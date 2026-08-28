@@ -96,7 +96,7 @@ input[type="number"] {
 }
 
 #view-prof-oak-lab {
-    background-image: url('./assets/backgrounds/BG-Professor-Oak-Lab.png');
+    background-image: url('./Assets/BG/BG-Professor-Oak-Lab.png');
     background-size: cover;
     text-align: center;
     padding-top: 50px;

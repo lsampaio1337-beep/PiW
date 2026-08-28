@@ -175,7 +175,7 @@ async function init() {
 
 
 window.showBackpack = function() {
-    let rightCol = document.getElementById('right-col');
+    let rightCol = document.getElementById('modal-overlay');
     let contentPanel = document.getElementById('content-panel');
     rightCol.style.display = 'block';
 
@@ -201,7 +201,7 @@ window.showBackpack = function() {
             </div>
             <br>
             <div style="text-align: center;">
-                <button onclick="document.getElementById('right-col').style.display='none'">Close</button>
+                <button onclick="document.getElementById('modal-overlay').style.display='none'">Close</button>
             </div>
         </div>
     `;
@@ -393,10 +393,10 @@ function switchView(viewName) {
 }
 
 function showModal(title, htmlContent) {
-    let rightCol = document.getElementById('right-col');
+    let rightCol = document.getElementById('modal-overlay');
     let contentPanel = document.getElementById('content-panel');
     rightCol.style.display = 'block';
-    contentPanel.innerHTML = `<h2>${title}</h2>${htmlContent}<br><br><button onclick="document.getElementById('right-col').style.display='none'">Close</button>`;
+    contentPanel.innerHTML = `<h2>${title}</h2>${htmlContent}<br><br><button onclick="document.getElementById('modal-overlay').style.display='none'">Close</button>`;
 }
 
 async function loadConfigs() {
@@ -638,7 +638,7 @@ function updateUI() {
 init();
 
 function showMap() {
-    let rightCol = document.getElementById('right-col');
+    let rightCol = document.getElementById('modal-overlay');
     let contentPanel = document.getElementById('content-panel');
     rightCol.style.display = 'block';
 
@@ -674,8 +674,12 @@ function showMap() {
         }
 
         if (isUnlocked) {
+
             let markerImg = './Assets/Extra/Spot.png';
-            if (locationId === 'pewter_gym') markerImg = './Assets/Badges/Badge Kanto 1.png';
+            if (locationId === 'pallet_town') markerImg = './Assets/Extra/Spot_Oak.png';
+            else if (locationId === 'trade_hub') markerImg = './Assets/Extra/Spot_PCPM.png';
+            else if (locationId === 'indigo_plateau') markerImg = './Assets/Extra/Spot_E4.png';
+            else if (locationId === 'pewter_gym') markerImg = './Assets/Badges/Badge Kanto 1.png';
             else if (locationId === 'cerulean_gym') markerImg = './Assets/Badges/Badge Kanto 2.png';
             else if (locationId === 'vermilion_gym') markerImg = './Assets/Badges/Badge Kanto 3.png';
             else if (locationId === 'celadon_gym') markerImg = './Assets/Badges/Badge Kanto 4.png';
@@ -684,11 +688,20 @@ function showMap() {
             else if (locationId === 'cinnabar_gym') markerImg = './Assets/Badges/Badge Kanto 7.png';
             else if (locationId === 'viridian_gym') markerImg = './Assets/Badges/Badge Kanto 8.png';
 
+            // Increase size for special spots
+            let markerWidth = "24px";
+            let markerHeight = "24px";
+            if (['pallet_town', 'trade_hub', 'indigo_plateau'].includes(locationId)) {
+                markerWidth = "40px";
+                markerHeight = "40px";
+            }
+
+
             html += `
                 <div class="map-marker"
                      data-location="${locationName}"
                      title="${locationName}"
-                     style="position: absolute; left: ${coords.x}%; top: ${coords.y}%; width: 24px; height: 24px; background-image: url('${markerImg}'); background-size: contain; background-repeat: no-repeat; transform: translate(-50%, -50%); cursor: pointer;"
+                     style="position: absolute; left: ${coords.x}%; top: ${coords.y}%; width: ${markerWidth}; height: ${markerHeight}; background-image: url('${markerImg}'); background-size: contain; background-repeat: no-repeat; transform: translate(-50%, -50%); cursor: pointer;"
                      onclick="navigateToLocation('${locationName}')"
                      onmouseover="showMapTooltip(event, '${locationName}')"
                      onmouseout="hideMapTooltip()">
@@ -700,7 +713,7 @@ function showMap() {
     html += `
         </div>
         <div id="map-tooltip" style="display:none; position:absolute; background:rgba(0,0,0,0.8); color:white; padding:5px; border-radius:5px; pointer-events:none; z-index: 100;"></div>
-        <br><button onclick="document.getElementById('right-col').style.display='none'">Close</button>
+        <br><button onclick="document.getElementById('modal-overlay').style.display='none'">Close</button>
     `;
 
     contentPanel.innerHTML = html;
@@ -708,7 +721,7 @@ function showMap() {
 
 window.navigateToLocation = function(locationName) {
     state.currentRoute = locationName;
-    document.getElementById('right-col').style.display = 'none';
+    document.getElementById('modal-overlay').style.display = 'none';
 
     if (locationName === "Professor Oak Lab") {
         switchView("PROF_OAK_LAB");
@@ -728,7 +741,7 @@ window.navigateToLocation = function(locationName) {
                 </div>
             </div>
         `;
-        vCenter.style.backgroundImage = "url('./Assets/BG/BG-PC&M.png')";
+        // vCenter.style.backgroundImage = "url('./Assets/BG/BG-PC&M.png')"; // missing asset
         vCenter.style.backgroundSize = "cover";
         vCenter.style.height = "100%";
         vCenter.style.textAlign = "center";

@@ -112,11 +112,16 @@
     </main>
 
     <!-- Right Column (Modals/Overlays for Map, Backpack, etc) -->
-    <aside id="right-col" style="display:none;">
-        <div id="content-panel">
-            <!-- Dynamic content injected here -->
+
+    <!-- Center Modal Overlay (replaces right-col) -->
+    <div id="modal-overlay" class="modal">
+        <div id="modal-content-box" class="modal-content" style="width: 80%; max-width: 800px; max-height: 90vh; overflow-y: auto;">
+            <div id="content-panel">
+                <!-- Dynamic content injected here -->
+            </div>
         </div>
-    </aside>
+    </div>
+
   </div>
 
   <script type="module" src="src/ui.js"></script>
