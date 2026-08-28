@@ -177,7 +177,7 @@ async function init() {
 window.showBackpack = function() {
     let rightCol = document.getElementById('modal-overlay');
     let contentPanel = document.getElementById('content-panel');
-    rightCol.style.display = 'block';
+    rightCol.style.display = 'flex';
 
     const formatQuantity = (q) => {
         if (q >= 1000000) return Math.floor(q / 1000000) + 'm';
@@ -395,7 +395,7 @@ function switchView(viewName) {
 function showModal(title, htmlContent) {
     let rightCol = document.getElementById('modal-overlay');
     let contentPanel = document.getElementById('content-panel');
-    rightCol.style.display = 'block';
+    rightCol.style.display = 'flex';
     contentPanel.innerHTML = `<h2>${title}</h2>${htmlContent}<br><br><button onclick="document.getElementById('modal-overlay').style.display='none'">Close</button>`;
 }
 
@@ -640,7 +640,7 @@ init();
 function showMap() {
     let rightCol = document.getElementById('modal-overlay');
     let contentPanel = document.getElementById('content-panel');
-    rightCol.style.display = 'block';
+    rightCol.style.display = 'flex';
 
     // Generate Interactive Map HTML
     let html = `

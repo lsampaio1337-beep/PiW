@@ -1,1 +1,77 @@
- INFO  Accepting connections at http://localhost:40957
+ INFO  Accepting connections at http://localhost:3000
+ HTTP  8/28/2026 5:22:25 PM ::1 GET /
+ HTTP  8/28/2026 5:22:25 PM ::1 Returned 200 in 46 ms
+ HTTP  8/28/2026 5:22:25 PM ::1 GET /styles.css
+ HTTP  8/28/2026 5:22:25 PM ::1 GET /src/ui.js
+ HTTP  8/28/2026 5:22:25 PM ::1 GET /Assets/Extra/Logo.jpg
+ HTTP  8/28/2026 5:22:25 PM ::1 GET /Assets/Pokemon%20Sprites/1.png
+ HTTP  8/28/2026 5:22:25 PM ::1 GET /Assets/Pokemon%20Sprites/4.png
+ HTTP  8/28/2026 5:22:25 PM ::1 GET /Assets/Pokemon%20Sprites/7.png
+ HTTP  8/28/2026 5:22:25 PM ::1 Returned 200 in 13 ms
+ HTTP  8/28/2026 5:22:25 PM ::1 Returned 200 in 13 ms
+ HTTP  8/28/2026 5:22:25 PM ::1 Returned 200 in 11 ms
+ HTTP  8/28/2026 5:22:25 PM ::1 Returned 200 in 10 ms
+ HTTP  8/28/2026 5:22:25 PM ::1 Returned 200 in 10 ms
+ HTTP  8/28/2026 5:22:25 PM ::1 GET /src/mathEngine.js
+ HTTP  8/28/2026 5:22:25 PM ::1 GET /src/battleSystem.js
+ HTTP  8/28/2026 5:22:25 PM ::1 GET /src/dayCare.js
+ HTTP  8/28/2026 5:22:25 PM ::1 GET /src/storage.js
+ HTTP  8/28/2026 5:22:25 PM ::1 Returned 200 in 10 ms
+ HTTP  8/28/2026 5:22:25 PM ::1 Returned 200 in 9 ms
+ HTTP  8/28/2026 5:22:25 PM ::1 Returned 200 in 9 ms
+ HTTP  8/28/2026 5:22:25 PM ::1 Returned 200 in 9 ms
+ HTTP  8/28/2026 5:22:25 PM ::1 Returned 200 in 56 ms
+ HTTP  8/28/2026 5:22:25 PM ::1 GET /config/pokemonData.js
+ HTTP  8/28/2026 5:22:25 PM ::1 GET /config/routes.js
+ HTTP  8/28/2026 5:22:25 PM ::1 GET /config/gyms.js
+ HTTP  8/28/2026 5:22:25 PM ::1 GET /config/balance.js
+ HTTP  8/28/2026 5:22:25 PM ::1 GET /config/moves.js
+ HTTP  8/28/2026 5:22:25 PM ::1 Returned 200 in 11 ms
+ HTTP  8/28/2026 5:22:25 PM ::1 Returned 200 in 10 ms
+ HTTP  8/28/2026 5:22:25 PM ::1 Returned 200 in 10 ms
+ HTTP  8/28/2026 5:22:25 PM ::1 Returned 200 in 11 ms
+ HTTP  8/28/2026 5:22:25 PM ::1 Returned 200 in 13 ms
+ HTTP  8/28/2026 5:22:25 PM ::1 GET /config/types.js
+ HTTP  8/28/2026 5:22:25 PM ::1 GET /config/mapCoordinates.js
+ HTTP  8/28/2026 5:22:25 PM ::1 Returned 200 in 5 ms
+ HTTP  8/28/2026 5:22:25 PM ::1 Returned 200 in 3 ms
+ HTTP  8/28/2026 5:22:25 PM ::1 GET /Assets/BG/BG-Professor-Oak-Lab.png
+ HTTP  8/28/2026 5:22:25 PM ::1 Returned 200 in 53 ms
+ HTTP  8/28/2026 5:22:26 PM ::1 GET /Assets/Map/Kanto%20Map.png
+ HTTP  8/28/2026 5:22:26 PM ::1 GET /Assets/Extra/Spot_Oak.png
+ HTTP  8/28/2026 5:22:26 PM ::1 GET /Assets/Extra/Spot.png
+ HTTP  8/28/2026 5:22:26 PM ::1 GET /Assets/Extra/Spot_E4.png
+ HTTP  8/28/2026 5:22:26 PM ::1 GET /Assets/Badges/Badge%20Kanto%201.png
+ HTTP  8/28/2026 5:22:26 PM ::1 GET /Assets/Badges/Badge%20Kanto%202.png
+ HTTP  8/28/2026 5:22:26 PM ::1 Returned 200 in 18 ms
+ HTTP  8/28/2026 5:22:26 PM ::1 Returned 200 in 17 ms
+ HTTP  8/28/2026 5:22:26 PM ::1 GET /Assets/Badges/Badge%20Kanto%208.png
+ HTTP  8/28/2026 5:22:26 PM ::1 GET /Assets/Badges/Badge%20Kanto%204.png
+ HTTP  8/28/2026 5:22:26 PM ::1 Returned 200 in 26 ms
+ HTTP  8/28/2026 5:22:26 PM ::1 Returned 200 in 26 ms
+ HTTP  8/28/2026 5:22:26 PM ::1 Returned 200 in 16 ms
+ HTTP  8/28/2026 5:22:26 PM ::1 GET /Assets/Badges/Badge%20Kanto%205.png
+ HTTP  8/28/2026 5:22:26 PM ::1 GET /Assets/Badges/Badge%20Kanto%206.png
+ HTTP  8/28/2026 5:22:26 PM ::1 GET /Assets/Badges/Badge%20Kanto%203.png
+ HTTP  8/28/2026 5:22:26 PM ::1 Returned 200 in 33 ms
+ HTTP  8/28/2026 5:22:26 PM ::1 Returned 200 in 20 ms
+ HTTP  8/28/2026 5:22:26 PM ::1 Returned 200 in 27 ms
+ HTTP  8/28/2026 5:22:26 PM ::1 GET /Assets/Badges/Badge%20Kanto%207.png
+ HTTP  8/28/2026 5:22:26 PM ::1 GET /Assets/Extra/Spot_PCPM.png
+ HTTP  8/28/2026 5:22:26 PM ::1 Returned 200 in 31 ms
+ HTTP  8/28/2026 5:22:26 PM ::1 Returned 200 in 93 ms
+ HTTP  8/28/2026 5:22:26 PM ::1 Returned 200 in 15 ms
+ HTTP  8/28/2026 5:22:26 PM ::1 Returned 200 in 27 ms
+ HTTP  8/28/2026 5:22:26 PM ::1 Returned 200 in 195 ms
+ HTTP  8/28/2026 5:22:29 PM ::1 GET /Assets/Items/Balls/Pokeball.png
+ HTTP  8/28/2026 5:22:29 PM ::1 GET /Assets/Items/Balls/Greatball.png
+ HTTP  8/28/2026 5:22:29 PM ::1 GET /Assets/Items/Balls/Ultraball.png
+ HTTP  8/28/2026 5:22:29 PM ::1 GET /Assets/Items/Balls/Safariball.png
+ HTTP  8/28/2026 5:22:29 PM ::1 GET /Assets/Items/Balls/Masterball.png
+ HTTP  8/28/2026 5:22:29 PM ::1 GET /Assets/Extra/Backpack.png
+ HTTP  8/28/2026 5:22:29 PM ::1 Returned 200 in 9 ms
+ HTTP  8/28/2026 5:22:29 PM ::1 Returned 200 in 9 ms
+ HTTP  8/28/2026 5:22:29 PM ::1 Returned 200 in 9 ms
+ HTTP  8/28/2026 5:22:29 PM ::1 Returned 200 in 9 ms
+ HTTP  8/28/2026 5:22:29 PM ::1 Returned 200 in 9 ms
+ HTTP  8/28/2026 5:22:29 PM ::1 Returned 200 in 44 ms
