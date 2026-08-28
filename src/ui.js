@@ -26,8 +26,8 @@ const state = {
         stones: {
             "Normal Stone": 0, "Fire Stone": 0, "Water Stone": 0, "Grass Stone": 0,
             "Electric Stone": 0, "Ice Stone": 0, "Fighting Stone": 0, "Poison Stone": 0,
-            "Ground Stone": 0, "Wind Stone": 0, "Psychic Stone": 0, "Bug Stone": 0,
-            "Rock Stone": 0, "Ghost Stone": 0, "Dragon Stone": 0, "Metal Stone": 0,
+            "Ground Stone": 0, "Flying Stone": 0, "Psychic Stone": 0, "Bug Stone": 0,
+            "Rock Stone": 0, "Ghost Stone": 0, "Dragon Stone": 0, "Steel Stone": 0,
             "Dark Stone": 0, "Fairy Stone": 0
         }
     },
@@ -270,16 +270,16 @@ window.renderBackpackTab = function(tab) {
 
         // Let's create an array of 8 slots for column 1
         const activePokemon = [];
-        state.party.forEach(p => activePokemon.push({...p, _tag: 'Party'}));
-        state.breeding.forEach(p => activePokemon.push({...p, _tag: 'Breeding'}));
-        state.training.forEach(p => activePokemon.push({...p, _tag: 'Training'}));
+        state.party.forEach((p, idx) => activePokemon.push({...p, _tag: 'Party', _origIndex: idx}));
+        state.breeding.forEach((p, idx) => activePokemon.push({...p, _tag: 'Breeding', _origIndex: idx}));
+        state.training.forEach((p, idx) => activePokemon.push({...p, _tag: 'Training', _origIndex: idx}));
 
         for (let i = 0; i < 8; i++) {
             if (i < activePokemon.length) {
                 let p = activePokemon[i];
                 let imgSrc = `Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png`;
                 content += `
-                    <div style="border: 1px solid #777; height: 60px; text-align: center; cursor: pointer; position: relative;" onclick="movePokemon('${p._tag}', ${i}, 'storage')">
+                    <div style="border: 1px solid #777; height: 60px; text-align: center; cursor: pointer; position: relative;" onclick="movePokemon('${p._tag}', ${p._origIndex}, 'storage')">
                         <span style="position: absolute; top: 0; left: 0; font-size: 8px; background: black; padding: 1px;">${p._tag}</span>
                         <img src="${imgSrc}" style="max-height: 40px; max-width: 40px;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
                         <div style="font-size: 10px;">Lv.${p.level}</div>
@@ -307,7 +307,7 @@ window.renderBackpackTab = function(tab) {
                 let imgSrc = `Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png`;
                 content += `
                     <div style="border: 1px solid #777; height: 60px; text-align: center; cursor: pointer;" onclick="movePokemon('storage', ${i}, 'safe')">
-                        <img src="${imgSrc}" style="max-height: 40px; max-width: 40px;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
+                        <img src="${imgSrc}" style="max-height: 40px; max-width: 40px;" title="Click to move to Safe" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
                         <div style="font-size: 10px;">Lv.${p.level}</div>
                     </div>
                 `;
@@ -332,9 +332,14 @@ window.renderBackpackTab = function(tab) {
                 let p = state.safe[i];
                 let imgSrc = `Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png`;
                 content += `
-                    <div style="border: 1px solid #777; height: 60px; text-align: center; cursor: pointer;" onclick="movePokemon('safe', ${i}, 'storage')">
+                    <div style="border: 1px solid #777; height: 60px; text-align: center; cursor: pointer; position: relative;">
                         <img src="${imgSrc}" style="max-height: 40px; max-width: 40px;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
                         <div style="font-size: 10px;">Lv.${p.level}</div>
+
+                        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; background: rgba(0,0,0,0.7); opacity: 0; transition: opacity 0.2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0">
+                            <div style="flex: 1; display: flex; align-items: center; justify-content: center; font-size: 10px; color: white; border-bottom: 1px solid #555;" title="Move to Party" onclick="movePokemon('safe', ${i}, 'Party')">To Party</div>
+                            <div style="flex: 1; display: flex; align-items: center; justify-content: center; font-size: 10px; color: white;" title="Move to Storage" onclick="movePokemon('safe', ${i}, 'storage')">To Storage</div>
+                        </div>
                     </div>
                 `;
             } else {
@@ -363,6 +368,11 @@ window.movePokemon = function(sourceList, index, targetListStr) {
 
     if (index >= sourceArr.length) return;
 
+    if (targetListStr === 'Party' && state.party.length >= 6) {
+        alert("Party is full! Max 6 Pokemon.");
+        return;
+    }
+
     let p = sourceArr.splice(index, 1)[0];
 
     let targetArr = [];
@@ -372,7 +382,7 @@ window.movePokemon = function(sourceList, index, targetListStr) {
 
     targetArr.push(p);
 
-    updatePartyUI();
+    updateUI();
     renderBackpackTab('pokemon'); // refresh UI
 };
 
