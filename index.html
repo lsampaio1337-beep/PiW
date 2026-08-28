@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Idle Pokemon World</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Top Navigation Bar -->
+  <nav id="top-nav">
+    <div id="trainer-stats">
+      Level: <span id="trainer-lvl">1</span> |
+      XP: <span id="trainer-xp">0</span> |
+      Money: $<span id="trainer-money">0</span> |
+      Badges: <span id="trainer-badges">0</span>
+    </div>
+    <div id="challenge-tracker" style="font-weight: bold; color: yellow;">
+      Next Challenge: <span id="current-challenge-text">None</span>
+    </div>
+    <div id="nav-buttons">
+      <button id="btn-map">Map</button>
+      <button id="btn-backpack">Backpack</button>
+      <button id="btn-dex">Pokedex</button>
+      <button id="btn-stats">Stats</button>
+      <button id="btn-settings">Settings</button>
+    </div>
+  </nav>
+
+  <div id="main-container">
+    <!-- Left Column: Party & Day Care -->
+    <aside id="left-col">
+      <h3>Party</h3>
+      <div id="party-list">
+        <!-- JS will populate 6 slots here -->
+      </div>
+      <div id="day-care">
+        <h3>Day Care</h3>
+        <div id="dc-slot1">Breeding: <span id="breed-prog">0/100</span></div>
+        <div id="dc-slot2">Training: <span id="train-prog">0/100</span></div>
+      </div>
+    </aside>
+
+    <!-- Center Column: Dynamic View State -->
+    <main id="center-col">
+
+      <!-- View 1: Oak's Lab -->
+      <div id="view-prof-oak-lab" class="game-view" style="display:none; background-image: url('./assets/backgrounds/BG-Professor-Oak-Lab.png');">
+        <h2>Choose your Pokémon</h2>
+        <div class="starter-choices">
+          <button id="choose-bulbasaur">
+            <img src="assets/Pokemon Sprites/1.png"><br>Bulbasaur
+          </button>
+          <button id="choose-charmander">
+            <img src="assets/Pokemon Sprites/4.png"><br>Charmander
+          </button>
+          <button id="choose-squirtle">
+            <img src="assets/Pokemon Sprites/7.png"><br>Squirtle
+          </button>
+        </div>
+      </div>
+
+      <!-- View 2: Battle Arena -->
+      <div id="view-battle-arena" class="game-view" style="display:none;">
+        <div id="combat-arena">
+          <div id="enemy-side">
+            <div class="stats-box">
+              <h4 id="enemy-name">Wild Pokemon</h4>
+              <div>Lvl: <span id="enemy-lvl">?</span></div>
+              <div>HP: <span id="enemy-hp">?/?</span></div>
+            </div>
+            <img id="enemy-sprite" src="" alt="Enemy Sprite">
+          </div>
+
+          <div id="player-side">
+            <img id="player-sprite" src="" alt="Player Sprite">
+            <div class="stats-box">
+              <h4 id="player-name">Player Leader</h4>
+              <div>Lvl: <span id="player-lvl">?</span></div>
+              <div>HP: <span id="player-hp">?/?</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="combat-log">
+          <!-- Combat text/updates -->
+        </div>
+      </div>
+
+      <!-- View 3: Pokemon Center & Market -->
+      <div id="view-center-market" class="game-view" style="display:none;">
+        <h2>Pokemon Center & Market</h2>
+        <p>Work in Progress...</p>
+      </div>
+
+      <!-- View 4: Gym -->
+      <div id="view-gym" class="game-view" style="display:none;">
+        <h2>Gym Challenge</h2>
+        <p>Work in Progress...</p>
+      </div>
+
+    </main>
+
+    <!-- Right Column (Modals/Overlays for Map, Backpack, etc) -->
+    <aside id="right-col" style="display:none;">
+        <div id="content-panel">
+            <!-- Dynamic content injected here -->
+        </div>
+    </aside>
+  </div>
+
+  <script type="module" src="src/ui.js"></script>
+</body>
+</html>
