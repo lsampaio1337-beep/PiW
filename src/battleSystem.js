@@ -328,7 +328,7 @@ class BattleSystem {
         if (this.state.settings.autoCatch) {
             const caught = this.throwPokeball();
             if (caught) {
-                this.state.box.push(JSON.parse(JSON.stringify(this.activeEncounter)));
+                this.state.storage.push(JSON.parse(JSON.stringify(this.activeEncounter)));
                 this.state.stats.caught++;
                 if (this.activeEncounter.qualityName === "Shiny") this.state.stats.shiniesCaught++;
 

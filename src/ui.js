@@ -123,8 +123,21 @@ async function init() {
         const choice = confirm("Save file found. Do you want to continue?\nClick OK to Continue, Cancel to start a New Game.");
         if (choice) {
             Object.assign(state, saved);
-            // We re-fetch configs because saved state overwrote it entirely (shallow assign)
             await loadConfigs();
+
+            // Bypass Oak if player already has Pokemon
+            if (state.party.length > 0 || state.storage.length > 0) {
+                const oakLabDiv = document.getElementById("view-prof-oak-lab");
+                if (oakLabDiv) {
+                    oakLabDiv.innerHTML = `
+                        <div style="background-color: rgba(0,0,0,0.5); display: inline-block; padding: 10px; margin-top: 50px; border-radius: 8px;">
+                            <h2>Professor Oak Lab</h2>
+                            <p>You already have your Pokémon! Explore Kanto by opening your Map.</p>
+                        </div>
+                    `;
+                }
+            }
+
             startGame();
         } else {
             storage.reset();
@@ -212,10 +225,10 @@ window.showBackpack = function() {
                 <div onclick="renderBackpackTab('pokemon')" style="position: absolute; top: 25%; right: 20%; width: 25%; height: 25%; cursor: pointer; border-radius: 50%;"></div>
 
                 <!-- Cyan Stones Pocket -->
-                <div onclick="renderBackpackTab('stones')" style="position: absolute; top: 55%; left: 20%; width: 25%; height: 25%; cursor: pointer; border-radius: 50%;"></div>
+                <div onclick="renderBackpackTab('potions')" style="position: absolute; top: 55%; left: 20%; width: 25%; height: 25%; cursor: pointer; border-radius: 50%;"></div>
 
                 <!-- Green Potions Pocket -->
-                <div onclick="renderBackpackTab('potions')" style="position: absolute; top: 55%; right: 20%; width: 25%; height: 25%; cursor: pointer; border-radius: 50%;"></div>
+                <div onclick="renderBackpackTab('stones')" style="position: absolute; top: 55%; right: 20%; width: 25%; height: 25%; cursor: pointer; border-radius: 50%;"></div>
             </div>
 
             <!-- Content Area - We'll position it at the bottom with a solid background so it overlaps gracefully -->
@@ -229,7 +242,7 @@ window.showBackpack = function() {
     contentPanel.innerHTML = html;
 };
 
-window.renderBackpackTab = function(tab) {
+window.renderBackpackTab = function renderBackpackTab(tab) {
     const area = document.getElementById('backpack-content-area');
     if (!area) return;
     area.style.display = "block";
@@ -375,6 +388,49 @@ window.renderBackpackTab = function(tab) {
     }
 
     area.innerHTML = content;
+};
+
+
+window.movePokemon = function(sourceType, index, targetType) {
+    let p = null;
+
+    // Remove from source
+    if (sourceType === 'Party' || sourceType === 'Active') {
+        p = state.party.splice(index, 1)[0];
+    } else if (sourceType === 'Breeding') {
+        p = state.breeding.splice(index, 1)[0];
+    } else if (sourceType === 'Training') {
+        p = state.training.splice(index, 1)[0];
+    } else if (sourceType === 'storage') {
+        p = state.storage.splice(index, 1)[0];
+    } else if (sourceType === 'safe') {
+        p = state.safe.splice(index, 1)[0];
+    }
+
+    if (!p) return;
+
+    // Add to target
+    if (targetType === 'storage') {
+        state.storage.push(p);
+    } else if (targetType === 'safe') {
+        state.safe.push(p);
+    } else if (targetType === 'Party' || targetType === 'Active') {
+        if (state.party.length < 6) {
+            state.party.push(p);
+        } else {
+            // Revert
+            if (sourceType === 'Party' || sourceType === 'Active') state.party.splice(index, 0, p);
+            else if (sourceType === 'Breeding') state.breeding.splice(index, 0, p);
+            else if (sourceType === 'Training') state.training.splice(index, 0, p);
+            else if (sourceType === 'storage') state.storage.splice(index, 0, p);
+            else if (sourceType === 'safe') state.safe.splice(index, 0, p);
+            alert("Party is full!");
+            return;
+        }
+    }
+
+    updateUI();
+    renderBackpackTab('pokemon');
 };
 
 window.dragStart = function(event, sourceCol, index) {
@@ -689,7 +745,7 @@ function showMap() {
     // Generate Interactive Map HTML
     let html = `
         <h2>Map</h2>
-        <div id="interactive-map" style="position: relative; width: 100%; aspect-ratio: 1/1; background-image: url('./Assets/Map/Kanto Map.png'); background-size: cover; border: 2px solid #fff; border-radius: 8px;">
+        <div id="interactive-map" style="position: relative; width: 100%; aspect-ratio: 16/11; background-image: url('./Assets/Map/Kanto Map.png'); background-size: contain; background-repeat: no-repeat; background-position: center; border: 2px solid #fff; border-radius: 8px;">
     `;
 
     // Ensure we only show unlocked routes based on battle count
