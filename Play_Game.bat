@@ -4,7 +4,7 @@ echo             Idle Pokemon World - Launcher
 echo ===================================================
 echo.
 echo Installing required dependencies (this may take a moment)...
-call npm install --silent
+call npm install --no-audit --no-fund
 
 echo.
 echo Checking and downloading Pokemon sprites...
