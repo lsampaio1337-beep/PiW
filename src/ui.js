@@ -143,7 +143,14 @@ async function init() {
     document.getElementById('btn-map').onclick = () => showMap();
     document.getElementById('btn-backpack').onclick = showBackpack;
     document.getElementById('btn-dex').onclick = showPokedex;
-    document.getElementById('btn-stats').onclick = () => showModal("Statistics", `<p>Battles Won: ${state.stats.battlesWon}</p><p>Money: $${state.trainer.money}</p>`);
+    document.getElementById('btn-stats').onclick = () => {
+    let badgesHtml = '<div style="display: flex; gap: 10px; margin-top: 10px;">';
+    for (let i = 1; i <= state.trainer.badges; i++) {
+        badgesHtml += `<img src="./Assets/Badges/Badge Kanto ${i}.png" style="width: 40px; height: 40px;" title="Badge ${i}">`;
+    }
+    badgesHtml += '</div>';
+    showModal("Statistics", `<p>Battles Won: ${state.stats.battlesWon}</p><p>Money: $${state.trainer.money}</p><h3>Badges:</h3>${badgesHtml}`);
+};
     document.getElementById('btn-settings').onclick = () => {
         const speedValues = [0.5, 1, 2, 4, 8, 16, 32];
         const currentIndex = speedValues.indexOf(state.settings.gameSpeed) !== -1 ? speedValues.indexOf(state.settings.gameSpeed) : 1;
@@ -186,29 +193,37 @@ window.showBackpack = function() {
     };
 
     let html = `
-        <div style="background-image: url('./Assets/Extra/Backpack.png'); background-size: cover; background-position: center; padding: 20px; border-radius: 8px; min-height: 400px; color: white;">
-            <h2 style="text-align: center; text-shadow: 1px 1px 2px black;">Backpack</h2>
+        <div style="position: relative; background-image: url('./Assets/Extra/Backpack.png'); background-size: contain; background-repeat: no-repeat; background-position: center top; padding: 20px; border-radius: 8px; min-height: 600px; color: white;">
 
-            <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 20px;">
-                <button onclick="renderBackpackTab('pokeballs')">Pokéballs</button>
-                <button onclick="renderBackpackTab('potions')">Potions</button>
-                <button onclick="renderBackpackTab('stones')">Stones</button>
-                <button onclick="renderBackpackTab('pokemon')">Pokémon</button>
+            <!-- Close Button Overlay -->
+            <div style="position: absolute; top: 10px; right: 10px; z-index: 10;">
+                <button onclick="document.getElementById('modal-overlay').style.display='none'" style="background: #e74c3c; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer;">X</button>
             </div>
 
-            <div id="backpack-content-area" style="background: rgba(0,0,0,0.6); padding: 15px; border-radius: 5px; min-height: 300px;">
+            <!-- Clickable Pockets Overlay -->
+            <!-- Note: Exact coordinates might need fine-tuning based on actual image aspect ratio, but we place them generally to be responsive -->
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                <!-- Purple Pokeballs Pocket -->
+                <div onclick="renderBackpackTab('pokeballs')" style="position: absolute; top: 25%; left: 20%; width: 25%; height: 25%; cursor: pointer; border-radius: 50%;"></div>
+
+                <!-- Green Potions Pocket -->
+                <div onclick="renderBackpackTab('potions')" style="position: absolute; top: 25%; right: 20%; width: 25%; height: 25%; cursor: pointer; border-radius: 50%;"></div>
+
+                <!-- Cyan Stones Pocket -->
+                <div onclick="renderBackpackTab('stones')" style="position: absolute; top: 55%; left: 20%; width: 25%; height: 25%; cursor: pointer; border-radius: 50%;"></div>
+
+                <!-- Yellow Pokemon Pocket -->
+                <div onclick="renderBackpackTab('pokemon')" style="position: absolute; top: 55%; right: 20%; width: 25%; height: 25%; cursor: pointer; border-radius: 50%;"></div>
+            </div>
+
+            <!-- Content Area - We'll position it at the bottom with a solid background so it overlaps gracefully -->
+            <div id="backpack-content-area" style="position: absolute; bottom: 20px; left: 5%; width: 90%; background: rgba(0,0,0,0.85); padding: 15px; border-radius: 5px; min-height: 250px; z-index: 5;">
                 <!-- Content gets rendered here -->
-            </div>
-            <br>
-            <div style="text-align: center;">
-                <button onclick="document.getElementById('modal-overlay').style.display='none'">Close</button>
+                <h3 style="text-align: center; margin-top: 0; color: #ddd;">Select a pocket to view items.</h3>
             </div>
         </div>
     `;
     contentPanel.innerHTML = html;
-
-    // Render default tab
-    renderBackpackTab('pokeballs');
 };
 
 window.renderBackpackTab = function(tab) {
@@ -358,32 +373,47 @@ window.renderBackpackTab = function(tab) {
     area.innerHTML = content;
 };
 
-window.movePokemon = function(sourceList, index, targetListStr) {
-    let sourceArr = [];
-    if (sourceList === 'Party') sourceArr = state.party;
-    else if (sourceList === 'Breeding') sourceArr = state.breeding;
-    else if (sourceList === 'Training') sourceArr = state.training;
-    else if (sourceList === 'storage') sourceArr = state.storage;
-    else if (sourceList === 'safe') sourceArr = state.safe;
+window.dragStart = function(event, sourceCol, index) {
+    event.dataTransfer.setData('text/plain', JSON.stringify({ sourceCol, index }));
+};
 
-    if (index >= sourceArr.length) return;
+window.allowDrop = function(event) {
+    event.preventDefault();
+};
 
-    if (targetListStr === 'Party' && state.party.length >= 6) {
-        alert("Party is full! Max 6 Pokemon.");
-        return;
+window.handleDrop = function(event, targetCol) {
+    event.preventDefault();
+    const data = event.dataTransfer.getData('text/plain');
+    if (!data) return;
+    const { sourceCol, index } = JSON.parse(data);
+
+    if (sourceCol === targetCol) return; // Dropping in same col doesn't do anything
+
+    let p = null;
+    if (sourceCol === 'Active') p = state.party[index];
+    else if (sourceCol === 'Storage') p = state.storage[index];
+    else if (sourceCol === 'Safe') p = state.safe[index];
+
+    if (!p) return;
+
+    if (targetCol === 'Active') {
+        if (state.party.length >= 6) {
+            return; // Reject drop
+        }
+        state.party.push(p);
+    } else if (targetCol === 'Storage') {
+        state.storage.push(p);
+    } else if (targetCol === 'Safe') {
+        state.safe.push(p);
     }
 
-    let p = sourceArr.splice(index, 1)[0];
-
-    let targetArr = [];
-    if (targetListStr === 'storage') targetArr = state.storage;
-    else if (targetListStr === 'safe') targetArr = state.safe;
-    else if (targetListStr === 'Party') targetArr = state.party;
-
-    targetArr.push(p);
+    // Remove from source only if successfully added to target
+    if (sourceCol === 'Active') state.party.splice(index, 1);
+    else if (sourceCol === 'Storage') state.storage.splice(index, 1);
+    else if (sourceCol === 'Safe') state.safe.splice(index, 1);
 
     updateUI();
-    renderBackpackTab('pokemon'); // refresh UI
+    renderBackpackTab('pokemon');
 };
 
 
@@ -686,17 +716,18 @@ function showMap() {
         if (isUnlocked) {
 
             let markerImg = './Assets/Extra/Spot.png';
+            let showCheckmark = false;
             if (locationId === 'pallet_town') markerImg = './Assets/Extra/Spot_Oak.png';
             else if (locationId === 'trade_hub') markerImg = './Assets/Extra/Spot_PCPM.png';
             else if (locationId === 'indigo_plateau') markerImg = './Assets/Extra/Spot_E4.png';
-            else if (locationId === 'pewter_gym') markerImg = './Assets/Badges/Badge Kanto 1.png';
-            else if (locationId === 'cerulean_gym') markerImg = './Assets/Badges/Badge Kanto 2.png';
-            else if (locationId === 'vermilion_gym') markerImg = './Assets/Badges/Badge Kanto 3.png';
-            else if (locationId === 'celadon_gym') markerImg = './Assets/Badges/Badge Kanto 4.png';
-            else if (locationId === 'fuchsia_gym') markerImg = './Assets/Badges/Badge Kanto 5.png';
-            else if (locationId === 'saffron_gym') markerImg = './Assets/Badges/Badge Kanto 6.png';
-            else if (locationId === 'cinnabar_gym') markerImg = './Assets/Badges/Badge Kanto 7.png';
-            else if (locationId === 'viridian_gym') markerImg = './Assets/Badges/Badge Kanto 8.png';
+            else if (locationId === 'pewter_gym') { markerImg = './Assets/Badges/Badge Kanto 1.png'; if (state.trainer.badges >= 1) showCheckmark = true; }
+            else if (locationId === 'cerulean_gym') { markerImg = './Assets/Badges/Badge Kanto 2.png'; if (state.trainer.badges >= 2) showCheckmark = true; }
+            else if (locationId === 'vermilion_gym') { markerImg = './Assets/Badges/Badge Kanto 3.png'; if (state.trainer.badges >= 3) showCheckmark = true; }
+            else if (locationId === 'celadon_gym') { markerImg = './Assets/Badges/Badge Kanto 4.png'; if (state.trainer.badges >= 4) showCheckmark = true; }
+            else if (locationId === 'fuchsia_gym') { markerImg = './Assets/Badges/Badge Kanto 5.png'; if (state.trainer.badges >= 5) showCheckmark = true; }
+            else if (locationId === 'saffron_gym') { markerImg = './Assets/Badges/Badge Kanto 6.png'; if (state.trainer.badges >= 6) showCheckmark = true; }
+            else if (locationId === 'cinnabar_gym') { markerImg = './Assets/Badges/Badge Kanto 7.png'; if (state.trainer.badges >= 7) showCheckmark = true; }
+            else if (locationId === 'viridian_gym') { markerImg = './Assets/Badges/Badge Kanto 8.png'; if (state.trainer.badges >= 8) showCheckmark = true; }
 
             // Increase size for special spots
             let markerWidth = "24px";
