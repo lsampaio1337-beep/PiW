@@ -26,6 +26,17 @@
     </div>
   </nav>
 
+  <!-- Splash Screen Logo Overlay -->
+  <div id="splash-screen" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); z-index: 1000; display: flex; justify-content: center; align-items: center; cursor: pointer;">
+    <img src="./Assets/Extra/Logo.jpg" style="max-width: 80%; max-height: 80%; object-fit: contain; cursor: default;" onclick="event.stopPropagation();">
+  </div>
+
+  <script>
+    document.getElementById('splash-screen').addEventListener('click', function() {
+      this.style.display = 'none';
+    });
+  </script>
+
   <div id="main-container">
     <!-- Left Column: Party & Day Care -->
     <aside id="left-col">
@@ -44,17 +55,17 @@
     <main id="center-col">
 
       <!-- View 1: Oak's Lab -->
-      <div id="view-prof-oak-lab" class="game-view" style="display:none; background-image: url('./assets/backgrounds/BG-Professor-Oak-Lab.png');">
+      <div id="view-prof-oak-lab" class="game-view" style="display:none; background-image: url('./Assets/BG/BG-Professor-Oak-Lab.png');">
         <h2>Choose your Pokémon</h2>
         <div class="starter-choices">
           <button id="choose-bulbasaur">
-            <img src="assets/Pokemon Sprites/1.png"><br>Bulbasaur
+            <img src="Assets/Pokemon Sprites/1.png"><br>Bulbasaur
           </button>
           <button id="choose-charmander">
-            <img src="assets/Pokemon Sprites/4.png"><br>Charmander
+            <img src="Assets/Pokemon Sprites/4.png"><br>Charmander
           </button>
           <button id="choose-squirtle">
-            <img src="assets/Pokemon Sprites/7.png"><br>Squirtle
+            <img src="Assets/Pokemon Sprites/7.png"><br>Squirtle
           </button>
         </div>
       </div>

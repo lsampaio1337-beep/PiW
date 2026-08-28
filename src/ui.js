@@ -16,10 +16,20 @@ const state = {
     },
     party: [],
     box: [],
+    storage: [],
+    safe: [],
+    breeding: [],
+    training: [],
     backpack: {
-        pokeballs: { "Pokeball": 10, "Greatball": 0, "Ultraball": 0, "Masterball": 0 },
-        potions: { "Tiny Potion": 500, "Small Potion": 0, "Regular Potion": 0, "Big": 0, "Hyper Potion": 0, "Ultimate Potion": 0, "Max Potion": 0 },
-        stones: 0
+        pokeballs: { "Pokeball": 100, "Greatball": 0, "Ultraball": 0, "Safariball": 0, "Masterball": 0 },
+        potions: { "Tiny Potion": 100, "Small Potion": 0, "Regular Potion": 0, "Big Potion": 0, "Hyper Potion": 0, "Ultimate Potion": 0 },
+        stones: {
+            "Normal Stone": 0, "Fire Stone": 0, "Water Stone": 0, "Grass Stone": 0,
+            "Electric Stone": 0, "Ice Stone": 0, "Fighting Stone": 0, "Poison Stone": 0,
+            "Ground Stone": 0, "Wind Stone": 0, "Psychic Stone": 0, "Bug Stone": 0,
+            "Rock Stone": 0, "Ghost Stone": 0, "Dragon Stone": 0, "Metal Stone": 0,
+            "Dark Stone": 0, "Fairy Stone": 0
+        }
     },
     stats: {
         battlesWon: 0,
@@ -72,7 +82,7 @@ function showPokedex() {
 
             html += `<div style="width: 60px; text-align: center; font-size: 10px;">
                 <div style="font-weight:bold;">#${i}</div>
-                <img src="assets/Pokemon Sprites/${i}.png" style="width: 50px; height: 50px; filter: ${filter}; cursor: ${cursor};" ${onClick}>
+                <img src="Assets/Pokemon Sprites/${i}.png" style="width: 50px; height: 50px; filter: ${filter}; cursor: ${cursor};" ${onClick}>
             </div>`;
         }
     }
@@ -93,11 +103,11 @@ window.showDexEntry = (id) => {
     const html = `
         <div style="text-align:center;">
             <h2>#${pData.id} ${pData.name}</h2>
-            <img id="dex-sprite" src="assets/Pokemon Sprites/${pData.id}.png" style="width: 100px; height: 100px;">
+            <img id="dex-sprite" src="Assets/Pokemon Sprites/${pData.id}.png" style="width: 100px; height: 100px;">
             <p>Type: ${pData.types.join('/')}</p>
             <p>BST: ${bst} (HP:${pData.hp} A:${pData.atk} D:${pData.def} SA:${pData.spa} SD:${pData.spd} S:${pData.spe})</p>
-            <button onclick="document.getElementById('dex-sprite').src = 'assets/Pokemon Sprites/${pData.id}_shiny.png'">Show Shiny</button>
-            <button onclick="document.getElementById('dex-sprite').src = 'assets/Pokemon Sprites/${pData.id}.png'">Show Normal</button>
+            <button onclick="document.getElementById('dex-sprite').src = 'Assets/Pokemon Sprites/${pData.id}_shiny.png'">Show Shiny</button>
+            <button onclick="document.getElementById('dex-sprite').src = 'Assets/Pokemon Sprites/${pData.id}.png'">Show Normal</button>
             <br><br>
             <button onclick="document.getElementById('btn-dex').click()">Back to Pokedex</button>
         </div>
@@ -131,12 +141,7 @@ async function init() {
 
     // Bind Hub Buttons
     document.getElementById('btn-map').onclick = () => showMap();
-    document.getElementById('btn-backpack').onclick = () => showModal("Backpack", `
-        <h3>Pokeballs</h3>
-        ${Object.keys(state.backpack.pokeballs).map(k => `${k}: ${state.backpack.pokeballs[k]}`).join('<br>')}
-        <h3>Potions</h3>
-        ${Object.keys(state.backpack.potions).map(k => `${k}: ${state.backpack.potions[k]}`).join('<br>')}
-    `);
+    document.getElementById('btn-backpack').onclick = showBackpack;
     document.getElementById('btn-dex').onclick = showPokedex;
     document.getElementById('btn-stats').onclick = () => showModal("Statistics", `<p>Battles Won: ${state.stats.battlesWon}</p><p>Money: $${state.trainer.money}</p>`);
     document.getElementById('btn-settings').onclick = () => {
@@ -167,6 +172,210 @@ async function init() {
         showModal("Settings", settingsHTML);
     };
 }
+
+
+window.showBackpack = function() {
+    let rightCol = document.getElementById('right-col');
+    let contentPanel = document.getElementById('content-panel');
+    rightCol.style.display = 'block';
+
+    const formatQuantity = (q) => {
+        if (q >= 1000000) return Math.floor(q / 1000000) + 'm';
+        if (q >= 1000) return Math.floor(q / 1000) + 'k';
+        return q;
+    };
+
+    let html = `
+        <div style="background-image: url('./Assets/Extra/Backpack.png'); background-size: cover; background-position: center; padding: 20px; border-radius: 8px; min-height: 400px; color: white;">
+            <h2 style="text-align: center; text-shadow: 1px 1px 2px black;">Backpack</h2>
+
+            <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 20px;">
+                <button onclick="renderBackpackTab('pokeballs')">Pokéballs</button>
+                <button onclick="renderBackpackTab('potions')">Potions</button>
+                <button onclick="renderBackpackTab('stones')">Stones</button>
+                <button onclick="renderBackpackTab('pokemon')">Pokémon</button>
+            </div>
+
+            <div id="backpack-content-area" style="background: rgba(0,0,0,0.6); padding: 15px; border-radius: 5px; min-height: 300px;">
+                <!-- Content gets rendered here -->
+            </div>
+            <br>
+            <div style="text-align: center;">
+                <button onclick="document.getElementById('right-col').style.display='none'">Close</button>
+            </div>
+        </div>
+    `;
+    contentPanel.innerHTML = html;
+
+    // Render default tab
+    renderBackpackTab('pokeballs');
+};
+
+window.renderBackpackTab = function(tab) {
+    const area = document.getElementById('backpack-content-area');
+    if (!area) return;
+
+    const formatQuantity = (q) => {
+        if (q >= 1000000) return Math.floor(q / 1000000) + 'm';
+        if (q >= 1000) return Math.floor(q / 1000) + 'k';
+        return q;
+    };
+
+    let content = '';
+
+    if (tab === 'pokeballs') {
+        content += '<div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">';
+        for (const [name, qty] of Object.entries(state.backpack.pokeballs)) {
+            content += `
+                <div style="text-align: center; width: 80px;">
+                    <img src="./Assets/Items/Balls/${name}.png" style="width: 50px; height: 50px;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
+                    <br><span style="font-size: 12px;">${name}</span>
+                    <br><b>x${formatQuantity(qty)}</b>
+                </div>
+            `;
+        }
+        content += '</div>';
+    } else if (tab === 'potions') {
+        content += '<div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">';
+        for (const [name, qty] of Object.entries(state.backpack.potions)) {
+            content += `
+                <div style="text-align: center; width: 80px;">
+                    <img src="./Assets/Items/Potions/${name}.png" style="width: 50px; height: 50px;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
+                    <br><span style="font-size: 12px;">${name}</span>
+                    <br><b>x${formatQuantity(qty)}</b>
+                </div>
+            `;
+        }
+        content += '</div>';
+    } else if (tab === 'stones') {
+        content += '<div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">';
+        for (const [name, qty] of Object.entries(state.backpack.stones)) {
+            content += `
+                <div style="text-align: center; width: 80px;">
+                    <img src="./Assets/Items/Stones/${name}.png" style="width: 50px; height: 50px;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
+                    <br><span style="font-size: 12px;">${name}</span>
+                    <br><b>x${formatQuantity(qty)}</b>
+                </div>
+            `;
+        }
+        content += '</div>';
+    } else if (tab === 'pokemon') {
+        content += `
+            <div style="display: flex; gap: 10px; width: 100%;">
+                <!-- Column 1: Party (6 max normally, but 4x2 slots requested means 8 total slots here for Party, Breeding, Training) -->
+                <div style="flex: 1; border: 1px solid #555; padding: 5px; min-height: 200px;">
+                    <h4 style="text-align: center; margin-top:0;">Active (Party/Breed/Train)</h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px;">
+        `;
+
+        // Let's create an array of 8 slots for column 1
+        const activePokemon = [];
+        state.party.forEach(p => activePokemon.push({...p, _tag: 'Party'}));
+        state.breeding.forEach(p => activePokemon.push({...p, _tag: 'Breeding'}));
+        state.training.forEach(p => activePokemon.push({...p, _tag: 'Training'}));
+
+        for (let i = 0; i < 8; i++) {
+            if (i < activePokemon.length) {
+                let p = activePokemon[i];
+                let imgSrc = `Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png`;
+                content += `
+                    <div style="border: 1px solid #777; height: 60px; text-align: center; cursor: pointer; position: relative;" onclick="movePokemon('${p._tag}', ${i}, 'storage')">
+                        <span style="position: absolute; top: 0; left: 0; font-size: 8px; background: black; padding: 1px;">${p._tag}</span>
+                        <img src="${imgSrc}" style="max-height: 40px; max-width: 40px;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
+                        <div style="font-size: 10px;">Lv.${p.level}</div>
+                    </div>
+                `;
+            } else {
+                content += `<div style="border: 1px dashed #777; height: 60px;"></div>`;
+            }
+        }
+
+        content += `
+                    </div>
+                </div>
+
+                <!-- Column 2: Storage (6xn) -->
+                <div style="flex: 1; border: 1px solid #555; padding: 5px; min-height: 200px;">
+                    <h4 style="text-align: center; margin-top:0;">Storage</h4>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 5px; max-height: 250px; overflow-y: auto;">
+        `;
+
+        // Show storage + 1 empty slot
+        for (let i = 0; i <= state.storage.length; i++) {
+            if (i < state.storage.length) {
+                let p = state.storage[i];
+                let imgSrc = `Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png`;
+                content += `
+                    <div style="border: 1px solid #777; height: 60px; text-align: center; cursor: pointer;" onclick="movePokemon('storage', ${i}, 'safe')">
+                        <img src="${imgSrc}" style="max-height: 40px; max-width: 40px;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
+                        <div style="font-size: 10px;">Lv.${p.level}</div>
+                    </div>
+                `;
+            } else {
+                content += `<div style="border: 1px dashed #777; height: 60px; display: flex; align-items: center; justify-content: center; font-size: 20px; cursor: pointer;" title="Empty Slot">+</div>`;
+            }
+        }
+
+        content += `
+                    </div>
+                </div>
+
+                <!-- Column 3: Safe (6xn) -->
+                <div style="flex: 1; border: 1px solid #555; padding: 5px; min-height: 200px;">
+                    <h4 style="text-align: center; margin-top:0;">Safe</h4>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 5px; max-height: 250px; overflow-y: auto;">
+        `;
+
+        // Show safe + 1 empty slot
+        for (let i = 0; i <= state.safe.length; i++) {
+            if (i < state.safe.length) {
+                let p = state.safe[i];
+                let imgSrc = `Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png`;
+                content += `
+                    <div style="border: 1px solid #777; height: 60px; text-align: center; cursor: pointer;" onclick="movePokemon('safe', ${i}, 'storage')">
+                        <img src="${imgSrc}" style="max-height: 40px; max-width: 40px;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
+                        <div style="font-size: 10px;">Lv.${p.level}</div>
+                    </div>
+                `;
+            } else {
+                content += `<div style="border: 1px dashed #777; height: 60px; display: flex; align-items: center; justify-content: center; font-size: 20px; cursor: pointer;" title="Empty Slot">+</div>`;
+            }
+        }
+
+        content += `
+                    </div>
+                </div>
+            </div>
+            <div style="font-size: 10px; text-align: center; margin-top: 5px; color: #ccc;">Click a Pokémon to move it.</div>
+        `;
+    }
+
+    area.innerHTML = content;
+};
+
+window.movePokemon = function(sourceList, index, targetListStr) {
+    let sourceArr = [];
+    if (sourceList === 'Party') sourceArr = state.party;
+    else if (sourceList === 'Breeding') sourceArr = state.breeding;
+    else if (sourceList === 'Training') sourceArr = state.training;
+    else if (sourceList === 'storage') sourceArr = state.storage;
+    else if (sourceList === 'safe') sourceArr = state.safe;
+
+    if (index >= sourceArr.length) return;
+
+    let p = sourceArr.splice(index, 1)[0];
+
+    let targetArr = [];
+    if (targetListStr === 'storage') targetArr = state.storage;
+    else if (targetListStr === 'safe') targetArr = state.safe;
+    else if (targetListStr === 'Party') targetArr = state.party;
+
+    targetArr.push(p);
+
+    updatePartyUI();
+    renderBackpackTab('pokemon'); // refresh UI
+};
+
 
 function switchView(viewName) {
     document.querySelectorAll('.game-view').forEach(el => el.style.display = 'none');
@@ -359,7 +568,7 @@ function updateUI() {
         const xpRequired = nextLevelXp - currentLevelXp;
 
         d.innerHTML = `
-            <img src="assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png" onload="this.style.display='inline'" onerror="this.style.display='none'">
+            <img src="Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png" onload="this.style.display='inline'" onerror="this.style.display='none'">
             <div style="display: inline-block; vertical-align: top; width: calc(100% - 70px);">
                 <b>${p.name}</b> Lv.${p.level}<br>
                 HP: ${Math.floor(p.currentHp)}/${p.maxHp}
@@ -391,7 +600,7 @@ function updateUI() {
         document.getElementById('enemy-name').innerText = `${enemy.name} (Q=${enemy.quality.toFixed(2)} & ∑IV=${enemyTotalIV})`;
         document.getElementById('enemy-lvl').innerText = enemy.level;
         document.getElementById('enemy-hp').innerText = `${Math.floor(enemy.currentHp)}/${enemy.maxHp}`;
-        document.getElementById('enemy-sprite').src = `assets/Pokemon Sprites/${enemy.qualityName === 'Shiny' ? enemy.id + '_shiny' : enemy.id}.png`;
+        document.getElementById('enemy-sprite').src = `Assets/Pokemon Sprites/${enemy.qualityName === 'Shiny' ? enemy.id + '_shiny' : enemy.id}.png`;
         document.getElementById('enemy-sprite').style.display = 'block';
 
         const leader = state.party[0];
@@ -399,7 +608,7 @@ function updateUI() {
             document.getElementById('player-name').innerText = leader.name;
             document.getElementById('player-lvl').innerText = leader.level;
             document.getElementById('player-hp').innerText = `${Math.floor(leader.currentHp)}/${leader.maxHp}`;
-            document.getElementById('player-sprite').src = `assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? leader.id + '_shiny' : leader.id}.png`;
+            document.getElementById('player-sprite').src = `Assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? leader.id + '_shiny' : leader.id}.png`;
             document.getElementById('player-sprite').style.display = 'block';
         }
     } else if (battleSystem && battleSystem.isSearching) {
@@ -414,7 +623,7 @@ function updateUI() {
             document.getElementById('player-name').innerText = leader.name;
             document.getElementById('player-lvl').innerText = leader.level;
             document.getElementById('player-hp').innerText = `${Math.floor(leader.currentHp)}/${leader.maxHp}`;
-            document.getElementById('player-sprite').src = `assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? leader.id + '_shiny' : leader.id}.png`;
+            document.getElementById('player-sprite').src = `Assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? leader.id + '_shiny' : leader.id}.png`;
             document.getElementById('player-sprite').style.display = 'block';
         } else {
             document.getElementById('player-sprite').style.display = 'none';
@@ -436,7 +645,7 @@ function showMap() {
     // Generate Interactive Map HTML
     let html = `
         <h2>Map</h2>
-        <div id="interactive-map" style="position: relative; width: 100%; aspect-ratio: 1/1; background-image: url('./assets/Extra/Kanto Map.png'); background-size: cover; border: 2px solid #fff; border-radius: 8px;">
+        <div id="interactive-map" style="position: relative; width: 100%; aspect-ratio: 1/1; background-image: url('./Assets/Map/Kanto Map.png'); background-size: cover; border: 2px solid #fff; border-radius: 8px;">
     `;
 
     // Ensure we only show unlocked routes based on battle count
@@ -465,11 +674,21 @@ function showMap() {
         }
 
         if (isUnlocked) {
+            let markerImg = './Assets/Extra/Spot.png';
+            if (locationId === 'pewter_gym') markerImg = './Assets/Badges/Badge Kanto 1.png';
+            else if (locationId === 'cerulean_gym') markerImg = './Assets/Badges/Badge Kanto 2.png';
+            else if (locationId === 'vermilion_gym') markerImg = './Assets/Badges/Badge Kanto 3.png';
+            else if (locationId === 'celadon_gym') markerImg = './Assets/Badges/Badge Kanto 4.png';
+            else if (locationId === 'fuchsia_gym') markerImg = './Assets/Badges/Badge Kanto 5.png';
+            else if (locationId === 'saffron_gym') markerImg = './Assets/Badges/Badge Kanto 6.png';
+            else if (locationId === 'cinnabar_gym') markerImg = './Assets/Badges/Badge Kanto 7.png';
+            else if (locationId === 'viridian_gym') markerImg = './Assets/Badges/Badge Kanto 8.png';
+
             html += `
                 <div class="map-marker"
                      data-location="${locationName}"
                      title="${locationName}"
-                     style="position: absolute; left: ${coords.x}%; top: ${coords.y}%; width: 24px; height: 24px; background-image: url('./assets/Extra/Spot.png'); background-size: contain; background-repeat: no-repeat; transform: translate(-50%, -50%); cursor: pointer;"
+                     style="position: absolute; left: ${coords.x}%; top: ${coords.y}%; width: 24px; height: 24px; background-image: url('${markerImg}'); background-size: contain; background-repeat: no-repeat; transform: translate(-50%, -50%); cursor: pointer;"
                      onclick="navigateToLocation('${locationName}')"
                      onmouseover="showMapTooltip(event, '${locationName}')"
                      onmouseout="hideMapTooltip()">
@@ -509,7 +728,7 @@ window.navigateToLocation = function(locationName) {
                 </div>
             </div>
         `;
-        vCenter.style.backgroundImage = "url('./assets/backgrounds/BG-PC&M.png')";
+        vCenter.style.backgroundImage = "url('./Assets/BG/BG-PC&M.png')";
         vCenter.style.backgroundSize = "cover";
         vCenter.style.height = "100%";
         vCenter.style.textAlign = "center";
@@ -592,7 +811,7 @@ window.navigateToLocation = function(locationName) {
             </div>
         `;
         if (bgImg) {
-            vGym.style.backgroundImage = `url('./assets/backgrounds/${bgImg}')`;
+            vGym.style.backgroundImage = `url('./Assets/BG/${bgImg}')`;
             vGym.style.backgroundSize = "cover";
             vGym.style.height = "100%";
             vGym.style.textAlign = "center";

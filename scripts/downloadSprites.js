@@ -3,7 +3,7 @@ const path = require('path');
 const axios = require('axios');
 
 const MAX_POKEMON = 151;
-const ASSETS_DIR = path.join(__dirname, '..', 'assets', 'sprites');
+const ASSETS_DIR = path.join(__dirname, '..', 'Assets', 'Pokemon Sprites');
 
 // Ensure directory exists
 if (!fs.existsSync(ASSETS_DIR)) {
