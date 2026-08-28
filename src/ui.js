@@ -195,6 +195,8 @@ window.showBackpack = function() {
     let html = `
         <div style="position: relative; background-image: url('./Assets/Extra/Backpack.png'); background-size: contain; background-repeat: no-repeat; background-position: center top; padding: 20px; border-radius: 8px; min-height: 600px; color: white;">
 
+            <div onclick="document.getElementById('modal-overlay').style.display='none'" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index: 1;"></div>
+
             <!-- Close Button Overlay -->
             <div style="position: absolute; top: 10px; right: 10px; z-index: 10;">
                 <button onclick="document.getElementById('modal-overlay').style.display='none'" style="background: #e74c3c; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer;">X</button>
@@ -202,22 +204,23 @@ window.showBackpack = function() {
 
             <!-- Clickable Pockets Overlay -->
             <!-- Note: Exact coordinates might need fine-tuning based on actual image aspect ratio, but we place them generally to be responsive -->
-            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2;">
                 <!-- Purple Pokeballs Pocket -->
                 <div onclick="renderBackpackTab('pokeballs')" style="position: absolute; top: 25%; left: 20%; width: 25%; height: 25%; cursor: pointer; border-radius: 50%;"></div>
 
-                <!-- Green Potions Pocket -->
-                <div onclick="renderBackpackTab('potions')" style="position: absolute; top: 25%; right: 20%; width: 25%; height: 25%; cursor: pointer; border-radius: 50%;"></div>
+                <!-- Yellow Pokemon Pocket -->
+                <div onclick="renderBackpackTab('pokemon')" style="position: absolute; top: 25%; right: 20%; width: 25%; height: 25%; cursor: pointer; border-radius: 50%;"></div>
 
                 <!-- Cyan Stones Pocket -->
                 <div onclick="renderBackpackTab('stones')" style="position: absolute; top: 55%; left: 20%; width: 25%; height: 25%; cursor: pointer; border-radius: 50%;"></div>
 
-                <!-- Yellow Pokemon Pocket -->
-                <div onclick="renderBackpackTab('pokemon')" style="position: absolute; top: 55%; right: 20%; width: 25%; height: 25%; cursor: pointer; border-radius: 50%;"></div>
+                <!-- Green Potions Pocket -->
+                <div onclick="renderBackpackTab('potions')" style="position: absolute; top: 55%; right: 20%; width: 25%; height: 25%; cursor: pointer; border-radius: 50%;"></div>
             </div>
 
             <!-- Content Area - We'll position it at the bottom with a solid background so it overlaps gracefully -->
-            <div id="backpack-content-area" style="position: absolute; bottom: 20px; left: 5%; width: 90%; background: rgba(0,0,0,0.85); padding: 15px; border-radius: 5px; min-height: 250px; z-index: 5;">
+            <div id="backpack-content-area" style="position: absolute; bottom: 20px; left: 5%; width: 90%; background: rgba(0,0,0,0.85); padding: 15px; border-radius: 5px; min-height: 250px; z-index: 5; display: none;">
+                <button onclick="document.getElementById('backpack-content-area').style.display='none'" style="position: absolute; top: 5px; right: 5px; background: #e74c3c; color: white; border: none; padding: 2px 6px; border-radius: 3px; cursor: pointer;">X</button>
                 <!-- Content gets rendered here -->
                 <h3 style="text-align: center; margin-top: 0; color: #ddd;">Select a pocket to view items.</h3>
             </div>
@@ -229,6 +232,7 @@ window.showBackpack = function() {
 window.renderBackpackTab = function(tab) {
     const area = document.getElementById('backpack-content-area');
     if (!area) return;
+    area.style.display = "block";
 
     const formatQuantity = (q) => {
         if (q >= 1000000) return Math.floor(q / 1000000) + 'm';
