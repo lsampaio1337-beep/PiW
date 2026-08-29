@@ -73,7 +73,7 @@ function showPokedex() {
             // If we haven't encountered it yet, it's a silhouette.
             const hasEncountered = (state.stats.seenSpecies && state.stats.seenSpecies[pData.name]) || (state.stats.caughtSpecies && state.stats.caughtSpecies[pData.name]) ||
                                    state.party.some(p => p.id === i) ||
-                                   state.box.some(p => p.id === i) ||
+                                   state.storage.some(p => p.id === i) ||
                                    false;
 
             let filter = hasEncountered ? "none" : "brightness(0)";
@@ -257,7 +257,7 @@ async function init() {
     };
 
     document.getElementById('btn-map').onclick = () => { if(!checkCombatLock()) showMap(); };
-    document.getElementById('btn-backpack').onclick = () => { if(!checkCombatLock()) showBackpack(); };
+    document.getElementById('btn-backpack').onclick = () => { if(!checkCombatLock()) window.showBackpack(); };
     document.getElementById('btn-dex').onclick = () => { if(!checkCombatLock()) showPokedex(); };
     document.getElementById('btn-stats').onclick = () => {
         if(checkCombatLock()) return;
@@ -281,18 +281,18 @@ async function init() {
             <div style="margin-bottom: 15px;">
                 <label for="add-money-input">Add Money:</label>
                 <input type="number" id="add-money-input" placeholder="Amount">
-                <button onclick="addMoney()">OK</button>
+                <button onclick="window.addMoney()">OK</button>
             </div>
 
             <div style="margin-bottom: 15px;">
                 <label for="add-xp-input">Add XP (Trainer & Slot 1):</label>
                 <input type="number" id="add-xp-input" placeholder="Amount">
-                <button onclick="addXp()">OK</button>
+                <button onclick="window.addXp()">OK</button>
             </div>
 
             <hr>
 
-            <button onclick="exportLog()">Export Save Log</button>
+            <button onclick="window.exportLog()">Export Save Log</button>
         `;
         showModal("Settings", settingsHTML);
     };
@@ -337,16 +337,16 @@ window.showBackpack = function() {
             </style>
             <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2;">
                 <!-- Purple Pokeballs Pocket -->
-                <div class="backpack-pocket" onclick="renderBackpackTab('pokeballs')" style="top: 25%; left: 20%; width: 25%; height: 25%;"></div>
+                <div class="backpack-pocket" onclick="window.renderBackpackTab('pokeballs')" style="top: 25%; left: 20%; width: 25%; height: 25%;"></div>
 
                 <!-- Yellow Pokemon Pocket -->
-                <div class="backpack-pocket" onclick="renderBackpackTab('pokemon')" style="top: 25%; right: 20%; width: 25%; height: 25%;"></div>
+                <div class="backpack-pocket" onclick="window.renderBackpackTab('pokemon')" style="top: 25%; right: 20%; width: 25%; height: 25%;"></div>
 
                 <!-- Green Potions Pocket -->
-                <div class="backpack-pocket" onclick="renderBackpackTab('potions')" style="top: 55%; left: 20%; width: 25%; height: 25%;"></div>
+                <div class="backpack-pocket" onclick="window.renderBackpackTab('potions')" style="top: 55%; left: 20%; width: 25%; height: 25%;"></div>
 
                 <!-- Cyan Stones Pocket -->
-                <div class="backpack-pocket" onclick="renderBackpackTab('stones')" style="top: 55%; right: 20%; width: 25%; height: 25%;"></div>
+                <div class="backpack-pocket" onclick="window.renderBackpackTab('stones')" style="top: 55%; right: 20%; width: 25%; height: 25%;"></div>
             </div>
 
             <!-- Content Area - We'll position it at the bottom with a solid background so it overlaps gracefully -->
@@ -673,7 +673,7 @@ window.handleDrop = function(event, targetCol) {
     else if (tCol === 'safe') state.safe.push(p);
 
     updateUI();
-    renderBackpackTab('pokemon');
+    window.renderBackpackTab('pokemon');
 };
 
 
