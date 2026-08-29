@@ -826,7 +826,7 @@ window.navigateToLocation = function(locationName) {
 
     if (locationName === "Professor Oak Lab") {
         switchView("PROF_OAK_LAB");
-    } else if (locationName === "Pokemon Center" || locationName.includes("Market")) {
+    } else if (locationName === "Pokemon Center & Market" || locationName.includes("Market")) {
         switchView("POKEMON_CENTER_MARKET");
         const vCenter = document.getElementById("view-center-market");
         vCenter.innerHTML = `
