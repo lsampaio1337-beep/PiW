@@ -183,15 +183,15 @@ window.showDexEntry = (id) => {
             <p><b>BST:</b> ${bst} (HP:${pData.hp} A:${pData.atk} D:${pData.def} SA:${pData.spa} SD:${pData.spd} S:${pData.spe})</p>
 
             <div style="text-align: left; margin: 15px 0; font-size: 14px; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 5px;">
-                <h4 style="margin: 0 0 5px 0;">Defensive Effectiveness (Receiving)</h4>
-                ${Object.keys(weaknesses).length ? `<b>Weak To:</b> ${formatTypes(weaknesses)}<br>` : ''}
-                ${Object.keys(resistances).length ? `<b>Resists:</b> ${formatTypes(resistances)}<br>` : ''}
-                ${Object.keys(immunities).length ? `<b>Immune To:</b> ${formatTypes(immunities)}<br>` : ''}
+                <h4 style="margin: 0 0 5px 0;">Defensive Effectiveness</h4>
+                ${Object.keys(weaknesses).length ? `<b>Weak To (2x):</b> ${formatTypes(weaknesses)}<br>` : ''}
+                ${Object.keys(resistances).length ? `<b>Resists (0.5x):</b> ${formatTypes(resistances)}<br>` : ''}
+                ${Object.keys(immunities).length ? `<b>Immune To (0x):</b> ${formatTypes(immunities)}<br>` : ''}
 
-                <h4 style="margin: 10px 0 5px 0;">Offensive Effectiveness (Attacking)</h4>
-                ${Object.keys(effective).length ? `<b>Super Effective Against:</b> ${formatTypes(effective)}<br>` : ''}
-                ${Object.keys(notEffective).length ? `<b>Not Very Effective Against:</b> ${formatTypes(notEffective)}<br>` : ''}
-                ${Object.keys(noEffect).length ? `<b>No Effect Against:</b> ${formatTypes(noEffect)}<br>` : ''}
+                <h4 style="margin: 10px 0 5px 0;">Offensive Effectiveness</h4>
+                ${Object.keys(effective).length ? `<b>Super Effective (2x):</b> ${formatTypes(effective)}<br>` : ''}
+                ${Object.keys(notEffective).length ? `<b>Not Very Effective (0.5x):</b> ${formatTypes(notEffective)}<br>` : ''}
+                ${Object.keys(noEffect).length ? `<b>No Effect (0x):</b> ${formatTypes(noEffect)}<br>` : ''}
             </div>
 
             ${evolveHtml}
@@ -321,19 +321,32 @@ window.showBackpack = function() {
             </div>
 
             <!-- Clickable Pockets Overlay -->
-            <!-- Note: Exact coordinates might need fine-tuning based on actual image aspect ratio, but we place them generally to be responsive -->
+            <!-- We add visual borders on hover to make it obvious where the pockets are -->
+            <style>
+                .backpack-pocket {
+                    position: absolute;
+                    cursor: pointer;
+                    border-radius: 50%;
+                    border: 3px solid transparent;
+                    transition: border 0.2s ease-in-out, background 0.2s ease-in-out;
+                }
+                .backpack-pocket:hover {
+                    border-color: rgba(255, 255, 255, 0.5);
+                    background: rgba(255, 255, 255, 0.1);
+                }
+            </style>
             <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2;">
                 <!-- Purple Pokeballs Pocket -->
-                <div onclick="renderBackpackTab('pokeballs')" style="position: absolute; top: 25%; left: 20%; width: 25%; height: 25%; cursor: pointer; border-radius: 50%;"></div>
+                <div class="backpack-pocket" onclick="renderBackpackTab('pokeballs')" style="top: 25%; left: 20%; width: 25%; height: 25%;"></div>
 
                 <!-- Yellow Pokemon Pocket -->
-                <div onclick="renderBackpackTab('pokemon')" style="position: absolute; top: 25%; right: 20%; width: 25%; height: 25%; cursor: pointer; border-radius: 50%;"></div>
+                <div class="backpack-pocket" onclick="renderBackpackTab('pokemon')" style="top: 25%; right: 20%; width: 25%; height: 25%;"></div>
 
                 <!-- Green Potions Pocket -->
-                <div onclick="renderBackpackTab('potions')" style="position: absolute; top: 55%; left: 20%; width: 25%; height: 25%; cursor: pointer; border-radius: 50%;"></div>
+                <div class="backpack-pocket" onclick="renderBackpackTab('potions')" style="top: 55%; left: 20%; width: 25%; height: 25%;"></div>
 
                 <!-- Cyan Stones Pocket -->
-                <div onclick="renderBackpackTab('stones')" style="position: absolute; top: 55%; right: 20%; width: 25%; height: 25%; cursor: pointer; border-radius: 50%;"></div>
+                <div class="backpack-pocket" onclick="renderBackpackTab('stones')" style="top: 55%; right: 20%; width: 25%; height: 25%;"></div>
             </div>
 
             <!-- Content Area - We'll position it at the bottom with a solid background so it overlaps gracefully -->
@@ -579,6 +592,8 @@ window.evolvePokemon = function(location, idx, toId) {
 
     p.id = newBase.id;
     p.name = newBase.name;
+    p.types = newBase.types;
+    p.bst = newBase.hp + newBase.atk + newBase.def + newBase.spa + newBase.spd + newBase.spe;
 
     // Recalculate stats with new base
     p.maxHp = Math.floor((((2 * newBase.hp + p.ivs.hp) * p.level / 100) + p.level + 10) * p.quality);
@@ -963,7 +978,7 @@ function showMap() {
             // Increase size for special spots
             let markerWidth = "24px";
             let markerHeight = "24px";
-            if (['professor_oak_lab', 'pokemon_center___market', 'indigo_plateu', 'safari_zone'].includes(locationId)) {
+            if (['professor_oak_lab', 'pokemon_center___market', 'indigo_plateu'].includes(locationId)) {
                 markerWidth = "40px";
                 markerHeight = "40px";
             }
@@ -1035,9 +1050,13 @@ window.navigateToLocation = function(locationName) {
                 // Pokeballs dynamically from config
                 state.config.balance.items.pokeballs.forEach(b => {
                     if (state.backpack.pokeballs[b.name] !== undefined) {
-                        itemsHtml += `<div style="margin-bottom: 5px;">
+                        const id = b.name.replace(/\s+/g, '');
+                        itemsHtml += `<div style="margin-bottom: 5px; display: flex; align-items: center; justify-content: space-between;">
                             <span>${b.name} ($${b.price})</span>
-                            <button onclick="window.buyItem('${b.name}', ${b.price}, 'pokeballs')">Buy</button>
+                            <div>
+                                <input type="number" id="qty-${id}" value="1" min="1" style="width: 50px; margin-right: 5px;">
+                                <button onclick="window.buyItem('${b.name}', ${b.price}, 'pokeballs', document.getElementById('qty-${id}').value)">Buy</button>
+                            </div>
                         </div>`;
                     }
                 });
@@ -1053,9 +1072,13 @@ window.navigateToLocation = function(locationName) {
                     if (p.name === 'Max Potion') return; // Excluded from backpack initial state for now unless added
 
                     if (state.backpack.potions[inventoryName] !== undefined) {
-                        itemsHtml += `<div style="margin-bottom: 5px;">
+                        const id = inventoryName.replace(/\s+/g, '');
+                        itemsHtml += `<div style="margin-bottom: 5px; display: flex; align-items: center; justify-content: space-between;">
                             <span>${inventoryName} ($${p.price})</span>
-                            <button onclick="window.buyItem('${inventoryName}', ${p.price}, 'potions')">Buy</button>
+                            <div>
+                                <input type="number" id="qty-${id}" value="1" min="1" style="width: 50px; margin-right: 5px;">
+                                <button onclick="window.buyItem('${inventoryName}', ${p.price}, 'potions', document.getElementById('qty-${id}').value)">Buy</button>
+                            </div>
                         </div>`;
                     }
                 });
@@ -1065,9 +1088,13 @@ window.navigateToLocation = function(locationName) {
                 // Stones from config (only has price/sell, need to list all stones in backpack)
                 const stonePrice = state.config.balance.items.stones.price;
                 Object.keys(state.backpack.stones).forEach(stoneName => {
-                    itemsHtml += `<div style="margin-bottom: 5px;">
+                    const id = stoneName.replace(/\s+/g, '');
+                    itemsHtml += `<div style="margin-bottom: 5px; display: flex; align-items: center; justify-content: space-between;">
                         <span>${stoneName} ($${stonePrice})</span>
-                        <button onclick="window.buyItem('${stoneName}', ${stonePrice}, 'stones')">Buy</button>
+                        <div>
+                            <input type="number" id="qty-${id}" value="1" min="1" style="width: 50px; margin-right: 5px;">
+                            <button onclick="window.buyItem('${stoneName}', ${stonePrice}, 'stones', document.getElementById('qty-${id}').value)">Buy</button>
+                        </div>
                     </div>`;
                 });
 
@@ -1075,10 +1102,14 @@ window.navigateToLocation = function(locationName) {
             }
         };
 
-        window.buyItem = (itemId, cost, category) => {
-            if (state.trainer.money >= cost) {
-                state.trainer.money -= cost;
-                state.backpack[category][itemId]++;
+        window.buyItem = (itemId, cost, category, quantityStr) => {
+            const quantity = parseInt(quantityStr) || 1;
+            if (quantity <= 0) return;
+            const totalCost = cost * quantity;
+
+            if (state.trainer.money >= totalCost) {
+                state.trainer.money -= totalCost;
+                state.backpack[category][itemId] += quantity;
                 updateUI();
                 // Optionally show a quick visual feedback instead of an alert
             } else {
@@ -1259,8 +1290,8 @@ window.showMapTooltip = function(e, locationName) {
             info += `Levels: ${minLvl}-${maxLvl}<br>`;
             info += `Spawns: ${route.spawns.length}<br>`;
 
-            // Show top 3 spawns
-            route.spawns.slice(0, 3).forEach(s => {
+            // Show all spawns
+            route.spawns.forEach(s => {
                 let pName = "Unknown";
                 if (state.config.pokemonData) {
                     const pd = state.config.pokemonData.find(p => p.id === s.pokemonId);
