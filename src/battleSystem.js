@@ -9,6 +9,12 @@ class BattleSystem {
         this.activeEncounter = null;
         this.combatLoop = null;
         this.isSearching = false;
+
+        this.gymState = {
+            isActive: false,
+            gym: null,
+            currentTrainerIndex: 0
+        };
     }
 
     start() {
@@ -67,6 +73,63 @@ class BattleSystem {
         return bestMove;
     }
 
+    startGymBattle(gymName) {
+        const gym = this.state.config.gyms.find(g => g.name === gymName);
+        if (!gym) return;
+
+        this.stop();
+        this.gymState = {
+            isActive: true,
+            gym: gym,
+            currentTrainerIndex: 0
+        };
+
+        // Update gym UI specifically to show current trainer
+        this.updateGymUI();
+    }
+
+    updateGymUI() {
+        const vGym = document.getElementById("view-gym");
+        const contentArea = document.getElementById("gym-content-area");
+        if (!vGym || !contentArea) return;
+
+        const gym = this.gymState.gym;
+        if (!gym) return;
+
+        const trainer = gym.trainers[this.gymState.currentTrainerIndex];
+
+        if (trainer) {
+            contentArea.innerHTML = `
+                <p>Next Opponent: ${trainer.name}</p>
+                <button onclick="window.battleEngine.searchNext()" style="padding: 10px 20px; font-size: 16px; cursor: pointer;">Battle ${trainer.name}</button>
+                <br><br>
+                <button onclick="window.battleEngine.stopGymBattle()" style="padding: 5px 10px; background: #e74c3c; border: none; color: white; border-radius: 3px; cursor: pointer;">Flee Gym</button>
+            `;
+            // Temporary expose for the button
+            window.battleEngine = this;
+        } else {
+            // Gym completed
+            contentArea.innerHTML = `
+                <h3>You defeated ${gym.leader}!</h3>
+                <p>You earned the ${gym.name} badge.</p>
+                <button onclick="window.battleEngine.stopGymBattle()" style="padding: 10px 20px; cursor: pointer;">Leave</button>
+            `;
+            window.battleEngine = this;
+        }
+    }
+
+    stopGymBattle() {
+        this.gymState.isActive = false;
+        this.gymState.gym = null;
+        this.stop();
+
+        // Return to normal map or idle
+        if (typeof window.navigateToLocation === 'function') {
+             // Reset UI back to just the gym entry
+             window.navigateToLocation(this.state.currentRoute);
+        }
+    }
+
     async searchNext() {
         if (this.state.party.every(p => p.currentHp <= 0)) {
             this.handleWipeout();
@@ -83,8 +146,85 @@ class BattleSystem {
         delay = Math.max(300, delay) / this.state.settings.gameSpeed;
 
         this.combatLoop = setTimeout(() => {
-            this.generateEncounter();
+            if (this.gymState.isActive) {
+                this.generateGymEncounter();
+            } else {
+                this.generateEncounter();
+            }
         }, delay);
+    }
+
+    generateGymEncounter() {
+        const gym = this.gymState.gym;
+        if (!gym) return;
+
+        const trainer = gym.trainers[this.gymState.currentTrainerIndex];
+        if (!trainer) {
+            // Should not happen, but safe fallback
+            this.stopGymBattle();
+            return;
+        }
+
+        // We'll simulate fighting the entire team as sequential encounters for now
+        // A full implementation might handle the team differently, but this fits the idle structure easiest
+        // For this task, we will just pick a random pokemon from the trainer's team or the first one
+        // Better: We should track which pokemon of the trainer we are on.
+        // Let's add a `currentPokemonIndex` to `gymState`.
+        if (this.gymState.currentPokemonIndex === undefined) {
+            this.gymState.currentPokemonIndex = 0;
+        }
+
+        const pokemonDef = trainer.team[this.gymState.currentPokemonIndex];
+        if (!pokemonDef) return; // Should have been handled in defeat
+
+        const pokemonBase = this.state.config.pokemonData.find(p => p.id === pokemonDef.id);
+        const level = pokemonDef.level;
+
+        // Gym leaders and trainers have fixed quality (e.g. Regular or Uncommon)
+        const isLeader = this.gymState.currentTrainerIndex === gym.trainers.length - 1;
+        const q = isLeader ? { name: "Rare", q: 1.40 } : { name: "Uncommon", q: 1.20 };
+
+        // Track seen for pokedex
+        if (!this.state.stats.seenSpecies) this.state.stats.seenSpecies = {};
+        this.state.stats.seenSpecies[pokemonBase.name] = true;
+
+        // Give them good IVs
+        const ivs = { hp: 50, atk: 50, def: 50, spa: 50, spd: 50, spe: 50 };
+        if (isLeader) {
+            ivs.hp = 80; ivs.atk = 80; ivs.def = 80; ivs.spa = 80; ivs.spd = 80; ivs.spe = 80;
+        }
+
+        const stats = {
+            hp: mathEngine.calculateHP(pokemonBase.hp, ivs.hp, level, q.q),
+            atk: mathEngine.calculateStat(pokemonBase.atk, ivs.atk, level, q.q),
+            def: mathEngine.calculateStat(pokemonBase.def, ivs.def, level, q.q),
+            spa: mathEngine.calculateStat(pokemonBase.spa, ivs.spa, level, q.q),
+            spd: mathEngine.calculateStat(pokemonBase.spd, ivs.spd, level, q.q),
+            spe: mathEngine.calculateStat(pokemonBase.spe, ivs.spe, level, q.q)
+        };
+
+        const bst = pokemonBase.hp + pokemonBase.atk + pokemonBase.def + pokemonBase.spa + pokemonBase.spd + pokemonBase.spe;
+        const totalIV = ivs.hp + ivs.atk + ivs.def + ivs.spa + ivs.spd + ivs.spe;
+
+        this.activeEncounter = {
+            id: pokemonBase.id,
+            name: pokemonBase.name,
+            level: level,
+            types: pokemonBase.types,
+            qualityName: q.name,
+            quality: q.q,
+            ivs: ivs,
+            currentStats: stats,
+            maxHp: stats.hp,
+            currentHp: stats.hp,
+            ev: mathEngine.calculateEV(bst, level, q.q, totalIV),
+            bst: bst,
+            moves: this.getLearnsetMoves(pokemonBase, level)
+        };
+
+        this.isSearching = false;
+        this.updateUI();
+        this.scheduleTurn();
     }
 
     generateEncounter() {
@@ -324,8 +464,8 @@ class BattleSystem {
         const leader = this.state.party[0];
         const ev = this.activeEncounter.ev;
 
-        // Auto Throw Pokeball logic
-        if (this.state.settings.autoCatch) {
+        // Auto Throw Pokeball logic (disable in gyms)
+        if (this.state.settings.autoCatch && (!this.gymState || !this.gymState.isActive)) {
             const caught = this.throwPokeball();
             if (caught) {
                 let caughtPokemon = JSON.parse(JSON.stringify(this.activeEncounter));
@@ -362,7 +502,39 @@ class BattleSystem {
 
         this.state.stats.battlesWon++;
         this.checkRouteUnlocks();
-        this.searchNext();
+
+        if (this.gymState && this.gymState.isActive) {
+            this.handleGymEnemyDefeat();
+        } else {
+            this.searchNext();
+        }
+    }
+
+    handleGymEnemyDefeat() {
+        const gym = this.gymState.gym;
+        const trainer = gym.trainers[this.gymState.currentTrainerIndex];
+
+        this.gymState.currentPokemonIndex++;
+
+        if (this.gymState.currentPokemonIndex >= trainer.team.length) {
+            // Defeated trainer
+            this.gymState.currentTrainerIndex++;
+            this.gymState.currentPokemonIndex = 0;
+            this.stop(); // Stop loop to show next button
+
+            if (this.gymState.currentTrainerIndex >= gym.trainers.length) {
+                // Defeated Gym!
+                if (!this.state.trainer.badges) this.state.trainer.badges = 0;
+                this.state.trainer.badges++;
+
+                // Bonus money for winning
+                this.state.trainer.money += 1000 * this.state.trainer.badges;
+            }
+            this.updateGymUI();
+        } else {
+            // Next pokemon
+            this.searchNext();
+        }
     }
 
     checkRouteUnlocks() {
@@ -435,12 +607,18 @@ class BattleSystem {
         // Heal all party to full
         this.state.party.forEach(p => p.currentHp = p.maxHp);
 
-        // Return to poke center (simulated by just waiting and searching again for idle game)
-        setTimeout(() => {
-            this.searchNext();
-        }, 5000 / this.state.settings.gameSpeed);
+        if (this.gymState && this.gymState.isActive) {
+            // Flee gym
+            this.stopGymBattle();
+            this.updateUI();
+        } else {
+            // Return to poke center (simulated by just waiting and searching again for idle game)
+            setTimeout(() => {
+                this.searchNext();
+            }, 5000 / this.state.settings.gameSpeed);
 
-        this.updateUI();
+            this.updateUI();
+        }
     }
 
     switchLeader(index) {

@@ -244,18 +244,32 @@ async function init() {
     document.getElementById('choose-squirtle').onclick = () => selectStarter(7);
 
     // Bind Hub Buttons
-    document.getElementById('btn-map').onclick = () => showMap();
-    document.getElementById('btn-backpack').onclick = showBackpack;
-    document.getElementById('btn-dex').onclick = showPokedex;
+    const checkCombatLock = () => {
+        if (battleSystem && battleSystem.gymState && battleSystem.gymState.isActive) {
+            alert("You cannot access this menu during a Gym Battle!");
+            return true;
+        }
+        if (battleSystem && battleSystem.activeEncounter && !battleSystem.isSearching && battleSystem.combatLoop) {
+             alert("You cannot access this menu while in active combat!");
+             return true;
+        }
+        return false;
+    };
+
+    document.getElementById('btn-map').onclick = () => { if(!checkCombatLock()) showMap(); };
+    document.getElementById('btn-backpack').onclick = () => { if(!checkCombatLock()) showBackpack(); };
+    document.getElementById('btn-dex').onclick = () => { if(!checkCombatLock()) showPokedex(); };
     document.getElementById('btn-stats').onclick = () => {
-    let badgesHtml = '<div style="display: flex; gap: 10px; margin-top: 10px;">';
-    for (let i = 1; i <= state.trainer.badges; i++) {
-        badgesHtml += `<img src="./Assets/Badges/Badge Kanto ${i}.png" style="width: 40px; height: 40px;" title="Badge ${i}">`;
-    }
-    badgesHtml += '</div>';
-    showModal("Statistics", `<p>Battles Won: ${state.stats.battlesWon}</p><p>Money: $${state.trainer.money}</p><h3>Badges:</h3>${badgesHtml}`);
-};
+        if(checkCombatLock()) return;
+        let badgesHtml = '<div style="display: flex; gap: 10px; margin-top: 10px;">';
+        for (let i = 1; i <= state.trainer.badges; i++) {
+            badgesHtml += `<img src="./Assets/Badges/Badge Kanto ${i}.png" style="width: 40px; height: 40px;" title="Badge ${i}">`;
+        }
+        badgesHtml += '</div>';
+        showModal("Statistics", `<p>Battles Won: ${state.stats.battlesWon}</p><p>Money: $${state.trainer.money}</p><h3>Badges:</h3>${badgesHtml}`);
+    };
     document.getElementById('btn-settings').onclick = () => {
+        if(checkCombatLock()) return;
         const speedValues = [0.5, 1, 2, 4, 8, 16, 32];
         const currentIndex = speedValues.indexOf(state.settings.gameSpeed) !== -1 ? speedValues.indexOf(state.settings.gameSpeed) : 1;
         const settingsHTML = `
@@ -1071,9 +1085,11 @@ window.navigateToLocation = function(locationName) {
                 alert("Not enough money!");
             }
         };
-    } else if (locationName.includes("Gym")) {
+    } else if (locationName.includes("Gym") || locationName === "Indigo Plateu") {
         switchView("GYM");
         let bgImg = "";
+        let lookupName = locationName;
+
         if (locationName.includes("Pewter")) bgImg = "BG-Gym-1-Pewter-Rock.png";
         else if (locationName.includes("Cerulean")) bgImg = "BG-Gym-2-Cerulean-Water.png";
         else if (locationName.includes("Vermilion")) bgImg = "BG-Gym-3-Vermilion-Electric.png";
@@ -1082,12 +1098,36 @@ window.navigateToLocation = function(locationName) {
         else if (locationName.includes("Saffron")) bgImg = "BG-Gym-6-Saffron-Psychic.png";
         else if (locationName.includes("Cinnabar")) bgImg = "BG-Gym-7-Cinnabar-Fire.png";
         else if (locationName.includes("Viridian Gym")) bgImg = "BG-Gym-8-Viridian-Ground.png";
+        else if (locationName === "Indigo Plateu") {
+            // Pick a random E4 background for now, or the first one
+            bgImg = "BG-Elite4-1Lorelei.png";
+            lookupName = "Indigo Plateau"; // Correct spelling for the gyms config
+        }
 
         const vGym = document.getElementById("view-gym");
+        const gymConfig = state.config.gyms.find(g => g.name === lookupName);
+
+        // Stop current battle system
+        if (battleSystem) {
+            battleSystem.stop();
+        }
+
+        let buttonHtml = '';
+        if (gymConfig) {
+            const playerLvl = state.party[0] ? state.party[0].level : 1;
+            if (playerLvl < gymConfig.levelRequirement) {
+                buttonHtml = `<p style="color: red;">Level ${gymConfig.levelRequirement} required to challenge this Gym.</p>`;
+            } else {
+                buttonHtml = `<button onclick="window.startGymBattle('${lookupName}')" style="padding: 10px 20px; font-size: 16px; margin-top: 10px; cursor: pointer;">Challenge ${locationName}</button>`;
+            }
+        }
+
         vGym.innerHTML = `
-            <div style="background-color: rgba(0,0,0,0.5); display: inline-block; padding: 10px; margin-top: 50px; border-radius: 8px;">
+            <div style="background-color: rgba(0,0,0,0.8); display: inline-block; padding: 20px; margin-top: 50px; border-radius: 8px;">
                 <h2>${locationName}</h2>
-                <p>Battle System idle. Implement gym logic in battleSystem.js.</p>
+                <div id="gym-content-area">
+                    ${buttonHtml}
+                </div>
             </div>
         `;
         if (bgImg) {
@@ -1103,6 +1143,12 @@ window.navigateToLocation = function(locationName) {
         }
     }
     updateUI();
+};
+
+window.startGymBattle = function(gymName) {
+    if (battleSystem) {
+        battleSystem.startGymBattle(gymName);
+    }
 };
 
 window.showDamage = function(target, amount, isCrit, moveName = '') {
