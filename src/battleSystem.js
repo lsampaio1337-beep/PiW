@@ -328,7 +328,10 @@ class BattleSystem {
         if (this.state.settings.autoCatch) {
             const caught = this.throwPokeball();
             if (caught) {
-                this.state.storage.push(JSON.parse(JSON.stringify(this.activeEncounter)));
+                let caughtPokemon = JSON.parse(JSON.stringify(this.activeEncounter));
+                // Fix the level 100 jump bug by setting xp explicitly to the exact minimum needed for their captured level
+                caughtPokemon.xp = mathEngine.calculateTotalXP(caughtPokemon.level);
+                this.state.storage.push(caughtPokemon);
                 this.state.stats.caught++;
                 if (this.activeEncounter.qualityName === "Shiny") this.state.stats.shiniesCaught++;
 

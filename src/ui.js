@@ -95,19 +95,95 @@ window.showDexEntry = (id) => {
     const pData = state.config.pokemonData.find(p => p.id === id);
     if (!pData) return;
 
-    // Total BST is sum of base stats
     const bst = pData.hp + pData.atk + pData.def + pData.spa + pData.spd + pData.spe;
 
-    // Check if shiny is unlocked/seen for this specific pokemon? The prompt says "button to see shiny version".
-    // Let's just toggle the sprite.
+    // Calculate Type Effectiveness
+    const tConfig = state.config.types;
+    let weaknesses = {};
+    let resistances = {};
+    let immunities = {};
+    let effective = {};
+    let notEffective = {};
+    let noEffect = {};
+
+    // Defending Matchups (Weakness, Resistance, Immune)
+    for (const atkType in tConfig) {
+        let multiplier = 1;
+        for (const defType of pData.types) {
+            if (tConfig[atkType] && tConfig[atkType][defType] !== undefined) {
+                multiplier *= tConfig[atkType][defType];
+            }
+        }
+        if (multiplier > 1) weaknesses[atkType] = multiplier;
+        else if (multiplier < 1 && multiplier > 0) resistances[atkType] = multiplier;
+        else if (multiplier === 0) immunities[atkType] = multiplier;
+    }
+
+    // Attacking Matchups (Effective, Not Effective, No Effect)
+    for (const defType in tConfig) {
+        let maxMult = 0;
+        for (const atkType of pData.types) {
+            let m = 1;
+            if (tConfig[atkType] && tConfig[atkType][defType] !== undefined) {
+                m = tConfig[atkType][defType];
+            }
+            if (m > maxMult) maxMult = m;
+        }
+        if (maxMult > 1) effective[defType] = maxMult;
+        else if (maxMult < 1 && maxMult > 0) notEffective[defType] = maxMult;
+        else if (maxMult === 0) noEffect[defType] = maxMult;
+    }
+
+    const formatTypes = (obj) => Object.keys(obj).length ? Object.keys(obj).join(', ') : 'None';
+
+    // Moveset Table
+    let movesHtml = `
+        <table style="width: 100%; border-collapse: collapse; text-align: left; margin-top: 10px; font-size: 12px;">
+            <tr style="border-bottom: 1px solid #777;">
+                <th>Lvl</th><th>Move Name</th><th>Type</th><th>Power</th><th>Category</th>
+            </tr>
+    `;
+    if (pData.learnset) {
+        pData.learnset.forEach(m => {
+            let mData = state.config.moves[m.move];
+            movesHtml += `<tr style="border-bottom: 1px solid #444;">
+                <td>${m.level}</td>
+                <td>${m.move}</td>
+                <td>${mData ? mData.type : '?'}</td>
+                <td>${mData ? mData.power : '?'}</td>
+                <td>${mData ? mData.category : '?'}</td>
+            </tr>`;
+        });
+    }
+    movesHtml += `</table>`;
+
     const html = `
-        <div style="text-align:center;">
+        <div style="text-align:center; max-height: 80vh; overflow-y: auto;">
             <h2>#${pData.id} ${pData.name}</h2>
             <img id="dex-sprite" src="Assets/Pokemon Sprites/${pData.id}.png" style="width: 100px; height: 100px;">
-            <p>Type: ${pData.types.join('/')}</p>
-            <p>BST: ${bst} (HP:${pData.hp} A:${pData.atk} D:${pData.def} SA:${pData.spa} SD:${pData.spd} S:${pData.spe})</p>
-            <button onclick="document.getElementById('dex-sprite').src = 'Assets/Pokemon Sprites/${pData.id}_shiny.png'">Show Shiny</button>
-            <button onclick="document.getElementById('dex-sprite').src = 'Assets/Pokemon Sprites/${pData.id}.png'">Show Normal</button>
+            <div>
+                <button onclick="document.getElementById('dex-sprite').src = 'Assets/Pokemon Sprites/${pData.id}_shiny.png'">Shiny</button>
+                <button onclick="document.getElementById('dex-sprite').src = 'Assets/Pokemon Sprites/${pData.id}.png'">Normal</button>
+            </div>
+
+            <p><b>Type:</b> ${pData.types.join(' / ')}</p>
+            <p><b>BST:</b> ${bst} (HP:${pData.hp} A:${pData.atk} D:${pData.def} SA:${pData.spa} SD:${pData.spd} S:${pData.spe})</p>
+
+            <div style="text-align: left; margin: 15px 0; font-size: 14px; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 5px;">
+                <h4 style="margin: 0 0 5px 0;">Defensive Effectiveness (Receiving)</h4>
+                ${Object.keys(weaknesses).length ? `<b>Weak To:</b> ${formatTypes(weaknesses)}<br>` : ''}
+                ${Object.keys(resistances).length ? `<b>Resists:</b> ${formatTypes(resistances)}<br>` : ''}
+                ${Object.keys(immunities).length ? `<b>Immune To:</b> ${formatTypes(immunities)}<br>` : ''}
+
+                <h4 style="margin: 10px 0 5px 0;">Offensive Effectiveness (Attacking)</h4>
+                ${Object.keys(effective).length ? `<b>Super Effective Against:</b> ${formatTypes(effective)}<br>` : ''}
+                ${Object.keys(notEffective).length ? `<b>Not Very Effective Against:</b> ${formatTypes(notEffective)}<br>` : ''}
+                ${Object.keys(noEffect).length ? `<b>No Effect Against:</b> ${formatTypes(noEffect)}<br>` : ''}
+            </div>
+
+            <h4 style="text-align: left;">Moveset</h4>
+            ${movesHtml}
+
             <br><br>
             <button onclick="document.getElementById('btn-dex').click()">Back to Pokedex</button>
         </div>
@@ -208,7 +284,7 @@ window.showBackpack = function() {
     let html = `
         <div style="position: relative; background-image: url('./Assets/Extra/Backpack.png'); background-size: contain; background-repeat: no-repeat; background-position: center top; padding: 20px; border-radius: 8px; min-height: 600px; color: white;">
 
-            <div onclick="document.getElementById('modal-overlay').style.display='none'" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index: 1;"></div>
+            <div onclick="document.getElementById('backpack-content-area').style.display='none'" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index: 1;"></div>
 
             <!-- Close Button Overlay -->
             <div style="position: absolute; top: 10px; right: 10px; z-index: 10;">
@@ -225,10 +301,10 @@ window.showBackpack = function() {
                 <div onclick="renderBackpackTab('pokemon')" style="position: absolute; top: 25%; right: 20%; width: 25%; height: 25%; cursor: pointer; border-radius: 50%;"></div>
 
                 <!-- Cyan Stones Pocket -->
-                <div onclick="renderBackpackTab('potions')" style="position: absolute; top: 55%; left: 20%; width: 25%; height: 25%; cursor: pointer; border-radius: 50%;"></div>
+                <div onclick="renderBackpackTab('stones')" style="position: absolute; top: 55%; left: 20%; width: 25%; height: 25%; cursor: pointer; border-radius: 50%;"></div>
 
                 <!-- Green Potions Pocket -->
-                <div onclick="renderBackpackTab('stones')" style="position: absolute; top: 55%; right: 20%; width: 25%; height: 25%; cursor: pointer; border-radius: 50%;"></div>
+                <div onclick="renderBackpackTab('potions')" style="position: absolute; top: 55%; right: 20%; width: 25%; height: 25%; cursor: pointer; border-radius: 50%;"></div>
             </div>
 
             <!-- Content Area - We'll position it at the bottom with a solid background so it overlaps gracefully -->
@@ -310,15 +386,17 @@ window.renderBackpackTab = function renderBackpackTab(tab) {
             if (i < activePokemon.length) {
                 let p = activePokemon[i];
                 let imgSrc = `Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png`;
+                let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
                 content += `
-                    <div style="border: 1px solid #777; height: 60px; text-align: center; cursor: pointer; position: relative;" onclick="movePokemon('${p._tag}', ${p._origIndex}, 'storage')">
+                    <div style="border: 1px solid #777; height: 60px; text-align: center; cursor: move; position: relative;" title="Q=${p.quality.toFixed(2)} & ∑IV=${sumIV}" draggable="true" ondragstart="dragStart(event, '${p._tag}', ${p._origIndex})">
                         <span style="position: absolute; top: 0; left: 0; font-size: 8px; background: black; padding: 1px;">${p._tag}</span>
                         <img src="${imgSrc}" style="max-height: 40px; max-width: 40px;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
                         <div style="font-size: 10px;">Lv.${p.level}</div>
+                        <div onclick="event.stopPropagation(); window.showPokemonStats(${p._origIndex}, '${p._tag.toLowerCase()}')" style="position: absolute; top: 2px; right: 2px; cursor: pointer; background: #34495e; color: white; border-radius: 50%; width: 14px; height: 14px; text-align: center; line-height: 14px; font-size: 10px; font-weight: bold;" title="View Info">i</div>
                     </div>
                 `;
             } else {
-                content += `<div style="border: 1px dashed #777; height: 60px;"></div>`;
+                content += `<div ondragover="dragOver(event)" ondrop="handleDrop(event, 'party')" style="border: 1px dashed #777; height: 60px;"></div>`;
             }
         }
 
@@ -327,7 +405,7 @@ window.renderBackpackTab = function renderBackpackTab(tab) {
                 </div>
 
                 <!-- Column 2: Storage (6xn) -->
-                <div style="flex: 1; border: 1px solid #555; padding: 5px; min-height: 200px;">
+                <div ondragover="dragOver(event)" ondrop="handleDrop(event, 'storage')" style="flex: 1; border: 1px solid #555; padding: 5px; min-height: 200px;">
                     <h4 style="text-align: center; margin-top:0;">Storage</h4>
                     <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 5px; max-height: 250px; overflow-y: auto;">
         `;
@@ -337,14 +415,16 @@ window.renderBackpackTab = function renderBackpackTab(tab) {
             if (i < state.storage.length) {
                 let p = state.storage[i];
                 let imgSrc = `Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png`;
+                let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
                 content += `
-                    <div style="border: 1px solid #777; height: 60px; text-align: center; cursor: pointer;" onclick="movePokemon('storage', ${i}, 'safe')">
-                        <img src="${imgSrc}" style="max-height: 40px; max-width: 40px;" title="Click to move to Safe" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
+                    <div style="border: 1px solid #777; height: 60px; text-align: center; cursor: move; position: relative;" title="Q=${p.quality.toFixed(2)} & ∑IV=${sumIV}" draggable="true" ondragstart="dragStart(event, 'storage', ${i})">
+                        <img src="${imgSrc}" style="max-height: 40px; max-width: 40px;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
                         <div style="font-size: 10px;">Lv.${p.level}</div>
+                        <div onclick="event.stopPropagation(); window.showPokemonStats(${i}, 'storage')" style="position: absolute; top: 2px; right: 2px; cursor: pointer; background: #34495e; color: white; border-radius: 50%; width: 14px; height: 14px; text-align: center; line-height: 14px; font-size: 10px; font-weight: bold;" title="View Info">i</div>
                     </div>
                 `;
             } else {
-                content += `<div style="border: 1px dashed #777; height: 60px; display: flex; align-items: center; justify-content: center; font-size: 20px; cursor: pointer;" title="Empty Slot">+</div>`;
+                content += `<div style="border: 1px dashed #777; height: 60px; display: flex; align-items: center; justify-content: center; font-size: 20px;" title="Empty Slot">+</div>`;
             }
         }
 
@@ -353,7 +433,7 @@ window.renderBackpackTab = function renderBackpackTab(tab) {
                 </div>
 
                 <!-- Column 3: Safe (6xn) -->
-                <div style="flex: 1; border: 1px solid #555; padding: 5px; min-height: 200px;">
+                <div ondragover="dragOver(event)" ondrop="handleDrop(event, 'safe')" style="flex: 1; border: 1px solid #555; padding: 5px; min-height: 200px;">
                     <h4 style="text-align: center; margin-top:0;">Safe</h4>
                     <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 5px; max-height: 250px; overflow-y: auto;">
         `;
@@ -363,15 +443,12 @@ window.renderBackpackTab = function renderBackpackTab(tab) {
             if (i < state.safe.length) {
                 let p = state.safe[i];
                 let imgSrc = `Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png`;
+                let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
                 content += `
-                    <div style="border: 1px solid #777; height: 60px; text-align: center; cursor: pointer; position: relative;">
+                    <div style="border: 1px solid #777; height: 60px; text-align: center; cursor: move; position: relative;" title="Q=${p.quality.toFixed(2)} & ∑IV=${sumIV}" draggable="true" ondragstart="dragStart(event, 'safe', ${i})">
                         <img src="${imgSrc}" style="max-height: 40px; max-width: 40px;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
                         <div style="font-size: 10px;">Lv.${p.level}</div>
-
-                        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; background: rgba(0,0,0,0.7); opacity: 0; transition: opacity 0.2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0">
-                            <div style="flex: 1; display: flex; align-items: center; justify-content: center; font-size: 10px; color: white; border-bottom: 1px solid #555;" title="Move to Party" onclick="movePokemon('safe', ${i}, 'Party')">To Party</div>
-                            <div style="flex: 1; display: flex; align-items: center; justify-content: center; font-size: 10px; color: white;" title="Move to Storage" onclick="movePokemon('safe', ${i}, 'storage')">To Storage</div>
-                        </div>
+                        <div onclick="event.stopPropagation(); window.showPokemonStats(${i}, 'safe')" style="position: absolute; top: 2px; right: 2px; cursor: pointer; background: #34495e; color: white; border-radius: 50%; width: 14px; height: 14px; text-align: center; line-height: 14px; font-size: 10px; font-weight: bold;" title="View Info">i</div>
                     </div>
                 `;
             } else {
@@ -391,86 +468,103 @@ window.renderBackpackTab = function renderBackpackTab(tab) {
 };
 
 
-window.movePokemon = function(sourceType, index, targetType) {
-    let p = null;
 
-    // Remove from source
-    if (sourceType === 'Party' || sourceType === 'Active') {
-        p = state.party.splice(index, 1)[0];
-    } else if (sourceType === 'Breeding') {
-        p = state.breeding.splice(index, 1)[0];
-    } else if (sourceType === 'Training') {
-        p = state.training.splice(index, 1)[0];
-    } else if (sourceType === 'storage') {
-        p = state.storage.splice(index, 1)[0];
-    } else if (sourceType === 'safe') {
-        p = state.safe.splice(index, 1)[0];
-    }
+window.setLeader = function(idx) {
+    if (idx === 0) return;
+    const newLeader = state.party.splice(idx, 1)[0];
+    state.party.unshift(newLeader);
+    updateUI();
+};
+
+window.showPokemonStats = function(idx, location) {
+    let p = null;
+    if (location === 'party') p = state.party[idx];
+    else if (location === 'breeding') p = state.breeding[idx];
+    else if (location === 'training') p = state.training[idx];
+    else if (location === 'storage') p = state.storage[idx];
+    else if (location === 'safe') p = state.safe[idx];
 
     if (!p) return;
 
-    // Add to target
-    if (targetType === 'storage') {
-        state.storage.push(p);
-    } else if (targetType === 'safe') {
-        state.safe.push(p);
-    } else if (targetType === 'Party' || targetType === 'Active') {
-        if (state.party.length < 6) {
-            state.party.push(p);
-        } else {
-            // Revert
-            if (sourceType === 'Party' || sourceType === 'Active') state.party.splice(index, 0, p);
-            else if (sourceType === 'Breeding') state.breeding.splice(index, 0, p);
-            else if (sourceType === 'Training') state.training.splice(index, 0, p);
-            else if (sourceType === 'storage') state.storage.splice(index, 0, p);
-            else if (sourceType === 'safe') state.safe.splice(index, 0, p);
-            alert("Party is full!");
-            return;
-        }
-    }
+    const sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
+    let html = `
+        <h2>${p.name} (Lv. ${p.level})</h2>
+        <div style="display: flex; justify-content: space-around;">
+            <div>
+                <img src="Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png" style="width: 100px; height: 100px;"><br>
+                <b>Quality:</b> ${p.qualityName} (Q=${p.quality.toFixed(2)})<br>
+                <b>Sum IVs:</b> ${sumIV}<br>
+            </div>
+            <div style="text-align: left;">
+                <h4>IV Distribution</h4>
+                HP: ${p.ivs.hp}<br>
+                ATK: ${p.ivs.atk}<br>
+                DEF: ${p.ivs.def}<br>
+                SPA: ${p.ivs.spa}<br>
+                SPD: ${p.ivs.spd}<br>
+                SPE: ${p.ivs.spe}<br>
+            </div>
+        </div>
+    `;
 
-    updateUI();
-    renderBackpackTab('pokemon');
+    let rightCol = document.getElementById('modal-overlay');
+    let contentPanel = document.getElementById('content-panel');
+    rightCol.style.display = 'flex';
+    contentPanel.innerHTML = html;
 };
 
 window.dragStart = function(event, sourceCol, index) {
     event.dataTransfer.setData('text/plain', JSON.stringify({ sourceCol, index }));
 };
 
-window.allowDrop = function(event) {
-    event.preventDefault();
+window.dragOver = function(event) {
+    event.preventDefault(); // Necessary to allow dropping
 };
 
 window.handleDrop = function(event, targetCol) {
     event.preventDefault();
     const data = event.dataTransfer.getData('text/plain');
     if (!data) return;
-    const { sourceCol, index } = JSON.parse(data);
+    let sourceCol, index;
+    try {
+        const parsed = JSON.parse(data);
+        sourceCol = parsed.sourceCol;
+        index = parsed.index;
+    } catch(e) { return; }
 
-    if (sourceCol === targetCol) return; // Dropping in same col doesn't do anything
+    // Normalize casings
+    const sCol = sourceCol.toLowerCase();
+    const tCol = targetCol.toLowerCase();
+
+    if (sCol === tCol) return; // Dropping in same col doesn't do anything
 
     let p = null;
-    if (sourceCol === 'Active') p = state.party[index];
-    else if (sourceCol === 'Storage') p = state.storage[index];
-    else if (sourceCol === 'Safe') p = state.safe[index];
+    if (sCol === 'party') p = state.party[index];
+    else if (sCol === 'breeding') p = state.breeding[index];
+    else if (sCol === 'training') p = state.training[index];
+    else if (sCol === 'storage') p = state.storage[index];
+    else if (sCol === 'safe') p = state.safe[index];
 
     if (!p) return;
 
-    if (targetCol === 'Active') {
-        if (state.party.length >= 6) {
-            return; // Reject drop
-        }
-        state.party.push(p);
-    } else if (targetCol === 'Storage') {
-        state.storage.push(p);
-    } else if (targetCol === 'Safe') {
-        state.safe.push(p);
+    if (tCol === 'party' && state.party.length >= 6) {
+        alert("Party is full!");
+        return;
     }
 
-    // Remove from source only if successfully added to target
-    if (sourceCol === 'Active') state.party.splice(index, 1);
-    else if (sourceCol === 'Storage') state.storage.splice(index, 1);
-    else if (sourceCol === 'Safe') state.safe.splice(index, 1);
+    // We can't drag directly into Breeding/Training via UI drop zone currently, it goes to Party.
+
+    // Remove from source
+    if (sCol === 'party') state.party.splice(index, 1);
+    else if (sCol === 'breeding') state.breeding.splice(index, 1);
+    else if (sCol === 'training') state.training.splice(index, 1);
+    else if (sCol === 'storage') state.storage.splice(index, 1);
+    else if (sCol === 'safe') state.safe.splice(index, 1);
+
+    // Add to target
+    if (tCol === 'party') state.party.push(p);
+    else if (tCol === 'storage') state.storage.push(p);
+    else if (tCol === 'safe') state.safe.push(p);
 
     updateUI();
     renderBackpackTab('pokemon');
@@ -660,6 +754,7 @@ function updateUI() {
     state.party.forEach((p, idx) => {
         const d = document.createElement('div');
         d.className = 'party-slot';
+        d.style.position = 'relative';
 
         // Calculate XP relative to current level
         const currentLevelXp = mathEngine.calculateTotalXP(p.level);
@@ -667,8 +762,11 @@ function updateUI() {
         const xpProgress = Math.floor(p.xp) - currentLevelXp;
         const xpRequired = nextLevelXp - currentLevelXp;
 
+        const crownColor = idx === 0 ? '#f1c40f' : '#7f8c8d'; // Yellow for leader, Grey for others
+
         d.innerHTML = `
-            <img src="Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png" onload="this.style.display='inline'" onerror="this.style.display='none'">
+            <div onclick="window.setLeader(${idx})" style="position: absolute; top: 5px; right: 5px; cursor: pointer; color: ${crownColor}; font-size: 16px;" title="Set as Leader">👑</div>
+            <img src="Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png" onload="this.style.display='inline'" onerror="this.style.display='none'" style="width: 50px; height: 50px;">
             <div style="display: inline-block; vertical-align: top; width: calc(100% - 70px);">
                 <b>${p.name}</b> Lv.${p.level}<br>
                 HP: ${Math.floor(p.currentHp)}/${p.maxHp}
@@ -680,10 +778,8 @@ function updateUI() {
                     <div style="width: ${Math.min(100, (xpProgress / xpRequired) * 100)}%; height: 100%; background: #4caf50;"></div>
                 </div>
             </div>
+            <div onclick="event.stopPropagation(); window.showPokemonStats(${idx}, 'party')" style="position: absolute; bottom: 5px; right: 5px; cursor: pointer; background: #34495e; color: white; border-radius: 50%; width: 20px; height: 20px; text-align: center; line-height: 20px; font-weight: bold;" title="View Info">i</div>
         `;
-        d.onclick = () => {
-            battleSystem.switchLeader(idx);
-        };
         partyDiv.appendChild(d);
     });
 
@@ -748,38 +844,21 @@ function showMap() {
         <div id="interactive-map" style="position: relative; width: 100%; aspect-ratio: 16/11; background-image: url('./Assets/Map/Kanto Map.png'); background-size: contain; background-repeat: no-repeat; background-position: center; border: 2px solid #fff; border-radius: 8px;">
     `;
 
-    // Ensure we only show unlocked routes based on battle count
-    const rCount = state.stats.battlesWon;
-    const maxIdx = Math.floor(rCount / 50) + 1; // Unlocks every 50 battles
-    const unlockedRoutes = new Set();
-    if (state.config.routes) {
-        for (let i = 0; i < Math.min(maxIdx, state.config.routes.length); i++) {
-            unlockedRoutes.add(state.config.routes[i].name);
-        }
-    }
-
     for (const [locationId, locationData] of Object.entries(state.config.mapCoordinates)) {
         const locationName = locationData.name;
         const coords = locationData;
 
-        // Simple filter logic for progression (only unlock routes that are allowed, plus gyms if route matches)
-        let isUnlocked = false;
-
-        if (locationName.includes("Gym") || locationName === "Elite 4") {
-            isUnlocked = true;
-        } else if (unlockedRoutes.has(locationName)) {
-            isUnlocked = true;
-        } else if (["Professor Oak Lab", "Viridian City", "Pewter City", "Cerulean City", "Vermilion City", "Lavender Town", "Saffron City", "Celadon City", "Fuchsia City", "Cinnabar Island", "Casino", "Small Fishing Spot", "Fighting Dojo", "Big Fishing Spot", "Fossil Revival Lab", "Trade with Friends Hub", "Unreachables Zone"].includes(locationName)) {
-            isUnlocked = true;
-        }
+        // By request, all map spots are currently unlocked by default
+        let isUnlocked = true;
 
         if (isUnlocked) {
 
             let markerImg = './Assets/Extra/Spot.png';
             let showCheckmark = false;
-            if (locationId === 'pallet_town') markerImg = './Assets/Extra/Spot_Oak.png';
-            else if (locationId === 'trade_hub') markerImg = './Assets/Extra/Spot_PCPM.png';
-            else if (locationId === 'indigo_plateau') markerImg = './Assets/Extra/Spot_E4.png';
+            if (locationId === 'professor_oak_lab') markerImg = './Assets/Extra/Spot_Oak.png';
+            else if (locationId === 'pokemon_center___market') markerImg = './Assets/Extra/Spot_PCPM.png';
+            else if (locationId === 'indigo_plateu') markerImg = './Assets/Extra/Spot_E4.png';
+            else if (locationId === 'safari_zone') markerImg = './Assets/Extra/Spot_Safariball.png';
             else if (locationId === 'pewter_gym') { markerImg = './Assets/Badges/Badge Kanto 1.png'; if (state.trainer.badges >= 1) showCheckmark = true; }
             else if (locationId === 'cerulean_gym') { markerImg = './Assets/Badges/Badge Kanto 2.png'; if (state.trainer.badges >= 2) showCheckmark = true; }
             else if (locationId === 'vermilion_gym') { markerImg = './Assets/Badges/Badge Kanto 3.png'; if (state.trainer.badges >= 3) showCheckmark = true; }
@@ -792,7 +871,7 @@ function showMap() {
             // Increase size for special spots
             let markerWidth = "24px";
             let markerHeight = "24px";
-            if (['pallet_town', 'trade_hub', 'indigo_plateau'].includes(locationId)) {
+            if (['professor_oak_lab', 'pokemon_center___market', 'indigo_plateu', 'safari_zone'].includes(locationId)) {
                 markerWidth = "40px";
                 markerHeight = "40px";
             }
@@ -806,6 +885,7 @@ function showMap() {
                      onclick="navigateToLocation('${locationName}')"
                      onmouseover="showMapTooltip(event, '${locationName}')"
                      onmouseout="hideMapTooltip()">
+                     ${showCheckmark ? '<div style="position:absolute; top:-5px; right:-5px; background:green; color:white; border-radius:50%; width:15px; height:15px; font-size:10px; line-height:15px; text-align:center;">✓</div>' : ''}
                 </div>
             `;
         }
@@ -858,37 +938,34 @@ window.navigateToLocation = function(locationName) {
             panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
             if(panel.style.display === 'block') {
                 const itemsDiv = document.getElementById('market-items');
-                let itemsHtml = '';
+                let itemsHtml = '<h4>Pokeballs</h4>';
 
-                // Pokeballs
-                const balls = [
-                    {id: 'pokeball', name: 'Pokeball', cost: 5},
-                    {id: 'greatball', name: 'Greatball', cost: 50},
-                    {id: 'ultraball', name: 'Ultraball', cost: 600}
-                ];
-
-                balls.forEach(b => {
-                    itemsHtml += `<div style="margin-bottom: 5px;">
-                        <span>${b.name} ($${b.cost})</span>
-                        <button onclick="window.buyItem('${b.id}', ${b.cost}, 'pokeballs')">Buy</button>
-                    </div>`;
+                // Pokeballs dynamically from config
+                state.config.balance.items.pokeballs.forEach(b => {
+                    if (state.backpack.pokeballs[b.name] !== undefined) {
+                        itemsHtml += `<div style="margin-bottom: 5px;">
+                            <span>${b.name} ($${b.price})</span>
+                            <button onclick="window.buyItem('${b.name}', ${b.price}, 'pokeballs')">Buy</button>
+                        </div>`;
+                    }
                 });
 
-                // Potions
-                const potions = [
-                    {id: 'tinyPotion', name: 'Tiny Potion', cost: 10},
-                    {id: 'smallPotion', name: 'Small Potion', cost: 25},
-                    {id: 'standardPotion', name: 'Standard Potion', cost: 75},
-                    {id: 'superPotion', name: 'Super Potion', cost: 300},
-                    {id: 'hyperPotion', name: 'Hyper Potion', cost: 1500},
-                    {id: 'ultimatePotion', name: 'Ultimate Potion', cost: 9000}
-                ];
+                itemsHtml += '<h4>Potions</h4>';
 
-                potions.forEach(p => {
-                    itemsHtml += `<div style="margin-bottom: 5px;">
-                        <span>${p.name} ($${p.cost})</span>
-                        <button onclick="window.buyItem('${p.id}', ${p.cost}, 'potions')">Buy</button>
-                    </div>`;
+                // Potions dynamically from config
+                state.config.balance.items.potions.forEach(p => {
+                    let inventoryName = p.name;
+                    // Map config names to inventory names where they differ slightly
+                    if (p.name === 'Regular Potion') inventoryName = 'Regular Potion';
+                    if (p.name === 'Big') inventoryName = 'Big Potion';
+                    if (p.name === 'Max Potion') return; // Excluded from backpack initial state for now unless added
+
+                    if (state.backpack.potions[inventoryName] !== undefined) {
+                        itemsHtml += `<div style="margin-bottom: 5px;">
+                            <span>${inventoryName} ($${p.price})</span>
+                            <button onclick="window.buyItem('${inventoryName}', ${p.price}, 'potions')">Buy</button>
+                        </div>`;
+                    }
                 });
 
                 itemsDiv.innerHTML = itemsHtml;
