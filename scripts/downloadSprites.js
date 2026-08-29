@@ -34,6 +34,20 @@ async function downloadImage(url, filename) {
 }
 
 async function downloadSprites() {
+  // Optimization: check if all files already exist to skip the loop entirely
+  let allExist = true;
+  for (let i = 1; i <= MAX_POKEMON; i++) {
+    if (!fs.existsSync(path.join(ASSETS_DIR, `${i}.png`)) || !fs.existsSync(path.join(ASSETS_DIR, `${i}_shiny.png`))) {
+      allExist = false;
+      break;
+    }
+  }
+
+  if (allExist) {
+    console.log('All sprites already exist. Skipping download.');
+    return;
+  }
+
   console.log('Downloading sprites from PokeAPI...');
   for (let i = 1; i <= MAX_POKEMON; i++) {
     // Normal sprite

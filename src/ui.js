@@ -300,11 +300,11 @@ window.showBackpack = function() {
                 <!-- Yellow Pokemon Pocket -->
                 <div onclick="renderBackpackTab('pokemon')" style="position: absolute; top: 25%; right: 20%; width: 25%; height: 25%; cursor: pointer; border-radius: 50%;"></div>
 
-                <!-- Cyan Stones Pocket -->
-                <div onclick="renderBackpackTab('stones')" style="position: absolute; top: 55%; left: 20%; width: 25%; height: 25%; cursor: pointer; border-radius: 50%;"></div>
-
                 <!-- Green Potions Pocket -->
-                <div onclick="renderBackpackTab('potions')" style="position: absolute; top: 55%; right: 20%; width: 25%; height: 25%; cursor: pointer; border-radius: 50%;"></div>
+                <div onclick="renderBackpackTab('potions')" style="position: absolute; top: 55%; left: 20%; width: 25%; height: 25%; cursor: pointer; border-radius: 50%;"></div>
+
+                <!-- Cyan Stones Pocket -->
+                <div onclick="renderBackpackTab('stones')" style="position: absolute; top: 55%; right: 20%; width: 25%; height: 25%; cursor: pointer; border-radius: 50%;"></div>
             </div>
 
             <!-- Content Area - We'll position it at the bottom with a solid background so it overlaps gracefully -->
@@ -471,9 +471,15 @@ window.renderBackpackTab = function renderBackpackTab(tab) {
 
 window.setLeader = function(idx) {
     if (idx === 0) return;
-    const newLeader = state.party.splice(idx, 1)[0];
-    state.party.unshift(newLeader);
-    updateUI();
+
+    // Check if battle system exists
+    if (battleSystem) {
+        battleSystem.switchLeader(idx);
+    } else {
+        const newLeader = state.party.splice(idx, 1)[0];
+        state.party.unshift(newLeader);
+        updateUI();
+    }
 };
 
 window.showPokemonStats = function(idx, location) {
@@ -488,7 +494,6 @@ window.showPokemonStats = function(idx, location) {
 
     const sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
     let html = `
-        <h2>${p.name} (Lv. ${p.level})</h2>
         <div style="display: flex; justify-content: space-around;">
             <div>
                 <img src="Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png" style="width: 100px; height: 100px;"><br>
@@ -507,10 +512,7 @@ window.showPokemonStats = function(idx, location) {
         </div>
     `;
 
-    let rightCol = document.getElementById('modal-overlay');
-    let contentPanel = document.getElementById('content-panel');
-    rightCol.style.display = 'flex';
-    contentPanel.innerHTML = html;
+    showModal(`${p.name} (Lv. ${p.level})`, html);
 };
 
 window.dragStart = function(event, sourceCol, index) {
@@ -859,6 +861,7 @@ function showMap() {
             else if (locationId === 'pokemon_center___market') markerImg = './Assets/Extra/Spot_PCPM.png';
             else if (locationId === 'indigo_plateu') markerImg = './Assets/Extra/Spot_E4.png';
             else if (locationId === 'safari_zone') markerImg = './Assets/Extra/Spot_Safariball.png';
+            else if (locationId === 'celadon_s_casino') markerImg = './Assets/Extra/Spot_Casino.png';
             else if (locationId === 'pewter_gym') { markerImg = './Assets/Badges/Badge Kanto 1.png'; if (state.trainer.badges >= 1) showCheckmark = true; }
             else if (locationId === 'cerulean_gym') { markerImg = './Assets/Badges/Badge Kanto 2.png'; if (state.trainer.badges >= 2) showCheckmark = true; }
             else if (locationId === 'vermilion_gym') { markerImg = './Assets/Badges/Badge Kanto 3.png'; if (state.trainer.badges >= 3) showCheckmark = true; }
