@@ -424,6 +424,8 @@ class BattleSystem {
 
     throwPokeball() {
         let tier = this.state.settings.activeBallTier;
+        if (tier < 0) return false; // None selected
+
         let ballName = this.state.config.balance.items.pokeballs[tier].name;
 
         while(tier >= 0) {

@@ -40,7 +40,7 @@ if %ERRORLEVEL% neq 0 (
 
 REM Start game
 echo [2/2] Starting the game!
-call npm start
+start "" npm start
 if %ERRORLEVEL% neq 0 (
     echo.
     echo [ERROR] Game crashed or failed to start.
@@ -49,6 +49,5 @@ if %ERRORLEVEL% neq 0 (
     goto :EOF
 )
 
-echo.
-echo Game closed normally.
-pause
+REM Exit to close the terminal automatically
+exit

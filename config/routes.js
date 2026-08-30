@@ -40,7 +40,7 @@ const routes = [
       ]
     },
     {
-      "name": "Mt. Moon",
+      "name": "Mount Moon",
       "spawns": [
         {"pokemonId": 41, "minLevel": 9, "maxLevel": 11, "chance": 0.55},
         {"pokemonId": 74, "minLevel": 9, "maxLevel": 11, "chance": 0.25},
@@ -117,7 +117,7 @@ const routes = [
       ]
     },
     {
-      "name": "Digletts Cave",
+      "name": "Diglett's Cave",
       "spawns": [
         {"pokemonId": 50, "minLevel": 30, "maxLevel": 33, "chance": 0.95},
         {"pokemonId": 51, "minLevel": 33, "maxLevel": 33, "chance": 0.05}
@@ -181,27 +181,28 @@ const routes = [
       ]
     },
     {
-      "name": "Casino",
+      "name": "Celadon's Casino",
       "spawns": [
-        { "pokemonId": 1, "minLevel": 45, "maxLevel": 45, "chance": 0.05 },
-        { "pokemonId": 4, "minLevel": 45, "maxLevel": 45, "chance": 0.05 },
-        { "pokemonId": 7, "minLevel": 45, "maxLevel": 45, "chance": 0.05 },
-        { "pokemonId": 2, "minLevel": 50, "maxLevel": 50, "chance": 0.05 },
-        { "pokemonId": 5, "minLevel": 50, "maxLevel": 50, "chance": 0.05 },
-        { "pokemonId": 8, "minLevel": 50, "maxLevel": 50, "chance": 0.05 },
-        { "pokemonId": 3, "minLevel": 55, "maxLevel": 55, "chance": 0.05 },
-        { "pokemonId": 6, "minLevel": 55, "maxLevel": 55, "chance": 0.05 },
-        { "pokemonId": 9, "minLevel": 55, "maxLevel": 55, "chance": 0.05 },
-        { "pokemonId": 134, "minLevel": 50, "maxLevel": 50, "chance": 0.1 },
-        { "pokemonId": 135, "minLevel": 50, "maxLevel": 50, "chance": 0.1 },
-        { "pokemonId": 136, "minLevel": 50, "maxLevel": 50, "chance": 0.1 },
-        { "pokemonId": 131, "minLevel": 52, "maxLevel": 52, "chance": 0.05 },
-        { "pokemonId": 137, "minLevel": 52, "maxLevel": 52, "chance": 0.05 },
-        { "pokemonId": 108, "minLevel": 52, "maxLevel": 52, "chance": 0.15 }
+        { "pokemonId": 1, "minLevel": 45, "maxLevel": 45, "chance": 0.06 },
+        { "pokemonId": 4, "minLevel": 45, "maxLevel": 45, "chance": 0.06 },
+        { "pokemonId": 7, "minLevel": 45, "maxLevel": 45, "chance": 0.06 },
+        { "pokemonId": 2, "minLevel": 50, "maxLevel": 50, "chance": 0.06 },
+        { "pokemonId": 5, "minLevel": 50, "maxLevel": 50, "chance": 0.06 },
+        { "pokemonId": 8, "minLevel": 50, "maxLevel": 50, "chance": 0.06 },
+        { "pokemonId": 3, "minLevel": 55, "maxLevel": 55, "chance": 0.06 },
+        { "pokemonId": 6, "minLevel": 55, "maxLevel": 55, "chance": 0.06 },
+        { "pokemonId": 9, "minLevel": 55, "maxLevel": 55, "chance": 0.06 },
+        { "pokemonId": 133, "minLevel": 50, "maxLevel": 50, "chance": 0.06 },
+        { "pokemonId": 134, "minLevel": 50, "maxLevel": 50, "chance": 0.06 },
+        { "pokemonId": 135, "minLevel": 50, "maxLevel": 50, "chance": 0.06 },
+        { "pokemonId": 136, "minLevel": 50, "maxLevel": 50, "chance": 0.06 },
+        { "pokemonId": 131, "minLevel": 52, "maxLevel": 52, "chance": 0.06 },
+        { "pokemonId": 137, "minLevel": 52, "maxLevel": 52, "chance": 0.08 },
+        { "pokemonId": 108, "minLevel": 52, "maxLevel": 52, "chance": 0.08 }
       ]
     },
     {
-      "name": "Pokemon Tower",
+      "name": "Pokémon Tower",
       "spawns": [
         {"pokemonId": 92, "minLevel": 58, "maxLevel": 63, "chance": 0.85},
         {"pokemonId": 93, "minLevel": 58, "maxLevel": 63, "chance": 0.1},
@@ -297,7 +298,7 @@ const routes = [
       ]
     },
     {
-      "name": "Pokemon Mansion",
+      "name": "Pokémon Mansion",
       "spawns": [
         {"pokemonId": 109, "minLevel": 82, "maxLevel": 87, "chance": 0.2},
         {"pokemonId": 88, "minLevel": 82, "maxLevel": 87, "chance": 0.15},
@@ -379,6 +380,59 @@ const routes = [
         {"pokemonId": 150, "minLevel": 95, "maxLevel": 95, "chance": 0.01}
       ]
     }
+    },
+    {
+      "name": "Small Fishing Spot",
+      "spawns": [
+        {"pokemonId": 129, "minLevel": 58, "maxLevel": 64, "chance": 0.3},
+        {"pokemonId": 60, "minLevel": 58, "maxLevel": 64, "chance": 0.2},
+        {"pokemonId": 61, "minLevel": 58, "maxLevel": 64, "chance": 0.1},
+        {"pokemonId": 118, "minLevel": 58, "maxLevel": 64, "chance": 0.1},
+        {"pokemonId": 98, "minLevel": 58, "maxLevel": 64, "chance": 0.1},
+        {"pokemonId": 116, "minLevel": 58, "maxLevel": 64, "chance": 0.1},
+        {"pokemonId": 90, "minLevel": 58, "maxLevel": 64, "chance": 0.1}
+      ]
+    },
+    {
+      "name": "Big Fishing Spot",
+      "spawns": [
+        {"pokemonId": 130, "minLevel": 80, "maxLevel": 85, "chance": 0.1},
+        {"pokemonId": 62, "minLevel": 80, "maxLevel": 85, "chance": 0.15},
+        {"pokemonId": 119, "minLevel": 80, "maxLevel": 85, "chance": 0.15},
+        {"pokemonId": 99, "minLevel": 80, "maxLevel": 85, "chance": 0.15},
+        {"pokemonId": 117, "minLevel": 80, "maxLevel": 85, "chance": 0.15},
+        {"pokemonId": 91, "minLevel": 80, "maxLevel": 85, "chance": 0.15},
+        {"pokemonId": 147, "minLevel": 80, "maxLevel": 85, "chance": 0.09},
+        {"pokemonId": 148, "minLevel": 80, "maxLevel": 85, "chance": 0.06},
+        {"pokemonId": 149, "minLevel": 80, "maxLevel": 85, "chance": 0.05}
+      ]
+    },
+    {
+      "name": "Fossil Revival",
+      "spawns": [
+        {"pokemonId": 138, "minLevel": 82, "maxLevel": 87, "chance": 0.3},
+        {"pokemonId": 140, "minLevel": 82, "maxLevel": 87, "chance": 0.3},
+        {"pokemonId": 139, "minLevel": 82, "maxLevel": 87, "chance": 0.15},
+        {"pokemonId": 141, "minLevel": 82, "maxLevel": 87, "chance": 0.15},
+        {"pokemonId": 142, "minLevel": 82, "maxLevel": 87, "chance": 0.1}
+      ]
+    },
+    {
+      "name": "Fighting Dojo",
+      "spawns": [
+        {"pokemonId": 106, "minLevel": 70, "maxLevel": 75, "chance": 0.5},
+        {"pokemonId": 107, "minLevel": 70, "maxLevel": 75, "chance": 0.5}
+      ]
+    },
+    {
+      "name": "Trade With a Friend",
+      "spawns": [
+        {"pokemonId": 65, "minLevel": 84, "maxLevel": 89, "chance": 0.25},
+        {"pokemonId": 68, "minLevel": 84, "maxLevel": 89, "chance": 0.25},
+        {"pokemonId": 94, "minLevel": 84, "maxLevel": 89, "chance": 0.25},
+        {"pokemonId": 76, "minLevel": 84, "maxLevel": 89, "chance": 0.25}
+      ]
+    }
   ];
 export { routes };
 
@@ -420,14 +474,14 @@ export const unlocks = [
   },
   {
     "areaId": "Route 3",
-    "unlocks": ["Mt. Moon"],
+    "unlocks": ["Mount Moon"],
     "requirements": {
       "defeatCount": 150,
       "catchSpecies": [{ "species": "Jigglypuff", "count": 1 }]
     }
   },
   {
-    "areaId": "Mt. Moon",
+    "areaId": "Mount Moon",
     "unlocks": ["Route 4"],
     "requirements": {
       "catchSpecies": [
@@ -481,13 +535,13 @@ export const unlocks = [
   },
   {
     "areaId": "Route 11",
-    "unlocks": ["Digletts Cave"],
+    "unlocks": ["Diglett's Cave"],
     "requirements": {
       "catchSpecies": [{ "species": "Drowzee", "count": 5 }]
     }
   },
   {
-    "areaId": "Digletts Cave",
+    "areaId": "Diglett's Cave",
     "unlocks": ["Route 9"],
     "requirements": {
       "defeatBoss": { "name": "Dugtrio", "level": 33 },
@@ -532,14 +586,14 @@ export const unlocks = [
   },
   {
     "areaId": "Route 7",
-    "unlocks": ["Pokemon Tower"],
+    "unlocks": ["Pokémon Tower"],
     "requirements": {
       "catchSpeciesAnyOf": [{ "species": ["Growlithe", "Vulpix"], "count": 1 }],
       "defeatCount": 1000
     }
   },
   {
-    "areaId": "Pokemon Tower",
+    "areaId": "Pokémon Tower",
     "unlocks": ["Route 12", "Small Fishing Spot"],
     "requirements": {
       "catchSpecies": [
@@ -618,21 +672,21 @@ export const unlocks = [
   },
   {
     "areaId": "Seafoam Islands",
-    "unlocks": ["Pokemon Mansion", "Big Fishing Spot"],
+    "unlocks": ["Pokémon Mansion", "Big Fishing Spot"],
     "requirements": {
       "defeatBoss": { "name": "Articuno", "level": 85 }
     }
   },
   {
-    "areaId": "Pokemon Mansion",
-    "unlocks": ["Cinnabar Gym", "Fossil Revival Lab"],
+    "areaId": "Pokémon Mansion",
+    "unlocks": ["Cinnabar Gym", "Fossil Revival"],
     "requirements": {
       "catchSpecies": [{ "species": "Magmar", "count": 1 }]
     }
   },
   {
     "areaId": "Cinnabar Gym",
-    "unlocks": ["Power Plant", "Trade with Friends Hub"],
+    "unlocks": ["Power Plant", "Trade With a Friend"],
     "requirements": {
       "defeatBoss": { "name": "Blaine", "level": 88 }
     }

@@ -249,10 +249,8 @@ async function init() {
             alert("You cannot access this menu during a Gym Battle!");
             return true;
         }
-        if (battleSystem && battleSystem.activeEncounter && !battleSystem.isSearching && battleSystem.combatLoop) {
-             alert("You cannot access this menu while in active combat!");
-             return true;
-        }
+        // User requested that normal routes do not lock the menus (only gyms do), except for maybe the main map travel which is handled elsewhere.
+        // We will remove the normal encounter combat lock here so users can browse backpack/dex in normal combat.
         return false;
     };
 
@@ -279,15 +277,11 @@ async function init() {
             </div>
 
             <div style="margin-bottom: 15px;">
-                <label for="add-money-input">Add Money:</label>
-                <input type="number" id="add-money-input" placeholder="Amount">
-                <button onclick="window.addMoney()">OK</button>
+                <button onclick="window.addMoney()" style="padding: 10px 20px; font-size: 16px;">Add Money</button>
             </div>
 
             <div style="margin-bottom: 15px;">
-                <label for="add-xp-input">Add XP (Trainer & Slot 1):</label>
-                <input type="number" id="add-xp-input" placeholder="Amount">
-                <button onclick="window.addXp()">OK</button>
+                <button onclick="window.addXp()" style="padding: 10px 20px; font-size: 16px;">Add XP (Trainer & Slot 1)</button>
             </div>
 
             <hr>
@@ -374,28 +368,57 @@ window.renderBackpackTab = function renderBackpackTab(tab) {
     let content = '';
 
     if (tab === 'pokeballs') {
+        content += '<div style="text-align:center; margin-bottom:10px;"><p style="font-size:12px;">Click a Pokeball to set it as active for auto-catch. Selected ball will be used if available, otherwise it falls back to a lower tier.</p></div>';
         content += '<div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">';
-        for (const [name, qty] of Object.entries(state.backpack.pokeballs)) {
+
+        // Add "None" option
+        const noneActive = state.settings.activeBallTier === -1;
+        content += `
+            <div onclick="window.setActiveItem('ball', -1)" style="text-align: center; width: 80px; cursor: pointer; border: 2px solid ${noneActive ? '#2ecc71' : 'transparent'}; border-radius: 8px; padding: 5px; background: ${noneActive ? 'rgba(46,204,113,0.2)' : 'transparent'};">
+                <div style="width: 50px; height: 50px; margin: 0 auto; display: flex; align-items: center; justify-content: center; font-size: 24px; color: #e74c3c;">X</div>
+                <span style="font-size: 12px;">None</span>
+            </div>
+        `;
+
+        state.config.balance.items.pokeballs.forEach((b, idx) => {
+            const qty = state.backpack.pokeballs[b.name] || 0;
+            const isActive = state.settings.activeBallTier === idx;
             content += `
-                <div style="text-align: center; width: 80px;">
-                    <img src="./Assets/Items/Balls/${name}.png" style="width: 50px; height: 50px;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
-                    <br><span style="font-size: 12px;">${name}</span>
+                <div onclick="window.setActiveItem('ball', ${idx})" style="text-align: center; width: 80px; cursor: pointer; border: 2px solid ${isActive ? '#2ecc71' : 'transparent'}; border-radius: 8px; padding: 5px; background: ${isActive ? 'rgba(46,204,113,0.2)' : 'transparent'};">
+                    <img src="./Assets/Items/Balls/${b.name}.png" style="width: 50px; height: 50px;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
+                    <br><span style="font-size: 12px;">${b.name}</span>
                     <br><b>x${formatQuantity(qty)}</b>
                 </div>
             `;
-        }
+        });
         content += '</div>';
     } else if (tab === 'potions') {
+        content += '<div style="text-align:center; margin-bottom:10px;"><p style="font-size:12px;">Click a Potion to set it as active for auto-heal. Selected potion will be used if available, otherwise it falls back to a lower tier.</p></div>';
         content += '<div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">';
-        for (const [name, qty] of Object.entries(state.backpack.potions)) {
+
+        // Add "None" option
+        const noneActive = state.settings.activePotionTier === -1;
+        content += `
+            <div onclick="window.setActiveItem('potion', -1)" style="text-align: center; width: 80px; cursor: pointer; border: 2px solid ${noneActive ? '#2ecc71' : 'transparent'}; border-radius: 8px; padding: 5px; background: ${noneActive ? 'rgba(46,204,113,0.2)' : 'transparent'};">
+                <div style="width: 50px; height: 50px; margin: 0 auto; display: flex; align-items: center; justify-content: center; font-size: 24px; color: #e74c3c;">X</div>
+                <span style="font-size: 12px;">None</span>
+            </div>
+        `;
+
+        state.config.balance.items.potions.forEach((p, idx) => {
+            let inventoryName = p.name;
+            if (p.name === 'Regular Potion') inventoryName = 'Regular Potion';
+            if (p.name === 'Big') inventoryName = 'Big Potion';
+            const qty = state.backpack.potions[inventoryName] || 0;
+            const isActive = state.settings.activePotionTier === idx;
             content += `
-                <div style="text-align: center; width: 80px;">
-                    <img src="./Assets/Items/Potions/${name}.png" style="width: 50px; height: 50px;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
-                    <br><span style="font-size: 12px;">${name}</span>
+                <div onclick="window.setActiveItem('potion', ${idx})" style="text-align: center; width: 80px; cursor: pointer; border: 2px solid ${isActive ? '#2ecc71' : 'transparent'}; border-radius: 8px; padding: 5px; background: ${isActive ? 'rgba(46,204,113,0.2)' : 'transparent'};">
+                    <img src="./Assets/Items/Potions/${inventoryName}.png" style="width: 50px; height: 50px;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
+                    <br><span style="font-size: 12px;">${inventoryName}</span>
                     <br><b>x${formatQuantity(qty)}</b>
                 </div>
             `;
-        }
+        });
         content += '</div>';
     } else if (tab === 'stones') {
         content += '<div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">';
@@ -510,6 +533,15 @@ window.renderBackpackTab = function renderBackpackTab(tab) {
 };
 
 
+
+window.setActiveItem = function(type, tierIdx) {
+    if (type === 'ball') {
+        state.settings.activeBallTier = tierIdx;
+    } else if (type === 'potion') {
+        state.settings.activePotionTier = tierIdx;
+    }
+    window.renderBackpackTab(type === 'ball' ? 'pokeballs' : 'potions');
+};
 
 window.setLeader = function(idx) {
     if (idx === 0) return;
@@ -841,6 +873,17 @@ function getChallengeText() {
 }
 
 function updateUI() {
+    // Handle UI Lock for Gym or no Pokemon
+    const inGym = battleSystem && battleSystem.gymState && battleSystem.gymState.isActive;
+    const noPokemon = state.party.length === 0 && state.storage.length === 0;
+
+    const lockMenus = inGym || noPokemon;
+    const navButtons = document.getElementById('nav-buttons');
+    if (navButtons) {
+        navButtons.style.pointerEvents = lockMenus ? 'none' : 'auto';
+        navButtons.style.opacity = lockMenus ? '0.5' : '1.0';
+    }
+
     // Top Nav
     document.getElementById('trainer-lvl').innerText = state.trainer.level;
 
@@ -1012,8 +1055,20 @@ window.navigateToLocation = function(locationName) {
     document.getElementById('modal-overlay').style.display = 'none';
 
     if (locationName === "Professor Oak Lab") {
+        if (battleSystem) {
+             battleSystem.stop();
+             battleSystem.activeEncounter = null;
+             battleSystem.isSearching = false;
+             if (battleSystem.gymState) battleSystem.gymState.isActive = false;
+        }
         switchView("PROF_OAK_LAB");
     } else if (locationName === "Pokemon Center & Market" || locationName.includes("Market")) {
+        if (battleSystem) {
+             battleSystem.stop();
+             battleSystem.activeEncounter = null;
+             battleSystem.isSearching = false;
+             if (battleSystem.gymState) battleSystem.gymState.isActive = false;
+        }
         switchView("POKEMON_CENTER_MARKET");
         const vCenter = document.getElementById("view-center-market");
         vCenter.innerHTML = `
@@ -1050,13 +1105,9 @@ window.navigateToLocation = function(locationName) {
                 // Pokeballs dynamically from config
                 state.config.balance.items.pokeballs.forEach(b => {
                     if (state.backpack.pokeballs[b.name] !== undefined) {
-                        const id = b.name.replace(/\s+/g, '');
                         itemsHtml += `<div style="margin-bottom: 5px; display: flex; align-items: center; justify-content: space-between;">
                             <span>${b.name} ($${b.price})</span>
-                            <div>
-                                <input type="number" id="qty-${id}" value="1" min="1" style="width: 50px; margin-right: 5px;">
-                                <button onclick="window.buyItem('${b.name}', ${b.price}, 'pokeballs', document.getElementById('qty-${id}').value)">Buy</button>
-                            </div>
+                            <button onclick="window.buyItem('${b.name}', ${b.price}, 'pokeballs')">Buy</button>
                         </div>`;
                     }
                 });
@@ -1072,13 +1123,9 @@ window.navigateToLocation = function(locationName) {
                     if (p.name === 'Max Potion') return; // Excluded from backpack initial state for now unless added
 
                     if (state.backpack.potions[inventoryName] !== undefined) {
-                        const id = inventoryName.replace(/\s+/g, '');
                         itemsHtml += `<div style="margin-bottom: 5px; display: flex; align-items: center; justify-content: space-between;">
                             <span>${inventoryName} ($${p.price})</span>
-                            <div>
-                                <input type="number" id="qty-${id}" value="1" min="1" style="width: 50px; margin-right: 5px;">
-                                <button onclick="window.buyItem('${inventoryName}', ${p.price}, 'potions', document.getElementById('qty-${id}').value)">Buy</button>
-                            </div>
+                            <button onclick="window.buyItem('${inventoryName}', ${p.price}, 'potions')">Buy</button>
                         </div>`;
                     }
                 });
@@ -1088,13 +1135,9 @@ window.navigateToLocation = function(locationName) {
                 // Stones from config (only has price/sell, need to list all stones in backpack)
                 const stonePrice = state.config.balance.items.stones.price;
                 Object.keys(state.backpack.stones).forEach(stoneName => {
-                    const id = stoneName.replace(/\s+/g, '');
                     itemsHtml += `<div style="margin-bottom: 5px; display: flex; align-items: center; justify-content: space-between;">
                         <span>${stoneName} ($${stonePrice})</span>
-                        <div>
-                            <input type="number" id="qty-${id}" value="1" min="1" style="width: 50px; margin-right: 5px;">
-                            <button onclick="window.buyItem('${stoneName}', ${stonePrice}, 'stones', document.getElementById('qty-${id}').value)">Buy</button>
-                        </div>
+                        <button onclick="window.buyItem('${stoneName}', ${stonePrice}, 'stones')">Buy</button>
                     </div>`;
                 });
 
@@ -1102,18 +1145,21 @@ window.navigateToLocation = function(locationName) {
             }
         };
 
-        window.buyItem = (itemId, cost, category, quantityStr) => {
-            const quantity = parseInt(quantityStr) || 1;
-            if (quantity <= 0) return;
+        window.buyItem = (itemId, cost, category) => {
+            const input = prompt(`How many ${itemId} do you want to buy? (Cost: $${cost} each)`);
+            if (!input) return;
+            const quantity = parseInt(input);
+            if (isNaN(quantity) || quantity <= 0) return;
+
             const totalCost = cost * quantity;
 
             if (state.trainer.money >= totalCost) {
                 state.trainer.money -= totalCost;
                 state.backpack[category][itemId] += quantity;
                 updateUI();
-                // Optionally show a quick visual feedback instead of an alert
+                alert(`Bought ${quantity}x ${itemId} for $${totalCost}!`);
             } else {
-                alert("Not enough money!");
+                alert(`Not enough money! You need $${totalCost} but only have $${state.trainer.money}.`);
             }
         };
     } else if (locationName.includes("Gym") || locationName === "Indigo Plateu") {
@@ -1170,6 +1216,10 @@ window.navigateToLocation = function(locationName) {
     } else {
         switchView("BATTLE_ARENA");
         if (battleSystem) {
+             battleSystem.stop();
+             battleSystem.activeEncounter = null;
+             battleSystem.isSearching = false;
+             if (battleSystem.gymState) battleSystem.gymState.isActive = false;
              battleSystem.searchNext(); // Restart search if we moved
         }
     }
@@ -1226,20 +1276,19 @@ window.updateGameSpeed = function(val) {
 };
 
 window.addMoney = function() {
-    const input = document.getElementById('add-money-input');
+    const input = prompt("Enter amount of money to add:");
     if (!input) return;
-    const amount = parseInt(input.value);
+    const amount = parseInt(input);
     if (!isNaN(amount) && amount > 0) {
         state.trainer.money += amount;
-        input.value = '';
         updateUI();
     }
 };
 
 window.addXp = function() {
-    const input = document.getElementById('add-xp-input');
+    const input = prompt("Enter amount of XP to add:");
     if (!input) return;
-    const amount = parseInt(input.value);
+    const amount = parseInt(input);
     if (!isNaN(amount) && amount > 0) {
         state.trainer.xp += amount;
         if (state.party.length > 0) {
@@ -1247,7 +1296,6 @@ window.addXp = function() {
             // Note: In a full engine we'd trigger a level up check here.
             // For now, battle loop handles leveled stats when entering next battle.
         }
-        input.value = '';
         updateUI();
     }
 };
