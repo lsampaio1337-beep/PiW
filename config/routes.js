@@ -379,7 +379,6 @@ const routes = [
         {"pokemonId": 40, "minLevel": 88, "maxLevel": 90, "chance": 0.02},
         {"pokemonId": 150, "minLevel": 95, "maxLevel": 95, "chance": 0.01}
       ]
-    }
     },
     {
       "name": "Small Fishing Spot",

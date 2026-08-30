@@ -238,10 +238,15 @@ async function init() {
         switchView("PROF_OAK_LAB");
     }
 
-    // Bind buttons
-    document.getElementById('choose-bulbasaur').onclick = () => selectStarter(1);
-    document.getElementById('choose-charmander').onclick = () => selectStarter(4);
-    document.getElementById('choose-squirtle').onclick = () => selectStarter(7);
+    // Bind buttons (they might be missing if bypass Oak)
+    const btnBulbasaur = document.getElementById('choose-bulbasaur');
+    if (btnBulbasaur) btnBulbasaur.onclick = () => selectStarter(1);
+
+    const btnCharmander = document.getElementById('choose-charmander');
+    if (btnCharmander) btnCharmander.onclick = () => selectStarter(4);
+
+    const btnSquirtle = document.getElementById('choose-squirtle');
+    if (btnSquirtle) btnSquirtle.onclick = () => selectStarter(7);
 
     // Bind Hub Buttons
     const checkCombatLock = () => {
