@@ -99,14 +99,52 @@ class BattleSystem {
         const trainer = gym.trainers[this.gymState.currentTrainerIndex];
 
         if (trainer) {
+            // Let's add sprites and damage numbers to gym battles!
             contentArea.innerHTML = `
                 <p>Next Opponent: ${trainer.name}</p>
-                <button onclick="window.battleEngine.searchNext()" style="padding: 10px 20px; font-size: 16px; cursor: pointer;">Battle ${trainer.name}</button>
+
+                <div id="gym-battle-area" style="display: none; margin-top: 20px; margin-bottom: 20px; position: relative;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-end; height: 150px; background: rgba(0,0,0,0.3); border: 2px solid #555; border-radius: 10px; padding: 20px;">
+
+                        <div style="text-align: left; width: 40%;">
+                            <h4 id="gym-player-name">Player</h4>
+                            <div style="width: 100%; height: 10px; background: #333; border: 1px solid #777;">
+                                <div id="gym-player-hp-bar" style="width: 100%; height: 100%; background: #2ecc71;"></div>
+                            </div>
+                            <span id="gym-player-hp-text"></span>
+                            <div style="position: relative; height: 80px; margin-top: 10px;">
+                                <img id="gym-player-sprite" src="" style="position: absolute; bottom: 0; left: 0; max-height: 80px; transform: scaleX(-1);">
+                            </div>
+                        </div>
+
+                        <div id="gym-combat-log" style="width: 20%; font-size: 12px; color: #ccc; text-align: center; overflow: hidden; height: 100px;"></div>
+
+                        <div style="text-align: right; width: 40%;">
+                            <h4 id="gym-enemy-name">Enemy</h4>
+                            <div style="width: 100%; height: 10px; background: #333; border: 1px solid #777;">
+                                <div id="gym-enemy-hp-bar" style="width: 100%; height: 100%; background: #e74c3c; float: right;"></div>
+                            </div>
+                            <span id="gym-enemy-hp-text"></span>
+                            <div style="position: relative; height: 80px; margin-top: 10px;">
+                                <img id="gym-enemy-sprite" src="" style="position: absolute; bottom: 0; right: 0; max-height: 80px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="btn-start-gym-battle" onclick="window.battleEngine.startNextGymBattle()" style="padding: 10px 20px; font-size: 16px; cursor: pointer;">Battle ${trainer.name}</button>
                 <br><br>
                 <button onclick="window.battleEngine.stopGymBattle()" style="padding: 5px 10px; background: #e74c3c; border: none; color: white; border-radius: 3px; cursor: pointer;">Flee Gym</button>
             `;
             // Temporary expose for the button
             window.battleEngine = this;
+
+            // Re-bind to use our special gym start func that toggles visibility
+            window.battleEngine.startNextGymBattle = () => {
+                document.getElementById('btn-start-gym-battle').style.display = 'none';
+                document.getElementById('gym-battle-area').style.display = 'block';
+                this.searchNext();
+            };
         } else {
             // Gym completed
             contentArea.innerHTML = `
@@ -527,7 +565,11 @@ class BattleSystem {
             if (this.gymState.currentTrainerIndex >= gym.trainers.length) {
                 // Defeated Gym!
                 if (!this.state.trainer.badges) this.state.trainer.badges = 0;
-                this.state.trainer.badges++;
+
+                const gymIndex = this.state.config.gyms.findIndex(g => g.name === gym.name);
+                if (gymIndex !== -1 && this.state.trainer.badges === gymIndex) {
+                    this.state.trainer.badges++;
+                }
 
                 // Bonus money for winning
                 this.state.trainer.money += 1000 * this.state.trainer.badges;

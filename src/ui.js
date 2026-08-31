@@ -22,7 +22,7 @@ const state = {
     training: [],
     backpack: {
         pokeballs: { "Pokeball": 100, "Greatball": 0, "Ultraball": 0, "Safariball": 0, "Masterball": 0 },
-        potions: { "Tiny Potion": 100, "Small Potion": 0, "Regular Potion": 0, "Big Potion": 0, "Hyper Potion": 0, "Ultimate Potion": 0 },
+        potions: { "Tiny Potion": 100, "Small Potion": 0, "Regular Potion": 0, "Big Potion": 0, "Hyper Potion": 0, "Ultra Potion": 0 },
         stones: {
             "Normal Stone": 0, "Fire Stone": 0, "Water Stone": 0, "Grass Stone": 0,
             "Electric Stone": 0, "Ice Stone": 0, "Fighting Stone": 0, "Poison Stone": 0,
@@ -230,6 +230,18 @@ async function init() {
             }
 
             startGame();
+
+            // Switch view based on saved route
+            if (state.currentRoute === "Professor Oak Lab") {
+                switchView("PROF_OAK_LAB");
+            } else if (state.currentRoute === "Pokemon Center & Market") {
+                // Trigger the UI updates for the center market
+                window.travelTo(state.currentRoute);
+            } else if (state.currentRoute.includes("Gym") || state.currentRoute === "Indigo Plateu") {
+                window.travelTo(state.currentRoute);
+            } else {
+                window.travelTo(state.currentRoute);
+            }
         } else {
             storage.reset();
             switchView("PROF_OAK_LAB");
@@ -282,11 +294,15 @@ async function init() {
             </div>
 
             <div style="margin-bottom: 15px;">
-                <button onclick="window.addMoney()" style="padding: 10px 20px; font-size: 16px;">Add Money</button>
+                <label for="add-money-input">Add Money:</label>
+                <input type="number" id="add-money-input" value="1000" style="padding: 5px; width: 80px;">
+                <button onclick="window.addMoney()" style="padding: 5px 10px; font-size: 14px;">Add</button>
             </div>
 
             <div style="margin-bottom: 15px;">
-                <button onclick="window.addXp()" style="padding: 10px 20px; font-size: 16px;">Add XP (Trainer & Slot 1)</button>
+                <label for="add-xp-input">Add XP (Trainer & Slot 1):</label>
+                <input type="number" id="add-xp-input" value="1000" style="padding: 5px; width: 80px;">
+                <button onclick="window.addXp()" style="padding: 5px 10px; font-size: 14px;">Add</button>
             </div>
 
             <hr>
@@ -695,6 +711,11 @@ window.handleDrop = function(event, targetCol) {
         return;
     }
 
+    if (sCol === 'party' && state.party.length <= 1 && tCol !== 'party') {
+        alert("You must have at least one Pokémon in your party!");
+        return;
+    }
+
     // We can't drag directly into Breeding/Training via UI drop zone currently, it goes to Party.
 
     // Remove from source
@@ -917,9 +938,12 @@ function updateUI() {
         const xpRequired = nextLevelXp - currentLevelXp;
 
         const crownColor = idx === 0 ? '#f1c40f' : '#7f8c8d'; // Yellow for leader, Grey for others
+        const sumIV = p.ivs ? p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe : 0;
+        const qVal = p.quality ? p.quality.toFixed(2) : '1.00';
 
         d.innerHTML = `
             <div onclick="window.setLeader(${idx})" style="position: absolute; top: 5px; right: 5px; cursor: pointer; color: ${crownColor}; font-size: 16px;" title="Set as Leader">👑</div>
+            <div style="position: absolute; bottom: 2px; right: 5px; font-size: 10px; color: #ccc;" title="Quality and Sum of IVs">Q=${qVal} & ∑IV=${sumIV}</div>
             <img src="Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png" onload="this.style.display='inline'" onerror="this.style.display='none'" style="width: 50px; height: 50px;">
             <div style="display: inline-block; vertical-align: top; width: calc(100% - 70px);">
                 <b>${p.name}</b> Lv.${p.level}<br>
@@ -943,44 +967,69 @@ function updateUI() {
         document.getElementById('train-prog').innerText = `${state.dayCareRef.slot2.battles}/${state.dayCareRef.slot2.requiredBattles}`;
     }
 
-    // Combat Arena
-    if (battleSystem && battleSystem.activeEncounter) {
-        const enemy = battleSystem.activeEncounter;
-        const enemyTotalIV = enemy.ivs.hp + enemy.ivs.atk + enemy.ivs.def + enemy.ivs.spa + enemy.ivs.spd + enemy.ivs.spe;
-        document.getElementById('enemy-name').innerText = `${enemy.name} (Q=${enemy.quality.toFixed(2)} & ∑IV=${enemyTotalIV})`;
-        document.getElementById('enemy-lvl').innerText = enemy.level;
-        document.getElementById('enemy-hp').innerText = `${Math.floor(enemy.currentHp)}/${enemy.maxHp}`;
-        document.getElementById('enemy-sprite').src = `Assets/Pokemon Sprites/${enemy.qualityName === 'Shiny' ? enemy.id + '_shiny' : enemy.id}.png`;
-        document.getElementById('enemy-sprite').style.display = 'block';
+    // Combat Arena & Gym UI Updates
+    if (inGym) {
+        // Update live gym battle UI elements if they exist
+        const eNameGym = document.getElementById('gym-enemy-name');
+        if (eNameGym && battleSystem && battleSystem.activeEncounter) {
+            const enemy = battleSystem.activeEncounter;
+            const enemyTotalIV = enemy.ivs.hp + enemy.ivs.atk + enemy.ivs.def + enemy.ivs.spa + enemy.ivs.spd + enemy.ivs.spe;
+            eNameGym.innerText = `Lv.${enemy.level} ${enemy.name}`;
+            document.getElementById('gym-enemy-hp-text').innerText = `${Math.floor(enemy.currentHp)}/${enemy.maxHp}`;
+            document.getElementById('gym-enemy-hp-bar').style.width = `${Math.min(100, (enemy.currentHp / enemy.maxHp) * 100)}%`;
+            document.getElementById('gym-enemy-sprite').src = `Assets/Pokemon Sprites/${enemy.qualityName === 'Shiny' ? enemy.id + '_shiny' : enemy.id}.png`;
 
-        const leader = state.party[0];
-        if (leader) {
-            document.getElementById('player-name').innerText = leader.name;
-            document.getElementById('player-lvl').innerText = leader.level;
-            document.getElementById('player-hp').innerText = `${Math.floor(leader.currentHp)}/${leader.maxHp}`;
-            document.getElementById('player-sprite').src = `Assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? leader.id + '_shiny' : leader.id}.png`;
-            document.getElementById('player-sprite').style.display = 'block';
-        }
-    } else if (battleSystem && battleSystem.isSearching) {
-        document.getElementById('enemy-name').innerText = "Searching...";
-        document.getElementById('enemy-lvl').innerText = "?";
-        document.getElementById('enemy-hp').innerText = "?/?";
-        document.getElementById('enemy-sprite').src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
-        document.getElementById('enemy-sprite').style.display = 'block';
-
-        const leader = state.party[0];
-        if (leader) {
-            document.getElementById('player-name').innerText = leader.name;
-            document.getElementById('player-lvl').innerText = leader.level;
-            document.getElementById('player-hp').innerText = `${Math.floor(leader.currentHp)}/${leader.maxHp}`;
-            document.getElementById('player-sprite').src = `Assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? leader.id + '_shiny' : leader.id}.png`;
-            document.getElementById('player-sprite').style.display = 'block';
-        } else {
-            document.getElementById('player-sprite').style.display = 'none';
+            const leader = state.party[0];
+            if (leader) {
+                const playerTotalIV = leader.ivs.hp + leader.ivs.atk + leader.ivs.def + leader.ivs.spa + leader.ivs.spd + leader.ivs.spe;
+                document.getElementById('gym-player-name').innerText = `Lv.${leader.level} ${leader.name}`;
+                document.getElementById('gym-player-hp-text').innerText = `${Math.floor(leader.currentHp)}/${leader.maxHp}`;
+                document.getElementById('gym-player-hp-bar').style.width = `${Math.min(100, (leader.currentHp / leader.maxHp) * 100)}%`;
+                document.getElementById('gym-player-sprite').src = `Assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? leader.id + '_shiny' : leader.id}.png`;
+            }
         }
     } else {
-         document.getElementById('enemy-sprite').style.display = 'none';
-         document.getElementById('player-sprite').style.display = 'none';
+        // Standard Combat Arena
+        if (battleSystem && battleSystem.activeEncounter) {
+            const enemy = battleSystem.activeEncounter;
+            const enemyTotalIV = enemy.ivs.hp + enemy.ivs.atk + enemy.ivs.def + enemy.ivs.spa + enemy.ivs.spd + enemy.ivs.spe;
+            document.getElementById('enemy-name').innerText = `${enemy.name} (Q=${enemy.quality.toFixed(2)} & ∑IV=${enemyTotalIV})`;
+            document.getElementById('enemy-lvl').innerText = enemy.level;
+            document.getElementById('enemy-hp').innerText = `${Math.floor(enemy.currentHp)}/${enemy.maxHp}`;
+            document.getElementById('enemy-sprite').src = `Assets/Pokemon Sprites/${enemy.qualityName === 'Shiny' ? enemy.id + '_shiny' : enemy.id}.png`;
+            document.getElementById('enemy-sprite').style.display = 'block';
+
+            const leader = state.party[0];
+            if (leader) {
+                const playerTotalIV = leader.ivs.hp + leader.ivs.atk + leader.ivs.def + leader.ivs.spa + leader.ivs.spd + leader.ivs.spe;
+                document.getElementById('player-name').innerText = `${leader.name} (Q=${leader.quality.toFixed(2)} & ∑IV=${playerTotalIV})`;
+                document.getElementById('player-lvl').innerText = leader.level;
+                document.getElementById('player-hp').innerText = `${Math.floor(leader.currentHp)}/${leader.maxHp}`;
+                document.getElementById('player-sprite').src = `Assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? leader.id + '_shiny' : leader.id}.png`;
+                document.getElementById('player-sprite').style.display = 'block';
+            }
+        } else if (battleSystem && battleSystem.isSearching) {
+            document.getElementById('enemy-name').innerText = "Searching...";
+            document.getElementById('enemy-lvl').innerText = "?";
+            document.getElementById('enemy-hp').innerText = "?/?";
+            document.getElementById('enemy-sprite').src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+            document.getElementById('enemy-sprite').style.display = 'block';
+
+            const leader = state.party[0];
+            if (leader) {
+                const playerTotalIV = leader.ivs.hp + leader.ivs.atk + leader.ivs.def + leader.ivs.spa + leader.ivs.spd + leader.ivs.spe;
+                document.getElementById('player-name').innerText = `${leader.name} (Q=${leader.quality.toFixed(2)} & ∑IV=${playerTotalIV})`;
+                document.getElementById('player-lvl').innerText = leader.level;
+                document.getElementById('player-hp').innerText = `${Math.floor(leader.currentHp)}/${leader.maxHp}`;
+                document.getElementById('player-sprite').src = `Assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? leader.id + '_shiny' : leader.id}.png`;
+                document.getElementById('player-sprite').style.display = 'block';
+            } else {
+                document.getElementById('player-sprite').style.display = 'none';
+            }
+        } else {
+             document.getElementById('enemy-sprite').style.display = 'none';
+             document.getElementById('player-sprite').style.display = 'none';
+        }
     }
 }
 
@@ -1083,7 +1132,7 @@ window.navigateToLocation = function(locationName) {
                     <button id="btn-heal-all" style="padding: 10px 20px; font-size: 16px; margin-right: 10px;">Pokemon Center (Heal All)</button>
                     <button id="btn-market-buy" style="padding: 10px 20px; font-size: 16px;">Market (Buy Items)</button>
                 </div>
-                <div id="market-panel" style="margin-top: 20px; display: none; text-align: left;">
+                <div id="market-panel" style="margin-top: 20px; display: none; text-align: left; max-height: 300px; overflow-y: auto;">
                     <h3>Buy Items</h3>
                     <div id="market-items"></div>
                 </div>
@@ -1112,7 +1161,10 @@ window.navigateToLocation = function(locationName) {
                     if (state.backpack.pokeballs[b.name] !== undefined) {
                         itemsHtml += `<div style="margin-bottom: 5px; display: flex; align-items: center; justify-content: space-between;">
                             <span>${b.name} ($${b.price})</span>
-                            <button onclick="window.buyItem('${b.name}', ${b.price}, 'pokeballs')">Buy</button>
+                            <div>
+                                <input type="number" id="buy-qty-${b.name.replace(/\s+/g, '-')}" value="1" min="1" style="width: 50px; padding: 5px; margin-right: 5px;">
+                                <button onclick="window.buyItem('${b.name}', ${b.price}, 'pokeballs')">Buy</button>
+                            </div>
                         </div>`;
                     }
                 });
@@ -1130,7 +1182,10 @@ window.navigateToLocation = function(locationName) {
                     if (state.backpack.potions[inventoryName] !== undefined) {
                         itemsHtml += `<div style="margin-bottom: 5px; display: flex; align-items: center; justify-content: space-between;">
                             <span>${inventoryName} ($${p.price})</span>
-                            <button onclick="window.buyItem('${inventoryName}', ${p.price}, 'potions')">Buy</button>
+                            <div>
+                                <input type="number" id="buy-qty-${inventoryName.replace(/\s+/g, '-')}" value="1" min="1" style="width: 50px; padding: 5px; margin-right: 5px;">
+                                <button onclick="window.buyItem('${inventoryName}', ${p.price}, 'potions')">Buy</button>
+                            </div>
                         </div>`;
                     }
                 });
@@ -1142,7 +1197,10 @@ window.navigateToLocation = function(locationName) {
                 Object.keys(state.backpack.stones).forEach(stoneName => {
                     itemsHtml += `<div style="margin-bottom: 5px; display: flex; align-items: center; justify-content: space-between;">
                         <span>${stoneName} ($${stonePrice})</span>
-                        <button onclick="window.buyItem('${stoneName}', ${stonePrice}, 'stones')">Buy</button>
+                        <div>
+                            <input type="number" id="buy-qty-${stoneName.replace(/\s+/g, '-')}" value="1" min="1" style="width: 50px; padding: 5px; margin-right: 5px;">
+                            <button onclick="window.buyItem('${stoneName}', ${stonePrice}, 'stones')">Buy</button>
+                        </div>
                     </div>`;
                 });
 
@@ -1151,9 +1209,9 @@ window.navigateToLocation = function(locationName) {
         };
 
         window.buyItem = (itemId, cost, category) => {
-            const input = prompt(`How many ${itemId} do you want to buy? (Cost: $${cost} each)`);
-            if (!input) return;
-            const quantity = parseInt(input);
+            const inputEl = document.getElementById(`buy-qty-${itemId.replace(/\s+/g, '-')}`);
+            if (!inputEl) return;
+            const quantity = parseInt(inputEl.value);
             if (isNaN(quantity) || quantity <= 0) return;
 
             const totalCost = cost * quantity;
@@ -1239,6 +1297,27 @@ window.startGymBattle = function(gymName) {
 
 window.showDamage = function(target, amount, isCrit, moveName = '') {
     let containerId = target === 'player' ? 'player-sprite' : 'enemy-sprite';
+
+    // Check if in gym battle
+    if (battleSystem && battleSystem.gymState && battleSystem.gymState.isActive) {
+        containerId = target === 'player' ? 'gym-player-sprite' : 'gym-enemy-sprite';
+
+        // Log to gym combat log
+        const log = document.getElementById('gym-combat-log');
+        if (log) {
+            const entry = document.createElement('div');
+            entry.style.marginBottom = '2px';
+            const attacker = target === 'player' ? 'Enemy' : 'You';
+            entry.innerHTML = `${attacker} used <b>${moveName}</b> for <span style="color:${isCrit ? '#f39c12' : '#e74c3c'}">${amount}</span> dmg!`;
+            log.appendChild(entry);
+
+            // Keep only last 4 entries
+            while(log.children.length > 4) {
+                log.removeChild(log.firstChild);
+            }
+        }
+    }
+
     let img = document.getElementById(containerId);
     if (!img) return;
 
@@ -1251,19 +1330,21 @@ window.showDamage = function(target, amount, isCrit, moveName = '') {
     dmgNode.style.textShadow = '1px 1px 2px black';
     dmgNode.style.pointerEvents = 'none';
     dmgNode.style.transition = 'all 1s ease-out';
+    dmgNode.style.zIndex = '100';
+    dmgNode.style.whiteSpace = 'nowrap';
 
     // Position relatively to the parent container of the image
     const rect = img.getBoundingClientRect();
     const parentRect = img.parentElement.getBoundingClientRect();
 
-    dmgNode.style.left = (rect.left - parentRect.left + (rect.width / 2)) + 'px';
+    dmgNode.style.left = (rect.left - parentRect.left + (rect.width / 2) - 20) + 'px'; // -20 to center text slightly better
     dmgNode.style.top = (rect.top - parentRect.top) + 'px';
 
     img.parentElement.appendChild(dmgNode);
 
     // Animate up and fade out
     setTimeout(() => {
-        dmgNode.style.top = (parseFloat(dmgNode.style.top) - 30) + 'px';
+        dmgNode.style.top = (parseInt(dmgNode.style.top) - 40) + 'px';
         dmgNode.style.opacity = '0';
     }, 50);
 
@@ -1281,9 +1362,9 @@ window.updateGameSpeed = function(val) {
 };
 
 window.addMoney = function() {
-    const input = prompt("Enter amount of money to add:");
-    if (!input) return;
-    const amount = parseInt(input);
+    const inputEl = document.getElementById('add-money-input');
+    if (!inputEl) return;
+    const amount = parseInt(inputEl.value);
     if (!isNaN(amount) && amount > 0) {
         state.trainer.money += amount;
         updateUI();
@@ -1291,9 +1372,9 @@ window.addMoney = function() {
 };
 
 window.addXp = function() {
-    const input = prompt("Enter amount of XP to add:");
-    if (!input) return;
-    const amount = parseInt(input);
+    const inputEl = document.getElementById('add-xp-input');
+    if (!inputEl) return;
+    const amount = parseInt(inputEl.value);
     if (!isNaN(amount) && amount > 0) {
         state.trainer.xp += amount;
         if (state.party.length > 0) {

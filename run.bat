@@ -40,7 +40,7 @@ if %ERRORLEVEL% neq 0 (
 
 REM Start game
 echo [2/2] Starting the game!
-start "" npm start
+start /b cmd /c "npm start"
 if %ERRORLEVEL% neq 0 (
     echo.
     echo [ERROR] Game crashed or failed to start.
