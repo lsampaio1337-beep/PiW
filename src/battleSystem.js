@@ -22,6 +22,10 @@ class BattleSystem {
             clearTimeout(this.combatLoop);
             this.combatLoop = null;
         }
+        if (this.damageTimeout) {
+            clearTimeout(this.damageTimeout);
+            this.damageTimeout = null;
+        }
     }
 
     getTypeEffectiveness(moveType, defenderTypes) {
@@ -224,25 +228,36 @@ class BattleSystem {
         const eff = this.getTypeEffectiveness(move.type, defender.types);
 
         const hit = mathEngine.calculateDamage(attacker.level, move.power, atkStat, defStat, eff, attacker.quality);
-        defender.currentHp -= hit.damage;
 
-        // Show floating damage
         const targetSide = attacker === leader ? 'enemy' : 'player';
-        if (typeof window.showDamage === 'function') {
-            window.showDamage(targetSide, hit.damage, hit.isCritical, move.name);
+
+        // Show projectile first
+        const projDuration = 400 / this.state.settings.gameSpeed;
+        if (typeof window.showProjectile === 'function') {
+            window.showProjectile(targetSide, move.type, projDuration);
         }
 
-        this.updateUI();
+        // Delay actual damage and UI update
+        this.damageTimeout = setTimeout(() => {
+            defender.currentHp -= hit.damage;
 
-        if (defender.currentHp <= 0) {
-            if (defender === this.activeEncounter) {
-                this.handleEnemyDefeat();
-            } else {
-                this.handleFaint();
+            // Show floating damage
+            if (typeof window.showDamage === 'function') {
+                window.showDamage(targetSide, hit.damage, hit.isCritical, move.name, move.type, eff);
             }
-        } else {
-            this.scheduleNextStrike(attacker, defender);
-        }
+
+            this.updateUI();
+
+            if (defender.currentHp <= 0) {
+                if (defender === this.activeEncounter) {
+                    this.handleEnemyDefeat();
+                } else {
+                    this.handleFaint();
+                }
+            } else {
+                this.scheduleNextStrike(attacker, defender);
+            }
+        }, projDuration);
     }
 
     scheduleNextStrike(attacker, defender) {
@@ -258,6 +273,8 @@ class BattleSystem {
         }
 
         delay = Math.max(250, delay) / this.state.settings.gameSpeed;
+
+    if (this.damageTimeout) clearTimeout(this.damageTimeout); // Catch any hanging animations just in case
 
         this.combatLoop = setTimeout(() => {
             this.executeTurn(defender, attacker); // Swap roles
@@ -450,8 +467,9 @@ class BattleSystem {
             this.updateUI();
 
             // if in battle, resetting turn timers
-            if (this.activeEncounter && this.combatLoop) {
-                clearTimeout(this.combatLoop);
+            if (this.activeEncounter) {
+                if (this.combatLoop) clearTimeout(this.combatLoop);
+                if (this.damageTimeout) clearTimeout(this.damageTimeout);
                 this.scheduleTurn();
             }
         }

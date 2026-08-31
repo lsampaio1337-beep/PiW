@@ -606,17 +606,133 @@ window.navigateToLocation = function(locationName) {
     updateUI();
 };
 
-window.showDamage = function(target, amount, isCrit, moveName = '') {
+const TYPE_COLORS = {
+    Normal: '#A8A878',
+    Fire: '#F08030',
+    Water: '#6890F0',
+    Grass: '#78C850',
+    Electric: '#F8D030',
+    Ice: '#98D8D8',
+    Fighting: '#C03028',
+    Poison: '#A040A0',
+    Ground: '#E0C068',
+    Flying: '#A890F0',
+    Psychic: '#F85888',
+    Bug: '#A8B820',
+    Rock: '#B8A038',
+    Ghost: '#705898',
+    Dragon: '#7038F8',
+    Dark: '#705848',
+    Steel: '#B8B8D0',
+    Fairy: '#EE99AC'
+};
+
+window.showProjectile = function(target, moveType, duration) {
+    let attackerId = target === 'enemy' ? 'player-sprite' : 'enemy-sprite';
+    let defenderId = target === 'enemy' ? 'enemy-sprite' : 'player-sprite';
+
+    let attackerImg = document.getElementById(attackerId);
+    let defenderImg = document.getElementById(defenderId);
+    if (!attackerImg || !defenderImg) return;
+
+    let arena = document.getElementById('combat-arena');
+    if (!arena) return;
+
+    let color = TYPE_COLORS[moveType] || '#ffffff';
+
+    let projectile = document.createElement('div');
+    projectile.style.position = 'absolute';
+    projectile.style.width = '20px';
+    projectile.style.height = '20px';
+    projectile.style.borderRadius = '50%';
+    projectile.style.backgroundColor = color;
+    projectile.style.boxShadow = `0 0 10px ${color}`;
+    projectile.style.zIndex = '100';
+    projectile.style.pointerEvents = 'none';
+    projectile.style.transition = `left ${duration}ms linear, top ${duration}ms linear`;
+
+    const aRect = attackerImg.getBoundingClientRect();
+    const dRect = defenderImg.getBoundingClientRect();
+    const arenaRect = arena.getBoundingClientRect();
+
+    let startX = (aRect.left - arenaRect.left) + (aRect.width / 2) - 10;
+    let startY = (aRect.top - arenaRect.top) + (aRect.height / 2) - 10;
+
+    let endX = (dRect.left - arenaRect.left) + (dRect.width / 2) - 10;
+    let endY = (dRect.top - arenaRect.top) + (dRect.height / 2) - 10;
+
+    projectile.style.left = startX + 'px';
+    projectile.style.top = startY + 'px';
+
+    arena.appendChild(projectile);
+
+    // Trigger reflow
+    projectile.getBoundingClientRect();
+
+    projectile.style.left = endX + 'px';
+    projectile.style.top = endY + 'px';
+
+    setTimeout(() => {
+        if (projectile.parentElement) projectile.parentElement.removeChild(projectile);
+
+        let splash = document.createElement('div');
+        splash.style.position = 'absolute';
+        splash.style.width = '20px';
+        splash.style.height = '20px';
+        splash.style.borderRadius = '50%';
+        splash.style.backgroundColor = color;
+        splash.style.boxShadow = `0 0 15px ${color}`;
+        splash.style.zIndex = '99';
+        splash.style.pointerEvents = 'none';
+        splash.style.transform = 'translate(-50%, -50%)';
+        splash.style.left = (endX + 10) + 'px';
+        splash.style.top = (endY + 10) + 'px';
+
+        // CSS Animation injected if not exists, or handled inline via transition
+        splash.style.transition = 'all 300ms ease-out';
+
+        arena.appendChild(splash);
+
+        // Trigger reflow
+        splash.getBoundingClientRect();
+
+        splash.style.width = '80px';
+        splash.style.height = '80px';
+        splash.style.opacity = '0';
+
+        setTimeout(() => {
+            if (splash.parentElement) splash.parentElement.removeChild(splash);
+        }, 300);
+
+    }, duration);
+};
+
+window.showDamage = function(target, amount, isCrit, moveName = '', moveType = 'Normal', effectiveness = 1) {
     let containerId = target === 'player' ? 'player-sprite' : 'enemy-sprite';
     let img = document.getElementById(containerId);
     if (!img) return;
 
     let dmgNode = document.createElement('div');
-    dmgNode.innerText = (moveName ? moveName + ' ' : '') + '-' + amount + (isCrit ? ' (CRIT)' : '');
+
+    let text = (moveName ? moveName + ' ' : '') + '-' + amount;
+    if (effectiveness !== 1) {
+        text += ` (${effectiveness}x)`;
+    }
+    if (isCrit) {
+        text += ' (CRIT)';
+    }
+
+    dmgNode.innerText = text;
     dmgNode.style.position = 'absolute';
-    dmgNode.style.color = isCrit ? '#f39c12' : '#e74c3c';
+
+    // Type color for damage text
+    dmgNode.style.color = TYPE_COLORS[moveType] || '#e74c3c';
+
     dmgNode.style.fontSize = isCrit ? '24px' : '18px';
     dmgNode.style.fontWeight = 'bold';
+    if (isCrit) {
+        dmgNode.style.fontStyle = 'italic';
+    }
     dmgNode.style.textShadow = '1px 1px 2px black';
     dmgNode.style.pointerEvents = 'none';
     dmgNode.style.transition = 'all 1s ease-out';
