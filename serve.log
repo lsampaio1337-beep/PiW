@@ -1,0 +1,259 @@
+ INFO  Accepting connections at http://localhost:3000
+ HTTP  8/31/2026 11:29:54 PM ::1 GET /
+ HTTP  8/31/2026 11:29:54 PM ::1 Returned 200 in 38 ms
+ HTTP  8/31/2026 11:29:54 PM ::1 GET /styles.css
+ HTTP  8/31/2026 11:29:54 PM ::1 GET /Assets/Extra/Logo.jpg
+ HTTP  8/31/2026 11:29:54 PM ::1 Returned 200 in 4 ms
+ HTTP  8/31/2026 11:29:54 PM ::1 GET /Assets/Pokemon%20Sprites/1.png
+ HTTP  8/31/2026 11:29:54 PM ::1 GET /src/ui.js
+ HTTP  8/31/2026 11:29:54 PM ::1 Returned 200 in 6 ms
+ HTTP  8/31/2026 11:29:54 PM ::1 Returned 200 in 8 ms
+ HTTP  8/31/2026 11:29:54 PM ::1 GET /Assets/Pokemon%20Sprites/4.png
+ HTTP  8/31/2026 11:29:54 PM ::1 GET /Assets/Pokemon%20Sprites/7.png
+ HTTP  8/31/2026 11:29:54 PM ::1 Returned 200 in 6 ms
+ HTTP  8/31/2026 11:29:54 PM ::1 Returned 200 in 5 ms
+ HTTP  8/31/2026 11:29:54 PM ::1 Returned 200 in 60 ms
+ HTTP  8/31/2026 11:30:48 PM ::1 GET /
+ HTTP  8/31/2026 11:30:48 PM ::1 Returned 200 in 2 ms
+ HTTP  8/31/2026 11:30:48 PM ::1 GET /styles.css
+ HTTP  8/31/2026 11:30:48 PM ::1 Returned 200 in 2 ms
+ HTTP  8/31/2026 11:30:48 PM ::1 GET /src/ui.js
+ HTTP  8/31/2026 11:30:48 PM ::1 GET /Assets/Extra/Logo.jpg
+ HTTP  8/31/2026 11:30:48 PM ::1 GET /Assets/Pokemon%20Sprites/1.png
+ HTTP  8/31/2026 11:30:48 PM ::1 Returned 200 in 2 ms
+ HTTP  8/31/2026 11:30:48 PM ::1 Returned 200 in 2 ms
+ HTTP  8/31/2026 11:30:48 PM ::1 Returned 200 in 2 ms
+ HTTP  8/31/2026 11:30:48 PM ::1 GET /Assets/Pokemon%20Sprites/4.png
+ HTTP  8/31/2026 11:30:48 PM ::1 Returned 200 in 3 ms
+ HTTP  8/31/2026 11:30:48 PM ::1 GET /Assets/Pokemon%20Sprites/7.png
+ HTTP  8/31/2026 11:30:48 PM ::1 Returned 200 in 2 ms
+ HTTP  8/31/2026 11:30:50 PM ::1 GET /
+ HTTP  8/31/2026 11:30:50 PM ::1 Returned 304 in 1 ms
+ HTTP  8/31/2026 11:30:50 PM ::1 GET /styles.css
+ HTTP  8/31/2026 11:30:50 PM ::1 GET /Assets/Extra/Logo.jpg
+ HTTP  8/31/2026 11:30:50 PM ::1 GET /Assets/Pokemon%20Sprites/1.png
+ HTTP  8/31/2026 11:30:50 PM ::1 GET /src/ui.js
+ HTTP  8/31/2026 11:30:50 PM ::1 Returned 304 in 2 ms
+ HTTP  8/31/2026 11:30:50 PM ::1 Returned 304 in 1 ms
+ HTTP  8/31/2026 11:30:50 PM ::1 Returned 304 in 1 ms
+ HTTP  8/31/2026 11:30:50 PM ::1 Returned 304 in 2 ms
+ HTTP  8/31/2026 11:30:50 PM ::1 GET /Assets/Pokemon%20Sprites/4.png
+ HTTP  8/31/2026 11:30:50 PM ::1 GET /Assets/Pokemon%20Sprites/7.png
+ HTTP  8/31/2026 11:30:50 PM ::1 Returned 304 in 0 ms
+ HTTP  8/31/2026 11:30:50 PM ::1 Returned 304 in 1 ms
+ HTTP  8/31/2026 11:31:42 PM ::1 GET /
+ HTTP  8/31/2026 11:31:42 PM ::1 Returned 200 in 1 ms
+ HTTP  8/31/2026 11:31:42 PM ::1 GET /styles.css
+ HTTP  8/31/2026 11:31:42 PM ::1 Returned 200 in 1 ms
+ HTTP  8/31/2026 11:31:42 PM ::1 GET /src/ui.js
+ HTTP  8/31/2026 11:31:42 PM ::1 GET /Assets/Extra/Logo.jpg
+ HTTP  8/31/2026 11:31:42 PM ::1 Returned 200 in 1 ms
+ HTTP  8/31/2026 11:31:42 PM ::1 GET /Assets/Pokemon%20Sprites/1.png
+ HTTP  8/31/2026 11:31:42 PM ::1 Returned 200 in 2 ms
+ HTTP  8/31/2026 11:31:42 PM ::1 Returned 200 in 1 ms
+ HTTP  8/31/2026 11:31:42 PM ::1 GET /Assets/Pokemon%20Sprites/4.png
+ HTTP  8/31/2026 11:31:42 PM ::1 GET /Assets/Pokemon%20Sprites/7.png
+ HTTP  8/31/2026 11:31:42 PM ::1 Returned 200 in 2 ms
+ HTTP  8/31/2026 11:31:42 PM ::1 Returned 200 in 1 ms
+ HTTP  8/31/2026 11:32:35 PM ::1 GET /
+ HTTP  8/31/2026 11:32:35 PM ::1 Returned 200 in 1 ms
+ HTTP  8/31/2026 11:32:35 PM ::1 GET /styles.css
+ HTTP  8/31/2026 11:32:35 PM ::1 Returned 200 in 1 ms
+ HTTP  8/31/2026 11:32:35 PM ::1 GET /src/ui.js
+ HTTP  8/31/2026 11:32:35 PM ::1 GET /Assets/Extra/Logo.jpg
+ HTTP  8/31/2026 11:32:35 PM ::1 GET /Assets/Pokemon%20Sprites/1.png
+ HTTP  8/31/2026 11:32:35 PM ::1 Returned 200 in 1 ms
+ HTTP  8/31/2026 11:32:35 PM ::1 Returned 200 in 2 ms
+ HTTP  8/31/2026 11:32:35 PM ::1 Returned 200 in 2 ms
+ HTTP  8/31/2026 11:32:35 PM ::1 GET /Assets/Pokemon%20Sprites/4.png
+ HTTP  8/31/2026 11:32:35 PM ::1 GET /Assets/Pokemon%20Sprites/7.png
+ HTTP  8/31/2026 11:32:35 PM ::1 Returned 200 in 3 ms
+ HTTP  8/31/2026 11:32:35 PM ::1 Returned 200 in 1 ms
+ HTTP  8/31/2026 11:33:16 PM ::1 GET /
+ HTTP  8/31/2026 11:33:16 PM ::1 Returned 200 in 2 ms
+ HTTP  8/31/2026 11:33:16 PM ::1 GET /styles.css
+ HTTP  8/31/2026 11:33:16 PM ::1 GET /src/ui.js
+ HTTP  8/31/2026 11:33:16 PM ::1 Returned 200 in 1 ms
+ HTTP  8/31/2026 11:33:16 PM ::1 GET /Assets/Extra/Logo.jpg
+ HTTP  8/31/2026 11:33:16 PM ::1 GET /Assets/Pokemon%20Sprites/1.png
+ HTTP  8/31/2026 11:33:16 PM ::1 Returned 200 in 2 ms
+ HTTP  8/31/2026 11:33:16 PM ::1 Returned 200 in 1 ms
+ HTTP  8/31/2026 11:33:16 PM ::1 Returned 200 in 2 ms
+ HTTP  8/31/2026 11:33:16 PM ::1 GET /Assets/Pokemon%20Sprites/4.png
+ HTTP  8/31/2026 11:33:16 PM ::1 GET /Assets/Pokemon%20Sprites/7.png
+ HTTP  8/31/2026 11:33:16 PM ::1 Returned 200 in 2 ms
+ HTTP  8/31/2026 11:33:16 PM ::1 Returned 200 in 1 ms
+ HTTP  8/31/2026 11:33:54 PM ::1 GET /
+ HTTP  8/31/2026 11:33:54 PM ::1 Returned 200 in 1 ms
+ HTTP  8/31/2026 11:33:54 PM ::1 GET /styles.css
+ HTTP  8/31/2026 11:33:54 PM ::1 Returned 200 in 1 ms
+ HTTP  8/31/2026 11:33:54 PM ::1 GET /src/ui.js
+ HTTP  8/31/2026 11:33:54 PM ::1 Returned 200 in 1 ms
+ HTTP  8/31/2026 11:33:54 PM ::1 GET /Assets/Extra/Logo.jpg
+ HTTP  8/31/2026 11:33:54 PM ::1 Returned 200 in 0 ms
+ HTTP  8/31/2026 11:33:54 PM ::1 GET /Assets/Pokemon%20Sprites/1.png
+ HTTP  8/31/2026 11:33:54 PM ::1 Returned 200 in 0 ms
+ HTTP  8/31/2026 11:33:54 PM ::1 GET /Assets/Pokemon%20Sprites/4.png
+ HTTP  8/31/2026 11:33:54 PM ::1 Returned 200 in 1 ms
+ HTTP  8/31/2026 11:33:54 PM ::1 GET /Assets/Pokemon%20Sprites/7.png
+ HTTP  8/31/2026 11:33:54 PM ::1 Returned 200 in 1 ms
+ HTTP  8/31/2026 11:34:30 PM ::1 GET /
+ HTTP  8/31/2026 11:34:30 PM ::1 Returned 200 in 1 ms
+ HTTP  8/31/2026 11:34:30 PM ::1 GET /styles.css
+ HTTP  8/31/2026 11:34:30 PM ::1 GET /src/ui.js
+ HTTP  8/31/2026 11:34:30 PM ::1 GET /Assets/Extra/Logo.jpg
+ HTTP  8/31/2026 11:34:30 PM ::1 GET /Assets/Pokemon%20Sprites/1.png
+ HTTP  8/31/2026 11:34:30 PM ::1 Returned 200 in 2 ms
+ HTTP  8/31/2026 11:34:30 PM ::1 Returned 200 in 2 ms
+ HTTP  8/31/2026 11:34:30 PM ::1 Returned 200 in 2 ms
+ HTTP  8/31/2026 11:34:30 PM ::1 Returned 200 in 2 ms
+ HTTP  8/31/2026 11:34:30 PM ::1 GET /Assets/Pokemon%20Sprites/4.png
+ HTTP  8/31/2026 11:34:30 PM ::1 Returned 200 in 1 ms
+ HTTP  8/31/2026 11:34:30 PM ::1 GET /Assets/Pokemon%20Sprites/7.png
+ HTTP  8/31/2026 11:34:30 PM ::1 Returned 200 in 1 ms
+ HTTP  8/31/2026 11:35:48 PM ::1 GET /
+ HTTP  8/31/2026 11:35:48 PM ::1 Returned 200 in 1 ms
+ HTTP  8/31/2026 11:35:48 PM ::1 GET /styles.css
+ HTTP  8/31/2026 11:35:48 PM ::1 Returned 200 in 1 ms
+ HTTP  8/31/2026 11:35:48 PM ::1 GET /Assets/Extra/Logo.jpg
+ HTTP  8/31/2026 11:35:48 PM ::1 Returned 200 in 1 ms
+ HTTP  8/31/2026 11:35:48 PM ::1 GET /src/ui.js
+ HTTP  8/31/2026 11:35:48 PM ::1 GET /Assets/Pokemon%20Sprites/1.png
+ HTTP  8/31/2026 11:35:48 PM ::1 Returned 200 in 2 ms
+ HTTP  8/31/2026 11:35:48 PM ::1 GET /Assets/Pokemon%20Sprites/4.png
+ HTTP  8/31/2026 11:35:48 PM ::1 GET /Assets/Pokemon%20Sprites/7.png
+ HTTP  8/31/2026 11:35:48 PM ::1 Returned 200 in 2 ms
+ HTTP  8/31/2026 11:35:48 PM ::1 Returned 200 in 1 ms
+ HTTP  8/31/2026 11:35:48 PM ::1 Returned 200 in 5 ms
+ HTTP  8/31/2026 11:35:48 PM ::1 GET /src/mathEngine.js
+ HTTP  8/31/2026 11:35:48 PM ::1 GET /src/battleSystem.js
+ HTTP  8/31/2026 11:35:48 PM ::1 GET /src/dayCare.js
+ HTTP  8/31/2026 11:35:48 PM ::1 GET /src/storage.js
+ HTTP  8/31/2026 11:35:48 PM ::1 GET /src/state.js
+ HTTP  8/31/2026 11:35:48 PM ::1 GET /src/ui/topbar.js
+ HTTP  8/31/2026 11:35:48 PM ::1 Returned 200 in 4 ms
+ HTTP  8/31/2026 11:35:48 PM ::1 Returned 200 in 5 ms
+ HTTP  8/31/2026 11:35:48 PM ::1 Returned 200 in 5 ms
+ HTTP  8/31/2026 11:35:48 PM ::1 Returned 200 in 5 ms
+ HTTP  8/31/2026 11:35:48 PM ::1 Returned 200 in 3 ms
+ HTTP  8/31/2026 11:35:48 PM ::1 Returned 200 in 3 ms
+ HTTP  8/31/2026 11:35:48 PM ::1 GET /src/ui/sidebar.js
+ HTTP  8/31/2026 11:35:48 PM ::1 GET /src/ui/battle.js
+ HTTP  8/31/2026 11:35:48 PM ::1 GET /src/ui/map.js
+ HTTP  8/31/2026 11:35:48 PM ::1 GET /src/ui/pokedex.js
+ HTTP  8/31/2026 11:35:48 PM ::1 GET /src/ui/pokemonStats.js
+ HTTP  8/31/2026 11:35:48 PM ::1 GET /src/ui/settings.js
+ HTTP  8/31/2026 11:35:48 PM ::1 Returned 200 in 3 ms
+ HTTP  8/31/2026 11:35:48 PM ::1 Returned 200 in 4 ms
+ HTTP  8/31/2026 11:35:48 PM ::1 Returned 200 in 3 ms
+ HTTP  8/31/2026 11:35:48 PM ::1 Returned 200 in 3 ms
+ HTTP  8/31/2026 11:35:48 PM ::1 Returned 200 in 4 ms
+ HTTP  8/31/2026 11:35:48 PM ::1 Returned 200 in 4 ms
+ HTTP  8/31/2026 11:35:48 PM ::1 GET /src/ui/market.js
+ HTTP  8/31/2026 11:35:48 PM ::1 GET /src/ui/backpack/index.js
+ HTTP  8/31/2026 11:35:48 PM ::1 GET /src/ui/backpack/pokemon.js
+ HTTP  8/31/2026 11:35:48 PM ::1 Returned 200 in 4 ms
+ HTTP  8/31/2026 11:35:48 PM ::1 Returned 200 in 3 ms
+ HTTP  8/31/2026 11:35:48 PM ::1 Returned 200 in 5 ms
+ HTTP  8/31/2026 11:36:26 PM ::1 GET /src/ui.js
+ HTTP  8/31/2026 11:36:26 PM ::1 Returned 200 in 1 ms
+ HTTP  8/31/2026 11:38:23 PM ::1 GET /
+ HTTP  8/31/2026 11:38:23 PM ::1 Returned 200 in 1 ms
+ HTTP  8/31/2026 11:38:23 PM ::1 GET /styles.css
+ HTTP  8/31/2026 11:38:23 PM ::1 Returned 200 in 2 ms
+ HTTP  8/31/2026 11:38:23 PM ::1 GET /src/ui.js
+ HTTP  8/31/2026 11:38:23 PM ::1 GET /Assets/Extra/Logo.jpg
+ HTTP  8/31/2026 11:38:23 PM ::1 GET /Assets/Pokemon%20Sprites/1.png
+ HTTP  8/31/2026 11:38:23 PM ::1 Returned 200 in 1 ms
+ HTTP  8/31/2026 11:38:23 PM ::1 Returned 200 in 2 ms
+ HTTP  8/31/2026 11:38:23 PM ::1 Returned 200 in 3 ms
+ HTTP  8/31/2026 11:38:23 PM ::1 GET /Assets/Pokemon%20Sprites/4.png
+ HTTP  8/31/2026 11:38:23 PM ::1 GET /Assets/Pokemon%20Sprites/7.png
+ HTTP  8/31/2026 11:38:23 PM ::1 Returned 200 in 2 ms
+ HTTP  8/31/2026 11:38:23 PM ::1 Returned 200 in 1 ms
+ HTTP  8/31/2026 11:38:23 PM ::1 GET /src/mathEngine.js
+ HTTP  8/31/2026 11:38:23 PM ::1 GET /src/battleSystem.js
+ HTTP  8/31/2026 11:38:23 PM ::1 GET /src/dayCare.js
+ HTTP  8/31/2026 11:38:23 PM ::1 Returned 200 in 1 ms
+ HTTP  8/31/2026 11:38:23 PM ::1 Returned 200 in 1 ms
+ HTTP  8/31/2026 11:38:23 PM ::1 Returned 200 in 1 ms
+ HTTP  8/31/2026 11:38:23 PM ::1 GET /src/storage.js
+ HTTP  8/31/2026 11:38:23 PM ::1 GET /src/state.js
+ HTTP  8/31/2026 11:38:23 PM ::1 Returned 200 in 1 ms
+ HTTP  8/31/2026 11:38:23 PM ::1 Returned 200 in 1 ms
+ HTTP  8/31/2026 11:38:23 PM ::1 GET /src/ui/topbar.js
+ HTTP  8/31/2026 11:38:23 PM ::1 GET /src/ui/sidebar.js
+ HTTP  8/31/2026 11:38:23 PM ::1 GET /src/ui/battle.js
+ HTTP  8/31/2026 11:38:23 PM ::1 GET /src/ui/map.js
+ HTTP  8/31/2026 11:38:23 PM ::1 GET /src/ui/pokedex.js
+ HTTP  8/31/2026 11:38:23 PM ::1 Returned 200 in 6 ms
+ HTTP  8/31/2026 11:38:23 PM ::1 Returned 200 in 5 ms
+ HTTP  8/31/2026 11:38:23 PM ::1 Returned 200 in 5 ms
+ HTTP  8/31/2026 11:38:23 PM ::1 Returned 200 in 5 ms
+ HTTP  8/31/2026 11:38:23 PM ::1 Returned 200 in 5 ms
+ HTTP  8/31/2026 11:38:23 PM ::1 GET /src/ui/pokemonStats.js
+ HTTP  8/31/2026 11:38:23 PM ::1 Returned 200 in 3 ms
+ HTTP  8/31/2026 11:38:23 PM ::1 GET /src/ui/settings.js
+ HTTP  8/31/2026 11:38:23 PM ::1 GET /src/ui/market.js
+ HTTP  8/31/2026 11:38:23 PM ::1 GET /src/ui/backpack/index.js
+ HTTP  8/31/2026 11:38:23 PM ::1 GET /src/ui/backpack/pokemon.js
+ HTTP  8/31/2026 11:38:23 PM ::1 Returned 200 in 2 ms
+ HTTP  8/31/2026 11:38:23 PM ::1 Returned 200 in 3 ms
+ HTTP  8/31/2026 11:38:23 PM ::1 Returned 200 in 2 ms
+ HTTP  8/31/2026 11:38:23 PM ::1 Returned 200 in 2 ms
+ HTTP  8/31/2026 11:38:23 PM ::1 GET /src/ui/backpack/pokeballs.js
+ HTTP  8/31/2026 11:38:23 PM ::1 Returned 200 in 1 ms
+ HTTP  8/31/2026 11:38:23 PM ::1 GET /src/ui/backpack/potions.js
+ HTTP  8/31/2026 11:38:23 PM ::1 GET /src/ui/backpack/stones.js
+ HTTP  8/31/2026 11:38:23 PM ::1 Returned 200 in 2 ms
+ HTTP  8/31/2026 11:38:23 PM ::1 Returned 200 in 1 ms
+ HTTP  8/31/2026 11:38:23 PM ::1 GET /src/ui/backpack/utils.js
+ HTTP  8/31/2026 11:38:23 PM ::1 Returned 200 in 2 ms
+ HTTP  8/31/2026 11:38:23 PM ::1 GET /config/pokemonData.js
+ HTTP  8/31/2026 11:38:23 PM ::1 Returned 200 in 2 ms
+ HTTP  8/31/2026 11:38:23 PM ::1 GET /config/routes.js
+ HTTP  8/31/2026 11:38:23 PM ::1 GET /config/gyms.js
+ HTTP  8/31/2026 11:38:23 PM ::1 GET /config/balance.js
+ HTTP  8/31/2026 11:38:23 PM ::1 GET /config/moves.js
+ HTTP  8/31/2026 11:38:23 PM ::1 GET /config/types.js
+ HTTP  8/31/2026 11:38:23 PM ::1 Returned 200 in 4 ms
+ HTTP  8/31/2026 11:38:23 PM ::1 Returned 200 in 5 ms
+ HTTP  8/31/2026 11:38:23 PM ::1 Returned 200 in 6 ms
+ HTTP  8/31/2026 11:38:23 PM ::1 Returned 200 in 6 ms
+ HTTP  8/31/2026 11:38:23 PM ::1 Returned 200 in 6 ms
+ HTTP  8/31/2026 11:38:23 PM ::1 GET /config/mapCoordinates.js
+ HTTP  8/31/2026 11:38:23 PM ::1 Returned 200 in 5 ms
+ HTTP  8/31/2026 11:38:23 PM ::1 GET /Assets/BG/BG-Professor-Oak-Lab.png
+ HTTP  8/31/2026 11:38:23 PM ::1 Returned 200 in 83 ms
+ HTTP  8/31/2026 11:38:28 PM ::1 GET /Assets/Map/Kanto%20Map.png
+ HTTP  8/31/2026 11:38:28 PM ::1 GET /Assets/Extra/Spot.png
+ HTTP  8/31/2026 11:38:28 PM ::1 GET /Assets/Badges/Badge%20Kanto%208.png
+ HTTP  8/31/2026 11:38:28 PM ::1 GET /Assets/Extra/Spot_PCPM.png
+ HTTP  8/31/2026 11:38:28 PM ::1 GET /Assets/Extra/Spot_E4.png
+ HTTP  8/31/2026 11:38:28 PM ::1 GET /Assets/Badges/Badge%20Kanto%201.png
+ HTTP  8/31/2026 11:38:28 PM ::1 Returned 200 in 15 ms
+ HTTP  8/31/2026 11:38:28 PM ::1 Returned 200 in 15 ms
+ HTTP  8/31/2026 11:38:28 PM ::1 Returned 200 in 16 ms
+ HTTP  8/31/2026 11:38:28 PM ::1 GET /Assets/Extra/Spot_Oak.png
+ HTTP  8/31/2026 11:38:28 PM ::1 GET /Assets/Extra/Spot_Casino.png
+ HTTP  8/31/2026 11:38:28 PM ::1 Returned 200 in 5 ms
+ HTTP  8/31/2026 11:38:28 PM ::1 GET /Assets/Badges/Badge%20Kanto%205.png
+ HTTP  8/31/2026 11:38:28 PM ::1 GET /Assets/Badges/Badge%20Kanto%203.png
+ HTTP  8/31/2026 11:38:28 PM ::1 Returned 200 in 8 ms
+ HTTP  8/31/2026 11:38:28 PM ::1 Returned 200 in 34 ms
+ HTTP  8/31/2026 11:38:28 PM ::1 Returned 200 in 9 ms
+ HTTP  8/31/2026 11:38:28 PM ::1 Returned 200 in 45 ms
+ HTTP  8/31/2026 11:38:29 PM ::1 GET /Assets/Extra/Spot_Safariball.png
+ HTTP  8/31/2026 11:38:28 PM ::1 Returned 200 in 38 ms
+ HTTP  8/31/2026 11:38:29 PM ::1 GET /Assets/Badges/Badge%20Kanto%207.png
+ HTTP  8/31/2026 11:38:29 PM ::1 Returned 200 in 27 ms
+ HTTP  8/31/2026 11:38:29 PM ::1 Returned 200 in 26 ms
+ HTTP  8/31/2026 11:38:29 PM ::1 GET /Assets/Badges/Badge%20Kanto%206.png
+ HTTP  8/31/2026 11:38:29 PM ::1 GET /Assets/Badges/Badge%20Kanto%202.png
+ HTTP  8/31/2026 11:38:29 PM ::1 GET /Assets/Badges/Badge%20Kanto%204.png
+ HTTP  8/31/2026 11:38:29 PM ::1 Returned 200 in 37 ms
+ HTTP  8/31/2026 11:38:29 PM ::1 Returned 200 in 42 ms
+ HTTP  8/31/2026 11:38:29 PM ::1 Returned 200 in 48 ms
+ HTTP  8/31/2026 11:38:28 PM ::1 Returned 200 in 279 ms
+ HTTP  8/31/2026 11:38:31 PM ::1 GET /Assets/Extra/Backpack.png
+ HTTP  8/31/2026 11:38:31 PM ::1 Returned 200 in 27 ms
