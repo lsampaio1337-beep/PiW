@@ -129,6 +129,14 @@ async function init() {
     document.getElementById('choose-charmander').onclick = () => selectStarter(4);
     document.getElementById('choose-squirtle').onclick = () => selectStarter(7);
 
+    // Add quick testing route jump
+    window.testJump = () => {
+        state.currentRoute = "Route 1";
+        switchView("BATTLE_ARENA");
+        battleSystem.searchNext();
+        updateUI();
+    };
+
     // Bind Hub Buttons
     document.getElementById('btn-map').onclick = () => showMap();
     document.getElementById('btn-backpack').onclick = () => showModal("Backpack", `
@@ -385,7 +393,10 @@ function updateUI() {
     }
 
     // Combat Arena
+    const combatArena = document.getElementById('combat-arena');
+
     if (battleSystem && battleSystem.activeEncounter) {
+        if (combatArena) combatArena.classList.remove('scrolling');
         const enemy = battleSystem.activeEncounter;
         const enemyTotalIV = enemy.ivs.hp + enemy.ivs.atk + enemy.ivs.def + enemy.ivs.spa + enemy.ivs.spd + enemy.ivs.spe;
         document.getElementById('enemy-name').innerText = `${enemy.name} (Q=${enemy.quality.toFixed(2)} & ∑IV=${enemyTotalIV})`;
@@ -393,6 +404,7 @@ function updateUI() {
         document.getElementById('enemy-hp').innerText = `${Math.floor(enemy.currentHp)}/${enemy.maxHp}`;
         document.getElementById('enemy-sprite').src = `assets/Pokemon Sprites/${enemy.qualityName === 'Shiny' ? enemy.id + '_shiny' : enemy.id}.png`;
         document.getElementById('enemy-sprite').style.display = 'block';
+        document.getElementById('enemy-sprite').classList.add('sprite-bob');
 
         const leader = state.party[0];
         if (leader) {
@@ -401,13 +413,17 @@ function updateUI() {
             document.getElementById('player-hp').innerText = `${Math.floor(leader.currentHp)}/${leader.maxHp}`;
             document.getElementById('player-sprite').src = `assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? leader.id + '_shiny' : leader.id}.png`;
             document.getElementById('player-sprite').style.display = 'block';
+            document.getElementById('player-sprite').classList.add('sprite-bob');
         }
     } else if (battleSystem && battleSystem.isSearching) {
+        if (combatArena) combatArena.classList.add('scrolling');
+
         document.getElementById('enemy-name').innerText = "Searching...";
         document.getElementById('enemy-lvl').innerText = "?";
         document.getElementById('enemy-hp').innerText = "?/?";
         document.getElementById('enemy-sprite').src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
         document.getElementById('enemy-sprite').style.display = 'block';
+        document.getElementById('enemy-sprite').classList.remove('sprite-bob');
 
         const leader = state.party[0];
         if (leader) {
@@ -416,6 +432,7 @@ function updateUI() {
             document.getElementById('player-hp').innerText = `${Math.floor(leader.currentHp)}/${leader.maxHp}`;
             document.getElementById('player-sprite').src = `assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? leader.id + '_shiny' : leader.id}.png`;
             document.getElementById('player-sprite').style.display = 'block';
+            document.getElementById('player-sprite').classList.add('sprite-bob');
         } else {
             document.getElementById('player-sprite').style.display = 'none';
         }

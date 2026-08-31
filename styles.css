@@ -88,11 +88,35 @@ input[type="number"] {
 #combat-arena {
     flex: 1;
     position: relative;
-    background-size: cover;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-between;
-    padding: 40px;
+    align-items: flex-end;
+    padding: 20px 80px;
+    background-color: #98D8D8; /* Sky */
+    background-image:
+        repeating-linear-gradient(90deg, #68A028 0px, #68A028 60px, #589018 60px, #589018 120px), /* Back grass */
+        repeating-linear-gradient(90deg, #E0C068 0px, #E0C068 40px, #D0B058 40px, #D0B058 80px), /* Dirt path */
+        repeating-linear-gradient(90deg, #389030 0px, #389030 20px, #287820 20px, #287820 40px); /* Front grass */
+    background-size:
+        120px 20%,
+        80px 15%,
+        40px 15%;
+    background-position:
+        0 70%,
+        0 85%,
+        0 100%;
+    background-repeat: repeat-x;
+    padding-bottom: 20px;
+}
+
+#combat-arena.scrolling {
+    animation: parallax-scroll 1s linear infinite;
+}
+
+@keyframes parallax-scroll {
+    from { background-position: 0 100%, 0 85%, 0 65%; }
+    to { background-position: -120px 100%, -80px 85%, -40px 65%; }
 }
 
 #view-prof-oak-lab {
@@ -111,18 +135,16 @@ input[type="number"] {
 #enemy-side {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: center;
     align-self: flex-end;
-    margin-top: 20px;
     position: relative;
 }
 
 #player-side {
     display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    align-self: flex-start;
-    margin-bottom: 20px;
+    flex-direction: column;
+    align-items: center;
+    align-self: flex-end;
     position: relative;
 }
 
@@ -130,16 +152,17 @@ input[type="number"] {
     background: rgba(0,0,0,0.6);
     padding: 10px;
     border-radius: 8px;
-    min-width: 200px;
-    height: 70px;
+    min-width: 180px;
+    height: 50px;
     z-index: 10;
+    margin-bottom: 10px;
 }
 .stats-box h4 { margin: 0 0 5px 0; font-size: 14px;}
 
 #enemy-sprite {
+    --facing: 1;
     width: 150px;
     height: 150px;
-    margin-top: -10px;
     object-fit: contain;
     position: relative;
 }
@@ -147,10 +170,47 @@ input[type="number"] {
 #player-sprite {
     width: 150px;
     height: 150px;
-    margin-right: 20px;
-    transform: scaleX(-1); /* Face right */
+    transform: scaleX(-1);
     object-fit: contain;
     position: relative;
+}
+
+.sprite-bob {
+    animation: running-bob 0.4s ease-in-out infinite alternate;
+}
+
+@keyframes running-bob {
+    from { transform: translateY(0); }
+    to { transform: translateY(-8px); }
+}
+
+#player-sprite.sprite-bob {
+    animation: running-bob-player 0.4s ease-in-out infinite alternate;
+}
+
+@keyframes running-bob-player {
+    from { transform: translateY(0) scaleX(-1); }
+    to { transform: translateY(-8px) scaleX(-1); }
+}
+    to { transform: translateY(-8px); }
+}
+
+.sprite-bob {
+    animation: running-bob 0.4s ease-in-out infinite alternate;
+}
+
+@keyframes running-bob {
+    from { transform: translateY(0) scaleX(var(--facing, 1)); }
+    to { transform: translateY(-8px) scaleX(var(--facing, 1)); }
+}
+
+.sprite-bob {
+    animation: running-bob 0.4s ease-in-out infinite alternate;
+}
+
+@keyframes running-bob {
+    from { transform: translateY(0) scaleX(var(--facing, 1)); }
+    to { transform: translateY(-8px) scaleX(var(--facing, 1)); }
 }
 
 #combat-log {
