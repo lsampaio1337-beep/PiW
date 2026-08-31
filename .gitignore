@@ -1,9 +1,2 @@
 node_modules/
-dist/
-build/
-assets/sprites/
-.DS_Store
 out/
-assets/Pokemon Sprites/
-assets/Extra/
-assets/backgrounds/

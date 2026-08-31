@@ -1,7 +1,7 @@
 #!/bin/bash
 echo "Installing dependencies..."
 npm install
-echo "Downloading sprites..."
-node scripts/downloadSprites.js
+
 echo "Starting game..."
-npm start
+nohup npm start > /dev/null 2>&1 &
+exit 0

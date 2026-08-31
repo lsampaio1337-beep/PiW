@@ -9,6 +9,12 @@ class BattleSystem {
         this.activeEncounter = null;
         this.combatLoop = null;
         this.isSearching = false;
+
+        this.gymState = {
+            isActive: false,
+            gym: null,
+            currentTrainerIndex: 0
+        };
     }
 
     start() {
@@ -67,6 +73,101 @@ class BattleSystem {
         return bestMove;
     }
 
+    startGymBattle(gymName) {
+        const gym = this.state.config.gyms.find(g => g.name === gymName);
+        if (!gym) return;
+
+        this.stop();
+        this.gymState = {
+            isActive: true,
+            gym: gym,
+            currentTrainerIndex: 0
+        };
+
+        // Update gym UI specifically to show current trainer
+        this.updateGymUI();
+    }
+
+    updateGymUI() {
+        const vGym = document.getElementById("view-gym");
+        const contentArea = document.getElementById("gym-content-area");
+        if (!vGym || !contentArea) return;
+
+        const gym = this.gymState.gym;
+        if (!gym) return;
+
+        const trainer = gym.trainers[this.gymState.currentTrainerIndex];
+
+        if (trainer) {
+            // Let's add sprites and damage numbers to gym battles!
+            contentArea.innerHTML = `
+                <p>Next Opponent: ${trainer.name}</p>
+
+                <div id="gym-battle-area" style="display: none; margin-top: 20px; margin-bottom: 20px; position: relative;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-end; height: 150px; background: rgba(0,0,0,0.3); border: 2px solid #555; border-radius: 10px; padding: 20px;">
+
+                        <div style="text-align: left; width: 40%;">
+                            <h4 id="gym-player-name">Player</h4>
+                            <div style="width: 100%; height: 10px; background: #333; border: 1px solid #777;">
+                                <div id="gym-player-hp-bar" style="width: 100%; height: 100%; background: #2ecc71;"></div>
+                            </div>
+                            <span id="gym-player-hp-text"></span>
+                            <div style="position: relative; height: 80px; margin-top: 10px;">
+                                <img id="gym-player-sprite" src="" style="position: absolute; bottom: 0; left: 0; max-height: 80px; transform: scaleX(-1);">
+                            </div>
+                        </div>
+
+                        <div id="gym-combat-log" style="width: 20%; font-size: 12px; color: #ccc; text-align: center; overflow: hidden; height: 100px;"></div>
+
+                        <div style="text-align: right; width: 40%;">
+                            <h4 id="gym-enemy-name">Enemy</h4>
+                            <div style="width: 100%; height: 10px; background: #333; border: 1px solid #777;">
+                                <div id="gym-enemy-hp-bar" style="width: 100%; height: 100%; background: #e74c3c; float: right;"></div>
+                            </div>
+                            <span id="gym-enemy-hp-text"></span>
+                            <div style="position: relative; height: 80px; margin-top: 10px;">
+                                <img id="gym-enemy-sprite" src="" style="position: absolute; bottom: 0; right: 0; max-height: 80px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="btn-start-gym-battle" onclick="window.battleEngine.startNextGymBattle()" style="padding: 10px 20px; font-size: 16px; cursor: pointer;">Battle ${trainer.name}</button>
+                <br><br>
+                <button onclick="window.battleEngine.stopGymBattle()" style="padding: 5px 10px; background: #e74c3c; border: none; color: white; border-radius: 3px; cursor: pointer;">Flee Gym</button>
+            `;
+            // Temporary expose for the button
+            window.battleEngine = this;
+
+            // Re-bind to use our special gym start func that toggles visibility
+            window.battleEngine.startNextGymBattle = () => {
+                document.getElementById('btn-start-gym-battle').style.display = 'none';
+                document.getElementById('gym-battle-area').style.display = 'block';
+                this.searchNext();
+            };
+        } else {
+            // Gym completed
+            contentArea.innerHTML = `
+                <h3>You defeated ${gym.leader}!</h3>
+                <p>You earned the ${gym.name} badge.</p>
+                <button onclick="window.battleEngine.stopGymBattle()" style="padding: 10px 20px; cursor: pointer;">Leave</button>
+            `;
+            window.battleEngine = this;
+        }
+    }
+
+    stopGymBattle() {
+        this.gymState.isActive = false;
+        this.gymState.gym = null;
+        this.stop();
+
+        // Return to normal map or idle
+        if (typeof window.navigateToLocation === 'function') {
+             // Reset UI back to just the gym entry
+             window.navigateToLocation(this.state.currentRoute);
+        }
+    }
+
     async searchNext() {
         if (this.state.party.every(p => p.currentHp <= 0)) {
             this.handleWipeout();
@@ -83,8 +184,85 @@ class BattleSystem {
         delay = Math.max(300, delay) / this.state.settings.gameSpeed;
 
         this.combatLoop = setTimeout(() => {
-            this.generateEncounter();
+            if (this.gymState.isActive) {
+                this.generateGymEncounter();
+            } else {
+                this.generateEncounter();
+            }
         }, delay);
+    }
+
+    generateGymEncounter() {
+        const gym = this.gymState.gym;
+        if (!gym) return;
+
+        const trainer = gym.trainers[this.gymState.currentTrainerIndex];
+        if (!trainer) {
+            // Should not happen, but safe fallback
+            this.stopGymBattle();
+            return;
+        }
+
+        // We'll simulate fighting the entire team as sequential encounters for now
+        // A full implementation might handle the team differently, but this fits the idle structure easiest
+        // For this task, we will just pick a random pokemon from the trainer's team or the first one
+        // Better: We should track which pokemon of the trainer we are on.
+        // Let's add a `currentPokemonIndex` to `gymState`.
+        if (this.gymState.currentPokemonIndex === undefined) {
+            this.gymState.currentPokemonIndex = 0;
+        }
+
+        const pokemonDef = trainer.team[this.gymState.currentPokemonIndex];
+        if (!pokemonDef) return; // Should have been handled in defeat
+
+        const pokemonBase = this.state.config.pokemonData.find(p => p.id === pokemonDef.id);
+        const level = pokemonDef.level;
+
+        // Gym leaders and trainers have fixed quality (e.g. Regular or Uncommon)
+        const isLeader = this.gymState.currentTrainerIndex === gym.trainers.length - 1;
+        const q = isLeader ? { name: "Rare", q: 1.40 } : { name: "Uncommon", q: 1.20 };
+
+        // Track seen for pokedex
+        if (!this.state.stats.seenSpecies) this.state.stats.seenSpecies = {};
+        this.state.stats.seenSpecies[pokemonBase.name] = true;
+
+        // Give them good IVs
+        const ivs = { hp: 50, atk: 50, def: 50, spa: 50, spd: 50, spe: 50 };
+        if (isLeader) {
+            ivs.hp = 80; ivs.atk = 80; ivs.def = 80; ivs.spa = 80; ivs.spd = 80; ivs.spe = 80;
+        }
+
+        const stats = {
+            hp: mathEngine.calculateHP(pokemonBase.hp, ivs.hp, level, q.q),
+            atk: mathEngine.calculateStat(pokemonBase.atk, ivs.atk, level, q.q),
+            def: mathEngine.calculateStat(pokemonBase.def, ivs.def, level, q.q),
+            spa: mathEngine.calculateStat(pokemonBase.spa, ivs.spa, level, q.q),
+            spd: mathEngine.calculateStat(pokemonBase.spd, ivs.spd, level, q.q),
+            spe: mathEngine.calculateStat(pokemonBase.spe, ivs.spe, level, q.q)
+        };
+
+        const bst = pokemonBase.hp + pokemonBase.atk + pokemonBase.def + pokemonBase.spa + pokemonBase.spd + pokemonBase.spe;
+        const totalIV = ivs.hp + ivs.atk + ivs.def + ivs.spa + ivs.spd + ivs.spe;
+
+        this.activeEncounter = {
+            id: pokemonBase.id,
+            name: pokemonBase.name,
+            level: level,
+            types: pokemonBase.types,
+            qualityName: q.name,
+            quality: q.q,
+            ivs: ivs,
+            currentStats: stats,
+            maxHp: stats.hp,
+            currentHp: stats.hp,
+            ev: mathEngine.calculateEV(bst, level, q.q, totalIV),
+            bst: bst,
+            moves: this.getLearnsetMoves(pokemonBase, level)
+        };
+
+        this.isSearching = false;
+        this.updateUI();
+        this.scheduleTurn();
     }
 
     generateEncounter() {
@@ -284,6 +462,8 @@ class BattleSystem {
 
     throwPokeball() {
         let tier = this.state.settings.activeBallTier;
+        if (tier < 0) return false; // None selected
+
         let ballName = this.state.config.balance.items.pokeballs[tier].name;
 
         while(tier >= 0) {
@@ -324,11 +504,14 @@ class BattleSystem {
         const leader = this.state.party[0];
         const ev = this.activeEncounter.ev;
 
-        // Auto Throw Pokeball logic
-        if (this.state.settings.autoCatch) {
+        // Auto Throw Pokeball logic (disable in gyms)
+        if (this.state.settings.autoCatch && (!this.gymState || !this.gymState.isActive)) {
             const caught = this.throwPokeball();
             if (caught) {
-                this.state.box.push(JSON.parse(JSON.stringify(this.activeEncounter)));
+                let caughtPokemon = JSON.parse(JSON.stringify(this.activeEncounter));
+                // Fix the level 100 jump bug by setting xp explicitly to the exact minimum needed for their captured level
+                caughtPokemon.xp = mathEngine.calculateTotalXP(caughtPokemon.level);
+                this.state.storage.push(caughtPokemon);
                 this.state.stats.caught++;
                 if (this.activeEncounter.qualityName === "Shiny") this.state.stats.shiniesCaught++;
 
@@ -359,7 +542,43 @@ class BattleSystem {
 
         this.state.stats.battlesWon++;
         this.checkRouteUnlocks();
-        this.searchNext();
+
+        if (this.gymState && this.gymState.isActive) {
+            this.handleGymEnemyDefeat();
+        } else {
+            this.searchNext();
+        }
+    }
+
+    handleGymEnemyDefeat() {
+        const gym = this.gymState.gym;
+        const trainer = gym.trainers[this.gymState.currentTrainerIndex];
+
+        this.gymState.currentPokemonIndex++;
+
+        if (this.gymState.currentPokemonIndex >= trainer.team.length) {
+            // Defeated trainer
+            this.gymState.currentTrainerIndex++;
+            this.gymState.currentPokemonIndex = 0;
+            this.stop(); // Stop loop to show next button
+
+            if (this.gymState.currentTrainerIndex >= gym.trainers.length) {
+                // Defeated Gym!
+                if (!this.state.trainer.badges) this.state.trainer.badges = 0;
+
+                const gymIndex = this.state.config.gyms.findIndex(g => g.name === gym.name);
+                if (gymIndex !== -1 && this.state.trainer.badges === gymIndex) {
+                    this.state.trainer.badges++;
+                }
+
+                // Bonus money for winning
+                this.state.trainer.money += 1000 * this.state.trainer.badges;
+            }
+            this.updateGymUI();
+        } else {
+            // Next pokemon
+            this.searchNext();
+        }
     }
 
     checkRouteUnlocks() {
@@ -432,12 +651,18 @@ class BattleSystem {
         // Heal all party to full
         this.state.party.forEach(p => p.currentHp = p.maxHp);
 
-        // Return to poke center (simulated by just waiting and searching again for idle game)
-        setTimeout(() => {
-            this.searchNext();
-        }, 5000 / this.state.settings.gameSpeed);
+        if (this.gymState && this.gymState.isActive) {
+            // Flee gym
+            this.stopGymBattle();
+            this.updateUI();
+        } else {
+            // Return to poke center (simulated by just waiting and searching again for idle game)
+            setTimeout(() => {
+                this.searchNext();
+            }, 5000 / this.state.settings.gameSpeed);
 
-        this.updateUI();
+            this.updateUI();
+        }
     }
 
     switchLeader(index) {
