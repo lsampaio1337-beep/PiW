@@ -84,7 +84,7 @@ export function renderPokemonTab(area) {
             <!-- Column 2: Storage -->
             <div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'storage')" style="flex: 2; border: 1px solid #555; padding: 5px; min-height: 200px; display: flex; flex-direction: column;">
                 <h4 style="text-align: center; margin-top:0;">Storage</h4>
-                <div id="storage-scroll-container" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; max-height: 250px; overflow-y: auto; align-content: start; flex-grow: 1;">
+                <div id="storage-scroll-container" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; max-height: 400px; overflow-y: auto; align-content: start; flex-grow: 1; padding-bottom: 20px;">
     `;
 
     for (let i = 0; i < state.storage.length; i++) {
@@ -98,9 +98,9 @@ export function renderPokemonTab(area) {
             </div>
 
             <!-- Column 3: Safe -->
-            <div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'safe')" style="flex: 2; border: 1px solid #555; padding: 5px; min-height: 200px; display: flex; flex-direction: column;">
+            <div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'safe')" style="flex: 1.2; border: 1px solid #555; padding: 5px; min-height: 200px; display: flex; flex-direction: column;">
                 <h4 style="text-align: center; margin-top:0;">Safe</h4>
-                <div id="safe-scroll-container" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; max-height: 250px; overflow-y: auto; align-content: start; flex-grow: 1;">
+                <div id="safe-scroll-container" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 5px; max-height: 400px; overflow-y: auto; align-content: start; flex-grow: 1; padding-bottom: 20px;">
     `;
 
     for (let i = 0; i < state.safe.length; i++) {
