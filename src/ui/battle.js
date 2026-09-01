@@ -1,6 +1,18 @@
 import { TYPE_COLORS } from '../ui.js';
 import { state, globals } from '../state.js';
 
+
+function getMovementClass(types) {
+    if (!types || types.length === 0) return 'anim-walk';
+    const hasFly = types.includes('Flying');
+    const hasWater = types.includes('Water');
+
+    if (hasFly && hasWater) return 'anim-fly-swim';
+    if (hasFly) return 'anim-fly';
+    if (hasWater) return 'anim-swim';
+    return 'anim-walk';
+}
+
 export function updateBattleArena() {
     const battleSystem = globals.battleSystem;
     const inGym = battleSystem && battleSystem.gymState && battleSystem.gymState.isActive;
@@ -19,7 +31,10 @@ export function updateBattleArena() {
             if (eHpBar) eHpBar.style.width = `${Math.min(100, (enemy.currentHp / enemy.maxHp) * 100)}%`;
 
             const eSprite = document.getElementById('gym-enemy-sprite');
-            if (eSprite) eSprite.src = `Assets/Pokemon Sprites/${enemy.qualityName === 'Shiny' ? enemy.id + '_shiny' : enemy.id}.png`;
+            if (eSprite) {
+                eSprite.src = `Assets/Pokemon Sprites/${enemy.qualityName === 'Shiny' ? enemy.id + '_shiny' : enemy.id}.png`;
+                eSprite.className = getMovementClass(enemy.types);
+            }
 
             const leader = state.party[0];
             if (leader) {
@@ -33,7 +48,10 @@ export function updateBattleArena() {
                 if (pHpBar) pHpBar.style.width = `${Math.min(100, (leader.currentHp / leader.maxHp) * 100)}%`;
 
                 const pSprite = document.getElementById('gym-player-sprite');
-                if (pSprite) pSprite.src = `Assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? leader.id + '_shiny' : leader.id}.png`;
+                if (pSprite) {
+                    pSprite.src = `Assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? leader.id + '_shiny' : leader.id}.png`;
+                    pSprite.className = getMovementClass(leader.types);
+                }
             }
         }
     } else {
@@ -54,6 +72,21 @@ export function updateBattleArena() {
             const elEnemySprite = document.getElementById('enemy-sprite');
             if (elEnemySprite) {
                 elEnemySprite.src = `Assets/Pokemon Sprites/${enemy.qualityName === 'Shiny' ? enemy.id + '_shiny' : enemy.id}.png`;
+                elEnemySprite.className = getMovementClass(enemy.types);
+
+                const enemySide = document.getElementById('enemy-side');
+                if (enemySide) {
+                    if (!enemy.hasMovedIn) {
+                        enemySide.classList.add('spawning');
+                        // Small delay to ensure the browser registers the initial spawning position before removing it to trigger transition
+                        setTimeout(() => {
+                           if (enemySide) enemySide.classList.remove('spawning');
+                        }, 50);
+                    } else {
+                        enemySide.classList.remove('spawning');
+                    }
+                }
+
                 elEnemySprite.style.display = 'block';
             }
 
@@ -73,6 +106,7 @@ export function updateBattleArena() {
                 const elPlayerSprite = document.getElementById('player-sprite');
                 if (elPlayerSprite) {
                     elPlayerSprite.src = `Assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? leader.id + '_shiny' : leader.id}.png`;
+                    elPlayerSprite.className = getMovementClass(leader.types);
                     elPlayerSprite.style.display = 'block';
                 }
             }
@@ -194,3 +228,114 @@ export function showDamage(target, amount, isCrit, moveName = '', moveType = 'No
         if (dmgNode.parentElement) dmgNode.parentElement.removeChild(dmgNode);
     }, 1000);
 }
+
+
+export function triggerCombatAnimation(attackerSide, moveType, attackerPrimaryType) {
+    const battleSystem = globals.battleSystem;
+    let attackerId = attackerSide === 'player' ? 'player-sprite' : 'enemy-sprite';
+    let defenderId = attackerSide === 'player' ? 'enemy-sprite' : 'player-sprite';
+
+    if (battleSystem && battleSystem.gymState && battleSystem.gymState.isActive) {
+        attackerId = attackerSide === 'player' ? 'gym-player-sprite' : 'gym-enemy-sprite';
+        defenderId = attackerSide === 'player' ? 'gym-enemy-sprite' : 'gym-player-sprite';
+    }
+
+    const attackerEl = document.getElementById(attackerId);
+    const defenderEl = document.getElementById(defenderId);
+
+    if (!attackerEl || !defenderEl) return;
+
+    // Ensure parent container is relative (combat-arena or gym-battle-area)
+    const container = attackerEl.closest('#combat-arena, #gym-battle-area');
+    if (!container) return;
+
+    const aRect = attackerEl.getBoundingClientRect();
+    const dRect = defenderEl.getBoundingClientRect();
+    const cRect = container.getBoundingClientRect();
+
+    // Calculate centers relative to container
+    const aX = aRect.left - cRect.left + aRect.width / 2;
+    const aY = aRect.top - cRect.top + aRect.height / 2;
+
+    const dX = dRect.left - cRect.left + dRect.width / 2;
+    const dY = dRect.top - cRect.top + dRect.height / 2;
+
+    const tx = dX - aX;
+    const ty = dY - aY;
+
+    // Projectile
+    const projectile = document.createElement('div');
+    projectile.className = 'combat-projectile';
+    projectile.style.left = aX + 'px';
+    projectile.style.top = aY + 'px';
+    projectile.style.setProperty('--tx', tx + 'px');
+    projectile.style.setProperty('--ty', ty + 'px');
+    projectile.style.setProperty('--duration', '0.3s');
+    projectile.style.color = TYPE_COLORS[moveType] || '#ffffff';
+
+    container.appendChild(projectile);
+
+    setTimeout(() => {
+        if (projectile.parentElement) projectile.parentElement.removeChild(projectile);
+
+        // Splash
+        const splash = document.createElement('div');
+        splash.className = 'combat-splash';
+        splash.style.left = dX + 'px';
+        splash.style.top = dY + 'px';
+        splash.style.color = TYPE_COLORS[attackerPrimaryType] || TYPE_COLORS[moveType] || '#ffffff';
+        container.appendChild(splash);
+
+        setTimeout(() => {
+            if (splash.parentElement) splash.parentElement.removeChild(splash);
+        }, 300);
+
+    }, 300);
+}
+
+// Make globally available
+window.triggerCombatAnimation = triggerCombatAnimation;
+
+
+export function triggerCatchAnimation(ballName, isCaught, callback) {
+    const battleSystem = globals.battleSystem;
+    const enemyEl = document.getElementById('enemy-sprite'); // Catching only happens outside gyms
+    const container = enemyEl ? enemyEl.closest('#combat-arena') : null;
+
+    if (!container || !enemyEl) {
+        if (callback) callback();
+        return;
+    }
+
+    const ballImg = document.createElement('img');
+    // Sanitize ballname to match image (e.g., Poke Ball -> Pokeball)
+    const formattedBall = ballName.replace(' ', '') + '.png';
+    ballImg.src = 'Assets/Items/Balls/' + formattedBall;
+    ballImg.className = 'pokeball-overlay pokeball-shake';
+
+    const indicator = document.createElement('div');
+    indicator.className = 'catch-indicator';
+
+    container.appendChild(ballImg);
+    container.appendChild(indicator);
+
+    // After 1s shake
+    setTimeout(() => {
+        ballImg.classList.remove('pokeball-shake');
+
+        if (isCaught) {
+            indicator.classList.add('catch-success');
+        } else {
+            indicator.classList.add('catch-fail');
+        }
+
+        // Wait another moment to show the result, then clean up and callback
+        setTimeout(() => {
+            if (ballImg.parentElement) ballImg.parentElement.removeChild(ballImg);
+            if (indicator.parentElement) indicator.parentElement.removeChild(indicator);
+            if (callback) callback();
+        }, 1000);
+    }, 1000);
+}
+
+window.triggerCatchAnimation = triggerCatchAnimation;

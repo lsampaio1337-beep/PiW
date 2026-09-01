@@ -90,9 +90,10 @@ input[type="number"] {
     position: relative;
     background-size: cover;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
     padding: 40px;
+    overflow: hidden;
 }
 
 #view-prof-oak-lab {
@@ -109,21 +110,30 @@ input[type="number"] {
 }
 
 #enemy-side {
+    position: absolute;
+    right: 50%;
+    top: 50%;
+    transform: translate(200px, -50%);
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
-    align-self: flex-end;
-    margin-top: 20px;
-    position: relative;
+    align-items: center;
+    margin-top: -50px;
+    transition: right 2s linear, transform 2s linear;
+}
+#enemy-side.spawning {
+    right: -200px;
+    transform: translate(0, -50%);
 }
 
 #player-side {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-200px, -50%);
     display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    align-self: flex-start;
-    margin-bottom: 20px;
-    position: relative;
+    flex-direction: column-reverse;
+    align-items: center;
+    margin-top: 50px;
 }
 
 .stats-box {
@@ -139,18 +149,17 @@ input[type="number"] {
 #enemy-sprite {
     width: 150px;
     height: 150px;
-    margin-top: -10px;
     object-fit: contain;
     position: relative;
+    --facing: 1;
 }
 
 #player-sprite {
     width: 150px;
     height: 150px;
-    margin-right: 20px;
-    transform: scaleX(-1); /* Face right */
     object-fit: contain;
     position: relative;
+    --facing: -1;
 }
 
 #combat-log {
@@ -246,4 +255,124 @@ input[type="number"] {
 }
 #modal-content-box button:hover {
     background: #c0392b;
+}
+
+
+/* Animation classes for Pokemon movement */
+@keyframes walk-anim {
+    0%, 100% { transform: scaleX(var(--facing, 1)) translateY(0) rotate(0deg); }
+    25% { transform: scaleX(var(--facing, 1)) translateY(-5px) rotate(5deg); }
+    75% { transform: scaleX(var(--facing, 1)) translateY(-5px) rotate(-5deg); }
+}
+
+@keyframes fly-anim {
+    0%, 100% { transform: scaleX(var(--facing, 1)) translateY(0); }
+    50% { transform: scaleX(var(--facing, 1)) translateY(-15px); }
+}
+
+@keyframes swim-anim {
+    0%, 100% { transform: scaleX(var(--facing, 1)) translateY(0) rotate(0deg); }
+    50% { transform: scaleX(var(--facing, 1)) translateY(5px) rotate(10deg); }
+}
+
+@keyframes fly-swim-anim {
+    0%, 100% { transform: scaleX(var(--facing, 1)) translateY(0) rotate(0deg); }
+    25% { transform: scaleX(var(--facing, 1)) translateY(-10px) rotate(5deg); }
+    75% { transform: scaleX(var(--facing, 1)) translateY(10px) rotate(-5deg); }
+}
+
+.anim-walk { animation: walk-anim 0.5s infinite linear; }
+.anim-fly { animation: fly-anim 1.5s infinite ease-in-out; }
+.anim-swim { animation: swim-anim 2s infinite ease-in-out; }
+.anim-fly-swim { animation: fly-swim-anim 2s infinite ease-in-out; }
+
+
+/* Pokeball Catch Animations */
+@keyframes shake-ball {
+    0% { transform: rotate(0deg) scale(0.5); }
+    20% { transform: rotate(-15deg) scale(0.5); }
+    40% { transform: rotate(0deg) scale(0.5); }
+    60% { transform: rotate(15deg) scale(0.5); }
+    80% { transform: rotate(0deg) scale(0.5); }
+    100% { transform: rotate(0deg) scale(0.5); }
+}
+
+.pokeball-overlay {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    top: 50%;
+    left: 50%;
+    margin-left: -30px;
+    margin-top: -30px;
+    z-index: 100;
+    pointer-events: none;
+}
+
+.pokeball-shake {
+    animation: shake-ball 0.5s ease-in-out 2;
+    transform: scale(0.5);
+}
+
+.catch-indicator {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: none;
+    z-index: 101;
+}
+
+.catch-success {
+    background: radial-gradient(circle, rgba(0,255,0,1) 0%, rgba(0,255,0,0.5) 100%);
+    opacity: 1;
+}
+
+.catch-fail {
+    background: radial-gradient(circle, rgba(255,0,0,1) 0%, rgba(255,0,0,0.5) 100%);
+    opacity: 1;
+}
+
+/* Projectile Animation */
+@keyframes projectile-move {
+    0% { transform: translate(0, 0); opacity: 1; }
+    100% { transform: translate(var(--tx), var(--ty)); opacity: 1; }
+}
+
+.combat-projectile {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    z-index: 50;
+    animation: projectile-move var(--duration) linear forwards;
+    pointer-events: none;
+    box-shadow: 0 0 10px currentColor;
+    background-color: currentColor;
+}
+
+/* Splash Animation */
+@keyframes splash-burst {
+    0% { transform: scale(0.5); opacity: 1; }
+    100% { transform: scale(2); opacity: 0; }
+}
+
+.combat-splash {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    z-index: 51;
+    animation: splash-burst 0.3s ease-out forwards;
+    pointer-events: none;
+    background: radial-gradient(circle, currentColor 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    margin-top: -30px;
+    margin-left: -30px;
 }

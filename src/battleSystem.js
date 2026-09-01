@@ -28,6 +28,10 @@ class BattleSystem {
             clearTimeout(this.combatLoop);
             this.combatLoop = null;
         }
+        if (this.damageTimeout) {
+            clearTimeout(this.damageTimeout);
+            this.damageTimeout = null;
+        }
     }
 
     getTypeEffectiveness(moveType, defenderTypes) {
@@ -169,6 +173,8 @@ class BattleSystem {
     }
 
     async searchNext() {
+        this.stop(); // Clear any pending timeouts before searching
+
         if (this.state.party.every(p => p.currentHp <= 0)) {
             this.handleWipeout();
             return;
@@ -355,6 +361,17 @@ class BattleSystem {
 
     scheduleTurn() {
         if (!this.activeEncounter || this.activeEncounter.currentHp <= 0) return;
+
+        // If it's the start of an encounter, wait for movement animation
+        if (!this.activeEncounter.hasMovedIn) {
+            this.activeEncounter.hasMovedIn = true;
+            this.combatLoop = setTimeout(() => {
+                this.scheduleTurn();
+            }, 2000); // 2 second walk animation
+            return;
+        }
+
+        if (!this.activeEncounter || this.activeEncounter.currentHp <= 0) return;
         const leader = this.state.party[0];
         if (leader.currentHp <= 0) {
             this.handleFaint();
@@ -402,25 +419,33 @@ class BattleSystem {
         const eff = this.getTypeEffectiveness(move.type, defender.types);
 
         const hit = mathEngine.calculateDamage(attacker.level, move.power, atkStat, defStat, eff, attacker.quality);
-        defender.currentHp -= hit.damage;
 
-        // Show floating damage
+        // Setup projectile and delay damage
         const targetSide = attacker === leader ? 'enemy' : 'player';
-        if (typeof window.showDamage === 'function') {
-            window.showDamage(targetSide, hit.damage, hit.isCritical, move.name, move.type, eff);
+
+        if (typeof window.triggerCombatAnimation === 'function') {
+             window.triggerCombatAnimation(attacker === leader ? 'player' : 'enemy', move.type, attacker.types ? attacker.types[0] : 'Normal');
         }
 
-        this.updateUI();
-
-        if (defender.currentHp <= 0) {
-            if (defender === this.activeEncounter) {
-                this.handleEnemyDefeat();
-            } else {
-                this.handleFaint();
+        // Delay HP reduction to sync with projectile (approx 300ms)
+        this.damageTimeout = setTimeout(() => {
+            defender.currentHp -= hit.damage;
+            if (typeof window.showDamage === 'function') {
+                window.showDamage(targetSide, hit.damage, hit.isCritical, move.name, move.type, eff);
             }
-        } else {
-            this.scheduleNextStrike(attacker, defender);
-        }
+            this.updateUI();
+
+            if (defender.currentHp <= 0) {
+                if (defender === this.activeEncounter) {
+                    this.handleEnemyDefeat();
+                } else {
+                    this.handleFaint();
+                }
+            } else {
+                this.scheduleNextStrike(attacker, defender);
+            }
+        }, 300);
+        return; // Early return because rest of execution is in the timeout
     }
 
     scheduleNextStrike(attacker, defender) {
@@ -460,9 +485,31 @@ class BattleSystem {
         return false;
     }
 
-    throwPokeball() {
+
+
+    handleEnemyDefeat() {
+        const leader = this.state.party[0];
+        const ev = this.activeEncounter.ev;
+
+        // Auto Throw Pokeball logic (disable in gyms)
+        if (this.state.settings.autoCatch && (!this.gymState || !this.gymState.isActive) && typeof window.triggerCatchAnimation === 'function') {
+            const catchResult = this.throwPokeballResult(); // Use new function that returns object
+            if (catchResult.threw) {
+                // Pause loop for animation
+                this.stop();
+                window.triggerCatchAnimation(catchResult.ballName, catchResult.caught, () => {
+                    this.finalizeEnemyDefeat(ev, catchResult.caught);
+                });
+                return;
+            }
+        }
+
+                this.finalizeEnemyDefeat(ev, false);
+    }
+
+    throwPokeballResult() {
         let tier = this.state.settings.activeBallTier;
-        if (tier < 0) return false; // None selected
+        if (tier < 0) return { threw: false }; // None selected
 
         let ballName = this.state.config.balance.items.pokeballs[tier].name;
 
@@ -475,7 +522,7 @@ class BattleSystem {
             if (tier >= 0) ballName = this.state.config.balance.items.pokeballs[tier].name;
         }
 
-        if (tier < 0) return false; // No balls left
+        if (tier < 0) return { threw: false }; // No balls left
 
         let multiplier = this.state.config.balance.items.pokeballs[tier].multiplier;
 
@@ -496,19 +543,16 @@ class BattleSystem {
         }
 
         const chance = mathEngine.calculateCatchChance(this.activeEncounter.bst, this.activeEncounter.level, multiplier);
+        const caught = (Math.random() * 100) <= chance;
 
-        return (Math.random() * 100) <= chance;
+        return { threw: true, ballName: ballName, caught: caught };
     }
 
-    handleEnemyDefeat() {
+    finalizeEnemyDefeat(ev, caught) {
         const leader = this.state.party[0];
-        const ev = this.activeEncounter.ev;
 
-        // Auto Throw Pokeball logic (disable in gyms)
-        if (this.state.settings.autoCatch && (!this.gymState || !this.gymState.isActive)) {
-            const caught = this.throwPokeball();
-            if (caught) {
-                let caughtPokemon = JSON.parse(JSON.stringify(this.activeEncounter));
+        if (caught) {
+            let caughtPokemon = JSON.parse(JSON.stringify(this.activeEncounter));
                 // Fix the level 100 jump bug by setting xp explicitly to the exact minimum needed for their captured level
                 caughtPokemon.xp = mathEngine.calculateTotalXP(caughtPokemon.level);
                 this.state.storage.unshift(caughtPokemon);
@@ -527,7 +571,6 @@ class BattleSystem {
                      }
                 }
                 // console.log(`Caught ${this.activeEncounter.name}!`);
-            }
         }
 
         // Daycare logic
@@ -630,6 +673,9 @@ class BattleSystem {
         const fainted = this.state.party.shift();
         this.state.party.push(fainted);
 
+        if (this.combatLoop) clearTimeout(this.combatLoop);
+        if (this.damageTimeout) clearTimeout(this.damageTimeout);
+
         if (this.state.party[0].currentHp <= 0) {
             this.handleWipeout();
         } else {
@@ -675,8 +721,9 @@ class BattleSystem {
             this.updateUI();
 
             // if in battle, resetting turn timers
-            if (this.activeEncounter && this.combatLoop) {
-                clearTimeout(this.combatLoop);
+            if (this.activeEncounter) {
+                if (this.combatLoop) clearTimeout(this.combatLoop);
+                if (this.damageTimeout) clearTimeout(this.damageTimeout);
                 this.scheduleTurn();
             }
         }
