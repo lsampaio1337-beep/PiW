@@ -27,7 +27,7 @@ export function showBackpack() {
     }
 
     let html = `
-        <div onclick="document.getElementById('modal-overlay').style.display='none'" style="position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; padding: 20px; box-sizing: border-box; color: white; overflow: hidden;">
+        <div onclick="document.getElementById('modal-overlay').style.display='none'" style="position: fixed; top: 0; left: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100vw; height: 100vh; padding: 20px; box-sizing: border-box; color: white; overflow: hidden; z-index: 9999;">
             <style>
                 .backpack-pocket {
                     cursor: pointer;
@@ -42,7 +42,9 @@ export function showBackpack() {
                 }
             </style>
 
-            <div style="position: relative; height: 100%; max-height: 100%; width: 100%; display: flex; align-items: center; justify-content: center; cursor: default; pointer-events: none;">
+            <div onclick="document.getElementById('modal-overlay').style.display='none'" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;"></div>
+
+            <div style="position: relative; height: 100%; max-height: 100%; width: 100%; display: flex; align-items: center; justify-content: center; cursor: default; pointer-events: none; z-index: 2;">
 
                 <!-- Inner container to hold image and preserve aspect ratio -->
                 <div onclick="event.stopPropagation(); document.getElementById('backpack-content-area').style.display='none'" style="position: relative; height: 100%; max-height: 100vh; aspect-ratio: 1279 / 1350; pointer-events: auto;">

@@ -21,9 +21,9 @@ function renderSlotUI(p, listName, origIndex, isDraggable) {
     return `
         <div class="${slotClass}" ${dataAttr} style="border: 1px solid #777; aspect-ratio: 1 / 1.5; display: flex; flex-direction: column; align-items: center; padding: 2px; box-sizing: border-box; background: rgba(0,0,0,0.5); position: relative; container-type: inline-size; ${cursorStyle}" title="Q=${p.quality.toFixed(2)} & ∑IV=${sumIV}" ${dragAttr}>
             <span style="position: absolute; top: 0; left: 0; font-size: 10cqw; background: black; padding: 2cqw; z-index: 2;">${p._tag || ''}</span>
-            <div onclick="event.stopPropagation(); window.showPokemonStats(${origIndex}, '${listName.toLowerCase()}')" style="position: absolute; top: 2cqw; right: 2cqw; cursor: pointer; background: #34495e; color: white; border-radius: 50%; width: 18cqw; height: 18cqw; text-align: center; display: flex; align-items: center; justify-content: center; font-size: 12cqw; font-weight: bold; z-index: 2;" title="View Info">i</div>
-            <img src="${imgSrc}" style="height: 60%; width: 100%; object-fit: contain; margin-top: 5cqw;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
-            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 11cqw; line-height: 1.2; width: 100%; margin-top: auto; margin-bottom: 2cqw;">
+            <div onclick="event.stopPropagation(); window.showPokemonStats(${origIndex}, '${listName.toLowerCase()}')" style="position: absolute; top: 2cqw; right: 2cqw; cursor: pointer; background: #34495e; color: white; border-radius: 50%; width: 18cqw; height: 18cqw; text-align: center; display: flex; align-items: center; justify-content: center; font-size: 12cqw; font-weight: bold; z-index: 3;" title="View Info">i</div>
+            <img src="${imgSrc}" style="position: absolute; top: 5%; height: 75%; width: 100%; object-fit: contain; z-index: 1;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: flex-end; font-size: 11cqw; line-height: 1.2; width: 100%; height: 100%; padding-bottom: 2cqw; z-index: 2; text-shadow: 1px 1px 2px black, -1px -1px 2px black, 1px -1px 2px black, -1px 1px 2px black; pointer-events: none;">
                 <div>Lv.${p.level}</div>
                 <div>Q:${p.quality.toFixed(2)}</div>
                 <div>∑IV:${sumIV}</div>
