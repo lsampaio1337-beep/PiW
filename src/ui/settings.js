@@ -1,5 +1,6 @@
 import { state, globals } from '../state.js';
 import { updateUI, showModal } from '../ui.js';
+import * as mathEngine from '../mathEngine.js';
 
 export function showSettings() {
     const battleSystem = globals.battleSystem;
@@ -32,6 +33,7 @@ export function showSettings() {
         <hr>
 
         <button onclick="window.exportLog()">Export Save Log</button>
+        <button onclick="window.activateCheat()" style="margin-left: 10px; background-color: #c0392b; color: white;">Cheat</button>
     `;
     showModal("Settings", settingsHTML);
 }
@@ -111,4 +113,87 @@ export function exportLog() {
     if (state.storageRef) {
         state.storageRef.exportLog(state);
     }
+}
+
+export function activateCheat() {
+    // Set money
+    state.trainer.money = 25000000000;
+
+    // Set 1,000,000 of each ball, potion, stone
+    for (let key in state.backpack.pokeballs) {
+        state.backpack.pokeballs[key] = 1000000;
+    }
+    for (let key in state.backpack.potions) {
+        state.backpack.potions[key] = 1000000;
+    }
+    for (let key in state.backpack.stones) {
+        state.backpack.stones[key] = 1000000;
+    }
+
+    // Generate Shiny Mewtwo (ID 150)
+    const mewtwoData = state.config.pokemonData.find(p => p.id === 150);
+    if (mewtwoData) {
+        const level = 100;
+        const qName = "Shiny";
+        const qVal = 2.0;
+        const ivs = { hp: 100, atk: 100, def: 100, spa: 100, spd: 100, spe: 100 };
+
+        const stats = {
+            hp: mathEngine.calculateHP(mewtwoData.hp, ivs.hp, level, qVal),
+            atk: mathEngine.calculateStat(mewtwoData.atk, ivs.atk, level, qVal),
+            def: mathEngine.calculateStat(mewtwoData.def, ivs.def, level, qVal),
+            spa: mathEngine.calculateStat(mewtwoData.spa, ivs.spa, level, qVal),
+            spd: mathEngine.calculateStat(mewtwoData.spd, ivs.spd, level, qVal),
+            spe: mathEngine.calculateStat(mewtwoData.spe, ivs.spe, level, qVal)
+        };
+
+        const bst = mewtwoData.hp + mewtwoData.atk + mewtwoData.def + mewtwoData.spa + mewtwoData.spd + mewtwoData.spe;
+        const totalIV = 600;
+
+        let learned = [];
+        if (mewtwoData.learnset) {
+            for (const ls of mewtwoData.learnset) {
+                if (level >= ls.level) {
+                    if (state.config.moves[ls.move]) {
+                        const moveData = JSON.parse(JSON.stringify(state.config.moves[ls.move]));
+                        moveData.name = ls.move;
+                        learned.push(moveData);
+                    }
+                }
+            }
+        }
+        const moves = learned.slice(-4);
+        const xp = mathEngine.calculateTotalXP(level);
+
+        const createMewtwo = () => {
+            return {
+                id: mewtwoData.id,
+                name: mewtwoData.name,
+                types: mewtwoData.types,
+                level: level,
+                xp: xp,
+                qualityName: qName,
+                quality: qVal,
+                ivs: { ...ivs },
+                currentStats: { ...stats },
+                maxHp: stats.hp,
+                currentHp: stats.hp,
+                ev: mathEngine.calculateEV(bst, level, qVal, totalIV),
+                bst: bst,
+                moves: JSON.parse(JSON.stringify(moves))
+            };
+        };
+
+        const spaces = 6 - state.party.length;
+        if (spaces >= 2) {
+            state.party.push(createMewtwo());
+            state.party.push(createMewtwo());
+        } else if (spaces === 1) {
+            state.party.push(createMewtwo());
+        }
+    }
+
+    updateUI();
+    const overlay = document.getElementById('modal-overlay');
+    if (overlay) overlay.style.display = 'none';
 }
