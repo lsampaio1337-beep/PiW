@@ -71,8 +71,8 @@ const mapCoordinates = {
   },
   "route_5": {
     "name": "Route 5",
-    "x": 64.79,
-    "y": 24.25
+    "x": 68.35,
+    "y": 24.97
   },
   "vermilion_gym": {
     "name": "Vermilion Gym",
@@ -243,6 +243,11 @@ const mapCoordinates = {
     "name": "Trade With a Friend",
     "x": 22.97,
     "y": 62.84
+  },
+  "daycare": {
+    "name": "Daycare",
+    "x": 61.58,
+    "y": 25.05
   }
 };
 export default mapCoordinates;
