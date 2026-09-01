@@ -133,7 +133,7 @@ window.claimOakTaskReward = function(type) {
     if (type === 'shinySeen') state.stats.shinySeenTaskTier = (state.stats.shinySeenTaskTier || 0) + 1;
     if (type === 'shinyCaught') state.stats.shinyCaughtTaskTier = (state.stats.shinyCaughtTaskTier || 0) + 1;
     if (type === 'iv') state.stats.ivTaskTier = (state.stats.ivTaskTier || 0) + 1;
-    window.showOakTasksModal();
+    window.showOakLabModal();
 };
 
 window.cheatCompleteOakTask = function(type) {
@@ -163,14 +163,20 @@ window.cheatCompleteOakTask = function(type) {
             state.stats[statName] = Math.max(state.stats[statName] || 0, oakTasks.iv[tier].req);
         }
     }
-    window.showOakTasksModal();
+    window.showOakLabModal();
 };
 
-window.showOakTasksModal = function() {
-    let html = `<div style="display:flex; flex-direction:column; gap:15px; text-align:left;">`;
+window.showOakLabModal = function() {
+    let html = `<div style="display:flex; flex-direction:column; gap:15px; text-align:left; max-height: 70vh; overflow-y: auto; padding-right: 10px;">`;
 
-    const renderTask = (type, currentVal, tierIdx, taskList) => {
-        if (tierIdx >= taskList.length) return ""; // All tasks in this category complete
+    const renderActiveTask = (type, currentVal, tierIdx, taskList) => {
+        if (tierIdx >= taskList.length) {
+            return `
+                <div style="margin-bottom: 10px;">
+                    <span style="color: #ccc; font-style: italic;">Task: Completed</span>
+                </div>
+            `;
+        }
 
         let task = taskList[tierIdx];
         let isComplete = currentVal >= task.req;
@@ -195,7 +201,7 @@ window.showOakTasksModal = function() {
         }
 
         return `
-            <div style="border: 1px solid #555; padding: 10px; border-radius: 5px; background-color: rgba(0,0,0,0.5);">
+            <div style="margin-bottom: 10px;">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <span>${task.text}</span>
                     <button onclick="window.cheatCompleteOakTask('${type}')" style="padding: 2px 5px; font-size: 10px; cursor: pointer; background: #d9534f; color: white; border: none; border-radius: 3px;">Cheat Complete</button>
@@ -205,51 +211,90 @@ window.showOakTasksModal = function() {
         `;
     };
 
-    html += renderTask('q', state.stats.epicCaptures || 0, state.stats.qTaskTier || 0, oakTasks.q);
-    html += renderTask('c', state.stats.caught || 0, state.stats.cTaskTier || 0, oakTasks.c);
-    html += renderTask('shinySeen', state.stats.shiniesSeen || 0, state.stats.shinySeenTaskTier || 0, oakTasks.shinySeen);
-    html += renderTask('shinyCaught', state.stats.shiniesCaught || 0, state.stats.shinyCaughtTaskTier || 0, oakTasks.shinyCaught);
+    const renderCard = (title, type, currentVal, tierIdx, taskList, keepAllRewards) => {
+        let taskHtml = renderActiveTask(type, currentVal, tierIdx, taskList);
 
-    // IV Task check
+        let rewardsHtml = "";
+        if (tierIdx > 0) {
+            if (keepAllRewards) {
+                // Shiny style - keep all
+                for (let i = 0; i < tierIdx; i++) {
+                    rewardsHtml += `
+                        <div style="font-size: 12px; margin-top: 5px; padding-left: 5px; border-left: 2px solid #4CAF50;">
+                            <b>${taskList[i].reward}</b>: <span style="color: #4CAF50;">${taskList[i].effect}</span>
+                        </div>
+                    `;
+                }
+            } else {
+                // Normal style - only show highest tier
+                let topReward = taskList[tierIdx - 1];
+                rewardsHtml += `
+                    <div style="font-size: 12px; margin-top: 5px; padding-left: 5px; border-left: 2px solid #4CAF50;">
+                        <b>${topReward.reward}</b>: <span style="color: #4CAF50;">${topReward.effect}</span>
+                    </div>
+                `;
+            }
+        }
+
+        return `
+            <div style="border: 1px solid #555; padding: 10px; border-radius: 5px; background-color: rgba(0,0,0,0.5);">
+                <h3 style="margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; font-size: 16px;">${title}</h3>
+                ${taskHtml}
+                ${rewardsHtml}
+            </div>
+        `;
+    };
+
+    // Quality Card
+    html += renderCard("Quality Tasks", 'q', state.stats.epicCaptures || 0, state.stats.qTaskTier || 0, oakTasks.q, false);
+
+    // Catch Card
+    html += renderCard("Catch Tasks", 'c', state.stats.caught || 0, state.stats.cTaskTier || 0, oakTasks.c, false);
+
+    // IV Card
     let ivTier = state.stats.ivTaskTier || 0;
     let ivCurrentVal = 0;
     if (ivTier < oakTasks.iv.length) {
         ivCurrentVal = state.stats[oakTasks.iv[ivTier].stat] || 0;
+    } else if (oakTasks.iv.length > 0) {
+        ivCurrentVal = state.stats[oakTasks.iv[oakTasks.iv.length - 1].stat] || 0; // fallback if completed
     }
-    html += renderTask('iv', ivCurrentVal, ivTier, oakTasks.iv);
+    html += renderCard("IV Tasks", 'iv', ivCurrentVal, ivTier, oakTasks.iv, false);
 
-    html += `</div>`;
-    showModal("Oak Tasks", html);
-};
+    // Shiny Card (Combined seen and caught, keeps all rewards)
+    let shinySeenTaskHtml = renderActiveTask('shinySeen', state.stats.shiniesSeen || 0, state.stats.shinySeenTaskTier || 0, oakTasks.shinySeen);
+    let shinyCaughtTaskHtml = renderActiveTask('shinyCaught', state.stats.shiniesCaught || 0, state.stats.shinyCaughtTaskTier || 0, oakTasks.shinyCaught);
 
-window.showOakRewardsModal = function() {
-    let html = `<div style="display:flex; flex-direction:column; gap:10px; text-align:left;">`;
+    let shinyRewardsHtml = "";
+    let seenTier = state.stats.shinySeenTaskTier || 0;
+    let caughtTier = state.stats.shinyCaughtTaskTier || 0;
 
-    let hasRewards = false;
-
-    const renderRewards = (tierIdx, taskList) => {
-        let h = "";
-        for (let i = 0; i < tierIdx; i++) {
-            hasRewards = true;
-            h += `<div style="border: 1px solid #555; padding: 8px; border-radius: 5px; background-color: rgba(0,0,0,0.5);">
-                <b>${taskList[i].reward}</b>: <span style="color: #4CAF50;">${taskList[i].effect}</span>
-            </div>`;
-        }
-        return h;
-    };
-
-    html += renderRewards(state.stats.qTaskTier || 0, oakTasks.q);
-    html += renderRewards(state.stats.cTaskTier || 0, oakTasks.c);
-    html += renderRewards(state.stats.shinySeenTaskTier || 0, oakTasks.shinySeen);
-    html += renderRewards(state.stats.shinyCaughtTaskTier || 0, oakTasks.shinyCaught);
-    html += renderRewards(state.stats.ivTaskTier || 0, oakTasks.iv);
-
-    if (!hasRewards) {
-        html += `<div>No rewards unlocked yet.</div>`;
+    for (let i = 0; i < seenTier; i++) {
+        shinyRewardsHtml += `
+            <div style="font-size: 12px; margin-top: 5px; padding-left: 5px; border-left: 2px solid #4CAF50;">
+                <b>${oakTasks.shinySeen[i].reward}</b>: <span style="color: #4CAF50;">${oakTasks.shinySeen[i].effect}</span>
+            </div>
+        `;
+    }
+    for (let i = 0; i < caughtTier; i++) {
+        shinyRewardsHtml += `
+            <div style="font-size: 12px; margin-top: 5px; padding-left: 5px; border-left: 2px solid #4CAF50;">
+                <b>${oakTasks.shinyCaught[i].reward}</b>: <span style="color: #4CAF50;">${oakTasks.shinyCaught[i].effect}</span>
+            </div>
+        `;
     }
 
+    html += `
+        <div style="border: 1px solid #555; padding: 10px; border-radius: 5px; background-color: rgba(0,0,0,0.5);">
+            <h3 style="margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; font-size: 16px;">Shiny Tasks</h3>
+            ${shinySeenTaskHtml}
+            ${shinyCaughtTaskHtml}
+            ${shinyRewardsHtml}
+        </div>
+    `;
+
     html += `</div>`;
-    showModal("Oak Rewards", html);
+    showModal("Oak Lab", html);
 };
 
 export function renderOakLab() {
@@ -267,8 +312,7 @@ export function renderOakLab() {
             <p style="font-size: 12px; color: #ccc; margin-bottom: 15px;">Complete tasks to unlock global bonuses.</p>
 
             <div style="display: flex; flex-direction: column; gap: 10px;">
-                <button onclick="window.showOakTasksModal()" style="padding: 10px; font-size: 16px; cursor: pointer;">View Tasks</button>
-                <button onclick="window.showOakRewardsModal()" style="padding: 10px; font-size: 16px; cursor: pointer;">View Rewards</button>
+                <button onclick="window.showOakLabModal()" style="padding: 10px; font-size: 16px; cursor: pointer;">View Tasks & Rewards</button>
             </div>
         </div>
     `;
