@@ -322,14 +322,14 @@ class BattleSystem {
             pokemonBase = this.state.config.pokemonData.find(p => p.id === selectedSpawn.pokemonId);
             level = Math.floor(Math.random() * (selectedSpawn.maxLevel - selectedSpawn.minLevel + 1)) + selectedSpawn.minLevel;
 
-            q = mathEngine.generateQuality(this.state.stats.caught, this.state.stats.shiniesSeen);
+            q = mathEngine.generateQuality(this.state.stats);
             if (q.name === "Shiny") {
-                this.state.stats.shiniesSeen++;
+                this.state.stats.shiniesSeen = (this.state.stats.shiniesSeen || 0) + 1;
                 if (!this.state.stats.seenShiniesSpecies) this.state.stats.seenShiniesSpecies = {};
                 this.state.stats.seenShiniesSpecies[pokemonBase.name] = true;
             }
 
-            ivs = mathEngine.generateIVs(this.state.stats.caught, this.state.stats.shiniesCaught, q.name === "Shiny");
+            ivs = mathEngine.generateIVs(this.state.stats, q.name === "Shiny");
 
             // Route 1 Level Cap
             if (this.state.currentRoute === "Route 1") {
@@ -521,23 +521,7 @@ class BattleSystem {
 
         let multiplier = this.state.config.balance.items.pokeballs[tier].multiplier;
 
-        // Catch Rate Booster based on caps
-        let caps = this.state.stats.caught;
-        let catchBoost = 0;
-        if (caps >= 25000) catchBoost = 0.25;
-        else if (caps >= 10000) catchBoost = 0.20;
-        else if (caps >= 5000) catchBoost = 0.15;
-        else if (caps >= 2500) catchBoost = 0.10;
-        else if (caps >= 1000) catchBoost = 0.05;
-
-        multiplier *= (1 + catchBoost);
-
-        // Shiny catch multiplier
-        if (this.activeEncounter.qualityName === "Shiny" && this.state.stats.shiniesSeen >= 10) {
-            multiplier *= 2.0;
-        }
-
-        const chance = mathEngine.calculateCatchChance(this.activeEncounter.bst, this.activeEncounter.level, multiplier);
+        const chance = mathEngine.calculateCatchChance(this.activeEncounter.bst, this.activeEncounter.level, multiplier, this.state.stats, this.activeEncounter.qualityName === "Shiny");
 
         return (Math.random() * 100) <= chance;
     }
@@ -555,7 +539,15 @@ class BattleSystem {
                 caughtPokemon.xp = mathEngine.calculateTotalXP(caughtPokemon.level);
                 this.state.storage.unshift(caughtPokemon);
                 this.state.stats.caught++;
-                if (this.activeEncounter.qualityName === "Shiny") this.state.stats.shiniesCaught++;
+                if (this.activeEncounter.qualityName === "Shiny") this.state.stats.shiniesCaught = (this.state.stats.shiniesCaught || 0) + 1;
+                if (this.activeEncounter.qualityName === "Epic") this.state.stats.epicCaptures = (this.state.stats.epicCaptures || 0) + 1;
+
+                let sumIV = caughtPokemon.ivs.hp + caughtPokemon.ivs.atk + caughtPokemon.ivs.def + caughtPokemon.ivs.spa + caughtPokemon.ivs.spd + caughtPokemon.ivs.spe;
+                if (sumIV < 300) this.state.stats.caughtIVUnder300 = (this.state.stats.caughtIVUnder300 || 0) + 1;
+                if (sumIV < 350) this.state.stats.caughtIVUnder350 = (this.state.stats.caughtIVUnder350 || 0) + 1;
+                if (sumIV < 400) this.state.stats.caughtIVUnder400 = (this.state.stats.caughtIVUnder400 || 0) + 1;
+                if (sumIV < 450) this.state.stats.caughtIVUnder450 = (this.state.stats.caughtIVUnder450 || 0) + 1;
+                if (sumIV < 500) this.state.stats.caughtIVUnder500 = (this.state.stats.caughtIVUnder500 || 0) + 1;
 
                 // Track species catches for unlocks
                 if (!this.state.stats.caughtSpecies) this.state.stats.caughtSpecies = {};

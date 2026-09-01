@@ -95,11 +95,90 @@ export function showModal(title, htmlContent) {
     contentPanel.innerHTML = `<h2>${title}</h2>${htmlContent}<br><br><button onclick="document.getElementById('modal-overlay').style.display='none'">Close</button>`;
 }
 
+export function renderOakLab() {
+    const oakLabDiv = document.getElementById("view-prof-oak-lab");
+    if (!oakLabDiv) return;
+
+    // Check if player has pokemon
+    if (state.party.length === 0 && state.storage.length === 0) {
+        return; // still selecting starter, handled in index.html
+    }
+
+    const s = state.stats;
+    const epicCaps = s.epicCaptures || 0;
+    const caught = s.caught || 0;
+    const shiniesSeen = s.shiniesSeen || 0;
+    const shiniesCaught = s.shiniesCaught || 0;
+
+    let qBoostTier = "None"; let qProg = 0; let qMax = 50;
+    if (epicCaps >= 1000) { qBoostTier = "Master (+100%)"; qProg = epicCaps; qMax = 1000; }
+    else if (epicCaps >= 500) { qBoostTier = "Excellent (+70%)"; qProg = epicCaps; qMax = 1000; }
+    else if (epicCaps >= 250) { qBoostTier = "Good (+45%)"; qProg = epicCaps; qMax = 500; }
+    else if (epicCaps >= 100) { qBoostTier = "Regular (+30%)"; qProg = epicCaps; qMax = 250; }
+    else if (epicCaps >= 50) { qBoostTier = "Low (+15%)"; qProg = epicCaps; qMax = 100; }
+    else { qProg = epicCaps; }
+
+    let catchBoostTier = "None"; let cProg = 0; let cMax = 1000;
+    if (caught >= 25000) { catchBoostTier = "Master (+100%)"; cProg = caught; cMax = 25000; }
+    else if (caught >= 10000) { catchBoostTier = "Excellent (+70%)"; cProg = caught; cMax = 25000; }
+    else if (caught >= 5000) { catchBoostTier = "Good (+45%)"; cProg = caught; cMax = 10000; }
+    else if (caught >= 2500) { catchBoostTier = "Regular (+25%)"; cProg = caught; cMax = 5000; }
+    else if (caught >= 1000) { catchBoostTier = "Low (+10%)"; cProg = caught; cMax = 2500; }
+    else { cProg = caught; }
+
+    const renderBar = (label, current, max, tierText) => {
+        const pct = Math.min(100, Math.floor((current / max) * 100));
+        return `
+            <div style="margin-bottom: 10px; text-align: left;">
+                <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 2px;">
+                    <span><b>${label}</b>: ${tierText}</span>
+                    <span>${current} / ${max}</span>
+                </div>
+                <div style="width: 100%; background-color: #333; border-radius: 4px; overflow: hidden; height: 12px; border: 1px solid #555;">
+                    <div style="width: ${pct}%; background-color: #4CAF50; height: 100%;"></div>
+                </div>
+            </div>
+        `;
+    };
+
+    let ivStatsHtml = `
+        <h3 style="margin-top: 15px; border-bottom: 1px solid #555; padding-bottom: 5px;">IV Boosters</h3>
+        ${renderBar('IV < 300 (Low +5%)', s.caughtIVUnder300 || 0, 500, (s.caughtIVUnder300||0)>=500 ? "Unlocked" : "Locked")}
+        ${renderBar('IV < 350 (Regular +10%)', s.caughtIVUnder350 || 0, 1000, (s.caughtIVUnder350||0)>=1000 ? "Unlocked" : "Locked")}
+        ${renderBar('IV < 400 (Good +15%)', s.caughtIVUnder400 || 0, 2500, (s.caughtIVUnder400||0)>=2500 ? "Unlocked" : "Locked")}
+        ${renderBar('IV < 450 (Excellent +20%)', s.caughtIVUnder450 || 0, 5000, (s.caughtIVUnder450||0)>=5000 ? "Unlocked" : "Locked")}
+        ${renderBar('IV < 500 (Master +25%)', s.caughtIVUnder500 || 0, 10000, (s.caughtIVUnder500||0)>=10000 ? "Unlocked" : "Locked")}
+    `;
+
+    let shinyStatsHtml = `
+        <h3 style="margin-top: 15px; border-bottom: 1px solid #555; padding-bottom: 5px;">Shiny Boosters</h3>
+        ${renderBar('Regular Shiny (+1 Roll)', shiniesSeen, 1, shiniesSeen>=1 ? "Unlocked" : "Locked")}
+        ${renderBar('Good Shiny (+2 Rolls)', shiniesSeen, 3, shiniesSeen>=3 ? "Unlocked" : "Locked")}
+        ${renderBar('Catch Shiny (4x Rate)', shiniesSeen, 10, shiniesSeen>=10 ? "Unlocked" : "Locked")}
+        ${renderBar('Stronger IV (+25%)', shiniesCaught, 5, shiniesCaught>=5 ? "Unlocked" : "Locked")}
+    `;
+
+    oakLabDiv.innerHTML = `
+        <div style="background-color: rgba(0,0,0,0.85); display: inline-block; padding: 20px; margin-top: 20px; border-radius: 8px; width: 400px; color: white;">
+            <h2 style="margin-top:0;">Professor Oak Lab</h2>
+            <p style="font-size: 12px; color: #ccc; margin-bottom: 15px;">Track your global capture milestones to unlock permanent bonuses.</p>
+
+            <h3 style="border-bottom: 1px solid #555; padding-bottom: 5px;">Global Boosters</h3>
+            ${renderBar('Quality Booster (Epic Caps)', qProg, qMax, qBoostTier)}
+            ${renderBar('Catch Rate Booster', cProg, cMax, catchBoostTier)}
+
+            ${shinyStatsHtml}
+            ${ivStatsHtml}
+        </div>
+    `;
+}
+
 export function switchView(viewName) {
     document.querySelectorAll('.game-view').forEach(el => el.style.display = 'none');
 
     if (viewName === 'PROF_OAK_LAB') {
         document.getElementById('view-prof-oak-lab').style.display = 'block';
+        renderOakLab();
     } else if (viewName === 'BATTLE_ARENA') {
         document.getElementById('view-battle-arena').style.display = 'flex';
         document.getElementById('view-battle-arena').style.flexDirection = 'column';
@@ -176,18 +255,8 @@ function selectStarter(id) {
     state.currentRoute = "Professor Oak Lab";
     switchView("PROF_OAK_LAB");
 
-    // Clear out the starter selection UI since they picked one
-    const oakLabDiv = document.getElementById("view-prof-oak-lab");
-    if (oakLabDiv) {
-        oakLabDiv.innerHTML = `
-            <div style="background-color: rgba(0,0,0,0.5); display: inline-block; padding: 10px; margin-top: 50px; border-radius: 8px;">
-                <h2>Professor Oak Lab</h2>
-                <p>You have received your starter Pokémon! Explore Kanto by opening your Map.</p>
-            </div>
-        `;
-    }
-
     startGame();
+    renderOakLab(); // Renders the new Oak Lab UI now that we have a party
 }
 
 function startGame() {
@@ -222,20 +291,9 @@ async function init() {
                 Object.assign(state, saved);
                 await loadConfigs();
 
-                // Bypass Oak if player already has Pokemon
-                if (state.party.length > 0 || state.storage.length > 0) {
-                    const oakLabDiv = document.getElementById("view-prof-oak-lab");
-                    if (oakLabDiv) {
-                        oakLabDiv.innerHTML = `
-                            <div style="background-color: rgba(0,0,0,0.5); display: inline-block; padding: 10px; margin-top: 50px; border-radius: 8px;">
-                                <h2>Professor Oak Lab</h2>
-                                <p>You already have your Pokémon! Explore Kanto by opening your Map.</p>
-                            </div>
-                        `;
-                    }
-                }
-
                 startGame();
+
+                // If player already has Pokemon, Oak Lab will render the bonuses next time it's visited.
 
                 // Switch view based on saved route
                 if (state.currentRoute === "Professor Oak Lab") {
