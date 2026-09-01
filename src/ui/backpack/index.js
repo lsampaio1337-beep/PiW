@@ -35,13 +35,13 @@ export function showBackpack() {
             <div onclick="document.getElementById('backpack-content-area').style.display='none'" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2;">
                 <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
                     <!-- Purple Pokeballs Pocket -->
-                    <circle class="backpack-pocket" onclick="event.stopPropagation(); window.renderBackpackTab('pokeballs')" cx="33.84" cy="48.65" r="14.18"></circle>
+                    <circle class="backpack-pocket" onclick="event.stopPropagation(); window.renderBackpackTab('pokeballs')" cx="34.12" cy="48.82" r="14.18"></circle>
                     <!-- Yellow Pokemon Pocket -->
-                    <circle class="backpack-pocket" onclick="event.stopPropagation(); window.renderBackpackTab('pokemon')" cx="64.80" cy="48.78" r="14.23"></circle>
+                    <circle class="backpack-pocket" onclick="event.stopPropagation(); window.renderBackpackTab('pokemon')" cx="65.61" cy="49.20" r="14.28"></circle>
                     <!-- Green Potions Pocket -->
-                    <circle class="backpack-pocket" onclick="event.stopPropagation(); window.renderBackpackTab('potions')" cx="34.72" cy="77.60" r="14.09"></circle>
+                    <circle class="backpack-pocket" onclick="event.stopPropagation(); window.renderBackpackTab('potions')" cx="34.20" cy="79.01" r="14.21"></circle>
                     <!-- Cyan Stones Pocket -->
-                    <circle class="backpack-pocket" onclick="event.stopPropagation(); window.renderBackpackTab('stones')" cx="65.79" cy="80.01" r="14.18"></circle>
+                    <circle class="backpack-pocket" onclick="event.stopPropagation(); window.renderBackpackTab('stones')" cx="65.78" cy="79.39" r="14.20"></circle>
                 </svg>
             </div>
 
