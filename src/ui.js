@@ -40,6 +40,10 @@ window.addXp = addXp;
 window.exportLog = exportLog;
 window.buyItem = buyItem;
 window.dragStart = dragStart;
+window.completeChallenge = function() {
+    state.stats.completedChallenges = (state.stats.completedChallenges || 0) + 1;
+    updateUI();
+};
 window.dragOver = dragOver;
 window.handleDrop = handleDrop;
 window.showDamage = showDamage;
