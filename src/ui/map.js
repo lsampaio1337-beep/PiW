@@ -23,11 +23,22 @@ export function showMap() {
 
             let markerImg = './Assets/Extra/Spot.png';
             let showCheckmark = false;
+            let isClickable = true;
+
             if (locationId === 'professor_oak_lab') markerImg = './Assets/Extra/Spot_Oak.png';
             else if (locationId === 'pokemon_center___market') markerImg = './Assets/Extra/Spot_PCPM.png';
             else if (locationId === 'indigo_plateu') markerImg = './Assets/Extra/Spot_E4.png';
             else if (locationId === 'safari_zone') markerImg = './Assets/Extra/Spot_Safariball.png';
-            else if (locationId === 'celadon_s_casino') markerImg = './Assets/Extra/Spot_Casino.png';
+            else if (locationId === 'celadon_s_casino') { markerImg = './Assets/Map/Spot_Casino.png'; isClickable = false; }
+            else if (locationId === 'diglett_s_cave') { markerImg = './Assets/Map/Spot_Cave.png'; isClickable = false; }
+            else if (['mount_moon', 'rock_tunnel', 'cerulean_cave', 'seafoam_islands'].includes(locationId)) markerImg = './Assets/Map/Spot_Cave.png';
+            else if (locationId === 'small_fishing_spot') markerImg = './Assets/Map/Spot_Fishing1.png';
+            else if (locationId === 'big_fishing_spot') markerImg = './Assets/Map/Spot_Fishing2.png';
+            else if (locationId === 'fighting_dojo') markerImg = './Assets/Map/Spot_FightingDojo.png';
+            else if (locationId === 'fossil_revival') markerImg = './Assets/Map/Spot_FossilRevival.png';
+            else if (locationId === 'pok_mon_mansion') markerImg = './Assets/Map/Spot_PokeMansion.png';
+            else if (locationId === 'trade_with_a_friend') markerImg = './Assets/Map/Spot_TradeHub.png';
+            else if (locationId === 'daycare') markerImg = './Assets/Map/Spot_Daycare.png';
             else if (locationId === 'pewter_gym') { markerImg = './Assets/Badges/Badge Kanto 1.png'; if (state.trainer.badges >= 1) showCheckmark = true; }
             else if (locationId === 'cerulean_gym') { markerImg = './Assets/Badges/Badge Kanto 2.png'; if (state.trainer.badges >= 2) showCheckmark = true; }
             else if (locationId === 'vermilion_gym') { markerImg = './Assets/Badges/Badge Kanto 3.png'; if (state.trainer.badges >= 3) showCheckmark = true; }
@@ -40,7 +51,7 @@ export function showMap() {
             // Increase size for special spots
             let markerWidth = "24px";
             let markerHeight = "24px";
-            if (['professor_oak_lab', 'pokemon_center___market', 'indigo_plateu'].includes(locationId)) {
+            if (['professor_oak_lab', 'pokemon_center___market', 'indigo_plateu', 'safari_zone', 'celadon_s_casino', 'mount_moon', 'rock_tunnel', 'cerulean_cave', 'seafoam_islands', 'small_fishing_spot', 'big_fishing_spot', 'fighting_dojo', 'fossil_revival', 'pok_mon_mansion', 'trade_with_a_friend', 'daycare', 'diglett_s_cave'].includes(locationId)) {
                 markerWidth = "40px";
                 markerHeight = "40px";
             }
@@ -50,8 +61,8 @@ export function showMap() {
                 <div class="map-marker"
                      data-location="${locationName}"
                      title="${locationName}"
-                     style="position: absolute; left: ${coords.x}%; top: ${coords.y}%; width: ${markerWidth}; height: ${markerHeight}; background-image: url('${markerImg}'); background-size: contain; background-repeat: no-repeat; transform: translate(-50%, -50%); cursor: pointer;"
-                     onclick="window.navigateToLocation('${locationName}')"
+                     style="position: absolute; left: ${coords.x}%; top: ${coords.y}%; width: ${markerWidth}; height: ${markerHeight}; background-image: url('${markerImg}'); background-size: contain; background-repeat: no-repeat; transform: translate(-50%, -50%); cursor: ${isClickable ? 'pointer' : 'default'};"
+                     ${isClickable ? `onclick="window.navigateToLocation('${locationName}')"` : ''}
                      onmouseover="window.showMapTooltip(event, '${locationName}')"
                      onmouseout="window.hideMapTooltip()">
                      ${showCheckmark ? '<div style="position:absolute; top:-5px; right:-5px; background:green; color:white; border-radius:50%; width:15px; height:15px; font-size:10px; line-height:15px; text-align:center;">✓</div>' : ''}

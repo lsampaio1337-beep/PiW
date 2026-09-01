@@ -27,8 +27,9 @@ class DayCare {
             sourceList.splice(pokemonIndex, 1);
             return true;
         } else if (!this.slot1.parent2) {
-            // Must be identical species and Quality
-            if (this.slot1.parent1.id === pkmn.id && this.slot1.parent1.qualityName === pkmn.qualityName) {
+            // Must be identical species and have the exact same QValue
+            // Note: qualityName check is replaced by strict numerical quality check based on the spec
+            if (this.slot1.parent1.id === pkmn.id && Math.abs(this.slot1.parent1.quality - pkmn.quality) < 0.001) {
                 this.slot1.parent2 = pkmn;
                 sourceList.splice(pokemonIndex, 1);
                 return true;
@@ -69,8 +70,8 @@ class DayCare {
 
     grantPassiveXP(amount) {
         if (this.slot2.pokemon) {
-            // Passively receives 20% of battle XP
-            this.slot2.pokemon.xp += amount * 0.20;
+            // Passively receives 50% of battle XP
+            this.slot2.pokemon.xp += amount * 0.50;
             // Simplified level up checking
         }
     }
@@ -79,27 +80,22 @@ class DayCare {
         const p1 = this.slot1.parent1;
         const p2 = this.slot1.parent2;
 
-        const merged = JSON.parse(JSON.stringify(p1));
+        const sumIV1 = p1.ivs.hp + p1.ivs.atk + p1.ivs.def + p1.ivs.spa + p1.ivs.spd + p1.ivs.spe;
+        const sumIV2 = p2.ivs.hp + p2.ivs.atk + p2.ivs.def + p2.ivs.spa + p2.ivs.spd + p2.ivs.spe;
 
-        // Keeps highest IVs
-        merged.ivs = {
-            hp: Math.max(p1.ivs.hp, p2.ivs.hp),
-            atk: Math.max(p1.ivs.atk, p2.ivs.atk),
-            def: Math.max(p1.ivs.def, p2.ivs.def),
-            spa: Math.max(p1.ivs.spa, p2.ivs.spa),
-            spd: Math.max(p1.ivs.spd, p2.ivs.spd),
-            spe: Math.max(p1.ivs.spe, p2.ivs.spe),
-        };
-
-        // Keeps highest XP
-        merged.xp = Math.max(p1.xp, p2.xp);
+        // Keep the parent with the highest SumIV (if tie, keep p1)
+        const keptParent = (sumIV2 > sumIV1) ? p2 : p1;
+        const merged = JSON.parse(JSON.stringify(keptParent));
 
         // Increase quality by 0.01 (Max 1.99)
-        merged.quality = Math.min(1.99, Math.max(p1.quality, p2.quality) + 0.01);
+        merged.quality = Math.min(1.99, merged.quality + 0.01);
+
+        // Discard the other parent (it is not pushed back anywhere)
 
         // Re-calculate stats based on new IVs and Quality would happen here
+        // Usually would call a stat calc method, assuming logic will be integrated via mathEngine later
 
-        this.state.box.push(merged);
+        this.state.storage.push(merged); // Correctly push to storage rather than box
 
         // Clear parents
         this.slot1.parent1 = null;
@@ -122,6 +118,12 @@ class DayCare {
                 pkmn.ivs[randStat]++;
             }
         }
+
+        // Track how many times this pokemon has completed a training cycle
+        if (!pkmn.trainingCyclesCompleted) {
+            pkmn.trainingCyclesCompleted = 0;
+        }
+        pkmn.trainingCyclesCompleted++;
 
         this.slot2.battles = 0;
     }
