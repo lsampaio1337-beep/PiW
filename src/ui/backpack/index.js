@@ -34,16 +34,16 @@ export function showBackpack() {
             </style>
             <div onclick="document.getElementById('backpack-content-area').style.display='none'" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2;">
                 <!-- Purple Pokeballs Pocket -->
-                <div class="backpack-pocket" onclick="event.stopPropagation(); window.renderBackpackTab('pokeballs')" style="top: 28%; left: 9.5%; width: 29%; height: 24%; border-radius: 50%;"></div>
+                <div class="backpack-pocket" onclick="event.stopPropagation(); window.renderBackpackTab('pokeballs')" style="top: 34.51%; left: 20.33%; width: 28.17%; height: 28.17%; border-radius: 50%;"></div>
 
                 <!-- Yellow Pokemon Pocket -->
-                <div class="backpack-pocket" onclick="event.stopPropagation(); window.renderBackpackTab('pokemon')" style="top: 31%; right: 14%; width: 28%; height: 24%; border-radius: 50%;"></div>
+                <div class="backpack-pocket" onclick="event.stopPropagation(); window.renderBackpackTab('pokemon')" style="top: 34.93%; left: 51.65%; width: 28.35%; height: 28.35%; border-radius: 50%;"></div>
 
                 <!-- Green Potions Pocket -->
-                <div class="backpack-pocket" onclick="event.stopPropagation(); window.renderBackpackTab('potions')" style="top: 61.5%; left: 11%; width: 28%; height: 24%; border-radius: 50%;"></div>
+                <div class="backpack-pocket" onclick="event.stopPropagation(); window.renderBackpackTab('potions')" style="top: 64.37%; left: 20.07%; width: 28.62%; height: 28.62%; border-radius: 50%;"></div>
 
                 <!-- Cyan Stones Pocket -->
-                <div class="backpack-pocket" onclick="event.stopPropagation(); window.renderBackpackTab('stones')" style="top: 62.5%; right: 17%; width: 27%; height: 23%; border-radius: 50%;"></div>
+                <div class="backpack-pocket" onclick="event.stopPropagation(); window.renderBackpackTab('stones')" style="top: 65.16%; left: 51.96%; width: 28.17%; height: 28.17%; border-radius: 50%;"></div>
             </div>
 
             <div id="backpack-content-area" onclick="event.stopPropagation()" style="position: absolute; bottom: 20px; left: 5%; width: 90%; background: rgba(0,0,0,0.85); padding: 15px; border-radius: 5px; min-height: 250px; z-index: 5; display: none;">

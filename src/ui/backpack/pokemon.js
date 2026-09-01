@@ -9,12 +9,12 @@ function renderSlotUI(p, listName, origIndex, isDraggable) {
     let dragAttr = isDraggable ? `draggable="true" ondragstart="window.dragStart(event, '${listName}', ${origIndex})"` : '';
     let cursorStyle = isDraggable ? 'cursor: move;' : 'cursor: default;';
 
+    // Remove "i" button and place onClick event directly on the whole card to mimic info button functionality.
     return `
-        <div style="border: 1px solid #888; height: 85px; display: flex; align-items: center; padding: 4px; box-sizing: border-box; background: rgba(0,0,0,0.6); position: relative; ${cursorStyle} border-radius: 4px;" title="Q=${p.quality.toFixed(2)} & ∑IV=${sumIV}" ${dragAttr}>
+        <div onclick="window.showPokemonStats(${origIndex}, '${listName.toLowerCase()}')" style="border: 1px solid #888; height: 85px; display: flex; align-items: center; padding: 4px; box-sizing: border-box; background: rgba(0,0,0,0.6); position: relative; ${cursorStyle} border-radius: 4px;" title="Q=${p.quality.toFixed(2)} & ∑IV=${sumIV}" ${dragAttr}>
             <span style="position: absolute; top: 0; left: 0; font-size: 9px; background: rgba(0,0,0,0.8); padding: 1px 3px; border-bottom-right-radius: 4px; z-index: 2;">${p._tag || ''}</span>
-            <div style="display: flex; flex-direction: column; align-items: center; width: 45px; margin-right: 5px;">
-                <img src="${imgSrc}" style="max-height: 40px; max-width: 40px; object-fit: contain;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
-                <div onclick="event.stopPropagation(); window.showPokemonStats(${origIndex}, '${listName.toLowerCase()}')" style="cursor: pointer; background: #3498db; color: white; border-radius: 50%; width: 16px; height: 16px; text-align: center; line-height: 16px; font-size: 11px; font-weight: bold; margin-top: 3px;" title="View Info">i</div>
+            <div style="display: flex; flex-direction: column; align-items: center; width: 50px; margin-right: 5px;">
+                <img src="${imgSrc}" style="max-height: 55px; max-width: 55px; object-fit: contain;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
             </div>
             <div style="display: flex; flex-direction: column; justify-content: center; font-size: 11px; line-height: 1.3;">
                 <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 65px; font-weight: bold; color: #f1c40f;" title="${p.name}">${p.name}</div>
@@ -142,8 +142,10 @@ export function renderPokemonTab(area) {
     let selectionEnd = 0;
     if (activeElementId && document.activeElement.tagName === 'INPUT') {
         try {
-            selectionStart = document.activeElement.selectionStart;
-            selectionEnd = document.activeElement.selectionEnd;
+            if (document.activeElement.type === 'text') {
+                selectionStart = document.activeElement.selectionStart;
+                selectionEnd = document.activeElement.selectionEnd;
+            }
         } catch(e) {}
     }
 
@@ -164,7 +166,14 @@ export function renderPokemonTab(area) {
             el.focus();
             if (el.tagName === 'INPUT') {
                 try {
-                    el.setSelectionRange(selectionStart, selectionEnd);
+                    if (el.type === 'text') {
+                        el.setSelectionRange(selectionStart, selectionEnd);
+                    } else if (el.type === 'number') {
+                        // Workaround for number inputs where setSelectionRange is not allowed
+                        let val = el.value;
+                        el.value = '';
+                        el.value = val;
+                    }
                 } catch(e) {}
             }
         }
