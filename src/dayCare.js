@@ -18,8 +18,8 @@ class DayCare {
         };
     }
 
-    addParentToSlot1(pokemonIndex, fromBox = true) {
-        const sourceList = fromBox ? this.state.box : this.state.party;
+    addParentToSlot1(pokemonIndex, fromStorage = true) {
+        const sourceList = fromStorage ? this.state.storage : this.state.party;
         const pkmn = sourceList[pokemonIndex];
 
         if (!this.slot1.parent1) {
@@ -40,8 +40,8 @@ class DayCare {
         return false;
     }
 
-    addPokemonToSlot2(pokemonIndex, fromBox = true) {
-        const sourceList = fromBox ? this.state.box : this.state.party;
+    addPokemonToSlot2(pokemonIndex, fromStorage = true) {
+        const sourceList = fromStorage ? this.state.storage : this.state.party;
         if (!this.slot2.pokemon) {
             this.slot2.pokemon = sourceList[pokemonIndex];
             sourceList.splice(pokemonIndex, 1);
@@ -95,7 +95,7 @@ class DayCare {
         // Re-calculate stats based on new IVs and Quality would happen here
         // Usually would call a stat calc method, assuming logic will be integrated via mathEngine later
 
-        this.state.storage.push(merged); // Correctly push to storage rather than box
+        this.state.storage.push(merged);
 
         // Clear parents
         this.slot1.parent1 = null;
