@@ -80,6 +80,8 @@ export function switchView(viewName) {
         setupMarket(document.getElementById('view-center-market'));
     } else if (viewName === 'GYM') {
         document.getElementById('view-gym').style.display = 'block';
+    } else if (viewName === 'CASINO_HUB') {
+        document.getElementById('view-casino').style.display = 'block';
     }
 }
 
