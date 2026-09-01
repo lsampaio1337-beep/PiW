@@ -244,7 +244,7 @@ async function init() {
             badgesHtml += `<img src="./Assets/Badges/Badge Kanto ${i}.png" style="width: 40px; height: 40px;" title="Badge ${i}">`;
         }
         badgesHtml += '</div>';
-        showModal("Statistics", `<p>Battles Won: ${state.stats.battlesWon}</p><p>Money: $${state.trainer.money}</p><h3>Badges:</h3>${badgesHtml}`);
+        showModal("Statistics", `<p>Battles Won: ${state.stats.battlesWon}</p><p>Total Pokémon Captured: ${state.stats.caught}</p><p>Shinies Seen: ${state.stats.shiniesSeen || 0}</p><p>Money: $${state.trainer.money}</p><h3>Badges:</h3>${badgesHtml}`);
     };
 
     document.getElementById('btn-settings').onclick = () => {
