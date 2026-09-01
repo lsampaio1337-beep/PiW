@@ -12,7 +12,9 @@ export function showBackpack() {
     // Remove any hardcoded modal width restrictions specifically for the backpack so it can scale
     const modalBox = document.getElementById('modal-content-box');
     if (modalBox) {
-        // Temporarily clear inline styles that might restrict backpack size; other modals will reset them
+        // Temporarily clear inline styles that might restrict backpack size. We add a cleanup on close.
+        modalBox.dataset.originalStyles = modalBox.getAttribute('style') || '';
+
         modalBox.style.width = '100%';
         modalBox.style.maxWidth = '100%';
         modalBox.style.height = '100%';
@@ -23,11 +25,26 @@ export function showBackpack() {
 
         // Hide the default modal X button
         const closeBtn = modalBox.querySelector('span');
-        if (closeBtn) closeBtn.style.display = 'none';
+        if (closeBtn) {
+            closeBtn.dataset.originalDisplay = closeBtn.style.display || '';
+            closeBtn.style.display = 'none';
+        }
     }
 
+    window.closeBackpackModal = function() {
+        document.getElementById('modal-overlay').style.display='none';
+        const modalBox = document.getElementById('modal-content-box');
+        if (modalBox && modalBox.dataset.originalStyles !== undefined) {
+            modalBox.setAttribute('style', modalBox.dataset.originalStyles);
+            const closeBtn = modalBox.querySelector('span');
+            if (closeBtn && closeBtn.dataset.originalDisplay !== undefined) {
+                closeBtn.style.display = closeBtn.dataset.originalDisplay;
+            }
+        }
+    };
+
     let html = `
-        <div onclick="document.getElementById('modal-overlay').style.display='none'" style="position: fixed; top: 0; left: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100vw; height: 100vh; padding: 20px; box-sizing: border-box; color: white; overflow: hidden; z-index: 9999;">
+        <div onclick="window.closeBackpackModal()" style="position: fixed; top: 0; left: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100vw; height: 100vh; padding: 20px; box-sizing: border-box; color: white; overflow: hidden; z-index: 9999;">
             <style>
                 .backpack-pocket {
                     cursor: pointer;
@@ -42,13 +59,13 @@ export function showBackpack() {
                 }
             </style>
 
-            <div onclick="document.getElementById('modal-overlay').style.display='none'" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;"></div>
+            <div onclick="window.closeBackpackModal()" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;"></div>
 
             <div style="position: relative; height: 100%; max-height: 100%; width: 100%; display: flex; align-items: center; justify-content: center; cursor: default; pointer-events: none; z-index: 2;">
 
-                <!-- Inner container to hold image and preserve aspect ratio -->
-                <div onclick="event.stopPropagation(); document.getElementById('backpack-content-area').style.display='none'" style="position: relative; height: 100%; max-height: 100vh; aspect-ratio: 1279 / 1350; pointer-events: auto;">
-                    <img src="./Assets/Extra/Backpack.png" style="height: 100%; width: 100%; object-fit: contain; display: block; pointer-events: none;">
+                <!-- Inner container shrink-wrapped to exact dimensions so clicks outside the bag hit the overlay -->
+                <div onclick="event.stopPropagation(); document.getElementById('backpack-content-area').style.display='none'" style="position: relative; height: 100%; width: 100%; max-height: 100%; max-width: max-content; aspect-ratio: 1279 / 1350; pointer-events: auto;">
+                    <img src="./Assets/Extra/Backpack.png" style="height: 100%; width: 100%; display: block; pointer-events: none;">
 
                     <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2;">
                         <!-- Use exact pixel dimensions of the image for the viewBox to ensure perfect circle scaling -->
