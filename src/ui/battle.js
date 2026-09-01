@@ -305,7 +305,7 @@ export function triggerCombatAnimation(attackerSide, moveType, attackerPrimaryTy
 }
 
 // Make globally available
-window.triggerCombatAnimation = triggerCombatAnimation;
+if (typeof window !== 'undefined') window.triggerCombatAnimation = triggerCombatAnimation;
 
 
 export function triggerCatchAnimation(ballName, isCaught, callback) {
@@ -349,13 +349,13 @@ export function triggerCatchAnimation(ballName, isCaught, callback) {
     }, 3000);
 }
 
-window.triggerCatchAnimation = triggerCatchAnimation;
+if (typeof window !== 'undefined') window.triggerCatchAnimation = triggerCatchAnimation;
 
-window.triggerEnemyFaint = () => {
+if (typeof window !== 'undefined') window.triggerEnemyFaint = () => {
     const el = document.getElementById('enemy-sprite');
     if (el) el.classList.add('fainting');
 };
-window.clearEnemyFaint = () => {
+if (typeof window !== 'undefined') window.clearEnemyFaint = () => {
     const el = document.getElementById('enemy-sprite');
     if (el) el.classList.remove('fainting');
 };
