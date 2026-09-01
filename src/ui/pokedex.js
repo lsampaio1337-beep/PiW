@@ -1,5 +1,17 @@
 import { state } from '../state.js';
-import { showModal } from '../ui.js';
+import { showModal, TYPE_COLORS } from '../ui.js';
+
+function formatType(typeStr) {
+    if (!typeStr || !TYPE_COLORS[typeStr]) return typeStr;
+    const color = TYPE_COLORS[typeStr];
+    return `<span style="color: ${color}; display: inline-flex; align-items: center; gap: 4px;">
+                <img src="Assets/Extra/Type ${typeStr}.png" style="height: 14px;"> ${typeStr}
+            </span>`;
+}
+
+function formatTypes(obj) {
+    return Object.keys(obj).length ? Object.keys(obj).map(t => formatType(t)).join(', ') : 'None';
+}
 
 export function showPokedex() {
     let uniqueSpeciesCaught = 0;
@@ -80,8 +92,6 @@ export function showDexEntry(id) {
         else if (maxMult === 0) noEffect[defType] = maxMult;
     }
 
-    const formatTypes = (obj) => Object.keys(obj).length ? Object.keys(obj).join(', ') : 'None';
-
     // Evolution Line
     let evolveHtml = "";
     if (pData.evolutions && pData.evolutions.length > 0) {
@@ -108,7 +118,7 @@ export function showDexEntry(id) {
             movesHtml += `<tr style="border-bottom: 1px solid #444;">
                 <td>${m.level}</td>
                 <td>${m.move}</td>
-                <td>${mData ? mData.type : '?'}</td>
+                <td>${mData ? formatType(mData.type) : '?'}</td>
                 <td>${mData ? mData.power : '?'}</td>
                 <td>${mData ? mData.category : '?'}</td>
             </tr>`;
@@ -125,7 +135,7 @@ export function showDexEntry(id) {
                 <button onclick="document.getElementById('dex-sprite').src = 'Assets/Pokemon Sprites/${pData.id}.png'">Normal</button>
             </div>
 
-            <p><b>Type:</b> ${pData.types.join(' / ')}</p>
+            <p><b>Type:</b> ${pData.types.map(t => formatType(t)).join(' / ')}</p>
             <p><b>BST:</b> ${bst} (HP:${pData.hp} A:${pData.atk} D:${pData.def} SA:${pData.spa} SD:${pData.spd} S:${pData.spe})</p>
 
             <div style="text-align: left; margin: 15px 0; font-size: 14px; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 5px;">
