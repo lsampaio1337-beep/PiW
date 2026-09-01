@@ -1,4 +1,12 @@
 
+import * as mathEngine from "./mathEngine.js";
+import BattleSystem from "./battleSystem.js";
+import DayCare from "./dayCare.js";
+import Storage from "./storage.js";
+
+// Import State and modules
+import { state, setBattleSystem, globals } from './state.js';
+
 export const TYPE_COLORS = {
     "Bug": "#aead56",
     "Dark": "#636066",
@@ -18,35 +26,6 @@ export const TYPE_COLORS = {
     "Rock": "#a7a7a7",
     "Steel": "#869ba7",
     "Water": "#6391c7",
-};
-
-import * as mathEngine from "./mathEngine.js";
-import BattleSystem from "./battleSystem.js";
-import DayCare from "./dayCare.js";
-import Storage from "./storage.js";
-
-// Import State and modules
-import { state, setBattleSystem, globals } from './state.js';
-
-export const TYPE_COLORS = {
-    "Normal": "#A8A77A",
-    "Fire": "#EE8130",
-    "Water": "#6390F0",
-    "Electric": "#F7D02C",
-    "Grass": "#7AC74C",
-    "Ice": "#96D9D6",
-    "Fighting": "#C22E28",
-    "Poison": "#A33EA1",
-    "Ground": "#E2BF65",
-    "Flying": "#A98FF3",
-    "Psychic": "#F95587",
-    "Bug": "#A6B91A",
-    "Rock": "#B6A136",
-    "Ghost": "#735797",
-    "Dragon": "#6F35FC",
-    "Dark": "#705848",
-    "Steel": "#B7B7CE",
-    "Fairy": "#D685AD"
 };
 import { updateTopbar } from './ui/topbar.js';
 import { updateSidebar } from './ui/sidebar.js';
@@ -224,40 +203,57 @@ function startGame() {
 async function init() {
     await loadConfigs();
     const saved = storage.load();
+
     if (saved) {
-        const choice = confirm("Save file found. Do you want to continue?\nClick OK to Continue, Cancel to start a New Game.");
-        if (choice) {
-            Object.assign(state, saved);
-            await loadConfigs();
+        // Show the save prompt modal instead of using confirm()
+        const savePrompt = document.getElementById('save-prompt-modal');
+        const splashScreen = document.getElementById('splash-screen');
 
-            // Bypass Oak if player already has Pokemon
-            if (state.party.length > 0 || state.storage.length > 0) {
-                const oakLabDiv = document.getElementById("view-prof-oak-lab");
-                if (oakLabDiv) {
-                    oakLabDiv.innerHTML = `
-                        <div style="background-color: rgba(0,0,0,0.5); display: inline-block; padding: 10px; margin-top: 50px; border-radius: 8px;">
-                            <h2>Professor Oak Lab</h2>
-                            <p>You already have your Pokémon! Explore Kanto by opening your Map.</p>
-                        </div>
-                    `;
+        if (savePrompt && splashScreen) {
+            splashScreen.style.display = 'flex';
+            savePrompt.style.display = 'block';
+
+            document.getElementById('btn-continue-game').onclick = async () => {
+                splashScreen.style.display = 'none';
+                savePrompt.style.display = 'none';
+
+                Object.assign(state, saved);
+                await loadConfigs();
+
+                // Bypass Oak if player already has Pokemon
+                if (state.party.length > 0 || state.storage.length > 0) {
+                    const oakLabDiv = document.getElementById("view-prof-oak-lab");
+                    if (oakLabDiv) {
+                        oakLabDiv.innerHTML = `
+                            <div style="background-color: rgba(0,0,0,0.5); display: inline-block; padding: 10px; margin-top: 50px; border-radius: 8px;">
+                                <h2>Professor Oak Lab</h2>
+                                <p>You already have your Pokémon! Explore Kanto by opening your Map.</p>
+                            </div>
+                        `;
+                    }
                 }
-            }
 
-            startGame();
+                startGame();
 
-            // Switch view based on saved route
-            if (state.currentRoute === "Professor Oak Lab") {
+                // Switch view based on saved route
+                if (state.currentRoute === "Professor Oak Lab") {
+                    switchView("PROF_OAK_LAB");
+                } else if (state.currentRoute === "Pokemon Center & Market") {
+                    navigateToLocation(state.currentRoute);
+                } else if (state.currentRoute.includes("Gym") || state.currentRoute === "Indigo Plateu") {
+                    navigateToLocation(state.currentRoute);
+                } else {
+                    navigateToLocation(state.currentRoute);
+                }
+            };
+
+            document.getElementById('btn-new-game').onclick = () => {
+                splashScreen.style.display = 'none';
+                savePrompt.style.display = 'none';
+
+                storage.reset();
                 switchView("PROF_OAK_LAB");
-            } else if (state.currentRoute === "Pokemon Center & Market") {
-                navigateToLocation(state.currentRoute);
-            } else if (state.currentRoute.includes("Gym") || state.currentRoute === "Indigo Plateu") {
-                navigateToLocation(state.currentRoute);
-            } else {
-                navigateToLocation(state.currentRoute);
-            }
-        } else {
-            storage.reset();
-            switchView("PROF_OAK_LAB");
+            };
         }
     } else {
         switchView("PROF_OAK_LAB");

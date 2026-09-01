@@ -1,0 +1,10 @@
+
+> idle-pokemon-world@1.0.0 start
+> electron-forge start
+
+❯ Checking your system
+❯ Checking package manager version
+✔ Found npm@11.11.0
+✔ Checking your system
+[?25h[6090:0901/055852.859278:ERROR:ozone_platform_x11.cc(246)] Missing X server or $DISPLAY
+[6090:0901/055852.859395:ERROR:env.cc(257)] The platform failed to initialize.  Exiting.
