@@ -29,8 +29,8 @@ export function showMap() {
             else if (locationId === 'pokemon_center___market') markerImg = './Assets/Extra/Spot_PCPM.png';
             else if (locationId === 'indigo_plateu') markerImg = './Assets/Extra/Spot_E4.png';
             else if (locationId === 'safari_zone') markerImg = './Assets/Extra/Spot_Safariball.png';
-            else if (locationId === 'celadon_s_casino') { markerImg = './Assets/Map/Spot_Casino.png'; isClickable = false; }
-            else if (locationId === 'diglett_s_cave') { markerImg = './Assets/Map/Spot_Cave.png'; isClickable = false; }
+            else if (locationId === 'celadon_s_casino') { markerImg = './Assets/Map/Spot_Casino.png'; }
+            else if (locationId === 'diglett_s_cave') { markerImg = './Assets/Map/Spot_Cave.png'; }
             else if (['mount_moon', 'rock_tunnel', 'cerulean_cave', 'seafoam_islands'].includes(locationId)) markerImg = './Assets/Map/Spot_Cave.png';
             else if (locationId === 'small_fishing_spot') markerImg = './Assets/Map/Spot_Fishing1.png';
             else if (locationId === 'big_fishing_spot') markerImg = './Assets/Map/Spot_Fishing2.png';
@@ -93,6 +93,25 @@ export function navigateToLocation(locationName) {
              if (battleSystem.gymState) battleSystem.gymState.isActive = false;
         }
         switchView("PROF_OAK_LAB");
+    } else if (locationName === "Celadon's Casino") {
+        if (battleSystem) {
+             battleSystem.stop();
+             battleSystem.activeEncounter = null;
+             battleSystem.isSearching = false;
+             if (battleSystem.gymState) battleSystem.gymState.isActive = false;
+        }
+        switchView("CASINO_HUB");
+
+        const btnContainer = document.getElementById("casino-buttons-container");
+        if (btnContainer) {
+            btnContainer.innerHTML = `
+                <button onclick="window.navigateToLocation('Casino - Starter Troupe')" style="padding: 10px; font-size: 16px; cursor: pointer;">Starter Troupe (Lv 45)</button>
+                <button onclick="window.navigateToLocation('Casino - Mid Troupe')" style="padding: 10px; font-size: 16px; cursor: pointer;">Mid Troupe (Lv 50)</button>
+                <button onclick="window.navigateToLocation('Casino - Late Troupe')" style="padding: 10px; font-size: 16px; cursor: pointer;">Late Troupe (Lv 55)</button>
+                <button onclick="window.navigateToLocation('Casino - Eeveelutions')" style="padding: 10px; font-size: 16px; cursor: pointer;">Eeveelutions (Lv 50)</button>
+                <button onclick="window.navigateToLocation('Casino - Special Spot')" style="padding: 10px; font-size: 16px; cursor: pointer;">Special Spot (Lv 52)</button>
+            `;
+        }
     } else if (locationName === "Pokemon Center & Market" || locationName.includes("Market")) {
         if (battleSystem) {
              battleSystem.stop();

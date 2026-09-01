@@ -119,8 +119,8 @@ const routes = [
     {
       "name": "Diglett's Cave",
       "spawns": [
-        {"pokemonId": 50, "minLevel": 30, "maxLevel": 33, "chance": 0.95},
-        {"pokemonId": 51, "minLevel": 33, "maxLevel": 33, "chance": 0.05}
+        {"pokemonId": 50, "minLevel": 30, "maxLevel": 33, "chance": 0.90},
+        {"pokemonId": 51, "minLevel": 30, "maxLevel": 33, "chance": 0.10}
       ]
     },
     {
@@ -181,24 +181,44 @@ const routes = [
       ]
     },
     {
-      "name": "Celadon's Casino",
+      "name": "Casino - Starter Troupe",
       "spawns": [
-        { "pokemonId": 1, "minLevel": 45, "maxLevel": 45, "chance": 0.06 },
-        { "pokemonId": 4, "minLevel": 45, "maxLevel": 45, "chance": 0.06 },
-        { "pokemonId": 7, "minLevel": 45, "maxLevel": 45, "chance": 0.06 },
-        { "pokemonId": 2, "minLevel": 50, "maxLevel": 50, "chance": 0.06 },
-        { "pokemonId": 5, "minLevel": 50, "maxLevel": 50, "chance": 0.06 },
-        { "pokemonId": 8, "minLevel": 50, "maxLevel": 50, "chance": 0.06 },
-        { "pokemonId": 3, "minLevel": 55, "maxLevel": 55, "chance": 0.06 },
-        { "pokemonId": 6, "minLevel": 55, "maxLevel": 55, "chance": 0.06 },
-        { "pokemonId": 9, "minLevel": 55, "maxLevel": 55, "chance": 0.06 },
-        { "pokemonId": 133, "minLevel": 50, "maxLevel": 50, "chance": 0.06 },
-        { "pokemonId": 134, "minLevel": 50, "maxLevel": 50, "chance": 0.06 },
-        { "pokemonId": 135, "minLevel": 50, "maxLevel": 50, "chance": 0.06 },
-        { "pokemonId": 136, "minLevel": 50, "maxLevel": 50, "chance": 0.06 },
-        { "pokemonId": 131, "minLevel": 52, "maxLevel": 52, "chance": 0.06 },
-        { "pokemonId": 137, "minLevel": 52, "maxLevel": 52, "chance": 0.08 },
-        { "pokemonId": 108, "minLevel": 52, "maxLevel": 52, "chance": 0.08 }
+        { "pokemonId": 1, "minLevel": 45, "maxLevel": 45, "chance": 0.333 },
+        { "pokemonId": 4, "minLevel": 45, "maxLevel": 45, "chance": 0.333 },
+        { "pokemonId": 7, "minLevel": 45, "maxLevel": 45, "chance": 0.334 }
+      ]
+    },
+    {
+      "name": "Casino - Mid Troupe",
+      "spawns": [
+        { "pokemonId": 2, "minLevel": 50, "maxLevel": 50, "chance": 0.333 },
+        { "pokemonId": 5, "minLevel": 50, "maxLevel": 50, "chance": 0.333 },
+        { "pokemonId": 8, "minLevel": 50, "maxLevel": 50, "chance": 0.334 }
+      ]
+    },
+    {
+      "name": "Casino - Late Troupe",
+      "spawns": [
+        { "pokemonId": 3, "minLevel": 55, "maxLevel": 55, "chance": 0.333 },
+        { "pokemonId": 6, "minLevel": 55, "maxLevel": 55, "chance": 0.333 },
+        { "pokemonId": 9, "minLevel": 55, "maxLevel": 55, "chance": 0.334 }
+      ]
+    },
+    {
+      "name": "Casino - Eeveelutions",
+      "spawns": [
+        { "pokemonId": 133, "minLevel": 50, "maxLevel": 50, "chance": 0.25 },
+        { "pokemonId": 134, "minLevel": 50, "maxLevel": 50, "chance": 0.25 },
+        { "pokemonId": 135, "minLevel": 50, "maxLevel": 50, "chance": 0.25 },
+        { "pokemonId": 136, "minLevel": 50, "maxLevel": 50, "chance": 0.25 }
+      ]
+    },
+    {
+      "name": "Casino - Special Spot",
+      "spawns": [
+        { "pokemonId": 131, "minLevel": 52, "maxLevel": 52, "chance": 0.333 },
+        { "pokemonId": 137, "minLevel": 52, "maxLevel": 52, "chance": 0.333 },
+        { "pokemonId": 108, "minLevel": 52, "maxLevel": 52, "chance": 0.334 }
       ]
     },
     {
