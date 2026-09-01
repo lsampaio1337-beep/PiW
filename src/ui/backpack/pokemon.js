@@ -59,7 +59,7 @@ export function renderPokemonTab(area) {
             <!-- Column 1: Active -->
             <div style="flex: 2; border: 1px solid #555; padding: 5px; min-height: 200px; display: flex; flex-direction: column;">
                 <h4 style="text-align: center; margin-top:0;">Active</h4>
-                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 5px; align-content: start;">
+                <div id="active-scroll-container" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 5px; max-height: 400px; overflow-y: scroll; align-content: start; flex-grow: 1; padding-bottom: 20px;">
     `;
 
     const activePokemon = [];
@@ -84,7 +84,7 @@ export function renderPokemonTab(area) {
             <!-- Column 2: Storage -->
             <div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'storage')" style="flex: 4; border: 1px solid #555; padding: 5px; min-height: 200px; display: flex; flex-direction: column;">
                 <h4 style="text-align: center; margin-top:0;">Storage</h4>
-                <div id="storage-scroll-container" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; max-height: 400px; overflow-y: auto; align-content: start; flex-grow: 1; padding-bottom: 20px;">
+                <div id="storage-scroll-container" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; max-height: 400px; overflow-y: scroll; align-content: start; flex-grow: 1; padding-bottom: 20px;">
     `;
 
     for (let i = 0; i < state.storage.length; i++) {
@@ -100,7 +100,7 @@ export function renderPokemonTab(area) {
             <!-- Column 3: Safe -->
             <div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'safe')" style="flex: 2; border: 1px solid #555; padding: 5px; min-height: 200px; display: flex; flex-direction: column;">
                 <h4 style="text-align: center; margin-top:0;">Safe</h4>
-                <div id="safe-scroll-container" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 5px; max-height: 400px; overflow-y: auto; align-content: start; flex-grow: 1; padding-bottom: 20px;">
+                <div id="safe-scroll-container" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 5px; max-height: 400px; overflow-y: scroll; align-content: start; flex-grow: 1; padding-bottom: 20px;">
     `;
 
     for (let i = 0; i < state.safe.length; i++) {
@@ -129,10 +129,13 @@ export function renderPokemonTab(area) {
     }
 
     // Capture previous scroll positions
+    let prevActiveScroll = 0;
     let prevStorageScroll = 0;
     let prevSafeScroll = 0;
+    const oldActive = document.getElementById('active-scroll-container');
     const oldStorage = document.getElementById('storage-scroll-container');
     const oldSafe = document.getElementById('safe-scroll-container');
+    if (oldActive) prevActiveScroll = oldActive.scrollTop;
     if (oldStorage) prevStorageScroll = oldStorage.scrollTop;
     if (oldSafe) prevSafeScroll = oldSafe.scrollTop;
 
@@ -152,8 +155,10 @@ export function renderPokemonTab(area) {
     }
 
     // Restore scroll positions
+    const newActive = document.getElementById('active-scroll-container');
     const newStorage = document.getElementById('storage-scroll-container');
     const newSafe = document.getElementById('safe-scroll-container');
+    if (newActive) newActive.scrollTop = prevActiveScroll;
     if (newStorage) newStorage.scrollTop = prevStorageScroll;
     if (newSafe) newSafe.scrollTop = prevSafeScroll;
 
