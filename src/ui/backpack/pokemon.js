@@ -8,15 +8,22 @@ function renderSlotUI(p, listName, origIndex, isDraggable) {
     let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
     let dragAttr = isDraggable ? `draggable="true" ondragstart="window.dragStart(event, '${listName}', ${origIndex})"` : '';
     let cursorStyle = isDraggable ? 'cursor: move;' : 'cursor: default;';
+    let slotClass = '';
+    let dataAttr = '';
+    if (listName.toLowerCase() === 'storage') {
+        slotClass = 'pokemon-storage-slot';
+        dataAttr = `data-index="${origIndex}"`;
+    } else if (listName.toLowerCase() === 'safe') {
+        slotClass = 'pokemon-safe-slot';
+        dataAttr = `data-index="${origIndex}"`;
+    }
 
     return `
-        <div style="border: 1px solid #777; height: 60px; display: flex; align-items: center; padding: 2px; box-sizing: border-box; background: rgba(0,0,0,0.5); position: relative; ${cursorStyle}" title="Q=${p.quality.toFixed(2)} & ∑IV=${sumIV}" ${dragAttr}>
+        <div class="${slotClass}" ${dataAttr} style="border: 1px solid #777; height: 100px; display: flex; flex-direction: column; align-items: center; padding: 2px; box-sizing: border-box; background: rgba(0,0,0,0.5); position: relative; ${cursorStyle}" title="Q=${p.quality.toFixed(2)} & ∑IV=${sumIV}" ${dragAttr}>
             <span style="position: absolute; top: 0; left: 0; font-size: 8px; background: black; padding: 1px; z-index: 2;">${p._tag || ''}</span>
-            <div style="display: flex; flex-direction: column; align-items: center; width: 40px; margin-right: 5px;">
-                <img src="${imgSrc}" style="max-height: 35px; max-width: 35px; object-fit: contain;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
-                <div onclick="event.stopPropagation(); window.showPokemonStats(${origIndex}, '${listName.toLowerCase()}')" style="cursor: pointer; background: #34495e; color: white; border-radius: 50%; width: 14px; height: 14px; text-align: center; line-height: 14px; font-size: 10px; font-weight: bold; margin-top: 2px;" title="View Info">i</div>
-            </div>
-            <div style="display: flex; flex-direction: column; justify-content: center; font-size: 9px; line-height: 1.2;">
+            <div onclick="event.stopPropagation(); window.showPokemonStats(${origIndex}, '${listName.toLowerCase()}')" style="position: absolute; top: 2px; right: 2px; cursor: pointer; background: #34495e; color: white; border-radius: 50%; width: 16px; height: 16px; text-align: center; line-height: 16px; font-size: 10px; font-weight: bold; z-index: 2;" title="View Info">i</div>
+            <img src="${imgSrc}" style="height: 50px; width: 50px; object-fit: contain; margin-top: 5px;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 9px; line-height: 1.2; width: 100%; margin-top: auto;">
                 <div>Lv.${p.level}</div>
                 <div>Q:${p.quality.toFixed(2)}</div>
                 <div>∑IV:${sumIV}</div>
@@ -66,7 +73,7 @@ export function renderPokemonTab(area) {
             content += renderSlotUI(p, p._tag, p._origIndex, true);
         } else {
             let label = i < 6 ? `Party #${i+1}` : (i === 6 ? 'Breed' : 'Training');
-            content += `<div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'party')" style="border: 1px dashed #777; height: 60px; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #777;">${label}</div>`;
+            content += `<div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'party')" style="border: 1px dashed #777; height: 100px; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #777;">${label}</div>`;
         }
     }
 
@@ -80,27 +87,11 @@ export function renderPokemonTab(area) {
                 <div id="storage-scroll-container" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; max-height: 250px; overflow-y: auto; align-content: start; flex-grow: 1;">
     `;
 
-    const filterFn = (p) => {
-        if (filters.name && !p.name.toLowerCase().includes(filters.name.toLowerCase())) return false;
-        if (filters.minLvl !== '' && p.level < parseInt(filters.minLvl)) return false;
-        if (filters.maxLvl !== '' && p.level > parseInt(filters.maxLvl)) return false;
-        if (filters.minQ !== '' && p.quality < parseFloat(filters.minQ)) return false;
-        if (filters.maxQ !== '' && p.quality > parseFloat(filters.maxQ)) return false;
-        let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
-        if (filters.minIV !== '' && sumIV < parseInt(filters.minIV)) return false;
-        if (filters.maxIV !== '' && sumIV > parseInt(filters.maxIV)) return false;
-        return true;
-    };
-
-    let displayedStorage = 0;
     for (let i = 0; i < state.storage.length; i++) {
         let p = state.storage[i];
-        if (filterFn(p)) {
-            content += renderSlotUI(p, 'storage', i, true);
-            displayedStorage++;
-        }
+        content += renderSlotUI(p, 'storage', i, true);
     }
-    content += `<div style="border: 1px dashed #777; height: 60px; display: flex; align-items: center; justify-content: center; font-size: 20px;" title="Empty Slot">+</div>`;
+    content += `<div style="border: 1px dashed #777; height: 100px; display: flex; align-items: center; justify-content: center; font-size: 20px;" title="Empty Slot">+</div>`;
 
     content += `
                 </div>
@@ -112,15 +103,11 @@ export function renderPokemonTab(area) {
                 <div id="safe-scroll-container" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; max-height: 250px; overflow-y: auto; align-content: start; flex-grow: 1;">
     `;
 
-    let displayedSafe = 0;
     for (let i = 0; i < state.safe.length; i++) {
         let p = state.safe[i];
-        if (filterFn(p)) {
-            content += renderSlotUI(p, 'safe', i, true);
-            displayedSafe++;
-        }
+        content += renderSlotUI(p, 'safe', i, true);
     }
-    content += `<div style="border: 1px dashed #777; height: 60px; display: flex; align-items: center; justify-content: center; font-size: 20px; cursor: pointer;" title="Empty Slot">+</div>`;
+    content += `<div style="border: 1px dashed #777; height: 100px; display: flex; align-items: center; justify-content: center; font-size: 20px; cursor: pointer;" title="Empty Slot">+</div>`;
 
     content += `
                 </div>
@@ -169,12 +156,49 @@ export function renderPokemonTab(area) {
     const newSafe = document.getElementById('safe-scroll-container');
     if (newStorage) newStorage.scrollTop = prevStorageScroll;
     if (newSafe) newSafe.scrollTop = prevSafeScroll;
+
+    // Apply filters immediately to initial render
+    window.applyPokemonFilters();
 }
 
 window.updatePokemonFilter = function(key, val) {
     window.pokemonFilters[key] = val;
-    // Debounce re-render slightly or direct call
-    renderBackpackTab('pokemon');
+    window.applyPokemonFilters();
+};
+
+window.applyPokemonFilters = function() {
+    const filters = window.pokemonFilters;
+    const filterFn = (p) => {
+        if (filters.name && !p.name.toLowerCase().includes(filters.name.toLowerCase())) return false;
+        if (filters.minLvl !== '' && p.level < parseInt(filters.minLvl)) return false;
+        if (filters.maxLvl !== '' && p.level > parseInt(filters.maxLvl)) return false;
+        if (filters.minQ !== '' && p.quality < parseFloat(filters.minQ)) return false;
+        if (filters.maxQ !== '' && p.quality > parseFloat(filters.maxQ)) return false;
+        let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
+        if (filters.minIV !== '' && sumIV < parseInt(filters.minIV)) return false;
+        if (filters.maxIV !== '' && sumIV > parseInt(filters.maxIV)) return false;
+        return true;
+    };
+
+    // Filter Storage
+    const storageSlots = document.querySelectorAll('.pokemon-storage-slot');
+    storageSlots.forEach(slot => {
+        const index = parseInt(slot.getAttribute('data-index'), 10);
+        const p = state.storage[index];
+        if (p) {
+            slot.style.display = filterFn(p) ? 'flex' : 'none';
+        }
+    });
+
+    // Filter Safe
+    const safeSlots = document.querySelectorAll('.pokemon-safe-slot');
+    safeSlots.forEach(slot => {
+        const index = parseInt(slot.getAttribute('data-index'), 10);
+        const p = state.safe[index];
+        if (p) {
+            slot.style.display = filterFn(p) ? 'flex' : 'none';
+        }
+    });
 };
 
 export function dragStart(event, sourceCol, index) {

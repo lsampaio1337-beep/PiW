@@ -21,29 +21,28 @@ export function showBackpack() {
 
             <style>
                 .backpack-pocket {
-                    position: absolute;
                     cursor: pointer;
-                    border-radius: 50%;
-                    border: 3px solid transparent;
-                    transition: border 0.2s ease-in-out, background 0.2s ease-in-out;
+                    fill: transparent;
+                    stroke: transparent;
+                    stroke-width: 2;
+                    transition: fill 0.2s ease-in-out, stroke 0.2s ease-in-out;
                 }
                 .backpack-pocket:hover {
-                    border-color: rgba(255, 255, 255, 0.5);
-                    background: rgba(255, 255, 255, 0.1);
+                    stroke: rgba(255, 255, 255, 0.5);
+                    fill: rgba(255, 255, 255, 0.1);
                 }
             </style>
             <div onclick="document.getElementById('backpack-content-area').style.display='none'" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2;">
-                <!-- Purple Pokeballs Pocket -->
-                <div class="backpack-pocket" onclick="event.stopPropagation(); window.renderBackpackTab('pokeballs')" style="top: 28%; left: 9.5%; width: 29%; height: 24%; border-radius: 50%;"></div>
-
-                <!-- Yellow Pokemon Pocket -->
-                <div class="backpack-pocket" onclick="event.stopPropagation(); window.renderBackpackTab('pokemon')" style="top: 31%; right: 14%; width: 28%; height: 24%; border-radius: 50%;"></div>
-
-                <!-- Green Potions Pocket -->
-                <div class="backpack-pocket" onclick="event.stopPropagation(); window.renderBackpackTab('potions')" style="top: 61.5%; left: 11%; width: 28%; height: 24%; border-radius: 50%;"></div>
-
-                <!-- Cyan Stones Pocket -->
-                <div class="backpack-pocket" onclick="event.stopPropagation(); window.renderBackpackTab('stones')" style="top: 62.5%; right: 17%; width: 27%; height: 23%; border-radius: 50%;"></div>
+                <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <!-- Purple Pokeballs Pocket -->
+                    <polygon class="backpack-pocket" onclick="event.stopPropagation(); window.renderBackpackTab('pokeballs')" points="20.68,43.95 30.88,35.24 45.41,40.2 48.07,52.48 35.39,62.58 22.61,57.45"></polygon>
+                    <!-- Yellow Pokemon Pocket -->
+                    <polygon class="backpack-pocket" onclick="event.stopPropagation(); window.renderBackpackTab('pokemon')" points="55.06,39.77 68.11,35.42 79.14,43.6 75.09,59.62 60.11,62.24 51.29,52.05"></polygon>
+                    <!-- Green Potions Pocket -->
+                    <polygon class="backpack-pocket" onclick="event.stopPropagation(); window.renderBackpackTab('potions')" points="21.78,71.73 32.54,65.2 43.66,68.42 48.25,75.91 46.42,86.36 29.87,92.28 20.5,83.31"></polygon>
+                    <!-- Cyan Stones Pocket -->
+                    <polygon class="backpack-pocket" onclick="event.stopPropagation(); window.renderBackpackTab('stones')" points="54.69,70.33 71.69,67.02 80.42,78.17 75.09,90.01 61.31,92.54 51.56,82"></polygon>
+                </svg>
             </div>
 
             <div id="backpack-content-area" onclick="event.stopPropagation()" style="position: absolute; bottom: 20px; left: 5%; width: 90%; background: rgba(0,0,0,0.85); padding: 15px; border-radius: 5px; min-height: 250px; z-index: 5; display: none;">
