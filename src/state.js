@@ -27,7 +27,8 @@ export const state = {
         caught: 0,
         shiniesSeen: 0,
         shiniesCaught: 0,
-        playtime: 0
+        playtime: 0,
+        completedChallenges: 0
     },
     settings: {
         gameSpeed: 1.0,
