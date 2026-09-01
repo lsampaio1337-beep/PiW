@@ -10,10 +10,10 @@ export function showBackpack() {
     rightCol.style.display = 'flex';
 
     let html = `
-        <div style="position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; padding: 20px; border-radius: 8px; color: white;">
+        <div style="position: relative; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; width: 100%; height: 100%; padding: 20px; border-radius: 8px; color: white; overflow-x: auto; overflow-y: hidden;">
 
             <!-- Close Button Overlay -->
-            <div style="position: absolute; top: 10px; right: 10px; z-index: 10;">
+            <div style="position: fixed; top: 20px; right: 30px; z-index: 100;">
                 <button onclick="document.getElementById('modal-overlay').style.display='none'" style="background: #e74c3c; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer;">X</button>
             </div>
 
@@ -31,7 +31,7 @@ export function showBackpack() {
                 }
             </style>
 
-            <div style="position: relative; height: 90vh; max-height: 1000px;">
+            <div style="position: relative; height: 90vh; max-height: 1000px; min-width: max-content; margin: 0 auto;">
                 <img src="./Assets/Extra/Backpack.png" style="height: 100%; width: auto; display: block; object-fit: contain;">
 
                 <div onclick="document.getElementById('backpack-content-area').style.display='none'" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2;">
