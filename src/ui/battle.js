@@ -1,3 +1,4 @@
+import { TYPE_COLORS } from '../ui.js';
 import { state, globals } from '../state.js';
 
 export function updateBattleArena() {
@@ -122,7 +123,11 @@ export function updateBattleArena() {
     }
 }
 
-export function showDamage(target, amount, isCrit, moveName = '') {
+
+/* removed TYPE_COLORS */
+
+
+export function showDamage(target, amount, isCrit, moveName = '', moveType = 'Normal', effectiveness = 1) {
     const battleSystem = globals.battleSystem;
     let containerId = target === 'player' ? 'player-sprite' : 'enemy-sprite';
 
@@ -136,7 +141,8 @@ export function showDamage(target, amount, isCrit, moveName = '') {
             const entry = document.createElement('div');
             entry.style.marginBottom = '2px';
             const attacker = target === 'player' ? 'Enemy' : 'You';
-            entry.innerHTML = `${attacker} used <b>${moveName}</b> for <span style="color:${isCrit ? '#f39c12' : '#e74c3c'}">${amount}</span> dmg!`;
+            const typeColor = TYPE_COLORS[moveType] || '#ffffff';
+            entry.innerHTML = `${attacker} used <b style="color:${typeColor}">${moveName}</b> for <span style="color:${typeColor}">${amount}</span> dmg!`;
             log.appendChild(entry);
 
             // Keep only last 4 entries
@@ -150,9 +156,17 @@ export function showDamage(target, amount, isCrit, moveName = '') {
     if (!img) return;
 
     let dmgNode = document.createElement('div');
-    dmgNode.innerText = (moveName ? moveName + ' ' : '') + '-' + amount + (isCrit ? ' (CRIT)' : '');
+
+    const typeColor = TYPE_COLORS[moveType] || '#ffffff';
+    let critText = isCrit ? ' Crit(1.5x)' : '';
+    let effText = `${effectiveness}x`;
+    let typeIconHtml = `<img src="Assets/Extra/Type ${moveType}.png" style="width: 20px; height: 20px; vertical-align: middle; margin: 0 4px;" />`;
+
+    // Layout: [Amount] [Icon] [Name] [Effectiveness] [Crit]
+    dmgNode.innerHTML = `<span style="font-weight: bold; font-style: ${isCrit ? 'italic' : 'normal'}; display: flex; align-items: center; justify-content: center; text-shadow: 1px 1px 2px black;">${amount} ${typeIconHtml} ${moveName} ${effText}${critText}</span>`;
+
     dmgNode.style.position = 'absolute';
-    dmgNode.style.color = isCrit ? '#f39c12' : '#e74c3c';
+    dmgNode.style.color = typeColor;
     dmgNode.style.fontSize = isCrit ? '24px' : '18px';
     dmgNode.style.fontWeight = 'bold';
     dmgNode.style.textShadow = '1px 1px 2px black';
