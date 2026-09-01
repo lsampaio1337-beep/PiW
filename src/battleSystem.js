@@ -407,7 +407,7 @@ class BattleSystem {
         // Show floating damage
         const targetSide = attacker === leader ? 'enemy' : 'player';
         if (typeof window.showDamage === 'function') {
-            window.showDamage(targetSide, hit.damage, hit.isCritical, move.name);
+            window.showDamage(targetSide, hit.damage, hit.isCritical, move.name, move.type, eff);
         }
 
         this.updateUI();
