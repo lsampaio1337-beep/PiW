@@ -266,43 +266,85 @@ class BattleSystem {
     }
 
     generateEncounter() {
-        // Find route spawns based on state.currentRoute
-        const route = this.state.config.routes.find(r => r.name === this.state.currentRoute);
-        if (!route) return;
+        let pokemonBase;
+        let level;
+        let q;
+        let ivs;
 
-        const rand = Math.random();
-        let cumulative = 0;
-        let selectedSpawn = route.spawns[0];
-        for (const spawn of route.spawns) {
-            cumulative += spawn.chance;
-            if (rand <= cumulative) {
-                selectedSpawn = spawn;
-                break;
+        if (this.state.nextForcedEncounter) {
+            const forced = this.state.nextForcedEncounter;
+            pokemonBase = this.state.config.pokemonData.find(p => p.id === forced.id) || this.state.config.pokemonData[0];
+            level = forced.level;
+
+            const qName = forced.qValue >= 2.0 ? "Shiny" : "Custom";
+            q = { name: qName, q: forced.qValue };
+
+            // Distribute SumIV randomly
+            let remainingIV = forced.sumIV;
+            ivs = { hp: 0, atk: 0, def: 0, spa: 0, spd: 0, spe: 0 };
+            const stats = ['hp', 'atk', 'def', 'spa', 'spd', 'spe'];
+
+            while (remainingIV > 0) {
+                // Filter out stats that are already maxed at 100
+                const availableStats = stats.filter(s => ivs[s] < 100);
+                if (availableStats.length === 0) break; // All maxed out
+
+                const randomStat = availableStats[Math.floor(Math.random() * availableStats.length)];
+                ivs[randomStat]++;
+                remainingIV--;
+            }
+
+            if (qName === "Shiny") this.state.stats.shiniesSeen++;
+
+            // Track shiny species
+            if (qName === "Shiny") {
+                if (!this.state.stats.seenShiniesSpecies) this.state.stats.seenShiniesSpecies = {};
+                this.state.stats.seenShiniesSpecies[pokemonBase.name] = true;
+            }
+
+            this.state.nextForcedEncounter = null;
+        } else {
+            // Find route spawns based on state.currentRoute
+            const route = this.state.config.routes.find(r => r.name === this.state.currentRoute);
+            if (!route) return;
+
+            const rand = Math.random();
+            let cumulative = 0;
+            let selectedSpawn = route.spawns[0];
+            for (const spawn of route.spawns) {
+                cumulative += spawn.chance;
+                if (rand <= cumulative) {
+                    selectedSpawn = spawn;
+                    break;
+                }
+            }
+
+            pokemonBase = this.state.config.pokemonData.find(p => p.id === selectedSpawn.pokemonId);
+            level = Math.floor(Math.random() * (selectedSpawn.maxLevel - selectedSpawn.minLevel + 1)) + selectedSpawn.minLevel;
+
+            q = mathEngine.generateQuality(this.state.stats.caught, this.state.stats.shiniesSeen);
+            if (q.name === "Shiny") {
+                this.state.stats.shiniesSeen++;
+                if (!this.state.stats.seenShiniesSpecies) this.state.stats.seenShiniesSpecies = {};
+                this.state.stats.seenShiniesSpecies[pokemonBase.name] = true;
+            }
+
+            ivs = mathEngine.generateIVs(this.state.stats.caught, this.state.stats.shiniesCaught, q.name === "Shiny");
+
+            // Route 1 Level Cap
+            if (this.state.currentRoute === "Route 1") {
+                const playerLevel = this.state.party[0] ? this.state.party[0].level : 1;
+                if (playerLevel === 1) {
+                    level = 1;
+                } else {
+                    level = Math.random() < 0.5 ? 1 : 2;
+                }
             }
         }
-
-        const pokemonBase = this.state.config.pokemonData.find(p => p.id === selectedSpawn.pokemonId);
-        let level = Math.floor(Math.random() * (selectedSpawn.maxLevel - selectedSpawn.minLevel + 1)) + selectedSpawn.minLevel;
-
-        const q = mathEngine.generateQuality(this.state.stats.caught, this.state.stats.shiniesSeen);
-        if (q.name === "Shiny") this.state.stats.shiniesSeen++;
 
         // Track seen for pokedex
         if (!this.state.stats.seenSpecies) this.state.stats.seenSpecies = {};
         this.state.stats.seenSpecies[pokemonBase.name] = true;
-
-
-        // Route 1 Level Cap
-        if (this.state.currentRoute === "Route 1") {
-            const playerLevel = this.state.party[0] ? this.state.party[0].level : 1;
-            if (playerLevel === 1) {
-                level = 1;
-            } else {
-                level = Math.random() < 0.5 ? 1 : 2;
-            }
-        }
-
-        const ivs = mathEngine.generateIVs(this.state.stats.caught, this.state.stats.shiniesCaught, q.name === "Shiny");
 
         const stats = {
             hp: mathEngine.calculateHP(pokemonBase.hp, ivs.hp, level, q.q),
