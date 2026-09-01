@@ -10,13 +10,14 @@ function renderSlotUI(p, listName, origIndex, isDraggable) {
     let cursorStyle = isDraggable ? 'cursor: move;' : 'cursor: default;';
 
     return `
-        <div style="border: 1px solid #777; height: 60px; display: flex; align-items: center; padding: 2px; box-sizing: border-box; background: rgba(0,0,0,0.5); position: relative; ${cursorStyle}" title="Q=${p.quality.toFixed(2)} & ∑IV=${sumIV}" ${dragAttr}>
-            <span style="position: absolute; top: 0; left: 0; font-size: 8px; background: black; padding: 1px; z-index: 2;">${p._tag || ''}</span>
-            <div style="display: flex; flex-direction: column; align-items: center; width: 40px; margin-right: 5px;">
-                <img src="${imgSrc}" style="max-height: 35px; max-width: 35px; object-fit: contain;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
-                <div onclick="event.stopPropagation(); window.showPokemonStats(${origIndex}, '${listName.toLowerCase()}')" style="cursor: pointer; background: #34495e; color: white; border-radius: 50%; width: 14px; height: 14px; text-align: center; line-height: 14px; font-size: 10px; font-weight: bold; margin-top: 2px;" title="View Info">i</div>
+        <div style="border: 1px solid #888; height: 85px; display: flex; align-items: center; padding: 4px; box-sizing: border-box; background: rgba(0,0,0,0.6); position: relative; ${cursorStyle} border-radius: 4px;" title="Q=${p.quality.toFixed(2)} & ∑IV=${sumIV}" ${dragAttr}>
+            <span style="position: absolute; top: 0; left: 0; font-size: 9px; background: rgba(0,0,0,0.8); padding: 1px 3px; border-bottom-right-radius: 4px; z-index: 2;">${p._tag || ''}</span>
+            <div style="display: flex; flex-direction: column; align-items: center; width: 45px; margin-right: 5px;">
+                <img src="${imgSrc}" style="max-height: 40px; max-width: 40px; object-fit: contain;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
+                <div onclick="event.stopPropagation(); window.showPokemonStats(${origIndex}, '${listName.toLowerCase()}')" style="cursor: pointer; background: #3498db; color: white; border-radius: 50%; width: 16px; height: 16px; text-align: center; line-height: 16px; font-size: 11px; font-weight: bold; margin-top: 3px;" title="View Info">i</div>
             </div>
-            <div style="display: flex; flex-direction: column; justify-content: center; font-size: 9px; line-height: 1.2;">
+            <div style="display: flex; flex-direction: column; justify-content: center; font-size: 11px; line-height: 1.3;">
+                <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 65px; font-weight: bold; color: #f1c40f;" title="${p.name}">${p.name}</div>
                 <div>Lv.${p.level}</div>
                 <div>Q:${p.quality.toFixed(2)}</div>
                 <div>∑IV:${sumIV}</div>
@@ -24,6 +25,7 @@ function renderSlotUI(p, listName, origIndex, isDraggable) {
         </div>
     `;
 }
+
 
 // Global filter state
 window.pokemonFilters = window.pokemonFilters || {
@@ -48,25 +50,26 @@ export function renderPokemonTab(area) {
             <style>#pokemon-filters input::-webkit-outer-spin-button, #pokemon-filters input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }</style>
         </div>
 
-        <div style="display: flex; gap: 10px; width: 100%;">
-            <!-- Column 1: Active -->
-            <div style="flex: 1.2; border: 1px solid #555; padding: 5px; min-height: 200px;">
-                <h4 style="text-align: center; margin-top:0;">Active</h4>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px;">
+
+        <div style="display: flex; flex-direction: column; gap: 10px; width: 100%;">
+            <!-- Top Row: Active -->
+            <div style="border: 1px solid #555; padding: 5px; min-height: 80px;">
+                <h4 style="text-align: center; margin: 0 0 5px 0;">Active</h4>
+                <div style="display: grid; grid-template-columns: repeat(8, 1fr); gap: 5px;">
     `;
 
     const activePokemon = [];
-    state.party.forEach((p, idx) => activePokemon.push({...p, _tag: 'Party', _origIndex: idx}));
-    state.breeding.forEach((p, idx) => activePokemon.push({...p, _tag: 'Breed', _origIndex: idx}));
-    state.training.forEach((p, idx) => activePokemon.push({...p, _tag: 'Train', _origIndex: idx}));
+    state.party.forEach((p, idx) => activePokemon.push({...p, _tag: "Party", _origIndex: idx}));
+    state.breeding.forEach((p, idx) => activePokemon.push({...p, _tag: "Breed", _origIndex: idx}));
+    state.training.forEach((p, idx) => activePokemon.push({...p, _tag: "Train", _origIndex: idx}));
 
     for (let i = 0; i < 8; i++) {
         if (i < activePokemon.length) {
             let p = activePokemon[i];
             content += renderSlotUI(p, p._tag, p._origIndex, true);
         } else {
-            let label = i < 6 ? `Party #${i+1}` : (i === 6 ? 'Breed' : 'Training');
-            content += `<div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'party')" style="border: 1px dashed #777; height: 60px; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #777;">${label}</div>`;
+            let label = i < 6 ? `Party #${i+1}` : (i === 6 ? "Breed" : "Training");
+            content += `<div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, "party")" style="border: 1px dashed #777; height: 85px; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #777; text-align: center;">${label}</div>`;
         }
     }
 
@@ -74,21 +77,23 @@ export function renderPokemonTab(area) {
                 </div>
             </div>
 
-            <!-- Column 2: Storage -->
-            <div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'storage')" style="flex: 2; border: 1px solid #555; padding: 5px; min-height: 200px; display: flex; flex-direction: column;">
-                <h4 style="text-align: center; margin-top:0;">Storage</h4>
-                <div id="storage-scroll-container" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; max-height: 250px; overflow-y: auto; align-content: start; flex-grow: 1;">
+            <!-- Bottom Row: Storage & Safe -->
+            <div style="display: flex; gap: 10px; width: 100%;">
+                <!-- Storage -->
+                <div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, "storage")" style="flex: 1; border: 1px solid #555; padding: 5px; display: flex; flex-direction: column;">
+                    <h4 style="text-align: center; margin: 0 0 5px 0;">Storage</h4>
+                    <div id="storage-scroll-container" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; max-height: 250px; overflow-y: auto; align-content: start; flex-grow: 1;">
     `;
 
     const filterFn = (p) => {
         if (filters.name && !p.name.toLowerCase().includes(filters.name.toLowerCase())) return false;
-        if (filters.minLvl !== '' && p.level < parseInt(filters.minLvl)) return false;
-        if (filters.maxLvl !== '' && p.level > parseInt(filters.maxLvl)) return false;
-        if (filters.minQ !== '' && p.quality < parseFloat(filters.minQ)) return false;
-        if (filters.maxQ !== '' && p.quality > parseFloat(filters.maxQ)) return false;
+        if (filters.minLvl !== "" && p.level < parseInt(filters.minLvl)) return false;
+        if (filters.maxLvl !== "" && p.level > parseInt(filters.maxLvl)) return false;
+        if (filters.minQ !== "" && p.quality < parseFloat(filters.minQ)) return false;
+        if (filters.maxQ !== "" && p.quality > parseFloat(filters.maxQ)) return false;
         let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
-        if (filters.minIV !== '' && sumIV < parseInt(filters.minIV)) return false;
-        if (filters.maxIV !== '' && sumIV > parseInt(filters.maxIV)) return false;
+        if (filters.minIV !== "" && sumIV < parseInt(filters.minIV)) return false;
+        if (filters.maxIV !== "" && sumIV > parseInt(filters.maxIV)) return false;
         return true;
     };
 
@@ -96,36 +101,37 @@ export function renderPokemonTab(area) {
     for (let i = 0; i < state.storage.length; i++) {
         let p = state.storage[i];
         if (filterFn(p)) {
-            content += renderSlotUI(p, 'storage', i, true);
+            content += renderSlotUI(p, "storage", i, true);
             displayedStorage++;
         }
     }
-    content += `<div style="border: 1px dashed #777; height: 60px; display: flex; align-items: center; justify-content: center; font-size: 20px;" title="Empty Slot">+</div>`;
+    content += `<div style="border: 1px dashed #777; height: 85px; display: flex; align-items: center; justify-content: center; font-size: 20px;" title="Empty Slot">+</div>`;
 
     content += `
+                    </div>
                 </div>
-            </div>
 
-            <!-- Column 3: Safe -->
-            <div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'safe')" style="flex: 2; border: 1px solid #555; padding: 5px; min-height: 200px; display: flex; flex-direction: column;">
-                <h4 style="text-align: center; margin-top:0;">Safe</h4>
-                <div id="safe-scroll-container" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; max-height: 250px; overflow-y: auto; align-content: start; flex-grow: 1;">
+                <!-- Safe -->
+                <div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, "safe")" style="flex: 1; border: 1px solid #555; padding: 5px; display: flex; flex-direction: column;">
+                    <h4 style="text-align: center; margin: 0 0 5px 0;">Safe</h4>
+                    <div id="safe-scroll-container" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; max-height: 250px; overflow-y: auto; align-content: start; flex-grow: 1;">
     `;
 
     let displayedSafe = 0;
     for (let i = 0; i < state.safe.length; i++) {
         let p = state.safe[i];
         if (filterFn(p)) {
-            content += renderSlotUI(p, 'safe', i, true);
+            content += renderSlotUI(p, "safe", i, true);
             displayedSafe++;
         }
     }
-    content += `<div style="border: 1px dashed #777; height: 60px; display: flex; align-items: center; justify-content: center; font-size: 20px; cursor: pointer;" title="Empty Slot">+</div>`;
+    content += `<div style="border: 1px dashed #777; height: 85px; display: flex; align-items: center; justify-content: center; font-size: 20px; cursor: pointer;" title="Empty Slot">+</div>`;
 
     content += `
+                    </div>
                 </div>
             </div>
-        </div>
+        </div></div>
         <div style="font-size: 10px; text-align: center; margin-top: 5px; color: #ccc;">Drag and Drop to move Pokémon.</div>
     `;
 
