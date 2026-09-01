@@ -62,8 +62,9 @@ function generateQuality(stats = {}) {
     let shinySeenTaskTier = stats.shinySeenTaskTier || 0;
 
     // Shiny Boosters
-    if (shinySeenTaskTier >= 1 && roll === 11999) roll = 12000;
-    if (shinySeenTaskTier >= 2 && roll === 11998) roll = 12000;
+    // Regular gives +1 roll (11999 becomes 12000). Good gives +2 rolls (11998 becomes 12000), completely replacing the +1.
+    if (shinySeenTaskTier >= 2 && roll >= 11998) roll = 12000; // Good Shiny +2 rolls
+    else if (shinySeenTaskTier == 1 && roll === 11999) roll = 12000; // Regular Shiny +1 roll
 
     let qTaskTier = stats.qTaskTier || 0;
     let bonusValue = 0;

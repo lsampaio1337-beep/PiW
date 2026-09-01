@@ -261,21 +261,45 @@ window.showOakLabModal = function() {
     }
     html += renderCard("IV Tasks", 'iv', ivCurrentVal, ivTier, oakTasks.iv, false);
 
-    // Shiny Card (Combined seen and caught, keeps all rewards)
-    let shinySeenTaskHtml = renderActiveTask('shinySeen', state.stats.shiniesSeen || 0, state.stats.shinySeenTaskTier || 0, oakTasks.shinySeen);
-    let shinyCaughtTaskHtml = renderActiveTask('shinyCaught', state.stats.shiniesCaught || 0, state.stats.shinyCaughtTaskTier || 0, oakTasks.shinyCaught);
-
-    let shinyRewardsHtml = "";
+    // Shiny Card (Combined seen and caught, keeps all rewards but obsolete regular seen shiny is removed by good shiny)
     let seenTier = state.stats.shinySeenTaskTier || 0;
     let caughtTier = state.stats.shinyCaughtTaskTier || 0;
 
+    let shinySeenTaskHtml = renderActiveTask('shinySeen', state.stats.shiniesSeen || 0, seenTier, oakTasks.shinySeen);
+    let shinyCaughtTaskHtml = renderActiveTask('shinyCaught', state.stats.shiniesCaught || 0, caughtTier, oakTasks.shinyCaught);
+
+    // Only show "Task: Completed" once if both are done
+    if (seenTier >= oakTasks.shinySeen.length && caughtTier >= oakTasks.shinyCaught.length) {
+        shinySeenTaskHtml = `
+            <div style="margin-bottom: 10px;">
+                <span style="color: #ccc; font-style: italic;">Task: Completed</span>
+            </div>
+        `;
+        shinyCaughtTaskHtml = "";
+    } else {
+        // If one is complete but not the other, we don't want duplicate "Task: Completed" texts
+        // if they rendered their own individual completions. Since we only want a single "Completed" when BOTH are done,
+        // we strip out the individual "Task: Completed" if it exists.
+        if (seenTier >= oakTasks.shinySeen.length) shinySeenTaskHtml = "";
+        if (caughtTier >= oakTasks.shinyCaught.length) shinyCaughtTaskHtml = "";
+    }
+
+    let shinyRewardsHtml = "";
+
+    // Shiny Seen rewards logic (Good Shiny replaces Regular Shiny)
     for (let i = 0; i < seenTier; i++) {
+        let rewardName = oakTasks.shinySeen[i].reward;
+        // If Good Shiny (tier index 1) is unlocked, we skip Regular Shiny (tier index 0)
+        if (seenTier > 1 && i === 0) continue;
+
         shinyRewardsHtml += `
             <div style="font-size: 12px; margin-top: 5px; padding-left: 5px; border-left: 2px solid #4CAF50;">
-                <b>${oakTasks.shinySeen[i].reward}</b>: <span style="color: #4CAF50;">${oakTasks.shinySeen[i].effect}</span>
+                <b>${rewardName}</b>: <span style="color: #4CAF50;">${oakTasks.shinySeen[i].effect}</span>
             </div>
         `;
     }
+
+    // Shiny Caught rewards logic
     for (let i = 0; i < caughtTier; i++) {
         shinyRewardsHtml += `
             <div style="font-size: 12px; margin-top: 5px; padding-left: 5px; border-left: 2px solid #4CAF50;">
