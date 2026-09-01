@@ -125,12 +125,15 @@
       </div>
 
       <!-- View 5: Casino Hub -->
-      <div id="view-casino" class="game-view" style="display:none; background-image: url('./Assets/BG/BG-Cassino.jpg'); text-align: center; background-size: cover; height: 100%;">
-        <div style="background-color: rgba(0,0,0,0.8); display: inline-block; padding: 30px; margin-top: 50px; border-radius: 8px;">
-            <h2>Welcome to Celadon Casino!</h2>
-            <p>Select a troupe to encounter:</p>
-            <div id="casino-buttons-container" style="display: flex; flex-direction: column; gap: 10px;">
-                <!-- Dynamically injected -->
+      <div id="view-casino" class="game-view" style="display:none; background-image: url('./Assets/BG/BG-Cassino.jpg'); text-align: center; background-size: cover; height: 100%; position: relative;">
+        <!-- Casino Content Container, so we can hide/show lobby vs specific background overlays -->
+        <div id="casino-content">
+            <div style="background-color: rgba(0,0,0,0.8); display: inline-block; padding: 30px; margin-top: 50px; border-radius: 8px;">
+                <h2>Welcome to Casino!</h2>
+                <p>Select a troupe to encounter:</p>
+                <div id="casino-buttons-container" style="display: flex; flex-direction: column; gap: 10px;">
+                    <!-- Dynamically injected -->
+                </div>
             </div>
         </div>
       </div>
