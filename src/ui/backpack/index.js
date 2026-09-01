@@ -10,7 +10,7 @@ export function showBackpack() {
     rightCol.style.display = 'flex';
 
     let html = `
-        <div style="position: relative; display: flex; flex-direction: column; align-items: center; padding: 20px; border-radius: 8px; color: white;">
+        <div style="position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; padding: 20px; border-radius: 8px; color: white;">
 
             <!-- Close Button Overlay -->
             <div style="position: absolute; top: 10px; right: 10px; z-index: 10;">
@@ -22,7 +22,7 @@ export function showBackpack() {
                     cursor: pointer;
                     fill: transparent;
                     stroke: transparent;
-                    stroke-width: 0.5;
+                    stroke-width: 5;
                     transition: fill 0.2s ease-in-out, stroke 0.2s ease-in-out;
                 }
                 .backpack-pocket:hover {
@@ -31,19 +31,20 @@ export function showBackpack() {
                 }
             </style>
 
-            <div style="position: relative; width: 100%; max-width: 500px;">
-                <img src="./Assets/Extra/Backpack.png" style="width: 100%; height: auto; display: block;">
+            <div style="position: relative; height: 90vh; max-height: 1000px;">
+                <img src="./Assets/Extra/Backpack.png" style="height: 100%; width: auto; display: block; object-fit: contain;">
 
                 <div onclick="document.getElementById('backpack-content-area').style.display='none'" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2;">
-                    <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <!-- Use exact pixel dimensions of the image for the viewBox to ensure perfect circle scaling -->
+                    <svg width="100%" height="100%" viewBox="0 0 1279 1350" preserveAspectRatio="none">
                         <!-- Purple Pokeballs Pocket -->
-                        <polygon class="backpack-pocket" onclick="event.stopPropagation(); window.renderBackpackTab('pokeballs')" points="20.68,43.95 30.88,35.24 45.41,40.2 48.07,52.48 35.39,62.58 22.61,57.45"></polygon>
+                        <circle class="backpack-pocket" onclick="event.stopPropagation(); window.renderBackpackTab('pokeballs')" cx="436.00" cy="659.21" r="186.13"></circle>
                         <!-- Yellow Pokemon Pocket -->
-                        <polygon class="backpack-pocket" onclick="event.stopPropagation(); window.renderBackpackTab('pokemon')" points="55.06,39.77 68.11,35.42 79.14,43.6 75.09,59.62 60.11,62.24 51.29,52.05"></polygon>
+                        <circle class="backpack-pocket" onclick="event.stopPropagation(); window.renderBackpackTab('pokemon')" cx="839.61" cy="664.26" r="187.63"></circle>
                         <!-- Green Potions Pocket -->
-                        <polygon class="backpack-pocket" onclick="event.stopPropagation(); window.renderBackpackTab('potions')" points="21.78,71.73 32.54,65.2 43.66,68.42 48.25,75.91 46.42,86.36 29.87,92.28 20.5,83.31"></polygon>
+                        <circle class="backpack-pocket" onclick="event.stopPropagation(); window.renderBackpackTab('potions')" cx="437.01" cy="1065.96" r="186.16"></circle>
                         <!-- Cyan Stones Pocket -->
-                        <polygon class="backpack-pocket" onclick="event.stopPropagation(); window.renderBackpackTab('stones')" points="54.69,70.33 71.69,67.02 80.42,78.17 75.09,90.01 61.31,92.54 51.56,82"></polygon>
+                        <circle class="backpack-pocket" onclick="event.stopPropagation(); window.renderBackpackTab('stones')" cx="841.54" cy="1072.47" r="186.09"></circle>
                     </svg>
                 </div>
 
