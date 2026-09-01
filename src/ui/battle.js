@@ -54,6 +54,16 @@ export function updateBattleArena() {
             if (elEnemySprite) {
                 elEnemySprite.src = `Assets/Pokemon Sprites/${enemy.qualityName === 'Shiny' ? enemy.id + '_shiny' : enemy.id}.png`;
                 elEnemySprite.style.display = 'block';
+
+                // Determine animation based on type
+                elEnemySprite.className = ''; // Reset classes
+                if (enemy.types && enemy.types.includes('Flying')) {
+                    elEnemySprite.classList.add('anim-hovering');
+                } else if (enemy.types && enemy.types.includes('Water')) {
+                    elEnemySprite.classList.add('anim-wavy');
+                } else {
+                    elEnemySprite.classList.add('anim-bobbing');
+                }
             }
 
             const leader = state.party[0];
@@ -73,6 +83,16 @@ export function updateBattleArena() {
                 if (elPlayerSprite) {
                     elPlayerSprite.src = `Assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? leader.id + '_shiny' : leader.id}.png`;
                     elPlayerSprite.style.display = 'block';
+
+                    // Determine animation based on type
+                    elPlayerSprite.className = ''; // Reset classes
+                    if (leader.types && leader.types.includes('Flying')) {
+                        elPlayerSprite.classList.add('anim-hovering-flipped');
+                    } else if (leader.types && leader.types.includes('Water')) {
+                        elPlayerSprite.classList.add('anim-wavy-flipped');
+                    } else {
+                        elPlayerSprite.classList.add('anim-bobbing-flipped');
+                    }
                 }
             }
         } else if (battleSystem && battleSystem.isSearching) {
@@ -108,6 +128,16 @@ export function updateBattleArena() {
                 if (elPlayerSprite) {
                     elPlayerSprite.src = `Assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? leader.id + '_shiny' : leader.id}.png`;
                     elPlayerSprite.style.display = 'block';
+
+                    // Determine animation based on type
+                    elPlayerSprite.className = ''; // Reset classes
+                    if (leader.types && leader.types.includes('Flying')) {
+                        elPlayerSprite.classList.add('anim-hovering-flipped');
+                    } else if (leader.types && leader.types.includes('Water')) {
+                        elPlayerSprite.classList.add('anim-wavy-flipped');
+                    } else {
+                        elPlayerSprite.classList.add('anim-bobbing-flipped');
+                    }
                 }
             } else {
                 const elPlayerSprite = document.getElementById('player-sprite');
@@ -169,6 +199,26 @@ export function showDamage(target, amount, isCrit, moveName = '') {
     dmgNode.style.top = (rect.top - parentRect.top) + 'px';
 
     img.parentElement.appendChild(dmgNode);
+
+    // Determine lunge class depending on who attacked
+    // If target is player, enemy is lunging. If target is enemy, player is lunging.
+    const attackerImgId = target === 'player'
+        ? (battleSystem.gymState && battleSystem.gymState.isActive ? 'gym-enemy-sprite' : 'enemy-sprite')
+        : (battleSystem.gymState && battleSystem.gymState.isActive ? 'gym-player-sprite' : 'player-sprite');
+
+    const attackerImg = document.getElementById(attackerImgId);
+
+    if (attackerImg) {
+        // Find if they need flipped version or normal version (player sprite is usually flipped via CSS or transform)
+        const isPlayerAttacking = (target === 'enemy' || target === 'gym-enemy');
+        const lungeClass = isPlayerAttacking ? 'anim-lunge-flipped' : 'anim-lunge';
+
+        attackerImg.classList.add(lungeClass);
+        // Remove lunge class after animation ends (300ms)
+        setTimeout(() => {
+            attackerImg.classList.remove(lungeClass);
+        }, 300);
+    }
 
     // Animate up and fade out
     setTimeout(() => {

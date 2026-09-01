@@ -89,10 +89,23 @@ input[type="number"] {
     flex: 1;
     position: relative;
     background-size: cover;
+    background-position: left center;
+    background-repeat: repeat-x;
     display: flex;
-    flex-direction: column;
+    flex-direction: row; /* Horizontal 2.5D perspective */
     justify-content: space-between;
+    align-items: flex-end;
     padding: 40px;
+    overflow: hidden;
+}
+
+.parallax-bg {
+    animation: parallax-scroll 20s linear infinite;
+}
+
+@keyframes parallax-scroll {
+    from { background-position: 0% center; }
+    to { background-position: 100% center; }
 }
 
 #view-prof-oak-lab {
@@ -106,24 +119,24 @@ input[type="number"] {
 .game-view {
     flex: 1;
     display: none;
+    flex-direction: column;
+}
+
+.side-scrolling-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 5;
+    margin-bottom: 20px;
 }
 
 #enemy-side {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    align-self: flex-end;
-    margin-top: 20px;
-    position: relative;
+    /* Comes from the right */
 }
 
 #player-side {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    align-self: flex-start;
-    margin-bottom: 20px;
-    position: relative;
+    /* On the left */
 }
 
 .stats-box {
@@ -133,24 +146,101 @@ input[type="number"] {
     min-width: 200px;
     height: 70px;
     z-index: 10;
+    margin-bottom: 20px;
 }
 .stats-box h4 { margin: 0 0 5px 0; font-size: 14px;}
 
-#enemy-sprite {
+.sprite-container {
     width: 150px;
     height: 150px;
-    margin-top: -10px;
-    object-fit: contain;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
     position: relative;
 }
 
+#enemy-sprite {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    position: relative;
+    transform-origin: bottom center;
+}
+
 #player-sprite {
-    width: 150px;
-    height: 150px;
-    margin-right: 20px;
+    width: 100%;
+    height: 100%;
     transform: scaleX(-1); /* Face right */
     object-fit: contain;
     position: relative;
+    transform-origin: bottom center;
+}
+
+/* Animations for sprite movement based on type */
+
+/* Walking / Bobbing */
+.anim-bobbing {
+    animation: bobbing 1s ease-in-out infinite alternate;
+}
+@keyframes bobbing {
+    0% { transform: translateY(0) scaleY(1) scaleX(1); }
+    100% { transform: translateY(-10px) scaleY(0.95) scaleX(1.02); }
+}
+.anim-bobbing-flipped {
+    animation: bobbing-flipped 1s ease-in-out infinite alternate;
+}
+@keyframes bobbing-flipped {
+    0% { transform: scaleX(-1) translateY(0) scaleY(1); }
+    100% { transform: scaleX(-1) translateY(-10px) scaleY(0.95); }
+}
+
+
+/* Flying / Hovering */
+.anim-hovering {
+    animation: hovering 2s ease-in-out infinite alternate;
+}
+@keyframes hovering {
+    0% { transform: translateY(-30px); }
+    100% { transform: translateY(-50px); }
+}
+.anim-hovering-flipped {
+    animation: hovering-flipped 2s ease-in-out infinite alternate;
+}
+@keyframes hovering-flipped {
+    0% { transform: scaleX(-1) translateY(-30px); }
+    100% { transform: scaleX(-1) translateY(-50px); }
+}
+
+/* Swimming / Wavy */
+.anim-wavy {
+    animation: wavy 1.5s ease-in-out infinite alternate;
+}
+@keyframes wavy {
+    0% { transform: translateY(0) rotate(-5deg); }
+    100% { transform: translateY(-15px) rotate(5deg); }
+}
+.anim-wavy-flipped {
+    animation: wavy-flipped 1.5s ease-in-out infinite alternate;
+}
+@keyframes wavy-flipped {
+    0% { transform: scaleX(-1) translateY(0) rotate(5deg); }
+    100% { transform: scaleX(-1) translateY(-15px) rotate(-5deg); }
+}
+
+/* Lunge / Attacking */
+.anim-lunge {
+    animation: lunge 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1 alternate !important;
+}
+@keyframes lunge {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50px); } /* Towards left (enemy -> player) */
+}
+.anim-lunge-flipped {
+    animation: lunge-flipped 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1 alternate !important;
+}
+@keyframes lunge-flipped {
+    0% { transform: scaleX(-1) translateX(0); }
+    100% { transform: scaleX(-1) translateX(-50px); } /* Towards right (player -> enemy). Because scaleX(-1), translateX negative moves right visually */
 }
 
 #combat-log {

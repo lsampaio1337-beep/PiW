@@ -74,24 +74,30 @@
 
       <!-- View 2: Battle Arena -->
       <div id="view-battle-arena" class="game-view" style="display:none;">
-        <div id="combat-arena">
-          <div id="enemy-side">
-            <div class="stats-box">
-              <h4 id="enemy-name">Wild Pokemon</h4>
-              <div>Lvl: <span id="enemy-lvl">?</span></div>
-              <div>HP: <span id="enemy-hp">?/?</span></div>
-            </div>
-            <img id="enemy-sprite" src="" alt="Enemy Sprite">
-          </div>
+        <div id="combat-arena" class="parallax-bg">
 
-          <div id="player-side">
-            <img id="player-sprite" src="" alt="Player Sprite">
+          <div id="player-side" class="side-scrolling-side">
             <div class="stats-box">
               <h4 id="player-name">Player Leader</h4>
               <div>Lvl: <span id="player-lvl">?</span></div>
               <div>HP: <span id="player-hp">?/?</span></div>
             </div>
+            <div class="sprite-container">
+              <img id="player-sprite" src="" alt="Player Sprite">
+            </div>
           </div>
+
+          <div id="enemy-side" class="side-scrolling-side">
+            <div class="stats-box">
+              <h4 id="enemy-name">Wild Pokemon</h4>
+              <div>Lvl: <span id="enemy-lvl">?</span></div>
+              <div>HP: <span id="enemy-hp">?/?</span></div>
+            </div>
+            <div class="sprite-container">
+              <img id="enemy-sprite" src="" alt="Enemy Sprite">
+            </div>
+          </div>
+
         </div>
 
         <div id="combat-log">
