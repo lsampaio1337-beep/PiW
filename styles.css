@@ -28,6 +28,13 @@ body {
     border-radius: 4px;
 }
 
+/* Fix electron input focus issue */
+input, textarea {
+  -webkit-user-select: text !important;
+  user-select: text !important;
+  -webkit-app-region: no-drag;
+}
+
 /* Hide up/down arrows for number inputs in settings */
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
