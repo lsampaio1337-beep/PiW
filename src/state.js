@@ -28,7 +28,12 @@ export const state = {
         shiniesSeen: 0,
         shiniesCaught: 0,
         playtime: 0,
-        completedChallenges: 0
+        completedChallenges: 0,
+        qTaskTier: 0,
+        cTaskTier: 0,
+        shinySeenTaskTier: 0,
+        shinyCaughtTaskTier: 0,
+        ivTaskTier: 0
     },
     settings: {
         gameSpeed: 1.0,
