@@ -2,7 +2,12 @@ import { state } from '../state.js';
 import { showModal } from '../ui.js';
 
 export function showPokedex() {
-    let html = `<h2>Pokedex</h2><p>Caught: ${state.stats.caught} / 150</p><p>Shinies Seen: ${state.stats.shiniesSeen || 0}</p><div style="display:flex; flex-wrap:wrap; max-height:400px; overflow-y:auto; gap:10px;">`;
+    let uniqueSpeciesCaught = 0;
+    if (state.stats.caughtSpecies) {
+        uniqueSpeciesCaught = Object.keys(state.stats.caughtSpecies).length;
+    }
+
+    let html = `<h2>Pokedex</h2><p>Caught: ${uniqueSpeciesCaught} / 150</p><div style="display:flex; flex-wrap:wrap; max-height:400px; overflow-y:auto; gap:10px;">`;
 
     if (!state.config.pokemonData) {
         html += "<p>Loading Pokedex data...</p>";
