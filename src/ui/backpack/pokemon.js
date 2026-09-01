@@ -77,7 +77,7 @@ export function renderPokemonTab(area) {
             <!-- Column 2: Storage -->
             <div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'storage')" style="flex: 2; border: 1px solid #555; padding: 5px; min-height: 200px; display: flex; flex-direction: column;">
                 <h4 style="text-align: center; margin-top:0;">Storage</h4>
-                <div id="storage-scroll-container" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; max-height: 250px; overflow-y: auto; align-content: start; flex-grow: 1;">
+                <div id="storage-scroll-container" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; max-height: 250px; overflow-y: auto; align-content: start; flex-grow: 1;">
     `;
 
     const filterFn = (p) => {
@@ -109,7 +109,7 @@ export function renderPokemonTab(area) {
             <!-- Column 3: Safe -->
             <div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'safe')" style="flex: 2; border: 1px solid #555; padding: 5px; min-height: 200px; display: flex; flex-direction: column;">
                 <h4 style="text-align: center; margin-top:0;">Safe</h4>
-                <div id="safe-scroll-container" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; max-height: 250px; overflow-y: auto; align-content: start; flex-grow: 1;">
+                <div id="safe-scroll-container" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; max-height: 250px; overflow-y: auto; align-content: start; flex-grow: 1;">
     `;
 
     let displayedSafe = 0;
@@ -130,6 +130,17 @@ export function renderPokemonTab(area) {
     `;
 
 
+    // Capture focus state
+    let activeElementId = document.activeElement ? document.activeElement.id : null;
+    let selectionStart = 0;
+    let selectionEnd = 0;
+    if (activeElementId && document.activeElement.tagName === 'INPUT') {
+        try {
+            selectionStart = document.activeElement.selectionStart;
+            selectionEnd = document.activeElement.selectionEnd;
+        } catch(e) {}
+    }
+
     // Capture previous scroll positions
     let prevStorageScroll = 0;
     let prevSafeScroll = 0;
@@ -140,12 +151,24 @@ export function renderPokemonTab(area) {
 
     area.innerHTML = content;
 
+    // Restore focus state
+    if (activeElementId) {
+        let el = document.getElementById(activeElementId);
+        if (el) {
+            el.focus();
+            if (el.tagName === 'INPUT') {
+                try {
+                    el.setSelectionRange(selectionStart, selectionEnd);
+                } catch(e) {}
+            }
+        }
+    }
+
     // Restore scroll positions
     const newStorage = document.getElementById('storage-scroll-container');
     const newSafe = document.getElementById('safe-scroll-container');
     if (newStorage) newStorage.scrollTop = prevStorageScroll;
     if (newSafe) newSafe.scrollTop = prevSafeScroll;
-
 }
 
 window.updatePokemonFilter = function(key, val) {
