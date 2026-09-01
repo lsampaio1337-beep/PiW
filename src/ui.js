@@ -33,7 +33,7 @@ import { updateBattleArena, showDamage } from './ui/battle.js';
 import { showMap, navigateToLocation, showMapTooltip, hideMapTooltip } from './ui/map.js';
 import { showPokedex, showDexEntry } from './ui/pokedex.js';
 import { showPokemonStats, evolvePokemon } from './ui/pokemonStats.js';
-import { showSettings, updateGameSpeed, addMoney, addXp, exportLog } from './ui/settings.js';
+import { showSettings, updateGameSpeed, addMoney, addXp, exportLog, showAddPokemonModal, forceNextEncounter } from './ui/settings.js';
 import { setupMarket, buyItem } from './ui/market.js';
 import { showBackpack, renderBackpackTab, setActiveItem } from './ui/backpack/index.js';
 import { dragStart, dragOver, handleDrop } from './ui/backpack/pokemon.js';
@@ -61,6 +61,8 @@ window.addMoney = addMoney;
 window.addXp = addXp;
 window.exportLog = exportLog;
 window.buyItem = buyItem;
+window.showAddPokemonModal = showAddPokemonModal;
+window.forceNextEncounter = forceNextEncounter;
 window.dragStart = dragStart;
 window.completeChallenge = function() {
     state.stats.completedChallenges = (state.stats.completedChallenges || 0) + 1;
