@@ -19,10 +19,10 @@ function renderSlotUI(p, listName, origIndex, isDraggable) {
     }
 
     return `
-        <div class="${slotClass}" ${dataAttr} style="border: 1px solid #777; height: 100px; display: flex; flex-direction: column; align-items: center; padding: 2px; box-sizing: border-box; background: rgba(0,0,0,0.5); position: relative; ${cursorStyle}" title="Q=${p.quality.toFixed(2)} & ∑IV=${sumIV}" ${dragAttr}>
+        <div class="${slotClass}" ${dataAttr} style="border: 1px solid #777; aspect-ratio: 1 / 1.5; display: flex; flex-direction: column; align-items: center; padding: 2px; box-sizing: border-box; background: rgba(0,0,0,0.5); position: relative; ${cursorStyle}" title="Q=${p.quality.toFixed(2)} & ∑IV=${sumIV}" ${dragAttr}>
             <span style="position: absolute; top: 0; left: 0; font-size: 8px; background: black; padding: 1px; z-index: 2;">${p._tag || ''}</span>
             <div onclick="event.stopPropagation(); window.showPokemonStats(${origIndex}, '${listName.toLowerCase()}')" style="position: absolute; top: 2px; right: 2px; cursor: pointer; background: #34495e; color: white; border-radius: 50%; width: 16px; height: 16px; text-align: center; line-height: 16px; font-size: 10px; font-weight: bold; z-index: 2;" title="View Info">i</div>
-            <img src="${imgSrc}" style="height: 50px; width: 50px; object-fit: contain; margin-top: 5px;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
+            <img src="${imgSrc}" style="height: 50%; width: 100%; object-fit: contain; margin-top: 5px;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
             <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 9px; line-height: 1.2; width: 100%; margin-top: auto;">
                 <div>Lv.${p.level}</div>
                 <div>Q:${p.quality.toFixed(2)}</div>
@@ -55,11 +55,11 @@ export function renderPokemonTab(area) {
             <style>#pokemon-filters input::-webkit-outer-spin-button, #pokemon-filters input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }</style>
         </div>
 
-        <div style="display: flex; gap: 10px; width: 100%;">
+        <div style="display: flex; gap: 10px; width: 100%; height: 55vh; min-height: 300px; flex-shrink: 1;">
             <!-- Column 1: Active -->
-            <div style="flex: 2; border: 1px solid #555; padding: 5px; min-height: 400px; display: flex; flex-direction: column;">
+            <div style="flex: 2; border: 1px solid #555; padding: 5px; display: flex; flex-direction: column; overflow: hidden; min-width: 0;">
                 <h4 style="text-align: center; margin-top:0;">Active</h4>
-                <div id="active-scroll-container" style="display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-rows: 100px; gap: 5px; max-height: 500px; overflow-y: scroll; align-content: start; flex-grow: 1; padding-bottom: 20px;">
+                <div id="active-scroll-container" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 5px; overflow-y: scroll; align-content: start; flex-grow: 1; padding-bottom: 20px;">
     `;
 
     const activePokemon = [];
@@ -73,7 +73,7 @@ export function renderPokemonTab(area) {
             content += renderSlotUI(p, p._tag, p._origIndex, true);
         } else {
             let label = i < 6 ? `Party #${i+1}` : (i === 6 ? 'Breed' : 'Training');
-            content += `<div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'party')" style="border: 1px dashed #777; height: 100px; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #777;">${label}</div>`;
+            content += `<div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'party')" style="border: 1px dashed #777; aspect-ratio: 1 / 1.5; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #777; box-sizing: border-box;">${label}</div>`;
         }
     }
 
@@ -82,32 +82,32 @@ export function renderPokemonTab(area) {
             </div>
 
             <!-- Column 2: Storage -->
-            <div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'storage')" style="flex: 4; border: 1px solid #555; padding: 5px; min-height: 400px; display: flex; flex-direction: column;">
+            <div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'storage')" style="flex: 4; border: 1px solid #555; padding: 5px; display: flex; flex-direction: column; overflow: hidden; min-width: 0;">
                 <h4 style="text-align: center; margin-top:0;">Storage</h4>
-                <div id="storage-scroll-container" style="display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 100px; gap: 5px; max-height: 500px; overflow-y: scroll; align-content: start; flex-grow: 1; padding-bottom: 20px;">
+                <div id="storage-scroll-container" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 5px; overflow-y: scroll; align-content: start; flex-grow: 1; padding-bottom: 20px;">
     `;
 
     for (let i = 0; i < state.storage.length; i++) {
         let p = state.storage[i];
         content += renderSlotUI(p, 'storage', i, true);
     }
-    content += `<div style="border: 1px dashed #777; height: 100px; display: flex; align-items: center; justify-content: center; font-size: 20px;" title="Empty Slot">+</div>`;
+    content += `<div style="border: 1px dashed #777; aspect-ratio: 1 / 1.5; display: flex; align-items: center; justify-content: center; font-size: 20px; box-sizing: border-box;" title="Empty Slot">+</div>`;
 
     content += `
                 </div>
             </div>
 
             <!-- Column 3: Safe -->
-            <div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'safe')" style="flex: 2; border: 1px solid #555; padding: 5px; min-height: 400px; display: flex; flex-direction: column;">
+            <div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'safe')" style="flex: 2; border: 1px solid #555; padding: 5px; display: flex; flex-direction: column; overflow: hidden; min-width: 0;">
                 <h4 style="text-align: center; margin-top:0;">Safe</h4>
-                <div id="safe-scroll-container" style="display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-rows: 100px; gap: 5px; max-height: 500px; overflow-y: scroll; align-content: start; flex-grow: 1; padding-bottom: 20px;">
+                <div id="safe-scroll-container" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 5px; overflow-y: scroll; align-content: start; flex-grow: 1; padding-bottom: 20px;">
     `;
 
     for (let i = 0; i < state.safe.length; i++) {
         let p = state.safe[i];
         content += renderSlotUI(p, 'safe', i, true);
     }
-    content += `<div style="border: 1px dashed #777; height: 100px; display: flex; align-items: center; justify-content: center; font-size: 20px; cursor: pointer;" title="Empty Slot">+</div>`;
+    content += `<div style="border: 1px dashed #777; aspect-ratio: 1 / 1.5; display: flex; align-items: center; justify-content: center; font-size: 20px; cursor: pointer; box-sizing: border-box;" title="Empty Slot">+</div>`;
 
     content += `
                 </div>
