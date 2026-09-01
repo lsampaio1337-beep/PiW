@@ -5,6 +5,27 @@ import Storage from "./storage.js";
 
 // Import State and modules
 import { state, setBattleSystem, globals } from './state.js';
+
+export const TYPE_COLORS = {
+    "Normal": "#A8A77A",
+    "Fire": "#EE8130",
+    "Water": "#6390F0",
+    "Electric": "#F7D02C",
+    "Grass": "#7AC74C",
+    "Ice": "#96D9D6",
+    "Fighting": "#C22E28",
+    "Poison": "#A33EA1",
+    "Ground": "#E2BF65",
+    "Flying": "#A98FF3",
+    "Psychic": "#F95587",
+    "Bug": "#A6B91A",
+    "Rock": "#B6A136",
+    "Ghost": "#735797",
+    "Dragon": "#6F35FC",
+    "Dark": "#705848",
+    "Steel": "#B7B7CE",
+    "Fairy": "#D685AD"
+};
 import { updateTopbar } from './ui/topbar.js';
 import { updateSidebar } from './ui/sidebar.js';
 import { updateBattleArena, showDamage } from './ui/battle.js';
