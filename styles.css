@@ -117,7 +117,6 @@ input[type="number"] {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: -50px;
     transition: right 2s linear, transform 2s linear;
 }
 #enemy-side.spawning {
@@ -133,7 +132,6 @@ input[type="number"] {
     display: flex;
     flex-direction: column-reverse;
     align-items: center;
-    margin-top: 50px;
 }
 
 .stats-box {
@@ -310,7 +308,7 @@ input[type="number"] {
 }
 
 .pokeball-shake {
-    animation: shake-ball 0.5s ease-in-out 2;
+    animation: shake-ball 0.5s ease-in-out 6; /* 3 seconds total */
     transform: scale(0.5);
 }
 
@@ -359,6 +357,7 @@ input[type="number"] {
 /* Splash Animation */
 @keyframes splash-burst {
     0% { transform: scale(0.5); opacity: 1; }
+    80% { transform: scale(2); opacity: 0.8; }
     100% { transform: scale(2); opacity: 0; }
 }
 
@@ -368,7 +367,7 @@ input[type="number"] {
     height: 60px;
     border-radius: 50%;
     z-index: 51;
-    animation: splash-burst 0.3s ease-out forwards;
+    animation: splash-burst 0.8s ease-out forwards;
     pointer-events: none;
     background: radial-gradient(circle, currentColor 0%, transparent 70%);
     top: 50%;
@@ -376,3 +375,26 @@ input[type="number"] {
     margin-top: -30px;
     margin-left: -30px;
 }
+
+.is-flying { transform: translateY(-30px); }
+
+.fainting { transition: opacity 2.5s ease-out; opacity: 0 !important; }
+
+@keyframes battle-idle {
+    0%, 100% { transform: scaleX(var(--facing, 1)) scaleY(1); }
+    50% { transform: scaleX(var(--facing, 1)) scaleY(0.95); }
+}
+.anim-battle-idle { animation: battle-idle 1.5s infinite ease-in-out; }
+
+@keyframes battle-attack {
+    0% { transform: scaleX(var(--facing, 1)) translateX(0); }
+    50% { transform: scaleX(var(--facing, 1)) translateX(calc(20px * var(--facing, 1))); }
+    100% { transform: scaleX(var(--facing, 1)) translateX(0); }
+}
+.anim-attack { animation: battle-attack 0.3s ease-out forwards; }
+
+@keyframes battle-damage {
+    0%, 100% { opacity: 1; filter: brightness(1); }
+    25%, 75% { opacity: 0.5; filter: brightness(2); }
+}
+.anim-damage { animation: battle-damage 0.3s ease-in-out forwards; }

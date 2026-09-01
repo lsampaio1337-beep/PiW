@@ -32,6 +32,13 @@ class BattleSystem {
             clearTimeout(this.damageTimeout);
             this.damageTimeout = null;
         }
+        if (this.faintTimeout) clearTimeout(this.faintTimeout);
+        if (this.catchTimeout) clearTimeout(this.catchTimeout);
+        if (this.fadeTimeout) clearTimeout(this.fadeTimeout);
+        this.faintTimeout = null;
+        this.catchTimeout = null;
+        this.fadeTimeout = null;
+        if (typeof window.clearEnemyFaint === 'function') window.clearEnemyFaint();
     }
 
     getTypeEffectiveness(moveType, defenderTypes) {
@@ -436,11 +443,14 @@ class BattleSystem {
             this.updateUI();
 
             if (defender.currentHp <= 0) {
-                if (defender === this.activeEncounter) {
-                    this.handleEnemyDefeat();
-                } else {
-                    this.handleFaint();
-                }
+                // Wait for the splash to finish (800ms) before triggering faint sequences
+                this.faintTimeout = setTimeout(() => {
+                    if (defender === this.activeEncounter) {
+                        this.handleEnemyDefeat();
+                    } else {
+                        this.handleFaint();
+                    }
+                }, 800);
             } else {
                 this.scheduleNextStrike(attacker, defender);
             }
@@ -491,20 +501,29 @@ class BattleSystem {
         const leader = this.state.party[0];
         const ev = this.activeEncounter.ev;
 
+        if (typeof window.triggerEnemyFaint === 'function') {
+            window.triggerEnemyFaint();
+        }
+
         // Auto Throw Pokeball logic (disable in gyms)
         if (this.state.settings.autoCatch && (!this.gymState || !this.gymState.isActive) && typeof window.triggerCatchAnimation === 'function') {
-            const catchResult = this.throwPokeballResult(); // Use new function that returns object
+            const catchResult = this.throwPokeballResult();
             if (catchResult.threw) {
-                // Pause loop for animation
                 this.stop();
-                window.triggerCatchAnimation(catchResult.ballName, catchResult.caught, () => {
-                    this.finalizeEnemyDefeat(ev, catchResult.caught);
-                });
+                this.catchTimeout = setTimeout(() => {
+                    window.triggerCatchAnimation(catchResult.ballName, catchResult.caught, () => {
+                        this.finalizeEnemyDefeat(ev, catchResult.caught);
+                    });
+                }, 0); // Trigger immediately as fade starts
                 return;
             }
         }
 
-                this.finalizeEnemyDefeat(ev, false);
+        // Wait 2.5s for the fade animation before finalizing if not catching
+        this.stop();
+        this.fadeTimeout = setTimeout(() => {
+            this.finalizeEnemyDefeat(ev, false);
+        }, 2500);
     }
 
     throwPokeballResult() {
@@ -675,6 +694,9 @@ class BattleSystem {
 
         if (this.combatLoop) clearTimeout(this.combatLoop);
         if (this.damageTimeout) clearTimeout(this.damageTimeout);
+        if (this.faintTimeout) clearTimeout(this.faintTimeout);
+        if (this.catchTimeout) clearTimeout(this.catchTimeout);
+        if (this.fadeTimeout) clearTimeout(this.fadeTimeout);
 
         if (this.state.party[0].currentHp <= 0) {
             this.handleWipeout();
@@ -724,6 +746,9 @@ class BattleSystem {
             if (this.activeEncounter) {
                 if (this.combatLoop) clearTimeout(this.combatLoop);
                 if (this.damageTimeout) clearTimeout(this.damageTimeout);
+                if (this.faintTimeout) clearTimeout(this.faintTimeout);
+                if (this.catchTimeout) clearTimeout(this.catchTimeout);
+                if (this.fadeTimeout) clearTimeout(this.fadeTimeout);
                 this.scheduleTurn();
             }
         }
