@@ -29,7 +29,7 @@ export const TYPE_COLORS = {
 };
 import { updateTopbar } from './ui/topbar.js';
 import { updateSidebar } from './ui/sidebar.js';
-import { updateBattleArena, showDamage } from './ui/battle.js';
+import { updateBattleArena, showDamage, playAttackAnimation, playAttackedAnimation, shootProjectile, playEnemyDefeatAnimation, playPokeballAnimation, pauseIdleAnimation, resumeIdleAnimation } from './ui/battle.js';
 import { showMap, navigateToLocation, showMapTooltip, hideMapTooltip } from './ui/map.js';
 import { showPokedex, showDexEntry } from './ui/pokedex.js';
 import { showPokemonStats, evolvePokemon } from './ui/pokemonStats.js';
@@ -72,6 +72,11 @@ window.completeChallenge = function() {
 window.dragOver = dragOver;
 window.handleDrop = handleDrop;
 window.showDamage = showDamage;
+window.playAttackAnimation = playAttackAnimation;
+window.playAttackedAnimation = playAttackedAnimation;
+window.shootProjectile = shootProjectile;
+window.playEnemyDefeatAnimation = playEnemyDefeatAnimation;
+window.playPokeballAnimation = playPokeballAnimation;
 window.setLeader = function(idx) {
     if (idx === 0) return;
     if (globals.battleSystem) {
@@ -545,3 +550,6 @@ async function init() {
 
 // Ensure the UI script runs
 init();
+
+window.pauseIdleAnimation = pauseIdleAnimation;
+window.resumeIdleAnimation = resumeIdleAnimation;

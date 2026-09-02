@@ -94,12 +94,18 @@
               <div>Lvl: <span id="enemy-lvl">?</span></div>
               <div>HP: <span id="enemy-hp">?/?</span></div>
             </div>
-            <img id="enemy-sprite" src="" alt="Enemy Sprite">
+            <div style="position: relative;">
+                <div id="enemy-fake-water" class="fake-water" style="display: none;"></div>
+                <img id="enemy-sprite" src="" alt="Enemy Sprite">
+            </div>
           </div>
 
           <div id="player-side">
-            <img id="player-sprite" src="" alt="Player Sprite">
-            <div class="stats-box">
+            <div style="position: relative;">
+                <div id="player-fake-water" class="fake-water" style="display: none;"></div>
+                <img id="player-sprite" src="" alt="Player Sprite">
+            </div>
+            <div class="stats-box" style="margin-left: 20px;">
               <h4 id="player-name">Player Leader</h4>
               <div>Lvl: <span id="player-lvl">?</span></div>
               <div>HP: <span id="player-hp">?/?</span></div>

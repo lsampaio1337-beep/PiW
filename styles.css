@@ -111,19 +111,19 @@ input[type="number"] {
 #enemy-side {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
-    align-self: flex-end;
-    margin-top: 20px;
-    position: relative;
+    align-items: center;
+    position: absolute;
+    right: 15%;
+    top: 20px;
 }
 
 #player-side {
     display: flex;
     flex-direction: row;
-    align-items: flex-end;
-    align-self: flex-start;
-    margin-bottom: 20px;
-    position: relative;
+    align-items: center;
+    position: absolute;
+    left: 15%;
+    bottom: 40px;
 }
 
 .stats-box {
@@ -139,18 +139,124 @@ input[type="number"] {
 #enemy-sprite {
     width: 150px;
     height: 150px;
-    margin-top: -10px;
+    margin-top: 10px;
     object-fit: contain;
     position: relative;
+    z-index: 5;
 }
 
 #player-sprite {
     width: 150px;
     height: 150px;
-    margin-right: 20px;
+    margin-top: 10px;
     transform: scaleX(-1); /* Face right */
     object-fit: contain;
     position: relative;
+    z-index: 5;
+}
+
+/* Base Idle Animations */
+@keyframes anim-walk {
+    0%, 100% { transform: scaleX(-1) rotate(0deg) translateY(0); }
+    25% { transform: scaleX(-1) rotate(-5deg) translateY(-3px); }
+    75% { transform: scaleX(-1) rotate(5deg) translateY(-3px); }
+}
+
+@keyframes anim-walk-enemy {
+    0%, 100% { transform: rotate(0deg) translateY(0); }
+    25% { transform: rotate(-5deg) translateY(-3px); }
+    75% { transform: rotate(5deg) translateY(-3px); }
+}
+
+@keyframes anim-fly {
+    0%, 100% { transform: scaleX(-1) translateY(0); }
+    50% { transform: scaleX(-1) translateY(-15px); }
+}
+
+@keyframes anim-fly-enemy {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+@keyframes anim-swim {
+    0%, 100% { transform: scaleX(-1) translateY(0) rotate(0deg); }
+    50% { transform: scaleX(-1) translateY(-10px) rotate(3deg); }
+}
+
+@keyframes anim-swim-enemy {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(-3deg); }
+}
+
+.anim-idle-walk { animation: anim-walk 1s infinite ease-in-out; }
+.anim-idle-walk-enemy { animation: anim-walk-enemy 1s infinite ease-in-out; }
+.anim-idle-fly { animation: anim-fly 2s infinite ease-in-out; }
+.anim-idle-fly-enemy { animation: anim-fly-enemy 2s infinite ease-in-out; }
+.anim-idle-swim { animation: anim-swim 2.5s infinite ease-in-out; }
+.anim-idle-swim-enemy { animation: anim-swim-enemy 2.5s infinite ease-in-out; }
+
+/* Attack and Defend Animations */
+@keyframes anim-attack {
+    0% { transform: scaleX(-1) translateX(0); }
+    30% { transform: scaleX(-1) translateX(15px) rotate(10deg); } /* Move back */
+    70% { transform: scaleX(-1) translateX(-30px) rotate(-10deg); } /* Lunge forward */
+    100% { transform: scaleX(-1) translateX(0); }
+}
+
+@keyframes anim-attack-enemy {
+    0% { transform: translateX(0); }
+    30% { transform: translateX(15px) rotate(10deg); }
+    70% { transform: translateX(-30px) rotate(-10deg); }
+    100% { transform: translateX(0); }
+}
+
+@keyframes anim-attacked {
+    0% { transform: scaleX(-1) translateX(0); filter: brightness(1); }
+    20% { transform: scaleX(-1) translateX(-5px); filter: brightness(2) sepia(1) hue-rotate(300deg); }
+    40% { transform: scaleX(-1) translateX(5px); filter: brightness(2) sepia(1) hue-rotate(300deg); }
+    60% { transform: scaleX(-1) translateX(-5px); filter: brightness(2) sepia(1) hue-rotate(300deg); }
+    80% { transform: scaleX(-1) translateX(5px); filter: brightness(2) sepia(1) hue-rotate(300deg); }
+    100% { transform: scaleX(-1) translateX(0); filter: brightness(1); }
+}
+
+@keyframes anim-attacked-enemy {
+    0% { transform: translateX(0); filter: brightness(1); }
+    20% { transform: translateX(-5px); filter: brightness(2) sepia(1) hue-rotate(300deg); }
+    40% { transform: translateX(5px); filter: brightness(2) sepia(1) hue-rotate(300deg); }
+    60% { transform: translateX(-5px); filter: brightness(2) sepia(1) hue-rotate(300deg); }
+    80% { transform: translateX(5px); filter: brightness(2) sepia(1) hue-rotate(300deg); }
+    100% { transform: translateX(0); filter: brightness(1); }
+}
+
+.anim-attack { animation: anim-attack 0.5s cubic-bezier(.36,.07,.19,.97) both; }
+.anim-attack-enemy { animation: anim-attack-enemy 0.5s cubic-bezier(.36,.07,.19,.97) both; }
+.anim-attacked { animation: anim-attacked 0.4s cubic-bezier(.36,.07,.19,.97) both; }
+.anim-attacked-enemy { animation: anim-attacked-enemy 0.4s cubic-bezier(.36,.07,.19,.97) both; }
+
+/* Entrance and Exit Animations */
+@keyframes slide-in-right {
+    from { right: -30%; opacity: 1; }
+    to { right: 15%; opacity: 1; }
+}
+
+@keyframes fade-out-enemy {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+.anim-slide-in { animation: slide-in-right 2s ease-out forwards; }
+.anim-fade-out { animation: fade-out-enemy 2s ease-out forwards; }
+
+.fake-water {
+    position: absolute;
+    bottom: -10px;
+    width: 120px;
+    height: 40px;
+    background: radial-gradient(ellipse at center, rgba(30, 144, 255, 0.6) 0%, rgba(30, 144, 255, 0) 70%);
+    border-radius: 50%;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.8;
 }
 
 #combat-log {

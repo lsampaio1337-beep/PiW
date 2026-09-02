@@ -1,0 +1,6 @@
+❯ Checking your system
+❯ Checking package manager version
+✔ Found npm@11.11.0
+✔ Checking your system
+[?25h[295794:0902/043743.351430:ERROR:ozone_platform_x11.cc(246)] Missing X server or $DISPLAY
+[295794:0902/043743.351642:ERROR:env.cc(257)] The platform failed to initialize.  Exiting.
