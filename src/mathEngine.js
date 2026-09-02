@@ -37,17 +37,18 @@ function calculateCatchChance(bst, level, ballMultiplier, stats = {}, isShiny = 
     if (ballMultiplier >= 10) return 100; // Masterball
     let chance = (72 - (bst / 8.5) - (level / 4)) * ballMultiplier;
 
-    let caught = stats.caught || 0;
+    let cTaskTier = stats.cTaskTier || 0;
     let catchBonus = 0;
-    if (caught >= 25000) catchBonus = 1.00;
-    else if (caught >= 10000) catchBonus = 0.70;
-    else if (caught >= 5000) catchBonus = 0.45;
-    else if (caught >= 2500) catchBonus = 0.25;
-    else if (caught >= 1000) catchBonus = 0.10;
+    if (cTaskTier >= 5) catchBonus = 1.00;
+    else if (cTaskTier >= 4) catchBonus = 0.70;
+    else if (cTaskTier >= 3) catchBonus = 0.45;
+    else if (cTaskTier >= 2) catchBonus = 0.25;
+    else if (cTaskTier >= 1) catchBonus = 0.10;
 
     chance = chance * (1 + catchBonus);
 
-    if (isShiny && (stats.shiniesSeen || 0) >= 10) {
+    let shinySeenTaskTier = stats.shinySeenTaskTier || 0;
+    if (isShiny && shinySeenTaskTier >= 3) {
         chance = chance * 4;
     }
 
@@ -58,29 +59,30 @@ function calculateCatchChance(bst, level, ballMultiplier, stats = {}, isShiny = 
 
 function generateQuality(stats = {}) {
     let roll = Math.floor(Math.random() * 12000) + 1;
-    let shiniesSeen = stats.shiniesSeen || 0;
+    let shinySeenTaskTier = stats.shinySeenTaskTier || 0;
 
     // Shiny Boosters
-    if (shiniesSeen >= 1 && roll === 11999) roll = 12000;
-    if (shiniesSeen >= 3 && roll === 11998) roll = 12000;
+    // Regular gives +1 roll (11999 becomes 12000). Good gives +2 rolls (11998 becomes 12000), completely replacing the +1.
+    if (shinySeenTaskTier >= 2 && roll >= 11998) roll = 12000; // Good Shiny +2 rolls
+    else if (shinySeenTaskTier == 1 && roll === 11999) roll = 12000; // Regular Shiny +1 roll
 
-    let epicCaps = stats.epicCaptures || 0;
+    let qTaskTier = stats.qTaskTier || 0;
     let bonusValue = 0;
     let weakMaxRoll = 1474;
     let regularMaxRoll = 6586;
     let uncommonMaxRoll = 9593;
     let rareMaxRoll = 11097;
 
-    // Quality Booster Roll Thresholds based on Epic Captures
-    if (epicCaps >= 1000) {
+    // Quality Booster Roll Thresholds based on task tiers
+    if (qTaskTier >= 5) {
         bonusValue = 1.00; weakMaxRoll = 120; regularMaxRoll = 3720; uncommonMaxRoll = 6120; rareMaxRoll = 8970;
-    } else if (epicCaps >= 500) {
+    } else if (qTaskTier >= 4) {
         bonusValue = 0.70; weakMaxRoll = 270; regularMaxRoll = 4470; uncommonMaxRoll = 7170; rareMaxRoll = 9570;
-    } else if (epicCaps >= 250) {
+    } else if (qTaskTier >= 3) {
         bonusValue = 0.45; weakMaxRoll = 570; regularMaxRoll = 5220; uncommonMaxRoll = 7920; rareMaxRoll = 9870;
-    } else if (epicCaps >= 100) {
+    } else if (qTaskTier >= 2) {
         bonusValue = 0.30; weakMaxRoll = 870; regularMaxRoll = 5820; uncommonMaxRoll = 8820; rareMaxRoll = 10320;
-    } else if (epicCaps >= 50) {
+    } else if (qTaskTier >= 1) {
         bonusValue = 0.15; weakMaxRoll = 1170; regularMaxRoll = 6270; uncommonMaxRoll = 9420; rareMaxRoll = 10920;
     }
 
@@ -108,14 +110,16 @@ function generateQuality(stats = {}) {
 
 function generateIVs(stats = {}, isShiny = false) {
     // IV Booster
+    let ivTaskTier = stats.ivTaskTier || 0;
     let ivBoost = 0;
-    if ((stats.caughtIVUnder500 || 0) >= 10000) ivBoost = 0.25;
-    else if ((stats.caughtIVUnder450 || 0) >= 5000) ivBoost = 0.20;
-    else if ((stats.caughtIVUnder400 || 0) >= 2500) ivBoost = 0.15;
-    else if ((stats.caughtIVUnder350 || 0) >= 1000) ivBoost = 0.10;
-    else if ((stats.caughtIVUnder300 || 0) >= 500) ivBoost = 0.05;
+    if (ivTaskTier >= 5) ivBoost = 0.25;
+    else if (ivTaskTier >= 4) ivBoost = 0.20;
+    else if (ivTaskTier >= 3) ivBoost = 0.15;
+    else if (ivTaskTier >= 2) ivBoost = 0.10;
+    else if (ivTaskTier >= 1) ivBoost = 0.05;
 
-    if (isShiny && (stats.shiniesCaught || 0) >= 5) {
+    let shinyCaughtTaskTier = stats.shinyCaughtTaskTier || 0;
+    if (isShiny && shinyCaughtTaskTier >= 1) {
         ivBoost += 0.25;
     }
 
