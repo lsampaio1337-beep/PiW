@@ -590,6 +590,17 @@ class BattleSystem {
         this.state.trainer.money += Math.floor(ev);
 
         this.state.stats.battlesWon++;
+
+        // If backpack is open to the pokemon tab, refresh it to show new capture
+        if (document.getElementById('backpack-content-area') && document.getElementById('backpack-content-area').style.display === 'block') {
+            if (typeof window.renderBackpackTab === 'function') {
+                const area = document.getElementById('backpack-content-area');
+                if (area.innerHTML.includes('Storage')) {
+                    window.renderBackpackTab('pokemon');
+                }
+            }
+        }
+
         this.checkRouteUnlocks();
 
         if (this.gymState && this.gymState.isActive) {

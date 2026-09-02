@@ -319,6 +319,9 @@ export function handleDrop(event, targetCol) {
 
     // --- Phase 2: Insert to target and handle potential swaps ---
 
+    // Clean lingering visual tags before it lands in a new area
+    delete p._tag;
+
     let displacedPokemon = null;
 
     if (tCol === 'party') {
