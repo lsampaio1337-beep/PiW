@@ -1,5 +1,12 @@
-import { state } from '../state.js';
-import { TYPE_COLORS, updateUI, showModal } from '../ui.js';
+const fs = require('fs');
+
+let content = fs.readFileSync('src/ui/pokemonStats.js', 'utf8');
+
+// The main issues are the layout problems and the evolve button text/cost bug.
+// We'll regenerate the whole file text because it's easier to build the HTML strings correctly.
+
+const newContent = `import { state } from '../state.js';
+import { TYPE_COLORS, updateUI, showModal, showDexEntry } from '../ui.js';
 
 export function showPokemonStats(location, idx) {
     let list = null;
@@ -19,7 +26,7 @@ export function showPokemonStats(location, idx) {
 
     const formatType = (type) => {
         const color = TYPE_COLORS[type] || '#fff';
-        return `<span style="color: ${color};"><img src="Assets/Extra/Type ${type}.png" style="height: 12px; vertical-align: middle;"> ${type}</span>`;
+        return \`<span style="color: \${color};"><img src="Assets/Extra/Type \${type}.png" style="height: 12px; vertical-align: middle;"> \${type}</span>\`;
     };
 
     const formatTypes = (typesObj) => {
@@ -39,7 +46,7 @@ export function showPokemonStats(location, idx) {
         let evo = pData.evolutions[0]; // Assume first for button
         const nextPData = state.config.pokemonData.find(pd => pd.id === evo.to);
 
-        const baseCost = Math.ceil(p.level * 0.1);
+        const baseCost = Math.ceil(evo.level * 0.1);
         const isDualTyped = p.types.length > 1;
         const stonesNeededType1 = isDualTyped ? baseCost : baseCost * 2;
         const stonesNeededType2 = isDualTyped ? baseCost : 0;
@@ -70,22 +77,22 @@ export function showPokemonStats(location, idx) {
         let costInnerHtml = "";
         if (!isDualTyped || type1 === type2) {
             let totalNeeded = isDualTyped ? (stonesNeededType1 + stonesNeededType2) : stonesNeededType1;
-            costInnerHtml = `${totalNeeded} <img src="Assets/Items/Stones/${stone1Name}.png" style="height: 16px; vertical-align: middle;">`;
+            costInnerHtml = \`\${totalNeeded} <img src="Assets/Items/\${stone1Name}.png" style="height: 16px; vertical-align: middle;">\`;
         } else {
-            costInnerHtml = `${stonesNeededType1} <img src="Assets/Items/Stones/${stone1Name}.png" style="height: 16px; vertical-align: middle;"> + ${stonesNeededType2} <img src="Assets/Items/Stones/${stone2Name}.png" style="height: 16px; vertical-align: middle;">`;
+            costInnerHtml = \`\${stonesNeededType1} <img src="Assets/Items/\${stone1Name}.png" style="height: 16px; vertical-align: middle;"> + \${stonesNeededType2} <img src="Assets/Items/\${stone2Name}.png" style="height: 16px; vertical-align: middle;">\`;
         }
 
-        let buttonLabel = isLevelOk ? costInnerHtml : `At least ${costInnerHtml}`;
+        let buttonLabel = isLevelOk ? costInnerHtml : \`At least \${costInnerHtml}\`;
 
-        evolveButtonHtml = `
+        evolveButtonHtml = \`
             <div style="text-align: center; margin-top: 10px;">
-                Evolution: <b>${nextPData ? nextPData.name : 'Unknown'}</b><br>
-                <button ${canEvolve ? '' : 'disabled'} onclick="window.evolvePokemon('${location}', ${idx}, ${evo.to}, ${evo.level})" style="${canEvolve ? 'background: #2ecc71;' : 'background: #7f8c8d; cursor: not-allowed; opacity: 0.8;'} margin-top: 5px; padding: 5px 15px; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%;">
+                Evolution: <b>\${nextPData ? nextPData.name : 'Unknown'}</b><br>
+                <button \${canEvolve ? '' : 'disabled'} onclick="window.evolvePokemon('\${location}', \${idx}, \${evo.to}, \${evo.level})" style="\${canEvolve ? 'background: #2ecc71;' : 'background: #7f8c8d; cursor: not-allowed; opacity: 0.8;'} margin-top: 5px; padding: 5px 15px; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%;">
                     <span>Evolve</span>
-                    <span style="font-size: 10px; display: flex; align-items: center; gap: 3px;">${buttonLabel}</span>
+                    <span style="font-size: 10px; display: flex; align-items: center; gap: 3px;">\${buttonLabel}</span>
                 </button>
             </div>
-        `;
+        \`;
     }
 
     // Evolution Line Display
@@ -103,29 +110,29 @@ export function showPokemonStats(location, idx) {
     }
 
     if(root) {
-         evolutionLineHtml = `<div style="display:flex; align-items:center; justify-content:center; gap: 10px; margin-top: 20px;">`;
+         evolutionLineHtml = \`<div style="display:flex; align-items:center; justify-content:center; gap: 10px; margin-top: 20px;">\`;
 
          let current = root;
          while(current) {
-             evolutionLineHtml += `
-                <div style="text-align:center; cursor:pointer;" onclick="window.showDexEntry(${current.id})">
-                    <img src="Assets/Pokemon Sprites/${current.id}.png" style="width: 50px; height: 50px;">
-                    <div style="font-size: 10px;">${current.name}</div>
+             evolutionLineHtml += \`
+                <div style="text-align:center; cursor:pointer;" onclick="window.showDexEntry(\${current.id})">
+                    <img src="Assets/Pokemon Sprites/\${current.id}.png" style="width: 50px; height: 50px;">
+                    <div style="font-size: 10px;">\${current.name}</div>
                 </div>
-             `;
+             \`;
              if(current.evolutions && current.evolutions.length > 0) {
                  let evo = current.evolutions[0]; // simplify for linear
-                 evolutionLineHtml += `
+                 evolutionLineHtml += \`
                     <div style="text-align:center; font-size:12px;">
-                        &#8594;<br>Lvl ${evo.level}
+                        &#8594;<br>Lvl \${evo.level}
                     </div>
-                 `;
+                 \`;
                  current = state.config.pokemonData.find(pd => pd.id === evo.to);
              } else {
                  current = null;
              }
          }
-         evolutionLineHtml += `</div>`;
+         evolutionLineHtml += \`</div>\`;
     }
 
     const bst = pData.hp + pData.atk + pData.def + pData.spa + pData.spd + pData.spe;
@@ -161,67 +168,67 @@ export function showPokemonStats(location, idx) {
         else if (maxMult === 0) noEffect[defType] = maxMult;
     }
 
-    let movesHtml = `
+    let movesHtml = \`
         <table style="width: 100%; border-collapse: collapse; text-align: left; margin-top: 10px; font-size: 12px;">
             <tr style="border-bottom: 1px solid #777;">
                 <th>Lvl</th><th>Move Name</th><th>Type</th><th>Power</th><th>Category</th>
             </tr>
-    `;
+    \`;
     if (pData.learnset) {
         pData.learnset.forEach(m => {
             let mData = state.config.moves[m.move];
-            movesHtml += `<tr style="border-bottom: 1px solid #444;">
-                <td>${m.level}</td>
-                <td>${m.move}</td>
-                <td>${mData ? formatType(mData.type) : '?'}</td>
-                <td>${mData ? mData.power : '?'}</td>
-                <td>${mData ? mData.category : '?'}</td>
-            </tr>`;
+            movesHtml += \`<tr style="border-bottom: 1px solid #444;">
+                <td>\${m.level}</td>
+                <td>\${m.move}</td>
+                <td>\${mData ? formatType(mData.type) : '?'}</td>
+                <td>\${mData ? mData.power : '?'}</td>
+                <td>\${mData ? mData.category : '?'}</td>
+            </tr>\`;
         });
     }
-    movesHtml += `</table>`;
+    movesHtml += \`</table>\`;
 
     // Helper for Custom Progress Bar
     const renderStatBar = (label, val) => {
-        return `
+        return \`
             <div style="margin-bottom: 5px;">
                 <div style="position: relative; background-color: #333; border-radius: 4px; height: 16px; width: 100%; overflow: hidden;">
-                    <div style="background-color: #3498db; width: ${val}%; height: 100%;"></div>
+                    <div style="background-color: #3498db; width: \${val}%; height: 100%;"></div>
                     <span style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; padding-left: 5px; font-size: 11px; color: #fff; text-shadow: 1px 1px 2px #000;">
-                        ${label}: ${val}
+                        \${label}: \${val}
                     </span>
                 </div>
             </div>
-        `;
+        \`;
     };
 
-    let html = `
+    let html = \`
         <!-- Removed max-height here so the entire modal can handle scrolling gracefully -->
         <div style="display: flex; flex-direction: column; gap: 15px;">
 
             <div style="display: flex; gap: 20px; align-items: stretch; border-bottom: 1px solid #555; padding-bottom: 15px;">
                 <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                    <img src="Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png" style="width: 100px; height: 100px;">
+                    <img src="Assets/Pokemon Sprites/\${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png" style="width: 100px; height: 100px;">
                     <div style="text-align: center;">
-                        <b>Type:</b> ${p.types.map(t => formatType(t)).join(' / ')}<br>
-                        <b>Quality:</b> ${p.qualityName} (Q=${p.quality.toFixed(2)})<br>
-                        <b>Sum IVs:</b> ${sumIV}<br>
+                        <b>Type:</b> \${p.types.map(t => formatType(t)).join(' / ')}<br>
+                        <b>Quality:</b> \${p.qualityName} (Q=\${p.quality.toFixed(2)})<br>
+                        <b>Sum IVs:</b> \${sumIV}<br>
                     </div>
-                    ${evolveButtonHtml}
+                    \${evolveButtonHtml}
                 </div>
 
                 <div style="flex: 1; display: flex; flex-direction: column; justify-content: center;">
-                    <div style="display: grid; grid-template-columns: 1fr 1fr;  column-gap: 15px;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: x; column-gap: 15px;">
                         <h4 style="grid-column: 1 / -1; text-align: center; margin: 0 0 10px 0;">IV Distribution</h4>
                         <div>
-                            ${renderStatBar('HP', p.ivs.hp)}
-                            ${renderStatBar('ATK', p.ivs.atk)}
-                            ${renderStatBar('DEF', p.ivs.def)}
+                            \${renderStatBar('HP', p.ivs.hp)}
+                            \${renderStatBar('ATK', p.ivs.atk)}
+                            \${renderStatBar('DEF', p.ivs.def)}
                         </div>
                         <div>
-                            ${renderStatBar('SPE', p.ivs.spe)}
-                            ${renderStatBar('SPA', p.ivs.spa)}
-                            ${renderStatBar('SPD', p.ivs.spd)}
+                            \${renderStatBar('SPE', p.ivs.spe)}
+                            \${renderStatBar('SPA', p.ivs.spa)}
+                            \${renderStatBar('SPD', p.ivs.spd)}
                         </div>
                     </div>
                 </div>
@@ -229,30 +236,30 @@ export function showPokemonStats(location, idx) {
 
             <div>
                 <h4 style="margin-top:0;">Species Data</h4>
-                <p><b>BST:</b> ${bst} (HP:${pData.hp} A:${pData.atk} D:${pData.def} SA:${pData.spa} SD:${pData.spd} S:${pData.spe})</p>
+                <p><b>BST:</b> \${bst} (HP:\${pData.hp} A:\${pData.atk} D:\${pData.def} SA:\${pData.spa} SD:\${pData.spd} S:\${pData.spe})</p>
 
                 <div style="text-align: left; margin: 15px 0; font-size: 14px; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 5px;">
                     <h4 style="margin: 0 0 5px 0;">Defensive Effectiveness</h4>
-                    ${Object.keys(weaknesses).length ? `<b>Weak To (2x):</b> ${formatTypes(weaknesses)}<br>` : ''}
-                    ${Object.keys(resistances).length ? `<b>Resists (0.5x):</b> ${formatTypes(resistances)}<br>` : ''}
-                    ${Object.keys(immunities).length ? `<b>Immune To (0x):</b> ${formatTypes(immunities)}<br>` : ''}
+                    \${Object.keys(weaknesses).length ? \`<b>Weak To (2x):</b> \${formatTypes(weaknesses)}<br>\` : ''}
+                    \${Object.keys(resistances).length ? \`<b>Resists (0.5x):</b> \${formatTypes(resistances)}<br>\` : ''}
+                    \${Object.keys(immunities).length ? \`<b>Immune To (0x):</b> \${formatTypes(immunities)}<br>\` : ''}
 
                     <h4 style="margin: 10px 0 5px 0;">Offensive Effectiveness</h4>
-                    ${Object.keys(effective).length ? `<b>Super Effective (2x):</b> ${formatTypes(effective)}<br>` : ''}
-                    ${Object.keys(notEffective).length ? `<b>Not Very Effective (0.5x):</b> ${formatTypes(notEffective)}<br>` : ''}
-                    ${Object.keys(noEffect).length ? `<b>No Effect (0x):</b> ${formatTypes(noEffect)}<br>` : ''}
+                    \${Object.keys(effective).length ? \`<b>Super Effective (2x):</b> \${formatTypes(effective)}<br>\` : ''}
+                    \${Object.keys(notEffective).length ? \`<b>Not Very Effective (0.5x):</b> \${formatTypes(notEffective)}<br>\` : ''}
+                    \${Object.keys(noEffect).length ? \`<b>No Effect (0x):</b> \${formatTypes(noEffect)}<br>\` : ''}
                 </div>
 
-                ${evolutionLineHtml}
+                \${evolutionLineHtml}
 
                 <h4 style="text-align: left;">Moveset</h4>
-                ${movesHtml}
+                \${movesHtml}
             </div>
         </div>
-    `;
+    \`;
 
     // Modals typically have their own internal overflow-y, but setting a class or style if needed:
-    showModal(`${p.name} (Lv. ${p.level})`, html);
+    showModal(\`\${p.name} (Lv. \${p.level})\`, html);
 }
 
 export function evolvePokemon(location, idx, toId, requiredLevel) {
@@ -272,8 +279,8 @@ export function evolvePokemon(location, idx, toId, requiredLevel) {
     const newBase = state.config.pokemonData.find(pd => pd.id === toId);
     if (!newBase) return;
 
-    // Consume stones based on the pokemon's current level
-    const baseCost = Math.ceil(p.level * 0.1);
+    // Consume stones based on the evolution's required level!
+    const baseCost = Math.ceil(requiredLevel * 0.1);
     const isDualTyped = p.types.length > 1;
     const stonesNeededType1 = isDualTyped ? baseCost : baseCost * 2;
     const stonesNeededType2 = isDualTyped ? baseCost : 0;
@@ -326,8 +333,11 @@ export function evolvePokemon(location, idx, toId, requiredLevel) {
         state.stats.caught++;
     }
 
-    alert(`${p.name} evolved into ${newBase.name}!`);
+    alert(\`\${p.name} evolved into \${newBase.name}!\`);
     document.getElementById('modal-overlay').style.display = 'none'; // Close modal
 
     updateUI();
 }
+`;
+
+fs.writeFileSync('src/ui/pokemonStats.js', newContent);
