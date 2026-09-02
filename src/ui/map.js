@@ -29,9 +29,8 @@ export function showMap() {
             else if (locationId === 'pokemon_center___market') markerImg = './Assets/Extra/Spot_PCPM.png';
             else if (locationId === 'indigo_plateu') markerImg = './Assets/Extra/Spot_E4.png';
             else if (locationId === 'safari_zone') markerImg = './Assets/Extra/Spot_Safariball.png';
-            else if (locationId === 'celadon_s_casino') { markerImg = './Assets/Map/Spot_Casino.png'; }
-            else if (locationId === 'diglett_s_cave') { markerImg = './Assets/Map/Spot_Cave.png'; }
-            else if (['mount_moon', 'rock_tunnel', 'cerulean_cave', 'seafoam_islands'].includes(locationId)) markerImg = './Assets/Map/Spot_Cave.png';
+            else if (locationId === 'casino') { markerImg = './Assets/Extra/Spot_Casino.png'; }
+            else if (['mount_moon', 'rock_tunnel', 'cerulean_cave', 'seafoam_islands', 'diglett_s_cave'].includes(locationId)) markerImg = './Assets/Map/Spot_Cave.png';
             else if (locationId === 'small_fishing_spot') markerImg = './Assets/Map/Spot_Fishing1.png';
             else if (locationId === 'big_fishing_spot') markerImg = './Assets/Map/Spot_Fishing2.png';
             else if (locationId === 'fighting_dojo') markerImg = './Assets/Map/Spot_FightingDojo.png';
@@ -48,12 +47,13 @@ export function showMap() {
             else if (locationId === 'cinnabar_gym') { markerImg = './Assets/Badges/Badge Kanto 7.png'; if (state.trainer.badges >= 7) showCheckmark = true; }
             else if (locationId === 'viridian_gym') { markerImg = './Assets/Badges/Badge Kanto 8.png'; if (state.trainer.badges >= 8) showCheckmark = true; }
 
-            // Increase size for special spots
+            // Standardize spot sizes
             let markerWidth = "24px";
             let markerHeight = "24px";
-            if (['professor_oak_lab', 'pokemon_center___market', 'indigo_plateu', 'safari_zone', 'celadon_s_casino', 'mount_moon', 'rock_tunnel', 'cerulean_cave', 'seafoam_islands', 'small_fishing_spot', 'big_fishing_spot', 'fighting_dojo', 'fossil_revival', 'pok_mon_mansion', 'trade_with_a_friend', 'daycare', 'diglett_s_cave'].includes(locationId)) {
-                markerWidth = "40px";
-                markerHeight = "40px";
+            if (['professor_oak_lab', 'pokemon_center___market', 'indigo_plateu', 'safari_zone', 'casino', 'mount_moon', 'rock_tunnel', 'cerulean_cave', 'seafoam_islands', 'small_fishing_spot', 'big_fishing_spot', 'fighting_dojo', 'fossil_revival', 'pok_mon_mansion', 'trade_with_a_friend', 'daycare', 'diglett_s_cave'].includes(locationId)) {
+                // Ensure spot markers like casino and diglett's cave are standard size
+                markerWidth = "24px";
+                markerHeight = "24px";
             }
 
 
@@ -93,7 +93,7 @@ export function navigateToLocation(locationName) {
              if (battleSystem.gymState) battleSystem.gymState.isActive = false;
         }
         switchView("PROF_OAK_LAB");
-    } else if (locationName === "Celadon's Casino") {
+    } else if (locationName === "Casino") {
         if (battleSystem) {
              battleSystem.stop();
              battleSystem.activeEncounter = null;
@@ -102,16 +102,91 @@ export function navigateToLocation(locationName) {
         }
         switchView("CASINO_HUB");
 
+        // Reset Casino background to default lobby if it was changed
+        const viewCasino = document.getElementById("view-casino");
+        viewCasino.style.backgroundImage = "url('./Assets/BG/BG-Cassino.jpg')";
+        const casinoContent = document.getElementById("casino-content");
+        if(casinoContent) casinoContent.style.display = 'block';
+
+        // Clear any overlay buttons
+        const oldOverlays = viewCasino.querySelectorAll('.casino-overlay-btn');
+        oldOverlays.forEach(el => el.remove());
+
         const btnContainer = document.getElementById("casino-buttons-container");
         if (btnContainer) {
             btnContainer.innerHTML = `
-                <button onclick="window.navigateToLocation('Casino - Starter Troupe')" style="padding: 10px; font-size: 16px; cursor: pointer;">Starter Troupe (Lv 45)</button>
-                <button onclick="window.navigateToLocation('Casino - Mid Troupe')" style="padding: 10px; font-size: 16px; cursor: pointer;">Mid Troupe (Lv 50)</button>
-                <button onclick="window.navigateToLocation('Casino - Late Troupe')" style="padding: 10px; font-size: 16px; cursor: pointer;">Late Troupe (Lv 55)</button>
-                <button onclick="window.navigateToLocation('Casino - Eeveelutions')" style="padding: 10px; font-size: 16px; cursor: pointer;">Eeveelutions (Lv 50)</button>
-                <button onclick="window.navigateToLocation('Casino - Special Spot')" style="padding: 10px; font-size: 16px; cursor: pointer;">Special Spot (Lv 52)</button>
+                <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; padding: 15px;">
+                    <div onclick="window.navigateToLocation('Casino - Starter Troupe')" style="cursor: pointer; text-align: center;">
+                        <img src="./Assets/Extra/Casino Starter Troupe.png" alt="Starter Troupe" style="width: 100%; max-width: 200px; border-radius: 8px; border: 2px solid #555;">
+                        <p style="margin-top: 5px; font-weight: bold;">Starter Troupe</p>
+                    </div>
+                    <div onclick="window.navigateToLocation('Casino - Mid Troupe')" style="cursor: pointer; text-align: center;">
+                        <img src="./Assets/Extra/Casino Mid Troupe.png" alt="Mid Troupe" style="width: 100%; max-width: 200px; border-radius: 8px; border: 2px solid #555;">
+                        <p style="margin-top: 5px; font-weight: bold;">Mid Troupe</p>
+                    </div>
+                    <div onclick="window.navigateToLocation('Casino - Late Troupe')" style="cursor: pointer; text-align: center;">
+                        <img src="./Assets/Extra/Casino Late Troupe.png" alt="Late Troupe" style="width: 100%; max-width: 200px; border-radius: 8px; border: 2px solid #555;">
+                        <p style="margin-top: 5px; font-weight: bold;">Late Troupe</p>
+                    </div>
+                    <div onclick="window.navigateToLocation('Casino - Eeveelutions')" style="cursor: pointer; text-align: center;">
+                        <img src="./Assets/Extra/Casino Eeveelutions.png" alt="Eeveelutions" style="width: 100%; max-width: 200px; border-radius: 8px; border: 2px solid #555;">
+                        <p style="margin-top: 5px; font-weight: bold;">Eeveelutions</p>
+                    </div>
+                    <div onclick="window.navigateToLocation('Casino - Special Spot')" style="cursor: pointer; text-align: center;">
+                        <img src="./Assets/Extra/Casino Special Spot.png" alt="Special Spot" style="width: 100%; max-width: 200px; border-radius: 8px; border: 2px solid #555;">
+                        <p style="margin-top: 5px; font-weight: bold;">Special Spot</p>
+                    </div>
+                </div>
             `;
         }
+    } else if (locationName.startsWith("Casino - ")) {
+        if (battleSystem) {
+             battleSystem.stop();
+             battleSystem.activeEncounter = null;
+             battleSystem.isSearching = false;
+             if (battleSystem.gymState) battleSystem.gymState.isActive = false;
+        }
+        switchView("CASINO_HUB");
+
+        const casinoContent = document.getElementById("casino-content");
+        if(casinoContent) casinoContent.style.display = 'none';
+
+        let bgImg = '';
+        if (locationName === 'Casino - Starter Troupe') bgImg = 'Casino Starter Troupe.png';
+        if (locationName === 'Casino - Mid Troupe') bgImg = 'Casino Mid Troupe.png';
+        if (locationName === 'Casino - Late Troupe') bgImg = 'Casino Late Troupe.png';
+        if (locationName === 'Casino - Eeveelutions') bgImg = 'Casino Eeveelutions.png';
+        if (locationName === 'Casino - Special Spot') bgImg = 'Casino Special Spot.png';
+
+        const viewCasino = document.getElementById("view-casino");
+        viewCasino.style.backgroundImage = `url('./Assets/Extra/${bgImg}')`;
+        viewCasino.style.backgroundPosition = 'center';
+        viewCasino.style.backgroundRepeat = 'no-repeat';
+        viewCasino.style.backgroundSize = 'contain';
+
+        // Remove old buttons if any
+        const oldOverlays = viewCasino.querySelectorAll('.casino-overlay-btn');
+        oldOverlays.forEach(el => el.remove());
+
+        // We use relative positioning for click areas
+        let html = '';
+        const stdLeft = 16.3;
+        const stdTop = 34.16;
+        const stdWidth = 76.7 - 16.3;
+        const stdHeight = 61.06 - 34.16;
+
+        const shinyLeft = 19.24;
+        const shinyTop = 85.96;
+        const shinyWidth = 73.94 - 19.24;
+        const shinyHeight = 94.72 - 85.96;
+
+        // Overlay transparent divs
+        html += `<div class="casino-overlay-btn" onclick="window.startCasinoEncounter(false, '${locationName}')" style="position: absolute; left: ${stdLeft}%; top: ${stdTop}%; width: ${stdWidth}%; height: ${stdHeight}%; cursor: pointer;" title="Standard Encounter ($10)"></div>`;
+        html += `<div class="casino-overlay-btn" onclick="window.startCasinoEncounter(false, '${locationName}')" style="position: absolute; left: ${shinyLeft}%; top: ${shinyTop}%; width: ${shinyWidth}%; height: ${shinyHeight}%; cursor: pointer;" title="Special Encounter ($10)"></div>`;
+        html += `<button class="casino-overlay-btn" onclick="window.navigateToLocation('Casino')" style="position: absolute; top: 10px; left: 10px; padding: 10px; cursor: pointer; z-index: 100;">Back to Lobby</button>`;
+
+        // Append to the viewCasino container
+        viewCasino.insertAdjacentHTML('beforeend', html);
     } else if (locationName === "Pokemon Center & Market" || locationName.includes("Market")) {
         if (battleSystem) {
              battleSystem.stop();

@@ -508,6 +508,22 @@ async function init() {
         return false;
     };
 
+    window.startCasinoEncounter = (doubleShiny, locationName) => {
+        state.casinoDoubleShiny = doubleShiny;
+        state.currentRoute = locationName;
+
+        // Money deduction and validation are handled by battleSystem.searchNext()
+        switchView("BATTLE_ARENA");
+        if (globals.battleSystem) {
+             globals.battleSystem.stop();
+             globals.battleSystem.activeEncounter = null;
+             globals.battleSystem.isSearching = false;
+             if (globals.battleSystem.gymState) globals.battleSystem.gymState.isActive = false;
+             globals.battleSystem.searchNext();
+        }
+        updateUI();
+    };
+
     document.getElementById('btn-map').onclick = () => { if(!checkCombatLock()) showMap(); };
     document.getElementById('btn-backpack').onclick = () => { if(!checkCombatLock()) showBackpack(); };
     document.getElementById('btn-dex').onclick = () => { if(!checkCombatLock()) showPokedex(); };

@@ -174,6 +174,19 @@ class BattleSystem {
             return;
         }
 
+        if (this.state.currentRoute && this.state.currentRoute.startsWith("Casino - ")) {
+            const cost = 10;
+            if (this.state.trainer.money < cost) {
+                alert("Not enough money! You need $" + cost + " to continue hunting here.");
+                this.stop();
+                if (typeof window.navigateToLocation === 'function') {
+                    window.navigateToLocation("Casino");
+                }
+                return;
+            }
+            this.state.trainer.money -= cost;
+        }
+
         this.isSearching = true;
         this.activeEncounter = null;
         this.updateUI();
@@ -296,11 +309,7 @@ class BattleSystem {
 
             if (qName === "Shiny") this.state.stats.shiniesSeen++;
 
-            // Track shiny species
-            if (qName === "Shiny") {
-                if (!this.state.stats.seenShiniesSpecies) this.state.stats.seenShiniesSpecies = {};
-                this.state.stats.seenShiniesSpecies[pokemonBase.name] = true;
-            }
+
 
             this.state.nextForcedEncounter = null;
         } else {
