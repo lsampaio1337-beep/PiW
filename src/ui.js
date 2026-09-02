@@ -369,6 +369,8 @@ export function renderOakLab() {
                     </button>
                 </div>
 
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+                <button onclick="window.showOakLabModal()" style="padding: 10px; font-size: 16px; cursor: pointer;">Tasks & Rewards</button>
             </div>
         </div>
     `;
