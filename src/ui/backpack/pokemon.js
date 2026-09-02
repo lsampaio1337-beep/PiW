@@ -59,27 +59,53 @@ export function renderPokemonTab(area) {
             <style>#pokemon-filters input::-webkit-outer-spin-button, #pokemon-filters input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }</style>
         </div>
 
-        <div style="display: flex; gap: 10px; width: 100%; height: 100%; overflow: hidden;">
+        <div style="display: flex; gap: 10px; width: 100%; height: 100%; min-height: 0; overflow: hidden; flex-grow: 1;">
             <!-- Column 1: Active -->
             <div style="flex: 2; border: 1px solid #555; padding: 5px; display: flex; flex-direction: column; min-width: 0; min-height: 0;">
                 <h4 style="text-align: center; margin-top:0;">Active</h4>
-                <div id="active-scroll-container" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 5px; overflow-y: scroll; align-content: start; flex-grow: 1; padding-bottom: 20px;">
+                <div id="active-scroll-container" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 5px; overflow-y: auto; align-content: start; flex-grow: 1; padding-bottom: 20px; min-height: 0;">
     `;
 
-    const activePokemon = [];
-    state.party.forEach((p, idx) => activePokemon.push({...p, _tag: 'Party', _origIndex: idx}));
-    state.breeding.forEach((p, idx) => activePokemon.push({...p, _tag: 'Breed', _origIndex: idx}));
-    state.training.forEach((p, idx) => activePokemon.push({...p, _tag: 'Train', _origIndex: idx}));
 
     for (let i = 0; i < 8; i++) {
-        if (i < activePokemon.length) {
-            let p = activePokemon[i];
-            content += renderSlotUI(p, p._tag, p._origIndex, true);
+        let p = null;
+        let tag = '';
+        let listName = '';
+        let origIndex = 0;
+
+        if (i < 6) {
+            if (i < state.party.length) {
+                p = state.party[i];
+                tag = 'Party';
+                listName = 'party';
+                origIndex = i;
+            }
+        } else if (i === 6) {
+            if (state.breeding.length > 0) {
+                p = state.breeding[0];
+                tag = 'To Breed';
+                listName = 'breeding';
+                origIndex = 0;
+            }
+        } else if (i === 7) {
+            if (state.training.length > 0) {
+                p = state.training[0];
+                tag = 'To Train';
+                listName = 'training';
+                origIndex = 0;
+            }
+        }
+
+        if (p) {
+            p._tag = tag;
+            content += `<div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, '${listName}')" style="box-sizing: border-box; min-width: 0;">` + renderSlotUI(p, listName, origIndex, true) + `</div>`;
         } else {
-            let label = i < 6 ? `Party #${i+1}` : (i === 6 ? 'Breed' : 'Training');
-            content += `<div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'party')" style="border: 1px dashed #777; aspect-ratio: 1 / 1.3; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #777; box-sizing: border-box;">${label}</div>`;
+            let label = i < 6 ? `Party #${i+1}` : (i === 6 ? 'To Breed' : 'To Train');
+            let dropTarget = i < 6 ? 'party' : (i === 6 ? 'breeding' : 'training');
+            content += `<div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, '${dropTarget}')" style="border: 1px dashed #777; aspect-ratio: 1 / 1.3; display: flex; align-items: center; justify-content: center; container-type: inline-size; color: #777; box-sizing: border-box;"><span style="font-size: 15cqw; text-align: center;">${label}</span></div>`;
         }
     }
+
 
     content += `
                 </div>
@@ -88,7 +114,7 @@ export function renderPokemonTab(area) {
             <!-- Column 2: Storage -->
             <div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'storage')" style="flex: 4; border: 1px solid #555; padding: 5px; display: flex; flex-direction: column; min-width: 0; min-height: 0;">
                 <h4 style="text-align: center; margin-top:0;">Storage</h4>
-                <div id="storage-scroll-container" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; overflow-y: scroll; align-content: start; flex-grow: 1; padding-bottom: 20px;">
+                <div id="storage-scroll-container" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; overflow-y: auto; align-content: start; flex-grow: 1; padding-bottom: 20px; min-height: 0;">
     `;
 
     for (let i = 0; i < state.storage.length; i++) {
@@ -104,7 +130,7 @@ export function renderPokemonTab(area) {
             <!-- Column 3: Safe -->
             <div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'safe')" style="flex: 2; border: 1px solid #555; padding: 5px; display: flex; flex-direction: column; min-width: 0; min-height: 0;">
                 <h4 style="text-align: center; margin-top:0;">Safe</h4>
-                <div id="safe-scroll-container" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 5px; overflow-y: scroll; align-content: start; flex-grow: 1; padding-bottom: 20px;">
+                <div id="safe-scroll-container" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 5px; overflow-y: auto; align-content: start; flex-grow: 1; padding-bottom: 20px; min-height: 0;">
     `;
 
     for (let i = 0; i < state.safe.length; i++) {
@@ -243,6 +269,17 @@ export function handleDrop(event, targetCol) {
 
     if (!p) return;
 
+    // Daycare interaction constraints
+    if (sCol === 'breeding' && state.dayCareRef && state.dayCareRef.slot1.isBreeding) {
+        alert("Cannot move Pokémon while it is actively breeding!");
+        return;
+    }
+
+    if (tCol === 'breeding' && state.dayCareRef && state.dayCareRef.slot1.isBreeding) {
+        alert("Cannot replace Pokémon while breeding is in progress!");
+        return;
+    }
+
     if (tCol === 'party' && state.party.length >= 6) {
         alert("Party is full!");
         return;
@@ -253,15 +290,131 @@ export function handleDrop(event, targetCol) {
         return;
     }
 
+    // --- Phase 1: Remove from source ---
     if (sCol === 'party') state.party.splice(index, 1);
-    else if (sCol === 'breeding') state.breeding.splice(index, 1);
-    else if (sCol === 'training') state.training.splice(index, 1);
+    else if (sCol === 'breeding') {
+        state.breeding.splice(index, 1);
+        if (state.dayCareRef) {
+            state.dayCareRef.slot1.pokemon = null;
+            state.dayCareRef.slot1.battles = 0;
+            state.dayCareRef.slot1.isBreeding = false;
+            state.dayCareRef.slot1.isFinished = false;
+        }
+        window.pokemonFilters.name = '';
+        window.pokemonFilters.minQ = '';
+        window.pokemonFilters.maxQ = '';
+    }
+    else if (sCol === 'training') {
+        state.training.splice(index, 1);
+        if (state.dayCareRef) {
+            state.dayCareRef.slot2.pokemon = null;
+            state.dayCareRef.slot2.battles = 0;
+        }
+    }
     else if (sCol === 'storage') state.storage.splice(index, 1);
     else if (sCol === 'safe') state.safe.splice(index, 1);
 
-    if (tCol === 'party') state.party.push(p);
-    else if (tCol === 'storage') state.storage.unshift(p);
-    else if (tCol === 'safe') state.safe.unshift(p);
+    // --- Phase 2: Insert to target and handle potential swaps ---
+
+    let displacedPokemon = null;
+
+    if (tCol === 'party') {
+        state.party.push(p);
+    }
+    else if (tCol === 'storage') {
+        state.storage.unshift(p);
+    }
+    else if (tCol === 'safe') {
+        state.safe.unshift(p);
+    }
+    else if (tCol === 'training') {
+        if (state.training.length > 0) {
+            displacedPokemon = state.training[0]; // Will need to send back to source
+            state.training[0] = p;
+        } else {
+            state.training.push(p);
+        }
+        if (state.dayCareRef) {
+            state.dayCareRef.slot2.pokemon = p;
+            state.dayCareRef.slot2.battles = 0;
+        }
+    }
+    else if (tCol === 'breeding') {
+        if (state.breeding.length > 0) {
+            const currentP = state.breeding[0];
+            // Check breeding criteria
+            if (currentP.id !== p.id || Math.abs(currentP.quality - p.quality) > 0.001) {
+                // Fails criteria -> simple swap
+                displacedPokemon = currentP;
+                state.breeding[0] = p;
+                if (state.dayCareRef) {
+                    state.dayCareRef.slot1.pokemon = p;
+                    state.dayCareRef.slot1.battles = 0;
+                    state.dayCareRef.slot1.isBreeding = false;
+                    state.dayCareRef.slot1.isFinished = false;
+                }
+                window.pokemonFilters.name = p.name;
+                window.pokemonFilters.minQ = p.quality.toFixed(2);
+                window.pokemonFilters.maxQ = p.quality.toFixed(2);
+            } else {
+                // Meets criteria -> Consume both, merge into highest IV
+                const sumIV1 = currentP.ivs.hp + currentP.ivs.atk + currentP.ivs.def + currentP.ivs.spa + currentP.ivs.spd + currentP.ivs.spe;
+                const sumIV2 = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
+                const keptParent = (sumIV2 > sumIV1) ? p : currentP;
+
+                state.breeding[0] = keptParent;
+                if (state.dayCareRef) {
+                    state.dayCareRef.slot1.pokemon = keptParent;
+                    state.dayCareRef.slot1.battles = 0;
+                    state.dayCareRef.slot1.isBreeding = true;
+                    state.dayCareRef.slot1.isFinished = false;
+                }
+                // Clear filter as breed started
+                window.pokemonFilters.name = '';
+                window.pokemonFilters.minQ = '';
+                window.pokemonFilters.maxQ = '';
+            }
+        } else {
+            state.breeding.push(p);
+            if (state.dayCareRef) {
+                state.dayCareRef.slot1.pokemon = p;
+                state.dayCareRef.slot1.battles = 0;
+                state.dayCareRef.slot1.isBreeding = false;
+                state.dayCareRef.slot1.isFinished = false;
+            }
+            window.pokemonFilters.name = p.name;
+            window.pokemonFilters.minQ = p.quality.toFixed(2);
+            window.pokemonFilters.maxQ = p.quality.toFixed(2);
+        }
+    }
+
+    // --- Phase 3: Handle displaced (swapped) pokemon ---
+    if (displacedPokemon) {
+        if (sCol === 'party') {
+            state.party.splice(index, 0, displacedPokemon);
+        } else if (sCol === 'storage') {
+            state.storage.splice(index, 0, displacedPokemon);
+        } else if (sCol === 'safe') {
+            state.safe.splice(index, 0, displacedPokemon);
+        } else if (sCol === 'training') {
+            state.training.push(displacedPokemon);
+            if (state.dayCareRef) {
+                state.dayCareRef.slot2.pokemon = displacedPokemon;
+                state.dayCareRef.slot2.battles = 0;
+            }
+        } else if (sCol === 'breeding') {
+            state.breeding.push(displacedPokemon);
+            if (state.dayCareRef) {
+                state.dayCareRef.slot1.pokemon = displacedPokemon;
+                state.dayCareRef.slot1.battles = 0;
+                state.dayCareRef.slot1.isBreeding = false; // reset state
+                state.dayCareRef.slot1.isFinished = false;
+            }
+            window.pokemonFilters.name = displacedPokemon.name;
+            window.pokemonFilters.minQ = displacedPokemon.quality.toFixed(2);
+            window.pokemonFilters.maxQ = displacedPokemon.quality.toFixed(2);
+        }
+    }
 
     updateUI();
     renderBackpackTab('pokemon');
