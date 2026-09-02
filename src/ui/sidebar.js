@@ -46,35 +46,42 @@ export function updateSidebar() {
             `;
         }
 
+        let glowClass = "glow-weak";
+        if (p.qualityName === "Shiny") glowClass = "glow-shiny";
+        else if (p.qualityName === "Epic") glowClass = "glow-epic";
+        else if (p.qualityName === "Rare") glowClass = "glow-rare";
+        else if (p.qualityName === "Uncommon") glowClass = "glow-uncommon";
+        else if (p.qualityName === "Regular") glowClass = "glow-regular";
+
         d.innerHTML = `
-            <div style="display: flex; width: 100%; align-items: stretch; height: 100%; min-height: 70px;">
-                <!-- Left Column: Crown, Sprite, Info -->
-                <div style="flex: 0 0 60px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; position: relative;">
-                    <div onclick="window.setLeader(${idx})" style="cursor: pointer; color: ${crownColor}; font-size: 16px; margin-top: 2px; z-index: 2;" title="Set as Leader">👑</div>
-                    <div style="width: 60px; height: 60px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 0; display: flex; justify-content: center; align-items: center;">
-                        <img src="Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png" onload="this.style.display='inline'" onerror="this.style.display='none'" style="max-width: 100%; max-height: 100%; object-fit: contain; pointer-events: none; opacity: 0.85;">
-                    </div>
-                    <div onclick="event.stopPropagation(); window.showPokemonStats(${idx}, 'party')" style="cursor: pointer; background: #34495e; color: white; border-radius: 50%; width: 16px; height: 16px; text-align: center; line-height: 16px; font-size: 10px; font-weight: bold; margin-bottom: 2px; z-index: 2; position: relative;" title="View Info">i</div>
+            <div style="display: flex; width: 100%; align-items: stretch; height: 100%; min-height: 55px;">
+                <!-- Left Column: Sprite -->
+                <div style="flex: 0 0 50px; display: flex; align-items: center; justify-content: center; position: relative;">
+                    <img src="Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png" onload="this.style.display='inline'" onerror="this.style.display='none'" class="${glowClass}" style="max-width: 100%; max-height: 100%; object-fit: contain; pointer-events: none; opacity: 0.85; transform: scale(1.5); z-index: 2;">
                 </div>
 
-                <!-- Right Column: Name/Lvl, QValue, SumIV, HP, XP -->
-                <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; padding-left: 5px; gap: 4px; min-width: 0;">
-                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                        <div style="display: flex; flex-direction: column; line-height: 1.1;">
-                            <span style="font-weight: bold; font-size: 13px; text-shadow: 1px 1px 1px rgba(0,0,0,0.8); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${p.name}</span>
-                            <span style="font-size: 11px; text-shadow: 1px 1px 1px rgba(0,0,0,0.8);">Lv.${p.level}</span>
+                <!-- Right Column: 3 Floors -->
+                <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; padding-left: 5px; gap: 2px; min-width: 0;">
+                    <!-- Top Floor: Name/Level and Buttons -->
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div style="line-height: 1; display: flex; align-items: baseline; gap: 4px;">
+                            <span style="font-weight: bold; font-size: 12px; text-shadow: 1px 1px 1px rgba(0,0,0,0.8); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${p.name}</span>
+                            <span style="font-size: 10px; text-shadow: 1px 1px 1px rgba(0,0,0,0.8);">Lv.${p.level}</span>
                         </div>
-                        <div style="display: flex; flex-direction: column; font-size: 9px; color: #eee; text-shadow: 1px 1px 1px rgba(0,0,0,0.8); line-height: 1.1; text-align: right; flex-shrink: 0;">
-                            <span title="Quality Value" style="color: #FFD700;">Q=${qVal}</span>
-                            <span title="Sum of IVs" style="color: #00FFFF;">∑IV=${sumIV}</span>
+                        <div style="display: flex; align-items: center; gap: 4px; pointer-events: auto; position: relative; z-index: 10;">
+                            <div onclick="window.setLeader(${idx})" style="cursor: pointer; color: ${crownColor}; font-size: 14px; line-height: 14px;" title="Set as Leader">👑</div>
+                            <div onclick="event.stopPropagation(); window.showPokemonStats(${idx}, 'party')" style="cursor: pointer; background: #34495e; color: white; border-radius: 50%; width: 14px; height: 14px; text-align: center; line-height: 14px; font-size: 10px; font-weight: bold;" title="View Info">i</div>
                         </div>
                     </div>
 
-                    <div style="width: 100%; height: 16px; background: #222; border: 1px solid #000; border-radius: 8px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; color: white; text-shadow: 1px 1px 1px black, -1px -1px 1px black, 1px -1px 1px black, -1px 1px 1px black; box-shadow: inset 0px 1px 3px rgba(0,0,0,0.5);">
+                    <!-- Middle Floor: HP Bar -->
+                    <div style="width: 100%; height: 14px; background: #222; border: 1px solid #000; border-radius: 8px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: bold; color: white; text-shadow: 1px 1px 1px black, -1px -1px 1px black, 1px -1px 1px black, -1px 1px 1px black; box-shadow: inset 0px 1px 3px rgba(0,0,0,0.5);">
                         <div style="position: absolute; left: 0; top: 0; width: ${hpPct}%; height: 100%; background: ${hpColor}; z-index: 0; transition: width 0.3s, background 0.3s; border-radius: 8px;"></div>
                         <span style="z-index: 1;">HP ${Math.floor(p.currentHp)}/${p.maxHp}</span>
                     </div>
-                    <div style="width: 100%; height: 16px; background: #222; border: 1px solid #000; border-radius: 8px; position: relative; overflow: hidden; display: flex; align-items: center; font-size: 10px; font-weight: bold; color: white; text-shadow: 1px 1px 1px black, -1px -1px 1px black, 1px -1px 1px black, -1px 1px 1px black; box-shadow: inset 0px 1px 3px rgba(0,0,0,0.5);">
+
+                    <!-- Base Floor: XP Bar -->
+                    <div style="width: 100%; height: 14px; background: #222; border: 1px solid #000; border-radius: 8px; position: relative; overflow: hidden; display: flex; align-items: center; font-size: 9px; font-weight: bold; color: white; text-shadow: 1px 1px 1px black, -1px -1px 1px black, 1px -1px 1px black, -1px 1px 1px black; box-shadow: inset 0px 1px 3px rgba(0,0,0,0.5);">
                         <div style="position: absolute; left: 0; top: 0; width: ${xpPct}%; height: 100%; background: #9b59b6; z-index: 0; transition: width 0.3s; border-radius: 8px;"></div>
                         <div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: flex;">
                             ${xpTextHtml}

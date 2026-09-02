@@ -289,3 +289,38 @@ input[type="number"] {
 #modal-content-box button:hover {
     background: #c0392b;
 }
+
+/* QTier Glow Effects */
+.glow-shiny {
+    filter: drop-shadow(0 -4px 4px #ff0000)
+            drop-shadow(4px 0 4px #ffff00)
+            drop-shadow(0 4px 4px #00ff00)
+            drop-shadow(-4px 0 4px #0000ff);
+}
+.glow-epic {
+    filter: drop-shadow(0 -2px 6px #7A00FF)
+            drop-shadow(2px 0 6px #7A00FF)
+            drop-shadow(0 2px 6px #7A00FF)
+            drop-shadow(-2px 0 6px #7A00FF);
+}
+.glow-rare {
+    filter: drop-shadow(0 -2px 6px #0000FF)
+            drop-shadow(2px 0 6px #0000FF)
+            drop-shadow(0 2px 6px #0000FF)
+            drop-shadow(-2px 0 6px #0000FF);
+}
+.glow-uncommon {
+    filter: drop-shadow(0 -2px 6px #00FFFF)
+            drop-shadow(2px 0 6px #00FFFF)
+            drop-shadow(0 2px 6px #00FFFF)
+            drop-shadow(-2px 0 6px #00FFFF);
+}
+.glow-regular {
+    filter: drop-shadow(0 -2px 6px #7AFFFF)
+            drop-shadow(2px 0 6px #7AFFFF)
+            drop-shadow(0 2px 6px #7AFFFF)
+            drop-shadow(-2px 0 6px #7AFFFF);
+}
+.glow-weak {
+    /* No glow */
+}
