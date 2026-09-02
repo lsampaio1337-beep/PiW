@@ -583,6 +583,27 @@ class BattleSystem {
         this.grantXP(leader, ev);
         this.state.trainer.money += Math.floor(ev);
 
+        // Stone Looting Logic
+        let dropChance = 0;
+        switch(this.activeEncounter.qualityName) {
+            case "Regular": dropChance = 1; break;
+            case "Uncommon": dropChance = 2; break;
+            case "Rare": dropChance = 3; break;
+            case "Epic": dropChance = 5; break;
+            case "Shiny": dropChance = 100; break;
+        }
+
+        if (Math.random() * 100 <= dropChance) {
+            if (!this.state.inventory) this.state.inventory = {};
+            const types = this.activeEncounter.types;
+            if (types && types.length > 0) {
+                const randomType = types[Math.floor(Math.random() * types.length)];
+                const stoneName = randomType + " Stone";
+                this.state.inventory[stoneName] = (this.state.inventory[stoneName] || 0) + 1;
+                console.log(`Looted a ${stoneName}!`);
+            }
+        }
+
         this.state.stats.battlesWon++;
         this.checkRouteUnlocks();
 
@@ -631,20 +652,7 @@ class BattleSystem {
     }
 
     grantXP(pokemon, amount) {
-        // Underlevel Boost
-        if (pokemon.level < this.state.trainer.level) {
-            const boost = Math.min(1.0, (this.state.trainer.level - pokemon.level) * amount * 0.05);
-            amount += boost;
-        }
-
         pokemon.xp += amount;
-        this.state.trainer.xp += amount;
-
-        // Check Trainer level up
-        let newTrainerLvl = mathEngine.getLevelFromXP(this.state.trainer.xp);
-        if (newTrainerLvl > this.state.trainer.level) {
-            this.state.trainer.level = newTrainerLvl;
-        }
 
         // Check level up
         let newLvl = mathEngine.getLevelFromXP(pokemon.xp);
@@ -688,8 +696,7 @@ class BattleSystem {
         // Penalty: deduct 10% gold
         this.state.trainer.money = Math.floor(this.state.trainer.money * 0.9);
 
-        // Reset Trainer XP to start of level (simplified)
-        this.state.trainer.xp = mathEngine.calculateTotalXP(this.state.trainer.level);
+
 
         // Heal all party to full
         this.state.party.forEach(p => p.currentHp = p.maxHp);

@@ -105,18 +105,7 @@ export function updateTopbar() {
         navButtons.style.opacity = lockMenus ? '0.5' : '1.0';
     }
 
-    // Top Nav
-    const elTrainerLvl = document.getElementById('trainer-lvl');
-    if (elTrainerLvl) elTrainerLvl.innerText = state.trainer.level;
 
-    // Trainer XP relative to current level
-    const currentTrainerXp = mathEngine.calculateTotalXP(state.trainer.level);
-    const nextTrainerXp = mathEngine.calculateTotalXP(state.trainer.level + 1);
-    const trainerXpProgress = Math.floor(state.trainer.xp) - currentTrainerXp;
-    const trainerXpRequired = nextTrainerXp - currentTrainerXp;
-
-    const elTrainerXp = document.getElementById('trainer-xp');
-    if (elTrainerXp) elTrainerXp.innerText = `${trainerXpProgress}/${trainerXpRequired}`;
 
     const elTrainerMoney = document.getElementById('trainer-money');
     if (elTrainerMoney) elTrainerMoney.innerText = state.trainer.money;

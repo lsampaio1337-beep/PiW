@@ -21,7 +21,7 @@ export function showSettings() {
         </div>
 
         <div style="margin-bottom: 15px;">
-            <label for="add-xp-input">Add XP (Trainer & Slot 1):</label>
+            <label for="add-xp-input">Add XP (Slot 1):</label>
             <input type="number" id="add-xp-input" value="1000" style="padding: 5px; width: 80px;">
             <button onclick="window.addXp()" style="padding: 5px 10px; font-size: 14px;">Add</button>
         </div>
@@ -101,7 +101,7 @@ export function addXp() {
     if (!inputEl) return;
     const amount = parseInt(inputEl.value);
     if (!isNaN(amount) && amount > 0) {
-        state.trainer.xp += amount;
+
         if (state.party.length > 0) {
             state.party[0].xp += amount;
         }

@@ -82,9 +82,8 @@ ${state.party.map((p, i) => `${i+1}. ${p.name} Lv.${p.level}`).join('\n')}
         } else if (cmd.startsWith("XP") && cmd.length > 2) {
             const xp = parseInt(cmd.substring(2));
             if (!isNaN(xp)) {
-                state.trainer.xp += xp;
                 if (state.party.length > 0) state.party[0].xp += xp;
-                console.log(`Added ${xp} XP to Trainer & Slot 1`);
+                console.log(`Added ${xp} XP to Slot 1`);
             }
         }
     }
