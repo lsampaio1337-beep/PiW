@@ -126,12 +126,15 @@ export function showDexEntry(id) {
     }
     movesHtml += `</table>`;
 
+    const hasSeenShiny = state.stats.seenShiniesSpecies && state.stats.seenShiniesSpecies[pData.name];
+    const shinyButtonStyle = hasSeenShiny ? "display: inline-block;" : "display: none;";
+
     const html = `
         <div style="text-align:center; max-height: 80vh; overflow-y: auto;">
             <h2>#${pData.id} ${pData.name}</h2>
             <img id="dex-sprite" src="Assets/Pokemon Sprites/${pData.id}.png" style="width: 100px; height: 100px;">
             <div>
-                <button onclick="document.getElementById('dex-sprite').src = 'Assets/Pokemon Sprites/${pData.id}_shiny.png'">Shiny</button>
+                <button style="${shinyButtonStyle}" onclick="document.getElementById('dex-sprite').src = 'Assets/Pokemon Sprites/${pData.id}_shiny.png'">Shiny</button>
                 <button onclick="document.getElementById('dex-sprite').src = 'Assets/Pokemon Sprites/${pData.id}.png'">Normal</button>
             </div>
 
