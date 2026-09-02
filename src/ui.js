@@ -359,6 +359,8 @@ export function switchView(viewName) {
         document.getElementById('view-gym').style.display = 'block';
     } else if (viewName === 'CASINO_HUB') {
         document.getElementById('view-casino').style.display = 'block';
+    } else if (viewName === 'DAYCARE_HUB') {
+        document.getElementById('view-daycare').style.display = 'block';
     }
 }
 
@@ -527,6 +529,13 @@ async function init() {
     document.getElementById('btn-map').onclick = () => { if(!checkCombatLock()) showMap(); };
     document.getElementById('btn-backpack').onclick = () => { if(!checkCombatLock()) showBackpack(); };
     document.getElementById('btn-dex').onclick = () => { if(!checkCombatLock()) showPokedex(); };
+
+    window.showBackpackAndFocus = (tab) => {
+        if(!checkCombatLock()) {
+            showBackpack();
+            renderBackpackTab(tab);
+        }
+    };
 
     document.getElementById('btn-stats').onclick = () => {
         if(checkCombatLock()) return;

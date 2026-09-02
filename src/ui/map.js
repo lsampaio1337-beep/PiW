@@ -187,6 +187,16 @@ export function navigateToLocation(locationName) {
 
         // Append to the viewCasino container
         viewCasino.insertAdjacentHTML('beforeend', html);
+    } else if (locationName === "Daycare") {
+        if (battleSystem) {
+             battleSystem.stop();
+             battleSystem.activeEncounter = null;
+             battleSystem.isSearching = false;
+             if (battleSystem.gymState) battleSystem.gymState.isActive = false;
+        }
+        switchView("DAYCARE_HUB");
+        updateUI();
+        return;
     } else if (locationName === "Pokemon Center & Market" || locationName.includes("Market")) {
         if (battleSystem) {
              battleSystem.stop();

@@ -243,6 +243,12 @@ export function handleDrop(event, targetCol) {
 
     if (!p) return;
 
+    // Daycare interaction constraints
+    if (sCol === 'breeding' && state.dayCareRef && state.dayCareRef.slot1.isBreeding) {
+        alert("Cannot move Pokémon while it is actively breeding!");
+        return;
+    }
+
     if (tCol === 'party' && state.party.length >= 6) {
         alert("Party is full!");
         return;
@@ -253,9 +259,140 @@ export function handleDrop(event, targetCol) {
         return;
     }
 
+    // DayCare Drag logic
+    if (tCol === 'breeding') {
+        if (state.dayCareRef && state.dayCareRef.slot1.pokemon) {
+            // Check if criteria matches
+            const currentP = state.dayCareRef.slot1.pokemon;
+            if (currentP.id !== p.id || Math.abs(currentP.quality - p.quality) > 0.001) {
+                // They swap places if the second one doesn't meet criteria
+                if (sCol === 'party') state.party[index] = currentP;
+                else if (sCol === 'training') state.training[index] = currentP;
+                else if (sCol === 'storage') state.storage[index] = currentP;
+                else if (sCol === 'safe') state.safe[index] = currentP;
+
+                state.breeding = [p];
+                state.dayCareRef.slot1.pokemon = p;
+                state.dayCareRef.slot1.battles = 0;
+                state.dayCareRef.slot1.isBreeding = false;
+                state.dayCareRef.slot1.isFinished = false;
+
+                // Set up filter
+                window.pokemonFilters.name = p.name;
+                window.pokemonFilters.minQ = p.quality.toFixed(2);
+                window.pokemonFilters.maxQ = p.quality.toFixed(2);
+
+                updateUI();
+                renderBackpackTab('pokemon');
+                return;
+            } else {
+                // Matches criteria: starts breeding
+                const sumIV1 = currentP.ivs.hp + currentP.ivs.atk + currentP.ivs.def + currentP.ivs.spa + currentP.ivs.spd + currentP.ivs.spe;
+                const sumIV2 = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
+
+                const keptParent = (sumIV2 > sumIV1) ? p : currentP;
+
+                // Clear filter
+                window.pokemonFilters.name = '';
+                window.pokemonFilters.minQ = '';
+                window.pokemonFilters.maxQ = '';
+
+                if (sCol === 'party') state.party.splice(index, 1);
+                else if (sCol === 'training') state.training.splice(index, 1);
+                else if (sCol === 'storage') state.storage.splice(index, 1);
+                else if (sCol === 'safe') state.safe.splice(index, 1);
+
+                state.breeding = [keptParent];
+                state.dayCareRef.slot1.pokemon = keptParent;
+                state.dayCareRef.slot1.battles = 0;
+                state.dayCareRef.slot1.isBreeding = true;
+                state.dayCareRef.slot1.isFinished = false;
+
+                updateUI();
+                renderBackpackTab('pokemon');
+                return;
+            }
+        } else {
+            // Empty breeding slot
+            if (sCol === 'party') state.party.splice(index, 1);
+            else if (sCol === 'training') state.training.splice(index, 1);
+            else if (sCol === 'storage') state.storage.splice(index, 1);
+            else if (sCol === 'safe') state.safe.splice(index, 1);
+
+            state.breeding = [p];
+            if (state.dayCareRef) {
+                state.dayCareRef.slot1.pokemon = p;
+                state.dayCareRef.slot1.battles = 0;
+                state.dayCareRef.slot1.isBreeding = false;
+                state.dayCareRef.slot1.isFinished = false;
+            }
+
+            // Set up filter
+            window.pokemonFilters.name = p.name;
+            window.pokemonFilters.minQ = p.quality.toFixed(2);
+            window.pokemonFilters.maxQ = p.quality.toFixed(2);
+
+            updateUI();
+            renderBackpackTab('pokemon');
+            return;
+        }
+    }
+
+    if (tCol === 'training') {
+        if (state.training.length > 0) {
+            // Swap if training slot is full
+            const currentP = state.training[0];
+            if (sCol === 'party') state.party[index] = currentP;
+            else if (sCol === 'breeding') state.breeding[index] = currentP;
+            else if (sCol === 'storage') state.storage[index] = currentP;
+            else if (sCol === 'safe') state.safe[index] = currentP;
+
+            state.training = [p];
+            if (state.dayCareRef) {
+                state.dayCareRef.slot2.pokemon = p;
+                state.dayCareRef.slot2.battles = 0;
+            }
+            updateUI();
+            renderBackpackTab('pokemon');
+            return;
+        } else {
+            if (sCol === 'party') state.party.splice(index, 1);
+            else if (sCol === 'breeding') state.breeding.splice(index, 1);
+            else if (sCol === 'storage') state.storage.splice(index, 1);
+            else if (sCol === 'safe') state.safe.splice(index, 1);
+
+            state.training = [p];
+            if (state.dayCareRef) {
+                state.dayCareRef.slot2.pokemon = p;
+                state.dayCareRef.slot2.battles = 0;
+            }
+            updateUI();
+            renderBackpackTab('pokemon');
+            return;
+        }
+    }
+
     if (sCol === 'party') state.party.splice(index, 1);
-    else if (sCol === 'breeding') state.breeding.splice(index, 1);
-    else if (sCol === 'training') state.training.splice(index, 1);
+    else if (sCol === 'breeding') {
+        state.breeding.splice(index, 1);
+        if (state.dayCareRef) {
+            state.dayCareRef.slot1.pokemon = null;
+            state.dayCareRef.slot1.battles = 0;
+            state.dayCareRef.slot1.isBreeding = false;
+            state.dayCareRef.slot1.isFinished = false;
+        }
+        // clear filters
+        window.pokemonFilters.name = '';
+        window.pokemonFilters.minQ = '';
+        window.pokemonFilters.maxQ = '';
+    }
+    else if (sCol === 'training') {
+        state.training.splice(index, 1);
+        if (state.dayCareRef) {
+            state.dayCareRef.slot2.pokemon = null;
+            state.dayCareRef.slot2.battles = 0;
+        }
+    }
     else if (sCol === 'storage') state.storage.splice(index, 1);
     else if (sCol === 'safe') state.safe.splice(index, 1);
 

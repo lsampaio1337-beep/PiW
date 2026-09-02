@@ -5,8 +5,9 @@ class DayCare {
         this.state = gameState;
 
         this.slot1 = {
-            parent1: null,
-            parent2: null,
+            pokemon: null,
+            isBreeding: false,
+            isFinished: false,
             battles: 0,
             requiredBattles: 100
         };
@@ -18,41 +19,9 @@ class DayCare {
         };
     }
 
-    addParentToSlot1(pokemonIndex, fromStorage = true) {
-        const sourceList = fromStorage ? this.state.storage : this.state.party;
-        const pkmn = sourceList[pokemonIndex];
-
-        if (!this.slot1.parent1) {
-            this.slot1.parent1 = pkmn;
-            sourceList.splice(pokemonIndex, 1);
-            return true;
-        } else if (!this.slot1.parent2) {
-            // Must be identical species and have the exact same QValue
-            // Note: qualityName check is replaced by strict numerical quality check based on the spec
-            if (this.slot1.parent1.id === pkmn.id && Math.abs(this.slot1.parent1.quality - pkmn.quality) < 0.001) {
-                this.slot1.parent2 = pkmn;
-                sourceList.splice(pokemonIndex, 1);
-                return true;
-            } else {
-                return false; // Criteria not met
-            }
-        }
-        return false;
-    }
-
-    addPokemonToSlot2(pokemonIndex, fromStorage = true) {
-        const sourceList = fromStorage ? this.state.storage : this.state.party;
-        if (!this.slot2.pokemon) {
-            this.slot2.pokemon = sourceList[pokemonIndex];
-            sourceList.splice(pokemonIndex, 1);
-            return true;
-        }
-        return false;
-    }
-
     tickBattle() {
         // Breeding logic
-        if (this.slot1.parent1 && this.slot1.parent2) {
+        if (this.slot1.pokemon && this.slot1.isBreeding && !this.slot1.isFinished) {
             this.slot1.battles++;
             if (this.slot1.battles >= this.slot1.requiredBattles) {
                 this.completeBreeding();
@@ -77,30 +46,25 @@ class DayCare {
     }
 
     completeBreeding() {
-        const p1 = this.slot1.parent1;
-        const p2 = this.slot1.parent2;
-
-        const sumIV1 = p1.ivs.hp + p1.ivs.atk + p1.ivs.def + p1.ivs.spa + p1.ivs.spd + p1.ivs.spe;
-        const sumIV2 = p2.ivs.hp + p2.ivs.atk + p2.ivs.def + p2.ivs.spa + p2.ivs.spd + p2.ivs.spe;
-
-        // Keep the parent with the highest SumIV (if tie, keep p1)
-        const keptParent = (sumIV2 > sumIV1) ? p2 : p1;
-        const merged = JSON.parse(JSON.stringify(keptParent));
+        const p = this.slot1.pokemon;
+        if (!p) return;
 
         // Increase quality by 0.01 (Max 1.99)
-        merged.quality = Math.min(1.99, merged.quality + 0.01);
+        p.quality = Math.min(1.99, p.quality + 0.01);
 
-        // Discard the other parent (it is not pushed back anywhere)
+        // Map Quality Tier if Q >= 1.5, 1.25, etc.
+        if (p.quality >= 1.99) {
+            p.qualityName = "Perfect";
+        } else if (p.quality >= 1.70) { // Generic threshold updates could go here
+            p.qualityName = p.qualityName;
+        }
 
-        // Re-calculate stats based on new IVs and Quality would happen here
-        // Usually would call a stat calc method, assuming logic will be integrated via mathEngine later
+        // Let UI know it's finished
+        this.slot1.isFinished = true;
+        this.slot1.isBreeding = false;
 
-        this.state.storage.push(merged);
-
-        // Clear parents
-        this.slot1.parent1 = null;
-        this.slot1.parent2 = null;
-        this.slot1.battles = 0;
+        // Note: the pokemon stays in state.breeding array (this.slot1.pokemon is a ref)
+        // until the player moves it manually.
     }
 
     completeTrainingCycle() {
