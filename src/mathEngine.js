@@ -109,71 +109,72 @@ function generateQuality(stats = {}) {
 }
 
 function generateIVs(stats = {}, isShiny = false) {
-    // IV Booster
+    // Mastery IV Booster
     let ivTaskTier = stats.ivTaskTier || 0;
-    let ivBoost = 0;
-    if (ivTaskTier >= 5) ivBoost = 0.25;
-    else if (ivTaskTier >= 4) ivBoost = 0.20;
-    else if (ivTaskTier >= 3) ivBoost = 0.15;
-    else if (ivTaskTier >= 2) ivBoost = 0.10;
-    else if (ivTaskTier >= 1) ivBoost = 0.05;
+    let masteryBoost = 0;
+    if (ivTaskTier >= 5) masteryBoost = 0.25;
+    else if (ivTaskTier >= 4) masteryBoost = 0.20;
+    else if (ivTaskTier >= 3) masteryBoost = 0.15;
+    else if (ivTaskTier >= 2) masteryBoost = 0.10;
+    else if (ivTaskTier >= 1) masteryBoost = 0.05;
 
+    // Shiny IV Booster
     let shinyCaughtTaskTier = stats.shinyCaughtTaskTier || 0;
+    let shinyBoost = 0;
     if (isShiny && shinyCaughtTaskTier >= 1) {
-        ivBoost += 0.25;
+        shinyBoost = 0.25;
     }
 
-    // Base roll: Integer [1, 100] per stat
-    const ivs = {
-        hp: Math.floor(Math.random() * 100) + 1,
-        atk: Math.floor(Math.random() * 100) + 1,
-        def: Math.floor(Math.random() * 100) + 1,
-        spa: Math.floor(Math.random() * 100) + 1,
-        spd: Math.floor(Math.random() * 100) + 1,
-        spe: Math.floor(Math.random() * 100) + 1
+    // Roll random SumIV from 6 to 600
+    let sumIV = Math.floor(Math.random() * 595) + 6;
+
+    // Apply bonuses multiplicatively
+    sumIV = Math.floor(sumIV * (1 + masteryBoost) * (1 + shinyBoost));
+
+    // Cap at 600
+    if (sumIV > 600) {
+        sumIV = 600;
+    }
+
+    // Randomly distribute from 1-100 each stat
+    let generatedStats = [1, 1, 1, 1, 1, 1];
+    let remaining = sumIV - 6;
+
+    while (remaining > 0) {
+        let availableIndices = [];
+        for (let i = 0; i < 6; i++) {
+            if (generatedStats[i] < 100) availableIndices.push(i);
+        }
+
+        let i = availableIndices[Math.floor(Math.random() * availableIndices.length)];
+
+        let capacityOfOthers = 0;
+        for (let j of availableIndices) {
+            if (j !== i) capacityOfOthers += (100 - generatedStats[j]);
+        }
+
+        let minAdd = Math.max(1, remaining - capacityOfOthers);
+        let maxAdd = Math.min(remaining, 100 - generatedStats[i]);
+
+        let add = Math.floor(Math.random() * (maxAdd - minAdd + 1)) + minAdd;
+        generatedStats[i] += add;
+        remaining -= add;
+    }
+
+    // Shuffle the stats to ensure pure randomness without index bias
+    for (let i = generatedStats.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [generatedStats[i], generatedStats[j]] = [generatedStats[j], generatedStats[i]];
+    }
+
+    return {
+        hp: generatedStats[0],
+        atk: generatedStats[1],
+        def: generatedStats[2],
+        spa: generatedStats[3],
+        spd: generatedStats[4],
+        spe: generatedStats[5]
     };
-
-    // Apply role bonuses
-    ivs.hp = Math.floor(ivs.hp * 1.5);
-    ivs.def = Math.floor(ivs.def * 1.5);
-    ivs.spd = Math.floor(ivs.spd * 1.5);
-    ivs.atk = Math.floor(ivs.atk * 2.0);
-    ivs.spa = Math.floor(ivs.spa * 2.0);
-    ivs.spe = Math.floor(ivs.spe * 1.25);
-
-    // Apply mastery boost
-    if (ivBoost > 0) {
-        for (let stat in ivs) {
-            ivs[stat] = Math.floor(ivs[stat] * (1 + ivBoost));
-        }
-    }
-
-    // Enforce hard cap of 100 per stat and a total IV limit of 600
-    let totalIV = 0;
-    for (let stat in ivs) {
-        ivs[stat] = Math.min(100, ivs[stat]);
-        totalIV += ivs[stat];
-    }
-
-    // If total exceeds 600, scale them down proportionally
-    if (totalIV > 600) {
-        let reductionRatio = 600 / totalIV;
-        let newTotal = 0;
-        let statKeys = Object.keys(ivs);
-
-        for (let i = 0; i < statKeys.length; i++) {
-            let stat = statKeys[i];
-            if (i === statKeys.length - 1) {
-                // To avoid rounding issues, the last stat gets the remainder up to 600
-                ivs[stat] = 600 - newTotal;
-            } else {
-                ivs[stat] = Math.floor(ivs[stat] * reductionRatio);
-                newTotal += ivs[stat];
-            }
-        }
-    }
-
-    return ivs;
 }
 
 function calculateDamage(level, power, attackStat, defenseStat, typeEffectiveness, quality) {
