@@ -111,6 +111,13 @@ const oakTasks = {
         { req: 10000, text: "Capture 10000 Pokemons", reward: "Excellent Catch Booster", effect: "+70% Catch Rate" },
         { req: 25000, text: "Capture 25000 Pokemons", reward: "Master Catch Booster", effect: "+100% Catch Rate" }
     ],
+    level: [
+        { req: 1000, stat: 'caughtLvl15', text: "Catch 1000 Pokemons with level >= 15", reward: "Low Level Booster", effect: "+50% XP for level < 15" },
+        { req: 2500, stat: 'caughtLvl30', text: "Catch 2500 Pokemons with level >= 30", reward: "Regular Level Booster", effect: "+50% XP for level < 30" },
+        { req: 5000, stat: 'caughtLvl45', text: "Catch 5000 Pokemons with level >= 45", reward: "Good Level Booster", effect: "+50% XP for level < 45" },
+        { req: 10000, stat: 'caughtLvl60', text: "Catch 10000 Pokemons with level >= 60", reward: "Excellent Level Booster", effect: "+50% XP for level < 60" },
+        { req: 25000, stat: 'caughtLvl75', text: "Catch 25000 Pokemons with level >= 75", reward: "Master Level Booster", effect: "+50% XP for level < 75" }
+    ],
     shinySeen: [
         { req: 1, text: "See 1 Shiny Pokemon", reward: "Regular Shiny Booster", effect: "+1 Shiny Roll" },
         { req: 3, text: "See 3 Shiny Pokemons", reward: "Good Shiny Booster", effect: "+2 Shiny Rolls" },
@@ -131,6 +138,7 @@ const oakTasks = {
 window.claimOakTaskReward = function(type) {
     if (type === 'q') state.stats.qTaskTier = (state.stats.qTaskTier || 0) + 1;
     if (type === 'c') state.stats.cTaskTier = (state.stats.cTaskTier || 0) + 1;
+    if (type === 'level') state.stats.levelTaskTier = (state.stats.levelTaskTier || 0) + 1;
     if (type === 'shinySeen') state.stats.shinySeenTaskTier = (state.stats.shinySeenTaskTier || 0) + 1;
     if (type === 'shinyCaught') state.stats.shinyCaughtTaskTier = (state.stats.shinyCaughtTaskTier || 0) + 1;
     if (type === 'iv') state.stats.ivTaskTier = (state.stats.ivTaskTier || 0) + 1;
@@ -156,6 +164,13 @@ window.cheatCompleteOakTask = function(type) {
     if (type === 'shinyCaught') {
         tier = state.stats.shinyCaughtTaskTier || 0;
         if (tier < oakTasks.shinyCaught.length) state.stats.shiniesCaught = Math.max(state.stats.shiniesCaught || 0, oakTasks.shinyCaught[tier].req);
+    }
+    if (type === 'level') {
+        tier = state.stats.levelTaskTier || 0;
+        if (tier < oakTasks.level.length) {
+            statName = oakTasks.level[tier].stat;
+            state.stats[statName] = Math.max(state.stats[statName] || 0, oakTasks.level[tier].req);
+        }
     }
     if (type === 'iv') {
         tier = state.stats.ivTaskTier || 0;
@@ -261,6 +276,16 @@ window.showOakLabModal = function() {
         ivCurrentVal = state.stats[oakTasks.iv[oakTasks.iv.length - 1].stat] || 0; // fallback if completed
     }
     html += renderCard("IV Tasks", 'iv', ivCurrentVal, ivTier, oakTasks.iv, false);
+
+    // Level Card
+    let levelTier = state.stats.levelTaskTier || 0;
+    let levelCurrentVal = 0;
+    if (levelTier < oakTasks.level.length) {
+        levelCurrentVal = state.stats[oakTasks.level[levelTier].stat] || 0;
+    } else if (oakTasks.level.length > 0) {
+        levelCurrentVal = state.stats[oakTasks.level[oakTasks.level.length - 1].stat] || 0; // fallback if completed
+    }
+    html += renderCard("Level Tasks", 'level', levelCurrentVal, levelTier, oakTasks.level, true);
 
     // Shiny Card (Combined seen and caught, keeps all rewards but obsolete regular seen shiny is removed by good shiny)
     let seenTier = state.stats.shinySeenTaskTier || 0;
