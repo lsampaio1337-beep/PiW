@@ -328,10 +328,10 @@ export function handleDrop(event, targetCol) {
         state.party.push(p);
     }
     else if (tCol === 'storage') {
-        state.storage.unshift(p);
+        state.storage.push(p);
     }
     else if (tCol === 'safe') {
-        state.safe.unshift(p);
+        state.safe.push(p);
     }
     else if (tCol === 'training') {
         if (state.training.length > 0) {
