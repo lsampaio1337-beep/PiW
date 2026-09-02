@@ -558,6 +558,12 @@ class BattleSystem {
                 if (sumIV < 450) this.state.stats.caughtIVUnder450 = (this.state.stats.caughtIVUnder450 || 0) + 1;
                 if (sumIV < 500) this.state.stats.caughtIVUnder500 = (this.state.stats.caughtIVUnder500 || 0) + 1;
 
+                if (caughtPokemon.level >= 15) this.state.stats.caughtLvl15 = (this.state.stats.caughtLvl15 || 0) + 1;
+                if (caughtPokemon.level >= 30) this.state.stats.caughtLvl30 = (this.state.stats.caughtLvl30 || 0) + 1;
+                if (caughtPokemon.level >= 45) this.state.stats.caughtLvl45 = (this.state.stats.caughtLvl45 || 0) + 1;
+                if (caughtPokemon.level >= 60) this.state.stats.caughtLvl60 = (this.state.stats.caughtLvl60 || 0) + 1;
+                if (caughtPokemon.level >= 75) this.state.stats.caughtLvl75 = (this.state.stats.caughtLvl75 || 0) + 1;
+
                 // Track species catches for unlocks
                 if (!this.state.stats.caughtSpecies) this.state.stats.caughtSpecies = {};
                 this.state.stats.caughtSpecies[this.activeEncounter.name] = (this.state.stats.caughtSpecies[this.activeEncounter.name] || 0) + 1;
@@ -631,6 +637,15 @@ class BattleSystem {
     }
 
     grantXP(pokemon, amount) {
+        let levelTaskTier = this.state.stats.levelTaskTier || 0;
+        let bonus = 0;
+        if (levelTaskTier >= 1 && pokemon.level < 15) bonus += 0.5;
+        if (levelTaskTier >= 2 && pokemon.level < 30) bonus += 0.5;
+        if (levelTaskTier >= 3 && pokemon.level < 45) bonus += 0.5;
+        if (levelTaskTier >= 4 && pokemon.level < 60) bonus += 0.5;
+        if (levelTaskTier >= 5 && pokemon.level < 75) bonus += 0.5;
+        amount = amount * (1 + bonus);
+
         // Underlevel Boost
         if (pokemon.level < this.state.trainer.level) {
             const boost = Math.min(1.0, (this.state.trainer.level - pokemon.level) * amount * 0.05);

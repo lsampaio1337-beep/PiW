@@ -33,6 +33,12 @@ export const state = {
         cTaskTier: 0,
         shinySeenTaskTier: 0,
         shinyCaughtTaskTier: 0,
+        levelTaskTier: 0,
+        caughtLvl15: 0,
+        caughtLvl30: 0,
+        caughtLvl45: 0,
+        caughtLvl60: 0,
+        caughtLvl75: 0,
         ivTaskTier: 0
     },
     settings: {
