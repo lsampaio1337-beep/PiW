@@ -187,11 +187,7 @@ window.showOakLabModal = function() {
 
     const renderActiveTask = (type, currentVal, tierIdx, taskList) => {
         if (tierIdx >= taskList.length) {
-            return `
-                <div style="margin-bottom: 10px;">
-                    <span style="color: #ccc; font-style: italic;">Task: Completed</span>
-                </div>
-            `;
+            return ``;
         }
 
         let task = taskList[tierIdx];
@@ -228,6 +224,9 @@ window.showOakLabModal = function() {
     };
 
     const renderCard = (title, type, currentVal, tierIdx, taskList, keepAllRewards) => {
+        if (tierIdx >= taskList.length) {
+            title = title.replace("Task", "Reward");
+        }
         let taskHtml = renderActiveTask(type, currentVal, tierIdx, taskList);
 
         let rewardsHtml = "";
@@ -262,10 +261,10 @@ window.showOakLabModal = function() {
     };
 
     // Quality Card
-    html += renderCard("Quality Tasks", 'q', state.stats.epicCaptures || 0, state.stats.qTaskTier || 0, oakTasks.q, false);
+    html += renderCard("Quality Task", 'q', state.stats.epicCaptures || 0, state.stats.qTaskTier || 0, oakTasks.q, false);
 
     // Catch Card
-    html += renderCard("Catch Tasks", 'c', state.stats.caught || 0, state.stats.cTaskTier || 0, oakTasks.c, false);
+    html += renderCard("Catch Task", 'c', state.stats.caught || 0, state.stats.cTaskTier || 0, oakTasks.c, false);
 
     // IV Card
     let ivTier = state.stats.ivTaskTier || 0;
@@ -275,7 +274,7 @@ window.showOakLabModal = function() {
     } else if (oakTasks.iv.length > 0) {
         ivCurrentVal = state.stats[oakTasks.iv[oakTasks.iv.length - 1].stat] || 0; // fallback if completed
     }
-    html += renderCard("IV Tasks", 'iv', ivCurrentVal, ivTier, oakTasks.iv, false);
+    html += renderCard("IV Task", 'iv', ivCurrentVal, ivTier, oakTasks.iv, false);
 
     // Level Card
     let levelTier = state.stats.levelTaskTier || 0;
@@ -285,7 +284,7 @@ window.showOakLabModal = function() {
     } else if (oakTasks.level.length > 0) {
         levelCurrentVal = state.stats[oakTasks.level[oakTasks.level.length - 1].stat] || 0; // fallback if completed
     }
-    html += renderCard("Level Tasks", 'level', levelCurrentVal, levelTier, oakTasks.level, true);
+    html += renderCard("Level Task", 'level', levelCurrentVal, levelTier, oakTasks.level, true);
 
     // Shiny Card (Combined seen and caught, keeps all rewards but obsolete regular seen shiny is removed by good shiny)
     let seenTier = state.stats.shinySeenTaskTier || 0;
@@ -294,13 +293,12 @@ window.showOakLabModal = function() {
     let shinySeenTaskHtml = renderActiveTask('shinySeen', state.stats.shiniesSeen || 0, seenTier, oakTasks.shinySeen);
     let shinyCaughtTaskHtml = renderActiveTask('shinyCaught', state.stats.shiniesCaught || 0, caughtTier, oakTasks.shinyCaught);
 
+    let shinyTitle = "Shiny Task";
+
     // Only show "Task: Completed" once if both are done
     if (seenTier >= oakTasks.shinySeen.length && caughtTier >= oakTasks.shinyCaught.length) {
-        shinySeenTaskHtml = `
-            <div style="margin-bottom: 10px;">
-                <span style="color: #ccc; font-style: italic;">Task: Completed</span>
-            </div>
-        `;
+        shinyTitle = "Shiny Reward";
+        shinySeenTaskHtml = "";
         shinyCaughtTaskHtml = "";
     } else {
         // If one is complete but not the other, we don't want duplicate "Task: Completed" texts
@@ -336,7 +334,7 @@ window.showOakLabModal = function() {
 
     html += `
         <div style="border: 1px solid #555; padding: 10px; border-radius: 5px; background-color: rgba(0,0,0,0.5);">
-            <h3 style="margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; font-size: 16px;">Shiny Tasks</h3>
+            <h3 style="margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; font-size: 16px;">${shinyTitle}</h3>
             ${shinySeenTaskHtml}
             ${shinyCaughtTaskHtml}
             ${shinyRewardsHtml}
@@ -344,7 +342,7 @@ window.showOakLabModal = function() {
     `;
 
     html += `</div>`;
-    showModal("Oak Lab", html);
+    showModal("Tasks & Rewards", html);
 };
 
 export function renderOakLab() {
@@ -362,7 +360,7 @@ export function renderOakLab() {
             <p style="font-size: 12px; color: #ccc; margin-bottom: 15px;">Complete tasks to unlock global bonuses.</p>
 
             <div style="display: flex; flex-direction: column; gap: 10px;">
-                <button onclick="window.showOakLabModal()" style="padding: 10px; font-size: 16px; cursor: pointer;">View Tasks & Rewards</button>
+                <button onclick="window.showOakLabModal()" style="padding: 10px; font-size: 16px; cursor: pointer;">Tasks & Rewards</button>
             </div>
         </div>
     `;
