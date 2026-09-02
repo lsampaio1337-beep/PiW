@@ -60,8 +60,13 @@ export function updateBattleArena() {
             // Only trigger entrance once when enemy spawns
             if (!elEnemySprite.dataset.spawnedId || elEnemySprite.dataset.spawnedId !== enemy.id.toString()) {
                 elEnemySprite.dataset.spawnedId = enemy.id.toString();
-                elEnemySprite.classList.add('anim-slide-in');
-                setTimeout(() => { elEnemySprite.classList.remove('anim-slide-in'); }, 2000);
+                const enemySideEl = document.getElementById('enemy-side');
+                if (enemySideEl) {
+                    enemySideEl.style.display = 'flex';
+                    enemySideEl.classList.remove('anim-slide-left', 'anim-fade-out'); // remove potential old corpse classes
+                    enemySideEl.classList.add('anim-slide-in');
+                    setTimeout(() => { enemySideEl.classList.remove('anim-slide-in'); }, 2000);
+                }
             }
             updateSpriteAnimation(elEnemySprite, enemy, 'enemy');
 
@@ -94,6 +99,9 @@ export function updateBattleArena() {
 
             const elEnemyHp = document.getElementById('enemy-hp');
             if (elEnemyHp) elEnemyHp.innerText = "?/?";
+
+            const elEnemySide = document.getElementById('enemy-side');
+            if (elEnemySide) elEnemySide.style.display = 'flex';
 
             const elEnemySprite = document.getElementById('enemy-sprite');
             if (elEnemySprite) {
@@ -181,7 +189,7 @@ export function showDamage(target, amount, isCrit, moveName = '', moveType = 'No
     dmgNode.style.fontWeight = 'bold';
     dmgNode.style.textShadow = '1px 1px 2px black';
     dmgNode.style.pointerEvents = 'none';
-    dmgNode.style.transition = 'all 1s ease-out';
+    dmgNode.style.transition = 'top 3s linear, opacity 1s linear';
     dmgNode.style.zIndex = '100';
     dmgNode.style.whiteSpace = 'nowrap';
 
@@ -194,12 +202,15 @@ export function showDamage(target, amount, isCrit, moveName = '', moveType = 'No
 
     img.parentElement.appendChild(dmgNode);
 
-    // Animate up
+    // Set initial opacity explicit for transition
+    dmgNode.style.opacity = '1';
+
+    // Slide up constantly over 3s
     setTimeout(() => {
         dmgNode.style.top = (parseInt(dmgNode.style.top) - 40) + 'px';
     }, 50);
 
-    // Keep 100% opacity for 2 seconds, then fade out over 1 second
+    // After 2s, start fading out over the last 1s
     setTimeout(() => {
         dmgNode.style.opacity = '0';
     }, 2050);
@@ -214,20 +225,31 @@ function updateSpriteAnimation(spriteEl, pokemon, side) {
     if (!spriteEl) return;
 
     // Clear existing idle classes
-    spriteEl.classList.remove('anim-idle-walk', 'anim-idle-walk-enemy', 'anim-idle-fly', 'anim-idle-fly-enemy', 'anim-idle-swim', 'anim-idle-swim-enemy');
+    const wrapper = side === 'player' ? document.getElementById('player-sprite-wrapper') : document.getElementById('enemy-sprite-wrapper');
+    if (wrapper) wrapper.classList.remove('anim-idle-walk', 'anim-idle-walk-enemy', 'anim-idle-fly', 'anim-idle-fly-enemy', 'anim-idle-swim', 'anim-idle-swim-enemy');
 
     const types = pokemon.types || [];
     let animClass = side === 'player' ? 'anim-idle-walk' : 'anim-idle-walk-enemy';
 
+    // Set base padding to 0 first
+    if (wrapper) wrapper.style.paddingTop = '0';
+
     // Determine animation based on priority: Fly+Water -> Fly, Fly -> Fly, Water -> Swim, Else -> Walk
     if (types.includes('Flying')) {
         animClass = side === 'player' ? 'anim-idle-fly' : 'anim-idle-fly-enemy';
+        if (wrapper) wrapper.style.paddingBottom = '60px'; // Fly higher
+        if (wrapper) wrapper.style.paddingTop = '0px';
     } else if (types.includes('Water')) {
         animClass = side === 'player' ? 'anim-idle-swim' : 'anim-idle-swim-enemy';
+        if (wrapper) wrapper.style.paddingTop = '60px'; // Swim lower
+        if (wrapper) wrapper.style.paddingBottom = '0px';
+    } else {
+        if (wrapper) wrapper.style.paddingTop = '30px'; // Normal walk height
+        if (wrapper) wrapper.style.paddingBottom = '0px';
     }
 
     // Don't override attack or entrance classes if they are active, just add it to classList
-    spriteEl.classList.add(animClass);
+    if (wrapper) wrapper.classList.add(animClass);
 
     // Handle fake water display
     const fakeWaterEl = document.getElementById(side + '-fake-water');
@@ -242,7 +264,8 @@ function updateSpriteAnimation(spriteEl, pokemon, side) {
 
 function clearSpriteAnimation(spriteEl, side) {
     if (!spriteEl) return;
-    spriteEl.classList.remove('anim-idle-walk', 'anim-idle-walk-enemy', 'anim-idle-fly', 'anim-idle-fly-enemy', 'anim-idle-swim', 'anim-idle-swim-enemy');
+    const wrapper = side === 'player' ? document.getElementById('player-sprite-wrapper') : document.getElementById('enemy-sprite-wrapper');
+    if (wrapper) wrapper.classList.remove('anim-idle-walk', 'anim-idle-walk-enemy', 'anim-idle-fly', 'anim-idle-fly-enemy', 'anim-idle-swim', 'anim-idle-swim-enemy');
 
     const fakeWaterEl = document.getElementById(side + '-fake-water');
     if (fakeWaterEl) fakeWaterEl.style.display = 'none';
@@ -252,8 +275,9 @@ function clearSpriteAnimation(spriteEl, side) {
 export function pauseIdleAnimation() {
     ['player-sprite', 'enemy-sprite'].forEach(id => {
         const el = document.getElementById(id);
-        if (el) {
-            el.style.animationPlayState = 'paused';
+        const wrapper = document.getElementById(id + '-wrapper');
+        if (wrapper) {
+            wrapper.style.animationPlayState = 'paused';
         }
     });
 }
@@ -261,8 +285,9 @@ export function pauseIdleAnimation() {
 export function resumeIdleAnimation() {
     ['player-sprite', 'enemy-sprite'].forEach(id => {
         const el = document.getElementById(id);
-        if (el) {
-            el.style.animationPlayState = 'running';
+        const wrapper = document.getElementById(id + '-wrapper');
+        if (wrapper) {
+            wrapper.style.animationPlayState = 'running';
         }
     });
 }
@@ -272,9 +297,6 @@ export function playAttackAnimation(attackerSide) {
     const el = document.getElementById(elId);
     if (!el) return;
 
-    // Briefly remove idle anim during attack
-    const idleClasses = Array.from(el.classList).filter(c => c.startsWith('anim-idle-'));
-    el.classList.remove(...idleClasses);
 
     const attackClass = attackerSide === 'player' ? 'anim-attack' : 'anim-attack-enemy';
     el.classList.remove(attackClass);
@@ -283,7 +305,6 @@ export function playAttackAnimation(attackerSide) {
 
     setTimeout(() => {
         el.classList.remove(attackClass);
-        if (idleClasses.length) el.classList.add(...idleClasses);
     }, 500);
 }
 
@@ -375,7 +396,7 @@ function playSplash(x, y, color, parent) {
         particle.style.left = x + 'px';
         particle.style.top = y + 'px';
         particle.style.zIndex = '99';
-        particle.style.transition = 'all 0.3s ease-out';
+        particle.style.transition = 'all 1s ease-out';
 
         parent.appendChild(particle);
 
@@ -391,72 +412,86 @@ function playSplash(x, y, color, parent) {
 
         setTimeout(() => {
             if (particle.parentElement) particle.parentElement.removeChild(particle);
-        }, 300);
+        }, 1000);
     }
 }
 
 
-export function playEnemyDefeatAnimation() {
-    const el = document.getElementById('enemy-sprite');
-    if (el) {
-        el.classList.add('anim-fade-out');
+export function playEnemyDefeatAnimation(ballName, success) {
+    const arena = document.getElementById('combat-arena');
+    const enemySide = document.getElementById('enemy-side');
+    if (!arena || !enemySide) return;
+
+    // Clone the entire enemy container to act as the "corpse"
+    const corpse = enemySide.cloneNode(true);
+    corpse.id = 'enemy-corpse-' + Date.now();
+    corpse.style.position = 'absolute';
+    corpse.style.right = '40%';
+    corpse.style.top = '20px';
+    corpse.style.zIndex = '2'; // slightly behind active sprite
+
+    // Reset/hide the real enemy side immediately for the next encounter
+    enemySide.style.display = 'none';
+
+    // Start fading out the corpse image (2s fade out)
+    const corpseImg = corpse.querySelector('img');
+    if (corpseImg) {
+        corpseImg.classList.add('anim-fade-corpse');
     }
+
+    // Attach pokeball to the corpse if applicable
+    if (ballName) {
+        const pokeball = document.createElement('img');
+        pokeball.src = 'Assets/Items/Balls/' + ballName + '.png';
+        pokeball.style.position = 'absolute';
+        pokeball.style.width = '40px';
+        pokeball.style.height = '40px';
+        pokeball.style.left = '50%';
+        pokeball.style.top = '50%';
+        pokeball.style.transform = 'translate(-50%, -50%)';
+        pokeball.style.zIndex = '100';
+
+        if (!document.getElementById('shake-style')) {
+            const style = document.createElement('style');
+            style.id = 'shake-style';
+            style.innerHTML = `
+                @keyframes ball-shake {
+                    0% { transform: translate(-50%, -50%) rotate(0deg); }
+                    20% { transform: translate(-50%, -50%) rotate(-15deg); }
+                    40% { transform: translate(-50%, -50%) rotate(15deg); }
+                    60% { transform: translate(-50%, -50%) rotate(-15deg); }
+                    80% { transform: translate(-50%, -50%) rotate(15deg); }
+                    100% { transform: translate(-50%, -50%) rotate(0deg); }
+                }
+                .anim-ball-shake { animation: ball-shake 0.5s ease-in-out infinite; }
+            `;
+            document.head.appendChild(style);
+        }
+
+        pokeball.classList.add('anim-ball-shake');
+
+        const wrapper = corpse.querySelector('#enemy-sprite-wrapper') || corpse;
+        wrapper.appendChild(pokeball);
+
+        setTimeout(() => {
+            pokeball.classList.remove('anim-ball-shake');
+            pokeball.src = 'Assets/Items/Balls/' + ballName + (success ? 'Y' : 'N') + '.png';
+        }, 3000);
+    }
+
+    arena.appendChild(corpse);
+
+    // Apply the 5s slide out to the left for the entire corpse container
+    corpse.classList.add('anim-slide-out-corpse');
+
+    // Clean up corpse after 5s
+    setTimeout(() => {
+        if (corpse.parentElement) corpse.parentElement.removeChild(corpse);
+    }, 5000);
 }
 
 export function playPokeballAnimation(ballName, success, onComplete) {
-    const arena = document.getElementById('combat-arena');
-    const el = document.getElementById('enemy-sprite');
-    if (!arena || !el) {
-        if(onComplete) onComplete();
-        return;
-    }
-
-    const rect = el.getBoundingClientRect();
-    const parentRect = arena.getBoundingClientRect();
-
-    const pokeball = document.createElement('img');
-    pokeball.src = 'Assets/Items/Balls/' + ballName + '.png';
-    pokeball.style.position = 'absolute';
-    pokeball.style.width = '40px';
-    pokeball.style.height = '40px';
-    pokeball.style.left = (rect.left - parentRect.left + rect.width / 2) + 'px';
-    pokeball.style.top = (rect.top - parentRect.top + rect.height / 2) + 'px';
-    pokeball.style.transform = 'translate(-50%, -50%)';
-    pokeball.style.zIndex = '100';
-
-    // Keyframe for shake
-    if (!document.getElementById('shake-style')) {
-        const style = document.createElement('style');
-        style.id = 'shake-style';
-        style.innerHTML = `
-            @keyframes ball-shake {
-                0% { transform: translate(-50%, -50%) rotate(0deg); }
-                20% { transform: translate(-50%, -50%) rotate(-15deg); }
-                40% { transform: translate(-50%, -50%) rotate(15deg); }
-                60% { transform: translate(-50%, -50%) rotate(-15deg); }
-                80% { transform: translate(-50%, -50%) rotate(15deg); }
-                100% { transform: translate(-50%, -50%) rotate(0deg); }
-            }
-            .anim-ball-shake {
-                animation: ball-shake 0.5s ease-in-out infinite;
-            }
-        `;
-        document.head.appendChild(style);
-    }
-
-    arena.appendChild(pokeball);
-    pokeball.classList.add('anim-ball-shake');
-
-    // Shake for 3 seconds
-    setTimeout(() => {
-        pokeball.classList.remove('anim-ball-shake');
-        pokeball.src = 'Assets/Items/Balls/' + ballName + (success ? 'Y' : 'N') + '.png';
-
-        // Show result for 2 seconds
-        setTimeout(() => {
-            if (pokeball.parentElement) pokeball.parentElement.removeChild(pokeball);
-            if(onComplete) onComplete();
-        }, 2000);
-
-    }, 3000);
+    // Legacy mapping in case it's still called directly.
+    // The visual logic has been moved to playEnemyDefeatAnimation.
+    if(onComplete) onComplete();
 }

@@ -113,7 +113,7 @@ input[type="number"] {
     flex-direction: column;
     align-items: center;
     position: absolute;
-    right: 15%;
+    right: 40%;
     top: 20px;
 }
 
@@ -157,9 +157,9 @@ input[type="number"] {
 
 /* Base Idle Animations */
 @keyframes anim-walk {
-    0%, 100% { transform: scaleX(-1) rotate(0deg) translateY(0); }
-    25% { transform: scaleX(-1) rotate(-5deg) translateY(-3px); }
-    75% { transform: scaleX(-1) rotate(5deg) translateY(-3px); }
+    0%, 100% { transform: rotate(0deg) translateY(0); }
+    25% { transform: rotate(-5deg) translateY(-3px); }
+    75% { transform: rotate(5deg) translateY(-3px); }
 }
 
 @keyframes anim-walk-enemy {
@@ -169,8 +169,8 @@ input[type="number"] {
 }
 
 @keyframes anim-fly {
-    0%, 100% { transform: scaleX(-1) translateY(0); }
-    50% { transform: scaleX(-1) translateY(-15px); }
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
 }
 
 @keyframes anim-fly-enemy {
@@ -179,8 +179,8 @@ input[type="number"] {
 }
 
 @keyframes anim-swim {
-    0%, 100% { transform: scaleX(-1) translateY(0) rotate(0deg); }
-    50% { transform: scaleX(-1) translateY(-10px) rotate(3deg); }
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(3deg); }
 }
 
 @keyframes anim-swim-enemy {
@@ -235,8 +235,8 @@ input[type="number"] {
 
 /* Entrance and Exit Animations */
 @keyframes slide-in-right {
-    from { right: -30%; opacity: 1; }
-    to { right: 15%; opacity: 1; }
+    from { right: -50%; opacity: 1; }
+    to { right: 40%; opacity: 1; }
 }
 
 @keyframes fade-out-enemy {
@@ -353,3 +353,12 @@ input[type="number"] {
 #modal-content-box button:hover {
     background: #c0392b;
 }
+
+
+@keyframes slide-out-left {
+    from { right: 40%; opacity: 1; }
+    to { right: 100%; opacity: 0; }
+}
+
+.anim-slide-out-corpse { animation: slide-out-left 5s linear forwards; }
+.anim-fade-corpse { animation: fade-out-enemy 2s ease-out forwards; }

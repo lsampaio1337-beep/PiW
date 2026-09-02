@@ -567,19 +567,6 @@ class BattleSystem {
     handleEnemyDefeat() {
         if (this.combatLoop) clearTimeout(this.combatLoop);
 
-        // Trigger fade out
-        if (typeof window.playEnemyDefeatAnimation === 'function') {
-            window.playEnemyDefeatAnimation();
-        }
-        if (window.pauseIdleAnimation) window.pauseIdleAnimation(); // ensure paused during fade/capture sequence
-
-        // Post battle sequence (wait 2s for fade out)
-        this.combatLoop = setTimeout(() => {
-            this.processPostBattle();
-        }, 2000);
-    }
-
-    processPostBattle() {
         const leader = this.state.party[0];
         const ev = this.activeEncounter.ev;
 
@@ -609,79 +596,79 @@ class BattleSystem {
             }
         }
 
-        const finishBattle = () => {
-            if (caught) {
-                let caughtPokemon = JSON.parse(JSON.stringify(this.activeEncounter));
-                // Fix the level 100 jump bug by setting xp explicitly to the exact minimum needed for their captured level
-                caughtPokemon.xp = mathEngine.calculateTotalXP(caughtPokemon.level);
-                this.state.storage.unshift(caughtPokemon);
-                this.state.stats.caught++;
-                if (this.activeEncounter.qualityName === "Shiny") this.state.stats.shiniesCaught = (this.state.stats.shiniesCaught || 0) + 1;
-                if (this.activeEncounter.qualityName === "Epic") this.state.stats.epicCaptures = (this.state.stats.epicCaptures || 0) + 1;
+        // Trigger fade out / corpse creation
+        if (typeof window.playEnemyDefeatAnimation === 'function') {
+            window.playEnemyDefeatAnimation(thrownBallName, caught);
+        }
 
-                let sumIV = caughtPokemon.ivs.hp + caughtPokemon.ivs.atk + caughtPokemon.ivs.def + caughtPokemon.ivs.spa + caughtPokemon.ivs.spd + caughtPokemon.ivs.spe;
-                if (sumIV < 300) this.state.stats.caughtIVUnder300 = (this.state.stats.caughtIVUnder300 || 0) + 1;
-                if (sumIV < 350) this.state.stats.caughtIVUnder350 = (this.state.stats.caughtIVUnder350 || 0) + 1;
-                if (sumIV < 400) this.state.stats.caughtIVUnder400 = (this.state.stats.caughtIVUnder400 || 0) + 1;
-                if (sumIV < 450) this.state.stats.caughtIVUnder450 = (this.state.stats.caughtIVUnder450 || 0) + 1;
-                if (sumIV < 500) this.state.stats.caughtIVUnder500 = (this.state.stats.caughtIVUnder500 || 0) + 1;
+        // Immediately process stats and start next search (no more 2s wait)
+        this.processPostBattleStats(thrownBallName, caught, leader, ev);
+    }
 
-                // Track species catches for unlocks
-                if (!this.state.stats.caughtSpecies) this.state.stats.caughtSpecies = {};
-                this.state.stats.caughtSpecies[this.activeEncounter.name] = (this.state.stats.caughtSpecies[this.activeEncounter.name] || 0) + 1;
+    processPostBattleStats(thrownBallName, caught, leader, ev) {
+
+        if (caught) {
+            let caughtPokemon = JSON.parse(JSON.stringify(this.activeEncounter));
+            // Fix the level 100 jump bug by setting xp explicitly to the exact minimum needed for their captured level
+            caughtPokemon.xp = mathEngine.calculateTotalXP(caughtPokemon.level);
+            this.state.storage.unshift(caughtPokemon);
+            this.state.stats.caught++;
+            if (this.activeEncounter.qualityName === "Shiny") this.state.stats.shiniesCaught = (this.state.stats.shiniesCaught || 0) + 1;
+            if (this.activeEncounter.qualityName === "Epic") this.state.stats.epicCaptures = (this.state.stats.epicCaptures || 0) + 1;
+
+            let sumIV = caughtPokemon.ivs.hp + caughtPokemon.ivs.atk + caughtPokemon.ivs.def + caughtPokemon.ivs.spa + caughtPokemon.ivs.spd + caughtPokemon.ivs.spe;
+            if (sumIV < 300) this.state.stats.caughtIVUnder300 = (this.state.stats.caughtIVUnder300 || 0) + 1;
+            if (sumIV < 350) this.state.stats.caughtIVUnder350 = (this.state.stats.caughtIVUnder350 || 0) + 1;
+            if (sumIV < 400) this.state.stats.caughtIVUnder400 = (this.state.stats.caughtIVUnder400 || 0) + 1;
+            if (sumIV < 450) this.state.stats.caughtIVUnder450 = (this.state.stats.caughtIVUnder450 || 0) + 1;
+            if (sumIV < 500) this.state.stats.caughtIVUnder500 = (this.state.stats.caughtIVUnder500 || 0) + 1;
+
+            // Track species catches for unlocks
+            if (!this.state.stats.caughtSpecies) this.state.stats.caughtSpecies = {};
+            this.state.stats.caughtSpecies[this.activeEncounter.name] = (this.state.stats.caughtSpecies[this.activeEncounter.name] || 0) + 1;
+        }
+
+        this.state.trainer.xp += ev;
+        this.state.stats.defeated++;
+        if (this.activeEncounter.qualityName === "Shiny") this.state.stats.shiniesDefeated = (this.state.stats.shiniesDefeated || 0) + 1;
+        if (!this.state.stats.defeatedSpecies) this.state.stats.defeatedSpecies = {};
+        this.state.stats.defeatedSpecies[this.activeEncounter.name] = (this.state.stats.defeatedSpecies[this.activeEncounter.name] || 0) + 1;
+
+        if (this.state.dayCareRef) {
+            this.state.dayCareRef.incrementTrainEncounters();
+        }
+
+        let moneyDrop = Math.floor(Math.random() * this.activeEncounter.level * 2) + 1;
+        moneyDrop = Math.floor(moneyDrop * this.state.settings.gameSpeed);
+        if (this.activeEncounter.qualityName === "Shiny") moneyDrop *= 5;
+        this.state.trainer.money += moneyDrop;
+
+        const xpDrop = ev * this.state.settings.gameSpeed;
+        leader.xp += xpDrop;
+
+        this.state.party.forEach((p, idx) => {
+            if (idx > 0 && p.currentHp > 0) {
+                p.xp += Math.floor(xpDrop * 0.5); // 50% share
             }
+        });
 
-            // Re-apply remaining handleEnemyDefeat logic for EXP and searching...
-            this.state.trainer.xp += ev;
-            this.state.stats.defeated++;
-            if (this.activeEncounter.qualityName === "Shiny") this.state.stats.shiniesDefeated = (this.state.stats.shiniesDefeated || 0) + 1;
-            if (!this.state.stats.defeatedSpecies) this.state.stats.defeatedSpecies = {};
-            this.state.stats.defeatedSpecies[this.activeEncounter.name] = (this.state.stats.defeatedSpecies[this.activeEncounter.name] || 0) + 1;
+        this.checkLevelUps();
 
-            if (this.state.dayCareRef) {
-                this.state.dayCareRef.incrementTrainEncounters();
-            }
+        this.stop();
+        this.activeEncounter = null;
 
-            // Drop money
-            let moneyDrop = Math.floor(Math.random() * this.activeEncounter.level * 2) + 1;
-            moneyDrop = Math.floor(moneyDrop * this.state.settings.gameSpeed);
-            if (this.activeEncounter.qualityName === "Shiny") moneyDrop *= 5;
-            this.state.trainer.money += moneyDrop;
-
-            // Share EXP
-            const xpDrop = ev * this.state.settings.gameSpeed;
-            leader.xp += xpDrop;
-
-            this.state.party.forEach((p, idx) => {
-                if (idx > 0 && p.currentHp > 0) {
-                    p.xp += Math.floor(xpDrop * 0.5); // 50% share
-                }
-            });
-
-            this.checkLevelUps();
-
-            this.stop();
-            this.activeEncounter = null;
-
-            if (this.gymState && this.gymState.isActive) {
-                this.handleGymVictory();
-            } else {
-                // Resume search with new timer logic
-                if (window.resumeIdleAnimation) window.resumeIdleAnimation();
-
-                const leaderSpeed = leader.currentStats.spe;
-                let searchDelay = 5.0 - ((leaderSpeed - 15) / 150) * 4.5;
-                searchDelay = Math.max(0.5, Math.min(5.0, searchDelay)); // clamp 0.5 to 5.0
-                searchDelay = searchDelay * 1000;
-
-                this.searchNext(searchDelay);
-            }
-        };
-
-        if (thrownBallName && typeof window.playPokeballAnimation === 'function') {
-            window.playPokeballAnimation(thrownBallName, caught, finishBattle);
+        if (this.gymState && this.gymState.isActive) {
+            this.handleGymVictory();
         } else {
-            finishBattle();
+            // Resume search with new timer logic
+            if (window.resumeIdleAnimation) window.resumeIdleAnimation();
+
+            const leaderSpeed = leader.currentStats.spe;
+            let searchDelay = 5.0 - ((leaderSpeed - 15) / 150) * 4.5;
+            searchDelay = Math.max(0.5, Math.min(5.0, searchDelay)); // clamp 0.5 to 5.0
+            searchDelay = searchDelay * 1000;
+
+            this.searchNext(searchDelay);
         }
     }
 
