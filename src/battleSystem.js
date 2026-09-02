@@ -646,20 +646,7 @@ class BattleSystem {
         if (levelTaskTier >= 5 && pokemon.level < 75) bonus += 0.5;
         amount = amount * (1 + bonus);
 
-        // Underlevel Boost
-        if (pokemon.level < this.state.trainer.level) {
-            const boost = Math.min(1.0, (this.state.trainer.level - pokemon.level) * amount * 0.05);
-            amount += boost;
-        }
-
         pokemon.xp += amount;
-        this.state.trainer.xp += amount;
-
-        // Check Trainer level up
-        let newTrainerLvl = mathEngine.getLevelFromXP(this.state.trainer.xp);
-        if (newTrainerLvl > this.state.trainer.level) {
-            this.state.trainer.level = newTrainerLvl;
-        }
 
         // Check level up
         let newLvl = mathEngine.getLevelFromXP(pokemon.xp);
@@ -702,9 +689,6 @@ class BattleSystem {
 
         // Penalty: deduct 10% gold
         this.state.trainer.money = Math.floor(this.state.trainer.money * 0.9);
-
-        // Reset Trainer XP to start of level (simplified)
-        this.state.trainer.xp = mathEngine.calculateTotalXP(this.state.trainer.level);
 
         // Heal all party to full
         this.state.party.forEach(p => p.currentHp = p.maxHp);
