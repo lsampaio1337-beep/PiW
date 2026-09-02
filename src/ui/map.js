@@ -115,7 +115,7 @@ export function navigateToLocation(locationName) {
         const btnContainer = document.getElementById("casino-buttons-container");
         if (btnContainer) {
             btnContainer.innerHTML = `
-                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; padding: 15px;">
+                <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; padding: 15px;">
                     <div onclick="window.navigateToLocation('Casino - Starter Troupe')" style="cursor: pointer; text-align: center;">
                         <img src="./Assets/Extra/Casino Starter Troupe.png" alt="Starter Troupe" style="width: 100%; max-width: 200px; border-radius: 8px; border: 2px solid #555;">
                         <p style="margin-top: 5px; font-weight: bold;">Starter Troupe</p>
@@ -128,7 +128,7 @@ export function navigateToLocation(locationName) {
                         <img src="./Assets/Extra/Casino Late Troupe.png" alt="Late Troupe" style="width: 100%; max-width: 200px; border-radius: 8px; border: 2px solid #555;">
                         <p style="margin-top: 5px; font-weight: bold;">Late Troupe</p>
                     </div>
-                    <div onclick="window.navigateToLocation('Casino - Eeveelutions')" style="cursor: pointer; text-align: center; grid-column: 1 / 3;">
+                    <div onclick="window.navigateToLocation('Casino - Eeveelutions')" style="cursor: pointer; text-align: center;">
                         <img src="./Assets/Extra/Casino Eeveelutions.png" alt="Eeveelutions" style="width: 100%; max-width: 200px; border-radius: 8px; border: 2px solid #555;">
                         <p style="margin-top: 5px; font-weight: bold;">Eeveelutions</p>
                     </div>
@@ -182,7 +182,7 @@ export function navigateToLocation(locationName) {
 
         // Overlay transparent divs
         html += `<div class="casino-overlay-btn" onclick="window.startCasinoEncounter(false, '${locationName}')" style="position: absolute; left: ${stdLeft}%; top: ${stdTop}%; width: ${stdWidth}%; height: ${stdHeight}%; cursor: pointer;" title="Standard Encounter ($10)"></div>`;
-        html += `<div class="casino-overlay-btn" onclick="window.startCasinoEncounter(true, '${locationName}')" style="position: absolute; left: ${shinyLeft}%; top: ${shinyTop}%; width: ${shinyWidth}%; height: ${shinyHeight}%; cursor: pointer;" title="Double Shiny Encounter ($20)"></div>`;
+        html += `<div class="casino-overlay-btn" onclick="window.startCasinoEncounter(false, '${locationName}')" style="position: absolute; left: ${shinyLeft}%; top: ${shinyTop}%; width: ${shinyWidth}%; height: ${shinyHeight}%; cursor: pointer;" title="Special Encounter ($10)"></div>`;
         html += `<button class="casino-overlay-btn" onclick="window.navigateToLocation('Casino')" style="position: absolute; top: 10px; left: 10px; padding: 10px; cursor: pointer; z-index: 100;">Back to Lobby</button>`;
 
         // Append to the viewCasino container

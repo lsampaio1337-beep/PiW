@@ -175,7 +175,7 @@ class BattleSystem {
         }
 
         if (this.state.currentRoute && this.state.currentRoute.startsWith("Casino - ")) {
-            const cost = this.state.casinoDoubleShiny ? 20 : 10;
+            const cost = 10;
             if (this.state.trainer.money < cost) {
                 alert("Not enough money! You need $" + cost + " to continue hunting here.");
                 this.stop();
@@ -298,13 +298,6 @@ class BattleSystem {
         let level = Math.floor(Math.random() * (selectedSpawn.maxLevel - selectedSpawn.minLevel + 1)) + selectedSpawn.minLevel;
 
         let q = mathEngine.generateQuality(this.state.stats.caught, this.state.stats.shiniesSeen);
-        // Double shiny chance for Casino
-        if (this.state.currentRoute && this.state.currentRoute.startsWith("Casino - ") && this.state.casinoDoubleShiny && q.name !== "Shiny") {
-            const secondRoll = mathEngine.generateQuality(this.state.stats.caught, this.state.stats.shiniesSeen);
-            if (secondRoll.name === "Shiny") {
-                q = secondRoll;
-            }
-        }
         if (q.name === "Shiny") this.state.stats.shiniesSeen++;
 
         // Track seen for pokedex
