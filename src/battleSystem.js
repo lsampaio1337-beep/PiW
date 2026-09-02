@@ -576,7 +576,7 @@ class BattleSystem {
         // Daycare logic
         if (this.state.dayCareRef) {
             this.state.dayCareRef.tickBattle();
-            this.state.dayCareRef.grantPassiveXP(ev);
+            this.state.dayCareRef.grantPassiveXP(ev, (pkmn, amt) => this.grantXP(pkmn, amt));
         }
 
         // Award XP and Money (EV)

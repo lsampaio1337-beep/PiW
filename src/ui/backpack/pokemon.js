@@ -63,23 +63,49 @@ export function renderPokemonTab(area) {
             <!-- Column 1: Active -->
             <div style="flex: 2; border: 1px solid #555; padding: 5px; display: flex; flex-direction: column; min-width: 0; min-height: 0;">
                 <h4 style="text-align: center; margin-top:0;">Active</h4>
-                <div id="active-scroll-container" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 5px; overflow-y: scroll; align-content: start; flex-grow: 1; padding-bottom: 20px;">
+                <div id="active-scroll-container" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 5px; overflow-y: auto; align-content: start; flex-grow: 1; padding-bottom: 20px;">
     `;
 
-    const activePokemon = [];
-    state.party.forEach((p, idx) => activePokemon.push({...p, _tag: 'Party', _origIndex: idx}));
-    state.breeding.forEach((p, idx) => activePokemon.push({...p, _tag: 'Breed', _origIndex: idx}));
-    state.training.forEach((p, idx) => activePokemon.push({...p, _tag: 'Train', _origIndex: idx}));
 
     for (let i = 0; i < 8; i++) {
-        if (i < activePokemon.length) {
-            let p = activePokemon[i];
-            content += renderSlotUI(p, p._tag, p._origIndex, true);
+        let p = null;
+        let tag = '';
+        let listName = '';
+        let origIndex = 0;
+
+        if (i < 6) {
+            if (i < state.party.length) {
+                p = state.party[i];
+                tag = 'Party';
+                listName = 'party';
+                origIndex = i;
+            }
+        } else if (i === 6) {
+            if (state.breeding.length > 0) {
+                p = state.breeding[0];
+                tag = 'To Breed';
+                listName = 'breeding';
+                origIndex = 0;
+            }
+        } else if (i === 7) {
+            if (state.training.length > 0) {
+                p = state.training[0];
+                tag = 'To Train';
+                listName = 'training';
+                origIndex = 0;
+            }
+        }
+
+        if (p) {
+            p._tag = tag;
+            content += `<div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, '${listName}')" style="box-sizing: border-box; min-width: 0;">` + renderSlotUI(p, listName, origIndex, true) + `</div>`;
         } else {
-            let label = i < 6 ? `Party #${i+1}` : (i === 6 ? 'Breed' : 'Training');
-            content += `<div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'party')" style="border: 1px dashed #777; aspect-ratio: 1 / 1.3; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #777; box-sizing: border-box;">${label}</div>`;
+            let label = i < 6 ? `Party #${i+1}` : (i === 6 ? 'To Breed' : 'To Train');
+            let dropTarget = i < 6 ? 'party' : (i === 6 ? 'breeding' : 'training');
+            content += `<div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, '${dropTarget}')" style="border: 1px dashed #777; aspect-ratio: 1 / 1.3; display: flex; align-items: center; justify-content: center; font-size: 10cqw; container-type: inline-size; color: #777; box-sizing: border-box;">${label}</div>`;
         }
     }
+
 
     content += `
                 </div>
@@ -88,7 +114,7 @@ export function renderPokemonTab(area) {
             <!-- Column 2: Storage -->
             <div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'storage')" style="flex: 4; border: 1px solid #555; padding: 5px; display: flex; flex-direction: column; min-width: 0; min-height: 0;">
                 <h4 style="text-align: center; margin-top:0;">Storage</h4>
-                <div id="storage-scroll-container" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; overflow-y: scroll; align-content: start; flex-grow: 1; padding-bottom: 20px;">
+                <div id="storage-scroll-container" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; overflow-y: auto; align-content: start; flex-grow: 1; padding-bottom: 20px;">
     `;
 
     for (let i = 0; i < state.storage.length; i++) {
@@ -104,7 +130,7 @@ export function renderPokemonTab(area) {
             <!-- Column 3: Safe -->
             <div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'safe')" style="flex: 2; border: 1px solid #555; padding: 5px; display: flex; flex-direction: column; min-width: 0; min-height: 0;">
                 <h4 style="text-align: center; margin-top:0;">Safe</h4>
-                <div id="safe-scroll-container" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 5px; overflow-y: scroll; align-content: start; flex-grow: 1; padding-bottom: 20px;">
+                <div id="safe-scroll-container" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 5px; overflow-y: auto; align-content: start; flex-grow: 1; padding-bottom: 20px;">
     `;
 
     for (let i = 0; i < state.safe.length; i++) {

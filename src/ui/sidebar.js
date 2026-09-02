@@ -41,27 +41,33 @@ export function updateSidebar() {
             xpTextHtml = ``; // No text for level 100
         } else {
             xpTextHtml = `
-                <div style="flex: 1; text-align: center; z-index: 1;">${Math.floor(xpPct)}%</div>
-                <div style="flex: 1; text-align: center; z-index: 1;">${xpProgress}/${xpRequired}</div>
+                <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center;">${Math.floor(xpPct)}%</div>
+                <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center;">${xpProgress}/${xpRequired}</div>
             `;
         }
 
         d.innerHTML = `
-            <div onclick="window.setLeader(${idx})" style="position: absolute; top: 5px; left: 5px; cursor: pointer; color: ${crownColor}; font-size: 16px;" title="Set as Leader">👑</div>
-            <div onclick="event.stopPropagation(); window.showPokemonStats(${idx}, 'party')" style="position: absolute; top: 5px; right: 5px; cursor: pointer; background: #34495e; color: white; border-radius: 50%; width: 20px; height: 20px; text-align: center; line-height: 20px; font-weight: bold;" title="View Info">i</div>
-            <img src="Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png" onload="this.style.display='inline'" onerror="this.style.display='none'" style="width: 50px; height: 50px; margin-top: 10px; margin-left: 5px;">
-            <div style="display: inline-block; vertical-align: top; width: calc(100% - 60px); margin-top: 5px;">
-                <b>${p.name}</b> Lv.${p.level}<br>
-                <div style="display: flex; justify-content: space-between; font-size: 10px; color: #ccc; margin-bottom: 2px;">
-                    <span title="Quality Value">Q=${qVal}</span>
-                    <span title="Sum of IVs">∑IV=${sumIV}</span>
+            <div onclick="window.setLeader(${idx})" style="position: absolute; top: 5px; left: 5px; cursor: pointer; color: ${crownColor}; font-size: 16px; z-index: 2;" title="Set as Leader">👑</div>
+            <div onclick="event.stopPropagation(); window.showPokemonStats(${idx}, 'party')" style="position: absolute; bottom: 5px; left: 5px; cursor: pointer; background: #34495e; color: white; border-radius: 50%; width: 16px; height: 16px; text-align: center; line-height: 16px; font-size: 10px; font-weight: bold; z-index: 2;" title="View Info">i</div>
+            <img src="Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png" onload="this.style.display='inline'" onerror="this.style.display='none'" style="position: absolute; top: -5px; right: 5px; width: 80px; height: 80px; z-index: 0; opacity: 0.85; pointer-events: none;">
+
+            <div style="position: relative; z-index: 1; margin-left: 25px; width: calc(100% - 30px); margin-top: 2px; display: flex; flex-direction: column; gap: 4px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-weight: bold; font-size: 13px; text-shadow: 1px 1px 1px rgba(0,0,0,0.8);">${p.name}</span>
+                    <span style="font-size: 11px; text-shadow: 1px 1px 1px rgba(0,0,0,0.8);">Lv.${p.level}</span>
                 </div>
-                <div style="width: 100%; height: 16px; background: #333; margin-bottom: 4px; border-radius: 2px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; color: white; text-shadow: 1px 1px 1px black, -1px -1px 1px black, 1px -1px 1px black, -1px 1px 1px black;">
-                    <div style="position: absolute; left: 0; top: 0; width: ${hpPct}%; height: 100%; background: ${hpColor}; z-index: 0; transition: width 0.3s, background 0.3s;"></div>
+
+                <div style="display: flex; flex-direction: column; font-size: 9px; color: #eee; text-shadow: 1px 1px 1px rgba(0,0,0,0.8); line-height: 1.1; position: absolute; right: 2px; top: -2px; text-align: right;">
+                    <span title="Quality Value" style="color: #FFD700;">Q=${qVal}</span>
+                    <span title="Sum of IVs" style="color: #00FFFF;">∑IV=${sumIV}</span>
+                </div>
+
+                <div style="width: 100%; height: 16px; background: #222; border: 1px solid #000; border-radius: 8px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; color: white; text-shadow: 1px 1px 1px black, -1px -1px 1px black, 1px -1px 1px black, -1px 1px 1px black; box-shadow: inset 0px 1px 3px rgba(0,0,0,0.5);">
+                    <div style="position: absolute; left: 0; top: 0; width: ${hpPct}%; height: 100%; background: ${hpColor}; z-index: 0; transition: width 0.3s, background 0.3s; border-radius: 8px;"></div>
                     <span style="z-index: 1;">HP ${Math.floor(p.currentHp)}/${p.maxHp}</span>
                 </div>
-                <div style="width: 100%; height: 16px; background: #333; border-radius: 2px; position: relative; overflow: hidden; display: flex; align-items: center; font-size: 10px; font-weight: bold; color: white; text-shadow: 1px 1px 1px black, -1px -1px 1px black, 1px -1px 1px black, -1px 1px 1px black;">
-                    <div style="position: absolute; left: 0; top: 0; width: ${xpPct}%; height: 100%; background: #9b59b6; z-index: 0; transition: width 0.3s;"></div>
+                <div style="width: 100%; height: 16px; background: #222; border: 1px solid #000; border-radius: 8px; position: relative; overflow: hidden; display: flex; align-items: center; font-size: 10px; font-weight: bold; color: white; text-shadow: 1px 1px 1px black, -1px -1px 1px black, 1px -1px 1px black, -1px 1px 1px black; box-shadow: inset 0px 1px 3px rgba(0,0,0,0.5);">
+                    <div style="position: absolute; left: 0; top: 0; width: ${xpPct}%; height: 100%; background: #9b59b6; z-index: 0; transition: width 0.3s; border-radius: 8px;"></div>
                     <div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: flex;">
                         ${xpTextHtml}
                     </div>

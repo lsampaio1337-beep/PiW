@@ -37,11 +37,14 @@ class DayCare {
         }
     }
 
-    grantPassiveXP(amount) {
+    grantPassiveXP(amount, grantXpCallback) {
         if (this.slot2.pokemon) {
-            // Passively receives 50% of battle XP
-            this.slot2.pokemon.xp += amount * 0.50;
-            // Simplified level up checking
+            // Passively receives 50% of battle XP. Use battleSystem's grantXP for correct level up handling.
+            if (grantXpCallback) {
+                grantXpCallback(this.slot2.pokemon, amount * 0.50);
+            } else {
+                this.slot2.pokemon.xp += amount * 0.50;
+            }
         }
     }
 
