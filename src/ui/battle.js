@@ -56,6 +56,14 @@ export function updateBattleArena() {
                 elEnemySprite.src = `Assets/Pokemon Sprites/${enemy.qualityName === 'Shiny' ? enemy.id + '_shiny' : enemy.id}.png`;
                 elEnemySprite.style.display = 'block';
             }
+            elEnemySprite.classList.remove('anim-fade-out');
+            // Only trigger entrance once when enemy spawns
+            if (!elEnemySprite.dataset.spawnedId || elEnemySprite.dataset.spawnedId !== enemy.id.toString()) {
+                elEnemySprite.dataset.spawnedId = enemy.id.toString();
+                elEnemySprite.classList.add('anim-slide-in');
+                setTimeout(() => { elEnemySprite.classList.remove('anim-slide-in'); }, 2000);
+            }
+            updateSpriteAnimation(elEnemySprite, enemy, 'enemy');
 
             const leader = state.party[0];
             if (leader) {
@@ -75,6 +83,7 @@ export function updateBattleArena() {
                     elPlayerSprite.src = `Assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? leader.id + '_shiny' : leader.id}.png`;
                     elPlayerSprite.style.display = 'block';
                 }
+                    updateSpriteAnimation(elPlayerSprite, leader, 'player');
             }
         } else if (battleSystem && battleSystem.isSearching) {
             const elEnemyName = document.getElementById('enemy-name');
@@ -90,6 +99,7 @@ export function updateBattleArena() {
             if (elEnemySprite) {
                 elEnemySprite.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
                 elEnemySprite.style.display = 'block';
+                clearSpriteAnimation(elEnemySprite, 'enemy');
             }
 
             const leader = state.party[0];
@@ -184,13 +194,269 @@ export function showDamage(target, amount, isCrit, moveName = '', moveType = 'No
 
     img.parentElement.appendChild(dmgNode);
 
-    // Animate up and fade out
+    // Animate up
     setTimeout(() => {
         dmgNode.style.top = (parseInt(dmgNode.style.top) - 40) + 'px';
-        dmgNode.style.opacity = '0';
     }, 50);
+
+    // Keep 100% opacity for 2 seconds, then fade out over 1 second
+    setTimeout(() => {
+        dmgNode.style.opacity = '0';
+    }, 2050);
 
     setTimeout(() => {
         if (dmgNode.parentElement) dmgNode.parentElement.removeChild(dmgNode);
-    }, 1000);
+    }, 3050);
+}
+
+
+function updateSpriteAnimation(spriteEl, pokemon, side) {
+    if (!spriteEl) return;
+
+    // Clear existing idle classes
+    spriteEl.classList.remove('anim-idle-walk', 'anim-idle-walk-enemy', 'anim-idle-fly', 'anim-idle-fly-enemy', 'anim-idle-swim', 'anim-idle-swim-enemy');
+
+    const types = pokemon.types || [];
+    let animClass = side === 'player' ? 'anim-idle-walk' : 'anim-idle-walk-enemy';
+
+    // Determine animation based on priority: Fly+Water -> Fly, Fly -> Fly, Water -> Swim, Else -> Walk
+    if (types.includes('Flying')) {
+        animClass = side === 'player' ? 'anim-idle-fly' : 'anim-idle-fly-enemy';
+    } else if (types.includes('Water')) {
+        animClass = side === 'player' ? 'anim-idle-swim' : 'anim-idle-swim-enemy';
+    }
+
+    // Don't override attack or entrance classes if they are active, just add it to classList
+    spriteEl.classList.add(animClass);
+
+    // Handle fake water display
+    const fakeWaterEl = document.getElementById(side + '-fake-water');
+    if (fakeWaterEl) {
+        if (animClass.includes('swim')) {
+            fakeWaterEl.style.display = 'block';
+        } else {
+            fakeWaterEl.style.display = 'none';
+        }
+    }
+}
+
+function clearSpriteAnimation(spriteEl, side) {
+    if (!spriteEl) return;
+    spriteEl.classList.remove('anim-idle-walk', 'anim-idle-walk-enemy', 'anim-idle-fly', 'anim-idle-fly-enemy', 'anim-idle-swim', 'anim-idle-swim-enemy');
+
+    const fakeWaterEl = document.getElementById(side + '-fake-water');
+    if (fakeWaterEl) fakeWaterEl.style.display = 'none';
+}
+
+
+export function pauseIdleAnimation() {
+    ['player-sprite', 'enemy-sprite'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.style.animationPlayState = 'paused';
+        }
+    });
+}
+
+export function resumeIdleAnimation() {
+    ['player-sprite', 'enemy-sprite'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.style.animationPlayState = 'running';
+        }
+    });
+}
+
+export function playAttackAnimation(attackerSide) {
+    const elId = attackerSide === 'player' ? 'player-sprite' : 'enemy-sprite';
+    const el = document.getElementById(elId);
+    if (!el) return;
+
+    // Briefly remove idle anim during attack
+    const idleClasses = Array.from(el.classList).filter(c => c.startsWith('anim-idle-'));
+    el.classList.remove(...idleClasses);
+
+    const attackClass = attackerSide === 'player' ? 'anim-attack' : 'anim-attack-enemy';
+    el.classList.remove(attackClass);
+    void el.offsetWidth; // trigger reflow
+    el.classList.add(attackClass);
+
+    setTimeout(() => {
+        el.classList.remove(attackClass);
+        if (idleClasses.length) el.classList.add(...idleClasses);
+    }, 500);
+}
+
+export function playAttackedAnimation(defenderSide) {
+    const elId = defenderSide === 'player' ? 'player-sprite' : 'enemy-sprite';
+    const el = document.getElementById(elId);
+    if (!el) return;
+
+    const attackedClass = defenderSide === 'player' ? 'anim-attacked' : 'anim-attacked-enemy';
+    el.classList.remove(attackedClass);
+    void el.offsetWidth; // trigger reflow
+    el.classList.add(attackedClass);
+
+    setTimeout(() => {
+        el.classList.remove(attackedClass);
+    }, 400);
+}
+
+export function shootProjectile(attackerSide, moveType, onImpactCallback) {
+    const color = TYPE_COLORS[moveType] || '#ffffff';
+
+    const startId = attackerSide === 'player' ? 'player-sprite' : 'enemy-sprite';
+    const targetId = attackerSide === 'player' ? 'enemy-sprite' : 'player-sprite';
+
+    const startEl = document.getElementById(startId);
+    const targetEl = document.getElementById(targetId);
+
+    if (!startEl || !targetEl) {
+        if(onImpactCallback) onImpactCallback();
+        return;
+    }
+
+    const arena = document.getElementById('combat-arena');
+    if (!arena) {
+        if(onImpactCallback) onImpactCallback();
+        return;
+    }
+
+    const startRect = startEl.getBoundingClientRect();
+    const targetRect = targetEl.getBoundingClientRect();
+    const arenaRect = arena.getBoundingClientRect();
+
+    const startX = startRect.left - arenaRect.left + startRect.width / 2;
+    const startY = startRect.top - arenaRect.top + startRect.height / 2;
+
+    const endX = targetRect.left - arenaRect.left + targetRect.width / 2;
+    const endY = targetRect.top - arenaRect.top + targetRect.height / 2;
+
+    const projectile = document.createElement('div');
+    projectile.style.position = 'absolute';
+    projectile.style.width = '16px';
+    projectile.style.height = '16px';
+    projectile.style.borderRadius = '50%';
+    projectile.style.backgroundColor = color;
+    projectile.style.boxShadow = `0 0 10px ${color}, 0 0 20px ${color}`;
+    projectile.style.left = startX + 'px';
+    projectile.style.top = startY + 'px';
+    projectile.style.transform = 'translate(-50%, -50%)';
+    projectile.style.zIndex = '100';
+    projectile.style.transition = 'left 0.4s cubic-bezier(0.25, 0.1, 0.25, 1), top 0.4s cubic-bezier(0.25, 0.1, 0.25, 1)';
+
+    arena.appendChild(projectile);
+
+    // Start animation next frame
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            projectile.style.left = endX + 'px';
+            projectile.style.top = endY + 'px';
+        });
+    });
+
+    setTimeout(() => {
+        if (projectile.parentElement) projectile.parentElement.removeChild(projectile);
+        playSplash(endX, endY, color, arena);
+        if(onImpactCallback) onImpactCallback();
+    }, 400);
+
+
+}
+
+function playSplash(x, y, color, parent) {
+    for (let i = 0; i < 8; i++) {
+        const particle = document.createElement('div');
+        particle.style.position = 'absolute';
+        particle.style.width = '8px';
+        particle.style.height = '8px';
+        particle.style.borderRadius = '50%';
+        particle.style.backgroundColor = color;
+        particle.style.left = x + 'px';
+        particle.style.top = y + 'px';
+        particle.style.zIndex = '99';
+        particle.style.transition = 'all 0.3s ease-out';
+
+        parent.appendChild(particle);
+
+        const angle = (Math.PI * 2 / 8) * i;
+        const distance = 30 + Math.random() * 20;
+
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                particle.style.transform = `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px) scale(0)`;
+                particle.style.opacity = '0';
+            });
+        });
+
+        setTimeout(() => {
+            if (particle.parentElement) particle.parentElement.removeChild(particle);
+        }, 300);
+    }
+}
+
+
+export function playEnemyDefeatAnimation() {
+    const el = document.getElementById('enemy-sprite');
+    if (el) {
+        el.classList.add('anim-fade-out');
+    }
+}
+
+export function playPokeballAnimation(ballName, success, onComplete) {
+    const arena = document.getElementById('combat-arena');
+    const el = document.getElementById('enemy-sprite');
+    if (!arena || !el) {
+        if(onComplete) onComplete();
+        return;
+    }
+
+    const rect = el.getBoundingClientRect();
+    const parentRect = arena.getBoundingClientRect();
+
+    const pokeball = document.createElement('img');
+    pokeball.src = 'Assets/Items/Balls/' + ballName + '.png';
+    pokeball.style.position = 'absolute';
+    pokeball.style.width = '40px';
+    pokeball.style.height = '40px';
+    pokeball.style.left = (rect.left - parentRect.left + rect.width / 2) + 'px';
+    pokeball.style.top = (rect.top - parentRect.top + rect.height / 2) + 'px';
+    pokeball.style.transform = 'translate(-50%, -50%)';
+    pokeball.style.zIndex = '100';
+
+    // Keyframe for shake
+    if (!document.getElementById('shake-style')) {
+        const style = document.createElement('style');
+        style.id = 'shake-style';
+        style.innerHTML = `
+            @keyframes ball-shake {
+                0% { transform: translate(-50%, -50%) rotate(0deg); }
+                20% { transform: translate(-50%, -50%) rotate(-15deg); }
+                40% { transform: translate(-50%, -50%) rotate(15deg); }
+                60% { transform: translate(-50%, -50%) rotate(-15deg); }
+                80% { transform: translate(-50%, -50%) rotate(15deg); }
+                100% { transform: translate(-50%, -50%) rotate(0deg); }
+            }
+            .anim-ball-shake {
+                animation: ball-shake 0.5s ease-in-out infinite;
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
+    arena.appendChild(pokeball);
+    pokeball.classList.add('anim-ball-shake');
+
+    // Shake for 3 seconds
+    setTimeout(() => {
+        pokeball.classList.remove('anim-ball-shake');
+        pokeball.src = 'Assets/Items/Balls/' + ballName + (success ? 'Y' : 'N') + '.png';
+
+        // Show result for 2 seconds
+        setTimeout(() => {
+            if (pokeball.parentElement) pokeball.parentElement.removeChild(pokeball);
+            if(onComplete) onComplete();
+        }, 2000);
+
+    }, 3000);
 }

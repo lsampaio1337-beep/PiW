@@ -168,7 +168,7 @@ class BattleSystem {
         }
     }
 
-    async searchNext() {
+    async searchNext(delayOverride) {
         if (this.state.party.every(p => p.currentHp <= 0)) {
             this.handleWipeout();
             return;
@@ -191,10 +191,12 @@ class BattleSystem {
         this.activeEncounter = null;
         this.updateUI();
 
-        // Speed Delays: Search Time: BaseSearchTime(3.0s) * (100 / (100 + Speed)), minimum 0.30s
-        const leaderSpeed = this.state.party[0].currentStats.spe;
-        let delay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed));
-        delay = Math.max(300, delay) / this.state.settings.gameSpeed;
+        let delay = delayOverride;
+        if (delay === undefined) {
+            const leaderSpeed = this.state.party[0].currentStats.spe;
+            delay = 5.0 - ((leaderSpeed - 15) / 150) * 4.5;
+            delay = Math.max(0.5, Math.min(5.0, delay)) * 1000;
+        }
 
         this.combatLoop = setTimeout(() => {
             if (this.gymState.isActive) {
@@ -275,7 +277,13 @@ class BattleSystem {
 
         this.isSearching = false;
         this.updateUI();
-        this.scheduleTurn();
+
+        // Wait 2s for slide in animation before starting combat turns
+        if (window.resumeIdleAnimation) window.resumeIdleAnimation();
+        this.combatLoop = setTimeout(() => {
+            if (window.pauseIdleAnimation) window.pauseIdleAnimation();
+            this.scheduleTurn();
+        }, 2000);
     }
 
     generateEncounter() {
@@ -385,7 +393,13 @@ class BattleSystem {
 
         this.isSearching = false;
         this.updateUI();
-        this.scheduleTurn();
+
+        // Wait 2s for slide in animation before starting combat turns
+        if (window.resumeIdleAnimation) window.resumeIdleAnimation();
+        this.combatLoop = setTimeout(() => {
+            if (window.pauseIdleAnimation) window.pauseIdleAnimation();
+            this.scheduleTurn();
+        }, 2000);
     }
 
     getLearnsetMoves(pokemonBase, level) {
@@ -453,24 +467,39 @@ class BattleSystem {
         const eff = this.getTypeEffectiveness(move.type, defender.types);
 
         const hit = mathEngine.calculateDamage(attacker.level, move.power, atkStat, defStat, eff, attacker.quality);
-        defender.currentHp -= hit.damage;
 
-        // Show floating damage
         const targetSide = attacker === leader ? 'enemy' : 'player';
-        if (typeof window.showDamage === 'function') {
-            window.showDamage(targetSide, hit.damage, hit.isCritical, move.name, move.type, eff);
-        }
+        const attackerSide = attacker === leader ? 'player' : 'enemy';
 
-        this.updateUI();
+        if (window.playAttackAnimation) window.playAttackAnimation(attackerSide);
 
-        if (defender.currentHp <= 0) {
-            if (defender === this.activeEncounter) {
-                this.handleEnemyDefeat();
-            } else {
-                this.handleFaint();
+        if (this.combatLoop) clearTimeout(this.combatLoop);
+
+        const applyDamage = () => {
+            if (window.playAttackedAnimation) window.playAttackedAnimation(targetSide);
+
+            defender.currentHp -= hit.damage;
+            if (typeof window.showDamage === 'function') {
+                window.showDamage(targetSide, hit.damage, hit.isCritical, move.name, move.type, eff);
             }
+
+            this.updateUI();
+
+            if (defender.currentHp <= 0) {
+                if (defender === this.activeEncounter) {
+                    this.handleEnemyDefeat();
+                } else {
+                    this.handleFaint();
+                }
+            } else {
+                this.scheduleNextStrike(attacker, defender);
+            }
+        };
+
+        if (window.shootProjectile) {
+            window.shootProjectile(attackerSide, move.type, applyDamage);
         } else {
-            this.scheduleNextStrike(attacker, defender);
+            setTimeout(applyDamage, 400); // Fallback delay if no projectile fn
         }
     }
 
@@ -536,12 +565,51 @@ class BattleSystem {
     }
 
     handleEnemyDefeat() {
+        if (this.combatLoop) clearTimeout(this.combatLoop);
+
+        // Trigger fade out
+        if (typeof window.playEnemyDefeatAnimation === 'function') {
+            window.playEnemyDefeatAnimation();
+        }
+        if (window.pauseIdleAnimation) window.pauseIdleAnimation(); // ensure paused during fade/capture sequence
+
+        // Post battle sequence (wait 2s for fade out)
+        this.combatLoop = setTimeout(() => {
+            this.processPostBattle();
+        }, 2000);
+    }
+
+    processPostBattle() {
         const leader = this.state.party[0];
         const ev = this.activeEncounter.ev;
 
-        // Auto Throw Pokeball logic (disable in gyms)
+        // Determine if we are catching
+        let thrownBallName = null;
+        let caught = false;
+
         if (this.state.settings.autoCatch && (!this.gymState || !this.gymState.isActive)) {
-            const caught = this.throwPokeball();
+            let tier = this.state.settings.activeBallTier;
+            if (tier >= 0) {
+                let ballName = this.state.config.balance.items.pokeballs[tier].name;
+                while(tier >= 0) {
+                    if (this.state.backpack.pokeballs[ballName] > 0) {
+                        this.state.backpack.pokeballs[ballName]--;
+                        thrownBallName = ballName;
+                        break;
+                    }
+                    tier--;
+                    if (tier >= 0) ballName = this.state.config.balance.items.pokeballs[tier].name;
+                }
+
+                if (thrownBallName) {
+                    let multiplier = this.state.config.balance.items.pokeballs[tier].multiplier;
+                    const chance = mathEngine.calculateCatchChance(this.activeEncounter.bst, this.activeEncounter.level, multiplier, this.state.stats, this.activeEncounter.qualityName === "Shiny");
+                    caught = (Math.random() * 100) <= chance;
+                }
+            }
+        }
+
+        const finishBattle = () => {
             if (caught) {
                 let caughtPokemon = JSON.parse(JSON.stringify(this.activeEncounter));
                 // Fix the level 100 jump bug by setting xp explicitly to the exact minimum needed for their captured level
@@ -567,36 +635,69 @@ class BattleSystem {
                 // Track species catches for unlocks
                 if (!this.state.stats.caughtSpecies) this.state.stats.caughtSpecies = {};
                 this.state.stats.caughtSpecies[this.activeEncounter.name] = (this.state.stats.caughtSpecies[this.activeEncounter.name] || 0) + 1;
-
-                // Track specific typings
-                if (!this.state.stats.caughtSpecific) this.state.stats.caughtSpecific = {};
-                if (this.activeEncounter.types) {
-                     for (let t of this.activeEncounter.types) {
-                          this.state.stats.caughtSpecific[t] = (this.state.stats.caughtSpecific[t] || 0) + 1;
-                     }
-                }
-                // console.log(`Caught ${this.activeEncounter.name}!`);
             }
-        }
 
-        // Daycare logic
-        if (this.state.dayCareRef) {
-            this.state.dayCareRef.tickBattle();
-            this.state.dayCareRef.grantPassiveXP(ev);
-        }
+            // Re-apply remaining handleEnemyDefeat logic for EXP and searching...
+            this.state.trainer.xp += ev;
+            this.state.stats.defeated++;
+            if (this.activeEncounter.qualityName === "Shiny") this.state.stats.shiniesDefeated = (this.state.stats.shiniesDefeated || 0) + 1;
+            if (!this.state.stats.defeatedSpecies) this.state.stats.defeatedSpecies = {};
+            this.state.stats.defeatedSpecies[this.activeEncounter.name] = (this.state.stats.defeatedSpecies[this.activeEncounter.name] || 0) + 1;
 
-        // Award XP and Money (EV)
-        this.grantXP(leader, ev);
-        this.state.trainer.money += Math.floor(ev);
+            if (this.state.dayCareRef) {
+                this.state.dayCareRef.incrementTrainEncounters();
+            }
 
-        this.state.stats.battlesWon++;
-        this.checkRouteUnlocks();
+            // Drop money
+            let moneyDrop = Math.floor(Math.random() * this.activeEncounter.level * 2) + 1;
+            moneyDrop = Math.floor(moneyDrop * this.state.settings.gameSpeed);
+            if (this.activeEncounter.qualityName === "Shiny") moneyDrop *= 5;
+            this.state.trainer.money += moneyDrop;
 
-        if (this.gymState && this.gymState.isActive) {
-            this.handleGymEnemyDefeat();
+            // Share EXP
+            const xpDrop = ev * this.state.settings.gameSpeed;
+            leader.xp += xpDrop;
+
+            this.state.party.forEach((p, idx) => {
+                if (idx > 0 && p.currentHp > 0) {
+                    p.xp += Math.floor(xpDrop * 0.5); // 50% share
+                }
+            });
+
+            this.checkLevelUps();
+
+            this.stop();
+            this.activeEncounter = null;
+
+            if (this.gymState && this.gymState.isActive) {
+                this.handleGymVictory();
+            } else {
+                // Resume search with new timer logic
+                if (window.resumeIdleAnimation) window.resumeIdleAnimation();
+
+                const leaderSpeed = leader.currentStats.spe;
+                let searchDelay = 5.0 - ((leaderSpeed - 15) / 150) * 4.5;
+                searchDelay = Math.max(0.5, Math.min(5.0, searchDelay)); // clamp 0.5 to 5.0
+                searchDelay = searchDelay * 1000;
+
+                this.searchNext(searchDelay);
+            }
+        };
+
+        if (thrownBallName && typeof window.playPokeballAnimation === 'function') {
+            window.playPokeballAnimation(thrownBallName, caught, finishBattle);
         } else {
-            this.searchNext();
+            finishBattle();
         }
+    }
+
+    // Legacy throwPokeball replaced by inline logic above, keeping for safety if referenced elsewhere
+    throwPokeball() { return false; }
+
+
+
+    handleGymVictory() {
+        this.handleGymEnemyDefeat();
     }
 
     handleGymEnemyDefeat() {
