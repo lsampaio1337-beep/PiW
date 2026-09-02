@@ -1,0 +1,9 @@
+127.0.0.1 - - [02/Sep/2026 04:00:09] "GET /animation_preview.html HTTP/1.1" 200 -
+127.0.0.1 - - [02/Sep/2026 04:00:09] "GET /Assets/Pokemon%20Sprites/1.png HTTP/1.1" 200 -
+127.0.0.1 - - [02/Sep/2026 04:00:09] "GET /Assets/Pokemon%20Sprites/133.png HTTP/1.1" 200 -
+127.0.0.1 - - [02/Sep/2026 04:00:09] "GET /Assets/Pokemon%20Sprites/118.png HTTP/1.1" 200 -
+127.0.0.1 - - [02/Sep/2026 04:00:09] "GET /Assets/Pokemon%20Sprites/149.png HTTP/1.1" 200 -
+127.0.0.1 - - [02/Sep/2026 04:00:09] "GET /Assets/Pokemon%20Sprites/16.png HTTP/1.1" 200 -
+127.0.0.1 - - [02/Sep/2026 04:00:09] "GET /Assets/Pokemon%20Sprites/7.png HTTP/1.1" 200 -
+127.0.0.1 - - [02/Sep/2026 04:00:09] "GET /Assets/Pokemon%20Sprites/130.png HTTP/1.1" 200 -
+127.0.0.1 - - [02/Sep/2026 04:00:09] "GET /Assets/Pokemon%20Sprites/15.png HTTP/1.1" 200 -
