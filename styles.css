@@ -50,14 +50,14 @@ input[type="number"] {
 
 #left-col {
     width: 250px;
-    background-color: #3b5998;
+    background-color: #bdc3c7;
     padding: 10px;
     overflow-y: auto;
     border-right: 2px solid #1abc9c;
 }
 
 .party-slot {
-    background: rgba(0,0,0,0.2);
+    background: #2c3e50;
     margin-bottom: 10px;
     padding: 5px;
     border-radius: 4px;
@@ -164,7 +164,7 @@ input[type="number"] {
 
 #right-col {
     width: 300px;
-    background-color: #3b5998;
+    background-color: #bdc3c7;
     padding: 10px;
     overflow-y: auto;
     border-left: 2px solid #1abc9c;
@@ -249,18 +249,11 @@ input[type="number"] {
 }
 
 /* QTier Glow Effects */
-@keyframes rainbow-glow {
-    0% { filter: drop-shadow(0 0 8px #ff0000); }
-    16% { filter: drop-shadow(0 0 8px #ffff00); }
-    33% { filter: drop-shadow(0 0 8px #00ff00); }
-    50% { filter: drop-shadow(0 0 8px #00ffff); }
-    66% { filter: drop-shadow(0 0 8px #0000ff); }
-    83% { filter: drop-shadow(0 0 8px #ff00ff); }
-    100% { filter: drop-shadow(0 0 8px #ff0000); }
-}
-
 .glow-shiny {
-    animation: rainbow-glow 3s linear infinite;
+    filter: drop-shadow(0 -4px 4px #ff0000)
+            drop-shadow(4px 0 4px #ffff00)
+            drop-shadow(0 4px 4px #00ff00)
+            drop-shadow(-4px 0 4px #0000ff);
 }
 .glow-epic {
     filter: drop-shadow(0 0 8px #7A00FF);

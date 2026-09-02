@@ -56,8 +56,8 @@ export function updateSidebar() {
         d.innerHTML = `
             <div style="display: flex; width: 100%; align-items: stretch; height: 100%; min-height: 70px;">
                 <!-- Left Column: Sprite -->
-                <div style="flex: 0 0 60px; display: flex; align-items: center; justify-content: center;">
-                    <img src="Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png" onload="this.style.display='inline'" onerror="this.style.display='none'" class="${glowClass}" style="max-width: 100%; max-height: 100%; object-fit: contain; pointer-events: none; opacity: 0.85;">
+                <div style="flex: 0 0 60px; display: flex; align-items: center; justify-content: center; position: relative;">
+                    <img src="Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png" onload="this.style.display='inline'" onerror="this.style.display='none'" class="${glowClass}" style="max-width: 100%; max-height: 100%; object-fit: contain; pointer-events: none; opacity: 0.85; transform: scale(1.5); z-index: 2;">
                 </div>
 
                 <!-- Right Column: 3 Floors -->
@@ -69,7 +69,7 @@ export function updateSidebar() {
                             <span style="font-size: 11px; text-shadow: 1px 1px 1px rgba(0,0,0,0.8);">Lv.${p.level}</span>
                         </div>
                         <div style="display: flex; align-items: center; gap: 4px;">
-                            <div onclick="window.setLeader(${idx})" style="cursor: pointer; color: ${crownColor}; font-size: 16px; z-index: 2;" title="Set as Leader">👑</div>
+                            <div onclick="window.setLeader(${idx})" style="cursor: pointer; color: ${crownColor}; font-size: 12px; z-index: 2; line-height: 16px;" title="Set as Leader">👑</div>
                             <div onclick="event.stopPropagation(); window.showPokemonStats(${idx}, 'party')" style="cursor: pointer; background: #34495e; color: white; border-radius: 50%; width: 16px; height: 16px; text-align: center; line-height: 16px; font-size: 10px; font-weight: bold; z-index: 2;" title="View Info">i</div>
                         </div>
                     </div>
