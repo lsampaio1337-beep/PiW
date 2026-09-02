@@ -8,7 +8,6 @@ export function showMap() {
 
     // Generate Interactive Map HTML
     let html = `
-        <h2>Map</h2>
         <div id="interactive-map" style="position: relative; width: 100%; aspect-ratio: 16/11; background-image: url('./Assets/Map/Kanto Map.png'); background-size: contain; background-repeat: no-repeat; background-position: center; border: 2px solid #fff; border-radius: 8px;">
     `;
 
@@ -74,7 +73,6 @@ export function showMap() {
     html += `
         </div>
         <div id="map-tooltip" style="display:none; position:absolute; background:rgba(0,0,0,0.8); color:white; padding:5px; border-radius:5px; pointer-events:none; z-index: 100;"></div>
-        <br><button onclick="document.getElementById('modal-overlay').style.display='none'">Close</button>
     `;
 
     contentPanel.innerHTML = html;
@@ -334,10 +332,12 @@ export function navigateToLocation(locationName) {
         }
 
         vGym.innerHTML = `
-            <div style="background-color: rgba(0,0,0,0.8); display: inline-block; padding: 20px; margin-top: 50px; border-radius: 8px;">
-                <h2>${locationName}</h2>
-                <div id="gym-content-area">
-                    ${buttonHtml}
+            <div style="position: absolute; left: 33%; top: 50%; transform: translate(-50%, -50%);">
+                <div style="background-color: rgba(0,0,0,0.8); display: inline-block; padding: 20px; border-radius: 8px;">
+                    <h2 style="margin-top: 0;">${locationName}</h2>
+                    <div id="gym-content-area">
+                        ${buttonHtml}
+                    </div>
                 </div>
             </div>
         `;
@@ -346,6 +346,7 @@ export function navigateToLocation(locationName) {
             vGym.style.backgroundSize = "cover";
             vGym.style.height = "100%";
             vGym.style.textAlign = "center";
+            vGym.style.position = "relative";
         }
     } else {
         switchView("BATTLE_ARENA");

@@ -93,7 +93,10 @@ export function showModal(title, htmlContent) {
     let rightCol = document.getElementById('modal-overlay');
     let contentPanel = document.getElementById('content-panel');
     rightCol.style.display = 'flex';
-    contentPanel.innerHTML = `<h2>${title}</h2>${htmlContent}<br><br><button onclick="document.getElementById('modal-overlay').style.display='none'">Close</button>`;
+
+    let titleHtml = title ? `<h2 style="margin-top: 0; margin-bottom: 15px;">${title}</h2>` : ``;
+
+    contentPanel.innerHTML = `${titleHtml}${htmlContent}`;
 }
 
 const oakTasks = {
@@ -354,10 +357,17 @@ export function renderOakLab() {
         return; // still selecting starter, handled in index.html
     }
 
+    // Wrap the modal container in absolute positioning x=33% centered
     oakLabDiv.innerHTML = `
-        <div style="background-color: rgba(0,0,0,0.85); display: inline-block; padding: 20px; margin-top: 20px; border-radius: 8px; width: 400px; color: white; text-align: center;">
-            <h2 style="margin-top:0;">Professor Oak Lab</h2>
-            <p style="font-size: 12px; color: #ccc; margin-bottom: 15px;">Complete tasks to unlock global bonuses.</p>
+        <div style="position: absolute; left: 33%; top: 50%; transform: translate(-50%, -50%);">
+            <div style="background: linear-gradient(135deg, rgba(30,30,30,0.9), rgba(10,10,10,0.95)); padding: 30px; border-radius: 12px; width: 350px; color: white; text-align: center; border: 2px solid #2ecc71; box-shadow: 0 4px 15px rgba(0,0,0,0.7);">
+                <h2 style="margin-top:0; color: #2ecc71; text-transform: uppercase; letter-spacing: 1px;">Professor Oak's Lab</h2>
+                <p style="font-size: 13px; color: #ddd; margin-bottom: 25px;">Complete tasks to unlock global gameplay bonuses.</p>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <button onclick="window.showOakLabModal()" style="background-color: #2ecc71; color: #fff; border: none; padding: 12px; font-size: 16px; font-weight: bold; cursor: pointer; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.5); text-transform: uppercase; transition: transform 0.1s, background-color 0.2s;" onmousedown="this.style.transform='scale(0.98)'" onmouseup="this.style.transform='scale(1)'" onmouseleave="this.style.transform='scale(1)'" onmouseover="this.style.backgroundColor='#27ae60'" onmouseout="this.style.backgroundColor='#2ecc71'">
+                        Tasks & Rewards
+                    </button>
+                </div>
 
             <div style="display: flex; flex-direction: column; gap: 10px;">
                 <button onclick="window.showOakLabModal()" style="padding: 10px; font-size: 16px; cursor: pointer;">Tasks & Rewards</button>
