@@ -549,9 +549,14 @@ async function init() {
         updateUI();
     };
 
-    document.getElementById('btn-map').onclick = () => { if(!checkCombatLock()) showMap(); };
-    document.getElementById('btn-backpack').onclick = () => { if(!checkCombatLock()) showBackpack(); };
-    document.getElementById('btn-dex').onclick = () => { if(!checkCombatLock()) showPokedex(); };
+    const bindBtn = (id, fn) => {
+        const el = document.getElementById(id);
+        if (el) el.onclick = fn;
+    };
+
+    bindBtn('btn-map', () => { if(!checkCombatLock()) showMap(); });
+    bindBtn('btn-backpack', () => { if(!checkCombatLock()) showBackpack(); });
+    bindBtn('btn-dex', () => { if(!checkCombatLock()) showPokedex(); });
 
     window.showBackpackAndFocus = (tab) => {
         if(!checkCombatLock()) {
@@ -560,19 +565,29 @@ async function init() {
         }
     };
 
-    document.getElementById('btn-stats').onclick = () => {
+    bindBtn('btn-stats', () => {
         if(checkCombatLock()) return;
-        let badgesHtml = '<div style="display: flex; gap: 10px; margin-top: 10px;">';
+        let badgesHtml = '<div style="display: flex; gap: 10px; margin-top: 10px; justify-content: center; flex-wrap: wrap;">';
         for (let i = 1; i <= state.trainer.badges; i++) {
             badgesHtml += `<img src="./Assets/Badges/Badge Kanto ${i}.png" style="width: 40px; height: 40px;" title="Badge ${i}">`;
         }
         badgesHtml += '</div>';
-        showModal("Statistics", `<p>Battles Won: ${state.stats.battlesWon}</p><p>Total Pokémon Captured: ${state.stats.caught}</p><p>Shinies Seen: ${state.stats.shiniesSeen || 0}</p><p>Money: $${state.trainer.money}</p><h3>Badges:</h3>${badgesHtml}`);
-    };
+        showModal("Statistics", `
+            <div style="text-align: left; display: inline-block;">
+                <p><b>Battles Won:</b> ${state.stats.battlesWon}</p>
+                <p><b>Total Pokémon Captured:</b> ${state.stats.caught}</p>
+                <p><b>Shinies Seen:</b> ${state.stats.shiniesSeen || 0}</p>
+                <p><b>Shinies Caught:</b> ${state.stats.shiniesCaught || 0}</p>
+                <p><b>Money:</b> $${state.trainer.money}</p>
+            </div>
+            <h3 style="margin-top: 20px;">Badges:</h3>
+            ${badgesHtml}
+        `);
+    });
 
-    document.getElementById('btn-settings').onclick = () => {
+    bindBtn('btn-settings', () => {
         if(!checkCombatLock()) showSettings();
-    };
+    });
 }
 
 // Ensure the UI script runs

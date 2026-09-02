@@ -6,25 +6,28 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Top Navigation Bar -->
-  <nav id="top-nav">
-    <div id="trainer-stats">
-      Level: <span id="trainer-lvl">1</span> |
-      XP: <span id="trainer-xp">0</span> |
-      Money: $<span id="trainer-money">0</span> |
-      Badges: <span id="trainer-badges">0</span>
-    </div>
-    <div id="challenge-tracker" style="font-weight: bold; color: yellow;">
-      Next Challenge: <span id="current-challenge-text">None</span>
-    </div>
+  <!-- Top Bar (Icons) -->
+  <div id="top-bar">
     <div id="nav-buttons">
-      <button id="btn-map">Map</button>
-      <button id="btn-backpack">Backpack</button>
-      <button id="btn-dex">Pokedex</button>
-      <button id="btn-stats">Stats</button>
-      <button id="btn-settings">Settings</button>
+      <img src="Assets/Extra/IconMap.png" id="btn-map" class="nav-icon" title="Map">
+      <img src="Assets/Extra/IconBackpack.png" id="btn-backpack" class="nav-icon" title="Backpack">
+      <img src="Assets/Extra/IconPokedex.png" id="btn-dex" class="nav-icon" title="Pokedex">
+      <img src="Assets/Extra/IconTrainer.png" id="btn-stats" class="nav-icon" title="Trainer">
+
+      <span class="nav-divider"></span>
+
+      <img src="Assets/Extra/IconBonusCandy.png" id="btn-bonus-candy" class="nav-icon" title="Bonus Candy">
+      <img src="Assets/Extra/IconGift.png" id="btn-gift" class="nav-icon" title="Gift">
+      <img src="Assets/Extra/IconCalendar.png" id="btn-calendar" class="nav-icon" title="Calendar">
+
+      <span class="nav-divider"></span>
+
+      <img src="Assets/Extra/IconSleep.png" id="btn-sleep" class="nav-icon" title="Sleep">
+      <img src="Assets/Extra/IconHelp.png" id="btn-help" class="nav-icon" title="Help">
+      <img src="Assets/Extra/IconSettings.png" id="btn-settings" class="nav-icon" title="Settings">
+      <img src="Assets/Extra/IconExit.png" id="btn-exit" class="nav-icon" title="Exit">
     </div>
-  </nav>
+  </div>
 
   <!-- Splash Screen Logo Overlay -->
   <div id="splash-screen" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); z-index: 1000; display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer;">
@@ -169,6 +172,13 @@
         </div>
     </div>
 
+  </div>
+
+  <!-- Bottom Bar (Challenge Tracker) -->
+  <div id="bottom-bar">
+    <div id="challenge-tracker">
+      Next Challenge: <span id="current-challenge-text">None</span>
+    </div>
   </div>
 
   <script type="module" src="src/ui.js"></script>

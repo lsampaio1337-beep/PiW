@@ -1,7 +1,5 @@
 export const state = {
     trainer: {
-        level: 1,
-        xp: 0,
         money: 0,
         badges: 0
     },
