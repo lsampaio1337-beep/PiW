@@ -247,3 +247,33 @@ input[type="number"] {
 #modal-content-box button:hover {
     background: #c0392b;
 }
+
+/* QTier Glow Effects */
+@keyframes rainbow-glow {
+    0% { filter: drop-shadow(0 0 8px #ff0000); }
+    16% { filter: drop-shadow(0 0 8px #ffff00); }
+    33% { filter: drop-shadow(0 0 8px #00ff00); }
+    50% { filter: drop-shadow(0 0 8px #00ffff); }
+    66% { filter: drop-shadow(0 0 8px #0000ff); }
+    83% { filter: drop-shadow(0 0 8px #ff00ff); }
+    100% { filter: drop-shadow(0 0 8px #ff0000); }
+}
+
+.glow-shiny {
+    animation: rainbow-glow 3s linear infinite;
+}
+.glow-epic {
+    filter: drop-shadow(0 0 8px #7A00FF);
+}
+.glow-rare {
+    filter: drop-shadow(0 0 8px #0000FF);
+}
+.glow-uncommon {
+    filter: drop-shadow(0 0 8px #00FFFF);
+}
+.glow-regular {
+    filter: drop-shadow(0 0 8px #7AFFFF);
+}
+.glow-weak {
+    /* No glow */
+}
