@@ -68,6 +68,82 @@ window.dragStart = dragStart;
 window.completeChallenge = function() {
     state.stats.completedChallenges = (state.stats.completedChallenges || 0) + 1;
     updateUI();
+    if (document.getElementById('modal-overlay').style.display !== 'none') {
+        window.showChallengesModal(); // refresh modal
+    }
+};
+
+import { getChallengeData } from './ui/topbar.js';
+
+window.showChallengesModal = function() {
+    if (!state.config.unlocks) return;
+
+    let currentIndex = state.stats.completedChallenges || 0;
+
+    let html = `<div style="display:flex; flex-direction:column; gap:15px; text-align:left; max-height: 70vh; overflow-y: auto; padding-right: 10px;">`;
+
+    // Active Challenge Sector
+    html += `<div style="border: 1px solid #555; padding: 10px; border-radius: 5px; background-color: rgba(0,0,0,0.5);">
+                <h3 style="margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; font-size: 16px;">Active Challenge</h3>`;
+
+    if (currentIndex >= state.config.unlocks.length) {
+        html += `<div style="text-align: center; font-size: 16px; color: #aaa;">No active Challenge</div>`;
+    } else {
+        let unlock = state.config.unlocks[currentIndex];
+        let cData = getChallengeData(unlock);
+
+        let rewardsStr = unlock.unlocks ? unlock.unlocks.join(", ") : "Next Area";
+
+        html += `<div style="margin-bottom: 5px;"><b>Requirements:</b></div>
+                 <ul style="margin-top: 0; padding-left: 20px;">`;
+
+        for (let part of cData.textParts) {
+            html += `<li>${part}</li>`;
+        }
+
+        html += `</ul>
+                 <div style="margin-top: 10px; color: #4CAF50;"><b>Rewards:</b> Unlocks ${rewardsStr}</div>`;
+
+        if (cData.isMet) {
+             html += `<div style="text-align: center; margin-top: 15px;">
+                         <button onclick="window.completeChallenge()" style="padding: 10px 20px; font-size: 16px; font-weight: bold; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">Complete ✔️</button>
+                      </div>`;
+        }
+    }
+
+    html += `</div>`;
+
+    // Past Challenges Sector
+    if (currentIndex > 0) {
+        let pastTitle = currentIndex === 1 ? "Past Challenge" : "Past Challenges";
+        html += `<div style="border: 1px solid #555; padding: 10px; border-radius: 5px; background-color: rgba(0,0,0,0.5);">
+                    <h3 style="margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; font-size: 16px;">${pastTitle}</h3>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">`;
+
+        for (let i = 0; i < currentIndex; i++) {
+             let pUnlock = state.config.unlocks[i];
+             // Fake the data slightly to make it look completed, though getChallengeData will naturally evaluate to true
+             let pData = getChallengeData(pUnlock);
+             let pRewards = pUnlock.unlocks ? pUnlock.unlocks.join(", ") : "Next Area";
+
+             html += `<div style="border: 1px solid #333; padding: 10px; border-radius: 5px; background-color: rgba(255,255,255,0.05);">
+                          <div style="color: #4CAF50; font-weight: bold; margin-bottom: 5px;">Challenge ${i+1}</div>
+                          <ul style="margin-top: 0; margin-bottom: 5px; padding-left: 20px; font-size: 14px;">`;
+             for (let part of pData.textParts) {
+                  // replace any ❌ with ✔️ to show it was completed
+                  part = part.replace(/❌/g, '✔️').replace(/color: red/g, 'color: green');
+                  html += `<li>${part}</li>`;
+             }
+             html += `</ul>
+                      <div style="font-size: 14px; color: #4CAF50;"><b>Rewards:</b> Unlocks ${pRewards}</div>
+                      </div>`;
+        }
+        html += `</div></div>`;
+    }
+
+    html += `</div>`;
+
+    showModal("Progress Challenges", html);
 };
 window.dragOver = dragOver;
 window.handleDrop = handleDrop;
@@ -557,6 +633,7 @@ async function init() {
     bindBtn('btn-map', () => { if(!checkCombatLock()) showMap(); });
     bindBtn('btn-backpack', () => { if(!checkCombatLock()) showBackpack(); });
     bindBtn('btn-dex', () => { if(!checkCombatLock()) showPokedex(); });
+    bindBtn('btn-challenges', () => { if(!checkCombatLock()) window.showChallengesModal(); });
 
     window.showBackpackAndFocus = (tab) => {
         if(!checkCombatLock()) {

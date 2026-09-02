@@ -27,13 +27,8 @@ function getGymBadgeByName(name) {
     return getPokemonSpriteByName(name); // Fallback to sprite for Elite Four or Boss Pokemon
 }
 
-export function getChallengeText() {
-    if (!state.config.unlocks) return "None";
-
-    let currentIndex = state.stats.completedChallenges || 0;
-    if (currentIndex >= state.config.unlocks.length) return "All Challenges Completed";
-
-    let unlock = state.config.unlocks[currentIndex];
+export function getChallengeData(unlock) {
+    if (!unlock) return { isMet: false, textParts: [] };
     let req = unlock.requirements;
     let isMet = true;
     let textParts = [];
@@ -83,11 +78,7 @@ export function getChallengeText() {
          textParts.push(`Reach Level ${req.reachPokemonLevel.minLevel} (${highestLvl}/${req.reachPokemonLevel.minLevel})`);
     }
 
-    if (!isMet) {
-        return textParts.join(" AND ");
-    } else {
-        return `<span style="color: green;">Complete</span> <button onclick="window.completeChallenge()" style="background-color: green; color: white; border: none; padding: 2px 5px; cursor: pointer; font-weight: bold; border-radius: 4px;">✔️</button>`;
-    }
+    return { isMet, textParts };
 }
 
 
@@ -105,6 +96,5 @@ export function updateTopbar() {
         navButtons.style.opacity = lockMenus ? '0.5' : '1.0';
     }
 
-    const elChallengeText = document.getElementById('current-challenge-text');
-    if (elChallengeText) elChallengeText.innerHTML = getChallengeText();
+    // Challenge text removed from topbar update since bottom-bar is gone
 }
