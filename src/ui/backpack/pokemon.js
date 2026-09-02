@@ -102,7 +102,7 @@ export function renderPokemonTab(area) {
         } else {
             let label = i < 6 ? `Party #${i+1}` : (i === 6 ? 'To Breed' : 'To Train');
             let dropTarget = i < 6 ? 'party' : (i === 6 ? 'breeding' : 'training');
-            content += `<div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, '${dropTarget}')" style="border: 1px dashed #777; aspect-ratio: 1 / 1.3; display: flex; align-items: center; justify-content: center; font-size: 10cqw; container-type: inline-size; color: #777; box-sizing: border-box;">${label}</div>`;
+            content += `<div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, '${dropTarget}')" style="border: 1px dashed #777; aspect-ratio: 1 / 1.3; display: flex; align-items: center; justify-content: center; container-type: inline-size; color: #777; box-sizing: border-box;"><span style="font-size: 15cqw; text-align: center;">${label}</span></div>`;
         }
     }
 
@@ -272,6 +272,11 @@ export function handleDrop(event, targetCol) {
     // Daycare interaction constraints
     if (sCol === 'breeding' && state.dayCareRef && state.dayCareRef.slot1.isBreeding) {
         alert("Cannot move Pokémon while it is actively breeding!");
+        return;
+    }
+
+    if (tCol === 'breeding' && state.dayCareRef && state.dayCareRef.slot1.isBreeding) {
+        alert("Cannot replace Pokémon while breeding is in progress!");
         return;
     }
 

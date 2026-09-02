@@ -49,7 +49,7 @@ export function updateSidebar() {
         d.innerHTML = `
             <div onclick="window.setLeader(${idx})" style="position: absolute; top: 5px; left: 5px; cursor: pointer; color: ${crownColor}; font-size: 16px; z-index: 2;" title="Set as Leader">👑</div>
             <div onclick="event.stopPropagation(); window.showPokemonStats(${idx}, 'party')" style="position: absolute; bottom: 5px; left: 5px; cursor: pointer; background: #34495e; color: white; border-radius: 50%; width: 16px; height: 16px; text-align: center; line-height: 16px; font-size: 10px; font-weight: bold; z-index: 2;" title="View Info">i</div>
-            <img src="Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png" onload="this.style.display='inline'" onerror="this.style.display='none'" style="position: absolute; top: -5px; right: 5px; width: 80px; height: 80px; z-index: 0; opacity: 0.85; pointer-events: none;">
+            <img src="Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png" onload="this.style.display='inline'" onerror="this.style.display='none'" style="position: absolute; top: -5px; left: 5px; width: 80px; height: 80px; z-index: 0; opacity: 0.85; pointer-events: none;">
 
             <div style="position: relative; z-index: 1; margin-left: 25px; width: calc(100% - 30px); margin-top: 2px; display: flex; flex-direction: column; gap: 4px;">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
