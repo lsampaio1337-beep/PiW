@@ -56,7 +56,7 @@ export function showMap() {
             else if (locationId === 'big_fishing_spot') markerImg = './Assets/Extra/Spot.png';
             else if (locationId === 'fighting_dojo') markerImg = './Assets/Extra/Spot.png';
             else if (locationId === 'fossil_revival') markerImg = './Assets/Extra/Spot.png';
-            else if (locationId === 'pok_mon_mansion') markerImg = './Assets/Map/Spot_PokeMansion.png';
+            else if (locationId === 'pok_mon_mansion') markerImg = './Assets/Extra/Spot.png';
             else if (locationId === 'trade_with_a_friend') markerImg = './Assets/Extra/Spot.png';
             else if (locationId === 'daycare') markerImg = './Assets/Map/Spot_Daycare.png';
             else if (locationId === 'pewter_gym') { markerImg = './Assets/Badges/Badge Kanto 1.png'; if (state.trainer.badges >= 1) showCheckmark = true; }
