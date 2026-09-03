@@ -283,6 +283,11 @@ export function handleDrop(event, targetCol) {
         return;
     }
 
+    if (tCol === 'breeding' && p.quality >= 1.99) {
+        alert("Cannot breed a Pokémon with Q >= 1.99!");
+        return;
+    }
+
     if (tCol === 'party' && state.party.length >= 6) {
         alert("Party is full!");
         return;
@@ -342,7 +347,13 @@ export function handleDrop(event, targetCol) {
         }
         if (state.dayCareRef) {
             state.dayCareRef.slot2.pokemon = p;
-            state.dayCareRef.slot2.battles = 0;
+
+            const totalIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
+            if (totalIV >= 600) {
+                state.dayCareRef.slot2.battles = state.dayCareRef.slot2.requiredBattles;
+            } else {
+                state.dayCareRef.slot2.battles = 0;
+            }
         }
     }
     else if (tCol === 'breeding') {
