@@ -23,28 +23,10 @@ export function showBackpack() {
         modalBox.style.border = 'none';
         modalBox.style.boxShadow = 'none';
 
-        // Hide the default modal X button
-        const closeBtn = modalBox.querySelector('span');
-        if (closeBtn) {
-            closeBtn.dataset.originalDisplay = closeBtn.style.display || '';
-            closeBtn.style.display = 'none';
-        }
     }
 
-    window.closeBackpackModal = function() {
-        document.getElementById('modal-overlay').style.display='none';
-        const modalBox = document.getElementById('modal-content-box');
-        if (modalBox && modalBox.dataset.originalStyles !== undefined) {
-            modalBox.setAttribute('style', modalBox.dataset.originalStyles);
-            const closeBtn = modalBox.querySelector('span');
-            if (closeBtn && closeBtn.dataset.originalDisplay !== undefined) {
-                closeBtn.style.display = closeBtn.dataset.originalDisplay;
-            }
-        }
-    };
-
     let html = `
-        <div onclick="window.closeBackpackModal()" style="position: fixed; top: 0; left: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100vw; height: 100vh; padding: 20px; box-sizing: border-box; color: white; overflow: hidden; z-index: 9999;">
+        <div onclick="if(window.closeModal) window.closeModal()" style="position: fixed; top: 0; left: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100vw; height: 100vh; padding: 20px; box-sizing: border-box; color: white; overflow: hidden; z-index: 9999;">
             <style>
                 .backpack-pocket {
                     cursor: pointer;

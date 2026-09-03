@@ -89,11 +89,30 @@ window.startGymBattle = function(gymName) {
     }
 };
 
+window.closeModal = function() {
+    document.getElementById('modal-overlay').style.display = 'none';
+    const modalBox = document.getElementById('modal-content-box');
+    if (modalBox && modalBox.dataset.originalStyles !== undefined) {
+        modalBox.setAttribute('style', modalBox.dataset.originalStyles);
+        delete modalBox.dataset.originalStyles;
+    }
+};
+
 export function showModal(title, htmlContent) {
     let rightCol = document.getElementById('modal-overlay');
     let contentPanel = document.getElementById('content-panel');
+    const modalBox = document.getElementById('modal-content-box');
+
+    // Reset styles for regular modals if not overridden by Map/Backpack
+    if (modalBox && modalBox.dataset.originalStyles !== undefined) {
+        modalBox.setAttribute('style', modalBox.dataset.originalStyles);
+        delete modalBox.dataset.originalStyles;
+    }
+
     rightCol.style.display = 'flex';
-    contentPanel.innerHTML = `<h2>${title}</h2>${htmlContent}<br><br><button onclick="document.getElementById('modal-overlay').style.display='none'">Close</button>`;
+
+    let titleHtml = title ? `<h2>${title}</h2>` : '';
+    contentPanel.innerHTML = `${titleHtml}${htmlContent}`;
 }
 
 const oakTasks = {

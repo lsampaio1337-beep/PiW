@@ -19,7 +19,7 @@ export function showPokedex() {
         uniqueSpeciesCaught = Object.keys(state.stats.caughtSpecies).length;
     }
 
-    let html = `<h2>Pokedex</h2><p>Caught: ${uniqueSpeciesCaught} / 150</p><div style="display:flex; flex-wrap:wrap; max-height:400px; overflow-y:auto; gap:10px;">`;
+    let html = `<p>Caught: ${uniqueSpeciesCaught} / 150</p><div style="display:flex; flex-wrap:wrap; max-height:400px; overflow-y:auto; gap:10px;">`;
 
     if (!state.config.pokemonData) {
         html += "<p>Loading Pokedex data...</p>";
@@ -46,7 +46,7 @@ export function showPokedex() {
     }
 
     html += `</div>`;
-    showModal("Pokedex", html);
+    showModal("", html);
 }
 
 export function showDexEntry(id) {
@@ -163,5 +163,5 @@ export function showDexEntry(id) {
         </div>
     `;
 
-    showModal("Pokedex Entry", html);
+    showModal("", html);
 }
