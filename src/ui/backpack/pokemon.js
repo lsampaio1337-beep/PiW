@@ -2,6 +2,10 @@ import { state } from '../../state.js';
 import { updateUI } from '../../ui.js';
 import { renderBackpackTab } from './index.js';
 
+window.sellModeActive = false;
+window.selectedForSale = new Set();
+import { calculateEV } from '../../mathEngine.js';
+
 // Helper to render a consistent Pokemon slot UI
 function renderSlotUI(p, listName, origIndex, isDraggable) {
     if (!p.uuid) p.uuid = Math.random().toString(36).substring(2, 15);
@@ -19,6 +23,17 @@ function renderSlotUI(p, listName, origIndex, isDraggable) {
         dataAttr = `data-uuid="${p.uuid}"`;
     }
 
+    let selectionStyle = '';
+    let clickHandler = '';
+    if (window.sellModeActive && listName.toLowerCase() === 'storage') {
+        dragAttr = ''; // Disable drag in sell mode
+        cursorStyle = 'cursor: pointer;';
+        clickHandler = `onclick="window.toggleSaleSelection('${p.uuid}')"`;
+        if (window.selectedForSale.has(p.uuid)) {
+            selectionStyle = 'outline: 3px solid #00ff00; outline-offset: -3px; background: rgba(0,255,0,0.2);';
+        }
+    }
+
     let glowClass = "glow-weak";
     if (p.qualityName === "Shiny") glowClass = "glow-shiny";
     else if (p.qualityName === "Epic") glowClass = "glow-epic";
@@ -27,7 +42,7 @@ function renderSlotUI(p, listName, origIndex, isDraggable) {
     else if (p.qualityName === "Regular") glowClass = "glow-regular";
 
     return `
-        <div class="${slotClass}" ${dataAttr} style="border: 1px solid #777; aspect-ratio: 1 / 1.3; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 4%; box-sizing: border-box; background: rgba(0,0,0,0.5); position: relative; container-type: inline-size; overflow: hidden; ${cursorStyle}; width: 100%;" title="Q=${p.quality.toFixed(2)} & ∑IV=${sumIV}" ${dragAttr}>
+        <div class="${slotClass}" ${dataAttr} style="border: 1px solid #777; aspect-ratio: 1 / 1.3; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 4%; box-sizing: border-box; background: rgba(0,0,0,0.5); position: relative; container-type: inline-size; overflow: hidden; ${cursorStyle}; width: 100%; ${selectionStyle}" title="Q=${p.quality.toFixed(2)} & ∑IV=${sumIV}" ${dragAttr} ${clickHandler}>
             <span style="position: absolute; top: 0; left: 0; font-size: 12cqw; background: black; padding: 2cqw; z-index: 2;">${p._tag || ''}</span>
             <div onclick="event.stopPropagation(); window.showPokemonStatsByUuid('${p.uuid}')" style="position: absolute; top: 2cqw; right: 2cqw; cursor: pointer; background: #34495e; color: white; border-radius: 50%; width: 20cqw; height: 20cqw; text-align: center; display: flex; align-items: center; justify-content: center; font-size: 14cqw; font-weight: bold; z-index: 3;" title="View Info">i</div>
 
@@ -38,6 +53,15 @@ function renderSlotUI(p, listName, origIndex, isDraggable) {
     `;
 }
 
+window.toggleSaleSelection = function(uuid) {
+    if (window.selectedForSale.has(uuid)) {
+        window.selectedForSale.delete(uuid);
+    } else {
+        window.selectedForSale.add(uuid);
+    }
+    renderBackpackTab('pokemon');
+};
+
 // Global filter state
 window.pokemonFilters = window.pokemonFilters || {
     name: '', minLvl: '', maxLvl: '', minQ: '', maxQ: '', minIV: '', maxIV: ''
@@ -45,6 +69,17 @@ window.pokemonFilters = window.pokemonFilters || {
 
 export function renderPokemonTab(area) {
     const filters = window.pokemonFilters;
+
+    let sellControlsHtml = '';
+    if (window.sellModeActive) {
+        sellControlsHtml = `
+            <div style="margin-bottom: 10px; text-align: center;">
+                <button onclick="window.selectAllForSale()" style="padding: 5px 15px; margin-right: 5px; background: #3498db; color: white; border: none; border-radius: 4px; cursor: pointer;">Select All in Storage</button>
+                <button onclick="window.sellSelectedPokemon()" style="padding: 5px 15px; margin-right: 5px; background: #e74c3c; color: white; border: none; border-radius: 4px; cursor: pointer;">Sell Selected</button>
+                <button onclick="window.cancelSellMode()" style="padding: 5px 15px; background: #7f8c8d; color: white; border: none; border-radius: 4px; cursor: pointer;">Cancel</button>
+            </div>
+        `;
+    }
 
     let content = `
         <div style="text-align: center; margin-bottom: 5px;">
@@ -60,6 +95,7 @@ export function renderPokemonTab(area) {
             <input type="number" id="pfilter-maxIV" placeholder="Max ∑IV" value="${filters.maxIV}" oninput="window.updatePokemonFilter('maxIV', this.value)" style="width: 60px; margin: 2px; -moz-appearance: textfield;">
             <style>#pokemon-filters input::-webkit-outer-spin-button, #pokemon-filters input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }</style>
         </div>
+        ${sellControlsHtml}
 
         <div style="display: flex; gap: 10px; width: 100%; height: 100%; min-height: 0; overflow: hidden; flex-grow: 1;">
             <!-- Column 1: Active -->
@@ -436,3 +472,77 @@ export function handleDrop(event, targetCol) {
     updateUI();
     renderBackpackTab('pokemon');
 }
+
+window.startSellMode = function() {
+    window.sellModeActive = true;
+    window.selectedForSale.clear();
+
+    // Open backpack directly to pokemon tab
+    state.backpack.activePocket = 'pokemon';
+    document.getElementById('backpack-modal').style.display = 'block';
+    renderBackpackTab('pokemon');
+};
+
+window.cancelSellMode = function() {
+    window.sellModeActive = false;
+    window.selectedForSale.clear();
+    document.getElementById('backpack-modal').style.display = 'none';
+
+    // Return to Market UI
+    const pcButton = document.querySelector('img[src="Assets/UI/Menu/TopBar/Icon_Map.png"]');
+    if (pcButton) {
+        window.changeLocation("Pokemon Center & Market");
+    }
+};
+
+window.selectAllForSale = function() {
+    const storageMons = state.backpack.storage;
+    const filters = window.pokemonFilters || {};
+    let minLvl = filters.minLvl !== '' ? parseFloat(filters.minLvl) : null;
+    let maxLvl = filters.maxLvl !== '' ? parseFloat(filters.maxLvl) : null;
+    let minQ = filters.minQ !== '' ? parseFloat(filters.minQ) : null;
+    let maxQ = filters.maxQ !== '' ? parseFloat(filters.maxQ) : null;
+    let minIV = filters.minIV !== '' ? parseFloat(filters.minIV) : null;
+    let maxIV = filters.maxIV !== '' ? parseFloat(filters.maxIV) : null;
+
+    storageMons.forEach(p => {
+        let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
+        let isVisible = true;
+
+        if (filters.name && !p.id.toLowerCase().includes(filters.name.toLowerCase())) isVisible = false;
+        if (minLvl !== null && p.level < minLvl) isVisible = false;
+        if (maxLvl !== null && p.level > maxLvl) isVisible = false;
+        if (minQ !== null && p.quality < minQ) isVisible = false;
+        if (maxQ !== null && p.quality > maxQ) isVisible = false;
+        if (minIV !== null && sumIV < minIV) isVisible = false;
+        if (maxIV !== null && sumIV > maxIV) isVisible = false;
+
+        if (isVisible && !window.selectedForSale.has(p.uuid)) {
+            window.selectedForSale.add(p.uuid);
+        }
+    });
+
+    renderBackpackTab('pokemon');
+};
+
+window.sellSelectedPokemon = function() {
+    if (window.selectedForSale.size === 0) return;
+
+    let totalGain = 0;
+    let numSold = 0;
+
+    state.backpack.storage = state.backpack.storage.filter(p => {
+        if (window.selectedForSale.has(p.uuid)) {
+            let val = Math.floor(calculateEV(p) * p.level);
+            totalGain += val;
+            numSold++;
+            return false; // Remove
+        }
+        return true; // Keep
+    });
+
+    state.trainer.money += totalGain;
+    alert(`Sold ${numSold} Pokemon for $${totalGain}!`);
+
+    window.cancelSellMode();
+};
