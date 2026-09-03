@@ -669,7 +669,6 @@ async function init() {
     bindBtn('btn-map', () => { if(!checkCombatLock()) showMap(); });
     bindBtn('btn-backpack', () => { if(!checkCombatLock()) showBackpack(); });
     bindBtn('btn-dex', () => { if(!checkCombatLock()) showPokedex(); });
-    bindBtn('btn-calendar', () => { if(!checkCombatLock()) showCalendar(); });
     bindBtn('btn-challenges', () => { if(!checkCombatLock()) window.showChallengesModal(); });
 
     window.showBackpackAndFocus = (tab) => {
