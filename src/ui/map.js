@@ -11,14 +11,26 @@ export function showMap() {
         // Save original inline styles to restore later if another view needs it
         modalBox.dataset.originalStyles = modalBox.getAttribute('style') || '';
 
-        // Remove padding so the map can stretch directly to the yellow border edges
+        // Remove padding and background so the map is flush and the background window is gone
         modalBox.style.padding = '0px';
+        modalBox.style.border = 'none';
+        modalBox.style.backgroundColor = 'transparent';
         modalBox.style.overflow = 'hidden';
+
+        // Ensure no inherited box-shadow or extra margins break the flush look
+        modalBox.style.boxShadow = 'none';
+        modalBox.style.maxWidth = '90%'; // Allow it to expand nicely
     }
 
-    // Generate Interactive Map HTML (removed white border)
+    // Also remove any padding from content-panel just in case
+    if (contentPanel) {
+        contentPanel.style.padding = '0px';
+        contentPanel.style.margin = '0px';
+    }
+
+    // Generate Interactive Map HTML
     let html = `
-        <div id="interactive-map" style="position: relative; width: 100%; aspect-ratio: 16/11; background-image: url('./Assets/Map/Kanto Map.png'); background-size: contain; background-repeat: no-repeat; background-position: center; border-radius: 8px;">
+        <div id="interactive-map" style="position: relative; width: 100%; aspect-ratio: 16/11; background-image: url('./Assets/Map/Kanto Map.png'); background-size: 100% 100%; background-repeat: no-repeat; background-position: center; border-radius: 8px;">
     `;
 
     for (const [locationId, locationData] of Object.entries(state.config.mapCoordinates)) {
