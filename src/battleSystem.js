@@ -540,7 +540,9 @@ class BattleSystem {
         const ev = this.activeEncounter.ev;
 
         // Bonus Candy Defeats Tracker
-        this.state.stats.bonusCandyDefeats = (this.state.stats.bonusCandyDefeats || 0) + 1;
+        if ((this.state.stats.bonusCandyDefeats || 0) < 1000) {
+            this.state.stats.bonusCandyDefeats = (this.state.stats.bonusCandyDefeats || 0) + 1;
+        }
 
         // Auto Throw Pokeball logic (disable in gyms)
         if (this.state.settings.autoCatch && (!this.gymState || !this.gymState.isActive)) {

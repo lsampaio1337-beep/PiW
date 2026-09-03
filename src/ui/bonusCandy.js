@@ -4,8 +4,9 @@ import { showModal, updateUI } from '../ui.js';
 export function showBonusCandyModal() {
     const defeats = state.stats.bonusCandyDefeats || 0;
     const isClaimable = defeats >= 1000;
-    const progressTextLeft = isClaimable ? "Click to Claim White Candy!" : `${defeats}/1000`;
+    const progressTextLeft = isClaimable ? "" : `${defeats}/1000`;
     const progressTextRight = isClaimable ? "" : `${Math.floor((defeats / 1000) * 100)}%`;
+    const progressTextCenter = isClaimable ? "Click to Claim White Candy!" : "";
     const progressPct = isClaimable ? 100 : (defeats / 1000) * 100;
 
     // Ensure candyPurchaseHistory exists
@@ -61,13 +62,14 @@ export function showBonusCandyModal() {
                     <div style="
                         position: absolute;
                         top: 0; left: 0; right: 0; height: 100%;
-                        display: flex; align-items: center; justify-content: ${isClaimable ? 'center' : 'space-between'};
-                        padding: 0 10px;
+                        display: flex; align-items: center; justify-content: center;
                         color: white; font-weight: bold; text-shadow: 1px 1px 2px black;
                         pointer-events: none;
                     ">
-                        <span>${progressTextLeft}</span>
-                        <span>${progressTextRight}</span>
+                        ${isClaimable
+                            ? `<span>${progressTextCenter}</span>`
+                            : `<div style="width: 50%; text-align: center;">${progressTextLeft}</div><div style="width: 50%; text-align: center;">${progressTextRight}</div>`
+                        }
                     </div>
                 </div>
             </div>
@@ -98,21 +100,34 @@ export function showBonusCandyModal() {
 function renderCandyOption(color, effectText, cost, currentOwned, currentEffect, imageFile) {
     const owned = currentOwned || 0;
 
-    let alignmentStyle = '';
-    if (color === 'Green Candy' || color === 'Black Yellow Candy') {
-        alignmentStyle = 'right: 10px;';
-    } else {
-        alignmentStyle = 'left: 10px;';
+    let verticalAlign = '';
+    let horizontalAlign = '';
+
+    if (color === 'Green Candy') {
+        verticalAlign = 'bottom: 10px;';
+        horizontalAlign = 'right: 10px;';
+    } else if (color === 'Purple Candy') {
+        verticalAlign = 'bottom: 10px;';
+        horizontalAlign = 'left: 10px;';
+    } else if (color === 'Black Yellow Candy') {
+        verticalAlign = 'top: 10px;';
+        horizontalAlign = 'right: 10px;';
+    } else if (color === 'Rainbow Candy') {
+        verticalAlign = 'top: 10px;';
+        horizontalAlign = 'left: 10px;';
     }
 
+    const titleStyle = color.includes('Rainbow')
+        ? `background: ${getColorHex(color)}; -webkit-background-clip: text; -webkit-text-fill-color: transparent;`
+        : `color: ${getColorHex(color)}; text-shadow: 1px 1px 2px black;`;
+
     return `
-        <div style="background-color: #222; border: 1px solid #444; border-radius: 8px; padding: 15px; display: flex; flex-direction: column; align-items: center; position: relative;">
-            <img src="Assets/Extra/${imageFile}" onclick="window.buyBonusCandy('${color}', ${cost})" style="width: 60px; height: 60px; position: absolute; top: 50%; transform: translateY(-50%); ${alignmentStyle} cursor: pointer; border-radius: 5px; box-shadow: 0 0 5px rgba(255,255,255,0.5);" onerror="this.style.display='none'" title="Click to buy ${color}">
-            <div style="font-size: 18px; font-weight: bold; margin-bottom: 5px; color: ${getColorHex(color)}; text-shadow: 1px 1px 2px black;">${color}</div>
+        <div style="background-color: #222; border: 1px solid #444; border-radius: 8px; padding: 15px; display: flex; flex-direction: column; align-items: center; position: relative; min-height: 120px; justify-content: center;">
+            <img src="Assets/Extra/${imageFile}" onclick="window.buyBonusCandy('${color}', ${cost})" style="width: 60px; height: 60px; position: absolute; ${verticalAlign} ${horizontalAlign} cursor: pointer; border-radius: 5px; box-shadow: 0 0 5px rgba(255,255,255,0.5);" onerror="this.style.display='none'" title="Click to buy ${color}">
+            <div style="font-size: 18px; font-weight: bold; margin-bottom: 5px; ${titleStyle}">${color}</div>
             <div style="font-size: 14px; margin-bottom: 5px; text-align: center;">Effect: ${effectText}</div>
-            <div style="font-size: 14px; margin-bottom: 10px;">Cost: ${cost} White</div>
+            <div style="font-size: 14px; margin-bottom: 10px;">Cost: ${cost} White Candy</div>
             <div style="font-size: 14px; color: #aaa;">Owned: ${owned}</div>
-            <div style="font-size: 14px; color: #4CAF50;">Total Effect: ${currentEffect}</div>
         </div>
     `;
 }

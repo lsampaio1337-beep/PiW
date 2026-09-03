@@ -19,7 +19,7 @@ def run_cuj(page):
         window.state.stats.purpleCandies = 1;
         window.state.stats.blackYellowCandies = 1;
         window.state.stats.rainbowCandies = 1;
-        window.state.stats.bonusCandyDefeats = 1000;
+        window.state.stats.bonusCandyDefeats = 500;
 
         if (typeof window.showBonusCandyModal === 'function') {
             window.showBonusCandyModal();
@@ -27,7 +27,7 @@ def run_cuj(page):
     """)
     page.wait_for_timeout(1000)
 
-    page.screenshot(path="verification/screenshots/verification2.png")
+    page.screenshot(path="verification/screenshots/verification3.png")
     page.wait_for_timeout(1000)
 
 if __name__ == "__main__":
