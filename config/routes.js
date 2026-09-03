@@ -478,11 +478,11 @@ export const unlocks = [
     "requirements": {
       "catchSpecies": [
         {
-          "species": "Nidoran♀",
+          "species": "NidoranF",
           "count": 1
         },
         {
-          "species": "Nidoran♂",
+          "species": "NidoranM",
           "count": 1
         }
       ]

@@ -10,6 +10,12 @@ function countDisplay(current, required) {
     return `(${displayCount}/${required})`;
 }
 
+function formatSpecies(name) {
+    if (name === "NidoranF") return "Nidoran♀";
+    if (name === "NidoranM") return "Nidoran♂";
+    return name;
+}
+
 export function getChallengeData(unlock) {
     if (!unlock) return { isMet: false, textParts: [] };
     let req = unlock.requirements;
@@ -29,7 +35,7 @@ export function getChallengeData(unlock) {
         for (let spec of req.catchSpecies) {
             let caughtCount = state.stats.caughtSpecies ? (state.stats.caughtSpecies[spec.species] || 0) : 0;
             if (caughtCount < spec.count) isMet = false;
-            textParts.push(`Catch ${spec.count} ${spec.species} ${countDisplay(caughtCount, spec.count)}${getStatusHtml(caughtCount >= spec.count)}`);
+            textParts.push(`Catch ${spec.count} ${formatSpecies(spec.species)} ${countDisplay(caughtCount, spec.count)}${getStatusHtml(caughtCount >= spec.count)}`);
         }
     }
 
@@ -38,7 +44,7 @@ export function getChallengeData(unlock) {
             let caughtKey = spec.species + "_" + spec.rarity;
             let caughtCount = state.stats.challengeCaughtSpecific ? (state.stats.challengeCaughtSpecific[caughtKey] || 0) : 0;
             if (caughtCount < spec.count) isMet = false;
-            textParts.push(`Catch ${spec.count} ${spec.rarity} ${spec.species} ${countDisplay(caughtCount, spec.count)}${getStatusHtml(caughtCount >= spec.count)}`);
+            textParts.push(`Catch ${spec.count} ${spec.rarity} ${formatSpecies(spec.species)} ${countDisplay(caughtCount, spec.count)}${getStatusHtml(caughtCount >= spec.count)}`);
         }
     }
 
@@ -49,7 +55,7 @@ export function getChallengeData(unlock) {
                  caughtCount += state.stats.caughtSpecies ? (state.stats.caughtSpecies[s] || 0) : 0;
              }
              if (caughtCount < specGroup.count) isMet = false;
-             let speciesList = specGroup.species.join(' or ');
+             let speciesList = specGroup.species.map(formatSpecies).join(' or ');
              textParts.push(`Catch ${specGroup.count} ${speciesList} ${countDisplay(caughtCount, specGroup.count)}${getStatusHtml(caughtCount >= specGroup.count)}`);
          }
     }
@@ -62,7 +68,7 @@ export function getChallengeData(unlock) {
                  caughtCount += state.stats.challengeCaughtSpecific ? (state.stats.challengeCaughtSpecific[caughtKey] || 0) : 0;
              }
              if (caughtCount < specGroup.count) isMet = false;
-             let speciesList = specGroup.species.join(' or ');
+             let speciesList = specGroup.species.map(formatSpecies).join(' or ');
              textParts.push(`Catch ${specGroup.count} ${specGroup.rarity} ${speciesList} ${countDisplay(caughtCount, specGroup.count)}${getStatusHtml(caughtCount >= specGroup.count)}`);
          }
     }
