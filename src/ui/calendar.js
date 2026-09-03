@@ -112,21 +112,20 @@ export function showCalendar() {
         if (i < dayOfWeek) {
             // Already claimed
             cardStyle += ` opacity: 0.5; border-color: #333; filter: grayscale(100%);`;
-            overlayHtml = `<div style="font-weight: bold; color: #aaa; margin-top: 5px;">Collected</div>`;
+            overlayHtml = `<div style="font-size: 20px; margin-top: 5px;">✔️</div>`;
         } else if (i === dayOfWeek) {
             if (isAvailable) {
                 // Claimable today
                 cardStyle += ` border-color: #4CAF50; cursor: pointer; background: rgba(0,100,0,0.6); box-shadow: 0 0 10px #4CAF50;`;
-                overlayHtml = `<button style="margin-top: 5px; padding: 5px 10px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Claim</button>`;
                 onClickHtml = `onclick="window.claimDailyReward(${i})"`;
             } else {
                 // Already claimed today, show this slot as collected
                 cardStyle += ` opacity: 0.5; border-color: #333; filter: grayscale(100%);`;
-                overlayHtml = `<div style="font-weight: bold; color: #aaa; margin-top: 5px;">Collected</div>`;
+                overlayHtml = `<div style="font-size: 20px; margin-top: 5px;">✔️</div>`;
             }
         } else {
             // Future days
-            overlayHtml = `<div style="color: #888; margin-top: 5px; font-size: 12px;">Day ${i+1}</div>`;
+            overlayHtml = '';
         }
 
         let itemsHtml = '';
