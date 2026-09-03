@@ -30,6 +30,7 @@ export const TYPE_COLORS = {
 import { updateTopbar } from './ui/topbar.js';
 import { updateSidebar } from './ui/sidebar.js';
 import { updateBattleArena, showDamage } from './ui/battle.js';
+import { showCalendar } from './ui/calendar.js';
 import { showMap, navigateToLocation, showMapTooltip, hideMapTooltip } from './ui/map.js';
 import { showPokedex, showDexEntry } from './ui/pokedex.js';
 import { showPokemonStats, showPokemonStatsByUuid, evolvePokemon } from './ui/pokemonStats.js';
@@ -577,6 +578,7 @@ async function init() {
     bindBtn('btn-map', () => { if(!checkCombatLock()) showMap(); });
     bindBtn('btn-backpack', () => { if(!checkCombatLock()) showBackpack(); });
     bindBtn('btn-dex', () => { if(!checkCombatLock()) showPokedex(); });
+    bindBtn('btn-calendar', () => { if(!checkCombatLock()) showCalendar(); });
 
     window.showBackpackAndFocus = (tab) => {
         if(!checkCombatLock()) {
@@ -584,6 +586,8 @@ async function init() {
             renderBackpackTab(tab);
         }
     };
+
+    window.updateTopbar = updateTopbar;
 
     bindBtn('btn-stats', () => {
         if(checkCombatLock()) return;

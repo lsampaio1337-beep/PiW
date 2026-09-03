@@ -1,6 +1,6 @@
 import { state, globals } from '../state.js';
 import * as mathEngine from "../mathEngine.js";
-
+import { checkDailyRewardAvailable } from './calendar.js';
 
 function getPokemonSpriteByName(name) {
     if (state.config.pokemonData) {
@@ -107,4 +107,13 @@ export function updateTopbar() {
 
     const elChallengeText = document.getElementById('current-challenge-text');
     if (elChallengeText) elChallengeText.innerHTML = getChallengeText();
+
+    const calendarNotification = document.getElementById('calendar-notification');
+    if (calendarNotification) {
+        if (checkDailyRewardAvailable()) {
+            calendarNotification.style.display = 'block';
+        } else {
+            calendarNotification.style.display = 'none';
+        }
+    }
 }
