@@ -310,3 +310,7 @@ input[type="number"] {
 .glow-weak {
     /* No glow */
 }
+
+#player-sprite {
+    transform: scaleX(-1); /* Face right */
+}
