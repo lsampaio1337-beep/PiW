@@ -54,7 +54,7 @@ export function showMap() {
             else if (['mount_moon', 'rock_tunnel', 'cerulean_cave', 'seafoam_islands', 'diglett_s_cave'].includes(locationId)) markerImg = './Assets/Extra/Spot.png';
             else if (locationId === 'small_fishing_spot') markerImg = './Assets/Extra/Spot.png';
             else if (locationId === 'big_fishing_spot') markerImg = './Assets/Extra/Spot.png';
-            else if (locationId === 'fighting_dojo') markerImg = './Assets/Map/Spot_FightingDojo.png';
+            else if (locationId === 'fighting_dojo') markerImg = './Assets/Extra/Spot.png';
             else if (locationId === 'fossil_revival') markerImg = './Assets/Extra/Spot.png';
             else if (locationId === 'pok_mon_mansion') markerImg = './Assets/Map/Spot_PokeMansion.png';
             else if (locationId === 'trade_with_a_friend') markerImg = './Assets/Extra/Spot.png';
@@ -72,14 +72,17 @@ export function showMap() {
             let markerWidth = "24px";
             let markerHeight = "24px";
             let dropShadow = "none";
-            if (['professor_oak_lab', 'pokemon_center___market', 'indigo_plateu', 'safari_zone', 'casino', 'daycare'].includes(locationId)) {
+
+            if (locationId === 'pokemon_center___market') {
+                markerWidth = "32px";
+                markerHeight = "32px";
+            } else if (['professor_oak_lab', 'indigo_plateu', 'safari_zone', 'casino', 'daycare'].includes(locationId)) {
                 markerWidth = "28px";
                 markerHeight = "28px";
+            }
+
+            if (markerImg !== './Assets/Extra/Spot.png') {
                 dropShadow = "drop-shadow(0px 0px 3px rgba(0,0,0,0.8))";
-            } else if (['mount_moon', 'rock_tunnel', 'cerulean_cave', 'seafoam_islands', 'small_fishing_spot', 'big_fishing_spot', 'fighting_dojo', 'fossil_revival', 'pok_mon_mansion', 'trade_with_a_friend', 'diglett_s_cave'].includes(locationId)) {
-                // Ensure spot markers like diglett's cave are standard size
-                markerWidth = "24px";
-                markerHeight = "24px";
             }
 
 
