@@ -461,9 +461,8 @@ export function renderOakLab() {
     if (!oakLabDiv) return;
 
     // Check if player has pokemon
-    if (state.party.length === 0 && state.backpack.pokemon.length === 0) {
-        // still selecting starter, DO NOT overwrite innerHTML
-        return;
+    if (state.party.length === 0 && state.storage.length === 0) {
+        return; // still selecting starter, handled in index.html
     }
 
     oakLabDiv.innerHTML = `
