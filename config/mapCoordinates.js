@@ -7,12 +7,12 @@ const mapCoordinates = {
   "viridian_gym": {
     "name": "Viridian Gym",
     "x": 26.91,
-    "y": 43.25
+    "y": 42.25
   },
   "pokemon_center___market": {
-    "name": "Pokemon Center & Market",
+    "name": "PokeCenter & PokeMarket",
     "x": 25.92,
-    "y": 47.43
+    "y": 48.43
   },
   "victory_road": {
     "name": "Victory Road",

@@ -331,7 +331,7 @@ class BattleSystem {
             pokemonBase = this.state.config.pokemonData.find(p => p.id === selectedSpawn.pokemonId);
             level = Math.floor(Math.random() * (selectedSpawn.maxLevel - selectedSpawn.minLevel + 1)) + selectedSpawn.minLevel;
 
-            q = mathEngine.generateQuality(this.state.stats);
+            q = mathEngine.generateQuality(this.state.stats, this.state.casinoDoubleShiny);
             if (q.name === "Shiny") {
                 this.state.stats.shiniesSeen = (this.state.stats.shiniesSeen || 0) + 1;
                 if (!this.state.stats.seenShiniesSpecies) this.state.stats.seenShiniesSpecies = {};
@@ -570,11 +570,23 @@ class BattleSystem {
 
                 // Track specific typings
                 if (!this.state.stats.caughtSpecific) this.state.stats.caughtSpecific = {};
+                if (!this.state.stats.challengeCaughtSpecific) this.state.stats.challengeCaughtSpecific = {};
+
+                let qName = this.activeEncounter.qualityName || "Regular";
+
                 if (this.activeEncounter.types) {
-                     for (let t of this.activeEncounter.types) {
+                      for (let t of this.activeEncounter.types) {
                           this.state.stats.caughtSpecific[t] = (this.state.stats.caughtSpecific[t] || 0) + 1;
-                     }
+                          let typeRarityKey = t + "_" + qName;
+                          let typeAnyKey = t + "_Any";
+                          this.state.stats.challengeCaughtSpecific[typeRarityKey] = (this.state.stats.challengeCaughtSpecific[typeRarityKey] || 0) + 1;
+                          this.state.stats.challengeCaughtSpecific[typeAnyKey] = (this.state.stats.challengeCaughtSpecific[typeAnyKey] || 0) + 1;
+                      }
                 }
+
+                let speciesRarityKey = this.activeEncounter.name + "_" + qName;
+                this.state.stats.challengeCaughtSpecific[speciesRarityKey] = (this.state.stats.challengeCaughtSpecific[speciesRarityKey] || 0) + 1;
+
                 // console.log(`Caught ${this.activeEncounter.name}!`);
             }
         }
@@ -592,6 +604,16 @@ class BattleSystem {
         this.state.stats.battlesWon++;
 
         this.checkRouteUnlocks();
+
+        // Record the defeated boss (for wild bosses like Mewtwo, Articuno)
+        if (!this.state.stats.defeatedBosses) this.state.stats.defeatedBosses = {};
+        if (this.activeEncounter.qualityName === "Boss" || this.activeEncounter.qualityName === "Legendary") { // In case we add these tiers later, or just check the name directly
+            this.state.stats.defeatedBosses[this.activeEncounter.name] = true;
+        } else {
+             // For safety, just track the name of everything defeated in the wild just in case a challenge requires it
+             // but let's stick to the specific bosses for now
+             this.state.stats.defeatedBosses[this.activeEncounter.name] = true;
+        }
 
         if (this.gymState && this.gymState.isActive) {
             this.handleGymEnemyDefeat();
@@ -616,6 +638,10 @@ class BattleSystem {
                 // Defeated Gym!
                 if (!this.state.trainer.badges) this.state.trainer.badges = 0;
 
+                // Record the defeated boss
+                if (!this.state.stats.defeatedBosses) this.state.stats.defeatedBosses = {};
+                this.state.stats.defeatedBosses[gym.leader] = true;
+
                 const gymIndex = this.state.config.gyms.findIndex(g => g.name === gym.name);
                 if (gymIndex !== -1 && this.state.trainer.badges === gymIndex) {
                     this.state.trainer.badges++;
@@ -632,9 +658,22 @@ class BattleSystem {
     }
 
     checkRouteUnlocks() {
-        // Progression is handled via map clicks based on stats.battlesWon.
-        // We no longer forcefully move the player to the next route here.
-        // The user must open the map to travel to newly unlocked routes manually.
+        // Evaluate active challenge defeat trackers
+        if (!this.state.config || !this.state.config.unlocks) return;
+        let currentIndex = this.state.stats.completedChallenges || 0;
+        if (currentIndex >= this.state.config.unlocks.length) return;
+
+        let unlock = this.state.config.unlocks[currentIndex];
+        let req = unlock.requirements;
+
+        if (req.defeatCountRoute && req.defeatCountRoute.route === this.state.currentRoute) {
+            this.state.stats.challengeRouteDefeats = (this.state.stats.challengeRouteDefeats || 0) + 1;
+        }
+
+        if (req.defeatSpecific && this.activeEncounter.name === req.defeatSpecific.name) {
+             if (!this.state.stats.challengeSpecificDefeats) this.state.stats.challengeSpecificDefeats = {};
+             this.state.stats.challengeSpecificDefeats[this.activeEncounter.name] = (this.state.stats.challengeSpecificDefeats[this.activeEncounter.name] || 0) + 1;
+        }
     }
 
     grantXP(pokemon, amount) {

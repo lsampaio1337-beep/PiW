@@ -112,7 +112,7 @@ export function showCalendar() {
         if (i < dayOfWeek) {
             // Already claimed
             cardStyle += ` opacity: 0.5; border-color: #333; filter: grayscale(100%);`;
-            overlayHtml = `<div style="font-size: 20px; margin-top: 5px;">✔️</div>`;
+            overlayHtml = '';
         } else if (i === dayOfWeek) {
             if (isAvailable) {
                 // Claimable today
@@ -121,7 +121,7 @@ export function showCalendar() {
             } else {
                 // Already claimed today, show this slot as collected
                 cardStyle += ` opacity: 0.5; border-color: #333; filter: grayscale(100%);`;
-                overlayHtml = `<div style="font-size: 20px; margin-top: 5px;">✔️</div>`;
+                overlayHtml = '';
             }
         } else {
             // Future days
