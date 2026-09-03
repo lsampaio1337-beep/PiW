@@ -2,22 +2,55 @@ import { state, globals } from '../state.js';
 import { updateUI } from '../ui.js';
 
 export function setupMarket(vCenter) {
+    vCenter.style.backgroundImage = "url('./Assets/BG/BG-PCPM.png')";
+    vCenter.style.backgroundSize = "cover";
+    vCenter.style.backgroundPosition = "center";
+    vCenter.style.backgroundRepeat = "no-repeat";
+    vCenter.style.height = "100%";
+    vCenter.style.width = "100%";
+    vCenter.style.position = "relative";
+
+    // Clear out old UI
+    vCenter.innerHTML = '';
+
+    // Create interactive overlay buttons (Transparent absolute positioned for realism, but let's just make nice visual buttons positioned over the desks)
     vCenter.innerHTML = `
-        <div style="background-color: rgba(0,0,0,0.8); display: inline-block; padding: 20px; margin-top: 50px; border-radius: 8px;">
-            <h2>Pokemon Center & Market</h2>
-            <div style="margin-top: 20px;">
-                <button id="btn-heal-all" style="padding: 10px 20px; font-size: 16px; margin-right: 10px;">Pokemon Center (Heal All)</button>
-                <button id="btn-market-buy" style="padding: 10px 20px; font-size: 16px;">Market (Buy Items)</button>
+        <!-- Left Side: PokeCenter -->
+        <button id="btn-heal-all" style="position: absolute; left: 15%; top: 50%; padding: 15px 30px; font-size: 18px; font-weight: bold; background: #e74c3c; color: white; border: 2px solid white; border-radius: 8px; cursor: pointer; transform: translate(-50%, -50%); box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+            Heal All Pokemon
+        </button>
+
+        <!-- Right Side: PokeMarket -->
+        <div style="position: absolute; right: 15%; top: 50%; transform: translate(50%, -50%); display: flex; flex-direction: column; gap: 15px;">
+            <button id="btn-market-buy" style="padding: 15px 30px; font-size: 18px; font-weight: bold; background: #3498db; color: white; border: 2px solid white; border-radius: 8px; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+                Buy Items
+            </button>
+            <button id="btn-market-sell" style="padding: 15px 30px; font-size: 18px; font-weight: bold; background: #2ecc71; color: white; border: 2px solid white; border-radius: 8px; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+                Sell Items / Pokemon
+            </button>
+        </div>
+
+        <!-- Market Buy Modal Container (Hidden by default) -->
+        <div id="market-buy-modal" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.9); padding: 20px; border-radius: 12px; border: 2px solid #3498db; width: 80%; max-width: 800px; max-height: 80%; overflow-y: auto; color: white; z-index: 100;">
+            <h2 style="text-align: center; margin-top: 0;">PokeMarket - Buy</h2>
+            <button onclick="document.getElementById('market-buy-modal').style.display='none'" style="position: absolute; top: 10px; right: 10px; background: red; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">Close</button>
+
+            <div style="text-align: center; margin-bottom: 20px;">
+                <button onclick="window.renderBuyTab('pokeballs')" style="padding: 8px 15px; margin: 0 5px; cursor: pointer;">Pokeballs</button>
+                <button onclick="window.renderBuyTab('potions')" style="padding: 8px 15px; margin: 0 5px; cursor: pointer;">Potions</button>
+                <button onclick="window.renderBuyTab('stones')" style="padding: 8px 15px; margin: 0 5px; cursor: pointer;">Stones</button>
             </div>
-            <div id="market-panel" style="margin-top: 20px; display: none; text-align: left; max-height: 300px; overflow-y: auto;">
-                <h3>Buy Items</h3>
-                <div id="market-items"></div>
+
+            <div style="text-align: center; margin-bottom: 20px; background: #222; padding: 15px; border-radius: 8px;">
+                <label>Purchase Quantity: </label>
+                <input type="number" id="global-buy-qty" value="1" min="1" onchange="window.updateBuyPrices()" style="width: 80px; padding: 5px; text-align: center; font-size: 16px;">
+            </div>
+
+            <div id="market-buy-items-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px;">
+                <!-- Items injected here -->
             </div>
         </div>
     `;
-    vCenter.style.backgroundSize = "cover";
-    vCenter.style.height = "100%";
-    vCenter.style.textAlign = "center";
 
     document.getElementById('btn-heal-all').onclick = () => {
         state.party.forEach(p => p.currentHp = p.maxHp);
@@ -26,75 +59,102 @@ export function setupMarket(vCenter) {
     };
 
     document.getElementById('btn-market-buy').onclick = () => {
-        const panel = document.getElementById('market-panel');
-        panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
-        if(panel.style.display === 'block') {
-            const itemsDiv = document.getElementById('market-items');
-            let itemsHtml = '<h4>Pokeballs</h4>';
+        document.getElementById('market-buy-modal').style.display = 'block';
+        window.renderBuyTab('pokeballs'); // Default tab
+    };
 
-            state.config.balance.items.pokeballs.forEach(b => {
-                if (state.backpack.pokeballs[b.name] !== undefined) {
-                    itemsHtml += `<div style="margin-bottom: 5px; display: flex; align-items: center; justify-content: space-between;">
-                        <span>${b.name} ($${b.price})</span>
-                        <div>
-                            <input type="number" id="buy-qty-${b.name.replace(/\\s+/g, '-')}" value="1" min="1" style="width: 50px; padding: 5px; margin-right: 5px;">
-                            <button onclick="window.buyItem('${b.name}', ${b.price}, 'pokeballs')">Buy</button>
-                        </div>
-                    </div>`;
-                }
-            });
-
-            itemsHtml += '<h4>Potions</h4>';
-
-            state.config.balance.items.potions.forEach(p => {
-                let inventoryName = p.name;
-                if (p.name === 'Regular Potion') inventoryName = 'Regular Potion';
-                if (p.name === 'Big') inventoryName = 'Big Potion';
-                if (p.name === 'Max Potion') return;
-
-                if (state.backpack.potions[inventoryName] !== undefined) {
-                    itemsHtml += `<div style="margin-bottom: 5px; display: flex; align-items: center; justify-content: space-between;">
-                        <span>${inventoryName} ($${p.price})</span>
-                        <div>
-                            <input type="number" id="buy-qty-${inventoryName.replace(/\\s+/g, '-')}" value="1" min="1" style="width: 50px; padding: 5px; margin-right: 5px;">
-                            <button onclick="window.buyItem('${inventoryName}', ${p.price}, 'potions')">Buy</button>
-                        </div>
-                    </div>`;
-                }
-            });
-
-            itemsHtml += '<h4>Stones</h4>';
-
-            const stonePrice = state.config.balance.items.stones.price;
-            Object.keys(state.backpack.stones).forEach(stoneName => {
-                itemsHtml += `<div style="margin-bottom: 5px; display: flex; align-items: center; justify-content: space-between;">
-                    <span>${stoneName} ($${stonePrice})</span>
-                    <div>
-                        <input type="number" id="buy-qty-${stoneName.replace(/\\s+/g, '-')}" value="1" min="1" style="width: 50px; padding: 5px; margin-right: 5px;">
-                        <button onclick="window.buyItem('${stoneName}', ${stonePrice}, 'stones')">Buy</button>
-                    </div>
-                </div>`;
-            });
-
-            itemsDiv.innerHTML = itemsHtml;
+    document.getElementById('btn-market-sell').onclick = () => {
+        if (window.startSellMode) {
+            window.startSellMode();
         }
     };
 }
 
-export function buyItem(itemId, cost, category) {
-    const inputEl = document.getElementById(`buy-qty-${itemId.replace(/\\s+/g, '-')}`);
-    if (!inputEl) return;
-    const quantity = parseInt(inputEl.value);
-    if (isNaN(quantity) || quantity <= 0) return;
+// Global functions for inline HTML calls in the buy modal
+window.renderBuyTab = function(category) {
+    const grid = document.getElementById('market-buy-items-grid');
+    if (!grid) return;
 
-    const totalCost = cost * quantity;
+    // Store active category for price updates
+    window.currentBuyCategory = category;
+
+    let html = '';
+
+    if (category === 'pokeballs') {
+        state.config.balance.items.pokeballs.forEach(b => {
+            html += generateBuyCard(b.name, b.price, `Efficiency: ${b.multiplier}x`, category, `Assets/Items/Pokeballs/${b.name}.png`);
+        });
+    } else if (category === 'potions') {
+        state.config.balance.items.potions.forEach(p => {
+            let inventoryName = p.name;
+            if (p.name === 'Regular Potion') inventoryName = 'Regular Potion';
+            if (p.name === 'Big') inventoryName = 'Big Potion';
+
+            html += generateBuyCard(inventoryName, p.price, `Heals: ${p.heal} HP`, category, `Assets/Items/Potions/${inventoryName}.png`);
+        });
+    } else if (category === 'stones') {
+        const stonePrice = state.config.balance.items.stones.price;
+        Object.keys(state.backpack.stones).forEach(stoneName => {
+            html += generateBuyCard(stoneName, stonePrice, "Evolves specific Pokemon", category, `Assets/Items/Stones/${stoneName}.png`);
+        });
+    }
+
+    grid.innerHTML = html;
+    window.updateBuyPrices();
+};
+
+function generateBuyCard(name, price, attribute, category, imgPath) {
+    // We store base price in a data attribute so we can dynamically update it
+    return `
+        <div onclick="window.confirmBuyItem('${name}', ${price}, '${category}')" style="background: #333; border: 2px solid #555; border-radius: 8px; padding: 15px; text-align: center; cursor: pointer; transition: transform 0.1s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+            <img src="${imgPath}" onerror="this.src='./Assets/Extra/Spot.png'" style="width: 64px; height: 64px; object-fit: contain; margin-bottom: 10px;">
+            <div style="font-weight: bold; font-size: 16px; margin-bottom: 5px;">${name}</div>
+            <div style="font-size: 12px; color: #aaa; margin-bottom: 10px;">${attribute}</div>
+            <div class="buy-price-display" data-base-price="${price}" style="color: #f1c40f; font-weight: bold; font-size: 18px;">
+                $${price}
+            </div>
+            <div style="margin-top: 10px; font-size: 12px; color: #3498db;">Click to Buy</div>
+        </div>
+    `;
+}
+
+window.updateBuyPrices = function() {
+    const qtyInput = document.getElementById('global-buy-qty');
+    if (!qtyInput) return;
+
+    let qty = parseInt(qtyInput.value);
+    if (isNaN(qty) || qty < 1) {
+        qty = 1;
+        qtyInput.value = 1;
+    }
+
+    const priceDisplays = document.querySelectorAll('.buy-price-display');
+    priceDisplays.forEach(el => {
+        const basePrice = parseInt(el.getAttribute('data-base-price'));
+        el.innerText = `$${(basePrice * qty).toLocaleString()}`;
+    });
+};
+
+window.confirmBuyItem = function(itemId, cost, category) {
+    const qtyInput = document.getElementById('global-buy-qty');
+    let qty = 1;
+    if (qtyInput) {
+        qty = parseInt(qtyInput.value);
+        if (isNaN(qty) || qty < 1) qty = 1;
+    }
+
+    const totalCost = cost * qty;
 
     if (state.trainer.money >= totalCost) {
         state.trainer.money -= totalCost;
-        state.backpack[category][itemId] += quantity;
+        if (state.backpack[category][itemId] !== undefined) {
+             state.backpack[category][itemId] += qty;
+        } else {
+             state.backpack[category][itemId] = qty;
+        }
         updateUI();
-        alert(`Bought ${quantity}x ${itemId} for $${totalCost}!`);
+        alert(`Bought ${qty}x ${itemId} for $${totalCost.toLocaleString()}!`);
     } else {
-        alert(`Not enough money! You need $${totalCost} but only have $${state.trainer.money}.`);
+        alert(`Not enough money! You need $${totalCost.toLocaleString()} but only have $${state.trainer.money.toLocaleString()}.`);
     }
-}
+};
