@@ -10,7 +10,7 @@ const mapCoordinates = {
     "y": 43.25
   },
   "pokemon_center___market": {
-    "name": "Pokemon Center & Market",
+    "name": "PokeCenter & PokeMarket",
     "x": 25.92,
     "y": 47.43
   },

@@ -513,7 +513,7 @@ async function init() {
                 // Switch view based on saved route
                 if (state.currentRoute === "Professor Oak Lab") {
                     switchView("PROF_OAK_LAB");
-                } else if (state.currentRoute === "Pokemon Center & Market") {
+                } else if (state.currentRoute === "PokeCenter & PokeMarket" || state.currentRoute === "Pokemon Center & Market") {
                     navigateToLocation(state.currentRoute);
                 } else if (state.currentRoute.includes("Gym") || state.currentRoute === "Indigo Plateu") {
                     navigateToLocation(state.currentRoute);

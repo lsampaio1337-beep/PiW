@@ -331,7 +331,7 @@ class BattleSystem {
             pokemonBase = this.state.config.pokemonData.find(p => p.id === selectedSpawn.pokemonId);
             level = Math.floor(Math.random() * (selectedSpawn.maxLevel - selectedSpawn.minLevel + 1)) + selectedSpawn.minLevel;
 
-            q = mathEngine.generateQuality(this.state.stats);
+            q = mathEngine.generateQuality(this.state.stats, this.state.casinoDoubleShiny);
             if (q.name === "Shiny") {
                 this.state.stats.shiniesSeen = (this.state.stats.shiniesSeen || 0) + 1;
                 if (!this.state.stats.seenShiniesSpecies) this.state.stats.seenShiniesSpecies = {};
