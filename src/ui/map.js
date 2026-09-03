@@ -144,31 +144,31 @@ export function navigateToLocation(locationName) {
         const btnContainer = document.getElementById("casino-buttons-container");
         if (btnContainer) {
             btnContainer.innerHTML = `
-                <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; padding: 15px;">
-                    <div style="position: relative; text-align: center; width: 100%; max-width: 200px;">
-                        <img src="./Assets/Extra/Casino Starter Troupe.png" alt="Starter Troupe" style="width: 100%; border-radius: 8px; border: 2px solid #555; display: block;">
-                        <div onclick="window.startCasinoEncounter(false, 'Casino - Starter Troupe')" style="position: absolute; top: 0; left: 0; width: 100%; height: 50%; cursor: pointer;" title="Standard Encounter ($10)"></div>
-                        <div onclick="window.startCasinoEncounter(true, 'Casino - Starter Troupe')" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 50%; cursor: pointer;" title="Special Encounter ($10)"></div>
+                <div style="display: flex; justify-content: space-evenly; align-items: center; width: 100%; height: 100%; padding: 15px; box-sizing: border-box;">
+                    <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
+                        <img src="./Assets/Extra/Casino Starter Troupe.png" alt="Starter Troupe" style="width: 100%; display: block;">
+                        <div onclick="window.startCasinoEncounter(false, 'Casino - Starter Troupe')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter ($10)"></div>
+                        <div onclick="window.startCasinoEncounter(true, 'Casino - Starter Troupe')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Special Encounter ($10)"></div>
                     </div>
-                    <div style="position: relative; text-align: center; width: 100%; max-width: 200px;">
-                        <img src="./Assets/Extra/Casino Mid Troupe.png" alt="Mid Troupe" style="width: 100%; border-radius: 8px; border: 2px solid #555; display: block;">
-                        <div onclick="window.startCasinoEncounter(false, 'Casino - Mid Troupe')" style="position: absolute; top: 0; left: 0; width: 100%; height: 50%; cursor: pointer;" title="Standard Encounter ($10)"></div>
-                        <div onclick="window.startCasinoEncounter(true, 'Casino - Mid Troupe')" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 50%; cursor: pointer;" title="Special Encounter ($10)"></div>
+                    <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
+                        <img src="./Assets/Extra/Casino Mid Troupe.png" alt="Mid Troupe" style="width: 100%; display: block;">
+                        <div onclick="window.startCasinoEncounter(false, 'Casino - Mid Troupe')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter ($10)"></div>
+                        <div onclick="window.startCasinoEncounter(true, 'Casino - Mid Troupe')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Special Encounter ($10)"></div>
                     </div>
-                    <div style="position: relative; text-align: center; width: 100%; max-width: 200px;">
-                        <img src="./Assets/Extra/Casino Late Troupe.png" alt="Late Troupe" style="width: 100%; border-radius: 8px; border: 2px solid #555; display: block;">
-                        <div onclick="window.startCasinoEncounter(false, 'Casino - Late Troupe')" style="position: absolute; top: 0; left: 0; width: 100%; height: 50%; cursor: pointer;" title="Standard Encounter ($10)"></div>
-                        <div onclick="window.startCasinoEncounter(true, 'Casino - Late Troupe')" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 50%; cursor: pointer;" title="Special Encounter ($10)"></div>
+                    <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
+                        <img src="./Assets/Extra/Casino Late Troupe.png" alt="Late Troupe" style="width: 100%; display: block;">
+                        <div onclick="window.startCasinoEncounter(false, 'Casino - Late Troupe')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter ($10)"></div>
+                        <div onclick="window.startCasinoEncounter(true, 'Casino - Late Troupe')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Special Encounter ($10)"></div>
                     </div>
-                    <div style="position: relative; text-align: center; width: 100%; max-width: 200px;">
-                        <img src="./Assets/Extra/Casino Eeveelutions.png" alt="Eeveelutions" style="width: 100%; border-radius: 8px; border: 2px solid #555; display: block;">
-                        <div onclick="window.startCasinoEncounter(false, 'Casino - Eeveelutions')" style="position: absolute; top: 0; left: 0; width: 100%; height: 50%; cursor: pointer;" title="Standard Encounter ($10)"></div>
-                        <div onclick="window.startCasinoEncounter(true, 'Casino - Eeveelutions')" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 50%; cursor: pointer;" title="Special Encounter ($10)"></div>
+                    <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
+                        <img src="./Assets/Extra/Casino Eeveelutions.png" alt="Eeveelutions" style="width: 100%; display: block;">
+                        <div onclick="window.startCasinoEncounter(false, 'Casino - Eeveelutions')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter ($10)"></div>
+                        <div onclick="window.startCasinoEncounter(true, 'Casino - Eeveelutions')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Special Encounter ($10)"></div>
                     </div>
-                    <div style="position: relative; text-align: center; width: 100%; max-width: 200px;">
-                        <img src="./Assets/Extra/Casino Special Spot.png" alt="Special Spot" style="width: 100%; border-radius: 8px; border: 2px solid #555; display: block;">
-                        <div onclick="window.startCasinoEncounter(false, 'Casino - Special Spot')" style="position: absolute; top: 0; left: 0; width: 100%; height: 50%; cursor: pointer;" title="Standard Encounter ($10)"></div>
-                        <div onclick="window.startCasinoEncounter(true, 'Casino - Special Spot')" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 50%; cursor: pointer;" title="Special Encounter ($10)"></div>
+                    <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
+                        <img src="./Assets/Extra/Casino Special Spot.png" alt="Special Spot" style="width: 100%; display: block;">
+                        <div onclick="window.startCasinoEncounter(false, 'Casino - Special Spot')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter ($10)"></div>
+                        <div onclick="window.startCasinoEncounter(true, 'Casino - Special Spot')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Special Encounter ($10)"></div>
                     </div>
                 </div>
             `;
