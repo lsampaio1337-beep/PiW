@@ -72,12 +72,12 @@ export function showBonusCandyModal() {
                 </div>
             </div>
 
-            <div style="margin-bottom: 20px; display: none;">
+            <div style="margin-bottom: 20px;">
                 <button onclick="window.cheatWhiteCandy()" style="padding: 5px 10px; background-color: #888; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 12px;">Cheat: +1 White Candy</button>
             </div>
 
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
-                ${renderCandyOption('Green Candy', '+1% Loot Probability and +1% Loot Quantity', 1, state.stats.greenCandies, (1 + 0.01 * (state.stats.greenCandies || 0)).toFixed(2) + 'x', 'LootCandy.png')}
+                ${renderCandyOption('Green Candy', '+1% Loot Probability and Quantity', 1, state.stats.greenCandies, (1 + 0.01 * (state.stats.greenCandies || 0)).toFixed(2) + 'x', 'LootCandy.png')}
                 ${renderCandyOption('Purple Candy', 'XP +1%', 2, state.stats.purpleCandies, (1 + 0.01 * (state.stats.purpleCandies || 0)).toFixed(2) + 'x', 'XPCandy.png')}
                 ${renderCandyOption('Black Yellow Candy', 'Catch +1%', 3, state.stats.blackYellowCandies, (1 + 0.01 * (state.stats.blackYellowCandies || 0)).toFixed(2) + 'x', 'CatchCandy.png')}
                 ${renderCandyOption('Rainbow Candy', 'Shiny +1roll', 5, state.stats.rainbowCandies, '+' + (state.stats.rainbowCandies || 0) + ' rolls', 'ShinyCandy.png')}
@@ -92,14 +92,22 @@ export function showBonusCandyModal() {
         </div>
     `;
 
-    showModal("Bonus Candy", html);
+    showModal(null, html);
 }
 
 function renderCandyOption(color, effectText, cost, currentOwned, currentEffect, imageFile) {
     const owned = currentOwned || 0;
+
+    let alignmentStyle = '';
+    if (color === 'Green Candy' || color === 'Black Yellow Candy') {
+        alignmentStyle = 'right: 10px;';
+    } else {
+        alignmentStyle = 'left: 10px;';
+    }
+
     return `
         <div style="background-color: #222; border: 1px solid #444; border-radius: 8px; padding: 15px; display: flex; flex-direction: column; align-items: center; position: relative;">
-            <img src="Assets/Extra/${imageFile}" onclick="window.buyBonusCandy('${color}', ${cost})" style="width: 40px; height: 40px; position: absolute; top: 10px; right: 10px; cursor: pointer; border-radius: 5px; box-shadow: 0 0 5px rgba(255,255,255,0.5);" onerror="this.style.display='none'" title="Click to buy ${color}">
+            <img src="Assets/Extra/${imageFile}" onclick="window.buyBonusCandy('${color}', ${cost})" style="width: 60px; height: 60px; position: absolute; top: 50%; transform: translateY(-50%); ${alignmentStyle} cursor: pointer; border-radius: 5px; box-shadow: 0 0 5px rgba(255,255,255,0.5);" onerror="this.style.display='none'" title="Click to buy ${color}">
             <div style="font-size: 18px; font-weight: bold; margin-bottom: 5px; color: ${getColorHex(color)}; text-shadow: 1px 1px 2px black;">${color}</div>
             <div style="font-size: 14px; margin-bottom: 5px; text-align: center;">Effect: ${effectText}</div>
             <div style="font-size: 14px; margin-bottom: 10px;">Cost: ${cost} White</div>

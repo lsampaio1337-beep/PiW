@@ -27,16 +27,7 @@ def run_cuj(page):
     """)
     page.wait_for_timeout(1000)
 
-    # Click via coordinates based on approximate layout to bypass module DOM issues
-    # Find the progress bar to claim white candy
-    page.mouse.click(400, 300)
-    page.wait_for_timeout(1000)
-
-    # Click the green candy to buy it
-    page.mouse.click(360, 420)
-    page.wait_for_timeout(1000)
-
-    page.screenshot(path="verification/screenshots/verification.png")
+    page.screenshot(path="verification/screenshots/verification2.png")
     page.wait_for_timeout(1000)
 
 if __name__ == "__main__":
