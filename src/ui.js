@@ -585,6 +585,65 @@ async function init() {
         }
     };
 
+    bindBtn('btn-gift', () => {
+        if(checkCombatLock()) return;
+        if (!state.gifts || state.gifts.length === 0) {
+            showModal("Gifts", "<p>No gifts to claim right now!</p>");
+            return;
+        }
+
+        let giftsHtml = '<div style="display: flex; gap: 10px; margin-top: 10px; justify-content: center; flex-wrap: wrap;">';
+        state.gifts.forEach((badge, index) => {
+            const gymIndex = state.config.gyms.findIndex(g => g.name === badge);
+            let badgeImg = '';
+            if (gymIndex !== -1) {
+                badgeImg = `<img src="./Assets/Badges/Badge Kanto ${gymIndex + 1}.png" style="width: 40px; height: 40px;" title="${badge} Badge">`;
+            } else {
+                badgeImg = badge; // Fallback
+            }
+
+            giftsHtml += `
+                <div style="text-align: center; border: 1px solid #444; border-radius: 5px; padding: 10px; background: rgba(0,0,0,0.5); cursor: pointer;" onclick="window.claimGift(${index})">
+                    ${badgeImg}<br>
+                    <span style="font-size: 12px;">${badge} Badge</span><br>
+                    <button style="margin-top: 5px; cursor: pointer;">Claim</button>
+                </div>
+            `;
+        });
+        giftsHtml += '</div>';
+
+        showModal("Gifts", `
+            <h3>You have unclaimed gifts!</h3>
+            ${giftsHtml}
+        `);
+    });
+
+    window.claimGift = (index) => {
+        if (!state.gifts || !state.gifts[index]) return;
+
+        const badgeName = state.gifts[index];
+        const gymIndex = state.config.gyms.findIndex(g => g.name === badgeName);
+
+        if (gymIndex !== -1) {
+            if (!state.trainer.badges) state.trainer.badges = 0;
+            if (state.trainer.badges === gymIndex) {
+                state.trainer.badges++;
+            }
+        }
+
+        // Remove from gifts array
+        state.gifts.splice(index, 1);
+
+        updateUI();
+
+        // Refresh modal or close if empty
+        if (state.gifts.length > 0) {
+            document.getElementById('btn-gift').click();
+        } else {
+            window.closeModal();
+        }
+    };
+
     bindBtn('btn-stats', () => {
         if(checkCombatLock()) return;
         let badgesHtml = '<div style="display: flex; gap: 10px; margin-top: 10px; justify-content: center; flex-wrap: wrap;">';

@@ -107,4 +107,11 @@ export function updateTopbar() {
 
     const elChallengeText = document.getElementById('current-challenge-text');
     if (elChallengeText) elChallengeText.innerHTML = getChallengeText();
+
+    // Handle Gift icon visibility
+    if (state.stats.giftUnlocked) {
+        document.getElementById('btn-gift').style.display = 'inline-block';
+    } else {
+        document.getElementById('btn-gift').style.display = 'none';
+    }
 }

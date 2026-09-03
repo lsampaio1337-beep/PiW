@@ -3,6 +3,7 @@ export const state = {
         money: 0,
         badges: 0
     },
+    gifts: [],
     party: [],
     box: [],
     storage: [],
@@ -21,6 +22,7 @@ export const state = {
         }
     },
     stats: {
+        giftUnlocked: false,
         battlesWon: 0,
         caught: 0,
         shiniesSeen: 0,

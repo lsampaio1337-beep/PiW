@@ -355,12 +355,7 @@ export function navigateToLocation(locationName) {
 
         let buttonHtml = '';
         if (gymConfig) {
-            const playerLvl = state.party[0] ? state.party[0].level : 1;
-            if (playerLvl < gymConfig.levelRequirement) {
-                buttonHtml = `<p style="color: red;">Level ${gymConfig.levelRequirement} required to challenge this Gym.</p>`;
-            } else {
-                buttonHtml = `<button onclick="window.startGymBattle('${lookupName}')" style="padding: 10px 20px; font-size: 16px; margin-top: 10px; cursor: pointer;">Challenge ${locationName}</button>`;
-            }
+            buttonHtml = `<button onclick="window.startGymBattle('${lookupName}')" style="padding: 10px 20px; font-size: 16px; margin-top: 10px; cursor: pointer;">Challenge ${locationName}</button>`;
         }
 
         vGym.innerHTML = `
@@ -405,7 +400,6 @@ export function showMapTooltip(e, locationName) {
             const gym = state.config.gyms.find(g => g.name === lookupName);
             if (gym) {
                 info += `Leader: ${gym.leader}<br>`;
-                info += `Lvl Req: ${gym.levelRequirement}<br>`;
                 info += `Trainers: ${gym.trainers.length - 1}<br>`;
             }
         }

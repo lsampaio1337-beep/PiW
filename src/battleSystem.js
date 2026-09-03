@@ -99,9 +99,21 @@ class BattleSystem {
         const trainer = gym.trainers[this.gymState.currentTrainerIndex];
 
         if (trainer) {
+            let trainerListHtml = `<div id="gym-trainer-list" style="margin-bottom: 20px;">`;
+            gym.trainers.forEach((t, i) => {
+                if (i < this.gymState.currentTrainerIndex) {
+                    trainerListHtml += `<button disabled style="padding: 10px 20px; font-size: 16px; margin: 5px; opacity: 0.5;">${t.name} (Defeated)</button><br>`;
+                } else if (i === this.gymState.currentTrainerIndex) {
+                    trainerListHtml += `<button id="btn-start-gym-battle" onclick="window.battleEngine.startNextGymBattle()" style="padding: 10px 20px; font-size: 16px; margin: 5px; cursor: pointer;">Battle ${t.name}</button><br>`;
+                } else {
+                    trainerListHtml += `<button disabled style="padding: 10px 20px; font-size: 16px; margin: 5px; opacity: 0.5;">${t.name} (Locked)</button><br>`;
+                }
+            });
+            trainerListHtml += `</div>`;
+
             // Let's add sprites and damage numbers to gym battles!
             contentArea.innerHTML = `
-                <p>Next Opponent: ${trainer.name}</p>
+                ${trainerListHtml}
 
                 <div id="gym-battle-area" style="display: none; margin-top: 20px; margin-bottom: 20px; position: relative;">
                     <div style="display: flex; justify-content: space-between; align-items: flex-end; height: 150px; background: rgba(0,0,0,0.3); border: 2px solid #555; border-radius: 10px; padding: 20px;">
@@ -132,7 +144,6 @@ class BattleSystem {
                     </div>
                 </div>
 
-                <button id="btn-start-gym-battle" onclick="window.battleEngine.startNextGymBattle()" style="padding: 10px 20px; font-size: 16px; cursor: pointer;">Battle ${trainer.name}</button>
                 <br><br>
                 <button onclick="window.battleEngine.stopGymBattle()" style="padding: 5px 10px; background: #e74c3c; border: none; color: white; border-radius: 3px; cursor: pointer;">Flee Gym</button>
             `;
@@ -141,7 +152,8 @@ class BattleSystem {
 
             // Re-bind to use our special gym start func that toggles visibility
             window.battleEngine.startNextGymBattle = () => {
-                document.getElementById('btn-start-gym-battle').style.display = 'none';
+                const trainerList = document.getElementById('gym-trainer-list');
+                if (trainerList) trainerList.style.display = 'none';
                 document.getElementById('gym-battle-area').style.display = 'block';
                 this.searchNext();
             };
@@ -149,7 +161,7 @@ class BattleSystem {
             // Gym completed
             contentArea.innerHTML = `
                 <h3>You defeated ${gym.leader}!</h3>
-                <p>You earned the ${gym.name} badge.</p>
+                <p>Gym fully defeated!</p>
                 <button onclick="window.battleEngine.stopGymBattle()" style="padding: 10px 20px; cursor: pointer;">Leave</button>
             `;
             window.battleEngine = this;
@@ -616,13 +628,27 @@ class BattleSystem {
                 // Defeated Gym!
                 if (!this.state.trainer.badges) this.state.trainer.badges = 0;
 
+                // Unlock gifts permanently
+                this.state.stats.giftUnlocked = true;
+
                 const gymIndex = this.state.config.gyms.findIndex(g => g.name === gym.name);
                 if (gymIndex !== -1 && this.state.trainer.badges === gymIndex) {
-                    this.state.trainer.badges++;
+                    // Send badge to gifts if not already there
+                    const nextBadgeName = gym.name;
+                    if (!this.state.gifts) this.state.gifts = [];
+                    if (!this.state.gifts.includes(nextBadgeName)) {
+                        this.state.gifts.push(nextBadgeName);
+                    }
                 }
 
-                // Bonus money for winning
-                this.state.trainer.money += 1000 * this.state.trainer.badges;
+                // Bonus money for winning is now tied to current badges.
+                const bonusMulti = Math.max(1, this.state.trainer.badges);
+                this.state.trainer.money += 1000 * bonusMulti;
+
+                // Reset trainer index so next time player visits the gym it starts from beginning
+                this.gymState.currentTrainerIndex = 0;
+
+                this.stopGymBattle();
             }
             this.updateGymUI();
         } else {
