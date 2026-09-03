@@ -33,6 +33,7 @@ import { updateBattleArena, showDamage } from './ui/battle.js';
 import { showMap, navigateToLocation, showMapTooltip, hideMapTooltip } from './ui/map.js';
 import { showPokedex, showDexEntry } from './ui/pokedex.js';
 import { showPokemonStats, showPokemonStatsByUuid, evolvePokemon } from './ui/pokemonStats.js';
+import { showBonusCandyModal } from './ui/bonusCandy.js';
 import { showSettings, updateGameSpeed, addMoney, addXp, exportLog, showAddPokemonModal, forceNextEncounter, activateCheat } from './ui/settings.js';
 import { setupMarket, buyItem } from './ui/market.js';
 import { showBackpack, renderBackpackTab, setActiveItem } from './ui/backpack/index.js';
@@ -577,6 +578,7 @@ async function init() {
     bindBtn('btn-map', () => { if(!checkCombatLock()) showMap(); });
     bindBtn('btn-backpack', () => { if(!checkCombatLock()) showBackpack(); });
     bindBtn('btn-dex', () => { if(!checkCombatLock()) showPokedex(); });
+    bindBtn('btn-bonus-candy', () => { if(!checkCombatLock()) showBonusCandyModal(); });
 
     window.showBackpackAndFocus = (tab) => {
         if(!checkCombatLock()) {

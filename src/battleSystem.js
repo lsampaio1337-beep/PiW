@@ -539,6 +539,9 @@ class BattleSystem {
         const leader = this.state.party[0];
         const ev = this.activeEncounter.ev;
 
+        // Bonus Candy Defeats Tracker
+        this.state.stats.bonusCandyDefeats = (this.state.stats.bonusCandyDefeats || 0) + 1;
+
         // Auto Throw Pokeball logic (disable in gyms)
         if (this.state.settings.autoCatch && (!this.gymState || !this.gymState.isActive)) {
             const caught = this.throwPokeball();
@@ -585,9 +588,29 @@ class BattleSystem {
             this.state.dayCareRef.grantPassiveXP(ev, (pkmn, amt) => this.grantXP(pkmn, amt));
         }
 
+        // Loot Bonus Calculation
+        const lootMultiplier = Math.pow(1.01, this.state.stats.greenCandies || 0);
+
+        // Stone drops based on quality
+        let dropChance = 0;
+        if (this.activeEncounter.qualityName === "Regular") dropChance = 1;
+        else if (this.activeEncounter.qualityName === "Uncommon") dropChance = 2;
+        else if (this.activeEncounter.qualityName === "Rare") dropChance = 3;
+        else if (this.activeEncounter.qualityName === "Epic") dropChance = 5;
+        else if (this.activeEncounter.qualityName === "Shiny") dropChance = 100;
+
+        if (dropChance > 0) {
+            if ((Math.random() * 100) <= (dropChance * lootMultiplier)) {
+                // Drop a random stone
+                const stonesList = Object.keys(this.state.backpack.stones);
+                const randomStone = stonesList[Math.floor(Math.random() * stonesList.length)];
+                this.state.backpack.stones[randomStone] = (this.state.backpack.stones[randomStone] || 0) + 1;
+            }
+        }
+
         // Award XP and Money (EV)
         this.grantXP(leader, ev);
-        this.state.trainer.money += Math.floor(ev);
+        this.state.trainer.money += Math.floor(ev * lootMultiplier);
 
         this.state.stats.battlesWon++;
 
@@ -645,7 +668,10 @@ class BattleSystem {
         if (levelTaskTier >= 3 && pokemon.level < 45) bonus += 0.5;
         if (levelTaskTier >= 4 && pokemon.level < 60) bonus += 0.5;
         if (levelTaskTier >= 5 && pokemon.level < 75) bonus += 0.5;
-        amount = amount * (1 + bonus);
+
+        // Purple Candy XP Bonus
+        const xpMultiplier = Math.pow(1.01, this.state.stats.purpleCandies || 0);
+        amount = amount * (1 + bonus) * xpMultiplier;
 
         pokemon.xp += amount;
 
