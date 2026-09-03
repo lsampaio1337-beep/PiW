@@ -592,6 +592,16 @@ class BattleSystem {
         this.state.stats.battlesWon++;
         this.checkRouteUnlocks();
 
+        // Record the defeated boss (for wild bosses like Mewtwo, Articuno)
+        if (!this.state.stats.defeatedBosses) this.state.stats.defeatedBosses = {};
+        if (this.activeEncounter.qualityName === "Boss" || this.activeEncounter.qualityName === "Legendary") { // In case we add these tiers later, or just check the name directly
+            this.state.stats.defeatedBosses[this.activeEncounter.name] = true;
+        } else {
+             // For safety, just track the name of everything defeated in the wild just in case a challenge requires it
+             // but let's stick to the specific bosses for now
+             this.state.stats.defeatedBosses[this.activeEncounter.name] = true;
+        }
+
         if (this.gymState && this.gymState.isActive) {
             this.handleGymEnemyDefeat();
         } else {
@@ -614,6 +624,10 @@ class BattleSystem {
             if (this.gymState.currentTrainerIndex >= gym.trainers.length) {
                 // Defeated Gym!
                 if (!this.state.trainer.badges) this.state.trainer.badges = 0;
+
+                // Record the defeated boss
+                if (!this.state.stats.defeatedBosses) this.state.stats.defeatedBosses = {};
+                this.state.stats.defeatedBosses[gym.leader] = true;
 
                 const gymIndex = this.state.config.gyms.findIndex(g => g.name === gym.name);
                 if (gymIndex !== -1 && this.state.trainer.badges === gymIndex) {

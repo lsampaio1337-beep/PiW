@@ -80,7 +80,7 @@ window.showChallengesModal = function() {
 
     let currentIndex = state.stats.completedChallenges || 0;
 
-    let html = `<div style="display:flex; flex-direction:column; gap:15px; text-align:left; max-height: 70vh; overflow-y: auto; padding-right: 10px;">`;
+    let html = `<div style="display:flex; flex-direction:column; gap:15px; text-align:left;">`;
 
     // Active Challenge Sector
     html += `<div style="border: 1px solid #555; padding: 10px; border-radius: 5px; background-color: rgba(0,0,0,0.5);">
@@ -120,7 +120,7 @@ window.showChallengesModal = function() {
                     <h3 style="margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; font-size: 16px;">${pastTitle}</h3>
                     <div style="display: flex; flex-direction: column; gap: 10px;">`;
 
-        for (let i = 0; i < currentIndex; i++) {
+        for (let i = currentIndex - 1; i >= 0; i--) {
              let pUnlock = state.config.unlocks[i];
              // Fake the data slightly to make it look completed, though getChallengeData will naturally evaluate to true
              let pData = getChallengeData(pUnlock);
@@ -130,8 +130,8 @@ window.showChallengesModal = function() {
                           <div style="color: #4CAF50; font-weight: bold; margin-bottom: 5px;">Challenge ${i+1}</div>
                           <ul style="margin-top: 0; margin-bottom: 5px; padding-left: 20px; font-size: 14px;">`;
              for (let part of pData.textParts) {
-                  // replace any ❌ with ✔️ to show it was completed
-                  part = part.replace(/❌/g, '✔️').replace(/color: red/g, 'color: green');
+                  // Ensure we show them as complete using words
+                  part = part.replace(/\[Incomplete\]/g, '[Complete]').replace(/color: red/g, 'color: green');
                   html += `<li>${part}</li>`;
              }
              html += `</ul>
@@ -169,7 +169,7 @@ export function showModal(title, htmlContent) {
     let rightCol = document.getElementById('modal-overlay');
     let contentPanel = document.getElementById('content-panel');
     rightCol.style.display = 'flex';
-    contentPanel.innerHTML = `<h2>${title}</h2>${htmlContent}<br><br><button onclick="document.getElementById('modal-overlay').style.display='none'">Close</button>`;
+    contentPanel.innerHTML = `<h2>${title}</h2>${htmlContent}`;
 }
 
 const oakTasks = {

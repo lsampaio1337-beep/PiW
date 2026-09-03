@@ -2,48 +2,23 @@ import { state, globals } from '../state.js';
 import * as mathEngine from "../mathEngine.js";
 
 
-function getPokemonSpriteByName(name) {
-    if (state.config.pokemonData) {
-        let p = state.config.pokemonData.find(pd => pd.name === name);
-        if (p) return `<img src="Assets/Pokemon Sprites/${p.id}.png" style="width: 30px; height: 30px; vertical-align: middle;">`;
-    }
-    return name;
-}
-
-function getGymBadgeByName(name) {
-    const badgeMap = {
-        "Brock": "Badge Kanto 1",
-        "Misty": "Badge Kanto 2",
-        "Lt. Surge": "Badge Kanto 3",
-        "Erika": "Badge Kanto 4",
-        "Koga": "Badge Kanto 5",
-        "Sabrina": "Badge Kanto 6",
-        "Blaine": "Badge Kanto 7",
-        "Giovanni": "Badge Kanto 8"
-    };
-    if (badgeMap[name]) {
-        return `<img src="Assets/Badges/${badgeMap[name]}.png" style="width: 30px; height: 30px; vertical-align: middle;">`;
-    }
-    return getPokemonSpriteByName(name); // Fallback to sprite for Elite Four or Boss Pokemon
-}
-
 export function getChallengeData(unlock) {
     if (!unlock) return { isMet: false, textParts: [] };
     let req = unlock.requirements;
     let isMet = true;
     let textParts = [];
 
-    const pokeballIcon = `<img src="Assets/Items/Balls/Pokeball.png" style="width: 20px; height: 20px; vertical-align: middle;">`;
-
     if (req.defeatCount) {
         if (state.stats.battlesWon < req.defeatCount) isMet = false;
-        textParts.push(`<span style="position: relative; display: inline-block; vertical-align: middle;"><span style="color: red; font-size: 24px; font-weight: bold; text-shadow: 1px 1px 2px black;">❌</span></span> ${req.defeatCount} Pokemons (${state.stats.battlesWon}/${req.defeatCount})`);
+        let status = (state.stats.battlesWon >= req.defeatCount) ? "[Complete]" : "[Incomplete]";
+        textParts.push(`Defeat ${req.defeatCount} Pokemons (${state.stats.battlesWon}/${req.defeatCount}) <span style="color: ${status === '[Complete]' ? 'green' : 'red'};">${status}</span>`);
     }
     if (req.catchSpecies) {
         for (let spec of req.catchSpecies) {
             let caughtCount = state.stats.caughtSpecies ? (state.stats.caughtSpecies[spec.species] || 0) : 0;
             if (caughtCount < spec.count) isMet = false;
-            textParts.push(`${pokeballIcon} ${spec.count} ${getPokemonSpriteByName(spec.species)} (${caughtCount}/${spec.count})`);
+            let status = (caughtCount >= spec.count) ? "[Complete]" : "[Incomplete]";
+            textParts.push(`Catch ${spec.count} ${spec.species} (${caughtCount}/${spec.count}) <span style="color: ${status === '[Complete]' ? 'green' : 'red'};">${status}</span>`);
         }
     }
     if (req.catchSpeciesAnyOf) {
@@ -53,29 +28,38 @@ export function getChallengeData(unlock) {
                  caughtCount += state.stats.caughtSpecies ? (state.stats.caughtSpecies[s] || 0) : 0;
              }
              if (caughtCount < specGroup.count) isMet = false;
-             let sprites = specGroup.species.map(s => getPokemonSpriteByName(s)).join('/');
-             textParts.push(`${pokeballIcon} ${specGroup.count} of ${sprites} (${caughtCount}/${specGroup.count})`);
+             let speciesList = specGroup.species.join(' or ');
+             let status = (caughtCount >= specGroup.count) ? "[Complete]" : "[Incomplete]";
+             textParts.push(`Catch ${specGroup.count} of ${speciesList} (${caughtCount}/${specGroup.count}) <span style="color: ${status === '[Complete]' ? 'green' : 'red'};">${status}</span>`);
          }
     }
     if (req.catchByRarityAndType) {
         let caughtCount = state.stats.caughtSpecific ? (state.stats.caughtSpecific[req.catchByRarityAndType.type] || 0) : 0;
         if (caughtCount < req.catchByRarityAndType.count) isMet = false;
-        textParts.push(`${pokeballIcon} ${req.catchByRarityAndType.count} ${req.catchByRarityAndType.rarity} ${req.catchByRarityAndType.type}-types (${caughtCount}/${req.catchByRarityAndType.count})`);
+        let status = (caughtCount >= req.catchByRarityAndType.count) ? "[Complete]" : "[Incomplete]";
+        textParts.push(`Catch ${req.catchByRarityAndType.count} ${req.catchByRarityAndType.rarity} ${req.catchByRarityAndType.type}-types (${caughtCount}/${req.catchByRarityAndType.count}) <span style="color: ${status === '[Complete]' ? 'green' : 'red'};">${status}</span>`);
     }
     if (req.defeatBoss) {
-         isMet = false;
-         let badgeOrSprite = getGymBadgeByName(req.defeatBoss.name);
-         textParts.push(`<span style="position: relative; display: inline-block; vertical-align: middle;">${badgeOrSprite}<span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: red; font-size: 24px; font-weight: bold; text-shadow: 1px 1px 2px black;">❌</span></span> ${req.defeatBoss.name}`);
+         if (!state.stats.defeatedBosses || !state.stats.defeatedBosses[req.defeatBoss.name]) {
+             isMet = false;
+         }
+         let statusText = (state.stats.defeatedBosses && state.stats.defeatedBosses[req.defeatBoss.name]) ? "[Complete]" : "[Incomplete]";
+         textParts.push(`Defeat ${req.defeatBoss.name} <span style="color: ${statusText === '[Complete]' ? 'green' : 'red'};">${statusText}</span>`);
     }
     if (req.defeatBossesSequential) {
-         isMet = false;
-         textParts.push(`<span style="position: relative; display: inline-block; vertical-align: middle;"><span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: red; font-size: 24px; font-weight: bold; text-shadow: 1px 1px 2px black;">❌</span></span> Elite Four & Champion`);
+         // Elite four logic is not fully implemented in state yet, so just check badges or a specific flag
+         if (state.trainer.badges < 8 || !state.stats.defeatedBosses || !state.stats.defeatedBosses["Elite 4 Lorelei"]) {
+             isMet = false;
+         }
+         let statusText = isMet ? "[Complete]" : "[Incomplete]";
+         textParts.push(`Defeat Elite Four & Champion <span style="color: ${statusText === '[Complete]' ? 'green' : 'red'};">${statusText}</span>`);
     }
     if (req.reachPokemonLevel) {
          let highestLvl = 0;
          state.party.forEach(p => { if(p.level > highestLvl) highestLvl = p.level; });
          if (highestLvl < req.reachPokemonLevel.minLevel) isMet = false;
-         textParts.push(`Reach Level ${req.reachPokemonLevel.minLevel} (${highestLvl}/${req.reachPokemonLevel.minLevel})`);
+         let statusText = (highestLvl >= req.reachPokemonLevel.minLevel) ? "[Complete]" : "[Incomplete]";
+         textParts.push(`Reach Level ${req.reachPokemonLevel.minLevel} (${highestLvl}/${req.reachPokemonLevel.minLevel}) <span style="color: ${statusText === '[Complete]' ? 'green' : 'red'};">${statusText}</span>`);
     }
 
     return { isMet, textParts };
@@ -96,5 +80,6 @@ export function updateTopbar() {
         navButtons.style.opacity = lockMenus ? '0.5' : '1.0';
     }
 
-    // Challenge text removed from topbar update since bottom-bar is gone
+
+
 }
