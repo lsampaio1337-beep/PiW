@@ -173,6 +173,9 @@ function renderDayCareSlot(container, p, battles, maxBattles, type) {
                         <span style="font-weight: bold; font-size: 12px; text-shadow: 1px 1px 1px rgba(0,0,0,0.8); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${p.name}</span>
                         <span style="font-size: 10px; text-shadow: 1px 1px 1px rgba(0,0,0,0.8);">Lv.${p.level}</span>
                     </div>
+                    <div style="display: flex; align-items: center; gap: 4px; pointer-events: auto; position: relative; z-index: 10;">
+                        <div onclick="event.stopPropagation(); window.showPokemonStatsByUuid('${p.uuid}')" style="cursor: pointer; background: #34495e; color: white; border-radius: 50%; width: 14px; height: 14px; text-align: center; line-height: 14px; font-size: 10px; font-weight: bold;" title="View Info">i</div>
+                    </div>
                 </div>
 
                 <!-- Middle Floor: Encounter Bar -->
