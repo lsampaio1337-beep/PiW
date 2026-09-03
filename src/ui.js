@@ -1,3 +1,4 @@
+import { getChallengeData } from './ui/topbar.js';
 
 import * as mathEngine from "./mathEngine.js";
 import BattleSystem from "./battleSystem.js";
@@ -67,13 +68,19 @@ window.activateCheat = activateCheat;
 window.dragStart = dragStart;
 window.completeChallenge = function() {
     state.stats.completedChallenges = (state.stats.completedChallenges || 0) + 1;
+
+    // Clear challenge specific tracking state
+    state.stats.challengeRouteDefeats = 0;
+    state.stats.challengeSpecificDefeats = {};
+    state.stats.challengeCaughtSpecific = {};
+
     updateUI();
     if (document.getElementById('modal-overlay').style.display !== 'none') {
         window.showChallengesModal(); // refresh modal
     }
 };
 
-import { getChallengeData } from './ui/topbar.js';
+
 
 window.showChallengesModal = function() {
     if (!state.config.unlocks) return;
@@ -131,7 +138,16 @@ window.showChallengesModal = function() {
                           <ul style="margin-top: 0; margin-bottom: 5px; padding-left: 20px; font-size: 14px;">`;
              for (let part of pData.textParts) {
                   // Ensure we show them as complete using words
-                  part = part.replace(/\[Incomplete\]/g, '[Complete]').replace(/color: red/g, 'color: green');
+
+                  // For past challenges, ensure they look complete and numbers match max requirements
+                  // The text might look like "Defeat 25 Pokémon on Route 1 (0/25)"
+                  // We extract the required count and force it to say (25/25) [Complete]
+                  part = part.replace(/\((\d+)\/(\d+)\)/, (match, p1, p2) => `(${p2}/${p2})`);
+                  if (!part.includes("[Complete]")) {
+                       part += ` <span style="color: green;">[Complete]</span>`;
+                  }
+                  part = part.replace(/color: red/g, 'color: green');
+
                   html += `<li>${part}</li>`;
              }
              html += `</ul>

@@ -570,11 +570,23 @@ class BattleSystem {
 
                 // Track specific typings
                 if (!this.state.stats.caughtSpecific) this.state.stats.caughtSpecific = {};
+                if (!this.state.stats.challengeCaughtSpecific) this.state.stats.challengeCaughtSpecific = {};
+
+                let qName = this.activeEncounter.qualityName || "Regular";
+
                 if (this.activeEncounter.types) {
-                     for (let t of this.activeEncounter.types) {
+                      for (let t of this.activeEncounter.types) {
                           this.state.stats.caughtSpecific[t] = (this.state.stats.caughtSpecific[t] || 0) + 1;
-                     }
+                          let typeRarityKey = t + "_" + qName;
+                          let typeAnyKey = t + "_Any";
+                          this.state.stats.challengeCaughtSpecific[typeRarityKey] = (this.state.stats.challengeCaughtSpecific[typeRarityKey] || 0) + 1;
+                          this.state.stats.challengeCaughtSpecific[typeAnyKey] = (this.state.stats.challengeCaughtSpecific[typeAnyKey] || 0) + 1;
+                      }
                 }
+
+                let speciesRarityKey = this.activeEncounter.name + "_" + qName;
+                this.state.stats.challengeCaughtSpecific[speciesRarityKey] = (this.state.stats.challengeCaughtSpecific[speciesRarityKey] || 0) + 1;
+
                 // console.log(`Caught ${this.activeEncounter.name}!`);
             }
         }
@@ -645,9 +657,22 @@ class BattleSystem {
     }
 
     checkRouteUnlocks() {
-        // Progression is handled via map clicks based on stats.battlesWon.
-        // We no longer forcefully move the player to the next route here.
-        // The user must open the map to travel to newly unlocked routes manually.
+        // Evaluate active challenge defeat trackers
+        if (!this.state.config || !this.state.config.unlocks) return;
+        let currentIndex = this.state.stats.completedChallenges || 0;
+        if (currentIndex >= this.state.config.unlocks.length) return;
+
+        let unlock = this.state.config.unlocks[currentIndex];
+        let req = unlock.requirements;
+
+        if (req.defeatCountRoute && req.defeatCountRoute.route === this.state.currentRoute) {
+            this.state.stats.challengeRouteDefeats = (this.state.stats.challengeRouteDefeats || 0) + 1;
+        }
+
+        if (req.defeatSpecific && this.activeEncounter.name === req.defeatSpecific.name) {
+             if (!this.state.stats.challengeSpecificDefeats) this.state.stats.challengeSpecificDefeats = {};
+             this.state.stats.challengeSpecificDefeats[this.activeEncounter.name] = (this.state.stats.challengeSpecificDefeats[this.activeEncounter.name] || 0) + 1;
+        }
     }
 
     grantXP(pokemon, amount) {
