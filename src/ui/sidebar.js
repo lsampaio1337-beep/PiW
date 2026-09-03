@@ -41,8 +41,9 @@ export function updateSidebar() {
             xpTextHtml = ``; // No text for level 100
         } else {
             xpTextHtml = `
-                <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center;">${Math.floor(xpPct)}%</div>
-                <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center;">${xpProgress}/${xpRequired}</div>
+                <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1;">${xpProgress}/${xpRequired}</div>
+                <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1; font-size: 8px; color: white;">XP</div>
+                <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1;">${Math.floor(xpPct)}%</div>
             `;
         }
 
@@ -77,7 +78,11 @@ export function updateSidebar() {
                     <!-- Middle Floor: HP Bar -->
                     <div style="width: 100%; height: 14px; background: #222; border: 1px solid #000; border-radius: 8px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: bold; color: white; text-shadow: 1px 1px 1px black, -1px -1px 1px black, 1px -1px 1px black, -1px 1px 1px black; box-shadow: inset 0px 1px 3px rgba(0,0,0,0.5);">
                         <div style="position: absolute; left: 0; top: 0; width: ${hpPct}%; height: 100%; background: ${hpColor}; z-index: 0; transition: width 0.3s, background 0.3s; border-radius: 8px;"></div>
-                        <span style="z-index: 1;">HP ${Math.floor(p.currentHp)}/${p.maxHp}</span>
+                        <div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: flex;">
+                            <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1;">${Math.floor(p.currentHp)}/${p.maxHp}</div>
+                            <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1; font-size: 8px; color: white;">HP</div>
+                            <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1;">${Math.floor(hpPct)}%</div>
+                        </div>
                     </div>
 
                     <!-- Base Floor: XP Bar -->
@@ -95,32 +100,103 @@ export function updateSidebar() {
 
     // Day Care UI updates
     if (state.dayCareRef) {
-        const breedProg = document.getElementById('breed-prog');
-        const trainProg = document.getElementById('train-prog');
-        if (breedProg) breedProg.innerText = `${state.dayCareRef.slot1.battles}/${state.dayCareRef.slot1.requiredBattles}`;
-        if (trainProg) trainProg.innerText = `${state.dayCareRef.slot2.battles}/${state.dayCareRef.slot2.requiredBattles}`;
-
-        const breedInfo = document.getElementById('breed-info');
-        const trainInfo = document.getElementById('train-info');
-
-        if (breedInfo) {
-            if (state.dayCareRef.slot1.isBreeding && state.dayCareRef.slot1.pokemon) {
-                breedInfo.innerText = `QValue = ${state.dayCareRef.slot1.pokemon.quality.toFixed(2)} + 0.01`;
-            } else if (state.dayCareRef.slot1.isFinished && state.dayCareRef.slot1.pokemon) {
-                breedInfo.innerText = `QValue = ${state.dayCareRef.slot1.pokemon.quality.toFixed(2)} (Finished)`;
-            } else {
-                breedInfo.innerText = '';
-            }
-        }
-
-        if (trainInfo) {
-            if (state.dayCareRef.slot2.pokemon) {
-                const cycles = state.dayCareRef.slot2.pokemon.trainingCyclesCompleted || 0;
-                const totalIV = state.dayCareRef.slot2.pokemon.ivs.hp + state.dayCareRef.slot2.pokemon.ivs.atk + state.dayCareRef.slot2.pokemon.ivs.def + state.dayCareRef.slot2.pokemon.ivs.spa + state.dayCareRef.slot2.pokemon.ivs.spd + state.dayCareRef.slot2.pokemon.ivs.spe;
-                trainInfo.innerText = `SumIV = ${totalIV - cycles} + ${cycles}`;
-            } else {
-                trainInfo.innerText = '';
-            }
-        }
+        renderDayCareSlot(document.getElementById('dc-slot1'), state.dayCareRef.slot1.pokemon, state.dayCareRef.slot1.battles, state.dayCareRef.slot1.requiredBattles, 'breed');
+        renderDayCareSlot(document.getElementById('dc-slot2'), state.dayCareRef.slot2.pokemon, state.dayCareRef.slot2.battles, state.dayCareRef.slot2.requiredBattles, 'train');
     }
+}
+
+function renderDayCareSlot(container, p, battles, maxBattles, type) {
+    if (!container) return;
+    if (!p) {
+        container.innerHTML = `<div style="font-size: 12px; color: #777; text-align: center; padding: 10px 0; border: 1px dashed #555; margin-bottom: 5px;">${type === 'breed' ? 'Breeding Slot Empty' : 'Training Slot Empty'}</div>`;
+        return;
+    }
+
+    const currentLevelXp = mathEngine.calculateTotalXP(p.level);
+    const nextLevelXp = mathEngine.calculateTotalXP(p.level + 1);
+    const xpProgress = Math.floor(p.xp) - currentLevelXp;
+    const xpRequired = nextLevelXp - currentLevelXp;
+
+    let xpPct = Math.min(100, (xpProgress / xpRequired) * 100);
+    let xpTextHtml = ``;
+    if (p.level === 100) {
+        xpPct = 100;
+        xpTextHtml = ``;
+    } else {
+        xpTextHtml = `
+            <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1;">${xpProgress}/${xpRequired}</div>
+            <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1; font-size: 8px; color: white;">XP</div>
+            <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1;">${Math.floor(xpPct)}%</div>
+        `;
+    }
+
+    let glowClass = "glow-weak";
+    if (p.qualityName === "Shiny") glowClass = "glow-shiny";
+    else if (p.qualityName === "Epic") glowClass = "glow-epic";
+    else if (p.qualityName === "Rare") glowClass = "glow-rare";
+    else if (p.qualityName === "Uncommon") glowClass = "glow-uncommon";
+    else if (p.qualityName === "Regular") glowClass = "glow-regular";
+
+    let progPct = Math.min(100, (battles / maxBattles) * 100);
+
+    let rightText = '';
+    let centerLabel = '';
+
+    if (type === 'breed') {
+        centerLabel = 'Q';
+        if (state.dayCareRef && state.dayCareRef.slot1 && state.dayCareRef.slot1.isFinished) {
+            const baseQ = (p.quality - 0.01).toFixed(2);
+            rightText = `${baseQ}+0.01`;
+        } else {
+            const baseQ = p.quality.toFixed(2);
+            rightText = `${baseQ}+0.00`;
+        }
+    } else if (type === 'train') {
+        centerLabel = 'SumIV';
+        const totalIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
+        const cycles = p.trainingCyclesCompleted || 0;
+        const initialIV = totalIV - cycles;
+        rightText = `${initialIV}+${cycles}`;
+    }
+
+    container.innerHTML = `
+        <div class="party-slot" style="position: relative; display: flex; width: 100%; align-items: stretch; height: 100%; min-height: 55px; margin-bottom: 5px;">
+            <!-- Left Column: Sprite -->
+            <div style="flex: 0 0 50px; display: flex; align-items: center; justify-content: center; position: relative;">
+                <img src="Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png" onload="this.style.display='inline'" onerror="this.style.display='none'" class="${glowClass}" style="max-width: 100%; max-height: 100%; object-fit: contain; pointer-events: none; opacity: 0.85; transform: scale(1.5); z-index: 2;">
+            </div>
+
+            <!-- Right Column: 3 Floors -->
+            <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; padding-left: 5px; gap: 2px; min-width: 0;">
+                <!-- Top Floor: Name/Level -->
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="line-height: 1; display: flex; align-items: baseline; gap: 4px;">
+                        <span style="font-weight: bold; font-size: 12px; text-shadow: 1px 1px 1px rgba(0,0,0,0.8); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${p.name}</span>
+                        <span style="font-size: 10px; text-shadow: 1px 1px 1px rgba(0,0,0,0.8);">Lv.${p.level}</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 4px; pointer-events: auto; position: relative; z-index: 10;">
+                        <div onclick="event.stopPropagation(); window.showPokemonStatsByUuid('${p.uuid}')" style="cursor: pointer; background: #34495e; color: white; border-radius: 50%; width: 14px; height: 14px; text-align: center; line-height: 14px; font-size: 10px; font-weight: bold;" title="View Info">i</div>
+                    </div>
+                </div>
+
+                <!-- Middle Floor: Encounter Bar -->
+                <div style="width: 100%; height: 14px; background: #222; border: 1px solid #000; border-radius: 8px; position: relative; overflow: hidden; display: flex; align-items: center; font-size: 9px; font-weight: bold; color: white; text-shadow: 1px 1px 1px black, -1px -1px 1px black, 1px -1px 1px black, -1px 1px 1px black; box-shadow: inset 0px 1px 3px rgba(0,0,0,0.5);">
+                    <div style="position: absolute; left: 0; top: 0; width: ${progPct}%; height: 100%; background: #3498db; z-index: 0; transition: width 0.3s; border-radius: 8px;"></div>
+                    <div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: flex;">
+                        <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1;">${battles}/${maxBattles}</div>
+                        <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1; font-size: 8px; color: white;">${centerLabel}</div>
+                        <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1;">${rightText}</div>
+                    </div>
+                </div>
+
+                <!-- Base Floor: XP Bar -->
+                <div style="width: 100%; height: 14px; background: #222; border: 1px solid #000; border-radius: 8px; position: relative; overflow: hidden; display: flex; align-items: center; font-size: 9px; font-weight: bold; color: white; text-shadow: 1px 1px 1px black, -1px -1px 1px black, 1px -1px 1px black, -1px 1px 1px black; box-shadow: inset 0px 1px 3px rgba(0,0,0,0.5);">
+                    <div style="position: absolute; left: 0; top: 0; width: ${xpPct}%; height: 100%; background: #9b59b6; z-index: 0; transition: width 0.3s; border-radius: 8px;"></div>
+                    <div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: flex;">
+                        ${xpTextHtml}
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
 }

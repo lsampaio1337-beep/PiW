@@ -33,7 +33,7 @@ import { updateSidebar } from './ui/sidebar.js';
 import { updateBattleArena, showDamage } from './ui/battle.js';
 import { showMap, navigateToLocation, showMapTooltip, hideMapTooltip } from './ui/map.js';
 import { showPokedex, showDexEntry } from './ui/pokedex.js';
-import { showPokemonStats, evolvePokemon } from './ui/pokemonStats.js';
+import { showPokemonStats, showPokemonStatsByUuid, evolvePokemon } from './ui/pokemonStats.js';
 import { showSettings, updateGameSpeed, addMoney, addXp, exportLog, showAddPokemonModal, forceNextEncounter, activateCheat } from './ui/settings.js';
 import { setupMarket, buyItem } from './ui/market.js';
 import { showBackpack, renderBackpackTab, setActiveItem } from './ui/backpack/index.js';
@@ -55,6 +55,7 @@ window.setActiveItem = setActiveItem;
 window.showPokedex = showPokedex;
 window.showDexEntry = showDexEntry;
 window.showPokemonStats = showPokemonStats;
+window.showPokemonStatsByUuid = showPokemonStatsByUuid;
 window.evolvePokemon = evolvePokemon;
 window.showSettings = showSettings;
 window.updateGameSpeed = updateGameSpeed;
@@ -181,11 +182,30 @@ window.startGymBattle = function(gymName) {
     }
 };
 
+window.closeModal = function() {
+    document.getElementById('modal-overlay').style.display = 'none';
+    const modalBox = document.getElementById('modal-content-box');
+    if (modalBox && modalBox.dataset.originalStyles !== undefined) {
+        modalBox.setAttribute('style', modalBox.dataset.originalStyles);
+        delete modalBox.dataset.originalStyles;
+    }
+};
+
 export function showModal(title, htmlContent) {
     let rightCol = document.getElementById('modal-overlay');
     let contentPanel = document.getElementById('content-panel');
+    const modalBox = document.getElementById('modal-content-box');
+
+    // Reset styles for regular modals if not overridden by Map/Backpack
+    if (modalBox && modalBox.dataset.originalStyles !== undefined) {
+        modalBox.setAttribute('style', modalBox.dataset.originalStyles);
+        delete modalBox.dataset.originalStyles;
+    }
+
     rightCol.style.display = 'flex';
-    contentPanel.innerHTML = `<h2>${title}</h2>${htmlContent}`;
+
+    let titleHtml = title ? `<h2>${title}</h2>` : '';
+    contentPanel.innerHTML = `${titleHtml}${htmlContent}`;
 }
 
 const oakTasks = {

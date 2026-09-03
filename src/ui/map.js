@@ -6,10 +6,31 @@ export function showMap() {
     let contentPanel = document.getElementById('content-panel');
     rightCol.style.display = 'flex';
 
+    const modalBox = document.getElementById('modal-content-box');
+    if (modalBox) {
+        // Save original inline styles to restore later if another view needs it
+        modalBox.dataset.originalStyles = modalBox.getAttribute('style') || '';
+
+        // Remove padding and background so the map is flush and the background window is gone
+        modalBox.style.padding = '0px';
+        modalBox.style.border = 'none';
+        modalBox.style.backgroundColor = 'transparent';
+        modalBox.style.overflow = 'hidden';
+
+        // Ensure no inherited box-shadow or extra margins break the flush look
+        modalBox.style.boxShadow = 'none';
+        modalBox.style.maxWidth = '90%'; // Allow it to expand nicely
+    }
+
+    // Also remove any padding from content-panel just in case
+    if (contentPanel) {
+        contentPanel.style.padding = '0px';
+        contentPanel.style.margin = '0px';
+    }
+
     // Generate Interactive Map HTML
     let html = `
-        <h2>Map</h2>
-        <div id="interactive-map" style="position: relative; width: 100%; aspect-ratio: 16/11; background-image: url('./Assets/Map/Kanto Map.png'); background-size: contain; background-repeat: no-repeat; background-position: center; border: 2px solid #fff; border-radius: 8px;">
+        <div id="interactive-map" style="position: relative; width: 100%; aspect-ratio: 16/11; background-image: url('./Assets/Map/Kanto Map.png'); background-size: 100% 100%; background-repeat: no-repeat; background-position: center; border-radius: 8px;">
     `;
 
     for (const [locationId, locationData] of Object.entries(state.config.mapCoordinates)) {
@@ -74,7 +95,6 @@ export function showMap() {
     html += `
         </div>
         <div id="map-tooltip" style="display:none; position:absolute; background:rgba(0,0,0,0.8); color:white; padding:5px; border-radius:5px; pointer-events:none; z-index: 100;"></div>
-        <br><button onclick="document.getElementById('modal-overlay').style.display='none'">Close</button>
     `;
 
     contentPanel.innerHTML = html;
@@ -83,7 +103,7 @@ export function showMap() {
 export function navigateToLocation(locationName) {
     const battleSystem = globals.battleSystem;
     state.currentRoute = locationName;
-    document.getElementById('modal-overlay').style.display = 'none';
+    if (window.closeModal) window.closeModal();
 
     if (locationName === "Professor Oak Lab") {
         if (battleSystem) {

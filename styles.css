@@ -284,28 +284,28 @@ input[type="number"] {
             drop-shadow(-4px 0 4px #0000ff);
 }
 .glow-epic {
-    filter: drop-shadow(0 -2px 6px #7A00FF)
-            drop-shadow(2px 0 6px #7A00FF)
-            drop-shadow(0 2px 6px #7A00FF)
-            drop-shadow(-2px 0 6px #7A00FF);
+    filter: drop-shadow(0 -4px 4px #7A00FF)
+            drop-shadow(4px 0 4px #7A00FF)
+            drop-shadow(0 4px 4px #7A00FF)
+            drop-shadow(-4px 0 4px #7A00FF);
 }
 .glow-rare {
-    filter: drop-shadow(0 -2px 6px #0000FF)
-            drop-shadow(2px 0 6px #0000FF)
-            drop-shadow(0 2px 6px #0000FF)
-            drop-shadow(-2px 0 6px #0000FF);
+    filter: drop-shadow(0 -4px 4px #0000FF)
+            drop-shadow(4px 0 4px #0000FF)
+            drop-shadow(0 4px 4px #0000FF)
+            drop-shadow(-4px 0 4px #0000FF);
 }
 .glow-uncommon {
-    filter: drop-shadow(0 -2px 6px #00FFFF)
-            drop-shadow(2px 0 6px #00FFFF)
-            drop-shadow(0 2px 6px #00FFFF)
-            drop-shadow(-2px 0 6px #00FFFF);
+    filter: drop-shadow(0 -4px 4px #00FFFF)
+            drop-shadow(4px 0 4px #00FFFF)
+            drop-shadow(0 4px 4px #00FFFF)
+            drop-shadow(-4px 0 4px #00FFFF);
 }
 .glow-regular {
-    filter: drop-shadow(0 -2px 6px #7AFFFF)
-            drop-shadow(2px 0 6px #7AFFFF)
-            drop-shadow(0 2px 6px #7AFFFF)
-            drop-shadow(-2px 0 6px #7AFFFF);
+    filter: drop-shadow(0 -4px 4px #7AFFFF)
+            drop-shadow(4px 0 4px #7AFFFF)
+            drop-shadow(0 4px 4px #7AFFFF)
+            drop-shadow(-4px 0 4px #7AFFFF);
 }
 .glow-weak {
     /* No glow */

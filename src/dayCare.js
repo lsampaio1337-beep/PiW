@@ -30,9 +30,18 @@ class DayCare {
 
         // Training logic
         if (this.slot2.pokemon) {
-            this.slot2.battles++;
-            if (this.slot2.battles >= this.slot2.requiredBattles) {
-                this.completeTrainingCycle();
+            const pkmn = this.slot2.pokemon;
+            const totalIV = pkmn.ivs.hp + pkmn.ivs.atk + pkmn.ivs.def + pkmn.ivs.spa + pkmn.ivs.spd + pkmn.ivs.spe;
+
+            // Only increment battles if we haven't hit the cap
+            if (totalIV < 600) {
+                this.slot2.battles++;
+                if (this.slot2.battles >= this.slot2.requiredBattles) {
+                    this.completeTrainingCycle();
+                }
+            } else {
+                // If we reach cap organically, keep it frozen
+                this.slot2.battles = this.slot2.requiredBattles;
             }
         }
     }
@@ -92,7 +101,13 @@ class DayCare {
         }
         pkmn.trainingCyclesCompleted++;
 
-        this.slot2.battles = 0;
+        // Reset progress only if we are still under the cap
+        const newTotalIV = pkmn.ivs.hp + pkmn.ivs.atk + pkmn.ivs.def + pkmn.ivs.spa + pkmn.ivs.spd + pkmn.ivs.spe;
+        if (newTotalIV >= 600) {
+            this.slot2.battles = this.slot2.requiredBattles;
+        } else {
+            this.slot2.battles = 0;
+        }
     }
 }
 

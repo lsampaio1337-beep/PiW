@@ -63,8 +63,8 @@
       </div>
       <div id="day-care">
         <h3>Day Care</h3>
-        <div id="dc-slot1" style="margin-bottom: 5px;">Breeding: <span id="breed-prog">0/100</span><br><span id="breed-info" style="font-size: 10px; color: #aaa;"></span></div>
-        <div id="dc-slot2">Training: <span id="train-prog">0/100</span><br><span id="train-info" style="font-size: 10px; color: #aaa;"></span></div>
+        <div id="dc-slot1"></div>
+        <div id="dc-slot2"></div>
       </div>
     </aside>
 
@@ -164,7 +164,7 @@
     <!-- Right Column (Modals/Overlays for Map, Backpack, etc) -->
 
     <!-- Center Modal Overlay (replaces right-col) -->
-    <div id="modal-overlay" class="modal" onclick="if(event.target === this) this.style.display='none'">
+    <div id="modal-overlay" class="modal" onclick="if(event.target === this && window.closeModal) window.closeModal()">
         <div id="modal-content-box" class="modal-content" style="width: 80%; max-width: 800px; max-height: 90vh; overflow-y: auto; position: relative;">
             <div id="content-panel">
                 <!-- Dynamic content injected here -->
