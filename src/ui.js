@@ -35,7 +35,7 @@ import { showMap, navigateToLocation, showMapTooltip, hideMapTooltip } from './u
 import { showPokedex, showDexEntry } from './ui/pokedex.js';
 import { showPokemonStats, showPokemonStatsByUuid, evolvePokemon } from './ui/pokemonStats.js';
 import { showSettings, updateGameSpeed, addMoney, addXp, exportLog, showAddPokemonModal, forceNextEncounter, activateCheat } from './ui/settings.js';
-import { setupMarket, buyItem } from './ui/market.js';
+import { setupMarket } from './ui/market.js';
 import { showBackpack, renderBackpackTab, setActiveItem } from './ui/backpack/index.js';
 import { dragStart, dragOver, handleDrop } from './ui/backpack/pokemon.js';
 
@@ -62,7 +62,6 @@ window.updateGameSpeed = updateGameSpeed;
 window.addMoney = addMoney;
 window.addXp = addXp;
 window.exportLog = exportLog;
-window.buyItem = buyItem;
 window.selectStarter = selectStarter;
 
 window.showAddPokemonModal = showAddPokemonModal;
