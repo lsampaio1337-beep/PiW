@@ -29,38 +29,56 @@ export function showBonusCandyModal() {
                         position: absolute;
                         top: 0; left: 0; height: 100%;
                         width: ${progressPct}%;
-                        background-color: ${isClaimable ? '#f1c40f' : '#3498db'};
+                        background-color: #3498db;
                         transition: width 0.3s ease;
                     "></div>
                     <div style="
                         position: absolute;
-                        top: 0; left: 10px; height: 100%;
-                        display: flex; align-items: center;
+                        top: 0; left: 0; right: 0; height: 100%;
+                        display: flex; align-items: center; justify-content: ${isClaimable ? 'center' : 'space-between'};
+                        padding: 0 10px;
                         color: white; font-weight: bold; text-shadow: 1px 1px 2px black;
+                        pointer-events: none;
                     ">
-                        ${progressTextLeft}
-                    </div>
-                    <div style="
-                        position: absolute;
-                        top: 0; right: 10px; height: 100%;
-                        display: flex; align-items: center;
-                        color: white; font-weight: bold; text-shadow: 1px 1px 2px black;
-                    ">
-                        ${progressTextRight}
+                        <span>${progressTextLeft}</span>
+                        <span>${progressTextRight}</span>
                     </div>
                 </div>
             </div>
 
             <div style="margin-bottom: 20px;">
                 <h2 style="margin: 0; display: inline-block; vertical-align: middle;">White Candies: ${state.stats.whiteCandies || 0}</h2>
-                <img src="Assets/Items/Candies/White Candy.png" style="width: 30px; height: 30px; vertical-align: middle; margin-left: 10px;" onerror="this.style.display='none'">
+                <img src="Assets/Extra/WhiteCandy.png" style="width: 30px; height: 30px; vertical-align: middle; margin-left: 10px;" onerror="this.style.display='none'">
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <button onclick="window.cheatWhiteCandy()" style="padding: 5px 10px; background-color: #888; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 12px;">Cheat: +1 White Candy</button>
+            </div>
+
+            <div style="display: flex; justify-content: space-around; background-color: #222; border: 1px solid #444; border-radius: 8px; padding: 10px; margin-bottom: 20px;">
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <img src="Assets/Extra/LootCandy.png" style="width: 30px; height: 30px;" onerror="this.style.display='none'">
+                    <span style="color: white; font-size: 14px; margin-top: 5px;">${state.stats.greenCandies || 0}</span>
+                </div>
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <img src="Assets/Extra/XPCandy.png" style="width: 30px; height: 30px;" onerror="this.style.display='none'">
+                    <span style="color: white; font-size: 14px; margin-top: 5px;">${state.stats.purpleCandies || 0}</span>
+                </div>
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <img src="Assets/Extra/CatchCandy.png" style="width: 30px; height: 30px;" onerror="this.style.display='none'">
+                    <span style="color: white; font-size: 14px; margin-top: 5px;">${state.stats.blackYellowCandies || 0}</span>
+                </div>
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <img src="Assets/Extra/ShinyCandy.png" style="width: 30px; height: 30px;" onerror="this.style.display='none'">
+                    <span style="color: white; font-size: 14px; margin-top: 5px;">${state.stats.rainbowCandies || 0}</span>
+                </div>
             </div>
 
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                ${renderCandyOption('Green', 'Loot +1%', 1, state.stats.greenCandies, (1.01 ** (state.stats.greenCandies || 0)).toFixed(2) + 'x')}
-                ${renderCandyOption('Purple', 'XP +1%', 2, state.stats.purpleCandies, (1.01 ** (state.stats.purpleCandies || 0)).toFixed(2) + 'x')}
-                ${renderCandyOption('Black Yellow', 'Catch +1%', 3, state.stats.blackYellowCandies, (1.01 ** (state.stats.blackYellowCandies || 0)).toFixed(2) + 'x')}
-                ${renderCandyOption('Rainbow', 'Shiny +1roll', 5, state.stats.rainbowCandies, '+' + (state.stats.rainbowCandies || 0) + ' rolls')}
+                ${renderCandyOption('Green', 'Loot +1%', 1, state.stats.greenCandies, (1.01 ** (state.stats.greenCandies || 0)).toFixed(2) + 'x', 'LootCandy.png')}
+                ${renderCandyOption('Purple', 'XP +1%', 2, state.stats.purpleCandies, (1.01 ** (state.stats.purpleCandies || 0)).toFixed(2) + 'x', 'XPCandy.png')}
+                ${renderCandyOption('Black Yellow', 'Catch +1%', 3, state.stats.blackYellowCandies, (1.01 ** (state.stats.blackYellowCandies || 0)).toFixed(2) + 'x', 'CatchCandy.png')}
+                ${renderCandyOption('Rainbow', 'Shiny +1roll', 5, state.stats.rainbowCandies, '+' + (state.stats.rainbowCandies || 0) + ' rolls', 'ShinyCandy.png')}
             </div>
         </div>
     `;
@@ -68,13 +86,14 @@ export function showBonusCandyModal() {
     showModal("Bonus Candy", html);
 }
 
-function renderCandyOption(color, effectText, cost, currentOwned, currentEffect) {
+function renderCandyOption(color, effectText, cost, currentOwned, currentEffect, imageFile) {
     const owned = currentOwned || 0;
     return `
-        <div style="background-color: #222; border: 1px solid #444; border-radius: 8px; padding: 15px; display: flex; flex-direction: column; align-items: center;">
-            <div style="font-size: 18px; font-weight: bold; margin-bottom: 5px; color: ${getColorHex(color)}; text-shadow: 1px 1px 2px black;">${color} Candy</div>
+        <div style="background-color: #222; border: 1px solid #444; border-radius: 8px; padding: 15px; display: flex; flex-direction: column; align-items: center; position: relative;">
+            <img src="Assets/Extra/${imageFile}" style="width: 40px; height: 40px; position: absolute; top: 10px; right: 10px;" onerror="this.style.display='none'">
+            <div style="font-size: 18px; font-weight: bold; margin-bottom: 5px; color: ${getColorHex(color)}; text-shadow: 1px 1px 2px black;">${color}</div>
             <div style="font-size: 14px; margin-bottom: 5px;">Effect: ${effectText}</div>
-            <div style="font-size: 14px; margin-bottom: 10px;">Cost: ${cost} White Candy</div>
+            <div style="font-size: 14px; margin-bottom: 10px;">Cost: ${cost} White</div>
             <button onclick="window.buyBonusCandy('${color}', ${cost})" style="
                 padding: 8px 15px;
                 background-color: #4CAF50;
@@ -84,7 +103,7 @@ function renderCandyOption(color, effectText, cost, currentOwned, currentEffect)
                 cursor: pointer;
                 font-weight: bold;
                 margin-bottom: 10px;
-            ">Buy (Cost: ${cost})</button>
+            ">Buy</button>
             <div style="font-size: 14px; color: #aaa;">Owned: ${owned}</div>
             <div style="font-size: 14px; color: #4CAF50;">Total Effect: ${currentEffect}</div>
         </div>
@@ -108,6 +127,12 @@ window.claimWhiteCandy = function() {
         updateUI();
         showBonusCandyModal(); // Refresh modal
     }
+};
+
+window.cheatWhiteCandy = function() {
+    state.stats.whiteCandies = (state.stats.whiteCandies || 0) + 1;
+    updateUI();
+    showBonusCandyModal();
 };
 
 window.buyBonusCandy = function(color, cost) {

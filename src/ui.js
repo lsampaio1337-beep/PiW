@@ -34,6 +34,7 @@ import { showMap, navigateToLocation, showMapTooltip, hideMapTooltip } from './u
 import { showPokedex, showDexEntry } from './ui/pokedex.js';
 import { showPokemonStats, showPokemonStatsByUuid, evolvePokemon } from './ui/pokemonStats.js';
 import { showBonusCandyModal } from './ui/bonusCandy.js';
+window.showBonusCandyModal = showBonusCandyModal;
 import { showSettings, updateGameSpeed, addMoney, addXp, exportLog, showAddPokemonModal, forceNextEncounter, activateCheat } from './ui/settings.js';
 import { setupMarket, buyItem } from './ui/market.js';
 import { showBackpack, renderBackpackTab, setActiveItem } from './ui/backpack/index.js';
