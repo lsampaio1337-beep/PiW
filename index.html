@@ -90,18 +90,18 @@
 
       <!-- View 2: Battle Arena -->
       <div id="view-battle-arena" class="game-view" style="display:none;">
-        <div id="combat-arena">
+        <div id="combat-arena" style="position: relative; height: 300px; overflow: hidden;">
           <div id="enemy-side">
             <div class="stats-box">
               <h4 id="enemy-name">Wild Pokemon</h4>
               <div>Lvl: <span id="enemy-lvl">?</span></div>
               <div>HP: <span id="enemy-hp">?/?</span></div>
             </div>
-            <img id="enemy-sprite" src="" alt="Enemy Sprite">
+            <img id="enemy-sprite" src="" alt="Enemy Sprite" style="--face-dir: 1;">
           </div>
 
           <div id="player-side">
-            <img id="player-sprite" src="" alt="Player Sprite">
+            <img id="player-sprite" src="" alt="Player Sprite" style="--face-dir: -1;">
             <div class="stats-box">
               <h4 id="player-name">Player Leader</h4>
               <div>Lvl: <span id="player-lvl">?</span></div>

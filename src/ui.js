@@ -29,7 +29,7 @@ export const TYPE_COLORS = {
 };
 import { updateTopbar } from './ui/topbar.js';
 import { updateSidebar } from './ui/sidebar.js';
-import { updateBattleArena, showDamage } from './ui/battle.js';
+import { updateBattleArena, showDamage, playCombatAnimations, playDefeatAndCaptureAnimation } from './ui/battle.js';
 import { showMap, navigateToLocation, showMapTooltip, hideMapTooltip } from './ui/map.js';
 import { showPokedex, showDexEntry } from './ui/pokedex.js';
 import { showPokemonStats, showPokemonStatsByUuid, evolvePokemon } from './ui/pokemonStats.js';

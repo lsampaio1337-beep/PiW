@@ -324,3 +324,108 @@ input[type="number"] {
 .glow-weak {
     /* No glow */
 }
+
+/* Pokemon Battle Animations and Layout Updates */
+#enemy-sprite, #player-sprite, #gym-enemy-sprite, #gym-player-sprite {
+    position: absolute;
+    bottom: 0;
+}
+
+#player-sprite, #gym-player-sprite {
+    left: 25%;
+    z-index: 20;
+}
+
+#enemy-sprite, #gym-enemy-sprite {
+    z-index: 10;
+}
+
+/* Base states for types */
+.type-flying {
+    bottom: 20px !important;
+}
+
+.type-water::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 20px;
+    background: radial-gradient(ellipse at center, rgba(0, 150, 255, 0.8) 0%, rgba(0, 150, 255, 0) 70%);
+    border-radius: 50%;
+    z-index: -1;
+}
+
+/* Animations */
+@keyframes idleHover {
+    0%, 100% { transform: translateY(0) scaleX(var(--face-dir, 1)); }
+    50% { transform: translateY(-10px) scaleX(var(--face-dir, 1)); }
+}
+
+@keyframes idleBob {
+    0%, 100% { transform: rotate(0deg) scaleX(var(--face-dir, 1)); }
+    25% { transform: rotate(-5deg) scaleX(var(--face-dir, 1)); }
+    75% { transform: rotate(5deg) scaleX(var(--face-dir, 1)); }
+}
+
+.anim-idle-flying {
+    animation: idleHover 2s infinite ease-in-out;
+}
+
+.anim-idle-ground {
+    animation: idleBob 2s infinite ease-in-out;
+}
+
+/* Combat Animations */
+@keyframes attackThrustRight {
+    0% { transform: translateX(0) scaleX(var(--face-dir, 1)); }
+    50% { transform: translateX(30px) scaleX(var(--face-dir, 1)); }
+    100% { transform: translateX(0) scaleX(var(--face-dir, 1)); }
+}
+
+@keyframes attackThrustLeft {
+    0% { transform: translateX(0) scaleX(var(--face-dir, 1)); }
+    50% { transform: translateX(-30px) scaleX(var(--face-dir, 1)); }
+    100% { transform: translateX(0) scaleX(var(--face-dir, 1)); }
+}
+
+@keyframes getHit {
+    0%, 100% { filter: brightness(1) drop-shadow(0 0 0 transparent); }
+    20%, 60% { filter: brightness(2) drop-shadow(0 0 10px white); transform: translateX(-5px) scaleX(var(--face-dir, 1)); }
+    40%, 80% { filter: brightness(2) drop-shadow(0 0 10px white); transform: translateX(5px) scaleX(var(--face-dir, 1)); }
+}
+
+.anim-attack-player { animation: attackThrustRight 0.3s ease-out; }
+.anim-attack-enemy { animation: attackThrustLeft 0.3s ease-out; }
+.anim-hit { animation: getHit 0.5s ease-out; }
+
+/* Projectiles and Splashes */
+.projectile {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    z-index: 100;
+    pointer-events: none;
+    box-shadow: 0 0 10px currentColor;
+    background: radial-gradient(circle at center, white 0%, currentColor 70%);
+}
+
+.splash {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    z-index: 101;
+    pointer-events: none;
+    background: transparent;
+    border: 5px solid currentColor;
+    animation: splashExplode 0.4s ease-out forwards;
+}
+
+@keyframes splashExplode {
+    0% { transform: scale(0.5); opacity: 1; border-width: 10px; }
+    100% { transform: scale(2); opacity: 0; border-width: 0px; }
+}

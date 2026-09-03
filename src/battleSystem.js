@@ -112,8 +112,8 @@ class BattleSystem {
                                 <div id="gym-player-hp-bar" style="width: 100%; height: 100%; background: #2ecc71;"></div>
                             </div>
                             <span id="gym-player-hp-text"></span>
-                            <div style="position: relative; height: 80px; margin-top: 10px;">
-                                <img id="gym-player-sprite" src="" style="position: absolute; bottom: 0; left: 0; max-height: 80px; transform: scaleX(-1);">
+                            <div style="position: relative; height: 80px; margin-top: 10px; overflow: hidden;">
+                                <img id="gym-player-sprite" src="" style="position: absolute; bottom: 0; left: 0; max-height: 80px; transform: scaleX(-1); --face-dir: -1;">
                             </div>
                         </div>
 
@@ -125,8 +125,8 @@ class BattleSystem {
                                 <div id="gym-enemy-hp-bar" style="width: 100%; height: 100%; background: #e74c3c; float: right;"></div>
                             </div>
                             <span id="gym-enemy-hp-text"></span>
-                            <div style="position: relative; height: 80px; margin-top: 10px;">
-                                <img id="gym-enemy-sprite" src="" style="position: absolute; bottom: 0; right: 0; max-height: 80px;">
+                            <div style="position: relative; height: 80px; margin-top: 10px; overflow: hidden;">
+                                <img id="gym-enemy-sprite" src="" style="position: absolute; bottom: 0; right: 0; max-height: 80px; --face-dir: 1;">
                             </div>
                         </div>
                     </div>
@@ -195,6 +195,7 @@ class BattleSystem {
         const leaderSpeed = this.state.party[0].currentStats.spe;
         let delay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed));
         delay = Math.max(300, delay) / this.state.settings.gameSpeed;
+        this.currentSearchDelay = delay; // Expose for UI animations
 
         this.combatLoop = setTimeout(() => {
             if (this.gymState.isActive) {
@@ -459,6 +460,10 @@ class BattleSystem {
         const targetSide = attacker === leader ? 'enemy' : 'player';
         if (typeof window.showDamage === 'function') {
             window.showDamage(targetSide, hit.damage, hit.isCritical, move.name, move.type, eff);
+        if (typeof window.playCombatAnimations === 'function') {
+            const attackerSide = attacker === leader ? 'player' : 'enemy';
+            window.playCombatAnimations(attackerSide, targetSide, move.type);
+        }
         }
 
         this.updateUI();
@@ -513,7 +518,7 @@ class BattleSystem {
 
     throwPokeball() {
         let tier = this.state.settings.activeBallTier;
-        if (tier < 0) return false; // None selected
+        if (tier < 0) return { caught: false, ballName: 'Pokeball' }; // None selected
 
         let ballName = this.state.config.balance.items.pokeballs[tier].name;
 
@@ -526,13 +531,13 @@ class BattleSystem {
             if (tier >= 0) ballName = this.state.config.balance.items.pokeballs[tier].name;
         }
 
-        if (tier < 0) return false; // No balls left
+        if (tier < 0) return { caught: false, ballName: 'Pokeball' }; // No balls left
 
         let multiplier = this.state.config.balance.items.pokeballs[tier].multiplier;
 
         const chance = mathEngine.calculateCatchChance(this.activeEncounter.bst, this.activeEncounter.level, multiplier, this.state.stats, this.activeEncounter.qualityName === "Shiny");
 
-        return (Math.random() * 100) <= chance;
+        return { caught: (Math.random() * 100) <= chance, ballName: ballName };
     }
 
     handleEnemyDefeat() {
@@ -541,15 +546,26 @@ class BattleSystem {
 
         // Auto Throw Pokeball logic (disable in gyms)
         if (this.state.settings.autoCatch && (!this.gymState || !this.gymState.isActive)) {
-            const caught = this.throwPokeball();
-            if (caught) {
-                let caughtPokemon = JSON.parse(JSON.stringify(this.activeEncounter));
+            const throwResult = this.throwPokeball();
+            const caught = throwResult.caught;
+            const ballName = throwResult.ballName;
+
+            if (typeof window.playDefeatAndCaptureAnimation === 'function') {
+                window.playDefeatAndCaptureAnimation(this.activeEncounter, caught, ballName);
+            }
+            // Capture math runs after 3s delay in background to match animation
+            // Cache the encounter to prevent this.activeEncounter from being overwritten by the next search
+            const encounterToCapture = JSON.parse(JSON.stringify(this.activeEncounter));
+            setTimeout(() => {
+                if (caught) {
+
+                let caughtPokemon = encounterToCapture;
                 // Fix the level 100 jump bug by setting xp explicitly to the exact minimum needed for their captured level
                 caughtPokemon.xp = mathEngine.calculateTotalXP(caughtPokemon.level);
                 this.state.storage.push(caughtPokemon);
                 this.state.stats.caught++;
-                if (this.activeEncounter.qualityName === "Shiny") this.state.stats.shiniesCaught = (this.state.stats.shiniesCaught || 0) + 1;
-                if (this.activeEncounter.qualityName === "Epic") this.state.stats.epicCaptures = (this.state.stats.epicCaptures || 0) + 1;
+                if (encounterToCapture.qualityName === "Shiny") this.state.stats.shiniesCaught = (this.state.stats.shiniesCaught || 0) + 1;
+                if (encounterToCapture.qualityName === "Epic") this.state.stats.epicCaptures = (this.state.stats.epicCaptures || 0) + 1;
 
                 let sumIV = caughtPokemon.ivs.hp + caughtPokemon.ivs.atk + caughtPokemon.ivs.def + caughtPokemon.ivs.spa + caughtPokemon.ivs.spd + caughtPokemon.ivs.spe;
                 if (sumIV < 300) this.state.stats.caughtIVUnder300 = (this.state.stats.caughtIVUnder300 || 0) + 1;
@@ -566,17 +582,23 @@ class BattleSystem {
 
                 // Track species catches for unlocks
                 if (!this.state.stats.caughtSpecies) this.state.stats.caughtSpecies = {};
-                this.state.stats.caughtSpecies[this.activeEncounter.name] = (this.state.stats.caughtSpecies[this.activeEncounter.name] || 0) + 1;
+                this.state.stats.caughtSpecies[encounterToCapture.name] = (this.state.stats.caughtSpecies[encounterToCapture.name] || 0) + 1;
 
                 // Track specific typings
                 if (!this.state.stats.caughtSpecific) this.state.stats.caughtSpecific = {};
-                if (this.activeEncounter.types) {
-                     for (let t of this.activeEncounter.types) {
+                if (encounterToCapture.types) {
+                     for (let t of encounterToCapture.types) {
                           this.state.stats.caughtSpecific[t] = (this.state.stats.caughtSpecific[t] || 0) + 1;
                      }
                 }
-                // console.log(`Caught ${this.activeEncounter.name}!`);
-            }
+                // console.log(`Caught ${encounterToCapture.name}!`);
+                }
+            }, 3000);
+
+        } else {
+             if (typeof window.playDefeatAndCaptureAnimation === 'function') {
+                  window.playDefeatAndCaptureAnimation(this.activeEncounter, false, "Pokeball"); // Dummy if auto-catch off
+             }
         }
 
         // Daycare logic

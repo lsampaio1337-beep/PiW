@@ -54,6 +54,30 @@ export function updateBattleArena() {
             const elEnemySprite = document.getElementById('enemy-sprite');
             if (elEnemySprite) {
                 elEnemySprite.src = `Assets/Pokemon Sprites/${enemy.qualityName === 'Shiny' ? enemy.id + '_shiny' : enemy.id}.png`;
+
+                // Add specific type classes for CSS styling
+                elEnemySprite.className = '';
+                if (enemy.types && enemy.types.includes('Flying')) elEnemySprite.classList.add('type-flying');
+                if (enemy.types && enemy.types.includes('Water')) elEnemySprite.classList.add('type-water');
+
+                // Add idle animations
+                if (enemy.types && enemy.types.includes('Flying')) {
+                    elEnemySprite.classList.add('anim-idle-flying');
+                } else {
+                    elEnemySprite.classList.add('anim-idle-ground');
+                }
+
+                // Handle search transition (Slide in)
+                if (elEnemySprite.style.left === '100%') {
+                    // Transition to battle position
+                    elEnemySprite.style.transition = `left ${battleSystem.currentSearchDelay / 1000}s linear`;
+                    elEnemySprite.style.left = '45%';
+                } else {
+                     // Keep at battle pos
+                     elEnemySprite.style.transition = 'none';
+                     elEnemySprite.style.left = '45%';
+                }
+
                 elEnemySprite.style.display = 'block';
             }
 
@@ -73,12 +97,43 @@ export function updateBattleArena() {
                 const elPlayerSprite = document.getElementById('player-sprite');
                 if (elPlayerSprite) {
                     elPlayerSprite.src = `Assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? leader.id + '_shiny' : leader.id}.png`;
+
+                    // Add specific type classes
+                    elPlayerSprite.className = '';
+                    if (leader.types && leader.types.includes('Flying')) elPlayerSprite.classList.add('type-flying');
+                    if (leader.types && leader.types.includes('Water')) elPlayerSprite.classList.add('type-water');
+
+                    // Add idle animations
+                    if (leader.types && leader.types.includes('Flying')) {
+                        elPlayerSprite.classList.add('anim-idle-flying');
+                    } else {
+                        elPlayerSprite.classList.add('anim-idle-ground');
+                    }
+
+                    // Stop animations dynamically by letting them finish their iteration
+                    const stopAnim = () => {
+                        elPlayerSprite.style.animationIterationCount = "1";
+                        elPlayerSprite.removeEventListener("animationiteration", stopAnim);
+                    };
+
+                    if (battleSystem.isSearching) {
+                        elPlayerSprite.style.animationIterationCount = "infinite";
+                    } else {
+                        elPlayerSprite.addEventListener("animationiteration", stopAnim);
+                    }
+
                     elPlayerSprite.style.display = 'block';
                 }
             }
         } else if (battleSystem && battleSystem.isSearching) {
             const elEnemyName = document.getElementById('enemy-name');
             if (elEnemyName) elEnemyName.innerText = "Searching...";
+            if (elEnemySprite) {
+                // Keep enemy sprite invisible and at 100% left until an encounter spawns
+                elEnemySprite.style.transition = 'none';
+                elEnemySprite.style.left = '100%';
+                elEnemySprite.style.display = 'none';
+            }
 
             const elEnemyLvl = document.getElementById('enemy-lvl');
             if (elEnemyLvl) elEnemyLvl.innerText = "?";
@@ -193,4 +248,137 @@ export function showDamage(target, amount, isCrit, moveName = '', moveType = 'No
     setTimeout(() => {
         if (dmgNode.parentElement) dmgNode.parentElement.removeChild(dmgNode);
     }, 1000);
+}
+
+export function playCombatAnimations(attackerSide, defenderSide, moveType) {
+    let attackerId = attackerSide === 'player' ? 'player-sprite' : 'enemy-sprite';
+    let defenderId = defenderSide === 'player' ? 'player-sprite' : 'enemy-sprite';
+
+    // Gym variants
+    const battleSystem = globals.battleSystem;
+    if (battleSystem && battleSystem.gymState && battleSystem.gymState.isActive) {
+        attackerId = attackerSide === 'player' ? 'gym-player-sprite' : 'gym-enemy-sprite';
+        defenderId = defenderSide === 'player' ? 'gym-player-sprite' : 'gym-enemy-sprite';
+    }
+
+    const attackerEl = document.getElementById(attackerId);
+    const defenderEl = document.getElementById(defenderId);
+    if (!attackerEl || !defenderEl) return;
+
+    const typeColor = TYPE_COLORS[moveType] || '#ffffff';
+
+    // 1. Attacker Animation (Thrust)
+    attackerEl.classList.remove('anim-attack-player', 'anim-attack-enemy');
+    void attackerEl.offsetWidth; // trigger reflow
+    attackerEl.classList.add(attackerSide === 'player' ? 'anim-attack-player' : 'anim-attack-enemy');
+
+    // 2. Projectile
+    const arena = document.getElementById(battleSystem && battleSystem.gymState && battleSystem.gymState.isActive ? 'gym-battle-area' : 'combat-arena');
+    const projectile = document.createElement('div');
+    projectile.className = 'projectile';
+    projectile.style.color = typeColor;
+
+    const aRect = attackerEl.getBoundingClientRect();
+    const dRect = defenderEl.getBoundingClientRect();
+    const arenaRect = arena.getBoundingClientRect();
+
+    // Start pos
+    const startX = aRect.left - arenaRect.left + aRect.width/2;
+    const startY = aRect.top - arenaRect.top + aRect.height/2;
+    // End pos
+    const endX = dRect.left - arenaRect.left + dRect.width/2;
+    const endY = dRect.top - arenaRect.top + dRect.height/2;
+
+    projectile.style.left = startX + 'px';
+    projectile.style.top = startY + 'px';
+    projectile.style.transition = 'all 0.3s ease-in';
+
+    arena.appendChild(projectile);
+
+    // Animate Projectile
+    setTimeout(() => {
+        projectile.style.left = endX + 'px';
+        projectile.style.top = endY + 'px';
+    }, 50);
+
+    // 3. Splash & Defender Hit Animation
+    setTimeout(() => {
+        projectile.remove();
+
+        // Splash
+        const splash = document.createElement('div');
+        splash.className = 'splash';
+        splash.style.color = typeColor;
+        splash.style.left = (endX - 30) + 'px'; // center splash
+        splash.style.top = (endY - 30) + 'px';
+        arena.appendChild(splash);
+
+        setTimeout(() => splash.remove(), 400); // splash animation duration
+
+        // Defender Hit
+        defenderEl.classList.remove('anim-hit');
+        void defenderEl.offsetWidth; // trigger reflow
+        defenderEl.classList.add('anim-hit');
+
+    }, 350);
+}
+
+export function playDefeatAndCaptureAnimation(enemyData, throwSuccess, ballName) {
+    const arena = document.getElementById('combat-arena');
+    const originalSprite = document.getElementById('enemy-sprite');
+    if (!arena || !originalSprite) return;
+
+    // Clone the original sprite to animate independently
+    const clone = originalSprite.cloneNode(true);
+    clone.id = 'enemy-sprite-clone';
+    clone.style.transition = 'opacity 2s ease-out, left 3s linear';
+    arena.appendChild(clone);
+
+    // The original sprite is now freed to be reused for the next search/spawn
+
+    // Create the Pokeball
+    const ball = document.createElement('img');
+    ball.src = `Assets/Items/Balls/${ballName}.png`;
+    ball.style.position = 'absolute';
+    ball.style.width = '30px';
+    ball.style.height = '30px';
+    ball.style.left = clone.style.left || '45%';
+    ball.style.top = '120px'; // Overlap on the enemy
+    ball.style.zIndex = '30';
+    ball.style.transition = 'left 3s linear';
+    // Shake animation
+    ball.animate([
+        { transform: 'rotate(0deg)' },
+        { transform: 'rotate(-20deg)' },
+        { transform: 'rotate(20deg)' },
+        { transform: 'rotate(0deg)' }
+    ], { duration: 500, iterations: 6 }); // Shakes for 3s
+
+    arena.appendChild(ball);
+
+    // Fade out enemy and slide left
+    setTimeout(() => {
+        clone.style.opacity = '0';
+        clone.style.left = '15%';
+        ball.style.left = '15%';
+    }, 50);
+
+    // After 3 seconds (when they hit 15%), decide capture and continue slide
+    setTimeout(() => {
+        // Remove enemy clone
+        clone.remove();
+
+        // Swap ball image based on success
+        const suffix = throwSuccess ? 'Y.png' : 'N.png';
+        ball.src = `Assets/Items/Balls/${ballName}${suffix}`;
+
+        // Keep sliding off screen
+        ball.style.transition = 'left 1.5s linear'; // keep same rough speed (30% distance in 1.5s is similar to 30% in 3s)
+        ball.style.left = '-15%';
+
+        setTimeout(() => {
+            ball.remove();
+        }, 1500);
+
+    }, 3050);
 }
