@@ -1,7 +1,7 @@
 import { state } from '../state.js';
 import { showModal, TYPE_COLORS } from '../ui.js';
 
-function formatType(typeStr) {
+export function formatType(typeStr) {
     if (!typeStr || !TYPE_COLORS[typeStr]) return typeStr;
     const color = TYPE_COLORS[typeStr];
     return `<span style="color: ${color}; display: inline-flex; align-items: center; gap: 4px;">
@@ -9,7 +9,7 @@ function formatType(typeStr) {
             </span>`;
 }
 
-function formatTypes(obj) {
+export function formatTypes(obj) {
     return Object.keys(obj).length ? Object.keys(obj).map(t => formatType(t)).join(', ') : 'None';
 }
 
@@ -139,7 +139,7 @@ export function showDexEntry(id) {
             </div>
 
             <p><b>Type:</b> ${pData.types.map(t => formatType(t)).join(' / ')}</p>
-            <p><b>BST:</b> ${bst} (HP:${pData.hp} A:${pData.atk} D:${pData.def} SA:${pData.spa} SD:${pData.spd} S:${pData.spe})</p>
+            <p><b>BST:</b> ${bst} (HP:${pData.hp} | Speed:${pData.spe} | Atk:${pData.atk} SpAtk:${pData.spa} | Def:${pData.def} SpDef:${pData.spd})</p>
 
             <div style="text-align: left; margin: 15px 0; font-size: 14px; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 5px;">
                 <h4 style="margin: 0 0 5px 0;">Defensive Effectiveness</h4>
