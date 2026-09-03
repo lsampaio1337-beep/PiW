@@ -68,21 +68,7 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
-#bottom-bar {
-    display: flex;
-    justify-content: center;
-    background-color: #34495e;
-    padding: 10px 20px;
-    border-top: 2px solid #1abc9c;
-    width: 100%;
-    box-sizing: border-box;
-}
 
-#challenge-tracker {
-    font-weight: bold;
-    color: yellow;
-    text-align: center;
-}
 
 #main-container {
     display: flex;

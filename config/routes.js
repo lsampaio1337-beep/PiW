@@ -460,172 +460,334 @@ export { routes };
 export const unlocks = [
   {
     "areaId": "Route 1",
-    "unlocks": ["Route 2"],
+    "unlocks": [
+      "Route 2"
+    ],
     "requirements": {
-      "defeatCount": 25
+      "defeatCountRoute": {
+        "route": "Route 1",
+        "count": 25
+      }
     }
   },
   {
     "areaId": "Route 2",
-    "unlocks": ["Viridian Forest"],
+    "unlocks": [
+      "Viridian Forest"
+    ],
     "requirements": {
       "catchSpecies": [
-        { "species": "Rattata", "count": 5 }
-      ],
-      "catchSpeciesAnyOf": [
-        { "species": ["Caterpie", "Weedle"], "count": 1 }
+        {
+          "species": "NidoranF",
+          "count": 1
+        },
+        {
+          "species": "NidoranM",
+          "count": 1
+        }
       ]
     }
   },
   {
     "areaId": "Viridian Forest",
-    "unlocks": ["Pewter Gym"],
+    "unlocks": [
+      "Pewter Gym"
+    ],
     "requirements": {
-      "catchByRarityAndType": { "type": "Bug", "rarity": "Uncommon", "count": 5 }
+      "catchByRarityAndType": {
+        "type": "Bug",
+        "rarity": "Epic",
+        "count": 10
+      }
     }
   },
   {
     "areaId": "Pewter Gym",
-    "unlocks": ["Route 3"],
+    "unlocks": [
+      "Route 3"
+    ],
     "requirements": {
-      "defeatBoss": { "name": "Brock", "level": 7 }
+      "earnBadge": {
+        "name": "Boulder Badge",
+        "leader": "Brock",
+        "badgeCount": 1
+      }
     }
   },
   {
     "areaId": "Route 3",
-    "unlocks": ["Mount Moon"],
+    "unlocks": [
+      "Mount Moon"
+    ],
     "requirements": {
-      "defeatCount": 150,
-      "catchSpecies": [{ "species": "Jigglypuff", "count": 1 }]
+      "catchSpecies": [
+        {
+          "species": "Ekans",
+          "count": 1
+        },
+        {
+          "species": "Sandshrew",
+          "count": 1
+        }
+      ]
     }
   },
   {
     "areaId": "Mount Moon",
-    "unlocks": ["Route 4"],
+    "unlocks": [
+      "Route 4"
+    ],
     "requirements": {
       "catchSpecies": [
-        { "species": "Clefairy", "count": 1 }
+        {
+          "species": "Clefairy",
+          "count": 1
+        }
       ],
-      "catchByRarityAndType": { "type": "Poison", "rarity": "Uncommon", "count": 1 } // Approximating Zubat rarity unlock logic
+      "catchSpeciesByRarity": [
+        {
+          "species": "Zubat",
+          "rarity": "Epic",
+          "count": 1
+        }
+      ]
     }
   },
   {
     "areaId": "Route 4",
-    "unlocks": ["Cerulean Gym"],
+    "unlocks": [
+      "Cerulean Gym"
+    ],
     "requirements": {
-      "reachPokemonLevel": { "minLevel": 15, "count": 1 }
+      "catchSpecies": [
+        {
+          "species": "Mankey",
+          "count": 2
+        }
+      ]
     }
   },
   {
     "areaId": "Cerulean Gym",
-    "unlocks": ["Route 24 & 25"],
+    "unlocks": [
+      "Route 24 & 25"
+    ],
     "requirements": {
-      "defeatBoss": { "name": "Misty" }
+      "earnBadge": {
+        "name": "Cascade Badge",
+        "leader": "Misty",
+        "badgeCount": 2
+      }
     }
   },
   {
     "areaId": "Route 24 & 25",
-    "unlocks": ["Route 5"],
+    "unlocks": [
+      "Route 5"
+    ],
     "requirements": {
-      "catchSpecies": [{ "species": "Abra", "count": 3 }],
-      "defeatCount": 300
+      "catchSpecies": [
+        {
+          "species": "Abra",
+          "count": 5
+        }
+      ]
     }
   },
   {
     "areaId": "Route 5",
-    "unlocks": ["Route 6"],
+    "unlocks": [
+      "Route 6"
+    ],
     "requirements": {
-      "catchSpeciesAnyOf": [{ "species": ["Meowth", "Mankey"], "count": 1 }]
+      "defeatCountRoute": {
+        "route": "Route 5",
+        "count": 200
+      }
     }
   },
   {
     "areaId": "Route 6",
-    "unlocks": ["Vermilion Gym"],
+    "unlocks": [
+      "Vermilion Gym"
+    ],
     "requirements": {
-      "catchByRarityAndType": { "type": "Normal", "rarity": "Rare", "count": 1 }
+      "catchSpeciesAnyOf": [
+        {
+          "species": [
+            "Psyduck",
+            "Goldeen"
+          ],
+          "count": 1
+        }
+      ]
     }
   },
   {
     "areaId": "Vermilion Gym",
-    "unlocks": ["Route 11"],
+    "unlocks": [
+      "Route 11"
+    ],
     "requirements": {
-      "defeatBoss": { "name": "Lt. Surge", "level": 27 }
+      "earnBadge": {
+        "name": "Thunder Badge",
+        "leader": "Lt. Surge",
+        "badgeCount": 3
+      }
     }
   },
   {
     "areaId": "Route 11",
-    "unlocks": ["Diglett's Cave"],
+    "unlocks": [
+      "Diglett's Cave"
+    ],
     "requirements": {
-      "catchSpecies": [{ "species": "Drowzee", "count": 5 }]
+      "catchSpecies": [
+        {
+          "species": "Drowzee",
+          "count": 10
+        },
+        {
+          "species": "Raticate",
+          "count": 1
+        }
+      ]
     }
   },
   {
     "areaId": "Diglett's Cave",
-    "unlocks": ["Route 9"],
+    "unlocks": [
+      "Route 9"
+    ],
     "requirements": {
-      "defeatBoss": { "name": "Dugtrio", "level": 33 },
-      "defeatCount": 500
+      "catchSpecies": [
+        {
+          "species": "Dugtrio",
+          "count": 2
+        }
+      ]
     }
   },
   {
     "areaId": "Route 9",
-    "unlocks": ["Route 10"],
+    "unlocks": [
+      "Route 10"
+    ],
     "requirements": {
-      "catchSpeciesAnyOf": [{ "species": ["Ekans", "Sandshrew"], "count": 1 }]
+      "catchSpecies": [
+        {
+          "species": "Fearow",
+          "count": 2
+        }
+      ]
     }
   },
   {
     "areaId": "Route 10",
-    "unlocks": ["Rock Tunnel"],
+    "unlocks": [
+      "Rock Tunnel"
+    ],
     "requirements": {
-      "catchSpecies": [{ "species": "Magnemite", "count": 1 }]
+      "defeatCountRoute": {
+        "route": "Route 10",
+        "count": 250
+      }
     }
   },
   {
     "areaId": "Rock Tunnel",
-    "unlocks": ["Route 8"],
+    "unlocks": [
+      "Route 8"
+    ],
     "requirements": {
-      "reachPokemonLevel": { "minLevel": 48, "count": 1 },
-      "catchSpecies": [{ "species": "Onix", "count": 1 }]
+      "catchSpecies": [
+        {
+          "species": "Onix",
+          "count": 2
+        },
+        {
+          "species": "Machop",
+          "count": 4
+        }
+      ]
     }
   },
   {
     "areaId": "Route 8",
-    "unlocks": ["Celadon Gym", "Casino"],
+    "unlocks": [
+      "Celadon Gym",
+      "Casino"
+    ],
     "requirements": {
-      "catchSpecies": [{ "species": "Kadabra", "count": 1 }]
+      "catchSpecies": [
+        {
+          "species": "Kadabra",
+          "count": 2
+        }
+      ],
+      "catchByType": {
+        "type": "Fire",
+        "count": 10
+      }
     }
   },
   {
     "areaId": "Celadon Gym",
-    "unlocks": ["Route 7"],
+    "unlocks": [
+      "Route 7"
+    ],
     "requirements": {
-      "defeatBoss": { "name": "Erika", "level": 52 }
+      "earnBadge": {
+        "name": "Rainbow Badge",
+        "leader": "Erika",
+        "badgeCount": 4
+      }
     }
   },
   {
     "areaId": "Route 7",
-    "unlocks": ["Pokémon Tower"],
+    "unlocks": [
+      "Pokémon Tower"
+    ],
     "requirements": {
-      "catchSpeciesAnyOf": [{ "species": ["Growlithe", "Vulpix"], "count": 1 }],
-      "defeatCount": 1000
+      "defeatCountRoute": {
+        "route": "Route 7",
+        "count": 300
+      }
     }
   },
   {
     "areaId": "Pokémon Tower",
-    "unlocks": ["Route 12", "Small Fishing Spot"],
+    "unlocks": [
+      "Route 12",
+      "Small Fishing Spot"
+    ],
     "requirements": {
       "catchSpecies": [
-        { "species": "Haunter", "count": 1 }
-      ],
-      "catchByRarityAndType": { "type": "Ghost", "rarity": "Epic", "count": 1 }
+        {
+          "species": "Haunter",
+          "count": 2
+        },
+        {
+          "species": "Cubone",
+          "count": 1
+        }
+      ]
     }
   },
   {
     "areaId": "Route 12",
-    "unlocks": ["Route 13", "Fighting Dojo"],
+    "unlocks": [
+      "Route 13",
+      "Fighting Dojo"
+    ],
     "requirements": {
-      "catchSpecies": [{ "species": "Farfetch'd", "count": 1 }]
+      "catchSpecies": [
+        {
+          "species": "Farfetch'd",
+          "count": 1
+        }
+      ]
     }
   },
   {
@@ -633,142 +795,225 @@ export const unlocks = [
     "unlocks": ["Route 14", "Route 15"],
     "requirements": {
       "catchSpecies": [
-        { "species": "Victreebel", "count": 1 },
-        { "species": "Vileplume", "count": 1 }
+        {
+          "species": "Victreebel",
+          "count": 2
+        },
+        {
+          "species": "Vileplume",
+          "count": 2
+        }
       ]
     }
   },
   {
     "areaId": "Route 14",
-    "unlocks": ["Fuchsia Gym"],
+    "unlocks": [
+      "Fuchsia Gym"
+    ],
     "requirements": {
-      "catchSpecies": [{ "species": "Ditto", "count": 5 }]
+      "catchSpecies": [
+        {
+          "species": "Ditto",
+          "count": 10
+        }
+      ]
     }
   },
-  {
-    "areaId": "Route 15",
-    "unlocks": ["Fuchsia Gym"],
-    "requirements": {
-      "catchSpecies": [{ "species": "Ditto", "count": 5 }]
-    }
-  },
+
   {
     "areaId": "Fuchsia Gym",
-    "unlocks": ["Cycling Road"],
+    "unlocks": [
+      "Cycling Road"
+    ],
     "requirements": {
-      "defeatBoss": { "name": "Koga", "level": 76 }
+      "earnBadge": {
+        "name": "Soul Badge",
+        "leader": "Koga",
+        "badgeCount": 5
+      }
     }
   },
   {
     "areaId": "Cycling Road",
-    "unlocks": ["Safari Zone"],
+    "unlocks": [
+      "Safari Zone"
+    ],
     "requirements": {
-      "reachPokemonLevel": { "minLevel": 80, "count": 1 },
-      "catchSpecies": [{ "species": "Dodrio", "count": 1 }]
+      "catchSpecies": [
+        {
+          "species": "Dodrio",
+          "count": 2
+        }
+      ]
     }
   },
   {
     "areaId": "Safari Zone",
-    "unlocks": ["Saffron Gym"],
+    "unlocks": [
+      "Saffron Gym"
+    ],
     "requirements": {
-      "catchSpeciesAnyOf": [{ "species": ["Scyther", "Pinsir", "Chansey"], "count": 1 }],
-      "defeatCount": 2000
+      "defeatCountRoute": {
+        "route": "Safari Zone",
+        "count": 1000
+      }
     }
   },
   {
     "areaId": "Saffron Gym",
-    "unlocks": ["Sea Routes"],
+    "unlocks": [
+      "Sea Routes"
+    ],
     "requirements": {
-      "defeatBoss": { "name": "Sabrina", "level": 84 }
+      "earnBadge": {
+        "name": "Marsh Badge",
+        "leader": "Sabrina",
+        "badgeCount": 6
+      }
     }
   },
   {
     "areaId": "Sea Routes",
-    "unlocks": ["Seafoam Islands"],
+    "unlocks": [
+      "Seafoam Islands"
+    ],
     "requirements": {
-      "catchSpecies": [{ "species": "Tentacruel", "count": 1 }]
+      "defeatCountRoute": {
+        "route": "Sea Routes",
+        "count": 500
+      }
     }
   },
   {
     "areaId": "Seafoam Islands",
-    "unlocks": ["Pokémon Mansion", "Big Fishing Spot"],
+    "unlocks": [
+      "Pokémon Mansion",
+      "Big Fishing Spot"
+    ],
     "requirements": {
-      "defeatBoss": { "name": "Articuno", "level": 85 }
+      "defeatSpecific": {
+        "name": "Articuno",
+        "count": 3
+      }
     }
   },
   {
     "areaId": "Pokémon Mansion",
-    "unlocks": ["Cinnabar Gym", "Fossil Revival"],
+    "unlocks": [
+      "Cinnabar Gym",
+      "Fossil Revival Lab"
+    ],
     "requirements": {
-      "catchSpecies": [{ "species": "Magmar", "count": 1 }]
+      "catchSpeciesByRarity": [
+        {
+          "species": "Magmar",
+          "rarity": "Epic",
+          "count": 1
+        }
+      ]
     }
   },
   {
     "areaId": "Cinnabar Gym",
-    "unlocks": ["Power Plant", "Trade With a Friend"],
+    "unlocks": [
+      "Power Plant",
+      "Trade With Friends Hub"
+    ],
     "requirements": {
-      "defeatBoss": { "name": "Blaine", "level": 88 }
+      "earnBadge": {
+        "name": "Volcano Badge",
+        "leader": "Blaine",
+        "badgeCount": 7
+      }
     }
   },
   {
     "areaId": "Power Plant",
-    "unlocks": ["Viridian Gym"],
+    "unlocks": [
+      "Viridian Gym"
+    ],
     "requirements": {
-      "defeatBoss": { "name": "Zapdos", "level": 89 },
-      "catchSpecies": [{ "species": "Electabuzz", "count": 1 }]
+      "defeatSpecific": {
+        "name": "Zapdos",
+        "count": 3
+      }
     }
   },
   {
     "areaId": "Viridian Gym",
-    "unlocks": ["Route 22"],
+    "unlocks": [
+      "Route 22"
+    ],
     "requirements": {
-      "defeatBoss": { "name": "Giovanni", "level": 90 }
+      "earnBadge": {
+        "name": "Earth Badge",
+        "leader": "Giovanni",
+        "badgeCount": 8
+      }
     }
   },
   {
     "areaId": "Route 22",
-    "unlocks": ["Route 23"],
+    "unlocks": [
+      "Route 23"
+    ],
     "requirements": {
-      "catchSpecies": [
-        { "species": "Nidorino", "count": 1 },
-        { "species": "Nidorina", "count": 1 }
-      ]
+      "defeatCountRoute": {
+        "route": "Route 22",
+        "count": 750
+      }
     }
   },
   {
     "areaId": "Route 23",
-    "unlocks": ["Victory Road"],
+    "unlocks": [
+      "Victory Road"
+    ],
     "requirements": {
-      "catchSpeciesAnyOf": [{ "species": ["Nidoking", "Nidoqueen"], "count": 1 }]
+      "catchSpeciesAnyOfByRarity": [
+        {
+          "species": [
+            "Nidoking",
+            "Nidoqueen"
+          ],
+          "rarity": "Epic",
+          "count": 1
+        }
+      ]
     }
   },
   {
     "areaId": "Victory Road",
-    "unlocks": ["Cerulean Cave"],
+    "unlocks": [
+      "Cerulean Cave"
+    ],
     "requirements": {
-      "defeatBoss": { "name": "Moltres", "level": 90 },
-      "reachPokemonLevel": { "minLevel": 90, "count": 1 }
+      "defeatSpecific": {
+        "name": "Moltres",
+        "count": 3
+      }
     }
   },
   {
     "areaId": "Cerulean Cave",
-    "unlocks": ["Elite Four"],
+    "unlocks": [
+      "Elite 4"
+    ],
     "requirements": {
-      "defeatBoss": { "name": "Mewtwo" },
-      "reachPokemonLevel": { "minLevel": 95, "count": 1 }
+      "defeatSpecific": {
+        "name": "Mewtwo",
+        "count": 5
+      }
     }
   },
   {
-    "areaId": "Elite Four",
-    "unlocks": ["Prestige Reset"],
+    "areaId": "Elite 4",
+    "unlocks": [
+      "Prestige / Region Reset"
+    ],
     "requirements": {
-      "defeatBossesSequential": [
-        { "name": "Lorelei", "level": 96 },
-        { "name": "Bruno", "level": 97 },
-        { "name": "Agatha", "level": 98 },
-        { "name": "Lance", "level": 99 },
-        { "name": "Champion Rival", "level": 100 }
-      ]
+      "defeatEliteFourAndChampion": true
     }
   }
 ];
