@@ -175,7 +175,7 @@ class BattleSystem {
         }
 
         if (this.state.currentRoute && this.state.currentRoute.startsWith("Casino - ")) {
-            const cost = 10;
+            const cost = this.state.casinoDoubleShiny ? 20 : 10;
             if (this.state.trainer.money < cost) {
                 alert("Not enough money! You need $" + cost + " to continue hunting here.");
                 this.stop();
@@ -600,6 +600,24 @@ class BattleSystem {
         // Award XP and Money (EV)
         this.grantXP(leader, ev);
         this.state.trainer.money += Math.floor(ev);
+
+        // Loot drops for Stones
+        let dropRate = 0;
+        switch (this.activeEncounter.qualityName) {
+            case "Regular": dropRate = 0.01; break;
+            case "Uncommon": dropRate = 0.02; break;
+            case "Rare": dropRate = 0.03; break;
+            case "Epic": dropRate = 0.05; break;
+            case "Shiny": dropRate = 1.0; break;
+        }
+
+        if (Math.random() < dropRate && this.activeEncounter.types && this.activeEncounter.types.length > 0) {
+            const types = this.activeEncounter.types;
+            const randomType = types[Math.floor(Math.random() * types.length)];
+            const stoneName = `${randomType} Stone`;
+            if (!this.state.backpack.stones) this.state.backpack.stones = {};
+            this.state.backpack.stones[stoneName] = (this.state.backpack.stones[stoneName] || 0) + 1;
+        }
 
         this.state.stats.battlesWon++;
 
