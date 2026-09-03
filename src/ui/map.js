@@ -82,7 +82,8 @@ export function showMap() {
             }
 
             if (markerImg !== './Assets/Extra/Spot.png') {
-                dropShadow = "drop-shadow(0px 0px 3px rgba(0,0,0,0.8))";
+                // Solid black outline (4-axis) and a larger soft white glow
+                dropShadow = "drop-shadow(1px 0px 0 #000) drop-shadow(-1px 0px 0 #000) drop-shadow(0px 1px 0 #000) drop-shadow(0px -1px 0 #000) drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.8))";
             }
 
 
