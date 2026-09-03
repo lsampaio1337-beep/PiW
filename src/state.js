@@ -37,7 +37,8 @@ export const state = {
         caughtLvl45: 0,
         caughtLvl60: 0,
         caughtLvl75: 0,
-        ivTaskTier: 0
+        ivTaskTier: 0,
+        dailyRewards: { daysClaimed: 0, lastClaimDate: null }
     },
     settings: {
         gameSpeed: 1.0,
