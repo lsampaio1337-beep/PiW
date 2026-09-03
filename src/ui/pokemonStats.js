@@ -1,6 +1,32 @@
 import { state } from '../state.js';
 import { updateUI, showModal } from '../ui.js';
 
+export function showPokemonStatsByUuid(uuid) {
+    let p = null;
+    let location = '';
+    let idx = state.party.findIndex(x => x.uuid === uuid);
+    if (idx !== -1) { p = state.party[idx]; location = 'party'; }
+    else {
+        idx = state.breeding.findIndex(x => x.uuid === uuid);
+        if (idx !== -1) { p = state.breeding[idx]; location = 'breeding'; }
+        else {
+            idx = state.training.findIndex(x => x.uuid === uuid);
+            if (idx !== -1) { p = state.training[idx]; location = 'training'; }
+            else {
+                idx = state.storage.findIndex(x => x.uuid === uuid);
+                if (idx !== -1) { p = state.storage[idx]; location = 'storage'; }
+                else {
+                    idx = state.safe.findIndex(x => x.uuid === uuid);
+                    if (idx !== -1) { p = state.safe[idx]; location = 'safe'; }
+                }
+            }
+        }
+    }
+
+    if (!p) return;
+    showPokemonStats(idx, location);
+}
+
 export function showPokemonStats(idx, location) {
     let p = null;
     if (location === 'party') p = state.party[idx];

@@ -4,33 +4,35 @@ import { renderBackpackTab } from './index.js';
 
 // Helper to render a consistent Pokemon slot UI
 function renderSlotUI(p, listName, origIndex, isDraggable) {
+    if (!p.uuid) p.uuid = Math.random().toString(36).substring(2, 15);
     let imgSrc = `Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png`;
     let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
-    let dragAttr = isDraggable ? `draggable="true" ondragstart="window.dragStart(event, '${listName}', ${origIndex})"` : '';
+    let dragAttr = isDraggable ? `draggable="true" ondragstart="window.dragStart(event, '${listName}', '${p.uuid}')"` : '';
     let cursorStyle = isDraggable ? 'cursor: move;' : 'cursor: default;';
     let slotClass = '';
     let dataAttr = '';
     if (listName.toLowerCase() === 'storage') {
         slotClass = 'pokemon-storage-slot';
-        dataAttr = `data-index="${origIndex}"`;
+        dataAttr = `data-uuid="${p.uuid}"`;
     } else if (listName.toLowerCase() === 'safe') {
         slotClass = 'pokemon-safe-slot';
-        dataAttr = `data-index="${origIndex}"`;
+        dataAttr = `data-uuid="${p.uuid}"`;
     }
 
+    let glowClass = "glow-weak";
+    if (p.qualityName === "Shiny") glowClass = "glow-shiny";
+    else if (p.qualityName === "Epic") glowClass = "glow-epic";
+    else if (p.qualityName === "Rare") glowClass = "glow-rare";
+    else if (p.qualityName === "Uncommon") glowClass = "glow-uncommon";
+    else if (p.qualityName === "Regular") glowClass = "glow-regular";
+
     return `
-        <div class="${slotClass}" ${dataAttr} style="border: 1px solid #777; aspect-ratio: 1 / 1.3; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 4%; box-sizing: border-box; background: rgba(0,0,0,0.5); position: relative; container-type: inline-size; overflow: hidden; ${cursorStyle}" title="Q=${p.quality.toFixed(2)} & ∑IV=${sumIV}" ${dragAttr}>
+        <div class="${slotClass}" ${dataAttr} style="border: 1px solid #777; aspect-ratio: 1 / 1.3; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 4%; box-sizing: border-box; background: rgba(0,0,0,0.5); position: relative; container-type: inline-size; overflow: hidden; ${cursorStyle}; width: 100%;" title="Q=${p.quality.toFixed(2)} & ∑IV=${sumIV}" ${dragAttr}>
             <span style="position: absolute; top: 0; left: 0; font-size: 12cqw; background: black; padding: 2cqw; z-index: 2;">${p._tag || ''}</span>
-            <div onclick="event.stopPropagation(); window.showPokemonStats(${origIndex}, '${listName.toLowerCase()}')" style="position: absolute; top: 2cqw; right: 2cqw; cursor: pointer; background: #34495e; color: white; border-radius: 50%; width: 20cqw; height: 20cqw; text-align: center; display: flex; align-items: center; justify-content: center; font-size: 14cqw; font-weight: bold; z-index: 3;" title="View Info">i</div>
+            <div onclick="event.stopPropagation(); window.showPokemonStatsByUuid('${p.uuid}')" style="position: absolute; top: 2cqw; right: 2cqw; cursor: pointer; background: #34495e; color: white; border-radius: 50%; width: 20cqw; height: 20cqw; text-align: center; display: flex; align-items: center; justify-content: center; font-size: 14cqw; font-weight: bold; z-index: 3;" title="View Info">i</div>
 
             <div style="flex: 1; width: 100%; display: flex; align-items: center; justify-content: center; position: relative;">
-                <img src="${imgSrc}" style="height: 140%; width: 140%; max-height: 140%; object-fit: contain; z-index: 1;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
-            </div>
-
-            <div style="display: flex; flex-direction: column; align-items: center; justify-content: flex-end; font-size: 12cqw; line-height: 1.2; width: 100%; z-index: 2; text-shadow: 1px 1px 1px black, -1px -1px 1px black, 1px -1px 1px black, -1px 1px 1px black; pointer-events: none;">
-                <div>Lv.${p.level}</div>
-                <div>Q:${p.quality.toFixed(2)}</div>
-                <div>∑IV:${sumIV}</div>
+                <img src="${imgSrc}" class="${glowClass}" style="height: 140%; width: 140%; max-height: 140%; object-fit: contain; z-index: 1;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
             </div>
         </div>
     `;
@@ -63,7 +65,7 @@ export function renderPokemonTab(area) {
             <!-- Column 1: Active -->
             <div style="flex: 2; border: 1px solid #555; padding: 5px; display: flex; flex-direction: column; min-width: 0; min-height: 0;">
                 <h4 style="text-align: center; margin-top:0;">Active</h4>
-                <div id="active-scroll-container" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 5px; overflow-y: auto; align-content: start; flex-grow: 1; padding-bottom: 20px; min-height: 0;">
+                <div id="active-scroll-container" style="display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-rows: max-content; gap: 5px; overflow-y: auto; align-content: start; flex-grow: 1; padding-bottom: 20px; min-height: 0;">
     `;
 
 
@@ -114,7 +116,7 @@ export function renderPokemonTab(area) {
             <!-- Column 2: Storage -->
             <div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'storage')" style="flex: 4; border: 1px solid #555; padding: 5px; display: flex; flex-direction: column; min-width: 0; min-height: 0;">
                 <h4 style="text-align: center; margin-top:0;">Storage</h4>
-                <div id="storage-scroll-container" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; overflow-y: auto; align-content: start; flex-grow: 1; padding-bottom: 20px; min-height: 0;">
+                <div id="storage-scroll-container" style="display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: max-content; gap: 5px; overflow-y: auto; align-content: start; flex-grow: 1; padding-bottom: 20px; min-height: 0;">
     `;
 
     for (let i = 0; i < state.storage.length; i++) {
@@ -130,7 +132,7 @@ export function renderPokemonTab(area) {
             <!-- Column 3: Safe -->
             <div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'safe')" style="flex: 2; border: 1px solid #555; padding: 5px; display: flex; flex-direction: column; min-width: 0; min-height: 0;">
                 <h4 style="text-align: center; margin-top:0;">Safe</h4>
-                <div id="safe-scroll-container" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 5px; overflow-y: auto; align-content: start; flex-grow: 1; padding-bottom: 20px; min-height: 0;">
+                <div id="safe-scroll-container" style="display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-rows: max-content; gap: 5px; overflow-y: auto; align-content: start; flex-grow: 1; padding-bottom: 20px; min-height: 0;">
     `;
 
     for (let i = 0; i < state.safe.length; i++) {
@@ -218,8 +220,8 @@ window.applyPokemonFilters = function() {
     // Filter Storage
     const storageSlots = document.querySelectorAll('.pokemon-storage-slot');
     storageSlots.forEach(slot => {
-        const index = parseInt(slot.getAttribute('data-index'), 10);
-        const p = state.storage[index];
+        const uuid = slot.getAttribute('data-uuid');
+        const p = state.storage.find(x => x.uuid === uuid);
         if (p) {
             slot.style.display = filterFn(p) ? 'flex' : 'none';
         }
@@ -228,16 +230,16 @@ window.applyPokemonFilters = function() {
     // Filter Safe
     const safeSlots = document.querySelectorAll('.pokemon-safe-slot');
     safeSlots.forEach(slot => {
-        const index = parseInt(slot.getAttribute('data-index'), 10);
-        const p = state.safe[index];
+        const uuid = slot.getAttribute('data-uuid');
+        const p = state.safe.find(x => x.uuid === uuid);
         if (p) {
             slot.style.display = filterFn(p) ? 'flex' : 'none';
         }
     });
 };
 
-export function dragStart(event, sourceCol, index) {
-    event.dataTransfer.setData('text/plain', JSON.stringify({ sourceCol, index }));
+export function dragStart(event, sourceCol, uuid) {
+    event.dataTransfer.setData('text/plain', JSON.stringify({ sourceCol, uuid }));
 }
 
 export function dragOver(event) {
@@ -248,11 +250,11 @@ export function handleDrop(event, targetCol) {
     event.preventDefault();
     const data = event.dataTransfer.getData('text/plain');
     if (!data) return;
-    let sourceCol, index;
+    let sourceCol, uuid;
     try {
         const parsed = JSON.parse(data);
         sourceCol = parsed.sourceCol;
-        index = parsed.index;
+        uuid = parsed.uuid;
     } catch(e) { return; }
 
     const sCol = sourceCol.toLowerCase();
@@ -261,11 +263,12 @@ export function handleDrop(event, targetCol) {
     if (sCol === tCol) return;
 
     let p = null;
-    if (sCol === 'party') p = state.party[index];
-    else if (sCol === 'breeding') p = state.breeding[index];
-    else if (sCol === 'training') p = state.training[index];
-    else if (sCol === 'storage') p = state.storage[index];
-    else if (sCol === 'safe') p = state.safe[index];
+    let index = -1;
+    if (sCol === 'party') { index = state.party.findIndex(x => x.uuid === uuid); p = state.party[index]; }
+    else if (sCol === 'breeding') { index = state.breeding.findIndex(x => x.uuid === uuid); p = state.breeding[index]; }
+    else if (sCol === 'training') { index = state.training.findIndex(x => x.uuid === uuid); p = state.training[index]; }
+    else if (sCol === 'storage') { index = state.storage.findIndex(x => x.uuid === uuid); p = state.storage[index]; }
+    else if (sCol === 'safe') { index = state.safe.findIndex(x => x.uuid === uuid); p = state.safe[index]; }
 
     if (!p) return;
 
@@ -277,6 +280,11 @@ export function handleDrop(event, targetCol) {
 
     if (tCol === 'breeding' && state.dayCareRef && state.dayCareRef.slot1.isBreeding) {
         alert("Cannot replace Pokémon while breeding is in progress!");
+        return;
+    }
+
+    if (tCol === 'breeding' && p.quality >= 1.99) {
+        alert("Cannot breed a Pokémon with Q >= 1.99!");
         return;
     }
 
@@ -316,16 +324,19 @@ export function handleDrop(event, targetCol) {
 
     // --- Phase 2: Insert to target and handle potential swaps ---
 
+    // Clean lingering visual tags before it lands in a new area
+    delete p._tag;
+
     let displacedPokemon = null;
 
     if (tCol === 'party') {
         state.party.push(p);
     }
     else if (tCol === 'storage') {
-        state.storage.unshift(p);
+        state.storage.push(p);
     }
     else if (tCol === 'safe') {
-        state.safe.unshift(p);
+        state.safe.push(p);
     }
     else if (tCol === 'training') {
         if (state.training.length > 0) {
@@ -336,7 +347,13 @@ export function handleDrop(event, targetCol) {
         }
         if (state.dayCareRef) {
             state.dayCareRef.slot2.pokemon = p;
-            state.dayCareRef.slot2.battles = 0;
+
+            const totalIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
+            if (totalIV >= 600) {
+                state.dayCareRef.slot2.battles = state.dayCareRef.slot2.requiredBattles;
+            } else {
+                state.dayCareRef.slot2.battles = 0;
+            }
         }
     }
     else if (tCol === 'breeding') {

@@ -546,7 +546,7 @@ class BattleSystem {
                 let caughtPokemon = JSON.parse(JSON.stringify(this.activeEncounter));
                 // Fix the level 100 jump bug by setting xp explicitly to the exact minimum needed for their captured level
                 caughtPokemon.xp = mathEngine.calculateTotalXP(caughtPokemon.level);
-                this.state.storage.unshift(caughtPokemon);
+                this.state.storage.push(caughtPokemon);
                 this.state.stats.caught++;
                 if (this.activeEncounter.qualityName === "Shiny") this.state.stats.shiniesCaught = (this.state.stats.shiniesCaught || 0) + 1;
                 if (this.activeEncounter.qualityName === "Epic") this.state.stats.epicCaptures = (this.state.stats.epicCaptures || 0) + 1;
@@ -590,6 +590,7 @@ class BattleSystem {
         this.state.trainer.money += Math.floor(ev);
 
         this.state.stats.battlesWon++;
+
         this.checkRouteUnlocks();
 
         if (this.gymState && this.gymState.isActive) {
