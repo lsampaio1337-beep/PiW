@@ -110,8 +110,15 @@ export function updateTopbar() {
 
     // Handle Gift icon visibility
     if (state.stats.giftUnlocked) {
-        document.getElementById('btn-gift').style.display = 'inline-block';
+        const giftContainer = document.getElementById('btn-gift-container');
+        if (giftContainer) giftContainer.style.display = 'inline-block';
+
+        const exclamation = document.getElementById('btn-gift-exclamation');
+        if (exclamation) {
+            exclamation.style.display = (state.gifts && state.gifts.length > 0) ? 'block' : 'none';
+        }
     } else {
-        document.getElementById('btn-gift').style.display = 'none';
+        const giftContainer = document.getElementById('btn-gift-container');
+        if (giftContainer) giftContainer.style.display = 'none';
     }
 }

@@ -546,8 +546,9 @@ async function init() {
 
     // Bind Hub Buttons
     const checkCombatLock = () => {
-        if (globals.battleSystem && globals.battleSystem.gymState && globals.battleSystem.gymState.isActive) {
-            alert("You cannot access this menu during a Gym Battle!");
+        // We only lock if we are actively in the BATTLE_ARENA while in a Gym challenge
+        if (globals.battleSystem && globals.battleSystem.gymState && globals.battleSystem.gymState.isActive && document.getElementById('view-battle-arena').style.display !== 'none') {
+            alert("You cannot leave during a Gym Trainer battle! Win or lose first.");
             return true;
         }
         return false;
