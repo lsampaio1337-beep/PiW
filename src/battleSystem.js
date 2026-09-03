@@ -196,6 +196,12 @@ class BattleSystem {
         let delay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed));
         delay = Math.max(300, delay) / this.state.settings.gameSpeed;
 
+        // Between encounters, duel is not active
+        window.duelActive = false;
+        if (window.triggerEnemySlideIn) {
+            window.triggerEnemySlideIn(delay);
+        }
+
         this.combatLoop = setTimeout(() => {
             if (this.gymState.isActive) {
                 this.generateGymEncounter();
@@ -385,7 +391,22 @@ class BattleSystem {
 
         this.isSearching = false;
         this.updateUI();
-        this.scheduleTurn();
+
+        // Trigger the Slide-in animation for the duration of the search time
+        const leaderSpeed = this.state.party[0] ? this.state.party[0].currentStats.spe : 50;
+        let slideDuration = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed));
+        slideDuration = Math.max(300, slideDuration) / this.state.settings.gameSpeed;
+
+        if (typeof window.triggerEnemySlideIn === 'function' && (!this.gymState || !this.gymState.isActive)) {
+            window.triggerEnemySlideIn(slideDuration);
+        }
+
+        // The wild pokemon will take the same amount of time to slide. Duel begins after.
+        setTimeout(() => {
+            if (this.activeEncounter) {
+                this.scheduleTurn();
+            }
+        }, slideDuration);
     }
 
     getLearnsetMoves(pokemonBase, level) {
@@ -426,6 +447,13 @@ class BattleSystem {
         const secondActor = isLeaderFaster ? this.activeEncounter : leader;
         const firstDelay = Math.min(leaderDelay, enemyDelay);
 
+        // Remove walking animation once we start the duel logic loop
+        window.duelActive = true;
+        const pContainer = document.getElementById('player-sprite-container');
+        if (pContainer) pContainer.classList.remove('sprite-walking');
+        const eContainer = document.getElementById('enemy-sprite-container');
+        if (eContainer) eContainer.classList.remove('sprite-walking');
+
         this.combatLoop = setTimeout(() => {
             this.executeTurn(firstActor, secondActor);
         }, firstDelay);
@@ -453,25 +481,37 @@ class BattleSystem {
         const eff = this.getTypeEffectiveness(move.type, defender.types);
 
         const hit = mathEngine.calculateDamage(attacker.level, move.power, atkStat, defStat, eff, attacker.quality);
-        defender.currentHp -= hit.damage;
 
-        // Show floating damage
         const targetSide = attacker === leader ? 'enemy' : 'player';
-        if (typeof window.showDamage === 'function') {
-            window.showDamage(targetSide, hit.damage, hit.isCritical, move.name, move.type, eff);
+        const sourceSide = attacker === leader ? 'player' : 'enemy';
+
+        if (typeof window.playCombatAnimations === 'function' && (!this.gymState || !this.gymState.isActive)) {
+            window.playCombatAnimations(sourceSide, move.type);
         }
 
-        this.updateUI();
+        // Delay HP deduction and damage text by 300ms to sync with projectile impact
+        setTimeout(() => {
+            if (!this.activeEncounter) return; // Prevent crash if ended
 
-        if (defender.currentHp <= 0) {
-            if (defender === this.activeEncounter) {
-                this.handleEnemyDefeat();
-            } else {
-                this.handleFaint();
+            defender.currentHp -= hit.damage;
+
+            // Show floating damage
+            if (typeof window.showDamage === 'function') {
+                window.showDamage(targetSide, hit.damage, hit.isCritical, move.name, move.type, eff);
             }
-        } else {
-            this.scheduleNextStrike(attacker, defender);
-        }
+
+            this.updateUI();
+
+            if (defender.currentHp <= 0) {
+                if (defender === this.activeEncounter) {
+                    this.handleEnemyDefeat();
+                } else {
+                    this.handleFaint();
+                }
+            } else {
+                this.scheduleNextStrike(attacker, defender);
+            }
+        }, (!this.gymState || !this.gymState.isActive) ? 300 : 0);
     }
 
     scheduleNextStrike(attacker, defender) {
@@ -531,8 +571,57 @@ class BattleSystem {
         let multiplier = this.state.config.balance.items.pokeballs[tier].multiplier;
 
         const chance = mathEngine.calculateCatchChance(this.activeEncounter.bst, this.activeEncounter.level, multiplier, this.state.stats, this.activeEncounter.qualityName === "Shiny");
+        const caught = (Math.random() * 100) <= chance;
 
-        return (Math.random() * 100) <= chance;
+        return { usedBall: ballName, caught: caught };
+    }
+
+    processCaptureLogic(encounter, caught) {
+        if (caught) {
+            let caughtPokemon = JSON.parse(JSON.stringify(encounter));
+            // Fix the level 100 jump bug by setting xp explicitly to the exact minimum needed for their captured level
+            caughtPokemon.xp = mathEngine.calculateTotalXP(caughtPokemon.level);
+            this.state.storage.push(caughtPokemon);
+            this.state.stats.caught++;
+            if (encounter.qualityName === "Shiny") this.state.stats.shiniesCaught = (this.state.stats.shiniesCaught || 0) + 1;
+            if (encounter.qualityName === "Epic") this.state.stats.epicCaptures = (this.state.stats.epicCaptures || 0) + 1;
+
+            let sumIV = caughtPokemon.ivs.hp + caughtPokemon.ivs.atk + caughtPokemon.ivs.def + caughtPokemon.ivs.spa + caughtPokemon.ivs.spd + caughtPokemon.ivs.spe;
+            if (sumIV < 300) this.state.stats.caughtIVUnder300 = (this.state.stats.caughtIVUnder300 || 0) + 1;
+            if (sumIV < 350) this.state.stats.caughtIVUnder350 = (this.state.stats.caughtIVUnder350 || 0) + 1;
+            if (sumIV < 400) this.state.stats.caughtIVUnder400 = (this.state.stats.caughtIVUnder400 || 0) + 1;
+            if (sumIV < 450) this.state.stats.caughtIVUnder450 = (this.state.stats.caughtIVUnder450 || 0) + 1;
+            if (sumIV < 500) this.state.stats.caughtIVUnder500 = (this.state.stats.caughtIVUnder500 || 0) + 1;
+
+            if (caughtPokemon.level >= 15) this.state.stats.caughtLvl15 = (this.state.stats.caughtLvl15 || 0) + 1;
+            if (caughtPokemon.level >= 30) this.state.stats.caughtLvl30 = (this.state.stats.caughtLvl30 || 0) + 1;
+            if (caughtPokemon.level >= 45) this.state.stats.caughtLvl45 = (this.state.stats.caughtLvl45 || 0) + 1;
+            if (caughtPokemon.level >= 60) this.state.stats.caughtLvl60 = (this.state.stats.caughtLvl60 || 0) + 1;
+            if (caughtPokemon.level >= 75) this.state.stats.caughtLvl75 = (this.state.stats.caughtLvl75 || 0) + 1;
+
+            // Track species catches for unlocks
+            if (!this.state.stats.caughtSpecies) this.state.stats.caughtSpecies = {};
+            this.state.stats.caughtSpecies[encounter.name] = (this.state.stats.caughtSpecies[encounter.name] || 0) + 1;
+
+            // Track specific typings
+            if (!this.state.stats.caughtSpecific) this.state.stats.caughtSpecific = {};
+            if (!this.state.stats.challengeCaughtSpecific) this.state.stats.challengeCaughtSpecific = {};
+
+            let qName = encounter.qualityName || "Regular";
+
+            if (encounter.types) {
+                    for (let t of encounter.types) {
+                        this.state.stats.caughtSpecific[t] = (this.state.stats.caughtSpecific[t] || 0) + 1;
+                        let typeRarityKey = t + "_" + qName;
+                        let typeAnyKey = t + "_Any";
+                        this.state.stats.challengeCaughtSpecific[typeRarityKey] = (this.state.stats.challengeCaughtSpecific[typeRarityKey] || 0) + 1;
+                        this.state.stats.challengeCaughtSpecific[typeAnyKey] = (this.state.stats.challengeCaughtSpecific[typeAnyKey] || 0) + 1;
+                    }
+            }
+
+            let speciesRarityKey = encounter.name + "_" + qName;
+            this.state.stats.challengeCaughtSpecific[speciesRarityKey] = (this.state.stats.challengeCaughtSpecific[speciesRarityKey] || 0) + 1;
+        }
     }
 
     handleEnemyDefeat() {
@@ -540,56 +629,32 @@ class BattleSystem {
         const ev = this.activeEncounter.ev;
 
         // Auto Throw Pokeball logic (disable in gyms)
+        let captureAttempt = null;
+        const currentEncounterRef = JSON.parse(JSON.stringify(this.activeEncounter));
+
         if (this.state.settings.autoCatch && (!this.gymState || !this.gymState.isActive)) {
-            const caught = this.throwPokeball();
-            if (caught) {
-                let caughtPokemon = JSON.parse(JSON.stringify(this.activeEncounter));
-                // Fix the level 100 jump bug by setting xp explicitly to the exact minimum needed for their captured level
-                caughtPokemon.xp = mathEngine.calculateTotalXP(caughtPokemon.level);
-                this.state.storage.push(caughtPokemon);
-                this.state.stats.caught++;
-                if (this.activeEncounter.qualityName === "Shiny") this.state.stats.shiniesCaught = (this.state.stats.shiniesCaught || 0) + 1;
-                if (this.activeEncounter.qualityName === "Epic") this.state.stats.epicCaptures = (this.state.stats.epicCaptures || 0) + 1;
+            captureAttempt = this.throwPokeball(); // returns { usedBall, caught } or false
+        }
 
-                let sumIV = caughtPokemon.ivs.hp + caughtPokemon.ivs.atk + caughtPokemon.ivs.def + caughtPokemon.ivs.spa + caughtPokemon.ivs.spd + caughtPokemon.ivs.spe;
-                if (sumIV < 300) this.state.stats.caughtIVUnder300 = (this.state.stats.caughtIVUnder300 || 0) + 1;
-                if (sumIV < 350) this.state.stats.caughtIVUnder350 = (this.state.stats.caughtIVUnder350 || 0) + 1;
-                if (sumIV < 400) this.state.stats.caughtIVUnder400 = (this.state.stats.caughtIVUnder400 || 0) + 1;
-                if (sumIV < 450) this.state.stats.caughtIVUnder450 = (this.state.stats.caughtIVUnder450 || 0) + 1;
-                if (sumIV < 500) this.state.stats.caughtIVUnder500 = (this.state.stats.caughtIVUnder500 || 0) + 1;
+        // 1. Kick off background task for capture if it happened
+        if (captureAttempt) {
+            // It takes 3s for shake + roughly 2s for sliding before we "add" it.
+            // Let's delay processing the logic by 5 seconds to simulate background time.
+            setTimeout(() => {
+                this.processCaptureLogic(currentEncounterRef, captureAttempt.caught);
+            }, 5000);
 
-                if (caughtPokemon.level >= 15) this.state.stats.caughtLvl15 = (this.state.stats.caughtLvl15 || 0) + 1;
-                if (caughtPokemon.level >= 30) this.state.stats.caughtLvl30 = (this.state.stats.caughtLvl30 || 0) + 1;
-                if (caughtPokemon.level >= 45) this.state.stats.caughtLvl45 = (this.state.stats.caughtLvl45 || 0) + 1;
-                if (caughtPokemon.level >= 60) this.state.stats.caughtLvl60 = (this.state.stats.caughtLvl60 || 0) + 1;
-                if (caughtPokemon.level >= 75) this.state.stats.caughtLvl75 = (this.state.stats.caughtLvl75 || 0) + 1;
-
-                // Track species catches for unlocks
-                if (!this.state.stats.caughtSpecies) this.state.stats.caughtSpecies = {};
-                this.state.stats.caughtSpecies[this.activeEncounter.name] = (this.state.stats.caughtSpecies[this.activeEncounter.name] || 0) + 1;
-
-                // Track specific typings
-                if (!this.state.stats.caughtSpecific) this.state.stats.caughtSpecific = {};
-                if (!this.state.stats.challengeCaughtSpecific) this.state.stats.challengeCaughtSpecific = {};
-
-                let qName = this.activeEncounter.qualityName || "Regular";
-
-                if (this.activeEncounter.types) {
-                      for (let t of this.activeEncounter.types) {
-                          this.state.stats.caughtSpecific[t] = (this.state.stats.caughtSpecific[t] || 0) + 1;
-                          let typeRarityKey = t + "_" + qName;
-                          let typeAnyKey = t + "_Any";
-                          this.state.stats.challengeCaughtSpecific[typeRarityKey] = (this.state.stats.challengeCaughtSpecific[typeRarityKey] || 0) + 1;
-                          this.state.stats.challengeCaughtSpecific[typeAnyKey] = (this.state.stats.challengeCaughtSpecific[typeAnyKey] || 0) + 1;
-                      }
-                }
-
-                let speciesRarityKey = this.activeEncounter.name + "_" + qName;
-                this.state.stats.challengeCaughtSpecific[speciesRarityKey] = (this.state.stats.challengeCaughtSpecific[speciesRarityKey] || 0) + 1;
-
-                // console.log(`Caught ${this.activeEncounter.name}!`);
+            // Trigger visual animation in UI
+            if (typeof window.playCaptureAnimation === 'function') {
+                window.playCaptureAnimation(currentEncounterRef, captureAttempt.usedBall, captureAttempt.caught);
+            }
+        } else {
+            // No capture attempted, just fade out visually
+            if (typeof window.playCaptureAnimation === 'function' && (!this.gymState || !this.gymState.isActive)) {
+                window.playCaptureAnimation(currentEncounterRef, null, false);
             }
         }
+
 
         // Daycare logic
         if (this.state.dayCareRef) {
