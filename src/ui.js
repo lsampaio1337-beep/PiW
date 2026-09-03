@@ -203,7 +203,6 @@ export function showModal(title, htmlContent) {
     }
 
     rightCol.style.display = 'flex';
-
     let titleHtml = title ? `<h2>${title}</h2>` : '';
     contentPanel.innerHTML = `${titleHtml}${htmlContent}`;
 }
