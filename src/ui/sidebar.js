@@ -41,9 +41,9 @@ export function updateSidebar() {
             xpTextHtml = ``; // No text for level 100
         } else {
             xpTextHtml = `
-                <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center;">${xpProgress}/${xpRequired}</div>
-                <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; font-size: 8px; color: white;">XP</div>
-                <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center;">${Math.floor(xpPct)}%</div>
+                <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1;">${xpProgress}/${xpRequired}</div>
+                <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1; font-size: 8px; color: white;">XP</div>
+                <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1;">${Math.floor(xpPct)}%</div>
             `;
         }
 
@@ -79,9 +79,9 @@ export function updateSidebar() {
                     <div style="width: 100%; height: 14px; background: #222; border: 1px solid #000; border-radius: 8px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: bold; color: white; text-shadow: 1px 1px 1px black, -1px -1px 1px black, 1px -1px 1px black, -1px 1px 1px black; box-shadow: inset 0px 1px 3px rgba(0,0,0,0.5);">
                         <div style="position: absolute; left: 0; top: 0; width: ${hpPct}%; height: 100%; background: ${hpColor}; z-index: 0; transition: width 0.3s, background 0.3s; border-radius: 8px;"></div>
                         <div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: flex;">
-                            <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center;">${Math.floor(p.currentHp)}/${p.maxHp}</div>
-                            <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; font-size: 8px; color: white;">HP</div>
-                            <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center;">${Math.floor(hpPct)}%</div>
+                            <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1;">${Math.floor(p.currentHp)}/${p.maxHp}</div>
+                            <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1; font-size: 8px; color: white;">HP</div>
+                            <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1;">${Math.floor(hpPct)}%</div>
                         </div>
                     </div>
 
@@ -124,9 +124,9 @@ function renderDayCareSlot(container, p, battles, maxBattles, type) {
         xpTextHtml = ``;
     } else {
         xpTextHtml = `
-            <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center;">${xpProgress}/${xpRequired}</div>
-            <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; font-size: 8px; color: white;">XP</div>
-            <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center;">${Math.floor(xpPct)}%</div>
+            <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1;">${xpProgress}/${xpRequired}</div>
+            <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1; font-size: 8px; color: white;">XP</div>
+            <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1;">${Math.floor(xpPct)}%</div>
         `;
     }
 
@@ -144,11 +144,12 @@ function renderDayCareSlot(container, p, battles, maxBattles, type) {
 
     if (type === 'breed') {
         centerLabel = 'Q';
-        const qVal = p.quality.toFixed(2);
         if (state.dayCareRef && state.dayCareRef.slot1 && state.dayCareRef.slot1.isFinished) {
-            rightText = `${qVal}+0.01`;
+            const baseQ = (p.quality - 0.01).toFixed(2);
+            rightText = `${baseQ}+0.01`;
         } else {
-            rightText = `${qVal}+0.00`;
+            const baseQ = p.quality.toFixed(2);
+            rightText = `${baseQ}+0.00`;
         }
     } else if (type === 'train') {
         centerLabel = 'SumIV';
@@ -182,9 +183,9 @@ function renderDayCareSlot(container, p, battles, maxBattles, type) {
                 <div style="width: 100%; height: 14px; background: #222; border: 1px solid #000; border-radius: 8px; position: relative; overflow: hidden; display: flex; align-items: center; font-size: 9px; font-weight: bold; color: white; text-shadow: 1px 1px 1px black, -1px -1px 1px black, 1px -1px 1px black, -1px 1px 1px black; box-shadow: inset 0px 1px 3px rgba(0,0,0,0.5);">
                     <div style="position: absolute; left: 0; top: 0; width: ${progPct}%; height: 100%; background: #3498db; z-index: 0; transition: width 0.3s; border-radius: 8px;"></div>
                     <div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: flex;">
-                        <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center;">${battles}/${maxBattles}</div>
-                        <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; font-size: 8px; color: white;">${centerLabel}</div>
-                        <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center;">${rightText}</div>
+                        <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1;">${battles}/${maxBattles}</div>
+                        <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1; font-size: 8px; color: white;">${centerLabel}</div>
+                        <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1;">${rightText}</div>
                     </div>
                 </div>
 
