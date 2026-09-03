@@ -670,6 +670,7 @@ async function init() {
     bindBtn('btn-backpack', () => { if(!checkCombatLock()) showBackpack(); });
     bindBtn('btn-dex', () => { if(!checkCombatLock()) showPokedex(); });
     bindBtn('btn-challenges', () => { if(!checkCombatLock()) window.showChallengesModal(); });
+    bindBtn('btn-calendar', () => { if(!checkCombatLock()) showCalendar(); });
 
     window.showBackpackAndFocus = (tab) => {
         if(!checkCombatLock()) {
