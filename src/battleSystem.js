@@ -589,7 +589,7 @@ class BattleSystem {
         }
 
         // Loot Bonus Calculation
-        const lootMultiplier = Math.pow(1.01, this.state.stats.greenCandies || 0);
+        const lootMultiplier = 1 + (0.01 * (this.state.stats.greenCandies || 0));
 
         // Stone drops based on quality
         let dropChance = 0;
@@ -604,7 +604,15 @@ class BattleSystem {
                 // Drop a random stone
                 const stonesList = Object.keys(this.state.backpack.stones);
                 const randomStone = stonesList[Math.floor(Math.random() * stonesList.length)];
-                this.state.backpack.stones[randomStone] = (this.state.backpack.stones[randomStone] || 0) + 1;
+                // Also apply loot multiplier to quantity: default is 1, but with +% we might drop more.
+                // Or maybe the user just wants the exact wording "+1% Loot Probability and +1% Loot Quantity"
+                // Usually this means base 1, plus any extra from percentage as guaranteed or chance.
+                // Let's interpret "Quantity +X%" as multiplying the base drop amount (1) by lootMultiplier, and flooring or adding chance.
+                // Actually, the simplest is `Math.floor(lootMultiplier) + (Math.random() < (lootMultiplier % 1) ? 1 : 0)`.
+                let dropQuantity = Math.floor(lootMultiplier);
+                if (Math.random() < (lootMultiplier % 1)) dropQuantity += 1;
+
+                this.state.backpack.stones[randomStone] = (this.state.backpack.stones[randomStone] || 0) + dropQuantity;
             }
         }
 
@@ -670,7 +678,7 @@ class BattleSystem {
         if (levelTaskTier >= 5 && pokemon.level < 75) bonus += 0.5;
 
         // Purple Candy XP Bonus
-        const xpMultiplier = Math.pow(1.01, this.state.stats.purpleCandies || 0);
+        const xpMultiplier = 1 + (0.01 * (this.state.stats.purpleCandies || 0));
         amount = amount * (1 + bonus) * xpMultiplier;
 
         pokemon.xp += amount;
