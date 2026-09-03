@@ -63,6 +63,8 @@ window.addMoney = addMoney;
 window.addXp = addXp;
 window.exportLog = exportLog;
 window.buyItem = buyItem;
+window.selectStarter = selectStarter;
+
 window.showAddPokemonModal = showAddPokemonModal;
 window.forceNextEncounter = forceNextEncounter;
 window.activateCheat = activateCheat;
