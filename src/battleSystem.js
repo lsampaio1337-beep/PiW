@@ -175,7 +175,7 @@ class BattleSystem {
         }
 
         if (this.state.currentRoute && this.state.currentRoute.startsWith("Casino - ")) {
-            const cost = 10;
+            const cost = this.state.casinoDoubleShiny ? 20 : 10;
             if (this.state.trainer.money < cost) {
                 alert("Not enough money! You need $" + cost + " to continue hunting here.");
                 this.stop();
@@ -198,14 +198,14 @@ class BattleSystem {
 
         this.combatLoop = setTimeout(() => {
             if (this.gymState.isActive) {
-                this.generateGymEncounter();
+                this.generateGymEncounter(delay);
             } else {
-                this.generateEncounter();
+                this.generateEncounter(delay);
             }
         }, delay);
     }
 
-    generateGymEncounter() {
+    generateGymEncounter(slideDelay) {
         const gym = this.gymState.gym;
         if (!gym) return;
 
@@ -274,11 +274,18 @@ class BattleSystem {
         };
 
         this.isSearching = false;
+        this.isSliding = true;
+        this.slideDuration = slideDelay;
         this.updateUI();
-        this.scheduleTurn();
+
+        this.combatLoop = setTimeout(() => {
+            this.isSliding = false;
+            this.updateUI();
+            this.scheduleTurn();
+        }, slideDelay);
     }
 
-    generateEncounter() {
+    generateEncounter(slideDelay) {
         let pokemonBase;
         let level;
         let q;
@@ -384,8 +391,15 @@ class BattleSystem {
         };
 
         this.isSearching = false;
+        this.isSliding = true;
+        this.slideDuration = slideDelay;
         this.updateUI();
-        this.scheduleTurn();
+
+        this.combatLoop = setTimeout(() => {
+            this.isSliding = false;
+            this.updateUI();
+            this.scheduleTurn();
+        }, slideDelay);
     }
 
     getLearnsetMoves(pokemonBase, level) {
@@ -453,25 +467,35 @@ class BattleSystem {
         const eff = this.getTypeEffectiveness(move.type, defender.types);
 
         const hit = mathEngine.calculateDamage(attacker.level, move.power, atkStat, defStat, eff, attacker.quality);
-        defender.currentHp -= hit.damage;
 
-        // Show floating damage
         const targetSide = attacker === leader ? 'enemy' : 'player';
-        if (typeof window.showDamage === 'function') {
-            window.showDamage(targetSide, hit.damage, hit.isCritical, move.name, move.type, eff);
+        const animDuration = 500 / this.state.settings.gameSpeed;
+
+        if (typeof window.playCombatAnimations === 'function') {
+            window.playCombatAnimations(targetSide, move.type, animDuration);
         }
 
-        this.updateUI();
+        // Delay damage and next turn by projectile travel time
+        setTimeout(() => {
+            defender.currentHp -= hit.damage;
 
-        if (defender.currentHp <= 0) {
-            if (defender === this.activeEncounter) {
-                this.handleEnemyDefeat();
-            } else {
-                this.handleFaint();
+            // Show floating damage and splash
+            if (typeof window.showDamage === 'function') {
+                window.showDamage(targetSide, hit.damage, hit.isCritical, move.name, move.type, eff);
             }
-        } else {
-            this.scheduleNextStrike(attacker, defender);
-        }
+
+            this.updateUI();
+
+            if (defender.currentHp <= 0) {
+                if (defender === this.activeEncounter) {
+                    this.handleEnemyDefeat();
+                } else {
+                    this.handleFaint();
+                }
+            } else {
+                this.scheduleNextStrike(attacker, defender);
+            }
+        }, animDuration);
     }
 
     scheduleNextStrike(attacker, defender) {
@@ -539,6 +563,11 @@ class BattleSystem {
         const leader = this.state.party[0];
         const ev = this.activeEncounter.ev;
 
+        // Bonus Candy Defeats Tracker
+        if ((this.state.stats.bonusCandyDefeats || 0) < 1000) {
+            this.state.stats.bonusCandyDefeats = (this.state.stats.bonusCandyDefeats || 0) + 1;
+        }
+
         // Auto Throw Pokeball logic (disable in gyms)
         if (this.state.settings.autoCatch && (!this.gymState || !this.gymState.isActive)) {
             const caught = this.throwPokeball();
@@ -597,9 +626,34 @@ class BattleSystem {
             this.state.dayCareRef.grantPassiveXP(ev, (pkmn, amt) => this.grantXP(pkmn, amt));
         }
 
+        // Loot Bonus Calculation
+        const lootMultiplier = 1 + (0.01 * (this.state.stats.greenCandies || 0));
+
         // Award XP and Money (EV)
         this.grantXP(leader, ev);
-        this.state.trainer.money += Math.floor(ev);
+        this.state.trainer.money += Math.floor(ev * lootMultiplier);
+
+        // Loot drops for Stones
+        let dropRate = 0;
+        switch (this.activeEncounter.qualityName) {
+            case "Regular": dropRate = 0.01; break;
+            case "Uncommon": dropRate = 0.02; break;
+            case "Rare": dropRate = 0.03; break;
+            case "Epic": dropRate = 0.05; break;
+            case "Shiny": dropRate = 1.0; break;
+        }
+
+        if (Math.random() < (dropRate * lootMultiplier) && this.activeEncounter.types && this.activeEncounter.types.length > 0) {
+            const types = this.activeEncounter.types;
+            const randomType = types[Math.floor(Math.random() * types.length)];
+            const stoneName = `${randomType} Stone`;
+
+            let dropQuantity = Math.floor(lootMultiplier);
+            if (Math.random() < (lootMultiplier % 1)) dropQuantity += 1;
+
+            if (!this.state.backpack.stones) this.state.backpack.stones = {};
+            this.state.backpack.stones[stoneName] = (this.state.backpack.stones[stoneName] || 0) + dropQuantity;
+        }
 
         this.state.stats.battlesWon++;
 
@@ -684,7 +738,9 @@ class BattleSystem {
         if (levelTaskTier >= 3 && pokemon.level < 45) bonus += 0.5;
         if (levelTaskTier >= 4 && pokemon.level < 60) bonus += 0.5;
         if (levelTaskTier >= 5 && pokemon.level < 75) bonus += 0.5;
-        amount = amount * (1 + bonus);
+        // Purple Candy XP Bonus
+        const xpMultiplier = 1 + (0.01 * (this.state.stats.purpleCandies || 0));
+        amount = amount * (1 + bonus) * xpMultiplier;
 
         pokemon.xp += amount;
 

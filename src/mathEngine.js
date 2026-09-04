@@ -52,6 +52,10 @@ function calculateCatchChance(bst, level, ballMultiplier, stats = {}, isShiny = 
         chance = chance * 4;
     }
 
+    // Black Yellow Candy Catch Bonus
+    const catchMultiplier = 1 + (0.01 * (stats.blackYellowCandies || 0));
+    chance = chance * catchMultiplier;
+
     // Result clamped between 1% and 100%
     if (chance > 100) chance = 100;
     return Math.max(1, chance);
@@ -60,6 +64,19 @@ function calculateCatchChance(bst, level, ballMultiplier, stats = {}, isShiny = 
 function generateQuality(stats = {}, isDoubleShiny = false) {
     let roll = Math.floor(Math.random() * 12000) + 1;
     let shinySeenTaskTier = stats.shinySeenTaskTier || 0;
+
+    // Rainbow Candy Shiny Bonus (+X rolls)
+    let extraRolls = stats.rainbowCandies || 0;
+
+    // Shiny Boosters
+    // Regular gives +1 roll (11999 becomes 12000). Good gives +2 rolls (11998 becomes 12000), completely replacing the +1.
+    if (shinySeenTaskTier >= 2) extraRolls += 2; // Good Shiny +2 rolls
+    else if (shinySeenTaskTier == 1) extraRolls += 1; // Regular Shiny +1 roll
+
+    // Apply extra rolls logic by artificially boosting the roll if it's within the threshold
+    if (roll >= (12000 - extraRolls)) {
+        roll = 12000;
+    }
 
     let qTaskTier = stats.qTaskTier || 0;
     let bonusValue = 0;
@@ -110,7 +127,7 @@ function generateQuality(stats = {}, isDoubleShiny = false) {
     else if (roll <= regularMaxRoll) { tierName = "Regular"; baseQ = 1.00; maxQ = 1.19; }
     else if (roll <= uncommonMaxRoll) { tierName = "Uncommon"; baseQ = 1.20; maxQ = 1.39; }
     else if (roll <= rareMaxRoll) { tierName = "Rare"; baseQ = 1.40; maxQ = 1.59; }
-    else if (roll <= 11999) { tierName = "Epic"; baseQ = 1.60; maxQ = 1.80; }
+    else if (roll < 12000) { tierName = "Epic"; baseQ = 1.60; maxQ = 1.80; }
     else { return { name: "Shiny", q: 2.00 }; }
 
     let originalQ = baseQ + Math.random() * (maxQ - baseQ);
