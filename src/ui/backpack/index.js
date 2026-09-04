@@ -49,6 +49,7 @@ export function showBackpack() {
                 <div onclick="event.stopPropagation(); document.getElementById('backpack-content-area').style.display='none'" style="position: relative; height: 100%; width: 100%; max-height: 100%; max-width: max-content; aspect-ratio: 1279 / 1350; pointer-events: auto;">
                     <img src="./Assets/Extra/Backpack.png" style="height: 100%; width: 100%; display: block; pointer-events: none;">
 
+
                     <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2;">
                         <!-- Use exact pixel dimensions of the image for the viewBox to ensure perfect circle scaling -->
                         <svg width="100%" height="100%" viewBox="0 0 1279 1350" preserveAspectRatio="none">
@@ -63,7 +64,10 @@ export function showBackpack() {
                         </svg>
                     </div>
 
+                    ${window.sellModeActive ? `<div style="position: absolute; top: 2%; left: 50%; transform: translateX(-50%); font-size: 32px; font-weight: bold; color: #ffeb3b; text-shadow: 0 0 10px red; background: rgba(0,0,0,0.7); padding: 10px 30px; border-radius: 12px; z-index: 10; pointer-events: none;">SELLING MODE</div>` : ''}
+
                     <div id="backpack-content-area" onclick="event.stopPropagation()" style="position: absolute; bottom: 5%; left: 5%; width: 90%; height: 80%; max-height: 80%; display: flex; flex-direction: column; background: rgba(0,0,0,0.85); padding: 15px; box-sizing: border-box; border-radius: 5px; z-index: 5; display: none;">
+
                         <h3 style="text-align: center; margin-top: 0; color: #ddd;">Select a pocket to view items.</h3>
                     </div>
                 </div>
@@ -76,7 +80,14 @@ export function showBackpack() {
 export function renderBackpackTab(tab) {
     const area = document.getElementById('backpack-content-area');
     if (!area) return;
-    area.style.display = "block";
+    area.style.display = "flex";
+    if (window.sellModeActive && tab !== 'pokemon') {
+        area.style.height = "fit-content";
+        area.style.minHeight = "auto";
+
+    } else {
+        area.style.height = '80%';
+    }
 
     if (tab === 'pokeballs') {
         renderPokeballsTab(area);
@@ -97,3 +108,13 @@ export function setActiveItem(type, tierIdx) {
     }
     renderBackpackTab(type === 'ball' ? 'pokeballs' : 'potions');
 }
+
+window.startSellMode = function() {
+    window.sellModeActive = true;
+    if (window.selectedForSale) window.selectedForSale.clear();
+
+    const modalBox = document.getElementById('backpack-modal');
+    if (modalBox) modalBox.style.display = 'block';
+
+    window.showBackpack();
+};

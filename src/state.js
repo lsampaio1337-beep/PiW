@@ -11,7 +11,7 @@ export const state = {
     training: [],
     backpack: {
         pokeballs: { "Pokeball": 100, "Greatball": 0, "Ultraball": 0, "Safariball": 0, "Masterball": 0 },
-        potions: { "Tiny Potion": 100, "Small Potion": 0, "Regular Potion": 0, "Big Potion": 0, "Hyper Potion": 0, "Ultra Potion": 0 },
+        potions: { "Tiny Potion": 100, "Small Potion": 0, "Regular Potion": 0, "Big Potion": 0, "Hyper Potion": 0, "Ultra Potion": 0, "Max Potion": 0 },
         stones: {
             "Normal Stone": 0, "Fire Stone": 0, "Water Stone": 0, "Grass Stone": 0,
             "Electric Stone": 0, "Ice Stone": 0, "Fighting Stone": 0, "Poison Stone": 0,
