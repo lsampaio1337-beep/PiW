@@ -117,10 +117,7 @@ input[type="number"] {
     flex: 1;
     position: relative;
     background-size: cover;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 40px;
+    overflow: hidden;
 }
 
 #view-prof-oak-lab {
@@ -137,21 +134,19 @@ input[type="number"] {
 }
 
 #enemy-side {
+    position: absolute;
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
-    align-self: flex-end;
-    margin-top: 20px;
-    position: relative;
+    align-items: center;
+    transform: translateX(-50%);
 }
 
 #player-side {
+    position: absolute;
     display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    align-self: flex-start;
-    margin-bottom: 20px;
-    position: relative;
+    flex-direction: column-reverse;
+    align-items: center;
+    transform: translateX(-50%);
 }
 
 .stats-box {
@@ -167,7 +162,7 @@ input[type="number"] {
 #enemy-sprite {
     width: 150px;
     height: 150px;
-    margin-top: -10px;
+    margin-top: 10px;
     object-fit: contain;
     position: relative;
 }
@@ -175,7 +170,7 @@ input[type="number"] {
 #player-sprite {
     width: 150px;
     height: 150px;
-    margin-right: 20px;
+    margin-bottom: 10px;
     transform: scaleX(-1); /* Face right */
     object-fit: contain;
     position: relative;

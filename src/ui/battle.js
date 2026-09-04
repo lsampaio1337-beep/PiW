@@ -52,14 +52,42 @@ export function updateBattleArena() {
             if (elEnemyHp) elEnemyHp.innerText = `${Math.floor(enemy.currentHp)}/${enemy.maxHp}`;
 
             const elEnemySprite = document.getElementById('enemy-sprite');
-            if (elEnemySprite) {
+            const elEnemySide = document.getElementById('enemy-side');
+
+            if (elEnemySprite && elEnemySide) {
                 elEnemySprite.src = `Assets/Pokemon Sprites/${enemy.qualityName === 'Shiny' ? enemy.id + '_shiny' : enemy.id}.png`;
                 elEnemySprite.style.display = 'block';
+
+                let baseBottom = 10;
+                if (enemy.types.includes('Water')) baseBottom = 5;
+                if (enemy.types.includes('Flying') || enemy.types.includes('Wind')) baseBottom = 20;
+
+                elEnemySide.style.bottom = `${baseBottom}%`;
+
+                if (battleSystem.isSliding) {
+                    elEnemySide.style.transition = 'none';
+                    elEnemySide.style.left = '100%';
+                    // Trigger reflow
+                    void elEnemySide.offsetWidth;
+                    elEnemySide.style.transition = `left ${battleSystem.slideDuration}ms linear`;
+                    elEnemySide.style.left = '30%';
+                } else {
+                    elEnemySide.style.transition = 'none';
+                    elEnemySide.style.left = '30%';
+                }
             }
 
             const leader = state.party[0];
-            if (leader) {
+            const elPlayerSide = document.getElementById('player-side');
+            if (leader && elPlayerSide) {
                 const playerTotalIV = leader.ivs.hp + leader.ivs.atk + leader.ivs.def + leader.ivs.spa + leader.ivs.spd + leader.ivs.spe;
+
+                let baseBottom = 10;
+                if (leader.types.includes('Water')) baseBottom = 5;
+                if (leader.types.includes('Flying') || leader.types.includes('Wind')) baseBottom = 20;
+
+                elPlayerSide.style.bottom = `${baseBottom}%`;
+                elPlayerSide.style.left = '25%';
 
                 const elPlayerName = document.getElementById('player-name');
                 if (elPlayerName) elPlayerName.innerText = `${leader.name} (Q=${leader.quality.toFixed(2)} & ∑IV=${playerTotalIV})`;
@@ -87,14 +115,26 @@ export function updateBattleArena() {
             if (elEnemyHp) elEnemyHp.innerText = "?/?";
 
             const elEnemySprite = document.getElementById('enemy-sprite');
-            if (elEnemySprite) {
+            const elEnemySide = document.getElementById('enemy-side');
+            if (elEnemySprite && elEnemySide) {
                 elEnemySprite.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
                 elEnemySprite.style.display = 'block';
+                elEnemySide.style.transition = 'none';
+                elEnemySide.style.left = '30%'; // Or center, but user mentioned lock at 30% for battle
+                elEnemySide.style.bottom = '10%'; // default
             }
 
             const leader = state.party[0];
-            if (leader) {
+            const elPlayerSide = document.getElementById('player-side');
+            if (leader && elPlayerSide) {
                 const playerTotalIV = leader.ivs.hp + leader.ivs.atk + leader.ivs.def + leader.ivs.spa + leader.ivs.spd + leader.ivs.spe;
+
+                let baseBottom = 10;
+                if (leader.types.includes('Water')) baseBottom = 5;
+                if (leader.types.includes('Flying') || leader.types.includes('Wind')) baseBottom = 20;
+
+                elPlayerSide.style.bottom = `${baseBottom}%`;
+                elPlayerSide.style.left = '25%';
 
                 const elPlayerName = document.getElementById('player-name');
                 if (elPlayerName) elPlayerName.innerText = `${leader.name} (Q=${leader.quality.toFixed(2)} & ∑IV=${playerTotalIV})`;
