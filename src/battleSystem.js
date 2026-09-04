@@ -453,25 +453,35 @@ class BattleSystem {
         const eff = this.getTypeEffectiveness(move.type, defender.types);
 
         const hit = mathEngine.calculateDamage(attacker.level, move.power, atkStat, defStat, eff, attacker.quality);
-        defender.currentHp -= hit.damage;
 
-        // Show floating damage
         const targetSide = attacker === leader ? 'enemy' : 'player';
-        if (typeof window.showDamage === 'function') {
-            window.showDamage(targetSide, hit.damage, hit.isCritical, move.name, move.type, eff);
+        const animDuration = 500 / this.state.settings.gameSpeed;
+
+        if (typeof window.playCombatAnimations === 'function') {
+            window.playCombatAnimations(targetSide, move.type, animDuration);
         }
 
-        this.updateUI();
+        // Delay damage and next turn by projectile travel time
+        setTimeout(() => {
+            defender.currentHp -= hit.damage;
 
-        if (defender.currentHp <= 0) {
-            if (defender === this.activeEncounter) {
-                this.handleEnemyDefeat();
-            } else {
-                this.handleFaint();
+            // Show floating damage and splash
+            if (typeof window.showDamage === 'function') {
+                window.showDamage(targetSide, hit.damage, hit.isCritical, move.name, move.type, eff);
             }
-        } else {
-            this.scheduleNextStrike(attacker, defender);
-        }
+
+            this.updateUI();
+
+            if (defender.currentHp <= 0) {
+                if (defender === this.activeEncounter) {
+                    this.handleEnemyDefeat();
+                } else {
+                    this.handleFaint();
+                }
+            } else {
+                this.scheduleNextStrike(attacker, defender);
+            }
+        }, animDuration);
     }
 
     scheduleNextStrike(attacker, defender) {
