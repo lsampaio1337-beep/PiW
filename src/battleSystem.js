@@ -81,7 +81,8 @@ class BattleSystem {
         this.gymState = {
             isActive: true,
             gym: gym,
-            currentTrainerIndex: 0
+            currentTrainerIndex: 0,
+            phase: 'REST'
         };
 
         // Update gym UI specifically to show current trainer
@@ -98,20 +99,29 @@ class BattleSystem {
 
         const trainer = gym.trainers[this.gymState.currentTrainerIndex];
 
-        if (trainer) {
-            // Let's add sprites and damage numbers to gym battles!
+        if (this.gymState.phase === 'END') {
             contentArea.innerHTML = `
-                <p>Next Opponent: ${trainer.name}</p>
+                <div style="background-color: rgba(0,0,0,0.8); padding: 20px; border-radius: 8px; text-align: center; color: white; width: 300px;">
+                    <h3 style="margin-top:0;">You defeated ${gym.leader}!</h3>
+                    <p>You earned the ${gym.name} badge.</p>
+                    <button onclick="window.battleEngine.collectBadge()" style="padding: 10px 20px; cursor: pointer;">Collect Badge</button>
+                </div>
+            `;
+            window.battleEngine = this;
+        } else if (this.gymState.phase === 'BATTLE') {
+            const trainer = gym.trainers[this.gymState.currentTrainerIndex];
+            contentArea.innerHTML = `
+                <div id="gym-battle-area" style="display: block; background-color: rgba(0,0,0,0.8); padding: 20px; border-radius: 8px; width: 100%;">
+                    <h3 style="margin-top: 0; margin-bottom: 5px; text-align: center; color: white;">${gym.name}</h3>
+                    <div style="font-size: 14px; margin-bottom: 10px; text-align: center; color: white;">Trainer: ${trainer.name}</div>
 
-                <div id="gym-battle-area" style="display: none; margin-top: 20px; margin-bottom: 20px; position: relative;">
                     <div style="display: flex; justify-content: space-between; align-items: flex-end; height: 150px; background: rgba(0,0,0,0.3); border: 2px solid #555; border-radius: 10px; padding: 20px;">
-
                         <div style="text-align: left; width: 40%;">
-                            <h4 id="gym-player-name">Player</h4>
+                            <h4 id="gym-player-name" style="margin: 0; color: white;">Player</h4>
                             <div style="width: 100%; height: 10px; background: #333; border: 1px solid #777;">
                                 <div id="gym-player-hp-bar" style="width: 100%; height: 100%; background: #2ecc71;"></div>
                             </div>
-                            <span id="gym-player-hp-text"></span>
+                            <span id="gym-player-hp-text" style="color: white; font-size: 12px;"></span>
                             <div style="position: relative; height: 80px; margin-top: 10px;">
                                 <img id="gym-player-sprite" src="" style="position: absolute; bottom: 0; left: 0; max-height: 80px; transform: scaleX(-1);">
                             </div>
@@ -679,6 +689,9 @@ class BattleSystem {
 
                 // Bonus money for winning
                 this.state.trainer.money += 1000 * this.state.trainer.badges;
+                this.gymState.phase = 'END';
+            } else {
+                this.gymState.phase = 'REST';
             }
             this.updateGymUI();
         } else {
