@@ -463,7 +463,33 @@ export function renderOakLab() {
 
     // Check if player has pokemon
     if (state.party.length === 0 && state.storage.length === 0) {
-        return; // still selecting starter, handled in index.html
+        oakLabDiv.innerHTML = `
+        <div style="background-color: rgba(0,0,0,0.8); display: inline-block; padding: 30px; margin-top: 50px; border-radius: 8px;">
+            <h2>Choose your Starter Pokémon</h2>
+            <div class="starter-choices">
+              <button id="choose-bulbasaur">
+                <img src="Assets/Pokemon Sprites/1.png" style="width: 80px; height: 80px;"><br>Bulbasaur
+              </button>
+              <button id="choose-charmander">
+                <img src="Assets/Pokemon Sprites/4.png" style="width: 80px; height: 80px;"><br>Charmander
+              </button>
+              <button id="choose-squirtle">
+                <img src="Assets/Pokemon Sprites/7.png" style="width: 80px; height: 80px;"><br>Squirtle
+              </button>
+            </div>
+        </div>`;
+
+        // We need to re-bind the buttons because they are newly injected HTML
+        const btnBulbasaur = document.getElementById('choose-bulbasaur');
+        if (btnBulbasaur) btnBulbasaur.onclick = () => selectStarter(1);
+
+        const btnCharmander = document.getElementById('choose-charmander');
+        if (btnCharmander) btnCharmander.onclick = () => selectStarter(4);
+
+        const btnSquirtle = document.getElementById('choose-squirtle');
+        if (btnSquirtle) btnSquirtle.onclick = () => selectStarter(7);
+
+        return;
     }
 
     oakLabDiv.innerHTML = `
