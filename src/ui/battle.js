@@ -232,9 +232,8 @@ export function playCombatAnimations(targetSide, moveType, duration) {
     // Attacker launch animation
     atkImg.style.transition = `transform ${duration * 0.2}ms ease-out`;
 
-    const isPlayerAtk = attackerId.includes('player');
     // For attack we just scale up slightly
-    atkImg.dataset.atkTransform = isPlayerAtk ? 'scaleY(1.2)' : 'scale(1.2)';
+    atkImg.dataset.atkTransform = 'scale(1.2)';
     updateTransform(atkImg);
 
     setTimeout(() => {
@@ -303,20 +302,20 @@ export function playCombatAnimations(targetSide, moveType, duration) {
         // Trigger reflow
         splash.getBoundingClientRect();
 
-        // Expand to 25x25 from the center
-        splash.style.left = (endX - 12.5) + 'px';
-        splash.style.top = (endY - 12.5) + 'px';
-        splash.style.width = '25px';
-        splash.style.height = '25px';
+        // Expand to 40x40 from the center
+        splash.style.left = (endX - 20) + 'px';
+        splash.style.top = (endY - 20) + 'px';
+        splash.style.width = '40px';
+        splash.style.height = '40px';
         splash.style.opacity = '1';
 
-        // Phase 2: Grow to 50px and fade out
+        // Phase 2: Grow to 80px and fade out
         setTimeout(() => {
             splash.style.transition = `all ${duration * 0.15}ms linear`;
-            splash.style.left = (endX - 25) + 'px';
-            splash.style.top = (endY - 25) + 'px';
-            splash.style.width = '50px';
-            splash.style.height = '50px';
+            splash.style.left = (endX - 40) + 'px';
+            splash.style.top = (endY - 40) + 'px';
+            splash.style.width = '80px';
+            splash.style.height = '80px';
             splash.style.opacity = '0';
         }, duration * 0.15);
 
