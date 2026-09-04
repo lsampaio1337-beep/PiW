@@ -1,3 +1,4 @@
+import { getSpeciesDataHtml } from "./pokedex.js";
 import { state } from '../state.js';
 import { updateUI, showModal } from '../ui.js';
 import { formatType, formatTypes } from './pokedex.js';
