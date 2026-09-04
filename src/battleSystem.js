@@ -539,11 +539,6 @@ class BattleSystem {
         const leader = this.state.party[0];
         const ev = this.activeEncounter.ev;
 
-        // Bonus Candy Defeats Tracker
-        if ((this.state.stats.bonusCandyDefeats || 0) < 1000) {
-            this.state.stats.bonusCandyDefeats = (this.state.stats.bonusCandyDefeats || 0) + 1;
-        }
-
         // Auto Throw Pokeball logic (disable in gyms)
         if (this.state.settings.autoCatch && (!this.gymState || !this.gymState.isActive)) {
             const caught = this.throwPokeball();
@@ -602,34 +597,9 @@ class BattleSystem {
             this.state.dayCareRef.grantPassiveXP(ev, (pkmn, amt) => this.grantXP(pkmn, amt));
         }
 
-        // Loot Bonus Calculation
-        const lootMultiplier = 1 + (0.01 * (this.state.stats.greenCandies || 0));
-
         // Award XP and Money (EV)
         this.grantXP(leader, ev);
-        this.state.trainer.money += Math.floor(ev * lootMultiplier);
-
-        // Loot drops for Stones
-        let dropRate = 0;
-        switch (this.activeEncounter.qualityName) {
-            case "Regular": dropRate = 0.01; break;
-            case "Uncommon": dropRate = 0.02; break;
-            case "Rare": dropRate = 0.03; break;
-            case "Epic": dropRate = 0.05; break;
-            case "Shiny": dropRate = 1.0; break;
-        }
-
-        if (Math.random() < (dropRate * lootMultiplier) && this.activeEncounter.types && this.activeEncounter.types.length > 0) {
-            const types = this.activeEncounter.types;
-            const randomType = types[Math.floor(Math.random() * types.length)];
-            const stoneName = `${randomType} Stone`;
-
-            let dropQuantity = Math.floor(lootMultiplier);
-            if (Math.random() < (lootMultiplier % 1)) dropQuantity += 1;
-
-            if (!this.state.backpack.stones) this.state.backpack.stones = {};
-            this.state.backpack.stones[stoneName] = (this.state.backpack.stones[stoneName] || 0) + dropQuantity;
-        }
+        this.state.trainer.money += Math.floor(ev);
 
         // Loot drops for Stones
         let dropRate = 0;
@@ -732,10 +702,7 @@ class BattleSystem {
         if (levelTaskTier >= 3 && pokemon.level < 45) bonus += 0.5;
         if (levelTaskTier >= 4 && pokemon.level < 60) bonus += 0.5;
         if (levelTaskTier >= 5 && pokemon.level < 75) bonus += 0.5;
-
-        // Purple Candy XP Bonus
-        const xpMultiplier = 1 + (0.01 * (this.state.stats.purpleCandies || 0));
-        amount = amount * (1 + bonus) * xpMultiplier;
+        amount = amount * (1 + bonus);
 
         pokemon.xp += amount;
 
