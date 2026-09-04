@@ -167,80 +167,11 @@ export function showDexEntry(id) {
 }
 
 
-export function getDexEntryHtml(id) {
-    const pd = state.config.pokemonData.find(p => p.id === id);
-    if (!pd) return '';
-
-    // Build Defensive Effectiveness
-    const defensive = state.config.typeMatchups.defensive[pd.types[0]];
-    let defMatchups = {};
-    for (const type in defensive) {
-        defMatchups[type] = defensive[type];
-    }
-    if (pd.types.length > 1) {
-        const defensive2 = state.config.typeMatchups.defensive[pd.types[1]];
-        for (const type in defensive2) {
-            defMatchups[type] = (defMatchups[type] || 1) * defensive2[type];
-        }
-    }
-    const defWeak = [], defResist = [];
-    for (const type in defMatchups) {
-        if (defMatchups[type] > 1) defWeak.push(formatType(type));
-        else if (defMatchups[type] < 1 && defMatchups[type] > 0) defResist.push(formatType(type));
-    }
-
-    // Build Offensive Effectiveness
-    const offensive = state.config.typeMatchups.offensive[pd.types[0]];
-    let offMatchups = {};
-    for (const type in offensive) {
-        offMatchups[type] = offensive[type];
-    }
-    if (pd.types.length > 1) {
-        const offensive2 = state.config.typeMatchups.offensive[pd.types[1]];
-        for (const type in offensive2) {
-            offMatchups[type] = Math.max(offMatchups[type] || 0, offensive2[type]);
-        }
-    }
-    const offSuper = [], offNotVery = [];
-    for (const type in offMatchups) {
-        if (offMatchups[type] > 1) offSuper.push(formatType(type));
-        else if (offMatchups[type] < 1 && offMatchups[type] > 0) offNotVery.push(formatType(type));
-    }
-
-    const bst = pd.hp + pd.atk + pd.def + pd.spa + pd.spd + pd.spe;
-    const bstHtml = `BST: ${bst} (HP:${pd.hp} | Speed:${pd.spe} | Atk:${pd.atk} SpAtk:${pd.spa} | Def:${pd.def} SpDef:${pd.spd})`;
-
-    let movesetHtml = '';
-    const uniqueMoves = [];
-    for (const move of pd.moveset) {
-        if (!uniqueMoves.some(m => m.name === move.name)) uniqueMoves.push(move);
-    }
-    for (const move of uniqueMoves) {
-        movesetHtml += `<span style="font-size: 11px;">Lv${move.level}: <b>${move.name}</b> (${formatType(move.type)} Power: ${move.power})</span><br>`;
-    }
-
-    return `
-        <div style="text-align: center; margin-bottom: 10px; font-size: 14px; font-weight: bold;">
-            ${bstHtml}
-        </div>
-
-        <div style="background: rgba(0,0,0,0.2); padding: 10px; border-radius: 5px; margin-bottom: 10px; text-align: left; font-size: 12px; line-height: 1.5;">
-            <b>Defensive Effectiveness</b><br>
-            Weak To (2x): ${defWeak.join(', ')}<br>
-            Resists (0.5x): ${defResist.join(', ')}<br>
-            <div style="margin-top: 5px;">
-                <b>Offensive Effectiveness</b><br>
-                Super Effective (2x): ${offSuper.join(', ')}<br>
-                Not Very Effective (0.5x): ${offNotVery.join(', ')}
-            </div>
-        </div>
-    `;
-}
-
-
 export function getSpeciesDataHtml(pData, state) {
     const bst = pData.hp + pData.atk + pData.def + pData.spa + pData.spd + pData.spe;
 
+    // Calculate Type Effectiveness
+    const tConfig = state.config.types;
     let weaknesses = {};
     let resistances = {};
     let immunities = {};
@@ -248,24 +179,33 @@ export function getSpeciesDataHtml(pData, state) {
     let notEffective = {};
     let noEffect = {};
 
-    pData.types.forEach(type => {
-        const typeData = state.config.types[type];
-        if (!typeData) return;
+    // Defending Matchups (Weakness, Resistance, Immune)
+    for (const atkType in tConfig) {
+        let multiplier = 1;
+        for (const defType of pData.types) {
+            if (tConfig[atkType] && tConfig[atkType][defType] !== undefined) {
+                multiplier *= tConfig[atkType][defType];
+            }
+        }
+        if (multiplier > 1) weaknesses[atkType] = multiplier;
+        else if (multiplier < 1 && multiplier > 0) resistances[atkType] = multiplier;
+        else if (multiplier === 0) immunities[atkType] = multiplier;
+    }
 
-        Object.keys(typeData.defenses).forEach(attacker => {
-            const val = typeData.defenses[attacker];
-            if (val === 2) weaknesses[attacker] = (weaknesses[attacker] || 1) * 2;
-            if (val === 0.5) resistances[attacker] = (resistances[attacker] || 1) * 0.5;
-            if (val === 0) immunities[attacker] = 0;
-        });
-
-        Object.keys(typeData.attacks).forEach(defender => {
-            const val = typeData.attacks[defender];
-            if (val === 2) effective[defender] = (effective[defender] || 1) * 2;
-            if (val === 0.5) notEffective[defender] = (notEffective[defender] || 1) * 0.5;
-            if (val === 0) noEffect[defender] = 0;
-        });
-    });
+    // Attacking Matchups (Effective, Not Effective, No Effect)
+    for (const defType in tConfig) {
+        let maxMult = 0;
+        for (const atkType of pData.types) {
+            let m = 1;
+            if (tConfig[atkType] && tConfig[atkType][defType] !== undefined) {
+                m = tConfig[atkType][defType];
+            }
+            if (m > maxMult) maxMult = m;
+        }
+        if (maxMult > 1) effective[defType] = maxMult;
+        else if (maxMult < 1 && maxMult > 0) notEffective[defType] = maxMult;
+        else if (maxMult === 0) noEffect[defType] = maxMult;
+    }
 
     let movesHtml = `
         <table style="width: 100%; text-align: left; font-size: 14px; border-collapse: collapse;">
