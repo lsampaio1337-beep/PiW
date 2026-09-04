@@ -14,7 +14,7 @@ const balance = {
         {"name": "Pokeball", "price": 5, "multiplier": 1.0},
         {"name": "Greatball", "price": 50, "multiplier": 1.5},
         {"name": "Ultraball", "price": 600, "multiplier": 2.0},
-        {"name": "Masterball", "price": 1000000, "multiplier": 999.0}
+        {"name": "Masterball", "price": 25000, "multiplier": 999.0}
       ],
       "potions": [
         {"name": "Tiny Potion", "price": 10, "heal": 25},
@@ -23,11 +23,11 @@ const balance = {
         {"name": "Big", "price": 300, "heal": 250},
         {"name": "Hyper Potion", "price": 1500, "heal": 1000},
         {"name": "Ultra Potion", "price": 9000, "heal": 5000},
-        {"name": "Max Potion", "price": 300000, "heal": 999999}
+        {"name": "Max Potion", "price": 50000, "heal": 999999}
       ],
       "stones": {
-         "price": 10000,
-         "sell": 5000
+         "price": 500,
+         "sell": 200
       }
     }
   };

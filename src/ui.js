@@ -38,7 +38,7 @@ import { showPokemonStats, showPokemonStatsByUuid, evolvePokemon } from './ui/po
 import { showBonusCandyModal } from './ui/bonusCandy.js';
 window.showBonusCandyModal = showBonusCandyModal;
 import { showSettings, updateGameSpeed, addMoney, addXp, exportLog, showAddPokemonModal, forceNextEncounter, activateCheat } from './ui/settings.js';
-import { setupMarket } from './ui/market.js';
+import { setupMarket, buyItem } from './ui/market.js';
 import { showBackpack, renderBackpackTab, setActiveItem } from './ui/backpack/index.js';
 import { dragStart, dragOver, handleDrop } from './ui/backpack/pokemon.js';
 
@@ -53,7 +53,6 @@ window.navigateToLocation = navigateToLocation;
 window.showMapTooltip = showMapTooltip;
 window.hideMapTooltip = hideMapTooltip;
 window.showBackpack = showBackpack;
-window.formatMarketPrice = function(val) { if (val < 1000) return val.toString(); if (val < 1000000) { let exactK = val / 1000; let roundedUpK = Math.ceil(val / 100) / 10; let isExact = (exactK === roundedUpK); return (isExact ? "" : "~") + roundedUpK.toFixed(1) + "k"; } if (val < 1000000000) { let exactM = val / 1000000; let roundedUpM = Math.ceil(val / 100000) / 10; let isExact = (exactM === roundedUpM); return (isExact ? "" : "~") + roundedUpM.toFixed(1) + "m"; } if (val < 1000000000000) { let exactB = val / 1000000000; let roundedUpB = Math.ceil(val / 100000000) / 10; let isExact = (exactB === roundedUpB); return (isExact ? "" : "~") + roundedUpB.toFixed(1) + "b"; } let exactT = val / 1000000000000; let roundedUpT = Math.ceil(val / 100000000000) / 10; let isExact = (exactT === roundedUpT); return (isExact ? "" : "~") + roundedUpT.toFixed(1) + "t"; };
 window.renderBackpackTab = renderBackpackTab;
 window.setActiveItem = setActiveItem;
 window.showPokedex = showPokedex;
@@ -66,8 +65,7 @@ window.updateGameSpeed = updateGameSpeed;
 window.addMoney = addMoney;
 window.addXp = addXp;
 window.exportLog = exportLog;
-window.selectStarter = selectStarter;
-
+window.buyItem = buyItem;
 window.showAddPokemonModal = showAddPokemonModal;
 window.forceNextEncounter = forceNextEncounter;
 window.activateCheat = activateCheat;
@@ -486,7 +484,7 @@ export function renderOakLab() {
 export function switchView(viewName) {
     document.querySelectorAll('.game-view').forEach(el => el.style.display = 'none');
 
-    if (viewName === 'PROF_OAK_LAB') { console.log("SWITCHING TO OAK LAB!");
+    if (viewName === 'PROF_OAK_LAB') {
         document.getElementById('view-prof-oak-lab').style.display = 'block';
         renderOakLab();
     } else if (viewName === 'BATTLE_ARENA') {
@@ -565,7 +563,7 @@ function selectStarter(id) {
 
     state.party.push(starter);
     state.currentRoute = "Professor Oak Lab";
-    if (document.getElementById("splash-screen")) document.getElementById("splash-screen").style.display = "none"; switchView("PROF_OAK_LAB");
+    switchView("PROF_OAK_LAB");
 
     startGame();
     renderOakLab(); // Renders the new Oak Lab UI now that we have a party
@@ -586,10 +584,8 @@ function startGame() {
 async function init() {
     await loadConfigs();
     const saved = storage.load();
-    const forceNewGame = localStorage.getItem('forceNewGame');
-    if (forceNewGame) localStorage.removeItem('forceNewGame');
 
-    if (saved && !forceNewGame) {
+    if (saved) {
         // Show the save prompt modal instead of using confirm()
         const savePrompt = document.getElementById('save-prompt-modal');
         const splashScreen = document.getElementById('splash-screen');
@@ -612,7 +608,7 @@ async function init() {
                 // Switch view based on saved route
                 if (state.currentRoute === "Professor Oak Lab") {
                     switchView("PROF_OAK_LAB");
-                } else if (state.currentRoute === "PokeCenter & PokeMarket") {
+                } else if (state.currentRoute === "PokeCenter & PokeMarket" || state.currentRoute === "Pokemon Center & Market") {
                     navigateToLocation(state.currentRoute);
                 } else if (state.currentRoute.includes("Gym") || state.currentRoute === "Indigo Plateu") {
                     navigateToLocation(state.currentRoute);
@@ -626,12 +622,10 @@ async function init() {
                 savePrompt.style.display = 'none';
 
                 storage.reset();
-                localStorage.setItem('forceNewGame', 'true');
-                window.location.reload();
+                window.location.reload(); // Actually refresh the page to clear memory state completely
             };
         }
     } else {
-        if (document.getElementById("splash-screen")) document.getElementById("splash-screen").style.display = "none";
         switchView("PROF_OAK_LAB");
     }
 
@@ -676,7 +670,7 @@ async function init() {
     };
 
     bindBtn('btn-map', () => { if(!checkCombatLock()) showMap(); });
-    bindBtn('btn-backpack', () => { if(!checkCombatLock()) { window.sellModeActive = false; if(window.selectedForSale) window.selectedForSale.clear(); showBackpack(); } });
+    bindBtn('btn-backpack', () => { if(!checkCombatLock()) showBackpack(); });
     bindBtn('btn-dex', () => { if(!checkCombatLock()) showPokedex(); });
     bindBtn('btn-bonus-candy', () => { if(!checkCombatLock()) showBonusCandyModal(); });
     bindBtn('btn-challenges', () => { if(!checkCombatLock()) window.showChallengesModal(); });
@@ -684,8 +678,6 @@ async function init() {
 
     window.showBackpackAndFocus = (tab) => {
         if(!checkCombatLock()) {
-            window.sellModeActive = false;
-            if(window.selectedForSale) window.selectedForSale.clear();
             showBackpack();
             renderBackpackTab(tab);
         }
