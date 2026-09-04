@@ -1,57 +1,8 @@
-import { getSpeciesDataHtml } from "./pokedex.js";
+import { getSpeciesDataHtml, buildEvolutionLineHtml } from "./pokedex.js";
 import { state } from '../state.js';
 import { updateUI, showModal } from '../ui.js';
 import { formatType, formatTypes } from './pokedex.js';
 
-
-function buildEvolutionLineHtml(pData, state) {
-    let baseId = pData.id;
-    let foundPrev = true;
-    while(foundPrev) {
-        foundPrev = false;
-        for (const pd of state.config.pokemonData) {
-            if (pd.evolutions && pd.evolutions.some(e => e.to === baseId)) {
-                baseId = pd.id;
-                foundPrev = true;
-                break;
-            }
-        }
-    }
-
-    function buildTree(currentId) {
-        const pd = state.config.pokemonData.find(p => p.id === currentId);
-        if (!pd) return "";
-
-        let html = `<div style="display: flex; flex-direction: column; align-items: center; margin: 5px;">
-            <img src="Assets/Pokemon Sprites/${pd.id}.png" style="width: 50px; height: 50px; cursor: pointer;" onclick="window.showDexEntry(${pd.id})" title="${pd.name}">
-            <span style="font-size: 10px; cursor: pointer;" onclick="window.showDexEntry(${pd.id})">${pd.name}</span>
-        </div>`;
-
-        if (pd.evolutions && pd.evolutions.length > 0) {
-            html = `<div style="display: flex; align-items: center;">` + html;
-
-            let evosHtml = `<div style="display: flex; flex-direction: column; justify-content: center; margin-left: 10px;">`;
-            for (const evo of pd.evolutions) {
-                evosHtml += `<div style="display: flex; align-items: center; margin: 5px 0;">
-                    <div style="font-size: 10px; color: #aaa; margin-right: 5px;">Lv.${evo.level} ➔</div>
-                    ${buildTree(evo.to)}
-                </div>`;
-            }
-            evosHtml += `</div>`;
-            html += evosHtml + `</div>`;
-        }
-
-        return html;
-    }
-
-    let treeHtml = buildTree(baseId);
-    return `<div style="text-align: left; margin: 15px 0; font-size: 14px; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 5px; overflow-x: auto;">
-        <h4 style="margin: 0 0 10px 0;">Evolution Line</h4>
-        <div style="display: flex; align-items: center; justify-content: center;">
-            ${treeHtml}
-        </div>
-    </div>`;
-}
 
 function getEvolveRequirements(p, evo, state) {
     const requiredLevel = evo.level;
@@ -160,11 +111,11 @@ export function showPokemonStats(idx, location) {
     }
 
     let individualHtml = `
-        <div style="display: flex; justify-content: space-around; flex-wrap: wrap; align-items: flex-start;">
-            <div style="text-align: left; min-width: 150px;">
-                <h4 style="margin-bottom: 5px; text-align: center;">Actual Stats</h4>
+        <div style="display: flex; justify-content: space-around; flex-wrap: wrap; align-items: flex-start; gap: 10px;">
+            <div style="background: rgba(0,0,0,0.5); padding: 15px; border-radius: 8px; text-align: left; min-width: 150px; flex: 1;">
+                <h4 style="margin: 0 0 10px 0; text-align: center;">Actual Stats</h4>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 12px; text-align: center;">
-                    <div>HP<br><b>${p.currentHp}/${p.maxHp}</b></div>
+                    <div>HP<br><b>${p.maxHp}</b></div>
                     <div>Speed<br><b>${p.currentStats ? p.currentStats.spe : '?'}</b></div>
                     <div>Atk<br><b>${p.currentStats ? p.currentStats.atk : '?'}</b></div>
                     <div>SpAtk<br><b>${p.currentStats ? p.currentStats.spa : '?'}</b></div>
@@ -173,15 +124,15 @@ export function showPokemonStats(idx, location) {
                 </div>
             </div>
 
-            <div style="text-align: center;">
+            <div style="background: rgba(0,0,0,0.5); padding: 15px; border-radius: 8px; text-align: center; flex: 1;">
                 <img src="Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png" style="width: 100px; height: 100px;"><br>
                 <p style="margin: 5px 0;"><b>Type:</b> ${p.types.map(t => formatType(t)).join(' ')}</p>
                 <b>Quality:</b> ${p.qualityName} (Q=${p.quality.toFixed(2)})<br>
                 <b>Sum IVs:</b> ${sumIV}<br>
             </div>
 
-            <div style="text-align: left; min-width: 200px;">
-                <h4 style="margin-bottom: 5px; text-align: center;">IV Distribution</h4>
+            <div style="background: rgba(0,0,0,0.5); padding: 15px; border-radius: 8px; text-align: left; min-width: 200px; flex: 1;">
+                <h4 style="margin: 0 0 10px 0; text-align: center;">IV Distribution</h4>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 12px; text-align: center;">
                     <div>HP<br>${ivBar(p.ivs.hp)}</div>
                     <div>Speed<br>${ivBar(p.ivs.spe)}</div>
