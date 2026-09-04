@@ -568,7 +568,18 @@ function selectStarter(id) {
     state.currentRoute = "Professor Oak Lab";
     switchView("PROF_OAK_LAB");
 
+    // Unlock the top bar for a new game
+    const navButtons = document.getElementById('nav-buttons');
+    if (navButtons) {
+        navButtons.style.pointerEvents = 'auto';
+        navButtons.style.opacity = '1.0';
+    }
+
     startGame();
+
+    // Force an immediate save so the initial state is persisted to the new profile
+    storage.save(state);
+
     renderOakLab(); // Renders the new Oak Lab UI now that we have a party
 }
 
@@ -605,6 +616,13 @@ async function init() {
     const startNewGame = () => {
         if (splashScreen) splashScreen.style.display = 'none';
         if (saveManagerModal) saveManagerModal.style.display = 'none';
+
+        // Force the nav buttons to be disabled immediately.
+        const navButtons = document.getElementById('nav-buttons');
+        if (navButtons) {
+            navButtons.style.pointerEvents = 'none';
+            navButtons.style.opacity = '0.5';
+        }
 
         switchView("PROF_OAK_LAB");
         // Don't call startGame yet, the user must choose a pokemon first.
@@ -790,10 +808,10 @@ async function init() {
     bindBtn('btn-exit', () => {
         if (confirm("Are you sure you want to save and exit?")) {
             if (state.party.length === 0 && state.storage.length === 0) {
-                window.location.reload();
+                window.close();
             } else {
                 storage.save(state);
-                window.location.reload(); // Reloads to the profile selection screen
+                window.close(); // Closes the app completely (works in Electron/app context)
             }
         }
     });
