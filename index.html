@@ -100,21 +100,27 @@
       <div id="view-battle-arena" class="game-view" style="display:none;">
         <div id="combat-arena">
           <div id="enemy-side">
-            <div class="stats-box">
-              <h4 id="enemy-name">Wild Pokemon</h4>
-              <div>Lvl: <span id="enemy-lvl">?</span></div>
-              <div>HP: <span id="enemy-hp">?/?</span></div>
+            <div style="width: 200px; height: 18px; background: #222; border: 1px solid #000; border-radius: 8px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: bold; color: white; text-shadow: 1px 1px 1px black, -1px -1px 1px black, 1px -1px 1px black, -1px 1px 1px black; box-shadow: inset 0px 1px 3px rgba(0,0,0,0.5); z-index: 5;" id="enemy-battle-hp-container">
+                <div id="enemy-battle-hp-bar" style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: #2ecc71; z-index: 0; transition: width 0.3s, background 0.3s; border-radius: 8px;"></div>
+                <div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: flex;">
+                    <div id="enemy-battle-hp-text" style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1;">?/?</div>
+                    <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1; font-size: 10px; color: white;">HP</div>
+                    <div id="enemy-battle-hp-pct" style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1;">100%</div>
+                </div>
             </div>
             <img id="enemy-sprite" src="" alt="Enemy Sprite">
           </div>
 
           <div id="player-side">
-            <img id="player-sprite" src="" alt="Player Sprite">
-            <div class="stats-box">
-              <h4 id="player-name">Player Leader</h4>
-              <div>Lvl: <span id="player-lvl">?</span></div>
-              <div>HP: <span id="player-hp">?/?</span></div>
+            <div style="width: 200px; height: 18px; background: #222; border: 1px solid #000; border-radius: 8px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: bold; color: white; text-shadow: 1px 1px 1px black, -1px -1px 1px black, 1px -1px 1px black, -1px 1px 1px black; box-shadow: inset 0px 1px 3px rgba(0,0,0,0.5); z-index: 5;" id="player-battle-hp-container">
+                <div id="player-battle-hp-bar" style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: #2ecc71; z-index: 0; transition: width 0.3s, background 0.3s; border-radius: 8px;"></div>
+                <div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: flex;">
+                    <div id="player-battle-hp-text" style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1;">?/?</div>
+                    <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1; font-size: 10px; color: white;">HP</div>
+                    <div id="player-battle-hp-pct" style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1;">100%</div>
+                </div>
             </div>
+            <img id="player-sprite" src="" alt="Player Sprite">
           </div>
         </div>
 

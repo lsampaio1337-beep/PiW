@@ -198,14 +198,14 @@ class BattleSystem {
 
         this.combatLoop = setTimeout(() => {
             if (this.gymState.isActive) {
-                this.generateGymEncounter();
+                this.generateGymEncounter(delay);
             } else {
-                this.generateEncounter();
+                this.generateEncounter(delay);
             }
         }, delay);
     }
 
-    generateGymEncounter() {
+    generateGymEncounter(slideDelay) {
         const gym = this.gymState.gym;
         if (!gym) return;
 
@@ -274,11 +274,18 @@ class BattleSystem {
         };
 
         this.isSearching = false;
+        this.isSliding = true;
+        this.slideDuration = slideDelay;
         this.updateUI();
-        this.scheduleTurn();
+
+        this.combatLoop = setTimeout(() => {
+            this.isSliding = false;
+            this.updateUI();
+            this.scheduleTurn();
+        }, slideDelay);
     }
 
-    generateEncounter() {
+    generateEncounter(slideDelay) {
         let pokemonBase;
         let level;
         let q;
@@ -384,8 +391,15 @@ class BattleSystem {
         };
 
         this.isSearching = false;
+        this.isSliding = true;
+        this.slideDuration = slideDelay;
         this.updateUI();
-        this.scheduleTurn();
+
+        this.combatLoop = setTimeout(() => {
+            this.isSliding = false;
+            this.updateUI();
+            this.scheduleTurn();
+        }, slideDelay);
     }
 
     getLearnsetMoves(pokemonBase, level) {
