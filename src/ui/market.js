@@ -15,6 +15,7 @@ export function setupMarket(vCenter) {
 
     // Create interactive overlay buttons (Transparent absolute positioned for realism, but let's just make nice visual buttons positioned over the desks)
     vCenter.innerHTML = `
+        <div id="market-toast" style="display: none; position: absolute; top: 10%; left: 50%; transform: translateX(-50%); background: #2ecc71; color: white; padding: 10px 20px; border-radius: 8px; z-index: 200; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.5);"></div>
         <!-- Left Side: PokeCenter -->
         <button id="btn-heal-all" style="position: absolute; left: 15%; top: 20%; padding: 15px 30px; font-size: 18px; font-weight: bold; background: #e74c3c; color: white; border: 2px solid white; border-radius: 8px; cursor: pointer; transform: translate(-50%, -50%); box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
             Heal
@@ -31,9 +32,10 @@ export function setupMarket(vCenter) {
         </div>
 
         <!-- Market Buy Modal Container (Hidden by default) -->
-        <div id="market-buy-modal" style="display: none; position: absolute; top: 20%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.9); padding: 20px; border-radius: 12px; border: 2px solid #3498db; width: 80%; max-width: 800px; max-height: 80%; overflow-y: auto; color: white; z-index: 100; resize: both; overflow: auto;">
+        <div id="market-buy-modal-overlay" onclick="window.closeMarketBuyModal(event)" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 99; background: rgba(0,0,0,0.5);">
+        <div id="market-buy-modal" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.9); padding: 20px; border-radius: 12px; border: 2px solid #3498db; width: 60%; max-width: 600px; max-height: 80%; overflow-y: auto; color: white; z-index: 100; resize: both; overflow: auto;" onclick="event.stopPropagation()">
             <h2 style="text-align: center; margin-top: 0;">PokeMarket - Buy</h2>
-            <button onclick="document.getElementById('market-buy-modal').style.display='none'" style="position: absolute; top: 10px; right: 10px; background: red; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">Close</button>
+            <button onclick="document.getElementById('market-buy-modal-overlay').style.display='none'" style="position: absolute; top: 10px; right: 10px; background: red; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">Close</button>
 
             <div style="text-align: center; margin-bottom: 20px;">
                 <button onclick="window.renderBuyTab('pokeballs')" style="padding: 8px 15px; margin: 0 5px; cursor: pointer;">Pokeballs</button>
@@ -46,10 +48,11 @@ export function setupMarket(vCenter) {
                 <input type="number" id="global-buy-qty" value="1" min="1" oninput="window.updateBuyPrices()" style="width: 80px; padding: 5px; text-align: center; font-size: 16px;">
             </div>
 
-            <div id="market-buy-items-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px;">
+            <div id="market-buy-items-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 15px;">
                 <!-- Items injected here -->
             </div>
         </div>
+    </div>
     `;
 
     document.getElementById('btn-heal-all').onclick = () => {
@@ -59,11 +62,14 @@ export function setupMarket(vCenter) {
     };
 
     document.getElementById('btn-market-buy').onclick = () => {
-        document.getElementById('market-buy-modal').style.display = 'block';
+        document.getElementById('market-buy-modal-overlay').style.display = 'block';
         window.renderBuyTab('pokeballs'); // Default tab
     };
 
     document.getElementById('btn-market-sell').onclick = () => {
+        if (document.getElementById('market-buy-modal-overlay')) {
+            document.getElementById('market-buy-modal-overlay').style.display = 'none';
+        }
         if (window.startSellMode) {
             window.startSellMode();
         }
@@ -82,7 +88,7 @@ window.renderBuyTab = function(category) {
 
     if (category === 'pokeballs') {
         state.config.balance.items.pokeballs.forEach(b => {
-            html += generateBuyCard(b.name, b.price, `Efficiency: ${b.multiplier}x`, category, `Assets/Items/Pokeballs/${b.name}.png`);
+            html += generateBuyCard(b.name, b.price, `Efficiency: ${b.multiplier}x`, category, `Assets/Items/Balls/${b.name.replace(/Regular Pokeball/, "Pokeball").replace(/Great Pokeball/, "Greatball").replace(/Ultra Pokeball/, "Ultraball").replace(/Master Pokeball/, "Masterball")}.png`);
         });
     } else if (category === 'potions') {
         state.config.balance.items.potions.forEach(p => {
@@ -95,7 +101,7 @@ window.renderBuyTab = function(category) {
     } else if (category === 'stones') {
         const stonePrice = state.config.balance.items.stones.price;
         Object.keys(state.backpack.stones).forEach(stoneName => {
-            html += generateBuyCard(stoneName, stonePrice, "Evolves specific Pokemon", category, `Assets/Items/Stones/${stoneName}.png`);
+            html += generateBuyCard(stoneName, stonePrice, "", category, `Assets/Items/Stones/${stoneName}.png`);
         });
     }
 
@@ -109,11 +115,11 @@ function generateBuyCard(name, price, attribute, category, imgPath) {
         <div onclick="window.confirmBuyItem('${name}', ${price}, '${category}')" style="background: #333; border: 2px solid #555; border-radius: 8px; padding: 15px; text-align: center; cursor: pointer; transition: transform 0.1s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
             <img src="${imgPath}" onerror="this.src='./Assets/Extra/Spot.png'" style="width: 32px; height: 32px; object-fit: contain; margin-bottom: 10px;">
             <div style="font-weight: bold; font-size: 16px; margin-bottom: 5px;">${name}</div>
-            <div style="font-size: 12px; color: #aaa; margin-bottom: 10px;">${attribute}</div>
+            ${attribute ? `<div style="font-size: 10px; color: #aaa; margin-bottom: 5px;">${attribute}</div>` : ""}
             <div class="buy-price-display" data-base-price="${price}" style="color: #f1c40f; font-weight: bold; font-size: 18px;">
                 $${price}
             </div>
-            <div style="margin-top: 10px; font-size: 12px; color: #3498db;">Click to Buy</div>
+
         </div>
     `;
 }
@@ -153,8 +159,18 @@ window.confirmBuyItem = function(itemId, cost, category) {
              state.backpack[category][itemId] = qty;
         }
         updateUI();
-        alert(`Bought ${qty}x ${itemId} for $${totalCost.toLocaleString()}!`);
+        const toast = document.getElementById('market-toast');
+        if (toast) {
+            toast.innerText = `Bought ${qty}x ${itemId} for ${totalCost.toLocaleString()}!`;
+            toast.style.display = 'block';
+            setTimeout(() => { toast.style.display = 'none'; }, 2000);
+        }
     } else {
         alert(`Not enough money! You need $${totalCost.toLocaleString()} but only have $${state.trainer.money.toLocaleString()}.`);
     }
+};
+
+window.closeMarketBuyModal = function(e) {
+    const overlay = document.getElementById('market-buy-modal-overlay');
+    if (overlay) overlay.style.display = 'none';
 };

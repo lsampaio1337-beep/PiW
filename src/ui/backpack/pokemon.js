@@ -54,12 +54,15 @@ function renderSlotUI(p, listName, origIndex, isDraggable) {
 }
 
 window.toggleSaleSelection = function(uuid) {
+    if (!window.selectedForSale) window.selectedForSale = new Set();
+
     if (window.selectedForSale.has(uuid)) {
         window.selectedForSale.delete(uuid);
     } else {
-        if (window.selectedForSale) window.selectedForSale.add(uuid);
+        window.selectedForSale.add(uuid);
     }
-    renderBackpackTab('pokemon');
+
+    if (window.renderBackpackTab) window.renderBackpackTab('pokemon');
 };
 
 // Global filter state
@@ -94,7 +97,7 @@ export function renderPokemonTab(area) {
                 <div style="margin-bottom: 10px; color: #f1c40f; font-weight: bold; font-size: 16px;">Selected: ${selectedCount} Pokemon - Value: ${Math.floor(selectedEVTotal).toLocaleString()}</div>
                 <button onclick="window.selectAllVisibleStorage()" style="padding: 8px 15px; margin-right: 5px; background: #3498db; color: white; border: none; border-radius: 4px; cursor: pointer;">Select All Visible Storage</button>
                 <button onclick="window.sellSelectedPokemon()" style="padding: 8px 15px; margin-right: 5px; background: #e74c3c; color: white; border: none; border-radius: 4px; cursor: pointer;">Sell Selected (${Math.floor(selectedEVTotal).toLocaleString()})</button>
-                <button onclick="window.cancelSellMode()" style="padding: 8px 15px; background: #7f8c8d; color: white; border: none; border-radius: 4px; cursor: pointer;">Cancel Selling</button>
+
             </div>
         `;
     }
@@ -564,7 +567,14 @@ window.sellSelectedPokemon = function() {
     });
 
     state.trainer.money += totalEarned;
-    alert(`Sold selected Pokemon for ${totalEarned.toLocaleString()}!`);
+    const toast = document.getElementById('market-toast');
+    if (toast) {
+        toast.innerText = `Sold selected Pokemon for ${totalEarned.toLocaleString()}!`;
+        toast.style.display = 'block';
+        setTimeout(() => { toast.style.display = 'none'; }, 2000);
+    } else {
+        alert(`Sold selected Pokemon for ${totalEarned.toLocaleString()}!`);
+    }
 
     window.selectedForSale.clear();
 
