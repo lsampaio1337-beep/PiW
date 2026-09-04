@@ -482,7 +482,7 @@ export function renderOakLab() {
 export function switchView(viewName) {
     document.querySelectorAll('.game-view').forEach(el => el.style.display = 'none');
 
-    if (viewName === 'PROF_OAK_LAB') {
+    if (viewName === 'PROF_OAK_LAB') { console.log("SWITCHING TO OAK LAB!");
         document.getElementById('view-prof-oak-lab').style.display = 'block';
         renderOakLab();
     } else if (viewName === 'BATTLE_ARENA') {
@@ -561,7 +561,7 @@ function selectStarter(id) {
 
     state.party.push(starter);
     state.currentRoute = "Professor Oak Lab";
-    switchView("PROF_OAK_LAB");
+    if (document.getElementById("splash-screen")) document.getElementById("splash-screen").style.display = "none"; switchView("PROF_OAK_LAB");
 
     startGame();
     renderOakLab(); // Renders the new Oak Lab UI now that we have a party
@@ -582,8 +582,10 @@ function startGame() {
 async function init() {
     await loadConfigs();
     const saved = storage.load();
+    const forceNewGame = localStorage.getItem('forceNewGame');
+    if (forceNewGame) localStorage.removeItem('forceNewGame');
 
-    if (saved) {
+    if (saved && !forceNewGame) {
         // Show the save prompt modal instead of using confirm()
         const savePrompt = document.getElementById('save-prompt-modal');
         const splashScreen = document.getElementById('splash-screen');
@@ -620,10 +622,12 @@ async function init() {
                 savePrompt.style.display = 'none';
 
                 storage.reset();
-                switchView("PROF_OAK_LAB");
+                localStorage.setItem('forceNewGame', 'true');
+                window.location.reload();
             };
         }
     } else {
+        if (document.getElementById("splash-screen")) document.getElementById("splash-screen").style.display = "none";
         switchView("PROF_OAK_LAB");
     }
 
