@@ -374,20 +374,12 @@ export function navigateToLocation(locationName) {
 
         let buttonHtml = '';
         if (gymConfig) {
-            const playerLvl = state.party[0] ? state.party[0].level : 1;
-            if (playerLvl < gymConfig.levelRequirement) {
-                buttonHtml = `<p style="color: red;">Level ${gymConfig.levelRequirement} required to challenge this Gym.</p>`;
-            } else {
-                buttonHtml = `<button onclick="window.startGymBattle('${lookupName}')" style="padding: 10px 20px; font-size: 16px; margin-top: 10px; cursor: pointer;">Challenge ${locationName}</button>`;
-            }
+            buttonHtml = `<button onclick="window.startGymBattle('${lookupName}')" style="padding: 10px 20px; font-size: 16px; cursor: pointer;">Battle Gym</button>`;
         }
 
         vGym.innerHTML = `
-            <div style="background-color: rgba(0,0,0,0.8); display: inline-block; padding: 20px; margin-top: 50px; border-radius: 8px;">
-                <h2>${locationName}</h2>
-                <div id="gym-content-area">
-                    ${buttonHtml}
-                </div>
+            <div id="gym-content-area" style="position: absolute; left: 33%; top: 50%; transform: translate(-50%, -50%); display: flex; flex-direction: column; gap: 10px; width: 300px; z-index: 100;">
+                ${buttonHtml}
             </div>
         `;
         if (bgImg) {
