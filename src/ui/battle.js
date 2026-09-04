@@ -70,10 +70,19 @@ export function updateBattleArena() {
                 const elPlayerHp = document.getElementById('player-hp');
                 if (elPlayerHp) elPlayerHp.innerText = `${Math.floor(leader.currentHp)}/${leader.maxHp}`;
 
+                const elPlayerSpriteWrapper = document.getElementById('player-sprite-wrapper');
                 const elPlayerSprite = document.getElementById('player-sprite');
                 if (elPlayerSprite) {
                     elPlayerSprite.src = `Assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? leader.id + '_shiny' : leader.id}.png`;
                     elPlayerSprite.style.display = 'block';
+                    elPlayerSprite.className = 'sprite-idle sprite-container'; // Reset class
+                }
+                if (elPlayerSpriteWrapper) {
+                    elPlayerSpriteWrapper.className = 'sprite-wrapper'; // Reset class
+                    if (leader.types) {
+                        if (leader.types.includes('Flying')) elPlayerSpriteWrapper.classList.add('type-flying');
+                        if (leader.types.includes('Water')) elPlayerSpriteWrapper.classList.add('type-water');
+                    }
                 }
             }
         } else if (battleSystem && battleSystem.isSearching) {
@@ -105,10 +114,19 @@ export function updateBattleArena() {
                 const elPlayerHp = document.getElementById('player-hp');
                 if (elPlayerHp) elPlayerHp.innerText = `${Math.floor(leader.currentHp)}/${leader.maxHp}`;
 
+                const elPlayerSpriteWrapper = document.getElementById('player-sprite-wrapper');
                 const elPlayerSprite = document.getElementById('player-sprite');
                 if (elPlayerSprite) {
                     elPlayerSprite.src = `Assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? leader.id + '_shiny' : leader.id}.png`;
                     elPlayerSprite.style.display = 'block';
+                    elPlayerSprite.className = 'sprite-idle sprite-container'; // Reset class
+                }
+                if (elPlayerSpriteWrapper) {
+                    elPlayerSpriteWrapper.className = 'sprite-wrapper'; // Reset class
+                    if (leader.types) {
+                        if (leader.types.includes('Flying')) elPlayerSpriteWrapper.classList.add('type-flying');
+                        if (leader.types.includes('Water')) elPlayerSpriteWrapper.classList.add('type-water');
+                    }
                 }
             } else {
                 const elPlayerSprite = document.getElementById('player-sprite');
