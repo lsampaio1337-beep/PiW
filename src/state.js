@@ -38,6 +38,13 @@ export const state = {
         caughtLvl60: 0,
         caughtLvl75: 0,
         ivTaskTier: 0,
+        bonusCandyDefeats: 0,
+        whiteCandies: 0,
+        greenCandies: 0,
+        purpleCandies: 0,
+        blackYellowCandies: 0,
+        rainbowCandies: 0,
+        candyPurchaseHistory: [],
         dailyRewards: { daysClaimed: 0, lastClaimDate: null }
     },
     settings: {
