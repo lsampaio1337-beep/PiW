@@ -82,7 +82,9 @@ export function renderBackpackTab(tab) {
     if (!area) return;
     area.style.display = "flex";
     if (window.sellModeActive && tab !== 'pokemon') {
-        area.style.height = 'auto';
+        area.style.height = "fit-content";
+        area.style.minHeight = "40%";
+
     } else {
         area.style.height = '80%';
     }

@@ -78,6 +78,19 @@ export function setupMarket(vCenter) {
 
 // Global functions for inline HTML calls in the buy modal
 window.renderBuyTab = function(category) {
+    const modal = document.getElementById('market-buy-modal');
+    if (modal) {
+        if (category === 'pokeballs') {
+            modal.style.width = '40%';
+            modal.style.maxWidth = '600px';
+        } else if (category === 'potions') {
+            modal.style.width = '55%';
+            modal.style.maxWidth = '700px';
+        } else if (category === 'stones') {
+            modal.style.width = '85%';
+            modal.style.maxWidth = '1000px';
+        }
+    }
     const grid = document.getElementById('market-buy-items-grid');
     if (!grid) return;
     window.currentBuyCategory = category;
@@ -124,7 +137,7 @@ function generateBuyCard(name, price, attribute, category, imgPath) {
             <div style="font-weight: bold; font-size: 3cqi; margin-bottom: 1cqi; line-height: 1.2;">${displayName}</div>
             ${attribute ? `<div style="font-size: 2cqi; color: #aaa; margin-bottom: 1cqi;">${attribute}</div>` : ""}
             <div class="buy-price-display" data-base-price="${price}" style="color: #f1c40f; font-weight: bold; font-size: 3.5cqi; margin-top: auto;">
-                ${price}
+                $${formatMarketPrice(price)}
             </div>
         </div>
     `;
@@ -143,7 +156,7 @@ window.updateBuyPrices = function() {
     const priceDisplays = document.querySelectorAll('.buy-price-display');
     priceDisplays.forEach(el => {
         const basePrice = parseInt(el.getAttribute('data-base-price'));
-        el.innerText = `$${(basePrice * qty).toLocaleString()}`;
+        el.innerText = "$" + formatMarketPrice(basePrice * qty);
     });
 };
 
@@ -180,3 +193,20 @@ window.closeMarketBuyModal = function(e) {
     const overlay = document.getElementById('market-buy-modal-overlay');
     if (overlay) overlay.style.display = 'none';
 };
+
+
+window.formatMarketPrice = function(val) {
+    if (val < 1000) return val.toString();
+
+    if (val < 1000000) {
+        let exactK = val / 1000;
+        let roundedUpK = Math.ceil(val / 100) / 10;
+        let isExact = (exactK === roundedUpK);
+        return (isExact ? "" : "~") + roundedUpK.toFixed(1) + "k";
+    }
+
+    let exactM = val / 1000000;
+    let roundedUpM = Math.ceil(val / 100000) / 10;
+    let isExact = (exactM === roundedUpM);
+    return (isExact ? "" : "~") + roundedUpM.toFixed(1) + "m";
+}

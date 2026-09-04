@@ -7,7 +7,14 @@ export function renderStonesTab(area) {
         return;
     }
 
-    let content = '<div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; width: 100%; justify-items: center; align-items: center; height: 100%;">';
+
+    let totalItems = 0;
+    Object.keys(state.backpack.stones).forEach(k => { if ((state.backpack.stones[k] || 0) > 0) totalItems++; });
+    if (totalItems === 0) {
+        area.innerHTML = '<div style="display: flex; height: 100%; width: 100%; align-items: center; justify-content: center; font-size: 24px; color: #aaa; font-weight: bold;">No item</div>';
+        return;
+    }
+    let content = '<div style="display: grid; grid-template-columns: repeat(6, 1fr); justify-content: center; gap: 10px; width: 100%; justify-items: center; align-items: center; height: 100%;">';
 
     const stoneNames = Object.keys(state.backpack.stones).sort();
 

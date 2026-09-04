@@ -3,7 +3,8 @@ import { updateUI } from '../../ui.js';
 import { renderBackpackTab } from './index.js';
 
 window.sellModeActive = false;
-if (!window.selectedForSale) window.selectedForSale = new Set();
+window.selectedForSale = window.selectedForSale || new Set();
+window.selectedForSale = window.selectedForSale || new Set();
 import { calculateEV } from '../../mathEngine.js';
 
 // Helper to render a consistent Pokemon slot UI
@@ -24,12 +25,14 @@ function renderSlotUI(p, listName, origIndex, isDraggable) {
     }
 
     let selectionStyle = '';
+    let selectedText = '';
     let clickHandler = '';
     if (window.sellModeActive) {
         dragAttr = ''; // Disable drag in sell mode everywhere
         cursorStyle = 'cursor: pointer;';
         clickHandler = `onclick="window.toggleSaleSelection('${p.uuid}')"`;
         if (window.selectedForSale && window.selectedForSale.has(p.uuid)) {
+            selectedText = '<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #00ff00; font-weight: bold; font-size: 24px; text-shadow: 0 0 5px black; pointer-events: none; z-index: 10;">SOLD</div>';
             selectionStyle = 'outline: 4px solid #00ff00 !important; outline-offset: -4px !important; background: rgba(0,255,0,0.4) !important;';
         }
     }
@@ -44,6 +47,7 @@ function renderSlotUI(p, listName, origIndex, isDraggable) {
     return `
         <div class="${slotClass}" ${dataAttr} style="border: 1px solid #777; aspect-ratio: 1 / 1.3; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 4%; box-sizing: border-box; background: rgba(0,0,0,0.5); position: relative; container-type: inline-size; overflow: hidden; ${cursorStyle}; width: 100%; ${selectionStyle}" title="Q=${p.quality.toFixed(2)} & ∑IV=${sumIV}" ${dragAttr} ${clickHandler}>
             <span style="position: absolute; top: 0; left: 0; font-size: 12cqw; background: black; padding: 2cqw; z-index: 2;">${p._tag || ''}</span>
+            ${selectedText}
             <div onclick="event.stopPropagation(); window.showPokemonStatsByUuid('${p.uuid}')" style="position: absolute; top: 2cqw; right: 2cqw; cursor: pointer; background: #34495e; color: white; border-radius: 50%; width: 20cqw; height: 20cqw; text-align: center; display: flex; align-items: center; justify-content: center; font-size: 14cqw; font-weight: bold; z-index: 3;" title="View Info">i</div>
 
             <div style="flex: 1; width: 100%; display: flex; align-items: center; justify-content: center; position: relative;">
@@ -55,7 +59,7 @@ function renderSlotUI(p, listName, origIndex, isDraggable) {
 
 window.toggleSaleSelection = function(uuid) {
     console.log("toggleSaleSelection", uuid);
-    if (!window.selectedForSale) window.selectedForSale = new Set();
+    window.selectedForSale = window.selectedForSale || new Set();
 
     if (window.selectedForSale.has(uuid)) {
         window.selectedForSale.delete(uuid);
@@ -78,7 +82,7 @@ export function renderPokemonTab(area) {
     let sellControlsHtml = '';
     if (window.sellModeActive) {
         let selectedEVTotal = 0;
-    if (!window.selectedForSale) window.selectedForSale = new Set();
+    window.selectedForSale = window.selectedForSale || new Set();
     console.log("renderPokemonTab selected size:", window.selectedForSale.size);
         let selectedCount = 0;
 
@@ -513,7 +517,7 @@ window.cancelSellMode = function() {
 };
 
 window.selectAllVisibleStorage = function() {
-    if (!window.selectedForSale) window.selectedForSale = new Set();
+    window.selectedForSale = window.selectedForSale || new Set();
     const storageSlots = document.querySelectorAll('.pokemon-storage-slot');
     storageSlots.forEach(slot => {
         if (slot.style.display !== 'none') {

@@ -44,7 +44,19 @@ export function renderPotionsTab(area) {
 }
 
 function renderPotionsSellMode(area) {
-    let content = '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 15px; overflow-y: auto; max-height: 100%; padding-bottom: 20px;">';
+
+    let totalItems = 0;
+    state.config.balance.items.potions.forEach(b => {
+        let k = b.name;
+        if (k === 'Regular Potion') k = 'Regular Potion';
+        if (k === 'Big') k = 'Big Potion';
+        if ((state.backpack.potions[k] || 0) > 0) totalItems++;
+    });
+    if (totalItems === 0) {
+        area.innerHTML = '<div style="display: flex; height: 100%; width: 100%; align-items: center; justify-content: center; font-size: 24px; color: #aaa; font-weight: bold;">No item</div>';
+        return;
+    }
+    let content = '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); justify-content: center; gap: 15px; overflow-y: auto; max-height: 100%; padding-bottom: 20px;">';
 
     state.config.balance.items.potions.forEach(p => {
         let inventoryName = p.name;

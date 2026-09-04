@@ -27,7 +27,7 @@ const balance = {
       ],
       "stones": {
          "price": 10000,
-         "sell": 200
+         "sell": 5000
       }
     }
   };
