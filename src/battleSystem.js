@@ -175,7 +175,7 @@ class BattleSystem {
         }
 
         if (this.state.currentRoute && this.state.currentRoute.startsWith("Casino - ")) {
-            const cost = 10;
+            const cost = this.state.casinoDoubleShiny ? 20 : 10;
             if (this.state.trainer.money < cost) {
                 alert("Not enough money! You need $" + cost + " to continue hunting here.");
                 this.stop();
@@ -331,7 +331,7 @@ class BattleSystem {
             pokemonBase = this.state.config.pokemonData.find(p => p.id === selectedSpawn.pokemonId);
             level = Math.floor(Math.random() * (selectedSpawn.maxLevel - selectedSpawn.minLevel + 1)) + selectedSpawn.minLevel;
 
-            q = mathEngine.generateQuality(this.state.stats);
+            q = mathEngine.generateQuality(this.state.stats, this.state.casinoDoubleShiny);
             if (q.name === "Shiny") {
                 this.state.stats.shiniesSeen = (this.state.stats.shiniesSeen || 0) + 1;
                 if (!this.state.stats.seenShiniesSpecies) this.state.stats.seenShiniesSpecies = {};
@@ -575,11 +575,23 @@ class BattleSystem {
 
                 // Track specific typings
                 if (!this.state.stats.caughtSpecific) this.state.stats.caughtSpecific = {};
+                if (!this.state.stats.challengeCaughtSpecific) this.state.stats.challengeCaughtSpecific = {};
+
+                let qName = this.activeEncounter.qualityName || "Regular";
+
                 if (this.activeEncounter.types) {
-                     for (let t of this.activeEncounter.types) {
+                      for (let t of this.activeEncounter.types) {
                           this.state.stats.caughtSpecific[t] = (this.state.stats.caughtSpecific[t] || 0) + 1;
-                     }
+                          let typeRarityKey = t + "_" + qName;
+                          let typeAnyKey = t + "_Any";
+                          this.state.stats.challengeCaughtSpecific[typeRarityKey] = (this.state.stats.challengeCaughtSpecific[typeRarityKey] || 0) + 1;
+                          this.state.stats.challengeCaughtSpecific[typeAnyKey] = (this.state.stats.challengeCaughtSpecific[typeAnyKey] || 0) + 1;
+                      }
                 }
+
+                let speciesRarityKey = this.activeEncounter.name + "_" + qName;
+                this.state.stats.challengeCaughtSpecific[speciesRarityKey] = (this.state.stats.challengeCaughtSpecific[speciesRarityKey] || 0) + 1;
+
                 // console.log(`Caught ${this.activeEncounter.name}!`);
             }
         }
@@ -593,38 +605,45 @@ class BattleSystem {
         // Loot Bonus Calculation
         const lootMultiplier = 1 + (0.01 * (this.state.stats.greenCandies || 0));
 
-        // Stone drops based on quality
-        let dropChance = 0;
-        if (this.activeEncounter.qualityName === "Regular") dropChance = 1;
-        else if (this.activeEncounter.qualityName === "Uncommon") dropChance = 2;
-        else if (this.activeEncounter.qualityName === "Rare") dropChance = 3;
-        else if (this.activeEncounter.qualityName === "Epic") dropChance = 5;
-        else if (this.activeEncounter.qualityName === "Shiny") dropChance = 100;
-
-        if (dropChance > 0) {
-            if ((Math.random() * 100) <= (dropChance * lootMultiplier)) {
-                // Drop a random stone
-                const stonesList = Object.keys(this.state.backpack.stones);
-                const randomStone = stonesList[Math.floor(Math.random() * stonesList.length)];
-                // Also apply loot multiplier to quantity: default is 1, but with +% we might drop more.
-                // Or maybe the user just wants the exact wording "+1% Loot Probability and +1% Loot Quantity"
-                // Usually this means base 1, plus any extra from percentage as guaranteed or chance.
-                // Let's interpret "Quantity +X%" as multiplying the base drop amount (1) by lootMultiplier, and flooring or adding chance.
-                // Actually, the simplest is `Math.floor(lootMultiplier) + (Math.random() < (lootMultiplier % 1) ? 1 : 0)`.
-                let dropQuantity = Math.floor(lootMultiplier);
-                if (Math.random() < (lootMultiplier % 1)) dropQuantity += 1;
-
-                this.state.backpack.stones[randomStone] = (this.state.backpack.stones[randomStone] || 0) + dropQuantity;
-            }
-        }
-
         // Award XP and Money (EV)
         this.grantXP(leader, ev);
         this.state.trainer.money += Math.floor(ev * lootMultiplier);
 
+        // Loot drops for Stones
+        let dropRate = 0;
+        switch (this.activeEncounter.qualityName) {
+            case "Regular": dropRate = 0.01; break;
+            case "Uncommon": dropRate = 0.02; break;
+            case "Rare": dropRate = 0.03; break;
+            case "Epic": dropRate = 0.05; break;
+            case "Shiny": dropRate = 1.0; break;
+        }
+
+        if (Math.random() < (dropRate * lootMultiplier) && this.activeEncounter.types && this.activeEncounter.types.length > 0) {
+            const types = this.activeEncounter.types;
+            const randomType = types[Math.floor(Math.random() * types.length)];
+            const stoneName = `${randomType} Stone`;
+
+            let dropQuantity = Math.floor(lootMultiplier);
+            if (Math.random() < (lootMultiplier % 1)) dropQuantity += 1;
+
+            if (!this.state.backpack.stones) this.state.backpack.stones = {};
+            this.state.backpack.stones[stoneName] = (this.state.backpack.stones[stoneName] || 0) + dropQuantity;
+        }
+
         this.state.stats.battlesWon++;
 
         this.checkRouteUnlocks();
+
+        // Record the defeated boss (for wild bosses like Mewtwo, Articuno)
+        if (!this.state.stats.defeatedBosses) this.state.stats.defeatedBosses = {};
+        if (this.activeEncounter.qualityName === "Boss" || this.activeEncounter.qualityName === "Legendary") { // In case we add these tiers later, or just check the name directly
+            this.state.stats.defeatedBosses[this.activeEncounter.name] = true;
+        } else {
+             // For safety, just track the name of everything defeated in the wild just in case a challenge requires it
+             // but let's stick to the specific bosses for now
+             this.state.stats.defeatedBosses[this.activeEncounter.name] = true;
+        }
 
         if (this.gymState && this.gymState.isActive) {
             this.handleGymEnemyDefeat();
@@ -649,6 +668,10 @@ class BattleSystem {
                 // Defeated Gym!
                 if (!this.state.trainer.badges) this.state.trainer.badges = 0;
 
+                // Record the defeated boss
+                if (!this.state.stats.defeatedBosses) this.state.stats.defeatedBosses = {};
+                this.state.stats.defeatedBosses[gym.leader] = true;
+
                 const gymIndex = this.state.config.gyms.findIndex(g => g.name === gym.name);
                 if (gymIndex !== -1 && this.state.trainer.badges === gymIndex) {
                     this.state.trainer.badges++;
@@ -665,9 +688,22 @@ class BattleSystem {
     }
 
     checkRouteUnlocks() {
-        // Progression is handled via map clicks based on stats.battlesWon.
-        // We no longer forcefully move the player to the next route here.
-        // The user must open the map to travel to newly unlocked routes manually.
+        // Evaluate active challenge defeat trackers
+        if (!this.state.config || !this.state.config.unlocks) return;
+        let currentIndex = this.state.stats.completedChallenges || 0;
+        if (currentIndex >= this.state.config.unlocks.length) return;
+
+        let unlock = this.state.config.unlocks[currentIndex];
+        let req = unlock.requirements;
+
+        if (req.defeatCountRoute && req.defeatCountRoute.route === this.state.currentRoute) {
+            this.state.stats.challengeRouteDefeats = (this.state.stats.challengeRouteDefeats || 0) + 1;
+        }
+
+        if (req.defeatSpecific && this.activeEncounter.name === req.defeatSpecific.name) {
+             if (!this.state.stats.challengeSpecificDefeats) this.state.stats.challengeSpecificDefeats = {};
+             this.state.stats.challengeSpecificDefeats[this.activeEncounter.name] = (this.state.stats.challengeSpecificDefeats[this.activeEncounter.name] || 0) + 1;
+        }
     }
 
     grantXP(pokemon, amount) {

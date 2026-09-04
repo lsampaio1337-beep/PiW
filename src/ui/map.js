@@ -51,13 +51,13 @@ export function showMap() {
             else if (locationId === 'indigo_plateu') markerImg = './Assets/Extra/Spot_E4.png';
             else if (locationId === 'safari_zone') markerImg = './Assets/Extra/Spot_Safariball.png';
             else if (locationId === 'casino') { markerImg = './Assets/Extra/Spot_Casino.png'; }
-            else if (['mount_moon', 'rock_tunnel', 'cerulean_cave', 'seafoam_islands', 'diglett_s_cave'].includes(locationId)) markerImg = './Assets/Map/Spot_Cave.png';
-            else if (locationId === 'small_fishing_spot') markerImg = './Assets/Map/Spot_Fishing1.png';
-            else if (locationId === 'big_fishing_spot') markerImg = './Assets/Map/Spot_Fishing2.png';
-            else if (locationId === 'fighting_dojo') markerImg = './Assets/Map/Spot_FightingDojo.png';
-            else if (locationId === 'fossil_revival') markerImg = './Assets/Map/Spot_FossilRevival.png';
-            else if (locationId === 'pok_mon_mansion') markerImg = './Assets/Map/Spot_PokeMansion.png';
-            else if (locationId === 'trade_with_a_friend') markerImg = './Assets/Map/Spot_TradeHub.png';
+            else if (['mount_moon', 'rock_tunnel', 'cerulean_cave', 'seafoam_islands', 'diglett_s_cave'].includes(locationId)) markerImg = './Assets/Extra/Spot.png';
+            else if (locationId === 'small_fishing_spot') markerImg = './Assets/Extra/Spot.png';
+            else if (locationId === 'big_fishing_spot') markerImg = './Assets/Extra/Spot.png';
+            else if (locationId === 'fighting_dojo') markerImg = './Assets/Extra/Spot.png';
+            else if (locationId === 'fossil_revival') markerImg = './Assets/Extra/Spot.png';
+            else if (locationId === 'pok_mon_mansion') markerImg = './Assets/Extra/Spot.png';
+            else if (locationId === 'trade_with_a_friend') markerImg = './Assets/Extra/Spot.png';
             else if (locationId === 'daycare') markerImg = './Assets/Map/Spot_Daycare.png';
             else if (locationId === 'pewter_gym') { markerImg = './Assets/Badges/Badge Kanto 1.png'; if (state.trainer.badges >= 1) showCheckmark = true; }
             else if (locationId === 'cerulean_gym') { markerImg = './Assets/Badges/Badge Kanto 2.png'; if (state.trainer.badges >= 2) showCheckmark = true; }
@@ -71,20 +71,29 @@ export function showMap() {
             // Standardize spot sizes
             let markerWidth = "24px";
             let markerHeight = "24px";
-            if (['professor_oak_lab', 'pokemon_center___market', 'indigo_plateu', 'safari_zone', 'casino', 'mount_moon', 'rock_tunnel', 'cerulean_cave', 'seafoam_islands', 'small_fishing_spot', 'big_fishing_spot', 'fighting_dojo', 'fossil_revival', 'pok_mon_mansion', 'trade_with_a_friend', 'daycare', 'diglett_s_cave'].includes(locationId)) {
-                // Ensure spot markers like casino and diglett's cave are standard size
-                markerWidth = "24px";
-                markerHeight = "24px";
+            let dropShadow = "none";
+
+            if (locationId === 'pokemon_center___market') {
+                markerWidth = "32px";
+                markerHeight = "32px";
+            } else if (['professor_oak_lab', 'indigo_plateu', 'safari_zone', 'casino', 'daycare'].includes(locationId)) {
+                markerWidth = "28px";
+                markerHeight = "28px";
+            }
+
+            if (markerImg !== './Assets/Extra/Spot.png') {
+                // Solid black outline (4-axis) and a larger soft white glow
+                dropShadow = "drop-shadow(1px 0px 0 #000) drop-shadow(-1px 0px 0 #000) drop-shadow(0px 1px 0 #000) drop-shadow(0px -1px 0 #000) drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.8))";
             }
 
 
             html += `
                 <div class="map-marker"
-                     data-location="${locationName}"
-                     title="${locationName}"
-                     style="position: absolute; left: ${coords.x}%; top: ${coords.y}%; width: ${markerWidth}; height: ${markerHeight}; background-image: url('${markerImg}'); background-size: contain; background-repeat: no-repeat; transform: translate(-50%, -50%); cursor: ${isClickable ? 'pointer' : 'default'};"
-                     ${isClickable ? `onclick="window.navigateToLocation('${locationName}')"` : ''}
-                     onmouseover="window.showMapTooltip(event, '${locationName}')"
+                     data-location="${locationName.replace(/'/g, "&#39;")}"
+                     title="${locationName.replace(/'/g, "&#39;")}"
+                     style="position: absolute; left: ${coords.x}%; top: ${coords.y}%; width: ${markerWidth}; height: ${markerHeight}; background-image: url('${markerImg}'); background-size: contain; background-repeat: no-repeat; transform: translate(-50%, -50%); filter: ${dropShadow}; cursor: ${isClickable ? 'pointer' : 'default'};"
+                     ${isClickable ? `onclick="window.navigateToLocation('${locationName.replace(/'/g, "\\'")}')"` : ''}
+                     onmouseover="window.showMapTooltip(event, '${locationName.replace(/'/g, "\\'")}')"
                      onmouseout="window.hideMapTooltip()">
                      ${showCheckmark ? '<div style="position:absolute; top:-5px; right:-5px; background:green; color:white; border-radius:50%; width:15px; height:15px; font-size:10px; line-height:15px; text-align:center;">✓</div>' : ''}
                 </div>
@@ -134,27 +143,37 @@ export function navigateToLocation(locationName) {
 
         const btnContainer = document.getElementById("casino-buttons-container");
         if (btnContainer) {
+            btnContainer.style.width = '100%';
+            btnContainer.style.height = '100%';
             btnContainer.innerHTML = `
-                <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; padding: 15px;">
-                    <div onclick="window.navigateToLocation('Casino - Starter Troupe')" style="cursor: pointer; text-align: center;">
-                        <img src="./Assets/Extra/Casino Starter Troupe.png" alt="Starter Troupe" style="width: 100%; max-width: 200px; border-radius: 8px; border: 2px solid #555;">
-                        <p style="margin-top: 5px; font-weight: bold;">Starter Troupe</p>
+                <div style="position: absolute; top: 20px; left: 0; width: 100%; text-align: center; z-index: 10; color: white; text-shadow: 2px 2px 4px black; font-size: 24px;">
+                    <h3>Standard Route $10 Special Route $20</h3>
+                </div>
+                <div style="display: flex; justify-content: space-evenly; align-items: center; width: 100%; height: 100%; padding: 15px; box-sizing: border-box;">
+                    <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
+                        <img src="./Assets/Extra/Casino Starter Troupe.png" alt="Starter Troupe" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
+                        <div onclick="window.startCasinoEncounter(false, 'Casino - Starter Troupe')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter ($10)"></div>
+                        <div onclick="window.startCasinoEncounter(true, 'Casino - Starter Troupe')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Special Encounter ($20)"></div>
                     </div>
-                    <div onclick="window.navigateToLocation('Casino - Mid Troupe')" style="cursor: pointer; text-align: center;">
-                        <img src="./Assets/Extra/Casino Mid Troupe.png" alt="Mid Troupe" style="width: 100%; max-width: 200px; border-radius: 8px; border: 2px solid #555;">
-                        <p style="margin-top: 5px; font-weight: bold;">Mid Troupe</p>
+                    <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
+                        <img src="./Assets/Extra/Casino Mid Troupe.png" alt="Mid Troupe" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
+                        <div onclick="window.startCasinoEncounter(false, 'Casino - Mid Troupe')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter ($10)"></div>
+                        <div onclick="window.startCasinoEncounter(true, 'Casino - Mid Troupe')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Special Encounter ($20)"></div>
                     </div>
-                    <div onclick="window.navigateToLocation('Casino - Late Troupe')" style="cursor: pointer; text-align: center;">
-                        <img src="./Assets/Extra/Casino Late Troupe.png" alt="Late Troupe" style="width: 100%; max-width: 200px; border-radius: 8px; border: 2px solid #555;">
-                        <p style="margin-top: 5px; font-weight: bold;">Late Troupe</p>
+                    <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
+                        <img src="./Assets/Extra/Casino Late Troupe.png" alt="Late Troupe" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
+                        <div onclick="window.startCasinoEncounter(false, 'Casino - Late Troupe')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter ($10)"></div>
+                        <div onclick="window.startCasinoEncounter(true, 'Casino - Late Troupe')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Special Encounter ($20)"></div>
                     </div>
-                    <div onclick="window.navigateToLocation('Casino - Eeveelutions')" style="cursor: pointer; text-align: center;">
-                        <img src="./Assets/Extra/Casino Eeveelutions.png" alt="Eeveelutions" style="width: 100%; max-width: 200px; border-radius: 8px; border: 2px solid #555;">
-                        <p style="margin-top: 5px; font-weight: bold;">Eeveelutions</p>
+                    <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
+                        <img src="./Assets/Extra/Casino Eeveelutions.png" alt="Eeveelutions" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
+                        <div onclick="window.startCasinoEncounter(false, 'Casino - Eeveelutions')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter ($10)"></div>
+                        <div onclick="window.startCasinoEncounter(true, 'Casino - Eeveelutions')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Special Encounter ($20)"></div>
                     </div>
-                    <div onclick="window.navigateToLocation('Casino - Special Spot')" style="cursor: pointer; text-align: center;">
-                        <img src="./Assets/Extra/Casino Special Spot.png" alt="Special Spot" style="width: 100%; max-width: 200px; border-radius: 8px; border: 2px solid #555;">
-                        <p style="margin-top: 5px; font-weight: bold;">Special Spot</p>
+                    <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
+                        <img src="./Assets/Extra/Casino Special Spot.png" alt="Special Spot" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
+                        <div onclick="window.startCasinoEncounter(false, 'Casino - Special Spot')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter ($10)"></div>
+                        <div onclick="window.startCasinoEncounter(true, 'Casino - Special Spot')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Special Encounter ($20)"></div>
                     </div>
                 </div>
             `;
@@ -202,7 +221,7 @@ export function navigateToLocation(locationName) {
 
         // Overlay transparent divs
         html += `<div class="casino-overlay-btn" onclick="window.startCasinoEncounter(false, '${locationName}')" style="position: absolute; left: ${stdLeft}%; top: ${stdTop}%; width: ${stdWidth}%; height: ${stdHeight}%; cursor: pointer;" title="Standard Encounter ($10)"></div>`;
-        html += `<div class="casino-overlay-btn" onclick="window.startCasinoEncounter(false, '${locationName}')" style="position: absolute; left: ${shinyLeft}%; top: ${shinyTop}%; width: ${shinyWidth}%; height: ${shinyHeight}%; cursor: pointer;" title="Special Encounter ($10)"></div>`;
+        html += `<div class="casino-overlay-btn" onclick="window.startCasinoEncounter(true, '${locationName}')" style="position: absolute; left: ${shinyLeft}%; top: ${shinyTop}%; width: ${shinyWidth}%; height: ${shinyHeight}%; cursor: pointer;" title="Special Encounter ($20)"></div>`;
         html += `<button class="casino-overlay-btn" onclick="window.navigateToLocation('Casino')" style="position: absolute; top: 10px; left: 10px; padding: 10px; cursor: pointer; z-index: 100;">Back to Lobby</button>`;
 
         // Append to the viewCasino container
@@ -217,7 +236,7 @@ export function navigateToLocation(locationName) {
         switchView("DAYCARE_HUB");
         updateUI();
         return;
-    } else if (locationName === "Pokemon Center & Market" || locationName.includes("Market")) {
+    } else if (locationName === "PokeCenter & PokeMarket" || locationName.includes("Market")) {
         if (battleSystem) {
              battleSystem.stop();
              battleSystem.activeEncounter = null;
@@ -228,7 +247,7 @@ export function navigateToLocation(locationName) {
         const vCenter = document.getElementById("view-center-market");
         vCenter.innerHTML = `
             <div style="background-color: rgba(0,0,0,0.8); display: inline-block; padding: 20px; margin-top: 50px; border-radius: 8px;">
-                <h2>Pokemon Center & Market</h2>
+                <h2>PokeCenter & PokeMarket</h2>
                 <div style="margin-top: 20px;">
                     <button id="btn-heal-all" style="padding: 10px 20px; font-size: 16px; margin-right: 10px;">Pokemon Center (Heal All)</button>
                     <button id="btn-market-buy" style="padding: 10px 20px; font-size: 16px;">Market (Buy Items)</button>

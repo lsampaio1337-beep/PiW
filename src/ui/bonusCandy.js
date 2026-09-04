@@ -118,7 +118,7 @@ function renderCandyOption(color, effectText, cost, currentOwned, currentEffect,
     }
 
     const titleStyle = color.includes('Rainbow')
-        ? `background: ${getColorHex(color)}; -webkit-background-clip: text; -webkit-text-fill-color: transparent;`
+        ? `background: ${getColorHex(color)}; background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: rainbowShift 3s linear infinite;`
         : `color: ${getColorHex(color)}; text-shadow: 1px 1px 2px black;`;
 
     return `

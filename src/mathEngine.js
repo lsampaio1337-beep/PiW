@@ -61,7 +61,7 @@ function calculateCatchChance(bst, level, ballMultiplier, stats = {}, isShiny = 
     return Math.max(1, chance);
 }
 
-function generateQuality(stats = {}) {
+function generateQuality(stats = {}, isDoubleShiny = false) {
     let roll = Math.floor(Math.random() * 12000) + 1;
     let shinySeenTaskTier = stats.shinySeenTaskTier || 0;
 
@@ -96,6 +96,27 @@ function generateQuality(stats = {}) {
         bonusValue = 0.30; weakMaxRoll = 870; regularMaxRoll = 5820; uncommonMaxRoll = 8820; rareMaxRoll = 10320;
     } else if (qTaskTier >= 1) {
         bonusValue = 0.15; weakMaxRoll = 1170; regularMaxRoll = 6270; uncommonMaxRoll = 9420; rareMaxRoll = 10920;
+    }
+
+    // Determine shiny threshold
+    // Base is 1 roll (12000)
+    let shinyRolls = 1;
+
+    // Shiny Boosters
+    // Regular gives +1 roll. Good gives +2 rolls, completely replacing the +1.
+    if (shinySeenTaskTier >= 2) shinyRolls += 2; // Good Shiny +2 rolls
+    else if (shinySeenTaskTier == 1) shinyRolls += 1; // Regular Shiny +1 roll
+
+    if (isDoubleShiny) {
+        let extraRolls = shinyRolls;
+        shinyRolls *= 2;
+        // Subtract the extra rolls from the tier just below Shiny (Rare) to preserve 12000 cap
+        rareMaxRoll -= extraRolls;
+    }
+
+    let shinyMinThreshold = 12000 - shinyRolls + 1;
+    if (roll >= shinyMinThreshold) {
+        roll = 12000;
     }
 
     let tierName = "";

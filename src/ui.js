@@ -1,3 +1,4 @@
+import { getChallengeData } from './ui/topbar.js';
 
 import * as mathEngine from "./mathEngine.js";
 import BattleSystem from "./battleSystem.js";
@@ -30,6 +31,7 @@ export const TYPE_COLORS = {
 import { updateTopbar } from './ui/topbar.js';
 import { updateSidebar } from './ui/sidebar.js';
 import { updateBattleArena, showDamage } from './ui/battle.js';
+import { showCalendar } from './ui/calendar.js';
 import { showMap, navigateToLocation, showMapTooltip, hideMapTooltip } from './ui/map.js';
 import { showPokedex, showDexEntry } from './ui/pokedex.js';
 import { showPokemonStats, showPokemonStatsByUuid, evolvePokemon } from './ui/pokemonStats.js';
@@ -70,7 +72,98 @@ window.activateCheat = activateCheat;
 window.dragStart = dragStart;
 window.completeChallenge = function() {
     state.stats.completedChallenges = (state.stats.completedChallenges || 0) + 1;
+
+    // Clear challenge specific tracking state
+    state.stats.challengeRouteDefeats = 0;
+    state.stats.challengeSpecificDefeats = {};
+    state.stats.challengeCaughtSpecific = {};
+
     updateUI();
+    if (document.getElementById('modal-overlay').style.display !== 'none') {
+        window.showChallengesModal(); // refresh modal
+    }
+};
+
+
+
+window.showChallengesModal = function() {
+    if (!state.config.unlocks) return;
+
+    let currentIndex = state.stats.completedChallenges || 0;
+
+    let html = `<div style="display:flex; flex-direction:column; gap:15px; text-align:left;">`;
+
+    // Active Challenge Sector
+    html += `<div style="border: 1px solid #555; padding: 10px; border-radius: 5px; background-color: rgba(0,0,0,0.5);">
+                <h3 style="margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; font-size: 16px;">Active Challenge</h3>`;
+
+    if (currentIndex >= state.config.unlocks.length) {
+        html += `<div style="text-align: center; font-size: 16px; color: #aaa;">No active Challenge</div>`;
+    } else {
+        let unlock = state.config.unlocks[currentIndex];
+        let cData = getChallengeData(unlock);
+
+        let rewardsStr = unlock.unlocks ? unlock.unlocks.join(", ") : "Next Area";
+
+        html += `<div style="margin-bottom: 5px;"><b>Requirements:</b></div>
+                 <ul style="margin-top: 0; padding-left: 20px;">`;
+
+        for (let part of cData.textParts) {
+            html += `<li>${part}</li>`;
+        }
+
+        html += `</ul>
+                 <div style="margin-top: 10px; color: #4CAF50;"><b>Rewards:</b> Unlocks ${rewardsStr}</div>`;
+
+        if (cData.isMet) {
+             html += `<div style="text-align: center; margin-top: 15px;">
+                         <button onclick="window.completeChallenge()" style="padding: 10px 20px; font-size: 16px; font-weight: bold; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">Complete ✔️</button>
+                      </div>`;
+        }
+    }
+
+    html += `</div>`;
+
+    // Past Challenges Sector
+    if (currentIndex > 0) {
+        let pastTitle = currentIndex === 1 ? "Past Challenge" : "Past Challenges";
+        html += `<div style="border: 1px solid #555; padding: 10px; border-radius: 5px; background-color: rgba(0,0,0,0.5);">
+                    <h3 style="margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; font-size: 16px;">${pastTitle}</h3>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">`;
+
+        for (let i = currentIndex - 1; i >= 0; i--) {
+             let pUnlock = state.config.unlocks[i];
+             // Fake the data slightly to make it look completed, though getChallengeData will naturally evaluate to true
+             let pData = getChallengeData(pUnlock);
+             let pRewards = pUnlock.unlocks ? pUnlock.unlocks.join(", ") : "Next Area";
+
+             html += `<div style="border: 1px solid #333; padding: 10px; border-radius: 5px; background-color: rgba(255,255,255,0.05);">
+                          <div style="color: #4CAF50; font-weight: bold; margin-bottom: 5px;">Challenge ${i+1}</div>
+                          <ul style="margin-top: 0; margin-bottom: 5px; padding-left: 20px; font-size: 14px;">`;
+             for (let part of pData.textParts) {
+                  // Ensure we show them as complete using words
+
+                  // For past challenges, ensure they look complete and numbers match max requirements
+                  // The text might look like "Defeat 25 Pokémon on Route 1 (0/25)"
+                  // We extract the required count and force it to say (25/25) [Complete]
+                  part = part.replace(/\((\d+)\/(\d+)\)/, (match, p1, p2) => `(${p2}/${p2})`);
+                  if (!part.includes("[Complete]")) {
+                       part += ` <span style="color: green;">[Complete]</span>`;
+                  }
+                  part = part.replace(/color: red/g, 'color: green');
+
+                  html += `<li>${part}</li>`;
+             }
+             html += `</ul>
+                      <div style="font-size: 14px; color: #4CAF50;"><b>Rewards:</b> Unlocks ${pRewards}</div>
+                      </div>`;
+        }
+        html += `</div></div>`;
+    }
+
+    html += `</div>`;
+
+    showModal("Progress Challenges", html);
 };
 window.dragOver = dragOver;
 window.handleDrop = handleDrop;
@@ -113,7 +206,6 @@ export function showModal(title, htmlContent) {
     }
 
     rightCol.style.display = 'flex';
-
     let titleHtml = title ? `<h2>${title}</h2>` : '';
     contentPanel.innerHTML = `${titleHtml}${htmlContent}`;
 }
@@ -515,7 +607,7 @@ async function init() {
                 // Switch view based on saved route
                 if (state.currentRoute === "Professor Oak Lab") {
                     switchView("PROF_OAK_LAB");
-                } else if (state.currentRoute === "Pokemon Center & Market") {
+                } else if (state.currentRoute === "PokeCenter & PokeMarket" || state.currentRoute === "Pokemon Center & Market") {
                     navigateToLocation(state.currentRoute);
                 } else if (state.currentRoute.includes("Gym") || state.currentRoute === "Indigo Plateu") {
                     navigateToLocation(state.currentRoute);
@@ -580,6 +672,8 @@ async function init() {
     bindBtn('btn-backpack', () => { if(!checkCombatLock()) showBackpack(); });
     bindBtn('btn-dex', () => { if(!checkCombatLock()) showPokedex(); });
     bindBtn('btn-bonus-candy', () => { if(!checkCombatLock()) showBonusCandyModal(); });
+    bindBtn('btn-challenges', () => { if(!checkCombatLock()) window.showChallengesModal(); });
+    bindBtn('btn-calendar', () => { if(!checkCombatLock()) showCalendar(); });
 
     window.showBackpackAndFocus = (tab) => {
         if(!checkCombatLock()) {
@@ -587,6 +681,8 @@ async function init() {
             renderBackpackTab(tab);
         }
     };
+
+    window.updateTopbar = updateTopbar;
 
     bindBtn('btn-stats', () => {
         if(checkCombatLock()) return;

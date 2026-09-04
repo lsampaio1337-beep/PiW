@@ -44,7 +44,8 @@ export const state = {
         purpleCandies: 0,
         blackYellowCandies: 0,
         rainbowCandies: 0,
-        candyPurchaseHistory: []
+        candyPurchaseHistory: [],
+        dailyRewards: { daysClaimed: 0, lastClaimDate: null }
     },
     settings: {
         gameSpeed: 1.0,
