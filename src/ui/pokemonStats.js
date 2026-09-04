@@ -19,7 +19,7 @@ function getEvolveRequirements(p, evo, state) {
         if (hasCount < stonesReq) {
             hasStones = false;
         }
-        missingStonesHtml += `${stonesReq}<img src="Assets/Items/Stones/${stoneName}.png" style="width: 16px; height: 16px; vertical-align: middle; margin-left: 2px; margin-right: 5px;" title="${stoneName}">`;
+        missingStonesHtml += `${missingStonesHtml ? ' and ' : ''}${stonesReq}<img src="Assets/Items/Stones/${stoneName}.png" style="width: 16px; height: 16px; vertical-align: middle; margin-left: 2px; margin-right: 5px;" title="${stoneName}">`;
     }
 
     const hasLevel = p.level >= requiredLevel;
@@ -112,9 +112,9 @@ export function showPokemonStats(idx, location) {
 
     let individualHtml = `
         <div style="display: flex; justify-content: space-around; flex-wrap: wrap; align-items: stretch; gap: 10px;">
-            <div style="background: rgba(0,0,0,0.5); padding: 15px; border-radius: 8px; text-align: left; min-width: 150px; flex: 1;">
+            <div style="background: rgba(0,0,0,0.5); padding: 15px; border-radius: 8px; text-align: left; min-width: 150px; flex: 1; display: flex; flex-direction: column;">
                 <h3 style="margin: 0 0 15px 0; text-align: center; border-bottom: 1px solid #555; padding-bottom: 5px;">Actual Stats</h3>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px 10px; font-size: 14px; text-align: center; height: 100%; align-content: space-evenly;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px 10px; font-size: 14px; text-align: center; flex: 1; align-content: center;">
                     <div>HP<br><b>${p.maxHp}</b></div>
                     <div>Speed<br><b>${p.currentStats ? p.currentStats.spe : '?'}</b></div>
                     <div>Atk<br><b>${p.currentStats ? p.currentStats.atk : '?'}</b></div>
@@ -131,9 +131,9 @@ export function showPokemonStats(idx, location) {
                 <b>Sum IVs:</b> ${sumIV}<br>
             </div>
 
-            <div style="background: rgba(0,0,0,0.5); padding: 15px; border-radius: 8px; text-align: left; min-width: 200px; flex: 1;">
+            <div style="background: rgba(0,0,0,0.5); padding: 15px; border-radius: 8px; text-align: left; min-width: 200px; flex: 1; display: flex; flex-direction: column;">
                 <h3 style="margin: 0 0 15px 0; text-align: center; border-bottom: 1px solid #555; padding-bottom: 5px;">IV Distribution</h3>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px 10px; font-size: 14px; text-align: center; height: 100%; align-content: space-evenly;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px 10px; font-size: 14px; text-align: center; flex: 1; align-content: center;">
                     <div>HP<br>${ivBar(p.ivs.hp)}</div>
                     <div>Speed<br>${ivBar(p.ivs.spe)}</div>
                     <div>Atk<br>${ivBar(p.ivs.atk)}</div>
@@ -161,8 +161,10 @@ export function showPokemonStats(idx, location) {
     `;
 
     let html = `
-        ${individualHtml}
-        ${collectiveHtml}
+        <div style="max-height: 80vh; overflow-y: auto; padding: 0 10px; overflow-x: hidden;">
+            ${individualHtml}
+            ${collectiveHtml}
+        </div>
     `;
 
     showModal(`${p.name} (Lv. ${p.level})`, html);
