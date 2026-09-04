@@ -472,6 +472,7 @@ class BattleSystem {
         } else {
             this.scheduleNextStrike(attacker, defender);
         }
+
     }
 
     scheduleNextStrike(attacker, defender) {
@@ -530,6 +531,7 @@ class BattleSystem {
 
         this.lastThrownBallName = ballName;
 
+
         let multiplier = this.state.config.balance.items.pokeballs[tier].multiplier;
 
         const chance = mathEngine.calculateCatchChance(this.activeEncounter.bst, this.activeEncounter.level, multiplier, this.state.stats, this.activeEncounter.qualityName === "Shiny");
@@ -547,6 +549,7 @@ class BattleSystem {
         }
 
         const finalizeDefeatLogic = (caught) => {
+
             if (caught) {
                 let caughtPokemon = JSON.parse(JSON.stringify(this.activeEncounter));
                 // Fix the level 100 jump bug by setting xp explicitly to the exact minimum needed for their captured level
@@ -617,11 +620,13 @@ class BattleSystem {
     }
 
     proceedAfterDefeat(leader, ev, lootMultiplier) {
+
         // Daycare logic
         if (this.state.dayCareRef) {
             this.state.dayCareRef.tickBattle();
             this.state.dayCareRef.grantPassiveXP(ev, (pkmn, amt) => this.grantXP(pkmn, amt));
         }
+
 
         // Award XP and Money (EV)
         this.grantXP(leader, ev);

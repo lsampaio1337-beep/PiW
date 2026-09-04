@@ -55,6 +55,7 @@ export function updateBattleArena() {
             if (elEnemySprite) {
                 elEnemySprite.src = `Assets/Pokemon Sprites/${enemy.qualityName === 'Shiny' ? enemy.id + '_shiny' : enemy.id}.png`;
                 elEnemySprite.style.display = 'block';
+                elEnemySprite.style.visibility = 'visible';
             }
 
             const leader = state.party[0];
@@ -74,6 +75,7 @@ export function updateBattleArena() {
                 if (elPlayerSprite) {
                     elPlayerSprite.src = `Assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? leader.id + '_shiny' : leader.id}.png`;
                     elPlayerSprite.style.display = 'block';
+                    elPlayerSprite.style.visibility = 'visible';
                 }
             }
         } else if (battleSystem && battleSystem.isSearching) {
@@ -243,9 +245,13 @@ export function playCaptureAnimation(ballName, isCaught) {
     spriteClone.style.zIndex = '100'; // Above the real sprite, below the ball
     enemySide.appendChild(spriteClone);
 
-    // We do NOT hide the real enemy sprite, so it keeps the layout from collapsing
+    // We do NOT use display: none on the real enemy sprite, so it keeps the layout from collapsing.
+    // But we must hide it visually so the clone can fade out.
+    enemySprite.style.visibility = 'hidden';
+
     // Also, we do not pause the game logic. The game will generate the next encounter.
     // If the next encounter spawns quickly, it will simply be underneath our clone.
+    // (updateBattleArena will reset its visibility)
 
     // Fade out clone over 2s
     spriteClone.style.transition = 'opacity 2s linear';
