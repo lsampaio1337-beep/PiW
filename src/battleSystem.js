@@ -513,7 +513,7 @@ class BattleSystem {
 
     throwPokeball() {
         let tier = this.state.settings.activeBallTier;
-        if (tier < 0) return false; // None selected
+        if (tier < 0) return { caught: false, ballName: null }; // None selected
 
         let ballName = this.state.config.balance.items.pokeballs[tier].name;
 
@@ -526,13 +526,13 @@ class BattleSystem {
             if (tier >= 0) ballName = this.state.config.balance.items.pokeballs[tier].name;
         }
 
-        if (tier < 0) return false; // No balls left
+        if (tier < 0) return { caught: false, ballName: null }; // No balls left
 
         let multiplier = this.state.config.balance.items.pokeballs[tier].multiplier;
 
         const chance = mathEngine.calculateCatchChance(this.activeEncounter.bst, this.activeEncounter.level, multiplier, this.state.stats, this.activeEncounter.qualityName === "Shiny");
 
-        return (Math.random() * 100) <= chance;
+        return { caught: (Math.random() * 100) <= chance, ballName: ballName };
     }
 
     handleEnemyDefeat() {
@@ -544,9 +544,7 @@ class BattleSystem {
             this.state.stats.bonusCandyDefeats = (this.state.stats.bonusCandyDefeats || 0) + 1;
         }
 
-        // Auto Throw Pokeball logic (disable in gyms)
-        if (this.state.settings.autoCatch && (!this.gymState || !this.gymState.isActive)) {
-            const caught = this.throwPokeball();
+        const finalizeDefeatLogic = (caught) => {
             if (caught) {
                 let caughtPokemon = JSON.parse(JSON.stringify(this.activeEncounter));
                 // Fix the level 100 jump bug by setting xp explicitly to the exact minimum needed for their captured level
