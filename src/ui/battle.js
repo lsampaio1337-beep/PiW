@@ -212,17 +212,34 @@ export function playCombatAnimations(targetSide, moveType, duration) {
 
     const color = TYPE_COLORS[moveType] || '#ffffff';
 
+    // We want to combine transforms without them overwriting each other.
+    // Initialize base transform (e.g. scaleX(-1) for player) if not set
+    if (!atkImg.dataset.baseTransform) {
+        atkImg.dataset.baseTransform = atkImg.style.transform || (attackerId.includes('player') ? 'scaleX(-1)' : '');
+    }
+    if (!defImg.dataset.baseTransform) {
+        defImg.dataset.baseTransform = defImg.style.transform || (defenderId.includes('player') ? 'scaleX(-1)' : '');
+    }
+
+    // Function to apply combined transforms safely
+    const updateTransform = (img) => {
+        const base = img.dataset.baseTransform || '';
+        const atk = img.dataset.atkTransform || '';
+        const def = img.dataset.defTransform || '';
+        img.style.transform = `${base} ${atk} ${def}`.trim();
+    };
+
     // Attacker launch animation
     atkImg.style.transition = `transform ${duration * 0.2}ms ease-out`;
-    let originalTransform = atkImg.style.transform || '';
 
-    // If player sprite, it has scaleX(-1) by default to face right
-    const isPlayer = attackerId.includes('player');
-    const scaleTransform = isPlayer ? 'scaleX(-1.2) scaleY(1.2)' : 'scale(1.2)';
+    const isPlayerAtk = attackerId.includes('player');
+    // For attack we just scale up slightly
+    atkImg.dataset.atkTransform = isPlayerAtk ? 'scaleY(1.2)' : 'scale(1.2)';
+    updateTransform(atkImg);
 
-    atkImg.style.transform = scaleTransform;
     setTimeout(() => {
-        atkImg.style.transform = originalTransform;
+        atkImg.dataset.atkTransform = '';
+        updateTransform(atkImg);
     }, duration * 0.4);
 
     // Create projectile
@@ -272,42 +289,54 @@ export function playCombatAnimations(targetSide, moveType, duration) {
         splash.style.top = endY + 'px';
         splash.style.width = '0px';
         splash.style.height = '0px';
-        splash.style.backgroundColor = 'transparent';
-        splash.style.border = `0px solid ${color}`;
+        splash.style.backgroundColor = color; // 100% solid color
         splash.style.borderRadius = '50%';
-        splash.style.boxShadow = `0 0 0px 0px ${color}`;
+        splash.style.boxShadow = `0 0 10px 5px ${color}`;
         splash.style.zIndex = '999';
         splash.style.pointerEvents = 'none';
-        splash.style.transition = `all ${Math.min(500, duration)}ms ease-out`;
+
+        // Phase 1: Grow to 25px
+        splash.style.transition = `all ${duration * 0.15}ms linear`;
 
         document.body.appendChild(splash);
 
         // Trigger reflow
         splash.getBoundingClientRect();
 
-        // Expand to 30x30 from the center
-        splash.style.left = (endX - 15) + 'px';
-        splash.style.top = (endY - 15) + 'px';
-        splash.style.width = '30px';
-        splash.style.height = '30px';
-        splash.style.border = `10px solid ${color}`;
-        splash.style.boxShadow = `0 0 20px 10px ${color}`;
-        splash.style.transform = 'scale(1)';
-        splash.style.opacity = '0';
+        // Expand to 25x25 from the center
+        splash.style.left = (endX - 12.5) + 'px';
+        splash.style.top = (endY - 12.5) + 'px';
+        splash.style.width = '25px';
+        splash.style.height = '25px';
+        splash.style.opacity = '1';
 
-        // Defender Hit Animation (Shake) using margins to avoid transform conflicts
-        defImg.style.position = 'relative'; // ensure top/left can apply if needed, though margin works
-        let defOriginalMargin = defImg.style.marginLeft || '0px';
+        // Phase 2: Grow to 50px and fade out
+        setTimeout(() => {
+            splash.style.transition = `all ${duration * 0.15}ms linear`;
+            splash.style.left = (endX - 25) + 'px';
+            splash.style.top = (endY - 25) + 'px';
+            splash.style.width = '50px';
+            splash.style.height = '50px';
+            splash.style.opacity = '0';
+        }, duration * 0.15);
+
+        setTimeout(() => {
+            if (splash.parentElement) splash.parentElement.removeChild(splash);
+        }, duration * 0.3);
+
+        // Defender Hit Animation (Shake) using transforms safely
+        defImg.style.transition = 'transform 50ms ease-in-out';
         let shakeInterval = setInterval(() => {
             const shift = (Math.random() - 0.5) * 20;
-            defImg.style.marginLeft = `${shift}px`;
+            defImg.dataset.defTransform = `translateX(${shift}px)`;
+            updateTransform(defImg);
         }, 50);
 
         setTimeout(() => {
             clearInterval(shakeInterval);
-            defImg.style.marginLeft = defOriginalMargin;
-            if (splash.parentElement) splash.parentElement.removeChild(splash);
-        }, Math.min(500, duration));
+            defImg.dataset.defTransform = '';
+            updateTransform(defImg);
+        }, Math.min(500, duration * 0.3));
 
     }, duration * 0.8);
 }
