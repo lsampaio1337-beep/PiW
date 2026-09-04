@@ -187,10 +187,155 @@ export function showDamage(target, amount, isCrit, moveName = '', moveType = 'No
     // Animate up and fade out
     setTimeout(() => {
         dmgNode.style.top = (parseInt(dmgNode.style.top) - 40) + 'px';
-        dmgNode.style.opacity = '0';
     }, 50);
 
     setTimeout(() => {
+        dmgNode.style.opacity = '0';
+    }, 2000);
+
+    setTimeout(() => {
         if (dmgNode.parentElement) dmgNode.parentElement.removeChild(dmgNode);
-    }, 1000);
+    }, 3000);
+}
+
+export function playCombatAnimations(targetSide, moveType, duration) {
+    const battleSystem = globals.battleSystem;
+    const isGym = battleSystem && battleSystem.gymState && battleSystem.gymState.isActive;
+
+    let attackerId = targetSide === 'player' ? (isGym ? 'gym-enemy-sprite' : 'enemy-sprite') : (isGym ? 'gym-player-sprite' : 'player-sprite');
+    let defenderId = targetSide === 'player' ? (isGym ? 'gym-player-sprite' : 'player-sprite') : (isGym ? 'gym-enemy-sprite' : 'enemy-sprite');
+
+    const atkImg = document.getElementById(attackerId);
+    const defImg = document.getElementById(defenderId);
+
+    if (!atkImg || !defImg) return;
+
+    const color = TYPE_COLORS[moveType] || '#ffffff';
+
+    // We want to combine transforms without them overwriting each other.
+    // Initialize base transform (e.g. scaleX(-1) for player) if not set
+    if (!atkImg.dataset.baseTransform) {
+        atkImg.dataset.baseTransform = atkImg.style.transform || (attackerId.includes('player') ? 'scaleX(-1)' : '');
+    }
+    if (!defImg.dataset.baseTransform) {
+        defImg.dataset.baseTransform = defImg.style.transform || (defenderId.includes('player') ? 'scaleX(-1)' : '');
+    }
+
+    // Function to apply combined transforms safely
+    const updateTransform = (img) => {
+        const base = img.dataset.baseTransform || '';
+        const atk = img.dataset.atkTransform || '';
+        const def = img.dataset.defTransform || '';
+        img.style.transform = `${base} ${atk} ${def}`.trim();
+    };
+
+    // Attacker launch animation
+    atkImg.style.transition = `transform ${duration * 0.2}ms ease-out`;
+
+    // For attack we just scale up slightly
+    atkImg.dataset.atkTransform = 'scale(1.2)';
+    updateTransform(atkImg);
+
+    setTimeout(() => {
+        atkImg.dataset.atkTransform = '';
+        updateTransform(atkImg);
+    }, duration * 0.4);
+
+    // Create projectile
+    const proj = document.createElement('div');
+    proj.style.position = 'fixed';
+    proj.style.width = '20px';
+    proj.style.height = '10px';
+    proj.style.backgroundColor = color;
+    proj.style.borderRadius = '5px';
+    proj.style.boxShadow = `0 0 10px 5px ${color}`;
+    proj.style.zIndex = '999';
+    proj.style.pointerEvents = 'none';
+
+    const atkRect = atkImg.getBoundingClientRect();
+    const defRect = defImg.getBoundingClientRect();
+
+    // Start at attacker center
+    const startX = atkRect.left + atkRect.width / 2;
+    const startY = atkRect.top + atkRect.height / 2;
+
+    // End at defender center
+    const endX = defRect.left + defRect.width / 2;
+    const endY = defRect.top + defRect.height / 2;
+
+    proj.style.left = startX + 'px';
+    proj.style.top = startY + 'px';
+
+    document.body.appendChild(proj);
+
+    // Animate projectile
+    proj.style.transition = `all ${duration * 0.8}ms linear`;
+
+    // Trigger reflow
+    proj.getBoundingClientRect();
+
+    proj.style.left = endX + 'px';
+    proj.style.top = endY + 'px';
+
+    setTimeout(() => {
+        if (proj.parentElement) proj.parentElement.removeChild(proj);
+
+        // Splash Effect
+        const splash = document.createElement('div');
+        splash.style.position = 'fixed';
+        // Center the 0x0 div on the target
+        splash.style.left = endX + 'px';
+        splash.style.top = endY + 'px';
+        splash.style.width = '0px';
+        splash.style.height = '0px';
+        splash.style.backgroundColor = color; // 100% solid color
+        splash.style.borderRadius = '50%';
+        splash.style.boxShadow = `0 0 10px 5px ${color}`;
+        splash.style.zIndex = '999';
+        splash.style.pointerEvents = 'none';
+
+        // Phase 1: Grow to 25px
+        splash.style.transition = `all ${duration * 0.15}ms linear`;
+
+        document.body.appendChild(splash);
+
+        // Trigger reflow
+        splash.getBoundingClientRect();
+
+        // Expand to 40x40 from the center
+        splash.style.left = (endX - 20) + 'px';
+        splash.style.top = (endY - 20) + 'px';
+        splash.style.width = '40px';
+        splash.style.height = '40px';
+        splash.style.opacity = '1';
+
+        // Phase 2: Grow to 80px and fade out
+        setTimeout(() => {
+            splash.style.transition = `all ${duration * 0.15}ms linear`;
+            splash.style.left = (endX - 40) + 'px';
+            splash.style.top = (endY - 40) + 'px';
+            splash.style.width = '80px';
+            splash.style.height = '80px';
+            splash.style.opacity = '0';
+        }, duration * 0.15);
+
+        setTimeout(() => {
+            if (splash.parentElement) splash.parentElement.removeChild(splash);
+        }, duration * 0.3);
+
+        // Defender Hit Animation (Shake) using transforms safely
+        defImg.style.transition = 'transform 50ms ease-in-out';
+        let shakeInterval = setInterval(() => {
+            const shift = (Math.random() - 0.5) * 20;
+            defImg.dataset.defTransform = `translateX(${shift}px)`;
+            updateTransform(defImg);
+        }, 50);
+
+        setTimeout(() => {
+            clearInterval(shakeInterval);
+            defImg.dataset.defTransform = '';
+            updateTransform(defImg);
+        }, Math.min(500, duration * 0.3));
+
+    }, duration * 0.8);
 }
