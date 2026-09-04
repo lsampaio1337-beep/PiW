@@ -80,7 +80,12 @@ export function showBackpack() {
 export function renderBackpackTab(tab) {
     const area = document.getElementById('backpack-content-area');
     if (!area) return;
-    area.style.display = "block";
+    area.style.display = "flex";
+    if (window.sellModeActive && tab !== 'pokemon') {
+        area.style.height = 'auto';
+    } else {
+        area.style.height = '80%';
+    }
 
     if (tab === 'pokeballs') {
         renderPokeballsTab(area);

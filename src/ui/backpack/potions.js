@@ -32,7 +32,7 @@ export function renderPotionsTab(area) {
                 <div style="width: 100%; aspect-ratio: 1/1; margin: 0 auto; display: flex; align-items: center; justify-content: center;">
                     <img src="./Assets/Items/Potions/${inventoryName}.png" style="max-width: 100%; max-height: 100%; object-fit: contain;" onerror="this.src='./Assets/Extra/Spot.png'">
                 </div>
-                <div style="font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px;">${inventoryName}</div>
+                <div style="font-size: 12px; margin-top: 2px;">${inventoryName.split(' ')[0]}<br>${inventoryName.split(' ').slice(1).join(' ')}</div>
                 <div style="font-size: 10px; color: #aaa;">Heals ${p.heal}HP</div>
                 <div style="font-size: 12px;"><b>x${formatQuantity(qty)}</b></div>
             </div>
@@ -57,7 +57,7 @@ function renderPotionsSellMode(area) {
             content += `
                 <div style="background: #333; border: 1px solid #555; border-radius: 8px; padding: 5%; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: space-between; aspect-ratio: 1 / 1.5; box-sizing: border-box; container-type: inline-size;">
                     <img src="./Assets/Items/Potions/${inventoryName}.png" onerror="this.src='./Assets/Extra/Spot.png'" style="width: 50%; max-height: 30%; object-fit: contain; margin-bottom: 5px;">
-                    <div style="font-size: 14px; font-weight: bold;">${inventoryName}</div>
+                    <div style="font-size: 14px; font-weight: bold;">${inventoryName.split(' ')[0]}<br>${inventoryName.split(' ').slice(1).join(' ')}</div>
                     <div style="font-size: 12px; color: #aaa;">Owned: ${formatQuantity(qty)}</div>
                     <div style="font-size: 12px; color: #2ecc71;">Sell: $${sellPrice} ea</div>
 

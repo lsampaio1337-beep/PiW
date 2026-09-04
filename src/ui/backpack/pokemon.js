@@ -3,12 +3,12 @@ import { updateUI } from '../../ui.js';
 import { renderBackpackTab } from './index.js';
 
 window.sellModeActive = false;
-window.selectedForSale = new Set();
+if (!window.selectedForSale) window.selectedForSale = new Set();
 import { calculateEV } from '../../mathEngine.js';
 
 // Helper to render a consistent Pokemon slot UI
 function renderSlotUI(p, listName, origIndex, isDraggable) {
-    if (!p.uuid) p.uuid = Math.random().toString(36).substring(2, 15);
+    if (!p.uuid) { p.uuid = Math.random().toString(36).substring(2, 15); }
     let imgSrc = `Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png`;
     let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
     let dragAttr = isDraggable ? `draggable="true" ondragstart="window.dragStart(event, '${listName}', '${p.uuid}')"` : '';
@@ -30,7 +30,7 @@ function renderSlotUI(p, listName, origIndex, isDraggable) {
         cursorStyle = 'cursor: pointer;';
         clickHandler = `onclick="window.toggleSaleSelection('${p.uuid}')"`;
         if (window.selectedForSale && window.selectedForSale.has(p.uuid)) {
-            selectionStyle = 'outline: 3px solid #00ff00; outline-offset: -3px; background: rgba(0,255,0,0.2);';
+            selectionStyle = 'outline: 4px solid #00ff00 !important; outline-offset: -4px !important; background: rgba(0,255,0,0.4) !important;';
         }
     }
 
@@ -54,6 +54,7 @@ function renderSlotUI(p, listName, origIndex, isDraggable) {
 }
 
 window.toggleSaleSelection = function(uuid) {
+    console.log("toggleSaleSelection", uuid);
     if (!window.selectedForSale) window.selectedForSale = new Set();
 
     if (window.selectedForSale.has(uuid)) {
@@ -63,6 +64,7 @@ window.toggleSaleSelection = function(uuid) {
     }
 
     if (window.renderBackpackTab) window.renderBackpackTab('pokemon');
+    if (window.updateUI) window.updateUI();
 };
 
 // Global filter state
@@ -76,6 +78,8 @@ export function renderPokemonTab(area) {
     let sellControlsHtml = '';
     if (window.sellModeActive) {
         let selectedEVTotal = 0;
+    if (!window.selectedForSale) window.selectedForSale = new Set();
+    console.log("renderPokemonTab selected size:", window.selectedForSale.size);
         let selectedCount = 0;
 
         // Sum EV dynamically for selected items
@@ -509,7 +513,7 @@ window.cancelSellMode = function() {
 };
 
 window.selectAllVisibleStorage = function() {
-    // Only select things in Storage that are currently visible (not display: none)
+    if (!window.selectedForSale) window.selectedForSale = new Set();
     const storageSlots = document.querySelectorAll('.pokemon-storage-slot');
     storageSlots.forEach(slot => {
         if (slot.style.display !== 'none') {
@@ -519,7 +523,8 @@ window.selectAllVisibleStorage = function() {
             }
         }
     });
-    renderBackpackTab('pokemon');
+    if (window.renderBackpackTab) window.renderBackpackTab('pokemon');
+    if (window.updateUI) window.updateUI();
 };
 
 window.sellSelectedPokemon = function() {

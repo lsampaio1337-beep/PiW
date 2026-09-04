@@ -33,7 +33,7 @@ export function renderStonesTab(area) {
 }
 
 function renderStonesSellMode(area) {
-    let content = '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 15px; overflow-y: auto; max-height: 100%; padding-bottom: 20px;">';
+    let content = '<div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 15px; overflow-y: auto; max-height: 100%; padding-bottom: 20px;">';
     const stonePrice = state.config.balance.items.stones.sell || Math.floor(state.config.balance.items.stones.price * 0.5);
 
     Object.keys(state.backpack.stones).sort().forEach(s => {
@@ -42,7 +42,7 @@ function renderStonesSellMode(area) {
             content += `
                 <div style="background: #333; border: 1px solid #555; border-radius: 8px; padding: 5%; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: space-between; aspect-ratio: 1 / 1.5; box-sizing: border-box; container-type: inline-size;">
                     <img src="./Assets/Items/Stones/${s}.png" onerror="this.src='./Assets/Extra/Spot.png'" style="width: 50%; max-height: 30%; object-fit: contain; margin-bottom: 5px;">
-                    <div style="font-size: 14px; font-weight: bold;">${s}</div>
+                    <div style="font-size: 14px; font-weight: bold;">${s.split(' ')[0]}<br>${s.split(' ').slice(1).join(' ')}</div>
                     <div style="font-size: 12px; color: #aaa;">Owned: ${formatQuantity(qty)}</div>
                     <div style="font-size: 12px; color: #2ecc71;">Sell: $${stonePrice} ea</div>
 

@@ -33,22 +33,22 @@ export function setupMarket(vCenter) {
 
         <!-- Market Buy Modal Container (Hidden by default) -->
         <div id="market-buy-modal-overlay" onclick="window.closeMarketBuyModal(event)" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 99; background: rgba(0,0,0,0.5);">
-        <div id="market-buy-modal" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.9); padding: 20px; border-radius: 12px; border: 2px solid #3498db; width: 60%; max-width: 600px; max-height: 80%; overflow-y: auto; color: white; z-index: 100; resize: both; overflow: auto;" onclick="event.stopPropagation()">
-            <h2 style="text-align: center; margin-top: 0;">PokeMarket - Buy</h2>
-            <button onclick="document.getElementById('market-buy-modal-overlay').style.display='none'" style="position: absolute; top: 10px; right: 10px; background: red; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">Close</button>
+        <div id="market-buy-modal" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.9); padding: 2%; border-radius: 12px; border: 2px solid #3498db; width: 60%; max-width: 800px; max-height: 80%; overflow-y: auto; color: white; z-index: 100; resize: both; overflow: auto; container-type: inline-size;" onclick="event.stopPropagation()">
+            <h2 style="text-align: center; margin-top: 0; font-size: 5cqi;">PokeMarket - Buy</h2>
+
 
             <div style="text-align: center; margin-bottom: 20px;">
-                <button onclick="window.renderBuyTab('pokeballs')" style="padding: 8px 15px; margin: 0 5px; cursor: pointer;">Pokeballs</button>
-                <button onclick="window.renderBuyTab('potions')" style="padding: 8px 15px; margin: 0 5px; cursor: pointer;">Potions</button>
-                <button onclick="window.renderBuyTab('stones')" style="padding: 8px 15px; margin: 0 5px; cursor: pointer;">Stones</button>
+                <button onclick="window.renderBuyTab('pokeballs')" style="padding: 1cqi 2cqi; margin: 0 1cqi; cursor: pointer; font-size: 2.5cqi;">Pokeballs</button>
+                <button onclick="window.renderBuyTab('potions')" style="padding: 1cqi 2cqi; margin: 0 1cqi; cursor: pointer; font-size: 2.5cqi;">Potions</button>
+                <button onclick="window.renderBuyTab('stones')" style="padding: 1cqi 2cqi; margin: 0 1cqi; cursor: pointer; font-size: 2.5cqi;">Stones</button>
             </div>
 
-            <div style="text-align: center; margin-bottom: 20px; background: #222; padding: 15px; border-radius: 8px;">
+            <div style="text-align: center; margin-bottom: 3cqi; background: #222; padding: 2cqi; border-radius: 1cqi; font-size: 3cqi;">
                 <label>Purchase Quantity: </label>
-                <input type="number" id="global-buy-qty" value="1" min="1" oninput="window.updateBuyPrices()" style="width: 80px; padding: 5px; text-align: center; font-size: 16px;">
+                <input type="number" id="global-buy-qty" value="1" min="1" oninput="window.updateBuyPrices()" style="width: 15cqi; padding: 1cqi; text-align: center; font-size: 3cqi;">
             </div>
 
-            <div id="market-buy-items-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 15px;">
+            <div id="market-buy-items-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(15cqi, 1fr)); gap: 2cqi;">
                 <!-- Items injected here -->
             </div>
         </div>
@@ -80,25 +80,24 @@ export function setupMarket(vCenter) {
 window.renderBuyTab = function(category) {
     const grid = document.getElementById('market-buy-items-grid');
     if (!grid) return;
-
-    // Store active category for price updates
     window.currentBuyCategory = category;
-
     let html = '';
 
     if (category === 'pokeballs') {
+        grid.style.gridTemplateColumns = 'repeat(auto-fill, minmax(15cqi, 1fr))';
         state.config.balance.items.pokeballs.forEach(b => {
             html += generateBuyCard(b.name, b.price, `Efficiency: ${b.multiplier}x`, category, `Assets/Items/Balls/${b.name.replace(/Regular Pokeball/, "Pokeball").replace(/Great Pokeball/, "Greatball").replace(/Ultra Pokeball/, "Ultraball").replace(/Master Pokeball/, "Masterball")}.png`);
         });
     } else if (category === 'potions') {
+        grid.style.gridTemplateColumns = 'repeat(auto-fill, minmax(15cqi, 1fr))';
         state.config.balance.items.potions.forEach(p => {
             let inventoryName = p.name;
             if (p.name === 'Regular Potion') inventoryName = 'Regular Potion';
             if (p.name === 'Big') inventoryName = 'Big Potion';
-
             html += generateBuyCard(inventoryName, p.price, `Heals: ${p.heal} HP`, category, `Assets/Items/Potions/${inventoryName}.png`);
         });
     } else if (category === 'stones') {
+        grid.style.gridTemplateColumns = 'repeat(6, 1fr)'; // Force exactly 6 columns
         const stonePrice = state.config.balance.items.stones.price;
         Object.keys(state.backpack.stones).forEach(stoneName => {
             html += generateBuyCard(stoneName, stonePrice, "", category, `Assets/Items/Stones/${stoneName}.png`);
@@ -110,16 +109,23 @@ window.renderBuyTab = function(category) {
 };
 
 function generateBuyCard(name, price, attribute, category, imgPath) {
-    // We store base price in a data attribute so we can dynamically update it
-    return `
-        <div onclick="window.confirmBuyItem('${name}', ${price}, '${category}')" style="background: #333; border: 2px solid #555; border-radius: 8px; padding: 15px; text-align: center; cursor: pointer; transition: transform 0.1s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-            <img src="${imgPath}" onerror="this.src='./Assets/Extra/Spot.png'" style="width: 32px; height: 32px; object-fit: contain; margin-bottom: 10px;">
-            <div style="font-weight: bold; font-size: 16px; margin-bottom: 5px;">${name}</div>
-            ${attribute ? `<div style="font-size: 10px; color: #aaa; margin-bottom: 5px;">${attribute}</div>` : ""}
-            <div class="buy-price-display" data-base-price="${price}" style="color: #f1c40f; font-weight: bold; font-size: 18px;">
-                $${price}
-            </div>
+    // Break names into 2 lines for potions and stones based on space
+    let displayName = name;
+    if (category === 'potions' || category === 'stones') {
+        let parts = name.split(' ');
+        if (parts.length > 1) {
+            displayName = parts[0] + '<br>' + parts.slice(1).join(' ');
+        }
+    }
 
+    return `
+        <div onclick="window.confirmBuyItem('${name}', ${price}, '${category}')" style="background: #333; border: 2px solid #555; border-radius: 1cqi; padding: 2cqi; text-align: center; cursor: pointer; transition: transform 0.1s; display: flex; flex-direction: column; align-items: center; justify-content: space-between;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+            <img src="${imgPath}" onerror="this.src='./Assets/Extra/Spot.png'" style="width: 80%; aspect-ratio: 1/1; object-fit: contain; margin-bottom: 2cqi;">
+            <div style="font-weight: bold; font-size: 3cqi; margin-bottom: 1cqi; line-height: 1.2;">${displayName}</div>
+            ${attribute ? `<div style="font-size: 2cqi; color: #aaa; margin-bottom: 1cqi;">${attribute}</div>` : ""}
+            <div class="buy-price-display" data-base-price="${price}" style="color: #f1c40f; font-weight: bold; font-size: 3.5cqi; margin-top: auto;">
+                ${price}
+            </div>
         </div>
     `;
 }
