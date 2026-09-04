@@ -136,7 +136,6 @@ export function showPokemonStats(idx, location) {
     let evolveHtml = "";
     if (pData.evolutions && pData.evolutions.length > 0) {
         let evolutionsList = pData.evolutions.map(evo => {
-            const nextPData = state.config.pokemonData.find(pd => pd.id === evo.to);
             const req = getEvolveRequirements(p, evo, state);
 
             let btnText = "Evolve";
@@ -151,25 +150,37 @@ export function showPokemonStats(idx, location) {
             }
 
             return `
-                <div style="margin-top: 10px;">
-                    Evolution: <b>${nextPData ? nextPData.name : 'Unknown'}</b>
-                    <button ${req.canEvolve ? '' : 'disabled'} onclick="window.evolvePokemon('${location}', ${idx}, ${evo.to})" style="${req.canEvolve ? 'background: #2ecc71;' : 'background: #7f8c8d; cursor: not-allowed;'} margin-left: 10px; vertical-align: middle; width: max-content; min-width: 200px; height: 40px; font-size: 12px; line-height: 1.2; padding: 5px 10px; text-align: center; display: inline-flex; align-items: center; justify-content: center; flex-direction: column;">${btnText}</button>
+                <div>
+                    <button ${req.canEvolve ? '' : 'disabled'} onclick="window.evolvePokemon('${location}', ${idx}, ${evo.to})" style="${req.canEvolve ? 'background: #2ecc71;' : 'background: #7f8c8d; cursor: not-allowed;'} vertical-align: middle; width: max-content; min-width: 200px; height: 40px; font-size: 12px; line-height: 1.2; padding: 5px 10px; text-align: center; display: inline-flex; align-items: center; justify-content: center; flex-direction: column;">${btnText}</button>
                 </div>
             `;
         }).join('');
-        evolveHtml = `<div style="margin-top: 15px; border-top: 1px solid #555; padding-top: 10px;">${evolutionsList}</div>`;
+        evolveHtml = `<div style="margin-top: 15px; border-top: 1px solid #555; padding-top: 10px; display: flex; justify-content: center; gap: 10px;">${evolutionsList}</div>`;
     }
 
     let individualHtml = `
-        <div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
+        <div style="display: flex; justify-content: space-around; flex-wrap: wrap; align-items: flex-start;">
+            <div style="text-align: left; min-width: 150px;">
+                <h4 style="margin-bottom: 5px; text-align: center;">Actual Stats</h4>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 12px; text-align: center;">
+                    <div>HP<br><b>${p.currentHp}/${p.maxHp}</b></div>
+                    <div>Speed<br><b>${p.currentStats ? p.currentStats.spe : '?'}</b></div>
+                    <div>Atk<br><b>${p.currentStats ? p.currentStats.atk : '?'}</b></div>
+                    <div>SpAtk<br><b>${p.currentStats ? p.currentStats.spa : '?'}</b></div>
+                    <div>Def<br><b>${p.currentStats ? p.currentStats.def : '?'}</b></div>
+                    <div>SpDef<br><b>${p.currentStats ? p.currentStats.spd : '?'}</b></div>
+                </div>
+            </div>
+
             <div style="text-align: center;">
                 <img src="Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png" style="width: 100px; height: 100px;"><br>
                 <p style="margin: 5px 0;"><b>Type:</b> ${p.types.map(t => formatType(t)).join(' ')}</p>
                 <b>Quality:</b> ${p.qualityName} (Q=${p.quality.toFixed(2)})<br>
                 <b>Sum IVs:</b> ${sumIV}<br>
             </div>
+
             <div style="text-align: left; min-width: 200px;">
-                <h4 style="margin-bottom: 5px;">IV Distribution</h4>
+                <h4 style="margin-bottom: 5px; text-align: center;">IV Distribution</h4>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 12px; text-align: center;">
                     <div>HP<br>${ivBar(p.ivs.hp)}</div>
                     <div>Speed<br>${ivBar(p.ivs.spe)}</div>
@@ -184,87 +195,23 @@ export function showPokemonStats(idx, location) {
     `;
 
     // --- Collective Data (Pokedex info) ---
-    const bst = pData.hp + pData.atk + pData.def + pData.spa + pData.spd + pData.spe;
-    const tConfig = state.config.types;
-    let weaknesses = {};
-    let resistances = {};
-    let immunities = {};
-    let effective = {};
-    let notEffective = {};
-    let noEffect = {};
 
-    for (const atkType in tConfig) {
-        let multiplier = 1;
-        for (const defType of pData.types) {
-            if (tConfig[atkType] && tConfig[atkType][defType] !== undefined) multiplier *= tConfig[atkType][defType];
-        }
-        if (multiplier > 1) weaknesses[atkType] = multiplier;
-        else if (multiplier < 1 && multiplier > 0) resistances[atkType] = multiplier;
-        else if (multiplier === 0) immunities[atkType] = multiplier;
-    }
 
-    for (const defType in tConfig) {
-        let maxMult = 0;
-        for (const atkType of pData.types) {
-            let m = 1;
-            if (tConfig[atkType] && tConfig[atkType][defType] !== undefined) m = tConfig[atkType][defType];
-            if (m > maxMult) maxMult = m;
-        }
-        if (maxMult > 1) effective[defType] = maxMult;
-        else if (maxMult < 1 && maxMult > 0) notEffective[defType] = maxMult;
-        else if (maxMult === 0) noEffect[defType] = maxMult;
-    }
-
-    let movesHtml = `
-        <table style="width: 100%; border-collapse: collapse; text-align: left; margin-top: 10px; font-size: 12px;">
-            <tr style="border-bottom: 1px solid #777;">
-                <th>Lvl</th><th>Move Name</th><th>Type</th><th>Power</th><th>Category</th>
-            </tr>
-    `;
-    if (pData.learnset) {
-        pData.learnset.forEach(m => {
-            let mData = state.config.moves[m.move];
-            movesHtml += `<tr style="border-bottom: 1px solid #444;">
-                <td>${m.level}</td>
-                <td>${m.move}</td>
-                <td>${mData ? formatType(mData.type) : '?'}</td>
-                <td>${mData ? mData.power : '?'}</td>
-                <td>${mData ? mData.category : '?'}</td>
-            </tr>`;
-        });
-    }
-    movesHtml += `</table>`;
 
     const fullEvoTreeHtml = buildEvolutionLineHtml(pData, state);
 
     let collectiveHtml = `
         <div style="margin-top: 20px; border-top: 2px solid #fff; padding-top: 15px;">
             <h3 style="margin-top: 0;">Species Data</h3>
-            <p><b>BST:</b> ${bst} (HP:${pData.hp} | Speed:${pData.spe} | Atk:${pData.atk} SpAtk:${pData.spa} | Def:${pData.def} SpDef:${pData.spd})</p>
-
-            <div style="text-align: left; margin: 15px 0; font-size: 14px; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 5px;">
-                <h4 style="margin: 0 0 5px 0;">Defensive Effectiveness</h4>
-                ${Object.keys(weaknesses).length ? `<b>Weak To (2x):</b> ${formatTypes(weaknesses)}<br>` : ''}
-                ${Object.keys(resistances).length ? `<b>Resists (0.5x):</b> ${formatTypes(resistances)}<br>` : ''}
-                ${Object.keys(immunities).length ? `<b>Immune To (0x):</b> ${formatTypes(immunities)}<br>` : ''}
-
-                <h4 style="margin: 10px 0 5px 0;">Offensive Effectiveness</h4>
-                ${Object.keys(effective).length ? `<b>Super Effective (2x):</b> ${formatTypes(effective)}<br>` : ''}
-                ${Object.keys(notEffective).length ? `<b>Not Very Effective (0.5x):</b> ${formatTypes(notEffective)}<br>` : ''}
-                ${Object.keys(noEffect).length ? `<b>No Effect (0x):</b> ${formatTypes(noEffect)}<br>` : ''}
-            </div>
-
+            ${getSpeciesDataHtml(pData, state)}
             ${fullEvoTreeHtml}
-
-            <h4 style="text-align: left;">Moveset</h4>
-            ${movesHtml}
         </div>
     `;
 
-    let html = `<div style="max-height: 80vh; overflow-y: auto; overflow-x: hidden;">
+    let html = `
         ${individualHtml}
         ${collectiveHtml}
-    </div>`;
+    `;
 
     showModal(`${p.name} (Lv. ${p.level})`, html);
 }

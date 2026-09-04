@@ -127,15 +127,15 @@ export function showDexEntry(id) {
     movesHtml += `</table>`;
 
     const hasSeenShiny = state.stats.seenShiniesSpecies && state.stats.seenShiniesSpecies[pData.name];
-    const shinyButtonStyle = hasSeenShiny ? "display: inline-block;" : "display: none;";
+    const buttonStyle = hasSeenShiny ? "display: inline-block;" : "display: none;";
 
     const html = `
         <div style="text-align:center; max-height: 80vh; overflow-y: auto;">
             <h2>#${pData.id} ${pData.name}</h2>
             <img id="dex-sprite" src="Assets/Pokemon Sprites/${pData.id}.png" style="width: 100px; height: 100px;">
             <div>
-                <button style="${shinyButtonStyle}" onclick="document.getElementById('dex-sprite').src = 'Assets/Pokemon Sprites/${pData.id}_shiny.png'">Shiny</button>
-                <button onclick="document.getElementById('dex-sprite').src = 'Assets/Pokemon Sprites/${pData.id}.png'">Normal</button>
+                <button style="${buttonStyle}" onclick="document.getElementById('dex-sprite').src = 'Assets/Pokemon Sprites/${pData.id}_shiny.png'">Shiny</button>
+                <button style="${buttonStyle}" onclick="document.getElementById('dex-sprite').src = 'Assets/Pokemon Sprites/${pData.id}.png'">Normal</button>
             </div>
 
             <p><b>Type:</b> ${pData.types.map(t => formatType(t)).join(' / ')}</p>
@@ -164,4 +164,149 @@ export function showDexEntry(id) {
     `;
 
     showModal("", html);
+}
+
+
+export function getDexEntryHtml(id) {
+    const pd = state.config.pokemonData.find(p => p.id === id);
+    if (!pd) return '';
+
+    // Build Defensive Effectiveness
+    const defensive = state.config.typeMatchups.defensive[pd.types[0]];
+    let defMatchups = {};
+    for (const type in defensive) {
+        defMatchups[type] = defensive[type];
+    }
+    if (pd.types.length > 1) {
+        const defensive2 = state.config.typeMatchups.defensive[pd.types[1]];
+        for (const type in defensive2) {
+            defMatchups[type] = (defMatchups[type] || 1) * defensive2[type];
+        }
+    }
+    const defWeak = [], defResist = [];
+    for (const type in defMatchups) {
+        if (defMatchups[type] > 1) defWeak.push(formatType(type));
+        else if (defMatchups[type] < 1 && defMatchups[type] > 0) defResist.push(formatType(type));
+    }
+
+    // Build Offensive Effectiveness
+    const offensive = state.config.typeMatchups.offensive[pd.types[0]];
+    let offMatchups = {};
+    for (const type in offensive) {
+        offMatchups[type] = offensive[type];
+    }
+    if (pd.types.length > 1) {
+        const offensive2 = state.config.typeMatchups.offensive[pd.types[1]];
+        for (const type in offensive2) {
+            offMatchups[type] = Math.max(offMatchups[type] || 0, offensive2[type]);
+        }
+    }
+    const offSuper = [], offNotVery = [];
+    for (const type in offMatchups) {
+        if (offMatchups[type] > 1) offSuper.push(formatType(type));
+        else if (offMatchups[type] < 1 && offMatchups[type] > 0) offNotVery.push(formatType(type));
+    }
+
+    const bst = pd.hp + pd.atk + pd.def + pd.spa + pd.spd + pd.spe;
+    const bstHtml = `BST: ${bst} (HP:${pd.hp} | Speed:${pd.spe} | Atk:${pd.atk} SpAtk:${pd.spa} | Def:${pd.def} SpDef:${pd.spd})`;
+
+    let movesetHtml = '';
+    const uniqueMoves = [];
+    for (const move of pd.moveset) {
+        if (!uniqueMoves.some(m => m.name === move.name)) uniqueMoves.push(move);
+    }
+    for (const move of uniqueMoves) {
+        movesetHtml += `<span style="font-size: 11px;">Lv${move.level}: <b>${move.name}</b> (${formatType(move.type)} Power: ${move.power})</span><br>`;
+    }
+
+    return `
+        <div style="text-align: center; margin-bottom: 10px; font-size: 14px; font-weight: bold;">
+            ${bstHtml}
+        </div>
+
+        <div style="background: rgba(0,0,0,0.2); padding: 10px; border-radius: 5px; margin-bottom: 10px; text-align: left; font-size: 12px; line-height: 1.5;">
+            <b>Defensive Effectiveness</b><br>
+            Weak To (2x): ${defWeak.join(', ')}<br>
+            Resists (0.5x): ${defResist.join(', ')}<br>
+            <div style="margin-top: 5px;">
+                <b>Offensive Effectiveness</b><br>
+                Super Effective (2x): ${offSuper.join(', ')}<br>
+                Not Very Effective (0.5x): ${offNotVery.join(', ')}
+            </div>
+        </div>
+    `;
+}
+
+
+export function getSpeciesDataHtml(pData, state) {
+    const bst = pData.hp + pData.atk + pData.def + pData.spa + pData.spd + pData.spe;
+
+    let weaknesses = {};
+    let resistances = {};
+    let immunities = {};
+    let effective = {};
+    let notEffective = {};
+    let noEffect = {};
+
+    pData.types.forEach(type => {
+        const typeData = state.config.types[type];
+        if (!typeData) return;
+
+        Object.keys(typeData.defenses).forEach(attacker => {
+            const val = typeData.defenses[attacker];
+            if (val === 2) weaknesses[attacker] = (weaknesses[attacker] || 1) * 2;
+            if (val === 0.5) resistances[attacker] = (resistances[attacker] || 1) * 0.5;
+            if (val === 0) immunities[attacker] = 0;
+        });
+
+        Object.keys(typeData.attacks).forEach(defender => {
+            const val = typeData.attacks[defender];
+            if (val === 2) effective[defender] = (effective[defender] || 1) * 2;
+            if (val === 0.5) notEffective[defender] = (notEffective[defender] || 1) * 0.5;
+            if (val === 0) noEffect[defender] = 0;
+        });
+    });
+
+    let movesHtml = `
+        <table style="width: 100%; text-align: left; font-size: 14px; border-collapse: collapse;">
+            <tr style="border-bottom: 1px solid #fff;">
+                <th style="padding-bottom: 5px;">Lvl</th>
+                <th style="padding-bottom: 5px;">Move</th>
+                <th style="padding-bottom: 5px;">Type</th>
+                <th style="padding-bottom: 5px;">Pwr</th>
+                <th style="padding-bottom: 5px;">Cat</th>
+            </tr>
+    `;
+    if (pData.learnset) {
+        pData.learnset.forEach(m => {
+            let mData = state.config.moves[m.move];
+            movesHtml += `<tr style="border-bottom: 1px solid #444;">
+                <td>${m.level}</td>
+                <td>${m.move}</td>
+                <td>${mData ? formatType(mData.type) : '?'}</td>
+                <td>${mData ? mData.power : '?'}</td>
+                <td>${mData ? mData.category : '?'}</td>
+            </tr>`;
+        });
+    }
+    movesHtml += `</table>`;
+
+    return `
+        <p><b>BST:</b> ${bst} (HP:${pData.hp} | Speed:${pData.spe} | Atk:${pData.atk} SpAtk:${pData.spa} | Def:${pData.def} SpDef:${pData.spd})</p>
+
+        <div style="text-align: left; margin: 15px 0; font-size: 14px; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 5px;">
+            <h4 style="margin: 0 0 5px 0;">Defensive Effectiveness</h4>
+            ${Object.keys(weaknesses).length ? \`<b>Weak To (2x):</b> \${formatTypes(weaknesses)}<br>\` : ''}
+            ${Object.keys(resistances).length ? \`<b>Resists (0.5x):</b> \${formatTypes(resistances)}<br>\` : ''}
+            ${Object.keys(immunities).length ? \`<b>Immune To (0x):</b> \${formatTypes(immunities)}<br>\` : ''}
+
+            <h4 style="margin: 10px 0 5px 0;">Offensive Effectiveness</h4>
+            ${Object.keys(effective).length ? \`<b>Super Effective (2x):</b> \${formatTypes(effective)}<br>\` : ''}
+            ${Object.keys(notEffective).length ? \`<b>Not Very Effective (0.5x):</b> \${formatTypes(notEffective)}<br>\` : ''}
+            ${Object.keys(noEffect).length ? \`<b>No Effect (0x):</b> \${formatTypes(noEffect)}<br>\` : ''}
+        </div>
+
+        <h4 style="text-align: left;">Moveset</h4>
+        ${movesHtml}
+    `;
 }
