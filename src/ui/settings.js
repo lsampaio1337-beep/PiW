@@ -32,7 +32,6 @@ export function showSettings() {
 
         <hr>
 
-        <button onclick="window.exportLog()">Export Save Log</button>
         <button onclick="window.activateCheat()" style="margin-left: 10px; background-color: #c0392b; color: white;">Cheat</button>
     `;
     showModal("Settings", settingsHTML);
@@ -106,12 +105,6 @@ export function addXp() {
             state.party[0].xp += amount;
         }
         updateUI();
-    }
-}
-
-export function exportLog() {
-    if (state.storageRef) {
-        state.storageRef.exportLog(state);
     }
 }
 

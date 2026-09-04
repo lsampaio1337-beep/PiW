@@ -602,8 +602,6 @@ async function init() {
 
                 startGame();
 
-                // If player already has Pokemon, Oak Lab will render the bonuses next time it's visited.
-
                 // Switch view based on saved route
                 if (state.currentRoute === "Professor Oak Lab") {
                     switchView("PROF_OAK_LAB");
@@ -613,6 +611,29 @@ async function init() {
                     navigateToLocation(state.currentRoute);
                 } else {
                     navigateToLocation(state.currentRoute);
+                }
+
+                if (state.sleepTimestamp) {
+                    const elapsedMs = Date.now() - state.sleepTimestamp;
+                    const elapsedMinutes = Math.floor(elapsedMs / 60000);
+
+                    if (elapsedMinutes > 0) {
+                        if (confirm(`You have been offline for ${elapsedMinutes} minute(s). Want to collect sleep mode data?`)) {
+                            const origHTML = splashScreen.innerHTML;
+                            splashScreen.style.display = 'flex';
+                            splashScreen.innerHTML = `<h2 style="color:white;">Collecting data...</h2><p style="color:white;">Simulating offline progress.</p>`;
+
+                            // Small delay to allow DOM to render before blocking main thread
+                            setTimeout(async () => {
+                                await globals.battleSystem.runFastForward(elapsedMinutes);
+                                splashScreen.style.display = 'none';
+
+                                // Restore splash HTML just in case
+                                splashScreen.innerHTML = origHTML;
+                            }, 100);
+                        }
+                    }
+                    delete state.sleepTimestamp;
                 }
             };
 
