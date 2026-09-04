@@ -267,14 +267,15 @@ export function playCombatAnimations(targetSide, moveType, duration) {
         // Splash Effect
         const splash = document.createElement('div');
         splash.style.position = 'fixed';
-        splash.style.left = (endX - 30) + 'px';
-        splash.style.top = (endY - 30) + 'px';
-        splash.style.width = '60px';
-        splash.style.height = '60px';
+        // Center the 0x0 div on the target
+        splash.style.left = endX + 'px';
+        splash.style.top = endY + 'px';
+        splash.style.width = '0px';
+        splash.style.height = '0px';
         splash.style.backgroundColor = 'transparent';
-        splash.style.border = `10px solid ${color}`;
+        splash.style.border = `0px solid ${color}`;
         splash.style.borderRadius = '50%';
-        splash.style.boxShadow = `0 0 20px 10px ${color}`;
+        splash.style.boxShadow = `0 0 0px 0px ${color}`;
         splash.style.zIndex = '999';
         splash.style.pointerEvents = 'none';
         splash.style.transition = `all ${Math.min(500, duration)}ms ease-out`;
@@ -284,24 +285,27 @@ export function playCombatAnimations(targetSide, moveType, duration) {
         // Trigger reflow
         splash.getBoundingClientRect();
 
-        splash.style.transform = 'scale(2)';
+        // Expand to 30x30 from the center
+        splash.style.left = (endX - 15) + 'px';
+        splash.style.top = (endY - 15) + 'px';
+        splash.style.width = '30px';
+        splash.style.height = '30px';
+        splash.style.border = `10px solid ${color}`;
+        splash.style.boxShadow = `0 0 20px 10px ${color}`;
+        splash.style.transform = 'scale(1)';
         splash.style.opacity = '0';
 
-        // Defender Hit Animation (Shake)
-        defImg.style.transition = 'transform 50ms ease-in-out';
-        let defOriginalTransform = defImg.style.transform || '';
+        // Defender Hit Animation (Shake) using margins to avoid transform conflicts
+        defImg.style.position = 'relative'; // ensure top/left can apply if needed, though margin works
+        let defOriginalMargin = defImg.style.marginLeft || '0px';
         let shakeInterval = setInterval(() => {
             const shift = (Math.random() - 0.5) * 20;
-            if (defenderId.includes('player')) {
-                defImg.style.transform = `scaleX(-1) translateX(${shift}px)`;
-            } else {
-                defImg.style.transform = `translateX(${shift}px)`;
-            }
+            defImg.style.marginLeft = `${shift}px`;
         }, 50);
 
         setTimeout(() => {
             clearInterval(shakeInterval);
-            defImg.style.transform = defOriginalTransform;
+            defImg.style.marginLeft = defOriginalMargin;
             if (splash.parentElement) splash.parentElement.removeChild(splash);
         }, Math.min(500, duration));
 
