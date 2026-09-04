@@ -29,7 +29,7 @@ function renderSlotUI(p, listName, origIndex, isDraggable) {
         dragAttr = ''; // Disable drag in sell mode everywhere
         cursorStyle = 'cursor: pointer;';
         clickHandler = `onclick="window.toggleSaleSelection('${p.uuid}')"`;
-        if (window.selectedForSale.has(p.uuid)) {
+        if (window.selectedForSale && window.selectedForSale.has(p.uuid)) {
             selectionStyle = 'outline: 3px solid #00ff00; outline-offset: -3px; background: rgba(0,255,0,0.2);';
         }
     }
@@ -57,7 +57,7 @@ window.toggleSaleSelection = function(uuid) {
     if (window.selectedForSale.has(uuid)) {
         window.selectedForSale.delete(uuid);
     } else {
-        window.selectedForSale.add(uuid);
+        if (window.selectedForSale) window.selectedForSale.add(uuid);
     }
     renderBackpackTab('pokemon');
 };
@@ -491,14 +491,7 @@ export function handleDrop(event, targetCol) {
     renderBackpackTab('pokemon');
 }
 
-window.startSellMode = function() {
-    window.sellModeActive = true;
-    window.selectedForSale.clear();
 
-    // Open backpack directly to pokemon tab
-    window.showBackpack();
-    window.renderBackpackTab('pokemon');
-};
 
 window.cancelSellMode = function() {
     window.sellModeActive = false;
@@ -508,7 +501,7 @@ window.cancelSellMode = function() {
     // Return to Market UI
     const pcButton = document.querySelector('img[src="Assets/UI/Menu/TopBar/Icon_Map.png"]');
     if (pcButton) {
-        window.changeLocation("PokeCenter & PokeMarket");
+        window.navigateToLocation ? window.navigateToLocation("PokeCenter & PokeMarket") : null;
     }
 };
 
@@ -546,7 +539,7 @@ window.sellSelectedPokemon = function() {
     allLists.forEach(listInfo => {
         const arr = listInfo.array;
         for (let i = arr.length - 1; i >= 0; i--) {
-            if (window.selectedForSale.has(arr[i].uuid)) {
+            if (window.selectedForSale && window.selectedForSale.has(arr[i].uuid)) {
                 // If it's the last Pokemon in the party, prevent selling!
                 if (listInfo.name === 'party' && arr.length === 1) {
                     alert("You cannot sell your last Pokemon in the party!");

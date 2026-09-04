@@ -16,22 +16,22 @@ export function setupMarket(vCenter) {
     // Create interactive overlay buttons (Transparent absolute positioned for realism, but let's just make nice visual buttons positioned over the desks)
     vCenter.innerHTML = `
         <!-- Left Side: PokeCenter -->
-        <button id="btn-heal-all" style="position: absolute; left: 15%; top: 50%; padding: 15px 30px; font-size: 18px; font-weight: bold; background: #e74c3c; color: white; border: 2px solid white; border-radius: 8px; cursor: pointer; transform: translate(-50%, -50%); box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
-            Heal All Pokemon
+        <button id="btn-heal-all" style="position: absolute; left: 15%; top: 20%; padding: 15px 30px; font-size: 18px; font-weight: bold; background: #e74c3c; color: white; border: 2px solid white; border-radius: 8px; cursor: pointer; transform: translate(-50%, -50%); box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+            Heal
         </button>
 
         <!-- Right Side: PokeMarket -->
-        <div style="position: absolute; right: 15%; top: 50%; transform: translate(50%, -50%); display: flex; flex-direction: column; gap: 15px;">
+        <div style="position: absolute; right: 15%; top: 20%; transform: translate(50%, -50%); display: flex; flex-direction: column; gap: 15px;">
             <button id="btn-market-buy" style="padding: 15px 30px; font-size: 18px; font-weight: bold; background: #3498db; color: white; border: 2px solid white; border-radius: 8px; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
-                Buy Items
+                Buy
             </button>
             <button id="btn-market-sell" style="padding: 15px 30px; font-size: 18px; font-weight: bold; background: #2ecc71; color: white; border: 2px solid white; border-radius: 8px; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
-                Sell Items / Pokemon
+                Sell
             </button>
         </div>
 
         <!-- Market Buy Modal Container (Hidden by default) -->
-        <div id="market-buy-modal" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.9); padding: 20px; border-radius: 12px; border: 2px solid #3498db; width: 80%; max-width: 800px; max-height: 80%; overflow-y: auto; color: white; z-index: 100;">
+        <div id="market-buy-modal" style="display: none; position: absolute; top: 20%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.9); padding: 20px; border-radius: 12px; border: 2px solid #3498db; width: 80%; max-width: 800px; max-height: 80%; overflow-y: auto; color: white; z-index: 100; resize: both; overflow: auto;">
             <h2 style="text-align: center; margin-top: 0;">PokeMarket - Buy</h2>
             <button onclick="document.getElementById('market-buy-modal').style.display='none'" style="position: absolute; top: 10px; right: 10px; background: red; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">Close</button>
 
@@ -43,7 +43,7 @@ export function setupMarket(vCenter) {
 
             <div style="text-align: center; margin-bottom: 20px; background: #222; padding: 15px; border-radius: 8px;">
                 <label>Purchase Quantity: </label>
-                <input type="number" id="global-buy-qty" value="1" min="1" onchange="window.updateBuyPrices()" style="width: 80px; padding: 5px; text-align: center; font-size: 16px;">
+                <input type="number" id="global-buy-qty" value="1" min="1" oninput="window.updateBuyPrices()" style="width: 80px; padding: 5px; text-align: center; font-size: 16px;">
             </div>
 
             <div id="market-buy-items-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px;">
@@ -54,7 +54,7 @@ export function setupMarket(vCenter) {
 
     document.getElementById('btn-heal-all').onclick = () => {
         state.party.forEach(p => p.currentHp = p.maxHp);
-        alert("All Pokemon have been healed!");
+
         updateUI();
     };
 
@@ -107,7 +107,7 @@ function generateBuyCard(name, price, attribute, category, imgPath) {
     // We store base price in a data attribute so we can dynamically update it
     return `
         <div onclick="window.confirmBuyItem('${name}', ${price}, '${category}')" style="background: #333; border: 2px solid #555; border-radius: 8px; padding: 15px; text-align: center; cursor: pointer; transition: transform 0.1s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-            <img src="${imgPath}" onerror="this.src='./Assets/Extra/Spot.png'" style="width: 64px; height: 64px; object-fit: contain; margin-bottom: 10px;">
+            <img src="${imgPath}" onerror="this.src='./Assets/Extra/Spot.png'" style="width: 32px; height: 32px; object-fit: contain; margin-bottom: 10px;">
             <div style="font-weight: bold; font-size: 16px; margin-bottom: 5px;">${name}</div>
             <div style="font-size: 12px; color: #aaa; margin-bottom: 10px;">${attribute}</div>
             <div class="buy-price-display" data-base-price="${price}" style="color: #f1c40f; font-weight: bold; font-size: 18px;">

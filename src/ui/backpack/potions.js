@@ -62,7 +62,7 @@ function renderPotionsSellMode(area) {
                     <div style="font-size: 12px; color: #2ecc71;">Sell: $${sellPrice} ea</div>
 
                     <div style="margin-top: 10px;">
-                        <input type="number" id="sell-qty-potion-${inventoryName.replace(/\s+/g, '-')}" value="1" min="1" max="${qty}" onchange="window.updateLocalSellPrice('potion', '${inventoryName}', ${sellPrice})" style="width: 50px; text-align: center; margin-bottom: 5px;">
+                        <input type="number" id="sell-qty-potion-${inventoryName.replace(/\s+/g, '-')}" value="1" min="1" max="${qty}" oninput="window.updateLocalSellPrice('potion', '${inventoryName}', ${sellPrice})" style="width: 50px; text-align: center; margin-bottom: 5px;">
                         <button onclick="document.getElementById('sell-qty-potion-${inventoryName.replace(/\s+/g, '-')}').value=${qty}; window.updateLocalSellPrice('potion', '${inventoryName}', ${sellPrice})" style="padding: 2px 5px; font-size: 10px;">Max</button>
                     </div>
                     <div id="sell-total-potion-${inventoryName.replace(/\s+/g, '-')}" style="font-size: 14px; font-weight: bold; color: #f1c40f; margin-top: 5px;">Total: $${sellPrice}</div>

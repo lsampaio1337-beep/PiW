@@ -667,12 +667,14 @@ async function init() {
     };
 
     bindBtn('btn-map', () => { if(!checkCombatLock()) showMap(); });
-    bindBtn('btn-backpack', () => { if(!checkCombatLock()) showBackpack(); });
+    bindBtn('btn-backpack', () => { if(!checkCombatLock()) { window.sellModeActive = false; if(window.selectedForSale) window.selectedForSale.clear(); showBackpack(); } });
     bindBtn('btn-dex', () => { if(!checkCombatLock()) showPokedex(); });
     bindBtn('btn-challenges', () => { if(!checkCombatLock()) window.showChallengesModal(); });
 
     window.showBackpackAndFocus = (tab) => {
         if(!checkCombatLock()) {
+            window.sellModeActive = false;
+            if(window.selectedForSale) window.selectedForSale.clear();
             showBackpack();
             renderBackpackTab(tab);
         }

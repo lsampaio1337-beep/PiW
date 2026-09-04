@@ -47,7 +47,7 @@ function renderStonesSellMode(area) {
                     <div style="font-size: 12px; color: #2ecc71;">Sell: $${stonePrice} ea</div>
 
                     <div style="margin-top: 10px;">
-                        <input type="number" id="sell-qty-stone-${s.replace(/\s+/g, '-')}" value="1" min="1" max="${qty}" onchange="window.updateLocalSellPrice('stone', '${s}', ${stonePrice})" style="width: 50px; text-align: center; margin-bottom: 5px;">
+                        <input type="number" id="sell-qty-stone-${s.replace(/\s+/g, '-')}" value="1" min="1" max="${qty}" oninput="window.updateLocalSellPrice('stone', '${s}', ${stonePrice})" style="width: 50px; text-align: center; margin-bottom: 5px;">
                         <button onclick="document.getElementById('sell-qty-stone-${s.replace(/\s+/g, '-')}').value=${qty}; window.updateLocalSellPrice('stone', '${s}', ${stonePrice})" style="padding: 2px 5px; font-size: 10px;">Max</button>
                     </div>
                     <div id="sell-total-stone-${s.replace(/\s+/g, '-')}" style="font-size: 14px; font-weight: bold; color: #f1c40f; margin-top: 5px;">Total: $${stonePrice}</div>

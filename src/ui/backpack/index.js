@@ -106,11 +106,8 @@ window.startSellMode = function() {
     window.sellModeActive = true;
     if (window.selectedForSale) window.selectedForSale.clear();
 
-    // Open backpack directly
     const modalBox = document.getElementById('backpack-modal');
     if (modalBox) modalBox.style.display = 'block';
 
-    // Call showBackpack to setup the UI overlay
     window.showBackpack();
-    window.renderBackpackTab('pokemon');
 };
