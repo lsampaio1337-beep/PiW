@@ -53,6 +53,19 @@ export default class Storage {
         }
     }
 
+    clearAllProfiles() {
+        try {
+            let profiles = this.getProfiles();
+            for (let pid of profiles) {
+                window.localStorage.removeItem(pid);
+            }
+            window.localStorage.removeItem(this.masterKey);
+            console.log("All profiles cleared.");
+        } catch(e) {
+            console.error("Failed to clear all profiles:", e);
+        }
+    }
+
     setCurrentProfile(profileId) {
         this.currentProfileId = profileId;
     }

@@ -628,15 +628,27 @@ async function init() {
         // Don't call startGame yet, the user must choose a pokemon first.
     };
 
-    if (profiles.length > 0 && saveManagerModal && splashScreen) {
+    // Filter corrupted/empty profiles and map them to their data
+    let validProfiles = profiles
+        .map(id => ({ id, data: storage.getProfileData(id) }))
+        .filter(p => p.data !== null);
+
+    // Sort descending by lastPlayed so newest is always on top
+    validProfiles.sort((a, b) => {
+        const timeA = a.data.lastPlayed || 0;
+        const timeB = b.data.lastPlayed || 0;
+        return timeB - timeA;
+    });
+
+    if (validProfiles.length > 0 && saveManagerModal && splashScreen) {
         splashScreen.style.display = 'flex';
         saveManagerModal.style.display = 'flex';
 
         profilesContainer.innerHTML = ''; // clear
 
-        profiles.forEach((profileId, index) => {
-            const pData = storage.getProfileData(profileId);
-            if (!pData) return;
+        validProfiles.forEach((profileObj, index) => {
+            const profileId = profileObj.id;
+            const pData = profileObj.data;
 
             // Format playtime
             let playtimeStr = "0h 0m 0s";
@@ -648,11 +660,18 @@ async function init() {
                 playtimeStr = `${h}h ${m}m ${s}s`;
             }
 
-            // Format last played
+            // Format last played explicitly as dd/mm/yyyy
             let lastPlayedStr = "Unknown";
             if (pData.lastPlayed) {
-                lastPlayedStr = new Date(pData.lastPlayed).toLocaleString();
+                const lpDate = new Date(pData.lastPlayed);
+                const dd = String(lpDate.getDate()).padStart(2, '0');
+                const mm = String(lpDate.getMonth() + 1).padStart(2, '0');
+                const yyyy = lpDate.getFullYear();
+                lastPlayedStr = `${dd}/${mm}/${yyyy}`;
             }
+
+            // Get profile name
+            const profileName = pData.profileName || `Profile ${index + 1}`;
 
             // Get last route unlocked
             let lastRoute = "None";
@@ -681,10 +700,9 @@ async function init() {
             btn.style.fontWeight = "bold";
 
             btn.innerHTML = `
-                <div style="font-size: 18px; margin-bottom: 5px;">Profile ${index + 1}</div>
-                <div style="font-size: 14px; font-weight: normal;"><b>Last Played:</b> ${lastPlayedStr}</div>
-                <div style="font-size: 14px; font-weight: normal;"><b>Playtime:</b> ${playtimeStr}</div>
-                <div style="font-size: 14px; font-weight: normal;"><b>Last Route Unlocked:</b> ${lastRoute}</div>
+                <div style="font-size: 18px; margin-bottom: 5px; font-weight: bold;">"${profileName}" - ${playtimeStr}</div>
+                <div style="font-size: 14px; font-weight: normal;">Last Played: ${lastPlayedStr}</div>
+                <div style="font-size: 14px; font-weight: normal;">Current: ${lastRoute}</div>
             `;
 
             btn.onclick = async () => {
@@ -723,17 +741,41 @@ async function init() {
 
         document.getElementById('btn-new-profile').onclick = startNewGame;
 
+        document.getElementById('btn-rename-profile').onclick = () => {
+            const profileStr = prompt("Enter the Profile Number you want to rename (e.g. 1, 2, 3...):");
+            const profileNum = parseInt(profileStr);
+            if (!isNaN(profileNum) && profileNum > 0 && profileNum <= validProfiles.length) {
+                const newName = prompt(`Enter new name for Profile ${profileNum}:`);
+                if (newName && newName.trim() !== "") {
+                    const idToRename = validProfiles[profileNum - 1].id;
+                    const pData = validProfiles[profileNum - 1].data;
+                    pData.profileName = newName.trim();
+                    window.localStorage.setItem(idToRename, JSON.stringify(pData));
+                    window.location.reload();
+                }
+            } else if (profileStr) {
+                alert("Invalid Profile Number.");
+            }
+        };
+
         document.getElementById('btn-erase-profile').onclick = () => {
             const profileStr = prompt("Enter the Profile Number you want to erase (e.g. 1, 2, 3...):");
             const profileNum = parseInt(profileStr);
-            if (!isNaN(profileNum) && profileNum > 0 && profileNum <= profiles.length) {
-                const idToDelete = profiles[profileNum - 1];
+            if (!isNaN(profileNum) && profileNum > 0 && profileNum <= validProfiles.length) {
+                const idToDelete = validProfiles[profileNum - 1].id;
                 if (confirm(`Are you sure you want to delete Profile ${profileNum}? This cannot be undone.`)) {
                     storage.deleteProfile(idToDelete);
                     window.location.reload();
                 }
             } else if (profileStr) {
                 alert("Invalid Profile Number.");
+            }
+        };
+
+        document.getElementById('btn-clean-all').onclick = () => {
+            if (confirm("Are you absolutely sure you want to erase ALL profiles? This cannot be undone.")) {
+                storage.clearAllProfiles();
+                window.location.reload();
             }
         };
 

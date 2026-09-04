@@ -40,16 +40,18 @@
   <!-- Splash Screen / Save Manager -->
   <div id="splash-screen" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); z-index: 1000; display: flex; justify-content: center; align-items: center;">
 
-    <div id="save-manager-modal" style="display: none; background-color: rgba(0,0,0,0.9); padding: 20px; border-radius: 8px; text-align: center; border: 2px solid white; max-width: 90vw; max-height: 90vh; overflow-y: auto; width: 600px; display: flex; flex-direction: column; gap: 15px; resize: both;">
+    <div id="save-manager-modal" style="display: none; background-color: rgba(0,0,0,0.9); padding: 2vw; border-radius: 8px; text-align: center; border: 2px solid white; max-width: 90vw; max-height: 90vh; overflow-y: auto; width: 50vw; min-width: 400px; display: flex; flex-direction: column; gap: 2vh; resize: both;">
         <h2 style="color: white; margin-top: 0;">Save Profiles</h2>
 
-        <div id="profiles-container" style="display: flex; flex-direction: column; gap: 10px; flex-grow: 1; overflow-y: auto;">
+        <div id="profiles-container" style="display: flex; flex-direction: column; gap: 1vh; flex-grow: 1; overflow-y: auto;">
             <!-- Dynamic profile buttons will go here -->
         </div>
 
-        <div style="display: flex; gap: 20px; justify-content: center; margin-top: 10px;">
-            <button id="btn-new-profile" style="padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer; background-color: #FFC107; color: black; border: none; border-radius: 5px; flex: 1;">New Game</button>
-            <button id="btn-erase-profile" style="padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer; background-color: #f44336; color: white; border: none; border-radius: 5px; flex: 1;">Erase</button>
+        <div style="display: flex; gap: 1vw; justify-content: center; margin-top: 1vh; flex-wrap: wrap;">
+            <button id="btn-new-profile" style="padding: 1vh 1vw; font-size: 1rem; font-weight: bold; cursor: pointer; background-color: #FFC107; color: black; border: none; border-radius: 5px; flex: 1; min-width: 100px;">New Game</button>
+            <button id="btn-rename-profile" style="padding: 1vh 1vw; font-size: 1rem; font-weight: bold; cursor: pointer; background-color: #3498db; color: white; border: none; border-radius: 5px; flex: 1; min-width: 100px;">Rename</button>
+            <button id="btn-erase-profile" style="padding: 1vh 1vw; font-size: 1rem; font-weight: bold; cursor: pointer; background-color: #f44336; color: white; border: none; border-radius: 5px; flex: 1; min-width: 100px;">Erase</button>
+            <button id="btn-clean-all" style="padding: 1vh 1vw; font-size: 1rem; font-weight: bold; cursor: pointer; background-color: #9b59b6; color: white; border: none; border-radius: 5px; flex: 1; min-width: 100px;">Clean All</button>
         </div>
     </div>
   </div>
