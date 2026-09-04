@@ -692,7 +692,23 @@ async function init() {
                 saveManagerModal.style.display = 'none';
 
                 storage.setCurrentProfile(profileId);
-                Object.assign(state, pData);
+
+                // Perform a deep merge to preserve nested object structures (like stats, backpack)
+                const deepMerge = (target, source) => {
+                    if (typeof source !== 'object' || source === null) return source;
+                    if (Array.isArray(source)) return source;
+                    for (const key of Object.keys(source)) {
+                        if (source[key] instanceof Object && !Array.isArray(source[key])) {
+                            if (!target[key]) target[key] = {};
+                            deepMerge(target[key], source[key]);
+                        } else {
+                            target[key] = source[key];
+                        }
+                    }
+                    return target;
+                };
+                deepMerge(state, pData);
+
                 await loadConfigs();
 
                 startGame();

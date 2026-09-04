@@ -72,8 +72,13 @@ export default class Storage {
             return;
         }
         try {
-            const safeState = JSON.parse(JSON.stringify(state));
-            delete safeState.config;
+            // Simple replacer to avoid the specific dayCareRef circular issue and config without breaking legitimate duplicate objects
+            const jsonString = JSON.stringify(state, (key, value) => {
+                if (key === 'config') return undefined;
+                if (key === 'dayCareRef') return undefined;
+                return value;
+            });
+            const safeState = JSON.parse(jsonString);
 
             // Inject a last played timestamp for UI
             safeState.lastPlayed = Date.now();
