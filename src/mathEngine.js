@@ -61,6 +61,19 @@ function generateQuality(stats = {}, isDoubleShiny = false) {
     let roll = Math.floor(Math.random() * 12000) + 1;
     let shinySeenTaskTier = stats.shinySeenTaskTier || 0;
 
+    // Rainbow Candy Shiny Bonus (+X rolls)
+    let extraRolls = stats.rainbowCandies || 0;
+
+    // Shiny Boosters
+    // Regular gives +1 roll (11999 becomes 12000). Good gives +2 rolls (11998 becomes 12000), completely replacing the +1.
+    if (shinySeenTaskTier >= 2) extraRolls += 2; // Good Shiny +2 rolls
+    else if (shinySeenTaskTier == 1) extraRolls += 1; // Regular Shiny +1 roll
+
+    // Apply extra rolls logic by artificially boosting the roll if it's within the threshold
+    if (roll >= (12000 - extraRolls)) {
+        roll = 12000;
+    }
+
     let qTaskTier = stats.qTaskTier || 0;
     let bonusValue = 0;
     let weakMaxRoll = 1474;
