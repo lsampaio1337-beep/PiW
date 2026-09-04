@@ -621,7 +621,7 @@ async function init() {
                 savePrompt.style.display = 'none';
 
                 storage.reset();
-                switchView("PROF_OAK_LAB");
+                window.location.reload(); // Actually refresh the page to clear memory state completely
             };
         }
     } else {
