@@ -1,0 +1,37 @@
+--- src/battleSystem.js
++++ src/battleSystem.js
+@@ -594,6 +594,22 @@
+                 // console.log(\`Caught \${this.activeEncounter.name}!\`);
+             }
+         }
+
++        const lootMultiplier = 1 + (0.01 * (this.state.stats.greenCandies || 0));
++
++        if (this.state.settings.autoCatch && (!this.gymState || !this.gymState.isActive)) {
++            const { caught, ballName } = this.throwPokeball();
++            if (ballName && typeof window.playCaptureAnimation === 'function') {
++                window.playCaptureAnimation(ballName, caught, () => {
++                    finalizeDefeatLogic(caught);
++                    this.proceedAfterDefeat(leader, ev, lootMultiplier);
++                });
++                return;
++            } else {
++                finalizeDefeatLogic(caught);
++            }
++        }
++        this.proceedAfterDefeat(leader, ev, lootMultiplier);
++    }
++
++    proceedAfterDefeat(leader, ev, lootMultiplier) {
+         // Daycare logic
+         if (this.state.dayCareRef) {
+             this.state.dayCareRef.tickBattle();
+@@ -601,9 +617,6 @@
+         }
+
+-        // Loot Bonus Calculation
+-        const lootMultiplier = 1 + (0.01 * (this.state.stats.greenCandies || 0));
+-
+         // Award XP and Money (EV)
+         this.grantXP(leader, ev);
+         this.state.trainer.money += Math.floor(ev * lootMultiplier);
