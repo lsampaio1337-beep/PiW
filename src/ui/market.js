@@ -195,31 +195,3 @@ window.closeMarketBuyModal = function(e) {
     const overlay = document.getElementById('market-buy-modal-overlay');
     if (overlay) overlay.style.display = 'none';
 };
-
-
-
-    if (val < 1000000000) {
-        let exactM = val / 1000000;
-        let roundedUpM = Math.ceil(val / 100000) / 10;
-        let isExact = (exactM === roundedUpM);
-        return (isExact ? "" : "~") + roundedUpM.toFixed(1) + "m";
-    }
-
-    if (val < 1000000000000) {
-        let exactB = val / 1000000000;
-        let roundedUpB = Math.ceil(val / 100000000) / 10;
-        let isExact = (exactB === roundedUpB);
-        return (isExact ? "" : "~") + roundedUpB.toFixed(1) + "b";
-    }
-
-    let exactT = val / 1000000000000;
-    let roundedUpT = Math.ceil(val / 100000000000) / 10;
-    let isExact = (exactT === roundedUpT);
-    return (isExact ? "" : "~") + roundedUpT.toFixed(1) + "t";
-}
-
-    let exactM = val / 1000000;
-    let roundedUpM = Math.ceil(val / 100000) / 10;
-    let isExact = (exactM === roundedUpM);
-    return (isExact ? "" : "~") + roundedUpM.toFixed(1) + "m";
-}
