@@ -40,16 +40,29 @@ export function updateBattleArena() {
         // Standard Combat Arena
         if (battleSystem && battleSystem.activeEncounter) {
             const enemy = battleSystem.activeEncounter;
-            const enemyTotalIV = enemy.ivs.hp + enemy.ivs.atk + enemy.ivs.def + enemy.ivs.spa + enemy.ivs.spd + enemy.ivs.spe;
 
-            const elEnemyName = document.getElementById('enemy-name');
-            if (elEnemyName) elEnemyName.innerText = `${enemy.name} (Q=${enemy.quality.toFixed(2)} & ∑IV=${enemyTotalIV})`;
+            // Enemy HP UI
+            const hpContainerEnemy = document.getElementById('enemy-battle-hp-container');
+            const hpBarEnemy = document.getElementById('enemy-battle-hp-bar');
+            const hpTextEnemy = document.getElementById('enemy-battle-hp-text');
+            const hpPctEnemy = document.getElementById('enemy-battle-hp-pct');
 
-            const elEnemyLvl = document.getElementById('enemy-lvl');
-            if (elEnemyLvl) elEnemyLvl.innerText = enemy.level;
+            if (hpContainerEnemy) hpContainerEnemy.style.display = 'flex';
 
-            const elEnemyHp = document.getElementById('enemy-hp');
-            if (elEnemyHp) elEnemyHp.innerText = `${Math.floor(enemy.currentHp)}/${enemy.maxHp}`;
+            if (hpBarEnemy && hpTextEnemy && hpPctEnemy) {
+                const pct = Math.min(100, (enemy.currentHp / enemy.maxHp) * 100);
+                let color = '#3498db';
+                if (pct <= 0) color = '#000000';
+                else if (pct < 25) color = '#e74c3c';
+                else if (pct < 50) color = '#e67e22';
+                else if (pct < 75) color = '#f1c40f';
+                else if (pct < 100) color = '#2ecc71';
+
+                hpBarEnemy.style.width = `${pct}%`;
+                hpBarEnemy.style.background = color;
+                hpTextEnemy.innerText = `${Math.floor(enemy.currentHp)}/${enemy.maxHp}`;
+                hpPctEnemy.innerText = `${Math.floor(pct)}%`;
+            }
 
             const elEnemySprite = document.getElementById('enemy-sprite');
             const elEnemySide = document.getElementById('enemy-side');
@@ -65,38 +78,58 @@ export function updateBattleArena() {
                 elEnemySide.style.bottom = `${baseBottom}%`;
 
                 if (battleSystem.isSliding) {
-                    elEnemySide.style.transition = 'none';
-                    elEnemySide.style.left = '100%';
-                    // Trigger reflow
-                    void elEnemySide.offsetWidth;
-                    elEnemySide.style.transition = `left ${battleSystem.slideDuration}ms linear`;
-                    elEnemySide.style.left = '30%';
+                    if (elEnemySide.dataset.sliding !== 'true') {
+                        elEnemySide.dataset.sliding = 'true';
+                        elEnemySide.style.transition = 'none';
+                        elEnemySide.style.left = '100%';
+                        // Trigger reflow
+                        void elEnemySide.offsetWidth;
+                        requestAnimationFrame(() => {
+                            requestAnimationFrame(() => {
+                                elEnemySide.style.transition = `left ${battleSystem.slideDuration}ms linear`;
+                                elEnemySide.style.left = '35%';
+                            });
+                        });
+                    }
                 } else {
+                    elEnemySide.dataset.sliding = 'false';
                     elEnemySide.style.transition = 'none';
-                    elEnemySide.style.left = '30%';
+                    elEnemySide.style.left = '35%';
                 }
             }
 
             const leader = state.party[0];
             const elPlayerSide = document.getElementById('player-side');
             if (leader && elPlayerSide) {
-                const playerTotalIV = leader.ivs.hp + leader.ivs.atk + leader.ivs.def + leader.ivs.spa + leader.ivs.spd + leader.ivs.spe;
 
                 let baseBottom = 10;
                 if (leader.types.includes('Water')) baseBottom = 5;
                 if (leader.types.includes('Flying') || leader.types.includes('Wind')) baseBottom = 20;
 
                 elPlayerSide.style.bottom = `${baseBottom}%`;
-                elPlayerSide.style.left = '25%';
+                elPlayerSide.style.left = '20%';
 
-                const elPlayerName = document.getElementById('player-name');
-                if (elPlayerName) elPlayerName.innerText = `${leader.name} (Q=${leader.quality.toFixed(2)} & ∑IV=${playerTotalIV})`;
+                const hpContainerPlayer = document.getElementById('player-battle-hp-container');
+                const hpBarPlayer = document.getElementById('player-battle-hp-bar');
+                const hpTextPlayer = document.getElementById('player-battle-hp-text');
+                const hpPctPlayer = document.getElementById('player-battle-hp-pct');
 
-                const elPlayerLvl = document.getElementById('player-lvl');
-                if (elPlayerLvl) elPlayerLvl.innerText = leader.level;
+                if (hpContainerPlayer) hpContainerPlayer.style.display = 'flex';
 
-                const elPlayerHp = document.getElementById('player-hp');
-                if (elPlayerHp) elPlayerHp.innerText = `${Math.floor(leader.currentHp)}/${leader.maxHp}`;
+                if (hpBarPlayer && hpTextPlayer && hpPctPlayer) {
+                    const pct = Math.min(100, (leader.currentHp / leader.maxHp) * 100);
+                    let color = '#3498db';
+                    if (pct <= 0) color = '#000000';
+                    else if (pct < 25) color = '#e74c3c';
+                    else if (pct < 50) color = '#e67e22';
+                    else if (pct < 75) color = '#f1c40f';
+                    else if (pct < 100) color = '#2ecc71';
+
+                    hpBarPlayer.style.width = `${pct}%`;
+                    hpBarPlayer.style.background = color;
+                    hpTextPlayer.innerText = `${Math.floor(leader.currentHp)}/${leader.maxHp}`;
+                    hpPctPlayer.innerText = `${Math.floor(pct)}%`;
+                }
 
                 const elPlayerSprite = document.getElementById('player-sprite');
                 if (elPlayerSprite) {
@@ -105,14 +138,9 @@ export function updateBattleArena() {
                 }
             }
         } else if (battleSystem && battleSystem.isSearching) {
-            const elEnemyName = document.getElementById('enemy-name');
-            if (elEnemyName) elEnemyName.innerText = "Searching...";
 
-            const elEnemyLvl = document.getElementById('enemy-lvl');
-            if (elEnemyLvl) elEnemyLvl.innerText = "?";
-
-            const elEnemyHp = document.getElementById('enemy-hp');
-            if (elEnemyHp) elEnemyHp.innerText = "?/?";
+            const hpContainerEnemy = document.getElementById('enemy-battle-hp-container');
+            if (hpContainerEnemy) hpContainerEnemy.style.display = 'none';
 
             const elEnemySprite = document.getElementById('enemy-sprite');
             const elEnemySide = document.getElementById('enemy-side');
@@ -120,30 +148,41 @@ export function updateBattleArena() {
                 elEnemySprite.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
                 elEnemySprite.style.display = 'block';
                 elEnemySide.style.transition = 'none';
-                elEnemySide.style.left = '30%'; // Or center, but user mentioned lock at 30% for battle
+                elEnemySide.style.left = '35%'; // Matching active battle destination
                 elEnemySide.style.bottom = '10%'; // default
             }
 
             const leader = state.party[0];
             const elPlayerSide = document.getElementById('player-side');
             if (leader && elPlayerSide) {
-                const playerTotalIV = leader.ivs.hp + leader.ivs.atk + leader.ivs.def + leader.ivs.spa + leader.ivs.spd + leader.ivs.spe;
-
                 let baseBottom = 10;
                 if (leader.types.includes('Water')) baseBottom = 5;
                 if (leader.types.includes('Flying') || leader.types.includes('Wind')) baseBottom = 20;
 
                 elPlayerSide.style.bottom = `${baseBottom}%`;
-                elPlayerSide.style.left = '25%';
+                elPlayerSide.style.left = '20%';
 
-                const elPlayerName = document.getElementById('player-name');
-                if (elPlayerName) elPlayerName.innerText = `${leader.name} (Q=${leader.quality.toFixed(2)} & ∑IV=${playerTotalIV})`;
+                const hpContainerPlayer = document.getElementById('player-battle-hp-container');
+                const hpBarPlayer = document.getElementById('player-battle-hp-bar');
+                const hpTextPlayer = document.getElementById('player-battle-hp-text');
+                const hpPctPlayer = document.getElementById('player-battle-hp-pct');
 
-                const elPlayerLvl = document.getElementById('player-lvl');
-                if (elPlayerLvl) elPlayerLvl.innerText = leader.level;
+                if (hpContainerPlayer) hpContainerPlayer.style.display = 'flex';
 
-                const elPlayerHp = document.getElementById('player-hp');
-                if (elPlayerHp) elPlayerHp.innerText = `${Math.floor(leader.currentHp)}/${leader.maxHp}`;
+                if (hpBarPlayer && hpTextPlayer && hpPctPlayer) {
+                    const pct = Math.min(100, (leader.currentHp / leader.maxHp) * 100);
+                    let color = '#3498db';
+                    if (pct <= 0) color = '#000000';
+                    else if (pct < 25) color = '#e74c3c';
+                    else if (pct < 50) color = '#e67e22';
+                    else if (pct < 75) color = '#f1c40f';
+                    else if (pct < 100) color = '#2ecc71';
+
+                    hpBarPlayer.style.width = `${pct}%`;
+                    hpBarPlayer.style.background = color;
+                    hpTextPlayer.innerText = `${Math.floor(leader.currentHp)}/${leader.maxHp}`;
+                    hpPctPlayer.innerText = `${Math.floor(pct)}%`;
+                }
 
                 const elPlayerSprite = document.getElementById('player-sprite');
                 if (elPlayerSprite) {
@@ -153,12 +192,18 @@ export function updateBattleArena() {
             } else {
                 const elPlayerSprite = document.getElementById('player-sprite');
                 if (elPlayerSprite) elPlayerSprite.style.display = 'none';
+                const hpContainerPlayer = document.getElementById('player-battle-hp-container');
+                if (hpContainerPlayer) hpContainerPlayer.style.display = 'none';
             }
         } else {
              const elEnemySprite = document.getElementById('enemy-sprite');
              if (elEnemySprite) elEnemySprite.style.display = 'none';
              const elPlayerSprite = document.getElementById('player-sprite');
              if (elPlayerSprite) elPlayerSprite.style.display = 'none';
+             const hpContainerEnemy = document.getElementById('enemy-battle-hp-container');
+             if (hpContainerEnemy) hpContainerEnemy.style.display = 'none';
+             const hpContainerPlayer = document.getElementById('player-battle-hp-container');
+             if (hpContainerPlayer) hpContainerPlayer.style.display = 'none';
         }
     }
 }

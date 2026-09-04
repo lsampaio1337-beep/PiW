@@ -160,20 +160,24 @@ input[type="number"] {
 .stats-box h4 { margin: 0 0 5px 0; font-size: 14px;}
 
 #enemy-sprite {
-    width: 150px;
-    height: 150px;
+    height: 35vh;
+    min-height: 100px;
+    width: auto;
     margin-top: 10px;
     object-fit: contain;
     position: relative;
+    z-index: 10;
 }
 
 #player-sprite {
-    width: 150px;
-    height: 150px;
+    height: 35vh;
+    min-height: 100px;
+    width: auto;
     margin-bottom: 10px;
     transform: scaleX(-1); /* Face right */
     object-fit: contain;
     position: relative;
+    z-index: 10;
 }
 
 #combat-log {
