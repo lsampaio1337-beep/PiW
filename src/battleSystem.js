@@ -513,7 +513,7 @@ class BattleSystem {
 
     throwPokeball() {
         let tier = this.state.settings.activeBallTier;
-        if (tier < 0) return { caught: false, ballName: null }; // None selected
+        if (tier < 0) return false; // None selected
 
         let ballName = this.state.config.balance.items.pokeballs[tier].name;
 
@@ -526,13 +526,15 @@ class BattleSystem {
             if (tier >= 0) ballName = this.state.config.balance.items.pokeballs[tier].name;
         }
 
-        if (tier < 0) return { caught: false, ballName: null }; // No balls left
+        if (tier < 0) return false; // No balls left
+
+        this.lastThrownBallName = ballName;
 
         let multiplier = this.state.config.balance.items.pokeballs[tier].multiplier;
 
         const chance = mathEngine.calculateCatchChance(this.activeEncounter.bst, this.activeEncounter.level, multiplier, this.state.stats, this.activeEncounter.qualityName === "Shiny");
 
-        return { caught: (Math.random() * 100) <= chance, ballName: ballName };
+        return (Math.random() * 100) <= chance;
     }
 
     handleEnemyDefeat() {
@@ -597,7 +599,10 @@ class BattleSystem {
         const lootMultiplier = 1 + (0.01 * (this.state.stats.greenCandies || 0));
 
         if (this.state.settings.autoCatch && (!this.gymState || !this.gymState.isActive)) {
-            const { caught, ballName } = this.throwPokeball();
+            this.lastThrownBallName = null;
+            const caught = this.throwPokeball();
+            const ballName = this.lastThrownBallName;
+
             if (ballName && typeof window.playCaptureAnimation === 'function') {
                 window.playCaptureAnimation(ballName, caught, () => {
                     finalizeDefeatLogic(caught);

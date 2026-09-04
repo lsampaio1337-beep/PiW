@@ -229,65 +229,49 @@ export function playCaptureAnimation(ballName, isCaught, onComplete) {
     // Append to enemy side
     enemySide.appendChild(ballElement);
 
-    // Fade out enemy over 3s
-    enemySprite.style.transition = 'opacity 3s linear';
-    enemySprite.style.opacity = '0';
+    // Clone the enemy sprite for the animation so the real one can be used by the next encounter
+    const spriteClone = enemySprite.cloneNode(true);
+    spriteClone.id = 'enemy-sprite-clone';
+    spriteClone.style.position = 'absolute';
+    spriteClone.style.left = (spriteRect.left - sideRect.left) + 'px';
+    spriteClone.style.top = (spriteRect.top - sideRect.top) + 'px';
+    spriteClone.style.margin = '0'; // override any margins
+    enemySide.appendChild(spriteClone);
 
-    // Calculate the distance to slide to x=15% of the screen
-    // screen width is window.innerWidth
-    // x=15% is 0.15 * window.innerWidth
-    // We need to move the ball from startLeft to something relative to the screen.
-    // Actually, we can use position: fixed or just calculate the relative distance.
-    const targetXScreen = window.innerWidth * 0.15;
-    const currentXScreen = spriteRect.left + (spriteRect.width / 2);
-    const distanceToMove = targetXScreen - currentXScreen;
+    // Hide the real enemy sprite immediately so it's ready for the next encounter
+    enemySprite.style.display = 'none';
 
-    // We need both the enemy sprite and the ball to move left.
-    // enemySprite is usually object-fit within enemy-side.
-    // Let's use CSS transform to slide both over 3s.
-    const slideTransition = 'transform 3s linear';
-    enemySprite.style.transition = `opacity 3s linear, ${slideTransition}`;
-    enemySprite.style.transform = `translateX(${distanceToMove}px)`;
+    // Fade out clone over 2s
+    spriteClone.style.transition = 'opacity 2s linear';
+    // Trigger reflow
+    void spriteClone.offsetWidth;
+    spriteClone.style.opacity = '0';
 
-    ballElement.style.transition = slideTransition;
-    ballElement.style.transform = `translateX(${distanceToMove}px)`;
-
-    // After 3 seconds, they reach x=15%
+    // After 3 seconds of shaking
     setTimeout(() => {
         // Swap image based on result
-        ballElement.style.animation = ''; // stop shake
+        ballElement.style.animation = 'none'; // stop shake
         if (isCaught) {
             ballElement.src = `Assets/Items/Balls/${ballName}Y.png`;
         } else {
             ballElement.src = `Assets/Items/Balls/${ballName}N.png`;
         }
 
-        // Calculate speed of previous slide.
-        // Distance = Math.abs(distanceToMove) over 3 seconds.
-        // Speed = Distance / 3 (pixels per second).
-        const speed = Math.abs(distanceToMove) / 3;
-
-        // Distance to off-screen left = targetXScreen + ball width
-        const distanceOffScreen = targetXScreen + 60; // 60 for safety
-        const timeOffScreen = distanceOffScreen / speed; // in seconds
-
-        const totalDistance = distanceToMove - distanceOffScreen;
-
-        // Continue sliding off-screen
-        ballElement.style.transition = `transform ${timeOffScreen}s linear`;
-        ballElement.style.transform = `translateX(${totalDistance}px)`;
-
-        // Enemy is invisible by now, but just in case, move it off too or hide it
-        enemySprite.style.display = 'none';
-        enemySprite.style.transform = 'translateX(0px)'; // reset
-        enemySprite.style.opacity = '1';
-
+        // Wait 2 seconds before removing the ball and continuing
         setTimeout(() => {
             if (ballElement.parentNode) {
                 ballElement.parentNode.removeChild(ballElement);
             }
+
+            if (spriteClone.parentNode) {
+                spriteClone.parentNode.removeChild(spriteClone);
+            }
+
+            // Restore the original sprite's display property so the next encounter isn't invisible
+            enemySprite.style.display = '';
+
             if (onComplete) onComplete();
-        }, timeOffScreen * 1000);
+        }, 2000);
 
     }, 3000);
 }
