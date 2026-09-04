@@ -15,6 +15,74 @@ class BattleSystem {
             gym: null,
             currentTrainerIndex: 0
         };
+
+        this.isFastForwarding = false;
+        this.fastForwardMaxTicks = 0;
+        this.fastForwardTicks = 0;
+    }
+
+    runFastForward(minutes) {
+        return new Promise((resolve) => {
+            if (!this.state.currentRoute) {
+                resolve();
+                return;
+            }
+
+            // Disable UI updates to maximize speed
+            this.isFastForwarding = true;
+            this.stop(); // Stop any active loop
+
+            // Calculate estimated encounters. A full cycle usually takes ~2.0 - 5.0 seconds. We'll use 3.0s as an average.
+            // Therefore, 1 minute = ~20 encounters
+            this.fastForwardMaxTicks = Math.floor(minutes * 20);
+            this.fastForwardTicks = 0;
+
+            console.log(`Simulating ${minutes} minutes (${this.fastForwardMaxTicks} encounters)...`);
+
+            // Iterate iteratively in batches to avoid call stack size exceeded
+            // and allow UI thread to breathe slightly
+            const batchSize = 100;
+
+            const processBatch = () => {
+                let limit = Math.min(this.fastForwardTicks + batchSize, this.fastForwardMaxTicks);
+                while (this.fastForwardTicks < limit) {
+                    this.fastForwardTicks++;
+
+                    // Keep leader alive
+                    if (this.state.party[0].currentHp <= 0) {
+                        this.state.party[0].currentHp = this.state.party[0].maxHp;
+                    }
+
+                    if (this.gymState.isActive) {
+                        this.generateGymEncounter();
+                    } else {
+                        this.generateEncounter();
+                    }
+                }
+
+                if (this.fastForwardTicks >= this.fastForwardMaxTicks) {
+                    this.isFastForwarding = false;
+                    this.fastForwardMaxTicks = 0;
+                    this.fastForwardTicks = 0;
+
+                    console.log(`Simulation complete.`);
+
+                    // Full party heal after simulation
+                    for (let p of this.state.party) {
+                        p.currentHp = p.maxHp;
+                    }
+
+                    // Restart real loop
+                    this.updateUI();
+                    this.start();
+                    resolve();
+                } else {
+                    setTimeout(processBatch, 0);
+                }
+            };
+
+            processBatch();
+        });
     }
 
     start() {
@@ -85,7 +153,7 @@ class BattleSystem {
         };
 
         // Update gym UI specifically to show current trainer
-        this.updateGymUI();
+        if (!this.isFastForwarding) this.updateGymUI();
     }
 
     updateGymUI() {
@@ -169,6 +237,10 @@ class BattleSystem {
     }
 
     async searchNext() {
+        if (this.isFastForwarding) {
+            return;
+        }
+
         if (this.state.party.every(p => p.currentHp <= 0)) {
             this.handleWipeout();
             return;
@@ -195,7 +267,6 @@ class BattleSystem {
         const leaderSpeed = this.state.party[0].currentStats.spe;
         let delay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed));
         delay = Math.max(300, delay) / this.state.settings.gameSpeed;
-
         this.combatLoop = setTimeout(() => {
             if (this.gymState.isActive) {
                 this.generateGymEncounter();
@@ -274,7 +345,7 @@ class BattleSystem {
         };
 
         this.isSearching = false;
-        this.updateUI();
+        if (!this.isFastForwarding) this.updateUI();
         this.scheduleTurn();
     }
 
@@ -384,7 +455,7 @@ class BattleSystem {
         };
 
         this.isSearching = false;
-        this.updateUI();
+        if (!this.isFastForwarding) this.updateUI();
         this.scheduleTurn();
     }
 
@@ -426,9 +497,13 @@ class BattleSystem {
         const secondActor = isLeaderFaster ? this.activeEncounter : leader;
         const firstDelay = Math.min(leaderDelay, enemyDelay);
 
-        this.combatLoop = setTimeout(() => {
+        if (this.isFastForwarding) {
             this.executeTurn(firstActor, secondActor);
-        }, firstDelay);
+        } else {
+            this.combatLoop = setTimeout(() => {
+                this.executeTurn(firstActor, secondActor);
+            }, firstDelay);
+        }
     }
 
     executeTurn(attacker, defender) {
@@ -439,7 +514,7 @@ class BattleSystem {
         // Check if player uses potion
         if (attacker === leader && this.state.settings.autoPotion) {
             if (this.tryUsePotion(attacker)) {
-                this.updateUI();
+                if (!this.isFastForwarding) this.updateUI();
                 this.scheduleNextStrike(attacker, defender);
                 return;
             }
@@ -457,11 +532,11 @@ class BattleSystem {
 
         // Show floating damage
         const targetSide = attacker === leader ? 'enemy' : 'player';
-        if (typeof window.showDamage === 'function') {
+        if (typeof window.showDamage === 'function' && !this.isFastForwarding) {
             window.showDamage(targetSide, hit.damage, hit.isCritical, move.name, move.type, eff);
         }
 
-        this.updateUI();
+        if (!this.isFastForwarding) this.updateUI();
 
         if (defender.currentHp <= 0) {
             if (defender === this.activeEncounter) {
@@ -488,9 +563,13 @@ class BattleSystem {
 
         delay = Math.max(250, delay) / this.state.settings.gameSpeed;
 
-        this.combatLoop = setTimeout(() => {
+        if (this.isFastForwarding) {
             this.executeTurn(defender, attacker); // Swap roles
-        }, delay);
+        } else {
+            this.combatLoop = setTimeout(() => {
+                this.executeTurn(defender, attacker); // Swap roles
+            }, delay);
+        }
     }
 
     tryUsePotion(pokemon) {
@@ -650,7 +729,7 @@ class BattleSystem {
                 // Bonus money for winning
                 this.state.trainer.money += 1000 * this.state.trainer.badges;
             }
-            this.updateGymUI();
+            if (!this.isFastForwarding) this.updateGymUI();
         } else {
             // Next pokemon
             this.searchNext();
@@ -718,7 +797,7 @@ class BattleSystem {
         if (this.state.party[0].currentHp <= 0) {
             this.handleWipeout();
         } else {
-            this.updateUI();
+            if (!this.isFastForwarding) this.updateUI();
             this.scheduleTurn(); // restart turn with new leader
         }
     }
@@ -736,14 +815,18 @@ class BattleSystem {
         if (this.gymState && this.gymState.isActive) {
             // Flee gym
             this.stopGymBattle();
-            this.updateUI();
+            if (!this.isFastForwarding) this.updateUI();
         } else {
             // Return to poke center (simulated by just waiting and searching again for idle game)
-            setTimeout(() => {
+            if (this.isFastForwarding) {
                 this.searchNext();
-            }, 5000 / this.state.settings.gameSpeed);
+            } else {
+                setTimeout(() => {
+                    this.searchNext();
+                }, 5000 / this.state.settings.gameSpeed);
 
-            this.updateUI();
+                this.updateUI();
+            }
         }
     }
 
@@ -754,7 +837,7 @@ class BattleSystem {
             const currentLeader = this.state.party[0];
             this.state.party[0] = target;
             this.state.party[index] = currentLeader;
-            this.updateUI();
+            if (!this.isFastForwarding) this.updateUI();
 
             // if in battle, resetting turn timers
             if (this.activeEncounter && this.combatLoop) {

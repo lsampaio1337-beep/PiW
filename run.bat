@@ -40,14 +40,8 @@ if %ERRORLEVEL% neq 0 (
 
 REM Start game
 echo [2/2] Starting the game!
-start /b cmd /c "npm start"
-if %ERRORLEVEL% neq 0 (
-    echo.
-    echo [ERROR] Game crashed or failed to start.
-    echo Please copy the error report above.
-    pause
-    goto :EOF
-)
+echo CreateObject("WScript.Shell").Run "cmd /c npm start", 0, False > start_hidden.vbs
+wscript.exe start_hidden.vbs
+del start_hidden.vbs
 
 REM Exit to close the terminal automatically
-exit

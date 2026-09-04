@@ -38,30 +38,6 @@ export default class Storage {
         }
     }
 
-    exportLog(state) {
-        try {
-            const logContent = `
-Stats:
-Battles Won: ${state.stats.battlesWon}
-Pokemon Caught: ${state.stats.caught}
-
-Party:
-${state.party.map((p, i) => `${i+1}. ${p.name} Lv.${p.level}`).join('\n')}
-            `;
-            // Browser-based download
-            const blob = new Blob([logContent], { type: 'text/plain' });
-            const a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
-            a.download = 'export_log.txt';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            console.log("Log exported.");
-        } catch(e) {
-            console.error("Log export failed:", e);
-        }
-    }
-
     processCheat(command, state) {
         const parts = command.split(' ');
         if (parts.length === 0) return;
