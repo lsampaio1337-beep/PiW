@@ -187,10 +187,123 @@ export function showDamage(target, amount, isCrit, moveName = '', moveType = 'No
     // Animate up and fade out
     setTimeout(() => {
         dmgNode.style.top = (parseInt(dmgNode.style.top) - 40) + 'px';
-        dmgNode.style.opacity = '0';
     }, 50);
 
     setTimeout(() => {
+        dmgNode.style.opacity = '0';
+    }, 2000);
+
+    setTimeout(() => {
         if (dmgNode.parentElement) dmgNode.parentElement.removeChild(dmgNode);
-    }, 1000);
+    }, 3000);
+}
+
+export function playCombatAnimations(targetSide, moveType, duration) {
+    const battleSystem = globals.battleSystem;
+    const isGym = battleSystem && battleSystem.gymState && battleSystem.gymState.isActive;
+
+    let attackerId = targetSide === 'player' ? (isGym ? 'gym-enemy-sprite' : 'enemy-sprite') : (isGym ? 'gym-player-sprite' : 'player-sprite');
+    let defenderId = targetSide === 'player' ? (isGym ? 'gym-player-sprite' : 'player-sprite') : (isGym ? 'gym-enemy-sprite' : 'enemy-sprite');
+
+    const atkImg = document.getElementById(attackerId);
+    const defImg = document.getElementById(defenderId);
+
+    if (!atkImg || !defImg) return;
+
+    const color = TYPE_COLORS[moveType] || '#ffffff';
+
+    // Attacker launch animation
+    atkImg.style.transition = `transform ${duration * 0.2}ms ease-out`;
+    let originalTransform = atkImg.style.transform || '';
+
+    // If player sprite, it has scaleX(-1) by default to face right
+    const isPlayer = attackerId.includes('player');
+    const scaleTransform = isPlayer ? 'scaleX(-1.2) scaleY(1.2)' : 'scale(1.2)';
+
+    atkImg.style.transform = scaleTransform;
+    setTimeout(() => {
+        atkImg.style.transform = originalTransform;
+    }, duration * 0.4);
+
+    // Create projectile
+    const proj = document.createElement('div');
+    proj.style.position = 'fixed';
+    proj.style.width = '20px';
+    proj.style.height = '10px';
+    proj.style.backgroundColor = color;
+    proj.style.borderRadius = '5px';
+    proj.style.boxShadow = `0 0 10px 5px ${color}`;
+    proj.style.zIndex = '999';
+    proj.style.pointerEvents = 'none';
+
+    const atkRect = atkImg.getBoundingClientRect();
+    const defRect = defImg.getBoundingClientRect();
+
+    // Start at attacker center
+    const startX = atkRect.left + atkRect.width / 2;
+    const startY = atkRect.top + atkRect.height / 2;
+
+    // End at defender center
+    const endX = defRect.left + defRect.width / 2;
+    const endY = defRect.top + defRect.height / 2;
+
+    proj.style.left = startX + 'px';
+    proj.style.top = startY + 'px';
+
+    document.body.appendChild(proj);
+
+    // Animate projectile
+    proj.style.transition = `all ${duration * 0.8}ms linear`;
+
+    // Trigger reflow
+    proj.getBoundingClientRect();
+
+    proj.style.left = endX + 'px';
+    proj.style.top = endY + 'px';
+
+    setTimeout(() => {
+        if (proj.parentElement) proj.parentElement.removeChild(proj);
+
+        // Splash Effect
+        const splash = document.createElement('div');
+        splash.style.position = 'fixed';
+        splash.style.left = (endX - 30) + 'px';
+        splash.style.top = (endY - 30) + 'px';
+        splash.style.width = '60px';
+        splash.style.height = '60px';
+        splash.style.backgroundColor = 'transparent';
+        splash.style.border = `10px solid ${color}`;
+        splash.style.borderRadius = '50%';
+        splash.style.boxShadow = `0 0 20px 10px ${color}`;
+        splash.style.zIndex = '999';
+        splash.style.pointerEvents = 'none';
+        splash.style.transition = `all ${Math.min(500, duration)}ms ease-out`;
+
+        document.body.appendChild(splash);
+
+        // Trigger reflow
+        splash.getBoundingClientRect();
+
+        splash.style.transform = 'scale(2)';
+        splash.style.opacity = '0';
+
+        // Defender Hit Animation (Shake)
+        defImg.style.transition = 'transform 50ms ease-in-out';
+        let defOriginalTransform = defImg.style.transform || '';
+        let shakeInterval = setInterval(() => {
+            const shift = (Math.random() - 0.5) * 20;
+            if (defenderId.includes('player')) {
+                defImg.style.transform = `scaleX(-1) translateX(${shift}px)`;
+            } else {
+                defImg.style.transform = `translateX(${shift}px)`;
+            }
+        }, 50);
+
+        setTimeout(() => {
+            clearInterval(shakeInterval);
+            defImg.style.transform = defOriginalTransform;
+            if (splash.parentElement) splash.parentElement.removeChild(splash);
+        }, Math.min(500, duration));
+
+    }, duration * 0.8);
 }
