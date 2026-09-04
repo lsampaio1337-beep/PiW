@@ -531,6 +531,9 @@ async function loadConfigs() {
 }
 
 function selectStarter(id) {
+    if (!storage.currentProfileId) {
+        storage.createNewProfile();
+    }
     const pData = state.config.pokemonData.find(p => p.id === id);
     const q = 1.40; // Fixed Rare
     const qName = "Rare";
@@ -575,58 +578,133 @@ function startGame() {
     updateUI();
     bs.start();
 
+    // Playtime tracker (adds 1 second every second)
+    setInterval(() => {
+        state.stats.playtime = (state.stats.playtime || 0) + 1;
+    }, 1000);
+
     // Autosave loop
     setInterval(() => {
         storage.save(state);
     }, 60000);
+
+    // Save on beforeunload
+    window.addEventListener('beforeunload', () => {
+        storage.save(state);
+    });
 }
 
 async function init() {
     await loadConfigs();
-    const saved = storage.load();
 
-    if (saved) {
-        // Show the save prompt modal instead of using confirm()
-        const savePrompt = document.getElementById('save-prompt-modal');
-        const splashScreen = document.getElementById('splash-screen');
+    const profiles = storage.getProfiles();
+    const splashScreen = document.getElementById('splash-screen');
+    const saveManagerModal = document.getElementById('save-manager-modal');
+    const profilesContainer = document.getElementById('profiles-container');
 
-        if (savePrompt && splashScreen) {
-            splashScreen.style.display = 'flex';
-            savePrompt.style.display = 'block';
+    const startNewGame = () => {
+        if (splashScreen) splashScreen.style.display = 'none';
+        if (saveManagerModal) saveManagerModal.style.display = 'none';
 
-            document.getElementById('btn-continue-game').onclick = async () => {
+        switchView("PROF_OAK_LAB");
+        // Don't call startGame yet, the user must choose a pokemon first.
+    };
+
+    if (profiles.length > 0 && saveManagerModal && splashScreen) {
+        splashScreen.style.display = 'flex';
+        saveManagerModal.style.display = 'flex';
+
+        profilesContainer.innerHTML = ''; // clear
+
+        profiles.forEach((profileId, index) => {
+            const pData = storage.getProfileData(profileId);
+            if (!pData) return;
+
+            // Format playtime
+            let playtimeStr = "0h 0m 0s";
+            if (pData.stats && pData.stats.playtime) {
+                const totalSec = pData.stats.playtime;
+                const h = Math.floor(totalSec / 3600);
+                const m = Math.floor((totalSec % 3600) / 60);
+                const s = totalSec % 60;
+                playtimeStr = `${h}h ${m}m ${s}s`;
+            }
+
+            // Format last played
+            let lastPlayedStr = "Unknown";
+            if (pData.lastPlayed) {
+                lastPlayedStr = new Date(pData.lastPlayed).toLocaleString();
+            }
+
+            // Get last route unlocked
+            let lastRoute = "None";
+            if (pData.stats && pData.stats.completedChallenges !== undefined && state.config.unlocks) {
+                const unlocksLength = state.config.unlocks.length;
+                let cIndex = pData.stats.completedChallenges;
+                // Cap to max
+                if (cIndex > unlocksLength) cIndex = unlocksLength;
+
+                // Get the reward from the LAST completed challenge
+                if (cIndex > 0) {
+                    let pUnlock = state.config.unlocks[cIndex - 1];
+                    lastRoute = pUnlock.unlocks ? pUnlock.unlocks.join(", ") : "Next Area";
+                }
+            }
+
+            const btn = document.createElement('button');
+            btn.style.padding = "10px";
+            btn.style.fontSize = "16px";
+            btn.style.cursor = "pointer";
+            btn.style.backgroundColor = "#FFC107"; // Big Yellow Button
+            btn.style.color = "black";
+            btn.style.border = "none";
+            btn.style.borderRadius = "5px";
+            btn.style.textAlign = "left";
+            btn.style.fontWeight = "bold";
+
+            btn.innerHTML = `
+                <div style="font-size: 18px; margin-bottom: 5px;">Profile ${index + 1}</div>
+                <div style="font-size: 14px; font-weight: normal;"><b>Last Played:</b> ${lastPlayedStr}</div>
+                <div style="font-size: 14px; font-weight: normal;"><b>Playtime:</b> ${playtimeStr}</div>
+                <div style="font-size: 14px; font-weight: normal;"><b>Last Route Unlocked:</b> ${lastRoute}</div>
+            `;
+
+            btn.onclick = async () => {
                 splashScreen.style.display = 'none';
-                savePrompt.style.display = 'none';
+                saveManagerModal.style.display = 'none';
 
-                Object.assign(state, saved);
+                storage.setCurrentProfile(profileId);
+                Object.assign(state, pData);
                 await loadConfigs();
 
                 startGame();
 
-                // If player already has Pokemon, Oak Lab will render the bonuses next time it's visited.
+                // Saved profiles always start at Oak's Lab and are free to explore
+                state.currentRoute = "Professor Oak Lab";
+                switchView("PROF_OAK_LAB");
+            };
 
-                // Switch view based on saved route
-                if (state.currentRoute === "Professor Oak Lab") {
-                    switchView("PROF_OAK_LAB");
-                } else if (state.currentRoute === "PokeCenter & PokeMarket" || state.currentRoute === "Pokemon Center & Market") {
-                    navigateToLocation(state.currentRoute);
-                } else if (state.currentRoute.includes("Gym") || state.currentRoute === "Indigo Plateu") {
-                    navigateToLocation(state.currentRoute);
-                } else {
-                    navigateToLocation(state.currentRoute);
+            profilesContainer.appendChild(btn);
+        });
+
+        document.getElementById('btn-new-profile').onclick = startNewGame;
+
+        document.getElementById('btn-erase-profile').onclick = () => {
+            const profileStr = prompt("Enter the Profile Number you want to erase (e.g. 1, 2, 3...):");
+            const profileNum = parseInt(profileStr);
+            if (!isNaN(profileNum) && profileNum > 0 && profileNum <= profiles.length) {
+                const idToDelete = profiles[profileNum - 1];
+                if (confirm(`Are you sure you want to delete Profile ${profileNum}? This cannot be undone.`)) {
+                    storage.deleteProfile(idToDelete);
+                    window.location.reload();
                 }
-            };
+            } else if (profileStr) {
+                alert("Invalid Profile Number.");
+            }
+        };
 
-            document.getElementById('btn-new-game').onclick = () => {
-                splashScreen.style.display = 'none';
-                savePrompt.style.display = 'none';
-
-                storage.reset();
-                window.location.reload(); // Actually refresh the page to clear memory state completely
-            };
-        }
     } else {
-        switchView("PROF_OAK_LAB");
+        startNewGame();
     }
 
     // Bind buttons (they might be missing if bypass Oak)
@@ -707,6 +785,17 @@ async function init() {
 
     bindBtn('btn-settings', () => {
         if(!checkCombatLock()) showSettings();
+    });
+
+    bindBtn('btn-exit', () => {
+        if (confirm("Are you sure you want to save and exit?")) {
+            if (state.party.length === 0 && state.storage.length === 0) {
+                window.location.reload();
+            } else {
+                storage.save(state);
+                window.location.reload(); // Reloads to the profile selection screen
+            }
+        }
     });
 }
 
