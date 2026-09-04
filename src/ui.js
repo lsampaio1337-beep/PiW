@@ -647,6 +647,14 @@ async function init() {
         switchView("PROF_OAK_LAB");
     }
 
+    if (!state.party || state.party.length === 0) {
+        const oakLabDiv = document.getElementById("view-prof-oak-lab");
+        if (oakLabDiv) {
+            oakLabDiv.style.display = 'block';
+            document.getElementById('top-bar').style.pointerEvents = 'none';
+        }
+    }
+
     // Bind buttons (they might be missing if bypass Oak)
     const btnBulbasaur = document.getElementById('choose-bulbasaur');
     if (btnBulbasaur) btnBulbasaur.onclick = () => selectStarter(1);
@@ -725,7 +733,27 @@ async function init() {
     bindBtn('btn-settings', () => {
         if(!checkCombatLock()) showSettings();
     });
+
+    bindBtn('btn-sleep', () => {
+        if (confirm("Are you sure you want to enter Sleep Mode?")) {
+            state.sleepTimestamp = Date.now();
+            storage.save(state);
+            window.close();
+        }
+    });
+
+    bindBtn('btn-exit', () => {
+        if (confirm("Are you sure you want to Exit?")) {
+            storage.save(state);
+            window.close();
+        }
+    });
 }
+
+// Add a beforeunload listener to auto-save whenever the app closes
+window.addEventListener('beforeunload', () => {
+    storage.save(state);
+});
 
 // Ensure the UI script runs
 init();
