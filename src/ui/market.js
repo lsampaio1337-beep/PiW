@@ -48,7 +48,7 @@ export function setupMarket(vCenter) {
                 <input type="number" id="global-buy-qty" value="1" min="1" oninput="window.updateBuyPrices()" style="width: 15cqi; padding: 1cqi; text-align: center; font-size: 3cqi;">
             </div>
 
-            <div id="market-buy-items-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(15cqi, 1fr)); gap: 2cqi;">
+            <div id="market-buy-items-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(15cqi, 1fr)); gap: 2cqi; justify-content: center;">
                 <!-- Items injected here -->
             </div>
         </div>
@@ -87,8 +87,8 @@ window.renderBuyTab = function(category) {
             modal.style.width = '55%';
             modal.style.maxWidth = '700px';
         } else if (category === 'stones') {
-            modal.style.width = '85%';
-            modal.style.maxWidth = '1000px';
+            modal.style.width = '70%';
+            modal.style.maxWidth = '800px';
         }
     }
     const grid = document.getElementById('market-buy-items-grid');
@@ -97,12 +97,14 @@ window.renderBuyTab = function(category) {
     let html = '';
 
     if (category === 'pokeballs') {
-        grid.style.gridTemplateColumns = 'repeat(auto-fill, minmax(15cqi, 1fr))';
+        grid.style.gridTemplateColumns = 'repeat(auto-fit, minmax(15cqi, 1fr))';
+        grid.style.justifyContent = 'center';
         state.config.balance.items.pokeballs.forEach(b => {
             html += generateBuyCard(b.name, b.price, `Efficiency: ${b.multiplier}x`, category, `Assets/Items/Balls/${b.name.replace(/Regular Pokeball/, "Pokeball").replace(/Great Pokeball/, "Greatball").replace(/Ultra Pokeball/, "Ultraball").replace(/Master Pokeball/, "Masterball")}.png`);
         });
     } else if (category === 'potions') {
-        grid.style.gridTemplateColumns = 'repeat(auto-fill, minmax(15cqi, 1fr))';
+        grid.style.gridTemplateColumns = 'repeat(auto-fit, minmax(15cqi, 1fr))';
+        grid.style.justifyContent = 'center';
         state.config.balance.items.potions.forEach(p => {
             let inventoryName = p.name;
             if (p.name === 'Regular Potion') inventoryName = 'Regular Potion';
@@ -110,7 +112,7 @@ window.renderBuyTab = function(category) {
             html += generateBuyCard(inventoryName, p.price, `Heals: ${p.heal} HP`, category, `Assets/Items/Potions/${inventoryName}.png`);
         });
     } else if (category === 'stones') {
-        grid.style.gridTemplateColumns = 'repeat(6, 1fr)'; // Force exactly 6 columns
+        grid.style.gridTemplateColumns = 'repeat(auto-fit, minmax(15cqi, 1fr))';
         const stonePrice = state.config.balance.items.stones.price;
         Object.keys(state.backpack.stones).forEach(stoneName => {
             html += generateBuyCard(stoneName, stonePrice, "", category, `Assets/Items/Stones/${stoneName}.png`);
@@ -195,15 +197,26 @@ window.closeMarketBuyModal = function(e) {
 };
 
 
-window.formatMarketPrice = function(val) {
-    if (val < 1000) return val.toString();
 
-    if (val < 1000000) {
-        let exactK = val / 1000;
-        let roundedUpK = Math.ceil(val / 100) / 10;
-        let isExact = (exactK === roundedUpK);
-        return (isExact ? "" : "~") + roundedUpK.toFixed(1) + "k";
+    if (val < 1000000000) {
+        let exactM = val / 1000000;
+        let roundedUpM = Math.ceil(val / 100000) / 10;
+        let isExact = (exactM === roundedUpM);
+        return (isExact ? "" : "~") + roundedUpM.toFixed(1) + "m";
     }
+
+    if (val < 1000000000000) {
+        let exactB = val / 1000000000;
+        let roundedUpB = Math.ceil(val / 100000000) / 10;
+        let isExact = (exactB === roundedUpB);
+        return (isExact ? "" : "~") + roundedUpB.toFixed(1) + "b";
+    }
+
+    let exactT = val / 1000000000000;
+    let roundedUpT = Math.ceil(val / 100000000000) / 10;
+    let isExact = (exactT === roundedUpT);
+    return (isExact ? "" : "~") + roundedUpT.toFixed(1) + "t";
+}
 
     let exactM = val / 1000000;
     let roundedUpM = Math.ceil(val / 100000) / 10;

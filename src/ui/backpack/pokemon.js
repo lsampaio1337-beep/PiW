@@ -88,6 +88,7 @@ export function renderPokemonTab(area) {
 
         // Sum EV dynamically for selected items
         const allPokemonLists = [...state.storage, ...state.safe, ...state.party, ...state.breeding, ...state.training];
+        allPokemonLists.forEach(p => { if (!p.uuid) p.uuid = Math.random().toString(36).substring(2, 15); });
         window.selectedForSale.forEach(uuid => {
             const pkmn = allPokemonLists.find(p => p.uuid === uuid);
             if (pkmn) {
@@ -102,9 +103,9 @@ export function renderPokemonTab(area) {
 
         sellControlsHtml = `
             <div style="margin-bottom: 10px; text-align: center; background: #222; padding: 10px; border-radius: 8px;">
-                <div style="margin-bottom: 10px; color: #f1c40f; font-weight: bold; font-size: 16px;">Selected: ${selectedCount} Pokemon - Value: ${Math.floor(selectedEVTotal).toLocaleString()}</div>
+                <div style="margin-bottom: 10px; color: #f1c40f; font-weight: bold; font-size: 16px;">Selected: ${selectedCount} Pokemon - Value: ${window.formatMarketPrice ? window.formatMarketPrice(selectedEVTotal) : Math.floor(selectedEVTotal)}</div>
                 <button onclick="window.selectAllVisibleStorage()" style="padding: 8px 15px; margin-right: 5px; background: #3498db; color: white; border: none; border-radius: 4px; cursor: pointer;">Select All Visible Storage</button>
-                <button onclick="window.sellSelectedPokemon()" style="padding: 8px 15px; margin-right: 5px; background: #e74c3c; color: white; border: none; border-radius: 4px; cursor: pointer;">Sell Selected (${Math.floor(selectedEVTotal).toLocaleString()})</button>
+                <button onclick="window.sellSelectedPokemon()" style="padding: 8px 15px; margin-right: 5px; background: #e74c3c; color: white; border: none; border-radius: 4px; cursor: pointer;">Sell Selected (${window.formatMarketPrice ? window.formatMarketPrice(selectedEVTotal) : Math.floor(selectedEVTotal)})</button>
 
             </div>
         `;
@@ -576,14 +577,7 @@ window.sellSelectedPokemon = function() {
     });
 
     state.trainer.money += totalEarned;
-    const toast = document.getElementById('market-toast');
-    if (toast) {
-        toast.innerText = `Sold selected Pokemon for ${totalEarned.toLocaleString()}!`;
-        toast.style.display = 'block';
-        setTimeout(() => { toast.style.display = 'none'; }, 2000);
-    } else {
-        alert(`Sold selected Pokemon for ${totalEarned.toLocaleString()}!`);
-    }
+    alert(`Sold selected Pokemon for ${window.formatMarketPrice ? window.formatMarketPrice(totalEarned) : totalEarned}!`);
 
     window.selectedForSale.clear();
 

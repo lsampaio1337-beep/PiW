@@ -40,7 +40,13 @@ export function renderStonesTab(area) {
 }
 
 function renderStonesSellMode(area) {
-    let content = '<div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 15px; overflow-y: auto; max-height: 100%; padding-bottom: 20px;">';
+    let totalItems = 0;
+    Object.keys(state.backpack.stones).forEach(k => { if ((state.backpack.stones[k] || 0) > 0) totalItems++; });
+    if (totalItems === 0) {
+        area.innerHTML = '<div style="display: flex; height: 100%; width: 100%; align-items: center; justify-content: center; font-size: 24px; color: #aaa; font-weight: bold;">No item</div>';
+        return;
+    }
+    let content = '<div style="display: grid; grid-template-columns: repeat(4, 1fr); justify-content: center; gap: 15px; overflow-y: auto; max-height: 100%; padding-bottom: 20px;">';
     const stonePrice = state.config.balance.items.stones.sell || Math.floor(state.config.balance.items.stones.price * 0.5);
 
     Object.keys(state.backpack.stones).sort().forEach(s => {

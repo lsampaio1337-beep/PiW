@@ -56,7 +56,7 @@ function renderPotionsSellMode(area) {
         area.innerHTML = '<div style="display: flex; height: 100%; width: 100%; align-items: center; justify-content: center; font-size: 24px; color: #aaa; font-weight: bold;">No item</div>';
         return;
     }
-    let content = '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); justify-content: center; gap: 15px; overflow-y: auto; max-height: 100%; padding-bottom: 20px;">';
+    let content = '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); justify-content: center; gap: 15px; overflow-y: auto; max-height: 100%; padding-bottom: 20px;">';
 
     state.config.balance.items.potions.forEach(p => {
         let inventoryName = p.name;
@@ -71,13 +71,13 @@ function renderPotionsSellMode(area) {
                     <img src="./Assets/Items/Potions/${inventoryName}.png" onerror="this.src='./Assets/Extra/Spot.png'" style="width: 50%; max-height: 30%; object-fit: contain; margin-bottom: 5px;">
                     <div style="font-size: 14px; font-weight: bold;">${inventoryName.split(' ')[0]}<br>${inventoryName.split(' ').slice(1).join(' ')}</div>
                     <div style="font-size: 12px; color: #aaa;">Owned: ${formatQuantity(qty)}</div>
-                    <div style="font-size: 12px; color: #2ecc71;">Sell: $${sellPrice} ea</div>
+                    <div style="font-size: 12px; color: #2ecc71;">Sell: ${window.formatMarketPrice(sellPrice)} ea</div>
 
                     <div style="margin-top: 10px;">
                         <input type="number" id="sell-qty-potion-${inventoryName.replace(/\s+/g, '-')}" value="1" min="1" max="${qty}" oninput="window.updateLocalSellPrice('potion', '${inventoryName}', ${sellPrice})" style="width: 80%; text-align: center; margin-bottom: 5px; font-size: 12px;">
                         <button onclick="document.getElementById('sell-qty-potion-${inventoryName.replace(/\s+/g, '-')}').value=${qty}; window.updateLocalSellPrice('potion', '${inventoryName}', ${sellPrice})" style="padding: 2px 5px; font-size: 10px;">Max</button>
                     </div>
-                    <div id="sell-total-potion-${inventoryName.replace(/\s+/g, '-')}" style="font-size: 14px; font-weight: bold; color: #f1c40f; margin-top: 5px;">Total: $${sellPrice}</div>
+                    <div id="sell-total-potion-${inventoryName.replace(/\s+/g, '-')}" style="font-size: 14px; font-weight: bold; color: #f1c40f; margin-top: 5px;">Total: $${window.formatMarketPrice(sellPrice)}</div>
                     <button onclick="window.sellItem('${inventoryName}', 'potions', ${sellPrice}, 'potion')" style="margin-top: 5px; padding: 5%; background: #e74c3c; color: white; border: none; border-radius: 4px; cursor: pointer; width: 100%; font-size: 10cqw;">Sell</button>
                 </div>
             `;
