@@ -52,6 +52,10 @@ function calculateCatchChance(bst, level, ballMultiplier, stats = {}, isShiny = 
         chance = chance * 4;
     }
 
+    // Black Yellow Candy Catch Bonus
+    const catchMultiplier = 1 + (0.01 * (stats.blackYellowCandies || 0));
+    chance = chance * catchMultiplier;
+
     // Result clamped between 1% and 100%
     if (chance > 100) chance = 100;
     return Math.max(1, chance);
@@ -123,7 +127,7 @@ function generateQuality(stats = {}, isDoubleShiny = false) {
     else if (roll <= regularMaxRoll) { tierName = "Regular"; baseQ = 1.00; maxQ = 1.19; }
     else if (roll <= uncommonMaxRoll) { tierName = "Uncommon"; baseQ = 1.20; maxQ = 1.39; }
     else if (roll <= rareMaxRoll) { tierName = "Rare"; baseQ = 1.40; maxQ = 1.59; }
-    else if (roll <= 11999) { tierName = "Epic"; baseQ = 1.60; maxQ = 1.80; }
+    else if (roll < 12000) { tierName = "Epic"; baseQ = 1.60; maxQ = 1.80; }
     else { return { name: "Shiny", q: 2.00 }; }
 
     let originalQ = baseQ + Math.random() * (maxQ - baseQ);

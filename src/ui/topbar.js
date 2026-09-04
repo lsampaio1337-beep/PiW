@@ -123,6 +123,14 @@ export function updateTopbar() {
     const elChallengeText = document.getElementById('current-challenge-text');
     if (elChallengeText) elChallengeText.innerHTML = getChallengeText();
 
+    const exclamation = document.getElementById('bonus-candy-exclamation');
+    if (exclamation) {
+        if (state.stats.bonusCandyDefeats >= 1000) {
+            exclamation.style.display = 'block';
+        } else {
+            exclamation.style.display = 'none';
+        }
+    }
     const calendarNotification = document.getElementById('calendar-notification');
     if (calendarNotification) {
         if (checkDailyRewardAvailable()) {
