@@ -194,3 +194,100 @@ export function showDamage(target, amount, isCrit, moveName = '', moveType = 'No
         if (dmgNode.parentElement) dmgNode.parentElement.removeChild(dmgNode);
     }, 1000);
 }
+
+export function playCaptureAnimation(ballName, isCaught, onComplete) {
+    const enemySprite = document.getElementById('enemy-sprite');
+    if (!enemySprite) {
+        if (onComplete) onComplete();
+        return;
+    }
+
+    const enemySide = document.getElementById('enemy-side');
+
+    // Create the Pokeball element
+    const ballElement = document.createElement('img');
+    ballElement.src = `Assets/Items/Balls/${ballName}.png`;
+    ballElement.style.position = 'absolute';
+    ballElement.style.width = '40px';
+    ballElement.style.height = '40px';
+    ballElement.style.zIndex = '100';
+
+    // We want the ball to be inside enemySide and overlayed on enemy-sprite
+    const spriteRect = enemySprite.getBoundingClientRect();
+    const sideRect = enemySide.getBoundingClientRect();
+
+    // Initial position on top of the enemy
+    const startLeft = (spriteRect.left - sideRect.left) + (spriteRect.width / 2) - 20; // 20 is half of ball width
+    const startTop = (spriteRect.top - sideRect.top) + (spriteRect.height / 2) - 20;
+
+    ballElement.style.left = startLeft + 'px';
+    ballElement.style.top = startTop + 'px';
+
+    // Animate shaking
+    ballElement.style.animation = 'pokeballShake 3s linear';
+
+    // Append to enemy side
+    enemySide.appendChild(ballElement);
+
+    // Fade out enemy over 3s
+    enemySprite.style.transition = 'opacity 3s linear';
+    enemySprite.style.opacity = '0';
+
+    // Calculate the distance to slide to x=15% of the screen
+    // screen width is window.innerWidth
+    // x=15% is 0.15 * window.innerWidth
+    // We need to move the ball from startLeft to something relative to the screen.
+    // Actually, we can use position: fixed or just calculate the relative distance.
+    const targetXScreen = window.innerWidth * 0.15;
+    const currentXScreen = spriteRect.left + (spriteRect.width / 2);
+    const distanceToMove = targetXScreen - currentXScreen;
+
+    // We need both the enemy sprite and the ball to move left.
+    // enemySprite is usually object-fit within enemy-side.
+    // Let's use CSS transform to slide both over 3s.
+    const slideTransition = 'transform 3s linear';
+    enemySprite.style.transition = `opacity 3s linear, ${slideTransition}`;
+    enemySprite.style.transform = `translateX(${distanceToMove}px)`;
+
+    ballElement.style.transition = slideTransition;
+    ballElement.style.transform = `translateX(${distanceToMove}px)`;
+
+    // After 3 seconds, they reach x=15%
+    setTimeout(() => {
+        // Swap image based on result
+        ballElement.style.animation = ''; // stop shake
+        if (isCaught) {
+            ballElement.src = `Assets/Items/Balls/${ballName}Y.png`;
+        } else {
+            ballElement.src = `Assets/Items/Balls/${ballName}N.png`;
+        }
+
+        // Calculate speed of previous slide.
+        // Distance = Math.abs(distanceToMove) over 3 seconds.
+        // Speed = Distance / 3 (pixels per second).
+        const speed = Math.abs(distanceToMove) / 3;
+
+        // Distance to off-screen left = targetXScreen + ball width
+        const distanceOffScreen = targetXScreen + 60; // 60 for safety
+        const timeOffScreen = distanceOffScreen / speed; // in seconds
+
+        const totalDistance = distanceToMove - distanceOffScreen;
+
+        // Continue sliding off-screen
+        ballElement.style.transition = `transform ${timeOffScreen}s linear`;
+        ballElement.style.transform = `translateX(${totalDistance}px)`;
+
+        // Enemy is invisible by now, but just in case, move it off too or hide it
+        enemySprite.style.display = 'none';
+        enemySprite.style.transform = 'translateX(0px)'; // reset
+        enemySprite.style.opacity = '1';
+
+        setTimeout(() => {
+            if (ballElement.parentNode) {
+                ballElement.parentNode.removeChild(ballElement);
+            }
+            if (onComplete) onComplete();
+        }, timeOffScreen * 1000);
+
+    }, 3000);
+}
