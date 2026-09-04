@@ -296,14 +296,14 @@ export function getSpeciesDataHtml(pData, state) {
 
         <div style="text-align: left; margin: 15px 0; font-size: 14px; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 5px;">
             <h4 style="margin: 0 0 5px 0;">Defensive Effectiveness</h4>
-            ${Object.keys(weaknesses).length ? \`<b>Weak To (2x):</b> \${formatTypes(weaknesses)}<br>\` : ''}
-            ${Object.keys(resistances).length ? \`<b>Resists (0.5x):</b> \${formatTypes(resistances)}<br>\` : ''}
-            ${Object.keys(immunities).length ? \`<b>Immune To (0x):</b> \${formatTypes(immunities)}<br>\` : ''}
+            ${Object.keys(weaknesses).length ? `<b>Weak To (2x):</b> ${formatTypes(weaknesses)}<br>` : ''}
+            ${Object.keys(resistances).length ? `<b>Resists (0.5x):</b> ${formatTypes(resistances)}<br>` : ''}
+            ${Object.keys(immunities).length ? `<b>Immune To (0x):</b> ${formatTypes(immunities)}<br>` : ''}
 
             <h4 style="margin: 10px 0 5px 0;">Offensive Effectiveness</h4>
-            ${Object.keys(effective).length ? \`<b>Super Effective (2x):</b> \${formatTypes(effective)}<br>\` : ''}
-            ${Object.keys(notEffective).length ? \`<b>Not Very Effective (0.5x):</b> \${formatTypes(notEffective)}<br>\` : ''}
-            ${Object.keys(noEffect).length ? \`<b>No Effect (0x):</b> \${formatTypes(noEffect)}<br>\` : ''}
+            ${Object.keys(effective).length ? `<b>Super Effective (2x):</b> ${formatTypes(effective)}<br>` : ''}
+            ${Object.keys(notEffective).length ? `<b>Not Very Effective (0.5x):</b> ${formatTypes(notEffective)}<br>` : ''}
+            ${Object.keys(noEffect).length ? `<b>No Effect (0x):</b> ${formatTypes(noEffect)}<br>` : ''}
         </div>
 
         <h4 style="text-align: left;">Moveset</h4>
