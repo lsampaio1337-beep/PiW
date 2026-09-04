@@ -1,6 +1,5 @@
 import { state, globals } from '../state.js';
 import * as mathEngine from "../mathEngine.js";
-import { checkDailyRewardAvailable } from './calendar.js';
 
 function getStatusHtml(isMet) {
     return isMet ? ` <span style="color: green;">[Complete]</span>` : "";
@@ -118,25 +117,5 @@ export function updateTopbar() {
     if (navButtons) {
         navButtons.style.pointerEvents = lockMenus ? 'none' : 'auto';
         navButtons.style.opacity = lockMenus ? '0.5' : '1.0';
-    }
-
-    const elChallengeText = document.getElementById('current-challenge-text');
-    if (elChallengeText) elChallengeText.innerHTML = getChallengeText();
-
-    const exclamation = document.getElementById('bonus-candy-exclamation');
-    if (exclamation) {
-        if (state.stats.bonusCandyDefeats >= 1000) {
-            exclamation.style.display = 'block';
-        } else {
-            exclamation.style.display = 'none';
-        }
-    }
-    const calendarNotification = document.getElementById('calendar-notification');
-    if (calendarNotification) {
-        if (checkDailyRewardAvailable()) {
-            calendarNotification.style.display = 'block';
-        } else {
-            calendarNotification.style.display = 'none';
-        }
     }
 }

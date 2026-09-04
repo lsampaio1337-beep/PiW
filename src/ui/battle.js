@@ -40,96 +40,35 @@ export function updateBattleArena() {
         // Standard Combat Arena
         if (battleSystem && battleSystem.activeEncounter) {
             const enemy = battleSystem.activeEncounter;
+            const enemyTotalIV = enemy.ivs.hp + enemy.ivs.atk + enemy.ivs.def + enemy.ivs.spa + enemy.ivs.spd + enemy.ivs.spe;
 
-            // Enemy HP UI
-            const hpContainerEnemy = document.getElementById('enemy-battle-hp-container');
-            const hpBarEnemy = document.getElementById('enemy-battle-hp-bar');
-            const hpTextEnemy = document.getElementById('enemy-battle-hp-text');
-            const hpPctEnemy = document.getElementById('enemy-battle-hp-pct');
+            const elEnemyName = document.getElementById('enemy-name');
+            if (elEnemyName) elEnemyName.innerText = `${enemy.name} (Q=${enemy.quality.toFixed(2)} & ∑IV=${enemyTotalIV})`;
 
-            if (hpContainerEnemy) hpContainerEnemy.style.display = 'flex';
+            const elEnemyLvl = document.getElementById('enemy-lvl');
+            if (elEnemyLvl) elEnemyLvl.innerText = enemy.level;
 
-            if (hpBarEnemy && hpTextEnemy && hpPctEnemy) {
-                const pct = Math.min(100, (enemy.currentHp / enemy.maxHp) * 100);
-                let color = '#3498db';
-                if (pct <= 0) color = '#000000';
-                else if (pct < 25) color = '#e74c3c';
-                else if (pct < 50) color = '#e67e22';
-                else if (pct < 75) color = '#f1c40f';
-                else if (pct < 100) color = '#2ecc71';
-
-                hpBarEnemy.style.width = `${pct}%`;
-                hpBarEnemy.style.background = color;
-                hpTextEnemy.innerText = `${Math.floor(enemy.currentHp)}/${enemy.maxHp}`;
-                hpPctEnemy.innerText = `${Math.floor(pct)}%`;
-            }
+            const elEnemyHp = document.getElementById('enemy-hp');
+            if (elEnemyHp) elEnemyHp.innerText = `${Math.floor(enemy.currentHp)}/${enemy.maxHp}`;
 
             const elEnemySprite = document.getElementById('enemy-sprite');
-            const elEnemySide = document.getElementById('enemy-side');
-
-            if (elEnemySprite && elEnemySide) {
+            if (elEnemySprite) {
                 elEnemySprite.src = `Assets/Pokemon Sprites/${enemy.qualityName === 'Shiny' ? enemy.id + '_shiny' : enemy.id}.png`;
                 elEnemySprite.style.display = 'block';
-
-                let baseBottom = 10;
-                if (enemy.types.includes('Water')) baseBottom = 5;
-                if (enemy.types.includes('Flying') || enemy.types.includes('Wind')) baseBottom = 20;
-
-                elEnemySide.style.bottom = `${baseBottom}%`;
-
-                if (battleSystem.isSliding) {
-                    if (elEnemySide.dataset.sliding !== 'true') {
-                        elEnemySide.dataset.sliding = 'true';
-                        elEnemySide.style.transition = 'none';
-                        elEnemySide.style.left = '100%';
-                        // Trigger reflow
-                        void elEnemySide.offsetWidth;
-                        requestAnimationFrame(() => {
-                            requestAnimationFrame(() => {
-                                elEnemySide.style.transition = `left ${battleSystem.slideDuration}ms linear`;
-                                elEnemySide.style.left = '35%';
-                            });
-                        });
-                    }
-                } else {
-                    elEnemySide.dataset.sliding = 'false';
-                    elEnemySide.style.transition = 'none';
-                    elEnemySide.style.left = '35%';
-                }
             }
 
             const leader = state.party[0];
-            const elPlayerSide = document.getElementById('player-side');
-            if (leader && elPlayerSide) {
+            if (leader) {
+                const playerTotalIV = leader.ivs.hp + leader.ivs.atk + leader.ivs.def + leader.ivs.spa + leader.ivs.spd + leader.ivs.spe;
 
-                let baseBottom = 10;
-                if (leader.types.includes('Water')) baseBottom = 5;
-                if (leader.types.includes('Flying') || leader.types.includes('Wind')) baseBottom = 20;
+                const elPlayerName = document.getElementById('player-name');
+                if (elPlayerName) elPlayerName.innerText = `${leader.name} (Q=${leader.quality.toFixed(2)} & ∑IV=${playerTotalIV})`;
 
-                elPlayerSide.style.bottom = `${baseBottom}%`;
-                elPlayerSide.style.left = '20%';
+                const elPlayerLvl = document.getElementById('player-lvl');
+                if (elPlayerLvl) elPlayerLvl.innerText = leader.level;
 
-                const hpContainerPlayer = document.getElementById('player-battle-hp-container');
-                const hpBarPlayer = document.getElementById('player-battle-hp-bar');
-                const hpTextPlayer = document.getElementById('player-battle-hp-text');
-                const hpPctPlayer = document.getElementById('player-battle-hp-pct');
-
-                if (hpContainerPlayer) hpContainerPlayer.style.display = 'flex';
-
-                if (hpBarPlayer && hpTextPlayer && hpPctPlayer) {
-                    const pct = Math.min(100, (leader.currentHp / leader.maxHp) * 100);
-                    let color = '#3498db';
-                    if (pct <= 0) color = '#000000';
-                    else if (pct < 25) color = '#e74c3c';
-                    else if (pct < 50) color = '#e67e22';
-                    else if (pct < 75) color = '#f1c40f';
-                    else if (pct < 100) color = '#2ecc71';
-
-                    hpBarPlayer.style.width = `${pct}%`;
-                    hpBarPlayer.style.background = color;
-                    hpTextPlayer.innerText = `${Math.floor(leader.currentHp)}/${leader.maxHp}`;
-                    hpPctPlayer.innerText = `${Math.floor(pct)}%`;
-                }
+                const elPlayerHp = document.getElementById('player-hp');
+                if (elPlayerHp) elPlayerHp.innerText = `${Math.floor(leader.currentHp)}/${leader.maxHp}`;
 
                 const elPlayerSprite = document.getElementById('player-sprite');
                 if (elPlayerSprite) {
@@ -138,51 +77,33 @@ export function updateBattleArena() {
                 }
             }
         } else if (battleSystem && battleSystem.isSearching) {
+            const elEnemyName = document.getElementById('enemy-name');
+            if (elEnemyName) elEnemyName.innerText = "Searching...";
 
-            const hpContainerEnemy = document.getElementById('enemy-battle-hp-container');
-            if (hpContainerEnemy) hpContainerEnemy.style.display = 'none';
+            const elEnemyLvl = document.getElementById('enemy-lvl');
+            if (elEnemyLvl) elEnemyLvl.innerText = "?";
+
+            const elEnemyHp = document.getElementById('enemy-hp');
+            if (elEnemyHp) elEnemyHp.innerText = "?/?";
 
             const elEnemySprite = document.getElementById('enemy-sprite');
-            const elEnemySide = document.getElementById('enemy-side');
-            if (elEnemySprite && elEnemySide) {
+            if (elEnemySprite) {
                 elEnemySprite.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
                 elEnemySprite.style.display = 'block';
-                elEnemySide.style.transition = 'none';
-                elEnemySide.style.left = '35%'; // Matching active battle destination
-                elEnemySide.style.bottom = '10%'; // default
             }
 
             const leader = state.party[0];
-            const elPlayerSide = document.getElementById('player-side');
-            if (leader && elPlayerSide) {
-                let baseBottom = 10;
-                if (leader.types.includes('Water')) baseBottom = 5;
-                if (leader.types.includes('Flying') || leader.types.includes('Wind')) baseBottom = 20;
+            if (leader) {
+                const playerTotalIV = leader.ivs.hp + leader.ivs.atk + leader.ivs.def + leader.ivs.spa + leader.ivs.spd + leader.ivs.spe;
 
-                elPlayerSide.style.bottom = `${baseBottom}%`;
-                elPlayerSide.style.left = '20%';
+                const elPlayerName = document.getElementById('player-name');
+                if (elPlayerName) elPlayerName.innerText = `${leader.name} (Q=${leader.quality.toFixed(2)} & ∑IV=${playerTotalIV})`;
 
-                const hpContainerPlayer = document.getElementById('player-battle-hp-container');
-                const hpBarPlayer = document.getElementById('player-battle-hp-bar');
-                const hpTextPlayer = document.getElementById('player-battle-hp-text');
-                const hpPctPlayer = document.getElementById('player-battle-hp-pct');
+                const elPlayerLvl = document.getElementById('player-lvl');
+                if (elPlayerLvl) elPlayerLvl.innerText = leader.level;
 
-                if (hpContainerPlayer) hpContainerPlayer.style.display = 'flex';
-
-                if (hpBarPlayer && hpTextPlayer && hpPctPlayer) {
-                    const pct = Math.min(100, (leader.currentHp / leader.maxHp) * 100);
-                    let color = '#3498db';
-                    if (pct <= 0) color = '#000000';
-                    else if (pct < 25) color = '#e74c3c';
-                    else if (pct < 50) color = '#e67e22';
-                    else if (pct < 75) color = '#f1c40f';
-                    else if (pct < 100) color = '#2ecc71';
-
-                    hpBarPlayer.style.width = `${pct}%`;
-                    hpBarPlayer.style.background = color;
-                    hpTextPlayer.innerText = `${Math.floor(leader.currentHp)}/${leader.maxHp}`;
-                    hpPctPlayer.innerText = `${Math.floor(pct)}%`;
-                }
+                const elPlayerHp = document.getElementById('player-hp');
+                if (elPlayerHp) elPlayerHp.innerText = `${Math.floor(leader.currentHp)}/${leader.maxHp}`;
 
                 const elPlayerSprite = document.getElementById('player-sprite');
                 if (elPlayerSprite) {
@@ -192,18 +113,12 @@ export function updateBattleArena() {
             } else {
                 const elPlayerSprite = document.getElementById('player-sprite');
                 if (elPlayerSprite) elPlayerSprite.style.display = 'none';
-                const hpContainerPlayer = document.getElementById('player-battle-hp-container');
-                if (hpContainerPlayer) hpContainerPlayer.style.display = 'none';
             }
         } else {
              const elEnemySprite = document.getElementById('enemy-sprite');
              if (elEnemySprite) elEnemySprite.style.display = 'none';
              const elPlayerSprite = document.getElementById('player-sprite');
              if (elPlayerSprite) elPlayerSprite.style.display = 'none';
-             const hpContainerEnemy = document.getElementById('enemy-battle-hp-container');
-             if (hpContainerEnemy) hpContainerEnemy.style.display = 'none';
-             const hpContainerPlayer = document.getElementById('player-battle-hp-container');
-             if (hpContainerPlayer) hpContainerPlayer.style.display = 'none';
         }
     }
 }
@@ -272,155 +187,10 @@ export function showDamage(target, amount, isCrit, moveName = '', moveType = 'No
     // Animate up and fade out
     setTimeout(() => {
         dmgNode.style.top = (parseInt(dmgNode.style.top) - 40) + 'px';
+        dmgNode.style.opacity = '0';
     }, 50);
 
     setTimeout(() => {
-        dmgNode.style.opacity = '0';
-    }, 2000);
-
-    setTimeout(() => {
         if (dmgNode.parentElement) dmgNode.parentElement.removeChild(dmgNode);
-    }, 3000);
-}
-
-export function playCombatAnimations(targetSide, moveType, duration) {
-    const battleSystem = globals.battleSystem;
-    const isGym = battleSystem && battleSystem.gymState && battleSystem.gymState.isActive;
-
-    let attackerId = targetSide === 'player' ? (isGym ? 'gym-enemy-sprite' : 'enemy-sprite') : (isGym ? 'gym-player-sprite' : 'player-sprite');
-    let defenderId = targetSide === 'player' ? (isGym ? 'gym-player-sprite' : 'player-sprite') : (isGym ? 'gym-enemy-sprite' : 'enemy-sprite');
-
-    const atkImg = document.getElementById(attackerId);
-    const defImg = document.getElementById(defenderId);
-
-    if (!atkImg || !defImg) return;
-
-    const color = TYPE_COLORS[moveType] || '#ffffff';
-
-    // We want to combine transforms without them overwriting each other.
-    // Initialize base transform (e.g. scaleX(-1) for player) if not set
-    if (!atkImg.dataset.baseTransform) {
-        atkImg.dataset.baseTransform = atkImg.style.transform || (attackerId.includes('player') ? 'scaleX(-1)' : '');
-    }
-    if (!defImg.dataset.baseTransform) {
-        defImg.dataset.baseTransform = defImg.style.transform || (defenderId.includes('player') ? 'scaleX(-1)' : '');
-    }
-
-    // Function to apply combined transforms safely
-    const updateTransform = (img) => {
-        const base = img.dataset.baseTransform || '';
-        const atk = img.dataset.atkTransform || '';
-        const def = img.dataset.defTransform || '';
-        img.style.transform = `${base} ${atk} ${def}`.trim();
-    };
-
-    // Attacker launch animation
-    atkImg.style.transition = `transform ${duration * 0.2}ms ease-out`;
-
-    // For attack we just scale up slightly
-    atkImg.dataset.atkTransform = 'scale(1.2)';
-    updateTransform(atkImg);
-
-    setTimeout(() => {
-        atkImg.dataset.atkTransform = '';
-        updateTransform(atkImg);
-    }, duration * 0.4);
-
-    // Create projectile
-    const proj = document.createElement('div');
-    proj.style.position = 'fixed';
-    proj.style.width = '20px';
-    proj.style.height = '10px';
-    proj.style.backgroundColor = color;
-    proj.style.borderRadius = '5px';
-    proj.style.boxShadow = `0 0 10px 5px ${color}`;
-    proj.style.zIndex = '999';
-    proj.style.pointerEvents = 'none';
-
-    const atkRect = atkImg.getBoundingClientRect();
-    const defRect = defImg.getBoundingClientRect();
-
-    // Start at attacker center
-    const startX = atkRect.left + atkRect.width / 2;
-    const startY = atkRect.top + atkRect.height / 2;
-
-    // End at defender center
-    const endX = defRect.left + defRect.width / 2;
-    const endY = defRect.top + defRect.height / 2;
-
-    proj.style.left = startX + 'px';
-    proj.style.top = startY + 'px';
-
-    document.body.appendChild(proj);
-
-    // Animate projectile
-    proj.style.transition = `all ${duration * 0.8}ms linear`;
-
-    // Trigger reflow
-    proj.getBoundingClientRect();
-
-    proj.style.left = endX + 'px';
-    proj.style.top = endY + 'px';
-
-    setTimeout(() => {
-        if (proj.parentElement) proj.parentElement.removeChild(proj);
-
-        // Splash Effect
-        const splash = document.createElement('div');
-        splash.style.position = 'fixed';
-        // Center the 0x0 div on the target
-        splash.style.left = endX + 'px';
-        splash.style.top = endY + 'px';
-        splash.style.width = '0px';
-        splash.style.height = '0px';
-        splash.style.backgroundColor = color; // 100% solid color
-        splash.style.borderRadius = '50%';
-        splash.style.boxShadow = `0 0 10px 5px ${color}`;
-        splash.style.zIndex = '999';
-        splash.style.pointerEvents = 'none';
-
-        // Phase 1: Grow to 25px
-        splash.style.transition = `all ${duration * 0.15}ms linear`;
-
-        document.body.appendChild(splash);
-
-        // Trigger reflow
-        splash.getBoundingClientRect();
-
-        // Expand to 40x40 from the center
-        splash.style.left = (endX - 20) + 'px';
-        splash.style.top = (endY - 20) + 'px';
-        splash.style.width = '40px';
-        splash.style.height = '40px';
-        splash.style.opacity = '1';
-
-        // Phase 2: Grow to 80px and fade out
-        setTimeout(() => {
-            splash.style.transition = `all ${duration * 0.15}ms linear`;
-            splash.style.left = (endX - 40) + 'px';
-            splash.style.top = (endY - 40) + 'px';
-            splash.style.width = '80px';
-            splash.style.height = '80px';
-            splash.style.opacity = '0';
-        }, duration * 0.15);
-
-        setTimeout(() => {
-            if (splash.parentElement) splash.parentElement.removeChild(splash);
-        }, duration * 0.3);
-
-        // Defender Hit Animation (Shake) using transforms safely
-        defImg.style.transition = 'transform 50ms ease-in-out';
-        let shakeInterval = setInterval(() => {
-            const shift = (Math.random() - 0.5) * 20;
-            defImg.dataset.defTransform = `translateX(${shift}px)`;
-            updateTransform(defImg);
-        }, 50);
-
-        setTimeout(() => {
-            clearInterval(shakeInterval);
-            defImg.dataset.defTransform = '';
-            updateTransform(defImg);
-        }, Math.min(500, duration * 0.3));
-
-    }, duration * 0.8);
+    }, 1000);
 }

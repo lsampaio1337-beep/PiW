@@ -117,7 +117,10 @@ input[type="number"] {
     flex: 1;
     position: relative;
     background-size: cover;
-    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 40px;
 }
 
 #view-prof-oak-lab {
@@ -134,19 +137,21 @@ input[type="number"] {
 }
 
 #enemy-side {
-    position: absolute;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    transform: translateX(-50%);
+    align-items: flex-end;
+    align-self: flex-end;
+    margin-top: 20px;
+    position: relative;
 }
 
 #player-side {
-    position: absolute;
     display: flex;
-    flex-direction: column-reverse;
-    align-items: center;
-    transform: translateX(-50%);
+    flex-direction: row;
+    align-items: flex-end;
+    align-self: flex-start;
+    margin-bottom: 20px;
+    position: relative;
 }
 
 .stats-box {
@@ -160,24 +165,20 @@ input[type="number"] {
 .stats-box h4 { margin: 0 0 5px 0; font-size: 14px;}
 
 #enemy-sprite {
-    height: 35vh;
-    min-height: 100px;
-    width: auto;
-    margin-top: 10px;
+    width: 150px;
+    height: 150px;
+    margin-top: -10px;
     object-fit: contain;
     position: relative;
-    z-index: 10;
 }
 
 #player-sprite {
-    height: 35vh;
-    min-height: 100px;
-    width: auto;
-    margin-bottom: 10px;
+    width: 150px;
+    height: 150px;
+    margin-right: 20px;
     transform: scaleX(-1); /* Face right */
     object-fit: contain;
     position: relative;
-    z-index: 10;
 }
 
 #combat-log {
@@ -277,34 +278,34 @@ input[type="number"] {
 
 /* QTier Glow Effects */
 .glow-shiny {
-    filter: drop-shadow(0 -1px 2px #ff0000)
-            drop-shadow(1px 0 2px #ffff00)
-            drop-shadow(0 1px 2px #00ff00)
-            drop-shadow(-1px 0 2px #0000ff);
+    filter: drop-shadow(0 -4px 4px #ff0000)
+            drop-shadow(4px 0 4px #ffff00)
+            drop-shadow(0 4px 4px #00ff00)
+            drop-shadow(-4px 0 4px #0000ff);
 }
 .glow-epic {
-    filter: drop-shadow(0 -1px 2px #7A00FF)
-            drop-shadow(1px 0 2px #7A00FF)
-            drop-shadow(0 1px 2px #7A00FF)
-            drop-shadow(-1px 0 2px #7A00FF);
+    filter: drop-shadow(0 -4px 4px #7A00FF)
+            drop-shadow(4px 0 4px #7A00FF)
+            drop-shadow(0 4px 4px #7A00FF)
+            drop-shadow(-4px 0 4px #7A00FF);
 }
 .glow-rare {
-    filter: drop-shadow(0 -1px 2px #0000FF)
-            drop-shadow(1px 0 2px #0000FF)
-            drop-shadow(0 1px 2px #0000FF)
-            drop-shadow(-1px 0 2px #0000FF);
+    filter: drop-shadow(0 -4px 4px #0000FF)
+            drop-shadow(4px 0 4px #0000FF)
+            drop-shadow(0 4px 4px #0000FF)
+            drop-shadow(-4px 0 4px #0000FF);
 }
 .glow-uncommon {
-    filter: drop-shadow(0 -1px 2px #00FFFF)
-            drop-shadow(1px 0 2px #00FFFF)
-            drop-shadow(0 1px 2px #00FFFF)
-            drop-shadow(-1px 0 2px #00FFFF);
+    filter: drop-shadow(0 -4px 4px #00FFFF)
+            drop-shadow(4px 0 4px #00FFFF)
+            drop-shadow(0 4px 4px #00FFFF)
+            drop-shadow(-4px 0 4px #00FFFF);
 }
 .glow-regular {
-    filter: drop-shadow(0 -1px 2px #7AFFFF)
-            drop-shadow(1px 0 2px #7AFFFF)
-            drop-shadow(0 1px 2px #7AFFFF)
-            drop-shadow(-1px 0 2px #7AFFFF);
+    filter: drop-shadow(0 -4px 4px #7AFFFF)
+            drop-shadow(4px 0 4px #7AFFFF)
+            drop-shadow(0 4px 4px #7AFFFF)
+            drop-shadow(-4px 0 4px #7AFFFF);
 }
 .glow-weak {
     /* No glow */

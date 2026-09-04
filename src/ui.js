@@ -30,13 +30,10 @@ export const TYPE_COLORS = {
 };
 import { updateTopbar } from './ui/topbar.js';
 import { updateSidebar } from './ui/sidebar.js';
-import { updateBattleArena, showDamage, playCombatAnimations } from './ui/battle.js';
-import { showCalendar } from './ui/calendar.js';
+import { updateBattleArena, showDamage } from './ui/battle.js';
 import { showMap, navigateToLocation, showMapTooltip, hideMapTooltip } from './ui/map.js';
 import { showPokedex, showDexEntry } from './ui/pokedex.js';
 import { showPokemonStats, showPokemonStatsByUuid, evolvePokemon } from './ui/pokemonStats.js';
-import { showBonusCandyModal } from './ui/bonusCandy.js';
-window.showBonusCandyModal = showBonusCandyModal;
 import { showSettings, updateGameSpeed, addMoney, addXp, exportLog, showAddPokemonModal, forceNextEncounter, activateCheat } from './ui/settings.js';
 import { setupMarket } from './ui/market.js';
 import { showBackpack, renderBackpackTab, setActiveItem } from './ui/backpack/index.js';
@@ -170,7 +167,6 @@ window.showChallengesModal = function() {
 window.dragOver = dragOver;
 window.handleDrop = handleDrop;
 window.showDamage = showDamage;
-window.playCombatAnimations = playCombatAnimations;
 window.setLeader = function(idx) {
     if (idx === 0) return;
     if (globals.battleSystem) {
@@ -533,6 +529,7 @@ async function loadConfigs() {
 }
 
 function selectStarter(id) {
+    alert("Starter Selected: " + id);
     const pData = state.config.pokemonData.find(p => p.id === id);
     const q = 1.40; // Fixed Rare
     const qName = "Rare";
@@ -637,7 +634,7 @@ async function init() {
 
     // Bind buttons (they might be missing if bypass Oak)
     const btnBulbasaur = document.getElementById('choose-bulbasaur');
-    if (btnBulbasaur) btnBulbasaur.onclick = () => selectStarter(1);
+    if (btnBulbasaur) btnBulbasaur.onclick = () => { console.log("Bulbasaur clicked"); selectStarter(1); };
 
     const btnCharmander = document.getElementById('choose-charmander');
     if (btnCharmander) btnCharmander.onclick = () => selectStarter(4);
@@ -678,9 +675,7 @@ async function init() {
     bindBtn('btn-map', () => { if(!checkCombatLock()) showMap(); });
     bindBtn('btn-backpack', () => { if(!checkCombatLock()) { window.sellModeActive = false; if(window.selectedForSale) window.selectedForSale.clear(); showBackpack(); } });
     bindBtn('btn-dex', () => { if(!checkCombatLock()) showPokedex(); });
-    bindBtn('btn-bonus-candy', () => { if(!checkCombatLock()) showBonusCandyModal(); });
     bindBtn('btn-challenges', () => { if(!checkCombatLock()) window.showChallengesModal(); });
-    bindBtn('btn-calendar', () => { if(!checkCombatLock()) showCalendar(); });
 
     window.showBackpackAndFocus = (tab) => {
         if(!checkCombatLock()) {
@@ -690,8 +685,6 @@ async function init() {
             renderBackpackTab(tab);
         }
     };
-
-    window.updateTopbar = updateTopbar;
 
     bindBtn('btn-stats', () => {
         if(checkCombatLock()) return;
