@@ -604,11 +604,8 @@ class BattleSystem {
             const ballName = this.lastThrownBallName;
 
             if (ballName && typeof window.playCaptureAnimation === 'function') {
-                window.playCaptureAnimation(ballName, caught, () => {
-                    finalizeDefeatLogic(caught);
-                    this.proceedAfterDefeat(leader, ev, lootMultiplier);
-                });
-                return;
+                window.playCaptureAnimation(ballName, caught);
+                finalizeDefeatLogic(caught);
             } else {
                 finalizeDefeatLogic(caught);
             }

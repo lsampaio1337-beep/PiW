@@ -195,10 +195,9 @@ export function showDamage(target, amount, isCrit, moveName = '', moveType = 'No
     }, 1000);
 }
 
-export function playCaptureAnimation(ballName, isCaught, onComplete) {
+export function playCaptureAnimation(ballName, isCaught) {
     const enemySprite = document.getElementById('enemy-sprite');
     if (!enemySprite) {
-        if (onComplete) onComplete();
         return;
     }
 
@@ -210,15 +209,17 @@ export function playCaptureAnimation(ballName, isCaught, onComplete) {
     ballElement.style.position = 'absolute';
     ballElement.style.width = '40px';
     ballElement.style.height = '40px';
-    ballElement.style.zIndex = '100';
+    ballElement.style.zIndex = '101'; // Ensure it's above the clone
 
-    // We want the ball to be inside enemySide and overlayed on enemy-sprite
-    const spriteRect = enemySprite.getBoundingClientRect();
-    const sideRect = enemySide.getBoundingClientRect();
+    // Use offsetLeft and offsetTop for more reliable positioning within the relatively positioned parent container
+    const spriteLeft = enemySprite.offsetLeft;
+    const spriteTop = enemySprite.offsetTop;
+    const spriteWidth = enemySprite.offsetWidth || 150;
+    const spriteHeight = enemySprite.offsetHeight || 150;
 
     // Initial position on top of the enemy
-    const startLeft = (spriteRect.left - sideRect.left) + (spriteRect.width / 2) - 20; // 20 is half of ball width
-    const startTop = (spriteRect.top - sideRect.top) + (spriteRect.height / 2) - 20;
+    const startLeft = spriteLeft + (spriteWidth / 2) - 20; // 20 is half of ball width
+    const startTop = spriteTop + (spriteHeight / 2) - 20;
 
     ballElement.style.left = startLeft + 'px';
     ballElement.style.top = startTop + 'px';
@@ -233,13 +234,18 @@ export function playCaptureAnimation(ballName, isCaught, onComplete) {
     const spriteClone = enemySprite.cloneNode(true);
     spriteClone.id = 'enemy-sprite-clone';
     spriteClone.style.position = 'absolute';
-    spriteClone.style.left = (spriteRect.left - sideRect.left) + 'px';
-    spriteClone.style.top = (spriteRect.top - sideRect.top) + 'px';
-    spriteClone.style.margin = '0'; // override any margins
+    spriteClone.style.left = spriteLeft + 'px';
+    spriteClone.style.top = spriteTop + 'px';
+    spriteClone.style.width = spriteWidth + 'px';
+    spriteClone.style.height = spriteHeight + 'px';
+    spriteClone.style.margin = '0';
+    // Do not set negative margin-top here because top/left already account for final rendered position
+    spriteClone.style.zIndex = '100'; // Above the real sprite, below the ball
     enemySide.appendChild(spriteClone);
 
-    // Hide the real enemy sprite immediately so it's ready for the next encounter
-    enemySprite.style.display = 'none';
+    // We do NOT hide the real enemy sprite, so it keeps the layout from collapsing
+    // Also, we do not pause the game logic. The game will generate the next encounter.
+    // If the next encounter spawns quickly, it will simply be underneath our clone.
 
     // Fade out clone over 2s
     spriteClone.style.transition = 'opacity 2s linear';
@@ -266,11 +272,6 @@ export function playCaptureAnimation(ballName, isCaught, onComplete) {
             if (spriteClone.parentNode) {
                 spriteClone.parentNode.removeChild(spriteClone);
             }
-
-            // Restore the original sprite's display property so the next encounter isn't invisible
-            enemySprite.style.display = '';
-
-            if (onComplete) onComplete();
         }, 2000);
 
     }, 3000);
