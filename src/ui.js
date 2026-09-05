@@ -896,6 +896,18 @@ async function init() {
         if(!checkCombatLock()) showSettings();
     });
 
+    bindBtn('btn-sleep', () => {
+        if (confirm("Are you sure you want to enter Sleep Mode?")) {
+            if (state.party.length === 0 && state.storage.length === 0) {
+                // Not a valid time to sleep
+                return;
+            }
+            state.settings.isSleepModeActive = true;
+            storage.save(state);
+            window.close();
+        }
+    });
+
     bindBtn('btn-exit', () => {
         if (confirm("Are you sure you want to save and exit?")) {
             if (state.party.length === 0 && state.storage.length === 0) {
