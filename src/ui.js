@@ -759,14 +759,16 @@ async function init() {
                 playtimeStr = `${h}h ${m}m ${s}s`;
             }
 
-            // Format last played explicitly as dd/mm/yyyy
+            // Format last played explicitly as dd/mm/yyyy HH:MM
             let lastPlayedStr = "Unknown";
             if (pData.lastPlayed) {
                 const lpDate = new Date(pData.lastPlayed);
                 const dd = String(lpDate.getDate()).padStart(2, '0');
                 const mm = String(lpDate.getMonth() + 1).padStart(2, '0');
                 const yyyy = lpDate.getFullYear();
-                lastPlayedStr = `${dd}/${mm}/${yyyy}`;
+                const hh = String(lpDate.getHours()).padStart(2, '0');
+                const min = String(lpDate.getMinutes()).padStart(2, '0');
+                lastPlayedStr = `${dd}/${mm}/${yyyy} ${hh}:${min}`;
             }
 
             // Get profile name

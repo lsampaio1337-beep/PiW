@@ -396,6 +396,7 @@ class BattleSystem {
         this.isSearching = false;
         this.isSliding = true;
         this.slideDuration = slideDelay;
+        if (this.isFastForwarding) return;
         this.updateUI();
 
         this.combatLoop = setTimeout(() => {
