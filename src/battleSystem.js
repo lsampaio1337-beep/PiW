@@ -15,6 +15,8 @@ class BattleSystem {
             gym: null,
             currentTrainerIndex: 0
         };
+
+        this.isFastForwarding = false;
     }
 
     start() {
@@ -276,6 +278,7 @@ class BattleSystem {
         this.isSearching = false;
         this.isSliding = true;
         this.slideDuration = slideDelay;
+        if (this.isFastForwarding) return;
         this.updateUI();
 
         this.combatLoop = setTimeout(() => {
@@ -801,6 +804,156 @@ class BattleSystem {
 
             this.updateUI();
         }
+    }
+
+    runFastForward(elapsedMs) {
+        this.stop();
+        this.isFastForwarding = true;
+
+        let stats = {
+            elapsedMs: elapsedMs,
+            money: 0,
+            xp: 0,
+            caught: 0,
+            encounters: 0,
+            loot: {}
+        };
+
+        // Snapshot stats to calculate diffs easily
+        const initialMoney = this.state.trainer.money;
+        const initialCaught = this.state.stats.caught;
+        const initialStones = JSON.parse(JSON.stringify(this.state.backpack.stones));
+
+        while (elapsedMs > 0 && this.state.party.some(p => p.currentHp > 0)) {
+            // Pick next healthy pokemon as leader
+            if (this.state.party[0].currentHp <= 0) {
+                const fainted = this.state.party.shift();
+                this.state.party.push(fainted);
+                if (this.state.party[0].currentHp <= 0) break; // all fainted
+            }
+
+            const leaderSpeed = this.state.party[0].currentStats.spe;
+            let searchDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed));
+            searchDelay = Math.max(300, searchDelay);
+
+            elapsedMs -= searchDelay;
+            if (elapsedMs <= 0) break;
+
+            // Generate encounter
+            this.generateEncounter(0);
+            stats.encounters++;
+
+            // Fast forward combat loop
+            let combatFinished = false;
+            let combatTime = 0;
+
+            while (!combatFinished) {
+                const leader = this.state.party[0];
+                if (leader.currentHp <= 0) {
+                    this.handleFaint();
+                    if (this.state.party[0].currentHp <= 0) {
+                        combatFinished = true;
+                    }
+                    continue;
+                }
+
+                let leaderDelay = this.state.config.balance.baseAttackDelay * 1000 * (100 / (100 + leader.currentStats.spe));
+                leaderDelay = Math.max(250, leaderDelay);
+
+                let enemyDelay = this.state.config.balance.baseAttackDelay * 1000 * (100 / (100 + this.activeEncounter.currentStats.spe));
+                enemyDelay = Math.max(250, enemyDelay);
+
+                const isLeaderFaster = leaderDelay <= enemyDelay;
+                const firstActor = isLeaderFaster ? leader : this.activeEncounter;
+                const secondActor = isLeaderFaster ? this.activeEncounter : leader;
+
+                combatTime += Math.min(leaderDelay, enemyDelay);
+
+                // Simulate Execute Turn (1)
+                if (firstActor === leader && this.state.settings.autoPotion) {
+                    this.tryUsePotion(firstActor);
+                }
+
+                const move1 = this.getBestMove(firstActor, secondActor);
+                const isPhysical1 = move1.category === 'Physical';
+                const atkStat1 = isPhysical1 ? firstActor.currentStats.atk : firstActor.currentStats.spa;
+                const defStat1 = isPhysical1 ? secondActor.currentStats.def : secondActor.currentStats.spd;
+                const eff1 = this.getTypeEffectiveness(move1.type, secondActor.types);
+
+                const hit1 = mathEngine.calculateDamage(firstActor.level, move1.power, atkStat1, defStat1, eff1, firstActor.quality || 1);
+                secondActor.currentHp -= hit1.damage;
+                combatTime += 500;
+
+                if (secondActor.currentHp <= 0) {
+                    if (secondActor === this.activeEncounter) {
+                        const preXP = leader.xp;
+                        this.handleEnemyDefeat();
+                        stats.xp += (leader.xp - preXP);
+                    } else {
+                        this.handleFaint();
+                    }
+                    combatFinished = true;
+                    continue;
+                }
+
+                // Simulate Execute Turn (2)
+                combatTime += Math.abs(leaderDelay - enemyDelay);
+
+                if (secondActor === leader && this.state.settings.autoPotion) {
+                    this.tryUsePotion(secondActor);
+                }
+
+                const move2 = this.getBestMove(secondActor, firstActor);
+                const isPhysical2 = move2.category === 'Physical';
+                const atkStat2 = isPhysical2 ? secondActor.currentStats.atk : secondActor.currentStats.spa;
+                const defStat2 = isPhysical2 ? firstActor.currentStats.def : firstActor.currentStats.spd;
+                const eff2 = this.getTypeEffectiveness(move2.type, firstActor.types);
+
+                const hit2 = mathEngine.calculateDamage(secondActor.level, move2.power, atkStat2, defStat2, eff2, secondActor.quality || 1);
+                firstActor.currentHp -= hit2.damage;
+                combatTime += 500;
+
+                if (firstActor.currentHp <= 0) {
+                    if (firstActor === this.activeEncounter) {
+                        const preXP = leader.xp;
+                        this.handleEnemyDefeat();
+                        stats.xp += (leader.xp - preXP);
+                    } else {
+                        this.handleFaint();
+                    }
+                    combatFinished = true;
+                }
+            }
+
+            elapsedMs -= combatTime;
+        }
+
+        this.isFastForwarding = false;
+
+        // Finalize stats
+        stats.money = this.state.trainer.money - initialMoney;
+        stats.caught = this.state.stats.caught - initialCaught;
+
+        for (const [stone, count] of Object.entries(this.state.backpack.stones)) {
+            const initialCount = initialStones[stone] || 0;
+            if (count > initialCount) {
+                stats.loot[stone] = count - initialCount;
+            }
+        }
+
+        if (this.state.party.every(p => p.currentHp <= 0)) {
+            // All fainted, place player in PokeCenter
+            this.handleWipeout();
+            if (typeof window.navigateToLocation === 'function') {
+                window.navigateToLocation("PokeCenter & PokeMarket");
+            }
+        } else {
+            this.activeEncounter = null;
+            this.updateUI();
+            this.start();
+        }
+
+        return stats;
     }
 
     switchLeader(index) {

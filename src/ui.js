@@ -583,6 +583,61 @@ function selectStarter(id) {
     renderOakLab(); // Renders the new Oak Lab UI now that we have a party
 }
 
+function showSleepModeLoading(elapsedMs) {
+    const overlayHtml = `
+        <div id="sleep-mode-loading-overlay" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.9); color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 10000;">
+            <h2>Collecting Data...</h2>
+            <p style="margin-top: 10px; font-size: 14px;">Simulating offline battles, please wait...</p>
+        </div>
+    `;
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = overlayHtml;
+    document.body.appendChild(tempDiv.firstElementChild);
+
+    // Give UI a moment to render before locking thread
+    setTimeout(() => {
+        const sleepStats = globals.battleSystem.runFastForward(elapsedMs);
+        document.getElementById('sleep-mode-loading-overlay').remove();
+        showSleepModeResults(sleepStats);
+    }, 100);
+}
+
+function showSleepModeResults(stats) {
+    let html = `
+        <div id="sleep-mode-results" onclick="this.remove()" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.8); z-index: 10000; display: flex; align-items: center; justify-content: center;">
+            <div style="background: #222; border: 2px solid #555; border-radius: 10px; padding: 20px; width: 400px; max-width: 90%; color: white; text-align: center;" onclick="event.stopPropagation()">
+                <h2>Sleep Mode Completed</h2>
+                <hr style="border-color: #444; margin: 15px 0;">
+                <p><strong>Offline Time:</strong> ${Math.floor(stats.elapsedMs / 1000 / 60)} minutes</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; text-align: left; margin-top: 15px;">
+                    <div><strong>Money Gained:</strong> $${stats.money}</div>
+                    <div><strong>Exp Gained:</strong> ${Math.floor(stats.xp)}</div>
+                    <div><strong>Pokemon Caught:</strong> ${stats.caught}</div>
+                    <div><strong>Encounters:</strong> ${stats.encounters}</div>
+                </div>
+                <h4 style="margin-top: 20px;">Loot Found:</h4>
+                <div style="max-height: 150px; overflow-y: auto; text-align: left; font-size: 14px; background: #111; padding: 10px; border-radius: 5px;">
+    `;
+
+    if (Object.keys(stats.loot).length === 0) {
+        html += `<p>No items found.</p>`;
+    } else {
+        for (const [item, count] of Object.entries(stats.loot)) {
+            html += `<div>${item} x${count}</div>`;
+        }
+    }
+
+    html += `
+                </div>
+                <p style="margin-top: 15px; font-size: 12px; color: #888;">(Click anywhere outside to close)</p>
+            </div>
+        </div>
+    `;
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = html;
+    document.body.appendChild(tempDiv.firstElementChild);
+}
+
 function startGame() {
     let bs = new BattleSystem(state, updateUI);
     setBattleSystem(bs);
@@ -794,6 +849,16 @@ async function init() {
                     // Saved profiles always start at Oak's Lab and are free to explore
                     state.currentRoute = "Professor Oak Lab";
                     switchView("PROF_OAK_LAB");
+
+                    if (state.settings.isSleepModeActive) {
+                        state.settings.isSleepModeActive = false;
+                        const lastTime = state.stats.lastSaveTime || Date.now();
+                        const elapsedMs = Date.now() - lastTime;
+
+                        if (elapsedMs > 0) {
+                            showSleepModeLoading(elapsedMs);
+                        }
+                    }
                 }
             };
 

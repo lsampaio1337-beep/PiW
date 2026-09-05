@@ -84,6 +84,9 @@ export default class Storage {
             console.error("Cannot save: No current profile selected.");
             return;
         }
+        if (state && state.stats) {
+            state.stats.lastSaveTime = Date.now();
+        }
         try {
             // Simple replacer to avoid the specific dayCareRef circular issue and config without breaking legitimate duplicate objects
             const jsonString = JSON.stringify(state, (key, value) => {
