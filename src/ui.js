@@ -646,6 +646,21 @@ async function init() {
 
         profilesContainer.innerHTML = ''; // clear
 
+        let profileAction = 'load';
+
+        const updateHeader = () => {
+            const h2 = saveManagerModal.querySelector('h2');
+            if (h2) {
+                if (profileAction === 'rename') {
+                    h2.innerHTML = "Save Profiles - <span style='color: #3498db;'>Select Profile to Rename</span>";
+                } else if (profileAction === 'erase') {
+                    h2.innerHTML = "Save Profiles - <span style='color: #f44336;'>Select Profile to Erase</span>";
+                } else {
+                    h2.innerHTML = "Save Profiles";
+                }
+            }
+        };
+
         validProfiles.forEach((profileObj, index) => {
             const profileId = profileObj.id;
             const pData = profileObj.data;
@@ -706,34 +721,53 @@ async function init() {
             `;
 
             btn.onclick = async () => {
-                splashScreen.style.display = 'none';
-                saveManagerModal.style.display = 'none';
-
-                storage.setCurrentProfile(profileId);
-
-                // Perform a deep merge to preserve nested object structures (like stats, backpack)
-                const deepMerge = (target, source) => {
-                    if (typeof source !== 'object' || source === null) return source;
-                    if (Array.isArray(source)) return source;
-                    for (const key of Object.keys(source)) {
-                        if (source[key] instanceof Object && !Array.isArray(source[key])) {
-                            if (!target[key]) target[key] = {};
-                            deepMerge(target[key], source[key]);
-                        } else {
-                            target[key] = source[key];
-                        }
+                if (profileAction === 'rename') {
+                    const newName = prompt(`Enter new name for "${profileName}":`);
+                    if (newName && newName.trim() !== "") {
+                        pData.profileName = newName.trim();
+                        window.localStorage.setItem(profileId, JSON.stringify(pData));
+                        window.location.reload();
                     }
-                    return target;
-                };
-                deepMerge(state, pData);
+                    profileAction = 'load';
+                    updateHeader();
+                } else if (profileAction === 'erase') {
+                    if (confirm(`Are you sure you want to delete "${profileName}"? This cannot be undone.`)) {
+                        storage.deleteProfile(profileId);
+                        window.location.reload();
+                    }
+                    profileAction = 'load';
+                    updateHeader();
+                } else {
+                    // Load Action
+                    splashScreen.style.display = 'none';
+                    saveManagerModal.style.display = 'none';
 
-                await loadConfigs();
+                    storage.setCurrentProfile(profileId);
 
-                startGame();
+                    // Perform a deep merge to preserve nested object structures (like stats, backpack)
+                    const deepMerge = (target, source) => {
+                        if (typeof source !== 'object' || source === null) return source;
+                        if (Array.isArray(source)) return source;
+                        for (const key of Object.keys(source)) {
+                            if (source[key] instanceof Object && !Array.isArray(source[key])) {
+                                if (!target[key]) target[key] = {};
+                                deepMerge(target[key], source[key]);
+                            } else {
+                                target[key] = source[key];
+                            }
+                        }
+                        return target;
+                    };
+                    deepMerge(state, pData);
 
-                // Saved profiles always start at Oak's Lab and are free to explore
-                state.currentRoute = "Professor Oak Lab";
-                switchView("PROF_OAK_LAB");
+                    await loadConfigs();
+
+                    startGame();
+
+                    // Saved profiles always start at Oak's Lab and are free to explore
+                    state.currentRoute = "Professor Oak Lab";
+                    switchView("PROF_OAK_LAB");
+                }
             };
 
             profilesContainer.appendChild(btn);
@@ -742,41 +776,13 @@ async function init() {
         document.getElementById('btn-new-profile').onclick = startNewGame;
 
         document.getElementById('btn-rename-profile').onclick = () => {
-            const profileStr = prompt("Enter the Profile Number you want to rename (e.g. 1, 2, 3...):");
-            const profileNum = parseInt(profileStr);
-            if (!isNaN(profileNum) && profileNum > 0 && profileNum <= validProfiles.length) {
-                const newName = prompt(`Enter new name for Profile ${profileNum}:`);
-                if (newName && newName.trim() !== "") {
-                    const idToRename = validProfiles[profileNum - 1].id;
-                    const pData = validProfiles[profileNum - 1].data;
-                    pData.profileName = newName.trim();
-                    window.localStorage.setItem(idToRename, JSON.stringify(pData));
-                    window.location.reload();
-                }
-            } else if (profileStr) {
-                alert("Invalid Profile Number.");
-            }
+            profileAction = profileAction === 'rename' ? 'load' : 'rename';
+            updateHeader();
         };
 
         document.getElementById('btn-erase-profile').onclick = () => {
-            const profileStr = prompt("Enter the Profile Number you want to erase (e.g. 1, 2, 3...):");
-            const profileNum = parseInt(profileStr);
-            if (!isNaN(profileNum) && profileNum > 0 && profileNum <= validProfiles.length) {
-                const idToDelete = validProfiles[profileNum - 1].id;
-                if (confirm(`Are you sure you want to delete Profile ${profileNum}? This cannot be undone.`)) {
-                    storage.deleteProfile(idToDelete);
-                    window.location.reload();
-                }
-            } else if (profileStr) {
-                alert("Invalid Profile Number.");
-            }
-        };
-
-        document.getElementById('btn-clean-all').onclick = () => {
-            if (confirm("Are you absolutely sure you want to erase ALL profiles? This cannot be undone.")) {
-                storage.clearAllProfiles();
-                window.location.reload();
-            }
+            profileAction = profileAction === 'erase' ? 'load' : 'erase';
+            updateHeader();
         };
 
     } else {
