@@ -491,7 +491,7 @@ window.cancelSellMode = function() {
     // Return to Market UI
     const pcButton = document.querySelector('img[src="Assets/UI/Menu/TopBar/Icon_Map.png"]');
     if (pcButton) {
-        window.changeLocation("Pokemon Center & Market");
+        window.changeLocation("PokeCenter & PokeMarket");
     }
 };
 
