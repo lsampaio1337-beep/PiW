@@ -195,10 +195,16 @@ class BattleSystem {
         enemy.currentHp = enemy.maxHp;
         enemy.moves = this.getLearnsetMoves(pBase, level);
 
-        setTimeout(() => {
-            this.activeEncounter = enemy;
-            this.combatLoop = setTimeout(() => this.startCombatLoop(), 500);
+        this.activeEncounter = enemy;
+        this.isSearching = false;
+        this.isSliding = true;
+        this.slideDuration = slideDelay;
+        this.updateUI();
+
+        this.combatLoop = setTimeout(() => {
+            this.isSliding = false;
             this.updateUI();
+            this.startCombatLoop(0); // Trigger standard combat loop instead of raw schedule turn so the UI syncs
         }, slideDelay);
     }
 
@@ -597,34 +603,47 @@ class BattleSystem {
         const gym = this.gymState.gym;
         const trainer = gym.trainers[this.gymState.currentTrainerIndex];
 
-        this.gymState.currentPokemonIndex++;
+        this.gymState.trainerPokemonIndex++;
 
-        if (this.gymState.currentPokemonIndex >= trainer.team.length) {
-            // Defeated trainer
-            this.gymState.currentTrainerIndex++;
-            this.gymState.currentPokemonIndex = 0;
-            this.stop(); // Stop loop to show next button
+        if (this.gymState.trainerPokemonIndex >= trainer.team.length) {
+            const isLeader = this.gymState.currentTrainerIndex === gym.trainers.length - 1;
+            const rewardMoney = Math.floor(Math.pow(this.activeEncounter.level, 1.5)) * (isLeader ? 100 : 20);
 
-            if (this.gymState.currentTrainerIndex >= gym.trainers.length) {
+            if (isLeader) {
                 // Defeated Gym!
-                if (!this.state.trainer.badges) this.state.trainer.badges = 0;
-
-                // Record the defeated boss
                 if (!this.state.stats.defeatedBosses) this.state.stats.defeatedBosses = {};
                 this.state.stats.defeatedBosses[gym.leader] = true;
 
-                const gymIndex = this.state.config.gyms.findIndex(g => g.name === gym.name);
-                if (gymIndex !== -1 && this.state.trainer.badges === gymIndex) {
-                    this.state.trainer.badges++;
+                if (gym.name === "Indigo Plateau") {
+                    this.state.stats.defeatedBosses["Champion Rival"] = true;
+                    this.state.stats.defeatedBosses["Elite 4 Lorelei"] = true;
                 }
 
-                // Bonus money for winning
-                this.state.trainer.money += 1000 * this.state.trainer.badges;
+                if (!this.state.trainer.pendingGifts) this.state.trainer.pendingGifts = [];
+                this.state.trainer.pendingGifts.push({ type: 'badge' });
+                this.state.trainer.pendingGifts.push({ type: 'money', amount: rewardMoney });
+                this.state.stats.giftIconUnlocked = true;
+
+                setTimeout(() => {
+                    this.fleeGym();
+                }, 1000);
+            } else {
+                // Defeated trainer
+                this.state.trainer.money += rewardMoney;
+                this.gymState.currentTrainerIndex++;
+                this.gymState.trainerPokemonIndex = 0;
+
+                setTimeout(() => {
+                    this.gymState.inLobby = true;
+                    if (typeof window.switchView === 'function') window.switchView('GYM');
+                    this.updateGymUI();
+                }, 1000);
             }
-            this.updateGymUI();
         } else {
             // Next pokemon
-            this.searchNext();
+            setTimeout(() => {
+                this.generateGymEncounter(1000);
+            }, 1000);
         }
     }
 
