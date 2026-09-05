@@ -648,6 +648,35 @@ async function init() {
 
         let profileAction = 'load';
 
+        // Variables to hold pending rename state
+        let pendingRenameId = null;
+        let pendingRenameData = null;
+
+        const renameModal = document.getElementById('rename-modal');
+        const renameInput = document.getElementById('rename-input');
+        const btnRenameSave = document.getElementById('btn-rename-save');
+        const btnRenameCancel = document.getElementById('btn-rename-cancel');
+
+        if (btnRenameSave) {
+            btnRenameSave.onclick = () => {
+                if (pendingRenameId && pendingRenameData && renameInput.value.trim() !== "") {
+                    pendingRenameData.profileName = renameInput.value.trim();
+                    window.localStorage.setItem(pendingRenameId, JSON.stringify(pendingRenameData));
+                    window.location.reload();
+                }
+            };
+        }
+
+        if (btnRenameCancel) {
+            btnRenameCancel.onclick = () => {
+                if (renameModal) renameModal.style.display = 'none';
+                pendingRenameId = null;
+                pendingRenameData = null;
+                profileAction = 'load';
+                updateHeader();
+            };
+        }
+
         const updateHeader = () => {
             const h2 = saveManagerModal.querySelector('h2');
             if (h2) {
@@ -722,14 +751,12 @@ async function init() {
 
             btn.onclick = async () => {
                 if (profileAction === 'rename') {
-                    const newName = prompt(`Enter new name for "${profileName}":`);
-                    if (newName && newName.trim() !== "") {
-                        pData.profileName = newName.trim();
-                        window.localStorage.setItem(profileId, JSON.stringify(pData));
-                        window.location.reload();
+                    if (renameModal && renameInput) {
+                        pendingRenameId = profileId;
+                        pendingRenameData = pData;
+                        renameInput.value = profileName;
+                        renameModal.style.display = 'flex';
                     }
-                    profileAction = 'load';
-                    updateHeader();
                 } else if (profileAction === 'erase') {
                     if (confirm(`Are you sure you want to delete "${profileName}"? This cannot be undone.`)) {
                         storage.deleteProfile(profileId);
