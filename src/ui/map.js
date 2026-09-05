@@ -1,5 +1,6 @@
 import { state, globals } from '../state.js';
 import { updateUI, switchView } from '../ui.js';
+import { setupMarket } from './market.js';
 
 export function showMap() {
     let rightCol = document.getElementById('modal-overlay');
@@ -236,7 +237,7 @@ export function navigateToLocation(locationName) {
         switchView("DAYCARE_HUB");
         updateUI();
         return;
-    } else if (locationName === "PokeCenter & PokeMarket" || locationName.includes("Market")) {
+    } else if (locationName === "PokeCenter & PokeMarket" || locationName.includes("Market") || locationName.includes("Center")) {
         if (battleSystem) {
              battleSystem.stop();
              battleSystem.activeEncounter = null;
@@ -245,6 +246,7 @@ export function navigateToLocation(locationName) {
         }
         switchView("POKEMON_CENTER_MARKET");
         const vCenter = document.getElementById("view-center-market");
+        setupMarket(vCenter);
     } else if (locationName.includes("Gym") || locationName === "Indigo Plateu") {
         switchView("GYM");
         let bgImg = "";

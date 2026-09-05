@@ -61,26 +61,26 @@ export function setupMarket(vCenter) {
 export function openPokeMarketBuy() {
     // Generate tabs: Balls, Potions, Stones
     const html = `
-        <div id="market-buy-modal" style="display: flex; flex-direction: column; width: 100%; height: 100%;">
+        <div id="market-buy-modal" style="display: flex; flex-direction: column; width: 100%; height: 100%; container-type: inline-size;">
 
-            <div style="display: flex; gap: 10px; margin-bottom: 15px; justify-content: center;">
-                <button onclick="window.renderPokeMarketTab('pokeballs')" style="padding: 10px 20px; font-weight: bold;">Balls</button>
-                <button onclick="window.renderPokeMarketTab('potions')" style="padding: 10px 20px; font-weight: bold;">Potions</button>
-                <button onclick="window.renderPokeMarketTab('stones')" style="padding: 10px 20px; font-weight: bold;">Stones</button>
+            <div style="display: flex; gap: 2cqw; margin-bottom: 3cqw; justify-content: center;">
+                <button onclick="window.renderPokeMarketTab('pokeballs')" style="padding: 1.5cqw 3cqw; font-size: 3cqw; font-weight: bold; border-radius: 1cqw;">Balls</button>
+                <button onclick="window.renderPokeMarketTab('potions')" style="padding: 1.5cqw 3cqw; font-size: 3cqw; font-weight: bold; border-radius: 1cqw;">Potions</button>
+                <button onclick="window.renderPokeMarketTab('stones')" style="padding: 1.5cqw 3cqw; font-size: 3cqw; font-weight: bold; border-radius: 1cqw;">Stones</button>
             </div>
 
-            <div style="margin-bottom: 15px; display: flex; align-items: center; justify-content: center; gap: 10px;">
-                <label style="font-weight: bold; font-size: 18px;">Quantity to Buy:</label>
-                <input type="text" id="market-global-qty" value="1" oninput="window.updateMarketPrices()" style="width: 100px; padding: 5px; font-size: 18px; text-align: center; border-radius: 5px; border: 1px solid #ccc;">
+            <div style="margin-bottom: 3cqw; display: flex; align-items: center; justify-content: center; gap: 2cqw;">
+                <label style="font-weight: bold; font-size: 4cqw;">Quantity to Buy:</label>
+                <input type="text" id="market-global-qty" value="1" oninput="window.updateMarketPrices()" style="width: 15cqw; padding: 1cqw; font-size: 4cqw; text-align: center; border-radius: 1cqw; border: 1px solid #ccc;">
             </div>
 
-            <div id="market-buy-content" style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; overflow-y: auto; flex: 1; padding: 10px;">
+            <div id="market-buy-content" style="display: flex; flex-wrap: wrap; gap: 2cqw; justify-content: center; overflow-y: auto; flex: 1; padding: 2cqw;">
                 <!-- Cards injected here -->
             </div>
         </div>
     `;
 
-    showModal("PokeMarket", html);
+    showModal(`<span style="font-size: 5cqw;">PokeMarket</span>`, html);
 
     // Apply specific modal overrides
     const modalBox = document.getElementById('modal-content-box');
@@ -90,6 +90,7 @@ export function openPokeMarketBuy() {
         modalBox.style.height = 'max-content';
         modalBox.style.maxWidth = '90%';
         modalBox.style.maxHeight = '90%';
+        modalBox.style.containerType = 'inline-size';
     }
 
     // Default to balls tab
