@@ -1,7 +1,8 @@
 export const state = {
     trainer: {
         money: 0,
-        badges: 0
+        badges: 0,
+        pendingGifts: []
     },
     party: [],
     box: [],
@@ -27,6 +28,7 @@ export const state = {
         shiniesCaught: 0,
         playtime: 0,
         completedChallenges: 0,
+        giftIconUnlocked: false,
         qTaskTier: 0,
         cTaskTier: 0,
         shinySeenTaskTier: 0,

@@ -73,136 +73,77 @@ class BattleSystem {
         return bestMove;
     }
 
-    startGymBattle(gymName) {
+    enterGymLobby(gymName) {
         const gym = this.state.config.gyms.find(g => g.name === gymName);
         if (!gym) return;
 
         this.stop();
         this.gymState = {
             isActive: true,
+            inLobby: true,
             gym: gym,
-            currentTrainerIndex: 0
+            currentTrainerIndex: 0,
+            previousBallTier: this.state.settings.activeBallTier
         };
 
-        // Update gym UI specifically to show current trainer
+        this.state.settings.activeBallTier = -1; // Force no pokeball
         this.updateGymUI();
+    }
+
+    startGymBattle(trainerIndex) {
+        if (!this.gymState || !this.gymState.isActive) return;
+        if (trainerIndex !== this.gymState.currentTrainerIndex) return; // Prevent clicking disabled buttons
+
+        this.gymState.inLobby = false;
+
+        if (typeof window.switchView === 'function') window.switchView('BATTLE_ARENA');
+
+        const delay = 1000;
+
+        if (this.gymState && this.gymState.isActive) {
+            this.generateGymEncounter(delay);
+        }
+    }
+
+    fleeGym() {
+        if (this.gymState && this.gymState.previousBallTier !== undefined) {
+            this.state.settings.activeBallTier = this.gymState.previousBallTier;
+        }
+        this.gymState = { isActive: false };
+        if (typeof window.switchView === 'function') window.switchView('PROF_OAK_LAB');
+        if (typeof window.showMap === 'function') window.showMap();
+        if (typeof window.updateUI === 'function') window.updateUI();
     }
 
     updateGymUI() {
         const vGym = document.getElementById("view-gym");
         const contentArea = document.getElementById("gym-content-area");
-        if (!vGym || !contentArea) return;
+        if (contentArea && this.gymState && this.gymState.isActive && this.gymState.inLobby) {
+            let html = `<div style="background-color: rgba(0,0,0,0.8); padding: 30px; border-radius: 8px; text-align: center; color: white; min-width: 300px;">
+                <h2>${this.gymState.gym.name}</h2>
+                <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 20px;">`;
 
-        const gym = this.gymState.gym;
-        if (!gym) return;
+            for (let i = 0; i < this.gymState.gym.trainers.length; i++) {
+                const trainer = this.gymState.gym.trainers[i];
+                const isCurrent = i === this.gymState.currentTrainerIndex;
+                const isDefeated = i < this.gymState.currentTrainerIndex;
+                const btnState = isCurrent ? '' : 'disabled';
+                const opacity = isCurrent ? '1.0' : '0.5';
+                const cursor = isCurrent ? 'pointer' : 'not-allowed';
+                let btnText = isDefeated ? `Defeated ${trainer.name}` : `Fight ${trainer.name}`;
 
-        const trainer = gym.trainers[this.gymState.currentTrainerIndex];
-
-        if (trainer) {
-            // Let's add sprites and damage numbers to gym battles!
-            contentArea.innerHTML = `
-                <p>Next Opponent: ${trainer.name}</p>
-
-                <div id="gym-battle-area" style="display: none; margin-top: 20px; margin-bottom: 20px; position: relative;">
-                    <div style="display: flex; justify-content: space-between; align-items: flex-end; height: 150px; background: rgba(0,0,0,0.3); border: 2px solid #555; border-radius: 10px; padding: 20px;">
-
-                        <div style="text-align: left; width: 40%;">
-                            <h4 id="gym-player-name">Player</h4>
-                            <div style="width: 100%; height: 10px; background: #333; border: 1px solid #777;">
-                                <div id="gym-player-hp-bar" style="width: 100%; height: 100%; background: #2ecc71;"></div>
-                            </div>
-                            <span id="gym-player-hp-text"></span>
-                            <div style="position: relative; height: 80px; margin-top: 10px;">
-                                <img id="gym-player-sprite" src="" style="position: absolute; bottom: 0; left: 0; max-height: 80px; transform: scaleX(-1);">
-                            </div>
-                        </div>
-
-                        <div id="gym-combat-log" style="width: 20%; font-size: 12px; color: #ccc; text-align: center; overflow: hidden; height: 100px;"></div>
-
-                        <div style="text-align: right; width: 40%;">
-                            <h4 id="gym-enemy-name">Enemy</h4>
-                            <div style="width: 100%; height: 10px; background: #333; border: 1px solid #777;">
-                                <div id="gym-enemy-hp-bar" style="width: 100%; height: 100%; background: #e74c3c; float: right;"></div>
-                            </div>
-                            <span id="gym-enemy-hp-text"></span>
-                            <div style="position: relative; height: 80px; margin-top: 10px;">
-                                <img id="gym-enemy-sprite" src="" style="position: absolute; bottom: 0; right: 0; max-height: 80px;">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <button id="btn-start-gym-battle" onclick="window.battleEngine.startNextGymBattle()" style="padding: 10px 20px; font-size: 16px; cursor: pointer;">Battle ${trainer.name}</button>
-                <br><br>
-                <button onclick="window.battleEngine.stopGymBattle()" style="padding: 5px 10px; background: #e74c3c; border: none; color: white; border-radius: 3px; cursor: pointer;">Flee Gym</button>
-            `;
-            // Temporary expose for the button
-            window.battleEngine = this;
-
-            // Re-bind to use our special gym start func that toggles visibility
-            window.battleEngine.startNextGymBattle = () => {
-                document.getElementById('btn-start-gym-battle').style.display = 'none';
-                document.getElementById('gym-battle-area').style.display = 'block';
-                this.searchNext();
-            };
-        } else {
-            // Gym completed
-            contentArea.innerHTML = `
-                <h3>You defeated ${gym.leader}!</h3>
-                <p>You earned the ${gym.name} badge.</p>
-                <button onclick="window.battleEngine.stopGymBattle()" style="padding: 10px 20px; cursor: pointer;">Leave</button>
-            `;
-            window.battleEngine = this;
-        }
-    }
-
-    stopGymBattle() {
-        this.gymState.isActive = false;
-        this.gymState.gym = null;
-        this.stop();
-
-        // Return to normal map or idle
-        if (typeof window.navigateToLocation === 'function') {
-             // Reset UI back to just the gym entry
-             window.navigateToLocation(this.state.currentRoute);
-        }
-    }
-
-    async searchNext() {
-        if (this.state.party.every(p => p.currentHp <= 0)) {
-            this.handleWipeout();
-            return;
-        }
-
-        if (this.state.currentRoute && this.state.currentRoute.startsWith("Casino - ")) {
-            const cost = this.state.casinoDoubleShiny ? 20 : 10;
-            if (this.state.trainer.money < cost) {
-                alert("Not enough money! You need $" + cost + " to continue hunting here.");
-                this.stop();
-                if (typeof window.navigateToLocation === 'function') {
-                    window.navigateToLocation("Casino");
+                // For Elite 4/Indigo Plateau, change "Fight Leader" to the trainer's name if they are the leader (index 4)
+                if (trainer.name.includes("Leader")) {
+                    btnText = isDefeated ? `Defeated ${trainer.name.replace("Leader ", "")}` : `Fight ${trainer.name.replace("Leader ", "")}`;
                 }
-                return;
+
+                html += `<button ${btnState} onclick="window.startGymBattle(${i})" style="padding: 10px 20px; font-size: 16px; cursor: ${cursor}; background-color: #3498db; color: white; border: none; border-radius: 5px; opacity: ${opacity};">${btnText}</button>`;
             }
-            this.state.trainer.money -= cost;
+
+            html += `<button onclick="window.fleeGym()" style="padding: 10px 20px; font-size: 16px; margin-top: 20px; cursor: pointer; background-color: #e74c3c; color: white; border: none; border-radius: 5px;">Flee Gym</button>`;
+            html += `</div></div>`;
+            contentArea.innerHTML = html;
         }
-
-        this.isSearching = true;
-        this.activeEncounter = null;
-        this.updateUI();
-
-        // Speed Delays: Search Time: BaseSearchTime(3.0s) * (100 / (100 + Speed)), minimum 0.30s
-        const leaderSpeed = this.state.party[0].currentStats.spe;
-        let delay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed));
-        delay = Math.max(300, delay) / this.state.settings.gameSpeed;
-
-        this.combatLoop = setTimeout(() => {
-            if (this.gymState.isActive) {
-                this.generateGymEncounter(delay);
-            } else {
-                this.generateEncounter(delay);
-            }
-        }, delay);
     }
 
     generateGymEncounter(slideDelay) {
@@ -211,68 +152,50 @@ class BattleSystem {
 
         const trainer = gym.trainers[this.gymState.currentTrainerIndex];
         if (!trainer) {
-            // Should not happen, but safe fallback
-            this.stopGymBattle();
+            this.fleeGym();
             return;
         }
 
-        // We'll simulate fighting the entire team as sequential encounters for now
-        // A full implementation might handle the team differently, but this fits the idle structure easiest
-        // For this task, we will just pick a random pokemon from the trainer's team or the first one
-        // Better: We should track which pokemon of the trainer we are on.
-        // Let's add a `currentPokemonIndex` to `gymState`.
-        if (this.gymState.currentPokemonIndex === undefined) {
-            this.gymState.currentPokemonIndex = 0;
+        if (this.gymState.trainerPokemonIndex === undefined) {
+            this.gymState.trainerPokemonIndex = 0;
         }
 
-        const pokemonDef = trainer.team[this.gymState.currentPokemonIndex];
-        if (!pokemonDef) return; // Should have been handled in defeat
+        const teamPokemon = trainer.team[this.gymState.trainerPokemonIndex];
+        if (!teamPokemon) {
+            this.fleeGym(); // fallback if team finishes awkwardly
+            return;
+        }
 
-        const pokemonBase = this.state.config.pokemonData.find(p => p.id === pokemonDef.id);
-        const level = pokemonDef.level;
+        const pBase = this.state.config.pokemonData.find(p => p.id === teamPokemon.id);
+        if (!pBase) return;
 
-        // Gym leaders and trainers have fixed quality (e.g. Regular or Uncommon)
-        const isLeader = this.gymState.currentTrainerIndex === gym.trainers.length - 1;
-        const q = isLeader ? { name: "Rare", q: 1.40 } : { name: "Uncommon", q: 1.20 };
-
-        // Track seen for pokedex
-        if (!this.state.stats.seenSpecies) this.state.stats.seenSpecies = {};
-        this.state.stats.seenSpecies[pokemonBase.name] = true;
-
-        // Give them good IVs
+        // Gym pokemon have fixed max IVs (100 in everything, 600 total) and Q=1.0 for simplicity, or we can just give them average
         const ivs = { hp: 50, atk: 50, def: 50, spa: 50, spd: 50, spe: 50 };
-        if (isLeader) {
-            ivs.hp = 80; ivs.atk = 80; ivs.def = 80; ivs.spa = 80; ivs.spd = 80; ivs.spe = 80;
-        }
+        const q = 1.0;
+        const level = teamPokemon.level;
 
-        const stats = {
-            hp: mathEngine.calculateHP(pokemonBase.hp, ivs.hp, level, q.q),
-            atk: mathEngine.calculateStat(pokemonBase.atk, ivs.atk, level, q.q),
-            def: mathEngine.calculateStat(pokemonBase.def, ivs.def, level, q.q),
-            spa: mathEngine.calculateStat(pokemonBase.spa, ivs.spa, level, q.q),
-            spd: mathEngine.calculateStat(pokemonBase.spd, ivs.spd, level, q.q),
-            spe: mathEngine.calculateStat(pokemonBase.spe, ivs.spe, level, q.q)
-        };
-
-        const bst = pokemonBase.hp + pokemonBase.atk + pokemonBase.def + pokemonBase.spa + pokemonBase.spd + pokemonBase.spe;
-        const totalIV = ivs.hp + ivs.atk + ivs.def + ivs.spa + ivs.spd + ivs.spe;
-
-        this.activeEncounter = {
-            id: pokemonBase.id,
-            name: pokemonBase.name,
+        const enemy = {
+            id: pBase.id,
+            name: pBase.name,
             level: level,
-            types: pokemonBase.types,
-            qualityName: q.name,
-            quality: q.q,
+            types: pBase.types,
+            quality: q,
             ivs: ivs,
-            currentStats: stats,
-            maxHp: stats.hp,
-            currentHp: stats.hp,
-            ev: mathEngine.calculateEV(bst, level, q.q, totalIV),
-            bst: bst,
-            moves: this.getLearnsetMoves(pokemonBase, level)
+            sumIV: 300,
+            qTier: 'Regular',
+            maxHp: mathEngine.calculateHP(pBase.hp, ivs.hp, level, q),
+            currentStats: {
+                atk: mathEngine.calculateStat(pBase.atk, ivs.atk, level, q),
+                def: mathEngine.calculateStat(pBase.def, ivs.def, level, q),
+                spa: mathEngine.calculateStat(pBase.spa, ivs.spa, level, q),
+                spd: mathEngine.calculateStat(pBase.spd, ivs.spd, level, q),
+                spe: mathEngine.calculateStat(pBase.spe, ivs.spe, level, q)
+            }
         };
+        enemy.currentHp = enemy.maxHp;
+        enemy.moves = this.getLearnsetMoves(pBase, level);
 
+        this.activeEncounter = enemy;
         this.isSearching = false;
         this.isSliding = true;
         this.slideDuration = slideDelay;
@@ -281,7 +204,7 @@ class BattleSystem {
         this.combatLoop = setTimeout(() => {
             this.isSliding = false;
             this.updateUI();
-            this.scheduleTurn();
+            this.startCombatLoop(0); // Trigger standard combat loop instead of raw schedule turn so the UI syncs
         }, slideDelay);
     }
 
@@ -680,34 +603,47 @@ class BattleSystem {
         const gym = this.gymState.gym;
         const trainer = gym.trainers[this.gymState.currentTrainerIndex];
 
-        this.gymState.currentPokemonIndex++;
+        this.gymState.trainerPokemonIndex++;
 
-        if (this.gymState.currentPokemonIndex >= trainer.team.length) {
-            // Defeated trainer
-            this.gymState.currentTrainerIndex++;
-            this.gymState.currentPokemonIndex = 0;
-            this.stop(); // Stop loop to show next button
+        if (this.gymState.trainerPokemonIndex >= trainer.team.length) {
+            const isLeader = this.gymState.currentTrainerIndex === gym.trainers.length - 1;
+            const rewardMoney = Math.floor(Math.pow(this.activeEncounter.level, 1.5)) * (isLeader ? 100 : 20);
 
-            if (this.gymState.currentTrainerIndex >= gym.trainers.length) {
+            if (isLeader) {
                 // Defeated Gym!
-                if (!this.state.trainer.badges) this.state.trainer.badges = 0;
-
-                // Record the defeated boss
                 if (!this.state.stats.defeatedBosses) this.state.stats.defeatedBosses = {};
                 this.state.stats.defeatedBosses[gym.leader] = true;
 
-                const gymIndex = this.state.config.gyms.findIndex(g => g.name === gym.name);
-                if (gymIndex !== -1 && this.state.trainer.badges === gymIndex) {
-                    this.state.trainer.badges++;
+                if (gym.name === "Indigo Plateau") {
+                    this.state.stats.defeatedBosses["Champion Rival"] = true;
+                    this.state.stats.defeatedBosses["Elite 4 Lorelei"] = true;
                 }
 
-                // Bonus money for winning
-                this.state.trainer.money += 1000 * this.state.trainer.badges;
+                if (!this.state.trainer.pendingGifts) this.state.trainer.pendingGifts = [];
+                this.state.trainer.pendingGifts.push({ type: 'badge' });
+                this.state.trainer.pendingGifts.push({ type: 'money', amount: rewardMoney });
+                this.state.stats.giftIconUnlocked = true;
+
+                setTimeout(() => {
+                    this.fleeGym();
+                }, 1000);
+            } else {
+                // Defeated trainer
+                this.state.trainer.money += rewardMoney;
+                this.gymState.currentTrainerIndex++;
+                this.gymState.trainerPokemonIndex = 0;
+
+                setTimeout(() => {
+                    this.gymState.inLobby = true;
+                    if (typeof window.switchView === 'function') window.switchView('GYM');
+                    this.updateGymUI();
+                }, 1000);
             }
-            this.updateGymUI();
         } else {
             // Next pokemon
-            this.searchNext();
+            setTimeout(() => {
+                this.generateGymEncounter(1000);
+            }, 1000);
         }
     }
 
@@ -791,8 +727,9 @@ class BattleSystem {
 
         if (this.gymState && this.gymState.isActive) {
             // Flee gym
-            this.stopGymBattle();
-            this.updateUI();
+            setTimeout(() => {
+                this.fleeGym();
+            }, 3000);
         } else {
             // Return to poke center (simulated by just waiting and searching again for idle game)
             setTimeout(() => {

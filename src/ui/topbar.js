@@ -131,6 +131,20 @@ export function updateTopbar() {
             exclamation.style.display = 'none';
         }
     }
+
+    const giftContainer = document.getElementById('btn-gift-container');
+    const giftExclamation = document.getElementById('gift-exclamation');
+    if (state.stats.giftIconUnlocked) {
+        giftContainer.style.display = 'inline-block';
+        if (state.trainer.pendingGifts && state.trainer.pendingGifts.length > 0) {
+            giftExclamation.style.display = 'block';
+        } else {
+            giftExclamation.style.display = 'none';
+        }
+    } else {
+        giftContainer.style.display = 'none';
+    }
+
     const calendarNotification = document.getElementById('calendar-notification');
     if (calendarNotification) {
         if (checkDailyRewardAvailable()) {
