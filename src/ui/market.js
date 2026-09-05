@@ -104,23 +104,55 @@ export function openPokeMarketBuy() {
 
 export function parseMarketQuantity(valStr) {
     if (!valStr) return 1;
-    let val = valStr.toLowerCase().trim();
+    let val = valStr.toUpperCase().trim();
     let multiplier = 1;
-    if (val.endsWith('k')) { multiplier = 1000; val = val.slice(0, -1); }
-    else if (val.endsWith('m')) { multiplier = 1000000; val = val.slice(0, -1); }
-    else if (val.endsWith('b')) { multiplier = 1000000000; val = val.slice(0, -1); }
-    else if (val.endsWith('t')) { multiplier = 1000000000000; val = val.slice(0, -1); }
+    if (val.endsWith('K')) { multiplier = 1000; val = val.slice(0, -1); }
+    else if (val.endsWith('M')) { multiplier = 1000000; val = val.slice(0, -1); }
+    else if (val.endsWith('B')) { multiplier = 1000000000; val = val.slice(0, -1); }
+    else if (val.endsWith('T')) { multiplier = 1000000000000; val = val.slice(0, -1); }
 
     let parsed = parseFloat(val);
     if (isNaN(parsed) || parsed <= 0) return 1;
     return Math.floor(parsed * multiplier);
 }
 
+export function formatMarketNumber(num) {
+    if (num < 1000) return num.toString();
+
+    let suffix = '';
+    let val = num;
+    if (num >= 1000000000000) { suffix = 'T'; val = num / 1000000000000; }
+    else if (num >= 1000000000) { suffix = 'B'; val = num / 1000000000; }
+    else if (num >= 1000000) { suffix = 'M'; val = num / 1000000; }
+    else if (num >= 1000) { suffix = 'K'; val = num / 1000; }
+
+    // Round up to 1 decimal place
+    // 4.44 -> 4.5
+    let rounded = Math.ceil(val * 10) / 10;
+
+    // Check if rounding changed the original meaning
+    let origRecomputed = rounded;
+    if (suffix === 'T') origRecomputed *= 1000000000000;
+    else if (suffix === 'B') origRecomputed *= 1000000000;
+    else if (suffix === 'M') origRecomputed *= 1000000;
+    else if (suffix === 'K') origRecomputed *= 1000;
+
+    let displayStr = rounded.toString() + suffix;
+    if (origRecomputed !== num) {
+        displayStr = '~' + displayStr;
+    }
+    return displayStr;
+}
+
 export function updateMarketPrices() {
     const qtyInput = document.getElementById('market-global-qty');
     if (!qtyInput) return;
 
-    const qty = parseMarketQuantity(qtyInput.value);
+    let qty = parseMarketQuantity(qtyInput.value);
+    if (qty > 1000000) {
+        qty = 1000000;
+        qtyInput.value = "1M";
+    }
 
     // Update all cards based on their base price
     document.querySelectorAll('.market-item-card').forEach(card => {
@@ -128,8 +160,7 @@ export function updateMarketPrices() {
         const finalPrice = basePrice * qty;
         const priceLabel = card.querySelector('.market-final-price');
         if (priceLabel) {
-            // Memory: format with k/m/b/t if needed, but for now exact number is fine, or simple formatting
-            priceLabel.textContent = '$' + finalPrice.toLocaleString();
+            priceLabel.textContent = '$' + formatMarketNumber(finalPrice);
         }
     });
 }
@@ -139,15 +170,18 @@ export function renderPokeMarketTab(category) {
     if (!content) return;
 
     let items = [];
+    let cols = 4;
 
     if (category === 'pokeballs') {
+        cols = 4;
         items = state.config.balance.items.pokeballs.map(b => ({
             name: b.name,
             price: b.price,
             img: `./Assets/Items/Balls/${b.name}.png`,
-            attrLabel: `Efficiency: ${b.multiplier}x`
+            attrLabel: b.name === 'Masterball' ? `Efficiency: 100%` : `Efficiency: ${b.multiplier}x`
         }));
     } else if (category === 'potions') {
+        cols = 7;
         items = state.config.balance.items.potions.map(p => {
             let invName = p.name;
             if (p.name === 'Regular Potion') invName = 'Regular Potion';
@@ -161,6 +195,7 @@ export function renderPokeMarketTab(category) {
             };
         });
     } else if (category === 'stones') {
+        cols = 6;
         const stonePrice = state.config.balance.items.stones.price;
         // Generate list from backpack stone keys
         items = Object.keys(state.backpack.stones).map(stoneName => ({
@@ -171,20 +206,21 @@ export function renderPokeMarketTab(category) {
         }));
     }
 
-    let html = '';
+    let html = `<div style="display: grid; grid-template-columns: repeat(${cols}, 120px); gap: 15px; justify-content: center;">`;
     items.forEach(item => {
         html += `
             <div class="market-item-card" data-price="${item.price}" data-id="${item.name}" data-category="${category}"
                 onclick="window.buyItem('${item.name}', ${item.price}, '${category}')"
-                style="background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; padding: 10px; width: 120px; text-align: center; cursor: pointer; transition: transform 0.2s;">
-                <div style="font-size: 14px; font-weight: bold; margin-bottom: 5px; height: 32px; display: flex; align-items: center; justify-content: center;">${item.name}</div>
-                <img src="${item.img}" style="width: 60px; height: 60px; object-fit: contain; margin-bottom: 5px;">
-                <div style="font-size: 12px; color: #f1c40f; margin-bottom: 5px;">${item.attrLabel}</div>
-                <div style="font-size: 12px; color: #bdc3c7;">Base: $${item.price.toLocaleString()}</div>
-                <div class="market-final-price" style="font-size: 14px; font-weight: bold; color: #2ecc71; margin-top: 5px;">$${item.price.toLocaleString()}</div>
+                style="background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; padding: 10px; text-align: center; cursor: pointer; transition: transform 0.2s; container-type: inline-size;">
+                <div style="font-size: 14cqw; font-weight: bold; margin-bottom: 5px; height: 32px; display: flex; align-items: center; justify-content: center;">${item.name}</div>
+                <img src="${item.img}" style="width: 50cqw; height: 50cqw; object-fit: contain; margin-bottom: 5px;">
+                <div style="font-size: 12cqw; color: #f1c40f; margin-bottom: 5px;">${item.attrLabel}</div>
+                <div style="font-size: 12cqw; color: #bdc3c7;">Base: $${formatMarketNumber(item.price)}</div>
+                <div class="market-final-price" style="font-size: 14cqw; font-weight: bold; color: #2ecc71; margin-top: 5px;">$${formatMarketNumber(item.price)}</div>
             </div>
         `;
     });
+    html += `</div>`;
 
     content.innerHTML = html;
     updateMarketPrices(); // Apply current quantity to new cards

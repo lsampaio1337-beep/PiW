@@ -26,7 +26,7 @@ const balance = {
         {"name": "Max Potion", "price": 300000, "heal": 999999}
       ],
       "stones": {
-         "price": 500,
+         "price": 50000,
          "sell": 200
       }
     }
