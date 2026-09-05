@@ -250,7 +250,8 @@ export function navigateToLocation(locationName) {
                 <h2>PokeCenter & PokeMarket</h2>
                 <div style="margin-top: 20px;">
                     <button id="btn-heal-all" style="padding: 10px 20px; font-size: 16px; margin-right: 10px;">Pokemon Center (Heal All)</button>
-                    <button id="btn-market-buy" style="padding: 10px 20px; font-size: 16px;">Market (Buy Items)</button>
+                    <button id="btn-market-buy" style="padding: 10px 20px; font-size: 16px; margin-right: 10px;">Market (Buy Items)</button>
+                    <button id="btn-market-sell" style="padding: 10px 20px; font-size: 16px;">Market (Sell Items)</button>
                 </div>
                 <div id="market-panel" style="margin-top: 20px; display: none; text-align: left; max-height: 300px; overflow-y: auto;">
                     <h3>Buy Items</h3>
@@ -269,7 +270,15 @@ export function navigateToLocation(locationName) {
             updateUI();
         };
 
+
+        document.getElementById('btn-market-sell').onclick = () => {
+            if (window.startSellMode) {
+                window.startSellMode();
+            }
+        };
+
         document.getElementById('btn-market-buy').onclick = () => {
+
             const panel = document.getElementById('market-panel');
             panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
             if(panel.style.display === 'block') {
