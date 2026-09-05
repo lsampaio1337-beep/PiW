@@ -198,7 +198,9 @@ export function renderPokeMarketTab(category) {
         cols = 6;
         const stonePrice = state.config.balance.items.stones.price;
         // Generate list from backpack stone keys
-        items = Object.keys(state.backpack.stones).map(stoneName => ({
+        let stoneKeys = Object.keys(state.backpack.stones);
+        stoneKeys.sort((a, b) => a.localeCompare(b));
+        items = stoneKeys.map(stoneName => ({
             name: stoneName,
             price: stonePrice,
             img: `./Assets/Items/Stones/${stoneName}.png`,
@@ -206,12 +208,12 @@ export function renderPokeMarketTab(category) {
         }));
     }
 
-    let html = `<div style="display: grid; grid-template-columns: repeat(${cols}, 120px); gap: 15px; justify-content: center;">`;
+    let html = `<div style="display: grid; grid-template-columns: repeat(${cols}, minmax(0, 120px)); gap: 1vw; justify-content: center; width: 100%;">`;
     items.forEach(item => {
         html += `
             <div class="market-item-card" data-price="${item.price}" data-id="${item.name}" data-category="${category}"
                 onclick="window.buyItem('${item.name}', ${item.price}, '${category}')"
-                style="background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; padding: 10px; text-align: center; cursor: pointer; transition: transform 0.2s; container-type: inline-size;">
+                style="background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; padding: 5px; text-align: center; cursor: pointer; transition: transform 0.2s; container-type: inline-size; display: flex; flex-direction: column; align-items: center; justify-content: center;">
                 <div style="font-size: 14cqw; font-weight: bold; margin-bottom: 5px; height: 32px; display: flex; align-items: center; justify-content: center;">${item.name}</div>
                 <img src="${item.img}" style="width: 50cqw; height: 50cqw; object-fit: contain; margin-bottom: 5px;">
                 <div style="font-size: 12cqw; color: #f1c40f; margin-bottom: 5px;">${item.attrLabel}</div>
