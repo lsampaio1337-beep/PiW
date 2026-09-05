@@ -97,3 +97,33 @@ export function setActiveItem(type, tierIdx) {
     }
     renderBackpackTab(type === 'ball' ? 'pokeballs' : 'potions');
 }
+
+window.sellItem = function(category, itemName, inputId, unitPrice) {
+    const input = document.getElementById(inputId);
+    if (!input) return;
+
+    const qtyToSell = parseInt(input.value) || 0;
+    if (qtyToSell <= 0) return;
+
+    // Check inventory bounds
+    let currentQty = state.backpack[category][itemName] || 0;
+    if (qtyToSell > currentQty) {
+        alert("You don't have that many to sell!");
+        return;
+    }
+
+    // Deduct and add money
+    state.backpack[category][itemName] -= qtyToSell;
+
+    // Clean up if it hits 0 so it doesn't just show 0 in regular mode
+    if (state.backpack[category][itemName] === 0) {
+        delete state.backpack[category][itemName];
+    }
+
+    const totalRevenue = qtyToSell * unitPrice;
+    state.trainer.money += totalRevenue;
+
+    // Trigger UI updates
+    updateUI();
+    renderBackpackTab(category);
+};

@@ -479,7 +479,7 @@ window.startSellMode = function() {
 
     // Open backpack directly to pokemon tab
     state.backpack.activePocket = 'pokemon';
-    document.getElementById('backpack-modal').style.display = 'block';
+    window.showBackpack();
     renderBackpackTab('pokemon');
 };
 
