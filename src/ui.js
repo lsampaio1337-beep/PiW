@@ -531,6 +531,9 @@ async function loadConfigs() {
 }
 
 function selectStarter(id) {
+    if (!storage.currentProfileId) {
+        storage.createNewProfile();
+    }
     const pData = state.config.pokemonData.find(p => p.id === id);
     const q = 1.40; // Fixed Rare
     const qName = "Rare";
@@ -565,7 +568,18 @@ function selectStarter(id) {
     state.currentRoute = "Professor Oak Lab";
     switchView("PROF_OAK_LAB");
 
+    // Unlock the top bar for a new game
+    const navButtons = document.getElementById('nav-buttons');
+    if (navButtons) {
+        navButtons.style.pointerEvents = 'auto';
+        navButtons.style.opacity = '1.0';
+    }
+
     startGame();
+
+    // Force an immediate save so the initial state is persisted to the new profile
+    storage.save(state);
+
     renderOakLab(); // Renders the new Oak Lab UI now that we have a party
 }
 
@@ -575,58 +589,231 @@ function startGame() {
     updateUI();
     bs.start();
 
+    // Playtime tracker (adds 1 second every second)
+    setInterval(() => {
+        state.stats.playtime = (state.stats.playtime || 0) + 1;
+    }, 1000);
+
     // Autosave loop
     setInterval(() => {
         storage.save(state);
     }, 60000);
+
+    // Save on beforeunload
+    window.addEventListener('beforeunload', () => {
+        storage.save(state);
+    });
 }
 
 async function init() {
     await loadConfigs();
-    const saved = storage.load();
 
-    if (saved) {
-        // Show the save prompt modal instead of using confirm()
-        const savePrompt = document.getElementById('save-prompt-modal');
-        const splashScreen = document.getElementById('splash-screen');
+    const profiles = storage.getProfiles();
+    const splashScreen = document.getElementById('splash-screen');
+    const saveManagerModal = document.getElementById('save-manager-modal');
+    const profilesContainer = document.getElementById('profiles-container');
 
-        if (savePrompt && splashScreen) {
-            splashScreen.style.display = 'flex';
-            savePrompt.style.display = 'block';
+    const startNewGame = () => {
+        if (splashScreen) splashScreen.style.display = 'none';
+        if (saveManagerModal) saveManagerModal.style.display = 'none';
 
-            document.getElementById('btn-continue-game').onclick = async () => {
-                splashScreen.style.display = 'none';
-                savePrompt.style.display = 'none';
+        // Force the nav buttons to be disabled immediately.
+        const navButtons = document.getElementById('nav-buttons');
+        if (navButtons) {
+            navButtons.style.pointerEvents = 'none';
+            navButtons.style.opacity = '0.5';
+        }
 
-                Object.assign(state, saved);
-                await loadConfigs();
+        switchView("PROF_OAK_LAB");
+        // Don't call startGame yet, the user must choose a pokemon first.
+    };
 
-                startGame();
+    // Filter corrupted/empty profiles and map them to their data
+    let validProfiles = profiles
+        .map(id => ({ id, data: storage.getProfileData(id) }))
+        .filter(p => p.data !== null);
 
-                // If player already has Pokemon, Oak Lab will render the bonuses next time it's visited.
+    // Sort descending by lastPlayed so newest is always on top
+    validProfiles.sort((a, b) => {
+        const timeA = a.data.lastPlayed || 0;
+        const timeB = b.data.lastPlayed || 0;
+        return timeB - timeA;
+    });
 
-                // Switch view based on saved route
-                if (state.currentRoute === "Professor Oak Lab") {
-                    switchView("PROF_OAK_LAB");
-                } else if (state.currentRoute === "PokeCenter & PokeMarket" || state.currentRoute === "Pokemon Center & Market") {
-                    navigateToLocation(state.currentRoute);
-                } else if (state.currentRoute.includes("Gym") || state.currentRoute === "Indigo Plateu") {
-                    navigateToLocation(state.currentRoute);
+    if (validProfiles.length > 0 && saveManagerModal && splashScreen) {
+        splashScreen.style.display = 'flex';
+        saveManagerModal.style.display = 'flex';
+
+        profilesContainer.innerHTML = ''; // clear
+
+        let profileAction = 'load';
+
+        // Variables to hold pending rename state
+        let pendingRenameId = null;
+        let pendingRenameData = null;
+
+        const renameModal = document.getElementById('rename-modal');
+        const renameInput = document.getElementById('rename-input');
+        const btnRenameSave = document.getElementById('btn-rename-save');
+        const btnRenameCancel = document.getElementById('btn-rename-cancel');
+
+        if (btnRenameSave) {
+            btnRenameSave.onclick = () => {
+                if (pendingRenameId && pendingRenameData && renameInput.value.trim() !== "") {
+                    pendingRenameData.profileName = renameInput.value.trim();
+                    window.localStorage.setItem(pendingRenameId, JSON.stringify(pendingRenameData));
+                    window.location.reload();
+                }
+            };
+        }
+
+        if (btnRenameCancel) {
+            btnRenameCancel.onclick = () => {
+                if (renameModal) renameModal.style.display = 'none';
+                pendingRenameId = null;
+                pendingRenameData = null;
+                profileAction = 'load';
+                updateHeader();
+            };
+        }
+
+        const updateHeader = () => {
+            const h2 = saveManagerModal.querySelector('h2');
+            if (h2) {
+                if (profileAction === 'rename') {
+                    h2.innerHTML = "Save Profiles - <span style='color: #3498db;'>Select Profile to Rename</span>";
+                } else if (profileAction === 'erase') {
+                    h2.innerHTML = "Save Profiles - <span style='color: #f44336;'>Select Profile to Erase</span>";
                 } else {
-                    navigateToLocation(state.currentRoute);
+                    h2.innerHTML = "Save Profiles";
+                }
+            }
+        };
+
+        validProfiles.forEach((profileObj, index) => {
+            const profileId = profileObj.id;
+            const pData = profileObj.data;
+
+            // Format playtime
+            let playtimeStr = "0h 0m 0s";
+            if (pData.stats && pData.stats.playtime) {
+                const totalSec = pData.stats.playtime;
+                const h = Math.floor(totalSec / 3600);
+                const m = Math.floor((totalSec % 3600) / 60);
+                const s = totalSec % 60;
+                playtimeStr = `${h}h ${m}m ${s}s`;
+            }
+
+            // Format last played explicitly as dd/mm/yyyy
+            let lastPlayedStr = "Unknown";
+            if (pData.lastPlayed) {
+                const lpDate = new Date(pData.lastPlayed);
+                const dd = String(lpDate.getDate()).padStart(2, '0');
+                const mm = String(lpDate.getMonth() + 1).padStart(2, '0');
+                const yyyy = lpDate.getFullYear();
+                lastPlayedStr = `${dd}/${mm}/${yyyy}`;
+            }
+
+            // Get profile name
+            const profileName = pData.profileName || `Profile ${index + 1}`;
+
+            // Get last route unlocked
+            let lastRoute = "None";
+            if (pData.stats && pData.stats.completedChallenges !== undefined && state.config.unlocks) {
+                const unlocksLength = state.config.unlocks.length;
+                let cIndex = pData.stats.completedChallenges;
+                // Cap to max
+                if (cIndex > unlocksLength) cIndex = unlocksLength;
+
+                // Get the reward from the LAST completed challenge
+                if (cIndex > 0) {
+                    let pUnlock = state.config.unlocks[cIndex - 1];
+                    lastRoute = pUnlock.unlocks ? pUnlock.unlocks.join(", ") : "Next Area";
+                }
+            }
+
+            const btn = document.createElement('button');
+            btn.style.padding = "10px";
+            btn.style.fontSize = "16px";
+            btn.style.cursor = "pointer";
+            btn.style.backgroundColor = "#FFC107"; // Big Yellow Button
+            btn.style.color = "black";
+            btn.style.border = "none";
+            btn.style.borderRadius = "5px";
+            btn.style.textAlign = "left";
+            btn.style.fontWeight = "bold";
+
+            btn.innerHTML = `
+                <div style="font-size: 18px; margin-bottom: 5px; font-weight: bold;">"${profileName}" - ${playtimeStr}</div>
+                <div style="font-size: 14px; font-weight: normal;">Last Played: ${lastPlayedStr}</div>
+                <div style="font-size: 14px; font-weight: normal;">Current: ${lastRoute}</div>
+            `;
+
+            btn.onclick = async () => {
+                if (profileAction === 'rename') {
+                    if (renameModal && renameInput) {
+                        pendingRenameId = profileId;
+                        pendingRenameData = pData;
+                        renameInput.value = profileName;
+                        renameModal.style.display = 'flex';
+                    }
+                } else if (profileAction === 'erase') {
+                    if (confirm(`Are you sure you want to delete "${profileName}"? This cannot be undone.`)) {
+                        storage.deleteProfile(profileId);
+                        window.location.reload();
+                    }
+                    profileAction = 'load';
+                    updateHeader();
+                } else {
+                    // Load Action
+                    splashScreen.style.display = 'none';
+                    saveManagerModal.style.display = 'none';
+
+                    storage.setCurrentProfile(profileId);
+
+                    // Perform a deep merge to preserve nested object structures (like stats, backpack)
+                    const deepMerge = (target, source) => {
+                        if (typeof source !== 'object' || source === null) return source;
+                        if (Array.isArray(source)) return source;
+                        for (const key of Object.keys(source)) {
+                            if (source[key] instanceof Object && !Array.isArray(source[key])) {
+                                if (!target[key]) target[key] = {};
+                                deepMerge(target[key], source[key]);
+                            } else {
+                                target[key] = source[key];
+                            }
+                        }
+                        return target;
+                    };
+                    deepMerge(state, pData);
+
+                    await loadConfigs();
+
+                    startGame();
+
+                    // Saved profiles always start at Oak's Lab and are free to explore
+                    state.currentRoute = "Professor Oak Lab";
+                    switchView("PROF_OAK_LAB");
                 }
             };
 
-            document.getElementById('btn-new-game').onclick = () => {
-                splashScreen.style.display = 'none';
-                savePrompt.style.display = 'none';
+            profilesContainer.appendChild(btn);
+        });
 
-                storage.reset();
-                window.location.reload(); // Actually refresh the page to clear memory state completely
-            };
-        }
+        document.getElementById('btn-new-profile').onclick = startNewGame;
+
+        document.getElementById('btn-rename-profile').onclick = () => {
+            profileAction = profileAction === 'rename' ? 'load' : 'rename';
+            updateHeader();
+        };
+
+        document.getElementById('btn-erase-profile').onclick = () => {
+            profileAction = profileAction === 'erase' ? 'load' : 'erase';
+            updateHeader();
+        };
+
     } else {
-        switchView("PROF_OAK_LAB");
+        startNewGame();
     }
 
     // Bind buttons (they might be missing if bypass Oak)
@@ -707,6 +894,17 @@ async function init() {
 
     bindBtn('btn-settings', () => {
         if(!checkCombatLock()) showSettings();
+    });
+
+    bindBtn('btn-exit', () => {
+        if (confirm("Are you sure you want to save and exit?")) {
+            if (state.party.length === 0 && state.storage.length === 0) {
+                window.close();
+            } else {
+                storage.save(state);
+                window.close(); // Closes the app completely (works in Electron/app context)
+            }
+        }
     });
 }
 
