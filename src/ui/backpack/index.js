@@ -73,6 +73,7 @@ export function showBackpack() {
     contentPanel.innerHTML = html;
 }
 
+window.renderBackpackTab = renderBackpackTab;
 export function renderBackpackTab(tab) {
     const area = document.getElementById('backpack-content-area');
     if (!area) return;

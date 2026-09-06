@@ -21,18 +21,30 @@ export function setupMarket(vCenter) {
             ">PokeCenter</button>
 
             <!-- PokeMarket Button (Right) -->
-            <button id="btn-market-buy" style="
-                background: #3498db;
-                color: white;
-                border: 3px solid white;
-                border-radius: 12px;
-                padding: 15px 30px;
-                font-size: 24px;
-                font-weight: bold;
-                cursor: pointer;
-                box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-                transform: translateY(-30vh);
-            ">PokeMarket</button>
+            <div style="display: flex; flex-direction: column; gap: 10px; transform: translateY(-30vh);">
+                <button id="btn-market-buy" style="
+                    background: #3498db;
+                    color: white;
+                    border: 3px solid white;
+                    border-radius: 12px;
+                    padding: 15px 30px;
+                    font-size: 24px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+                ">PokeMarket</button>
+                <button id="btn-market-sell" style="
+                    background: #e74c3c;
+                    color: white;
+                    border: 3px solid white;
+                    border-radius: 12px;
+                    padding: 10px 20px;
+                    font-size: 18px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+                ">Sell</button>
+            </div>
         </div>
     `;
     vCenter.style.backgroundImage = "url('./Assets/BG/BG-PCPM.png')";
@@ -53,6 +65,12 @@ export function setupMarket(vCenter) {
             window.openPokeMarketBuy();
         } else {
             openPokeMarketBuy();
+        }
+    };
+
+    document.getElementById('btn-market-sell').onclick = () => {
+        if (window.startSellMode) {
+            window.startSellMode();
         }
     };
 }
