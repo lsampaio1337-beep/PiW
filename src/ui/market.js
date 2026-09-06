@@ -69,12 +69,19 @@ export function setupMarket(vCenter) {
     };
 
     document.getElementById('btn-market-sell').onclick = () => {
-        if (window.startSellMode) { window.startSellMode(); }
-        else if (window.showBackpack) {
-            window.showBackpack(); // Loads pokemon.js logic implicitly via backpack init
-            setTimeout(() => { if(window.startSellMode) window.startSellMode(); }, 50);
-        } else {
-            console.error("startSellMode not found!");
+        if (window.showBackpack) {
+            window.showBackpack(); // This renders the backpack modal wrapper
+
+            // The backpack module loads pokemon.js, which creates startSellMode globally.
+            // If it's already loaded, call it. If not, wait a tiny bit for it to bind.
+            if (window.startSellMode) {
+                window.startSellMode();
+            } else {
+                setTimeout(() => {
+                    if (window.startSellMode) window.startSellMode();
+                    else console.error("startSellMode STILL not found after backpack load!");
+                }, 100);
+            }
         }
     };
 }
