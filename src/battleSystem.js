@@ -204,7 +204,7 @@ class BattleSystem {
         this.combatLoop = setTimeout(() => {
             this.isSliding = false;
             this.updateUI();
-            this.startCombatLoop(0); // Trigger standard combat loop instead of raw schedule turn so the UI syncs
+            this.scheduleTurn();
         }, slideDelay);
     }
 
