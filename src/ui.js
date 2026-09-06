@@ -583,19 +583,31 @@ function selectStarter(id) {
     renderOakLab(); // Renders the new Oak Lab UI now that we have a party
 }
 
+function showSleepModePrompt(elapsedMs) {
 function showSleepModeLoading(elapsedMs) {
     const overlayHtml = `
         <div id="sleep-mode-loading-overlay" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.9); color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 10000;">
             <h2>Collecting Data...</h2>
-            <p style="margin-top: 10px; font-size: 14px;">Simulating offline battles, please wait...</p>
+            <div style="width: 300px; height: 20px; background: #333; margin-top: 20px; border-radius: 10px; overflow: hidden; border: 2px solid #555;">
+                <div id="sleep-mode-progress-bar" style="width: 0%; height: 100%; background: #4CAF50; transition: width 0.1s;"></div>
+            </div>
+            <p id="sleep-mode-progress-text" style="margin-top: 10px; font-size: 14px;">0%</p>
+            <p style="margin-top: 10px; font-size: 12px; color: #888;">Simulating offline battles...</p>
         </div>
     `;
     const tempDiv = document.createElement('div');
     tempDiv.innerHTML = overlayHtml;
     document.body.appendChild(tempDiv.firstElementChild);
 
-    // Give UI a moment to render before locking thread
-    setTimeout(() => {
+    // Give UI a moment to render before starting async simulation
+    setTimeout(async () => {
+        const sleepStats = await globals.battleSystem.runFastForward(elapsedMs, (progress) => {
+            const bar = document.getElementById('sleep-mode-progress-bar');
+            const text = document.getElementById('sleep-mode-progress-text');
+            if (bar && text) {
+                bar.style.width = progress + '%';
+                text.textContent = progress + '%';
+            }
         const sleepStats = globals.battleSystem.runFastForward(elapsedMs);
         document.getElementById('sleep-mode-loading-overlay').remove();
         showSleepModeResults(sleepStats);
@@ -858,7 +870,7 @@ async function init() {
                         const elapsedMs = Date.now() - lastTime;
 
                         if (elapsedMs > 0) {
-                            showSleepModeLoading(elapsedMs);
+                            showSleepModePrompt(elapsedMs);
                         }
                     }
                 }

@@ -807,7 +807,7 @@ class BattleSystem {
         }
     }
 
-    runFastForward(elapsedMs) {
+    async runFastForward(elapsedMs, progressCallback) {
         this.stop();
         this.isFastForwarding = true;
 
@@ -823,64 +823,66 @@ class BattleSystem {
         // Snapshot stats to calculate diffs easily
         const initialMoney = this.state.trainer.money;
         const initialCaught = this.state.stats.caught;
-        const initialStones = JSON.parse(JSON.stringify(this.state.backpack.stones));
+        const initialStones = JSON.parse(JSON.stringify(this.state.backpack.stones || {}));
+        const totalMs = elapsedMs;
+        let encountersProcessed = 0;
 
         while (elapsedMs > 0 && this.state.party.some(p => p.currentHp > 0)) {
             // Pick next healthy pokemon as leader
             let safeGuard = 0;
-            while (this.state.party[0].currentHp <= 0 && safeGuard < this.state.party.length) {
-                const fainted = this.state.party.shift();
-                this.state.party.push(fainted);
+            while(this.state.party[0].currentHp <= 0 && safeGuard < 6) {
+                this.handleFaint(); // This handles rotation
                 safeGuard++;
             }
-            if (this.state.party[0].currentHp <= 0) break; // all fainted
+            if (this.state.party[0].currentHp <= 0) break;
 
-            const leaderSpeed = this.state.party[0].currentStats.spe;
-            let searchDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed));
-            searchDelay = Math.max(300, searchDelay);
-
-            elapsedMs -= searchDelay;
-            if (elapsedMs <= 0) break;
+            const leader = this.state.party[0];
 
             // Generate encounter
-            this.generateEncounter(0);
+            const encounter = mathEngine.generateEncounter(this.state.currentRoute, leader);
+            if (!encounter) break; // Should not happen but safety check
+
+            this.activeEncounter = encounter;
             stats.encounters++;
+            encountersProcessed++;
 
-            // Fast forward combat loop
-            let combatFinished = false;
-            let combatTime = 0;
-            let failsafeTurns = 0;
-
-            while (!combatFinished && failsafeTurns < 1000) {
-                failsafeTurns++;
-                const leader = this.state.party[0];
-                if (leader.currentHp <= 0) {
-                    this.handleFaint();
-                    if (this.state.party[0].currentHp <= 0) {
-                        combatFinished = true;
-                    }
-                    continue;
+            // Let the thread breathe every 100 encounters
+            if (encountersProcessed % 100 === 0) {
+                if (progressCallback) {
+                    const progress = Math.min(99, Math.floor(((totalMs - elapsedMs) / totalMs) * 100));
+                    progressCallback(progress);
                 }
+                await new Promise(r => setTimeout(r, 0));
+            }
 
-                let leaderDelay = this.state.config.balance.baseAttackDelay * 1000 * (100 / (100 + leader.currentStats.spe));
-                leaderDelay = Math.max(250, leaderDelay);
+            // Search delay
+            elapsedMs -= encounter.searchTime;
+            if (elapsedMs <= 0) break;
 
-                let enemyDelay = this.state.config.balance.baseAttackDelay * 1000 * (100 / (100 + this.activeEncounter.currentStats.spe));
-                enemyDelay = Math.max(250, enemyDelay);
+            // Battle simulation
+            const leaderDelay = mathEngine.calculateAttackDelay(leader.currentStats.spe);
+            const enemyDelay = mathEngine.calculateAttackDelay(this.activeEncounter.currentStats.spe);
 
-                const isLeaderFaster = leaderDelay <= enemyDelay;
-                const firstActor = isLeaderFaster ? leader : this.activeEncounter;
-                const secondActor = isLeaderFaster ? this.activeEncounter : leader;
+            let combatTime = 0;
+            let combatFinished = false;
+            let turns = 0;
 
-                combatTime += Math.min(leaderDelay, enemyDelay);
+            while (!combatFinished && turns < 1000) { // Limit to 1000 turns to prevent infinite loops
+                turns++;
+
+                // Determine order
+                const firstActor = leaderDelay <= enemyDelay ? leader : this.activeEncounter;
+                const secondActor = firstActor === leader ? this.activeEncounter : leader;
 
                 // Simulate Execute Turn (1)
+                combatTime += Math.min(leaderDelay, enemyDelay);
+
                 if (firstActor === leader && this.state.settings.autoPotion) {
                     this.tryUsePotion(firstActor);
                 }
 
                 const move1 = this.getBestMove(firstActor, secondActor);
-                const isPhysical1 = move1.category === 'Physical';
+                const isPhysical1 = move1.category === "Physical";
                 const atkStat1 = isPhysical1 ? firstActor.currentStats.atk : firstActor.currentStats.spa;
                 const defStat1 = isPhysical1 ? secondActor.currentStats.def : secondActor.currentStats.spd;
                 const eff1 = this.getTypeEffectiveness(move1.type, secondActor.types);
@@ -909,7 +911,7 @@ class BattleSystem {
                 }
 
                 const move2 = this.getBestMove(secondActor, firstActor);
-                const isPhysical2 = move2.category === 'Physical';
+                const isPhysical2 = move2.category === "Physical";
                 const atkStat2 = isPhysical2 ? secondActor.currentStats.atk : secondActor.currentStats.spa;
                 const defStat2 = isPhysical2 ? firstActor.currentStats.def : firstActor.currentStats.spd;
                 const eff2 = this.getTypeEffectiveness(move2.type, firstActor.types);
@@ -917,6 +919,58 @@ class BattleSystem {
                 const hit2 = mathEngine.calculateDamage(secondActor.level, move2.power, atkStat2, defStat2, eff2, secondActor.quality || 1);
                 firstActor.currentHp -= hit2.damage;
                 combatTime += 500;
+
+                if (firstActor.currentHp <= 0) {
+                    if (firstActor === this.activeEncounter) {
+                        const preXP = leader.xp;
+                        this.handleEnemyDefeat();
+                        stats.xp += (leader.xp - preXP);
+                    } else {
+                        this.handleFaint();
+                    }
+                    combatFinished = true;
+                }
+            }
+
+            // If we hit the failsafe limit, force the battle to end to prevent infinite loops
+            if (!combatFinished) {
+                // Flee from the battle
+                this.activeEncounter = null;
+            }
+
+            elapsedMs -= combatTime;
+        }
+
+        this.isFastForwarding = false;
+
+        if (progressCallback) progressCallback(100);
+
+        // Finalize stats
+        stats.money = this.state.trainer.money - initialMoney;
+        stats.caught = this.state.stats.caught - initialCaught;
+
+        if (!this.state.backpack.stones) this.state.backpack.stones = {};
+        for (const [stone, count] of Object.entries(this.state.backpack.stones)) {
+            const initialCount = initialStones[stone] || 0;
+            if (count > initialCount) {
+                stats.loot[stone] = count - initialCount;
+            }
+        }
+
+        if (this.state.party.every(p => p.currentHp <= 0)) {
+            // All fainted, place player in PokeCenter
+            this.handleWipeout();
+            if (typeof window.navigateToLocation === "function") {
+                window.navigateToLocation("PokeCenter & PokeMarket");
+            }
+        } else {
+            this.activeEncounter = null;
+            this.updateUI();
+            this.start();
+        }
+
+        return stats;
+    }
 
                 if (firstActor.currentHp <= 0) {
                     if (firstActor === this.activeEncounter) {
