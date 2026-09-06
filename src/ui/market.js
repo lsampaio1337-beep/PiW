@@ -21,18 +21,30 @@ export function setupMarket(vCenter) {
             ">PokeCenter</button>
 
             <!-- PokeMarket Button (Right) -->
-            <button id="btn-market-buy" style="
-                background: #3498db;
-                color: white;
-                border: 3px solid white;
-                border-radius: 12px;
-                padding: 15px 30px;
-                font-size: 24px;
-                font-weight: bold;
-                cursor: pointer;
-                box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-                transform: translateY(-30vh);
-            ">PokeMarket</button>
+            <div style="display: flex; flex-direction: column; gap: 15px; transform: translateY(-30vh);">
+                <button id="btn-market-buy" style="
+                    background: #3498db;
+                    color: white;
+                    border: 3px solid white;
+                    border-radius: 12px;
+                    padding: 15px 30px;
+                    font-size: 24px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+                ">Buy</button>
+                <button id="btn-market-sell" style="
+                    background: #2ecc71;
+                    color: white;
+                    border: 3px solid white;
+                    border-radius: 12px;
+                    padding: 15px 30px;
+                    font-size: 24px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+                ">Sell</button>
+            </div>
         </div>
     `;
     vCenter.style.backgroundImage = "url('./Assets/BG/BG-PCPM.png')";
@@ -46,6 +58,14 @@ export function setupMarket(vCenter) {
         state.party.forEach(p => p.currentHp = p.maxHp);
         state.storage.forEach(p => p.currentHp = p.maxHp);
         updateUI();
+    };
+
+    document.getElementById('btn-market-sell').onclick = () => {
+        if (window.openPokeMarketSell) {
+            window.openPokeMarketSell();
+        } else {
+            openPokeMarketSell();
+        }
     };
 
     document.getElementById('btn-market-buy').onclick = () => {
@@ -247,3 +267,197 @@ export function buyItem(itemId, baseCost, category) {
         alert(`Not enough money! You need $${totalCost.toLocaleString()} but only have $${state.trainer.money.toLocaleString()}.`);
     }
 }
+
+export function openPokeMarketSell() {
+    const html = `
+        <div id="market-sell-modal" style="display: flex; flex-direction: column; width: 60vw; min-width: 300px; height: 100%;">
+
+            <div style="display: flex; gap: 10px; margin-bottom: 20px; justify-content: center;">
+                <button onclick="window.renderPokeMarketSellTab('pokeballs')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; border-radius: 5px; background-color: #2ecc71; color: white; border: none; cursor: pointer;">Balls</button>
+                <button onclick="window.renderPokeMarketSellTab('potions')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; border-radius: 5px; background-color: #2ecc71; color: white; border: none; cursor: pointer;">Potions</button>
+                <button onclick="window.renderPokeMarketSellTab('stones')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; border-radius: 5px; background-color: #2ecc71; color: white; border: none; cursor: pointer;">Stones</button>
+            </div>
+
+            <div id="market-sell-content" style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; overflow-y: auto; flex: 1; padding: 10px;">
+                <!-- Cards injected here -->
+            </div>
+        </div>
+    `;
+
+    showModal(`<span style="font-size: 24px; color: #2ecc71;">Sell Items</span>`, html);
+
+    // Apply specific modal overrides
+    const modalBox = document.getElementById('modal-content-box');
+    if (modalBox) {
+        modalBox.dataset.originalStyles = modalBox.getAttribute('style') || '';
+        modalBox.style.width = 'max-content';
+        modalBox.style.height = 'max-content';
+        modalBox.style.maxWidth = '90%';
+        modalBox.style.maxHeight = '90%';
+    }
+
+    // Default to balls tab
+    setTimeout(() => {
+        if (window.renderPokeMarketSellTab) {
+            window.renderPokeMarketSellTab('pokeballs');
+        } else {
+            renderPokeMarketSellTab('pokeballs');
+        }
+    }, 10);
+}
+
+export function renderPokeMarketSellTab(category) {
+    const content = document.getElementById('market-sell-content');
+    if (!content) return;
+
+    let items = [];
+    let cols = 4;
+
+    if (category === 'pokeballs') {
+        cols = 4;
+        state.config.balance.items.pokeballs.forEach(b => {
+            const owned = state.backpack.pokeballs[b.name] || 0;
+            if (owned > 0) {
+                items.push({
+                    name: b.name,
+                    price: Math.floor(b.price * 0.5), // Sell price is 50%
+                    img: \`./Assets/Items/Balls/\${b.name}.png\`,
+                    attrLabel: \`Owned: \${formatMarketNumber(owned)}\`,
+                    owned: owned
+                });
+            }
+        });
+    } else if (category === 'potions') {
+        cols = 7;
+        state.config.balance.items.potions.forEach(p => {
+            let invName = p.name;
+            if (p.name === 'Regular Potion') invName = 'Regular Potion';
+            if (p.name === 'Big') invName = 'Big Potion';
+
+            const owned = state.backpack.potions[invName] || 0;
+            if (owned > 0) {
+                items.push({
+                    name: invName,
+                    price: Math.floor(p.price * 0.5), // Sell price is 50%
+                    img: \`./Assets/Items/Potions/\${invName}.png\`,
+                    attrLabel: \`Owned: \${formatMarketNumber(owned)}\`,
+                    owned: owned
+                });
+            }
+        });
+    } else if (category === 'stones') {
+        cols = 6;
+        const stonePrice = Math.floor(state.config.balance.items.stones.price * 0.5); // Sell price is 50%
+        let stoneKeys = Object.keys(state.backpack.stones);
+        stoneKeys.sort((a, b) => a.localeCompare(b));
+        stoneKeys.forEach(stoneName => {
+            const owned = state.backpack.stones[stoneName] || 0;
+            if (owned > 0) {
+                items.push({
+                    name: stoneName,
+                    price: stonePrice,
+                    img: \`./Assets/Items/Stones/\${stoneName}.png\`,
+                    attrLabel: \`Owned: \${formatMarketNumber(owned)}\`,
+                    owned: owned
+                });
+            }
+        });
+    }
+
+    if (items.length === 0) {
+        content.innerHTML = \`<div style="font-size: 20px; color: #7f8c8d; text-align: center; width: 100%; margin-top: 50px;">You have no items in this category to sell.</div>\`;
+        return;
+    }
+
+    let html = \`<div style="display: grid; grid-template-columns: repeat(\${cols}, minmax(120px, 160px)); gap: 15px; justify-content: center; width: 100%;">\`;
+    items.forEach(item => {
+        // We use a safe ID for inputs
+        const safeId = item.name.replace(/\\s+/g, '-').toLowerCase();
+        html += \`
+            <div class="market-item-card"
+                style="background: #2c3e50; border: 2px solid #2ecc71; border-radius: 10px; padding: 10px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <div style="font-size: 14px; font-weight: bold; margin-bottom: 5px; height: 32px; display: flex; align-items: center; justify-content: center;">\${item.name}</div>
+                <img src="\${item.img}" style="width: 60px; height: 60px; object-fit: contain; margin-bottom: 5px;">
+                <div style="font-size: 12px; color: #f1c40f; margin-bottom: 5px;">\${item.attrLabel}</div>
+                <div style="font-size: 12px; color: #bdc3c7; margin-bottom: 5px;">Sell: $\${formatMarketNumber(item.price)} ea</div>
+
+                <input type="text" id="sell-qty-\${safeId}" value="1"
+                    oninput="window.updateSellPrice(this, \${item.price}, \${item.owned}, 'sell-total-\${safeId}')"
+                    style="width: 60px; padding: 5px; font-size: 14px; text-align: center; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 5px; color: black;">
+
+                <div id="sell-total-\${safeId}" style="font-size: 14px; font-weight: bold; color: #2ecc71; margin-bottom: 10px;">$\${formatMarketNumber(item.price)}</div>
+
+                <button onclick="window.sellItem('\${item.name}', '\${category}', \${item.price}, 'sell-qty-\${safeId}')"
+                    style="background: #e74c3c; color: white; border: none; border-radius: 5px; padding: 5px 10px; font-weight: bold; cursor: pointer; width: 100%;">
+                    Sell
+                </button>
+            </div>
+        \`;
+    });
+    html += \`</div>\`;
+
+    content.innerHTML = html;
+}
+
+export function updateSellPrice(inputEl, baseSellPrice, maxOwned, totalId) {
+    let qtyStr = inputEl.value;
+    let qty = parseMarketQuantity(qtyStr);
+
+    // If the input was completely empty, we can just treat it as 0 visually, but limit to maxOwned
+    if (qtyStr.trim() === '') qty = 0;
+
+    if (qty > maxOwned) {
+        qty = maxOwned;
+        // Don't format with K/M here unless it was a K/M input to avoid user frustration while typing
+        // But for safety, we just rewrite the raw max
+        inputEl.value = maxOwned;
+    }
+    if (qty < 0) {
+        qty = 0;
+        inputEl.value = 0;
+    }
+
+    const totalCost = baseSellPrice * qty;
+    const totalEl = document.getElementById(totalId);
+    if (totalEl) {
+        totalEl.textContent = '$' + formatMarketNumber(totalCost);
+    }
+}
+
+export function sellItem(itemName, category, baseSellPrice, inputId) {
+    const qtyInput = document.getElementById(inputId);
+    const qtyStr = qtyInput ? qtyInput.value : '1';
+    let qty = parseMarketQuantity(qtyStr);
+
+    if (qty <= 0) return;
+
+    const maxOwned = state.backpack[category][itemName] || 0;
+    if (qty > maxOwned) qty = maxOwned; // Final safety check
+
+    const totalEarned = baseSellPrice * qty;
+
+    state.backpack[category][itemName] -= qty;
+
+    // Clean up if 0
+    if (state.backpack[category][itemName] <= 0) {
+        delete state.backpack[category][itemName];
+    }
+
+    state.trainer.money += totalEarned;
+    updateUI();
+
+    alert(\`Sold \${qty.toLocaleString()}x \${itemName} for $\${totalEarned.toLocaleString()}!\`);
+
+    // Refresh the tab
+    if (window.renderPokeMarketSellTab) {
+        window.renderPokeMarketSellTab(category);
+    } else {
+        renderPokeMarketSellTab(category);
+    }
+}
+
+// Make functions globally available for inline HTML handlers
+window.openPokeMarketSell = openPokeMarketSell;
+window.renderPokeMarketSellTab = renderPokeMarketSellTab;
+window.updateSellPrice = updateSellPrice;
+window.sellItem = sellItem;
