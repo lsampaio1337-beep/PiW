@@ -45,9 +45,11 @@ export const state = {
         blackYellowCandies: 0,
         rainbowCandies: 0,
         candyPurchaseHistory: [],
-        dailyRewards: { daysClaimed: 0, lastClaimDate: null }
+        dailyRewards: { daysClaimed: 0, lastClaimDate: null },
+        lastSaveTime: 0
     },
     settings: {
+        isSleepModeActive: false,
         gameSpeed: 1.0,
         autoPotion: true,
         activePotionTier: 0, // Tiny

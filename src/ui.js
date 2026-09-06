@@ -586,6 +586,73 @@ function selectStarter(id) {
     renderOakLab(); // Renders the new Oak Lab UI now that we have a party
 }
 
+function showSleepModePrompt(elapsedMs) {
+function showSleepModeLoading(elapsedMs) {
+    const overlayHtml = `
+        <div id="sleep-mode-loading-overlay" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.9); color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 10000;">
+            <h2>Collecting Data...</h2>
+            <div style="width: 300px; height: 20px; background: #333; margin-top: 20px; border-radius: 10px; overflow: hidden; border: 2px solid #555;">
+                <div id="sleep-mode-progress-bar" style="width: 0%; height: 100%; background: #4CAF50; transition: width 0.1s;"></div>
+            </div>
+            <p id="sleep-mode-progress-text" style="margin-top: 10px; font-size: 14px;">0%</p>
+            <p style="margin-top: 10px; font-size: 12px; color: #888;">Simulating offline battles...</p>
+        </div>
+    `;
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = overlayHtml;
+    document.body.appendChild(tempDiv.firstElementChild);
+
+    // Give UI a moment to render before starting async simulation
+    setTimeout(async () => {
+        const sleepStats = await globals.battleSystem.runFastForward(elapsedMs, (progress) => {
+            const bar = document.getElementById('sleep-mode-progress-bar');
+            const text = document.getElementById('sleep-mode-progress-text');
+            if (bar && text) {
+                bar.style.width = progress + '%';
+                text.textContent = progress + '%';
+            }
+        const sleepStats = globals.battleSystem.runFastForward(elapsedMs);
+        document.getElementById('sleep-mode-loading-overlay').remove();
+        showSleepModeResults(sleepStats);
+    }, 100);
+}
+
+function showSleepModeResults(stats) {
+    let html = `
+        <div id="sleep-mode-results" onclick="this.remove()" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.8); z-index: 10000; display: flex; align-items: center; justify-content: center;">
+            <div style="background: #222; border: 2px solid #555; border-radius: 10px; padding: 20px; width: 400px; max-width: 90%; color: white; text-align: center;" onclick="event.stopPropagation()">
+                <h2>Sleep Mode Completed</h2>
+                <hr style="border-color: #444; margin: 15px 0;">
+                <p><strong>Offline Time:</strong> ${Math.floor(stats.elapsedMs / 1000 / 60)} minutes</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; text-align: left; margin-top: 15px;">
+                    <div><strong>Money Gained:</strong> $${stats.money}</div>
+                    <div><strong>Exp Gained:</strong> ${Math.floor(stats.xp)}</div>
+                    <div><strong>Pokemon Caught:</strong> ${stats.caught}</div>
+                    <div><strong>Encounters:</strong> ${stats.encounters}</div>
+                </div>
+                <h4 style="margin-top: 20px;">Loot Found:</h4>
+                <div style="max-height: 150px; overflow-y: auto; text-align: left; font-size: 14px; background: #111; padding: 10px; border-radius: 5px;">
+    `;
+
+    if (Object.keys(stats.loot).length === 0) {
+        html += `<p>No items found.</p>`;
+    } else {
+        for (const [item, count] of Object.entries(stats.loot)) {
+            html += `<div>${item} x${count}</div>`;
+        }
+    }
+
+    html += `
+                </div>
+                <p style="margin-top: 15px; font-size: 12px; color: #888;">(Click anywhere outside to close)</p>
+            </div>
+        </div>
+    `;
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = html;
+    document.body.appendChild(tempDiv.firstElementChild);
+}
+
 function startGame() {
     let bs = new BattleSystem(state, updateUI);
     setBattleSystem(bs);
@@ -707,14 +774,16 @@ async function init() {
                 playtimeStr = `${h}h ${m}m ${s}s`;
             }
 
-            // Format last played explicitly as dd/mm/yyyy
+            // Format last played explicitly as dd/mm/yyyy HH:MM
             let lastPlayedStr = "Unknown";
             if (pData.lastPlayed) {
                 const lpDate = new Date(pData.lastPlayed);
                 const dd = String(lpDate.getDate()).padStart(2, '0');
                 const mm = String(lpDate.getMonth() + 1).padStart(2, '0');
                 const yyyy = lpDate.getFullYear();
-                lastPlayedStr = `${dd}/${mm}/${yyyy}`;
+                const hh = String(lpDate.getHours()).padStart(2, '0');
+                const min = String(lpDate.getMinutes()).padStart(2, '0');
+                lastPlayedStr = `${dd}/${mm}/${yyyy} ${hh}:${min}`;
             }
 
             // Get profile name
@@ -797,6 +866,16 @@ async function init() {
                     // Saved profiles always start at Oak's Lab and are free to explore
                     state.currentRoute = "Professor Oak Lab";
                     switchView("PROF_OAK_LAB");
+
+                    if (state.settings.isSleepModeActive) {
+                        state.settings.isSleepModeActive = false;
+                        const lastTime = state.stats.lastSaveTime || Date.now();
+                        const elapsedMs = Date.now() - lastTime;
+
+                        if (elapsedMs > 0) {
+                            showSleepModePrompt(elapsedMs);
+                        }
+                    }
                 }
             };
 
@@ -897,6 +976,18 @@ async function init() {
 
     bindBtn('btn-settings', () => {
         if(!checkCombatLock()) showSettings();
+    });
+
+    bindBtn('btn-sleep', () => {
+        if (confirm("Are you sure you want to enter Sleep Mode?")) {
+            if (state.party.length === 0 && state.storage.length === 0) {
+                // Not a valid time to sleep
+                return;
+            }
+            state.settings.isSleepModeActive = true;
+            storage.save(state);
+            window.close();
+        }
     });
 
     bindBtn('btn-exit', () => {
