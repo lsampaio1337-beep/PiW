@@ -66,6 +66,7 @@ export function updateBattleArena() {
 
             const elEnemySprite = document.getElementById('enemy-sprite');
             const elEnemySide = document.getElementById('enemy-side');
+            const enemySplash = document.getElementById('enemy-water-splash');
 
             if (elEnemySprite && elEnemySide) {
                 elEnemySprite.src = `Assets/Pokemon Sprites/${enemy.qualityName === 'Shiny' ? enemy.id + '_shiny' : enemy.id}.png`;
@@ -78,6 +79,18 @@ export function updateBattleArena() {
                 elEnemySide.style.bottom = `${baseBottom}%`;
 
                 if (battleSystem.isSliding) {
+                    // Set animation classes if they don't already have one
+                    if (!elEnemySprite.classList.contains('anim-splash') && !elEnemySprite.classList.contains('anim-fly') && !elEnemySprite.classList.contains('anim-walk')) {
+                        if (enemy.types.includes('Water')) {
+                            elEnemySprite.classList.add('anim-splash');
+                            if (enemySplash) enemySplash.style.display = 'block';
+                        } else if (enemy.types.includes('Flying') || enemy.types.includes('Wind')) {
+                            elEnemySprite.classList.add('anim-fly');
+                        } else {
+                            elEnemySprite.classList.add('anim-walk');
+                        }
+                    }
+
                     if (elEnemySide.dataset.sliding !== 'true') {
                         elEnemySide.dataset.sliding = 'true';
                         elEnemySide.style.transition = 'none';
@@ -95,6 +108,18 @@ export function updateBattleArena() {
                     elEnemySide.dataset.sliding = 'false';
                     elEnemySide.style.transition = 'none';
                     elEnemySide.style.left = '35%';
+
+                    // Stop animation gracefully when duel starts by waiting for the animation iteration event
+                    const stopAnim = () => {
+                        elEnemySprite.className = ''; // Removes anim classes
+                        if (enemySplash) enemySplash.style.display = 'none';
+                        elEnemySprite.removeEventListener('animationiteration', stopAnim);
+                    };
+                    if (elEnemySprite.className) {
+                        elEnemySprite.addEventListener('animationiteration', stopAnim);
+                        // Fallback if animation is not running
+                        setTimeout(stopAnim, 1500);
+                    }
                 }
             }
 
@@ -132,9 +157,12 @@ export function updateBattleArena() {
                 }
 
                 const elPlayerSprite = document.getElementById('player-sprite');
+                const playerSplash = document.getElementById('player-water-splash');
                 if (elPlayerSprite) {
                     elPlayerSprite.src = `Assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? leader.id + '_shiny' : leader.id}.png`;
                     elPlayerSprite.style.display = 'block';
+                    elPlayerSprite.className = '';
+                    if (playerSplash) playerSplash.style.display = 'none';
                 }
             }
         } else if (battleSystem && battleSystem.isSearching) {
@@ -144,9 +172,12 @@ export function updateBattleArena() {
 
             const elEnemySprite = document.getElementById('enemy-sprite');
             const elEnemySide = document.getElementById('enemy-side');
+            const enemySplash = document.getElementById('enemy-water-splash');
             if (elEnemySprite && elEnemySide) {
                 elEnemySprite.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
                 elEnemySprite.style.display = 'block';
+                elEnemySprite.className = '';
+                if (enemySplash) enemySplash.style.display = 'none';
                 elEnemySide.style.transition = 'none';
                 elEnemySide.style.left = '35%'; // Matching active battle destination
                 elEnemySide.style.bottom = '10%'; // default
@@ -185,9 +216,12 @@ export function updateBattleArena() {
                 }
 
                 const elPlayerSprite = document.getElementById('player-sprite');
+                const playerSplash = document.getElementById('player-water-splash');
                 if (elPlayerSprite) {
                     elPlayerSprite.src = `Assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? leader.id + '_shiny' : leader.id}.png`;
                     elPlayerSprite.style.display = 'block';
+                    elPlayerSprite.className = '';
+                    if (playerSplash) playerSplash.style.display = 'none';
                 }
             } else {
                 const elPlayerSprite = document.getElementById('player-sprite');
@@ -423,4 +457,51 @@ export function playCombatAnimations(targetSide, moveType, duration) {
         }, Math.min(500, duration * 0.3));
 
     }, duration * 0.8);
+}
+export function triggerDefeatAnimation(enemy) {
+    const elEnemySprite = document.getElementById('enemy-sprite');
+    const elEnemySide = document.getElementById('enemy-side');
+    if (!elEnemySprite || !elEnemySide || !enemy) return;
+
+    // Clone the entire enemy side to retain all styling
+    const ghost = elEnemySide.cloneNode(true);
+    ghost.id = 'enemy-side-ghost';
+
+    // Hide the HP bar in the ghost
+    const hpBar = ghost.querySelector('#enemy-battle-hp-container');
+    if (hpBar) hpBar.style.display = 'none';
+
+    // Remove ID from the sprite to prevent duplicates
+    const ghostSprite = ghost.querySelector('#enemy-sprite');
+    if (ghostSprite) ghostSprite.id = 'enemy-sprite-ghost';
+
+    // Absolute positioning exactly where it was
+    ghost.style.position = 'absolute';
+    ghost.style.left = elEnemySide.style.left || '35%';
+    ghost.style.bottom = elEnemySide.style.bottom || '10%';
+    ghost.style.transition = 'all 2s ease-out';
+    ghost.style.zIndex = '4'; // slightly behind active sprite
+
+    const arena = document.getElementById('combat-arena');
+    if (arena) {
+        arena.appendChild(ghost);
+
+        // Trigger reflow
+        void ghost.offsetWidth;
+
+        // Slide left to 15% and fade out
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                ghost.style.left = '15%';
+                ghost.style.opacity = '0';
+            });
+        });
+
+        // Cleanup
+        setTimeout(() => {
+            if (ghost.parentElement) {
+                ghost.parentElement.removeChild(ghost);
+            }
+        }, 2000);
+    }
 }
