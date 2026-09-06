@@ -488,6 +488,7 @@ class BattleSystem {
 
             if (defender.currentHp <= 0) {
                 if (defender === this.activeEncounter) {
+                    if (typeof window.triggerDefeatAnimation === 'function') window.triggerDefeatAnimation(defender);
                     this.handleEnemyDefeat();
                 } else {
                     this.handleFaint();
