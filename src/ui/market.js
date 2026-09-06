@@ -173,7 +173,6 @@ export function renderPokeMarketTab(category) {
     let cols = 4;
 
     if (category === 'pokeballs') {
-        cols = 4;
         items = state.config.balance.items.pokeballs.map(b => ({
             name: b.name,
             price: b.price,
@@ -181,21 +180,21 @@ export function renderPokeMarketTab(category) {
             attrLabel: b.name === 'Masterball' ? `Efficiency: 100%` : `Efficiency: ${b.multiplier}x`
         }));
     } else if (category === 'potions') {
-        cols = 7;
-        items = state.config.balance.items.potions.map(p => {
-            let invName = p.name;
-            if (p.name === 'Regular Potion') invName = 'Regular Potion';
-            if (p.name === 'Big') invName = 'Big Potion';
+        items = state.config.balance.items.potions
+            .filter(p => p.name !== 'Max Potion') // Hide Max Potion
+            .map(p => {
+                let invName = p.name;
+                if (p.name === 'Regular Potion') invName = 'Regular Potion';
+                if (p.name === 'Big') invName = 'Big Potion';
 
-            return {
-                name: invName,
-                price: p.price,
-                img: `./Assets/Items/Potions/${invName}.png`,
-                attrLabel: `Heal: ${p.heal >= 999999 ? '100%' : p.heal + ' HP'}`
-            };
-        });
+                return {
+                    name: invName,
+                    price: p.price,
+                    img: `./Assets/Items/Potions/${invName}.png`,
+                    attrLabel: `Heal: ${p.heal >= 999999 ? '100%' : p.heal + ' HP'}`
+                };
+            });
     } else if (category === 'stones') {
-        cols = 6;
         const stonePrice = state.config.balance.items.stones.price;
         // Generate list from backpack stone keys
         let stoneKeys = Object.keys(state.backpack.stones);
@@ -208,7 +207,7 @@ export function renderPokeMarketTab(category) {
         }));
     }
 
-    let html = `<div style="display: grid; grid-template-columns: repeat(${cols}, minmax(100px, 150px)); gap: 15px; justify-content: center; width: 100%;">`;
+    let html = `<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 150px)); gap: 15px; justify-content: center; width: 100%;">`;
     items.forEach(item => {
         let displayName = item.name;
         if (category === 'potions') displayName = displayName.replace(' Potion', '<br>Potion');
@@ -220,7 +219,7 @@ export function renderPokeMarketTab(category) {
                 style="background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; padding: 10px; text-align: center; cursor: pointer; transition: transform 0.2s; display: flex; flex-direction: column; align-items: center; justify-content: center;">
                 <div style="font-size: 14px; font-weight: bold; margin-bottom: 5px; height: 32px; display: flex; align-items: center; justify-content: center; text-align: center;">${displayName}</div>
                 <img src="${item.img}" style="width: 60px; height: 60px; object-fit: contain; margin-bottom: 5px;">
-                <div style="font-size: 12px; color: #f1c40f; margin-bottom: 5px;">${item.attrLabel}</div>
+                ${category !== 'stones' ? `<div style="font-size: 12px; color: #f1c40f; margin-bottom: 5px;">${item.attrLabel}</div>` : ''}
                 <div style="font-size: 12px; color: #bdc3c7;">Base: $${formatMarketNumber(item.price)}</div>
                 <div class="market-final-price" style="font-size: 14px; font-weight: bold; color: #2ecc71; margin-top: 5px;">$${formatMarketNumber(item.price)}</div>
             </div>
