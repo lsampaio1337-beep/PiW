@@ -583,8 +583,52 @@ function selectStarter(id) {
     renderOakLab(); // Renders the new Oak Lab UI now that we have a party
 }
 
-function showSleepModePrompt(elapsedMs) {
+
 function showSleepModeLoading(elapsedMs) {
+function showSleepModePrompt(elapsedMs) {
+    const timeSecs = Math.floor(elapsedMs / 1000);
+    const m = Math.floor(timeSecs / 60);
+    const h = Math.floor(m / 60);
+    const displayTime = `${h}h ${m % 60}m`;
+
+    let ballName = state.settings.activePokeball;
+    let potionName = "None";
+    if (state.settings.autoPotion) {
+        potionName = state.settings.activePotionTier === 0 ? "Tiny Potion" : "Small Potion"; // simplified for display
+    }
+
+    const html = `
+        <div id="zzz-mode-prompt" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.85); z-index: 10000; display: flex; align-items: center; justify-content: center;">
+            <div style="background: #222; border: 2px solid #555; border-radius: 10px; padding: 20px; width: 400px; max-width: 90%; color: white; text-align: center;">
+                <h2>ZzZ Mode Detected</h2>
+                <hr style="border-color: #444; margin: 15px 0;">
+                <div style="text-align: left; line-height: 1.6; margin-bottom: 20px;">
+                    <p><strong>Time AFK:</strong> ${displayTime}</p>
+                    <p><strong>Route:</strong> ${state.currentRoute || 'Unknown'}</p>
+                    <p><strong>Ball Selected:</strong> ${ballName}</p>
+                    <p><strong>Auto-Heal:</strong> ${state.settings.autoPotion ? 'On (' + potionName + ')' : 'Off'}</p>
+                </div>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <button id="btn-run-zzz" class="styled-btn" style="background-color: #4CAF50; color: white;">Run ZzZ Mode</button>
+                    <button id="btn-skip-zzz" class="styled-btn" style="background-color: #f44336; color: white;">Do Not Run</button>
+                </div>
+            </div>
+        </div>
+    `;
+
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = html;
+    document.body.appendChild(tempDiv.firstElementChild);
+
+    document.getElementById('btn-run-zzz').onclick = () => {
+        document.getElementById('zzz-mode-prompt').remove();
+        showSleepModeLoading(elapsedMs);
+    };
+
+    document.getElementById('btn-skip-zzz').onclick = () => {
+        document.getElementById('zzz-mode-prompt').remove();
+    };
+}
     const overlayHtml = `
         <div id="sleep-mode-loading-overlay" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.9); color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 10000;">
             <h2>Collecting Data...</h2>
