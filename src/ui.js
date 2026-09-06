@@ -713,7 +713,7 @@ async function init() {
 
         profilesContainer.innerHTML = ''; // clear
 
-        let profileAction = 'load';
+        window.profileAction = 'load';
 
         // Variables to hold pending rename state
         let pendingRenameId = null;
@@ -739,7 +739,7 @@ async function init() {
                 if (renameModal) renameModal.style.display = 'none';
                 pendingRenameId = null;
                 pendingRenameData = null;
-                profileAction = 'load';
+                window.profileAction = 'load';
                 updateHeader();
             };
         }
@@ -747,9 +747,9 @@ async function init() {
         const updateHeader = () => {
             const h2 = saveManagerModal.querySelector('h2');
             if (h2) {
-                if (profileAction === 'rename') {
+                if (window.profileAction === 'rename') {
                     h2.innerHTML = "Save Profiles - <span style='color: #3498db;'>Select Profile to Rename</span>";
-                } else if (profileAction === 'erase') {
+                } else if (window.profileAction === 'erase') {
                     h2.innerHTML = "Save Profiles - <span style='color: #f44336;'>Select Profile to Erase</span>";
                 } else {
                     h2.innerHTML = "Save Profiles";
@@ -819,19 +819,19 @@ async function init() {
             `;
 
             btn.onclick = async () => {
-                if (profileAction === 'rename') {
+                if (window.profileAction === 'rename') {
                     if (renameModal && renameInput) {
                         pendingRenameId = profileId;
                         pendingRenameData = pData;
                         renameInput.value = profileName;
                         renameModal.style.display = 'flex';
                     }
-                } else if (profileAction === 'erase') {
+                } else if (window.profileAction === 'erase') {
                     if (confirm(`Are you sure you want to delete "${profileName}"? This cannot be undone.`)) {
                         storage.deleteProfile(profileId);
                         window.location.reload();
                     }
-                    profileAction = 'load';
+                    window.profileAction = 'load';
                     updateHeader();
                 } else {
                     // Load Action
@@ -882,12 +882,12 @@ async function init() {
         document.getElementById('btn-new-profile').onclick = startNewGame;
 
         document.getElementById('btn-rename-profile').onclick = () => {
-            profileAction = profileAction === 'rename' ? 'load' : 'rename';
+            window.profileAction = window.profileAction === 'rename' ? 'load' : 'rename';
             updateHeader();
         };
 
         document.getElementById('btn-erase-profile').onclick = () => {
-            profileAction = profileAction === 'erase' ? 'load' : 'erase';
+            window.profileAction = window.profileAction === 'erase' ? 'load' : 'erase';
             updateHeader();
         };
 
