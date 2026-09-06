@@ -210,11 +210,15 @@ export function renderPokeMarketTab(category) {
 
     let html = `<div style="display: grid; grid-template-columns: repeat(${cols}, minmax(100px, 150px)); gap: 15px; justify-content: center; width: 100%;">`;
     items.forEach(item => {
+        let displayName = item.name;
+        if (category === 'potions') displayName = displayName.replace(' Potion', '<br>Potion');
+        if (category === 'stones') displayName = displayName.replace(' Stone', '<br>Stone');
+
         html += `
             <div class="market-item-card" data-price="${item.price}" data-id="${item.name}" data-category="${category}"
                 onclick="window.buyItem('${item.name}', ${item.price}, '${category}')"
                 style="background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; padding: 10px; text-align: center; cursor: pointer; transition: transform 0.2s; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                <div style="font-size: 14px; font-weight: bold; margin-bottom: 5px; height: 32px; display: flex; align-items: center; justify-content: center;">${item.name}</div>
+                <div style="font-size: 14px; font-weight: bold; margin-bottom: 5px; height: 32px; display: flex; align-items: center; justify-content: center; text-align: center;">${displayName}</div>
                 <img src="${item.img}" style="width: 60px; height: 60px; object-fit: contain; margin-bottom: 5px;">
                 <div style="font-size: 12px; color: #f1c40f; margin-bottom: 5px;">${item.attrLabel}</div>
                 <div style="font-size: 12px; color: #bdc3c7;">Base: $${formatMarketNumber(item.price)}</div>
