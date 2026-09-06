@@ -78,6 +78,16 @@ export function updateBattleArena() {
                 elEnemySide.style.bottom = `${baseBottom}%`;
 
                 if (battleSystem.isSliding) {
+                    if (!elEnemySprite.classList.contains('anim-splash') && !elEnemySprite.classList.contains('anim-fly') && !elEnemySprite.classList.contains('anim-walk')) {
+                        if (enemy.types.includes('Water')) {
+                            elEnemySprite.classList.add('anim-splash');
+                            if (enemySplash) enemySplash.style.display = 'block';
+                        } else if (enemy.types.includes('Flying') || enemy.types.includes('Wind')) {
+                            elEnemySprite.classList.add('anim-fly');
+                        } else {
+                            elEnemySprite.classList.add('anim-walk');
+                        }
+                    }
                     if (elEnemySide.dataset.sliding !== 'true') {
                         elEnemySide.dataset.sliding = 'true';
                         elEnemySide.style.transition = 'none';
@@ -95,6 +105,20 @@ export function updateBattleArena() {
                     elEnemySide.dataset.sliding = 'false';
                     elEnemySide.style.transition = 'none';
                     elEnemySide.style.left = '35%';
+
+                    if (elEnemySprite.dataset.stopping !== 'true' && (elEnemySprite.classList.contains('anim-walk') || elEnemySprite.classList.contains('anim-fly') || elEnemySprite.classList.contains('anim-splash'))) {
+                        elEnemySprite.dataset.stopping = 'true';
+                        let fallbackTimeout;
+                        const stopEnemyAnim = () => {
+                            elEnemySprite.classList.remove('anim-walk', 'anim-fly', 'anim-splash');
+                            if (enemySplash) enemySplash.style.display = 'none';
+                            elEnemySprite.dataset.stopping = 'false';
+                            elEnemySprite.removeEventListener('animationiteration', stopEnemyAnim);
+                            if (fallbackTimeout) clearTimeout(fallbackTimeout);
+                        };
+                        elEnemySprite.addEventListener('animationiteration', stopEnemyAnim);
+                        fallbackTimeout = setTimeout(stopEnemyAnim, 1500);
+                    }
                 }
             }
 
@@ -132,9 +156,24 @@ export function updateBattleArena() {
                 }
 
                 const elPlayerSprite = document.getElementById('player-sprite');
+                const playerSplash = document.getElementById('player-water-splash');
                 if (elPlayerSprite) {
                     elPlayerSprite.src = `Assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? leader.id + '_shiny' : leader.id}.png`;
                     elPlayerSprite.style.display = 'block';
+
+                    if (elPlayerSprite.dataset.stopping !== 'true' && (elPlayerSprite.classList.contains('anim-walk') || elPlayerSprite.classList.contains('anim-fly') || elPlayerSprite.classList.contains('anim-splash'))) {
+                        elPlayerSprite.dataset.stopping = 'true';
+                        let pFallbackTimeout;
+                        const stopPlayerAnim = () => {
+                            elPlayerSprite.classList.remove('anim-walk', 'anim-fly', 'anim-splash');
+                            if (playerSplash) playerSplash.style.display = 'none';
+                            elPlayerSprite.dataset.stopping = 'false';
+                            elPlayerSprite.removeEventListener('animationiteration', stopPlayerAnim);
+                            if (pFallbackTimeout) clearTimeout(pFallbackTimeout);
+                        };
+                        elPlayerSprite.addEventListener('animationiteration', stopPlayerAnim);
+                        pFallbackTimeout = setTimeout(stopPlayerAnim, 1500);
+                    }
                 }
             }
         } else if (battleSystem && battleSystem.isSearching) {
@@ -185,9 +224,21 @@ export function updateBattleArena() {
                 }
 
                 const elPlayerSprite = document.getElementById('player-sprite');
+                const playerSplash = document.getElementById('player-water-splash');
                 if (elPlayerSprite) {
                     elPlayerSprite.src = `Assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? leader.id + '_shiny' : leader.id}.png`;
                     elPlayerSprite.style.display = 'block';
+
+                    if (!elPlayerSprite.classList.contains('anim-splash') && !elPlayerSprite.classList.contains('anim-fly') && !elPlayerSprite.classList.contains('anim-walk')) {
+                        if (leader.types.includes('Water')) {
+                            elPlayerSprite.classList.add('anim-splash');
+                            if (playerSplash) playerSplash.style.display = 'block';
+                        } else if (leader.types.includes('Flying') || leader.types.includes('Wind')) {
+                            elPlayerSprite.classList.add('anim-fly');
+                        } else {
+                            elPlayerSprite.classList.add('anim-walk');
+                        }
+                    }
                 }
             } else {
                 const elPlayerSprite = document.getElementById('player-sprite');
@@ -423,4 +474,52 @@ export function playCombatAnimations(targetSide, moveType, duration) {
         }, Math.min(500, duration * 0.3));
 
     }, duration * 0.8);
+}
+export function triggerDefeatAnimation(enemy) {
+    const elEnemySprite = document.getElementById('enemy-sprite');
+    const elEnemySide = document.getElementById('enemy-side');
+    if (!elEnemySprite || !elEnemySide || !enemy) return;
+
+    // Clone the entire enemy side to retain all styling
+    const ghost = elEnemySide.cloneNode(true);
+    ghost.id = 'enemy-side-ghost';
+
+    // Explicitly set the sprite's dimensions to prevent CSS collapse
+    const rect = elEnemySprite.getBoundingClientRect();
+    const ghostSprite = ghost.querySelector('#enemy-sprite');
+    if (ghostSprite) {
+        ghostSprite.id = 'enemy-sprite-ghost';
+        ghostSprite.style.height = rect.height + 'px';
+        ghostSprite.style.width = rect.width + 'px';
+    }
+
+    // Hide the HP bar in the ghost
+    const hpBar = ghost.querySelector('#enemy-battle-hp-container');
+    if (hpBar) hpBar.style.display = 'none';
+
+    // Absolute positioning exactly where it was
+    ghost.style.position = 'absolute';
+    ghost.style.left = elEnemySide.style.left || '35%';
+    ghost.style.bottom = elEnemySide.style.bottom || '10%';
+    ghost.style.transition = 'all 2s ease-out';
+    ghost.style.zIndex = '4'; // slightly behind active sprite
+
+    const arena = document.getElementById('combat-arena');
+    if (arena) {
+        arena.appendChild(ghost);
+
+        // Trigger reflow
+        void ghost.offsetWidth;
+
+        // Slide to x=15% and fade out
+        ghost.style.left = '15%';
+        ghost.style.opacity = '0';
+
+        // Cleanup
+        setTimeout(() => {
+            if (ghost.parentElement) {
+                ghost.parentElement.removeChild(ghost);
+            }
+        }, 2000);
+    }
 }

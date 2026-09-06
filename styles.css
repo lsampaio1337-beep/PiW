@@ -333,3 +333,58 @@ input[type="number"] {
 .glow-weak {
     /* No glow */
 }
+
+/* Battle Animations */
+@keyframes anim-walk {
+    0% { translate: 0 0; rotate: 0deg; }
+    25% { translate: 0 -15px; rotate: 3deg; }
+    50% { translate: 0 0; rotate: 0deg; }
+    75% { translate: 0 -15px; rotate: -3deg; }
+    100% { translate: 0 0; rotate: 0deg; }
+}
+
+@keyframes anim-fly {
+    0% { translate: 0 0; }
+    50% { translate: 0 -25px; }
+    100% { translate: 0 0; }
+}
+
+@keyframes anim-splash {
+    0% { translate: 0 0; }
+    50% { translate: 0 -10px; }
+    100% { translate: 0 0; }
+}
+
+@keyframes splash-pulse {
+    0% { transform: translateX(-50%) scale(1); opacity: 0.5; }
+    50% { transform: translateX(-50%) scale(1.2); opacity: 1; }
+    100% { transform: translateX(-50%) scale(1); opacity: 0.5; }
+}
+
+.anim-walk {
+    animation: anim-walk 1s ease-in-out infinite;
+}
+
+.anim-fly {
+    animation: anim-fly 1.5s ease-in-out infinite;
+}
+
+.anim-splash {
+    animation: anim-splash 1.5s ease-in-out infinite;
+}
+
+/* Water splash element for base */
+.water-splash-effect {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 30px;
+    background: radial-gradient(ellipse at center, rgba(52,152,219,0.8) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: 1;
+    animation: splash-pulse 1.5s infinite;
+    pointer-events: none;
+    display: none;
+}

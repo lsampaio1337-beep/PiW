@@ -563,6 +563,10 @@ class BattleSystem {
         const leader = this.state.party[0];
         const ev = this.activeEncounter.ev;
 
+        if (typeof window.triggerDefeatAnimation === 'function') {
+            window.triggerDefeatAnimation(this.activeEncounter);
+        }
+
         // Bonus Candy Defeats Tracker
         if ((this.state.stats.bonusCandyDefeats || 0) < 1000) {
             this.state.stats.bonusCandyDefeats = (this.state.stats.bonusCandyDefeats || 0) + 1;
