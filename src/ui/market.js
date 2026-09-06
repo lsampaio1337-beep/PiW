@@ -61,7 +61,7 @@ export function setupMarket(vCenter) {
 export function openPokeMarketBuy() {
     // Generate tabs: Balls, Potions, Stones
     const html = `
-        <div id="market-buy-modal" style="display: flex; flex-direction: column; width: 60vw; min-width: 300px; height: 100%;">
+        <div id="market-buy-modal" style="display: flex; flex-direction: column; width: max-content; min-width: 300px; max-width: 100%; height: 100%;">
 
             <div style="display: flex; gap: 10px; margin-bottom: 20px; justify-content: center;">
                 <button onclick="window.renderPokeMarketTab('pokeballs')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; border-radius: 5px;">Balls</button>
@@ -173,6 +173,7 @@ export function renderPokeMarketTab(category) {
     let cols = 4;
 
     if (category === 'pokeballs') {
+        cols = 4;
         items = state.config.balance.items.pokeballs.map(b => ({
             name: b.name,
             price: b.price,
@@ -180,6 +181,7 @@ export function renderPokeMarketTab(category) {
             attrLabel: b.name === 'Masterball' ? `Efficiency: 100%` : `Efficiency: ${b.multiplier}x`
         }));
     } else if (category === 'potions') {
+        cols = 6;
         items = state.config.balance.items.potions
             .filter(p => p.name !== 'Max Potion') // Hide Max Potion
             .map(p => {
@@ -195,6 +197,7 @@ export function renderPokeMarketTab(category) {
                 };
             });
     } else if (category === 'stones') {
+        cols = 6;
         const stonePrice = state.config.balance.items.stones.price;
         // Generate list from backpack stone keys
         let stoneKeys = Object.keys(state.backpack.stones);
@@ -207,7 +210,7 @@ export function renderPokeMarketTab(category) {
         }));
     }
 
-    let html = `<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 150px)); gap: 15px; justify-content: center; width: 100%;">`;
+    let html = `<div style="display: grid; grid-template-columns: repeat(${cols}, 120px); gap: 15px; justify-content: center; width: 100%;">`;
     items.forEach(item => {
         let displayName = item.name;
         if (category === 'potions') displayName = displayName.replace(' Potion', '<br>Potion');
