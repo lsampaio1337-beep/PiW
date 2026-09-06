@@ -25,11 +25,14 @@ function renderSlotUI(p, listName, origIndex, isDraggable) {
 
     let selectionStyle = '';
     let clickHandler = '';
-    if (window.sellModeActive && listName.toLowerCase() === 'storage') {
+    if (window.sellModeActive) {
+        // Ensure updatePokemonSellValueDisplay runs when tab renders, so the value displays immediately
+        setTimeout(() => { if (window.updatePokemonSellValueDisplay) window.updatePokemonSellValueDisplay(); }, 10);
+
         dragAttr = ''; // Disable drag in sell mode
         cursorStyle = 'cursor: pointer;';
         clickHandler = `onclick="window.toggleSaleSelection('${p.uuid}')"`;
-        if (window.selectedForSale.has(p.uuid)) {
+        if (window.selectedForSale && window.selectedForSale.has(p.uuid)) {
             selectionStyle = 'outline: 3px solid #00ff00; outline-offset: -3px; background: rgba(0,255,0,0.2);';
         }
     }
@@ -54,12 +57,14 @@ function renderSlotUI(p, listName, origIndex, isDraggable) {
 }
 
 window.toggleSaleSelection = function(uuid) {
+    window.selectedForSale = window.selectedForSale || new Set();
     if (window.selectedForSale.has(uuid)) {
         window.selectedForSale.delete(uuid);
     } else {
         window.selectedForSale.add(uuid);
     }
     renderBackpackTab('pokemon');
+    if (window.updatePokemonSellValueDisplay) window.updatePokemonSellValueDisplay();
 };
 
 // Global filter state
@@ -76,6 +81,7 @@ export function renderPokemonTab(area) {
             <div style="margin-bottom: 10px; text-align: center;">
                 <button onclick="window.selectAllForSale()" style="padding: 5px 15px; margin-right: 5px; background: #3498db; color: white; border: none; border-radius: 4px; cursor: pointer;">Select All in Storage</button>
                 <button onclick="window.sellSelectedPokemon()" style="padding: 5px 15px; margin-right: 5px; background: #e74c3c; color: white; border: none; border-radius: 4px; cursor: pointer;">Sell Selected</button>
+                <div id="pokemon-sell-value-display" style="display: inline-block; margin-left: 10px; font-weight: bold; font-size: 14px; min-width: 150px; text-align: left;"></div>
                 <button onclick="window.cancelSellMode()" style="padding: 5px 15px; background: #7f8c8d; color: white; border: none; border-radius: 4px; cursor: pointer;">Cancel</button>
             </div>
         `;
@@ -534,6 +540,7 @@ window.selectAllForSale = function() {
     // (User can still manually click them to select, but this button ignores them)
 
     window.renderBackpackTab('pokemon');
+    if (window.updatePokemonSellValueDisplay) window.updatePokemonSellValueDisplay();
 };
 
 window.sellSelectedPokemon = function() {
@@ -558,8 +565,7 @@ window.sellSelectedPokemon = function() {
                 let bstTotal = bst.hp + bst.atk + bst.def + bst.spa + bst.spd + bst.spe;
                 let totalIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
                 let ev = window.calculateEV ? window.calculateEV(bstTotal, p.level, p.quality, totalIV) : Math.floor(bstTotal * (p.level/100) * p.quality);
-
-                let val = Math.floor(ev * p.level);
+                let val = ev; // Pokemon price will be the EV of him
                 totalGain += val;
                 numSold++;
 
@@ -601,5 +607,38 @@ window.sellSelectedPokemon = function() {
                 window.renderBackpackTab('pokemon');
             }
         }, 2000);
+    }
+};
+
+window.updatePokemonSellValueDisplay = function() {
+    if (!window.selectedForSale) return;
+
+    let totalVal = 0;
+
+    const countValues = (arr) => {
+        for (let p of arr) {
+            if (window.selectedForSale.has(p.uuid)) {
+                let bst = window.state.config.pokedex[p.id].baseStats;
+                let bstTotal = bst.hp + bst.atk + bst.def + bst.spa + bst.spd + bst.spe;
+                let totalIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
+                let ev = window.calculateEV ? window.calculateEV(bstTotal, p.level, p.quality, totalIV) : Math.floor(bstTotal * (p.level/100) * p.quality);
+                totalVal += ev; // Pokemon price is exactly the EV
+            }
+        }
+    };
+
+    countValues(state.storage);
+    countValues(state.party);
+    countValues(state.breeding);
+    countValues(state.training);
+    countValues(state.safe);
+
+    const valDisplay = document.getElementById('pokemon-sell-value-display');
+    if (valDisplay) {
+        if (window.selectedForSale.size > 0) {
+            valDisplay.innerHTML = `<span style="color: gold">Total Value: ${totalVal.toLocaleString()}</span>`;
+        } else {
+            valDisplay.innerHTML = "";
+        }
     }
 };
