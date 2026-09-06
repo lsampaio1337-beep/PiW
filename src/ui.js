@@ -183,11 +183,44 @@ window.setLeader = function(idx) {
     }
 };
 
-window.startGymBattle = function(gymName) {
-    if (globals.battleSystem) {
-        globals.battleSystem.startGymBattle(gymName);
-    }
+window.enterGymLobby = function(gymName) {
+    if (globals.battleSystem) globals.battleSystem.enterGymLobby(gymName);
 };
+
+window.startGymBattle = function(trainerIndex) {
+    if (globals.battleSystem) globals.battleSystem.startGymBattle(trainerIndex);
+};
+
+window.fleeGym = function() {
+    if (globals.battleSystem) globals.battleSystem.fleeGym();
+};
+
+
+window.claimGift = function() {
+    if (!state.trainer.pendingGifts || state.trainer.pendingGifts.length === 0) return;
+
+    let message = "You claimed the following gifts:<br><br>";
+    for (const gift of state.trainer.pendingGifts) {
+        if (gift.type === 'badge') {
+            state.trainer.badges += 1;
+            message += `- Gym Badge<br>`;
+        } else if (gift.type === 'money') {
+            state.trainer.money += gift.amount;
+            message += `- $${gift.amount}<br>`;
+        }
+    }
+    state.trainer.pendingGifts = [];
+
+    showModal("Gifts Claimed!", `<div style="padding: 20px; text-align: center; color: white;"><p>${message}</p></div>`);
+    updateUI();
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+    const btnGift = document.getElementById('btn-gift');
+    if (btnGift) {
+        btnGift.addEventListener('click', window.claimGift);
+    }
+});
 
 window.closeModal = function() {
     document.getElementById('modal-overlay').style.display = 'none';
@@ -198,6 +231,7 @@ window.closeModal = function() {
     }
 };
 
+window.showModal = function(title, htmlContent) { showModal(title, htmlContent); };
 export function showModal(title, htmlContent) {
     let rightCol = document.getElementById('modal-overlay');
     let contentPanel = document.getElementById('content-panel');
@@ -484,6 +518,7 @@ export function renderOakLab() {
     `;
 }
 
+window.switchView = function(viewName) { switchView(viewName); };
 export function switchView(viewName) {
     document.querySelectorAll('.game-view').forEach(el => el.style.display = 'none');
 
@@ -590,6 +625,7 @@ function startGame() {
     let bs = new BattleSystem(state, updateUI);
     setBattleSystem(bs);
     updateUI();
+    if (state.settings.activeBallTier === -1) { state.settings.activeBallTier = 0; }
     bs.start();
 
     // Playtime tracker (adds 1 second every second)
