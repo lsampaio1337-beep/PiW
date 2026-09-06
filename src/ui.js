@@ -520,6 +520,7 @@ export function renderOakLab() {
     `;
 }
 
+window.switchView = function(viewName) { switchView(viewName); };
 export function switchView(viewName) {
     document.querySelectorAll('.game-view').forEach(el => el.style.display = 'none');
 
