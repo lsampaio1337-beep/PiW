@@ -1,6 +1,37 @@
 import { TYPE_COLORS } from '../ui.js';
 import { state, globals } from '../state.js';
 
+
+function manageAnimation(spriteEl, pokemon, isSliding) {
+    if (!spriteEl) return;
+
+    // Set up the listener once
+    if (!spriteEl.dataset.animListenerAttached) {
+        spriteEl.addEventListener('animationiteration', (e) => {
+            if (spriteEl.dataset.shouldStopAnim === 'true') {
+                spriteEl.classList.remove('anim-walk', 'anim-fly', 'anim-splash');
+                spriteEl.dataset.shouldStopAnim = 'false';
+                spriteEl.dataset.currentAnim = '';
+            }
+        });
+        spriteEl.dataset.animListenerAttached = 'true';
+    }
+
+    const targetAnim = (pokemon.types.includes('Flying') || pokemon.types.includes('Wind')) ? 'anim-fly' : (pokemon.types.includes('Water') ? 'anim-splash' : 'anim-walk');
+
+    if (isSliding) {
+        spriteEl.dataset.shouldStopAnim = 'false';
+        if (spriteEl.dataset.currentAnim !== targetAnim) {
+            spriteEl.classList.remove('anim-walk', 'anim-fly', 'anim-splash');
+            spriteEl.classList.add(targetAnim);
+            spriteEl.dataset.currentAnim = targetAnim;
+        }
+    } else {
+        // Duel started, tell it to stop on next iteration
+        spriteEl.dataset.shouldStopAnim = 'true';
+    }
+}
+
 export function updateBattleArena() {
     const battleSystem = globals.battleSystem;
     const inGym = battleSystem && battleSystem.gymState && battleSystem.gymState.isActive;
@@ -76,6 +107,8 @@ export function updateBattleArena() {
                 if (enemy.types.includes('Flying') || enemy.types.includes('Wind')) baseBottom = 20;
 
                 elEnemySide.style.bottom = `${baseBottom}%`;
+                manageAnimation(elEnemySprite, enemy, battleSystem.isSliding);
+
 
                 if (battleSystem.isSliding) {
                     if (elEnemySide.dataset.sliding !== 'true') {
@@ -107,6 +140,9 @@ export function updateBattleArena() {
                 if (leader.types.includes('Flying') || leader.types.includes('Wind')) baseBottom = 20;
 
                 elPlayerSide.style.bottom = `${baseBottom}%`;
+                manageAnimation(elPlayerSprite, leader, battleSystem.isSliding);
+
+
                 elPlayerSide.style.left = '20%';
 
                 const hpContainerPlayer = document.getElementById('player-battle-hp-container');
@@ -211,6 +247,52 @@ export function updateBattleArena() {
 
 /* removed TYPE_COLORS */
 
+
+
+export function triggerDefeatAnimation(pokemon) {
+    const arena = document.getElementById('combat-arena');
+    if (!arena) return;
+
+    // Create a clone of the enemy sprite side
+    const ghostSide = document.createElement('div');
+    ghostSide.style.position = 'absolute';
+    ghostSide.style.display = 'flex';
+    ghostSide.style.flexDirection = 'column';
+    ghostSide.style.alignItems = 'center';
+
+    let baseBottom = 10;
+    if (pokemon.types.includes('Water')) baseBottom = 5;
+    if (pokemon.types.includes('Flying') || pokemon.types.includes('Wind')) baseBottom = 20;
+
+    ghostSide.style.bottom = `${baseBottom}%`;
+    ghostSide.style.left = '35%'; // starting position when defeated
+    ghostSide.style.transform = 'translateX(-50%)'; // to match #enemy-side css
+
+    const img = document.createElement('img');
+    img.src = `Assets/Pokemon Sprites/${pokemon.qualityName === 'Shiny' ? pokemon.id + '_shiny' : pokemon.id}.png`;
+    img.style.height = '35vh';
+    img.style.minHeight = '100px';
+    img.style.width = 'auto';
+    img.style.marginTop = '10px';
+    img.style.objectFit = 'contain';
+    img.style.position = 'relative';
+    img.style.zIndex = '9'; // slightly below active sprite
+
+    ghostSide.appendChild(img);
+    arena.appendChild(ghostSide);
+
+    // Trigger reflow
+    void ghostSide.offsetWidth;
+
+    // Start animation: slide to 15% and fade out over 2s
+    ghostSide.style.transition = 'left 2s linear, opacity 2s linear';
+    ghostSide.style.left = '15%';
+    ghostSide.style.opacity = '0';
+
+    setTimeout(() => {
+        if (ghostSide.parentElement) ghostSide.parentElement.removeChild(ghostSide);
+    }, 2000);
+}
 
 export function showDamage(target, amount, isCrit, moveName = '', moveType = 'Normal', effectiveness = 1) {
     const battleSystem = globals.battleSystem;
