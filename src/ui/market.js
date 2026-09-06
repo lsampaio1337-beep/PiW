@@ -69,8 +69,12 @@ export function setupMarket(vCenter) {
     };
 
     document.getElementById('btn-market-sell').onclick = () => {
-        if (window.startSellMode) {
-            window.startSellMode();
+        if (window.startSellMode) { window.startSellMode(); }
+        else if (window.showBackpack) {
+            window.showBackpack(); // Loads pokemon.js logic implicitly via backpack init
+            setTimeout(() => { if(window.startSellMode) window.startSellMode(); }, 50);
+        } else {
+            console.error("startSellMode not found!");
         }
     };
 }

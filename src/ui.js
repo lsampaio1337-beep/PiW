@@ -54,6 +54,8 @@ window.showMapTooltip = showMapTooltip;
 window.hideMapTooltip = hideMapTooltip;
 window.showBackpack = showBackpack;
 window.renderBackpackTab = renderBackpackTab;
+window.startSellMode = window.startSellMode || (() => { if (window.showBackpack) { window.showBackpack(); window.startSellMode && window.startSellMode(); } });
+window.startSellMode = window.startSellMode || (() => { if (window.showBackpack) { window.showBackpack(); window.startSellMode && window.startSellMode(); } });
 window.setActiveItem = setActiveItem;
 window.showPokedex = showPokedex;
 window.showDexEntry = showDexEntry;
