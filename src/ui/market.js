@@ -8,20 +8,6 @@ export function setupMarket(vCenter) {
         <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: space-between; align-items: center; padding: 0 10vw; box-sizing: border-box;">
             <!-- PokeCenter Button (Left) -->
             <button id="btn-heal-all" style="
-                background: #e74c3c;
-                color: white;
-                border: 3px solid white;
-                border-radius: 12px;
-                padding: 15px 30px;
-                font-size: 24px;
-                font-weight: bold;
-                cursor: pointer;
-                box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-                transform: translateY(-30vh);
-            ">PokeCenter</button>
-
-            <!-- PokeMarket Button (Right) -->
-            <button id="btn-market-buy" style="
                 background: #3498db;
                 color: white;
                 border: 3px solid white;
@@ -32,7 +18,21 @@ export function setupMarket(vCenter) {
                 cursor: pointer;
                 box-shadow: 0 4px 10px rgba(0,0,0,0.5);
                 transform: translateY(-30vh);
-            ">PokeMarket</button>
+            ">Heal</button>
+
+            <!-- PokeMarket Button (Right) -->
+            <button id="btn-market-buy" style="
+                background: #f1c40f;
+                color: black;
+                border: 3px solid white;
+                border-radius: 12px;
+                padding: 15px 30px;
+                font-size: 24px;
+                font-weight: bold;
+                cursor: pointer;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+                transform: translateY(-30vh);
+            ">Buy</button>
         </div>
     `;
     vCenter.style.backgroundImage = "url('./Assets/BG/BG-PCPM.png')";
@@ -61,7 +61,7 @@ export function setupMarket(vCenter) {
 export function openPokeMarketBuy() {
     // Generate tabs: Balls, Potions, Stones
     const html = `
-        <div id="market-buy-modal" style="display: flex; flex-direction: column; width: max-content; min-width: 300px; max-width: 100%; height: 100%;">
+        <div id="market-buy-modal" style="display: flex; flex-direction: column; width: max-content; min-width: 300px; max-width: 100%; height: 100%; margin-top: 10px;">
 
             <div style="display: flex; gap: 10px; margin-bottom: 20px; justify-content: center;">
                 <button onclick="window.renderPokeMarketTab('pokeballs')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; border-radius: 5px;">Balls</button>
@@ -80,7 +80,7 @@ export function openPokeMarketBuy() {
         </div>
     `;
 
-    showModal(`<span style="font-size: 24px;">PokeMarket</span>`, html);
+    showModal('', html);
 
     // Apply specific modal overrides
     const modalBox = document.getElementById('modal-content-box');
