@@ -620,13 +620,22 @@ class BattleSystem {
                 }
 
                 if (!this.state.trainer.pendingGifts) this.state.trainer.pendingGifts = [];
-                this.state.trainer.pendingGifts.push({ type: 'badge' });
+
+                const gymIndex = this.state.config.gyms.findIndex(g => g.name === gym.name);
+                if (gymIndex !== -1 && this.state.trainer.badges === gymIndex) {
+                    this.state.trainer.pendingGifts.push({ type: 'badge' });
+                }
+
                 this.state.trainer.pendingGifts.push({ type: 'money', amount: rewardMoney });
                 this.state.stats.giftIconUnlocked = true;
 
+                if (typeof window.showModal === 'function') {
+                    window.showModal("Gym Defeated!", `<div style="padding: 20px; text-align: center; color: white;"><p>You defeated ${gym.leader}! A Gift awaits for you.</p></div>`);
+                }
+
                 setTimeout(() => {
                     this.fleeGym();
-                }, 1000);
+                }, 3000);
             } else {
                 // Defeated trainer
                 this.state.trainer.money += rewardMoney;

@@ -208,13 +208,7 @@ window.claimGift = function() {
     }
     state.trainer.pendingGifts = [];
 
-    const panel = document.getElementById('content-panel');
-    panel.innerHTML = `<div style="padding: 20px; text-align: center; color: white;">
-        <h2>Gifts Claimed!</h2>
-        <p>${message}</p>
-    </div>`;
-    document.getElementById('modal-overlay').style.display = 'flex';
-    document.getElementById('modal-content-box').dataset.originalStyles = document.getElementById('modal-content-box').getAttribute('style');
+    showModal("Gifts Claimed!", `<div style="padding: 20px; text-align: center; color: white;"><p>${message}</p></div>`);
     updateUI();
 };
 
@@ -234,6 +228,7 @@ window.closeModal = function() {
     }
 };
 
+window.showModal = function(title, htmlContent) { showModal(title, htmlContent); };
 export function showModal(title, htmlContent) {
     let rightCol = document.getElementById('modal-overlay');
     let contentPanel = document.getElementById('content-panel');
