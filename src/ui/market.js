@@ -8,20 +8,6 @@ export function setupMarket(vCenter) {
         <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: space-between; align-items: center; padding: 0 10vw; box-sizing: border-box;">
             <!-- PokeCenter Button (Left) -->
             <button id="btn-heal-all" style="
-                background: #e74c3c;
-                color: white;
-                border: 3px solid white;
-                border-radius: 12px;
-                padding: 15px 30px;
-                font-size: 24px;
-                font-weight: bold;
-                cursor: pointer;
-                box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-                transform: translateY(-30vh);
-            ">PokeCenter</button>
-
-            <!-- PokeMarket Button (Right) -->
-            <button id="btn-market-buy" style="
                 background: #3498db;
                 color: white;
                 border: 3px solid white;
@@ -32,7 +18,21 @@ export function setupMarket(vCenter) {
                 cursor: pointer;
                 box-shadow: 0 4px 10px rgba(0,0,0,0.5);
                 transform: translateY(-30vh);
-            ">PokeMarket</button>
+            ">Heal</button>
+
+            <!-- PokeMarket Button (Right) -->
+            <button id="btn-market-buy" style="
+                background: #f1c40f;
+                color: black;
+                border: 3px solid white;
+                border-radius: 12px;
+                padding: 15px 30px;
+                font-size: 24px;
+                font-weight: bold;
+                cursor: pointer;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+                transform: translateY(-30vh);
+            ">Buy</button>
         </div>
     `;
     vCenter.style.backgroundImage = "url('./Assets/BG/BG-PCPM.png')";
@@ -61,7 +61,7 @@ export function setupMarket(vCenter) {
 export function openPokeMarketBuy() {
     // Generate tabs: Balls, Potions, Stones
     const html = `
-        <div id="market-buy-modal" style="display: flex; flex-direction: column; width: 60vw; min-width: 300px; height: 100%;">
+        <div id="market-buy-modal" style="display: flex; flex-direction: column; width: max-content; min-width: 300px; max-width: 100%; height: 100%; margin-top: 10px;">
 
             <div style="display: flex; gap: 10px; margin-bottom: 20px; justify-content: center;">
                 <button onclick="window.renderPokeMarketTab('pokeballs')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; border-radius: 5px;">Balls</button>
@@ -80,7 +80,7 @@ export function openPokeMarketBuy() {
         </div>
     `;
 
-    showModal(`<span style="font-size: 24px;">PokeMarket</span>`, html);
+    showModal('', html);
 
     // Apply specific modal overrides
     const modalBox = document.getElementById('modal-content-box');
@@ -181,19 +181,21 @@ export function renderPokeMarketTab(category) {
             attrLabel: b.name === 'Masterball' ? `Efficiency: 100%` : `Efficiency: ${b.multiplier}x`
         }));
     } else if (category === 'potions') {
-        cols = 7;
-        items = state.config.balance.items.potions.map(p => {
-            let invName = p.name;
-            if (p.name === 'Regular Potion') invName = 'Regular Potion';
-            if (p.name === 'Big') invName = 'Big Potion';
+        cols = 6;
+        items = state.config.balance.items.potions
+            .filter(p => p.name !== 'Max Potion') // Hide Max Potion
+            .map(p => {
+                let invName = p.name;
+                if (p.name === 'Regular Potion') invName = 'Regular Potion';
+                if (p.name === 'Big') invName = 'Big Potion';
 
-            return {
-                name: invName,
-                price: p.price,
-                img: `./Assets/Items/Potions/${invName}.png`,
-                attrLabel: `Heal: ${p.heal >= 999999 ? '100%' : p.heal + ' HP'}`
-            };
-        });
+                return {
+                    name: invName,
+                    price: p.price,
+                    img: `./Assets/Items/Potions/${invName}.png`,
+                    attrLabel: `Heal: ${p.heal >= 999999 ? '100%' : p.heal + ' HP'}`
+                };
+            });
     } else if (category === 'stones') {
         cols = 6;
         const stonePrice = state.config.balance.items.stones.price;
@@ -208,15 +210,19 @@ export function renderPokeMarketTab(category) {
         }));
     }
 
-    let html = `<div style="display: grid; grid-template-columns: repeat(${cols}, minmax(100px, 150px)); gap: 15px; justify-content: center; width: 100%;">`;
+    let html = `<div style="display: grid; grid-template-columns: repeat(${cols}, 120px); gap: 15px; justify-content: center; width: 100%;">`;
     items.forEach(item => {
+        let displayName = item.name;
+        if (category === 'potions') displayName = displayName.replace(' Potion', '<br>Potion');
+        if (category === 'stones') displayName = displayName.replace(' Stone', '<br>Stone');
+
         html += `
             <div class="market-item-card" data-price="${item.price}" data-id="${item.name}" data-category="${category}"
                 onclick="window.buyItem('${item.name}', ${item.price}, '${category}')"
                 style="background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; padding: 10px; text-align: center; cursor: pointer; transition: transform 0.2s; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                <div style="font-size: 14px; font-weight: bold; margin-bottom: 5px; height: 32px; display: flex; align-items: center; justify-content: center;">${item.name}</div>
+                <div style="font-size: 14px; font-weight: bold; margin-bottom: 5px; height: 32px; display: flex; align-items: center; justify-content: center; text-align: center;">${displayName}</div>
                 <img src="${item.img}" style="width: 60px; height: 60px; object-fit: contain; margin-bottom: 5px;">
-                <div style="font-size: 12px; color: #f1c40f; margin-bottom: 5px;">${item.attrLabel}</div>
+                ${category !== 'stones' ? `<div style="font-size: 12px; color: #f1c40f; margin-bottom: 5px;">${item.attrLabel}</div>` : ''}
                 <div style="font-size: 12px; color: #bdc3c7;">Base: $${formatMarketNumber(item.price)}</div>
                 <div class="market-final-price" style="font-size: 14px; font-weight: bold; color: #2ecc71; margin-top: 5px;">$${formatMarketNumber(item.price)}</div>
             </div>
