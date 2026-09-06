@@ -827,11 +827,13 @@ class BattleSystem {
 
         while (elapsedMs > 0 && this.state.party.some(p => p.currentHp > 0)) {
             // Pick next healthy pokemon as leader
-            if (this.state.party[0].currentHp <= 0) {
+            let safeGuard = 0;
+            while (this.state.party[0].currentHp <= 0 && safeGuard < this.state.party.length) {
                 const fainted = this.state.party.shift();
                 this.state.party.push(fainted);
-                if (this.state.party[0].currentHp <= 0) break; // all fainted
+                safeGuard++;
             }
+            if (this.state.party[0].currentHp <= 0) break; // all fainted
 
             const leaderSpeed = this.state.party[0].currentStats.spe;
             let searchDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed));
@@ -847,8 +849,10 @@ class BattleSystem {
             // Fast forward combat loop
             let combatFinished = false;
             let combatTime = 0;
+            let failsafeTurns = 0;
 
-            while (!combatFinished) {
+            while (!combatFinished && failsafeTurns < 1000) {
+                failsafeTurns++;
                 const leader = this.state.party[0];
                 if (leader.currentHp <= 0) {
                     this.handleFaint();
@@ -924,6 +928,12 @@ class BattleSystem {
                     }
                     combatFinished = true;
                 }
+            }
+
+            // If we hit the failsafe limit, force the battle to end to prevent infinite loops
+            if (!combatFinished) {
+                // Flee from the battle
+                this.activeEncounter = null;
             }
 
             elapsedMs -= combatTime;
