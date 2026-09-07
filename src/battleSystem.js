@@ -244,13 +244,12 @@ class BattleSystem {
         let delay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed));
         delay = Math.max(300, delay) / this.state.settings.gameSpeed;
 
-        this.combatLoop = setTimeout(() => {
-            if (this.gymState.isActive) {
-                this.generateGymEncounter(delay);
-            } else {
-                this.generateEncounter(delay);
-            }
-        }, delay);
+        // Start encounter generation immediately using the search time as the slide-in duration
+        if (this.gymState.isActive) {
+            this.generateGymEncounter(delay);
+        } else {
+            this.generateEncounter(delay);
+        }
     }
 
     generateGymEncounter(slideDelay) {
@@ -812,6 +811,12 @@ class BattleSystem {
                 while ((leader.currentHp / leader.maxHp) * 100 <= threshold) {
                     if (!this.tryUsePotion(leader)) break;
                 }
+            }
+
+            // Heal party and storage during Rest/End Phase
+            this.state.party.forEach(p => p.currentHp = p.maxHp);
+            if (this.state.storage) {
+                this.state.storage.forEach(p => p.currentHp = p.maxHp);
             }
 
             this.gymState.currentTrainerIndex++;
