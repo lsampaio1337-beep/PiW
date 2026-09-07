@@ -494,6 +494,8 @@ export function switchView(viewName) {
     if (viewName === 'PROF_OAK_LAB') {
         document.getElementById('view-prof-oak-lab').style.display = 'block';
         renderOakLab();
+    } else if (viewName === 'SAFARI_HUB') {
+        document.getElementById('view-safari-hub').style.display = 'flex';
     } else if (viewName === 'BATTLE_ARENA') {
         document.getElementById('view-battle-arena').style.display = 'flex';
         document.getElementById('view-battle-arena').style.flexDirection = 'column';
@@ -1175,3 +1177,21 @@ window.showGameAlert = function(message) {
         alertBox.style.opacity = '0';
     }, 2500);
 };
+
+window.enterSafariZone = () => {
+    switchView("BATTLE_ARENA");
+    if (window.globals && window.globals.battleSystem) {
+        window.globals.battleSystem.stop();
+        window.globals.battleSystem.activeEncounter = null;
+        window.globals.battleSystem.isSearching = false;
+        if (window.globals.battleSystem.gymState) window.globals.battleSystem.gymState.isActive = false;
+        window.globals.battleSystem.state.currentRoute = "Safari Zone";
+        window.globals.battleSystem.searchNext();
+
+    }
+};
+
+window.leaveSafariZone = () => {
+    switchView("MAP");
+};
+window.switchView = switchView;

@@ -123,6 +123,13 @@ export function navigateToLocation(locationName) {
              if (battleSystem.gymState) battleSystem.gymState.isActive = false;
         }
         switchView("PROF_OAK_LAB");
+    } else if (locationName === "Safari Zone") {
+        if (battleSystem) {
+            battleSystem.stop();
+        }
+        switchView("SAFARI_HUB");
+        const msg = document.getElementById("safari-welcome-msg");
+        if (msg) msg.innerText = "Welcome to Safari Zone! Here we charge a fee of $500 per battle you have and you can use our SafariBalls at will. Do you wanna enter Safari Zone?";
     } else if (locationName === "Casino") {
         if (battleSystem) {
              battleSystem.stop();

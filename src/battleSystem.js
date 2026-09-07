@@ -198,6 +198,19 @@ class BattleSystem {
             return;
         }
 
+        if (this.state.currentRoute === "Safari Zone") {
+            if (this.state.trainer.money < 500) {
+                this.stop();
+                if (typeof window.switchView === 'function') {
+                    window.switchView("SAFARI_HUB");
+                }
+                let msg = document.getElementById("safari-welcome-msg");
+                if (msg) msg.innerText = "I am sorry, but you are all out of money. Try to sell some pokemons and come check us latter.";
+                return;
+            }
+            this.state.trainer.money -= 500;
+        }
+
         // Out of combat insta-heal if threshold is met
         const leader = this.state.party[0];
         if (leader && leader.currentHp > 0 && this.state.settings.autoPotion) {
@@ -599,19 +612,31 @@ class BattleSystem {
 
     throwPokeball() {
         let tier = this.state.settings.activeBallTier;
-        if (tier < 0) return { used: false, ballName: null, caught: false }; // None selected
+        let isSafariZone = this.state.currentRoute === "Safari Zone";
+        let ballName;
+        let multiplier;
 
-        let ballName = this.state.config.balance.items.pokeballs[tier].name;
-
-        if (this.state.backpack.pokeballs[ballName] > 0) {
-            this.state.backpack.pokeballs[ballName]--;
+        if (isSafariZone) {
+            let safariBallConfig = this.state.config.balance.items.pokeballs.find(b => b.name === "Safariball");
+            ballName = "Safariball";
+            multiplier = safariBallConfig ? safariBallConfig.multiplier : 1.5;
+            this.state.stats.ballsThrown = (this.state.stats.ballsThrown || 0) + 1;
         } else {
-            return { used: false, ballName: null, caught: false }; // No balls left
+            if (tier < 0) return { used: false, ballName: null, caught: false }; // None selected
+            ballName = this.state.config.balance.items.pokeballs[tier].name;
+
+        if (ballName !== "Safariball") {
+            if (this.state.backpack.pokeballs[ballName] > 0) {
+                this.state.backpack.pokeballs[ballName]--;
+            } else {
+                return { used: false, ballName: null, caught: false }; // No balls left
+            }
         }
+            if (tier < 0) return { used: false, ballName: null, caught: false }; // No balls left
 
-        if (tier < 0) return { used: false, ballName: null, caught: false }; // No balls left
-
-        let multiplier = this.state.config.balance.items.pokeballs[tier].multiplier;
+            multiplier = this.state.config.balance.items.pokeballs[tier].multiplier;
+            this.state.stats.ballsThrown = (this.state.stats.ballsThrown || 0) + 1;
+        }
 
         const chance = mathEngine.calculateCatchChance(this.activeEncounter.bst, this.activeEncounter.level, multiplier, this.state.stats, this.activeEncounter.qualityName === "Shiny");
 
