@@ -71,9 +71,9 @@ export function updateBattleArena() {
                 elEnemySprite.src = `Assets/Pokemon Sprites/${enemy.qualityName === 'Shiny' ? enemy.id + '_shiny' : enemy.id}.png`;
                 elEnemySprite.style.display = 'block';
 
-                let baseTop = 90;
-                if (enemy.types.includes('Water')) baseTop = 92;
-                if (enemy.types.includes('Flying') || enemy.types.includes('Wind')) baseTop = 85;
+                let baseTop = 87;
+                if (enemy.types.includes('Water')) baseTop = 90;
+                if (enemy.types.includes('Flying') || enemy.types.includes('Wind')) baseTop = 80;
 
                 elEnemySide.style.bottom = 'auto';
                 elEnemySide.style.top = `${baseTop}%`;
@@ -116,9 +116,9 @@ export function updateBattleArena() {
             const elPlayerSide = document.getElementById('player-side');
             if (leader && elPlayerSide) {
 
-                let baseTop = 90;
-                if (leader.types.includes('Water')) baseTop = 92;
-                if (leader.types.includes('Flying') || leader.types.includes('Wind')) baseTop = 85;
+                let baseTop = 87;
+                if (leader.types.includes('Water')) baseTop = 90;
+                if (leader.types.includes('Flying') || leader.types.includes('Wind')) baseTop = 80;
 
                 elPlayerSide.style.bottom = 'auto';
                 elPlayerSide.style.top = `${baseTop}%`;
@@ -166,7 +166,7 @@ export function updateBattleArena() {
                 elEnemySide.style.transition = 'none';
                 elEnemySide.style.left = '35%'; // Matching active battle destination
                 elEnemySide.style.bottom = 'auto';
-                elEnemySide.style.top = '90%'; // default
+                elEnemySide.style.top = '87%'; // default
                 elEnemySide.style.transform = 'translate(-50%, -100%)';
                 if (hpContainerEnemy) {
                     hpContainerEnemy.style.transition = 'none';
@@ -177,9 +177,9 @@ export function updateBattleArena() {
             const leader = state.party[0];
             const elPlayerSide = document.getElementById('player-side');
             if (leader && elPlayerSide) {
-                let baseTop = 90;
-                if (leader.types.includes('Water')) baseTop = 92;
-                if (leader.types.includes('Flying') || leader.types.includes('Wind')) baseTop = 85;
+                let baseTop = 87;
+                if (leader.types.includes('Water')) baseTop = 90;
+                if (leader.types.includes('Flying') || leader.types.includes('Wind')) baseTop = 80;
 
                 elPlayerSide.style.bottom = 'auto';
                 elPlayerSide.style.top = `${baseTop}%`;
@@ -256,9 +256,9 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
     ghost.style.left = '35%';
     ghost.style.transform = 'translate(-50%, -100%)';
 
-    let baseTop = 90;
-    if (activeEncounter.types && activeEncounter.types.includes('Water')) baseTop = 92;
-    if (activeEncounter.types && (activeEncounter.types.includes('Flying') || activeEncounter.types.includes('Wind'))) baseTop = 85;
+    let baseTop = 87;
+    if (activeEncounter.types && activeEncounter.types.includes('Water')) baseTop = 90;
+    if (activeEncounter.types && (activeEncounter.types.includes('Flying') || activeEncounter.types.includes('Wind'))) baseTop = 80;
 
     ghost.style.bottom = 'auto';
     ghost.style.top = `${baseTop}%`;
