@@ -330,11 +330,7 @@ class BattleSystem {
                 remainingIV--;
             }
 
-            if (qName === "Shiny") {
-                this.state.stats.shiniesSeen = (this.state.stats.shiniesSeen || 0) + 1;
-                if (!this.state.stats.seenShiniesSpecies) this.state.stats.seenShiniesSpecies = {};
-                this.state.stats.seenShiniesSpecies[pokemonBase.name] = true;
-            }
+            if (qName === "Shiny") this.state.stats.shiniesSeen++;
 
 
 
@@ -598,10 +594,6 @@ class BattleSystem {
                 this.state.storage.push(caughtPokemon);
                 this.state.stats.caught++;
                 if (this.activeEncounter.qualityName === "Shiny") this.state.stats.shiniesCaught = (this.state.stats.shiniesCaught || 0) + 1;
-                if (this.activeEncounter.qualityName === "Shiny") {
-                    if (!this.state.stats.caughtShiniesSpecies) this.state.stats.caughtShiniesSpecies = {};
-                    this.state.stats.caughtShiniesSpecies[this.activeEncounter.name] = true;
-                }
                 if (this.activeEncounter.qualityName === "Epic") this.state.stats.epicCaptures = (this.state.stats.epicCaptures || 0) + 1;
 
                 let sumIV = caughtPokemon.ivs.hp + caughtPokemon.ivs.atk + caughtPokemon.ivs.def + caughtPokemon.ivs.spa + caughtPokemon.ivs.spd + caughtPokemon.ivs.spe;
@@ -995,10 +987,6 @@ class BattleSystem {
                             this.state.storage.push(caughtPokemon);
                             this.state.stats.caught++;
                             if (this.activeEncounter.qualityName === "Shiny") this.state.stats.shiniesCaught = (this.state.stats.shiniesCaught || 0) + 1;
-                            if (this.activeEncounter.qualityName === "Shiny") {
-                                if (!this.state.stats.caughtShiniesSpecies) this.state.stats.caughtShiniesSpecies = {};
-                                this.state.stats.caughtShiniesSpecies[this.activeEncounter.name] = true;
-                            }
                             // Simplification: Omitting other stats trackers for speed in offline simulation
                         }
                     }
