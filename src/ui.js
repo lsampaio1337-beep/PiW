@@ -595,8 +595,15 @@ function startGame() {
     bs.start();
 
     // Playtime tracker (adds 1 second every second)
+    let lastPlaytimeGrainsAwarded = state.stats.playtime || 0;
     setInterval(() => {
         state.stats.playtime = (state.stats.playtime || 0) + 1;
+
+        // Award Jigglypuff Dust grains (1 grain per minute)
+        if (state.stats.playtime - lastPlaytimeGrainsAwarded >= 60) {
+            state.stats.jigglypuffGrains = (state.stats.jigglypuffGrains || 0) + 1;
+            lastPlaytimeGrainsAwarded += 60;
+        }
     }, 1000);
 
     // Autosave loop
@@ -835,7 +842,19 @@ async function init() {
                             document.getElementById('zzz-resume-modal').style.display = 'none';
 
                             // Simulate sleep farm
-                            const timeElapsedMs = Date.now() - (state.zzzTimestamp || Date.now());
+                            let timeElapsedMs = Date.now() - (state.zzzTimestamp || Date.now());
+
+                            // Cap time elapsed by grains
+                            let availableGrains = state.stats.jigglypuffGrains || 0;
+                            let maxTimeMs = availableGrains * 60000;
+
+                            if (timeElapsedMs > maxTimeMs) {
+                                timeElapsedMs = maxTimeMs;
+                            }
+
+                            let consumedGrains = Math.ceil(timeElapsedMs / 60000);
+                            state.stats.jigglypuffGrains = Math.max(0, availableGrains - consumedGrains);
+
                             const results = globals.battleSystem.runFastForward(timeElapsedMs);
 
                             state.isZzZMode = false;
@@ -1020,6 +1039,34 @@ async function init() {
     bindBtn('btn-sleep', () => {
         if(!checkCombatLock()) {
             document.getElementById('zzz-confirmation-modal').style.display = 'flex';
+
+            // Show tutorial if first time
+            if (!state.stats.hasSeenZzZTutorial) {
+                document.getElementById('zzz-tutorial-section').style.display = 'block';
+                state.stats.hasSeenZzZTutorial = true;
+                storage.save(state);
+            } else {
+                document.getElementById('zzz-tutorial-section').style.display = 'none';
+            }
+
+            // Update grains and time
+            const grains = state.stats.jigglypuffGrains || 0;
+            document.getElementById('zzz-current-grains').innerText = grains;
+
+            let m = grains;
+            let timeStr = "";
+            let h = Math.floor(m / 60);
+            let d = Math.floor(h / 24);
+            h = h % 24;
+            m = m % 60;
+            if (d > 0) timeStr += `${d}d`;
+            if (h > 0 || d > 0) timeStr += `${h}h`;
+            timeStr += `${m}m`;
+
+            document.getElementById('zzz-max-offline-time').innerText = `Max Offline Time: ${timeStr}`;
+
+            // Disable Go to Sleep if no grains (optional depending on if they can sleep for 0 mins just to pause, but task says "use grains to farm offline")
+            // Let's just allow it, but it will cap at 0 if no grains.
         }
     });
 

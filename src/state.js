@@ -45,7 +45,9 @@ export const state = {
         blackYellowCandies: 0,
         rainbowCandies: 0,
         candyPurchaseHistory: [],
-        dailyRewards: { daysClaimed: 0, lastClaimDate: null }
+        dailyRewards: { daysClaimed: 0, lastClaimDate: null },
+        jigglypuffGrains: 0,
+        hasSeenZzZTutorial: false
     },
     settings: {
         gameSpeed: 1.0,
