@@ -61,20 +61,20 @@ export function setupMarket(vCenter) {
 export function openPokeMarketBuy() {
     // Generate tabs: Balls, Potions, Stones
     const html = `
-        <div id="market-buy-modal" style="display: flex; flex-direction: column; width: max-content; min-width: 300px; max-width: 100%; height: 100%; margin-top: 10px;">
+        <div id="market-buy-modal" style="display: flex; flex-direction: column; width: 100%; height: 100%; margin-top: 10px; container-type: inline-size;">
 
-            <div style="display: flex; gap: 10px; margin-bottom: 20px; justify-content: center;">
-                <button onclick="window.renderPokeMarketTab('pokeballs')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; border-radius: 5px;">Balls</button>
-                <button onclick="window.renderPokeMarketTab('potions')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; border-radius: 5px;">Potions</button>
-                <button onclick="window.renderPokeMarketTab('stones')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; border-radius: 5px;">Stones</button>
+            <div style="display: flex; gap: clamp(5px, 1.25cqi, 10px); margin-bottom: clamp(10px, 2.5cqi, 20px); justify-content: center;">
+                <button onclick="window.renderPokeMarketTab('pokeballs')" style="padding: clamp(5px, 1.25cqi, 10px) clamp(10px, 2.5cqi, 20px); font-size: clamp(10px, 2cqi, 16px); font-weight: bold; border-radius: 5px;">Balls</button>
+                <button onclick="window.renderPokeMarketTab('potions')" style="padding: clamp(5px, 1.25cqi, 10px) clamp(10px, 2.5cqi, 20px); font-size: clamp(10px, 2cqi, 16px); font-weight: bold; border-radius: 5px;">Potions</button>
+                <button onclick="window.renderPokeMarketTab('stones')" style="padding: clamp(5px, 1.25cqi, 10px) clamp(10px, 2.5cqi, 20px); font-size: clamp(10px, 2cqi, 16px); font-weight: bold; border-radius: 5px;">Stones</button>
             </div>
 
-            <div style="margin-bottom: 20px; display: flex; align-items: center; justify-content: center; gap: 10px;">
-                <label style="font-weight: bold; font-size: 18px; color: #2ecc71;">Money: $<span id="market-trainer-money">${state.trainer.money.toLocaleString()}</span></label>
+            <div style="margin-bottom: clamp(10px, 2.5cqi, 20px); display: flex; align-items: center; justify-content: center; gap: clamp(5px, 1.25cqi, 10px);">
+                <label style="font-weight: bold; font-size: clamp(12px, 2.25cqi, 18px); color: #2ecc71;">Money: $<span id="market-trainer-money">${state.trainer.money.toLocaleString()}</span></label>
             </div>
-            <div style="margin-bottom: 20px; display: flex; align-items: center; justify-content: center; gap: 10px;">
-                <label style="font-weight: bold; font-size: 18px;">Quantity to Buy:</label>
-                <input type="text" id="market-global-qty" value="1" oninput="window.updateMarketPrices()" style="width: 80px; padding: 5px; font-size: 18px; text-align: center; border-radius: 5px; border: 1px solid #ccc;">
+            <div style="margin-bottom: clamp(10px, 2.5cqi, 20px); display: flex; align-items: center; justify-content: center; gap: clamp(5px, 1.25cqi, 10px);">
+                <label style="font-weight: bold; font-size: clamp(12px, 2.25cqi, 18px);">Quantity to Buy:</label>
+                <input type="text" id="market-global-qty" value="1" oninput="window.updateMarketPrices()" style="width: clamp(50px, 10cqi, 80px); padding: clamp(3px, 0.6cqi, 5px); font-size: clamp(12px, 2.25cqi, 18px); text-align: center; border-radius: 5px; border: 1px solid #ccc;">
             </div>
 
             <div id="market-buy-content" style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; overflow-y: auto; flex: 1; padding: 10px;">
@@ -89,7 +89,7 @@ export function openPokeMarketBuy() {
     const modalBox = document.getElementById('modal-content-box');
     if (modalBox) {
         modalBox.dataset.originalStyles = modalBox.getAttribute('style') || '';
-        modalBox.style.width = 'max-content';
+        modalBox.style.width = '825px'; // Force fixed max-width to allow uniform identical fluid scaling down via container queries across 4col/6col tabs
         modalBox.style.height = 'max-content';
         modalBox.style.maxWidth = '90%';
         modalBox.style.maxHeight = '90%';
@@ -213,7 +213,7 @@ export function renderPokeMarketTab(category) {
         }));
     }
 
-    let html = `<div style="display: grid; grid-template-columns: repeat(${cols}, minmax(0, 120px)); gap: 15px; justify-content: center; width: 100%;">`;
+    let html = `<div style="display: grid; grid-template-columns: repeat(${cols}, clamp(40px, 15cqi, 120px)); gap: clamp(5px, 1.88cqi, 15px); justify-content: center; width: 100%;">`;
     items.forEach(item => {
         let displayName = item.name;
         if (category === 'potions') displayName = displayName.replace(' Potion', '<br>Potion');
@@ -222,12 +222,12 @@ export function renderPokeMarketTab(category) {
         html += `
             <div class="market-item-card" data-price="${item.price}" data-id="${item.name}" data-category="${category}"
                 onclick="window.buyItem('${item.name}', ${item.price}, '${category}')"
-                style="background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; padding: 8%; text-align: center; cursor: pointer; transition: transform 0.2s; display: flex; flex-direction: column; align-items: center; justify-content: center; container-type: inline-size;">
-                <div style="font-size: clamp(8px, 12cqi, 14px); font-weight: bold; margin-bottom: 5%; height: 25cqi; display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.1;">${displayName}</div>
-                <img src="${item.img}" style="width: 60cqw; height: 60cqw; max-width: 60px; max-height: 60px; object-fit: contain; margin-bottom: 5%;">
-                ${category !== 'stones' ? `<div style="font-size: clamp(7px, 10cqi, 12px); color: #f1c40f; margin-bottom: 5%; line-height: 1.1;">${item.attrLabel}</div>` : ''}
-                <div style="font-size: clamp(7px, 10cqi, 12px); color: #bdc3c7; line-height: 1.1;">Base: $${formatMarketNumber(item.price)}</div>
-                <div class="market-final-price" style="font-size: clamp(8px, 12cqi, 14px); font-weight: bold; color: #2ecc71; margin-top: 5%; line-height: 1.1;">$${formatMarketNumber(item.price)}</div>
+                style="background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; padding: clamp(5px, 1.25cqi, 10px); text-align: center; cursor: pointer; transition: transform 0.2s; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <div style="font-size: clamp(8px, 1.75cqi, 14px); font-weight: bold; margin-bottom: clamp(2px, 0.6cqi, 5px); height: clamp(15px, 3.14cqi, 32px); display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.1;">${displayName}</div>
+                <img src="${item.img}" style="width: clamp(30px, 7.5cqi, 60px); height: clamp(30px, 7.5cqi, 60px); object-fit: contain; margin-bottom: clamp(2px, 0.6cqi, 5px);">
+                ${category !== 'stones' ? `<div style="font-size: clamp(7px, 1.5cqi, 12px); color: #f1c40f; margin-bottom: clamp(2px, 0.6cqi, 5px); line-height: 1.1;">${item.attrLabel}</div>` : ''}
+                <div style="font-size: clamp(7px, 1.5cqi, 12px); color: #bdc3c7; line-height: 1.1;">Base: $${formatMarketNumber(item.price)}</div>
+                <div class="market-final-price" style="font-size: clamp(8px, 1.75cqi, 14px); font-weight: bold; color: #2ecc71; margin-top: clamp(2px, 0.6cqi, 5px); line-height: 1.1;">$${formatMarketNumber(item.price)}</div>
             </div>
         `;
     });
