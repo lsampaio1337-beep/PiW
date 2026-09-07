@@ -71,24 +71,32 @@ export function updateBattleArena() {
                 elEnemySprite.src = `Assets/Pokemon Sprites/${enemy.qualityName === 'Shiny' ? enemy.id + '_shiny' : enemy.id}.png`;
                 elEnemySprite.style.display = 'block';
 
-                let baseTop = 85;
-                if (enemy.types.includes('Water')) baseTop = 90;
-                if (enemy.types.includes('Flying') || enemy.types.includes('Wind')) baseTop = 75;
+                let baseBottom = 15; // 100 - 85
+                if (enemy.types.includes('Water')) baseBottom = 10; // 100 - 90
+                if (enemy.types.includes('Flying') || enemy.types.includes('Wind')) baseBottom = 25; // 100 - 75
 
-                elEnemySide.style.bottom = 'auto';
-                elEnemySide.style.top = `${baseTop}%`;
+                elEnemySide.style.top = 'auto';
+                elEnemySide.style.bottom = `${baseBottom}%`;
 
                 if (battleSystem.isSliding) {
                     if (elEnemySide.dataset.sliding !== 'true') {
                         elEnemySide.dataset.sliding = 'true';
                         elEnemySide.style.transition = 'none';
                         elEnemySide.style.left = '100%';
+                        if (hpContainerEnemy) {
+                            hpContainerEnemy.style.transition = 'none';
+                            hpContainerEnemy.style.left = '100%';
+                        }
                         // Trigger reflow
                         void elEnemySide.offsetWidth;
                         requestAnimationFrame(() => {
                             requestAnimationFrame(() => {
                                 elEnemySide.style.transition = `left ${battleSystem.slideDuration}ms linear`;
                                 elEnemySide.style.left = '35%';
+                                if (hpContainerEnemy) {
+                                    hpContainerEnemy.style.transition = `left ${battleSystem.slideDuration}ms linear`;
+                                    hpContainerEnemy.style.left = '35%';
+                                }
                             });
                         });
                     }
@@ -96,6 +104,10 @@ export function updateBattleArena() {
                     elEnemySide.dataset.sliding = 'false';
                     elEnemySide.style.transition = 'none';
                     elEnemySide.style.left = '35%';
+                    if (hpContainerEnemy) {
+                        hpContainerEnemy.style.transition = 'none';
+                        hpContainerEnemy.style.left = '35%';
+                    }
                 }
             }
 
@@ -103,12 +115,12 @@ export function updateBattleArena() {
             const elPlayerSide = document.getElementById('player-side');
             if (leader && elPlayerSide) {
 
-                let baseTop = 85;
-                if (leader.types.includes('Water')) baseTop = 90;
-                if (leader.types.includes('Flying') || leader.types.includes('Wind')) baseTop = 75;
+                let baseBottom = 15; // 100 - 85
+                if (leader.types.includes('Water')) baseBottom = 10; // 100 - 90
+                if (leader.types.includes('Flying') || leader.types.includes('Wind')) baseBottom = 25; // 100 - 75
 
-                elPlayerSide.style.bottom = 'auto';
-                elPlayerSide.style.top = `${baseTop}%`;
+                elPlayerSide.style.top = 'auto';
+                elPlayerSide.style.bottom = `${baseBottom}%`;
                 elPlayerSide.style.left = '20%';
 
                 const hpContainerPlayer = document.getElementById('player-battle-hp-container');
@@ -151,19 +163,23 @@ export function updateBattleArena() {
                 elEnemySprite.style.display = 'block';
                 elEnemySide.style.transition = 'none';
                 elEnemySide.style.left = '35%'; // Matching active battle destination
-                elEnemySide.style.bottom = 'auto';
-                elEnemySide.style.top = '85%'; // default
+                elEnemySide.style.top = 'auto';
+                elEnemySide.style.bottom = '15%'; // default
+                if (hpContainerEnemy) {
+                    hpContainerEnemy.style.transition = 'none';
+                    hpContainerEnemy.style.left = '35%';
+                }
             }
 
             const leader = state.party[0];
             const elPlayerSide = document.getElementById('player-side');
             if (leader && elPlayerSide) {
-                let baseTop = 85;
-                if (leader.types.includes('Water')) baseTop = 90;
-                if (leader.types.includes('Flying') || leader.types.includes('Wind')) baseTop = 75;
+                let baseBottom = 15; // 100 - 85
+                if (leader.types.includes('Water')) baseBottom = 10; // 100 - 90
+                if (leader.types.includes('Flying') || leader.types.includes('Wind')) baseBottom = 25; // 100 - 75
 
-                elPlayerSide.style.bottom = 'auto';
-                elPlayerSide.style.top = `${baseTop}%`;
+                elPlayerSide.style.top = 'auto';
+                elPlayerSide.style.bottom = `${baseBottom}%`;
                 elPlayerSide.style.left = '20%';
 
                 const hpContainerPlayer = document.getElementById('player-battle-hp-container');
