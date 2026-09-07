@@ -5,6 +5,7 @@ import { state, globals } from '../state.js';
 // CSS Animation Generator
 function applyMovementAnimation(elContainer, pokemon, isAnimating) {
     if (!elContainer) return;
+    // We want to be able to stop animations even if pokemon is null
     if (isAnimating && !pokemon) return;
 
     // We'll manage classes and splash elements on the container.
@@ -63,6 +64,7 @@ function applyMovementAnimation(elContainer, pokemon, isAnimating) {
             elContainer.dataset.stopping = "true";
 
             const handleIteration = () => {
+                if (!elContainer.dataset.stopping || elContainer.dataset.stopping === "false") return;
                 elContainer.className = "sprite-anim-container"; // clear animations
                 const existingSplashes = elContainer.querySelector('.water-splash-container');
                 if (existingSplashes) existingSplashes.remove();
@@ -157,10 +159,12 @@ export function updateBattleArena() {
                 elEnemySide.style.top = 'auto';
                 elEnemySide.style.bottom = `${baseBottom}%`;
 
-                if (elEnemyContainer && enemy) applyMovementAnimation(elEnemyContainer, enemy, battleSystem.isSliding || battleSystem.isSearching);
-
-                if (!battleSystem.isSliding && !battleSystem.isSearching) {
-                    if (elEnemyContainer) applyMovementAnimation(elEnemyContainer, null, false);
+                if (elEnemyContainer && enemy) {
+                    if (battleSystem.isSliding || battleSystem.isSearching) {
+                        applyMovementAnimation(elEnemyContainer, enemy, true);
+                    } else {
+                        applyMovementAnimation(elEnemyContainer, enemy, false);
+                    }
                 }
                 if (battleSystem.isSliding) {
                     if (elEnemySide.dataset.sliding !== 'true') {
@@ -236,9 +240,10 @@ export function updateBattleArena() {
                     elPlayerSprite.style.display = 'block';
                 }
                 if (elPlayerContainer && leader) {
-                    applyMovementAnimation(elPlayerContainer, leader, battleSystem.isSearching || battleSystem.isSliding);
-                    if (!battleSystem.isSearching && !battleSystem.isSliding) {
-                        applyMovementAnimation(elPlayerContainer, null, false);
+                    if (battleSystem.isSearching || battleSystem.isSliding) {
+                        applyMovementAnimation(elPlayerContainer, leader, true);
+                    } else {
+                        applyMovementAnimation(elPlayerContainer, leader, false);
                     }
                 }
             }
@@ -299,14 +304,16 @@ export function updateBattleArena() {
                 }
 
                 const elPlayerSprite = document.getElementById('player-sprite');
+                const elPlayerContainer = document.getElementById('player-sprite-container');
                 if (elPlayerSprite) {
                     elPlayerSprite.src = `Assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? leader.id + '_shiny' : leader.id}.png`;
                     elPlayerSprite.style.display = 'block';
                 }
                 if (elPlayerContainer && leader) {
-                    applyMovementAnimation(elPlayerContainer, leader, battleSystem.isSearching || battleSystem.isSliding);
-                    if (!battleSystem.isSearching && !battleSystem.isSliding) {
-                        applyMovementAnimation(elPlayerContainer, null, false);
+                    if (battleSystem.isSearching || battleSystem.isSliding) {
+                        applyMovementAnimation(elPlayerContainer, leader, true);
+                    } else {
+                        applyMovementAnimation(elPlayerContainer, leader, false);
                     }
                 }
             } else {
