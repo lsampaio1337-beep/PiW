@@ -97,3 +97,15 @@ export function setActiveItem(type, tierIdx) {
     }
     renderBackpackTab(type === 'ball' ? 'pokeballs' : 'potions');
 }
+
+export function setAutoPotionThreshold(val) {
+    state.settings.autoPotionThreshold = val;
+
+    // Attempt to manually save to ensure the threshold is preserved
+    // since clicking outside the bag dismisses it without explicit save events
+    try {
+        if (window.storageRef) {
+            window.storageRef.save(state);
+        }
+    } catch(e) {}
+}

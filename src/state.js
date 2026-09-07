@@ -52,6 +52,7 @@ export const state = {
     settings: {
         gameSpeed: 1.0,
         autoPotion: true,
+        autoPotionThreshold: 50,
         activePotionTier: 0, // Tiny
         autoCatch: true,
         activeBallTier: 0 // Pokeball

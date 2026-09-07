@@ -40,10 +40,11 @@ import { showBonusCandyModal } from './ui/bonusCandy.js';
 window.showBonusCandyModal = showBonusCandyModal;
 import { showSettings, updateGameSpeed, addMoney, addXp, exportLog, showAddPokemonModal, forceNextEncounter, activateCheat } from './ui/settings.js';
 import { setupMarket, buyItem, openPokeMarketBuy, renderPokeMarketTab, updateMarketPrices } from './ui/market.js';
-import { showBackpack, renderBackpackTab, setActiveItem } from './ui/backpack/index.js';
+import { showBackpack, renderBackpackTab, setActiveItem, setAutoPotionThreshold } from './ui/backpack/index.js';
 import { dragStart, dragOver, handleDrop } from './ui/backpack/pokemon.js';
 
 const storage = new Storage();
+window.storageRef = storage;
 const dayCare = new DayCare(state);
 state.dayCareRef = dayCare;
 state.storageRef = storage;
@@ -56,6 +57,7 @@ window.hideMapTooltip = hideMapTooltip;
 window.showBackpack = showBackpack;
 window.renderBackpackTab = renderBackpackTab;
 window.setActiveItem = setActiveItem;
+window.setAutoPotionThreshold = setAutoPotionThreshold;
 window.showPokedex = showPokedex;
 window.showDexEntry = showDexEntry;
 window.showPokemonStats = showPokemonStats;
@@ -820,6 +822,11 @@ async function init() {
                         return target;
                     };
                     deepMerge(state, pData);
+
+                    // Fallback for older saves
+                    if (state.settings.autoPotionThreshold === undefined) {
+                        state.settings.autoPotionThreshold = 50;
+                    }
 
                     await loadConfigs();
 
