@@ -9,9 +9,6 @@ class BattleSystem {
         this.activeEncounter = null;
         this.combatLoop = null;
         this.isSearching = false;
-        this.isFainting = false;
-
-        this.consecutiveHeals = 0;
 
         this.gymState = {
             isActive: false,
@@ -188,39 +185,10 @@ class BattleSystem {
     }
 
     async searchNext() {
-        // Prevent searching if we are in the middle of fading out/fainting
-        if (this.isFainting) {
-            return;
-        }
-
         if (this.state.party.every(p => p.currentHp <= 0)) {
             this.handleWipeout();
             return;
         }
-
-        if (this.state.currentRoute === "Safari Zone") {
-            if (this.state.trainer.money < 500) {
-                this.stop();
-                if (typeof window.switchView === 'function') {
-                    window.switchView("SAFARI_HUB");
-                }
-                let msg = document.getElementById("safari-welcome-msg");
-                if (msg) msg.innerText = "I am sorry, but you are all out of money. Try to sell some pokemons and come check us latter.";
-                return;
-            }
-            this.state.trainer.money -= 500;
-        }
-
-        // Out of combat insta-heal if threshold is met
-        const leader = this.state.party[0];
-        if (leader && leader.currentHp > 0 && this.state.settings.autoPotion) {
-            let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 50;
-            while ((leader.currentHp / leader.maxHp) * 100 <= threshold) {
-                if (!this.tryUsePotion(leader)) break; // Stop if no potions left
-            }
-        }
-
-        this.consecutiveHeals = 0; // Reset for new battle
 
         if (this.state.currentRoute && this.state.currentRoute.startsWith("Casino - ")) {
             const cost = this.state.casinoDoubleShiny ? 20 : 10;
@@ -471,8 +439,6 @@ class BattleSystem {
     }
 
     scheduleTurn() {
-        if (this.isFainting) return;
-
         if (!this.activeEncounter || this.activeEncounter.currentHp <= 0) return;
         const leader = this.state.party[0];
         if (leader.currentHp <= 0) {
@@ -500,33 +466,16 @@ class BattleSystem {
     }
 
     executeTurn(attacker, defender) {
-        if (this.isFainting) return;
-
         if (!this.activeEncounter) return;
 
         const leader = this.state.party[0];
 
         // Check if player uses potion
         if (attacker === leader && this.state.settings.autoPotion) {
-            // Check if we hit the threshold
-            let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 50;
-            let hpPercentage = (attacker.currentHp / attacker.maxHp) * 100;
-
-            if (hpPercentage <= threshold) {
-                if (this.consecutiveHeals >= 3) {
-                    // Skip heal to attack, reset consecutive heals
-                    this.consecutiveHeals = 0;
-                } else {
-                    if (this.tryUsePotion(attacker)) {
-                        this.consecutiveHeals++;
-                        this.updateUI();
-                        this.scheduleNextStrike(attacker, defender);
-                        return;
-                    }
-                }
-            } else {
-                // If we attack instead of healing because hp > threshold, reset heals
-                this.consecutiveHeals = 0;
+            if (this.tryUsePotion(attacker)) {
+                this.updateUI();
+                this.scheduleNextStrike(attacker, defender);
+                return;
             }
         }
 
@@ -561,9 +510,7 @@ class BattleSystem {
                 if (defender === this.activeEncounter) {
                     this.handleEnemyDefeat();
                 } else {
-                    if (!this.isFainting) {
-                        this.handleFaint();
-                    }
+                    this.handleFaint();
                 }
             } else {
                 this.scheduleNextStrike(attacker, defender);
@@ -572,8 +519,6 @@ class BattleSystem {
     }
 
     scheduleNextStrike(attacker, defender) {
-        if (this.isFainting) return;
-
         if (!this.activeEncounter) return;
 
         const leader = this.state.party[0];
@@ -594,9 +539,7 @@ class BattleSystem {
 
     tryUsePotion(pokemon) {
         if (pokemon.currentHp >= pokemon.maxHp) return false; // don't heal if full
-
-        let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 50;
-        if ((pokemon.currentHp / pokemon.maxHp) * 100 > threshold) return false;
+        if (pokemon.currentHp > pokemon.maxHp * 0.5) return false; // simple logic: heal if <50%
 
         let tier = this.state.settings.activePotionTier;
         if (tier < 0) return false;
@@ -612,31 +555,19 @@ class BattleSystem {
 
     throwPokeball() {
         let tier = this.state.settings.activeBallTier;
-        let isSafariZone = this.state.currentRoute === "Safari Zone";
-        let ballName;
-        let multiplier;
+        if (tier < 0) return { used: false, ballName: null, caught: false }; // None selected
 
-        if (isSafariZone) {
-            let safariBallConfig = this.state.config.balance.items.pokeballs.find(b => b.name === "Safariball");
-            ballName = "Safariball";
-            multiplier = safariBallConfig ? safariBallConfig.multiplier : 1.5;
-            this.state.stats.ballsThrown = (this.state.stats.ballsThrown || 0) + 1;
+        let ballName = this.state.config.balance.items.pokeballs[tier].name;
+
+        if (this.state.backpack.pokeballs[ballName] > 0) {
+            this.state.backpack.pokeballs[ballName]--;
         } else {
-            if (tier < 0) return { used: false, ballName: null, caught: false }; // None selected
-            ballName = this.state.config.balance.items.pokeballs[tier].name;
-
-        if (ballName !== "Safariball") {
-            if (this.state.backpack.pokeballs[ballName] > 0) {
-                this.state.backpack.pokeballs[ballName]--;
-            } else {
-                return { used: false, ballName: null, caught: false }; // No balls left
-            }
+            return { used: false, ballName: null, caught: false }; // No balls left
         }
-            if (tier < 0) return { used: false, ballName: null, caught: false }; // No balls left
 
-            multiplier = this.state.config.balance.items.pokeballs[tier].multiplier;
-            this.state.stats.ballsThrown = (this.state.stats.ballsThrown || 0) + 1;
-        }
+        if (tier < 0) return { used: false, ballName: null, caught: false }; // No balls left
+
+        let multiplier = this.state.config.balance.items.pokeballs[tier].multiplier;
 
         const chance = mathEngine.calculateCatchChance(this.activeEncounter.bst, this.activeEncounter.level, multiplier, this.state.stats, this.activeEncounter.qualityName === "Shiny");
 
@@ -649,15 +580,6 @@ class BattleSystem {
 
     handleEnemyDefeat() {
         const leader = this.state.party[0];
-
-        // Out of combat insta-heal if threshold is met
-        if (leader && leader.currentHp > 0 && this.state.settings.autoPotion) {
-            let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 50;
-            while ((leader.currentHp / leader.maxHp) * 100 <= threshold) {
-                if (!this.tryUsePotion(leader)) break;
-            }
-        }
-
         const ev = this.activeEncounter.ev;
 
         // Bonus Candy Defeats Tracker
@@ -804,16 +726,6 @@ class BattleSystem {
 
         if (this.gymState.currentPokemonIndex >= trainer.team.length) {
             // Defeated trainer
-
-            // Out of combat insta-heal if threshold is met
-            const leader = this.state.party[0];
-            if (leader && leader.currentHp > 0 && this.state.settings.autoPotion) {
-                let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 50;
-                while ((leader.currentHp / leader.maxHp) * 100 <= threshold) {
-                    if (!this.tryUsePotion(leader)) break;
-                }
-            }
-
             this.gymState.currentTrainerIndex++;
             this.gymState.currentPokemonIndex = 0;
             this.gymState.inCombat = false; // Return to rest phase
@@ -897,39 +809,16 @@ class BattleSystem {
     }
 
     handleFaint() {
-        this.isFainting = true;
-        this.updateUI(); // This will trigger the fade out via UI logic
+        // move fainted pokemon to end of party
+        const fainted = this.state.party.shift();
+        this.state.party.push(fainted);
 
-        // Wait 4 seconds (2s fade out + 2s extra wait)
-        setTimeout(() => {
-            // move fainted pokemon to end of party
-            const fainted = this.state.party.shift();
-            this.state.party.push(fainted);
-
-            this.isFainting = false;
-
-            if (this.state.party[0].currentHp <= 0) {
-                this.handleWipeout();
-            } else {
-                // Prepare slide in duration for next pokemon
-                const slideDelay = 1000 / this.state.settings.gameSpeed; // Arbitrary 1s slide in
-                this.isPlayerPreSlidingIn = true;
-                this.updateUI(); // Move offscreen
-
-                setTimeout(() => {
-                    this.isPlayerPreSlidingIn = false;
-                    this.isPlayerSlidingIn = true;
-                    this.slideDuration = slideDelay;
-                    this.updateUI(); // Set position and start sliding animation
-
-                    setTimeout(() => {
-                        this.isPlayerSlidingIn = false;
-                        this.updateUI();
-                        this.scheduleTurn(); // restart turn with new leader
-                    }, slideDelay);
-                }, 50); // slight delay to ensure offscreen position is applied
-            }
-        }, 4000 / this.state.settings.gameSpeed);
+        if (this.state.party[0].currentHp <= 0) {
+            this.handleWipeout();
+        } else {
+            this.updateUI();
+            this.scheduleTurn(); // restart turn with new leader
+        }
     }
 
     handleWipeout() {
@@ -937,8 +826,10 @@ class BattleSystem {
         this.activeEncounter = null;
 
         // Penalty: deduct 10% gold
-        const penalty = Math.floor(this.state.trainer.money * 0.1);
-        this.state.trainer.money -= penalty;
+        this.state.trainer.money = Math.floor(this.state.trainer.money * 0.9);
+
+        // Heal all party to full
+        this.state.party.forEach(p => p.currentHp = p.maxHp);
 
         if (this.gymState && this.gymState.isActive) {
             // Reset gym state entirely if wiped out
@@ -951,18 +842,13 @@ class BattleSystem {
                 window.navigateToLocation("PokeCenter & PokeMarket");
             }
             this.updateUI();
-            setTimeout(() => {
-                alert(`All party fainted and you were charged $${penalty} to be brought back here. [Enter] Stay safe next time.`);
-            }, 100);
         } else {
-            this.state.currentRoute = "PokeCenter & PokeMarket";
-            if (typeof window.navigateToLocation === 'function') {
-                window.navigateToLocation("PokeCenter & PokeMarket");
-            }
-            this.updateUI();
+            // Return to poke center (simulated by just waiting and searching again for idle game)
             setTimeout(() => {
-                alert(`All party fainted and you were charged $${penalty} to be brought back here. [Enter] Stay safe next time.`);
-            }, 100);
+                this.searchNext();
+            }, 5000 / this.state.settings.gameSpeed);
+
+            this.updateUI();
         }
     }
 
@@ -1125,10 +1011,7 @@ class BattleSystem {
                     this.state.party.push(fainted);
                 } else {
                     if (this.state.settings.autoPotion) {
-                        let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 50;
-                        while ((leader.currentHp / leader.maxHp) * 100 <= threshold) {
-                            if (!this.tryUsePotion(leader)) break;
-                        }
+                         this.tryUsePotion(leader);
                     }
 
                     // Simplified handleEnemyDefeat avoiding UI loops/searchNext

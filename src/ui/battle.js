@@ -33,7 +33,27 @@ export function updateBattleArena() {
                 if (pHpBar) pHpBar.style.width = `${Math.min(100, (leader.currentHp / leader.maxHp) * 100)}%`;
 
                 const pSprite = document.getElementById('gym-player-sprite');
-                if (pSprite) pSprite.src = `Assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? leader.id + '_shiny' : leader.id}.png`;
+                if (pSprite) {
+                    pSprite.src = `Assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? leader.id + '_shiny' : leader.id}.png`;
+                    if (leader.currentHp <= 0) {
+                        pSprite.style.transition = 'opacity 2s linear';
+                        pSprite.style.opacity = '0';
+                    } else if (battleSystem && battleSystem.isPlayerSlidingIn) {
+                        pSprite.style.transition = `left ${battleSystem.slideDuration}ms linear`;
+                        pSprite.style.left = '25%';
+                        pSprite.style.opacity = '1';
+                    } else if (battleSystem && battleSystem.isFainting) {
+                        // don't touch style while fading
+                    } else if (battleSystem && battleSystem.isPlayerPreSlidingIn) {
+                        pSprite.style.transition = 'none';
+                        pSprite.style.left = '-30%';
+                        pSprite.style.opacity = '1';
+                    } else {
+                        pSprite.style.transition = 'none';
+                        pSprite.style.left = '25%';
+                        pSprite.style.opacity = '1';
+                    }
+                }
             }
         }
     } else {
@@ -149,6 +169,25 @@ export function updateBattleArena() {
                 if (elPlayerSprite) {
                     elPlayerSprite.src = `Assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? leader.id + '_shiny' : leader.id}.png`;
                     elPlayerSprite.style.display = 'block';
+
+                    if (leader.currentHp <= 0) {
+                        elPlayerSprite.style.transition = 'opacity 2s linear';
+                        elPlayerSprite.style.opacity = '0';
+                    } else if (battleSystem && battleSystem.isPlayerSlidingIn) {
+                        elPlayerSprite.style.transition = `left ${battleSystem.slideDuration}ms linear`;
+                        elPlayerSprite.style.left = '25%';
+                        elPlayerSprite.style.opacity = '1';
+                    } else if (battleSystem && battleSystem.isFainting) {
+                        // don't touch style while fading
+                    } else if (battleSystem && battleSystem.isPlayerPreSlidingIn) {
+                        elPlayerSprite.style.transition = 'none';
+                        elPlayerSprite.style.left = '-30%';
+                        elPlayerSprite.style.opacity = '1';
+                    } else {
+                        elPlayerSprite.style.transition = 'none';
+                        elPlayerSprite.style.left = '25%';
+                        elPlayerSprite.style.opacity = '1';
+                    }
                 }
             }
         } else if (battleSystem && battleSystem.isSearching) {
@@ -208,6 +247,25 @@ export function updateBattleArena() {
                 if (elPlayerSprite) {
                     elPlayerSprite.src = `Assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? leader.id + '_shiny' : leader.id}.png`;
                     elPlayerSprite.style.display = 'block';
+
+                    if (leader.currentHp <= 0) {
+                        elPlayerSprite.style.transition = 'opacity 2s linear';
+                        elPlayerSprite.style.opacity = '0';
+                    } else if (battleSystem && battleSystem.isPlayerSlidingIn) {
+                        elPlayerSprite.style.transition = `left ${battleSystem.slideDuration}ms linear`;
+                        elPlayerSprite.style.left = '25%';
+                        elPlayerSprite.style.opacity = '1';
+                    } else if (battleSystem && battleSystem.isFainting) {
+                        // don't touch style while fading
+                    } else if (battleSystem && battleSystem.isPlayerPreSlidingIn) {
+                        elPlayerSprite.style.transition = 'none';
+                        elPlayerSprite.style.left = '-30%';
+                        elPlayerSprite.style.opacity = '1';
+                    } else {
+                        elPlayerSprite.style.transition = 'none';
+                        elPlayerSprite.style.left = '25%';
+                        elPlayerSprite.style.opacity = '1';
+                    }
                 }
             } else {
                 const elPlayerSprite = document.getElementById('player-sprite');

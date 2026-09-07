@@ -40,10 +40,11 @@ import { showBonusCandyModal } from './ui/bonusCandy.js';
 window.showBonusCandyModal = showBonusCandyModal;
 import { showSettings, updateGameSpeed, addMoney, addXp, exportLog, showAddPokemonModal, forceNextEncounter, activateCheat } from './ui/settings.js';
 import { setupMarket, buyItem, openPokeMarketBuy, renderPokeMarketTab, updateMarketPrices } from './ui/market.js';
-import { showBackpack, renderBackpackTab, setActiveItem } from './ui/backpack/index.js';
+import { showBackpack, renderBackpackTab, setActiveItem, setAutoPotionThreshold } from './ui/backpack/index.js';
 import { dragStart, dragOver, handleDrop } from './ui/backpack/pokemon.js';
 
 const storage = new Storage();
+window.storageRef = storage;
 const dayCare = new DayCare(state);
 state.dayCareRef = dayCare;
 state.storageRef = storage;
@@ -56,6 +57,7 @@ window.hideMapTooltip = hideMapTooltip;
 window.showBackpack = showBackpack;
 window.renderBackpackTab = renderBackpackTab;
 window.setActiveItem = setActiveItem;
+window.setAutoPotionThreshold = setAutoPotionThreshold;
 window.showPokedex = showPokedex;
 window.showDexEntry = showDexEntry;
 window.showPokemonStats = showPokemonStats;
@@ -599,6 +601,13 @@ function startGame() {
     // Playtime tracker (adds 1 second every second)
     setInterval(() => {
         state.stats.playtime = (state.stats.playtime || 0) + 1;
+
+        // Award Jigglypuff Dust grains (1 grain per minute)
+        // Check using modulo so that reloading doesn't reset progress towards the next minute.
+        // We ensure we only add 1 grain if playtime is perfectly divisible by 60 and > 0.
+        if (state.stats.playtime % 60 === 0 && state.stats.playtime > 0) {
+            state.stats.jigglypuffGrains = (state.stats.jigglypuffGrains || 0) + 1;
+        }
     }, 1000);
 
     // Autosave loop
@@ -816,6 +825,11 @@ async function init() {
                     };
                     deepMerge(state, pData);
 
+                    // Fallback for older saves
+                    if (state.settings.autoPotionThreshold === undefined) {
+                        state.settings.autoPotionThreshold = 50;
+                    }
+
                     await loadConfigs();
 
                     startGame();
@@ -837,7 +851,20 @@ async function init() {
                             document.getElementById('zzz-resume-modal').style.display = 'none';
 
                             // Simulate sleep farm
-                            const timeElapsedMs = Date.now() - (state.zzzTimestamp || Date.now());
+                            let timeElapsedMs = Date.now() - (state.zzzTimestamp || Date.now());
+                            timeElapsedMs = Math.max(0, timeElapsedMs); // Prevent negative time if system clock changes
+
+                            // Cap time elapsed by grains
+                            let availableGrains = state.stats.jigglypuffGrains || 0;
+                            let maxTimeMs = availableGrains * 60000;
+
+                            if (timeElapsedMs > maxTimeMs) {
+                                timeElapsedMs = maxTimeMs;
+                            }
+
+                            let consumedGrains = Math.ceil(timeElapsedMs / 60000);
+                            state.stats.jigglypuffGrains = Math.max(0, availableGrains - consumedGrains);
+
                             const results = globals.battleSystem.runFastForward(timeElapsedMs);
 
                             state.isZzZMode = false;
@@ -1022,6 +1049,24 @@ async function init() {
     bindBtn('btn-sleep', () => {
         if(!checkCombatLock()) {
             document.getElementById('zzz-confirmation-modal').style.display = 'flex';
+
+            // Show tutorial if first time
+            if (!state.stats.hasSeenZzZTutorial) {
+                document.getElementById('zzz-tutorial-section').style.display = 'block';
+                state.stats.hasSeenZzZTutorial = true;
+                storage.save(state);
+            } else {
+                document.getElementById('zzz-tutorial-section').style.display = 'none';
+            }
+
+            // Update grains and time
+            const grains = state.stats.jigglypuffGrains || 0;
+            document.getElementById('zzz-current-grains').innerText = grains;
+
+            // Text is now static (1 grain = 1min offline farm) in HTML
+
+            // Disable Go to Sleep if no grains (optional depending on if they can sleep for 0 mins just to pause, but task says "use grains to farm offline")
+            // Let's just allow it, but it will cap at 0 if no grains.
         }
     });
 
@@ -1036,6 +1081,15 @@ async function init() {
         state.stats.lastSaveTime = Date.now();
         storage.save(state);
         window.close();
+    });
+
+    bindBtn('btn-zzz-cheat-grains', () => {
+        state.stats.jigglypuffGrains = (state.stats.jigglypuffGrains || 0) + 10;
+        storage.save(state);
+
+        // Update UI immediately if the modal is open
+        const grains = state.stats.jigglypuffGrains;
+        document.getElementById('zzz-current-grains').innerText = grains;
     });
 
     window.showBackpackAndFocus = (tab) => {

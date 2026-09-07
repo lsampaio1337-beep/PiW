@@ -45,11 +45,14 @@ export const state = {
         blackYellowCandies: 0,
         rainbowCandies: 0,
         candyPurchaseHistory: [],
-        dailyRewards: { daysClaimed: 0, lastClaimDate: null }
+        dailyRewards: { daysClaimed: 0, lastClaimDate: null },
+        jigglypuffGrains: 0,
+        hasSeenZzZTutorial: false
     },
     settings: {
         gameSpeed: 1.0,
         autoPotion: true,
+        autoPotionThreshold: 50,
         activePotionTier: 0, // Tiny
         autoCatch: true,
         activeBallTier: 0 // Pokeball

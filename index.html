@@ -33,7 +33,7 @@
 
       <span class="nav-divider"></span>
 
-      <img src="Assets/Extra/IconSleep.png" id="btn-sleep" class="nav-icon" title="Sleep">
+      <img src="Assets/Extra/IconSleep.png" id="btn-sleep" class="nav-icon" title="ZzZ Mode">
       <img src="Assets/Extra/IconHelp.png" id="btn-help" class="nav-icon" title="Help">
       <img src="Assets/Extra/IconSettings.png" id="btn-settings" class="nav-icon" title="Settings">
       <img src="Assets/Extra/IconExit.png" id="btn-exit" class="nav-icon" title="Exit">
@@ -206,14 +206,32 @@
   </div>
 
   <!-- ZzZ Mode Modals -->
-  <div id="zzz-confirmation-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); z-index: 1020; justify-content: center; align-items: center;">
-      <div style="background-color: #2c3e50; padding: 20px; border-radius: 8px; text-align: center; border: 2px solid white; display: flex; flex-direction: column; gap: 15px; width: 350px;">
-          <h3 style="color: white; margin: 0;">Are you sure?</h3>
-          <p style="color: white; margin: 0;">Do you want to enter Sleep Mode (ZzZ)? The game will close and your Pokémon will farm offline.</p>
-          <div style="display: flex; gap: 10px; justify-content: center;">
-              <button id="btn-zzz-yes" style="padding: 10px; font-size: 16px; font-weight: bold; cursor: pointer; background-color: #4CAF50; color: white; border: none; border-radius: 5px; flex: 1;">Yes</button>
-              <button id="btn-zzz-no" style="padding: 10px; font-size: 16px; font-weight: bold; cursor: pointer; background-color: #f44336; color: white; border: none; border-radius: 5px; flex: 1;">No</button>
+  <div id="zzz-confirmation-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); z-index: 1020; justify-content: center; align-items: center; backdrop-filter: blur(3px);">
+      <div style="background: linear-gradient(145deg, #1e293b, #0f172a); padding: 18px; border-radius: 12px; text-align: center; border: 2px solid #3b82f6; box-shadow: 0 10px 25px rgba(0,0,0,0.8), 0 0 20px rgba(59, 130, 246, 0.4); display: flex; flex-direction: column; gap: 15px; width: 480px; max-width: 90vw;">
+          <h2 style="color: #93c5fd; margin: 0; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 2px 4px rgba(0,0,0,0.8); border-bottom: 2px solid #334155; padding-bottom: 10px; font-size: 20px;">ZzZ Mode</h2>
+
+          <div id="zzz-tutorial-section" style="display: none; background: rgba(255,255,255,0.05); border: 1px dashed #475569; border-radius: 8px; padding: 15px; margin-bottom: 10px; text-align: left;">
+              <div style="color: #cbd5e1; font-size: 14px; margin-bottom: 8px;"><b>Welcome to ZzZ Mode!</b></div>
+              <div style="color: #94a3b8; font-size: 13px; line-height: 1.4;">Earn <b>Jigglypuff Dust</b> simply by playing the game (1 minute active = 1 grain). You can spend these grains to allow your Pokémon to farm offline when you close the game (1 grain = 1 minute of offline farming).</div>
           </div>
+
+          <div style="display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.2); border-radius: 8px; padding: 20px; border: 1px solid #334155; gap: 20px;">
+              <div style="flex: 1; display: flex; justify-content: flex-end;">
+                  <img src="Assets/Extra/Jigglypuff Dust.png" style="width: 150px; height: auto; filter: drop-shadow(0 0 10px rgba(255, 192, 203, 0.4));">
+              </div>
+              <div style="flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center;">
+                  <div style="font-size: 14px; color: #94a3b8; text-transform: uppercase; letter-spacing: 2px;">Available Grains</div>
+                  <div id="zzz-current-grains" style="font-size: 36px; font-weight: bold; color: #fbcfe8; text-shadow: 0 2px 4px rgba(0,0,0,0.8); margin: 5px 0;">0</div>
+                  <div id="zzz-max-offline-time" style="font-size: 12px; color: #cbd5e1;">(1 grain = 1min offline farm)</div>
+              </div>
+          </div>
+
+          <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px;">
+              <button id="btn-zzz-yes" style="padding: 12px; font-size: 16px; font-weight: bold; cursor: pointer; background: linear-gradient(to right, #3b82f6, #2563eb); color: white; border: 1px solid #60a5fa; border-radius: 8px; flex: 1; box-shadow: 0 4px 6px rgba(0,0,0,0.3); text-transform: uppercase; letter-spacing: 1px;">Go to Sleep</button>
+              <button id="btn-zzz-no" style="padding: 12px; font-size: 16px; font-weight: bold; cursor: pointer; background: linear-gradient(to right, #ef4444, #dc2626); color: white; border: 1px solid #f87171; border-radius: 8px; flex: 1; box-shadow: 0 4px 6px rgba(0,0,0,0.3); text-transform: uppercase; letter-spacing: 1px;">Cancel</button>
+          </div>
+
+          <button id="btn-zzz-cheat-grains" style="margin-top: 15px; padding: 5px 10px; font-size: 11px; cursor: pointer; background: transparent; color: #94a3b8; border: 1px dashed #475569; border-radius: 4px;">Add +10 grains</button>
       </div>
   </div>
 
