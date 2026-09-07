@@ -25,8 +25,8 @@ function renderSlotUI(p, listName, origIndex, isDraggable) {
 
     let selectionStyle = '';
     let clickHandler = '';
-    if (window.sellModeActive && listName.toLowerCase() === 'storage') {
-        dragAttr = ''; // Disable drag in sell mode
+    if (window.sellModeActive) {
+        dragAttr = ''; // Disable drag in sell mode for all pockets
         cursorStyle = 'cursor: pointer;';
         clickHandler = `onclick="window.toggleSaleSelection('${p.uuid}')"`;
         if (window.selectedForSale.has(p.uuid)) {
@@ -72,9 +72,26 @@ export function renderPokemonTab(area) {
 
     let sellControlsHtml = '';
     if (window.sellModeActive) {
+        let totalValue = 0;
+        const allMons = [...state.party, ...state.storage, ...state.safe, ...state.breeding, ...state.training];
+
+        // Use standard calculateEV function directly
+        allMons.forEach(p => {
+             if (p && window.selectedForSale.has(p.uuid)) {
+                 let bst = 195; // fallback
+                 if (state.config?.pokemonData) {
+                    const pd = state.config.pokemonData.find(pd => pd.id === p.id);
+                    if (pd) bst = pd.stats.hp + pd.stats.atk + pd.stats.def + pd.stats.spa + pd.stats.spd + pd.stats.spe;
+                 }
+                 const sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
+                 totalValue += Math.floor(calculateEV(bst, p.level, p.quality, sumIV) * p.level);
+             }
+        });
+
         sellControlsHtml = `
             <div style="margin-bottom: 10px; text-align: center;">
-                <button onclick="window.selectAllForSale()" style="padding: 5px 15px; margin-right: 5px; background: #3498db; color: white; border: none; border-radius: 4px; cursor: pointer;">Select All in Storage</button>
+                <div style="margin-bottom: 5px; font-weight: bold; font-size: 16px; color: #f1c40f;">Total Value: $${totalValue.toLocaleString()}</div>
+                <button onclick="window.selectAllForSale()" style="padding: 5px 15px; margin-right: 5px; background: #3498db; color: white; border: none; border-radius: 4px; cursor: pointer;">Select all Visible Storage</button>
                 <button onclick="window.sellSelectedPokemon()" style="padding: 5px 15px; margin-right: 5px; background: #e74c3c; color: white; border: none; border-radius: 4px; cursor: pointer;">Sell Selected</button>
                 <button onclick="window.cancelSellMode()" style="padding: 5px 15px; background: #7f8c8d; color: white; border: none; border-radius: 4px; cursor: pointer;">Cancel</button>
             </div>
@@ -478,25 +495,27 @@ window.startSellMode = function() {
     window.selectedForSale.clear();
 
     // Open backpack directly to pokemon tab
-    state.backpack.activePocket = 'pokemon';
-    document.getElementById('backpack-modal').style.display = 'block';
+    if (window.showBackpack) {
+        window.showBackpack();
+    }
     renderBackpackTab('pokemon');
 };
 
 window.cancelSellMode = function() {
     window.sellModeActive = false;
     window.selectedForSale.clear();
-    document.getElementById('backpack-modal').style.display = 'none';
+    if (window.closeModal) {
+        window.closeModal();
+    }
 
     // Return to Market UI
-    const pcButton = document.querySelector('img[src="Assets/UI/Menu/TopBar/Icon_Map.png"]');
-    if (pcButton) {
-        window.changeLocation("PokeCenter & PokeMarket");
+    if (window.navigateToLocation) {
+        window.navigateToLocation("PokeCenter & PokeMarket");
     }
 };
 
 window.selectAllForSale = function() {
-    const storageMons = state.backpack.storage;
+    const storageMons = state.storage;
     const filters = window.pokemonFilters || {};
     let minLvl = filters.minLvl !== '' ? parseFloat(filters.minLvl) : null;
     let maxLvl = filters.maxLvl !== '' ? parseFloat(filters.maxLvl) : null;
@@ -528,21 +547,59 @@ window.selectAllForSale = function() {
 window.sellSelectedPokemon = function() {
     if (window.selectedForSale.size === 0) return;
 
+    // Check if selling would empty the party
+    let partySellCount = 0;
+    state.party.forEach(p => {
+        if (window.selectedForSale.has(p.uuid)) {
+            partySellCount++;
+        }
+    });
+
+    if (partySellCount >= state.party.length) {
+        alert("You cannot sell your last Pokémon in the party!");
+        return; // Abort sale without unselecting
+    }
+
     let totalGain = 0;
     let numSold = 0;
 
-    state.backpack.storage = state.backpack.storage.filter(p => {
+    const processSale = (listName, p) => {
         if (window.selectedForSale.has(p.uuid)) {
-            let val = Math.floor(calculateEV(p) * p.level);
+            let bst = 195; // fallback
+            if (state.config?.pokemonData) {
+                const pd = state.config.pokemonData.find(pd => pd.id === p.id);
+                if (pd) bst = pd.stats.hp + pd.stats.atk + pd.stats.def + pd.stats.spa + pd.stats.spd + pd.stats.spe;
+            }
+            const sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
+            let val = Math.floor(calculateEV(bst, p.level, p.quality, sumIV) * p.level);
             totalGain += val;
             numSold++;
+
+            // Clear daycare if applicable
+            if (listName === 'breeding' && state.dayCareRef) {
+                state.dayCareRef.slot1.pokemon = null;
+                state.dayCareRef.slot1.battles = 0;
+                state.dayCareRef.slot1.isBreeding = false;
+                state.dayCareRef.slot1.isFinished = false;
+            }
+            if (listName === 'training' && state.dayCareRef) {
+                state.dayCareRef.slot2.pokemon = null;
+                state.dayCareRef.slot2.battles = 0;
+            }
+
             return false; // Remove
         }
         return true; // Keep
-    });
+    };
+
+    state.party = state.party.filter(p => processSale('party', p));
+    state.storage = state.storage.filter(p => processSale('storage', p));
+    state.safe = state.safe.filter(p => processSale('safe', p));
+    state.breeding = state.breeding.filter(p => processSale('breeding', p));
+    state.training = state.training.filter(p => processSale('training', p));
 
     state.trainer.money += totalGain;
-    alert(`Sold ${numSold} Pokemon for $${totalGain}!`);
+    alert(`Sold ${numSold} Pokemon for $${totalGain.toLocaleString()}!`);
 
     window.cancelSellMode();
 };
