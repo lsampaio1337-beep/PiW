@@ -1,0 +1,11 @@
+--- src/ui.js
++++ src/ui.js
+@@ -43,6 +43,8 @@ import { showSettings, updateGameSpeed, addMoney, addXp, exportLog, showAddPokem
+ import { setupMarket, buyItem, openPokeMarketBuy, renderPokeMarketTab, updateMarketPrices } from './ui/market.js';
+ import { showBackpack, renderBackpackTab, setActiveItem } from './ui/backpack/index.js';
+ import { dragStart, dragOver, handleDrop } from './ui/backpack/pokemon.js';
++
++import './ui/backpack/pokemon.js';
+
+ const storage = new Storage();
+ const dayCare = new DayCare(state);
