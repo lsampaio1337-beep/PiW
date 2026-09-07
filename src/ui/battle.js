@@ -77,6 +77,7 @@ export function updateBattleArena() {
 
                 elEnemySide.style.bottom = 'auto';
                 elEnemySide.style.top = `${baseTop}%`;
+                elEnemySide.style.transform = 'translate(-50%, -100%)';
 
                 if (battleSystem.isSliding) {
                     if (elEnemySide.dataset.sliding !== 'true') {
@@ -121,6 +122,7 @@ export function updateBattleArena() {
 
                 elPlayerSide.style.bottom = 'auto';
                 elPlayerSide.style.top = `${baseTop}%`;
+                elPlayerSide.style.transform = 'translate(-50%, -100%)';
                 elPlayerSide.style.left = '20%';
 
                 const hpContainerPlayer = document.getElementById('player-battle-hp-container');
@@ -165,6 +167,7 @@ export function updateBattleArena() {
                 elEnemySide.style.left = '35%'; // Matching active battle destination
                 elEnemySide.style.bottom = 'auto';
                 elEnemySide.style.top = '90%'; // default
+                elEnemySide.style.transform = 'translate(-50%, -100%)';
                 if (hpContainerEnemy) {
                     hpContainerEnemy.style.transition = 'none';
                     hpContainerEnemy.style.left = '35%';
@@ -180,6 +183,7 @@ export function updateBattleArena() {
 
                 elPlayerSide.style.bottom = 'auto';
                 elPlayerSide.style.top = `${baseTop}%`;
+                elPlayerSide.style.transform = 'translate(-50%, -100%)';
                 elPlayerSide.style.left = '20%';
 
                 const hpContainerPlayer = document.getElementById('player-battle-hp-container');
@@ -250,7 +254,7 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
     ghost.src = `Assets/Pokemon Sprites/${activeEncounter.qualityName === 'Shiny' ? activeEncounter.id + '_shiny' : activeEncounter.id}.png`;
     ghost.style.position = 'absolute';
     ghost.style.left = '35%';
-    ghost.style.transform = 'translateX(-50%)';
+    ghost.style.transform = 'translate(-50%, -100%)';
 
     let baseTop = 90;
     if (activeEncounter.types && activeEncounter.types.includes('Water')) baseTop = 92;
@@ -273,7 +277,7 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
         ball.style.left = '35%';
         ball.style.bottom = 'auto';
         ball.style.top = `${baseTop}%`;
-        ball.style.transform = 'translateX(-50%)';
+        ball.style.transform = 'translate(-50%, -100%)';
         ball.style.width = '40px'; // fixed size for ball
         ball.style.height = '40px';
         ball.style.zIndex = '51';
