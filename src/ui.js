@@ -1054,17 +1054,7 @@ async function init() {
             const grains = state.stats.jigglypuffGrains || 0;
             document.getElementById('zzz-current-grains').innerText = grains;
 
-            let m = grains;
-            let timeStr = "";
-            let h = Math.floor(m / 60);
-            let d = Math.floor(h / 24);
-            h = h % 24;
-            m = m % 60;
-            if (d > 0) timeStr += `${d}d`;
-            if (h > 0 || d > 0) timeStr += `${h}h`;
-            timeStr += `${m}m`;
-
-            document.getElementById('zzz-max-offline-time').innerText = `Max Offline Time: ${timeStr}`;
+            // Text is now static (1 grain = 1min offline farm) in HTML
 
             // Disable Go to Sleep if no grains (optional depending on if they can sleep for 0 mins just to pause, but task says "use grains to farm offline")
             // Let's just allow it, but it will cap at 0 if no grains.
@@ -1091,18 +1081,6 @@ async function init() {
         // Update UI immediately if the modal is open
         const grains = state.stats.jigglypuffGrains;
         document.getElementById('zzz-current-grains').innerText = grains;
-
-        let m = grains;
-        let timeStr = "";
-        let h = Math.floor(m / 60);
-        let d = Math.floor(h / 24);
-        h = h % 24;
-        m = m % 60;
-        if (d > 0) timeStr += `${d}d`;
-        if (h > 0 || d > 0) timeStr += `${h}h`;
-        timeStr += `${m}m`;
-
-        document.getElementById('zzz-max-offline-time').innerText = `Max Offline Time: ${timeStr}`;
     });
 
     window.showBackpackAndFocus = (tab) => {
