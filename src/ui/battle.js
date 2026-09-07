@@ -51,12 +51,12 @@ export function updateBattleArena() {
 
             if (hpBarEnemy && hpTextEnemy && hpPctEnemy) {
                 const pct = Math.min(100, (enemy.currentHp / enemy.maxHp) * 100);
-                let color = '#3498db';
-                if (pct <= 0) color = '#000000';
-                else if (pct < 25) color = '#e74c3c';
-                else if (pct < 50) color = '#e67e22';
-                else if (pct < 75) color = '#f1c40f';
-                else if (pct < 100) color = '#2ecc71';
+
+                    let color = '#2ecc71';
+                    if (pct <= 0) color = '#000000';
+                    else if (pct < 20) color = '#e74c3c';
+                    else if (pct < 50) color = '#f1c40f';
+
 
                 hpBarEnemy.style.width = `${pct}%`;
                 hpBarEnemy.style.background = color;
@@ -71,11 +71,11 @@ export function updateBattleArena() {
                 elEnemySprite.src = `Assets/Pokemon Sprites/${enemy.qualityName === 'Shiny' ? enemy.id + '_shiny' : enemy.id}.png`;
                 elEnemySprite.style.display = 'block';
 
-                let baseBottom = 10;
-                if (enemy.types.includes('Water')) baseBottom = 5;
-                if (enemy.types.includes('Flying') || enemy.types.includes('Wind')) baseBottom = 20;
+                let baseTop = 85;
+                if (enemy.types.includes('Water')) baseTop = 90;
+                if (enemy.types.includes('Flying') || enemy.types.includes('Wind')) baseTop = 75;
 
-                elEnemySide.style.bottom = `${baseBottom}%`;
+                if (elEnemySprite) elEnemySprite.style.top = `${baseTop}%`;
 
                 if (battleSystem.isSliding) {
                     if (elEnemySide.dataset.sliding !== 'true') {
@@ -102,11 +102,11 @@ export function updateBattleArena() {
             const elPlayerSide = document.getElementById('player-side');
             if (leader && elPlayerSide) {
 
-                let baseBottom = 10;
-                if (leader.types.includes('Water')) baseBottom = 5;
-                if (leader.types.includes('Flying') || leader.types.includes('Wind')) baseBottom = 20;
+                let baseTop = 85;
+                if (leader.types.includes('Water')) baseTop = 90;
+                if (leader.types.includes('Flying') || leader.types.includes('Wind')) baseTop = 75;
 
-                elPlayerSide.style.bottom = `${baseBottom}%`;
+                const elPlayerSpriteLocal = document.getElementById('player-sprite'); if (elPlayerSpriteLocal) elPlayerSpriteLocal.style.top = `${baseTop}%`;
                 elPlayerSide.style.left = '20%';
 
                 const hpContainerPlayer = document.getElementById('player-battle-hp-container');
@@ -118,12 +118,12 @@ export function updateBattleArena() {
 
                 if (hpBarPlayer && hpTextPlayer && hpPctPlayer) {
                     const pct = Math.min(100, (leader.currentHp / leader.maxHp) * 100);
-                    let color = '#3498db';
+
+                    let color = '#2ecc71';
                     if (pct <= 0) color = '#000000';
-                    else if (pct < 25) color = '#e74c3c';
-                    else if (pct < 50) color = '#e67e22';
-                    else if (pct < 75) color = '#f1c40f';
-                    else if (pct < 100) color = '#2ecc71';
+                    else if (pct < 20) color = '#e74c3c';
+                    else if (pct < 50) color = '#f1c40f';
+
 
                     hpBarPlayer.style.width = `${pct}%`;
                     hpBarPlayer.style.background = color;
@@ -149,17 +149,17 @@ export function updateBattleArena() {
                 elEnemySprite.style.display = 'block';
                 elEnemySide.style.transition = 'none';
                 elEnemySide.style.left = '35%'; // Matching active battle destination
-                elEnemySide.style.bottom = '10%'; // default
+                if (elEnemySprite) elEnemySprite.style.top = '85%';
             }
 
             const leader = state.party[0];
             const elPlayerSide = document.getElementById('player-side');
             if (leader && elPlayerSide) {
-                let baseBottom = 10;
-                if (leader.types.includes('Water')) baseBottom = 5;
-                if (leader.types.includes('Flying') || leader.types.includes('Wind')) baseBottom = 20;
+                let baseTop = 85;
+                if (leader.types.includes('Water')) baseTop = 90;
+                if (leader.types.includes('Flying') || leader.types.includes('Wind')) baseTop = 75;
 
-                elPlayerSide.style.bottom = `${baseBottom}%`;
+                const elPlayerSpriteLocal = document.getElementById('player-sprite'); if (elPlayerSpriteLocal) elPlayerSpriteLocal.style.top = `${baseTop}%`;
                 elPlayerSide.style.left = '20%';
 
                 const hpContainerPlayer = document.getElementById('player-battle-hp-container');
@@ -171,12 +171,12 @@ export function updateBattleArena() {
 
                 if (hpBarPlayer && hpTextPlayer && hpPctPlayer) {
                     const pct = Math.min(100, (leader.currentHp / leader.maxHp) * 100);
-                    let color = '#3498db';
+
+                    let color = '#2ecc71';
                     if (pct <= 0) color = '#000000';
-                    else if (pct < 25) color = '#e74c3c';
-                    else if (pct < 50) color = '#e67e22';
-                    else if (pct < 75) color = '#f1c40f';
-                    else if (pct < 100) color = '#2ecc71';
+                    else if (pct < 20) color = '#e74c3c';
+                    else if (pct < 50) color = '#f1c40f';
+
 
                     hpBarPlayer.style.width = `${pct}%`;
                     hpBarPlayer.style.background = color;
