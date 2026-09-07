@@ -22,10 +22,10 @@ export function renderPotionsTab(area) {
                     >
                     <!-- Background bar to show locked zone -->
                     <div style="position: absolute; top: 50%; left: 0; width: 100%; height: 6px; transform: translateY(-50%); background: #555; border-radius: 3px; z-index: 1; pointer-events: none;">
-                        <div style="position: absolute; top: 0; left: 90%; width: 10%; height: 100%; background: repeating-linear-gradient(45deg, #e74c3c, #e74c3c 4px, #c0392b 4px, #c0392b 8px); border-radius: 0 3px 3px 0;"></div>
+                        <div style="position: absolute; top: 0; left: 90%; width: 10%; height: 100%; background: #e74c3c; border-radius: 0 3px 3px 0;"></div>
                     </div>
-                    <!-- 90% Marker Text -->
-                    <div style="position: absolute; top: 15px; left: 90%; transform: translateX(-50%); color: #e74c3c; font-size: 1.2cqi; font-weight: bold; pointer-events: none;">90% Max</div>
+                    <!-- 90% Marker Ball -->
+                    <div style="position: absolute; top: 50%; left: 90%; transform: translate(-50%, -50%); width: 16px; height: 16px; background: #e74c3c; border-radius: 50%; z-index: 3; pointer-events: none; box-shadow: 0 0 2px rgba(0,0,0,0.5);"></div>
                 </div>
             </div>
 
