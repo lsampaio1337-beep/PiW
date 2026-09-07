@@ -708,14 +708,22 @@ async function init() {
                 playtimeStr = `${h}h ${m}m ${s}s`;
             }
 
-            // Format last played explicitly as dd/mm/yyyy
+            // Format last played explicitly as dd/mm/yyyy hh:mm am/pm
             let lastPlayedStr = "Unknown";
             if (pData.lastPlayed) {
                 const lpDate = new Date(pData.lastPlayed);
                 const dd = String(lpDate.getDate()).padStart(2, '0');
                 const mm = String(lpDate.getMonth() + 1).padStart(2, '0');
                 const yyyy = lpDate.getFullYear();
-                lastPlayedStr = `${dd}/${mm}/${yyyy}`;
+
+                let hours = lpDate.getHours();
+                const minutes = String(lpDate.getMinutes()).padStart(2, '0');
+                const ampm = hours >= 12 ? 'pm' : 'am';
+                hours = hours % 12;
+                hours = hours ? hours : 12; // the hour '0' should be '12'
+                const strTime = `${String(hours).padStart(2, '0')}:${minutes} ${ampm}`;
+
+                lastPlayedStr = `${dd}/${mm}/${yyyy} ${strTime}`;
             }
 
             // Get profile name
@@ -736,6 +744,8 @@ async function init() {
                 }
             }
 
+            let zzzText = pData.isZzZMode ? ` - ZzZ: ${pData.currentRoute || 'Unknown Route'}` : '';
+
             const btn = document.createElement('button');
             btn.style.padding = "10px";
             btn.style.fontSize = "16px";
@@ -746,15 +756,23 @@ async function init() {
             btn.style.borderRadius = "5px";
             btn.style.textAlign = "left";
             btn.style.fontWeight = "bold";
+            btn.style.width = "75%";
+            btn.style.margin = "0 auto";
+            btn.style.display = "flex";
+            btn.style.justifyContent = "space-between";
+            btn.style.alignItems = "center";
 
-            let zzzIcon = pData.isZzZMode ? `<img src="Assets/Extra/IconSleep.png" style="width: 20px; height: 20px; vertical-align: middle; margin-left: 10px;" title="ZzZ Mode Active">` : '';
+            let zzzIconHtml = pData.isZzZMode ? `<img src="Assets/Extra/IconSleep.png" style="height: 100%; max-height: 60px; margin-left: 10px;" title="ZzZ Mode Active">` : '';
 
             btn.innerHTML = `
-                <div style="font-size: 18px; margin-bottom: 5px; font-weight: bold; display: flex; align-items: center;">
-                    "${profileName}" - ${playtimeStr} ${zzzIcon}
+                <div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center;">
+                    <div style="font-size: 18px; margin-bottom: 5px; font-weight: bold; display: flex; align-items: center;">
+                        "${profileName}" - ${playtimeStr}
+                    </div>
+                    <div style="font-size: 14px; font-weight: normal;">Last Played: ${lastPlayedStr}</div>
+                    <div style="font-size: 14px; font-weight: normal;">Progress: ${lastRoute}${zzzText}</div>
                 </div>
-                <div style="font-size: 14px; font-weight: normal;">Last Played: ${lastPlayedStr}</div>
-                <div style="font-size: 14px; font-weight: normal;">Current: ${lastRoute}</div>
+                ${zzzIconHtml}
             `;
 
             btn.onclick = async () => {
