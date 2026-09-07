@@ -533,7 +533,7 @@ window.sellSelectedPokemon = function() {
 
     state.backpack.storage = state.backpack.storage.filter(p => {
         if (window.selectedForSale.has(p.uuid)) {
-            let val = Math.floor(calculateEV(p) * p.level);
+            let val = Math.floor(calculateEV(p.bst, p.level, p.quality, p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe));
             totalGain += val;
             numSold++;
             return false; // Remove
