@@ -266,8 +266,34 @@ export function openPokeMarketSell() {
             <div id="market-pokemon-sell-controls" style="display: none; flex-direction: column; align-items: center; justify-content: center; margin-bottom: calc(var(--m-width) * 0.024); gap: calc(var(--m-width) * 0.012);">
                 <div style="font-size: calc(var(--m-width) * 0.022); font-weight: bold; color: white;">Selected: <span id="market-pokemon-sell-count">0</span> | Total: $<span id="market-pokemon-sell-total">0</span></div>
                 <div style="display: flex; gap: calc(var(--m-width) * 0.012);">
-                    <button onclick="if(window.marketSelectAllPokemonForSale) window.marketSelectAllPokemonForSale()" style="padding: calc(var(--m-width) * 0.012) calc(var(--m-width) * 0.024); font-size: calc(var(--m-width) * 0.019); font-weight: bold; border-radius: 5px; background: #3498db; color: white; cursor: pointer; border: none;">Select All Storage</button>
+                    <button onclick="if(window.marketSelectAllPokemonForSale) window.marketSelectAllPokemonForSale()" style="padding: calc(var(--m-width) * 0.012) calc(var(--m-width) * 0.024); font-size: calc(var(--m-width) * 0.019); font-weight: bold; border-radius: 5px; background: #3498db; color: white; cursor: pointer; border: none;">Select All</button>
+                    <button onclick="if(window.marketDeselectAllPokemonForSale) window.marketDeselectAllPokemonForSale()" style="padding: calc(var(--m-width) * 0.012) calc(var(--m-width) * 0.024); font-size: calc(var(--m-width) * 0.019); font-weight: bold; border-radius: 5px; background: #95a5a6; color: white; cursor: pointer; border: none;">Deselect All</button>
                     <button onclick="if(window.marketSellSelectedPokemon) window.marketSellSelectedPokemon()" style="padding: calc(var(--m-width) * 0.012) calc(var(--m-width) * 0.024); font-size: calc(var(--m-width) * 0.019); font-weight: bold; border-radius: 5px; background: #e74c3c; color: white; cursor: pointer; border: none;">Sell Selected</button>
+                </div>
+
+                <div id="market-pokemon-filters" style="display: flex; flex-wrap: wrap; gap: calc(var(--m-width) * 0.012); justify-content: center; align-items: center; background: #2c3e50; padding: calc(var(--m-width) * 0.012); border-radius: 8px; border: 1px solid #7f8c8d; width: 100%; box-sizing: border-box;">
+                    <div style="display: flex; gap: calc(var(--m-width) * 0.006); align-items: center;">
+                        <label style="color: white; font-size: calc(var(--m-width) * 0.017);">Name:</label>
+                        <input type="text" id="market-filter-name" oninput="if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon')" style="width: calc(var(--m-width) * 0.1); padding: calc(var(--m-width) * 0.006); border-radius: 4px; border: 1px solid #ccc; font-size: calc(var(--m-width) * 0.017);">
+                    </div>
+                    <div style="display: flex; gap: calc(var(--m-width) * 0.006); align-items: center;">
+                        <label style="color: white; font-size: calc(var(--m-width) * 0.017);">Level:</label>
+                        <input type="number" id="market-filter-level-min" placeholder="Min" oninput="if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon')" style="width: calc(var(--m-width) * 0.06); padding: calc(var(--m-width) * 0.006); border-radius: 4px; border: 1px solid #ccc; font-size: calc(var(--m-width) * 0.017);">
+                        <span style="color: white;">-</span>
+                        <input type="number" id="market-filter-level-max" placeholder="Max" oninput="if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon')" style="width: calc(var(--m-width) * 0.06); padding: calc(var(--m-width) * 0.006); border-radius: 4px; border: 1px solid #ccc; font-size: calc(var(--m-width) * 0.017);">
+                    </div>
+                    <div style="display: flex; gap: calc(var(--m-width) * 0.006); align-items: center;">
+                        <label style="color: white; font-size: calc(var(--m-width) * 0.017);">Q:</label>
+                        <input type="number" step="0.01" id="market-filter-q-min" placeholder="Min" oninput="if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon')" style="width: calc(var(--m-width) * 0.06); padding: calc(var(--m-width) * 0.006); border-radius: 4px; border: 1px solid #ccc; font-size: calc(var(--m-width) * 0.017);">
+                        <span style="color: white;">-</span>
+                        <input type="number" step="0.01" id="market-filter-q-max" placeholder="Max" oninput="if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon')" style="width: calc(var(--m-width) * 0.06); padding: calc(var(--m-width) * 0.006); border-radius: 4px; border: 1px solid #ccc; font-size: calc(var(--m-width) * 0.017);">
+                    </div>
+                    <div style="display: flex; gap: calc(var(--m-width) * 0.006); align-items: center;">
+                        <label style="color: white; font-size: calc(var(--m-width) * 0.017);">SumIV:</label>
+                        <input type="number" id="market-filter-sumiv-min" placeholder="Min" oninput="if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon')" style="width: calc(var(--m-width) * 0.06); padding: calc(var(--m-width) * 0.006); border-radius: 4px; border: 1px solid #ccc; font-size: calc(var(--m-width) * 0.017);">
+                        <span style="color: white;">-</span>
+                        <input type="number" id="market-filter-sumiv-max" placeholder="Max" oninput="if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon')" style="width: calc(var(--m-width) * 0.06); padding: calc(var(--m-width) * 0.006); border-radius: 4px; border: 1px solid #ccc; font-size: calc(var(--m-width) * 0.017);">
+                    </div>
                 </div>
             </div>
 
@@ -312,10 +338,32 @@ export function renderPokeMarketSellTab(category) {
         cols = 6;
         let html = `<div style="display: grid; grid-template-columns: repeat(${cols}, calc(var(--m-width) * 0.145)); gap: calc(var(--m-width) * 0.018); justify-content: center; width: 100%;">`;
 
+        const filterName = (document.getElementById('market-filter-name')?.value || '').toLowerCase();
+        const filterLevelMin = parseFloat(document.getElementById('market-filter-level-min')?.value);
+        const filterLevelMax = parseFloat(document.getElementById('market-filter-level-max')?.value);
+        const filterQMin = parseFloat(document.getElementById('market-filter-q-min')?.value);
+        const filterQMax = parseFloat(document.getElementById('market-filter-q-max')?.value);
+        const filterSumIVMin = parseFloat(document.getElementById('market-filter-sumiv-min')?.value);
+        const filterSumIVMax = parseFloat(document.getElementById('market-filter-sumiv-max')?.value);
+
         state.storage.forEach(p => {
-            let imgSrc = `Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png`;
             let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
             let pEv = calculateEV(p.bst, p.level, p.quality, sumIV);
+
+            let pName = p.name || p.id;
+            if (typeof p.id === 'number' && state.config && state.config.pokemonData) {
+                const pd = state.config.pokemonData.find(pd => pd.id === p.id);
+                if (pd) pName = p.name || pd.name;
+            }
+            if (filterName && !(pName && pName.toString().toLowerCase().includes(filterName)) && !(p.id && p.id.toString().toLowerCase().includes(filterName))) return;
+            if (!isNaN(filterLevelMin) && p.level < filterLevelMin) return;
+            if (!isNaN(filterLevelMax) && p.level > filterLevelMax) return;
+            if (!isNaN(filterQMin) && p.quality < filterQMin) return;
+            if (!isNaN(filterQMax) && p.quality > filterQMax) return;
+            if (!isNaN(filterSumIVMin) && sumIV < filterSumIVMin) return;
+            if (!isNaN(filterSumIVMax) && sumIV > filterSumIVMax) return;
+
+            let imgSrc = `Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png`;
 
             let glowClass = "glow-weak";
             if (p.qualityName === "Shiny") glowClass = "glow-shiny";
@@ -330,7 +378,7 @@ export function renderPokeMarketSellTab(category) {
             html += `
                 <div onclick="if(window.toggleMarketPokemonSaleSelection) window.toggleMarketPokemonSaleSelection('${p.uuid}')"
                     style="${selectionStyle} border-radius: 10px; padding: calc(var(--m-width) * 0.012); text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; position: relative;">
-                    <div style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; margin-bottom: calc(var(--m-width) * 0.006); line-height: 1.1; color: white;">${p.id}</div>
+                    <div style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; margin-bottom: calc(var(--m-width) * 0.006); line-height: 1.1; color: white;">${pName}</div>
                     <div style="flex: 1; width: 100%; display: flex; align-items: center; justify-content: center; position: relative; height: calc(var(--m-width) * 0.072); margin-bottom: calc(var(--m-width) * 0.006);">
                         <img src="${imgSrc}" class="${glowClass}" style="max-height: 100%; max-width: 100%; object-fit: contain; z-index: 1;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
                     </div>
@@ -522,6 +570,14 @@ window.toggleMarketPokemonSaleSelection = function(uuid) {
         window.marketSelectedPokemonForSale.delete(uuid);
     } else {
         window.marketSelectedPokemonForSale.add(uuid);
+    }
+    updateMarketPokemonSellCount();
+    if (window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon');
+};
+
+window.marketDeselectAllPokemonForSale = function() {
+    if (window.marketSelectedPokemonForSale) {
+        window.marketSelectedPokemonForSale.clear();
     }
     updateMarketPokemonSellCount();
     if (window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon');
