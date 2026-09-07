@@ -3,6 +3,11 @@ import { updateUI, switchView } from '../ui.js';
 import { setupMarket } from './market.js';
 
 export function showMap() {
+    if (state.stats.hasUnseenMap) {
+        state.stats.hasUnseenMap = false;
+        updateUI();
+    }
+
     let rightCol = document.getElementById('modal-overlay');
     let contentPanel = document.getElementById('content-panel');
     rightCol.style.display = 'flex';
@@ -46,6 +51,11 @@ export function showMap() {
             let markerImg = './Assets/Extra/Spot.png';
             let showCheckmark = false;
             let isClickable = true;
+            let hasNewNotification = false;
+
+            if (state.stats.newRoutes && state.stats.newRoutes.includes(locationName)) {
+                hasNewNotification = true;
+            }
 
             if (locationId === 'professor_oak_lab') markerImg = './Assets/Extra/Spot_Oak.png';
             else if (locationId === 'pokemon_center___market') markerImg = './Assets/Extra/Spot_PCPM.png';
@@ -88,8 +98,10 @@ export function showMap() {
             }
 
 
+            let markerClass = hasNewNotification ? 'map-marker pulse-marker' : 'map-marker';
+
             html += `
-                <div class="map-marker"
+                <div class="${markerClass}"
                      data-location="${locationName.replace(/'/g, "&#39;")}"
                      title="${locationName.replace(/'/g, "&#39;")}"
                      style="position: absolute; left: ${coords.x}%; top: ${coords.y}%; width: ${markerWidth}; height: ${markerHeight}; background-image: url('${markerImg}'); background-size: contain; background-repeat: no-repeat; transform: translate(-50%, -50%); filter: ${dropShadow}; cursor: ${isClickable ? 'pointer' : 'default'};"
@@ -111,6 +123,10 @@ export function showMap() {
 }
 
 export function navigateToLocation(locationName) {
+    if (state.stats.newRoutes && state.stats.newRoutes.includes(locationName)) {
+        state.stats.newRoutes = state.stats.newRoutes.filter(r => r !== locationName);
+    }
+
     const battleSystem = globals.battleSystem;
     state.currentRoute = locationName;
     if (window.closeModal) window.closeModal();

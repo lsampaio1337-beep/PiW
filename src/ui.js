@@ -77,6 +77,22 @@ window.forceNextEncounter = forceNextEncounter;
 window.activateCheat = activateCheat;
 window.dragStart = dragStart;
 window.completeChallenge = function() {
+    let currentIndex = state.stats.completedChallenges || 0;
+    if (state.config.unlocks && currentIndex < state.config.unlocks.length) {
+        let unlock = state.config.unlocks[currentIndex];
+        if (unlock.unlocks) {
+            for (let newRoute of unlock.unlocks) {
+                if (!state.stats.newRoutes) state.stats.newRoutes = [];
+                if (!state.stats.newRoutes.includes(newRoute)) {
+                    state.stats.newRoutes.push(newRoute);
+                }
+            }
+            if (unlock.unlocks.length > 0) {
+                state.stats.hasUnseenMap = true;
+            }
+        }
+    }
+
     state.stats.completedChallenges = (state.stats.completedChallenges || 0) + 1;
 
     // Clear challenge specific tracking state
