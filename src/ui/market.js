@@ -265,7 +265,7 @@ export function openPokeMarketSell() {
             <div id="market-pokemon-sell-controls" style="display: none; flex-direction: column; align-items: center; justify-content: center; margin-bottom: calc(var(--m-width) * 0.024); gap: calc(var(--m-width) * 0.012);">
                 <div style="font-size: calc(var(--m-width) * 0.022); font-weight: bold; color: white;">Selected: <span id="market-pokemon-sell-count">0</span> | Total: $<span id="market-pokemon-sell-total">0</span></div>
                 <div style="display: flex; gap: calc(var(--m-width) * 0.012);">
-                    <button onclick="if(window.marketSelectAllPokemonForSale) window.marketSelectAllPokemonForSale()" style="padding: calc(var(--m-width) * 0.012) calc(var(--m-width) * 0.024); font-size: calc(var(--m-width) * 0.019); font-weight: bold; border-radius: 5px; background: #3498db; color: white; cursor: pointer; border: none;">Select All Storage</button>
+                    <button onclick="if(window.marketSelectAllPokemonForSale) window.marketSelectAllPokemonForSale()" style="padding: calc(var(--m-width) * 0.012) calc(var(--m-width) * 0.024); font-size: calc(var(--m-width) * 0.019); font-weight: bold; border-radius: 5px; background: #3498db; color: white; cursor: pointer; border: none;">Select All</button>
                     <button onclick="if(window.marketDeselectAllPokemonForSale) window.marketDeselectAllPokemonForSale()" style="padding: calc(var(--m-width) * 0.012) calc(var(--m-width) * 0.024); font-size: calc(var(--m-width) * 0.019); font-weight: bold; border-radius: 5px; background: #95a5a6; color: white; cursor: pointer; border: none;">Deselect All</button>
                     <button onclick="if(window.marketSellSelectedPokemon) window.marketSellSelectedPokemon()" style="padding: calc(var(--m-width) * 0.012) calc(var(--m-width) * 0.024); font-size: calc(var(--m-width) * 0.019); font-weight: bold; border-radius: 5px; background: #e74c3c; color: white; cursor: pointer; border: none;">Sell Selected</button>
                 </div>
@@ -376,7 +376,7 @@ export function renderPokeMarketSellTab(category) {
             html += `
                 <div onclick="if(window.toggleMarketPokemonSaleSelection) window.toggleMarketPokemonSaleSelection('${p.uuid}')"
                     style="${selectionStyle} border-radius: 10px; padding: calc(var(--m-width) * 0.012); text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; position: relative;">
-                    <div style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; margin-bottom: calc(var(--m-width) * 0.006); line-height: 1.1; color: white;">${p.id}</div>
+                    <div style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; margin-bottom: calc(var(--m-width) * 0.006); line-height: 1.1; color: white;">${pName}</div>
                     <div style="flex: 1; width: 100%; display: flex; align-items: center; justify-content: center; position: relative; height: calc(var(--m-width) * 0.072); margin-bottom: calc(var(--m-width) * 0.006);">
                         <img src="${imgSrc}" class="${glowClass}" style="max-height: 100%; max-width: 100%; object-fit: contain; z-index: 1;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
                     </div>
