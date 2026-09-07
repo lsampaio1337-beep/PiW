@@ -542,15 +542,13 @@ class BattleSystem {
         if (pokemon.currentHp > pokemon.maxHp * 0.5) return false; // simple logic: heal if <50%
 
         let tier = this.state.settings.activePotionTier;
-        // downgraded logic
-        while(tier >= 0) {
-            const potName = this.state.config.balance.items.potions[tier].name;
-            if (this.state.backpack.potions[potName] > 0) {
-                this.state.backpack.potions[potName]--;
-                pokemon.currentHp = Math.min(pokemon.maxHp, pokemon.currentHp + this.state.config.balance.items.potions[tier].heal);
-                return true;
-            }
-            tier--;
+        if (tier < 0) return false;
+
+        const potName = this.state.config.balance.items.potions[tier].name;
+        if (this.state.backpack.potions[potName] > 0) {
+            this.state.backpack.potions[potName]--;
+            pokemon.currentHp = Math.min(pokemon.maxHp, pokemon.currentHp + this.state.config.balance.items.potions[tier].heal);
+            return true;
         }
         return false;
     }
@@ -561,13 +559,10 @@ class BattleSystem {
 
         let ballName = this.state.config.balance.items.pokeballs[tier].name;
 
-        while(tier >= 0) {
-            if (this.state.backpack.pokeballs[ballName] > 0) {
-                this.state.backpack.pokeballs[ballName]--;
-                break;
-            }
-            tier--;
-            if (tier >= 0) ballName = this.state.config.balance.items.pokeballs[tier].name;
+        if (this.state.backpack.pokeballs[ballName] > 0) {
+            this.state.backpack.pokeballs[ballName]--;
+        } else {
+            return { used: false, ballName: null, caught: false }; // No balls left
         }
 
         if (tier < 0) return { used: false, ballName: null, caught: false }; // No balls left

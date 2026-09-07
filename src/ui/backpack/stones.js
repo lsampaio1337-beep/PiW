@@ -9,24 +9,31 @@ export function renderStonesTab(area) {
         "Normal Stone", "Poison Stone", "Psychic Stone", "Rock Stone", "Steel Stone", "Water Stone"
     ];
 
-    let content = '<div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; width: 100%; justify-items: center; align-items: center;">';
+    let content = `
+        <div style="display: flex; flex-direction: column; width: 100%; height: 100%; container-type: inline-size;">
+            <div style="display: grid; grid-template-columns: repeat(6, 14.5cqi); gap: 1.5cqi; justify-content: center; align-content: flex-start; width: 100%; padding: 1.2cqi; overflow-y: hidden; overflow-x: hidden; box-sizing: border-box;">
+    `;
 
     for (const name of allStones) {
         // Fallback to 0 if they don't have it in inventory yet
         const qty = state.backpack.stones[name] || 0;
 
+        let displayName = name.replace(' Stone', '<br>Stone');
+
         content += `
-            <div style="text-align: center; width: 100%; box-sizing: border-box;">
-                <div style="width: 100%; aspect-ratio: 1/1; margin: 0 auto; display: flex; align-items: center; justify-content: center;">
-                    <img src="./Assets/Items/Stones/${name}.png" style="max-width: 100%; max-height: 100%; object-fit: contain;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
-                </div>
-                <div style="font-size: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px;">${name}</div>
-                <div style="font-size: 12px;"><b>x${formatQuantity(qty)}</b></div>
+            <div style="background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; padding: 1cqi; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; box-sizing: border-box;">
+                <div style="font-size: 1.6cqi; font-weight: bold; margin-bottom: 0.5cqi; height: 3.5cqi; display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.1;">${displayName}</div>
+                <img src="./Assets/Items/Stones/${name}.png" style="width: 7cqi; height: 7cqi; object-fit: contain; margin-bottom: 0.5cqi;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
+                <div style="font-size: 1.3cqi; color: transparent; margin-bottom: 0.5cqi; line-height: 1.1; user-select: none;">-</div>
+                <div style="font-size: 1.6cqi; font-weight: bold; color: #bdc3c7; line-height: 1.1;">Stock: ${formatQuantity(qty)}</div>
             </div>
         `;
     }
 
-    content += '</div>';
+    content += `
+            </div>
+        </div>
+    `;
 
     area.innerHTML = content;
 }

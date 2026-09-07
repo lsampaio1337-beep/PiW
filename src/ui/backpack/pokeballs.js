@@ -2,33 +2,32 @@ import { state } from '../../state.js';
 import { formatQuantity } from './utils.js';
 
 export function renderPokeballsTab(area) {
-    let content = '<div style="text-align:center; margin-bottom:10px;"><p style="font-size:12px;">Click a Pokeball to set it as active for auto-catch. Selected ball will be used if available, otherwise it falls back to a lower tier.</p></div>';
-
-    // Use CSS grid to allow dynamic scaling
-    content += '<div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; width: 100%; justify-items: center; align-items: center;">';
-
-    const noneActive = state.settings.activeBallTier === -1;
-    content += `
-        <div onclick="window.setActiveItem('ball', -1)" style="text-align: center; width: 100%; cursor: pointer; border: 2px solid ${noneActive ? '#2ecc71' : 'transparent'}; border-radius: 8px; padding: 5px; background: ${noneActive ? 'rgba(46,204,113,0.2)' : 'transparent'}; box-sizing: border-box;">
-            <div style="width: 100%; aspect-ratio: 1/1; margin: 0 auto; display: flex; align-items: center; justify-content: center; font-size: 24px; color: #e74c3c;">X</div>
-            <div style="font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px;">None</div>
-        </div>
+    let content = `
+        <div style="display: flex; flex-direction: column; width: 100%; height: 100%; container-type: inline-size;">
+            <h3 style="text-align: center; margin-top: 0; color: #ddd; font-size: 2.5cqi;">Select Ball to auto use during battles.</h3>
+            <div style="display: flex; flex-wrap: wrap; gap: 1.5cqi; justify-content: center; align-content: flex-start; overflow-y: auto; flex: 1; padding: 1.2cqi; box-sizing: border-box;">
     `;
 
     state.config.balance.items.pokeballs.forEach((b, idx) => {
         const qty = state.backpack.pokeballs[b.name] || 0;
         const isActive = state.settings.activeBallTier === idx;
+        const borderColor = isActive ? '#2ecc71' : '#3498db';
+        const attrLabel = b.name === 'Masterball' ? `Efficiency: 100%` : `Efficiency: ${b.multiplier}x`;
+
         content += `
-            <div onclick="window.setActiveItem('ball', ${idx})" style="text-align: center; width: 100%; cursor: pointer; border: 2px solid ${isActive ? '#2ecc71' : 'transparent'}; border-radius: 8px; padding: 5px; background: ${isActive ? 'rgba(46,204,113,0.2)' : 'transparent'}; box-sizing: border-box;">
-                <div style="width: 100%; aspect-ratio: 1/1; margin: 0 auto; display: flex; align-items: center; justify-content: center;">
-                    <img src="./Assets/Items/Balls/${b.name}.png" style="max-width: 100%; max-height: 100%; object-fit: contain;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
-                </div>
-                <div style="font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px;">${b.name}</div>
-                <div style="font-size: 12px;"><b>x${formatQuantity(qty)}</b></div>
+            <div onclick="window.setActiveItem('ball', ${idx})"
+                style="background: #2c3e50; border: 2px solid ${borderColor}; border-radius: 10px; padding: 1cqi; text-align: center; cursor: pointer; transition: transform 0.2s; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 14.5cqi; box-sizing: border-box;">
+                <div style="font-size: 1.6cqi; font-weight: bold; margin-bottom: 0.5cqi; height: 3.5cqi; display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.1;">${b.name}</div>
+                <img src="./Assets/Items/Balls/${b.name}.png" style="width: 7cqi; height: 7cqi; object-fit: contain; margin-bottom: 0.5cqi;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
+                <div style="font-size: 1.4cqi; color: #f1c40f; margin-bottom: 0.5cqi; line-height: 1.1;">${attrLabel}</div>
+                <div style="font-size: 1.6cqi; font-weight: bold; color: #bdc3c7; line-height: 1.1;">Stock: ${formatQuantity(qty)}</div>
             </div>
         `;
     });
-    content += '</div>';
+    content += `
+            </div>
+        </div>
+    `;
 
     area.innerHTML = content;
 }
