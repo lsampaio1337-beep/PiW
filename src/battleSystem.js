@@ -81,7 +81,8 @@ class BattleSystem {
         this.gymState = {
             isActive: true,
             gym: gym,
-            currentTrainerIndex: 0
+            currentTrainerIndex: 0,
+            inCombat: false
         };
 
         // Update gym UI specifically to show current trainer
@@ -99,9 +100,27 @@ class BattleSystem {
         const trainer = gym.trainers[this.gymState.currentTrainerIndex];
 
         if (trainer) {
-            // Let's add sprites and damage numbers to gym battles!
+            let trainerButtonsHtml = gym.trainers.map((t, index) => {
+                const isLeader = index === gym.trainers.length - 1;
+                const buttonText = isLeader ? `Fight Gym Leader` : `Fight Gym Trainer`;
+
+                if (index < this.gymState.currentTrainerIndex) {
+                    return `<button disabled style="padding: 10px; opacity: 0.5; width: 100%;">${buttonText} (Defeated)</button>`;
+                } else if (index === this.gymState.currentTrainerIndex) {
+                    return `<button id="btn-start-gym-battle" onclick="window.battleEngine.startNextGymBattle()" style="padding: 10px; font-weight: bold; background-color: #2ecc71; color: white; border: none; cursor: pointer; width: 100%;">${buttonText} (${t.name})</button>`;
+                } else {
+                    return `<button disabled style="padding: 10px; opacity: 0.5; width: 100%;">${buttonText} (${t.name})</button>`;
+                }
+            }).join('');
+
+            // Rest phase UI
             contentArea.innerHTML = `
-                <p>Next Opponent: ${trainer.name}</p>
+                <div id="gym-rest-area" style="display: flex; flex-direction: column; gap: 10px; width: 100%;">
+                    <h3>Gym Lobby</h3>
+                    <p style="font-size: 14px; margin-bottom: 10px;">You may heal and organize your party.</p>
+                    ${trainerButtonsHtml}
+                    <button onclick="window.battleEngine.stopGymBattle()" style="padding: 10px; background: #e74c3c; border: none; color: white; border-radius: 3px; cursor: pointer; margin-top: 10px; width: 100%;">Flee Gym</button>
+                </div>
 
                 <div id="gym-battle-area" style="display: none; margin-top: 20px; margin-bottom: 20px; position: relative;">
                     <div style="display: flex; justify-content: space-between; align-items: flex-end; height: 150px; background: rgba(0,0,0,0.3); border: 2px solid #555; border-radius: 10px; padding: 20px;">
@@ -131,17 +150,14 @@ class BattleSystem {
                         </div>
                     </div>
                 </div>
-
-                <button id="btn-start-gym-battle" onclick="window.battleEngine.startNextGymBattle()" style="padding: 10px 20px; font-size: 16px; cursor: pointer;">Battle ${trainer.name}</button>
-                <br><br>
-                <button onclick="window.battleEngine.stopGymBattle()" style="padding: 5px 10px; background: #e74c3c; border: none; color: white; border-radius: 3px; cursor: pointer;">Flee Gym</button>
             `;
             // Temporary expose for the button
             window.battleEngine = this;
 
             // Re-bind to use our special gym start func that toggles visibility
             window.battleEngine.startNextGymBattle = () => {
-                document.getElementById('btn-start-gym-battle').style.display = 'none';
+                this.gymState.inCombat = true;
+                document.getElementById('gym-rest-area').style.display = 'none';
                 document.getElementById('gym-battle-area').style.display = 'block';
                 this.searchNext();
             };
@@ -686,6 +702,7 @@ class BattleSystem {
             // Defeated trainer
             this.gymState.currentTrainerIndex++;
             this.gymState.currentPokemonIndex = 0;
+            this.gymState.inCombat = false; // Return to rest phase
             this.stop(); // Stop loop to show next button
 
             if (this.gymState.currentTrainerIndex >= gym.trainers.length) {
@@ -790,8 +807,15 @@ class BattleSystem {
         this.state.party.forEach(p => p.currentHp = p.maxHp);
 
         if (this.gymState && this.gymState.isActive) {
-            // Flee gym
-            this.stopGymBattle();
+            // Reset gym state entirely if wiped out
+            this.gymState.isActive = false;
+            this.gymState.gym = null;
+            this.gymState.inCombat = false;
+
+            // Return to poke center
+            if (typeof window.navigateToLocation === 'function') {
+                window.navigateToLocation("PokeCenter & PokeMarket");
+            }
             this.updateUI();
         } else {
             // Return to poke center (simulated by just waiting and searching again for idle game)

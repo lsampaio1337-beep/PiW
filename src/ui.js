@@ -883,7 +883,7 @@ async function init() {
 
     // Bind Hub Buttons
     const checkCombatLock = () => {
-        if (globals.battleSystem && globals.battleSystem.gymState && globals.battleSystem.gymState.isActive) {
+        if (globals.battleSystem && globals.battleSystem.gymState && globals.battleSystem.gymState.isActive && globals.battleSystem.gymState.inCombat) {
             alert("You cannot access this menu during a Gym Battle!");
             return true;
         }
