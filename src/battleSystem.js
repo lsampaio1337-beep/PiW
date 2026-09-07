@@ -565,6 +565,8 @@ class BattleSystem {
             return { used: false, ballName: null, caught: false }; // No balls left
         }
 
+        if (tier < 0) return { used: false, ballName: null, caught: false }; // No balls left
+
         let multiplier = this.state.config.balance.items.pokeballs[tier].multiplier;
 
         const chance = mathEngine.calculateCatchChance(this.activeEncounter.bst, this.activeEncounter.level, multiplier, this.state.stats, this.activeEncounter.qualityName === "Shiny");
