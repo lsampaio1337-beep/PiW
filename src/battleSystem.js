@@ -165,7 +165,7 @@ class BattleSystem {
             // Gym completed
             contentArea.innerHTML = `
                 <h3>You defeated ${gym.leader}!</h3>
-                <p>You earned the ${gym.name} badge.</p>
+                <p>A Gift is awaiting for you.</p>
                 <button onclick="window.battleEngine.stopGymBattle()" style="padding: 10px 20px; cursor: pointer;">Leave</button>
             `;
             window.battleEngine = this;
@@ -715,11 +715,10 @@ class BattleSystem {
 
                 const gymIndex = this.state.config.gyms.findIndex(g => g.name === gym.name);
                 if (gymIndex !== -1 && this.state.trainer.badges === gymIndex) {
-                    this.state.trainer.badges++;
+                    if (!this.state.stats.pendingGifts) this.state.stats.pendingGifts = [];
+                    this.state.stats.pendingGifts.push({ type: 'badge', gymName: gym.name, gymIndex: gymIndex });
+                    this.state.stats.giftIconUnlocked = true;
                 }
-
-                // Bonus money for winning
-                this.state.trainer.money += 1000 * this.state.trainer.badges;
             }
             this.updateGymUI();
         } else {
