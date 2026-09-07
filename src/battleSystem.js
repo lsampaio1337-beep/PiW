@@ -10,6 +10,8 @@ class BattleSystem {
         this.combatLoop = null;
         this.isSearching = false;
 
+        this.consecutiveHeals = 0;
+
         this.gymState = {
             isActive: false,
             gym: null,
@@ -189,6 +191,17 @@ class BattleSystem {
             this.handleWipeout();
             return;
         }
+
+        // Out of combat insta-heal if threshold is met
+        const leader = this.state.party[0];
+        if (leader && leader.currentHp > 0 && this.state.settings.autoPotion) {
+            let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 50;
+            while ((leader.currentHp / leader.maxHp) * 100 <= threshold) {
+                if (!this.tryUsePotion(leader)) break; // Stop if no potions left
+            }
+        }
+
+        this.consecutiveHeals = 0; // Reset for new battle
 
         if (this.state.currentRoute && this.state.currentRoute.startsWith("Casino - ")) {
             const cost = this.state.casinoDoubleShiny ? 20 : 10;
@@ -472,10 +485,25 @@ class BattleSystem {
 
         // Check if player uses potion
         if (attacker === leader && this.state.settings.autoPotion) {
-            if (this.tryUsePotion(attacker)) {
-                this.updateUI();
-                this.scheduleNextStrike(attacker, defender);
-                return;
+            // Check if we hit the threshold
+            let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 50;
+            let hpPercentage = (attacker.currentHp / attacker.maxHp) * 100;
+
+            if (hpPercentage <= threshold) {
+                if (this.consecutiveHeals >= 3) {
+                    // Skip heal to attack, reset consecutive heals
+                    this.consecutiveHeals = 0;
+                } else {
+                    if (this.tryUsePotion(attacker)) {
+                        this.consecutiveHeals++;
+                        this.updateUI();
+                        this.scheduleNextStrike(attacker, defender);
+                        return;
+                    }
+                }
+            } else {
+                // If we attack instead of healing because hp > threshold, reset heals
+                this.consecutiveHeals = 0;
             }
         }
 
@@ -539,7 +567,9 @@ class BattleSystem {
 
     tryUsePotion(pokemon) {
         if (pokemon.currentHp >= pokemon.maxHp) return false; // don't heal if full
-        if (pokemon.currentHp > pokemon.maxHp * 0.5) return false; // simple logic: heal if <50%
+
+        let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 50;
+        if ((pokemon.currentHp / pokemon.maxHp) * 100 > threshold) return false;
 
         let tier = this.state.settings.activePotionTier;
         if (tier < 0) return false;
@@ -580,6 +610,15 @@ class BattleSystem {
 
     handleEnemyDefeat() {
         const leader = this.state.party[0];
+
+        // Out of combat insta-heal if threshold is met
+        if (leader && leader.currentHp > 0 && this.state.settings.autoPotion) {
+            let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 50;
+            while ((leader.currentHp / leader.maxHp) * 100 <= threshold) {
+                if (!this.tryUsePotion(leader)) break;
+            }
+        }
+
         const ev = this.activeEncounter.ev;
 
         // Bonus Candy Defeats Tracker
@@ -726,6 +765,16 @@ class BattleSystem {
 
         if (this.gymState.currentPokemonIndex >= trainer.team.length) {
             // Defeated trainer
+
+            // Out of combat insta-heal if threshold is met
+            const leader = this.state.party[0];
+            if (leader && leader.currentHp > 0 && this.state.settings.autoPotion) {
+                let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 50;
+                while ((leader.currentHp / leader.maxHp) * 100 <= threshold) {
+                    if (!this.tryUsePotion(leader)) break;
+                }
+            }
+
             this.gymState.currentTrainerIndex++;
             this.gymState.currentPokemonIndex = 0;
             this.gymState.inCombat = false; // Return to rest phase
@@ -1011,7 +1060,10 @@ class BattleSystem {
                     this.state.party.push(fainted);
                 } else {
                     if (this.state.settings.autoPotion) {
-                         this.tryUsePotion(leader);
+                        let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 50;
+                        while ((leader.currentHp / leader.maxHp) * 100 <= threshold) {
+                            if (!this.tryUsePotion(leader)) break;
+                        }
                     }
 
                     // Simplified handleEnemyDefeat avoiding UI loops/searchNext

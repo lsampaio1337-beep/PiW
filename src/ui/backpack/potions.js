@@ -5,6 +5,22 @@ export function renderPotionsTab(area) {
     let content = `
         <div style="display: flex; flex-direction: column; width: 100%; height: 100%; container-type: inline-size;">
             <h3 style="text-align: center; margin-top: 0; color: #ddd; font-size: 2.5cqi;">Select Potion to auto use during battles.</h3>
+
+            <div style="width: 80%; margin: 1cqi auto 2cqi auto; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <label style="color: #ddd; font-size: 1.8cqi; margin-bottom: 1cqi;">
+                    Auto-Heal Threshold: <span id="potion-threshold-val">${state.settings.autoPotionThreshold}%</span>
+                </label>
+                <input type="range" min="0" max="100" value="${state.settings.autoPotionThreshold}" id="potion-threshold-slider"
+                    oninput="
+                        let val = parseInt(this.value);
+                        if (val > 90) { val = 90; this.value = 90; }
+                        document.getElementById('potion-threshold-val').innerText = val + '%';
+                        window.setAutoPotionThreshold(val);
+                    "
+                    style="width: 100%; cursor: pointer;"
+                >
+            </div>
+
             <div style="display: flex; flex-wrap: wrap; gap: 1.5cqi; justify-content: center; align-content: flex-start; overflow-y: auto; flex: 1; padding: 1.2cqi; box-sizing: border-box;">
     `;
 

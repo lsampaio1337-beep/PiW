@@ -97,3 +97,7 @@ export function setActiveItem(type, tierIdx) {
     }
     renderBackpackTab(type === 'ball' ? 'pokeballs' : 'potions');
 }
+
+export function setAutoPotionThreshold(val) {
+    state.settings.autoPotionThreshold = val;
+}
