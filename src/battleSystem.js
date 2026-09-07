@@ -190,6 +190,19 @@ class BattleSystem {
             return;
         }
 
+        if (this.state.currentRoute === "Safari Zone") {
+            if (this.state.trainer.money < 500) {
+                this.stop();
+                if (typeof window.switchView === 'function') {
+                    window.switchView("SAFARI_HUB");
+                }
+                let msg = document.getElementById("safari-welcome-msg");
+                if (msg) msg.innerText = "I am sorry, but you are all out of money. Try to sell some pokemons and come check us latter.";
+                return;
+            }
+            this.state.trainer.money -= 500;
+        }
+
         if (this.state.currentRoute && this.state.currentRoute.startsWith("Casino - ")) {
             const cost = this.state.casinoDoubleShiny ? 20 : 10;
             if (this.state.trainer.money < cost) {
@@ -557,22 +570,33 @@ class BattleSystem {
 
     throwPokeball() {
         let tier = this.state.settings.activeBallTier;
-        if (tier < 0) return { used: false, ballName: null, caught: false }; // None selected
+        let isSafariZone = this.state.currentRoute === "Safari Zone";
+        let ballName;
+        let multiplier;
 
-        let ballName = this.state.config.balance.items.pokeballs[tier].name;
+        if (isSafariZone) {
+            let safariBallConfig = this.state.config.balance.items.pokeballs.find(b => b.name === "Safariball");
+            ballName = "Safariball";
+            multiplier = safariBallConfig ? safariBallConfig.multiplier : 1.5;
+            this.state.stats.ballsThrown = (this.state.stats.ballsThrown || 0) + 1;
+        } else {
+            if (tier < 0) return { used: false, ballName: null, caught: false }; // None selected
+            ballName = this.state.config.balance.items.pokeballs[tier].name;
 
-        while(tier >= 0) {
-            if (this.state.backpack.pokeballs[ballName] > 0) {
-                this.state.backpack.pokeballs[ballName]--;
-                break;
+            while(tier >= 0) {
+                if (this.state.backpack.pokeballs[ballName] > 0) {
+                    this.state.backpack.pokeballs[ballName]--;
+                    break;
+                }
+                tier--;
+                if (tier >= 0) ballName = this.state.config.balance.items.pokeballs[tier].name;
             }
-            tier--;
-            if (tier >= 0) ballName = this.state.config.balance.items.pokeballs[tier].name;
+
+            if (tier < 0) return { used: false, ballName: null, caught: false }; // No balls left
+
+            multiplier = this.state.config.balance.items.pokeballs[tier].multiplier;
+            this.state.stats.ballsThrown = (this.state.stats.ballsThrown || 0) + 1;
         }
-
-        if (tier < 0) return { used: false, ballName: null, caught: false }; // No balls left
-
-        let multiplier = this.state.config.balance.items.pokeballs[tier].multiplier;
 
         const chance = mathEngine.calculateCatchChance(this.activeEncounter.bst, this.activeEncounter.level, multiplier, this.state.stats, this.activeEncounter.qualityName === "Shiny");
 
