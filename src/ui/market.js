@@ -5,7 +5,10 @@ export function setupMarket(vCenter) {
     vCenter.innerHTML = `
         <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: space-between; align-items: center; padding: 0 10vw; box-sizing: border-box;">
             <button id="btn-heal-all" style="background: #3498db; color: white; border: 3px solid white; border-radius: 12px; padding: 15px 30px; font-size: 24px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.5); transform: translateY(-30vh);">Heal</button>
-            <button id="btn-market-buy" style="background: #f1c40f; color: black; border: 3px solid white; border-radius: 12px; padding: 15px 30px; font-size: 24px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.5); transform: translateY(-30vh);">Buy</button>
+            <div style="display: flex; flex-direction: column; gap: 15px; transform: translateY(-30vh);">
+                <button id="btn-market-sell" style="background: #e74c3c; color: white; border: 3px solid white; border-radius: 12px; padding: 15px 30px; font-size: 24px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.5);">Sell Pokemon</button>
+                <button id="btn-market-buy" style="background: #f1c40f; color: black; border: 3px solid white; border-radius: 12px; padding: 15px 30px; font-size: 24px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.5);">Buy</button>
+            </div>
         </div>
     `;
 
@@ -21,6 +24,12 @@ export function setupMarket(vCenter) {
 
     document.getElementById('btn-market-buy').addEventListener('click', () => {
         window.openPokeMarketBuy();
+    });
+
+    document.getElementById('btn-market-sell').addEventListener('click', () => {
+        if (window.startSellMode) {
+            window.startSellMode();
+        }
     });
 }
 

@@ -74,6 +74,12 @@ window.showAddPokemonModal = showAddPokemonModal;
 window.forceNextEncounter = forceNextEncounter;
 window.activateCheat = activateCheat;
 window.dragStart = dragStart;
+window.startSellMode = window.startSellMode || function() {}; // Will be assigned by pokemon.js
+window.cancelSellMode = window.cancelSellMode || function() {};
+window.selectAllForSale = window.selectAllForSale || function() {};
+window.sellSelectedPokemon = window.sellSelectedPokemon || function() {};
+window.toggleSaleSelection = window.toggleSaleSelection || function() {};
+
 window.completeChallenge = function() {
     state.stats.completedChallenges = (state.stats.completedChallenges || 0) + 1;
 
