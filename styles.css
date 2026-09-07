@@ -326,3 +326,87 @@ input[type="number"] {
 .glow-weak {
     /* No glow */
 }
+
+/* --- Search & Slide Encounter Animations --- */
+.sprite-anim-container {
+    position: relative;
+    display: inline-block;
+}
+
+/* Standard Animations */
+.anim-std-a { animation: std-a 1s ease-in-out infinite; }
+@keyframes std-a {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-4px) rotate(3deg); }
+}
+
+.anim-std-b { animation: std-b 1.2s ease-in-out infinite; }
+@keyframes std-b {
+  0%, 100% { transform: translateX(0) scaleY(1); }
+  25% { transform: translateX(-2px) scaleY(0.95); }
+  75% { transform: translateX(2px) scaleY(0.95); }
+}
+
+/* Flying Animations */
+.anim-fly-a { animation: fly-a 1.5s ease-in-out infinite; }
+@keyframes fly-a {
+  0%, 100% { transform: translateY(-10px) rotate(0deg); }
+  50% { transform: translateY(-18px) rotate(2deg); }
+}
+
+.anim-fly-b { animation: fly-b 1.2s ease-in-out infinite; }
+@keyframes fly-b {
+  0%, 100% { transform: translateY(-15px) scale(1); }
+  50% { transform: translateY(-22px) scale(1.02); }
+}
+
+/* Water Animations */
+.anim-water-a { animation: water-a 1.5s ease-in-out infinite; }
+@keyframes water-a {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-4px) rotate(4deg); }
+}
+
+.anim-water-b { animation: water-b 1s ease-in-out infinite; }
+@keyframes water-b {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(5deg); }
+}
+
+/* Water Big Splashes */
+.water-splash-container {
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 30px;
+    pointer-events: none;
+    z-index: 5;
+}
+.water-splash {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    border: 4px solid #3498db; /* Huge thick big splash */
+    opacity: 0;
+}
+
+/* 10 distinct splash animations to create a chaotic big splash effect */
+.splash-1 { animation: s-anim 1.5s ease-out infinite 0.1s; }
+.splash-2 { animation: s-anim 1.5s ease-out infinite 0.25s; border-color: #2980b9; border-width: 5px; }
+.splash-3 { animation: s-anim 1.5s ease-out infinite 0.4s; }
+.splash-4 { animation: s-anim 1.5s ease-out infinite 0.55s; border-color: #2980b9; border-width: 6px; }
+.splash-5 { animation: s-anim 1.5s ease-out infinite 0.7s; }
+.splash-6 { animation: s-anim 1.5s ease-out infinite 0.85s; border-color: #2980b9; }
+.splash-7 { animation: s-anim 1.5s ease-out infinite 1.0s; border-width: 5px; }
+.splash-8 { animation: s-anim 1.5s ease-out infinite 1.15s; }
+.splash-9 { animation: s-anim 1.5s ease-out infinite 1.3s; border-color: #2980b9; border-width: 6px; }
+.splash-10 { animation: s-anim 1.5s ease-out infinite 1.45s; }
+
+@keyframes s-anim {
+  0% { width: 10px; height: 5px; opacity: 1; bottom: 5px; }
+  100% { width: 90px; height: 35px; opacity: 0; bottom: -10px; }
+}

@@ -1,6 +1,84 @@
 import { TYPE_COLORS } from '../ui.js';
 import { state, globals } from '../state.js';
 
+
+// CSS Animation Generator
+function applyMovementAnimation(elContainer, pokemon, isAnimating) {
+    if (!elContainer) return;
+    if (isAnimating && !pokemon) return;
+
+    // We'll manage classes and splash elements on the container.
+    // If not animating, just remove classes but respect the iteration if currently animating.
+    // However, the smooth stopping is handled by the main render loop reading the classes,
+    // so here we just SET them if isAnimating is true. The removing logic needs to handle the event.
+
+    // Actually, it's safer to handle the start AND stop here.
+    if (isAnimating) {
+        if (!elContainer.dataset.isAnimating || elContainer.dataset.isAnimating === "false") {
+            elContainer.dataset.isAnimating = "true";
+
+            // Clean up old classes
+            elContainer.className = "sprite-anim-container";
+            const existingSplashes = elContainer.querySelector('.water-splash-container');
+            if (existingSplashes) existingSplashes.remove();
+
+            // Determine type
+            let animType = 'std';
+            const hasWater = pokemon.types.includes('Water');
+            const hasFlying = pokemon.types.includes('Flying') || pokemon.types.includes('Wind');
+
+            if (hasWater && hasFlying) {
+                animType = Math.random() < 0.5 ? 'water' : 'fly';
+            } else if (hasWater) {
+                animType = 'water';
+            } else if (hasFlying) {
+                animType = 'fly';
+            }
+
+            let animClass = '';
+            if (animType === 'water') {
+                animClass = Math.random() < 0.5 ? 'anim-water-a' : 'anim-water-b';
+
+                // Add 10 thick splashes
+                const splashContainer = document.createElement('div');
+                splashContainer.className = 'water-splash-container';
+                for(let i=1; i<=10; i++) {
+                    const s = document.createElement('div');
+                    s.className = 'water-splash splash-' + i;
+                    splashContainer.appendChild(s);
+                }
+                elContainer.appendChild(splashContainer);
+            } else if (animType === 'fly') {
+                animClass = Math.random() < 0.5 ? 'anim-fly-a' : 'anim-fly-b';
+            } else {
+                animClass = Math.random() < 0.5 ? 'anim-std-a' : 'anim-std-b';
+            }
+
+            elContainer.classList.add(animClass);
+            elContainer.dataset.activeAnim = animClass;
+        }
+    } else {
+        // We want to stop it, but wait for iteration!
+        if (elContainer.dataset.isAnimating === "true" && elContainer.dataset.stopping !== "true") {
+            elContainer.dataset.stopping = "true";
+
+            const handleIteration = () => {
+                elContainer.className = "sprite-anim-container"; // clear animations
+                const existingSplashes = elContainer.querySelector('.water-splash-container');
+                if (existingSplashes) existingSplashes.remove();
+
+                elContainer.dataset.isAnimating = "false";
+                elContainer.dataset.stopping = "false";
+                elContainer.dataset.activeAnim = "";
+
+                elContainer.removeEventListener('animationiteration', handleIteration);
+            };
+
+            elContainer.addEventListener('animationiteration', handleIteration);
+        }
+    }
+}
+
 export function updateBattleArena() {
     const battleSystem = globals.battleSystem;
     const inGym = battleSystem && battleSystem.gymState && battleSystem.gymState.isActive;
@@ -65,6 +143,7 @@ export function updateBattleArena() {
             }
 
             const elEnemySprite = document.getElementById('enemy-sprite');
+            const elEnemyContainer = document.getElementById('enemy-sprite-container');
             const elEnemySide = document.getElementById('enemy-side');
 
             if (elEnemySprite && elEnemySide) {
@@ -78,6 +157,11 @@ export function updateBattleArena() {
                 elEnemySide.style.top = 'auto';
                 elEnemySide.style.bottom = `${baseBottom}%`;
 
+                if (elEnemyContainer && enemy) applyMovementAnimation(elEnemyContainer, enemy, battleSystem.isSliding || battleSystem.isSearching);
+
+                if (!battleSystem.isSliding && !battleSystem.isSearching) {
+                    if (elEnemyContainer) applyMovementAnimation(elEnemyContainer, null, false);
+                }
                 if (battleSystem.isSliding) {
                     if (elEnemySide.dataset.sliding !== 'true') {
                         elEnemySide.dataset.sliding = 'true';
@@ -146,9 +230,16 @@ export function updateBattleArena() {
                 }
 
                 const elPlayerSprite = document.getElementById('player-sprite');
+                const elPlayerContainer = document.getElementById('player-sprite-container');
                 if (elPlayerSprite) {
                     elPlayerSprite.src = `Assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? leader.id + '_shiny' : leader.id}.png`;
                     elPlayerSprite.style.display = 'block';
+                }
+                if (elPlayerContainer && leader) {
+                    applyMovementAnimation(elPlayerContainer, leader, battleSystem.isSearching || battleSystem.isSliding);
+                    if (!battleSystem.isSearching && !battleSystem.isSliding) {
+                        applyMovementAnimation(elPlayerContainer, null, false);
+                    }
                 }
             }
         } else if (battleSystem && battleSystem.isSearching) {
@@ -157,10 +248,13 @@ export function updateBattleArena() {
             if (hpContainerEnemy) hpContainerEnemy.style.display = 'none';
 
             const elEnemySprite = document.getElementById('enemy-sprite');
+            const elEnemyContainer = document.getElementById('enemy-sprite-container');
             const elEnemySide = document.getElementById('enemy-side');
             if (elEnemySprite && elEnemySide) {
                 elEnemySprite.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
                 elEnemySprite.style.display = 'block';
+                const elEnemyContainer = document.getElementById('enemy-sprite-container');
+                if (elEnemyContainer) applyMovementAnimation(elEnemyContainer, null, false);
                 elEnemySide.style.transition = 'none';
                 elEnemySide.style.left = '35%'; // Matching active battle destination
                 elEnemySide.style.top = 'auto';
@@ -209,16 +303,28 @@ export function updateBattleArena() {
                     elPlayerSprite.src = `Assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? leader.id + '_shiny' : leader.id}.png`;
                     elPlayerSprite.style.display = 'block';
                 }
+                if (elPlayerContainer && leader) {
+                    applyMovementAnimation(elPlayerContainer, leader, battleSystem.isSearching || battleSystem.isSliding);
+                    if (!battleSystem.isSearching && !battleSystem.isSliding) {
+                        applyMovementAnimation(elPlayerContainer, null, false);
+                    }
+                }
             } else {
                 const elPlayerSprite = document.getElementById('player-sprite');
+                const elPlayerContainer = document.getElementById('player-sprite-container');
+                if (elPlayerContainer) applyMovementAnimation(elPlayerContainer, null, false);
                 if (elPlayerSprite) elPlayerSprite.style.display = 'none';
                 const hpContainerPlayer = document.getElementById('player-battle-hp-container');
                 if (hpContainerPlayer) hpContainerPlayer.style.display = 'none';
             }
         } else {
              const elEnemySprite = document.getElementById('enemy-sprite');
+            const elEnemyContainer = document.getElementById('enemy-sprite-container');
+             if (elEnemyContainer) applyMovementAnimation(elEnemyContainer, null, false);
              if (elEnemySprite) elEnemySprite.style.display = 'none';
              const elPlayerSprite = document.getElementById('player-sprite');
+             const elPlayerContainer = document.getElementById('player-sprite-container');
+             if (elPlayerContainer) applyMovementAnimation(elPlayerContainer, null, false);
              if (elPlayerSprite) elPlayerSprite.style.display = 'none';
              const hpContainerEnemy = document.getElementById('enemy-battle-hp-container');
              if (hpContainerEnemy) hpContainerEnemy.style.display = 'none';
@@ -241,6 +347,7 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
 
     // Hide original enemy sprite container momentarily so ghost takes precedence until next slide in
     const elEnemySprite = document.getElementById('enemy-sprite');
+            const elEnemyContainer = document.getElementById('enemy-sprite-container');
     if (elEnemySprite) {
          // It will be replaced when searching/sliding starts
     }
