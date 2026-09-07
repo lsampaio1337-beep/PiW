@@ -131,6 +131,22 @@ export function updateTopbar() {
             exclamation.style.display = 'none';
         }
     }
+    const giftContainer = document.getElementById('gift-container');
+    const giftNotification = document.getElementById('gift-notification');
+    if (giftContainer && giftNotification) {
+        if (state.stats.giftIconUnlocked) {
+            giftContainer.style.display = 'inline-block';
+        } else {
+            giftContainer.style.display = 'none';
+        }
+
+        if (state.stats.pendingGifts && state.stats.pendingGifts.length > 0) {
+            giftNotification.style.display = 'block';
+        } else {
+            giftNotification.style.display = 'none';
+        }
+    }
+
     const calendarNotification = document.getElementById('calendar-notification');
     if (calendarNotification) {
         if (checkDailyRewardAvailable()) {
