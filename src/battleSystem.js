@@ -1099,7 +1099,7 @@ class BattleSystem {
                 moves: this.getLearnsetMoves(pokemonBase, level)
             };
 
-            // Estimate battle time (e.g. 1-3 seconds based on speed) + 5s base search
+            // Estimate search time
             let searchTime = 5000;
             let leaderSpe = leader.currentStats ? leader.currentStats.spe : 10;
             let enemySpe = this.activeEncounter.currentStats ? this.activeEncounter.currentStats.spe : 10;
@@ -1107,60 +1107,95 @@ class BattleSystem {
             // Adjust search time based on leader speed
             searchTime = Math.max(500, searchTime * (10 / Math.max(10, leaderSpe)));
 
-            // Rough combat estimate:
-            let strikes = Math.max(1, Math.ceil(this.activeEncounter.maxHp / Math.max(1, leader.currentStats.atk)));
-            let combatTime = strikes * 1000; // 1 second per strike roughly
+            // Accurate Combat Simulation Loop
+            let combatTime = 0;
+            let leaderConsecutiveHeals = 0;
 
-            // Take damage roughly based on enemy strikes
-            let enemyStrikes = Math.max(1, Math.ceil(leader.currentHp / Math.max(1, this.activeEncounter.currentStats.atk)));
+            // Which goes first
+            let isLeaderFaster = leaderSpe >= enemySpe;
 
-            // Win check
-            if (strikes <= enemyStrikes) {
-                // Win
-                let damageTaken = strikes * this.activeEncounter.currentStats.atk * 0.2; // Rough mitigation
-                leader.currentHp -= Math.max(0, damageTaken);
+            const executeSimulatedTurn = (attacker, defender, isLeader) => {
+                if (isLeader && this.state.settings.autoPotion) {
+                    let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 50;
+                    let hpPercentage = (attacker.currentHp / attacker.maxHp) * 100;
 
-                if (leader.currentHp <= 0) {
-                    const fainted = this.state.party.shift();
-                    this.state.party.push(fainted);
-                } else {
-                    if (this.state.settings.autoPotion) {
-                        let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 50;
-                        while ((leader.currentHp / leader.maxHp) * 100 <= threshold) {
-                            if (!this.tryUsePotion(leader)) break;
-                        }
-                    }
-
-                    // Simplified handleEnemyDefeat avoiding UI loops/searchNext
-                    if ((this.state.stats.bonusCandyDefeats || 0) < 1000) {
-                        this.state.stats.bonusCandyDefeats = (this.state.stats.bonusCandyDefeats || 0) + 1;
-                    }
-
-                    if (this.state.settings.autoCatch) {
-                        const ballResult = this.throwPokeball();
-                        if (ballResult.caught) {
-                            if (!this.state.stats.caughtSpecies) this.state.stats.caughtSpecies = {};
-                            this.state.stats.caughtSpecies[this.activeEncounter.name] = (this.state.stats.caughtSpecies[this.activeEncounter.name] || 0) + 1;
-                            let caughtPokemon = JSON.parse(JSON.stringify(this.activeEncounter));
-                            caughtPokemon.xp = mathEngine.calculateTotalXP(caughtPokemon.level);
-                            this.state.storage.push(caughtPokemon);
-                            this.state.stats.caught++;
-                            if (this.activeEncounter.qualityName === "Shiny") this.state.stats.shiniesCaught = (this.state.stats.shiniesCaught || 0) + 1;
-                            if (this.activeEncounter.qualityName === "Shiny") {
-                                if (!this.state.stats.caughtShiniesSpecies) this.state.stats.caughtShiniesSpecies = {};
-                                this.state.stats.caughtShiniesSpecies[this.activeEncounter.name] = true;
+                    if (hpPercentage <= threshold) {
+                        if (leaderConsecutiveHeals >= 3) {
+                            leaderConsecutiveHeals = 0;
+                        } else {
+                            if (this.tryUsePotion(attacker)) {
+                                leaderConsecutiveHeals++;
+                                return true; // Potion takes the turn
                             }
-                            // Simplification: Omitting other stats trackers for speed in offline simulation
+                        }
+                    } else {
+                        leaderConsecutiveHeals = 0;
+                    }
+                }
+
+                const move = this.getBestMove(attacker, defender);
+                const isPhysical = move.category === 'Physical';
+                const atkStat = isPhysical ? attacker.currentStats.atk : attacker.currentStats.spa;
+                const defStat = isPhysical ? defender.currentStats.def : defender.currentStats.spd;
+                const eff = this.getTypeEffectiveness(move.type, defender.types);
+
+                const hit = mathEngine.calculateDamage(attacker.level, move.power, atkStat, defStat, eff, attacker.quality);
+                defender.currentHp -= hit.damage;
+
+                return false; // Not a potion, just an attack
+            };
+
+            while (leader.currentHp > 0 && this.activeEncounter.currentHp > 0) {
+                combatTime += 1000; // Roughly 1s per turn phase
+
+                let firstActor = isLeaderFaster ? leader : this.activeEncounter;
+                let secondActor = isLeaderFaster ? this.activeEncounter : leader;
+
+                // First turn
+                executeSimulatedTurn(firstActor, secondActor, isLeaderFaster);
+
+                if (secondActor.currentHp <= 0) break;
+
+                // Second turn
+                executeSimulatedTurn(secondActor, firstActor, !isLeaderFaster);
+            }
+
+            // End of combat logic
+            if (leader.currentHp > 0) {
+                // Out of combat insta-heal if threshold is met, identical to handleEnemyDefeat
+                if (this.state.settings.autoPotion) {
+                    let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 50;
+                    while ((leader.currentHp / leader.maxHp) * 100 <= threshold) {
+                        if (!this.tryUsePotion(leader)) break;
+                    }
+                }
+
+                if ((this.state.stats.bonusCandyDefeats || 0) < 1000) {
+                    this.state.stats.bonusCandyDefeats = (this.state.stats.bonusCandyDefeats || 0) + 1;
+                }
+
+                if (this.state.settings.autoCatch) {
+                    const ballResult = this.throwPokeball();
+                    if (ballResult.caught) {
+                        if (!this.state.stats.caughtSpecies) this.state.stats.caughtSpecies = {};
+                        this.state.stats.caughtSpecies[this.activeEncounter.name] = (this.state.stats.caughtSpecies[this.activeEncounter.name] || 0) + 1;
+                        let caughtPokemon = JSON.parse(JSON.stringify(this.activeEncounter));
+                        caughtPokemon.xp = mathEngine.calculateTotalXP(caughtPokemon.level);
+                        this.state.storage.push(caughtPokemon);
+                        this.state.stats.caught++;
+                        if (this.activeEncounter.qualityName === "Shiny") this.state.stats.shiniesCaught = (this.state.stats.shiniesCaught || 0) + 1;
+                        if (this.activeEncounter.qualityName === "Shiny") {
+                            if (!this.state.stats.caughtShiniesSpecies) this.state.stats.caughtShiniesSpecies = {};
+                            this.state.stats.caughtShiniesSpecies[this.activeEncounter.name] = true;
                         }
                     }
-
-                    const lootMultiplier = 1 + (0.01 * (this.state.stats.greenCandies || 0));
-                    this.grantXP(leader, ev);
-                    this.state.trainer.money += Math.floor(ev * lootMultiplier);
-                    this.state.stats.battlesWon++;
                 }
+
+                const lootMultiplier = 1 + (0.01 * (this.state.stats.greenCandies || 0));
+                this.grantXP(leader, ev);
+                this.state.trainer.money += Math.floor(ev * lootMultiplier);
+                this.state.stats.battlesWon++;
             } else {
-                // Lose
                 leader.currentHp = 0;
                 const fainted = this.state.party.shift();
                 this.state.party.push(fainted);
