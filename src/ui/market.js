@@ -141,49 +141,6 @@ export function renderPokeMarketTab(category) {
     let cols = 4;
 
 
-    const pokemonControls = document.getElementById('market-pokemon-sell-controls');
-    if (pokemonControls) {
-        pokemonControls.style.display = category === 'pokemon' ? 'flex' : 'none';
-    }
-
-    if (category === 'pokemon') {
-        cols = 6;
-        let html = `<div style="display: grid; grid-template-columns: repeat(${cols}, calc(var(--m-width) * 0.145)); gap: calc(var(--m-width) * 0.018); justify-content: center; width: 100%;">`;
-
-        state.storage.forEach(p => {
-            let imgSrc = `Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png`;
-            let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
-
-            let glowClass = "glow-weak";
-            if (p.qualityName === "Shiny") glowClass = "glow-shiny";
-            else if (p.qualityName === "Epic") glowClass = "glow-epic";
-            else if (p.qualityName === "Rare") glowClass = "glow-rare";
-            else if (p.qualityName === "Uncommon") glowClass = "glow-uncommon";
-            else if (p.qualityName === "Regular") glowClass = "glow-regular";
-
-            let isSelected = window.marketSelectedPokemonForSale && window.marketSelectedPokemonForSale.has(p.uuid);
-            let selectionStyle = isSelected ? 'outline: 3px solid #00ff00; outline-offset: -3px; background: rgba(0,255,0,0.2);' : 'background: #2c3e50; border: 2px solid #777;';
-
-            html += `
-                <div onclick="if(window.toggleMarketPokemonSaleSelection) window.toggleMarketPokemonSaleSelection('${p.uuid}')"
-                    style="${selectionStyle} border-radius: 10px; padding: calc(var(--m-width) * 0.012); text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; position: relative;">
-                    <div style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; margin-bottom: calc(var(--m-width) * 0.006); line-height: 1.1; color: white;">${p.id}</div>
-                    <div style="flex: 1; width: 100%; display: flex; align-items: center; justify-content: center; position: relative; height: calc(var(--m-width) * 0.072); margin-bottom: calc(var(--m-width) * 0.006);">
-                        <img src="${imgSrc}" class="${glowClass}" style="max-height: 100%; max-width: 100%; object-fit: contain; z-index: 1;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
-                    </div>
-                    <div style="font-size: calc(var(--m-width) * 0.014); color: #bdc3c7; line-height: 1.1;">Lv. ${p.level}</div>
-                    <div style="font-size: calc(var(--m-width) * 0.014); color: #f1c40f; line-height: 1.1;">Q: ${p.quality.toFixed(2)}</div>
-                    <div style="font-size: calc(var(--m-width) * 0.014); color: #3498db; line-height: 1.1;">∑IV: ${sumIV}</div>
-                    <div style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; color: #2ecc71; margin-top: calc(var(--m-width) * 0.012); line-height: 1.1;">$1</div>
-                </div>
-            `;
-        });
-
-        html += `</div>`;
-        content.innerHTML = html;
-        return;
-    }
-
     if (category === 'pokeballs') {
         cols = 4;
         items = state.config.balance.items.pokeballs.map(b => ({
@@ -344,6 +301,49 @@ export function renderPokeMarketSellTab(category) {
 
     let items = [];
     let cols = 4;
+
+    const pokemonControls = document.getElementById('market-pokemon-sell-controls');
+    if (pokemonControls) {
+        pokemonControls.style.display = category === 'pokemon' ? 'flex' : 'none';
+    }
+
+    if (category === 'pokemon') {
+        cols = 6;
+        let html = `<div style="display: grid; grid-template-columns: repeat(${cols}, calc(var(--m-width) * 0.145)); gap: calc(var(--m-width) * 0.018); justify-content: center; width: 100%;">`;
+
+        state.storage.forEach(p => {
+            let imgSrc = `Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png`;
+            let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
+
+            let glowClass = "glow-weak";
+            if (p.qualityName === "Shiny") glowClass = "glow-shiny";
+            else if (p.qualityName === "Epic") glowClass = "glow-epic";
+            else if (p.qualityName === "Rare") glowClass = "glow-rare";
+            else if (p.qualityName === "Uncommon") glowClass = "glow-uncommon";
+            else if (p.qualityName === "Regular") glowClass = "glow-regular";
+
+            let isSelected = window.marketSelectedPokemonForSale && window.marketSelectedPokemonForSale.has(p.uuid);
+            let selectionStyle = isSelected ? 'outline: 3px solid #00ff00; outline-offset: -3px; background: rgba(0,255,0,0.2);' : 'background: #2c3e50; border: 2px solid #777;';
+
+            html += `
+                <div onclick="if(window.toggleMarketPokemonSaleSelection) window.toggleMarketPokemonSaleSelection('${p.uuid}')"
+                    style="${selectionStyle} border-radius: 10px; padding: calc(var(--m-width) * 0.012); text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; position: relative;">
+                    <div style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; margin-bottom: calc(var(--m-width) * 0.006); line-height: 1.1; color: white;">${p.id}</div>
+                    <div style="flex: 1; width: 100%; display: flex; align-items: center; justify-content: center; position: relative; height: calc(var(--m-width) * 0.072); margin-bottom: calc(var(--m-width) * 0.006);">
+                        <img src="${imgSrc}" class="${glowClass}" style="max-height: 100%; max-width: 100%; object-fit: contain; z-index: 1;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
+                    </div>
+                    <div style="font-size: calc(var(--m-width) * 0.014); color: #bdc3c7; line-height: 1.1;">Lv. ${p.level}</div>
+                    <div style="font-size: calc(var(--m-width) * 0.014); color: #f1c40f; line-height: 1.1;">Q: ${p.quality.toFixed(2)}</div>
+                    <div style="font-size: calc(var(--m-width) * 0.014); color: #3498db; line-height: 1.1;">∑IV: ${sumIV}</div>
+                    <div style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; color: #2ecc71; margin-top: calc(var(--m-width) * 0.012); line-height: 1.1;">$1</div>
+                </div>
+            `;
+        });
+
+        html += `</div>`;
+        content.innerHTML = html;
+        return;
+    }
 
     if (category === 'pokeballs') {
         cols = 4;
