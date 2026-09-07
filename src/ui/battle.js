@@ -106,7 +106,7 @@ export function updateBattleArena() {
                 if (leader.types.includes('Water')) baseTop = 90;
                 if (leader.types.includes('Flying') || leader.types.includes('Wind')) baseTop = 75;
 
-                const elPlayerSpriteLocal = document.getElementById('player-sprite'); if (elPlayerSpriteLocal) elPlayerSpriteLocal.style.top = `${baseTop}%`;
+                const elPlayerSpriteLocal = document.getElementById('player-sprite'); if (elPlayerSpriteLocal) elPlayerSpriteLocal.style.top = '85%';
                 elPlayerSide.style.left = '20%';
 
                 const hpContainerPlayer = document.getElementById('player-battle-hp-container');
@@ -169,7 +169,7 @@ export function updateBattleArena() {
                 if (leader.types.includes('Water')) baseTop = 90;
                 if (leader.types.includes('Flying') || leader.types.includes('Wind')) baseTop = 75;
 
-                const elPlayerSpriteLocal = document.getElementById('player-sprite'); if (elPlayerSpriteLocal) elPlayerSpriteLocal.style.top = `${baseTop}%`;
+                const elPlayerSpriteLocal = document.getElementById('player-sprite'); if (elPlayerSpriteLocal) elPlayerSpriteLocal.style.top = '85%';
                 elPlayerSide.style.left = '20%';
 
                 const hpContainerPlayer = document.getElementById('player-battle-hp-container');
