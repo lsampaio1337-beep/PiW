@@ -1,3 +1,4 @@
+import { calculateEV } from "../mathEngine.js";
 import { state, globals } from '../state.js';
 import { updateUI, showModal } from '../ui.js';
 
@@ -314,6 +315,7 @@ export function renderPokeMarketSellTab(category) {
         state.storage.forEach(p => {
             let imgSrc = `Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png`;
             let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
+            let pEv = calculateEV(p.bst, p.level, p.quality, sumIV);
 
             let glowClass = "glow-weak";
             if (p.qualityName === "Shiny") glowClass = "glow-shiny";
@@ -335,7 +337,7 @@ export function renderPokeMarketSellTab(category) {
                     <div style="font-size: calc(var(--m-width) * 0.014); color: #bdc3c7; line-height: 1.1;">Lv. ${p.level}</div>
                     <div style="font-size: calc(var(--m-width) * 0.014); color: #f1c40f; line-height: 1.1;">Q: ${p.quality.toFixed(2)}</div>
                     <div style="font-size: calc(var(--m-width) * 0.014); color: #3498db; line-height: 1.1;">∑IV: ${sumIV}</div>
-                    <div style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; color: #2ecc71; margin-top: calc(var(--m-width) * 0.012); line-height: 1.1;">$1</div>
+                    <div style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; color: #2ecc71; margin-top: calc(var(--m-width) * 0.012); line-height: 1.1;">$${formatMarketNumber(pEv)}</div>
                 </div>
             `;
         });
@@ -537,8 +539,18 @@ function updateMarketPokemonSellCount() {
     const totalSpan = document.getElementById('market-pokemon-sell-total');
     if (countSpan && totalSpan && window.marketSelectedPokemonForSale) {
         let count = window.marketSelectedPokemonForSale.size;
+
+        let totalGain = 0;
+        state.storage.forEach(p => {
+            if (window.marketSelectedPokemonForSale.has(p.uuid)) {
+                let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
+                let pEv = calculateEV(p.bst, p.level, p.quality, sumIV);
+                totalGain += pEv;
+            }
+        });
+
         countSpan.textContent = count;
-        totalSpan.textContent = formatMarketNumber(count);
+        totalSpan.textContent = formatMarketNumber(totalGain);
     }
 }
 
@@ -546,9 +558,17 @@ window.marketSellSelectedPokemon = function() {
     if (!window.marketSelectedPokemonForSale || window.marketSelectedPokemonForSale.size === 0) return;
 
     let numSold = window.marketSelectedPokemonForSale.size;
-    let totalGain = numSold; // $1 per pokemon
+    let totalGain = 0;
 
-    state.storage = state.storage.filter(p => !window.marketSelectedPokemonForSale.has(p.uuid));
+    state.storage = state.storage.filter(p => {
+        if (window.marketSelectedPokemonForSale.has(p.uuid)) {
+            let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
+            let pEv = calculateEV(p.bst, p.level, p.quality, sumIV);
+            totalGain += pEv;
+            return false;
+        }
+        return true;
+    });
 
     state.trainer.money += totalGain;
 
