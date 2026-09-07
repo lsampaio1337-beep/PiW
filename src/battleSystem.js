@@ -848,6 +848,8 @@ class BattleSystem {
             money: 0,
             caught: 0,
             shinies: 0,
+            ballsUsed: 0,
+            potionsUsed: 0,
             fainted: false
         };
 
@@ -857,6 +859,11 @@ class BattleSystem {
         let lastKnownMoney = this.state.trainer.money;
         let lastKnownCaught = this.state.stats.caught;
         let lastKnownShinies = this.state.stats.shiniesCaught || 0;
+
+        let initialBalls = this.state.settings.activeBallTier >= 0 ?
+            this.state.backpack.pokeballs[this.state.config.balance.items.pokeballs[this.state.settings.activeBallTier].name] || 0 : 0;
+        let initialPotions = this.state.settings.activePotionTier >= 0 ?
+            this.state.backpack.potions[this.state.config.balance.items.potions[this.state.settings.activePotionTier].name] || 0 : 0;
 
         // Ensure we don't simulate too many frames and hang the browser if time is huge
         // Limit to approx max of 24h of simulation steps, but it evaluates fast
@@ -1002,6 +1009,14 @@ class BattleSystem {
         results.money = this.state.trainer.money - lastKnownMoney;
         results.caught = this.state.stats.caught - lastKnownCaught;
         results.shinies = (this.state.stats.shiniesCaught || 0) - lastKnownShinies;
+
+        let finalBalls = this.state.settings.activeBallTier >= 0 ?
+            this.state.backpack.pokeballs[this.state.config.balance.items.pokeballs[this.state.settings.activeBallTier].name] || 0 : 0;
+        let finalPotions = this.state.settings.activePotionTier >= 0 ?
+            this.state.backpack.potions[this.state.config.balance.items.potions[this.state.settings.activePotionTier].name] || 0 : 0;
+
+        results.ballsUsed = Math.max(0, initialBalls - finalBalls);
+        results.potionsUsed = Math.max(0, initialPotions - finalPotions);
 
         if (results.fainted) {
             // Heal all
