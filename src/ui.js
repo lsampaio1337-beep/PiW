@@ -77,6 +77,13 @@ window.forceNextEncounter = forceNextEncounter;
 window.activateCheat = activateCheat;
 window.dragStart = dragStart;
 
+
+
+
+
+
+
+
 window.completeChallenge = function() {
     state.stats.completedChallenges = (state.stats.completedChallenges || 0) + 1;
 

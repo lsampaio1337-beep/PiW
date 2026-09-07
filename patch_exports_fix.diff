@@ -1,0 +1,15 @@
+--- src/ui.js
++++ src/ui.js
+@@ -74,11 +74,5 @@ window.showAddPokemonModal = showAddPokemonModal;
+ window.forceNextEncounter = forceNextEncounter;
+ window.activateCheat = activateCheat;
+ window.dragStart = dragStart;
+-
+-// Do not initialize to dummy functions here to prevent race conditions that overwrite real functions
+-window.startSellMode = window.startSellMode;
+-window.cancelSellMode = window.cancelSellMode;
+-window.selectAllForSale = window.selectAllForSale;
+-window.sellSelectedPokemon = window.sellSelectedPokemon;
+-window.toggleSaleSelection = window.toggleSaleSelection;
+
+ window.completeChallenge = function() {

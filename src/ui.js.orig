@@ -43,6 +43,8 @@ import { setupMarket, buyItem, openPokeMarketBuy, renderPokeMarketTab, updateMar
 import { showBackpack, renderBackpackTab, setActiveItem } from './ui/backpack/index.js';
 import { dragStart, dragOver, handleDrop } from './ui/backpack/pokemon.js';
 
+import './ui/backpack/pokemon.js';
+
 const storage = new Storage();
 const dayCare = new DayCare(state);
 state.dayCareRef = dayCare;
