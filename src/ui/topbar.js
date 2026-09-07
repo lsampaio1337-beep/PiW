@@ -155,4 +155,33 @@ export function updateTopbar() {
             calendarNotification.style.display = 'none';
         }
     }
+
+    const mapNotification = document.getElementById('map-notification');
+    if (mapNotification) {
+        if (state.stats.hasUnseenMap) {
+            mapNotification.style.display = 'block';
+        } else {
+            mapNotification.style.display = 'none';
+        }
+    }
+
+    const challengesNotification = document.getElementById('challenges-notification');
+    if (challengesNotification) {
+        if (state.config && state.config.unlocks) {
+            let currentIndex = state.stats.completedChallenges || 0;
+            if (currentIndex < state.config.unlocks.length) {
+                let unlock = state.config.unlocks[currentIndex];
+                let cData = getChallengeData(unlock);
+                if (cData.isMet) {
+                    challengesNotification.style.display = 'block';
+                } else {
+                    challengesNotification.style.display = 'none';
+                }
+            } else {
+                challengesNotification.style.display = 'none';
+            }
+        } else {
+            challengesNotification.style.display = 'none';
+        }
+    }
 }

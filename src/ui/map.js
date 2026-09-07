@@ -3,6 +3,11 @@ import { updateUI, switchView } from '../ui.js';
 import { setupMarket } from './market.js';
 
 export function showMap() {
+    if (state.stats.hasUnseenMap) {
+        state.stats.hasUnseenMap = false;
+        updateUI();
+    }
+
     let rightCol = document.getElementById('modal-overlay');
     let contentPanel = document.getElementById('content-panel');
     rightCol.style.display = 'flex';
@@ -46,6 +51,11 @@ export function showMap() {
             let markerImg = './Assets/Extra/Spot.png';
             let showCheckmark = false;
             let isClickable = true;
+            let hasNewNotification = false;
+
+            if (state.stats.newRoutes && state.stats.newRoutes.includes(locationName)) {
+                hasNewNotification = true;
+            }
 
             if (locationId === 'professor_oak_lab') markerImg = './Assets/Extra/Spot_Oak.png';
             else if (locationId === 'pokemon_center___market') markerImg = './Assets/Extra/Spot_PCPM.png';
@@ -96,7 +106,7 @@ export function showMap() {
                      ${isClickable ? `onclick="window.navigateToLocation('${locationName.replace(/'/g, "\\'")}')"` : ''}
                      onmouseover="window.showMapTooltip(event, '${locationName.replace(/'/g, "\\'")}')"
                      onmouseout="window.hideMapTooltip()">
-                     ${showCheckmark ? '<div style="position:absolute; top:-5px; right:-5px; background:green; color:white; border-radius:50%; width:15px; height:15px; font-size:10px; line-height:15px; text-align:center;">✓</div>' : ''}
+                     ${showCheckmark ? '<div style="position:absolute; top:-5px; right:-5px; background:green; color:white; border-radius:50%; width:15px; height:15px; font-size:10px; line-height:15px; text-align:center;">✓</div>' : (hasNewNotification ? '<img src="Assets/Extra/ExclamationMark.png" style="position: absolute; top: -5px; right: -5px; width: 15px; height: auto; pointer-events: none; z-index: 10;">' : '')}
                 </div>
             `;
         }
@@ -111,6 +121,10 @@ export function showMap() {
 }
 
 export function navigateToLocation(locationName) {
+    if (state.stats.newRoutes && state.stats.newRoutes.includes(locationName)) {
+        state.stats.newRoutes = state.stats.newRoutes.filter(r => r !== locationName);
+    }
+
     const battleSystem = globals.battleSystem;
     state.currentRoute = locationName;
     if (window.closeModal) window.closeModal();
