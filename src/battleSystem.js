@@ -330,7 +330,11 @@ class BattleSystem {
                 remainingIV--;
             }
 
-            if (qName === "Shiny") this.state.stats.shiniesSeen++;
+            if (qName === "Shiny") {
+                this.state.stats.shiniesSeen = (this.state.stats.shiniesSeen || 0) + 1;
+                if (!this.state.stats.seenShiniesSpecies) this.state.stats.seenShiniesSpecies = {};
+                this.state.stats.seenShiniesSpecies[pokemonBase.name] = true;
+            }
 
 
 
@@ -601,7 +605,11 @@ class BattleSystem {
                         caughtPokemon.xp = mathEngine.calculateTotalXP(caughtPokemon.level);
                         this.state.storage.push(caughtPokemon);
                         this.state.stats.caught++;
-                        if (defeatedEncounter.qualityName === "Shiny") this.state.stats.shiniesCaught = (this.state.stats.shiniesCaught || 0) + 1;
+                        if (defeatedEncounter.qualityName === "Shiny") {
+                            this.state.stats.shiniesCaught = (this.state.stats.shiniesCaught || 0) + 1;
+                            if (!this.state.stats.caughtShiniesSpecies) this.state.stats.caughtShiniesSpecies = {};
+                            this.state.stats.caughtShiniesSpecies[defeatedEncounter.name] = true;
+                        }
                         if (defeatedEncounter.qualityName === "Epic") this.state.stats.epicCaptures = (this.state.stats.epicCaptures || 0) + 1;
 
                         let sumIV = caughtPokemon.ivs.hp + caughtPokemon.ivs.atk + caughtPokemon.ivs.def + caughtPokemon.ivs.spa + caughtPokemon.ivs.spd + caughtPokemon.ivs.spe;
@@ -941,6 +949,14 @@ class BattleSystem {
             }
 
             q = mathEngine.generateQuality(this.state.stats, this.state.casinoDoubleShiny);
+
+            this.state.stats.seenSpecies[pokemonBase.name] = true;
+
+            if (q.name === "Shiny") {
+                this.state.stats.shiniesSeen = (this.state.stats.shiniesSeen || 0) + 1;
+                if (!this.state.stats.seenShiniesSpecies) this.state.stats.seenShiniesSpecies = {};
+                this.state.stats.seenShiniesSpecies[pokemonBase.name] = true;
+            }
             ivs = mathEngine.generateIVs(this.state.stats, q.name === "Shiny");
 
             if (q.name === "Shiny") this.state.stats.shiniesSeen = (this.state.stats.shiniesSeen || 0) + 1;
@@ -1011,11 +1027,17 @@ class BattleSystem {
                     if (this.state.settings.autoCatch) {
                         const ballResult = this.throwPokeball();
                         if (ballResult.caught) {
+                            if (!this.state.stats.caughtSpecies) this.state.stats.caughtSpecies = {};
+                            this.state.stats.caughtSpecies[this.activeEncounter.name] = (this.state.stats.caughtSpecies[this.activeEncounter.name] || 0) + 1;
                             let caughtPokemon = JSON.parse(JSON.stringify(this.activeEncounter));
                             caughtPokemon.xp = mathEngine.calculateTotalXP(caughtPokemon.level);
                             this.state.storage.push(caughtPokemon);
                             this.state.stats.caught++;
                             if (this.activeEncounter.qualityName === "Shiny") this.state.stats.shiniesCaught = (this.state.stats.shiniesCaught || 0) + 1;
+                            if (this.activeEncounter.qualityName === "Shiny") {
+                                if (!this.state.stats.caughtShiniesSpecies) this.state.stats.caughtShiniesSpecies = {};
+                                this.state.stats.caughtShiniesSpecies[this.activeEncounter.name] = true;
+                            }
                             // Simplification: Omitting other stats trackers for speed in offline simulation
                         }
                     }
