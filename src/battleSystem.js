@@ -871,6 +871,8 @@ class BattleSystem {
             money: 0,
             caught: 0,
             shinies: 0,
+            encounters: 0,
+            shinyEncounters: 0,
             ballsUsed: 0,
             potionsUsed: 0,
             fainted: false
@@ -882,6 +884,8 @@ class BattleSystem {
         let lastKnownMoney = this.state.trainer.money;
         let lastKnownCaught = this.state.stats.caught;
         let lastKnownShinies = this.state.stats.shiniesCaught || 0;
+        let lastKnownEncounters = this.state.stats.battlesWon || 0; // Approximate encounters fought using battlesWon
+        let lastKnownShinyEncounters = this.state.stats.shiniesSeen || 0;
 
         let initialBalls = this.state.settings.activeBallTier >= 0 ?
             this.state.backpack.pokeballs[this.state.config.balance.items.pokeballs[this.state.settings.activeBallTier].name] || 0 : 0;
@@ -938,6 +942,8 @@ class BattleSystem {
 
             q = mathEngine.generateQuality(this.state.stats, this.state.casinoDoubleShiny);
             ivs = mathEngine.generateIVs(this.state.stats, q.name === "Shiny");
+
+            if (q.name === "Shiny") this.state.stats.shiniesSeen = (this.state.stats.shiniesSeen || 0) + 1;
 
             const stats = {
                 hp: mathEngine.calculateHP(pokemonBase.hp, ivs.hp, level, q.q),
@@ -1032,6 +1038,8 @@ class BattleSystem {
         results.money = this.state.trainer.money - lastKnownMoney;
         results.caught = this.state.stats.caught - lastKnownCaught;
         results.shinies = (this.state.stats.shiniesCaught || 0) - lastKnownShinies;
+        results.encounters = (this.state.stats.battlesWon || 0) - lastKnownEncounters;
+        results.shinyEncounters = (this.state.stats.shiniesSeen || 0) - lastKnownShinyEncounters;
 
         let finalBalls = this.state.settings.activeBallTier >= 0 ?
             this.state.backpack.pokeballs[this.state.config.balance.items.pokeballs[this.state.settings.activeBallTier].name] || 0 : 0;
