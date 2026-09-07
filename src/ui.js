@@ -743,7 +743,7 @@ async function init() {
                 }
             }
 
-            let zzzText = pData.isZzZMode ? ` - ZzZ on: ${pData.currentRoute || 'Unknown Route'}` : '';
+            let zzzText = pData.isZzZMode ? ` - ZzZ` : '';
 
             const btn = document.createElement('button');
             btn.style.padding = "10px";
@@ -755,7 +755,7 @@ async function init() {
             btn.style.borderRadius = "5px";
             btn.style.textAlign = "left";
             btn.style.fontWeight = "bold";
-            btn.style.width = "70%";
+            btn.style.width = "75%";
             btn.style.margin = "0 auto";
             btn.style.display = "flex";
             btn.style.justifyContent = "space-between";
@@ -769,7 +769,7 @@ async function init() {
                         "${profileName}" - ${playtimeStr}
                     </div>
                     <div style="font-size: 14px; font-weight: normal;">Last Played: ${lastPlayedStr}</div>
-                    <div style="font-size: 14px; font-weight: normal;">Last Unlocked: ${lastRoute}${zzzText}</div>
+                    <div style="font-size: 14px; font-weight: normal;">Progress: ${lastRoute}${zzzText}</div>
                 </div>
                 ${zzzIconHtml}
             `;
