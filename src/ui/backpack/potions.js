@@ -7,18 +7,26 @@ export function renderPotionsTab(area) {
             <h3 style="text-align: center; margin-top: 0; color: #ddd; font-size: 2.5cqi;">Select Potion to auto use during battles.</h3>
 
             <div style="width: 80%; margin: 1cqi auto 2cqi auto; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                <label style="color: #ddd; font-size: 1.8cqi; margin-bottom: 1cqi;">
+                <label style="color: #ddd; font-size: 1.8cqi; margin-bottom: 1.5cqi;">
                     Auto-Heal Threshold: <span id="potion-threshold-val">${state.settings.autoPotionThreshold}%</span>
                 </label>
-                <input type="range" min="0" max="100" value="${state.settings.autoPotionThreshold}" id="potion-threshold-slider"
-                    oninput="
-                        let val = parseInt(this.value);
-                        if (val > 90) { val = 90; this.value = 90; }
-                        document.getElementById('potion-threshold-val').innerText = val + '%';
-                        window.setAutoPotionThreshold(val);
-                    "
-                    style="width: 100%; cursor: pointer;"
-                >
+                <div style="position: relative; width: 100%;">
+                    <input type="range" min="0" max="100" value="${state.settings.autoPotionThreshold}" id="potion-threshold-slider"
+                        oninput="
+                            let val = parseInt(this.value);
+                            if (val > 90) { val = 90; this.value = 90; }
+                            document.getElementById('potion-threshold-val').innerText = val + '%';
+                            window.setAutoPotionThreshold(val);
+                        "
+                        style="width: 100%; cursor: pointer; position: relative; z-index: 2; background: transparent; accent-color: #2ecc71;"
+                    >
+                    <!-- Background bar to show locked zone -->
+                    <div style="position: absolute; top: 50%; left: 0; width: 100%; height: 6px; transform: translateY(-50%); background: #555; border-radius: 3px; z-index: 1; pointer-events: none;">
+                        <div style="position: absolute; top: 0; left: 90%; width: 10%; height: 100%; background: repeating-linear-gradient(45deg, #e74c3c, #e74c3c 4px, #c0392b 4px, #c0392b 8px); border-radius: 0 3px 3px 0;"></div>
+                    </div>
+                    <!-- 90% Marker Text -->
+                    <div style="position: absolute; top: 15px; left: 90%; transform: translateX(-50%); color: #e74c3c; font-size: 1.2cqi; font-weight: bold; pointer-events: none;">90% Max</div>
+                </div>
             </div>
 
             <div style="display: flex; flex-wrap: wrap; gap: 1.5cqi; justify-content: center; align-content: flex-start; overflow-y: auto; flex: 1; padding: 1.2cqi; box-sizing: border-box;">

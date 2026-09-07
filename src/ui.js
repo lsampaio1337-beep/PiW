@@ -44,6 +44,7 @@ import { showBackpack, renderBackpackTab, setActiveItem, setAutoPotionThreshold 
 import { dragStart, dragOver, handleDrop } from './ui/backpack/pokemon.js';
 
 const storage = new Storage();
+window.storageRef = storage;
 const dayCare = new DayCare(state);
 state.dayCareRef = dayCare;
 state.storageRef = storage;
@@ -814,6 +815,11 @@ async function init() {
                         return target;
                     };
                     deepMerge(state, pData);
+
+                    // Fallback for older saves
+                    if (state.settings.autoPotionThreshold === undefined) {
+                        state.settings.autoPotionThreshold = 50;
+                    }
 
                     await loadConfigs();
 
