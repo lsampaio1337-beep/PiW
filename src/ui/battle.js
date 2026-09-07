@@ -71,10 +71,11 @@ export function updateBattleArena() {
                 elEnemySprite.src = `Assets/Pokemon Sprites/${enemy.qualityName === 'Shiny' ? enemy.id + '_shiny' : enemy.id}.png`;
                 elEnemySprite.style.display = 'block';
 
-                let baseBottom = 10;
-                if (enemy.types.includes('Water')) baseBottom = 5;
-                if (enemy.types.includes('Flying') || enemy.types.includes('Wind')) baseBottom = 20;
+                let baseBottom = 15; // 100 - 85
+                if (enemy.types.includes('Water')) baseBottom = 10; // 100 - 90
+                if (enemy.types.includes('Flying') || enemy.types.includes('Wind')) baseBottom = 25; // 100 - 75
 
+                elEnemySide.style.top = 'auto';
                 elEnemySide.style.bottom = `${baseBottom}%`;
 
                 if (battleSystem.isSliding) {
@@ -82,12 +83,20 @@ export function updateBattleArena() {
                         elEnemySide.dataset.sliding = 'true';
                         elEnemySide.style.transition = 'none';
                         elEnemySide.style.left = '100%';
+                        if (hpContainerEnemy) {
+                            hpContainerEnemy.style.transition = 'none';
+                            hpContainerEnemy.style.left = '100%';
+                        }
                         // Trigger reflow
                         void elEnemySide.offsetWidth;
                         requestAnimationFrame(() => {
                             requestAnimationFrame(() => {
                                 elEnemySide.style.transition = `left ${battleSystem.slideDuration}ms linear`;
                                 elEnemySide.style.left = '35%';
+                                if (hpContainerEnemy) {
+                                    hpContainerEnemy.style.transition = `left ${battleSystem.slideDuration}ms linear`;
+                                    hpContainerEnemy.style.left = '35%';
+                                }
                             });
                         });
                     }
@@ -95,6 +104,10 @@ export function updateBattleArena() {
                     elEnemySide.dataset.sliding = 'false';
                     elEnemySide.style.transition = 'none';
                     elEnemySide.style.left = '35%';
+                    if (hpContainerEnemy) {
+                        hpContainerEnemy.style.transition = 'none';
+                        hpContainerEnemy.style.left = '35%';
+                    }
                 }
             }
 
@@ -102,10 +115,11 @@ export function updateBattleArena() {
             const elPlayerSide = document.getElementById('player-side');
             if (leader && elPlayerSide) {
 
-                let baseBottom = 10;
-                if (leader.types.includes('Water')) baseBottom = 5;
-                if (leader.types.includes('Flying') || leader.types.includes('Wind')) baseBottom = 20;
+                let baseBottom = 15; // 100 - 85
+                if (leader.types.includes('Water')) baseBottom = 10; // 100 - 90
+                if (leader.types.includes('Flying') || leader.types.includes('Wind')) baseBottom = 25; // 100 - 75
 
+                elPlayerSide.style.top = 'auto';
                 elPlayerSide.style.bottom = `${baseBottom}%`;
                 elPlayerSide.style.left = '20%';
 
@@ -149,16 +163,22 @@ export function updateBattleArena() {
                 elEnemySprite.style.display = 'block';
                 elEnemySide.style.transition = 'none';
                 elEnemySide.style.left = '35%'; // Matching active battle destination
-                elEnemySide.style.bottom = '10%'; // default
+                elEnemySide.style.top = 'auto';
+                elEnemySide.style.bottom = '15%'; // default
+                if (hpContainerEnemy) {
+                    hpContainerEnemy.style.transition = 'none';
+                    hpContainerEnemy.style.left = '35%';
+                }
             }
 
             const leader = state.party[0];
             const elPlayerSide = document.getElementById('player-side');
             if (leader && elPlayerSide) {
-                let baseBottom = 10;
-                if (leader.types.includes('Water')) baseBottom = 5;
-                if (leader.types.includes('Flying') || leader.types.includes('Wind')) baseBottom = 20;
+                let baseBottom = 15; // 100 - 85
+                if (leader.types.includes('Water')) baseBottom = 10; // 100 - 90
+                if (leader.types.includes('Flying') || leader.types.includes('Wind')) baseBottom = 25; // 100 - 75
 
+                elPlayerSide.style.top = 'auto';
                 elPlayerSide.style.bottom = `${baseBottom}%`;
                 elPlayerSide.style.left = '20%';
 
@@ -210,6 +230,112 @@ export function updateBattleArena() {
 
 
 /* removed TYPE_COLORS */
+
+
+export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallback) {
+    const arena = document.getElementById('combat-arena');
+    if (!arena) {
+        captureCallback();
+        return;
+    }
+
+    // Hide original enemy sprite container momentarily so ghost takes precedence until next slide in
+    const elEnemySprite = document.getElementById('enemy-sprite');
+    if (elEnemySprite) {
+         // It will be replaced when searching/sliding starts
+    }
+
+    // 1. Create Ghost Enemy
+    const ghost = document.createElement('img');
+    ghost.src = `Assets/Pokemon Sprites/${activeEncounter.qualityName === 'Shiny' ? activeEncounter.id + '_shiny' : activeEncounter.id}.png`;
+    ghost.style.position = 'absolute';
+    ghost.style.left = '35%';
+    ghost.style.transform = 'translateX(-50%)';
+
+    let baseBottom = 10;
+    if (activeEncounter.types && activeEncounter.types.includes('Water')) baseBottom = 5;
+    if (activeEncounter.types && (activeEncounter.types.includes('Flying') || activeEncounter.types.includes('Wind'))) baseBottom = 20;
+
+    ghost.style.bottom = `${baseBottom}%`;
+    ghost.style.height = '35vh';
+    ghost.style.zIndex = '50';
+    ghost.style.opacity = '1';
+
+    arena.appendChild(ghost);
+
+    // 2. Create Pokeball if used
+    let ball = null;
+    if (ballResult && ballResult.used && ballResult.ballName) {
+        ball = document.createElement('img');
+        ball.src = `Assets/Items/Balls/${ballResult.ballName}.png`;
+        ball.style.position = 'absolute';
+        ball.style.left = '35%';
+        ball.style.bottom = `${baseBottom + 15}%`; // Hover above ghost
+        ball.style.transform = 'translateX(-50%)';
+        ball.style.width = '40px'; // fixed size for ball
+        ball.style.height = '40px';
+        ball.style.zIndex = '51';
+        arena.appendChild(ball);
+    }
+
+    // Force reflow
+    void ghost.offsetWidth;
+    if (ball) void ball.offsetWidth;
+
+    // Timeline Animations
+    // Over 3 seconds, slide both to left: 15%
+    ghost.style.transition = 'left 3s linear, opacity 2s linear';
+    ghost.style.left = '15%';
+    ghost.style.opacity = '0'; // fades out in 2s while sliding
+
+    if (ball) {
+        ball.style.transition = 'left 3s linear';
+        ball.style.left = '15%';
+
+        // Add shake animation manually using setInterval since we need to slide too
+        let shakeCount = 0;
+        let shakeInterval = setInterval(() => {
+            shakeCount++;
+            let rotation = (shakeCount % 2 === 0) ? 15 : -15;
+            if (shakeCount % 10 === 0) rotation = 0; // brief pause
+            ball.style.transform = `translateX(-50%) rotate(${rotation}deg)`;
+        }, 150);
+
+        setTimeout(() => {
+            clearInterval(shakeInterval);
+            ball.style.transform = 'translateX(-50%) rotate(0deg)';
+
+            // 3s mark: decide outcome
+            if (ballResult.caught) {
+                ball.src = `Assets/Items/Balls/${ballResult.ballName}Y.png`;
+            } else {
+                ball.src = `Assets/Items/Balls/${ballResult.ballName}N.png`;
+            }
+
+            // Execute capture logic
+            captureCallback();
+
+            // Slide off screen for the next 1.5s
+            ball.style.transition = 'left 1.5s linear';
+            ball.style.left = '-10%';
+
+            setTimeout(() => {
+                if (ball.parentElement) ball.parentElement.removeChild(ball);
+            }, 1500);
+
+        }, 3000);
+    } else {
+        // No ball used, just wait for ghost to fade out then remove
+        setTimeout(() => {
+            captureCallback();
+        }, 3000);
+    }
+
+    // Ghost should be removed after 3s (faded by 2s)
+    setTimeout(() => {
+        if (ghost.parentElement) ghost.parentElement.removeChild(ghost);
+    }, 3000);
+}
 
 
 export function showDamage(target, amount, isCrit, moveName = '', moveType = 'Normal', effectiveness = 1) {
