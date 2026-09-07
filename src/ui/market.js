@@ -266,6 +266,7 @@ export function openPokeMarketSell() {
                 <div style="font-size: calc(var(--m-width) * 0.022); font-weight: bold; color: white;">Selected: <span id="market-pokemon-sell-count">0</span> | Total: $<span id="market-pokemon-sell-total">0</span></div>
                 <div style="display: flex; gap: calc(var(--m-width) * 0.012);">
                     <button onclick="if(window.marketSelectAllPokemonForSale) window.marketSelectAllPokemonForSale()" style="padding: calc(var(--m-width) * 0.012) calc(var(--m-width) * 0.024); font-size: calc(var(--m-width) * 0.019); font-weight: bold; border-radius: 5px; background: #3498db; color: white; cursor: pointer; border: none;">Select All Storage</button>
+                    <button onclick="if(window.marketDeselectAllPokemonForSale) window.marketDeselectAllPokemonForSale()" style="padding: calc(var(--m-width) * 0.012) calc(var(--m-width) * 0.024); font-size: calc(var(--m-width) * 0.019); font-weight: bold; border-radius: 5px; background: #95a5a6; color: white; cursor: pointer; border: none;">Deselect All</button>
                     <button onclick="if(window.marketSellSelectedPokemon) window.marketSellSelectedPokemon()" style="padding: calc(var(--m-width) * 0.012) calc(var(--m-width) * 0.024); font-size: calc(var(--m-width) * 0.019); font-weight: bold; border-radius: 5px; background: #e74c3c; color: white; cursor: pointer; border: none;">Sell Selected</button>
                 </div>
 
@@ -347,7 +348,7 @@ export function renderPokeMarketSellTab(category) {
         state.storage.forEach(p => {
             let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
 
-            if (filterName && !p.id.toLowerCase().includes(filterName)) return;
+            if (filterName && !(p.name && p.name.toLowerCase().includes(filterName)) && !(p.id && p.id.toLowerCase().includes(filterName))) return;
             if (!isNaN(filterLevelMin) && p.level < filterLevelMin) return;
             if (!isNaN(filterLevelMax) && p.level > filterLevelMax) return;
             if (!isNaN(filterQMin) && p.quality < filterQMin) return;
@@ -562,6 +563,14 @@ window.toggleMarketPokemonSaleSelection = function(uuid) {
         window.marketSelectedPokemonForSale.delete(uuid);
     } else {
         window.marketSelectedPokemonForSale.add(uuid);
+    }
+    updateMarketPokemonSellCount();
+    if (window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon');
+};
+
+window.marketDeselectAllPokemonForSale = function() {
+    if (window.marketSelectedPokemonForSale) {
+        window.marketSelectedPokemonForSale.clear();
     }
     updateMarketPokemonSellCount();
     if (window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon');
