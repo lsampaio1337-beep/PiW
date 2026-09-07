@@ -327,6 +327,16 @@ input[type="number"] {
     /* No glow */
 }
 
+@keyframes pulseMarker {
+    0% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.5); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+.pulse-marker {
+    animation: pulseMarker 1.5s infinite ease-in-out;
+}
+
 /* Pokedex Card Styles */
 .pokedex-card {
     background: #2c3e50;

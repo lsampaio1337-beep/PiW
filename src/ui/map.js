@@ -98,15 +98,17 @@ export function showMap() {
             }
 
 
+            let markerClass = hasNewNotification ? 'map-marker pulse-marker' : 'map-marker';
+
             html += `
-                <div class="map-marker"
+                <div class="${markerClass}"
                      data-location="${locationName.replace(/'/g, "&#39;")}"
                      title="${locationName.replace(/'/g, "&#39;")}"
                      style="position: absolute; left: ${coords.x}%; top: ${coords.y}%; width: ${markerWidth}; height: ${markerHeight}; background-image: url('${markerImg}'); background-size: contain; background-repeat: no-repeat; transform: translate(-50%, -50%); filter: ${dropShadow}; cursor: ${isClickable ? 'pointer' : 'default'};"
                      ${isClickable ? `onclick="window.navigateToLocation('${locationName.replace(/'/g, "\\'")}')"` : ''}
                      onmouseover="window.showMapTooltip(event, '${locationName.replace(/'/g, "\\'")}')"
                      onmouseout="window.hideMapTooltip()">
-                     ${showCheckmark ? '<div style="position:absolute; top:-5px; right:-5px; background:green; color:white; border-radius:50%; width:15px; height:15px; font-size:10px; line-height:15px; text-align:center;">✓</div>' : (hasNewNotification ? '<img src="Assets/Extra/ExclamationMark.png" style="position: absolute; top: -5px; right: -5px; width: 15px; height: auto; pointer-events: none; z-index: 10;">' : '')}
+                     ${showCheckmark ? '<div style="position:absolute; top:-5px; right:-5px; background:green; color:white; border-radius:50%; width:15px; height:15px; font-size:10px; line-height:15px; text-align:center;">✓</div>' : ''}
                 </div>
             `;
         }
