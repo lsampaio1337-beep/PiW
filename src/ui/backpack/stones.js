@@ -10,8 +10,8 @@ export function renderStonesTab(area) {
     ];
 
     let content = `
-        <div style="display: flex; flex-direction: column; width: 100%; height: 100%; --m-width: min(95vw, 1200px);">
-            <div style="display: grid; grid-template-columns: repeat(6, calc(var(--m-width) * 0.145)); gap: calc(var(--m-width) * 0.018); justify-content: center; width: 100%; padding: calc(var(--m-width) * 0.012); overflow-y: auto;">
+        <div style="display: flex; flex-direction: column; width: 100%; height: 100%; --m-width: min(90vw, 825px);">
+            <div style="display: grid; grid-template-columns: repeat(6, calc(var(--m-width) * 0.145)); gap: calc(var(--m-width) * 0.018); justify-content: center; align-content: flex-start; width: 100%; padding: calc(var(--m-width) * 0.012); overflow-y: hidden; overflow-x: hidden;">
     `;
 
     for (const name of allStones) {
@@ -24,6 +24,7 @@ export function renderStonesTab(area) {
             <div style="background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; padding: calc(var(--m-width) * 0.012); text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; box-sizing: border-box;">
                 <div style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; margin-bottom: calc(var(--m-width) * 0.006); height: calc(var(--m-width) * 0.038); display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.1;">${displayName}</div>
                 <img src="./Assets/Items/Stones/${name}.png" style="width: calc(var(--m-width) * 0.072); height: calc(var(--m-width) * 0.072); object-fit: contain; margin-bottom: calc(var(--m-width) * 0.006);" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
+                <div style="font-size: calc(var(--m-width) * 0.014); color: transparent; margin-bottom: calc(var(--m-width) * 0.006); line-height: 1.1; user-select: none;">-</div>
                 <div style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; color: #bdc3c7; line-height: 1.1;">Stock: ${formatQuantity(qty)}</div>
             </div>
         `;
