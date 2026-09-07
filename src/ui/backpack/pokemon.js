@@ -495,20 +495,22 @@ window.startSellMode = function() {
     window.selectedForSale.clear();
 
     // Open backpack directly to pokemon tab
-    state.backpack.activePocket = 'pokemon';
-    document.getElementById('backpack-modal').style.display = 'block';
+    if (window.showBackpack) {
+        window.showBackpack();
+    }
     renderBackpackTab('pokemon');
 };
 
 window.cancelSellMode = function() {
     window.sellModeActive = false;
     window.selectedForSale.clear();
-    document.getElementById('backpack-modal').style.display = 'none';
+    if (window.closeModal) {
+        window.closeModal();
+    }
 
     // Return to Market UI
-    const pcButton = document.querySelector('img[src="Assets/UI/Menu/TopBar/Icon_Map.png"]');
-    if (pcButton) {
-        window.changeLocation("PokeCenter & PokeMarket");
+    if (window.navigateToLocation) {
+        window.navigateToLocation("PokeCenter & PokeMarket");
     }
 };
 
