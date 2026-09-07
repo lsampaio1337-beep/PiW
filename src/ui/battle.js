@@ -71,11 +71,12 @@ export function updateBattleArena() {
                 elEnemySprite.src = `Assets/Pokemon Sprites/${enemy.qualityName === 'Shiny' ? enemy.id + '_shiny' : enemy.id}.png`;
                 elEnemySprite.style.display = 'block';
 
-                let baseBottom = 10;
-                if (enemy.types.includes('Water')) baseBottom = 5;
-                if (enemy.types.includes('Flying') || enemy.types.includes('Wind')) baseBottom = 20;
+                let baseTop = 85;
+                if (enemy.types.includes('Water')) baseTop = 90;
+                if (enemy.types.includes('Flying') || enemy.types.includes('Wind')) baseTop = 75;
 
-                elEnemySide.style.bottom = `${baseBottom}%`;
+                elEnemySide.style.bottom = 'auto';
+                elEnemySide.style.top = `${baseTop}%`;
 
                 if (battleSystem.isSliding) {
                     if (elEnemySide.dataset.sliding !== 'true') {
@@ -102,11 +103,12 @@ export function updateBattleArena() {
             const elPlayerSide = document.getElementById('player-side');
             if (leader && elPlayerSide) {
 
-                let baseBottom = 10;
-                if (leader.types.includes('Water')) baseBottom = 5;
-                if (leader.types.includes('Flying') || leader.types.includes('Wind')) baseBottom = 20;
+                let baseTop = 85;
+                if (leader.types.includes('Water')) baseTop = 90;
+                if (leader.types.includes('Flying') || leader.types.includes('Wind')) baseTop = 75;
 
-                elPlayerSide.style.bottom = `${baseBottom}%`;
+                elPlayerSide.style.bottom = 'auto';
+                elPlayerSide.style.top = `${baseTop}%`;
                 elPlayerSide.style.left = '20%';
 
                 const hpContainerPlayer = document.getElementById('player-battle-hp-container');
@@ -149,17 +151,19 @@ export function updateBattleArena() {
                 elEnemySprite.style.display = 'block';
                 elEnemySide.style.transition = 'none';
                 elEnemySide.style.left = '35%'; // Matching active battle destination
-                elEnemySide.style.bottom = '10%'; // default
+                elEnemySide.style.bottom = 'auto';
+                elEnemySide.style.top = '85%'; // default
             }
 
             const leader = state.party[0];
             const elPlayerSide = document.getElementById('player-side');
             if (leader && elPlayerSide) {
-                let baseBottom = 10;
-                if (leader.types.includes('Water')) baseBottom = 5;
-                if (leader.types.includes('Flying') || leader.types.includes('Wind')) baseBottom = 20;
+                let baseTop = 85;
+                if (leader.types.includes('Water')) baseTop = 90;
+                if (leader.types.includes('Flying') || leader.types.includes('Wind')) baseTop = 75;
 
-                elPlayerSide.style.bottom = `${baseBottom}%`;
+                elPlayerSide.style.bottom = 'auto';
+                elPlayerSide.style.top = `${baseTop}%`;
                 elPlayerSide.style.left = '20%';
 
                 const hpContainerPlayer = document.getElementById('player-battle-hp-container');

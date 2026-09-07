@@ -141,6 +141,8 @@ input[type="number"] {
     flex: 1;
     position: relative;
     background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     overflow: hidden;
 }
 
