@@ -922,6 +922,14 @@ class BattleSystem {
             }
 
             q = mathEngine.generateQuality(this.state.stats, this.state.casinoDoubleShiny);
+
+            this.state.stats.seenSpecies[pokemonBase.name] = true;
+
+            if (q.name === "Shiny") {
+                this.state.stats.shiniesSeen = (this.state.stats.shiniesSeen || 0) + 1;
+                if (!this.state.stats.seenShiniesSpecies) this.state.stats.seenShiniesSpecies = {};
+                this.state.stats.seenShiniesSpecies[pokemonBase.name] = true;
+            }
             ivs = mathEngine.generateIVs(this.state.stats, q.name === "Shiny");
 
             const stats = {
@@ -990,6 +998,8 @@ class BattleSystem {
                     if (this.state.settings.autoCatch) {
                         const caught = this.throwPokeball();
                         if (caught) {
+                            if (!this.state.stats.caughtSpecies) this.state.stats.caughtSpecies = {};
+                            this.state.stats.caughtSpecies[this.activeEncounter.name] = (this.state.stats.caughtSpecies[this.activeEncounter.name] || 0) + 1;
                             let caughtPokemon = JSON.parse(JSON.stringify(this.activeEncounter));
                             caughtPokemon.xp = mathEngine.calculateTotalXP(caughtPokemon.level);
                             this.state.storage.push(caughtPokemon);
