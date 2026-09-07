@@ -232,6 +232,112 @@ export function updateBattleArena() {
 /* removed TYPE_COLORS */
 
 
+export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallback) {
+    const arena = document.getElementById('combat-arena');
+    if (!arena) {
+        captureCallback();
+        return;
+    }
+
+    // Hide original enemy sprite container momentarily so ghost takes precedence until next slide in
+    const elEnemySprite = document.getElementById('enemy-sprite');
+    if (elEnemySprite) {
+         // It will be replaced when searching/sliding starts
+    }
+
+    // 1. Create Ghost Enemy
+    const ghost = document.createElement('img');
+    ghost.src = `Assets/Pokemon Sprites/${activeEncounter.qualityName === 'Shiny' ? activeEncounter.id + '_shiny' : activeEncounter.id}.png`;
+    ghost.style.position = 'absolute';
+    ghost.style.left = '35%';
+    ghost.style.transform = 'translateX(-50%)';
+
+    let baseBottom = 10;
+    if (activeEncounter.types && activeEncounter.types.includes('Water')) baseBottom = 5;
+    if (activeEncounter.types && (activeEncounter.types.includes('Flying') || activeEncounter.types.includes('Wind'))) baseBottom = 20;
+
+    ghost.style.bottom = `${baseBottom}%`;
+    ghost.style.height = '35vh';
+    ghost.style.zIndex = '50';
+    ghost.style.opacity = '1';
+
+    arena.appendChild(ghost);
+
+    // 2. Create Pokeball if used
+    let ball = null;
+    if (ballResult && ballResult.used && ballResult.ballName) {
+        ball = document.createElement('img');
+        ball.src = `Assets/Items/Balls/${ballResult.ballName}.png`;
+        ball.style.position = 'absolute';
+        ball.style.left = '35%';
+        ball.style.bottom = `${baseBottom + 15}%`; // Hover above ghost
+        ball.style.transform = 'translateX(-50%)';
+        ball.style.width = '40px'; // fixed size for ball
+        ball.style.height = '40px';
+        ball.style.zIndex = '51';
+        arena.appendChild(ball);
+    }
+
+    // Force reflow
+    void ghost.offsetWidth;
+    if (ball) void ball.offsetWidth;
+
+    // Timeline Animations
+    // Over 3 seconds, slide both to left: 15%
+    ghost.style.transition = 'left 3s linear, opacity 2s linear';
+    ghost.style.left = '15%';
+    ghost.style.opacity = '0'; // fades out in 2s while sliding
+
+    if (ball) {
+        ball.style.transition = 'left 3s linear';
+        ball.style.left = '15%';
+
+        // Add shake animation manually using setInterval since we need to slide too
+        let shakeCount = 0;
+        let shakeInterval = setInterval(() => {
+            shakeCount++;
+            let rotation = (shakeCount % 2 === 0) ? 15 : -15;
+            if (shakeCount % 10 === 0) rotation = 0; // brief pause
+            ball.style.transform = `translateX(-50%) rotate(${rotation}deg)`;
+        }, 150);
+
+        setTimeout(() => {
+            clearInterval(shakeInterval);
+            ball.style.transform = 'translateX(-50%) rotate(0deg)';
+
+            // 3s mark: decide outcome
+            if (ballResult.caught) {
+                ball.src = `Assets/Items/Balls/${ballResult.ballName}Y.png`;
+            } else {
+                ball.src = `Assets/Items/Balls/${ballResult.ballName}N.png`;
+            }
+
+            // Execute capture logic
+            captureCallback();
+
+            // Slide off screen for the next 1.5s
+            ball.style.transition = 'left 1.5s linear';
+            ball.style.left = '-10%';
+
+            setTimeout(() => {
+                if (ball.parentElement) ball.parentElement.removeChild(ball);
+            }, 1500);
+
+        }, 3000);
+    } else {
+        // No ball used, just wait for ghost to fade out then remove
+        setTimeout(() => {
+            captureCallback();
+        }, 3000);
+    }
+
+    // Ghost should be removed after 3s (faded by 2s)
+    setTimeout(() => {
+        if (ghost.parentElement) ghost.parentElement.removeChild(ghost);
+    }, 3000);
+}
+
+
 export function showDamage(target, amount, isCrit, moveName = '', moveType = 'Normal', effectiveness = 1) {
     const battleSystem = globals.battleSystem;
     let containerId = target === 'player' ? 'player-sprite' : 'enemy-sprite';

@@ -813,14 +813,6 @@ async function init() {
                     };
                     deepMerge(state, pData);
 
-                    // Normalize legacy -1 (None) to 0 (Pokeball/Tiny Potion) since "None" is removed
-                    if (state.settings.activeBallTier === -1) {
-                        state.settings.activeBallTier = 0;
-                    }
-                    if (state.settings.activePotionTier === -1) {
-                        state.settings.activePotionTier = 0;
-                    }
-
                     await loadConfigs();
 
                     startGame();

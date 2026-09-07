@@ -27,6 +27,24 @@ export function hasEncounteredSpecies(id, state) {
            false;
 }
 
+export function hasSeenSpecies(id, state) {
+    const pData = state.config.pokemonData.find(p => p.id === id);
+    if (!pData) return false;
+    return (state.stats.seenSpecies && state.stats.seenSpecies[pData.name]);
+}
+
+export function hasCaughtSpecies(id, state) {
+    const pData = state.config.pokemonData.find(p => p.id === id);
+    if (!pData) return false;
+    return (state.stats.caughtSpecies && state.stats.caughtSpecies[pData.name]) ||
+           state.party.some(p => p.id === id) ||
+           state.storage.some(p => p.id === id) ||
+           state.safe.some(p => p.id === id) ||
+           state.breeding.some(p => p.id === id) ||
+           state.training.some(p => p.id === id) ||
+           false;
+}
+
 export function showPokedex() {
     let uniqueSpeciesCaught = 0;
     if (state.stats.caughtSpecies) {
@@ -43,13 +61,29 @@ export function showPokedex() {
             const pData = state.config.pokemonData.find(p => p.id === i);
             if (!pData) continue;
 
-            const hasEncountered = hasEncounteredSpecies(i, state);
+            const isSeen = hasSeenSpecies(i, state);
+            const isCaught = hasCaughtSpecies(i, state);
+            const hasSeenShiny = state.stats.seenShiniesSpecies && state.stats.seenShiniesSpecies[pData.name];
+            const hasCaughtShiny = state.stats.caughtShiniesSpecies && state.stats.caughtShiniesSpecies[pData.name];
 
-            let filter = hasEncountered ? "none" : "brightness(0)";
-            let cursor = hasEncountered ? "pointer" : "default";
-            let onClick = hasEncountered ? `onclick="window.showDexEntry(${i})"` : "";
+            let filter = isCaught ? "none" : "brightness(0)";
+            let cursor = isCaught ? "pointer" : "default";
+            let onClick = isCaught ? `onclick="window.showDexEntry(${i})"` : "";
 
-            html += `<div style="width: 60px; text-align: center; font-size: 10px;">
+            let cardClass = "";
+            let cardStyle = "width: 60px; text-align: center; font-size: 10px;";
+            if (isSeen || isCaught) {
+                cardClass = "pokedex-card";
+                cardStyle = "width: 80px; text-align: center; font-size: 10px; margin: 2px;";
+                if (hasSeenShiny || hasCaughtShiny) {
+                    cardClass += " pokedex-card-shiny";
+                }
+                if (hasCaughtShiny) {
+                    cardClass += " pokedex-card-shiny-rotate";
+                }
+            }
+
+            html += `<div class="${cardClass}" style="${cardStyle}">
                 <div style="font-weight:bold;">#${i}</div>
                 <img src="Assets/Pokemon Sprites/${i}.png" style="width: 50px; height: 50px; filter: ${filter}; cursor: ${cursor};" ${onClick}>
             </div>`;

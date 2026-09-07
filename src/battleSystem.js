@@ -330,7 +330,11 @@ class BattleSystem {
                 remainingIV--;
             }
 
-            if (qName === "Shiny") this.state.stats.shiniesSeen++;
+            if (qName === "Shiny") {
+                this.state.stats.shiniesSeen = (this.state.stats.shiniesSeen || 0) + 1;
+                if (!this.state.stats.seenShiniesSpecies) this.state.stats.seenShiniesSpecies = {};
+                this.state.stats.seenShiniesSpecies[pokemonBase.name] = true;
+            }
 
 
 
@@ -546,27 +550,30 @@ class BattleSystem {
             pokemon.currentHp = Math.min(pokemon.maxHp, pokemon.currentHp + this.state.config.balance.items.potions[tier].heal);
             return true;
         }
-
         return false;
     }
 
     throwPokeball() {
         let tier = this.state.settings.activeBallTier;
-        if (tier < 0) return false; // None selected
+        if (tier < 0) return { used: false, ballName: null, caught: false }; // None selected
 
         let ballName = this.state.config.balance.items.pokeballs[tier].name;
 
         if (this.state.backpack.pokeballs[ballName] > 0) {
             this.state.backpack.pokeballs[ballName]--;
         } else {
-            return false;
+            return { used: false, ballName: null, caught: false }; // No balls left
         }
 
         let multiplier = this.state.config.balance.items.pokeballs[tier].multiplier;
 
         const chance = mathEngine.calculateCatchChance(this.activeEncounter.bst, this.activeEncounter.level, multiplier, this.state.stats, this.activeEncounter.qualityName === "Shiny");
 
-        return (Math.random() * 100) <= chance;
+        return {
+            used: true,
+            ballName: ballName,
+            caught: (Math.random() * 100) <= chance
+        };
     }
 
     handleEnemyDefeat() {
@@ -580,54 +587,77 @@ class BattleSystem {
 
         // Auto Throw Pokeball logic (disable in gyms)
         if (this.state.settings.autoCatch && (!this.gymState || !this.gymState.isActive)) {
-            const caught = this.throwPokeball();
-            if (caught) {
-                let caughtPokemon = JSON.parse(JSON.stringify(this.activeEncounter));
-                // Fix the level 100 jump bug by setting xp explicitly to the exact minimum needed for their captured level
-                caughtPokemon.xp = mathEngine.calculateTotalXP(caughtPokemon.level);
-                this.state.storage.push(caughtPokemon);
-                this.state.stats.caught++;
-                if (this.activeEncounter.qualityName === "Shiny") this.state.stats.shiniesCaught = (this.state.stats.shiniesCaught || 0) + 1;
-                if (this.activeEncounter.qualityName === "Epic") this.state.stats.epicCaptures = (this.state.stats.epicCaptures || 0) + 1;
+            const ballResult = this.throwPokeball();
+            const defeatedEncounter = this.activeEncounter; // cache for closure
 
-                let sumIV = caughtPokemon.ivs.hp + caughtPokemon.ivs.atk + caughtPokemon.ivs.def + caughtPokemon.ivs.spa + caughtPokemon.ivs.spd + caughtPokemon.ivs.spe;
-                if (sumIV < 300) this.state.stats.caughtIVUnder300 = (this.state.stats.caughtIVUnder300 || 0) + 1;
-                if (sumIV < 350) this.state.stats.caughtIVUnder350 = (this.state.stats.caughtIVUnder350 || 0) + 1;
-                if (sumIV < 400) this.state.stats.caughtIVUnder400 = (this.state.stats.caughtIVUnder400 || 0) + 1;
-                if (sumIV < 450) this.state.stats.caughtIVUnder450 = (this.state.stats.caughtIVUnder450 || 0) + 1;
-                if (sumIV < 500) this.state.stats.caughtIVUnder500 = (this.state.stats.caughtIVUnder500 || 0) + 1;
+            if (ballResult.used) {
+                const processCapture = () => {
+                    if (ballResult.caught) {
+                        let caughtPokemon = JSON.parse(JSON.stringify(defeatedEncounter));
+                        // Fix the level 100 jump bug by setting xp explicitly to the exact minimum needed for their captured level
+                        caughtPokemon.xp = mathEngine.calculateTotalXP(caughtPokemon.level);
+                        this.state.storage.push(caughtPokemon);
+                        this.state.stats.caught++;
+                        if (defeatedEncounter.qualityName === "Shiny") {
+                            this.state.stats.shiniesCaught = (this.state.stats.shiniesCaught || 0) + 1;
+                            if (!this.state.stats.caughtShiniesSpecies) this.state.stats.caughtShiniesSpecies = {};
+                            this.state.stats.caughtShiniesSpecies[defeatedEncounter.name] = true;
+                        }
+                        if (defeatedEncounter.qualityName === "Epic") this.state.stats.epicCaptures = (this.state.stats.epicCaptures || 0) + 1;
 
-                if (caughtPokemon.level >= 15) this.state.stats.caughtLvl15 = (this.state.stats.caughtLvl15 || 0) + 1;
-                if (caughtPokemon.level >= 30) this.state.stats.caughtLvl30 = (this.state.stats.caughtLvl30 || 0) + 1;
-                if (caughtPokemon.level >= 45) this.state.stats.caughtLvl45 = (this.state.stats.caughtLvl45 || 0) + 1;
-                if (caughtPokemon.level >= 60) this.state.stats.caughtLvl60 = (this.state.stats.caughtLvl60 || 0) + 1;
-                if (caughtPokemon.level >= 75) this.state.stats.caughtLvl75 = (this.state.stats.caughtLvl75 || 0) + 1;
+                        let sumIV = caughtPokemon.ivs.hp + caughtPokemon.ivs.atk + caughtPokemon.ivs.def + caughtPokemon.ivs.spa + caughtPokemon.ivs.spd + caughtPokemon.ivs.spe;
+                        if (sumIV < 300) this.state.stats.caughtIVUnder300 = (this.state.stats.caughtIVUnder300 || 0) + 1;
+                        if (sumIV < 350) this.state.stats.caughtIVUnder350 = (this.state.stats.caughtIVUnder350 || 0) + 1;
+                        if (sumIV < 400) this.state.stats.caughtIVUnder400 = (this.state.stats.caughtIVUnder400 || 0) + 1;
+                        if (sumIV < 450) this.state.stats.caughtIVUnder450 = (this.state.stats.caughtIVUnder450 || 0) + 1;
+                        if (sumIV < 500) this.state.stats.caughtIVUnder500 = (this.state.stats.caughtIVUnder500 || 0) + 1;
 
-                // Track species catches for unlocks
-                if (!this.state.stats.caughtSpecies) this.state.stats.caughtSpecies = {};
-                this.state.stats.caughtSpecies[this.activeEncounter.name] = (this.state.stats.caughtSpecies[this.activeEncounter.name] || 0) + 1;
+                        if (caughtPokemon.level >= 15) this.state.stats.caughtLvl15 = (this.state.stats.caughtLvl15 || 0) + 1;
+                        if (caughtPokemon.level >= 30) this.state.stats.caughtLvl30 = (this.state.stats.caughtLvl30 || 0) + 1;
+                        if (caughtPokemon.level >= 45) this.state.stats.caughtLvl45 = (this.state.stats.caughtLvl45 || 0) + 1;
+                        if (caughtPokemon.level >= 60) this.state.stats.caughtLvl60 = (this.state.stats.caughtLvl60 || 0) + 1;
+                        if (caughtPokemon.level >= 75) this.state.stats.caughtLvl75 = (this.state.stats.caughtLvl75 || 0) + 1;
 
-                // Track specific typings
-                if (!this.state.stats.caughtSpecific) this.state.stats.caughtSpecific = {};
-                if (!this.state.stats.challengeCaughtSpecific) this.state.stats.challengeCaughtSpecific = {};
+                        // Track species catches for unlocks
+                        if (!this.state.stats.caughtSpecies) this.state.stats.caughtSpecies = {};
+                        this.state.stats.caughtSpecies[defeatedEncounter.name] = (this.state.stats.caughtSpecies[defeatedEncounter.name] || 0) + 1;
 
-                let qName = this.activeEncounter.qualityName || "Regular";
+                        // Track specific typings
+                        if (!this.state.stats.caughtSpecific) this.state.stats.caughtSpecific = {};
+                        if (!this.state.stats.challengeCaughtSpecific) this.state.stats.challengeCaughtSpecific = {};
 
-                if (this.activeEncounter.types) {
-                      for (let t of this.activeEncounter.types) {
-                          this.state.stats.caughtSpecific[t] = (this.state.stats.caughtSpecific[t] || 0) + 1;
-                          let typeRarityKey = t + "_" + qName;
-                          let typeAnyKey = t + "_Any";
-                          this.state.stats.challengeCaughtSpecific[typeRarityKey] = (this.state.stats.challengeCaughtSpecific[typeRarityKey] || 0) + 1;
-                          this.state.stats.challengeCaughtSpecific[typeAnyKey] = (this.state.stats.challengeCaughtSpecific[typeAnyKey] || 0) + 1;
-                      }
+                        let qName = defeatedEncounter.qualityName || "Regular";
+
+                        if (defeatedEncounter.types) {
+                              for (let t of defeatedEncounter.types) {
+                                  this.state.stats.caughtSpecific[t] = (this.state.stats.caughtSpecific[t] || 0) + 1;
+                                  let typeRarityKey = t + "_" + qName;
+                                  let typeAnyKey = t + "_Any";
+                                  this.state.stats.challengeCaughtSpecific[typeRarityKey] = (this.state.stats.challengeCaughtSpecific[typeRarityKey] || 0) + 1;
+                                  this.state.stats.challengeCaughtSpecific[typeAnyKey] = (this.state.stats.challengeCaughtSpecific[typeAnyKey] || 0) + 1;
+                              }
+                        }
+
+                        let speciesRarityKey = defeatedEncounter.name + "_" + qName;
+                        this.state.stats.challengeCaughtSpecific[speciesRarityKey] = (this.state.stats.challengeCaughtSpecific[speciesRarityKey] || 0) + 1;
+                    }
+                };
+
+                if (typeof window.triggerDefeatAnimation === 'function' && !this.gymState?.isActive) {
+                    // Start visual capture sequence
+                    window.triggerDefeatAnimation(defeatedEncounter, ballResult, processCapture);
+                } else {
+                    // Sync fallback
+                    processCapture();
                 }
-
-                let speciesRarityKey = this.activeEncounter.name + "_" + qName;
-                this.state.stats.challengeCaughtSpecific[speciesRarityKey] = (this.state.stats.challengeCaughtSpecific[speciesRarityKey] || 0) + 1;
-
-                // console.log(`Caught ${this.activeEncounter.name}!`);
+            } else if (typeof window.triggerDefeatAnimation === 'function' && !this.gymState?.isActive) {
+                // If ball wasn't used but we still defeated it, we just show a generic ghost fade out without a ball.
+                window.triggerDefeatAnimation(defeatedEncounter, ballResult, () => {});
             }
+        } else if (typeof window.triggerDefeatAnimation === 'function' && !this.gymState?.isActive) {
+             // Generic ghost fade out without ball if autoCatch is disabled
+             const defeatedEncounter = this.activeEncounter;
+             window.triggerDefeatAnimation(defeatedEncounter, { used: false }, () => {});
         }
 
         // Daycare logic
@@ -842,6 +872,8 @@ class BattleSystem {
             money: 0,
             caught: 0,
             shinies: 0,
+            encounters: 0,
+            shinyEncounters: 0,
             ballsUsed: 0,
             potionsUsed: 0,
             fainted: false
@@ -853,6 +885,8 @@ class BattleSystem {
         let lastKnownMoney = this.state.trainer.money;
         let lastKnownCaught = this.state.stats.caught;
         let lastKnownShinies = this.state.stats.shiniesCaught || 0;
+        let lastKnownEncounters = this.state.stats.battlesWon || 0; // Approximate encounters fought using battlesWon
+        let lastKnownShinyEncounters = this.state.stats.shiniesSeen || 0;
 
         let initialBalls = this.state.settings.activeBallTier >= 0 ?
             this.state.backpack.pokeballs[this.state.config.balance.items.pokeballs[this.state.settings.activeBallTier].name] || 0 : 0;
@@ -908,7 +942,17 @@ class BattleSystem {
             }
 
             q = mathEngine.generateQuality(this.state.stats, this.state.casinoDoubleShiny);
+
+            this.state.stats.seenSpecies[pokemonBase.name] = true;
+
+            if (q.name === "Shiny") {
+                this.state.stats.shiniesSeen = (this.state.stats.shiniesSeen || 0) + 1;
+                if (!this.state.stats.seenShiniesSpecies) this.state.stats.seenShiniesSpecies = {};
+                this.state.stats.seenShiniesSpecies[pokemonBase.name] = true;
+            }
             ivs = mathEngine.generateIVs(this.state.stats, q.name === "Shiny");
+
+            if (q.name === "Shiny") this.state.stats.shiniesSeen = (this.state.stats.shiniesSeen || 0) + 1;
 
             const stats = {
                 hp: mathEngine.calculateHP(pokemonBase.hp, ivs.hp, level, q.q),
@@ -974,13 +1018,19 @@ class BattleSystem {
                     }
 
                     if (this.state.settings.autoCatch) {
-                        const caught = this.throwPokeball();
-                        if (caught) {
+                        const ballResult = this.throwPokeball();
+                        if (ballResult.caught) {
+                            if (!this.state.stats.caughtSpecies) this.state.stats.caughtSpecies = {};
+                            this.state.stats.caughtSpecies[this.activeEncounter.name] = (this.state.stats.caughtSpecies[this.activeEncounter.name] || 0) + 1;
                             let caughtPokemon = JSON.parse(JSON.stringify(this.activeEncounter));
                             caughtPokemon.xp = mathEngine.calculateTotalXP(caughtPokemon.level);
                             this.state.storage.push(caughtPokemon);
                             this.state.stats.caught++;
                             if (this.activeEncounter.qualityName === "Shiny") this.state.stats.shiniesCaught = (this.state.stats.shiniesCaught || 0) + 1;
+                            if (this.activeEncounter.qualityName === "Shiny") {
+                                if (!this.state.stats.caughtShiniesSpecies) this.state.stats.caughtShiniesSpecies = {};
+                                this.state.stats.caughtShiniesSpecies[this.activeEncounter.name] = true;
+                            }
                             // Simplification: Omitting other stats trackers for speed in offline simulation
                         }
                     }
@@ -1003,6 +1053,8 @@ class BattleSystem {
         results.money = this.state.trainer.money - lastKnownMoney;
         results.caught = this.state.stats.caught - lastKnownCaught;
         results.shinies = (this.state.stats.shiniesCaught || 0) - lastKnownShinies;
+        results.encounters = (this.state.stats.battlesWon || 0) - lastKnownEncounters;
+        results.shinyEncounters = (this.state.stats.shiniesSeen || 0) - lastKnownShinyEncounters;
 
         let finalBalls = this.state.settings.activeBallTier >= 0 ?
             this.state.backpack.pokeballs[this.state.config.balance.items.pokeballs[this.state.settings.activeBallTier].name] || 0 : 0;

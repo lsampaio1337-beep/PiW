@@ -11,10 +11,8 @@ const routes = [
       "spawns": [
         {"pokemonId": 16, "minLevel": 3, "maxLevel": 4, "chance": 0.4},
         {"pokemonId": 19, "minLevel": 3, "maxLevel": 4, "chance": 0.4},
-        {"pokemonId": 10, "minLevel": 3, "maxLevel": 4, "chance": 0.05},
-        {"pokemonId": 13, "minLevel": 3, "maxLevel": 4, "chance": 0.05},
-        {"pokemonId": 29, "minLevel": 3, "maxLevel": 4, "chance": 0.05},
-        {"pokemonId": 32, "minLevel": 3, "maxLevel": 4, "chance": 0.05}
+        {"pokemonId": 29, "minLevel": 3, "maxLevel": 4, "chance": 0.1},
+        {"pokemonId": 32, "minLevel": 3, "maxLevel": 4, "chance": 0.1}
       ]
     },
     {
@@ -497,7 +495,7 @@ export const unlocks = [
       "catchByRarityAndType": {
         "type": "Bug",
         "rarity": "Epic",
-        "count": 10
+        "count": 2
       }
     }
   },
