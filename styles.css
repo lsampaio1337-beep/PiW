@@ -206,15 +206,6 @@ input[type="number"] {
     z-index: 10;
 }
 
-#combat-log {
-    height: 100px;
-    background: rgba(0,0,0,0.8);
-    color: #0f0;
-    padding: 10px;
-    overflow-y: auto;
-    font-family: monospace;
-}
-
 #right-col {
     width: 300px;
     background-color: #3b5998;
