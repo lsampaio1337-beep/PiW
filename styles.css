@@ -141,6 +141,8 @@ input[type="number"] {
     flex: 1;
     position: relative;
     background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     overflow: hidden;
 }
 
@@ -202,15 +204,6 @@ input[type="number"] {
     object-fit: contain;
     position: relative;
     z-index: 10;
-}
-
-#combat-log {
-    height: 100px;
-    background: rgba(0,0,0,0.8);
-    color: #0f0;
-    padding: 10px;
-    overflow-y: auto;
-    font-family: monospace;
 }
 
 #right-col {
