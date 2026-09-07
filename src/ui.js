@@ -746,8 +746,12 @@ async function init() {
             btn.style.textAlign = "left";
             btn.style.fontWeight = "bold";
 
+            let zzzIcon = pData.isZzZMode ? `<img src="Assets/Extra/IconSleep.png" style="width: 20px; height: 20px; vertical-align: middle; margin-left: 10px;" title="ZzZ Mode Active">` : '';
+
             btn.innerHTML = `
-                <div style="font-size: 18px; margin-bottom: 5px; font-weight: bold;">"${profileName}" - ${playtimeStr}</div>
+                <div style="font-size: 18px; margin-bottom: 5px; font-weight: bold; display: flex; align-items: center;">
+                    "${profileName}" - ${playtimeStr} ${zzzIcon}
+                </div>
                 <div style="font-size: 14px; font-weight: normal;">Last Played: ${lastPlayedStr}</div>
                 <div style="font-size: 14px; font-weight: normal;">Current: ${lastRoute}</div>
             `;
@@ -794,9 +798,57 @@ async function init() {
 
                     startGame();
 
-                    // Saved profiles always start at Oak's Lab and are free to explore
-                    state.currentRoute = "Professor Oak Lab";
-                    switchView("PROF_OAK_LAB");
+                    if (state.isZzZMode) {
+                        document.getElementById('zzz-resume-modal').style.display = 'flex';
+
+                        document.getElementById('btn-zzz-resume-no').onclick = () => {
+                            state.isZzZMode = false;
+                            state.zzzTimestamp = null;
+                            storage.save(state);
+                            document.getElementById('zzz-resume-modal').style.display = 'none';
+                            // Start normally at Oak's lab
+                            state.currentRoute = "Professor Oak Lab";
+                            switchView("PROF_OAK_LAB");
+                        };
+
+                        document.getElementById('btn-zzz-resume-yes').onclick = () => {
+                            document.getElementById('zzz-resume-modal').style.display = 'none';
+
+                            // Simulate sleep farm
+                            const timeElapsedMs = Date.now() - (state.zzzTimestamp || Date.now());
+                            const results = globals.battleSystem.runFastForward(timeElapsedMs);
+
+                            state.isZzZMode = false;
+                            state.zzzTimestamp = null;
+                            storage.save(state);
+
+                            // Show results modal
+                            document.getElementById('zzz-results-content').innerHTML = `
+                                <b>Time offline:</b> ${Math.floor(timeElapsedMs / 60000)} minutes<br>
+                                <b>Money Earned:</b> $${results.money}<br>
+                                <b>Pokémon Caught:</b> ${results.caught}<br>
+                                <b>Shinies Caught:</b> ${results.shinies}<br>
+                                <b>Fainted:</b> ${results.fainted ? '<span style="color:red">Yes (Returned to PokeCenter)</span>' : 'No'}<br>
+                            `;
+                            document.getElementById('zzz-results-modal').style.display = 'flex';
+                            document.getElementById('btn-zzz-results-close').onclick = () => {
+                                document.getElementById('zzz-results-modal').style.display = 'none';
+                                updateUI();
+                            };
+
+                            if (results.fainted) {
+                                state.currentRoute = "PokeCenter & PokeMarket";
+                                window.navigateToLocation("PokeCenter & PokeMarket");
+                            } else {
+                                state.currentRoute = "Professor Oak Lab";
+                                switchView("PROF_OAK_LAB");
+                            }
+                        };
+                    } else {
+                        // Saved profiles always start at Oak's Lab and are free to explore
+                        state.currentRoute = "Professor Oak Lab";
+                        switchView("PROF_OAK_LAB");
+                    }
                 }
             };
 
@@ -865,6 +917,25 @@ async function init() {
     bindBtn('btn-bonus-candy', () => { if(!checkCombatLock()) showBonusCandyModal(); });
     bindBtn('btn-challenges', () => { if(!checkCombatLock()) window.showChallengesModal(); });
     bindBtn('btn-calendar', () => { if(!checkCombatLock()) showCalendar(); });
+
+    bindBtn('btn-sleep', () => {
+        if(!checkCombatLock()) {
+            document.getElementById('zzz-confirmation-modal').style.display = 'flex';
+        }
+    });
+
+    bindBtn('btn-zzz-no', () => {
+        document.getElementById('zzz-confirmation-modal').style.display = 'none';
+    });
+
+    bindBtn('btn-zzz-yes', () => {
+        state.isZzZMode = true;
+        state.zzzTimestamp = Date.now();
+        state.settings.isSleepModeActive = true;
+        state.stats.lastSaveTime = Date.now();
+        storage.save(state);
+        window.close();
+    });
 
     window.showBackpackAndFocus = (tab) => {
         if(!checkCombatLock()) {

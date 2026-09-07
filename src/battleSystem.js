@@ -819,6 +819,175 @@ class BattleSystem {
             }
         }
     }
+
+    runFastForward(elapsedMs) {
+        let results = {
+            money: 0,
+            caught: 0,
+            shinies: 0,
+            fainted: false
+        };
+
+        if (this.state.party.length === 0) return results;
+
+        let totalSimTime = 0;
+        let lastKnownMoney = this.state.trainer.money;
+        let lastKnownCaught = this.state.stats.caught;
+        let lastKnownShinies = this.state.stats.shiniesCaught || 0;
+
+        // Ensure we don't simulate too many frames and hang the browser if time is huge
+        // Limit to approx max of 24h of simulation steps, but it evaluates fast
+        const maxTime = Math.min(elapsedMs, 24 * 60 * 60 * 1000);
+        const route = this.state.config.routes.find(r => r.name === this.state.currentRoute);
+
+        if (!route && this.state.currentRoute !== "Casino - Eeveelutions" && !this.state.currentRoute.startsWith("Casino")) {
+            return results; // Can't farm without a route
+        }
+
+        while (totalSimTime < maxTime) {
+            // Check if wiped out
+            if (!this.state.party.some(p => p.currentHp > 0)) {
+                results.fainted = true;
+                break;
+            }
+
+            let leader = this.state.party[0];
+
+            // Generate Encounter explicitly without UI triggers
+            let pokemonBase;
+            let level;
+            let q;
+            let ivs;
+
+            // Simplify spawn logic for background
+            const rand = Math.random();
+            let cumulative = 0;
+            let selectedSpawn = route.spawns[0];
+            for (const spawn of route.spawns) {
+                cumulative += spawn.chance;
+                if (rand <= cumulative) {
+                    selectedSpawn = spawn;
+                    break;
+                }
+            }
+            if(!selectedSpawn) {
+                totalSimTime += 5000;
+                continue;
+            }
+
+            pokemonBase = this.state.config.pokemonData.find(p => p.id === selectedSpawn.pokemonId);
+            level = Math.floor(Math.random() * (selectedSpawn.maxLevel - selectedSpawn.minLevel + 1)) + selectedSpawn.minLevel;
+
+            if (this.state.currentRoute === "Route 1") {
+                const playerLevel = leader.level || 1;
+                level = playerLevel === 1 ? 1 : (Math.random() < 0.5 ? 1 : 2);
+            }
+
+            q = mathEngine.generateQuality(this.state.stats, this.state.casinoDoubleShiny);
+            ivs = mathEngine.generateIVs(this.state.stats, q.name === "Shiny");
+
+            const stats = {
+                hp: mathEngine.calculateHP(pokemonBase.hp, ivs.hp, level, q.q),
+                atk: mathEngine.calculateStat(pokemonBase.atk, ivs.atk, level, q.q),
+                def: mathEngine.calculateStat(pokemonBase.def, ivs.def, level, q.q),
+                spa: mathEngine.calculateStat(pokemonBase.spa, ivs.spa, level, q.q),
+                spd: mathEngine.calculateStat(pokemonBase.spd, ivs.spd, level, q.q),
+                spe: mathEngine.calculateStat(pokemonBase.spe, ivs.spe, level, q.q),
+            };
+
+            const totalIV = ivs.hp + ivs.atk + ivs.def + ivs.spa + ivs.spd + ivs.spe;
+            const bst = pokemonBase.hp + pokemonBase.atk + pokemonBase.def + pokemonBase.spa + pokemonBase.spd + pokemonBase.spe;
+            const ev = mathEngine.calculateEV(bst, level, q.q, totalIV);
+
+            this.activeEncounter = {
+                id: pokemonBase.id,
+                name: pokemonBase.name,
+                types: pokemonBase.types,
+                level: level,
+                qualityName: q.name,
+                quality: q.q,
+                ivs: ivs,
+                currentStats: stats,
+                maxHp: stats.hp,
+                currentHp: stats.hp,
+                ev: ev,
+                bst: bst,
+                moves: this.getLearnsetMoves(pokemonBase, level)
+            };
+
+            // Estimate battle time (e.g. 1-3 seconds based on speed) + 5s base search
+            let searchTime = 5000;
+            let leaderSpe = leader.currentStats ? leader.currentStats.spe : 10;
+            let enemySpe = this.activeEncounter.currentStats ? this.activeEncounter.currentStats.spe : 10;
+
+            // Adjust search time based on leader speed
+            searchTime = Math.max(500, searchTime * (10 / Math.max(10, leaderSpe)));
+
+            // Rough combat estimate:
+            let strikes = Math.max(1, Math.ceil(this.activeEncounter.maxHp / Math.max(1, leader.currentStats.atk)));
+            let combatTime = strikes * 1000; // 1 second per strike roughly
+
+            // Take damage roughly based on enemy strikes
+            let enemyStrikes = Math.max(1, Math.ceil(leader.currentHp / Math.max(1, this.activeEncounter.currentStats.atk)));
+
+            // Win check
+            if (strikes <= enemyStrikes) {
+                // Win
+                let damageTaken = strikes * this.activeEncounter.currentStats.atk * 0.2; // Rough mitigation
+                leader.currentHp -= Math.max(0, damageTaken);
+
+                if (leader.currentHp <= 0) {
+                    const fainted = this.state.party.shift();
+                    this.state.party.push(fainted);
+                } else {
+                    if (this.state.settings.autoPotion) {
+                         this.tryUsePotion(leader);
+                    }
+
+                    // Simplified handleEnemyDefeat avoiding UI loops/searchNext
+                    if ((this.state.stats.bonusCandyDefeats || 0) < 1000) {
+                        this.state.stats.bonusCandyDefeats = (this.state.stats.bonusCandyDefeats || 0) + 1;
+                    }
+
+                    if (this.state.settings.autoCatch) {
+                        const caught = this.throwPokeball();
+                        if (caught) {
+                            let caughtPokemon = JSON.parse(JSON.stringify(this.activeEncounter));
+                            caughtPokemon.xp = mathEngine.calculateTotalXP(caughtPokemon.level);
+                            this.state.storage.push(caughtPokemon);
+                            this.state.stats.caught++;
+                            if (this.activeEncounter.qualityName === "Shiny") this.state.stats.shiniesCaught = (this.state.stats.shiniesCaught || 0) + 1;
+                            // Simplification: Omitting other stats trackers for speed in offline simulation
+                        }
+                    }
+
+                    const lootMultiplier = 1 + (0.01 * (this.state.stats.greenCandies || 0));
+                    this.grantXP(leader, ev);
+                    this.state.trainer.money += Math.floor(ev * lootMultiplier);
+                    this.state.stats.battlesWon++;
+                }
+            } else {
+                // Lose
+                leader.currentHp = 0;
+                const fainted = this.state.party.shift();
+                this.state.party.push(fainted);
+            }
+
+            totalSimTime += searchTime + combatTime;
+        }
+
+        results.money = this.state.trainer.money - lastKnownMoney;
+        results.caught = this.state.stats.caught - lastKnownCaught;
+        results.shinies = (this.state.stats.shiniesCaught || 0) - lastKnownShinies;
+
+        if (results.fainted) {
+            // Heal all
+            this.state.party.forEach(p => p.currentHp = p.maxHp);
+            this.state.currentRoute = "PokeCenter & PokeMarket";
+        }
+
+        return results;
+    }
 }
 
 export default BattleSystem;
