@@ -9,7 +9,6 @@ class BattleSystem {
         this.activeEncounter = null;
         this.combatLoop = null;
         this.isSearching = false;
-        this.isFainting = false;
 
         this.gymState = {
             isActive: false,
@@ -186,11 +185,6 @@ class BattleSystem {
     }
 
     async searchNext() {
-        // Prevent searching if we are in the middle of fading out/fainting
-        if (this.isFainting) {
-            return;
-        }
-
         if (this.state.party.every(p => p.currentHp <= 0)) {
             this.handleWipeout();
             return;
@@ -445,8 +439,6 @@ class BattleSystem {
     }
 
     scheduleTurn() {
-        if (this.isFainting) return;
-
         if (!this.activeEncounter || this.activeEncounter.currentHp <= 0) return;
         const leader = this.state.party[0];
         if (leader.currentHp <= 0) {
@@ -474,8 +466,6 @@ class BattleSystem {
     }
 
     executeTurn(attacker, defender) {
-        if (this.isFainting) return;
-
         if (!this.activeEncounter) return;
 
         const leader = this.state.party[0];
@@ -520,9 +510,7 @@ class BattleSystem {
                 if (defender === this.activeEncounter) {
                     this.handleEnemyDefeat();
                 } else {
-                    if (!this.isFainting) {
-                        this.handleFaint();
-                    }
+                    this.handleFaint();
                 }
             } else {
                 this.scheduleNextStrike(attacker, defender);
@@ -531,8 +519,6 @@ class BattleSystem {
     }
 
     scheduleNextStrike(attacker, defender) {
-        if (this.isFainting) return;
-
         if (!this.activeEncounter) return;
 
         const leader = this.state.party[0];
@@ -823,39 +809,16 @@ class BattleSystem {
     }
 
     handleFaint() {
-        this.isFainting = true;
-        this.updateUI(); // This will trigger the fade out via UI logic
+        // move fainted pokemon to end of party
+        const fainted = this.state.party.shift();
+        this.state.party.push(fainted);
 
-        // Wait 4 seconds (2s fade out + 2s extra wait)
-        setTimeout(() => {
-            // move fainted pokemon to end of party
-            const fainted = this.state.party.shift();
-            this.state.party.push(fainted);
-
-            this.isFainting = false;
-
-            if (this.state.party[0].currentHp <= 0) {
-                this.handleWipeout();
-            } else {
-                // Prepare slide in duration for next pokemon
-                const slideDelay = 1000 / this.state.settings.gameSpeed; // Arbitrary 1s slide in
-                this.isPlayerPreSlidingIn = true;
-                this.updateUI(); // Move offscreen
-
-                setTimeout(() => {
-                    this.isPlayerPreSlidingIn = false;
-                    this.isPlayerSlidingIn = true;
-                    this.slideDuration = slideDelay;
-                    this.updateUI(); // Set position and start sliding animation
-
-                    setTimeout(() => {
-                        this.isPlayerSlidingIn = false;
-                        this.updateUI();
-                        this.scheduleTurn(); // restart turn with new leader
-                    }, slideDelay);
-                }, 50); // slight delay to ensure offscreen position is applied
-            }
-        }, 4000 / this.state.settings.gameSpeed);
+        if (this.state.party[0].currentHp <= 0) {
+            this.handleWipeout();
+        } else {
+            this.updateUI();
+            this.scheduleTurn(); // restart turn with new leader
+        }
     }
 
     handleWipeout() {
@@ -863,8 +826,10 @@ class BattleSystem {
         this.activeEncounter = null;
 
         // Penalty: deduct 10% gold
-        const penalty = Math.floor(this.state.trainer.money * 0.1);
-        this.state.trainer.money -= penalty;
+        this.state.trainer.money = Math.floor(this.state.trainer.money * 0.9);
+
+        // Heal all party to full
+        this.state.party.forEach(p => p.currentHp = p.maxHp);
 
         if (this.gymState && this.gymState.isActive) {
             // Reset gym state entirely if wiped out
@@ -877,18 +842,13 @@ class BattleSystem {
                 window.navigateToLocation("PokeCenter & PokeMarket");
             }
             this.updateUI();
-            setTimeout(() => {
-                alert(`All party fainted and you were charged $${penalty} to be brought back here. [Enter] Stay safe next time.`);
-            }, 100);
         } else {
-            this.state.currentRoute = "PokeCenter & PokeMarket";
-            if (typeof window.navigateToLocation === 'function') {
-                window.navigateToLocation("PokeCenter & PokeMarket");
-            }
-            this.updateUI();
+            // Return to poke center (simulated by just waiting and searching again for idle game)
             setTimeout(() => {
-                alert(`All party fainted and you were charged $${penalty} to be brought back here. [Enter] Stay safe next time.`);
-            }, 100);
+                this.searchNext();
+            }, 5000 / this.state.settings.gameSpeed);
+
+            this.updateUI();
         }
     }
 
