@@ -1083,3 +1083,41 @@ async function init() {
 
 // Ensure the UI script runs
 init();
+
+
+window.showGameAlert = function(message) {
+    let alertBox = document.getElementById('game-alert-toast');
+    if (!alertBox) {
+        alertBox = document.createElement('div');
+        alertBox.id = 'game-alert-toast';
+        alertBox.style.position = 'fixed';
+        alertBox.style.top = '20px';
+        alertBox.style.left = '50%';
+        alertBox.style.transform = 'translateX(-50%)';
+        alertBox.style.backgroundColor = 'rgba(0, 0, 0, 0.85)';
+        alertBox.style.color = '#fff';
+        alertBox.style.padding = '15px 30px';
+        alertBox.style.borderRadius = '10px';
+        alertBox.style.border = '2px solid #3498db';
+        alertBox.style.boxShadow = '0 4px 15px rgba(0,0,0,0.5)';
+        alertBox.style.zIndex = '9999';
+        alertBox.style.fontSize = '18px';
+        alertBox.style.fontWeight = 'bold';
+        alertBox.style.textAlign = 'center';
+        alertBox.style.pointerEvents = 'none';
+        alertBox.style.opacity = '0';
+        alertBox.style.transition = 'opacity 0.3s ease-in-out';
+        document.body.appendChild(alertBox);
+    }
+
+    alertBox.innerHTML = message;
+    alertBox.style.opacity = '1';
+
+    if (window.gameAlertTimeout) {
+        clearTimeout(window.gameAlertTimeout);
+    }
+
+    window.gameAlertTimeout = setTimeout(() => {
+        alertBox.style.opacity = '0';
+    }, 2500);
+};
