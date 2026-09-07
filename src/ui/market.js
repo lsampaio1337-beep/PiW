@@ -348,7 +348,12 @@ export function renderPokeMarketSellTab(category) {
         state.storage.forEach(p => {
             let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
 
-            if (filterName && !(p.name && p.name.toLowerCase().includes(filterName)) && !(p.id && p.id.toLowerCase().includes(filterName))) return;
+            let pName = p.name || p.id;
+            if (typeof p.id === 'number' && state.config && state.config.pokemonData) {
+                const pd = state.config.pokemonData.find(pd => pd.id === p.id);
+                if (pd) pName = p.name || pd.name;
+            }
+            if (filterName && !(pName && pName.toString().toLowerCase().includes(filterName)) && !(p.id && p.id.toString().toLowerCase().includes(filterName))) return;
             if (!isNaN(filterLevelMin) && p.level < filterLevelMin) return;
             if (!isNaN(filterLevelMax) && p.level > filterLevelMax) return;
             if (!isNaN(filterQMin) && p.quality < filterQMin) return;
