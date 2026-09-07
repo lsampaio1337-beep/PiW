@@ -841,12 +841,63 @@ async function init() {
                             state.zzzTimestamp = null;
                             storage.save(state);
 
+
+                            function formatFarmMoney(num) {
+                                if (num === 0) return "0";
+                                if (num < 1000) return num.toString();
+
+                                let suffix = '';
+                                let val = num;
+                                if (num >= 1000000000000) { suffix = 'T'; val = num / 1000000000000; }
+                                else if (num >= 1000000000) { suffix = 'B'; val = num / 1000000000; }
+                                else if (num >= 1000000) { suffix = 'M'; val = num / 1000000; }
+                                else if (num >= 1000) { suffix = 'K'; val = num / 1000; }
+
+                                let rounded = Math.floor(val * 10) / 10;
+
+                                let origRecomputed = rounded;
+                                if (suffix === 'K') origRecomputed *= 1000;
+                                else if (suffix === 'M') origRecomputed *= 1000000;
+                                else if (suffix === 'B') origRecomputed *= 1000000000;
+                                else if (suffix === 'T') origRecomputed *= 1000000000000;
+
+                                let prefix = origRecomputed !== num ? '~' : '';
+                                return prefix + rounded.toFixed(1).replace(/\.0$/, '') + suffix;
+                            }
+
+                            // Format Time
+                            let totalSeconds = Math.floor(timeElapsedMs / 1000);
+                            let d = Math.floor(totalSeconds / (3600 * 24));
+                            let h = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+                            let m = Math.floor((totalSeconds % 3600) / 60);
+                            let s = totalSeconds % 60;
+
+                            let timeStr = "";
+                            if (d > 0) timeStr += `${d}d`;
+                            if (h > 0 || d > 0) timeStr += `${h}h`;
+                            if (m > 0 || h > 0 || d > 0) timeStr += `${m}m`;
+                            timeStr += `${s}s`; // Always display seconds
+
+                            // Items Used Names
+                            let ballUsedStr = "No ball used";
+                            if (state.settings.activeBallTier >= 0) {
+                                ballUsedStr = `${state.config.balance.items.pokeballs[state.settings.activeBallTier].name} Used: ${results.ballsUsed}`;
+                            }
+
+                            let potionUsedStr = "No potion used";
+                            if (state.settings.activePotionTier >= 0) {
+                                potionUsedStr = `${state.config.balance.items.potions[state.settings.activePotionTier].name} Used: ${results.potionsUsed}`;
+                            }
+
                             // Show results modal
                             document.getElementById('zzz-results-content').innerHTML = `
-                                <b>Time offline:</b> ${Math.floor(timeElapsedMs / 60000)} minutes<br>
-                                <b>Money Earned:</b> $${results.money}<br>
+                                <b>Time offline:</b> ${timeStr.trim()}<br>
+                                <b>Route:</b> ${state.currentRoute}<br>
+                                <b>Money Earned:</b> $${formatFarmMoney(results.money)}<br>
                                 <b>Pokémon Caught:</b> ${results.caught}<br>
                                 <b>Shinies Caught:</b> ${results.shinies}<br>
+                                <b>${ballUsedStr}</b><br>
+                                <b>${potionUsedStr}</b><br>
                                 <b>Fainted:</b> ${results.fainted ? '<span style="color:red">Yes (Returned to PokeCenter)</span>' : 'No'}<br>
                             `;
                             document.getElementById('zzz-results-modal').style.display = 'flex';
