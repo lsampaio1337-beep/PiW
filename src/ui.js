@@ -743,7 +743,7 @@ async function init() {
                 }
             }
 
-            let zzzText = pData.isZzZMode ? ` - ZzZ` : '';
+            let zzzText = pData.isZzZMode ? ` - ZzZ: ${pData.currentRoute || 'Unknown Route'}` : '';
 
             const btn = document.createElement('button');
             btn.style.padding = "10px";
