@@ -5,7 +5,7 @@ export function renderPokeballsTab(area) {
     let content = `
         <div style="display: flex; flex-direction: column; width: 100%; height: 100%; --m-width: min(90vw, 825px);">
             <h3 style="text-align: center; margin-top: 0; color: #ddd; font-size: calc(var(--m-width) * 0.022);">Select Ball to auto use during battles.</h3>
-            <div style="display: flex; flex-wrap: wrap; gap: calc(var(--m-width) * 0.018); justify-content: center; overflow-y: auto; flex: 1; padding: calc(var(--m-width) * 0.012);">
+            <div style="display: flex; flex-wrap: wrap; gap: calc(var(--m-width) * 0.018); justify-content: center; align-content: flex-start; overflow-y: auto; flex: 1; padding: calc(var(--m-width) * 0.012);">
     `;
 
     state.config.balance.items.pokeballs.forEach((b, idx) => {

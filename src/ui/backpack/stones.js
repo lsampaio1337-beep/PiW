@@ -10,7 +10,7 @@ export function renderStonesTab(area) {
     ];
 
     let content = `
-        <div style="display: flex; flex-direction: column; width: 100%; height: 100%; --m-width: min(90vw, 825px);">
+        <div style="display: flex; flex-direction: column; width: 100%; height: 100%; --m-width: min(95vw, 1200px);">
             <div style="display: grid; grid-template-columns: repeat(6, calc(var(--m-width) * 0.145)); gap: calc(var(--m-width) * 0.018); justify-content: center; width: 100%; padding: calc(var(--m-width) * 0.012); overflow-y: auto;">
     `;
 

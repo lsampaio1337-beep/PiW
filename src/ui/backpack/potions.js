@@ -5,13 +5,14 @@ export function renderPotionsTab(area) {
     let content = `
         <div style="display: flex; flex-direction: column; width: 100%; height: 100%; --m-width: min(90vw, 825px);">
             <h3 style="text-align: center; margin-top: 0; color: #ddd; font-size: calc(var(--m-width) * 0.022);">Select Potion to auto use during battles.</h3>
-            <div style="display: flex; flex-wrap: wrap; gap: calc(var(--m-width) * 0.018); justify-content: center; overflow-y: auto; flex: 1; padding: calc(var(--m-width) * 0.012);">
+            <div style="display: flex; flex-wrap: wrap; gap: calc(var(--m-width) * 0.018); justify-content: center; align-content: flex-start; overflow-y: auto; flex: 1; padding: calc(var(--m-width) * 0.012);">
     `;
 
     const potions = state.config.balance.items.potions;
 
     for (let idx = 0; idx < potions.length; idx++) {
         let p = potions[idx];
+        if (p.name === 'Max Potion') continue;
         let inventoryName = p.name;
         if (p.name === 'Regular Potion') inventoryName = 'Regular Potion';
         if (p.name === 'Big') inventoryName = 'Big Potion';
