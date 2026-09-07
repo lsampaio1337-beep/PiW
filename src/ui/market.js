@@ -70,6 +70,9 @@ export function openPokeMarketBuy() {
             </div>
 
             <div style="margin-bottom: 20px; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                <label style="font-weight: bold; font-size: 18px; color: #2ecc71;">Money: $<span id="market-trainer-money">${state.trainer.money.toLocaleString()}</span></label>
+            </div>
+            <div style="margin-bottom: 20px; display: flex; align-items: center; justify-content: center; gap: 10px;">
                 <label style="font-weight: bold; font-size: 18px;">Quantity to Buy:</label>
                 <input type="text" id="market-global-qty" value="1" oninput="window.updateMarketPrices()" style="width: 80px; padding: 5px; font-size: 18px; text-align: center; border-radius: 5px; border: 1px solid #ccc;">
             </div>
@@ -210,7 +213,7 @@ export function renderPokeMarketTab(category) {
         }));
     }
 
-    let html = `<div style="display: grid; grid-template-columns: repeat(${cols}, 120px); gap: 15px; justify-content: center; width: 100%;">`;
+    let html = `<div style="display: grid; grid-template-columns: repeat(${cols}, minmax(0, 120px)); gap: 15px; justify-content: center; width: 100%;">`;
     items.forEach(item => {
         let displayName = item.name;
         if (category === 'potions') displayName = displayName.replace(' Potion', '<br>Potion');
@@ -219,12 +222,12 @@ export function renderPokeMarketTab(category) {
         html += `
             <div class="market-item-card" data-price="${item.price}" data-id="${item.name}" data-category="${category}"
                 onclick="window.buyItem('${item.name}', ${item.price}, '${category}')"
-                style="background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; padding: 10px; text-align: center; cursor: pointer; transition: transform 0.2s; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                <div style="font-size: 14px; font-weight: bold; margin-bottom: 5px; height: 32px; display: flex; align-items: center; justify-content: center; text-align: center;">${displayName}</div>
-                <img src="${item.img}" style="width: 60px; height: 60px; object-fit: contain; margin-bottom: 5px;">
-                ${category !== 'stones' ? `<div style="font-size: 12px; color: #f1c40f; margin-bottom: 5px;">${item.attrLabel}</div>` : ''}
-                <div style="font-size: 12px; color: #bdc3c7;">Base: $${formatMarketNumber(item.price)}</div>
-                <div class="market-final-price" style="font-size: 14px; font-weight: bold; color: #2ecc71; margin-top: 5px;">$${formatMarketNumber(item.price)}</div>
+                style="background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; padding: 8%; text-align: center; cursor: pointer; transition: transform 0.2s; display: flex; flex-direction: column; align-items: center; justify-content: center; container-type: inline-size;">
+                <div style="font-size: clamp(8px, 12cqi, 14px); font-weight: bold; margin-bottom: 5%; height: 25cqi; display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.1;">${displayName}</div>
+                <img src="${item.img}" style="width: 60cqw; height: 60cqw; max-width: 60px; max-height: 60px; object-fit: contain; margin-bottom: 5%;">
+                ${category !== 'stones' ? `<div style="font-size: clamp(7px, 10cqi, 12px); color: #f1c40f; margin-bottom: 5%; line-height: 1.1;">${item.attrLabel}</div>` : ''}
+                <div style="font-size: clamp(7px, 10cqi, 12px); color: #bdc3c7; line-height: 1.1;">Base: $${formatMarketNumber(item.price)}</div>
+                <div class="market-final-price" style="font-size: clamp(8px, 12cqi, 14px); font-weight: bold; color: #2ecc71; margin-top: 5%; line-height: 1.1;">$${formatMarketNumber(item.price)}</div>
             </div>
         `;
     });
@@ -248,6 +251,8 @@ export function buyItem(itemId, baseCost, category) {
         }
         state.backpack[category][itemId] += qty;
         updateUI();
+        const moneyLabel = document.getElementById('market-trainer-money');
+        if (moneyLabel) moneyLabel.textContent = state.trainer.money.toLocaleString();
         alert(`Bought ${qty.toLocaleString()}x ${itemId} for $${totalCost.toLocaleString()}!`);
     } else {
         alert(`Not enough money! You need $${totalCost.toLocaleString()} but only have $${state.trainer.money.toLocaleString()}.`);
