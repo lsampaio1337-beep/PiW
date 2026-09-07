@@ -139,6 +139,7 @@ export function updateBattleArena() {
             }
         } else if (battleSystem && battleSystem.isSearching) {
 
+
             const hpContainerEnemy = document.getElementById('enemy-battle-hp-container');
             if (hpContainerEnemy) hpContainerEnemy.style.display = 'none';
 
@@ -149,8 +150,17 @@ export function updateBattleArena() {
                 elEnemySprite.style.display = 'block';
                 elEnemySide.style.transition = 'none';
                 elEnemySide.style.left = '35%'; // Matching active battle destination
-                if (elEnemySprite) elEnemySprite.style.top = '85%';
+
+                // Keep the correct height during searching phase
+                let enemyBaseTop = 85;
+                if (battleSystem && battleSystem.activeEncounter) {
+                    const e = battleSystem.activeEncounter;
+                    if (e.types.includes('Water')) enemyBaseTop = 90;
+                    if (e.types.includes('Flying') || e.types.includes('Wind')) enemyBaseTop = 75;
+                }
+                elEnemySprite.style.top = `${enemyBaseTop}%`;
             }
+
 
             const leader = state.party[0];
             const elPlayerSide = document.getElementById('player-side');

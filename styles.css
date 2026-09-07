@@ -186,29 +186,22 @@ input[type="number"] {
     width: auto;
     object-fit: contain;
     position: absolute;
+    left: 50%;
+    transform: translate(-50%, -100%);
     z-index: 10;
-    transform: translate(-50%, -100%); /* bottom up anchor point */
 }
 
 #player-sprite {
     height: 35vh;
-    min-height: 100px;
     width: auto;
-    margin-bottom: 10px;
-    transform: scaleX(-1); /* Face right */
     object-fit: contain;
-    position: relative;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -100%) scaleX(-1);
     z-index: 10;
 }
 
-#combat-log {
-    height: 100px;
-    background: rgba(0,0,0,0.8);
-    color: #0f0;
-    padding: 10px;
-    overflow-y: auto;
-    font-family: monospace;
-}
+
 
 #right-col {
     width: 300px;
