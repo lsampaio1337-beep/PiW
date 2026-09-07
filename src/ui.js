@@ -844,25 +844,7 @@ async function init() {
 
                             function formatFarmMoney(num) {
                                 if (num === 0) return "0";
-                                if (num < 1000) return num.toString();
-
-                                let suffix = '';
-                                let val = num;
-                                if (num >= 1000000000000) { suffix = 'T'; val = num / 1000000000000; }
-                                else if (num >= 1000000000) { suffix = 'B'; val = num / 1000000000; }
-                                else if (num >= 1000000) { suffix = 'M'; val = num / 1000000; }
-                                else if (num >= 1000) { suffix = 'K'; val = num / 1000; }
-
-                                let rounded = Math.floor(val * 10) / 10;
-
-                                let origRecomputed = rounded;
-                                if (suffix === 'K') origRecomputed *= 1000;
-                                else if (suffix === 'M') origRecomputed *= 1000000;
-                                else if (suffix === 'B') origRecomputed *= 1000000000;
-                                else if (suffix === 'T') origRecomputed *= 1000000000000;
-
-                                let prefix = origRecomputed !== num ? '~' : '';
-                                return prefix + rounded.toFixed(1).replace(/\.0$/, '') + suffix;
+                                return num.toLocaleString('en-US').replace(/,/g, '.');
                             }
 
                             // Format Time
@@ -917,14 +899,14 @@ async function init() {
                                     <!-- Caught Card -->
                                     <div style="background: rgba(255,255,255,0.05); border: 1px solid #475569; border-radius: 8px; padding: 12px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
                                         <div style="font-size: 11px; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;">Pokémon Caught</div>
-                                        <div style="font-size: 18px; font-weight: bold; color: #fff;">${results.caught}</div>
+                                        <div style="font-size: 18px; font-weight: bold; color: #fff;">${results.caught}/${results.encounters}</div>
                                     </div>
 
                                     <!-- Shinies Card -->
                                     <div style="background: rgba(255,255,255,0.05); border: 1px solid #475569; border-radius: 8px; padding: 12px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; overflow: hidden;">
                                         ${results.shinies > 0 ? '<div style="position: absolute; top: -10px; left: -10px; width: 150%; height: 150%; background: radial-gradient(circle, rgba(168,85,247,0.2) 0%, transparent 70%); pointer-events: none;"></div>' : ''}
                                         <div style="font-size: 11px; color: #d8b4fe; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; z-index: 1;">Shinies Caught</div>
-                                        <div style="font-size: 18px; font-weight: bold; color: #fff; z-index: 1;">${results.shinies}</div>
+                                        <div style="font-size: 18px; font-weight: bold; color: #fff; z-index: 1;">${results.shinies}/${results.shinyEncounters}</div>
                                     </div>
 
                                     <!-- Items Used Header -->
