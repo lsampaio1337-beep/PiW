@@ -1131,8 +1131,9 @@ window.enterSafariZone = () => {
         window.globals.battleSystem.activeEncounter = null;
         window.globals.battleSystem.isSearching = false;
         if (window.globals.battleSystem.gymState) window.globals.battleSystem.gymState.isActive = false;
-        window.globals.battleSystem.changeRoute("Safari Zone");
-        window.globals.battleSystem.startEncounter();
+        window.globals.battleSystem.state.currentRoute = "Safari Zone";
+        window.globals.battleSystem.searchNext();
+
     }
 };
 
