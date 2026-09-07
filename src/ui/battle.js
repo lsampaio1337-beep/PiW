@@ -19,7 +19,31 @@ export function updateBattleArena() {
             if (eHpBar) eHpBar.style.width = `${Math.min(100, (enemy.currentHp / enemy.maxHp) * 100)}%`;
 
             const eSprite = document.getElementById('gym-enemy-sprite');
+            const eSpriteContainer = document.getElementById('gym-enemy-side');
             if (eSprite) eSprite.src = `Assets/Pokemon Sprites/${enemy.qualityName === 'Shiny' ? enemy.id + '_shiny' : enemy.id}.png`;
+
+            if (eSpriteContainer) {
+                if (battleSystem.isSliding) {
+                    if (eSpriteContainer.dataset.sliding !== 'true') {
+                        eSpriteContainer.dataset.sliding = 'true';
+                        eSpriteContainer.style.transition = 'none';
+                        eSpriteContainer.style.left = '100%';
+                        eSpriteContainer.style.opacity = '1';
+                        // Trigger reflow
+                        void eSpriteContainer.offsetWidth;
+                        requestAnimationFrame(() => {
+                            requestAnimationFrame(() => {
+                                eSpriteContainer.style.transition = `left ${battleSystem.slideDuration}ms linear`;
+                                eSpriteContainer.style.left = '50%';
+                            });
+                        });
+                    }
+                } else {
+                    eSpriteContainer.dataset.sliding = 'false';
+                    eSpriteContainer.style.transition = 'none';
+                    eSpriteContainer.style.left = '50%';
+                }
+            }
 
             const leader = state.party[0];
             if (leader) {
