@@ -3,8 +3,9 @@ import { updateUI, switchView } from '../ui.js';
 import { setupMarket } from './market.js';
 
 export function showMap() {
-    if (state.stats.hasUnseenMap) {
+    if (state.stats.hasUnseenMap || state.stats.showMapOakNotification) {
         state.stats.hasUnseenMap = false;
+        state.stats.showMapOakNotification = false;
         updateUI();
     }
 
@@ -57,7 +58,12 @@ export function showMap() {
                 hasNewNotification = true;
             }
 
-            if (locationId === 'professor_oak_lab') markerImg = './Assets/Extra/Spot_Oak.png';
+            if (locationId === 'professor_oak_lab') {
+                markerImg = './Assets/Extra/Spot_Oak.png';
+                if (state.stats.showOakMarkerPulse) {
+                    hasNewNotification = true;
+                }
+            }
             else if (locationId === 'pokemon_center___market') markerImg = './Assets/Extra/Spot_PCPM.png';
             else if (locationId === 'indigo_plateu') markerImg = './Assets/Extra/Spot_E4.png';
             else if (locationId === 'safari_zone') markerImg = './Assets/Extra/Spot_Safariball.png';

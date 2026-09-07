@@ -156,9 +156,24 @@ export function updateTopbar() {
         }
     }
 
+    // Oak Task Notification Tracking
+    if (window.getOakTaskAvailableCount) {
+        let currentOakTasksCount = window.getOakTaskAvailableCount();
+        if (currentOakTasksCount > (state.stats.oakTasksAvailableCount || 0)) {
+            state.stats.showMapOakNotification = true;
+            state.stats.showOakMarkerPulse = true;
+            state.stats.showOakLobbyNotification = true;
+        } else if (currentOakTasksCount === 0) {
+            state.stats.showMapOakNotification = false;
+            state.stats.showOakMarkerPulse = false;
+            state.stats.showOakLobbyNotification = false;
+        }
+        state.stats.oakTasksAvailableCount = currentOakTasksCount;
+    }
+
     const mapNotification = document.getElementById('map-notification');
     if (mapNotification) {
-        if (state.stats.hasUnseenMap) {
+        if (state.stats.hasUnseenMap || state.stats.showMapOakNotification) {
             mapNotification.style.display = 'block';
         } else {
             mapNotification.style.display = 'none';
