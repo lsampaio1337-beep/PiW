@@ -272,7 +272,7 @@ export function updateBattleArena() {
              if (hpContainerPlayer) hpContainerPlayer.style.display = 'none';
         }
     }
-}
+
 
 
 /* removed TYPE_COLORS */
