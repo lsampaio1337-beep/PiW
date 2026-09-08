@@ -293,8 +293,7 @@ export function navigateToLocation(locationName) {
         else if (locationName.includes("Cinnabar")) bgImg = "BG-Gym-7-Cinnabar-Fire.png";
         else if (locationName.includes("Viridian Gym")) bgImg = "BG-Gym-8-Viridian-Ground.png";
         else if (locationName === "Indigo Plateu") {
-            // Pick a random E4 background for now, or the first one
-            bgImg = "BG-Elite4-1Lorelei.png";
+            bgImg = "BG-IndigoPlateau.png";
             lookupName = "Indigo Plateau"; // Correct spelling for the gyms config
         }
 
@@ -308,7 +307,8 @@ export function navigateToLocation(locationName) {
 
         let buttonHtml = '';
         if (gymConfig) {
-            buttonHtml = `<button onclick="window.startGymBattle('${lookupName}')" style="padding: 10px 20px; font-size: 16px; margin-top: 10px; cursor: pointer;">Battle Gym</button>`;
+            let buttonText = lookupName === "Indigo Plateau" ? "Challange Elite 4 and Champion" : "Battle Gym";
+            buttonHtml = `<button onclick="window.startGymBattle('${lookupName}')" style="padding: 10px 20px; font-size: 16px; margin-top: 10px; cursor: pointer;">${buttonText}</button>`;
         }
 
         vGym.innerHTML = `
