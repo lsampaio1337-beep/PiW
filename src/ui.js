@@ -80,6 +80,12 @@ window.completeChallenge = function() {
     let currentIndex = state.stats.completedChallenges || 0;
     if (state.config.unlocks && currentIndex < state.config.unlocks.length) {
         let unlock = state.config.unlocks[currentIndex];
+        window.currentChallengeTarget = unlock;
+        if (unlock.gift) {
+            if (!state.stats.pendingGifts) state.stats.pendingGifts = [];
+            state.stats.pendingGifts.push({ type: 'item', item: unlock.gift.item || unlock.gift, count: unlock.gift.count || 1 });
+            state.stats.giftIconUnlocked = true;
+        }
         if (unlock.unlocks) {
             for (let newRoute of unlock.unlocks) {
                 if (!state.stats.newRoutes) state.stats.newRoutes = [];
@@ -108,6 +114,44 @@ window.completeChallenge = function() {
 
 
 
+
+window.cheatProgressChallenge = function() {
+    if (window.currentChallengeTarget) {
+        let req = window.currentChallengeTarget.requirements;
+        if (req) {
+            if (req.catchSpecies) {
+                req.catchSpecies.forEach(r => state.stats.caughtSpecies[r.species] = (state.stats.caughtSpecies[r.species] || 0) + r.count);
+            }
+            if (req.catchEachFromSlotMachine) {
+                if (req.catchEachFromSlotMachine.machines) {
+                    req.catchEachFromSlotMachine.machines.forEach(m => {
+                        state.stats.caughtSpecies[m[0]] = (state.stats.caughtSpecies[m[0]] || 0) + 1;
+                    });
+                } else if (req.catchEachFromSlotMachine.speciesList) {
+                    req.catchEachFromSlotMachine.speciesList.forEach(s => {
+                        state.stats.caughtSpecies[s] = (state.stats.caughtSpecies[s] || 0) + 1;
+                    });
+                }
+            }
+            if (req.catchByType) {
+                let typeKey = req.catchByType.type + "_Any";
+                if (!state.stats.challengeCaughtSpecific) state.stats.challengeCaughtSpecific = {};
+                state.stats.challengeCaughtSpecific[typeKey] = (state.stats.challengeCaughtSpecific[typeKey] || 0) + req.catchByType.count;
+            }
+            if (req.earnBadge) {
+                state.trainer.badges = Math.max(state.trainer.badges, req.earnBadge.badgeCount);
+            }
+            if (req.defeatEliteFourAndChampion) {
+                if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};
+                state.stats.defeatedBosses["Elite 4 Lorelei"] = true;
+                state.stats.defeatedBosses["Champion Rival"] = true;
+            }
+        }
+        window.showChallengesModal(window.currentChallengeTarget.areaId); // refresh
+        if (window.updateUI) window.updateUI();
+    }
+};
+
 window.showChallengesModal = function() {
     if (!state.config.unlocks) return;
 
@@ -123,9 +167,18 @@ window.showChallengesModal = function() {
         html += `<div style="text-align: center; font-size: 16px; color: #aaa;">No active Challenge</div>`;
     } else {
         let unlock = state.config.unlocks[currentIndex];
+        window.currentChallengeTarget = unlock;
         let cData = getChallengeData(unlock);
 
+
         let rewardsStr = unlock.unlocks ? unlock.unlocks.join(", ") : "Next Area";
+        if (unlock.gift) rewardsStr += " + Gift";
+
+
+
+        html += `<div style="text-align: center; margin-top: 15px;">
+                     <button id="btn-cheat-challenge" onclick="window.cheatProgressChallenge()" style="padding: 10px 20px; font-size: 16px; font-weight: bold; background-color: orange; color: white; border: none; border-radius: 5px; cursor: pointer;">Cheat Progress Challanges</button>
+                 </div>`;
 
         html += `<div style="margin-bottom: 5px;"><b>Requirements:</b></div>
                  <ul style="margin-top: 0; padding-left: 20px;">`;
@@ -157,7 +210,10 @@ window.showChallengesModal = function() {
              let pUnlock = state.config.unlocks[i];
              // Fake the data slightly to make it look completed, though getChallengeData will naturally evaluate to true
              let pData = getChallengeData(pUnlock);
+
              let pRewards = pUnlock.unlocks ? pUnlock.unlocks.join(", ") : "Next Area";
+             if (pUnlock.gift) pRewards += " + Gift";
+
 
              html += `<div style="border: 1px solid #333; padding: 10px; border-radius: 5px; background-color: rgba(255,255,255,0.05);">
                           <div style="color: #4CAF50; font-weight: bold; margin-bottom: 5px;">Challenge ${i+1}</div>

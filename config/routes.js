@@ -470,6 +470,7 @@ export const unlocks = [
   },
   {
     "areaId": "Route 2",
+    "gift": { "item": "Pokeball", "count": 10 },
     "unlocks": [
       "Viridian Forest"
     ],
@@ -488,6 +489,7 @@ export const unlocks = [
   },
   {
     "areaId": "Viridian Forest",
+    "gift": { "item": "Greatball", "count": 10 },
     "unlocks": [
       "Pewter Gym"
     ],
@@ -568,7 +570,7 @@ export const unlocks = [
   {
     "areaId": "Cerulean Gym",
     "unlocks": [
-      "Route 24 & 25"
+      "Route 24"
     ],
     "requirements": {
       "earnBadge": {
@@ -579,7 +581,21 @@ export const unlocks = [
     }
   },
   {
-    "areaId": "Route 24 & 25",
+    "areaId": "Route 24",
+    "unlocks": [
+      "Route 25"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Abra",
+          "count": 2
+        }
+      ]
+    }
+  },
+  {
+    "areaId": "Route 25",
     "unlocks": [
       "Route 5"
     ],
@@ -726,6 +742,21 @@ export const unlocks = [
       "catchByType": {
         "type": "Fire",
         "count": 10
+      }
+    }
+  },
+  {
+    "areaId": "Casino",
+    "unlocks": [],
+    "requirements": {
+      "catchEachFromSlotMachine": {
+        "machines": [
+          ["Bulbasaur", "Charmander", "Squirtle"],
+          ["Ivysaur", "Charmeleon", "Wartortle"],
+          ["Venusaur", "Charizard", "Blastoise"],
+          ["Eevee", "Vaporeon", "Jolteon", "Flareon"],
+          ["Lapras", "Porygon", "Lickitung"]
+        ]
       }
     }
   },
