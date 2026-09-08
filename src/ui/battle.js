@@ -4,88 +4,52 @@ import { state, globals } from '../state.js';
 export function updateBattleArena() {
     const battleSystem = globals.battleSystem;
     const inGym = battleSystem && battleSystem.gymState && battleSystem.gymState.isActive;
+    const inGymCombat = inGym && battleSystem.gymState.inCombat;
 
-    if (inGym) {
-        // Update live gym battle UI elements if they exist
-        const eNameGym = document.getElementById('gym-enemy-name');
-        if (eNameGym && battleSystem && battleSystem.activeEncounter) {
-            const enemy = battleSystem.activeEncounter;
-            eNameGym.innerText = `Lv.${enemy.level} ${enemy.name}`;
-
-            const eHpText = document.getElementById('gym-enemy-hp-text');
-            if (eHpText) eHpText.innerText = `${Math.floor(enemy.currentHp)}/${enemy.maxHp}`;
-
-            const eHpBar = document.getElementById('gym-enemy-hp-bar');
-            if (eHpBar) eHpBar.style.width = `${Math.min(100, (enemy.currentHp / enemy.maxHp) * 100)}%`;
-
-            const eSprite = document.getElementById('gym-enemy-sprite');
-            const eSpriteContainer = document.getElementById('gym-enemy-side');
-            if (eSprite) eSprite.src = `Assets/Pokemon Sprites/${enemy.qualityName === 'Shiny' ? enemy.id + '_shiny' : enemy.id}.png`;
-
-            if (eSpriteContainer) {
-                if (battleSystem.isSliding) {
-                    if (eSpriteContainer.dataset.sliding !== 'true') {
-                        eSpriteContainer.dataset.sliding = 'true';
-                        eSpriteContainer.style.transition = 'none';
-                        eSpriteContainer.style.left = '100%';
-                        eSpriteContainer.style.opacity = '1';
-                        // Trigger reflow
-                        void eSpriteContainer.offsetWidth;
-                        requestAnimationFrame(() => {
-                            requestAnimationFrame(() => {
-                                eSpriteContainer.style.transition = `left ${battleSystem.slideDuration}ms linear`;
-                                eSpriteContainer.style.left = '50%';
-                            });
-                        });
-                    }
-                } else {
-                    eSpriteContainer.dataset.sliding = 'false';
-                    eSpriteContainer.style.transition = 'none';
-                    eSpriteContainer.style.left = '50%';
-                }
+    const combatArena = document.getElementById('combat-arena');
+    if (combatArena) {
+        if (inGymCombat) {
+            const gym = battleSystem.gymState.gym;
+            if (gym.name === "Indigo Plateau") {
+                const trainerIndex = battleSystem.gymState.currentTrainerIndex;
+                const trainerBGs = [
+                    'BG-Elite4-1Lorelei.png',
+                    'BG-Elite4-2Bruno.png',
+                    'BG-Elite4-3Agatha.png',
+                    'BG-Elite4-4Lance.png',
+                    'BG-Elite4-5Champion.png'
+                ];
+                const bgImage = trainerBGs[trainerIndex] || 'BG.png';
+                combatArena.style.backgroundImage = `url('./Assets/BG/${bgImage}')`;
+            } else {
+                const gymIndex = state.config.gyms.findIndex(g => g.name === gym.name);
+                const gymBGs = [
+                    'BG-Gym-1-Pewter-Rock.png',
+                    'BG-Gym-2-Cerulean-Water.png',
+                    'BG-Gym-3-Vermilion-Electric.png',
+                    'BG-Gym-4-Celadon-Grass.png',
+                    'BG-Gym-5-Fuchsia-Poison.png',
+                    'BG-Gym-6-Saffron-Psychic.png',
+                    'BG-Gym-7-Cinnabar-Fire.png',
+                    'BG-Gym-8-Viridian-Ground.png'
+                ];
+                const bgImage = gymBGs[gymIndex] || 'BG.png';
+                combatArena.style.backgroundImage = `url('./Assets/BG/${bgImage}')`;
             }
-
-            const leader = state.party[0];
-            if (leader) {
-                const pNameGym = document.getElementById('gym-player-name');
-                if (pNameGym) pNameGym.innerText = `Lv.${leader.level} ${leader.name}`;
-
-                const pHpText = document.getElementById('gym-player-hp-text');
-                if (pHpText) pHpText.innerText = `${Math.floor(leader.currentHp)}/${leader.maxHp}`;
-
-                const pHpBar = document.getElementById('gym-player-hp-bar');
-                if (pHpBar) pHpBar.style.width = `${Math.min(100, (leader.currentHp / leader.maxHp) * 100)}%`;
-
-                const pSprite = document.getElementById('gym-player-sprite');
-                if (pSprite) {
-                    pSprite.src = `Assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? leader.id + '_shiny' : leader.id}.png`;
-                    if (leader.currentHp <= 0) {
-                        pSprite.style.transition = 'opacity 2s linear';
-                        pSprite.style.opacity = '0';
-                    } else if (battleSystem && battleSystem.isPlayerSlidingIn) {
-                        pSprite.style.transition = `left ${battleSystem.slideDuration}ms linear`;
-                        pSprite.style.left = '25%';
-                        pSprite.style.opacity = '1';
-                    } else if (battleSystem && battleSystem.isFainting) {
-                        // don't touch style while fading
-                    } else if (battleSystem && battleSystem.isPlayerPreSlidingIn) {
-                        pSprite.style.transition = 'none';
-                        pSprite.style.left = '-30%';
-                        pSprite.style.opacity = '1';
-                    } else {
-                        pSprite.style.transition = 'none';
-                        pSprite.style.left = '25%';
-                        pSprite.style.opacity = '1';
-                    }
-                }
-            }
+        } else if (state.currentRoute === 'Safari Zone') {
+            combatArena.style.backgroundImage = `url('./Assets/BG/BG-SafariZone.png')`;
+        } else if (state.currentRoute && state.currentRoute.startsWith('Casino')) {
+             combatArena.style.backgroundImage = `url('./Assets/BG/BG-Cassino.jpg')`;
+        } else {
+            combatArena.style.backgroundImage = `url('./Assets/BG/BG.png')`;
         }
-    } else {
-        // Standard Combat Arena
-        if (battleSystem && battleSystem.activeEncounter) {
-            const enemy = battleSystem.activeEncounter;
+    }
 
-            // Enemy HP UI
+    // Use standard combat arena for all battles
+    if (battleSystem && battleSystem.activeEncounter) {
+        const enemy = battleSystem.activeEncounter;
+
+        // Enemy HP UI
             const hpContainerEnemy = document.getElementById('enemy-battle-hp-container');
             const hpBarEnemy = document.getElementById('enemy-battle-hp-bar');
             const hpTextEnemy = document.getElementById('enemy-battle-hp-text');
@@ -115,12 +79,8 @@ export function updateBattleArena() {
                 elEnemySprite.src = `Assets/Pokemon Sprites/${enemy.qualityName === 'Shiny' ? enemy.id + '_shiny' : enemy.id}.png`;
                 elEnemySprite.style.display = 'block';
 
-                let baseBottom = 15; // 100 - 85
-                if (enemy.types.includes('Water')) baseBottom = 10; // 100 - 90
-                if (enemy.types.includes('Flying') || enemy.types.includes('Wind')) baseBottom = 25; // 100 - 75
-
                 elEnemySide.style.top = 'auto';
-                elEnemySide.style.bottom = `${baseBottom}%`;
+                elEnemySide.style.bottom = '10%'; // top 90%
 
                 if (battleSystem.isSliding) {
                     if (elEnemySide.dataset.sliding !== 'true') {
@@ -159,12 +119,8 @@ export function updateBattleArena() {
             const elPlayerSide = document.getElementById('player-side');
             if (leader && elPlayerSide) {
 
-                let baseBottom = 15; // 100 - 85
-                if (leader.types.includes('Water')) baseBottom = 10; // 100 - 90
-                if (leader.types.includes('Flying') || leader.types.includes('Wind')) baseBottom = 25; // 100 - 75
-
                 elPlayerSide.style.top = 'auto';
-                elPlayerSide.style.bottom = `${baseBottom}%`;
+                elPlayerSide.style.bottom = '10%'; // top 90%
                 elPlayerSide.style.left = '20%';
 
                 const hpContainerPlayer = document.getElementById('player-battle-hp-container');
@@ -227,7 +183,7 @@ export function updateBattleArena() {
                 elEnemySide.style.transition = 'none';
                 elEnemySide.style.left = '35%'; // Matching active battle destination
                 elEnemySide.style.top = 'auto';
-                elEnemySide.style.bottom = '15%'; // default
+                elEnemySide.style.bottom = '10%'; // top 90%
                 if (hpContainerEnemy) {
                     hpContainerEnemy.style.transition = 'none';
                     hpContainerEnemy.style.left = '35%';
@@ -237,12 +193,9 @@ export function updateBattleArena() {
             const leader = state.party[0];
             const elPlayerSide = document.getElementById('player-side');
             if (leader && elPlayerSide) {
-                let baseBottom = 15; // 100 - 85
-                if (leader.types.includes('Water')) baseBottom = 10; // 100 - 90
-                if (leader.types.includes('Flying') || leader.types.includes('Wind')) baseBottom = 25; // 100 - 75
 
                 elPlayerSide.style.top = 'auto';
-                elPlayerSide.style.bottom = `${baseBottom}%`;
+                elPlayerSide.style.bottom = '10%'; // top 90%
                 elPlayerSide.style.left = '20%';
 
                 const hpContainerPlayer = document.getElementById('player-battle-hp-container');
@@ -308,7 +261,7 @@ export function updateBattleArena() {
              if (hpContainerPlayer) hpContainerPlayer.style.display = 'none';
         }
     }
-}
+
 
 
 /* removed TYPE_COLORS */
@@ -334,11 +287,7 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
     ghost.style.left = '35%';
     ghost.style.transform = 'translateX(-50%)';
 
-    let baseBottom = 10;
-    if (activeEncounter.types && activeEncounter.types.includes('Water')) baseBottom = 5;
-    if (activeEncounter.types && (activeEncounter.types.includes('Flying') || activeEncounter.types.includes('Wind'))) baseBottom = 20;
-
-    ghost.style.bottom = `${baseBottom}%`;
+    ghost.style.bottom = '10%'; // top 90%
     ghost.style.height = '35vh';
     ghost.style.zIndex = '50';
     ghost.style.opacity = '1';
@@ -352,7 +301,7 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
         ball.src = `Assets/Items/Balls/${ballResult.ballName}.png`;
         ball.style.position = 'absolute';
         ball.style.left = '35%';
-        ball.style.bottom = `${baseBottom + 15}%`; // Hover above ghost
+        ball.style.bottom = '25%'; // Hover above ghost (10 + 15)
         ball.style.transform = 'translateX(-50%)';
         ball.style.width = '40px'; // fixed size for ball
         ball.style.height = '40px';
