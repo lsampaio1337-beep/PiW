@@ -92,6 +92,7 @@ class BattleSystem {
         this.updateGymUI();
     }
 
+
     updateGymUI() {
         const vGym = document.getElementById("view-gym");
         const contentArea = document.getElementById("gym-content-area");
@@ -100,7 +101,26 @@ class BattleSystem {
         const gym = this.gymState.gym;
         if (!gym) return;
 
+        // Apply elite 4 background during rest phase if applicable
+        if (gym.name === "Indigo Plateau") {
+            const trainerBGs = [
+                'BG-Elite4-1Lorelei.png',
+                'BG-Elite4-2Bruno.png',
+                'BG-Elite4-3Agatha.png',
+                'BG-Elite4-4Lance.png',
+                'BG-Elite4-5Champion.png'
+            ];
+            let trainerIndex = this.gymState.currentTrainerIndex;
+            if (trainerIndex >= trainerBGs.length) {
+                trainerIndex = trainerBGs.length - 1; // Keep Champion BG after beating them
+            }
+            const bgImage = trainerBGs[trainerIndex] || 'BG.png';
+            vGym.style.backgroundImage = `url('./Assets/BG/${bgImage}')`;
+            vGym.style.backgroundSize = "cover";
+        }
+
         const trainer = gym.trainers[this.gymState.currentTrainerIndex];
+
 
         if (trainer) {
             let trainerButtonsHtml = gym.trainers.map((t, index) => {
