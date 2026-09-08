@@ -184,6 +184,11 @@ export function renderPokeMarketTab(category) {
         if (category === 'potions') displayName = displayName.replace(' Potion', '<br>Potion');
         if (category === 'stones') displayName = displayName.replace(' Stone', '<br>Stone');
 
+        let stock = 0;
+        if (state.backpack[category] && state.backpack[category][item.name]) {
+            stock = state.backpack[category][item.name];
+        }
+
         html += `
             <div class="market-item-card" data-price="${item.price}" data-id="${item.name}" data-category="${category}"
                 onclick="window.buyItem('${item.name}', ${item.price}, '${category}')"
@@ -191,6 +196,7 @@ export function renderPokeMarketTab(category) {
                 <div style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; margin-bottom: calc(var(--m-width) * 0.006); height: calc(var(--m-width) * 0.038); display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.1;">${displayName}</div>
                 <img src="${item.img}" style="width: calc(var(--m-width) * 0.072); height: calc(var(--m-width) * 0.072); object-fit: contain; margin-bottom: calc(var(--m-width) * 0.006);">
                 ${category !== 'stones' ? `<div style="font-size: calc(var(--m-width) * 0.014); color: #f1c40f; margin-bottom: calc(var(--m-width) * 0.006); line-height: 1.1;">${item.attrLabel}</div>` : ''}
+                <div style="font-size: calc(var(--m-width) * 0.014); color: #bdc3c7; line-height: 1.1; margin-bottom: calc(var(--m-width) * 0.006);">Stock: ${formatMarketNumberDown(stock)}</div>
                 <div style="font-size: calc(var(--m-width) * 0.014); color: #bdc3c7; line-height: 1.1;">Base: $${formatMarketNumber(item.price)}</div>
                 <div class="market-final-price" style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; color: #2ecc71; margin-top: calc(var(--m-width) * 0.006); line-height: 1.1;">$${formatMarketNumber(item.price)}</div>
             </div>
@@ -400,7 +406,8 @@ export function renderPokeMarketSellTab(category) {
         items = state.config.balance.items.pokeballs.map(b => ({
             name: b.name,
             buyPrice: b.price,
-            img: `./Assets/Items/Balls/${b.name}.png`
+            img: `./Assets/Items/Balls/${b.name}.png`,
+            attrLabel: b.name === 'Masterball' ? `Efficiency: 100%` : `Efficiency: ${b.multiplier}x`
         }));
     } else if (category === 'potions') {
         cols = 6;
@@ -413,7 +420,8 @@ export function renderPokeMarketSellTab(category) {
                 return {
                     name: invName,
                     buyPrice: p.price,
-                    img: `./Assets/Items/Potions/${invName}.png`
+                    img: `./Assets/Items/Potions/${invName}.png`,
+                    attrLabel: `Heal: ${p.heal >= 999999 ? '100%' : p.heal + ' HP'}`
                 };
             });
     } else if (category === 'stones') {
@@ -447,11 +455,12 @@ export function renderPokeMarketSellTab(category) {
                 style="background: #2c3e50; border: 2px solid #e74c3c; border-radius: 10px; padding: calc(var(--m-width) * 0.012); text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center;">
                 <div style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; margin-bottom: calc(var(--m-width) * 0.006); height: calc(var(--m-width) * 0.038); display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.1;">${displayName}</div>
                 <img src="${item.img}" style="width: calc(var(--m-width) * 0.072); height: calc(var(--m-width) * 0.072); object-fit: contain; margin-bottom: calc(var(--m-width) * 0.006);">
+                ${category !== 'stones' ? `<div style="font-size: calc(var(--m-width) * 0.014); color: #f1c40f; margin-bottom: calc(var(--m-width) * 0.006); line-height: 1.1;">${item.attrLabel}</div>` : ''}
                 <div style="font-size: calc(var(--m-width) * 0.014); color: #bdc3c7; line-height: 1.1;">Stock: ${formatMarketNumberDown(stock)}</div>
 
-                <div style="display: flex; gap: 5px; margin-top: calc(var(--m-width) * 0.012); align-items: center;">
-                    <input type="text" id="sell-qty-${safeId}" value="${stock > 0 ? 1 : 0}" oninput="if(window.updateSellItemPrice) window.updateSellItemPrice('${item.name}', '${category}')" style="width: calc(var(--m-width) * 0.06); height: calc(var(--m-width) * 0.025); padding: 0 calc(var(--m-width) * 0.006); font-size: calc(var(--m-width) * 0.015); text-align: center; border-radius: 5px; border: 1px solid #ccc; box-sizing: border-box;">
-                    <button onclick="if(window.sellSetMax) window.sellSetMax('${item.name}', '${category}')" style="padding: 0 calc(var(--m-width) * 0.006); height: calc(var(--m-width) * 0.025); font-size: calc(var(--m-width) * 0.015); font-weight: bold; border-radius: 5px; cursor: pointer; background: #95a5a6; border: none; box-sizing: border-box;">All</button>
+                <div style="display: flex; gap: 5px; margin-top: calc(var(--m-width) * 0.012); align-items: center; justify-content: center; width: 100%;">
+                    <input type="text" id="sell-qty-${safeId}" value="${stock > 0 ? 1 : 0}" oninput="if(window.updateSellItemPrice) window.updateSellItemPrice('${item.name}', '${category}')" style="width: calc(var(--m-width) * 0.06); height: calc(var(--m-width) * 0.025); padding: 0 calc(var(--m-width) * 0.006); font-size: calc(var(--m-width) * 0.015); text-align: center; border-radius: 5px; border: 1px solid #ccc; box-sizing: border-box; margin: 0; outline: none;">
+                    <button onclick="if(window.sellSetMax) window.sellSetMax('${item.name}', '${category}')" style="display: flex; align-items: center; justify-content: center; padding: 0 calc(var(--m-width) * 0.006); height: calc(var(--m-width) * 0.025); font-size: calc(var(--m-width) * 0.015); font-weight: bold; border-radius: 5px; cursor: pointer; background: #95a5a6; color: white; border: none; box-sizing: border-box; margin: 0;">All</button>
                 </div>
 
                 <div class="market-final-price-sell" id="sell-total-${safeId}" style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; color: #2ecc71; margin-top: calc(var(--m-width) * 0.012); line-height: 1.1;">$${formatMarketNumber(stock > 0 ? baseSellPrice : 0)}</div>
@@ -647,3 +656,7 @@ window.marketSellSelectedPokemon = function() {
 
     if (window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon');
 };
+window.openPokeMarketBuy = openPokeMarketBuy;
+window.renderPokeMarketTab = renderPokeMarketTab;
+window.updateMarketPrices = updateMarketPrices;
+window.buyItem = buyItem;
