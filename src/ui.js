@@ -273,6 +273,48 @@ const oakTasks = {
     ]
 };
 
+window.getOakTaskAvailableCount = function() {
+    let count = 0;
+
+    // Quality
+    let qTier = state.stats.qTaskTier || 0;
+    if (qTier < oakTasks.q.length) {
+        if ((state.stats.epicCaptures || 0) >= oakTasks.q[qTier].req) count++;
+    }
+
+    // Catch
+    let cTier = state.stats.cTaskTier || 0;
+    if (cTier < oakTasks.c.length) {
+        if ((state.stats.caught || 0) >= oakTasks.c[cTier].req) count++;
+    }
+
+    // IV
+    let ivTier = state.stats.ivTaskTier || 0;
+    if (ivTier < oakTasks.iv.length) {
+        if ((state.stats[oakTasks.iv[ivTier].stat] || 0) >= oakTasks.iv[ivTier].req) count++;
+    }
+
+    // Level
+    let levelTier = state.stats.levelTaskTier || 0;
+    if (levelTier < oakTasks.level.length) {
+        if ((state.stats[oakTasks.level[levelTier].stat] || 0) >= oakTasks.level[levelTier].req) count++;
+    }
+
+    // Shiny Seen
+    let seenTier = state.stats.shinySeenTaskTier || 0;
+    if (seenTier < oakTasks.shinySeen.length) {
+        if ((state.stats.shiniesSeen || 0) >= oakTasks.shinySeen[seenTier].req) count++;
+    }
+
+    // Shiny Caught
+    let caughtTier = state.stats.shinyCaughtTaskTier || 0;
+    if (caughtTier < oakTasks.shinyCaught.length) {
+        if ((state.stats.shiniesCaught || 0) >= oakTasks.shinyCaught[caughtTier].req) count++;
+    }
+
+    return count;
+};
+
 window.claimOakTaskReward = function(type) {
     if (type === 'q') state.stats.qTaskTier = (state.stats.qTaskTier || 0) + 1;
     if (type === 'c') state.stats.cTaskTier = (state.stats.cTaskTier || 0) + 1;
@@ -321,6 +363,11 @@ window.cheatCompleteOakTask = function(type) {
 };
 
 window.showOakLabModal = function() {
+    if (state.stats.showOakLobbyNotification) {
+        state.stats.showOakLobbyNotification = false;
+        renderOakLab(); // Clear the notification from the lobby button
+    }
+
     let html = `<div style="display:flex; flex-direction:column; gap:15px; text-align:left; max-height: 70vh; overflow-y: auto; padding-right: 10px;">`;
 
     const renderActiveTask = (type, currentVal, tierIdx, taskList) => {
@@ -492,13 +539,25 @@ export function renderOakLab() {
         return; // still selecting starter, handled in index.html
     }
 
+    if (state.stats.showOakMarkerPulse) {
+        state.stats.showOakMarkerPulse = false;
+        // updateUI(); could be called here to refresh map icon but it's done dynamically in topbar
+    }
+
+    let exclamationHtml = state.stats.showOakLobbyNotification
+        ? `<img src="Assets/Extra/ExclamationMark.png" style="position: absolute; top: -5px; right: -5px; width: 20px; height: auto; pointer-events: none; z-index: 10;">`
+        : ``;
+
     oakLabDiv.innerHTML = `
         <div style="background-color: rgba(0,0,0,0.85); display: inline-block; padding: 20px; margin-top: 20px; border-radius: 8px; width: 400px; color: white; text-align: center;">
             <h2 style="margin-top:0;">Professor Oak Lab</h2>
             <p style="font-size: 12px; color: #ccc; margin-bottom: 15px;">Complete tasks to unlock global bonuses.</p>
 
             <div style="display: flex; flex-direction: column; gap: 10px;">
-                <button onclick="window.showOakLabModal()" style="padding: 10px; font-size: 16px; cursor: pointer;">Tasks & Rewards</button>
+                <div style="position: relative; display: inline-block; width: 100%;">
+                    <button onclick="window.showOakLabModal()" style="width: 100%; padding: 10px; font-size: 16px; cursor: pointer;">Tasks & Rewards</button>
+                    ${exclamationHtml}
+                </div>
             </div>
         </div>
     `;
