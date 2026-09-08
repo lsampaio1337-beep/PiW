@@ -74,6 +74,25 @@ export function getChallengeData(unlock) {
          }
     }
 
+
+    if (req.catchEachFromSlotMachine) {
+        if (req.catchEachFromSlotMachine.machines) {
+            req.catchEachFromSlotMachine.machines.forEach(machine => {
+                let caughtAny = false;
+                for (let s of machine) {
+                    if (state.stats.caughtSpecies && state.stats.caughtSpecies[s] >= 1) {
+                        caughtAny = true;
+                        break;
+                    }
+                }
+                if (!caughtAny) isMet = false;
+
+                let machineStr = machine.map(formatSpecies).join(' or ');
+                textParts.push(`Catch 1 ${machineStr} ${getStatusHtml(caughtAny)}`);
+            });
+        }
+    }
+
     if (req.catchByRarityAndType) {
         let caughtKey = req.catchByRarityAndType.type + "_" + req.catchByRarityAndType.rarity;
         let caughtCount = state.stats.challengeCaughtSpecific ? (state.stats.challengeCaughtSpecific[caughtKey] || 0) : 0;
