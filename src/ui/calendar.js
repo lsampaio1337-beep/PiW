@@ -6,7 +6,7 @@ const week1Rewards = [
     { items: { "Pokeball": 100 }, potions: { "Tiny Potion": 100 } },
     { items: { "Greatball": 100 }, potions: { "Small Potion": 100 } },
     { items: { "Greatball": 200 }, potions: { "Small Potion": 200 } },
-    { items: { "Greatball": 300 }, potions: { "Big Potion": 300 } },
+    { items: { "Greatball": 300 }, potions: { "Small Potion": 300 } },
     { items: { "Ultraball": 100 }, potions: { "Big Potion": 100 } },
     { items: { "Ultraball": 200 }, potions: { "Big Potion": 200 } },
     { items: { "Masterball": 1 }, potions: { "Hyper Potion": 10 } }
