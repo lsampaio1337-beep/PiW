@@ -1,10 +1,10 @@
 const balance = {
     "baseAttackDelay": 2.0,
     "baseSearchTime": 3.0,
-    "safariZonePrice": 500,
+    "safariZonePrice": 5000,
     "casinoPrices": {
-        "standard": 10,
-        "doubleShiny": 20
+        "standard": 5000,
+        "doubleShiny": 10000
     },
     "qualityTiers": [
       {"name": "Weak", "min": 0.80, "max": 0.99, "rollMax": 1474},
