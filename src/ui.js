@@ -923,9 +923,14 @@ async function init() {
                                 potionIconStr = `<img src="Assets/Items/Potions/${potionName}.png" style="width: 30px; height: 30px; margin-bottom: 5px;" alt="${potionName}">`;
                             }
 
-                            const faintedBanner = results.fainted
-                                ? `<div style="background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; border-radius: 8px; padding: 10px; color: #fca5a5; text-align: center; font-weight: bold; margin-top: 5px;">❌ Party Fainted</div>`
-                                : `<div style="background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; border-radius: 8px; padding: 10px; color: #6ee7b7; text-align: center; font-weight: bold; margin-top: 5px;">✅ Farm Successful</div>`;
+                            let faintedBanner = "";
+                            if (results.fainted) {
+                                faintedBanner = `<div style="background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; border-radius: 8px; padding: 10px; color: #fca5a5; text-align: center; font-weight: bold; margin-top: 5px;">❌ Party Fainted</div>`;
+                            } else if (results.outOfMoney) {
+                                faintedBanner = `<div style="background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; border-radius: 8px; padding: 10px; color: #fca5a5; text-align: center; font-weight: bold; margin-top: 5px;">❌ Farm Stopped: No money to buy more entries</div>`;
+                            } else {
+                                faintedBanner = `<div style="background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; border-radius: 8px; padding: 10px; color: #6ee7b7; text-align: center; font-weight: bold; margin-top: 5px;">✅ Farm Successful</div>`;
+                            }
 
                             // Show results modal
                             document.getElementById('zzz-results-content').innerHTML = `
@@ -982,6 +987,16 @@ async function init() {
                             if (results.fainted) {
                                 state.currentRoute = "PokeCenter & PokeMarket";
                                 window.navigateToLocation("PokeCenter & PokeMarket");
+                            } else if (results.outOfMoney) {
+                                if (state.currentRoute === "Safari Zone") {
+                                    switchView("SAFARI_HUB");
+                                } else if (state.currentRoute && state.currentRoute.startsWith("Casino - ")) {
+                                    state.currentRoute = "Casino";
+                                    window.navigateToLocation("Casino");
+                                } else {
+                                    state.currentRoute = "Professor Oak Lab";
+                                    switchView("PROF_OAK_LAB");
+                                }
                             } else {
                                 state.currentRoute = "Professor Oak Lab";
                                 switchView("PROF_OAK_LAB");

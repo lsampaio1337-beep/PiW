@@ -199,7 +199,8 @@ class BattleSystem {
         }
 
         if (this.state.currentRoute === "Safari Zone") {
-            if (this.state.trainer.money < 500) {
+            const safariCost = this.state.config.balance.safariZonePrice || 500;
+            if (this.state.trainer.money < safariCost) {
                 this.stop();
                 if (typeof window.switchView === 'function') {
                     window.switchView("SAFARI_HUB");
@@ -208,7 +209,7 @@ class BattleSystem {
                 if (msg) msg.innerText = "I am sorry, but you are all out of money. Try to sell some pokemons and come check us latter.";
                 return;
             }
-            this.state.trainer.money -= 500;
+            this.state.trainer.money -= safariCost;
         }
 
         // Out of combat insta-heal if threshold is met
@@ -223,7 +224,9 @@ class BattleSystem {
         this.consecutiveHeals = 0; // Reset for new battle
 
         if (this.state.currentRoute && this.state.currentRoute.startsWith("Casino - ")) {
-            const cost = this.state.casinoDoubleShiny ? 20 : 10;
+            const baseCostStandard = this.state.config.balance.casinoPrices?.standard || 10;
+            const baseCostSpecial = this.state.config.balance.casinoPrices?.doubleShiny || 20;
+            const cost = this.state.casinoDoubleShiny ? baseCostSpecial : baseCostStandard;
             if (this.state.trainer.money < cost) {
                 alert("Not enough money! You need $" + cost + " to continue hunting here.");
                 this.stop();
@@ -997,7 +1000,8 @@ class BattleSystem {
             shinyEncounters: 0,
             ballsUsed: 0,
             potionsUsed: 0,
-            fainted: false
+            fainted: false,
+            outOfMoney: false
         };
 
         if (this.state.party.length === 0) return results;
@@ -1023,11 +1027,32 @@ class BattleSystem {
             return results; // Can't farm without a route
         }
 
+        let encounterCost = 0;
+        let requiresPayment = false;
+        if (this.state.currentRoute === "Safari Zone") {
+            encounterCost = this.state.config.balance.safariZonePrice || 500;
+            requiresPayment = true;
+        } else if (this.state.currentRoute && this.state.currentRoute.startsWith("Casino - ")) {
+            const baseCostStandard = this.state.config.balance.casinoPrices?.standard || 10;
+            const baseCostSpecial = this.state.config.balance.casinoPrices?.doubleShiny || 20;
+            encounterCost = this.state.casinoDoubleShiny ? baseCostSpecial : baseCostStandard;
+            requiresPayment = true;
+        }
+
         while (totalSimTime < maxTime) {
             // Check if wiped out
             if (!this.state.party.some(p => p.currentHp > 0)) {
                 results.fainted = true;
                 break;
+            }
+
+            // Check if can pay for encounter
+            if (requiresPayment) {
+                if (this.state.trainer.money < encounterCost) {
+                    results.outOfMoney = true;
+                    break;
+                }
+                this.state.trainer.money -= encounterCost;
             }
 
             let leader = this.state.party[0];
