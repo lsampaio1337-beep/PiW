@@ -1016,7 +1016,8 @@ class BattleSystem {
             ballsUsed: 0,
             potionsUsed: 0,
             fainted: false,
-            outOfMoney: false
+            outOfMoney: false,
+            simulatedTimeMs: 0
         };
 
         if (this.state.party.length === 0) return results;
@@ -1262,6 +1263,8 @@ class BattleSystem {
 
         results.ballsUsed = Math.max(0, initialBalls - finalBalls);
         results.potionsUsed = Math.max(0, initialPotions - finalPotions);
+
+        results.simulatedTimeMs = totalSimTime;
 
         if (results.fainted) {
             // Heal all
