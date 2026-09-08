@@ -124,35 +124,6 @@ class BattleSystem {
                     ${trainerButtonsHtml}
                     <button onclick="window.battleEngine.stopGymBattle()" style="padding: 10px; background: #e74c3c; border: none; color: white; border-radius: 3px; cursor: pointer; margin-top: 10px; width: 100%;">Flee Gym</button>
                 </div>
-
-                <div id="gym-battle-area" style="display: none; margin-top: 20px; margin-bottom: 20px; position: relative;">
-                    <div style="display: flex; justify-content: space-between; align-items: flex-end; height: 150px; background: rgba(0,0,0,0.3); border: 2px solid #555; border-radius: 10px; padding: 20px;">
-
-                        <div style="text-align: left; width: 40%;">
-                            <h4 id="gym-player-name">Player</h4>
-                            <div style="width: 100%; height: 10px; background: #333; border: 1px solid #777;">
-                                <div id="gym-player-hp-bar" style="width: 100%; height: 100%; background: #2ecc71;"></div>
-                            </div>
-                            <span id="gym-player-hp-text"></span>
-                            <div style="position: relative; height: 80px; margin-top: 10px;">
-                                <img id="gym-player-sprite" src="" style="position: absolute; bottom: 0; left: 0; max-height: 80px; transform: scaleX(-1);">
-                            </div>
-                        </div>
-
-                        <div id="gym-combat-log" style="width: 20%; font-size: 12px; color: #ccc; text-align: center; overflow: hidden; height: 100px;"></div>
-
-                        <div style="text-align: right; width: 40%;">
-                            <h4 id="gym-enemy-name">Enemy</h4>
-                            <div style="width: 100%; height: 10px; background: #333; border: 1px solid #777;">
-                                <div id="gym-enemy-hp-bar" style="width: 100%; height: 100%; background: #e74c3c; float: right;"></div>
-                            </div>
-                            <span id="gym-enemy-hp-text"></span>
-                            <div style="position: relative; height: 80px; margin-top: 10px;">
-                                <img id="gym-enemy-sprite" src="" style="position: absolute; bottom: 0; right: 0; max-height: 80px;">
-                            </div>
-                        </div>
-                    </div>
-                </div>
             `;
             // Temporary expose for the button
             window.battleEngine = this;
@@ -160,8 +131,9 @@ class BattleSystem {
             // Re-bind to use our special gym start func that toggles visibility
             window.battleEngine.startNextGymBattle = () => {
                 this.gymState.inCombat = true;
-                document.getElementById('gym-rest-area').style.display = 'none';
-                document.getElementById('gym-battle-area').style.display = 'block';
+                if (typeof window.switchView === 'function') {
+                    window.switchView("BATTLE_ARENA");
+                }
                 this.searchNext();
             };
         } else {
@@ -843,6 +815,9 @@ class BattleSystem {
                 }
             }
             this.updateGymUI();
+            if (typeof window.switchView === 'function') {
+                window.switchView("GYM");
+            }
         } else {
             // Next pokemon
             this.searchNext();
@@ -953,6 +928,9 @@ class BattleSystem {
             this.gymState.isActive = false;
             this.gymState.gym = null;
             this.gymState.inCombat = false;
+            if (typeof window.switchView === 'function') {
+                window.switchView("GYM");
+            }
 
             // Return to poke center
             if (typeof window.navigateToLocation === 'function') {

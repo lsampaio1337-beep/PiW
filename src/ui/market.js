@@ -450,8 +450,8 @@ export function renderPokeMarketSellTab(category) {
                 <div style="font-size: calc(var(--m-width) * 0.014); color: #bdc3c7; line-height: 1.1;">Stock: ${formatMarketNumberDown(stock)}</div>
 
                 <div style="display: flex; gap: 5px; margin-top: calc(var(--m-width) * 0.012); align-items: center;">
-                    <input type="text" id="sell-qty-${safeId}" value="${stock > 0 ? 1 : 0}" oninput="if(window.updateSellItemPrice) window.updateSellItemPrice('${item.name}', '${category}')" style="width: calc(var(--m-width) * 0.06); padding: calc(var(--m-width) * 0.006); font-size: calc(var(--m-width) * 0.015); text-align: center; border-radius: 5px; border: 1px solid #ccc;">
-                    <button onclick="if(window.sellSetMax) window.sellSetMax('${item.name}', '${category}')" style="padding: calc(var(--m-width) * 0.006); font-size: calc(var(--m-width) * 0.015); font-weight: bold; border-radius: 5px; cursor: pointer; background: #95a5a6; border: none;">All</button>
+                    <input type="text" id="sell-qty-${safeId}" value="${stock > 0 ? 1 : 0}" oninput="if(window.updateSellItemPrice) window.updateSellItemPrice('${item.name}', '${category}')" style="width: calc(var(--m-width) * 0.06); height: calc(var(--m-width) * 0.025); padding: 0 calc(var(--m-width) * 0.006); font-size: calc(var(--m-width) * 0.015); text-align: center; border-radius: 5px; border: 1px solid #ccc; box-sizing: border-box;">
+                    <button onclick="if(window.sellSetMax) window.sellSetMax('${item.name}', '${category}')" style="padding: 0 calc(var(--m-width) * 0.006); height: calc(var(--m-width) * 0.025); font-size: calc(var(--m-width) * 0.015); font-weight: bold; border-radius: 5px; cursor: pointer; background: #95a5a6; border: none; box-sizing: border-box;">All</button>
                 </div>
 
                 <div class="market-final-price-sell" id="sell-total-${safeId}" style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; color: #2ecc71; margin-top: calc(var(--m-width) * 0.012); line-height: 1.1;">$${formatMarketNumber(stock > 0 ? baseSellPrice : 0)}</div>
