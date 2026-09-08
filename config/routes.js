@@ -560,7 +560,7 @@ export const unlocks = [
       "catchSpecies": [
         {
           "species": "Mankey",
-          "count": 2
+          "count": 1
         }
       ]
     }
