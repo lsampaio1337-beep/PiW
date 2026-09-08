@@ -119,10 +119,26 @@
         <div id="combat-arena" style="background-image: url('./Assets/BG/BG.png');">
           <div id="battle-sprites-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
             <div id="enemy-side" style="position: absolute; transform: translateX(-50%);">
-              <img id="enemy-sprite" src="" alt="Enemy Sprite">
+              <div id="enemy-sprite-anim-container" class="sprite-anim-container">
+                <img id="enemy-sprite" src="" alt="Enemy Sprite" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\'><circle cx=\'50\' cy=\'50\' r=\'40\' fill=\'red\'/></svg>'">
+                <div class="water-splashes" style="display: none;">
+                  <div class="splash"></div><div class="splash"></div><div class="splash"></div>
+                  <div class="splash"></div><div class="splash"></div><div class="splash"></div>
+                  <div class="splash"></div><div class="splash"></div><div class="splash"></div>
+                  <div class="splash"></div>
+                </div>
+              </div>
             </div>
             <div id="player-side" style="position: absolute; transform: translateX(-50%);">
-              <img id="player-sprite" src="" alt="Player Sprite">
+              <div id="player-sprite-anim-container" class="sprite-anim-container">
+                <img id="player-sprite" src="" alt="Player Sprite" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\'><circle cx=\'50\' cy=\'50\' r=\'40\' fill=\'red\'/></svg>'">
+                <div class="water-splashes" style="display: none;">
+                  <div class="splash"></div><div class="splash"></div><div class="splash"></div>
+                  <div class="splash"></div><div class="splash"></div><div class="splash"></div>
+                  <div class="splash"></div><div class="splash"></div><div class="splash"></div>
+                  <div class="splash"></div>
+                </div>
+              </div>
             </div>
           </div>
 

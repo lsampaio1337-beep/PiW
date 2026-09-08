@@ -1,6 +1,52 @@
 import { TYPE_COLORS } from '../ui.js';
 import { state, globals } from '../state.js';
 
+function startSpriteAnimation(container, types, id) {
+    if (!container) return;
+    if (container.dataset.activeAnimId === String(id) && container.dataset.stopping !== 'true') {
+        return;
+    }
+
+    container.dataset.activeAnimId = String(id);
+    container.dataset.stopping = 'false';
+    container.classList.remove('anim-flying', 'anim-water', 'anim-standard');
+
+    // Remove any previous animation listener to avoid conflicts
+    const newContainer = container.cloneNode(true);
+    container.parentNode.replaceChild(newContainer, container);
+    container = newContainer;
+
+    let isFlying = types.includes('Flying') || types.includes('Wind');
+    let isWater = types.includes('Water');
+
+    let animClass = 'anim-standard';
+    if (isFlying && isWater) {
+        animClass = Math.random() < 0.5 ? 'anim-flying' : 'anim-water';
+    } else if (isFlying) {
+        animClass = 'anim-flying';
+    } else if (isWater) {
+        animClass = 'anim-water';
+    }
+
+    container.classList.add(animClass);
+}
+
+function stopSpriteAnimation(containerId) {
+    let container = document.getElementById(containerId);
+    if (!container) return;
+    if (container.dataset.stopping === 'true' || !container.dataset.activeAnimId) return;
+
+    container.dataset.stopping = 'true';
+
+    container.addEventListener('animationiteration', function onAnimEnd() {
+        if (container.dataset.stopping === 'true') {
+            container.classList.remove('anim-flying', 'anim-water', 'anim-standard');
+            container.dataset.activeAnimId = '';
+        }
+        container.removeEventListener('animationiteration', onAnimEnd);
+    });
+}
+
 export function updateBattleArena() {
     const battleSystem = globals.battleSystem;
     const inGym = battleSystem && battleSystem.gymState && battleSystem.gymState.isActive;
@@ -99,6 +145,7 @@ export function updateBattleArena() {
                 elEnemySide.style.bottom = `${baseBottom}%`;
 
                 if (battleSystem.isSliding) {
+                    startSpriteAnimation(document.getElementById('enemy-sprite-anim-container'), enemy.types, enemy.id);
                     if (elEnemySide.dataset.sliding !== 'true') {
                         elEnemySide.dataset.sliding = 'true';
                         elEnemySide.style.transition = 'none';
@@ -121,6 +168,7 @@ export function updateBattleArena() {
                         });
                     }
                 } else {
+                    stopSpriteAnimation('enemy-sprite-anim-container');
                     elEnemySide.dataset.sliding = 'false';
                     elEnemySide.style.transition = 'none';
                     elEnemySide.style.left = '35%';
@@ -169,6 +217,12 @@ export function updateBattleArena() {
                 if (elPlayerSprite) {
                     elPlayerSprite.src = `Assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? leader.id + '_shiny' : leader.id}.png`;
                     elPlayerSprite.style.display = 'block';
+
+                    if (battleSystem && (battleSystem.isSearching || battleSystem.isSliding || battleSystem.isPlayerSlidingIn || battleSystem.isPlayerPreSlidingIn)) {
+                        startSpriteAnimation(document.getElementById('player-sprite-anim-container'), leader.types, leader.id);
+                    } else {
+                        stopSpriteAnimation('player-sprite-anim-container');
+                    }
 
                     if (leader.currentHp <= 0) {
                         elPlayerSprite.style.transition = 'opacity 2s linear';
@@ -247,6 +301,12 @@ export function updateBattleArena() {
                 if (elPlayerSprite) {
                     elPlayerSprite.src = `Assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? leader.id + '_shiny' : leader.id}.png`;
                     elPlayerSprite.style.display = 'block';
+
+                    if (battleSystem && (battleSystem.isSearching || battleSystem.isSliding || battleSystem.isPlayerSlidingIn || battleSystem.isPlayerPreSlidingIn)) {
+                        startSpriteAnimation(document.getElementById('player-sprite-anim-container'), leader.types, leader.id);
+                    } else {
+                        stopSpriteAnimation('player-sprite-anim-container');
+                    }
 
                     if (leader.currentHp <= 0) {
                         elPlayerSprite.style.transition = 'opacity 2s linear';

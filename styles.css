@@ -367,3 +367,96 @@ input[type="number"] {
         --pokedex-shiny-angle: 360deg;
     }
 }
+
+/* Sprite Animations */
+.sprite-anim-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+/* Flying Type: Hover, tilt, scale */
+@keyframes anim-flying-kf {
+    0% { transform: translateY(0) rotate(0deg) scale(1); }
+    25% { transform: translateY(-15px) rotate(-3deg) scale(1.02); }
+    50% { transform: translateY(0) rotate(0deg) scale(1); }
+    75% { transform: translateY(-15px) rotate(3deg) scale(1.02); }
+    100% { transform: translateY(0) rotate(0deg) scale(1); }
+}
+
+.anim-flying {
+    animation: anim-flying-kf 3s ease-in-out infinite;
+}
+
+/* Water Type: Rocking and bobbing */
+@keyframes anim-water-bob-kf {
+    0% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-8px) rotate(-2deg); }
+    50% { transform: translateY(0) rotate(0deg); }
+    75% { transform: translateY(-8px) rotate(2deg); }
+    100% { transform: translateY(0) rotate(0deg); }
+}
+
+.anim-water {
+    animation: anim-water-bob-kf 2s ease-in-out infinite;
+}
+
+/* Standard Type: Rock and side-to-side */
+@keyframes anim-standard-kf {
+    0% { transform: translateX(0) rotate(0deg); }
+    25% { transform: translateX(-10px) rotate(-2deg); }
+    50% { transform: translateX(0) rotate(0deg); }
+    75% { transform: translateX(10px) rotate(2deg); }
+    100% { transform: translateX(0) rotate(0deg); }
+}
+
+.anim-standard {
+    animation: anim-standard-kf 2s ease-in-out infinite;
+}
+
+/* Water Splashes */
+.water-splashes {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150%;
+    height: 50px;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.anim-water .water-splashes {
+    display: block !important;
+}
+
+@keyframes splash-anim {
+    0% { transform: scale(0); opacity: 0; }
+    50% { opacity: 0.8; }
+    100% { transform: scale(2.5); opacity: 0; }
+}
+
+.splash {
+    position: absolute;
+    bottom: 10px;
+    width: 25px;
+    height: 10px;
+    background-color: rgba(52, 152, 219, 0.7);
+    border-radius: 50%;
+    border: 3px solid rgba(41, 128, 185, 0.9);
+    animation: splash-anim 1.5s ease-out infinite;
+    opacity: 0;
+}
+
+/* Randomize splash positions and delays using nth-child */
+.splash:nth-child(1) { left: 10%; animation-delay: 0.1s; }
+.splash:nth-child(2) { left: 30%; animation-delay: 0.8s; }
+.splash:nth-child(3) { left: 50%; animation-delay: 0.3s; }
+.splash:nth-child(4) { left: 70%; animation-delay: 1.1s; }
+.splash:nth-child(5) { left: 90%; animation-delay: 0.5s; }
+.splash:nth-child(6) { left: 20%; animation-delay: 1.4s; }
+.splash:nth-child(7) { left: 40%; animation-delay: 0.2s; }
+.splash:nth-child(8) { left: 60%; animation-delay: 0.9s; }
+.splash:nth-child(9) { left: 80%; animation-delay: 0.6s; }
+.splash:nth-child(10) { left: 45%; animation-delay: 1.2s; bottom: 5px;}
