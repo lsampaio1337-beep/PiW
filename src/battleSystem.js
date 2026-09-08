@@ -587,6 +587,8 @@ class BattleSystem {
     }
 
     tryUsePotion(pokemon) {
+        if (this.gymState && this.gymState.isActive) return false; // Auto potions disabled in Gyms
+
         if (pokemon.currentHp >= pokemon.maxHp) return false; // don't heal if full
 
         let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 50;
@@ -798,15 +800,6 @@ class BattleSystem {
 
         if (this.gymState.currentPokemonIndex >= trainer.team.length) {
             // Defeated trainer
-
-            // Out of combat insta-heal if threshold is met
-            const leader = this.state.party[0];
-            if (leader && leader.currentHp > 0 && this.state.settings.autoPotion) {
-                let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 50;
-                while ((leader.currentHp / leader.maxHp) * 100 <= threshold) {
-                    if (!this.tryUsePotion(leader)) break;
-                }
-            }
 
             // Heal party and storage during Rest/End Phase
             this.state.party.forEach(p => p.currentHp = p.maxHp);
@@ -1095,8 +1088,6 @@ class BattleSystem {
                 this.state.stats.seenShiniesSpecies[pokemonBase.name] = true;
             }
             ivs = mathEngine.generateIVs(this.state.stats, q.name === "Shiny");
-
-            if (q.name === "Shiny") this.state.stats.shiniesSeen = (this.state.stats.shiniesSeen || 0) + 1;
 
             const stats = {
                 hp: mathEngine.calculateHP(pokemonBase.hp, ivs.hp, level, q.q),
