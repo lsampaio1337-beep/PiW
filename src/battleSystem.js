@@ -275,17 +275,34 @@ class BattleSystem {
 
         // Gym leaders and trainers have fixed quality (e.g. Regular or Uncommon)
         const isLeader = this.gymState.currentTrainerIndex === gym.trainers.length - 1;
-        const q = isLeader ? { name: "Rare", q: 1.40 } : { name: "Uncommon", q: 1.20 };
+
+        let gymIndex = this.state.config.gyms.findIndex(g => g.name === gym.name);
+        if (gymIndex === -1) gymIndex = 0; // Fallback
+
+        // Map Gym Index to QValue and SumIV
+        // Gym 1 (Index 0): Q=1.2, SumIV=270 => IV=45
+        // Gym 2 (Index 1): Q=1.25, SumIV=300 => IV=50
+        // ...
+        // Gym 8 (Index 7): Q=1.55, SumIV=480 => IV=80
+        // E4 (Index 8): Q=1.6, SumIV=510 => IV=85
+        let qValue = 1.2 + (gymIndex * 0.05);
+        let sumIV = 270 + (gymIndex * 30);
+        let ivValue = sumIV / 6;
+
+        let qualityName = "Gym"; // You can keep a standard name or map it if desired
+        if (qValue >= 1.6) qualityName = "Legendary";
+        else if (qValue >= 1.4) qualityName = "Epic";
+        else if (qValue >= 1.3) qualityName = "Rare";
+        else if (qValue >= 1.2) qualityName = "Uncommon";
+
+        const q = { name: qualityName, q: qValue };
 
         // Track seen for pokedex
         if (!this.state.stats.seenSpecies) this.state.stats.seenSpecies = {};
         this.state.stats.seenSpecies[pokemonBase.name] = true;
 
-        // Give them good IVs
-        const ivs = { hp: 50, atk: 50, def: 50, spa: 50, spd: 50, spe: 50 };
-        if (isLeader) {
-            ivs.hp = 80; ivs.atk = 80; ivs.def = 80; ivs.spa = 80; ivs.spd = 80; ivs.spe = 80;
-        }
+        // Give them good IVs based on gym progression
+        const ivs = { hp: ivValue, atk: ivValue, def: ivValue, spa: ivValue, spd: ivValue, spe: ivValue };
 
         const stats = {
             hp: mathEngine.calculateHP(pokemonBase.hp, ivs.hp, level, q.q),
