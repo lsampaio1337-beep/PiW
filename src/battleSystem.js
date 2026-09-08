@@ -92,6 +92,7 @@ class BattleSystem {
         this.updateGymUI();
     }
 
+
     updateGymUI() {
         const vGym = document.getElementById("view-gym");
         const contentArea = document.getElementById("gym-content-area");
@@ -100,7 +101,26 @@ class BattleSystem {
         const gym = this.gymState.gym;
         if (!gym) return;
 
+        // Apply elite 4 background during rest phase if applicable
+        if (gym.name === "Indigo Plateau") {
+            const trainerBGs = [
+                'BG-Elite4-1Lorelei.png',
+                'BG-Elite4-2Bruno.png',
+                'BG-Elite4-3Agatha.png',
+                'BG-Elite4-4Lance.png',
+                'BG-Elite4-5Champion.png'
+            ];
+            let trainerIndex = this.gymState.currentTrainerIndex;
+            if (trainerIndex >= trainerBGs.length) {
+                trainerIndex = trainerBGs.length - 1; // Keep Champion BG after beating them
+            }
+            const bgImage = trainerBGs[trainerIndex] || 'BG.png';
+            vGym.style.backgroundImage = `url('./Assets/BG/${bgImage}')`;
+            vGym.style.backgroundSize = "cover";
+        }
+
         const trainer = gym.trainers[this.gymState.currentTrainerIndex];
+
 
         if (trainer) {
             let trainerButtonsHtml = gym.trainers.map((t, index) => {
@@ -255,17 +275,34 @@ class BattleSystem {
 
         // Gym leaders and trainers have fixed quality (e.g. Regular or Uncommon)
         const isLeader = this.gymState.currentTrainerIndex === gym.trainers.length - 1;
-        const q = isLeader ? { name: "Rare", q: 1.40 } : { name: "Uncommon", q: 1.20 };
+
+        let gymIndex = this.state.config.gyms.findIndex(g => g.name === gym.name);
+        if (gymIndex === -1) gymIndex = 0; // Fallback
+
+        // Map Gym Index to QValue and SumIV
+        // Gym 1 (Index 0): Q=1.2, SumIV=270 => IV=45
+        // Gym 2 (Index 1): Q=1.25, SumIV=300 => IV=50
+        // ...
+        // Gym 8 (Index 7): Q=1.55, SumIV=480 => IV=80
+        // E4 (Index 8): Q=1.6, SumIV=510 => IV=85
+        let qValue = 1.2 + (gymIndex * 0.05);
+        let sumIV = 270 + (gymIndex * 30);
+        let ivValue = sumIV / 6;
+
+        let qualityName = "Gym"; // You can keep a standard name or map it if desired
+        if (qValue >= 1.6) qualityName = "Legendary";
+        else if (qValue >= 1.4) qualityName = "Epic";
+        else if (qValue >= 1.3) qualityName = "Rare";
+        else if (qValue >= 1.2) qualityName = "Uncommon";
+
+        const q = { name: qualityName, q: qValue };
 
         // Track seen for pokedex
         if (!this.state.stats.seenSpecies) this.state.stats.seenSpecies = {};
         this.state.stats.seenSpecies[pokemonBase.name] = true;
 
-        // Give them good IVs
-        const ivs = { hp: 50, atk: 50, def: 50, spa: 50, spd: 50, spe: 50 };
-        if (isLeader) {
-            ivs.hp = 80; ivs.atk = 80; ivs.def = 80; ivs.spa = 80; ivs.spd = 80; ivs.spe = 80;
-        }
+        // Give them good IVs based on gym progression
+        const ivs = { hp: ivValue, atk: ivValue, def: ivValue, spa: ivValue, spd: ivValue, spe: ivValue };
 
         const stats = {
             hp: mathEngine.calculateHP(pokemonBase.hp, ivs.hp, level, q.q),
@@ -567,6 +604,8 @@ class BattleSystem {
     }
 
     tryUsePotion(pokemon) {
+        if (this.gymState && this.gymState.isActive) return false; // Auto potions disabled in Gyms
+
         if (pokemon.currentHp >= pokemon.maxHp) return false; // don't heal if full
 
         let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 50;
@@ -779,15 +818,6 @@ class BattleSystem {
         if (this.gymState.currentPokemonIndex >= trainer.team.length) {
             // Defeated trainer
 
-            // Out of combat insta-heal if threshold is met
-            const leader = this.state.party[0];
-            if (leader && leader.currentHp > 0 && this.state.settings.autoPotion) {
-                let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 50;
-                while ((leader.currentHp / leader.maxHp) * 100 <= threshold) {
-                    if (!this.tryUsePotion(leader)) break;
-                }
-            }
-
             // Heal party and storage during Rest/End Phase
             this.state.party.forEach(p => p.currentHp = p.maxHp);
             if (this.state.storage) {
@@ -979,7 +1009,8 @@ class BattleSystem {
             ballsUsed: 0,
             potionsUsed: 0,
             fainted: false,
-            outOfMoney: false
+            outOfMoney: false,
+            simulatedTimeMs: 0
         };
 
         if (this.state.party.length === 0) return results;
@@ -1075,8 +1106,6 @@ class BattleSystem {
                 this.state.stats.seenShiniesSpecies[pokemonBase.name] = true;
             }
             ivs = mathEngine.generateIVs(this.state.stats, q.name === "Shiny");
-
-            if (q.name === "Shiny") this.state.stats.shiniesSeen = (this.state.stats.shiniesSeen || 0) + 1;
 
             const stats = {
                 hp: mathEngine.calculateHP(pokemonBase.hp, ivs.hp, level, q.q),
@@ -1225,6 +1254,8 @@ class BattleSystem {
 
         results.ballsUsed = Math.max(0, initialBalls - finalBalls);
         results.potionsUsed = Math.max(0, initialPotions - finalPotions);
+
+        results.simulatedTimeMs = totalSimTime;
 
         if (results.fainted) {
             // Heal all

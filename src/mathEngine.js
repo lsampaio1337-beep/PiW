@@ -35,7 +35,10 @@ function calculateEV(bst, level, quality, totalIV) {
 function calculateCatchChance(bst, level, ballMultiplier, stats = {}, isShiny = false) {
     // Formula: CatchChance = Math.max(1, (72 - (BST / 8.5) - (Level / 4)) * BallMultiplier)
     if (ballMultiplier >= 10) return 100; // Masterball
-    let chance = (72 - (bst / 8.5) - (level / 4)) * ballMultiplier;
+
+    let baseChance = 72 - (bst / 8.5) - (level / 4);
+    if (baseChance < 1) baseChance = 1; // Ensure negative base chance doesn't ruin multipliers
+    let chance = baseChance * ballMultiplier;
 
     let cTaskTier = stats.cTaskTier || 0;
     let catchBonus = 0;

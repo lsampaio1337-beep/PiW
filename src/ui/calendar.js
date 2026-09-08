@@ -4,21 +4,21 @@ import { updateTopbar } from './topbar.js';
 
 const week1Rewards = [
     { items: { "Pokeball": 100 }, potions: { "Tiny Potion": 100 } },
-    { items: { "Greatball": 100 }, potions: { "Small Potion": 100 } },
-    { items: { "Greatball": 200 }, potions: { "Small Potion": 200 } },
-    { items: { "Greatball": 300 }, potions: { "Big Potion": 300 } },
-    { items: { "Ultraball": 100 }, potions: { "Big Potion": 100 } },
-    { items: { "Ultraball": 200 }, potions: { "Big Potion": 200 } },
-    { items: { "Masterball": 1 }, potions: { "Hyper Potion": 10 } }
+    { items: { "Pokeball": 200 }, potions: { "Tiny Potion": 200 } },
+    { items: { "Pokeball": 300 }, potions: { "Small Potion": 100 } },
+    { items: { "Greatball": 100 }, potions: { "Small Potion": 200 } },
+    { items: { "Greatball": 200 }, potions: { "Regular Potion": 100 } },
+    { items: { "Greatball": 300 }, potions: { "Regular Potion": 200 } },
+    { items: { "Masterball": 1 }, potions: { "Hyper Potion": 5 } }
 ];
 
 const weekXRewards = [
     { items: { "Ultraball": 100 }, potions: { "Big Potion": 100 } },
+    { items: { "Ultraball": 150 }, potions: { "Big Potion": 150 } },
     { items: { "Ultraball": 200 }, potions: { "Big Potion": 200 } },
+    { items: { "Ultraball": 250 }, potions: { "Big Potion": 250 } },
     { items: { "Ultraball": 300 }, potions: { "Big Potion": 300 } },
-    { items: { "Ultraball": 400 }, potions: { "Big Potion": 400 } },
-    { items: { "Ultraball": 500 }, potions: { "Big Potion": 500 } },
-    { items: { "Ultraball": 600 }, potions: { "Big Potion": 600 } },
+    { items: { "Ultraball": 300 }, potions: { "Big Potion": 300 } },
     { items: { "Masterball": 1 }, potions: { "Hyper Potion": 10 } }
 ];
 

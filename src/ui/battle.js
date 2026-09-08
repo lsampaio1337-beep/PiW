@@ -1,51 +1,6 @@
 import { TYPE_COLORS } from '../ui.js';
 import { state, globals } from '../state.js';
 
-
-function applyWalkAnimations(pokemon, isEnemy) {
-    const battleSystem = globals.battleSystem;
-    const realPrefix = isEnemy ? 'enemy' : 'player';
-    const animContainer = document.getElementById(realPrefix + '-anim-container');
-    const bubbles = document.getElementById(realPrefix + '-water-bubbles');
-
-    if (!animContainer) return;
-
-    let walkClass = 'anim-walk-other';
-    if (pokemon.types.includes('Water')) walkClass = 'anim-walk-water';
-    else if (pokemon.types.includes('Flying') || pokemon.types.includes('Wind')) walkClass = 'anim-walk-flying';
-
-    let shouldWalk = false;
-    if (isEnemy) {
-        shouldWalk = battleSystem.isSliding || battleSystem.isSearching;
-    } else {
-        shouldWalk = battleSystem.isPlayerSlidingIn || battleSystem.isPlayerPreSlidingIn || battleSystem.isSearching;
-    }
-
-    if (shouldWalk) {
-        animContainer.classList.remove('anim-walk-other', 'anim-walk-flying', 'anim-walk-water');
-        animContainer.classList.add(walkClass);
-        animContainer.dataset.stopping = 'false';
-    } else if (animContainer.classList.contains(walkClass)) {
-        if (animContainer.dataset.stopping !== 'true') {
-            animContainer.dataset.stopping = 'true';
-            const stopAnim = () => {
-                if (animContainer.dataset.stopping === 'true') {
-                    animContainer.classList.remove('anim-walk-other', 'anim-walk-flying', 'anim-walk-water');
-                }
-                animContainer.removeEventListener('animationiteration', stopAnim);
-            };
-            animContainer.addEventListener('animationiteration', stopAnim);
-        }
-    } else {
-         animContainer.classList.remove('anim-walk-other', 'anim-walk-flying', 'anim-walk-water');
-    }
-
-    if (bubbles) {
-         bubbles.style.display = pokemon.types.includes('Water') ? 'block' : 'none';
-    }
-}
-
-
 export function updateBattleArena() {
     const battleSystem = globals.battleSystem;
     const inGym = battleSystem && battleSystem.gymState && battleSystem.gymState.isActive;
@@ -123,7 +78,6 @@ export function updateBattleArena() {
             if (elEnemySprite && elEnemySide) {
                 elEnemySprite.src = `Assets/Pokemon Sprites/${enemy.qualityName === 'Shiny' ? enemy.id + '_shiny' : enemy.id}.png`;
                 elEnemySprite.style.display = 'block';
-                applyWalkAnimations(enemy, true);
 
                 let baseBottom = 15; // 100 - 85
                 if (enemy.types.includes('Water')) baseBottom = 10; // 100 - 90
@@ -203,30 +157,23 @@ export function updateBattleArena() {
                 if (elPlayerSprite) {
                     elPlayerSprite.src = `Assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? leader.id + '_shiny' : leader.id}.png`;
                     elPlayerSprite.style.display = 'block';
-                    applyWalkAnimations(leader, false);
 
                     if (leader.currentHp <= 0) {
-                        if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.transition = 'opacity 2s linear'; else elPlayerSprite.style.transition = 'opacity 2s linear';
-                        if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.opacity = '0'; else elPlayerSprite.style.opacity = '0';
+                        elPlayerSprite.style.transition = 'opacity 2s linear';
+                        elPlayerSprite.style.opacity = '0';
                     } else if (battleSystem && battleSystem.isPlayerSlidingIn) {
                         elPlayerSprite.style.transition = `left ${battleSystem.slideDuration}ms linear`;
                         elPlayerSprite.style.left = '25%';
-                        if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.transition = 'none';
-                        if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.opacity = '1';
                         elPlayerSprite.style.opacity = '1';
                     } else if (battleSystem && battleSystem.isFainting) {
                         // don't touch style while fading
                     } else if (battleSystem && battleSystem.isPlayerPreSlidingIn) {
                         elPlayerSprite.style.transition = 'none';
                         elPlayerSprite.style.left = '-30%';
-                        if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.transition = 'none';
-                        if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.opacity = '1';
                         elPlayerSprite.style.opacity = '1';
                     } else {
                         elPlayerSprite.style.transition = 'none';
                         elPlayerSprite.style.left = '25%';
-                        if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.transition = 'none';
-                        if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.opacity = '1';
                         elPlayerSprite.style.opacity = '1';
                     }
                 }
@@ -288,30 +235,23 @@ export function updateBattleArena() {
                 if (elPlayerSprite) {
                     elPlayerSprite.src = `Assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? leader.id + '_shiny' : leader.id}.png`;
                     elPlayerSprite.style.display = 'block';
-                    applyWalkAnimations(leader, false);
 
                     if (leader.currentHp <= 0) {
-                        if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.transition = 'opacity 2s linear'; else elPlayerSprite.style.transition = 'opacity 2s linear';
-                        if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.opacity = '0'; else elPlayerSprite.style.opacity = '0';
+                        elPlayerSprite.style.transition = 'opacity 2s linear';
+                        elPlayerSprite.style.opacity = '0';
                     } else if (battleSystem && battleSystem.isPlayerSlidingIn) {
                         elPlayerSprite.style.transition = `left ${battleSystem.slideDuration}ms linear`;
                         elPlayerSprite.style.left = '25%';
-                        if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.transition = 'none';
-                        if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.opacity = '1';
                         elPlayerSprite.style.opacity = '1';
                     } else if (battleSystem && battleSystem.isFainting) {
                         // don't touch style while fading
                     } else if (battleSystem && battleSystem.isPlayerPreSlidingIn) {
                         elPlayerSprite.style.transition = 'none';
                         elPlayerSprite.style.left = '-30%';
-                        if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.transition = 'none';
-                        if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.opacity = '1';
                         elPlayerSprite.style.opacity = '1';
                     } else {
                         elPlayerSprite.style.transition = 'none';
                         elPlayerSprite.style.left = '25%';
-                        if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.transition = 'none';
-                        if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.opacity = '1';
                         elPlayerSprite.style.opacity = '1';
                     }
                 }
@@ -520,9 +460,7 @@ export function playCombatAnimations(targetSide, moveType, duration) {
     const isGym = battleSystem && battleSystem.gymState && battleSystem.gymState.isActive;
 
     let attackerId = targetSide === 'player' ? (isGym ? 'gym-enemy-sprite' : 'enemy-sprite') : (isGym ? 'gym-player-sprite' : 'player-sprite');
-    if (!document.getElementById(attackerId)) attackerId = targetSide === 'player' ? 'enemy-sprite' : 'player-sprite';
     let defenderId = targetSide === 'player' ? (isGym ? 'gym-player-sprite' : 'player-sprite') : (isGym ? 'gym-enemy-sprite' : 'enemy-sprite');
-    if (!document.getElementById(defenderId)) defenderId = targetSide === 'player' ? 'player-sprite' : 'enemy-sprite';
 
     const atkImg = document.getElementById(attackerId);
     const defImg = document.getElementById(defenderId);
@@ -548,44 +486,17 @@ export function playCombatAnimations(targetSide, moveType, duration) {
         img.style.transform = `${base} ${atk} ${def}`.trim();
     };
 
-    let atkTypes = [];
-    if (attackerId.includes('player')) {
-        atkTypes = state.party[0]?.types || [];
-    } else if (battleSystem) {
-        if (isGym && battleSystem.gymState && battleSystem.gymState.gym) {
-             const gym = battleSystem.gymState.gym;
-             const tIdx = battleSystem.gymState.currentTrainerIndex;
-             const pIdx = battleSystem.gymState.currentPokemonIndex;
-             if (gym.trainers[tIdx] && gym.trainers[tIdx].pokemon[pIdx]) {
-                 atkTypes = gym.trainers[tIdx].pokemon[pIdx].types;
-             }
-        } else if (battleSystem.activeEncounter) {
-             atkTypes = battleSystem.activeEncounter.types || [];
-        }
-    }
+    // Attacker launch animation
+    atkImg.style.transition = `transform ${duration * 0.2}ms ease-out`;
 
-    const isPlayerAtk = attackerId.includes('player');
-    const xDir = isPlayerAtk ? 15 : -15;
-    const bt = atkImg.dataset.baseTransform || '';
+    // For attack we just scale up slightly
+    atkImg.dataset.atkTransform = 'scale(1.2)';
+    updateTransform(atkImg);
 
-    let attackKeyframes = [
-        { transform: `${bt}` },
-        { transform: `${bt} translateX(${xDir}px) scale(1.05)` },
-        { transform: `${bt}` }
-    ];
-
-    if (atkTypes.includes('Flying') || atkTypes.includes('Wind')) {
-        attackKeyframes = [
-            { transform: `${bt}` },
-            { transform: `${bt} translate(${xDir}px, 15px) scale(1.05)` },
-            { transform: `${bt}` }
-        ];
-    }
-
-    atkImg.animate(attackKeyframes, {
-        duration: duration * 0.4,
-        easing: 'ease-in-out'
-    });
+    setTimeout(() => {
+        atkImg.dataset.atkTransform = '';
+        updateTransform(atkImg);
+    }, duration * 0.4);
 
     // Create projectile
     const proj = document.createElement('div');
