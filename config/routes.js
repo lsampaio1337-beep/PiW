@@ -1186,13 +1186,13 @@ const routes = [
         "pokemonId": 26,
         "minLevel": 72,
         "maxLevel": 77,
-        "chance": 0.05
+        "chance": 0.08
       },
       {
         "pokemonId": 145,
         "minLevel": 80,
         "maxLevel": 80,
-        "chance": 0.05
+        "chance": 0.02
       }
     ]
   },
