@@ -219,3 +219,34 @@ export function updateTopbar() {
         }
     }
 }
+
+
+export function getChallengeText() {
+    let req = state.nextChallengeRequirement;
+    if (!req) return "Next Challenge: None";
+
+    let unlocks = "Unlocks: " + state.nextChallengeUnlocks;
+
+    // Check if the area ID belongs to the "Extra Challenges" list.
+    // The previous areaId usually implies the CURRENT challenge being evaluated.
+    // But since `state.nextChallengeRequirement` doesn't explicitly store `areaId` directly... wait!
+    // I can just rely on the unlocks text parsing or let the UI layer handle it.
+
+    // Just reproducing my original simple `getChallengeText` logic:
+    if (req.defeatCountRoute) {
+        let route = req.defeatCountRoute.route;
+        let count = req.defeatCountRoute.count;
+        let defeats = state.stats.challengeRouteDefeats || 0;
+        return `Defeat ${count} Pokémon on ${route} (${Math.min(defeats, count)}/${count}) - ${unlocks}`;
+    }
+
+    // Fallback if needed
+    return `Next Challenge: Requirements not formatted. - ${unlocks}`;
+}
+
+export function getChallengeData() {
+    return {
+        req: state.nextChallengeRequirement,
+        unlocks: state.nextChallengeUnlocks
+    };
+}
