@@ -2,25 +2,56 @@ import { state } from '../state.js';
 import { showModal } from '../ui.js';
 import { updateTopbar } from './topbar.js';
 
-const week1Rewards = [
-    { items: { "Pokeball": 100 }, potions: { "Tiny Potion": 100 } },
-    { items: { "Pokeball": 200 }, potions: { "Tiny Potion": 200 } },
-    { items: { "Pokeball": 300 }, potions: { "Small Potion": 100 } },
-    { items: { "Greatball": 100 }, potions: { "Small Potion": 200 } },
-    { items: { "Greatball": 200 }, potions: { "Regular Potion": 100 } },
-    { items: { "Greatball": 300 }, potions: { "Regular Potion": 200 } },
-    { items: { "Masterball": 1 }, potions: { "Hyper Potion": 5 } }
-];
 
-const weekXRewards = [
-    { items: { "Ultraball": 100 }, potions: { "Big Potion": 100 } },
-    { items: { "Ultraball": 150 }, potions: { "Big Potion": 150 } },
-    { items: { "Ultraball": 200 }, potions: { "Big Potion": 200 } },
-    { items: { "Ultraball": 250 }, potions: { "Big Potion": 250 } },
-    { items: { "Ultraball": 300 }, potions: { "Big Potion": 300 } },
-    { items: { "Ultraball": 300 }, potions: { "Big Potion": 300 } },
-    { items: { "Masterball": 1 }, potions: { "Hyper Potion": 10 } }
-];
+export function getRewardForDay(daysClaimed) {
+    const w = Math.floor(daysClaimed / 7) + 1;
+    const d = daysClaimed + 1;
+    const dayOfWeek = daysClaimed % 7; // 0 to 6 (Day 1 to Day 7)
+
+    if (w === 1) {
+        switch(dayOfWeek) {
+            case 0: return { items: { "Pokeball": 10 }, potions: { "Tiny Potion": 10 } };
+            case 1: return { items: { "Pokeball": 20 }, potions: { "Small Potion": 10 } };
+            case 2: return { items: { "Greatball": 10 }, potions: { "Regular Potion": 10 } };
+            case 3: return { items: { "Greatball": 20 }, potions: { "Regular Potion": 20 } };
+            case 4: return { items: { "Ultraball": 10 }, potions: { "Big Potion": 5 } };
+            case 5: return { items: { "Ultraball": 20 }, potions: { "Big Potion": 10 } };
+            case 6: return { items: { "Masterball": 1 }, potions: { "Hyper Potion": 2 } };
+        }
+    } else if (w === 2) {
+        switch(dayOfWeek) {
+            case 0: return { items: { "Ultraball": 15 }, potions: { "Big Potion": 10 } };
+            case 1: return { items: { "Ultraball": 20 }, potions: { "Big Potion": 10 } };
+            case 2: return { items: { "Ultraball": 25 }, potions: { "Big Potion": 15 } };
+            case 3: return { items: { "Ultraball": 30 }, potions: { "Big Potion": 15 } };
+            case 4: return { items: { "Ultraball": 35 }, potions: { "Big Potion": 20 } };
+            case 5: return { items: { "Ultraball": 40 }, potions: { "Hyper Potion": 10 } };
+            case 6: return { items: { "Masterball": 2 }, potions: { "Hyper Potion": 4 } };
+        }
+    } else {
+        // Week 3+
+        if (dayOfWeek < 6) { // Days 1-6
+            const ultraballs = 40 + 5 * (d - 14);
+            const hyperPotions = 10 + 2 * (d - 14);
+            return { items: { "Ultraball": ultraballs }, potions: { "Hyper Potion": hyperPotions } };
+        } else { // Day 7
+            const masterballs = w;
+            const bigPotions = 2 * w;
+            return { items: { "Masterball": masterballs }, potions: { "Big Potion": bigPotions } };
+        }
+    }
+}
+
+export function getRewardListForWeek(weekNumber) {
+    const list = [];
+    const startDaysClaimed = (weekNumber - 1) * 7;
+    for (let i = 0; i < 7; i++) {
+        list.push(getRewardForDay(startDaysClaimed + i));
+    }
+    return list;
+}
+
+
 
 function getLocalDateString() {
     const now = new Date();
@@ -39,14 +70,11 @@ export function checkDailyRewardAvailable() {
 export function claimDailyReward(dayIndex) {
     if (!checkDailyRewardAvailable()) return;
 
-    // Determine if we are on week 1 or week > 1
-    const week = Math.floor(state.stats.dailyRewards.daysClaimed / 7);
     const dayOfWeek = state.stats.dailyRewards.daysClaimed % 7;
 
     if (dayIndex !== dayOfWeek) return; // Can only claim the current day
 
-    const rewardList = (week === 0) ? week1Rewards : weekXRewards;
-    const reward = rewardList[dayOfWeek];
+    const reward = getRewardForDay(state.stats.dailyRewards.daysClaimed);
 
     // Grant items
     for (let ballName in reward.items) {
@@ -87,7 +115,7 @@ export function showCalendar() {
     const weekNumber = Math.floor(displayDaysClaimed / 7) + 1;
     const dayOfWeek = displayDaysClaimed % 7;
 
-    const rewardList = (weekNumber === 1) ? week1Rewards : weekXRewards;
+    const rewardList = getRewardListForWeek(weekNumber);
 
     let html = `<div style="text-align: center; color: white;">`;
     html += `<h2 style="margin-top: 0;">Daily Rewards - Week ${weekNumber}</h2>`;
