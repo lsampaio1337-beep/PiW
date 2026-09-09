@@ -2,6 +2,31 @@ import { calculateEV } from "../mathEngine.js";
 import { state, globals } from '../state.js';
 import { updateUI, showModal } from '../ui.js';
 
+// formatMarketNumberDown is hoisted manually if needed
+function _formatMarketNumberDown(num) {
+    if (num < 1000) return num.toString();
+
+    let suffix = '';
+    let val = num;
+    if (num >= 1000000000000) { suffix = 'T'; val = num / 1000000000000; }
+    else if (num >= 1000000000) { suffix = 'B'; val = num / 1000000000; }
+    else if (num >= 1000000) { suffix = 'M'; val = num / 1000000; }
+    else if (num >= 1000) { suffix = 'K'; val = num / 1000; }
+
+    let rounded = Math.floor(val * 10) / 10;
+    let origRecomputed = rounded;
+    if (suffix === 'T') origRecomputed *= 1000000000000;
+    else if (suffix === 'B') origRecomputed *= 1000000000;
+    else if (suffix === 'M') origRecomputed *= 1000000;
+    else if (suffix === 'K') origRecomputed *= 1000;
+
+    let displayStr = rounded.toString() + suffix;
+    if (origRecomputed !== num) {
+        displayStr = '~' + displayStr;
+    }
+    return displayStr;
+}
+
 export function setupMarket(vCenter) {
     vCenter.innerHTML = `
         <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: space-between; align-items: center; padding: 0 10vw; box-sizing: border-box;">
@@ -197,7 +222,7 @@ export function renderPokeMarketTab(category) {
                 <img src="${item.img}" style="width: calc(var(--m-width) * 0.072); height: calc(var(--m-width) * 0.072); object-fit: contain; margin-bottom: calc(var(--m-width) * 0.006);">
                 ${category !== 'stones' ? `<div style="font-size: calc(var(--m-width) * 0.014); color: #f1c40f; margin-bottom: calc(var(--m-width) * 0.006); line-height: 1.1;">${item.attrLabel}</div>` : ''}
                 <div style="font-size: calc(var(--m-width) * 0.014); color: #bdc3c7; line-height: 1.1; margin-bottom: calc(var(--m-width) * 0.006);">Stock: ${formatMarketNumberDown(stock)}</div>
-                <div style="font-size: calc(var(--m-width) * 0.014); color: #bdc3c7; line-height: 1.1;">Base: $${formatMarketNumber(item.price)}</div>
+                <div style="font-size: calc(var(--m-width) * 0.014); color: #bdc3c7; line-height: 1.1;">Base: ${formatMarketNumber(item.price)}</div>
                 <div class="market-final-price" style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; color: #2ecc71; margin-top: calc(var(--m-width) * 0.006); line-height: 1.1;">$${formatMarketNumber(item.price)}</div>
             </div>
         `;
@@ -225,6 +250,7 @@ export function buyItem(itemId, baseCost, category) {
         const moneyLabel = document.getElementById('market-trainer-money');
         if (moneyLabel) moneyLabel.textContent = state.trainer.money.toLocaleString();
         window.showGameAlert(`Bought ${qty.toLocaleString()}x ${itemId} for $${totalCost.toLocaleString()}!`);
+        renderPokeMarketTab(category);
     } else {
         window.showGameAlert(`Not enough money! You need $${totalCost.toLocaleString()} but only have $${state.trainer.money.toLocaleString()}.`);
     }
@@ -232,27 +258,7 @@ export function buyItem(itemId, baseCost, category) {
 
 
 export function formatMarketNumberDown(num) {
-    if (num < 1000) return num.toString();
-
-    let suffix = '';
-    let val = num;
-    if (num >= 1000000000000) { suffix = 'T'; val = num / 1000000000000; }
-    else if (num >= 1000000000) { suffix = 'B'; val = num / 1000000000; }
-    else if (num >= 1000000) { suffix = 'M'; val = num / 1000000; }
-    else if (num >= 1000) { suffix = 'K'; val = num / 1000; }
-
-    let rounded = Math.floor(val * 10) / 10;
-    let origRecomputed = rounded;
-    if (suffix === 'T') origRecomputed *= 1000000000000;
-    else if (suffix === 'B') origRecomputed *= 1000000000;
-    else if (suffix === 'M') origRecomputed *= 1000000;
-    else if (suffix === 'K') origRecomputed *= 1000;
-
-    let displayStr = rounded.toString() + suffix;
-    if (origRecomputed !== num) {
-        displayStr = '~' + displayStr;
-    }
-    return displayStr;
+    return _formatMarketNumberDown(num);
 }
 
 export function openPokeMarketSell() {
@@ -272,7 +278,7 @@ export function openPokeMarketSell() {
             <div id="market-pokemon-sell-controls" style="display: none; flex-direction: column; align-items: center; justify-content: center; margin-bottom: calc(var(--m-width) * 0.024); gap: calc(var(--m-width) * 0.012);">
                 <div style="font-size: calc(var(--m-width) * 0.022); font-weight: bold; color: white;">Selected: <span id="market-pokemon-sell-count">0</span> | Total: $<span id="market-pokemon-sell-total">0</span></div>
                 <div style="display: flex; gap: calc(var(--m-width) * 0.012);">
-                    <button onclick="if(window.marketSelectAllPokemonForSale) window.marketSelectAllPokemonForSale()" style="padding: calc(var(--m-width) * 0.012) calc(var(--m-width) * 0.024); font-size: calc(var(--m-width) * 0.019); font-weight: bold; border-radius: 5px; background: #3498db; color: white; cursor: pointer; border: none;">Select All</button>
+                    <button onclick="if(window.marketSelectAllPokemonForSale) window.marketSelectAllPokemonForSale()" style="padding: calc(var(--m-width) * 0.012) calc(var(--m-width) * 0.024); font-size: calc(var(--m-width) * 0.019); font-weight: bold; border-radius: 5px; background: #3498db; color: white; cursor: pointer; border: none;">Select Visible</button>
                     <button onclick="if(window.marketDeselectAllPokemonForSale) window.marketDeselectAllPokemonForSale()" style="padding: calc(var(--m-width) * 0.012) calc(var(--m-width) * 0.024); font-size: calc(var(--m-width) * 0.019); font-weight: bold; border-radius: 5px; background: #95a5a6; color: white; cursor: pointer; border: none;">Deselect All</button>
                     <button onclick="if(window.marketSellSelectedPokemon) window.marketSellSelectedPokemon()" style="padding: calc(var(--m-width) * 0.012) calc(var(--m-width) * 0.024); font-size: calc(var(--m-width) * 0.019); font-weight: bold; border-radius: 5px; background: #e74c3c; color: white; cursor: pointer; border: none;">Sell Selected</button>
                 </div>
@@ -353,6 +359,7 @@ export function renderPokeMarketSellTab(category) {
         const filterSumIVMax = parseFloat(document.getElementById('market-filter-sumiv-max')?.value);
 
         state.storage.forEach(p => {
+        if (!p.uuid) p.uuid = Math.random().toString(36).substring(2, 15);
             let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
             let pEv = calculateEV(p.bst, p.level, p.quality, sumIV);
 
@@ -594,7 +601,35 @@ window.marketDeselectAllPokemonForSale = function() {
 
 window.marketSelectAllPokemonForSale = function() {
     if (!window.marketSelectedPokemonForSale) window.marketSelectedPokemonForSale = new Set();
-    state.storage.forEach(p => window.marketSelectedPokemonForSale.add(p.uuid));
+
+    const filterName = (document.getElementById('market-filter-name')?.value || '').toLowerCase();
+    const filterLevelMin = parseFloat(document.getElementById('market-filter-level-min')?.value);
+    const filterLevelMax = parseFloat(document.getElementById('market-filter-level-max')?.value);
+    const filterQMin = parseFloat(document.getElementById('market-filter-q-min')?.value);
+    const filterQMax = parseFloat(document.getElementById('market-filter-q-max')?.value);
+    const filterSumIVMin = parseFloat(document.getElementById('market-filter-sumiv-min')?.value);
+    const filterSumIVMax = parseFloat(document.getElementById('market-filter-sumiv-max')?.value);
+
+    state.storage.forEach(p => {
+        if (!p.uuid) p.uuid = Math.random().toString(36).substring(2, 15);
+        let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
+
+        let pName = p.name || p.id;
+        if (typeof p.id === 'number' && state.config && state.config.pokemonData) {
+            const pd = state.config.pokemonData.find(pd => pd.id === p.id);
+            if (pd) pName = p.name || pd.name;
+        }
+        if (filterName && !(pName && pName.toString().toLowerCase().includes(filterName)) && !(p.id && p.id.toString().toLowerCase().includes(filterName))) return;
+        if (!isNaN(filterLevelMin) && p.level < filterLevelMin) return;
+        if (!isNaN(filterLevelMax) && p.level > filterLevelMax) return;
+        if (!isNaN(filterQMin) && p.quality < filterQMin) return;
+        if (!isNaN(filterQMax) && p.quality > filterQMax) return;
+        if (!isNaN(filterSumIVMin) && sumIV < filterSumIVMin) return;
+        if (!isNaN(filterSumIVMax) && sumIV > filterSumIVMax) return;
+
+        window.marketSelectedPokemonForSale.add(p.uuid);
+    });
+
     updateMarketPokemonSellCount();
     if (window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon');
 };
@@ -607,6 +642,7 @@ function updateMarketPokemonSellCount() {
 
         let totalGain = 0;
         state.storage.forEach(p => {
+        if (!p.uuid) p.uuid = Math.random().toString(36).substring(2, 15);
             if (window.marketSelectedPokemonForSale.has(p.uuid)) {
                 let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
                 let pEv = calculateEV(p.bst, p.level, p.quality, sumIV);
