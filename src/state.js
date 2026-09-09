@@ -27,6 +27,7 @@ export const state = {
         shiniesCaught: 0,
         playtime: 0,
         completedChallenges: 0,
+        upgrades: { ballsTier: 0, potionsTier: 0, boxTier: 0 },
         qTaskTier: 0,
         cTaskTier: 0,
         shinySeenTaskTier: 0,

@@ -33,7 +33,32 @@ const balance = {
       "stones": {
          "price": 200,
          "sell": 200
-      }
+      },
+
+      "upgrades": {
+        "balls": [
+          {"tier": 1, "name": "Ball Carrier", "increment": 50, "price": 150},
+          {"tier": 2, "name": "Tactical Ball Cinch", "increment": 100, "price": 450},
+          {"tier": 3, "name": "Ball Sling", "increment": 250, "price": 1200},
+          {"tier": 4, "name": "Silph Ball Loader", "increment": 500, "price": 3000},
+          {"tier": 5, "name": "Upgraded Silph Ball Loader", "increment": 1000, "price": 7500},
+          {"tier": 6, "name": "Endless Ball Reservoir", "increment": 7999, "price": 20000}
+        ],
+        "potions": [
+          {"tier": 1, "name": "Small Pouch Patch", "increment": 20, "price": 75},
+          {"tier": 2, "name": "Standard Pouch Patch", "increment": 30, "price": 200},
+          {"tier": 3, "name": "Heavy Pouch Patch", "increment": 50, "price": 500},
+          {"tier": 4, "name": "Expanded Satchel Kit", "increment": 100, "price": 1200},
+          {"tier": 5, "name": "Alchemist Belt Rig", "increment": 280, "price": 3000}
+        ],
+        "box": [
+          {"tier": 1, "name": "Small Box Upgrade", "increment": 10, "price": 100},
+          {"tier": 2, "name": "Standard Box Upgrade", "increment": 20, "price": 300},
+          {"tier": 3, "name": "Large Box Upgrade", "increment": 50, "price": 900},
+          {"tier": 4, "name": "Huge Box Upgrade", "increment": 100, "price": 2500},
+          {"tier": 5, "name": "Ultimate Box Upgrade", "increment": 300, "price": 6000}
+        ]
+      },
     }
   };
 export default balance;
