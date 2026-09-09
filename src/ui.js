@@ -153,6 +153,8 @@ window.cheatProgressChallenge = function() {
 };
 
 window.showChallengesModal = function() {
+    const extraChallengeAreas = ['Cassino', 'Small Fishing Spot', 'Fighting Dojo', 'Big Fishing Spot', 'Fossil Revival Lab', 'Trade With Friends Hub', 'Power Plant', 'Seafoam Islands', 'Victory Road'];
+
     if (!state.config.unlocks) return;
 
     let currentIndex = state.stats.completedChallenges || 0;
@@ -1008,8 +1010,9 @@ async function init() {
                                 return num.toLocaleString('en-US').replace(/,/g, '.');
                             }
 
-                            // Format Time
-                            let totalSeconds = Math.floor(timeElapsedMs / 1000);
+                            // Format Time based on actual simulated time returned by the engine
+                            let displayTimeMs = results.simulatedTimeMs !== undefined ? results.simulatedTimeMs : timeElapsedMs;
+                            let totalSeconds = Math.floor(displayTimeMs / 1000);
                             let d = Math.floor(totalSeconds / (3600 * 24));
                             let h = Math.floor((totalSeconds % (3600 * 24)) / 3600);
                             let m = Math.floor((totalSeconds % 3600) / 60);
@@ -1040,11 +1043,13 @@ async function init() {
 
                             let faintedBanner = "";
                             if (results.fainted) {
-                                faintedBanner = `<div style="background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; border-radius: 8px; padding: 10px; color: #fca5a5; text-align: center; font-weight: bold; margin-top: 5px;">❌ Party Fainted</div>`;
+                                faintedBanner = `<div style="background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; border-radius: 8px; padding: 10px; color: #fca5a5; text-align: center; font-weight: bold; margin-top: 5px;">❌ Farm Stopped: Party Fainted</div>`;
                             } else if (results.outOfMoney) {
                                 faintedBanner = `<div style="background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; border-radius: 8px; padding: 10px; color: #fca5a5; text-align: center; font-weight: bold; margin-top: 5px;">❌ Farm Stopped: No money to buy more entries</div>`;
+                            } else if (results.simulatedTimeMs !== undefined && results.simulatedTimeMs >= maxTimeMs) {
+                                faintedBanner = `<div style="background: rgba(234, 179, 8, 0.2); border: 1px solid #facc15; border-radius: 8px; padding: 10px; color: #fde047; text-align: center; font-weight: bold; margin-top: 5px;">❌ Farm Stopped: Jigglypuff Dust ended</div>`;
                             } else {
-                                faintedBanner = `<div style="background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; border-radius: 8px; padding: 10px; color: #6ee7b7; text-align: center; font-weight: bold; margin-top: 5px;">✅ Farm Successful</div>`;
+                                faintedBanner = `<div style="background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; border-radius: 8px; padding: 10px; color: #6ee7b7; text-align: center; font-weight: bold; margin-top: 5px;">✅ Farm Stopped: Logged in a save</div>`;
                             }
 
                             // Show results modal
@@ -1341,3 +1346,6 @@ window.leaveSafariZone = () => {
     switchView("MAP");
 };
 window.switchView = switchView;
+
+window.initGame = init;
+window.startGame = startGame;

@@ -456,50 +456,665 @@ export { routes };
 
 
 export const unlocks = [
-  { areaId: "Route 1", unlocks: ["Route 2"], requirements: { defeat: { route: "Route 1", count: 25 } } },
-  { areaId: "Route 2", unlocks: ["Viridian Forest"], requirements: { catchSpecific: ["Nidoran♀", "Nidoran♂"] } },
-  { areaId: "Viridian Forest", unlocks: ["Pewter Gym"], requirements: { catchType: { type: "Bug", minQ: 3, count: 1 } }, gift: { type: "item", item: "Pokeball", count: 10 } },
-  { areaId: "Pewter Gym", unlocks: ["Route 3"], requirements: { badge: "Boulder Badge" } },
-  { areaId: "Route 3", unlocks: ["Mt. Moon"], requirements: { catchSpecific: ["Ekans", "Sandshrew"] } },
-  { areaId: "Mt. Moon", unlocks: ["Route 4"], requirements: { catchSpecific: ["Clefairy"], catchSpecificWithQ: { name: "Zubat", minQ: 3, count: 1 } }, gift: { type: "item", item: "Fairy Stone", count: 1 } },
-  { areaId: "Route 4", unlocks: ["Cerulean Gym"], requirements: { catchSpecific: ["Mankey", "Mankey"] } },
-  { areaId: "Cerulean Gym", unlocks: ["Route 24"], requirements: { badge: "Cascade Badge" } },
-  { areaId: "Route 24", unlocks: ["Route 25"], requirements: { catchSpecific: ["Abra", "Abra"] } },
-  { areaId: "Route 25", unlocks: ["Route 5"], requirements: { catchSpecific: ["Abra", "Abra", "Abra", "Abra", "Abra"] }, gift: { type: "item", item: "Psychic Stone", count: 1 } },
-  { areaId: "Route 5", unlocks: ["Route 6"], requirements: { defeat: { route: "Route 5", count: 100 } } },
-  { areaId: "Route 6", unlocks: ["Vermilion Gym"], requirements: { catchSpecific: ["Psyduck", "Goldeen"] } },
-  { areaId: "Vermilion Gym", unlocks: ["Route 11"], requirements: { badge: "Thunder Badge" } },
-  { areaId: "Route 11", unlocks: ["Diglett's Cave"], requirements: { catchSpecific: ["Drowzee", "Drowzee", "Drowzee", "Drowzee", "Drowzee", "Raticate"] } },
-  { areaId: "Diglett's Cave", unlocks: ["Route 9"], requirements: { catchSpecific: ["Dugtrio", "Dugtrio"] }, gift: { type: "item", item: "Ground Stone", count: 1 } },
-  { areaId: "Route 9", unlocks: ["Route 10"], requirements: { catchSpecific: ["Fearow", "Fearow"] } },
-  { areaId: "Route 10", unlocks: ["Rock Tunnel"], requirements: { defeat: { route: "Route 10", count: 100 } } },
-  { areaId: "Rock Tunnel", unlocks: ["Route 8"], requirements: { catchSpecific: ["Onix", "Onix", "Machop", "Machop"] }, gift: { type: "item", item: "Rock Stone", count: 1 } },
-  { areaId: "Route 8", unlocks: ["Celadon Gym"], requirements: { catchSpecific: ["Kadabra", "Kadabra"], catchType: { type: "Fire", count: 10 } } },
-  { areaId: "Celadon Gym", unlocks: ["Route 7", "Casino"], requirements: { badge: "Rainbow Badge" } },
-  { areaId: "Route 7", unlocks: ["Pokémon Tower"], requirements: { defeat: { route: "Route 7", count: 150 } } },
-  { areaId: "Pokémon Tower", unlocks: ["Route 12"], requirements: { catchSpecific: ["Haunter", "Haunter", "Cubone"] }, gift: { type: "item", item: "Ghost Stone", count: 2 } },
-  { areaId: "Route 12", unlocks: ["Route 13"], requirements: { catchSpecific: ["Farfetch'd", "Farfetch'd", "Farfetch'd"] } },
-  { areaId: "Route 13", unlocks: ["Route 14, 15"], requirements: { catchSpecific: ["Victreebel", "Vileplume"] } },
-  { areaId: "Route 14, 15", unlocks: ["Fuchsia Gym"], requirements: { catchSpecific: ["Ditto", "Ditto", "Ditto", "Ditto", "Ditto"] }, gift: { type: "item", item: "Normal Stone", count: 2 } },
-  { areaId: "Fuchsia Gym", unlocks: ["Cycling Road (16-18)"], requirements: { badge: "Soul Badge" } },
-  { areaId: "Cycling Road (16-18)", unlocks: ["Safari Zone"], requirements: { catchSpecific: ["Dodrio", "Dodrio"] } },
-  { areaId: "Safari Zone", unlocks: ["Saffron Gym"], requirements: { defeat: { route: "Safari Zone", count: 400 } }, gift: { type: "item", item: "Ultraball", count: 10 } },
-  { areaId: "Saffron Gym", unlocks: ["Sea Routes"], requirements: { badge: "Marsh Badge" } },
-  { areaId: "Sea Routes", unlocks: ["Pokémon Mansion"], requirements: { defeat: { route: "Sea Routes", count: 250 } } },
-  { areaId: "Pokémon Mansion", unlocks: ["Cinnabar Gym"], requirements: { catchSpecificWithQ: { name: "Magmar", minQ: 3, count: 1 } }, gift: { type: "item", item: "Fire Stone", count: 3 } },
-  { areaId: "Cinnabar Gym", unlocks: ["Viridian Gym"], requirements: { badge: "Volcano Badge" } },
-  { areaId: "Viridian Gym", unlocks: ["Route 22"], requirements: { badge: "Earth Badge" } },
-  { areaId: "Route 22", unlocks: ["Route 23"], requirements: { defeat: { route: "Route 22", count: 350 } }, gift: { type: "item", item: "Big Potion", count: 10 } },
-  { areaId: "Route 23", unlocks: ["Elite 4"], requirements: { catchSpecificWithQ: { name: "Nidoking", name2: "Nidoqueen", minQ: 3, count: 1 } } },
-  { areaId: "Elite 4", unlocks: ["Casino (Extra Challenge)"], requirements: { defeatEliteFourAndChampion: true } },
-  { areaId: "Casino", unlocks: ["Small Fishing Spot"], requirements: { catchSpecific: ["Bulbasaur", "Charmander", "Squirtle"] }, gift: { type: "item", item: "Ultraball", count: 10 } },
-  { areaId: "Small Fishing Spot", unlocks: ["Fighting Dojo"], requirements: { catchSpecificWithQ: { name: "Magikarp", minQ: 4, count: 1 }, catchEachFromSlotMachine: { name: "Casino Mid Trupe", machines: [["Machop", "Geodude", "Gastly", "Abra"]] } }, gift: { type: "item", item: "Ultraball", count: 10 } },
-  { areaId: "Fighting Dojo", unlocks: ["Big Fishing Spot"], requirements: { catchSpecificWithQ: { name: "Hitmonchan", name2: "Hitmonlee", both: true, minQ: 3, count: 1 }, catchEachFromSlotMachine: { name: "Casino Eeveelutions", machines: [["Eevee", "Vaporeon", "Jolteon", "Flareon"]] } }, gift: { type: "item", item: "Fighting Stone", count: 3 } },
-  { areaId: "Big Fishing Spot", unlocks: ["Fossil Revival Lab"], requirements: { catchType: { type: "Dragon", minQ: 3, count: 2 }, catchEachFromSlotMachine: { name: "Casino Special Spot", machines: [["Dratini", "Dragonair", "Dragonite", "Porygon"]] } }, gift: { type: "item", item: "Dragon Stone", count: 6 } },
-  { areaId: "Fossil Revival Lab", unlocks: ["Trade With Friends Hub"], requirements: { catchSpecificWithQ: { name: "Aerodactyl", minQ: 3, count: 1 }, catchEachFromSlotMachine: { name: "Casino Late Trupe", machines: [["Scyther", "Pinsir", "Tauros", "Chansey"]] } }, gift: { type: "item", item: "Ultraball", count: 20 } },
-  { areaId: "Trade With Friends Hub", unlocks: ["Power Plant"], requirements: { catchSpecific: ["Gengar", "Golem", "Alakazam", "Machamp"] }, gift: { type: "item", item: "Ultraball", count: 20 } },
-  { areaId: "Power Plant", unlocks: ["Seafoam Islands"], requirements: { defeatSpecific: { name: "Zapdos", count: 5 } }, gift: { type: "item", item: "Masterball", count: 1 } },
-  { areaId: "Seafoam Islands", unlocks: ["Victory Road"], requirements: { defeatSpecific: { name: "Articuno", count: 5 } }, gift: { type: "item", item: "Masterball", count: 1 } },
-  { areaId: "Victory Road", unlocks: ["Cerulean Cave"], requirements: { defeatSpecific: { name: "Moltres", count: 5 } }, gift: { type: "item", item: "Masterball", count: 1 } },
-  { areaId: "Cerulean Cave", unlocks: ["Elite 4 (Reset)"], requirements: { defeatSpecific: { name: "Mewtwo", count: 5 } }, gift: { type: "item", item: "Masterball", count: 2 } },
+  {
+    "areaId": "Route 1",
+    "unlocks": [
+      "Route 2"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Route 1",
+        "count": 25
+      }
+    }
+  },
+  {
+    "areaId": "Route 2",
+    "unlocks": [
+      "Viridian Forest"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "NidoranF",
+          "count": 1
+        },
+        {
+          "species": "NidoranM",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "areaId": "Viridian Forest",
+    "gift": { "item": "Pokeball", "count": 10 },
+    "unlocks": [
+      "Pewter Gym"
+    ],
+    "requirements": {
+      "catchByRarityAndType": {
+        "type": "Bug",
+        "rarity": "Epic",
+        "count": 1
+      }
+    }
+  },
+  {
+    "areaId": "Pewter Gym",
+    "unlocks": [
+      "Route 3"
+    ],
+    "requirements": {
+      "earnBadge": {
+        "name": "Boulder Badge",
+        "leader": "Brock",
+        "badgeCount": 1
+      }
+    }
+  },
+  {
+    "areaId": "Route 3",
+    "unlocks": [
+      "Mount Moon"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Ekans",
+          "count": 1
+        },
+        {
+          "species": "Sandshrew",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "areaId": "Mount Moon",
+    "gift": { "item": "Fairy Stone", "count": 1 },
+    "unlocks": [
+      "Route 4"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Clefairy",
+          "count": 1
+        }
+      ],
+      "catchSpeciesByRarity": [
+        {
+          "species": "Zubat",
+          "rarity": "Epic",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "areaId": "Route 4",
+    "unlocks": [
+      "Cerulean Gym"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Mankey",
+          "count": 2
+        }
+      ]
+    }
+  },
+  {
+    "areaId": "Cerulean Gym",
+    "unlocks": [
+      "Route 24"
+    ],
+    "requirements": {
+      "earnBadge": {
+        "name": "Cascade Badge",
+        "leader": "Misty",
+        "badgeCount": 2
+      }
+    }
+  },
+  {
+    "areaId": "Route 24",
+    "unlocks": [
+      "Route 25"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Abra",
+          "count": 2
+        }
+      ]
+    }
+  },
+  {
+    "areaId": "Route 25",
+    "gift": { "item": "Psychic Stone", "count": 1 },
+    "unlocks": [
+      "Route 5"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Abra",
+          "count": 5
+        }
+      ]
+    }
+  },
+  {
+    "areaId": "Route 5",
+    "unlocks": [
+      "Route 6"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Route 5",
+        "count": 100
+      }
+    }
+  },
+  {
+    "areaId": "Route 6",
+    "unlocks": [
+      "Vermilion Gym"
+    ],
+    "requirements": {
+      "catchSpeciesAnyOf": [
+        {
+          "species": [
+            "Psyduck",
+            "Goldeen"
+          ],
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "areaId": "Vermilion Gym",
+    "unlocks": [
+      "Route 11"
+    ],
+    "requirements": {
+      "earnBadge": {
+        "name": "Thunder Badge",
+        "leader": "Lt. Surge",
+        "badgeCount": 3
+      }
+    }
+  },
+  {
+    "areaId": "Route 11",
+    "unlocks": [
+      "Diglett's Cave"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Drowzee",
+          "count": 5
+        },
+        {
+          "species": "Raticate",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "areaId": "Diglett's Cave",
+    "gift": { "item": "Ground Stone", "count": 1 },
+    "unlocks": [
+      "Route 9"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Dugtrio",
+          "count": 2
+        }
+      ]
+    }
+  },
+  {
+    "areaId": "Route 9",
+    "unlocks": [
+      "Route 10"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Fearow",
+          "count": 2
+        }
+      ]
+    }
+  },
+  {
+    "areaId": "Route 10",
+    "unlocks": [
+      "Rock Tunnel"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Route 10",
+        "count": 100
+      }
+    }
+  },
+  {
+    "areaId": "Rock Tunnel",
+    "gift": { "item": "Rock Stone", "count": 1 },
+    "unlocks": [
+      "Route 8"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Onix",
+          "count": 2
+        },
+        {
+          "species": "Machop",
+          "count": 2
+        }
+      ]
+    }
+  },
+  {
+    "areaId": "Route 8",
+    "unlocks": [
+      "Celadon Gym"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Kadabra",
+          "count": 2
+        }
+      ],
+      "catchByType": {
+        "type": "Fire",
+        "count": 10
+      }
+    }
+  },
+  {
+    "areaId": "Celadon Gym",
+    "unlocks": [
+      "Route 7",
+      "Casino"
+    ],
+    "requirements": {
+      "earnBadge": {
+        "name": "Rainbow Badge",
+        "leader": "Erika",
+        "badgeCount": 4
+      }
+    }
+  },
+  {
+    "areaId": "Route 7",
+    "unlocks": [
+      "Pokémon Tower"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Route 7",
+        "count": 150
+      }
+    }
+  },
+  {
+    "areaId": "Pokémon Tower",
+    "gift": { "item": "Ghost Stone", "count": 2 },
+    "unlocks": [
+      "Route 12"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Haunter",
+          "count": 2
+        },
+        {
+          "species": "Cubone",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "areaId": "Route 12",
+    "unlocks": [
+      "Route 13"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Farfetch'd",
+          "count": 3
+        }
+      ]
+    }
+  },
+  {
+    "areaId": "Route 13",
+    "unlocks": ["Route 14,15"],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Victreebel",
+          "count": 1
+        },
+        {
+          "species": "Vileplume",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "areaId": "Route 14,15",
+    "gift": { "item": "Normal Stone", "count": 2 },
+    "unlocks": [
+      "Fuchsia Gym"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Ditto",
+          "count": 5
+        }
+      ]
+    }
+  },
+
+  {
+    "areaId": "Fuchsia Gym",
+    "unlocks": [
+      "Cycling Road (16-18)"
+    ],
+    "requirements": {
+      "earnBadge": {
+        "name": "Soul Badge",
+        "leader": "Koga",
+        "badgeCount": 5
+      }
+    }
+  },
+  {
+    "areaId": "Cycling Road (16-18)",
+    "unlocks": [
+      "Safari Zone"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Dodrio",
+          "count": 2
+        }
+      ]
+    }
+  },
+  {
+    "areaId": "Safari Zone",
+    "gift": { "item": "Ultraball", "count": 10 },
+    "unlocks": [
+      "Saffron Gym"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Safari Zone",
+        "count": 400
+      }
+    }
+  },
+  {
+    "areaId": "Saffron Gym",
+    "unlocks": [
+      "Sea Routes"
+    ],
+    "requirements": {
+      "earnBadge": {
+        "name": "Marsh Badge",
+        "leader": "Sabrina",
+        "badgeCount": 6
+      }
+    }
+  },
+  {
+    "areaId": "Sea Routes",
+    "unlocks": [
+      "Pokémon Mansion"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Sea Routes",
+        "count": 250
+      }
+    }
+  },
+  {
+    "areaId": "Pokémon Mansion",
+    "gift": { "item": "Fire Stone", "count": 3 },
+    "unlocks": [
+      "Cinnabar Gym"
+    ],
+    "requirements": {
+      "catchSpeciesByRarity": [
+        {
+          "species": "Magmar",
+          "rarity": "Epic",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "areaId": "Cinnabar Gym",
+    "unlocks": [
+      "Viridian Gym"
+    ],
+    "requirements": {
+      "earnBadge": {
+        "name": "Volcano Badge",
+        "leader": "Blaine",
+        "badgeCount": 7
+      }
+    }
+  },
+  {
+    "areaId": "Viridian Gym",
+    "unlocks": [
+      "Route 22"
+    ],
+    "requirements": {
+      "earnBadge": {
+        "name": "Earth Badge",
+        "leader": "Giovanni",
+        "badgeCount": 8
+      }
+    }
+  },
+  {
+    "areaId": "Route 22",
+    "gift": { "item": "Big Potion", "count": 10 },
+    "unlocks": [
+      "Route 23"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Route 22",
+        "count": 350
+      }
+    }
+  },
+  {
+    "areaId": "Route 23",
+    "unlocks": [
+      "Elite 4"
+    ],
+    "requirements": {
+      "catchSpeciesAnyOfByRarity": [
+        {
+          "species": [
+            "Nidoking",
+            "Nidoqueen"
+          ],
+          "rarity": "Epic",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "areaId": "Elite 4",
+    "unlocks": [
+      "Prestige / Region Reset"
+    ],
+    "requirements": {
+      "defeatEliteFourAndChampion": true
+    }
+  },
+  {
+    "areaId": "Cassino",
+    "gift": { "item": "Ultraball", "count": 10 },
+    "unlocks": ["Small Fishing Spot"],
+    "requirements": {
+      "catchSpecies": [
+        {"species": "Bulbasaur", "count": 1},
+        {"species": "Charmander", "count": 1},
+        {"species": "Squirtle", "count": 1}
+      ]
+    }
+  },
+  {
+    "areaId": "Small Fishing Spot",
+    "gift": { "item": "Ultraball", "count": 10 },
+    "unlocks": ["Fighting Dojo"],
+    "requirements": {
+      "catchSpeciesByRarity": [
+        {"species": "Magikarp", "rarity": "Epic", "count": 1}
+      ],
+      "catchEachFromSlotMachine": {
+        "machines": [
+          ["Machop", "Geodude", "Gastly", "Abra"]
+        ]
+      }
+    }
+  },
+  {
+    "areaId": "Fighting Dojo",
+    "gift": { "item": "Fighting Stone", "count": 3 },
+    "unlocks": ["Big Fishing Spot"],
+    "requirements": {
+      "catchSpeciesByRarity": [
+        {"species": "Hitmonchan", "rarity": "Epic", "count": 1},
+        {"species": "Hitmonlee", "rarity": "Epic", "count": 1}
+      ],
+      "catchEachFromSlotMachine": {
+        "machines": [
+          ["Eevee", "Vaporeon", "Jolteon", "Flareon"]
+        ]
+      }
+    }
+  },
+  {
+    "areaId": "Big Fishing Spot",
+    "gift": { "item": "Dragon Stone", "count": 6 },
+    "unlocks": ["Fossil Revival Lab"],
+    "requirements": {
+      "catchByRarityAndType": {
+        "type": "Dragon",
+        "rarity": "Epic",
+        "count": 2
+      },
+      "catchEachFromSlotMachine": {
+        "machines": [
+          ["Dratini", "Dragonair", "Dragonite", "Porygon"]
+        ]
+      }
+    }
+  },
+  {
+    "areaId": "Fossil Revival Lab",
+    "gift": { "item": "Ultraball", "count": 20 },
+    "unlocks": ["Trade With Friends Hub"],
+    "requirements": {
+      "catchSpeciesByRarity": [
+        {"species": "Aerodactyl", "rarity": "Epic", "count": 1}
+      ],
+      "catchEachFromSlotMachine": {
+        "machines": [
+          ["Scyther", "Pinsir", "Tauros", "Chansey"]
+        ]
+      }
+    }
+  },
+  {
+    "areaId": "Trade With Friends Hub",
+    "gift": { "item": "Ultraball", "count": 20 },
+    "unlocks": ["Power Plant"],
+    "requirements": {
+      "catchSpecies": [
+        {"species": "Gengar", "count": 1},
+        {"species": "Golem", "count": 1},
+        {"species": "Alakazam", "count": 1},
+        {"species": "Machamp", "count": 1}
+      ]
+    }
+  },
+  {
+    "areaId": "Power Plant",
+    "gift": { "item": "Masterball", "count": 1 },
+    "unlocks": ["Seafoam Islands"],
+    "requirements": {
+      "defeatSpecific": {
+        "name": "Zapdos",
+        "count": 5
+      }
+    }
+  },
+  {
+    "areaId": "Seafoam Islands",
+    "gift": { "item": "Masterball", "count": 1 },
+    "unlocks": ["Victory Road"],
+    "requirements": {
+      "defeatSpecific": {
+        "name": "Articuno",
+        "count": 5
+      }
+    }
+  },
+  {
+    "areaId": "Victory Road",
+    "gift": { "item": "Masterball", "count": 1 },
+    "unlocks": ["Cerulean Cave"],
+    "requirements": {
+      "defeatSpecific": {
+        "name": "Moltres",
+        "count": 5
+      }
+    }
+  },
+  {
+    "areaId": "Cerulean Cave",
+    "gift": { "item": "Masterball", "count": 2 },
+    "unlocks": ["Elite 4 (Reset)"],
+    "requirements": {
+      "defeatSpecific": {
+        "name": "Mewtwo",
+        "count": 5
+      }
+    }
+  }
 ];
