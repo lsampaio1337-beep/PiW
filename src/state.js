@@ -49,7 +49,12 @@ export const state = {
         jigglypuffGrains: 0,
         hasSeenZzZTutorial: false,
         newRoutes: [],
-        hasUnseenMap: false
+        hasUnseenMap: false,
+        upgrades: {
+            ballsTier: 0,
+            potionsTier: 0,
+            boxTier: 0
+        }
     },
     settings: {
         gameSpeed: 1.0,
