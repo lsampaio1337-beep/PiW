@@ -327,7 +327,9 @@ class BattleSystem {
             currentStats: stats,
             maxHp: stats.hp,
             currentHp: stats.hp,
-            ev: mathEngine.calculateEV(bst, level, q.q, totalIV),
+            evxp: mathEngine.calculateEVXP(bst, level, q.q, totalIV),
+            evm: mathEngine.calculateEVM(bst, level, q.q, totalIV),
+            pp: mathEngine.calculatePP(bst, level, q.q, totalIV),
             bst: bst,
             moves: this.getLearnsetMoves(pokemonBase, level)
         };
@@ -448,7 +450,9 @@ class BattleSystem {
             currentStats: stats,
             maxHp: stats.hp,
             currentHp: stats.hp,
-            ev: mathEngine.calculateEV(bst, level, q.q, totalIV),
+            evxp: mathEngine.calculateEVXP(bst, level, q.q, totalIV),
+            evm: mathEngine.calculateEVM(bst, level, q.q, totalIV),
+            pp: mathEngine.calculatePP(bst, level, q.q, totalIV),
             bst: bst,
             moves: this.getLearnsetMoves(pokemonBase, level)
         };
@@ -651,7 +655,8 @@ class BattleSystem {
             this.state.stats.ballsThrown = (this.state.stats.ballsThrown || 0) + 1;
         }
 
-        const chance = mathEngine.calculateCatchChance(this.activeEncounter.bst, this.activeEncounter.level, multiplier, this.state.stats, this.activeEncounter.qualityName === "Shiny");
+        const totalIV = this.activeEncounter.ivs.hp + this.activeEncounter.ivs.atk + this.activeEncounter.ivs.def + this.activeEncounter.ivs.spa + this.activeEncounter.ivs.spd + this.activeEncounter.ivs.spe;
+        const chance = mathEngine.calculateCatchChance(this.activeEncounter.bst, this.activeEncounter.level, this.activeEncounter.quality, totalIV, multiplier, this.state.stats, this.activeEncounter.qualityName === "Shiny");
 
         return {
             used: true,
@@ -671,7 +676,8 @@ class BattleSystem {
             }
         }
 
-        const ev = this.activeEncounter.ev;
+        const evxp = this.activeEncounter.evxp;
+        const evm = this.activeEncounter.evm;
 
         // Bonus Candy Defeats Tracker
         if ((this.state.stats.bonusCandyDefeats || 0) < 250) {
@@ -735,7 +741,7 @@ class BattleSystem {
                         if (!this.state.stats.caughtSpecific) this.state.stats.caughtSpecific = {};
                         if (!this.state.stats.challengeCaughtSpecific) this.state.stats.challengeCaughtSpecific = {};
 
-                        let qName = defeatedEncounter.qualityName || "Regular";
+                        qName = defeatedEncounter.qualityName || "Regular";
 
                         if (defeatedEncounter.types) {
                               for (let t of defeatedEncounter.types) {
@@ -772,15 +778,15 @@ class BattleSystem {
         // Daycare logic
         if (this.state.dayCareRef) {
             this.state.dayCareRef.tickBattle();
-            this.state.dayCareRef.grantPassiveXP(ev, (pkmn, amt) => this.grantXP(pkmn, amt));
+            this.state.dayCareRef.grantPassiveXP(evxp, (pkmn, amt) => this.grantXP(pkmn, amt));
         }
 
         // Loot Bonus Calculation
         const lootMultiplier = 1 + (0.03 * (this.state.stats.greenCandies || 0));
 
         // Award XP and Money (EV)
-        this.grantXP(leader, ev);
-        this.state.trainer.money += Math.floor(ev * lootMultiplier);
+        this.grantXP(leader, evxp);
+        this.state.trainer.money += Math.floor(evm * lootMultiplier);
 
         // Loot drops for Stones
         let dropRate = 0;
@@ -808,6 +814,30 @@ class BattleSystem {
         if (this.activeEncounter.ivs) {
             sumIV = this.activeEncounter.ivs.hp + this.activeEncounter.ivs.atk + this.activeEncounter.ivs.def +
                     this.activeEncounter.ivs.spa + this.activeEncounter.ivs.spd + this.activeEncounter.ivs.spe;
+        }
+
+        let customDropChance = (2.0 + 8.0 * (sumIV / 600.0)) / 100.0;
+
+        if (Math.random() < (customDropChance * lootMultiplier)) {
+            let ballDrop = "Pokeball";
+            let potionDrop = "Tiny Potion";
+            let level = this.activeEncounter.level;
+
+            if (level >= 76) { ballDrop = "Ultraball"; potionDrop = "Hyper Potion"; }
+            else if (level >= 56) { ballDrop = "Greatball"; potionDrop = "Big Potion"; }
+            else if (level >= 36) { ballDrop = "Greatball"; potionDrop = "Regular Potion"; }
+            else if (level >= 16) { ballDrop = "Pokeball"; potionDrop = "Small Potion"; }
+
+            let dropQuantity = Math.floor(lootMultiplier);
+            if (Math.random() < (lootMultiplier % 1)) dropQuantity += 1;
+
+            if (Math.random() < 0.5) {
+                if (!this.state.backpack.pokeballs[ballDrop]) this.state.backpack.pokeballs[ballDrop] = 0;
+                this.state.backpack.pokeballs[ballDrop] += dropQuantity;
+            } else {
+                if (!this.state.backpack.potions[potionDrop]) this.state.backpack.potions[potionDrop] = 0;
+                this.state.backpack.potions[potionDrop] += dropQuantity;
+            }
         }
 
         let itemDropChance = (2.0 + 8.0 * (sumIV / 600)) / 100.0;
@@ -1182,7 +1212,9 @@ class BattleSystem {
 
             const totalIV = ivs.hp + ivs.atk + ivs.def + ivs.spa + ivs.spd + ivs.spe;
             const bst = pokemonBase.hp + pokemonBase.atk + pokemonBase.def + pokemonBase.spa + pokemonBase.spd + pokemonBase.spe;
-            const ev = mathEngine.calculateEV(bst, level, q.q, totalIV);
+            const evxp = mathEngine.calculateEVXP(bst, level, q.q, totalIV);
+            const evm = mathEngine.calculateEVM(bst, level, q.q, totalIV);
+            const pp = mathEngine.calculatePP(bst, level, q.q, totalIV);
 
             this.activeEncounter = {
                 id: pokemonBase.id,
@@ -1195,7 +1227,7 @@ class BattleSystem {
                 currentStats: stats,
                 maxHp: stats.hp,
                 currentHp: stats.hp,
-                ev: ev,
+                evxp: evxp, evm: evm, pp: pp,
                 bst: bst,
                 moves: this.getLearnsetMoves(pokemonBase, level)
             };
@@ -1293,8 +1325,8 @@ class BattleSystem {
                 }
 
                 const lootMultiplier = 1 + (0.03 * (this.state.stats.greenCandies || 0));
-                this.grantXP(leader, ev);
-                this.state.trainer.money += Math.floor(ev * lootMultiplier);
+                this.grantXP(leader, evxp);
+                this.state.trainer.money += Math.floor(evm * lootMultiplier);
                 this.state.stats.battlesWon++;
             } else {
                 leader.currentHp = 0;
