@@ -92,6 +92,7 @@ class BattleSystem {
         this.updateGymUI();
     }
 
+
     updateGymUI() {
         const vGym = document.getElementById("view-gym");
         const contentArea = document.getElementById("gym-content-area");
@@ -100,7 +101,26 @@ class BattleSystem {
         const gym = this.gymState.gym;
         if (!gym) return;
 
+        // Apply elite 4 background during rest phase if applicable
+        if (gym.name === "Indigo Plateau") {
+            const trainerBGs = [
+                'BG-Elite4-1Lorelei.png',
+                'BG-Elite4-2Bruno.png',
+                'BG-Elite4-3Agatha.png',
+                'BG-Elite4-4Lance.png',
+                'BG-Elite4-5Champion.png'
+            ];
+            let trainerIndex = this.gymState.currentTrainerIndex;
+            if (trainerIndex >= trainerBGs.length) {
+                trainerIndex = trainerBGs.length - 1; // Keep Champion BG after beating them
+            }
+            const bgImage = trainerBGs[trainerIndex] || 'BG.png';
+            vGym.style.backgroundImage = `url('./Assets/BG/${bgImage}')`;
+            vGym.style.backgroundSize = "cover";
+        }
+
         const trainer = gym.trainers[this.gymState.currentTrainerIndex];
+
 
         if (trainer) {
             let trainerButtonsHtml = gym.trainers.map((t, index) => {
@@ -124,35 +144,6 @@ class BattleSystem {
                     ${trainerButtonsHtml}
                     <button onclick="window.battleEngine.stopGymBattle()" style="padding: 10px; background: #e74c3c; border: none; color: white; border-radius: 3px; cursor: pointer; margin-top: 10px; width: 100%;">Flee Gym</button>
                 </div>
-
-                <div id="gym-battle-area" style="display: none; margin-top: 20px; margin-bottom: 20px; position: relative;">
-                    <div style="display: flex; justify-content: space-between; align-items: flex-end; height: 150px; background: rgba(0,0,0,0.3); border: 2px solid #555; border-radius: 10px; padding: 20px;">
-
-                        <div style="text-align: left; width: 40%;">
-                            <h4 id="gym-player-name">Player</h4>
-                            <div style="width: 100%; height: 10px; background: #333; border: 1px solid #777;">
-                                <div id="gym-player-hp-bar" style="width: 100%; height: 100%; background: #2ecc71;"></div>
-                            </div>
-                            <span id="gym-player-hp-text"></span>
-                            <div style="position: relative; height: 80px; margin-top: 10px;">
-                                <img id="gym-player-sprite" src="" style="position: absolute; bottom: 0; left: 0; max-height: 80px; transform: scaleX(-1);">
-                            </div>
-                        </div>
-
-                        <div id="gym-combat-log" style="width: 20%; font-size: 12px; color: #ccc; text-align: center; overflow: hidden; height: 100px;"></div>
-
-                        <div style="text-align: right; width: 40%;">
-                            <h4 id="gym-enemy-name">Enemy</h4>
-                            <div style="width: 100%; height: 10px; background: #333; border: 1px solid #777;">
-                                <div id="gym-enemy-hp-bar" style="width: 100%; height: 100%; background: #e74c3c; float: right;"></div>
-                            </div>
-                            <span id="gym-enemy-hp-text"></span>
-                            <div style="position: relative; height: 80px; margin-top: 10px;">
-                                <img id="gym-enemy-sprite" src="" style="position: absolute; bottom: 0; right: 0; max-height: 80px;">
-                            </div>
-                        </div>
-                    </div>
-                </div>
             `;
             // Temporary expose for the button
             window.battleEngine = this;
@@ -160,8 +151,9 @@ class BattleSystem {
             // Re-bind to use our special gym start func that toggles visibility
             window.battleEngine.startNextGymBattle = () => {
                 this.gymState.inCombat = true;
-                document.getElementById('gym-rest-area').style.display = 'none';
-                document.getElementById('gym-battle-area').style.display = 'block';
+                if (typeof window.switchView === 'function') {
+                    window.switchView("BATTLE_ARENA");
+                }
                 this.searchNext();
             };
         } else {
@@ -199,7 +191,8 @@ class BattleSystem {
         }
 
         if (this.state.currentRoute === "Safari Zone") {
-            if (this.state.trainer.money < 500) {
+            const safariCost = this.state.config.balance.safariZonePrice || 500;
+            if (this.state.trainer.money < safariCost) {
                 this.stop();
                 if (typeof window.switchView === 'function') {
                     window.switchView("SAFARI_HUB");
@@ -208,7 +201,7 @@ class BattleSystem {
                 if (msg) msg.innerText = "I am sorry, but you are all out of money. Try to sell some pokemons and come check us latter.";
                 return;
             }
-            this.state.trainer.money -= 500;
+            this.state.trainer.money -= safariCost;
         }
 
         // Out of combat insta-heal if threshold is met
@@ -223,7 +216,9 @@ class BattleSystem {
         this.consecutiveHeals = 0; // Reset for new battle
 
         if (this.state.currentRoute && this.state.currentRoute.startsWith("Casino - ")) {
-            const cost = this.state.casinoDoubleShiny ? 20 : 10;
+            const baseCostStandard = this.state.config.balance.casinoPrices?.standard || 10;
+            const baseCostSpecial = this.state.config.balance.casinoPrices?.doubleShiny || 20;
+            const cost = this.state.casinoDoubleShiny ? baseCostSpecial : baseCostStandard;
             if (this.state.trainer.money < cost) {
                 alert("Not enough money! You need $" + cost + " to continue hunting here.");
                 this.stop();
@@ -280,17 +275,34 @@ class BattleSystem {
 
         // Gym leaders and trainers have fixed quality (e.g. Regular or Uncommon)
         const isLeader = this.gymState.currentTrainerIndex === gym.trainers.length - 1;
-        const q = isLeader ? { name: "Rare", q: 1.40 } : { name: "Uncommon", q: 1.20 };
+
+        let gymIndex = this.state.config.gyms.findIndex(g => g.name === gym.name);
+        if (gymIndex === -1) gymIndex = 0; // Fallback
+
+        // Map Gym Index to QValue and SumIV
+        // Gym 1 (Index 0): Q=1.2, SumIV=270 => IV=45
+        // Gym 2 (Index 1): Q=1.25, SumIV=300 => IV=50
+        // ...
+        // Gym 8 (Index 7): Q=1.55, SumIV=480 => IV=80
+        // E4 (Index 8): Q=1.6, SumIV=510 => IV=85
+        let qValue = 1.2 + (gymIndex * 0.05);
+        let sumIV = 270 + (gymIndex * 30);
+        let ivValue = sumIV / 6;
+
+        let qualityName = "Gym"; // You can keep a standard name or map it if desired
+        if (qValue >= 1.6) qualityName = "Legendary";
+        else if (qValue >= 1.4) qualityName = "Epic";
+        else if (qValue >= 1.3) qualityName = "Rare";
+        else if (qValue >= 1.2) qualityName = "Uncommon";
+
+        const q = { name: qualityName, q: qValue };
 
         // Track seen for pokedex
         if (!this.state.stats.seenSpecies) this.state.stats.seenSpecies = {};
         this.state.stats.seenSpecies[pokemonBase.name] = true;
 
-        // Give them good IVs
-        const ivs = { hp: 50, atk: 50, def: 50, spa: 50, spd: 50, spe: 50 };
-        if (isLeader) {
-            ivs.hp = 80; ivs.atk = 80; ivs.def = 80; ivs.spa = 80; ivs.spd = 80; ivs.spe = 80;
-        }
+        // Give them good IVs based on gym progression
+        const ivs = { hp: ivValue, atk: ivValue, def: ivValue, spa: ivValue, spd: ivValue, spe: ivValue };
 
         const stats = {
             hp: mathEngine.calculateHP(pokemonBase.hp, ivs.hp, level, q.q),
@@ -592,6 +604,8 @@ class BattleSystem {
     }
 
     tryUsePotion(pokemon) {
+        if (this.gymState && this.gymState.isActive) return false; // Auto potions disabled in Gyms
+
         if (pokemon.currentHp >= pokemon.maxHp) return false; // don't heal if full
 
         let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 50;
@@ -804,15 +818,6 @@ class BattleSystem {
         if (this.gymState.currentPokemonIndex >= trainer.team.length) {
             // Defeated trainer
 
-            // Out of combat insta-heal if threshold is met
-            const leader = this.state.party[0];
-            if (leader && leader.currentHp > 0 && this.state.settings.autoPotion) {
-                let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 50;
-                while ((leader.currentHp / leader.maxHp) * 100 <= threshold) {
-                    if (!this.tryUsePotion(leader)) break;
-                }
-            }
-
             // Heal party and storage during Rest/End Phase
             this.state.party.forEach(p => p.currentHp = p.maxHp);
             if (this.state.storage) {
@@ -840,6 +845,9 @@ class BattleSystem {
                 }
             }
             this.updateGymUI();
+            if (typeof window.switchView === 'function') {
+                window.switchView("GYM");
+            }
         } else {
             // Next pokemon
             this.searchNext();
@@ -950,6 +958,9 @@ class BattleSystem {
             this.gymState.isActive = false;
             this.gymState.gym = null;
             this.gymState.inCombat = false;
+            if (typeof window.switchView === 'function') {
+                window.switchView("GYM");
+            }
 
             // Return to poke center
             if (typeof window.navigateToLocation === 'function') {
@@ -997,7 +1008,9 @@ class BattleSystem {
             shinyEncounters: 0,
             ballsUsed: 0,
             potionsUsed: 0,
-            fainted: false
+            fainted: false,
+            outOfMoney: false,
+            simulatedTimeMs: 0
         };
 
         if (this.state.party.length === 0) return results;
@@ -1023,11 +1036,32 @@ class BattleSystem {
             return results; // Can't farm without a route
         }
 
+        let encounterCost = 0;
+        let requiresPayment = false;
+        if (this.state.currentRoute === "Safari Zone") {
+            encounterCost = this.state.config.balance.safariZonePrice || 500;
+            requiresPayment = true;
+        } else if (this.state.currentRoute && this.state.currentRoute.startsWith("Casino - ")) {
+            const baseCostStandard = this.state.config.balance.casinoPrices?.standard || 10;
+            const baseCostSpecial = this.state.config.balance.casinoPrices?.doubleShiny || 20;
+            encounterCost = this.state.casinoDoubleShiny ? baseCostSpecial : baseCostStandard;
+            requiresPayment = true;
+        }
+
         while (totalSimTime < maxTime) {
             // Check if wiped out
             if (!this.state.party.some(p => p.currentHp > 0)) {
                 results.fainted = true;
                 break;
+            }
+
+            // Check if can pay for encounter
+            if (requiresPayment) {
+                if (this.state.trainer.money < encounterCost) {
+                    results.outOfMoney = true;
+                    break;
+                }
+                this.state.trainer.money -= encounterCost;
             }
 
             let leader = this.state.party[0];
@@ -1072,8 +1106,6 @@ class BattleSystem {
                 this.state.stats.seenShiniesSpecies[pokemonBase.name] = true;
             }
             ivs = mathEngine.generateIVs(this.state.stats, q.name === "Shiny");
-
-            if (q.name === "Shiny") this.state.stats.shiniesSeen = (this.state.stats.shiniesSeen || 0) + 1;
 
             const stats = {
                 hp: mathEngine.calculateHP(pokemonBase.hp, ivs.hp, level, q.q),
@@ -1222,6 +1254,8 @@ class BattleSystem {
 
         results.ballsUsed = Math.max(0, initialBalls - finalBalls);
         results.potionsUsed = Math.max(0, initialPotions - finalPotions);
+
+        results.simulatedTimeMs = totalSimTime;
 
         if (results.fainted) {
             // Heal all

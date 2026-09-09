@@ -80,6 +80,12 @@ window.completeChallenge = function() {
     let currentIndex = state.stats.completedChallenges || 0;
     if (state.config.unlocks && currentIndex < state.config.unlocks.length) {
         let unlock = state.config.unlocks[currentIndex];
+        window.currentChallengeTarget = unlock;
+        if (unlock.gift) {
+            if (!state.stats.pendingGifts) state.stats.pendingGifts = [];
+            state.stats.pendingGifts.push({ type: 'item', item: unlock.gift.item || unlock.gift, count: unlock.gift.count || 1 });
+            state.stats.giftIconUnlocked = true;
+        }
         if (unlock.unlocks) {
             for (let newRoute of unlock.unlocks) {
                 if (!state.stats.newRoutes) state.stats.newRoutes = [];
@@ -108,6 +114,44 @@ window.completeChallenge = function() {
 
 
 
+
+window.cheatProgressChallenge = function() {
+    if (window.currentChallengeTarget) {
+        let req = window.currentChallengeTarget.requirements;
+        if (req) {
+            if (req.catchSpecies) {
+                req.catchSpecies.forEach(r => state.stats.caughtSpecies[r.species] = (state.stats.caughtSpecies[r.species] || 0) + r.count);
+            }
+            if (req.catchEachFromSlotMachine) {
+                if (req.catchEachFromSlotMachine.machines) {
+                    req.catchEachFromSlotMachine.machines.forEach(m => {
+                        state.stats.caughtSpecies[m[0]] = (state.stats.caughtSpecies[m[0]] || 0) + 1;
+                    });
+                } else if (req.catchEachFromSlotMachine.speciesList) {
+                    req.catchEachFromSlotMachine.speciesList.forEach(s => {
+                        state.stats.caughtSpecies[s] = (state.stats.caughtSpecies[s] || 0) + 1;
+                    });
+                }
+            }
+            if (req.catchByType) {
+                let typeKey = req.catchByType.type + "_Any";
+                if (!state.stats.challengeCaughtSpecific) state.stats.challengeCaughtSpecific = {};
+                state.stats.challengeCaughtSpecific[typeKey] = (state.stats.challengeCaughtSpecific[typeKey] || 0) + req.catchByType.count;
+            }
+            if (req.earnBadge) {
+                state.trainer.badges = Math.max(state.trainer.badges, req.earnBadge.badgeCount);
+            }
+            if (req.defeatEliteFourAndChampion) {
+                if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};
+                state.stats.defeatedBosses["Elite 4 Lorelei"] = true;
+                state.stats.defeatedBosses["Champion Rival"] = true;
+            }
+        }
+        window.showChallengesModal(window.currentChallengeTarget.areaId); // refresh
+        if (window.updateUI) window.updateUI();
+    }
+};
+
 window.showChallengesModal = function() {
     if (!state.config.unlocks) return;
 
@@ -123,9 +167,18 @@ window.showChallengesModal = function() {
         html += `<div style="text-align: center; font-size: 16px; color: #aaa;">No active Challenge</div>`;
     } else {
         let unlock = state.config.unlocks[currentIndex];
+        window.currentChallengeTarget = unlock;
         let cData = getChallengeData(unlock);
 
+
         let rewardsStr = unlock.unlocks ? unlock.unlocks.join(", ") : "Next Area";
+        if (unlock.gift) rewardsStr += " + Gift";
+
+
+
+        html += `<div style="text-align: center; margin-top: 15px;">
+                     <button id="btn-cheat-challenge" onclick="window.cheatProgressChallenge()" style="padding: 10px 20px; font-size: 16px; font-weight: bold; background-color: orange; color: white; border: none; border-radius: 5px; cursor: pointer;">Cheat Progress Challanges</button>
+                 </div>`;
 
         html += `<div style="margin-bottom: 5px;"><b>Requirements:</b></div>
                  <ul style="margin-top: 0; padding-left: 20px;">`;
@@ -157,7 +210,10 @@ window.showChallengesModal = function() {
              let pUnlock = state.config.unlocks[i];
              // Fake the data slightly to make it look completed, though getChallengeData will naturally evaluate to true
              let pData = getChallengeData(pUnlock);
+
              let pRewards = pUnlock.unlocks ? pUnlock.unlocks.join(", ") : "Next Area";
+             if (pUnlock.gift) pRewards += " + Gift";
+
 
              html += `<div style="border: 1px solid #333; padding: 10px; border-radius: 5px; background-color: rgba(255,255,255,0.05);">
                           <div style="color: #4CAF50; font-weight: bold; margin-bottom: 5px;">Challenge ${i+1}</div>
@@ -952,8 +1008,9 @@ async function init() {
                                 return num.toLocaleString('en-US').replace(/,/g, '.');
                             }
 
-                            // Format Time
-                            let totalSeconds = Math.floor(timeElapsedMs / 1000);
+                            // Format Time based on actual simulated time returned by the engine
+                            let displayTimeMs = results.simulatedTimeMs !== undefined ? results.simulatedTimeMs : timeElapsedMs;
+                            let totalSeconds = Math.floor(displayTimeMs / 1000);
                             let d = Math.floor(totalSeconds / (3600 * 24));
                             let h = Math.floor((totalSeconds % (3600 * 24)) / 3600);
                             let m = Math.floor((totalSeconds % 3600) / 60);
@@ -982,9 +1039,16 @@ async function init() {
                                 potionIconStr = `<img src="Assets/Items/Potions/${potionName}.png" style="width: 30px; height: 30px; margin-bottom: 5px;" alt="${potionName}">`;
                             }
 
-                            const faintedBanner = results.fainted
-                                ? `<div style="background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; border-radius: 8px; padding: 10px; color: #fca5a5; text-align: center; font-weight: bold; margin-top: 5px;">❌ Party Fainted</div>`
-                                : `<div style="background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; border-radius: 8px; padding: 10px; color: #6ee7b7; text-align: center; font-weight: bold; margin-top: 5px;">✅ Farm Successful</div>`;
+                            let faintedBanner = "";
+                            if (results.fainted) {
+                                faintedBanner = `<div style="background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; border-radius: 8px; padding: 10px; color: #fca5a5; text-align: center; font-weight: bold; margin-top: 5px;">❌ Farm Stopped: Party Fainted</div>`;
+                            } else if (results.outOfMoney) {
+                                faintedBanner = `<div style="background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; border-radius: 8px; padding: 10px; color: #fca5a5; text-align: center; font-weight: bold; margin-top: 5px;">❌ Farm Stopped: No money to buy more entries</div>`;
+                            } else if (results.simulatedTimeMs !== undefined && results.simulatedTimeMs >= maxTimeMs) {
+                                faintedBanner = `<div style="background: rgba(234, 179, 8, 0.2); border: 1px solid #facc15; border-radius: 8px; padding: 10px; color: #fde047; text-align: center; font-weight: bold; margin-top: 5px;">❌ Farm Stopped: Jigglypuff Dust ended</div>`;
+                            } else {
+                                faintedBanner = `<div style="background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; border-radius: 8px; padding: 10px; color: #6ee7b7; text-align: center; font-weight: bold; margin-top: 5px;">✅ Farm Stopped: Logged in a save</div>`;
+                            }
 
                             // Show results modal
                             document.getElementById('zzz-results-content').innerHTML = `
@@ -1041,6 +1105,16 @@ async function init() {
                             if (results.fainted) {
                                 state.currentRoute = "PokeCenter & PokeMarket";
                                 window.navigateToLocation("PokeCenter & PokeMarket");
+                            } else if (results.outOfMoney) {
+                                if (state.currentRoute === "Safari Zone") {
+                                    switchView("SAFARI_HUB");
+                                } else if (state.currentRoute && state.currentRoute.startsWith("Casino - ")) {
+                                    state.currentRoute = "Casino";
+                                    window.navigateToLocation("Casino");
+                                } else {
+                                    state.currentRoute = "Professor Oak Lab";
+                                    switchView("PROF_OAK_LAB");
+                                }
                             } else {
                                 state.currentRoute = "Professor Oak Lab";
                                 switchView("PROF_OAK_LAB");

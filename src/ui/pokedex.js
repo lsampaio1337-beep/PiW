@@ -70,11 +70,14 @@ export function showPokedex() {
             let cursor = isCaught ? "pointer" : "default";
             let onClick = isCaught ? `onclick="window.showDexEntry(${i})"` : "";
 
-            let cardClass = "";
-            let cardStyle = "width: 60px; text-align: center; font-size: 10px;";
-            if (isSeen || isCaught) {
-                cardClass = "pokedex-card";
-                cardStyle = "width: 80px; text-align: center; font-size: 10px; margin: 2px;";
+            let cardClass = "pokedex-card";
+            let cardStyle = "width: 80px; text-align: center; font-size: 10px; margin: 2px;";
+
+            if (!isSeen && !isCaught) {
+                // Apply a transparent border to maintain the same grid box sizing as standard cards
+                // (which have 2px borders) so it fits 8 per row cleanly.
+                cardStyle += " border: 2px solid transparent; background: transparent;";
+            } else {
                 if (hasSeenShiny || hasCaughtShiny) {
                     cardClass += " pokedex-card-shiny";
                 }
