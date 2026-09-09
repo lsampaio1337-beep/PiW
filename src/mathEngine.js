@@ -1,67 +1,84 @@
 // src/mathEngine.js
 
 function calculateHP(baseHp, ivHp, level, quality) {
-    // HP = [((2 * BaseHP + IV_HP) * Level / 100) + Level + 10] * Q
+    // HP = floor(((2 * BaseHP + IV_HP) * Level / 100 + Level + 10) * Q)
     return Math.floor((((2 * baseHp + ivHp) * level / 100) + level + 10) * quality);
 }
 
 function calculateStat(baseStat, ivStat, level, quality) {
-    // Stat = [((2 * BaseStat + IV_Stat) * Level / 100) + 5] * Q
+    // Stat = floor(((2 * BaseStat + IV_Stat) * Level / 100 + 5) * Q)
     return Math.floor((((2 * baseStat + ivStat) * level / 100) + 5) * quality);
 }
 
+function calculateReqXP(level) {
+    // ReqXP(L) = floor(L * (36 + 0.44 * (L - 1)^2))
+    return Math.floor(level * (36 + 0.44 * Math.pow(level - 1, 2)));
+}
+
 function calculateTotalXP(level) {
-    if (level === 1) return 0;
-    // TotalXP(n) = floor(12.65 * (n ^ 3.45)) - 12
-    return Math.floor(12.65 * Math.pow(level, 3.45)) - 12;
+    let total = 0;
+    for (let i = 1; i < level; i++) {
+        total += calculateReqXP(i);
+    }
+    return total;
 }
 
 function getLevelFromXP(xp) {
-    // Inverse of total xp formula to find level, capped at 100
-    for (let i = 1; i <= 100; i++) {
-        if (calculateTotalXP(i) > xp) {
-            return i - 1;
+    let level = 1;
+    let totalXpNeeded = 0;
+    while (level < 100) {
+        totalXpNeeded += calculateReqXP(level);
+        if (xp < totalXpNeeded) {
+            break;
         }
+        level++;
     }
-    return 100;
+    return level;
 }
 
-function calculateEV(bst, level, quality, totalIV) {
-    // EV = floor(12.5 * (BST/195)^2.86 * (1 + 16.82 * ((Level-1)/99)^1.5) * Q * (1 + TotalIV/1500))
-    const ev = Math.floor(12.5 * Math.pow(bst / 195, 2.86) * (1 + 16.82 * Math.pow((level - 1) / 99, 1.5)) * quality * (1 + totalIV / 1500));
-    return Math.max(1, ev); // Ensuring positive EV
+function calculateEVXP(bst, level, quality, totalIV) {
+    // EVXP = max(1, floor((7.0 + 8.47 * (Level - 1)) * (BST / 300)^0.85 * (Q / 1.20)^0.30 * (0.85 + 0.15 * (IV_Total / 600))))
+    const evxp = Math.floor((7.0 + 8.47 * (level - 1)) * Math.pow(bst / 300, 0.85) * Math.pow(quality / 1.20, 0.30) * (0.85 + 0.15 * (totalIV / 600)));
+    return Math.max(1, evxp);
 }
 
-function calculateCatchChance(bst, level, ballMultiplier, stats = {}, isShiny = false) {
-    // Formula: CatchChance = Math.max(1, (72 - (BST / 8.5) - (Level / 4)) * BallMultiplier)
+function calculateEVM(bst, level, quality, totalIV) {
+    // EVM = max(1, floor(0.75 * (Level)^1.15 * (BST / 300)^0.5 * (Q / 1.20)^0.5 * (0.70 + 0.30 * (IV_Total / 600))))
+    const evm = Math.floor(0.75 * Math.pow(level, 1.15) * Math.pow(bst / 300, 0.5) * Math.pow(quality / 1.20, 0.5) * (0.70 + 0.30 * (totalIV / 600)));
+    return Math.max(1, evm);
+}
+
+function calculatePP(bst, level, quality, totalIV) {
+    // PP = max(1, floor(50 * (Q / 1.40)^4.0 * (IV_Total / 450)^3.0 * (BST / 300)^1.1 * (Level / 50)))
+    const pp = Math.floor(50 * Math.pow(quality / 1.40, 4.0) * Math.pow(totalIV / 450, 3.0) * Math.pow(bst / 300, 1.1) * (level / 50));
+    return Math.max(1, pp);
+}
+
+
+
+function calculateCatchChance(bst, level, quality, totalIV, ballMultiplier, stats = {}, isShiny = false) {
     if (ballMultiplier >= 10) return 100; // Masterball
-
-    let baseChance = 72 - (bst / 8.5) - (level / 4);
-    if (baseChance < 1) baseChance = 1; // Ensure negative base chance doesn't ruin multipliers
-    let chance = baseChance * ballMultiplier;
 
     let cTaskTier = stats.cTaskTier || 0;
     let catchBonus = 0;
-    if (cTaskTier >= 5) catchBonus = 0.25;
-    else if (cTaskTier >= 4) catchBonus = 0.20;
-    else if (cTaskTier >= 3) catchBonus = 0.15;
-    else if (cTaskTier >= 2) catchBonus = 0.10;
-    else if (cTaskTier >= 1) catchBonus = 0.05;
-
-    chance = chance * (1 + catchBonus);
-
-    let shinySeenTaskTier = stats.shinySeenTaskTier || 0;
-    if (isShiny && shinySeenTaskTier >= 3) {
-        chance = chance * 2;
-    }
+    if (cTaskTier >= 5) catchBonus = 25;
+    else if (cTaskTier >= 4) catchBonus = 20;
+    else if (cTaskTier >= 3) catchBonus = 15;
+    else if (cTaskTier >= 2) catchBonus = 10;
+    else if (cTaskTier >= 1) catchBonus = 5;
 
     // Black Yellow Candy Catch Bonus
-    const catchMultiplier = 1 + (0.04 * (stats.blackYellowCandies || 0));
-    chance = chance * catchMultiplier;
+    catchBonus += (4 * (stats.blackYellowCandies || 0));
 
-    // Result clamped between 1% and 100%
-    if (chance > 100) chance = 100;
-    return Math.max(1, chance);
+    let shinySeenTaskTier = stats.shinySeenTaskTier || 0;
+    let shinyCatchMulti = (isShiny && shinySeenTaskTier >= 3) ? 2 : 1;
+
+    let baseChance = 74.0 - (bst / 14.6) - (level / 4.0) - 8.0 * ((quality - 0.8) / 1.0) - 5.0 * (totalIV / 600);
+    if (baseChance < 1) baseChance = 1;
+
+    let chance = baseChance * ballMultiplier * (1 + catchBonus / 100) * shinyCatchMulti;
+
+    return Math.min(100.0, Math.max(1.0, chance));
 }
 
 function generateQuality(stats = {}, isDoubleShiny = false) {
@@ -89,6 +106,7 @@ function generateQuality(stats = {}, isDoubleShiny = false) {
     let rareMaxRoll = 11097;
 
     // Quality Booster Roll Thresholds based on task tiers
+    // Quality Booster Tier None Low Regular Good Excellent Master
     if (qTaskTier >= 5) {
         bonusValue = 1.00; weakMaxRoll = 120; regularMaxRoll = 3720; uncommonMaxRoll = 6120; rareMaxRoll = 8970;
     } else if (qTaskTier >= 4) {
@@ -102,19 +120,16 @@ function generateQuality(stats = {}, isDoubleShiny = false) {
     }
 
     // Determine shiny threshold
-    // Base is 1 roll (12000)
     let shinyRolls = 1;
 
     // Shiny Boosters
-    // Regular gives +1 roll. Good gives +2 rolls, completely replacing the +1.
     if (shinySeenTaskTier >= 2) shinyRolls += 2; // Good Shiny +2 rolls
     else if (shinySeenTaskTier == 1) shinyRolls += 1; // Regular Shiny +1 roll
 
     if (isDoubleShiny) {
-        let extraRolls = shinyRolls;
+        let doubleRolls = shinyRolls;
         shinyRolls *= 2;
-        // Subtract the extra rolls from the tier just below Shiny (Rare) to preserve 12000 cap
-        rareMaxRoll -= extraRolls;
+        rareMaxRoll -= doubleRolls;
     }
 
     let shinyMinThreshold = 12000 - shinyRolls + 1;
@@ -197,7 +212,6 @@ function generateIVs(stats = {}, isShiny = false) {
         remaining -= add;
     }
 
-    // Shuffle the stats to ensure pure randomness without index bias
     for (let i = generatedStats.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [generatedStats[i], generatedStats[j]] = [generatedStats[j], generatedStats[i]];
@@ -214,16 +228,17 @@ function generateIVs(stats = {}, isShiny = false) {
 }
 
 function calculateDamage(level, power, attackStat, defenseStat, typeEffectiveness, quality) {
-    // Damage = floor([((Level + 5) / 125) * (Power * A / D)] + 2) * Modifier
-    // Modifier = TypeEffectiveness * Critical * Random * Q
-
+    // BaseDamage = floor(((Level + 5) / 125) * ((Power * AttackStat) / DefenseStat) + 2)
+    // Modifier involves type, critical, random. But do NOT include direct Quality multiplier as per AGENTS.md / constraints!
+    // Memory: "Base damage calculation modifiers involve type effectiveness, critical hits, and random variance, but they do NOT include a direct Quality multiplier since Quality is already factored into the Attack and Defense stats."
     const isCritical = Math.random() < 0.04;
     const criticalMult = isCritical ? 1.5 : 1.0;
     const randomMult = 0.85 + Math.random() * 0.15; // Uniform float in [0.85, 1.00]
 
-    const modifier = typeEffectiveness * criticalMult * randomMult * quality;
+    const modifier = typeEffectiveness * criticalMult * randomMult;
 
-    let damage = Math.floor((((level + 5) / 125) * (power * attackStat / defenseStat)) + 2) * modifier;
+    let baseDamage = Math.floor(((level + 5) / 125) * ((power * attackStat) / defenseStat) + 2);
+    let damage = Math.floor(baseDamage * modifier);
 
     return {
         damage: Math.max(1, Math.floor(damage)), // Minimum 1 damage
@@ -235,9 +250,12 @@ function calculateDamage(level, power, attackStat, defenseStat, typeEffectivenes
 export {
     calculateHP,
     calculateStat,
+    calculateReqXP,
     calculateTotalXP,
     getLevelFromXP,
-    calculateEV,
+    calculateEVXP,
+    calculateEVM,
+    calculatePP,
     calculateCatchChance,
     generateQuality,
     generateIVs,

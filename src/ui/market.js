@@ -1,4 +1,4 @@
-import { calculateEV } from "../mathEngine.js";
+import { calculatePP } from "../mathEngine.js";
 import { state, globals } from '../state.js';
 import { updateUI, showModal } from '../ui.js';
 import { getCapacity, getCurrentCount } from '../mathEngine.js';
@@ -441,7 +441,7 @@ export function renderPokeMarketSellTab(category) {
         state.storage.forEach(p => {
         if (!p.uuid) p.uuid = Math.random().toString(36).substring(2, 15);
             let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
-            let pEv = calculateEV(p.bst, p.level, p.quality, sumIV);
+            let pEv = calculatePP(p.bst, p.level, p.quality, sumIV);
 
             let pName = p.name || p.id;
             if (typeof p.id === 'number' && state.config && state.config.pokemonData) {
@@ -725,7 +725,7 @@ function updateMarketPokemonSellCount() {
         if (!p.uuid) p.uuid = Math.random().toString(36).substring(2, 15);
             if (window.marketSelectedPokemonForSale.has(p.uuid)) {
                 let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
-                let pEv = calculateEV(p.bst, p.level, p.quality, sumIV);
+                let pEv = calculatePP(p.bst, p.level, p.quality, sumIV);
                 totalGain += pEv;
             }
         });
@@ -744,7 +744,7 @@ window.marketSellSelectedPokemon = function() {
     state.storage = state.storage.filter(p => {
         if (window.marketSelectedPokemonForSale.has(p.uuid)) {
             let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
-            let pEv = calculateEV(p.bst, p.level, p.quality, sumIV);
+            let pEv = calculatePP(p.bst, p.level, p.quality, sumIV);
             totalGain += pEv;
             return false;
         }

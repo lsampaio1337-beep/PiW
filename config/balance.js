@@ -14,6 +14,31 @@ const balance = {
       {"name": "Epic", "min": 1.60, "max": 1.80, "rollMax": 11999},
       {"name": "Shiny", "min": 2.00, "max": 2.00, "rollMax": 12000}
     ],
+
+    "expansions": {
+      "ballPocket": [
+        { "tier": 1, "name": "Ball Pocket Clip", "increment": 50, "cost": 150 },
+        { "tier": 2, "name": "Belt Carrier Harness", "increment": 100, "cost": 450 },
+        { "tier": 3, "name": "Tactical Ball Cinch", "increment": 250, "cost": 1200 },
+        { "tier": 4, "name": "Silph Ball Loader", "increment": 500, "cost": 3000 },
+        { "tier": 5, "name": "Master Ball Sling", "increment": 1000, "cost": 7500 },
+        { "tier": 6, "name": "Endless Ball Reservoir", "increment": 8999, "cost": 20000 }
+      ],
+      "potionSatchel": [
+        { "tier": 1, "name": "Small Pouch Patch", "increment": 20, "cost": 75 },
+        { "tier": 2, "name": "Standard Pouch Patch", "increment": 30, "cost": 200 },
+        { "tier": 3, "name": "Heavy Pouch Patch", "increment": 50, "cost": 500 },
+        { "tier": 4, "name": "Expanded Satchel Kit", "increment": 100, "cost": 1200 },
+        { "tier": 5, "name": "Alchemist Belt Rig", "increment": 280, "cost": 3000 }
+      ],
+      "pokemonBox": [
+        { "tier": 1, "name": "Small Box Upgrade", "increment": 10, "cost": 100 },
+        { "tier": 2, "name": "Standard Box Upgrade", "increment": 20, "cost": 300 },
+        { "tier": 3, "name": "Large Box Upgrade", "increment": 50, "cost": 900 },
+        { "tier": 4, "name": "Huge Box Upgrade", "increment": 100, "cost": 2500 },
+        { "tier": 5, "name": "Ultimate Box Upgrade", "increment": 300, "cost": 6000 }
+      ]
+    },
     "items": {
       "pokeballs": [
         {"name": "Pokeball", "price": 2, "multiplier": 1.0},

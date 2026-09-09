@@ -16,7 +16,7 @@ export function getRewardForDay(daysClaimed) {
             case 3: return { items: { "Greatball": 20 }, potions: { "Regular Potion": 20 } };
             case 4: return { items: { "Ultraball": 10 }, potions: { "Big Potion": 5 } };
             case 5: return { items: { "Ultraball": 20 }, potions: { "Big Potion": 10 } };
-            case 6: return { items: { "Masterball": 1 }, potions: { "Hyper Potion": 2 } };
+            case 6: return { items: { "Masterball": 1 }, potions: { "Ultra Potion": 2 } };
         }
     } else if (w === 2) {
         switch(dayOfWeek) {
@@ -26,7 +26,7 @@ export function getRewardForDay(daysClaimed) {
             case 3: return { items: { "Ultraball": 30 }, potions: { "Big Potion": 15 } };
             case 4: return { items: { "Ultraball": 35 }, potions: { "Big Potion": 20 } };
             case 5: return { items: { "Ultraball": 40 }, potions: { "Hyper Potion": 10 } };
-            case 6: return { items: { "Masterball": 2 }, potions: { "Hyper Potion": 4 } };
+            case 6: return { items: { "Masterball": 2 }, potions: { "Ultra Potion": 4 } };
         }
     } else {
         // Week 3+
