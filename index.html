@@ -57,7 +57,7 @@
         </div>
 
         <div style="display: flex; flex-direction: column; gap: 1vh; justify-content: center; margin-top: 1vh; width: 75%; margin-left: auto; margin-right: auto;">
-            <button id="btn-new-profile" style="padding: 1vh 1vw; font-size: 1rem; font-weight: bold; cursor: pointer; background-color: #FFC107; color: black; border: none; border-radius: 5px; width: 100%;">New Game</button>
+            <button id="btn-new-profile" onclick="window.startNewGame()" style="padding: 1vh 1vw; font-size: 1rem; font-weight: bold; cursor: pointer; background-color: #FFC107; color: black; border: none; border-radius: 5px; width: 100%;">New Game</button>
             <div style="display: flex; gap: 1vw; width: 100%;">
                 <button id="btn-rename-profile" style="padding: 1vh 1vw; font-size: 1rem; font-weight: bold; cursor: pointer; background-color: #3498db; color: white; border: none; border-radius: 5px; flex: 1;">Rename</button>
                 <button id="btn-erase-profile" style="padding: 1vh 1vw; font-size: 1rem; font-weight: bold; cursor: pointer; background-color: #f44336; color: white; border: none; border-radius: 5px; flex: 1;">Erase</button>
@@ -100,13 +100,13 @@
         <div style="background-color: rgba(0,0,0,0.8); display: inline-block; padding: 30px; margin-top: 50px; border-radius: 8px;">
             <h2>Choose your Starter Pokémon</h2>
             <div class="starter-choices">
-              <button id="choose-bulbasaur">
+              <button id="choose-bulbasaur" onclick="window.selectStarter(1)">
                 <img src="Assets/Pokemon Sprites/1.png" style="width: 80px; height: 80px;"><br>Bulbasaur
               </button>
-              <button id="choose-charmander">
+              <button id="choose-charmander" onclick="window.selectStarter(4)">
                 <img src="Assets/Pokemon Sprites/4.png" style="width: 80px; height: 80px;"><br>Charmander
               </button>
-              <button id="choose-squirtle">
+              <button id="choose-squirtle" onclick="window.selectStarter(7)">
                 <img src="Assets/Pokemon Sprites/7.png" style="width: 80px; height: 80px;"><br>Squirtle
               </button>
             </div>
