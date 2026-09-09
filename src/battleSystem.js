@@ -415,11 +415,7 @@ class BattleSystem {
             // Route 1 Level Cap
             if (this.state.currentRoute === "Route 1") {
                 const playerLevel = this.state.party[0] ? this.state.party[0].level : 1;
-                if (playerLevel === 1) {
-                    level = 1;
-                } else {
-                    level = Math.random() < 0.5 ? 1 : 2;
-                }
+                level = Math.min(level, playerLevel);
             }
         }
 
@@ -1187,7 +1183,7 @@ class BattleSystem {
 
             if (this.state.currentRoute === "Route 1") {
                 const playerLevel = leader.level || 1;
-                level = playerLevel === 1 ? 1 : (Math.random() < 0.5 ? 1 : 2);
+                level = Math.min(level, playerLevel);
             }
 
             q = mathEngine.generateQuality(this.state.stats, this.state.casinoDoubleShiny);
