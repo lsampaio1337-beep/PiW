@@ -292,18 +292,18 @@ export function showModal(title, htmlContent) {
 
 const oakTasks = {
     q: [
-        { req: 50, text: "Capture 50 Epic Pokemons", reward: "Low Quality Booster", effect: "+15% Quality" },
-        { req: 100, text: "Capture 100 Epic Pokemons", reward: "Regular Quality Booster", effect: "+30% Quality" },
-        { req: 250, text: "Capture 250 Epic Pokemons", reward: "Good Quality Booster", effect: "+45% Quality" },
-        { req: 500, text: "Capture 500 Epic Pokemons", reward: "Excellent Quality Booster", effect: "+70% Quality" },
-        { req: 1000, text: "Capture 1000 Epic Pokemons", reward: "Master Quality Booster", effect: "+100% Quality" }
+        { req: 50, stat: 'weakPlusCaptures', text: "Capture 50 Weak+ Pokemons", reward: "Low Quality Booster", effect: "+15% Quality" },
+        { req: 100, stat: 'regularPlusCaptures', text: "Capture 100 Regular+ Pokemons", reward: "Regular Quality Booster", effect: "+30% Quality" },
+        { req: 250, stat: 'uncommonPlusCaptures', text: "Capture 250 Uncommon+ Pokemons", reward: "Good Quality Booster", effect: "+45% Quality" },
+        { req: 500, stat: 'rarePlusCaptures', text: "Capture 500 Rare+ Pokemons", reward: "Excellent Quality Booster", effect: "+70% Quality" },
+        { req: 300, stat: 'epicPlusCaptures', text: "Capture 300 Epic+ Pokemons", reward: "Master Quality Booster", effect: "+100% Quality" }
     ],
     c: [
-        { req: 1000, text: "Capture 1000 Pokemons", reward: "Low Catch Booster", effect: "+10% Catch Rate" },
-        { req: 2500, text: "Capture 2500 Pokemons", reward: "Regular Catch Booster", effect: "+25% Catch Rate" },
-        { req: 5000, text: "Capture 5000 Pokemons", reward: "Good Catch Booster", effect: "+45% Catch Rate" },
-        { req: 10000, text: "Capture 10000 Pokemons", reward: "Excellent Catch Booster", effect: "+70% Catch Rate" },
-        { req: 25000, text: "Capture 25000 Pokemons", reward: "Master Catch Booster", effect: "+100% Catch Rate" }
+        { req: 100, text: "Capture 100 Pokemons", reward: "Low Catch Booster", effect: "+5% Catch Rate" },
+        { req: 300, text: "Capture 300 Pokemons", reward: "Regular Catch Booster", effect: "+10% Catch Rate" },
+        { req: 750, text: "Capture 750 Pokemons", reward: "Good Catch Booster", effect: "+15% Catch Rate" },
+        { req: 1500, text: "Capture 1500 Pokemons", reward: "Excellent Catch Booster", effect: "+20% Catch Rate" },
+        { req: 3000, text: "Capture 3000 Pokemons", reward: "Master Catch Booster", effect: "+25% Catch Rate" }
     ],
     level: [
         { req: 1000, stat: 'caughtLvl15', text: "Catch 1000 Pokemons with level >= 15", reward: "Low Level Booster", effect: "+50% XP for level < 15" },
@@ -314,18 +314,18 @@ const oakTasks = {
     ],
     shinySeen: [
         { req: 1, text: "See 1 Shiny Pokemon", reward: "Regular Shiny Booster", effect: "+1 Shiny Roll" },
-        { req: 3, text: "See 3 Shiny Pokemons", reward: "Good Shiny Booster", effect: "+2 Shiny Rolls" },
-        { req: 10, text: "See 10 Shiny Pokemons", reward: "Catch Shiny Booster", effect: "4x Catch Rate on Shinies" }
+        { req: 2, text: "See 2 Shiny Pokemons", reward: "Good Shiny Booster", effect: "+2 Shiny Rolls" },
+        { req: 4, text: "See 4 Shiny Pokemons", reward: "Catch Shiny Booster", effect: "2x Catch Rate on Shinies" }
     ],
     shinyCaught: [
         { req: 2, text: "Catch 2 Shiny Pokemons", reward: "Shiny IV Booster", effect: "+25% IVs for Shinies" }
     ],
     iv: [
-        { req: 500, stat: 'caughtIVUnder300', text: "Catch 500 Pokemons with IV < 300", reward: "Low IV Booster", effect: "+5% IVs" },
-        { req: 1000, stat: 'caughtIVUnder350', text: "Catch 1000 Pokemons with IV < 350", reward: "Regular IV Booster", effect: "+10% IVs" },
-        { req: 2500, stat: 'caughtIVUnder400', text: "Catch 2500 Pokemons with IV < 400", reward: "Good IV Booster", effect: "+15% IVs" },
-        { req: 5000, stat: 'caughtIVUnder450', text: "Catch 5000 Pokemons with IV < 450", reward: "Excellent IV Booster", effect: "+20% IVs" },
-        { req: 10000, stat: 'caughtIVUnder500', text: "Catch 10000 Pokemons with IV < 500", reward: "Master IV Booster", effect: "+25% IVs" }
+        { req: 50, stat: 'caughtIVUnder300', text: "Catch 50 Pokemons with IV < 300", reward: "Low IV Booster", effect: "+5% IVs" },
+        { req: 200, stat: 'caughtIVUnder350', text: "Catch 200 Pokemons with IV < 350", reward: "Regular IV Booster", effect: "+10% IVs" },
+        { req: 500, stat: 'caughtIVUnder400', text: "Catch 500 Pokemons with IV < 400", reward: "Good IV Booster", effect: "+15% IVs" },
+        { req: 1000, stat: 'caughtIVUnder450', text: "Catch 1000 Pokemons with IV < 450", reward: "Excellent IV Booster", effect: "+20% IVs" },
+        { req: 2000, stat: 'caughtIVUnder500', text: "Catch 2000 Pokemons with IV < 500", reward: "Master IV Booster", effect: "+25% IVs" }
     ]
 };
 
@@ -335,7 +335,7 @@ window.getOakTaskAvailableCount = function() {
     // Quality
     let qTier = state.stats.qTaskTier || 0;
     if (qTier < oakTasks.q.length) {
-        if ((state.stats.epicCaptures || 0) >= oakTasks.q[qTier].req) count++;
+        if ((state.stats[oakTasks.q[qTier].stat] || 0) >= oakTasks.q[qTier].req) count++;
     }
 
     // Catch
@@ -387,7 +387,10 @@ window.cheatCompleteOakTask = function(type) {
     let statName = "";
     if (type === 'q') {
         tier = state.stats.qTaskTier || 0;
-        if (tier < oakTasks.q.length) state.stats.epicCaptures = Math.max(state.stats.epicCaptures || 0, oakTasks.q[tier].req);
+        if (tier < oakTasks.q.length) {
+            statName = oakTasks.q[tier].stat;
+            state.stats[statName] = Math.max(state.stats[statName] || 0, oakTasks.q[tier].req);
+        }
     }
     if (type === 'c') {
         tier = state.stats.cTaskTier || 0;
@@ -502,7 +505,14 @@ window.showOakLabModal = function() {
     };
 
     // Quality Card
-    html += renderCard("Quality Task", 'q', state.stats.epicCaptures || 0, state.stats.qTaskTier || 0, oakTasks.q, false);
+    let qTier = state.stats.qTaskTier || 0;
+    let qCurrentVal = 0;
+    if (qTier < oakTasks.q.length) {
+        qCurrentVal = state.stats[oakTasks.q[qTier].stat] || 0;
+    } else if (oakTasks.q.length > 0) {
+        qCurrentVal = state.stats[oakTasks.q[oakTasks.q.length - 1].stat] || 0;
+    }
+    html += renderCard("Quality Task", 'q', qCurrentVal, qTier, oakTasks.q, false);
 
     // Catch Card
     html += renderCard("Catch Task", 'c', state.stats.caught || 0, state.stats.cTaskTier || 0, oakTasks.c, false);

@@ -42,17 +42,17 @@ function calculateCatchChance(bst, level, ballMultiplier, stats = {}, isShiny = 
 
     let cTaskTier = stats.cTaskTier || 0;
     let catchBonus = 0;
-    if (cTaskTier >= 5) catchBonus = 1.00;
-    else if (cTaskTier >= 4) catchBonus = 0.70;
-    else if (cTaskTier >= 3) catchBonus = 0.45;
-    else if (cTaskTier >= 2) catchBonus = 0.25;
-    else if (cTaskTier >= 1) catchBonus = 0.10;
+    if (cTaskTier >= 5) catchBonus = 0.25;
+    else if (cTaskTier >= 4) catchBonus = 0.20;
+    else if (cTaskTier >= 3) catchBonus = 0.15;
+    else if (cTaskTier >= 2) catchBonus = 0.10;
+    else if (cTaskTier >= 1) catchBonus = 0.05;
 
     chance = chance * (1 + catchBonus);
 
     let shinySeenTaskTier = stats.shinySeenTaskTier || 0;
     if (isShiny && shinySeenTaskTier >= 3) {
-        chance = chance * 4;
+        chance = chance * 2;
     }
 
     // Black Yellow Candy Catch Bonus

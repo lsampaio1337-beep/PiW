@@ -696,7 +696,23 @@ class BattleSystem {
                             if (!this.state.stats.caughtShiniesSpecies) this.state.stats.caughtShiniesSpecies = {};
                             this.state.stats.caughtShiniesSpecies[defeatedEncounter.name] = true;
                         }
-                        if (defeatedEncounter.qualityName === "Epic") this.state.stats.epicCaptures = (this.state.stats.epicCaptures || 0) + 1;
+                        // Track captures for Oak Tasks (Weak+, Regular+, Uncommon+, Rare+, Epic+)
+                        let qName = defeatedEncounter.qualityName || "Regular";
+                        if (["Weak", "Regular", "Uncommon", "Rare", "Epic", "Shiny", "Legendary", "Boss"].includes(qName)) {
+                            this.state.stats.weakPlusCaptures = (this.state.stats.weakPlusCaptures || 0) + 1;
+                        }
+                        if (["Regular", "Uncommon", "Rare", "Epic", "Shiny", "Legendary", "Boss"].includes(qName)) {
+                            this.state.stats.regularPlusCaptures = (this.state.stats.regularPlusCaptures || 0) + 1;
+                        }
+                        if (["Uncommon", "Rare", "Epic", "Shiny", "Legendary", "Boss"].includes(qName)) {
+                            this.state.stats.uncommonPlusCaptures = (this.state.stats.uncommonPlusCaptures || 0) + 1;
+                        }
+                        if (["Rare", "Epic", "Shiny", "Legendary", "Boss"].includes(qName)) {
+                            this.state.stats.rarePlusCaptures = (this.state.stats.rarePlusCaptures || 0) + 1;
+                        }
+                        if (["Epic", "Shiny", "Legendary", "Boss"].includes(qName)) {
+                            this.state.stats.epicPlusCaptures = (this.state.stats.epicPlusCaptures || 0) + 1;
+                        }
 
                         let sumIV = caughtPokemon.ivs.hp + caughtPokemon.ivs.atk + caughtPokemon.ivs.def + caughtPokemon.ivs.spa + caughtPokemon.ivs.spd + caughtPokemon.ivs.spe;
                         if (sumIV < 300) this.state.stats.caughtIVUnder300 = (this.state.stats.caughtIVUnder300 || 0) + 1;
