@@ -337,9 +337,9 @@ const routes = [
         {"pokemonId": 81, "minLevel": 84, "maxLevel": 89, "chance": 0.2},
         {"pokemonId": 82, "minLevel": 84, "maxLevel": 89, "chance": 0.1},
         {"pokemonId": 25, "minLevel": 84, "maxLevel": 89, "chance": 0.15},
-        {"pokemonId": 26, "minLevel": 84, "maxLevel": 89, "chance": 0.05},
-        {"pokemonId": 125, "minLevel": 84, "maxLevel": 89, "chance": 0.15},
-        {"pokemonId": 145, "minLevel": 89, "maxLevel": 89, "chance": 0.01}
+        {"pokemonId": 26, "minLevel": 72, "maxLevel": 77, "chance": 0.08},
+        {"pokemonId": 125, "minLevel": 84, "maxLevel": 89, "chance": 0.11},
+        {"pokemonId": 145, "minLevel": 80, "maxLevel": 80, "chance": 0.02}
       ]
     },
     {
