@@ -16,22 +16,22 @@ const balance = {
     ],
     "items": {
       "pokeballs": [
-        {"name": "Pokeball", "price": 5, "multiplier": 1.0},
-        {"name": "Greatball", "price": 50, "multiplier": 1.5},
-        {"name": "Ultraball", "price": 600, "multiplier": 2.0},
+        {"name": "Pokeball", "price": 2, "multiplier": 1.0},
+        {"name": "Greatball", "price": 18, "multiplier": 1.5},
+        {"name": "Ultraball", "price": 75, "multiplier": 2.0},
         {"name": "Masterball", "price": 1000000, "multiplier": 999.0}
       ],
       "potions": [
-        {"name": "Tiny Potion", "price": 10, "heal": 25},
-        {"name": "Small Potion", "price": 25, "heal": 50},
-        {"name": "Regular Potion", "price": 75, "heal": 100},
-        {"name": "Big", "price": 300, "heal": 250},
-        {"name": "Hyper Potion", "price": 1500, "heal": 1000},
+        {"name": "Tiny Potion", "price": 3, "heal": 25},
+        {"name": "Small Potion", "price": 12, "heal": 50},
+        {"name": "Regular Potion", "price": 35, "heal": 100},
+        {"name": "Big", "price": 90, "heal": 250},
+        {"name": "Hyper Potion", "price": 220, "heal": 1000},
         {"name": "Ultra Potion", "price": 9000, "heal": 5000},
         {"name": "Max Potion", "price": 300000, "heal": 999999}
       ],
       "stones": {
-         "price": 50000,
+         "price": 200,
          "sell": 200
       }
     }
