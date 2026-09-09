@@ -785,10 +785,9 @@ class BattleSystem {
         // Loot drops for Stones
         let dropRate = 0;
         switch (this.activeEncounter.qualityName) {
-            case "Regular": dropRate = 0.01; break;
-            case "Uncommon": dropRate = 0.02; break;
-            case "Rare": dropRate = 0.03; break;
-            case "Epic": dropRate = 0.05; break;
+            case "Uncommon": dropRate = 0.01; break;
+            case "Rare": dropRate = 0.02; break;
+            case "Epic": dropRate = 0.03; break;
             case "Shiny": dropRate = 1.0; break;
         }
 
@@ -802,6 +801,55 @@ class BattleSystem {
 
             if (!this.state.backpack.stones) this.state.backpack.stones = {};
             this.state.backpack.stones[stoneName] = (this.state.backpack.stones[stoneName] || 0) + dropQuantity;
+        }
+
+        // Loot drops for Balls and Potions
+        let sumIV = 0;
+        if (this.activeEncounter.ivs) {
+            sumIV = this.activeEncounter.ivs.hp + this.activeEncounter.ivs.atk + this.activeEncounter.ivs.def +
+                    this.activeEncounter.ivs.spa + this.activeEncounter.ivs.spd + this.activeEncounter.ivs.spe;
+        }
+
+        let itemDropChance = (2.0 + 8.0 * (sumIV / 600)) / 100.0;
+
+        let level = this.activeEncounter.level || 1;
+        let ballTierName = "Pokeball";
+        let potionTierName = "Tiny Potion";
+
+        if (level <= 15) {
+            ballTierName = "Pokeball";
+            potionTierName = "Tiny Potion";
+        } else if (level <= 35) {
+            ballTierName = "Pokeball";
+            potionTierName = "Small Potion";
+        } else if (level <= 55) {
+            ballTierName = "Greatball";
+            potionTierName = "Regular Potion";
+        } else if (level <= 75) {
+            ballTierName = "Greatball";
+            // Potion is "Big" in config
+            potionTierName = "Big Potion";
+        } else {
+            ballTierName = "Ultraball";
+            potionTierName = "Hyper Potion";
+        }
+
+        // Roll for Ball drop
+        if (Math.random() < itemDropChance) {
+            let ballDropQty = Math.floor(lootMultiplier);
+            if (Math.random() < (lootMultiplier % 1)) ballDropQty += 1;
+
+            if (!this.state.backpack.pokeballs) this.state.backpack.pokeballs = {};
+            this.state.backpack.pokeballs[ballTierName] = (this.state.backpack.pokeballs[ballTierName] || 0) + ballDropQty;
+        }
+
+        // Roll for Potion drop
+        if (Math.random() < itemDropChance) {
+            let potionDropQty = Math.floor(lootMultiplier);
+            if (Math.random() < (lootMultiplier % 1)) potionDropQty += 1;
+
+            if (!this.state.backpack.potions) this.state.backpack.potions = {};
+            this.state.backpack.potions[potionTierName] = (this.state.backpack.potions[potionTierName] || 0) + potionDropQty;
         }
 
         this.state.stats.battlesWon++;
