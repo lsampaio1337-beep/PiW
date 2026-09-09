@@ -682,7 +682,7 @@ async function loadConfigs() {
     state.config.mapCoordinates = mapCoordinates;
 }
 
-function selectStarter(id) {
+window.selectStarter = function selectStarter(id) {
     if (!storage.currentProfileId) {
         storage.createNewProfile();
     }
@@ -772,7 +772,7 @@ async function init() {
     const saveManagerModal = document.getElementById('save-manager-modal');
     const profilesContainer = document.getElementById('profiles-container');
 
-    const startNewGame = () => {
+    window.startNewGame = () => {
         if (splashScreen) splashScreen.style.display = 'none';
         if (saveManagerModal) saveManagerModal.style.display = 'none';
 
@@ -1156,18 +1156,11 @@ async function init() {
         };
 
     } else {
-        startNewGame();
+        window.startNewGame();
     }
 
     // Bind buttons (they might be missing if bypass Oak)
-    const btnBulbasaur = document.getElementById('choose-bulbasaur');
-    if (btnBulbasaur) btnBulbasaur.onclick = () => selectStarter(1);
 
-    const btnCharmander = document.getElementById('choose-charmander');
-    if (btnCharmander) btnCharmander.onclick = () => selectStarter(4);
-
-    const btnSquirtle = document.getElementById('choose-squirtle');
-    if (btnSquirtle) btnSquirtle.onclick = () => selectStarter(7);
 
     // Bind Hub Buttons
     const checkCombatLock = () => {
