@@ -6,8 +6,8 @@ import { formatType, formatTypes } from './pokedex.js';
 
 function getEvolveRequirements(p, evo, state) {
     const requiredLevel = evo.level;
-    const baseStones = Math.ceil(p.level * 0.1);
-    const stonesReq = p.types.length === 1 ? baseStones * 2 : baseStones;
+    const baseStones = Math.ceil(p.level * 0.2);
+    const stonesReq = p.types.length === 1 ? baseStones : Math.ceil(baseStones / 2);
 
     let hasStones = true;
     let missingStonesHtml = "";

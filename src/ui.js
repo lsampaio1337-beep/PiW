@@ -294,11 +294,11 @@ export function showModal(title, htmlContent) {
 
 const oakTasks = {
     q: [
-        { req: 50, stat: 'weakPlusCaptures', text: "Capture 50 Weak+ Pokemons", reward: "Low Quality Booster", effect: "+15% Quality" },
-        { req: 100, stat: 'regularPlusCaptures', text: "Capture 100 Regular+ Pokemons", reward: "Regular Quality Booster", effect: "+30% Quality" },
-        { req: 250, stat: 'uncommonPlusCaptures', text: "Capture 250 Uncommon+ Pokemons", reward: "Good Quality Booster", effect: "+45% Quality" },
-        { req: 500, stat: 'rarePlusCaptures', text: "Capture 500 Rare+ Pokemons", reward: "Excellent Quality Booster", effect: "+70% Quality" },
-        { req: 300, stat: 'epicPlusCaptures', text: "Capture 300 Epic+ Pokemons", reward: "Master Quality Booster", effect: "+100% Quality" }
+        { req: 50, stat: 'weakPlusCaptures', text: "Capture 50 Weak+ Pokemons", reward: "Low Quality Booster", effect: "+15% Quality Bonus" },
+        { req: 100, stat: 'regularPlusCaptures', text: "Capture 100 Regular+ Pokemons", reward: "Regular Quality Booster", effect: "+30% Quality Bonus" },
+        { req: 250, stat: 'uncommonPlusCaptures', text: "Capture 250 Uncommon+ Pokemons", reward: "Good Quality Booster", effect: "+45% Quality Bonus" },
+        { req: 500, stat: 'rarePlusCaptures', text: "Capture 500 Rare+ Pokemons", reward: "Excellent Quality Booster", effect: "+70% Quality Bonus" },
+        { req: 300, stat: 'epicPlusCaptures', text: "Capture 300 Epic+ Pokemons", reward: "Master Quality Booster", effect: "+100% Quality Bonus" }
     ],
     c: [
         { req: 100, text: "Capture 100 Pokemons", reward: "Low Catch Booster", effect: "+5% Catch Rate" },
@@ -320,7 +320,7 @@ const oakTasks = {
         { req: 4, text: "See 4 Shiny Pokemons", reward: "Catch Shiny Booster", effect: "2x Catch Rate on Shinies" }
     ],
     shinyCaught: [
-        { req: 2, text: "Catch 2 Shiny Pokemons", reward: "Shiny IV Booster", effect: "+25% IVs for Shinies" }
+        { req: 1, text: "Catch 1 Shiny Pokemon", reward: "Shiny IV Booster", effect: "+25% IVs for Shinies" }
     ],
     iv: [
         { req: 50, stat: 'caughtIVUnder300', text: "Catch 50 Pokemons with IV < 300", reward: "Low IV Booster", effect: "+5% IVs" },

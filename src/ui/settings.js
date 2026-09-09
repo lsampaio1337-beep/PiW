@@ -178,7 +178,9 @@ export function activateCheat() {
                 currentStats: { ...stats },
                 maxHp: stats.hp,
                 currentHp: stats.hp,
-                ev: mathEngine.calculateEV(bst, level, qVal, totalIV),
+                evxp: mathEngine.calculateEVXP(bst, level, qVal, totalIV),
+                evm: mathEngine.calculateEVM(bst, level, qVal, totalIV),
+                pp: mathEngine.calculatePP(bst, level, qVal, totalIV),
                 bst: bst,
                 moves: JSON.parse(JSON.stringify(moves))
             };

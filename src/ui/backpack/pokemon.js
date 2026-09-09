@@ -4,7 +4,7 @@ import { renderBackpackTab } from './index.js';
 
 window.sellModeActive = false;
 window.selectedForSale = new Set();
-import { calculateEV } from '../../mathEngine.js';
+import { calculatePP } from '../../mathEngine.js';
 
 // Helper to render a consistent Pokemon slot UI
 function renderSlotUI(p, listName, origIndex, isDraggable) {
@@ -533,7 +533,7 @@ window.sellSelectedPokemon = function() {
 
     state.backpack.storage = state.backpack.storage.filter(p => {
         if (window.selectedForSale.has(p.uuid)) {
-            let val = Math.floor(calculateEV(p.bst, p.level, p.quality, p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe));
+            let val = Math.floor(calculatePP(p.bst, p.level, p.quality, p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe));
             totalGain += val;
             numSold++;
             return false; // Remove

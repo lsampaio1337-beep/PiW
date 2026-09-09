@@ -1143,7 +1143,7 @@ const pokemonData = [
   },
   {
     "id": 29,
-    "name": "NidoranF",
+    "name": "Nidoran\u2640",
     "types": [
       "Poison"
     ],
@@ -1286,7 +1286,7 @@ const pokemonData = [
   },
   {
     "id": 32,
-    "name": "NidoranM",
+    "name": "Nidoran\u2642",
     "types": [
       "Poison"
     ],
@@ -3724,7 +3724,7 @@ const pokemonData = [
   },
   {
     "id": 83,
-    "name": "Farfetchd",
+    "name": "Farfetch'd",
     "types": [
       "Normal",
       "Flying"
