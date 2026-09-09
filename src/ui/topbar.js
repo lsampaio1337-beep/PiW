@@ -219,3 +219,38 @@ export function updateTopbar() {
         }
     }
 }
+
+
+export function getChallengeText() {
+    let req = state.nextChallengeRequirement;
+    if (!req) return "Next Challenge: None";
+
+    let unlocks = "Unlocks: " + state.nextChallengeUnlocks;
+
+    const extraChallengeAreas = ["Cassino", "Small Fishing Spot", "Fighting Dojo", "Big Fishing Spot", "Fossil Revival Lab", "Trade With Friends Hub", "Power Plant", "Seafoam Islands", "Victory Road"];
+    let prefix = "Next Challenge";
+    if (state.config && state.config.unlocks) {
+        let currentIndex = state.stats.completedChallenges || 0;
+        if (currentIndex < state.config.unlocks.length) {
+            let unlock = state.config.unlocks[currentIndex];
+            if (extraChallengeAreas.includes(unlock.areaId)) {
+                prefix = "Next Extra Challenge";
+            }
+        }
+    }
+
+    if (req.defeatCountRoute) {
+        let route = req.defeatCountRoute.route;
+        let count = req.defeatCountRoute.count;
+        let defeats = state.stats.challengeRouteDefeats || 0;
+        return `${prefix}: Defeat ${count} Pokémon on ${route} (${Math.min(defeats, count)}/${count}) - ${unlocks}`;
+    }
+
+    // Check other types
+    if (req.catchSpecies) {
+        return `${prefix}: Catch required Pokémon - ${unlocks}`;
+    }
+
+    // For any others just fallback
+    return `${prefix}: Requirements not formatted. - ${unlocks}`;
+}

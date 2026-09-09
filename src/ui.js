@@ -153,6 +153,8 @@ window.cheatProgressChallenge = function() {
 };
 
 window.showChallengesModal = function() {
+    const extraChallengeAreas = ['Cassino', 'Small Fishing Spot', 'Fighting Dojo', 'Big Fishing Spot', 'Fossil Revival Lab', 'Trade With Friends Hub', 'Power Plant', 'Seafoam Islands', 'Victory Road'];
+
     if (!state.config.unlocks) return;
 
     let currentIndex = state.stats.completedChallenges || 0;
@@ -1354,3 +1356,6 @@ window.leaveSafariZone = () => {
     switchView("MAP");
 };
 window.switchView = switchView;
+
+window.initGame = init;
+window.startGame = startGame;
