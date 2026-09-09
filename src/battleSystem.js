@@ -735,7 +735,7 @@ class BattleSystem {
                         if (!this.state.stats.caughtSpecific) this.state.stats.caughtSpecific = {};
                         if (!this.state.stats.challengeCaughtSpecific) this.state.stats.challengeCaughtSpecific = {};
 
-                        let qName = defeatedEncounter.qualityName || "Regular";
+                        qName = defeatedEncounter.qualityName || "Regular";
 
                         if (defeatedEncounter.types) {
                               for (let t of defeatedEncounter.types) {
