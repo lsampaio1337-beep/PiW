@@ -627,8 +627,17 @@ class BattleSystem {
         return false;
     }
 
+
     throwPokeball() {
+        let cap = globals.mathEngine.getCapacity(this.state, 'box');
+        let cur = globals.mathEngine.getCurrentCount(this.state, 'box');
+        if (cur >= cap) {
+            if(window.showGameAlert) window.showGameAlert("Your Pokémon Box is full!");
+            return { used: false, ballName: null, caught: false };
+        }
+
         let tier = this.state.settings.activeBallTier;
+
         let isSafariZone = this.state.currentRoute === "Safari Zone";
         let ballName;
         let multiplier;
@@ -870,7 +879,13 @@ class BattleSystem {
             if (Math.random() < (lootMultiplier % 1)) ballDropQty += 1;
 
             if (!this.state.backpack.pokeballs) this.state.backpack.pokeballs = {};
-            this.state.backpack.pokeballs[ballTierName] = (this.state.backpack.pokeballs[ballTierName] || 0) + ballDropQty;
+            let ballsCap = globals.mathEngine.getCapacity(this.state, 'balls');
+            let ballsCur = globals.mathEngine.getCurrentCount(this.state, 'balls');
+            if (ballsCur + ballDropQty <= ballsCap) {
+                this.state.backpack.pokeballs[ballTierName] = (this.state.backpack.pokeballs[ballTierName] || 0) + ballDropQty;
+            } else if (ballsCur < ballsCap) {
+                this.state.backpack.pokeballs[ballTierName] = (this.state.backpack.pokeballs[ballTierName] || 0) + (ballsCap - ballsCur);
+            }
         }
 
         // Roll for Potion drop
@@ -879,7 +894,15 @@ class BattleSystem {
             if (Math.random() < (lootMultiplier % 1)) potionDropQty += 1;
 
             if (!this.state.backpack.potions) this.state.backpack.potions = {};
-            this.state.backpack.potions[potionTierName] = (this.state.backpack.potions[potionTierName] || 0) + potionDropQty;
+
+            const potsCap = globals.mathEngine.getCapacity(this.state, 'potions');
+            const potsCur = globals.mathEngine.getCurrentCount(this.state, 'potions');
+
+            if (potsCur + potionDropQty <= potsCap) {
+                this.state.backpack.potions[potionTierName] = (this.state.backpack.potions[potionTierName] || 0) + potionDropQty;
+            } else if (potsCur < potsCap) {
+                this.state.backpack.potions[potionTierName] = (this.state.backpack.potions[potionTierName] || 0) + (potsCap - potsCur);
+            }
         }
 
         this.state.stats.battlesWon++;

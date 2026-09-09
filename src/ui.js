@@ -968,7 +968,11 @@ async function init() {
                     };
                     deepMerge(state, pData);
 
+
                     // Fallback for older saves
+                    if (!state.stats.upgrades) {
+                        state.stats.upgrades = { ballsTier: 0, potionsTier: 0, boxTier: 0 };
+                    }
                     if (state.settings.autoPotionThreshold === undefined) {
                         state.settings.autoPotionThreshold = 50;
                     }
@@ -1269,16 +1273,43 @@ async function init() {
             badgesHtml += `<img src="./Assets/Badges/Badge Kanto ${i}.png" style="width: 40px; height: 40px;" title="Badge ${i}">`;
         }
         badgesHtml += '</div>';
-        showModal("Statistics", `
+
+        let upgradesHtml = '';
+        if (state.stats.upgrades) {
+            upgradesHtml += '<h3 style="margin-top: 20px;">Upgrades:</h3><div style="display: flex; gap: 10px; margin-top: 10px; justify-content: center; flex-wrap: wrap;">';
+
+            const upgData = state.config.balance.items.upgrades;
+            if (upgData) {
+                // Balls
+                for (let i = 1; i <= state.stats.upgrades.ballsTier; i++) {
+                    let u = upgData.balls.find(x => x.tier === i);
+                    if (u) upgradesHtml += `<img src="./Assets/Items/Upgrades/${u.name}.png" style="width: 40px; height: 40px; object-fit: contain;" title="${u.name}">`;
+                }
+                // Potions
+                for (let i = 1; i <= state.stats.upgrades.potionsTier; i++) {
+                    let u = upgData.potions.find(x => x.tier === i);
+                    if (u) upgradesHtml += `<img src="./Assets/Items/Upgrades/${u.name}.png" style="width: 40px; height: 40px; object-fit: contain;" title="${u.name}">`;
+                }
+                // Box
+                for (let i = 1; i <= state.stats.upgrades.boxTier; i++) {
+                    let u = upgData.box.find(x => x.tier === i);
+                    if (u) upgradesHtml += `<img src="./Assets/Items/Upgrades/${u.name}.png" style="width: 40px; height: 40px; object-fit: contain;" title="${u.name}">`;
+                }
+            }
+            upgradesHtml += '</div>';
+        }
+
+        showModal("Trainer", `
             <div style="text-align: left; display: inline-block;">
                 <p><b>Battles Won:</b> ${state.stats.battlesWon}</p>
                 <p><b>Total Pokémon Captured:</b> ${state.stats.caught}</p>
                 <p><b>Shinies Seen:</b> ${state.stats.shiniesSeen || 0}</p>
                 <p><b>Shinies Caught:</b> ${state.stats.shiniesCaught || 0}</p>
-                <p><b>Money:</b> $${state.trainer.money}</p>
+                <p><b>Money:</b> ${state.trainer.money}</p>
             </div>
             <h3 style="margin-top: 20px;">Badges:</h3>
             ${badgesHtml}
+            ${upgradesHtml}
         `);
     });
 

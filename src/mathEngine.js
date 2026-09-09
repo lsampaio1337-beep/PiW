@@ -261,3 +261,46 @@ export {
     generateIVs,
     calculateDamage
 };
+
+export function getCapacity(state, type) {
+    if (!state.config || !state.config.balance || !state.config.balance.items || !state.config.balance.items.upgrades) return 999999;
+
+    let base = 0;
+    let upgs = [];
+    let currentTier = 0;
+
+    if (type === 'balls') {
+        base = 100;
+        upgs = state.config.balance.items.upgrades.balls;
+        currentTier = state.stats.upgrades.ballsTier;
+    } else if (type === 'potions') {
+        base = 20;
+        upgs = state.config.balance.items.upgrades.potions;
+        currentTier = state.stats.upgrades.potionsTier;
+    } else if (type === 'box') {
+        base = 28; // 20 + 6 + 2
+        upgs = state.config.balance.items.upgrades.box;
+        currentTier = state.stats.upgrades.boxTier;
+    }
+
+    let total = base;
+    for (let i = 1; i <= currentTier; i++) {
+        let u = upgs.find(u => u.tier === i);
+        if (u) total += u.increment;
+    }
+    return total;
+}
+
+export function getCurrentCount(state, type) {
+    let count = 0;
+    if (type === 'balls') {
+        for (let b in state.backpack.pokeballs) count += state.backpack.pokeballs[b];
+    } else if (type === 'potions') {
+        for (let p in state.backpack.potions) count += state.backpack.potions[p];
+    } else if (type === 'box') {
+        count += state.party.length;
+        count += state.storage.length;
+        count += state.breeding.length; // Daycare
+    }
+    return count;
+}
