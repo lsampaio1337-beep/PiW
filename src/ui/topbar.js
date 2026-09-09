@@ -144,7 +144,7 @@ export function updateTopbar() {
 
     const exclamation = document.getElementById('bonus-candy-exclamation');
     if (exclamation) {
-        if (state.stats.bonusCandyDefeats >= 1000) {
+        if (state.stats.bonusCandyDefeats >= 250) {
             exclamation.style.display = 'block';
         } else {
             exclamation.style.display = 'none';

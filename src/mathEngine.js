@@ -56,7 +56,7 @@ function calculateCatchChance(bst, level, ballMultiplier, stats = {}, isShiny = 
     }
 
     // Black Yellow Candy Catch Bonus
-    const catchMultiplier = 1 + (0.01 * (stats.blackYellowCandies || 0));
+    const catchMultiplier = 1 + (0.04 * (stats.blackYellowCandies || 0));
     chance = chance * catchMultiplier;
 
     // Result clamped between 1% and 100%
