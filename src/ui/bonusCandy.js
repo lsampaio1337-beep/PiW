@@ -1,13 +1,22 @@
 import { state, globals } from '../state.js';
 import { showModal, updateUI } from '../ui.js';
 
+function getCandyCost(color, currentOwned) {
+    const owned = currentOwned || 0;
+    if (color === 'Green Candy') return 1 + Math.floor(owned / 5);
+    if (color === 'Purple Candy') return 2 + Math.floor(owned / 3);
+    if (color === 'Black Yellow Candy') return 3 + Math.floor(owned / 2);
+    if (color === 'Rainbow Candy') return 8 + (owned * 4);
+    return 1;
+}
+
 export function showBonusCandyModal() {
     const defeats = state.stats.bonusCandyDefeats || 0;
-    const isClaimable = defeats >= 1000;
-    const progressTextLeft = isClaimable ? "" : `${defeats}/1000`;
-    const progressTextRight = isClaimable ? "" : `${Math.floor((defeats / 1000) * 100)}%`;
+    const isClaimable = defeats >= 250;
+    const progressTextLeft = isClaimable ? "" : `${defeats}/250`;
+    const progressTextRight = isClaimable ? "" : `${Math.floor((defeats / 250) * 100)}%`;
     const progressTextCenter = isClaimable ? "Click to Claim White Candy!" : "";
-    const progressPct = isClaimable ? 100 : (defeats / 1000) * 100;
+    const progressPct = isClaimable ? 100 : (defeats / 250) * 100;
 
     // Ensure candyPurchaseHistory exists
     if (!state.stats.candyPurchaseHistory) {
@@ -79,10 +88,10 @@ export function showBonusCandyModal() {
             </div>
 
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
-                ${renderCandyOption('Green Candy', '+1% Loot Probability and Quantity', 1, state.stats.greenCandies, (1 + 0.01 * (state.stats.greenCandies || 0)).toFixed(2) + 'x', 'LootCandy.png')}
-                ${renderCandyOption('Purple Candy', 'XP +1%', 2, state.stats.purpleCandies, (1 + 0.01 * (state.stats.purpleCandies || 0)).toFixed(2) + 'x', 'XPCandy.png')}
-                ${renderCandyOption('Black Yellow Candy', 'Catch +1%', 3, state.stats.blackYellowCandies, (1 + 0.01 * (state.stats.blackYellowCandies || 0)).toFixed(2) + 'x', 'CatchCandy.png')}
-                ${renderCandyOption('Rainbow Candy', 'Shiny +1roll', 5, state.stats.rainbowCandies, '+' + (state.stats.rainbowCandies || 0) + ' rolls', 'ShinyCandy.png')}
+                ${renderCandyOption('Green Candy', '+3% Loot Probability and Quantity', getCandyCost('Green Candy', state.stats.greenCandies), state.stats.greenCandies, (1 + 0.03 * (state.stats.greenCandies || 0)).toFixed(2) + 'x', 'LootCandy.png')}
+                ${renderCandyOption('Purple Candy', 'XP +2%', getCandyCost('Purple Candy', state.stats.purpleCandies), state.stats.purpleCandies, (1 + 0.02 * (state.stats.purpleCandies || 0)).toFixed(2) + 'x', 'XPCandy.png')}
+                ${renderCandyOption('Black Yellow Candy', 'Catch +4%', getCandyCost('Black Yellow Candy', state.stats.blackYellowCandies), state.stats.blackYellowCandies, (1 + 0.04 * (state.stats.blackYellowCandies || 0)).toFixed(2) + 'x', 'CatchCandy.png')}
+                ${renderCandyOption('Rainbow Candy', 'Shiny +1roll', getCandyCost('Rainbow Candy', state.stats.rainbowCandies), state.stats.rainbowCandies, '+' + (state.stats.rainbowCandies || 0) + ' rolls', 'ShinyCandy.png')}
             </div>
 
             <div style="background-color: #222; border: 1px solid #444; border-radius: 8px; padding: 10px; text-align: left; min-height: 50px;">
@@ -121,13 +130,15 @@ function renderCandyOption(color, effectText, cost, currentOwned, currentEffect,
         ? `background: ${getColorHex(color)}; background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: rainbowShift 3s linear infinite;`
         : `color: ${getColorHex(color)}; text-shadow: 1px 1px 2px black;`;
 
+    const isMaxed = color === 'Rainbow Candy' && owned >= 5;
+
     return `
-        <div style="background-color: #222; border: 1px solid #444; border-radius: 8px; padding: 15px; display: flex; flex-direction: column; align-items: center; position: relative; min-height: 120px; justify-content: center;">
-            <img src="Assets/Extra/${imageFile}" onclick="window.buyBonusCandy('${color}', ${cost})" style="width: 60px; height: 60px; position: absolute; ${verticalAlign} ${horizontalAlign} cursor: pointer; border-radius: 5px; box-shadow: 0 0 5px rgba(255,255,255,0.5);" onerror="this.style.display='none'" title="Click to buy ${color}">
+        <div style="background-color: #222; border: 1px solid #444; border-radius: 8px; padding: 15px; display: flex; flex-direction: column; align-items: center; position: relative; min-height: 120px; justify-content: center; ${isMaxed ? 'opacity: 0.5;' : ''}">
+            <img src="Assets/Extra/${imageFile}" ${isMaxed ? '' : `onclick="window.buyBonusCandy('${color}')"`} style="width: 60px; height: 60px; position: absolute; ${verticalAlign} ${horizontalAlign} ${isMaxed ? '' : 'cursor: pointer;'} border-radius: 5px; box-shadow: 0 0 5px rgba(255,255,255,0.5);" onerror="this.style.display='none'" title="${isMaxed ? 'MAXED' : `Click to buy ${color}`}">
             <div style="font-size: 18px; font-weight: bold; margin-bottom: 5px; ${titleStyle}">${color}</div>
             <div style="font-size: 14px; margin-bottom: 5px; text-align: center;">Effect: ${effectText}</div>
-            <div style="font-size: 14px; margin-bottom: 10px;">Cost: ${cost} White Candy</div>
-            <div style="font-size: 14px; color: #aaa;">Owned: ${owned}</div>
+            <div style="font-size: 14px; margin-bottom: 10px;">${isMaxed ? 'Cost: MAXED' : `Cost: ${cost} White Candy`}</div>
+            <div style="font-size: 14px; color: #aaa;">Owned: ${owned}${color === 'Rainbow Candy' ? ' / 5' : ''}</div>
         </div>
     `;
 }
@@ -141,8 +152,8 @@ function getColorHex(colorName) {
 }
 
 window.claimWhiteCandy = function() {
-    if ((state.stats.bonusCandyDefeats || 0) >= 1000) {
-        state.stats.bonusCandyDefeats -= 1000;
+    if ((state.stats.bonusCandyDefeats || 0) >= 250) {
+        state.stats.bonusCandyDefeats -= 250;
         state.stats.whiteCandies = (state.stats.whiteCandies || 0) + 1;
         updateUI();
         showBonusCandyModal(); // Refresh modal
@@ -155,7 +166,20 @@ window.cheatWhiteCandy = function() {
     showBonusCandyModal();
 };
 
-window.buyBonusCandy = function(color, cost) {
+window.buyBonusCandy = function(color) {
+    if (color === 'Rainbow Candy' && (state.stats.rainbowCandies || 0) >= 5) {
+        alert("Maximum Rainbow Candies reached!");
+        return;
+    }
+
+    const currentOwned = color === 'Green Candy' ? state.stats.greenCandies
+                       : color === 'Purple Candy' ? state.stats.purpleCandies
+                       : color === 'Black Yellow Candy' ? state.stats.blackYellowCandies
+                       : color === 'Rainbow Candy' ? state.stats.rainbowCandies
+                       : 0;
+
+    const cost = getCandyCost(color, currentOwned);
+
     if ((state.stats.whiteCandies || 0) >= cost) {
         state.stats.whiteCandies -= cost;
         if (color === 'Green Candy') state.stats.greenCandies = (state.stats.greenCandies || 0) + 1;

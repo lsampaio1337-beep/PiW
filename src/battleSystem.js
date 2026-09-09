@@ -674,7 +674,7 @@ class BattleSystem {
         const ev = this.activeEncounter.ev;
 
         // Bonus Candy Defeats Tracker
-        if ((this.state.stats.bonusCandyDefeats || 0) < 1000) {
+        if ((this.state.stats.bonusCandyDefeats || 0) < 250) {
             this.state.stats.bonusCandyDefeats = (this.state.stats.bonusCandyDefeats || 0) + 1;
         }
 
@@ -776,7 +776,7 @@ class BattleSystem {
         }
 
         // Loot Bonus Calculation
-        const lootMultiplier = 1 + (0.01 * (this.state.stats.greenCandies || 0));
+        const lootMultiplier = 1 + (0.03 * (this.state.stats.greenCandies || 0));
 
         // Award XP and Money (EV)
         this.grantXP(leader, ev);
@@ -898,7 +898,7 @@ class BattleSystem {
         if (levelTaskTier >= 4 && pokemon.level < 60) bonus += 0.5;
         if (levelTaskTier >= 5 && pokemon.level < 75) bonus += 0.5;
         // Purple Candy XP Bonus
-        const xpMultiplier = 1 + (0.01 * (this.state.stats.purpleCandies || 0));
+        const xpMultiplier = 1 + (0.02 * (this.state.stats.purpleCandies || 0));
         amount = amount * (1 + bonus) * xpMultiplier;
 
         pokemon.xp += amount;
@@ -1223,7 +1223,7 @@ class BattleSystem {
                     }
                 }
 
-                if ((this.state.stats.bonusCandyDefeats || 0) < 1000) {
+                if ((this.state.stats.bonusCandyDefeats || 0) < 250) {
                     this.state.stats.bonusCandyDefeats = (this.state.stats.bonusCandyDefeats || 0) + 1;
                 }
 
@@ -1244,7 +1244,7 @@ class BattleSystem {
                     }
                 }
 
-                const lootMultiplier = 1 + (0.01 * (this.state.stats.greenCandies || 0));
+                const lootMultiplier = 1 + (0.03 * (this.state.stats.greenCandies || 0));
                 this.grantXP(leader, ev);
                 this.state.trainer.money += Math.floor(ev * lootMultiplier);
                 this.state.stats.battlesWon++;
