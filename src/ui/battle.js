@@ -572,8 +572,12 @@ export function playCombatAnimations(targetSide, moveType, duration) {
              const gym = battleSystem.gymState.gym;
              const tIdx = battleSystem.gymState.currentTrainerIndex;
              const pIdx = battleSystem.gymState.currentPokemonIndex;
-             if (gym.trainers[tIdx] && gym.trainers[tIdx].pokemon[pIdx]) {
-                 atkTypes = gym.trainers[tIdx].pokemon[pIdx].types;
+             if (gym.trainers[tIdx] && gym.trainers[tIdx].team && gym.trainers[tIdx].team[pIdx]) {
+                 const pId = gym.trainers[tIdx].team[pIdx].id;
+                 const baseData = state.config.pokemonData[pId];
+                 if (baseData) {
+                     atkTypes = baseData.types || [];
+                 }
              }
         } else if (battleSystem.activeEncounter) {
              atkTypes = battleSystem.activeEncounter.types || [];
