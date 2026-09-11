@@ -37,8 +37,8 @@ function getLevelFromXP(xp) {
 }
 
 function calculateEVXP(bst, level, quality, totalIV) {
-    // EVXP = max(1, floor((7.0 + 8.47 * (Level - 1)) * (BST / 300)^0.85 * (Q / 1.20)^0.30 * (0.85 + 0.15 * (IV_Total / 600))))
-    const evxp = Math.floor((7.0 + 8.47 * (level - 1)) * Math.pow(bst / 300, 0.85) * Math.pow(quality / 1.20, 0.30) * (0.85 + 0.15 * (totalIV / 600)));
+    // EVXP = max(1, floor(1.82 * (7.0 + 8.47 * (Level - 1)) * (BST / 300)^0.85 * (Q / 1.20)^0.30 * (0.85 + 0.15 * (IV_Total / 600))))
+    const evxp = Math.floor(1.82 * (7.0 + 8.47 * (level - 1)) * Math.pow(bst / 300, 0.85) * Math.pow(quality / 1.20, 0.30) * (0.85 + 0.15 * (totalIV / 600)));
     return Math.max(1, evxp);
 }
 
