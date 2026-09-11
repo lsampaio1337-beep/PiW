@@ -31,6 +31,7 @@ export const TYPE_COLORS = {
 import { updateTopbar } from './ui/topbar.js';
 import { updateSidebar } from './ui/sidebar.js';
 import { updateBattleArena, showDamage, playCombatAnimations, triggerDefeatAnimation } from './ui/battle.js';
+import { WindowManager } from './windowManager.js';
 import { showCalendar } from './ui/calendar.js';
 import { showGiftModal } from './ui/gift.js';
 import { showMap, navigateToLocation, showMapTooltip, hideMapTooltip } from './ui/map.js';
@@ -632,6 +633,11 @@ export function renderOakLab() {
 }
 
 export function switchView(viewName) {
+    // Ensure the battle area window is open when switching views since all these views exist inside it
+    if (window.WindowManager) {
+        window.WindowManager.showWindow('center-col');
+    }
+
     document.querySelectorAll('.game-view').forEach(el => el.style.display = 'none');
 
     if (viewName === 'PROF_OAK_LAB') {
@@ -1206,6 +1212,9 @@ async function init() {
     bindBtn('btn-challenges', () => { if(!checkCombatLock()) window.showChallengesModal(); });
     bindBtn('btn-calendar', () => { if(!checkCombatLock()) showCalendar(); });
     bindBtn('btn-gift', () => { if(!checkCombatLock()) showGiftModal(); });
+
+    bindBtn('btn-toggle-party', () => { window.WindowManager.toggleWindow('left-col'); });
+    bindBtn('btn-toggle-battle', () => { window.WindowManager.toggleWindow('center-col'); });
 
     bindBtn('btn-sleep', () => {
         if(!checkCombatLock()) {
