@@ -9,6 +9,11 @@
   <!-- Top Bar (Icons) -->
   <div id="top-bar">
     <div id="nav-buttons">
+      <!-- New Desktop Window Toggles -->
+      <img src="Assets/Extra/Icon2.png" class="nav-icon" id="btn-toggle-party" title="Toggle Party & Daycare">
+      <img src="Assets/Extra/Icon3.png" class="nav-icon" id="btn-toggle-battle" title="Toggle Battle Area">
+      <span class="nav-divider"></span>
+
       <div style="position: relative; display: inline-block; height: 100%;">
         <img src="Assets/Extra/IconMap.png" id="btn-map" class="nav-icon" title="Map" style="display: block;">
         <img src="Assets/Extra/ExclamationMark.png" id="map-notification" style="display: none; position: absolute; top: -5px; right: -5px; width: 15px; height: auto; pointer-events: none; z-index: 10;">
@@ -78,9 +83,17 @@
     </div>
   </div>
 
-  <div id="main-container">
-    <!-- Left Column: Party & Day Care -->
-    <aside id="left-col">
+  <!-- Desktop Area (Floating Windows Container) -->
+  <div id="main-container" style="position: relative; width: 100%; flex: 1; overflow: hidden; background-color: #2c3e50;">
+    <!-- Left Column: Party & Day Care - Now a Floating Window -->
+    <aside id="left-col" class="floating-window" style="display: none; position: absolute; left: 10px; top: 10px; width: 250px; background-color: #3b5998; border: 2px solid #1abc9c; border-radius: 8px; z-index: 100; box-shadow: 0 4px 10px rgba(0,0,0,0.5);">
+      <!-- Window Header for Dragging -->
+      <div class="window-header" style="background-color: #2c3e50; padding: 5px 10px; cursor: grab; font-weight: bold; border-top-left-radius: 6px; border-top-right-radius: 6px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #1abc9c;">
+          <span>Party & Daycare</span>
+          <button onclick="window.WindowManager.hideWindow('left-col')" style="background: #e74c3c; color: white; border: none; cursor: pointer; border-radius: 4px; padding: 2px 6px;">X</button>
+      </div>
+      <!-- Window Content -->
+      <div class="window-content" style="padding: 10px; overflow-y: auto; max-height: calc(100vh - 120px);">
       <h3>Party</h3>
       <div id="party-list">
         <!-- JS will populate 6 slots here -->
@@ -90,10 +103,18 @@
         <div id="dc-slot1"></div>
         <div id="dc-slot2"></div>
       </div>
+      </div>
     </aside>
 
-    <!-- Center Column: Dynamic View State -->
-    <main id="center-col">
+    <!-- Center Column: Views - Now a Floating Window -->
+    <main id="center-col" class="floating-window" style="display: none; position: absolute; left: 280px; top: 10px; width: 600px; height: 400px; background-color: #8fa1b3; border: 2px solid #1abc9c; border-radius: 8px; z-index: 100; box-shadow: 0 4px 10px rgba(0,0,0,0.5);">
+      <!-- Window Header for Dragging -->
+      <div class="window-header" style="background-color: #2c3e50; padding: 5px 10px; cursor: grab; font-weight: bold; border-top-left-radius: 6px; border-top-right-radius: 6px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #1abc9c;">
+          <span>Battle Area</span>
+          <button onclick="window.WindowManager.hideWindow('center-col')" style="background: #e74c3c; color: white; border: none; cursor: pointer; border-radius: 4px; padding: 2px 6px;">X</button>
+      </div>
+      <!-- Window Content -->
+      <div class="window-content" style="width: 100%; height: calc(100% - 35px); position: relative; display: flex; flex-direction: column;">
 
       <!-- View 1: Oak's Lab -->
       <div id="view-prof-oak-lab" class="game-view" style="display:none; background-image: url('./Assets/BG/BG-Professor-Oak-Lab.png'); text-align: center;">
@@ -213,11 +234,12 @@
         </div>
       </div>
 
+      </div>
     </main>
 
-    <!-- Right Column (Modals/Overlays for Map, Backpack, etc) -->
+    <!-- Modals/Overlays for Map, Backpack, etc (These remain centered overlays) -->
 
-    <!-- Center Modal Overlay (replaces right-col) -->
+    <!-- Center Modal Overlay -->
     <div id="modal-overlay" class="modal" onclick="if(event.target === this && window.closeModal) window.closeModal()">
         <div id="modal-content-box" class="modal-content" style="width: 80%; max-width: 800px; max-height: 90vh; overflow-y: auto; position: relative;">
             <div id="content-panel">
@@ -300,6 +322,13 @@
     window.showModal = showModal;
     window.switchView = switchView;
     window.navigateToLocation = navigateToLocation;
+</script>
+
+<script type="module">
+    import { WindowManager } from './src/windowManager.js';
+    if (!window.WindowManager) {
+        window.WindowManager = new WindowManager();
+    }
 </script>
 </body>
 
