@@ -1,3 +1,5 @@
+import { WindowManager } from './windowManager.js';
+import { setupClickThrough } from './clickThrough.js';
 import { getChallengeData } from './ui/topbar.js';
 
 import * as mathEngine from "./mathEngine.js";
@@ -287,6 +289,11 @@ export function showModal(title, htmlContent) {
     let rightCol = document.getElementById('modal-overlay');
     let contentPanel = document.getElementById('content-panel');
     const modalBox = document.getElementById('modal-content-box');
+    const modalHeader = document.getElementById('modal-header');
+
+    if (modalHeader && title) {
+        modalHeader.innerText = title;
+    }
 
     // Reset styles for regular modals if not overridden by Map/Backpack
     if (modalBox && modalBox.dataset.originalStyles !== undefined) {
@@ -295,7 +302,11 @@ export function showModal(title, htmlContent) {
     }
 
     rightCol.style.display = 'flex';
-    let titleHtml = title ? `<h2>${title}</h2>` : '';
+    // Ensure window manager focuses it
+    if (window.windowManager) {
+        window.windowManager.focusWindow(modalBox);
+    }
+    let titleHtml = '';
     contentPanel.innerHTML = `${titleHtml}${htmlContent}`;
 }
 
@@ -772,6 +783,16 @@ function startGame() {
 }
 
 async function init() {
+    // Desktop Overlay init
+    window.windowManager = new WindowManager(); window.WindowManager = WindowManager;
+    setupClickThrough();
+
+    // Register floating windows
+    window.windowManager.registerWindow('top-bar-window', 'top-bar-header', '10%', '5%');
+    window.windowManager.registerWindow('party-window', 'party-header', '5%', '15%');
+    window.windowManager.registerWindow('main-view-window', 'main-view-header', '30%', '15%');
+
+    window.windowManager.registerWindow('modal-content-box', 'modal-header', '25%', '25%');
     await loadConfigs();
 
     const profiles = storage.getProfiles();
@@ -1209,7 +1230,10 @@ async function init() {
         if (el) el.onclick = fn;
     };
 
-    bindBtn('btn-map', () => { if(!checkCombatLock()) showMap(); });
+
+    bindBtn('btn-toggle-party', () => { window.windowManager.toggleWindow('party-window'); });
+    bindBtn('btn-toggle-main', () => { window.windowManager.toggleWindow('main-view-window'); });
+bindBtn('btn-map', () => { if(!checkCombatLock()) showMap(); });
     bindBtn('btn-backpack', () => { if(!checkCombatLock()) showBackpack(); });
     bindBtn('btn-dex', () => { if(!checkCombatLock()) showPokedex(); });
     bindBtn('btn-bonus-candy', () => { if(!checkCombatLock()) showBonusCandyModal(); });

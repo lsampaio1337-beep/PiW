@@ -7,7 +7,11 @@
 </head>
 <body>
   <!-- Top Bar (Icons) -->
-  <div id="top-bar">
+
+  <div id="top-bar-window" class="floating-window" style="display: flex;">
+    <div id="top-bar-header" class="window-header">Topbar</div>
+    <div id="top-bar">
+
     <div id="nav-buttons">
       <div style="position: relative; display: inline-block; height: 100%;">
         <img src="Assets/Extra/IconMap.png" id="btn-map" class="nav-icon" title="Map" style="display: block;">
@@ -17,7 +21,11 @@
       <img src="Assets/Extra/IconPokedex.png" id="btn-dex" class="nav-icon" title="Pokedex">
       <img src="Assets/Extra/IconTrainer.png" id="btn-stats" class="nav-icon" title="Trainer">
 
+
+      <img src="Assets/Extra/Icon2.png" id="btn-toggle-party" class="nav-icon" title="Toggle Party">
+      <img src="Assets/Extra/Icon2.png" id="btn-toggle-main" class="nav-icon" title="Toggle Main View">
       <span class="nav-divider"></span>
+
 
 
       <div style="position: relative; display: inline-block; height: 100%;">
@@ -46,10 +54,13 @@
     </div>
   </div>
 
-  <!-- Splash Screen / Save Manager -->
-  <div id="splash-screen" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); z-index: 1000; display: flex; justify-content: center; align-items: center;">
+      </div>
+  </div>
 
-    <div id="save-manager-modal" style="display: none; background-color: rgba(0,0,0,0.9); padding: 2vw; border-radius: 8px; text-align: center; border: 2px solid white; max-width: 90vw; max-height: 90vh; overflow-y: auto; width: 50vw; min-width: 400px; display: flex; flex-direction: column; gap: 2vh; resize: both;">
+  <!-- Splash Screen / Save Manager -->
+  <div id="splash-screen" class="transparent-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: transparent; z-index: 1000; display: flex; justify-content: center; align-items: center; pointer-events: none;">
+
+    <div id="save-manager-modal" style="display: none; background-color: rgba(0,0,0,0.9); pointer-events: auto; padding: 2vw; border-radius: 8px; text-align: center; border: 2px solid white; max-width: 90vw; max-height: 90vh; overflow-y: auto; width: 50vw; min-width: 400px; display: flex; flex-direction: column; gap: 2vh; resize: both;">
         <h2 style="color: white; margin-top: 0;">Save Profiles</h2>
 
         <div id="profiles-container" style="display: flex; flex-direction: column; gap: 1vh; flex-grow: 1; overflow-y: auto;">
@@ -78,9 +89,13 @@
     </div>
   </div>
 
-  <div id="main-container">
+
     <!-- Left Column: Party & Day Care -->
+
+  <div id="party-window" class="floating-window" style="display: flex;">
+    <div id="party-header" class="window-header">Party & Daycare</div>
     <aside id="left-col">
+
       <h3>Party</h3>
       <div id="party-list">
         <!-- JS will populate 6 slots here -->
@@ -91,9 +106,14 @@
         <div id="dc-slot2"></div>
       </div>
     </aside>
+  </div>
 
     <!-- Center Column: Dynamic View State -->
+
+  <div id="main-view-window" class="floating-window" style="display: flex;">
+    <div id="main-view-header" class="window-header">Main View</div>
     <main id="center-col">
+
 
       <!-- View 1: Oak's Lab -->
       <div id="view-prof-oak-lab" class="game-view" style="display:none; background-image: url('./Assets/BG/BG-Professor-Oak-Lab.png'); text-align: center;">
@@ -214,13 +234,15 @@
       </div>
 
     </main>
+  </div>
 
     <!-- Right Column (Modals/Overlays for Map, Backpack, etc) -->
 
     <!-- Center Modal Overlay (replaces right-col) -->
-    <div id="modal-overlay" class="modal" onclick="if(event.target === this && window.closeModal) window.closeModal()">
-        <div id="modal-content-box" class="modal-content" style="width: 80%; max-width: 800px; max-height: 90vh; overflow-y: auto; position: relative;">
-            <div id="content-panel">
+    <div id="modal-overlay" class="modal transparent-overlay" onclick="if(event.target === this && window.closeModal) window.closeModal()">
+        <div id="modal-content-box" class="modal-content floating-window" style="width: 800px; height: 600px; display: flex; flex-direction: column;">
+            <div id="modal-header" class="window-header">Window</div>
+            <div id="content-panel" style="flex: 1; overflow-y: auto;">
                 <!-- Dynamic content injected here -->
             </div>
         </div>
@@ -229,7 +251,6 @@
   </div>
 
   <!-- Bottom Bar (Challenge Tracker) -->
-  </div>
 
   <!-- ZzZ Mode Modals -->
   <div id="zzz-confirmation-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); z-index: 1020; justify-content: center; align-items: center; backdrop-filter: blur(3px);">
