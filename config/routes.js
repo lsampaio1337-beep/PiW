@@ -1577,10 +1577,6 @@ export const unlocks = [
     "unlocks": [
       "Pewter Gym"
     ],
-    "gift": {
-      "item": "Pokeball",
-      "count": 10
-    },
     "requirements": {
       "catchByRarityAndType": {
         "type": "Bug",
