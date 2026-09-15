@@ -1093,6 +1093,52 @@ async function init() {
                                 faintedBanner = `<div style="background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; border-radius: 8px; padding: 10px; color: #6ee7b7; text-align: center; font-weight: bold; margin-top: 5px;">✅ Farm Stopped: Logged in a save</div>`;
                             }
 
+                            // Show results modal
+                            document.getElementById('zzz-results-content').innerHTML = `
+                                <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.3); padding: 8px 12px; border-radius: 8px; margin-bottom: 15px;">
+                                    <div style="font-size: 14px; color: #cbd5e1;">📍 <b>Route:</b> ${state.currentRoute}</div>
+                                    <div style="font-size: 14px; color: #cbd5e1;">⏳ <b>Time:</b> ${timeStr.trim()}</div>
+                                </div>
+
+                                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 15px;">
+
+                                    <!-- Money Card -->
+                                    <div style="background: linear-gradient(to bottom right, rgba(234, 179, 8, 0.1), rgba(0,0,0,0.4)); border: 1px solid #facc15; border-radius: 8px; padding: 12px; text-align: center; grid-column: span 2; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: inset 0 0 10px rgba(234, 179, 8, 0.1);">
+                                        <div style="font-size: 11px; color: #fde047; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;">Money Earned</div>
+                                        <div style="font-size: 22px; font-weight: bold; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">$${formatFarmMoney(results.money)}</div>
+                                    </div>
+
+                                    <!-- Caught Card -->
+                                    <div style="background: rgba(255,255,255,0.05); border: 1px solid #475569; border-radius: 8px; padding: 12px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                                        <div style="font-size: 11px; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;">Pokémon Caught</div>
+                                        <div style="font-size: 18px; font-weight: bold; color: #fff;">${results.caught}/${results.encounters}</div>
+                                    </div>
+
+                                    <!-- Shinies Card -->
+                                    <div style="background: rgba(255,255,255,0.05); border: 1px solid #475569; border-radius: 8px; padding: 12px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; overflow: hidden;">
+                                        ${results.shinies > 0 ? '<div style="position: absolute; top: -10px; left: -10px; width: 150%; height: 150%; background: radial-gradient(circle, rgba(168,85,247,0.2) 0%, transparent 70%); pointer-events: none;"></div>' : ''}
+                                        <div style="font-size: 11px; color: #d8b4fe; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; z-index: 1;">Shinies Caught</div>
+                                        <div style="font-size: 18px; font-weight: bold; color: #fff; z-index: 1;">${results.shinies}/${results.shinyEncounters}</div>
+                                    </div>
+
+                                    <!-- Items Used Header -->
+                                    <div style="grid-column: span 2; border-bottom: 1px solid #334155; padding-bottom: 5px; margin-top: 5px; color: #94a3b8; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; text-align: center;">Resources Used</div>
+
+                                    <!-- Balls Used -->
+                                    <div style="background: rgba(0,0,0,0.2); border: 1px dashed #475569; border-radius: 8px; padding: 10px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                                        ${ballIconStr}
+                                        <div style="font-size: 12px; color: #cbd5e1;">${ballUsedStr}</div>
+                                    </div>
+
+                                    <!-- Potions Used -->
+                                    <div style="background: rgba(0,0,0,0.2); border: 1px dashed #475569; border-radius: 8px; padding: 10px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                                        ${potionIconStr}
+                                        <div style="font-size: 12px; color: #cbd5e1;">${potionUsedStr}</div>
+                                    </div>
+
+                                </div>
+                                ${faintedBanner}
+                            `;
 
                             const resultsHtml = `
                                 <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.3); padding: 8px 12px; border-radius: 8px; margin-bottom: 15px;">
@@ -1147,15 +1193,85 @@ async function init() {
                             `;
                             showModal("ZzZ Mode", resultsHtml);
 
+
                             if (results.fainted) {
                                 state.currentRoute = "PokeCenter & PokeMarket";
                                 window.navigateToLocation("PokeCenter & PokeMarket");
                             } else if (results.outOfMoney) {
-                                state.currentRoute = "Casino Lobby";
-                                window.navigateToLocation("Casino Lobby");
+                                if (state.currentRoute === "Safari Zone") {
+                                    switchView("SAFARI_HUB");
+                                } else if (state.currentRoute && state.currentRoute.startsWith("Casino - ")) {
+                                    state.currentRoute = "Casino";
+                                    window.navigateToLocation("Casino");
+                                } else {
+                                    state.currentRoute = "Professor Oak Lab";
+                                    switchView("PROF_OAK_LAB");
+                                }
+                            } else {
+                                state.currentRoute = "Professor Oak Lab";
+                                switchView("PROF_OAK_LAB");
                             }
-                            updateUI();
+                        };
+                    } else {
+                        // Saved profiles always start at Oak's Lab and are free to explore
+                        state.currentRoute = "Professor Oak Lab";
+                        switchView("PROF_OAK_LAB");
+                    }
+                }
+            };
 
+            profilesContainer.appendChild(btn);
+        });
+
+        document.getElementById('btn-new-profile').onclick = startNewGame;
+
+        document.getElementById('btn-rename-profile').onclick = () => {
+            profileAction = profileAction === 'rename' ? 'load' : 'rename';
+            updateHeader();
+        };
+
+        document.getElementById('btn-erase-profile').onclick = () => {
+            profileAction = profileAction === 'erase' ? 'load' : 'erase';
+            updateHeader();
+        };
+
+    } else {
+        startNewGame();
+    }
+
+    // Bind buttons (they might be missing if bypass Oak)
+    const btnBulbasaur = document.getElementById('choose-bulbasaur');
+    if (btnBulbasaur) btnBulbasaur.onclick = () => selectStarter(1);
+
+    const btnCharmander = document.getElementById('choose-charmander');
+    if (btnCharmander) btnCharmander.onclick = () => selectStarter(4);
+
+    const btnSquirtle = document.getElementById('choose-squirtle');
+    if (btnSquirtle) btnSquirtle.onclick = () => selectStarter(7);
+
+    // Bind Hub Buttons
+    const checkCombatLock = () => {
+        if (globals.battleSystem && globals.battleSystem.gymState && globals.battleSystem.gymState.isActive && globals.battleSystem.gymState.inCombat) {
+            alert("You cannot access this menu during a Gym Battle!");
+            return true;
+        }
+        return false;
+    };
+
+    window.startCasinoEncounter = (doubleShiny, locationName) => {
+        state.casinoDoubleShiny = doubleShiny;
+        state.currentRoute = locationName;
+
+        // Money deduction and validation are handled by battleSystem.searchNext()
+        switchView("BATTLE_ARENA");
+        if (globals.battleSystem) {
+             globals.battleSystem.stop();
+             globals.battleSystem.activeEncounter = null;
+             globals.battleSystem.isSearching = false;
+             if (globals.battleSystem.gymState) globals.battleSystem.gymState.isActive = false;
+             globals.battleSystem.searchNext();
+        }
+        updateUI();
     };
 
     const bindBtn = (id, fn) => {
