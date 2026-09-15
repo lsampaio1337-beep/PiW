@@ -47,7 +47,10 @@
 
       <span class="nav-divider"></span>
 
-      <img src="Assets/Extra/IconSleep.png" id="btn-sleep" class="nav-icon" title="ZzZ Mode">
+      <div id="sleep-container" style="position: relative; display: none; height: 100%; aspect-ratio: 1/1;">
+        <img src="Assets/Extra/IconSleep.png" id="btn-sleep" class="nav-icon" title="ZzZ Mode" style="display: block; width: 100%; height: 100%;">
+        <img src="Assets/Extra/ExclamationMark.png" id="sleep-notification" style="display: none; position: absolute; top: -5px; right: -5px; width: 15px; height: auto; pointer-events: none; z-index: 10;">
+      </div>
       <img src="Assets/Extra/IconHelp.png" id="btn-help" class="nav-icon" title="Help">
       <img src="Assets/Extra/IconSettings.png" id="btn-settings" class="nav-icon" title="Settings">
       <img src="Assets/Extra/IconExit.png" id="btn-exit" class="nav-icon" title="Exit">
