@@ -71,10 +71,10 @@ export function openPokeMarketBuy() {
                 <label style="font-weight: bold; font-size: calc(var(--m-width) * 0.022); color: #2ecc71;">Money: $<span id="market-trainer-money">${state.trainer.money.toLocaleString()}</span></label>
             </div>
 
-            <div id="market-buy-qty-container" style="margin-bottom: calc(var(--m-width) * 0.024); display: flex; align-items: center; justify-content: center; gap: calc(var(--m-width) * 0.012);">
-                <label style="font-weight: bold; font-size: calc(var(--m-width) * 0.022);">Quantity to Buy:</label>
-                <input type="text" id="market-global-qty" value="1" oninput="window.updateMarketPrices()" style="width: calc(var(--m-width) * 0.097); padding: calc(var(--m-width) * 0.006); font-size: calc(var(--m-width) * 0.022); text-align: center; border-radius: 5px; border: 1px solid #ccc;">
-                <button onclick="if(window.buySetMax) window.buySetMax()" style="display: flex; align-items: center; justify-content: center; padding: 0 calc(var(--m-width) * 0.012); height: 100%; font-size: calc(var(--m-width) * 0.019); font-weight: bold; border-radius: 5px; cursor: pointer; background: #95a5a6; color: white; border: none; box-sizing: border-box; margin: 0;">Max</button>
+            <div id="market-buy-qty-container" style="margin-bottom: calc(var(--m-width) * 0.024); display: flex; align-items: stretch; justify-content: center; gap: calc(var(--m-width) * 0.012);">
+                <label style="display: flex; align-items: center; font-weight: bold; font-size: calc(var(--m-width) * 0.022);">Quantity to Buy:</label>
+                <input type="text" id="market-global-qty" value="1" oninput="window.updateMarketPrices()" style="width: calc(var(--m-width) * 0.097); padding: calc(var(--m-width) * 0.006); font-size: calc(var(--m-width) * 0.022); text-align: center; border-radius: 5px; border: 1px solid #ccc; box-sizing: border-box;">
+                <button onclick="if(window.buySetMax) window.buySetMax()" style="display: flex; align-items: center; justify-content: center; padding: 0 calc(var(--m-width) * 0.012); font-size: calc(var(--m-width) * 0.022); font-weight: bold; border-radius: 5px; cursor: pointer; background: #95a5a6; color: white; border: none; box-sizing: border-box; margin: 0;">Max</button>
             </div>
 
             <div id="market-buy-content" style="display: flex; flex-wrap: wrap; gap: calc(var(--m-width) * 0.018); justify-content: center; overflow-y: auto; flex: 1; padding: calc(var(--m-width) * 0.012);">
