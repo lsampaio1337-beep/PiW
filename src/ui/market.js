@@ -140,8 +140,6 @@ export function formatMarketNumber(num) {
     return displayStr;
 }
 
-import { getCapacity, getCurrentCount } from '../mathEngine.js';
-
 export function updateMarketPrices() {
     const qtyInput = document.getElementById('market-global-qty');
     if (!qtyInput) return;
