@@ -1096,8 +1096,8 @@ const routes = [
       },
       {
         "pokemonId": 144,
-        "minLevel": 82,
-        "maxLevel": 82,
+        "minLevel": 85,
+        "maxLevel": 85,
         "chance": 0.02
       }
     ]

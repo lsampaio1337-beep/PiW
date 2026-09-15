@@ -1012,10 +1012,14 @@ async function init() {
                                 timeElapsedMs = maxTimeMs;
                             }
 
-                            let consumedGrains = Math.ceil(timeElapsedMs / 60000);
-                            state.stats.jigglypuffGrains = Math.max(0, availableGrains - consumedGrains);
-
                             const results = globals.battleSystem.runFastForward(timeElapsedMs);
+
+                            let displayTimeMs = results.simulatedTimeMs !== undefined ? results.simulatedTimeMs : timeElapsedMs;
+
+                            // Make sure to cap the max time back to max available grains to avoid overdraft when resuming from save/etc.
+                            let actualTimeConsumedMs = Math.min(displayTimeMs, maxTimeMs);
+                            let consumedGrains = Math.ceil(actualTimeConsumedMs / 60000);
+                            state.stats.jigglypuffGrains = Math.max(0, availableGrains - consumedGrains);
 
                             state.isZzZMode = false;
                             state.zzzTimestamp = null;
@@ -1028,7 +1032,6 @@ async function init() {
                             }
 
                             // Format Time based on actual simulated time returned by the engine
-                            let displayTimeMs = results.simulatedTimeMs !== undefined ? results.simulatedTimeMs : timeElapsedMs;
                             let totalSeconds = Math.floor(displayTimeMs / 1000);
                             let d = Math.floor(totalSeconds / (3600 * 24));
                             let h = Math.floor((totalSeconds % (3600 * 24)) / 3600);
