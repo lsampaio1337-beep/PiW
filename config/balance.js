@@ -51,7 +51,7 @@ const balance = {
         {"name": "Small Potion", "price": 12, "heal": 50},
         {"name": "Regular Potion", "price": 35, "heal": 100},
         {"name": "Big", "price": 90, "heal": 250},
-        {"name": "Hyper Potion", "price": 220, "heal": 1000},
+        {"name": "Huge Potion", "price": 220, "heal": 1000},
         {"name": "Ultra Potion", "price": 9000, "heal": 5000},
         {"name": "Max Potion", "price": 300000, "heal": 999999}
       ],

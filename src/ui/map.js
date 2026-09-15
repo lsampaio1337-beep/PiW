@@ -35,6 +35,20 @@ export function showMap() {
         contentPanel.style.margin = '0px';
     }
 
+    // Get all unlocked areas from completed challenges
+    let unlockedAreas = new Set(['Route 1', 'Professor Oak Lab', 'PokeCenter & PokeMarket']);
+    let completed = state.stats.completedChallenges || 0;
+    if (state.config.unlocks) {
+        for (let i = 0; i < completed; i++) {
+            let u = state.config.unlocks[i];
+            if (u && u.unlocks) {
+                for (let r of u.unlocks) {
+                    unlockedAreas.add(r);
+                }
+            }
+        }
+    }
+
     // Generate Interactive Map HTML
     let html = `
         <div id="interactive-map" style="position: relative; width: 100%; aspect-ratio: 16/11; background-image: url('./Assets/Map/Kanto Map.png'); background-size: 100% 100%; background-repeat: no-repeat; background-position: center; border-radius: 8px;">
@@ -44,8 +58,7 @@ export function showMap() {
         const locationName = locationData.name;
         const coords = locationData;
 
-        // By request, all map spots are currently unlocked by default
-        let isUnlocked = true;
+        let isUnlocked = unlockedAreas.has(locationName);
 
         if (isUnlocked) {
 

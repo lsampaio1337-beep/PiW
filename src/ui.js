@@ -154,6 +154,7 @@ window.cheatProgressChallenge = function() {
                 state.stats.defeatedBosses["Champion Rival"] = true;
             }
         }
+        window.completeChallenge();
         window.showChallengesModal(window.currentChallengeTarget.areaId); // refresh
         if (window.updateUI) window.updateUI();
     }

@@ -68,7 +68,7 @@ This document provides a comprehensive overview of all formulas, game mechanics,
 - **Small Potion**: Price $12, Heal 50 HP
 - **Regular Potion**: Price $35, Heal 100 HP
 - **Big Potion** (Key: `Big Potion`, Balance key: `Big`): Price $90, Heal 250 HP
-- **Hyper Potion**: Price $220, Heal 1000 HP
+- **Huge Potion**: Price $220, Heal 1000 HP
 - **Ultra Potion**: Price $9000, Heal 5000 HP
 - **Max Potion**: Price $300,000, Heal 999,999 HP
 

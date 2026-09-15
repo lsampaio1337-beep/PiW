@@ -825,7 +825,7 @@ class BattleSystem {
             let potionDrop = "Tiny Potion";
             let level = this.activeEncounter.level;
 
-            if (level >= 76) { ballDrop = "Ultraball"; potionDrop = "Hyper Potion"; }
+            if (level >= 76) { ballDrop = "Ultraball"; potionDrop = "Huge Potion"; }
             else if (level >= 56) { ballDrop = "Greatball"; potionDrop = "Big Potion"; }
             else if (level >= 36) { ballDrop = "Greatball"; potionDrop = "Regular Potion"; }
             else if (level >= 16) { ballDrop = "Pokeball"; potionDrop = "Small Potion"; }
@@ -863,7 +863,7 @@ class BattleSystem {
             potionTierName = "Big Potion";
         } else {
             ballTierName = "Ultraball";
-            potionTierName = "Hyper Potion";
+            potionTierName = "Huge Potion";
         }
 
         // Roll for Ball drop
