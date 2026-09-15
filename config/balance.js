@@ -22,7 +22,7 @@ const balance = {
         { "tier": 3, "name": "Tactical Ball Cinch", "increment": 250, "cost": 1200 },
         { "tier": 4, "name": "Silph Ball Loader", "increment": 500, "cost": 3000 },
         { "tier": 5, "name": "Upgraded Silph Ball Loader", "increment": 1000, "cost": 7500 },
-        { "tier": 6, "name": "Endless Ball Reservoir", "increment": 8999, "cost": 20000 }
+        { "tier": 6, "name": "Endless Ball Reservoir", "increment": 8000, "cost": 20000 }
       ],
       "potionSatchel": [
         { "tier": 1, "name": "Small Pouch Patch", "increment": 20, "cost": 75 },
