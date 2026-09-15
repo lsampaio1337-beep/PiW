@@ -8,7 +8,7 @@
 <body>
   <!-- Top Bar (Icons) -->
 
-  <div id="top-bar-window" class="floating-window" style="display: flex;">
+  <div id="top-bar-window" class="floating-window" style="display: none;">
     <div id="top-bar-header" class="window-header">Main Control</div>
     <div id="top-bar">
 
@@ -63,19 +63,21 @@
   <!-- Splash Screen / Save Manager -->
   <div id="splash-screen" class="transparent-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: transparent; z-index: 1000; display: flex; justify-content: center; align-items: center; pointer-events: none;">
 
-    <div id="save-manager-modal" style="display: none; background-color: rgba(0,0,0,0.9); pointer-events: auto; padding: 2vw; border-radius: 8px; text-align: center; border: 2px solid white; max-width: 90vw; max-height: 90vh; overflow-y: auto; width: 50vw; min-width: 400px; display: flex; flex-direction: column; gap: 2vh; resize: both;">
-        <h2 style="color: white; margin-top: 0;">Save Profiles</h2>
+    <div id="save-manager-modal" class="floating-window" style="display: none; background-color: #2c3e50; pointer-events: auto; border-radius: 8px; text-align: center; border: 2px solid #1abc9c; max-width: 90vw; max-height: 90vh; width: 50vw; min-width: 400px; flex-direction: column; resize: both; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
+        <div id="save-manager-header" class="window-header">Save Profiles</div>
+        <div style="padding: 2vw; display: flex; flex-direction: column; gap: 2vh; flex-grow: 1; overflow-y: auto;">
 
         <div id="profiles-container" style="display: flex; flex-direction: column; gap: 1vh; flex-grow: 1; overflow-y: auto;">
             <!-- Dynamic profile buttons will go here -->
         </div>
 
         <div style="display: flex; flex-direction: column; gap: 1vh; justify-content: center; margin-top: 1vh; width: 75%; margin-left: auto; margin-right: auto;">
-            <button id="btn-new-profile" style="padding: 1vh 1vw; font-size: 1rem; font-weight: bold; cursor: pointer; background-color: #FFC107; color: black; border: none; border-radius: 5px; width: 100%;">New Game</button>
+            <button id="btn-new-profile" onclick="window.startNewGame()" style="padding: 1vh 1vw; font-size: 1rem; font-weight: bold; cursor: pointer; background-color: #FFC107; color: black; border: none; border-radius: 5px; width: 100%;">New Game</button>
             <div style="display: flex; gap: 1vw; width: 100%;">
                 <button id="btn-rename-profile" style="padding: 1vh 1vw; font-size: 1rem; font-weight: bold; cursor: pointer; background-color: #3498db; color: white; border: none; border-radius: 5px; flex: 1;">Rename</button>
                 <button id="btn-erase-profile" style="padding: 1vh 1vw; font-size: 1rem; font-weight: bold; cursor: pointer; background-color: #f44336; color: white; border: none; border-radius: 5px; flex: 1;">Erase</button>
             </div>
+        </div>
         </div>
     </div>
 
@@ -95,8 +97,8 @@
 
     <!-- Left Column: Party & Day Care -->
 
-  <div id="party-window" class="floating-window" style="display: flex;">
-    <div id="party-header" class="window-header">Team</div>
+  <div id="party-window" class="floating-window" style="display: none;">
+    <div id="party-header" class="window-header" style="position: relative;">Team<span onclick="window.windowManager.toggleWindow('party-window')" style="position: absolute; right: 10px; cursor: pointer; color: white;">X</span></div>
     <aside id="left-col">
 
       <h3>Party</h3>
@@ -113,8 +115,8 @@
 
     <!-- Center Column: Dynamic View State -->
 
-  <div id="main-view-window" class="floating-window" style="display: flex;">
-    <div id="main-view-header" class="window-header">Main View</div>
+  <div id="main-view-window" class="floating-window" style="display: none;">
+    <div id="main-view-header" class="window-header" style="position: relative;">Main View<span onclick="window.windowManager.toggleWindow('main-view-window')" style="position: absolute; right: 10px; cursor: pointer; color: white;">X</span></div>
     <main id="center-col">
 
 
@@ -244,7 +246,7 @@
     <!-- Center Modal Overlay (replaces right-col) -->
     <div id="modal-overlay" class="modal transparent-overlay" onclick="if(event.target === this && window.closeModal) window.closeModal()">
         <div id="modal-content-box" class="modal-content floating-window" style="width: 800px; height: 600px; display: flex; flex-direction: column;">
-            <div id="modal-header" class="window-header">Window</div>
+            <div id="modal-header" class="window-header" style="position: relative;">Window<span onclick="if(window.closeModal) window.closeModal()" style="position: absolute; right: 10px; cursor: pointer; color: white;">X</span></div>
             <div id="content-panel" style="flex: 1; overflow-y: auto;">
                 <!-- Dynamic content injected here -->
             </div>
