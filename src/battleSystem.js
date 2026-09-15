@@ -624,6 +624,10 @@ class BattleSystem {
     }
 
     throwPokeball() {
+        if (mathEngine.getCurrentCount(this.state, 'box') >= mathEngine.getCapacity(this.state, 'box')) {
+            return { used: false, ballName: null, caught: false };
+        }
+
         let tier = this.state.settings.activeBallTier;
         let isSafariZone = this.state.currentRoute === "Safari Zone";
         let ballName;

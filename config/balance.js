@@ -17,11 +17,11 @@ const balance = {
 
     "expansions": {
       "ballPocket": [
-        { "tier": 1, "name": "Ball Pocket Clip", "increment": 50, "cost": 150 },
-        { "tier": 2, "name": "Belt Carrier Harness", "increment": 100, "cost": 450 },
+        { "tier": 1, "name": "Ball Carrier", "increment": 50, "cost": 150 },
+        { "tier": 2, "name": "Ball Sling", "increment": 100, "cost": 450 },
         { "tier": 3, "name": "Tactical Ball Cinch", "increment": 250, "cost": 1200 },
         { "tier": 4, "name": "Silph Ball Loader", "increment": 500, "cost": 3000 },
-        { "tier": 5, "name": "Master Ball Sling", "increment": 1000, "cost": 7500 },
+        { "tier": 5, "name": "Upgraded Silph Ball Loader", "increment": 1000, "cost": 7500 },
         { "tier": 6, "name": "Endless Ball Reservoir", "increment": 8999, "cost": 20000 }
       ],
       "potionSatchel": [

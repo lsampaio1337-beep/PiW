@@ -247,6 +247,50 @@ function calculateDamage(level, power, attackStat, defenseStat, typeEffectivenes
     };
 }
 
+function getCapacity(state, type) {
+    let base = 0;
+    let expansions = [];
+    let currentTier = 0;
+
+    if (type === 'balls' || type === 'pokeballs') {
+        base = 100;
+        expansions = state.config?.balance?.expansions?.ballPocket || [];
+        currentTier = state.stats?.upgrades?.ballsTier || 0;
+    } else if (type === 'potions') {
+        base = 20;
+        expansions = state.config?.balance?.expansions?.potionSatchel || [];
+        currentTier = state.stats?.upgrades?.potionsTier || 0;
+    } else if (type === 'box') {
+        base = 20;
+        expansions = state.config?.balance?.expansions?.pokemonBox || [];
+        currentTier = state.stats?.upgrades?.boxTier || 0;
+    }
+
+    let capacity = base;
+    for (let i = 0; i < currentTier; i++) {
+        if (expansions[i]) {
+            capacity += expansions[i].increment;
+        }
+    }
+    return capacity;
+}
+
+function getCurrentCount(state, type) {
+    let count = 0;
+    if (type === 'balls' || type === 'pokeballs') {
+        for (const [key, value] of Object.entries(state.backpack.pokeballs)) {
+            count += value;
+        }
+    } else if (type === 'potions') {
+        for (const [key, value] of Object.entries(state.backpack.potions)) {
+            count += value;
+        }
+    } else if (type === 'box') {
+        count = state.storage ? state.storage.length : 0;
+    }
+    return count;
+}
+
 export {
     calculateHP,
     calculateStat,
@@ -259,5 +303,7 @@ export {
     calculateCatchChance,
     generateQuality,
     generateIVs,
-    calculateDamage
+    calculateDamage,
+    getCapacity,
+    getCurrentCount
 };
