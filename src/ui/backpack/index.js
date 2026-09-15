@@ -9,24 +9,15 @@ export function showBackpack() {
     let contentPanel = document.getElementById('content-panel');
     rightCol.style.display = 'flex';
 
-    // Remove any hardcoded modal width restrictions specifically for the backpack so it can scale
     const modalBox = document.getElementById('modal-content-box');
-    if (modalBox) {
-        // Temporarily clear inline styles that might restrict backpack size. We add a cleanup on close.
-        modalBox.dataset.originalStyles = modalBox.getAttribute('style') || '';
-
-        modalBox.style.width = '100%';
-        modalBox.style.maxWidth = '100%';
-        modalBox.style.height = '100%';
-        modalBox.style.maxHeight = '100%';
-        modalBox.style.background = 'transparent'; // Remove white background box
-        modalBox.style.border = 'none';
-        modalBox.style.boxShadow = 'none';
-
+    // Ensure header title is set to Backpack
+    const modalHeader = document.getElementById('modal-header');
+    if (modalHeader) {
+        modalHeader.innerHTML = 'Backpack<span onclick="if(window.closeModal) window.closeModal()" style="position: absolute; right: 10px; cursor: pointer; color: white;">X</span>';
     }
 
     let html = `
-        <div onclick="if(window.closeModal) window.closeModal()" style="position: fixed; top: 0; left: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100vw; height: 100vh; padding: 20px; box-sizing: border-box; color: white; overflow: hidden; z-index: 9999;">
+        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; padding: 20px; box-sizing: border-box; color: white; overflow: hidden; position: relative;">
             <style>
                 .backpack-pocket {
                     cursor: pointer;

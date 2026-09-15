@@ -794,6 +794,7 @@ async function init() {
     window.windowManager.registerWindow('main-view-window', 'main-view-header', '30%', '15%');
 
     window.windowManager.registerWindow('modal-content-box', 'modal-header', '25%', '25%');
+    window.windowManager.registerWindow('save-manager-modal', 'save-manager-header', '25%', '15%');
     await loadConfigs();
 
     const profiles = storage.getProfiles();
@@ -802,8 +803,13 @@ async function init() {
     const profilesContainer = document.getElementById('profiles-container');
 
     const startNewGame = () => {
+        state.stats.giftIconUnlocked = true;
+        state.stats.hasSeenZzZTutorial = true;
         if (splashScreen) splashScreen.style.display = 'none';
-        if (saveManagerModal) saveManagerModal.style.display = 'none';
+        if (saveManagerModal) window.windowManager.toggleWindow('save-manager-modal', false);
+        window.windowManager.toggleWindow('top-bar-window', true);
+        window.windowManager.toggleWindow('party-window', true);
+        window.windowManager.toggleWindow('main-view-window', true);
 
         // Force the nav buttons to be disabled immediately.
         const navButtons = document.getElementById('nav-buttons');
@@ -815,6 +821,7 @@ async function init() {
         switchView("PROF_OAK_LAB");
         // Don't call startGame yet, the user must choose a pokemon first.
     };
+    window.startNewGame = startNewGame;
 
     // Filter corrupted/empty profiles and map them to their data
     let validProfiles = profiles
@@ -830,7 +837,7 @@ async function init() {
 
     if (validProfiles.length > 0 && saveManagerModal && splashScreen) {
         splashScreen.style.display = 'flex';
-        saveManagerModal.style.display = 'flex';
+        window.windowManager.toggleWindow('save-manager-modal', true);
 
         profilesContainer.innerHTML = ''; // clear
 
@@ -977,7 +984,10 @@ async function init() {
                 } else {
                     // Load Action
                     splashScreen.style.display = 'none';
-                    saveManagerModal.style.display = 'none';
+                    window.windowManager.toggleWindow('save-manager-modal', false);
+                    window.windowManager.toggleWindow('top-bar-window', true);
+                    window.windowManager.toggleWindow('party-window', true);
+                    window.windowManager.toggleWindow('main-view-window', true);
 
                     storage.setCurrentProfile(profileId);
 
@@ -1188,7 +1198,10 @@ async function init() {
         };
 
     } else {
-        startNewGame();
+        if (splashScreen) splashScreen.style.display = 'flex';
+        window.windowManager.toggleWindow('save-manager-modal', true);
+
+        document.getElementById('btn-new-profile').onclick = startNewGame;
     }
 
     // Bind buttons (they might be missing if bypass Oak)
