@@ -1233,13 +1233,48 @@ async function init() {
 
     bindBtn('btn-toggle-party', () => { window.windowManager.toggleWindow('party-window'); });
     bindBtn('btn-toggle-main', () => { window.windowManager.toggleWindow('main-view-window'); });
-bindBtn('btn-map', () => { if(!checkCombatLock()) showMap(); });
-    bindBtn('btn-backpack', () => { if(!checkCombatLock()) showBackpack(); });
-    bindBtn('btn-dex', () => { if(!checkCombatLock()) showPokedex(); });
-    bindBtn('btn-bonus-candy', () => { if(!checkCombatLock()) showBonusCandyModal(); });
-    bindBtn('btn-challenges', () => { if(!checkCombatLock()) window.showChallengesModal(); });
-    bindBtn('btn-calendar', () => { if(!checkCombatLock()) showCalendar(); });
-    bindBtn('btn-gift', () => { if(!checkCombatLock()) showGiftModal(); });
+    bindBtn('btn-map', () => {
+        if(!checkCombatLock()) {
+            showMap();
+            window.windowManager.toggleWindow('main-view-window', true);
+        }
+    });
+    bindBtn('btn-backpack', () => {
+        if(!checkCombatLock()) {
+            showBackpack();
+            window.windowManager.toggleWindow('modal-content-box', true);
+        }
+    });
+    bindBtn('btn-dex', () => {
+        if(!checkCombatLock()) {
+            showPokedex();
+            window.windowManager.toggleWindow('modal-content-box', true);
+        }
+    });
+    bindBtn('btn-bonus-candy', () => {
+        if(!checkCombatLock()) {
+            showBonusCandyModal();
+            window.windowManager.toggleWindow('modal-content-box', true);
+        }
+    });
+    bindBtn('btn-challenges', () => {
+        if(!checkCombatLock()) {
+            window.showChallengesModal();
+            window.windowManager.toggleWindow('modal-content-box', true);
+        }
+    });
+    bindBtn('btn-calendar', () => {
+        if(!checkCombatLock()) {
+            showCalendar();
+            window.windowManager.toggleWindow('modal-content-box', true);
+        }
+    });
+    bindBtn('btn-gift', () => {
+        if(!checkCombatLock()) {
+            showGiftModal();
+            window.windowManager.toggleWindow('modal-content-box', true);
+        }
+    });
 
     bindBtn('btn-sleep', () => {
         if(!checkCombatLock()) {

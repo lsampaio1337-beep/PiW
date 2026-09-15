@@ -45,10 +45,10 @@ export class WindowManager {
         }
     }
 
-    toggleWindow(windowId) {
+    toggleWindow(windowId, forceShow = false) {
         const winElement = document.getElementById(windowId);
         if (winElement) {
-            if (winElement.style.display === 'none') {
+            if (forceShow || winElement.style.display === 'none') {
                 winElement.style.display = 'flex';
                 this.focusWindow(winElement);
             } else {

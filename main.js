@@ -11,7 +11,7 @@ function createWindow() {
         transparent: true,
         frame: false,
         hasShadow: false,
-        alwaysOnTop: true, // Keep it above other windows
+        alwaysOnTop: false, // Don't keep it above other windows
         skipTaskbar: false,
         webPreferences: {
             nodeIntegration: true,
