@@ -1093,19 +1093,25 @@ async function init() {
                                 faintedBanner = `<div style="background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; border-radius: 8px; padding: 10px; color: #6ee7b7; text-align: center; font-weight: bold; margin-top: 5px;">✅ Farm Stopped: Logged in a save</div>`;
                             }
 
-                            // Show results modal
-                            document.getElementById('zzz-results-content').innerHTML = `
+
+                            const resultsHtml = `
                                 <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.3); padding: 8px 12px; border-radius: 8px; margin-bottom: 15px;">
                                     <div style="font-size: 14px; color: #cbd5e1;">📍 <b>Route:</b> ${state.currentRoute}</div>
                                     <div style="font-size: 14px; color: #cbd5e1;">⏳ <b>Time:</b> ${timeStr.trim()}</div>
                                 </div>
 
-                                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 15px;">
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
 
-                                    <!-- Money Card -->
-                                    <div style="background: linear-gradient(to bottom right, rgba(234, 179, 8, 0.1), rgba(0,0,0,0.4)); border: 1px solid #facc15; border-radius: 8px; padding: 12px; text-align: center; grid-column: span 2; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: inset 0 0 10px rgba(234, 179, 8, 0.1);">
-                                        <div style="font-size: 11px; color: #fde047; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;">Money Earned</div>
-                                        <div style="font-size: 22px; font-weight: bold; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">$${formatFarmMoney(results.money)}</div>
+                                    <!-- Money Earned -->
+                                    <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid #10b981; border-radius: 8px; padding: 12px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                                        <div style="font-size: 11px; color: #6ee7b7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;">Money Earned</div>
+                                        <div style="font-size: 18px; font-weight: bold; color: #10b981;">+$${Math.floor(results.moneyEarned).toLocaleString('pt-BR')}</div>
+                                    </div>
+
+                                    <!-- XP Earned -->
+                                    <div style="background: rgba(59, 130, 246, 0.1); border: 1px solid #3b82f6; border-radius: 8px; padding: 12px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                                        <div style="font-size: 11px; color: #93c5fd; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;">XP Earned</div>
+                                        <div style="font-size: 18px; font-weight: bold; color: #3b82f6;">+${Math.floor(results.xpEarned).toLocaleString('pt-BR')} XP</div>
                                     </div>
 
                                     <!-- Caught Card -->
@@ -1139,90 +1145,17 @@ async function init() {
                                 </div>
                                 ${faintedBanner}
                             `;
-                            document.getElementById('zzz-results-modal').style.display = 'flex';
-                            document.getElementById('btn-zzz-results-close').onclick = () => {
-                                document.getElementById('zzz-results-modal').style.display = 'none';
-                                updateUI();
-                            };
+                            showModal("ZzZ Mode", resultsHtml);
 
                             if (results.fainted) {
                                 state.currentRoute = "PokeCenter & PokeMarket";
                                 window.navigateToLocation("PokeCenter & PokeMarket");
                             } else if (results.outOfMoney) {
-                                if (state.currentRoute === "Safari Zone") {
-                                    switchView("SAFARI_HUB");
-                                } else if (state.currentRoute && state.currentRoute.startsWith("Casino - ")) {
-                                    state.currentRoute = "Casino";
-                                    window.navigateToLocation("Casino");
-                                } else {
-                                    state.currentRoute = "Professor Oak Lab";
-                                    switchView("PROF_OAK_LAB");
-                                }
-                            } else {
-                                state.currentRoute = "Professor Oak Lab";
-                                switchView("PROF_OAK_LAB");
+                                state.currentRoute = "Casino Lobby";
+                                window.navigateToLocation("Casino Lobby");
                             }
-                        };
-                    } else {
-                        // Saved profiles always start at Oak's Lab and are free to explore
-                        state.currentRoute = "Professor Oak Lab";
-                        switchView("PROF_OAK_LAB");
-                    }
-                }
-            };
+                            updateUI();
 
-            profilesContainer.appendChild(btn);
-        });
-
-        document.getElementById('btn-new-profile').onclick = startNewGame;
-
-        document.getElementById('btn-rename-profile').onclick = () => {
-            profileAction = profileAction === 'rename' ? 'load' : 'rename';
-            updateHeader();
-        };
-
-        document.getElementById('btn-erase-profile').onclick = () => {
-            profileAction = profileAction === 'erase' ? 'load' : 'erase';
-            updateHeader();
-        };
-
-    } else {
-        startNewGame();
-    }
-
-    // Bind buttons (they might be missing if bypass Oak)
-    const btnBulbasaur = document.getElementById('choose-bulbasaur');
-    if (btnBulbasaur) btnBulbasaur.onclick = () => selectStarter(1);
-
-    const btnCharmander = document.getElementById('choose-charmander');
-    if (btnCharmander) btnCharmander.onclick = () => selectStarter(4);
-
-    const btnSquirtle = document.getElementById('choose-squirtle');
-    if (btnSquirtle) btnSquirtle.onclick = () => selectStarter(7);
-
-    // Bind Hub Buttons
-    const checkCombatLock = () => {
-        if (globals.battleSystem && globals.battleSystem.gymState && globals.battleSystem.gymState.isActive && globals.battleSystem.gymState.inCombat) {
-            alert("You cannot access this menu during a Gym Battle!");
-            return true;
-        }
-        return false;
-    };
-
-    window.startCasinoEncounter = (doubleShiny, locationName) => {
-        state.casinoDoubleShiny = doubleShiny;
-        state.currentRoute = locationName;
-
-        // Money deduction and validation are handled by battleSystem.searchNext()
-        switchView("BATTLE_ARENA");
-        if (globals.battleSystem) {
-             globals.battleSystem.stop();
-             globals.battleSystem.activeEncounter = null;
-             globals.battleSystem.isSearching = false;
-             if (globals.battleSystem.gymState) globals.battleSystem.gymState.isActive = false;
-             globals.battleSystem.searchNext();
-        }
-        updateUI();
     };
 
     const bindBtn = (id, fn) => {
@@ -1338,7 +1271,7 @@ async function init() {
             badgesHtml += `<img src="./Assets/Badges/Badge Kanto ${i}.png" style="width: 40px; height: 40px;" title="Badge ${i}">`;
         }
         badgesHtml += '</div>';
-        showModal("Statistics", `
+        showModal("Trainer", `
             <div style="text-align: left; display: inline-block;">
                 <p><b>Battles Won:</b> ${state.stats.battlesWon}</p>
                 <p><b>Total Pokémon Captured:</b> ${state.stats.caught}</p>

@@ -94,7 +94,7 @@ export function showPokedex() {
     }
 
     html += `</div>`;
-    showModal("", html);
+    showModal("Pokedex", html);
 }
 
 export function showDexEntry(id) {
@@ -126,7 +126,7 @@ export function showDexEntry(id) {
         </div>
     `;
 
-    showModal("", html);
+    showModal("Pokedex", html);
 }
 
 export function buildEvolutionLineHtml(pData, state) {

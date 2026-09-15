@@ -103,7 +103,7 @@ export function showBonusCandyModal() {
         </div>
     `;
 
-    showModal(null, html);
+    showModal("Bonus Candy", html);
 }
 
 function renderCandyOption(color, effectText, cost, currentOwned, currentEffect, imageFile) {
