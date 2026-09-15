@@ -299,7 +299,8 @@ class BattleSystem {
 
         // Track seen for pokedex
         if (!this.state.stats.seenSpecies) this.state.stats.seenSpecies = {};
-        this.state.stats.seenSpecies[pokemonBase.name] = true;
+        if (!this.state.stats.seenSpecies) this.state.stats.seenSpecies = {};
+            this.state.stats.seenSpecies[pokemonBase.name] = true;
 
         // Give them good IVs based on gym progression
         const ivs = { hp: ivValue, atk: ivValue, def: ivValue, spa: ivValue, spd: ivValue, spe: ivValue };
@@ -421,7 +422,8 @@ class BattleSystem {
 
         // Track seen for pokedex
         if (!this.state.stats.seenSpecies) this.state.stats.seenSpecies = {};
-        this.state.stats.seenSpecies[pokemonBase.name] = true;
+        if (!this.state.stats.seenSpecies) this.state.stats.seenSpecies = {};
+            this.state.stats.seenSpecies[pokemonBase.name] = true;
 
         const stats = {
             hp: mathEngine.calculateHP(pokemonBase.hp, ivs.hp, level, q.q),
@@ -1188,6 +1190,7 @@ class BattleSystem {
 
             q = mathEngine.generateQuality(this.state.stats, this.state.casinoDoubleShiny);
 
+            if (!this.state.stats.seenSpecies) this.state.stats.seenSpecies = {};
             this.state.stats.seenSpecies[pokemonBase.name] = true;
 
             if (q.name === "Shiny") {

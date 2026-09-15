@@ -1,21 +1,22 @@
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import * as mathEngine from '../src/mathEngine.js';
 import balance from '../config/balance.js';
 
 function simulateGame() {
-    let currentLevel = 5;
+    let currentLevel = 1;
     let totalTimeSeconds = 0;
     let currentXP = mathEngine.calculateTotalXP(currentLevel);
 
-    console.log("Starting full game emulation (incorporating Potions, Delays, RNG, Catching)...");
-
-    let totalCatchesNeeded = 50;
-    let timeSpentCatching = 0;
+    console.log("Testing with a 1.86x multiplier to fine-tune to 24h exactly...");
 
     while(currentLevel < 100) {
-        let wildLevel = currentLevel <= 10 ? Math.min(5, currentLevel) : Math.min(80, Math.max(5, currentLevel - 2));
+        let wildLevel = currentLevel <= 10 ? 1 : Math.min(80, Math.max(5, currentLevel - 2));
         let bst = currentLevel <= 10 ? 253 : Math.min(500, 250 + (currentLevel * 2));
 
-        let xpGained = mathEngine.calculateEVXP(bst, wildLevel, 1.0, 300);
+        let xpGained = Math.floor(1.86 * (7.0 + 8.47 * (wildLevel - 1)) * Math.pow(bst / 300, 0.85) * Math.pow(1.0 / 1.20, 0.30) * (0.85 + 0.15 * (300 / 600)));
+        xpGained = Math.max(1, xpGained);
 
         let myAtk = mathEngine.calculateStat(80, 15, currentLevel, 1.0);
         let mySpeed = mathEngine.calculateStat(80, 15, currentLevel, 1.0);
@@ -53,7 +54,7 @@ function simulateGame() {
         if (currentXP >= nextLevelXP) {
             currentLevel++;
             if (currentLevel % 10 === 0 || currentLevel === 100) {
-                console.log(`Reached Level ${currentLevel} in ${(totalTimeSeconds / 3600).toFixed(2)} hours`);
+                console.log(`Reached Level ${currentLevel} in ${(totalTimeSeconds / 60).toFixed(2)} mins (${(totalTimeSeconds / 3600).toFixed(2)} hours)`);
             }
         }
     }
@@ -61,8 +62,7 @@ function simulateGame() {
     totalTimeSeconds += 600;
     totalTimeSeconds *= 1.05;
 
-    console.log(`\nSimulation complete!`);
-    console.log(`Estimated active playtime to reach Level 100: ${(totalTimeSeconds / 3600).toFixed(2)} hours`);
+    console.log(`\nEstimated active playtime to reach Level 100: ${(totalTimeSeconds / 3600).toFixed(2)} hours`);
 }
 
 simulateGame();
