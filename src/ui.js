@@ -770,6 +770,10 @@ function startGame() {
         if (state.stats.playtime % 60 === 0 && state.stats.playtime > 0) {
             state.stats.jigglypuffGrains = (state.stats.jigglypuffGrains || 0) + 1;
         }
+
+        if (state.stats.playtime === 60) {
+            updateTopbar();
+        }
     }, 1000);
 
     // Autosave loop
@@ -1279,6 +1283,10 @@ async function init() {
 
     bindBtn('btn-sleep', () => {
         if(!checkCombatLock()) {
+            state.stats.hasSeenZzZIcon = true;
+            storage.save(state);
+            updateTopbar();
+
             document.getElementById('zzz-confirmation-modal').style.display = 'flex';
 
             // Show tutorial if first time
