@@ -11,8 +11,8 @@ function calculateStat(baseStat, ivStat, level, quality) {
 }
 
 function calculateReqXP(level) {
-    // ReqXP(L) = floor((5 + 495 * ((L - 1) / 98)^1.64) * (5 + 8 * L))
-    return Math.floor((5 + 495 * Math.pow((level - 1) / 98, 1.64)) * (5 + 8 * level));
+    // ReqXP(L) = floor((4 + 496 * ((L - 1) / 98)^1.60) * (5 + 8 * L))
+    return Math.floor((4 + 496 * Math.pow((level - 1) / 98, 1.60)) * (5 + 8 * level));
 }
 
 function calculateTotalXP(level) {
