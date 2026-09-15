@@ -18,26 +18,16 @@ export function getRewardForDay(daysClaimed) {
             case 5: return { items: { "Ultraball": 20 }, potions: { "Big Potion": 10 } };
             case 6: return { items: { "Masterball": 1 }, potions: { "Ultra Potion": 2 } };
         }
-    } else if (w === 2) {
-        switch(dayOfWeek) {
-            case 0: return { items: { "Ultraball": 15 }, potions: { "Big Potion": 10 } };
-            case 1: return { items: { "Ultraball": 20 }, potions: { "Big Potion": 10 } };
-            case 2: return { items: { "Ultraball": 25 }, potions: { "Big Potion": 15 } };
-            case 3: return { items: { "Ultraball": 30 }, potions: { "Big Potion": 15 } };
-            case 4: return { items: { "Ultraball": 35 }, potions: { "Big Potion": 20 } };
-            case 5: return { items: { "Ultraball": 40 }, potions: { "Hyper Potion": 10 } };
-            case 6: return { items: { "Masterball": 2 }, potions: { "Ultra Potion": 4 } };
-        }
     } else {
-        // Week 3+
+        // Week 2+
         if (dayOfWeek < 6) { // Days 1-6
-            const ultraballs = 40 + 5 * (d - 14);
-            const hyperPotions = 10 + 2 * (d - 14);
+            const ultraballs = 15 + 5 * (d - 7);
+            const hyperPotions = 2 * (d - 7);
             return { items: { "Ultraball": ultraballs }, potions: { "Hyper Potion": hyperPotions } };
         } else { // Day 7
             const masterballs = w;
-            const bigPotions = 2 * w;
-            return { items: { "Masterball": masterballs }, potions: { "Big Potion": bigPotions } };
+            const ultraPotions = 2 * w;
+            return { items: { "Masterball": masterballs }, potions: { "Ultra Potion": ultraPotions } };
         }
     }
 }
