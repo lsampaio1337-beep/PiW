@@ -9,10 +9,10 @@ This document provides a comprehensive overview of all formulas, game mechanics,
 - **Other Stats (ATK, DEF, SPA, SPD, SPE)** = `Math.floor((((2 * BaseStat + IV_Stat) * Level / 100) + 5) * Quality)`
 
 ### Experience & Leveling
-- **ReqXP(L)** (XP needed to go from Level L to L+1) = `Math.floor(L * (36 + 0.44 * (L - 1)^2))`
+- **ReqXP(L)** (XP needed to go from Level L to L+1) = `Math.floor((4 + 496 * ((L - 1) / 98)^1.60) * (5 + 8 * L))`
 - **TotalXP(L)** (Cumulative XP from Level 1 to L) = Sum of ReqXP from Level 1 to L-1.
 - **EVXP** (Battle XP from defeating a Pokemon):
-  `Math.max(1, Math.floor((7.0 + 8.47 * (Level - 1)) * (BST / 300)^0.85 * (Quality / 1.20)^0.30 * (0.85 + 0.15 * (TotalIV / 600))))`
+  `Math.max(1, Math.floor((5 + 8 * Level) * (BST / 300) * Quality * (0.85 + 0.15 * (TotalIV / 600))))`
   - *Note*: XP gains are further multiplied by Oak Task Level Tier bonuses and Purple Candy bonuses (see Items section).
 
 ### Economy Calculation
