@@ -23,7 +23,7 @@ export function getRewardForDay(daysClaimed) {
         if (dayOfWeek < 6) { // Days 1-6
             const ultraballs = 15 + 5 * (d - 7);
             const hyperPotions = 2 * (d - 7);
-            return { items: { "Ultraball": ultraballs }, potions: { "Hyper Potion": hyperPotions } };
+            return { items: { "Ultraball": ultraballs }, potions: { "Huge Potion": hyperPotions } };
         } else { // Day 7
             const masterballs = w;
             const ultraPotions = 2 * w;
