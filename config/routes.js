@@ -4,13 +4,13 @@ const routes = [
     "spawns": [
       {
         "pokemonId": 16,
-        "minLevel": 2,
-        "maxLevel": 5,
+        "minLevel": 1,
+        "maxLevel": 4,
         "chance": 0.5
       },
       {
         "pokemonId": 19,
-        "minLevel": 2,
+        "minLevel": 1,
         "maxLevel": 4,
         "chance": 0.5
       }
@@ -23,25 +23,25 @@ const routes = [
         "pokemonId": 16,
         "minLevel": 3,
         "maxLevel": 5,
-        "chance": 0.45
+        "chance": 0.35
       },
       {
         "pokemonId": 19,
         "minLevel": 3,
         "maxLevel": 5,
-        "chance": 0.45
+        "chance": 0.35
       },
       {
         "pokemonId": 29,
         "minLevel": 4,
         "maxLevel": 6,
-        "chance": 0.05
+        "chance": 0.15
       },
       {
         "pokemonId": 32,
         "minLevel": 4,
         "maxLevel": 6,
-        "chance": 0.05
+        "chance": 0.15
       }
     ]
   },

@@ -122,6 +122,13 @@ window.cheatProgressChallenge = function() {
             if (req.catchSpecies) {
                 req.catchSpecies.forEach(r => state.stats.caughtSpecies[r.species] = (state.stats.caughtSpecies[r.species] || 0) + r.count);
             }
+            if (req.catchSpeciesByRarity) {
+                if (!state.stats.challengeCaughtSpecific) state.stats.challengeCaughtSpecific = {};
+                req.catchSpeciesByRarity.forEach(r => {
+                    let key = r.species + "_" + r.rarity;
+                    state.stats.challengeCaughtSpecific[key] = (state.stats.challengeCaughtSpecific[key] || 0) + r.count;
+                });
+            }
             if (req.catchEachFromSlotMachine) {
                 if (req.catchEachFromSlotMachine.machines) {
                     req.catchEachFromSlotMachine.machines.forEach(m => {
