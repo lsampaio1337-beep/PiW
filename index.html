@@ -10,6 +10,9 @@
 
   <div id="top-bar-window" class="floating-window" style="display: flex;">
     <div id="top-bar-header" class="window-header">Main Control</div>
+    <div class="window-content-container">
+        <div class="window-content-scaler">
+
     <div id="top-bar">
 
     <div id="nav-buttons">
@@ -53,6 +56,9 @@
       <img src="Assets/Extra/IconExit.png" id="btn-exit" class="nav-icon" title="Exit">
     </div>
   </div>
+        </div>
+    </div>
+    <div class="window-resize-handle"></div>
 
       </div>
   </div>
@@ -94,6 +100,9 @@
 
   <div id="party-window" class="floating-window" style="display: flex;">
     <div id="party-header" class="window-header">Team</div>
+    <div class="window-content-container">
+        <div class="window-content-scaler">
+
     <aside id="left-col">
 
       <h3>Party</h3>
@@ -107,11 +116,17 @@
       </div>
     </aside>
   </div>
+        </div>
+    </div>
+    <div class="window-resize-handle"></div>
 
     <!-- Center Column: Dynamic View State -->
 
   <div id="main-view-window" class="floating-window" style="display: flex;">
     <div id="main-view-header" class="window-header">Main View</div>
+    <div class="window-content-container">
+        <div class="window-content-scaler">
+
     <main id="center-col">
 
 
@@ -235,6 +250,9 @@
 
     </main>
   </div>
+        </div>
+    </div>
+    <div class="window-resize-handle"></div>
 
     <!-- Right Column (Modals/Overlays for Map, Backpack, etc) -->
 
@@ -242,10 +260,16 @@
     <div id="modal-overlay" class="modal transparent-overlay" onclick="if(event.target === this && window.closeModal) window.closeModal()">
         <div id="modal-content-box" class="modal-content floating-window" style="width: 800px; height: 600px; display: flex; flex-direction: column;">
             <div id="modal-header" class="window-header">Window</div>
+    <div class="window-content-container">
+        <div class="window-content-scaler">
+
             <div id="content-panel" style="flex: 1; overflow-y: auto;">
                 <!-- Dynamic content injected here -->
             </div>
         </div>
+    </div>
+    <div class="window-resize-handle"></div>
+    </div>
     </div>
 
   </div>
