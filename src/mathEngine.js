@@ -11,8 +11,8 @@ function calculateStat(baseStat, ivStat, level, quality) {
 }
 
 function calculateReqXP(level) {
-    // ReqXP(L) = floor(L * (36 + 0.44 * (L - 1)^2))
-    return Math.floor(level * (36 + 0.44 * Math.pow(level - 1, 2)));
+    // ReqXP(L) = floor((5 + 495 * ((L - 1) / 98)^1.64) * (5 + 8 * L))
+    return Math.floor((5 + 495 * Math.pow((level - 1) / 98, 1.64)) * (5 + 8 * level));
 }
 
 function calculateTotalXP(level) {
@@ -37,8 +37,8 @@ function getLevelFromXP(xp) {
 }
 
 function calculateEVXP(bst, level, quality, totalIV) {
-    // EVXP = max(1, floor(1.86 * (7.0 + 8.47 * (Level - 1)) * (BST / 300)^0.85 * (Q / 1.20)^0.30 * (0.85 + 0.15 * (IV_Total / 600))))
-    const evxp = Math.floor(1.86 * (7.0 + 8.47 * (level - 1)) * Math.pow(bst / 300, 0.85) * Math.pow(quality / 1.20, 0.30) * (0.85 + 0.15 * (totalIV / 600)));
+    // EVXP = max(1, floor((5 + 8 * Level) * (BST / 300) * Q * (0.85 + 0.15 * (IV_Total / 600))))
+    const evxp = Math.floor((5 + 8 * level) * (bst / 300) * quality * (0.85 + 0.15 * (totalIV / 600)));
     return Math.max(1, evxp);
 }
 
