@@ -38,8 +38,8 @@ export function showBackpack() {
             <div style="position: relative; height: 100%; max-height: 100%; width: 100%; display: flex; align-items: center; justify-content: center; cursor: default; pointer-events: none; z-index: 2;">
 
                 <!-- Inner container shrink-wrapped to exact dimensions so clicks outside the bag hit the overlay -->
-                <div onclick="event.stopPropagation(); document.getElementById('backpack-content-area').style.display='none'" style="position: relative; height: 100%; width: 100%; max-height: 100%; max-width: max-content; aspect-ratio: 1279 / 1350; pointer-events: auto;">
-                    <img src="./Assets/Extra/Backpack.png" style="height: 100%; width: 100%; display: block; pointer-events: none;">
+                <div onclick="event.stopPropagation(); document.getElementById('backpack-content-area').style.display='none'" style="position: relative; height: 100%; width: 100%; max-height: 100%; max-width: 100%; aspect-ratio: 1279 / 1350; pointer-events: auto;">
+                    <img src="./Assets/Extra/Backpack.png" style="height: 100%; width: 100%; object-fit: contain; display: block; pointer-events: none;">
 
                     <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2;">
                         <!-- Use exact pixel dimensions of the image for the viewBox to ensure perfect circle scaling -->
