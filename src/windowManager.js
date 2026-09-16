@@ -355,7 +355,7 @@ export class WindowManager {
         let left = 50;
         let top = 50;
 
-        const mainView = document.getElementById('main-view-window');
+        const mainView = document.getElementById('top-bar-window');
         if (mainView && mainView.style.display !== 'none') {
             const rect = mainView.getBoundingClientRect();
             left = rect.left;
