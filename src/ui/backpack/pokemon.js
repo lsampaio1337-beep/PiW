@@ -42,7 +42,7 @@ function renderSlotUI(p, listName, origIndex, isDraggable) {
     else if (p.qualityName === "Regular") glowClass = "glow-regular";
 
     return `
-        <div class="${slotClass}" ${dataAttr} style="background: #2c3e50; border: 2px solid #00ffff; border-radius: 10px; aspect-ratio: 1 / 1.5; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 4%; box-sizing: border-box; position: relative; container-type: inline-size; overflow: hidden; ${cursorStyle}; width: 100%; ${selectionStyle}" title="Q=${p.quality.toFixed(2)} & ∑IV=${sumIV}" ${dragAttr} ${clickHandler}>
+        <div class="${slotClass}" ${dataAttr} style="background: #2c3e50; border: 2px solid #00ffff; border-radius: 10px; aspect-ratio: 1 / 1.3; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 4%; box-sizing: border-box; position: relative; container-type: inline-size; overflow: hidden; ${cursorStyle}; width: 100%; ${selectionStyle}" title="Q=${p.quality.toFixed(2)} & ∑IV=${sumIV}" ${dragAttr} ${clickHandler}>
             <span style="position: absolute; top: 0; left: 0; font-size: 12cqw; background: black; border-bottom-right-radius: 5px; padding: 2cqw; z-index: 2;">${p._tag || ''}</span>
             <div onclick="event.stopPropagation(); window.showPokemonStatsByUuid('${p.uuid}')" style="position: absolute; top: 2cqw; right: 2cqw; cursor: pointer; background: #34495e; color: white; border-radius: 50%; width: 20cqw; height: 20cqw; text-align: center; display: flex; align-items: center; justify-content: center; font-size: 14cqw; font-weight: bold; z-index: 3;" title="View Info">i</div>
 
