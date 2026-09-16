@@ -110,23 +110,20 @@ export function showDexEntry(id) {
     const html = `
         <div style="text-align:center; height: 100%; overflow-y: auto; padding: 0 10px;">
             <h2>#${pData.id} ${pData.name}</h2>
-            <img id="dex-sprite" src="Assets/Pokemon Sprites/${pData.id}.png" style="width: 100px; height: 100px;">
+            <img id="dex-sprite-${pData.id}" src="Assets/Pokemon Sprites/${pData.id}.png" style="width: 100px; height: 100px;">
             <div style="margin-bottom: 10px;">
-                <button style="${buttonStyle}" onclick="document.getElementById('dex-sprite').src = 'Assets/Pokemon Sprites/${pData.id}_shiny.png'">Shiny</button>
-                <button style="${buttonStyle}" onclick="document.getElementById('dex-sprite').src = 'Assets/Pokemon Sprites/${pData.id}.png'">Normal</button>
+                <button style="${buttonStyle}" onclick="document.getElementById('dex-sprite-${pData.id}').src = 'Assets/Pokemon Sprites/${pData.id}_shiny.png'">Shiny</button>
+                <button style="${buttonStyle}" onclick="document.getElementById('dex-sprite-${pData.id}').src = 'Assets/Pokemon Sprites/${pData.id}.png'">Normal</button>
             </div>
 
             <p><b>Type:</b> ${pData.types.map(t => formatType(t)).join(' ')}</p>
 
             ${speciesHtml}
             ${evoTreeHtml}
-
-            <br>
-            <button onclick="window.showPokedex()">Back to Pokedex</button>
         </div>
     `;
 
-    showModal("Pokedex", html, "window-pokedex");
+    showModal(`Pokedex Entry - ${pData.name}`, html, `window-pokedex-entry-${pData.id}`);
 }
 
 export function buildEvolutionLineHtml(pData, state) {
