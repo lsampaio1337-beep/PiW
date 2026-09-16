@@ -99,18 +99,29 @@ export function updateSidebar() {
     });
 
     // Day Care UI updates
-    if (state.dayCareRef) {
+    const dayCareContainer = document.getElementById('day-care');
+    if (state.dayCareRef && dayCareContainer) {
         renderDayCareSlot(document.getElementById('dc-slot1'), state.dayCareRef.slot1.pokemon, state.dayCareRef.slot1.battles, state.dayCareRef.slot1.requiredBattles, 'breed');
         renderDayCareSlot(document.getElementById('dc-slot2'), state.dayCareRef.slot2.pokemon, state.dayCareRef.slot2.battles, state.dayCareRef.slot2.requiredBattles, 'train');
+
+        // Hide the entire day care container if both slots are empty
+        if (!state.dayCareRef.slot1.pokemon && !state.dayCareRef.slot2.pokemon) {
+            dayCareContainer.style.display = 'none';
+        } else {
+            dayCareContainer.style.display = 'block';
+        }
     }
 }
 
 function renderDayCareSlot(container, p, battles, maxBattles, type) {
     if (!container) return;
     if (!p) {
-        container.innerHTML = `<div style="font-size: 12px; color: #777; text-align: center; padding: 10px 0; border: 1px dashed #555; margin-bottom: 5px;">${type === 'breed' ? 'Breeding Slot Empty' : 'Training Slot Empty'}</div>`;
+        container.innerHTML = ``;
+        container.style.display = 'none';
         return;
     }
+
+    container.style.display = 'block';
 
     const currentLevelXp = mathEngine.calculateTotalXP(p.level);
     const nextLevelXp = mathEngine.calculateTotalXP(p.level + 1);
