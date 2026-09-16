@@ -69,7 +69,7 @@
   <div id="splash-screen" class="transparent-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: transparent; z-index: 1000; display: flex; justify-content: center; align-items: center; pointer-events: none;">
 
     <div id="save-manager-modal" class="floating-window" style="display: none; background-color: #34495e; pointer-events: auto; border-radius: 8px; text-align: center; border: 2px solid #1abc9c; max-width: 90vw; max-height: 90vh; width: 50vw; min-width: 400px; flex-direction: column; resize: both; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
-        <div id="save-manager-header" class="window-header" style="position: relative;">Save Profiles<span onclick="window.windowManager.toggleWindow('save-manager-modal', false)" style="position: absolute; right: 10px; cursor: pointer; color: white; font-weight: bold;">X</span></div>
+        <div id="save-manager-header" class="window-header" style="position: relative;">Save Profiles<span onclick="window.promptExitGame()" style="position: absolute; right: 10px; cursor: pointer; color: white; font-weight: bold;">X</span></div>
         <div style="padding: 2vw; display: flex; flex-direction: column; gap: 2vh; flex-grow: 1; overflow-y: auto;">
 
         <div id="profiles-container" style="display: flex; flex-direction: column; gap: 1vh; flex-grow: 1; overflow-y: auto;">
