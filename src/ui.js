@@ -139,28 +139,30 @@ window.completeChallenge = function(targetAreaId) {
             state.stats.challengeRouteDefeats = 0;
         }
         if (unlock.requirements.defeatSpecific) {
-             delete state.stats.challengeSpecificDefeats[unlock.requirements.defeatSpecific.name];
+             if (state.stats.challengeSpecificDefeats) delete state.stats.challengeSpecificDefeats[unlock.requirements.defeatSpecific.name];
         }
         if (unlock.requirements.catchSpecies) {
              for (let s of unlock.requirements.catchSpecies) {
-                 delete state.stats.caughtSpecies[s.species];
+                 if (state.stats.caughtSpecies) delete state.stats.caughtSpecies[s.species];
              }
         }
         if (unlock.requirements.catchSpeciesByRarity) {
              for (let s of unlock.requirements.catchSpeciesByRarity) {
-                 delete state.stats.challengeCaughtSpecific[s.species + "_" + s.rarity];
+                 if (state.stats.challengeCaughtSpecific) delete state.stats.challengeCaughtSpecific[s.species + "_" + s.rarity];
              }
         }
         if (unlock.requirements.catchByRarityAndType) {
-             delete state.stats.challengeCaughtSpecific[unlock.requirements.catchByRarityAndType.type + "_" + unlock.requirements.catchByRarityAndType.rarity];
+             if (state.stats.challengeCaughtSpecific) delete state.stats.challengeCaughtSpecific[unlock.requirements.catchByRarityAndType.type + "_" + unlock.requirements.catchByRarityAndType.rarity];
         }
         if (unlock.requirements.catchByType) {
-             delete state.stats.challengeCaughtSpecific[unlock.requirements.catchByType.type + "_Any"];
+             if (state.stats.challengeCaughtSpecific) delete state.stats.challengeCaughtSpecific[unlock.requirements.catchByType.type + "_Any"];
         }
         if (unlock.requirements.catchEachFromSlotMachine) {
              if (unlock.requirements.catchEachFromSlotMachine.machines) {
                  for (let m of unlock.requirements.catchEachFromSlotMachine.machines) {
-                     for (let s of m) delete state.stats.caughtSpecies[s];
+                     for (let s of m) {
+                         if (state.stats.caughtSpecies) delete state.stats.caughtSpecies[s];
+                     }
                  }
              }
         }
@@ -191,6 +193,7 @@ window.cheatProgressChallenge = function(targetAreaId) {
             state.stats.challengeSpecificDefeats[req.defeatSpecific.name] = Math.max(state.stats.challengeSpecificDefeats[req.defeatSpecific.name] || 0, req.defeatSpecific.count);
         }
         if (req.catchSpecies) {
+            if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
             req.catchSpecies.forEach(r => state.stats.caughtSpecies[r.species] = (state.stats.caughtSpecies[r.species] || 0) + r.count);
         }
         if (req.catchSpeciesByRarity) {
@@ -209,6 +212,7 @@ window.cheatProgressChallenge = function(targetAreaId) {
             });
         }
         if (req.catchEachFromSlotMachine) {
+            if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
             if (req.catchEachFromSlotMachine.machines) {
                 req.catchEachFromSlotMachine.machines.forEach(m => {
                     state.stats.caughtSpecies[m[0]] = (state.stats.caughtSpecies[m[0]] || 0) + 1;
@@ -290,11 +294,13 @@ window.showChallengesModal = function() {
             html += `</ul>
                      <div style="margin-top: 10px; color: #4CAF50;"><b>Rewards:</b> Unlocks ${rewardsStr}</div>`;
 
+            let safeAreaId = unlock.areaId.replace(/'/g, "\\'");
+
             html += `<div style="text-align: center; margin-top: 15px; display: flex; justify-content: center; gap: 10px;">
-                         <button onclick="window.cheatProgressChallenge('${unlock.areaId.replace(/'/g, "\\'")}')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; background-color: orange; color: white; border: none; border-radius: 5px; cursor: pointer;">Cheat Progress</button>`;
+                         <button onclick="window.cheatProgressChallenge('${safeAreaId}')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; background-color: orange; color: white; border: none; border-radius: 5px; cursor: pointer;">Cheat Progress</button>`;
 
             if (cData.isMet) {
-                 html += `<button onclick="window.completeChallenge('${unlock.areaId.replace(/'/g, "\\'")}')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">Complete ✔️</button>`;
+                 html += `<button onclick="window.completeChallenge('${safeAreaId}')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">Complete ✔️</button>`;
             }
             html += `</div></div>`;
         }
