@@ -108,7 +108,7 @@ export function showDexEntry(id) {
     const evoTreeHtml = buildEvolutionLineHtml(pData, state);
 
     const html = `
-        <div style="text-align:center; max-height: 80vh; overflow-y: auto; padding: 0 10px;">
+        <div style="text-align:center; height: 100%; overflow-y: auto; padding: 0 10px;">
             <h2>#${pData.id} ${pData.name}</h2>
             <img id="dex-sprite" src="Assets/Pokemon Sprites/${pData.id}.png" style="width: 100px; height: 100px;">
             <div style="margin-bottom: 10px;">
