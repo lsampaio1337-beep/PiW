@@ -9,6 +9,15 @@ export function showMap() {
         updateUI();
     }
 
+    let unlockedAreas = new Set();
+    unlockedAreas.add("Professor Oak Lab");
+    if (state.stats.completedChallengeIds) {
+        state.stats.completedChallengeIds.forEach(id => unlockedAreas.add(id));
+    }
+    if (state.stats.activeChallenges) {
+        state.stats.activeChallenges.forEach(id => unlockedAreas.add(id));
+    }
+
     let html = `
         <div id="interactive-map" style="position: relative; width: 100%; aspect-ratio: 16/11; background-image: url('./Assets/Map/Kanto Map.png'); background-size: 100% 100%; background-repeat: no-repeat; background-position: center; border-radius: 8px;">
     `;
