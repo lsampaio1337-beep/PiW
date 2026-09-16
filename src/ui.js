@@ -182,6 +182,13 @@ window.cheatProgressChallenge = function(targetAreaId) {
 
     let req = unlock.requirements;
     if (req) {
+        if (req.defeatCountRoute) {
+            state.stats.challengeRouteDefeats = Math.max(state.stats.challengeRouteDefeats || 0, req.defeatCountRoute.count);
+        }
+        if (req.defeatSpecific) {
+            if (!state.stats.challengeSpecificDefeats) state.stats.challengeSpecificDefeats = {};
+            state.stats.challengeSpecificDefeats[req.defeatSpecific.name] = Math.max(state.stats.challengeSpecificDefeats[req.defeatSpecific.name] || 0, req.defeatSpecific.count);
+        }
         if (req.catchSpecies) {
             req.catchSpecies.forEach(r => state.stats.caughtSpecies[r.species] = (state.stats.caughtSpecies[r.species] || 0) + r.count);
         }
@@ -261,7 +268,7 @@ window.showChallengesModal = function() {
 
 
         html += `<div style="text-align: center; margin-top: 15px;">
-                     <button id="btn-cheat-challenge" onclick="window.cheatProgressChallenge()" style="padding: 10px 20px; font-size: 16px; font-weight: bold; background-color: orange; color: white; border: none; border-radius: 5px; cursor: pointer;">Cheat Progress Challanges</button>
+                     <button id="btn-cheat-challenge" onclick="window.cheatProgressChallenge(window.currentChallengeTarget.areaId)" style="padding: 10px 20px; font-size: 16px; font-weight: bold; background-color: orange; color: white; border: none; border-radius: 5px; cursor: pointer;">Cheat Progress Challanges</button>
                  </div>`;
 
         html += `<div style="margin-bottom: 5px;"><b>Requirements:</b></div>
