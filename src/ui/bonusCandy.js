@@ -157,6 +157,7 @@ window.claimWhiteCandy = function() {
         state.stats.whiteCandies = (state.stats.whiteCandies || 0) + 1;
         updateUI();
         showBonusCandyModal(); // Refresh modal
+        if (window.windowManager) window.windowManager.recalculateWindowSize('window-bonus-candy');
     }
 };
 
@@ -164,6 +165,7 @@ window.cheatWhiteCandy = function() {
     state.stats.whiteCandies = (state.stats.whiteCandies || 0) + 1;
     updateUI();
     showBonusCandyModal();
+    if (window.windowManager) window.windowManager.recalculateWindowSize('window-bonus-candy');
 };
 
 window.buyBonusCandy = function(color) {
@@ -194,6 +196,7 @@ window.buyBonusCandy = function(color) {
 
         updateUI();
         showBonusCandyModal(); // Refresh modal
+        if (window.windowManager) window.windowManager.recalculateWindowSize('window-bonus-candy');
     } else {
         alert("Not enough White Candies!");
     }
