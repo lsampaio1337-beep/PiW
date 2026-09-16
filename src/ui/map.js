@@ -254,7 +254,7 @@ export function navigateToLocation(locationName) {
         switchView("POKEMON_CENTER_MARKET");
         const vCenter = document.getElementById("view-center-market");
         setupMarket(vCenter);
-    } else if (locationName.includes("Gym") || locationName === "Indigo Plateu") {
+    } else if (locationName.includes("Gym") || locationName === "Indigo Plateau") {
         switchView("GYM");
         let bgImg = "";
         let lookupName = locationName;
@@ -267,7 +267,7 @@ export function navigateToLocation(locationName) {
         else if (locationName.includes("Saffron")) bgImg = "BG-Gym-6-Saffron-Psychic.png";
         else if (locationName.includes("Cinnabar")) bgImg = "BG-Gym-7-Cinnabar-Fire.png";
         else if (locationName.includes("Viridian Gym")) bgImg = "BG-Gym-8-Viridian-Ground.png";
-        else if (locationName === "Indigo Plateu") {
+        else if (locationName === "Indigo Plateau") {
             bgImg = "BG-IndigoPlateau.png";
             lookupName = "Indigo Plateau"; // Correct spelling for the gyms config
         }
@@ -320,9 +320,9 @@ export function showMapTooltip(e, locationName) {
     let info = `<strong>${locationName}</strong><br>`;
 
     // Fetch info to show on tooltip
-    if (locationName.includes("Gym") || locationName === "Elite 4") {
+    if (locationName.includes("Gym") || locationName === "Indigo Plateau") {
         let lookupName = locationName;
-        if (lookupName === "Elite 4") lookupName = "Indigo Plateau";
+
 
         if (state.config.gyms) {
             const gym = state.config.gyms.find(g => g.name === lookupName);
