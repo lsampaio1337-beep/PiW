@@ -1,0 +1,10 @@
+<<<<<<< SEARCH
+            <div style="font-size: 11cqw; color: #f1c40f; margin-bottom: 2cqw; line-height: 1.1; z-index: 1;">Lv: ${p.level} | Q: ${p.quality.toFixed(2)}</div>
+            <div style="font-size: 11cqw; color: #bdc3c7; line-height: 1.1; z-index: 1; margin-bottom: 2cqw;">∑IV: ${sumIV}</div>
+        </div>
+=======
+            <div style="font-size: 11cqw; color: #f1c40f; margin-bottom: 2cqw; line-height: 1.1; z-index: 1;">Lv. ${p.level}</div>
+            <div style="font-size: 11cqw; color: #f1c40f; margin-bottom: 2cqw; line-height: 1.1; z-index: 1;">Q: ${p.quality.toFixed(2)}</div>
+            <div style="font-size: 11cqw; color: #bdc3c7; line-height: 1.1; z-index: 1; margin-bottom: 2cqw;">∑IV: ${sumIV}</div>
+        </div>
+>>>>>>> REPLACE
