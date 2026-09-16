@@ -167,7 +167,7 @@ export function showPokemonStats(idx, location) {
         </div>
     `;
 
-    showModal(`${p.name} (Lv. ${p.level})`, html);
+    showModal(`${p.name} (Lv. ${p.level})`, html, "window-pokemon-stats");
 }
 
 export function evolvePokemon(location, idx, toId) {

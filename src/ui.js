@@ -332,7 +332,7 @@ window.showChallengesModal = function() {
 
     html += `</div>`;
 
-    showModal("Progress Challenges", html);
+    showModal("Progress Challenges", html, "window-challenges");
 };
 window.dragOver = dragOver;
 window.handleDrop = handleDrop;
@@ -356,39 +356,24 @@ window.startGymBattle = function(gymName) {
     }
 };
 
-window.closeModal = function() {
-    document.getElementById('modal-overlay').style.display = 'none';
-    const modalBox = document.getElementById('modal-content-box');
-    if (modalBox && modalBox.dataset.originalStyles !== undefined) {
-        modalBox.setAttribute('style', modalBox.dataset.originalStyles);
-        delete modalBox.dataset.originalStyles;
+window.closeModal = function(windowId) {
+    if (windowId && typeof windowId === 'string' && window.windowManager) {
+        window.windowManager.closeDynamicWindow(windowId);
+    } else {
+        const overlay = document.getElementById('modal-overlay');
+        if (overlay) overlay.style.display = 'none';
+        const modalBox = document.getElementById('modal-content-box');
+        if (modalBox && modalBox.dataset.originalStyles !== undefined) {
+            modalBox.setAttribute('style', modalBox.dataset.originalStyles);
+            delete modalBox.dataset.originalStyles;
+        }
     }
 };
 
-export function showModal(title, htmlContent) {
-    let rightCol = document.getElementById('modal-overlay');
-    let contentPanel = document.getElementById('content-panel');
-    const modalBox = document.getElementById('modal-content-box');
-    const modalHeader = document.getElementById('modal-header');
-
-    if (modalHeader && title) {
-        modalHeader.style.position = 'relative';
-        modalHeader.innerHTML = `${title}<span onclick="if(window.closeModal) window.closeModal()" style="position: absolute; right: 10px; cursor: pointer; color: white; font-weight: bold;">X</span>`;
-    }
-
-    // Reset styles for regular modals if not overridden by Map/Backpack
-    if (modalBox && modalBox.dataset.originalStyles !== undefined) {
-        modalBox.setAttribute('style', modalBox.dataset.originalStyles);
-        delete modalBox.dataset.originalStyles;
-    }
-
-    rightCol.style.display = 'flex';
-    // Ensure window manager focuses it
+export function showModal(title, htmlContent, windowId = 'dynamic-modal') {
     if (window.windowManager) {
-        window.windowManager.focusWindow(modalBox);
+        window.windowManager.createDynamicWindow(windowId, title, htmlContent);
     }
-    let titleHtml = '';
-    contentPanel.innerHTML = `${titleHtml}${htmlContent}`;
 }
 
 const oakTasks = {
@@ -694,7 +679,7 @@ window.showOakLabModal = function() {
     `;
 
     html += `</div>`;
-    showModal("Tasks & Rewards", html);
+    showModal("Tasks & Rewards", html, "window-tasks");
 };
 
 export function renderOakLab() {
@@ -1318,7 +1303,7 @@ async function init() {
                                 </div>
                                 ${faintedBanner}
                             `;
-                            showModal("ZzZ Mode", resultsHtml);
+                            showModal("ZzZ Mode", resultsHtml, "window-zzz-rewards");
 
 
                             if (results.fainted) {
@@ -1421,37 +1406,37 @@ async function init() {
     bindBtn('btn-backpack', () => {
         if(!checkCombatLock()) {
             showBackpack();
-            window.windowManager.toggleWindow('modal-content-box', true);
+
         }
     });
     bindBtn('btn-dex', () => {
         if(!checkCombatLock()) {
             showPokedex();
-            window.windowManager.toggleWindow('modal-content-box', true);
+
         }
     });
     bindBtn('btn-bonus-candy', () => {
         if(!checkCombatLock()) {
             showBonusCandyModal();
-            window.windowManager.toggleWindow('modal-content-box', true);
+
         }
     });
     bindBtn('btn-challenges', () => {
         if(!checkCombatLock()) {
             window.showChallengesModal();
-            window.windowManager.toggleWindow('modal-content-box', true);
+
         }
     });
     bindBtn('btn-calendar', () => {
         if(!checkCombatLock()) {
             showCalendar();
-            window.windowManager.toggleWindow('modal-content-box', true);
+
         }
     });
     bindBtn('btn-gift', () => {
         if(!checkCombatLock()) {
             showGiftModal();
-            window.windowManager.toggleWindow('modal-content-box', true);
+
         }
     });
 
@@ -1531,7 +1516,7 @@ async function init() {
             </div>
             <h3 style="margin-top: 20px;">Badges:</h3>
             ${badgesHtml}
-        `);
+        `, "window-trainer");
     });
 
     bindBtn('btn-settings', () => {

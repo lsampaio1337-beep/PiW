@@ -181,5 +181,5 @@ export function showCalendar() {
     html += `<p style="font-size: 12px; color: #ccc; margin-top: 15px;">New rewards available every day. Check back tomorrow!</p>`;
     html += `</div>`;
 
-    showModal("Daily Rewards", html);
+    showModal("Daily Rewards", html, "window-calendar");
 }
