@@ -218,6 +218,23 @@ export function updateTopbar() {
             challengesNotification.style.display = 'none';
         }
     }
+
+    const sleepContainer = document.getElementById('sleep-container');
+    const sleepNotification = document.getElementById('sleep-notification');
+
+    if (sleepContainer && sleepNotification) {
+        if (state.stats.playtime && state.stats.playtime >= 60) {
+            sleepContainer.style.display = 'inline-block';
+            if (!state.stats.hasSeenZzZIcon) {
+                sleepNotification.style.display = 'block';
+            } else {
+                sleepNotification.style.display = 'none';
+            }
+        } else {
+            sleepContainer.style.display = 'none';
+            sleepNotification.style.display = 'none';
+        }
+    }
 }
 
 

@@ -1550,7 +1550,7 @@ export const unlocks = [
     "requirements": {
       "defeatCountRoute": {
         "route": "Route 1",
-        "count": 25
+        "count": 15
       }
     }
   },

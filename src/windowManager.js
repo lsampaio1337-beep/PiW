@@ -36,6 +36,7 @@ export class WindowManager {
         });
 
 
+
         // Setup drag
         this._setupDrag(winElement, headerElement);
 
@@ -46,6 +47,7 @@ export class WindowManager {
         if (resizeHandle && contentScaler) {
             this._setupResize(winElement, resizeHandle, contentScaler, headerElement);
         }
+
 
     }
 
@@ -137,7 +139,6 @@ export class WindowManager {
             if (!originalWidth) {
                 const headerH = headerElement ? headerElement.offsetHeight : 0;
 
-                // Read from offsetWidth if displayed
                 if (winElement.style.display !== 'none' && winElement.offsetWidth > 0) {
                     originalWidth = winElement.offsetWidth;
                     originalHeight = winElement.offsetHeight - headerH;
@@ -146,8 +147,8 @@ export class WindowManager {
                         scalerElement.style.setProperty('--original-height', originalHeight + 'px');
                         originalRatio = originalWidth / originalHeight;
 
-                        // Set width/height explicitly on scaler so it doesn't collapse
-                        scalerElement.style.width = originalWidth + 'px'; scalerElement.style.position = 'absolute';
+                        scalerElement.style.width = originalWidth + 'px';
+                        scalerElement.style.position = 'absolute';
                         scalerElement.style.height = originalHeight + 'px';
                     }
                 }
@@ -203,7 +204,6 @@ export class WindowManager {
         });
         observer.observe(winElement, { attributes: true });
 
-        // Call once on load just in case
         setTimeout(initDims, 100);
     }
 

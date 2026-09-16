@@ -156,6 +156,7 @@ window.cheatProgressChallenge = function() {
                 state.stats.defeatedBosses["Champion Rival"] = true;
             }
         }
+        window.completeChallenge();
         window.showChallengesModal(window.currentChallengeTarget.areaId); // refresh
         if (window.updateUI) window.updateUI();
     }
@@ -769,6 +770,10 @@ function startGame() {
         if (state.stats.playtime % 60 === 0 && state.stats.playtime > 0) {
             state.stats.jigglypuffGrains = (state.stats.jigglypuffGrains || 0) + 1;
         }
+
+        if (state.stats.playtime === 60) {
+            updateTopbar();
+        }
     }, 1000);
 
     // Autosave loop
@@ -793,6 +798,7 @@ async function init() {
     window.windowManager.registerWindow('main-view-window', 'main-view-header', '30%', '15%');
 
     window.windowManager.registerWindow('modal-content-box', 'modal-header', '25%', '25%');
+    window.windowManager.registerWindow('save-manager-modal', 'save-manager-header', '25%', '15%');
     await loadConfigs();
 
     const profiles = storage.getProfiles();
@@ -801,8 +807,13 @@ async function init() {
     const profilesContainer = document.getElementById('profiles-container');
 
     const startNewGame = () => {
+        state.stats.giftIconUnlocked = true;
+        state.stats.hasSeenZzZTutorial = true;
         if (splashScreen) splashScreen.style.display = 'none';
-        if (saveManagerModal) saveManagerModal.style.display = 'none';
+        if (saveManagerModal) window.windowManager.toggleWindow('save-manager-modal', false);
+        window.windowManager.toggleWindow('top-bar-window', true);
+        window.windowManager.toggleWindow('party-window', true);
+        window.windowManager.toggleWindow('main-view-window', true);
 
         // Force the nav buttons to be disabled immediately.
         const navButtons = document.getElementById('nav-buttons');
@@ -814,6 +825,7 @@ async function init() {
         switchView("PROF_OAK_LAB");
         // Don't call startGame yet, the user must choose a pokemon first.
     };
+    window.startNewGame = startNewGame;
 
     // Filter corrupted/empty profiles and map them to their data
     let validProfiles = profiles
@@ -829,7 +841,7 @@ async function init() {
 
     if (validProfiles.length > 0 && saveManagerModal && splashScreen) {
         splashScreen.style.display = 'flex';
-        saveManagerModal.style.display = 'flex';
+        if (saveManagerModal) saveManagerModal.style.display = 'flex';
 
         profilesContainer.innerHTML = ''; // clear
 
@@ -868,11 +880,11 @@ async function init() {
             const h2 = saveManagerModal.querySelector('h2');
             if (h2) {
                 if (profileAction === 'rename') {
-                    h2.innerHTML = "Save Profiles - <span style='color: #3498db;'>Select Profile to Rename</span>";
+                    h2.innerHTML = "Saved Profiles - <span style='color: #3498db;'>Select Profile to Rename</span>";
                 } else if (profileAction === 'erase') {
-                    h2.innerHTML = "Save Profiles - <span style='color: #f44336;'>Select Profile to Erase</span>";
+                    h2.innerHTML = "Saved Profiles - <span style='color: #f44336;'>Select Profile to Erase</span>";
                 } else {
-                    h2.innerHTML = "Save Profiles";
+                    h2.innerHTML = "Saved Profiles";
                 }
             }
         };
@@ -976,7 +988,10 @@ async function init() {
                 } else {
                     // Load Action
                     splashScreen.style.display = 'none';
-                    saveManagerModal.style.display = 'none';
+                    window.windowManager.toggleWindow('save-manager-modal', false);
+                    window.windowManager.toggleWindow('top-bar-window', true);
+                    window.windowManager.toggleWindow('party-window', true);
+                    window.windowManager.toggleWindow('main-view-window', true);
 
                     storage.setCurrentProfile(profileId);
 
@@ -1236,7 +1251,10 @@ async function init() {
         };
 
     } else {
-        startNewGame();
+        if (splashScreen) splashScreen.style.display = 'flex';
+        if (saveManagerModal) saveManagerModal.style.display = 'flex';
+
+        document.getElementById('btn-new-profile').onclick = startNewGame;
     }
 
     // Bind buttons (they might be missing if bypass Oak)
@@ -1327,6 +1345,10 @@ async function init() {
 
     bindBtn('btn-sleep', () => {
         if(!checkCombatLock()) {
+            state.stats.hasSeenZzZIcon = true;
+            storage.save(state);
+            updateTopbar();
+
             document.getElementById('zzz-confirmation-modal').style.display = 'flex';
 
             // Show tutorial if first time
