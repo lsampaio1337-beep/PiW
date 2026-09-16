@@ -10,6 +10,8 @@
 
   <div id="top-bar-window" class="floating-window" style="display: none;">
     <div id="top-bar-header" class="window-header">Main Control</div>
+    <div class="window-content-container">
+        <div class="window-content-scaler">
     <div id="top-bar">
 
     <div id="nav-buttons">
@@ -58,6 +60,9 @@
   </div>
 
       </div>
+        </div>
+    </div>
+    <div class="window-resize-handle"></div>
   </div>
 
   <!-- Splash Screen / Save Manager -->
@@ -98,7 +103,9 @@
     <!-- Left Column: Party & Day Care -->
 
   <div id="party-window" class="floating-window" style="display: none;">
-    <div id="party-header" class="window-header" style="position: relative;">Team<span onclick="window.windowManager.toggleWindow('party-window')" style="position: absolute; right: 10px; cursor: pointer; color: white;">X</span></div>
+    <div id="party-header" class="window-header">Team</div>
+    <div class="window-content-container">
+        <div class="window-content-scaler">
     <aside id="left-col">
 
       <h3>Party</h3>
@@ -111,12 +118,17 @@
         <div id="dc-slot2"></div>
       </div>
     </aside>
+        </div>
+    </div>
+    <div class="window-resize-handle"></div>
   </div>
 
     <!-- Center Column: Dynamic View State -->
 
   <div id="main-view-window" class="floating-window" style="display: none;">
-    <div id="main-view-header" class="window-header" style="position: relative;">Main View<span onclick="window.windowManager.toggleWindow('main-view-window')" style="position: absolute; right: 10px; cursor: pointer; color: white;">X</span></div>
+    <div id="main-view-header" class="window-header">Main View</div>
+    <div class="window-content-container">
+        <div class="window-content-scaler">
     <main id="center-col">
 
 
@@ -239,6 +251,9 @@
       </div>
 
     </main>
+        </div>
+    </div>
+    <div class="window-resize-handle"></div>
   </div>
 
     <!-- Right Column (Modals/Overlays for Map, Backpack, etc) -->
@@ -246,10 +261,15 @@
     <!-- Center Modal Overlay (replaces right-col) -->
     <div id="modal-overlay" class="modal transparent-overlay" onclick="if(event.target === this && window.closeModal) window.closeModal()">
         <div id="modal-content-box" class="modal-content floating-window" style="width: 800px; height: 600px; display: flex; flex-direction: column;">
-            <div id="modal-header" class="window-header" style="position: relative;">Window<span onclick="if(window.closeModal) window.closeModal()" style="position: absolute; right: 10px; cursor: pointer; color: white;">X</span></div>
+            <div id="modal-header" class="window-header">Window</div>
+    <div class="window-content-container">
+        <div class="window-content-scaler">
             <div id="content-panel" style="flex: 1; overflow-y: auto;">
                 <!-- Dynamic content injected here -->
             </div>
+        </div>
+    </div>
+    <div class="window-resize-handle"></div>
         </div>
     </div>
 
@@ -297,6 +317,9 @@
           </div>
       </div>
   </div>
+
+
+
 
   <div id="zzz-results-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); z-index: 1030; justify-content: center; align-items: center; backdrop-filter: blur(3px);">
       <div style="background: linear-gradient(145deg, #1e293b, #0f172a); padding: 18px; border-radius: 12px; text-align: center; border: 2px solid #3b82f6; box-shadow: 0 10px 25px rgba(0,0,0,0.8), 0 0 20px rgba(59, 130, 246, 0.4); display: flex; flex-direction: column; gap: 15px; width: 480px; max-width: 90vw; max-height: 85vh; overflow-y: auto;">

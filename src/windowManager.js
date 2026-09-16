@@ -35,8 +35,20 @@ export class WindowManager {
             this.focusWindow(winElement);
         });
 
+
+
         // Setup drag
         this._setupDrag(winElement, headerElement);
+
+        // Setup resize if handles exist
+        const resizeHandle = winElement.querySelector('.window-resize-handle');
+        const contentScaler = winElement.querySelector('.window-content-scaler');
+
+        if (resizeHandle && contentScaler) {
+            this._setupResize(winElement, resizeHandle, contentScaler, headerElement);
+        }
+
+
     }
 
     focusWindow(winElement) {
@@ -113,6 +125,86 @@ export class WindowManager {
                 headerElement.style.cursor = 'grab';
             }
         });
+    }
+
+
+    _setupResize(winElement, handleElement, scalerElement, headerElement) {
+        let isResizing = false;
+        let startX, startY;
+        let startWidth, startHeight;
+        let originalWidth, originalHeight;
+        let originalRatio;
+
+        const initDims = () => {
+            if (!originalWidth) {
+                const headerH = headerElement ? headerElement.offsetHeight : 0;
+
+                if (winElement.style.display !== 'none' && winElement.offsetWidth > 0) {
+                    originalWidth = winElement.offsetWidth;
+                    originalHeight = winElement.offsetHeight - headerH;
+                    if (originalWidth > 0 && originalHeight > 0) {
+                        scalerElement.style.setProperty('--original-width', originalWidth + 'px');
+                        scalerElement.style.setProperty('--original-height', originalHeight + 'px');
+                        originalRatio = originalWidth / originalHeight;
+
+                        scalerElement.style.width = originalWidth + 'px';
+                        scalerElement.style.position = 'absolute';
+                        scalerElement.style.height = originalHeight + 'px';
+                    }
+                }
+            }
+        };
+
+        handleElement.addEventListener('mousedown', (e) => {
+            isResizing = true;
+            startX = e.clientX;
+            startY = e.clientY;
+
+            initDims(); // Ensure dimensions are known
+
+            startWidth = winElement.offsetWidth;
+            startHeight = winElement.offsetHeight;
+
+            this.focusWindow(winElement);
+            e.stopPropagation();
+            e.preventDefault();
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isResizing) return;
+
+            const dx = e.clientX - startX;
+            let newWidth = Math.max(200, startWidth + dx); // minimum width 200px
+
+            if (originalWidth && originalRatio) {
+                const headerH = headerElement ? headerElement.offsetHeight : 0;
+                const scale = newWidth / originalWidth;
+                const newContentHeight = originalHeight * scale;
+                let newHeight = headerH + newContentHeight;
+
+                winElement.style.width = newWidth + 'px';
+                winElement.style.height = newHeight + 'px';
+                scalerElement.style.transform = `scale(${scale})`;
+            }
+        });
+
+        document.addEventListener('mouseup', () => {
+            if (isResizing) {
+                isResizing = false;
+                this._constrainAllWindows();
+            }
+        });
+
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.attributeName === 'style' && winElement.style.display !== 'none' && !originalWidth) {
+                    setTimeout(initDims, 50);
+                }
+            });
+        });
+        observer.observe(winElement, { attributes: true });
+
+        setTimeout(initDims, 100);
     }
 
     _constrainAllWindows() {
