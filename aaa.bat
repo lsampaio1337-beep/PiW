@@ -1,5 +1,9 @@
 @echo off
 cd /d "%~dp0"
+
+REM Cleanup any leftover ready flag from a previous dirty exit
+if exist "game_ready.txt" del "game_ready.txt"
+
 echo ===================================================
 echo             Idle Pokemon World - Launcher
 echo ===================================================
@@ -45,6 +49,12 @@ echo Set WshShell = CreateObject("WScript.Shell") > launch_hidden.vbs
 echo WshShell.Run "cmd /c npm start", 0, False >> launch_hidden.vbs
 cscript //nologo launch_hidden.vbs
 del launch_hidden.vbs
+
+echo Waiting for the game window to open...
+:WAIT_LOOP
+timeout /t 1 /nobreak >nul
+if not exist "game_ready.txt" goto WAIT_LOOP
+del game_ready.txt
 
 REM Exit to close the terminal automatically
 exit
