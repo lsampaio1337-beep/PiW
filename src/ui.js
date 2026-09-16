@@ -365,7 +365,8 @@ export function showModal(title, htmlContent) {
     const modalHeader = document.getElementById('modal-header');
 
     if (modalHeader && title) {
-        modalHeader.innerText = title;
+        modalHeader.style.position = 'relative';
+        modalHeader.innerHTML = `${title}<span onclick="if(window.closeModal) window.closeModal()" style="position: absolute; right: 10px; cursor: pointer; color: white; font-weight: bold;">X</span>`;
     }
 
     // Reset styles for regular modals if not overridden by Map/Backpack
