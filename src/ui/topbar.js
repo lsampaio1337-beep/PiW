@@ -201,22 +201,20 @@ export function updateTopbar() {
 
     const challengesNotification = document.getElementById('challenges-notification');
     if (challengesNotification) {
-        if (state.config && state.config.unlocks) {
-            let currentIndex = state.stats.completedChallenges || 0;
-            if (currentIndex < state.config.unlocks.length) {
-                let unlock = state.config.unlocks[currentIndex];
-                let cData = getChallengeData(unlock);
-                if (cData.isMet) {
-                    challengesNotification.style.display = 'block';
-                } else {
-                    challengesNotification.style.display = 'none';
+        let anyMet = false;
+        if (state.config && state.config.unlocks && state.stats.activeChallenges) {
+            for (let activeId of state.stats.activeChallenges) {
+                let unlock = state.config.unlocks.find(u => u.areaId === activeId);
+                if (unlock) {
+                    let cData = getChallengeData(unlock);
+                    if (cData.isMet) {
+                        anyMet = true;
+                        break;
+                    }
                 }
-            } else {
-                challengesNotification.style.display = 'none';
             }
-        } else {
-            challengesNotification.style.display = 'none';
         }
+        challengesNotification.style.display = anyMet ? 'block' : 'none';
     }
 
     const sleepContainer = document.getElementById('sleep-container');
@@ -239,35 +237,23 @@ export function updateTopbar() {
 
 
 export function getChallengeText() {
-    let req = state.nextChallengeRequirement;
-    if (!req) return "Next Challenge: None";
+    if (!state.stats.activeChallenges || state.stats.activeChallenges.length === 0) {
+        return "Next Challenge: None";
+    }
 
-    let unlocks = "Unlocks: " + state.nextChallengeUnlocks;
+    let activeCount = state.stats.activeChallenges.length;
 
-    const extraChallengeAreas = ["Cassino", "Small Fishing Spot", "Fighting Dojo", "Big Fishing Spot", "Fossil Revival Lab", "Trade With Friends Hub", "Power Plant", "Seafoam Islands", "Victory Road"];
-    let prefix = "Next Challenge";
-    if (state.config && state.config.unlocks) {
-        let currentIndex = state.stats.completedChallenges || 0;
-        if (currentIndex < state.config.unlocks.length) {
-            let unlock = state.config.unlocks[currentIndex];
-            if (extraChallengeAreas.includes(unlock.areaId)) {
-                prefix = "Next Extra Challenge";
-            }
+    // If only one, provide basic info
+    if (activeCount === 1) {
+        let activeId = state.stats.activeChallenges[0];
+        let unlock = state.config.unlocks.find(u => u.areaId === activeId);
+        if (unlock) {
+            const extraChallengeAreas = ["Casino", "Small Fishing Spot", "Fighting Dojo", "Big Fishing Spot", "Fossil Revival Lab", "Trade With Friends Hub", "Power Plant", "Seafoam Islands", "Victory Road"];
+            let prefix = extraChallengeAreas.includes(activeId) ? "Next Extra Challenge" : "Next Challenge";
+            let unlocks = "Unlocks: " + (unlock.unlocks ? unlock.unlocks.join(', ') : "Next Area");
+            return `${prefix}: ${activeId} - ${unlocks}`;
         }
     }
 
-    if (req.defeatCountRoute) {
-        let route = req.defeatCountRoute.route;
-        let count = req.defeatCountRoute.count;
-        let defeats = state.stats.challengeRouteDefeats || 0;
-        return `${prefix}: Defeat ${count} Pokémon on ${route} (${Math.min(defeats, count)}/${count}) - ${unlocks}`;
-    }
-
-    // Check other types
-    if (req.catchSpecies) {
-        return `${prefix}: Catch required Pokémon - ${unlocks}`;
-    }
-
-    // For any others just fallback
-    return `${prefix}: Requirements not formatted. - ${unlocks}`;
+    return `${activeCount} Active Challenges Available`;
 }

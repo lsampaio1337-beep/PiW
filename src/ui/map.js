@@ -37,13 +37,27 @@ export function showMap() {
 
     // Get all unlocked areas from completed challenges
     let unlockedAreas = new Set(['Route 1', 'Professor Oak Lab', 'PokeCenter & PokeMarket']);
-    let completed = state.stats.completedChallenges || 0;
-    if (state.config.unlocks) {
-        for (let i = 0; i < completed; i++) {
-            let u = state.config.unlocks[i];
+
+    // Add unlocks from completed challenges
+    if (state.config.unlocks && state.stats.completedChallengeIds) {
+        for (let cid of state.stats.completedChallengeIds) {
+            let u = state.config.unlocks.find(unlock => unlock.areaId === cid);
             if (u && u.unlocks) {
                 for (let r of u.unlocks) {
                     unlockedAreas.add(r);
+                }
+            }
+        }
+    } else {
+        // Fallback to legacy index format
+        let completed = state.stats.completedChallenges || 0;
+        if (state.config.unlocks) {
+            for (let i = 0; i < completed; i++) {
+                let u = state.config.unlocks[i];
+                if (u && u.unlocks) {
+                    for (let r of u.unlocks) {
+                        unlockedAreas.add(r);
+                    }
                 }
             }
         }

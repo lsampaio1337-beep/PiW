@@ -27,6 +27,8 @@ export const state = {
         shiniesCaught: 0,
         playtime: 0,
         completedChallenges: 0,
+        activeChallenges: ["Route 1"],
+        completedChallengeIds: [],
         qTaskTier: 0,
         cTaskTier: 0,
         shinySeenTaskTier: 0,
