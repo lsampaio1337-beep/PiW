@@ -78,11 +78,28 @@ window.showAddPokemonModal = showAddPokemonModal;
 window.forceNextEncounter = forceNextEncounter;
 window.activateCheat = activateCheat;
 window.dragStart = dragStart;
-window.completeChallenge = function() {
-    let currentIndex = state.stats.completedChallenges || 0;
-    if (state.config.unlocks && currentIndex < state.config.unlocks.length) {
-        let unlock = state.config.unlocks[currentIndex];
-        window.currentChallengeTarget = unlock;
+window.completeChallenge = function(targetAreaId) {
+    if (!state.stats.activeChallenges) {
+        state.stats.activeChallenges = ["Route 1"];
+    }
+    if (!state.stats.completedChallengeIds) {
+        state.stats.completedChallengeIds = [];
+    }
+
+    // Default to the first active challenge if none provided
+    if (!targetAreaId && state.stats.activeChallenges.length > 0) {
+        targetAreaId = state.stats.activeChallenges[0];
+    }
+
+    // Safety check, ensure it's in active
+    if (!state.stats.activeChallenges.includes(targetAreaId)) return;
+
+    let unlock = null;
+    if (state.config.unlocks) {
+        unlock = state.config.unlocks.find(u => u.areaId === targetAreaId);
+    }
+
+    if (unlock) {
         if (unlock.gift) {
             if (!state.stats.pendingGifts) state.stats.pendingGifts = [];
             state.stats.pendingGifts.push({ type: 'item', item: unlock.gift.item || unlock.gift, count: unlock.gift.count || 1 });
@@ -94,6 +111,10 @@ window.completeChallenge = function() {
                 if (!state.stats.newRoutes.includes(newRoute)) {
                     state.stats.newRoutes.push(newRoute);
                 }
+                // Add the newly unlocked area to active challenges, but check if already completed
+                if (!state.stats.activeChallenges.includes(newRoute) && !state.stats.completedChallengeIds.includes(newRoute)) {
+                    state.stats.activeChallenges.push(newRoute);
+                }
             }
             if (unlock.unlocks.length > 0) {
                 state.stats.hasUnseenMap = true;
@@ -101,12 +122,49 @@ window.completeChallenge = function() {
         }
     }
 
+    // Remove from active, add to completed
+    state.stats.activeChallenges = state.stats.activeChallenges.filter(id => id !== targetAreaId);
+    state.stats.completedChallengeIds.push(targetAreaId);
+
+    // Also increment integer for backwards compatibility with any existing simple checks
     state.stats.completedChallenges = (state.stats.completedChallenges || 0) + 1;
 
     // Clear challenge specific tracking state
-    state.stats.challengeRouteDefeats = 0;
-    state.stats.challengeSpecificDefeats = {};
-    state.stats.challengeCaughtSpecific = {};
+    // We only want to clear progress if no OTHER active challenge needs it.
+    // However, to be perfectly safe, since the requirements are distinct, we can leave the tracked progress.
+    // Wait, if we never clear it, a future challenge that asks for "Catch 2 Mankey" might auto-complete.
+    // Let's clear ONLY the specific progress tied to the completed challenge.
+    if (unlock.requirements) {
+        if (unlock.requirements.defeatCountRoute) {
+            state.stats.challengeRouteDefeats = 0;
+        }
+        if (unlock.requirements.defeatSpecific) {
+             delete state.stats.challengeSpecificDefeats[unlock.requirements.defeatSpecific.name];
+        }
+        if (unlock.requirements.catchSpecies) {
+             for (let s of unlock.requirements.catchSpecies) {
+                 delete state.stats.caughtSpecies[s.species];
+             }
+        }
+        if (unlock.requirements.catchSpeciesByRarity) {
+             for (let s of unlock.requirements.catchSpeciesByRarity) {
+                 delete state.stats.challengeCaughtSpecific[s.species + "_" + s.rarity];
+             }
+        }
+        if (unlock.requirements.catchByRarityAndType) {
+             delete state.stats.challengeCaughtSpecific[unlock.requirements.catchByRarityAndType.type + "_" + unlock.requirements.catchByRarityAndType.rarity];
+        }
+        if (unlock.requirements.catchByType) {
+             delete state.stats.challengeCaughtSpecific[unlock.requirements.catchByType.type + "_Any"];
+        }
+        if (unlock.requirements.catchEachFromSlotMachine) {
+             if (unlock.requirements.catchEachFromSlotMachine.machines) {
+                 for (let m of unlock.requirements.catchEachFromSlotMachine.machines) {
+                     for (let s of m) delete state.stats.caughtSpecies[s];
+                 }
+             }
+        }
+    }
 
     updateUI();
     if (document.getElementById('modal-overlay').style.display !== 'none') {
@@ -117,53 +175,67 @@ window.completeChallenge = function() {
 
 
 
-window.cheatProgressChallenge = function() {
-    if (window.currentChallengeTarget) {
-        let req = window.currentChallengeTarget.requirements;
-        if (req) {
-            if (req.catchSpecies) {
-                req.catchSpecies.forEach(r => state.stats.caughtSpecies[r.species] = (state.stats.caughtSpecies[r.species] || 0) + r.count);
-            }
-            if (req.catchSpeciesByRarity) {
-                if (!state.stats.challengeCaughtSpecific) state.stats.challengeCaughtSpecific = {};
-                req.catchSpeciesByRarity.forEach(r => {
-                    let key = r.species + "_" + r.rarity;
-                    state.stats.challengeCaughtSpecific[key] = (state.stats.challengeCaughtSpecific[key] || 0) + r.count;
+window.cheatProgressChallenge = function(targetAreaId) {
+    if (!targetAreaId) return;
+    let unlock = state.config.unlocks.find(u => u.areaId === targetAreaId);
+    if (!unlock) return;
+
+    let req = unlock.requirements;
+    if (req) {
+        if (req.catchSpecies) {
+            req.catchSpecies.forEach(r => state.stats.caughtSpecies[r.species] = (state.stats.caughtSpecies[r.species] || 0) + r.count);
+        }
+        if (req.catchSpeciesByRarity) {
+            if (!state.stats.challengeCaughtSpecific) state.stats.challengeCaughtSpecific = {};
+            req.catchSpeciesByRarity.forEach(r => {
+                let key = r.species + "_" + r.rarity;
+                state.stats.challengeCaughtSpecific[key] = (state.stats.challengeCaughtSpecific[key] || 0) + r.count;
+            });
+        }
+        if (req.catchSpeciesAnyOfByRarity) {
+            if (!state.stats.challengeCaughtSpecific) state.stats.challengeCaughtSpecific = {};
+            req.catchSpeciesAnyOfByRarity.forEach(r => {
+                // Cheat by catching the first one in the list
+                let key = r.species[0] + "_" + r.rarity;
+                state.stats.challengeCaughtSpecific[key] = (state.stats.challengeCaughtSpecific[key] || 0) + r.count;
+            });
+        }
+        if (req.catchEachFromSlotMachine) {
+            if (req.catchEachFromSlotMachine.machines) {
+                req.catchEachFromSlotMachine.machines.forEach(m => {
+                    state.stats.caughtSpecies[m[0]] = (state.stats.caughtSpecies[m[0]] || 0) + 1;
+                });
+            } else if (req.catchEachFromSlotMachine.speciesList) {
+                req.catchEachFromSlotMachine.speciesList.forEach(s => {
+                    state.stats.caughtSpecies[s] = (state.stats.caughtSpecies[s] || 0) + 1;
                 });
             }
-            if (req.catchEachFromSlotMachine) {
-                if (req.catchEachFromSlotMachine.machines) {
-                    req.catchEachFromSlotMachine.machines.forEach(m => {
-                        state.stats.caughtSpecies[m[0]] = (state.stats.caughtSpecies[m[0]] || 0) + 1;
-                    });
-                } else if (req.catchEachFromSlotMachine.speciesList) {
-                    req.catchEachFromSlotMachine.speciesList.forEach(s => {
-                        state.stats.caughtSpecies[s] = (state.stats.caughtSpecies[s] || 0) + 1;
-                    });
-                }
-            }
-            if (req.catchByType) {
-                let typeKey = req.catchByType.type + "_Any";
-                if (!state.stats.challengeCaughtSpecific) state.stats.challengeCaughtSpecific = {};
-                state.stats.challengeCaughtSpecific[typeKey] = (state.stats.challengeCaughtSpecific[typeKey] || 0) + req.catchByType.count;
-            }
-            if (req.earnBadge) {
-                state.trainer.badges = Math.max(state.trainer.badges, req.earnBadge.badgeCount);
-            }
-            if (req.defeatEliteFourAndChampion) {
-                if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};
-                state.stats.defeatedBosses["Elite 4 Lorelei"] = true;
-                state.stats.defeatedBosses["Champion Rival"] = true;
-            }
         }
-        window.completeChallenge();
-        window.showChallengesModal(window.currentChallengeTarget.areaId); // refresh
-        if (window.updateUI) window.updateUI();
+        if (req.catchByRarityAndType) {
+             let key = req.catchByRarityAndType.type + "_" + req.catchByRarityAndType.rarity;
+             if (!state.stats.challengeCaughtSpecific) state.stats.challengeCaughtSpecific = {};
+             state.stats.challengeCaughtSpecific[key] = (state.stats.challengeCaughtSpecific[key] || 0) + req.catchByRarityAndType.count;
+        }
+        if (req.catchByType) {
+            let typeKey = req.catchByType.type + "_Any";
+            if (!state.stats.challengeCaughtSpecific) state.stats.challengeCaughtSpecific = {};
+            state.stats.challengeCaughtSpecific[typeKey] = (state.stats.challengeCaughtSpecific[typeKey] || 0) + req.catchByType.count;
+        }
+        if (req.earnBadge) {
+            state.trainer.badges = Math.max(state.trainer.badges, req.earnBadge.badgeCount);
+        }
+        if (req.defeatEliteFourAndChampion) {
+            if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};
+            state.stats.defeatedBosses["Elite 4 Lorelei"] = true;
+            state.stats.defeatedBosses["Champion Rival"] = true;
+        }
     }
+    window.completeChallenge(targetAreaId);
+    if (window.updateUI) window.updateUI();
 };
 
 window.showChallengesModal = function() {
-    const extraChallengeAreas = ['Cassino', 'Small Fishing Spot', 'Fighting Dojo', 'Big Fishing Spot', 'Fossil Revival Lab', 'Trade With Friends Hub', 'Power Plant', 'Seafoam Islands', 'Victory Road'];
+    const extraChallengeAreas = ['Casino', 'Small Fishing Spot', 'Fighting Dojo', 'Big Fishing Spot', 'Fossil Revival Lab', 'Trade With Friends Hub', 'Power Plant', 'Seafoam Islands', 'Victory Road'];
 
     if (!state.config.unlocks) return;
 
@@ -1016,7 +1088,39 @@ async function init() {
                         state.settings.autoPotionThreshold = 50;
                     }
 
+                    // Handle backwards compatibility for challenges
+                    if (state.stats.completedChallenges !== undefined && (!state.stats.completedChallengeIds || state.stats.completedChallengeIds.length === 0)) {
+                        state.stats.completedChallengeIds = [];
+                        state.stats.activeChallenges = ["Route 1"];
+
+                        // Wait for configs to be available to build the list
+                        // We will do this right after loadConfigs
+                    }
+
                     await loadConfigs();
+
+                    // Complete challenge arrays mapping for older saves
+                    if (state.stats.completedChallenges > 0 && state.stats.completedChallengeIds && state.stats.completedChallengeIds.length === 0) {
+                        if (state.config.unlocks) {
+                            let maxIndex = Math.min(state.stats.completedChallenges, state.config.unlocks.length);
+                            for (let i = 0; i < maxIndex; i++) {
+                                let unlock = state.config.unlocks[i];
+                                state.stats.completedChallengeIds.push(unlock.areaId);
+
+                                // Emulate the unlock logic to find the active challenges at that point
+                                state.stats.activeChallenges = state.stats.activeChallenges.filter(id => id !== unlock.areaId);
+                                if (unlock.unlocks) {
+                                    for (let newRoute of unlock.unlocks) {
+                                        if (!state.stats.activeChallenges.includes(newRoute)) {
+                                            state.stats.activeChallenges.push(newRoute);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if (!state.stats.activeChallenges) state.stats.activeChallenges = ["Route 1"];
+                    if (!state.stats.completedChallengeIds) state.stats.completedChallengeIds = [];
 
                     startGame();
 

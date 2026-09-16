@@ -953,19 +953,21 @@ class BattleSystem {
     checkRouteUnlocks() {
         // Evaluate active challenge defeat trackers
         if (!this.state.config || !this.state.config.unlocks) return;
-        let currentIndex = this.state.stats.completedChallenges || 0;
-        if (currentIndex >= this.state.config.unlocks.length) return;
+        if (!this.state.stats.activeChallenges || this.state.stats.activeChallenges.length === 0) return;
 
-        let unlock = this.state.config.unlocks[currentIndex];
-        let req = unlock.requirements;
+        for (let activeId of this.state.stats.activeChallenges) {
+            let unlock = this.state.config.unlocks.find(u => u.areaId === activeId);
+            if (!unlock) continue;
 
-        if (req.defeatCountRoute && req.defeatCountRoute.route === this.state.currentRoute) {
-            this.state.stats.challengeRouteDefeats = (this.state.stats.challengeRouteDefeats || 0) + 1;
-        }
+            let req = unlock.requirements;
+            if (req.defeatCountRoute && req.defeatCountRoute.route === this.state.currentRoute) {
+                this.state.stats.challengeRouteDefeats = (this.state.stats.challengeRouteDefeats || 0) + 1;
+            }
 
-        if (req.defeatSpecific && this.activeEncounter.name === req.defeatSpecific.name) {
-             if (!this.state.stats.challengeSpecificDefeats) this.state.stats.challengeSpecificDefeats = {};
-             this.state.stats.challengeSpecificDefeats[this.activeEncounter.name] = (this.state.stats.challengeSpecificDefeats[this.activeEncounter.name] || 0) + 1;
+            if (req.defeatSpecific && this.activeEncounter.name === req.defeatSpecific.name) {
+                 if (!this.state.stats.challengeSpecificDefeats) this.state.stats.challengeSpecificDefeats = {};
+                 this.state.stats.challengeSpecificDefeats[this.activeEncounter.name] = (this.state.stats.challengeSpecificDefeats[this.activeEncounter.name] || 0) + 1;
+            }
         }
     }
 
