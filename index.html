@@ -260,7 +260,7 @@
 
   <!-- Generic Window Template -->
   <template id="generic-window-template">
-      <div class="modal-content floating-window" style="width: 800px; height: 600px; display: flex; flex-direction: column; display: none;">
+      <div class="modal-content floating-window" style="width: 800px; height: auto; display: flex; flex-direction: column; display: none;">
           <div class="window-header">Window</div>
           <div class="window-content-container">
               <div class="window-content-scaler">
@@ -272,7 +272,7 @@
   </template>
 
   <div id="modal-overlay" class="modal transparent-overlay" onclick="if(event.target === this && window.closeModal) window.closeModal()">
-        <div id="modal-content-box" class="modal-content floating-window" style="width: 800px; height: 600px; display: flex; flex-direction: column;">
+        <div id="modal-content-box" class="modal-content floating-window" style="width: 800px; height: auto; display: flex; flex-direction: column;">
             <div id="modal-header" class="window-header">Window</div>
     <div class="window-content-container">
         <div class="window-content-scaler">

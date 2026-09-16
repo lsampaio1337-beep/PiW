@@ -294,7 +294,7 @@ export class WindowManager {
         });
     }
 
-    createDynamicWindow(windowId, title, htmlContent, width = '800px', height = '600px') {
+    createDynamicWindow(windowId, title, htmlContent, width = '800px', height = 'auto') {
         let winElement = document.getElementById(windowId);
 
         if (!winElement) {
