@@ -294,11 +294,13 @@ window.showChallengesModal = function() {
             html += `</ul>
                      <div style="margin-top: 10px; color: #4CAF50;"><b>Rewards:</b> Unlocks ${rewardsStr}</div>`;
 
+            let safeAreaId = unlock.areaId.replace(/'/g, "\\'");
+
             html += `<div style="text-align: center; margin-top: 15px; display: flex; justify-content: center; gap: 10px;">
-                         <button onclick="window.cheatProgressChallenge('${unlock.areaId}')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; background-color: orange; color: white; border: none; border-radius: 5px; cursor: pointer;">Cheat Progress</button>`;
+                         <button onclick="window.cheatProgressChallenge('${safeAreaId}')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; background-color: orange; color: white; border: none; border-radius: 5px; cursor: pointer;">Cheat Progress</button>`;
 
             if (cData.isMet) {
-                 html += `<button onclick="window.completeChallenge('${unlock.areaId}')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">Complete ✔️</button>`;
+                 html += `<button onclick="window.completeChallenge('${safeAreaId}')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">Complete ✔️</button>`;
             }
             html += `</div></div>`;
         }
