@@ -46,5 +46,11 @@ echo WshShell.Run "cmd /c npm start", 0, False >> launch_hidden.vbs
 cscript //nologo launch_hidden.vbs
 del launch_hidden.vbs
 
+echo Waiting for the game window to open...
+:WAIT_LOOP
+timeout /t 1 /nobreak >nul
+tasklist /fi "imagename eq electron.exe" 2>nul | find /i "electron.exe" >nul
+if %ERRORLEVEL% neq 0 goto WAIT_LOOP
+
 REM Exit to close the terminal automatically
 exit
