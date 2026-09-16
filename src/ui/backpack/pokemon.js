@@ -46,15 +46,15 @@ function renderSlotUI(p, listName, origIndex, isDraggable) {
             <span style="position: absolute; top: 0; left: 0; font-size: 12cqw; background: black; border-bottom-right-radius: 5px; padding: 2cqw; z-index: 2;">${p._tag || ''}</span>
             <div onclick="event.stopPropagation(); window.showPokemonStatsByUuid('${p.uuid}')" style="position: absolute; top: 2cqw; right: 2cqw; cursor: pointer; background: #34495e; color: white; border-radius: 50%; width: 20cqw; height: 20cqw; text-align: center; display: flex; align-items: center; justify-content: center; font-size: 14cqw; font-weight: bold; z-index: 3;" title="View Info">i</div>
 
-            <div style="font-size: 13cqw; font-weight: bold; margin-top: 12cqw; margin-bottom: 2cqw; display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.1; z-index: 1; color: white;">${p.name}</div>
+            <div style="font-size: 13cqw; font-weight: bold; margin-top: 10cqw; margin-bottom: 1cqw; display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.1; z-index: 1; color: white;">${p.name}</div>
 
-            <div style="flex: 1; width: 100%; display: flex; align-items: center; justify-content: center; position: relative; margin-bottom: 2cqw;">
-                <img src="${imgSrc}" class="${glowClass}" style="height: 120%; width: 120%; max-height: 120%; object-fit: contain; z-index: 1;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
+            <div style="flex: 1; min-height: 0; width: 100%; display: flex; align-items: center; justify-content: center; position: relative; margin-bottom: 1cqw;">
+                <img src="${imgSrc}" class="${glowClass}" style="height: 100%; width: 100%; object-fit: contain; z-index: 1;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
             </div>
 
-            <div style="font-size: 11cqw; color: #bdc3c7; line-height: 1.1; z-index: 1;">Lv. ${p.level}</div>
-            <div style="font-size: 11cqw; color: #f1c40f; line-height: 1.1; z-index: 1;">Q: ${p.quality.toFixed(2)}</div>
-            <div style="font-size: 11cqw; color: #3498db; line-height: 1.1; z-index: 1; margin-bottom: 2cqw;">∑IV: ${sumIV}</div>
+            <div style="font-size: 10cqw; color: #bdc3c7; line-height: 1.1; z-index: 1;">Lv. ${p.level}</div>
+            <div style="font-size: 10cqw; color: #f1c40f; line-height: 1.1; z-index: 1;">Q: ${p.quality.toFixed(2)}</div>
+            <div style="font-size: 10cqw; color: #3498db; line-height: 1.1; z-index: 1; margin-bottom: 1cqw;">∑IV: ${sumIV}</div>
         </div>
     `;
 }
