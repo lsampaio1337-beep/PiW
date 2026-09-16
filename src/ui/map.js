@@ -339,7 +339,7 @@ export function navigateToLocation(locationName) {
         }
 
         vGym.innerHTML = `
-            <div style="background-color: rgba(0,0,0,0.8); display: flex; flex-direction: column; align-items: center; padding: 20px; border-radius: 8px; position: absolute; left: 33%; top: 50%; transform: translate(-50%, -50%); min-width: 300px;">
+            <div style="background-color: rgba(0,0,0,0.8); display: flex; flex-direction: column; align-items: center; padding: 20px; border-radius: 8px; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); min-width: 300px;">
                 <h2>${locationName}</h2>
                 <div id="gym-content-area" style="position: relative; width: 100%; text-align: center; display: flex; flex-direction: column; gap: 10px; align-items: center;">
                     ${buttonHtml}
