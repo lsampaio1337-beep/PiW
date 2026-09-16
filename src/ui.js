@@ -77,6 +77,7 @@ window.updateMarketPrices = updateMarketPrices;
 window.showAddPokemonModal = showAddPokemonModal;
 window.forceNextEncounter = forceNextEncounter;
 window.activateCheat = activateCheat;
+
 window.dragStart = dragStart;
 window.completeChallenge = function(targetAreaId) {
     if (!state.stats.activeChallenges) {
@@ -391,6 +392,7 @@ export function showModal(title, htmlContent, windowId = 'dynamic-modal') {
         window.windowManager.createDynamicWindow(windowId, title, htmlContent);
     }
 }
+window.showModal = showModal;
 
 const oakTasks = {
     q: [
