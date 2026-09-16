@@ -111,6 +111,11 @@ export function updateSidebar() {
             dayCareContainer.style.display = 'block';
         }
     }
+
+    const partyWindow = document.getElementById('party-window');
+    if (partyWindow && partyWindow.recalculateDims) {
+        setTimeout(() => partyWindow.recalculateDims(), 0);
+    }
 }
 
 function renderDayCareSlot(container, p, battles, maxBattles, type) {

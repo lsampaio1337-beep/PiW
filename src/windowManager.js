@@ -209,10 +209,48 @@ export class WindowManager {
                         originalRatio = originalWidth / originalHeight;
 
                         scalerElement.style.width = originalWidth + 'px';
-                        scalerElement.style.position = 'absolute';
                         scalerElement.style.height = originalHeight + 'px';
                     }
                 }
+            }
+        };
+
+        winElement.recalculateDims = () => {
+            const headerH = headerElement ? headerElement.offsetHeight : 0;
+
+            // Get current scale to reapply later
+            let currentScale = 1;
+            if (originalWidth) {
+                currentScale = winElement.offsetWidth / originalWidth;
+            }
+
+            // Temporarily reset styles to measure natural unscaled dimensions
+            winElement.style.width = '';
+            winElement.style.height = '';
+            scalerElement.style.transform = 'none';
+            scalerElement.style.width = '';
+            scalerElement.style.height = '';
+
+            const newOriginalWidth = winElement.offsetWidth;
+            const newOriginalHeight = winElement.offsetHeight - headerH;
+
+            if (newOriginalWidth > 0 && newOriginalHeight > 0) {
+                originalWidth = newOriginalWidth;
+                originalHeight = newOriginalHeight;
+                originalRatio = originalWidth / originalHeight;
+
+                scalerElement.style.setProperty('--original-width', originalWidth + 'px');
+                scalerElement.style.setProperty('--original-height', originalHeight + 'px');
+                scalerElement.style.width = originalWidth + 'px';
+                scalerElement.style.height = originalHeight + 'px';
+
+                // Reapply scale
+                let newWidth = originalWidth * currentScale;
+                let newHeight = headerH + (originalHeight * currentScale);
+
+                winElement.style.width = newWidth + 'px';
+                winElement.style.height = newHeight + 'px';
+                scalerElement.style.transform = `scale(${currentScale})`;
             }
         };
 
