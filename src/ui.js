@@ -1539,16 +1539,22 @@ async function init() {
     });
 
     bindBtn('btn-exit', () => {
-        if (confirm("Are you sure you want to save and exit?")) {
-            if (state.party.length === 0 && state.storage.length === 0) {
-                window.close();
-            } else {
-                storage.save(state);
-                window.close(); // Closes the app completely (works in Electron/app context)
-            }
-        }
+        window.promptExitGame();
     });
 }
+
+export const promptExitGame = () => {
+    if (confirm("Do you want to leave the game?")) {
+        if (state.party.length === 0 && state.storage.length === 0) {
+            window.close();
+        } else {
+            storage.save(state);
+            window.close(); // Closes the app completely (works in Electron/app context)
+        }
+    }
+};
+
+window.promptExitGame = promptExitGame;
 
 // Ensure the UI script runs
 init();

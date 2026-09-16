@@ -9,7 +9,7 @@
   <!-- Top Bar (Icons) -->
 
   <div id="top-bar-window" class="floating-window" style="display: none;">
-    <div id="top-bar-header" class="window-header" style="position: relative;">Main Control<span onclick="window.windowManager.toggleWindow('top-bar-window', false)" style="position: absolute; right: 10px; cursor: pointer; color: white; font-weight: bold;">X</span></div>
+    <div id="top-bar-header" class="window-header" style="position: relative;">Main Control<span onclick="window.promptExitGame()" style="position: absolute; right: 10px; cursor: pointer; color: white; font-weight: bold;">X</span></div>
     <div class="window-content-container">
         <div class="window-content-scaler">
     <div id="top-bar">
@@ -347,6 +347,10 @@
     window.showModal = showModal;
     window.switchView = switchView;
     window.navigateToLocation = navigateToLocation;
+
+    // UI exports
+    import { promptExitGame } from './src/ui.js';
+    window.promptExitGame = promptExitGame;
 </script>
 </body>
 
