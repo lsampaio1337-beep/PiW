@@ -18,14 +18,9 @@ export function showMap() {
         // Save original inline styles to restore later if another view needs it
         modalBox.dataset.originalStyles = modalBox.getAttribute('style') || '';
 
-        // Remove padding and background so the map is flush and the background window is gone
+        // Standardize app background and borders to match Main Control
         modalBox.style.padding = '0px';
-        modalBox.style.border = 'none';
-        modalBox.style.backgroundColor = 'transparent';
         modalBox.style.overflow = 'hidden';
-
-        // Ensure no inherited box-shadow or extra margins break the flush look
-        modalBox.style.boxShadow = 'none';
         modalBox.style.maxWidth = '90%'; // Allow it to expand nicely
     }
 

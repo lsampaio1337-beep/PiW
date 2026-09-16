@@ -9,7 +9,7 @@
   <!-- Top Bar (Icons) -->
 
   <div id="top-bar-window" class="floating-window" style="display: none;">
-    <div id="top-bar-header" class="window-header">Main Control</div>
+    <div id="top-bar-header" class="window-header" style="position: relative;">Main Control<span onclick="window.windowManager.toggleWindow('top-bar-window', false)" style="position: absolute; right: 10px; cursor: pointer; color: white; font-weight: bold;">X</span></div>
     <div class="window-content-container">
         <div class="window-content-scaler">
     <div id="top-bar">
@@ -68,8 +68,8 @@
   <!-- Splash Screen / Save Manager -->
   <div id="splash-screen" class="transparent-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: transparent; z-index: 1000; display: flex; justify-content: center; align-items: center; pointer-events: none;">
 
-    <div id="save-manager-modal" class="floating-window" style="display: none; background-color: #2c3e50; pointer-events: auto; border-radius: 8px; text-align: center; border: 2px solid #1abc9c; max-width: 90vw; max-height: 90vh; width: 50vw; min-width: 400px; flex-direction: column; resize: both; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
-        <div id="save-manager-header" class="window-header">Save Profiles</div>
+    <div id="save-manager-modal" class="floating-window" style="display: none; background-color: #34495e; pointer-events: auto; border-radius: 8px; text-align: center; border: 2px solid #1abc9c; max-width: 90vw; max-height: 90vh; width: 50vw; min-width: 400px; flex-direction: column; resize: both; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
+        <div id="save-manager-header" class="window-header" style="position: relative;">Save Profiles<span onclick="window.windowManager.toggleWindow('save-manager-modal', false)" style="position: absolute; right: 10px; cursor: pointer; color: white; font-weight: bold;">X</span></div>
         <div style="padding: 2vw; display: flex; flex-direction: column; gap: 2vh; flex-grow: 1; overflow-y: auto;">
 
         <div id="profiles-container" style="display: flex; flex-direction: column; gap: 1vh; flex-grow: 1; overflow-y: auto;">
@@ -88,7 +88,7 @@
 
     <!-- Custom Rename Modal Overlay -->
     <div id="rename-modal" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); z-index: 1010; justify-content: center; align-items: center;">
-        <div style="background-color: #2c3e50; padding: 20px; border-radius: 8px; text-align: center; border: 2px solid white; display: flex; flex-direction: column; gap: 15px; width: 300px;">
+        <div style="background-color: #34495e; padding: 20px; border-radius: 8px; text-align: center; border: 2px solid #1abc9c; display: flex; flex-direction: column; gap: 15px; width: 300px;">
             <h3 style="color: white; margin: 0;">Rename Profile</h3>
             <input type="text" id="rename-input" style="padding: 10px; font-size: 16px; border-radius: 5px; border: none; width: 100%; box-sizing: border-box;" placeholder="Enter new name...">
             <div style="display: flex; gap: 10px; justify-content: center;">
@@ -103,7 +103,7 @@
     <!-- Left Column: Party & Day Care -->
 
   <div id="party-window" class="floating-window" style="display: none;">
-    <div id="party-header" class="window-header">Team</div>
+    <div id="party-header" class="window-header" style="position: relative;">Team<span onclick="window.windowManager.toggleWindow('party-window', false)" style="position: absolute; right: 10px; cursor: pointer; color: white; font-weight: bold;">X</span></div>
     <div class="window-content-container">
         <div class="window-content-scaler">
     <aside id="left-col">
@@ -124,7 +124,7 @@
     <!-- Center Column: Dynamic View State -->
 
   <div id="main-view-window" class="floating-window" style="display: none;">
-    <div id="main-view-header" class="window-header">Main View</div>
+    <div id="main-view-header" class="window-header" style="position: relative;">Main View<span onclick="window.windowManager.toggleWindow('main-view-window', false)" style="position: absolute; right: 10px; cursor: pointer; color: white; font-weight: bold;">X</span></div>
     <div class="window-content-container">
         <div class="window-content-scaler">
     <main id="center-col">
@@ -277,8 +277,8 @@
 
   <!-- ZzZ Mode Modals -->
   <div id="zzz-confirmation-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); z-index: 1020; justify-content: center; align-items: center; backdrop-filter: blur(3px);">
-      <div style="background: linear-gradient(145deg, #1e293b, #0f172a); padding: 18px; border-radius: 12px; text-align: center; border: 2px solid #3b82f6; box-shadow: 0 10px 25px rgba(0,0,0,0.8), 0 0 20px rgba(59, 130, 246, 0.4); display: flex; flex-direction: column; gap: 15px; width: 480px; max-width: 90vw;">
-          <h2 style="color: #93c5fd; margin: 0; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 2px 4px rgba(0,0,0,0.8); border-bottom: 2px solid #334155; padding-bottom: 10px; font-size: 20px;">ZzZ Mode</h2>
+      <div style="background-color: #34495e; padding: 18px; border-radius: 12px; text-align: center; border: 2px solid #1abc9c; box-shadow: 0 4px 15px rgba(0,0,0,0.5); display: flex; flex-direction: column; gap: 15px; width: 480px; max-width: 90vw; position: relative;">
+          <h2 style="color: #93c5fd; margin: 0; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 2px 4px rgba(0,0,0,0.8); border-bottom: 2px solid #334155; padding-bottom: 10px; font-size: 20px; position: relative;">ZzZ Mode<span onclick="document.getElementById('zzz-confirmation-modal').style.display='none'" style="position: absolute; right: 0px; top: 0px; cursor: pointer; color: white; font-weight: bold;">X</span></h2>
 
           <div id="zzz-tutorial-section" style="display: none; background: rgba(255,255,255,0.05); border: 1px dashed #475569; border-radius: 8px; padding: 15px; margin-bottom: 10px; text-align: left;">
               <div style="color: #cbd5e1; font-size: 14px; margin-bottom: 8px;"><b>Welcome to ZzZ Mode!</b></div>
@@ -306,8 +306,8 @@
   </div>
 
   <div id="zzz-resume-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); z-index: 1020; justify-content: center; align-items: center;">
-      <div style="background-color: #2c3e50; padding: 20px; border-radius: 8px; text-align: center; border: 2px solid white; display: flex; flex-direction: column; gap: 15px; width: 400px;">
-          <h3 style="color: white; margin: 0;">Sleep Mode</h3>
+      <div style="background-color: #34495e; padding: 20px; border-radius: 8px; text-align: center; border: 2px solid #1abc9c; display: flex; flex-direction: column; gap: 15px; width: 400px; position: relative;">
+          <h3 style="color: white; margin: 0; position: relative;">Sleep Mode<span onclick="document.getElementById('zzz-resume-modal').style.display='none'" style="position: absolute; right: 0px; top: 0px; cursor: pointer; color: white; font-weight: bold;">X</span></h3>
           <p style="color: white; margin: 0;">Do you want to collect the farm while Sleeping?</p>
           <div style="display: flex; gap: 10px; justify-content: center;">
               <button id="btn-zzz-resume-yes" style="padding: 10px; font-size: 16px; font-weight: bold; cursor: pointer; background-color: #4CAF50; color: white; border: none; border-radius: 5px; flex: 1;">Yes</button>
@@ -320,8 +320,8 @@
 
 
   <div id="zzz-results-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); z-index: 1030; justify-content: center; align-items: center; backdrop-filter: blur(3px);">
-      <div style="background: linear-gradient(145deg, #1e293b, #0f172a); padding: 18px; border-radius: 12px; text-align: center; border: 2px solid #3b82f6; box-shadow: 0 10px 25px rgba(0,0,0,0.8), 0 0 20px rgba(59, 130, 246, 0.4); display: flex; flex-direction: column; gap: 15px; width: 480px; max-width: 90vw; max-height: 85vh; overflow-y: auto;">
-          <h2 style="color: #93c5fd; margin: 0; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 2px 4px rgba(0,0,0,0.8); border-bottom: 2px solid #334155; padding-bottom: 10px; font-size: 20px;">ZzZ Mode</h2>
+      <div style="background-color: #34495e; padding: 18px; border-radius: 12px; text-align: center; border: 2px solid #1abc9c; box-shadow: 0 4px 15px rgba(0,0,0,0.5); display: flex; flex-direction: column; gap: 15px; width: 480px; max-width: 90vw; max-height: 85vh; overflow-y: auto; position: relative;">
+          <h2 style="color: #93c5fd; margin: 0; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 2px 4px rgba(0,0,0,0.8); border-bottom: 2px solid #334155; padding-bottom: 10px; font-size: 20px; position: relative;">ZzZ Mode<span onclick="document.getElementById('zzz-results-modal').style.display='none'" style="position: absolute; right: 0px; top: 0px; cursor: pointer; color: white; font-weight: bold;">X</span></h2>
           <div id="zzz-results-content" style="color: white; text-align: left; font-size: 14px; width: 100%;"></div>
           <button id="btn-zzz-results-close" style="padding: 12px; font-size: 16px; font-weight: bold; cursor: pointer; background: linear-gradient(to right, #10b981, #059669); color: white; border: 1px solid #34d399; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); margin-top: 5px; text-transform: uppercase; letter-spacing: 1px;">Claim Rewards</button>
       </div>
