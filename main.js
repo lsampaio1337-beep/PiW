@@ -1,5 +1,6 @@
 const { app, BrowserWindow, ipcMain, screen } = require('electron');
 const path = require('path');
+const fs = require('fs');
 
 function createWindow() {
     // Get primary display dimensions
@@ -23,6 +24,13 @@ function createWindow() {
     win.maximize();
 
     win.loadFile('index.html');
+
+    win.once('ready-to-show', () => {
+        // Create a signal file to let the launcher know the game is ready
+        if (process.platform === 'win32') {
+            fs.writeFileSync('game_ready.txt', 'ready');
+        }
+    });
 
     // Handle click-through messages from the renderer process
     ipcMain.on('set-ignore-mouse-events', (event, ignore, options) => {

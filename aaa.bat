@@ -1,5 +1,9 @@
 @echo off
 cd /d "%~dp0"
+
+REM Cleanup any leftover ready flag from a previous dirty exit
+if exist "game_ready.txt" del "game_ready.txt"
+
 echo ===================================================
 echo             Idle Pokemon World - Launcher
 echo ===================================================
@@ -49,8 +53,8 @@ del launch_hidden.vbs
 echo Waiting for the game window to open...
 :WAIT_LOOP
 timeout /t 1 /nobreak >nul
-tasklist /fi "imagename eq electron.exe" 2>nul | find /i "electron.exe" >nul
-if %ERRORLEVEL% neq 0 goto WAIT_LOOP
+if not exist "game_ready.txt" goto WAIT_LOOP
+del game_ready.txt
 
 REM Exit to close the terminal automatically
 exit
