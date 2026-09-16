@@ -176,6 +176,7 @@ window.completeChallenge = function(targetAreaId) {
 
 
 window.cheatProgressChallenge = function(targetAreaId) {
+    if (!targetAreaId && state.stats.activeChallenges && state.stats.activeChallenges.length > 0) targetAreaId = state.stats.activeChallenges[0];
     if (!targetAreaId) return;
     let unlock = state.config.unlocks.find(u => u.areaId === targetAreaId);
     if (!unlock) return;
@@ -224,6 +225,13 @@ window.cheatProgressChallenge = function(targetAreaId) {
         if (req.earnBadge) {
             state.trainer.badges = Math.max(state.trainer.badges, req.earnBadge.badgeCount);
         }
+        if (req.defeatCountRoute) {
+            state.stats.challengeRouteDefeats = req.defeatCountRoute.count;
+        }
+        if (req.defeatSpecific) {
+            if (!state.stats.challengeSpecificDefeats) state.stats.challengeSpecificDefeats = {};
+            state.stats.challengeSpecificDefeats[req.defeatSpecific.name] = req.defeatSpecific.count;
+        }
         if (req.defeatEliteFourAndChampion) {
             if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};
             state.stats.defeatedBosses["Elite 4 Lorelei"] = true;
@@ -239,68 +247,76 @@ window.showChallengesModal = function() {
 
     if (!state.config.unlocks) return;
 
-    let currentIndex = state.stats.completedChallenges || 0;
+    let html = `<div style="display:flex; flex-direction:column; gap:15px; text-align:left; max-height: 70vh; overflow-y: auto; padding-right: 10px;">`;
 
-    let html = `<div style="display:flex; flex-direction:column; gap:15px; text-align:left;">`;
+    // Active Challenges Sector
+    let activeChallengesCount = state.stats.activeChallenges ? state.stats.activeChallenges.length : 0;
 
-    // Active Challenge Sector
     html += `<div style="border: 1px solid #555; padding: 10px; border-radius: 5px; background-color: rgba(0,0,0,0.5);">
-                <h3 style="margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; font-size: 16px;">Active Challenge</h3>`;
+                <h3 style="margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; font-size: 16px;">${activeChallengesCount > 1 ? 'Active Challenges' : 'Active Challenge'}</h3>
+                <div style="display: flex; flex-direction: column; gap: 15px;">`;
 
-    if (currentIndex >= state.config.unlocks.length) {
+    if (activeChallengesCount === 0) {
         html += `<div style="text-align: center; font-size: 16px; color: #aaa;">No active Challenge</div>`;
     } else {
-        let unlock = state.config.unlocks[currentIndex];
-        window.currentChallengeTarget = unlock;
-        let cData = getChallengeData(unlock);
+        for (let activeId of state.stats.activeChallenges) {
+            let unlock = state.config.unlocks.find(u => u.areaId === activeId);
+            if (!unlock) continue;
 
+            let cData = getChallengeData(unlock);
+            let isExtra = extraChallengeAreas.includes(unlock.areaId);
 
-        let rewardsStr = unlock.unlocks ? unlock.unlocks.join(", ") : "Next Area";
-        if (unlock.gift) rewardsStr += " + Gift";
+            let rewardsStr = unlock.unlocks ? unlock.unlocks.join(", ") : "Next Area";
+            if (unlock.gift) rewardsStr += " + Gift";
 
+            html += `<div style="border: 1px solid #333; padding: 10px; border-radius: 5px; background-color: rgba(255,255,255,0.05);">
+                        <div style="color: ${isExtra ? '#ff9800' : '#4CAF50'}; font-weight: bold; margin-bottom: 5px;">${isExtra ? 'Extra Challenge' : 'Challenge'} - ${unlock.areaId}</div>`;
 
+            html += `<div style="margin-bottom: 5px;"><b>Requirements:</b></div>
+                     <ul style="margin-top: 0; padding-left: 20px;">`;
 
-        html += `<div style="text-align: center; margin-top: 15px;">
-                     <button id="btn-cheat-challenge" onclick="window.cheatProgressChallenge()" style="padding: 10px 20px; font-size: 16px; font-weight: bold; background-color: orange; color: white; border: none; border-radius: 5px; cursor: pointer;">Cheat Progress Challanges</button>
-                 </div>`;
+            for (let part of cData.textParts) {
+                html += `<li>${part}</li>`;
+            }
 
-        html += `<div style="margin-bottom: 5px;"><b>Requirements:</b></div>
-                 <ul style="margin-top: 0; padding-left: 20px;">`;
+            html += `</ul>
+                     <div style="margin-top: 10px; color: #4CAF50;"><b>Rewards:</b> Unlocks ${rewardsStr}</div>`;
 
-        for (let part of cData.textParts) {
-            html += `<li>${part}</li>`;
-        }
+            html += `<div style="text-align: center; margin-top: 15px; display: flex; justify-content: center; gap: 10px;">
+                         <button onclick="window.cheatProgressChallenge('${unlock.areaId}')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; background-color: orange; color: white; border: none; border-radius: 5px; cursor: pointer;">Cheat Progress</button>`;
 
-        html += `</ul>
-                 <div style="margin-top: 10px; color: #4CAF50;"><b>Rewards:</b> Unlocks ${rewardsStr}</div>`;
-
-        if (cData.isMet) {
-             html += `<div style="text-align: center; margin-top: 15px;">
-                         <button onclick="window.completeChallenge()" style="padding: 10px 20px; font-size: 16px; font-weight: bold; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">Complete ✔️</button>
-                      </div>`;
+            if (cData.isMet) {
+                 html += `<button onclick="window.completeChallenge('${unlock.areaId}')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">Complete ✔️</button>`;
+            }
+            html += `</div></div>`;
         }
     }
 
-    html += `</div>`;
+    html += `</div></div>`;
 
     // Past Challenges Sector
-    if (currentIndex > 0) {
-        let pastTitle = currentIndex === 1 ? "Past Challenge" : "Past Challenges";
+    let completedCount = state.stats.completedChallengeIds ? state.stats.completedChallengeIds.length : 0;
+    if (completedCount > 0) {
+        let pastTitle = completedCount === 1 ? "Past Challenge" : "Past Challenges";
         html += `<div style="border: 1px solid #555; padding: 10px; border-radius: 5px; background-color: rgba(0,0,0,0.5);">
                     <h3 style="margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; font-size: 16px;">${pastTitle}</h3>
                     <div style="display: flex; flex-direction: column; gap: 10px;">`;
 
-        for (let i = currentIndex - 1; i >= 0; i--) {
-             let pUnlock = state.config.unlocks[i];
+        for (let i = completedCount - 1; i >= 0; i--) {
+             let completedId = state.stats.completedChallengeIds[i];
+             let pUnlock = state.config.unlocks.find(u => u.areaId === completedId);
+             if (!pUnlock) continue;
+
+             let isExtra = extraChallengeAreas.includes(pUnlock.areaId);
+
              // Fake the data slightly to make it look completed, though getChallengeData will naturally evaluate to true
              let pData = getChallengeData(pUnlock);
 
              let pRewards = pUnlock.unlocks ? pUnlock.unlocks.join(", ") : "Next Area";
              if (pUnlock.gift) pRewards += " + Gift";
 
-
              html += `<div style="border: 1px solid #333; padding: 10px; border-radius: 5px; background-color: rgba(255,255,255,0.05);">
-                          <div style="color: #4CAF50; font-weight: bold; margin-bottom: 5px;">Challenge ${i+1}</div>
+                          <div style="color: ${isExtra ? '#ff9800' : '#4CAF50'}; font-weight: bold; margin-bottom: 5px;">${isExtra ? 'Extra Challenge' : 'Challenge'} - ${pUnlock.areaId}</div>
                           <ul style="margin-top: 0; margin-bottom: 5px; padding-left: 20px; font-size: 14px;">`;
              for (let part of pData.textParts) {
                   // Ensure we show them as complete using words
@@ -308,7 +324,7 @@ window.showChallengesModal = function() {
                   // For past challenges, ensure they look complete and numbers match max requirements
                   // The text might look like "Defeat 25 Pokémon on Route 1 (0/25)"
                   // We extract the required count and force it to say (25/25) [Complete]
-                  part = part.replace(/\((\d+)\/(\d+)\)/, (match, p1, p2) => `(${p2}/${p2})`);
+                  part = part.replace(/\(\d+\/\d+\)/, (match, p1, p2) => `(${p2}/${p2})`);
                   if (!part.includes("[Complete]")) {
                        part += ` <span style="color: green;">[Complete]</span>`;
                   }
