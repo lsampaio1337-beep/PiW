@@ -389,7 +389,11 @@ window.closeModal = function(windowId) {
 
 export function showModal(title, htmlContent, windowId = 'dynamic-modal') {
     if (window.windowManager) {
-        window.windowManager.createDynamicWindow(windowId, title, htmlContent);
+        const winElement = window.windowManager.createDynamicWindow(windowId, title, htmlContent);
+        if (winElement) {
+             winElement.style.display = "flex";
+             window.windowManager.spawnWindow(windowId);
+        }
     } else {
         const overlay = document.getElementById('modal-overlay');
         const modalBox = document.getElementById('modal-content-box');
