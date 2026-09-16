@@ -181,5 +181,12 @@ export function showCalendar() {
     html += `<p style="font-size: 12px; color: #ccc; margin-top: 15px;">New rewards available every day. Check back tomorrow!</p>`;
     html += `</div>`;
 
+    const modalBox = document.getElementById('modal-content-box');
+    if (modalBox) {
+        modalBox.dataset.originalStyles = modalBox.getAttribute('style') || '';
+        modalBox.style.width = 'auto';
+        modalBox.style.height = 'auto';
+    }
+
     showModal("Daily Rewards", html);
 }
