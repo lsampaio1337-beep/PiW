@@ -69,10 +69,15 @@ export class WindowManager {
         }
     }
 
+
+
     _setupDrag(winElement, headerElement) {
         let isDragging = false;
         let startX, startY;
         let initialLeft, initialTop;
+
+        let snapLockX = null;
+        let snapLockY = null;
 
         headerElement.style.cursor = 'grab';
 
@@ -84,18 +89,18 @@ export class WindowManager {
             // Focus
             this.focusWindow(winElement);
 
-            // Parse left/top (can be px or % initially)
             const rect = winElement.getBoundingClientRect();
             initialLeft = rect.left;
             initialTop = rect.top;
 
-            // Set to px for dragging
             winElement.style.left = initialLeft + 'px';
             winElement.style.top = initialTop + 'px';
-            winElement.style.transform = 'none'; // Clear any transform
+            winElement.style.transform = 'none';
 
             headerElement.style.cursor = 'grabbing';
-            e.preventDefault(); // Prevent text selection
+            snapLockX = null;
+            snapLockY = null;
+            e.preventDefault();
         });
 
         document.addEventListener('mousemove', (e) => {
@@ -104,19 +109,76 @@ export class WindowManager {
             const dx = e.clientX - startX;
             const dy = e.clientY - startY;
 
-            let newLeft = initialLeft + dx;
-            let newTop = initialTop + dy;
+            let rawLeft = initialLeft + dx;
+            let rawTop = initialTop + dy;
 
-            // Boundary constraints
+            let finalLeft = rawLeft;
+            let finalTop = rawTop;
+
             const rect = winElement.getBoundingClientRect();
 
-            if (newLeft < 0) newLeft = 0;
-            if (newTop < 0) newTop = 0;
-            if (newLeft + rect.width > this.containerWidth) newLeft = this.containerWidth - rect.width;
-            if (newTop + rect.height > this.containerHeight) newTop = this.containerHeight - rect.height;
+            const snapDistance = 20;
+            const breakDistance = 30; // Distance raw mouse can move away from snap before breaking
 
-            winElement.style.left = newLeft + 'px';
-            winElement.style.top = newTop + 'px';
+            // Check X Snap
+            if (snapLockX !== null) {
+                if (Math.abs(rawLeft - snapLockX.rawAtSnap) > breakDistance) {
+                    snapLockX = null; // Break snap
+                } else {
+                    finalLeft = snapLockX.snappedValue;
+                }
+            }
+
+            if (snapLockX === null) {
+                this.windows.forEach(otherWin => {
+                    if (otherWin === winElement || otherWin.style.display === 'none') return;
+                    const otherRect = otherWin.getBoundingClientRect();
+
+                    if (Math.abs(rawLeft - otherRect.right) < snapDistance) {
+                        snapLockX = { snappedValue: otherRect.right, rawAtSnap: rawLeft };
+                    } else if (Math.abs((rawLeft + rect.width) - otherRect.left) < snapDistance) {
+                        snapLockX = { snappedValue: otherRect.left - rect.width, rawAtSnap: rawLeft };
+                    } else if (Math.abs(rawLeft - otherRect.left) < snapDistance) {
+                        snapLockX = { snappedValue: otherRect.left, rawAtSnap: rawLeft };
+                    }
+                });
+            }
+
+            // Check Y Snap
+            if (snapLockY !== null) {
+                if (Math.abs(rawTop - snapLockY.rawAtSnap) > breakDistance) {
+                    snapLockY = null; // Break snap
+                } else {
+                    finalTop = snapLockY.snappedValue;
+                }
+            }
+
+            if (snapLockY === null) {
+                this.windows.forEach(otherWin => {
+                    if (otherWin === winElement || otherWin.style.display === 'none') return;
+                    const otherRect = otherWin.getBoundingClientRect();
+
+                    if (Math.abs(rawTop - otherRect.bottom) < snapDistance) {
+                        snapLockY = { snappedValue: otherRect.bottom, rawAtSnap: rawTop };
+                    } else if (Math.abs((rawTop + rect.height) - otherRect.top) < snapDistance) {
+                        snapLockY = { snappedValue: otherRect.top - rect.height, rawAtSnap: rawTop };
+                    } else if (Math.abs(rawTop - otherRect.top) < snapDistance) {
+                        snapLockY = { snappedValue: otherRect.top, rawAtSnap: rawTop };
+                    }
+                });
+            }
+
+            if (snapLockX !== null) finalLeft = snapLockX.snappedValue;
+            if (snapLockY !== null) finalTop = snapLockY.snappedValue;
+
+            // Container Boundary constraints
+            if (finalLeft < 0) finalLeft = 0;
+            if (finalTop < 0) finalTop = 0;
+            if (finalLeft + rect.width > this.containerWidth) finalLeft = this.containerWidth - rect.width;
+            if (finalTop + rect.height > this.containerHeight) finalTop = this.containerHeight - rect.height;
+
+            winElement.style.left = finalLeft + 'px';
+            winElement.style.top = finalTop + 'px';
         });
 
         document.addEventListener('mouseup', () => {
@@ -126,7 +188,6 @@ export class WindowManager {
             }
         });
     }
-
 
     _setupResize(winElement, handleElement, scalerElement, headerElement) {
         let isResizing = false;
@@ -232,4 +293,106 @@ export class WindowManager {
             }
         });
     }
+
+    createDynamicWindow(windowId, title, htmlContent, width = '800px', height = '600px') {
+        let winElement = document.getElementById(windowId);
+
+        if (!winElement) {
+            const template = document.getElementById('generic-window-template');
+            if (!template) {
+                console.error("Template #generic-window-template not found.");
+                return null;
+            }
+
+            const clone = template.content.cloneNode(true);
+            winElement = clone.querySelector('.floating-window');
+            winElement.id = windowId;
+            winElement.style.width = width;
+            winElement.style.height = height;
+
+            const header = winElement.querySelector('.window-header');
+            header.id = windowId + '-header';
+
+            const contentPanel = winElement.querySelector('.content-panel');
+            contentPanel.id = windowId + '-content';
+
+            document.body.appendChild(winElement);
+
+            // Register it with windowManager
+            this.registerWindow(windowId, header.id);
+        }
+
+        const header = document.getElementById(windowId + '-header');
+        if (header && title) {
+            header.style.position = 'relative';
+            header.innerHTML = `${title}<span onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('${windowId}')" style="position: absolute; right: 10px; cursor: pointer; color: white; font-weight: bold;">X</span>`;
+        }
+
+        const contentPanel = document.getElementById(windowId + '-content');
+        if (contentPanel && htmlContent !== undefined) {
+            contentPanel.innerHTML = htmlContent;
+        }
+
+        // Spawn logic: under main control if possible
+        this.spawnWindow(windowId);
+
+        return winElement;
+    }
+
+    closeDynamicWindow(windowId) {
+        const winElement = document.getElementById(windowId);
+        if (winElement) {
+            winElement.style.display = 'none';
+        }
+    }
+
+    spawnWindow(windowId) {
+        const winElement = document.getElementById(windowId);
+        if (!winElement) return;
+
+        winElement.style.display = 'flex';
+
+        let left = 50;
+        let top = 50;
+
+        const mainView = document.getElementById('main-view-window');
+        if (mainView && mainView.style.display !== 'none') {
+            const rect = mainView.getBoundingClientRect();
+            left = rect.left;
+            top = rect.top;
+        }
+
+        // We need to place this window underneath (z-index) the existing windows.
+        // And make sure they are "covered by previous one".
+        // The lowest active z-index:
+        let lowestZ = this.zIndexCounter;
+        this.windows.forEach(w => {
+            if (w.style.display !== 'none' && w.id !== windowId) {
+                const z = parseInt(w.style.zIndex || this.zIndexCounter);
+                if (z < lowestZ) lowestZ = z;
+            }
+        });
+
+        winElement.style.zIndex = lowestZ - 1;
+
+        // Slightly offset so the user can grab the header if it's completely behind another window
+        // The user said "covered by previous one", but to drag it they need a handle. We'll offset by 30px so the header peeps out.
+        // Wait, if it spawns behind main view, how do they drag it? By dragging the main view away.
+        // We will just put it exactly where the main view is, but z-indexed behind it.
+
+        const winRect = winElement.getBoundingClientRect();
+        if (left < 0) left = 0;
+        if (top < 0) top = 0;
+        if (left + winRect.width > this.containerWidth) left = this.containerWidth - winRect.width;
+        if (top + winRect.height > this.containerHeight) top = this.containerHeight - winRect.height;
+
+        winElement.style.left = left + 'px';
+        winElement.style.top = top + 'px';
+
+        setTimeout(() => {
+             // trigger resize initialization if needed
+             winElement.style.display = 'flex';
+        }, 50);
+    }
+
 }

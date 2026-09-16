@@ -83,7 +83,7 @@ export function openPokeMarketBuy() {
         </div>
     `;
 
-    showModal('', html);
+    showModal('Market', html, 'window-market');
 
     const modalBox = document.getElementById('modal-content-box');
     if (modalBox) {
@@ -430,7 +430,7 @@ export function openPokeMarketSell() {
     `;
 
     window.marketSelectedPokemonForSale = new Set();
-    if (window.showModal) window.showModal('Sell Items', html);
+    if (window.showModal) window.showModal('Sell Items', html, 'window-market-sell');
 
     const modalBox = document.getElementById('modal-content-box');
     if (modalBox) {

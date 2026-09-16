@@ -5,18 +5,6 @@ import { renderStonesTab } from './stones.js';
 import { renderPokemonTab } from './pokemon.js';
 
 export function showBackpack() {
-    let rightCol = document.getElementById('modal-overlay');
-    let contentPanel = document.getElementById('content-panel');
-    rightCol.style.display = 'flex';
-
-    const modalBox = document.getElementById('modal-content-box');
-    // Ensure header title is set to Backpack
-    const modalHeader = document.getElementById('modal-header');
-    if (modalHeader) {
-        modalHeader.style.position = 'relative';
-        modalHeader.innerHTML = 'Backpack<span onclick="if(window.closeModal) window.closeModal()" style="position: absolute; right: 10px; cursor: pointer; color: white; font-weight: bold;">X</span>';
-    }
-
     let html = `
         <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; padding: 20px; box-sizing: border-box; color: white; overflow: hidden; position: relative;">
             <style>
@@ -62,7 +50,10 @@ export function showBackpack() {
             </div>
         </div>
     `;
-    contentPanel.innerHTML = html;
+
+    if (window.showModal) {
+        window.showModal('Backpack', html, 'window-backpack');
+    }
 }
 
 export function renderBackpackTab(tab) {

@@ -79,5 +79,5 @@ export function showGiftModal() {
 
     html += `</div>`;
 
-    showModal("Gifts", html);
+    showModal("Gifts", html, "window-gifts");
 }

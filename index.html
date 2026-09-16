@@ -257,7 +257,21 @@
     <!-- Right Column (Modals/Overlays for Map, Backpack, etc) -->
 
     <!-- Center Modal Overlay (replaces right-col) -->
-    <div id="modal-overlay" class="modal transparent-overlay" onclick="if(event.target === this && window.closeModal) window.closeModal()">
+
+  <!-- Generic Window Template -->
+  <template id="generic-window-template">
+      <div class="modal-content floating-window" style="width: 800px; height: 600px; display: flex; flex-direction: column; display: none;">
+          <div class="window-header">Window</div>
+          <div class="window-content-container">
+              <div class="window-content-scaler">
+                  <div class="content-panel" style="flex: 1; overflow-y: auto;"></div>
+              </div>
+          </div>
+          <div class="window-resize-handle"></div>
+      </div>
+  </template>
+
+  <div id="modal-overlay" class="modal transparent-overlay" onclick="if(event.target === this && window.closeModal) window.closeModal()">
         <div id="modal-content-box" class="modal-content floating-window" style="width: 800px; height: 600px; display: flex; flex-direction: column;">
             <div id="modal-header" class="window-header">Window</div>
     <div class="window-content-container">

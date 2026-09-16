@@ -35,7 +35,7 @@ export function showSettings() {
         <button onclick="window.exportLog()">Export Save Log</button>
         <button onclick="window.activateCheat()" style="margin-left: 10px; background-color: #c0392b; color: white;">Cheat</button>
     `;
-    showModal("Settings", settingsHTML);
+    showModal("Settings", settingsHTML, "window-settings");
 }
 
 export function showAddPokemonModal() {
@@ -58,7 +58,7 @@ export function showAddPokemonModal() {
         </div>
         <button onclick="window.forceNextEncounter()" style="padding: 5px 10px;">OK</button>
     `;
-    showModal("Force Next Encounter", html);
+    showModal("Force Next Encounter", html, "window-force-encounter");
 }
 
 export function forceNextEncounter() {
