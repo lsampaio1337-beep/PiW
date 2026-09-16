@@ -1,5 +1,5 @@
 import { state, globals } from '../state.js';
-import { updateUI, switchView } from '../ui.js';
+import { updateUI, switchView, showModal } from '../ui.js';
 import { setupMarket } from './market.js';
 
 export function showMap() {
@@ -98,8 +98,8 @@ export function showMap() {
     `;
 
 
-    if (window.showModal) {
-        window.showModal('Map', html, 'window-map');
+    if (showModal) {
+        showModal('Map', html, 'window-map');
     }
 }
 

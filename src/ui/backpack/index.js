@@ -2,6 +2,7 @@ import { state } from '../../state.js';
 import { renderPokeballsTab } from './pokeballs.js';
 import { renderPotionsTab } from './potions.js';
 import { renderStonesTab } from './stones.js';
+import { showModal } from '../../ui.js';
 import { renderPokemonTab } from './pokemon.js';
 
 export function showBackpack() {
@@ -51,8 +52,8 @@ export function showBackpack() {
         </div>
     `;
 
-    if (window.showModal) {
-        window.showModal('Backpack', html, 'window-backpack');
+    if (showModal) {
+        showModal('Backpack', html, 'window-backpack');
     }
 }
 
