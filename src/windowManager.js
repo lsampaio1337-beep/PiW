@@ -210,6 +210,10 @@ export class WindowManager {
                         scalerElement.style.setProperty('--original-height', originalHeight + 'px');
                         originalRatio = originalWidth / originalHeight;
 
+                        // Lock the window to its exact measured height so it doesn't collapse
+                        // when the scaler changes to absolute positioning.
+                        winElement.style.height = (headerH + originalHeight) + 'px';
+
                         scalerElement.style.width = originalWidth + 'px';
                         scalerElement.style.position = 'absolute';
                         scalerElement.style.height = originalHeight + 'px';
