@@ -3,8 +3,8 @@ const balance = {
     "baseSearchTime": 3.0,
     "safariZonePrice": 5000,
     "casinoPrices": {
-        "standard": 5000,
-        "doubleShiny": 10000
+        "standard": 75,
+        "doubleShiny": 200,
     },
     "qualityTiers": [
       {"name": "Weak", "min": 0.80, "max": 0.99, "rollMax": 1474},
