@@ -430,7 +430,7 @@ export function openPokeMarketSell() {
     `;
 
     window.marketSelectedPokemonForSale = new Set();
-    if (window.showModal) window.showModal('Sell Items', html, 'window-market-sell');
+    if (showModal) showModal('Sell Items', html, 'window-market-sell');
 
     const modalBox = document.getElementById('modal-content-box');
     if (modalBox) {
