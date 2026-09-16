@@ -272,12 +272,13 @@ window.showChallengesModal = function() {
 
             let cData = getChallengeData(unlock);
             let isExtra = extraChallengeAreas.includes(unlock.areaId);
-
             let rewardsStr = unlock.unlocks ? unlock.unlocks.join(", ") : "Next Area";
             if (unlock.gift) rewardsStr += " + Gift";
 
+            let displayName = unlock.challengeName || (isExtra ? 'Extra Challenge - ' + unlock.areaId : 'Challenge - ' + unlock.areaId);
+
             html += `<div style="border: 1px solid #333; padding: 10px; border-radius: 5px; background-color: rgba(255,255,255,0.05);">
-                        <div style="color: ${isExtra ? '#ff9800' : '#4CAF50'}; font-weight: bold; margin-bottom: 5px;">${isExtra ? 'Extra Challenge' : 'Challenge'} - ${unlock.areaId}</div>`;
+                        <div style="color: ${isExtra ? '#ff9800' : '#4CAF50'}; font-weight: bold; margin-bottom: 5px;">${displayName}</div>`;
 
             html += `<div style="margin-bottom: 5px;"><b>Requirements:</b></div>
                      <ul style="margin-top: 0; padding-left: 20px;">`;
@@ -322,8 +323,10 @@ window.showChallengesModal = function() {
              let pRewards = pUnlock.unlocks ? pUnlock.unlocks.join(", ") : "Next Area";
              if (pUnlock.gift) pRewards += " + Gift";
 
+             let displayName = pUnlock.challengeName || (isExtra ? 'Extra Challenge - ' + pUnlock.areaId : 'Challenge - ' + pUnlock.areaId);
+
              html += `<div style="border: 1px solid #333; padding: 10px; border-radius: 5px; background-color: rgba(255,255,255,0.05);">
-                          <div style="color: ${isExtra ? '#ff9800' : '#4CAF50'}; font-weight: bold; margin-bottom: 5px;">${isExtra ? 'Extra Challenge' : 'Challenge'} - ${pUnlock.areaId}</div>
+                          <div style="color: ${isExtra ? '#ff9800' : '#4CAF50'}; font-weight: bold; margin-bottom: 5px;">${displayName}</div>
                           <ul style="margin-top: 0; margin-bottom: 5px; padding-left: 20px; font-size: 14px;">`;
              for (let part of pData.textParts) {
                   // Ensure we show them as complete using words
@@ -331,7 +334,7 @@ window.showChallengesModal = function() {
                   // For past challenges, ensure they look complete and numbers match max requirements
                   // The text might look like "Defeat 25 Pokémon on Route 1 (0/25)"
                   // We extract the required count and force it to say (25/25) [Complete]
-                  part = part.replace(/\(\d+\/\d+\)/, (match, p1, p2) => `(${p2}/${p2})`);
+                  part = part.replace(/\(\d+\/(\d+)\)/, (match, p1) => `(${p1}/${p1})`);
                   if (!part.includes("[Complete]")) {
                        part += ` <span style="color: green;">[Complete]</span>`;
                   }
@@ -386,9 +389,9 @@ window.closeModal = function(windowId) {
     }
 };
 
-export function showModal(title, htmlContent, windowId = 'dynamic-modal') {
+export function showModal(title, htmlContent, windowId = 'dynamic-modal', width = '800px', height = 'auto') {
     if (window.windowManager) {
-        window.windowManager.createDynamicWindow(windowId, title, htmlContent);
+        window.windowManager.createDynamicWindow(windowId, title, htmlContent, width, height);
     }
 }
 
@@ -1419,7 +1422,6 @@ async function init() {
     bindBtn('btn-map', () => {
         if(!checkCombatLock()) {
             showMap();
-            window.windowManager.toggleWindow('main-view-window', true);
         }
     });
     bindBtn('btn-backpack', () => {

@@ -1,6 +1,6 @@
 import { calculatePP, getCapacity, getCurrentCount } from "../mathEngine.js";
 import { state, globals } from '../state.js';
-import { updateUI, showModal } from '../ui.js';
+import { showModal, updateUI } from '../ui.js';
 
 // formatMarketNumberDown is hoisted manually if needed
 function _formatMarketNumberDown(num) {
@@ -430,7 +430,7 @@ export function openPokeMarketSell() {
     `;
 
     window.marketSelectedPokemonForSale = new Set();
-    if (showModal) showModal('Sell Items', html, 'window-market-sell');
+    showModal('Sell Items', html, 'window-market-sell');
 
     const modalBox = document.getElementById('modal-content-box');
     if (modalBox) {

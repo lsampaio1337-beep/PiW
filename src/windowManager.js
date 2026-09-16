@@ -1,3 +1,4 @@
+import { state } from "./state.js";
 export class WindowManager {
     constructor() {
         this.windows = [];
@@ -185,6 +186,7 @@ export class WindowManager {
             if (isDragging) {
                 isDragging = false;
                 headerElement.style.cursor = 'grab';
+                this.saveWindowData(winElement.id);
             }
         });
     }
@@ -253,6 +255,7 @@ export class WindowManager {
             if (isResizing) {
                 isResizing = false;
                 this._constrainAllWindows();
+                this.saveWindowData(winElement.id);
             }
         });
 
@@ -268,7 +271,60 @@ export class WindowManager {
         setTimeout(initDims, 100);
     }
 
+
+    saveWindowData(windowId) {
+        if (!state.settings.windowSettings) {
+            state.settings.windowSettings = {};
+        }
+        const winElement = document.getElementById(windowId);
+        if (winElement) {
+            state.settings.windowSettings[windowId] = {
+                left: winElement.style.left,
+                top: winElement.style.top,
+                width: winElement.style.width,
+                height: winElement.style.height
+            };
+            if (window.storageRef) {
+                window.storageRef.save(state);
+            }
+        }
+    }
+
+
+
+    recalculateWindowSize(windowId) {
+        const winElement = document.getElementById(windowId);
+        if (!winElement) return;
+
+        // Reset to auto to let content reflow
+        winElement.style.width = '800px';
+        winElement.style.height = 'auto';
+
+        const scalerElement = winElement.querySelector('.window-content-scaler');
+        if (scalerElement) {
+            scalerElement.style.transform = 'none';
+            scalerElement.style.width = 'auto';
+            scalerElement.style.height = 'auto';
+            scalerElement.style.position = 'relative';
+
+            // Clear CSS properties so the MutationObserver in _setupResize can capture new heights
+            scalerElement.style.removeProperty('--original-width');
+            scalerElement.style.removeProperty('--original-height');
+
+            // Delete the saved settings for this window so it doesn't get squished if re-opened
+            if (state.settings && state.settings.windowSettings && state.settings.windowSettings[windowId]) {
+                delete state.settings.windowSettings[windowId];
+                if (window.storageRef) {
+                    window.storageRef.save(state);
+                }
+            }
+        }
+    }
+
+
+
     _constrainAllWindows() {
+
         this.windows.forEach(winElement => {
             if (winElement.style.display !== 'none') {
                 const rect = winElement.getBoundingClientRect();
@@ -294,7 +350,7 @@ export class WindowManager {
         });
     }
 
-    createDynamicWindow(windowId, title, htmlContent, width = '800px', height = '600px') {
+    createDynamicWindow(windowId, title, htmlContent, width = '800px', height = 'auto') {
         let winElement = document.getElementById(windowId);
 
         if (!winElement) {
@@ -352,32 +408,47 @@ export class WindowManager {
 
         winElement.style.display = 'flex';
 
-        let left = 50;
-        let top = 50;
+        // Check if there is saved position/size for this window
+        let savedSettings = null;
+        if (state.settings && state.settings.windowSettings && state.settings.windowSettings[windowId]) {
+            savedSettings = state.settings.windowSettings[windowId];
+        }
 
-        const mainView = document.getElementById('top-bar-window');
-        if (mainView && mainView.style.display !== 'none') {
-            const rect = mainView.getBoundingClientRect();
-            left = rect.left;
-            top = rect.bottom; // directly below (vertical)
+        if (savedSettings) {
+            if (savedSettings.width) winElement.style.width = savedSettings.width;
+            if (savedSettings.height) winElement.style.height = savedSettings.height;
+            if (savedSettings.left) winElement.style.left = savedSettings.left;
+            if (savedSettings.top) winElement.style.top = savedSettings.top;
+        } else {
+            let left = 50;
+            let top = 50;
+
+            const mainView = document.getElementById('top-bar-window');
+            if (mainView && mainView.style.display !== 'none') {
+                const rect = mainView.getBoundingClientRect();
+                left = rect.left;
+                top = rect.bottom; // directly below (vertical)
+            }
+
+            const winRect = winElement.getBoundingClientRect();
+            if (left < 0) left = 0;
+            if (top < 0) top = 0;
+            if (left + winRect.width > this.containerWidth) left = this.containerWidth - winRect.width;
+            if (top + winRect.height > this.containerHeight) top = this.containerHeight - winRect.height;
+
+            winElement.style.left = left + 'px';
+            winElement.style.top = top + 'px';
         }
 
         // above all other windows
         winElement.style.zIndex = this.zIndexCounter++;
-
-        const winRect = winElement.getBoundingClientRect();
-        if (left < 0) left = 0;
-        if (top < 0) top = 0;
-        if (left + winRect.width > this.containerWidth) left = this.containerWidth - winRect.width;
-        if (top + winRect.height > this.containerHeight) top = this.containerHeight - winRect.height;
-
-        winElement.style.left = left + 'px';
-        winElement.style.top = top + 'px';
 
         setTimeout(() => {
              // trigger resize initialization if needed
              winElement.style.display = 'flex';
         }, 50);
     }
+
+
 
 }
