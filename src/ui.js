@@ -958,14 +958,17 @@ async function init() {
         }
 
         const updateHeader = () => {
-            const h2 = saveManagerModal.querySelector('h2');
+            const h2 = document.getElementById('save-action-title');
             if (h2) {
                 if (profileAction === 'rename') {
-                    h2.innerHTML = "Saved Profiles - <span style='color: #3498db;'>Select Profile to Rename</span>";
-                } else if (profileAction === 'erase') {
-                    h2.innerHTML = "Saved Profiles - <span style='color: #f44336;'>Select Profile to Erase</span>";
+                    h2.innerHTML = "Select a game to <span style='color: #3498db;'>rename.</span>";
+                    h2.style.display = 'block';
+                } else if (profileAction === 'delete') {
+                    h2.innerHTML = "Select a game to <span style='color: #f44336;'>delete.</span>";
+                    h2.style.display = 'block';
                 } else {
-                    h2.innerHTML = "Saved Profiles";
+                    h2.innerHTML = "";
+                    h2.style.display = 'none';
                 }
             }
         };
@@ -1059,7 +1062,7 @@ async function init() {
                         renameInput.value = profileName;
                         renameModal.style.display = 'flex';
                     }
-                } else if (profileAction === 'erase') {
+                } else if (profileAction === 'delete') {
                     if (confirm(`Are you sure you want to delete "${profileName}"? This cannot be undone.`)) {
                         storage.deleteProfile(profileId);
                         window.location.reload();
@@ -1358,8 +1361,8 @@ async function init() {
             updateHeader();
         };
 
-        document.getElementById('btn-erase-profile').onclick = () => {
-            profileAction = profileAction === 'erase' ? 'load' : 'erase';
+        document.getElementById('btn-delete-profile').onclick = () => {
+            profileAction = profileAction === 'delete' ? 'load' : 'delete';
             updateHeader();
         };
 
