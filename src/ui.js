@@ -1345,6 +1345,11 @@ async function init() {
             profilesContainer.appendChild(btn);
         });
 
+        // Recalculate dimensions for the save manager modal after appending dynamic profiles
+        if (saveManagerModal.recalculateDims) {
+            saveManagerModal.recalculateDims();
+        }
+
         document.getElementById('btn-new-profile').onclick = startNewGame;
 
         document.getElementById('btn-rename-profile').onclick = () => {

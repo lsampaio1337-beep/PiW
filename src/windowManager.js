@@ -155,6 +155,19 @@ export class WindowManager {
             }
         };
 
+        // Attach recalculate method so we can force it after dynamic content loads
+        winElement.recalculateDims = () => {
+            originalWidth = null;
+            originalHeight = null;
+            scalerElement.style.position = '';
+            scalerElement.style.width = '';
+            scalerElement.style.height = '';
+            scalerElement.style.transform = 'none';
+            winElement.style.width = '';
+            winElement.style.height = '';
+            setTimeout(initDims, 50);
+        };
+
         handleElement.addEventListener('mousedown', (e) => {
             isResizing = true;
             startX = e.clientX;
