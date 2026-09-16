@@ -485,7 +485,7 @@ input[type="number"] {
 
 #party-window {
     width: 250px;
-    height: 80vh;
+    height: auto;
 }
 
 #left-col {
