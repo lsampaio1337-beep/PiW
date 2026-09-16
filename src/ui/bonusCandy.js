@@ -40,6 +40,14 @@ export function showBonusCandyModal() {
         candyBankHTML += `<img src="Assets/Extra/WhiteCandy.png" style="width: 30px; height: 30px; margin: 2px;" title="White Candy" onerror="this.style.display='none'">`;
     }
 
+    const modalBox = document.getElementById('modal-content-box');
+    if (modalBox) {
+        modalBox.dataset.originalStyles = modalBox.getAttribute('style') || '';
+        modalBox.style.width = 'auto';
+        modalBox.style.height = 'auto';
+        modalBox.style.minWidth = '400px';
+    }
+
     const html = `
         <div style="text-align: center; font-family: sans-serif; padding: 10px;">
             <div style="margin-bottom: 10px;">

@@ -248,7 +248,7 @@ window.showChallengesModal = function() {
 
     let currentIndex = state.stats.completedChallenges || 0;
 
-    let html = `<div style="display:flex; flex-direction:column; gap:15px; text-align:left;">`;
+    let html = `<div style="display:flex; flex-direction:column; gap:15px; text-align:left; max-height: 60vh; overflow-y: auto; padding-right: 5px;">`;
 
     // Active Challenge Sector
     html += `<div style="border: 1px solid #555; padding: 10px; border-radius: 5px; background-color: rgba(0,0,0,0.5);">
