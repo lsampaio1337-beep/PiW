@@ -139,28 +139,30 @@ window.completeChallenge = function(targetAreaId) {
             state.stats.challengeRouteDefeats = 0;
         }
         if (unlock.requirements.defeatSpecific) {
-             delete state.stats.challengeSpecificDefeats[unlock.requirements.defeatSpecific.name];
+             if (state.stats.challengeSpecificDefeats) delete state.stats.challengeSpecificDefeats[unlock.requirements.defeatSpecific.name];
         }
         if (unlock.requirements.catchSpecies) {
              for (let s of unlock.requirements.catchSpecies) {
-                 delete state.stats.caughtSpecies[s.species];
+                 if (state.stats.caughtSpecies) delete state.stats.caughtSpecies[s.species];
              }
         }
         if (unlock.requirements.catchSpeciesByRarity) {
              for (let s of unlock.requirements.catchSpeciesByRarity) {
-                 delete state.stats.challengeCaughtSpecific[s.species + "_" + s.rarity];
+                 if (state.stats.challengeCaughtSpecific) delete state.stats.challengeCaughtSpecific[s.species + "_" + s.rarity];
              }
         }
         if (unlock.requirements.catchByRarityAndType) {
-             delete state.stats.challengeCaughtSpecific[unlock.requirements.catchByRarityAndType.type + "_" + unlock.requirements.catchByRarityAndType.rarity];
+             if (state.stats.challengeCaughtSpecific) delete state.stats.challengeCaughtSpecific[unlock.requirements.catchByRarityAndType.type + "_" + unlock.requirements.catchByRarityAndType.rarity];
         }
         if (unlock.requirements.catchByType) {
-             delete state.stats.challengeCaughtSpecific[unlock.requirements.catchByType.type + "_Any"];
+             if (state.stats.challengeCaughtSpecific) delete state.stats.challengeCaughtSpecific[unlock.requirements.catchByType.type + "_Any"];
         }
         if (unlock.requirements.catchEachFromSlotMachine) {
              if (unlock.requirements.catchEachFromSlotMachine.machines) {
                  for (let m of unlock.requirements.catchEachFromSlotMachine.machines) {
-                     for (let s of m) delete state.stats.caughtSpecies[s];
+                     for (let s of m) {
+                         if (state.stats.caughtSpecies) delete state.stats.caughtSpecies[s];
+                     }
                  }
              }
         }
@@ -191,6 +193,7 @@ window.cheatProgressChallenge = function(targetAreaId) {
             state.stats.challengeSpecificDefeats[req.defeatSpecific.name] = Math.max(state.stats.challengeSpecificDefeats[req.defeatSpecific.name] || 0, req.defeatSpecific.count);
         }
         if (req.catchSpecies) {
+            if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
             req.catchSpecies.forEach(r => state.stats.caughtSpecies[r.species] = (state.stats.caughtSpecies[r.species] || 0) + r.count);
         }
         if (req.catchSpeciesByRarity) {
@@ -209,6 +212,7 @@ window.cheatProgressChallenge = function(targetAreaId) {
             });
         }
         if (req.catchEachFromSlotMachine) {
+            if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
             if (req.catchEachFromSlotMachine.machines) {
                 req.catchEachFromSlotMachine.machines.forEach(m => {
                     state.stats.caughtSpecies[m[0]] = (state.stats.caughtSpecies[m[0]] || 0) + 1;
