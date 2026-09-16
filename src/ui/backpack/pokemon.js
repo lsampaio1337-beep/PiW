@@ -42,13 +42,18 @@ function renderSlotUI(p, listName, origIndex, isDraggable) {
     else if (p.qualityName === "Regular") glowClass = "glow-regular";
 
     return `
-        <div class="${slotClass}" ${dataAttr} style="border: 1px solid #777; aspect-ratio: 1 / 1.3; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 4%; box-sizing: border-box; background: rgba(0,0,0,0.5); position: relative; container-type: inline-size; overflow: hidden; ${cursorStyle}; width: 100%; ${selectionStyle}" title="Q=${p.quality.toFixed(2)} & ∑IV=${sumIV}" ${dragAttr} ${clickHandler}>
-            <span style="position: absolute; top: 0; left: 0; font-size: 12cqw; background: black; padding: 2cqw; z-index: 2;">${p._tag || ''}</span>
+        <div class="${slotClass}" ${dataAttr} style="background: #2c3e50; border: 2px solid #e74c3c; border-radius: 10px; aspect-ratio: 1 / 1.5; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 4%; box-sizing: border-box; position: relative; container-type: inline-size; overflow: hidden; ${cursorStyle}; width: 100%; ${selectionStyle}" title="Q=${p.quality.toFixed(2)} & ∑IV=${sumIV}" ${dragAttr} ${clickHandler}>
+            <span style="position: absolute; top: 0; left: 0; font-size: 12cqw; background: black; border-bottom-right-radius: 5px; padding: 2cqw; z-index: 2;">${p._tag || ''}</span>
             <div onclick="event.stopPropagation(); window.showPokemonStatsByUuid('${p.uuid}')" style="position: absolute; top: 2cqw; right: 2cqw; cursor: pointer; background: #34495e; color: white; border-radius: 50%; width: 20cqw; height: 20cqw; text-align: center; display: flex; align-items: center; justify-content: center; font-size: 14cqw; font-weight: bold; z-index: 3;" title="View Info">i</div>
 
-            <div style="flex: 1; width: 100%; display: flex; align-items: center; justify-content: center; position: relative;">
-                <img src="${imgSrc}" class="${glowClass}" style="height: 140%; width: 140%; max-height: 140%; object-fit: contain; z-index: 1;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
+            <div style="font-size: 13cqw; font-weight: bold; margin-top: 12cqw; margin-bottom: 2cqw; display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.1; z-index: 1; color: white;">${p.name}</div>
+
+            <div style="flex: 1; width: 100%; display: flex; align-items: center; justify-content: center; position: relative; margin-bottom: 2cqw;">
+                <img src="${imgSrc}" class="${glowClass}" style="height: 120%; width: 120%; max-height: 120%; object-fit: contain; z-index: 1;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
             </div>
+
+            <div style="font-size: 11cqw; color: #f1c40f; margin-bottom: 2cqw; line-height: 1.1; z-index: 1;">Lv: ${p.level} | Q: ${p.quality.toFixed(2)}</div>
+            <div style="font-size: 11cqw; color: #bdc3c7; line-height: 1.1; z-index: 1; margin-bottom: 2cqw;">∑IV: ${sumIV}</div>
         </div>
     `;
 }

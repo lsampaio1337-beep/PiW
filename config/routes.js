@@ -1551,7 +1551,7 @@ export const unlocks = [
   { "areaId": "Route 4", "unlocks": ["Cerulean Gym"], "requirements": { "catchSpecies": [{ "species": "Mankey", "count": 2 }] } },
   { "areaId": "Cerulean Gym", "unlocks": ["Route 24"], "requirements": { "earnBadge": { "name": "Cascade Badge", "leader": "Misty", "badgeCount": 2 } } },
   { "areaId": "Route 24", "unlocks": ["Route 25"], "requirements": { "catchSpecies": [{ "species": "Abra", "count": 2 }] } },
-  { "areaId": "Route 25", "unlocks": ["Route 5"], "gift": { "item": "Psychic Stone", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Abra", "count": 5 }] } },
+  { "areaId": "Route 25", "unlocks": ["Route 5", "Daycare"], "gift": { "item": "Psychic Stone", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Abra", "count": 5 }] } },
   { "areaId": "Route 5", "unlocks": ["Route 6"], "requirements": { "defeatCountRoute": { "route": "Route 5", "count": 100 } } },
   { "areaId": "Route 6", "unlocks": ["Vermilion Gym"], "requirements": { "catchSpecies": [{ "species": "Psyduck", "count": 1 }, { "species": "Goldeen", "count": 1 }] } },
   { "areaId": "Vermilion Gym", "unlocks": ["Route 11"], "requirements": { "earnBadge": { "name": "Thunder Badge", "leader": "Lt. Surge", "badgeCount": 3 } } },

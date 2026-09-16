@@ -5,17 +5,6 @@ import { renderStonesTab } from './stones.js';
 import { renderPokemonTab } from './pokemon.js';
 
 export function showBackpack() {
-    let rightCol = document.getElementById('modal-overlay');
-    let contentPanel = document.getElementById('content-panel');
-    rightCol.style.display = 'flex';
-
-    const modalBox = document.getElementById('modal-content-box');
-    // Ensure header title is set to Backpack
-    const modalHeader = document.getElementById('modal-header');
-    if (modalHeader) {
-        modalHeader.innerHTML = 'Backpack<span onclick="if(window.closeModal) window.closeModal()" style="position: absolute; right: 10px; cursor: pointer; color: white;">X</span>';
-    }
-
     let html = `
         <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; padding: 20px; box-sizing: border-box; color: white; overflow: hidden; position: relative;">
             <style>
@@ -54,14 +43,17 @@ export function showBackpack() {
                         </svg>
                     </div>
 
-                    <div id="backpack-content-area" onclick="event.stopPropagation()" style="position: absolute; bottom: 5%; left: 5%; width: 90%; height: 80%; max-height: 80%; display: flex; flex-direction: column; background: rgba(0,0,0,0.85); padding: 15px; box-sizing: border-box; border-radius: 5px; z-index: 5; display: none;">
+                    <div id="backpack-content-area" onclick="event.stopPropagation()" style="position: absolute; bottom: 5%; left: 5%; width: 90%; height: auto; max-height: 90%; overflow-y: auto; display: flex; flex-direction: column; background: rgba(0,0,0,0.85); padding: 15px; box-sizing: border-box; border-radius: 5px; z-index: 5; display: none;">
                         <h3 style="text-align: center; margin-top: 0; color: #ddd;">Select a pocket to view items.</h3>
                     </div>
                 </div>
             </div>
         </div>
     `;
-    contentPanel.innerHTML = html;
+
+    if (window.showModal) {
+        window.showModal('Backpack', html, 'window-backpack');
+    }
 }
 
 export function renderBackpackTab(tab) {

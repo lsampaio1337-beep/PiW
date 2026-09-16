@@ -9,61 +9,6 @@ export function showMap() {
         updateUI();
     }
 
-    let rightCol = document.getElementById('modal-overlay');
-    let contentPanel = document.getElementById('content-panel');
-    rightCol.style.display = 'flex';
-
-    const modalBox = document.getElementById('modal-content-box');
-    if (modalBox) {
-        // Save original inline styles to restore later if another view needs it
-        modalBox.dataset.originalStyles = modalBox.getAttribute('style') || '';
-
-        // Remove padding and background so the map is flush and the background window is gone
-        modalBox.style.padding = '0px';
-        modalBox.style.border = 'none';
-        modalBox.style.backgroundColor = 'transparent';
-        modalBox.style.overflow = 'hidden';
-
-        // Ensure no inherited box-shadow or extra margins break the flush look
-        modalBox.style.boxShadow = 'none';
-        modalBox.style.maxWidth = '90%'; // Allow it to expand nicely
-    }
-
-    // Also remove any padding from content-panel just in case
-    if (contentPanel) {
-        contentPanel.style.padding = '0px';
-        contentPanel.style.margin = '0px';
-    }
-
-    // Get all unlocked areas from completed challenges
-    let unlockedAreas = new Set(['Route 1', 'Professor Oak Lab', 'PokeCenter & PokeMarket']);
-
-    // Add unlocks from completed challenges
-    if (state.config.unlocks && state.stats.completedChallengeIds) {
-        for (let cid of state.stats.completedChallengeIds) {
-            let u = state.config.unlocks.find(unlock => unlock.areaId === cid);
-            if (u && u.unlocks) {
-                for (let r of u.unlocks) {
-                    unlockedAreas.add(r);
-                }
-            }
-        }
-    } else {
-        // Fallback to legacy index format
-        let completed = state.stats.completedChallenges || 0;
-        if (state.config.unlocks) {
-            for (let i = 0; i < completed; i++) {
-                let u = state.config.unlocks[i];
-                if (u && u.unlocks) {
-                    for (let r of u.unlocks) {
-                        unlockedAreas.add(r);
-                    }
-                }
-            }
-        }
-    }
-
-    // Generate Interactive Map HTML
     let html = `
         <div id="interactive-map" style="position: relative; width: 100%; aspect-ratio: 16/11; background-image: url('./Assets/Map/Kanto Map.png'); background-size: 100% 100%; background-repeat: no-repeat; background-position: center; border-radius: 8px;">
     `;
@@ -152,7 +97,10 @@ export function showMap() {
         <div id="map-tooltip" style="display:none; position:absolute; background:rgba(0,0,0,0.8); color:white; padding:5px; border-radius:5px; pointer-events:none; z-index: 100;"></div>
     `;
 
-    contentPanel.innerHTML = html;
+
+    if (window.showModal) {
+        window.showModal('Map', html, 'window-map');
+    }
 }
 
 export function navigateToLocation(locationName) {
