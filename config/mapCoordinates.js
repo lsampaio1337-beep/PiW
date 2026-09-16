@@ -19,8 +19,8 @@ const mapCoordinates = {
     "x": 12.62,
     "y": 14.34
   },
-  "indigo_plateu": {
-    "name": "Indigo Plateu",
+  "indigo_plateau": {
+    "name": "Indigo Plateau",
     "x": 12.62,
     "y": 5.46
   },
