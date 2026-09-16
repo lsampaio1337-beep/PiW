@@ -389,9 +389,9 @@ window.closeModal = function(windowId) {
     }
 };
 
-export function showModal(title, htmlContent, windowId = 'dynamic-modal') {
+export function showModal(title, htmlContent, windowId = 'dynamic-modal', width = '800px', height = 'auto') {
     if (window.windowManager) {
-        window.windowManager.createDynamicWindow(windowId, title, htmlContent);
+        window.windowManager.createDynamicWindow(windowId, title, htmlContent, width, height);
     }
 }
 
