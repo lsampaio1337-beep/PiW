@@ -1022,8 +1022,8 @@ async function init() {
             let zzzText = pData.isZzZMode ? ` - ZzZ: ${pData.currentRoute || 'Unknown Route'}` : '';
 
             const btn = document.createElement('button');
-            btn.style.padding = "10px";
-            btn.style.fontSize = "16px";
+            btn.style.padding = "1vh 1vw";
+            btn.style.fontSize = "1vw";
             btn.style.cursor = "pointer";
             btn.style.backgroundColor = "#FFC107"; // Big Yellow Button
             btn.style.color = "black";
@@ -1037,15 +1037,15 @@ async function init() {
             btn.style.justifyContent = "space-between";
             btn.style.alignItems = "center";
 
-            let zzzIconHtml = pData.isZzZMode ? `<img src="Assets/Extra/IconSleep.png" style="height: 100%; max-height: 60px; margin-left: 10px;" title="ZzZ Mode Active">` : '';
+            let zzzIconHtml = pData.isZzZMode ? `<img src="Assets/Extra/IconSleep.png" style="height: 100%; max-height: 6vh; margin-left: 1vw;" title="ZzZ Mode Active">` : '';
 
             btn.innerHTML = `
                 <div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center;">
-                    <div style="font-size: 18px; margin-bottom: 5px; font-weight: bold; display: flex; align-items: center;">
+                    <div style="font-size: 1.2vw; margin-bottom: 0.5vh; font-weight: bold; display: flex; align-items: center;">
                         "${profileName}" - ${playtimeStr}
                     </div>
-                    <div style="font-size: 14px; font-weight: normal;">Last Played: ${lastPlayedStr}</div>
-                    <div style="font-size: 14px; font-weight: normal;">Progress: ${lastRoute}${zzzText}</div>
+                    <div style="font-size: 0.9vw; font-weight: normal;">Last Played: ${lastPlayedStr}</div>
+                    <div style="font-size: 0.9vw; font-weight: normal;">Progress: ${lastRoute}${zzzText}</div>
                 </div>
                 ${zzzIconHtml}
             `;

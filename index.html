@@ -72,17 +72,17 @@
         <div id="save-manager-header" class="window-header" style="position: relative;">Select a Game<span onclick="window.windowManager.toggleWindow('save-manager-modal', false)" style="position: absolute; right: 10px; cursor: pointer; color: white; font-weight: bold;">X</span></div>
         <div class="window-content-container">
             <div class="window-content-scaler">
-                <div style="padding: 20px; display: flex; flex-direction: column; gap: 10px; flex-grow: 1; overflow-y: auto;">
-                    <h2 id="save-action-title" style="color: white; margin: 0; padding: 10px 0; display: none;"></h2>
-                    <div id="profiles-container" style="display: flex; flex-direction: column; gap: 10px; flex-grow: 1; overflow-y: auto;">
+                <div style="padding: 2vw; display: flex; flex-direction: column; gap: 2vh; flex-grow: 1; overflow-y: auto; box-sizing: border-box; height: 100%;">
+                    <h2 id="save-action-title" style="color: white; margin: 0; padding: 1vh 0; display: none; font-size: 1.5vw;"></h2>
+                    <div id="profiles-container" style="display: flex; flex-direction: column; gap: 1vh; flex-grow: 1; overflow-y: auto;">
                         <!-- Dynamic profile buttons will go here -->
                     </div>
 
-                    <div style="display: flex; flex-direction: column; gap: 10px; justify-content: center; margin-top: 10px; width: 75%; margin-left: auto; margin-right: auto;">
-                        <button id="btn-new-profile" onclick="window.startNewGame()" style="padding: 10px; font-size: 1rem; font-weight: bold; cursor: pointer; background-color: #FFC107; color: black; border: none; border-radius: 5px; width: 100%;">New Game</button>
-                        <div style="display: flex; gap: 10px; width: 100%;">
-                            <button id="btn-rename-profile" style="padding: 10px; font-size: 1rem; font-weight: bold; cursor: pointer; background-color: #3498db; color: white; border: none; border-radius: 5px; flex: 1;">Rename</button>
-                            <button id="btn-delete-profile" style="padding: 10px; font-size: 1rem; font-weight: bold; cursor: pointer; background-color: #f44336; color: white; border: none; border-radius: 5px; flex: 1;">Delete</button>
+                    <div style="display: flex; flex-direction: column; gap: 1vh; justify-content: center; margin-top: 1vh; width: 75%; margin-left: auto; margin-right: auto;">
+                        <button id="btn-new-profile" onclick="window.startNewGame()" style="padding: 1vh 1vw; font-size: 1vw; font-weight: bold; cursor: pointer; background-color: #FFC107; color: black; border: none; border-radius: 5px; width: 100%;">New Game</button>
+                        <div style="display: flex; gap: 1vw; width: 100%;">
+                            <button id="btn-rename-profile" style="padding: 1vh 1vw; font-size: 1vw; font-weight: bold; cursor: pointer; background-color: #3498db; color: white; border: none; border-radius: 5px; flex: 1;">Rename</button>
+                            <button id="btn-delete-profile" style="padding: 1vh 1vw; font-size: 1vw; font-weight: bold; cursor: pointer; background-color: #f44336; color: white; border: none; border-radius: 5px; flex: 1;">Delete</button>
                         </div>
                     </div>
                 </div>
