@@ -359,26 +359,11 @@ export class WindowManager {
         if (mainView && mainView.style.display !== 'none') {
             const rect = mainView.getBoundingClientRect();
             left = rect.left;
-            top = rect.top;
+            top = rect.bottom; // directly below (vertical)
         }
 
-        // We need to place this window underneath (z-index) the existing windows.
-        // And make sure they are "covered by previous one".
-        // The lowest active z-index:
-        let lowestZ = this.zIndexCounter;
-        this.windows.forEach(w => {
-            if (w.style.display !== 'none' && w.id !== windowId) {
-                const z = parseInt(w.style.zIndex || this.zIndexCounter);
-                if (z < lowestZ) lowestZ = z;
-            }
-        });
-
-        winElement.style.zIndex = lowestZ - 1;
-
-        // Slightly offset so the user can grab the header if it's completely behind another window
-        // The user said "covered by previous one", but to drag it they need a handle. We'll offset by 30px so the header peeps out.
-        // Wait, if it spawns behind main view, how do they drag it? By dragging the main view away.
-        // We will just put it exactly where the main view is, but z-indexed behind it.
+        // above all other windows
+        winElement.style.zIndex = this.zIndexCounter++;
 
         const winRect = winElement.getBoundingClientRect();
         if (left < 0) left = 0;
