@@ -754,7 +754,7 @@ export function switchView(viewName) {
     document.querySelectorAll('.game-view').forEach(el => el.style.display = 'none');
 
     if (viewName === 'BATTLE_ARENA') {
-        if (window.windowManager) window.windowManager.setWindowProportions('main-view-window', 1 / 5.75);
+        if (window.windowManager) window.windowManager.setWindowProportions('main-view-window', 5.75);
     } else {
         if (window.windowManager) window.windowManager.setWindowProportions('main-view-window', 1.8);
     }

@@ -215,6 +215,7 @@ export class WindowManager {
                         scalerElement.style.width = winElement._originalWidth + 'px';
                         scalerElement.style.position = 'absolute';
                         scalerElement.style.height = winElement._originalHeight + 'px';
+                        scalerElement.style.top = headerH + 'px';
                     }
                 }
             }
@@ -273,7 +274,7 @@ export class WindowManager {
         setTimeout(initDims, 100);
     }
 
-    setWindowProportions(windowId, heightToWidthRatio) {
+    setWindowProportions(windowId, widthToHeightRatio) {
         const winElement = document.getElementById(windowId);
         if (!winElement) return;
 
@@ -281,7 +282,8 @@ export class WindowManager {
         const scalerElement = winElement.querySelector('.window-content-scaler');
         if (!scalerElement) return;
 
-        const headerH = headerElement ? headerElement.offsetHeight : 0;
+        // Force a layout flush to ensure header height is accurate
+        const headerH = headerElement ? headerElement.offsetHeight || 30 : 0;
 
         if (!winElement._originalWidth) {
              winElement._originalWidth = 800;
@@ -289,10 +291,11 @@ export class WindowManager {
 
         // We MUST preserve originalWidth and scale, and only update originalHeight
         const originalWidth = winElement._originalWidth;
-        const originalHeight = originalWidth * heightToWidthRatio;
+        // height = width / (width/height ratio)
+        const originalHeight = originalWidth / widthToHeightRatio;
 
         winElement._originalHeight = originalHeight;
-        winElement._originalRatio = originalWidth / originalHeight;
+        winElement._originalRatio = widthToHeightRatio;
 
         scalerElement.style.setProperty('--original-width', originalWidth + 'px');
         scalerElement.style.setProperty('--original-height', originalHeight + 'px');
@@ -305,11 +308,13 @@ export class WindowManager {
         const newContentHeight = originalHeight * scale;
         const newHeight = headerH + newContentHeight;
 
+        // Apply exactly
         winElement.style.height = newHeight + 'px';
-
         scalerElement.style.height = originalHeight + 'px';
-        // DO NOT change transform or scalerElement.style.width, we preserve the existing scale!
+        // Enforce top margin to prevent overlapping the header
+        scalerElement.style.top = headerH + 'px';
 
+        // DO NOT change transform or scalerElement.style.width, we preserve the existing scale!
         this.saveWindowData(windowId);
     }
 
