@@ -704,7 +704,17 @@ window.showOakLabModal = function() {
     `;
 
     html += `</div>`;
-    showModal("Tasks & Rewards", html, "window-tasks");
+
+    const overlay = document.getElementById('main-view-inner-modal-overlay');
+    const title = document.getElementById('main-view-inner-modal-title');
+    const content = document.getElementById('main-view-inner-modal-content');
+    if (overlay && title && content) {
+        title.innerText = "Tasks & Rewards";
+        content.innerHTML = html;
+        overlay.style.display = 'flex';
+    } else {
+        showModal("Tasks & Rewards", html, "window-tasks");
+    }
 };
 
 export function renderOakLab() {
@@ -742,6 +752,12 @@ export function renderOakLab() {
 
 export function switchView(viewName) {
     document.querySelectorAll('.game-view').forEach(el => el.style.display = 'none');
+
+    if (viewName === 'BATTLE_ARENA') {
+        if (window.windowManager) window.windowManager.setWindowProportions('main-view-window', 5.75);
+    } else {
+        if (window.windowManager) window.windowManager.setWindowProportions('main-view-window', 1.8);
+    }
 
     if (viewName === 'PROF_OAK_LAB') {
         document.getElementById('view-prof-oak-lab').style.display = 'block';
@@ -1155,7 +1171,7 @@ async function init() {
         </div>
     </div>
 `;
-showModal("Sleep Mode", resumeHtml, "window-zzz-resume");
+showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
 
                         document.getElementById('btn-zzz-resume-no').onclick = () => {
                             state.isZzZMode = false;
@@ -1478,7 +1494,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume");
                 </div>
             `;
 
-            showModal("ZzZ Mode", htmlContent, "window-zzz-confirmation");
+            showModal("ZzZ Mode", htmlContent, "window-zzz-confirmation", "460px");
 
             document.getElementById('btn-zzz-no').onclick = () => {
                 if(window.windowManager) window.windowManager.closeDynamicWindow('window-zzz-confirmation');
@@ -1517,10 +1533,28 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume");
             badgesHtml += `<img src="./Assets/Badges/Badge Kanto ${i}.png" style="width: 40px; height: 40px;" title="Badge ${i}">`;
         }
         badgesHtml += '</div>';
+
+        let uniqueSpeciesCaught = 0;
+        if (state.stats.caughtSpecies) {
+            uniqueSpeciesCaught = Object.keys(state.stats.caughtSpecies).length;
+        }
+
+        let playtimeStr = "0h 0m 0s";
+        if (state.stats.playtime) {
+            const totalSec = state.stats.playtime;
+            const h = Math.floor(totalSec / 3600);
+            const m = Math.floor((totalSec % 3600) / 60);
+            const s = totalSec % 60;
+            playtimeStr = `${h}h ${m}m ${s}s`;
+        }
+
         showModal("Trainer", `
             <div style="text-align: left; display: inline-block;">
-                <p><b>Battles Won:</b> ${state.stats.battlesWon}</p>
+                <p><b>Time played:</b> ${playtimeStr}</p>
+                <p><b>Species Caught:</b> ${uniqueSpeciesCaught} / 150</p>
                 <p><b>Total Pokémon Captured:</b> ${state.stats.caught}</p>
+                <p><b>Battles Won:</b> ${state.stats.battlesWon}</p>
+                <p><b>Faints:</b> ${state.stats.faints || 0}</p>
                 <p><b>Shinies Seen:</b> ${state.stats.shiniesSeen || 0}</p>
                 <p><b>Shinies Caught:</b> ${state.stats.shiniesCaught || 0}</p>
                 <p><b>Money:</b> $${state.trainer.money}</p>

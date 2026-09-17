@@ -83,15 +83,24 @@ export function openPokeMarketBuy() {
         </div>
     `;
 
-    showModal('Market', html, 'window-market');
+    const overlay = document.getElementById('main-view-inner-modal-overlay');
+    const title = document.getElementById('main-view-inner-modal-title');
+    const content = document.getElementById('main-view-inner-modal-content');
+    if (overlay && title && content) {
+        title.innerText = "Market";
+        content.innerHTML = html;
+        overlay.style.display = 'flex';
+    } else {
+        showModal('Market', html, 'window-market');
 
-    const modalBox = document.getElementById('modal-content-box');
-    if (modalBox) {
-        modalBox.dataset.originalStyles = modalBox.getAttribute('style') || '';
-        modalBox.style.width = 'max-content';
-        modalBox.style.height = 'max-content';
-        modalBox.style.maxWidth = '90%';
-        modalBox.style.maxHeight = '90%';
+        const modalBox = document.getElementById('modal-content-box');
+        if (modalBox) {
+            modalBox.dataset.originalStyles = modalBox.getAttribute('style') || '';
+            modalBox.style.width = 'max-content';
+            modalBox.style.height = 'max-content';
+            modalBox.style.maxWidth = '90%';
+            modalBox.style.maxHeight = '90%';
+        }
     }
 
     setTimeout(() => {
@@ -430,15 +439,25 @@ export function openPokeMarketSell() {
     `;
 
     window.marketSelectedPokemonForSale = new Set();
-    if (window.showModal) window.showModal('Sell Items', html, 'window-market-sell');
 
-    const modalBox = document.getElementById('modal-content-box');
-    if (modalBox) {
-        modalBox.dataset.originalStyles = modalBox.getAttribute('style') || '';
-        modalBox.style.width = 'max-content';
-        modalBox.style.height = 'max-content';
-        modalBox.style.maxWidth = '90%';
-        modalBox.style.maxHeight = '90%';
+    const overlay = document.getElementById('main-view-inner-modal-overlay');
+    const title = document.getElementById('main-view-inner-modal-title');
+    const content = document.getElementById('main-view-inner-modal-content');
+    if (overlay && title && content) {
+        title.innerText = "Sell Items";
+        content.innerHTML = html;
+        overlay.style.display = 'flex';
+    } else {
+        if (window.showModal) window.showModal('Sell Items', html, 'window-market-sell');
+
+        const modalBox = document.getElementById('modal-content-box');
+        if (modalBox) {
+            modalBox.dataset.originalStyles = modalBox.getAttribute('style') || '';
+            modalBox.style.width = 'max-content';
+            modalBox.style.height = 'max-content';
+            modalBox.style.maxWidth = '90%';
+            modalBox.style.maxHeight = '90%';
+        }
     }
 
     setTimeout(() => {

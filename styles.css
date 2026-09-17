@@ -119,7 +119,7 @@ input[type="number"] {
 #combat-arena {
     flex: 1;
     position: relative;
-    background-size: cover;
+    background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
     overflow: hidden;
@@ -127,13 +127,14 @@ input[type="number"] {
 
 #view-prof-oak-lab {
     background-image: url('./Assets/BG/BG-Professor-Oak-Lab.png');
-    background-size: cover;
+    background-size: 100% 100%;
     text-align: center;
     padding-top: 50px;
     height: 100%;
 }
 
 .game-view {
+    background-size: 100% 100%;
     flex: 1;
     display: none;
 }
