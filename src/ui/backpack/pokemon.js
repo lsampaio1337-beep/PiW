@@ -135,6 +135,7 @@ export function renderPokemonTab(area) {
                 origIndex = i;
             }
         } else if (i === 6) {
+            if (!state.stats.hasSeenDaycare) continue; // Hide if Daycare hasn't been opened
             if (state.breeding.length > 0) {
                 p = state.breeding[0];
                 tag = 'To Breed';
@@ -142,6 +143,7 @@ export function renderPokemonTab(area) {
                 origIndex = 0;
             }
         } else if (i === 7) {
+            if (!state.stats.hasSeenDaycare) continue; // Hide if Daycare hasn't been opened
             if (state.training.length > 0) {
                 p = state.training[0];
                 tag = 'To Train';

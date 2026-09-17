@@ -10,6 +10,17 @@ import Storage from "./storage.js";
 // Import State and modules
 import { state, setBattleSystem, globals } from './state.js';
 
+window.dismissDaycareMessage = function() {
+    state.stats.hasSeenDaycare = true;
+    document.getElementById('daycare-first-time-overlay').style.display = 'none';
+    if (Storage) {
+        Storage.save(state);
+    } else if (window.storageRef) {
+        window.storageRef.save(state);
+    }
+    updateUI();
+};
+
 export const TYPE_COLORS = {
     "Bug": "#aead56",
     "Dark": "#636066",
