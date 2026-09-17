@@ -6,7 +6,7 @@ import { renderPokemonTab } from './pokemon.js';
 
 export function showBackpack() {
     let html = `
-        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; padding: 20px; box-sizing: border-box; color: white; overflow: hidden; position: relative;">
+        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; padding: 10px; box-sizing: border-box; color: white; overflow: hidden; position: relative;">
             <style>
                 .backpack-pocket {
                     cursor: pointer;
@@ -49,7 +49,7 @@ export function showBackpack() {
                             <span onclick="document.getElementById('backpack-content-area').style.display='none'" style="position: absolute; right: 10px; cursor: pointer; color: white; font-weight: bold;">X</span>
                         </div>
                         <div class="window-content-container" style="flex: 1; overflow-y: auto;">
-                            <div id="backpack-inner-content" style="padding: 15px; box-sizing: border-box; width: 100%; height: 100%;">
+                            <div id="backpack-inner-content" style="padding: 10px; box-sizing: border-box; width: 100%; height: 100%;">
                                 <h3 style="text-align: center; margin-top: 0; color: #ddd;">Select a pocket to view items.</h3>
                             </div>
                         </div>

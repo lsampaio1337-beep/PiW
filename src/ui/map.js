@@ -20,7 +20,7 @@ export function showMap() {
     }
 
     let html = `
-        <div id="interactive-map" style="position: relative; width: 100%; aspect-ratio: 16/11; background-image: url('./Assets/Map/Kanto Map.png'); background-size: 100% 100%; background-repeat: no-repeat; background-position: center; border-radius: 8px;">
+        <div id="interactive-map" style="position: relative; width: 100%; height: 100%; aspect-ratio: 16/11; background-image: url('./Assets/Map/Kanto Map.png'); background-size: 100% 100%; background-repeat: no-repeat; background-position: center; margin: -10px; width: calc(100% + 20px); height: calc(100% + 20px);">
     `;
 
     for (const [locationId, locationData] of Object.entries(state.config.mapCoordinates)) {

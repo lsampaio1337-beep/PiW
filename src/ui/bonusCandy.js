@@ -41,7 +41,7 @@ export function showBonusCandyModal() {
     }
 
     const html = `
-        <div style="text-align: center; font-family: sans-serif; padding: 10px;">
+        <div style="text-align: center; font-family: sans-serif;">
             <div style="margin-bottom: 10px;">
                 <h2 style="margin: 0; display: inline-block; vertical-align: middle;">White Candies: ${state.stats.whiteCandies || 0}</h2>
                 <img src="Assets/Extra/WhiteCandy.png" style="width: 30px; height: 30px; vertical-align: middle; margin-left: 10px;" onerror="this.style.display='none'">

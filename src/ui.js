@@ -1163,7 +1163,7 @@ async function init() {
 
                     if (state.isZzZMode) {
                         const resumeHtml = `
-    <div style="display: flex; flex-direction: column; gap: 15px; width: 360px; padding: 20px; text-align: center;">
+    <div style="display: flex; flex-direction: column; gap: 15px; width: 360px; padding: 10px; box-sizing: border-box; text-align: center;">
         <p style="color: white; margin: 0;">Do you want to collect the farm while Sleeping?</p>
         <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px;">
             <button id="btn-zzz-resume-yes" style="padding: 10px; font-size: 16px; font-weight: bold; cursor: pointer; background-color: #4CAF50; color: white; border: none; border-radius: 5px; flex: 1;">Yes</button>
@@ -1262,7 +1262,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
 
 
                             const resultsHtml = `
-                                <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.3); padding: 8px 12px; border-radius: 8px; margin-bottom: 15px;">
+                                <div style="padding: 10px; box-sizing: border-box;"><div style="display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.3); padding: 8px 12px; border-radius: 8px; margin-bottom: 15px;">
                                     <div style="font-size: 14px; color: #cbd5e1;">📍 <b>Route:</b> ${state.currentRoute}</div>
                                     <div style="font-size: 14px; color: #cbd5e1;">⏳ <b>Time:</b> ${timeStr.trim()}</div>
                                 </div>
@@ -1311,7 +1311,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
 
                                 </div>
                                 ${faintedBanner}
-                                <button id="btn-zzz-results-close-dynamic" style="padding: 12px; font-size: 16px; font-weight: bold; cursor: pointer; background: linear-gradient(to right, #10b981, #059669); color: white; border: 1px solid #34d399; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); margin-top: 15px; width: 100%; text-transform: uppercase; letter-spacing: 1px;">Claim Rewards</button>
+                                <button id="btn-zzz-results-close-dynamic" style="padding: 12px; font-size: 16px; font-weight: bold; cursor: pointer; background: linear-gradient(to right, #10b981, #059669); color: white; border: 1px solid #34d399; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); margin-top: 15px; width: 100%; text-transform: uppercase; letter-spacing: 1px;">Claim Rewards</button></div>
                             `;
                             showModal("ZzZ Mode", resultsHtml, "window-zzz-rewards");
 
@@ -1468,7 +1468,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
             }
 
             const htmlContent = `
-                <div style="display: flex; flex-direction: column; gap: 15px; width: 440px; padding: 10px;">
+                <div style="display: flex; flex-direction: column; gap: 15px; width: 440px; padding: 10px; box-sizing: border-box;">
                     <div id="zzz-tutorial-section" style="display: ${tutorialDisplay}; background: rgba(255,255,255,0.05); border: 1px dashed #475569; border-radius: 8px; padding: 15px; margin-bottom: 10px; text-align: left;">
                         <div style="color: #cbd5e1; font-size: 14px; margin-bottom: 8px;"><b>Welcome to ZzZ Mode!</b></div>
                         <div style="color: #94a3b8; font-size: 13px; line-height: 1.4;">Earn <b>Jigglypuff Dust</b> simply by playing the game (1 minute active = 1 grain). You can spend these grains to allow your Pokémon to farm offline when you close the game (1 grain = 1 minute of offline farming).</div>
@@ -1548,7 +1548,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
             playtimeStr = `${h}h ${m}m ${s}s`;
         }
 
-        showModal("Trainer", `
+        showModal("Trainer", `<div style="padding: 10px; box-sizing: border-box; width: 100%;">
             <div style="text-align: left; display: inline-block;">
                 <p><b>Time played:</b> ${playtimeStr}</p>
                 <p><b>Species Caught:</b> ${uniqueSpeciesCaught} / 150</p>
@@ -1561,7 +1561,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
             </div>
             <h3 style="margin-top: 20px;">Badges:</h3>
             ${badgesHtml}
-        `, "window-trainer");
+        </div>`, "window-trainer");
     });
 
     bindBtn('btn-settings', () => {
