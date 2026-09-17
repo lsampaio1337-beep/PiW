@@ -237,7 +237,8 @@ window.cheatProgressChallenge = function(targetAreaId) {
         }
         if (req.earnBadge) {
             // Only give badge if they don't have it yet to prevent duplicates if cheated multiple times
-            if (state.trainer.badges < req.earnBadge.badgeCount) {
+            const hasPending = state.stats.pendingGifts && state.stats.pendingGifts.some(g => g.type === 'badge' && g.gymIndex === req.earnBadge.badgeCount - 1);
+            if (state.trainer.badges < req.earnBadge.badgeCount && !hasPending) {
                  if (!state.stats.pendingGifts) state.stats.pendingGifts = [];
                  state.stats.pendingGifts.push({ type: 'badge', gymName: req.earnBadge.name.replace(' Badge', ''), gymIndex: req.earnBadge.badgeCount - 1 });
                  // Do not auto-increment badges, the gift claim will do it
@@ -256,8 +257,26 @@ window.cheatProgressChallenge = function(targetAreaId) {
             state.stats.defeatedBosses["Champion Rival"] = true;
         }
     }
-    window.completeChallenge(targetAreaId);
-    if (window.updateUI) window.updateUI();
+        if (window.updateUI) window.updateUI();
+    if (document.getElementById('modal-overlay').style.display !== 'none') {
+        window.showChallengesModal();
+    }
+
+    // Find the Complete button in the modal and click it
+    setTimeout(() => {
+        const modal = document.getElementById('window-challenges');
+        if (modal) {
+            const completeBtns = Array.from(modal.querySelectorAll('button')).filter(btn => btn.innerText.includes('Complete'));
+            if (completeBtns.length > 0) {
+                // Find the specific complete button for this area
+                const safeAreaId = targetAreaId.replace(/'/g, "\\'");
+                const specificBtn = completeBtns.find(btn => btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(safeAreaId));
+                if (specificBtn) specificBtn.click();
+                else completeBtns[0].click();
+            }
+        }
+    }, 100);
+
 };
 
 window.showChallengesModal = function() {
@@ -265,7 +284,7 @@ window.showChallengesModal = function() {
 
     if (!state.config.unlocks) return;
 
-    let html = `<div style="display:flex; flex-direction:column; gap:15px; text-align:left; padding-right: 10px; padding-bottom: 15px; height: 100%; overflow-y: auto;">`;
+    let html = `<div id="challenges-content-wrapper" style="display:flex; flex-direction:column; gap:15px; text-align:left; padding-right: 10px; padding-bottom: 15px; overflow-y: auto;">`;
 
     // Active Challenges Sector
     let activeChallengesCount = state.stats.activeChallenges ? state.stats.activeChallenges.length : 0;
@@ -366,9 +385,15 @@ window.showChallengesModal = function() {
 
     showModal("Progress Challenges", html, "window-challenges");
     const win = document.getElementById("window-challenges");
-    if (win) {
-        win.style.maxHeight = '800px';
+    const wrapper = document.getElementById("challenges-content-wrapper");
+    if (win && wrapper) {
+        // Read the actual unscaled width, defaulting to 800 if not yet set
+        let winWidth = win._originalWidth || parseInt(win.style.width) || win.offsetWidth || 800;
+        // The user wants max-height to be exactly the window's width (height=wide)
+        wrapper.style.maxHeight = winWidth + 'px';
+
     }
+
     if (window.windowManager) window.windowManager.recalculateWindowSize('window-challenges');
 };
 window.dragOver = dragOver;
