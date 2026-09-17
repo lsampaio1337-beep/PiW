@@ -317,29 +317,14 @@ export class WindowManager {
         // Check if we need to grow original width
         const currentOriginalWidthStr = scalerElement.style.getPropertyValue('--original-width');
         let currentOriginalWidth = parseInt(currentOriginalWidthStr);
-
-        let needsResize = false;
-        let growthRatio = 1;
-
         if (isNaN(currentOriginalWidth) || currentOriginalWidth <= 0) {
-            // It wasn't initialized yet
             currentOriginalWidth = newOriginalWidth;
-            scalerElement.style.setProperty('--original-width', newOriginalWidth + 'px');
-            needsResize = true;
+        }
 
-            if (oldWidth && oldWidth.endsWith('px')) {
-                 const currentWidth = parseInt(oldWidth);
-                 if (newOriginalWidth > currentWidth) {
-                     winElement.style.width = newOriginalWidth + 'px';
-                 }
-            } else {
-                 winElement.style.width = Math.max(900, newOriginalWidth) + 'px';
-            }
-        } else if (newOriginalWidth > currentOriginalWidth) {
+        if (newOriginalWidth > currentOriginalWidth) {
             // Content needs more width, we must grow
-            growthRatio = newOriginalWidth / currentOriginalWidth;
+            const growthRatio = newOriginalWidth / currentOriginalWidth;
             scalerElement.style.setProperty('--original-width', newOriginalWidth + 'px');
-            needsResize = true;
 
             // Scale up the window width by the same ratio
             if (oldWidth && oldWidth.endsWith('px')) {
@@ -348,10 +333,14 @@ export class WindowManager {
             } else {
                 winElement.style.width = newOriginalWidth + 'px';
             }
-        }
 
-        if (needsResize) {
             this.saveWindowData(windowId);
+        } else if (newOriginalWidth > 0 && (!currentOriginalWidthStr || isNaN(parseInt(currentOriginalWidthStr)))) {
+            // Initializing original width if it wasn't set yet
+            scalerElement.style.setProperty('--original-width', newOriginalWidth + 'px');
+            if (!oldWidth || oldWidth === 'auto') {
+                winElement.style.width = Math.max(900, newOriginalWidth) + 'px';
+            }
         }
 
         // Restore positioning
