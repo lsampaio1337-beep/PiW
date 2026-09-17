@@ -913,7 +913,6 @@ async function init() {
     const profilesContainer = document.getElementById('profiles-container');
 
     const startNewGame = () => {
-        state.stats.giftIconUnlocked = true;
         state.stats.hasSeenZzZTutorial = true;
         if (splashScreen) splashScreen.style.display = 'none';
         if (saveManagerModal) window.windowManager.toggleWindow('save-manager-modal', false);
@@ -1432,9 +1431,9 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
     bindBtn('btn-bonus-candy', () => {
         if(!checkCombatLock()) {
             state.stats.hasSeenBonusCandyIcon = true;
-            storage.save(state);
             updateTopbar();
             showBonusCandyModal();
+
         }
     });
     bindBtn('btn-challenges', () => {
@@ -1452,9 +1451,9 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
     bindBtn('btn-gift', () => {
         if(!checkCombatLock()) {
             state.stats.hasSeenGiftIcon = true;
-            storage.save(state);
             updateTopbar();
             showGiftModal();
+
         }
     });
 
