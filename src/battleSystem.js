@@ -1047,6 +1047,9 @@ class BattleSystem {
         this.stop();
         this.activeEncounter = null;
 
+        // Track faint
+        this.state.stats.faints = (this.state.stats.faints || 0) + 1;
+
         // Penalty: deduct 10% gold
         const penalty = Math.floor(this.state.trainer.money * 0.1);
         this.state.trainer.money -= penalty;
@@ -1359,6 +1362,8 @@ class BattleSystem {
         results.simulatedTimeMs = totalSimTime;
 
         if (results.fainted) {
+            // Track faint
+            this.state.stats.faints = (this.state.stats.faints || 0) + 1;
             // Heal all
             this.state.party.forEach(p => p.currentHp = p.maxHp);
             this.state.currentRoute = "PokeCenter & PokeMarket";

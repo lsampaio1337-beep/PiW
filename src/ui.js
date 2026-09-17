@@ -1517,10 +1517,28 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume");
             badgesHtml += `<img src="./Assets/Badges/Badge Kanto ${i}.png" style="width: 40px; height: 40px;" title="Badge ${i}">`;
         }
         badgesHtml += '</div>';
+
+        let uniqueSpeciesCaught = 0;
+        if (state.stats.caughtSpecies) {
+            uniqueSpeciesCaught = Object.keys(state.stats.caughtSpecies).length;
+        }
+
+        let playtimeStr = "0h 0m 0s";
+        if (state.stats.playtime) {
+            const totalSec = state.stats.playtime;
+            const h = Math.floor(totalSec / 3600);
+            const m = Math.floor((totalSec % 3600) / 60);
+            const s = totalSec % 60;
+            playtimeStr = `${h}h ${m}m ${s}s`;
+        }
+
         showModal("Trainer", `
             <div style="text-align: left; display: inline-block;">
-                <p><b>Battles Won:</b> ${state.stats.battlesWon}</p>
+                <p><b>Time played:</b> ${playtimeStr}</p>
+                <p><b>Species Caught:</b> ${uniqueSpeciesCaught} / 150</p>
                 <p><b>Total Pokémon Captured:</b> ${state.stats.caught}</p>
+                <p><b>Battles Won:</b> ${state.stats.battlesWon}</p>
+                <p><b>Faints:</b> ${state.stats.faints || 0}</p>
                 <p><b>Shinies Seen:</b> ${state.stats.shiniesSeen || 0}</p>
                 <p><b>Shinies Caught:</b> ${state.stats.shiniesCaught || 0}</p>
                 <p><b>Money:</b> $${state.trainer.money}</p>
