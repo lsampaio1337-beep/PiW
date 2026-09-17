@@ -124,7 +124,7 @@ export function updateBattleArena() {
                 elEnemySprite.style.display = 'block';
                 applyWalkAnimations(enemy, true);
 
-                elEnemySide.style.top = '25%';
+                elEnemySide.style.top = '50%';
                 elEnemySide.style.bottom = 'auto';
 
                 if (battleSystem.isSliding) {
@@ -164,9 +164,9 @@ export function updateBattleArena() {
             const elPlayerSide = document.getElementById('player-side');
             if (leader && elPlayerSide) {
 
-                elPlayerSide.style.top = '25%';
+                elPlayerSide.style.top = '50%';
                 elPlayerSide.style.bottom = 'auto';
-                elPlayerSide.style.left = '20%';
+                elPlayerSide.style.left = '25%';
 
                 const hpContainerPlayer = document.getElementById('player-battle-hp-container');
                 const hpBarPlayer = document.getElementById('player-battle-hp-bar');
@@ -234,7 +234,7 @@ export function updateBattleArena() {
                 elEnemySprite.style.display = 'block';
                 elEnemySide.style.transition = 'none';
                 elEnemySide.style.left = '35%'; // Matching active battle destination
-                elEnemySide.style.top = '25%';
+                elEnemySide.style.top = '50%';
                 elEnemySide.style.bottom = 'auto';
                 if (hpContainerEnemy) {
                     hpContainerEnemy.style.transition = 'none';
@@ -246,9 +246,9 @@ export function updateBattleArena() {
             const elPlayerSide = document.getElementById('player-side');
             if (leader && elPlayerSide) {
 
-                elPlayerSide.style.top = '25%';
+                elPlayerSide.style.top = '50%';
                 elPlayerSide.style.bottom = 'auto';
-                elPlayerSide.style.left = '20%';
+                elPlayerSide.style.left = '25%';
 
                 const hpContainerPlayer = document.getElementById('player-battle-hp-container');
                 const hpBarPlayer = document.getElementById('player-battle-hp-bar');
@@ -344,11 +344,11 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
     const ghostContainer = document.createElement('div');
     ghostContainer.style.position = 'absolute';
     ghostContainer.style.left = '35%';
-    ghostContainer.style.transform = 'translateX(-50%)';
+    ghostContainer.style.transform = 'translate(-50%, -50%)';
     ghostContainer.style.zIndex = '50';
     ghostContainer.style.opacity = '1';
 
-    ghostContainer.style.top = '25%';
+    ghostContainer.style.top = '50%';
     ghostContainer.style.bottom = 'auto';
 
     // The image itself
@@ -381,7 +381,7 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
         ball.style.left = '35%';
         ball.style.top = `50%`;
         ball.style.bottom = 'auto'; // Reset bottom
-        ball.style.transform = 'translateX(-50%)';
+        ball.style.transform = 'translate(-50%, -50%)';
         ball.style.width = '25vh';
         ball.style.height = '25vh';
         ball.style.objectFit = 'contain';
@@ -409,12 +409,12 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
             shakeCount++;
             let rotation = (shakeCount % 2 === 0) ? 15 : -15;
             if (shakeCount % 10 === 0) rotation = 0; // brief pause
-            ball.style.transform = `translateX(-50%) rotate(${rotation}deg)`;
+            ball.style.transform = `translate(-50%, -50%) rotate(${rotation}deg)`;
         }, 150);
 
         setTimeout(() => {
             clearInterval(shakeInterval);
-            ball.style.transform = 'translateX(-50%) rotate(0deg)';
+            ball.style.transform = 'translate(-50%, -50%) rotate(0deg)';
 
             // 3s mark: decide outcome
             if (ballResult.caught) {
@@ -501,17 +501,14 @@ export function showDamage(target, amount, isCrit, moveName = '', moveType = 'No
     const rect = img.getBoundingClientRect();
     const parentRect = img.parentElement.getBoundingClientRect();
 
-    // Use percentage/vh to place the damage text appropriately
-    // The parent container scales relative to the viewport.
-    dmgNode.style.left = '50%'; // Center horizontally over the sprite container
-    dmgNode.style.transform = 'translateX(-50%)'; // Center offset
-    dmgNode.style.top = '10%'; // Top position relative to the sprite bounds
+    dmgNode.style.left = (rect.left - parentRect.left + (rect.width / 2) - 20) + 'px'; // -20 to center text slightly better
+    dmgNode.style.top = (rect.top - parentRect.top) + 'px';
 
     img.parentElement.appendChild(dmgNode);
 
     // Animate up and fade out
     setTimeout(() => {
-        dmgNode.style.top = '0%'; // Float upwards slightly
+        dmgNode.style.top = (parseInt(dmgNode.style.top) - 40) + 'px';
     }, 50);
 
     setTimeout(() => {
@@ -639,7 +636,6 @@ export function playCombatAnimations(targetSide, moveType, duration) {
         // Splash Effect
         const splash = document.createElement('div');
         splash.style.position = 'fixed';
-        // Get viewport height in pixels for proportional conversion
         const vh = window.innerHeight / 100;
 
         // Center the 0x0 div on the target
