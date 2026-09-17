@@ -684,6 +684,9 @@ class BattleSystem {
         // Bonus Candy Defeats Tracker
         if ((this.state.stats.bonusCandyDefeats || 0) < 250) {
             this.state.stats.bonusCandyDefeats = (this.state.stats.bonusCandyDefeats || 0) + 1;
+            if (this.state.stats.bonusCandyDefeats >= 250) {
+                this.state.stats.hasSeenBonusCandyIcon = false;
+            }
         }
 
         // Auto Throw Pokeball logic (disable in gyms)
@@ -937,7 +940,7 @@ class BattleSystem {
                 if (gymIndex !== -1 && this.state.trainer.badges === gymIndex) {
                     if (!this.state.stats.pendingGifts) this.state.stats.pendingGifts = [];
                     this.state.stats.pendingGifts.push({ type: 'badge', gymName: gym.name, gymIndex: gymIndex });
-                    this.state.stats.giftIconUnlocked = true;
+                    this.state.stats.hasSeenGiftIcon = false;
                 }
             }
             this.updateGymUI();
@@ -1356,6 +1359,9 @@ class BattleSystem {
 
                 if ((this.state.stats.bonusCandyDefeats || 0) < 250) {
                     this.state.stats.bonusCandyDefeats = (this.state.stats.bonusCandyDefeats || 0) + 1;
+                    if (this.state.stats.bonusCandyDefeats >= 250) {
+                        this.state.stats.hasSeenBonusCandyIcon = false;
+                    }
                 }
 
                 if (this.state.settings.autoCatch) {

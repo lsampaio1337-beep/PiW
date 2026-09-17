@@ -40,6 +40,7 @@ import { showPokedex, showDexEntry } from './ui/pokedex.js';
 import { showPokemonStats, showPokemonStatsByUuid, evolvePokemon } from './ui/pokemonStats.js';
 import { showBonusCandyModal } from './ui/bonusCandy.js';
 window.showBonusCandyModal = showBonusCandyModal;
+window.showGiftModal = showGiftModal;
 import { showSettings, updateGameSpeed, addMoney, addXp, exportLog, showAddPokemonModal, forceNextEncounter, activateCheat } from './ui/settings.js';
 import { setupMarket, buyItem, openPokeMarketBuy, renderPokeMarketTab, updateMarketPrices } from './ui/market.js';
 import { showBackpack, renderBackpackTab, setActiveItem, setAutoPotionThreshold } from './ui/backpack/index.js';
@@ -103,7 +104,7 @@ window.completeChallenge = function(targetAreaId) {
         if (unlock.gift) {
             if (!state.stats.pendingGifts) state.stats.pendingGifts = [];
             state.stats.pendingGifts.push({ type: 'item', item: unlock.gift.item || unlock.gift, count: unlock.gift.count || 1 });
-            state.stats.giftIconUnlocked = true;
+            state.stats.hasSeenGiftIcon = false;
         }
         if (unlock.unlocks) {
             for (let newRoute of unlock.unlocks) {
@@ -929,7 +930,7 @@ async function init() {
     const profilesContainer = document.getElementById('profiles-container');
 
     const startNewGame = () => {
-        state.stats.giftIconUnlocked = true;
+        state.stats.hasSeenGiftIcon = false;
         state.stats.hasSeenZzZTutorial = true;
         if (splashScreen) splashScreen.style.display = 'none';
         if (saveManagerModal) window.windowManager.toggleWindow('save-manager-modal', false);
@@ -1447,6 +1448,9 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
     });
     bindBtn('btn-bonus-candy', () => {
         if(!checkCombatLock()) {
+            state.stats.hasSeenBonusCandyIcon = true;
+            storage.save(state);
+            updateTopbar();
             showBonusCandyModal();
 
         }
@@ -1465,6 +1469,9 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
     });
     bindBtn('btn-gift', () => {
         if(!checkCombatLock()) {
+            state.stats.hasSeenGiftIcon = true;
+            storage.save(state);
+            updateTopbar();
             showGiftModal();
 
         }
