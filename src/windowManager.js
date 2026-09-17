@@ -200,18 +200,18 @@ export class WindowManager {
         winElement.adjustHeightForNewContent = () => {
             if (!winElement._originalWidth) {
                 initDims();
-                return;
             }
+            if (!winElement._originalWidth) return;
 
             const headerH = headerElement ? headerElement.offsetHeight : 0;
 
             // To find the unscaled content height without removing scaling which causes flicker/warp,
             // we can temporarily reset width to original, height to auto, and transform to none.
             const currentWidth = winElement.offsetWidth;
-            const currentScale = currentWidth / originalWidth;
+            const currentScale = currentWidth / winElement._originalWidth;
 
             // Strip scaling temporarily
-            winElement.style.width = originalWidth + 'px';
+            winElement.style.width = winElement._originalWidth + 'px';
             winElement.style.height = 'auto';
             scalerElement.style.transform = 'none';
             scalerElement.style.width = 'auto';
@@ -219,24 +219,26 @@ export class WindowManager {
             scalerElement.style.position = 'relative';
 
             // Need to let browser reflow
-
-            // Force synchronous reflow to measure without visual flicker
             void winElement.offsetHeight;
 
-            const newOriginalHeight = winElement.offsetHeight - headerH;
+            let newOriginalHeight = scalerElement.scrollHeight;
+            if (newOriginalHeight <= 0) {
+                newOriginalHeight = winElement.offsetHeight - headerH;
+            }
+
             if (newOriginalHeight > 0) {
-                originalHeight = newOriginalHeight;
-                scalerElement.style.setProperty('--original-height', originalHeight + 'px');
-                originalRatio = originalWidth / originalHeight;
+                winElement._originalHeight = newOriginalHeight;
+                scalerElement.style.setProperty('--original-height', winElement._originalHeight + 'px');
+                winElement._originalRatio = winElement._originalWidth / winElement._originalHeight;
 
                 // Re-apply scale
-                const newScaledContentHeight = originalHeight * currentScale;
+                const newScaledContentHeight = winElement._originalHeight * currentScale;
                 const newHeight = headerH + newScaledContentHeight;
 
                 // Lock dimensions
                 scalerElement.style.position = 'absolute';
-                scalerElement.style.width = originalWidth + 'px';
-                scalerElement.style.height = originalHeight + 'px';
+                scalerElement.style.width = winElement._originalWidth + 'px';
+                scalerElement.style.height = winElement._originalHeight + 'px';
                 scalerElement.style.transform = `scale(${currentScale})`;
 
                 winElement.style.width = currentWidth + 'px';
@@ -279,7 +281,7 @@ export class WindowManager {
                         scalerElement.style.width = winElement._originalWidth + 'px';
                         scalerElement.style.position = 'absolute';
                         scalerElement.style.height = winElement._originalHeight + 'px';
-                        scalerElement.style.top = headerH + 'px';
+                        scalerElement.style.top = '0px';
                     }
                 }
             }
@@ -376,7 +378,7 @@ export class WindowManager {
         winElement.style.height = newHeight + 'px';
         scalerElement.style.height = originalHeight + 'px';
         // Enforce top margin to prevent overlapping the header
-        scalerElement.style.top = headerH + 'px';
+        scalerElement.style.top = '0px';
 
         // DO NOT change transform or scalerElement.style.width, we preserve the existing scale!
         this.saveWindowData(windowId);
