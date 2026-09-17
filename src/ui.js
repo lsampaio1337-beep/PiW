@@ -283,7 +283,7 @@ window.showChallengesModal = function() {
 
     if (!state.config.unlocks) return;
 
-    let html = `<div style="display:flex; flex-direction:column; gap:15px; text-align:left; padding-right: 10px; padding-bottom: 15px; max-height: 800px; overflow-y: auto;">`;
+    let html = `<div id="challenges-content-wrapper" style="display:flex; flex-direction:column; gap:15px; text-align:left; padding-right: 10px; padding-bottom: 15px; overflow-y: auto;">`;
 
     // Active Challenges Sector
     let activeChallengesCount = state.stats.activeChallenges ? state.stats.activeChallenges.length : 0;
@@ -383,6 +383,15 @@ window.showChallengesModal = function() {
     html += `</div>`;
 
     showModal("Progress Challenges", html, "window-challenges");
+    const win = document.getElementById("window-challenges");
+    const wrapper = document.getElementById("challenges-content-wrapper");
+    if (win && wrapper) {
+        // Read the actual unscaled width, defaulting to 800 if not yet set
+        let winWidth = win._originalWidth || parseInt(win.style.width) || win.offsetWidth || 800;
+        // The user wants max-height to be exactly the window's width (height=wide)
+        wrapper.style.maxHeight = winWidth + 'px';
+
+    }
 
     if (window.windowManager) window.windowManager.recalculateWindowSize('window-challenges');
 };
