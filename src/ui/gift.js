@@ -31,12 +31,12 @@ window.claimPendingGift = function(index) {
 };
 
 export function showGiftModal() {
-    let html = `<div style="text-align: center;">`;
+    let html = `<div style="text-align: center; padding: 5%; box-sizing: border-box;">`;
 
     // Check pending gifts
     const pending = state.stats.pendingGifts || [];
     if (pending.length > 0) {
-        html += `<h3 style="margin-bottom: 10px;">Pending Gifts</h3>`;
+        html += `<h3 style="margin-top: 0; margin-bottom: 10px;">Pending Gifts</h3>`;
         html += `<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 20px;">`;
 
         pending.forEach((gift, index) => {
@@ -63,8 +63,6 @@ export function showGiftModal() {
         });
 
         html += `</div>`;
-    } else {
-        html += `<h3 style="margin-bottom: 10px; color: #aaa;">No Pending Gifts</h3>`;
     }
 
     // Backwards compatibility for collected gifts
@@ -78,8 +76,10 @@ export function showGiftModal() {
     // Check collected gifts (items and badges)
     const claimed = state.stats.claimedGifts || [];
     if (claimed.length > 0) {
-        html += `<hr style="border: 1px solid #444; margin: 20px 0;">`;
-        html += `<h3 style="margin-bottom: 10px;">Collected Gifts</h3>`;
+        if (pending.length > 0) {
+            html += `<hr style="border: 1px solid #444; margin: 20px 0;">`;
+        }
+        html += `<h3 style="margin-top: 0; margin-bottom: 10px;">Collected Gifts</h3>`;
         html += `<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">`;
 
         claimed.forEach((gift) => {
