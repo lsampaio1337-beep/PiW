@@ -46,7 +46,12 @@ export function hasCaughtSpecies(id, state) {
 }
 
 export function showPokedex() {
-    let html = `<div style="display:flex; flex-wrap:wrap; max-height:400px; overflow-y:auto; gap:10px;">`;
+    let html = `
+        <style>
+            #window-pokedex-content { padding: 0 !important; }
+        </style>
+        <div style="display:flex; flex-wrap:wrap; gap:10px; padding: 5%; justify-content: center;">
+    `;
 
     if (!state.config.pokemonData) {
         html += "<p>Loading Pokedex data...</p>";
@@ -104,8 +109,11 @@ export function showDexEntry(id) {
     const evoTreeHtml = buildEvolutionLineHtml(pData, state);
 
     const html = `
-        <div style="text-align:center; height: 100%; overflow-y: auto; padding: 0 10px;">
-            <h2>#${pData.id} ${pData.name}</h2>
+        <style>
+            #window-pokedex-entry-${pData.id}-content { padding: 0 !important; }
+        </style>
+        <div style="text-align:center; padding: 5%;">
+            <h2 style="margin-top: 0;">#${pData.id} ${pData.name}</h2>
             <img id="dex-sprite-${pData.id}" src="Assets/Pokemon Sprites/${pData.id}.png" style="width: 100px; height: 100px;">
             <div style="margin-bottom: 10px;">
                 <button style="${buttonStyle}" onclick="document.getElementById('dex-sprite-${pData.id}').src = 'Assets/Pokemon Sprites/${pData.id}_shiny.png'">Shiny</button>
