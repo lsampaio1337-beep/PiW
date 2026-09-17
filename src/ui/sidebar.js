@@ -131,7 +131,7 @@ export function updateSidebar() {
                 } else {
                     window.windowManager.recalculateWindowSize('party-window');
                 }
-            }, 10);
+            }, 50); // increased timeout to allow dom to render properly before measuring
         }
     }
     lastTeamCount = currentTeamCount;
