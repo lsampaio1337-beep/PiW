@@ -46,7 +46,7 @@ export function hasCaughtSpecies(id, state) {
 }
 
 export function showPokedex() {
-    let html = `<div style="display:flex; flex-wrap:wrap; max-height:400px; overflow-y:auto; gap:10px;">`;
+    let html = `<div style="display:flex; flex-wrap:wrap; overflow-y:auto; gap:10px;">`;
 
     if (!state.config.pokemonData) {
         html += "<p>Loading Pokedex data...</p>";

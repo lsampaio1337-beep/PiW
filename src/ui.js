@@ -264,7 +264,7 @@ window.showChallengesModal = function() {
 
     if (!state.config.unlocks) return;
 
-    let html = `<div style="display:flex; flex-direction:column; gap:15px; text-align:left; padding-right: 10px; padding-bottom: 15px; height: 100%; overflow-y: auto;">`;
+    let html = `<div style="display:flex; flex-direction:column; gap:15px; text-align:left; padding-right: 10px; padding-bottom: 15px; ">`;
 
     // Active Challenges Sector
     let activeChallengesCount = state.stats.activeChallenges ? state.stats.activeChallenges.length : 0;
@@ -549,7 +549,7 @@ window.showOakLabModal = function() {
         renderOakLab(); // Clear the notification from the lobby button
     }
 
-    let html = `<div style="display:flex; flex-direction:column; gap:15px; text-align:left; padding-right: 10px; padding-bottom: 15px; height: 100%; overflow-y: auto;">`;
+    let html = `<div style="display:flex; flex-direction:column; gap:15px; text-align:left; padding-right: 10px; padding-bottom: 15px; ">`;
 
     const renderActiveTask = (type, currentVal, tierIdx, taskList) => {
         if (tierIdx >= taskList.length) {
@@ -1082,7 +1082,7 @@ async function init() {
             btn.style.justifyContent = "space-between";
             btn.style.alignItems = "center";
 
-            let zzzIconHtml = pData.isZzZMode ? `<img src="Assets/Extra/IconSleep.png" style="height: 100%; max-height: 60px; margin-left: 10px;" title="ZzZ Mode Active">` : '';
+            let zzzIconHtml = pData.isZzZMode ? `<img src="Assets/Extra/IconSleep.png" style="max-height: 60px; margin-left: 10px;" title="ZzZ Mode Active">` : '';
 
             btn.innerHTML = `
                 <div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center;">
