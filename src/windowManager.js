@@ -398,26 +398,71 @@ export class WindowManager {
 
 
 
+
+    autoAdjustWidth(windowId) {
+        const winElement = document.getElementById(windowId);
+        if (!winElement) return;
+
+        const scalerElement = winElement.querySelector('.window-content-scaler');
+        if (!scalerElement) return;
+
+        // Briefly measure natural width of content without constraints
+        const oldScale = scalerElement.style.transform;
+        const oldWidth = winElement.style.width;
+        const oldPosition = scalerElement.style.position;
+
+        // Temporarily clear constraints to let it flow to natural width
+        scalerElement.style.position = 'relative';
+        scalerElement.style.transform = 'none';
+        scalerElement.style.width = 'max-content';
+
+        const newOriginalWidth = scalerElement.scrollWidth;
+
+        // Check if we need to grow original width
+        const currentOriginalWidthStr = scalerElement.style.getPropertyValue('--original-width');
+        let currentOriginalWidth = parseInt(currentOriginalWidthStr);
+        if (isNaN(currentOriginalWidth) || currentOriginalWidth <= 0) {
+            currentOriginalWidth = newOriginalWidth;
+        }
+
+        if (newOriginalWidth > currentOriginalWidth) {
+            // Content needs more width, we must grow
+            const growthRatio = newOriginalWidth / currentOriginalWidth;
+            scalerElement.style.setProperty('--original-width', newOriginalWidth + 'px');
+
+            // Scale up the window width by the same ratio
+            if (oldWidth && oldWidth.endsWith('px')) {
+                const currentWidth = parseInt(oldWidth);
+                winElement.style.width = (currentWidth * growthRatio) + 'px';
+            } else {
+                winElement.style.width = newOriginalWidth + 'px';
+            }
+
+            this.saveWindowData(windowId);
+        } else if (newOriginalWidth > 0 && (!currentOriginalWidthStr || isNaN(parseInt(currentOriginalWidthStr)))) {
+            // Initializing original width if it wasn't set yet
+            scalerElement.style.setProperty('--original-width', newOriginalWidth + 'px');
+            if (!oldWidth || oldWidth === 'auto') {
+                winElement.style.width = Math.max(1100, newOriginalWidth) + 'px';
+            }
+        }
+
+        // Restore positioning
+        scalerElement.style.position = oldPosition;
+        scalerElement.style.transform = oldScale;
+        scalerElement.style.width = scalerElement.style.getPropertyValue('--original-width');
+    }
+
     recalculateWindowSize(windowId) {
         const winElement = document.getElementById(windowId);
         if (!winElement) return;
 
-        // If the window has already been initialized with scaling, use proportional height adjuster
-        if (typeof winElement.adjustHeightForNewContent === 'function') {
-            winElement.adjustHeightForNewContent();
-            return;
+        // Reset to auto to let content reflow
+        if (windowId === 'top-bar-window') {
+            winElement.style.width = '1100px';
+        } else {
+            winElement.style.width = '800px';
         }
-
-        let currentWidth = winElement.style.width;
-        if (!currentWidth || currentWidth === 'auto' || currentWidth === '') {
-            if (winElement.offsetWidth > 0) {
-                currentWidth = winElement.offsetWidth + 'px';
-            } else {
-                currentWidth = '800px';
-            }
-        }
-
-        winElement.style.width = currentWidth;
         winElement.style.height = 'auto';
 
         const scalerElement = winElement.querySelector('.window-content-scaler');
