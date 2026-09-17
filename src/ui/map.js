@@ -11,6 +11,7 @@ export function showMap() {
 
     let unlockedAreas = new Set();
     unlockedAreas.add("Professor Oak Lab");
+    unlockedAreas.add("PokeCenter & PokeMarket");
     if (state.stats.completedChallengeIds) {
         state.stats.completedChallengeIds.forEach(id => unlockedAreas.add(id));
     }
