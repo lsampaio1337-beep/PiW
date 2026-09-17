@@ -191,12 +191,10 @@ export class WindowManager {
         });
     }
 
-    _setupResize(winElement, handleElement, scalerElement, headerElement) {
+        _setupResize(winElement, handleElement, scalerElement, headerElement) {
         let isResizing = false;
         let startX, startY;
         let startWidth, startHeight;
-        let originalWidth, originalHeight;
-        let originalRatio;
 
 
         winElement.adjustHeightForNewContent = () => {
@@ -258,24 +256,25 @@ export class WindowManager {
         };
 
         const initDims = () => {
-            if (!originalWidth) {
+            if (!winElement._originalWidth) {
                 const headerH = headerElement ? headerElement.offsetHeight : 0;
 
                 if (winElement.style.display !== 'none' && winElement.offsetWidth > 0) {
-                    originalWidth = winElement.offsetWidth;
-                    originalHeight = winElement.offsetHeight - headerH;
-                    if (originalWidth > 0 && originalHeight > 0) {
-                        scalerElement.style.setProperty('--original-width', originalWidth + 'px');
-                        scalerElement.style.setProperty('--original-height', originalHeight + 'px');
-                        originalRatio = originalWidth / originalHeight;
+                    winElement._originalWidth = winElement.offsetWidth;
+                    winElement._originalHeight = winElement.offsetHeight - headerH;
+                    if (winElement._originalWidth > 0 && winElement._originalHeight > 0) {
+                        scalerElement.style.setProperty('--original-width', winElement._originalWidth + 'px');
+                        scalerElement.style.setProperty('--original-height', winElement._originalHeight + 'px');
+                        winElement._originalRatio = winElement._originalWidth / winElement._originalHeight;
 
                         // Lock the window to its exact measured height so it doesn't collapse
                         // when the scaler changes to absolute positioning.
-                        winElement.style.height = (headerH + originalHeight) + 'px';
+                        winElement.style.height = (headerH + winElement._originalHeight) + 'px';
 
-                        scalerElement.style.width = originalWidth + 'px';
+                        scalerElement.style.width = winElement._originalWidth + 'px';
                         scalerElement.style.position = 'absolute';
-                        scalerElement.style.height = originalHeight + 'px';
+                        scalerElement.style.height = winElement._originalHeight + 'px';
+                        scalerElement.style.top = headerH + 'px';
                     }
                 }
             }
@@ -302,10 +301,10 @@ export class WindowManager {
             const dx = e.clientX - startX;
             let newWidth = Math.max(200, startWidth + dx); // minimum width 200px
 
-            if (originalWidth && originalRatio) {
+            if (winElement._originalWidth && winElement._originalRatio) {
                 const headerH = headerElement ? headerElement.offsetHeight : 0;
-                const scale = newWidth / originalWidth;
-                const newContentHeight = originalHeight * scale;
+                const scale = newWidth / winElement._originalWidth;
+                const newContentHeight = winElement._originalHeight * scale;
                 let newHeight = headerH + newContentHeight;
 
                 winElement.style.width = newWidth + 'px';
@@ -324,7 +323,7 @@ export class WindowManager {
 
         const observer = new MutationObserver((mutations) => {
             mutations.forEach((mutation) => {
-                if (mutation.attributeName === 'style' && winElement.style.display !== 'none' && !originalWidth) {
+                if (mutation.attributeName === 'style' && winElement.style.display !== 'none' && !winElement._originalWidth) {
                     setTimeout(initDims, 50);
                 }
             });
@@ -332,6 +331,50 @@ export class WindowManager {
         observer.observe(winElement, { attributes: true });
 
         setTimeout(initDims, 100);
+    }
+
+    setWindowProportions(windowId, widthToHeightRatio) {
+        const winElement = document.getElementById(windowId);
+        if (!winElement) return;
+
+        const headerElement = winElement.querySelector('.window-header');
+        const scalerElement = winElement.querySelector('.window-content-scaler');
+        if (!scalerElement) return;
+
+        // Force a layout flush to ensure header height is accurate
+        const headerH = headerElement ? headerElement.offsetHeight || 30 : 0;
+
+        if (!winElement._originalWidth) {
+             winElement._originalWidth = 800;
+        }
+
+        // We MUST preserve originalWidth and scale, and only update originalHeight
+        const originalWidth = winElement._originalWidth;
+        // height = width / (width/height ratio)
+        const originalHeight = originalWidth / widthToHeightRatio;
+
+        winElement._originalHeight = originalHeight;
+        winElement._originalRatio = widthToHeightRatio;
+
+        scalerElement.style.setProperty('--original-width', originalWidth + 'px');
+        scalerElement.style.setProperty('--original-height', originalHeight + 'px');
+
+        // Find current width to keep scale the same
+        let currentWidth = winElement.offsetWidth;
+        if (currentWidth === 0) currentWidth = parseInt(winElement.style.width) || 800;
+
+        const scale = currentWidth / originalWidth;
+        const newContentHeight = originalHeight * scale;
+        const newHeight = headerH + newContentHeight;
+
+        // Apply exactly
+        winElement.style.height = newHeight + 'px';
+        scalerElement.style.height = originalHeight + 'px';
+        // Enforce top margin to prevent overlapping the header
+        scalerElement.style.top = headerH + 'px';
+
+        // DO NOT change transform or scalerElement.style.width, we preserve the existing scale!
+        this.saveWindowData(windowId);
     }
 
 
