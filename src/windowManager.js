@@ -281,7 +281,7 @@ export class WindowManager {
                         scalerElement.style.width = winElement._originalWidth + 'px';
                         scalerElement.style.position = 'absolute';
                         scalerElement.style.height = winElement._originalHeight + 'px';
-                        scalerElement.style.top = headerH + 'px';
+                        scalerElement.style.top = '0px';
                     }
                 }
             }
@@ -378,7 +378,7 @@ export class WindowManager {
         winElement.style.height = newHeight + 'px';
         scalerElement.style.height = originalHeight + 'px';
         // Enforce top margin to prevent overlapping the header
-        scalerElement.style.top = headerH + 'px';
+        scalerElement.style.top = '0px';
 
         // DO NOT change transform or scalerElement.style.width, we preserve the existing scale!
         this.saveWindowData(windowId);
