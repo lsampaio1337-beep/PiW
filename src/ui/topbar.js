@@ -233,6 +233,11 @@ export function updateTopbar() {
             sleepNotification.style.display = 'none';
         }
     }
+
+    // Auto-adjust width of the Main Control window if new icons appeared
+    if (window.windowManager) {
+        window.windowManager.autoAdjustWidth('top-bar-window');
+    }
 }
 
 

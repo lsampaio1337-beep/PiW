@@ -296,12 +296,80 @@ export class WindowManager {
 
 
 
+    autoAdjustWidth(windowId) {
+        const winElement = document.getElementById(windowId);
+        if (!winElement) return;
+
+        const scalerElement = winElement.querySelector('.window-content-scaler');
+        if (!scalerElement) return;
+
+        // Briefly measure natural width of content without constraints
+        const oldScale = scalerElement.style.transform;
+        const oldWidth = winElement.style.width;
+
+        // Temporarily clear constraints to let it flow to natural width
+        scalerElement.style.position = 'relative';
+        scalerElement.style.transform = 'none';
+        scalerElement.style.width = 'max-content';
+
+        const newOriginalWidth = scalerElement.scrollWidth;
+
+        // Check if we need to grow original width
+        const currentOriginalWidthStr = scalerElement.style.getPropertyValue('--original-width');
+        let currentOriginalWidth = parseInt(currentOriginalWidthStr);
+
+        let needsResize = false;
+        let growthRatio = 1;
+
+        if (isNaN(currentOriginalWidth) || currentOriginalWidth <= 0) {
+            // It wasn't initialized yet
+            currentOriginalWidth = newOriginalWidth;
+            scalerElement.style.setProperty('--original-width', newOriginalWidth + 'px');
+            needsResize = true;
+
+            if (oldWidth && oldWidth.endsWith('px')) {
+                 const currentWidth = parseInt(oldWidth);
+                 if (newOriginalWidth > currentWidth) {
+                     winElement.style.width = newOriginalWidth + 'px';
+                 }
+            } else {
+                 winElement.style.width = Math.max(900, newOriginalWidth) + 'px';
+            }
+        } else if (newOriginalWidth > currentOriginalWidth) {
+            // Content needs more width, we must grow
+            growthRatio = newOriginalWidth / currentOriginalWidth;
+            scalerElement.style.setProperty('--original-width', newOriginalWidth + 'px');
+            needsResize = true;
+
+            // Scale up the window width by the same ratio
+            if (oldWidth && oldWidth.endsWith('px')) {
+                const currentWidth = parseInt(oldWidth);
+                winElement.style.width = (currentWidth * growthRatio) + 'px';
+            } else {
+                winElement.style.width = newOriginalWidth + 'px';
+            }
+        }
+
+        if (needsResize) {
+            this.saveWindowData(windowId);
+        }
+
+        // Restore positioning
+        scalerElement.style.position = 'absolute';
+        scalerElement.style.transform = oldScale;
+        scalerElement.style.width = scalerElement.style.getPropertyValue('--original-width');
+    }
+
     recalculateWindowSize(windowId) {
         const winElement = document.getElementById(windowId);
         if (!winElement) return;
 
         // Reset to auto to let content reflow
-        winElement.style.width = '800px';
+        if (windowId === 'top-bar-window') {
+            winElement.style.width = '900px';
+        } else {
+            winElement.style.width = '800px';
+        }
         winElement.style.height = 'auto';
 
         const scalerElement = winElement.querySelector('.window-content-scaler');
