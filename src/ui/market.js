@@ -77,7 +77,7 @@ export function openPokeMarketBuy() {
                 <button onclick="if(window.buySetMax) window.buySetMax()" style="display: flex; align-items: center; justify-content: center; padding: 0 calc(var(--m-width) * 0.012); font-size: calc(var(--m-width) * 0.022); font-weight: bold; border-radius: 5px; cursor: pointer; background: #95a5a6; color: white; border: none; box-sizing: border-box; margin: 0;">Max</button>
             </div>
 
-            <div id="market-buy-content" style="display: flex; flex-wrap: wrap; gap: calc(var(--m-width) * 0.018); justify-content: center; overflow-y: auto; flex: 1; padding: calc(var(--m-width) * 0.012);">
+            <div id="market-buy-content" style="display: block; overflow-y: auto; flex: 1; padding: calc(var(--m-width) * 0.012); width: 100%;">
                 <!-- Cards injected here -->
             </div>
         </div>
@@ -87,7 +87,11 @@ export function openPokeMarketBuy() {
     const title = document.getElementById('main-view-inner-modal-title');
     const content = document.getElementById('main-view-inner-modal-content');
     if (overlay && title && content) {
-        title.innerText = "Market";
+        title.innerHTML = `<div style="display: flex; width: 100%;">
+            <div style="flex: 1; text-align: center; font-weight: bold; color: #f1c40f; cursor: pointer;">Buy Items</div>
+            <div style="width: 2px; background-color: #fff;"></div>
+            <div style="flex: 1; text-align: center; color: #ccc; cursor: pointer;" onclick="if(window.openPokeMarketSell) window.openPokeMarketSell()">Sell Items</div>
+        </div>`;
         content.innerHTML = html;
         overlay.style.display = 'flex';
     } else {
@@ -257,7 +261,7 @@ export function renderPokeMarketTab(category) {
         }));
     }
 
-    let html = `<div style="display: grid; grid-template-columns: repeat(${cols}, calc(var(--m-width) * 0.145)); gap: calc(var(--m-width) * 0.018); justify-content: center; width: 100%;">`;
+    let html = `<div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: calc(var(--m-width) * 0.01); justify-content: center; width: 100%;">`;
     items.forEach(item => {
         let displayName = item.name;
         if (category === 'potions') displayName = displayName.replace(' Potion', '<br>Potion');
@@ -432,7 +436,7 @@ export function openPokeMarketSell() {
                 </div>
             </div>
 
-            <div id="market-sell-content" style="display: flex; flex-wrap: wrap; gap: calc(var(--m-width) * 0.018); justify-content: center; overflow-y: auto; flex: 1; padding: calc(var(--m-width) * 0.012);">
+            <div id="market-sell-content" style="display: block; overflow-y: auto; flex: 1; padding: calc(var(--m-width) * 0.012); width: 100%;">
                 <!-- Cards injected here -->
             </div>
         </div>
@@ -444,7 +448,11 @@ export function openPokeMarketSell() {
     const title = document.getElementById('main-view-inner-modal-title');
     const content = document.getElementById('main-view-inner-modal-content');
     if (overlay && title && content) {
-        title.innerText = "Sell Items";
+        title.innerHTML = `<div style="display: flex; width: 100%;">
+            <div style="flex: 1; text-align: center; color: #ccc; cursor: pointer;" onclick="if(window.openPokeMarketBuy) window.openPokeMarketBuy()">Buy Items</div>
+            <div style="width: 2px; background-color: #fff;"></div>
+            <div style="flex: 1; text-align: center; font-weight: bold; color: #f1c40f; cursor: pointer;">Sell Items</div>
+        </div>`;
         content.innerHTML = html;
         overlay.style.display = 'flex';
     } else {
@@ -481,7 +489,7 @@ export function renderPokeMarketSellTab(category) {
 
     if (category === 'pokemon') {
         cols = 6;
-        let html = `<div style="display: grid; grid-template-columns: repeat(${cols}, calc(var(--m-width) * 0.145)); gap: calc(var(--m-width) * 0.018); justify-content: center; width: 100%;">`;
+        let html = `<div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: calc(var(--m-width) * 0.01); justify-content: center; width: 100%;">`;
 
         const filterName = (document.getElementById('market-filter-name')?.value || '').toLowerCase();
         const filterLevelMin = parseFloat(document.getElementById('market-filter-level-min')?.value);
@@ -576,7 +584,7 @@ export function renderPokeMarketSellTab(category) {
         }));
     }
 
-    let html = `<div style="display: grid; grid-template-columns: repeat(${cols}, calc(var(--m-width) * 0.145)); gap: calc(var(--m-width) * 0.018); justify-content: center; width: 100%;">`;
+    let html = `<div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: calc(var(--m-width) * 0.01); justify-content: center; width: 100%;">`;
     items.forEach(item => {
         let displayName = item.name;
         if (category === 'potions') displayName = displayName.replace(' Potion', '<br>Potion');
