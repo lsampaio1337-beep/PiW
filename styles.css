@@ -81,14 +81,13 @@ input[type="number"] {
 #left-col {
     width: 250px;
     background-color: #3b5998;
-    padding: 10px 10px 0 10px;
+    padding: 10px;
     overflow-y: auto;
     border-right: 2px solid #1abc9c;
 }
 
 .party-slot {
     background: rgba(0,0,0,0.2);
-    margin-bottom: 10px;
     padding: 5px;
     border-radius: 4px;
     cursor: pointer;
@@ -101,8 +100,17 @@ input[type="number"] {
     height: 40px;
 }
 
+#party-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 #day-care {
-    margin-top: 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
     border-top: 1px solid #fff;
     padding-top: 10px;
 }
