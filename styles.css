@@ -81,7 +81,7 @@ input[type="number"] {
 #left-col {
     width: 250px;
     background-color: #3b5998;
-    padding: 10px;
+    padding: 10px 10px 0 10px;
     overflow-y: auto;
     border-right: 2px solid #1abc9c;
 }
@@ -102,7 +102,7 @@ input[type="number"] {
 }
 
 #day-care {
-    margin-top: 20px;
+    margin-top: 0px;
     border-top: 1px solid #fff;
     padding-top: 10px;
 }
