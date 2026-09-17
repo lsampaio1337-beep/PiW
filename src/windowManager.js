@@ -578,6 +578,18 @@ export class WindowManager {
         // Spawn logic: under main control if possible
         this.spawnWindow(windowId);
 
+        // Ensure layout is recalculated so it fits inner content with the new paddings
+        if (height === 'auto') {
+            this.recalculateWindowSize(windowId);
+            setTimeout(() => {
+                if (typeof winElement.adjustHeightForNewContent === 'function') {
+                    winElement.adjustHeightForNewContent();
+                } else {
+                    this.recalculateWindowSize(windowId);
+                }
+            }, 50);
+        }
+
         return winElement;
     }
 
