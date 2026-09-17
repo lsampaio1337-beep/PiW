@@ -142,26 +142,39 @@ export function updateTopbar() {
     const elChallengeText = document.getElementById('current-challenge-text');
     if (elChallengeText) elChallengeText.innerHTML = getChallengeText();
 
+    const bonusCandyContainer = document.getElementById('bonus-candy-container');
     const exclamation = document.getElementById('bonus-candy-exclamation');
-    if (exclamation) {
-        if (state.stats.bonusCandyDefeats >= 250) {
-            exclamation.style.display = 'block';
+    if (bonusCandyContainer && exclamation) {
+        const hasBonusCandy = state.stats.bonusCandyDefeats >= 250;
+
+        if (hasBonusCandy || state.stats.hasSeenBonusCandyIcon) {
+            bonusCandyContainer.style.display = 'inline-block';
+            if (hasBonusCandy) {
+                exclamation.style.display = 'block';
+            } else {
+                exclamation.style.display = 'none';
+            }
         } else {
+            bonusCandyContainer.style.display = 'none';
             exclamation.style.display = 'none';
         }
     }
     const giftContainer = document.getElementById('gift-container');
     const giftNotification = document.getElementById('gift-notification');
     if (giftContainer && giftNotification) {
-        if (state.stats.giftIconUnlocked) {
+        const hasPendingGifts = state.stats.pendingGifts && state.stats.pendingGifts.length > 0;
+
+        if (hasPendingGifts || state.stats.hasSeenGiftIcon || state.stats.giftIconUnlocked) {
             giftContainer.style.display = 'inline-block';
+            if (hasPendingGifts) {
+                giftNotification.style.display = 'block';
+            } else if (!state.stats.hasSeenGiftIcon && state.stats.giftIconUnlocked) {
+                giftNotification.style.display = 'block';
+            } else {
+                giftNotification.style.display = 'none';
+            }
         } else {
             giftContainer.style.display = 'none';
-        }
-
-        if (state.stats.pendingGifts && state.stats.pendingGifts.length > 0) {
-            giftNotification.style.display = 'block';
-        } else {
             giftNotification.style.display = 'none';
         }
     }
