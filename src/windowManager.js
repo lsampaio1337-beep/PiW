@@ -198,6 +198,65 @@ export class WindowManager {
         let originalWidth, originalHeight;
         let originalRatio;
 
+
+        winElement.adjustHeightForNewContent = () => {
+            if (!originalWidth) {
+                initDims();
+                return;
+            }
+
+            const headerH = headerElement ? headerElement.offsetHeight : 0;
+
+            // To find the unscaled content height without removing scaling which causes flicker/warp,
+            // we can temporarily reset width to original, height to auto, and transform to none.
+            const currentWidth = winElement.offsetWidth;
+            const currentScale = currentWidth / originalWidth;
+
+            // Strip scaling temporarily
+            winElement.style.width = originalWidth + 'px';
+            winElement.style.height = 'auto';
+            scalerElement.style.transform = 'none';
+            scalerElement.style.width = 'auto';
+            scalerElement.style.height = 'auto';
+            scalerElement.style.position = 'relative';
+
+            // Need to let browser reflow
+
+            // Force synchronous reflow to measure without visual flicker
+            void winElement.offsetHeight;
+
+            const newOriginalHeight = winElement.offsetHeight - headerH;
+            if (newOriginalHeight > 0) {
+                originalHeight = newOriginalHeight;
+                scalerElement.style.setProperty('--original-height', originalHeight + 'px');
+                originalRatio = originalWidth / originalHeight;
+
+                // Re-apply scale
+                const newScaledContentHeight = originalHeight * currentScale;
+                const newHeight = headerH + newScaledContentHeight;
+
+                // Lock dimensions
+                scalerElement.style.position = 'absolute';
+                scalerElement.style.width = originalWidth + 'px';
+                scalerElement.style.height = originalHeight + 'px';
+                scalerElement.style.transform = `scale(${currentScale})`;
+
+                winElement.style.width = currentWidth + 'px';
+                winElement.style.height = newHeight + 'px';
+
+                if (this.windows.includes(winElement)) {
+                    this.saveWindowData(winElement.id);
+                }
+            }
+
+        };
+
+        winElement.resetResizeDims = () => {
+            originalWidth = 0;
+            originalHeight = 0;
+            initDims();
+        };
+
         const initDims = () => {
             if (!originalWidth) {
                 const headerH = headerElement ? headerElement.offsetHeight : 0;
@@ -300,8 +359,22 @@ export class WindowManager {
         const winElement = document.getElementById(windowId);
         if (!winElement) return;
 
-        // Reset to auto to let content reflow
-        winElement.style.width = '800px';
+        // If the window has already been initialized with scaling, use proportional height adjuster
+        if (typeof winElement.adjustHeightForNewContent === 'function') {
+            winElement.adjustHeightForNewContent();
+            return;
+        }
+
+        let currentWidth = winElement.style.width;
+        if (!currentWidth || currentWidth === 'auto' || currentWidth === '') {
+            if (winElement.offsetWidth > 0) {
+                currentWidth = winElement.offsetWidth + 'px';
+            } else {
+                currentWidth = '800px';
+            }
+        }
+
+        winElement.style.width = currentWidth;
         winElement.style.height = 'auto';
 
         const scalerElement = winElement.querySelector('.window-content-scaler');
@@ -311,11 +384,15 @@ export class WindowManager {
             scalerElement.style.height = 'auto';
             scalerElement.style.position = 'relative';
 
-            // Clear CSS properties so the MutationObserver in _setupResize can capture new heights
             scalerElement.style.removeProperty('--original-width');
             scalerElement.style.removeProperty('--original-height');
 
-            // Delete the saved settings for this window so it doesn't get squished if re-opened
+            if (typeof winElement.resetResizeDims === 'function') {
+                setTimeout(() => {
+                    winElement.resetResizeDims();
+                }, 50);
+            }
+
             if (state.settings && state.settings.windowSettings && state.settings.windowSettings[windowId]) {
                 delete state.settings.windowSettings[windowId];
                 if (window.storageRef) {
