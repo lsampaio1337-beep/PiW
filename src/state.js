@@ -50,6 +50,8 @@ export const state = {
         candyPurchaseHistory: [],
         dailyRewards: { daysClaimed: 0, lastClaimDate: null },
         jigglypuffGrains: 0,
+        hasSeenBonusCandyIcon: false,
+        hasSeenGiftIcon: false,
         hasSeenZzZTutorial: false,
         newRoutes: [],
         hasUnseenMap: false,

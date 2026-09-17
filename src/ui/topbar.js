@@ -142,12 +142,24 @@ export function updateTopbar() {
     const elChallengeText = document.getElementById('current-challenge-text');
     if (elChallengeText) elChallengeText.innerHTML = getChallengeText();
 
+    const bonusCandyContainer = document.getElementById('bonus-candy-container');
     const exclamation = document.getElementById('bonus-candy-exclamation');
-    if (exclamation) {
+    if (bonusCandyContainer && exclamation) {
         if (state.stats.bonusCandyDefeats >= 250) {
-            exclamation.style.display = 'block';
+            bonusCandyContainer.style.display = 'inline-block';
+            if (!state.stats.hasSeenBonusCandyIcon) {
+                exclamation.style.display = 'block';
+            } else {
+                exclamation.style.display = 'none';
+            }
         } else {
-            exclamation.style.display = 'none';
+            if (state.stats.hasSeenBonusCandyIcon) {
+                bonusCandyContainer.style.display = 'inline-block';
+                exclamation.style.display = 'none';
+            } else {
+                bonusCandyContainer.style.display = 'none';
+                exclamation.style.display = 'none';
+            }
         }
     }
     const giftContainer = document.getElementById('gift-container');
@@ -155,14 +167,27 @@ export function updateTopbar() {
     if (giftContainer && giftNotification) {
         if (state.stats.giftIconUnlocked) {
             giftContainer.style.display = 'inline-block';
+            if (!state.stats.hasSeenGiftIcon) {
+                giftNotification.style.display = 'block';
+            } else {
+                if (state.stats.pendingGifts && state.stats.pendingGifts.length > 0) {
+                    giftNotification.style.display = 'block';
+                } else {
+                    giftNotification.style.display = 'none';
+                }
+            }
         } else {
-            giftContainer.style.display = 'none';
-        }
-
-        if (state.stats.pendingGifts && state.stats.pendingGifts.length > 0) {
-            giftNotification.style.display = 'block';
-        } else {
-            giftNotification.style.display = 'none';
+            if (state.stats.hasSeenGiftIcon) {
+                giftContainer.style.display = 'inline-block';
+                if (state.stats.pendingGifts && state.stats.pendingGifts.length > 0) {
+                    giftNotification.style.display = 'block';
+                } else {
+                    giftNotification.style.display = 'none';
+                }
+            } else {
+                giftContainer.style.display = 'none';
+                giftNotification.style.display = 'none';
+            }
         }
     }
 
