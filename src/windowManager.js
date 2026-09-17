@@ -198,7 +198,7 @@ export class WindowManager {
 
 
         winElement.adjustHeightForNewContent = () => {
-            if (!originalWidth) {
+            if (!winElement._originalWidth) {
                 initDims();
                 return;
             }

@@ -40,6 +40,7 @@ import { showPokedex, showDexEntry } from './ui/pokedex.js';
 import { showPokemonStats, showPokemonStatsByUuid, evolvePokemon } from './ui/pokemonStats.js';
 import { showBonusCandyModal } from './ui/bonusCandy.js';
 window.showBonusCandyModal = showBonusCandyModal;
+window.showGiftModal = showGiftModal;
 import { showSettings, updateGameSpeed, addMoney, addXp, exportLog, showAddPokemonModal, forceNextEncounter, activateCheat } from './ui/settings.js';
 import { setupMarket, buyItem, openPokeMarketBuy, renderPokeMarketTab, updateMarketPrices } from './ui/market.js';
 import { showBackpack, renderBackpackTab, setActiveItem, setAutoPotionThreshold } from './ui/backpack/index.js';
@@ -1449,7 +1450,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
         if(!checkCombatLock()) {
             state.stats.hasSeenBonusCandyIcon = true;
             storage.save(state);
-            ui.updateTopbar();
+            updateTopbar();
             showBonusCandyModal();
 
         }
@@ -1470,7 +1471,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
         if(!checkCombatLock()) {
             state.stats.hasSeenGiftIcon = true;
             storage.save(state);
-            ui.updateTopbar();
+            updateTopbar();
             showGiftModal();
 
         }
