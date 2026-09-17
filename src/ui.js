@@ -704,7 +704,17 @@ window.showOakLabModal = function() {
     `;
 
     html += `</div>`;
-    showModal("Tasks & Rewards", html, "window-tasks");
+
+    const overlay = document.getElementById('main-view-inner-modal-overlay');
+    const title = document.getElementById('main-view-inner-modal-title');
+    const content = document.getElementById('main-view-inner-modal-content');
+    if (overlay && title && content) {
+        title.innerText = "Tasks & Rewards";
+        content.innerHTML = html;
+        overlay.style.display = 'flex';
+    } else {
+        showModal("Tasks & Rewards", html, "window-tasks");
+    }
 };
 
 export function renderOakLab() {
