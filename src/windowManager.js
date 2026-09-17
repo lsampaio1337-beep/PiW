@@ -340,7 +340,7 @@ export class WindowManager {
             // Initializing original width if it wasn't set yet
             scalerElement.style.setProperty('--original-width', newOriginalWidth + 'px');
             if (!oldWidth || oldWidth === 'auto') {
-                winElement.style.width = Math.max(900, newOriginalWidth) + 'px';
+                winElement.style.width = Math.max(1100, newOriginalWidth) + 'px';
             }
         }
 
@@ -356,7 +356,7 @@ export class WindowManager {
 
         // Reset to auto to let content reflow
         if (windowId === 'top-bar-window') {
-            winElement.style.width = '900px';
+            winElement.style.width = '1100px';
         } else {
             winElement.style.width = '800px';
         }

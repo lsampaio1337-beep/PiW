@@ -451,6 +451,8 @@ input[type="number"] {
 #top-bar-window {
     /* width: max-content; removed to allow resizing */
     border-radius: 10px;
+    padding-bottom: 20px; /* Space for the resize handle */
+    overflow: visible; /* Prevent handle cutoff */
 }
 
 #top-bar {
