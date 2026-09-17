@@ -239,8 +239,8 @@ const mapCoordinates = {
     "x": 25,
     "y": 66.33
   },
-  "trade_with_a_friend": {
-    "name": "Trade With a Friend",
+  "trade_with_friends_hub": {
+    "name": "Trade With Friends Hub",
     "x": 22.97,
     "y": 62.84
   },

@@ -1507,7 +1507,7 @@ const routes = [
     ]
   },
   {
-    "name": "Trade With a Friend",
+    "name": "Trade With Friends Hub",
     "spawns": [
       {
         "pokemonId": 94,
