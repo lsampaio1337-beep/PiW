@@ -236,7 +236,8 @@ window.cheatProgressChallenge = function(targetAreaId) {
         }
         if (req.earnBadge) {
             // Only give badge if they don't have it yet to prevent duplicates if cheated multiple times
-            if (state.trainer.badges < req.earnBadge.badgeCount) {
+            const hasPending = state.stats.pendingGifts && state.stats.pendingGifts.some(g => g.type === 'badge' && g.gymIndex === req.earnBadge.badgeCount - 1);
+            if (state.trainer.badges < req.earnBadge.badgeCount && !hasPending) {
                  if (!state.stats.pendingGifts) state.stats.pendingGifts = [];
                  state.stats.pendingGifts.push({ type: 'badge', gymName: req.earnBadge.name.replace(' Badge', ''), gymIndex: req.earnBadge.badgeCount - 1 });
                  // Do not auto-increment badges, the gift claim will do it
