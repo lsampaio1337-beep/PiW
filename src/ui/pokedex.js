@@ -61,9 +61,10 @@ export function showPokedex() {
             const hasSeenShiny = state.stats.seenShiniesSpecies && state.stats.seenShiniesSpecies[pData.name];
             const hasCaughtShiny = state.stats.caughtShiniesSpecies && state.stats.caughtShiniesSpecies[pData.name];
 
-            let filter = isCaught ? "none" : "brightness(0)";
-            let cursor = isCaught ? "pointer" : "default";
-            let onClick = isCaught ? `onclick="window.showDexEntry(${i})"` : "";
+            const isRevealed = isCaught || hasCaughtShiny;
+            let filter = isRevealed ? "none" : "brightness(0)";
+            let cursor = isRevealed ? "pointer" : "default";
+            let onClick = isRevealed ? `onclick="window.showDexEntry(${i})"` : "";
 
             let cardClass = "pokedex-card";
             let cardStyle = "width: 80px; text-align: center; font-size: 10px; margin: 2px;";
@@ -140,10 +141,12 @@ export function buildEvolutionLineHtml(pData, state) {
         if (!pd) return "";
 
         const hasEncountered = hasEncounteredSpecies(currentId, state);
-        let filter = hasEncountered ? "none" : "brightness(0)";
-        let cursor = hasEncountered ? "pointer" : "default";
-        let onClick = hasEncountered ? `onclick="window.showDexEntry(${pd.id})"` : "";
-        let displayName = hasEncountered ? pd.name : "???";
+        const hasCaughtShiny = state.stats.caughtShiniesSpecies && state.stats.caughtShiniesSpecies[pd.name];
+        const isRevealed = hasEncountered || hasCaughtShiny;
+        let filter = isRevealed ? "none" : "brightness(0)";
+        let cursor = isRevealed ? "pointer" : "default";
+        let onClick = isRevealed ? `onclick="window.showDexEntry(${pd.id})"` : "";
+        let displayName = isRevealed ? pd.name : "???";
 
         let html = `<div style="display: flex; flex-direction: column; align-items: center; margin: 5px;">
             <img src="Assets/Pokemon Sprites/${pd.id}.png" style="width: 50px; height: 50px; filter: ${filter}; cursor: ${cursor};" ${onClick} title="${displayName}">
