@@ -306,6 +306,7 @@ export class WindowManager {
         // Briefly measure natural width of content without constraints
         const oldScale = scalerElement.style.transform;
         const oldWidth = winElement.style.width;
+        const oldPosition = scalerElement.style.position;
 
         // Temporarily clear constraints to let it flow to natural width
         scalerElement.style.position = 'relative';
@@ -344,7 +345,7 @@ export class WindowManager {
         }
 
         // Restore positioning
-        scalerElement.style.position = 'absolute';
+        scalerElement.style.position = oldPosition;
         scalerElement.style.transform = oldScale;
         scalerElement.style.width = scalerElement.style.getPropertyValue('--original-width');
     }
