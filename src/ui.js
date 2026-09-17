@@ -172,11 +172,7 @@ window.completeChallenge = function(targetAreaId) {
     if (document.getElementById('modal-overlay').style.display !== 'none') {
         window.showChallengesModal(); // refresh modal
     }
-    if (state.stats.pendingGifts && state.stats.pendingGifts.length > 0) {
-        import('./ui/gift.js').then(module => {
-            module.showGiftModal();
-        });
-    }
+
 };
 
 
@@ -243,7 +239,7 @@ window.cheatProgressChallenge = function(targetAreaId) {
             if (state.trainer.badges < req.earnBadge.badgeCount) {
                  if (!state.stats.pendingGifts) state.stats.pendingGifts = [];
                  state.stats.pendingGifts.push({ type: 'badge', gymName: req.earnBadge.name.replace(' Badge', ''), gymIndex: req.earnBadge.badgeCount - 1 });
-                 state.trainer.badges = Math.max(state.trainer.badges, req.earnBadge.badgeCount);
+                 // Do not auto-increment badges, the gift claim will do it
             }
         }
         if (req.defeatCountRoute) {
