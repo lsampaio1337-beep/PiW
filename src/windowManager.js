@@ -198,6 +198,12 @@ export class WindowManager {
         let originalWidth, originalHeight;
         let originalRatio;
 
+        winElement.resetResizeDims = () => {
+            originalWidth = 0;
+            originalHeight = 0;
+            initDims();
+        };
+
         const initDims = () => {
             if (!originalWidth) {
                 const headerH = headerElement ? headerElement.offsetHeight : 0;
@@ -300,8 +306,17 @@ export class WindowManager {
         const winElement = document.getElementById(windowId);
         if (!winElement) return;
 
-        // Reset to auto to let content reflow
-        winElement.style.width = '800px';
+        let currentWidth = winElement.style.width;
+        if (!currentWidth || currentWidth === 'auto' || currentWidth === '') {
+            if (winElement.offsetWidth > 0) {
+                currentWidth = winElement.offsetWidth + 'px';
+            } else {
+                currentWidth = '800px';
+            }
+        }
+
+        // Reset height to auto to let content reflow, but preserve width
+        winElement.style.width = currentWidth;
         winElement.style.height = 'auto';
 
         const scalerElement = winElement.querySelector('.window-content-scaler');
@@ -314,6 +329,13 @@ export class WindowManager {
             // Clear CSS properties so the MutationObserver in _setupResize can capture new heights
             scalerElement.style.removeProperty('--original-width');
             scalerElement.style.removeProperty('--original-height');
+
+            // Force recalculation of original dimensions to lock in the new auto-calculated height
+            if (typeof winElement.resetResizeDims === 'function') {
+                setTimeout(() => {
+                    winElement.resetResizeDims();
+                }, 50);
+            }
 
             // Delete the saved settings for this window so it doesn't get squished if re-opened
             if (state.settings && state.settings.windowSettings && state.settings.windowSettings[windowId]) {
