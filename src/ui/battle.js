@@ -200,7 +200,9 @@ export function updateBattleArena() {
 
                 const elPlayerSprite = document.getElementById('player-sprite');
                 if (elPlayerSprite) {
-                    elPlayerSprite.src = `Assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? leader.id + '_shiny' : leader.id}.png`;
+                    let dittoBg = document.getElementById('player-sprite-ditto-bg');
+                    if (dittoBg) dittoBg.style.display = 'none';
+                    elPlayerSprite.src = `Assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? (leader.transformedIntoId || leader.id) + '_shiny' : (leader.transformedIntoId || leader.id)}.png`;
                     elPlayerSprite.style.display = 'block';
                     applyWalkAnimations(leader, false);
 
@@ -285,7 +287,9 @@ export function updateBattleArena() {
 
                 const elPlayerSprite = document.getElementById('player-sprite');
                 if (elPlayerSprite) {
-                    elPlayerSprite.src = `Assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? leader.id + '_shiny' : leader.id}.png`;
+                    let dittoBg = document.getElementById('player-sprite-ditto-bg');
+                    if (dittoBg) dittoBg.style.display = 'none';
+                    elPlayerSprite.src = `Assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? (leader.transformedIntoId || leader.id) + '_shiny' : (leader.transformedIntoId || leader.id)}.png`;
                     elPlayerSprite.style.display = 'block';
                     applyWalkAnimations(leader, false);
 
@@ -317,6 +321,8 @@ export function updateBattleArena() {
             } else {
                 const elPlayerSprite = document.getElementById('player-sprite');
                 if (elPlayerSprite) elPlayerSprite.style.display = 'none';
+                let dittoBg = document.getElementById('player-sprite-ditto-bg');
+                if (dittoBg) dittoBg.style.display = 'none';
                 const hpContainerPlayer = document.getElementById('player-battle-hp-container');
                 if (hpContainerPlayer) hpContainerPlayer.style.display = 'none';
             }
@@ -325,6 +331,8 @@ export function updateBattleArena() {
              if (elEnemySprite) elEnemySprite.style.display = 'none';
              const elPlayerSprite = document.getElementById('player-sprite');
              if (elPlayerSprite) elPlayerSprite.style.display = 'none';
+             let dittoBg = document.getElementById('player-sprite-ditto-bg');
+             if (dittoBg) dittoBg.style.display = 'none';
              const hpContainerEnemy = document.getElementById('enemy-battle-hp-container');
              if (hpContainerEnemy) hpContainerEnemy.style.display = 'none';
              const hpContainerPlayer = document.getElementById('player-battle-hp-container');

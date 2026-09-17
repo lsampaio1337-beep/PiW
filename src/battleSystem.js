@@ -1015,6 +1015,49 @@ class BattleSystem {
         setTimeout(() => {
             // move fainted pokemon to end of party
             const fainted = this.state.party.shift();
+
+            // Revert Ditto Transformation on Faint
+            if (fainted && fainted.isTransformed && fainted.transformedIntoId) {
+                fainted.isTransformed = false;
+                fainted.transformedIntoId = null;
+                fainted.transformedIntoName = null;
+                fainted.id = 132;
+                fainted.name = 'Ditto';
+
+                const newBase = this.state.config.pokemonData.find(pd => pd.id === 132);
+                if (newBase) {
+                    fainted.types = newBase.types;
+                    fainted.bst = newBase.hp + newBase.atk + newBase.def + newBase.spa + newBase.spd + newBase.spe;
+
+                    // Recalculate stats
+                    fainted.maxHp = Math.floor((((2 * newBase.hp + fainted.ivs.hp) * fainted.level / 100) + fainted.level + 10) * fainted.quality);
+                    fainted.currentStats.atk = Math.floor((((2 * newBase.atk + fainted.ivs.atk) * fainted.level / 100) + 5) * fainted.quality);
+                    fainted.currentStats.def = Math.floor((((2 * newBase.def + fainted.ivs.def) * fainted.level / 100) + 5) * fainted.quality);
+                    fainted.currentStats.spa = Math.floor((((2 * newBase.spa + fainted.ivs.spa) * fainted.level / 100) + 5) * fainted.quality);
+                    fainted.currentStats.spd = Math.floor((((2 * newBase.spd + fainted.ivs.spd) * fainted.level / 100) + 5) * fainted.quality);
+                    fainted.currentStats.spe = Math.floor((((2 * newBase.spe + fainted.ivs.spe) * fainted.level / 100) + 5) * fainted.quality);
+
+                    fainted.currentHp = Math.min(fainted.currentHp, fainted.maxHp);
+
+                    // Moves
+                    let getLearnsetMoves = (pokemonBase, level) => {
+                        let learned = [];
+                        for (let i = 1; i <= level; i++) {
+                            if (pokemonBase.learnset && pokemonBase.learnset[i]) {
+                                const moveNames = pokemonBase.learnset[i];
+                                for (const mName of moveNames) {
+                                    const moveData = this.state.config.moves[mName];
+                                    if (moveData && !learned.find(lm => lm.name === mName)) {
+                                        learned.push(moveData);
+                                    }
+                                }
+                            }
+                        }
+                        return learned.slice(-4);
+                    };
+                    fainted.moves = getLearnsetMoves(newBase, fainted.level);
+                }
+            }
             this.state.party.push(fainted);
 
             this.isFainting = false;
@@ -1339,6 +1382,40 @@ class BattleSystem {
             } else {
                 leader.currentHp = 0;
                 const fainted = this.state.party.shift();
+
+                // Revert Ditto Transformation on Faint
+                if (fainted && fainted.isTransformed && fainted.transformedIntoId) {
+                    fainted.isTransformed = false;
+                    fainted.transformedIntoId = null;
+                    fainted.transformedIntoName = null;
+                    fainted.id = 132;
+                    fainted.name = 'Ditto';
+
+                    const newBase = this.state.config.pokemonData.find(pd => pd.id === 132);
+                    if (newBase) {
+                        fainted.types = newBase.types;
+                        fainted.bst = newBase.hp + newBase.atk + newBase.def + newBase.spa + newBase.spd + newBase.spe;
+                        fainted.maxHp = Math.floor((((2 * newBase.hp + fainted.ivs.hp) * fainted.level / 100) + fainted.level + 10) * fainted.quality);
+                        fainted.currentStats.atk = Math.floor((((2 * newBase.atk + fainted.ivs.atk) * fainted.level / 100) + 5) * fainted.quality);
+                        fainted.currentStats.def = Math.floor((((2 * newBase.def + fainted.ivs.def) * fainted.level / 100) + 5) * fainted.quality);
+                        fainted.currentStats.spa = Math.floor((((2 * newBase.spa + fainted.ivs.spa) * fainted.level / 100) + 5) * fainted.quality);
+                        fainted.currentStats.spd = Math.floor((((2 * newBase.spd + fainted.ivs.spd) * fainted.level / 100) + 5) * fainted.quality);
+                        fainted.currentStats.spe = Math.floor((((2 * newBase.spe + fainted.ivs.spe) * fainted.level / 100) + 5) * fainted.quality);
+                        fainted.currentHp = Math.min(fainted.currentHp, fainted.maxHp);
+
+                        let learned = [];
+                        for (let i = 1; i <= fainted.level; i++) {
+                            if (newBase.learnset && newBase.learnset[i]) {
+                                for (const mName of newBase.learnset[i]) {
+                                    const moveData = this.state.config.moves[mName];
+                                    if (moveData && !learned.find(lm => lm.name === mName)) learned.push(moveData);
+                                }
+                            }
+                        }
+                        fainted.moves = learned.slice(-4);
+                    }
+                }
+
                 this.state.party.push(fainted);
             }
 
