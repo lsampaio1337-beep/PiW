@@ -15,6 +15,15 @@ window.claimPendingGift = function(index) {
         state.trainer.badges++;
     }
 
+    if (!state.stats.claimedGifts) {
+        state.stats.claimedGifts = [];
+        // For backwards compatibility, populate existing badges
+        for (let i = 0; i < state.trainer.badges - (gift.type === 'badge' ? 1 : 0); i++) {
+            state.stats.claimedGifts.push({ type: 'badge', gymIndex: i });
+        }
+    }
+    state.stats.claimedGifts.push(gift);
+
     state.stats.pendingGifts.splice(index, 1);
 
     showGiftModal(); // refresh modal
@@ -58,21 +67,43 @@ export function showGiftModal() {
         html += `<h3 style="margin-bottom: 10px; color: #aaa;">No Pending Gifts</h3>`;
     }
 
-    // Check collected gifts (badges)
-    const collectedBadges = state.trainer.badges || 0;
-    if (collectedBadges > 0) {
+    // Backwards compatibility for collected gifts
+    if (!state.stats.claimedGifts && state.trainer.badges > 0) {
+        state.stats.claimedGifts = [];
+        for (let i = 0; i < state.trainer.badges; i++) {
+            state.stats.claimedGifts.push({ type: 'badge', gymIndex: i });
+        }
+    }
+
+    // Check collected gifts (items and badges)
+    const claimed = state.stats.claimedGifts || [];
+    if (claimed.length > 0) {
         html += `<hr style="border: 1px solid #444; margin: 20px 0;">`;
         html += `<h3 style="margin-bottom: 10px;">Collected Gifts</h3>`;
         html += `<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">`;
 
-        for (let i = 0; i < collectedBadges; i++) {
-            const badgeNum = i + 1;
-            html += `
-                <div style="padding: 10px; border: 1px solid #444; border-radius: 5px; background: rgba(0,0,0,0.2);">
-                    <img src="./Assets/Badges/Badge Kanto ${badgeNum}.png" style="width: 50px; height: 50px; filter: drop-shadow(0 0 5px gold);">
-                </div>
-            `;
-        }
+        claimed.forEach((gift) => {
+            if (gift.type === 'badge') {
+                const badgeNum = gift.gymIndex + 1;
+                html += `
+                    <div style="padding: 10px; border: 1px solid #444; border-radius: 5px; background: rgba(0,0,0,0.2);">
+                        <img src="./Assets/Badges/Badge Kanto ${badgeNum}.png" style="width: 50px; height: 50px; filter: drop-shadow(0 0 5px gold);" title="${gift.gymName ? gift.gymName + ' Badge' : 'Badge'}">
+                    </div>
+                `;
+            } else if (gift.type === 'item') {
+                let imgPath = gift.item.includes('Potion') ? `Assets/Items/Potions/${gift.item}.png` :
+                              gift.item.includes('Stone') ? `Assets/Items/Stones/${gift.item}.png` :
+                              `Assets/Items/Balls/${gift.item}.png`;
+                html += `
+                    <div style="padding: 10px; border: 1px solid #444; border-radius: 5px; background: rgba(0,0,0,0.2);">
+                        <div style="position: relative; display: inline-block;">
+                            <img src="${imgPath}" style="width: 50px; height: 50px;" title="${gift.item}">
+                            ${gift.count > 1 ? `<span style="position: absolute; bottom: -5px; right: -5px; background: rgba(0,0,0,0.8); color: white; padding: 2px 5px; border-radius: 10px; font-size: 12px; font-weight: bold;">x${gift.count}</span>` : ''}
+                        </div>
+                    </div>
+                `;
+            }
+        });
 
         html += `</div>`;
     }
