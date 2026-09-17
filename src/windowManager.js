@@ -208,7 +208,17 @@ export class WindowManager {
             // To find the unscaled content height without removing scaling which causes flicker/warp,
             // we can temporarily reset width to original, height to auto, and transform to none.
             const currentWidth = winElement.offsetWidth;
-            const currentScale = currentWidth / winElement._originalWidth;
+
+            let contentContainer = winElement.querySelector('.window-content-container');
+            let horizontalPadding = 0;
+            let verticalPadding = 0;
+            if (contentContainer) {
+                const style = window.getComputedStyle(contentContainer);
+                horizontalPadding = parseFloat(style.paddingLeft || 0) + parseFloat(style.paddingRight || 0);
+                verticalPadding = parseFloat(style.paddingTop || 0) + parseFloat(style.paddingBottom || 0);
+            }
+
+            const currentScale = (currentWidth - horizontalPadding) / winElement._originalWidth;
 
             // Strip scaling temporarily
             winElement.style.width = winElement._originalWidth + 'px';
@@ -233,7 +243,7 @@ export class WindowManager {
 
                 // Re-apply scale
                 const newScaledContentHeight = winElement._originalHeight * currentScale;
-                const newHeight = headerH + newScaledContentHeight;
+                const newHeight = headerH + newScaledContentHeight + verticalPadding;
 
                 // Lock dimensions
                 scalerElement.style.position = 'absolute';
@@ -262,8 +272,16 @@ export class WindowManager {
                 const headerH = headerElement ? headerElement.offsetHeight : 0;
 
                 if (winElement.style.display !== 'none' && winElement.offsetWidth > 0) {
-                    winElement._originalWidth = winElement.offsetWidth;
-                    winElement._originalHeight = winElement.offsetHeight - headerH;
+                    let contentContainer = winElement.querySelector('.window-content-container');
+                    let horizontalPadding = 0;
+                    let verticalPadding = 0;
+                    if (contentContainer) {
+                        const style = window.getComputedStyle(contentContainer);
+                        horizontalPadding = parseFloat(style.paddingLeft || 0) + parseFloat(style.paddingRight || 0);
+                        verticalPadding = parseFloat(style.paddingTop || 0) + parseFloat(style.paddingBottom || 0);
+                    }
+                    winElement._originalWidth = winElement.offsetWidth - horizontalPadding;
+                    winElement._originalHeight = winElement.offsetHeight - headerH - verticalPadding;
                     let maxH = parseInt(winElement.style.maxHeight);
                     if (!isNaN(maxH)) {
                          let actualContentHeight = scalerElement ? (scalerElement.scrollHeight || winElement._originalHeight) : winElement._originalHeight;
@@ -310,9 +328,20 @@ export class WindowManager {
 
             if (winElement._originalWidth && winElement._originalRatio) {
                 const headerH = headerElement ? headerElement.offsetHeight : 0;
-                const scale = newWidth / winElement._originalWidth;
+
+                let contentContainer = winElement.querySelector('.window-content-container');
+                let horizontalPadding = 0;
+                let verticalPadding = 0;
+                if (contentContainer) {
+                    const style = window.getComputedStyle(contentContainer);
+                    horizontalPadding = parseFloat(style.paddingLeft || 0) + parseFloat(style.paddingRight || 0);
+                    verticalPadding = parseFloat(style.paddingTop || 0) + parseFloat(style.paddingBottom || 0);
+                }
+
+                const currentContentWidth = newWidth - horizontalPadding;
+                const scale = currentContentWidth / winElement._originalWidth;
                 const newContentHeight = winElement._originalHeight * scale;
-                let newHeight = headerH + newContentHeight;
+                let newHeight = headerH + newContentHeight + verticalPadding;
 
                 winElement.style.width = newWidth + 'px';
                 winElement.style.height = newHeight + 'px';

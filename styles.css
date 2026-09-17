@@ -514,8 +514,15 @@ input[type="number"] {
     box-sizing: border-box;
 }
 
-#window-map .window-content-container {
+#window-map .window-content-container,
+#main-view-window .window-content-container,
+#party-window .window-content-container {
     padding: 0 !important;
+}
+
+#window-settings .window-content-container {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
 }
 
 .window-content-scaler {
