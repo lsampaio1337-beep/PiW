@@ -22,11 +22,12 @@ body {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     margin: 0 auto;
-    width: min(80vw, 150vh);
+    width: 100%;
     aspect-ratio: 15 / 1;
-    max-width: 1000px;
+    max-width: none;
     max-height: 80px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
 }
 
 #nav-buttons {
@@ -449,18 +450,16 @@ input[type="number"] {
 }
 
 #top-bar-window {
-    /* width: max-content; removed to allow resizing */
     border-radius: 10px;
-    padding-bottom: 20px; /* Space for the resize handle */
-    overflow: visible; /* Prevent handle cutoff */
 }
 
 #top-bar {
     border-bottom: none;
     margin: 0;
-    width: auto;
+    width: 100%;
     padding: 10px;
     border-radius: 0;
+    box-sizing: border-box;
 }
 
 #party-window {

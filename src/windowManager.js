@@ -296,6 +296,7 @@ export class WindowManager {
 
 
 
+
     autoAdjustWidth(windowId) {
         const winElement = document.getElementById(windowId);
         if (!winElement) return;
