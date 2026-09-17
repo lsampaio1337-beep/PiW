@@ -510,6 +510,12 @@ input[type="number"] {
     position: relative;
     overflow: hidden;
     width: 100%;
+    padding: 5% !important;
+    box-sizing: border-box;
+}
+
+#window-map .window-content-container {
+    padding: 0 !important;
 }
 
 .window-content-scaler {
