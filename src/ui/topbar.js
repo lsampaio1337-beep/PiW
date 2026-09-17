@@ -146,8 +146,15 @@ export function updateTopbar() {
     const exclamation = document.getElementById('bonus-candy-exclamation');
     if (exclamation && bonusCandyContainer) {
         if (state.stats.bonusCandyDefeats >= 250) {
-            exclamation.style.display = 'block';
             bonusCandyContainer.style.display = 'inline-block';
+            if (!state.stats.hasSeenBonusCandyIcon) {
+                exclamation.style.display = 'block';
+            } else {
+                exclamation.style.display = 'none';
+            }
+        } else if (state.stats.hasSeenBonusCandyIcon) {
+            bonusCandyContainer.style.display = 'inline-block';
+            exclamation.style.display = 'none';
         } else {
             exclamation.style.display = 'none';
             bonusCandyContainer.style.display = 'none';
@@ -157,8 +164,15 @@ export function updateTopbar() {
     const giftNotification = document.getElementById('gift-notification');
     if (giftContainer && giftNotification) {
         if (state.stats.pendingGifts && state.stats.pendingGifts.length > 0) {
-            giftNotification.style.display = 'block';
             giftContainer.style.display = 'inline-block';
+            if (!state.stats.hasSeenGiftIcon) {
+                giftNotification.style.display = 'block';
+            } else {
+                giftNotification.style.display = 'none';
+            }
+        } else if (state.stats.hasSeenGiftIcon) {
+            giftContainer.style.display = 'inline-block';
+            giftNotification.style.display = 'none';
         } else {
             giftNotification.style.display = 'none';
             giftContainer.style.display = 'none';
