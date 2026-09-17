@@ -22,11 +22,12 @@ body {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     margin: 0 auto;
-    width: min(80vw, 150vh);
+    width: 100%;
     aspect-ratio: 15 / 1;
-    max-width: 1000px;
+    max-width: none;
     max-height: 80px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
 }
 
 #nav-buttons {
@@ -88,7 +89,6 @@ input[type="number"] {
 
 .party-slot {
     background: rgba(0,0,0,0.2);
-    margin-bottom: 10px;
     padding: 5px;
     border-radius: 4px;
     cursor: pointer;
@@ -101,8 +101,17 @@ input[type="number"] {
     height: 40px;
 }
 
+#party-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 #day-care {
-    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
     border-top: 1px solid #fff;
     padding-top: 10px;
 }
@@ -450,16 +459,16 @@ input[type="number"] {
 }
 
 #top-bar-window {
-    width: max-content;
     border-radius: 10px;
 }
 
 #top-bar {
     border-bottom: none;
     margin: 0;
-    width: auto;
+    width: 100%;
     padding: 10px;
     border-radius: 0;
+    box-sizing: border-box;
 }
 
 #party-window {
