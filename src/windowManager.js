@@ -300,8 +300,17 @@ export class WindowManager {
         const winElement = document.getElementById(windowId);
         if (!winElement) return;
 
+        let currentWidth = winElement.style.width;
+        if (!currentWidth || currentWidth === 'auto' || currentWidth === '') {
+            if (winElement.offsetWidth > 0) {
+                currentWidth = winElement.offsetWidth + 'px';
+            } else {
+                currentWidth = '800px';
+            }
+        }
+
         // Reset to auto to let content reflow
-        winElement.style.width = '800px';
+        winElement.style.width = currentWidth;
         winElement.style.height = 'auto';
 
         const scalerElement = winElement.querySelector('.window-content-scaler');
