@@ -170,7 +170,7 @@ window.completeChallenge = function(targetAreaId) {
     }
 
     updateUI();
-    if (document.getElementById('modal-overlay').style.display !== 'none') {
+    if (document.getElementById('window-challenges')) {
         window.showChallengesModal(); // refresh modal
     }
 
@@ -258,7 +258,7 @@ window.cheatProgressChallenge = function(targetAreaId) {
         }
     }
         if (window.updateUI) window.updateUI();
-    if (document.getElementById('modal-overlay').style.display !== 'none') {
+    if (document.getElementById('window-challenges')) {
         window.showChallengesModal();
     }
 
@@ -284,7 +284,7 @@ window.showChallengesModal = function() {
 
     if (!state.config.unlocks) return;
 
-    let html = `<div id="challenges-content-wrapper" style="display:flex; flex-direction:column; gap:15px; text-align:left; padding-right: 10px; padding-bottom: 15px; overflow-y: auto;">`;
+    let html = `<div id="challenges-content-wrapper" style="display:flex; flex-direction:column; gap:15px; text-align:left; padding: 5% 0; overflow-y: auto;">`;
 
     // Active Challenges Sector
     let activeChallengesCount = state.stats.activeChallenges ? state.stats.activeChallenges.length : 0;
@@ -575,7 +575,7 @@ window.showOakLabModal = function() {
         renderOakLab(); // Clear the notification from the lobby button
     }
 
-    let html = `<div style="display:flex; flex-direction:column; gap:15px; text-align:left; padding-right: 10px; padding-bottom: 15px; height: 100%; overflow-y: auto;">`;
+    let html = `<div style="display:flex; flex-direction:column; gap:15px; text-align:left; padding: 5% 0; height: 100%; overflow-y: auto;">`;
 
     const renderActiveTask = (type, currentVal, tierIdx, taskList) => {
         if (tierIdx >= taskList.length) {
