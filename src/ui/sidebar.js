@@ -6,8 +6,6 @@ import * as mathEngine from "../mathEngine.js";
 // they need to be defined elsewhere and attached to window, or attached here.
 // Let's attach them in the main ui.js or where appropriate.
 
-let lastTeamCount = -1;
-
 export function updateSidebar() {
     const partyDiv = document.getElementById('party-list');
     if (!partyDiv) return;
@@ -100,36 +98,20 @@ export function updateSidebar() {
         partyDiv.appendChild(d);
     });
 
-
     // Day Care UI updates
     const dayCareContainer = document.getElementById('day-care');
-    let dayCareCount = 0;
     if (state.dayCareRef && dayCareContainer) {
-        if (state.dayCareRef.slot1.pokemon) dayCareCount++;
-        if (state.dayCareRef.slot2.pokemon) dayCareCount++;
-
         renderDayCareSlot(document.getElementById('dc-slot1'), state.dayCareRef.slot1.pokemon, state.dayCareRef.slot1.battles, state.dayCareRef.slot1.requiredBattles, 'breed');
         renderDayCareSlot(document.getElementById('dc-slot2'), state.dayCareRef.slot2.pokemon, state.dayCareRef.slot2.battles, state.dayCareRef.slot2.requiredBattles, 'train');
 
         // Hide the entire day care container if both slots are empty
-        if (dayCareCount === 0) {
+        if (!state.dayCareRef.slot1.pokemon && !state.dayCareRef.slot2.pokemon) {
             dayCareContainer.style.display = 'none';
         } else {
             dayCareContainer.style.display = 'block';
         }
     }
-
-    const currentTeamCount = state.party.length + dayCareCount;
-    if (lastTeamCount !== -1 && currentTeamCount !== lastTeamCount) {
-        if (window.windowManager) {
-            setTimeout(() => {
-                window.windowManager.recalculateWindowSize('party-window');
-            }, 10);
-        }
-    }
-    lastTeamCount = currentTeamCount;
 }
-
 
 function renderDayCareSlot(container, p, battles, maxBattles, type) {
     if (!container) return;
