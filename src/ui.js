@@ -255,8 +255,26 @@ window.cheatProgressChallenge = function(targetAreaId) {
             state.stats.defeatedBosses["Champion Rival"] = true;
         }
     }
-    window.completeChallenge(targetAreaId);
-    if (window.updateUI) window.updateUI();
+        if (window.updateUI) window.updateUI();
+    if (document.getElementById('modal-overlay').style.display !== 'none') {
+        window.showChallengesModal();
+    }
+
+    // Find the Complete button in the modal and click it
+    setTimeout(() => {
+        const modal = document.getElementById('window-challenges');
+        if (modal) {
+            const completeBtns = Array.from(modal.querySelectorAll('button')).filter(btn => btn.innerText.includes('Complete'));
+            if (completeBtns.length > 0) {
+                // Find the specific complete button for this area
+                const safeAreaId = targetAreaId.replace(/'/g, "\\'");
+                const specificBtn = completeBtns.find(btn => btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(safeAreaId));
+                if (specificBtn) specificBtn.click();
+                else completeBtns[0].click();
+            }
+        }
+    }, 100);
+
 };
 
 window.showChallengesModal = function() {
@@ -264,7 +282,7 @@ window.showChallengesModal = function() {
 
     if (!state.config.unlocks) return;
 
-    let html = `<div style="display:flex; flex-direction:column; gap:15px; text-align:left; padding-right: 10px; padding-bottom: 15px; height: 100%; overflow-y: auto;">`;
+    let html = `<div style="display:flex; flex-direction:column; gap:15px; text-align:left; padding-right: 10px; padding-bottom: 15px; max-height: 800px; overflow-y: auto;">`;
 
     // Active Challenges Sector
     let activeChallengesCount = state.stats.activeChallenges ? state.stats.activeChallenges.length : 0;
@@ -364,10 +382,7 @@ window.showChallengesModal = function() {
     html += `</div>`;
 
     showModal("Progress Challenges", html, "window-challenges");
-    const win = document.getElementById("window-challenges");
-    if (win) {
-        win.style.maxHeight = '800px';
-    }
+
     if (window.windowManager) window.windowManager.recalculateWindowSize('window-challenges');
 };
 window.dragOver = dragOver;
