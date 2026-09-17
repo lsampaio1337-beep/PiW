@@ -460,6 +460,13 @@ export class WindowManager {
         // Reset to auto to let content reflow
         if (windowId === 'top-bar-window') {
             winElement.style.width = '1100px';
+        } else if (windowId === 'party-window') {
+            // Keep current width for party window to prevent height calc issues
+            const currentWidth = winElement.style.width;
+            if (!currentWidth || currentWidth === 'auto') {
+                winElement.style.width = '250px';
+            }
+            // else leave it as currentWidth
         } else {
             winElement.style.width = '800px';
         }
