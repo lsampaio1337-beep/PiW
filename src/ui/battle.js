@@ -124,12 +124,8 @@ export function updateBattleArena() {
                 elEnemySprite.style.display = 'block';
                 applyWalkAnimations(enemy, true);
 
-                let baseBottom = 15; // 100 - 85
-                if (enemy.types.includes('Water')) baseBottom = 10; // 100 - 90
-                if (enemy.types.includes('Flying') || enemy.types.includes('Wind')) baseBottom = 25; // 100 - 75
-
-                elEnemySide.style.top = 'auto';
-                elEnemySide.style.bottom = `${baseBottom}%`;
+                elEnemySide.style.top = '50%';
+                elEnemySide.style.bottom = 'auto';
 
                 if (battleSystem.isSliding) {
                     if (elEnemySide.dataset.sliding !== 'true') {
@@ -168,13 +164,9 @@ export function updateBattleArena() {
             const elPlayerSide = document.getElementById('player-side');
             if (leader && elPlayerSide) {
 
-                let baseBottom = 15; // 100 - 85
-                if (leader.types.includes('Water')) baseBottom = 10; // 100 - 90
-                if (leader.types.includes('Flying') || leader.types.includes('Wind')) baseBottom = 25; // 100 - 75
-
-                elPlayerSide.style.top = 'auto';
-                elPlayerSide.style.bottom = `${baseBottom}%`;
-                elPlayerSide.style.left = '20%';
+                elPlayerSide.style.top = '50%';
+                elPlayerSide.style.bottom = 'auto';
+                elPlayerSide.style.left = '25%';
 
                 const hpContainerPlayer = document.getElementById('player-battle-hp-container');
                 const hpBarPlayer = document.getElementById('player-battle-hp-bar');
@@ -244,8 +236,8 @@ export function updateBattleArena() {
                 elEnemySprite.style.display = 'block';
                 elEnemySide.style.transition = 'none';
                 elEnemySide.style.left = '35%'; // Matching active battle destination
-                elEnemySide.style.top = 'auto';
-                elEnemySide.style.bottom = '15%'; // default
+                elEnemySide.style.top = '50%';
+                elEnemySide.style.bottom = 'auto';
                 if (hpContainerEnemy) {
                     hpContainerEnemy.style.transition = 'none';
                     hpContainerEnemy.style.left = '35%';
@@ -255,13 +247,10 @@ export function updateBattleArena() {
             const leader = state.party[0];
             const elPlayerSide = document.getElementById('player-side');
             if (leader && elPlayerSide) {
-                let baseBottom = 15; // 100 - 85
-                if (leader.types.includes('Water')) baseBottom = 10; // 100 - 90
-                if (leader.types.includes('Flying') || leader.types.includes('Wind')) baseBottom = 25; // 100 - 75
 
-                elPlayerSide.style.top = 'auto';
-                elPlayerSide.style.bottom = `${baseBottom}%`;
-                elPlayerSide.style.left = '20%';
+                elPlayerSide.style.top = '50%';
+                elPlayerSide.style.bottom = 'auto';
+                elPlayerSide.style.left = '25%';
 
                 const hpContainerPlayer = document.getElementById('player-battle-hp-container');
                 const hpBarPlayer = document.getElementById('player-battle-hp-bar');
@@ -363,19 +352,22 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
     const ghostContainer = document.createElement('div');
     ghostContainer.style.position = 'absolute';
     ghostContainer.style.left = '35%';
-    ghostContainer.style.transform = 'translateX(-50%)';
+    ghostContainer.style.transform = 'translate(-50%, -50%)';
     ghostContainer.style.zIndex = '50';
     ghostContainer.style.opacity = '1';
 
-    let baseBottom = 10;
-    if (activeEncounter.types && activeEncounter.types.includes('Water')) baseBottom = 5;
-    if (activeEncounter.types && (activeEncounter.types.includes('Flying') || activeEncounter.types.includes('Wind'))) baseBottom = 20;
-    ghostContainer.style.bottom = `${baseBottom}%`;
+    ghostContainer.style.top = '50%';
+    ghostContainer.style.bottom = 'auto';
+    ghostContainer.style.height = '50%'; // Match sprite container height
+    ghostContainer.style.display = 'flex';
+    ghostContainer.style.flexDirection = 'column';
+    ghostContainer.style.alignItems = 'center';
 
     // The image itself
     const ghost = document.createElement('img');
     ghost.src = `Assets/Pokemon Sprites/${activeEncounter.qualityName === 'Shiny' ? activeEncounter.id + '_shiny' : activeEncounter.id}.png`;
-    ghost.style.height = '35vh';
+    ghost.style.height = '100%';
+    ghost.style.objectFit = 'contain';
     ghostContainer.appendChild(ghost);
 
     // Recreate bubbles for ghost if it's water type
@@ -400,10 +392,12 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
         ball.src = `Assets/Items/Balls/${ballResult.ballName}.png`;
         ball.style.position = 'absolute';
         ball.style.left = '35%';
-        ball.style.bottom = `${baseBottom + 15}%`; // Hover above ghost
-        ball.style.transform = 'translateX(-50%)';
-        ball.style.width = '40px'; // fixed size for ball
-        ball.style.height = '40px';
+        ball.style.top = `50%`;
+        ball.style.bottom = 'auto'; // Reset bottom
+        ball.style.transform = 'translate(-50%, -50%)';
+        ball.style.width = '25%';
+        ball.style.height = '25%';
+        ball.style.objectFit = 'contain';
         ball.style.zIndex = '51';
         arena.appendChild(ball);
     }
@@ -428,12 +422,12 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
             shakeCount++;
             let rotation = (shakeCount % 2 === 0) ? 15 : -15;
             if (shakeCount % 10 === 0) rotation = 0; // brief pause
-            ball.style.transform = `translateX(-50%) rotate(${rotation}deg)`;
+            ball.style.transform = `translate(-50%, -50%) rotate(${rotation}deg)`;
         }, 150);
 
         setTimeout(() => {
             clearInterval(shakeInterval);
-            ball.style.transform = 'translateX(-50%) rotate(0deg)';
+            ball.style.transform = 'translate(-50%, -50%) rotate(0deg)';
 
             // 3s mark: decide outcome
             if (ballResult.caught) {
@@ -516,18 +510,16 @@ export function showDamage(target, amount, isCrit, moveName = '', moveType = 'No
     dmgNode.style.zIndex = '100';
     dmgNode.style.whiteSpace = 'nowrap';
 
-    // Position relatively to the parent container of the image
-    const rect = img.getBoundingClientRect();
-    const parentRect = img.parentElement.getBoundingClientRect();
-
-    dmgNode.style.left = (rect.left - parentRect.left + (rect.width / 2) - 20) + 'px'; // -20 to center text slightly better
-    dmgNode.style.top = (rect.top - parentRect.top) + 'px';
+    // Position relatively to the parent container of the image using percentages
+    dmgNode.style.left = '50%'; // Center horizontally
+    dmgNode.style.top = '10%'; // Top of the image (relative to sprite container)
+    dmgNode.style.transform = 'translate(-50%, -50%)'; // Ensure exact centering
 
     img.parentElement.appendChild(dmgNode);
 
     // Animate up and fade out
     setTimeout(() => {
-        dmgNode.style.top = (parseInt(dmgNode.style.top) - 40) + 'px';
+        dmgNode.style.top = '-10%'; // Float up relative to the container
     }, 50);
 
     setTimeout(() => {
@@ -613,19 +605,23 @@ export function playCombatAnimations(targetSide, moveType, duration) {
         easing: 'ease-in-out'
     });
 
+    const atkRect = atkImg.getBoundingClientRect();
+    const defRect = defImg.getBoundingClientRect();
+
+    // Instead of vh, use the scale of the images to determine projectile size roughly
+    const projHeight = atkRect.height * 0.05;
+    const projWidth = projHeight * 2;
+
     // Create projectile
     const proj = document.createElement('div');
     proj.style.position = 'fixed';
-    proj.style.width = '20px';
-    proj.style.height = '10px';
+    proj.style.width = projWidth + 'px';
+    proj.style.height = projHeight + 'px';
     proj.style.backgroundColor = color;
     proj.style.borderRadius = '5px';
-    proj.style.boxShadow = `0 0 10px 5px ${color}`;
+    proj.style.boxShadow = `0 0 ${projHeight}px ${projHeight/2}px ${color}`;
     proj.style.zIndex = '999';
     proj.style.pointerEvents = 'none';
-
-    const atkRect = atkImg.getBoundingClientRect();
-    const defRect = defImg.getBoundingClientRect();
 
     // Start at attacker center
     const startX = atkRect.left + atkRect.width / 2;
@@ -655,6 +651,7 @@ export function playCombatAnimations(targetSide, moveType, duration) {
         // Splash Effect
         const splash = document.createElement('div');
         splash.style.position = 'fixed';
+
         // Center the 0x0 div on the target
         splash.style.left = endX + 'px';
         splash.style.top = endY + 'px';
@@ -662,11 +659,11 @@ export function playCombatAnimations(targetSide, moveType, duration) {
         splash.style.height = '0px';
         splash.style.backgroundColor = color; // 100% solid color
         splash.style.borderRadius = '50%';
-        splash.style.boxShadow = `0 0 10px 5px ${color}`;
+        splash.style.boxShadow = `0 0 ${projHeight}px ${projHeight/2}px ${color}`;
         splash.style.zIndex = '999';
         splash.style.pointerEvents = 'none';
 
-        // Phase 1: Grow to 25px
+        // Phase 1: Grow to 25% of sprite height
         splash.style.transition = `all ${duration * 0.15}ms linear`;
 
         document.body.appendChild(splash);
@@ -674,20 +671,22 @@ export function playCombatAnimations(targetSide, moveType, duration) {
         // Trigger reflow
         splash.getBoundingClientRect();
 
-        // Expand to 40x40 from the center
-        splash.style.left = (endX - 20) + 'px';
-        splash.style.top = (endY - 20) + 'px';
-        splash.style.width = '40px';
-        splash.style.height = '40px';
+        // Expand to 25% height of sprite from the center
+        const sSize1 = defRect.height * 0.25;
+        splash.style.left = (endX - sSize1 / 2) + 'px';
+        splash.style.top = (endY - sSize1 / 2) + 'px';
+        splash.style.width = sSize1 + 'px';
+        splash.style.height = sSize1 + 'px';
         splash.style.opacity = '1';
 
-        // Phase 2: Grow to 80px and fade out
+        // Phase 2: Grow to 50% height and fade out
         setTimeout(() => {
             splash.style.transition = `all ${duration * 0.15}ms linear`;
-            splash.style.left = (endX - 40) + 'px';
-            splash.style.top = (endY - 40) + 'px';
-            splash.style.width = '80px';
-            splash.style.height = '80px';
+            const sSize2 = defRect.height * 0.5;
+            splash.style.left = (endX - sSize2 / 2) + 'px';
+            splash.style.top = (endY - sSize2 / 2) + 'px';
+            splash.style.width = sSize2 + 'px';
+            splash.style.height = sSize2 + 'px';
             splash.style.opacity = '0';
         }, duration * 0.15);
 
