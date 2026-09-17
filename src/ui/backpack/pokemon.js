@@ -46,15 +46,9 @@ function renderSlotUI(p, listName, origIndex, isDraggable) {
         transformBtn = `<div onclick="event.stopPropagation(); window.openDittoTransformModal('${p.uuid}')" style="position: absolute; bottom: 2cqw; right: 2cqw; cursor: pointer; background: #9b59b6; color: white; border-radius: 50%; width: 20cqw; height: 20cqw; text-align: center; display: flex; align-items: center; justify-content: center; font-size: 14cqw; font-weight: bold; z-index: 3;" title="Transform">T</div>`;
     }
 
-    let imageHtml = `<img src="${imgSrc}" class="${glowClass}" style="height: 100%; width: 100%; object-fit: contain; z-index: 1;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">`;
-    if (p.isTransformed && p.transformedIntoId) {
-        let dittoImgSrc = `Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? '132_shiny' : '132'}.png`;
-        let targetImgSrc = `Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.transformedIntoId + '_shiny' : p.transformedIntoId}.png`;
-        imageHtml = `
-            <img src="${dittoImgSrc}" class="${glowClass}" style="position: absolute; top: 0; left: 0; height: 100%; width: 100%; object-fit: contain; z-index: 0; opacity: 0.5;">
-            <img src="${targetImgSrc}" class="${glowClass}" style="position: absolute; top: 0; left: 0; height: 100%; width: 100%; object-fit: contain; z-index: 1;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
-        `;
-    }
+    let finalId = p.transformedIntoId || p.id;
+    let finalImgSrc = `Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? finalId + '_shiny' : finalId}.png`;
+    let imageHtml = `<img src="${finalImgSrc}" class="${glowClass}" style="height: 100%; width: 100%; object-fit: contain; z-index: 1;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">`;
 
     return `
         <div class="${slotClass}" ${dataAttr} style="background: #2c3e50; border: 2px solid #00ffff; border-radius: 10px; aspect-ratio: 1 / 1.5; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 4%; box-sizing: border-box; position: relative; container-type: inline-size; overflow: hidden; ${cursorStyle}; width: 100%; ${selectionStyle}" title="Q=${p.quality.toFixed(2)} & ∑IV=${sumIV}" ${dragAttr} ${clickHandler}>
@@ -569,6 +563,25 @@ window.sellSelectedPokemon = function() {
     window.cancelSellMode();
 };
 
+window.selectDittoTransformTarget = function(idStr) {
+    // Un-highlight all
+    const allItems = document.querySelectorAll('.ditto-transform-option');
+    allItems.forEach(el => {
+        el.style.outline = 'none';
+        el.style.background = '#2c3e50';
+    });
+
+    // Highlight selected
+    const selected = document.getElementById('ditto-transform-option-' + idStr);
+    if (selected) {
+        selected.style.outline = '3px solid #00ff00';
+        selected.style.background = 'rgba(0, 255, 0, 0.2)';
+    }
+
+    // Update global state
+    window.dittoSelectedTransformId = parseInt(idStr);
+};
+
 window.openDittoTransformModal = function(uuid) {
     let p = null;
     let location = '';
@@ -593,6 +606,9 @@ window.openDittoTransformModal = function(uuid) {
 
     if (!p) return;
 
+    // Reset global selected target
+    window.dittoSelectedTransformId = null;
+
     let allPokemonHtml = '';
 
     // Combine all arrays
@@ -604,12 +620,23 @@ window.openDittoTransformModal = function(uuid) {
         ...state.safe
     ];
 
+    // Deduplicate and collect IDs
+    const uniqueIds = new Set();
     allArrays.forEach(targetP => {
-        let imgSrc = `Assets/Pokemon Sprites/${targetP.qualityName === 'Shiny' ? targetP.id + '_shiny' : targetP.id}.png`;
+        uniqueIds.add(targetP.id);
+    });
+
+    const sortedIds = Array.from(uniqueIds).sort((a, b) => a - b);
+
+    sortedIds.forEach(id => {
+        const pd = state.config.pokemonData.find(d => d.id === id);
+        if(!pd) return;
+
+        let imgSrc = `Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? id + '_shiny' : id}.png`;
         allPokemonHtml += `
-            <div onclick="window.transformDitto('${uuid}', '${targetP.uuid}')" style="cursor: pointer; background: #2c3e50; border: 2px solid #00ffff; border-radius: 10px; padding: 10px; text-align: center;">
+            <div id="ditto-transform-option-${id}" class="ditto-transform-option" onclick="window.selectDittoTransformTarget('${id}')" style="cursor: pointer; background: #2c3e50; border: 2px solid #00ffff; border-radius: 10px; padding: 10px; text-align: center; transition: all 0.1s;">
                 <img src="${imgSrc}" style="width: 50px; height: 50px; object-fit: contain;">
-                <div style="color: white; font-size: 12px; margin-top: 5px;">${targetP.name}</div>
+                <div style="color: white; font-size: 12px; margin-top: 5px;">${pd.name}</div>
             </div>
         `;
     });
@@ -620,7 +647,11 @@ window.openDittoTransformModal = function(uuid) {
             <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 10px; max-height: 60vh; overflow-y: auto; padding: 10px;">
                 ${allPokemonHtml}
             </div>
-            <button onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-ditto-transform')" style="margin-top: 20px; padding: 5px 15px; background: #e74c3c; color: white; border: none; border-radius: 4px; cursor: pointer;">Cancel</button>
+            <div style="margin-top: 20px; display: flex; justify-content: center; gap: 10px;">
+                <button onclick="window.transformDitto('${uuid}')" style="padding: 10px 20px; background: #2ecc71; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">Choose</button>
+                <button onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-ditto-transform')" style="padding: 10px 20px; background: #e74c3c; color: white; border: none; border-radius: 4px; cursor: pointer;">Cancel</button>
+                <button onclick="window.transformDitto('${uuid}', 132)" style="padding: 10px 20px; background: #f39c12; color: white; border: none; border-radius: 4px; cursor: pointer;">Restore</button>
+            </div>
         </div>
     `;
 
@@ -629,8 +660,11 @@ window.openDittoTransformModal = function(uuid) {
     }
 };
 
-window.transformDitto = function(dittoUuid, targetUuid) {
+window.transformDitto = function(dittoUuid, targetIdOverride) {
     if(window.windowManager) window.windowManager.closeDynamicWindow('window-ditto-transform');
+
+    let targetId = targetIdOverride || window.dittoSelectedTransformId;
+    if (!targetId) return; // No selection made
 
     let p = null;
     const allArrays = [
@@ -646,15 +680,9 @@ window.transformDitto = function(dittoUuid, targetUuid) {
         if (found) { p = found; break; }
     }
 
-    let targetP = null;
-    for (let arr of allArrays) {
-        let found = arr.find(x => x.uuid === targetUuid);
-        if (found) { targetP = found; break; }
-    }
+    if (!p) return;
 
-    if (!p || !targetP) return;
-
-    if (p.uuid === targetUuid || targetP.name === 'Ditto' || targetP.originalName === 'Ditto') {
+    if (targetId === 132) {
         // Revert transformation
         if (p.isTransformed) {
             p.isTransformed = false;
@@ -700,11 +728,13 @@ window.transformDitto = function(dittoUuid, targetUuid) {
         }
     } else {
         // Transform
-        p.isTransformed = true;
-        p.transformedIntoId = targetP.id;
-        p.transformedIntoName = targetP.name;
+        const targetBase = state.config.pokemonData.find(pd => pd.id === targetId);
+        if(!targetBase) return;
 
-        const targetBase = state.config.pokemonData.find(pd => pd.id === targetP.id);
+        p.isTransformed = true;
+        p.transformedIntoId = targetId;
+        p.transformedIntoName = targetBase.name;
+
         if (targetBase) {
             p.types = targetBase.types;
             p.bst = targetBase.hp + targetBase.atk + targetBase.def + targetBase.spa + targetBase.spd + targetBase.spe;

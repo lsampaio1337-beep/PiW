@@ -200,32 +200,9 @@ export function updateBattleArena() {
 
                 const elPlayerSprite = document.getElementById('player-sprite');
                 if (elPlayerSprite) {
-                    if (leader.isTransformed && leader.transformedIntoId) {
-                        elPlayerSprite.parentElement.style.position = 'relative';
-                        let dittoBg = document.getElementById('player-sprite-ditto-bg');
-                        if (!dittoBg) {
-                            dittoBg = document.createElement('img');
-                            dittoBg.id = 'player-sprite-ditto-bg';
-                            dittoBg.style.position = 'absolute';
-                            dittoBg.style.top = '0';
-                            dittoBg.style.left = '0';
-                            dittoBg.style.width = '100%';
-                            dittoBg.style.height = '100%';
-                            dittoBg.style.objectFit = 'contain';
-                            dittoBg.style.opacity = '0.5';
-                            dittoBg.style.zIndex = '1';
-                            // scaleX(-1) if player sprite is flipped? The container or image itself handles it via CSS/baseTransform.
-                            elPlayerSprite.parentElement.appendChild(dittoBg);
-                        }
-                        dittoBg.src = `Assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? '132_shiny' : '132'}.png`;
-                        dittoBg.style.display = 'block';
-                        elPlayerSprite.style.zIndex = '2';
-                        elPlayerSprite.style.position = 'relative';
-                    } else {
-                        let dittoBg = document.getElementById('player-sprite-ditto-bg');
-                        if (dittoBg) dittoBg.style.display = 'none';
-                    }
-                    elPlayerSprite.src = `Assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? leader.id + '_shiny' : leader.id}.png`;
+                    let dittoBg = document.getElementById('player-sprite-ditto-bg');
+                    if (dittoBg) dittoBg.style.display = 'none';
+                    elPlayerSprite.src = `Assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? (leader.transformedIntoId || leader.id) + '_shiny' : (leader.transformedIntoId || leader.id)}.png`;
                     elPlayerSprite.style.display = 'block';
                     applyWalkAnimations(leader, false);
 
@@ -310,32 +287,9 @@ export function updateBattleArena() {
 
                 const elPlayerSprite = document.getElementById('player-sprite');
                 if (elPlayerSprite) {
-                    if (leader.isTransformed && leader.transformedIntoId) {
-                        elPlayerSprite.parentElement.style.position = 'relative';
-                        let dittoBg = document.getElementById('player-sprite-ditto-bg');
-                        if (!dittoBg) {
-                            dittoBg = document.createElement('img');
-                            dittoBg.id = 'player-sprite-ditto-bg';
-                            dittoBg.style.position = 'absolute';
-                            dittoBg.style.top = '0';
-                            dittoBg.style.left = '0';
-                            dittoBg.style.width = '100%';
-                            dittoBg.style.height = '100%';
-                            dittoBg.style.objectFit = 'contain';
-                            dittoBg.style.opacity = '0.5';
-                            dittoBg.style.zIndex = '1';
-                            // scaleX(-1) if player sprite is flipped? The container or image itself handles it via CSS/baseTransform.
-                            elPlayerSprite.parentElement.appendChild(dittoBg);
-                        }
-                        dittoBg.src = `Assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? '132_shiny' : '132'}.png`;
-                        dittoBg.style.display = 'block';
-                        elPlayerSprite.style.zIndex = '2';
-                        elPlayerSprite.style.position = 'relative';
-                    } else {
-                        let dittoBg = document.getElementById('player-sprite-ditto-bg');
-                        if (dittoBg) dittoBg.style.display = 'none';
-                    }
-                    elPlayerSprite.src = `Assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? leader.id + '_shiny' : leader.id}.png`;
+                    let dittoBg = document.getElementById('player-sprite-ditto-bg');
+                    if (dittoBg) dittoBg.style.display = 'none';
+                    elPlayerSprite.src = `Assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? (leader.transformedIntoId || leader.id) + '_shiny' : (leader.transformedIntoId || leader.id)}.png`;
                     elPlayerSprite.style.display = 'block';
                     applyWalkAnimations(leader, false);
 
