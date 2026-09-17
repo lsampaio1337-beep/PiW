@@ -513,6 +513,19 @@ input[type="number"] {
     position: relative;
     overflow: hidden;
     width: 100%;
+    padding: 5% !important;
+    box-sizing: border-box;
+}
+
+#window-map .window-content-container,
+#main-view-window .window-content-container,
+#party-window .window-content-container {
+    padding: 0 !important;
+}
+
+#window-settings .window-content-container {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
 }
 
 .window-content-scaler {
