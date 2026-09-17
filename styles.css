@@ -165,7 +165,7 @@ input[type="number"] {
 .stats-box h4 { margin: 0 0 5px 0; font-size: 14px;}
 
 #enemy-sprite {
-    height: 35vh;
+    height: 50vh;
     min-height: 100px;
     width: auto;
     margin-top: 10px;
@@ -175,7 +175,7 @@ input[type="number"] {
 }
 
 #player-sprite {
-    height: 35vh;
+    height: 50vh;
     min-height: 100px;
     width: auto;
     margin-bottom: 10px;
