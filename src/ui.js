@@ -1155,7 +1155,7 @@ async function init() {
         </div>
     </div>
 `;
-showModal("Sleep Mode", resumeHtml, "window-zzz-resume");
+showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
 
                         document.getElementById('btn-zzz-resume-no').onclick = () => {
                             state.isZzZMode = false;
@@ -1478,7 +1478,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume");
                 </div>
             `;
 
-            showModal("ZzZ Mode", htmlContent, "window-zzz-confirmation");
+            showModal("ZzZ Mode", htmlContent, "window-zzz-confirmation", "460px");
 
             document.getElementById('btn-zzz-no').onclick = () => {
                 if(window.windowManager) window.windowManager.closeDynamicWindow('window-zzz-confirmation');
