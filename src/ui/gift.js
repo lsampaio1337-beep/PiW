@@ -11,6 +11,9 @@ window.claimPendingGift = function(index) {
         if (!state.backpack) state.backpack = {};
         if (!state.backpack[gift.item]) state.backpack[gift.item] = 0;
         state.backpack[gift.item] += gift.count || 1;
+
+        if (!state.stats.claimedGifts) state.stats.claimedGifts = [];
+        state.stats.claimedGifts.push({ type: 'item', item: gift.item, count: gift.count || 1 });
     } else if (gift.type === 'badge') {
         state.trainer.badges++;
     }
@@ -58,9 +61,11 @@ export function showGiftModal() {
         html += `<h3 style="margin-bottom: 10px; color: #aaa;">No Pending Gifts</h3>`;
     }
 
-    // Check collected gifts (badges)
+    // Check collected gifts (badges and items)
     const collectedBadges = state.trainer.badges || 0;
-    if (collectedBadges > 0) {
+    const claimedGifts = state.stats.claimedGifts || [];
+
+    if (collectedBadges > 0 || claimedGifts.length > 0) {
         html += `<hr style="border: 1px solid #444; margin: 20px 0;">`;
         html += `<h3 style="margin-bottom: 10px;">Collected Gifts</h3>`;
         html += `<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">`;
@@ -73,6 +78,20 @@ export function showGiftModal() {
                 </div>
             `;
         }
+
+        claimedGifts.forEach((gift) => {
+            let imgPath = gift.item.includes('Potion') ? `Assets/Items/Potions/${gift.item}.png` :
+                          gift.item.includes('Stone') ? `Assets/Items/Stones/${gift.item}.png` :
+                          `Assets/Items/Balls/${gift.item}.png`;
+            html += `
+                <div style="padding: 10px; border: 1px solid #444; border-radius: 5px; background: rgba(0,0,0,0.2);">
+                    <div style="position: relative; display: inline-block;">
+                        <img src="${imgPath}" style="width: 50px; height: 50px;" title="${gift.item}">
+                        ${gift.count > 1 ? `<span style="position: absolute; bottom: -5px; right: -5px; background: rgba(0,0,0,0.8); color: white; padding: 2px 5px; border-radius: 10px; font-size: 12px; font-weight: bold;">x${gift.count}</span>` : ''}
+                    </div>
+                </div>
+            `;
+        });
 
         html += `</div>`;
     }
