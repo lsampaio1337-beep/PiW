@@ -123,7 +123,14 @@ export function updateSidebar() {
     if (lastTeamCount !== -1 && currentTeamCount !== lastTeamCount) {
         if (window.windowManager) {
             setTimeout(() => {
-                window.windowManager.recalculateWindowSize('party-window');
+                if (lastTeamCount === 0 && currentTeamCount > 0) {
+                    window.windowManager.recalculateWindowSize('party-window');
+                } else {
+                    const win = document.getElementById('party-window');
+                    if (win && typeof win.adjustHeightForNewContent === 'function') {
+                        win.adjustHeightForNewContent();
+                    }
+                }
             }, 10);
         }
     }
