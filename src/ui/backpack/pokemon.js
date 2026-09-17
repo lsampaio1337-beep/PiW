@@ -41,6 +41,21 @@ function renderSlotUI(p, listName, origIndex, isDraggable) {
     else if (p.qualityName === "Uncommon") glowClass = "glow-uncommon";
     else if (p.qualityName === "Regular") glowClass = "glow-regular";
 
+    let transformBtn = '';
+    if (p.name === 'Ditto') {
+        transformBtn = `<div onclick="event.stopPropagation(); window.openDittoTransformModal('${p.uuid}')" style="position: absolute; bottom: 2cqw; right: 2cqw; cursor: pointer; background: #9b59b6; color: white; border-radius: 50%; width: 20cqw; height: 20cqw; text-align: center; display: flex; align-items: center; justify-content: center; font-size: 14cqw; font-weight: bold; z-index: 3;" title="Transform">T</div>`;
+    }
+
+    let imageHtml = `<img src="${imgSrc}" class="${glowClass}" style="height: 100%; width: 100%; object-fit: contain; z-index: 1;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">`;
+    if (p.isTransformed && p.transformedIntoId) {
+        let dittoImgSrc = `Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? '132_shiny' : '132'}.png`;
+        let targetImgSrc = `Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.transformedIntoId + '_shiny' : p.transformedIntoId}.png`;
+        imageHtml = `
+            <img src="${dittoImgSrc}" class="${glowClass}" style="position: absolute; top: 0; left: 0; height: 100%; width: 100%; object-fit: contain; z-index: 0; opacity: 0.5;">
+            <img src="${targetImgSrc}" class="${glowClass}" style="position: absolute; top: 0; left: 0; height: 100%; width: 100%; object-fit: contain; z-index: 1;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
+        `;
+    }
+
     return `
         <div class="${slotClass}" ${dataAttr} style="background: #2c3e50; border: 2px solid #00ffff; border-radius: 10px; aspect-ratio: 1 / 1.5; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 4%; box-sizing: border-box; position: relative; container-type: inline-size; overflow: hidden; ${cursorStyle}; width: 100%; ${selectionStyle}" title="Q=${p.quality.toFixed(2)} & ∑IV=${sumIV}" ${dragAttr} ${clickHandler}>
             <span style="position: absolute; top: 0; left: 0; font-size: 12cqw; background: black; border-bottom-right-radius: 5px; padding: 2cqw; z-index: 2;">${p._tag || ''}</span>
@@ -49,12 +64,13 @@ function renderSlotUI(p, listName, origIndex, isDraggable) {
             <div style="font-size: 13cqw; font-weight: bold; margin-top: 10cqw; margin-bottom: 1cqw; display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.1; z-index: 1; color: white;">${p.name}</div>
 
             <div style="flex: 1; min-height: 0; width: 100%; display: flex; align-items: center; justify-content: center; position: relative; margin-bottom: 1cqw;">
-                <img src="${imgSrc}" class="${glowClass}" style="height: 100%; width: 100%; object-fit: contain; z-index: 1;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
+                ${imageHtml}
             </div>
 
             <div style="font-size: 10cqw; color: #bdc3c7; line-height: 1.1; z-index: 1;">Lv. ${p.level}</div>
             <div style="font-size: 10cqw; color: #f1c40f; line-height: 1.1; z-index: 1;">Q: ${p.quality.toFixed(2)}</div>
             <div style="font-size: 10cqw; color: #3498db; line-height: 1.1; z-index: 1; margin-bottom: 1cqw;">∑IV: ${sumIV}</div>
+            ${transformBtn}
         </div>
     `;
 }
@@ -551,4 +567,189 @@ window.sellSelectedPokemon = function() {
     alert(`Sold ${numSold} Pokemon for $${totalGain}!`);
 
     window.cancelSellMode();
+};
+
+window.openDittoTransformModal = function(uuid) {
+    let p = null;
+    let location = '';
+    let idx = state.party.findIndex(x => x.uuid === uuid);
+    if (idx !== -1) { p = state.party[idx]; location = 'party'; }
+    else {
+        idx = state.breeding.findIndex(x => x.uuid === uuid);
+        if (idx !== -1) { p = state.breeding[idx]; location = 'breeding'; }
+        else {
+            idx = state.training.findIndex(x => x.uuid === uuid);
+            if (idx !== -1) { p = state.training[idx]; location = 'training'; }
+            else {
+                idx = state.storage.findIndex(x => x.uuid === uuid);
+                if (idx !== -1) { p = state.storage[idx]; location = 'storage'; }
+                else {
+                    idx = state.safe.findIndex(x => x.uuid === uuid);
+                    if (idx !== -1) { p = state.safe[idx]; location = 'safe'; }
+                }
+            }
+        }
+    }
+
+    if (!p) return;
+
+    let allPokemonHtml = '';
+
+    // Combine all arrays
+    const allArrays = [
+        ...state.party,
+        ...state.breeding,
+        ...state.training,
+        ...state.storage,
+        ...state.safe
+    ];
+
+    allArrays.forEach(targetP => {
+        let imgSrc = `Assets/Pokemon Sprites/${targetP.qualityName === 'Shiny' ? targetP.id + '_shiny' : targetP.id}.png`;
+        allPokemonHtml += `
+            <div onclick="window.transformDitto('${uuid}', '${targetP.uuid}')" style="cursor: pointer; background: #2c3e50; border: 2px solid #00ffff; border-radius: 10px; padding: 10px; text-align: center;">
+                <img src="${imgSrc}" style="width: 50px; height: 50px; object-fit: contain;">
+                <div style="color: white; font-size: 12px; margin-top: 5px;">${targetP.name}</div>
+            </div>
+        `;
+    });
+
+    const html = `
+        <div style="text-align: center; color: white;">
+            <h3>Select a Pokemon to Transform into</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 10px; max-height: 60vh; overflow-y: auto; padding: 10px;">
+                ${allPokemonHtml}
+            </div>
+            <button onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-ditto-transform')" style="margin-top: 20px; padding: 5px 15px; background: #e74c3c; color: white; border: none; border-radius: 4px; cursor: pointer;">Cancel</button>
+        </div>
+    `;
+
+    if (window.showModal) {
+        window.showModal('Ditto Transform', html, 'window-ditto-transform', '50%', '60%');
+    }
+};
+
+window.transformDitto = function(dittoUuid, targetUuid) {
+    if(window.windowManager) window.windowManager.closeDynamicWindow('window-ditto-transform');
+
+    let p = null;
+    const allArrays = [
+        state.party,
+        state.breeding,
+        state.training,
+        state.storage,
+        state.safe
+    ];
+
+    for (let arr of allArrays) {
+        let found = arr.find(x => x.uuid === dittoUuid);
+        if (found) { p = found; break; }
+    }
+
+    let targetP = null;
+    for (let arr of allArrays) {
+        let found = arr.find(x => x.uuid === targetUuid);
+        if (found) { targetP = found; break; }
+    }
+
+    if (!p || !targetP) return;
+
+    if (p.uuid === targetUuid || targetP.name === 'Ditto' || targetP.originalName === 'Ditto') {
+        // Revert transformation
+        if (p.isTransformed) {
+            p.isTransformed = false;
+            p.transformedIntoId = null;
+            p.transformedIntoName = null;
+            p.id = 132;
+            p.name = 'Ditto';
+
+            const newBase = state.config.pokemonData.find(pd => pd.id === 132);
+            if (newBase) {
+                p.types = newBase.types;
+                p.bst = newBase.hp + newBase.atk + newBase.def + newBase.spa + newBase.spd + newBase.spe;
+
+                // Recalculate stats
+                p.maxHp = Math.floor((((2 * newBase.hp + p.ivs.hp) * p.level / 100) + p.level + 10) * p.quality);
+                p.currentStats.atk = Math.floor((((2 * newBase.atk + p.ivs.atk) * p.level / 100) + 5) * p.quality);
+                p.currentStats.def = Math.floor((((2 * newBase.def + p.ivs.def) * p.level / 100) + 5) * p.quality);
+                p.currentStats.spa = Math.floor((((2 * newBase.spa + p.ivs.spa) * p.level / 100) + 5) * p.quality);
+                p.currentStats.spd = Math.floor((((2 * newBase.spd + p.ivs.spd) * p.level / 100) + 5) * p.quality);
+                p.currentStats.spe = Math.floor((((2 * newBase.spe + p.ivs.spe) * p.level / 100) + 5) * p.quality);
+
+                // Heal by diff
+                p.currentHp = Math.min(p.currentHp, p.maxHp);
+
+                // Moves
+                let getLearnsetMoves = function(pokemonBase, level) {
+                    let learned = [];
+                    for (let i = 1; i <= level; i++) {
+                        if (pokemonBase.learnset && pokemonBase.learnset[i]) {
+                            const moveNames = pokemonBase.learnset[i];
+                            for (const mName of moveNames) {
+                                const moveData = state.config.moves[mName];
+                                if (moveData && !learned.find(lm => lm.name === mName)) {
+                                    learned.push(moveData);
+                                }
+                            }
+                        }
+                    }
+                    return learned.slice(-4);
+                };
+                p.moves = getLearnsetMoves(newBase, p.level);
+            }
+        }
+    } else {
+        // Transform
+        p.isTransformed = true;
+        p.transformedIntoId = targetP.id;
+        p.transformedIntoName = targetP.name;
+
+        const targetBase = state.config.pokemonData.find(pd => pd.id === targetP.id);
+        if (targetBase) {
+            p.types = targetBase.types;
+            p.bst = targetBase.hp + targetBase.atk + targetBase.def + targetBase.spa + targetBase.spd + targetBase.spe;
+
+            // Recalculate stats
+            p.maxHp = Math.floor((((2 * targetBase.hp + p.ivs.hp) * p.level / 100) + p.level + 10) * p.quality);
+            p.currentStats.atk = Math.floor((((2 * targetBase.atk + p.ivs.atk) * p.level / 100) + 5) * p.quality);
+            p.currentStats.def = Math.floor((((2 * targetBase.def + p.ivs.def) * p.level / 100) + 5) * p.quality);
+            p.currentStats.spa = Math.floor((((2 * targetBase.spa + p.ivs.spa) * p.level / 100) + 5) * p.quality);
+            p.currentStats.spd = Math.floor((((2 * targetBase.spd + p.ivs.spd) * p.level / 100) + 5) * p.quality);
+            p.currentStats.spe = Math.floor((((2 * targetBase.spe + p.ivs.spe) * p.level / 100) + 5) * p.quality);
+
+            p.currentHp = Math.min(p.currentHp, p.maxHp);
+
+            // Replicate the moveset logic
+            let getLearnsetMoves = function(pokemonBase, level) {
+                let learned = [];
+                for (let i = 1; i <= level; i++) {
+                    if (pokemonBase.learnset && pokemonBase.learnset[i]) {
+                        const moveNames = pokemonBase.learnset[i];
+                        for (const mName of moveNames) {
+                            const moveData = state.config.moves[mName];
+                            if (moveData && !learned.find(lm => lm.name === mName)) {
+                                learned.push(moveData);
+                            }
+                        }
+                    }
+                }
+                return learned.slice(-4);
+            };
+            p.moves = getLearnsetMoves(targetBase, p.level);
+        }
+    }
+
+    // Attempt to manually save
+    try {
+        if (window.storageRef) {
+            window.storageRef.save(state);
+        }
+    } catch(e) {}
+
+    import('../../ui.js').then(module => {
+        module.updateUI();
+    });
+    import('./index.js').then(module => {
+        module.renderBackpackTab('pokemon');
+    });
 };

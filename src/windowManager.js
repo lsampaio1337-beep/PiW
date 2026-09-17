@@ -262,6 +262,11 @@ export class WindowManager {
                 if (winElement.style.display !== 'none' && winElement.offsetWidth > 0) {
                     winElement._originalWidth = winElement.offsetWidth;
                     winElement._originalHeight = winElement.offsetHeight - headerH;
+                    let maxH = parseInt(winElement.style.maxHeight);
+                    if (!isNaN(maxH)) {
+                         let actualContentHeight = scalerElement ? (scalerElement.scrollHeight || winElement._originalHeight) : winElement._originalHeight;
+                         winElement._originalHeight = Math.min(actualContentHeight, maxH - headerH);
+                    }
                     if (winElement._originalWidth > 0 && winElement._originalHeight > 0) {
                         scalerElement.style.setProperty('--original-width', winElement._originalWidth + 'px');
                         scalerElement.style.setProperty('--original-height', winElement._originalHeight + 'px');
@@ -457,12 +462,22 @@ export class WindowManager {
         const winElement = document.getElementById(windowId);
         if (!winElement) return;
 
-        // Reset to auto to let content reflow
-        if (windowId === 'top-bar-window') {
-            winElement.style.width = '1100px';
-        } else {
-            winElement.style.width = '800px';
+        // If the window has already been initialized with scaling, use proportional height adjuster
+        if (typeof winElement.adjustHeightForNewContent === 'function') {
+            winElement.adjustHeightForNewContent();
+            return;
         }
+
+        let currentWidth = winElement.style.width;
+        if (!currentWidth || currentWidth === 'auto' || currentWidth === '') {
+            if (winElement.offsetWidth > 0) {
+                currentWidth = winElement.offsetWidth + 'px';
+            } else {
+                currentWidth = '800px';
+            }
+        }
+
+        winElement.style.width = currentWidth;
         winElement.style.height = 'auto';
 
         const scalerElement = winElement.querySelector('.window-content-scaler');

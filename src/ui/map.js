@@ -2,6 +2,26 @@ import { state, globals } from '../state.js';
 import { updateUI, switchView } from '../ui.js';
 import { setupMarket } from './market.js';
 
+const parseAreaNames = (id) => {
+    let result = [];
+    if (id.includes(",")) {
+        let parts = id.split(",");
+        let baseRoute = parts[0].replace(/[0-9]+$/, "").trim();
+        result.push(parts[0].replace(/\s*\(.*?\)/, "").trim());
+        for (let i = 1; i < parts.length; i++) {
+            let num = parts[i].trim();
+            if (!isNaN(num)) {
+                result.push((baseRoute + " " + num).replace(/\s*\(.*?\)/, "").trim());
+            } else {
+                result.push(num.replace(/\s*\(.*?\)/, "").trim());
+            }
+        }
+    } else {
+        result.push(id.replace(/\s*\(.*?\)/, "").trim());
+    }
+    return result;
+};
+
 export function showMap() {
     if (state.stats.hasUnseenMap || state.stats.showMapOakNotification) {
         state.stats.hasUnseenMap = false;
@@ -13,10 +33,14 @@ export function showMap() {
     unlockedAreas.add("Professor Oak Lab");
     unlockedAreas.add("PokeCenter & PokeMarket");
     if (state.stats.completedChallengeIds) {
-        state.stats.completedChallengeIds.forEach(id => unlockedAreas.add(id));
+        state.stats.completedChallengeIds.forEach(id => {
+            parseAreaNames(id).forEach(area => unlockedAreas.add(area));
+        });
     }
     if (state.stats.activeChallenges) {
-        state.stats.activeChallenges.forEach(id => unlockedAreas.add(id));
+        state.stats.activeChallenges.forEach(id => {
+            parseAreaNames(id).forEach(area => unlockedAreas.add(area));
+        });
     }
 
     let html = `
@@ -36,7 +60,7 @@ export function showMap() {
             let isClickable = true;
             let hasNewNotification = false;
 
-            if (state.stats.newRoutes && state.stats.newRoutes.includes(locationName)) {
+            if (state.stats.newRoutes && state.stats.newRoutes.some(r => parseAreaNames(r).includes(locationName))) {
                 hasNewNotification = true;
             }
 
@@ -114,8 +138,8 @@ export function showMap() {
 }
 
 export function navigateToLocation(locationName) {
-    if (state.stats.newRoutes && state.stats.newRoutes.includes(locationName)) {
-        state.stats.newRoutes = state.stats.newRoutes.filter(r => r !== locationName);
+    if (state.stats.newRoutes && state.stats.newRoutes.some(r => parseAreaNames(r).includes(locationName))) {
+        state.stats.newRoutes = state.stats.newRoutes.filter(r => !parseAreaNames(r).includes(locationName));
     }
 
     const battleSystem = globals.battleSystem;
@@ -165,7 +189,7 @@ export function navigateToLocation(locationName) {
             btnContainer.style.height = '100%';
 
             const completedChallenges = state.stats.completedChallengeIds || [];
-            const isUnlockedByAreaId = (areaId) => completedChallenges.includes(areaId);
+            const isUnlockedByAreaId = (areaId) => completedChallenges.some(id => parseAreaNames(id).includes(areaId));
 
             let machinesHtml = `
                 <div style="position: absolute; top: 20px; left: 0; width: 100%; text-align: center; z-index: 10; color: white; text-shadow: 2px 2px 4px black; font-size: 24px;">

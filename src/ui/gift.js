@@ -111,4 +111,9 @@ export function showGiftModal() {
     html += `</div>`;
 
     showModal("Gifts", html, "window-gifts");
+    const win = document.getElementById("window-gifts");
+    if (win) {
+        win.style.maxHeight = '800px';
+    }
+    if (window.windowManager) window.windowManager.recalculateWindowSize('window-gifts');
 }

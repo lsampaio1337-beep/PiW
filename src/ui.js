@@ -172,6 +172,7 @@ window.completeChallenge = function(targetAreaId) {
     if (document.getElementById('modal-overlay').style.display !== 'none') {
         window.showChallengesModal(); // refresh modal
     }
+
 };
 
 
@@ -234,7 +235,12 @@ window.cheatProgressChallenge = function(targetAreaId) {
             state.stats.challengeCaughtSpecific[typeKey] = (state.stats.challengeCaughtSpecific[typeKey] || 0) + req.catchByType.count;
         }
         if (req.earnBadge) {
-            state.trainer.badges = Math.max(state.trainer.badges, req.earnBadge.badgeCount);
+            // Only give badge if they don't have it yet to prevent duplicates if cheated multiple times
+            if (state.trainer.badges < req.earnBadge.badgeCount) {
+                 if (!state.stats.pendingGifts) state.stats.pendingGifts = [];
+                 state.stats.pendingGifts.push({ type: 'badge', gymName: req.earnBadge.name.replace(' Badge', ''), gymIndex: req.earnBadge.badgeCount - 1 });
+                 // Do not auto-increment badges, the gift claim will do it
+            }
         }
         if (req.defeatCountRoute) {
             state.stats.challengeRouteDefeats = req.defeatCountRoute.count;
@@ -258,7 +264,7 @@ window.showChallengesModal = function() {
 
     if (!state.config.unlocks) return;
 
-    let html = `<div style="display:flex; flex-direction:column; gap:15px; text-align:left; max-height: 70vh; overflow-y: auto; padding-right: 10px;">`;
+    let html = `<div style="display:flex; flex-direction:column; gap:15px; text-align:left; padding-right: 10px; padding-bottom: 15px; height: 100%; overflow-y: auto;">`;
 
     // Active Challenges Sector
     let activeChallengesCount = state.stats.activeChallenges ? state.stats.activeChallenges.length : 0;
@@ -358,6 +364,11 @@ window.showChallengesModal = function() {
     html += `</div>`;
 
     showModal("Progress Challenges", html, "window-challenges");
+    const win = document.getElementById("window-challenges");
+    if (win) {
+        win.style.maxHeight = '800px';
+    }
+    if (window.windowManager) window.windowManager.recalculateWindowSize('window-challenges');
 };
 window.dragOver = dragOver;
 window.handleDrop = handleDrop;
@@ -538,7 +549,7 @@ window.showOakLabModal = function() {
         renderOakLab(); // Clear the notification from the lobby button
     }
 
-    let html = `<div style="display:flex; flex-direction:column; gap:15px; text-align:left; max-height: 70vh; overflow-y: auto; padding-right: 10px;">`;
+    let html = `<div style="display:flex; flex-direction:column; gap:15px; text-align:left; padding-right: 10px; padding-bottom: 15px; height: 100%; overflow-y: auto;">`;
 
     const renderActiveTask = (type, currentVal, tierIdx, taskList) => {
         if (tierIdx >= taskList.length) {
@@ -714,6 +725,11 @@ window.showOakLabModal = function() {
         overlay.style.display = 'flex';
     } else {
         showModal("Tasks & Rewards", html, "window-tasks");
+    const winTasks = document.getElementById("window-tasks");
+    if (winTasks) {
+        winTasks.style.maxHeight = '800px';
+    }
+    if (window.windowManager) window.windowManager.recalculateWindowSize('window-tasks');
     }
 };
 
