@@ -142,27 +142,26 @@ export function updateTopbar() {
     const elChallengeText = document.getElementById('current-challenge-text');
     if (elChallengeText) elChallengeText.innerHTML = getChallengeText();
 
+    const bonusCandyContainer = document.getElementById('bonus-candy-container');
     const exclamation = document.getElementById('bonus-candy-exclamation');
-    if (exclamation) {
+    if (exclamation && bonusCandyContainer) {
         if (state.stats.bonusCandyDefeats >= 250) {
             exclamation.style.display = 'block';
+            bonusCandyContainer.style.display = 'inline-block';
         } else {
             exclamation.style.display = 'none';
+            bonusCandyContainer.style.display = 'none';
         }
     }
     const giftContainer = document.getElementById('gift-container');
     const giftNotification = document.getElementById('gift-notification');
     if (giftContainer && giftNotification) {
-        if (state.stats.giftIconUnlocked) {
-            giftContainer.style.display = 'inline-block';
-        } else {
-            giftContainer.style.display = 'none';
-        }
-
         if (state.stats.pendingGifts && state.stats.pendingGifts.length > 0) {
             giftNotification.style.display = 'block';
+            giftContainer.style.display = 'inline-block';
         } else {
             giftNotification.style.display = 'none';
+            giftContainer.style.display = 'none';
         }
     }
 
