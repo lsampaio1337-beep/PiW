@@ -357,7 +357,7 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
     ghostContainer.style.position = 'absolute';
     ghostContainer.style.left = '35%';
     ghostContainer.id = 'enemy-ghost-container';
-    ghostContainer.style.transform = 'translate(0, -100%)';
+    ghostContainer.style.transform = 'translate(-50%, -50%)';
     ghostContainer.style.zIndex = '50';
     ghostContainer.style.opacity = '1';
 
@@ -399,7 +399,7 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
         ball.style.left = '35%';
         ball.style.top = '80%';
         ball.style.bottom = 'auto'; // Reset bottom
-        ball.style.transform = 'translate(0, -100%)';
+        ball.style.transform = 'translate(-50%, -50%)';
         ball.style.width = '25%';
         ball.style.height = '25%';
         ball.style.objectFit = 'contain';
@@ -427,12 +427,12 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
             shakeCount++;
             let rotation = (shakeCount % 2 === 0) ? 15 : -15;
             if (shakeCount % 10 === 0) rotation = 0; // brief pause
-            ball.style.transform = `translate(0, -100%) rotate(${rotation}deg)`;
+            ball.style.transform = `translate(-50%, -50%) rotate(${rotation}deg)`;
         }, 150);
 
         setTimeout(() => {
             clearInterval(shakeInterval);
-            ball.style.transform = 'translate(0, -100%) rotate(0deg)';
+            ball.style.transform = 'translate(-50%, -50%) rotate(0deg)';
 
             // 3s mark: decide outcome
             if (ballResult.caught) {
