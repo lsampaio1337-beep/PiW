@@ -528,12 +528,8 @@ input[type="number"] {
     padding-bottom: 0 !important;
 }
 
-#window-trainer .window-content-container {
-    padding: 15px !important;
-}
-
-#window-trainer p {
-    margin: 5px 0;
+#window-bonus-candy .window-content-container {
+    padding: 5% !important;
 }
 
 .window-content-scaler {
