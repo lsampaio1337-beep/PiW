@@ -512,7 +512,8 @@ input[type="number"] {
 .window-content-container {
     flex: 1;
     position: relative;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
     width: 100%;
     padding: 0 !important; /* Outer container flush, inner scrolling content will pad 5% */
     box-sizing: border-box;

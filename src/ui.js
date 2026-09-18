@@ -295,7 +295,7 @@ window.showChallengesModal = function() {
 
     if (!state.config.unlocks) return;
 
-    let html = `<div id="challenges-content-wrapper" class="content-panel" style="display:flex; flex-direction:column; gap:15px; text-align:left; overflow-y: auto;">`;
+    let html = `<div id="challenges-content-wrapper" class="content-panel" style="display:flex; flex-direction:column; gap:15px; text-align:left;">`;
 
     // Active Challenges Sector
     let activeChallengesCount = state.stats.activeChallenges ? state.stats.activeChallenges.length : 0;
@@ -394,15 +394,11 @@ window.showChallengesModal = function() {
 
     html += `</div>`;
 
-    showModal("Progress Challenges", html, "window-challenges");
+    // Explicitly set width and height so the outer modal container triggers the scrollbar.
+    showModal("Progress Challenges", html, "window-challenges", "600px", "600px");
     const win = document.getElementById("window-challenges");
-    const wrapper = document.getElementById("challenges-content-wrapper");
-    if (win && wrapper) {
-        // Read the actual unscaled width, defaulting to 800 if not yet set
-        let winWidth = win._originalWidth || parseInt(win.style.width) || win.offsetWidth || 800;
-        // The user wants max-height to be exactly the window's width (height=wide)
-        wrapper.style.maxHeight = winWidth + 'px';
-
+    if (win) {
+        win.style.maxHeight = '600px';
     }
 
     if (window.windowManager) window.windowManager.recalculateWindowSize('window-challenges');
@@ -479,7 +475,7 @@ function showCatchRateModal(showShiny = false) {
             ${showShiny ? 'Showing Shiny Attempts (Click to show Normal)' : 'Showing Normal Attempts (Click to show Shiny)'}
         </button>
     </div>
-    <div style="max-height: 60vh; overflow-y: auto;">
+    <div>
         <table style="width: 100%; border-collapse: collapse; text-align: center; color: white;">
             <thead>
                 <tr style="background: rgba(255,255,255,0.1);">
@@ -520,10 +516,11 @@ function showCatchRateModal(showShiny = false) {
     </div>
     </div>`;
 
-    showModal("Catch Rate Table", html, "window-catch-rate", "800px", "auto");
+    showModal("Catch Rate Table", html, "window-catch-rate", "800px", "600px");
 
     const win = document.getElementById('window-catch-rate');
     if (win) {
+        win.style.maxHeight = '600px';
         const innerContent = win.querySelector('.window-content-container');
         if (innerContent) {
             innerContent.style.setProperty('padding', '0px', 'important'); // Let the injected wrapper handle the 5% padding so it sizes nicely
@@ -683,7 +680,7 @@ window.showOakLabModal = function() {
         renderOakLab(); // Clear the notification from the lobby button
     }
 
-    let html = `<div class="content-panel" style="display:flex; flex-direction:column; gap:15px; text-align:left; height: 100%; overflow-y: auto;">`;
+    let html = `<div class="content-panel" style="display:flex; flex-direction:column; gap:15px; text-align:left;">`;
 
     const renderActiveTask = (type, currentVal, tierIdx, taskList) => {
         if (tierIdx >= taskList.length) {
@@ -1725,7 +1722,12 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
             <div style="margin-top: 15px; text-align: center;">
                 <button id="btn-catch-rate" style="padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer; background: #3b82f6; color: white; border: none; border-radius: 5px;">Catch Rate Table</button>
             </div>
-        `, "window-trainer");
+        `, "window-trainer", "800px", "600px");
+
+        const win = document.getElementById("window-trainer");
+        if (win) {
+            win.style.maxHeight = '600px';
+        }
 
         document.getElementById('btn-catch-rate').onclick = () => {
             if(!checkCombatLock()) showCatchRateModal();

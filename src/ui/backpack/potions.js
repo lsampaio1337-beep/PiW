@@ -29,7 +29,7 @@ export function renderPotionsTab(area) {
                 </div>
             </div>
 
-            <div style="display: flex; flex-wrap: wrap; gap: 1.5cqi; justify-content: center; align-content: flex-start; overflow-y: auto; flex: 1; padding: 1.2cqi; box-sizing: border-box;">
+            <div style="display: flex; flex-wrap: wrap; gap: 1.5cqi; justify-content: center; align-content: flex-start; flex: 1; padding: 1.2cqi; box-sizing: border-box;">
     `;
 
     const potions = state.config.balance.items.potions;
