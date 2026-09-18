@@ -9,6 +9,8 @@ function createWindow() {
     const win = new BrowserWindow({
         width: width,
         height: height,
+        x: 0,
+        y: 0,
         transparent: true,
         frame: false,
         hasShadow: false,
@@ -19,9 +21,6 @@ function createWindow() {
             contextIsolation: false
         }
     });
-
-    // Maximize the window to cover the screen
-    win.maximize();
 
     win.loadFile('index.html');
 
