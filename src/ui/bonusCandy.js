@@ -157,12 +157,7 @@ window.claimWhiteCandy = function() {
         state.stats.whiteCandies = (state.stats.whiteCandies || 0) + 1;
         updateUI();
         showBonusCandyModal(); // Refresh modal
-<<<<<<< Updated upstream
-            }
-=======
-//
     }
->>>>>>> Stashed changes
 };
 
 window.cheatWhiteCandy = function() {
@@ -174,12 +169,7 @@ window.cheatWhiteCandy = function() {
 =======
 
 };
->>>>>>> Stashed changes
-
-window.buyBonusCandy = function(color) {
-    if (color === 'Rainbow Candy' && (state.stats.rainbowCandies || 0) >= 5) {
-        alert("Maximum Rainbow Candies reached!");
-        return;
+};
     }
 
     const currentOwned = color === 'Green Candy' ? state.stats.greenCandies
