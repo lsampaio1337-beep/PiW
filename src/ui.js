@@ -1001,6 +1001,50 @@ function selectStarter(id) {
 
     startGame();
 
+    setTimeout(() => {
+        // Create 3 test windows with 3 different solutions
+        const oakHtml = `
+            <div style="background-color: rgba(0,0,0,0.85); display: inline-block; padding: 20px; margin-top: 20px; border-radius: 8px; width: 400px; color: white; text-align: center;">
+                <h2 style="margin-top:0;">Professor Oak Lab</h2>
+                <p style="font-size: 9px; color: #ccc; margin-bottom: 15px;">Complete tasks to unlock global bonuses.</p>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <div style="position: relative; display: inline-block; width: 100%;">
+                        <button onclick="window.showOakLabModal()" style="width: 100%; padding: 8px; font-size: 9px; cursor: pointer;">Tasks & Rewards</button>
+                    </div>
+                </div>
+            </div>
+        `;
+        const pData = state.config.pokemonData.find(p => p.id === 1);
+        const dexHtml = `
+            <div class="content-panel" style="text-align:center;">
+                <h2>#${pData.id} ${pData.name}</h2>
+                <img id="dex-sprite-${pData.id}" src="Assets/Pokemon Sprites/${pData.id}.png" style="width: 100px; height: 100px;">
+                <p><b>Type:</b> Grass Poison</p>
+            </div>
+        `;
+
+        const fullHtml = `
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+            ${oakHtml}
+            ${dexHtml}
+        </div>
+        `;
+
+        window.windowManager.createDynamicWindow('test-win-1', 'Solution 1 (Math.ceil)', fullHtml, '500px', 'auto');
+        window.windowManager.createDynamicWindow('test-win-2', 'Solution 2 (getBoundingClientRect)', fullHtml, '500px', 'auto');
+        window.windowManager.createDynamicWindow('test-win-3', 'Solution 3 (Fixed Buffer)', fullHtml, '500px', 'auto');
+
+        const win1 = document.getElementById('test-win-1');
+        if (win1) win1.style.left = '50px';
+
+        const win2 = document.getElementById('test-win-2');
+        if (win2) win2.style.left = '560px';
+
+        const win3 = document.getElementById('test-win-3');
+        if (win3) win3.style.left = '1070px';
+
+    }, 1000);
+
     // Force an immediate save so the initial state is persisted to the new profile
     storage.save(state);
 
@@ -1307,6 +1351,50 @@ async function init() {
                     if (!state.stats.completedChallengeIds) state.stats.completedChallengeIds = [];
 
                     startGame();
+
+                    setTimeout(() => {
+                        // Create 3 test windows with 3 different solutions
+                        const oakHtml = `
+                            <div style="background-color: rgba(0,0,0,0.85); display: inline-block; padding: 20px; margin-top: 20px; border-radius: 8px; width: 400px; color: white; text-align: center;">
+                                <h2 style="margin-top:0;">Professor Oak Lab</h2>
+                                <p style="font-size: 9px; color: #ccc; margin-bottom: 15px;">Complete tasks to unlock global bonuses.</p>
+                                <div style="display: flex; flex-direction: column; gap: 10px;">
+                                    <div style="position: relative; display: inline-block; width: 100%;">
+                                        <button onclick="window.showOakLabModal()" style="width: 100%; padding: 8px; font-size: 9px; cursor: pointer;">Tasks & Rewards</button>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        const pData = state.config.pokemonData.find(p => p.id === 1);
+                        const dexHtml = `
+                            <div class="content-panel" style="text-align:center;">
+                                <h2>#${pData.id} ${pData.name}</h2>
+                                <img id="dex-sprite-${pData.id}" src="Assets/Pokemon Sprites/${pData.id}.png" style="width: 100px; height: 100px;">
+                                <p><b>Type:</b> Grass Poison</p>
+                            </div>
+                        `;
+
+                        const fullHtml = `
+                        <div style="display: flex; flex-direction: column; gap: 20px;">
+                            ${oakHtml}
+                            ${dexHtml}
+                        </div>
+                        `;
+
+                        window.windowManager.createDynamicWindow('test-win-1', 'Solution 1 (Math.ceil)', fullHtml, '500px', 'auto');
+                        window.windowManager.createDynamicWindow('test-win-2', 'Solution 2 (getBoundingClientRect)', fullHtml, '500px', 'auto');
+                        window.windowManager.createDynamicWindow('test-win-3', 'Solution 3 (Fixed Buffer)', fullHtml, '500px', 'auto');
+
+                        const win1 = document.getElementById('test-win-1');
+                        if (win1) win1.style.left = '50px';
+
+                        const win2 = document.getElementById('test-win-2');
+                        if (win2) win2.style.left = '560px';
+
+                        const win3 = document.getElementById('test-win-3');
+                        if (win3) win3.style.left = '1070px';
+
+                    }, 1000);
 
                     if (state.isZzZMode) {
                         const resumeHtml = `
