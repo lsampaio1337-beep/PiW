@@ -735,7 +735,7 @@ window.showOakLabModal = function() {
                 // Shiny style - keep all
                 for (let i = 0; i < tierIdx; i++) {
                     rewardsHtml += `
-                        <div style="font-size: 12px; margin-top: 5px; padding-left: 5px; border-left: 2px solid #4CAF50;">
+                        <div style="font-size: calc(var(--m-width) * 0.018); margin-top: calc(var(--m-width) * 0.01); padding-left: calc(var(--m-width) * 0.01); border-left: 2px solid #4CAF50;">
                             <b>${taskList[i].reward}</b>: <span style="color: #4CAF50;">${taskList[i].effect}</span>
                         </div>
                     `;
@@ -744,7 +744,7 @@ window.showOakLabModal = function() {
                 // Normal style - only show highest tier
                 let topReward = taskList[tierIdx - 1];
                 rewardsHtml += `
-                    <div style="font-size: 12px; margin-top: 5px; padding-left: 5px; border-left: 2px solid #4CAF50;">
+                    <div style="font-size: calc(var(--m-width) * 0.018); margin-top: calc(var(--m-width) * 0.01); padding-left: calc(var(--m-width) * 0.01); border-left: 2px solid #4CAF50;">
                         <b>${topReward.reward}</b>: <span style="color: #4CAF50;">${topReward.effect}</span>
                     </div>
                 `;
@@ -752,8 +752,8 @@ window.showOakLabModal = function() {
         }
 
         return `
-            <div style="border: 1px solid #555; padding: 10px; border-radius: 5px; background-color: rgba(0,0,0,0.5);">
-                <h3 style="margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; font-size: 16px;">${title}</h3>
+            <div style="border: 1px solid #555; padding: calc(var(--m-width) * 0.015); border-radius: 5px; background-color: rgba(0,0,0,0.5);">
+                <h3 style="margin-top: 0; margin-bottom: calc(var(--m-width) * 0.015); border-bottom: 1px solid #444; padding-bottom: calc(var(--m-width) * 0.01); font-size: calc(var(--m-width) * 0.024);">${title}</h3>
                 ${taskHtml}
                 ${rewardsHtml}
             </div>
@@ -824,7 +824,7 @@ window.showOakLabModal = function() {
         if (seenTier > 1 && i === 0) continue;
 
         shinyRewardsHtml += `
-            <div style="font-size: 12px; margin-top: 5px; padding-left: 5px; border-left: 2px solid #4CAF50;">
+            <div style="font-size: calc(var(--m-width) * 0.018); margin-top: calc(var(--m-width) * 0.01); padding-left: calc(var(--m-width) * 0.01); border-left: 2px solid #4CAF50;">
                 <b>${rewardName}</b>: <span style="color: #4CAF50;">${oakTasks.shinySeen[i].effect}</span>
             </div>
         `;
@@ -833,15 +833,15 @@ window.showOakLabModal = function() {
     // Shiny Caught rewards logic
     for (let i = 0; i < caughtTier; i++) {
         shinyRewardsHtml += `
-            <div style="font-size: 12px; margin-top: 5px; padding-left: 5px; border-left: 2px solid #4CAF50;">
+            <div style="font-size: calc(var(--m-width) * 0.018); margin-top: calc(var(--m-width) * 0.01); padding-left: calc(var(--m-width) * 0.01); border-left: 2px solid #4CAF50;">
                 <b>${oakTasks.shinyCaught[i].reward}</b>: <span style="color: #4CAF50;">${oakTasks.shinyCaught[i].effect}</span>
             </div>
         `;
     }
 
     html += `
-        <div style="border: 1px solid #555; padding: 10px; border-radius: 5px; background-color: rgba(0,0,0,0.5);">
-            <h3 style="margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; font-size: 16px;">${shinyTitle}</h3>
+        <div style="border: 1px solid #555; padding: calc(var(--m-width) * 0.015); border-radius: 5px; background-color: rgba(0,0,0,0.5);">
+            <h3 style="margin-top: 0; margin-bottom: calc(var(--m-width) * 0.015); border-bottom: 1px solid #444; padding-bottom: calc(var(--m-width) * 0.01); font-size: calc(var(--m-width) * 0.024);">${shinyTitle}</h3>
             ${shinySeenTaskHtml}
             ${shinyCaughtTaskHtml}
             ${shinyRewardsHtml}
@@ -854,11 +854,12 @@ window.showOakLabModal = function() {
     const title = document.getElementById('main-view-inner-modal-title');
     const content = document.getElementById('main-view-inner-modal-content');
     if (overlay && title && content) {
-        title.innerText = "Tasks & Rewards";
+        title.innerText = "Assignment & Boosts";
         content.innerHTML = html;
         overlay.style.display = 'flex';
+        document.getElementById('main-view-inner-modal').style.width = '70%';
     } else {
-        showModal("Tasks & Rewards", html, "window-tasks");
+        showModal("Assignment & Boosts", html, "window-tasks");
     const winTasks = document.getElementById("window-tasks");
     if (winTasks) {
         winTasks.style.maxHeight = '800px';
@@ -892,7 +893,7 @@ export function renderOakLab() {
 
             <div style="display: flex; flex-direction: column; gap: 10px;">
                 <div style="position: relative; display: inline-block; width: 100%;">
-                    <button onclick="window.showOakLabModal()" style="width: 100%; padding: 10px; font-size: 16px; cursor: pointer;">Tasks & Rewards</button>
+                    <button onclick="window.showOakLabModal()" style="width: 100%; padding: 10px; font-size: 16px; cursor: pointer;">Assignment & Boosts</button>
                     ${exclamationHtml}
                 </div>
             </div>
