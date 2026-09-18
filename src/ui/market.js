@@ -28,6 +28,7 @@ function _formatMarketNumberDown(num) {
 }
 
 export function setupMarket(vCenter) {
+    if (!vCenter) return;
     vCenter.innerHTML = `
         <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: space-between; align-items: center; padding: 0 10%; box-sizing: border-box;">
             <button id="btn-heal-all" style="background: #3498db; color: white; border: 3px solid white; border-radius: 12px; padding: 15px 30px; font-size: 24px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.5); margin-top: -20%;">Heal</button>
