@@ -181,7 +181,7 @@ window.completeChallenge = function(targetAreaId) {
     }
 
     updateUI();
-    if (document.getElementById('modal-overlay').style.display !== 'none') {
+    if (document.getElementById('window-challenges')) {
         window.showChallengesModal(); // refresh modal
     }
 
@@ -269,7 +269,7 @@ window.cheatProgressChallenge = function(targetAreaId) {
         }
     }
         if (window.updateUI) window.updateUI();
-    if (document.getElementById('modal-overlay').style.display !== 'none') {
+    if (document.getElementById('window-challenges')) {
         window.showChallengesModal();
     }
 
