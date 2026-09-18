@@ -696,7 +696,7 @@ window.showOakLabModal = function() {
         let barHtml = "";
         if (isComplete) {
             barHtml = `
-                <div onclick="window.claimOakTaskReward('${type}')" style="width: 100%; background-color: #4CAF50; border-radius: 4px; padding: 5px; text-align: center; cursor: pointer; color: white; font-weight: bold; margin-top: 5px;">
+                <div onclick="window.claimOakTaskReward('${type}')" style="width: 100%; background-color: #4CAF50; border-radius: 4px; padding: 0 5px; height: 20px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: white; font-weight: bold; margin-top: 5px; font-size: 14px; box-sizing: border-box;">
                     ${task.reward}
                 </div>
             `;
@@ -727,6 +727,7 @@ window.showOakLabModal = function() {
         if (tierIdx >= taskList.length) {
             title = title.replace("Task", "Reward");
         }
+        title = title.replace("Task", "Assignment");
         let taskHtml = renderActiveTask(type, currentVal, tierIdx, taskList);
 
         let rewardsHtml = "";
@@ -814,6 +815,7 @@ window.showOakLabModal = function() {
         if (seenTier >= oakTasks.shinySeen.length) shinySeenTaskHtml = "";
         if (caughtTier >= oakTasks.shinyCaught.length) shinyCaughtTaskHtml = "";
     }
+    shinyTitle = shinyTitle.replace("Task", "Assignment");
 
     let shinyRewardsHtml = "";
 
