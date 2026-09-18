@@ -11,6 +11,7 @@ function createWindow() {
         height: height,
         x: 0,
         y: 0,
+        show: false,
         transparent: true,
         frame: false,
         hasShadow: false,
@@ -25,6 +26,7 @@ function createWindow() {
     win.loadFile('index.html');
 
     win.once('ready-to-show', () => {
+        win.show();
         // Create a signal file to let the launcher know the game is ready
         if (process.platform === 'win32') {
             fs.writeFileSync('game_ready.txt', 'ready');
@@ -40,9 +42,6 @@ function createWindow() {
         }
     });
 }
-
-// Disable hardware acceleration to prevent transparency bugs on some OS
-app.disableHardwareAcceleration();
 
 app.whenReady().then(() => {
     createWindow();
