@@ -516,7 +516,7 @@ function showCatchRateModal(showShiny = false) {
     </div>
     </div>`;
 
-    showModal("Catch Rate Table", html, "window-catch-rate", "800px", "600px");
+    showModal("Catch Rate Table", html, "window-catch-rate", "800px", "auto");
 
     const win = document.getElementById('window-catch-rate');
     if (win) {
@@ -1722,7 +1722,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
             <div style="margin-top: 15px; text-align: center;">
                 <button id="btn-catch-rate" style="padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer; background: #3b82f6; color: white; border: none; border-radius: 5px;">Catch Rate Table</button>
             </div>
-        `, "window-trainer", "800px", "600px");
+        `, "window-trainer", "800px", "auto");
 
         const win = document.getElementById("window-trainer");
         if (win) {
