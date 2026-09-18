@@ -513,19 +513,14 @@ input[type="number"] {
     position: relative;
     overflow: hidden;
     width: 100%;
-    padding: 5% !important;
+    padding: 0 !important; /* Outer container flush, inner scrolling content will pad 5% */
     box-sizing: border-box;
 }
 
-#window-map .window-content-container,
-#main-view-window .window-content-container,
-#party-window .window-content-container {
-    padding: 0 !important;
-}
-
-#window-settings .window-content-container {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
+/* Default 5% padding for all scrollable window contents. Remove this for specific windows if unwanted */
+.content-panel {
+    padding: 5%;
+    box-sizing: border-box;
 }
 
 .window-content-scaler {

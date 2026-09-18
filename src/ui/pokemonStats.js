@@ -161,7 +161,7 @@ export function showPokemonStats(idx, location) {
     `;
 
     let html = `
-        <div style="max-height: 80vh; overflow-y: auto; padding: 0 10px; overflow-x: hidden;">
+        <div class="content-panel" style="max-height: 80vh; overflow-y: auto; overflow-x: hidden;">
             ${individualHtml}
             ${collectiveHtml}
         </div>
