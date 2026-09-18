@@ -124,8 +124,9 @@ export function updateBattleArena() {
                 elEnemySprite.style.display = 'block';
                 applyWalkAnimations(enemy, true);
 
-                elEnemySide.style.top = '50%';
+                elEnemySide.style.top = '80%';
                 elEnemySide.style.bottom = 'auto';
+                elEnemySide.style.transform = 'translate(0, -100%)';
 
                 if (battleSystem.isSliding) {
                     if (elEnemySide.dataset.sliding !== 'true') {
@@ -164,8 +165,9 @@ export function updateBattleArena() {
             const elPlayerSide = document.getElementById('player-side');
             if (leader && elPlayerSide) {
 
-                elPlayerSide.style.top = '50%';
+                elPlayerSide.style.top = '80%';
                 elPlayerSide.style.bottom = 'auto';
+                elPlayerSide.style.transform = 'translate(-100%, -100%)';
                 elPlayerSide.style.left = '25%';
 
                 const hpContainerPlayer = document.getElementById('player-battle-hp-container');
@@ -236,8 +238,9 @@ export function updateBattleArena() {
                 elEnemySprite.style.display = 'block';
                 elEnemySide.style.transition = 'none';
                 elEnemySide.style.left = '35%'; // Matching active battle destination
-                elEnemySide.style.top = '50%';
+                elEnemySide.style.top = '80%';
                 elEnemySide.style.bottom = 'auto';
+                elEnemySide.style.transform = 'translate(0, -100%)';
                 if (hpContainerEnemy) {
                     hpContainerEnemy.style.transition = 'none';
                     hpContainerEnemy.style.left = '35%';
@@ -248,8 +251,9 @@ export function updateBattleArena() {
             const elPlayerSide = document.getElementById('player-side');
             if (leader && elPlayerSide) {
 
-                elPlayerSide.style.top = '50%';
+                elPlayerSide.style.top = '80%';
                 elPlayerSide.style.bottom = 'auto';
+                elPlayerSide.style.transform = 'translate(-100%, -100%)';
                 elPlayerSide.style.left = '25%';
 
                 const hpContainerPlayer = document.getElementById('player-battle-hp-container');
@@ -352,11 +356,12 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
     const ghostContainer = document.createElement('div');
     ghostContainer.style.position = 'absolute';
     ghostContainer.style.left = '35%';
-    ghostContainer.style.transform = 'translate(-50%, -50%)';
+    ghostContainer.id = 'enemy-ghost-container';
+    ghostContainer.style.transform = 'translate(0, -100%)';
     ghostContainer.style.zIndex = '50';
     ghostContainer.style.opacity = '1';
 
-    ghostContainer.style.top = '50%';
+    ghostContainer.style.top = '80%';
     ghostContainer.style.bottom = 'auto';
     ghostContainer.style.height = '50%'; // Match sprite container height
     ghostContainer.style.display = 'flex';
@@ -392,9 +397,9 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
         ball.src = `Assets/Items/Balls/${ballResult.ballName}.png`;
         ball.style.position = 'absolute';
         ball.style.left = '35%';
-        ball.style.top = `50%`;
+        ball.style.top = '80%';
         ball.style.bottom = 'auto'; // Reset bottom
-        ball.style.transform = 'translate(-50%, -50%)';
+        ball.style.transform = 'translate(0, -100%)';
         ball.style.width = '25%';
         ball.style.height = '25%';
         ball.style.objectFit = 'contain';
@@ -422,12 +427,12 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
             shakeCount++;
             let rotation = (shakeCount % 2 === 0) ? 15 : -15;
             if (shakeCount % 10 === 0) rotation = 0; // brief pause
-            ball.style.transform = `translate(-50%, -50%) rotate(${rotation}deg)`;
+            ball.style.transform = `translate(0, -100%) rotate(${rotation}deg)`;
         }, 150);
 
         setTimeout(() => {
             clearInterval(shakeInterval);
-            ball.style.transform = 'translate(-50%, -50%) rotate(0deg)';
+            ball.style.transform = 'translate(0, -100%) rotate(0deg)';
 
             // 3s mark: decide outcome
             if (ballResult.caught) {
@@ -465,6 +470,9 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
 export function showDamage(target, amount, isCrit, moveName = '', moveType = 'Normal', effectiveness = 1) {
     const battleSystem = globals.battleSystem;
     let containerId = target === 'player' ? 'player-sprite' : 'enemy-sprite';
+    if (target === 'enemy' && document.getElementById('enemy-ghost-container')) {
+        containerId = 'enemy-ghost-container';
+    }
 
     // Check if in gym battle
     if (battleSystem && battleSystem.gymState && battleSystem.gymState.isActive) {
