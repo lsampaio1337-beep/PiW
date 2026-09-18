@@ -300,12 +300,12 @@ window.showChallengesModal = function() {
     // Active Challenges Sector
     let activeChallengesCount = state.stats.activeChallenges ? state.stats.activeChallenges.length : 0;
 
-    html += `<div style="border: 1px solid #555; padding: 10px; border-radius: 5px; background-color: rgba(0,0,0,0.5);">
-                <h3 style="margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; font-size: 16px;">${activeChallengesCount > 1 ? 'Active Challenges' : 'Active Challenge'}</h3>
+    html += `<div style="border: 1px solid #555; padding: 8px; border-radius: 5px; background-color: rgba(0,0,0,0.5);">
+                <h3 style="margin-top: 0; margin-bottom: 8px; border-bottom: 1px solid #444; padding-bottom: 4px; font-size: 9px;">${activeChallengesCount > 1 ? 'Active Challenges' : 'Active Challenge'}</h3>
                 <div style="display: flex; flex-direction: column; gap: 15px;">`;
 
     if (activeChallengesCount === 0) {
-        html += `<div style="text-align: center; font-size: 16px; color: #aaa;">No active Challenge</div>`;
+        html += `<div style="text-align: center; font-size: 9px; color: #aaa;">No active Challenge</div>`;
     } else {
         for (let activeId of state.stats.activeChallenges) {
             let unlock = state.config.unlocks.find(u => u.areaId === activeId);
@@ -318,10 +318,10 @@ window.showChallengesModal = function() {
 
             let displayName = unlock.challengeName || (isExtra ? 'Extra Challenge - ' + unlock.areaId : 'Challenge - ' + unlock.areaId);
 
-            html += `<div style="border: 1px solid #333; padding: 10px; border-radius: 5px; background-color: rgba(255,255,255,0.05);">
-                        <div style="color: ${isExtra ? '#ff9800' : '#4CAF50'}; font-weight: bold; margin-bottom: 5px;">${displayName}</div>`;
+            html += `<div style="border: 1px solid #333; padding: 8px; border-radius: 5px; background-color: rgba(255,255,255,0.05);">
+                        <div style="color: ${isExtra ? '#ff9800' : '#4CAF50'}; font-weight: bold; margin-bottom: 4px;">${displayName}</div>`;
 
-            html += `<div style="margin-bottom: 5px;"><b>Requirements:</b></div>
+            html += `<div style="margin-bottom: 4px;"><b>Requirements:</b></div>
                      <ul style="margin-top: 0; padding-left: 20px;">`;
 
             for (let part of cData.textParts) {
@@ -334,10 +334,10 @@ window.showChallengesModal = function() {
             let safeAreaId = unlock.areaId.replace(/'/g, "\\'");
 
             html += `<div style="text-align: center; margin-top: 15px; display: flex; justify-content: center; gap: 10px;">
-                         <button onclick="window.cheatProgressChallenge('${safeAreaId}')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; background-color: orange; color: white; border: none; border-radius: 5px; cursor: pointer;">Cheat Progress</button>`;
+                         <button onclick="window.cheatProgressChallenge('${safeAreaId}')" style="padding: 10px 20px; font-size: 9px; font-weight: bold; background-color: orange; color: white; border: none; border-radius: 5px; cursor: pointer;">Cheat Progress</button>`;
 
             if (cData.isMet) {
-                 html += `<button onclick="window.completeChallenge('${safeAreaId}')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">Complete ✔️</button>`;
+                 html += `<button onclick="window.completeChallenge('${safeAreaId}')" style="padding: 10px 20px; font-size: 9px; font-weight: bold; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">Complete ✔️</button>`;
             }
             html += `</div></div>`;
         }
@@ -349,8 +349,8 @@ window.showChallengesModal = function() {
     let completedCount = state.stats.completedChallengeIds ? state.stats.completedChallengeIds.length : 0;
     if (completedCount > 0) {
         let pastTitle = completedCount === 1 ? "Past Challenge" : "Past Challenges";
-        html += `<div style="border: 1px solid #555; padding: 10px; border-radius: 5px; background-color: rgba(0,0,0,0.5);">
-                    <h3 style="margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; font-size: 16px;">${pastTitle}</h3>
+        html += `<div style="border: 1px solid #555; padding: 8px; border-radius: 5px; background-color: rgba(0,0,0,0.5);">
+                    <h3 style="margin-top: 0; margin-bottom: 8px; border-bottom: 1px solid #444; padding-bottom: 4px; font-size: 9px;">${pastTitle}</h3>
                     <div style="display: flex; flex-direction: column; gap: 10px;">`;
 
         for (let i = completedCount - 1; i >= 0; i--) {
@@ -368,9 +368,9 @@ window.showChallengesModal = function() {
 
              let displayName = pUnlock.challengeName || (isExtra ? 'Extra Challenge - ' + pUnlock.areaId : 'Challenge - ' + pUnlock.areaId);
 
-             html += `<div style="border: 1px solid #333; padding: 10px; border-radius: 5px; background-color: rgba(255,255,255,0.05);">
-                          <div style="color: ${isExtra ? '#ff9800' : '#4CAF50'}; font-weight: bold; margin-bottom: 5px;">${displayName}</div>
-                          <ul style="margin-top: 0; margin-bottom: 5px; padding-left: 20px; font-size: 14px;">`;
+             html += `<div style="border: 1px solid #333; padding: 8px; border-radius: 5px; background-color: rgba(255,255,255,0.05);">
+                          <div style="color: ${isExtra ? '#ff9800' : '#4CAF50'}; font-weight: bold; margin-bottom: 4px;">${displayName}</div>
+                          <ul style="margin-top: 0; margin-bottom: 4px; padding-left: 20px; font-size: 14px;">`;
              for (let part of pData.textParts) {
                   // Ensure we show them as complete using words
 
@@ -475,7 +475,7 @@ function showCatchRateModal(showShiny = false) {
 
     let html = `<div style="padding: 5%; box-sizing: border-box;">
     <div style="text-align: center; margin-bottom: 15px;">
-        <button id="btn-catch-rate-shiny-toggle" style="padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer; background: ${showShiny ? '#fbbf24' : '#6b7280'}; color: white; border: none; border-radius: 5px;">
+        <button id="btn-catch-rate-shiny-toggle" style="padding: 10px 20px; font-size: 9px; font-weight: bold; cursor: pointer; background: ${showShiny ? '#fbbf24' : '#6b7280'}; color: white; border: none; border-radius: 5px;">
             ${showShiny ? 'Showing Shiny Attempts (Click to show Normal)' : 'Showing Normal Attempts (Click to show Shiny)'}
         </button>
     </div>
@@ -696,16 +696,16 @@ window.showOakLabModal = function() {
         let barHtml = "";
         if (isComplete) {
             barHtml = `
-                <div onclick="window.claimOakTaskReward('${type}')" style="width: 100%; background-color: #4CAF50; border-radius: 4px; padding: 0 5px; height: 20px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: white; font-weight: bold; margin-top: 5px; font-size: 14px; box-sizing: border-box;">
+                <div onclick="window.claimOakTaskReward('${type}')" style="width: 100%; background-color: #4CAF50; border-radius: 4px; height: 15px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: white; font-weight: bold; margin-top: 4px; font-size: 11px; box-sizing: border-box;">
                     ${task.reward}
                 </div>
             `;
         } else {
             let pct = Math.min(100, Math.floor((currentVal / task.req) * 100));
             barHtml = `
-                <div style="width: 100%; background-color: #333; border-radius: 4px; overflow: hidden; height: 20px; border: 1px solid #555; position: relative; margin-top: 5px; display: flex; align-items: center;">
+                <div style="width: 100%; background-color: #333; border-radius: 4px; overflow: hidden; height: 15px; border: 1px solid #555; position: relative; margin-top: 4px; display: flex; align-items: center;">
                     <div style="width: ${pct}%; background-color: #4CAF50; height: 100%;"></div>
-                    <span style="position: absolute; width: 100%; text-align: center; color: white; font-size: 12px; font-weight: bold; line-height: 20px;">
+                    <span style="position: absolute; width: 100%; text-align: center; color: white; font-size: 9px; font-weight: bold; line-height: 15px;">
                         ${currentVal} / ${task.req}
                     </span>
                 </div>
@@ -713,10 +713,10 @@ window.showOakLabModal = function() {
         }
 
         return `
-            <div style="margin-bottom: 10px;">
+            <div style="margin-bottom: 8px;">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <span>${task.text}</span>
-                    <button onclick="window.cheatCompleteOakTask('${type}')" style="padding: 2px 5px; font-size: 10px; cursor: pointer; background: #d9534f; color: white; border: none; border-radius: 3px;">Cheat Complete</button>
+                    <span style="font-size: 12px;">${task.text}</span>
+                    <button onclick="window.cheatCompleteOakTask('${type}')" style="padding: 2px 4px; font-size: 8px; cursor: pointer; background: #d9534f; color: white; border: none; border-radius: 3px;">Cheat Complete</button>
                 </div>
                 ${barHtml}
             </div>
@@ -727,7 +727,6 @@ window.showOakLabModal = function() {
         if (tierIdx >= taskList.length) {
             title = title.replace("Task", "Reward");
         }
-        title = title.replace("Task", "Assignment");
         let taskHtml = renderActiveTask(type, currentVal, tierIdx, taskList);
 
         let rewardsHtml = "";
@@ -736,7 +735,7 @@ window.showOakLabModal = function() {
                 // Shiny style - keep all
                 for (let i = 0; i < tierIdx; i++) {
                     rewardsHtml += `
-                        <div style="font-size: 12px; margin-top: 5px; padding-left: 5px; border-left: 2px solid #4CAF50;">
+                        <div style="font-size: 9px; margin-top: 4px; padding-left: 5px; border-left: 2px solid #4CAF50;">
                             <b>${taskList[i].reward}</b>: <span style="color: #4CAF50;">${taskList[i].effect}</span>
                         </div>
                     `;
@@ -745,7 +744,7 @@ window.showOakLabModal = function() {
                 // Normal style - only show highest tier
                 let topReward = taskList[tierIdx - 1];
                 rewardsHtml += `
-                    <div style="font-size: 12px; margin-top: 5px; padding-left: 5px; border-left: 2px solid #4CAF50;">
+                    <div style="font-size: 9px; margin-top: 4px; padding-left: 5px; border-left: 2px solid #4CAF50;">
                         <b>${topReward.reward}</b>: <span style="color: #4CAF50;">${topReward.effect}</span>
                     </div>
                 `;
@@ -753,8 +752,8 @@ window.showOakLabModal = function() {
         }
 
         return `
-            <div style="border: 1px solid #555; padding: 10px; border-radius: 5px; background-color: rgba(0,0,0,0.5);">
-                <h3 style="margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; font-size: 16px;">${title}</h3>
+            <div style="border: 1px solid #555; padding: 8px; border-radius: 5px; background-color: rgba(0,0,0,0.5);">
+                <h3 style="margin-top: 0; margin-bottom: 8px; border-bottom: 1px solid #444; padding-bottom: 4px; font-size: 12px;">${title}</h3>
                 ${taskHtml}
                 ${rewardsHtml}
             </div>
@@ -769,10 +768,10 @@ window.showOakLabModal = function() {
     } else if (oakTasks.q.length > 0) {
         qCurrentVal = state.stats[oakTasks.q[oakTasks.q.length - 1].stat] || 0;
     }
-    html += renderCard("Quality Task", 'q', qCurrentVal, qTier, oakTasks.q, false);
+    html += renderCard("Quality Assignment", 'q', qCurrentVal, qTier, oakTasks.q, false);
 
     // Catch Card
-    html += renderCard("Catch Task", 'c', state.stats.caught || 0, state.stats.cTaskTier || 0, oakTasks.c, false);
+    html += renderCard("Catch Assignment", 'c', state.stats.caught || 0, state.stats.cTaskTier || 0, oakTasks.c, false);
 
     // IV Card
     let ivTier = state.stats.ivTaskTier || 0;
@@ -782,7 +781,7 @@ window.showOakLabModal = function() {
     } else if (oakTasks.iv.length > 0) {
         ivCurrentVal = state.stats[oakTasks.iv[oakTasks.iv.length - 1].stat] || 0; // fallback if completed
     }
-    html += renderCard("IV Task", 'iv', ivCurrentVal, ivTier, oakTasks.iv, false);
+    html += renderCard("IV Assignment", 'iv', ivCurrentVal, ivTier, oakTasks.iv, false);
 
     // Level Card
     let levelTier = state.stats.levelTaskTier || 0;
@@ -792,7 +791,7 @@ window.showOakLabModal = function() {
     } else if (oakTasks.level.length > 0) {
         levelCurrentVal = state.stats[oakTasks.level[oakTasks.level.length - 1].stat] || 0; // fallback if completed
     }
-    html += renderCard("Level Task", 'level', levelCurrentVal, levelTier, oakTasks.level, true);
+    html += renderCard("Level Assignment", 'level', levelCurrentVal, levelTier, oakTasks.level, true);
 
     // Shiny Card (Combined seen and caught, keeps all rewards but obsolete regular seen shiny is removed by good shiny)
     let seenTier = state.stats.shinySeenTaskTier || 0;
@@ -801,7 +800,7 @@ window.showOakLabModal = function() {
     let shinySeenTaskHtml = renderActiveTask('shinySeen', state.stats.shiniesSeen || 0, seenTier, oakTasks.shinySeen);
     let shinyCaughtTaskHtml = renderActiveTask('shinyCaught', state.stats.shiniesCaught || 0, caughtTier, oakTasks.shinyCaught);
 
-    let shinyTitle = "Shiny Task";
+    let shinyTitle = "Shiny Assignment";
 
     // Only show "Task: Completed" once if both are done
     if (seenTier >= oakTasks.shinySeen.length && caughtTier >= oakTasks.shinyCaught.length) {
@@ -815,7 +814,6 @@ window.showOakLabModal = function() {
         if (seenTier >= oakTasks.shinySeen.length) shinySeenTaskHtml = "";
         if (caughtTier >= oakTasks.shinyCaught.length) shinyCaughtTaskHtml = "";
     }
-    shinyTitle = shinyTitle.replace("Task", "Assignment");
 
     let shinyRewardsHtml = "";
 
@@ -826,7 +824,7 @@ window.showOakLabModal = function() {
         if (seenTier > 1 && i === 0) continue;
 
         shinyRewardsHtml += `
-            <div style="font-size: 12px; margin-top: 5px; padding-left: 5px; border-left: 2px solid #4CAF50;">
+            <div style="font-size: 9px; margin-top: 4px; padding-left: 5px; border-left: 2px solid #4CAF50;">
                 <b>${rewardName}</b>: <span style="color: #4CAF50;">${oakTasks.shinySeen[i].effect}</span>
             </div>
         `;
@@ -835,15 +833,15 @@ window.showOakLabModal = function() {
     // Shiny Caught rewards logic
     for (let i = 0; i < caughtTier; i++) {
         shinyRewardsHtml += `
-            <div style="font-size: 12px; margin-top: 5px; padding-left: 5px; border-left: 2px solid #4CAF50;">
+            <div style="font-size: 9px; margin-top: 4px; padding-left: 5px; border-left: 2px solid #4CAF50;">
                 <b>${oakTasks.shinyCaught[i].reward}</b>: <span style="color: #4CAF50;">${oakTasks.shinyCaught[i].effect}</span>
             </div>
         `;
     }
 
     html += `
-        <div style="border: 1px solid #555; padding: 10px; border-radius: 5px; background-color: rgba(0,0,0,0.5);">
-            <h3 style="margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; font-size: 16px;">${shinyTitle}</h3>
+        <div style="border: 1px solid #555; padding: 8px; border-radius: 5px; background-color: rgba(0,0,0,0.5);">
+            <h3 style="margin-top: 0; margin-bottom: 8px; border-bottom: 1px solid #444; padding-bottom: 4px; font-size: 12px;">${shinyTitle}</h3>
             ${shinySeenTaskHtml}
             ${shinyCaughtTaskHtml}
             ${shinyRewardsHtml}
@@ -856,11 +854,11 @@ window.showOakLabModal = function() {
     const title = document.getElementById('main-view-inner-modal-title');
     const content = document.getElementById('main-view-inner-modal-content');
     if (overlay && title && content) {
-        title.innerHTML = "Assignment & Boosts";
+        title.innerText = "Tasks & Rewards";
         content.innerHTML = html;
         overlay.style.display = 'flex';
     } else {
-        showModal("Assignment & Boosts", html, "window-tasks");
+        showModal("Tasks & Rewards", html, "window-tasks");
     const winTasks = document.getElementById("window-tasks");
     if (winTasks) {
         winTasks.style.maxHeight = '800px';
@@ -890,11 +888,11 @@ export function renderOakLab() {
     oakLabDiv.innerHTML = `
         <div style="background-color: rgba(0,0,0,0.85); display: inline-block; padding: 20px; margin-top: 20px; border-radius: 8px; width: 400px; color: white; text-align: center;">
             <h2 style="margin-top:0;">Professor Oak Lab</h2>
-            <p style="font-size: 12px; color: #ccc; margin-bottom: 15px;">Complete tasks to unlock global bonuses.</p>
+            <p style="font-size: 9px; color: #ccc; margin-bottom: 15px;">Complete tasks to unlock global bonuses.</p>
 
             <div style="display: flex; flex-direction: column; gap: 10px;">
                 <div style="position: relative; display: inline-block; width: 100%;">
-                    <button onclick="window.showOakLabModal()" style="width: 100%; padding: 10px; font-size: 16px; cursor: pointer;">Assignment & Boosts</button>
+                    <button onclick="window.showOakLabModal()" style="width: 100%; padding: 8px; font-size: 9px; cursor: pointer;">Tasks & Rewards</button>
                     ${exclamationHtml}
                 </div>
             </div>
@@ -1222,7 +1220,7 @@ async function init() {
 
             btn.innerHTML = `
                 <div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center;">
-                    <div style="font-size: 18px; margin-bottom: 5px; font-weight: bold; display: flex; align-items: center;">
+                    <div style="font-size: 18px; margin-bottom: 4px; font-weight: bold; display: flex; align-items: center;">
                         "${profileName}" - ${playtimeStr}
                     </div>
                     <div style="font-size: 14px; font-weight: normal;">Last Played: ${lastPlayedStr}</div>
@@ -1318,8 +1316,8 @@ async function init() {
     <div class="content-panel" style="display: flex; flex-direction: column; gap: 15px; width: 100%; text-align: center;">
         <p style="color: white; margin: 0;">Do you want to collect the farm while Sleeping?</p>
         <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px;">
-            <button id="btn-zzz-resume-yes" style="padding: 10px; font-size: 16px; font-weight: bold; cursor: pointer; background-color: #4CAF50; color: white; border: none; border-radius: 5px; flex: 1;">Yes</button>
-            <button id="btn-zzz-resume-no" style="padding: 10px; font-size: 16px; font-weight: bold; cursor: pointer; background-color: #f44336; color: white; border: none; border-radius: 5px; flex: 1;">No</button>
+            <button id="btn-zzz-resume-yes" style="padding: 8px; font-size: 9px; font-weight: bold; cursor: pointer; background-color: #4CAF50; color: white; border: none; border-radius: 5px; flex: 1;">Yes</button>
+            <button id="btn-zzz-resume-no" style="padding: 8px; font-size: 9px; font-weight: bold; cursor: pointer; background-color: #f44336; color: white; border: none; border-radius: 5px; flex: 1;">No</button>
         </div>
     </div>
 `;
@@ -1385,30 +1383,30 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
 
                             // Items Used Names
                             let ballUsedStr = "No Ball Used";
-                            let ballIconStr = `<div style="font-size: 18px; color: #64748b; margin-bottom: 5px;">-</div>`;
+                            let ballIconStr = `<div style="font-size: 18px; color: #64748b; margin-bottom: 4px;">-</div>`;
                             if (state.settings.activeBallTier >= 0) {
                                 const ballName = state.config.balance.items.pokeballs[state.settings.activeBallTier].name;
                                 ballUsedStr = `${results.ballsUsed} ${ballName}s`;
-                                ballIconStr = `<img src="Assets/Items/Balls/${ballName}.png" style="width: 30px; height: 30px; margin-bottom: 5px;" alt="${ballName}">`;
+                                ballIconStr = `<img src="Assets/Items/Balls/${ballName}.png" style="width: 30px; height: 30px; margin-bottom: 4px;" alt="${ballName}">`;
                             }
 
                             let potionUsedStr = "No Potion Used";
-                            let potionIconStr = `<div style="font-size: 18px; color: #64748b; margin-bottom: 5px;">-</div>`;
+                            let potionIconStr = `<div style="font-size: 18px; color: #64748b; margin-bottom: 4px;">-</div>`;
                             if (state.settings.activePotionTier >= 0) {
                                 const potionName = state.config.balance.items.potions[state.settings.activePotionTier].name;
                                 potionUsedStr = `${results.potionsUsed} ${potionName}s`;
-                                potionIconStr = `<img src="Assets/Items/Potions/${potionName}.png" style="width: 30px; height: 30px; margin-bottom: 5px;" alt="${potionName}">`;
+                                potionIconStr = `<img src="Assets/Items/Potions/${potionName}.png" style="width: 30px; height: 30px; margin-bottom: 4px;" alt="${potionName}">`;
                             }
 
                             let faintedBanner = "";
                             if (results.fainted) {
-                                faintedBanner = `<div style="background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; border-radius: 8px; padding: 10px; color: #fca5a5; text-align: center; font-weight: bold; margin-top: 5px;">❌ Farm Stopped: Party Fainted</div>`;
+                                faintedBanner = `<div style="background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; border-radius: 8px; padding: 8px; color: #fca5a5; text-align: center; font-weight: bold; margin-top: 4px;">❌ Farm Stopped: Party Fainted</div>`;
                             } else if (results.outOfMoney) {
-                                faintedBanner = `<div style="background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; border-radius: 8px; padding: 10px; color: #fca5a5; text-align: center; font-weight: bold; margin-top: 5px;">❌ Farm Stopped: No money to buy more entries</div>`;
+                                faintedBanner = `<div style="background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; border-radius: 8px; padding: 8px; color: #fca5a5; text-align: center; font-weight: bold; margin-top: 4px;">❌ Farm Stopped: No money to buy more entries</div>`;
                             } else if (results.simulatedTimeMs !== undefined && results.simulatedTimeMs >= maxTimeMs) {
-                                faintedBanner = `<div style="background: rgba(234, 179, 8, 0.2); border: 1px solid #facc15; border-radius: 8px; padding: 10px; color: #fde047; text-align: center; font-weight: bold; margin-top: 5px;">❌ Farm Stopped: Jigglypuff Dust ended</div>`;
+                                faintedBanner = `<div style="background: rgba(234, 179, 8, 0.2); border: 1px solid #facc15; border-radius: 8px; padding: 8px; color: #fde047; text-align: center; font-weight: bold; margin-top: 4px;">❌ Farm Stopped: Jigglypuff Dust ended</div>`;
                             } else {
-                                faintedBanner = `<div style="background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; border-radius: 8px; padding: 10px; color: #6ee7b7; text-align: center; font-weight: bold; margin-top: 5px;">✅ Farm Stopped: Logged in a save</div>`;
+                                faintedBanner = `<div style="background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; border-radius: 8px; padding: 8px; color: #6ee7b7; text-align: center; font-weight: bold; margin-top: 4px;">✅ Farm Stopped: Logged in a save</div>`;
                             }
 
                             // Show results modal
@@ -1425,47 +1423,47 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
 
                                     <!-- Money Earned -->
                                     <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid #10b981; border-radius: 8px; padding: 12px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                                        <div style="font-size: 11px; color: #6ee7b7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;">Money Earned</div>
+                                        <div style="font-size: 11px; color: #6ee7b7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Money Earned</div>
                                         <div style="font-size: 18px; font-weight: bold; color: #10b981;">+$${Math.floor(results.moneyEarned).toLocaleString('pt-BR')}</div>
                                     </div>
 
                                     <!-- XP Earned -->
                                     <div style="background: rgba(59, 130, 246, 0.1); border: 1px solid #3b82f6; border-radius: 8px; padding: 12px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                                        <div style="font-size: 11px; color: #93c5fd; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;">XP Earned</div>
+                                        <div style="font-size: 11px; color: #93c5fd; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">XP Earned</div>
                                         <div style="font-size: 18px; font-weight: bold; color: #3b82f6;">+${Math.floor(results.xpEarned).toLocaleString('pt-BR')} XP</div>
                                     </div>
 
                                     <!-- Caught Card -->
                                     <div style="background: rgba(255,255,255,0.05); border: 1px solid #475569; border-radius: 8px; padding: 12px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                                        <div style="font-size: 11px; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;">Pokémon Caught</div>
+                                        <div style="font-size: 11px; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Pokémon Caught</div>
                                         <div style="font-size: 18px; font-weight: bold; color: #fff;">${results.caught}/${results.encounters}</div>
                                     </div>
 
                                     <!-- Shinies Card -->
                                     <div style="background: rgba(255,255,255,0.05); border: 1px solid #475569; border-radius: 8px; padding: 12px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; overflow: hidden;">
                                         ${results.shinies > 0 ? '<div style="position: absolute; top: -10px; left: -10px; width: 150%; height: 150%; background: radial-gradient(circle, rgba(168,85,247,0.2) 0%, transparent 70%); pointer-events: none;"></div>' : ''}
-                                        <div style="font-size: 11px; color: #d8b4fe; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; z-index: 1;">Shinies Caught</div>
+                                        <div style="font-size: 11px; color: #d8b4fe; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; z-index: 1;">Shinies Caught</div>
                                         <div style="font-size: 18px; font-weight: bold; color: #fff; z-index: 1;">${results.shinies}/${results.shinyEncounters}</div>
                                     </div>
 
                                     <!-- Items Used Header -->
-                                    <div style="grid-column: span 2; border-bottom: 1px solid #334155; padding-bottom: 5px; margin-top: 5px; color: #94a3b8; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; text-align: center;">Resources Used</div>
+                                    <div style="grid-column: span 2; border-bottom: 1px solid #334155; padding-bottom: 4px; margin-top: 4px; color: #94a3b8; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; text-align: center;">Resources Used</div>
 
                                     <!-- Balls Used -->
-                                    <div style="background: rgba(0,0,0,0.2); border: 1px dashed #475569; border-radius: 8px; padding: 10px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                                    <div style="background: rgba(0,0,0,0.2); border: 1px dashed #475569; border-radius: 8px; padding: 8px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
                                         ${ballIconStr}
-                                        <div style="font-size: 12px; color: #cbd5e1;">${ballUsedStr}</div>
+                                        <div style="font-size: 9px; color: #cbd5e1;">${ballUsedStr}</div>
                                     </div>
 
                                     <!-- Potions Used -->
-                                    <div style="background: rgba(0,0,0,0.2); border: 1px dashed #475569; border-radius: 8px; padding: 10px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                                    <div style="background: rgba(0,0,0,0.2); border: 1px dashed #475569; border-radius: 8px; padding: 8px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
                                         ${potionIconStr}
-                                        <div style="font-size: 12px; color: #cbd5e1;">${potionUsedStr}</div>
+                                        <div style="font-size: 9px; color: #cbd5e1;">${potionUsedStr}</div>
                                     </div>
 
                                 </div>
                                 ${faintedBanner}
-                                <button id="btn-zzz-results-close-dynamic" style="padding: 12px; font-size: 16px; font-weight: bold; cursor: pointer; background: linear-gradient(to right, #10b981, #059669); color: white; border: 1px solid #34d399; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); margin-top: 15px; width: 100%; text-transform: uppercase; letter-spacing: 1px;">Claim Rewards</button>
+                                <button id="btn-zzz-results-close-dynamic" style="padding: 12px; font-size: 9px; font-weight: bold; cursor: pointer; background: linear-gradient(to right, #10b981, #059669); color: white; border: 1px solid #34d399; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); margin-top: 15px; width: 100%; text-transform: uppercase; letter-spacing: 1px;">Claim Rewards</button>
                                 </div>
                             `;
                             showModal("ZzZ Mode", resultsHtml, "window-zzz-rewards");
@@ -1630,7 +1628,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
 
             const htmlContent = `
                 <div class="content-panel" style="display: flex; flex-direction: column; gap: 15px; width: 100%;">
-                    <div id="zzz-tutorial-section" style="display: ${tutorialDisplay}; background: rgba(255,255,255,0.05); border: 1px dashed #475569; border-radius: 8px; padding: 15px; margin-bottom: 10px; text-align: left;">
+                    <div id="zzz-tutorial-section" style="display: ${tutorialDisplay}; background: rgba(255,255,255,0.05); border: 1px dashed #475569; border-radius: 8px; padding: 15px; margin-bottom: 8px; text-align: left;">
                         <div style="color: #cbd5e1; font-size: 14px; margin-bottom: 8px;"><b>Welcome to ZzZ Mode!</b></div>
                         <div style="color: #94a3b8; font-size: 13px; line-height: 1.4;">Earn <b>Jigglypuff Dust</b> simply by playing the game (1 minute active = 1 grain). You can spend these grains to allow your Pokémon to farm offline when you close the game (1 grain = 1 minute of offline farming).</div>
                     </div>
@@ -1642,13 +1640,13 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
                         <div style="flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center;">
                             <div style="font-size: 14px; color: #94a3b8; text-transform: uppercase; letter-spacing: 2px;">Available Grains</div>
                             <div id="zzz-current-grains" style="font-size: 36px; font-weight: bold; color: #fbcfe8; text-shadow: 0 2px 4px rgba(0,0,0,0.8); margin: 5px 0;">${grains}</div>
-                            <div id="zzz-max-offline-time" style="font-size: 12px; color: #cbd5e1;">(1 grain = 1min offline farm)</div>
+                            <div id="zzz-max-offline-time" style="font-size: 9px; color: #cbd5e1;">(1 grain = 1min offline farm)</div>
                         </div>
                     </div>
 
                     <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px;">
-                        <button id="btn-zzz-yes" style="padding: 12px; font-size: 16px; font-weight: bold; cursor: pointer; background: linear-gradient(to right, #3b82f6, #2563eb); color: white; border: 1px solid #60a5fa; border-radius: 8px; flex: 1; box-shadow: 0 4px 6px rgba(0,0,0,0.3); text-transform: uppercase; letter-spacing: 1px;">Go to Sleep</button>
-                        <button id="btn-zzz-no" style="padding: 12px; font-size: 16px; font-weight: bold; cursor: pointer; background: linear-gradient(to right, #ef4444, #dc2626); color: white; border: 1px solid #f87171; border-radius: 8px; flex: 1; box-shadow: 0 4px 6px rgba(0,0,0,0.3); text-transform: uppercase; letter-spacing: 1px;">Cancel</button>
+                        <button id="btn-zzz-yes" style="padding: 12px; font-size: 9px; font-weight: bold; cursor: pointer; background: linear-gradient(to right, #3b82f6, #2563eb); color: white; border: 1px solid #60a5fa; border-radius: 8px; flex: 1; box-shadow: 0 4px 6px rgba(0,0,0,0.3); text-transform: uppercase; letter-spacing: 1px;">Go to Sleep</button>
+                        <button id="btn-zzz-no" style="padding: 12px; font-size: 9px; font-weight: bold; cursor: pointer; background: linear-gradient(to right, #ef4444, #dc2626); color: white; border: 1px solid #f87171; border-radius: 8px; flex: 1; box-shadow: 0 4px 6px rgba(0,0,0,0.3); text-transform: uppercase; letter-spacing: 1px;">Cancel</button>
                     </div>
 
                     <button id="btn-zzz-cheat-grains" style="margin-top: 15px; padding: 5px 10px; font-size: 11px; cursor: pointer; background: transparent; color: #94a3b8; border: 1px dashed #475569; border-radius: 4px;">Add +10 grains</button>
@@ -1722,10 +1720,10 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
                 <p><b>Jigglypuff Grains Used:</b> ${state.stats.jigglypuffGrainsUsed || 0}</p>
                 <p><b>Money:</b> $${state.trainer.money}</p>
             </div>
-            <h3 style="margin-top: 10px; margin-bottom: 5px;">Badges:</h3>
+            <h3 style="margin-top: 10px; margin-bottom: 4px;">Badges:</h3>
             ${badgesHtml}
             <div style="margin-top: 15px; text-align: center;">
-                <button id="btn-catch-rate" style="padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer; background: #3b82f6; color: white; border: none; border-radius: 5px;">Catch Rate Table</button>
+                <button id="btn-catch-rate" style="padding: 10px 20px; font-size: 9px; font-weight: bold; cursor: pointer; background: #3b82f6; color: white; border: none; border-radius: 5px;">Catch Rate Table</button>
             </div>
         `, "window-trainer");
 
