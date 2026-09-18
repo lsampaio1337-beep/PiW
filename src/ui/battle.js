@@ -109,7 +109,7 @@ export function updateBattleArena() {
                     combatArena.dataset.bgAnimationInterval = setInterval(() => {
                         const gameSpeed = (state && state.settings && state.settings.gameSpeed) ? state.settings.gameSpeed : 1;
                         const slideDelay = 1000 / gameSpeed;
-                        const moveDistance = 32.5; // Half of 65% (100% -> 35%)
+                        const moveDistance = 16.25; // Reduce speed to half of what it was
                         const ticksPerSlide = slideDelay / 33;
                         const pctPerTick = moveDistance / ticksPerSlide;
                         pos += pctPerTick;
@@ -130,7 +130,7 @@ export function updateBattleArena() {
                     void combatArena.offsetWidth;
                     requestAnimationFrame(() => {
                         requestAnimationFrame(() => {
-                            combatArena.style.backgroundPositionX = `${pos + 32.5}%`;
+                            combatArena.style.backgroundPositionX = `${pos + 16.25}%`;
                         });
                     });
                 }
