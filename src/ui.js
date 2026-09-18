@@ -394,10 +394,12 @@ window.showChallengesModal = function() {
 
     html += `</div>`;
 
-    showModal("Progress Challenges", html, "window-challenges");
+    // Explicitly set width and height so the outer modal container triggers the scrollbar.
+    showModal("Progress Challenges", html, "window-challenges", "600px", "600px");
     const win = document.getElementById("window-challenges");
-
-    // With outer scrollbars, we don't constrain the inner wrapper height. Let the window handle it.
+    if (win) {
+        win.style.maxHeight = '600px';
+    }
 
     if (window.windowManager) window.windowManager.recalculateWindowSize('window-challenges');
 };
@@ -514,10 +516,11 @@ function showCatchRateModal(showShiny = false) {
     </div>
     </div>`;
 
-    showModal("Catch Rate Table", html, "window-catch-rate", "800px", "auto");
+    showModal("Catch Rate Table", html, "window-catch-rate", "800px", "600px");
 
     const win = document.getElementById('window-catch-rate');
     if (win) {
+        win.style.maxHeight = '600px';
         const innerContent = win.querySelector('.window-content-container');
         if (innerContent) {
             innerContent.style.setProperty('padding', '0px', 'important'); // Let the injected wrapper handle the 5% padding so it sizes nicely
@@ -1719,7 +1722,12 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
             <div style="margin-top: 15px; text-align: center;">
                 <button id="btn-catch-rate" style="padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer; background: #3b82f6; color: white; border: none; border-radius: 5px;">Catch Rate Table</button>
             </div>
-        `, "window-trainer");
+        `, "window-trainer", "800px", "600px");
+
+        const win = document.getElementById("window-trainer");
+        if (win) {
+            win.style.maxHeight = '600px';
+        }
 
         document.getElementById('btn-catch-rate').onclick = () => {
             if(!checkCombatLock()) showCatchRateModal();

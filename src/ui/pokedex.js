@@ -90,7 +90,11 @@ export function showPokedex() {
     }
 
     html += `</div>`;
-    showModal("Pokedex", html, "window-pokedex");
+    showModal("Pokedex", html, "window-pokedex", "800px", "600px");
+    const win = document.getElementById("window-pokedex");
+    if (win) {
+        win.style.maxHeight = '600px';
+    }
 }
 
 export function showDexEntry(id) {
