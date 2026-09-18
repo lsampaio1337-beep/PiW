@@ -64,17 +64,22 @@ export function updateSidebar() {
         else if (p.qualityName === "Regular") glowClass = "glow-regular";
 
         const isSinglePokemon = (state.party.length + dayCareCount === 1) && !state.stats.hasExpandedTeam;
-        const flexHeightStyle = isSinglePokemon ? 'height: 100%; min-height: 100%;' : 'height: 100%; min-height: 55px;';
 
-        // When there's only 1 pokemon, scale up the sprite and adjust the right column to distribute space
-        const rightColStyle = isSinglePokemon
-            ? 'flex: 1; display: flex; flex-direction: column; justify-content: space-around; padding-left: 5px; gap: 4px; min-width: 0; padding-top: 10px; padding-bottom: 10px;'
-            : 'flex: 1; display: flex; flex-direction: column; justify-content: center; padding-left: 5px; gap: 2px; min-width: 0;';
+        let outerFlexStyle, spriteColStyle, spriteScale, rightColStyle;
 
-        const spriteScale = isSinglePokemon ? 'transform: scale(3.5);' : 'transform: scale(1.5);';
-
-        const outerFlexStyle = isSinglePokemon ? 'display: flex; flex-direction: column; width: 100%; align-items: stretch; height: 100%; min-height: 100%; padding: 10px;' : `display: flex; width: 100%; align-items: stretch; ${flexHeightStyle}`;
-        const spriteColStyle = isSinglePokemon ? 'flex: 1; display: flex; align-items: center; justify-content: center; position: relative; min-height: 150px;' : 'flex: 0 0 50px; display: flex; align-items: center; justify-content: center; position: relative;';
+        if (isSinglePokemon) {
+            // For a single pokemon, card width is conceptually 100px and vertically proportioned (approx 140px)
+            outerFlexStyle = 'display: flex; flex-direction: column; width: 100px; align-items: stretch; height: 140px; margin: 0 auto; box-sizing: border-box;';
+            spriteColStyle = 'flex: 1; display: flex; align-items: center; justify-content: center; position: relative; min-height: 80px;';
+            spriteScale = 'transform: scale(2.0);'; // Adjusted scale for a smaller card
+            rightColStyle = 'flex: none; display: flex; flex-direction: column; justify-content: space-around; gap: 4px; min-width: 0; padding-top: 5px; height: 60px;';
+        } else {
+            // Standard layout
+            outerFlexStyle = 'display: flex; width: 100%; align-items: stretch; height: 100%; min-height: 55px; box-sizing: border-box;';
+            spriteColStyle = 'flex: 0 0 50px; display: flex; align-items: center; justify-content: center; position: relative;';
+            spriteScale = 'transform: scale(1.5);';
+            rightColStyle = 'flex: 1; display: flex; flex-direction: column; justify-content: center; padding-left: 5px; gap: 2px; min-width: 0;';
+        }
 
         d.innerHTML = `
             <div style="${outerFlexStyle}">
@@ -130,7 +135,6 @@ export function updateSidebar() {
     // Day Care UI updates
     const dayCareContainer = document.getElementById('day-care');
     if (state.dayCareRef && dayCareContainer) {
-
         renderDayCareSlot(document.getElementById('dc-slot1'), state.dayCareRef.slot1.pokemon, state.dayCareRef.slot1.battles, state.dayCareRef.slot1.requiredBattles, 'breed');
         renderDayCareSlot(document.getElementById('dc-slot2'), state.dayCareRef.slot2.pokemon, state.dayCareRef.slot2.battles, state.dayCareRef.slot2.requiredBattles, 'train');
 
@@ -154,19 +158,31 @@ export function updateSidebar() {
                 const win = document.getElementById('party-window');
                 if (win && typeof win.adjustHeightForNewContent === 'function') {
                     if (currentTeamCount === 1 && !state.stats.hasExpandedTeam) {
-                        win.style.width = '250px';
-                        win.style.height = '300px';
+                        win.style.width = '110px';
+                        win.style.height = 'auto'; // Let the internal 140px card dictate height
+                        const contentPanel = win.querySelector('.content-panel');
+                        if (contentPanel) {
+                            contentPanel.style.padding = '5px';
+                        }
                         if (typeof win.resetResizeDims === 'function') {
                             win.resetResizeDims();
                         }
+                        win.adjustHeightForNewContent(); // Measure accurate height
                     } else {
-                        if (win.style.height === '300px') {
+                        // Restore normal width if reverting from single state
+                        if (win.style.width === '110px') {
                             win.style.width = '250px';
                             win.style.height = 'auto';
+                            const contentPanel = win.querySelector('.content-panel');
+                            if (contentPanel) {
+                                contentPanel.style.padding = ''; // Clear inline padding
+                            }
                         } else if (!state.stats.hasExpandedTeam) {
-                            // If first time going > 1, make sure we enforce default width
-                            // to override any manual resize on the 1-size window.
                             win.style.width = '250px';
+                            const contentPanel = win.querySelector('.content-panel');
+                            if (contentPanel) {
+                                contentPanel.style.padding = '';
+                            }
                         }
                         win.adjustHeightForNewContent();
                     }

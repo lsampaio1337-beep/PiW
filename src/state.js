@@ -21,7 +21,6 @@ export const state = {
         }
     },
     stats: {
-        hasExpandedTeam: false,
         battlesWon: 0,
         caught: 0,
         shiniesSeen: 0,
@@ -52,6 +51,7 @@ export const state = {
         dailyRewards: { daysClaimed: 0, lastClaimDate: null },
         jigglypuffGrains: 0,
         jigglypuffGrainsUsed: 0,
+        hasExpandedTeam: false,
         hasSeenZzZTutorial: false,
         newRoutes: [],
         hasUnseenMap: false,
