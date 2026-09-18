@@ -34,12 +34,18 @@ export function showMap() {
     unlockedAreas.add("PokeCenter & PokeMarket");
     if (state.stats.completedChallengeIds) {
         state.stats.completedChallengeIds.forEach(id => {
-            parseAreaNames(id).forEach(area => unlockedAreas.add(area));
+            parseAreaNames(id).forEach(area => {
+                unlockedAreas.add(area);
+                if (area === "Mt. Moon") unlockedAreas.add("Mount Moon");
+            });
         });
     }
     if (state.stats.activeChallenges) {
         state.stats.activeChallenges.forEach(id => {
-            parseAreaNames(id).forEach(area => unlockedAreas.add(area));
+            parseAreaNames(id).forEach(area => {
+                unlockedAreas.add(area);
+                if (area === "Mt. Moon") unlockedAreas.add("Mount Moon");
+            });
         });
     }
 
