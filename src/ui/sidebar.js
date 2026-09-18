@@ -68,15 +68,18 @@ export function updateSidebar() {
 
         // When there's only 1 pokemon, scale up the sprite and adjust the right column to distribute space
         const rightColStyle = isSinglePokemon
-            ? 'flex: 1; display: flex; flex-direction: column; justify-content: space-around; padding-left: 5px; gap: 4px; min-width: 0;'
+            ? 'flex: 1; display: flex; flex-direction: column; justify-content: space-around; padding-left: 5px; gap: 4px; min-width: 0; padding-top: 10px; padding-bottom: 10px;'
             : 'flex: 1; display: flex; flex-direction: column; justify-content: center; padding-left: 5px; gap: 2px; min-width: 0;';
 
-        const spriteScale = isSinglePokemon ? 'transform: scale(2.0);' : 'transform: scale(1.5);';
+        const spriteScale = isSinglePokemon ? 'transform: scale(3.5);' : 'transform: scale(1.5);';
+
+        const outerFlexStyle = isSinglePokemon ? 'display: flex; flex-direction: column; width: 100%; align-items: stretch; height: 100%; min-height: 100%; padding: 10px;' : `display: flex; width: 100%; align-items: stretch; ${flexHeightStyle}`;
+        const spriteColStyle = isSinglePokemon ? 'flex: 1; display: flex; align-items: center; justify-content: center; position: relative; min-height: 150px;' : 'flex: 0 0 50px; display: flex; align-items: center; justify-content: center; position: relative;';
 
         d.innerHTML = `
-            <div style="display: flex; width: 100%; align-items: stretch; ${flexHeightStyle}">
-                <!-- Left Column: Sprite -->
-                <div style="flex: 0 0 50px; display: flex; align-items: center; justify-content: center; position: relative;">
+            <div style="${outerFlexStyle}">
+                <!-- Sprite Area -->
+                <div style="${spriteColStyle}">
                     ${p.isTransformed && p.transformedIntoId ?
                         `<img src="Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? '132_shiny' : '132'}.png" class="${glowClass}" style="position: absolute; top: 0; left: 0; max-width: 100%; max-height: 100%; object-fit: contain; pointer-events: none; opacity: 0.5; ${spriteScale} z-index: 1;">
                          <img src="Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png" onload="this.style.display='inline'" onerror="this.style.display='none'" class="${glowClass}" style="max-width: 100%; max-height: 100%; object-fit: contain; pointer-events: none; opacity: 0.85; ${spriteScale} z-index: 2; position: relative;">`
@@ -152,12 +155,12 @@ export function updateSidebar() {
                 if (win && typeof win.adjustHeightForNewContent === 'function') {
                     if (currentTeamCount === 1 && !state.stats.hasExpandedTeam) {
                         win.style.width = '250px';
-                        win.style.height = '125px';
+                        win.style.height = '300px';
                         if (typeof win.resetResizeDims === 'function') {
                             win.resetResizeDims();
                         }
                     } else {
-                        if (win.style.height === '125px') {
+                        if (win.style.height === '300px') {
                             win.style.width = '250px';
                             win.style.height = 'auto';
                         } else if (!state.stats.hasExpandedTeam) {
