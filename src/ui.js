@@ -462,7 +462,8 @@ function showCatchRateModal(showShiny = false) {
         rowData.sort((a, b) => a.id - b.id);
     }
 
-    let html = `<div style="text-align: center; margin-bottom: 15px;">
+    let html = `<div style="padding: 5%; box-sizing: border-box;">
+    <div style="text-align: center; margin-bottom: 15px;">
         <button id="btn-catch-rate-shiny-toggle" style="padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer; background: ${showShiny ? '#fbbf24' : '#6b7280'}; color: white; border: none; border-radius: 5px;">
             ${showShiny ? 'Showing Shiny Attempts (Click to show Normal)' : 'Showing Normal Attempts (Click to show Shiny)'}
         </button>
@@ -488,7 +489,7 @@ function showCatchRateModal(showShiny = false) {
     } else {
         rowData.forEach(row => {
             html += `<tr style="border-bottom: 1px solid #334155; background: rgba(0,0,0,0.2);">
-                <td style="padding: 8px; font-weight: bold;">${row.name}</td>`;
+                <td style="padding: 8px; font-weight: bold; text-align: left;">#${row.id} ${row.name}</td>`;
 
             balls.forEach(b => {
                 const bData = row.data[b];
@@ -505,9 +506,18 @@ function showCatchRateModal(showShiny = false) {
 
     html += `   </tbody>
         </table>
+    </div>
     </div>`;
 
-    showModal("Catch Rate Table", html, "window-catch-rate", "800px");
+    showModal("Catch Rate Table", html, "window-catch-rate", "800px", "auto");
+
+    const win = document.getElementById('window-catch-rate');
+    if (win) {
+        const innerContent = win.querySelector('.window-content-container');
+        if (innerContent) {
+            innerContent.style.setProperty('padding', '0px', 'important'); // Let the injected wrapper handle the 5% padding so it sizes nicely
+        }
+    }
 
     setTimeout(() => {
         const btn = document.getElementById('btn-catch-rate-shiny-toggle');
