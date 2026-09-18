@@ -466,12 +466,23 @@ export class WindowManager {
             const growthRatio = newOriginalWidth / currentOriginalWidth;
             scalerElement.style.setProperty('--original-width', newOriginalWidth + 'px');
 
+            // Set original width properly to prevent glitches
+            if (winElement._originalWidth) {
+                 winElement._originalWidth = newOriginalWidth;
+            }
+
             // Scale up the window width by the same ratio
             if (oldWidth && oldWidth.endsWith('px')) {
                 const currentWidth = parseInt(oldWidth);
                 winElement.style.width = (currentWidth * growthRatio) + 'px';
             } else {
                 winElement.style.width = newOriginalWidth + 'px';
+            }
+
+            // If we are strictly expanding horizontally, the vertical unscaled originalHeight remains perfectly static
+            // but the window's total _originalRatio must be updated since it's wider now, so resize handle works flawlessly
+            if (winElement._originalHeight) {
+                winElement._originalRatio = winElement._originalWidth / winElement._originalHeight;
             }
 
             this.saveWindowData(windowId);

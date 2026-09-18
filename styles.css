@@ -17,15 +17,11 @@ body {
     justify-content: center;
     align-items: center;
     background-color: #34495e;
-    padding: 1% 2%;
     border-bottom: 2px solid #1abc9c;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     margin: 0 auto;
     width: 100%;
-    aspect-ratio: 15 / 1;
-    max-width: none;
-    max-height: 80px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     box-sizing: border-box;
 }
@@ -33,9 +29,9 @@ body {
 #nav-buttons {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
     width: 100%;
-    height: 80%;
+    height: 100%;
     gap: 1%;
 }
 
@@ -469,7 +465,8 @@ input[type="number"] {
     border-bottom: none;
     margin: 0;
     width: 100%;
-    padding: 10px;
+    height: 120px;
+    padding: 5%;
     border-radius: 0;
     box-sizing: border-box;
 }
@@ -519,7 +516,8 @@ input[type="number"] {
 
 #window-map .window-content-container,
 #main-view-window .window-content-container,
-#party-window .window-content-container {
+#party-window .window-content-container,
+#top-bar-window .window-content-container {
     padding: 0 !important;
 }
 
