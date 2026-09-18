@@ -41,7 +41,7 @@ export function showBonusCandyModal() {
     }
 
     const html = `
-        <div style="text-align: center; font-family: sans-serif;">
+        <div style="text-align: center; font-family: sans-serif; box-sizing: border-box;">
             <div style="margin-bottom: 10px;">
                 <h2 style="margin: 0; display: inline-block; vertical-align: middle;">White Candies: ${state.stats.whiteCandies || 0}</h2>
                 <img src="Assets/Extra/WhiteCandy.png" style="width: 30px; height: 30px; vertical-align: middle; margin-left: 10px;" onerror="this.style.display='none'">
@@ -103,7 +103,7 @@ export function showBonusCandyModal() {
         </div>
     `;
 
-    showModal("Bonus Candy", html, "window-bonus-candy");
+    showModal("Bonus Candy", html, "window-bonus-candy", "800px", "auto");
 }
 
 function renderCandyOption(color, effectText, cost, currentOwned, currentEffect, imageFile) {
@@ -157,14 +157,14 @@ window.claimWhiteCandy = function() {
         state.stats.whiteCandies = (state.stats.whiteCandies || 0) + 1;
         updateUI();
         showBonusCandyModal(); // Refresh modal
-    }
+            }
 };
 
 window.cheatWhiteCandy = function() {
     state.stats.whiteCandies = (state.stats.whiteCandies || 0) + 1;
     updateUI();
     showBonusCandyModal();
-};
+    };
 
 window.buyBonusCandy = function(color) {
     if (color === 'Rainbow Candy' && (state.stats.rainbowCandies || 0) >= 5) {
@@ -194,7 +194,7 @@ window.buyBonusCandy = function(color) {
 
         updateUI();
         showBonusCandyModal(); // Refresh modal
-    } else {
+            } else {
         alert("Not enough White Candies!");
     }
 };
