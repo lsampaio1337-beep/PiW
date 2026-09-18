@@ -95,7 +95,7 @@ export function showPokedex() {
     }
 
     html += `</div>`;
-    showModal("Pokedex", html, "window-pokedex");
+    showModal("Pokedex", html, "window-pokedex", "600px", "500px");
 }
 
 export function showDexEntry(id) {
@@ -127,7 +127,7 @@ export function showDexEntry(id) {
         </div>
     `;
 
-    showModal(`Pokedex Entry - ${pData.name}`, html, `window-pokedex-entry-${pData.id}`);
+    showModal(`Pokedex Entry - ${pData.name}`, html, `window-pokedex-entry-${pData.id}`, "500px", "600px");
 }
 
 export function buildEvolutionLineHtml(pData, state) {
@@ -179,7 +179,7 @@ export function buildEvolutionLineHtml(pData, state) {
     }
 
     let treeHtml = buildTree(baseId);
-    return `<div style="text-align: left; margin: 15px 0; font-size: 14px; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 5px; overflow-x: auto;">
+    return `<div style="text-align: left; margin: 15px 0 0 0; font-size: 14px; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 5px; overflow-x: auto;">
         <h4 style="margin: 0 0 10px 0;">Evolution Line</h4>
         <div style="display: flex; align-items: center; justify-content: center;">
             ${treeHtml}
@@ -262,7 +262,7 @@ export function getSpeciesDataHtml(pData, state) {
     return `
         <p><b>BST:</b> ${bst} (HP:${pData.hp} | Speed:${pData.spe} | Atk:${pData.atk} | SpAtk:${pData.spa} | Def:${pData.def} | SpDef:${pData.spd})</p>
 
-        <div style="text-align: left; margin: 15px 0; font-size: 14px; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 5px;">
+        <div style="text-align: left; margin: 15px 0 0 0; font-size: 14px; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 5px;">
             <h4 style="margin: 0 0 5px 0;">Defensive Effectiveness</h4>
             ${Object.keys(def4x).length ? `<b>Very Weak To (4x):</b> ${formatTypes(def4x)}<br>` : ''}
             ${Object.keys(def2x).length ? `<b>Weak To (2x):</b> ${formatTypes(def2x)}<br>` : ''}
@@ -277,6 +277,8 @@ export function getSpeciesDataHtml(pData, state) {
         </div>
 
         <h4 style="text-align: left;">Moveset</h4>
-        ${movesHtml}
+        <div style="margin-bottom: 0;">
+            ${movesHtml}
+        </div>
     `;
 }
