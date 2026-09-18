@@ -128,7 +128,6 @@ export function showMap() {
 
     html += `
         </div>
-        <div id="map-tooltip" style="display:none; position:absolute; background:rgba(0,0,0,0.8); color:white; padding:5px; border-radius:5px; pointer-events:none; z-index: 100;"></div>
     `;
 
 
@@ -380,8 +379,13 @@ export function navigateToLocation(locationName) {
 }
 
 export function showMapTooltip(e, locationName) {
-    const tooltip = document.getElementById('map-tooltip');
-    if (!tooltip) return;
+    let tooltip = document.getElementById('map-tooltip');
+    if (!tooltip) {
+        tooltip = document.createElement('div');
+        tooltip.id = 'map-tooltip';
+        tooltip.style.cssText = 'display:none; position:fixed; background:rgba(0,0,0,0.8); color:white; padding:5px; border-radius:5px; pointer-events:none; z-index: 99999;';
+        document.body.appendChild(tooltip);
+    }
 
     let info = `<strong>${locationName}</strong><br>`;
 
