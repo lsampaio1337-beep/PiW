@@ -396,14 +396,8 @@ window.showChallengesModal = function() {
 
     showModal("Progress Challenges", html, "window-challenges");
     const win = document.getElementById("window-challenges");
-    const wrapper = document.getElementById("challenges-content-wrapper");
-    if (win && wrapper) {
-        // Read the actual unscaled width, defaulting to 800 if not yet set
-        let winWidth = win._originalWidth || parseInt(win.style.width) || win.offsetWidth || 800;
-        // The user wants max-height to be exactly the window's width (height=wide)
-        wrapper.style.maxHeight = winWidth + 'px';
 
-    }
+    // With outer scrollbars, we don't constrain the inner wrapper height. Let the window handle it.
 
     if (window.windowManager) window.windowManager.recalculateWindowSize('window-challenges');
 };
