@@ -392,6 +392,10 @@ window.showChallengesModal = function() {
         // The user wants max-height to be exactly the window's width (height=wide)
         wrapper.style.maxHeight = winWidth + 'px';
 
+        // Ensure resetResizeDims is called when replacing content entirely
+        if (typeof win.resetResizeDims === 'function') {
+            win.resetResizeDims();
+        }
     }
 
     if (window.windowManager) window.windowManager.recalculateWindowSize('window-challenges');
