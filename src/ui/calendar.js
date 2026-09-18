@@ -107,17 +107,17 @@ export function showCalendar() {
 
     const rewardList = getRewardListForWeek(weekNumber);
 
-    let html = `<div style="text-align: center; color: white;">`;
+    let html = `<div style="text-align: center; color: white; padding: 5%; box-sizing: border-box;">`;
     html += `<h2 style="margin-top: 0;">Daily Rewards - Week ${weekNumber}</h2>`;
-    html += `<div style="display: flex; gap: 10px; justify-content: center; overflow-x: auto; padding-bottom: 10px;">`;
+    html += `<div style="display: flex; gap: 1%; justify-content: center; padding-bottom: 10px; width: 100%;">`;
 
     for (let i = 0; i < 7; i++) {
         const reward = rewardList[i];
         let cardStyle = `
             border: 2px solid #555;
             border-radius: 8px;
-            padding: 10px;
-            width: 120px;
+            padding: 10px 5px;
+            flex: 1;
             background: rgba(0,0,0,0.6);
             display: flex;
             flex-direction: column;
