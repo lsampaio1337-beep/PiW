@@ -660,10 +660,29 @@ class BattleSystem {
         const totalIV = this.activeEncounter.ivs.hp + this.activeEncounter.ivs.atk + this.activeEncounter.ivs.def + this.activeEncounter.ivs.spa + this.activeEncounter.ivs.spd + this.activeEncounter.ivs.spe;
         const chance = mathEngine.calculateCatchChance(this.activeEncounter.bst, this.activeEncounter.level, this.activeEncounter.quality, totalIV, multiplier, this.state.stats, this.activeEncounter.qualityName === "Shiny");
 
+        const caught = (Math.random() * 100) <= chance;
+
+        // Track catch attempts per pokemon
+        if (!this.state.stats.catchAttempts) this.state.stats.catchAttempts = {};
+        if (!this.state.stats.shinyCatchAttempts) this.state.stats.shinyCatchAttempts = {};
+
+        const targetTracker = this.activeEncounter.qualityName === "Shiny" ? this.state.stats.shinyCatchAttempts : this.state.stats.catchAttempts;
+        if (!targetTracker[this.activeEncounter.name]) {
+            targetTracker[this.activeEncounter.name] = {};
+        }
+        if (!targetTracker[this.activeEncounter.name][ballName]) {
+            targetTracker[this.activeEncounter.name][ballName] = { thrown: 0, caught: 0 };
+        }
+
+        targetTracker[this.activeEncounter.name][ballName].thrown++;
+        if (caught) {
+            targetTracker[this.activeEncounter.name][ballName].caught++;
+        }
+
         return {
             used: true,
             ballName: ballName,
-            caught: (Math.random() * 100) <= chance
+            caught: caught
         };
     }
 

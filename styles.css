@@ -528,6 +528,14 @@ input[type="number"] {
     padding-bottom: 0 !important;
 }
 
+#window-trainer .window-content-container {
+    padding: 15px !important;
+}
+
+#window-trainer p {
+    margin: 5px 0;
+}
+
 .window-content-scaler {
     transform-origin: top left;
     width: var(--original-width, 100%);
