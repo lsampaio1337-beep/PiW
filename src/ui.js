@@ -854,7 +854,7 @@ window.showOakLabModal = function() {
     const title = document.getElementById('main-view-inner-modal-title');
     const content = document.getElementById('main-view-inner-modal-content');
     if (overlay && title && content) {
-        title.innerText = "Tasks & Rewards";
+        title.innerHTML = "Tasks & Rewards";
         content.innerHTML = html;
         overlay.style.display = 'flex';
     } else {
@@ -902,6 +902,11 @@ export function renderOakLab() {
 
 export function switchView(viewName) {
     document.querySelectorAll('.game-view').forEach(el => el.style.display = 'none');
+
+    const overlay = document.getElementById('main-view-inner-modal-overlay');
+    if (overlay) {
+        overlay.style.display = 'none';
+    }
 
     if (viewName === 'BATTLE_ARENA') {
         if (window.windowManager) window.windowManager.setWindowProportions('main-view-window', 5.75);

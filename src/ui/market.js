@@ -87,7 +87,7 @@ export function openPokeMarketBuy() {
     const title = document.getElementById('main-view-inner-modal-title');
     const content = document.getElementById('main-view-inner-modal-content');
     if (overlay && title && content) {
-        title.innerText = "Market";
+        title.innerHTML = `<span onclick="if(window.openPokeMarketBuy) window.openPokeMarketBuy()" style="cursor: pointer; text-decoration: underline;">Buy Items</span> <span style="margin: 0 10px;">|</span> <span onclick="if(window.openPokeMarketSell) window.openPokeMarketSell()" style="cursor: pointer; opacity: 0.6;">Sell Items</span>`;
         content.innerHTML = html;
         overlay.style.display = 'flex';
     } else {
@@ -222,7 +222,7 @@ export function renderPokeMarketTab(category) {
             upgradeType: u.type
         }));
     } else if (category === 'pokeballs') {
-        cols = 4;
+        cols = 6;
         items = state.config.balance.items.pokeballs.map(b => ({
             name: b.name,
             price: b.price,
@@ -444,7 +444,7 @@ export function openPokeMarketSell() {
     const title = document.getElementById('main-view-inner-modal-title');
     const content = document.getElementById('main-view-inner-modal-content');
     if (overlay && title && content) {
-        title.innerText = "Sell Items";
+        title.innerHTML = `<span onclick="if(window.openPokeMarketBuy) window.openPokeMarketBuy()" style="cursor: pointer; opacity: 0.6;">Buy Items</span> <span style="margin: 0 10px;">|</span> <span onclick="if(window.openPokeMarketSell) window.openPokeMarketSell()" style="cursor: pointer; text-decoration: underline;">Sell Items</span>`;
         content.innerHTML = html;
         overlay.style.display = 'flex';
     } else {
@@ -542,7 +542,7 @@ export function renderPokeMarketSellTab(category) {
     }
 
     if (category === 'pokeballs') {
-        cols = 4;
+        cols = 6;
         items = state.config.balance.items.pokeballs.map(b => ({
             name: b.name,
             buyPrice: b.price,
