@@ -1527,7 +1527,8 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
             }
 
             const htmlContent = `
-                <div style="display: flex; flex-direction: column; gap: 15px; width: 440px; padding: 10px;">
+                <style>#window-zzz-confirmation-content { padding: 0 !important; overflow: hidden !important; }</style>
+                <div style="display: flex; flex-direction: column; gap: 15px; width: 100%; box-sizing: border-box; padding: 5%;">
                     <div id="zzz-tutorial-section" style="display: ${tutorialDisplay}; background: rgba(255,255,255,0.05); border: 1px dashed #475569; border-radius: 8px; padding: 15px; margin-bottom: 10px; text-align: left;">
                         <div style="color: #cbd5e1; font-size: 14px; margin-bottom: 8px;"><b>Welcome to ZzZ Mode!</b></div>
                         <div style="color: #94a3b8; font-size: 13px; line-height: 1.4;">Earn <b>Jigglypuff Dust</b> simply by playing the game (1 minute active = 1 grain). You can spend these grains to allow your Pokémon to farm offline when you close the game (1 grain = 1 minute of offline farming).</div>
@@ -1554,6 +1555,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
             `;
 
             showModal("ZzZ Mode", htmlContent, "window-zzz-confirmation", "460px");
+            if (window.windowManager) window.windowManager.recalculateWindowSize('window-zzz-confirmation');
 
             document.getElementById('btn-zzz-no').onclick = () => {
                 if(window.windowManager) window.windowManager.closeDynamicWindow('window-zzz-confirmation');
