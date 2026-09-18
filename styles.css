@@ -523,6 +523,10 @@ input[type="number"] {
     box-sizing: border-box;
 }
 
+#window-bonus-candy .window-content-container {
+    padding: 5% !important;
+}
+
 .window-content-scaler {
     transform-origin: top left;
     width: var(--original-width, 100%);
