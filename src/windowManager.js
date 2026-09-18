@@ -509,7 +509,11 @@ export class WindowManager {
             if (winElement.offsetWidth > 0) {
                 currentWidth = winElement.offsetWidth + 'px';
             } else {
-                currentWidth = '800px';
+                if (windowId === 'party-window') {
+                    currentWidth = '250px';
+                } else {
+                    currentWidth = '800px';
+                }
             }
         }
 
