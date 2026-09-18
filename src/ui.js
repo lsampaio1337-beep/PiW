@@ -10,6 +10,17 @@ import Storage from "./storage.js";
 // Import State and modules
 import { state, setBattleSystem, globals } from './state.js';
 
+window.dismissDaycareMessage = function() {
+    state.stats.hasSeenDaycare = true;
+    document.getElementById('daycare-first-time-overlay').style.display = 'none';
+    if (Storage) {
+        Storage.save(state);
+    } else if (window.storageRef) {
+        window.storageRef.save(state);
+    }
+    updateUI();
+};
+
 export const TYPE_COLORS = {
     "Bug": "#aead56",
     "Dark": "#636066",
@@ -284,7 +295,7 @@ window.showChallengesModal = function() {
 
     if (!state.config.unlocks) return;
 
-    let html = `<div id="challenges-content-wrapper" style="display:flex; flex-direction:column; gap:15px; text-align:left; padding-right: 10px; padding-bottom: 15px; overflow-y: auto;">`;
+    let html = `<div id="challenges-content-wrapper" class="content-panel" style="display:flex; flex-direction:column; gap:15px; text-align:left; overflow-y: auto;">`;
 
     // Active Challenges Sector
     let activeChallengesCount = state.stats.activeChallenges ? state.stats.activeChallenges.length : 0;
@@ -432,8 +443,104 @@ window.closeModal = function(windowId) {
     }
 };
 
+
+function showCatchRateModal(showShiny = false) {
+    const balls = ["Pokeball", "Greatball", "Ultraball", "Safariball", "Masterball"];
+    const targetTracker = showShiny ? (state.stats.shinyCatchAttempts || {}) : (state.stats.catchAttempts || {});
+
+    // Collect all pokemon that have been thrown at
+    let rowData = [];
+    if (state.config && state.config.pokemonData) {
+        state.config.pokemonData.forEach(p => {
+            const data = targetTracker[p.name];
+            if (data) {
+                // Check if any ball was thrown
+                let anyThrown = false;
+                balls.forEach(b => {
+                    if (data[b] && data[b].thrown > 0) anyThrown = true;
+                });
+
+                if (anyThrown) {
+                    rowData.push({
+                        id: p.id,
+                        name: p.name,
+                        data: data
+                    });
+                }
+            }
+        });
+        // Sort by dex number ascending
+        rowData.sort((a, b) => a.id - b.id);
+    }
+
+    let html = `<div style="padding: 5%; box-sizing: border-box;">
+    <div style="text-align: center; margin-bottom: 15px;">
+        <button id="btn-catch-rate-shiny-toggle" style="padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer; background: ${showShiny ? '#fbbf24' : '#6b7280'}; color: white; border: none; border-radius: 5px;">
+            ${showShiny ? 'Showing Shiny Attempts (Click to show Normal)' : 'Showing Normal Attempts (Click to show Shiny)'}
+        </button>
+    </div>
+    <div style="max-height: 60vh; overflow-y: auto;">
+        <table style="width: 100%; border-collapse: collapse; text-align: center; color: white;">
+            <thead>
+                <tr style="background: rgba(255,255,255,0.1);">
+                    <th style="padding: 8px; border-bottom: 1px solid #475569;">Pokémon</th>`;
+
+    balls.forEach(b => {
+        html += `<th style="padding: 8px; border-bottom: 1px solid #475569;">
+            <img src="Assets/Items/Balls/${b}.png" style="width: 24px; height: 24px;" alt="${b}" title="${b}"><br>${b}
+        </th>`;
+    });
+
+    html += `   </tr>
+            </thead>
+            <tbody>`;
+
+    if (rowData.length === 0) {
+        html += `<tr><td colspan="${balls.length + 1}" style="padding: 20px; font-style: italic; color: #94a3b8;">No ${showShiny ? 'shiny ' : ''}catch attempts recorded yet.</td></tr>`;
+    } else {
+        rowData.forEach(row => {
+            html += `<tr style="border-bottom: 1px solid #334155; background: rgba(0,0,0,0.2);">
+                <td style="padding: 8px; font-weight: bold; text-align: left;">#${row.id} ${row.name}</td>`;
+
+            balls.forEach(b => {
+                const bData = row.data[b];
+                if (bData && bData.thrown > 0) {
+                    html += `<td style="padding: 8px;">${bData.caught} / ${bData.thrown}</td>`;
+                } else {
+                    html += `<td style="padding: 8px; color: #64748b;">-</td>`;
+                }
+            });
+
+            html += `</tr>`;
+        });
+    }
+
+    html += `   </tbody>
+        </table>
+    </div>
+    </div>`;
+
+    showModal("Catch Rate Table", html, "window-catch-rate", "800px", "auto");
+
+    const win = document.getElementById('window-catch-rate');
+    if (win) {
+        const innerContent = win.querySelector('.window-content-container');
+        if (innerContent) {
+            innerContent.style.setProperty('padding', '0px', 'important'); // Let the injected wrapper handle the 5% padding so it sizes nicely
+        }
+    }
+
+    setTimeout(() => {
+        const btn = document.getElementById('btn-catch-rate-shiny-toggle');
+        if (btn) {
+            btn.onclick = () => {
+                showCatchRateModal(!showShiny);
+            };
+        }
+    }, 0);
+}
+
 export function showModal(title, htmlContent, windowId = 'dynamic-modal', width = '800px', height = '600px') {
-    if (window.windowManager) {
         window.windowManager.createDynamicWindow(windowId, title, htmlContent, width, height);
     }
 }
@@ -575,7 +682,7 @@ window.showOakLabModal = function() {
         renderOakLab(); // Clear the notification from the lobby button
     }
 
-    let html = `<div style="display:flex; flex-direction:column; gap:15px; text-align:left; padding-right: 10px; padding-bottom: 15px; height: 100%; overflow-y: auto;">`;
+    let html = `<div class="content-panel" style="display:flex; flex-direction:column; gap:15px; text-align:left; height: 100%; overflow-y: auto;">`;
 
     const renderActiveTask = (type, currentVal, tierIdx, taskList) => {
         if (tierIdx >= taskList.length) {
@@ -1205,7 +1312,7 @@ async function init() {
 
                     if (state.isZzZMode) {
                         const resumeHtml = `
-    <div style="display: flex; flex-direction: column; gap: 15px; width: 360px; padding: 20px; text-align: center;">
+    <div class="content-panel" style="display: flex; flex-direction: column; gap: 15px; width: 100%; text-align: center;">
         <p style="color: white; margin: 0;">Do you want to collect the farm while Sleeping?</p>
         <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px;">
             <button id="btn-zzz-resume-yes" style="padding: 10px; font-size: 16px; font-weight: bold; cursor: pointer; background-color: #4CAF50; color: white; border: none; border-radius: 5px; flex: 1;">Yes</button>
@@ -1248,6 +1355,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
                             let actualTimeConsumedMs = Math.min(displayTimeMs, maxTimeMs);
                             let consumedGrains = Math.ceil(actualTimeConsumedMs / 60000);
                             state.stats.jigglypuffGrains = Math.max(0, availableGrains - consumedGrains);
+                            state.stats.jigglypuffGrainsUsed = (state.stats.jigglypuffGrainsUsed || 0) + consumedGrains;
 
                             state.isZzZMode = false;
                             state.zzzTimestamp = null;
@@ -1304,6 +1412,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
 
 
                             const resultsHtml = `
+                                <div class="content-panel">
                                 <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.3); padding: 8px 12px; border-radius: 8px; margin-bottom: 15px;">
                                     <div style="font-size: 14px; color: #cbd5e1;">📍 <b>Route:</b> ${state.currentRoute}</div>
                                     <div style="font-size: 14px; color: #cbd5e1;">⏳ <b>Time:</b> ${timeStr.trim()}</div>
@@ -1354,6 +1463,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
                                 </div>
                                 ${faintedBanner}
                                 <button id="btn-zzz-results-close-dynamic" style="padding: 12px; font-size: 16px; font-weight: bold; cursor: pointer; background: linear-gradient(to right, #10b981, #059669); color: white; border: 1px solid #34d399; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); margin-top: 15px; width: 100%; text-transform: uppercase; letter-spacing: 1px;">Claim Rewards</button>
+                                </div>
                             `;
                             showModal("ZzZ Mode", resultsHtml, "window-zzz-rewards");
 
@@ -1547,7 +1657,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
             }
 
             const htmlContent = `
-                <div style="display: flex; flex-direction: column; gap: 15px; width: 440px; padding: 10px;">
+                <div class="content-panel" style="display: flex; flex-direction: column; gap: 15px; width: 100%;">
                     <div id="zzz-tutorial-section" style="display: ${tutorialDisplay}; background: rgba(255,255,255,0.05); border: 1px dashed #475569; border-radius: 8px; padding: 15px; margin-bottom: 10px; text-align: left;">
                         <div style="color: #cbd5e1; font-size: 14px; margin-bottom: 8px;"><b>Welcome to ZzZ Mode!</b></div>
                         <div style="color: #94a3b8; font-size: 13px; line-height: 1.4;">Earn <b>Jigglypuff Dust</b> simply by playing the game (1 minute active = 1 grain). You can spend these grains to allow your Pokémon to farm offline when you close the game (1 grain = 1 minute of offline farming).</div>
@@ -1574,6 +1684,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
             `;
 
             showModal("ZzZ Mode", htmlContent, "window-zzz-confirmation", "460px");
+            if (window.windowManager) window.windowManager.recalculateWindowSize('window-zzz-confirmation');
 
             document.getElementById('btn-zzz-no').onclick = () => {
                 if(window.windowManager) window.windowManager.closeDynamicWindow('window-zzz-confirmation');
@@ -1640,11 +1751,19 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
                 <p><b>Faints:</b> ${state.stats.faints || 0}</p>
                 <p><b>Shinies Seen:</b> ${state.stats.shiniesSeen || 0}</p>
                 <p><b>Shinies Caught:</b> ${state.stats.shiniesCaught || 0}</p>
+                <p><b>Jigglypuff Grains Used:</b> ${state.stats.jigglypuffGrainsUsed || 0}</p>
                 <p><b>Money:</b> $${state.trainer.money}</p>
             </div>
-            <h3 style="margin-top: 20px;">Badges:</h3>
+            <h3 style="margin-top: 10px; margin-bottom: 5px;">Badges:</h3>
             ${badgesHtml}
+            <div style="margin-top: 15px; text-align: center;">
+                <button id="btn-catch-rate" style="padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer; background: #3b82f6; color: white; border: none; border-radius: 5px;">Catch Rate Table</button>
+            </div>
         `, "window-trainer");
+
+        document.getElementById('btn-catch-rate').onclick = () => {
+            if(!checkCombatLock()) showCatchRateModal();
+        };
     });
 
     bindBtn('btn-settings', () => {
