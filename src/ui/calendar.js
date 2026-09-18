@@ -87,7 +87,16 @@ export function claimDailyReward(dayIndex) {
 
     // Refresh UI
     updateTopbar();
-    showCalendar();
+
+    // Instead of completely re-rendering and losing scale, we just update HTML content
+    // and let WindowManager adjust.
+    if (window.windowManager) {
+        showCalendar();
+        const win = document.getElementById("window-calendar");
+        if (win && win.adjustHeightForNewContent) {
+            win.adjustHeightForNewContent();
+        }
+    }
 }
 
 // Make globally accessible for the inline onclick handler

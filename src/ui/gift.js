@@ -28,6 +28,10 @@ window.claimPendingGift = function(index) {
 
     showGiftModal(); // refresh modal
     updateUI();
+    const win = document.getElementById("window-gifts");
+    if (win && win.adjustHeightForNewContent) {
+        win.adjustHeightForNewContent();
+    }
 };
 
 export function showGiftModal() {
