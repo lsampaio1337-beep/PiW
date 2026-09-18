@@ -11,6 +11,13 @@ let lastTeamCount = -1;
 export function updateSidebar() {
     const partyDiv = document.getElementById('party-list');
     if (!partyDiv) return;
+
+    let dayCareCount = 0;
+    if (state.dayCareRef) {
+        if (state.dayCareRef.slot1 && state.dayCareRef.slot1.pokemon) dayCareCount++;
+        if (state.dayCareRef.slot2 && state.dayCareRef.slot2.pokemon) dayCareCount++;
+    }
+
     partyDiv.innerHTML = '';
     state.party.forEach((p, idx) => {
         const d = document.createElement('div');
@@ -119,10 +126,7 @@ export function updateSidebar() {
 
     // Day Care UI updates
     const dayCareContainer = document.getElementById('day-care');
-    let dayCareCount = 0;
     if (state.dayCareRef && dayCareContainer) {
-        if (state.dayCareRef.slot1.pokemon) dayCareCount++;
-        if (state.dayCareRef.slot2.pokemon) dayCareCount++;
 
         renderDayCareSlot(document.getElementById('dc-slot1'), state.dayCareRef.slot1.pokemon, state.dayCareRef.slot1.battles, state.dayCareRef.slot1.requiredBattles, 'breed');
         renderDayCareSlot(document.getElementById('dc-slot2'), state.dayCareRef.slot2.pokemon, state.dayCareRef.slot2.battles, state.dayCareRef.slot2.requiredBattles, 'train');
@@ -154,7 +158,12 @@ export function updateSidebar() {
                         }
                     } else {
                         if (win.style.height === '125px') {
+                            win.style.width = '250px';
                             win.style.height = 'auto';
+                        } else if (!state.stats.hasExpandedTeam) {
+                            // If first time going > 1, make sure we enforce default width
+                            // to override any manual resize on the 1-size window.
+                            win.style.width = '250px';
                         }
                         win.adjustHeightForNewContent();
                     }
