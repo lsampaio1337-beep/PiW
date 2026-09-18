@@ -295,7 +295,7 @@ window.showChallengesModal = function() {
 
     if (!state.config.unlocks) return;
 
-    let html = `<div id="challenges-content-wrapper" class="content-panel" style="display:flex; flex-direction:column; gap:15px; text-align:left; overflow-y: auto;">`;
+    let html = `<div id="challenges-content-wrapper" class="content-panel" style="display:flex; flex-direction:column; gap:15px; text-align:left;">`;
 
     // Active Challenges Sector
     let activeChallengesCount = state.stats.activeChallenges ? state.stats.activeChallenges.length : 0;
@@ -479,7 +479,7 @@ function showCatchRateModal(showShiny = false) {
             ${showShiny ? 'Showing Shiny Attempts (Click to show Normal)' : 'Showing Normal Attempts (Click to show Shiny)'}
         </button>
     </div>
-    <div style="max-height: 60vh; overflow-y: auto;">
+    <div>
         <table style="width: 100%; border-collapse: collapse; text-align: center; color: white;">
             <thead>
                 <tr style="background: rgba(255,255,255,0.1);">
@@ -683,7 +683,7 @@ window.showOakLabModal = function() {
         renderOakLab(); // Clear the notification from the lobby button
     }
 
-    let html = `<div class="content-panel" style="display:flex; flex-direction:column; gap:15px; text-align:left; height: 100%; overflow-y: auto;">`;
+    let html = `<div class="content-panel" style="display:flex; flex-direction:column; gap:15px; text-align:left;">`;
 
     const renderActiveTask = (type, currentVal, tierIdx, taskList) => {
         if (tierIdx >= taskList.length) {

@@ -117,7 +117,7 @@ export function renderPokemonTab(area) {
             <!-- Column 1: Active -->
             <div style="flex: 2; border: 1px solid #555; padding: 5px; display: flex; flex-direction: column; min-width: 0; min-height: 0; overflow-x: hidden;">
                 <h4 style="text-align: center; margin-top:0;">Active</h4>
-                <div id="active-scroll-container" style="display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-rows: max-content; gap: 5px; overflow-y: auto; overflow-x: hidden; align-content: start; flex-grow: 1; padding-bottom: 20px; min-height: 0;">
+                <div id="active-scroll-container" style="display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-rows: max-content; gap: 5px; overflow-x: hidden; align-content: start; flex-grow: 1; padding-bottom: 20px; min-height: 0;">
     `;
 
 
@@ -170,7 +170,7 @@ export function renderPokemonTab(area) {
             <!-- Column 2: Storage -->
             <div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'storage')" style="flex: 4; border: 1px solid #555; padding: 5px; display: flex; flex-direction: column; min-width: 0; min-height: 0; overflow-x: hidden;">
                 <h4 style="text-align: center; margin-top:0;">Storage</h4>
-                <div id="storage-scroll-container" style="display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: max-content; gap: 5px; overflow-y: auto; overflow-x: hidden; align-content: start; flex-grow: 1; padding-bottom: 20px; min-height: 0;">
+                <div id="storage-scroll-container" style="display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: max-content; gap: 5px; overflow-x: hidden; align-content: start; flex-grow: 1; padding-bottom: 20px; min-height: 0;">
     `;
 
     for (let i = 0; i < state.storage.length; i++) {
@@ -186,7 +186,7 @@ export function renderPokemonTab(area) {
             <!-- Column 3: Safe -->
             <div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'safe')" style="flex: 2; border: 1px solid #555; padding: 5px; display: flex; flex-direction: column; min-width: 0; min-height: 0; overflow-x: hidden;">
                 <h4 style="text-align: center; margin-top:0;">Safe</h4>
-                <div id="safe-scroll-container" style="display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-rows: max-content; gap: 5px; overflow-y: auto; overflow-x: hidden; align-content: start; flex-grow: 1; padding-bottom: 20px; min-height: 0;">
+                <div id="safe-scroll-container" style="display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-rows: max-content; gap: 5px; overflow-x: hidden; align-content: start; flex-grow: 1; padding-bottom: 20px; min-height: 0;">
     `;
 
     for (let i = 0; i < state.safe.length; i++) {
@@ -646,7 +646,7 @@ window.openDittoTransformModal = function(uuid) {
     const html = `
         <div style="text-align: center; color: white;">
             <h3>Select a Pokemon to Transform into</h3>
-            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 10px; max-height: 60vh; overflow-y: auto; padding: 10px;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 10px; padding: 10px;">
                 ${allPokemonHtml}
             </div>
             <div style="margin-top: 20px; display: flex; justify-content: center; gap: 10px;">
