@@ -119,5 +119,5 @@ export function showGiftModal() {
     if (win) {
         win.style.maxHeight = '800px';
     }
-
+    if (window.windowManager) window.windowManager.recalculateWindowSize('window-gifts');
 }
