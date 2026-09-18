@@ -164,9 +164,7 @@ window.cheatWhiteCandy = function() {
     state.stats.whiteCandies = (state.stats.whiteCandies || 0) + 1;
     updateUI();
     showBonusCandyModal();
-<<<<<<< Updated upstream
     };
-=======
 
 };
 };
@@ -194,12 +192,9 @@ window.cheatWhiteCandy = function() {
 
         updateUI();
         showBonusCandyModal(); // Refresh modal
-<<<<<<< Updated upstream
-            } else {
-=======
-//
+
     } else {
->>>>>>> Stashed changes
+
         alert("Not enough White Candies!");
     }
 };
