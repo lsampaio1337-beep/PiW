@@ -198,6 +198,8 @@ export function renderPokeMarketTab(category) {
     let items = [];
 
 
+    let html = `<div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: calc(var(--m-width) * 0.018); justify-content: center; width: 100%;">`;
+
     if (category === 'upgrades') {
 
         let ballTier = state.stats.upgrades.ballsTier || 0;
@@ -220,7 +222,6 @@ export function renderPokeMarketTab(category) {
             upgradeType: u.type
         }));
     } else if (category === 'pokeballs') {
-        cols = 4;
         items = state.config.balance.items.pokeballs.map(b => ({
             name: b.name,
             price: b.price,
@@ -228,7 +229,6 @@ export function renderPokeMarketTab(category) {
             attrLabel: b.name === 'Masterball' ? `Efficiency: 100%` : `Efficiency: ${b.multiplier}x`
         }));
     } else if (category === 'potions') {
-        cols = 6;
         items = state.config.balance.items.potions
             .filter(p => p.name !== 'Max Potion')
             .map(p => {
@@ -243,7 +243,6 @@ export function renderPokeMarketTab(category) {
                 };
             });
     } else if (category === 'stones') {
-        cols = 6;
         const stonePrice = state.config.balance.items.stones.price;
         let stoneKeys = Object.keys(state.backpack.stones);
         stoneKeys.sort((a, b) => a.localeCompare(b));
@@ -254,8 +253,6 @@ export function renderPokeMarketTab(category) {
             attrLabel: `Evolution Item`
         }));
     }
-
-    let html = `<div style="display: grid; grid-template-columns: repeat(${cols}, calc(var(--m-width) * 0.145)); gap: calc(var(--m-width) * 0.018); justify-content: center; width: 100%;">`;
     items.forEach(item => {
         let displayName = item.name;
         if (category === 'potions') displayName = displayName.replace(' Potion', '<br>Potion');
@@ -561,7 +558,6 @@ export function renderPokeMarketSellTab(category) {
                 };
             });
     } else if (category === 'stones') {
-        cols = 6;
         const stonePrice = state.config.balance.items.stones.price;
         let stoneKeysSell = Object.keys(state.backpack.stones);
         stoneKeysSell.sort((a, b) => a.localeCompare(b));
@@ -571,8 +567,6 @@ export function renderPokeMarketSellTab(category) {
             img: `./Assets/Items/Stones/${stoneName}.png`
         }));
     }
-
-    let html = `<div style="display: grid; grid-template-columns: repeat(${cols}, calc(var(--m-width) * 0.145)); gap: calc(var(--m-width) * 0.018); justify-content: center; width: 100%;">`;
     items.forEach(item => {
         let displayName = item.name;
         if (category === 'potions') displayName = displayName.replace(' Potion', '<br>Potion');
