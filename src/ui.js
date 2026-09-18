@@ -992,19 +992,80 @@ function selectStarter(id) {
     state.currentRoute = "Professor Oak Lab";
     switchView("PROF_OAK_LAB");
 
-    // Unlock the top bar for a new game
-    const navButtons = document.getElementById('nav-buttons');
-    if (navButtons) {
-        navButtons.style.pointerEvents = 'auto';
-        navButtons.style.opacity = '1.0';
-    }
+    const partyWindow = document.getElementById('party-window');
+    if (partyWindow) partyWindow.style.display = 'block';
 
-    startGame();
+    if (window.windowManager) window.windowManager.recalculateWindowSize('party-window');
+    updateSidebar();
 
-    // Force an immediate save so the initial state is persisted to the new profile
-    storage.save(state);
+    // Create the OK button
+    const okBtn = document.createElement("button");
+    okBtn.innerText = "ok";
+    okBtn.id = "btn-cheat-ok";
+    okBtn.style.position = "fixed";
+    okBtn.style.top = "50%";
+    okBtn.style.left = "50%";
+    okBtn.style.transform = "translate(-50%, -50%)";
+    okBtn.style.zIndex = "9999";
+    okBtn.style.padding = "20px 40px";
+    okBtn.style.fontSize = "24px";
 
-    renderOakLab(); // Renders the new Oak Lab UI now that we have a party
+    okBtn.onclick = () => {
+        // Insert second pokemon identical to the first
+        const starterCopy = {
+            id: pData.id,
+            name: pData.name,
+            types: pData.types,
+            level: level,
+            xp: 0,
+            qualityName: qName,
+            quality: q,
+            ivs: { ...ivs },
+            currentStats: { ...stats },
+            maxHp: stats.hp,
+            currentHp: stats.hp,
+            moves: [{name: "Tackle", power: 40, type: "Normal", category: "Physical"}] // Basic start
+        };
+        state.party.push(starterCopy);
+        updateSidebar();
+
+        okBtn.remove();
+
+        // Create the Remove button
+        const removeBtn = document.createElement("button");
+        removeBtn.innerText = "remove";
+        removeBtn.id = "btn-cheat-remove";
+        removeBtn.style.position = "fixed";
+        removeBtn.style.top = "50%";
+        removeBtn.style.left = "50%";
+        removeBtn.style.transform = "translate(-50%, -50%)";
+        removeBtn.style.zIndex = "9999";
+        removeBtn.style.padding = "20px 40px";
+        removeBtn.style.fontSize = "24px";
+
+        removeBtn.onclick = () => {
+            // Remove the second pokemon
+            state.party.pop();
+            updateSidebar();
+
+            removeBtn.remove();
+
+            // Continue with the normal game start flow
+            const navButtons = document.getElementById('nav-buttons');
+            if (navButtons) {
+                navButtons.style.pointerEvents = 'auto';
+                navButtons.style.opacity = '1.0';
+            }
+
+            startGame();
+            storage.save(state);
+            renderOakLab();
+        };
+
+        document.body.appendChild(removeBtn);
+    };
+
+    document.body.appendChild(okBtn);
 }
 
 function startGame() {
