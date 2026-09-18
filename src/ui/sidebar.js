@@ -128,13 +128,15 @@ export function updateSidebar() {
     if (lastTeamCount !== -1 && currentTeamCount !== lastTeamCount) {
         if (window.windowManager) {
             setTimeout(() => {
-                if (lastTeamCount === 0 && currentTeamCount > 0) {
-                    window.windowManager.recalculateWindowSize('party-window');
-                } else {
-                    const win = document.getElementById('party-window');
-                    if (win && typeof win.adjustHeightForNewContent === 'function') {
-                        win.adjustHeightForNewContent();
+                const win = document.getElementById('party-window');
+                if (win && typeof win.adjustHeightForNewContent === 'function') {
+                    if (lastTeamCount === 0 && currentTeamCount > 0) {
+                        win.style.width = '250px';
+                        if (typeof win.resetResizeDims === 'function') {
+                            win.resetResizeDims();
+                        }
                     }
+                    win.adjustHeightForNewContent();
                 }
             }, 10);
         }

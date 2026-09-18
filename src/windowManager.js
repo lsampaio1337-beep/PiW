@@ -262,8 +262,8 @@ export class WindowManager {
         };
 
         winElement.resetResizeDims = () => {
-            originalWidth = 0;
-            originalHeight = 0;
+            winElement._originalWidth = 0;
+            winElement._originalHeight = 0;
             initDims();
         };
 
