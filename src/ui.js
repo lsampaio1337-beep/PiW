@@ -405,7 +405,7 @@ window.showChallengesModal = function() {
 
     }
 
-
+    if (window.windowManager) window.windowManager.recalculateWindowSize('window-challenges');
 };
 window.dragOver = dragOver;
 window.handleDrop = handleDrop;
@@ -540,7 +540,8 @@ function showCatchRateModal(showShiny = false) {
     }, 0);
 }
 
-export function showModal(title, htmlContent, windowId = 'dynamic-modal', width = '800px', height = '600px') {
+export function showModal(title, htmlContent, windowId = 'dynamic-modal', width = '800px', height = 'auto') {
+    if (window.windowManager) {
         window.windowManager.createDynamicWindow(windowId, title, htmlContent, width, height);
     }
 }
@@ -862,7 +863,7 @@ window.showOakLabModal = function() {
     if (winTasks) {
         winTasks.style.maxHeight = '800px';
     }
-
+    if (window.windowManager) window.windowManager.recalculateWindowSize('window-tasks');
     }
 };
 
@@ -1560,91 +1561,60 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
         if (el) el.onclick = fn;
     };
 
-    const isWindowOpen = (windowId) => {
-        const win = document.getElementById(windowId);
-        return win && win.style.display !== 'none';
-    };
-
 
     bindBtn('btn-toggle-party', () => { window.windowManager.toggleWindow('party-window'); });
     bindBtn('btn-toggle-main', () => { window.windowManager.toggleWindow('main-view-window'); });
     bindBtn('btn-map', () => {
         if(!checkCombatLock()) {
-            if (isWindowOpen('window-map')) {
-                window.windowManager.toggleWindow('window-map', false);
-            } else {
-                showMap();
-                window.windowManager.toggleWindow('main-view-window', true);
-            }
+            showMap();
+            window.windowManager.toggleWindow('main-view-window', true);
         }
     });
     bindBtn('btn-backpack', () => {
         if(!checkCombatLock()) {
-            if (isWindowOpen('window-backpack')) {
-                window.windowManager.toggleWindow('window-backpack', false);
-            } else {
-                showBackpack();
-            }
+            showBackpack();
+
         }
     });
     bindBtn('btn-dex', () => {
         if(!checkCombatLock()) {
-            if (isWindowOpen('window-pokedex')) {
-                window.windowManager.toggleWindow('window-pokedex', false);
-            } else {
-                showPokedex();
-            }
+            showPokedex();
+
         }
     });
     bindBtn('btn-bonus-candy', () => {
         if(!checkCombatLock()) {
-            if (isWindowOpen('window-bonus-candy')) {
-                window.windowManager.toggleWindow('window-bonus-candy', false);
-            } else {
-                state.stats.hasSeenBonusCandyIcon = true;
-                storage.save(state);
-                updateTopbar();
-                showBonusCandyModal();
-            }
+            state.stats.hasSeenBonusCandyIcon = true;
+            storage.save(state);
+            updateTopbar();
+            showBonusCandyModal();
+
         }
     });
     bindBtn('btn-challenges', () => {
         if(!checkCombatLock()) {
-            if (isWindowOpen('window-challenges')) {
-                window.windowManager.toggleWindow('window-challenges', false);
-            } else {
-                window.showChallengesModal();
-            }
+            window.showChallengesModal();
+
         }
     });
     bindBtn('btn-calendar', () => {
         if(!checkCombatLock()) {
-            if (isWindowOpen('window-calendar')) {
-                window.windowManager.toggleWindow('window-calendar', false);
-            } else {
-                showCalendar();
-            }
+            showCalendar();
+
         }
     });
     bindBtn('btn-gift', () => {
         if(!checkCombatLock()) {
-            if (isWindowOpen('window-gifts')) {
-                window.windowManager.toggleWindow('window-gifts', false);
-            } else {
-                state.stats.hasSeenGiftIcon = true;
-                storage.save(state);
-                updateTopbar();
-                showGiftModal();
-            }
+            state.stats.hasSeenGiftIcon = true;
+            storage.save(state);
+            updateTopbar();
+            showGiftModal();
+
         }
     });
 
         bindBtn('btn-sleep', () => {
         if(!checkCombatLock()) {
-            if (isWindowOpen('window-zzz-confirmation')) {
-                window.windowManager.toggleWindow('window-zzz-confirmation', false);
-                return;
-            }
             state.stats.hasSeenZzZIcon = true;
             storage.save(state);
             updateTopbar();
@@ -1718,10 +1688,6 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
 
     bindBtn('btn-stats', () => {
         if(checkCombatLock()) return;
-        if (isWindowOpen('window-trainer')) {
-            window.windowManager.toggleWindow('window-trainer', false);
-            return;
-        }
         let badgesHtml = '<div style="display: flex; gap: 10px; margin-top: 10px; justify-content: center; flex-wrap: wrap;">';
         for (let i = 1; i <= state.trainer.badges; i++) {
             badgesHtml += `<img src="./Assets/Badges/Badge Kanto ${i}.png" style="width: 40px; height: 40px;" title="Badge ${i}">`;
@@ -1767,13 +1733,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
     });
 
     bindBtn('btn-settings', () => {
-        if(!checkCombatLock()) {
-            if (isWindowOpen('window-settings')) {
-                window.windowManager.toggleWindow('window-settings', false);
-            } else {
-                showSettings();
-            }
-        }
+        if(!checkCombatLock()) showSettings();
     });
 
     bindBtn('btn-exit', () => {
