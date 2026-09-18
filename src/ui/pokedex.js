@@ -50,7 +50,7 @@ export function showPokedex() {
         <style>
             #window-pokedex-content { padding: 0 !important; }
         </style>
-        <div style="display:flex; flex-wrap:wrap; gap:10px; padding: 5%; justify-content: center;">
+        <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; padding: 5%; box-sizing: border-box; width: 100%;">
     `;
 
     if (!state.config.pokemonData) {
@@ -72,7 +72,7 @@ export function showPokedex() {
             let onClick = isRevealed ? `onclick="window.showDexEntry(${i})"` : "";
 
             let cardClass = "pokedex-card";
-            let cardStyle = "width: 80px; text-align: center; font-size: 10px; margin: 2px;";
+            let cardStyle = "width: 100%; text-align: center; font-size: 10px; box-sizing: border-box;";
 
             if (!isSeen && !isCaught) {
                 // Apply a transparent border to maintain the same grid box sizing as standard cards
@@ -95,7 +95,7 @@ export function showPokedex() {
     }
 
     html += `</div>`;
-    showModal("Pokedex", html, "window-pokedex", "600px", "500px");
+    showModal("Pokedex", html, "window-pokedex", "500px", "1000px");
 }
 
 export function showDexEntry(id) {
@@ -110,9 +110,9 @@ export function showDexEntry(id) {
 
     const html = `
         <style>
-            #window-pokedex-entry-${pData.id}-content { padding: 0 !important; }
+            #window-pokedex-entry-${pData.id}-content { padding: 0 !important; overflow-y: auto !important; overflow-x: hidden !important; }
         </style>
-        <div style="text-align:center; padding: 5%;">
+        <div style="text-align:center; padding: 5%; box-sizing: border-box; width: 100%;">
             <h2 style="margin-top: 0;">#${pData.id} ${pData.name}</h2>
             <img id="dex-sprite-${pData.id}" src="Assets/Pokemon Sprites/${pData.id}.png" style="width: 100px; height: 100px;">
             <div style="margin-bottom: 10px;">
