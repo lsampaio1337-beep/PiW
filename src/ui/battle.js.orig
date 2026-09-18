@@ -84,76 +84,8 @@ export function updateBattleArena() {
             combatArena.style.backgroundImage = `url('./Assets/BG/BG-SafariZone.png')`;
         } else if (state.currentRoute && state.currentRoute.startsWith('Casino')) {
              combatArena.style.backgroundImage = `url('./Assets/BG/BG-Cassino.jpg')`;
-        } else if (state.currentRoute === 'Viridian Forest') {
-            combatArena.style.backgroundImage = `url('./Assets/BG/BGForest.png')`;
-        } else if (state.currentRoute === 'Route 1' || state.currentRoute === 'Victory Road') {
-            combatArena.style.backgroundImage = `url('./Assets/BG/BGPlains.png')`;
         } else {
             combatArena.style.backgroundImage = `url('./Assets/BG/BG.png')`;
-        }
-
-        // Handle Viridian Forest BG sizing and positioning
-        if ((state.currentRoute === 'Viridian Forest' || state.currentRoute === 'Route 1' || state.currentRoute === 'Victory Road') && !inGymCombat) {
-            combatArena.style.backgroundSize = 'auto 100%';
-            combatArena.style.backgroundRepeat = 'repeat-x';
-
-            // Background sliding logic
-            if (battleSystem && battleSystem.isSearching) {
-                if (combatArena.dataset.slidingState !== 'searching') {
-                    combatArena.dataset.slidingState = 'searching';
-                    combatArena.style.transition = 'none';
-                    if (combatArena.dataset.bgAnimationInterval) {
-                        clearInterval(parseInt(combatArena.dataset.bgAnimationInterval));
-                    }
-                    let pos = parseFloat(combatArena.style.backgroundPositionX) || 0;
-                    combatArena.dataset.bgAnimationInterval = setInterval(() => {
-                        const gameSpeed = (state && state.settings && state.settings.gameSpeed) ? state.settings.gameSpeed : 1;
-                        const slideDelay = 1000 / gameSpeed;
-                        const moveDistance = 4.0625; // Reduced by 75%
-                        const ticksPerSlide = slideDelay / 33;
-                        const pctPerTick = moveDistance / ticksPerSlide;
-                        pos += pctPerTick;
-                        combatArena.style.backgroundPositionX = `${pos}%`;
-                    }, 33);
-                }
-            } else if (battleSystem && battleSystem.isSliding) {
-                if (combatArena.dataset.slidingState !== 'sliding') {
-                    combatArena.dataset.slidingState = 'sliding';
-                    if (combatArena.dataset.bgAnimationInterval) {
-                        clearInterval(parseInt(combatArena.dataset.bgAnimationInterval));
-                        combatArena.dataset.bgAnimationInterval = '';
-                    }
-                    let pos = parseFloat(combatArena.style.backgroundPositionX) || 0;
-                    combatArena.style.transition = `background-position-x ${battleSystem.slideDuration}ms linear`;
-
-                    // Trigger reflow
-                    void combatArena.offsetWidth;
-                    requestAnimationFrame(() => {
-                        requestAnimationFrame(() => {
-                            combatArena.style.backgroundPositionX = `${pos + 4.0625}%`;
-                        });
-                    });
-                }
-            } else {
-                if (combatArena.dataset.slidingState !== 'idle') {
-                    combatArena.dataset.slidingState = 'idle';
-                    if (combatArena.dataset.bgAnimationInterval) {
-                        clearInterval(parseInt(combatArena.dataset.bgAnimationInterval));
-                        combatArena.dataset.bgAnimationInterval = '';
-                    }
-                    // Keep the current position but remove transition
-                    combatArena.style.transition = 'none';
-                }
-            }
-        } else {
-            // Reset to default
-            combatArena.style.backgroundSize = '100% 100%';
-            combatArena.style.backgroundPositionX = 'center';
-            combatArena.style.transition = 'none';
-            if (combatArena.dataset.bgAnimationInterval) {
-                clearInterval(parseInt(combatArena.dataset.bgAnimationInterval));
-                combatArena.dataset.bgAnimationInterval = '';
-            }
         }
     }
 
