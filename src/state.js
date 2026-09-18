@@ -21,6 +21,7 @@ export const state = {
         }
     },
     stats: {
+        hasExpandedTeam: false,
         battlesWon: 0,
         caught: 0,
         shiniesSeen: 0,
