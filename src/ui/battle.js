@@ -234,7 +234,8 @@ export function updateBattleArena() {
             const elPlayerSide = document.getElementById('player-side');
             if (leader && elPlayerSide) {
 
-                elPlayerSide.style.top = '50%';
+                elPlayerSide.style.top = '80%';
+                elPlayerSide.style.transform = 'translate(-100%, -100%)';
                 elPlayerSide.style.bottom = 'auto';
                 elPlayerSide.style.left = '25%';
 
