@@ -696,7 +696,7 @@ window.showOakLabModal = function() {
         let barHtml = "";
         if (isComplete) {
             barHtml = `
-                <div onclick="window.claimOakTaskReward('${type}')" style="width: 100%; background-color: #4CAF50; border-radius: 4px; padding: 5px; text-align: center; cursor: pointer; color: white; font-weight: bold; margin-top: 5px;">
+                <div onclick="window.claimOakTaskReward('${type}')" style="width: 100%; box-sizing: border-box; background-color: #4CAF50; border-radius: 4px; padding: 5px; text-align: center; cursor: pointer; color: white; font-weight: bold; margin-top: 5px;">
                     ${task.reward}
                 </div>
             `;
@@ -856,6 +856,39 @@ window.showOakLabModal = function() {
     if (overlay && title && content) {
         title.innerText = "Tasks & Rewards";
         content.innerHTML = html;
+
+        // Dynamically style the inner modal for Oak Lab to 70% width and proportional scale
+        const innerModal = document.getElementById('main-view-inner-modal');
+        if (innerModal) {
+            // Save original styles if we want to restore them, or just set explicitly
+            innerModal.dataset.originalWidth = innerModal.style.width || '90%';
+            innerModal.dataset.originalAspectRatio = innerModal.style.aspectRatio || '';
+            innerModal.dataset.originalHeight = innerModal.style.height || 'auto';
+
+            innerModal.style.width = '70%';
+            innerModal.style.aspectRatio = '4/3';
+            innerModal.style.height = 'auto'; // ensure it relies on aspect-ratio if supported
+
+            // Apply font scaling dynamically to the content wrapper to keep proportions
+            content.style.fontSize = '1.3vw';
+        }
+
+        // Add cleanup on close to avoid affecting other modals (like Market)
+        const closeBtn = overlay.querySelector('.window-header span');
+        if (closeBtn && !closeBtn.dataset.oakHooked) {
+            const originalClick = closeBtn.onclick;
+            closeBtn.onclick = (e) => {
+                if (innerModal) {
+                    innerModal.style.width = innerModal.dataset.originalWidth || '90%';
+                    innerModal.style.aspectRatio = innerModal.dataset.originalAspectRatio || '';
+                    innerModal.style.height = innerModal.dataset.originalHeight || 'auto';
+                }
+                content.style.fontSize = ''; // reset font scaling
+                if (originalClick) originalClick(e);
+            };
+            closeBtn.dataset.oakHooked = 'true';
+        }
+
         overlay.style.display = 'flex';
     } else {
         showModal("Tasks & Rewards", html, "window-tasks");
@@ -892,7 +925,7 @@ export function renderOakLab() {
 
             <div style="display: flex; flex-direction: column; gap: 10px;">
                 <div style="position: relative; display: inline-block; width: 100%;">
-                    <button onclick="window.showOakLabModal()" style="width: 100%; padding: 10px; font-size: 16px; cursor: pointer;">Tasks & Rewards</button>
+                    <button onclick="window.showOakLabModal()" style="width: 100%; box-sizing: border-box; padding: 10px; font-size: 16px; cursor: pointer;">Tasks & Rewards</button>
                     ${exclamationHtml}
                 </div>
             </div>
