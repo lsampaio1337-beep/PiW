@@ -509,7 +509,7 @@ export function renderPokeMarketSellTab(category) {
             if (!isNaN(filterSumIVMin) && sumIV < filterSumIVMin) return;
             if (!isNaN(filterSumIVMax) && sumIV > filterSumIVMax) return;
 
-            let imgSrc = `Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png`;
+            let imgSrc = `Assets/Pokemon Sprites/Natural/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png`;
 
             let glowClass = "glow-weak";
             if (p.qualityName === "Shiny") glowClass = "glow-shiny";

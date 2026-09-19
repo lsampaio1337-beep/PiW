@@ -9,7 +9,7 @@ import { calculatePP } from '../../mathEngine.js';
 // Helper to render a consistent Pokemon slot UI
 function renderSlotUI(p, listName, origIndex, isDraggable) {
     if (!p.uuid) p.uuid = Math.random().toString(36).substring(2, 15);
-    let imgSrc = `Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png`;
+    let imgSrc = `Assets/Pokemon Sprites/Natural/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png`;
     let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
     let dragAttr = isDraggable ? `draggable="true" ondragstart="window.dragStart(event, '${listName}', '${p.uuid}')"` : '';
     let cursorStyle = isDraggable ? 'cursor: move;' : 'cursor: default;';
@@ -47,7 +47,7 @@ function renderSlotUI(p, listName, origIndex, isDraggable) {
     }
 
     let finalId = p.transformedIntoId || p.id;
-    let finalImgSrc = `Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? finalId + '_shiny' : finalId}.png`;
+    let finalImgSrc = `Assets/Pokemon Sprites/Natural/${p.qualityName === 'Shiny' ? finalId + '_shiny' : finalId}.png`;
     let imageHtml = `<img src="${finalImgSrc}" class="${glowClass}" style="height: 100%; width: 100%; object-fit: contain; z-index: 1;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">`;
 
     return `
@@ -634,7 +634,7 @@ window.openDittoTransformModal = function(uuid) {
         const pd = state.config.pokemonData.find(d => d.id === id);
         if(!pd) return;
 
-        let imgSrc = `Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? id + '_shiny' : id}.png`;
+        let imgSrc = `Assets/Pokemon Sprites/Natural/${p.qualityName === 'Shiny' ? id + '_shiny' : id}.png`;
         allPokemonHtml += `
             <div id="ditto-transform-option-${id}" class="ditto-transform-option" onclick="window.selectDittoTransformTarget('${id}')" style="cursor: pointer; background: #2c3e50; border: 2px solid #00ffff; border-radius: 10px; padding: 10px; text-align: center; transition: all 0.1s;">
                 <img src="${imgSrc}" style="width: 50px; height: 50px; object-fit: contain;">

@@ -181,7 +181,10 @@ window.completeChallenge = function(targetAreaId) {
     }
 
     updateUI();
-    if (document.getElementById('modal-overlay').style.display !== 'none') {
+    const challengeWin = document.getElementById('window-challenges');
+    if (challengeWin && challengeWin.style.display !== 'none') {
+        window.showChallengesModal(); // refresh modal
+    } else if (document.getElementById('modal-overlay') && document.getElementById('modal-overlay').style.display !== 'none') {
         window.showChallengesModal(); // refresh modal
     }
 
@@ -269,8 +272,11 @@ window.cheatProgressChallenge = function(targetAreaId) {
         }
     }
         if (window.updateUI) window.updateUI();
-    if (document.getElementById('modal-overlay').style.display !== 'none') {
-        window.showChallengesModal();
+    const challengeWinCheat = document.getElementById('window-challenges');
+    if (challengeWinCheat && challengeWinCheat.style.display !== 'none') {
+        window.showChallengesModal(); // refresh modal
+    } else if (document.getElementById('modal-overlay') && document.getElementById('modal-overlay').style.display !== 'none') {
+        window.showChallengesModal(); // refresh modal
     }
 
     // Find the Complete button in the modal and click it
@@ -696,7 +702,7 @@ window.showOakLabModal = function() {
         let barHtml = "";
         if (isComplete) {
             barHtml = `
-                <div onclick="window.claimOakTaskReward('${type}')" style="width: 100%; background-color: #4CAF50; border-radius: 4px; padding: 5px; text-align: center; cursor: pointer; color: white; font-weight: bold; margin-top: 5px;">
+                <div onclick="window.claimOakTaskReward('${type}')" style="width: 100%; box-sizing: border-box; background-color: #4CAF50; border-radius: 4px; padding: 5px; text-align: center; cursor: pointer; color: white; font-weight: bold; margin-top: 5px;">
                     ${task.reward}
                 </div>
             `;
@@ -705,7 +711,7 @@ window.showOakLabModal = function() {
             barHtml = `
                 <div style="width: 100%; background-color: #333; border-radius: 4px; overflow: hidden; height: 20px; border: 1px solid #555; position: relative; margin-top: 5px; display: flex; align-items: center;">
                     <div style="width: ${pct}%; background-color: #4CAF50; height: 100%;"></div>
-                    <span style="position: absolute; width: 100%; text-align: center; color: white; font-size: 12px; font-weight: bold; line-height: 20px;">
+                    <span style="position: absolute; width: 100%; text-align: center; color: white; font-size: 9px; font-weight: bold; line-height: 20px;">
                         ${currentVal} / ${task.req}
                     </span>
                 </div>
@@ -713,10 +719,10 @@ window.showOakLabModal = function() {
         }
 
         return `
-            <div style="margin-bottom: 10px;">
+            <div style="margin-bottom: 10px; font-size: 12px;">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <span>${task.text}</span>
-                    <button onclick="window.cheatCompleteOakTask('${type}')" style="padding: 2px 5px; font-size: 10px; cursor: pointer; background: #d9534f; color: white; border: none; border-radius: 3px;">Cheat Complete</button>
+                    <button onclick="window.cheatCompleteOakTask('${type}')" style="padding: 2px 5px; font-size: 8px; cursor: pointer; background: #d9534f; color: white; border: none; border-radius: 3px;">Cheat Complete</button>
                 </div>
                 ${barHtml}
             </div>
@@ -735,7 +741,7 @@ window.showOakLabModal = function() {
                 // Shiny style - keep all
                 for (let i = 0; i < tierIdx; i++) {
                     rewardsHtml += `
-                        <div style="font-size: 12px; margin-top: 5px; padding-left: 5px; border-left: 2px solid #4CAF50;">
+                        <div style="font-size: 9px; margin-top: 5px; padding-left: 5px; border-left: 2px solid #4CAF50;">
                             <b>${taskList[i].reward}</b>: <span style="color: #4CAF50;">${taskList[i].effect}</span>
                         </div>
                     `;
@@ -744,7 +750,7 @@ window.showOakLabModal = function() {
                 // Normal style - only show highest tier
                 let topReward = taskList[tierIdx - 1];
                 rewardsHtml += `
-                    <div style="font-size: 12px; margin-top: 5px; padding-left: 5px; border-left: 2px solid #4CAF50;">
+                    <div style="font-size: 9px; margin-top: 5px; padding-left: 5px; border-left: 2px solid #4CAF50;">
                         <b>${topReward.reward}</b>: <span style="color: #4CAF50;">${topReward.effect}</span>
                     </div>
                 `;
@@ -752,8 +758,8 @@ window.showOakLabModal = function() {
         }
 
         return `
-            <div style="border: 1px solid #555; padding: 10px; border-radius: 5px; background-color: rgba(0,0,0,0.5);">
-                <h3 style="margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; font-size: 16px;">${title}</h3>
+            <div style="border: 1px solid #555; padding: 8px; border-radius: 5px; background-color: rgba(0,0,0,0.5);">
+                <h3 style="margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; font-size: 12px;">${title}</h3>
                 ${taskHtml}
                 ${rewardsHtml}
             </div>
@@ -824,7 +830,7 @@ window.showOakLabModal = function() {
         if (seenTier > 1 && i === 0) continue;
 
         shinyRewardsHtml += `
-            <div style="font-size: 12px; margin-top: 5px; padding-left: 5px; border-left: 2px solid #4CAF50;">
+            <div style="font-size: 9px; margin-top: 5px; padding-left: 5px; border-left: 2px solid #4CAF50;">
                 <b>${rewardName}</b>: <span style="color: #4CAF50;">${oakTasks.shinySeen[i].effect}</span>
             </div>
         `;
@@ -833,15 +839,15 @@ window.showOakLabModal = function() {
     // Shiny Caught rewards logic
     for (let i = 0; i < caughtTier; i++) {
         shinyRewardsHtml += `
-            <div style="font-size: 12px; margin-top: 5px; padding-left: 5px; border-left: 2px solid #4CAF50;">
+            <div style="font-size: 9px; margin-top: 5px; padding-left: 5px; border-left: 2px solid #4CAF50;">
                 <b>${oakTasks.shinyCaught[i].reward}</b>: <span style="color: #4CAF50;">${oakTasks.shinyCaught[i].effect}</span>
             </div>
         `;
     }
 
     html += `
-        <div style="border: 1px solid #555; padding: 10px; border-radius: 5px; background-color: rgba(0,0,0,0.5);">
-            <h3 style="margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; font-size: 16px;">${shinyTitle}</h3>
+        <div style="border: 1px solid #555; padding: 8px; border-radius: 5px; background-color: rgba(0,0,0,0.5);">
+            <h3 style="margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; font-size: 12px;">${shinyTitle}</h3>
             ${shinySeenTaskHtml}
             ${shinyCaughtTaskHtml}
             ${shinyRewardsHtml}
@@ -856,6 +862,36 @@ window.showOakLabModal = function() {
     if (overlay && title && content) {
         title.innerText = "Assignments and Boosters";
         content.innerHTML = html;
+
+        // Dynamically style the inner modal for Oak Lab to 70% width and proportional scale
+        const innerModal = document.getElementById('main-view-inner-modal');
+        if (innerModal) {
+            // Apply a specific class for Oak Lab modal instead of hacking inline styles permanently
+            innerModal.classList.add('oak-lab-inner-modal');
+            innerModal.style.width = '70%';
+            innerModal.style.aspectRatio = '4/3';
+        }
+
+        // Ensure cleanup when the modal is closed
+        const cleanUp = () => {
+            if (innerModal) {
+                innerModal.classList.remove('oak-lab-inner-modal');
+                innerModal.style.width = '90%';
+                innerModal.style.aspectRatio = '';
+            }
+            overlay.style.display = 'none';
+        };
+
+        const closeBtn = overlay.querySelector('.window-header span');
+        if (closeBtn) {
+            closeBtn.onclick = cleanUp;
+        }
+        overlay.onclick = (e) => {
+            if (e.target === overlay) {
+                cleanUp();
+            }
+        };
+
         overlay.style.display = 'flex';
     } else {
         showModal("Assignments and Boosters", html, "window-tasks");
@@ -892,7 +928,7 @@ export function renderOakLab() {
 
             <div style="display: flex; flex-direction: column; gap: 10px;">
                 <div style="position: relative; display: inline-block; width: 100%;">
-                    <button onclick="window.showOakLabModal()" style="width: 100%; padding: 10px; font-size: 16px; cursor: pointer;">Assignments and Boosters</button>
+                    <button onclick="window.showOakLabModal()" style="width: 100%; box-sizing: border-box; padding: 10px; font-size: 12px; cursor: pointer;">Assignments and Boosters</button>
                     ${exclamationHtml}
                 </div>
             </div>
@@ -995,7 +1031,49 @@ function selectStarter(id) {
     state.currentRoute = "Professor Oak Lab";
     switchView("PROF_OAK_LAB");
 
-    // Unlock the top bar for a new game
+    // Refresh window after adding chosen pokemon
+    const partyWindow = document.getElementById('party-window');
+    if (partyWindow && window.windowManager) {
+        if (partyWindow.style.display === 'none' || !partyWindow.style.display) {
+            window.windowManager.toggleWindow('party-window', true);
+        }
+        window.windowManager.recalculateWindowSize('party-window');
+    }
+    updateSidebar();
+
+    // Add identical pokemon to Team
+    const starterCopy = {
+        id: pData.id,
+        name: pData.name,
+        types: pData.types,
+        level: level,
+        xp: 0,
+        qualityName: qName,
+        quality: q,
+        ivs: { ...ivs },
+        currentStats: { ...stats },
+        maxHp: stats.hp,
+        currentHp: stats.hp,
+        moves: [{name: "Tackle", power: 40, type: "Normal", category: "Physical"}] // Basic start
+    };
+    state.party.push(starterCopy);
+
+    // Refresh window after adding duplicate
+    if (partyWindow && window.windowManager) {
+        window.windowManager.recalculateWindowSize('party-window');
+    }
+    updateSidebar();
+
+    // Remove similar pokemon from Team
+    state.party.pop();
+
+    // Refresh window after removing duplicate
+    if (partyWindow && window.windowManager) {
+        window.windowManager.recalculateWindowSize('party-window');
+    }
+    updateSidebar();
+
+    // Continue normal game flow
     const navButtons = document.getElementById('nav-buttons');
     if (navButtons) {
         navButtons.style.pointerEvents = 'auto';
@@ -1003,11 +1081,8 @@ function selectStarter(id) {
     }
 
     startGame();
-
-    // Force an immediate save so the initial state is persisted to the new profile
     storage.save(state);
-
-    renderOakLab(); // Renders the new Oak Lab UI now that we have a party
+    renderOakLab();
 }
 
 function startGame() {
