@@ -82,6 +82,7 @@ window.updateGameSpeed = updateGameSpeed;
 window.addMoney = addMoney;
 window.addXp = addXp;
 window.exportLog = exportLog;
+window.setupMarket = setupMarket;
 window.buyItem = buyItem;
 window.openPokeMarketBuy = openPokeMarketBuy;
 window.renderPokeMarketTab = renderPokeMarketTab;
@@ -915,14 +916,14 @@ export function switchView(viewName) {
         document.getElementById('view-battle-arena').style.display = 'flex';
         document.getElementById('view-battle-arena').style.flexDirection = 'column';
     } else if (viewName === 'POKEMON_CENTER_MARKET') {
-        document.getElementById('view-center-market').style.display = 'block';
+        document.getElementById('view-center-market').style.display = 'flex';
         setupMarket(document.getElementById('view-center-market'));
     } else if (viewName === 'GYM') {
         document.getElementById('view-gym').style.display = 'block';
     } else if (viewName === 'CASINO_HUB') {
-        document.getElementById('view-casino').style.display = 'block';
+        document.getElementById('view-casino').style.display = 'flex';
     } else if (viewName === 'DAYCARE_HUB') {
-        document.getElementById('view-daycare').style.display = 'block';
+        document.getElementById('view-daycare').style.display = 'flex';
     }
 }
 

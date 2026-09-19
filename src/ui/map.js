@@ -178,79 +178,72 @@ export function navigateToLocation(locationName) {
         }
         switchView("CASINO_HUB");
 
-        // Reset Casino background to default lobby if it was changed
         const viewCasino = document.getElementById("view-casino");
         viewCasino.style.backgroundImage = "url('./Assets/BG/BG-Cassino.jpg')";
-        const casinoContent = document.getElementById("casino-content");
-        if(casinoContent) casinoContent.style.display = 'block';
 
-        // Clear any overlay buttons
-        const oldOverlays = viewCasino.querySelectorAll('.casino-overlay-btn');
-        oldOverlays.forEach(el => el.remove());
+        const completedChallenges = state.stats.completedChallengeIds || [];
+        const isUnlockedByAreaId = (areaId) => completedChallenges.some(id => parseAreaNames(id).includes(areaId));
 
-        const btnContainer = document.getElementById("casino-buttons-container");
-        if (btnContainer) {
-            btnContainer.style.width = '100%';
-            btnContainer.style.height = '100%';
-
-            const completedChallenges = state.stats.completedChallengeIds || [];
-            const isUnlockedByAreaId = (areaId) => completedChallenges.some(id => parseAreaNames(id).includes(areaId));
-
-            let machinesHtml = `
-                <div style="position: absolute; top: 20px; left: 0; width: 100%; text-align: center; z-index: 10; color: white; text-shadow: 2px 2px 4px black; font-size: 24px;">
-                    <h3>Standard Route $${state.config.balance.casinoPrices?.standard || 75} Special Route $${state.config.balance.casinoPrices?.doubleShiny || 200}</h3>
-                </div>
-                <div style="display: flex; justify-content: space-evenly; align-items: center; width: 100%; height: 100%; padding: 15px; box-sizing: border-box;">
-                    <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
-                        <img src="./Assets/Extra/Casino Starter Troupe.png" alt="Starter Troupe" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
-                        <div onclick="window.startCasinoEncounter(false, 'Casino - Starter Troupe')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter ($${state.config.balance.casinoPrices?.standard || 75})"></div>
-                        <div onclick="window.startCasinoEncounter(true, 'Casino - Starter Troupe')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Special Encounter ($${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
+        let machinesHtml = `
+            <div id="casino-content" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                <div id="casino-buttons-container" style="display: flex; flex-direction: row; gap: 10px; width: 100%; height: 100%;">
+                    <div style="position: absolute; top: 20px; left: 0; width: 100%; text-align: center; z-index: 10; color: white; text-shadow: 2px 2px 4px black; font-size: 24px;">
+                        <h3>Standard Route $${state.config.balance.casinoPrices?.standard || 75} Special Route $${state.config.balance.casinoPrices?.doubleShiny || 200}</h3>
                     </div>
+                    <div style="display: flex; justify-content: space-evenly; align-items: center; width: 100%; height: 100%; padding: 15px; box-sizing: border-box;">
+                        <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
+                            <img src="./Assets/Extra/Casino Starter Troupe.png" alt="Starter Troupe" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
+                            <div onclick="window.startCasinoEncounter(false, 'Casino - Starter Troupe')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter ($${state.config.balance.casinoPrices?.standard || 75})"></div>
+                            <div onclick="window.startCasinoEncounter(true, 'Casino - Starter Troupe')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Special Encounter ($${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
+                        </div>
+        `;
+
+        if (isUnlockedByAreaId('Casino')) {
+            machinesHtml += `
+                        <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
+                            <img src="./Assets/Extra/Casino Mid Troupe.png" alt="Mid Troupe" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
+                            <div onclick="window.startCasinoEncounter(false, 'Casino - Mid Troupe')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter ($${state.config.balance.casinoPrices?.standard || 75})"></div>
+                            <div onclick="window.startCasinoEncounter(true, 'Casino - Mid Troupe')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Special Encounter ($${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
+                        </div>
             `;
-
-            if (isUnlockedByAreaId('Casino')) {
-                machinesHtml += `
-                    <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
-                        <img src="./Assets/Extra/Casino Mid Troupe.png" alt="Mid Troupe" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
-                        <div onclick="window.startCasinoEncounter(false, 'Casino - Mid Troupe')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter ($${state.config.balance.casinoPrices?.standard || 75})"></div>
-                        <div onclick="window.startCasinoEncounter(true, 'Casino - Mid Troupe')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Special Encounter ($${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
-                    </div>
-                `;
-            }
-
-            if (isUnlockedByAreaId('Big Fishing Spot')) {
-                machinesHtml += `
-                    <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
-                        <img src="./Assets/Extra/Casino Late Troupe.png" alt="Late Troupe" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
-                        <div onclick="window.startCasinoEncounter(false, 'Casino - Late Troupe')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter ($${state.config.balance.casinoPrices?.standard || 75})"></div>
-                        <div onclick="window.startCasinoEncounter(true, 'Casino - Late Troupe')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Special Encounter ($${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
-                    </div>
-                `;
-            }
-
-            if (isUnlockedByAreaId('Small Fishing Spot')) {
-                machinesHtml += `
-                    <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
-                        <img src="./Assets/Extra/Casino Eeveelutions.png" alt="Eeveelutions" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
-                        <div onclick="window.startCasinoEncounter(false, 'Casino - Eeveelutions')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter ($${state.config.balance.casinoPrices?.standard || 75})"></div>
-                        <div onclick="window.startCasinoEncounter(true, 'Casino - Eeveelutions')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Special Encounter ($${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
-                    </div>
-                `;
-            }
-
-            if (isUnlockedByAreaId('Fighting Dojo')) {
-                machinesHtml += `
-                    <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
-                        <img src="./Assets/Extra/Casino Special Spot.png" alt="Special Spot" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
-                        <div onclick="window.startCasinoEncounter(false, 'Casino - Special Spot')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter ($${state.config.balance.casinoPrices?.standard || 75})"></div>
-                        <div onclick="window.startCasinoEncounter(true, 'Casino - Special Spot')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Special Encounter ($${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
-                    </div>
-                `;
-            }
-
-            machinesHtml += `</div>`;
-            btnContainer.innerHTML = machinesHtml;
         }
+
+        if (isUnlockedByAreaId('Big Fishing Spot')) {
+            machinesHtml += `
+                        <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
+                            <img src="./Assets/Extra/Casino Late Troupe.png" alt="Late Troupe" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
+                            <div onclick="window.startCasinoEncounter(false, 'Casino - Late Troupe')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter ($${state.config.balance.casinoPrices?.standard || 75})"></div>
+                            <div onclick="window.startCasinoEncounter(true, 'Casino - Late Troupe')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Special Encounter ($${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
+                        </div>
+            `;
+        }
+
+        if (isUnlockedByAreaId('Small Fishing Spot')) {
+            machinesHtml += `
+                        <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
+                            <img src="./Assets/Extra/Casino Eeveelutions.png" alt="Eeveelutions" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
+                            <div onclick="window.startCasinoEncounter(false, 'Casino - Eeveelutions')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter ($${state.config.balance.casinoPrices?.standard || 75})"></div>
+                            <div onclick="window.startCasinoEncounter(true, 'Casino - Eeveelutions')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Special Encounter ($${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
+                        </div>
+            `;
+        }
+
+        if (isUnlockedByAreaId('Fighting Dojo')) {
+            machinesHtml += `
+                        <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
+                            <img src="./Assets/Extra/Casino Special Spot.png" alt="Special Spot" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
+                            <div onclick="window.startCasinoEncounter(false, 'Casino - Special Spot')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter ($${state.config.balance.casinoPrices?.standard || 75})"></div>
+                            <div onclick="window.startCasinoEncounter(true, 'Casino - Special Spot')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Special Encounter ($${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
+                        </div>
+            `;
+        }
+
+        machinesHtml += `
+                    </div>
+                </div>
+            </div>`;
+        viewCasino.innerHTML = machinesHtml;
+        updateUI();
     } else if (locationName.startsWith("Casino - ")) {
         if (battleSystem) {
              battleSystem.stop();
@@ -259,9 +252,6 @@ export function navigateToLocation(locationName) {
              if (battleSystem.gymState) battleSystem.gymState.isActive = false;
         }
         switchView("CASINO_HUB");
-
-        const casinoContent = document.getElementById("casino-content");
-        if(casinoContent) casinoContent.style.display = 'none';
 
         let bgImg = '';
         if (locationName === 'Casino - Starter Troupe') bgImg = 'Casino Starter Troupe.png';
@@ -276,12 +266,7 @@ export function navigateToLocation(locationName) {
         viewCasino.style.backgroundRepeat = 'no-repeat';
         viewCasino.style.backgroundSize = 'contain';
 
-        // Remove old buttons if any
-        const oldOverlays = viewCasino.querySelectorAll('.casino-overlay-btn');
-        oldOverlays.forEach(el => el.remove());
-
         // We use relative positioning for click areas
-        let html = '';
         const stdLeft = 16.3;
         const stdTop = 34.16;
         const stdWidth = 76.7 - 16.3;
@@ -292,20 +277,14 @@ export function navigateToLocation(locationName) {
         const shinyWidth = 73.94 - 19.24;
         const shinyHeight = 94.72 - 85.96;
 
-        // Overlay transparent divs
-        html += `<div class="casino-overlay-btn" onclick="window.startCasinoEncounter(false, '${locationName}')" style="position: absolute; left: ${stdLeft}%; top: ${stdTop}%; width: ${stdWidth}%; height: ${stdHeight}%; cursor: pointer;" title="Standard Encounter ($${state.config.balance.casinoPrices?.standard || 75})"></div>`;
-        html += `<div class="casino-overlay-btn" onclick="window.startCasinoEncounter(true, '${locationName}')" style="position: absolute; left: ${shinyLeft}%; top: ${shinyTop}%; width: ${shinyWidth}%; height: ${shinyHeight}%; cursor: pointer;" title="Special Encounter ($${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>`;
-        html += `<button class="casino-overlay-btn" onclick="window.navigateToLocation('Casino')" style="position: absolute; top: 10px; left: 10px; padding: 10px; cursor: pointer; z-index: 100;">Back to Lobby</button>`;
+        let html = `
+            <div class="casino-overlay-btn" onclick="window.startCasinoEncounter(false, '${locationName}')" style="position: absolute; left: ${stdLeft}%; top: ${stdTop}%; width: ${stdWidth}%; height: ${stdHeight}%; cursor: pointer;" title="Standard Encounter ($${state.config.balance.casinoPrices?.standard || 75})"></div>
+            <div class="casino-overlay-btn" onclick="window.startCasinoEncounter(true, '${locationName}')" style="position: absolute; left: ${shinyLeft}%; top: ${shinyTop}%; width: ${shinyWidth}%; height: ${shinyHeight}%; cursor: pointer;" title="Special Encounter ($${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
+            <button class="casino-overlay-btn" onclick="window.navigateToLocation('Casino')" style="position: absolute; top: 10px; left: 10px; padding: 10px; cursor: pointer; z-index: 100;">Back to Lobby</button>
+        `;
 
-        // Append to the viewCasino container
-        viewCasino.insertAdjacentHTML('beforeend', html);
+        viewCasino.innerHTML = html;
     } else if (locationName === "Daycare") {
-        if (!state.stats.hasSeenDaycare) {
-            document.getElementById('daycare-first-time-overlay').style.display = 'flex';
-        } else {
-            document.getElementById('daycare-first-time-overlay').style.display = 'none';
-        }
-
         if (battleSystem) {
              battleSystem.stop();
              battleSystem.activeEncounter = null;
@@ -313,6 +292,29 @@ export function navigateToLocation(locationName) {
              if (battleSystem.gymState) battleSystem.gymState.isActive = false;
         }
         switchView("DAYCARE_HUB");
+
+        const viewDaycare = document.getElementById("view-daycare");
+        viewDaycare.innerHTML = `
+            <div id="daycare-first-time-overlay" style="display: ${!state.stats.hasSeenDaycare ? 'flex' : 'none'}; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000; background: rgba(0, 0, 0, 0.7); flex-direction: column; align-items: center; justify-content: center;">
+                <div style="background: #34495e; padding: 20px; border-radius: 10px; border: 2px solid #00ffff; text-align: center; color: white; max-width: 80%;">
+                    <p style="margin-top: 0; font-size: 16px;">Now you are able to use Daycare!<br>You can chose options in here or directly in your backpack.</p>
+                    <button onclick="window.dismissDaycareMessage()" style="padding: 10px 20px; background: #2ecc71; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: 10px; font-size: 16px;">Ok.</button>
+                </div>
+            </div>
+
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: space-between; align-items: center; padding: 0 10%; box-sizing: border-box;">
+                <div style="background: rgba(0,0,0,0.7); padding: 20px; border-radius: 10px; text-align: center;">
+                    <h3 style="color: white; margin-top: 0;">Training Area</h3>
+                    <button onclick="window.showBackpackAndFocus('pokemon')" style="padding: 15px 30px; font-size: 18px; cursor: pointer; border-radius: 8px; background: #3498db; color: white; border: none; font-weight: bold;">Train Pokémon</button>
+                </div>
+
+                <div style="background: rgba(0,0,0,0.7); padding: 20px; border-radius: 10px; text-align: center;">
+                    <h3 style="color: white; margin-top: 0;">Breeding Area</h3>
+                    <button onclick="window.showBackpackAndFocus('pokemon')" style="padding: 15px 30px; font-size: 18px; cursor: pointer; border-radius: 8px; background: #e74c3c; color: white; border: none; font-weight: bold;">Breed Pokémon</button>
+                </div>
+            </div>
+        `;
+
         updateUI();
         return;
     } else if (locationName === "PokeCenter & PokeMarket" || locationName.includes("Market") || locationName.includes("Center")) {
