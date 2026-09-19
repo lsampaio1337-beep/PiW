@@ -11,6 +11,13 @@ let lastTeamCount = -1;
 export function updateSidebar() {
     const partyDiv = document.getElementById('party-list');
     if (!partyDiv) return;
+
+    let dayCareCount = 0;
+    if (state.dayCareRef) {
+        if (state.dayCareRef.slot1 && state.dayCareRef.slot1.pokemon) dayCareCount++;
+        if (state.dayCareRef.slot2 && state.dayCareRef.slot2.pokemon) dayCareCount++;
+    }
+
     partyDiv.innerHTML = '';
     state.party.forEach((p, idx) => {
         const d = document.createElement('div');
@@ -56,20 +63,39 @@ export function updateSidebar() {
         else if (p.qualityName === "Uncommon") glowClass = "glow-uncommon";
         else if (p.qualityName === "Regular") glowClass = "glow-regular";
 
+        const isSinglePokemon = (state.party.length + dayCareCount === 1) && !state.stats.hasExpandedTeam;
+
+        let outerFlexStyle, spriteColStyle, spriteScale, rightColStyle;
+
+        if (isSinglePokemon) {
+            // For a single pokemon, card width is conceptually 100px and vertically proportioned (approx 140px)
+            outerFlexStyle = 'display: flex; flex-direction: column; width: 100px; align-items: stretch; height: 140px; margin: 0 auto; box-sizing: border-box;';
+            spriteColStyle = 'flex: 1; display: flex; align-items: center; justify-content: center; position: relative; min-height: 80px;';
+            spriteScale = 'transform: scale(2.0);'; // Adjusted scale for a smaller card
+            rightColStyle = 'flex: none; display: flex; flex-direction: column; justify-content: space-around; gap: 4px; min-width: 0; padding-top: 5px; height: 60px;';
+        } else {
+            // Standard layout
+            outerFlexStyle = 'display: flex; width: 100%; align-items: stretch; height: 100%; min-height: 55px; box-sizing: border-box;';
+            spriteColStyle = 'flex: 0 0 50px; display: flex; align-items: center; justify-content: center; position: relative;';
+            spriteScale = 'transform: scale(1.5);';
+            rightColStyle = 'flex: 1; display: flex; flex-direction: column; justify-content: center; padding-left: 5px; gap: 2px; min-width: 0;';
+        }
+
         d.innerHTML = `
-            <div style="display: flex; width: 100%; align-items: stretch; height: 100%; min-height: 55px;">
-                <!-- Left Column: Sprite -->
-                <div style="flex: 0 0 50px; display: flex; align-items: center; justify-content: center; position: relative;">
+            <div style="${outerFlexStyle}">
+                <!-- Sprite Area -->
+                <div style="${spriteColStyle}">
                     ${p.isTransformed && p.transformedIntoId ?
-                        `<img src="Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? '132_shiny' : '132'}.png" class="${glowClass}" style="position: absolute; top: 0; left: 0; max-width: 100%; max-height: 100%; object-fit: contain; pointer-events: none; opacity: 0.5; transform: scale(1.5); z-index: 1;">
-                         <img src="Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png" onload="this.style.display='inline'" onerror="this.style.display='none'" class="${glowClass}" style="max-width: 100%; max-height: 100%; object-fit: contain; pointer-events: none; opacity: 0.85; transform: scale(1.5); z-index: 2; position: relative;">`
+                        `<img src="Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? '132_shiny' : '132'}.png" class="${glowClass}" style="position: absolute; top: 0; left: 0; max-width: 100%; max-height: 100%; object-fit: contain; pointer-events: none; opacity: 0.5; ${spriteScale} z-index: 1;">
+                         <img src="Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png" onload="this.style.display='inline'" onerror="this.style.display='none'" class="${glowClass}" style="max-width: 100%; max-height: 100%; object-fit: contain; pointer-events: none; opacity: 0.85; ${spriteScale} z-index: 2; position: relative;">`
                         :
-                        `<img src="Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png" onload="this.style.display='inline'" onerror="this.style.display='none'" class="${glowClass}" style="max-width: 100%; max-height: 100%; object-fit: contain; pointer-events: none; opacity: 0.85; transform: scale(1.5); z-index: 2;">`
+                        `<img src="Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png" onload="this.style.display='inline'" onerror="this.style.display='none'" class="${glowClass}" style="max-width: 100%; max-height: 100%; object-fit: contain; pointer-events: none; opacity: 0.85; ${spriteScale} z-index: 2;">`
                     }
                 </div>
 
                 <!-- Right Column: 3 Floors -->
-                <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; padding-left: 5px; gap: 2px; min-width: 0;">
+                <div style="${rightColStyle}">
+
                     <!-- Top Floor: Name/Level and Buttons -->
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <div style="line-height: 1; display: flex; align-items: baseline; gap: 4px;">
@@ -108,11 +134,7 @@ export function updateSidebar() {
 
     // Day Care UI updates
     const dayCareContainer = document.getElementById('day-care');
-    let dayCareCount = 0;
     if (state.dayCareRef && dayCareContainer) {
-        if (state.dayCareRef.slot1.pokemon) dayCareCount++;
-        if (state.dayCareRef.slot2.pokemon) dayCareCount++;
-
         renderDayCareSlot(document.getElementById('dc-slot1'), state.dayCareRef.slot1.pokemon, state.dayCareRef.slot1.battles, state.dayCareRef.slot1.requiredBattles, 'breed');
         renderDayCareSlot(document.getElementById('dc-slot2'), state.dayCareRef.slot2.pokemon, state.dayCareRef.slot2.battles, state.dayCareRef.slot2.requiredBattles, 'train');
 
@@ -125,14 +147,43 @@ export function updateSidebar() {
     }
 
     const currentTeamCount = state.party.length + dayCareCount;
+
+    if (currentTeamCount > 1) {
+        state.stats.hasExpandedTeam = true;
+    }
+
     if (lastTeamCount !== -1 && currentTeamCount !== lastTeamCount) {
         if (window.windowManager) {
             setTimeout(() => {
-                if (lastTeamCount === 0 && currentTeamCount > 0) {
-                    window.windowManager.recalculateWindowSize('party-window');
-                } else {
-                    const win = document.getElementById('party-window');
-                    if (win && typeof win.adjustHeightForNewContent === 'function') {
+                const win = document.getElementById('party-window');
+                if (win && typeof win.adjustHeightForNewContent === 'function') {
+                    if (currentTeamCount === 1 && !state.stats.hasExpandedTeam) {
+                        win.style.width = '110px';
+                        win.style.height = 'auto'; // Let the internal 140px card dictate height
+                        const contentPanel = win.querySelector('.content-panel');
+                        if (contentPanel) {
+                            contentPanel.style.padding = '5px';
+                        }
+                        if (typeof win.resetResizeDims === 'function') {
+                            win.resetResizeDims();
+                        }
+                        win.adjustHeightForNewContent(); // Measure accurate height
+                    } else {
+                        // Restore normal width if reverting from single state
+                        if (win.style.width === '110px') {
+                            win.style.width = '250px';
+                            win.style.height = 'auto';
+                            const contentPanel = win.querySelector('.content-panel');
+                            if (contentPanel) {
+                                contentPanel.style.padding = ''; // Clear inline padding
+                            }
+                        } else if (!state.stats.hasExpandedTeam) {
+                            win.style.width = '250px';
+                            const contentPanel = win.querySelector('.content-panel');
+                            if (contentPanel) {
+                                contentPanel.style.padding = '';
+                            }
+                        }
                         win.adjustHeightForNewContent();
                     }
                 }
