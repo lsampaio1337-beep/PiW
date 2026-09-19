@@ -181,7 +181,10 @@ window.completeChallenge = function(targetAreaId) {
     }
 
     updateUI();
-    if (document.getElementById('modal-overlay').style.display !== 'none') {
+    const challengeWin = document.getElementById('window-challenges');
+    if (challengeWin && challengeWin.style.display !== 'none') {
+        window.showChallengesModal(); // refresh modal
+    } else if (document.getElementById('modal-overlay') && document.getElementById('modal-overlay').style.display !== 'none') {
         window.showChallengesModal(); // refresh modal
     }
 
@@ -269,8 +272,11 @@ window.cheatProgressChallenge = function(targetAreaId) {
         }
     }
         if (window.updateUI) window.updateUI();
-    if (document.getElementById('modal-overlay').style.display !== 'none') {
-        window.showChallengesModal();
+    const challengeWinCheat = document.getElementById('window-challenges');
+    if (challengeWinCheat && challengeWinCheat.style.display !== 'none') {
+        window.showChallengesModal(); // refresh modal
+    } else if (document.getElementById('modal-overlay') && document.getElementById('modal-overlay').style.display !== 'none') {
+        window.showChallengesModal(); // refresh modal
     }
 
     // Find the Complete button in the modal and click it
