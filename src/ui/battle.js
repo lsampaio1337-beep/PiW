@@ -192,9 +192,8 @@ export function updateBattleArena() {
                 elEnemySprite.style.display = 'block';
                 applyWalkAnimations(enemy, true);
 
-                elEnemySide.style.top = '80%';
+                elEnemySide.style.top = '50%';
                 elEnemySide.style.bottom = 'auto';
-                elEnemySide.style.transform = 'translate(0, -100%)';
 
                 if (battleSystem.isSliding) {
                     if (elEnemySide.dataset.sliding !== 'true') {
@@ -233,9 +232,8 @@ export function updateBattleArena() {
             const elPlayerSide = document.getElementById('player-side');
             if (leader && elPlayerSide) {
 
-                elPlayerSide.style.top = '80%';
+                elPlayerSide.style.top = '50%';
                 elPlayerSide.style.bottom = 'auto';
-                elPlayerSide.style.transform = 'translate(-100%, -100%)';
                 elPlayerSide.style.left = '25%';
 
                 const hpContainerPlayer = document.getElementById('player-battle-hp-container');
@@ -306,9 +304,8 @@ export function updateBattleArena() {
                 elEnemySprite.style.display = 'block';
                 elEnemySide.style.transition = 'none';
                 elEnemySide.style.left = '35%'; // Matching active battle destination
-                elEnemySide.style.top = '80%';
+                elEnemySide.style.top = '50%';
                 elEnemySide.style.bottom = 'auto';
-                elEnemySide.style.transform = 'translate(0, -100%)';
                 if (hpContainerEnemy) {
                     hpContainerEnemy.style.transition = 'none';
                     hpContainerEnemy.style.left = '35%';
@@ -319,9 +316,8 @@ export function updateBattleArena() {
             const elPlayerSide = document.getElementById('player-side');
             if (leader && elPlayerSide) {
 
-                elPlayerSide.style.top = '80%';
+                elPlayerSide.style.top = '50%';
                 elPlayerSide.style.bottom = 'auto';
-                elPlayerSide.style.transform = 'translate(-100%, -100%)';
                 elPlayerSide.style.left = '25%';
 
                 const hpContainerPlayer = document.getElementById('player-battle-hp-container');
@@ -424,12 +420,11 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
     const ghostContainer = document.createElement('div');
     ghostContainer.style.position = 'absolute';
     ghostContainer.style.left = '35%';
-    ghostContainer.id = 'enemy-ghost-container';
     ghostContainer.style.transform = 'translate(-50%, -50%)';
     ghostContainer.style.zIndex = '50';
     ghostContainer.style.opacity = '1';
 
-    ghostContainer.style.top = '80%';
+    ghostContainer.style.top = '50%';
     ghostContainer.style.bottom = 'auto';
     ghostContainer.style.height = '50%'; // Match sprite container height
     ghostContainer.style.display = 'flex';
@@ -465,7 +460,7 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
         ball.src = `Assets/Items/Balls/${ballResult.ballName}.png`;
         ball.style.position = 'absolute';
         ball.style.left = '35%';
-        ball.style.top = '80%';
+        ball.style.top = `50%`;
         ball.style.bottom = 'auto'; // Reset bottom
         ball.style.transform = 'translate(-50%, -50%)';
         ball.style.width = '25%';
@@ -538,9 +533,6 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
 export function showDamage(target, amount, isCrit, moveName = '', moveType = 'Normal', effectiveness = 1) {
     const battleSystem = globals.battleSystem;
     let containerId = target === 'player' ? 'player-sprite' : 'enemy-sprite';
-    if (target === 'enemy' && document.getElementById('enemy-ghost-container')) {
-        containerId = 'enemy-ghost-container';
-    }
 
     // Check if in gym battle
     if (battleSystem && battleSystem.gymState && battleSystem.gymState.isActive) {

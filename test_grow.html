@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<body>
+<div id="win" style="width: 800px;">
+  <div class="window-content-container" style="padding: 0;">
+    <div class="window-content-scaler">
+      <div id="inner" style="padding: 5%; box-sizing: border-box;">
+        Content
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  let winElement = document.getElementById("win");
+  let scalerElement = winElement.querySelector('.window-content-scaler');
+  let contentContainer = winElement.querySelector('.window-content-container');
+  winElement._originalWidth = 800;
+  let horizontalPadding = 0;
+  let verticalPadding = 0;
+
+  function adjustHeightForNewContent() {
+      scalerElement.style.transform = 'none';
+      scalerElement.style.width = (winElement._originalWidth - horizontalPadding) + 'px';
+      scalerElement.style.height = 'auto';
+
+      let newUnscaledHeight = scalerElement.offsetHeight + verticalPadding;
+
+      winElement._originalHeight = newUnscaledHeight;
+      winElement._originalRatio = winElement._originalWidth / winElement._originalHeight;
+
+      scalerElement.style.width = (winElement._originalWidth - horizontalPadding) + 'px';
+      scalerElement.style.height = (winElement._originalHeight - verticalPadding) + 'px';
+
+      const scale = 1;
+      scalerElement.style.transform = `scale(${scale})`;
+      scalerElement.style.transformOrigin = 'top left';
+
+      winElement.style.height = (0 + winElement._originalHeight * scale) + 'px';
+      console.log("New height:", winElement.style.height);
+  }
+
+  adjustHeightForNewContent();
+  adjustHeightForNewContent();
+  adjustHeightForNewContent();
+</script>
+</body>
+</html>
