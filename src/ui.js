@@ -725,7 +725,7 @@ window.showOakLabModal = function() {
 
     const renderCard = (title, type, currentVal, tierIdx, taskList, keepAllRewards) => {
         if (tierIdx >= taskList.length) {
-            title = title.replace("Task", "Reward");
+            title = title.replace("Assignment", "Reward");
         }
         let taskHtml = renderActiveTask(type, currentVal, tierIdx, taskList);
 
@@ -768,10 +768,10 @@ window.showOakLabModal = function() {
     } else if (oakTasks.q.length > 0) {
         qCurrentVal = state.stats[oakTasks.q[oakTasks.q.length - 1].stat] || 0;
     }
-    html += renderCard("Quality Task", 'q', qCurrentVal, qTier, oakTasks.q, false);
+    html += renderCard("Quality Assignment", 'q', qCurrentVal, qTier, oakTasks.q, false);
 
     // Catch Card
-    html += renderCard("Catch Task", 'c', state.stats.caught || 0, state.stats.cTaskTier || 0, oakTasks.c, false);
+    html += renderCard("Catch Assignment", 'c', state.stats.caught || 0, state.stats.cTaskTier || 0, oakTasks.c, false);
 
     // IV Card
     let ivTier = state.stats.ivTaskTier || 0;
@@ -781,7 +781,7 @@ window.showOakLabModal = function() {
     } else if (oakTasks.iv.length > 0) {
         ivCurrentVal = state.stats[oakTasks.iv[oakTasks.iv.length - 1].stat] || 0; // fallback if completed
     }
-    html += renderCard("IV Task", 'iv', ivCurrentVal, ivTier, oakTasks.iv, false);
+    html += renderCard("IV Assignment", 'iv', ivCurrentVal, ivTier, oakTasks.iv, false);
 
     // Level Card
     let levelTier = state.stats.levelTaskTier || 0;
@@ -791,7 +791,7 @@ window.showOakLabModal = function() {
     } else if (oakTasks.level.length > 0) {
         levelCurrentVal = state.stats[oakTasks.level[oakTasks.level.length - 1].stat] || 0; // fallback if completed
     }
-    html += renderCard("Level Task", 'level', levelCurrentVal, levelTier, oakTasks.level, true);
+    html += renderCard("Level Assignment", 'level', levelCurrentVal, levelTier, oakTasks.level, true);
 
     // Shiny Card (Combined seen and caught, keeps all rewards but obsolete regular seen shiny is removed by good shiny)
     let seenTier = state.stats.shinySeenTaskTier || 0;
@@ -800,17 +800,17 @@ window.showOakLabModal = function() {
     let shinySeenTaskHtml = renderActiveTask('shinySeen', state.stats.shiniesSeen || 0, seenTier, oakTasks.shinySeen);
     let shinyCaughtTaskHtml = renderActiveTask('shinyCaught', state.stats.shiniesCaught || 0, caughtTier, oakTasks.shinyCaught);
 
-    let shinyTitle = "Shiny Task";
+    let shinyTitle = "Shiny Assignment";
 
-    // Only show "Task: Completed" once if both are done
+    // Only show "Assignment: Completed" once if both are done
     if (seenTier >= oakTasks.shinySeen.length && caughtTier >= oakTasks.shinyCaught.length) {
         shinyTitle = "Shiny Reward";
         shinySeenTaskHtml = "";
         shinyCaughtTaskHtml = "";
     } else {
-        // If one is complete but not the other, we don't want duplicate "Task: Completed" texts
+        // If one is complete but not the other, we don't want duplicate "Assignment: Completed" texts
         // if they rendered their own individual completions. Since we only want a single "Completed" when BOTH are done,
-        // we strip out the individual "Task: Completed" if it exists.
+        // we strip out the individual "Assignment: Completed" if it exists.
         if (seenTier >= oakTasks.shinySeen.length) shinySeenTaskHtml = "";
         if (caughtTier >= oakTasks.shinyCaught.length) shinyCaughtTaskHtml = "";
     }
@@ -854,11 +854,11 @@ window.showOakLabModal = function() {
     const title = document.getElementById('main-view-inner-modal-title');
     const content = document.getElementById('main-view-inner-modal-content');
     if (overlay && title && content) {
-        title.innerText = "Tasks & Rewards";
+        title.innerText = "Assignments and Boosters";
         content.innerHTML = html;
         overlay.style.display = 'flex';
     } else {
-        showModal("Tasks & Rewards", html, "window-tasks");
+        showModal("Assignments and Boosters", html, "window-tasks");
     const winTasks = document.getElementById("window-tasks");
     if (winTasks) {
         winTasks.style.maxHeight = '800px';
@@ -888,11 +888,11 @@ export function renderOakLab() {
     oakLabDiv.innerHTML = `
         <div style="background-color: rgba(0,0,0,0.85); display: inline-block; padding: 20px; margin-top: 20px; border-radius: 8px; width: 400px; color: white; text-align: center;">
             <h2 style="margin-top:0;">Professor Oak Lab</h2>
-            <p style="font-size: 12px; color: #ccc; margin-bottom: 15px;">Complete tasks to unlock global bonuses.</p>
+            <p style="font-size: 12px; color: #ccc; margin-bottom: 15px;">Complete assignments to unlock global bonuses.</p>
 
             <div style="display: flex; flex-direction: column; gap: 10px;">
                 <div style="position: relative; display: inline-block; width: 100%;">
-                    <button onclick="window.showOakLabModal()" style="width: 100%; padding: 10px; font-size: 16px; cursor: pointer;">Tasks & Rewards</button>
+                    <button onclick="window.showOakLabModal()" style="width: 100%; padding: 10px; font-size: 16px; cursor: pointer;">Assignments and Boosters</button>
                     ${exclamationHtml}
                 </div>
             </div>
