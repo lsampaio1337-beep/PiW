@@ -220,6 +220,13 @@ export class WindowManager {
 
             const currentScale = (currentWidth - horizontalPadding) / winElement._originalWidth;
 
+            // Temporarily hide overflow to measure true content size without scrollbars
+            let oldOverflowY = '';
+            if (contentContainer) {
+                oldOverflowY = contentContainer.style.overflowY;
+                contentContainer.style.overflowY = 'hidden';
+            }
+
             // Strip scaling temporarily
             winElement.style.width = winElement._originalWidth + 'px';
             winElement.style.height = 'auto';
@@ -243,7 +250,8 @@ export class WindowManager {
 
                 // Re-apply scale
                 const newScaledContentHeight = winElement._originalHeight * currentScale;
-                const newHeight = headerH + newScaledContentHeight + verticalPadding;
+                // Add Math.ceil and +1px buffer to prevent sub-pixel issues triggering scrollbars
+                const newHeight = Math.ceil(headerH + newScaledContentHeight + verticalPadding) + 1;
 
                 // Lock dimensions
                 scalerElement.style.position = 'absolute';
@@ -257,6 +265,10 @@ export class WindowManager {
                 if (this.windows.includes(winElement)) {
                     this.saveWindowData(winElement.id);
                 }
+            }
+
+            if (contentContainer) {
+                contentContainer.style.overflowY = oldOverflowY;
             }
 
         };
