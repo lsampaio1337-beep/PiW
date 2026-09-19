@@ -61,10 +61,10 @@ export function updateSidebar() {
                 <!-- Left Column: Sprite -->
                 <div style="flex: 0 0 50px; display: flex; align-items: center; justify-content: center; position: relative;">
                     ${p.isTransformed && p.transformedIntoId ?
-                        `<img src="Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? '132_shiny' : '132'}.png" class="${glowClass}" style="position: absolute; top: 0; left: 0; max-width: 100%; max-height: 100%; object-fit: contain; pointer-events: none; opacity: 0.5; transform: scale(1.5); z-index: 1;">
-                         <img src="Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png" onload="this.style.display='inline'" onerror="this.style.display='none'" class="${glowClass}" style="max-width: 100%; max-height: 100%; object-fit: contain; pointer-events: none; opacity: 0.85; transform: scale(1.5); z-index: 2; position: relative;">`
+                        `<img src="Assets/Pokemon Sprites/Natural/${p.qualityName === 'Shiny' ? '132_shiny' : '132'}.png" class="${glowClass}" style="position: absolute; top: 0; left: 0; max-width: 100%; max-height: 100%; object-fit: contain; pointer-events: none; opacity: 0.5; transform: scale(1.5); z-index: 1;">
+                         <img src="Assets/Pokemon Sprites/Natural/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png" onload="this.style.display='inline'" onerror="this.style.display='none'" class="${glowClass}" style="max-width: 100%; max-height: 100%; object-fit: contain; pointer-events: none; opacity: 0.85; transform: scale(1.5); z-index: 2; position: relative;">`
                         :
-                        `<img src="Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png" onload="this.style.display='inline'" onerror="this.style.display='none'" class="${glowClass}" style="max-width: 100%; max-height: 100%; object-fit: contain; pointer-events: none; opacity: 0.85; transform: scale(1.5); z-index: 2;">`
+                        `<img src="Assets/Pokemon Sprites/Natural/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png" onload="this.style.display='inline'" onerror="this.style.display='none'" class="${glowClass}" style="max-width: 100%; max-height: 100%; object-fit: contain; pointer-events: none; opacity: 0.85; transform: scale(1.5); z-index: 2;">`
                     }
                 </div>
 
@@ -205,7 +205,7 @@ function renderDayCareSlot(container, p, battles, maxBattles, type) {
             <div style="display: flex; width: 100%; align-items: stretch; height: 100%; min-height: 55px;">
             <!-- Left Column: Sprite -->
             <div style="flex: 0 0 50px; display: flex; align-items: center; justify-content: center; position: relative;">
-                <img src="Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png" onload="this.style.display='inline'" onerror="this.style.display='none'" class="${glowClass}" style="max-width: 100%; max-height: 100%; object-fit: contain; pointer-events: none; opacity: 0.85; transform: scale(1.5); z-index: 2;">
+                <img src="Assets/Pokemon Sprites/Natural/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png" onload="this.style.display='inline'" onerror="this.style.display='none'" class="${glowClass}" style="max-width: 100%; max-height: 100%; object-fit: contain; pointer-events: none; opacity: 0.85; transform: scale(1.5); z-index: 2;">
             </div>
 
             <!-- Right Column: 3 Floors -->
