@@ -992,6 +992,16 @@ function selectStarter(id) {
     state.currentRoute = "Professor Oak Lab";
     switchView("PROF_OAK_LAB");
 
+    // Refresh window after adding chosen pokemon
+    const partyWindow = document.getElementById('party-window');
+    if (partyWindow && window.windowManager) {
+        if (partyWindow.style.display === 'none' || !partyWindow.style.display) {
+            window.windowManager.toggleWindow('party-window', true);
+        }
+        window.windowManager.recalculateWindowSize('party-window');
+    }
+    updateSidebar();
+
     // Add identical pokemon to Team
     const starterCopy = {
         id: pData.id,
@@ -1009,15 +1019,17 @@ function selectStarter(id) {
     };
     state.party.push(starterCopy);
 
+    // Refresh window after adding duplicate
+    if (partyWindow && window.windowManager) {
+        window.windowManager.recalculateWindowSize('party-window');
+    }
+    updateSidebar();
+
     // Remove similar pokemon from Team
     state.party.pop();
 
-    // Refresh window
-    const partyWindow = document.getElementById('party-window');
+    // Refresh window after removing duplicate
     if (partyWindow && window.windowManager) {
-        if (partyWindow.style.display === 'none' || !partyWindow.style.display) {
-            window.windowManager.toggleWindow('party-window', true);
-        }
         window.windowManager.recalculateWindowSize('party-window');
     }
     updateSidebar();
