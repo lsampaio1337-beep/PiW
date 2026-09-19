@@ -992,12 +992,6 @@ function selectStarter(id) {
     state.currentRoute = "Professor Oak Lab";
     switchView("PROF_OAK_LAB");
 
-    const partyWindow = document.getElementById('party-window');
-    if (partyWindow) partyWindow.style.display = 'block';
-
-    if (window.windowManager) window.windowManager.recalculateWindowSize('party-window');
-    updateSidebar();
-
     // Create the OK button
     const okBtn = document.createElement("button");
     okBtn.innerText = "ok";
@@ -1046,9 +1040,9 @@ function selectStarter(id) {
         removeBtn.onclick = () => {
             // Remove the second pokemon
             state.party.pop();
-            updateSidebar();
 
-            removeBtn.remove();
+            updateSidebar();
+            if (window.windowManager) window.windowManager.recalculateWindowSize('party-window');
 
             // Continue with the normal game start flow
             const navButtons = document.getElementById('nav-buttons');
@@ -1060,12 +1054,24 @@ function selectStarter(id) {
             startGame();
             storage.save(state);
             renderOakLab();
+
+            removeBtn.remove();
         };
 
         document.body.appendChild(removeBtn);
     };
 
     document.body.appendChild(okBtn);
+
+    // We also need to run startGame so the first pokemon shows up, otherwise the UI is frozen!
+    const partyWindow = document.getElementById('party-window');
+    if (partyWindow && window.windowManager) {
+        if (partyWindow.style.display === 'none' || !partyWindow.style.display) {
+            window.windowManager.toggleWindow('party-window', true);
+        }
+        window.windowManager.recalculateWindowSize('party-window');
+    }
+    updateSidebar();
 }
 
 function startGame() {
