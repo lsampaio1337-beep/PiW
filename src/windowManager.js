@@ -198,6 +198,10 @@ export class WindowManager {
 
 
         winElement.adjustHeightForNewContent = () => {
+            if (winElement._sizeInitialized) {
+                return; // Do not adjust height if already initialized
+            }
+
             if (!winElement._originalWidth) {
                 initDims();
             }
@@ -257,6 +261,7 @@ export class WindowManager {
                 if (this.windows.includes(winElement)) {
                     this.saveWindowData(winElement.id);
                 }
+                winElement._sizeInitialized = true;
             }
 
         };
@@ -498,6 +503,10 @@ export class WindowManager {
         const winElement = document.getElementById(windowId);
         if (!winElement) return;
 
+        if (winElement._originalWidth) {
+            return; // Window already sized, do not resize it
+        }
+
         // If the window has already been initialized with scaling, use proportional height adjuster
         if (typeof winElement.adjustHeightForNewContent === 'function') {
             winElement.adjustHeightForNewContent();
@@ -635,8 +644,10 @@ export class WindowManager {
 
     createDynamicWindow(windowId, title, htmlContent, width = '800px', height = 'auto') {
         let winElement = document.getElementById(windowId);
+        let isNewWindow = false;
 
         if (!winElement) {
+            isNewWindow = true;
             const template = document.getElementById('generic-window-template');
             if (!template) {
                 console.error("Template #generic-window-template not found.");
@@ -677,14 +688,16 @@ export class WindowManager {
 
         // Ensure layout is recalculated so it fits inner content with the new paddings
         if (height === 'auto') {
-            this.recalculateWindowSize(windowId);
-            setTimeout(() => {
-                if (typeof winElement.adjustHeightForNewContent === 'function') {
-                    winElement.adjustHeightForNewContent();
-                } else {
-                    this.recalculateWindowSize(windowId);
-                }
-            }, 50);
+            if (isNewWindow || !winElement._originalWidth) {
+                this.recalculateWindowSize(windowId);
+                setTimeout(() => {
+                    if (typeof winElement.adjustHeightForNewContent === 'function') {
+                        winElement.adjustHeightForNewContent();
+                    } else {
+                        this.recalculateWindowSize(windowId);
+                    }
+                }, 50);
+            }
         }
 
         return winElement;
