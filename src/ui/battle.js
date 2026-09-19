@@ -85,21 +85,15 @@ export function updateBattleArena() {
         } else if (state.currentRoute && state.currentRoute.startsWith('Casino')) {
              combatArena.style.backgroundImage = `url('./Assets/BG/BG-Cassino.jpg')`;
         } else if (state.currentRoute === 'Viridian Forest') {
-            combatArena.style.backgroundImage = `url('./Assets/BG/BG-Forest.png')`;
-        } else if (['Mount Moon', 'Cerulean Cave', 'Rock Tunnel', 'Seafoam Islands', 'Victory Road', "Diglett's Cave"].includes(state.currentRoute)) {
-            combatArena.style.backgroundImage = `url('./Assets/BG/BG-Cave.png')`;
-        } else if (['Route 1', 'Route 2', 'Route 3', 'Route 4', 'Route 24', 'Route 25', 'Route 9', 'Route 10', 'Route 5', 'Route 7', 'Route 12', 'Route 11', 'Route 6', 'Route 8', 'Route 13', 'Route 14', 'Route 15', 'Route 22', 'Route 23'].includes(state.currentRoute)) {
-            combatArena.style.backgroundImage = `url('./Assets/BG/BG-Plain.png')`;
+            combatArena.style.backgroundImage = `url('./Assets/BG/BGForest.png')`;
+        } else if (state.currentRoute === 'Route 1' || state.currentRoute === 'Victory Road') {
+            combatArena.style.backgroundImage = `url('./Assets/BG/BGPlains.png')`;
         } else {
             combatArena.style.backgroundImage = `url('./Assets/BG/BG.png')`;
         }
 
-        const isSlidingBG = (state.currentRoute === 'Viridian Forest' ||
-                             ['Mount Moon', 'Cerulean Cave', 'Rock Tunnel', 'Seafoam Islands', 'Victory Road', "Diglett's Cave"].includes(state.currentRoute) ||
-                             ['Route 1', 'Route 2', 'Route 3', 'Route 4', 'Route 24', 'Route 25', 'Route 9', 'Route 10', 'Route 5', 'Route 7', 'Route 12', 'Route 11', 'Route 6', 'Route 8', 'Route 13', 'Route 14', 'Route 15', 'Route 22', 'Route 23'].includes(state.currentRoute));
-
-        // Handle BG sizing and positioning for scrolling backgrounds
-        if (isSlidingBG && !inGymCombat) {
+        // Handle Viridian Forest BG sizing and positioning
+        if ((state.currentRoute === 'Viridian Forest' || state.currentRoute === 'Route 1' || state.currentRoute === 'Victory Road') && !inGymCombat) {
             combatArena.style.backgroundSize = 'auto 100%';
             combatArena.style.backgroundRepeat = 'repeat-x';
 
