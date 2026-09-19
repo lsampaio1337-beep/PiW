@@ -34,18 +34,12 @@ export function showMap() {
     unlockedAreas.add("PokeCenter & PokeMarket");
     if (state.stats.completedChallengeIds) {
         state.stats.completedChallengeIds.forEach(id => {
-            parseAreaNames(id).forEach(area => {
-                unlockedAreas.add(area);
-                if (area === "Mt. Moon") unlockedAreas.add("Mount Moon");
-            });
+            parseAreaNames(id).forEach(area => unlockedAreas.add(area));
         });
     }
     if (state.stats.activeChallenges) {
         state.stats.activeChallenges.forEach(id => {
-            parseAreaNames(id).forEach(area => {
-                unlockedAreas.add(area);
-                if (area === "Mt. Moon") unlockedAreas.add("Mount Moon");
-            });
+            parseAreaNames(id).forEach(area => unlockedAreas.add(area));
         });
     }
 
@@ -134,6 +128,7 @@ export function showMap() {
 
     html += `
         </div>
+        <div id="map-tooltip" style="display:none; position:absolute; background:rgba(0,0,0,0.8); color:white; padding:5px; border-radius:5px; pointer-events:none; z-index: 100;"></div>
     `;
 
 
@@ -385,13 +380,8 @@ export function navigateToLocation(locationName) {
 }
 
 export function showMapTooltip(e, locationName) {
-    let tooltip = document.getElementById('map-tooltip');
-    if (!tooltip) {
-        tooltip = document.createElement('div');
-        tooltip.id = 'map-tooltip';
-        tooltip.style.cssText = 'display:none; position:fixed; background:rgba(0,0,0,0.8); color:white; padding:5px; border-radius:5px; pointer-events:none; z-index: 99999;';
-        document.body.appendChild(tooltip);
-    }
+    const tooltip = document.getElementById('map-tooltip');
+    if (!tooltip) return;
 
     let info = `<strong>${locationName}</strong><br>`;
 
@@ -439,30 +429,8 @@ export function showMapTooltip(e, locationName) {
 
     // Fix tooltip positioning by using fixed position for the tooltip to avoid offset issues
     tooltip.style.position = 'fixed';
-
-    // Default positioning to the right and below the cursor
-    let leftPos = e.clientX + 15;
-    let topPos = e.clientY + 15;
-
-    // Apply position first so the browser can calculate its dimensions
-    tooltip.style.left = leftPos + 'px';
-    tooltip.style.top = topPos + 'px';
-
-    // Adjust if it goes off-screen
-    const rect = tooltip.getBoundingClientRect();
-    if (leftPos + rect.width > window.innerWidth) {
-        leftPos = e.clientX - rect.width - 15;
-        // Make sure it doesn't go off the left edge either
-        if (leftPos < 0) leftPos = 0;
-        tooltip.style.left = leftPos + 'px';
-    }
-
-    if (topPos + rect.height > window.innerHeight) {
-        topPos = e.clientY - rect.height - 15;
-        // Make sure it doesn't go off the top edge either
-        if (topPos < 0) topPos = 0;
-        tooltip.style.top = topPos + 'px';
-    }
+    tooltip.style.left = (e.clientX + 15) + 'px';
+    tooltip.style.top = (e.clientY + 15) + 'px';
 }
 
 export function hideMapTooltip() {
