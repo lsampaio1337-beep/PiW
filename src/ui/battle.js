@@ -274,22 +274,22 @@ export function updateBattleArena() {
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.transition = 'opacity 2s linear'; else elPlayerSprite.style.transition = 'opacity 2s linear';
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.opacity = '0'; else elPlayerSprite.style.opacity = '0';
                     } else if (battleSystem && battleSystem.isPlayerSlidingIn) {
-                        elPlayerSprite.style.transition = `left ${battleSystem.slideDuration}ms linear`;
-                        elPlayerSprite.style.left = '25%';
+                        elPlayerSide.style.transition = `left ${battleSystem.slideDuration}ms linear`;
+                        elPlayerSide.style.left = '25%';
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.transition = 'none';
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.opacity = '1';
                         elPlayerSprite.style.opacity = '1';
                     } else if (battleSystem && battleSystem.isFainting) {
                         // don't touch style while fading
                     } else if (battleSystem && battleSystem.isPlayerPreSlidingIn) {
-                        elPlayerSprite.style.transition = 'none';
-                        elPlayerSprite.style.left = '-30%';
+                        elPlayerSide.style.transition = 'none';
+                        elPlayerSide.style.left = '-30%';
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.transition = 'none';
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.opacity = '1';
                         elPlayerSprite.style.opacity = '1';
                     } else {
-                        elPlayerSprite.style.transition = 'none';
-                        elPlayerSprite.style.left = '25%';
+                        elPlayerSide.style.transition = 'none';
+                        elPlayerSide.style.left = '25%';
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.transition = 'none';
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.opacity = '1';
                         elPlayerSprite.style.opacity = '1';
@@ -361,22 +361,22 @@ export function updateBattleArena() {
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.transition = 'opacity 2s linear'; else elPlayerSprite.style.transition = 'opacity 2s linear';
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.opacity = '0'; else elPlayerSprite.style.opacity = '0';
                     } else if (battleSystem && battleSystem.isPlayerSlidingIn) {
-                        elPlayerSprite.style.transition = `left ${battleSystem.slideDuration}ms linear`;
-                        elPlayerSprite.style.left = '25%';
+                        elPlayerSide.style.transition = `left ${battleSystem.slideDuration}ms linear`;
+                        elPlayerSide.style.left = '25%';
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.transition = 'none';
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.opacity = '1';
                         elPlayerSprite.style.opacity = '1';
                     } else if (battleSystem && battleSystem.isFainting) {
                         // don't touch style while fading
                     } else if (battleSystem && battleSystem.isPlayerPreSlidingIn) {
-                        elPlayerSprite.style.transition = 'none';
-                        elPlayerSprite.style.left = '-30%';
+                        elPlayerSide.style.transition = 'none';
+                        elPlayerSide.style.left = '-30%';
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.transition = 'none';
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.opacity = '1';
                         elPlayerSprite.style.opacity = '1';
                     } else {
-                        elPlayerSprite.style.transition = 'none';
-                        elPlayerSprite.style.left = '25%';
+                        elPlayerSide.style.transition = 'none';
+                        elPlayerSide.style.left = '25%';
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.transition = 'none';
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.opacity = '1';
                         elPlayerSprite.style.opacity = '1';
