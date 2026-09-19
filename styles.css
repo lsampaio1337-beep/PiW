@@ -443,7 +443,6 @@ input[type="number"] {
     box-shadow: 0 4px 15px rgba(0,0,0,0.5);
     overflow: hidden; /* keep header and content clipped */
     pointer-events: auto; /* ensure we can click it */
-    box-sizing: border-box;
 }
 
 .window-header {
