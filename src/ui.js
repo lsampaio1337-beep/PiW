@@ -992,78 +992,27 @@ function selectStarter(id) {
     state.currentRoute = "Professor Oak Lab";
     switchView("PROF_OAK_LAB");
 
-    // Create the OK button
-    const okBtn = document.createElement("button");
-    okBtn.innerText = "ok";
-    okBtn.id = "btn-cheat-ok";
-    okBtn.style.position = "fixed";
-    okBtn.style.top = "50%";
-    okBtn.style.left = "50%";
-    okBtn.style.transform = "translate(-50%, -50%)";
-    okBtn.style.zIndex = "9999";
-    okBtn.style.padding = "20px 40px";
-    okBtn.style.fontSize = "24px";
-
-    okBtn.onclick = () => {
-        // Insert second pokemon identical to the first
-        const starterCopy = {
-            id: pData.id,
-            name: pData.name,
-            types: pData.types,
-            level: level,
-            xp: 0,
-            qualityName: qName,
-            quality: q,
-            ivs: { ...ivs },
-            currentStats: { ...stats },
-            maxHp: stats.hp,
-            currentHp: stats.hp,
-            moves: [{name: "Tackle", power: 40, type: "Normal", category: "Physical"}] // Basic start
-        };
-        state.party.push(starterCopy);
-        updateSidebar();
-
-        okBtn.remove();
-
-        // Create the Remove button
-        const removeBtn = document.createElement("button");
-        removeBtn.innerText = "remove";
-        removeBtn.id = "btn-cheat-remove";
-        removeBtn.style.position = "fixed";
-        removeBtn.style.top = "50%";
-        removeBtn.style.left = "50%";
-        removeBtn.style.transform = "translate(-50%, -50%)";
-        removeBtn.style.zIndex = "9999";
-        removeBtn.style.padding = "20px 40px";
-        removeBtn.style.fontSize = "24px";
-
-        removeBtn.onclick = () => {
-            // Remove the second pokemon
-            state.party.pop();
-
-            updateSidebar();
-            if (window.windowManager) window.windowManager.recalculateWindowSize('party-window');
-
-            // Continue with the normal game start flow
-            const navButtons = document.getElementById('nav-buttons');
-            if (navButtons) {
-                navButtons.style.pointerEvents = 'auto';
-                navButtons.style.opacity = '1.0';
-            }
-
-            startGame();
-            storage.save(state);
-            renderOakLab();
-
-            removeBtn.remove();
-        };
-
-        document.body.appendChild(removeBtn);
+    // Add identical pokemon to Team
+    const starterCopy = {
+        id: pData.id,
+        name: pData.name,
+        types: pData.types,
+        level: level,
+        xp: 0,
+        qualityName: qName,
+        quality: q,
+        ivs: { ...ivs },
+        currentStats: { ...stats },
+        maxHp: stats.hp,
+        currentHp: stats.hp,
+        moves: [{name: "Tackle", power: 40, type: "Normal", category: "Physical"}] // Basic start
     };
+    state.party.push(starterCopy);
 
-    document.body.appendChild(okBtn);
+    // Remove similar pokemon from Team
+    state.party.pop();
 
-    // We also need to run startGame so the first pokemon shows up, otherwise the UI is frozen!
+    // Refresh window
     const partyWindow = document.getElementById('party-window');
     if (partyWindow && window.windowManager) {
         if (partyWindow.style.display === 'none' || !partyWindow.style.display) {
@@ -1072,6 +1021,17 @@ function selectStarter(id) {
         window.windowManager.recalculateWindowSize('party-window');
     }
     updateSidebar();
+
+    // Continue normal game flow
+    const navButtons = document.getElementById('nav-buttons');
+    if (navButtons) {
+        navButtons.style.pointerEvents = 'auto';
+        navButtons.style.opacity = '1.0';
+    }
+
+    startGame();
+    storage.save(state);
+    renderOakLab();
 }
 
 function startGame() {
