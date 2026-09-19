@@ -231,7 +231,8 @@ export class WindowManager {
             // Need to let browser reflow
             void winElement.offsetHeight;
 
-            let newOriginalHeight = scalerElement.scrollHeight;
+            let newOriginalHeight = scalerElement.getBoundingClientRect().height;
+
             if (newOriginalHeight <= 0) {
                 newOriginalHeight = winElement.offsetHeight - headerH;
             }
@@ -243,7 +244,8 @@ export class WindowManager {
 
                 // Re-apply scale
                 const newScaledContentHeight = winElement._originalHeight * currentScale;
-                const newHeight = headerH + newScaledContentHeight + verticalPadding;
+                let newHeight = headerH + newScaledContentHeight + verticalPadding;
+                newHeight = Math.ceil(newHeight);
 
                 // Lock dimensions
                 scalerElement.style.position = 'absolute';
@@ -347,6 +349,7 @@ export class WindowManager {
                 const scale = currentContentWidth / winElement._originalWidth;
                 const newContentHeight = winElement._originalHeight * scale;
                 let newHeight = headerH + newContentHeight + verticalPadding;
+                newHeight = Math.ceil(newHeight);
 
                 winElement.style.width = newWidth + 'px';
                 winElement.style.height = newHeight + 'px';
@@ -578,6 +581,8 @@ export class WindowManager {
                 newContentHeight = winElement._originalHeight * scale;
                 targetHeight = headerH + newContentHeight + verticalPadding;
             }
+
+            targetHeight = Math.ceil(targetHeight);
 
             winElement.style.width = newWidth + 'px';
             winElement.style.height = targetHeight + 'px';
