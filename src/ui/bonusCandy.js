@@ -157,7 +157,7 @@ window.claimWhiteCandy = function() {
         state.stats.whiteCandies = (state.stats.whiteCandies || 0) + 1;
         updateUI();
         showBonusCandyModal(); // Refresh modal
-    }
+            }
 };
 
 window.cheatWhiteCandy = function() {
@@ -166,8 +166,10 @@ window.cheatWhiteCandy = function() {
     showBonusCandyModal();
     };
 
-};
-};
+window.buyBonusCandy = function(color) {
+    if (color === 'Rainbow Candy' && (state.stats.rainbowCandies || 0) >= 5) {
+        alert("Maximum Rainbow Candies reached!");
+        return;
     }
 
     const currentOwned = color === 'Green Candy' ? state.stats.greenCandies
@@ -192,9 +194,7 @@ window.cheatWhiteCandy = function() {
 
         updateUI();
         showBonusCandyModal(); // Refresh modal
-
-    } else {
-
+            } else {
         alert("Not enough White Candies!");
     }
 };
