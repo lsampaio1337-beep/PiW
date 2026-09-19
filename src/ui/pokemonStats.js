@@ -125,7 +125,7 @@ export function showPokemonStats(idx, location) {
             </div>
 
             <div style="background: rgba(0,0,0,0.5); padding: 15px; border-radius: 8px; text-align: center; flex: 1; font-size: 14px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                <img src="Assets/Pokemon Sprites/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png" style="width: 100px; height: 100px;"><br>
+                <img src="Assets/Pokemon Sprites/Natural/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png" style="width: 100px; height: 100px;"><br>
                 <p style="margin: 5px 0;"><b>Type:</b> ${p.types.map(t => formatType(t)).join(' ')}</p>
                 <b>Quality:</b> ${p.qualityName} (Q=${p.quality.toFixed(2)})<br>
                 <b>Sum IVs:</b> ${sumIV}<br>

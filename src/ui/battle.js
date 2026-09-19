@@ -194,7 +194,7 @@ export function updateBattleArena() {
             const elEnemySide = document.getElementById('enemy-side');
 
             if (elEnemySprite && elEnemySide) {
-                elEnemySprite.src = `Assets/Pokemon Sprites/${enemy.qualityName === 'Shiny' ? enemy.id + '_shiny' : enemy.id}.png`;
+                elEnemySprite.src = `Assets/Pokemon Sprites/Natural/${enemy.qualityName === 'Shiny' ? enemy.id + '_shiny' : enemy.id}.png`;
                 elEnemySprite.style.display = 'block';
                 applyWalkAnimations(enemy, true);
 
@@ -270,7 +270,7 @@ export function updateBattleArena() {
                 if (elPlayerSprite) {
                     let dittoBg = document.getElementById('player-sprite-ditto-bg');
                     if (dittoBg) dittoBg.style.display = 'none';
-                    elPlayerSprite.src = `Assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? (leader.transformedIntoId || leader.id) + '_shiny' : (leader.transformedIntoId || leader.id)}.png`;
+                    elPlayerSprite.src = `Assets/Pokemon Sprites/Natural/${leader.qualityName === 'Shiny' ? (leader.transformedIntoId || leader.id) + '_shiny' : (leader.transformedIntoId || leader.id)}.png`;
                     elPlayerSprite.style.display = 'block';
                     applyWalkAnimations(leader, false);
 
@@ -356,7 +356,7 @@ export function updateBattleArena() {
                 if (elPlayerSprite) {
                     let dittoBg = document.getElementById('player-sprite-ditto-bg');
                     if (dittoBg) dittoBg.style.display = 'none';
-                    elPlayerSprite.src = `Assets/Pokemon Sprites/${leader.qualityName === 'Shiny' ? (leader.transformedIntoId || leader.id) + '_shiny' : (leader.transformedIntoId || leader.id)}.png`;
+                    elPlayerSprite.src = `Assets/Pokemon Sprites/Natural/${leader.qualityName === 'Shiny' ? (leader.transformedIntoId || leader.id) + '_shiny' : (leader.transformedIntoId || leader.id)}.png`;
                     elPlayerSprite.style.display = 'block';
                     applyWalkAnimations(leader, false);
 
@@ -444,7 +444,7 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
 
     // The image itself
     const ghost = document.createElement('img');
-    ghost.src = `Assets/Pokemon Sprites/${activeEncounter.qualityName === 'Shiny' ? activeEncounter.id + '_shiny' : activeEncounter.id}.png`;
+    ghost.src = `Assets/Pokemon Sprites/Natural/${activeEncounter.qualityName === 'Shiny' ? activeEncounter.id + '_shiny' : activeEncounter.id}.png`;
     ghost.style.height = '100%';
     ghost.style.objectFit = 'contain';
     ghostContainer.appendChild(ghost);

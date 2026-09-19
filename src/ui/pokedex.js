@@ -84,7 +84,7 @@ export function showPokedex() {
 
             html += `<div class="${cardClass}" style="${cardStyle}">
                 <div style="font-weight:bold;">#${i}</div>
-                <img src="Assets/Pokemon Sprites/${i}.png" style="width: 50px; height: 50px; filter: ${filter}; cursor: ${cursor};" ${onClick}>
+                <img src="Assets/Pokemon Sprites/Natural/${i}.png" style="width: 50px; height: 50px; filter: ${filter}; cursor: ${cursor};" ${onClick}>
             </div>`;
         }
     }
@@ -110,10 +110,10 @@ export function showDexEntry(id) {
     const html = `
         <div class="content-panel" style="text-align:center;">
             <h2>#${pData.id} ${pData.name}</h2>
-            <img id="dex-sprite-${pData.id}" src="Assets/Pokemon Sprites/${pData.id}.png" style="width: 100px; height: 100px;">
+            <img id="dex-sprite-${pData.id}" src="Assets/Pokemon Sprites/Natural/${pData.id}.png" style="width: 100px; height: 100px;">
             <div style="margin-bottom: 10px;">
-                <button style="${buttonStyle}" onclick="document.getElementById('dex-sprite-${pData.id}').src = 'Assets/Pokemon Sprites/${pData.id}_shiny.png'">Shiny</button>
-                <button style="${buttonStyle}" onclick="document.getElementById('dex-sprite-${pData.id}').src = 'Assets/Pokemon Sprites/${pData.id}.png'">Normal</button>
+                <button style="${buttonStyle}" onclick="document.getElementById('dex-sprite-${pData.id}').src = 'Assets/Pokemon Sprites/Natural/${pData.id}_shiny.png'">Shiny</button>
+                <button style="${buttonStyle}" onclick="document.getElementById('dex-sprite-${pData.id}').src = 'Assets/Pokemon Sprites/Natural/${pData.id}.png'">Normal</button>
             </div>
 
             <p><b>Type:</b> ${pData.types.map(t => formatType(t)).join(' ')}</p>
@@ -153,7 +153,7 @@ export function buildEvolutionLineHtml(pData, state) {
         let displayName = isRevealed ? pd.name : "???";
 
         let html = `<div style="display: flex; flex-direction: column; align-items: center; margin: 5px;">
-            <img src="Assets/Pokemon Sprites/${pd.id}.png" style="width: 50px; height: 50px; filter: ${filter}; cursor: ${cursor};" ${onClick} title="${displayName}">
+            <img src="Assets/Pokemon Sprites/Natural/${pd.id}.png" style="width: 50px; height: 50px; filter: ${filter}; cursor: ${cursor};" ${onClick} title="${displayName}">
             <span style="font-size: 10px; cursor: ${cursor};" ${onClick}>${displayName}</span>
         </div>`;
 
