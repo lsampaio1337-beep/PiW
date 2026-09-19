@@ -188,11 +188,13 @@ export function updateBattleArena() {
             const elEnemySide = document.getElementById('enemy-side');
 
             if (elEnemySprite && elEnemySide) {
-                elEnemySprite.src = `Assets/Pokemon Sprites/Natural/${enemy.qualityName === 'Shiny' ? enemy.id + '_shiny' : enemy.id}.png`;
+                elEnemySprite.src = `Assets/Pokemon Sprites/Clean/${enemy.qualityName === 'Shiny' ? enemy.id + '_shiny_Clean' : enemy.id + '_Clean'}.png`;
+                elEnemySprite.className = enemy.types.includes('Flying') ? 'snap-top-left' : 'snap-bottom-right';
                 elEnemySprite.style.display = 'block';
                 applyWalkAnimations(enemy, true);
 
-                elEnemySide.style.top = '50%';
+                elEnemySide.style.top = '80%';
+                elEnemySide.style.transform = 'translate(0, -100%)';
                 elEnemySide.style.bottom = 'auto';
 
                 if (battleSystem.isSliding) {
@@ -232,7 +234,8 @@ export function updateBattleArena() {
             const elPlayerSide = document.getElementById('player-side');
             if (leader && elPlayerSide) {
 
-                elPlayerSide.style.top = '50%';
+                elPlayerSide.style.top = '80%';
+                elPlayerSide.style.transform = 'translate(-100%, -100%)';
                 elPlayerSide.style.bottom = 'auto';
                 elPlayerSide.style.left = '25%';
 
@@ -262,7 +265,8 @@ export function updateBattleArena() {
                 if (elPlayerSprite) {
                     let dittoBg = document.getElementById('player-sprite-ditto-bg');
                     if (dittoBg) dittoBg.style.display = 'none';
-                    elPlayerSprite.src = `Assets/Pokemon Sprites/Natural/${leader.qualityName === 'Shiny' ? (leader.transformedIntoId || leader.id) + '_shiny' : (leader.transformedIntoId || leader.id)}.png`;
+                    elPlayerSprite.src = `Assets/Pokemon Sprites/Clean/${leader.qualityName === 'Shiny' ? (leader.transformedIntoId || leader.id) + '_shiny_Clean' : (leader.transformedIntoId || leader.id) + '_Clean'}.png`;
+                    elPlayerSprite.className = leader.types.includes('Flying') ? 'snap-top-left' : 'snap-bottom-right';
                     elPlayerSprite.style.display = 'block';
                     applyWalkAnimations(leader, false);
 
@@ -270,22 +274,22 @@ export function updateBattleArena() {
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.transition = 'opacity 2s linear'; else elPlayerSprite.style.transition = 'opacity 2s linear';
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.opacity = '0'; else elPlayerSprite.style.opacity = '0';
                     } else if (battleSystem && battleSystem.isPlayerSlidingIn) {
-                        elPlayerSprite.style.transition = `left ${battleSystem.slideDuration}ms linear`;
-                        elPlayerSprite.style.left = '25%';
+                        elPlayerSide.style.transition = `left ${battleSystem.slideDuration}ms linear`;
+                        elPlayerSide.style.left = '25%';
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.transition = 'none';
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.opacity = '1';
                         elPlayerSprite.style.opacity = '1';
                     } else if (battleSystem && battleSystem.isFainting) {
                         // don't touch style while fading
                     } else if (battleSystem && battleSystem.isPlayerPreSlidingIn) {
-                        elPlayerSprite.style.transition = 'none';
-                        elPlayerSprite.style.left = '-30%';
+                        elPlayerSide.style.transition = 'none';
+                        elPlayerSide.style.left = '-30%';
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.transition = 'none';
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.opacity = '1';
                         elPlayerSprite.style.opacity = '1';
                     } else {
-                        elPlayerSprite.style.transition = 'none';
-                        elPlayerSprite.style.left = '25%';
+                        elPlayerSide.style.transition = 'none';
+                        elPlayerSide.style.left = '25%';
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.transition = 'none';
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.opacity = '1';
                         elPlayerSprite.style.opacity = '1';
@@ -304,7 +308,8 @@ export function updateBattleArena() {
                 elEnemySprite.style.display = 'block';
                 elEnemySide.style.transition = 'none';
                 elEnemySide.style.left = '35%'; // Matching active battle destination
-                elEnemySide.style.top = '50%';
+                elEnemySide.style.top = '80%';
+                elEnemySide.style.transform = 'translate(0, -100%)';
                 elEnemySide.style.bottom = 'auto';
                 if (hpContainerEnemy) {
                     hpContainerEnemy.style.transition = 'none';
@@ -316,7 +321,8 @@ export function updateBattleArena() {
             const elPlayerSide = document.getElementById('player-side');
             if (leader && elPlayerSide) {
 
-                elPlayerSide.style.top = '50%';
+                elPlayerSide.style.top = '80%';
+                elPlayerSide.style.transform = 'translate(-100%, -100%)';
                 elPlayerSide.style.bottom = 'auto';
                 elPlayerSide.style.left = '25%';
 
@@ -346,7 +352,8 @@ export function updateBattleArena() {
                 if (elPlayerSprite) {
                     let dittoBg = document.getElementById('player-sprite-ditto-bg');
                     if (dittoBg) dittoBg.style.display = 'none';
-                    elPlayerSprite.src = `Assets/Pokemon Sprites/Natural/${leader.qualityName === 'Shiny' ? (leader.transformedIntoId || leader.id) + '_shiny' : (leader.transformedIntoId || leader.id)}.png`;
+                    elPlayerSprite.src = `Assets/Pokemon Sprites/Clean/${leader.qualityName === 'Shiny' ? (leader.transformedIntoId || leader.id) + '_shiny_Clean' : (leader.transformedIntoId || leader.id) + '_Clean'}.png`;
+                    elPlayerSprite.className = leader.types.includes('Flying') ? 'snap-top-left' : 'snap-bottom-right';
                     elPlayerSprite.style.display = 'block';
                     applyWalkAnimations(leader, false);
 
@@ -354,22 +361,22 @@ export function updateBattleArena() {
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.transition = 'opacity 2s linear'; else elPlayerSprite.style.transition = 'opacity 2s linear';
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.opacity = '0'; else elPlayerSprite.style.opacity = '0';
                     } else if (battleSystem && battleSystem.isPlayerSlidingIn) {
-                        elPlayerSprite.style.transition = `left ${battleSystem.slideDuration}ms linear`;
-                        elPlayerSprite.style.left = '25%';
+                        elPlayerSide.style.transition = `left ${battleSystem.slideDuration}ms linear`;
+                        elPlayerSide.style.left = '25%';
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.transition = 'none';
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.opacity = '1';
                         elPlayerSprite.style.opacity = '1';
                     } else if (battleSystem && battleSystem.isFainting) {
                         // don't touch style while fading
                     } else if (battleSystem && battleSystem.isPlayerPreSlidingIn) {
-                        elPlayerSprite.style.transition = 'none';
-                        elPlayerSprite.style.left = '-30%';
+                        elPlayerSide.style.transition = 'none';
+                        elPlayerSide.style.left = '-30%';
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.transition = 'none';
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.opacity = '1';
                         elPlayerSprite.style.opacity = '1';
                     } else {
-                        elPlayerSprite.style.transition = 'none';
-                        elPlayerSprite.style.left = '25%';
+                        elPlayerSide.style.transition = 'none';
+                        elPlayerSide.style.left = '25%';
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.transition = 'none';
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.opacity = '1';
                         elPlayerSprite.style.opacity = '1';
@@ -420,22 +427,47 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
     const ghostContainer = document.createElement('div');
     ghostContainer.style.position = 'absolute';
     ghostContainer.style.left = '35%';
-    ghostContainer.style.transform = 'translate(-50%, -50%)';
     ghostContainer.style.zIndex = '50';
     ghostContainer.style.opacity = '1';
 
-    ghostContainer.style.top = '50%';
+    ghostContainer.style.top = '80%';
+    ghostContainer.style.transform = 'translate(0, -100%)';
     ghostContainer.style.bottom = 'auto';
-    ghostContainer.style.height = '50%'; // Match sprite container height
-    ghostContainer.style.display = 'flex';
-    ghostContainer.style.flexDirection = 'column';
-    ghostContainer.style.alignItems = 'center';
+    ghostContainer.style.height = '96px';
+    ghostContainer.style.width = '96px';
+    ghostContainer.style.display = 'inline-block';
+    ghostContainer.style.position = 'absolute';
+
+    // Frame for ghost
+    const frame = document.createElement('img');
+    frame.src = 'Assets/Pokemon Sprites/Extra/Frame.png';
+    frame.style.width = '96px';
+    frame.style.height = '96px';
+    frame.style.position = 'absolute';
+    frame.style.top = '50%';
+    frame.style.left = '50%';
+    frame.style.transform = 'translate(-50%, -50%)';
+    frame.style.zIndex = '5';
+    frame.style.pointerEvents = 'none';
+    ghostContainer.appendChild(frame);
 
     // The image itself
     const ghost = document.createElement('img');
-    ghost.src = `Assets/Pokemon Sprites/Natural/${activeEncounter.qualityName === 'Shiny' ? activeEncounter.id + '_shiny' : activeEncounter.id}.png`;
-    ghost.style.height = '100%';
+    ghost.src = `Assets/Pokemon Sprites/Clean/${activeEncounter.qualityName === 'Shiny' ? activeEncounter.id + '_shiny_Clean' : activeEncounter.id + '_Clean'}.png`;
+    ghost.style.width = 'auto';
+    ghost.style.height = 'auto';
+    ghost.style.maxWidth = '96px';
+    ghost.style.maxHeight = '96px';
     ghost.style.objectFit = 'contain';
+    ghost.style.position = 'absolute';
+    ghost.style.zIndex = '10';
+    if (activeEncounter.types && activeEncounter.types.includes('Flying')) {
+        ghost.style.top = '0';
+        ghost.style.left = '0';
+    } else {
+        ghost.style.bottom = '0';
+        ghost.style.right = '0';
+    }
     ghostContainer.appendChild(ghost);
 
     // Recreate bubbles for ghost if it's water type
