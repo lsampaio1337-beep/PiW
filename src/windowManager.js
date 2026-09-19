@@ -633,7 +633,7 @@ export class WindowManager {
         });
     }
 
-    createDynamicWindow(windowId, title, htmlContent, width = '800px', height = 'auto') {
+    createDynamicWindow(windowId, title, htmlContent, width = '800px', height = '600px') {
         let winElement = document.getElementById(windowId);
 
         if (!winElement) {
@@ -685,6 +685,8 @@ export class WindowManager {
                     this.recalculateWindowSize(windowId);
                 }
             }, 50);
+        } else {
+            winElement.style.height = height;
         }
 
         return winElement;
