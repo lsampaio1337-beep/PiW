@@ -995,7 +995,49 @@ function selectStarter(id) {
     state.currentRoute = "Professor Oak Lab";
     switchView("PROF_OAK_LAB");
 
-    // Unlock the top bar for a new game
+    // Refresh window after adding chosen pokemon
+    const partyWindow = document.getElementById('party-window');
+    if (partyWindow && window.windowManager) {
+        if (partyWindow.style.display === 'none' || !partyWindow.style.display) {
+            window.windowManager.toggleWindow('party-window', true);
+        }
+        window.windowManager.recalculateWindowSize('party-window');
+    }
+    updateSidebar();
+
+    // Add identical pokemon to Team
+    const starterCopy = {
+        id: pData.id,
+        name: pData.name,
+        types: pData.types,
+        level: level,
+        xp: 0,
+        qualityName: qName,
+        quality: q,
+        ivs: { ...ivs },
+        currentStats: { ...stats },
+        maxHp: stats.hp,
+        currentHp: stats.hp,
+        moves: [{name: "Tackle", power: 40, type: "Normal", category: "Physical"}] // Basic start
+    };
+    state.party.push(starterCopy);
+
+    // Refresh window after adding duplicate
+    if (partyWindow && window.windowManager) {
+        window.windowManager.recalculateWindowSize('party-window');
+    }
+    updateSidebar();
+
+    // Remove similar pokemon from Team
+    state.party.pop();
+
+    // Refresh window after removing duplicate
+    if (partyWindow && window.windowManager) {
+        window.windowManager.recalculateWindowSize('party-window');
+    }
+    updateSidebar();
+
+    // Continue normal game flow
     const navButtons = document.getElementById('nav-buttons');
     if (navButtons) {
         navButtons.style.pointerEvents = 'auto';
@@ -1003,11 +1045,8 @@ function selectStarter(id) {
     }
 
     startGame();
-
-    // Force an immediate save so the initial state is persisted to the new profile
     storage.save(state);
-
-    renderOakLab(); // Renders the new Oak Lab UI now that we have a party
+    renderOakLab();
 }
 
 function startGame() {
