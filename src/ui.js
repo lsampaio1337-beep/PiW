@@ -705,7 +705,7 @@ window.showOakLabModal = function() {
             barHtml = `
                 <div style="width: 100%; background-color: #333; border-radius: 4px; overflow: hidden; height: 20px; border: 1px solid #555; position: relative; margin-top: 5px; display: flex; align-items: center;">
                     <div style="width: ${pct}%; background-color: #4CAF50; height: 100%;"></div>
-                    <span style="position: absolute; width: 100%; text-align: center; color: white; font-size: 12px; font-weight: bold; line-height: 20px;">
+                    <span style="position: absolute; width: 100%; text-align: center; color: white; font-size: 9px; font-weight: bold; line-height: 20px;">
                         ${currentVal} / ${task.req}
                     </span>
                 </div>
@@ -713,10 +713,10 @@ window.showOakLabModal = function() {
         }
 
         return `
-            <div style="margin-bottom: 10px;">
+            <div style="margin-bottom: 10px; font-size: 12px;">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <span>${task.text}</span>
-                    <button onclick="window.cheatCompleteOakTask('${type}')" style="padding: 2px 5px; font-size: 10px; cursor: pointer; background: #d9534f; color: white; border: none; border-radius: 3px;">Cheat Complete</button>
+                    <button onclick="window.cheatCompleteOakTask('${type}')" style="padding: 2px 5px; font-size: 8px; cursor: pointer; background: #d9534f; color: white; border: none; border-radius: 3px;">Cheat Complete</button>
                 </div>
                 ${barHtml}
             </div>
@@ -735,7 +735,7 @@ window.showOakLabModal = function() {
                 // Shiny style - keep all
                 for (let i = 0; i < tierIdx; i++) {
                     rewardsHtml += `
-                        <div style="font-size: 12px; margin-top: 5px; padding-left: 5px; border-left: 2px solid #4CAF50;">
+                        <div style="font-size: 9px; margin-top: 5px; padding-left: 5px; border-left: 2px solid #4CAF50;">
                             <b>${taskList[i].reward}</b>: <span style="color: #4CAF50;">${taskList[i].effect}</span>
                         </div>
                     `;
@@ -744,7 +744,7 @@ window.showOakLabModal = function() {
                 // Normal style - only show highest tier
                 let topReward = taskList[tierIdx - 1];
                 rewardsHtml += `
-                    <div style="font-size: 12px; margin-top: 5px; padding-left: 5px; border-left: 2px solid #4CAF50;">
+                    <div style="font-size: 9px; margin-top: 5px; padding-left: 5px; border-left: 2px solid #4CAF50;">
                         <b>${topReward.reward}</b>: <span style="color: #4CAF50;">${topReward.effect}</span>
                     </div>
                 `;
@@ -752,8 +752,8 @@ window.showOakLabModal = function() {
         }
 
         return `
-            <div style="border: 1px solid #555; padding: 10px; border-radius: 5px; background-color: rgba(0,0,0,0.5);">
-                <h3 style="margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; font-size: 16px;">${title}</h3>
+            <div style="border: 1px solid #555; padding: 8px; border-radius: 5px; background-color: rgba(0,0,0,0.5);">
+                <h3 style="margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; font-size: 12px;">${title}</h3>
                 ${taskHtml}
                 ${rewardsHtml}
             </div>
@@ -824,7 +824,7 @@ window.showOakLabModal = function() {
         if (seenTier > 1 && i === 0) continue;
 
         shinyRewardsHtml += `
-            <div style="font-size: 12px; margin-top: 5px; padding-left: 5px; border-left: 2px solid #4CAF50;">
+            <div style="font-size: 9px; margin-top: 5px; padding-left: 5px; border-left: 2px solid #4CAF50;">
                 <b>${rewardName}</b>: <span style="color: #4CAF50;">${oakTasks.shinySeen[i].effect}</span>
             </div>
         `;
@@ -833,15 +833,15 @@ window.showOakLabModal = function() {
     // Shiny Caught rewards logic
     for (let i = 0; i < caughtTier; i++) {
         shinyRewardsHtml += `
-            <div style="font-size: 12px; margin-top: 5px; padding-left: 5px; border-left: 2px solid #4CAF50;">
+            <div style="font-size: 9px; margin-top: 5px; padding-left: 5px; border-left: 2px solid #4CAF50;">
                 <b>${oakTasks.shinyCaught[i].reward}</b>: <span style="color: #4CAF50;">${oakTasks.shinyCaught[i].effect}</span>
             </div>
         `;
     }
 
     html += `
-        <div style="border: 1px solid #555; padding: 10px; border-radius: 5px; background-color: rgba(0,0,0,0.5);">
-            <h3 style="margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; font-size: 16px;">${shinyTitle}</h3>
+        <div style="border: 1px solid #555; padding: 8px; border-radius: 5px; background-color: rgba(0,0,0,0.5);">
+            <h3 style="margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; font-size: 12px;">${shinyTitle}</h3>
             ${shinySeenTaskHtml}
             ${shinyCaughtTaskHtml}
             ${shinyRewardsHtml}
@@ -860,34 +860,31 @@ window.showOakLabModal = function() {
         // Dynamically style the inner modal for Oak Lab to 70% width and proportional scale
         const innerModal = document.getElementById('main-view-inner-modal');
         if (innerModal) {
-            // Save original styles if we want to restore them, or just set explicitly
-            innerModal.dataset.originalWidth = innerModal.style.width || '90%';
-            innerModal.dataset.originalAspectRatio = innerModal.style.aspectRatio || '';
-            innerModal.dataset.originalHeight = innerModal.style.height || 'auto';
-
+            // Apply a specific class for Oak Lab modal instead of hacking inline styles permanently
+            innerModal.classList.add('oak-lab-inner-modal');
             innerModal.style.width = '70%';
             innerModal.style.aspectRatio = '4/3';
-            innerModal.style.height = 'auto'; // ensure it relies on aspect-ratio if supported
-
-            // Apply font scaling dynamically to the content wrapper to keep proportions
-            content.style.fontSize = '1.3vw';
         }
 
-        // Add cleanup on close to avoid affecting other modals (like Market)
+        // Ensure cleanup when the modal is closed
+        const cleanUp = () => {
+            if (innerModal) {
+                innerModal.classList.remove('oak-lab-inner-modal');
+                innerModal.style.width = '90%';
+                innerModal.style.aspectRatio = '';
+            }
+            overlay.style.display = 'none';
+        };
+
         const closeBtn = overlay.querySelector('.window-header span');
-        if (closeBtn && !closeBtn.dataset.oakHooked) {
-            const originalClick = closeBtn.onclick;
-            closeBtn.onclick = (e) => {
-                if (innerModal) {
-                    innerModal.style.width = innerModal.dataset.originalWidth || '90%';
-                    innerModal.style.aspectRatio = innerModal.dataset.originalAspectRatio || '';
-                    innerModal.style.height = innerModal.dataset.originalHeight || 'auto';
-                }
-                content.style.fontSize = ''; // reset font scaling
-                if (originalClick) originalClick(e);
-            };
-            closeBtn.dataset.oakHooked = 'true';
+        if (closeBtn) {
+            closeBtn.onclick = cleanUp;
         }
+        overlay.onclick = (e) => {
+            if (e.target === overlay) {
+                cleanUp();
+            }
+        };
 
         overlay.style.display = 'flex';
     } else {
@@ -925,7 +922,7 @@ export function renderOakLab() {
 
             <div style="display: flex; flex-direction: column; gap: 10px;">
                 <div style="position: relative; display: inline-block; width: 100%;">
-                    <button onclick="window.showOakLabModal()" style="width: 100%; box-sizing: border-box; padding: 10px; font-size: 16px; cursor: pointer;">Tasks & Rewards</button>
+                    <button onclick="window.showOakLabModal()" style="width: 100%; box-sizing: border-box; padding: 10px; font-size: 12px; cursor: pointer;">Tasks & Rewards</button>
                     ${exclamationHtml}
                 </div>
             </div>
