@@ -6,7 +6,7 @@ import { renderPokemonTab } from './pokemon.js';
 
 export function showBackpack() {
     let html = `
-        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; padding: 20px; box-sizing: border-box; color: white; overflow: hidden; position: relative;">
+        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; box-sizing: border-box; color: white; position: relative;">
             <style>
                 .backpack-pocket {
                     cursor: pointer;
@@ -23,11 +23,11 @@ export function showBackpack() {
 
             <div onclick="window.closeBackpackModal()" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;"></div>
 
-            <div style="position: relative; height: 100%; max-height: 100%; width: 100%; display: flex; align-items: center; justify-content: center; cursor: default; pointer-events: none; z-index: 2;">
+            <div style="position: relative; width: 100%; display: flex; align-items: center; justify-content: center; cursor: default; pointer-events: none; z-index: 2;">
 
                 <!-- Inner container shrink-wrapped to exact dimensions so clicks outside the bag hit the overlay -->
-                <div onclick="event.stopPropagation(); document.getElementById('backpack-content-area').style.display='none'" style="position: relative; height: 100%; width: 100%; max-height: 100%; max-width: max-content; aspect-ratio: 1279 / 1350; pointer-events: auto;">
-                    <img src="./Assets/Extra/Backpack.png" style="height: 100%; width: 100%; display: block; pointer-events: none;">
+                <div onclick="event.stopPropagation(); document.getElementById('backpack-content-area').style.display='none'" style="position: relative; width: 100%; aspect-ratio: 1279 / 1350; pointer-events: auto;">
+                    <img src="./Assets/Extra/Backpack.png" style="width: 100%; display: block; pointer-events: none;">
 
                     <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2;">
                         <!-- Use exact pixel dimensions of the image for the viewBox to ensure perfect circle scaling -->
@@ -60,7 +60,13 @@ export function showBackpack() {
     `;
 
     if (window.showModal) {
-        window.showModal('Backpack', html, 'window-backpack');
+        window.showModal('Backpack', html, 'window-backpack', '800px', 'auto');
+        const win = document.getElementById('window-backpack');
+        if (win) {
+            // Apply maximum height logic for Backpack based on aspect ratio constraint (800 / 1279 * 1350 = ~844px)
+            // We set it slightly larger so it triggers native app bounding constraints if it overflows screen
+            win.style.maxHeight = '90vh';
+        }
     }
 }
 

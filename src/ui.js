@@ -52,7 +52,7 @@ import { showPokemonStats, showPokemonStatsByUuid, evolvePokemon } from './ui/po
 import { showBonusCandyModal } from './ui/bonusCandy.js';
 window.showBonusCandyModal = showBonusCandyModal;
 window.showGiftModal = showGiftModal;
-import { showSettings, updateGameSpeed, exportLog, showAddPokemonModal, forceNextEncounter, showCheatControlModal, executeTimeLapse } from './ui/settings.js';
+import { showSettings, updateGameSpeed, addMoney, addXp, exportLog, showAddPokemonModal, forceNextEncounter, activateCheat } from './ui/settings.js';
 import { setupMarket, buyItem, openPokeMarketBuy, renderPokeMarketTab, updateMarketPrices } from './ui/market.js';
 import { showBackpack, renderBackpackTab, setActiveItem, setAutoPotionThreshold } from './ui/backpack/index.js';
 import { dragStart, dragOver, handleDrop } from './ui/backpack/pokemon.js';
@@ -79,6 +79,8 @@ window.showPokemonStatsByUuid = showPokemonStatsByUuid;
 window.evolvePokemon = evolvePokemon;
 window.showSettings = showSettings;
 window.updateGameSpeed = updateGameSpeed;
+window.addMoney = addMoney;
+window.addXp = addXp;
 window.exportLog = exportLog;
 window.buyItem = buyItem;
 window.openPokeMarketBuy = openPokeMarketBuy;
@@ -86,8 +88,7 @@ window.renderPokeMarketTab = renderPokeMarketTab;
 window.updateMarketPrices = updateMarketPrices;
 window.showAddPokemonModal = showAddPokemonModal;
 window.forceNextEncounter = forceNextEncounter;
-window.showCheatControlModal = showCheatControlModal;
-window.executeTimeLapse = executeTimeLapse;
+window.activateCheat = activateCheat;
 window.dragStart = dragStart;
 window.completeChallenge = function(targetAreaId) {
     if (!state.stats.activeChallenges) {
@@ -300,7 +301,7 @@ window.showChallengesModal = function() {
 
     if (!state.config.unlocks) return;
 
-    let html = `<div id="challenges-content-wrapper" class="content-panel" style="display:flex; flex-direction:column; gap:15px; text-align:left; overflow-y: auto;">`;
+    let html = `<div id="challenges-content-wrapper" class="content-panel" style="display:flex; flex-direction:column; gap:15px; text-align:left;">`;
 
     // Active Challenges Sector
     let activeChallengesCount = state.stats.activeChallenges ? state.stats.activeChallenges.length : 0;
@@ -401,13 +402,25 @@ window.showChallengesModal = function() {
 
     showModal("Progress Challenges", html, "window-challenges");
     const win = document.getElementById("window-challenges");
-    const wrapper = document.getElementById("challenges-content-wrapper");
-    if (win && wrapper) {
+    if (win) {
         // Read the actual unscaled width, defaulting to 800 if not yet set
         let winWidth = win._originalWidth || parseInt(win.style.width) || win.offsetWidth || 800;
-        // The user wants max-height to be exactly the window's width (height=wide)
-        wrapper.style.maxHeight = winWidth + 'px';
 
+        // The user wants max window height is 1.5x width.
+        win.style.maxHeight = (winWidth * 1.5) + 'px';
+
+        // Ensure the content container scrolls if it overflows
+        const contentContainer = win.querySelector('.window-content-container');
+        if (contentContainer) {
+            contentContainer.style.overflowY = 'auto';
+        }
+
+        // Reset initialization so the window auto-adjusts its height fully to its new content up to max-height
+        win._sizeInitialized = false;
+
+        if (typeof win.adjustHeightForNewContent === 'function') {
+            win.adjustHeightForNewContent();
+        }
     }
 
     if (window.windowManager) window.windowManager.recalculateWindowSize('window-challenges');
@@ -936,6 +949,7 @@ export function renderOakLab() {
 }
 
 export function switchView(viewName) {
+    state.currentView = viewName;
     document.querySelectorAll('.game-view').forEach(el => el.style.display = 'none');
 
     if (viewName === 'BATTLE_ARENA') {
@@ -1093,6 +1107,15 @@ function startGame() {
     // Playtime tracker (adds 1 second every second)
     setInterval(() => {
         state.stats.playtime = (state.stats.playtime || 0) + 1;
+
+        if (state.currentView === "BATTLE_ARENA") {
+            const speed = (state.settings && state.settings.gameSpeed) || 1;
+            state.stats.battleModeTimer = (state.stats.battleModeTimer || 0) + (1 * speed);
+            updateTopbar();
+        } else {
+            state.stats.battleModeTimer = 0;
+            updateTopbar();
+        }
 
         // Award Jigglypuff Dust grains (1 grain per minute)
         // Check using modulo so that reloading doesn't reset progress towards the next minute.
@@ -1701,7 +1724,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
             }
 
             const htmlContent = `
-                <div class="content-panel" style="display: flex; flex-direction: column; gap: 15px; width: 100%;">
+                <div class="content-panel" style="display: flex; flex-direction: column; gap: 15px; width: 100%; box-sizing: border-box;">
                     <div id="zzz-tutorial-section" style="display: ${tutorialDisplay}; background: rgba(255,255,255,0.05); border: 1px dashed #475569; border-radius: 8px; padding: 15px; margin-bottom: 10px; text-align: left;">
                         <div style="color: #cbd5e1; font-size: 14px; margin-bottom: 8px;"><b>Welcome to ZzZ Mode!</b></div>
                         <div style="color: #94a3b8; font-size: 13px; line-height: 1.4;">Earn <b>Jigglypuff Dust</b> simply by playing the game (1 minute active = 1 grain). You can spend these grains to allow your Pokémon to farm offline when you close the game (1 grain = 1 minute of offline farming).</div>
@@ -1718,16 +1741,18 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
                         </div>
                     </div>
 
-                    <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px;">
+                    <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px; padding-bottom: 5px;">
                         <button id="btn-zzz-yes" style="padding: 12px; font-size: 16px; font-weight: bold; cursor: pointer; background: linear-gradient(to right, #3b82f6, #2563eb); color: white; border: 1px solid #60a5fa; border-radius: 8px; flex: 1; box-shadow: 0 4px 6px rgba(0,0,0,0.3); text-transform: uppercase; letter-spacing: 1px;">Go to Sleep</button>
                         <button id="btn-zzz-no" style="padding: 12px; font-size: 16px; font-weight: bold; cursor: pointer; background: linear-gradient(to right, #ef4444, #dc2626); color: white; border: 1px solid #f87171; border-radius: 8px; flex: 1; box-shadow: 0 4px 6px rgba(0,0,0,0.3); text-transform: uppercase; letter-spacing: 1px;">Cancel</button>
                     </div>
-
-                    <button id="btn-zzz-cheat-grains" style="margin-top: 15px; padding: 5px 10px; font-size: 11px; cursor: pointer; background: transparent; color: #94a3b8; border: 1px dashed #475569; border-radius: 4px;">Add +10 grains</button>
                 </div>
             `;
 
             showModal("ZzZ Mode", htmlContent, "window-zzz-confirmation", "460px");
+            const winZzz = document.getElementById('window-zzz-confirmation');
+            if (winZzz) {
+                winZzz._sizeInitialized = false;
+            }
             if (window.windowManager) window.windowManager.recalculateWindowSize('window-zzz-confirmation');
 
             document.getElementById('btn-zzz-no').onclick = () => {
@@ -1741,12 +1766,6 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
                 state.stats.lastSaveTime = Date.now();
                 storage.save(state);
                 window.close();
-            };
-
-            document.getElementById('btn-zzz-cheat-grains').onclick = () => {
-                state.stats.jigglypuffGrains = (state.stats.jigglypuffGrains || 0) + 10;
-                storage.save(state);
-                document.getElementById('zzz-current-grains').innerText = state.stats.jigglypuffGrains;
             };
         }
     });
@@ -1782,6 +1801,25 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
             playtimeStr = `${h}h ${m}m ${s}s`;
         }
 
+        let highestLevel = 0;
+        let highestQuality = 0;
+        let highestSumIV = 0;
+        let allMons = [];
+        if (state.party) allMons = allMons.concat(state.party);
+        if (state.storage) allMons = allMons.concat(state.storage);
+        if (state.safe) allMons = allMons.concat(state.safe);
+        if (state.dayCareRef) allMons = allMons.concat(state.dayCareRef);
+
+        allMons.forEach(p => {
+            if (!p) return;
+            if (p.level > highestLevel) highestLevel = p.level;
+            if (p.quality > highestQuality) highestQuality = p.quality;
+            if (p.ivs) {
+                const sumIV = (p.ivs.hp || 0) + (p.ivs.atk || 0) + (p.ivs.def || 0) + (p.ivs.spa || 0) + (p.ivs.spd || 0) + (p.ivs.spe || 0);
+                if (sumIV > highestSumIV) highestSumIV = sumIV;
+            }
+        });
+
         showModal("Trainer", `
             <div style="text-align: left; display: inline-block;">
                 <p><b>Time played:</b> ${playtimeStr}</p>
@@ -1792,6 +1830,9 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
                 <p><b>Shinies Seen:</b> ${state.stats.shiniesSeen || 0}</p>
                 <p><b>Shinies Caught:</b> ${state.stats.shiniesCaught || 0}</p>
                 <p><b>Jigglypuff Grains Used:</b> ${state.stats.jigglypuffGrainsUsed || 0}</p>
+                <p><b>Highest Level:</b> ${highestLevel}</p>
+                <p><b>Highest Quality:</b> ${highestQuality}</p>
+                <p><b>Highest IV Sum:</b> ${highestSumIV}</p>
                 <p><b>Money:</b> $${state.trainer.money}</p>
             </div>
             <h3 style="margin-top: 10px; margin-bottom: 5px;">Badges:</h3>
