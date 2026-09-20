@@ -237,6 +237,12 @@ class BattleSystem {
         // Speed Delays: Search Time: BaseSearchTime(3.0s) * (100 / (100 + Speed)), minimum 0.30s
         const leaderSpeed = this.state.party[0].currentStats.spe;
         let delay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed));
+
+        // Apply Speed Upgrade Reduction
+        const speedTier = this.state.stats?.upgrades?.speedTier || 0;
+        const speedReduction = speedTier * 0.10; // 10% per tier
+        delay = delay * (1 - speedReduction);
+
         delay = Math.max(300, delay) / this.state.settings.gameSpeed;
 
         // Start encounter generation immediately using the search time as the slide-in duration

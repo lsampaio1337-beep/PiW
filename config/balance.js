@@ -37,6 +37,31 @@ const balance = {
         { "tier": 3, "name": "Large Box Upgrade", "increment": 50, "cost": 900 },
         { "tier": 4, "name": "Huge Box Upgrade", "increment": 100, "cost": 2500 },
         { "tier": 5, "name": "Ultimate Box Upgrade", "increment": 300, "cost": 6000 }
+      ],
+      "speed": [
+        { "tier": 1, "name": "Voltorb Sneakers", "image": "Speed1", "increment": "10%", "cost": 1 },
+        { "tier": 2, "name": "Shelder Skate", "image": "Speed2", "increment": "20%", "cost": 2 },
+        { "tier": 3, "name": "Primeape Scooter", "image": "Speed3", "increment": "30%", "cost": 3 },
+        { "tier": 4, "name": "Doduo Rollers", "image": "Speed4", "increment": "40%", "cost": 4 },
+        { "tier": 5, "name": "Rapidash Bike", "image": "Speed5", "increment": "50%", "cost": 5 }
+      ],
+      "glasses": [
+        { "tier": 1, "name": "Health Monocle", "image": "Glass 1", "increment": "Show Healthbar at Main View", "cost": 1 },
+        { "tier": 2, "name": "Basic Glasses", "image": "Glass2", "increment": "Show damage at Main View", "cost": 2 },
+        { "tier": 3, "name": "Great Glasses", "image": "Glass3", "increment": "Show level at Main View", "cost": 3 },
+        { "tier": 4, "name": "Ultra Glasses", "image": "Glass4", "increment": "Show Quality at Main View", "cost": 4 },
+        { "tier": 5, "name": "Master Glasses", "image": "Glass5", "increment": "Show IV at Main View", "cost": 5 }
+      ],
+      "loot": [
+        { "tier": 1, "name": "Basic Loot", "image": "Loot1", "increment": "Potions", "cost": 1 },
+        { "tier": 2, "name": "Basic Loot", "image": "Loot2", "increment": "Balls", "cost": 1 },
+        { "tier": 3, "name": "Good Loot", "image": "Loot3", "increment": "Stones", "cost": 2 },
+        { "tier": 4, "name": "Improved Loot", "image": "Loot4", "increment": "Vitamins", "cost": 3 }
+      ],
+      "smartwatch": [
+        { "tier": 1, "name": "Ball Watch", "image": "Smartwatch1", "increment": "Select Ball at Main View", "cost": 1 },
+        { "tier": 2, "name": "Potion Watch", "image": "Smartwatch2", "increment": "Select Potions at Main View", "cost": 2 },
+        { "tier": 3, "name": "Smart Ball Watch", "image": "Smartwatch3", "increment": "Select balls for each pokemon", "cost": 3 }
       ]
     },
     "items": {

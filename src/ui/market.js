@@ -205,14 +205,26 @@ export function renderPokeMarketTab(category) {
         let ballTier = state.stats.upgrades.ballsTier || 0;
         let potionTier = state.stats.upgrades.potionsTier || 0;
         let boxTier = state.stats.upgrades.boxTier || 0;
+        let speedTier = state.stats.upgrades.speedTier || 0;
+        let glassesTier = state.stats.upgrades.glassesTier || 0;
+        let lootTier = state.stats.upgrades.lootTier || 0;
+        let smartwatchTier = state.stats.upgrades.smartwatchTier || 0;
 
         let ballUpgrade = state.config.balance.expansions.ballPocket[ballTier];
         let potionUpgrade = state.config.balance.expansions.potionSatchel[potionTier];
         let boxUpgrade = state.config.balance.expansions.pokemonBox[boxTier];
+        let speedUpgrade = state.config.balance.expansions.speed?.[speedTier];
+        let glassesUpgrade = state.config.balance.expansions.glasses?.[glassesTier];
+        let lootUpgrade = state.config.balance.expansions.loot?.[lootTier];
+        let smartwatchUpgrade = state.config.balance.expansions.smartwatch?.[smartwatchTier];
 
         if (ballUpgrade) items.push({ ...ballUpgrade, type: 'balls', img: './Assets/Items/Upgrades/' + ballUpgrade.name + '.png', attrLabel: '+' + ballUpgrade.increment + ' Balls' });
         if (potionUpgrade) items.push({ ...potionUpgrade, type: 'potions', img: './Assets/Items/Upgrades/' + potionUpgrade.name + '.png', attrLabel: '+' + potionUpgrade.increment + ' Potions' });
         if (boxUpgrade) items.push({ ...boxUpgrade, type: 'box', img: './Assets/Items/Upgrades/' + boxUpgrade.name + '.png', attrLabel: '+' + boxUpgrade.increment + ' Pokemon' });
+        if (speedUpgrade) items.push({ ...speedUpgrade, type: 'speed', img: './Assets/Items/Upgrades/' + speedUpgrade.image + '.png', attrLabel: speedUpgrade.increment });
+        if (glassesUpgrade) items.push({ ...glassesUpgrade, type: 'glasses', img: './Assets/Items/Upgrades/' + glassesUpgrade.image + '.png', attrLabel: glassesUpgrade.increment });
+        if (lootUpgrade) items.push({ ...lootUpgrade, type: 'loot', img: './Assets/Items/Upgrades/' + lootUpgrade.image + '.png', attrLabel: lootUpgrade.increment });
+        if (smartwatchUpgrade) items.push({ ...smartwatchUpgrade, type: 'smartwatch', img: './Assets/Items/Upgrades/' + smartwatchUpgrade.image + '.png', attrLabel: smartwatchUpgrade.increment });
 
         items = items.map(u => ({
             name: u.name,
