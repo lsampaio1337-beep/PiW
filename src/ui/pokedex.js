@@ -46,7 +46,7 @@ export function hasCaughtSpecies(id, state) {
 }
 
 export function showPokedex() {
-    let html = `<div style="display:grid; grid-template-columns: repeat(9, 1fr); max-height:400px; overflow-y:auto; gap:10px;">`;
+    let html = `<div style="display:flex; flex-wrap:wrap; justify-content:center; max-height:400px; overflow-y:auto; gap:10px;">`;
 
     if (!state.config.pokemonData) {
         html += "<p>Loading Pokedex data...</p>";
@@ -68,7 +68,8 @@ export function showPokedex() {
             let displayName = isRevealed ? pData.name : "???";
 
             let cardClass = "pokedex-card";
-            let cardStyle = "width: 100%; text-align: center; font-size: 10px; margin: 2px;";
+            // Set width dynamically assuming a ~10px gap to fit exactly 9 items per row
+            let cardStyle = "width: calc((100% / 9) - 10px); text-align: center; font-size: 10px; box-sizing: border-box;";
 
             if (!isSeen && !isCaught) {
                 cardStyle += " border: 2px solid transparent; background: transparent;";

@@ -528,8 +528,7 @@ input[type="number"] {
 }
 
 #window-backpack .content-panel {
-    padding: 0;
-    height: 100%;
+    padding: 5%;
     display: flex;
     flex-direction: column;
 }

@@ -301,7 +301,7 @@ window.showChallengesModal = function() {
 
     if (!state.config.unlocks) return;
 
-    let html = `<div id="challenges-content-wrapper" class="content-panel" style="display:flex; flex-direction:column; gap:15px; text-align:left; overflow-y: auto;">`;
+    let html = `<div id="challenges-content-wrapper" class="content-panel" style="display:flex; flex-direction:column; gap:15px; text-align:left;">`;
 
     // Active Challenges Sector
     let activeChallengesCount = state.stats.activeChallenges ? state.stats.activeChallenges.length : 0;
@@ -402,13 +402,11 @@ window.showChallengesModal = function() {
 
     showModal("Progress Challenges", html, "window-challenges");
     const win = document.getElementById("window-challenges");
-    const wrapper = document.getElementById("challenges-content-wrapper");
-    if (win && wrapper) {
+    if (win) {
         // Read the actual unscaled width, defaulting to 800 if not yet set
         let winWidth = win._originalWidth || parseInt(win.style.width) || win.offsetWidth || 800;
         // The user wants max window height is 1.5x width.
-        wrapper.style.maxHeight = (winWidth * 1.5) + 'px';
-
+        win.style.maxHeight = (winWidth * 1.5) + 'px';
     }
 
     if (window.windowManager) window.windowManager.recalculateWindowSize('window-challenges');
@@ -937,6 +935,7 @@ export function renderOakLab() {
 }
 
 export function switchView(viewName) {
+    state.currentView = viewName;
     document.querySelectorAll('.game-view').forEach(el => el.style.display = 'none');
 
     if (viewName === 'BATTLE_ARENA') {
@@ -1097,7 +1096,7 @@ function startGame() {
 
         if (state.currentView === "BATTLE_ARENA") {
             const speed = (state.settings && state.settings.gameSpeed) || 1;
-            state.stats.battleModeTimer = (state.stats.battleModeTimer || 0) + speed;
+            state.stats.battleModeTimer = (state.stats.battleModeTimer || 0) + (1 * speed);
             updateTopbar();
         } else {
             state.stats.battleModeTimer = 0;
@@ -1728,7 +1727,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
                         </div>
                     </div>
 
-                    <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px; padding-bottom: 15px;">
+                    <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px; padding-bottom: 25px;">
                         <button id="btn-zzz-yes" style="padding: 12px; font-size: 16px; font-weight: bold; cursor: pointer; background: linear-gradient(to right, #3b82f6, #2563eb); color: white; border: 1px solid #60a5fa; border-radius: 8px; flex: 1; box-shadow: 0 4px 6px rgba(0,0,0,0.3); text-transform: uppercase; letter-spacing: 1px;">Go to Sleep</button>
                         <button id="btn-zzz-no" style="padding: 12px; font-size: 16px; font-weight: bold; cursor: pointer; background: linear-gradient(to right, #ef4444, #dc2626); color: white; border: 1px solid #f87171; border-radius: 8px; flex: 1; box-shadow: 0 4px 6px rgba(0,0,0,0.3); text-transform: uppercase; letter-spacing: 1px;">Cancel</button>
                     </div>
@@ -1794,10 +1793,13 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
         if (state.dayCareRef) allMons = allMons.concat(state.dayCareRef);
 
         allMons.forEach(p => {
+            if (!p) return;
             if (p.level > highestLevel) highestLevel = p.level;
             if (p.quality > highestQuality) highestQuality = p.quality;
-            const sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
-            if (sumIV > highestSumIV) highestSumIV = sumIV;
+            if (p.ivs) {
+                const sumIV = (p.ivs.hp || 0) + (p.ivs.atk || 0) + (p.ivs.def || 0) + (p.ivs.spa || 0) + (p.ivs.spd || 0) + (p.ivs.spe || 0);
+                if (sumIV > highestSumIV) highestSumIV = sumIV;
+            }
         });
 
         showModal("Trainer", `

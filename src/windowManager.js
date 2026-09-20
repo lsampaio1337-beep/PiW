@@ -235,9 +235,9 @@ export class WindowManager {
             // Need to let browser reflow
             void winElement.offsetHeight;
 
-            let newOriginalHeight = scalerElement.scrollHeight;
+            let newOriginalHeight = Math.ceil(scalerElement.getBoundingClientRect().height);
             if (newOriginalHeight <= 0) {
-                newOriginalHeight = winElement.offsetHeight - headerH;
+                newOriginalHeight = Math.ceil(winElement.getBoundingClientRect().height) - headerH;
             }
 
             if (newOriginalHeight > 0) {
@@ -462,7 +462,7 @@ export class WindowManager {
         scalerElement.style.transform = 'none';
         scalerElement.style.width = 'max-content';
 
-        const newOriginalWidth = scalerElement.scrollWidth;
+        const newOriginalWidth = Math.ceil(scalerElement.getBoundingClientRect().width);
 
         // Check if we need to grow original width
         const currentOriginalWidthStr = scalerElement.style.getPropertyValue('--original-width');
