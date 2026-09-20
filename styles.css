@@ -530,7 +530,6 @@ input[type="number"] {
 
 /* Scale inner content up with specific padding based on window width */
 .window-content-scaler {
-    padding: 2%;
     box-sizing: border-box;
     transform-origin: top left;
     width: var(--original-width, 100%);

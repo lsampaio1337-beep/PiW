@@ -188,12 +188,18 @@ export function updateBattleArena() {
             const elEnemySide = document.getElementById('enemy-side');
 
             if (elEnemySprite && elEnemySide) {
-                elEnemySprite.src = `Assets/Pokemon Sprites/Natural/${enemy.qualityName === 'Shiny' ? enemy.id + '_shiny' : enemy.id}.png`;
+                elEnemySprite.src = `Assets/Pokemon Sprites/Clean/${enemy.qualityName === 'Shiny' ? enemy.id + '_shiny_Clean' : enemy.id + '_Clean'}.png`;
                 elEnemySprite.style.display = 'block';
-                applyWalkAnimations(enemy, true);
 
-                elEnemySide.style.top = '50%';
-                elEnemySide.style.bottom = 'auto';
+                if (enemy.types.includes('Flying')) {
+                    elEnemySprite.style.top = '0';
+                    elEnemySprite.style.bottom = 'auto';
+                } else {
+                    elEnemySprite.style.bottom = '0';
+                    elEnemySprite.style.top = 'auto';
+                }
+
+                applyWalkAnimations(enemy, true);
 
                 if (battleSystem.isSliding) {
                     if (elEnemySide.dataset.sliding !== 'true') {
@@ -232,8 +238,6 @@ export function updateBattleArena() {
             const elPlayerSide = document.getElementById('player-side');
             if (leader && elPlayerSide) {
 
-                elPlayerSide.style.top = '50%';
-                elPlayerSide.style.bottom = 'auto';
                 elPlayerSide.style.left = '25%';
 
                 const hpContainerPlayer = document.getElementById('player-battle-hp-container');
@@ -262,8 +266,17 @@ export function updateBattleArena() {
                 if (elPlayerSprite) {
                     let dittoBg = document.getElementById('player-sprite-ditto-bg');
                     if (dittoBg) dittoBg.style.display = 'none';
-                    elPlayerSprite.src = `Assets/Pokemon Sprites/Natural/${leader.qualityName === 'Shiny' ? (leader.transformedIntoId || leader.id) + '_shiny' : (leader.transformedIntoId || leader.id)}.png`;
+                    elPlayerSprite.src = `Assets/Pokemon Sprites/Clean/${leader.qualityName === 'Shiny' ? (leader.transformedIntoId || leader.id) + '_shiny_Clean' : (leader.transformedIntoId || leader.id) + '_Clean'}.png`;
                     elPlayerSprite.style.display = 'block';
+
+                    if (leader.types.includes('Flying')) {
+                        elPlayerSprite.style.top = '0';
+                        elPlayerSprite.style.bottom = 'auto';
+                    } else {
+                        elPlayerSprite.style.bottom = '0';
+                        elPlayerSprite.style.top = 'auto';
+                    }
+
                     applyWalkAnimations(leader, false);
 
                     if (leader.currentHp <= 0) {
@@ -304,8 +317,6 @@ export function updateBattleArena() {
                 elEnemySprite.style.display = 'block';
                 elEnemySide.style.transition = 'none';
                 elEnemySide.style.left = '35%'; // Matching active battle destination
-                elEnemySide.style.top = '50%';
-                elEnemySide.style.bottom = 'auto';
                 if (hpContainerEnemy) {
                     hpContainerEnemy.style.transition = 'none';
                     hpContainerEnemy.style.left = '35%';
@@ -316,8 +327,6 @@ export function updateBattleArena() {
             const elPlayerSide = document.getElementById('player-side');
             if (leader && elPlayerSide) {
 
-                elPlayerSide.style.top = '50%';
-                elPlayerSide.style.bottom = 'auto';
                 elPlayerSide.style.left = '25%';
 
                 const hpContainerPlayer = document.getElementById('player-battle-hp-container');
@@ -424,18 +433,26 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
     ghostContainer.style.zIndex = '50';
     ghostContainer.style.opacity = '1';
 
-    ghostContainer.style.top = '50%';
+    ghostContainer.style.top = '80%';
     ghostContainer.style.bottom = 'auto';
-    ghostContainer.style.height = '50%'; // Match sprite container height
-    ghostContainer.style.display = 'flex';
-    ghostContainer.style.flexDirection = 'column';
-    ghostContainer.style.alignItems = 'center';
+    ghostContainer.style.height = '96px'; // Match sprite container height
+    ghostContainer.style.width = '96px';
+    ghostContainer.style.transform = 'translate(-50%, -100%)';
 
     // The image itself
     const ghost = document.createElement('img');
-    ghost.src = `Assets/Pokemon Sprites/Natural/${activeEncounter.qualityName === 'Shiny' ? activeEncounter.id + '_shiny' : activeEncounter.id}.png`;
+    ghost.src = `Assets/Pokemon Sprites/Clean/${activeEncounter.qualityName === 'Shiny' ? activeEncounter.id + '_shiny_Clean' : activeEncounter.id + '_Clean'}.png`;
+    ghost.style.position = 'absolute';
+    ghost.style.left = '0';
     ghost.style.height = '100%';
     ghost.style.objectFit = 'contain';
+    if (activeEncounter.types.includes('Flying')) {
+        ghost.style.top = '0';
+        ghost.style.bottom = 'auto';
+    } else {
+        ghost.style.bottom = '0';
+        ghost.style.top = 'auto';
+    }
     ghostContainer.appendChild(ghost);
 
     // Recreate bubbles for ghost if it's water type
