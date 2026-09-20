@@ -407,7 +407,7 @@ window.showChallengesModal = function() {
         // Read the actual unscaled width, defaulting to 800 if not yet set
         let winWidth = win._originalWidth || parseInt(win.style.width) || win.offsetWidth || 800;
         // The user wants max-height to be exactly the window's width (height=wide)
-        wrapper.style.maxHeight = winWidth + 'px';
+        win.style.maxHeight = (winWidth * 1.5) + 'px';
 
     }
 

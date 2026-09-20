@@ -188,7 +188,7 @@ export function updateBattleArena() {
             const elEnemySide = document.getElementById('enemy-side');
 
             if (elEnemySprite && elEnemySide) {
-                elEnemySprite.src = `Assets/Pokemon Sprites/Clean/${enemy.qualityName === 'Shiny' ? enemy.id + '_shiny_Clean' : enemy.id + '_Clean'}.png`;
+                elEnemySprite.src = `Assets/Pokemon Sprites/Clean/${enemy.qualityName === 'Shiny' ? enemy.id + '_shiny_Clean' : enemy.id}.png`;
                 elEnemySprite.style.display = 'block';
 
                 if (enemy.types.includes('Flying')) {
@@ -266,7 +266,7 @@ export function updateBattleArena() {
                 if (elPlayerSprite) {
                     let dittoBg = document.getElementById('player-sprite-ditto-bg');
                     if (dittoBg) dittoBg.style.display = 'none';
-                    elPlayerSprite.src = `Assets/Pokemon Sprites/Clean/${leader.qualityName === 'Shiny' ? (leader.transformedIntoId || leader.id) + '_shiny_Clean' : (leader.transformedIntoId || leader.id) + '_Clean'}.png`;
+                    elPlayerSprite.src = `Assets/Pokemon Sprites/Clean/${leader.qualityName === 'Shiny' ? (leader.transformedIntoId || leader.id) + '_shiny_Clean' : (leader.transformedIntoId || leader.id)}.png`;
                     elPlayerSprite.style.display = 'block';
 
                     if (leader.types.includes('Flying')) {
@@ -437,11 +437,11 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
     ghostContainer.style.bottom = 'auto';
     ghostContainer.style.height = '96px'; // Match sprite container height
     ghostContainer.style.width = '96px';
-    ghostContainer.style.transform = 'translate(-50%, -100%)';
+    ghostContainer.style.transform = 'translate(0, -100%)';
 
     // The image itself
     const ghost = document.createElement('img');
-    ghost.src = `Assets/Pokemon Sprites/Clean/${activeEncounter.qualityName === 'Shiny' ? activeEncounter.id + '_shiny_Clean' : activeEncounter.id + '_Clean'}.png`;
+    ghost.src = `Assets/Pokemon Sprites/Clean/${activeEncounter.qualityName === 'Shiny' ? activeEncounter.id + '_shiny_Clean' : activeEncounter.id}.png`;
     ghost.style.position = 'absolute';
     ghost.style.left = '0';
     ghost.style.height = '100%';
