@@ -1444,12 +1444,6 @@ class BattleSystem {
                 diffLoot(oldBalls, this.state.backpack.pokeballs, 'balls');
                 diffLoot(oldPotions, this.state.backpack.potions, 'potions');
 
-                // Undo handleEnemyDefeatDrops money to avoid double dipping since we simulate it differently or properly track money
-                // Wait, handleEnemyDefeatDrops DOES give money.
-                // Let's remove the extra manual money logic and just let handleEnemyDefeatDrops do it, or we handle money here:
-
-                // In handleEnemyDefeatDrops it might do money. No, handleEnemyDefeatDrops only does items in actual code. Let's check handleEnemyDefeatDrops.
-
                 this.state.trainer.money += Math.floor(evm * lootMultiplier);
                 this.state.stats.battlesWon++;
             } else {
