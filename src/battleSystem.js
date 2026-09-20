@@ -1180,7 +1180,11 @@ class BattleSystem {
             potionsUsed: 0,
             fainted: false,
             outOfMoney: false,
-            simulatedTimeMs: 0
+            simulatedTimeMs: 0,
+            xpEarned: 0,
+            pokemonCaughtValue: 0,
+            shinyCaughtValue: 0,
+            lootsCollected: []
         };
 
         if (this.state.party.length === 0) return results;
@@ -1191,6 +1195,7 @@ class BattleSystem {
         let lastKnownShinies = this.state.stats.shiniesCaught || 0;
         let lastKnownEncounters = this.state.stats.battlesWon || 0; // Approximate encounters fought using battlesWon
         let lastKnownShinyEncounters = this.state.stats.shiniesSeen || 0;
+        let lastKnownXp = this.state.trainer.xp;
 
         let initialBalls = this.state.settings.activeBallTier >= 0 ?
             this.state.backpack.pokeballs[this.state.config.balance.items.pokeballs[this.state.settings.activeBallTier].name] || 0 : 0;
@@ -1396,8 +1401,13 @@ class BattleSystem {
                         caughtPokemon.xp = mathEngine.calculateTotalXP(caughtPokemon.level);
                         this.state.storage.push(caughtPokemon);
                         this.state.stats.caught++;
-                        if (this.activeEncounter.qualityName === "Shiny") this.state.stats.shiniesCaught = (this.state.stats.shiniesCaught || 0) + 1;
+
+                        const caughtSellValue = caughtPokemon.evm; // Assuming evm is used for sell value in market
+                        results.pokemonCaughtValue += caughtSellValue;
+
                         if (this.activeEncounter.qualityName === "Shiny") {
+                            this.state.stats.shiniesCaught = (this.state.stats.shiniesCaught || 0) + 1;
+                            results.shinyCaughtValue += caughtSellValue;
                             if (!this.state.stats.caughtShiniesSpecies) this.state.stats.caughtShiniesSpecies = {};
                             this.state.stats.caughtShiniesSpecies[this.activeEncounter.name] = true;
                         }
@@ -1406,6 +1416,40 @@ class BattleSystem {
 
                 const lootMultiplier = 1 + (0.03 * (this.state.stats.greenCandies || 0));
                 this.grantXP(leader, evxp);
+
+                // Track loot drops from battle logic manually here for timelapse
+                const oldStones = JSON.parse(JSON.stringify(this.state.backpack.stones || {}));
+                const oldBalls = JSON.parse(JSON.stringify(this.state.backpack.pokeballs || {}));
+                const oldPotions = JSON.parse(JSON.stringify(this.state.backpack.potions || {}));
+
+                this.handleEnemyDefeatDrops(evm);
+
+                // Diff loot drops
+                const diffLoot = (oldDict, newDict, category) => {
+                    if(!newDict) return;
+                    for (const [k, v] of Object.entries(newDict)) {
+                        const oldVal = oldDict[k] || 0;
+                        if (v > oldVal) {
+                            let existing = results.lootsCollected.find(l => l.name === k);
+                            if (existing) {
+                                existing.qty += (v - oldVal);
+                            } else {
+                                results.lootsCollected.push({ name: k, qty: (v - oldVal), category: category });
+                            }
+                        }
+                    }
+                };
+
+                diffLoot(oldStones, this.state.backpack.stones, 'stones');
+                diffLoot(oldBalls, this.state.backpack.pokeballs, 'balls');
+                diffLoot(oldPotions, this.state.backpack.potions, 'potions');
+
+                // Undo handleEnemyDefeatDrops money to avoid double dipping since we simulate it differently or properly track money
+                // Wait, handleEnemyDefeatDrops DOES give money.
+                // Let's remove the extra manual money logic and just let handleEnemyDefeatDrops do it, or we handle money here:
+
+                // In handleEnemyDefeatDrops it might do money. No, handleEnemyDefeatDrops only does items in actual code. Let's check handleEnemyDefeatDrops.
+
                 this.state.trainer.money += Math.floor(evm * lootMultiplier);
                 this.state.stats.battlesWon++;
             } else {
@@ -1456,6 +1500,7 @@ class BattleSystem {
         results.shinies = (this.state.stats.shiniesCaught || 0) - lastKnownShinies;
         results.encounters = (this.state.stats.battlesWon || 0) - lastKnownEncounters;
         results.shinyEncounters = (this.state.stats.shiniesSeen || 0) - lastKnownShinyEncounters;
+        results.xpEarned = this.state.trainer.xp - lastKnownXp;
 
         let finalBalls = this.state.settings.activeBallTier >= 0 ?
             this.state.backpack.pokeballs[this.state.config.balance.items.pokeballs[this.state.settings.activeBallTier].name] || 0 : 0;

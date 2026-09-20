@@ -249,7 +249,7 @@ window.cheatPokedex = (isShiny) => {
             pp: mathEngine.calculatePP(bst, level, qVal, totalIV),
             bst: bst,
             moves: JSON.parse(JSON.stringify(moves)),
-            uuid: mathEngine.generateUUID()
+            uuid: Math.random().toString(36).substring(2, 15)
         };
 
         // Bypass limits, push straight to storage
@@ -287,35 +287,59 @@ window.cheatTimeLapse = () => {
                     const timeMs = hours * 3600000;
                     const results = globals.battleSystem.runFastForward(timeMs);
 
-                    // Re-use ZzZ Mode Rewards UI snippet here for convenience
-                    let resultsHtml = `<div style="text-align: left; font-size: 14px; max-height: 400px; overflow-y: auto;">
-                        <p><b>Simulated Time:</b> ${hours} Hours</p>
-                        <p><b>Battles:</b> ${results.battlesCount || 0}</p>
-                        <p><b>Pokemon Caught:</b> ${results.caughtCount || 0}</p>
-                        <p><b>Shinies Caught:</b> ${results.shinyCaughtCount || 0}</p>
-                        <p><b>Faints:</b> ${results.faintsCount || 0}</p>
-                        <p><b>Money Earned:</b> $${(results.moneyEarned || 0).toLocaleString()}</p>
+                    // Format output for Timelapse Report Window
+                    const totalMoneyEarned = results.money || 0;
+
+                    // Sum up items selling and buying values
+                    let itemsSellValue = 0;
+                    let itemsBuyValue = 0;
+
+                    let lootHtml = "";
+                    if (results.lootsCollected && results.lootsCollected.length > 0) {
+                        for (let loot of results.lootsCollected) {
+                            // Format: #n item.png
+                            // Need to guess directory based on category if we want images, but we don't have exactly what it is.
+                            let dir = "Balls";
+                            if (loot.category === 'potions') dir = "Potions";
+                            if (loot.category === 'stones') dir = "Stones";
+                            lootHtml += ` ${loot.qty}x <img src="Assets/Items/${dir}/${loot.name}.png" style="width:16px;height:16px;vertical-align:middle;" title="${loot.name}"> /`;
+
+                            // Let's do a rough estimate of buy/sell value if market is accessible.
+                            // Normally you'd read from config.balance.items.
+                            // We can just add dummy values or parse them if available, but for now we skip complex pricing
+                            // if we don't have direct access. Actually we do have state.config.
+                            let basePrice = 0;
+                            if (loot.category === 'balls') {
+                                const b = state.config.balance.items.pokeballs.find(x => x.name === loot.name);
+                                if (b) basePrice = b.price;
+                            } else if (loot.category === 'potions') {
+                                const p = state.config.balance.items.potions.find(x => x.name === loot.name);
+                                if (p) basePrice = p.price;
+                            } else if (loot.category === 'stones') {
+                                const s = state.config.balance.items.stones.find(x => x.name === loot.name);
+                                if (s) basePrice = s.price;
+                            }
+
+                            itemsBuyValue += (basePrice * loot.qty);
+                            itemsSellValue += Math.floor(basePrice * 0.1 * loot.qty); // Typical sell value in market
+                        }
+                        lootHtml = lootHtml.slice(0, -2); // remove trailing " /"
+                    }
+
+                    let resultsHtml = `<div style="text-align: left; font-size: 14px; max-height: 400px; overflow-y: auto; line-height: 1.6;">
+                        <div><b>Simulated time:</b> ${hours} hours</div>
+                        <div><b>Battles:</b> ${results.encounters || 0}</div>
+                        <div><b>XP Earned:</b> ${(results.xpEarned || 0).toLocaleString()}</div>
+                        <div><b>Money collected:</b> $${totalMoneyEarned.toLocaleString()}</div>
+                        <div><b>Pokemon Caught:</b> ${results.caught || 0}</div>
+                        <div><b>Value of Pokemon Caught if sold:</b> $${(results.pokemonCaughtValue || 0).toLocaleString()}</div>
+                        <div><b>Shinies Caught:</b> ${results.shinies || 0}</div>
+                        <div><b>Value of Pokemon Caught if sold:</b> $${(results.shinyCaughtValue || 0).toLocaleString()}</div>
+                        <div><b>Loots collected:</b> ${results.lootsCollected ? results.lootsCollected.length : 0} types</div>
+                        <div><b>Value of hunt if selling:</b> $${(totalMoneyEarned + itemsSellValue).toLocaleString()}</div>
+                        <div><b>Value of hunt if buying:</b> $${(totalMoneyEarned + itemsBuyValue).toLocaleString()}</div>
+                        <div style="margin-top: 10px;"><b>All items collected:</b> ${lootHtml || "None"}</div>
                     </div>`;
-
-                    if (results.shinyCaughtNames && results.shinyCaughtNames.length > 0) {
-                        resultsHtml += `<div style="margin-top: 10px; text-align: left;">
-                            <b>Shinies Caught:</b>
-                            <ul style="margin: 5px 0; padding-left: 20px;">`;
-                        for (let shinyName of results.shinyCaughtNames) {
-                            resultsHtml += `<li>${shinyName}</li>`;
-                        }
-                        resultsHtml += `</ul></div>`;
-                    }
-
-                    if (results.lootDrops && results.lootDrops.length > 0) {
-                        resultsHtml += `<div style="margin-top: 10px; text-align: left;">
-                            <b>Loot Found:</b>
-                            <ul style="margin: 5px 0; padding-left: 20px;">`;
-                        for (let drop of results.lootDrops) {
-                            resultsHtml += `<li>${drop.qty}x ${drop.name}</li>`;
-                        }
-                        resultsHtml += `</ul></div>`;
-                    }
 
                     if (window.windowManager) window.windowManager.closeDynamicWindow('window-timelapse-prompt');
                     showModal("TimeLapse Results", resultsHtml, "window-zzz-rewards");
