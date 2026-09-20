@@ -406,8 +406,8 @@ window.showChallengesModal = function() {
     if (win && wrapper) {
         // Read the actual unscaled width, defaulting to 800 if not yet set
         let winWidth = win._originalWidth || parseInt(win.style.width) || win.offsetWidth || 800;
-        // The user wants max-height to be exactly the window's width (height=wide)
-        wrapper.style.maxHeight = winWidth + 'px';
+        // The user wants max window height is 1.5x width.
+        wrapper.style.maxHeight = (winWidth * 1.5) + 'px';
 
     }
 
@@ -1723,8 +1723,6 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
                         <button id="btn-zzz-yes" style="padding: 12px; font-size: 16px; font-weight: bold; cursor: pointer; background: linear-gradient(to right, #3b82f6, #2563eb); color: white; border: 1px solid #60a5fa; border-radius: 8px; flex: 1; box-shadow: 0 4px 6px rgba(0,0,0,0.3); text-transform: uppercase; letter-spacing: 1px;">Go to Sleep</button>
                         <button id="btn-zzz-no" style="padding: 12px; font-size: 16px; font-weight: bold; cursor: pointer; background: linear-gradient(to right, #ef4444, #dc2626); color: white; border: 1px solid #f87171; border-radius: 8px; flex: 1; box-shadow: 0 4px 6px rgba(0,0,0,0.3); text-transform: uppercase; letter-spacing: 1px;">Cancel</button>
                     </div>
-
-                    <button id="btn-zzz-cheat-grains" style="margin-top: 15px; padding: 5px 10px; font-size: 11px; cursor: pointer; background: transparent; color: #94a3b8; border: 1px dashed #475569; border-radius: 4px;">Add +10 grains</button>
                 </div>
             `;
 
@@ -1742,12 +1740,6 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
                 state.stats.lastSaveTime = Date.now();
                 storage.save(state);
                 window.close();
-            };
-
-            document.getElementById('btn-zzz-cheat-grains').onclick = () => {
-                state.stats.jigglypuffGrains = (state.stats.jigglypuffGrains || 0) + 10;
-                storage.save(state);
-                document.getElementById('zzz-current-grains').innerText = state.stats.jigglypuffGrains;
             };
         }
     });
