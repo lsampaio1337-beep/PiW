@@ -511,7 +511,8 @@ input[type="number"] {
 .window-content-container {
     flex: 1;
     position: relative;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
     width: 100%;
     padding: 0 !important; /* Outer container flush, inner scrolling content will pad 5% */
     box-sizing: border-box;
@@ -527,7 +528,10 @@ input[type="number"] {
     padding: 5% !important;
 }
 
+/* Scale inner content up with specific padding based on window width */
 .window-content-scaler {
+    padding: 5%;
+    box-sizing: border-box;
     transform-origin: top left;
     width: var(--original-width, 100%);
     height: var(--original-height, 100%);
