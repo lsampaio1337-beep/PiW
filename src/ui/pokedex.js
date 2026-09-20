@@ -46,7 +46,7 @@ export function hasCaughtSpecies(id, state) {
 }
 
 export function showPokedex() {
-    let html = `<div style="display:flex; flex-wrap:wrap; max-height:400px; overflow-y:auto; gap:10px;">`;
+    let html = `<div style="display:flex; flex-wrap:wrap; gap:10px;">`;
 
     if (!state.config.pokemonData) {
         html += "<p>Loading Pokedex data...</p>";
@@ -104,7 +104,7 @@ export function showDexEntry(id) {
     const evoTreeHtml = buildEvolutionLineHtml(pData, state);
 
     const html = `
-        <div class="content-panel" style="text-align:center; height: 100%; overflow-y: auto;">
+        <div class="content-panel" style="text-align:center; height: 100%;">
             <h2>#${pData.id} ${pData.name}</h2>
             <img id="dex-sprite-${pData.id}" src="Assets/Pokemon Sprites/Natural/${pData.id}.png" style="width: 100px; height: 100px;">
             <div style="margin-bottom: 10px;">

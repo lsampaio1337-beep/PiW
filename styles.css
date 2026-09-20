@@ -518,24 +518,31 @@ input[type="number"] {
     box-sizing: border-box;
 }
 
-/* Default 5% padding for all scrollable window contents. Remove this for specific windows if unwanted */
+/* Default 2% padding for all scrollable window contents. Remove this for specific windows if unwanted */
 .content-panel {
-    padding: 5%;
+    padding: 2%;
     box-sizing: border-box;
 }
 
 #window-bonus-candy .window-content-container {
-    padding: 5% !important;
+    padding: 2% !important;
 }
 
 /* Scale inner content up with specific padding based on window width */
 .window-content-scaler {
-    padding: 5%;
+    padding: 2%;
     box-sizing: border-box;
     transform-origin: top left;
     width: var(--original-width, 100%);
     height: var(--original-height, 100%);
     /* Removed position: absolute to keep it in flow, so the parent can have height */
+}
+
+#party-window .window-content-scaler, #party-window .content-panel,
+#top-bar-window .window-content-scaler, #top-bar-window .content-panel,
+#main-view-window .window-content-scaler, #main-view-window .content-panel,
+#window-map .window-content-scaler, #window-map .content-panel {
+    padding: 0 !important;
 }
 
 .window-resize-handle {
