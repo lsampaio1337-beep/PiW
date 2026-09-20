@@ -278,7 +278,7 @@ window.cheatTimeLapse = () => {
     showModal("TimeLapse", html, "window-timelapse-prompt", "300px");
 };
 
-window.executeTimeLapse = () => {
+export function executeTimeLapse() {
     const input = document.getElementById('timelapse-hours');
     if (!input) return;
     const hours = parseFloat(input.value);
