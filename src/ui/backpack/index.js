@@ -60,7 +60,7 @@ export function showBackpack() {
     `;
 
     if (window.showModal) {
-        window.showModal('Backpack', html, 'window-backpack');
+        window.showModal('Backpack', html, 'window-backpack', '800px', '900px');
     }
 }
 

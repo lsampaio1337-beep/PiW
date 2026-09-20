@@ -1095,6 +1095,15 @@ function startGame() {
     setInterval(() => {
         state.stats.playtime = (state.stats.playtime || 0) + 1;
 
+        if (state.currentView === "BATTLE_ARENA") {
+            const speed = (state.settings && state.settings.gameSpeed) || 1;
+            state.stats.battleModeTimer = (state.stats.battleModeTimer || 0) + speed;
+            updateTopbar();
+        } else {
+            state.stats.battleModeTimer = 0;
+            updateTopbar();
+        }
+
         // Award Jigglypuff Dust grains (1 grain per minute)
         // Check using modulo so that reloading doesn't reset progress towards the next minute.
         // We ensure we only add 1 grain if playtime is perfectly divisible by 60 and > 0.
@@ -1719,7 +1728,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
                         </div>
                     </div>
 
-                    <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px;">
+                    <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px; padding-bottom: 15px;">
                         <button id="btn-zzz-yes" style="padding: 12px; font-size: 16px; font-weight: bold; cursor: pointer; background: linear-gradient(to right, #3b82f6, #2563eb); color: white; border: 1px solid #60a5fa; border-radius: 8px; flex: 1; box-shadow: 0 4px 6px rgba(0,0,0,0.3); text-transform: uppercase; letter-spacing: 1px;">Go to Sleep</button>
                         <button id="btn-zzz-no" style="padding: 12px; font-size: 16px; font-weight: bold; cursor: pointer; background: linear-gradient(to right, #ef4444, #dc2626); color: white; border: 1px solid #f87171; border-radius: 8px; flex: 1; box-shadow: 0 4px 6px rgba(0,0,0,0.3); text-transform: uppercase; letter-spacing: 1px;">Cancel</button>
                     </div>
@@ -1775,6 +1784,22 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
             playtimeStr = `${h}h ${m}m ${s}s`;
         }
 
+        let highestLevel = 0;
+        let highestQuality = 0;
+        let highestSumIV = 0;
+        let allMons = [];
+        if (state.party) allMons = allMons.concat(state.party);
+        if (state.storage) allMons = allMons.concat(state.storage);
+        if (state.safe) allMons = allMons.concat(state.safe);
+        if (state.dayCareRef) allMons = allMons.concat(state.dayCareRef);
+
+        allMons.forEach(p => {
+            if (p.level > highestLevel) highestLevel = p.level;
+            if (p.quality > highestQuality) highestQuality = p.quality;
+            const sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
+            if (sumIV > highestSumIV) highestSumIV = sumIV;
+        });
+
         showModal("Trainer", `
             <div style="text-align: left; display: inline-block;">
                 <p><b>Time played:</b> ${playtimeStr}</p>
@@ -1785,6 +1810,9 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
                 <p><b>Shinies Seen:</b> ${state.stats.shiniesSeen || 0}</p>
                 <p><b>Shinies Caught:</b> ${state.stats.shiniesCaught || 0}</p>
                 <p><b>Jigglypuff Grains Used:</b> ${state.stats.jigglypuffGrainsUsed || 0}</p>
+                <p><b>Highest Level:</b> ${highestLevel}</p>
+                <p><b>Highest Quality:</b> ${highestQuality}</p>
+                <p><b>Highest IV Sum:</b> ${highestSumIV}</p>
                 <p><b>Money:</b> $${state.trainer.money}</p>
             </div>
             <h3 style="margin-top: 10px; margin-bottom: 5px;">Badges:</h3>

@@ -46,7 +46,7 @@ export function hasCaughtSpecies(id, state) {
 }
 
 export function showPokedex() {
-    let html = `<div style="display:flex; flex-wrap:wrap; max-height:400px; overflow-y:auto; gap:10px;">`;
+    let html = `<div style="display:grid; grid-template-columns: repeat(9, 1fr); max-height:400px; overflow-y:auto; gap:10px;">`;
 
     if (!state.config.pokemonData) {
         html += "<p>Loading Pokedex data...</p>";
@@ -65,13 +65,12 @@ export function showPokedex() {
             let filter = isRevealed ? "none" : "brightness(0)";
             let cursor = isRevealed ? "pointer" : "default";
             let onClick = isRevealed ? `onclick="window.showDexEntry(${i})"` : "";
+            let displayName = isRevealed ? pData.name : "???";
 
             let cardClass = "pokedex-card";
-            let cardStyle = "width: 80px; text-align: center; font-size: 10px; margin: 2px;";
+            let cardStyle = "width: 100%; text-align: center; font-size: 10px; margin: 2px;";
 
             if (!isSeen && !isCaught) {
-                // Apply a transparent border to maintain the same grid box sizing as standard cards
-                // (which have 2px borders) so it fits 8 per row cleanly.
                 cardStyle += " border: 2px solid transparent; background: transparent;";
             } else {
                 if (hasSeenShiny || hasCaughtShiny) {
@@ -84,6 +83,7 @@ export function showPokedex() {
 
             html += `<div class="${cardClass}" style="${cardStyle}">
                 <div style="font-weight:bold;">#${i}</div>
+                <div style="font-size: 9px; margin-bottom: 2px;">${displayName}</div>
                 <img src="Assets/Pokemon Sprites/Natural/${i}.png" style="width: 50px; height: 50px; filter: ${filter}; cursor: ${cursor};" ${onClick}>
             </div>`;
         }
