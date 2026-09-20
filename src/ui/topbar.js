@@ -140,9 +140,12 @@ export function updateTopbar() {
     }
 
     const timerDisplay = document.getElementById('battle-timer-display');
+    const mainViewTimerDisplay = document.getElementById('main-view-timer');
     if (timerDisplay) {
         if (state.currentView === "BATTLE_ARENA") {
             timerDisplay.style.display = 'inline-block';
+            if (mainViewTimerDisplay) mainViewTimerDisplay.style.display = 'inline-block';
+
             const totalSec = state.stats.battleModeTimer || 0;
             const d = Math.floor(totalSec / 86400);
             const h = Math.floor((totalSec % 86400) / 3600);
@@ -153,8 +156,10 @@ export function updateTopbar() {
                 timeStr = `${d}d ${timeStr}`;
             }
             timerDisplay.innerText = timeStr;
+            if (mainViewTimerDisplay) mainViewTimerDisplay.innerText = timeStr;
         } else {
             timerDisplay.style.display = 'none';
+            if (mainViewTimerDisplay) mainViewTimerDisplay.style.display = 'none';
         }
     }
 

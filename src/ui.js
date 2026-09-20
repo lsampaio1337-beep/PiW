@@ -406,11 +406,16 @@ window.showChallengesModal = function() {
         // Read the actual unscaled width, defaulting to 800 if not yet set
         let winWidth = win._originalWidth || parseInt(win.style.width) || win.offsetWidth || 800;
 
-        // Ensure scrolling works by resetting any max-height
-        win.style.maxHeight = '';
+        // The user wants max window height is 1.5x width.
+        win.style.maxHeight = (winWidth * 1.5) + 'px';
 
-        // Reset initialization so the window auto-adjusts its height fully to its new content.
-        // The internal container handle native scrolling for overflow if it exceeds maximum limits in windowManager.
+        // Ensure the content container scrolls if it overflows
+        const contentContainer = win.querySelector('.window-content-container');
+        if (contentContainer) {
+            contentContainer.style.overflowY = 'auto';
+        }
+
+        // Reset initialization so the window auto-adjusts its height fully to its new content up to max-height
         win._sizeInitialized = false;
 
         if (typeof win.adjustHeightForNewContent === 'function') {
@@ -1719,7 +1724,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
             }
 
             const htmlContent = `
-                <div style="display: flex; flex-direction: column; gap: 15px; width: 100%; box-sizing: border-box;">
+                <div class="content-panel" style="display: flex; flex-direction: column; gap: 15px; width: 100%; box-sizing: border-box;">
                     <div id="zzz-tutorial-section" style="display: ${tutorialDisplay}; background: rgba(255,255,255,0.05); border: 1px dashed #475569; border-radius: 8px; padding: 15px; margin-bottom: 10px; text-align: left;">
                         <div style="color: #cbd5e1; font-size: 14px; margin-bottom: 8px;"><b>Welcome to ZzZ Mode!</b></div>
                         <div style="color: #94a3b8; font-size: 13px; line-height: 1.4;">Earn <b>Jigglypuff Dust</b> simply by playing the game (1 minute active = 1 grain). You can spend these grains to allow your Pokémon to farm offline when you close the game (1 grain = 1 minute of offline farming).</div>
@@ -1744,6 +1749,10 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
             `;
 
             showModal("ZzZ Mode", htmlContent, "window-zzz-confirmation", "460px");
+            const winZzz = document.getElementById('window-zzz-confirmation');
+            if (winZzz) {
+                winZzz._sizeInitialized = false;
+            }
             if (window.windowManager) window.windowManager.recalculateWindowSize('window-zzz-confirmation');
 
             document.getElementById('btn-zzz-no').onclick = () => {
