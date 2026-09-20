@@ -57,4 +57,4 @@ if not exist "game_ready.txt" goto WAIT_LOOP
 del game_ready.txt
 
 REM Exit to close the terminal automatically
-exit
+exit /b
