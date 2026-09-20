@@ -114,13 +114,39 @@ window.cheatNoMoney = () => {
 window.cheatSlot1Xp = () => {
     if (state.party.length > 0) {
         const p = state.party[0];
-        const nextLevelTotalXp = mathEngine.calculateTotalXP(p.level + 1);
-        p.xp = nextLevelTotalXp;
-        updateUI();
+        if (p.level < 100) {
+            p.level++;
+            p.xp = mathEngine.calculateTotalXP(p.level);
+
+            // Recalculate stats
+            const oldMaxHp = p.maxHp;
+            const bst = p.bst;
+            const totalIV = Object.values(p.ivs).reduce((a, b) => a + b, 0);
+
+            // Need base stats from config
+            const pData = state.config.pokemonData.find(x => x.id === p.id);
+            if (pData) {
+                p.currentStats.hp = mathEngine.calculateHP(pData.hp, p.ivs.hp, p.level, p.quality);
+                p.currentStats.atk = mathEngine.calculateStat(pData.atk, p.ivs.atk, p.level, p.quality);
+                p.currentStats.def = mathEngine.calculateStat(pData.def, p.ivs.def, p.level, p.quality);
+                p.currentStats.spa = mathEngine.calculateStat(pData.spa, p.ivs.spa, p.level, p.quality);
+                p.currentStats.spd = mathEngine.calculateStat(pData.spd, p.ivs.spd, p.level, p.quality);
+                p.currentStats.spe = mathEngine.calculateStat(pData.spe, p.ivs.spe, p.level, p.quality);
+            }
+
+            p.maxHp = p.currentStats.hp;
+            p.currentHp = Math.min(p.maxHp, p.currentHp + (p.maxHp - oldMaxHp));
+            p.evxp = mathEngine.calculateEVXP(bst, p.level, p.quality, totalIV);
+            p.evm = mathEngine.calculateEVM(bst, p.level, p.quality, totalIV);
+            p.pp = mathEngine.calculatePP(bst, p.level, p.quality, totalIV);
+
+            updateUI();
+        }
     }
 };
 
 window.toggleInfiniteItems = () => {
+    if (!state.settings) state.settings = {}; // Safety check
     if(!state.settings.infiniteItems) {
         state.settings.infiniteItems = true;
         alert("Infinite items activated");
@@ -227,7 +253,7 @@ window.cheatPokedex = (isShiny) => {
         };
 
         // Bypass limits, push straight to storage
-        state.backpack.storage.push(newPokemon);
+        state.storage.push(newPokemon);
 
         // Pokedex counts
         if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
@@ -242,45 +268,62 @@ window.cheatPokedex = (isShiny) => {
 };
 
 window.cheatTimeLapse = () => {
-    const hours = prompt("How long? (Hours)", "1");
-    if (hours !== null) {
-        const timeMs = parseFloat(hours) * 3600000;
-        if (!isNaN(timeMs) && timeMs > 0) {
-            const results = globals.battleSystem.runFastForward(timeMs);
+    const html = `
+        <div style="text-align: center;">
+            <label for="timelapse-hours">How long? (Hours):</label><br><br>
+            <input type="number" id="timelapse-hours" value="1" min="0.1" step="0.1" style="width: 100px; padding: 5px;"><br><br>
+            <button id="btn-timelapse-confirm" style="padding: 10px 20px; font-weight: bold; background-color: #1abc9c; color: white;">Simulate</button>
+        </div>
+    `;
+    showModal("TimeLapse", html, "window-timelapse-prompt", "300px");
 
-            // Re-use ZzZ Mode Rewards UI snippet here for convenience
-            let resultsHtml = `<div style="text-align: left; font-size: 14px; max-height: 400px; overflow-y: auto;">
-                <p><b>Simulated Time:</b> ${hours} Hours</p>
-                <p><b>Battles:</b> ${results.battlesCount || 0}</p>
-                <p><b>Pokemon Caught:</b> ${results.caughtCount || 0}</p>
-                <p><b>Shinies Caught:</b> ${results.shinyCaughtCount || 0}</p>
-                <p><b>Faints:</b> ${results.faintsCount || 0}</p>
-                <p><b>Money Earned:</b> $${(results.moneyEarned || 0).toLocaleString()}</p>
-            </div>`;
+    setTimeout(() => {
+        const btn = document.getElementById('btn-timelapse-confirm');
+        if (btn) {
+            btn.onclick = () => {
+                const input = document.getElementById('timelapse-hours');
+                const hours = parseFloat(input.value);
+                if (!isNaN(hours) && hours > 0) {
+                    const timeMs = hours * 3600000;
+                    const results = globals.battleSystem.runFastForward(timeMs);
 
-            if (results.shinyCaughtNames && results.shinyCaughtNames.length > 0) {
-                resultsHtml += `<div style="margin-top: 10px; text-align: left;">
-                    <b>Shinies Caught:</b>
-                    <ul style="margin: 5px 0; padding-left: 20px;">`;
-                for (let shinyName of results.shinyCaughtNames) {
-                    resultsHtml += `<li>${shinyName}</li>`;
+                    // Re-use ZzZ Mode Rewards UI snippet here for convenience
+                    let resultsHtml = `<div style="text-align: left; font-size: 14px; max-height: 400px; overflow-y: auto;">
+                        <p><b>Simulated Time:</b> ${hours} Hours</p>
+                        <p><b>Battles:</b> ${results.battlesCount || 0}</p>
+                        <p><b>Pokemon Caught:</b> ${results.caughtCount || 0}</p>
+                        <p><b>Shinies Caught:</b> ${results.shinyCaughtCount || 0}</p>
+                        <p><b>Faints:</b> ${results.faintsCount || 0}</p>
+                        <p><b>Money Earned:</b> $${(results.moneyEarned || 0).toLocaleString()}</p>
+                    </div>`;
+
+                    if (results.shinyCaughtNames && results.shinyCaughtNames.length > 0) {
+                        resultsHtml += `<div style="margin-top: 10px; text-align: left;">
+                            <b>Shinies Caught:</b>
+                            <ul style="margin: 5px 0; padding-left: 20px;">`;
+                        for (let shinyName of results.shinyCaughtNames) {
+                            resultsHtml += `<li>${shinyName}</li>`;
+                        }
+                        resultsHtml += `</ul></div>`;
+                    }
+
+                    if (results.lootDrops && results.lootDrops.length > 0) {
+                        resultsHtml += `<div style="margin-top: 10px; text-align: left;">
+                            <b>Loot Found:</b>
+                            <ul style="margin: 5px 0; padding-left: 20px;">`;
+                        for (let drop of results.lootDrops) {
+                            resultsHtml += `<li>${drop.qty}x ${drop.name}</li>`;
+                        }
+                        resultsHtml += `</ul></div>`;
+                    }
+
+                    if (window.windowManager) window.windowManager.closeDynamicWindow('window-timelapse-prompt');
+                    showModal("TimeLapse Results", resultsHtml, "window-zzz-rewards");
+                    updateUI();
                 }
-                resultsHtml += `</ul></div>`;
-            }
-
-            if (results.lootDrops && results.lootDrops.length > 0) {
-                resultsHtml += `<div style="margin-top: 10px; text-align: left;">
-                    <b>Loot Found:</b>
-                    <ul style="margin: 5px 0; padding-left: 20px;">`;
-                for (let drop of results.lootDrops) {
-                    resultsHtml += `<li>${drop.qty}x ${drop.name}</li>`;
-                }
-                resultsHtml += `</ul></div>`;
-            }
-            showModal("TimeLapse Results", resultsHtml, "window-zzz-rewards");
-            updateUI();
+            };
         }
-    }
+    }, 100);
 };
 
 window.cheatJigglypuffDust = () => {
