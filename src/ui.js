@@ -405,8 +405,17 @@ window.showChallengesModal = function() {
     if (win) {
         // Read the actual unscaled width, defaulting to 800 if not yet set
         let winWidth = win._originalWidth || parseInt(win.style.width) || win.offsetWidth || 800;
-        // The user wants max window height is 1.5x width.
-        win.style.maxHeight = (winWidth * 1.5) + 'px';
+
+        // Ensure scrolling works by resetting any max-height
+        win.style.maxHeight = '';
+
+        // Reset initialization so the window auto-adjusts its height fully to its new content.
+        // The internal container handle native scrolling for overflow if it exceeds maximum limits in windowManager.
+        win._sizeInitialized = false;
+
+        if (typeof win.adjustHeightForNewContent === 'function') {
+            win.adjustHeightForNewContent();
+        }
     }
 
     if (window.windowManager) window.windowManager.recalculateWindowSize('window-challenges');
@@ -1710,7 +1719,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
             }
 
             const htmlContent = `
-                <div class="content-panel" style="display: flex; flex-direction: column; gap: 15px; width: 100%;">
+                <div style="display: flex; flex-direction: column; gap: 15px; width: 100%; box-sizing: border-box;">
                     <div id="zzz-tutorial-section" style="display: ${tutorialDisplay}; background: rgba(255,255,255,0.05); border: 1px dashed #475569; border-radius: 8px; padding: 15px; margin-bottom: 10px; text-align: left;">
                         <div style="color: #cbd5e1; font-size: 14px; margin-bottom: 8px;"><b>Welcome to ZzZ Mode!</b></div>
                         <div style="color: #94a3b8; font-size: 13px; line-height: 1.4;">Earn <b>Jigglypuff Dust</b> simply by playing the game (1 minute active = 1 grain). You can spend these grains to allow your Pokémon to farm offline when you close the game (1 grain = 1 minute of offline farming).</div>
@@ -1727,7 +1736,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
                         </div>
                     </div>
 
-                    <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px; padding-bottom: 25px;">
+                    <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px; padding-bottom: 5px;">
                         <button id="btn-zzz-yes" style="padding: 12px; font-size: 16px; font-weight: bold; cursor: pointer; background: linear-gradient(to right, #3b82f6, #2563eb); color: white; border: 1px solid #60a5fa; border-radius: 8px; flex: 1; box-shadow: 0 4px 6px rgba(0,0,0,0.3); text-transform: uppercase; letter-spacing: 1px;">Go to Sleep</button>
                         <button id="btn-zzz-no" style="padding: 12px; font-size: 16px; font-weight: bold; cursor: pointer; background: linear-gradient(to right, #ef4444, #dc2626); color: white; border: 1px solid #f87171; border-radius: 8px; flex: 1; box-shadow: 0 4px 6px rgba(0,0,0,0.3); text-transform: uppercase; letter-spacing: 1px;">Cancel</button>
                     </div>

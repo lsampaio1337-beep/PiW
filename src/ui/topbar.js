@@ -144,10 +144,15 @@ export function updateTopbar() {
         if (state.currentView === "BATTLE_ARENA") {
             timerDisplay.style.display = 'inline-block';
             const totalSec = state.stats.battleModeTimer || 0;
-            const h = Math.floor(totalSec / 3600);
+            const d = Math.floor(totalSec / 86400);
+            const h = Math.floor((totalSec % 86400) / 3600);
             const m = Math.floor((totalSec % 3600) / 60);
             const s = Math.floor(totalSec % 60);
-            timerDisplay.innerText = `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+            let timeStr = `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+            if (d >= 1) {
+                timeStr = `${d}d ${timeStr}`;
+            }
+            timerDisplay.innerText = timeStr;
         } else {
             timerDisplay.style.display = 'none';
         }
