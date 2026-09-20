@@ -173,7 +173,7 @@
       <div id="view-battle-arena" class="game-view" style="display:none;">
         <div id="combat-arena" style="background-image: url('./Assets/BG/BG.png');">
           <div id="battle-sprites-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;">
-            <div id="enemy-side" style="position: absolute; transform: translate(-50%, -50%); top: 50%; left: 75%;">
+            <div id="enemy-side" style="position: absolute; transform: translate(-50%, -50%); top: 50%; left: 75%; display: flex; align-items: center;">
               <div id="enemy-anim-container" class="sprite-anim-container">
                 <img id="enemy-sprite" src="" alt="Enemy Sprite">
                 <div id="enemy-water-bubbles" class="water-bubbles">
@@ -184,6 +184,11 @@
                   <div class="bubble c5"></div>
                   <div class="bubble c6"></div>
                 </div>
+              </div>
+              <div id="enemy-battle-stats-box" style="display: none; flex-direction: column; height: 100%; justify-content: center; margin-left: 10px; border: 1px solid white; border-radius: 4px; background: rgba(0, 0, 0, 0.6); color: white; font-size: 14px; font-weight: bold; text-align: center; font-family: monospace; overflow: hidden; pointer-events: none;">
+                <div id="enemy-stat-lvl" style="border-bottom: 1px solid white; padding: 2px 4px; flex: 1; display: flex; align-items: center; justify-content: center;">Lv. ?</div>
+                <div id="enemy-stat-q" style="border-bottom: 1px solid white; padding: 2px 4px; flex: 1; display: flex; align-items: center; justify-content: center;">Q=?</div>
+                <div id="enemy-stat-sumiv" style="padding: 2px 4px; flex: 1; display: flex; align-items: center; justify-content: center;">SumIV=?</div>
               </div>
             </div>
             <div id="player-side" style="position: absolute; transform: translate(-50%, -50%); top: 50%; left: 25%;">
@@ -198,6 +203,15 @@
                   <div class="bubble c6"></div>
                 </div>
               </div>
+            </div>
+          </div>
+
+          <div id="battle-active-items" style="position: absolute; left: 10px; bottom: 10px; display: flex; gap: 10px; z-index: 5;">
+            <div style="width: 50px; height: 50px; background: rgba(0,0,0,0.5); border: 2px solid #555; border-radius: 8px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+              <img id="battle-active-potion" src="" style="width: 80%; height: 80%; object-fit: contain; display: none;">
+            </div>
+            <div style="width: 50px; height: 50px; background: rgba(0,0,0,0.5); border: 2px solid #555; border-radius: 8px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+              <img id="battle-active-ball" src="" style="width: 80%; height: 80%; object-fit: contain; display: none;">
             </div>
           </div>
 

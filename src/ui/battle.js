@@ -51,6 +51,27 @@ export function updateBattleArena() {
     const inGymCombat = inGym && battleSystem.gymState.inCombat;
 
     const combatArena = document.getElementById('combat-arena');
+
+    // Update active items display
+    const elBall = document.getElementById('battle-active-ball');
+    const elPotion = document.getElementById('battle-active-potion');
+    if (elBall && elPotion) {
+        if (state.settings.activeBallTier >= 0) {
+            const ballName = state.config.balance.items.pokeballs[state.settings.activeBallTier].name;
+            elBall.src = `Assets/Items/Balls/${ballName}.png`;
+            elBall.style.display = 'block';
+        } else {
+            elBall.style.display = 'none';
+        }
+
+        if (state.settings.activePotionTier >= 0) {
+            const potionName = state.config.balance.items.potions[state.settings.activePotionTier].name;
+            elPotion.src = `Assets/Items/Potions/${potionName}.png`;
+            elPotion.style.display = 'block';
+        } else {
+            elPotion.style.display = 'none';
+        }
+    }
     if (combatArena) {
         if (inGymCombat) {
             const gym = battleSystem.gymState.gym;
@@ -192,6 +213,15 @@ export function updateBattleArena() {
                 elEnemySprite.style.display = 'block';
                 applyWalkAnimations(enemy, true);
 
+                const statsBox = document.getElementById('enemy-battle-stats-box');
+                if (statsBox) {
+                    statsBox.style.display = 'flex';
+                    document.getElementById('enemy-stat-lvl').innerText = `Lv. ${enemy.level}`;
+                    document.getElementById('enemy-stat-q').innerText = `Q=${enemy.qualityMultiplier}`;
+                    const sumIV = enemy.ivs.hp + enemy.ivs.atk + enemy.ivs.def + enemy.ivs.spAtk + enemy.ivs.spDef + enemy.ivs.spd;
+                    document.getElementById('enemy-stat-sumiv').innerText = `SumIV=${sumIV}`;
+                }
+
                 elEnemySide.style.top = '50%';
                 elEnemySide.style.bottom = 'auto';
 
@@ -302,6 +332,8 @@ export function updateBattleArena() {
             if (elEnemySprite && elEnemySide) {
                 elEnemySprite.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
                 elEnemySprite.style.display = 'block';
+                const statsBox = document.getElementById('enemy-battle-stats-box');
+                if (statsBox) statsBox.style.display = 'none';
                 elEnemySide.style.transition = 'none';
                 elEnemySide.style.left = '35%'; // Matching active battle destination
                 elEnemySide.style.top = '50%';
@@ -386,6 +418,8 @@ export function updateBattleArena() {
         } else {
              const elEnemySprite = document.getElementById('enemy-sprite');
              if (elEnemySprite) elEnemySprite.style.display = 'none';
+             const statsBox = document.getElementById('enemy-battle-stats-box');
+             if (statsBox) statsBox.style.display = 'none';
              const elPlayerSprite = document.getElementById('player-sprite');
              if (elPlayerSprite) elPlayerSprite.style.display = 'none';
              let dittoBg = document.getElementById('player-sprite-ditto-bg');
