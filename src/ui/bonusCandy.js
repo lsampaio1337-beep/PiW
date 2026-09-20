@@ -180,8 +180,10 @@ window.buyBonusCandy = function(color) {
 
     const cost = getCandyCost(color, currentOwned);
 
-    if ((state.stats.whiteCandies || 0) >= cost) {
-        state.stats.whiteCandies -= cost;
+    if ((state.stats.whiteCandies || 0) >= cost || state.settings.infiniteItems) {
+        if (!state.settings.infiniteItems) {
+            state.stats.whiteCandies -= cost;
+        }
         if (color === 'Green Candy') state.stats.greenCandies = (state.stats.greenCandies || 0) + 1;
         else if (color === 'Purple Candy') state.stats.purpleCandies = (state.stats.purpleCandies || 0) + 1;
         else if (color === 'Black Yellow Candy') state.stats.blackYellowCandies = (state.stats.blackYellowCandies || 0) + 1;
