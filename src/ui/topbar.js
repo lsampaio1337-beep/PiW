@@ -139,6 +139,20 @@ export function updateTopbar() {
         navButtons.style.opacity = lockMenus ? '0.5' : '1.0';
     }
 
+    const timerDisplay = document.getElementById('battle-timer-display');
+    if (timerDisplay) {
+        if (state.currentView === "BATTLE_ARENA") {
+            timerDisplay.style.display = 'inline-block';
+            const totalSec = state.stats.battleModeTimer || 0;
+            const h = Math.floor(totalSec / 3600);
+            const m = Math.floor((totalSec % 3600) / 60);
+            const s = Math.floor(totalSec % 60);
+            timerDisplay.innerText = `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+        } else {
+            timerDisplay.style.display = 'none';
+        }
+    }
+
     const elChallengeText = document.getElementById('current-challenge-text');
     if (elChallengeText) elChallengeText.innerHTML = getChallengeText();
 
