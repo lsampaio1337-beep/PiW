@@ -186,11 +186,23 @@ export function updateBattleArena() {
 
             const elEnemySprite = document.getElementById('enemy-sprite');
             const elEnemySide = document.getElementById('enemy-side');
+            const elEnemyInfo = document.getElementById('enemy-info-container');
+            const elLevel = document.getElementById('enemy-info-level');
+            const elQuality = document.getElementById('enemy-info-quality');
+            const elSumIV = document.getElementById('enemy-info-sumiv');
 
             if (elEnemySprite && elEnemySide) {
                 elEnemySprite.src = `Assets/Pokemon Sprites/Natural/${enemy.qualityName === 'Shiny' ? enemy.id + '_shiny' : enemy.id}.png`;
                 elEnemySprite.style.display = 'block';
                 applyWalkAnimations(enemy, true);
+
+                if (elEnemyInfo && elLevel && elQuality && elSumIV) {
+                    elEnemyInfo.style.display = 'flex';
+                    elLevel.innerText = `Lv. ${enemy.level}`;
+                    elQuality.innerText = `Q=${enemy.qualityName === 'Shiny' ? 'Shiny' : enemy.quality}`;
+                    const sumIV = enemy.ivs ? (enemy.ivs.hp + enemy.ivs.atk + enemy.ivs.def + enemy.ivs.spa + enemy.ivs.spd + enemy.ivs.spe) : 0;
+                    elSumIV.innerText = `SumIV=${sumIV}`;
+                }
 
                 elEnemySide.style.top = '50%';
                 elEnemySide.style.bottom = 'auto';
@@ -306,6 +318,10 @@ export function updateBattleArena() {
                 elEnemySide.style.left = '35%'; // Matching active battle destination
                 elEnemySide.style.top = '50%';
                 elEnemySide.style.bottom = 'auto';
+
+                const elEnemyInfo = document.getElementById('enemy-info-container');
+                if (elEnemyInfo) elEnemyInfo.style.display = 'none';
+
                 if (hpContainerEnemy) {
                     hpContainerEnemy.style.transition = 'none';
                     hpContainerEnemy.style.left = '35%';
@@ -386,6 +402,8 @@ export function updateBattleArena() {
         } else {
              const elEnemySprite = document.getElementById('enemy-sprite');
              if (elEnemySprite) elEnemySprite.style.display = 'none';
+             const elEnemyInfo = document.getElementById('enemy-info-container');
+             if (elEnemyInfo) elEnemyInfo.style.display = 'none';
              const elPlayerSprite = document.getElementById('player-sprite');
              if (elPlayerSprite) elPlayerSprite.style.display = 'none';
              let dittoBg = document.getElementById('player-sprite-ditto-bg');
