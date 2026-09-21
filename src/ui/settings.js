@@ -15,6 +15,18 @@ export function showSettings() {
         </div>
 
         <div style="margin-bottom: 15px;">
+            <label for="add-money-input">Add Money:</label>
+            <input type="number" id="add-money-input" value="1000" style="padding: 5px; width: 80px;">
+            <button onclick="window.addMoney()" style="padding: 5px 10px; font-size: 14px;">Add</button>
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <label for="add-xp-input">Add XP (Trainer & Slot 1):</label>
+            <input type="number" id="add-xp-input" value="1000" style="padding: 5px; width: 80px;">
+            <button onclick="window.addXp()" style="padding: 5px 10px; font-size: 14px;">Add</button>
+        </div>
+
+        <div style="margin-bottom: 15px;">
             <button onclick="window.showAddPokemonModal()" style="padding: 5px 10px; font-size: 14px;">Add Pokemon</button>
         </div>
 
@@ -205,170 +217,90 @@ export function updateGameSpeed(val) {
     if (display) display.innerText = speed + 'x';
 }
 
+export function addMoney() {
+    const inputEl = document.getElementById('add-money-input');
+    if (!inputEl) return;
+    const amount = parseInt(inputEl.value);
+    if (!isNaN(amount) && amount > 0) {
+        state.trainer.money += amount;
+        updateUI();
+    }
+}
+
+export function addXp() {
+    const inputEl = document.getElementById('add-xp-input');
+    if (!inputEl) return;
+    const amount = parseInt(inputEl.value);
+    if (!isNaN(amount) && amount > 0) {
+        state.trainer.xp += amount;
+        if (state.party.length > 0) {
+            state.party[0].xp += amount;
+        }
+        updateUI();
+    }
+}
+
 export function exportLog() {
     if (state.storageRef) {
         state.storageRef.exportLog(state);
     }
 }
 
-export function showCheatControl() {
-    const isInfiniteItems = state.settings.infiniteItems ? 'ON' : 'OFF';
-    const btnStyle = 'padding: 5px 10px; font-size: 14px; margin-bottom: 5px; cursor: pointer; width: 100%; border: none; border-radius: 4px;';
-
-    // Use an alternating layout for the buttons to make it clear what they do
-    const html = `
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 400px; box-sizing: border-box; padding: 10px;">
-            <div><button style="${btnStyle} background-color: #2ecc71; color: white;" onclick="window.cheatMoney()">Money ($1B)</button></div>
-            <div><button style="${btnStyle} background-color: #e74c3c; color: white;" onclick="window.cheatNoMoney()">NoMoney ($0)</button></div>
-
-            <div><button style="${btnStyle} background-color: #f1c40f; color: black;" onclick="window.cheatXP()">XP (+1 Level Slot 1)</button></div>
-            <div><button style="${btnStyle} background-color: #3498db; color: white;" onclick="window.cheatInfiniteItems()" id="btn-cheat-infinite-items">Infinite items (${isInfiniteItems})</button></div>
-
-            <div><button style="${btnStyle} background-color: #9b59b6; color: white;" onclick="window.cheatUpgrades()">Upgrades (Max All)</button></div>
-            <div><button style="${btnStyle} background-color: #e67e22; color: white;" onclick="window.cheatMap()">Map (Unlock All)</button></div>
-
-            <div><button style="${btnStyle} background-color: #1abc9c; color: white;" onclick="window.cheatPokedex(false)">Pokedex (Normal)</button></div>
-            <div><button style="${btnStyle} background-color: #f39c12; color: white;" onclick="window.cheatPokedex(true)">Pokedex (Shiny)</button></div>
-
-            <div><button style="${btnStyle} background-color: #ff9ff3; color: black;" onclick="window.cheatJigglypuff()">Jigglypuff Dust (+10)</button></div>
-            <div><button style="${btnStyle} background-color: #ffffff; color: black; border: 1px solid #bdc3c7;" onclick="window.cheatBonusCandy()">Bonus Candy (+10)</button></div>
-        </div>
-    `;
-
-    showModal("Cheat Control", html, "window-cheat-control");
-}
-
 export function activateCheat() {
-    // Close the settings modal first
-    const overlay = document.getElementById('modal-overlay');
-    if (overlay) overlay.style.display = 'none';
+    // Set money
+    state.trainer.money = 25000000000;
 
-    // Show the new Cheat Control window
-    showCheatControl();
-}
-
-window.cheatMoney = function() {
-    state.trainer.money += 1000000000;
-    updateUI();
-};
-
-window.cheatNoMoney = function() {
-    state.trainer.money = 0;
-    updateUI();
-};
-
-window.cheatXP = function() {
-    if (state.party.length > 0) {
-        const p = state.party[0];
-        const nextLevelXp = mathEngine.calculateTotalXP(p.level + 1);
-        const currentXp = p.xp;
-        const xpNeeded = nextLevelXp - currentXp;
-        if (xpNeeded > 0) {
-            p.xp += xpNeeded; // Add exactly enough XP to level up
-            state.trainer.xp += xpNeeded;
-            p.level = mathEngine.getLevelFromXP(p.xp);
-        }
-        updateUI();
+    // Set 1,000,000 of each ball, potion, stone
+    for (let key in state.backpack.pokeballs) {
+        state.backpack.pokeballs[key] = 1000000;
     }
-};
-
-window.cheatInfiniteItems = function() {
-    state.settings.infiniteItems = !state.settings.infiniteItems;
-    const btn = document.getElementById('btn-cheat-infinite-items');
-    if (btn) {
-        btn.innerText = `Infinite items (${state.settings.infiniteItems ? 'ON' : 'OFF'})`;
+    for (let key in state.backpack.potions) {
+        state.backpack.potions[key] = 1000000;
     }
-};
-
-window.cheatUpgrades = function() {
-    // Max out existing known upgrades
-    if (state.config.balance.expansions) {
-        if (state.config.balance.expansions.ballPocket) {
-            state.stats.upgrades.ballsTier = state.config.balance.expansions.ballPocket.length - 1;
-        }
-        if (state.config.balance.expansions.potionSatchel) {
-            state.stats.upgrades.potionsTier = state.config.balance.expansions.potionSatchel.length - 1;
-        }
-        if (state.config.balance.expansions.pokemonBox) {
-            state.stats.upgrades.boxTier = state.config.balance.expansions.pokemonBox.length - 1;
-        }
-
-        // Buy all other expansions that might exist in the config
-        for (let key in state.config.balance.expansions) {
-            if (key !== 'ballPocket' && key !== 'potionSatchel' && key !== 'pokemonBox') {
-                 // For any other dynamic expansions that were added
-                 let tierKey = key.replace(/([a-z])([A-Z])/g, '$1_$2').split('_')[0] + 'Tier';
-                 if (state.stats.upgrades[tierKey] !== undefined) {
-                     state.stats.upgrades[tierKey] = state.config.balance.expansions[key].length - 1;
-                 } else {
-                     // Try directly or fallback
-                     state.stats.upgrades[key + 'Tier'] = state.config.balance.expansions[key].length - 1;
-                 }
-            }
-        }
+    for (let key in state.backpack.stones) {
+        state.backpack.stones[key] = 1000000;
     }
-    updateUI();
-};
 
-window.cheatMap = function() {
-    if (state.config.unlocks) {
-        for (const unlock of state.config.unlocks) {
-            window.completeChallenge(unlock.areaId);
-        }
-    }
-    updateUI();
-};
+    // Generate Shiny Mewtwo (ID 150)
+    const mewtwoData = state.config.pokemonData.find(p => p.id === 150);
+    if (mewtwoData) {
+        const level = 100;
+        const qName = "Shiny";
+        const qVal = 2.0;
+        const ivs = { hp: 100, atk: 100, def: 100, spa: 100, spd: 100, spe: 100 };
 
-window.cheatPokedex = function(isShiny) {
-    for (let i = 1; i <= 150; i++) {
-        const pData = state.config.pokemonData.find(p => p.id === i);
-        if (pData) {
-            const level = isShiny ? 100 : 1;
-            const qName = isShiny ? "Shiny" : "Regular";
-            const qVal = isShiny ? 2.0 : (Math.random() * (1.19 - 1.00) + 1.00); // Random Regular Q
+        const stats = {
+            hp: mathEngine.calculateHP(mewtwoData.hp, ivs.hp, level, qVal),
+            atk: mathEngine.calculateStat(mewtwoData.atk, ivs.atk, level, qVal),
+            def: mathEngine.calculateStat(mewtwoData.def, ivs.def, level, qVal),
+            spa: mathEngine.calculateStat(mewtwoData.spa, ivs.spa, level, qVal),
+            spd: mathEngine.calculateStat(mewtwoData.spd, ivs.spd, level, qVal),
+            spe: mathEngine.calculateStat(mewtwoData.spe, ivs.spe, level, qVal)
+        };
 
-            const ivs = isShiny ? { hp: 100, atk: 100, def: 100, spa: 100, spd: 100, spe: 100 } :
-                {
-                    hp: Math.floor(Math.random() * 100),
-                    atk: Math.floor(Math.random() * 100),
-                    def: Math.floor(Math.random() * 100),
-                    spa: Math.floor(Math.random() * 100),
-                    spd: Math.floor(Math.random() * 100),
-                    spe: Math.floor(Math.random() * 100)
-                };
+        const bst = mewtwoData.hp + mewtwoData.atk + mewtwoData.def + mewtwoData.spa + mewtwoData.spd + mewtwoData.spe;
+        const totalIV = 600;
 
-            const stats = {
-                hp: mathEngine.calculateHP(pData.hp, ivs.hp, level, qVal),
-                atk: mathEngine.calculateStat(pData.atk, ivs.atk, level, qVal),
-                def: mathEngine.calculateStat(pData.def, ivs.def, level, qVal),
-                spa: mathEngine.calculateStat(pData.spa, ivs.spa, level, qVal),
-                spd: mathEngine.calculateStat(pData.spd, ivs.spd, level, qVal),
-                spe: mathEngine.calculateStat(pData.spe, ivs.spe, level, qVal)
-            };
-
-            const bst = pData.hp + pData.atk + pData.def + pData.spa + pData.spd + pData.spe;
-            const totalIV = ivs.hp + ivs.atk + ivs.def + ivs.spa + ivs.spd + ivs.spe;
-
-            let learned = [];
-            if (pData.learnset) {
-                for (const ls of pData.learnset) {
-                    if (level >= ls.level) {
-                        if (state.config.moves && state.config.moves[ls.move]) {
-                            const moveData = JSON.parse(JSON.stringify(state.config.moves[ls.move]));
-                            moveData.name = ls.move;
-                            learned.push(moveData);
-                        }
+        let learned = [];
+        if (mewtwoData.learnset) {
+            for (const ls of mewtwoData.learnset) {
+                if (level >= ls.level) {
+                    if (state.config.moves[ls.move]) {
+                        const moveData = JSON.parse(JSON.stringify(state.config.moves[ls.move]));
+                        moveData.name = ls.move;
+                        learned.push(moveData);
                     }
                 }
             }
-            const moves = learned.slice(-4);
-            const xp = mathEngine.calculateTotalXP(level);
+        }
+        const moves = learned.slice(-4);
+        const xp = mathEngine.calculateTotalXP(level);
 
-            const caughtPokemon = {
-                id: pData.id,
-                uuid: 'cheat_' + Date.now() + '_' + i,
-                name: pData.name,
-                types: pData.types,
+        const createMewtwo = () => {
+            return {
+                id: mewtwoData.id,
+                name: mewtwoData.name,
+                types: mewtwoData.types,
                 level: level,
                 xp: xp,
                 qualityName: qName,
@@ -383,34 +315,18 @@ window.cheatPokedex = function(isShiny) {
                 bst: bst,
                 moves: JSON.parse(JSON.stringify(moves))
             };
+        };
 
-            state.storage.push(caughtPokemon);
-
-            // Also register in Pokedex counts
-            if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
-            state.stats.caughtSpecies[pData.name] = (state.stats.caughtSpecies[pData.name] || 0) + 1;
-
-            if (isShiny) {
-                if (!state.stats.caughtShiniesSpecies) state.stats.caughtShiniesSpecies = {};
-                state.stats.caughtShiniesSpecies[pData.name] = (state.stats.caughtShiniesSpecies[pData.name] || 0) + 1;
-                state.stats.shiniesCaught = (state.stats.shiniesCaught || 0) + 1;
-            }
-
-            state.stats.caught++;
+        const spaces = 6 - state.party.length;
+        if (spaces >= 2) {
+            state.party.push(createMewtwo());
+            state.party.push(createMewtwo());
+        } else if (spaces === 1) {
+            state.party.push(createMewtwo());
         }
     }
-    updateUI();
-};
 
-window.cheatJigglypuff = function() {
-    state.stats.jigglypuffGrains = (state.stats.jigglypuffGrains || 0) + 10;
     updateUI();
-};
-
-window.cheatBonusCandy = function() {
-    state.stats.whiteCandies = (state.stats.whiteCandies || 0) + 10;
-    updateUI();
-};
     const overlay = document.getElementById('modal-overlay');
     if (overlay) overlay.style.display = 'none';
 }
