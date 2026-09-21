@@ -1027,7 +1027,7 @@ function selectStarter(id) {
     if (!storage.currentProfileId) {
         storage.createNewProfile();
     }
-    const pData = state.config.pokemonData.find(p => p.id === id);
+    const pData = state.config.pokemonData[(id) - 1];
     const q = 1.40; // Fixed Rare
     const qName = "Rare";
     const ivs = {hp: 50, atk: 50, def: 50, spa: 50, spd: 50, spe: 50};

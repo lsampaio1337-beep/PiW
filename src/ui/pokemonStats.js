@@ -71,7 +71,7 @@ export function showPokemonStats(idx, location) {
     if (!p) return;
 
     const sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
-    const pData = state.config.pokemonData.find(pd => pd.id === p.id);
+    const pData = state.config.pokemonData[(p.id) - 1];
     if (!pData) return;
 
     // --- Individual Data ---
@@ -181,11 +181,11 @@ export function evolvePokemon(location, idx, toId) {
     if (!list || !list[idx]) return;
 
     let p = list[idx];
-    const newBase = state.config.pokemonData.find(pd => pd.id === toId);
+    const newBase = state.config.pokemonData[(toId) - 1];
     if (!newBase) return;
 
     // Re-verify requirements and consume stones
-    const oldPData = state.config.pokemonData.find(pd => pd.id === p.id);
+    const oldPData = state.config.pokemonData[(p.id) - 1];
     const evoObj = oldPData ? oldPData.evolutions.find(e => e.to === toId) : null;
     if (evoObj) {
         const req = getEvolveRequirements(p, evoObj, state);
