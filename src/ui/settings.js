@@ -90,7 +90,7 @@ export function showCheatControl() {
             <div><button style="${btnStyle} background-color: #2ecc71; color: white;" onclick="window.cheatMoney()">Money ($1B)</button></div>
             <div><button style="${btnStyle} background-color: #e74c3c; color: white;" onclick="window.cheatNoMoney()">NoMoney ($0)</button></div>
 
-            <div><button style="${btnStyle} background-color: #f1c40f; color: black;" onclick="window.cheatXP()">XP (Max Bar Slot 1)</button></div>
+            <div><button style="${btnStyle} background-color: #f1c40f; color: black;" onclick="window.cheatXP()">XP (+1 Level Slot 1)</button></div>
             <div><button style="${btnStyle} background-color: #3498db; color: white;" onclick="window.cheatInfiniteItems()" id="btn-cheat-infinite-items">Infinite items (${isInfiniteItems})</button></div>
 
             <div><button style="${btnStyle} background-color: #9b59b6; color: white;" onclick="window.cheatUpgrades()">Upgrades (Max All)</button></div>
@@ -132,9 +132,10 @@ window.cheatXP = function() {
         const nextLevelXp = mathEngine.calculateTotalXP(p.level + 1);
         const currentXp = p.xp;
         const xpNeeded = nextLevelXp - currentXp;
-        if (xpNeeded > 1) { // Leave 1 XP short of actually leveling up
-            p.xp += (xpNeeded - 1);
-            state.trainer.xp += (xpNeeded - 1);
+        if (xpNeeded > 0) {
+            p.xp += xpNeeded; // Add exactly enough XP to level up
+            state.trainer.xp += xpNeeded;
+            p.level = mathEngine.getLevelFromXP(p.xp);
         }
         updateUI();
     }
