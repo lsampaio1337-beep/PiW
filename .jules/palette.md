@@ -1,0 +1,3 @@
+## 2024-05-23 - Semantic Close Buttons
+**Learning:** Found a specific app pattern where `<span>` tags were consistently used as interactive "X" close buttons in floating windows (both static HTML and dynamic JS) without proper ARIA labels or keyboard support. Replacing them required careful inline styling to ensure semantic HTML didn't break the CSS structure.
+**Action:** When adding or auditing window close buttons, use a proper `<button aria-label="Close">X</button>` tag. Apply inline styles `background: transparent; border: none; padding: 0; font: inherit;` so the structural semantic change doesn't break existing visual alignment and layout.
