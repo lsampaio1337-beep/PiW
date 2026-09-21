@@ -402,14 +402,15 @@ window.showChallengesModal = function() {
 
     html += `</div>`;
 
-    showModal("Progress Challenges", html, "window-challenges");
+    showModal("Progress Challenges", html, "window-challenges", "1000px");
     const win = document.getElementById("window-challenges");
     if (win) {
-        // Read the actual unscaled width, defaulting to 800 if not yet set
-        let winWidth = win._originalWidth || parseInt(win.style.width) || win.offsetWidth || 800;
+        // Read the actual unscaled width, defaulting to 1000 if not yet set
+        let winWidth = win._originalWidth || parseInt(win.style.width) || win.offsetWidth || 1000;
 
-        // The user wants max window height is 1.5x width.
-        win.style.maxHeight = (winWidth * 1.5) + 'px';
+        // We handle the max height natively in windowManager now, so remove the strict CSS limit
+        win.style.maxHeight = '';
+        win.dataset.maxHeightRatio = '1.5';
 
         // Ensure the content container scrolls if it overflows
         const contentContainer = win.querySelector('.window-content-container');

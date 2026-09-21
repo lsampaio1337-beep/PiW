@@ -252,13 +252,20 @@ export class WindowManager {
                 const newScaledContentHeight = winElement._originalHeight * currentScale;
                 let newHeight = headerH + newScaledContentHeight + verticalPadding;
 
-                // Respect maxHeight if it's set
+                // Respect maxHeight if it's set via style or dataset
+                let maxHeight = 0;
                 const maxHeightStr = winElement.style.maxHeight;
                 if (maxHeightStr && maxHeightStr.endsWith('px')) {
-                    const maxHeight = parseInt(maxHeightStr, 10);
-                    if (maxHeight > 0 && newHeight > maxHeight) {
-                        newHeight = maxHeight;
+                    maxHeight = parseInt(maxHeightStr, 10);
+                } else if (winElement.dataset.maxHeightRatio) {
+                    const ratio = parseFloat(winElement.dataset.maxHeightRatio);
+                    if (!isNaN(ratio) && ratio > 0) {
+                        maxHeight = winElement._originalWidth * ratio;
                     }
+                }
+
+                if (maxHeight > 0 && newHeight > maxHeight) {
+                    newHeight = maxHeight;
                 }
 
                 // Lock dimensions
@@ -367,6 +374,11 @@ export class WindowManager {
 
                 winElement.style.width = newWidth + 'px';
                 winElement.style.height = newHeight + 'px';
+
+                if (winElement.dataset.maxHeightRatio) {
+                     delete winElement.dataset.maxHeightRatio;
+                }
+
                 scalerElement.style.transform = `scale(${scale})`;
             }
         });
@@ -586,12 +598,19 @@ export class WindowManager {
             }
 
             // Respect maxHeight if it's set on shrink logic too
+            let maxHeight = 0;
             const maxHeightStr = winElement.style.maxHeight;
             if (maxHeightStr && maxHeightStr.endsWith('px')) {
-                const maxHeight = parseInt(maxHeightStr, 10);
-                if (maxHeight > 0 && targetHeight > maxHeight) {
-                    targetHeight = maxHeight;
+                maxHeight = parseInt(maxHeightStr, 10);
+            } else if (winElement.dataset.maxHeightRatio) {
+                const ratio = parseFloat(winElement.dataset.maxHeightRatio);
+                if (!isNaN(ratio) && ratio > 0) {
+                    maxHeight = winElement._originalWidth * ratio;
                 }
+            }
+
+            if (maxHeight > 0 && targetHeight > maxHeight) {
+                targetHeight = maxHeight;
             }
 
             let newContentHeight = targetHeight - headerH - verticalPadding;
