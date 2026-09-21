@@ -9,7 +9,7 @@
   <!-- Top Bar (Icons) -->
 
   <div id="top-bar-window" class="floating-window" style="display: none; width: 1100px; height: auto; overflow: visible;">
-    <div id="top-bar-header" class="window-header" style="position: relative;">Main Control<span class="btn-exit-game" style="position: absolute; right: 10px; cursor: pointer; color: white; font-weight: bold;">X</span></div>
+    <div id="top-bar-header" class="window-header" style="position: relative;">Main Control<button class="btn-exit-game" aria-label="Close" style="position: absolute; right: 10px; cursor: pointer; color: white; font-weight: bold; background: transparent; border: none; padding: 0; font: inherit;">X</button></div>
     <div class="window-content-container">
         <div class="window-content-scaler">
     <div id="top-bar">
@@ -70,7 +70,7 @@
   <div id="splash-screen" class="transparent-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: transparent; z-index: 1000; display: flex; justify-content: center; align-items: center; pointer-events: none;">
 
     <div id="save-manager-modal" class="floating-window" style="display: none; background-color: #34495e; pointer-events: auto; border-radius: 8px; text-align: center; border: 2px solid #1abc9c; max-width: 90vw; max-height: 90vh; width: 50vw; min-width: 400px; flex-direction: column; resize: both; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
-        <div id="save-manager-header" class="window-header" style="position: relative;">Select a Game<span class="btn-exit-game" style="position: absolute; right: 10px; cursor: pointer; color: white; font-weight: bold;">X</span></div>
+        <div id="save-manager-header" class="window-header" style="position: relative;">Select a Game<button class="btn-exit-game" aria-label="Close" style="position: absolute; right: 10px; cursor: pointer; color: white; font-weight: bold; background: transparent; border: none; padding: 0; font: inherit;">X</button></div>
         <h2 id="save-action-title" style="margin: 0; padding-top: 10px; font-size: 1.2rem; display: none;"></h2>
         <div class="content-panel" style="display: flex; flex-direction: column; gap: 2vh; flex-grow: 1; overflow-y: auto;">
 
@@ -105,7 +105,7 @@
     <!-- Left Column: Party & Day Care -->
 
   <div id="party-window" class="floating-window" style="display: none; width: 250px; height: auto;">
-    <div id="party-header" class="window-header" style="position: relative;">Team<span id="btn-close-party-window" style="position: absolute; right: 10px; cursor: pointer; color: white; font-weight: bold;">X</span></div>
+    <div id="party-header" class="window-header" style="position: relative;">Team<button id="btn-close-party-window" aria-label="Close" style="position: absolute; right: 10px; cursor: pointer; color: white; font-weight: bold; background: transparent; border: none; padding: 0; font: inherit;">X</button></div>
     <div class="window-content-container">
         <div class="window-content-scaler">
     <aside id="left-col">
@@ -126,7 +126,7 @@
     <!-- Center Column: Dynamic View State -->
 
   <div id="main-view-window" class="floating-window" style="display: none; width: 800px; height: 600px;">
-    <div id="main-view-header" class="window-header" style="position: relative;">Main View<span id="main-view-timer" style="position: absolute; right: 40px; display: none; color: white; font-weight: bold; font-size: 16px;">00:00:00</span><span id="btn-close-main-view-window" style="position: absolute; right: 10px; cursor: pointer; color: white; font-weight: bold;">X</span></div>
+    <div id="main-view-header" class="window-header" style="position: relative;">Main View<span id="main-view-timer" style="position: absolute; right: 40px; display: none; color: white; font-weight: bold; font-size: 16px;">00:00:00</span><button id="btn-close-main-view-window" aria-label="Close" style="position: absolute; right: 10px; cursor: pointer; color: white; font-weight: bold; background: transparent; border: none; padding: 0; font: inherit;">X</button></div>
     <div class="window-content-container">
         <div class="window-content-scaler">
     <main id="center-col" style="position: relative;">
@@ -136,7 +136,7 @@
           <div id="main-view-inner-modal" class="floating-window" style="width: 90%; height: auto; max-height: 90%; display: flex; flex-direction: column; overflow: hidden; pointer-events: auto;">
               <div class="window-header" style="position: relative; cursor: default;">
                   <span id="main-view-inner-modal-title">Modal</span>
-                  <span id="btn-close-inner-modal" style="position: absolute; right: 10px; cursor: pointer; color: white; font-weight: bold;">X</span>
+                  <button id="btn-close-inner-modal" aria-label="Close" style="position: absolute; right: 10px; cursor: pointer; color: white; font-weight: bold; background: transparent; border: none; padding: 0; font: inherit;">X</button>
               </div>
               <div class="window-content-container" style="flex: 1; display: flex;">
                   <div id="main-view-inner-modal-content" class="content-panel" style="width: 100%; height: auto; overflow-y: auto;">
