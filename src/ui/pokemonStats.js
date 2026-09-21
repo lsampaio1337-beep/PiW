@@ -196,7 +196,9 @@ export function evolvePokemon(location, idx, toId) {
         // Deduct stones
         for (const type of p.types) {
             const stoneName = type + " Stone";
-            state.backpack.stones[stoneName] -= req.stonesReq;
+            if (!state.settings.infiniteItems) {
+                state.backpack.stones[stoneName] -= req.stonesReq;
+            }
         }
     }
 
