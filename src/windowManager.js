@@ -260,7 +260,7 @@ export class WindowManager {
                 } else if (winElement.dataset.maxHeightRatio) {
                     const ratio = parseFloat(winElement.dataset.maxHeightRatio);
                     if (!isNaN(ratio) && ratio > 0) {
-                        maxHeight = winElement._originalWidth * ratio;
+                        maxHeight = winElement._originalWidth * ratio * currentScale;
                     }
                 }
 
@@ -605,7 +605,10 @@ export class WindowManager {
             } else if (winElement.dataset.maxHeightRatio) {
                 const ratio = parseFloat(winElement.dataset.maxHeightRatio);
                 if (!isNaN(ratio) && ratio > 0) {
-                    maxHeight = winElement._originalWidth * ratio;
+                    let currentW = winElement.offsetWidth;
+                    if (!currentW || currentW <= 0) currentW = parseInt(winElement.style.width) || 800;
+                    let currentScale = (currentW - horizontalPadding) / winElement._originalWidth;
+                    maxHeight = winElement._originalWidth * ratio * currentScale;
                 }
             }
 
