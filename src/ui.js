@@ -1804,13 +1804,12 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
         let highestLevel = 0;
         let highestQuality = 0;
         let highestSumIV = 0;
-        let allMons = [];
-        if (state.party) allMons = allMons.concat(state.party);
-        if (state.storage) allMons = allMons.concat(state.storage);
-        if (state.safe) allMons = allMons.concat(state.safe);
-        if (state.dayCareRef) allMons = allMons.concat(state.dayCareRef);
+        let backpackMons = [];
+        if (state.party) backpackMons = backpackMons.concat(state.party);
+        if (state.storage) backpackMons = backpackMons.concat(state.storage);
+        if (state.safe) backpackMons = backpackMons.concat(state.safe);
 
-        allMons.forEach(p => {
+        backpackMons.forEach(p => {
             if (!p) return;
             if (p.level > highestLevel) highestLevel = p.level;
             if (p.quality > highestQuality) highestQuality = p.quality;
@@ -1820,20 +1819,55 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
             }
         });
 
+        const whiteCandiesClaimed = state.stats.whiteCandies || 0;
+
+        let challengesCompleted = state.stats.completedChallengeIds ? state.stats.completedChallengeIds.length : 0;
+        let maxChallenges = state.config.unlocks ? state.config.unlocks.length : 45;
+
+        let assignmentsCompleted = 0;
+        assignmentsCompleted += (state.stats.qTaskTier || 0);
+        assignmentsCompleted += (state.stats.cTaskTier || 0);
+        assignmentsCompleted += (state.stats.levelTaskTier || 0);
+        assignmentsCompleted += (state.stats.ivTaskTier || 0);
+        assignmentsCompleted += (state.stats.shinySeenTaskTier || 0);
+        assignmentsCompleted += (state.stats.shinyCaughtTaskTier || 0);
+        let maxAssignments = (oakTasks.q ? oakTasks.q.length : 0) +
+                             (oakTasks.c ? oakTasks.c.length : 0) +
+                             (oakTasks.level ? oakTasks.level.length : 0) +
+                             (oakTasks.iv ? oakTasks.iv.length : 0) +
+                             (oakTasks.shinySeen ? oakTasks.shinySeen.length : 0) +
+                             (oakTasks.shinyCaught ? oakTasks.shinyCaught.length : 0);
+
+        let uniqueShinySpeciesCaught = 0;
+        if (state.stats.caughtShiniesSpecies) {
+            uniqueShinySpeciesCaught = Object.keys(state.stats.caughtShiniesSpecies).length;
+        }
+
         showModal("Trainer", `
             <div style="text-align: left; display: inline-block;">
                 <p><b>Time played:</b> ${playtimeStr}</p>
+                <p><b>Money:</b> $${state.trainer.money.toLocaleString()}</p>
+                <br>
+                <p><b>Battles Won:</b> ${(state.stats.battlesWon || 0).toLocaleString()}</p>
+                <p><b>Faints:</b> ${(state.stats.faints || 0).toLocaleString()}</p>
+                <p><b>Total Pokémon Captured:</b> ${(state.stats.caught || 0).toLocaleString()}</p>
                 <p><b>Species Caught:</b> ${uniqueSpeciesCaught} / 150</p>
-                <p><b>Total Pokémon Captured:</b> ${state.stats.caught}</p>
-                <p><b>Battles Won:</b> ${state.stats.battlesWon}</p>
-                <p><b>Faints:</b> ${state.stats.faints || 0}</p>
-                <p><b>Shinies Seen:</b> ${state.stats.shiniesSeen || 0}</p>
-                <p><b>Shinies Caught:</b> ${state.stats.shiniesCaught || 0}</p>
-                <p><b>Jigglypuff Grains Used:</b> ${state.stats.jigglypuffGrainsUsed || 0}</p>
-                <p><b>Highest Level:</b> ${highestLevel}</p>
-                <p><b>Highest Quality:</b> ${highestQuality}</p>
-                <p><b>Highest IV Sum:</b> ${highestSumIV}</p>
-                <p><b>Money:</b> $${state.trainer.money}</p>
+                <p><b>Shiny Species Caught:</b> ${uniqueShinySpeciesCaught} / 150</p>
+                <p><b>Shinies Seen:</b> ${(state.stats.shiniesSeen || 0).toLocaleString()}</p>
+                <p><b>Shinies Caught:</b> ${(state.stats.shiniesCaught || 0).toLocaleString()}</p>
+                <br>
+                <p><b>Jigglypuff Grains Used:</b> ${(state.stats.jigglypuffGrainsUsed || 0).toLocaleString()}</p>
+                <p><b>White Candies Claimed:</b> ${(whiteCandiesClaimed || 0).toLocaleString()}</p>
+                <p><b>Daily Rewards Collected:</b> ${(state.stats.dailyRewards ? state.stats.dailyRewards.daysClaimed : 0).toLocaleString()}</p>
+                <p><b>Progress Challenge Completed:</b> ${challengesCompleted}/${maxChallenges}</p>
+                <p><b>Assignments Completed:</b> ${assignmentsCompleted}/${maxAssignments}</p>
+                <br>
+                <p><b>Highest Level on Backpack:</b> ${highestLevel}</p>
+                <p><b>Highest Quality on Backpack:</b> ${highestQuality}</p>
+                <p><b>Highest IV Sum on Backpack:</b> ${highestSumIV}</p>
+                <p><b>Highest Level Captured:</b> ${state.stats.highestLevelCaptured || 0}</p>
+                <p><b>Highest Quality Captured:</b> ${state.stats.highestQualityCaptured || 0}</p>
+                <p><b>Highest IV Sum Captured:</b> ${state.stats.highestSumIVCaptured || 0}</p>
             </div>
             <h3 style="margin-top: 10px; margin-bottom: 5px;">Badges:</h3>
             ${badgesHtml}
