@@ -82,20 +82,25 @@ export function exportLog() {
 
 export function showCheatControl() {
     const isInfiniteItems = state.settings.infiniteItems ? 'ON' : 'OFF';
-    const btnStyle = 'padding: 5px 10px; font-size: 14px; margin-right: 5px; margin-bottom: 5px; cursor: pointer;';
+    const btnStyle = 'padding: 5px 10px; font-size: 14px; margin-bottom: 5px; cursor: pointer; width: 100%; border: none; border-radius: 4px;';
 
+    // Use an alternating layout for the buttons to make it clear what they do
     const html = `
-        <div style="display: flex; flex-wrap: wrap; max-width: 400px;">
-            <button style="${btnStyle}" onclick="window.cheatMoney()">Money ($1,000,000,000)</button>
-            <button style="${btnStyle}" onclick="window.cheatNoMoney()">NoMoney ($0)</button>
-            <button style="${btnStyle}" onclick="window.cheatXP()">XP (+1 Level Slot 1)</button>
-            <button style="${btnStyle}" onclick="window.cheatInfiniteItems()" id="btn-cheat-infinite-items">Infinite items (${isInfiniteItems})</button>
-            <button style="${btnStyle}" onclick="window.cheatUpgrades()">Upgrades (Max All)</button>
-            <button style="${btnStyle}" onclick="window.cheatMap()">Map (Unlock All)</button>
-            <button style="${btnStyle}" onclick="window.cheatPokedex(false)">Pokedex</button>
-            <button style="${btnStyle}" onclick="window.cheatPokedex(true)">PokedexShiny</button>
-            <button style="${btnStyle}" onclick="window.cheatJigglypuff()">Jigglypuff Dust (+10)</button>
-            <button style="${btnStyle}" onclick="window.cheatBonusCandy()">Bonus Candy (+10)</button>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 400px; box-sizing: border-box; padding: 10px;">
+            <div><button style="${btnStyle} background-color: #2ecc71; color: white;" onclick="window.cheatMoney()">Money ($1B)</button></div>
+            <div><button style="${btnStyle} background-color: #e74c3c; color: white;" onclick="window.cheatNoMoney()">NoMoney ($0)</button></div>
+
+            <div><button style="${btnStyle} background-color: #f1c40f; color: black;" onclick="window.cheatXP()">XP (Max Bar Slot 1)</button></div>
+            <div><button style="${btnStyle} background-color: #3498db; color: white;" onclick="window.cheatInfiniteItems()" id="btn-cheat-infinite-items">Infinite items (${isInfiniteItems})</button></div>
+
+            <div><button style="${btnStyle} background-color: #9b59b6; color: white;" onclick="window.cheatUpgrades()">Upgrades (Max All)</button></div>
+            <div><button style="${btnStyle} background-color: #e67e22; color: white;" onclick="window.cheatMap()">Map (Unlock All)</button></div>
+
+            <div><button style="${btnStyle} background-color: #1abc9c; color: white;" onclick="window.cheatPokedex(false)">Pokedex (Normal)</button></div>
+            <div><button style="${btnStyle} background-color: #f39c12; color: white;" onclick="window.cheatPokedex(true)">Pokedex (Shiny)</button></div>
+
+            <div><button style="${btnStyle} background-color: #ff9ff3; color: black;" onclick="window.cheatJigglypuff()">Jigglypuff Dust (+10)</button></div>
+            <div><button style="${btnStyle} background-color: #ffffff; color: black; border: 1px solid #bdc3c7;" onclick="window.cheatBonusCandy()">Bonus Candy (+10)</button></div>
         </div>
     `;
 
@@ -127,9 +132,9 @@ window.cheatXP = function() {
         const nextLevelXp = mathEngine.calculateTotalXP(p.level + 1);
         const currentXp = p.xp;
         const xpNeeded = nextLevelXp - currentXp;
-        if (xpNeeded > 0) {
-            p.xp += xpNeeded;
-            state.trainer.xp += xpNeeded;
+        if (xpNeeded > 1) { // Leave 1 XP short of actually leveling up
+            p.xp += (xpNeeded - 1);
+            state.trainer.xp += (xpNeeded - 1);
         }
         updateUI();
     }
@@ -144,9 +149,32 @@ window.cheatInfiniteItems = function() {
 };
 
 window.cheatUpgrades = function() {
-    state.stats.upgrades.ballsTier = state.config.balance.expansions.ballPocket.length - 1;
-    state.stats.upgrades.potionsTier = state.config.balance.expansions.potionSatchel.length - 1;
-    state.stats.upgrades.boxTier = state.config.balance.expansions.pokemonBox.length - 1;
+    // Max out existing known upgrades
+    if (state.config.balance.expansions) {
+        if (state.config.balance.expansions.ballPocket) {
+            state.stats.upgrades.ballsTier = state.config.balance.expansions.ballPocket.length - 1;
+        }
+        if (state.config.balance.expansions.potionSatchel) {
+            state.stats.upgrades.potionsTier = state.config.balance.expansions.potionSatchel.length - 1;
+        }
+        if (state.config.balance.expansions.pokemonBox) {
+            state.stats.upgrades.boxTier = state.config.balance.expansions.pokemonBox.length - 1;
+        }
+
+        // Buy all other expansions that might exist in the config
+        for (let key in state.config.balance.expansions) {
+            if (key !== 'ballPocket' && key !== 'potionSatchel' && key !== 'pokemonBox') {
+                 // For any other dynamic expansions that were added
+                 let tierKey = key.replace(/([a-z])([A-Z])/g, '$1_$2').split('_')[0] + 'Tier';
+                 if (state.stats.upgrades[tierKey] !== undefined) {
+                     state.stats.upgrades[tierKey] = state.config.balance.expansions[key].length - 1;
+                 } else {
+                     // Try directly or fallback
+                     state.stats.upgrades[key + 'Tier'] = state.config.balance.expansions[key].length - 1;
+                 }
+            }
+        }
+    }
     updateUI();
 };
 
@@ -160,7 +188,7 @@ window.cheatMap = function() {
 };
 
 window.cheatPokedex = function(isShiny) {
-    for (let i = 1; i <= 151; i++) {
+    for (let i = 1; i <= 150; i++) {
         const pData = state.config.pokemonData.find(p => p.id === i);
         if (pData) {
             const level = isShiny ? 100 : 1;
