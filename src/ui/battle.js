@@ -44,56 +44,8 @@ function applyWalkAnimations(pokemon, isEnemy) {
     }
 }
 
-function updateActiveItemsUI() {
-    const potionImg = document.getElementById('battle-active-potion-img');
-    const potionCount = document.getElementById('battle-active-potion-count');
-    const potionCard = document.getElementById('battle-active-potion-card');
-
-    if (potionImg && potionCount && potionCard) {
-        if (state.settings.activePotionTier >= 0) {
-            const potionName = state.config.balance.items.potions[state.settings.activePotionTier].name;
-            potionImg.src = `./Assets/Items/Potions/${potionName}.png`;
-            potionCount.textContent = formatActiveItemQuantity(state.backpack.potions[potionName] || 0);
-            potionImg.style.display = 'block';
-            potionCount.style.display = 'block';
-        } else {
-            potionImg.src = "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
-            potionCount.textContent = '';
-            potionImg.style.display = 'none';
-            potionCount.style.display = 'none';
-        }
-    }
-
-    const ballImg = document.getElementById('battle-active-ball-img');
-    const ballCount = document.getElementById('battle-active-ball-count');
-    const ballCard = document.getElementById('battle-active-ball-card');
-
-    if (ballImg && ballCount && ballCard) {
-        if (state.settings.activeBallTier >= 0) {
-            const ballName = state.config.balance.items.pokeballs[state.settings.activeBallTier].name;
-            ballImg.src = `./Assets/Items/Balls/${ballName}.png`;
-            ballCount.textContent = formatActiveItemQuantity(state.backpack.pokeballs[ballName] || 0);
-            ballImg.style.display = 'block';
-            ballCount.style.display = 'block';
-        } else {
-            ballImg.src = "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
-            ballCount.textContent = '';
-            ballImg.style.display = 'none';
-            ballCount.style.display = 'none';
-        }
-    }
-}
-
-function formatActiveItemQuantity(q) {
-    if (q >= 1000000) return Math.floor(q / 1000000) + 'm';
-    if (q >= 1000) return Math.floor(q / 1000) + 'k';
-    return q;
-}
-
 
 export function updateBattleArena() {
-    updateActiveItemsUI();
-
     const battleSystem = globals.battleSystem;
     const inGym = battleSystem && battleSystem.gymState && battleSystem.gymState.isActive;
     const inGymCombat = inGym && battleSystem.gymState.inCombat;
@@ -741,24 +693,14 @@ export function playCombatAnimations(targetSide, moveType, duration) {
 
     const atkRect = atkImg.getBoundingClientRect();
     const defRect = defImg.getBoundingClientRect();
-    const container = document.getElementById('battle-sprites-container') || document.body;
-
-    let containerRect = container.getBoundingClientRect();
-    let scaleX = 1;
-    let scaleY = 1;
-
-    if (container.offsetWidth) {
-        scaleX = containerRect.width / container.offsetWidth;
-        scaleY = containerRect.height / container.offsetHeight;
-    }
 
     // Instead of vh, use the scale of the images to determine projectile size roughly
-    const projHeight = (atkRect.height / scaleY) * 0.05;
+    const projHeight = atkRect.height * 0.05;
     const projWidth = projHeight * 2;
 
     // Create projectile
     const proj = document.createElement('div');
-    proj.style.position = container === document.body ? 'fixed' : 'absolute';
+    proj.style.position = 'fixed';
     proj.style.width = projWidth + 'px';
     proj.style.height = projHeight + 'px';
     proj.style.backgroundColor = color;
@@ -766,24 +708,19 @@ export function playCombatAnimations(targetSide, moveType, duration) {
     proj.style.boxShadow = `0 0 ${projHeight}px ${projHeight/2}px ${color}`;
     proj.style.zIndex = '999';
     proj.style.pointerEvents = 'none';
-    proj.style.transform = 'translate(-50%, -50%)';
 
     // Start at attacker center
-    const atkCenterX = atkRect.left + atkRect.width / 2;
-    const atkCenterY = atkRect.top + atkRect.height / 2;
-    const startX = container === document.body ? atkCenterX : (atkCenterX - containerRect.left) / scaleX;
-    const startY = container === document.body ? atkCenterY : (atkCenterY - containerRect.top) / scaleY;
+    const startX = atkRect.left + atkRect.width / 2;
+    const startY = atkRect.top + atkRect.height / 2;
 
     // End at defender center
-    const defCenterX = defRect.left + defRect.width / 2;
-    const defCenterY = defRect.top + defRect.height / 2;
-    const endX = container === document.body ? defCenterX : (defCenterX - containerRect.left) / scaleX;
-    const endY = container === document.body ? defCenterY : (defCenterY - containerRect.top) / scaleY;
+    const endX = defRect.left + defRect.width / 2;
+    const endY = defRect.top + defRect.height / 2;
 
     proj.style.left = startX + 'px';
     proj.style.top = startY + 'px';
 
-    container.appendChild(proj);
+    document.body.appendChild(proj);
 
     // Animate projectile
     proj.style.transition = `all ${duration * 0.8}ms linear`;
@@ -799,7 +736,7 @@ export function playCombatAnimations(targetSide, moveType, duration) {
 
         // Splash Effect
         const splash = document.createElement('div');
-        splash.style.position = container === document.body ? 'fixed' : 'absolute';
+        splash.style.position = 'fixed';
 
         // Center the 0x0 div on the target
         splash.style.left = endX + 'px';
@@ -811,18 +748,19 @@ export function playCombatAnimations(targetSide, moveType, duration) {
         splash.style.boxShadow = `0 0 ${projHeight}px ${projHeight/2}px ${color}`;
         splash.style.zIndex = '999';
         splash.style.pointerEvents = 'none';
-        splash.style.transform = 'translate(-50%, -50%)';
 
         // Phase 1: Grow to 25% of sprite height
         splash.style.transition = `all ${duration * 0.15}ms linear`;
 
-        container.appendChild(splash);
+        document.body.appendChild(splash);
 
         // Trigger reflow
         splash.getBoundingClientRect();
 
         // Expand to 25% height of sprite from the center
-        const sSize1 = (defRect.height / scaleY) * 0.25;
+        const sSize1 = defRect.height * 0.25;
+        splash.style.left = (endX - sSize1 / 2) + 'px';
+        splash.style.top = (endY - sSize1 / 2) + 'px';
         splash.style.width = sSize1 + 'px';
         splash.style.height = sSize1 + 'px';
         splash.style.opacity = '1';
@@ -830,7 +768,9 @@ export function playCombatAnimations(targetSide, moveType, duration) {
         // Phase 2: Grow to 50% height and fade out
         setTimeout(() => {
             splash.style.transition = `all ${duration * 0.15}ms linear`;
-            const sSize2 = (defRect.height / scaleY) * 0.5;
+            const sSize2 = defRect.height * 0.5;
+            splash.style.left = (endX - sSize2 / 2) + 'px';
+            splash.style.top = (endY - sSize2 / 2) + 'px';
             splash.style.width = sSize2 + 'px';
             splash.style.height = sSize2 + 'px';
             splash.style.opacity = '0';

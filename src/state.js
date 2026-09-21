@@ -57,11 +57,7 @@ export const state = {
         upgrades: {
             ballsTier: 0,
             potionsTier: 0,
-            boxTier: 0,
-            glassTier: 0,
-            smartwatchTier: 0,
-            speedTier: 0,
-            lootTier: 0
+            boxTier: 0
         }
     },
     settings: {
