@@ -21,13 +21,13 @@ function createWindow() {
         }
     });
 
-    // Maximize the window to cover the screen
-    win.maximize();
-
     win.loadFile('index.html');
 
     win.once('ready-to-show', () => {
         win.show();
+        win.maximize();
+        win.focus();
+
         // Create a signal file to let the launcher know the game is ready
         if (process.platform === 'win32') {
             fs.writeFileSync('game_ready.txt', 'ready');
