@@ -745,6 +745,9 @@ class BattleSystem {
                         }
 
                         let sumIV = caughtPokemon.ivs.hp + caughtPokemon.ivs.atk + caughtPokemon.ivs.def + caughtPokemon.ivs.spa + caughtPokemon.ivs.spd + caughtPokemon.ivs.spe;
+                        if (caughtPokemon.level > (this.state.stats.highestLevelCaptured || 0)) this.state.stats.highestLevelCaptured = caughtPokemon.level;
+                        if (caughtPokemon.quality > (this.state.stats.highestQualityCaptured || 0)) this.state.stats.highestQualityCaptured = caughtPokemon.quality;
+                        if (sumIV > (this.state.stats.highestSumIVCaptured || 0)) this.state.stats.highestSumIVCaptured = sumIV;
                         if (sumIV < 300) this.state.stats.caughtIVUnder300 = (this.state.stats.caughtIVUnder300 || 0) + 1;
                         if (sumIV < 350) this.state.stats.caughtIVUnder350 = (this.state.stats.caughtIVUnder350 || 0) + 1;
                         if (sumIV < 400) this.state.stats.caughtIVUnder400 = (this.state.stats.caughtIVUnder400 || 0) + 1;
@@ -1392,6 +1395,10 @@ class BattleSystem {
                         caughtPokemon.xp = mathEngine.calculateTotalXP(caughtPokemon.level);
                         this.state.storage.push(caughtPokemon);
                         this.state.stats.caught++;
+                        if (caughtPokemon.level > (this.state.stats.highestLevelCaptured || 0)) this.state.stats.highestLevelCaptured = caughtPokemon.level;
+                        if (caughtPokemon.quality > (this.state.stats.highestQualityCaptured || 0)) this.state.stats.highestQualityCaptured = caughtPokemon.quality;
+                        let sumIV_ZzZ = caughtPokemon.ivs.hp + caughtPokemon.ivs.atk + caughtPokemon.ivs.def + caughtPokemon.ivs.spa + caughtPokemon.ivs.spd + caughtPokemon.ivs.spe;
+                        if (sumIV_ZzZ > (this.state.stats.highestSumIVCaptured || 0)) this.state.stats.highestSumIVCaptured = sumIV_ZzZ;
                         if (this.activeEncounter.qualityName === "Shiny") this.state.stats.shiniesCaught = (this.state.stats.shiniesCaught || 0) + 1;
                         if (this.activeEncounter.qualityName === "Shiny") {
                             if (!this.state.stats.caughtShiniesSpecies) this.state.stats.caughtShiniesSpecies = {};
