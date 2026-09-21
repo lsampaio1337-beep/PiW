@@ -952,6 +952,11 @@ export function switchView(viewName) {
     state.currentView = viewName;
     document.querySelectorAll('.game-view').forEach(el => el.style.display = 'none');
 
+    const overlay = document.getElementById('main-view-inner-modal-overlay');
+    if (overlay) {
+        overlay.style.display = 'none';
+    }
+
     if (viewName === 'BATTLE_ARENA') {
         if (window.windowManager) window.windowManager.setWindowProportions('main-view-window', 5.75);
     } else {
