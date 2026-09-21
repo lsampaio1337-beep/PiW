@@ -513,13 +513,13 @@ input[type="number"] {
     position: relative;
     overflow: hidden;
     width: 100%;
-    padding: 0 !important; /* Outer container flush, inner scrolling content will pad 5% */
+    padding: 0 !important; /* Outer container flush, inner scrolling content will pad 2% */
     box-sizing: border-box;
 }
 
-/* Default 5% padding for all scrollable window contents. Remove this for specific windows if unwanted */
+/* Default 2% padding for all scrollable window contents. Remove this for specific windows if unwanted */
 .content-panel {
-    padding: 5%;
+    padding: 2%;
     box-sizing: border-box;
 }
 
@@ -528,13 +528,19 @@ input[type="number"] {
 }
 
 #window-backpack .content-panel {
-    padding: 5%;
+    padding: 2%;
     display: flex;
     flex-direction: column;
 }
 
 #window-bonus-candy .window-content-container {
-    padding: 5% !important;
+    padding: 2% !important;
+}
+
+#main-view-window .content-panel,
+#top-bar-window .content-panel,
+#party-window .content-panel {
+    padding: 0 !important;
 }
 
 .window-content-scaler {
