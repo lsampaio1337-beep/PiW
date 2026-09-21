@@ -35,7 +35,7 @@ window.claimPendingGift = function(index) {
 };
 
 export function showGiftModal() {
-    let html = `<div style="text-align: center; padding: 5%; box-sizing: border-box;">`;
+    let html = `<div style="text-align: center; padding: 2%; box-sizing: border-box;">`;
 
     // Check pending gifts
     const pending = state.stats.pendingGifts || [];

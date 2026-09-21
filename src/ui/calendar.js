@@ -107,7 +107,7 @@ export function showCalendar() {
 
     const rewardList = getRewardListForWeek(weekNumber);
 
-    let html = `<div style="text-align: center; color: white; padding: 5%; box-sizing: border-box;">`;
+    let html = `<div style="text-align: center; color: white; padding: 2%; box-sizing: border-box;">`;
     html += `<h2 style="margin-top: 0;">Daily Rewards - Week ${weekNumber}</h2>`;
     html += `<div style="display: flex; gap: 1%; justify-content: center; padding-bottom: 10px; width: 100%;">`;
 

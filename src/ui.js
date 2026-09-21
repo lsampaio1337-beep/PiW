@@ -491,7 +491,7 @@ function showCatchRateModal(showShiny = false) {
         rowData.sort((a, b) => a.id - b.id);
     }
 
-    let html = `<div style="padding: 5%; box-sizing: border-box;">
+    let html = `<div style="padding: 2%; box-sizing: border-box;">
     <div style="text-align: center; margin-bottom: 15px;">
         <button id="btn-catch-rate-shiny-toggle" style="padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer; background: ${showShiny ? '#fbbf24' : '#6b7280'}; color: white; border: none; border-radius: 5px;">
             ${showShiny ? 'Showing Shiny Attempts (Click to show Normal)' : 'Showing Normal Attempts (Click to show Shiny)'}

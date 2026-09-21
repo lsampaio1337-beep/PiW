@@ -51,8 +51,8 @@ export function showPokedex() {
     if (!state.config.pokemonData) {
         html += "<p>Loading Pokedex data...</p>";
     } else {
-        // Iterate up to 150
-        for(let i = 1; i <= 150; i++) {
+        // Iterate up to 151
+        for(let i = 1; i <= 151; i++) {
             const pData = state.config.pokemonData.find(p => p.id === i);
             if (!pData) continue;
 
