@@ -262,7 +262,7 @@ export function activateCheat() {
     }
 
     // Generate Shiny Mewtwo (ID 150)
-    const mewtwoData = state.config.pokemonData.find(p => p.id === 150);
+    const mewtwoData = state.config.pokemonData[(150) - 1];
     if (mewtwoData) {
         const level = 100;
         const qName = "Shiny";

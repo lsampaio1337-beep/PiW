@@ -270,7 +270,7 @@ class BattleSystem {
         const pokemonDef = trainer.team[this.gymState.currentPokemonIndex];
         if (!pokemonDef) return; // Should have been handled in defeat
 
-        const pokemonBase = this.state.config.pokemonData.find(p => p.id === pokemonDef.id);
+        const pokemonBase = this.state.config.pokemonData[(pokemonDef.id) - 1];
         const level = pokemonDef.level;
 
         // Gym leaders and trainers have fixed quality (e.g. Regular or Uncommon)
@@ -355,7 +355,7 @@ class BattleSystem {
 
         if (this.state.nextForcedEncounter) {
             const forced = this.state.nextForcedEncounter;
-            pokemonBase = this.state.config.pokemonData.find(p => p.id === forced.id) || this.state.config.pokemonData[0];
+            pokemonBase = this.state.config.pokemonData[(forced.id) - 1] || this.state.config.pokemonData[0];
             level = forced.level;
 
             const qName = forced.qValue >= 2.0 ? "Shiny" : "Custom";
@@ -401,7 +401,7 @@ class BattleSystem {
                 }
             }
 
-            pokemonBase = this.state.config.pokemonData.find(p => p.id === selectedSpawn.pokemonId);
+            pokemonBase = this.state.config.pokemonData[(selectedSpawn.pokemonId) - 1];
             level = Math.floor(Math.random() * (selectedSpawn.maxLevel - selectedSpawn.minLevel + 1)) + selectedSpawn.minLevel;
 
             q = mathEngine.generateQuality(this.state.stats, this.state.casinoDoubleShiny);
@@ -1015,7 +1015,7 @@ class BattleSystem {
         if (newLvl > pokemon.level) {
             pokemon.level = newLvl;
             // re-calc stats
-            const pBase = this.state.config.pokemonData.find(p => p.id === pokemon.id);
+            const pBase = this.state.config.pokemonData[(pokemon.id) - 1];
             if (pBase) {
                 pokemon.maxHp = mathEngine.calculateHP(pBase.hp, pokemon.ivs.hp, pokemon.level, pokemon.quality);
                 pokemon.currentStats.atk = mathEngine.calculateStat(pBase.atk, pokemon.ivs.atk, pokemon.level, pokemon.quality);
@@ -1049,7 +1049,7 @@ class BattleSystem {
                 fainted.id = 132;
                 fainted.name = 'Ditto';
 
-                const newBase = this.state.config.pokemonData.find(pd => pd.id === 132);
+                const newBase = this.state.config.pokemonData[(132) - 1];
                 if (newBase) {
                     fainted.types = newBase.types;
                     fainted.bst = newBase.hp + newBase.atk + newBase.def + newBase.spa + newBase.spd + newBase.spe;
@@ -1261,7 +1261,7 @@ class BattleSystem {
                 continue;
             }
 
-            pokemonBase = this.state.config.pokemonData.find(p => p.id === selectedSpawn.pokemonId);
+            pokemonBase = this.state.config.pokemonData[(selectedSpawn.pokemonId) - 1];
             level = Math.floor(Math.random() * (selectedSpawn.maxLevel - selectedSpawn.minLevel + 1)) + selectedSpawn.minLevel;
 
             if (this.state.currentRoute === "Route 1") {
@@ -1495,7 +1495,7 @@ class BattleSystem {
                     fainted.id = 132;
                     fainted.name = 'Ditto';
 
-                    const newBase = this.state.config.pokemonData.find(pd => pd.id === 132);
+                    const newBase = this.state.config.pokemonData[(132) - 1];
                     if (newBase) {
                         fainted.types = newBase.types;
                         fainted.bst = newBase.hp + newBase.atk + newBase.def + newBase.spa + newBase.spd + newBase.spe;
