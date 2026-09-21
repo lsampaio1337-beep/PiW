@@ -224,6 +224,9 @@ export class WindowManager {
 
             const currentScale = (currentWidth - horizontalPadding) / winElement._originalWidth;
 
+            // Stop auto-adjusting if user has resized manually, indicated by --original-width being set or manual interaction
+            // To be safe, if we are in adjustHeightForNewContent, we only adjust height, not width.
+
             // Strip scaling temporarily
             winElement.style.width = winElement._originalWidth + 'px';
             winElement.style.height = 'auto';
@@ -247,7 +250,16 @@ export class WindowManager {
 
                 // Re-apply scale
                 const newScaledContentHeight = winElement._originalHeight * currentScale;
-                const newHeight = headerH + newScaledContentHeight + verticalPadding;
+                let newHeight = headerH + newScaledContentHeight + verticalPadding;
+
+                // Respect maxHeight if it's set
+                const maxHeightStr = winElement.style.maxHeight;
+                if (maxHeightStr && maxHeightStr.endsWith('px')) {
+                    const maxHeight = parseInt(maxHeightStr, 10);
+                    if (maxHeight > 0 && newHeight > maxHeight) {
+                        newHeight = maxHeight;
+                    }
+                }
 
                 // Lock dimensions
                 scalerElement.style.position = 'absolute';
@@ -571,6 +583,15 @@ export class WindowManager {
             let targetHeight = 720;
             if (targetHeight > this.containerHeight) {
                 targetHeight = this.containerHeight;
+            }
+
+            // Respect maxHeight if it's set on shrink logic too
+            const maxHeightStr = winElement.style.maxHeight;
+            if (maxHeightStr && maxHeightStr.endsWith('px')) {
+                const maxHeight = parseInt(maxHeightStr, 10);
+                if (maxHeight > 0 && targetHeight > maxHeight) {
+                    targetHeight = maxHeight;
+                }
             }
 
             let newContentHeight = targetHeight - headerH - verticalPadding;

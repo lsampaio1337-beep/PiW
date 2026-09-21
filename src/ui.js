@@ -305,6 +305,8 @@ window.showChallengesModal = function() {
 
     // Active Challenges Sector
     let activeChallengesCount = state.stats.activeChallenges ? state.stats.activeChallenges.length : 0;
+    let completedChallengesCount = state.stats.completedChallengeIds ? state.stats.completedChallengeIds.length : 0;
+    let totalChallengesCount = activeChallengesCount + completedChallengesCount;
 
     html += `<div style="border: 1px solid #555; padding: 10px; border-radius: 5px; background-color: rgba(0,0,0,0.5);">
                 <h3 style="margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; font-size: 16px;">${activeChallengesCount > 1 ? 'Active Challenges' : 'Active Challenge'}</h3>
@@ -415,15 +417,16 @@ window.showChallengesModal = function() {
             contentContainer.style.overflowY = 'auto';
         }
 
-        // Reset initialization so the window auto-adjusts its height fully to its new content up to max-height
-        win._sizeInitialized = false;
+        // Only auto-adjust height if the number of challenges has changed
+        if (win._lastTotalChallengesCount !== totalChallengesCount) {
+            win._sizeInitialized = false;
+            win._lastTotalChallengesCount = totalChallengesCount;
 
-        if (typeof win.adjustHeightForNewContent === 'function') {
-            win.adjustHeightForNewContent();
+            if (typeof win.adjustHeightForNewContent === 'function') {
+                win.adjustHeightForNewContent();
+            }
         }
     }
-
-    if (window.windowManager) window.windowManager.recalculateWindowSize('window-challenges');
 };
 window.dragOver = dragOver;
 window.handleDrop = handleDrop;
