@@ -32,8 +32,7 @@ export function setupMarket(vCenter) {
         <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: space-between; align-items: center; padding: 0 10%; box-sizing: border-box;">
             <button id="btn-heal-all" style="background: #3498db; color: white; border: 3px solid white; border-radius: 12px; padding: 15px 30px; font-size: 24px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.5); margin-top: -20%;">Heal</button>
             <div style="display: flex; flex-direction: column; gap: 20px; margin-top: -20%;">
-                <button id="btn-market-buy" style="background: #f1c40f; color: black; border: 3px solid white; border-radius: 12px; padding: 15px 30px; font-size: 24px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.5);">Buy</button>
-                <button id="btn-market-sell" style="background: #f1c40f; color: black; border: 3px solid white; border-radius: 12px; padding: 15px 30px; font-size: 24px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.5);">Sell</button>
+                <button id="btn-market-trade" style="background: #f1c40f; color: black; border: 3px solid white; border-radius: 12px; padding: 15px 30px; font-size: 24px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.5);">Trade</button>
             </div>
         </div>
     `;
@@ -48,12 +47,8 @@ export function setupMarket(vCenter) {
         setTimeout(() => btn.textContent = origText, 1000);
     });
 
-    document.getElementById('btn-market-buy').addEventListener('click', () => {
+    document.getElementById('btn-market-trade').addEventListener('click', () => {
         window.openPokeMarketBuy();
-    });
-
-    document.getElementById('btn-market-sell').addEventListener('click', () => {
-        if (window.openPokeMarketSell) window.openPokeMarketSell();
     });
 }
 
@@ -87,7 +82,7 @@ export function openPokeMarketBuy() {
     const title = document.getElementById('main-view-inner-modal-title');
     const content = document.getElementById('main-view-inner-modal-content');
     if (overlay && title && content) {
-        title.innerText = "Market";
+        title.innerHTML = `<span onclick="window.openPokeMarketBuy()" style="cursor: pointer; opacity: 1; text-decoration: underline;">Buy Items</span> <span style="opacity: 0.5;">|</span> <span onclick="if(window.openPokeMarketSell) window.openPokeMarketSell()" style="cursor: pointer; opacity: 0.5;">Sell Items</span>`;
         content.innerHTML = html;
         overlay.style.display = 'flex';
     } else {
@@ -205,14 +200,26 @@ export function renderPokeMarketTab(category) {
         let ballTier = state.stats.upgrades.ballsTier || 0;
         let potionTier = state.stats.upgrades.potionsTier || 0;
         let boxTier = state.stats.upgrades.boxTier || 0;
+        let glassTier = state.stats.upgrades.glassTier || 0;
+        let smartwatchTier = state.stats.upgrades.smartwatchTier || 0;
+        let speedTier = state.stats.upgrades.speedTier || 0;
+        let lootTier = state.stats.upgrades.lootTier || 0;
 
         let ballUpgrade = state.config.balance.expansions.ballPocket[ballTier];
         let potionUpgrade = state.config.balance.expansions.potionSatchel[potionTier];
         let boxUpgrade = state.config.balance.expansions.pokemonBox[boxTier];
+        let glassUpgrade = state.config.balance.expansions.glass[glassTier];
+        let smartwatchUpgrade = state.config.balance.expansions.smartwatch[smartwatchTier];
+        let speedUpgrade = state.config.balance.expansions.speed[speedTier];
+        let lootUpgrade = state.config.balance.expansions.loot[lootTier];
 
         if (ballUpgrade) items.push({ ...ballUpgrade, type: 'balls', img: './Assets/Items/Upgrades/' + ballUpgrade.name + '.png', attrLabel: '+' + ballUpgrade.increment + ' Balls' });
         if (potionUpgrade) items.push({ ...potionUpgrade, type: 'potions', img: './Assets/Items/Upgrades/' + potionUpgrade.name + '.png', attrLabel: '+' + potionUpgrade.increment + ' Potions' });
         if (boxUpgrade) items.push({ ...boxUpgrade, type: 'box', img: './Assets/Items/Upgrades/' + boxUpgrade.name + '.png', attrLabel: '+' + boxUpgrade.increment + ' Pokemon' });
+        if (glassUpgrade) items.push({ ...glassUpgrade, type: 'glass', img: './Assets/Items/Upgrades/' + glassUpgrade.name + '.png', attrLabel: 'Effect TBD' });
+        if (smartwatchUpgrade) items.push({ ...smartwatchUpgrade, type: 'smartwatch', img: './Assets/Items/Upgrades/' + smartwatchUpgrade.name + '.png', attrLabel: 'Effect TBD' });
+        if (speedUpgrade) items.push({ ...speedUpgrade, type: 'speed', img: './Assets/Items/Upgrades/' + speedUpgrade.name + '.png', attrLabel: 'Effect TBD' });
+        if (lootUpgrade) items.push({ ...lootUpgrade, type: 'loot', img: './Assets/Items/Upgrades/' + lootUpgrade.name + '.png', attrLabel: 'Effect TBD' });
 
         items = items.map(u => ({
             name: u.name,
@@ -444,7 +451,7 @@ export function openPokeMarketSell() {
     const title = document.getElementById('main-view-inner-modal-title');
     const content = document.getElementById('main-view-inner-modal-content');
     if (overlay && title && content) {
-        title.innerText = "Sell Items";
+        title.innerHTML = `<span onclick="window.openPokeMarketBuy()" style="cursor: pointer; opacity: 0.5;">Buy Items</span> <span style="opacity: 0.5;">|</span> <span onclick="if(window.openPokeMarketSell) window.openPokeMarketSell()" style="cursor: pointer; opacity: 1; text-decoration: underline;">Sell Items</span>`;
         content.innerHTML = html;
         overlay.style.display = 'flex';
     } else {
