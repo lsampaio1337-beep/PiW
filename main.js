@@ -14,18 +14,22 @@ function createWindow() {
         hasShadow: false,
         alwaysOnTop: false, // Don't keep it above other windows
         skipTaskbar: false,
+        show: false,
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false
         }
     });
 
-    // Maximize the window to cover the screen
-    win.maximize();
+    // Instead of maximizing (which can cause transparent frameless windows to become invisible on Windows),
+    // set bounds to cover the screen work area.
+    const { x, y } = screen.getPrimaryDisplay().workArea;
+    win.setBounds({ x, y, width, height });
 
     win.loadFile('index.html');
 
     win.once('ready-to-show', () => {
+        win.show();
         // Create a signal file to let the launcher know the game is ready
         if (process.platform === 'win32') {
             fs.writeFileSync('game_ready.txt', 'ready');
@@ -41,9 +45,6 @@ function createWindow() {
         }
     });
 }
-
-// Disable hardware acceleration to prevent transparency bugs on some OS
-app.disableHardwareAcceleration();
 
 app.whenReady().then(() => {
     createWindow();
