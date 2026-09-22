@@ -85,8 +85,11 @@ window.showTimeLapseResults = function(results) {
     let valShiniesSold = 0;
     if (results.caughtPokemonList) {
         for (let p of results.caughtPokemonList) {
-            let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
-            let pEv = mathEngine.calculatePP(p.bst, p.level, p.quality, sumIV);
+            let pEv = p.pp;
+            if (pEv === undefined) {
+                let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
+                pEv = mathEngine.calculatePP(p.bst, p.level, p.quality, sumIV);
+            }
             if (p.qualityName === "Shiny") {
                 valShiniesSold += pEv;
             } else {

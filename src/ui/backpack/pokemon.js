@@ -551,8 +551,11 @@ window.sellSelectedPokemon = function() {
 
     state.backpack.storage = state.backpack.storage.filter(p => {
         if (window.selectedForSale.has(p.uuid)) {
-            let val = Math.floor(calculatePP(p.bst, p.level, p.quality, p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe));
-            totalGain += val;
+            let pEv = p.pp;
+            if (pEv === undefined) {
+                pEv = Math.floor(calculatePP(p.bst, p.level, p.quality, p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe));
+            }
+            totalGain += pEv;
             numSold++;
             return false; // Remove
         }

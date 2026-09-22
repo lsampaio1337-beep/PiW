@@ -501,7 +501,10 @@ export function renderPokeMarketSellTab(category) {
         state.storage.forEach(p => {
         if (!p.uuid) p.uuid = Math.random().toString(36).substring(2, 15);
             let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
-            let pEv = calculatePP(p.bst, p.level, p.quality, sumIV);
+            let pEv = p.pp;
+            if (pEv === undefined) {
+                pEv = calculatePP(p.bst, p.level, p.quality, sumIV);
+            }
 
             let pName = p.name || p.id;
             if (typeof p.id === 'number' && state.config && state.config.pokemonData) {
@@ -790,8 +793,11 @@ function updateMarketPokemonSellCount() {
         state.storage.forEach(p => {
         if (!p.uuid) p.uuid = Math.random().toString(36).substring(2, 15);
             if (window.marketSelectedPokemonForSale.has(p.uuid)) {
-                let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
-                let pEv = calculatePP(p.bst, p.level, p.quality, sumIV);
+                let pEv = p.pp;
+                if (pEv === undefined) {
+                    let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
+                    pEv = calculatePP(p.bst, p.level, p.quality, sumIV);
+                }
                 totalGain += pEv;
             }
         });
@@ -809,8 +815,11 @@ window.marketSellSelectedPokemon = function() {
 
     state.storage = state.storage.filter(p => {
         if (window.marketSelectedPokemonForSale.has(p.uuid)) {
-            let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
-            let pEv = calculatePP(p.bst, p.level, p.quality, sumIV);
+            let pEv = p.pp;
+            if (pEv === undefined) {
+                let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
+                pEv = calculatePP(p.bst, p.level, p.quality, sumIV);
+            }
             totalGain += pEv;
             return false;
         }
