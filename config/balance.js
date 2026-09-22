@@ -37,6 +37,30 @@ const balance = {
         { "tier": 3, "name": "Large Box Upgrade", "increment": 50, "cost": 900 },
         { "tier": 4, "name": "Huge Box Upgrade", "increment": 100, "cost": 2500 },
         { "tier": 5, "name": "Ultimate Box Upgrade", "increment": 300, "cost": 6000 }
+      ],
+      "glass": [
+        { "tier": 1, "name": "Glass1", "increment": 0, "cost": 1 },
+        { "tier": 2, "name": "Glass2", "increment": 0, "cost": 1 },
+        { "tier": 3, "name": "Glass3", "increment": 0, "cost": 1 },
+        { "tier": 4, "name": "Glass4", "increment": 0, "cost": 1 },
+        { "tier": 5, "name": "Glass5", "increment": 0, "cost": 1 }
+      ],
+      "smartwatch": [
+        { "tier": 1, "name": "Smartwatch1", "increment": 0, "cost": 1 },
+        { "tier": 2, "name": "Smartwatch2", "increment": 0, "cost": 1 },
+        { "tier": 3, "name": "Smartwatch3", "increment": 0, "cost": 1 }
+      ],
+      "speed": [
+        { "tier": 1, "name": "Speed1", "increment": 0, "cost": 1 },
+        { "tier": 2, "name": "Speed2", "increment": 0, "cost": 1 },
+        { "tier": 3, "name": "Speed3", "increment": 0, "cost": 1 },
+        { "tier": 4, "name": "Speed4", "increment": 0, "cost": 1 },
+        { "tier": 5, "name": "Speed5", "increment": 0, "cost": 1 }
+      ],
+      "loot": [
+        { "tier": 1, "name": "Loot1", "increment": 0, "cost": 1 },
+        { "tier": 2, "name": "Loot2", "increment": 0, "cost": 1 },
+        { "tier": 3, "name": "Loot3", "increment": 0, "cost": 1 }
       ]
     },
     "items": {

@@ -749,6 +749,9 @@ class BattleSystem {
                         }
 
                         let sumIV = caughtPokemon.ivs.hp + caughtPokemon.ivs.atk + caughtPokemon.ivs.def + caughtPokemon.ivs.spa + caughtPokemon.ivs.spd + caughtPokemon.ivs.spe;
+                        if (caughtPokemon.level > (this.state.stats.highestLevelCaptured || 0)) this.state.stats.highestLevelCaptured = caughtPokemon.level;
+                        if (caughtPokemon.quality > (this.state.stats.highestQualityCaptured || 0)) this.state.stats.highestQualityCaptured = caughtPokemon.quality;
+                        if (sumIV > (this.state.stats.highestSumIVCaptured || 0)) this.state.stats.highestSumIVCaptured = sumIV;
                         if (sumIV < 300) this.state.stats.caughtIVUnder300 = (this.state.stats.caughtIVUnder300 || 0) + 1;
                         if (sumIV < 350) this.state.stats.caughtIVUnder350 = (this.state.stats.caughtIVUnder350 || 0) + 1;
                         if (sumIV < 400) this.state.stats.caughtIVUnder400 = (this.state.stats.caughtIVUnder400 || 0) + 1;
@@ -1180,7 +1183,10 @@ class BattleSystem {
             potionsUsed: 0,
             fainted: false,
             outOfMoney: false,
-            simulatedTimeMs: 0
+            simulatedTimeMs: 0,
+            xpEarned: 0,
+            itemsLooted: {},
+            caughtPokemonList: []
         };
 
         if (this.state.party.length === 0) return results;
@@ -1191,6 +1197,7 @@ class BattleSystem {
         let lastKnownShinies = this.state.stats.shiniesCaught || 0;
         let lastKnownEncounters = this.state.stats.battlesWon || 0; // Approximate encounters fought using battlesWon
         let lastKnownShinyEncounters = this.state.stats.shiniesSeen || 0;
+        let initialLeaderXP = this.state.party[0] ? this.state.party[0].xp : 0;
 
         let initialBalls = this.state.settings.activeBallTier >= 0 ?
             this.state.backpack.pokeballs[this.state.config.balance.items.pokeballs[this.state.settings.activeBallTier].name] || 0 : 0;
@@ -1395,7 +1402,12 @@ class BattleSystem {
                         let caughtPokemon = JSON.parse(JSON.stringify(this.activeEncounter));
                         caughtPokemon.xp = mathEngine.calculateTotalXP(caughtPokemon.level);
                         this.state.storage.push(caughtPokemon);
+                        results.caughtPokemonList.push(caughtPokemon);
                         this.state.stats.caught++;
+                        if (caughtPokemon.level > (this.state.stats.highestLevelCaptured || 0)) this.state.stats.highestLevelCaptured = caughtPokemon.level;
+                        if (caughtPokemon.quality > (this.state.stats.highestQualityCaptured || 0)) this.state.stats.highestQualityCaptured = caughtPokemon.quality;
+                        let sumIV_ZzZ = caughtPokemon.ivs.hp + caughtPokemon.ivs.atk + caughtPokemon.ivs.def + caughtPokemon.ivs.spa + caughtPokemon.ivs.spd + caughtPokemon.ivs.spe;
+                        if (sumIV_ZzZ > (this.state.stats.highestSumIVCaptured || 0)) this.state.stats.highestSumIVCaptured = sumIV_ZzZ;
                         if (this.activeEncounter.qualityName === "Shiny") this.state.stats.shiniesCaught = (this.state.stats.shiniesCaught || 0) + 1;
                         if (this.activeEncounter.qualityName === "Shiny") {
                             if (!this.state.stats.caughtShiniesSpecies) this.state.stats.caughtShiniesSpecies = {};
@@ -1407,6 +1419,73 @@ class BattleSystem {
                 const lootMultiplier = 1 + (0.03 * (this.state.stats.greenCandies || 0));
                 this.grantXP(leader, evxp);
                 this.state.trainer.money += Math.floor(evm * lootMultiplier);
+
+                // Add loot drops
+                let dropRate = 0;
+                switch (this.activeEncounter.qualityName) {
+                    case "Uncommon": dropRate = 0.01; break;
+                    case "Rare": dropRate = 0.02; break;
+                    case "Epic": dropRate = 0.03; break;
+                    case "Shiny": dropRate = 1.0; break;
+                }
+
+                if (Math.random() < (dropRate * lootMultiplier) && this.activeEncounter.types && this.activeEncounter.types.length > 0) {
+                    const types = this.activeEncounter.types;
+                    const randomType = types[Math.floor(Math.random() * types.length)];
+                    const stoneName = `${randomType} Stone`;
+
+                    let dropQuantity = Math.floor(lootMultiplier);
+                    if (Math.random() < (lootMultiplier % 1)) dropQuantity += 1;
+
+                    if (!this.state.backpack.stones) this.state.backpack.stones = {};
+                    this.state.backpack.stones[stoneName] = (this.state.backpack.stones[stoneName] || 0) + dropQuantity;
+                    results.itemsLooted[stoneName] = (results.itemsLooted[stoneName] || 0) + dropQuantity;
+                }
+
+                let sumIV = 0;
+                if (this.activeEncounter.ivs) {
+                    sumIV = this.activeEncounter.ivs.hp + this.activeEncounter.ivs.atk + this.activeEncounter.ivs.def +
+                            this.activeEncounter.ivs.spa + this.activeEncounter.ivs.spd + this.activeEncounter.ivs.spe;
+                }
+
+                let itemDropChance = (2.0 + 8.0 * (sumIV / 600)) / 100.0;
+                let level = this.activeEncounter.level || 1;
+                let ballTierName = "Pokeball";
+                let potionTierName = "Tiny Potion";
+
+                if (level <= 15) {
+                    ballTierName = "Pokeball";
+                    potionTierName = "Tiny Potion";
+                } else if (level <= 35) {
+                    ballTierName = "Pokeball";
+                    potionTierName = "Small Potion";
+                } else if (level <= 55) {
+                    ballTierName = "Greatball";
+                    potionTierName = "Regular Potion";
+                } else if (level <= 75) {
+                    ballTierName = "Greatball";
+                    potionTierName = "Big Potion";
+                } else {
+                    ballTierName = "Ultraball";
+                    potionTierName = "Huge Potion";
+                }
+
+                if (Math.random() < itemDropChance) {
+                    let ballDropQty = Math.floor(lootMultiplier);
+                    if (Math.random() < (lootMultiplier % 1)) ballDropQty += 1;
+                    if (!this.state.backpack.pokeballs) this.state.backpack.pokeballs = {};
+                    this.state.backpack.pokeballs[ballTierName] = (this.state.backpack.pokeballs[ballTierName] || 0) + ballDropQty;
+                    results.itemsLooted[ballTierName] = (results.itemsLooted[ballTierName] || 0) + ballDropQty;
+                }
+
+                if (Math.random() < itemDropChance) {
+                    let potionDropQty = Math.floor(lootMultiplier);
+                    if (Math.random() < (lootMultiplier % 1)) potionDropQty += 1;
+                    if (!this.state.backpack.potions) this.state.backpack.potions = {};
+                    this.state.backpack.potions[potionTierName] = (this.state.backpack.potions[potionTierName] || 0) + potionDropQty;
+                    results.itemsLooted[potionTierName] = (results.itemsLooted[potionTierName] || 0) + potionDropQty;
+                }
+
                 this.state.stats.battlesWon++;
             } else {
                 leader.currentHp = 0;
@@ -1466,6 +1545,7 @@ class BattleSystem {
         results.potionsUsed = Math.max(0, initialPotions - finalPotions);
 
         results.simulatedTimeMs = totalSimTime;
+        results.xpEarned = this.state.party[0] ? this.state.party[0].xp - initialLeaderXP : 0;
 
         if (results.fainted) {
             // Track faint

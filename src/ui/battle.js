@@ -44,8 +44,106 @@ function applyWalkAnimations(pokemon, isEnemy) {
     }
 }
 
+function updateActiveItemsUI() {
+    const potionImg = document.getElementById('battle-active-potion-img');
+    const potionCount = document.getElementById('battle-active-potion-count');
+    const potionCard = document.getElementById('battle-active-potion-card');
+
+    if (potionImg && potionCount && potionCard) {
+        if (state.settings.activePotionTier >= 0) {
+            const potionName = state.config.balance.items.potions[state.settings.activePotionTier].name;
+            potionImg.src = `./Assets/Items/Potions/${potionName}.png`;
+            potionCount.textContent = formatActiveItemQuantity(state.backpack.potions[potionName] || 0);
+            potionImg.style.display = 'block';
+            potionCount.style.display = 'block';
+        } else {
+            potionImg.src = "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
+            potionCount.textContent = '';
+            potionImg.style.display = 'none';
+            potionCount.style.display = 'none';
+        }
+    }
+
+    const ballImg = document.getElementById('battle-active-ball-img');
+    const ballCount = document.getElementById('battle-active-ball-count');
+    const ballCard = document.getElementById('battle-active-ball-card');
+
+    if (ballImg && ballCount && ballCard) {
+        if (state.settings.activeBallTier >= 0) {
+            const ballName = state.config.balance.items.pokeballs[state.settings.activeBallTier].name;
+            ballImg.src = `./Assets/Items/Balls/${ballName}.png`;
+            ballCount.textContent = formatActiveItemQuantity(state.backpack.pokeballs[ballName] || 0);
+            ballImg.style.display = 'block';
+            ballCount.style.display = 'block';
+        } else {
+            ballImg.src = "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
+            ballCount.textContent = '';
+            ballImg.style.display = 'none';
+            ballCount.style.display = 'none';
+        }
+    }
+}
+
+function formatActiveItemQuantity(qty) {
+    if (qty >= 1000000) {
+        return (qty / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+    } else if (qty >= 1000) {
+        return (qty / 1000).toFixed(1).replace(/\.0$/, '') + 'k';
+    }
+    return qty.toString();
+}
 
 export function updateBattleArena() {
+function updateActiveItemsUI() {
+    const potionImg = document.getElementById('battle-active-potion-img');
+    const potionCount = document.getElementById('battle-active-potion-count');
+    const potionCard = document.getElementById('battle-active-potion-card');
+
+    if (potionImg && potionCount && potionCard) {
+        if (state.settings.activePotionTier >= 0) {
+            const potionName = state.config.balance.items.potions[state.settings.activePotionTier].name;
+            potionImg.src = `./Assets/Items/Potions/${potionName}.png`;
+            potionCount.textContent = formatActiveItemQuantity(state.backpack.potions[potionName] || 0);
+            potionImg.style.display = 'block';
+            potionCount.style.display = 'block';
+        } else {
+            potionImg.src = "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
+            potionCount.textContent = '';
+            potionImg.style.display = 'none';
+            potionCount.style.display = 'none';
+        }
+    }
+
+    const ballImg = document.getElementById('battle-active-ball-img');
+    const ballCount = document.getElementById('battle-active-ball-count');
+    const ballCard = document.getElementById('battle-active-ball-card');
+
+    if (ballImg && ballCount && ballCard) {
+        if (state.settings.activeBallTier >= 0) {
+            const ballName = state.config.balance.items.pokeballs[state.settings.activeBallTier].name;
+            ballImg.src = `./Assets/Items/Balls/${ballName}.png`;
+            ballCount.textContent = formatActiveItemQuantity(state.backpack.pokeballs[ballName] || 0);
+            ballImg.style.display = 'block';
+            ballCount.style.display = 'block';
+        } else {
+            ballImg.src = "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
+            ballCount.textContent = '';
+            ballImg.style.display = 'none';
+            ballCount.style.display = 'none';
+        }
+    }
+}
+
+function formatActiveItemQuantity(q) {
+    if (q >= 1000000) return Math.floor(q / 1000000) + 'm';
+    if (q >= 1000) return Math.floor(q / 1000) + 'k';
+    return q;
+}
+
+
+export function updateBattleArena() {
+    updateActiveItemsUI();
+
     const battleSystem = globals.battleSystem;
     const inGym = battleSystem && battleSystem.gymState && battleSystem.gymState.isActive;
     const inGymCombat = inGym && battleSystem.gymState.inCombat;
@@ -693,7 +791,6 @@ export function playCombatAnimations(targetSide, moveType, duration) {
 
     const atkRect = atkImg.getBoundingClientRect();
     const defRect = defImg.getBoundingClientRect();
-
     // Instead of vh, use the scale of the images to determine projectile size roughly
     const projHeight = atkRect.height * 0.05;
     const projWidth = projHeight * 2;
@@ -708,7 +805,6 @@ export function playCombatAnimations(targetSide, moveType, duration) {
     proj.style.boxShadow = `0 0 ${projHeight}px ${projHeight/2}px ${color}`;
     proj.style.zIndex = '999';
     proj.style.pointerEvents = 'none';
-
     // Start at attacker center
     const startX = atkRect.left + atkRect.width / 2;
     const startY = atkRect.top + atkRect.height / 2;
