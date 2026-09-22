@@ -224,6 +224,8 @@ export class WindowManager {
 
             const currentScale = (currentWidth - horizontalPadding) / winElement._originalWidth;
 
+            // Stop auto-adjusting if user has resized manually, indicated by --original-width being set or manual interaction
+            // To be safe, if we are in adjustHeightForNewContent, we only adjust height, not width.
             // Strip scaling temporarily
             winElement.style.width = winElement._originalWidth + 'px';
             winElement.style.height = 'auto';
@@ -247,7 +249,27 @@ export class WindowManager {
 
                 // Re-apply scale
                 const newScaledContentHeight = winElement._originalHeight * currentScale;
+<<<<<<< HEAD
                 const newHeight = headerH + newScaledContentHeight + verticalPadding;
+=======
+                let newHeight = headerH + newScaledContentHeight + verticalPadding;
+
+                // Respect maxHeight if it's set via style or dataset
+                let maxHeight = 0;
+                const maxHeightStr = winElement.style.maxHeight;
+                if (maxHeightStr && maxHeightStr.endsWith('px')) {
+                    maxHeight = parseInt(maxHeightStr, 10);
+                } else if (winElement.dataset.maxHeightRatio) {
+                    const ratio = parseFloat(winElement.dataset.maxHeightRatio);
+                    if (!isNaN(ratio) && ratio > 0) {
+                        maxHeight = winElement._originalWidth * ratio * currentScale;
+                    }
+                }
+
+                if (maxHeight > 0 && newHeight > maxHeight) {
+                    newHeight = maxHeight;
+                }
+>>>>>>> origin/main
 
                 // Lock dimensions
                 scalerElement.style.position = 'absolute';
@@ -355,6 +377,9 @@ export class WindowManager {
 
                 winElement.style.width = newWidth + 'px';
                 winElement.style.height = newHeight + 'px';
+                if (winElement.dataset.maxHeightRatio) {
+                     delete winElement.dataset.maxHeightRatio;
+                }
                 scalerElement.style.transform = `scale(${scale})`;
             }
         });
@@ -573,6 +598,28 @@ export class WindowManager {
                 targetHeight = this.containerHeight;
             }
 
+<<<<<<< HEAD
+=======
+            // Respect maxHeight if it's set on shrink logic too
+            let maxHeight = 0;
+            const maxHeightStr = winElement.style.maxHeight;
+            if (maxHeightStr && maxHeightStr.endsWith('px')) {
+                maxHeight = parseInt(maxHeightStr, 10);
+            } else if (winElement.dataset.maxHeightRatio) {
+                const ratio = parseFloat(winElement.dataset.maxHeightRatio);
+                if (!isNaN(ratio) && ratio > 0) {
+                    let currentW = winElement.offsetWidth;
+                    if (!currentW || currentW <= 0) currentW = parseInt(winElement.style.width) || 800;
+                    let currentScale = (currentW - horizontalPadding) / winElement._originalWidth;
+                    maxHeight = winElement._originalWidth * ratio * currentScale;
+                }
+            }
+
+            if (maxHeight > 0 && targetHeight > maxHeight) {
+                targetHeight = maxHeight;
+            }
+
+>>>>>>> origin/main
             let newContentHeight = targetHeight - headerH - verticalPadding;
             if (newContentHeight <= 0) newContentHeight = 100;
             let scale = newContentHeight / winElement._originalHeight;
