@@ -677,9 +677,14 @@ window.transformDitto = function(dittoUuid, targetIdOverride) {
         state.safe
     ];
 
-    for (let arr of allArrays) {
-        let found = arr.find(x => x.uuid === dittoUuid);
-        if (found) { p = found; break; }
+    outer: for (let i = 0; i < allArrays.length; i++) {
+        let arr = allArrays[i];
+        for (let j = 0; j < arr.length; j++) {
+            if (arr[j].uuid === dittoUuid) {
+                p = arr[j];
+                break outer;
+            }
+        }
     }
 
     if (!p) return;
