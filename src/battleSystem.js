@@ -980,8 +980,17 @@ class BattleSystem {
         if (!this.state.config || !this.state.config.unlocks) return;
         if (!this.state.stats.activeChallenges || this.state.stats.activeChallenges.length === 0) return;
 
+        // Lazily build a Map for O(1) lookups
+        if (!this._unlocksMap || this._unlocksMapSize !== this.state.config.unlocks.length) {
+            this._unlocksMap = new Map();
+            for (let unlock of this.state.config.unlocks) {
+                this._unlocksMap.set(unlock.areaId, unlock);
+            }
+            this._unlocksMapSize = this.state.config.unlocks.length;
+        }
+
         for (let activeId of this.state.stats.activeChallenges) {
-            let unlock = this.state.config.unlocks.find(u => u.areaId === activeId);
+            let unlock = this._unlocksMap.get(activeId);
             if (!unlock) continue;
 
             let req = unlock.requirements;
