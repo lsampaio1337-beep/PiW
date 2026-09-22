@@ -1,6 +1,19 @@
 import { state } from '../state.js';
 import { showModal, TYPE_COLORS } from '../ui.js';
 
+let _pokemonDataMap = null;
+
+export function getPokemonData(id, state) {
+    if (!_pokemonDataMap || !state.config.pokemonData) {
+        if (!state.config.pokemonData) return null;
+        _pokemonDataMap = new Map();
+        for (const p of state.config.pokemonData) {
+            _pokemonDataMap.set(p.id, p);
+        }
+    }
+    return _pokemonDataMap.get(id);
+}
+
 export function formatType(typeStr) {
     if (!typeStr || !TYPE_COLORS[typeStr]) return typeStr;
     const color = TYPE_COLORS[typeStr];
@@ -15,7 +28,7 @@ export function formatTypes(obj) {
 
 
 export function hasEncounteredSpecies(id, state) {
-    const pData = state.config.pokemonData.find(p => p.id === id);
+    const pData = getPokemonData(id, state);
     if (!pData) return false;
     return (state.stats.seenSpecies && state.stats.seenSpecies[pData.name]) ||
            (state.stats.caughtSpecies && state.stats.caughtSpecies[pData.name]) ||
@@ -28,13 +41,13 @@ export function hasEncounteredSpecies(id, state) {
 }
 
 export function hasSeenSpecies(id, state) {
-    const pData = state.config.pokemonData.find(p => p.id === id);
+    const pData = getPokemonData(id, state);
     if (!pData) return false;
     return (state.stats.seenSpecies && state.stats.seenSpecies[pData.name]);
 }
 
 export function hasCaughtSpecies(id, state) {
-    const pData = state.config.pokemonData.find(p => p.id === id);
+    const pData = getPokemonData(id, state);
     if (!pData) return false;
     return (state.stats.caughtSpecies && state.stats.caughtSpecies[pData.name]) ||
            state.party.some(p => p.id === id) ||
@@ -53,7 +66,7 @@ export function showPokedex() {
     } else {
         // Iterate up to 151
         for(let i = 1; i <= 151; i++) {
-            const pData = state.config.pokemonData.find(p => p.id === i);
+            const pData = getPokemonData(i, state);
             if (!pData) continue;
 
             const isSeen = hasSeenSpecies(i, state);
@@ -95,7 +108,7 @@ export function showPokedex() {
 }
 
 export function showDexEntry(id) {
-    const pData = state.config.pokemonData.find(p => p.id === id);
+    const pData = getPokemonData(id, state);
     if (!pData) return;
 
     const hasSeenShiny = state.stats.seenShiniesSpecies && state.stats.seenShiniesSpecies[pData.name];
@@ -138,7 +151,7 @@ export function buildEvolutionLineHtml(pData, state) {
     }
 
     function buildTree(currentId) {
-        const pd = state.config.pokemonData.find(p => p.id === currentId);
+        const pd = getPokemonData(currentId, state);
         if (!pd) return "";
 
         const hasEncountered = hasEncounteredSpecies(currentId, state);
