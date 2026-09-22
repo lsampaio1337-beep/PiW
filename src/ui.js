@@ -10,6 +10,16 @@ import Storage from "./storage.js";
 // Import State and modules
 import { state, setBattleSystem, globals } from './state.js';
 
+function escapeHtml(unsafe) {
+    return (unsafe || "").toString()
+         .replace(/&/g, "&amp;")
+         .replace(/</g, "&lt;")
+         .replace(/>/g, "&gt;")
+         .replace(/"/g, "&quot;")
+         .replace(/'/g, "&#039;");
+}
+
+
 window.dismissDaycareMessage = function() {
     state.stats.hasSeenDaycare = true;
     document.getElementById('daycare-first-time-overlay').style.display = 'none';
@@ -1335,7 +1345,7 @@ async function init() {
             btn.innerHTML = `
                 <div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center;">
                     <div style="font-size: 18px; margin-bottom: 5px; font-weight: bold; display: flex; align-items: center;">
-                        "${profileName}" - ${playtimeStr}
+                        "${escapeHtml(profileName)}" - ${playtimeStr}
                     </div>
                     <div style="font-size: 14px; font-weight: normal;">Last Played: ${lastPlayedStr}</div>
                     <div style="font-size: 14px; font-weight: normal;">Progress: ${lastRoute}${zzzText}</div>
