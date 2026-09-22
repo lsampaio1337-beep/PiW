@@ -17,26 +17,55 @@ const balance = {
 
     "expansions": {
       "ballPocket": [
-        { "tier": 1, "name": "Ball Carrier", "increment": 50, "cost": 150 },
-        { "tier": 2, "name": "Ball Sling", "increment": 100, "cost": 450 },
-        { "tier": 3, "name": "Tactical Ball Cinch", "increment": 250, "cost": 1200 },
-        { "tier": 4, "name": "Silph Ball Loader", "increment": 500, "cost": 3000 },
-        { "tier": 5, "name": "Upgraded Silph Ball Loader", "increment": 1000, "cost": 7500 },
-        { "tier": 6, "name": "Endless Ball Reservoir", "increment": 8000, "cost": 20000 }
+{ "tier": 1, "name": "Ball1", "increment": 50, "cost": 150 },
+        { "tier": 2, "name": "Ball2", "increment": 100, "cost": 450 },
+        { "tier": 3, "name": "Ball3", "increment": 250, "cost": 1200 },
+        { "tier": 4, "name": "Ball4", "increment": 500, "cost": 3000 },
+        { "tier": 5, "name": "Ball5", "increment": 1000, "cost": 7500 },
+        { "tier": 6, "name": "Ball6", "increment": 8000, "cost": 20000 }
       ],
       "potionSatchel": [
-        { "tier": 1, "name": "Small Pouch Patch", "increment": 20, "cost": 75 },
-        { "tier": 2, "name": "Standard Pouch Patch", "increment": 30, "cost": 200 },
-        { "tier": 3, "name": "Heavy Pouch Patch", "increment": 50, "cost": 500 },
-        { "tier": 4, "name": "Expanded Satchel Kit", "increment": 100, "cost": 1200 },
-        { "tier": 5, "name": "Alchemist Belt Rig", "increment": 280, "cost": 3000 }
+        { "tier": 1, "name": "Potion1", "increment": 20, "cost": 75 },
+        { "tier": 2, "name": "Potion2", "increment": 30, "cost": 200 },
+        { "tier": 3, "name": "Potion3", "increment": 50, "cost": 500 },
+        { "tier": 4, "name": "Potion4", "increment": 100, "cost": 1200 },
+        { "tier": 5, "name": "Potion5", "increment": 280, "cost": 3000 }
       ],
       "pokemonBox": [
-        { "tier": 1, "name": "Small Box Upgrade", "increment": 10, "cost": 100 },
-        { "tier": 2, "name": "Standard Box Upgrade", "increment": 20, "cost": 300 },
-        { "tier": 3, "name": "Large Box Upgrade", "increment": 50, "cost": 900 },
-        { "tier": 4, "name": "Huge Box Upgrade", "increment": 100, "cost": 2500 },
-        { "tier": 5, "name": "Ultimate Box Upgrade", "increment": 300, "cost": 6000 }
+        { "tier": 1, "name": "Storage1", "increment": 10, "cost": 100 },
+        { "tier": 2, "name": "Storage2", "increment": 20, "cost": 300 },
+        { "tier": 3, "name": "Storage3", "increment": 50, "cost": 900 },
+        { "tier": 4, "name": "Storage4", "increment": 100, "cost": 2500 },
+        { "tier": 5, "name": "Storage5", "increment": 300, "cost": 6000 }
+      ],
+      "glass": [
+        { "tier": 1, "name": "Glass1", "increment": 0, "cost": 1 },
+        { "tier": 2, "name": "Glass2", "increment": 0, "cost": 1 },
+        { "tier": 3, "name": "Glass3", "increment": 0, "cost": 1 },
+        { "tier": 4, "name": "Glass4", "increment": 0, "cost": 1 },
+        { "tier": 5, "name": "Glass5", "increment": 0, "cost": 1 },
+        { "tier": 6, "name": "Glass6", "increment": 0, "cost": 1 },
+        { "tier": 7, "name": "Glass7", "increment": 0, "cost": 1 }
+      ],
+      "smartwatch": [
+        { "tier": 1, "name": "Smartwatch1", "increment": 0, "cost": 1 },
+        { "tier": 2, "name": "Smartwatch2", "increment": 0, "cost": 1 },
+        { "tier": 3, "name": "Smartwatch3", "increment": 0, "cost": 1 },
+        { "tier": 4, "name": "Smartwatch4", "increment": 0, "cost": 1 },
+        { "tier": 5, "name": "Smartwatch5", "increment": 0, "cost": 1 },
+        { "tier": 6, "name": "Smartwatch6", "increment": 0, "cost": 1 }
+      ],
+      "speed": [
+        { "tier": 1, "name": "Speed1", "increment": 0, "cost": 1 },
+        { "tier": 2, "name": "Speed2", "increment": 0, "cost": 1 },
+        { "tier": 3, "name": "Speed3", "increment": 0, "cost": 1 },
+        { "tier": 4, "name": "Speed4", "increment": 0, "cost": 1 },
+        { "tier": 5, "name": "Speed5", "increment": 0, "cost": 1 }
+      ],
+      "loot": [
+        { "tier": 1, "name": "Loot1", "increment": 0, "cost": 1 },
+        { "tier": 2, "name": "Loot2", "increment": 0, "cost": 1 },
+        { "tier": 3, "name": "Loot3", "increment": 0, "cost": 1 }
       ]
     },
     "items": {

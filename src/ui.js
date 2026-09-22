@@ -52,7 +52,7 @@ import { showPokemonStats, showPokemonStatsByUuid, evolvePokemon } from './ui/po
 import { showBonusCandyModal } from './ui/bonusCandy.js';
 window.showBonusCandyModal = showBonusCandyModal;
 window.showGiftModal = showGiftModal;
-import { showSettings, updateGameSpeed, exportLog, showAddPokemonModal, forceNextEncounter, activateCheat } from './ui/settings.js';
+import { showSettings, updateGameSpeed, addMoney, addXp, exportLog, showAddPokemonModal, forceNextEncounter, activateCheat, showTimeLapseModal, runTimeLapse } from './ui/settings.js';
 import { setupMarket, buyItem, openPokeMarketBuy, renderPokeMarketTab, updateMarketPrices } from './ui/market.js';
 import { showBackpack, renderBackpackTab, setActiveItem, setAutoPotionThreshold } from './ui/backpack/index.js';
 import { dragStart, dragOver, handleDrop } from './ui/backpack/pokemon.js';
@@ -79,6 +79,8 @@ window.showPokemonStatsByUuid = showPokemonStatsByUuid;
 window.evolvePokemon = evolvePokemon;
 window.showSettings = showSettings;
 window.updateGameSpeed = updateGameSpeed;
+window.addMoney = addMoney;
+window.addXp = addXp;
 window.exportLog = exportLog;
 window.buyItem = buyItem;
 window.openPokeMarketBuy = openPokeMarketBuy;
@@ -87,6 +89,8 @@ window.updateMarketPrices = updateMarketPrices;
 window.showAddPokemonModal = showAddPokemonModal;
 window.forceNextEncounter = forceNextEncounter;
 window.activateCheat = activateCheat;
+window.showTimeLapseModal = showTimeLapseModal;
+window.runTimeLapse = runTimeLapse;
 window.dragStart = dragStart;
 window.completeChallenge = function(targetAreaId) {
     if (!state.stats.activeChallenges) {
@@ -303,6 +307,8 @@ window.showChallengesModal = function() {
 
     // Active Challenges Sector
     let activeChallengesCount = state.stats.activeChallenges ? state.stats.activeChallenges.length : 0;
+    let completedChallengesCount = state.stats.completedChallengeIds ? state.stats.completedChallengeIds.length : 0;
+    let totalChallengesCount = activeChallengesCount + completedChallengesCount;
 
     html += `<div style="border: 1px solid #555; padding: 10px; border-radius: 5px; background-color: rgba(0,0,0,0.5);">
                 <h3 style="margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; font-size: 16px;">${activeChallengesCount > 1 ? 'Active Challenges' : 'Active Challenge'}</h3>
@@ -398,14 +404,15 @@ window.showChallengesModal = function() {
 
     html += `</div>`;
 
-    showModal("Progress Challenges", html, "window-challenges");
+    showModal("Progress Challenges", html, "window-challenges", "1000px");
     const win = document.getElementById("window-challenges");
     if (win) {
-        // Read the actual unscaled width, defaulting to 800 if not yet set
-        let winWidth = win._originalWidth || parseInt(win.style.width) || win.offsetWidth || 800;
+        // Read the actual unscaled width, defaulting to 1000 if not yet set
+        let winWidth = win._originalWidth || parseInt(win.style.width) || win.offsetWidth || 1000;
 
-        // The user wants max window height is 1.5x width.
-        win.style.maxHeight = (winWidth * 1.5) + 'px';
+        // We handle the max height natively in windowManager now, so remove the strict CSS limit
+        win.style.maxHeight = '';
+        win.dataset.maxHeightRatio = '1.5';
 
         // Ensure the content container scrolls if it overflows
         const contentContainer = win.querySelector('.window-content-container');
@@ -413,15 +420,22 @@ window.showChallengesModal = function() {
             contentContainer.style.overflowY = 'auto';
         }
 
-        // Reset initialization so the window auto-adjusts its height fully to its new content up to max-height
-        win._sizeInitialized = false;
+        // Only auto-adjust height if the number of challenges has changed
+        if (win._lastTotalChallengesCount !== totalChallengesCount) {
 
-        if (typeof win.adjustHeightForNewContent === 'function') {
-            win.adjustHeightForNewContent();
+            // Only force re-init if it's NOT the first time opening, because the first time opening
+            // createDynamicWindow will already do it, and doing it twice might cause a jump
+            if (win._lastTotalChallengesCount !== undefined) {
+                win._sizeInitialized = false;
+            }
+
+            win._lastTotalChallengesCount = totalChallengesCount;
+
+            if (typeof win.adjustHeightForNewContent === 'function') {
+                win.adjustHeightForNewContent();
+            }
         }
     }
-
-    if (window.windowManager) window.windowManager.recalculateWindowSize('window-challenges');
 };
 window.dragOver = dragOver;
 window.handleDrop = handleDrop;
@@ -950,6 +964,10 @@ export function switchView(viewName) {
     state.currentView = viewName;
     document.querySelectorAll('.game-view').forEach(el => el.style.display = 'none');
 
+    const overlay = document.getElementById('main-view-inner-modal-overlay');
+    if (overlay) {
+        overlay.style.display = 'none';
+    }
     if (viewName === 'BATTLE_ARENA') {
         if (window.windowManager) window.windowManager.setWindowProportions('main-view-window', 5.75);
     } else {
@@ -1802,13 +1820,12 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
         let highestLevel = 0;
         let highestQuality = 0;
         let highestSumIV = 0;
-        let allMons = [];
-        if (state.party) allMons = allMons.concat(state.party);
-        if (state.storage) allMons = allMons.concat(state.storage);
-        if (state.safe) allMons = allMons.concat(state.safe);
-        if (state.dayCareRef) allMons = allMons.concat(state.dayCareRef);
+        let backpackMons = [];
+        if (state.party) backpackMons = backpackMons.concat(state.party);
+        if (state.storage) backpackMons = backpackMons.concat(state.storage);
+        if (state.safe) backpackMons = backpackMons.concat(state.safe);
 
-        allMons.forEach(p => {
+        backpackMons.forEach(p => {
             if (!p) return;
             if (p.level > highestLevel) highestLevel = p.level;
             if (p.quality > highestQuality) highestQuality = p.quality;
@@ -1818,20 +1835,55 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
             }
         });
 
+        const whiteCandiesClaimed = state.stats.whiteCandies || 0;
+
+        let challengesCompleted = state.stats.completedChallengeIds ? state.stats.completedChallengeIds.length : 0;
+        let maxChallenges = state.config.unlocks ? state.config.unlocks.length : 45;
+
+        let assignmentsCompleted = 0;
+        assignmentsCompleted += (state.stats.qTaskTier || 0);
+        assignmentsCompleted += (state.stats.cTaskTier || 0);
+        assignmentsCompleted += (state.stats.levelTaskTier || 0);
+        assignmentsCompleted += (state.stats.ivTaskTier || 0);
+        assignmentsCompleted += (state.stats.shinySeenTaskTier || 0);
+        assignmentsCompleted += (state.stats.shinyCaughtTaskTier || 0);
+        let maxAssignments = (oakTasks.q ? oakTasks.q.length : 0) +
+                             (oakTasks.c ? oakTasks.c.length : 0) +
+                             (oakTasks.level ? oakTasks.level.length : 0) +
+                             (oakTasks.iv ? oakTasks.iv.length : 0) +
+                             (oakTasks.shinySeen ? oakTasks.shinySeen.length : 0) +
+                             (oakTasks.shinyCaught ? oakTasks.shinyCaught.length : 0);
+
+        let uniqueShinySpeciesCaught = 0;
+        if (state.stats.caughtShiniesSpecies) {
+            uniqueShinySpeciesCaught = Object.keys(state.stats.caughtShiniesSpecies).length;
+        }
+
         showModal("Trainer", `
             <div style="text-align: left; display: inline-block;">
                 <p><b>Time played:</b> ${playtimeStr}</p>
+                <p><b>Money:</b> $${state.trainer.money.toLocaleString()}</p>
+                <br>
+                <p><b>Battles Won:</b> ${(state.stats.battlesWon || 0).toLocaleString()}</p>
+                <p><b>Faints:</b> ${(state.stats.faints || 0).toLocaleString()}</p>
+                <p><b>Total Pokémon Captured:</b> ${(state.stats.caught || 0).toLocaleString()}</p>
                 <p><b>Species Caught:</b> ${uniqueSpeciesCaught} / 150</p>
-                <p><b>Total Pokémon Captured:</b> ${state.stats.caught}</p>
-                <p><b>Battles Won:</b> ${state.stats.battlesWon}</p>
-                <p><b>Faints:</b> ${state.stats.faints || 0}</p>
-                <p><b>Shinies Seen:</b> ${state.stats.shiniesSeen || 0}</p>
-                <p><b>Shinies Caught:</b> ${state.stats.shiniesCaught || 0}</p>
-                <p><b>Jigglypuff Grains Used:</b> ${state.stats.jigglypuffGrainsUsed || 0}</p>
-                <p><b>Highest Level:</b> ${highestLevel}</p>
-                <p><b>Highest Quality:</b> ${highestQuality}</p>
-                <p><b>Highest IV Sum:</b> ${highestSumIV}</p>
-                <p><b>Money:</b> $${state.trainer.money}</p>
+                <p><b>Shiny Species Caught:</b> ${uniqueShinySpeciesCaught} / 150</p>
+                <p><b>Shinies Seen:</b> ${(state.stats.shiniesSeen || 0).toLocaleString()}</p>
+                <p><b>Shinies Caught:</b> ${(state.stats.shiniesCaught || 0).toLocaleString()}</p>
+                <br>
+                <p><b>Jigglypuff Grains Used:</b> ${(state.stats.jigglypuffGrainsUsed || 0).toLocaleString()}</p>
+                <p><b>White Candies Claimed:</b> ${(whiteCandiesClaimed || 0).toLocaleString()}</p>
+                <p><b>Daily Rewards Collected:</b> ${(state.stats.dailyRewards ? state.stats.dailyRewards.daysClaimed : 0).toLocaleString()}</p>
+                <p><b>Progress Challenge Completed:</b> ${challengesCompleted}/${maxChallenges}</p>
+                <p><b>Assignments Completed:</b> ${assignmentsCompleted}/${maxAssignments}</p>
+                <br>
+                <p><b>Highest Level on Backpack:</b> ${highestLevel}</p>
+                <p><b>Highest Quality on Backpack:</b> ${highestQuality}</p>
+                <p><b>Highest IV Sum on Backpack:</b> ${highestSumIV}</p>
+                <p><b>Highest Level Captured:</b> ${state.stats.highestLevelCaptured || 0}</p>
+                <p><b>Highest Quality Captured:</b> ${state.stats.highestQualityCaptured || 0}</p>
+                <p><b>Highest IV Sum Captured:</b> ${state.stats.highestSumIVCaptured || 0}</p>
             </div>
             <h3 style="margin-top: 10px; margin-bottom: 5px;">Badges:</h3>
             ${badgesHtml}
