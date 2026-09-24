@@ -744,8 +744,10 @@ class BattleSystem {
                             this.state.stats.epicPlusCaptures = (this.state.stats.epicPlusCaptures || 0) + 1;
                         }
 
-                        let sumIV = caughtPokemon.ivs.hp + caughtPokemon.ivs.atk + caughtPokemon.ivs.def + caughtPokemon.ivs.spa + caughtPokemon.ivs.spd + caughtPokemon.ivs.spe;
+                        // let sumIV handled below
                         if (caughtPokemon.level > (this.state.stats.highestLevelCaptured || 0)) this.state.stats.highestLevelCaptured = caughtPokemon.level;
+                        const sumIV = (caughtPokemon.ivs.hp||0) + (caughtPokemon.ivs.atk||0) + (caughtPokemon.ivs.def||0) + (caughtPokemon.ivs.spa||0) + (caughtPokemon.ivs.spd||0) + (caughtPokemon.ivs.spe||0);
+                        updateChallengeProgress(CHALLENGE_TYPES.CATCH_IV, 1, { sumIV: sumIV });
                         if (caughtPokemon.quality > (this.state.stats.highestQualityCaptured || 0)) this.state.stats.highestQualityCaptured = caughtPokemon.quality;
                         if (sumIV > (this.state.stats.highestSumIVCaptured || 0)) this.state.stats.highestSumIVCaptured = sumIV;
                         if (sumIV < 300) this.state.stats.caughtIVUnder300 = (this.state.stats.caughtIVUnder300 || 0) + 1;
@@ -910,6 +912,8 @@ class BattleSystem {
         }
 
         this.state.stats.battlesWon++;
+            updateChallengeProgress(CHALLENGE_TYPES.DEFEAT_LEVEL, 1, { level: enemyPokemon.level });
+            updateChallengeProgress(CHALLENGE_TYPES.DEFEAT_TYPE, 1, { types: enemyPokemon.type });
 
         this.checkRouteUnlocks();
 
@@ -1401,6 +1405,8 @@ class BattleSystem {
                         results.caughtPokemonList.push(caughtPokemon);
                         this.state.stats.caught++;
                         if (caughtPokemon.level > (this.state.stats.highestLevelCaptured || 0)) this.state.stats.highestLevelCaptured = caughtPokemon.level;
+                        const sumIV = (caughtPokemon.ivs.hp||0) + (caughtPokemon.ivs.atk||0) + (caughtPokemon.ivs.def||0) + (caughtPokemon.ivs.spa||0) + (caughtPokemon.ivs.spd||0) + (caughtPokemon.ivs.spe||0);
+                        updateChallengeProgress(CHALLENGE_TYPES.CATCH_IV, 1, { sumIV: sumIV });
                         if (caughtPokemon.quality > (this.state.stats.highestQualityCaptured || 0)) this.state.stats.highestQualityCaptured = caughtPokemon.quality;
                         let sumIV_ZzZ = caughtPokemon.ivs.hp + caughtPokemon.ivs.atk + caughtPokemon.ivs.def + caughtPokemon.ivs.spa + caughtPokemon.ivs.spd + caughtPokemon.ivs.spe;
                         if (sumIV_ZzZ > (this.state.stats.highestSumIVCaptured || 0)) this.state.stats.highestSumIVCaptured = sumIV_ZzZ;
@@ -1483,6 +1489,8 @@ class BattleSystem {
                 }
 
                 this.state.stats.battlesWon++;
+            updateChallengeProgress(CHALLENGE_TYPES.DEFEAT_LEVEL, 1, { level: enemyPokemon.level });
+            updateChallengeProgress(CHALLENGE_TYPES.DEFEAT_TYPE, 1, { types: enemyPokemon.type });
             } else {
                 leader.currentHp = 0;
                 const fainted = this.state.party.shift();
