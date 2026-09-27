@@ -818,9 +818,8 @@ class BattleSystem {
         // Loot drops for Stones
         let dropRate = 0;
         switch (this.activeEncounter.qualityName) {
-            case "Uncommon": dropRate = 0.01; break;
-            case "Rare": dropRate = 0.02; break;
-            case "Epic": dropRate = 0.03; break;
+            case "Rare": dropRate = 0.01; break;
+            case "Epic": dropRate = 0.02; break;
             case "Shiny": dropRate = 1.0; break;
         }
 
@@ -843,7 +842,7 @@ class BattleSystem {
                     this.activeEncounter.ivs.spa + this.activeEncounter.ivs.spd + this.activeEncounter.ivs.spe;
         }
 
-        let customDropChance = (2.0 + 8.0 * (sumIV / 600.0)) / 100.0;
+        let customDropChance = (2.0 * (sumIV / 600.0)) / 100.0;
 
         if (Math.random() < (customDropChance * lootMultiplier)) {
             let ballDrop = "Pokeball";
@@ -867,7 +866,7 @@ class BattleSystem {
             }
         }
 
-        let itemDropChance = (2.0 + 8.0 * (sumIV / 600)) / 100.0;
+        let itemDropChance = (2.0 * (sumIV / 600)) / 100.0;
 
         let level = this.activeEncounter.level || 1;
         let ballTierName = "Pokeball";
@@ -1419,9 +1418,8 @@ class BattleSystem {
                 // Add loot drops
                 let dropRate = 0;
                 switch (this.activeEncounter.qualityName) {
-                    case "Uncommon": dropRate = 0.01; break;
-                    case "Rare": dropRate = 0.02; break;
-                    case "Epic": dropRate = 0.03; break;
+                    case "Rare": dropRate = 0.01; break;
+                    case "Epic": dropRate = 0.02; break;
                     case "Shiny": dropRate = 1.0; break;
                 }
 
@@ -1444,7 +1442,7 @@ class BattleSystem {
                             this.activeEncounter.ivs.spa + this.activeEncounter.ivs.spd + this.activeEncounter.ivs.spe;
                 }
 
-                let itemDropChance = (2.0 + 8.0 * (sumIV / 600)) / 100.0;
+                let itemDropChance = (2.0 * (sumIV / 600)) / 100.0;
                 let level = this.activeEncounter.level || 1;
                 let ballTierName = "Pokeball";
                 let potionTierName = "Tiny Potion";
