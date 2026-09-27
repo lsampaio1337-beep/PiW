@@ -497,9 +497,14 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
     ghostContainer.style.flexDirection = 'column';
     ghostContainer.style.alignItems = 'center';
 
+    let displayId = activeEncounter.id;
+    if (activeEncounter.isDisguisedDitto) {
+        displayId = activeEncounter.originalDittoId;
+    }
+
     // The image itself
     const ghost = document.createElement('img');
-    ghost.src = `Assets/Pokemon Sprites/Natural/${activeEncounter.qualityName === 'Shiny' ? activeEncounter.id + '_shiny' : activeEncounter.id}.png`;
+    ghost.src = `Assets/Pokemon Sprites/Natural/${activeEncounter.qualityName === 'Shiny' ? displayId + '_shiny' : displayId}.png`;
     ghost.style.height = '100%';
     ghost.style.objectFit = 'contain';
     ghostContainer.appendChild(ghost);

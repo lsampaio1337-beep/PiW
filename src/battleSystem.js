@@ -404,6 +404,21 @@ class BattleSystem {
             pokemonBase = this.state.config.pokemonData.find(p => p.id === selectedSpawn.pokemonId);
             level = Math.floor(Math.random() * (selectedSpawn.maxLevel - selectedSpawn.minLevel + 1)) + selectedSpawn.minLevel;
 
+            let isDisguisedDitto = false;
+            let originalDittoPokemonBase = null;
+            if (pokemonBase.id === 132 && route.spawns.length > 1) {
+                // Wild Ditto copies another pokemon on the route
+                isDisguisedDitto = true;
+                originalDittoPokemonBase = pokemonBase;
+
+                // Randomly select from other spawns
+                const otherSpawns = route.spawns.filter(s => s.pokemonId !== 132);
+                if (otherSpawns.length > 0) {
+                    const disguiseSpawn = otherSpawns[Math.floor(Math.random() * otherSpawns.length)];
+                    pokemonBase = this.state.config.pokemonData.find(p => p.id === disguiseSpawn.pokemonId);
+                }
+            }
+
             q = mathEngine.generateQuality(this.state.stats, this.state.casinoDoubleShiny);
             if (q.name === "Shiny") {
                 this.state.stats.shiniesSeen = (this.state.stats.shiniesSeen || 0) + 1;
@@ -454,6 +469,11 @@ class BattleSystem {
             bst: bst,
             moves: this.getLearnsetMoves(pokemonBase, level)
         };
+
+        if (typeof isDisguisedDitto !== 'undefined' && isDisguisedDitto) {
+            this.activeEncounter.isDisguisedDitto = true;
+            this.activeEncounter.originalDittoId = 132;
+        }
 
         this.isSearching = false;
         this.isSliding = true;
@@ -717,6 +737,37 @@ class BattleSystem {
                 const processCapture = () => {
                     if (ballResult.caught) {
                         let caughtPokemon = JSON.parse(JSON.stringify(defeatedEncounter));
+
+                        // Handle Ditto Disguise
+                        if (caughtPokemon.isDisguisedDitto) {
+                            const dittoBase = this.state.config.pokemonData.find(p => p.id === caughtPokemon.originalDittoId);
+                            caughtPokemon.id = dittoBase.id;
+                            caughtPokemon.name = dittoBase.name;
+                            caughtPokemon.types = dittoBase.types;
+                            caughtPokemon.bst = dittoBase.hp + dittoBase.atk + dittoBase.def + dittoBase.spa + dittoBase.spd + dittoBase.spe;
+                            caughtPokemon.moves = this.getLearnsetMoves(dittoBase, caughtPokemon.level);
+
+                            // Recalculate stats based on Ditto's base stats, keeping the generated IVs and Quality
+                            caughtPokemon.currentStats = {
+                                hp: mathEngine.calculateHP(dittoBase.hp, caughtPokemon.ivs.hp, caughtPokemon.level, caughtPokemon.quality),
+                                atk: mathEngine.calculateStat(dittoBase.atk, caughtPokemon.ivs.atk, caughtPokemon.level, caughtPokemon.quality),
+                                def: mathEngine.calculateStat(dittoBase.def, caughtPokemon.ivs.def, caughtPokemon.level, caughtPokemon.quality),
+                                spa: mathEngine.calculateStat(dittoBase.spa, caughtPokemon.ivs.spa, caughtPokemon.level, caughtPokemon.quality),
+                                spd: mathEngine.calculateStat(dittoBase.spd, caughtPokemon.ivs.spd, caughtPokemon.level, caughtPokemon.quality),
+                                spe: mathEngine.calculateStat(dittoBase.spe, caughtPokemon.ivs.spe, caughtPokemon.level, caughtPokemon.quality),
+                            };
+                            caughtPokemon.maxHp = caughtPokemon.currentStats.hp;
+                            caughtPokemon.currentHp = caughtPokemon.currentStats.hp;
+
+                            const totalIV = caughtPokemon.ivs.hp + caughtPokemon.ivs.atk + caughtPokemon.ivs.def + caughtPokemon.ivs.spa + caughtPokemon.ivs.spd + caughtPokemon.ivs.spe;
+                            caughtPokemon.evxp = mathEngine.calculateEVXP(caughtPokemon.bst, caughtPokemon.level, caughtPokemon.quality, totalIV);
+                            caughtPokemon.evm = mathEngine.calculateEVM(caughtPokemon.bst, caughtPokemon.level, caughtPokemon.quality, totalIV);
+                            caughtPokemon.pp = mathEngine.calculatePP(caughtPokemon.bst, caughtPokemon.level, caughtPokemon.quality, totalIV);
+
+                            delete caughtPokemon.isDisguisedDitto;
+                            delete caughtPokemon.originalDittoId;
+                        }
+
                         // Fix the level 100 jump bug by setting xp explicitly to the exact minimum needed for their captured level
                         caughtPokemon.xp = mathEngine.calculateTotalXP(caughtPokemon.level);
                         this.state.storage.push(caughtPokemon);
@@ -815,6 +866,11 @@ class BattleSystem {
         this.grantXP(leader, evxp);
         this.state.trainer.money += Math.floor(evm * lootMultiplier);
 
+        let lootId = this.activeEncounter.id;
+        if (this.activeEncounter.isDisguisedDitto) {
+            lootId = this.activeEncounter.originalDittoId;
+        }
+
         // Loot drops for Stones
         let dropRate = 0;
         switch (this.activeEncounter.qualityName) {
@@ -823,8 +879,14 @@ class BattleSystem {
             case "Shiny": dropRate = 1.0; break;
         }
 
-        if (Math.random() < (dropRate * lootMultiplier) && this.activeEncounter.types && this.activeEncounter.types.length > 0) {
-            const types = this.activeEncounter.types;
+        let lootTypes = this.activeEncounter.types;
+        if (this.activeEncounter.isDisguisedDitto) {
+            const dittoBase = this.state.config.pokemonData.find(p => p.id === this.activeEncounter.originalDittoId);
+            if (dittoBase) lootTypes = dittoBase.types;
+        }
+
+        if (Math.random() < (dropRate * lootMultiplier) && lootTypes && lootTypes.length > 0) {
+            const types = lootTypes;
             const randomType = types[Math.floor(Math.random() * types.length)];
             const stoneName = `${randomType} Stone`;
 
@@ -1263,6 +1325,21 @@ class BattleSystem {
             pokemonBase = this.state.config.pokemonData.find(p => p.id === selectedSpawn.pokemonId);
             level = Math.floor(Math.random() * (selectedSpawn.maxLevel - selectedSpawn.minLevel + 1)) + selectedSpawn.minLevel;
 
+            let isDisguisedDitto = false;
+            let originalDittoPokemonBase = null;
+            if (pokemonBase.id === 132 && route.spawns.length > 1) {
+                // Wild Ditto copies another pokemon on the route
+                isDisguisedDitto = true;
+                originalDittoPokemonBase = pokemonBase;
+
+                // Randomly select from other spawns
+                const otherSpawns = route.spawns.filter(s => s.pokemonId !== 132);
+                if (otherSpawns.length > 0) {
+                    const disguiseSpawn = otherSpawns[Math.floor(Math.random() * otherSpawns.length)];
+                    pokemonBase = this.state.config.pokemonData.find(p => p.id === disguiseSpawn.pokemonId);
+                }
+            }
+
             if (this.state.currentRoute === "Route 1") {
                 const playerLevel = leader.level || 1;
                 level = Math.min(level, playerLevel);
@@ -1310,6 +1387,11 @@ class BattleSystem {
                 bst: bst,
                 moves: this.getLearnsetMoves(pokemonBase, level)
             };
+
+            if (typeof isDisguisedDitto !== 'undefined' && isDisguisedDitto) {
+                this.activeEncounter.isDisguisedDitto = true;
+                this.activeEncounter.originalDittoId = 132;
+            }
 
             // Estimate search time
             let searchTime = 5000;
@@ -1395,6 +1477,36 @@ class BattleSystem {
                         if (!this.state.stats.caughtSpecies) this.state.stats.caughtSpecies = {};
                         this.state.stats.caughtSpecies[this.activeEncounter.name] = (this.state.stats.caughtSpecies[this.activeEncounter.name] || 0) + 1;
                         let caughtPokemon = JSON.parse(JSON.stringify(this.activeEncounter));
+
+                        // Handle Ditto Disguise
+                        if (caughtPokemon.isDisguisedDitto) {
+                            const dittoBase = this.state.config.pokemonData.find(p => p.id === caughtPokemon.originalDittoId);
+                            caughtPokemon.id = dittoBase.id;
+                            caughtPokemon.name = dittoBase.name;
+                            caughtPokemon.types = dittoBase.types;
+                            caughtPokemon.bst = dittoBase.hp + dittoBase.atk + dittoBase.def + dittoBase.spa + dittoBase.spd + dittoBase.spe;
+                            caughtPokemon.moves = this.getLearnsetMoves(dittoBase, caughtPokemon.level);
+
+                            caughtPokemon.currentStats = {
+                                hp: mathEngine.calculateHP(dittoBase.hp, caughtPokemon.ivs.hp, caughtPokemon.level, caughtPokemon.quality),
+                                atk: mathEngine.calculateStat(dittoBase.atk, caughtPokemon.ivs.atk, caughtPokemon.level, caughtPokemon.quality),
+                                def: mathEngine.calculateStat(dittoBase.def, caughtPokemon.ivs.def, caughtPokemon.level, caughtPokemon.quality),
+                                spa: mathEngine.calculateStat(dittoBase.spa, caughtPokemon.ivs.spa, caughtPokemon.level, caughtPokemon.quality),
+                                spd: mathEngine.calculateStat(dittoBase.spd, caughtPokemon.ivs.spd, caughtPokemon.level, caughtPokemon.quality),
+                                spe: mathEngine.calculateStat(dittoBase.spe, caughtPokemon.ivs.spe, caughtPokemon.level, caughtPokemon.quality),
+                            };
+                            caughtPokemon.maxHp = caughtPokemon.currentStats.hp;
+                            caughtPokemon.currentHp = caughtPokemon.currentStats.hp;
+
+                            const totalIV = caughtPokemon.ivs.hp + caughtPokemon.ivs.atk + caughtPokemon.ivs.def + caughtPokemon.ivs.spa + caughtPokemon.ivs.spd + caughtPokemon.ivs.spe;
+                            caughtPokemon.evxp = mathEngine.calculateEVXP(caughtPokemon.bst, caughtPokemon.level, caughtPokemon.quality, totalIV);
+                            caughtPokemon.evm = mathEngine.calculateEVM(caughtPokemon.bst, caughtPokemon.level, caughtPokemon.quality, totalIV);
+                            caughtPokemon.pp = mathEngine.calculatePP(caughtPokemon.bst, caughtPokemon.level, caughtPokemon.quality, totalIV);
+
+                            delete caughtPokemon.isDisguisedDitto;
+                            delete caughtPokemon.originalDittoId;
+                        }
+
                         caughtPokemon.xp = mathEngine.calculateTotalXP(caughtPokemon.level);
                         this.state.storage.push(caughtPokemon);
                         results.caughtPokemonList.push(caughtPokemon);
@@ -1423,8 +1535,14 @@ class BattleSystem {
                     case "Shiny": dropRate = 1.0; break;
                 }
 
-                if (Math.random() < (dropRate * lootMultiplier) && this.activeEncounter.types && this.activeEncounter.types.length > 0) {
-                    const types = this.activeEncounter.types;
+                let lootTypes = this.activeEncounter.types;
+                if (this.activeEncounter.isDisguisedDitto) {
+                    const dittoBase = this.state.config.pokemonData.find(p => p.id === this.activeEncounter.originalDittoId);
+                    if (dittoBase) lootTypes = dittoBase.types;
+                }
+
+                if (Math.random() < (dropRate * lootMultiplier) && lootTypes && lootTypes.length > 0) {
+                    const types = lootTypes;
                     const randomType = types[Math.floor(Math.random() * types.length)];
                     const stoneName = `${randomType} Stone`;
 
