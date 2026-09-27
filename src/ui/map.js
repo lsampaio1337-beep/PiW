@@ -414,7 +414,7 @@ export function showMapTooltip(e, locationName) {
             route.spawns.forEach(s => {
                 let pName = "Unknown";
                 if (state.config.pokemonData) {
-                    const pd = state.config.pokemonData.find(p => p.id === s.pokemonId);
+                    const pd = state.config.pokemonData[(s.pokemonId) - 1];
                     if (pd) pName = pd.name;
                 }
                 info += `- ${pName} (${Math.round(s.chance * 100)}%)<br>`;

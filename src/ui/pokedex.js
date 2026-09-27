@@ -15,7 +15,7 @@ export function formatTypes(obj) {
 
 
 export function hasEncounteredSpecies(id, state) {
-    const pData = state.config.pokemonData.find(p => p.id === id);
+    const pData = state.config.pokemonData[(id) - 1];
     if (!pData) return false;
     return (state.stats.seenSpecies && state.stats.seenSpecies[pData.name]) ||
            (state.stats.caughtSpecies && state.stats.caughtSpecies[pData.name]) ||
@@ -28,13 +28,13 @@ export function hasEncounteredSpecies(id, state) {
 }
 
 export function hasSeenSpecies(id, state) {
-    const pData = state.config.pokemonData.find(p => p.id === id);
+    const pData = state.config.pokemonData[(id) - 1];
     if (!pData) return false;
     return (state.stats.seenSpecies && state.stats.seenSpecies[pData.name]);
 }
 
 export function hasCaughtSpecies(id, state) {
-    const pData = state.config.pokemonData.find(p => p.id === id);
+    const pData = state.config.pokemonData[(id) - 1];
     if (!pData) return false;
     return (state.stats.caughtSpecies && state.stats.caughtSpecies[pData.name]) ||
            state.party.some(p => p.id === id) ||
@@ -53,7 +53,7 @@ export function showPokedex() {
     } else {
         // Iterate up to 151
         for(let i = 1; i <= 151; i++) {
-            const pData = state.config.pokemonData.find(p => p.id === i);
+            const pData = state.config.pokemonData[(i) - 1];
             if (!pData) continue;
 
             const isSeen = hasSeenSpecies(i, state);
@@ -95,7 +95,7 @@ export function showPokedex() {
 }
 
 export function showDexEntry(id) {
-    const pData = state.config.pokemonData.find(p => p.id === id);
+    const pData = state.config.pokemonData[(id) - 1];
     if (!pData) return;
 
     const hasSeenShiny = state.stats.seenShiniesSpecies && state.stats.seenShiniesSpecies[pData.name];
@@ -138,7 +138,7 @@ export function buildEvolutionLineHtml(pData, state) {
     }
 
     function buildTree(currentId) {
-        const pd = state.config.pokemonData.find(p => p.id === currentId);
+        const pd = state.config.pokemonData[(currentId) - 1];
         if (!pd) return "";
 
         const hasEncountered = hasEncounteredSpecies(currentId, state);
