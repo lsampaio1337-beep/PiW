@@ -12,6 +12,7 @@ export const state = {
     backpack: {
         pokeballs: { "Pokeball": 0, "Greatball": 0, "Ultraball": 0, "Safariball": 0, "Masterball": 0 },
         potions: { "Tiny Potion": 0, "Small Potion": 0, "Regular Potion": 0, "Big Potion": 0, "Huge Potion": 0, "Ultra Potion": 0 },
+        tokens: { "Daily Token": 0 },
         stones: {
             "Normal Stone": 0, "Fire Stone": 0, "Water Stone": 0, "Grass Stone": 0,
             "Electric Stone": 0, "Ice Stone": 0, "Fighting Stone": 0, "Poison Stone": 0,
@@ -49,6 +50,7 @@ export const state = {
         rainbowCandies: 0,
         candyPurchaseHistory: [],
         dailyRewards: { daysClaimed: 0, lastClaimDate: null },
+        dailyChallenges: { date: null, list: [], claimed: false },
         jigglypuffGrains: 0,
         jigglypuffGrainsUsed: 0,
         hasSeenZzZTutorial: false,

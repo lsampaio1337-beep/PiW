@@ -42,6 +42,7 @@ export const TYPE_COLORS = {
     "Water": "#6391c7",
 };
 import { updateTopbar } from './ui/topbar.js';
+import { checkAndInitializeDailyChallenges } from './dailyChallenges.js';
 import { updateSidebar } from './ui/sidebar.js';
 import { updateBattleArena, showDamage, playCombatAnimations, triggerDefeatAnimation } from './ui/battle.js';
 import { showCalendar } from './ui/calendar.js';

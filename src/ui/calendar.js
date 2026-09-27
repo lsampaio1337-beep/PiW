@@ -1,6 +1,7 @@
 import { state } from '../state.js';
 import { showModal } from '../ui.js';
 import { updateTopbar } from './topbar.js';
+import { claimDailyChallengeReward } from '../dailyChallenges.js';
 
 
 export function getRewardForDay(daysClaimed) {
@@ -179,6 +180,51 @@ export function showCalendar() {
 
     html += `</div>`;
     html += `<p style="font-size: 12px; color: #ccc; margin-top: 15px;">New rewards available every day. Check back tomorrow!</p>`;
+
+    // Append Daily Challenges
+    if (state.stats.dailyChallenges && state.stats.dailyChallenges.list && state.stats.dailyChallenges.list.length > 0) {
+        html += `<h2 style="margin-top: 20px; border-top: 1px solid #444; padding-top: 20px;">Daily Challenges</h2>`;
+        html += `<div style="display: flex; gap: 2%; justify-content: center; width: 100%;">`;
+
+        let allCompleted = true;
+
+        for (let i = 0; i < state.stats.dailyChallenges.list.length; i++) {
+            const challenge = state.stats.dailyChallenges.list[i];
+            const isDone = challenge.current >= challenge.target;
+            if (!isDone) allCompleted = false;
+
+            let cStyle = `border: 2px solid ${isDone ? '#4CAF50' : '#555'}; border-radius: 8px; padding: 10px; flex: 1; background: rgba(0,0,0,0.6); display: flex; flex-direction: column; align-items: center; text-align: center;`;
+            let pText = challenge.description.replace('{target}', challenge.target).replace('{typeTarget}', challenge.typeTarget || '').replace('{ivTarget}', challenge.ivTarget || '');
+
+            html += `<div style="${cStyle}">
+                <p style="font-size: 14px; margin: 0 0 10px 0;">${pText}</p>
+                <div style="width: 100%; background: #333; border-radius: 5px; height: 10px; margin-bottom: 5px; overflow: hidden;">
+                    <div style="width: ${(Math.min(challenge.current / challenge.target, 1) * 100).toFixed(0)}%; background: #4CAF50; height: 100%;"></div>
+                </div>
+                <span style="font-size: 12px; color: #ccc;">${challenge.current} / ${challenge.target}</span>
+            </div>`;
+        }
+
+        html += `</div>`;
+
+        html += `<div style="margin-top: 20px; text-align: center; display: flex; justify-content: center; align-items: center; gap: 15px;">
+            <div style="display: flex; align-items: center; gap: 5px;">
+                <img src="Assets/Items/Extra/DailyToken.png" style="width: 32px; height: 32px;" title="Daily Token">
+                <span style="font-size: 18px; font-weight: bold; color: #FFD700;">x1</span>
+            </div>
+            `;
+
+        if (state.stats.dailyChallenges.claimed) {
+            html += `<button disabled style="padding: 10px 20px; background: #555; color: #888; border: none; border-radius: 5px; font-weight: bold; cursor: not-allowed;">Collected</button>`;
+        } else if (allCompleted) {
+            html += `<button onclick="window.claimDailyChallengeReward()" style="padding: 10px 20px; background: #4CAF50; color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; box-shadow: 0 0 10px #4CAF50;">Claim Reward</button>`;
+        } else {
+            html += `<button disabled style="padding: 10px 20px; background: #555; color: #888; border: none; border-radius: 5px; font-weight: bold; cursor: not-allowed;">Claim Reward</button>`;
+        }
+
+        html += `</div>`;
+    }
+
     html += `</div>`;
 
     showModal("Daily Rewards", html, "window-calendar");
