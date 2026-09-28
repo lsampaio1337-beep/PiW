@@ -1,0 +1,116 @@
+Starting up http-server, serving ./
+
+http-server version: 14.1.1
+
+http-server settings:
+CORS: disabled
+Cache: 3600 seconds
+Connection Timeout: 120 seconds
+Directory Listings: visible
+AutoIndex: visible
+Serve GZIP Files: false
+Serve Brotli Files: false
+Default File Extension: none
+
+Available on:
+  http://127.0.0.1:3000
+  http://192.168.0.2:3000
+Hit CTRL-C to stop the server
+
+[2026-09-28T03:36:41.846Z]  "GET /index.html" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+(node:167315) [DEP0066] DeprecationWarning: OutgoingMessage.prototype._headers is deprecated
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[2026-09-28T03:36:41.884Z]  "GET /styles.css" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:36:41.900Z]  "GET /src/ui.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:36:41.901Z]  "GET /Assets/Extra/IconMap.png" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:36:41.905Z]  "GET /Assets/Extra/ExclamationMark.png" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:36:41.926Z]  "GET /Assets/Extra/IconBackpack.png" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:36:41.963Z]  "GET /Assets/Extra/IconPokedex.png" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:36:41.964Z]  "GET /Assets/Extra/IconTrainer.png" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:36:41.987Z]  "GET /src/ui/market.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:36:41.988Z]  "GET /src/state.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:36:41.995Z]  "GET /src/ui/map.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:36:42.007Z]  "GET /src/init/eventListeners.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:36:42.016Z]  "GET /src/windowManager.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:36:42.018Z]  "GET /src/clickThrough.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:36:42.020Z]  "GET /src/ui/topbar.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:36:42.020Z]  "GET /src/mathEngine.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:36:42.020Z]  "GET /src/battleSystem.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:36:42.021Z]  "GET /src/dayCare.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:36:42.045Z]  "GET /src/storage.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:36:42.046Z]  "GET /src/ui/sidebar.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:36:42.047Z]  "GET /src/ui/battle.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:36:42.048Z]  "GET /src/ui/calendar.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:36:42.048Z]  "GET /src/ui/gift.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:36:42.049Z]  "GET /src/ui/pokedex.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:36:42.058Z]  "GET /src/ui/pokemonStats.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:36:42.059Z]  "GET /src/ui/bonusCandy.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:36:42.065Z]  "GET /src/ui/settings.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:36:42.066Z]  "GET /src/ui/backpack/index.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:36:42.068Z]  "GET /src/ui/backpack/pokemon.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:36:42.070Z]  "GET /src/ui/dailyChallenges.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:36:42.076Z]  "GET /Assets/Extra/IconTeam.png" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:36:42.077Z]  "GET /Assets/Extra/IconMainView.png" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:36:42.080Z]  "GET /Assets/Extra/BonusCandy.png" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:36:42.080Z]  "GET /Assets/Extra/IconGift.png" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:36:42.081Z]  "GET /Assets/Extra/IconCalendar.png" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:36:42.082Z]  "GET /Assets/Extra/ProgressChallange.png" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:36:42.150Z]  "GET /src/ui/backpack/pokeballs.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:36:42.151Z]  "GET /src/ui/backpack/potions.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:36:42.159Z]  "GET /src/ui/backpack/stones.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:36:42.159Z]  "GET /Assets/Extra/IconSleep.png" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:36:42.166Z]  "GET /Assets/Extra/IconHelp.png" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:36:42.166Z]  "GET /src/ui/backpack/utils.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:36:42.171Z]  "GET /Assets/Extra/IconSettings.png" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:36:42.173Z]  "GET /Assets/Extra/IconExit.png" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:36:42.174Z]  "GET /Assets/Pokemon%20Sprites/Natural/1.png" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:36:42.179Z]  "GET /Assets/Pokemon%20Sprites/Natural/4.png" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:36:42.203Z]  "GET /Assets/Pokemon%20Sprites/Natural/7.png" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:37:07.777Z]  "GET /index.html" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:37:07.785Z]  "GET /styles.css" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:37:07.792Z]  "GET /Assets/Extra/IconMap.png" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:37:07.794Z]  "GET /src/ui.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:37:07.794Z]  "GET /Assets/Extra/ExclamationMark.png" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:37:07.800Z]  "GET /Assets/Extra/IconBackpack.png" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:37:07.807Z]  "GET /Assets/Extra/IconPokedex.png" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:37:07.807Z]  "GET /Assets/Extra/IconTrainer.png" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:37:07.808Z]  "GET /Assets/Extra/IconTeam.png" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:37:07.820Z]  "GET /src/ui/market.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:37:07.823Z]  "GET /src/state.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:37:07.834Z]  "GET /src/ui/map.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:37:07.835Z]  "GET /src/init/eventListeners.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:37:07.835Z]  "GET /src/windowManager.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:37:07.836Z]  "GET /src/clickThrough.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:37:07.837Z]  "GET /src/ui/topbar.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:37:07.840Z]  "GET /src/mathEngine.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:37:07.846Z]  "GET /src/battleSystem.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:37:07.848Z]  "GET /src/dayCare.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:37:07.849Z]  "GET /src/storage.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:37:07.854Z]  "GET /src/ui/sidebar.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:37:07.854Z]  "GET /src/ui/battle.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:37:07.855Z]  "GET /src/ui/calendar.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:37:07.857Z]  "GET /src/ui/gift.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:37:07.857Z]  "GET /src/ui/pokedex.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:37:07.860Z]  "GET /src/ui/pokemonStats.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:37:07.865Z]  "GET /src/ui/bonusCandy.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:37:07.865Z]  "GET /src/ui/settings.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:37:07.866Z]  "GET /src/ui/backpack/index.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:37:07.866Z]  "GET /src/ui/backpack/pokemon.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:37:07.868Z]  "GET /Assets/Extra/IconMainView.png" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:37:07.868Z]  "GET /Assets/Extra/BonusCandy.png" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:37:07.874Z]  "GET /Assets/Extra/IconGift.png" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:37:07.877Z]  "GET /src/ui/dailyChallenges.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:37:07.878Z]  "GET /Assets/Extra/IconCalendar.png" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:37:07.878Z]  "GET /Assets/Extra/ProgressChallange.png" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:37:07.888Z]  "GET /src/ui/backpack/pokeballs.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:37:07.890Z]  "GET /src/ui/backpack/potions.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:37:07.891Z]  "GET /src/ui/backpack/stones.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:37:07.892Z]  "GET /Assets/Extra/IconSleep.png" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:37:07.894Z]  "GET /Assets/Extra/IconHelp.png" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:37:07.895Z]  "GET /Assets/Extra/IconSettings.png" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:37:07.896Z]  "GET /Assets/Extra/IconExit.png" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:37:07.898Z]  "GET /Assets/Pokemon%20Sprites/Natural/1.png" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:37:07.904Z]  "GET /src/ui/backpack/utils.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:37:07.910Z]  "GET /Assets/Pokemon%20Sprites/Natural/4.png" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+[2026-09-28T03:37:07.912Z]  "GET /Assets/Pokemon%20Sprites/Natural/7.png" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36"
+Killed
