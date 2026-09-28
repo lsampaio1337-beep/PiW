@@ -11,6 +11,7 @@ function createWindow() {
         height: height,
         show: false,
         transparent: true,
+        backgroundColor: '#00000000', // Explicitly set transparent background to help rendering
         frame: false,
         hasShadow: false,
         alwaysOnTop: false, // Don't keep it above other windows
@@ -28,6 +29,13 @@ function createWindow() {
 
     win.once('ready-to-show', () => {
         win.show();
+        win.focus();
+        // Fallback robust show delay
+        setTimeout(() => {
+            if (!win.isVisible()) win.show();
+            win.focus();
+        }, 500);
+
         // Create a signal file to let the launcher know the game is ready
         if (process.platform === 'win32') {
             fs.writeFileSync('game_ready.txt', 'ready');
@@ -48,7 +56,8 @@ function createWindow() {
 // app.disableHardwareAcceleration();
 
 app.whenReady().then(() => {
-    createWindow();
+    // Delay creation slightly to ensure graphics context is fully ready
+    setTimeout(createWindow, 250);
 
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) {
