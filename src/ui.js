@@ -358,44 +358,47 @@ window.showChallengesModal = function() {
 
     // The 150 Challenge should only appear if the Final Challenge (Indigo Plateau) has been completed
     let isFinalChallengeCompleted = state.stats.completedChallengeIds && state.stats.completedChallengeIds.includes('Indigo Plateau');
+    let hasActive150Challenge = isFinalChallengeCompleted && !state.stats.completed150Challenge;
 
-    if (activeChallengesCount === 0) {
-        if (state.stats.completed150Challenge || !isFinalChallengeCompleted) {
-            html += `<div style="text-align: center; font-size: 16px; color: #aaa;">No active Challenge</div>`;
-        } else {
-            let uniqueSpeciesCaught = state.stats.caughtSpecies ? Object.keys(state.stats.caughtSpecies).length : 0;
-            let isMet = uniqueSpeciesCaught >= 150;
-            let displayName = "The 150 Challenge";
-            let rewardsStr = "Mythical and Legendary Spot";
-            let cData = {
-                isMet: isMet,
-                textParts: [`Capture 150 different Pokémons (${uniqueSpeciesCaught}/150)${isMet ? ' <span style="color: #4CAF50;">[Complete]</span>' : ''}`]
-            };
+    if (activeChallengesCount === 0 && !hasActive150Challenge) {
+        html += `<div style="text-align: center; font-size: 16px; color: #aaa;">No active Challenge</div>`;
+    }
 
-            html += `<div style="border: 1px solid #333; padding: 10px; border-radius: 5px; background-color: rgba(255,255,255,0.05);">
-                        <div style="color: #ff9800; font-weight: bold; margin-bottom: 5px;">${displayName}</div>`;
+    if (hasActive150Challenge) {
+        let uniqueSpeciesCaught = state.stats.caughtSpecies ? Object.keys(state.stats.caughtSpecies).length : 0;
+        let isMet = uniqueSpeciesCaught >= 150;
+        let displayName = "The 150 Challenge";
+        let rewardsStr = "Mythical and Legendary Spot";
+        let cData = {
+            isMet: isMet,
+            textParts: [`Capture 150 different Pokémons (${uniqueSpeciesCaught}/150)${isMet ? ' <span style="color: #4CAF50;">[Complete]</span>' : ''}`]
+        };
 
-            html += `<div style="margin-bottom: 5px;"><b>Requirements:</b></div>
-                     <ul style="margin-top: 0; padding-left: 20px;">`;
+        html += `<div style="border: 1px solid #333; padding: 10px; border-radius: 5px; background-color: rgba(255,255,255,0.05);">
+                    <div style="color: #ff9800; font-weight: bold; margin-bottom: 5px;">${displayName}</div>`;
 
-            for (let part of cData.textParts) {
-                html += `<li>${part}</li>`;
-            }
+        html += `<div style="margin-bottom: 5px;"><b>Requirements:</b></div>
+                 <ul style="margin-top: 0; padding-left: 20px;">`;
 
-            html += `</ul>
-                     <div style="margin-top: 10px; color: #4CAF50;"><b>Rewards:</b> Unlocks ${rewardsStr}</div>`;
-
-            let safeAreaId = "150_challenge";
-
-            html += `<div style="text-align: center; margin-top: 15px; display: flex; justify-content: center; gap: 10px;">
-                         <button onclick="window.cheatProgressChallenge('${safeAreaId}')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; background-color: orange; color: white; border: none; border-radius: 5px; cursor: pointer;">Cheat Progress</button>`;
-
-            if (cData.isMet) {
-                 html += `<button onclick="window.completeChallenge('${safeAreaId}')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">Complete ✔️</button>`;
-            }
-            html += `</div></div>`;
+        for (let part of cData.textParts) {
+            html += `<li>${part}</li>`;
         }
-    } else {
+
+        html += `</ul>
+                 <div style="margin-top: 10px; color: #4CAF50;"><b>Rewards:</b> Unlocks ${rewardsStr}</div>`;
+
+        let safeAreaId = "150_challenge";
+
+        html += `<div style="text-align: center; margin-top: 15px; display: flex; justify-content: center; gap: 10px;">
+                     <button onclick="window.cheatProgressChallenge('${safeAreaId}')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; background-color: orange; color: white; border: none; border-radius: 5px; cursor: pointer;">Cheat Progress</button>`;
+
+        if (cData.isMet) {
+             html += `<button onclick="window.completeChallenge('${safeAreaId}')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">Complete ✔️</button>`;
+        }
+        html += `</div></div>`;
+    }
+
+    if (activeChallengesCount > 0) {
         for (let activeId of state.stats.activeChallenges) {
             let unlock = state.config.unlocks.find(u => u.areaId === activeId);
             if (!unlock) continue;
