@@ -32,6 +32,12 @@ export function showMap() {
     let unlockedAreas = new Set();
     unlockedAreas.add("Professor Oak Lab");
     unlockedAreas.add("PokeCenter & PokeMarket");
+
+    // Check if 150 unique species are caught
+    if (state.stats.caughtSpecies && Object.keys(state.stats.caughtSpecies).length >= 150) {
+        unlockedAreas.add("Mythical and Legendaries");
+    }
+
     if (state.stats.completedChallengeIds) {
         state.stats.completedChallengeIds.forEach(id => {
             parseAreaNames(id).forEach(area => unlockedAreas.add(area));
@@ -82,6 +88,7 @@ export function showMap() {
             else if (locationId === 'pok_mon_mansion') markerImg = './Assets/Extra/Spot.png';
             else if (locationId === 'trade_with_friends_hub') markerImg = './Assets/Extra/Spot.png';
             else if (locationId === 'daycare') markerImg = './Assets/Map/Spot_Daycare.png';
+            else if (locationId === 'mythical_and_legendaries') markerImg = './Assets/Extra/Spot.png';
             else if (locationId === 'pewter_gym') { markerImg = './Assets/Badges/Badge Kanto 1.png'; if (state.trainer.badges >= 1) showCheckmark = true; }
             else if (locationId === 'cerulean_gym') { markerImg = './Assets/Badges/Badge Kanto 2.png'; if (state.trainer.badges >= 2) showCheckmark = true; }
             else if (locationId === 'vermilion_gym') { markerImg = './Assets/Badges/Badge Kanto 3.png'; if (state.trainer.badges >= 3) showCheckmark = true; }

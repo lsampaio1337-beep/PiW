@@ -1534,6 +1534,17 @@ const routes = [
         "chance": 0.25
       }
     ]
+  },
+  {
+    "name": "Mythical and Legendaries",
+    "spawns": [
+      {
+        "pokemonId": 151,
+        "minLevel": 100,
+        "maxLevel": 100,
+        "chance": 1.0
+      }
+    ]
   }
 ];
 

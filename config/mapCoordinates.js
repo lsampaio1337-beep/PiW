@@ -248,6 +248,11 @@ const mapCoordinates = {
     "name": "Daycare",
     "x": 61.58,
     "y": 25.05
+  },
+  "mythical_and_legendaries": {
+    "name": "Mythical and Legendaries",
+    "x": 1,
+    "y": 1
   }
 };
 export default mapCoordinates;
