@@ -2,8 +2,12 @@ const { app, BrowserWindow, ipcMain, screen } = require('electron');
 const path = require('path');
 const fs = require('fs');
 
+// Force D3D11 backend to ensure stable hardware acceleration (required for transparent: true on Windows)
+app.commandLine.appendSwitch('use-angle', 'd3d11');
 // Disable CalculateNativeWinOcclusion to prevent frameless transparent window freezing issues
 app.commandLine.appendSwitch('disable-features', 'CalculateNativeWinOcclusion');
+// Force standard color profile to ensure alpha channels map correctly
+app.commandLine.appendSwitch('force-color-profile', 'srgb');
 
 function createWindow() {
     // Get primary display dimensions
@@ -21,6 +25,7 @@ function createWindow() {
         alwaysOnTop: false, // Don't keep it above other windows
         skipTaskbar: false,
         show: false,
+        backgroundColor: '#00000000', // Explicit transparent hex for software alpha channel base
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false,
@@ -51,7 +56,10 @@ function createWindow() {
 }
 
 app.whenReady().then(() => {
-    createWindow();
+    // 500ms delay to ensure the main process and IPC pipelines are completely settled
+    setTimeout(() => {
+        createWindow();
+    }, 500);
 
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) {
