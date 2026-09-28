@@ -277,6 +277,10 @@ export function getSpeciesDataHtml(pData, state) {
 let isSmartCaptureShinyMode = false;
 
 export function showSmartCaptureMode() {
+    // Preserve scroll position if window is already open
+    const modalContentContainer = document.querySelector('#window-smart-capture .window-content-container > div > div:nth-child(2)');
+    const savedScrollTop = modalContentContainer ? modalContentContainer.scrollTop : 0;
+
     let headerHtml = `
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding: 0 10px;">
             <div style="font-size: 14px; font-weight: bold;">Smart Capture Mode</div>
@@ -289,7 +293,7 @@ export function showSmartCaptureMode() {
         </div>
     `;
 
-    let html = headerHtml + `<div style="display:flex; flex-wrap:wrap; justify-content:center; max-height:400px; overflow-y:auto; gap:10px;">`;
+    let html = headerHtml + `<div id="smart-capture-grid" style="display:flex; flex-wrap:wrap; justify-content:center; max-height:400px; overflow-y:auto; gap:10px;">`;
 
     if (!state.config.pokemonData) {
         html += "<p>Loading Pokedex data...</p>";
@@ -304,25 +308,24 @@ export function showSmartCaptureMode() {
             const hasSeenShiny = state.stats.seenShiniesSpecies && state.stats.seenShiniesSpecies[pData.name];
             const hasCaughtShiny = state.stats.caughtShiniesSpecies && state.stats.caughtShiniesSpecies[pData.name];
 
-            const isRevealed = isCaught || hasCaughtShiny || isSeen || hasSeenShiny;
-            let filter = isRevealed ? "none" : "brightness(0)";
-            let cursor = isRevealed ? "pointer" : "default";
-            let onClick = isRevealed ? `onclick="window.showSmartCaptureBallSelection(${i})"` : "";
-            let displayName = isRevealed ? pData.name : "???";
+            let filter = (isCaught || hasCaughtShiny) ? "none" : "brightness(0)";
+            let cursor = "pointer";
+            let onClick = `onclick="window.showSmartCaptureBallSelection(${i})"`;
+            let displayName = (isSeen || hasSeenShiny || isCaught || hasCaughtShiny) ? pData.name : "???";
 
             let cardClass = "pokedex-card";
             // Set width dynamically assuming a ~10px gap to fit exactly 9 items per row
-            let cardStyle = "width: calc((100% / 9) - 10px); text-align: center; font-size: 10px; box-sizing: border-box; position: relative;";
+            let cardStyle = "width: calc((100% / 9) - 10px); text-align: center; font-size: 10px; box-sizing: border-box; position: relative; cursor: pointer;";
 
-            if (!isSeen && !isCaught) {
-                cardStyle += " border: 2px solid transparent; background: transparent;";
+            if (hasCaughtShiny) {
+                cardClass += " pokedex-card-shiny pokedex-card-shiny-rotate";
+            } else if (hasSeenShiny) {
+                cardClass += " pokedex-card-shiny";
+            } else if (isCaught) {
+                // Keep default blue border from 'pokedex-card'
             } else {
-                if (hasSeenShiny || hasCaughtShiny) {
-                    cardClass += " pokedex-card-shiny";
-                }
-                if (hasCaughtShiny) {
-                    cardClass += " pokedex-card-shiny-rotate";
-                }
+                // Not captured -> no border
+                cardStyle += " border: 2px solid transparent; background: transparent;";
             }
 
             // Which ball is selected?
@@ -349,6 +352,14 @@ export function showSmartCaptureMode() {
 
     html += `</div>`;
     showModal("Smart Capture Mode", html, "window-smart-capture");
+
+    // Restore scroll position
+    setTimeout(() => {
+        const grid = document.getElementById('smart-capture-grid');
+        if (grid) {
+            grid.scrollTop = savedScrollTop;
+        }
+    }, 10);
 }
 
 export function toggleSmartCaptureShinyMode() {
@@ -397,7 +408,7 @@ export function showSmartCaptureBallSelection(id) {
     }
 
     html += `</div>`;
-    showModal("Select Ball", html, "window-smart-capture-ball");
+    showModal(`Select ball to ${pData.name}`, html, "window-smart-capture-ball");
 }
 
 export function selectSmartCaptureBall(id, tier) {
@@ -419,9 +430,6 @@ export function selectSmartCaptureBall(id, tier) {
         window.storageRef.save(state);
     }
 
-    if (window.windowManager) {
-        window.windowManager.closeWindow("window-smart-capture-ball");
-    }
-
     showSmartCaptureMode();
+    showSmartCaptureBallSelection(id);
 }
