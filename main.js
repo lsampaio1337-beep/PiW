@@ -4,24 +4,26 @@ const fs = require('fs');
 
 function createWindow() {
     // Get primary display dimensions
-    const { width, height } = screen.getPrimaryDisplay().workAreaSize;
+    const { x, y, width, height } = screen.getPrimaryDisplay().workArea;
 
     const win = new BrowserWindow({
         width: width,
         height: height,
+        x: x,
+        y: y,
         transparent: true,
         frame: false,
         hasShadow: false,
         alwaysOnTop: false, // Don't keep it above other windows
         skipTaskbar: false,
+        show: false,
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false
         }
     });
 
-    // Maximize the window to cover the screen
-    win.maximize();
+    win.setBounds({ x, y, width, height });
 
     win.loadFile('index.html');
 
@@ -30,6 +32,7 @@ function createWindow() {
         if (process.platform === 'win32') {
             fs.writeFileSync('game_ready.txt', 'ready');
         }
+        win.show();
     });
 
     // Handle click-through messages from the renderer process
@@ -41,9 +44,6 @@ function createWindow() {
         }
     });
 }
-
-// Disable hardware acceleration to prevent transparency bugs on some OS
-app.disableHardwareAcceleration();
 
 app.whenReady().then(() => {
     createWindow();
