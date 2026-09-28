@@ -11,7 +11,8 @@ function createWindow() {
         height: height,
         x: x,
         y: y,
-        transparent: true,
+        transparent: false,
+        backgroundColor: '#000000',
         frame: false,
         hasShadow: false,
         alwaysOnTop: false, // Don't keep it above other windows
@@ -44,6 +45,8 @@ function createWindow() {
         }
     });
 }
+
+app.disableHardwareAcceleration();
 
 app.whenReady().then(() => {
     createWindow();
