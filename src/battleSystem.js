@@ -894,6 +894,18 @@ class BattleSystem {
                     this.activeEncounter.ivs.spa + this.activeEncounter.ivs.spd + this.activeEncounter.ivs.spe;
         }
 
+        // Vitamin drops
+        if (sumIV > 450 && this.activeEncounter?.quality > 1.4) {
+            const vitamins = ["Calcium SpAtk", "Carbo Speed", "HP Up", "Iron Def", "Protein Atk", "Zinc SpDef"];
+            const randomVitamin = vitamins[Math.floor(Math.random() * vitamins.length)];
+
+            let dropQuantity = Math.floor(lootMultiplier);
+            if (Math.random() < (lootMultiplier % 1)) dropQuantity += 1;
+
+            if (!this.state.backpack.stones) this.state.backpack.stones = {};
+            this.state.backpack.stones[randomVitamin] = (this.state.backpack.stones[randomVitamin] || 0) + dropQuantity;
+        }
+
         let customDropChance = (2.0 * (sumIV / 600.0)) / 100.0;
 
         if (Math.random() < (customDropChance * lootMultiplier)) {
@@ -1530,6 +1542,19 @@ class BattleSystem {
                 if (this.activeEncounter.ivs) {
                     sumIV = this.activeEncounter.ivs.hp + this.activeEncounter.ivs.atk + this.activeEncounter.ivs.def +
                             this.activeEncounter.ivs.spa + this.activeEncounter.ivs.spd + this.activeEncounter.ivs.spe;
+                }
+
+                // Vitamin drops
+                if (sumIV > 450 && this.activeEncounter?.quality > 1.4) {
+                    const vitamins = ["Calcium SpAtk", "Carbo Speed", "HP Up", "Iron Def", "Protein Atk", "Zinc SpDef"];
+                    const randomVitamin = vitamins[Math.floor(Math.random() * vitamins.length)];
+
+                    let dropQuantity = Math.floor(lootMultiplier);
+                    if (Math.random() < (lootMultiplier % 1)) dropQuantity += 1;
+
+                    if (!this.state.backpack.stones) this.state.backpack.stones = {};
+                    this.state.backpack.stones[randomVitamin] = (this.state.backpack.stones[randomVitamin] || 0) + dropQuantity;
+                    results.itemsLooted[randomVitamin] = (results.itemsLooted[randomVitamin] || 0) + dropQuantity;
                 }
 
                 let itemDropChance = (2.0 * (sumIV / 600)) / 100.0;
