@@ -2,8 +2,10 @@ const { app, BrowserWindow, ipcMain, screen } = require('electron');
 const path = require('path');
 const fs = require('fs');
 
-// Append command-line switches to force hardware acceleration stability
-app.commandLine.appendSwitch('use-angle', 'd3d11');
+// Explicitly disable hardware acceleration for maximum stability
+app.disableHardwareAcceleration();
+
+// Append command-line switches to improve compatibility
 app.commandLine.appendSwitch('disable-features', 'CalculateNativeWinOcclusion');
 app.commandLine.appendSwitch('force-color-profile', 'srgb');
 
@@ -16,7 +18,7 @@ function createWindow() {
         height: height,
         x: x,
         y: y,
-        transparent: true,
+        transparent: false, // Disable transparency to prevent rendering bugs
         frame: false,
         hasShadow: false,
         alwaysOnTop: false, // Don't keep it above other windows
@@ -53,10 +55,7 @@ function createWindow() {
 }
 
 app.whenReady().then(() => {
-    // Add a 500ms delay to ensure hardware rendering (like D3D11) fully initializes
-    setTimeout(() => {
-        createWindow();
-    }, 500);
+    createWindow();
 
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) {
