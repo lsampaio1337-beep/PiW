@@ -362,7 +362,7 @@ export function updateBattleArena() {
                         elEnemySide.style.left = '100%';
                         if (hpContainerEnemy) {
                             hpContainerEnemy.style.transition = 'none';
-                            hpContainerEnemy.style.left = '100%';
+
                         }
                         // Trigger reflow
                         void elEnemySide.offsetWidth;
