@@ -2,6 +2,8 @@ const { app, BrowserWindow, ipcMain, screen } = require('electron');
 const path = require('path');
 const fs = require('fs');
 
+app.disableHardwareAcceleration();
+
 function createWindow() {
     // Get primary display dimensions
     const { x, y, width, height } = screen.getPrimaryDisplay().workArea;
@@ -11,7 +13,8 @@ function createWindow() {
         height: height,
         x: x,
         y: y,
-        transparent: true,
+        transparent: false,
+        backgroundColor: '#000000',
         frame: false,
         hasShadow: false,
         alwaysOnTop: false, // Don't keep it above other windows
