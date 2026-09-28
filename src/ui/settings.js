@@ -42,8 +42,12 @@ export function showSettings() {
 export function showTimeLapseModal() {
     const html = `
         <div style="margin-bottom: 15px;">
-            <label for="timelapse-hours-input">How long? (Hours):</label>
-            <input type="number" id="timelapse-hours-input" value="1" min="1" style="padding: 5px; width: 80px;">
+            <label for="timelapse-duration-input">How long?:</label>
+            <input type="number" id="timelapse-duration-input" value="1" min="1" style="padding: 5px; width: 80px;">
+            <select id="timelapse-unit-input" style="padding: 5px;">
+                <option value="hours">Hours</option>
+                <option value="minutes">Minutes</option>
+            </select>
         </div>
         <button onclick="window.runTimeLapse()" style="padding: 5px 10px; font-size: 14px;">Start</button>
     `;
@@ -51,10 +55,14 @@ export function showTimeLapseModal() {
 }
 
 export function runTimeLapse() {
-    const inputEl = document.getElementById('timelapse-hours-input');
-    if (!inputEl) return;
-    const hours = parseFloat(inputEl.value);
-    if (!isNaN(hours) && hours > 0) {
+    const inputEl = document.getElementById('timelapse-duration-input');
+    const unitEl = document.getElementById('timelapse-unit-input');
+    if (!inputEl || !unitEl) return;
+
+    const duration = parseFloat(inputEl.value);
+    const unit = unitEl.value;
+
+    if (!isNaN(duration) && duration > 0) {
         // Close modals
         document.getElementById('modal-overlay').style.display = 'none';
         if (window.windowManager) {
@@ -62,11 +70,25 @@ export function runTimeLapse() {
             window.windowManager.closeDynamicWindow('window-settings');
         }
 
-        const elapsedMs = hours * 3600 * 1000;
+        let elapsedMs = 0;
+        if (unit === 'hours') {
+            elapsedMs = duration * 3600 * 1000;
+        } else if (unit === 'minutes') {
+            elapsedMs = duration * 60 * 1000;
+        }
 
         // Execute TimeLapse Simulation
         if (globals.battleSystem) {
             const results = globals.battleSystem.runFastForward(elapsedMs);
+
+            // Add simulated time to playtime and battle mode timer
+            let simulatedSeconds = Math.floor((results.simulatedTimeMs !== undefined ? results.simulatedTimeMs : elapsedMs) / 1000);
+
+            state.stats.playtime = (state.stats.playtime || 0) + simulatedSeconds;
+            state.stats.battleModeTimer = (state.stats.battleModeTimer || 0) + simulatedSeconds;
+
+            if (window.updateTopbar) window.updateTopbar();
+
             window.showTimeLapseResults(results);
         }
     }
