@@ -3,6 +3,7 @@ import { renderPokeballsTab } from './pokeballs.js';
 import { renderPotionsTab } from './potions.js';
 import { renderStonesTab } from './stones.js';
 import { renderPokemonTab } from './pokemon.js';
+import { renderVitaminsTab } from './vitamins.js';
 
 export function showBackpack() {
     let html = `
@@ -40,6 +41,8 @@ export function showBackpack() {
                             <circle class="backpack-pocket" onclick="event.stopPropagation(); window.renderBackpackTab('potions')" cx="437.01" cy="1065.96" r="186.16"></circle>
                             <!-- Cyan Stones Pocket -->
                             <circle class="backpack-pocket" onclick="event.stopPropagation(); window.renderBackpackTab('stones')" cx="841.54" cy="1072.47" r="186.09"></circle>
+                            <!-- Vitamin Pocket -->
+                            <polygon class="backpack-pocket" onclick="event.stopPropagation(); window.renderBackpackTab('vitamins')" points="1111.96,469.66 1111.96,480.20 1111.96,489.11 1111.96,492.21 1107.49,501.26 1093.93,510.30 1089.45,520.83 1089.45,537.30 1098.41,544.86 1098.41,559.85 1098.41,576.45 1098.41,591.43 1093.93,611.01 1089.45,629.10 1084.98,647.19 1084.98,668.25 1084.98,680.26 1086.38,699.84 1087.92,716.44 1087.92,753.98 1090.99,772.06 1090.99,811.22 1097.00,833.76 1098.41,878.85 1098.41,898.42 1097.00,924.08 1097.00,946.62 1097.00,964.71 1098.41,1003.86 1093.93,1023.43 1093.93,1051.92 1098.41,1076.09 1098.41,1100.12 1098.41,1118.21 1098.41,1143.72 1097.00,1164.78 1097.00,1182.87 1095.46,1207.04 1115.03,1210.00 1139.08,1199.47 1157.11,1184.36 1175.15,1167.88 1190.24,1154.25 1199.32,1134.67 1205.33,1112.13 1205.33,1079.06 1206.74,1050.43 1206.74,1026.40 1206.74,1005.35 1209.81,994.82 1211.34,976.73 1211.34,969.16 1211.34,954.18 1208.27,936.09 1206.74,921.11 1202.26,904.50 1200.73,884.92 1200.73,859.41 1202.26,844.29 1202.26,830.79 1200.73,815.67 1200.73,793.12 1200.73,765.99 1200.73,746.55 1205.33,717.93 1211.34,699.84 1212.88,669.74 1215.82,647.19 1218.89,618.57 1220.29,601.97 1220.29,585.50 1224.90,572.00 1232.32,559.85 1239.86,549.31 1239.86,531.36 1232.32,525.28 1217.35,517.73 1215.82,510.30 1218.89,481.68 1218.89,469.66 1202.26,456.03 1178.21,451.58 1154.17,451.58 1139.08,451.58 1122.58,451.58 1111.96,469.66"></polygon>
                         </svg>
                     </div>
 
@@ -90,6 +93,9 @@ export function renderBackpackTab(tab) {
     } else if (tab === 'pokemon') {
         titleSpan.innerText = 'Pokémon';
         renderPokemonTab(innerContent);
+    } else if (tab === 'vitamins') {
+        titleSpan.innerText = 'Vitamin';
+        renderVitaminsTab(innerContent);
     }
 }
 
