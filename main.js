@@ -2,6 +2,9 @@ const { app, BrowserWindow, ipcMain, screen } = require('electron');
 const path = require('path');
 const fs = require('fs');
 
+// Explicitly disable hardware acceleration as requested
+app.disableHardwareAcceleration();
+
 function createWindow() {
     // Get primary display dimensions
     const { x, y, width, height } = screen.getPrimaryDisplay().workArea;
@@ -14,7 +17,7 @@ function createWindow() {
         backgroundColor: '#000000',
         frame: false,
         hasShadow: false,
-        alwaysOnTop: false, // Don't keep it above other windows
+        alwaysOnTop: false,
         skipTaskbar: false,
         show: false,
         webPreferences: {
@@ -44,8 +47,6 @@ function createWindow() {
         }
     });
 }
-
-app.commandLine.appendSwitch('disable-accelerated-video-decode');
 
 app.whenReady().then(() => {
     createWindow();
