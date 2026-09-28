@@ -2,11 +2,7 @@ const { app, BrowserWindow, ipcMain, screen } = require('electron');
 const path = require('path');
 const fs = require('fs');
 
-// Robust hardware acceleration and GPU flags to prevent transparency freezing issues
-app.commandLine.appendSwitch('ignore-gpu-blocklist');
-app.commandLine.appendSwitch('enable-gpu-rasterization');
-app.commandLine.appendSwitch('enable-zero-copy');
-app.commandLine.appendSwitch('enable-transparent-visuals');
+// Disable CalculateNativeWinOcclusion to prevent frameless transparent window freezing issues
 app.commandLine.appendSwitch('disable-features', 'CalculateNativeWinOcclusion');
 
 function createWindow() {
@@ -25,7 +21,6 @@ function createWindow() {
         alwaysOnTop: false, // Don't keep it above other windows
         skipTaskbar: false,
         show: false,
-        backgroundColor: '#00000000', // Explicit transparent hex to prevent glitched contexts
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false,
@@ -56,10 +51,7 @@ function createWindow() {
 }
 
 app.whenReady().then(() => {
-    // Slight delay to ensure the GPU process is fully initialized before window creation
-    setTimeout(() => {
-        createWindow();
-    }, 400);
+    createWindow();
 
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) {
