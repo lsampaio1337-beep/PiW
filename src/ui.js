@@ -356,8 +356,11 @@ window.showChallengesModal = function() {
                 <h3 style="margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; font-size: 16px;">${activeChallengesCount > 1 ? 'Active Challenges' : 'Active Challenge'}</h3>
                 <div style="display: flex; flex-direction: column; gap: 15px;">`;
 
+    // The 150 Challenge should only appear if the Final Challenge (Indigo Plateau) has been completed
+    let isFinalChallengeCompleted = state.stats.completedChallengeIds && state.stats.completedChallengeIds.includes('Indigo Plateau');
+
     if (activeChallengesCount === 0) {
-        if (state.stats.completed150Challenge) {
+        if (state.stats.completed150Challenge || !isFinalChallengeCompleted) {
             html += `<div style="text-align: center; font-size: 16px; color: #aaa;">No active Challenge</div>`;
         } else {
             let uniqueSpeciesCaught = state.stats.caughtSpecies ? Object.keys(state.stats.caughtSpecies).length : 0;
