@@ -9,6 +9,7 @@ function createWindow() {
     const win = new BrowserWindow({
         width: width,
         height: height,
+        show: false,
         transparent: true,
         frame: false,
         hasShadow: false,
@@ -20,12 +21,13 @@ function createWindow() {
         }
     });
 
-    // Maximize the window to cover the screen
-    win.maximize();
+    // Use setBounds instead of maximize to avoid invisible window bug on Windows
+    win.setBounds(screen.getPrimaryDisplay().workArea);
 
     win.loadFile('index.html');
 
     win.once('ready-to-show', () => {
+        win.show();
         // Create a signal file to let the launcher know the game is ready
         if (process.platform === 'win32') {
             fs.writeFileSync('game_ready.txt', 'ready');
