@@ -815,6 +815,8 @@ class BattleSystem {
         this.grantXP(leader, evxp);
         this.state.trainer.money += Math.floor(evm * lootMultiplier);
 
+        let lootedItemsThisBattle = {};
+
         // Loot drops for Stones
         let dropRate = 0;
         switch (this.activeEncounter.qualityName) {
@@ -833,6 +835,7 @@ class BattleSystem {
 
             if (!this.state.backpack.stones) this.state.backpack.stones = {};
             this.state.backpack.stones[stoneName] = (this.state.backpack.stones[stoneName] || 0) + dropQuantity;
+            lootedItemsThisBattle[stoneName] = (lootedItemsThisBattle[stoneName] || 0) + dropQuantity;
         }
 
         // Loot drops for Balls and Potions
@@ -860,9 +863,11 @@ class BattleSystem {
             if (Math.random() < 0.5) {
                 if (!this.state.backpack.pokeballs[ballDrop]) this.state.backpack.pokeballs[ballDrop] = 0;
                 this.state.backpack.pokeballs[ballDrop] += dropQuantity;
+                lootedItemsThisBattle[ballDrop] = (lootedItemsThisBattle[ballDrop] || 0) + dropQuantity;
             } else {
                 if (!this.state.backpack.potions[potionDrop]) this.state.backpack.potions[potionDrop] = 0;
                 this.state.backpack.potions[potionDrop] += dropQuantity;
+                lootedItemsThisBattle[potionDrop] = (lootedItemsThisBattle[potionDrop] || 0) + dropQuantity;
             }
         }
 
@@ -897,6 +902,7 @@ class BattleSystem {
 
             if (!this.state.backpack.pokeballs) this.state.backpack.pokeballs = {};
             this.state.backpack.pokeballs[ballTierName] = (this.state.backpack.pokeballs[ballTierName] || 0) + ballDropQty;
+            lootedItemsThisBattle[ballTierName] = (lootedItemsThisBattle[ballTierName] || 0) + ballDropQty;
         }
 
         // Roll for Potion drop
@@ -906,6 +912,11 @@ class BattleSystem {
 
             if (!this.state.backpack.potions) this.state.backpack.potions = {};
             this.state.backpack.potions[potionTierName] = (this.state.backpack.potions[potionTierName] || 0) + potionDropQty;
+            lootedItemsThisBattle[potionTierName] = (lootedItemsThisBattle[potionTierName] || 0) + potionDropQty;
+        }
+
+        if (Object.keys(lootedItemsThisBattle).length > 0 && typeof window.showLoot === 'function' && !this.state.isTimeLapsing) {
+            window.showLoot(lootedItemsThisBattle);
         }
 
         this.state.stats.battlesWon++;

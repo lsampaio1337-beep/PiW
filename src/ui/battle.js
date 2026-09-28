@@ -90,6 +90,90 @@ function formatActiveItemQuantity(q) {
     return q;
 }
 
+window.showActiveItemSelection = function(type) {
+    const popup = document.getElementById('battle-active-item-selection-popup');
+    if (!popup) return;
+
+    if (popup.style.display === 'flex' && popup.dataset.type === type) {
+        popup.style.display = 'none';
+        return;
+    }
+
+    let html = '';
+
+    if (type === 'potion') {
+        const potions = state.config.balance.items.potions;
+        for (let idx = 0; idx < potions.length; idx++) {
+            let p = potions[idx];
+            if (p.name === 'Max Potion') continue;
+            let inventoryName = p.name;
+            if (p.name === 'Regular Potion') inventoryName = 'Regular Potion';
+            if (p.name === 'Big') inventoryName = 'Big Potion';
+
+            const qty = state.backpack.potions[inventoryName] || 0;
+            const isActive = state.settings.activePotionTier === idx;
+            const borderColor = isActive ? '#2ecc71' : '#3498db';
+
+            html += `
+                <div onclick="window.selectBattleActiveItem('potion', ${idx})" style="width: 30px; height: 30px; background: rgba(0, 0, 0, 0.6); border: 2px solid ${borderColor}; border-radius: 8px; position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                    <img src="./Assets/Items/Potions/${inventoryName}.png" style="width: 80%; height: 80%; object-fit: contain;">
+                    <span style="position: absolute; bottom: 0px; right: 2px; color: white; font-size: 8px; font-weight: bold; text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;">${formatActiveItemQuantity(qty)}</span>
+                </div>
+            `;
+        }
+    } else if (type === 'ball') {
+        const balls = state.config.balance.items.pokeballs;
+        for (let idx = 0; idx < balls.length; idx++) {
+            let b = balls[idx];
+            const qty = state.backpack.pokeballs[b.name] || 0;
+            const isActive = state.settings.activeBallTier === idx;
+            const borderColor = isActive ? '#2ecc71' : '#3498db';
+
+            html += `
+                <div onclick="window.selectBattleActiveItem('ball', ${idx})" style="width: 30px; height: 30px; background: rgba(0, 0, 0, 0.6); border: 2px solid ${borderColor}; border-radius: 8px; position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                    <img src="./Assets/Items/Balls/${b.name}.png" style="width: 80%; height: 80%; object-fit: contain;">
+                    <span style="position: absolute; bottom: 0px; right: 2px; color: white; font-size: 8px; font-weight: bold; text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;">${formatActiveItemQuantity(qty)}</span>
+                </div>
+            `;
+        }
+    }
+
+    popup.innerHTML = html;
+    popup.style.display = 'flex';
+    popup.dataset.type = type;
+};
+
+window.selectBattleActiveItem = function(type, idx) {
+    if (type === 'potion') {
+        state.settings.activePotionTier = idx;
+    } else if (type === 'ball') {
+        state.settings.activeBallTier = idx;
+    }
+
+    // Save state
+    if (window.storageRef) {
+        window.storageRef.save(state);
+    }
+
+    // Hide popup and update UI
+    const popup = document.getElementById('battle-active-item-selection-popup');
+    if (popup) popup.style.display = 'none';
+
+    updateActiveItemsUI();
+};
+
+// Close popup if clicked outside
+document.addEventListener('click', (e) => {
+    const popup = document.getElementById('battle-active-item-selection-popup');
+    if (popup && popup.style.display === 'flex') {
+        const potionBtn = document.getElementById('battle-active-potion-card');
+        const ballBtn = document.getElementById('battle-active-ball-card');
+        if (!popup.contains(e.target) && (!potionBtn || !potionBtn.contains(e.target)) && (!ballBtn || !ballBtn.contains(e.target))) {
+            popup.style.display = 'none';
+        }
+    }
+});
+
 
 export function updateBattleArena() {
     updateActiveItemsUI();
@@ -855,4 +939,47 @@ export function playCombatAnimations(targetSide, moveType, duration) {
         }, Math.min(500, duration * 0.3));
 
     }, duration * 0.8);
+}
+
+let lootHideTimeout = null;
+
+export function showLoot(lootItems) {
+    const container = document.getElementById('battle-loot-container');
+    if (!container) return;
+
+    const keys = Object.keys(lootItems);
+    if (keys.length === 0) return;
+
+    let html = '';
+    for (let i = 0; i < keys.length; i++) {
+        const itemName = keys[i];
+        const count = lootItems[itemName];
+
+        let imgFolder = 'Balls';
+        if (itemName.includes('Potion')) imgFolder = 'Potions';
+        else if (itemName.includes('Stone')) imgFolder = 'Stones';
+
+        html += `
+            <div style="width: 30px; height: 30px; background: rgba(0, 0, 0, 0.6); border: 1px solid #f1c40f; border-radius: 4px; position: relative; display: flex; align-items: center; justify-content: center;">
+                <img src="Assets/Items/${imgFolder}/${itemName}.png" style="width: 80%; height: 80%; object-fit: contain;">
+                <span style="position: absolute; bottom: -2px; right: 0px; color: white; font-size: 8px; font-weight: bold; text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;">${count}</span>
+            </div>
+        `;
+    }
+
+    container.innerHTML = html;
+    container.style.display = 'flex';
+    container.style.opacity = '1';
+
+    if (lootHideTimeout) {
+        clearTimeout(lootHideTimeout);
+    }
+
+    lootHideTimeout = setTimeout(() => {
+        container.style.opacity = '0';
+        lootHideTimeout = setTimeout(() => {
+            container.style.display = 'none';
+            lootHideTimeout = null;
+        }, 500); // Wait for transition
+    }, 5000);
 }
