@@ -52,7 +52,7 @@ import { showPokemonStats, showPokemonStatsByUuid, evolvePokemon } from './ui/po
 import { showBonusCandyModal } from './ui/bonusCandy.js';
 window.showBonusCandyModal = showBonusCandyModal;
 window.showGiftModal = showGiftModal;
-import { showSettings, updateGameSpeed, addMoney, addXp, exportLog, showAddPokemonModal, forceNextEncounter, activateCheat, showTimeLapseModal, runTimeLapse } from './ui/settings.js';
+import { showSettings, updateGameSpeed, addMoney, exportLog, showAddPokemonModal, forceNextEncounter, activateCheat, showTimeLapseModal, runTimeLapse } from './ui/settings.js';
 import { setupMarket, buyItem, openPokeMarketBuy, renderPokeMarketTab, updateMarketPrices } from './ui/market.js';
 import { showBackpack, renderBackpackTab, setActiveItem, setAutoPotionThreshold } from './ui/backpack/index.js';
 import { dragStart, dragOver, handleDrop } from './ui/backpack/pokemon.js';
@@ -80,7 +80,6 @@ window.evolvePokemon = evolvePokemon;
 window.showSettings = showSettings;
 window.updateGameSpeed = updateGameSpeed;
 window.addMoney = addMoney;
-window.addXp = addXp;
 window.exportLog = exportLog;
 window.buyItem = buyItem;
 window.openPokeMarketBuy = openPokeMarketBuy;
