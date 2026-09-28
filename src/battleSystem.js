@@ -670,6 +670,20 @@ class BattleSystem {
         }
 
         let tier = this.state.settings.activeBallTier;
+
+        // Smart Capture Mode override (only if outside Safari Zone, checked later)
+        if (this.activeEncounter && this.state.settings.smartCapture) {
+            let overrideTier;
+            if (this.activeEncounter.qualityName === "Shiny" && this.state.settings.smartCaptureShiny && this.state.settings.smartCaptureShiny[this.activeEncounter.id] !== undefined) {
+                overrideTier = this.state.settings.smartCaptureShiny[this.activeEncounter.id];
+            } else {
+                overrideTier = this.state.settings.smartCapture[this.activeEncounter.id];
+            }
+            if (overrideTier !== undefined) {
+                tier = overrideTier;
+            }
+        }
+
         let isSafariZone = this.state.currentRoute === "Safari Zone";
         let ballName;
         let multiplier;
@@ -680,17 +694,16 @@ class BattleSystem {
             multiplier = safariBallConfig ? safariBallConfig.multiplier : 1.5;
             this.state.stats.ballsThrown = (this.state.stats.ballsThrown || 0) + 1;
         } else {
-            if (tier < 0) return { used: false, ballName: null, caught: false }; // None selected
+            if (tier < 0) return { used: false, ballName: null, caught: false }; // None selected or explicitly ignored (-1)
             ballName = this.state.config.balance.items.pokeballs[tier].name;
 
-        if (ballName !== "Safariball") {
-            if (this.state.backpack.pokeballs[ballName] > 0) {
-                this.state.backpack.pokeballs[ballName]--;
-            } else {
-                return { used: false, ballName: null, caught: false }; // No balls left
+            if (ballName !== "Safariball") {
+                if (this.state.backpack.pokeballs[ballName] > 0) {
+                    this.state.backpack.pokeballs[ballName]--;
+                } else {
+                    return { used: false, ballName: null, caught: false }; // No balls left
+                }
             }
-        }
-            if (tier < 0) return { used: false, ballName: null, caught: false }; // No balls left
 
             multiplier = this.state.config.balance.items.pokeballs[tier].multiplier;
             this.state.stats.ballsThrown = (this.state.stats.ballsThrown || 0) + 1;
