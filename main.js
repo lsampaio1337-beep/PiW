@@ -46,7 +46,8 @@ function createWindow() {
     });
 }
 
-app.disableHardwareAcceleration();
+// Disable hardware accelerated video decoding to fix video freezing issues
+app.commandLine.appendSwitch('disable-accelerated-video-decode');
 
 app.whenReady().then(() => {
     createWindow();

@@ -3,3 +3,5 @@ out/
 Assets/Pokemon Sprites/*.png
 test-results/
 app_output.log
+app_output_final.log
+app_output_new.log
