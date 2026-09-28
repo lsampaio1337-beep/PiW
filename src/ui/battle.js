@@ -57,9 +57,9 @@ function updateActiveItemsUI() {
             potionImg.style.display = 'block';
             potionCount.style.display = 'block';
         } else {
-            potionImg.src = "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
+            potionImg.src = "./Assets/Extra/IconExit.png";
             potionCount.textContent = '';
-            potionImg.style.display = 'none';
+            potionImg.style.display = 'block';
             potionCount.style.display = 'none';
         }
     }
@@ -76,9 +76,9 @@ function updateActiveItemsUI() {
             ballImg.style.display = 'block';
             ballCount.style.display = 'block';
         } else {
-            ballImg.src = "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
+            ballImg.src = "./Assets/Extra/IconExit.png";
             ballCount.textContent = '';
-            ballImg.style.display = 'none';
+            ballImg.style.display = 'block';
             ballCount.style.display = 'none';
         }
     }
@@ -102,6 +102,14 @@ window.showActiveItemSelection = function(type) {
     let html = '';
 
     if (type === 'potion') {
+        const isNoActive = state.settings.activePotionTier === -1;
+        const noBorderColor = isNoActive ? '#2ecc71' : '#3498db';
+        html += `
+            <div onclick="window.selectBattleActiveItem('potion', -1)" style="width: 30px; height: 30px; background: rgba(0, 0, 0, 0.6); border: 2px solid ${noBorderColor}; border-radius: 8px; position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer;" title="No Potion">
+                <img src="./Assets/Extra/IconExit.png" style="width: 60%; height: 60%; object-fit: contain;">
+            </div>
+        `;
+
         const potions = state.config.balance.items.potions;
         for (let idx = 0; idx < potions.length; idx++) {
             let p = potions[idx];
@@ -122,6 +130,14 @@ window.showActiveItemSelection = function(type) {
             `;
         }
     } else if (type === 'ball') {
+        const isNoActive = state.settings.activeBallTier === -1;
+        const noBorderColor = isNoActive ? '#2ecc71' : '#3498db';
+        html += `
+            <div onclick="window.selectBattleActiveItem('ball', -1)" style="width: 30px; height: 30px; background: rgba(0, 0, 0, 0.6); border: 2px solid ${noBorderColor}; border-radius: 8px; position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer;" title="No Ball">
+                <img src="./Assets/Extra/IconExit.png" style="width: 60%; height: 60%; object-fit: contain;">
+            </div>
+        `;
+
         const balls = state.config.balance.items.pokeballs;
         for (let idx = 0; idx < balls.length; idx++) {
             let b = balls[idx];
