@@ -852,6 +852,8 @@ class BattleSystem {
                             window.trackDailyChallenge('catch_sum_iv', { sumIv: sumIV });
                             window.trackDailyChallenge('catch_level', { level: caughtPokemon.level });
                             window.trackDailyChallenge('catch_different_species', { species: caughtPokemon.name }); // Would need species tracking logic inside trackDailyChallenge if we fully implement it
+                            window.trackDailyChallenge('catch_type', { types: caughtPokemon.types });
+                            window.trackDailyChallenge('catch_ball_tier', { ball: ballResult.ballName });
                         }
                         if (sumIV < 300) this.state.stats.caughtIVUnder300 = (this.state.stats.caughtIVUnder300 || 0) + 1;
                         if (sumIV < 350) this.state.stats.caughtIVUnder350 = (this.state.stats.caughtIVUnder350 || 0) + 1;
@@ -1593,6 +1595,8 @@ class BattleSystem {
                         if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') {
                             window.trackDailyChallenge('catch_sum_iv', { sumIv: sumIV_ZzZ });
                             window.trackDailyChallenge('catch_level', { level: caughtPokemon.level });
+                            window.trackDailyChallenge('catch_type', { types: caughtPokemon.types });
+                            window.trackDailyChallenge('catch_ball_tier', { ball: ballResult.ballName });
                         }
                         if (this.activeEncounter.qualityName === "Shiny") this.state.stats.shiniesCaught = (this.state.stats.shiniesCaught || 0) + 1;
                         if (this.activeEncounter.qualityName === "Shiny") {
