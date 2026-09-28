@@ -278,8 +278,8 @@ let isSmartCaptureShinyMode = false;
 
 export function showSmartCaptureMode() {
     // Preserve scroll position if window is already open
-    const modalContentContainer = document.querySelector('#window-smart-capture .window-content-container > div > div:nth-child(2)');
-    const savedScrollTop = modalContentContainer ? modalContentContainer.scrollTop : 0;
+    const gridEl = document.getElementById('smart-capture-grid');
+    const savedScrollTop = gridEl ? gridEl.scrollTop : 0;
 
     let headerHtml = `
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding: 0 10px;">
@@ -371,8 +371,7 @@ export function showSmartCaptureBallSelection(id) {
     const pData = state.config.pokemonData.find(p => p.id === id);
     if (!pData) return;
 
-    let html = `<div style="text-align: center; margin-bottom: 15px;">Select a ball to automatically use for ${pData.name} ${isSmartCaptureShinyMode ? '(Shiny)' : ''}</div>`;
-    html += `<div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">`;
+    let html = `<div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">`;
 
     // Default option (follow global active ball)
     let selectedTier = isSmartCaptureShinyMode ? state.settings.smartCaptureShiny[id] : state.settings.smartCapture[id];
@@ -408,7 +407,7 @@ export function showSmartCaptureBallSelection(id) {
     }
 
     html += `</div>`;
-    showModal(`Select ball to ${pData.name}`, html, "window-smart-capture-ball");
+    showModal(`Select ball to ${isSmartCaptureShinyMode ? 'Shiny ' : ''}${pData.name}`, html, "window-smart-capture-ball");
 }
 
 export function selectSmartCaptureBall(id, tier) {
