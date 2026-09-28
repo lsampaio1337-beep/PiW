@@ -37,14 +37,15 @@ export function cheatAction(action) {
             const data = state.config.pokemonData[p.id - 1];
             if (data) {
                 const oldMaxHp = p.maxHp;
-                p.maxHp = mathEngine.calculateHP(data.hp, p.ivs.hp, p.level, p.quality);
+                const v = p.vitamins || {};
+                p.maxHp = mathEngine.calculateHP(data.hp, p.ivs.hp, p.level, p.quality, v.hp || 0);
                 p.currentStats = {
                     hp: p.maxHp,
-                    atk: mathEngine.calculateStat(data.atk, p.ivs.atk, p.level, p.quality),
-                    def: mathEngine.calculateStat(data.def, p.ivs.def, p.level, p.quality),
-                    spa: mathEngine.calculateStat(data.spa, p.ivs.spa, p.level, p.quality),
-                    spd: mathEngine.calculateStat(data.spd, p.ivs.spd, p.level, p.quality),
-                    spe: mathEngine.calculateStat(data.spe, p.ivs.spe, p.level, p.quality)
+                    atk: mathEngine.calculateStat(data.atk, p.ivs.atk, p.level, p.quality, v.atk || 0),
+                    def: mathEngine.calculateStat(data.def, p.ivs.def, p.level, p.quality, v.def || 0),
+                    spa: mathEngine.calculateStat(data.spa, p.ivs.spa, p.level, p.quality, v.spa || 0),
+                    spd: mathEngine.calculateStat(data.spd, p.ivs.spd, p.level, p.quality, v.spd || 0),
+                    spe: mathEngine.calculateStat(data.spe, p.ivs.spe, p.level, p.quality, v.spe || 0)
                 };
                 // Keep the HP proportional or add the max hp difference
                 p.currentHp = Math.min(p.maxHp, p.currentHp + (p.maxHp - oldMaxHp));

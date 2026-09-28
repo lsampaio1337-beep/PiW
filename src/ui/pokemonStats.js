@@ -84,7 +84,7 @@ export function showPokemonStats(idx, location) {
         </div>
     `;
 
-    // Evolution Check
+    // Actions Check
     let evolveHtml = "";
     if (pData.evolutions && pData.evolutions.length > 0) {
         let evolutionsList = pData.evolutions.map(evo => {
@@ -107,8 +107,15 @@ export function showPokemonStats(idx, location) {
                 </div>
             `;
         }).join('');
-        evolveHtml = `<div style="margin-top: 15px; border-top: 1px solid #555; padding-top: 10px; display: flex; justify-content: center; gap: 10px;">${evolutionsList}</div>`;
+        evolveHtml = evolutionsList;
     }
+
+    let actionsHtml = `<div style="margin-top: 15px; border-top: 1px solid #555; padding-top: 10px; display: flex; justify-content: center; gap: 10px;">
+        ${evolveHtml}
+        <div>
+            <button onclick="window.showVitaminsModal('${location}', ${idx})" style="background: #e67e22; cursor: pointer; vertical-align: middle; width: max-content; min-width: 100px; height: 40px; font-size: 14px; font-weight: bold; line-height: 1.2; padding: 5px 10px; text-align: center; display: inline-flex; align-items: center; justify-content: center; flex-direction: column; border: none; border-radius: 5px; color: white;">Vitamins</button>
+        </div>
+    </div>`;
 
     let individualHtml = `
         <div style="display: flex; justify-content: space-around; flex-wrap: wrap; align-items: stretch; gap: 10px;">
@@ -143,7 +150,7 @@ export function showPokemonStats(idx, location) {
                 </div>
             </div>
         </div>
-        ${evolveHtml}
+        ${actionsHtml}
     `;
 
     // --- Collective Data (Pokedex info) ---
@@ -207,12 +214,13 @@ export function evolvePokemon(location, idx, toId) {
     p.bst = newBase.hp + newBase.atk + newBase.def + newBase.spa + newBase.spd + newBase.spe;
 
     // Recalculate stats with new base
-    p.maxHp = Math.floor((((2 * newBase.hp + p.ivs.hp) * p.level / 100) + p.level + 10) * p.quality);
-    p.currentStats.atk = Math.floor((((2 * newBase.atk + p.ivs.atk) * p.level / 100) + 5) * p.quality);
-    p.currentStats.def = Math.floor((((2 * newBase.def + p.ivs.def) * p.level / 100) + 5) * p.quality);
-    p.currentStats.spa = Math.floor((((2 * newBase.spa + p.ivs.spa) * p.level / 100) + 5) * p.quality);
-    p.currentStats.spd = Math.floor((((2 * newBase.spd + p.ivs.spd) * p.level / 100) + 5) * p.quality);
-    p.currentStats.spe = Math.floor((((2 * newBase.spe + p.ivs.spe) * p.level / 100) + 5) * p.quality);
+    const v = p.vitamins || {};
+    p.maxHp = mathEngine.calculateHP(newBase.hp, p.ivs.hp, p.level, p.quality, v.hp || 0);
+    p.currentStats.atk = mathEngine.calculateStat(newBase.atk, p.ivs.atk, p.level, p.quality, v.atk || 0);
+    p.currentStats.def = mathEngine.calculateStat(newBase.def, p.ivs.def, p.level, p.quality, v.def || 0);
+    p.currentStats.spa = mathEngine.calculateStat(newBase.spa, p.ivs.spa, p.level, p.quality, v.spa || 0);
+    p.currentStats.spd = mathEngine.calculateStat(newBase.spd, p.ivs.spd, p.level, p.quality, v.spd || 0);
+    p.currentStats.spe = mathEngine.calculateStat(newBase.spe, p.ivs.spe, p.level, p.quality, v.spe || 0);
 
     // Heal to max hp when evolving
     p.currentHp = p.maxHp;
@@ -229,3 +237,101 @@ export function evolvePokemon(location, idx, toId) {
 
     updateUI();
 }
+
+window.showVitaminsModal = function(location, idx) {
+    let list = null;
+    if (location === 'party') list = state.party;
+    else if (location === 'breeding') list = state.breeding;
+    else if (location === 'training') list = state.training;
+    else if (location === 'storage') list = state.storage;
+    else if (location === 'safe') list = state.safe;
+
+    if (!list || !list[idx]) return;
+    const p = list[idx];
+
+    const vitamins = [
+        { name: "HP Up", stat: "hp", displayName: "HP" },
+        { name: "Protein Atk", stat: "atk", displayName: "Attack" },
+        { name: "Iron Def", stat: "def", displayName: "Defense" },
+        { name: "Calcium SpAtk", stat: "spa", displayName: "Sp. Atk" },
+        { name: "Zinc SpDef", stat: "spd", displayName: "Sp. Def" },
+        { name: "Carbo Speed", stat: "spe", displayName: "Speed" }
+    ];
+
+    if (!p.vitamins) p.vitamins = {};
+
+    let html = `
+        <div class="content-panel" style="text-align: center; color: white;">
+            <p style="margin-top: 0; font-size: 14px; color: #ccc;">Each vitamin increases its stat by 1% of the final base stat (Max 20 per stat).</p>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top: 20px;">
+    `;
+
+    for (const v of vitamins) {
+        const owned = state.backpack.stones[v.name] || 0;
+        const applied = p.vitamins[v.stat] || 0;
+        const isMaxed = applied >= 20;
+        const canUse = owned > 0 && !isMaxed;
+
+        let btnHtml = '';
+        if (isMaxed) {
+            btnHtml = `<button disabled style="background: #7f8c8d; cursor: not-allowed; padding: 5px 10px; border: none; border-radius: 4px; color: white; width: 100%;">Maxed (20/20)</button>`;
+        } else {
+            btnHtml = `<button ${canUse ? '' : 'disabled'} onclick="window.useVitamin('${location}', ${idx}, '${v.name}', '${v.stat}')" style="${canUse ? 'background: #2ecc71; cursor: pointer;' : 'background: #7f8c8d; cursor: not-allowed;'} padding: 5px 10px; border: none; border-radius: 4px; color: white; width: 100%;">Use Vitamin (Owned: ${owned})</button>`;
+        }
+
+        html += `
+            <div style="background: rgba(0,0,0,0.4); border: 1px solid #555; border-radius: 8px; padding: 10px; display: flex; flex-direction: column; align-items: center;">
+                <img src="./Assets/Items/Vitamins/${v.name}.png" style="width: 40px; height: 40px; margin-bottom: 5px;">
+                <div style="font-weight: bold; margin-bottom: 5px;">${v.displayName} (+${applied}%)</div>
+                ${btnHtml}
+            </div>
+        `;
+    }
+
+    html += `
+            </div>
+        </div>
+    `;
+
+    showModal(`Vitamins for ${p.name}`, html, "window-vitamins", "500px");
+};
+
+import * as mathEngine from '../mathEngine.js';
+
+window.useVitamin = function(location, idx, vitaminName, statKey) {
+    let list = null;
+    if (location === 'party') list = state.party;
+    else if (location === 'breeding') list = state.breeding;
+    else if (location === 'training') list = state.training;
+    else if (location === 'storage') list = state.storage;
+    else if (location === 'safe') list = state.safe;
+
+    if (!list || !list[idx]) return;
+    const p = list[idx];
+
+    if (!p.vitamins) p.vitamins = {};
+    if (!state.backpack.stones[vitaminName] || state.backpack.stones[vitaminName] <= 0) return;
+    if ((p.vitamins[statKey] || 0) >= 20) return;
+
+    // Consume vitamin
+    state.backpack.stones[vitaminName]--;
+    p.vitamins[statKey] = (p.vitamins[statKey] || 0) + 1;
+
+    // Recalculate stats
+    const pBase = state.config.pokemonData.find(pd => pd.id === p.id);
+    if (pBase) {
+        if (statKey === 'hp') {
+            const oldMax = p.maxHp;
+            p.maxHp = mathEngine.calculateHP(pBase.hp, p.ivs.hp, p.level, p.quality, p.vitamins.hp);
+            p.currentHp = Math.min(p.maxHp, p.currentHp + (p.maxHp - oldMax)); // Heal by difference
+        } else {
+            p.currentStats[statKey] = mathEngine.calculateStat(pBase[statKey], p.ivs[statKey], p.level, p.quality, p.vitamins[statKey]);
+        }
+    }
+
+    updateUI();
+
+    // Refresh modals
+    window.showVitaminsModal(location, idx);
+    showPokemonStats(idx, location);
+};
