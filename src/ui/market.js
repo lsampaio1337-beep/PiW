@@ -256,12 +256,15 @@ export function renderPokeMarketTab(category) {
         const stonePrice = state.config.balance.items.stones.price;
         let stoneKeys = Object.keys(state.backpack.stones);
         stoneKeys.sort((a, b) => a.localeCompare(b));
-        items = stoneKeys.map(stoneName => ({
-            name: stoneName,
-            price: stonePrice,
-            img: `./Assets/Items/Stones/${stoneName}.png`,
-            attrLabel: `Evolution Item`
-        }));
+        items = stoneKeys.map(stoneName => {
+            const isVitamin = ["Calcium SpAtk", "Carbo Speed", "HP Up", "Iron Def", "Protein Atk", "Zinc SpDef"].includes(stoneName);
+            return {
+                name: stoneName,
+                price: stonePrice,
+                img: isVitamin ? `./Assets/Items/Vitamins/${stoneName}.png` : `./Assets/Items/Stones/${stoneName}.png`,
+                attrLabel: isVitamin ? `Stat Item` : `Evolution Item`
+            };
+        });
     }
 
     let html = `<div style="display: grid; grid-template-columns: repeat(${cols}, calc(var(--m-width) * 0.145)); gap: calc(var(--m-width) * 0.018); justify-content: center; width: 100%;">`;
@@ -336,6 +339,16 @@ export function buyItem(itemId, baseCost, category, upgradeType = null) {
             }
             state.backpack[category][itemId] += qty;
         }
+
+        // Track Daily Challenges
+        if (typeof window.trackDailyChallenge === 'function') {
+            if (category === 'pokeballs') {
+                window.trackDailyChallenge('spend_balls', { amount: totalCost });
+            } else if (category === 'potions') {
+                window.trackDailyChallenge('spend_potions', { amount: totalCost });
+            }
+        }
+
         updateUI();
         const moneyLabel = document.getElementById('market-trainer-money');
         if (moneyLabel) moneyLabel.textContent = state.trainer.money.toLocaleString();
@@ -576,11 +589,14 @@ export function renderPokeMarketSellTab(category) {
         const stonePrice = state.config.balance.items.stones.price;
         let stoneKeysSell = Object.keys(state.backpack.stones);
         stoneKeysSell.sort((a, b) => a.localeCompare(b));
-        items = stoneKeysSell.map(stoneName => ({
-            name: stoneName,
-            buyPrice: stonePrice,
-            img: `./Assets/Items/Stones/${stoneName}.png`
-        }));
+        items = stoneKeysSell.map(stoneName => {
+            const isVitamin = ["Calcium SpAtk", "Carbo Speed", "HP Up", "Iron Def", "Protein Atk", "Zinc SpDef"].includes(stoneName);
+            return {
+                name: stoneName,
+                buyPrice: stonePrice,
+                img: isVitamin ? `./Assets/Items/Vitamins/${stoneName}.png` : `./Assets/Items/Stones/${stoneName}.png`
+            };
+        });
     }
 
     let html = `<div style="display: grid; grid-template-columns: repeat(${cols}, calc(var(--m-width) * 0.145)); gap: calc(var(--m-width) * 0.018); justify-content: center; width: 100%;">`;
@@ -818,6 +834,12 @@ window.marketSellSelectedPokemon = function() {
     });
 
     state.trainer.money += totalGain;
+
+    // Track Daily Challenges
+    if (typeof window.trackDailyChallenge === 'function') {
+        window.trackDailyChallenge('sell_pokemon', { count: numSold });
+        window.trackDailyChallenge('earn_money', { amount: totalGain });
+    }
 
     window.marketSelectedPokemonForSale.clear();
 

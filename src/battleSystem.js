@@ -20,7 +20,34 @@ class BattleSystem {
         };
     }
 
+
+    getEvolutionStage(pokemonId) {
+        if (!this.evolutionStageMap) {
+            const evolveFromMap = {};
+            for (let p of this.state.config.pokemonData) {
+                if (p.evolutions) {
+                    for (let evo of p.evolutions) {
+                        evolveFromMap[evo.to] = p.id;
+                    }
+                }
+            }
+            this.evolutionStageMap = {};
+            for (let p of this.state.config.pokemonData) {
+                let stage = 1;
+                let currentId = p.id;
+                while (evolveFromMap[currentId]) {
+                    stage++;
+                    currentId = evolveFromMap[currentId];
+                    if (stage > 5) break;
+                }
+                this.evolutionStageMap[p.id] = stage;
+            }
+        }
+        return this.evolutionStageMap[pokemonId] || 1;
+    }
+
     start() {
+
         if (!this.combatLoop) {
             this.searchNext();
         }
@@ -401,15 +428,31 @@ class BattleSystem {
                 }
             }
 
-            pokemonBase = this.state.config.pokemonData.find(p => p.id === selectedSpawn.pokemonId);
+            let actualPokemonBase = this.state.config.pokemonData.find(p => p.id === selectedSpawn.pokemonId);
+            pokemonBase = actualPokemonBase;
             level = Math.floor(Math.random() * (selectedSpawn.maxLevel - selectedSpawn.minLevel + 1)) + selectedSpawn.minLevel;
+            let isDisguisedDitto = false;
+
+            if (pokemonBase.id === 132 && route.spawns.length > 1) {
+                isDisguisedDitto = true;
+                const otherSpawns = route.spawns.filter(s => s.pokemonId !== 132);
+                if (otherSpawns.length > 0) {
+                    const disguiseSpawn = otherSpawns[Math.floor(Math.random() * otherSpawns.length)];
+                    pokemonBase = this.state.config.pokemonData.find(p => p.id === disguiseSpawn.pokemonId);
+                }
+            }
 
             q = mathEngine.generateQuality(this.state.stats, this.state.casinoDoubleShiny);
+
+            // Track seen for pokedex using actual encounter (Ditto or regular)
             if (q.name === "Shiny") {
                 this.state.stats.shiniesSeen = (this.state.stats.shiniesSeen || 0) + 1;
                 if (!this.state.stats.seenShiniesSpecies) this.state.stats.seenShiniesSpecies = {};
-                this.state.stats.seenShiniesSpecies[pokemonBase.name] = true;
+                this.state.stats.seenShiniesSpecies[actualPokemonBase.name] = true;
             }
+
+            if (!this.state.stats.seenSpecies) this.state.stats.seenSpecies = {};
+            this.state.stats.seenSpecies[actualPokemonBase.name] = true;
 
             ivs = mathEngine.generateIVs(this.state.stats, q.name === "Shiny");
 
@@ -418,42 +461,38 @@ class BattleSystem {
                 const playerLevel = this.state.party[0] ? this.state.party[0].level : 1;
                 level = Math.min(level, playerLevel);
             }
+
+            const stats = {
+                hp: mathEngine.calculateHP(pokemonBase.hp, ivs.hp, level, q.q),
+                atk: mathEngine.calculateStat(pokemonBase.atk, ivs.atk, level, q.q),
+                def: mathEngine.calculateStat(pokemonBase.def, ivs.def, level, q.q),
+                spa: mathEngine.calculateStat(pokemonBase.spa, ivs.spa, level, q.q),
+                spd: mathEngine.calculateStat(pokemonBase.spd, ivs.spd, level, q.q),
+                spe: mathEngine.calculateStat(pokemonBase.spe, ivs.spe, level, q.q),
+            };
+
+            const totalIV = ivs.hp + ivs.atk + ivs.def + ivs.spa + ivs.spd + ivs.spe;
+            const bst = pokemonBase.hp + pokemonBase.atk + pokemonBase.def + pokemonBase.spa + pokemonBase.spd + pokemonBase.spe;
+
+            this.activeEncounter = {
+                id: pokemonBase.id,
+                name: pokemonBase.name,
+                types: pokemonBase.types,
+                level: level,
+                qualityName: q.name,
+                quality: q.q,
+                ivs: ivs,
+                currentStats: stats,
+                maxHp: stats.hp,
+                currentHp: stats.hp,
+                evxp: mathEngine.calculateEVXP(bst, level, q.q, totalIV),
+                evm: mathEngine.calculateEVM(bst, level, q.q, totalIV),
+                pp: mathEngine.calculatePP(bst, level, q.q, totalIV),
+                bst: bst,
+                moves: this.getLearnsetMoves(pokemonBase, level),
+                isDisguisedDitto: isDisguisedDitto
+            };
         }
-
-        // Track seen for pokedex
-        if (!this.state.stats.seenSpecies) this.state.stats.seenSpecies = {};
-        if (!this.state.stats.seenSpecies) this.state.stats.seenSpecies = {};
-            this.state.stats.seenSpecies[pokemonBase.name] = true;
-
-        const stats = {
-            hp: mathEngine.calculateHP(pokemonBase.hp, ivs.hp, level, q.q),
-            atk: mathEngine.calculateStat(pokemonBase.atk, ivs.atk, level, q.q),
-            def: mathEngine.calculateStat(pokemonBase.def, ivs.def, level, q.q),
-            spa: mathEngine.calculateStat(pokemonBase.spa, ivs.spa, level, q.q),
-            spd: mathEngine.calculateStat(pokemonBase.spd, ivs.spd, level, q.q),
-            spe: mathEngine.calculateStat(pokemonBase.spe, ivs.spe, level, q.q),
-        };
-
-        const totalIV = ivs.hp + ivs.atk + ivs.def + ivs.spa + ivs.spd + ivs.spe;
-        const bst = pokemonBase.hp + pokemonBase.atk + pokemonBase.def + pokemonBase.spa + pokemonBase.spd + pokemonBase.spe;
-
-        this.activeEncounter = {
-            id: pokemonBase.id,
-            name: pokemonBase.name,
-            types: pokemonBase.types,
-            level: level,
-            qualityName: q.name,
-            quality: q.q,
-            ivs: ivs,
-            currentStats: stats,
-            maxHp: stats.hp,
-            currentHp: stats.hp,
-            evxp: mathEngine.calculateEVXP(bst, level, q.q, totalIV),
-            evm: mathEngine.calculateEVM(bst, level, q.q, totalIV),
-            pp: mathEngine.calculatePP(bst, level, q.q, totalIV),
-            bst: bst,
-            moves: this.getLearnsetMoves(pokemonBase, level)
-        };
 
         this.isSearching = false;
         this.isSliding = true;
@@ -708,6 +747,12 @@ class BattleSystem {
             }
         }
 
+        // Track Daily Challenges
+        if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') {
+            window.trackDailyChallenge('defeat_level', { level: this.activeEncounter.level, playerLevel: leader.level });
+            window.trackDailyChallenge('defeat_type', { types: this.activeEncounter.types }); // Handled in a simpler way if needed, or we might need to adjust logic
+        }
+
         // Auto Throw Pokeball logic (disable in gyms)
         if (this.state.settings.autoCatch && (!this.gymState || !this.gymState.isActive)) {
             const ballResult = this.throwPokeball();
@@ -717,6 +762,46 @@ class BattleSystem {
                 const processCapture = () => {
                     if (ballResult.caught) {
                         let caughtPokemon = JSON.parse(JSON.stringify(defeatedEncounter));
+
+                        let trackingName = defeatedEncounter.name;
+                        let trackingTypes = defeatedEncounter.types || [];
+
+                        if (caughtPokemon.isDisguisedDitto) {
+                            const dittoBase = this.state.config.pokemonData.find(p => p.id === 132);
+                            caughtPokemon.id = 132;
+                            caughtPokemon.name = "Ditto";
+                            caughtPokemon.types = ["Normal"];
+
+                            const level = caughtPokemon.level;
+                            const ivs = caughtPokemon.ivs;
+                            const q = caughtPokemon.quality;
+
+                            caughtPokemon.currentStats = {
+                                hp: mathEngine.calculateHP(dittoBase.hp, ivs.hp, level, q),
+                                atk: mathEngine.calculateStat(dittoBase.atk, ivs.atk, level, q),
+                                def: mathEngine.calculateStat(dittoBase.def, ivs.def, level, q),
+                                spa: mathEngine.calculateStat(dittoBase.spa, ivs.spa, level, q),
+                                spd: mathEngine.calculateStat(dittoBase.spd, ivs.spd, level, q),
+                                spe: mathEngine.calculateStat(dittoBase.spe, ivs.spe, level, q),
+                            };
+
+                            caughtPokemon.maxHp = caughtPokemon.currentStats.hp;
+                            caughtPokemon.currentHp = caughtPokemon.currentStats.hp;
+
+                            const bst = dittoBase.hp + dittoBase.atk + dittoBase.def + dittoBase.spa + dittoBase.spd + dittoBase.spe;
+                            const totalIV = ivs.hp + ivs.atk + ivs.def + ivs.spa + ivs.spd + ivs.spe;
+
+                            caughtPokemon.bst = bst;
+                            caughtPokemon.evxp = mathEngine.calculateEVXP(bst, level, q, totalIV);
+                            caughtPokemon.evm = mathEngine.calculateEVM(bst, level, q, totalIV);
+                            caughtPokemon.pp = mathEngine.calculatePP(bst, level, q, totalIV);
+                            caughtPokemon.moves = this.getLearnsetMoves(dittoBase, level);
+
+                            trackingName = "Ditto";
+                            trackingTypes = ["Normal"];
+                            delete caughtPokemon.isDisguisedDitto;
+                        }
+
                         // Fix the level 100 jump bug by setting xp explicitly to the exact minimum needed for their captured level
                         caughtPokemon.xp = mathEngine.calculateTotalXP(caughtPokemon.level);
                         this.state.storage.push(caughtPokemon);
@@ -724,7 +809,7 @@ class BattleSystem {
                         if (defeatedEncounter.qualityName === "Shiny") {
                             this.state.stats.shiniesCaught = (this.state.stats.shiniesCaught || 0) + 1;
                             if (!this.state.stats.caughtShiniesSpecies) this.state.stats.caughtShiniesSpecies = {};
-                            this.state.stats.caughtShiniesSpecies[defeatedEncounter.name] = true;
+                            this.state.stats.caughtShiniesSpecies[trackingName] = true;
                         }
                         // Track captures for Oak Tasks (Weak+, Regular+, Uncommon+, Rare+, Epic+)
                         let qName = defeatedEncounter.qualityName || "Regular";
@@ -748,6 +833,13 @@ class BattleSystem {
                         if (caughtPokemon.level > (this.state.stats.highestLevelCaptured || 0)) this.state.stats.highestLevelCaptured = caughtPokemon.level;
                         if (caughtPokemon.quality > (this.state.stats.highestQualityCaptured || 0)) this.state.stats.highestQualityCaptured = caughtPokemon.quality;
                         if (sumIV > (this.state.stats.highestSumIVCaptured || 0)) this.state.stats.highestSumIVCaptured = sumIV;
+
+                        // Track Daily Challenges
+                        if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') {
+                            window.trackDailyChallenge('catch_sum_iv', { sumIv: sumIV });
+                            window.trackDailyChallenge('catch_level', { level: caughtPokemon.level });
+                            window.trackDailyChallenge('catch_different_species', { species: caughtPokemon.name }); // Would need species tracking logic inside trackDailyChallenge if we fully implement it
+                        }
                         if (sumIV < 300) this.state.stats.caughtIVUnder300 = (this.state.stats.caughtIVUnder300 || 0) + 1;
                         if (sumIV < 350) this.state.stats.caughtIVUnder350 = (this.state.stats.caughtIVUnder350 || 0) + 1;
                         if (sumIV < 400) this.state.stats.caughtIVUnder400 = (this.state.stats.caughtIVUnder400 || 0) + 1;
@@ -762,7 +854,7 @@ class BattleSystem {
 
                         // Track species catches for unlocks
                         if (!this.state.stats.caughtSpecies) this.state.stats.caughtSpecies = {};
-                        this.state.stats.caughtSpecies[defeatedEncounter.name] = (this.state.stats.caughtSpecies[defeatedEncounter.name] || 0) + 1;
+                        this.state.stats.caughtSpecies[trackingName] = (this.state.stats.caughtSpecies[trackingName] || 0) + 1;
 
                         // Track specific typings
                         if (!this.state.stats.caughtSpecific) this.state.stats.caughtSpecific = {};
@@ -770,8 +862,8 @@ class BattleSystem {
 
                         qName = defeatedEncounter.qualityName || "Regular";
 
-                        if (defeatedEncounter.types) {
-                              for (let t of defeatedEncounter.types) {
+                        if (trackingTypes) {
+                              for (let t of trackingTypes) {
                                   this.state.stats.caughtSpecific[t] = (this.state.stats.caughtSpecific[t] || 0) + 1;
                                   let typeRarityKey = t + "_" + qName;
                                   let typeAnyKey = t + "_Any";
@@ -780,7 +872,7 @@ class BattleSystem {
                               }
                         }
 
-                        let speciesRarityKey = defeatedEncounter.name + "_" + qName;
+                        let speciesRarityKey = trackingName + "_" + qName;
                         this.state.stats.challengeCaughtSpecific[speciesRarityKey] = (this.state.stats.challengeCaughtSpecific[speciesRarityKey] || 0) + 1;
                     }
                 };
@@ -813,15 +905,23 @@ class BattleSystem {
 
         // Award XP and Money (EV)
         this.grantXP(leader, evxp);
-        this.state.trainer.money += Math.floor(evm * lootMultiplier);
+        let earned = Math.floor(evm * lootMultiplier);
+        this.state.trainer.money += earned;
+        if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') {
+            window.trackDailyChallenge('earn_money', { amount: earned });
+        }
+
+        let lootedItemsThisBattle = {};
 
         // Loot drops for Stones
         let dropRate = 0;
-        switch (this.activeEncounter.qualityName) {
-            case "Uncommon": dropRate = 0.01; break;
-            case "Rare": dropRate = 0.02; break;
-            case "Epic": dropRate = 0.03; break;
-            case "Shiny": dropRate = 1.0; break;
+        const evoStage = this.getEvolutionStage(this.activeEncounter.id);
+
+        if (evoStage === 2) dropRate = 0.01;
+        else if (evoStage >= 3) dropRate = 0.02;
+
+        if (this.activeEncounter.qualityName === "Shiny" && evoStage >= 2) {
+            dropRate = 1.0;
         }
 
         if (Math.random() < (dropRate * lootMultiplier) && this.activeEncounter.types && this.activeEncounter.types.length > 0) {
@@ -834,6 +934,7 @@ class BattleSystem {
 
             if (!this.state.backpack.stones) this.state.backpack.stones = {};
             this.state.backpack.stones[stoneName] = (this.state.backpack.stones[stoneName] || 0) + dropQuantity;
+            lootedItemsThisBattle[stoneName] = (lootedItemsThisBattle[stoneName] || 0) + dropQuantity;
         }
 
         // Loot drops for Balls and Potions
@@ -843,7 +944,19 @@ class BattleSystem {
                     this.activeEncounter.ivs.spa + this.activeEncounter.ivs.spd + this.activeEncounter.ivs.spe;
         }
 
-        let customDropChance = (2.0 + 8.0 * (sumIV / 600.0)) / 100.0;
+        // Vitamin drops
+        if (sumIV > 500 && this.activeEncounter?.quality > 1.6 && Math.random() < (0.05 * lootMultiplier)) {
+            const vitamins = ["Calcium SpAtk", "Carbo Speed", "HP Up", "Iron Def", "Protein Atk", "Zinc SpDef"];
+            const randomVitamin = vitamins[Math.floor(Math.random() * vitamins.length)];
+
+            let dropQuantity = Math.floor(lootMultiplier);
+            if (Math.random() < (lootMultiplier % 1)) dropQuantity += 1;
+
+            if (!this.state.backpack.stones) this.state.backpack.stones = {};
+            this.state.backpack.stones[randomVitamin] = (this.state.backpack.stones[randomVitamin] || 0) + dropQuantity;
+        }
+
+        let customDropChance = (2.0 * (sumIV / 600.0)) / 100.0;
 
         if (Math.random() < (customDropChance * lootMultiplier)) {
             let ballDrop = "Pokeball";
@@ -861,13 +974,15 @@ class BattleSystem {
             if (Math.random() < 0.5) {
                 if (!this.state.backpack.pokeballs[ballDrop]) this.state.backpack.pokeballs[ballDrop] = 0;
                 this.state.backpack.pokeballs[ballDrop] += dropQuantity;
+                lootedItemsThisBattle[ballDrop] = (lootedItemsThisBattle[ballDrop] || 0) + dropQuantity;
             } else {
                 if (!this.state.backpack.potions[potionDrop]) this.state.backpack.potions[potionDrop] = 0;
                 this.state.backpack.potions[potionDrop] += dropQuantity;
+                lootedItemsThisBattle[potionDrop] = (lootedItemsThisBattle[potionDrop] || 0) + dropQuantity;
             }
         }
 
-        let itemDropChance = (2.0 + 8.0 * (sumIV / 600)) / 100.0;
+        let itemDropChance = (2.0 * (sumIV / 600)) / 100.0;
 
         let level = this.activeEncounter.level || 1;
         let ballTierName = "Pokeball";
@@ -898,6 +1013,7 @@ class BattleSystem {
 
             if (!this.state.backpack.pokeballs) this.state.backpack.pokeballs = {};
             this.state.backpack.pokeballs[ballTierName] = (this.state.backpack.pokeballs[ballTierName] || 0) + ballDropQty;
+            lootedItemsThisBattle[ballTierName] = (lootedItemsThisBattle[ballTierName] || 0) + ballDropQty;
         }
 
         // Roll for Potion drop
@@ -907,6 +1023,11 @@ class BattleSystem {
 
             if (!this.state.backpack.potions) this.state.backpack.potions = {};
             this.state.backpack.potions[potionTierName] = (this.state.backpack.potions[potionTierName] || 0) + potionDropQty;
+            lootedItemsThisBattle[potionTierName] = (lootedItemsThisBattle[potionTierName] || 0) + potionDropQty;
+        }
+
+        if (Object.keys(lootedItemsThisBattle).length > 0 && typeof window.showLoot === 'function' && !this.state.isTimeLapsing) {
+            window.showLoot(lootedItemsThisBattle);
         }
 
         this.state.stats.battlesWon++;
@@ -1013,7 +1134,13 @@ class BattleSystem {
         // Check level up
         let newLvl = mathEngine.getLevelFromXP(pokemon.xp);
         if (newLvl > pokemon.level) {
+            let levelsGained = newLvl - pokemon.level;
             pokemon.level = newLvl;
+
+            // Track Daily Challenges
+            if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') {
+                window.trackDailyChallenge('gain_levels', { amount: levelsGained });
+            }
             // re-calc stats
             const pBase = this.state.config.pokemonData.find(p => p.id === pokemon.id);
             if (pBase) {
@@ -1390,12 +1517,56 @@ class BattleSystem {
                     }
                 }
 
+                // Track Daily Challenges
+                if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') {
+                    window.trackDailyChallenge('defeat_level', { level: this.activeEncounter.level, playerLevel: leader.level });
+                    window.trackDailyChallenge('defeat_type', { types: this.activeEncounter.types }); // Handled in a simpler way if needed, or we might need to adjust logic
+                }
+
                 if (this.state.settings.autoCatch) {
                     const ballResult = this.throwPokeball();
                     if (ballResult.caught) {
-                        if (!this.state.stats.caughtSpecies) this.state.stats.caughtSpecies = {};
-                        this.state.stats.caughtSpecies[this.activeEncounter.name] = (this.state.stats.caughtSpecies[this.activeEncounter.name] || 0) + 1;
                         let caughtPokemon = JSON.parse(JSON.stringify(this.activeEncounter));
+                        let trackingName = this.activeEncounter.name;
+
+                        if (caughtPokemon.isDisguisedDitto) {
+                            const dittoBase = this.state.config.pokemonData.find(p => p.id === 132);
+                            caughtPokemon.id = 132;
+                            caughtPokemon.name = "Ditto";
+                            caughtPokemon.types = ["Normal"];
+
+                            const level = caughtPokemon.level;
+                            const ivs = caughtPokemon.ivs;
+                            const q = caughtPokemon.quality;
+
+                            caughtPokemon.currentStats = {
+                                hp: mathEngine.calculateHP(dittoBase.hp, ivs.hp, level, q),
+                                atk: mathEngine.calculateStat(dittoBase.atk, ivs.atk, level, q),
+                                def: mathEngine.calculateStat(dittoBase.def, ivs.def, level, q),
+                                spa: mathEngine.calculateStat(dittoBase.spa, ivs.spa, level, q),
+                                spd: mathEngine.calculateStat(dittoBase.spd, ivs.spd, level, q),
+                                spe: mathEngine.calculateStat(dittoBase.spe, ivs.spe, level, q),
+                            };
+
+                            caughtPokemon.maxHp = caughtPokemon.currentStats.hp;
+                            caughtPokemon.currentHp = caughtPokemon.currentStats.hp;
+
+                            const bst = dittoBase.hp + dittoBase.atk + dittoBase.def + dittoBase.spa + dittoBase.spd + dittoBase.spe;
+                            const totalIV = ivs.hp + ivs.atk + ivs.def + ivs.spa + ivs.spd + ivs.spe;
+
+                            caughtPokemon.bst = bst;
+                            caughtPokemon.evxp = mathEngine.calculateEVXP(bst, level, q, totalIV);
+                            caughtPokemon.evm = mathEngine.calculateEVM(bst, level, q, totalIV);
+                            caughtPokemon.pp = mathEngine.calculatePP(bst, level, q, totalIV);
+                            caughtPokemon.moves = this.getLearnsetMoves(dittoBase, level);
+
+                            trackingName = "Ditto";
+                            delete caughtPokemon.isDisguisedDitto;
+                        }
+
+                        if (!this.state.stats.caughtSpecies) this.state.stats.caughtSpecies = {};
+                        this.state.stats.caughtSpecies[trackingName] = (this.state.stats.caughtSpecies[trackingName] || 0) + 1;
+
                         caughtPokemon.xp = mathEngine.calculateTotalXP(caughtPokemon.level);
                         this.state.storage.push(caughtPokemon);
                         results.caughtPokemonList.push(caughtPokemon);
@@ -1404,25 +1575,37 @@ class BattleSystem {
                         if (caughtPokemon.quality > (this.state.stats.highestQualityCaptured || 0)) this.state.stats.highestQualityCaptured = caughtPokemon.quality;
                         let sumIV_ZzZ = caughtPokemon.ivs.hp + caughtPokemon.ivs.atk + caughtPokemon.ivs.def + caughtPokemon.ivs.spa + caughtPokemon.ivs.spd + caughtPokemon.ivs.spe;
                         if (sumIV_ZzZ > (this.state.stats.highestSumIVCaptured || 0)) this.state.stats.highestSumIVCaptured = sumIV_ZzZ;
+
+                        // Track Daily Challenges
+                        if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') {
+                            window.trackDailyChallenge('catch_sum_iv', { sumIv: sumIV_ZzZ });
+                            window.trackDailyChallenge('catch_level', { level: caughtPokemon.level });
+                        }
                         if (this.activeEncounter.qualityName === "Shiny") this.state.stats.shiniesCaught = (this.state.stats.shiniesCaught || 0) + 1;
                         if (this.activeEncounter.qualityName === "Shiny") {
                             if (!this.state.stats.caughtShiniesSpecies) this.state.stats.caughtShiniesSpecies = {};
-                            this.state.stats.caughtShiniesSpecies[this.activeEncounter.name] = true;
+                            this.state.stats.caughtShiniesSpecies[trackingName] = true;
                         }
                     }
                 }
 
                 const lootMultiplier = 1 + (0.03 * (this.state.stats.greenCandies || 0));
                 this.grantXP(leader, evxp);
-                this.state.trainer.money += Math.floor(evm * lootMultiplier);
+                let earnedZzZ = Math.floor(evm * lootMultiplier);
+                this.state.trainer.money += earnedZzZ;
+                if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') {
+                    window.trackDailyChallenge('earn_money', { amount: earnedZzZ });
+                }
 
                 // Add loot drops
                 let dropRate = 0;
-                switch (this.activeEncounter.qualityName) {
-                    case "Uncommon": dropRate = 0.01; break;
-                    case "Rare": dropRate = 0.02; break;
-                    case "Epic": dropRate = 0.03; break;
-                    case "Shiny": dropRate = 1.0; break;
+                const evoStage = this.getEvolutionStage(this.activeEncounter.id);
+
+                if (evoStage === 2) dropRate = 0.01;
+                else if (evoStage >= 3) dropRate = 0.02;
+
+                if (this.activeEncounter.qualityName === "Shiny" && evoStage >= 2) {
+                    dropRate = 1.0;
                 }
 
                 if (Math.random() < (dropRate * lootMultiplier) && this.activeEncounter.types && this.activeEncounter.types.length > 0) {
@@ -1444,7 +1627,20 @@ class BattleSystem {
                             this.activeEncounter.ivs.spa + this.activeEncounter.ivs.spd + this.activeEncounter.ivs.spe;
                 }
 
-                let itemDropChance = (2.0 + 8.0 * (sumIV / 600)) / 100.0;
+                // Vitamin drops
+                if (sumIV > 500 && this.activeEncounter?.quality > 1.6 && Math.random() < (0.05 * lootMultiplier)) {
+                    const vitamins = ["Calcium SpAtk", "Carbo Speed", "HP Up", "Iron Def", "Protein Atk", "Zinc SpDef"];
+                    const randomVitamin = vitamins[Math.floor(Math.random() * vitamins.length)];
+
+                    let dropQuantity = Math.floor(lootMultiplier);
+                    if (Math.random() < (lootMultiplier % 1)) dropQuantity += 1;
+
+                    if (!this.state.backpack.stones) this.state.backpack.stones = {};
+                    this.state.backpack.stones[randomVitamin] = (this.state.backpack.stones[randomVitamin] || 0) + dropQuantity;
+                    results.itemsLooted[randomVitamin] = (results.itemsLooted[randomVitamin] || 0) + dropQuantity;
+                }
+
+                let itemDropChance = (2.0 * (sumIV / 600)) / 100.0;
                 let level = this.activeEncounter.level || 1;
                 let ballTierName = "Pokeball";
                 let potionTierName = "Tiny Potion";

@@ -6,7 +6,8 @@ export function renderStonesTab(area) {
     const allStones = [
         "Bug Stone", "Dark Stone", "Dragon Stone", "Electric Stone", "Fairy Stone", "Fighting Stone",
         "Fire Stone", "Flying Stone", "Ghost Stone", "Grass Stone", "Ground Stone", "Ice Stone",
-        "Normal Stone", "Poison Stone", "Psychic Stone", "Rock Stone", "Steel Stone", "Water Stone"
+        "Normal Stone", "Poison Stone", "Psychic Stone", "Rock Stone", "Steel Stone", "Water Stone",
+        "Calcium SpAtk", "Carbo Speed", "HP Up", "Iron Def", "Protein Atk", "Zinc SpDef"
     ];
 
     let content = `
@@ -19,11 +20,20 @@ export function renderStonesTab(area) {
         const qty = state.backpack.stones[name] || 0;
 
         let displayName = name.replace(' Stone', '<br>Stone');
+        if (name.includes(' ')) {
+            const parts = name.split(' ');
+            if (parts.length === 2 && parts[1] !== 'Stone') {
+                displayName = `${parts[0]}<br>${parts[1]}`;
+            }
+        }
+
+        const isVitamin = ["Calcium SpAtk", "Carbo Speed", "HP Up", "Iron Def", "Protein Atk", "Zinc SpDef"].includes(name);
+        const imagePath = isVitamin ? `./Assets/Items/Vitamins/${name}.png` : `./Assets/Items/Stones/${name}.png`;
 
         content += `
             <div style="background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; padding: 1cqi; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; box-sizing: border-box;">
                 <div style="font-size: 1.6cqi; font-weight: bold; margin-bottom: 0.5cqi; height: 3.5cqi; display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.1;">${displayName}</div>
-                <img src="./Assets/Items/Stones/${name}.png" style="width: 7cqi; height: 7cqi; object-fit: contain; margin-bottom: 0.5cqi;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
+                <img src="${imagePath}" style="width: 7cqi; height: 7cqi; object-fit: contain; margin-bottom: 0.5cqi;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
                 <div style="font-size: 1.3cqi; color: transparent; margin-bottom: 0.5cqi; line-height: 1.1; user-select: none;">-</div>
                 <div style="font-size: 1.6cqi; font-weight: bold; color: #bdc3c7; line-height: 1.1;">Stock: ${formatQuantity(qty)}</div>
             </div>

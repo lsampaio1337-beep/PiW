@@ -57,9 +57,9 @@ function updateActiveItemsUI() {
             potionImg.style.display = 'block';
             potionCount.style.display = 'block';
         } else {
-            potionImg.src = "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
+            potionImg.src = "./Assets/Extra/IconExit.png";
             potionCount.textContent = '';
-            potionImg.style.display = 'none';
+            potionImg.style.display = 'block';
             potionCount.style.display = 'none';
         }
     }
@@ -76,9 +76,9 @@ function updateActiveItemsUI() {
             ballImg.style.display = 'block';
             ballCount.style.display = 'block';
         } else {
-            ballImg.src = "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
+            ballImg.src = "./Assets/Extra/IconExit.png";
             ballCount.textContent = '';
-            ballImg.style.display = 'none';
+            ballImg.style.display = 'block';
             ballCount.style.display = 'none';
         }
     }
@@ -89,6 +89,106 @@ function formatActiveItemQuantity(q) {
     if (q >= 1000) return Math.floor(q / 1000) + 'k';
     return q;
 }
+
+window.showActiveItemSelection = function(type) {
+    const popup = document.getElementById('battle-active-item-selection-popup');
+    if (!popup) return;
+
+    if (popup.style.display === 'flex' && popup.dataset.type === type) {
+        popup.style.display = 'none';
+        return;
+    }
+
+    let html = '';
+
+    if (type === 'potion') {
+        const isNoActive = state.settings.activePotionTier === -1;
+        const noBorderColor = isNoActive ? '#2ecc71' : '#3498db';
+        html += `
+            <div onclick="window.selectBattleActiveItem('potion', -1)" style="width: 30px; height: 30px; background: rgba(0, 0, 0, 0.6); border: 2px solid ${noBorderColor}; border-radius: 8px; position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer;" title="No Potion">
+                <img src="./Assets/Extra/IconExit.png" style="width: 60%; height: 60%; object-fit: contain;">
+            </div>
+        `;
+
+        const potions = state.config.balance.items.potions;
+        for (let idx = 0; idx < potions.length; idx++) {
+            let p = potions[idx];
+            if (p.name === 'Max Potion') continue;
+            let inventoryName = p.name;
+            if (p.name === 'Regular Potion') inventoryName = 'Regular Potion';
+            if (p.name === 'Big') inventoryName = 'Big Potion';
+
+            const qty = state.backpack.potions[inventoryName] || 0;
+            const isActive = state.settings.activePotionTier === idx;
+            const borderColor = isActive ? '#2ecc71' : '#3498db';
+
+            html += `
+                <div onclick="window.selectBattleActiveItem('potion', ${idx})" style="width: 30px; height: 30px; background: rgba(0, 0, 0, 0.6); border: 2px solid ${borderColor}; border-radius: 8px; position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                    <img src="./Assets/Items/Potions/${inventoryName}.png" style="width: 80%; height: 80%; object-fit: contain;">
+                    <span style="position: absolute; bottom: 0px; right: 2px; color: white; font-size: 8px; font-weight: bold; text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;">${formatActiveItemQuantity(qty)}</span>
+                </div>
+            `;
+        }
+    } else if (type === 'ball') {
+        const isNoActive = state.settings.activeBallTier === -1;
+        const noBorderColor = isNoActive ? '#2ecc71' : '#3498db';
+        html += `
+            <div onclick="window.selectBattleActiveItem('ball', -1)" style="width: 30px; height: 30px; background: rgba(0, 0, 0, 0.6); border: 2px solid ${noBorderColor}; border-radius: 8px; position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer;" title="No Ball">
+                <img src="./Assets/Extra/IconExit.png" style="width: 60%; height: 60%; object-fit: contain;">
+            </div>
+        `;
+
+        const balls = state.config.balance.items.pokeballs;
+        for (let idx = 0; idx < balls.length; idx++) {
+            let b = balls[idx];
+            const qty = state.backpack.pokeballs[b.name] || 0;
+            const isActive = state.settings.activeBallTier === idx;
+            const borderColor = isActive ? '#2ecc71' : '#3498db';
+
+            html += `
+                <div onclick="window.selectBattleActiveItem('ball', ${idx})" style="width: 30px; height: 30px; background: rgba(0, 0, 0, 0.6); border: 2px solid ${borderColor}; border-radius: 8px; position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                    <img src="./Assets/Items/Balls/${b.name}.png" style="width: 80%; height: 80%; object-fit: contain;">
+                    <span style="position: absolute; bottom: 0px; right: 2px; color: white; font-size: 8px; font-weight: bold; text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;">${formatActiveItemQuantity(qty)}</span>
+                </div>
+            `;
+        }
+    }
+
+    popup.innerHTML = html;
+    popup.style.display = 'flex';
+    popup.dataset.type = type;
+};
+
+window.selectBattleActiveItem = function(type, idx) {
+    if (type === 'potion') {
+        state.settings.activePotionTier = idx;
+    } else if (type === 'ball') {
+        state.settings.activeBallTier = idx;
+    }
+
+    // Save state
+    if (window.storageRef) {
+        window.storageRef.save(state);
+    }
+
+    // Hide popup and update UI
+    const popup = document.getElementById('battle-active-item-selection-popup');
+    if (popup) popup.style.display = 'none';
+
+    updateActiveItemsUI();
+};
+
+// Close popup if clicked outside
+document.addEventListener('click', (e) => {
+    const popup = document.getElementById('battle-active-item-selection-popup');
+    if (popup && popup.style.display === 'flex') {
+        const potionBtn = document.getElementById('battle-active-potion-card');
+        const ballBtn = document.getElementById('battle-active-ball-card');
+        if (!popup.contains(e.target) && (!potionBtn || !potionBtn.contains(e.target)) && (!ballBtn || !ballBtn.contains(e.target))) {
+            popup.style.display = 'none';
+        }
+    }
+});
 
 
 export function updateBattleArena() {
@@ -499,7 +599,8 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
 
     // The image itself
     const ghost = document.createElement('img');
-    ghost.src = `Assets/Pokemon Sprites/Natural/${activeEncounter.qualityName === 'Shiny' ? activeEncounter.id + '_shiny' : activeEncounter.id}.png`;
+    let ghostId = activeEncounter.isDisguisedDitto ? 132 : activeEncounter.id;
+    ghost.src = `Assets/Pokemon Sprites/Natural/${activeEncounter.qualityName === 'Shiny' ? ghostId + '_shiny' : ghostId}.png`;
     ghost.style.height = '100%';
     ghost.style.objectFit = 'contain';
     ghostContainer.appendChild(ghost);
@@ -855,4 +956,57 @@ export function playCombatAnimations(targetSide, moveType, duration) {
         }, Math.min(500, duration * 0.3));
 
     }, duration * 0.8);
+}
+
+export function showLoot(lootItems) {
+    const container = document.getElementById('battle-loot-container');
+    if (!container) return;
+
+    const keys = Object.keys(lootItems);
+    if (keys.length === 0) return;
+
+    let html = '';
+    for (let i = 0; i < keys.length; i++) {
+        const itemName = keys[i];
+        const count = lootItems[itemName];
+
+        let imgFolder = 'Balls';
+        if (itemName.includes('Potion')) imgFolder = 'Potions';
+        else if (itemName.includes('Stone')) imgFolder = 'Stones';
+
+        html += `
+            <div style="width: 30px; height: 30px; background: rgba(0, 0, 0, 0.6); border: 1px solid #f1c40f; border-radius: 4px; position: relative; display: flex; align-items: center; justify-content: center;">
+                <img src="Assets/Items/${imgFolder}/${itemName}.png" style="width: 80%; height: 80%; object-fit: contain;">
+                <span style="position: absolute; bottom: -2px; right: 0px; color: white; font-size: 8px; font-weight: bold; text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;">${count}</span>
+            </div>
+        `;
+    }
+
+    const row = document.createElement('div');
+    row.style.display = 'flex';
+    row.style.gap = '5px';
+    row.style.transition = 'opacity 0.5s ease-in-out';
+    row.style.opacity = '1';
+    row.innerHTML = html;
+
+    container.prepend(row);
+    container.style.display = 'flex';
+    container.style.opacity = '1';
+
+    // Keep maximum 5 rows visible
+    while (container.children.length > 5) {
+        container.removeChild(container.lastChild);
+    }
+
+    setTimeout(() => {
+        row.style.opacity = '0';
+        setTimeout(() => {
+            if (row.parentElement) {
+                row.parentElement.removeChild(row);
+            }
+            if (container.children.length === 0) {
+                container.style.display = 'none';
+            }
+        }, 500); // Wait for transition
+    }, 5000);
 }

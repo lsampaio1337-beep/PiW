@@ -9,6 +9,7 @@ import Storage from "./storage.js";
 
 // Import State and modules
 import { state, setBattleSystem, globals } from './state.js';
+import { trackDailyChallenge, checkAndResetDailyChallenges } from './ui/dailyChallenges.js';
 
 window.dismissDaycareMessage = function() {
     state.stats.hasSeenDaycare = true;
@@ -43,7 +44,7 @@ export const TYPE_COLORS = {
 };
 import { updateTopbar } from './ui/topbar.js';
 import { updateSidebar } from './ui/sidebar.js';
-import { updateBattleArena, showDamage, playCombatAnimations, triggerDefeatAnimation } from './ui/battle.js';
+import { updateBattleArena, showDamage, playCombatAnimations, triggerDefeatAnimation, showLoot } from './ui/battle.js';
 import { showCalendar } from './ui/calendar.js';
 import { showGiftModal } from './ui/gift.js';
 import { showMap, navigateToLocation, showMapTooltip, hideMapTooltip } from './ui/map.js';
@@ -52,7 +53,7 @@ import { showPokemonStats, showPokemonStatsByUuid, evolvePokemon } from './ui/po
 import { showBonusCandyModal } from './ui/bonusCandy.js';
 window.showBonusCandyModal = showBonusCandyModal;
 window.showGiftModal = showGiftModal;
-import { showSettings, updateGameSpeed, addMoney, addXp, exportLog, showAddPokemonModal, forceNextEncounter, activateCheat, showTimeLapseModal, runTimeLapse } from './ui/settings.js';
+import { showSettings, updateGameSpeed, addMoney, exportLog, showAddPokemonModal, forceNextEncounter, activateCheat, showTimeLapseModal, runTimeLapse } from './ui/settings.js';
 import { setupMarket, buyItem, openPokeMarketBuy, renderPokeMarketTab, updateMarketPrices } from './ui/market.js';
 import { showBackpack, renderBackpackTab, setActiveItem, setAutoPotionThreshold } from './ui/backpack/index.js';
 import { dragStart, dragOver, handleDrop } from './ui/backpack/pokemon.js';
@@ -80,7 +81,6 @@ window.evolvePokemon = evolvePokemon;
 window.showSettings = showSettings;
 window.updateGameSpeed = updateGameSpeed;
 window.addMoney = addMoney;
-window.addXp = addXp;
 window.exportLog = exportLog;
 window.buyItem = buyItem;
 window.openPokeMarketBuy = openPokeMarketBuy;
@@ -89,10 +89,27 @@ window.updateMarketPrices = updateMarketPrices;
 window.showAddPokemonModal = showAddPokemonModal;
 window.forceNextEncounter = forceNextEncounter;
 window.activateCheat = activateCheat;
+
+import { cheatAction } from "./ui/cheatControl.js";
+window.cheatAction = cheatAction;
 window.showTimeLapseModal = showTimeLapseModal;
 window.runTimeLapse = runTimeLapse;
 window.dragStart = dragStart;
 window.completeChallenge = function(targetAreaId) {
+    if (targetAreaId === '150_challenge') {
+        state.stats.completed150Challenge = true;
+        if (!state.stats.newRoutes) state.stats.newRoutes = [];
+        if (!state.stats.newRoutes.includes("Mythical and Legendaries")) {
+            state.stats.newRoutes.push("Mythical and Legendaries");
+        }
+        state.stats.hasUnseenMap = true;
+        updateUI();
+        const challengeWin = document.getElementById('window-challenges');
+        if (challengeWin && challengeWin.style.display !== 'none') {
+            window.showChallengesModal(); // refresh modal
+        }
+        return;
+    }
     if (!state.stats.activeChallenges) {
         state.stats.activeChallenges = ["Route 1"];
     }
@@ -142,6 +159,9 @@ window.completeChallenge = function(targetAreaId) {
 
     // Also increment integer for backwards compatibility with any existing simple checks
     state.stats.completedChallenges = (state.stats.completedChallenges || 0) + 1;
+
+    // Track Daily Challenges
+    trackDailyChallenge('complete_progress_challenge');
 
     // Clear challenge specific tracking state
     // We only want to clear progress if no OTHER active challenge needs it.
@@ -196,6 +216,32 @@ window.completeChallenge = function(targetAreaId) {
 
 
 window.cheatProgressChallenge = function(targetAreaId) {
+    if (targetAreaId === '150_challenge') {
+        if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
+        let count = 0;
+        for (let i = 0; i < state.config.pokemonData.length; i++) {
+             if (count >= 150) break;
+             let p = state.config.pokemonData[i];
+             state.stats.caughtSpecies[p.name] = 1;
+             count++;
+        }
+        if (window.updateUI) window.updateUI();
+        const challengeWinCheat = document.getElementById('window-challenges');
+        if (challengeWinCheat && challengeWinCheat.style.display !== 'none') {
+            window.showChallengesModal(); // refresh modal
+        }
+        setTimeout(() => {
+            const modal = document.getElementById('window-challenges');
+            if (modal) {
+                const completeBtns = Array.from(modal.querySelectorAll('button')).filter(btn => btn.innerText.includes('Complete'));
+                if (completeBtns.length > 0) {
+                    const specificBtn = completeBtns.find(btn => btn.getAttribute('onclick') && btn.getAttribute('onclick').includes('150_challenge'));
+                    if (specificBtn) specificBtn.click();
+                }
+            }
+        }, 100);
+        return;
+    }
     if (!targetAreaId && state.stats.activeChallenges && state.stats.activeChallenges.length > 0) targetAreaId = state.stats.activeChallenges[0];
     if (!targetAreaId) return;
     let unlock = state.config.unlocks.find(u => u.areaId === targetAreaId);
@@ -314,9 +360,49 @@ window.showChallengesModal = function() {
                 <h3 style="margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; font-size: 16px;">${activeChallengesCount > 1 ? 'Active Challenges' : 'Active Challenge'}</h3>
                 <div style="display: flex; flex-direction: column; gap: 15px;">`;
 
-    if (activeChallengesCount === 0) {
+    // The 150 Challenge should only appear if the Final Challenge (Indigo Plateau) has been completed
+    let isFinalChallengeCompleted = state.stats.completedChallengeIds && state.stats.completedChallengeIds.includes('Indigo Plateau');
+    let hasActive150Challenge = isFinalChallengeCompleted && !state.stats.completed150Challenge;
+
+    if (activeChallengesCount === 0 && !hasActive150Challenge) {
         html += `<div style="text-align: center; font-size: 16px; color: #aaa;">No active Challenge</div>`;
-    } else {
+    }
+
+    if (hasActive150Challenge) {
+        let uniqueSpeciesCaught = state.stats.caughtSpecies ? Object.keys(state.stats.caughtSpecies).length : 0;
+        let isMet = uniqueSpeciesCaught >= 150;
+        let displayName = "The 150 Challenge";
+        let rewardsStr = "Mythical and Legendary Spot";
+        let cData = {
+            isMet: isMet,
+            textParts: [`Capture 150 different Pokémons (${uniqueSpeciesCaught}/150)${isMet ? ' <span style="color: #4CAF50;">[Complete]</span>' : ''}`]
+        };
+
+        html += `<div style="border: 1px solid #333; padding: 10px; border-radius: 5px; background-color: rgba(255,255,255,0.05);">
+                    <div style="color: #ff9800; font-weight: bold; margin-bottom: 5px;">${displayName}</div>`;
+
+        html += `<div style="margin-bottom: 5px;"><b>Requirements:</b></div>
+                 <ul style="margin-top: 0; padding-left: 20px;">`;
+
+        for (let part of cData.textParts) {
+            html += `<li>${part}</li>`;
+        }
+
+        html += `</ul>
+                 <div style="margin-top: 10px; color: #4CAF50;"><b>Rewards:</b> Unlocks ${rewardsStr}</div>`;
+
+        let safeAreaId = "150_challenge";
+
+        html += `<div style="text-align: center; margin-top: 15px; display: flex; justify-content: center; gap: 10px;">
+                     <button onclick="window.cheatProgressChallenge('${safeAreaId}')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; background-color: orange; color: white; border: none; border-radius: 5px; cursor: pointer;">Cheat Progress</button>`;
+
+        if (cData.isMet) {
+             html += `<button onclick="window.completeChallenge('${safeAreaId}')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">Complete ✔️</button>`;
+        }
+        html += `</div></div>`;
+    }
+
+    if (activeChallengesCount > 0) {
         for (let activeId of state.stats.activeChallenges) {
             let unlock = state.config.unlocks.find(u => u.areaId === activeId);
             if (!unlock) continue;
@@ -357,11 +443,25 @@ window.showChallengesModal = function() {
 
     // Past Challenges Sector
     let completedCount = state.stats.completedChallengeIds ? state.stats.completedChallengeIds.length : 0;
+    if (state.stats.completed150Challenge) completedCount++;
+
     if (completedCount > 0) {
         let pastTitle = completedCount === 1 ? "Past Challenge" : "Past Challenges";
         html += `<div style="border: 1px solid #555; padding: 10px; border-radius: 5px; background-color: rgba(0,0,0,0.5);">
                     <h3 style="margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; font-size: 16px;">${pastTitle}</h3>
                     <div style="display: flex; flex-direction: column; gap: 10px;">`;
+
+        // Render 150 Challenge in Past Challenges if completed
+        if (state.stats.completed150Challenge) {
+            html += `<div style="border: 1px solid #333; padding: 10px; border-radius: 5px; background-color: rgba(255,255,255,0.05);">
+                          <div style="color: #ff9800; font-weight: bold; margin-bottom: 5px;">The 150 Challenge</div>
+                          <ul style="margin-top: 0; margin-bottom: 5px; padding-left: 20px; font-size: 14px;">
+                              <li>Capture 150 different Pokémons (150/150) <span style="color: green;">[Complete]</span></li>
+                          </ul>
+                          <div style="color: #4CAF50; font-size: 14px;"><b>Rewards:</b> Unlocks Mythical and Legendary Spot</div>
+                      </div>`;
+        }
+
 
         for (let i = completedCount - 1; i >= 0; i--) {
              let completedId = state.stats.completedChallengeIds[i];
@@ -442,6 +542,7 @@ window.handleDrop = handleDrop;
 window.showDamage = showDamage;
 window.playCombatAnimations = playCombatAnimations;
 window.triggerDefeatAnimation = triggerDefeatAnimation;
+window.showLoot = showLoot;
 window.setLeader = function(idx) {
     if (idx === 0) return;
     if (globals.battleSystem) {
@@ -612,6 +713,9 @@ const oakTasks = {
         { req: 500, stat: 'caughtIVUnder400', text: "Catch 500 Pokemons with IV < 400", reward: "Good IV Booster", effect: "+15% IVs" },
         { req: 1000, stat: 'caughtIVUnder450', text: "Catch 1000 Pokemons with IV < 450", reward: "Excellent IV Booster", effect: "+20% IVs" },
         { req: 2000, stat: 'caughtIVUnder500', text: "Catch 2000 Pokemons with IV < 500", reward: "Master IV Booster", effect: "+25% IVs" }
+    ],
+    final: [
+        { req: 151, text: "Capture 151 Pokemon species", reward: "Final Shiny Booster", effect: "12x Shiny Rolls" }
     ]
 };
 
@@ -654,6 +758,14 @@ window.getOakTaskAvailableCount = function() {
         if ((state.stats.shiniesCaught || 0) >= oakTasks.shinyCaught[caughtTier].req) count++;
     }
 
+    // Final
+    let finalTier = state.stats.finalTaskTier || 0;
+    if (finalTier < oakTasks.final.length) {
+        let currentSpeciesCount = state.stats.caughtSpecies ? Object.keys(state.stats.caughtSpecies).length : 0;
+        let totalSpecies = state.config.pokemonData.length;
+        if (currentSpeciesCount >= totalSpecies) count++;
+    }
+
     return count;
 };
 
@@ -664,6 +776,7 @@ window.claimOakTaskReward = function(type) {
     if (type === 'shinySeen') state.stats.shinySeenTaskTier = (state.stats.shinySeenTaskTier || 0) + 1;
     if (type === 'shinyCaught') state.stats.shinyCaughtTaskTier = (state.stats.shinyCaughtTaskTier || 0) + 1;
     if (type === 'iv') state.stats.ivTaskTier = (state.stats.ivTaskTier || 0) + 1;
+    if (type === 'final') state.stats.finalTaskTier = (state.stats.finalTaskTier || 0) + 1;
     window.showOakLabModal();
 };
 
@@ -702,6 +815,12 @@ window.cheatCompleteOakTask = function(type) {
         if (tier < oakTasks.iv.length) {
             statName = oakTasks.iv[tier].stat;
             state.stats[statName] = Math.max(state.stats[statName] || 0, oakTasks.iv[tier].req);
+        }
+    }
+    if (type === 'final') {
+        if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
+        for (let p of state.config.pokemonData) {
+            state.stats.caughtSpecies[p.name] = (state.stats.caughtSpecies[p.name] || 0) + 1;
         }
     }
     window.showOakLabModal();
@@ -877,6 +996,19 @@ window.showOakLabModal = function() {
             ${shinyRewardsHtml}
         </div>
     `;
+
+    // Final Card
+    let finalTier = state.stats.finalTaskTier || 0;
+    let finalCurrentVal = state.stats.caughtSpecies ? Object.keys(state.stats.caughtSpecies).length : 0;
+    if (finalTier >= oakTasks.final.length && oakTasks.final.length > 0) {
+        finalCurrentVal = state.config.pokemonData.length;
+    }
+    // Update req dynamically if it differs (for example, if new Pokemon are added)
+    if (oakTasks.final.length > 0) {
+        oakTasks.final[0].req = state.config.pokemonData.length;
+        oakTasks.final[0].text = `Capture ${state.config.pokemonData.length} Pokemon species`;
+    }
+    html += renderCard("Final Assignment", 'final', finalCurrentVal, finalTier, oakTasks.final, true);
 
     html += `</div>`;
 
@@ -1139,6 +1271,11 @@ function startGame() {
         // We ensure we only add 1 grain if playtime is perfectly divisible by 60 and > 0.
         if (state.stats.playtime % 60 === 0 && state.stats.playtime > 0) {
             state.stats.jigglypuffGrains = (state.stats.jigglypuffGrains || 0) + 1;
+        }
+
+        // Daily Challenge Check
+        if (state.stats.playtime % 10 === 0) {
+            checkAndResetDailyChallenges();
         }
 
         if (state.stats.playtime === 60) {
@@ -1471,6 +1608,9 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
                             let consumedGrains = Math.ceil(actualTimeConsumedMs / 60000);
                             state.stats.jigglypuffGrains = Math.max(0, availableGrains - consumedGrains);
                             state.stats.jigglypuffGrainsUsed = (state.stats.jigglypuffGrainsUsed || 0) + consumedGrains;
+
+                            // Track Daily Challenges
+                            trackDailyChallenge('sleep_minutes', { amount: Math.floor(actualTimeConsumedMs / 60000) });
 
                             state.isZzZMode = false;
                             state.zzzTimestamp = null;
@@ -1848,12 +1988,14 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
         assignmentsCompleted += (state.stats.ivTaskTier || 0);
         assignmentsCompleted += (state.stats.shinySeenTaskTier || 0);
         assignmentsCompleted += (state.stats.shinyCaughtTaskTier || 0);
+        assignmentsCompleted += (state.stats.finalTaskTier || 0);
         let maxAssignments = (oakTasks.q ? oakTasks.q.length : 0) +
                              (oakTasks.c ? oakTasks.c.length : 0) +
                              (oakTasks.level ? oakTasks.level.length : 0) +
                              (oakTasks.iv ? oakTasks.iv.length : 0) +
                              (oakTasks.shinySeen ? oakTasks.shinySeen.length : 0) +
-                             (oakTasks.shinyCaught ? oakTasks.shinyCaught.length : 0);
+                             (oakTasks.shinyCaught ? oakTasks.shinyCaught.length : 0) +
+                             (oakTasks.final ? oakTasks.final.length : 0);
 
         let uniqueShinySpeciesCaught = 0;
         if (state.stats.caughtShiniesSpecies) {
@@ -1868,8 +2010,8 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
                 <p><b>Battles Won:</b> ${(state.stats.battlesWon || 0).toLocaleString()}</p>
                 <p><b>Faints:</b> ${(state.stats.faints || 0).toLocaleString()}</p>
                 <p><b>Total Pokémon Captured:</b> ${(state.stats.caught || 0).toLocaleString()}</p>
-                <p><b>Species Caught:</b> ${uniqueSpeciesCaught} / 150</p>
-                <p><b>Shiny Species Caught:</b> ${uniqueShinySpeciesCaught} / 150</p>
+                <p><b>Species Caught:</b> ${uniqueSpeciesCaught} / ${state.config.pokemonData.length}</p>
+                <p><b>Shiny Species Caught:</b> ${uniqueShinySpeciesCaught} / ${state.config.pokemonData.length}</p>
                 <p><b>Shinies Seen:</b> ${(state.stats.shiniesSeen || 0).toLocaleString()}</p>
                 <p><b>Shinies Caught:</b> ${(state.stats.shiniesCaught || 0).toLocaleString()}</p>
                 <br>

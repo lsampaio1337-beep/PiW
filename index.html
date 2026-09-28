@@ -224,17 +224,26 @@
               </div>
           </div>
 
+          <!-- Battle Loot Indicators -->
+          <div id="battle-loot-container" style="position: absolute; top: 10px; right: 10px; display: flex; flex-direction: column; align-items: flex-end; gap: 5px; z-index: 20; transition: opacity 0.5s ease-in-out;">
+              <!-- Dynamically populated loot cards -->
+          </div>
+
           <!-- Active Items Indicators -->
           <div id="battle-active-items-container" style="position: absolute; bottom: 10px; left: 10px; display: flex; gap: 10px; z-index: 20;">
               <!-- Potion Card -->
-              <div id="battle-active-potion-card" style="width: 60px; height: 60px; background: rgba(0, 0, 0, 0.6); border: 2px solid #3498db; border-radius: 8px; position: relative; display: flex; align-items: center; justify-content: center;">
+              <div id="battle-active-potion-card" onclick="window.showActiveItemSelection('potion')" style="width: 30px; height: 30px; background: rgba(0, 0, 0, 0.6); border: 2px solid #3498db; border-radius: 8px; position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer;">
                   <img id="battle-active-potion-img" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" style="width: 80%; height: 80%; object-fit: contain;">
-                  <span id="battle-active-potion-count" style="position: absolute; bottom: 2px; right: 4px; color: white; font-size: 12px; font-weight: bold; text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;"></span>
+                  <span id="battle-active-potion-count" style="position: absolute; bottom: 0px; right: 2px; color: white; font-size: 8px; font-weight: bold; text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;"></span>
               </div>
               <!-- Pokeball Card -->
-              <div id="battle-active-ball-card" style="width: 60px; height: 60px; background: rgba(0, 0, 0, 0.6); border: 2px solid #2ecc71; border-radius: 8px; position: relative; display: flex; align-items: center; justify-content: center;">
+              <div id="battle-active-ball-card" onclick="window.showActiveItemSelection('ball')" style="width: 30px; height: 30px; background: rgba(0, 0, 0, 0.6); border: 2px solid #2ecc71; border-radius: 8px; position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer;">
                   <img id="battle-active-ball-img" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" style="width: 80%; height: 80%; object-fit: contain;">
-                  <span id="battle-active-ball-count" style="position: absolute; bottom: 2px; right: 4px; color: white; font-size: 12px; font-weight: bold; text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;"></span>
+                  <span id="battle-active-ball-count" style="position: absolute; bottom: 0px; right: 2px; color: white; font-size: 8px; font-weight: bold; text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;"></span>
+              </div>
+
+              <!-- Item Selection Popup (Hidden by default) -->
+              <div id="battle-active-item-selection-popup" style="display: none; position: absolute; bottom: 40px; left: 0; background: rgba(0, 0, 0, 0.85); border: 1px solid #555; border-radius: 8px; padding: 10px; flex-direction: row; gap: 8px; z-index: 25; flex-wrap: wrap; max-width: 250px; width: max-content; align-items: flex-start; justify-content: flex-start;">
               </div>
           </div>
         </div>

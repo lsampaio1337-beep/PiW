@@ -21,12 +21,6 @@ export function showSettings() {
         </div>
 
         <div style="margin-bottom: 15px;">
-            <label for="add-xp-input">Add XP (Trainer & Slot 1):</label>
-            <input type="number" id="add-xp-input" value="1000" style="padding: 5px; width: 80px;">
-            <button onclick="window.addXp()" style="padding: 5px 10px; font-size: 14px;">Add</button>
-        </div>
-
-        <div style="margin-bottom: 15px;">
             <button onclick="window.showAddPokemonModal()" style="padding: 5px 10px; font-size: 14px;">Add Pokemon</button>
         </div>
 
@@ -42,8 +36,12 @@ export function showSettings() {
 export function showTimeLapseModal() {
     const html = `
         <div style="margin-bottom: 15px;">
-            <label for="timelapse-hours-input">How long? (Hours):</label>
-            <input type="number" id="timelapse-hours-input" value="1" min="1" style="padding: 5px; width: 80px;">
+            <label for="timelapse-duration-input">How long?:</label>
+            <input type="number" id="timelapse-duration-input" value="1" min="1" style="padding: 5px; width: 80px;">
+            <select id="timelapse-unit-input" style="padding: 5px;">
+                <option value="hours">Hours</option>
+                <option value="minutes">Minutes</option>
+            </select>
         </div>
         <button onclick="window.runTimeLapse()" style="padding: 5px 10px; font-size: 14px;">Start</button>
     `;
@@ -51,10 +49,14 @@ export function showTimeLapseModal() {
 }
 
 export function runTimeLapse() {
-    const inputEl = document.getElementById('timelapse-hours-input');
-    if (!inputEl) return;
-    const hours = parseFloat(inputEl.value);
-    if (!isNaN(hours) && hours > 0) {
+    const inputEl = document.getElementById('timelapse-duration-input');
+    const unitEl = document.getElementById('timelapse-unit-input');
+    if (!inputEl || !unitEl) return;
+
+    const duration = parseFloat(inputEl.value);
+    const unit = unitEl.value;
+
+    if (!isNaN(duration) && duration > 0) {
         // Close modals
         document.getElementById('modal-overlay').style.display = 'none';
         if (window.windowManager) {
@@ -62,11 +64,25 @@ export function runTimeLapse() {
             window.windowManager.closeDynamicWindow('window-settings');
         }
 
-        const elapsedMs = hours * 3600 * 1000;
+        let elapsedMs = 0;
+        if (unit === 'hours') {
+            elapsedMs = duration * 3600 * 1000;
+        } else if (unit === 'minutes') {
+            elapsedMs = duration * 60 * 1000;
+        }
 
         // Execute TimeLapse Simulation
         if (globals.battleSystem) {
             const results = globals.battleSystem.runFastForward(elapsedMs);
+
+            // Add simulated time to playtime and battle mode timer
+            let simulatedSeconds = Math.floor((results.simulatedTimeMs !== undefined ? results.simulatedTimeMs : elapsedMs) / 1000);
+
+            state.stats.playtime = (state.stats.playtime || 0) + simulatedSeconds;
+            state.stats.battleModeTimer = (state.stats.battleModeTimer || 0) + simulatedSeconds;
+
+            if (window.updateTopbar) window.updateTopbar();
+
             window.showTimeLapseResults(results);
         }
     }
@@ -227,18 +243,6 @@ export function addMoney() {
     }
 }
 
-export function addXp() {
-    const inputEl = document.getElementById('add-xp-input');
-    if (!inputEl) return;
-    const amount = parseInt(inputEl.value);
-    if (!isNaN(amount) && amount > 0) {
-        state.trainer.xp += amount;
-        if (state.party.length > 0) {
-            state.party[0].xp += amount;
-        }
-        updateUI();
-    }
-}
 
 export function exportLog() {
     if (state.storageRef) {
@@ -246,87 +250,8 @@ export function exportLog() {
     }
 }
 
+import { showCheatControlModal } from './cheatControl.js';
+
 export function activateCheat() {
-    // Set money
-    state.trainer.money = 25000000000;
-
-    // Set 1,000,000 of each ball, potion, stone
-    for (let key in state.backpack.pokeballs) {
-        state.backpack.pokeballs[key] = 1000000;
-    }
-    for (let key in state.backpack.potions) {
-        state.backpack.potions[key] = 1000000;
-    }
-    for (let key in state.backpack.stones) {
-        state.backpack.stones[key] = 1000000;
-    }
-
-    // Generate Shiny Mewtwo (ID 150)
-    const mewtwoData = state.config.pokemonData.find(p => p.id === 150);
-    if (mewtwoData) {
-        const level = 100;
-        const qName = "Shiny";
-        const qVal = 2.0;
-        const ivs = { hp: 100, atk: 100, def: 100, spa: 100, spd: 100, spe: 100 };
-
-        const stats = {
-            hp: mathEngine.calculateHP(mewtwoData.hp, ivs.hp, level, qVal),
-            atk: mathEngine.calculateStat(mewtwoData.atk, ivs.atk, level, qVal),
-            def: mathEngine.calculateStat(mewtwoData.def, ivs.def, level, qVal),
-            spa: mathEngine.calculateStat(mewtwoData.spa, ivs.spa, level, qVal),
-            spd: mathEngine.calculateStat(mewtwoData.spd, ivs.spd, level, qVal),
-            spe: mathEngine.calculateStat(mewtwoData.spe, ivs.spe, level, qVal)
-        };
-
-        const bst = mewtwoData.hp + mewtwoData.atk + mewtwoData.def + mewtwoData.spa + mewtwoData.spd + mewtwoData.spe;
-        const totalIV = 600;
-
-        let learned = [];
-        if (mewtwoData.learnset) {
-            for (const ls of mewtwoData.learnset) {
-                if (level >= ls.level) {
-                    if (state.config.moves[ls.move]) {
-                        const moveData = JSON.parse(JSON.stringify(state.config.moves[ls.move]));
-                        moveData.name = ls.move;
-                        learned.push(moveData);
-                    }
-                }
-            }
-        }
-        const moves = learned.slice(-4);
-        const xp = mathEngine.calculateTotalXP(level);
-
-        const createMewtwo = () => {
-            return {
-                id: mewtwoData.id,
-                name: mewtwoData.name,
-                types: mewtwoData.types,
-                level: level,
-                xp: xp,
-                qualityName: qName,
-                quality: qVal,
-                ivs: { ...ivs },
-                currentStats: { ...stats },
-                maxHp: stats.hp,
-                currentHp: stats.hp,
-                evxp: mathEngine.calculateEVXP(bst, level, qVal, totalIV),
-                evm: mathEngine.calculateEVM(bst, level, qVal, totalIV),
-                pp: mathEngine.calculatePP(bst, level, qVal, totalIV),
-                bst: bst,
-                moves: JSON.parse(JSON.stringify(moves))
-            };
-        };
-
-        const spaces = 6 - state.party.length;
-        if (spaces >= 2) {
-            state.party.push(createMewtwo());
-            state.party.push(createMewtwo());
-        } else if (spaces === 1) {
-            state.party.push(createMewtwo());
-        }
-    }
-
-    updateUI();
-    const overlay = document.getElementById('modal-overlay');
-    if (overlay) overlay.style.display = 'none';
+    showCheatControlModal();
 }

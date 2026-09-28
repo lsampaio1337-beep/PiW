@@ -82,11 +82,11 @@ This document provides a comprehensive overview of all formulas, game mechanics,
 - **Green Candy**: Effect = +3% Loot Probability & Quantity (EVm drops). Cost = `1 + Math.floor(Owned / 5)` White Candies.
 - **Purple Candy**: Effect = +2% XP Gain. Cost = `2 + Math.floor(Owned / 3)` White Candies.
 - **Black Yellow Candy**: Effect = +4% Catch Chance. Cost = `3 + Math.floor(Owned / 2)` White Candies.
-- **Rainbow Candy**: Effect = +1 Shiny Roll. Cost = `8 + (Owned * 4)` White Candies. (Max capacity: 5).
+- **Rainbow Candy**: Effect = +1 Shiny Roll. Cost = `8 + (Owned * 4)` White Candies. (Max capacity: 7).
 
 ### Other Item Drops
-- **Evolution Stones**: Dropped when defeating Pokemon. Drop chance based on enemy Quality: Uncommon (1%), Rare (2%), Epic (3%), Shiny (100%). Sell value $200.
-- **Loot Drops (Balls/Potions)**: Wild pokemon can drop loot based on IVs: `(2.0 + 8.0 * (TotalIV / 600))%`.
+- **Evolution Stones**: Dropped when defeating Pokemon. Drop chance based on enemy Quality: Rare (1%), Epic (2%), Shiny (100%). Sell value $200.
+- **Loot Drops (Balls/Potions)**: Wild pokemon can drop loot based on IVs: `(2.0 * (TotalIV / 600))%`.
 
 ## 3. Game Progression & Scaling
 
