@@ -98,6 +98,11 @@ function generateQuality(stats = {}, isDoubleShiny = false) {
         shinyRolls *= 2;
     }
 
+    // Final Assignment Reward
+    if ((stats.finalTaskTier || 0) >= 1) {
+        shinyRolls *= 12;
+    }
+
     // Instead of cutting into Rare/Epic rolls, we just increase the total pool size.
     // Base pool is 11999 (Weak through Epic).
     let maxTableRoll = 11999 + shinyRolls;
