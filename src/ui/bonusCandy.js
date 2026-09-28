@@ -130,7 +130,7 @@ function renderCandyOption(color, effectText, cost, currentOwned, currentEffect,
         ? `background: ${getColorHex(color)}; background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: rainbowShift 3s linear infinite;`
         : `color: ${getColorHex(color)}; text-shadow: 1px 1px 2px black;`;
 
-    const isMaxed = color === 'Rainbow Candy' && owned >= 5;
+    const isMaxed = color === 'Rainbow Candy' && owned >= 7;
 
     return `
         <div style="background-color: #222; border: 1px solid #444; border-radius: 8px; padding: 15px; display: flex; flex-direction: column; align-items: center; position: relative; min-height: 120px; justify-content: center; ${isMaxed ? 'opacity: 0.5;' : ''}">
@@ -138,7 +138,7 @@ function renderCandyOption(color, effectText, cost, currentOwned, currentEffect,
             <div style="font-size: 18px; font-weight: bold; margin-bottom: 5px; ${titleStyle}">${color}</div>
             <div style="font-size: 14px; margin-bottom: 5px; text-align: center;">Effect: ${effectText}</div>
             <div style="font-size: 14px; margin-bottom: 10px;">${isMaxed ? 'Cost: MAXED' : `Cost: ${cost} White Candy`}</div>
-            <div style="font-size: 14px; color: #aaa;">Owned: ${owned}${color === 'Rainbow Candy' ? ' / 5' : ''}</div>
+            <div style="font-size: 14px; color: #aaa;">Owned: ${owned}${color === 'Rainbow Candy' ? ' / 7' : ''}</div>
         </div>
     `;
 }
@@ -167,7 +167,7 @@ window.cheatWhiteCandy = function() {
     };
 
 window.buyBonusCandy = function(color) {
-    if (color === 'Rainbow Candy' && (state.stats.rainbowCandies || 0) >= 5) {
+    if (color === 'Rainbow Candy' && (state.stats.rainbowCandies || 0) >= 7) {
         alert("Maximum Rainbow Candies reached!");
         return;
     }
