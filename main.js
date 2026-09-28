@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, screen } = require('electron');
+const { app, BrowserWindow, screen } = require('electron');
 const path = require('path');
 const fs = require('fs');
 
@@ -11,7 +11,6 @@ function createWindow() {
         height: height,
         x: x,
         y: y,
-        transparent: true,
         frame: false,
         hasShadow: false,
         alwaysOnTop: false, // Don't keep it above other windows
@@ -33,15 +32,6 @@ function createWindow() {
             fs.writeFileSync('game_ready.txt', 'ready');
         }
         win.show();
-    });
-
-    // Handle click-through messages from the renderer process
-    ipcMain.on('set-ignore-mouse-events', (event, ignore, options) => {
-        const webContents = event.sender;
-        const currentWindow = BrowserWindow.fromWebContents(webContents);
-        if (currentWindow) {
-            currentWindow.setIgnoreMouseEvents(ignore, options);
-        }
     });
 }
 
