@@ -1,4 +1,4 @@
-const { ipcRenderer } = require('electron');
+let ipcRenderer; try { ipcRenderer = require('electron').ipcRenderer; } catch (e) {}
 
 function setupClickThrough() {
     let ignoreMouse = false;

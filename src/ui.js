@@ -89,6 +89,9 @@ window.updateMarketPrices = updateMarketPrices;
 window.showAddPokemonModal = showAddPokemonModal;
 window.forceNextEncounter = forceNextEncounter;
 window.activateCheat = activateCheat;
+
+import { cheatAction } from "./ui/cheatControl.js";
+window.cheatAction = cheatAction;
 window.showTimeLapseModal = showTimeLapseModal;
 window.runTimeLapse = runTimeLapse;
 window.dragStart = dragStart;
