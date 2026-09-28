@@ -11,7 +11,7 @@ function createWindow() {
         height: height,
         x: x,
         y: y,
-        transparent: true,
+        backgroundColor: '#000000',
         frame: false,
         hasShadow: false,
         alwaysOnTop: false, // Don't keep it above other windows
@@ -44,6 +44,8 @@ function createWindow() {
         }
     });
 }
+
+app.commandLine.appendSwitch('disable-accelerated-video-decode');
 
 app.whenReady().then(() => {
     createWindow();
