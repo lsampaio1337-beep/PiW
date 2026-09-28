@@ -1,6 +1,18 @@
-const { app, BrowserWindow, ipcMain, screen } = require('electron');
+const { app, BrowserWindow, screen } = require('electron');
 const path = require('path');
 const fs = require('fs');
+
+// Disable hardware acceleration to fix invisible/frozen window issues
+app.disableHardwareAcceleration();
+
+// Aggressive GPU disabling switches
+app.commandLine.appendSwitch('disable-gpu');
+app.commandLine.appendSwitch('disable-software-rasterizer');
+app.commandLine.appendSwitch('disable-gpu-compositing');
+app.commandLine.appendSwitch('disable-gpu-rasterization');
+app.commandLine.appendSwitch('disable-gpu-sandbox');
+app.commandLine.appendSwitch('no-sandbox');
+app.commandLine.appendSwitch('disable-direct-composition'); // Specific to Windows DWM issues
 
 function createWindow() {
     // Get primary display dimensions
@@ -11,15 +23,16 @@ function createWindow() {
         height: height,
         x: x,
         y: y,
-        transparent: true,
         frame: false,
         hasShadow: false,
         alwaysOnTop: false, // Don't keep it above other windows
         skipTaskbar: false,
-        show: false,
+        show: true, // Show immediately
+        backgroundColor: '#000000', // Solid black base to prevent transparency bugs
         webPreferences: {
             nodeIntegration: true,
-            contextIsolation: false
+            contextIsolation: false,
+            backgroundThrottling: false
         }
     });
 
@@ -33,15 +46,6 @@ function createWindow() {
             fs.writeFileSync('game_ready.txt', 'ready');
         }
         win.show();
-    });
-
-    // Handle click-through messages from the renderer process
-    ipcMain.on('set-ignore-mouse-events', (event, ignore, options) => {
-        const webContents = event.sender;
-        const currentWindow = BrowserWindow.fromWebContents(webContents);
-        if (currentWindow) {
-            currentWindow.setIgnoreMouseEvents(ignore, options);
-        }
     });
 }
 
