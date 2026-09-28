@@ -20,7 +20,34 @@ class BattleSystem {
         };
     }
 
+
+    getEvolutionStage(pokemonId) {
+        if (!this.evolutionStageMap) {
+            const evolveFromMap = {};
+            for (let p of this.state.config.pokemonData) {
+                if (p.evolutions) {
+                    for (let evo of p.evolutions) {
+                        evolveFromMap[evo.to] = p.id;
+                    }
+                }
+            }
+            this.evolutionStageMap = {};
+            for (let p of this.state.config.pokemonData) {
+                let stage = 1;
+                let currentId = p.id;
+                while (evolveFromMap[currentId]) {
+                    stage++;
+                    currentId = evolveFromMap[currentId];
+                    if (stage > 5) break;
+                }
+                this.evolutionStageMap[p.id] = stage;
+            }
+        }
+        return this.evolutionStageMap[pokemonId] || 1;
+    }
+
     start() {
+
         if (!this.combatLoop) {
             this.searchNext();
         }
@@ -867,12 +894,17 @@ class BattleSystem {
         this.grantXP(leader, evxp);
         this.state.trainer.money += Math.floor(evm * lootMultiplier);
 
+        let lootedItemsThisBattle = {};
+
         // Loot drops for Stones
         let dropRate = 0;
-        switch (this.activeEncounter.qualityName) {
-            case "Rare": dropRate = 0.01; break;
-            case "Epic": dropRate = 0.02; break;
-            case "Shiny": dropRate = 1.0; break;
+        const evoStage = this.getEvolutionStage(this.activeEncounter.id);
+
+        if (evoStage === 2) dropRate = 0.01;
+        else if (evoStage >= 3) dropRate = 0.02;
+
+        if (this.activeEncounter.qualityName === "Shiny" && evoStage >= 2) {
+            dropRate = 1.0;
         }
 
         if (Math.random() < (dropRate * lootMultiplier) && this.activeEncounter.types && this.activeEncounter.types.length > 0) {
@@ -885,6 +917,7 @@ class BattleSystem {
 
             if (!this.state.backpack.stones) this.state.backpack.stones = {};
             this.state.backpack.stones[stoneName] = (this.state.backpack.stones[stoneName] || 0) + dropQuantity;
+            lootedItemsThisBattle[stoneName] = (lootedItemsThisBattle[stoneName] || 0) + dropQuantity;
         }
 
         // Loot drops for Balls and Potions
@@ -912,9 +945,11 @@ class BattleSystem {
             if (Math.random() < 0.5) {
                 if (!this.state.backpack.pokeballs[ballDrop]) this.state.backpack.pokeballs[ballDrop] = 0;
                 this.state.backpack.pokeballs[ballDrop] += dropQuantity;
+                lootedItemsThisBattle[ballDrop] = (lootedItemsThisBattle[ballDrop] || 0) + dropQuantity;
             } else {
                 if (!this.state.backpack.potions[potionDrop]) this.state.backpack.potions[potionDrop] = 0;
                 this.state.backpack.potions[potionDrop] += dropQuantity;
+                lootedItemsThisBattle[potionDrop] = (lootedItemsThisBattle[potionDrop] || 0) + dropQuantity;
             }
         }
 
@@ -949,6 +984,7 @@ class BattleSystem {
 
             if (!this.state.backpack.pokeballs) this.state.backpack.pokeballs = {};
             this.state.backpack.pokeballs[ballTierName] = (this.state.backpack.pokeballs[ballTierName] || 0) + ballDropQty;
+            lootedItemsThisBattle[ballTierName] = (lootedItemsThisBattle[ballTierName] || 0) + ballDropQty;
         }
 
         // Roll for Potion drop
@@ -958,6 +994,11 @@ class BattleSystem {
 
             if (!this.state.backpack.potions) this.state.backpack.potions = {};
             this.state.backpack.potions[potionTierName] = (this.state.backpack.potions[potionTierName] || 0) + potionDropQty;
+            lootedItemsThisBattle[potionTierName] = (lootedItemsThisBattle[potionTierName] || 0) + potionDropQty;
+        }
+
+        if (Object.keys(lootedItemsThisBattle).length > 0 && typeof window.showLoot === 'function' && !this.state.isTimeLapsing) {
+            window.showLoot(lootedItemsThisBattle);
         }
 
         this.state.stats.battlesWon++;
@@ -1507,10 +1548,13 @@ class BattleSystem {
 
                 // Add loot drops
                 let dropRate = 0;
-                switch (this.activeEncounter.qualityName) {
-                    case "Rare": dropRate = 0.01; break;
-                    case "Epic": dropRate = 0.02; break;
-                    case "Shiny": dropRate = 1.0; break;
+                const evoStage = this.getEvolutionStage(this.activeEncounter.id);
+
+                if (evoStage === 2) dropRate = 0.01;
+                else if (evoStage >= 3) dropRate = 0.02;
+
+                if (this.activeEncounter.qualityName === "Shiny" && evoStage >= 2) {
+                    dropRate = 1.0;
                 }
 
                 if (Math.random() < (dropRate * lootMultiplier) && this.activeEncounter.types && this.activeEncounter.types.length > 0) {

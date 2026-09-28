@@ -43,7 +43,7 @@ export const TYPE_COLORS = {
 };
 import { updateTopbar } from './ui/topbar.js';
 import { updateSidebar } from './ui/sidebar.js';
-import { updateBattleArena, showDamage, playCombatAnimations, triggerDefeatAnimation } from './ui/battle.js';
+import { updateBattleArena, showDamage, playCombatAnimations, triggerDefeatAnimation, showLoot } from './ui/battle.js';
 import { showCalendar } from './ui/calendar.js';
 import { showGiftModal } from './ui/gift.js';
 import { showMap, navigateToLocation, showMapTooltip, hideMapTooltip } from './ui/map.js';
@@ -444,6 +444,7 @@ window.handleDrop = handleDrop;
 window.showDamage = showDamage;
 window.playCombatAnimations = playCombatAnimations;
 window.triggerDefeatAnimation = triggerDefeatAnimation;
+window.showLoot = showLoot;
 window.setLeader = function(idx) {
     if (idx === 0) return;
     if (globals.battleSystem) {
@@ -614,6 +615,9 @@ const oakTasks = {
         { req: 500, stat: 'caughtIVUnder400', text: "Catch 500 Pokemons with IV < 400", reward: "Good IV Booster", effect: "+15% IVs" },
         { req: 1000, stat: 'caughtIVUnder450', text: "Catch 1000 Pokemons with IV < 450", reward: "Excellent IV Booster", effect: "+20% IVs" },
         { req: 2000, stat: 'caughtIVUnder500', text: "Catch 2000 Pokemons with IV < 500", reward: "Master IV Booster", effect: "+25% IVs" }
+    ],
+    final: [
+        { req: 151, text: "Capture 151 Pokemon species", reward: "Final Shiny Booster", effect: "12x Shiny Rolls" }
     ]
 };
 
@@ -656,6 +660,14 @@ window.getOakTaskAvailableCount = function() {
         if ((state.stats.shiniesCaught || 0) >= oakTasks.shinyCaught[caughtTier].req) count++;
     }
 
+    // Final
+    let finalTier = state.stats.finalTaskTier || 0;
+    if (finalTier < oakTasks.final.length) {
+        let currentSpeciesCount = state.stats.caughtSpecies ? Object.keys(state.stats.caughtSpecies).length : 0;
+        let totalSpecies = state.config.pokemonData.length;
+        if (currentSpeciesCount >= totalSpecies) count++;
+    }
+
     return count;
 };
 
@@ -666,6 +678,7 @@ window.claimOakTaskReward = function(type) {
     if (type === 'shinySeen') state.stats.shinySeenTaskTier = (state.stats.shinySeenTaskTier || 0) + 1;
     if (type === 'shinyCaught') state.stats.shinyCaughtTaskTier = (state.stats.shinyCaughtTaskTier || 0) + 1;
     if (type === 'iv') state.stats.ivTaskTier = (state.stats.ivTaskTier || 0) + 1;
+    if (type === 'final') state.stats.finalTaskTier = (state.stats.finalTaskTier || 0) + 1;
     window.showOakLabModal();
 };
 
@@ -704,6 +717,12 @@ window.cheatCompleteOakTask = function(type) {
         if (tier < oakTasks.iv.length) {
             statName = oakTasks.iv[tier].stat;
             state.stats[statName] = Math.max(state.stats[statName] || 0, oakTasks.iv[tier].req);
+        }
+    }
+    if (type === 'final') {
+        if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
+        for (let p of state.config.pokemonData) {
+            state.stats.caughtSpecies[p.name] = (state.stats.caughtSpecies[p.name] || 0) + 1;
         }
     }
     window.showOakLabModal();
@@ -879,6 +898,19 @@ window.showOakLabModal = function() {
             ${shinyRewardsHtml}
         </div>
     `;
+
+    // Final Card
+    let finalTier = state.stats.finalTaskTier || 0;
+    let finalCurrentVal = state.stats.caughtSpecies ? Object.keys(state.stats.caughtSpecies).length : 0;
+    if (finalTier >= oakTasks.final.length && oakTasks.final.length > 0) {
+        finalCurrentVal = state.config.pokemonData.length;
+    }
+    // Update req dynamically if it differs (for example, if new Pokemon are added)
+    if (oakTasks.final.length > 0) {
+        oakTasks.final[0].req = state.config.pokemonData.length;
+        oakTasks.final[0].text = `Capture ${state.config.pokemonData.length} Pokemon species`;
+    }
+    html += renderCard("Final Assignment", 'final', finalCurrentVal, finalTier, oakTasks.final, true);
 
     html += `</div>`;
 
@@ -1850,12 +1882,14 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
         assignmentsCompleted += (state.stats.ivTaskTier || 0);
         assignmentsCompleted += (state.stats.shinySeenTaskTier || 0);
         assignmentsCompleted += (state.stats.shinyCaughtTaskTier || 0);
+        assignmentsCompleted += (state.stats.finalTaskTier || 0);
         let maxAssignments = (oakTasks.q ? oakTasks.q.length : 0) +
                              (oakTasks.c ? oakTasks.c.length : 0) +
                              (oakTasks.level ? oakTasks.level.length : 0) +
                              (oakTasks.iv ? oakTasks.iv.length : 0) +
                              (oakTasks.shinySeen ? oakTasks.shinySeen.length : 0) +
-                             (oakTasks.shinyCaught ? oakTasks.shinyCaught.length : 0);
+                             (oakTasks.shinyCaught ? oakTasks.shinyCaught.length : 0) +
+                             (oakTasks.final ? oakTasks.final.length : 0);
 
         let uniqueShinySpeciesCaught = 0;
         if (state.stats.caughtShiniesSpecies) {
