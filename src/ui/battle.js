@@ -941,8 +941,6 @@ export function playCombatAnimations(targetSide, moveType, duration) {
     }, duration * 0.8);
 }
 
-let lootHideTimeout = null;
-
 export function showLoot(lootItems) {
     const container = document.getElementById('battle-loot-container');
     if (!container) return;
@@ -967,19 +965,31 @@ export function showLoot(lootItems) {
         `;
     }
 
-    container.innerHTML = html;
+    const row = document.createElement('div');
+    row.style.display = 'flex';
+    row.style.gap = '5px';
+    row.style.transition = 'opacity 0.5s ease-in-out';
+    row.style.opacity = '1';
+    row.innerHTML = html;
+
+    container.prepend(row);
     container.style.display = 'flex';
     container.style.opacity = '1';
 
-    if (lootHideTimeout) {
-        clearTimeout(lootHideTimeout);
+    // Keep maximum 5 rows visible
+    while (container.children.length > 5) {
+        container.removeChild(container.lastChild);
     }
 
-    lootHideTimeout = setTimeout(() => {
-        container.style.opacity = '0';
-        lootHideTimeout = setTimeout(() => {
-            container.style.display = 'none';
-            lootHideTimeout = null;
+    setTimeout(() => {
+        row.style.opacity = '0';
+        setTimeout(() => {
+            if (row.parentElement) {
+                row.parentElement.removeChild(row);
+            }
+            if (container.children.length === 0) {
+                container.style.display = 'none';
+            }
         }, 500); // Wait for transition
     }, 5000);
 }
