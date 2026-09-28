@@ -401,15 +401,31 @@ class BattleSystem {
                 }
             }
 
-            pokemonBase = this.state.config.pokemonData.find(p => p.id === selectedSpawn.pokemonId);
+            let actualPokemonBase = this.state.config.pokemonData.find(p => p.id === selectedSpawn.pokemonId);
+            pokemonBase = actualPokemonBase;
             level = Math.floor(Math.random() * (selectedSpawn.maxLevel - selectedSpawn.minLevel + 1)) + selectedSpawn.minLevel;
+            let isDisguisedDitto = false;
+
+            if (pokemonBase.id === 132 && route.spawns.length > 1) {
+                isDisguisedDitto = true;
+                const otherSpawns = route.spawns.filter(s => s.pokemonId !== 132);
+                if (otherSpawns.length > 0) {
+                    const disguiseSpawn = otherSpawns[Math.floor(Math.random() * otherSpawns.length)];
+                    pokemonBase = this.state.config.pokemonData.find(p => p.id === disguiseSpawn.pokemonId);
+                }
+            }
 
             q = mathEngine.generateQuality(this.state.stats, this.state.casinoDoubleShiny);
+
+            // Track seen for pokedex using actual encounter (Ditto or regular)
             if (q.name === "Shiny") {
                 this.state.stats.shiniesSeen = (this.state.stats.shiniesSeen || 0) + 1;
                 if (!this.state.stats.seenShiniesSpecies) this.state.stats.seenShiniesSpecies = {};
-                this.state.stats.seenShiniesSpecies[pokemonBase.name] = true;
+                this.state.stats.seenShiniesSpecies[actualPokemonBase.name] = true;
             }
+
+            if (!this.state.stats.seenSpecies) this.state.stats.seenSpecies = {};
+            this.state.stats.seenSpecies[actualPokemonBase.name] = true;
 
             ivs = mathEngine.generateIVs(this.state.stats, q.name === "Shiny");
 
@@ -418,42 +434,38 @@ class BattleSystem {
                 const playerLevel = this.state.party[0] ? this.state.party[0].level : 1;
                 level = Math.min(level, playerLevel);
             }
+
+            const stats = {
+                hp: mathEngine.calculateHP(pokemonBase.hp, ivs.hp, level, q.q),
+                atk: mathEngine.calculateStat(pokemonBase.atk, ivs.atk, level, q.q),
+                def: mathEngine.calculateStat(pokemonBase.def, ivs.def, level, q.q),
+                spa: mathEngine.calculateStat(pokemonBase.spa, ivs.spa, level, q.q),
+                spd: mathEngine.calculateStat(pokemonBase.spd, ivs.spd, level, q.q),
+                spe: mathEngine.calculateStat(pokemonBase.spe, ivs.spe, level, q.q),
+            };
+
+            const totalIV = ivs.hp + ivs.atk + ivs.def + ivs.spa + ivs.spd + ivs.spe;
+            const bst = pokemonBase.hp + pokemonBase.atk + pokemonBase.def + pokemonBase.spa + pokemonBase.spd + pokemonBase.spe;
+
+            this.activeEncounter = {
+                id: pokemonBase.id,
+                name: pokemonBase.name,
+                types: pokemonBase.types,
+                level: level,
+                qualityName: q.name,
+                quality: q.q,
+                ivs: ivs,
+                currentStats: stats,
+                maxHp: stats.hp,
+                currentHp: stats.hp,
+                evxp: mathEngine.calculateEVXP(bst, level, q.q, totalIV),
+                evm: mathEngine.calculateEVM(bst, level, q.q, totalIV),
+                pp: mathEngine.calculatePP(bst, level, q.q, totalIV),
+                bst: bst,
+                moves: this.getLearnsetMoves(pokemonBase, level),
+                isDisguisedDitto: isDisguisedDitto
+            };
         }
-
-        // Track seen for pokedex
-        if (!this.state.stats.seenSpecies) this.state.stats.seenSpecies = {};
-        if (!this.state.stats.seenSpecies) this.state.stats.seenSpecies = {};
-            this.state.stats.seenSpecies[pokemonBase.name] = true;
-
-        const stats = {
-            hp: mathEngine.calculateHP(pokemonBase.hp, ivs.hp, level, q.q),
-            atk: mathEngine.calculateStat(pokemonBase.atk, ivs.atk, level, q.q),
-            def: mathEngine.calculateStat(pokemonBase.def, ivs.def, level, q.q),
-            spa: mathEngine.calculateStat(pokemonBase.spa, ivs.spa, level, q.q),
-            spd: mathEngine.calculateStat(pokemonBase.spd, ivs.spd, level, q.q),
-            spe: mathEngine.calculateStat(pokemonBase.spe, ivs.spe, level, q.q),
-        };
-
-        const totalIV = ivs.hp + ivs.atk + ivs.def + ivs.spa + ivs.spd + ivs.spe;
-        const bst = pokemonBase.hp + pokemonBase.atk + pokemonBase.def + pokemonBase.spa + pokemonBase.spd + pokemonBase.spe;
-
-        this.activeEncounter = {
-            id: pokemonBase.id,
-            name: pokemonBase.name,
-            types: pokemonBase.types,
-            level: level,
-            qualityName: q.name,
-            quality: q.q,
-            ivs: ivs,
-            currentStats: stats,
-            maxHp: stats.hp,
-            currentHp: stats.hp,
-            evxp: mathEngine.calculateEVXP(bst, level, q.q, totalIV),
-            evm: mathEngine.calculateEVM(bst, level, q.q, totalIV),
-            pp: mathEngine.calculatePP(bst, level, q.q, totalIV),
-            bst: bst,
-            moves: this.getLearnsetMoves(pokemonBase, level)
-        };
 
         this.isSearching = false;
         this.isSliding = true;
@@ -717,6 +729,46 @@ class BattleSystem {
                 const processCapture = () => {
                     if (ballResult.caught) {
                         let caughtPokemon = JSON.parse(JSON.stringify(defeatedEncounter));
+
+                        let trackingName = defeatedEncounter.name;
+                        let trackingTypes = defeatedEncounter.types || [];
+
+                        if (caughtPokemon.isDisguisedDitto) {
+                            const dittoBase = this.state.config.pokemonData.find(p => p.id === 132);
+                            caughtPokemon.id = 132;
+                            caughtPokemon.name = "Ditto";
+                            caughtPokemon.types = ["Normal"];
+
+                            const level = caughtPokemon.level;
+                            const ivs = caughtPokemon.ivs;
+                            const q = caughtPokemon.quality;
+
+                            caughtPokemon.currentStats = {
+                                hp: mathEngine.calculateHP(dittoBase.hp, ivs.hp, level, q),
+                                atk: mathEngine.calculateStat(dittoBase.atk, ivs.atk, level, q),
+                                def: mathEngine.calculateStat(dittoBase.def, ivs.def, level, q),
+                                spa: mathEngine.calculateStat(dittoBase.spa, ivs.spa, level, q),
+                                spd: mathEngine.calculateStat(dittoBase.spd, ivs.spd, level, q),
+                                spe: mathEngine.calculateStat(dittoBase.spe, ivs.spe, level, q),
+                            };
+
+                            caughtPokemon.maxHp = caughtPokemon.currentStats.hp;
+                            caughtPokemon.currentHp = caughtPokemon.currentStats.hp;
+
+                            const bst = dittoBase.hp + dittoBase.atk + dittoBase.def + dittoBase.spa + dittoBase.spd + dittoBase.spe;
+                            const totalIV = ivs.hp + ivs.atk + ivs.def + ivs.spa + ivs.spd + ivs.spe;
+
+                            caughtPokemon.bst = bst;
+                            caughtPokemon.evxp = mathEngine.calculateEVXP(bst, level, q, totalIV);
+                            caughtPokemon.evm = mathEngine.calculateEVM(bst, level, q, totalIV);
+                            caughtPokemon.pp = mathEngine.calculatePP(bst, level, q, totalIV);
+                            caughtPokemon.moves = this.getLearnsetMoves(dittoBase, level);
+
+                            trackingName = "Ditto";
+                            trackingTypes = ["Normal"];
+                            delete caughtPokemon.isDisguisedDitto;
+                        }
+
                         // Fix the level 100 jump bug by setting xp explicitly to the exact minimum needed for their captured level
                         caughtPokemon.xp = mathEngine.calculateTotalXP(caughtPokemon.level);
                         this.state.storage.push(caughtPokemon);
@@ -724,7 +776,7 @@ class BattleSystem {
                         if (defeatedEncounter.qualityName === "Shiny") {
                             this.state.stats.shiniesCaught = (this.state.stats.shiniesCaught || 0) + 1;
                             if (!this.state.stats.caughtShiniesSpecies) this.state.stats.caughtShiniesSpecies = {};
-                            this.state.stats.caughtShiniesSpecies[defeatedEncounter.name] = true;
+                            this.state.stats.caughtShiniesSpecies[trackingName] = true;
                         }
                         // Track captures for Oak Tasks (Weak+, Regular+, Uncommon+, Rare+, Epic+)
                         let qName = defeatedEncounter.qualityName || "Regular";
@@ -762,7 +814,7 @@ class BattleSystem {
 
                         // Track species catches for unlocks
                         if (!this.state.stats.caughtSpecies) this.state.stats.caughtSpecies = {};
-                        this.state.stats.caughtSpecies[defeatedEncounter.name] = (this.state.stats.caughtSpecies[defeatedEncounter.name] || 0) + 1;
+                        this.state.stats.caughtSpecies[trackingName] = (this.state.stats.caughtSpecies[trackingName] || 0) + 1;
 
                         // Track specific typings
                         if (!this.state.stats.caughtSpecific) this.state.stats.caughtSpecific = {};
@@ -770,8 +822,8 @@ class BattleSystem {
 
                         qName = defeatedEncounter.qualityName || "Regular";
 
-                        if (defeatedEncounter.types) {
-                              for (let t of defeatedEncounter.types) {
+                        if (trackingTypes) {
+                              for (let t of trackingTypes) {
                                   this.state.stats.caughtSpecific[t] = (this.state.stats.caughtSpecific[t] || 0) + 1;
                                   let typeRarityKey = t + "_" + qName;
                                   let typeAnyKey = t + "_Any";
@@ -780,7 +832,7 @@ class BattleSystem {
                               }
                         }
 
-                        let speciesRarityKey = defeatedEncounter.name + "_" + qName;
+                        let speciesRarityKey = trackingName + "_" + qName;
                         this.state.stats.challengeCaughtSpecific[speciesRarityKey] = (this.state.stats.challengeCaughtSpecific[speciesRarityKey] || 0) + 1;
                     }
                 };
@@ -1392,9 +1444,47 @@ class BattleSystem {
                 if (this.state.settings.autoCatch) {
                     const ballResult = this.throwPokeball();
                     if (ballResult.caught) {
-                        if (!this.state.stats.caughtSpecies) this.state.stats.caughtSpecies = {};
-                        this.state.stats.caughtSpecies[this.activeEncounter.name] = (this.state.stats.caughtSpecies[this.activeEncounter.name] || 0) + 1;
                         let caughtPokemon = JSON.parse(JSON.stringify(this.activeEncounter));
+                        let trackingName = this.activeEncounter.name;
+
+                        if (caughtPokemon.isDisguisedDitto) {
+                            const dittoBase = this.state.config.pokemonData.find(p => p.id === 132);
+                            caughtPokemon.id = 132;
+                            caughtPokemon.name = "Ditto";
+                            caughtPokemon.types = ["Normal"];
+
+                            const level = caughtPokemon.level;
+                            const ivs = caughtPokemon.ivs;
+                            const q = caughtPokemon.quality;
+
+                            caughtPokemon.currentStats = {
+                                hp: mathEngine.calculateHP(dittoBase.hp, ivs.hp, level, q),
+                                atk: mathEngine.calculateStat(dittoBase.atk, ivs.atk, level, q),
+                                def: mathEngine.calculateStat(dittoBase.def, ivs.def, level, q),
+                                spa: mathEngine.calculateStat(dittoBase.spa, ivs.spa, level, q),
+                                spd: mathEngine.calculateStat(dittoBase.spd, ivs.spd, level, q),
+                                spe: mathEngine.calculateStat(dittoBase.spe, ivs.spe, level, q),
+                            };
+
+                            caughtPokemon.maxHp = caughtPokemon.currentStats.hp;
+                            caughtPokemon.currentHp = caughtPokemon.currentStats.hp;
+
+                            const bst = dittoBase.hp + dittoBase.atk + dittoBase.def + dittoBase.spa + dittoBase.spd + dittoBase.spe;
+                            const totalIV = ivs.hp + ivs.atk + ivs.def + ivs.spa + ivs.spd + ivs.spe;
+
+                            caughtPokemon.bst = bst;
+                            caughtPokemon.evxp = mathEngine.calculateEVXP(bst, level, q, totalIV);
+                            caughtPokemon.evm = mathEngine.calculateEVM(bst, level, q, totalIV);
+                            caughtPokemon.pp = mathEngine.calculatePP(bst, level, q, totalIV);
+                            caughtPokemon.moves = this.getLearnsetMoves(dittoBase, level);
+
+                            trackingName = "Ditto";
+                            delete caughtPokemon.isDisguisedDitto;
+                        }
+
+                        if (!this.state.stats.caughtSpecies) this.state.stats.caughtSpecies = {};
+                        this.state.stats.caughtSpecies[trackingName] = (this.state.stats.caughtSpecies[trackingName] || 0) + 1;
+
                         caughtPokemon.xp = mathEngine.calculateTotalXP(caughtPokemon.level);
                         this.state.storage.push(caughtPokemon);
                         results.caughtPokemonList.push(caughtPokemon);
@@ -1406,7 +1496,7 @@ class BattleSystem {
                         if (this.activeEncounter.qualityName === "Shiny") this.state.stats.shiniesCaught = (this.state.stats.shiniesCaught || 0) + 1;
                         if (this.activeEncounter.qualityName === "Shiny") {
                             if (!this.state.stats.caughtShiniesSpecies) this.state.stats.caughtShiniesSpecies = {};
-                            this.state.stats.caughtShiniesSpecies[this.activeEncounter.name] = true;
+                            this.state.stats.caughtShiniesSpecies[trackingName] = true;
                         }
                     }
                 }

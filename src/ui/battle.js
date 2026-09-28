@@ -583,7 +583,8 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
 
     // The image itself
     const ghost = document.createElement('img');
-    ghost.src = `Assets/Pokemon Sprites/Natural/${activeEncounter.qualityName === 'Shiny' ? activeEncounter.id + '_shiny' : activeEncounter.id}.png`;
+    let ghostId = activeEncounter.isDisguisedDitto ? 132 : activeEncounter.id;
+    ghost.src = `Assets/Pokemon Sprites/Natural/${activeEncounter.qualityName === 'Shiny' ? ghostId + '_shiny' : ghostId}.png`;
     ghost.style.height = '100%';
     ghost.style.objectFit = 'contain';
     ghostContainer.appendChild(ghost);
