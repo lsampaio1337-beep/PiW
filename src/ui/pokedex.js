@@ -273,3 +273,155 @@ export function getSpeciesDataHtml(pData, state) {
         ${movesHtml}
     `;
 }
+
+let isSmartCaptureShinyMode = false;
+
+export function showSmartCaptureMode() {
+    let headerHtml = `
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding: 0 10px;">
+            <div style="font-size: 14px; font-weight: bold;">Smart Capture Mode</div>
+            <div>
+                <label style="cursor: pointer; display: flex; align-items: center; gap: 5px; font-size: 12px;">
+                    <input type="checkbox" id="smart-capture-shiny-toggle" ${isSmartCaptureShinyMode ? 'checked' : ''} onchange="window.toggleSmartCaptureShinyMode()">
+                    Shiny Mode
+                </label>
+            </div>
+        </div>
+    `;
+
+    let html = headerHtml + `<div style="display:flex; flex-wrap:wrap; justify-content:center; max-height:400px; overflow-y:auto; gap:10px;">`;
+
+    if (!state.config.pokemonData) {
+        html += "<p>Loading Pokedex data...</p>";
+    } else {
+        // Iterate up to 151
+        for(let i = 1; i <= 151; i++) {
+            const pData = state.config.pokemonData.find(p => p.id === i);
+            if (!pData) continue;
+
+            const isSeen = hasSeenSpecies(i, state);
+            const isCaught = hasCaughtSpecies(i, state);
+            const hasSeenShiny = state.stats.seenShiniesSpecies && state.stats.seenShiniesSpecies[pData.name];
+            const hasCaughtShiny = state.stats.caughtShiniesSpecies && state.stats.caughtShiniesSpecies[pData.name];
+
+            const isRevealed = isCaught || hasCaughtShiny || isSeen || hasSeenShiny;
+            let filter = isRevealed ? "none" : "brightness(0)";
+            let cursor = isRevealed ? "pointer" : "default";
+            let onClick = isRevealed ? `onclick="window.showSmartCaptureBallSelection(${i})"` : "";
+            let displayName = isRevealed ? pData.name : "???";
+
+            let cardClass = "pokedex-card";
+            // Set width dynamically assuming a ~10px gap to fit exactly 9 items per row
+            let cardStyle = "width: calc((100% / 9) - 10px); text-align: center; font-size: 10px; box-sizing: border-box; position: relative;";
+
+            if (!isSeen && !isCaught) {
+                cardStyle += " border: 2px solid transparent; background: transparent;";
+            } else {
+                if (hasSeenShiny || hasCaughtShiny) {
+                    cardClass += " pokedex-card-shiny";
+                }
+                if (hasCaughtShiny) {
+                    cardClass += " pokedex-card-shiny-rotate";
+                }
+            }
+
+            // Which ball is selected?
+            let selectedBallTier = isSmartCaptureShinyMode ? state.settings.smartCaptureShiny[pData.id] : state.settings.smartCapture[pData.id];
+            let ballIconHtml = '';
+            if (selectedBallTier !== undefined && selectedBallTier >= 0 && selectedBallTier < state.config.balance.items.pokeballs.length) {
+                let bName = state.config.balance.items.pokeballs[selectedBallTier].name;
+                ballIconHtml = `<img src="Assets/Items/Balls/${bName}.png" style="position: absolute; top: 2px; right: 2px; width: 16px; height: 16px; filter: drop-shadow(1px 1px 0 black); pointer-events: none;">`;
+            } else if (selectedBallTier === -1) {
+                ballIconHtml = `<img src="Assets/Extra/IconExit.png" style="position: absolute; top: 2px; right: 2px; width: 16px; height: 16px; filter: drop-shadow(1px 1px 0 black); pointer-events: none;" title="Ignore">`;
+            }
+
+            // Sprite based on shiny mode
+            let spriteUrl = isSmartCaptureShinyMode ? `Assets/Pokemon Sprites/Natural/${i}_shiny.png` : `Assets/Pokemon Sprites/Natural/${i}.png`;
+
+            html += `<div class="${cardClass}" style="${cardStyle}" ${onClick}>
+                ${ballIconHtml}
+                <div style="font-weight:bold;">#${i}</div>
+                <div style="font-size: 9px; margin-bottom: 2px;">${displayName}</div>
+                <img src="${spriteUrl}" style="width: 50px; height: 50px; filter: ${filter}; cursor: ${cursor}; pointer-events: none;">
+            </div>`;
+        }
+    }
+
+    html += `</div>`;
+    showModal("Smart Capture Mode", html, "window-smart-capture");
+}
+
+export function toggleSmartCaptureShinyMode() {
+    isSmartCaptureShinyMode = !isSmartCaptureShinyMode;
+    showSmartCaptureMode();
+}
+
+export function showSmartCaptureBallSelection(id) {
+    const pData = state.config.pokemonData.find(p => p.id === id);
+    if (!pData) return;
+
+    let html = `<div style="text-align: center; margin-bottom: 15px;">Select a ball to automatically use for ${pData.name} ${isSmartCaptureShinyMode ? '(Shiny)' : ''}</div>`;
+    html += `<div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">`;
+
+    // Default option (follow global active ball)
+    let selectedTier = isSmartCaptureShinyMode ? state.settings.smartCaptureShiny[id] : state.settings.smartCapture[id];
+    let defaultBorder = (selectedTier === undefined) ? '#2ecc71' : '#555';
+    html += `
+        <div onclick="window.selectSmartCaptureBall(${id}, undefined)" style="width: 60px; height: 60px; background: rgba(0,0,0,0.6); border: 2px solid ${defaultBorder}; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; padding: 5px; box-sizing: border-box;">
+            <span style="font-size: 10px; font-weight: bold; color: white; text-align: center;">Follow Global</span>
+        </div>
+    `;
+
+    // None option (ignore / don't throw)
+    let noneBorder = (selectedTier === -1) ? '#2ecc71' : '#555';
+    html += `
+        <div onclick="window.selectSmartCaptureBall(${id}, -1)" style="width: 60px; height: 60px; background: rgba(0,0,0,0.6); border: 2px solid ${noneBorder}; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; padding: 5px; box-sizing: border-box;">
+            <img src="Assets/Extra/IconExit.png" style="width: 30px; height: 30px; object-fit: contain;">
+            <span style="font-size: 10px; color: white; margin-top: 5px;">Ignore</span>
+        </div>
+    `;
+
+
+    const balls = state.config.balance.items.pokeballs;
+    for (let idx = 0; idx < balls.length; idx++) {
+        let b = balls[idx];
+        const isActive = selectedTier === idx;
+        const borderColor = isActive ? '#2ecc71' : '#555';
+
+        html += `
+            <div onclick="window.selectSmartCaptureBall(${id}, ${idx})" style="width: 60px; height: 60px; background: rgba(0, 0, 0, 0.6); border: 2px solid ${borderColor}; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; padding: 5px; box-sizing: border-box;">
+                <img src="./Assets/Items/Balls/${b.name}.png" style="width: 30px; height: 30px; object-fit: contain;">
+                <span style="font-size: 9px; color: white; margin-top: 5px; text-align: center;">${b.name}</span>
+            </div>
+        `;
+    }
+
+    html += `</div>`;
+    showModal("Select Ball", html, "window-smart-capture-ball");
+}
+
+export function selectSmartCaptureBall(id, tier) {
+    if (isSmartCaptureShinyMode) {
+        if (tier === undefined) {
+            delete state.settings.smartCaptureShiny[id];
+        } else {
+            state.settings.smartCaptureShiny[id] = tier;
+        }
+    } else {
+        if (tier === undefined) {
+            delete state.settings.smartCapture[id];
+        } else {
+            state.settings.smartCapture[id] = tier;
+        }
+    }
+
+    if (window.storageRef) {
+        window.storageRef.save(state);
+    }
+
+    if (window.windowManager) {
+        window.windowManager.closeWindow("window-smart-capture-ball");
+    }
+
+    showSmartCaptureMode();
+}
