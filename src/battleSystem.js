@@ -1,3 +1,4 @@
+import { VITAMINS } from "./constants.js";
 // src/battleSystem.js
 import * as mathEngine from './mathEngine.js';
 
@@ -959,7 +960,7 @@ class BattleSystem {
 
         // Vitamin drops
         if (sumIV > 500 && this.activeEncounter?.quality > 1.6 && Math.random() < (0.05 * lootMultiplier)) {
-            const vitamins = ["Calcium SpAtk", "Carbo Speed", "HP Up", "Iron Def", "Protein Atk", "Zinc SpDef"];
+            const vitamins = VITAMINS;
             const randomVitamin = vitamins[Math.floor(Math.random() * vitamins.length)];
 
             let dropQuantity = Math.floor(lootMultiplier);
@@ -1642,7 +1643,7 @@ class BattleSystem {
 
                 // Vitamin drops
                 if (sumIV > 500 && this.activeEncounter?.quality > 1.6 && Math.random() < (0.05 * lootMultiplier)) {
-                    const vitamins = ["Calcium SpAtk", "Carbo Speed", "HP Up", "Iron Def", "Protein Atk", "Zinc SpDef"];
+                    const vitamins = VITAMINS;
                     const randomVitamin = vitamins[Math.floor(Math.random() * vitamins.length)];
 
                     let dropQuantity = Math.floor(lootMultiplier);

@@ -1,3 +1,4 @@
+import { VITAMINS } from "../constants.js";
 import { state, globals } from '../state.js';
 import { updateUI, showModal } from '../ui.js';
 import * as mathEngine from '../mathEngine.js';
@@ -115,6 +116,9 @@ window.showTimeLapseResults = function(results) {
             } else if (state.config.balance.items.potions.find(p => p.name === itemName)) {
                 imgFolder = "Potions";
                 basePrice = state.config.balance.items.potions.find(p => p.name === itemName).price;
+            } else if (VITAMINS.includes(itemName)) {
+                imgFolder = "Vitamins";
+                basePrice = state.config.balance.items.stones.price * 2;
             } else {
                 imgFolder = "Stones";
                 basePrice = state.config.balance.items.stones.price;

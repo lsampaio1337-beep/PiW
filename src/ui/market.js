@@ -1,3 +1,4 @@
+import { VITAMINS } from "../constants.js";
 import { calculatePP, getCapacity, getCurrentCount } from "../mathEngine.js";
 import { state, globals } from '../state.js';
 import { updateUI, showModal } from '../ui.js';
@@ -258,7 +259,7 @@ export function renderPokeMarketTab(category) {
         let stoneKeys = Object.keys(state.backpack.stones);
         stoneKeys.sort((a, b) => a.localeCompare(b));
         items = stoneKeys.map(stoneName => {
-            const isVitamin = ["Calcium SpAtk", "Carbo Speed", "HP Up", "Iron Def", "Protein Atk", "Zinc SpDef"].includes(stoneName);
+            const isVitamin = VITAMINS.includes(stoneName);
             return {
                 name: stoneName,
                 price: stonePrice,
@@ -591,7 +592,7 @@ export function renderPokeMarketSellTab(category) {
         let stoneKeysSell = Object.keys(state.backpack.stones);
         stoneKeysSell.sort((a, b) => a.localeCompare(b));
         items = stoneKeysSell.map(stoneName => {
-            const isVitamin = ["Calcium SpAtk", "Carbo Speed", "HP Up", "Iron Def", "Protein Atk", "Zinc SpDef"].includes(stoneName);
+            const isVitamin = VITAMINS.includes(stoneName);
             return {
                 name: stoneName,
                 buyPrice: stonePrice,
