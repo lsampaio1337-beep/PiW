@@ -895,7 +895,7 @@ class BattleSystem {
         }
 
         // Vitamin drops
-        if (sumIV > 450 && this.activeEncounter?.quality > 1.4) {
+        if (sumIV > 500 && this.activeEncounter?.quality > 1.6) {
             const vitamins = ["Calcium SpAtk", "Carbo Speed", "HP Up", "Iron Def", "Protein Atk", "Zinc SpDef"];
             const randomVitamin = vitamins[Math.floor(Math.random() * vitamins.length)];
 
@@ -1545,7 +1545,7 @@ class BattleSystem {
                 }
 
                 // Vitamin drops
-                if (sumIV > 450 && this.activeEncounter?.quality > 1.4) {
+                if (sumIV > 500 && this.activeEncounter?.quality > 1.6) {
                     const vitamins = ["Calcium SpAtk", "Carbo Speed", "HP Up", "Iron Def", "Protein Atk", "Zinc SpDef"];
                     const randomVitamin = vitamins[Math.floor(Math.random() * vitamins.length)];
 
