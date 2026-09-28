@@ -941,3 +941,56 @@ export function playCombatAnimations(targetSide, moveType, duration) {
 
     }, duration * 0.8);
 }
+
+export function showLoot(lootItems) {
+    const container = document.getElementById('battle-loot-container');
+    if (!container) return;
+
+    const keys = Object.keys(lootItems);
+    if (keys.length === 0) return;
+
+    let html = '';
+    for (let i = 0; i < keys.length; i++) {
+        const itemName = keys[i];
+        const count = lootItems[itemName];
+
+        let imgFolder = 'Balls';
+        if (itemName.includes('Potion')) imgFolder = 'Potions';
+        else if (itemName.includes('Stone')) imgFolder = 'Stones';
+
+        html += `
+            <div style="width: 30px; height: 30px; background: rgba(0, 0, 0, 0.6); border: 1px solid #f1c40f; border-radius: 4px; position: relative; display: flex; align-items: center; justify-content: center;">
+                <img src="Assets/Items/${imgFolder}/${itemName}.png" style="width: 80%; height: 80%; object-fit: contain;">
+                <span style="position: absolute; bottom: -2px; right: 0px; color: white; font-size: 8px; font-weight: bold; text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;">${count}</span>
+            </div>
+        `;
+    }
+
+    const row = document.createElement('div');
+    row.style.display = 'flex';
+    row.style.gap = '5px';
+    row.style.transition = 'opacity 0.5s ease-in-out';
+    row.style.opacity = '1';
+    row.innerHTML = html;
+
+    container.prepend(row);
+    container.style.display = 'flex';
+    container.style.opacity = '1';
+
+    // Keep maximum 5 rows visible
+    while (container.children.length > 5) {
+        container.removeChild(container.lastChild);
+    }
+
+    setTimeout(() => {
+        row.style.opacity = '0';
+        setTimeout(() => {
+            if (row.parentElement) {
+                row.parentElement.removeChild(row);
+            }
+            if (container.children.length === 0) {
+                container.style.display = 'none';
+            }
+        }, 500); // Wait for transition
+    }, 5000);
+}

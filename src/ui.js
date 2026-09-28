@@ -43,7 +43,7 @@ export const TYPE_COLORS = {
 };
 import { updateTopbar } from './ui/topbar.js';
 import { updateSidebar } from './ui/sidebar.js';
-import { updateBattleArena, showDamage, playCombatAnimations, triggerDefeatAnimation } from './ui/battle.js';
+import { updateBattleArena, showDamage, playCombatAnimations, triggerDefeatAnimation, showLoot } from './ui/battle.js';
 import { showCalendar } from './ui/calendar.js';
 import { showGiftModal } from './ui/gift.js';
 import { showMap, navigateToLocation, showMapTooltip, hideMapTooltip } from './ui/map.js';
@@ -444,6 +444,7 @@ window.handleDrop = handleDrop;
 window.showDamage = showDamage;
 window.playCombatAnimations = playCombatAnimations;
 window.triggerDefeatAnimation = triggerDefeatAnimation;
+window.showLoot = showLoot;
 window.setLeader = function(idx) {
     if (idx === 0) return;
     if (globals.battleSystem) {
