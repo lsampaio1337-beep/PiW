@@ -4,7 +4,7 @@ const fs = require('fs');
 
 function createWindow() {
     // Get primary display dimensions
-    const { width, height } = screen.getPrimaryDisplay().workAreaSize;
+    const { width, height } = require('electron').screen.getPrimaryDisplay().workAreaSize;
 
     const win = new BrowserWindow({
         width: width,
@@ -14,6 +14,7 @@ function createWindow() {
         hasShadow: false,
         alwaysOnTop: false, // Don't keep it above other windows
         skipTaskbar: false,
+        show: false,
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false
@@ -21,11 +22,13 @@ function createWindow() {
     });
 
     // Maximize the window to cover the screen
-    win.maximize();
+    // win.maximize();
+    win.setBounds(require('electron').screen.getPrimaryDisplay().workArea);
 
     win.loadFile('index.html');
 
     win.once('ready-to-show', () => {
+        win.show();
         // Create a signal file to let the launcher know the game is ready
         if (process.platform === 'win32') {
             fs.writeFileSync('game_ready.txt', 'ready');
@@ -43,7 +46,7 @@ function createWindow() {
 }
 
 // Disable hardware acceleration to prevent transparency bugs on some OS
-app.disableHardwareAcceleration();
+// app.disableHardwareAcceleration(); // Disabled to fix transparent frameless window on Windows
 
 app.whenReady().then(() => {
     createWindow();
