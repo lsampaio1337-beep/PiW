@@ -251,8 +251,8 @@ const mapCoordinates = {
   },
   "mythical_and_legendaries": {
     "name": "Mythical and Legendaries",
-    "x": 1,
-    "y": 1
+    "x": 35.77,
+    "y": 3.38
   }
 };
 export default mapCoordinates;
