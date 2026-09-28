@@ -2,7 +2,13 @@ const { app, BrowserWindow, ipcMain, screen } = require('electron');
 const path = require('path');
 const fs = require('fs');
 
+// Robust GPU Disabling (Force CPU-only mode)
 app.disableHardwareAcceleration();
+app.commandLine.appendSwitch('disable-gpu');
+app.commandLine.appendSwitch('disable-gpu-compositing');
+app.commandLine.appendSwitch('disable-software-rasterizer');
+app.commandLine.appendSwitch('disable-gpu-rasterization');
+app.commandLine.appendSwitch('disable-gpu-sandbox');
 
 function createWindow() {
     // Get primary display dimensions
@@ -15,8 +21,8 @@ function createWindow() {
         y: y,
         transparent: false,
         backgroundColor: '#000000',
-        frame: false,
-        hasShadow: false,
+        frame: true,
+        hasShadow: true,
         alwaysOnTop: false, // Don't keep it above other windows
         skipTaskbar: false,
         show: false,
