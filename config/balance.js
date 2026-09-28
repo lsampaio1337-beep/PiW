@@ -17,51 +17,50 @@ const balance = {
 
     "expansions": {
       "ballPocket": [
-        { "tier": 1, "name": "Ball1", "displayName": "Pocket Clip", "increment": 50, "cost": 150 },
-        { "tier": 2, "name": "Ball2", "displayName": "Belt Carrier", "increment": 100, "cost": 450 },
-        { "tier": 3, "name": "Ball3", "displayName": "Tactical Cinch", "increment": 250, "cost": 1200 },
-        { "tier": 4, "name": "Ball4", "displayName": "Silph Loader", "increment": 500, "cost": 3000 },
-        { "tier": 5, "name": "Ball5", "displayName": "Master Sling", "increment": 1000, "cost": 7500 },
-        { "tier": 6, "name": "Ball6", "displayName": "Endless Reservoir", "increment": 8000, "cost": 20000 }
+        { "tier": 1, "name": "Ball1", "increment": 50, "cost": 150 },
+        { "tier": 2, "name": "Ball2", "increment": 100, "cost": 450 },
+        { "tier": 3, "name": "Ball3", "increment": 250, "cost": 1200 },
+        { "tier": 4, "name": "Ball4", "increment": 500, "cost": 3000 },
+        { "tier": 5, "name": "Ball5", "increment": 1000, "cost": 7500 },
+        { "tier": 6, "name": "Ball6", "increment": 8000, "cost": 20000 }
       ],
       "potionSatchel": [
-        { "tier": 1, "name": "Potion1", "displayName": "Small Pouch Patch", "increment": 20, "cost": 75 },
-        { "tier": 2, "name": "Potion2", "displayName": "Standard Pouch Patch", "increment": 30, "cost": 200 },
-        { "tier": 3, "name": "Potion3", "displayName": "Heavy Pouch Patch", "increment": 50, "cost": 500 },
-        { "tier": 4, "name": "Potion4", "displayName": "Expanded Satchel Kit", "increment": 100, "cost": 1200 },
-        { "tier": 5, "name": "Potion5", "displayName": "Alchemist Belt Rig", "increment": 280, "cost": 3000 }
+        { "tier": 1, "name": "Potion1", "increment": 20, "cost": 75 },
+        { "tier": 2, "name": "Potion2", "increment": 30, "cost": 200 },
+        { "tier": 3, "name": "Potion3", "increment": 50, "cost": 500 },
+        { "tier": 4, "name": "Potion4", "increment": 100, "cost": 1200 },
+        { "tier": 5, "name": "Potion5", "increment": 280, "cost": 3000 }
       ],
       "pokemonBox": [
-        { "tier": 1, "name": "Storage1", "displayName": "Small Box Upgrade", "increment": 10, "cost": 100 },
-        { "tier": 2, "name": "Storage2", "displayName": "Standard Box Upgrade", "increment": 20, "cost": 300 },
-        { "tier": 3, "name": "Storage3", "displayName": "Large Box Upgrade", "increment": 50, "cost": 900 },
-        { "tier": 4, "name": "Storage4", "displayName": "Huge Box Upgrade", "increment": 100, "cost": 2500 },
-        { "tier": 5, "name": "Storage5", "displayName": "Ultimate Box Upgrade", "increment": 300, "cost": 6000 }
+        { "tier": 1, "name": "Storage1", "increment": 10, "cost": 100 },
+        { "tier": 2, "name": "Storage2", "increment": 20, "cost": 300 },
+        { "tier": 3, "name": "Storage3", "increment": 50, "cost": 900 },
+        { "tier": 4, "name": "Storage4", "increment": 100, "cost": 2500 },
+        { "tier": 5, "name": "Storage5", "increment": 300, "cost": 6000 }
       ],
       "glass": [
-        { "tier": 1, "name": "Glass1", "displayName": "Health Monocle", "increment": 0, "cost": 1 },
-        { "tier": 2, "name": "Glass2", "displayName": "Basic Glasses", "increment": 0, "cost": 1 },
-        { "tier": 3, "name": "Glass3", "displayName": "Great Glasses", "increment": 0, "cost": 1 },
-        { "tier": 4, "name": "Glass4", "displayName": "Ultra Glasses", "increment": 0, "cost": 1 },
-        { "tier": 5, "name": "Glass5", "displayName": "Master Glasses", "increment": 0, "cost": 1 }
+        { "tier": 1, "name": "Glass1", "increment": 0, "cost": 1 },
+        { "tier": 2, "name": "Glass2", "increment": 0, "cost": 1 },
+        { "tier": 3, "name": "Glass3", "increment": 0, "cost": 1 },
+        { "tier": 4, "name": "Glass4", "increment": 0, "cost": 1 },
+        { "tier": 5, "name": "Glass5", "increment": 0, "cost": 1 }
       ],
       "smartwatch": [
-        { "tier": 1, "name": "Smartwatch1", "displayName": "Ball Watch", "increment": 0, "cost": 1 },
-        { "tier": 2, "name": "Smartwatch2", "displayName": "Potion Watch", "increment": 0, "cost": 1 },
-        { "tier": 3, "name": "Smartwatch3", "displayName": "Smart Ball Watch", "increment": 0, "cost": 1 }
+        { "tier": 1, "name": "Smartwatch1", "increment": 0, "cost": 1 },
+        { "tier": 2, "name": "Smartwatch2", "increment": 0, "cost": 1 },
+        { "tier": 3, "name": "Smartwatch3", "increment": 0, "cost": 1 }
       ],
       "speed": [
-        { "tier": 1, "name": "Speed1", "displayName": "Voltorb Sneakers", "increment": 0, "cost": 1 },
-        { "tier": 2, "name": "Speed2", "displayName": "Shelder Skate", "increment": 0, "cost": 1 },
-        { "tier": 3, "name": "Speed3", "displayName": "Primeape Scooter", "increment": 0, "cost": 1 },
-        { "tier": 4, "name": "Speed4", "displayName": "Doduo Rollers", "increment": 0, "cost": 1 },
-        { "tier": 5, "name": "Speed5", "displayName": "Rapidash Bike", "increment": 0, "cost": 1 }
+        { "tier": 1, "name": "Speed1", "increment": 0, "cost": 1 },
+        { "tier": 2, "name": "Speed2", "increment": 0, "cost": 1 },
+        { "tier": 3, "name": "Speed3", "increment": 0, "cost": 1 },
+        { "tier": 4, "name": "Speed4", "increment": 0, "cost": 1 },
+        { "tier": 5, "name": "Speed5", "increment": 0, "cost": 1 }
       ],
       "loot": [
-        { "tier": 1, "name": "Loot1", "displayName": "Potion Loot", "increment": 0, "cost": 1 },
-        { "tier": 2, "name": "Loot2", "displayName": "Ball Loot", "increment": 0, "cost": 1 },
-        { "tier": 3, "name": "Loot3", "displayName": "Evolution Loot", "increment": 0, "cost": 1 },
-        { "tier": 4, "name": "Loot4", "displayName": "Vitamin Loot", "increment": 0, "cost": 1 }
+        { "tier": 1, "name": "Loot1", "increment": 0, "cost": 1 },
+        { "tier": 2, "name": "Loot2", "increment": 0, "cost": 1 },
+        { "tier": 3, "name": "Loot3", "increment": 0, "cost": 1 }
       ]
     },
     "items": {

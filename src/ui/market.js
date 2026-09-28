@@ -223,7 +223,6 @@ export function renderPokeMarketTab(category) {
 
         items = items.map(u => ({
             name: u.name,
-            displayName: u.displayName,
             price: u.cost,
             img: u.img,
             attrLabel: u.attrLabel,
@@ -270,7 +269,7 @@ export function renderPokeMarketTab(category) {
 
     let html = `<div style="display: grid; grid-template-columns: repeat(${cols}, calc(var(--m-width) * 0.145)); gap: calc(var(--m-width) * 0.018); justify-content: center; width: 100%;">`;
     items.forEach(item => {
-        let displayName = item.displayName || item.name;
+        let displayName = item.name;
         if (category === 'potions') displayName = displayName.replace(' Potion', '<br>Potion');
         if (category === 'stones') displayName = displayName.replace(' Stone', '<br>Stone');
 
@@ -602,7 +601,7 @@ export function renderPokeMarketSellTab(category) {
 
     let html = `<div style="display: grid; grid-template-columns: repeat(${cols}, calc(var(--m-width) * 0.145)); gap: calc(var(--m-width) * 0.018); justify-content: center; width: 100%;">`;
     items.forEach(item => {
-        let displayName = item.displayName || item.name;
+        let displayName = item.name;
         if (category === 'potions') displayName = displayName.replace(' Potion', '<br>Potion');
         if (category === 'stones') displayName = displayName.replace(' Stone', '<br>Stone');
 
