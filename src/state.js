@@ -72,9 +72,7 @@ export const state = {
         activePotionTier: 0, // Tiny
         autoCatch: true,
         activeBallTier: 0, // Pokeball
-        windowSettings: {}, // Stores window positions and sizes
-        smartCapture: {},
-        smartCaptureShiny: {}
+        windowSettings: {} // Stores window positions and sizes
     },
     currentRoute: "Route 1",
     config: {}
