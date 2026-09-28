@@ -2,6 +2,13 @@ const { app, BrowserWindow, ipcMain, screen } = require('electron');
 const path = require('path');
 const fs = require('fs');
 
+// Force D3D11 backend to ensure stable hardware acceleration (required for transparent: true on Windows)
+app.commandLine.appendSwitch('use-angle', 'd3d11');
+// Disable CalculateNativeWinOcclusion to prevent frameless transparent window freezing issues
+app.commandLine.appendSwitch('disable-features', 'CalculateNativeWinOcclusion');
+// Force standard color profile to ensure alpha channels map correctly
+app.commandLine.appendSwitch('force-color-profile', 'srgb');
+
 function createWindow() {
     // Get primary display dimensions
     const { x, y, width, height } = screen.getPrimaryDisplay().workArea;
@@ -13,13 +20,15 @@ function createWindow() {
         y: y,
         transparent: true,
         frame: false,
+        resizable: false, // Prevent unintentional resizing
         hasShadow: false,
         alwaysOnTop: false, // Don't keep it above other windows
         skipTaskbar: false,
         show: false,
         webPreferences: {
             nodeIntegration: true,
-            contextIsolation: false
+            contextIsolation: false,
+            backgroundThrottling: false // Prevent video/animation freezes when unfocused
         }
     });
 
