@@ -1707,8 +1707,14 @@ class BattleSystem {
         let finalPotions = this.state.settings.activePotionTier >= 0 ?
             this.state.backpack.potions[this.state.config.balance.items.potions[this.state.settings.activePotionTier].name] || 0 : 0;
 
-        results.ballsUsed = Math.max(0, initialBalls - finalBalls);
-        results.potionsUsed = Math.max(0, initialPotions - finalPotions);
+        let activeBallName = this.state.settings.activeBallTier >= 0 ? this.state.config.balance.items.pokeballs[this.state.settings.activeBallTier].name : null;
+        let activePotionName = this.state.settings.activePotionTier >= 0 ? this.state.config.balance.items.potions[this.state.settings.activePotionTier].name : null;
+
+        let ballsLooted = activeBallName ? (results.itemsLooted[activeBallName] || 0) : 0;
+        let potionsLooted = activePotionName ? (results.itemsLooted[activePotionName] || 0) : 0;
+
+        results.ballsUsed = Math.max(0, initialBalls - finalBalls + ballsLooted);
+        results.potionsUsed = Math.max(0, initialPotions - finalPotions + potionsLooted);
 
         results.simulatedTimeMs = totalSimTime;
         results.xpEarned = this.state.party[0] ? this.state.party[0].xp - initialLeaderXP : 0;
