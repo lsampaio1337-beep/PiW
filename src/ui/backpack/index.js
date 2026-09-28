@@ -27,7 +27,7 @@ export function showBackpack() {
 
                 <!-- Inner container shrink-wrapped to exact dimensions so clicks outside the bag hit the overlay -->
                 <div onclick="event.stopPropagation(); document.getElementById('backpack-content-area').style.display='none'" style="position: relative; width: 100%; aspect-ratio: 1279 / 1350; pointer-events: auto;">
-                    <img src="./Assets/Extra/Backpack.png" style="width: 100%; display: block; pointer-events: none;">
+                    <img src="${(state.stats.upgrades && state.stats.upgrades.lootTier >= 4) ? './Assets/Extra/Backpack2.png' : './Assets/Extra/Backpack.png'}" style="width: 100%; display: block; pointer-events: none;">
 
                     <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2;">
                         <!-- Use exact pixel dimensions of the image for the viewBox to ensure perfect circle scaling -->
