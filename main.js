@@ -10,8 +10,8 @@ function createWindow() {
         width: width,
         height: height,
         show: false,
-        transparent: true,
-        backgroundColor: '#00000000', // Explicitly set transparent background to help rendering
+        transparent: false,
+        backgroundColor: '#000000', // Solid black background to guarantee rendering
         frame: false,
         hasShadow: false,
         alwaysOnTop: false, // Don't keep it above other windows
@@ -52,8 +52,8 @@ function createWindow() {
     });
 }
 
-// Removing disableHardwareAcceleration as it causes transparent frameless windows to be invisible on Windows.
-// app.disableHardwareAcceleration();
+// Disable hardware acceleration to prevent GPU crashes on some environments
+app.disableHardwareAcceleration();
 
 app.whenReady().then(() => {
     // Delay creation slightly to ensure graphics context is fully ready
