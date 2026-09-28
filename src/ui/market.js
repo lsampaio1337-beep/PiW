@@ -412,6 +412,7 @@ export function openPokeMarketSell() {
                 <button onclick="if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokeballs')" style="padding: calc(var(--m-width) * 0.012) calc(var(--m-width) * 0.024); font-size: calc(var(--m-width) * 0.019); font-weight: bold; border-radius: 5px; cursor: pointer;">Balls</button>
                 <button onclick="if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('potions')" style="padding: calc(var(--m-width) * 0.012) calc(var(--m-width) * 0.024); font-size: calc(var(--m-width) * 0.019); font-weight: bold; border-radius: 5px; cursor: pointer;">Potions</button>
                 <button onclick="if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('stones')" style="padding: calc(var(--m-width) * 0.012) calc(var(--m-width) * 0.024); font-size: calc(var(--m-width) * 0.019); font-weight: bold; border-radius: 5px; cursor: pointer;">Stones</button>
+                <button onclick="if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('vitamins')" style="padding: calc(var(--m-width) * 0.012) calc(var(--m-width) * 0.024); font-size: calc(var(--m-width) * 0.019); font-weight: bold; border-radius: 5px; cursor: pointer;">Vitamins</button>
                 <button onclick="if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon')" style="padding: calc(var(--m-width) * 0.012) calc(var(--m-width) * 0.024); font-size: calc(var(--m-width) * 0.019); font-weight: bold; border-radius: 5px; cursor: pointer;">Pokemon</button>
             </div>
 
@@ -588,14 +589,27 @@ export function renderPokeMarketSellTab(category) {
     } else if (category === 'stones') {
         cols = 6;
         const stonePrice = state.config.balance.items.stones.price;
-        let stoneKeysSell = Object.keys(state.backpack.stones);
+        const vitaminsList = ["Calcium SpAtk", "Carbo Speed", "HP Up", "Iron Def", "Protein Atk", "Zinc SpDef"];
+        let stoneKeysSell = Object.keys(state.backpack.stones).filter(k => !vitaminsList.includes(k));
         stoneKeysSell.sort((a, b) => a.localeCompare(b));
         items = stoneKeysSell.map(stoneName => {
-            const isVitamin = ["Calcium SpAtk", "Carbo Speed", "HP Up", "Iron Def", "Protein Atk", "Zinc SpDef"].includes(stoneName);
             return {
                 name: stoneName,
                 buyPrice: stonePrice,
-                img: isVitamin ? `./Assets/Items/Vitamins/${stoneName}.png` : `./Assets/Items/Stones/${stoneName}.png`
+                img: `./Assets/Items/Stones/${stoneName}.png`
+            };
+        });
+    } else if (category === 'vitamins') {
+        cols = 6;
+        const vitaminsList = ["Calcium SpAtk", "Carbo Speed", "HP Up", "Iron Def", "Protein Atk", "Zinc SpDef"];
+        // Base sell price should be $5. The logic below calculates baseSellPrice = Math.floor(buyPrice * 0.5)
+        // Therefore, we set buyPrice to 10 so that baseSellPrice is 5.
+        const vitaminBuyPrice = 10;
+        items = vitaminsList.map(vitaminName => {
+            return {
+                name: vitaminName,
+                buyPrice: vitaminBuyPrice,
+                img: `./Assets/Items/Vitamins/${vitaminName}.png`
             };
         });
     }
@@ -609,8 +623,9 @@ export function renderPokeMarketSellTab(category) {
         const baseSellPrice = Math.floor(item.buyPrice * 0.5);
         let stock = 0;
         let maxCapStr = "";
-        if (state.backpack[category] && state.backpack[category][item.name]) {
-            stock = state.backpack[category][item.name];
+        const targetCategory = category === 'vitamins' ? 'stones' : category;
+        if (state.backpack[targetCategory] && state.backpack[targetCategory][item.name]) {
+            stock = state.backpack[targetCategory][item.name];
         }
         if (category === 'pokeballs' || category === 'potions') {
             const type = category === 'pokeballs' ? 'balls' : 'potions';
@@ -625,7 +640,7 @@ export function renderPokeMarketSellTab(category) {
                 style="background: #2c3e50; border: 2px solid #e74c3c; border-radius: 10px; padding: calc(var(--m-width) * 0.012); text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center;">
                 <div style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; margin-bottom: calc(var(--m-width) * 0.006); height: calc(var(--m-width) * 0.038); display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.1;">${displayName}</div>
                 <img src="${item.img}" style="width: calc(var(--m-width) * 0.072); height: calc(var(--m-width) * 0.072); object-fit: contain; margin-bottom: calc(var(--m-width) * 0.006);">
-                ${category !== 'stones' ? `<div style="font-size: calc(var(--m-width) * 0.014); color: #f1c40f; margin-bottom: calc(var(--m-width) * 0.006); line-height: 1.1;">${item.attrLabel}</div>` : ''}
+                ${item.attrLabel ? `<div style="font-size: calc(var(--m-width) * 0.014); color: #f1c40f; margin-bottom: calc(var(--m-width) * 0.006); line-height: 1.1;">${item.attrLabel}</div>` : ''}
                 <div style="font-size: calc(var(--m-width) * 0.014); color: #bdc3c7; line-height: 1.1;">Stock: ${formatMarketNumberDown(stock)}${maxCapStr}</div>
 
                 <div style="display: flex; gap: 5px; margin-top: calc(var(--m-width) * 0.012); align-items: center; justify-content: center; width: 100%;">
@@ -700,8 +715,9 @@ export function sellMarketItem(itemId, baseSellPrice, category) {
     const input = document.getElementById(`sell-qty-${safeId}`);
 
     let stock = 0;
-    if (state.backpack[category] && state.backpack[category][itemId]) {
-        stock = state.backpack[category][itemId];
+    const targetCategory = category === 'vitamins' ? 'stones' : category;
+    if (state.backpack[targetCategory] && state.backpack[targetCategory][itemId]) {
+        stock = state.backpack[targetCategory][itemId];
     }
 
     let qty = parseMarketQuantity(input ? input.value : '0');
@@ -720,7 +736,7 @@ export function sellMarketItem(itemId, baseSellPrice, category) {
     if (stock >= qty && qty > 0) {
         const totalValue = qty * baseSellPrice;
 
-        state.backpack[category][itemId] -= qty;
+        state.backpack[targetCategory][itemId] -= qty;
         state.trainer.money += totalValue;
 
         if (window.updateUI) window.updateUI();
