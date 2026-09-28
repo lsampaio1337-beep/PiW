@@ -2,6 +2,9 @@ const { app, BrowserWindow, screen } = require('electron');
 const path = require('path');
 const fs = require('fs');
 
+// Disable hardware acceleration to fix invisible/frozen window issues
+app.disableHardwareAcceleration();
+
 function createWindow() {
     // Get primary display dimensions
     const { x, y, width, height } = screen.getPrimaryDisplay().workArea;
@@ -15,7 +18,7 @@ function createWindow() {
         hasShadow: false,
         alwaysOnTop: false, // Don't keep it above other windows
         skipTaskbar: false,
-        show: false,
+        show: true, // Show immediately
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false
