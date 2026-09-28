@@ -3,28 +3,19 @@ const path = require('path');
 const fs = require('fs');
 
 function createWindow() {
-    // Get primary display dimensions
-    const { x, y, width, height } = screen.getPrimaryDisplay().workArea;
-
     const win = new BrowserWindow({
-        width: width,
-        height: height,
-        x: x,
-        y: y,
-        transparent: false,
+        width: 1280,
+        height: 720,
         backgroundColor: '#000000',
-        frame: false,
-        hasShadow: false,
-        alwaysOnTop: false, // Don't keep it above other windows
-        skipTaskbar: false,
-        show: false,
+        show: false, // Wait until ready-to-show
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false
         }
     });
 
-    win.setBounds({ x, y, width, height });
+    // Maximize the window automatically
+    win.maximize();
 
     win.loadFile('index.html');
 
