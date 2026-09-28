@@ -34,7 +34,7 @@ export function showMap() {
     unlockedAreas.add("PokeCenter & PokeMarket");
 
     // Check if 150 unique species are caught
-    if (state.stats.caughtSpecies && Object.keys(state.stats.caughtSpecies).length >= 150) {
+    if (state.stats.completed150Challenge) {
         unlockedAreas.add("Mythical and Legendaries");
     }
 
