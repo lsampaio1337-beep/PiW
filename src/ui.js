@@ -1870,8 +1870,8 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
                 <p><b>Battles Won:</b> ${(state.stats.battlesWon || 0).toLocaleString()}</p>
                 <p><b>Faints:</b> ${(state.stats.faints || 0).toLocaleString()}</p>
                 <p><b>Total Pokémon Captured:</b> ${(state.stats.caught || 0).toLocaleString()}</p>
-                <p><b>Species Caught:</b> ${uniqueSpeciesCaught} / 150</p>
-                <p><b>Shiny Species Caught:</b> ${uniqueShinySpeciesCaught} / 150</p>
+                <p><b>Species Caught:</b> ${uniqueSpeciesCaught} / ${state.config.pokemonData.length}</p>
+                <p><b>Shiny Species Caught:</b> ${uniqueShinySpeciesCaught} / ${state.config.pokemonData.length}</p>
                 <p><b>Shinies Seen:</b> ${(state.stats.shiniesSeen || 0).toLocaleString()}</p>
                 <p><b>Shinies Caught:</b> ${(state.stats.shiniesCaught || 0).toLocaleString()}</p>
                 <br>
