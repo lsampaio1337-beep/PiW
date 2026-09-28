@@ -125,6 +125,14 @@ export function cheatAction(action) {
             state.stats.newRoutes.push('Casino');
         }
 
+        // Ensure Daycare is unlocked
+        if (!state.stats.completedChallengeIds.includes('Daycare')) {
+            state.stats.completedChallengeIds.push('Daycare');
+        }
+        if (!state.stats.newRoutes.includes('Daycare')) {
+            state.stats.newRoutes.push('Daycare');
+        }
+
         // Complete all progress challenges.
         // This is primarily driven by activeChallenges and completedChallengeIds.
         state.stats.activeChallenges = [];
