@@ -20,7 +20,34 @@ class BattleSystem {
         };
     }
 
+
+    getEvolutionStage(pokemonId) {
+        if (!this.evolutionStageMap) {
+            const evolveFromMap = {};
+            for (let p of this.state.config.pokemonData) {
+                if (p.evolutions) {
+                    for (let evo of p.evolutions) {
+                        evolveFromMap[evo.to] = p.id;
+                    }
+                }
+            }
+            this.evolutionStageMap = {};
+            for (let p of this.state.config.pokemonData) {
+                let stage = 1;
+                let currentId = p.id;
+                while (evolveFromMap[currentId]) {
+                    stage++;
+                    currentId = evolveFromMap[currentId];
+                    if (stage > 5) break;
+                }
+                this.evolutionStageMap[p.id] = stage;
+            }
+        }
+        return this.evolutionStageMap[pokemonId] || 1;
+    }
+
     start() {
+
         if (!this.combatLoop) {
             this.searchNext();
         }
@@ -869,10 +896,13 @@ class BattleSystem {
 
         // Loot drops for Stones
         let dropRate = 0;
-        switch (this.activeEncounter.qualityName) {
-            case "Rare": dropRate = 0.01; break;
-            case "Epic": dropRate = 0.02; break;
-            case "Shiny": dropRate = 1.0; break;
+        const evoStage = this.getEvolutionStage(this.activeEncounter.id);
+
+        if (evoStage === 2) dropRate = 0.01;
+        else if (evoStage >= 3) dropRate = 0.02;
+
+        if (this.activeEncounter.qualityName === "Shiny" && evoStage >= 2) {
+            dropRate = 1.0;
         }
 
         if (Math.random() < (dropRate * lootMultiplier) && this.activeEncounter.types && this.activeEncounter.types.length > 0) {
@@ -1507,10 +1537,13 @@ class BattleSystem {
 
                 // Add loot drops
                 let dropRate = 0;
-                switch (this.activeEncounter.qualityName) {
-                    case "Rare": dropRate = 0.01; break;
-                    case "Epic": dropRate = 0.02; break;
-                    case "Shiny": dropRate = 1.0; break;
+                const evoStage = this.getEvolutionStage(this.activeEncounter.id);
+
+                if (evoStage === 2) dropRate = 0.01;
+                else if (evoStage >= 3) dropRate = 0.02;
+
+                if (this.activeEncounter.qualityName === "Shiny" && evoStage >= 2) {
+                    dropRate = 1.0;
                 }
 
                 if (Math.random() < (dropRate * lootMultiplier) && this.activeEncounter.types && this.activeEncounter.types.length > 0) {
