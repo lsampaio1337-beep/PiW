@@ -514,28 +514,16 @@ window.showChallengesModal = function() {
 
         // We handle the max height natively in windowManager now, so remove the strict CSS limit
         win.style.maxHeight = '';
-        win.dataset.maxHeightRatio = '1.5';
+
+        // Use fixed proportions: Height = 2x Width
+        if (window.windowManager) {
+            window.windowManager.setWindowProportions('window-challenges', 0.5);
+        }
 
         // Ensure the content container scrolls if it overflows
         const contentContainer = win.querySelector('.window-content-container');
         if (contentContainer) {
             contentContainer.style.overflowY = 'auto';
-        }
-
-        // Only auto-adjust height if the number of challenges has changed
-        if (win._lastTotalChallengesCount !== totalChallengesCount) {
-
-            // Only force re-init if it's NOT the first time opening, because the first time opening
-            // createDynamicWindow will already do it, and doing it twice might cause a jump
-            if (win._lastTotalChallengesCount !== undefined) {
-                win._sizeInitialized = false;
-            }
-
-            win._lastTotalChallengesCount = totalChallengesCount;
-
-            if (typeof win.adjustHeightForNewContent === 'function') {
-                win.adjustHeightForNewContent();
-            }
         }
     }
 };
