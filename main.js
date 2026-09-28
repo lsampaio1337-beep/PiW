@@ -5,6 +5,15 @@ const fs = require('fs');
 // Disable hardware acceleration to fix invisible/frozen window issues
 app.disableHardwareAcceleration();
 
+// Aggressive GPU disabling switches
+app.commandLine.appendSwitch('disable-gpu');
+app.commandLine.appendSwitch('disable-software-rasterizer');
+app.commandLine.appendSwitch('disable-gpu-compositing');
+app.commandLine.appendSwitch('disable-gpu-rasterization');
+app.commandLine.appendSwitch('disable-gpu-sandbox');
+app.commandLine.appendSwitch('no-sandbox');
+app.commandLine.appendSwitch('disable-direct-composition'); // Specific to Windows DWM issues
+
 function createWindow() {
     // Get primary display dimensions
     const { x, y, width, height } = screen.getPrimaryDisplay().workArea;
@@ -19,9 +28,11 @@ function createWindow() {
         alwaysOnTop: false, // Don't keep it above other windows
         skipTaskbar: false,
         show: true, // Show immediately
+        backgroundColor: '#000000', // Solid black base to prevent transparency bugs
         webPreferences: {
             nodeIntegration: true,
-            contextIsolation: false
+            contextIsolation: false,
+            backgroundThrottling: false
         }
     });
 
