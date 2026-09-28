@@ -49,6 +49,7 @@ export const state = {
         rainbowCandies: 0,
         candyPurchaseHistory: [],
         dailyRewards: { daysClaimed: 0, lastClaimDate: null },
+        dailyChallenges: { lastDate: null, rotationIndex: 0, active: [], totalCompleted: 0 },
         jigglypuffGrains: 0,
         jigglypuffGrainsUsed: 0,
         hasSeenZzZTutorial: false,

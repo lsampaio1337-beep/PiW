@@ -340,6 +340,16 @@ export function buyItem(itemId, baseCost, category, upgradeType = null) {
             }
             state.backpack[category][itemId] += qty;
         }
+
+        // Track Daily Challenges
+        if (typeof window.trackDailyChallenge === 'function') {
+            if (category === 'pokeballs') {
+                window.trackDailyChallenge('spend_balls', { amount: totalCost });
+            } else if (category === 'potions') {
+                window.trackDailyChallenge('spend_potions', { amount: totalCost });
+            }
+        }
+
         updateUI();
         const moneyLabel = document.getElementById('market-trainer-money');
         if (moneyLabel) moneyLabel.textContent = state.trainer.money.toLocaleString();
@@ -825,6 +835,12 @@ window.marketSellSelectedPokemon = function() {
     });
 
     state.trainer.money += totalGain;
+
+    // Track Daily Challenges
+    if (typeof window.trackDailyChallenge === 'function') {
+        window.trackDailyChallenge('sell_pokemon', { count: numSold });
+        window.trackDailyChallenge('earn_money', { amount: totalGain });
+    }
 
     window.marketSelectedPokemonForSale.clear();
 

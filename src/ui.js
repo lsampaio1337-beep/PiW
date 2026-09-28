@@ -9,6 +9,7 @@ import Storage from "./storage.js";
 
 // Import State and modules
 import { state, setBattleSystem, globals } from './state.js';
+import { trackDailyChallenge, checkAndResetDailyChallenges } from './ui/dailyChallenges.js';
 
 window.dismissDaycareMessage = function() {
     state.stats.hasSeenDaycare = true;
@@ -160,6 +161,9 @@ window.completeChallenge = function(targetAreaId) {
 
     // Also increment integer for backwards compatibility with any existing simple checks
     state.stats.completedChallenges = (state.stats.completedChallenges || 0) + 1;
+
+    // Track Daily Challenges
+    trackDailyChallenge('complete_progress_challenge');
 
     // Clear challenge specific tracking state
     // We only want to clear progress if no OTHER active challenge needs it.
@@ -1271,6 +1275,11 @@ function startGame() {
             state.stats.jigglypuffGrains = (state.stats.jigglypuffGrains || 0) + 1;
         }
 
+        // Daily Challenge Check
+        if (state.stats.playtime % 10 === 0) {
+            checkAndResetDailyChallenges();
+        }
+
         if (state.stats.playtime === 60) {
             updateTopbar();
         }
@@ -1601,6 +1610,9 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
                             let consumedGrains = Math.ceil(actualTimeConsumedMs / 60000);
                             state.stats.jigglypuffGrains = Math.max(0, availableGrains - consumedGrains);
                             state.stats.jigglypuffGrainsUsed = (state.stats.jigglypuffGrainsUsed || 0) + consumedGrains;
+
+                            // Track Daily Challenges
+                            trackDailyChallenge('sleep_minutes', { amount: Math.floor(actualTimeConsumedMs / 60000) });
 
                             state.isZzZMode = false;
                             state.zzzTimestamp = null;

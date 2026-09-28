@@ -760,6 +760,12 @@ class BattleSystem {
             }
         }
 
+        // Track Daily Challenges
+        if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') {
+            window.trackDailyChallenge('defeat_level', { level: this.activeEncounter.level, playerLevel: leader.level });
+            window.trackDailyChallenge('defeat_type', { types: this.activeEncounter.types }); // Handled in a simpler way if needed, or we might need to adjust logic
+        }
+
         // Auto Throw Pokeball logic (disable in gyms)
         if (this.state.settings.autoCatch && (!this.gymState || !this.gymState.isActive)) {
             const ballResult = this.throwPokeball();
@@ -840,6 +846,13 @@ class BattleSystem {
                         if (caughtPokemon.level > (this.state.stats.highestLevelCaptured || 0)) this.state.stats.highestLevelCaptured = caughtPokemon.level;
                         if (caughtPokemon.quality > (this.state.stats.highestQualityCaptured || 0)) this.state.stats.highestQualityCaptured = caughtPokemon.quality;
                         if (sumIV > (this.state.stats.highestSumIVCaptured || 0)) this.state.stats.highestSumIVCaptured = sumIV;
+
+                        // Track Daily Challenges
+                        if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') {
+                            window.trackDailyChallenge('catch_sum_iv', { sumIv: sumIV });
+                            window.trackDailyChallenge('catch_level', { level: caughtPokemon.level });
+                            window.trackDailyChallenge('catch_different_species', { species: caughtPokemon.name }); // Would need species tracking logic inside trackDailyChallenge if we fully implement it
+                        }
                         if (sumIV < 300) this.state.stats.caughtIVUnder300 = (this.state.stats.caughtIVUnder300 || 0) + 1;
                         if (sumIV < 350) this.state.stats.caughtIVUnder350 = (this.state.stats.caughtIVUnder350 || 0) + 1;
                         if (sumIV < 400) this.state.stats.caughtIVUnder400 = (this.state.stats.caughtIVUnder400 || 0) + 1;
@@ -905,7 +918,13 @@ class BattleSystem {
 
         // Award XP and Money (EV)
         this.grantXP(leader, evxp);
-        this.state.trainer.money += Math.floor(evm * lootMultiplier);
+        let earned = Math.floor(evm * lootMultiplier);
+        this.state.trainer.money += earned;
+        if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') {
+            window.trackDailyChallenge('earn_money', { amount: earned });
+        }
+
+        let lootedItemsThisBattle = {};
 
         let lootedItemsThisBattle = {};
 
@@ -1130,7 +1149,13 @@ class BattleSystem {
         // Check level up
         let newLvl = mathEngine.getLevelFromXP(pokemon.xp);
         if (newLvl > pokemon.level) {
+            let levelsGained = newLvl - pokemon.level;
             pokemon.level = newLvl;
+
+            // Track Daily Challenges
+            if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') {
+                window.trackDailyChallenge('gain_levels', { amount: levelsGained });
+            }
             // re-calc stats
             const pBase = this.state.config.pokemonData.find(p => p.id === pokemon.id);
             if (pBase) {
@@ -1507,6 +1532,12 @@ class BattleSystem {
                     }
                 }
 
+                // Track Daily Challenges
+                if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') {
+                    window.trackDailyChallenge('defeat_level', { level: this.activeEncounter.level, playerLevel: leader.level });
+                    window.trackDailyChallenge('defeat_type', { types: this.activeEncounter.types }); // Handled in a simpler way if needed, or we might need to adjust logic
+                }
+
                 if (this.state.settings.autoCatch) {
                     const ballResult = this.throwPokeball();
                     if (ballResult.caught) {
@@ -1559,6 +1590,12 @@ class BattleSystem {
                         if (caughtPokemon.quality > (this.state.stats.highestQualityCaptured || 0)) this.state.stats.highestQualityCaptured = caughtPokemon.quality;
                         let sumIV_ZzZ = caughtPokemon.ivs.hp + caughtPokemon.ivs.atk + caughtPokemon.ivs.def + caughtPokemon.ivs.spa + caughtPokemon.ivs.spd + caughtPokemon.ivs.spe;
                         if (sumIV_ZzZ > (this.state.stats.highestSumIVCaptured || 0)) this.state.stats.highestSumIVCaptured = sumIV_ZzZ;
+
+                        // Track Daily Challenges
+                        if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') {
+                            window.trackDailyChallenge('catch_sum_iv', { sumIv: sumIV_ZzZ });
+                            window.trackDailyChallenge('catch_level', { level: caughtPokemon.level });
+                        }
                         if (this.activeEncounter.qualityName === "Shiny") this.state.stats.shiniesCaught = (this.state.stats.shiniesCaught || 0) + 1;
                         if (this.activeEncounter.qualityName === "Shiny") {
                             if (!this.state.stats.caughtShiniesSpecies) this.state.stats.caughtShiniesSpecies = {};
@@ -1569,7 +1606,11 @@ class BattleSystem {
 
                 const lootMultiplier = 1 + (0.03 * (this.state.stats.greenCandies || 0));
                 this.grantXP(leader, evxp);
-                this.state.trainer.money += Math.floor(evm * lootMultiplier);
+                let earnedZzZ = Math.floor(evm * lootMultiplier);
+                this.state.trainer.money += earnedZzZ;
+                if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') {
+                    window.trackDailyChallenge('earn_money', { amount: earnedZzZ });
+                }
 
                 // Add loot drops
                 let dropRate = 0;
