@@ -926,8 +926,6 @@ class BattleSystem {
 
         let lootedItemsThisBattle = {};
 
-        let lootedItemsThisBattle = {};
-
         // Loot drops for Stones
         let dropRate = 0;
         const evoStage = this.getEvolutionStage(this.activeEncounter.id);
