@@ -772,10 +772,10 @@ class BattleSystem {
                         caughtPokemon.xp = mathEngine.calculateTotalXP(caughtPokemon.level);
                         this.state.storage.push(caughtPokemon);
                         this.state.stats.caught++;
-                        if (defeatedEncounter.qualityName === "Shiny") {
+                        if (caughtPokemon.qualityName === "Shiny") {
                             this.state.stats.shiniesCaught = (this.state.stats.shiniesCaught || 0) + 1;
                             if (!this.state.stats.caughtShiniesSpecies) this.state.stats.caughtShiniesSpecies = {};
-                            this.state.stats.caughtShiniesSpecies[defeatedEncounter.name] = true;
+                            this.state.stats.caughtShiniesSpecies[caughtPokemon.name] = true;
                         }
                         // Track captures for Oak Tasks (Weak+, Regular+, Uncommon+, Rare+, Epic+)
                         let qName = defeatedEncounter.qualityName || "Regular";
@@ -813,7 +813,7 @@ class BattleSystem {
 
                         // Track species catches for unlocks
                         if (!this.state.stats.caughtSpecies) this.state.stats.caughtSpecies = {};
-                        this.state.stats.caughtSpecies[defeatedEncounter.name] = (this.state.stats.caughtSpecies[defeatedEncounter.name] || 0) + 1;
+                        this.state.stats.caughtSpecies[caughtPokemon.name] = (this.state.stats.caughtSpecies[caughtPokemon.name] || 0) + 1;
 
                         // Track specific typings
                         if (!this.state.stats.caughtSpecific) this.state.stats.caughtSpecific = {};
@@ -1474,8 +1474,6 @@ class BattleSystem {
                 if (this.state.settings.autoCatch) {
                     const ballResult = this.throwPokeball();
                     if (ballResult.caught) {
-                        if (!this.state.stats.caughtSpecies) this.state.stats.caughtSpecies = {};
-                        this.state.stats.caughtSpecies[this.activeEncounter.name] = (this.state.stats.caughtSpecies[this.activeEncounter.name] || 0) + 1;
                         let caughtPokemon = JSON.parse(JSON.stringify(this.activeEncounter));
 
                         // Handle Ditto Disguise
@@ -1511,14 +1509,17 @@ class BattleSystem {
                         this.state.storage.push(caughtPokemon);
                         results.caughtPokemonList.push(caughtPokemon);
                         this.state.stats.caught++;
+
+                        if (!this.state.stats.caughtSpecies) this.state.stats.caughtSpecies = {};
+                        this.state.stats.caughtSpecies[caughtPokemon.name] = (this.state.stats.caughtSpecies[caughtPokemon.name] || 0) + 1;
                         if (caughtPokemon.level > (this.state.stats.highestLevelCaptured || 0)) this.state.stats.highestLevelCaptured = caughtPokemon.level;
                         if (caughtPokemon.quality > (this.state.stats.highestQualityCaptured || 0)) this.state.stats.highestQualityCaptured = caughtPokemon.quality;
                         let sumIV_ZzZ = caughtPokemon.ivs.hp + caughtPokemon.ivs.atk + caughtPokemon.ivs.def + caughtPokemon.ivs.spa + caughtPokemon.ivs.spd + caughtPokemon.ivs.spe;
                         if (sumIV_ZzZ > (this.state.stats.highestSumIVCaptured || 0)) this.state.stats.highestSumIVCaptured = sumIV_ZzZ;
                         if (this.activeEncounter.qualityName === "Shiny") this.state.stats.shiniesCaught = (this.state.stats.shiniesCaught || 0) + 1;
-                        if (this.activeEncounter.qualityName === "Shiny") {
+                        if (caughtPokemon.qualityName === "Shiny") {
                             if (!this.state.stats.caughtShiniesSpecies) this.state.stats.caughtShiniesSpecies = {};
-                            this.state.stats.caughtShiniesSpecies[this.activeEncounter.name] = true;
+                            this.state.stats.caughtShiniesSpecies[caughtPokemon.name] = true;
                         }
                     }
                 }
