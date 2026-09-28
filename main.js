@@ -5,21 +5,19 @@ const fs = require('fs');
 // Disable hardware acceleration to fix invisible/frozen window issues
 app.disableHardwareAcceleration();
 
-// Aggressive GPU disabling switches
-app.commandLine.appendSwitch('disable-gpu');
-app.commandLine.appendSwitch('disable-software-rasterizer');
-app.commandLine.appendSwitch('disable-gpu-compositing');
-app.commandLine.appendSwitch('disable-gpu-rasterization');
-
 function createWindow() {
-    // Get primary display dimensions
-    const { x, y, width, height } = screen.getPrimaryDisplay().workArea;
+    // Get primary display dimensions, with a robust fallback
+    const workArea = screen.getPrimaryDisplay().workArea || {};
+    const winWidth = workArea.width || 1200;
+    const winHeight = workArea.height || 800;
+    const winX = workArea.x || 0;
+    const winY = workArea.y || 0;
 
     const win = new BrowserWindow({
-        width: width,
-        height: height,
-        x: x,
-        y: y,
+        width: winWidth,
+        height: winHeight,
+        x: winX,
+        y: winY,
         frame: false,
         hasShadow: false,
         alwaysOnTop: false, // Don't keep it above other windows
@@ -33,9 +31,9 @@ function createWindow() {
         }
     });
 
-    win.setBounds({ x, y, width, height });
+    win.setBounds({ x: winX, y: winY, width: winWidth, height: winHeight });
 
-    win.loadFile('index.html');
+    win.loadFile(path.join(__dirname, 'index.html'));
 
     win.once('ready-to-show', () => {
         // Create a signal file to let the launcher know the game is ready
