@@ -506,36 +506,24 @@ window.showChallengesModal = function() {
 
     html += `</div>`;
 
-    showModal("Progress Challenges", html, "window-challenges", "1000px");
+    showModal("Progress Challenges", html, "window-challenges", "400px");
     const win = document.getElementById("window-challenges");
     if (win) {
-        // Read the actual unscaled width, defaulting to 1000 if not yet set
-        let winWidth = win._originalWidth || parseInt(win.style.width) || win.offsetWidth || 1000;
-
         // We handle the max height natively in windowManager now, so remove the strict CSS limit
         win.style.maxHeight = '';
-        win.dataset.maxHeightRatio = '1.5';
+        if (win.dataset.maxHeightRatio) {
+            delete win.dataset.maxHeightRatio;
+        }
+
+        // Fix proportions: 1 * height = 2 * width => Width / Height = 0.5
+        if (window.windowManager) {
+            window.windowManager.setWindowProportions('window-challenges', 0.5);
+        }
 
         // Ensure the content container scrolls if it overflows
         const contentContainer = win.querySelector('.window-content-container');
         if (contentContainer) {
             contentContainer.style.overflowY = 'auto';
-        }
-
-        // Only auto-adjust height if the number of challenges has changed
-        if (win._lastTotalChallengesCount !== totalChallengesCount) {
-
-            // Only force re-init if it's NOT the first time opening, because the first time opening
-            // createDynamicWindow will already do it, and doing it twice might cause a jump
-            if (win._lastTotalChallengesCount !== undefined) {
-                win._sizeInitialized = false;
-            }
-
-            win._lastTotalChallengesCount = totalChallengesCount;
-
-            if (typeof win.adjustHeightForNewContent === 'function') {
-                win.adjustHeightForNewContent();
-            }
         }
     }
 };
