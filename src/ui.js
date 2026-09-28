@@ -95,6 +95,20 @@ window.showTimeLapseModal = showTimeLapseModal;
 window.runTimeLapse = runTimeLapse;
 window.dragStart = dragStart;
 window.completeChallenge = function(targetAreaId) {
+    if (targetAreaId === '150_challenge') {
+        state.stats.completed150Challenge = true;
+        if (!state.stats.newRoutes) state.stats.newRoutes = [];
+        if (!state.stats.newRoutes.includes("Mythical and Legendaries")) {
+            state.stats.newRoutes.push("Mythical and Legendaries");
+        }
+        state.stats.hasUnseenMap = true;
+        updateUI();
+        const challengeWin = document.getElementById('window-challenges');
+        if (challengeWin && challengeWin.style.display !== 'none') {
+            window.showChallengesModal(); // refresh modal
+        }
+        return;
+    }
     if (!state.stats.activeChallenges) {
         state.stats.activeChallenges = ["Route 1"];
     }
@@ -198,6 +212,32 @@ window.completeChallenge = function(targetAreaId) {
 
 
 window.cheatProgressChallenge = function(targetAreaId) {
+    if (targetAreaId === '150_challenge') {
+        if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
+        let count = 0;
+        for (let i = 0; i < state.config.pokemonData.length; i++) {
+             if (count >= 150) break;
+             let p = state.config.pokemonData[i];
+             state.stats.caughtSpecies[p.name] = 1;
+             count++;
+        }
+        if (window.updateUI) window.updateUI();
+        const challengeWinCheat = document.getElementById('window-challenges');
+        if (challengeWinCheat && challengeWinCheat.style.display !== 'none') {
+            window.showChallengesModal(); // refresh modal
+        }
+        setTimeout(() => {
+            const modal = document.getElementById('window-challenges');
+            if (modal) {
+                const completeBtns = Array.from(modal.querySelectorAll('button')).filter(btn => btn.innerText.includes('Complete'));
+                if (completeBtns.length > 0) {
+                    const specificBtn = completeBtns.find(btn => btn.getAttribute('onclick') && btn.getAttribute('onclick').includes('150_challenge'));
+                    if (specificBtn) specificBtn.click();
+                }
+            }
+        }, 100);
+        return;
+    }
     if (!targetAreaId && state.stats.activeChallenges && state.stats.activeChallenges.length > 0) targetAreaId = state.stats.activeChallenges[0];
     if (!targetAreaId) return;
     let unlock = state.config.unlocks.find(u => u.areaId === targetAreaId);
@@ -316,9 +356,49 @@ window.showChallengesModal = function() {
                 <h3 style="margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; font-size: 16px;">${activeChallengesCount > 1 ? 'Active Challenges' : 'Active Challenge'}</h3>
                 <div style="display: flex; flex-direction: column; gap: 15px;">`;
 
-    if (activeChallengesCount === 0) {
+    // The 150 Challenge should only appear if the Final Challenge (Indigo Plateau) has been completed
+    let isFinalChallengeCompleted = state.stats.completedChallengeIds && state.stats.completedChallengeIds.includes('Indigo Plateau');
+    let hasActive150Challenge = isFinalChallengeCompleted && !state.stats.completed150Challenge;
+
+    if (activeChallengesCount === 0 && !hasActive150Challenge) {
         html += `<div style="text-align: center; font-size: 16px; color: #aaa;">No active Challenge</div>`;
-    } else {
+    }
+
+    if (hasActive150Challenge) {
+        let uniqueSpeciesCaught = state.stats.caughtSpecies ? Object.keys(state.stats.caughtSpecies).length : 0;
+        let isMet = uniqueSpeciesCaught >= 150;
+        let displayName = "The 150 Challenge";
+        let rewardsStr = "Mythical and Legendary Spot";
+        let cData = {
+            isMet: isMet,
+            textParts: [`Capture 150 different Pokémons (${uniqueSpeciesCaught}/150)${isMet ? ' <span style="color: #4CAF50;">[Complete]</span>' : ''}`]
+        };
+
+        html += `<div style="border: 1px solid #333; padding: 10px; border-radius: 5px; background-color: rgba(255,255,255,0.05);">
+                    <div style="color: #ff9800; font-weight: bold; margin-bottom: 5px;">${displayName}</div>`;
+
+        html += `<div style="margin-bottom: 5px;"><b>Requirements:</b></div>
+                 <ul style="margin-top: 0; padding-left: 20px;">`;
+
+        for (let part of cData.textParts) {
+            html += `<li>${part}</li>`;
+        }
+
+        html += `</ul>
+                 <div style="margin-top: 10px; color: #4CAF50;"><b>Rewards:</b> Unlocks ${rewardsStr}</div>`;
+
+        let safeAreaId = "150_challenge";
+
+        html += `<div style="text-align: center; margin-top: 15px; display: flex; justify-content: center; gap: 10px;">
+                     <button onclick="window.cheatProgressChallenge('${safeAreaId}')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; background-color: orange; color: white; border: none; border-radius: 5px; cursor: pointer;">Cheat Progress</button>`;
+
+        if (cData.isMet) {
+             html += `<button onclick="window.completeChallenge('${safeAreaId}')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">Complete ✔️</button>`;
+        }
+        html += `</div></div>`;
+    }
+
+    if (activeChallengesCount > 0) {
         for (let activeId of state.stats.activeChallenges) {
             let unlock = state.config.unlocks.find(u => u.areaId === activeId);
             if (!unlock) continue;
@@ -359,11 +439,25 @@ window.showChallengesModal = function() {
 
     // Past Challenges Sector
     let completedCount = state.stats.completedChallengeIds ? state.stats.completedChallengeIds.length : 0;
+    if (state.stats.completed150Challenge) completedCount++;
+
     if (completedCount > 0) {
         let pastTitle = completedCount === 1 ? "Past Challenge" : "Past Challenges";
         html += `<div style="border: 1px solid #555; padding: 10px; border-radius: 5px; background-color: rgba(0,0,0,0.5);">
                     <h3 style="margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; font-size: 16px;">${pastTitle}</h3>
                     <div style="display: flex; flex-direction: column; gap: 10px;">`;
+
+        // Render 150 Challenge in Past Challenges if completed
+        if (state.stats.completed150Challenge) {
+            html += `<div style="border: 1px solid #333; padding: 10px; border-radius: 5px; background-color: rgba(255,255,255,0.05);">
+                          <div style="color: #ff9800; font-weight: bold; margin-bottom: 5px;">The 150 Challenge</div>
+                          <ul style="margin-top: 0; margin-bottom: 5px; padding-left: 20px; font-size: 14px;">
+                              <li>Capture 150 different Pokémons (150/150) <span style="color: green;">[Complete]</span></li>
+                          </ul>
+                          <div style="color: #4CAF50; font-size: 14px;"><b>Rewards:</b> Unlocks Mythical and Legendary Spot</div>
+                      </div>`;
+        }
+
 
         for (let i = completedCount - 1; i >= 0; i--) {
              let completedId = state.stats.completedChallengeIds[i];
