@@ -261,7 +261,7 @@ export function getDailyChallengesHtml() {
     for (let i = 0; i < active.length; i++) {
         let c = active[i];
 
-        let progressText = c.claimed ? "Completed" : `${c.progress} / ${c.target}`;
+        let progressText = c.completed ? "" : `${c.progress} / ${c.target}`;
         let color = c.claimed ? "#4CAF50" : "#ccc";
         let textDec = c.claimed ? "line-through" : "none";
 

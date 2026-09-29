@@ -1,8 +1,8 @@
 export const VITAMINS = [
-    "Calcium SpAtk",
-    "Carbo Speed",
     "HP Up",
-    "Iron Def",
+    "Carbo Speed",
     "Protein Atk",
+    "Calcium SpAtk",
+    "Iron Def",
     "Zinc SpDef"
 ];

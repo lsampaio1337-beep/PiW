@@ -616,8 +616,7 @@ export function renderPokeMarketSellTab(category) {
     } else if (category === 'stones') {
         cols = 6;
         const stonePrice = state.config.balance.items.stones.price;
-        const vitaminsList = ["Calcium SpAtk", "Carbo Speed", "HP Up", "Iron Def", "Protein Atk", "Zinc SpDef"];
-        let stoneKeysSell = Object.keys(state.backpack.stones).filter(k => !vitaminsList.includes(k));
+        let stoneKeysSell = Object.keys(state.backpack.stones).filter(k => !VITAMINS.includes(k));
         stoneKeysSell.sort((a, b) => a.localeCompare(b));
         items = stoneKeysSell.map(stoneName => {
             const isVitamin = VITAMINS.includes(stoneName);
@@ -629,11 +628,10 @@ export function renderPokeMarketSellTab(category) {
         });
     } else if (category === 'vitamins') {
         cols = 6;
-        const vitaminsList = ["HP Up", "Carbo Speed", "Protein Atk", "Calcium SpAtk", "Iron Def", "Zinc SpDef"];
         // Base sell price should be $5. The logic below calculates baseSellPrice = Math.floor(buyPrice * 0.5)
         // Therefore, we set buyPrice to 10 so that baseSellPrice is 5.
         const vitaminBuyPrice = 10;
-        items = vitaminsList.map(vitaminName => {
+        items = VITAMINS.map(vitaminName => {
             return {
                 name: vitaminName,
                 buyPrice: vitaminBuyPrice,
