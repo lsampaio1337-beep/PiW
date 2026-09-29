@@ -381,6 +381,8 @@ class BattleSystem {
         let q;
         let ivs;
 
+        let isDisguisedDitto = false;
+
         if (this.state.nextForcedEncounter) {
             const forced = this.state.nextForcedEncounter;
             pokemonBase = this.state.config.pokemonData.find(p => p.id === forced.id) || this.state.config.pokemonData[0];
@@ -392,11 +394,11 @@ class BattleSystem {
             // Distribute SumIV randomly
             let remainingIV = forced.sumIV;
             ivs = { hp: 0, atk: 0, def: 0, spa: 0, spd: 0, spe: 0 };
-            const stats = ['hp', 'atk', 'def', 'spa', 'spd', 'spe'];
+            const statKeys = ['hp', 'atk', 'def', 'spa', 'spd', 'spe'];
 
             while (remainingIV > 0) {
                 // Filter out stats that are already maxed at 100
-                const availableStats = stats.filter(s => ivs[s] < 100);
+                const availableStats = statKeys.filter(s => ivs[s] < 100);
                 if (availableStats.length === 0) break; // All maxed out
 
                 const randomStat = availableStats[Math.floor(Math.random() * availableStats.length)];
@@ -410,7 +412,8 @@ class BattleSystem {
                 this.state.stats.seenShiniesSpecies[pokemonBase.name] = true;
             }
 
-
+            if (!this.state.stats.seenSpecies) this.state.stats.seenSpecies = {};
+            this.state.stats.seenSpecies[pokemonBase.name] = true;
 
             this.state.nextForcedEncounter = null;
         } else {
@@ -432,7 +435,6 @@ class BattleSystem {
             let actualPokemonBase = this.state.config.pokemonData.find(p => p.id === selectedSpawn.pokemonId);
             pokemonBase = actualPokemonBase;
             level = Math.floor(Math.random() * (selectedSpawn.maxLevel - selectedSpawn.minLevel + 1)) + selectedSpawn.minLevel;
-            let isDisguisedDitto = false;
 
             if (pokemonBase.id === 132 && route.spawns.length > 1) {
                 isDisguisedDitto = true;
@@ -462,38 +464,38 @@ class BattleSystem {
                 const playerLevel = this.state.party[0] ? this.state.party[0].level : 1;
                 level = Math.min(level, playerLevel);
             }
-
-            const stats = {
-                hp: mathEngine.calculateHP(pokemonBase.hp, ivs.hp, level, q.q),
-                atk: mathEngine.calculateStat(pokemonBase.atk, ivs.atk, level, q.q),
-                def: mathEngine.calculateStat(pokemonBase.def, ivs.def, level, q.q),
-                spa: mathEngine.calculateStat(pokemonBase.spa, ivs.spa, level, q.q),
-                spd: mathEngine.calculateStat(pokemonBase.spd, ivs.spd, level, q.q),
-                spe: mathEngine.calculateStat(pokemonBase.spe, ivs.spe, level, q.q),
-            };
-
-            const totalIV = ivs.hp + ivs.atk + ivs.def + ivs.spa + ivs.spd + ivs.spe;
-            const bst = pokemonBase.hp + pokemonBase.atk + pokemonBase.def + pokemonBase.spa + pokemonBase.spd + pokemonBase.spe;
-
-            this.activeEncounter = {
-                id: pokemonBase.id,
-                name: pokemonBase.name,
-                types: pokemonBase.types,
-                level: level,
-                qualityName: q.name,
-                quality: q.q,
-                ivs: ivs,
-                currentStats: stats,
-                maxHp: stats.hp,
-                currentHp: stats.hp,
-                evxp: mathEngine.calculateEVXP(bst, level, q.q, totalIV),
-                evm: mathEngine.calculateEVM(bst, level, q.q, totalIV),
-                pp: mathEngine.calculatePP(bst, level, q.q, totalIV),
-                bst: bst,
-                moves: this.getLearnsetMoves(pokemonBase, level),
-                isDisguisedDitto: isDisguisedDitto
-            };
         }
+
+        const currentStats = {
+            hp: mathEngine.calculateHP(pokemonBase.hp, ivs.hp, level, q.q),
+            atk: mathEngine.calculateStat(pokemonBase.atk, ivs.atk, level, q.q),
+            def: mathEngine.calculateStat(pokemonBase.def, ivs.def, level, q.q),
+            spa: mathEngine.calculateStat(pokemonBase.spa, ivs.spa, level, q.q),
+            spd: mathEngine.calculateStat(pokemonBase.spd, ivs.spd, level, q.q),
+            spe: mathEngine.calculateStat(pokemonBase.spe, ivs.spe, level, q.q),
+        };
+
+        const totalIV = ivs.hp + ivs.atk + ivs.def + ivs.spa + ivs.spd + ivs.spe;
+        const bst = pokemonBase.hp + pokemonBase.atk + pokemonBase.def + pokemonBase.spa + pokemonBase.spd + pokemonBase.spe;
+
+        this.activeEncounter = {
+            id: pokemonBase.id,
+            name: pokemonBase.name,
+            types: pokemonBase.types,
+            level: level,
+            qualityName: q.name,
+            quality: q.q,
+            ivs: ivs,
+            currentStats: currentStats,
+            maxHp: currentStats.hp,
+            currentHp: currentStats.hp,
+            evxp: mathEngine.calculateEVXP(bst, level, q.q, totalIV),
+            evm: mathEngine.calculateEVM(bst, level, q.q, totalIV),
+            pp: mathEngine.calculatePP(bst, level, q.q, totalIV),
+            bst: bst,
+            moves: this.getLearnsetMoves(pokemonBase, level),
+            isDisguisedDitto: isDisguisedDitto
+        };
 
         this.isSearching = false;
         this.isSliding = true;
