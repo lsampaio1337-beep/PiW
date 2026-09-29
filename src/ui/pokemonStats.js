@@ -261,19 +261,19 @@ window.showVitaminsModal = function(location, idx) {
     const p = list[idx];
 
     const vitamins = [
-        { name: "HP Up", stat: "hp", displayName: "HP" },
-        { name: "Protein Atk", stat: "atk", displayName: "Attack" },
-        { name: "Iron Def", stat: "def", displayName: "Defense" },
-        { name: "Calcium SpAtk", stat: "spa", displayName: "Sp. Atk" },
-        { name: "Zinc SpDef", stat: "spd", displayName: "Sp. Def" },
-        { name: "Carbo Speed", stat: "spe", displayName: "Speed" }
+        { name: "HP Up", stat: "hp", displayName: "HP Up", shortName: "HP" },
+        { name: "Carbo Speed", stat: "spe", displayName: "Carbo", shortName: "Speed" },
+        { name: "Protein Atk", stat: "atk", displayName: "Protein", shortName: "Atk" },
+        { name: "Calcium SpAtk", stat: "spa", displayName: "Calcium", shortName: "SpAtk" },
+        { name: "Iron Def", stat: "def", displayName: "Iron", shortName: "Def" },
+        { name: "Zinc SpDef", stat: "spd", displayName: "Zinc", shortName: "SpDef" }
     ];
 
     if (!p.vitamins) p.vitamins = {};
 
     let html = `
         <div class="content-panel" style="text-align: center; color: white;">
-            <p style="margin-top: 0; font-size: 14px; color: #ccc;">Each vitamin increases its stat by 1% of the final base stat (Max 20 per stat).</p>
+            <p style="margin-top: 0; font-size: 14px; color: #ccc;">Each vitamin increases its stat by 1% of the final base stat.<br>(Max 20 per stat).</p>
             <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top: 20px;">
     `;
 
@@ -285,7 +285,7 @@ window.showVitaminsModal = function(location, idx) {
 
         let btnHtml = '';
         if (isMaxed) {
-            btnHtml = `<button disabled style="background: #7f8c8d; cursor: not-allowed; padding: 5px 10px; border: none; border-radius: 4px; color: white; width: 100%;">Maxed (20/20)</button>`;
+            btnHtml = `<button disabled style="background: #7f8c8d; cursor: not-allowed; padding: 5px 10px; border: none; border-radius: 4px; color: white; width: 100%;">Maxed</button>`;
         } else {
             btnHtml = `<button ${canUse ? '' : 'disabled'} onclick="window.useVitamin('${location}', ${idx}, '${v.name}', '${v.stat}')" style="${canUse ? 'background: #2ecc71; cursor: pointer;' : 'background: #7f8c8d; cursor: not-allowed;'} padding: 5px 10px; border: none; border-radius: 4px; color: white; width: 100%;">Use Vitamin (Owned: ${owned})</button>`;
         }
@@ -293,7 +293,7 @@ window.showVitaminsModal = function(location, idx) {
         html += `
             <div style="background: rgba(0,0,0,0.4); border: 1px solid #555; border-radius: 8px; padding: 10px; display: flex; flex-direction: column; align-items: center;">
                 <img src="./Assets/Items/Vitamins/${v.name}.png" style="width: 40px; height: 40px; margin-bottom: 5px;">
-                <div style="font-weight: bold; margin-bottom: 5px;">${v.displayName} (+${applied}%)</div>
+                <div style="font-weight: bold; margin-bottom: 5px;">${v.displayName} (+${applied}% ${v.shortName})</div>
                 ${btnHtml}
             </div>
         `;
@@ -342,7 +342,7 @@ window.useVitamin = function(location, idx, vitaminName, statKey) {
 
     updateUI();
 
-    // Refresh modals
-    window.showVitaminsModal(location, idx);
+    // Refresh modals (Stats first, then Vitamins so Vitamins stays on top)
     showPokemonStats(idx, location);
+    window.showVitaminsModal(location, idx);
 };
