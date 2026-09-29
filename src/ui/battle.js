@@ -544,7 +544,7 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
         return;
     }
 
-    // Hide original enemy sprite container momentarily so ghost takes precedence until next slide in
+    // Hide original enemy sprite container momentarily until next slide in
     const elEnemySide = document.getElementById('enemy-side');
     if (elEnemySide) {
          elEnemySide.style.opacity = '0';
@@ -553,46 +553,16 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
          }, 3000);
     }
 
-    // 1. Create Ghost Enemy
-    // Create a container to mirror the actual rendered sprite
-    const ghostContainer = document.createElement('div');
-    ghostContainer.style.position = 'absolute';
-    ghostContainer.style.left = '35%';
-    ghostContainer.style.transform = 'translate(-50%, -50%)';
-    ghostContainer.style.zIndex = '50';
-    ghostContainer.style.opacity = '1';
-
-    ghostContainer.style.top = '50%';
-    ghostContainer.style.bottom = 'auto';
-    ghostContainer.style.height = '50%'; // Match sprite container height
-    ghostContainer.style.display = 'flex';
-    ghostContainer.style.flexDirection = 'column';
-    ghostContainer.style.alignItems = 'center';
-
-    // The image itself
-    const ghost = document.createElement('img');
-    let ghostId = activeEncounter.isDisguisedDitto ? 132 : activeEncounter.id;
-    ghost.src = `Assets/Pokemon Sprites/Natural/${activeEncounter.qualityName === 'Shiny' ? ghostId + '_shiny' : ghostId}.png`;
-    ghost.style.height = '100%';
-    ghost.style.objectFit = 'contain';
-    ghostContainer.appendChild(ghost);
-
-    // Recreate bubbles for ghost if it's water type
-    if (activeEncounter.types && activeEncounter.types.includes('Water')) {
-        const bubbles = document.createElement('div');
-        bubbles.className = 'water-bubbles';
-        bubbles.style.display = 'block';
-        for(let i=1; i<=6; i++) {
-            const b = document.createElement('div');
-            b.className = 'bubble c' + i;
-            bubbles.appendChild(b);
-        }
-        ghostContainer.appendChild(bubbles);
+    // Also wipe out enemy HP container and stats
+    const hpContainerEnemy = document.getElementById('enemy-battle-hp-container');
+    if (hpContainerEnemy) {
+        hpContainerEnemy.style.opacity = '0';
+        setTimeout(() => {
+            if (hpContainerEnemy) hpContainerEnemy.style.opacity = '1';
+        }, 3000);
     }
 
-    arena.appendChild(ghostContainer);
-
-    // 2. Create Pokeball if used
+    // 1. Create Pokeball if used
     let ball = null;
     if (ballResult && ballResult.used && ballResult.ballName) {
         ball = document.createElement('img');
@@ -610,15 +580,9 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
     }
 
     // Force reflow
-    void ghost.offsetWidth;
     if (ball) void ball.offsetWidth;
 
     // Timeline Animations
-    // Over 3 seconds, slide both to left: 15%
-    ghostContainer.style.transition = 'left 3s linear, opacity 2s linear';
-    ghostContainer.style.left = '15%';
-    ghostContainer.style.opacity = '0'; // fades out in 2s while sliding
-
     if (ball) {
         ball.style.transition = 'left 3s linear';
         ball.style.left = '15%';
@@ -656,16 +620,11 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
 
         }, 3000);
     } else {
-        // No ball used, just wait for ghost to fade out then remove
+        // No ball used, just wait 3s before triggering captureCallback
         setTimeout(() => {
             captureCallback();
         }, 3000);
     }
-
-    // Ghost should be removed after 3s (faded by 2s)
-    setTimeout(() => {
-        if (ghostContainer.parentElement) ghostContainer.parentElement.removeChild(ghostContainer);
-    }, 3000);
 }
 
 
