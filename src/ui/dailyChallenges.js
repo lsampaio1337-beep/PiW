@@ -79,6 +79,37 @@ const CHALLENGE_DEFS = {
             if (typeArr.length === 0) return 'Normal';
             return typeArr[Math.floor(Math.random() * typeArr.length)];
         } },
+        { id: 31, text: "Species Master: Defeat $ {extra}.", getTarget: () => 10 + ((state.stats.completedChallengeIds ? state.stats.completedChallengeIds.length : 0) * 2), type: 'defeat_species', getExtra: () => {
+            let availableSpecies = new Set();
+            if (state.config && state.config.routes && state.stats.completedChallengeIds) {
+                let unlockedAreas = new Set();
+                state.stats.completedChallengeIds.forEach(id => {
+                    parseAreaNames(id).forEach(area => unlockedAreas.add(area));
+                });
+
+                if (state.config.unlocks) {
+                    for (let unlock of state.config.unlocks) {
+                        if (state.stats.completedChallengeIds.includes(unlock.areaId)) {
+                            unlock.unlocks.forEach(u => parseAreaNames(u).forEach(a => unlockedAreas.add(a)));
+                        }
+                    }
+                }
+
+                unlockedAreas.add('Route 1');
+
+                for (let area of unlockedAreas) {
+                    let route = state.config.routes.find(r => r.name === area);
+                    if (route && route.spawns) {
+                        for (let s of route.spawns) {
+                            availableSpecies.add(s.pokemonId);
+                        }
+                    }
+                }
+            }
+            let speciesArr = Array.from(availableSpecies);
+            if (speciesArr.length === 0) return 'Pidgey';
+            return speciesArr[Math.floor(Math.random() * speciesArr.length)];
+        } },
         { id: 3, text: "Endurance: Defeat $ Pokémon without fainting, healing, or swaping.", getTarget: () => 10 + (state.trainer.badges * 5), type: 'defeat_endurance' },
         { id: 4, text: "Speedrunner: Defeat a Pokémon in 1 turn $ times.", getTarget: () => Math.max(5, Math.floor((state.stats.completedChallenges || 0) * 0.5)), type: 'defeat_1_turn', condition: () => state.trainer.badges >= 1 },
         { id: 5, text: "Underdog: Defeat $ Pokémon using a Pokémon that is at least 5 levels lower than the enemy.", getTarget: () => 5 + state.trainer.badges, type: 'defeat_underdog', condition: () => state.trainer.badges >= 1 },
@@ -444,6 +475,10 @@ window.trackDailyChallenge = function(type, data = {}) {
             }
 
             if (type === 'catch_species' && data.species && c.extra) {
+                if (data.species !== c.extra) continue;
+            }
+
+            if (type === 'defeat_species' && data.species && c.extra) {
                 if (data.species !== c.extra) continue;
             }
 
