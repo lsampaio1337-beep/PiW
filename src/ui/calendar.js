@@ -94,23 +94,35 @@ export function claimDailyReward(dayIndex) {
 // Make globally accessible for the inline onclick handler
 window.claimDailyReward = claimDailyReward;
 
-export function showCalendar() {
-    if (!state.stats.dailyRewards) {
-        state.stats.dailyRewards = { daysClaimed: 0, lastClaimDate: null };
-    }
+export function showCalendar(tab = 'activities') {
+    let html = `<div style="display: flex; flex-direction: column; width: 100%; height: 100%; box-sizing: border-box;">`;
 
-    const isAvailable = checkDailyRewardAvailable();
-    const daysClaimed = state.stats.dailyRewards.daysClaimed;
-    const displayDaysClaimed = isAvailable ? daysClaimed : Math.max(0, daysClaimed - 1);
+    // Tabs
+    html += `
+        <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px; margin-bottom: 10px;">
+            <button onclick="window.showCalendar('activities')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; border-radius: 5px; cursor: pointer; ${tab === 'activities' ? 'background: #3498db; color: white;' : 'background: #2c3e50; color: #bdc3c7; border: 1px solid #7f8c8d;'}">Activities</button>
+            <button onclick="window.showCalendar('shop')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; border-radius: 5px; cursor: pointer; ${tab === 'shop' ? 'background: #3498db; color: white;' : 'background: #2c3e50; color: #bdc3c7; border: 1px solid #7f8c8d;'}">Shop</button>
+        </div>
+        <div id="calendar-content-area" style="flex: 1; overflow-y: auto;">
+    `;
 
-    const weekNumber = Math.floor(displayDaysClaimed / 7) + 1;
-    const dayOfWeek = displayDaysClaimed % 7;
+    if (tab === 'activities') {
+        if (!state.stats.dailyRewards) {
+            state.stats.dailyRewards = { daysClaimed: 0, lastClaimDate: null };
+        }
 
-    const rewardList = getRewardListForWeek(weekNumber);
+        const isAvailable = checkDailyRewardAvailable();
+        const daysClaimed = state.stats.dailyRewards.daysClaimed;
+        const displayDaysClaimed = isAvailable ? daysClaimed : Math.max(0, daysClaimed - 1);
 
-    let html = `<div style="text-align: center; color: white; padding: 2%; box-sizing: border-box;">`;
-    html += `<h2 style="margin-top: 0;">Daily Rewards - Week ${weekNumber}</h2>`;
-    html += `<div style="display: flex; gap: 1%; justify-content: center; padding-bottom: 10px; width: 100%;">`;
+        const weekNumber = Math.floor(displayDaysClaimed / 7) + 1;
+        const dayOfWeek = displayDaysClaimed % 7;
+
+        const rewardList = getRewardListForWeek(weekNumber);
+
+        html += `<div style="text-align: center; color: white; padding: 2%; box-sizing: border-box;">`;
+        html += `<h2 style="margin-top: 0;">Daily Rewards - Week ${weekNumber}</h2>`;
+        html += `<div style="display: flex; gap: 1%; justify-content: center; padding-bottom: 10px; width: 100%;">`;
 
     for (let i = 0; i < 7; i++) {
         const reward = rewardList[i];
@@ -178,13 +190,21 @@ export function showCalendar() {
         `;
     }
 
-    html += `</div>`;
-    html += `<p style="font-size: 12px; color: #ccc; margin-top: 15px;">New rewards available every day. Check back tomorrow!</p>`;
+        html += `</div>`;
+        html += `<p style="font-size: 12px; color: #ccc; margin-top: 15px;">New rewards available every day. Check back tomorrow!</p>`;
 
-    // Inject Daily Challenges
-    html += getDailyChallengesHtml();
+        // Inject Daily Challenges
+        html += getDailyChallengesHtml();
 
-    html += `</div>`;
+        html += `</div>`;
+    } else if (tab === 'shop') {
+        html += window.renderTokenShopHtml ? window.renderTokenShopHtml() : '<div style="color: white; text-align: center;">Loading shop...</div>';
+    }
 
-    showModal("Daily Rewards", html, "window-calendar", "800px", "auto");
+    html += `</div></div>`;
+
+    showModal("Calendar", html, "window-calendar", "800px", "auto");
+
+    // Bind to window for tab switching
+    window.showCalendar = showCalendar;
 }

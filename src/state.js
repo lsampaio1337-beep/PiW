@@ -1,7 +1,8 @@
 export const state = {
     trainer: {
         money: 0,
-        badges: 0
+        badges: 0,
+        tokens: 0
     },
     party: [],
     box: [],
@@ -63,6 +64,15 @@ export const state = {
             smartwatchTier: 0,
             speedTier: 0,
             lootTier: 0
+        },
+        upgradesUnlocked: {
+            balls: false,
+            potions: false,
+            box: false,
+            glass: false,
+            smartwatch: false,
+            speed: false,
+            loot: false
         }
     },
     settings: {
