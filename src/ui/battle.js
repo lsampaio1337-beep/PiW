@@ -245,17 +245,32 @@ export function updateBattleArena() {
         const elPlayerSpriteInner = document.getElementById('player-sprite-inner');
         const elEnemySpriteInner = document.getElementById('enemy-sprite-inner');
 
-        if (elPlayerSpriteInner && battleSystem.playerActive) {
-            const isFlying = battleSystem.playerActive.types.includes('Flying');
+        let activePlayerPokemon = globals.state.party[0]; // Player always uses party leader
+        let activeEnemyPokemon = battleSystem.activeEncounter;
+
+        if (battleSystem.gymState && battleSystem.gymState.isActive) {
+            if (battleSystem.gymState.inCombat && battleSystem.gymState.gym && battleSystem.gymState.gym.trainers[battleSystem.gymState.currentTrainerIndex]) {
+                 const trainer = battleSystem.gymState.gym.trainers[battleSystem.gymState.currentTrainerIndex];
+                 if (trainer.team && trainer.team[battleSystem.gymState.currentPokemonIndex]) {
+                     activeEnemyPokemon = trainer.team[battleSystem.gymState.currentPokemonIndex];
+                 }
+            } else {
+                activeEnemyPokemon = null; // No active enemy between gym battles
+            }
+        }
+
+        if (elPlayerSpriteInner && activePlayerPokemon) {
+            const isFlying = activePlayerPokemon.types && activePlayerPokemon.types.includes('Flying');
             elPlayerSpriteInner.style.bottom = isFlying ? 'auto' : '0';
             elPlayerSpriteInner.style.top = isFlying ? '0' : 'auto';
             elPlayerSpriteInner.style.right = '0';
             elPlayerSpriteInner.style.left = 'auto';
+            // Inner wrapper flex layout handles top/bottom alignment securely without breaking HP offsets
             elPlayerSpriteInner.style.justifyContent = isFlying ? 'flex-start' : 'flex-end';
         }
 
-        if (elEnemySpriteInner && battleSystem.enemyActive) {
-            const isFlying = battleSystem.enemyActive.types.includes('Flying');
+        if (elEnemySpriteInner && activeEnemyPokemon) {
+            const isFlying = activeEnemyPokemon.types && activeEnemyPokemon.types.includes('Flying');
             elEnemySpriteInner.style.bottom = isFlying ? 'auto' : '0';
             elEnemySpriteInner.style.top = isFlying ? '0' : 'auto';
             elEnemySpriteInner.style.left = '0';
