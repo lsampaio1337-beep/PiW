@@ -135,7 +135,6 @@ export function showMap() {
 
     html += `
         </div>
-        <div id="map-tooltip" style="display:none; position:absolute; background:rgba(0,0,0,0.8); color:white; padding:5px; border-radius:5px; pointer-events:none; z-index: 100;"></div>
     `;
 
 
@@ -387,7 +386,14 @@ export function navigateToLocation(locationName) {
 }
 
 export function showMapTooltip(e, locationName) {
-    const tooltip = document.getElementById('map-tooltip');
+    let tooltip = document.getElementById('map-tooltip');
+    if (!tooltip) {
+        tooltip = document.createElement('div');
+        tooltip.id = 'map-tooltip';
+        tooltip.style.cssText = 'display:none; position:fixed; background:rgba(0,0,0,0.8); color:white; padding:5px; border-radius:5px; pointer-events:none; z-index: 99999; font-size: 14px; line-height: 1.4;';
+        document.body.appendChild(tooltip);
+    }
+
     if (!tooltip) return;
 
     let info = `<strong>${locationName}</strong><br>`;
@@ -434,9 +440,6 @@ export function showMapTooltip(e, locationName) {
     tooltip.innerHTML = info;
     tooltip.style.display = 'block';
 
-    // Fix tooltip positioning by using fixed position for the tooltip to avoid offset issues
-    tooltip.style.position = 'fixed';
-
     // Get tooltip dimensions
     const rect = tooltip.getBoundingClientRect();
 
@@ -455,8 +458,8 @@ export function showMapTooltip(e, locationName) {
     leftPos = Math.max(0, leftPos);
     topPos = Math.max(0, topPos);
 
-    tooltip.style.left = leftPos + 'px';
-    tooltip.style.top = topPos + 'px';
+    tooltip.style.left = leftPos + "px";
+    tooltip.style.top = topPos + "px";
 }
 
 export function hideMapTooltip() {
