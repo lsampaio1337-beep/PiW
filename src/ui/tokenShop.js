@@ -23,7 +23,7 @@ function getTokenShopItemsHtml() {
             id: 'vitamin',
             name: 'Vitamin',
             img: 'Assets/Extra/Vitamin.png',
-            desc: 'A vitamin that improves any stat in a Pokemon in 1% (max 20% each stat).',
+            desc: 'A vitamin that improves any stat in a Pokemon in 1%.',
             isSelectable: true,
             selectPrice: 2,
             randomPrice: 1
@@ -89,7 +89,7 @@ function getTokenShopItemsHtml() {
             id: 'unlock_glasses',
             name: 'Unlock Glasses Upgrade',
             img: 'Assets/Items/Upgrades/Glass1.png',
-            desc: 'Allow you to buy upgrades that display visual information while combat.',
+            desc: 'Allow you to buy upgrades that display visual information while in battle.',
             price: 1,
             isUnlock: true,
             unlockKey: 'glass',
@@ -99,7 +99,7 @@ function getTokenShopItemsHtml() {
             id: 'unlock_loot',
             name: 'Unlock Loot Upgrade',
             img: 'Assets/Items/Upgrades/Loot1.png',
-            desc: 'Allow you to buy upgrades that collect loots from pokemons.',
+            desc: 'Allow you to buy upgrades that collect loot from pokemons.',
             price: 1,
             isUnlock: true,
             unlockKey: 'loot',
@@ -109,7 +109,7 @@ function getTokenShopItemsHtml() {
             id: 'unlock_smartwatch',
             name: 'Unlock Smartwatch Upgrade',
             img: 'Assets/Items/Upgrades/Smartwatch1.png',
-            desc: 'Allow you to buy upgrades that helps capture and heal during battle.',
+            desc: 'Allow you to buy upgrades that helps capture and heal while in battle.',
             price: 1,
             isUnlock: true,
             unlockKey: 'smartwatch',
@@ -232,7 +232,7 @@ window.showTokenItemSelect = function(itemType) {
 
     itemsToSelect.forEach(item => {
         html += `
-            <div onclick="window.confirmTokenItemSelect('${item.name}')" style="background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; padding: 10px; text-align: center; cursor: pointer; transition: transform 0.2s;">
+            <div onclick="window.confirmTokenItemSelect('${item.name}')" style="background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; padding: 10px; text-align: center; cursor: pointer; transition: transform 0.2s; width: 100px; height: 110px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; box-sizing: border-box;">
                 <img src="${item.img}" style="width: 48px; height: 48px; object-fit: contain; margin-bottom: 5px;">
                 <div style="font-size: 12px; font-weight: bold;">${item.name}</div>
             </div>
