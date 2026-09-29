@@ -773,6 +773,7 @@ class BattleSystem {
         if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') {
             window.trackDailyChallenge('defeat_level', { level: this.activeEncounter.level, playerLevel: leader.level });
             window.trackDailyChallenge('defeat_type', { types: this.activeEncounter.types });
+            window.trackDailyChallenge('defeat_species', { species: this.activeEncounter.name });
             window.trackDailyChallenge('defeat_underdog', { level: this.activeEncounter.level, playerLevel: leader.level });
 
             if (this.state.stats.dailyChallenges) {
@@ -1592,6 +1593,7 @@ class BattleSystem {
                 if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') {
                     window.trackDailyChallenge('defeat_level', { level: this.activeEncounter.level, playerLevel: leader.level });
                     window.trackDailyChallenge('defeat_type', { types: this.activeEncounter.types });
+                    window.trackDailyChallenge('defeat_species', { species: this.activeEncounter.name });
                     window.trackDailyChallenge('defeat_underdog', { level: this.activeEncounter.level, playerLevel: leader.level });
 
                     if (this.state.stats.dailyChallenges) {
