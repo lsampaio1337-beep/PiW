@@ -348,8 +348,24 @@ export function updateBattleArena() {
             const elSumIV = document.getElementById('enemy-info-sumiv');
 
             if (elEnemySprite && elEnemySide) {
-                elEnemySprite.src = `Assets/Pokemon Sprites/Natural/${enemy.qualityName === 'Shiny' ? enemy.id + '_shiny' : enemy.id}.png`;
+                elEnemySprite.src = `Assets/Pokemon Sprites/Clean/${enemy.qualityName === 'Shiny' ? enemy.id + '_shiny_Clean' : enemy.id + '_Clean'}.png`;
                 elEnemySprite.style.display = 'block';
+
+                const elEnemyAnimContainer = document.getElementById('enemy-anim-container');
+                if (elEnemyAnimContainer) {
+                    if (enemy.types.includes('Flying') || enemy.types.includes('Wind')) {
+                        elEnemyAnimContainer.style.top = '0';
+                        elEnemyAnimContainer.style.left = '0';
+                        elEnemyAnimContainer.style.bottom = 'auto';
+                        elEnemyAnimContainer.style.right = 'auto';
+                    } else {
+                        elEnemyAnimContainer.style.bottom = '0';
+                        elEnemyAnimContainer.style.left = '0';
+                        elEnemyAnimContainer.style.top = 'auto';
+                        elEnemyAnimContainer.style.right = 'auto';
+                    }
+                }
+
                 applyWalkAnimations(enemy, true);
 
                 if (elEnemyInfo && elLevel && elQuality && elSumIV) {
@@ -360,28 +376,18 @@ export function updateBattleArena() {
                     elSumIV.innerText = `SumIV=${sumIV}`;
                 }
 
-                elEnemySide.style.top = '50%';
-                elEnemySide.style.bottom = 'auto';
-
+                // Removed dynamic positioning to elEnemySide which overrides the new CSS setup
                 if (battleSystem.isSliding) {
                     if (elEnemySide.dataset.sliding !== 'true') {
                         elEnemySide.dataset.sliding = 'true';
                         elEnemySide.style.transition = 'none';
                         elEnemySide.style.left = '100%';
-                        if (hpContainerEnemy) {
-                            hpContainerEnemy.style.transition = 'none';
-                            hpContainerEnemy.style.left = '100%';
-                        }
                         // Trigger reflow
                         void elEnemySide.offsetWidth;
                         requestAnimationFrame(() => {
                             requestAnimationFrame(() => {
                                 elEnemySide.style.transition = `left ${battleSystem.slideDuration}ms linear`;
                                 elEnemySide.style.left = '35%';
-                                if (hpContainerEnemy) {
-                                    hpContainerEnemy.style.transition = `left ${battleSystem.slideDuration}ms linear`;
-                                    hpContainerEnemy.style.left = '35%';
-                                }
                             });
                         });
                     }
@@ -389,20 +395,12 @@ export function updateBattleArena() {
                     elEnemySide.dataset.sliding = 'false';
                     elEnemySide.style.transition = 'none';
                     elEnemySide.style.left = '35%';
-                    if (hpContainerEnemy) {
-                        hpContainerEnemy.style.transition = 'none';
-                        hpContainerEnemy.style.left = '35%';
-                    }
                 }
             }
 
             const leader = state.party[0];
             const elPlayerSide = document.getElementById('player-side');
             if (leader && elPlayerSide) {
-
-                elPlayerSide.style.top = '50%';
-                elPlayerSide.style.bottom = 'auto';
-                elPlayerSide.style.left = '25%';
 
                 const hpContainerPlayer = document.getElementById('player-battle-hp-container');
                 const hpBarPlayer = document.getElementById('player-battle-hp-bar');
@@ -430,30 +428,46 @@ export function updateBattleArena() {
                 if (elPlayerSprite) {
                     let dittoBg = document.getElementById('player-sprite-ditto-bg');
                     if (dittoBg) dittoBg.style.display = 'none';
-                    elPlayerSprite.src = `Assets/Pokemon Sprites/Natural/${leader.qualityName === 'Shiny' ? (leader.transformedIntoId || leader.id) + '_shiny' : (leader.transformedIntoId || leader.id)}.png`;
+                    elPlayerSprite.src = `Assets/Pokemon Sprites/Clean/${leader.qualityName === 'Shiny' ? (leader.transformedIntoId || leader.id) + '_shiny_Clean' : (leader.transformedIntoId || leader.id) + '_Clean'}.png`;
                     elPlayerSprite.style.display = 'block';
+
+                    const elPlayerAnimContainer = document.getElementById('player-anim-container');
+                    if (elPlayerAnimContainer) {
+                        if (leader.types.includes('Flying') || leader.types.includes('Wind')) {
+                            elPlayerAnimContainer.style.top = '0';
+                            elPlayerAnimContainer.style.right = '0';
+                            elPlayerAnimContainer.style.bottom = 'auto';
+                            elPlayerAnimContainer.style.left = 'auto';
+                        } else {
+                            elPlayerAnimContainer.style.bottom = '0';
+                            elPlayerAnimContainer.style.right = '0';
+                            elPlayerAnimContainer.style.top = 'auto';
+                            elPlayerAnimContainer.style.left = 'auto';
+                        }
+                    }
+
                     applyWalkAnimations(leader, false);
 
                     if (leader.currentHp <= 0) {
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.transition = 'opacity 2s linear'; else elPlayerSprite.style.transition = 'opacity 2s linear';
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.opacity = '0'; else elPlayerSprite.style.opacity = '0';
                     } else if (battleSystem && battleSystem.isPlayerSlidingIn) {
-                        elPlayerSprite.style.transition = `left ${battleSystem.slideDuration}ms linear`;
-                        elPlayerSprite.style.left = '25%';
+                        elPlayerSide.style.transition = `left ${battleSystem.slideDuration}ms linear`;
+                        elPlayerSide.style.left = '25%';
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.transition = 'none';
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.opacity = '1';
                         elPlayerSprite.style.opacity = '1';
                     } else if (battleSystem && battleSystem.isFainting) {
                         // don't touch style while fading
                     } else if (battleSystem && battleSystem.isPlayerPreSlidingIn) {
-                        elPlayerSprite.style.transition = 'none';
-                        elPlayerSprite.style.left = '-30%';
+                        elPlayerSide.style.transition = 'none';
+                        elPlayerSide.style.left = '-30%';
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.transition = 'none';
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.opacity = '1';
                         elPlayerSprite.style.opacity = '1';
                     } else {
-                        elPlayerSprite.style.transition = 'none';
-                        elPlayerSprite.style.left = '25%';
+                        elPlayerSide.style.transition = 'none';
+                        elPlayerSide.style.left = '25%';
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.transition = 'none';
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.opacity = '1';
                         elPlayerSprite.style.opacity = '1';
@@ -488,10 +502,6 @@ export function updateBattleArena() {
             const elPlayerSide = document.getElementById('player-side');
             if (leader && elPlayerSide) {
 
-                elPlayerSide.style.top = '50%';
-                elPlayerSide.style.bottom = 'auto';
-                elPlayerSide.style.left = '25%';
-
                 const hpContainerPlayer = document.getElementById('player-battle-hp-container');
                 const hpBarPlayer = document.getElementById('player-battle-hp-bar');
                 const hpTextPlayer = document.getElementById('player-battle-hp-text');
@@ -518,30 +528,46 @@ export function updateBattleArena() {
                 if (elPlayerSprite) {
                     let dittoBg = document.getElementById('player-sprite-ditto-bg');
                     if (dittoBg) dittoBg.style.display = 'none';
-                    elPlayerSprite.src = `Assets/Pokemon Sprites/Natural/${leader.qualityName === 'Shiny' ? (leader.transformedIntoId || leader.id) + '_shiny' : (leader.transformedIntoId || leader.id)}.png`;
+                    elPlayerSprite.src = `Assets/Pokemon Sprites/Clean/${leader.qualityName === 'Shiny' ? (leader.transformedIntoId || leader.id) + '_shiny_Clean' : (leader.transformedIntoId || leader.id) + '_Clean'}.png`;
                     elPlayerSprite.style.display = 'block';
+
+                    const elPlayerAnimContainer = document.getElementById('player-anim-container');
+                    if (elPlayerAnimContainer) {
+                        if (leader.types.includes('Flying') || leader.types.includes('Wind')) {
+                            elPlayerAnimContainer.style.top = '0';
+                            elPlayerAnimContainer.style.right = '0';
+                            elPlayerAnimContainer.style.bottom = 'auto';
+                            elPlayerAnimContainer.style.left = 'auto';
+                        } else {
+                            elPlayerAnimContainer.style.bottom = '0';
+                            elPlayerAnimContainer.style.right = '0';
+                            elPlayerAnimContainer.style.top = 'auto';
+                            elPlayerAnimContainer.style.left = 'auto';
+                        }
+                    }
+
                     applyWalkAnimations(leader, false);
 
                     if (leader.currentHp <= 0) {
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.transition = 'opacity 2s linear'; else elPlayerSprite.style.transition = 'opacity 2s linear';
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.opacity = '0'; else elPlayerSprite.style.opacity = '0';
                     } else if (battleSystem && battleSystem.isPlayerSlidingIn) {
-                        elPlayerSprite.style.transition = `left ${battleSystem.slideDuration}ms linear`;
-                        elPlayerSprite.style.left = '25%';
+                        elPlayerSide.style.transition = `left ${battleSystem.slideDuration}ms linear`;
+                        elPlayerSide.style.left = '25%';
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.transition = 'none';
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.opacity = '1';
                         elPlayerSprite.style.opacity = '1';
                     } else if (battleSystem && battleSystem.isFainting) {
                         // don't touch style while fading
                     } else if (battleSystem && battleSystem.isPlayerPreSlidingIn) {
-                        elPlayerSprite.style.transition = 'none';
-                        elPlayerSprite.style.left = '-30%';
+                        elPlayerSide.style.transition = 'none';
+                        elPlayerSide.style.left = '-30%';
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.transition = 'none';
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.opacity = '1';
                         elPlayerSprite.style.opacity = '1';
                     } else {
-                        elPlayerSprite.style.transition = 'none';
-                        elPlayerSprite.style.left = '25%';
+                        elPlayerSide.style.transition = 'none';
+                        elPlayerSide.style.left = '25%';
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.transition = 'none';
                         if (elPlayerSprite.parentElement.classList.contains('sprite-anim-container')) elPlayerSprite.parentElement.style.opacity = '1';
                         elPlayerSprite.style.opacity = '1';
