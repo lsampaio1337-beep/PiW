@@ -512,7 +512,11 @@ window.showChallengesModal = function() {
         // We handle the max height natively in windowManager now, so remove the strict CSS limit
         win.style.maxHeight = '';
 
-        if (window.windowManager) window.windowManager.setWindowProportions('window-challenges', 1.0);
+        win.dataset.maxHeightRatio = '1.0';
+        win._sizeInitialized = false;
+        if (typeof win.adjustHeightForNewContent === 'function') {
+            win.adjustHeightForNewContent();
+        }
 
         // Ensure the content container scrolls if it overflows
         const contentContainer = win.querySelector('.window-content-container');
