@@ -229,7 +229,7 @@
           </div>
 
           <!-- Active Items Indicators -->
-          <div id="battle-active-items-container" style="position: absolute; bottom: 10px; left: 10px; display: flex; gap: 10px; z-index: 20;">
+          <div id="battle-active-items-container" style="position: absolute; bottom: 10px; left: 10px; display: flex; gap: 10px; z-index: 9999;">
               <!-- Potion Card -->
               <div id="battle-active-potion-card" onclick="window.showActiveItemSelection('potion')" style="width: 30px; height: 30px; background: rgba(0, 0, 0, 0.6); border: 2px solid #3498db; border-radius: 8px; position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer;">
                   <img id="battle-active-potion-img" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" style="width: 80%; height: 80%; object-fit: contain;">
@@ -242,7 +242,7 @@
               </div>
 
               <!-- Item Selection Popup (Hidden by default) -->
-              <div id="battle-active-item-selection-popup" style="display: none; position: absolute; bottom: 40px; left: 0; background: rgba(0, 0, 0, 0.85); border: 1px solid #555; border-radius: 8px; padding: 10px; flex-direction: row; gap: 8px; z-index: 25; flex-wrap: wrap; max-width: 250px; width: max-content; align-items: flex-start; justify-content: flex-start;">
+              <div id="battle-active-item-selection-popup" style="display: none; position: absolute; bottom: 40px; left: 0; background: rgba(0, 0, 0, 0.85); border: 1px solid #555; border-radius: 8px; padding: 10px; flex-direction: row; gap: 8px; z-index: 10000; flex-wrap: wrap; max-width: 250px; width: max-content; align-items: flex-start; justify-content: flex-start;">
               </div>
           </div>
         </div>
