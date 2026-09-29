@@ -3,20 +3,19 @@ import { showModal, updateUI } from '../ui.js';
 
 function getCandyCost(color, currentOwned) {
     const owned = currentOwned || 0;
-    if (color === 'Green Candy') return 1 + Math.floor(owned / 5);
-    if (color === 'Purple Candy') return 2 + Math.floor(owned / 3);
-    if (color === 'Black Yellow Candy') return 3 + Math.floor(owned / 2);
-    if (color === 'Rainbow Candy') return 8 + (owned * 4);
+    if (color === 'Green Candy') return 1 + owned;
+    if (color === 'Purple Candy') return 2 + (owned * 2);
+    if (color === 'Black Yellow Candy') return 3 + (owned * 3);
+    if (color === 'Rainbow Candy') return 4 + (owned * 4);
     return 1;
 }
 
 export function showBonusCandyModal() {
     const defeats = state.stats.bonusCandyDefeats || 0;
-    const isClaimable = defeats >= 250;
-    const progressTextLeft = isClaimable ? "" : `${defeats}/250`;
-    const progressTextRight = isClaimable ? "" : `${Math.floor((defeats / 250) * 100)}%`;
-    const progressTextCenter = isClaimable ? "Click to Claim White Candy!" : "";
-    const progressPct = isClaimable ? 100 : (defeats / 250) * 100;
+    const isClaimable = false; // Auto claims now
+    const progressTextLeft = `${defeats}/100`;
+    const progressTextRight = `${Math.floor((defeats / 100) * 100)}%`;
+    const progressPct = (defeats / 100) * 100;
 
     // Ensure candyPurchaseHistory exists
     if (!state.stats.candyPurchaseHistory) {
@@ -49,7 +48,6 @@ export function showBonusCandyModal() {
 
             <div style="margin-bottom: 20px;">
                 <div
-                    onclick="window.claimWhiteCandy()"
                     style="
                         position: relative;
                         width: 100%;
@@ -58,8 +56,7 @@ export function showBonusCandyModal() {
                         border-radius: 15px;
                         border: 2px solid #555;
                         overflow: hidden;
-                        cursor: ${isClaimable ? 'pointer' : 'default'};
-                        box-shadow: ${isClaimable ? '0 0 10px yellow' : 'none'};
+                        cursor: default;
                     ">
                     <div style="
                         position: absolute;
@@ -75,10 +72,7 @@ export function showBonusCandyModal() {
                         color: white; font-weight: bold; text-shadow: 1px 1px 2px black;
                         pointer-events: none;
                     ">
-                        ${isClaimable
-                            ? `<span>${progressTextCenter}</span>`
-                            : `<div style="width: 50%; text-align: center;">${progressTextLeft}</div><div style="width: 50%; text-align: center;">${progressTextRight}</div>`
-                        }
+                        <div style="width: 50%; text-align: center;">${progressTextLeft}</div><div style="width: 50%; text-align: center;">${progressTextRight}</div>
                     </div>
                 </div>
             </div>
@@ -88,9 +82,9 @@ export function showBonusCandyModal() {
             </div>
 
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
-                ${renderCandyOption('Green Candy', '+3% Loot Probability and Quantity', getCandyCost('Green Candy', state.stats.greenCandies), state.stats.greenCandies, (1 + 0.03 * (state.stats.greenCandies || 0)).toFixed(2) + 'x', 'LootCandy.png')}
-                ${renderCandyOption('Purple Candy', 'XP +2%', getCandyCost('Purple Candy', state.stats.purpleCandies), state.stats.purpleCandies, (1 + 0.02 * (state.stats.purpleCandies || 0)).toFixed(2) + 'x', 'XPCandy.png')}
-                ${renderCandyOption('Black Yellow Candy', 'Catch +4%', getCandyCost('Black Yellow Candy', state.stats.blackYellowCandies), state.stats.blackYellowCandies, (1 + 0.04 * (state.stats.blackYellowCandies || 0)).toFixed(2) + 'x', 'CatchCandy.png')}
+                ${renderCandyOption('Green Candy', '+0.25% Loot Probability and +1% Money', getCandyCost('Green Candy', state.stats.greenCandies), state.stats.greenCandies, `Loot: +${0.25 * (state.stats.greenCandies || 0)}% | Money: +${1 * (state.stats.greenCandies || 0)}%`, 'LootCandy.png')}
+                ${renderCandyOption('Purple Candy', 'XP +2%', getCandyCost('Purple Candy', state.stats.purpleCandies), state.stats.purpleCandies, `+${2 * (state.stats.purpleCandies || 0)}%`, 'XPCandy.png')}
+                ${renderCandyOption('Black Yellow Candy', 'Catch Bonus of 20%', getCandyCost('Black Yellow Candy', state.stats.blackYellowCandies), state.stats.blackYellowCandies, `Catch: +${20 * (state.stats.blackYellowCandies || 0)}%`, 'CatchCandy.png')}
                 ${renderCandyOption('Rainbow Candy', 'Shiny +1roll', getCandyCost('Rainbow Candy', state.stats.rainbowCandies), state.stats.rainbowCandies, '+' + (state.stats.rainbowCandies || 0) + ' rolls', 'ShinyCandy.png')}
             </div>
 
@@ -137,6 +131,7 @@ function renderCandyOption(color, effectText, cost, currentOwned, currentEffect,
             <img src="Assets/Extra/${imageFile}" ${isMaxed ? '' : `onclick="window.buyBonusCandy('${color}')"`} style="width: 60px; height: 60px; position: absolute; ${verticalAlign} ${horizontalAlign} ${isMaxed ? '' : 'cursor: pointer;'} border-radius: 5px; box-shadow: 0 0 5px rgba(255,255,255,0.5);" onerror="this.style.display='none'" title="${isMaxed ? 'MAXED' : `Click to buy ${color}`}">
             <div style="font-size: 18px; font-weight: bold; margin-bottom: 5px; ${titleStyle}">${color}</div>
             <div style="font-size: 14px; margin-bottom: 5px; text-align: center;">Effect: ${effectText}</div>
+            <div style="font-size: 12px; margin-bottom: 5px; text-align: center; color: #88ff88;">Current Bonus: ${currentEffect}</div>
             <div style="font-size: 14px; margin-bottom: 10px;">${isMaxed ? 'Cost: MAXED' : `Cost: ${cost} White Candy`}</div>
             <div style="font-size: 14px; color: #aaa;">Owned: ${owned}${color === 'Rainbow Candy' ? ' / 7' : ''}</div>
         </div>
@@ -152,12 +147,7 @@ function getColorHex(colorName) {
 }
 
 window.claimWhiteCandy = function() {
-    if ((state.stats.bonusCandyDefeats || 0) >= 250) {
-        state.stats.bonusCandyDefeats -= 250;
-        state.stats.whiteCandies = (state.stats.whiteCandies || 0) + 1;
-        updateUI();
-        showBonusCandyModal(); // Refresh modal
-            }
+    // Deprecated now that it auto-claims
 };
 
 window.cheatWhiteCandy = function() {

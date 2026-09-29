@@ -165,7 +165,7 @@ export function updateTopbar() {
     const bonusCandyContainer = document.getElementById('bonus-candy-container');
     const exclamation = document.getElementById('bonus-candy-exclamation');
     if (exclamation && bonusCandyContainer) {
-        if (state.stats.bonusCandyDefeats >= 250) {
+        if (state.stats.whiteCandies > 0) {
             bonusCandyContainer.style.display = 'inline-block';
             if (!state.stats.hasSeenBonusCandyIcon) {
                 exclamation.style.display = 'block';

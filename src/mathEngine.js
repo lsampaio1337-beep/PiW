@@ -69,9 +69,6 @@ function calculateCatchChance(bst, level, quality, totalIV, ballMultiplier, stat
     else if (cTaskTier >= 2) catchBonus = 10;
     else if (cTaskTier >= 1) catchBonus = 5;
 
-    // Black Yellow Candy Catch Bonus
-    catchBonus += (4 * (stats.blackYellowCandies || 0));
-
     let shinySeenTaskTier = stats.shinySeenTaskTier || 0;
     let shinyCatchMulti = (isShiny && shinySeenTaskTier >= 3) ? 2 : 1;
 
@@ -79,6 +76,11 @@ function calculateCatchChance(bst, level, quality, totalIV, ballMultiplier, stat
     if (baseChance < 1) baseChance = 1;
 
     let chance = baseChance * ballMultiplier * (1 + catchBonus / 100) * shinyCatchMulti;
+
+    // Black Yellow Candy Catch Bonus
+    // Modifies the overall chance directly: chance * (1 + 0.20 * blackYellowCandies)
+    const blackYellowMulti = 1 + (0.20 * (stats.blackYellowCandies || 0));
+    chance = chance * blackYellowMulti;
 
     return Math.min(100.0, Math.max(1.0, chance));
 }
