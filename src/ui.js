@@ -1231,41 +1231,69 @@ function selectStarter(id) {
     renderOakLab();
 }
 
+let gameClockTimeout = null;
+let lastTickTime = null;
+
+window.restartGameClock = function() {
+    if (gameClockTimeout) {
+        clearTimeout(gameClockTimeout);
+        gameClockTimeout = null;
+    }
+
+    // Safety boundaries for speed
+    const speed = (state.settings && state.settings.gameSpeed) || 1;
+    // Timeout minimum is usually 4ms in browsers.
+    // This naturally caps the speed at ~250x, matching actual execution time.
+    const delay = Math.max(4, Math.floor(1000 / speed));
+
+    gameClockTimeout = setTimeout(gameClockTick, delay);
+};
+
+function gameClockTick() {
+    const speed = (state.settings && state.settings.gameSpeed) || 1;
+
+    if (!state.stats.playtime) state.stats.playtime = 0;
+    state.stats.playtime++;
+
+    if (state.currentView === "BATTLE_ARENA") {
+        state.stats.battleModeTimer = (state.stats.battleModeTimer || 0) + 1;
+        updateTopbar();
+    } else {
+        state.stats.battleModeTimer = 0;
+        updateTopbar();
+    }
+
+    // Award Jigglypuff Dust grains (1 grain per minute)
+    if (state.stats.playtime % 60 === 0 && state.stats.playtime > 0) {
+        state.stats.jigglypuffGrains = (state.stats.jigglypuffGrains || 0) + 1;
+        updateUI(); // Reflect new grains
+    }
+
+    // Daily Challenge Check
+    if (state.stats.playtime % 10 === 0) {
+        checkAndResetDailyChallenges();
+    }
+
+    if (state.stats.playtime === 60) {
+        updateTopbar();
+    }
+
+    // Schedule next tick
+    const delay = Math.max(4, Math.floor(1000 / speed));
+    gameClockTimeout = setTimeout(gameClockTick, delay);
+}
+
+
 function startGame() {
     let bs = new BattleSystem(state, updateUI);
     setBattleSystem(bs);
     updateUI();
     bs.start();
 
-    // Playtime tracker (adds 1 second every second)
-    setInterval(() => {
-        state.stats.playtime = (state.stats.playtime || 0) + 1;
+    state.settings.gameSpeed = 1; // Reset to 1 on load
 
-        if (state.currentView === "BATTLE_ARENA") {
-            const speed = (state.settings && state.settings.gameSpeed) || 1;
-            state.stats.battleModeTimer = (state.stats.battleModeTimer || 0) + (1 * speed);
-            updateTopbar();
-        } else {
-            state.stats.battleModeTimer = 0;
-            updateTopbar();
-        }
-
-        // Award Jigglypuff Dust grains (1 grain per minute)
-        // Check using modulo so that reloading doesn't reset progress towards the next minute.
-        // We ensure we only add 1 grain if playtime is perfectly divisible by 60 and > 0.
-        if (state.stats.playtime % 60 === 0 && state.stats.playtime > 0) {
-            state.stats.jigglypuffGrains = (state.stats.jigglypuffGrains || 0) + 1;
-        }
-
-        // Daily Challenge Check
-        if (state.stats.playtime % 10 === 0) {
-            checkAndResetDailyChallenges();
-        }
-
-        if (state.stats.playtime === 60) {
-            updateTopbar();
-        }
-    }, 1000);
+    // Start playtime tracker
+    window.restartGameClock();
 
     // Autosave loop
     setInterval(() => {
