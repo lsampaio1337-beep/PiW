@@ -561,7 +561,7 @@ window.closeModal = function(windowId) {
 };
 
 
-function showCatchRateModal(showShiny = false) {
+function showCatchRateModal(showShiny = false, isSubWindow = false) {
     const balls = ["Pokeball", "Greatball", "Ultraball", "Safariball", "Masterball"];
     const targetTracker = showShiny ? (state.stats.shinyCatchAttempts || {}) : (state.stats.catchAttempts || {});
 
@@ -637,13 +637,24 @@ function showCatchRateModal(showShiny = false) {
     </div>
     </div>`;
 
-    showModal("Catch Rate Table", html, "window-catch-rate", "800px", "auto");
-
-    const win = document.getElementById('window-catch-rate');
-    if (win) {
-        const innerContent = win.querySelector('.window-content-container');
-        if (innerContent) {
-            innerContent.style.setProperty('padding', '0px', 'important'); // Let the injected wrapper handle the 5% padding so it sizes nicely
+    if (isSubWindow) {
+        const innerOverlay = document.getElementById('trainer-inner-modal-overlay');
+        const innerTitle = document.getElementById('trainer-inner-modal-title');
+        const innerContent = document.getElementById('trainer-inner-modal-content');
+        if (innerOverlay && innerTitle && innerContent) {
+            innerTitle.innerText = "Catch Rate Table";
+            innerContent.innerHTML = html;
+            innerContent.style.setProperty('padding', '0px', 'important'); // Keep padding logic
+            innerOverlay.style.display = 'flex';
+        }
+    } else {
+        showModal("Catch Rate Table", html, "window-catch-rate", "800px", "auto");
+        const win = document.getElementById('window-catch-rate');
+        if (win) {
+            const innerContent = win.querySelector('.window-content-container');
+            if (innerContent) {
+                innerContent.style.setProperty('padding', '0px', 'important'); // Let the injected wrapper handle the 5% padding so it sizes nicely
+            }
         }
     }
 
@@ -651,7 +662,7 @@ function showCatchRateModal(showShiny = false) {
         const btn = document.getElementById('btn-catch-rate-shiny-toggle');
         if (btn) {
             btn.onclick = () => {
-                showCatchRateModal(!showShiny);
+                showCatchRateModal(!showShiny, isSubWindow);
             };
         }
     }, 0);
@@ -2046,7 +2057,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
 
     window.updateTopbar = updateTopbar;
 
-    bindBtn('btn-stats', () => {
+    window.showTrainerStats = function() {
         if(checkCombatLock()) return;
         let badgesHtml = '<div style="display: flex; gap: 10px; margin-top: 10px; justify-content: center; flex-wrap: wrap;">';
         for (let i = 1; i <= state.trainer.badges; i++) {
@@ -2112,119 +2123,176 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
             uniqueShinySpeciesCaught = Object.keys(state.stats.caughtShiniesSpecies).length;
         }
 
-        showModal("Trainer", `
-            <div style="text-align: left; margin-bottom: 20px;">
-                <div style="display: flex; gap: 40px; justify-content: space-between;">
-                    <div style="flex: 1;">
-                        <p><b>Time played:</b> ${playtimeStr}</p>
-                        <p><b>Money:</b> $${state.trainer.money.toLocaleString()}</p>
+        const trainerHtml = `
+            <div style="position: relative; height: 100%; display: flex; flex-direction: column;">
+                <div style="text-align: left; margin-bottom: 20px;">
+                    <div style="display: flex; gap: 40px; justify-content: space-between;">
+                        <div style="flex: 1;">
+                            <p><b>Time played:</b> ${playtimeStr}</p>
+                            <p><b>Money:</b> $${state.trainer.money.toLocaleString()}</p>
+                        </div>
+                        <div style="flex: 1;">
+                            <p><b>Battles Won:</b> ${(state.stats.battlesWon || 0).toLocaleString()}</p>
+                            <p><b>Faints:</b> ${(state.stats.faints || 0).toLocaleString()}</p>
+                        </div>
                     </div>
-                    <div style="flex: 1;">
-                        <p><b>Battles Won:</b> ${(state.stats.battlesWon || 0).toLocaleString()}</p>
-                        <p><b>Faints:</b> ${(state.stats.faints || 0).toLocaleString()}</p>
+                    <hr style="margin: 10px 0;">
+                    <div style="display: flex; gap: 40px; justify-content: space-between;">
+                        <div style="flex: 1;">
+                            <p><b>Total Pokémon Captured:</b> ${(state.stats.caught || 0).toLocaleString()}</p>
+                            <p><b>Species Caught:</b> ${uniqueSpeciesCaught} / ${state.config.pokemonData.length}</p>
+                        </div>
+                        <div style="flex: 1;">
+                            <p><b>Shinies Caught:</b> ${(state.stats.shiniesCaught || 0).toLocaleString()}</p>
+                            <p><b>Shiny Species Caught:</b> ${uniqueShinySpeciesCaught} / ${state.config.pokemonData.length}</p>
+                        </div>
+                    </div>
+                    <hr style="margin: 10px 0;">
+                    <div style="display: flex; gap: 40px; justify-content: space-between;">
+                        <div style="flex: 1;">
+                            <p><b>Jigglypuff Grains Used:</b> ${(state.stats.jigglypuffGrainsUsed || 0).toLocaleString()}</p>
+                            <p><b>Daily Rewards Collected:</b> ${(state.stats.dailyRewards ? state.stats.dailyRewards.daysClaimed : 0).toLocaleString()}</p>
+                            <p><b>Professor Oak Assignments Completed:</b> ${assignmentsCompleted}/${maxAssignments}</p>
+                        </div>
+                        <div style="flex: 1;">
+                            <p><b>White Candies Claimed:</b> ${(whiteCandiesClaimed || 0).toLocaleString()}</p>
+                            <p><b>Tokens Earned:</b> ${(state.stats.tokensEarned || 0).toLocaleString()}</p>
+                            <p><b>Progress Challenge Completed:</b> ${challengesCompleted}/${maxChallenges}</p>
+                        </div>
+                    </div>
+                    <hr style="margin: 10px 0;">
+                    <div style="display: flex; gap: 40px; justify-content: space-between;">
+                        <div style="flex: 1;">
+                            <p><b>Highest Level on Backpack:</b> ${highestLevel}</p>
+                            <p><b>Highest Quality on Backpack:</b> ${highestQuality}</p>
+                            <p><b>Highest IV Sum on Backpack:</b> ${highestSumIV}</p>
+                        </div>
+                        <div style="flex: 1;">
+                            <p><b>Highest Level Captured:</b> ${state.stats.highestLevelCaptured || 0}</p>
+                            <p><b>Highest Quality Captured:</b> ${state.stats.highestQualityCaptured || 0}</p>
+                            <p><b>Highest IV Sum Captured:</b> ${state.stats.highestSumIVCaptured || 0}</p>
+                        </div>
                     </div>
                 </div>
-                <hr style="margin: 10px 0;">
-                <div style="display: flex; gap: 40px; justify-content: space-between;">
-                    <div style="flex: 1;">
-                        <p><b>Total Pokémon Captured:</b> ${(state.stats.caught || 0).toLocaleString()}</p>
-                        <p><b>Species Caught:</b> ${uniqueSpeciesCaught} / ${state.config.pokemonData.length}</p>
-                    </div>
-                    <div style="flex: 1;">
-                        <p><b>Shinies Caught:</b> ${(state.stats.shiniesCaught || 0).toLocaleString()}</p>
-                        <p><b>Shiny Species Caught:</b> ${uniqueShinySpeciesCaught} / ${state.config.pokemonData.length}</p>
-                    </div>
+                <div style="margin-top: auto; text-align: center; display: flex; gap: 10px; justify-content: center; padding-top: 15px;">
+                    <button id="btn-trainer-badges" style="padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer; background: #3b82f6; color: white; border: none; border-radius: 5px;">Badges</button>
+                    <button id="btn-catch-rate" style="padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer; background: #3b82f6; color: white; border: none; border-radius: 5px;">Catch Rate Table</button>
+                    <button id="btn-trainer-upgrades" style="padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer; background: #3b82f6; color: white; border: none; border-radius: 5px;">Upgrades</button>
                 </div>
-                <hr style="margin: 10px 0;">
-                <div style="display: flex; gap: 40px; justify-content: space-between;">
-                    <div style="flex: 1;">
-                        <p><b>Jigglypuff Grains Used:</b> ${(state.stats.jigglypuffGrainsUsed || 0).toLocaleString()}</p>
-                        <p><b>Daily Rewards Collected:</b> ${(state.stats.dailyRewards ? state.stats.dailyRewards.daysClaimed : 0).toLocaleString()}</p>
-                        <p><b>Professor Oak Assignments Completed:</b> ${assignmentsCompleted}/${maxAssignments}</p>
-                    </div>
-                    <div style="flex: 1;">
-                        <p><b>White Candies Claimed:</b> ${(whiteCandiesClaimed || 0).toLocaleString()}</p>
-                        <p><b>Tokens Earned:</b> ${(state.stats.tokensEarned || 0).toLocaleString()}</p>
-                        <p><b>Progress Challenge Completed:</b> ${challengesCompleted}/${maxChallenges}</p>
-                    </div>
-                </div>
-                <hr style="margin: 10px 0;">
-                <div style="display: flex; gap: 40px; justify-content: space-between;">
-                    <div style="flex: 1;">
-                        <p><b>Highest Level on Backpack:</b> ${highestLevel}</p>
-                        <p><b>Highest Quality on Backpack:</b> ${highestQuality}</p>
-                        <p><b>Highest IV Sum on Backpack:</b> ${highestSumIV}</p>
-                    </div>
-                    <div style="flex: 1;">
-                        <p><b>Highest Level Captured:</b> ${state.stats.highestLevelCaptured || 0}</p>
-                        <p><b>Highest Quality Captured:</b> ${state.stats.highestQualityCaptured || 0}</p>
-                        <p><b>Highest IV Sum Captured:</b> ${state.stats.highestSumIVCaptured || 0}</p>
+
+                <!-- Inner Modal Overlay specifically for the Trainer window -->
+                <div id="trainer-inner-modal-overlay" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 10; align-items: center; justify-content: center; border-radius: inherit;">
+                    <div id="trainer-inner-modal" class="floating-window" style="width: 90%; height: auto; max-height: 90%; display: flex; flex-direction: column; overflow: hidden; pointer-events: auto; position: relative; left: auto; top: auto; transform: none; min-width: auto; min-height: auto;">
+                        <div class="window-header" style="position: relative; cursor: default;">
+                            <span id="trainer-inner-modal-title">Modal</span>
+                            <span id="btn-close-trainer-inner-modal" style="position: absolute; right: 10px; cursor: pointer; color: white; font-weight: bold;">X</span>
+                        </div>
+                        <div class="window-content-container" style="flex: 1; display: flex; overflow-y: auto;">
+                            <div id="trainer-inner-modal-content" class="content-panel" style="width: 100%; height: auto; overflow-y: visible;">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div style="margin-top: 15px; text-align: center; display: flex; gap: 10px; justify-content: center;">
-                <button id="btn-trainer-badges" style="padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer; background: #3b82f6; color: white; border: none; border-radius: 5px;">Badges</button>
-                <button id="btn-catch-rate" style="padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer; background: #3b82f6; color: white; border: none; border-radius: 5px;">Catch Rate Table</button>
-                <button id="btn-trainer-upgrades" style="padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer; background: #3b82f6; color: white; border: none; border-radius: 5px;">Upgrades</button>
-            </div>
-        `, "window-trainer");
+        `;
 
-        document.getElementById('btn-catch-rate').onclick = () => {
-            if(!checkCombatLock()) showCatchRateModal();
-        };
+        showModal("Trainer", trainerHtml, "window-trainer");
 
-        document.getElementById('btn-trainer-badges').onclick = () => {
-            if(!checkCombatLock()) {
-                showModal("Badges", `
-                    <div style="text-align: center;">
-                        ${badgesHtml}
-                    </div>
-                `, "window-badges");
+        setTimeout(() => {
+            const innerOverlay = document.getElementById('trainer-inner-modal-overlay');
+            const closeInnerBtn = document.getElementById('btn-close-trainer-inner-modal');
+            if (closeInnerBtn && innerOverlay) {
+                closeInnerBtn.onclick = () => {
+                    innerOverlay.style.display = 'none';
+                };
             }
-        };
 
-        document.getElementById('btn-trainer-upgrades').onclick = () => {
-            if(!checkCombatLock()) {
-                let upgradesHtml = '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 10px; padding: 10px;">';
+            const btnCatchRate = document.getElementById('btn-catch-rate');
+            if (btnCatchRate) {
+                btnCatchRate.onclick = () => {
+                    if(!checkCombatLock()) showCatchRateModal(false, true); // true for subWindow mode
+                };
+            }
 
-                if (state.stats.upgrades) {
-                    const upgradeTypes = [
-                        { key: 'ballsTier', configKey: 'ballPocket' },
-                        { key: 'potionsTier', configKey: 'potionSatchel' },
-                        { key: 'boxTier', configKey: 'pokemonBox' },
-                        { key: 'glassTier', configKey: 'glass' },
-                        { key: 'smartwatchTier', configKey: 'smartwatch' },
-                        { key: 'speedTier', configKey: 'speed' },
-                        { key: 'lootTier', configKey: 'loot' }
-                    ];
-
-                    upgradeTypes.forEach(type => {
-                        const tier = state.stats.upgrades[type.key] || 0;
-                        if (tier > 0) {
-                            // Show the currently purchased tier (index tier - 1)
-                            const configItem = state.config.balance.expansions[type.configKey][tier - 1];
-                            if (configItem) {
-                                const displayName = configItem.displayName || configItem.name;
-                                upgradesHtml += `
-                                    <div style="background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; padding: 10px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                                        <img src="./Assets/Items/Upgrades/${configItem.name}.png" style="width: 50px; height: 50px; object-fit: contain; margin-bottom: 5px;" alt="${displayName}">
-                                        <div style="font-size: 12px; font-weight: bold; color: white; line-height: 1.1; word-wrap: break-word;">${displayName}</div>
-                                    </div>
-                                `;
-                            }
+            const btnTrainerBadges = document.getElementById('btn-trainer-badges');
+            if (btnTrainerBadges) {
+                btnTrainerBadges.onclick = () => {
+                    if(!checkCombatLock()) {
+                        const innerOverlay = document.getElementById('trainer-inner-modal-overlay');
+                        const innerTitle = document.getElementById('trainer-inner-modal-title');
+                        const innerContent = document.getElementById('trainer-inner-modal-content');
+                        if (innerOverlay && innerTitle && innerContent) {
+                            innerTitle.innerText = "Badges";
+                            innerContent.innerHTML = `
+                                <div style="text-align: center; margin-bottom: 20px;">
+                                    ${badgesHtml}
+                                </div>
+                            `;
+                            innerContent.style.setProperty('padding', '20px', 'important');
+                            innerOverlay.style.display = 'flex';
                         }
-                    });
-                }
-
-                upgradesHtml += '</div>';
-
-                if (upgradesHtml === '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 10px; padding: 10px;"></div>') {
-                    upgradesHtml = '<div style="text-align: center; padding: 20px; font-style: italic; color: #ccc;">No upgrades purchased yet.</div>';
-                }
-
-                showModal("Upgrades", upgradesHtml, "window-upgrades");
+                    }
+                };
             }
-        };
+
+            const btnTrainerUpgrades = document.getElementById('btn-trainer-upgrades');
+            if (btnTrainerUpgrades) {
+                btnTrainerUpgrades.onclick = () => {
+                    if(!checkCombatLock()) {
+                        let upgradesHtml = '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 10px; padding: 10px;">';
+
+                        if (state.stats.upgrades) {
+                            const upgradeTypes = [
+                                { key: 'ballsTier', configKey: 'ballPocket' },
+                                { key: 'potionsTier', configKey: 'potionSatchel' },
+                                { key: 'boxTier', configKey: 'pokemonBox' },
+                                { key: 'glassTier', configKey: 'glass' },
+                                { key: 'smartwatchTier', configKey: 'smartwatch' },
+                                { key: 'speedTier', configKey: 'speed' },
+                                { key: 'lootTier', configKey: 'loot' }
+                            ];
+
+                            upgradeTypes.forEach(type => {
+                                const tier = state.stats.upgrades[type.key] || 0;
+                                if (tier > 0) {
+                                    // Show the currently purchased tier (index tier - 1)
+                                    const configItem = state.config.balance.expansions[type.configKey][tier - 1];
+                                    if (configItem) {
+                                        const displayName = configItem.displayName || configItem.name;
+                                        upgradesHtml += `
+                                            <div style="background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; padding: 10px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                                <img src="./Assets/Items/Upgrades/${configItem.name}.png" style="width: 50px; height: 50px; object-fit: contain; margin-bottom: 5px;" alt="${displayName}">
+                                                <div style="font-size: 12px; font-weight: bold; color: white; line-height: 1.1; word-wrap: break-word;">${displayName}</div>
+                                            </div>
+                                        `;
+                                    }
+                                }
+                            });
+                        }
+
+                        upgradesHtml += '</div>';
+
+                        if (upgradesHtml === '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 10px; padding: 10px;"></div>') {
+                            upgradesHtml = '<div style="text-align: center; padding: 20px; font-style: italic; color: #ccc;">No upgrades purchased yet.</div>';
+                        }
+
+                        const innerOverlay = document.getElementById('trainer-inner-modal-overlay');
+                        const innerTitle = document.getElementById('trainer-inner-modal-title');
+                        const innerContent = document.getElementById('trainer-inner-modal-content');
+                        if (innerOverlay && innerTitle && innerContent) {
+                            innerTitle.innerText = "Upgrades";
+                            innerContent.innerHTML = upgradesHtml;
+                            innerContent.style.setProperty('padding', '20px', 'important');
+                            innerOverlay.style.display = 'flex';
+                        }
+                    }
+                };
+            }
+        }, 0);
+    };
+
+    bindBtn('btn-stats', () => {
+        window.showTrainerStats();
     });
 
     bindBtn('btn-settings', () => {
