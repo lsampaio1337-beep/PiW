@@ -55,11 +55,7 @@ function updateActiveItemsUI() {
     const openType = (popup && popup.style.display === 'flex') ? popup.dataset.type : null;
 
     if (potionImg && potionCount && potionCard) {
-        if (openType) {
-            potionCard.style.border = (openType === 'potion') ? '2px solid #3498db' : '2px solid orange';
-        } else {
-            potionCard.style.border = '2px solid #3498db';
-        }
+        potionCard.style.border = '2px solid #3498db';
 
         if (state.settings.activePotionTier >= 0) {
             const potionName = state.config.balance.items.potions[state.settings.activePotionTier].name;
@@ -81,11 +77,7 @@ function updateActiveItemsUI() {
     const storageCard = document.getElementById('smartwatch-storage-card');
 
     if (storageImg && storageCount && storageOverlay && storageCard) {
-        if (openType) {
-            storageCard.style.border = '2px solid orange';
-        } else {
-            storageCard.style.border = '2px solid #3498db';
-        }
+        storageCard.style.border = '2px solid #3498db';
 
         const boxTier = state.stats?.upgrades?.boxTier || 0;
         storageImg.src = `./Assets/Items/Upgrades/Storage${Math.max(1, boxTier)}.png`;
@@ -112,11 +104,7 @@ function updateActiveItemsUI() {
     const ballCard = document.getElementById('smartwatch-ball-card');
 
     if (ballImg && ballCount && ballCard) {
-        if (openType) {
-            ballCard.style.border = (openType === 'ball') ? '2px solid #3498db' : '2px solid orange';
-        } else {
-            ballCard.style.border = '2px solid #3498db';
-        }
+        ballCard.style.border = '2px solid #3498db';
 
         if (state.settings.activeBallTier >= 0) {
             const ballName = state.config.balance.items.pokeballs[state.settings.activeBallTier].name;
