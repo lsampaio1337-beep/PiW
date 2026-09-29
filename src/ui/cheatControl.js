@@ -166,9 +166,9 @@ export function cheatAction(action) {
 
         // Find max tiers from balance config if available, otherwise set arbitrarily high
         const balance = state.config.balance.expansions || {};
-        const maxBallsTier = (balance.balls || []).length;
-        const maxPotionsTier = (balance.potions || []).length;
-        const maxBoxTier = (balance.box || []).length;
+        const maxBallsTier = (balance.ballPocket || []).length;
+        const maxPotionsTier = (balance.potionSatchel || []).length;
+        const maxBoxTier = (balance.pokemonBox || []).length;
         const maxGlassTier = (balance.glass || []).length;
         const maxSmartwatchTier = (balance.smartwatch || []).length;
         const maxSpeedTier = (balance.speed || []).length;

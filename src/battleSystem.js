@@ -657,8 +657,10 @@ class BattleSystem {
         if (tier < 0) return false;
 
         const potName = this.state.config.balance.items.potions[tier].name;
-        if (this.state.backpack.potions[potName] > 0) {
-            this.state.backpack.potions[potName]--;
+        if (this.state.settings.infiniteItems || this.state.backpack.potions[potName] > 0) {
+            if (!this.state.settings.infiniteItems) {
+                this.state.backpack.potions[potName]--;
+            }
             pokemon.currentHp = Math.min(pokemon.maxHp, pokemon.currentHp + this.state.config.balance.items.potions[tier].heal);
             return true;
         }
@@ -699,8 +701,10 @@ class BattleSystem {
             ballName = this.state.config.balance.items.pokeballs[tier].name;
 
             if (ballName !== "Safariball") {
-                if (this.state.backpack.pokeballs[ballName] > 0) {
-                    this.state.backpack.pokeballs[ballName]--;
+                if (this.state.settings.infiniteItems || this.state.backpack.pokeballs[ballName] > 0) {
+                    if (!this.state.settings.infiniteItems) {
+                        this.state.backpack.pokeballs[ballName]--;
+                    }
                 } else {
                     return { used: false, ballName: null, caught: false }; // No balls left
                 }
