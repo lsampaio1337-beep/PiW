@@ -1317,8 +1317,8 @@ function startGame() {
     });
 
     window.addEventListener('wheel', (e) => {
-        if (window.isDraggingPokemon && dragScrollTarget) {
-            let scrollNode = getScrollableParent(dragScrollTarget);
+        if (window.isDraggingPokemon) {
+            let scrollNode = getScrollableParent(dragScrollTarget) || cachedScrollNode;
             if (scrollNode) {
                 scrollNode.scrollTop += e.deltaY;
             }
@@ -1346,11 +1346,15 @@ function startGame() {
 
             // If mouse is near or beyond the top edge of the scroll container
             if (dragScrollY < rect.top + edgeSize) {
-                cachedScrollNode.scrollTop -= 15;
+                let speed = 15;
+                if (dragScrollY < rect.top) speed = 60; // 4x faster beyond border
+                cachedScrollNode.scrollTop -= speed;
             }
             // If mouse is near or beyond the bottom edge of the scroll container
             else if (dragScrollY > rect.bottom - edgeSize) {
-                cachedScrollNode.scrollTop += 15;
+                let speed = 15;
+                if (dragScrollY > rect.bottom) speed = 60; // 4x faster beyond border
+                cachedScrollNode.scrollTop += speed;
             }
         }
 
