@@ -238,9 +238,30 @@ document.addEventListener('click', (e) => {
 
 
 export function updateBattleArena() {
-    updateActiveItemsUI();
-
     const battleSystem = globals.battleSystem;
+
+    // Dynamic snapping logic
+    if (battleSystem) {
+        const elPlayerSpriteInner = document.getElementById('player-sprite-inner');
+        const elEnemySpriteInner = document.getElementById('enemy-sprite-inner');
+
+        if (elPlayerSpriteInner && battleSystem.playerActive) {
+            const isFlying = battleSystem.playerActive.types.includes('Flying');
+            elPlayerSpriteInner.style.bottom = isFlying ? 'auto' : '0';
+            elPlayerSpriteInner.style.top = isFlying ? '0' : 'auto';
+            elPlayerSpriteInner.style.right = '0';
+            elPlayerSpriteInner.style.left = 'auto';
+        }
+
+        if (elEnemySpriteInner && battleSystem.enemyActive) {
+            const isFlying = battleSystem.enemyActive.types.includes('Flying');
+            elEnemySpriteInner.style.bottom = isFlying ? 'auto' : '0';
+            elEnemySpriteInner.style.top = isFlying ? '0' : 'auto';
+            elEnemySpriteInner.style.left = '0';
+            elEnemySpriteInner.style.right = 'auto';
+        }
+    }
+    updateActiveItemsUI();
     const inGym = battleSystem && battleSystem.gymState && battleSystem.gymState.isActive;
     const inGymCombat = inGym && battleSystem.gymState.inCombat;
 
@@ -386,7 +407,7 @@ export function updateBattleArena() {
             const elSumIV = document.getElementById('enemy-info-sumiv');
 
             if (elEnemySprite && elEnemySide) {
-                elEnemySprite.src = `Assets/Pokemon Sprites/Natural/${enemy.qualityName === 'Shiny' ? enemy.id + '_shiny' : enemy.id}.png`;
+                elEnemySprite.src = `Assets/Pokemon Sprites/Clean/${enemy.qualityName === 'Shiny' ? enemy.id + '_shiny_Clean' : enemy.id + '_Clean'}.png`;
                 elEnemySprite.style.display = 'block';
                 applyWalkAnimations(enemy, true);
 
@@ -468,7 +489,7 @@ export function updateBattleArena() {
                 if (elPlayerSprite) {
                     let dittoBg = document.getElementById('player-sprite-ditto-bg');
                     if (dittoBg) dittoBg.style.display = 'none';
-                    elPlayerSprite.src = `Assets/Pokemon Sprites/Natural/${leader.qualityName === 'Shiny' ? (leader.transformedIntoId || leader.id) + '_shiny' : (leader.transformedIntoId || leader.id)}.png`;
+                    elPlayerSprite.src = `Assets/Pokemon Sprites/Clean/${leader.qualityName === 'Shiny' ? (leader.transformedIntoId || leader.id) + '_shiny_Clean' : (leader.transformedIntoId || leader.id) + '_Clean'}.png`;
                     elPlayerSprite.style.display = 'block';
                     applyWalkAnimations(leader, false);
 
@@ -556,7 +577,7 @@ export function updateBattleArena() {
                 if (elPlayerSprite) {
                     let dittoBg = document.getElementById('player-sprite-ditto-bg');
                     if (dittoBg) dittoBg.style.display = 'none';
-                    elPlayerSprite.src = `Assets/Pokemon Sprites/Natural/${leader.qualityName === 'Shiny' ? (leader.transformedIntoId || leader.id) + '_shiny' : (leader.transformedIntoId || leader.id)}.png`;
+                    elPlayerSprite.src = `Assets/Pokemon Sprites/Clean/${leader.qualityName === 'Shiny' ? (leader.transformedIntoId || leader.id) + '_shiny_Clean' : (leader.transformedIntoId || leader.id) + '_Clean'}.png`;
                     elPlayerSprite.style.display = 'block';
                     applyWalkAnimations(leader, false);
 
