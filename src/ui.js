@@ -507,19 +507,35 @@ window.showChallengesModal = function() {
     html += `</div>`;
 
     showModal("Progress Challenges", html, "window-challenges", "1000px");
-    const win = document.getElementById("window-challenges");
-    if (win) {
-        // We handle the max height natively in windowManager now, so remove the strict CSS limit
-        win.style.maxHeight = '';
 
-        if (window.windowManager) window.windowManager.setWindowProportions('window-challenges', 1.0);
+    // Test Fixes
+    showModal("Progress Challenges (Fix 1: Ratio 0.8)", html, "window-challenges-fix1", "1000px");
+    showModal("Progress Challenges (Fix 2: Ratio 1.25)", html, "window-challenges-fix2", "1000px");
+    showModal("Progress Challenges (Fix 3: Ratio 0.5)", html, "window-challenges-fix3", "1000px");
 
-        // Ensure the content container scrolls if it overflows
-        const contentContainer = win.querySelector('.window-content-container');
-        if (contentContainer) {
-            contentContainer.style.overflowY = 'auto';
+    const applyProps = (id, ratio, left, top) => {
+        const win = document.getElementById(id);
+        if (win) {
+            win.style.maxHeight = '';
+            if (window.windowManager) window.windowManager.setWindowProportions(id, ratio);
+
+            // Adjust position so they don't exactly overlap
+            win.style.left = left + 'px';
+            win.style.top = top + 'px';
+
+            const contentContainer = win.querySelector('.window-content-container');
+            if (contentContainer) {
+                contentContainer.style.overflowY = 'auto';
+            }
         }
-    }
+    };
+
+    setTimeout(() => {
+        applyProps("window-challenges", 1.0, 50, 50);
+        applyProps("window-challenges-fix1", 0.8, 100, 100);
+        applyProps("window-challenges-fix2", 1.25, 150, 150);
+        applyProps("window-challenges-fix3", 0.5, 200, 200);
+    }, 100);
 };
 window.dragOver = dragOver;
 window.handleDrop = handleDrop;
