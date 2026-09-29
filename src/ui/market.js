@@ -44,6 +44,8 @@ export function setupMarket(vCenter) {
         const btn = document.getElementById('btn-heal-all');
         const origText = btn.textContent;
         btn.textContent = 'Healed!';
+        if (typeof window.trackDailyChallenge === 'function') window.trackDailyChallenge('heal_center', { amount: 1 });
+        if (typeof window.resetDailyChallengeProgress === 'function') window.resetDailyChallengeProgress('defeat_endurance');
         setTimeout(() => btn.textContent = origText, 1000);
     });
 

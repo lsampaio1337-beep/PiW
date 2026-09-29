@@ -225,6 +225,7 @@ export function evolvePokemon(location, idx, toId) {
     }
 
     alert(`${p.name} evolved into ${newBase.name}!`);
+    if (typeof window.trackDailyChallenge === 'function') window.trackDailyChallenge('evolve_pokemon', { amount: 1 });
     document.getElementById('modal-overlay').style.display = 'none'; // Close modal
 
     updateUI();

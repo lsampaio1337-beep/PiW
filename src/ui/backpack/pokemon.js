@@ -416,6 +416,7 @@ export function handleDrop(event, targetCol) {
             // Check breeding criteria
             if (currentP.id !== p.id || Math.abs(currentP.quality - p.quality) > 0.001) {
                 // Fails criteria -> simple swap
+                if (typeof window.resetDailyChallengeProgress === 'function') window.resetDailyChallengeProgress('defeat_endurance');
                 displacedPokemon = currentP;
                 state.breeding[0] = p;
                 if (state.dayCareRef) {
@@ -460,6 +461,7 @@ export function handleDrop(event, targetCol) {
     }
 
     // --- Phase 3: Handle displaced (swapped) pokemon ---
+    if (typeof window.resetDailyChallengeProgress === 'function') window.resetDailyChallengeProgress('defeat_endurance');
     if (displacedPokemon) {
         if (sCol === 'party') {
             state.party.splice(index, 0, displacedPokemon);

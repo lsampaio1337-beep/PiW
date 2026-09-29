@@ -86,7 +86,7 @@ const CHALLENGE_DEFS = {
         { id: 10, text: "Gotta Catch 'Em All: Catch $ different species of Pokémon today.", getTarget: () => 2, type: 'catch_different_species', condition: () => Object.keys(state.stats.caughtSpecies || {}).length < 148 },
         { id: 11, text: "Rare: Catch $ Rare Pokémon.", getTarget: () => 2 + state.trainer.badges, type: 'catch_rare' },
         { id: 12, text: "Weak: Catch $ Weak Pokémon.", getTarget: () => 2 + state.trainer.badges, type: 'catch_weak' },
-        { id: 13, text: "Specific Species: Catch $ of a specific species.", getTarget: () => Math.max(5, (state.stats.newRoutes ? state.stats.newRoutes.length : 1)), type: 'catch_species' },
+        { id: 13, text: "Specific Species: Catch $ #.", getTarget: () => Math.max(5, (state.stats.newRoutes ? state.stats.newRoutes.length : 1)), type: 'catch_species', getExtra: () => getRandomUnlockedSpecies() },
         { id: 14, text: "Type Enthusiast: Catch $ # type Pokémon.", getTarget: () => 5 + (state.trainer.badges * 2), type: 'catch_type', getExtra: () => getRandomUnlockedType() },
         { id: 15, text: "Level Grinder: Catch $ Pokémon above level #.", getTarget: () => 5, getExtra: () => Math.floor((state.stats.highestLevelCaptured || 1) * 0.9), type: 'catch_level' }
     ],
@@ -112,6 +112,24 @@ const CHALLENGE_DEFS = {
         { id: 30, text: "Lucky Spinner: See 1 Shiny Pokémon in the Casino.", getTarget: () => 1, type: 'casino_shiny', condition: () => state.stats.newRoutes && state.stats.newRoutes.includes('Casino') }
     ]
 };
+
+
+function getRandomUnlockedSpecies() {
+    let speciesList = [];
+    if (!state.stats.newRoutes || state.stats.newRoutes.length === 0) {
+        let r0 = state.config.unlocks['Route 1'];
+        if(r0 && r0.pokemon) speciesList.push(...r0.pokemon.map(p => p.name));
+    } else {
+        for (let route of state.stats.newRoutes) {
+            let unlock = state.config.unlocks[route];
+            if (unlock && unlock.pokemon) {
+                speciesList.push(...unlock.pokemon.map(p => p.name));
+            }
+        }
+    }
+    if (speciesList.length === 0) return "Pidgey"; // fallback
+    return speciesList[Math.floor(Math.random() * speciesList.length)];
+}
 
 function getValidChallenge(challengeList, rotationIndex) {
     let originalIdx = rotationIndex % challengeList.length;
@@ -144,8 +162,9 @@ function generateActiveChallenges() {
     for (let c of group) {
         let target = c.getTarget();
         let text = c.text.replace('$', target);
-        if (c.getExtra) {
-            text = text.replace('#', c.getExtra());
+        let extraVal = c.getExtra ? c.getExtra() : null;
+        if (extraVal !== null) {
+            text = text.replace('#', extraVal);
         }
         active.push({
             id: c.id,
@@ -154,7 +173,7 @@ function generateActiveChallenges() {
             progress: 0,
             completed: false,
             text: text,
-            extra: c.getExtra ? c.getExtra() : null
+            extra: extraVal
         });
     }
 
@@ -267,24 +286,32 @@ window.trackDailyChallenge = function(type, data = {}) {
                 }
                 state.stats.dailyChallenges.caughtSpecies.push(data.species);
             }
-            if (type === 'sell_pokemon' && data.count !== undefined) {
-                increment = data.count;
+
+            // Missing checks addition
+            if (type === 'defeat_underdog' && data.level !== undefined && data.playerLevel !== undefined) {
+                if (data.playerLevel > data.level - 5) continue; // Player must be at least 5 levels lower
             }
-            if (type === 'earn_money' && data.amount !== undefined) {
-                increment = data.amount;
+            if (type === 'catch_species') {
+                // Assuming c.extra holds the target species name, we only increment if it matches
+                                if (!data.species || (c.extra && data.species !== c.extra)) continue;
             }
-            if (type === 'spend_balls' && data.amount !== undefined) {
-                increment = data.amount;
-            }
-            if (type === 'spend_potions' && data.amount !== undefined) {
-                increment = data.amount;
-            }
-            if (type === 'gain_levels' && data.amount !== undefined) {
-                increment = data.amount;
-            }
-            if (type === 'sleep_minutes' && data.amount !== undefined) {
-                increment = data.amount;
-            }
+
+            // Value-based increments
+            if (type === 'sell_pokemon' && data.count !== undefined) increment = data.count;
+            if (type === 'earn_money' && data.amount !== undefined) increment = data.amount;
+            if (type === 'spend_balls' && data.amount !== undefined) increment = data.amount;
+            if (type === 'spend_potions' && data.amount !== undefined) increment = data.amount;
+            if (type === 'gain_levels' && data.amount !== undefined) increment = data.amount;
+            if (type === 'sleep_minutes' && data.amount !== undefined) increment = data.amount;
+            if (type === 'gain_exp' && data.amount !== undefined) increment = data.amount;
+            if (type === 'daycare_iv' && data.amount !== undefined) increment = data.amount;
+            if (type === 'evolve_pokemon' && data.amount !== undefined) increment = data.amount;
+            if (type === 'hatch_eggs' && data.amount !== undefined) increment = data.amount;
+            if (type === 'heal_center' && data.amount !== undefined) increment = data.amount;
+            if (type === 'safari_catch' && data.amount !== undefined) increment = data.amount;
+            if (type === 'casino_catch' && data.amount !== undefined) increment = data.amount;
+            if (type === 'catch_rare' && data.amount !== undefined) increment = data.amount;
+            if (type === 'catch_weak' && data.amount !== undefined) increment = data.amount;
 
             c.progress += increment;
             if (c.progress >= c.target) {
@@ -298,4 +325,19 @@ window.trackDailyChallenge = function(type, data = {}) {
 }
 export function trackDailyChallenge(type, data = {}) {
     window.trackDailyChallenge(type, data);
+}
+
+
+window.resetDailyChallengeProgress = function(type) {
+    if (!state.stats.dailyChallenges || !state.stats.dailyChallenges.active) return;
+    let active = state.stats.dailyChallenges.active;
+    for (let c of active) {
+        if (!c.completed && c.type === type) {
+            c.progress = 0;
+            if (typeof window.showCalendar === 'function') window.showCalendar();
+        }
+    }
+}
+export function resetDailyChallengeProgress(type) {
+    window.resetDailyChallengeProgress(type);
 }
