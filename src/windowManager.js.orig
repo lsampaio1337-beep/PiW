@@ -208,7 +208,7 @@ export class WindowManager {
 
             // To find the unscaled content height without removing scaling which causes flicker/warp,
             // we can temporarily reset width to original, height to auto, and transform to none.
-            const currentWidth = winElement.style.width; // Use explicit style width to avoid border/padding accumulation
+            const currentWidth = winElement.offsetWidth;
 
             let contentContainer = winElement.querySelector('.window-content-container');
             let horizontalPadding = 0;
@@ -219,8 +219,7 @@ export class WindowManager {
                 verticalPadding = parseFloat(style.paddingTop || 0) + parseFloat(style.paddingBottom || 0);
             }
 
-            const parsedCurrentWidth = currentWidth && currentWidth.endsWith('px') ? parseFloat(currentWidth) : winElement.offsetWidth;
-            const currentScale = (parsedCurrentWidth - horizontalPadding) / winElement._originalWidth;
+            const currentScale = (currentWidth - horizontalPadding) / winElement._originalWidth;
 
             // Stop auto-adjusting if user has resized manually, indicated by --original-width being set or manual interaction
             // To be safe, if we are in adjustHeightForNewContent, we only adjust height, not width.
@@ -272,7 +271,7 @@ export class WindowManager {
                 scalerElement.style.height = winElement._originalHeight + 'px';
                 scalerElement.style.transform = `scale(${currentScale})`;
 
-                winElement.style.width = parsedCurrentWidth + 'px';
+                winElement.style.width = currentWidth + 'px';
                 winElement.style.height = newHeight + 'px';
 
                 if (this.windows.includes(winElement)) {
