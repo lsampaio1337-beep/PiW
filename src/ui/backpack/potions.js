@@ -11,7 +11,7 @@ export function renderPotionsTab(area) {
                     Auto-Heal Threshold: <span id="potion-threshold-val">${state.settings.autoPotionThreshold}%</span>
                 </label>
                 <div style="position: relative; width: 100%;">
-                    <input type="range" min="0" max="100" value="${state.settings.autoPotionThreshold}" id="potion-threshold-slider"
+                    <input type="range" min="1" max="100" value="${state.settings.autoPotionThreshold}" id="potion-threshold-slider"
                         oninput="
                             let val = parseInt(this.value);
                             if (val > 90) { val = 90; this.value = 90; }

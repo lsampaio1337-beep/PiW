@@ -1622,7 +1622,7 @@ async function init() {
 
                     // Fallback for older saves
                     if (state.settings.autoPotionThreshold === undefined) {
-                        state.settings.autoPotionThreshold = 50;
+                        state.settings.autoPotionThreshold = 25;
                     }
 
                     // Handle backwards compatibility for challenges

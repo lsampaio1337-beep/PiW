@@ -235,7 +235,7 @@ class BattleSystem {
         // Out of combat insta-heal if threshold is met
         const leader = this.state.party[0];
         if (leader && leader.currentHp > 0 && this.state.settings.autoPotion) {
-            let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 50;
+            let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 25;
             while ((leader.currentHp / leader.maxHp) * 100 <= threshold) {
                 if (!this.tryUsePotion(leader)) break; // Stop if no potions left
             }
@@ -562,7 +562,7 @@ class BattleSystem {
         // Check if player uses potion
         if (attacker === leader && this.state.settings.autoPotion) {
             // Check if we hit the threshold
-            let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 50;
+            let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 25;
             let hpPercentage = (attacker.currentHp / attacker.maxHp) * 100;
 
             if (hpPercentage <= threshold) {
@@ -650,7 +650,7 @@ class BattleSystem {
 
         if (pokemon.currentHp >= pokemon.maxHp) return false; // don't heal if full
 
-        let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 50;
+        let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 25;
         if ((pokemon.currentHp / pokemon.maxHp) * 100 > threshold) return false;
 
         let tier = this.state.settings.activePotionTier;
@@ -744,7 +744,7 @@ class BattleSystem {
 
         // Out of combat insta-heal if threshold is met
         if (leader && leader.currentHp > 0 && this.state.settings.autoPotion) {
-            let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 50;
+            let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 25;
             while ((leader.currentHp / leader.maxHp) * 100 <= threshold) {
                 if (!this.tryUsePotion(leader)) break;
             }
@@ -1480,7 +1480,7 @@ class BattleSystem {
 
             const executeSimulatedTurn = (attacker, defender, isLeader) => {
                 if (isLeader && this.state.settings.autoPotion) {
-                    let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 50;
+                    let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 25;
                     let hpPercentage = (attacker.currentHp / attacker.maxHp) * 100;
 
                     if (hpPercentage <= threshold) {
@@ -1534,7 +1534,7 @@ class BattleSystem {
             if (leader.currentHp > 0) {
                 // Out of combat insta-heal if threshold is met, identical to handleEnemyDefeat
                 if (this.state.settings.autoPotion) {
-                    let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 50;
+                    let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 25;
                     while ((leader.currentHp / leader.maxHp) * 100 <= threshold) {
                         if (!this.tryUsePotion(leader)) break;
                     }

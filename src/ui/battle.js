@@ -119,6 +119,17 @@ function updateActiveItemsUI() {
             ballCount.style.display = 'none';
         }
     }
+
+    const thresholdCard = document.getElementById('smartwatch-threshold-card');
+    const thresholdVal = document.getElementById('smartwatch-threshold-val');
+    if (thresholdCard && thresholdVal) {
+        thresholdVal.textContent = state.settings.autoPotionThreshold + '%';
+        if (openType === 'threshold') {
+            thresholdCard.style.border = '2px solid orange';
+        } else {
+            thresholdCard.style.border = '2px solid #3498db';
+        }
+    }
 }
 
 function formatActiveItemQuantity(q) {
@@ -193,8 +204,34 @@ window.showActiveItemSelection = function(type) {
 
         // Add Pokedex icon for Smart Capture Mode
         html += `
-            <div onclick="window.showSmartCaptureMode(); document.getElementById('smartwatch-item-selection-popup').style.display = 'none';" style="width: 30px; height: 30px; background: rgba(0, 0, 0, 0.6); border: 2px solid orange; border-radius: 8px; position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer;" title="Smart Capture Mode">
+            <div onclick="window.showSmartCaptureMode(); document.getElementById('smartwatch-item-selection-popup').style.display = 'none';" style="width: 30px; height: 30px; background: rgba(0, 0, 0, 0.6); border: 2px solid #3498db; border-radius: 8px; position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer;" title="Smart Capture Mode">
                 <img src="./Assets/Extra/IconPokedex.png" style="width: 80%; height: 80%; object-fit: contain;">
+            </div>
+        `;
+    } else if (type === 'threshold') {
+        html += `
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 5px; width: 120px;">
+                <label style="color: white; font-size: 10px; margin-bottom: 8px; font-weight: bold;">
+                    Auto-Heal: <span id="smartwatch-popup-threshold-val">${state.settings.autoPotionThreshold}%</span>
+                </label>
+                <div style="position: relative; width: 100%; height: 16px; display: flex; align-items: center;">
+                    <input type="range" min="1" max="100" value="${state.settings.autoPotionThreshold}" id="smartwatch-popup-threshold-slider"
+                        oninput="
+                            let val = parseInt(this.value);
+                            if (val > 90) { val = 90; this.value = 90; }
+                            document.getElementById('smartwatch-popup-threshold-val').innerText = val + '%';
+                            if (typeof window.setAutoPotionThreshold === 'function') window.setAutoPotionThreshold(val);
+                            document.getElementById('smartwatch-threshold-val').textContent = val + '%';
+                        "
+                        style="width: 100%; cursor: pointer; position: relative; z-index: 2; background: transparent; accent-color: #2ecc71; margin: 0;"
+                    >
+                    <!-- Background bar to show locked zone -->
+                    <div style="position: absolute; top: 50%; left: 0; width: 100%; height: 4px; transform: translateY(-50%); background: #555; border-radius: 2px; z-index: 1; pointer-events: none;">
+                        <div style="position: absolute; top: 0; left: 90%; width: 10%; height: 100%; background: #e74c3c; border-radius: 0 2px 2px 0;"></div>
+                    </div>
+                    <!-- 90% Marker Ball -->
+                    <div style="position: absolute; top: 50%; left: 90%; transform: translate(-50%, -50%); width: 10px; height: 10px; background: #e74c3c; border-radius: 50%; z-index: 3; pointer-events: none; box-shadow: 0 0 2px rgba(0,0,0,0.5);"></div>
+                </div>
             </div>
         `;
     }
@@ -230,7 +267,12 @@ document.addEventListener('click', (e) => {
     if (popup && popup.style.display === 'flex') {
         const potionBtn = document.getElementById('smartwatch-potion-card');
         const ballBtn = document.getElementById('smartwatch-ball-card');
-        if (!popup.contains(e.target) && (!potionBtn || !potionBtn.contains(e.target)) && (!ballBtn || !ballBtn.contains(e.target))) {
+        const thresholdBtn = document.getElementById('smartwatch-threshold-card');
+
+        if (!popup.contains(e.target) &&
+            (!potionBtn || !potionBtn.contains(e.target)) &&
+            (!ballBtn || !ballBtn.contains(e.target)) &&
+            (!thresholdBtn || !thresholdBtn.contains(e.target))) {
             popup.style.display = 'none';
         }
     }
