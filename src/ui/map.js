@@ -436,8 +436,27 @@ export function showMapTooltip(e, locationName) {
 
     // Fix tooltip positioning by using fixed position for the tooltip to avoid offset issues
     tooltip.style.position = 'fixed';
-    tooltip.style.left = (e.clientX + 15) + 'px';
-    tooltip.style.top = (e.clientY + 15) + 'px';
+
+    // Get tooltip dimensions
+    const rect = tooltip.getBoundingClientRect();
+
+    let leftPos = e.clientX + 15;
+    let topPos = e.clientY + 15;
+
+    // Clamp to window boundaries
+    if (leftPos + rect.width > window.innerWidth) {
+        leftPos = e.clientX - rect.width - 15;
+    }
+    if (topPos + rect.height > window.innerHeight) {
+        topPos = e.clientY - rect.height - 15;
+    }
+
+    // Ensure it doesn't go off the top or left edges either
+    leftPos = Math.max(0, leftPos);
+    topPos = Math.max(0, topPos);
+
+    tooltip.style.left = leftPos + 'px';
+    tooltip.style.top = topPos + 'px';
 }
 
 export function hideMapTooltip() {
