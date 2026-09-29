@@ -383,26 +383,31 @@ export function updateBattleArena() {
 
             const elEnemySide = document.getElementById('enemy-side');
 
+            const enemySpriteWrapper = document.getElementById('enemy-sprite-wrapper');
+            const enemyPokemonSprite = document.getElementById('enemy-pokemon-sprite');
+            if (enemySpriteWrapper && enemyPokemonSprite) {
+                let enemyId = enemy.isDisguisedDitto ? 132 : enemy.id;
+                let spriteSuffix = enemy.qualityName === 'Shiny' ? '_shiny_Clean.png' : '_Clean.png';
+                enemyPokemonSprite.src = `Assets/Pokemon Sprites/Clean/${enemyId}${spriteSuffix}`;
+
+                const isFlying = enemy.types && (enemy.types.includes('Flying') || enemy.types.includes('Wind'));
+                enemySpriteWrapper.style.justifyContent = isFlying ? 'flex-start' : 'flex-end';
+                enemySpriteWrapper.style.alignItems = 'flex-start';
+                enemyPokemonSprite.style.transform = 'none';
+            }
+
             if (elEnemySide) {
                 if (battleSystem.isSliding) {
                     if (elEnemySide.dataset.sliding !== 'true') {
                         elEnemySide.dataset.sliding = 'true';
                         elEnemySide.style.transition = 'none';
                         elEnemySide.style.left = '100%';
-                        if (hpContainerEnemy) {
-                            hpContainerEnemy.style.transition = 'none';
-                            hpContainerEnemy.style.left = '100%';
-                        }
                         // Trigger reflow
                         void elEnemySide.offsetWidth;
                         requestAnimationFrame(() => {
                             requestAnimationFrame(() => {
                                 elEnemySide.style.transition = `left ${battleSystem.slideDuration}ms linear`;
                                 elEnemySide.style.left = '35%';
-                                if (hpContainerEnemy) {
-                                    hpContainerEnemy.style.transition = `left ${battleSystem.slideDuration}ms linear`;
-                                    hpContainerEnemy.style.left = '35%';
-                                }
                             });
                         });
                     }
@@ -410,16 +415,24 @@ export function updateBattleArena() {
                     elEnemySide.dataset.sliding = 'false';
                     elEnemySide.style.transition = 'none';
                     elEnemySide.style.left = '35%';
-                    if (hpContainerEnemy) {
-                        hpContainerEnemy.style.transition = 'none';
-                        hpContainerEnemy.style.left = '35%';
-                    }
                 }
             }
 
             const leader = state.party[0];
             const elPlayerSide = document.getElementById('player-side');
             if (leader && elPlayerSide) {
+                const playerSpriteWrapper = document.getElementById('player-sprite-wrapper');
+                const playerPokemonSprite = document.getElementById('player-pokemon-sprite');
+                if (playerSpriteWrapper && playerPokemonSprite) {
+                    let spriteSuffix = leader.qualityName === 'Shiny' ? '_shiny_Clean.png' : '_Clean.png';
+                    playerPokemonSprite.src = `Assets/Pokemon Sprites/Clean/${leader.id}${spriteSuffix}`;
+
+                    const isFlying = leader.types && (leader.types.includes('Flying') || leader.types.includes('Wind'));
+                    playerSpriteWrapper.style.justifyContent = isFlying ? 'flex-start' : 'flex-end';
+                    playerSpriteWrapper.style.alignItems = 'flex-end';
+                    playerPokemonSprite.style.transform = 'scaleX(-1)';
+                }
+
                 const hpContainerPlayer = document.getElementById('player-battle-hp-container');
                 const hpBarPlayer = document.getElementById('player-battle-hp-bar');
                 const hpTextPlayer = document.getElementById('player-battle-hp-text');
@@ -459,16 +472,23 @@ export function updateBattleArena() {
                 elEnemySide.style.transition = 'none';
                 elEnemySide.style.left = '100%';
                 elEnemySide.style.opacity = '1';
-
-                if (hpContainerEnemy) {
-                    hpContainerEnemy.style.transition = 'none';
-                    hpContainerEnemy.style.left = '100%';
-                }
             }
 
             const leader = state.party[0];
             const elPlayerSide = document.getElementById('player-side');
             if (leader && elPlayerSide) {
+                const playerSpriteWrapper = document.getElementById('player-sprite-wrapper');
+                const playerPokemonSprite = document.getElementById('player-pokemon-sprite');
+                if (playerSpriteWrapper && playerPokemonSprite) {
+                    let spriteSuffix = leader.qualityName === 'Shiny' ? '_shiny_Clean.png' : '_Clean.png';
+                    playerPokemonSprite.src = `Assets/Pokemon Sprites/Clean/${leader.id}${spriteSuffix}`;
+
+                    const isFlying = leader.types && (leader.types.includes('Flying') || leader.types.includes('Wind'));
+                    playerSpriteWrapper.style.justifyContent = isFlying ? 'flex-start' : 'flex-end';
+                    playerSpriteWrapper.style.alignItems = 'flex-end';
+                    playerPokemonSprite.style.transform = 'scaleX(-1)';
+                }
+
                 const hpContainerPlayer = document.getElementById('player-battle-hp-container');
                 const hpBarPlayer = document.getElementById('player-battle-hp-bar');
                 const hpTextPlayer = document.getElementById('player-battle-hp-text');

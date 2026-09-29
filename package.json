@@ -46,5 +46,10 @@
       "electron-winstaller",
       "electron-squirrel-startup"
     ]
-  }
+  },
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/lsampaio1337-beep/PiW/issues"
+  },
+  "homepage": "https://github.com/lsampaio1337-beep/PiW#readme"
 }
