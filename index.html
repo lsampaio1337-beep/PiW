@@ -173,36 +173,11 @@
       <div id="view-battle-arena" class="game-view" style="display:none;">
         <div id="combat-arena" style="background-image: url('./Assets/BG/BG.png');">
           <div id="battle-sprites-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;">
-            <div id="enemy-side" style="position: absolute; transform: translate(-50%, -50%); top: 50%; left: 75%; display: flex; align-items: center;">
-              <div id="enemy-anim-container" class="sprite-anim-container">
-                <img id="enemy-sprite" src="" alt="Enemy Sprite">
-                <div id="enemy-water-bubbles" class="water-bubbles">
-                  <div class="bubble c1"></div>
-                  <div class="bubble c2"></div>
-                  <div class="bubble c3"></div>
-                  <div class="bubble c4"></div>
-                  <div class="bubble c5"></div>
-                  <div class="bubble c6"></div>
-                </div>
-                <div id="enemy-info-container" style="display: none; position: absolute; left: 100%; top: 50%; transform: translateY(-50%); flex-direction: column; gap: 4px; margin-left: 10px; font-family: monospace; font-size: clamp(10px, 1.2vw, 14px); color: white; text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000; z-index: 10;">
-                  <div id="enemy-info-level" style="background: rgba(0, 0, 0, 0.5); padding: 2px 6px; border-radius: 4px;">Lv. ?</div>
-                  <div id="enemy-info-quality" style="background: rgba(0, 0, 0, 0.5); padding: 2px 6px; border-radius: 4px;">Q=?</div>
-                  <div id="enemy-info-sumiv" style="background: rgba(0, 0, 0, 0.5); padding: 2px 6px; border-radius: 4px;">SumIV=?</div>
-                </div>
-              </div>
+            <div id="enemy-side" style="position: absolute; bottom: 20%; left: 100%; display: flex; align-items: center; width: max-content; height: max-content;">
+              <img src="Assets/Pokemon Sprites/Extra/FrameBorder.png" style="width: 96px; height: 96px;" alt="Enemy Frame">
             </div>
-            <div id="player-side" style="position: absolute; transform: translate(-50%, -50%); top: 50%; left: 25%;">
-              <div id="player-anim-container" class="sprite-anim-container">
-                <img id="player-sprite" src="" alt="Player Sprite">
-                <div id="player-water-bubbles" class="water-bubbles">
-                  <div class="bubble c1"></div>
-                  <div class="bubble c2"></div>
-                  <div class="bubble c3"></div>
-                  <div class="bubble c4"></div>
-                  <div class="bubble c5"></div>
-                  <div class="bubble c6"></div>
-                </div>
-              </div>
+            <div id="player-side" style="position: absolute; bottom: 20%; left: 25%; transform: translateX(-100%); display: flex; align-items: center; width: max-content; height: max-content;">
+              <img src="Assets/Pokemon Sprites/Extra/FrameBorder.png" style="width: 96px; height: 96px;" alt="Player Frame">
             </div>
           </div>
 
