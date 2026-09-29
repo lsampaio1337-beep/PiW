@@ -419,7 +419,7 @@ export function updateBattleArena() {
                     elSumIV.innerText = `SumIV=${sumIV}`;
                 }
 
-                elEnemySide.style.top = '50%';
+                elEnemySide.style.top = '80%';
                 elEnemySide.style.bottom = 'auto';
 
                 if (battleSystem.isSliding) {
@@ -459,7 +459,7 @@ export function updateBattleArena() {
             const elPlayerSide = document.getElementById('player-side');
             if (leader && elPlayerSide) {
 
-                elPlayerSide.style.top = '50%';
+                elPlayerSide.style.top = '80%';
                 elPlayerSide.style.bottom = 'auto';
                 elPlayerSide.style.left = '25%';
 
@@ -531,7 +531,7 @@ export function updateBattleArena() {
                 elEnemySprite.style.display = 'block';
                 elEnemySide.style.transition = 'none';
                 elEnemySide.style.left = '35%'; // Matching active battle destination
-                elEnemySide.style.top = '50%';
+                elEnemySide.style.top = '80%';
                 elEnemySide.style.bottom = 'auto';
 
                 const elEnemyInfo = document.getElementById('enemy-info-container');
@@ -547,7 +547,7 @@ export function updateBattleArena() {
             const elPlayerSide = document.getElementById('player-side');
             if (leader && elPlayerSide) {
 
-                elPlayerSide.style.top = '50%';
+                elPlayerSide.style.top = '80%';
                 elPlayerSide.style.bottom = 'auto';
                 elPlayerSide.style.left = '25%';
 
