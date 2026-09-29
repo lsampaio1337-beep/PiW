@@ -88,8 +88,12 @@ window.clearPokemonBreedFilter = function() {
 };
 
 window.clickEmptyBreedSlot = function() {
-    window.clearPokemonBreedFilter();
-    window.pokemonFilters.breedableOnly = true;
+    if (window.pokemonFilters.breedableOnly) {
+        window.clearPokemonBreedFilter();
+    } else {
+        window.clearPokemonBreedFilter();
+        window.pokemonFilters.breedableOnly = true;
+    }
     renderBackpackTab('pokemon');
 };
 
@@ -168,7 +172,11 @@ export function renderPokemonTab(area) {
         } else {
             let label = i < 6 ? `Party #${i+1}` : (i === 6 ? 'To Breed' : 'To Train');
             let dropTarget = i < 6 ? 'party' : (i === 6 ? 'breeding' : 'training');
-            let extraAttrs = (i === 6) ? `onclick="window.clickEmptyBreedSlot()" style="border: 1px dashed #777; aspect-ratio: 1 / 1.5; display: flex; align-items: center; justify-content: center; container-type: inline-size; color: #777; box-sizing: border-box; cursor: pointer;"` : `style="border: 1px dashed #777; aspect-ratio: 1 / 1.5; display: flex; align-items: center; justify-content: center; container-type: inline-size; color: #777; box-sizing: border-box;"`;
+            let activeBreedStyle = '';
+            if (i === 6 && window.pokemonFilters.breedableOnly) {
+                activeBreedStyle = ' border: 2px solid #00ff00; background: rgba(0, 255, 0, 0.2); font-weight: bold; color: #fff;';
+            }
+            let extraAttrs = (i === 6) ? `onclick="window.clickEmptyBreedSlot()" style="border: 1px dashed #777; aspect-ratio: 1 / 1.5; display: flex; align-items: center; justify-content: center; container-type: inline-size; color: #777; box-sizing: border-box; cursor: pointer;${activeBreedStyle}"` : `style="border: 1px dashed #777; aspect-ratio: 1 / 1.5; display: flex; align-items: center; justify-content: center; container-type: inline-size; color: #777; box-sizing: border-box;"`;
             content += `<div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, '${dropTarget}')" ${extraAttrs}><span style="font-size: 15cqw; text-align: center;">${label}</span></div>`;
         }
     }
@@ -310,13 +318,21 @@ window.applyPokemonFilters = function() {
         return true;
     };
 
+    const displayedBreedableKeys = new Set();
+
     // Filter Storage
     const storageSlots = document.querySelectorAll('.pokemon-storage-slot');
     storageSlots.forEach(slot => {
         const uuid = slot.getAttribute('data-uuid');
         const p = state.storage.find(x => x.uuid === uuid);
         if (p) {
-            slot.style.display = filterFn(p) ? 'flex' : 'none';
+            let show = filterFn(p);
+            if (show && filters.breedableOnly) {
+                const key = p.id + '_' + p.quality.toFixed(2);
+                if (displayedBreedableKeys.has(key)) show = false;
+                else displayedBreedableKeys.add(key);
+            }
+            slot.style.display = show ? 'flex' : 'none';
         }
     });
 
@@ -326,7 +342,13 @@ window.applyPokemonFilters = function() {
         const uuid = slot.getAttribute('data-uuid');
         const p = state.safe.find(x => x.uuid === uuid);
         if (p) {
-            slot.style.display = filterFn(p) ? 'flex' : 'none';
+            let show = filterFn(p);
+            if (show && filters.breedableOnly) {
+                const key = p.id + '_' + p.quality.toFixed(2);
+                if (displayedBreedableKeys.has(key)) show = false;
+                else displayedBreedableKeys.add(key);
+            }
+            slot.style.display = show ? 'flex' : 'none';
         }
     });
 };
@@ -484,17 +506,62 @@ export function handleDrop(event, targetCol) {
                 if (window.clearPokemonBreedFilter) window.clearPokemonBreedFilter();
             }
         } else {
-            state.breeding.push(p);
-            if (state.dayCareRef) {
-                state.dayCareRef.slot1.pokemon = p;
-                state.dayCareRef.slot1.battles = 0;
-                state.dayCareRef.slot1.isBreeding = false;
-                state.dayCareRef.slot1.isFinished = false;
+            // Try to auto-start breeding if a pair exists in storage/safe/party
+            let partner = null;
+            let partnerIndex = -1;
+            let partnerCol = null;
+
+            const findPartner = (arr, colName) => {
+                for (let i = 0; i < arr.length; i++) {
+                    const candidate = arr[i];
+                    // Must have same ID, identical Q (Math.abs < 0.001), Q < 1.99, and not be the dragged pokemon itself
+                    if (candidate.uuid !== p.uuid && candidate.id === p.id && Math.abs(candidate.quality - p.quality) <= 0.001 && candidate.quality < 1.99) {
+                        partner = candidate;
+                        partnerIndex = i;
+                        partnerCol = colName;
+                        return true;
+                    }
+                }
+                return false;
+            };
+
+            if (!findPartner(state.storage, 'storage')) {
+                if (!findPartner(state.safe, 'safe')) {
+                    findPartner(state.party, 'party');
+                }
             }
-            if (window.clearPokemonBreedFilter) window.clearPokemonBreedFilter();
-            window.pokemonFilters.name = p.name;
-            window.pokemonFilters.minQ = p.quality.toFixed(2);
-            window.pokemonFilters.maxQ = p.quality.toFixed(2);
+
+            if (partner) {
+                // Remove partner from its source collection
+                if (partnerCol === 'storage') state.storage.splice(partnerIndex, 1);
+                else if (partnerCol === 'safe') state.safe.splice(partnerIndex, 1);
+                else if (partnerCol === 'party') state.party.splice(partnerIndex, 1);
+
+                const sumIV1 = partner.ivs.hp + partner.ivs.atk + partner.ivs.def + partner.ivs.spa + partner.ivs.spd + partner.ivs.spe;
+                const sumIV2 = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
+                const keptParent = (sumIV2 > sumIV1) ? p : partner;
+
+                state.breeding.push(keptParent);
+                if (state.dayCareRef) {
+                    state.dayCareRef.slot1.pokemon = keptParent;
+                    state.dayCareRef.slot1.battles = 0;
+                    state.dayCareRef.slot1.isBreeding = true;
+                    state.dayCareRef.slot1.isFinished = false;
+                }
+                if (window.clearPokemonBreedFilter) window.clearPokemonBreedFilter();
+            } else {
+                state.breeding.push(p);
+                if (state.dayCareRef) {
+                    state.dayCareRef.slot1.pokemon = p;
+                    state.dayCareRef.slot1.battles = 0;
+                    state.dayCareRef.slot1.isBreeding = false;
+                    state.dayCareRef.slot1.isFinished = false;
+                }
+                if (window.clearPokemonBreedFilter) window.clearPokemonBreedFilter();
+                window.pokemonFilters.name = p.name;
+                window.pokemonFilters.minQ = p.quality.toFixed(2);
+                window.pokemonFilters.maxQ = p.quality.toFixed(2);
+            }
         }
     }
 
