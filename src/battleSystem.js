@@ -1454,20 +1454,29 @@ class BattleSystem {
                 moves: this.getLearnsetMoves(pokemonBase, level)
             };
 
-            // Estimate search time
-            let searchTime = 5000;
             let leaderSpe = leader.currentStats ? leader.currentStats.spe : 10;
             let enemySpe = this.activeEncounter.currentStats ? this.activeEncounter.currentStats.spe : 10;
 
-            // Adjust search time based on leader speed
-            searchTime = Math.max(500, searchTime * (10 / Math.max(10, leaderSpe)));
+            // Accurate search time to mimic Natural play at 1x speed
+            let searchTime = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpe));
+            searchTime = Math.max(300, searchTime);
+
+            // Add slide-in animation delay that occurs in Natural play (1000ms at 1x speed)
+            searchTime += 1000;
 
             // Accurate Combat Simulation Loop
             let combatTime = 0;
             let leaderConsecutiveHeals = 0;
 
+            // Leader and Enemy attack delays
+            let leaderDelay = this.state.config.balance.baseAttackDelay * 1000 * (100 / (100 + leaderSpe));
+            leaderDelay = Math.max(250, leaderDelay);
+            let enemyDelay = this.state.config.balance.baseAttackDelay * 1000 * (100 / (100 + enemySpe));
+            enemyDelay = Math.max(250, enemyDelay);
+
             // Which goes first
-            let isLeaderFaster = leaderSpe >= enemySpe;
+            let isLeaderFaster = leaderDelay <= enemyDelay;
+            let firstDelay = Math.min(leaderDelay, enemyDelay);
 
             const executeSimulatedTurn = (attacker, defender, isLeader) => {
                 if (isLeader && this.state.settings.autoPotion) {
@@ -1501,19 +1510,25 @@ class BattleSystem {
             };
 
             while (leader.currentHp > 0 && this.activeEncounter.currentHp > 0) {
-                combatTime += 1000; // Roughly 1s per turn phase
-
                 let firstActor = isLeaderFaster ? leader : this.activeEncounter;
                 let secondActor = isLeaderFaster ? this.activeEncounter : leader;
+
+                combatTime += firstDelay;
 
                 // First turn
                 executeSimulatedTurn(firstActor, secondActor, isLeaderFaster);
 
                 if (secondActor.currentHp <= 0) break;
 
-                // Second turn
+                // Second turn (delay before second actor strikes)
+                let secondDelay = isLeaderFaster ? enemyDelay : leaderDelay;
+                combatTime += secondDelay;
+
                 executeSimulatedTurn(secondActor, firstActor, !isLeaderFaster);
             }
+
+            // Add UI defeat/faint fade-out delay mimicking natural play
+            combatTime += 500;
 
             // End of combat logic
             if (leader.currentHp > 0) {
