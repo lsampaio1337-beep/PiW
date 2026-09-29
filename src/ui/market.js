@@ -601,7 +601,7 @@ export function renderPokeMarketSellTab(category) {
         });
     } else if (category === 'vitamins') {
         cols = 6;
-        const vitaminsList = ["Calcium SpAtk", "Carbo Speed", "HP Up", "Iron Def", "Protein Atk", "Zinc SpDef"];
+        const vitaminsList = ["HP Up", "Carbo Speed", "Protein Atk", "Calcium SpAtk", "Iron Def", "Zinc SpDef"];
         // Base sell price should be $5. The logic below calculates baseSellPrice = Math.floor(buyPrice * 0.5)
         // Therefore, we set buyPrice to 10 so that baseSellPrice is 5.
         const vitaminBuyPrice = 10;
