@@ -6,7 +6,7 @@ import { getCapacity } from '../mathEngine.js';
 function applyWalkAnimations(pokemon, isEnemy) {
     const battleSystem = globals.battleSystem;
     const realPrefix = isEnemy ? 'enemy' : 'player';
-    const animContainer = document.getElementById(realPrefix + '-anim-container');
+    const animContainer = document.getElementById(realPrefix + '-sprite-inner');
     const bubbles = document.getElementById(realPrefix + '-water-bubbles');
 
     if (!animContainer) return;
@@ -251,6 +251,7 @@ export function updateBattleArena() {
             elPlayerSpriteInner.style.top = isFlying ? '0' : 'auto';
             elPlayerSpriteInner.style.right = '0';
             elPlayerSpriteInner.style.left = 'auto';
+            elPlayerSpriteInner.style.justifyContent = isFlying ? 'flex-start' : 'flex-end';
         }
 
         if (elEnemySpriteInner && battleSystem.enemyActive) {
@@ -259,6 +260,7 @@ export function updateBattleArena() {
             elEnemySpriteInner.style.top = isFlying ? '0' : 'auto';
             elEnemySpriteInner.style.left = '0';
             elEnemySpriteInner.style.right = 'auto';
+            elEnemySpriteInner.style.justifyContent = isFlying ? 'flex-start' : 'flex-end';
         }
     }
     updateActiveItemsUI();
