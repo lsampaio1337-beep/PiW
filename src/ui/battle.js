@@ -553,6 +553,8 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
          setTimeout(() => {
              if (elEnemySide) {
                  elEnemySide.style.transition = 'none';
+                 // Reset left property so the next encounter spawns correctly
+                 elEnemySide.style.left = '';
              }
          }, 5000);
     }
@@ -572,24 +574,25 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
         ball = document.createElement('img');
         ball.src = `Assets/Items/Balls/${ballResult.ballName}.png`;
         ball.style.position = 'absolute';
-        ball.style.left = '35%';
-        ball.style.top = `50%`;
-        ball.style.bottom = 'auto'; // Reset bottom
+        ball.style.left = '50%';
+        ball.style.top = '50%';
         ball.style.transform = 'translate(-50%, -50%)';
-        ball.style.width = '25%';
-        ball.style.height = '25%';
+        ball.style.width = '10vw';
+        ball.style.height = '10vw';
         ball.style.objectFit = 'contain';
         ball.style.zIndex = '51';
-        arena.appendChild(ball);
-    }
 
-    // Force reflow
-    if (ball) void ball.offsetWidth;
+        // Append to the inline-block wrapper of the sprite so it overlays exactly
+        const spriteWrapper = document.querySelector('#enemy-sprite-wrapper > div');
+        if (spriteWrapper) {
+            spriteWrapper.appendChild(ball);
+        } else {
+            arena.appendChild(ball);
+        }
+    }
 
     // Timeline Animations
     if (ball) {
-        ball.style.transition = 'left 5s linear';
-        ball.style.left = '-30%';
 
         setTimeout(() => {
             // 3s mark: decide outcome
