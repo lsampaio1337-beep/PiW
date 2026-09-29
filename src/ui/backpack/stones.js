@@ -1,3 +1,4 @@
+import { VITAMINS } from "../../constants.js";
 import { state } from '../../state.js';
 import { formatQuantity } from './utils.js';
 
@@ -27,7 +28,7 @@ export function renderStonesTab(area) {
             }
         }
 
-        const isVitamin = ["Calcium SpAtk", "Carbo Speed", "HP Up", "Iron Def", "Protein Atk", "Zinc SpDef"].includes(name);
+        const isVitamin = VITAMINS.includes(name);
         const imagePath = isVitamin ? `./Assets/Items/Vitamins/${name}.png` : `./Assets/Items/Stones/${name}.png`;
 
         content += `
