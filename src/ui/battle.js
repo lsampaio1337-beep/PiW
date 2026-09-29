@@ -1,6 +1,7 @@
 import { VITAMINS } from "../constants.js";
 import { TYPE_COLORS } from '../ui.js';
 import { state, globals } from '../state.js';
+import { getCapacity } from '../mathEngine.js';
 
 function applyWalkAnimations(pokemon, isEnemy) {
     const battleSystem = globals.battleSystem;
@@ -46,9 +47,9 @@ function applyWalkAnimations(pokemon, isEnemy) {
 }
 
 function updateActiveItemsUI() {
-    const potionImg = document.getElementById('battle-active-potion-img');
-    const potionCount = document.getElementById('battle-active-potion-count');
-    const potionCard = document.getElementById('battle-active-potion-card');
+    const potionImg = document.getElementById('smartwatch-potion-img');
+    const potionCount = document.getElementById('smartwatch-potion-count');
+    const potionCard = document.getElementById('smartwatch-potion-card');
 
     if (potionImg && potionCount && potionCard) {
         if (state.settings.activePotionTier >= 0) {
@@ -58,16 +59,41 @@ function updateActiveItemsUI() {
             potionImg.style.display = 'block';
             potionCount.style.display = 'block';
         } else {
-            potionImg.src = "./Assets/Extra/IconExit.png";
+            potionImg.src = "./Assets/Extra/No.png";
             potionCount.textContent = '';
             potionImg.style.display = 'block';
             potionCount.style.display = 'none';
         }
     }
 
-    const ballImg = document.getElementById('battle-active-ball-img');
-    const ballCount = document.getElementById('battle-active-ball-count');
-    const ballCard = document.getElementById('battle-active-ball-card');
+    const storageImg = document.getElementById('smartwatch-storage-img');
+    const storageCount = document.getElementById('smartwatch-storage-count');
+    const storageOverlay = document.getElementById('smartwatch-storage-full-overlay');
+
+    if (storageImg && storageCount && storageOverlay) {
+        const boxTier = state.stats?.upgrades?.boxTier || 0;
+        storageImg.src = `./Assets/Items/Upgrades/Storage${Math.max(1, boxTier)}.png`;
+
+        const partyLength = state.party ? state.party.length : 0;
+        const storageLength = state.storage ? state.storage.length : 0;
+        const safeLength = state.safe ? state.safe.length : 0;
+        const breedLength = state.breeding ? state.breeding.length : 0;
+        const totalCount = partyLength + storageLength + safeLength + breedLength;
+        const maxBox = getCapacity(state, 'box');
+
+        const maxAllowed = maxBox + 6 + 2; // Box capacity + 6 party + 2 daycare
+        storageCount.textContent = `${totalCount}/${maxAllowed}`;
+
+        if (totalCount >= maxAllowed) {
+            storageOverlay.style.display = 'block';
+        } else {
+            storageOverlay.style.display = 'none';
+        }
+    }
+
+    const ballImg = document.getElementById('smartwatch-ball-img');
+    const ballCount = document.getElementById('smartwatch-ball-count');
+    const ballCard = document.getElementById('smartwatch-ball-card');
 
     if (ballImg && ballCount && ballCard) {
         if (state.settings.activeBallTier >= 0) {
@@ -77,7 +103,7 @@ function updateActiveItemsUI() {
             ballImg.style.display = 'block';
             ballCount.style.display = 'block';
         } else {
-            ballImg.src = "./Assets/Extra/IconExit.png";
+            ballImg.src = "./Assets/Extra/No.png";
             ballCount.textContent = '';
             ballImg.style.display = 'block';
             ballCount.style.display = 'none';
@@ -92,7 +118,7 @@ function formatActiveItemQuantity(q) {
 }
 
 window.showActiveItemSelection = function(type) {
-    const popup = document.getElementById('battle-active-item-selection-popup');
+    const popup = document.getElementById('smartwatch-item-selection-popup');
     if (!popup) return;
 
     if (popup.style.display === 'flex' && popup.dataset.type === type) {
@@ -107,7 +133,7 @@ window.showActiveItemSelection = function(type) {
         const noBorderColor = isNoActive ? '#2ecc71' : '#3498db';
         html += `
             <div onclick="window.selectBattleActiveItem('potion', -1)" style="width: 30px; height: 30px; background: rgba(0, 0, 0, 0.6); border: 2px solid ${noBorderColor}; border-radius: 8px; position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer;" title="No Potion">
-                <img src="./Assets/Extra/IconExit.png" style="width: 60%; height: 60%; object-fit: contain;">
+                <img src="./Assets/Extra/No.png" style="width: 60%; height: 60%; object-fit: contain;">
             </div>
         `;
 
@@ -135,7 +161,7 @@ window.showActiveItemSelection = function(type) {
         const noBorderColor = isNoActive ? '#2ecc71' : '#3498db';
         html += `
             <div onclick="window.selectBattleActiveItem('ball', -1)" style="width: 30px; height: 30px; background: rgba(0, 0, 0, 0.6); border: 2px solid ${noBorderColor}; border-radius: 8px; position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer;" title="No Ball">
-                <img src="./Assets/Extra/IconExit.png" style="width: 60%; height: 60%; object-fit: contain;">
+                <img src="./Assets/Extra/No.png" style="width: 60%; height: 60%; object-fit: contain;">
             </div>
         `;
 
@@ -156,7 +182,7 @@ window.showActiveItemSelection = function(type) {
 
         // Add Pokedex icon for Smart Capture Mode
         html += `
-            <div onclick="window.showSmartCaptureMode(); document.getElementById('battle-active-item-selection-popup').style.display = 'none';" style="width: 30px; height: 30px; background: rgba(0, 0, 0, 0.6); border: 2px solid #f39c12; border-radius: 8px; position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer;" title="Smart Capture Mode">
+            <div onclick="window.showSmartCaptureMode(); document.getElementById('smartwatch-item-selection-popup').style.display = 'none';" style="width: 30px; height: 30px; background: rgba(0, 0, 0, 0.6); border: 2px solid #f39c12; border-radius: 8px; position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer;" title="Smart Capture Mode">
                 <img src="./Assets/Extra/IconPokedex.png" style="width: 80%; height: 80%; object-fit: contain;">
             </div>
         `;
@@ -180,7 +206,7 @@ window.selectBattleActiveItem = function(type, idx) {
     }
 
     // Hide popup and update UI
-    const popup = document.getElementById('battle-active-item-selection-popup');
+    const popup = document.getElementById('smartwatch-item-selection-popup');
     if (popup) popup.style.display = 'none';
 
     updateActiveItemsUI();
@@ -188,10 +214,10 @@ window.selectBattleActiveItem = function(type, idx) {
 
 // Close popup if clicked outside
 document.addEventListener('click', (e) => {
-    const popup = document.getElementById('battle-active-item-selection-popup');
+    const popup = document.getElementById('smartwatch-item-selection-popup');
     if (popup && popup.style.display === 'flex') {
-        const potionBtn = document.getElementById('battle-active-potion-card');
-        const ballBtn = document.getElementById('battle-active-ball-card');
+        const potionBtn = document.getElementById('smartwatch-potion-card');
+        const ballBtn = document.getElementById('smartwatch-ball-card');
         if (!popup.contains(e.target) && (!potionBtn || !potionBtn.contains(e.target)) && (!ballBtn || !ballBtn.contains(e.target))) {
             popup.style.display = 'none';
         }
