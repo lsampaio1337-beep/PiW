@@ -20,20 +20,57 @@ function getLocalDateString() {
 }
 
 
+function parseAreaNames(id) {
+    let result = [];
+    if (id.includes(",")) {
+        let parts = id.split(",");
+        let baseRoute = parts[0].replace(/[0-9]+$/, "").trim();
+        result.push(parts[0].replace(/\s*\(.*?\)/, "").trim());
+        for (let i = 1; i < parts.length; i++) {
+            let num = parts[i].trim();
+            if (!isNaN(num)) {
+                result.push((baseRoute + " " + num).replace(/\s*\(.*?\)/, "").trim());
+            } else {
+                result.push(num.replace(/\s*\(.*?\)/, "").trim());
+            }
+        }
+    } else {
+        result.push(id.replace(/\s*\(.*?\)/, "").trim());
+    }
+    return result;
+}
+
+
+
 
 const CHALLENGE_DEFS = {
     combat: [
         { id: 1, text: "The Rival: Defeat $ Pokémon with the same (or higher) level as your Pokémon.", getTarget: () => 10, type: 'defeat_level' },
         { id: 2, text: "Type Master: Defeat $ {extra} Pokémon.", getTarget: () => 10 + ((state.stats.completedChallengeIds ? state.stats.completedChallengeIds.length : 0) * 2), type: 'defeat_type', getExtra: () => {
             let availableTypes = new Set();
-            if (state.config && state.config.unlocks && state.stats.completedChallengeIds) {
-                for (let unlock of state.config.unlocks) {
-                    if (state.stats.completedChallengeIds.includes(unlock.areaId)) {
-                        if (unlock.pokemon) {
-                            for (let p of unlock.pokemon) {
-                                let pData = state.config.pokemonData.find(pd => pd.name === p.name);
-                                if (pData && pData.types) pData.types.forEach(t => availableTypes.add(t));
-                            }
+            if (state.config && state.config.routes && state.stats.completedChallengeIds) {
+
+                let unlockedAreas = new Set();
+                state.stats.completedChallengeIds.forEach(id => {
+                    parseAreaNames(id).forEach(area => unlockedAreas.add(area));
+                });
+
+                if (state.config.unlocks) {
+                    for (let unlock of state.config.unlocks) {
+                        if (state.stats.completedChallengeIds.includes(unlock.areaId)) {
+                            unlock.unlocks.forEach(u => parseAreaNames(u).forEach(a => unlockedAreas.add(a)));
+                        }
+                    }
+                }
+
+                unlockedAreas.add('Route 1');
+
+                for (let area of unlockedAreas) {
+                    let route = state.config.routes.find(r => r.name === area);
+                    if (route && route.spawns) {
+                        for (let s of route.spawns) {
+                            let pData = state.config.pokemonData.find(pd => pd.id === s.pokemonId);
+                            if (pData && pData.types) pData.types.forEach(t => availableTypes.add(t));
                         }
                     }
                 }
@@ -62,19 +99,38 @@ const CHALLENGE_DEFS = {
         { id: 12, text: "Weak: Catch $ Weak Pokémon.", getTarget: () => 2 + state.trainer.badges, type: 'catch_weak' },
         { id: 13, text: "Specific Species: Catch $ {extra}.", getTarget: () => Math.max(5, (state.stats.completedChallengeIds ? state.stats.completedChallengeIds.length : 1)), type: 'catch_species', getExtra: () => {
             let caught = Object.keys(state.stats.caughtSpecies || {});
+            let casinoUnlocked = state.stats.completedChallengeIds && (state.stats.completedChallengeIds.includes('Casino') || state.stats.completedChallengeIds.includes('Casino - Starter Troupe'));
+            if (!casinoUnlocked) {
+                caught = caught.filter(species => !['Bulbasaur', 'Charmander', 'Squirtle'].includes(species));
+            }
             if (caught.length === 0) return 'Pidgey';
             return caught[Math.floor(Math.random() * caught.length)];
         } },
         { id: 14, text: "Type Enthusiast: Catch $ {extra} Pokémon.", getTarget: () => 5 + (state.trainer.badges * 2), type: 'catch_type', getExtra: () => {
             let availableTypes = new Set();
-            if (state.config && state.config.unlocks && state.stats.completedChallengeIds) {
-                for (let unlock of state.config.unlocks) {
-                    if (state.stats.completedChallengeIds.includes(unlock.areaId)) {
-                        if (unlock.pokemon) {
-                            for (let p of unlock.pokemon) {
-                                let pData = state.config.pokemonData.find(pd => pd.name === p.name);
-                                if (pData && pData.types) pData.types.forEach(t => availableTypes.add(t));
-                            }
+            if (state.config && state.config.routes && state.stats.completedChallengeIds) {
+
+                let unlockedAreas = new Set();
+                state.stats.completedChallengeIds.forEach(id => {
+                    parseAreaNames(id).forEach(area => unlockedAreas.add(area));
+                });
+
+                if (state.config.unlocks) {
+                    for (let unlock of state.config.unlocks) {
+                        if (state.stats.completedChallengeIds.includes(unlock.areaId)) {
+                            unlock.unlocks.forEach(u => parseAreaNames(u).forEach(a => unlockedAreas.add(a)));
+                        }
+                    }
+                }
+
+                unlockedAreas.add('Route 1');
+
+                for (let area of unlockedAreas) {
+                    let route = state.config.routes.find(r => r.name === area);
+                    if (route && route.spawns) {
+                        for (let s of route.spawns) {
+                            let pData = state.config.pokemonData.find(pd => pd.id === s.pokemonId);
+                            if (pData && pData.types) pData.types.forEach(t => availableTypes.add(t));
                         }
                     }
                 }
@@ -100,8 +156,8 @@ const CHALLENGE_DEFS = {
         { id: 25, text: "ZzZ: Sleep $ minutes.", getTarget: () => Math.max(1, Math.floor(0.1 * (state.stats.jigglypuffGrains || 0))), type: 'sleep_minutes' }
     ],
     special: [
-        { id: 26, text: "Daycare Manager: Gain $ IV in daycare.", getTarget: () => 10 + (state.stats.highestLevelCaptured || 0), type: 'daycare_iv' },
-        { id: 27, text: "Breeder: Hatch $ Eggs from the Daycare.", getTarget: () => Math.random() < 0.5 ? 1 : 2, type: 'hatch_eggs' },
+        { id: 26, text: "Daycare Manager: Gain $ IV in daycare.", getTarget: () => 10 + (state.stats.highestLevelCaptured || 0), type: 'daycare_iv', condition: () => state.stats.hasSeenDaycare },
+        { id: 27, text: "Breeder: Hatch $ Eggs from the Daycare.", getTarget: () => Math.random() < 0.5 ? 1 : 2, type: 'hatch_eggs', condition: () => state.stats.hasSeenDaycare },
         { id: 28, text: "Safari Tourist: Catch $ Pokémon in the Safari Zone.", getTarget: () => 5 + ((state.stats.completedChallenges || 0) * 2), type: 'safari_catch', condition: () => state.stats.completedChallengeIds && state.stats.completedChallengeIds.includes("Fuchsia City") },
         { id: 29, text: "High Roller: Catch $ Pokémon in the Casino.", getTarget: () => 5 * Math.max(1, state.trainer.badges), type: 'casino_catch', condition: () => state.stats.completedChallengeIds && state.stats.completedChallengeIds.includes('Casino') },
         { id: 30, text: "Lucky Spinner: See 1 Shiny Pokémon in the Casino.", getTarget: () => 1, type: 'casino_shiny', condition: () => state.stats.completedChallengeIds && state.stats.completedChallengeIds.includes('Casino') }
