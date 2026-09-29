@@ -262,18 +262,18 @@ window.showVitaminsModal = function(location, idx) {
 
     const vitamins = [
         { name: "HP Up", stat: "hp", displayName: "HP Up", shortName: "HP" },
-        { name: "Carbo Speed", stat: "spe", displayName: "Carbo Speed", shortName: "Speed" },
-        { name: "Protein Atk", stat: "atk", displayName: "Protein Atk", shortName: "Atk" },
-        { name: "Calcium SpAtk", stat: "spa", displayName: "Calcium SpAtk", shortName: "SpAtk" },
-        { name: "Iron Def", stat: "def", displayName: "Iron Def", shortName: "Def" },
-        { name: "Zinc SpDef", stat: "spd", displayName: "Zinc SpDef", shortName: "SpDef" }
+        { name: "Carbo Speed", stat: "spe", displayName: "Carbo", shortName: "Speed" },
+        { name: "Protein Atk", stat: "atk", displayName: "Protein", shortName: "Atk" },
+        { name: "Calcium SpAtk", stat: "spa", displayName: "Calcium", shortName: "SpAtk" },
+        { name: "Iron Def", stat: "def", displayName: "Iron", shortName: "Def" },
+        { name: "Zinc SpDef", stat: "spd", displayName: "Zinc", shortName: "SpDef" }
     ];
 
     if (!p.vitamins) p.vitamins = {};
 
     let html = `
         <div class="content-panel" style="text-align: center; color: white;">
-            <p style="margin-top: 0; font-size: 14px; color: #ccc;">Each vitamin increases its stat by 1% of the final base stat (Max 20 per stat).</p>
+            <p style="margin-top: 0; font-size: 14px; color: #ccc;">Each vitamin increases its stat by 1% of the final base stat.<br>(Max 20 per stat).</p>
             <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top: 20px;">
     `;
 
@@ -285,7 +285,7 @@ window.showVitaminsModal = function(location, idx) {
 
         let btnHtml = '';
         if (isMaxed) {
-            btnHtml = `<button disabled style="background: #7f8c8d; cursor: not-allowed; padding: 5px 10px; border: none; border-radius: 4px; color: white; width: 100%;">Maxed (20/20)</button>`;
+            btnHtml = `<button disabled style="background: #7f8c8d; cursor: not-allowed; padding: 5px 10px; border: none; border-radius: 4px; color: white; width: 100%;">Maxed</button>`;
         } else {
             btnHtml = `<button ${canUse ? '' : 'disabled'} onclick="window.useVitamin('${location}', ${idx}, '${v.name}', '${v.stat}')" style="${canUse ? 'background: #2ecc71; cursor: pointer;' : 'background: #7f8c8d; cursor: not-allowed;'} padding: 5px 10px; border: none; border-radius: 4px; color: white; width: 100%;">Use Vitamin (Owned: ${owned})</button>`;
         }
@@ -342,6 +342,7 @@ window.useVitamin = function(location, idx, vitaminName, statKey) {
 
     updateUI();
 
-    // Refresh modals
+    // Refresh modals (Stats first, then Vitamins so Vitamins stays on top)
+    showPokemonStats(idx, location);
     window.showVitaminsModal(location, idx);
 };
