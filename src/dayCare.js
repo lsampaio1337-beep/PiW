@@ -73,6 +73,7 @@ class DayCare {
 
         // Let UI know it's finished
         this.slot1.isFinished = true;
+        if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') window.trackDailyChallenge('hatch_eggs');
         this.slot1.isBreeding = false;
 
         // Note: the pokemon stays in state.breeding array (this.slot1.pokemon is a ref)
@@ -100,6 +101,7 @@ class DayCare {
             pkmn.trainingCyclesCompleted = 0;
         }
         pkmn.trainingCyclesCompleted++;
+        if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') window.trackDailyChallenge('daycare_iv', { amount: 1 });
 
         // Reset progress only if we are still under the cap
         const newTotalIV = pkmn.ivs.hp + pkmn.ivs.atk + pkmn.ivs.def + pkmn.ivs.spa + pkmn.ivs.spd + pkmn.ivs.spe;

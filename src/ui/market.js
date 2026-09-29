@@ -40,6 +40,7 @@ export function setupMarket(vCenter) {
 
     document.getElementById('btn-heal-all').addEventListener('click', () => {
         state.party.forEach(p => p.currentHp = p.maxHp);
+        if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') window.trackDailyChallenge('heal_center');
         state.storage.forEach(p => p.currentHp = p.maxHp);
         updateUI();
         const btn = document.getElementById('btn-heal-all');

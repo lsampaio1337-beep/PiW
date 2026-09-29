@@ -447,6 +447,9 @@ class BattleSystem {
 
             // Track seen for pokedex using actual encounter (Ditto or regular)
             if (q.name === "Shiny") {
+                if (this.state.currentRoute === 'Casino') {
+                    if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') window.trackDailyChallenge('casino_shiny');
+                }
                 this.state.stats.shiniesSeen = (this.state.stats.shiniesSeen || 0) + 1;
                 if (!this.state.stats.seenShiniesSpecies) this.state.stats.seenShiniesSpecies = {};
                 this.state.stats.seenShiniesSpecies[actualPokemonBase.name] = true;
@@ -765,7 +768,23 @@ class BattleSystem {
         // Track Daily Challenges
         if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') {
             window.trackDailyChallenge('defeat_level', { level: this.activeEncounter.level, playerLevel: leader.level });
-            window.trackDailyChallenge('defeat_type', { types: this.activeEncounter.types }); // Handled in a simpler way if needed, or we might need to adjust logic
+            window.trackDailyChallenge('defeat_type', { types: this.activeEncounter.types });
+            window.trackDailyChallenge('defeat_underdog', { level: this.activeEncounter.level, playerLevel: leader.level });
+
+            if (this.state.stats.dailyChallenges) {
+                window.trackDailyChallenge('defeat_endurance', { streak: 1 });
+
+                if (this.state.currentRoute === this.state.stats.dailyChallenges.currentRoute) {
+                    window.trackDailyChallenge('defeat_single_route', { streak: 2 });
+                } else {
+                    this.state.stats.dailyChallenges.currentRoute = this.state.currentRoute;
+                    window.trackDailyChallenge('defeat_single_route', { streak: 1 });
+                }
+            }
+
+            if (this.turnCount === 1) {
+                 window.trackDailyChallenge('defeat_1_turn');
+            } // Handled in a simpler way if needed, or we might need to adjust logic
         }
 
         // Auto Throw Pokeball logic (disable in gyms)
@@ -853,7 +872,14 @@ class BattleSystem {
                         if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') {
                             window.trackDailyChallenge('catch_sum_iv', { sumIv: sumIV });
                             window.trackDailyChallenge('catch_level', { level: caughtPokemon.level });
-                            window.trackDailyChallenge('catch_different_species', { species: caughtPokemon.name }); // Would need species tracking logic inside trackDailyChallenge if we fully implement it
+                            window.trackDailyChallenge('catch_different_species', { species: caughtPokemon.name });
+                            window.trackDailyChallenge('catch_rare', { quality: caughtPokemon.qualityName });
+                            window.trackDailyChallenge('catch_weak', { quality: caughtPokemon.qualityName });
+                            window.trackDailyChallenge('catch_species', { species: caughtPokemon.name });
+                            window.trackDailyChallenge('catch_type', { types: caughtPokemon.types });
+                            window.trackDailyChallenge('catch_ball_tier', { ball: this.activeEncounter.caughtBall });
+                            if (this.state.currentRoute === 'Safari Zone') window.trackDailyChallenge('safari_catch');
+                            if (this.state.currentRoute === 'Casino') window.trackDailyChallenge('casino_catch'); // Would need species tracking logic inside trackDailyChallenge if we fully implement it
                         }
                         if (sumIV < 300) this.state.stats.caughtIVUnder300 = (this.state.stats.caughtIVUnder300 || 0) + 1;
                         if (sumIV < 350) this.state.stats.caughtIVUnder350 = (this.state.stats.caughtIVUnder350 || 0) + 1;
@@ -920,6 +946,7 @@ class BattleSystem {
 
         // Award XP and Money (EV)
         this.grantXP(leader, evxp);
+        if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') window.trackDailyChallenge('gain_exp', { amount: evxp });
         let earned = Math.floor(evm * lootMultiplier);
         this.state.trainer.money += earned;
         if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') {
@@ -1093,6 +1120,9 @@ class BattleSystem {
                 // Record the defeated boss
                 if (!this.state.stats.defeatedBosses) this.state.stats.defeatedBosses = {};
                 this.state.stats.defeatedBosses[gym.leader] = true;
+                if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') {
+                    window.trackDailyChallenge('defeat_gym_leader');
+                }
 
                 const gymIndex = this.state.config.gyms.findIndex(g => g.name === gym.name);
                 if (gymIndex !== -1 && this.state.trainer.badges === gymIndex) {
@@ -1421,6 +1451,9 @@ class BattleSystem {
             this.state.stats.seenSpecies[pokemonBase.name] = true;
 
             if (q.name === "Shiny") {
+                if (this.state.currentRoute === 'Casino') {
+                    if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') window.trackDailyChallenge('casino_shiny');
+                }
                 this.state.stats.shiniesSeen = (this.state.stats.shiniesSeen || 0) + 1;
                 if (!this.state.stats.seenShiniesSpecies) this.state.stats.seenShiniesSpecies = {};
                 this.state.stats.seenShiniesSpecies[pokemonBase.name] = true;
@@ -1539,7 +1572,23 @@ class BattleSystem {
                 // Track Daily Challenges
                 if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') {
                     window.trackDailyChallenge('defeat_level', { level: this.activeEncounter.level, playerLevel: leader.level });
-                    window.trackDailyChallenge('defeat_type', { types: this.activeEncounter.types }); // Handled in a simpler way if needed, or we might need to adjust logic
+                    window.trackDailyChallenge('defeat_type', { types: this.activeEncounter.types });
+                    window.trackDailyChallenge('defeat_underdog', { level: this.activeEncounter.level, playerLevel: leader.level });
+
+                    if (this.state.stats.dailyChallenges) {
+                        window.trackDailyChallenge('defeat_endurance', { streak: 1 });
+
+                        if (this.state.currentRoute === this.state.stats.dailyChallenges.currentRoute) {
+                            window.trackDailyChallenge('defeat_single_route', { streak: 2 });
+                        } else {
+                            this.state.stats.dailyChallenges.currentRoute = this.state.currentRoute;
+                            window.trackDailyChallenge('defeat_single_route', { streak: 1 });
+                        }
+                    }
+
+                    if (this.turnCount === 1) {
+                         window.trackDailyChallenge('defeat_1_turn');
+                    }
                 }
 
                 if (this.state.settings.autoCatch) {
@@ -1610,6 +1659,7 @@ class BattleSystem {
 
                 const lootMultiplier = 1 + (0.03 * (this.state.stats.greenCandies || 0));
                 this.grantXP(leader, evxp);
+        if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') window.trackDailyChallenge('gain_exp', { amount: evxp });
                 let earnedZzZ = Math.floor(evm * lootMultiplier);
                 this.state.trainer.money += earnedZzZ;
                 if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') {
