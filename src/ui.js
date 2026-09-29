@@ -559,7 +559,7 @@ window.closeModal = function(windowId) {
 };
 
 
-function showCatchRateModal(showShiny = false, isSubWindow = false) {
+function showCatchRateModal(showShiny = false) {
     const balls = ["Pokeball", "Greatball", "Ultraball", "Safariball", "Masterball"];
     const targetTracker = showShiny ? (state.stats.shinyCatchAttempts || {}) : (state.stats.catchAttempts || {});
 
@@ -635,28 +635,13 @@ function showCatchRateModal(showShiny = false, isSubWindow = false) {
     </div>
     </div>`;
 
-    if (isSubWindow) {
-        html += `
-            <div style="text-align: center; margin-top: 15px; margin-bottom: 15px;">
-                <button onclick="window.showTrainerStats()" style="padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer; background: #3b82f6; color: white; border: none; border-radius: 5px;">Back</button>
-            </div>
-        `;
-        const win = document.getElementById("window-trainer");
-        if (win) {
-            const innerContent = win.querySelector('.window-content-container');
-            if (innerContent) {
-                innerContent.innerHTML = html;
-                innerContent.style.setProperty('padding', '0px', 'important'); // Keep padding logic
-            }
-        }
-    } else {
-        showModal("Catch Rate Table", html, "window-catch-rate", "800px", "auto");
-        const win = document.getElementById('window-catch-rate');
-        if (win) {
-            const innerContent = win.querySelector('.window-content-container');
-            if (innerContent) {
-                innerContent.style.setProperty('padding', '0px', 'important'); // Let the injected wrapper handle the 5% padding so it sizes nicely
-            }
+    showModal("Catch Rate Table", html, "window-catch-rate", "800px", "auto");
+
+    const win = document.getElementById('window-catch-rate');
+    if (win) {
+        const innerContent = win.querySelector('.window-content-container');
+        if (innerContent) {
+            innerContent.style.setProperty('padding', '0px', 'important'); // Let the injected wrapper handle the 5% padding so it sizes nicely
         }
     }
 
@@ -664,7 +649,7 @@ function showCatchRateModal(showShiny = false, isSubWindow = false) {
         const btn = document.getElementById('btn-catch-rate-shiny-toggle');
         if (btn) {
             btn.onclick = () => {
-                showCatchRateModal(!showShiny, isSubWindow);
+                showCatchRateModal(!showShiny);
             };
         }
     }, 0);
@@ -2056,7 +2041,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
 
     window.updateTopbar = updateTopbar;
 
-    window.showTrainerStats = function() {
+    bindBtn('btn-stats', () => {
         if(checkCombatLock()) return;
         let badgesHtml = '<div style="display: flex; gap: 10px; margin-top: 10px; justify-content: center; flex-wrap: wrap;">';
         for (let i = 1; i <= state.trainer.badges; i++) {
@@ -2122,7 +2107,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
             uniqueShinySpeciesCaught = Object.keys(state.stats.caughtShiniesSpecies).length;
         }
 
-        const trainerHtml = `
+        showModal("Trainer", `
             <div style="text-align: left; margin-bottom: 20px;">
                 <div style="display: flex; gap: 40px; justify-content: space-between;">
                     <div style="flex: 1;">
@@ -2177,110 +2162,64 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
                 <button id="btn-catch-rate" style="padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer; background: #3b82f6; color: white; border: none; border-radius: 5px;">Catch Rate Table</button>
                 <button id="btn-trainer-upgrades" style="padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer; background: #3b82f6; color: white; border: none; border-radius: 5px;">Upgrades</button>
             </div>
-        `;
+        `, "window-trainer");
 
-        const win = document.getElementById("window-trainer");
-        if (win) {
-            const innerContent = win.querySelector('.window-content-container');
-            if (innerContent) {
-                innerContent.innerHTML = trainerHtml;
+        document.getElementById('btn-catch-rate').onclick = () => {
+            if(!checkCombatLock()) showCatchRateModal();
+        };
+
+        document.getElementById('btn-trainer-badges').onclick = () => {
+            if(!checkCombatLock()) {
+                showModal("Badges", `
+                    <div style="text-align: center;">
+                        ${badgesHtml}
+                    </div>
+                `, "window-badges");
             }
-        } else {
-            showModal("Trainer", trainerHtml, "window-trainer");
-        }
+        };
 
-        setTimeout(() => {
-            const btnCatchRate = document.getElementById('btn-catch-rate');
-            if (btnCatchRate) {
-                btnCatchRate.onclick = () => {
-                    if(!checkCombatLock()) showCatchRateModal(false, true); // true for subWindow mode
-                };
-            }
+        document.getElementById('btn-trainer-upgrades').onclick = () => {
+            if(!checkCombatLock()) {
+                let upgradesHtml = '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 10px; padding: 10px;">';
 
-            const btnTrainerBadges = document.getElementById('btn-trainer-badges');
-            if (btnTrainerBadges) {
-                btnTrainerBadges.onclick = () => {
-                    if(!checkCombatLock()) {
-                        const win = document.getElementById("window-trainer");
-                        if (win) {
-                            const innerContent = win.querySelector('.window-content-container');
-                            if (innerContent) {
-                                innerContent.innerHTML = `
-                                    <div style="text-align: center; margin-bottom: 20px;">
-                                        ${badgesHtml}
-                                    </div>
-                                    <div style="text-align: center;">
-                                        <button onclick="window.showTrainerStats()" style="padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer; background: #3b82f6; color: white; border: none; border-radius: 5px;">Back</button>
+                if (state.stats.upgrades) {
+                    const upgradeTypes = [
+                        { key: 'ballsTier', configKey: 'ballPocket' },
+                        { key: 'potionsTier', configKey: 'potionSatchel' },
+                        { key: 'boxTier', configKey: 'pokemonBox' },
+                        { key: 'glassTier', configKey: 'glass' },
+                        { key: 'smartwatchTier', configKey: 'smartwatch' },
+                        { key: 'speedTier', configKey: 'speed' },
+                        { key: 'lootTier', configKey: 'loot' }
+                    ];
+
+                    upgradeTypes.forEach(type => {
+                        const tier = state.stats.upgrades[type.key] || 0;
+                        if (tier > 0) {
+                            // Show the currently purchased tier (index tier - 1)
+                            const configItem = state.config.balance.expansions[type.configKey][tier - 1];
+                            if (configItem) {
+                                const displayName = configItem.displayName || configItem.name;
+                                upgradesHtml += `
+                                    <div style="background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; padding: 10px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                        <img src="./Assets/Items/Upgrades/${configItem.name}.png" style="width: 50px; height: 50px; object-fit: contain; margin-bottom: 5px;" alt="${displayName}">
+                                        <div style="font-size: 12px; font-weight: bold; color: white; line-height: 1.1; word-wrap: break-word;">${displayName}</div>
                                     </div>
                                 `;
                             }
                         }
-                    }
-                };
+                    });
+                }
+
+                upgradesHtml += '</div>';
+
+                if (upgradesHtml === '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 10px; padding: 10px;"></div>') {
+                    upgradesHtml = '<div style="text-align: center; padding: 20px; font-style: italic; color: #ccc;">No upgrades purchased yet.</div>';
+                }
+
+                showModal("Upgrades", upgradesHtml, "window-upgrades");
             }
-
-            const btnTrainerUpgrades = document.getElementById('btn-trainer-upgrades');
-            if (btnTrainerUpgrades) {
-                btnTrainerUpgrades.onclick = () => {
-                    if(!checkCombatLock()) {
-                        let upgradesHtml = '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 10px; padding: 10px;">';
-
-                        if (state.stats.upgrades) {
-                            const upgradeTypes = [
-                                { key: 'ballsTier', configKey: 'ballPocket' },
-                                { key: 'potionsTier', configKey: 'potionSatchel' },
-                                { key: 'boxTier', configKey: 'pokemonBox' },
-                                { key: 'glassTier', configKey: 'glass' },
-                                { key: 'smartwatchTier', configKey: 'smartwatch' },
-                                { key: 'speedTier', configKey: 'speed' },
-                                { key: 'lootTier', configKey: 'loot' }
-                            ];
-
-                            upgradeTypes.forEach(type => {
-                                const tier = state.stats.upgrades[type.key] || 0;
-                                if (tier > 0) {
-                                    // Show the currently purchased tier (index tier - 1)
-                                    const configItem = state.config.balance.expansions[type.configKey][tier - 1];
-                                    if (configItem) {
-                                        const displayName = configItem.displayName || configItem.name;
-                                        upgradesHtml += `
-                                            <div style="background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; padding: 10px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                                                <img src="./Assets/Items/Upgrades/${configItem.name}.png" style="width: 50px; height: 50px; object-fit: contain; margin-bottom: 5px;" alt="${displayName}">
-                                                <div style="font-size: 12px; font-weight: bold; color: white; line-height: 1.1; word-wrap: break-word;">${displayName}</div>
-                                            </div>
-                                        `;
-                                    }
-                                }
-                            });
-                        }
-
-                        upgradesHtml += '</div>';
-
-                        if (upgradesHtml === '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 10px; padding: 10px;"></div>') {
-                            upgradesHtml = '<div style="text-align: center; padding: 20px; font-style: italic; color: #ccc;">No upgrades purchased yet.</div>';
-                        }
-
-                        upgradesHtml += `
-                            <div style="text-align: center; margin-top: 15px;">
-                                <button onclick="window.showTrainerStats()" style="padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer; background: #3b82f6; color: white; border: none; border-radius: 5px;">Back</button>
-                            </div>
-                        `;
-
-                        const win = document.getElementById("window-trainer");
-                        if (win) {
-                            const innerContent = win.querySelector('.window-content-container');
-                            if (innerContent) {
-                                innerContent.innerHTML = upgradesHtml;
-                            }
-                        }
-                    }
-                };
-            }
-        }, 0);
-    };
-
-    bindBtn('btn-stats', () => {
-        window.showTrainerStats();
+        };
     });
 
     bindBtn('btn-settings', () => {
