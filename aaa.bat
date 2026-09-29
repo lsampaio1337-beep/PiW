@@ -29,9 +29,14 @@ if not exist "package.json" (
 )
 
 :START_SETUP
-echo Please wait while the game installs dependencies and starts up...
+echo Please wait while the game starts up...
 
-REM Install dependencies
+REM Install dependencies only if node_modules does not exist
+if exist "node_modules\" (
+    echo [1/2] Dependencies already installed, skipping...
+    goto SKIP_NPM
+)
+
 echo [1/2] Installing dependencies...
 call npm install --no-audit --no-fund
 if %ERRORLEVEL% neq 0 (
@@ -41,6 +46,8 @@ if %ERRORLEVEL% neq 0 (
     pause
     goto :EOF
 )
+
+:SKIP_NPM
 
 REM Start game
 echo [2/2] Starting the game!
