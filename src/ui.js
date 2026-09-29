@@ -512,6 +512,7 @@ window.showChallengesModal = function() {
         // We handle the max height natively in windowManager now, so remove the strict CSS limit
         win.style.maxHeight = '';
 
+        win.style.maxHeight = '';
         win.dataset.maxHeightRatio = '1.0';
         win._sizeInitialized = false;
         if (typeof win.adjustHeightForNewContent === 'function') {
