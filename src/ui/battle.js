@@ -398,9 +398,9 @@ export function updateBattleArena() {
                     elSumIV.innerText = `SumIV=${sumIV}`;
                 }
 
-                elEnemySide.style.top = '80%';
-                elEnemySide.style.bottom = 'auto';
-                elEnemySide.style.transform = 'translateY(-100%)';
+                elEnemySide.style.top = 'auto';
+                elEnemySide.style.bottom = '20%';
+                elEnemySide.style.transform = 'none';
 
                 if (battleSystem.isSliding) {
                     if (elEnemySide.dataset.sliding !== 'true') {
@@ -439,9 +439,9 @@ export function updateBattleArena() {
             const elPlayerSide = document.getElementById('player-side');
             if (leader && elPlayerSide) {
 
-                elPlayerSide.style.top = '80%';
-                elPlayerSide.style.bottom = 'auto';
-                elPlayerSide.style.transform = 'translate(-100%, -100%)';
+                elPlayerSide.style.top = 'auto';
+                elPlayerSide.style.bottom = '20%';
+                elPlayerSide.style.transform = 'translateX(-100%)';
                 elPlayerSide.style.left = '25%';
 
                 const hpContainerPlayer = document.getElementById('player-battle-hp-container');
@@ -512,9 +512,9 @@ export function updateBattleArena() {
                 elEnemySprite.style.display = 'block';
                 elEnemySide.style.transition = 'none';
                 elEnemySide.style.left = '35%'; // Matching active battle destination
-                elEnemySide.style.top = '80%';
-                elEnemySide.style.bottom = 'auto';
-                elEnemySide.style.transform = 'translateY(-100%)';
+                elEnemySide.style.top = 'auto';
+                elEnemySide.style.bottom = '20%';
+                elEnemySide.style.transform = 'none';
 
                 const elEnemyInfo = document.getElementById('enemy-info-container');
                 if (elEnemyInfo) elEnemyInfo.style.display = 'none';
@@ -529,9 +529,9 @@ export function updateBattleArena() {
             const elPlayerSide = document.getElementById('player-side');
             if (leader && elPlayerSide) {
 
-                elPlayerSide.style.top = '80%';
-                elPlayerSide.style.bottom = 'auto';
-                elPlayerSide.style.transform = 'translate(-100%, -100%)';
+                elPlayerSide.style.top = 'auto';
+                elPlayerSide.style.bottom = '20%';
+                elPlayerSide.style.transform = 'translateX(-100%)';
                 elPlayerSide.style.left = '25%';
 
                 const hpContainerPlayer = document.getElementById('player-battle-hp-container');
