@@ -261,12 +261,12 @@ window.showVitaminsModal = function(location, idx) {
     const p = list[idx];
 
     const vitamins = [
-        { name: "HP Up", stat: "hp", displayName: "HP" },
-        { name: "Protein Atk", stat: "atk", displayName: "Attack" },
-        { name: "Iron Def", stat: "def", displayName: "Defense" },
-        { name: "Calcium SpAtk", stat: "spa", displayName: "Sp. Atk" },
-        { name: "Zinc SpDef", stat: "spd", displayName: "Sp. Def" },
-        { name: "Carbo Speed", stat: "spe", displayName: "Speed" }
+        { name: "HP Up", stat: "hp", displayName: "HP Up", shortName: "HP" },
+        { name: "Carbo Speed", stat: "spe", displayName: "Carbo Speed", shortName: "Speed" },
+        { name: "Protein Atk", stat: "atk", displayName: "Protein Atk", shortName: "Atk" },
+        { name: "Calcium SpAtk", stat: "spa", displayName: "Calcium SpAtk", shortName: "SpAtk" },
+        { name: "Iron Def", stat: "def", displayName: "Iron Def", shortName: "Def" },
+        { name: "Zinc SpDef", stat: "spd", displayName: "Zinc SpDef", shortName: "SpDef" }
     ];
 
     if (!p.vitamins) p.vitamins = {};
@@ -293,7 +293,7 @@ window.showVitaminsModal = function(location, idx) {
         html += `
             <div style="background: rgba(0,0,0,0.4); border: 1px solid #555; border-radius: 8px; padding: 10px; display: flex; flex-direction: column; align-items: center;">
                 <img src="./Assets/Items/Vitamins/${v.name}.png" style="width: 40px; height: 40px; margin-bottom: 5px;">
-                <div style="font-weight: bold; margin-bottom: 5px;">${v.displayName} (+${applied}%)</div>
+                <div style="font-weight: bold; margin-bottom: 5px;">${v.displayName} (+${applied}% ${v.shortName})</div>
                 ${btnHtml}
             </div>
         `;
@@ -344,5 +344,4 @@ window.useVitamin = function(location, idx, vitaminName, statKey) {
 
     // Refresh modals
     window.showVitaminsModal(location, idx);
-    showPokemonStats(idx, location);
 };
