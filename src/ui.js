@@ -519,6 +519,17 @@ window.showChallengesModal = function() {
             win.adjustHeightForNewContent();
         }
 
+        // Force manual resize to allow flexible height (up to the max height ratio)
+        // by disabling the strict lock on the original narrow ratio
+        win.dataset.manualResizeMode = "true";
+        win._originalRatio = 1.0;
+        const scalerElement = win.querySelector('.window-content-scaler');
+        if (scalerElement) {
+             scalerElement.style.setProperty('--original-height', win._originalWidth + 'px');
+        }
+        win._originalHeight = win._originalWidth;
+
+
         // Ensure the content container scrolls if it overflows
         const contentContainer = win.querySelector('.window-content-container');
         if (contentContainer) {

@@ -376,7 +376,31 @@ export class WindowManager {
                 winElement.style.height = newHeight + 'px';
 
                 if (winElement.dataset.maxHeightRatio) {
-                     delete winElement.dataset.maxHeightRatio;
+                    const ratio = parseFloat(winElement.dataset.maxHeightRatio);
+                    if (!isNaN(ratio) && ratio > 0) {
+                        let maxHeight = winElement._originalWidth * ratio * scale;
+                        if (newContentHeight > maxHeight) {
+                            newHeight = headerH + maxHeight + verticalPadding;
+                            winElement.style.height = newHeight + 'px';
+                        }
+                    }
+                }
+
+                // Keep the window ratio consistent with the manual resize ratio if dataset.maxHeightRatio is not active
+                // If the user manually resizes, we use the original aspect ratio logic
+                if (winElement.dataset.maxHeightRatio && winElement.dataset.manualResizeMode) {
+                     let dy = e.clientY - startY;
+                     let manualHeight = Math.max(200, startHeight + dy);
+
+                     // Constrain manual height
+                     const ratio = parseFloat(winElement.dataset.maxHeightRatio);
+                     if (!isNaN(ratio) && ratio > 0) {
+                          let maxHeightForWidth = newWidth * ratio;
+                          if (manualHeight > maxHeightForWidth) {
+                               manualHeight = maxHeightForWidth;
+                          }
+                     }
+                     winElement.style.height = manualHeight + 'px';
                 }
 
                 scalerElement.style.transform = `scale(${scale})`;
