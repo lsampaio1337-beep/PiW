@@ -125,7 +125,7 @@ export function showMap() {
                      title="${locationName.replace(/'/g, "&#39;")}"
                      style="position: absolute; left: ${coords.x}%; top: ${coords.y}%; width: ${markerWidth}; height: ${markerHeight}; background-image: url('${markerImg}'); background-size: contain; background-repeat: no-repeat; transform: translate(-50%, -50%); filter: ${dropShadow}; cursor: ${isClickable ? 'pointer' : 'default'};"
                      ${isClickable ? `onclick="window.navigateToLocation('${locationName.replace(/'/g, "\\'")}')"` : ''}
-                     onmouseover="window.showMapTooltip(event, '${locationName.replace(/'/g, "\\'")}')"
+                     onmousemove="window.showMapTooltip(event, '${locationName.replace(/'/g, "\\'")}')"
                      onmouseout="window.hideMapTooltip()">
                      ${showCheckmark ? '<div style="position:absolute; top:-5px; right:-5px; background:green; color:white; border-radius:50%; width:15px; height:15px; font-size:10px; line-height:15px; text-align:center;">✓</div>' : ''}
                 </div>
