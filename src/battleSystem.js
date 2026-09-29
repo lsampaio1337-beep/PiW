@@ -1343,8 +1343,8 @@ class BattleSystem {
             this.state.backpack.potions[this.state.config.balance.items.potions[this.state.settings.activePotionTier].name] || 0 : 0;
 
         // Ensure we don't simulate too many frames and hang the browser if time is huge
-        // Limit to approx max of 24h of simulation steps, but it evaluates fast
-        const maxTime = Math.min(elapsedMs, 24 * 60 * 60 * 1000);
+        // Limit to approx max of 111h of simulation steps, but it evaluates fast
+        const maxTime = Math.min(elapsedMs, 111 * 60 * 60 * 1000);
         const route = this.state.config.routes.find(r => r.name === this.state.currentRoute);
 
         if (!route && this.state.currentRoute !== "Casino - Eeveelutions" && !this.state.currentRoute.startsWith("Casino")) {
