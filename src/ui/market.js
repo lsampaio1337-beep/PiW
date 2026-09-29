@@ -870,6 +870,10 @@ window.marketSellSelectedPokemon = function() {
     });
 
     state.trainer.money += totalGain;
+            if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') {
+                window.trackDailyChallenge('sell_pokemon', { count: numSold });
+                window.trackDailyChallenge('earn_money', { amount: totalGain });
+            }
 
     // Track Daily Challenges
     if (typeof window.trackDailyChallenge === 'function') {

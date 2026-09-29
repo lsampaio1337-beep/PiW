@@ -19,7 +19,17 @@ function getLocalDateString() {
     return now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0');
 }
 
-
+export function checkAndResetDailyChallenges() {
+    initDailyChallengesState();
+    const today = getLocalDateString();
+    if (state.stats.dailyChallenges.lastDate !== today) {
+        if (state.stats.dailyChallenges.lastDate !== null) {
+            state.stats.dailyChallenges.rotationIndex++;
+        }
+        state.stats.dailyChallenges.lastDate = today;
+        generateActiveChallenges();
+    }
+}
 
 const CHALLENGE_DEFS = {
     combat: [
@@ -303,7 +313,11 @@ window.trackDailyChallenge = function(type, data = {}) {
             }
 
             if ((type === 'catch_type' || type === 'defeat_type') && data.types && c.extra) {
-                if (!data.types.includes(c.extra)) continue;
+                let found = false;
+                for (let t of data.types) {
+                    if (t.toLowerCase() === c.extra.toLowerCase()) found = true;
+                }
+                if (!found) continue;
             }
 
             if (type === 'catch_species' && data.species && c.extra) {

@@ -50,14 +50,6 @@ function getLocalDateString() {
     return now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0');
 }
 
-export function checkDailyRewardAvailable() {
-    if (!state.stats.dailyRewards) {
-        state.stats.dailyRewards = { daysClaimed: 0, lastClaimDate: null };
-    }
-    const today = getLocalDateString();
-    return state.stats.dailyRewards.lastClaimDate !== today;
-}
-
 export function checkAnyDailyChallengeCompleted() {
     if (!state.stats.dailyChallenges || !state.stats.dailyChallenges.active) return false;
     if (state.stats.dailyChallenges.hasSeenNotification) return false;
@@ -65,6 +57,14 @@ export function checkAnyDailyChallengeCompleted() {
         if (c.completed) return true;
     }
     return false;
+}
+
+export function checkDailyRewardAvailable() {
+    if (!state.stats.dailyRewards) {
+        state.stats.dailyRewards = { daysClaimed: 0, lastClaimDate: null };
+    }
+    const today = getLocalDateString();
+    return state.stats.dailyRewards.lastClaimDate !== today;
 }
 
 export function claimDailyReward(dayIndex) {

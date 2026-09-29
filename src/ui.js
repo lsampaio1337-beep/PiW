@@ -1857,10 +1857,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
     bindBtn('btn-calendar', () => {
         if(!checkCombatLock()) {
             showCalendar();
-            if (state.stats.dailyChallenges) {
-                state.stats.dailyChallenges.hasSeenNotification = true;
-                updateTopbar();
-            }
+
         }
     });
     bindBtn('btn-gift', () => {
