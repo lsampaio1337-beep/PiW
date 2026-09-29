@@ -16,7 +16,6 @@ export function showSettings() {
 
         <button onclick="window.exportLog()">Export Save Log</button>
         <button onclick="window.activateCheat()" style="margin-left: 10px; background-color: #c0392b; color: white;">Cheat</button>
-        <button onclick="window.showTimeLapseModal()" style="margin-left: 10px; background-color: #8e44ad; color: white;">TimeLapse</button>
     `;
     showModal("Settings", settingsHTML, "window-settings");
 }

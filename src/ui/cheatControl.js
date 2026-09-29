@@ -1,6 +1,7 @@
 import { state, globals } from '../state.js';
 import * as mathEngine from '../mathEngine.js';
 import { updateUI, showModal } from '../ui.js';
+import { VITAMINS } from '../constants.js';
 
 export function showCheatControlModal() {
     const html = `
@@ -15,13 +16,108 @@ export function showCheatControlModal() {
             <button onclick="window.cheatAction('PokedexShiny')" style="padding: 10px; font-size: 14px; background: linear-gradient(45deg, #f39c12, #e74c3c, #8e44ad); color: white; border: none; border-radius: 5px; cursor: pointer;">PokedexShiny</button>
             <button onclick="window.cheatAction('JigglypuffDust')" style="padding: 10px; font-size: 14px; background: #ffb6c1; color: black; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Jigglypuff Dust</button>
             <button onclick="window.cheatAction('BonusCandy')" style="padding: 10px; font-size: 14px; background: #ecf0f1; color: black; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Bonus Candy</button>
+            <button onclick="window.showTimeLapseModal()" style="padding: 10px; font-size: 14px; background: #8e44ad; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">TimeLapse</button>
+            <button onclick="window.cheatAction('GodMode')" style="padding: 10px; font-size: 14px; background: linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3); color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; text-shadow: 1px 1px 2px black;">God Mode</button>
         </div>
     `;
     showModal("Cheat Control", html, "window-cheat-control", "400px");
 }
 
 export function cheatAction(action) {
-    if (action === 'Money') {
+    if (action === 'GodMode') {
+        state.trainer.money += 100000000;
+
+        // 10000 masterball
+        if (!state.backpack.pokeballs) state.backpack.pokeballs = {};
+        state.backpack.pokeballs['Masterball'] = (state.backpack.pokeballs['Masterball'] || 0) + 10000;
+
+        // 1000 of each stone (Types + VITAMINS)
+        if (!state.backpack.stones) state.backpack.stones = {};
+        Object.keys(state.config.types).forEach(type => {
+            const stoneName = `${type} Stone`;
+            state.backpack.stones[stoneName] = (state.backpack.stones[stoneName] || 0) + 1000;
+        });
+        VITAMINS.forEach(vitamin => {
+            state.backpack.stones[vitamin] = (state.backpack.stones[vitamin] || 0) + 1000;
+        });
+
+        // 1000 of each potion
+        if (!state.backpack.potions) state.backpack.potions = {};
+        if (state.config.balance && state.config.balance.items && state.config.balance.items.potions) {
+            state.config.balance.items.potions.forEach(potion => {
+                state.backpack.potions[potion.name] = (state.backpack.potions[potion.name] || 0) + 1000;
+            });
+        }
+
+        // Mewtwo Q=2 SumIv=600 Lvl=200 in party as leader
+        const mewtwoData = state.config.pokemonData[149]; // Mewtwo is ID 150, so index 149
+        if (mewtwoData) {
+            const level = 200;
+            const qVal = 2.0;
+            const ivs = { hp: 100, atk: 100, def: 100, spa: 100, spd: 100, spe: 100 };
+            const bst = mewtwoData.hp + mewtwoData.atk + mewtwoData.def + mewtwoData.spa + mewtwoData.spd + mewtwoData.spe;
+            const totalIV = 600;
+
+            const stats = {
+                hp: mathEngine.calculateHP(mewtwoData.hp, ivs.hp, level, qVal),
+                atk: mathEngine.calculateStat(mewtwoData.atk, ivs.atk, level, qVal),
+                def: mathEngine.calculateStat(mewtwoData.def, ivs.def, level, qVal),
+                spa: mathEngine.calculateStat(mewtwoData.spa, ivs.spa, level, qVal),
+                spd: mathEngine.calculateStat(mewtwoData.spd, ivs.spd, level, qVal),
+                spe: mathEngine.calculateStat(mewtwoData.spe, ivs.spe, level, qVal)
+            };
+
+            let learned = [];
+            if (mewtwoData.learnset) {
+                for (const ls of mewtwoData.learnset) {
+                    if (level >= ls.level && state.config.moves[ls.move]) {
+                        const moveData = JSON.parse(JSON.stringify(state.config.moves[ls.move]));
+                        moveData.name = ls.move;
+                        learned.push(moveData);
+                    }
+                }
+            }
+            const moves = learned.slice(-4);
+            const xp = mathEngine.calculateTotalXP(level);
+
+            const godMewtwo = {
+                id: mewtwoData.id,
+                name: mewtwoData.name,
+                types: mewtwoData.types,
+                level: level,
+                xp: xp,
+                qualityName: "Shiny",
+                quality: qVal,
+                ivs: { ...ivs },
+                currentStats: { ...stats },
+                maxHp: stats.hp,
+                currentHp: stats.hp,
+                evxp: mathEngine.calculateEVXP(bst, level, qVal, totalIV),
+                evm: mathEngine.calculateEVM(bst, level, qVal, totalIV),
+                pp: mathEngine.calculatePP(bst, level, qVal, totalIV),
+                bst: bst,
+                moves: JSON.parse(JSON.stringify(moves)),
+                uuid: crypto.randomUUID()
+            };
+
+            if (state.party.length >= 6) {
+                const lastMon = state.party.pop();
+                if (!state.storage) state.storage = [];
+                state.storage.push(lastMon);
+            }
+            state.party.unshift(godMewtwo);
+
+            // Give Pokedex credit
+            if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
+            if (!state.stats.seenShiniesSpecies) state.stats.seenShiniesSpecies = {};
+            if (!state.stats.caughtShiniesSpecies) state.stats.caughtShiniesSpecies = {};
+            state.stats.caughtSpecies[mewtwoData.name] = (state.stats.caughtSpecies[mewtwoData.name] || 0) + 1;
+            state.stats.seenShiniesSpecies[mewtwoData.name] = true;
+            state.stats.caughtShiniesSpecies[mewtwoData.name] = (state.stats.caughtShiniesSpecies[mewtwoData.name] || 0) + 1;
+        }
+
+        updateUI();
+    } else if (action === 'Money') {
         state.trainer.money += 1000000000;
         updateUI();
     } else if (action === 'NoMoney') {
