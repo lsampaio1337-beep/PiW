@@ -39,5 +39,12 @@
     "axios": "^1.19.0",
     "electron-squirrel-startup": "^1.0.1",
     "jsdom": "^29.1.1"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "electron",
+      "electron-winstaller",
+      "electron-squirrel-startup"
+    ]
   }
 }
