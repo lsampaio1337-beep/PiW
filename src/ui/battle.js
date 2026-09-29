@@ -431,8 +431,15 @@ export function updateBattleArena() {
             const elSumIV = document.getElementById('enemy-info-sumiv');
 
             if (elEnemySprite && elEnemySide) {
-                elEnemySprite.src = `Assets/Pokemon Sprites/Natural/${enemy.qualityName === 'Shiny' ? enemy.id + '_shiny' : enemy.id}.png`;
+                elEnemySprite.src = `Assets/Pokemon Sprites/Clean/${enemy.qualityName === 'Shiny' ? enemy.id + '_shiny' : enemy.id}_Clean.png`;
                 elEnemySprite.style.display = 'block';
+
+                // Snap flying vs non-flying inside the new flex frame container
+                const isFlying = enemy.types.includes('Flying') || enemy.types.includes('Wind');
+                if (elEnemySprite.parentElement) {
+                    elEnemySprite.parentElement.style.justifyContent = isFlying ? 'flex-start' : 'flex-end';
+                }
+
                 applyWalkAnimations(enemy, true);
 
                 if (elEnemyInfo && elLevel && elQuality && elSumIV) {
@@ -443,28 +450,17 @@ export function updateBattleArena() {
                     elSumIV.innerText = `SumIV=${sumIV}`;
                 }
 
-                elEnemySide.style.top = '50%';
-                elEnemySide.style.bottom = 'auto';
-
                 if (battleSystem.isSliding) {
                     if (elEnemySide.dataset.sliding !== 'true') {
                         elEnemySide.dataset.sliding = 'true';
                         elEnemySide.style.transition = 'none';
                         elEnemySide.style.left = '100%';
-                        if (hpContainerEnemy) {
-                            hpContainerEnemy.style.transition = 'none';
-                            hpContainerEnemy.style.left = '100%';
-                        }
                         // Trigger reflow
                         void elEnemySide.offsetWidth;
                         requestAnimationFrame(() => {
                             requestAnimationFrame(() => {
                                 elEnemySide.style.transition = `left ${battleSystem.slideDuration}ms linear`;
                                 elEnemySide.style.left = '35%';
-                                if (hpContainerEnemy) {
-                                    hpContainerEnemy.style.transition = `left ${battleSystem.slideDuration}ms linear`;
-                                    hpContainerEnemy.style.left = '35%';
-                                }
                             });
                         });
                     }
@@ -472,10 +468,6 @@ export function updateBattleArena() {
                     elEnemySide.dataset.sliding = 'false';
                     elEnemySide.style.transition = 'none';
                     elEnemySide.style.left = '35%';
-                    if (hpContainerEnemy) {
-                        hpContainerEnemy.style.transition = 'none';
-                        hpContainerEnemy.style.left = '35%';
-                    }
                 }
             }
 
@@ -483,8 +475,6 @@ export function updateBattleArena() {
             const elPlayerSide = document.getElementById('player-side');
             if (leader && elPlayerSide) {
 
-                elPlayerSide.style.top = '50%';
-                elPlayerSide.style.bottom = 'auto';
                 elPlayerSide.style.left = '25%';
 
                 const hpContainerPlayer = document.getElementById('player-battle-hp-container');
@@ -513,8 +503,15 @@ export function updateBattleArena() {
                 if (elPlayerSprite) {
                     let dittoBg = document.getElementById('player-sprite-ditto-bg');
                     if (dittoBg) dittoBg.style.display = 'none';
-                    elPlayerSprite.src = `Assets/Pokemon Sprites/Natural/${leader.qualityName === 'Shiny' ? (leader.transformedIntoId || leader.id) + '_shiny' : (leader.transformedIntoId || leader.id)}.png`;
+                    elPlayerSprite.src = `Assets/Pokemon Sprites/Clean/${leader.qualityName === 'Shiny' ? (leader.transformedIntoId || leader.id) + '_shiny' : (leader.transformedIntoId || leader.id)}_Clean.png`;
                     elPlayerSprite.style.display = 'block';
+
+                    // Snap flying vs non-flying inside the new flex frame container
+                    const isFlying = leader.types.includes('Flying') || leader.types.includes('Wind');
+                    if (elPlayerSprite.parentElement) {
+                        elPlayerSprite.parentElement.style.justifyContent = isFlying ? 'flex-start' : 'flex-end';
+                    }
+
                     applyWalkAnimations(leader, false);
 
                     if (leader.currentHp <= 0) {
@@ -555,24 +552,15 @@ export function updateBattleArena() {
                 elEnemySprite.style.display = 'block';
                 elEnemySide.style.transition = 'none';
                 elEnemySide.style.left = '35%'; // Matching active battle destination
-                elEnemySide.style.top = '50%';
-                elEnemySide.style.bottom = 'auto';
 
                 const elEnemyInfo = document.getElementById('enemy-info-container');
                 if (elEnemyInfo) elEnemyInfo.style.display = 'none';
-
-                if (hpContainerEnemy) {
-                    hpContainerEnemy.style.transition = 'none';
-                    hpContainerEnemy.style.left = '35%';
-                }
             }
 
             const leader = state.party[0];
             const elPlayerSide = document.getElementById('player-side');
             if (leader && elPlayerSide) {
 
-                elPlayerSide.style.top = '50%';
-                elPlayerSide.style.bottom = 'auto';
                 elPlayerSide.style.left = '25%';
 
                 const hpContainerPlayer = document.getElementById('player-battle-hp-container');
@@ -601,8 +589,15 @@ export function updateBattleArena() {
                 if (elPlayerSprite) {
                     let dittoBg = document.getElementById('player-sprite-ditto-bg');
                     if (dittoBg) dittoBg.style.display = 'none';
-                    elPlayerSprite.src = `Assets/Pokemon Sprites/Natural/${leader.qualityName === 'Shiny' ? (leader.transformedIntoId || leader.id) + '_shiny' : (leader.transformedIntoId || leader.id)}.png`;
+                    elPlayerSprite.src = `Assets/Pokemon Sprites/Clean/${leader.qualityName === 'Shiny' ? (leader.transformedIntoId || leader.id) + '_shiny' : (leader.transformedIntoId || leader.id)}_Clean.png`;
                     elPlayerSprite.style.display = 'block';
+
+                    // Snap flying vs non-flying inside the new flex frame container
+                    const isFlying = leader.types.includes('Flying') || leader.types.includes('Wind');
+                    if (elPlayerSprite.parentElement) {
+                        elPlayerSprite.parentElement.style.justifyContent = isFlying ? 'flex-start' : 'flex-end';
+                    }
+
                     applyWalkAnimations(leader, false);
 
                     if (leader.currentHp <= 0) {
