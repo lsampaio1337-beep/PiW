@@ -235,7 +235,7 @@ class BattleSystem {
         // Out of combat insta-heal if threshold is met
         const leader = this.state.party[0];
         if (leader && leader.currentHp > 0 && this.state.settings.autoPotion) {
-            let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 50;
+            let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 25;
             while ((leader.currentHp / leader.maxHp) * 100 <= threshold) {
                 if (!this.tryUsePotion(leader)) break; // Stop if no potions left
             }
@@ -565,7 +565,7 @@ class BattleSystem {
         // Check if player uses potion
         if (attacker === leader && this.state.settings.autoPotion) {
             // Check if we hit the threshold
-            let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 50;
+            let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 25;
             let hpPercentage = (attacker.currentHp / attacker.maxHp) * 100;
 
             if (hpPercentage <= threshold) {
@@ -653,7 +653,7 @@ class BattleSystem {
 
         if (pokemon.currentHp >= pokemon.maxHp) return false; // don't heal if full
 
-        let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 50;
+        let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 25;
         if ((pokemon.currentHp / pokemon.maxHp) * 100 > threshold) return false;
 
         let tier = this.state.settings.activePotionTier;
@@ -703,8 +703,10 @@ class BattleSystem {
             ballName = this.state.config.balance.items.pokeballs[tier].name;
 
             if (ballName !== "Safariball") {
-                if (this.state.backpack.pokeballs[ballName] > 0) {
-                    this.state.backpack.pokeballs[ballName]--;
+                if (this.state.settings.infiniteItems || this.state.backpack.pokeballs[ballName] > 0) {
+                    if (!this.state.settings.infiniteItems) {
+                        this.state.backpack.pokeballs[ballName]--;
+                    }
                 } else {
                     return { used: false, ballName: null, caught: false }; // No balls left
                 }
@@ -748,7 +750,7 @@ class BattleSystem {
 
         // Out of combat insta-heal if threshold is met
         if (leader && leader.currentHp > 0 && this.state.settings.autoPotion) {
-            let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 50;
+            let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 25;
             while ((leader.currentHp / leader.maxHp) * 100 <= threshold) {
                 if (!this.tryUsePotion(leader)) break;
             }
@@ -1377,8 +1379,8 @@ class BattleSystem {
             this.state.backpack.potions[this.state.config.balance.items.potions[this.state.settings.activePotionTier].name] || 0 : 0;
 
         // Ensure we don't simulate too many frames and hang the browser if time is huge
-        // Limit to approx max of 24h of simulation steps, but it evaluates fast
-        const maxTime = Math.min(elapsedMs, 24 * 60 * 60 * 1000);
+        // Limit to approx max of 111h of simulation steps, but it evaluates fast
+        const maxTime = Math.min(elapsedMs, 111 * 60 * 60 * 1000);
         const route = this.state.config.routes.find(r => r.name === this.state.currentRoute);
 
         if (!route && this.state.currentRoute !== "Casino - Eeveelutions" && !this.state.currentRoute.startsWith("Casino")) {
@@ -1491,24 +1493,33 @@ class BattleSystem {
                 moves: this.getLearnsetMoves(pokemonBase, level)
             };
 
-            // Estimate search time
-            let searchTime = 5000;
             let leaderSpe = leader.currentStats ? leader.currentStats.spe : 10;
             let enemySpe = this.activeEncounter.currentStats ? this.activeEncounter.currentStats.spe : 10;
 
-            // Adjust search time based on leader speed
-            searchTime = Math.max(500, searchTime * (10 / Math.max(10, leaderSpe)));
+            // Accurate search time to mimic Natural play at 1x speed
+            let searchTime = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpe));
+            searchTime = Math.max(300, searchTime);
+
+            // Add slide-in animation delay that occurs in Natural play (1000ms at 1x speed)
+            searchTime += 1000;
 
             // Accurate Combat Simulation Loop
             let combatTime = 0;
             let leaderConsecutiveHeals = 0;
 
+            // Leader and Enemy attack delays
+            let leaderDelay = this.state.config.balance.baseAttackDelay * 1000 * (100 / (100 + leaderSpe));
+            leaderDelay = Math.max(250, leaderDelay);
+            let enemyDelay = this.state.config.balance.baseAttackDelay * 1000 * (100 / (100 + enemySpe));
+            enemyDelay = Math.max(250, enemyDelay);
+
             // Which goes first
-            let isLeaderFaster = leaderSpe >= enemySpe;
+            let isLeaderFaster = leaderDelay <= enemyDelay;
+            let firstDelay = Math.min(leaderDelay, enemyDelay);
 
             const executeSimulatedTurn = (attacker, defender, isLeader) => {
                 if (isLeader && this.state.settings.autoPotion) {
-                    let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 50;
+                    let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 25;
                     let hpPercentage = (attacker.currentHp / attacker.maxHp) * 100;
 
                     if (hpPercentage <= threshold) {
@@ -1538,25 +1549,31 @@ class BattleSystem {
             };
 
             while (leader.currentHp > 0 && this.activeEncounter.currentHp > 0) {
-                combatTime += 1000; // Roughly 1s per turn phase
-
                 let firstActor = isLeaderFaster ? leader : this.activeEncounter;
                 let secondActor = isLeaderFaster ? this.activeEncounter : leader;
+
+                combatTime += firstDelay;
 
                 // First turn
                 executeSimulatedTurn(firstActor, secondActor, isLeaderFaster);
 
                 if (secondActor.currentHp <= 0) break;
 
-                // Second turn
+                // Second turn (delay before second actor strikes)
+                let secondDelay = isLeaderFaster ? enemyDelay : leaderDelay;
+                combatTime += secondDelay;
+
                 executeSimulatedTurn(secondActor, firstActor, !isLeaderFaster);
             }
+
+            // Add UI defeat/faint fade-out delay mimicking natural play
+            combatTime += 500;
 
             // End of combat logic
             if (leader.currentHp > 0) {
                 // Out of combat insta-heal if threshold is met, identical to handleEnemyDefeat
                 if (this.state.settings.autoPotion) {
-                    let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 50;
+                    let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 25;
                     while ((leader.currentHp / leader.maxHp) * 100 <= threshold) {
                         if (!this.tryUsePotion(leader)) break;
                     }

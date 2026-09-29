@@ -46,6 +46,7 @@ import { updateTopbar } from './ui/topbar.js';
 import { updateSidebar } from './ui/sidebar.js';
 import { updateBattleArena, showDamage, playCombatAnimations, triggerDefeatAnimation, showLoot } from './ui/battle.js';
 import { showCalendar } from './ui/calendar.js';
+import './ui/tokenShop.js';
 import { showGiftModal } from './ui/gift.js';
 import { showMap, navigateToLocation, showMapTooltip, hideMapTooltip } from './ui/map.js';
 import { showPokedex, showDexEntry, showSmartCaptureMode, toggleSmartCaptureShinyMode, showSmartCaptureBallSelection, selectSmartCaptureBall } from './ui/pokedex.js';
@@ -509,33 +510,15 @@ window.showChallengesModal = function() {
     showModal("Progress Challenges", html, "window-challenges", "1000px");
     const win = document.getElementById("window-challenges");
     if (win) {
-        // Read the actual unscaled width, defaulting to 1000 if not yet set
-        let winWidth = win._originalWidth || parseInt(win.style.width) || win.offsetWidth || 1000;
-
         // We handle the max height natively in windowManager now, so remove the strict CSS limit
         win.style.maxHeight = '';
-        win.dataset.maxHeightRatio = '1.5';
+
+        if (window.windowManager) window.windowManager.setWindowProportions('window-challenges', 1.0);
 
         // Ensure the content container scrolls if it overflows
         const contentContainer = win.querySelector('.window-content-container');
         if (contentContainer) {
             contentContainer.style.overflowY = 'auto';
-        }
-
-        // Only auto-adjust height if the number of challenges has changed
-        if (win._lastTotalChallengesCount !== totalChallengesCount) {
-
-            // Only force re-init if it's NOT the first time opening, because the first time opening
-            // createDynamicWindow will already do it, and doing it twice might cause a jump
-            if (win._lastTotalChallengesCount !== undefined) {
-                win._sizeInitialized = false;
-            }
-
-            win._lastTotalChallengesCount = totalChallengesCount;
-
-            if (typeof win.adjustHeightForNewContent === 'function') {
-                win.adjustHeightForNewContent();
-            }
         }
     }
 };
@@ -1095,6 +1078,12 @@ export function renderOakLab() {
     `;
 }
 
+// Main View has 2 modes:
+// 1. Hub Mode: The taller one (where you visit places such as casino, market, professor oak, safari, gyms).
+const MAIN_VIEW_HUB_MODE_RATIO = 1.8;
+// 2. Battle Mode: The shorter one (where battle occurs).
+const MAIN_VIEW_BATTLE_MODE_RATIO = 5.75;
+
 export function switchView(viewName) {
     state.currentView = viewName;
     document.querySelectorAll('.game-view').forEach(el => el.style.display = 'none');
@@ -1105,9 +1094,9 @@ export function switchView(viewName) {
     }
 
     if (viewName === 'BATTLE_ARENA') {
-        if (window.windowManager) window.windowManager.setWindowProportions('main-view-window', 5.75);
+        if (window.windowManager) window.windowManager.setWindowProportions('main-view-window', MAIN_VIEW_BATTLE_MODE_RATIO);
     } else {
-        if (window.windowManager) window.windowManager.setWindowProportions('main-view-window', 1.8);
+        if (window.windowManager) window.windowManager.setWindowProportions('main-view-window', MAIN_VIEW_HUB_MODE_RATIO);
     }
 
     if (viewName === 'PROF_OAK_LAB') {
@@ -1250,41 +1239,69 @@ function selectStarter(id) {
     renderOakLab();
 }
 
+let gameClockTimeout = null;
+let lastTickTime = null;
+
+window.restartGameClock = function() {
+    if (gameClockTimeout) {
+        clearTimeout(gameClockTimeout);
+        gameClockTimeout = null;
+    }
+
+    // Safety boundaries for speed
+    const speed = (state.settings && state.settings.gameSpeed) || 1;
+    // Timeout minimum is usually 4ms in browsers.
+    // This naturally caps the speed at ~250x, matching actual execution time.
+    const delay = Math.max(4, Math.floor(1000 / speed));
+
+    gameClockTimeout = setTimeout(gameClockTick, delay);
+};
+
+function gameClockTick() {
+    const speed = (state.settings && state.settings.gameSpeed) || 1;
+
+    if (!state.stats.playtime) state.stats.playtime = 0;
+    state.stats.playtime++;
+
+    if (state.currentView === "BATTLE_ARENA") {
+        state.stats.battleModeTimer = (state.stats.battleModeTimer || 0) + 1;
+        updateTopbar();
+    } else {
+        state.stats.battleModeTimer = 0;
+        updateTopbar();
+    }
+
+    // Award Jigglypuff Dust grains (1 grain per minute)
+    if (state.stats.playtime % 60 === 0 && state.stats.playtime > 0) {
+        state.stats.jigglypuffGrains = (state.stats.jigglypuffGrains || 0) + 1;
+        updateUI(); // Reflect new grains
+    }
+
+    // Daily Challenge Check
+    if (state.stats.playtime % 10 === 0) {
+        checkAndResetDailyChallenges();
+    }
+
+    if (state.stats.playtime === 60) {
+        updateTopbar();
+    }
+
+    // Schedule next tick
+    const delay = Math.max(4, Math.floor(1000 / speed));
+    gameClockTimeout = setTimeout(gameClockTick, delay);
+}
+
+
 function startGame() {
     let bs = new BattleSystem(state, updateUI);
     setBattleSystem(bs);
     updateUI();
     bs.start();
 
-    // Playtime tracker (adds 1 second every second)
-    setInterval(() => {
-        state.stats.playtime = (state.stats.playtime || 0) + 1;
+    state.settings.gameSpeed = 1; // Reset to 1 on load
 
-        if (state.currentView === "BATTLE_ARENA") {
-            const speed = (state.settings && state.settings.gameSpeed) || 1;
-            state.stats.battleModeTimer = (state.stats.battleModeTimer || 0) + (1 * speed);
-            updateTopbar();
-        } else {
-            state.stats.battleModeTimer = 0;
-            updateTopbar();
-        }
-
-        // Award Jigglypuff Dust grains (1 grain per minute)
-        // Check using modulo so that reloading doesn't reset progress towards the next minute.
-        // We ensure we only add 1 grain if playtime is perfectly divisible by 60 and > 0.
-        if (state.stats.playtime % 60 === 0 && state.stats.playtime > 0) {
-            state.stats.jigglypuffGrains = (state.stats.jigglypuffGrains || 0) + 1;
-        }
-
-        // Daily Challenge Check
-        if (state.stats.playtime % 10 === 0) {
-            checkAndResetDailyChallenges();
-        }
-
-        if (state.stats.playtime === 60) {
-            updateTopbar();
-        }
-    }, 1000);
+    // Start playtime tracker
+    window.restartGameClock();
 
     // Autosave loop
     setInterval(() => {
@@ -1295,6 +1312,93 @@ function startGame() {
     window.addEventListener('beforeunload', () => {
         storage.save(state);
     });
+
+    // Handle scrolling during drag-and-drop (Wheel + Auto-scroll at edges)
+    window.isDraggingPokemon = false;
+    let dragScrollTarget = null;
+    let dragScrollY = 0;
+    let autoScrollInterval = null;
+
+    function getScrollableParent(node) {
+        if (!node) return null;
+        while (node && node !== document.body && node !== document) {
+            if (node.scrollHeight > node.clientHeight) {
+                const style = window.getComputedStyle(node);
+                if (style.overflowY === 'auto' || style.overflowY === 'scroll') {
+                    return node;
+                }
+            }
+            node = node.parentNode;
+        }
+        return null;
+    }
+
+    window.addEventListener('dragstart', () => {
+        window.isDraggingPokemon = true;
+        if (autoScrollInterval) cancelAnimationFrame(autoScrollInterval);
+
+        autoScrollInterval = requestAnimationFrame(autoScrollLoop);
+    });
+
+    window.addEventListener('dragend', () => {
+        window.isDraggingPokemon = false;
+        dragScrollTarget = null;
+        if (autoScrollInterval) cancelAnimationFrame(autoScrollInterval);
+    });
+
+    // Track mouse position during drag to find what we are hovering
+    window.addEventListener('dragover', (e) => {
+        dragScrollTarget = document.elementFromPoint(e.clientX, e.clientY) || e.target;
+        dragScrollY = e.clientY;
+    });
+
+    window.addEventListener('wheel', (e) => {
+        if (window.isDraggingPokemon) {
+            let scrollNode = getScrollableParent(dragScrollTarget) || cachedScrollNode;
+            if (scrollNode) {
+                scrollNode.scrollTop += e.deltaY;
+            }
+        }
+    }, { passive: false });
+
+    let cachedScrollNode = null;
+
+    function autoScrollLoop() {
+        if (!window.isDraggingPokemon) {
+            cachedScrollNode = null;
+            return;
+        }
+
+        if (dragScrollTarget) {
+            let currentNode = getScrollableParent(dragScrollTarget);
+            if (currentNode) {
+                cachedScrollNode = currentNode;
+            }
+        }
+
+        if (cachedScrollNode) {
+            const rect = cachedScrollNode.getBoundingClientRect();
+            const edgeSize = 40;
+
+            // If mouse is near or beyond the top edge of the scroll container
+            if (dragScrollY < rect.top + edgeSize) {
+                let speed = 15;
+                if (dragScrollY < rect.top) speed = 60; // 4x faster beyond border
+                cachedScrollNode.scrollTop -= speed;
+            }
+            // If mouse is near or beyond the bottom edge of the scroll container
+            else if (dragScrollY > rect.bottom - edgeSize) {
+                let speed = 15;
+                if (dragScrollY > rect.bottom) speed = 60; // 4x faster beyond border
+                cachedScrollNode.scrollTop += speed;
+            }
+        }
+
+        autoScrollInterval = requestAnimationFrame(autoScrollLoop);
+    }
+
+
+
 }
 
 async function init() {
@@ -1526,7 +1630,7 @@ async function init() {
 
                     // Fallback for older saves
                     if (state.settings.autoPotionThreshold === undefined) {
-                        state.settings.autoPotionThreshold = 50;
+                        state.settings.autoPotionThreshold = 25;
                     }
 
                     // Handle backwards compatibility for challenges
@@ -2009,40 +2113,117 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
         }
 
         showModal("Trainer", `
-            <div style="text-align: left; display: inline-block;">
-                <p><b>Time played:</b> ${playtimeStr}</p>
-                <p><b>Money:</b> $${state.trainer.money.toLocaleString()}</p>
-                <br>
-                <p><b>Battles Won:</b> ${(state.stats.battlesWon || 0).toLocaleString()}</p>
-                <p><b>Faints:</b> ${(state.stats.faints || 0).toLocaleString()}</p>
-                <p><b>Total Pokémon Captured:</b> ${(state.stats.caught || 0).toLocaleString()}</p>
-                <p><b>Species Caught:</b> ${uniqueSpeciesCaught} / ${state.config.pokemonData.length}</p>
-                <p><b>Shiny Species Caught:</b> ${uniqueShinySpeciesCaught} / ${state.config.pokemonData.length}</p>
-                <p><b>Shinies Seen:</b> ${(state.stats.shiniesSeen || 0).toLocaleString()}</p>
-                <p><b>Shinies Caught:</b> ${(state.stats.shiniesCaught || 0).toLocaleString()}</p>
-                <br>
-                <p><b>Jigglypuff Grains Used:</b> ${(state.stats.jigglypuffGrainsUsed || 0).toLocaleString()}</p>
-                <p><b>White Candies Claimed:</b> ${(whiteCandiesClaimed || 0).toLocaleString()}</p>
-                <p><b>Daily Rewards Collected:</b> ${(state.stats.dailyRewards ? state.stats.dailyRewards.daysClaimed : 0).toLocaleString()}</p>
-                <p><b>Progress Challenge Completed:</b> ${challengesCompleted}/${maxChallenges}</p>
-                <p><b>Assignments Completed:</b> ${assignmentsCompleted}/${maxAssignments}</p>
-                <br>
-                <p><b>Highest Level on Backpack:</b> ${highestLevel}</p>
-                <p><b>Highest Quality on Backpack:</b> ${highestQuality}</p>
-                <p><b>Highest IV Sum on Backpack:</b> ${highestSumIV}</p>
-                <p><b>Highest Level Captured:</b> ${state.stats.highestLevelCaptured || 0}</p>
-                <p><b>Highest Quality Captured:</b> ${state.stats.highestQualityCaptured || 0}</p>
-                <p><b>Highest IV Sum Captured:</b> ${state.stats.highestSumIVCaptured || 0}</p>
+            <div style="text-align: left; margin-bottom: 20px;">
+                <div style="display: flex; gap: 40px; justify-content: space-between;">
+                    <div style="flex: 1;">
+                        <p><b>Time played:</b> ${playtimeStr}</p>
+                        <p><b>Money:</b> $${state.trainer.money.toLocaleString()}</p>
+                    </div>
+                    <div style="flex: 1;">
+                        <p><b>Battles Won:</b> ${(state.stats.battlesWon || 0).toLocaleString()}</p>
+                        <p><b>Faints:</b> ${(state.stats.faints || 0).toLocaleString()}</p>
+                    </div>
+                </div>
+                <hr style="margin: 10px 0;">
+                <div style="display: flex; gap: 40px; justify-content: space-between;">
+                    <div style="flex: 1;">
+                        <p><b>Total Pokémon Captured:</b> ${(state.stats.caught || 0).toLocaleString()}</p>
+                        <p><b>Species Caught:</b> ${uniqueSpeciesCaught} / ${state.config.pokemonData.length}</p>
+                    </div>
+                    <div style="flex: 1;">
+                        <p><b>Shinies Caught:</b> ${(state.stats.shiniesCaught || 0).toLocaleString()}</p>
+                        <p><b>Shiny Species Caught:</b> ${uniqueShinySpeciesCaught} / ${state.config.pokemonData.length}</p>
+                    </div>
+                </div>
+                <hr style="margin: 10px 0;">
+                <div style="display: flex; gap: 40px; justify-content: space-between;">
+                    <div style="flex: 1;">
+                        <p><b>Jigglypuff Grains Used:</b> ${(state.stats.jigglypuffGrainsUsed || 0).toLocaleString()}</p>
+                        <p><b>Daily Rewards Collected:</b> ${(state.stats.dailyRewards ? state.stats.dailyRewards.daysClaimed : 0).toLocaleString()}</p>
+                        <p><b>Professor Oak Assignments Completed:</b> ${assignmentsCompleted}/${maxAssignments}</p>
+                    </div>
+                    <div style="flex: 1;">
+                        <p><b>White Candies Claimed:</b> ${(whiteCandiesClaimed || 0).toLocaleString()}</p>
+                        <p><b>Tokens Earned:</b> ${(state.stats.tokensEarned || 0).toLocaleString()}</p>
+                        <p><b>Progress Challenge Completed:</b> ${challengesCompleted}/${maxChallenges}</p>
+                    </div>
+                </div>
+                <hr style="margin: 10px 0;">
+                <div style="display: flex; gap: 40px; justify-content: space-between;">
+                    <div style="flex: 1;">
+                        <p><b>Highest Level on Backpack:</b> ${highestLevel}</p>
+                        <p><b>Highest Quality on Backpack:</b> ${highestQuality}</p>
+                        <p><b>Highest IV Sum on Backpack:</b> ${highestSumIV}</p>
+                    </div>
+                    <div style="flex: 1;">
+                        <p><b>Highest Level Captured:</b> ${state.stats.highestLevelCaptured || 0}</p>
+                        <p><b>Highest Quality Captured:</b> ${state.stats.highestQualityCaptured || 0}</p>
+                        <p><b>Highest IV Sum Captured:</b> ${state.stats.highestSumIVCaptured || 0}</p>
+                    </div>
+                </div>
             </div>
-            <h3 style="margin-top: 10px; margin-bottom: 5px;">Badges:</h3>
-            ${badgesHtml}
-            <div style="margin-top: 15px; text-align: center;">
+            <div style="margin-top: 15px; text-align: center; display: flex; gap: 10px; justify-content: center;">
+                <button id="btn-trainer-badges" style="padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer; background: #3b82f6; color: white; border: none; border-radius: 5px;">Badges</button>
                 <button id="btn-catch-rate" style="padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer; background: #3b82f6; color: white; border: none; border-radius: 5px;">Catch Rate Table</button>
+                <button id="btn-trainer-upgrades" style="padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer; background: #3b82f6; color: white; border: none; border-radius: 5px;">Upgrades</button>
             </div>
         `, "window-trainer");
 
         document.getElementById('btn-catch-rate').onclick = () => {
             if(!checkCombatLock()) showCatchRateModal();
+        };
+
+        document.getElementById('btn-trainer-badges').onclick = () => {
+            if(!checkCombatLock()) {
+                showModal("Badges", `
+                    <div style="text-align: center;">
+                        ${badgesHtml}
+                    </div>
+                `, "window-badges");
+            }
+        };
+
+        document.getElementById('btn-trainer-upgrades').onclick = () => {
+            if(!checkCombatLock()) {
+                let upgradesHtml = '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 10px; padding: 10px;">';
+
+                if (state.stats.upgrades) {
+                    const upgradeTypes = [
+                        { key: 'ballsTier', configKey: 'ballPocket' },
+                        { key: 'potionsTier', configKey: 'potionSatchel' },
+                        { key: 'boxTier', configKey: 'pokemonBox' },
+                        { key: 'glassTier', configKey: 'glass' },
+                        { key: 'smartwatchTier', configKey: 'smartwatch' },
+                        { key: 'speedTier', configKey: 'speed' },
+                        { key: 'lootTier', configKey: 'loot' }
+                    ];
+
+                    upgradeTypes.forEach(type => {
+                        const tier = state.stats.upgrades[type.key] || 0;
+                        if (tier > 0) {
+                            // Show the currently purchased tier (index tier - 1)
+                            const configItem = state.config.balance.expansions[type.configKey][tier - 1];
+                            if (configItem) {
+                                const displayName = configItem.displayName || configItem.name;
+                                upgradesHtml += `
+                                    <div style="background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; padding: 10px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                        <img src="./Assets/Items/Upgrades/${configItem.name}.png" style="width: 50px; height: 50px; object-fit: contain; margin-bottom: 5px;" alt="${displayName}">
+                                        <div style="font-size: 12px; font-weight: bold; color: white; line-height: 1.1; word-wrap: break-word;">${displayName}</div>
+                                    </div>
+                                `;
+                            }
+                        }
+                    });
+                }
+
+                upgradesHtml += '</div>';
+
+                if (upgradesHtml === '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 10px; padding: 10px;"></div>') {
+                    upgradesHtml = '<div style="text-align: center; padding: 20px; font-style: italic; color: #ccc;">No upgrades purchased yet.</div>';
+                }
+
+                showModal("Upgrades", upgradesHtml, "window-upgrades");
+            }
         };
     });
 

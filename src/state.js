@@ -1,7 +1,8 @@
 export const state = {
     trainer: {
         money: 0,
-        badges: 0
+        badges: 0,
+        tokens: 0
     },
     party: [],
     box: [],
@@ -27,6 +28,7 @@ export const state = {
         shiniesCaught: 0,
         playtime: 0,
         faints: 0,
+        tokensEarned: 0,
         completedChallenges: 0,
         activeChallenges: ["Route 1"],
         completedChallengeIds: [],
@@ -63,12 +65,21 @@ export const state = {
             smartwatchTier: 0,
             speedTier: 0,
             lootTier: 0
+        },
+        upgradesUnlocked: {
+            balls: false,
+            potions: false,
+            box: false,
+            glass: false,
+            smartwatch: false,
+            speed: false,
+            loot: false
         }
     },
     settings: {
         gameSpeed: 1.0,
         autoPotion: true,
-        autoPotionThreshold: 50,
+        autoPotionThreshold: 25,
         activePotionTier: 0, // Tiny
         autoCatch: true,
         activeBallTier: 0, // Pokeball

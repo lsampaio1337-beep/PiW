@@ -5,10 +5,10 @@ import { formatQuantity } from './utils.js';
 export function renderStonesTab(area) {
     // 18 stones list hardcoded alphabetically to match the 6x3 grid request precisely
     const allStones = [
+        "Calcium SpAtk", "Carbo Speed", "HP Up", "Iron Def", "Protein Atk", "Zinc SpDef",
         "Bug Stone", "Dark Stone", "Dragon Stone", "Electric Stone", "Fairy Stone", "Fighting Stone",
         "Fire Stone", "Flying Stone", "Ghost Stone", "Grass Stone", "Ground Stone", "Ice Stone",
-        "Normal Stone", "Poison Stone", "Psychic Stone", "Rock Stone", "Steel Stone", "Water Stone",
-        "Calcium SpAtk", "Carbo Speed", "HP Up", "Iron Def", "Protein Atk", "Zinc SpDef"
+        "Normal Stone", "Poison Stone", "Psychic Stone", "Rock Stone", "Steel Stone", "Water Stone"
     ];
 
     let content = `
