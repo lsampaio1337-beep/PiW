@@ -82,8 +82,16 @@ export function openPokeMarketBuy() {
     const overlay = document.getElementById('main-view-inner-modal-overlay');
     const title = document.getElementById('main-view-inner-modal-title');
     const content = document.getElementById('main-view-inner-modal-content');
+
+    const titleHtml = `
+        <div style="display: inline-flex; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px;">
+            <button onclick="window.openPokeMarketBuy()" style="background: linear-gradient(to bottom, #2ecc71, #27ae60); color: white; border: 1px solid #2ecc71; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.2); font-size: 14px;">Buy Items</button>
+            <button onclick="if(window.openPokeMarketSell) window.openPokeMarketSell()" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmouseover="this.style.color='white'; this.style.background='rgba(255,255,255,0.1)';" onmouseout="this.style.color='rgba(255, 255, 255, 0.7)'; this.style.background='transparent';">Sell Items</button>
+        </div>
+    `;
+
     if (overlay && title && content) {
-        title.innerHTML = `<span onclick="window.openPokeMarketBuy()" style="cursor: pointer; opacity: 1; text-decoration: underline;">Buy Items</span> <span style="opacity: 0.5;">|</span> <span onclick="if(window.openPokeMarketSell) window.openPokeMarketSell()" style="cursor: pointer; opacity: 0.5;">Sell Items</span>`;
+        title.innerHTML = titleHtml;
         content.innerHTML = html;
         overlay.style.display = 'flex';
     } else {
@@ -466,8 +474,16 @@ export function openPokeMarketSell() {
     const overlay = document.getElementById('main-view-inner-modal-overlay');
     const title = document.getElementById('main-view-inner-modal-title');
     const content = document.getElementById('main-view-inner-modal-content');
+
+    const titleHtml = `
+        <div style="display: inline-flex; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px;">
+            <button onclick="window.openPokeMarketBuy()" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmouseover="this.style.color='white'; this.style.background='rgba(255,255,255,0.1)';" onmouseout="this.style.color='rgba(255, 255, 255, 0.7)'; this.style.background='transparent';">Buy Items</button>
+            <button onclick="if(window.openPokeMarketSell) window.openPokeMarketSell()" style="background: linear-gradient(to bottom, #e74c3c, #c0392b); color: white; border: 1px solid #e74c3c; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.2); font-size: 14px;">Sell Items</button>
+        </div>
+    `;
+
     if (overlay && title && content) {
-        title.innerHTML = `<span onclick="window.openPokeMarketBuy()" style="cursor: pointer; opacity: 0.5;">Buy Items</span> <span style="opacity: 0.5;">|</span> <span onclick="if(window.openPokeMarketSell) window.openPokeMarketSell()" style="cursor: pointer; opacity: 1; text-decoration: underline;">Sell Items</span>`;
+        title.innerHTML = titleHtml;
         content.innerHTML = html;
         overlay.style.display = 'flex';
     } else {
