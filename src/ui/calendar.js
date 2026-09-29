@@ -227,7 +227,6 @@ export function showCalendar(tab = 'activities') {
     }
 
         html += `</div>`;
-        html += `<p style="font-size: 12px; color: #ccc; margin-top: 15px;">New rewards available every day. Check back tomorrow!</p>`;
 
         // Inject Daily Challenges
         html += getDailyChallengesHtml();
