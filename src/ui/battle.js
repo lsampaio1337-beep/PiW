@@ -11,6 +11,36 @@ function applyWalkAnimations(pokemon, isEnemy) {
     if (!animContainer) return;
 
     let walkClass = 'anim-walk-other';
+    // Apply absolute snapping logic inside the 96x96 container
+    const spriteImg = document.getElementById(realPrefix + '-sprite');
+    if (spriteImg) {
+        spriteImg.style.position = 'absolute';
+
+        // Reset old styles
+        spriteImg.style.top = '';
+        spriteImg.style.bottom = '';
+        spriteImg.style.left = '';
+        spriteImg.style.right = '';
+        spriteImg.style.transform = ''; // reset flip
+
+        const isFlying = pokemon.types.includes('Flying') || pokemon.types.includes('Wind');
+
+        if (isFlying) {
+            spriteImg.style.top = '0';
+        } else {
+            spriteImg.style.bottom = '0';
+        }
+
+        if (isEnemy) {
+            spriteImg.style.left = '0'; // Face left naturally or snap left
+            spriteImg.dataset.baseTransform = '';
+        } else {
+            spriteImg.style.right = '0';
+            spriteImg.style.transform = 'scaleX(-1)'; // Player flipped horizontally when snapped to right corner
+            spriteImg.dataset.baseTransform = 'scaleX(-1)';
+        }
+    }
+
     if (pokemon.types.includes('Water')) walkClass = 'anim-walk-water';
     else if (pokemon.types.includes('Flying') || pokemon.types.includes('Wind')) walkClass = 'anim-walk-flying';
 
@@ -360,8 +390,7 @@ export function updateBattleArena() {
                     elSumIV.innerText = `SumIV=${sumIV}`;
                 }
 
-                elEnemySide.style.top = '50%';
-                elEnemySide.style.bottom = 'auto';
+
 
                 if (battleSystem.isSliding) {
                     if (elEnemySide.dataset.sliding !== 'true') {
@@ -400,8 +429,7 @@ export function updateBattleArena() {
             const elPlayerSide = document.getElementById('player-side');
             if (leader && elPlayerSide) {
 
-                elPlayerSide.style.top = '50%';
-                elPlayerSide.style.bottom = 'auto';
+
                 elPlayerSide.style.left = '25%';
 
                 const hpContainerPlayer = document.getElementById('player-battle-hp-container');
@@ -472,8 +500,7 @@ export function updateBattleArena() {
                 elEnemySprite.style.display = 'block';
                 elEnemySide.style.transition = 'none';
                 elEnemySide.style.left = '35%'; // Matching active battle destination
-                elEnemySide.style.top = '50%';
-                elEnemySide.style.bottom = 'auto';
+
 
                 const elEnemyInfo = document.getElementById('enemy-info-container');
                 if (elEnemyInfo) elEnemyInfo.style.display = 'none';
@@ -488,8 +515,7 @@ export function updateBattleArena() {
             const elPlayerSide = document.getElementById('player-side');
             if (leader && elPlayerSide) {
 
-                elPlayerSide.style.top = '50%';
-                elPlayerSide.style.bottom = 'auto';
+
                 elPlayerSide.style.left = '25%';
 
                 const hpContainerPlayer = document.getElementById('player-battle-hp-container');
