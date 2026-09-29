@@ -80,7 +80,17 @@ window.toggleSaleSelection = function(uuid) {
 
 // Global filter state
 window.pokemonFilters = window.pokemonFilters || {
-    name: '', minLvl: '', maxLvl: '', minQ: '', maxQ: '', minIV: '', maxIV: ''
+    name: '', minLvl: '', maxLvl: '', minQ: '', maxQ: '', minIV: '', maxIV: '', breedableOnly: false
+};
+
+window.clearPokemonBreedFilter = function() {
+    window.pokemonFilters = { name: '', minLvl: '', maxLvl: '', minQ: '', maxQ: '', minIV: '', maxIV: '', breedableOnly: false };
+};
+
+window.clickEmptyBreedSlot = function() {
+    window.clearPokemonBreedFilter();
+    window.pokemonFilters.breedableOnly = true;
+    renderBackpackTab('pokemon');
 };
 
 export function renderPokemonTab(area) {
@@ -158,7 +168,8 @@ export function renderPokemonTab(area) {
         } else {
             let label = i < 6 ? `Party #${i+1}` : (i === 6 ? 'To Breed' : 'To Train');
             let dropTarget = i < 6 ? 'party' : (i === 6 ? 'breeding' : 'training');
-            content += `<div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, '${dropTarget}')" style="border: 1px dashed #777; aspect-ratio: 1 / 1.5; display: flex; align-items: center; justify-content: center; container-type: inline-size; color: #777; box-sizing: border-box;"><span style="font-size: 15cqw; text-align: center;">${label}</span></div>`;
+            let extraAttrs = (i === 6) ? `onclick="window.clickEmptyBreedSlot()" style="border: 1px dashed #777; aspect-ratio: 1 / 1.5; display: flex; align-items: center; justify-content: center; container-type: inline-size; color: #777; box-sizing: border-box; cursor: pointer;"` : `style="border: 1px dashed #777; aspect-ratio: 1 / 1.5; display: flex; align-items: center; justify-content: center; container-type: inline-size; color: #777; box-sizing: border-box;"`;
+            content += `<div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, '${dropTarget}')" ${extraAttrs}><span style="font-size: 15cqw; text-align: center;">${label}</span></div>`;
         }
     }
 
@@ -259,6 +270,27 @@ window.updatePokemonFilter = function(key, val) {
 
 window.applyPokemonFilters = function() {
     const filters = window.pokemonFilters;
+
+    // Compute breedable map if needed
+    let breedableMap = null;
+    if (filters.breedableOnly) {
+        breedableMap = new Map();
+        const allMons = [...state.storage, ...state.safe]; // Only check storage/safe? Wait, all pokemon? Let's check all arrays just in case, or just storage/safe since they are the only ones filtered visually here.
+        allMons.forEach(p => {
+            if (p.quality < 1.99) {
+                const key = p.id + '_' + p.quality.toFixed(2); // ID and exact quality must match? The user said "samem Q and it is same species".
+                // In game mechanics, same species, but wait, do they need same exact Q or just Q < 1.99?
+                // The rules of breeding: quality < 1.99. Then, if they have exactly same ID and Math.abs(currentP.quality - p.quality) <= 0.001 they merge.
+                // So yes, same ID and same Q.
+                if (breedableMap.has(key)) {
+                    breedableMap.set(key, breedableMap.get(key) + 1);
+                } else {
+                    breedableMap.set(key, 1);
+                }
+            }
+        });
+    }
+
     const filterFn = (p) => {
         if (filters.name && !p.name.toLowerCase().includes(filters.name.toLowerCase())) return false;
         if (filters.minLvl !== '' && p.level < parseInt(filters.minLvl)) return false;
@@ -268,6 +300,13 @@ window.applyPokemonFilters = function() {
         let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
         if (filters.minIV !== '' && sumIV < parseInt(filters.minIV)) return false;
         if (filters.maxIV !== '' && sumIV > parseInt(filters.maxIV)) return false;
+
+        if (filters.breedableOnly) {
+            if (p.quality >= 1.99) return false;
+            const key = p.id + '_' + p.quality.toFixed(2);
+            if (!breedableMap || breedableMap.get(key) < 2) return false;
+        }
+
         return true;
     };
 
@@ -424,6 +463,7 @@ export function handleDrop(event, targetCol) {
                     state.dayCareRef.slot1.isBreeding = false;
                     state.dayCareRef.slot1.isFinished = false;
                 }
+                if (window.clearPokemonBreedFilter) window.clearPokemonBreedFilter();
                 window.pokemonFilters.name = p.name;
                 window.pokemonFilters.minQ = p.quality.toFixed(2);
                 window.pokemonFilters.maxQ = p.quality.toFixed(2);
@@ -441,9 +481,7 @@ export function handleDrop(event, targetCol) {
                     state.dayCareRef.slot1.isFinished = false;
                 }
                 // Clear filter as breed started
-                window.pokemonFilters.name = '';
-                window.pokemonFilters.minQ = '';
-                window.pokemonFilters.maxQ = '';
+                if (window.clearPokemonBreedFilter) window.clearPokemonBreedFilter();
             }
         } else {
             state.breeding.push(p);
@@ -453,6 +491,7 @@ export function handleDrop(event, targetCol) {
                 state.dayCareRef.slot1.isBreeding = false;
                 state.dayCareRef.slot1.isFinished = false;
             }
+            if (window.clearPokemonBreedFilter) window.clearPokemonBreedFilter();
             window.pokemonFilters.name = p.name;
             window.pokemonFilters.minQ = p.quality.toFixed(2);
             window.pokemonFilters.maxQ = p.quality.toFixed(2);
