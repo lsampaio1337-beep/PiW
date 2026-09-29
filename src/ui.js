@@ -641,13 +641,21 @@ function showCatchRateModal(showShiny = false, isSubWindow = false) {
                 <button onclick="window.showTrainerStats()" style="padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer; background: #3b82f6; color: white; border: none; border-radius: 5px;">Back</button>
             </div>
         `;
-        const win = document.getElementById("window-trainer");
-        if (win) {
-            const innerContent = win.querySelector('.window-content-container');
-            if (innerContent) {
-                innerContent.innerHTML = html;
-                innerContent.style.setProperty('padding', '0px', 'important'); // Keep padding logic
+        const getTargetContent = () => {
+            const overlay = document.getElementById('main-view-inner-modal-overlay');
+            if (overlay && overlay.style.display !== 'none') {
+                return document.getElementById('main-view-inner-modal-content');
             }
+            const win = document.getElementById("window-trainer");
+            if (win) {
+                return win.querySelector('.window-content-container');
+            }
+            return null;
+        };
+        const targetContent = getTargetContent();
+        if (targetContent) {
+            targetContent.innerHTML = html;
+            targetContent.style.setProperty('padding', '0px', 'important'); // Keep padding logic
         }
     } else {
         showModal("Catch Rate Table", html, "window-catch-rate", "800px", "auto");
@@ -2123,7 +2131,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
         }
 
         const trainerHtml = `
-            <div style="text-align: left; margin-bottom: 20px;">
+            <div style="text-align: left; margin-bottom: 20px; font-size: 14px;">
                 <div style="display: flex; gap: 40px; justify-content: space-between;">
                     <div style="flex: 1;">
                         <p><b>Time played:</b> ${playtimeStr}</p>
@@ -2179,17 +2187,48 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
             </div>
         `;
 
-        const win = document.getElementById("window-trainer");
-        if (win) {
-            const innerContent = win.querySelector('.window-content-container');
-            if (innerContent) {
-                innerContent.innerHTML = trainerHtml;
+        const overlay = document.getElementById('main-view-inner-modal-overlay');
+        const title = document.getElementById('main-view-inner-modal-title');
+        const content = document.getElementById('main-view-inner-modal-content');
+
+        if (overlay && title && content) {
+            title.innerText = "Trainer Statistics";
+            content.innerHTML = trainerHtml;
+            content.style.setProperty('padding', '20px', 'important');
+
+            const cleanUp = () => {
+                overlay.style.display = 'none';
+                content.style.setProperty('padding', '', 'important');
+            };
+
+            const closeBtn = overlay.querySelector('.window-header span');
+            if (closeBtn) {
+                closeBtn.onclick = cleanUp;
             }
+            overlay.onclick = (e) => {
+                if (e.target === overlay) {
+                    cleanUp();
+                }
+            };
+
+            overlay.style.display = 'flex';
         } else {
             showModal("Trainer", trainerHtml, "window-trainer");
         }
 
         setTimeout(() => {
+            const getTargetContent = () => {
+                const overlay = document.getElementById('main-view-inner-modal-overlay');
+                if (overlay && overlay.style.display !== 'none') {
+                    return document.getElementById('main-view-inner-modal-content');
+                }
+                const win = document.getElementById("window-trainer");
+                if (win) {
+                    return win.querySelector('.window-content-container');
+                }
+                return null;
+            };
+
             const btnCatchRate = document.getElementById('btn-catch-rate');
             if (btnCatchRate) {
                 btnCatchRate.onclick = () => {
@@ -2201,19 +2240,16 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
             if (btnTrainerBadges) {
                 btnTrainerBadges.onclick = () => {
                     if(!checkCombatLock()) {
-                        const win = document.getElementById("window-trainer");
-                        if (win) {
-                            const innerContent = win.querySelector('.window-content-container');
-                            if (innerContent) {
-                                innerContent.innerHTML = `
-                                    <div style="text-align: center; margin-bottom: 20px;">
-                                        ${badgesHtml}
-                                    </div>
-                                    <div style="text-align: center;">
-                                        <button onclick="window.showTrainerStats()" style="padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer; background: #3b82f6; color: white; border: none; border-radius: 5px;">Back</button>
-                                    </div>
-                                `;
-                            }
+                        const targetContent = getTargetContent();
+                        if (targetContent) {
+                            targetContent.innerHTML = `
+                                <div style="text-align: center; margin-bottom: 20px;">
+                                    ${badgesHtml}
+                                </div>
+                                <div style="text-align: center;">
+                                    <button onclick="window.showTrainerStats()" style="padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer; background: #3b82f6; color: white; border: none; border-radius: 5px;">Back</button>
+                                </div>
+                            `;
                         }
                     }
                 };
@@ -2266,12 +2302,9 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
                             </div>
                         `;
 
-                        const win = document.getElementById("window-trainer");
-                        if (win) {
-                            const innerContent = win.querySelector('.window-content-container');
-                            if (innerContent) {
-                                innerContent.innerHTML = upgradesHtml;
-                            }
+                        const targetContent = getTargetContent();
+                        if (targetContent) {
+                            targetContent.innerHTML = upgradesHtml;
                         }
                     }
                 };
