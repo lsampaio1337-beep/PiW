@@ -458,6 +458,7 @@ export function updateBattleArena() {
             if (elEnemySide) {
                 elEnemySide.style.transition = 'none';
                 elEnemySide.style.left = '100%';
+                elEnemySide.style.opacity = '1';
 
                 if (hpContainerEnemy) {
                     hpContainerEnemy.style.transition = 'none';
