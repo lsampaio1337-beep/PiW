@@ -2222,3 +2222,5 @@ window.switchView = switchView;
 
 window.initGame = init;
 window.startGame = startGame;
+
+window.showCalendar = showCalendar;

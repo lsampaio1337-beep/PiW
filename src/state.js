@@ -1,6 +1,7 @@
 export const state = {
     trainer: {
         money: 0,
+        tokens: 0,
         badges: 0
     },
     party: [],

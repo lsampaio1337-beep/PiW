@@ -2,6 +2,12 @@ import { state } from '../state.js';
 import { showModal } from '../ui.js';
 import { updateTopbar } from './topbar.js';
 import { getDailyChallengesHtml } from './dailyChallenges.js';
+import { getShopHtml } from './shop.js';
+
+import { getShopHtml } from './shop.js';
+
+import { getShopHtml } from './shop.js';
+
 
 
 export function getRewardForDay(daysClaimed) {
@@ -94,97 +100,109 @@ export function claimDailyReward(dayIndex) {
 // Make globally accessible for the inline onclick handler
 window.claimDailyReward = claimDailyReward;
 
-export function showCalendar() {
+export function showCalendar(tab = 'activities') {
     if (!state.stats.dailyRewards) {
         state.stats.dailyRewards = { daysClaimed: 0, lastClaimDate: null };
     }
 
-    const isAvailable = checkDailyRewardAvailable();
-    const daysClaimed = state.stats.dailyRewards.daysClaimed;
-    const displayDaysClaimed = isAvailable ? daysClaimed : Math.max(0, daysClaimed - 1);
+    let html = `<div style="text-align: center; color: white; padding: 2%; box-sizing: border-box; display: flex; flex-direction: column; min-height: 400px;">`;
 
-    const weekNumber = Math.floor(displayDaysClaimed / 7) + 1;
-    const dayOfWeek = displayDaysClaimed % 7;
+    // Header Tabs
+    let titleHtml = `
+        <div style="display: flex; gap: 10px; align-items: center; justify-content: center;">
+            <button onclick="window.showCalendar('activities')" style="padding: 5px 15px; font-size: 16px; font-weight: bold; border-radius: 5px; cursor: pointer; border: none; ${tab === 'activities' ? 'background: #3498db; color: white;' : 'background: #555; color: #ccc;'}">Activities</button>
+            <button onclick="window.showCalendar('shop')" style="padding: 5px 15px; font-size: 16px; font-weight: bold; border-radius: 5px; cursor: pointer; border: none; ${tab === 'shop' ? 'background: #e67e22; color: white;' : 'background: #555; color: #ccc;'}">Shop</button>
+        </div>
+    `;
 
-    const rewardList = getRewardListForWeek(weekNumber);
+    html += `<div id="calendar-content-area" style="flex: 1; display: flex; flex-direction: column;">`;
 
-    let html = `<div style="text-align: center; color: white; padding: 2%; box-sizing: border-box;">`;
-    html += `<h2 style="margin-top: 0;">Daily Rewards - Week ${weekNumber}</h2>`;
-    html += `<div style="display: flex; gap: 1%; justify-content: center; padding-bottom: 10px; width: 100%;">`;
+    if (tab === 'activities') {
+        const isAvailable = checkDailyRewardAvailable();
+        const daysClaimed = state.stats.dailyRewards.daysClaimed;
+        const displayDaysClaimed = isAvailable ? daysClaimed : Math.max(0, daysClaimed - 1);
 
-    for (let i = 0; i < 7; i++) {
-        const reward = rewardList[i];
-        let cardStyle = `
-            border: 2px solid #555;
-            border-radius: 8px;
-            padding: 10px 5px;
-            flex: 1;
-            background: rgba(0,0,0,0.6);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-        `;
-        let overlayHtml = '';
-        let onClickHtml = '';
+        const weekNumber = Math.floor(displayDaysClaimed / 7) + 1;
+        const dayOfWeek = displayDaysClaimed % 7;
 
-        if (i < dayOfWeek) {
-            // Already claimed
-            cardStyle += ` opacity: 0.5; border-color: #333; filter: grayscale(100%);`;
-            overlayHtml = '';
-        } else if (i === dayOfWeek) {
-            if (isAvailable) {
-                // Claimable today
-                cardStyle += ` border-color: #4CAF50; cursor: pointer; background: rgba(0,100,0,0.6); box-shadow: 0 0 10px #4CAF50;`;
-                onClickHtml = `onclick="window.claimDailyReward(${i})"`;
-            } else {
-                // Already claimed today, show this slot as collected
+        const rewardList = getRewardListForWeek(weekNumber);
+
+        html += `<h2 style="margin-top: 0;">Daily Rewards - Week ${weekNumber}</h2>`;
+        html += `<div style="display: flex; gap: 1%; justify-content: center; padding-bottom: 10px; width: 100%;">`;
+
+        for (let i = 0; i < 7; i++) {
+            const reward = rewardList[i];
+            let cardStyle = `
+                border: 2px solid #555;
+                border-radius: 8px;
+                padding: 10px 5px;
+                flex: 1;
+                background: rgba(0,0,0,0.6);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-between;
+            `;
+            let overlayHtml = '';
+            let onClickHtml = '';
+
+            if (i < dayOfWeek) {
+                // Already claimed
                 cardStyle += ` opacity: 0.5; border-color: #333; filter: grayscale(100%);`;
-                overlayHtml = '';
+            } else if (i === dayOfWeek) {
+                if (isAvailable) {
+                    // Claimable today
+                    cardStyle += ` border-color: #4CAF50; cursor: pointer; background: rgba(0,100,0,0.6); box-shadow: 0 0 10px #4CAF50;`;
+                    onClickHtml = `onclick="window.claimDailyReward(${i})"`;
+                } else {
+                    // Already claimed today
+                    cardStyle += ` opacity: 0.5; border-color: #333; filter: grayscale(100%);`;
+                }
             }
-        } else {
-            // Future days
-            overlayHtml = '';
-        }
 
-        let itemsHtml = '';
-        for (let ballName in reward.items) {
-            let qty = reward.items[ballName];
-            itemsHtml += `
-                <div style="display: flex; align-items: center; gap: 5px; margin-bottom: 5px; justify-content: center;">
-                    <img src="Assets/Items/Balls/${ballName}.png" style="width: 24px; height: 24px;" title="${ballName}">
-                    <span style="font-size: 14px;">x${qty}</span>
+            let itemsHtml = '';
+            for (let ballName in reward.items) {
+                let qty = reward.items[ballName];
+                itemsHtml += `
+                    <div style="display: flex; align-items: center; gap: 5px; margin-bottom: 5px; justify-content: center;">
+                        <img src="Assets/Items/Balls/${ballName}.png" style="width: 24px; height: 24px;" title="${ballName}">
+                        <span style="font-size: 14px;">x${qty}</span>
+                    </div>
+                `;
+            }
+            for (let potionName in reward.potions) {
+                let qty = reward.potions[potionName];
+                itemsHtml += `
+                    <div style="display: flex; align-items: center; gap: 5px; justify-content: center;">
+                        <img src="Assets/Items/Potions/${potionName}.png" style="width: 24px; height: 24px;" title="${potionName}">
+                        <span style="font-size: 14px;">x${qty}</span>
+                    </div>
+                `;
+            }
+
+            html += `
+                <div style="${cardStyle}" ${onClickHtml}>
+                    <div style="font-weight: bold; margin-bottom: 10px;">Day ${i+1}</div>
+                    <div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center;">
+                        ${itemsHtml}
+                    </div>
+                    ${overlayHtml}
                 </div>
             `;
         }
-        for (let potionName in reward.potions) {
-            let qty = reward.potions[potionName];
-            itemsHtml += `
-                <div style="display: flex; align-items: center; gap: 5px; justify-content: center;">
-                    <img src="Assets/Items/Potions/${potionName}.png" style="width: 24px; height: 24px;" title="${potionName}">
-                    <span style="font-size: 14px;">x${qty}</span>
-                </div>
-            `;
-        }
 
-        html += `
-            <div style="${cardStyle}" ${onClickHtml}>
-                <div style="font-weight: bold; margin-bottom: 10px;">Day ${i+1}</div>
-                <div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center;">
-                    ${itemsHtml}
-                </div>
-                ${overlayHtml}
-            </div>
-        `;
+        html += `</div>`;
+        html += `<p style="font-size: 12px; color: #ccc; margin-top: 15px;">New rewards available every day. Check back tomorrow!</p>`;
+
+        // Inject Daily Challenges
+        html += getDailyChallengesHtml();
+    } else if (tab === 'shop') {
+        html += getShopHtml();
     }
 
-    html += `</div>`;
-    html += `<p style="font-size: 12px; color: #ccc; margin-top: 15px;">New rewards available every day. Check back tomorrow!</p>`;
+    html += `</div></div>`;
 
-    // Inject Daily Challenges
-    html += getDailyChallengesHtml();
-
-    html += `</div>`;
-
-    showModal("Daily Rewards", html, "window-calendar", "800px", "auto");
+    showModal(titleHtml, html, "window-calendar", "900px", "auto");
 }
+
+window.showCalendar = showCalendar;
