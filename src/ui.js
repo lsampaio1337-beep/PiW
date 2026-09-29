@@ -1076,6 +1076,12 @@ export function renderOakLab() {
     `;
 }
 
+// Main View has 2 modes:
+// 1. Hub Mode: The taller one (where you visit places such as casino, market, professor oak, safari, gyms).
+const MAIN_VIEW_HUB_MODE_RATIO = 1.8;
+// 2. Battle Mode: The shorter one (where battle occurs).
+const MAIN_VIEW_BATTLE_MODE_RATIO = 5.75;
+
 export function switchView(viewName) {
     state.currentView = viewName;
     document.querySelectorAll('.game-view').forEach(el => el.style.display = 'none');
@@ -1086,9 +1092,9 @@ export function switchView(viewName) {
     }
 
     if (viewName === 'BATTLE_ARENA') {
-        if (window.windowManager) window.windowManager.setWindowProportions('main-view-window', 5.75);
+        if (window.windowManager) window.windowManager.setWindowProportions('main-view-window', MAIN_VIEW_BATTLE_MODE_RATIO);
     } else {
-        if (window.windowManager) window.windowManager.setWindowProportions('main-view-window', 1.8);
+        if (window.windowManager) window.windowManager.setWindowProportions('main-view-window', MAIN_VIEW_HUB_MODE_RATIO);
     }
 
     if (viewName === 'PROF_OAK_LAB') {
