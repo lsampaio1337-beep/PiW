@@ -348,7 +348,7 @@ export function updateBattleArena() {
             const elSumIV = document.getElementById('enemy-info-sumiv');
 
             if (elEnemySprite && elEnemySide) {
-                elEnemySprite.src = `Assets/Pokemon Sprites/Clean/${enemy.qualityName === 'Shiny' ? enemy.id + '_shiny' : enemy.id}.png`;
+                elEnemySprite.src = `Assets/Pokemon Sprites/Clean/${enemy.qualityName === 'Shiny' ? enemy.id + '_shiny' : enemy.id}_Clean.png`;
                 if (enemy.types.includes('Flying')) {
                     elEnemySprite.style.top = '0';
                     elEnemySprite.style.bottom = 'auto';
@@ -439,7 +439,7 @@ export function updateBattleArena() {
                 if (elPlayerSprite) {
                     let dittoBg = document.getElementById('player-sprite-ditto-bg');
                     if (dittoBg) dittoBg.style.display = 'none';
-                    elPlayerSprite.src = `Assets/Pokemon Sprites/Clean/${leader.qualityName === 'Shiny' ? (leader.transformedIntoId || leader.id) + '_shiny' : (leader.transformedIntoId || leader.id)}.png`;
+                    elPlayerSprite.src = `Assets/Pokemon Sprites/Clean/${leader.qualityName === 'Shiny' ? (leader.transformedIntoId || leader.id) + '_shiny' : (leader.transformedIntoId || leader.id)}_Clean.png`;
                     if (leader.types.includes('Flying')) {
                         elPlayerSprite.style.top = '0';
                         elPlayerSprite.style.bottom = 'auto';
@@ -536,7 +536,7 @@ export function updateBattleArena() {
                 if (elPlayerSprite) {
                     let dittoBg = document.getElementById('player-sprite-ditto-bg');
                     if (dittoBg) dittoBg.style.display = 'none';
-                    elPlayerSprite.src = `Assets/Pokemon Sprites/Clean/${leader.qualityName === 'Shiny' ? (leader.transformedIntoId || leader.id) + '_shiny' : (leader.transformedIntoId || leader.id)}.png`;
+                    elPlayerSprite.src = `Assets/Pokemon Sprites/Clean/${leader.qualityName === 'Shiny' ? (leader.transformedIntoId || leader.id) + '_shiny' : (leader.transformedIntoId || leader.id)}_Clean.png`;
                     if (leader.types.includes('Flying')) {
                         elPlayerSprite.style.top = '0';
                         elPlayerSprite.style.bottom = 'auto';
@@ -635,7 +635,7 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
     // The image itself
     const ghost = document.createElement('img');
     let ghostId = activeEncounter.isDisguisedDitto ? 132 : activeEncounter.id;
-    ghost.src = `Assets/Pokemon Sprites/Clean/${activeEncounter.qualityName === 'Shiny' ? ghostId + '_shiny' : ghostId}.png`;
+    ghost.src = `Assets/Pokemon Sprites/Clean/${activeEncounter.qualityName === 'Shiny' ? ghostId + '_shiny' : ghostId}_Clean.png`;
     ghost.style.height = '100%';
     ghost.style.objectFit = 'contain';
     ghostContainer.appendChild(ghost);
