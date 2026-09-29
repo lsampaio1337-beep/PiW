@@ -1276,6 +1276,28 @@ function startGame() {
     window.addEventListener('beforeunload', () => {
         storage.save(state);
     });
+
+    // Handle scrolling during drag-and-drop
+    window.isDraggingPokemon = false;
+    window.addEventListener('dragstart', () => { window.isDraggingPokemon = true; });
+    window.addEventListener('dragend', () => { window.isDraggingPokemon = false; });
+
+    window.addEventListener('wheel', (e) => {
+        if (window.isDraggingPokemon) {
+            const target = document.elementFromPoint(e.clientX, e.clientY);
+            let node = target;
+            while (node && node !== document.body && node !== document) {
+                if (node.scrollHeight > node.clientHeight) {
+                    const style = window.getComputedStyle(node);
+                    if (style.overflowY === 'auto' || style.overflowY === 'scroll') {
+                        node.scrollTop += e.deltaY;
+                        break;
+                    }
+                }
+                node = node.parentNode;
+            }
+        }
+    }, { passive: false });
 }
 
 async function init() {
