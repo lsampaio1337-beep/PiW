@@ -83,15 +83,15 @@ window.pokemonFilters = window.pokemonFilters || {
     name: '', minLvl: '', maxLvl: '', minQ: '', maxQ: '', minIV: '', maxIV: '', breedableOnly: false
 };
 
-window.clearPokemonBreedFilter = function() {
+window.clearPokemonFilter = function() {
     window.pokemonFilters = { name: '', minLvl: '', maxLvl: '', minQ: '', maxQ: '', minIV: '', maxIV: '', breedableOnly: false };
 };
 
 window.clickEmptyBreedSlot = function() {
     if (window.pokemonFilters.breedableOnly) {
-        window.clearPokemonBreedFilter();
+        window.clearPokemonFilter();
     } else {
-        window.clearPokemonBreedFilter();
+        window.clearPokemonFilter();
         window.pokemonFilters.breedableOnly = true;
     }
     renderBackpackTab('pokemon');
@@ -485,7 +485,7 @@ export function handleDrop(event, targetCol) {
                     state.dayCareRef.slot1.isBreeding = false;
                     state.dayCareRef.slot1.isFinished = false;
                 }
-                if (window.clearPokemonBreedFilter) window.clearPokemonBreedFilter();
+                if (window.clearPokemonFilter) window.clearPokemonFilter();
                 window.pokemonFilters.name = p.name;
                 window.pokemonFilters.minQ = p.quality.toFixed(2);
                 window.pokemonFilters.maxQ = p.quality.toFixed(2);
@@ -503,7 +503,7 @@ export function handleDrop(event, targetCol) {
                     state.dayCareRef.slot1.isFinished = false;
                 }
                 // Clear filter as breed started
-                if (window.clearPokemonBreedFilter) window.clearPokemonBreedFilter();
+                if (window.clearPokemonFilter) window.clearPokemonFilter();
             }
         } else {
             // Try to auto-start breeding if a pair exists in storage/safe/party
@@ -548,7 +548,7 @@ export function handleDrop(event, targetCol) {
                     state.dayCareRef.slot1.isBreeding = true;
                     state.dayCareRef.slot1.isFinished = false;
                 }
-                if (window.clearPokemonBreedFilter) window.clearPokemonBreedFilter();
+                if (window.clearPokemonFilter) window.clearPokemonFilter();
             } else {
                 state.breeding.push(p);
                 if (state.dayCareRef) {
@@ -557,7 +557,7 @@ export function handleDrop(event, targetCol) {
                     state.dayCareRef.slot1.isBreeding = false;
                     state.dayCareRef.slot1.isFinished = false;
                 }
-                if (window.clearPokemonBreedFilter) window.clearPokemonBreedFilter();
+                if (window.clearPokemonFilter) window.clearPokemonFilter();
                 window.pokemonFilters.name = p.name;
                 window.pokemonFilters.minQ = p.quality.toFixed(2);
                 window.pokemonFilters.maxQ = p.quality.toFixed(2);
