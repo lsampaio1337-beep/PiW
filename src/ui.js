@@ -1147,6 +1147,7 @@ async function loadConfigs() {
     state.config.mapCoordinates = mapCoordinates;
 }
 
+window.selectStarter = selectStarter;
 function selectStarter(id) {
     if (!storage.currentProfileId) {
         storage.createNewProfile();

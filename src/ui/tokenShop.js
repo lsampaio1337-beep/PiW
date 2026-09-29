@@ -202,7 +202,7 @@ window.buyTokenItemRandom = function(itemType) {
             if (!state.backpack.stones[itemAwarded]) state.backpack.stones[itemAwarded] = 0;
             state.backpack.stones[itemAwarded] += 1;
         } else if (itemType === 'stone') {
-            const stoneTypes = ["Fire Stone", "Water Stone", "Grass Stone", "Electric Stone", "Ice Stone", "Fighting Stone", "Poison Stone", "Ground Stone", "Flying Stone", "Psychic Stone", "Bug Stone", "Rock Stone", "Ghost Stone", "Dragon Stone", "Steel Stone", "Dark Stone", "Fairy Stone"];
+            const stoneTypes = ["Normal Stone", "Fire Stone", "Water Stone", "Grass Stone", "Electric Stone", "Ice Stone", "Fighting Stone", "Poison Stone", "Ground Stone", "Flying Stone", "Psychic Stone", "Bug Stone", "Rock Stone", "Ghost Stone", "Dragon Stone", "Steel Stone", "Dark Stone", "Fairy Stone"];
             const index = Math.floor(Math.random() * stoneTypes.length);
             itemAwarded = stoneTypes[index];
             if (!state.backpack.stones[itemAwarded]) state.backpack.stones[itemAwarded] = 0;
@@ -219,7 +219,7 @@ window.showTokenItemSelect = function(itemType) {
         itemsToSelect = VITAMINS.map(v => ({ name: v, img: `Assets/Items/Vitamins/${v}.png` }));
         title = "Select a Vitamin";
     } else if (itemType === 'stone') {
-        const stoneTypes = ["Fire Stone", "Water Stone", "Grass Stone", "Electric Stone", "Ice Stone", "Fighting Stone", "Poison Stone", "Ground Stone", "Flying Stone", "Psychic Stone", "Bug Stone", "Rock Stone", "Ghost Stone", "Dragon Stone", "Steel Stone", "Dark Stone", "Fairy Stone"];
+        const stoneTypes = ["Normal Stone", "Fire Stone", "Water Stone", "Grass Stone", "Electric Stone", "Ice Stone", "Fighting Stone", "Poison Stone", "Ground Stone", "Flying Stone", "Psychic Stone", "Bug Stone", "Rock Stone", "Ghost Stone", "Dragon Stone", "Steel Stone", "Dark Stone", "Fairy Stone"];
         itemsToSelect = stoneTypes.map(s => ({ name: s, img: `Assets/Items/Stones/${s}.png` }));
         title = "Select an Evolution Stone";
     }

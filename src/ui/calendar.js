@@ -119,6 +119,7 @@ window.giveFreeTokens = function() {
     if (window.showCalendar) window.showCalendar('shop');
 };
 
+window.showCalendar = showCalendar;
 export function showCalendar(tab = 'activities') {
     let html = `<div style="display: flex; flex-direction: column; width: 100%; height: 100%; box-sizing: border-box;">`;
 
