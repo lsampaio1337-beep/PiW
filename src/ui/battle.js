@@ -6,7 +6,7 @@ import { getCapacity } from '../mathEngine.js';
 function applyWalkAnimations(pokemon, isEnemy) {
     const battleSystem = globals.battleSystem;
     const realPrefix = isEnemy ? 'enemy' : 'player';
-    const animContainer = document.getElementById(realPrefix + '-anim-container');
+    const animContainer = document.getElementById(realPrefix + '-sprite-inner');
     const bubbles = document.getElementById(realPrefix + '-water-bubbles');
 
     if (!animContainer) return;
@@ -283,9 +283,47 @@ document.addEventListener('click', (e) => {
 
 
 export function updateBattleArena() {
-    updateActiveItemsUI();
-
     const battleSystem = globals.battleSystem;
+
+    // Dynamic snapping logic
+    if (battleSystem) {
+        const elPlayerSpriteInner = document.getElementById('player-sprite-inner');
+        const elEnemySpriteInner = document.getElementById('enemy-sprite-inner');
+
+        let activePlayerPokemon = globals.state.party[0]; // Player always uses party leader
+        let activeEnemyPokemon = battleSystem.activeEncounter;
+
+        if (battleSystem.gymState && battleSystem.gymState.isActive) {
+            if (battleSystem.gymState.inCombat && battleSystem.gymState.gym && battleSystem.gymState.gym.trainers[battleSystem.gymState.currentTrainerIndex]) {
+                 const trainer = battleSystem.gymState.gym.trainers[battleSystem.gymState.currentTrainerIndex];
+                 if (trainer.team && trainer.team[battleSystem.gymState.currentPokemonIndex]) {
+                     activeEnemyPokemon = trainer.team[battleSystem.gymState.currentPokemonIndex];
+                 }
+            } else {
+                activeEnemyPokemon = null; // No active enemy between gym battles
+            }
+        }
+
+        if (elPlayerSpriteInner && activePlayerPokemon) {
+            const isFlying = activePlayerPokemon.types && activePlayerPokemon.types.includes('Flying');
+            elPlayerSpriteInner.style.bottom = isFlying ? 'auto' : '0';
+            elPlayerSpriteInner.style.top = isFlying ? '0' : 'auto';
+            elPlayerSpriteInner.style.right = '0';
+            elPlayerSpriteInner.style.left = 'auto';
+            // Inner wrapper flex layout handles top/bottom alignment securely without breaking HP offsets
+            elPlayerSpriteInner.style.justifyContent = isFlying ? 'flex-start' : 'flex-end';
+        }
+
+        if (elEnemySpriteInner && activeEnemyPokemon) {
+            const isFlying = activeEnemyPokemon.types && activeEnemyPokemon.types.includes('Flying');
+            elEnemySpriteInner.style.bottom = isFlying ? 'auto' : '0';
+            elEnemySpriteInner.style.top = isFlying ? '0' : 'auto';
+            elEnemySpriteInner.style.left = '0';
+            elEnemySpriteInner.style.right = 'auto';
+            elEnemySpriteInner.style.justifyContent = isFlying ? 'flex-start' : 'flex-end';
+        }
+    }
+    updateActiveItemsUI();
     const inGym = battleSystem && battleSystem.gymState && battleSystem.gymState.isActive;
     const inGymCombat = inGym && battleSystem.gymState.inCombat;
 
@@ -431,7 +469,7 @@ export function updateBattleArena() {
             const elSumIV = document.getElementById('enemy-info-sumiv');
 
             if (elEnemySprite && elEnemySide) {
-                elEnemySprite.src = `Assets/Pokemon Sprites/Natural/${enemy.qualityName === 'Shiny' ? enemy.id + '_shiny' : enemy.id}.png`;
+                elEnemySprite.src = `Assets/Pokemon Sprites/Clean/${enemy.qualityName === 'Shiny' ? enemy.id + '_shiny_Clean' : enemy.id + '_Clean'}.png`;
                 elEnemySprite.style.display = 'block';
                 applyWalkAnimations(enemy, true);
 
@@ -443,7 +481,7 @@ export function updateBattleArena() {
                     elSumIV.innerText = `SumIV=${sumIV}`;
                 }
 
-                elEnemySide.style.top = '50%';
+                elEnemySide.style.top = '80%';
                 elEnemySide.style.bottom = 'auto';
 
                 if (battleSystem.isSliding) {
@@ -483,7 +521,7 @@ export function updateBattleArena() {
             const elPlayerSide = document.getElementById('player-side');
             if (leader && elPlayerSide) {
 
-                elPlayerSide.style.top = '50%';
+                elPlayerSide.style.top = '80%';
                 elPlayerSide.style.bottom = 'auto';
                 elPlayerSide.style.left = '25%';
 
@@ -513,7 +551,7 @@ export function updateBattleArena() {
                 if (elPlayerSprite) {
                     let dittoBg = document.getElementById('player-sprite-ditto-bg');
                     if (dittoBg) dittoBg.style.display = 'none';
-                    elPlayerSprite.src = `Assets/Pokemon Sprites/Natural/${leader.qualityName === 'Shiny' ? (leader.transformedIntoId || leader.id) + '_shiny' : (leader.transformedIntoId || leader.id)}.png`;
+                    elPlayerSprite.src = `Assets/Pokemon Sprites/Clean/${leader.qualityName === 'Shiny' ? (leader.transformedIntoId || leader.id) + '_shiny_Clean' : (leader.transformedIntoId || leader.id) + '_Clean'}.png`;
                     elPlayerSprite.style.display = 'block';
                     applyWalkAnimations(leader, false);
 
@@ -555,7 +593,7 @@ export function updateBattleArena() {
                 elEnemySprite.style.display = 'block';
                 elEnemySide.style.transition = 'none';
                 elEnemySide.style.left = '35%'; // Matching active battle destination
-                elEnemySide.style.top = '50%';
+                elEnemySide.style.top = '80%';
                 elEnemySide.style.bottom = 'auto';
 
                 const elEnemyInfo = document.getElementById('enemy-info-container');
@@ -571,7 +609,7 @@ export function updateBattleArena() {
             const elPlayerSide = document.getElementById('player-side');
             if (leader && elPlayerSide) {
 
-                elPlayerSide.style.top = '50%';
+                elPlayerSide.style.top = '80%';
                 elPlayerSide.style.bottom = 'auto';
                 elPlayerSide.style.left = '25%';
 
@@ -601,7 +639,7 @@ export function updateBattleArena() {
                 if (elPlayerSprite) {
                     let dittoBg = document.getElementById('player-sprite-ditto-bg');
                     if (dittoBg) dittoBg.style.display = 'none';
-                    elPlayerSprite.src = `Assets/Pokemon Sprites/Natural/${leader.qualityName === 'Shiny' ? (leader.transformedIntoId || leader.id) + '_shiny' : (leader.transformedIntoId || leader.id)}.png`;
+                    elPlayerSprite.src = `Assets/Pokemon Sprites/Clean/${leader.qualityName === 'Shiny' ? (leader.transformedIntoId || leader.id) + '_shiny_Clean' : (leader.transformedIntoId || leader.id) + '_Clean'}.png`;
                     elPlayerSprite.style.display = 'block';
                     applyWalkAnimations(leader, false);
 
