@@ -659,6 +659,7 @@ class BattleSystem {
         const potName = this.state.config.balance.items.potions[tier].name;
         if (this.state.backpack.potions[potName] > 0) {
             this.state.backpack.potions[potName]--;
+            if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') window.trackDailyChallenge('defeat_endurance', { streak: 0 });
             pokemon.currentHp = Math.min(pokemon.maxHp, pokemon.currentHp + this.state.config.balance.items.potions[tier].heal);
             return true;
         }
@@ -1176,6 +1177,9 @@ class BattleSystem {
 
     handleFaint() {
         this.isFainting = true;
+        if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') {
+            window.trackDailyChallenge('defeat_endurance', { streak: 0 });
+        }
         this.updateUI(); // This will trigger the fade out via UI logic
 
         // Wait 4 seconds (2s fade out + 2s extra wait)

@@ -1,6 +1,6 @@
 import { state, globals } from '../state.js';
 import * as mathEngine from "../mathEngine.js";
-import { checkDailyRewardAvailable, checkAnyDailyChallengeCompleted } from './calendar.js';
+import { checkDailyRewardAvailable } from './calendar.js';
 
 function getStatusHtml(isMet) {
     return isMet ? ` <span style="color: green;">[Complete]</span>` : "";
@@ -201,7 +201,7 @@ export function updateTopbar() {
 
     const calendarNotification = document.getElementById('calendar-notification');
     if (calendarNotification) {
-        if (checkDailyRewardAvailable() || checkAnyDailyChallengeCompleted()) {
+        if (checkDailyRewardAvailable()) {
             calendarNotification.style.display = 'block';
         } else {
             calendarNotification.style.display = 'none';

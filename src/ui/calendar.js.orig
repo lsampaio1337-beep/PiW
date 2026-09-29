@@ -58,15 +58,6 @@ export function checkDailyRewardAvailable() {
     return state.stats.dailyRewards.lastClaimDate !== today;
 }
 
-export function checkAnyDailyChallengeCompleted() {
-    if (!state.stats.dailyChallenges || !state.stats.dailyChallenges.active) return false;
-    if (state.stats.dailyChallenges.hasSeenNotification) return false;
-    for (let c of state.stats.dailyChallenges.active) {
-        if (c.completed) return true;
-    }
-    return false;
-}
-
 export function claimDailyReward(dayIndex) {
     if (!checkDailyRewardAvailable()) return;
 

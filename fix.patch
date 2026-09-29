@@ -1,0 +1,46 @@
+--- src/ui/dailyChallenges.js
++++ src/ui/dailyChallenges.js
+@@ -165,2 +165,3 @@
+         state.stats.dailyChallenges.totalCompleted++;
++        state.stats.dailyChallenges.hasSeenNotification = false;
+         showCalendar(); // Refresh UI
+@@ -220,2 +221,3 @@
+                 c.completed = true;
++                state.stats.dailyChallenges.hasSeenNotification = false;
+                 state.stats.dailyChallenges.totalCompleted++;
+--- src/ui.js
++++ src/ui.js
+@@ -1858,3 +1858,6 @@
+             showCalendar();
+-
++            if (state.stats.dailyChallenges) {
++                state.stats.dailyChallenges.hasSeenNotification = true;
++                updateTopbar();
++            }
+         }
+--- src/ui/calendar.js
++++ src/ui/calendar.js
+@@ -58,2 +58,11 @@
+ }
++
++export function checkAnyDailyChallengeCompleted() {
++    if (!state.stats.dailyChallenges || !state.stats.dailyChallenges.active) return false;
++    if (state.stats.dailyChallenges.hasSeenNotification) return false;
++    for (let c of state.stats.dailyChallenges.active) {
++        if (c.completed) return true;
++    }
++    return false;
++}
+
+--- src/ui/topbar.js
++++ src/ui/topbar.js
+@@ -3,3 +3,3 @@
+ import * as mathEngine from "../mathEngine.js";
+-import { checkDailyRewardAvailable } from './calendar.js';
++import { checkDailyRewardAvailable, checkAnyDailyChallengeCompleted } from './calendar.js';
+
+@@ -203,3 +203,3 @@
+     if (calendarNotification) {
+-        if (checkDailyRewardAvailable()) {
++        if (checkDailyRewardAvailable() || checkAnyDailyChallengeCompleted()) {
+             calendarNotification.style.display = 'block';
