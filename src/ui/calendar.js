@@ -94,14 +94,22 @@ export function claimDailyReward(dayIndex) {
 // Make globally accessible for the inline onclick handler
 window.claimDailyReward = claimDailyReward;
 
+window.giveFreeTokens = function() {
+    if (!state.trainer.tokens) state.trainer.tokens = 0;
+    state.trainer.tokens += 10;
+    if (window.showGameAlert) window.showGameAlert("Received 10 Tokens!");
+    if (window.showCalendar) window.showCalendar('shop');
+};
+
 export function showCalendar(tab = 'activities') {
     let html = `<div style="display: flex; flex-direction: column; width: 100%; height: 100%; box-sizing: border-box;">`;
 
     // Tabs
     html += `
-        <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px; margin-bottom: 10px;">
+        <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px; margin-bottom: 10px; align-items: center;">
             <button onclick="window.showCalendar('activities')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; border-radius: 5px; cursor: pointer; ${tab === 'activities' ? 'background: #3498db; color: white;' : 'background: #2c3e50; color: #bdc3c7; border: 1px solid #7f8c8d;'}">Activities</button>
             <button onclick="window.showCalendar('shop')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; border-radius: 5px; cursor: pointer; ${tab === 'shop' ? 'background: #3498db; color: white;' : 'background: #2c3e50; color: #bdc3c7; border: 1px solid #7f8c8d;'}">Shop</button>
+            <button onclick="window.giveFreeTokens()" style="padding: 10px 20px; font-size: 16px; font-weight: bold; border-radius: 5px; cursor: pointer; background: #e67e22; color: white; border: none;">Token</button>
         </div>
         <div id="calendar-content-area" style="flex: 1; overflow-y: auto;">
     `;

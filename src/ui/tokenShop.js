@@ -129,22 +129,22 @@ function getTokenShopItemsHtml() {
         }
 
         html += `
-            <div style="background: #2c3e50; border: 2px solid #f1c40f; border-radius: 10px; padding: 15px; width: 220px; display: flex; flex-direction: column; align-items: center; text-align: center; justify-content: space-between;">
-                <div style="font-weight: bold; font-size: 16px; margin-bottom: 10px; height: 40px; display: flex; align-items: center;">${item.name}</div>
-                <img src="${item.img}" style="width: 64px; height: 64px; object-fit: contain; margin-bottom: 10px;">
-                <div style="font-size: 12px; color: #bdc3c7; margin-bottom: 15px; flex-grow: 1;">${item.desc}</div>
+            <div style="background: #2c3e50; border: 2px solid #f1c40f; border-radius: 8px; padding: 8px; width: 150px; display: flex; flex-direction: column; align-items: center; text-align: center; justify-content: space-between;">
+                <div style="font-weight: bold; font-size: 12px; margin-bottom: 5px; height: 30px; display: flex; align-items: center;">${item.name}</div>
+                <img src="${item.img}" style="width: 40px; height: 40px; object-fit: contain; margin-bottom: 5px;">
+                <div style="font-size: 10px; color: #bdc3c7; margin-bottom: 10px; flex-grow: 1;">${item.desc}</div>
         `;
 
         if (item.isSelectable) {
             html += `
                 <div style="display: flex; gap: 5px; width: 100%;">
-                    <button onclick="window.buyTokenItemRandom('${item.id}')" style="flex: 1; padding: 5px; background: #95a5a6; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 12px;">Random<br><img src="Assets/Extra/Token.png" style="width:12px;vertical-align:middle;"> ${item.randomPrice}</button>
-                    <button onclick="window.showTokenItemSelect('${item.id}')" style="flex: 1; padding: 5px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 12px;">Select<br><img src="Assets/Extra/Token.png" style="width:12px;vertical-align:middle;"> ${item.selectPrice}</button>
+                    <button onclick="window.buyTokenItemRandom('${item.id}')" style="flex: 1; padding: 5px; background: #2ecc71; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 12px;">Random<br><img src="Assets/Extra/Token.png" style="width:12px;vertical-align:middle;"> ${item.randomPrice}</button>
+                    <button onclick="window.showTokenItemSelect('${item.id}')" style="flex: 1; padding: 5px; background: #2ecc71; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 12px;">Choose<br><img src="Assets/Extra/Token.png" style="width:12px;vertical-align:middle;"> ${item.selectPrice}</button>
                 </div>
             `;
         } else {
             html += `
-                <button onclick="${item.action}" style="width: 100%; padding: 8px; background: #2ecc71; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 14px;">
+                <button onclick="${item.action}" style="width: 100%; padding: 8px; background: #2ecc71; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 12px;">
                     Buy for <img src="Assets/Extra/Token.png" style="width:14px;vertical-align:middle;"> ${item.price}
                 </button>
             `;
