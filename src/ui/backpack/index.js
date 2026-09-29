@@ -4,6 +4,16 @@ import { renderPotionsTab } from './potions.js';
 import { renderStonesTab } from './stones.js';
 import { renderPokemonTab } from './pokemon.js';
 
+window.closeBackpackPocket = function() {
+    document.getElementById('backpack-content-area').style.display='none';
+    if (window.clearPokemonFilter) window.clearPokemonFilter();
+};
+
+window.closeBackpackModal = function() {
+    if (window.closeBackpackPocket) window.closeBackpackPocket();
+    if (window.closeModal) window.closeModal('window-backpack');
+};
+
 export function showBackpack() {
     let html = `
         <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; box-sizing: border-box; color: white; position: relative;">
@@ -26,7 +36,7 @@ export function showBackpack() {
             <div style="position: relative; width: 100%; display: flex; align-items: center; justify-content: center; cursor: default; pointer-events: none; z-index: 2;">
 
                 <!-- Inner container shrink-wrapped to exact dimensions so clicks outside the bag hit the overlay -->
-                <div onclick="event.stopPropagation(); document.getElementById('backpack-content-area').style.display='none'" style="position: relative; width: 100%; aspect-ratio: 1279 / 1350; pointer-events: auto;">
+                <div onclick="event.stopPropagation(); window.closeBackpackPocket()" style="position: relative; width: 100%; aspect-ratio: 1279 / 1350; pointer-events: auto;">
                     <img src="./Assets/Extra/Backpack.png" style="width: 100%; display: block; pointer-events: none;">
 
                     <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2;">
@@ -46,7 +56,7 @@ export function showBackpack() {
                     <div id="backpack-content-area" onclick="event.stopPropagation()" class="floating-window" style="position: absolute; bottom: 5%; left: 5%; width: 90%; height: auto; max-height: 90%; display: flex; flex-direction: column; z-index: 5; display: none; overflow: hidden;">
                         <div class="window-header" style="position: relative; cursor: default;">
                             <span id="backpack-pocket-title">Pocket</span>
-                            <span onclick="document.getElementById('backpack-content-area').style.display='none'" style="position: absolute; right: 10px; cursor: pointer; color: white; font-weight: bold;">X</span>
+                            <span onclick="window.closeBackpackPocket()" style="position: absolute; right: 10px; cursor: pointer; color: white; font-weight: bold;">X</span>
                         </div>
                         <div class="window-content-container" style="flex: 1; overflow-y: auto;">
                             <div id="backpack-inner-content" style="padding: 15px; box-sizing: border-box; width: 100%; height: 100%;">
@@ -77,6 +87,10 @@ export function renderBackpackTab(tab) {
     if (!area || !innerContent || !titleSpan) return;
 
     area.style.display = "flex";
+
+    if (tab !== 'pokemon') {
+        if (window.clearPokemonFilter) window.clearPokemonFilter();
+    }
 
     if (tab === 'pokeballs') {
         titleSpan.innerText = 'Pokéballs';
