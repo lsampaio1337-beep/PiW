@@ -2108,40 +2108,117 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
         }
 
         showModal("Trainer", `
-            <div style="text-align: left; display: inline-block;">
-                <p><b>Time played:</b> ${playtimeStr}</p>
-                <p><b>Money:</b> $${state.trainer.money.toLocaleString()}</p>
-                <br>
-                <p><b>Battles Won:</b> ${(state.stats.battlesWon || 0).toLocaleString()}</p>
-                <p><b>Faints:</b> ${(state.stats.faints || 0).toLocaleString()}</p>
-                <p><b>Total Pokémon Captured:</b> ${(state.stats.caught || 0).toLocaleString()}</p>
-                <p><b>Species Caught:</b> ${uniqueSpeciesCaught} / ${state.config.pokemonData.length}</p>
-                <p><b>Shiny Species Caught:</b> ${uniqueShinySpeciesCaught} / ${state.config.pokemonData.length}</p>
-                <p><b>Shinies Seen:</b> ${(state.stats.shiniesSeen || 0).toLocaleString()}</p>
-                <p><b>Shinies Caught:</b> ${(state.stats.shiniesCaught || 0).toLocaleString()}</p>
-                <br>
-                <p><b>Jigglypuff Grains Used:</b> ${(state.stats.jigglypuffGrainsUsed || 0).toLocaleString()}</p>
-                <p><b>White Candies Claimed:</b> ${(whiteCandiesClaimed || 0).toLocaleString()}</p>
-                <p><b>Daily Rewards Collected:</b> ${(state.stats.dailyRewards ? state.stats.dailyRewards.daysClaimed : 0).toLocaleString()}</p>
-                <p><b>Progress Challenge Completed:</b> ${challengesCompleted}/${maxChallenges}</p>
-                <p><b>Assignments Completed:</b> ${assignmentsCompleted}/${maxAssignments}</p>
-                <br>
-                <p><b>Highest Level on Backpack:</b> ${highestLevel}</p>
-                <p><b>Highest Quality on Backpack:</b> ${highestQuality}</p>
-                <p><b>Highest IV Sum on Backpack:</b> ${highestSumIV}</p>
-                <p><b>Highest Level Captured:</b> ${state.stats.highestLevelCaptured || 0}</p>
-                <p><b>Highest Quality Captured:</b> ${state.stats.highestQualityCaptured || 0}</p>
-                <p><b>Highest IV Sum Captured:</b> ${state.stats.highestSumIVCaptured || 0}</p>
+            <div style="text-align: left; margin-bottom: 20px;">
+                <div style="display: flex; gap: 40px; justify-content: space-between;">
+                    <div style="flex: 1;">
+                        <p><b>Time played:</b> ${playtimeStr}</p>
+                        <p><b>Money:</b> $${state.trainer.money.toLocaleString()}</p>
+                    </div>
+                    <div style="flex: 1;">
+                        <p><b>Battles Won:</b> ${(state.stats.battlesWon || 0).toLocaleString()}</p>
+                        <p><b>Faints:</b> ${(state.stats.faints || 0).toLocaleString()}</p>
+                    </div>
+                </div>
+                <hr style="margin: 10px 0;">
+                <div style="display: flex; gap: 40px; justify-content: space-between;">
+                    <div style="flex: 1;">
+                        <p><b>Total Pokémon Captured:</b> ${(state.stats.caught || 0).toLocaleString()}</p>
+                        <p><b>Species Caught:</b> ${uniqueSpeciesCaught} / ${state.config.pokemonData.length}</p>
+                    </div>
+                    <div style="flex: 1;">
+                        <p><b>Shinies Caught:</b> ${(state.stats.shiniesCaught || 0).toLocaleString()}</p>
+                        <p><b>Shiny Species Caught:</b> ${uniqueShinySpeciesCaught} / ${state.config.pokemonData.length}</p>
+                    </div>
+                </div>
+                <hr style="margin: 10px 0;">
+                <div style="display: flex; gap: 40px; justify-content: space-between;">
+                    <div style="flex: 1;">
+                        <p><b>Jigglypuff Grains Used:</b> ${(state.stats.jigglypuffGrainsUsed || 0).toLocaleString()}</p>
+                        <p><b>Daily Rewards Collected:</b> ${(state.stats.dailyRewards ? state.stats.dailyRewards.daysClaimed : 0).toLocaleString()}</p>
+                        <p><b>Professor Oak Assignments Completed:</b> ${assignmentsCompleted}/${maxAssignments}</p>
+                    </div>
+                    <div style="flex: 1;">
+                        <p><b>White Candies Claimed:</b> ${(whiteCandiesClaimed || 0).toLocaleString()}</p>
+                        <p><b>Tokens Earned:</b> ${(state.stats.tokensEarned || 0).toLocaleString()}</p>
+                        <p><b>Progress Challenge Completed:</b> ${challengesCompleted}/${maxChallenges}</p>
+                    </div>
+                </div>
+                <hr style="margin: 10px 0;">
+                <div style="display: flex; gap: 40px; justify-content: space-between;">
+                    <div style="flex: 1;">
+                        <p><b>Highest Level on Backpack:</b> ${highestLevel}</p>
+                        <p><b>Highest Quality on Backpack:</b> ${highestQuality}</p>
+                        <p><b>Highest IV Sum on Backpack:</b> ${highestSumIV}</p>
+                    </div>
+                    <div style="flex: 1;">
+                        <p><b>Highest Level Captured:</b> ${state.stats.highestLevelCaptured || 0}</p>
+                        <p><b>Highest Quality Captured:</b> ${state.stats.highestQualityCaptured || 0}</p>
+                        <p><b>Highest IV Sum Captured:</b> ${state.stats.highestSumIVCaptured || 0}</p>
+                    </div>
+                </div>
             </div>
-            <h3 style="margin-top: 10px; margin-bottom: 5px;">Badges:</h3>
-            ${badgesHtml}
-            <div style="margin-top: 15px; text-align: center;">
+            <div style="margin-top: 15px; text-align: center; display: flex; gap: 10px; justify-content: center;">
+                <button id="btn-trainer-badges" style="padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer; background: #3b82f6; color: white; border: none; border-radius: 5px;">Badges</button>
                 <button id="btn-catch-rate" style="padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer; background: #3b82f6; color: white; border: none; border-radius: 5px;">Catch Rate Table</button>
+                <button id="btn-trainer-upgrades" style="padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer; background: #3b82f6; color: white; border: none; border-radius: 5px;">Upgrades</button>
             </div>
         `, "window-trainer");
 
         document.getElementById('btn-catch-rate').onclick = () => {
             if(!checkCombatLock()) showCatchRateModal();
+        };
+
+        document.getElementById('btn-trainer-badges').onclick = () => {
+            if(!checkCombatLock()) {
+                showModal("Badges", `
+                    <div style="text-align: center;">
+                        ${badgesHtml}
+                    </div>
+                `, "window-badges");
+            }
+        };
+
+        document.getElementById('btn-trainer-upgrades').onclick = () => {
+            if(!checkCombatLock()) {
+                let upgradesHtml = '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 10px; padding: 10px;">';
+
+                if (state.stats.upgrades) {
+                    const upgradeTypes = [
+                        { key: 'ballsTier', configKey: 'ballPocket' },
+                        { key: 'potionsTier', configKey: 'potionSatchel' },
+                        { key: 'boxTier', configKey: 'pokemonBox' },
+                        { key: 'glassTier', configKey: 'glass' },
+                        { key: 'smartwatchTier', configKey: 'smartwatch' },
+                        { key: 'speedTier', configKey: 'speed' },
+                        { key: 'lootTier', configKey: 'loot' }
+                    ];
+
+                    upgradeTypes.forEach(type => {
+                        const tier = state.stats.upgrades[type.key] || 0;
+                        if (tier > 0) {
+                            // Show the currently purchased tier (index tier - 1)
+                            const configItem = state.config.balance.expansions[type.configKey][tier - 1];
+                            if (configItem) {
+                                const displayName = configItem.displayName || configItem.name;
+                                upgradesHtml += `
+                                    <div style="background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; padding: 10px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                        <img src="./Assets/Items/Upgrades/${configItem.name}.png" style="width: 50px; height: 50px; object-fit: contain; margin-bottom: 5px;" alt="${displayName}">
+                                        <div style="font-size: 12px; font-weight: bold; color: white; line-height: 1.1; word-wrap: break-word;">${displayName}</div>
+                                    </div>
+                                `;
+                            }
+                        }
+                    });
+                }
+
+                upgradesHtml += '</div>';
+
+                if (upgradesHtml === '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 10px; padding: 10px;"></div>') {
+                    upgradesHtml = '<div style="text-align: center; padding: 20px; font-style: italic; color: #ccc;">No upgrades purchased yet.</div>';
+                }
+
+                showModal("Upgrades", upgradesHtml, "window-upgrades");
+            }
         };
     });
 

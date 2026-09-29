@@ -27,6 +27,7 @@ export const state = {
         shiniesCaught: 0,
         playtime: 0,
         faints: 0,
+        tokensEarned: 0,
         completedChallenges: 0,
         activeChallenges: ["Route 1"],
         completedChallengeIds: [],
