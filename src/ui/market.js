@@ -225,10 +225,10 @@ export function renderPokeMarketTab(category) {
         if (ballUpgrade) items.push({ ...ballUpgrade, type: 'balls', img: './Assets/Items/Upgrades/' + ballUpgrade.name + '.png', attrLabel: '+' + ballUpgrade.increment + ' Balls' });
         if (potionUpgrade) items.push({ ...potionUpgrade, type: 'potions', img: './Assets/Items/Upgrades/' + potionUpgrade.name + '.png', attrLabel: '+' + potionUpgrade.increment + ' Potions' });
         if (boxUpgrade) items.push({ ...boxUpgrade, type: 'box', img: './Assets/Items/Upgrades/' + boxUpgrade.name + '.png', attrLabel: '+' + boxUpgrade.increment + ' Pokemon' });
-        if (glassUpgrade) items.push({ ...glassUpgrade, type: 'glass', img: './Assets/Items/Upgrades/' + glassUpgrade.name + '.png', attrLabel: 'Effect TBD' });
-        if (smartwatchUpgrade) items.push({ ...smartwatchUpgrade, type: 'smartwatch', img: './Assets/Items/Upgrades/' + smartwatchUpgrade.name + '.png', attrLabel: 'Effect TBD' });
-        if (speedUpgrade) items.push({ ...speedUpgrade, type: 'speed', img: './Assets/Items/Upgrades/' + speedUpgrade.name + '.png', attrLabel: 'Effect TBD' });
-        if (lootUpgrade) items.push({ ...lootUpgrade, type: 'loot', img: './Assets/Items/Upgrades/' + lootUpgrade.name + '.png', attrLabel: 'Effect TBD' });
+        if (glassUpgrade) items.push({ ...glassUpgrade, type: 'glass', img: './Assets/Items/Upgrades/' + glassUpgrade.name + '.png', attrLabel: glassUpgrade.description });
+        if (smartwatchUpgrade) items.push({ ...smartwatchUpgrade, type: 'smartwatch', img: './Assets/Items/Upgrades/' + smartwatchUpgrade.name + '.png', attrLabel: smartwatchUpgrade.description });
+        if (speedUpgrade) items.push({ ...speedUpgrade, type: 'speed', img: './Assets/Items/Upgrades/' + speedUpgrade.name + '.png', attrLabel: speedUpgrade.description });
+        if (lootUpgrade) items.push({ ...lootUpgrade, type: 'loot', img: './Assets/Items/Upgrades/' + lootUpgrade.name + '.png', attrLabel: lootUpgrade.description });
 
         items = items.map(u => ({
             name: u.name,
