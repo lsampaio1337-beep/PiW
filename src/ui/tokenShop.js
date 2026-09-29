@@ -171,7 +171,7 @@ function handleTokenPurchase(cost, callback) {
     }
 }
 
-window.buyTokenItem = function(itemType) {
+export function buyTokenItem(itemType) {
     if (itemType === 'masterball') {
         handleTokenPurchase(10, () => {
             if (!state.backpack.pokeballs["Masterball"]) {
@@ -181,9 +181,9 @@ window.buyTokenItem = function(itemType) {
             if (window.showGameAlert) window.showGameAlert("Bought 1x Masterball!");
         });
     }
-};
+}
 
-window.buyTokenUnlock = function(unlockKey) {
+export function buyTokenUnlock(unlockKey) {
     handleTokenPurchase(1, () => {
         if (!state.stats.upgradesUnlocked) {
             state.stats.upgradesUnlocked = {};
@@ -191,9 +191,9 @@ window.buyTokenUnlock = function(unlockKey) {
         state.stats.upgradesUnlocked[unlockKey] = true;
         if (window.showGameAlert) window.showGameAlert(`Unlocked ${unlockKey} upgrades!`);
     });
-};
+}
 
-window.buyTokenItemRandom = function(itemType) {
+export function buyTokenItemRandom(itemType) {
     handleTokenPurchase(1, () => {
         let itemAwarded = "";
         if (itemType === 'vitamin') {
@@ -210,9 +210,9 @@ window.buyTokenItemRandom = function(itemType) {
         }
         if (window.showGameAlert) window.showGameAlert(`Got 1x ${itemAwarded}!`);
     });
-};
+}
 
-window.showTokenItemSelect = function(itemType) {
+export function showTokenItemSelect(itemType) {
     let itemsToSelect = [];
     let title = "";
     if (itemType === 'vitamin') {
@@ -248,9 +248,9 @@ window.showTokenItemSelect = function(itemType) {
     if (window.showModal) {
         window.showModal(title, html, "window-token-select", "600px", "auto");
     }
-};
+}
 
-window.confirmTokenItemSelect = function(itemName) {
+export function confirmTokenItemSelect(itemName) {
     handleTokenPurchase(2, () => {
         if (!state.backpack.stones[itemName]) {
             state.backpack.stones[itemName] = 0;
@@ -260,6 +260,6 @@ window.confirmTokenItemSelect = function(itemName) {
         if (window.showGameAlert) window.showGameAlert(`Bought 1x ${itemName}!`);
         // The handleTokenPurchase already navigates back to 'shop' calendar tab
     });
-};
+}
 
 window.renderTokenShopHtml = renderTokenShopHtml;

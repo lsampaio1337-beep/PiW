@@ -46,7 +46,7 @@ import { updateTopbar } from './ui/topbar.js';
 import { updateSidebar } from './ui/sidebar.js';
 import { updateBattleArena, showDamage, playCombatAnimations, triggerDefeatAnimation, showLoot } from './ui/battle.js';
 import { showCalendar } from './ui/calendar.js';
-import './ui/tokenShop.js';
+import { buyTokenItem, buyTokenUnlock, buyTokenItemRandom, showTokenItemSelect, confirmTokenItemSelect } from './ui/tokenShop.js';
 import { showGiftModal } from './ui/gift.js';
 import { showMap, navigateToLocation, showMapTooltip, hideMapTooltip } from './ui/map.js';
 import { showPokedex, showDexEntry, showSmartCaptureMode, toggleSmartCaptureShinyMode, showSmartCaptureBallSelection, selectSmartCaptureBall } from './ui/pokedex.js';
@@ -92,6 +92,11 @@ window.updateMarketPrices = updateMarketPrices;
 window.showAddPokemonModal = showAddPokemonModal;
 window.forceNextEncounter = forceNextEncounter;
 window.activateCheat = activateCheat;
+window.buyTokenItem = buyTokenItem;
+window.buyTokenUnlock = buyTokenUnlock;
+window.buyTokenItemRandom = buyTokenItemRandom;
+window.showTokenItemSelect = showTokenItemSelect;
+window.confirmTokenItemSelect = confirmTokenItemSelect;
 
 import { cheatAction } from "./ui/cheatControl.js";
 window.cheatAction = cheatAction;
@@ -1135,6 +1140,7 @@ export function updateUI() {
     updateSidebar();
     updateBattleArena();
 }
+window.updateUI = updateUI;
 
 async function loadConfigs() {
     const [pokemonData, routes, gyms, balance, moves, types, mapCoordinates] = await Promise.all([

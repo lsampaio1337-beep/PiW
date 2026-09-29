@@ -121,14 +121,14 @@ window.giveFreeTokens = function() {
 
 window.showCalendar = showCalendar;
 export function showCalendar(tab = 'activities') {
-    let html = `<div style="display: flex; flex-direction: column; width: 100%; height: 100%; box-sizing: border-box;">`;
+    let html = `<div id="calendar-wrapper" style="display: flex; flex-direction: column; width: 100%; height: 100%; box-sizing: border-box; --m-width: min(90vw, 825px);">`;
 
     // Tabs
     html += `
-        <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px; margin-bottom: 10px; align-items: center;">
-            <button onclick="window.showCalendar('activities')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; border-radius: 5px; cursor: pointer; ${tab === 'activities' ? 'background: #3498db; color: white;' : 'background: #2c3e50; color: #bdc3c7; border: 1px solid #7f8c8d;'}">Activities</button>
-            <button onclick="window.showCalendar('shop')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; border-radius: 5px; cursor: pointer; ${tab === 'shop' ? 'background: #3498db; color: white;' : 'background: #2c3e50; color: #bdc3c7; border: 1px solid #7f8c8d;'}">Shop</button>
-            <button onclick="window.giveFreeTokens()" style="padding: 10px 20px; font-size: 16px; font-weight: bold; border-radius: 5px; cursor: pointer; background: #e67e22; color: white; border: none;">Token</button>
+        <div style="display: flex; gap: calc(var(--m-width) * 0.012); justify-content: center; margin-top: calc(var(--m-width) * 0.012); margin-bottom: calc(var(--m-width) * 0.024); align-items: center;">
+            <button onclick="window.showCalendar('activities')" style="padding: calc(var(--m-width) * 0.012) calc(var(--m-width) * 0.024); font-size: calc(var(--m-width) * 0.019); font-weight: bold; border-radius: 5px; cursor: pointer; ${tab === 'activities' ? 'background: #3498db; color: white;' : 'background: #2c3e50; color: #bdc3c7; border: 1px solid #7f8c8d;'}">Activities</button>
+            <button onclick="window.showCalendar('shop')" style="padding: calc(var(--m-width) * 0.012) calc(var(--m-width) * 0.024); font-size: calc(var(--m-width) * 0.019); font-weight: bold; border-radius: 5px; cursor: pointer; ${tab === 'shop' ? 'background: #3498db; color: white;' : 'background: #2c3e50; color: #bdc3c7; border: 1px solid #7f8c8d;'}">Shop</button>
+            <button onclick="window.giveFreeTokens()" style="padding: calc(var(--m-width) * 0.012) calc(var(--m-width) * 0.024); font-size: calc(var(--m-width) * 0.019); font-weight: bold; border-radius: 5px; cursor: pointer; background: #e67e22; color: white; border: none;">Token</button>
         </div>
         <div id="calendar-content-area" style="flex: 1; overflow-y: auto;">
     `;
