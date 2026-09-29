@@ -125,7 +125,7 @@ export function showMap() {
                      title="${locationName.replace(/'/g, "&#39;")}"
                      style="position: absolute; left: ${coords.x}%; top: ${coords.y}%; width: ${markerWidth}; height: ${markerHeight}; background-image: url('${markerImg}'); background-size: contain; background-repeat: no-repeat; transform: translate(-50%, -50%); filter: ${dropShadow}; cursor: ${isClickable ? 'pointer' : 'default'};"
                      ${isClickable ? `onclick="window.navigateToLocation('${locationName.replace(/'/g, "\\'")}')"` : ''}
-                     onmouseover="window.showMapTooltip(event, '${locationName.replace(/'/g, "\\'")}')"
+                     onmousemove="window.showMapTooltip(event, '${locationName.replace(/'/g, "\\'")}')"
                      onmouseout="window.hideMapTooltip()">
                      ${showCheckmark ? '<div style="position:absolute; top:-5px; right:-5px; background:green; color:white; border-radius:50%; width:15px; height:15px; font-size:10px; line-height:15px; text-align:center;">✓</div>' : ''}
                 </div>
@@ -135,7 +135,6 @@ export function showMap() {
 
     html += `
         </div>
-        <div id="map-tooltip" style="display:none; position:absolute; background:rgba(0,0,0,0.8); color:white; padding:5px; border-radius:5px; pointer-events:none; z-index: 100;"></div>
     `;
 
 
@@ -387,7 +386,14 @@ export function navigateToLocation(locationName) {
 }
 
 export function showMapTooltip(e, locationName) {
-    const tooltip = document.getElementById('map-tooltip');
+    let tooltip = document.getElementById('map-tooltip');
+    if (!tooltip) {
+        tooltip = document.createElement('div');
+        tooltip.id = 'map-tooltip';
+        tooltip.style.cssText = 'display:none; position:fixed; background:rgba(0,0,0,0.8); color:white; padding:5px; border-radius:5px; pointer-events:none; z-index: 99999; font-size: 14px; line-height: 1.4;';
+        document.body.appendChild(tooltip);
+    }
+
     if (!tooltip) return;
 
     let info = `<strong>${locationName}</strong><br>`;
@@ -421,10 +427,10 @@ export function showMapTooltip(e, locationName) {
             route.spawns.forEach(s => {
                 let pName = "Unknown";
                 if (state.config.pokemonData) {
-                    const pd = state.config.pokemonData.find(p => p.id === s.pokemonId);
+                    const pd = state.config.pokemonData[s.pokemonId - 1]; // Use O(1) lookup
                     if (pd) pName = pd.name;
                 }
-                info += `- ${pName} (${Math.round(s.chance * 100)}%)<br>`;
+                info += `- ${pName} (Lvl: ${s.minLevel}-${s.maxLevel}, ${Math.round(s.chance * 100)}%)<br>`;
             });
         } else {
             info += `Hub Area<br>`;
@@ -434,10 +440,26 @@ export function showMapTooltip(e, locationName) {
     tooltip.innerHTML = info;
     tooltip.style.display = 'block';
 
-    // Fix tooltip positioning by using fixed position for the tooltip to avoid offset issues
-    tooltip.style.position = 'fixed';
-    tooltip.style.left = (e.clientX + 15) + 'px';
-    tooltip.style.top = (e.clientY + 15) + 'px';
+    // Get tooltip dimensions
+    const rect = tooltip.getBoundingClientRect();
+
+    let leftPos = e.clientX + 15;
+    let topPos = e.clientY + 15;
+
+    // Clamp to window boundaries
+    if (leftPos + rect.width > window.innerWidth) {
+        leftPos = e.clientX - rect.width - 15;
+    }
+    if (topPos + rect.height > window.innerHeight) {
+        topPos = e.clientY - rect.height - 15;
+    }
+
+    // Ensure it doesn't go off the top or left edges either
+    leftPos = Math.max(0, leftPos);
+    topPos = Math.max(0, topPos);
+
+    tooltip.style.left = leftPos + "px";
+    tooltip.style.top = topPos + "px";
 }
 
 export function hideMapTooltip() {
