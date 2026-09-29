@@ -17,6 +17,7 @@ export function showCheatControlModal() {
             <button onclick="window.cheatAction('JigglypuffDust')" style="padding: 10px; font-size: 14px; background: #ffb6c1; color: black; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Jigglypuff Dust</button>
             <button onclick="window.cheatAction('BonusCandy')" style="padding: 10px; font-size: 14px; background: #ecf0f1; color: black; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Bonus Candy</button>
             <button onclick="window.showTimeLapseModal()" style="padding: 10px; font-size: 14px; background: #8e44ad; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">TimeLapse</button>
+            <button onclick="window.cheatAction('GameSpeed')" style="padding: 10px; font-size: 14px; background: #9b59b6; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Game Speed</button>
             <button onclick="window.cheatAction('GodMode')" style="padding: 10px; font-size: 14px; background: linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3); color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; text-shadow: 1px 1px 2px black;">God Mode</button>
         </div>
     `;
@@ -245,6 +246,36 @@ export function cheatAction(action) {
     } else if (action === 'BonusCandy') {
         state.stats.whiteCandies = (state.stats.whiteCandies || 0) + 100;
         updateUI();
+    } else if (action === 'GameSpeed') {
+        const speeds = [0.25, 0.5, 1, 2, 5, 10, 25, 50, 100, 500, 1000];
+        const currentIndex = speeds.indexOf(state.settings.gameSpeed || 1);
+        const startIndex = currentIndex !== -1 ? currentIndex : 2; // Default to index 2 (1x)
+
+        let speedHtml = `
+            <div style="display: flex; flex-direction: column; gap: 15px; text-align: center; color: white;">
+                <div style="font-size: 14px; font-weight: bold;">Current Speed: <span id="game-speed-display" style="color: #4CAF50;">${speeds[startIndex]}x</span></div>
+                <input type="range" id="game-speed-slider" min="0" max="${speeds.length - 1}" step="1" value="${startIndex}" style="width: 100%; cursor: pointer;" oninput="window.handleGameSpeedSlider(this.value)">
+                <div style="display: flex; justify-content: space-between; font-size: 10px; color: #aaa;">
+                    <span>0.25x</span>
+                    <span>1000x</span>
+                </div>
+            </div>
+        `;
+
+        window.handleGameSpeedSlider = function(val) {
+            const display = document.getElementById('game-speed-display');
+            const allowedSpeeds = [0.25, 0.5, 1, 2, 5, 10, 25, 50, 100, 500, 1000];
+            const newSpeed = allowedSpeeds[val];
+            if (display) {
+                display.innerText = newSpeed + 'x';
+            }
+
+            state.settings.gameSpeed = newSpeed;
+            if (window.restartGameClock) window.restartGameClock();
+            if (window.updateUI) window.updateUI();
+        };
+
+        showModal("Game Speed", speedHtml, "window-gamespeed", "300px");
     }
 }
 
