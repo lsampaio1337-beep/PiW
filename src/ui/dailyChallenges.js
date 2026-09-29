@@ -134,6 +134,7 @@ function generateActiveChallenges() {
             target: target,
             progress: 0,
             completed: false,
+            claimed: false,
             text: text,
             extra: extra
         });
@@ -173,9 +174,9 @@ export function getDailyChallengesHtml() {
     for (let i = 0; i < active.length; i++) {
         let c = active[i];
 
-        let progressText = c.completed ? "Completed" : `${c.progress} / ${c.target}`;
-        let color = c.completed ? "#4CAF50" : "#ccc";
-        let textDec = c.completed ? "line-through" : "none";
+        let progressText = c.claimed ? "Completed" : `${c.progress} / ${c.target}`;
+        let color = c.claimed ? "#4CAF50" : "#ccc";
+        let textDec = c.claimed ? "line-through" : "none";
 
         html += `
             <div style="background: rgba(0,0,0,0.4); border: 1px solid #444; border-radius: 5px; padding: 10px; display: flex; align-items: center; justify-content: space-between;">
@@ -186,7 +187,9 @@ export function getDailyChallengesHtml() {
                     <div style="font-weight: bold; color: ${color}; white-space: nowrap; font-size: 14px;">
                         ${progressText}
                     </div>
+                    ${c.completed && !c.claimed ? `<button onclick="window.claimDailyChallengeToken(${i})" style="display: flex; align-items: center; gap: 5px; padding: 5px 10px; font-size: 12px; background: #2ecc71; color: white; border: none; border-radius: 3px; cursor: pointer;">Claim <img src="Assets/Extra/Token.png" style="width: 16px; height: 16px;"></button>` : ''}
                     ${!c.completed ? `<button onclick="window.cheatCompleteDailyChallenge(${i})" style="padding: 5px 10px; font-size: 12px; background: #666; color: white; border: none; border-radius: 3px; cursor: pointer;">Cheat Complete</button>` : ''}
+                    ${!c.completed ? `<button onclick="window.rerollIndividualDailyChallenge(${i})" style="padding: 5px 10px; font-size: 12px; background: #e74c3c; color: white; border: none; border-radius: 3px; cursor: pointer;">Reroll</button>` : ''}
                 </div>
             </div>
         `;
@@ -208,8 +211,19 @@ window.cheatCompleteDailyChallenge = function(index) {
     if (active && active[index] && !active[index].completed) {
         active[index].progress = active[index].target;
         active[index].completed = true;
-        state.stats.dailyChallenges.totalCompleted++;
         state.stats.dailyChallenges.hasSeenNotification = false;
+        if (typeof window.updateTopbar === 'function') window.updateTopbar();
+        if (typeof showCalendar === 'function') showCalendar(); // Refresh UI
+    }
+};
+
+window.claimDailyChallengeToken = function(index) {
+    let active = state.stats.dailyChallenges.active;
+    if (active && active[index] && active[index].completed && !active[index].claimed) {
+        active[index].claimed = true;
+        if (!state.trainer.tokens) state.trainer.tokens = 0;
+        state.trainer.tokens += 1;
+        state.stats.dailyChallenges.totalCompleted++;
         if (typeof window.updateTopbar === 'function') window.updateTopbar();
         if (typeof showCalendar === 'function') showCalendar(); // Refresh UI
     }
@@ -219,6 +233,69 @@ window.rerollDailyChallenges = function() {
     initDailyChallengesState();
     state.stats.dailyChallenges.rotationIndex++;
     generateActiveChallenges();
+    if (typeof showCalendar === 'function') showCalendar();
+};
+
+window.rerollIndividualDailyChallenge = function(index) {
+    let active = state.stats.dailyChallenges.active;
+    if (!active || !active[index]) return;
+    if (active[index].completed) return;
+
+    let currentType = active[index].type;
+    let categoryLists = {
+        combat: CHALLENGE_DEFS.combat.filter(c => !c.condition || c.condition()),
+        catching: CHALLENGE_DEFS.catching.filter(c => !c.condition || c.condition()),
+        economy: CHALLENGE_DEFS.economy.filter(c => !c.condition || c.condition()),
+        management: CHALLENGE_DEFS.management.filter(c => !c.condition || c.condition()),
+        special: CHALLENGE_DEFS.special.filter(c => !c.condition || c.condition())
+    };
+
+    // Find the category of the current challenge
+    let currentCategoryKey = null;
+    for (let key in categoryLists) {
+        if (categoryLists[key].some(c => c.type === currentType)) {
+            currentCategoryKey = key;
+            break;
+        }
+    }
+
+    // Filter out the current category
+    let availableCategories = Object.keys(categoryLists).filter(key => key !== currentCategoryKey && categoryLists[key].length > 0);
+
+    if (availableCategories.length === 0) {
+        // Fallback if no other categories are available, just reroll from the same category but a different challenge
+        availableCategories = [currentCategoryKey];
+    }
+
+    let rCat = availableCategories[Math.floor(Math.random() * availableCategories.length)];
+    let possibleChallenges = categoryLists[rCat];
+
+    if (availableCategories.length === 1 && rCat === currentCategoryKey) {
+        // Try to not pick the exact same one
+        possibleChallenges = possibleChallenges.filter(c => c.type !== currentType);
+        if (possibleChallenges.length === 0) possibleChallenges = categoryLists[rCat]; // fallback if only 1 exists
+    }
+
+    let newC = possibleChallenges[Math.floor(Math.random() * possibleChallenges.length)];
+
+    let target = newC.getTarget();
+    let extra = newC.getExtra ? newC.getExtra() : null;
+    let text = newC.text.replace('$', target);
+    if (extra !== null) {
+        text = text.replace('{extra}', extra);
+    }
+
+    active[index] = {
+        id: newC.id,
+        type: newC.type,
+        target: target,
+        progress: 0,
+        completed: false,
+        claimed: false,
+        text: text,
+        extra: extra
+    };
+
     if (typeof showCalendar === 'function') showCalendar();
 };
 
@@ -323,7 +400,6 @@ window.trackDailyChallenge = function(type, data = {}) {
                 c.progress = c.target;
                 c.completed = true;
                 state.stats.dailyChallenges.hasSeenNotification = false;
-                state.stats.dailyChallenges.totalCompleted++;
                 if (typeof window.updateTopbar === 'function') window.updateTopbar();
             }
             updated = true;
@@ -344,7 +420,7 @@ export function checkAnyDailyChallengeCompleted() {
     if (!state.stats.dailyChallenges || !state.stats.dailyChallenges.active) return false;
     if (state.stats.dailyChallenges.hasSeenNotification) return false;
     for (let c of state.stats.dailyChallenges.active) {
-        if (c.completed) return true;
+        if (c.completed && !c.claimed) return true;
     }
     return false;
 }

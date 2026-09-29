@@ -9,28 +9,32 @@ export function getRewardForDay(daysClaimed) {
     const d = daysClaimed + 1;
     const dayOfWeek = daysClaimed % 7; // 0 to 6 (Day 1 to Day 7)
 
+    let reward = {};
+
     if (w === 1) {
         switch(dayOfWeek) {
-            case 0: return { items: { "Pokeball": 10 }, potions: { "Tiny Potion": 10 } };
-            case 1: return { items: { "Pokeball": 20 }, potions: { "Small Potion": 10 } };
-            case 2: return { items: { "Greatball": 10 }, potions: { "Regular Potion": 10 } };
-            case 3: return { items: { "Greatball": 20 }, potions: { "Regular Potion": 20 } };
-            case 4: return { items: { "Ultraball": 10 }, potions: { "Big Potion": 5 } };
-            case 5: return { items: { "Ultraball": 20 }, potions: { "Big Potion": 10 } };
-            case 6: return { items: { "Masterball": 1 }, potions: { "Ultra Potion": 2 } };
+            case 0: reward = { items: { "Pokeball": 10 }, potions: { "Tiny Potion": 10 } }; break;
+            case 1: reward = { items: { "Pokeball": 20 }, potions: { "Small Potion": 10 } }; break;
+            case 2: reward = { items: { "Greatball": 10 }, potions: { "Regular Potion": 10 } }; break;
+            case 3: reward = { items: { "Greatball": 20 }, potions: { "Regular Potion": 20 } }; break;
+            case 4: reward = { items: { "Ultraball": 10 }, potions: { "Big Potion": 5 } }; break;
+            case 5: reward = { items: { "Ultraball": 20 }, potions: { "Big Potion": 10 } }; break;
+            case 6: reward = { items: { "Masterball": 1 }, potions: { "Ultra Potion": 2 } }; break;
         }
     } else {
         // Week 2+
         if (dayOfWeek < 6) { // Days 1-6
             const ultraballs = 15 + 5 * (d - 7);
             const hyperPotions = 2 * (d - 7);
-            return { items: { "Ultraball": ultraballs }, potions: { "Huge Potion": hyperPotions } };
+            reward = { items: { "Ultraball": ultraballs }, potions: { "Huge Potion": hyperPotions } };
         } else { // Day 7
             const masterballs = w;
             const ultraPotions = 2 * w;
-            return { items: { "Masterball": masterballs }, potions: { "Ultra Potion": ultraPotions } };
+            reward = { items: { "Masterball": masterballs }, potions: { "Ultra Potion": ultraPotions } };
         }
     }
+    reward.tokens = 1;
+    return reward;
 }
 
 export function getRewardListForWeek(weekNumber) {
@@ -89,6 +93,11 @@ export function claimDailyReward(dayIndex) {
              state.backpack.potions[potionName] = 0;
         }
         state.backpack.potions[potionName] += reward.potions[potionName];
+    }
+
+    if (reward.tokens) {
+        if (!state.trainer.tokens) state.trainer.tokens = 0;
+        state.trainer.tokens += reward.tokens;
     }
 
     // Update state
@@ -192,6 +201,15 @@ export function showCalendar(tab = 'activities') {
                 <div style="display: flex; align-items: center; gap: 5px; justify-content: center;">
                     <img src="Assets/Items/Potions/${potionName}.png" style="width: 24px; height: 24px;" title="${potionName}">
                     <span style="font-size: 14px;">x${qty}</span>
+                </div>
+            `;
+        }
+
+        if (reward.tokens) {
+            itemsHtml += `
+                <div style="display: flex; align-items: center; gap: 5px; margin-top: 5px; justify-content: center;">
+                    <img src="Assets/Extra/Token.png" style="width: 24px; height: 24px;" title="Token">
+                    <span style="font-size: 14px;">x${reward.tokens}</span>
                 </div>
             `;
         }
