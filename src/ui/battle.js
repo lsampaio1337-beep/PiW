@@ -386,7 +386,16 @@ export function updateBattleArena() {
             const elSumIV = document.getElementById('enemy-info-sumiv');
 
             if (elEnemySprite && elEnemySide) {
-                elEnemySprite.src = `Assets/Pokemon Sprites/Natural/${enemy.qualityName === 'Shiny' ? enemy.id + '_shiny' : enemy.id}.png`;
+                elEnemySprite.src = `Assets/Pokemon Sprites/Clean/${enemy.qualityName === 'Shiny' ? enemy.id + '_shiny' : enemy.id}_Clean.png`;
+                if (enemy.types.includes('Flying')) {
+                    elEnemySprite.style.top = '0';
+                    elEnemySprite.style.bottom = 'auto';
+                } else {
+                    elEnemySprite.style.top = 'auto';
+                    elEnemySprite.style.bottom = '0';
+                }
+                elEnemySprite.style.left = '0';
+                elEnemySprite.style.right = 'auto';
                 elEnemySprite.style.display = 'block';
                 applyWalkAnimations(enemy, true);
 
@@ -398,8 +407,8 @@ export function updateBattleArena() {
                     elSumIV.innerText = `SumIV=${sumIV}`;
                 }
 
-                elEnemySide.style.top = '50%';
-                elEnemySide.style.bottom = 'auto';
+                elEnemySide.style.top = '80%';
+                elEnemySide.style.transform = 'translateY(-100%)';
 
                 if (battleSystem.isSliding) {
                     if (elEnemySide.dataset.sliding !== 'true') {
@@ -438,8 +447,8 @@ export function updateBattleArena() {
             const elPlayerSide = document.getElementById('player-side');
             if (leader && elPlayerSide) {
 
-                elPlayerSide.style.top = '50%';
-                elPlayerSide.style.bottom = 'auto';
+                elPlayerSide.style.top = '80%';
+                elPlayerSide.style.transform = 'translate(-100%, -100%)';
                 elPlayerSide.style.left = '25%';
 
                 const hpContainerPlayer = document.getElementById('player-battle-hp-container');
@@ -468,7 +477,16 @@ export function updateBattleArena() {
                 if (elPlayerSprite) {
                     let dittoBg = document.getElementById('player-sprite-ditto-bg');
                     if (dittoBg) dittoBg.style.display = 'none';
-                    elPlayerSprite.src = `Assets/Pokemon Sprites/Natural/${leader.qualityName === 'Shiny' ? (leader.transformedIntoId || leader.id) + '_shiny' : (leader.transformedIntoId || leader.id)}.png`;
+                    elPlayerSprite.src = `Assets/Pokemon Sprites/Clean/${leader.qualityName === 'Shiny' ? (leader.transformedIntoId || leader.id) + '_shiny' : (leader.transformedIntoId || leader.id)}_Clean.png`;
+                    if (leader.types.includes('Flying')) {
+                        elPlayerSprite.style.top = '0';
+                        elPlayerSprite.style.bottom = 'auto';
+                    } else {
+                        elPlayerSprite.style.top = 'auto';
+                        elPlayerSprite.style.bottom = '0';
+                    }
+                    elPlayerSprite.style.right = '0';
+                    elPlayerSprite.style.left = 'auto';
                     elPlayerSprite.style.display = 'block';
                     applyWalkAnimations(leader, false);
 
@@ -510,8 +528,8 @@ export function updateBattleArena() {
                 elEnemySprite.style.display = 'block';
                 elEnemySide.style.transition = 'none';
                 elEnemySide.style.left = '35%'; // Matching active battle destination
-                elEnemySide.style.top = '50%';
-                elEnemySide.style.bottom = 'auto';
+                elEnemySide.style.top = '80%';
+                elEnemySide.style.transform = 'translateY(-100%)';
 
                 const elEnemyInfo = document.getElementById('enemy-info-container');
                 if (elEnemyInfo) elEnemyInfo.style.display = 'none';
@@ -526,8 +544,8 @@ export function updateBattleArena() {
             const elPlayerSide = document.getElementById('player-side');
             if (leader && elPlayerSide) {
 
-                elPlayerSide.style.top = '50%';
-                elPlayerSide.style.bottom = 'auto';
+                elPlayerSide.style.top = '80%';
+                elPlayerSide.style.transform = 'translate(-100%, -100%)';
                 elPlayerSide.style.left = '25%';
 
                 const hpContainerPlayer = document.getElementById('player-battle-hp-container');
@@ -556,7 +574,16 @@ export function updateBattleArena() {
                 if (elPlayerSprite) {
                     let dittoBg = document.getElementById('player-sprite-ditto-bg');
                     if (dittoBg) dittoBg.style.display = 'none';
-                    elPlayerSprite.src = `Assets/Pokemon Sprites/Natural/${leader.qualityName === 'Shiny' ? (leader.transformedIntoId || leader.id) + '_shiny' : (leader.transformedIntoId || leader.id)}.png`;
+                    elPlayerSprite.src = `Assets/Pokemon Sprites/Clean/${leader.qualityName === 'Shiny' ? (leader.transformedIntoId || leader.id) + '_shiny' : (leader.transformedIntoId || leader.id)}_Clean.png`;
+                    if (leader.types.includes('Flying')) {
+                        elPlayerSprite.style.top = '0';
+                        elPlayerSprite.style.bottom = 'auto';
+                    } else {
+                        elPlayerSprite.style.top = 'auto';
+                        elPlayerSprite.style.bottom = '0';
+                    }
+                    elPlayerSprite.style.right = '0';
+                    elPlayerSprite.style.left = 'auto';
                     elPlayerSprite.style.display = 'block';
                     applyWalkAnimations(leader, false);
 
@@ -646,7 +673,7 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
     // The image itself
     const ghost = document.createElement('img');
     let ghostId = activeEncounter.isDisguisedDitto ? 132 : activeEncounter.id;
-    ghost.src = `Assets/Pokemon Sprites/Natural/${activeEncounter.qualityName === 'Shiny' ? ghostId + '_shiny' : ghostId}.png`;
+    ghost.src = `Assets/Pokemon Sprites/Clean/${activeEncounter.qualityName === 'Shiny' ? ghostId + '_shiny' : ghostId}_Clean.png`;
     ghost.style.height = '100%';
     ghost.style.objectFit = 'contain';
     ghostContainer.appendChild(ghost);
