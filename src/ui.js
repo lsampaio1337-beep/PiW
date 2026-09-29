@@ -2108,36 +2108,53 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
         }
 
         showModal("Trainer", `
-            <div style="text-align: left; display: flex; gap: 40px; justify-content: center; margin-bottom: 20px;">
-                <div>
-                    <p><b>Time played:</b> ${playtimeStr}</p>
-                    <p><b>Money:</b> $${state.trainer.money.toLocaleString()}</p>
-                    <hr>
-                    <p><b>Total Pokémon Captured:</b> ${(state.stats.caught || 0).toLocaleString()}</p>
-                    <p><b>Species Caught:</b> ${uniqueSpeciesCaught} / ${state.config.pokemonData.length}</p>
-                    <hr>
-                    <p><b>Jigglypuff Grains Used:</b> ${(state.stats.jigglypuffGrainsUsed || 0).toLocaleString()}</p>
-                    <p><b>Daily Rewards Collected:</b> ${(state.stats.dailyRewards ? state.stats.dailyRewards.daysClaimed : 0).toLocaleString()}</p>
-                    <p><b>Professor Oak Assignments Completed:</b> ${assignmentsCompleted}/${maxAssignments}</p>
-                    <hr>
-                    <p><b>Highest Level on Backpack:</b> ${highestLevel}</p>
-                    <p><b>Highest Quality on Backpack:</b> ${highestQuality}</p>
-                    <p><b>Highest IV Sum on Backpack:</b> ${highestSumIV}</p>
+            <div style="text-align: left; margin-bottom: 20px;">
+                <div style="display: flex; gap: 40px; justify-content: space-between;">
+                    <div style="flex: 1;">
+                        <p><b>Time played:</b> ${playtimeStr}</p>
+                        <p><b>Money:</b> $${state.trainer.money.toLocaleString()}</p>
+                    </div>
+                    <div style="flex: 1;">
+                        <p><b>Battles Won:</b> ${(state.stats.battlesWon || 0).toLocaleString()}</p>
+                        <p><b>Faints:</b> ${(state.stats.faints || 0).toLocaleString()}</p>
+                    </div>
                 </div>
-                <div>
-                    <p><b>Battles Won:</b> ${(state.stats.battlesWon || 0).toLocaleString()}</p>
-                    <p><b>Faints:</b> ${(state.stats.faints || 0).toLocaleString()}</p>
-                    <hr>
-                    <p><b>Shinies Caught:</b> ${(state.stats.shiniesCaught || 0).toLocaleString()}</p>
-                    <p><b>Shiny Species Caught:</b> ${uniqueShinySpeciesCaught} / ${state.config.pokemonData.length}</p>
-                    <hr>
-                    <p><b>White Candies Claimed:</b> ${(whiteCandiesClaimed || 0).toLocaleString()}</p>
-                    <p><b>Tokens Earned:</b> ${(state.stats.tokensEarned || 0).toLocaleString()}</p>
-                    <p><b>Progress Challenge Completed:</b> ${challengesCompleted}/${maxChallenges}</p>
-                    <hr>
-                    <p><b>Highest Level Captured:</b> ${state.stats.highestLevelCaptured || 0}</p>
-                    <p><b>Highest Quality Captured:</b> ${state.stats.highestQualityCaptured || 0}</p>
-                    <p><b>Highest IV Sum Captured:</b> ${state.stats.highestSumIVCaptured || 0}</p>
+                <hr style="margin: 10px 0;">
+                <div style="display: flex; gap: 40px; justify-content: space-between;">
+                    <div style="flex: 1;">
+                        <p><b>Total Pokémon Captured:</b> ${(state.stats.caught || 0).toLocaleString()}</p>
+                        <p><b>Species Caught:</b> ${uniqueSpeciesCaught} / ${state.config.pokemonData.length}</p>
+                    </div>
+                    <div style="flex: 1;">
+                        <p><b>Shinies Caught:</b> ${(state.stats.shiniesCaught || 0).toLocaleString()}</p>
+                        <p><b>Shiny Species Caught:</b> ${uniqueShinySpeciesCaught} / ${state.config.pokemonData.length}</p>
+                    </div>
+                </div>
+                <hr style="margin: 10px 0;">
+                <div style="display: flex; gap: 40px; justify-content: space-between;">
+                    <div style="flex: 1;">
+                        <p><b>Jigglypuff Grains Used:</b> ${(state.stats.jigglypuffGrainsUsed || 0).toLocaleString()}</p>
+                        <p><b>Daily Rewards Collected:</b> ${(state.stats.dailyRewards ? state.stats.dailyRewards.daysClaimed : 0).toLocaleString()}</p>
+                        <p><b>Professor Oak Assignments Completed:</b> ${assignmentsCompleted}/${maxAssignments}</p>
+                    </div>
+                    <div style="flex: 1;">
+                        <p><b>White Candies Claimed:</b> ${(whiteCandiesClaimed || 0).toLocaleString()}</p>
+                        <p><b>Tokens Earned:</b> ${(state.stats.tokensEarned || 0).toLocaleString()}</p>
+                        <p><b>Progress Challenge Completed:</b> ${challengesCompleted}/${maxChallenges}</p>
+                    </div>
+                </div>
+                <hr style="margin: 10px 0;">
+                <div style="display: flex; gap: 40px; justify-content: space-between;">
+                    <div style="flex: 1;">
+                        <p><b>Highest Level on Backpack:</b> ${highestLevel}</p>
+                        <p><b>Highest Quality on Backpack:</b> ${highestQuality}</p>
+                        <p><b>Highest IV Sum on Backpack:</b> ${highestSumIV}</p>
+                    </div>
+                    <div style="flex: 1;">
+                        <p><b>Highest Level Captured:</b> ${state.stats.highestLevelCaptured || 0}</p>
+                        <p><b>Highest Quality Captured:</b> ${state.stats.highestQualityCaptured || 0}</p>
+                        <p><b>Highest IV Sum Captured:</b> ${state.stats.highestSumIVCaptured || 0}</p>
+                    </div>
                 </div>
             </div>
             <div style="margin-top: 15px; text-align: center; display: flex; gap: 10px; justify-content: center;">
