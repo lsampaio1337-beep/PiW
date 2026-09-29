@@ -544,13 +544,17 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
         return;
     }
 
-    // Hide original enemy sprite container momentarily until next slide in
+    // Animate enemy sprite sliding off screen
     const elEnemySide = document.getElementById('enemy-side');
     if (elEnemySide) {
-         elEnemySide.style.opacity = '0';
+         elEnemySide.style.transition = 'left 5s linear';
+         elEnemySide.style.left = '-30%';
+         // Reset after 5s
          setTimeout(() => {
-             if (elEnemySide) elEnemySide.style.opacity = '1';
-         }, 3000);
+             if (elEnemySide) {
+                 elEnemySide.style.transition = 'none';
+             }
+         }, 5000);
     }
 
     // Also wipe out enemy HP container and stats
@@ -559,7 +563,7 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
         hpContainerEnemy.style.opacity = '0';
         setTimeout(() => {
             if (hpContainerEnemy) hpContainerEnemy.style.opacity = '1';
-        }, 3000);
+        }, 5000);
     }
 
     // 1. Create Pokeball if used
@@ -584,22 +588,10 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
 
     // Timeline Animations
     if (ball) {
-        ball.style.transition = 'left 3s linear';
-        ball.style.left = '15%';
-
-        // Add shake animation manually using setInterval since we need to slide too
-        let shakeCount = 0;
-        let shakeInterval = setInterval(() => {
-            shakeCount++;
-            let rotation = (shakeCount % 2 === 0) ? 15 : -15;
-            if (shakeCount % 10 === 0) rotation = 0; // brief pause
-            ball.style.transform = `translate(-50%, -50%) rotate(${rotation}deg)`;
-        }, 150);
+        ball.style.transition = 'left 5s linear';
+        ball.style.left = '-30%';
 
         setTimeout(() => {
-            clearInterval(shakeInterval);
-            ball.style.transform = 'translate(-50%, -50%) rotate(0deg)';
-
             // 3s mark: decide outcome
             if (ballResult.caught) {
                 ball.src = `Assets/Items/Balls/${ballResult.ballName}Y.png`;
@@ -610,15 +602,11 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
             // Execute capture logic
             captureCallback();
 
-            // Slide off screen for the next 1.5s
-            ball.style.transition = 'left 1.5s linear';
-            ball.style.left = '-10%';
-
-            setTimeout(() => {
-                if (ball.parentElement) ball.parentElement.removeChild(ball);
-            }, 1500);
-
         }, 3000);
+
+        setTimeout(() => {
+            if (ball && ball.parentElement) ball.parentElement.removeChild(ball);
+        }, 5000);
     } else {
         // No ball used, just wait 3s before triggering captureCallback
         setTimeout(() => {
