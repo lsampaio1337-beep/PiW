@@ -8,12 +8,6 @@ export function showSettings() {
     if (battleSystem && battleSystem.gymState && battleSystem.gymState.isActive) return;
 
     const settingsHTML = `
-        <div style="margin-bottom: 15px;">
-            <button onclick="window.showAddPokemonModal()" style="padding: 5px 10px; font-size: 14px;">Add Pokemon</button>
-        </div>
-
-        <hr>
-
         <button onclick="window.exportLog()">Export Save Log</button>
         <button onclick="window.activateCheat()" style="margin-left: 10px; background-color: #c0392b; color: white;">Cheat</button>
     `;

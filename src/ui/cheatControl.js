@@ -18,6 +18,7 @@ export function showCheatControlModal() {
             <button onclick="window.cheatAction('BonusCandy')" style="padding: 10px; font-size: 14px; background: #ecf0f1; color: black; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Bonus Candy</button>
             <button onclick="window.showTimeLapseModal()" style="padding: 10px; font-size: 14px; background: #8e44ad; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">TimeLapse</button>
             <button onclick="window.cheatAction('GameSpeed')" style="padding: 10px; font-size: 14px; background: #9b59b6; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Game Speed</button>
+            <button onclick="window.showAddPokemonModal()" style="padding: 10px; font-size: 14px; background: #16a085; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Add Pokemon</button>
             <button onclick="window.cheatAction('GodMode')" style="padding: 10px; font-size: 14px; background: linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3); color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; text-shadow: 1px 1px 2px black;">God Mode</button>
         </div>
     `;
