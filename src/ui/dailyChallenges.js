@@ -19,17 +19,7 @@ function getLocalDateString() {
     return now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0');
 }
 
-export function checkAndResetDailyChallenges() {
-    initDailyChallengesState();
-    const today = getLocalDateString();
-    if (state.stats.dailyChallenges.lastDate !== today) {
-        if (state.stats.dailyChallenges.lastDate !== null) {
-            state.stats.dailyChallenges.rotationIndex++;
-        }
-        state.stats.dailyChallenges.lastDate = today;
-        generateActiveChallenges();
-    }
-}
+
 
 const CHALLENGE_DEFS = {
     combat: [

@@ -769,22 +769,22 @@ class BattleSystem {
         if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') {
             window.trackDailyChallenge('defeat_level', { level: this.activeEncounter.level, playerLevel: leader.level });
             window.trackDailyChallenge('defeat_type', { types: this.activeEncounter.types });
-                    window.trackDailyChallenge('defeat_underdog', { level: this.activeEncounter.level, playerLevel: leader.level });
+            window.trackDailyChallenge('defeat_underdog', { level: this.activeEncounter.level, playerLevel: leader.level });
 
-                    if (this.state.stats.dailyChallenges) {
-                        window.trackDailyChallenge('defeat_endurance', { streak: 1 });
+            if (this.state.stats.dailyChallenges) {
+                window.trackDailyChallenge('defeat_endurance', { streak: 1 });
 
-                        if (this.state.currentRoute === this.state.stats.dailyChallenges.currentRoute) {
-                            window.trackDailyChallenge('defeat_single_route', { streak: 2 });
-                        } else {
-                            this.state.stats.dailyChallenges.currentRoute = this.state.currentRoute;
-                            window.trackDailyChallenge('defeat_single_route', { streak: 1 });
-                        }
-                    }
+                if (this.state.currentRoute === this.state.stats.dailyChallenges.currentRoute) {
+                    window.trackDailyChallenge('defeat_single_route', { streak: 2 });
+                } else {
+                    this.state.stats.dailyChallenges.currentRoute = this.state.currentRoute;
+                    window.trackDailyChallenge('defeat_single_route', { streak: 1 });
+                }
+            }
 
-                    if (this.turnCount === 1) {
-                         window.trackDailyChallenge('defeat_1_turn');
-                    } // Handled in a simpler way if needed, or we might need to adjust logic
+            if (this.turnCount === 1) {
+                 window.trackDailyChallenge('defeat_1_turn');
+            } // Handled in a simpler way if needed, or we might need to adjust logic
         }
 
         // Auto Throw Pokeball logic (disable in gyms)
@@ -1206,10 +1206,10 @@ class BattleSystem {
     }
 
     handleFaint() {
+        this.isFainting = true;
         if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') {
             window.trackDailyChallenge('defeat_endurance', { streak: 0 });
         }
-        this.isFainting = true;
         this.updateUI(); // This will trigger the fade out via UI logic
 
         // Wait 4 seconds (2s fade out + 2s extra wait)
@@ -1588,7 +1588,7 @@ class BattleSystem {
 
                     if (this.turnCount === 1) {
                          window.trackDailyChallenge('defeat_1_turn');
-                    } // Handled in a simpler way if needed, or we might need to adjust logic
+                    }
                 }
 
                 if (this.state.settings.autoCatch) {
