@@ -1,0 +1,6 @@
+--- src/ui/dailyChallenges.js
++++ src/ui/dailyChallenges.js
+@@ -232,2 +232,3 @@
+             showCalendar();
+         }
++    }

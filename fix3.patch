@@ -1,0 +1,6 @@
+--- src/ui/dailyChallenges.js
++++ src/ui/dailyChallenges.js
+@@ -231,2 +231,3 @@
+         if (document.getElementById('window-calendar')) {
+             showCalendar();
++        }

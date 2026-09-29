@@ -247,6 +247,7 @@ export function evolvePokemon(location, idx, toId) {
     document.getElementById('modal-overlay').style.display = 'none'; // Close modal
 
     updateUI();
+    if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') window.trackDailyChallenge('evolve_pokemon');
 }
 
 window.showVitaminsModal = function(location, idx) {

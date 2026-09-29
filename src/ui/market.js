@@ -40,6 +40,7 @@ export function setupMarket(vCenter) {
 
     document.getElementById('btn-heal-all').addEventListener('click', () => {
         state.party.forEach(p => p.currentHp = p.maxHp);
+        if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') window.trackDailyChallenge('heal_center');
         state.storage.forEach(p => p.currentHp = p.maxHp);
         updateUI();
         const btn = document.getElementById('btn-heal-all');
@@ -869,6 +870,10 @@ window.marketSellSelectedPokemon = function() {
     });
 
     state.trainer.money += totalGain;
+            if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') {
+                window.trackDailyChallenge('sell_pokemon', { count: numSold });
+                window.trackDailyChallenge('earn_money', { amount: totalGain });
+            }
 
     // Track Daily Challenges
     if (typeof window.trackDailyChallenge === 'function') {

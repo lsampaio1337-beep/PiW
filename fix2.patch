@@ -1,0 +1,17 @@
+--- src/ui/dailyChallenges.js
++++ src/ui/dailyChallenges.js
+@@ -223,3 +223,4 @@
+                 state.stats.dailyChallenges.totalCompleted++;
++                if (typeof window.updateTopbar === 'function') window.updateTopbar();
+             }
+             updated = true;
+@@ -226,2 +227,6 @@
+         }
+     }
++
++    if (updated) {
++        if (document.getElementById('window-calendar')) {
++            showCalendar();
++        }
++    }
+ }

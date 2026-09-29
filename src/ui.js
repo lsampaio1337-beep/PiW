@@ -529,6 +529,7 @@ window.playCombatAnimations = playCombatAnimations;
 window.triggerDefeatAnimation = triggerDefeatAnimation;
 window.showLoot = showLoot;
 window.setLeader = function(idx) {
+    if (typeof window.trackDailyChallenge === 'function') window.trackDailyChallenge('defeat_endurance', { streak: 0 });
     if (idx === 0) return;
     if (globals.battleSystem) {
         globals.battleSystem.switchLeader(idx);
@@ -1960,7 +1961,10 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
     bindBtn('btn-calendar', () => {
         if(!checkCombatLock()) {
             showCalendar();
-
+            if (state.stats.dailyChallenges) {
+                state.stats.dailyChallenges.hasSeenNotification = true;
+                updateTopbar();
+            }
         }
     });
     bindBtn('btn-gift', () => {
