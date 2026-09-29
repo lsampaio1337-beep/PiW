@@ -762,11 +762,11 @@ class BattleSystem {
         const evm = this.activeEncounter.evm;
 
         // Bonus Candy Defeats Tracker
-        if ((this.state.stats.bonusCandyDefeats || 0) < 250) {
-            this.state.stats.bonusCandyDefeats = (this.state.stats.bonusCandyDefeats || 0) + 1;
-            if (this.state.stats.bonusCandyDefeats >= 250) {
-                this.state.stats.hasSeenBonusCandyIcon = false;
-            }
+        this.state.stats.bonusCandyDefeats = (this.state.stats.bonusCandyDefeats || 0) + 1;
+        if (this.state.stats.bonusCandyDefeats >= 100) {
+            this.state.stats.bonusCandyDefeats -= 100;
+            this.state.stats.whiteCandies = (this.state.stats.whiteCandies || 0) + 1;
+            // Never reset hasSeenBonusCandyIcon so the exclamation mark never reappears
         }
 
         // Track Daily Challenges
@@ -946,12 +946,13 @@ class BattleSystem {
         }
 
         // Loot Bonus Calculation
-        const lootMultiplier = 1 + (0.03 * (this.state.stats.greenCandies || 0));
+        const lootMultiplier = 1 + (0.0025 * (this.state.stats.greenCandies || 0));
+        const moneyMultiplier = 1 + (0.01 * (this.state.stats.greenCandies || 0));
 
         // Award XP and Money (EV)
         this.grantXP(leader, evxp);
         if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') window.trackDailyChallenge('gain_exp', { amount: evxp });
-        let earned = Math.floor(evm * lootMultiplier);
+        let earned = Math.floor(evm * moneyMultiplier);
         this.state.trainer.money += earned;
         if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') {
             window.trackDailyChallenge('earn_money', { amount: earned });
@@ -1581,11 +1582,10 @@ class BattleSystem {
                     }
                 }
 
-                if ((this.state.stats.bonusCandyDefeats || 0) < 250) {
-                    this.state.stats.bonusCandyDefeats = (this.state.stats.bonusCandyDefeats || 0) + 1;
-                    if (this.state.stats.bonusCandyDefeats >= 250) {
-                        this.state.stats.hasSeenBonusCandyIcon = false;
-                    }
+                this.state.stats.bonusCandyDefeats = (this.state.stats.bonusCandyDefeats || 0) + 1;
+                if (this.state.stats.bonusCandyDefeats >= 100) {
+                    this.state.stats.bonusCandyDefeats -= 100;
+                    this.state.stats.whiteCandies = (this.state.stats.whiteCandies || 0) + 1;
                 }
 
                 // Track Daily Challenges
@@ -1676,10 +1676,11 @@ class BattleSystem {
                     }
                 }
 
-                const lootMultiplier = 1 + (0.03 * (this.state.stats.greenCandies || 0));
+                const lootMultiplier = 1 + (0.0025 * (this.state.stats.greenCandies || 0));
+                const moneyMultiplier = 1 + (0.01 * (this.state.stats.greenCandies || 0));
                 this.grantXP(leader, evxp);
         if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') window.trackDailyChallenge('gain_exp', { amount: evxp });
-                let earnedZzZ = Math.floor(evm * lootMultiplier);
+                let earnedZzZ = Math.floor(evm * moneyMultiplier);
                 this.state.trainer.money += earnedZzZ;
                 if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') {
                     window.trackDailyChallenge('earn_money', { amount: earnedZzZ });
