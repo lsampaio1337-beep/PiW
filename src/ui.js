@@ -1304,6 +1304,93 @@ function startGame() {
     window.addEventListener('beforeunload', () => {
         storage.save(state);
     });
+
+    // Handle scrolling during drag-and-drop (Wheel + Auto-scroll at edges)
+    window.isDraggingPokemon = false;
+    let dragScrollTarget = null;
+    let dragScrollY = 0;
+    let autoScrollInterval = null;
+
+    function getScrollableParent(node) {
+        if (!node) return null;
+        while (node && node !== document.body && node !== document) {
+            if (node.scrollHeight > node.clientHeight) {
+                const style = window.getComputedStyle(node);
+                if (style.overflowY === 'auto' || style.overflowY === 'scroll') {
+                    return node;
+                }
+            }
+            node = node.parentNode;
+        }
+        return null;
+    }
+
+    window.addEventListener('dragstart', () => {
+        window.isDraggingPokemon = true;
+        if (autoScrollInterval) cancelAnimationFrame(autoScrollInterval);
+
+        autoScrollInterval = requestAnimationFrame(autoScrollLoop);
+    });
+
+    window.addEventListener('dragend', () => {
+        window.isDraggingPokemon = false;
+        dragScrollTarget = null;
+        if (autoScrollInterval) cancelAnimationFrame(autoScrollInterval);
+    });
+
+    // Track mouse position during drag to find what we are hovering
+    window.addEventListener('dragover', (e) => {
+        dragScrollTarget = document.elementFromPoint(e.clientX, e.clientY) || e.target;
+        dragScrollY = e.clientY;
+    });
+
+    window.addEventListener('wheel', (e) => {
+        if (window.isDraggingPokemon) {
+            let scrollNode = getScrollableParent(dragScrollTarget) || cachedScrollNode;
+            if (scrollNode) {
+                scrollNode.scrollTop += e.deltaY;
+            }
+        }
+    }, { passive: false });
+
+    let cachedScrollNode = null;
+
+    function autoScrollLoop() {
+        if (!window.isDraggingPokemon) {
+            cachedScrollNode = null;
+            return;
+        }
+
+        if (dragScrollTarget) {
+            let currentNode = getScrollableParent(dragScrollTarget);
+            if (currentNode) {
+                cachedScrollNode = currentNode;
+            }
+        }
+
+        if (cachedScrollNode) {
+            const rect = cachedScrollNode.getBoundingClientRect();
+            const edgeSize = 40;
+
+            // If mouse is near or beyond the top edge of the scroll container
+            if (dragScrollY < rect.top + edgeSize) {
+                let speed = 15;
+                if (dragScrollY < rect.top) speed = 60; // 4x faster beyond border
+                cachedScrollNode.scrollTop -= speed;
+            }
+            // If mouse is near or beyond the bottom edge of the scroll container
+            else if (dragScrollY > rect.bottom - edgeSize) {
+                let speed = 15;
+                if (dragScrollY > rect.bottom) speed = 60; // 4x faster beyond border
+                cachedScrollNode.scrollTop += speed;
+            }
+        }
+
+        autoScrollInterval = requestAnimationFrame(autoScrollLoop);
+    }
+
+
+
 }
 
 async function init() {
