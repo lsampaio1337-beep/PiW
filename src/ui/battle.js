@@ -1,3 +1,4 @@
+import { VITAMINS } from "../constants.js";
 import { TYPE_COLORS } from '../ui.js';
 import { state, globals } from '../state.js';
 
@@ -980,6 +981,7 @@ export function showLoot(lootItems) {
         let imgFolder = 'Balls';
         if (itemName.includes('Potion')) imgFolder = 'Potions';
         else if (itemName.includes('Stone')) imgFolder = 'Stones';
+        else if (VITAMINS.includes(itemName)) imgFolder = 'Vitamins';
 
         html += `
             <div style="width: 30px; height: 30px; background: rgba(0, 0, 0, 0.6); border: 1px solid #f1c40f; border-radius: 4px; position: relative; display: flex; align-items: center; justify-content: center;">

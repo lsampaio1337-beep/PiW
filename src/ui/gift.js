@@ -1,3 +1,4 @@
+import { VITAMINS } from "../constants.js";
 import { state } from '../state.js';
 import { updateUI } from '../ui.js';
 import { showModal } from '../ui.js';
@@ -54,6 +55,7 @@ export function showGiftModal() {
             } else if (gift.type === 'item') {
                 let imgPath = gift.item.includes('Potion') ? `Assets/Items/Potions/${gift.item}.png` :
                               gift.item.includes('Stone') ? `Assets/Items/Stones/${gift.item}.png` :
+                              VITAMINS.includes(gift.item) ? `Assets/Items/Vitamins/${gift.item}.png` :
                               `Assets/Items/Balls/${gift.item}.png`;
                 html += `
                     <div onclick="window.claimPendingGift(${index})" style="cursor: pointer; padding: 10px; border: 1px solid #ccc; border-radius: 5px; background: rgba(0,0,0,0.5); transition: background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(0,0,0,0.5)'">
@@ -97,6 +99,7 @@ export function showGiftModal() {
             } else if (gift.type === 'item') {
                 let imgPath = gift.item.includes('Potion') ? `Assets/Items/Potions/${gift.item}.png` :
                               gift.item.includes('Stone') ? `Assets/Items/Stones/${gift.item}.png` :
+                              VITAMINS.includes(gift.item) ? `Assets/Items/Vitamins/${gift.item}.png` :
                               `Assets/Items/Balls/${gift.item}.png`;
                 html += `
                     <div style="padding: 10px; border: 1px solid #444; border-radius: 5px; background: rgba(0,0,0,0.2);">
