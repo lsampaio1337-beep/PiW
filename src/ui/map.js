@@ -390,18 +390,33 @@ export function showMapTooltip(e, locationName) {
     if (!tooltip) {
         tooltip = document.createElement('div');
         tooltip.id = 'map-tooltip';
-        tooltip.style.cssText = 'display:none; position:fixed; background:rgba(0,0,0,0.8); color:white; padding:5px; border-radius:5px; pointer-events:none; z-index: 99999; font-size: 14px; line-height: 1.4;';
+        tooltip.style.cssText = 'display:none; position:fixed; background:rgba(0,0,0,0.8); color:white; pointer-events:none; z-index: 99999; line-height: 1.4;';
         document.body.appendChild(tooltip);
     }
 
     if (!tooltip) return;
+
+    let scale = 1;
+    const mapWindow = document.getElementById('window-map');
+    if (mapWindow) {
+        const currentWidth = mapWindow.offsetWidth || parseInt(mapWindow.style.width) || 800;
+        scale = currentWidth / 800;
+    }
+
+    const fontSize = 14 * scale;
+    const padding = 5 * scale;
+    const borderRadius = 5 * scale;
+    const cursorOffset = 15 * scale;
+
+    tooltip.style.fontSize = fontSize + 'px';
+    tooltip.style.padding = padding + 'px';
+    tooltip.style.borderRadius = borderRadius + 'px';
 
     let info = `<strong>${locationName}</strong><br>`;
 
     // Fetch info to show on tooltip
     if (locationName.includes("Gym") || locationName === "Indigo Plateau") {
         let lookupName = locationName;
-
 
         if (state.config.gyms) {
             const gym = state.config.gyms.find(g => g.name === lookupName);
@@ -443,15 +458,15 @@ export function showMapTooltip(e, locationName) {
     // Get tooltip dimensions
     const rect = tooltip.getBoundingClientRect();
 
-    let leftPos = e.clientX + 15;
-    let topPos = e.clientY + 15;
+    let leftPos = e.clientX + cursorOffset;
+    let topPos = e.clientY + cursorOffset;
 
     // Clamp to window boundaries
     if (leftPos + rect.width > window.innerWidth) {
-        leftPos = e.clientX - rect.width - 15;
+        leftPos = e.clientX - rect.width - cursorOffset;
     }
     if (topPos + rect.height > window.innerHeight) {
-        topPos = e.clientY - rect.height - 15;
+        topPos = e.clientY - rect.height - cursorOffset;
     }
 
     // Ensure it doesn't go off the top or left edges either
@@ -461,7 +476,6 @@ export function showMapTooltip(e, locationName) {
     tooltip.style.left = leftPos + "px";
     tooltip.style.top = topPos + "px";
 }
-
 export function hideMapTooltip() {
     const tooltip = document.getElementById('map-tooltip');
     if (tooltip) tooltip.style.display = 'none';
