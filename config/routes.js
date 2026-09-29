@@ -73,22 +73,10 @@ const routes = [
         "chance": 0.1
       },
       {
-        "pokemonId": 12,
-        "minLevel": 6,
-        "maxLevel": 8,
-        "chance": 0.03
-      },
-      {
-        "pokemonId": 15,
-        "minLevel": 6,
-        "maxLevel": 8,
-        "chance": 0.03
-      },
-      {
         "pokemonId": 25,
         "minLevel": 3,
         "maxLevel": 5,
-        "chance": 0.02
+        "chance": 0.08
       }
     ]
   },
@@ -786,7 +774,13 @@ const routes = [
         "pokemonId": 17,
         "minLevel": 43,
         "maxLevel": 49,
-        "chance": 0.2
+        "chance": 0.1
+      },
+      {
+        "pokemonId": 12,
+        "minLevel": 42,
+        "maxLevel": 48,
+        "chance": 0.1
       },
       {
         "pokemonId": 44,
@@ -821,7 +815,13 @@ const routes = [
         "pokemonId": 17,
         "minLevel": 45,
         "maxLevel": 51,
-        "chance": 0.25
+        "chance": 0.15
+      },
+      {
+        "pokemonId": 15,
+        "minLevel": 45,
+        "maxLevel": 51,
+        "chance": 0.1
       },
       {
         "pokemonId": 18,
@@ -1539,10 +1539,34 @@ const routes = [
     "name": "Mythical and Legendaries",
     "spawns": [
       {
+        "pokemonId": 150,
+        "minLevel": 100,
+        "maxLevel": 100,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 144,
+        "minLevel": 100,
+        "maxLevel": 100,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 145,
+        "minLevel": 100,
+        "maxLevel": 100,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 146,
+        "minLevel": 100,
+        "maxLevel": 100,
+        "chance": 0.2
+      },
+      {
         "pokemonId": 151,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 1.0
+        "chance": 0.2
       }
     ]
   }

@@ -1231,41 +1231,69 @@ function selectStarter(id) {
     renderOakLab();
 }
 
+let gameClockTimeout = null;
+let lastTickTime = null;
+
+window.restartGameClock = function() {
+    if (gameClockTimeout) {
+        clearTimeout(gameClockTimeout);
+        gameClockTimeout = null;
+    }
+
+    // Safety boundaries for speed
+    const speed = (state.settings && state.settings.gameSpeed) || 1;
+    // Timeout minimum is usually 4ms in browsers.
+    // This naturally caps the speed at ~250x, matching actual execution time.
+    const delay = Math.max(4, Math.floor(1000 / speed));
+
+    gameClockTimeout = setTimeout(gameClockTick, delay);
+};
+
+function gameClockTick() {
+    const speed = (state.settings && state.settings.gameSpeed) || 1;
+
+    if (!state.stats.playtime) state.stats.playtime = 0;
+    state.stats.playtime++;
+
+    if (state.currentView === "BATTLE_ARENA") {
+        state.stats.battleModeTimer = (state.stats.battleModeTimer || 0) + 1;
+        updateTopbar();
+    } else {
+        state.stats.battleModeTimer = 0;
+        updateTopbar();
+    }
+
+    // Award Jigglypuff Dust grains (1 grain per minute)
+    if (state.stats.playtime % 60 === 0 && state.stats.playtime > 0) {
+        state.stats.jigglypuffGrains = (state.stats.jigglypuffGrains || 0) + 1;
+        updateUI(); // Reflect new grains
+    }
+
+    // Daily Challenge Check
+    if (state.stats.playtime % 10 === 0) {
+        checkAndResetDailyChallenges();
+    }
+
+    if (state.stats.playtime === 60) {
+        updateTopbar();
+    }
+
+    // Schedule next tick
+    const delay = Math.max(4, Math.floor(1000 / speed));
+    gameClockTimeout = setTimeout(gameClockTick, delay);
+}
+
+
 function startGame() {
     let bs = new BattleSystem(state, updateUI);
     setBattleSystem(bs);
     updateUI();
     bs.start();
 
-    // Playtime tracker (adds 1 second every second)
-    setInterval(() => {
-        state.stats.playtime = (state.stats.playtime || 0) + 1;
+    state.settings.gameSpeed = 1; // Reset to 1 on load
 
-        if (state.currentView === "BATTLE_ARENA") {
-            const speed = (state.settings && state.settings.gameSpeed) || 1;
-            state.stats.battleModeTimer = (state.stats.battleModeTimer || 0) + (1 * speed);
-            updateTopbar();
-        } else {
-            state.stats.battleModeTimer = 0;
-            updateTopbar();
-        }
-
-        // Award Jigglypuff Dust grains (1 grain per minute)
-        // Check using modulo so that reloading doesn't reset progress towards the next minute.
-        // We ensure we only add 1 grain if playtime is perfectly divisible by 60 and > 0.
-        if (state.stats.playtime % 60 === 0 && state.stats.playtime > 0) {
-            state.stats.jigglypuffGrains = (state.stats.jigglypuffGrains || 0) + 1;
-        }
-
-        // Daily Challenge Check
-        if (state.stats.playtime % 10 === 0) {
-            checkAndResetDailyChallenges();
-        }
-
-        if (state.stats.playtime === 60) {
-            updateTopbar();
-        }
-    }, 1000);
+    // Start playtime tracker
+    window.restartGameClock();
 
     // Autosave loop
     setInterval(() => {
@@ -1276,6 +1304,93 @@ function startGame() {
     window.addEventListener('beforeunload', () => {
         storage.save(state);
     });
+
+    // Handle scrolling during drag-and-drop (Wheel + Auto-scroll at edges)
+    window.isDraggingPokemon = false;
+    let dragScrollTarget = null;
+    let dragScrollY = 0;
+    let autoScrollInterval = null;
+
+    function getScrollableParent(node) {
+        if (!node) return null;
+        while (node && node !== document.body && node !== document) {
+            if (node.scrollHeight > node.clientHeight) {
+                const style = window.getComputedStyle(node);
+                if (style.overflowY === 'auto' || style.overflowY === 'scroll') {
+                    return node;
+                }
+            }
+            node = node.parentNode;
+        }
+        return null;
+    }
+
+    window.addEventListener('dragstart', () => {
+        window.isDraggingPokemon = true;
+        if (autoScrollInterval) cancelAnimationFrame(autoScrollInterval);
+
+        autoScrollInterval = requestAnimationFrame(autoScrollLoop);
+    });
+
+    window.addEventListener('dragend', () => {
+        window.isDraggingPokemon = false;
+        dragScrollTarget = null;
+        if (autoScrollInterval) cancelAnimationFrame(autoScrollInterval);
+    });
+
+    // Track mouse position during drag to find what we are hovering
+    window.addEventListener('dragover', (e) => {
+        dragScrollTarget = document.elementFromPoint(e.clientX, e.clientY) || e.target;
+        dragScrollY = e.clientY;
+    });
+
+    window.addEventListener('wheel', (e) => {
+        if (window.isDraggingPokemon) {
+            let scrollNode = getScrollableParent(dragScrollTarget) || cachedScrollNode;
+            if (scrollNode) {
+                scrollNode.scrollTop += e.deltaY;
+            }
+        }
+    }, { passive: false });
+
+    let cachedScrollNode = null;
+
+    function autoScrollLoop() {
+        if (!window.isDraggingPokemon) {
+            cachedScrollNode = null;
+            return;
+        }
+
+        if (dragScrollTarget) {
+            let currentNode = getScrollableParent(dragScrollTarget);
+            if (currentNode) {
+                cachedScrollNode = currentNode;
+            }
+        }
+
+        if (cachedScrollNode) {
+            const rect = cachedScrollNode.getBoundingClientRect();
+            const edgeSize = 40;
+
+            // If mouse is near or beyond the top edge of the scroll container
+            if (dragScrollY < rect.top + edgeSize) {
+                let speed = 15;
+                if (dragScrollY < rect.top) speed = 60; // 4x faster beyond border
+                cachedScrollNode.scrollTop -= speed;
+            }
+            // If mouse is near or beyond the bottom edge of the scroll container
+            else if (dragScrollY > rect.bottom - edgeSize) {
+                let speed = 15;
+                if (dragScrollY > rect.bottom) speed = 60; // 4x faster beyond border
+                cachedScrollNode.scrollTop += speed;
+            }
+        }
+
+        autoScrollInterval = requestAnimationFrame(autoScrollLoop);
+    }
+
+
+
 }
 
 async function init() {
