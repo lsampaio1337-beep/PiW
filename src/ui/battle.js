@@ -120,16 +120,6 @@ function updateActiveItemsUI() {
         }
     }
 
-    const thresholdCard = document.getElementById('smartwatch-threshold-card');
-    const thresholdVal = document.getElementById('smartwatch-threshold-val');
-    if (thresholdCard && thresholdVal) {
-        thresholdVal.textContent = state.settings.autoPotionThreshold + '%';
-        if (openType === 'threshold') {
-            thresholdCard.style.border = '2px solid orange';
-        } else {
-            thresholdCard.style.border = '2px solid #3498db';
-        }
-    }
 }
 
 function formatActiveItemQuantity(q) {
@@ -178,6 +168,13 @@ window.showActiveItemSelection = function(type) {
                 </div>
             `;
         }
+
+        // Add Threshold Card at the end
+        html += `
+            <div id="smartwatch-potion-threshold-card" onclick="event.stopPropagation(); window.showActiveItemSelection('threshold')" style="width: 30px; height: 30px; background: rgba(0, 0, 0, 0.6); border: 2px solid #3498db; border-radius: 8px; position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                <span id="smartwatch-threshold-val" style="color: white; font-size: 10px; font-weight: bold; text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;">${state.settings.autoPotionThreshold}%</span>
+            </div>
+        `;
     } else if (type === 'ball') {
         const isNoActive = state.settings.activeBallTier === -1;
         const noBorderColor = isNoActive ? '#3498db' : 'orange';
@@ -221,7 +218,8 @@ window.showActiveItemSelection = function(type) {
                             if (val > 90) { val = 90; this.value = 90; }
                             document.getElementById('smartwatch-popup-threshold-val').innerText = val + '%';
                             if (typeof window.setAutoPotionThreshold === 'function') window.setAutoPotionThreshold(val);
-                            document.getElementById('smartwatch-threshold-val').textContent = val + '%';
+                            let cardVal = document.getElementById('smartwatch-threshold-val');
+                            if (cardVal) cardVal.textContent = val + '%';
                         "
                         style="width: 100%; cursor: pointer; position: relative; z-index: 2; background: transparent; accent-color: #2ecc71; margin: 0;"
                     >
@@ -267,12 +265,17 @@ document.addEventListener('click', (e) => {
     if (popup && popup.style.display === 'flex') {
         const potionBtn = document.getElementById('smartwatch-potion-card');
         const ballBtn = document.getElementById('smartwatch-ball-card');
-        const thresholdBtn = document.getElementById('smartwatch-threshold-card');
+        const potionThresholdBtn = document.getElementById('smartwatch-potion-threshold-card');
 
-        if (!popup.contains(e.target) &&
-            (!potionBtn || !potionBtn.contains(e.target)) &&
-            (!ballBtn || !ballBtn.contains(e.target)) &&
-            (!thresholdBtn || !thresholdBtn.contains(e.target))) {
+        // Use e.composedPath() to check if the clicked element was inside the popup,
+        // even if it was detached during the click event (like replacing innerHTML).
+        const path = e.composedPath();
+        const clickedInsidePopup = path.includes(popup);
+        const clickedPotionBtn = potionBtn && path.includes(potionBtn);
+        const clickedBallBtn = ballBtn && path.includes(ballBtn);
+        const clickedPotionThresholdBtn = potionThresholdBtn && path.includes(potionThresholdBtn);
+
+        if (!clickedInsidePopup && !clickedPotionBtn && !clickedBallBtn && !clickedPotionThresholdBtn) {
             popup.style.display = 'none';
         }
     }

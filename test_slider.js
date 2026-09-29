@@ -25,13 +25,28 @@ const path = require('path');
     // Simulate UI flow without full map navigation which is blocking
     // Just evaluate the function directly as if it was triggered via smartwatch UI
 
-    // Evaluate to see if function exists
-    let hasFunc = await page.evaluate(() => typeof window.setAutoPotionThreshold === 'function');
-    console.log("has window.setAutoPotionThreshold?", hasFunc);
-
-    // Call it manually to test state update
+    // 1. Open potion popup to generate the threshold card DOM
     await page.evaluate(() => {
-        window.setAutoPotionThreshold(60);
+        window.showActiveItemSelection('potion');
+    });
+
+    const thresholdCardInMain = await page.$('#smartwatch-threshold-card');
+    console.log("Threshold card in main view? (should be null):", thresholdCardInMain);
+
+    // Check for threshold card in popup
+    const thresholdCardInPopup = await page.$('#smartwatch-potion-threshold-card');
+    console.log("Threshold card in popup? (should not be null):", thresholdCardInPopup);
+
+    // 2. Click threshold card in popup (which opens the slider and DESTROYS the potion popup DOM, thus destroying the card)
+    await page.evaluate(() => {
+        window.showActiveItemSelection('threshold');
+    });
+
+    // 3. Drag slider
+    await page.evaluate(() => {
+        let slider = document.getElementById('smartwatch-popup-threshold-slider');
+        slider.value = 60;
+        slider.dispatchEvent(new Event('input'));
     });
 
     let stateVal = await page.evaluate(() => {
@@ -43,6 +58,14 @@ const path = require('path');
         return data ? JSON.parse(data).settings.autoPotionThreshold : null;
     });
     console.log("New threshold in save:", stateVal);
+
+    // Notice: if we open the 'threshold' popup, it overwrites the 'potion' popup content because they share the same container
+    // So the card itself won't be in the DOM to be updated, but the slider label will
+
+    let sliderLabelText = await page.evaluate(() => {
+        return document.getElementById('smartwatch-popup-threshold-val').textContent;
+    });
+    console.log("New slider label text:", sliderLabelText);
 
     await browser.close();
 })();
