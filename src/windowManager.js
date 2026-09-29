@@ -198,9 +198,6 @@ export class WindowManager {
 
 
         winElement.adjustHeightForNewContent = () => {
-            if (winElement._sizeInitialized) {
-                return; // Do not adjust height if already initialized
-            }
 
             if (!winElement._originalWidth) {
                 initDims();
@@ -280,7 +277,7 @@ export class WindowManager {
                 if (this.windows.includes(winElement)) {
                     this.saveWindowData(winElement.id);
                 }
-                winElement._sizeInitialized = true;
+
             }
 
         };

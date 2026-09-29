@@ -1202,7 +1202,7 @@ function selectStarter(id) {
         if (partyWindow.style.display === 'none' || !partyWindow.style.display) {
             window.windowManager.toggleWindow('party-window', true);
         }
-        window.windowManager.recalculateWindowSize('party-window');
+        if (typeof partyWindow.adjustHeightForNewContent === 'function') partyWindow.adjustHeightForNewContent();
     }
     updateSidebar();
 
@@ -1225,7 +1225,7 @@ function selectStarter(id) {
 
     // Refresh window after adding duplicate
     if (partyWindow && window.windowManager) {
-        window.windowManager.recalculateWindowSize('party-window');
+        if (typeof partyWindow.adjustHeightForNewContent === 'function') partyWindow.adjustHeightForNewContent();
     }
     updateSidebar();
 
@@ -1234,7 +1234,7 @@ function selectStarter(id) {
 
     // Refresh window after removing duplicate
     if (partyWindow && window.windowManager) {
-        window.windowManager.recalculateWindowSize('party-window');
+        if (typeof partyWindow.adjustHeightForNewContent === 'function') partyWindow.adjustHeightForNewContent();
     }
     updateSidebar();
 
