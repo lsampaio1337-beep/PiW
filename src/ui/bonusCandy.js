@@ -83,7 +83,7 @@ export function showBonusCandyModal() {
 
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
                 ${renderCandyOption('Green Candy', '+0.25% Loot Probability and +1% Money', getCandyCost('Green Candy', state.stats.greenCandies), state.stats.greenCandies, `Loot: +${0.25 * (state.stats.greenCandies || 0)}% | Money: +${1 * (state.stats.greenCandies || 0)}%`, 'LootCandy.png')}
-                ${renderCandyOption('Purple Candy', 'XP +2%', getCandyCost('Purple Candy', state.stats.purpleCandies), state.stats.purpleCandies, (1 + 0.02 * (state.stats.purpleCandies || 0)).toFixed(2) + 'x', 'XPCandy.png')}
+                ${renderCandyOption('Purple Candy', 'XP +2%', getCandyCost('Purple Candy', state.stats.purpleCandies), state.stats.purpleCandies, `+${2 * (state.stats.purpleCandies || 0)}%`, 'XPCandy.png')}
                 ${renderCandyOption('Black Yellow Candy', 'Catch Bonus of 20%', getCandyCost('Black Yellow Candy', state.stats.blackYellowCandies), state.stats.blackYellowCandies, `Catch: +${20 * (state.stats.blackYellowCandies || 0)}%`, 'CatchCandy.png')}
                 ${renderCandyOption('Rainbow Candy', 'Shiny +1roll', getCandyCost('Rainbow Candy', state.stats.rainbowCandies), state.stats.rainbowCandies, '+' + (state.stats.rainbowCandies || 0) + ' rolls', 'ShinyCandy.png')}
             </div>
