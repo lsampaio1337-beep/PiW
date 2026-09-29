@@ -39,23 +39,23 @@ const balance = {
         { "tier": 5, "name": "Storage5", "displayName": "Ultimate Box Upgrade", "increment": 300, "cost": 6000 }
       ],
       "glass": [
-        { "tier": 1, "name": "Glass1", "displayName": "Health Monocle", "increment": 0, "cost": 1, "description": "Show Healthbar in Main View" },
-        { "tier": 2, "name": "Glass2", "displayName": "Basic Glasses", "increment": 0, "cost": 1, "description": "Show Damage in Main View" },
-        { "tier": 3, "name": "Glass3", "displayName": "Great Glasses", "increment": 0, "cost": 1, "description": "Show Level in Main View" },
-        { "tier": 4, "name": "Glass4", "displayName": "Ultra Glasses", "increment": 0, "cost": 1, "description": "Show Quality in Main View" },
-        { "tier": 5, "name": "Glass5", "displayName": "Master Glasses", "increment": 0, "cost": 1, "description": "Show IV in Main View" }
+        { "tier": 1, "name": "Glass1", "displayName": "Health Monocle", "increment": 0, "cost": 1, "description": "Show Healthbar<br>in Main View" },
+        { "tier": 2, "name": "Glass2", "displayName": "Basic Glasses", "increment": 0, "cost": 1, "description": "Show Damage<br>in Main View" },
+        { "tier": 3, "name": "Glass3", "displayName": "Great Glasses", "increment": 0, "cost": 1, "description": "Show Level<br>in Main View" },
+        { "tier": 4, "name": "Glass4", "displayName": "Ultra Glasses", "increment": 0, "cost": 1, "description": "Show Quality<br>in Main View" },
+        { "tier": 5, "name": "Glass5", "displayName": "Master Glasses", "increment": 0, "cost": 1, "description": "Show IV<br>in Main View" }
       ],
       "smartwatch": [
-        { "tier": 1, "name": "Smartwatch1", "displayName": "Ball Watch", "increment": 0, "cost": 1, "description": "Select Ball in Main View" },
-        { "tier": 2, "name": "Smartwatch2", "displayName": "Potion Watch", "increment": 0, "cost": 1, "description": "Select Potion in Main View" },
-        { "tier": 3, "name": "Smartwatch3", "displayName": "Smart Ball Watch", "increment": 0, "cost": 1, "description": "Select Ball Smart Mode" }
+        { "tier": 1, "name": "Smartwatch1", "displayName": "Ball Watch", "increment": 0, "cost": 1, "description": "Select Ball<br>in Main View" },
+        { "tier": 2, "name": "Smartwatch2", "displayName": "Potion Watch", "increment": 0, "cost": 1, "description": "Select Potion<br>in Main View" },
+        { "tier": 3, "name": "Smartwatch3", "displayName": "Smart Ball Watch", "increment": 0, "cost": 1, "description": "Select Ball<br>Smart Mode" }
       ],
       "speed": [
-        { "tier": 1, "name": "Speed1", "displayName": "Voltorb Sneakers", "increment": 0, "cost": 1, "description": "Decease encounter time in 10%" },
-        { "tier": 2, "name": "Speed2", "displayName": "Shelder Skate", "increment": 0, "cost": 1, "description": "Decease encounter time in 20%" },
-        { "tier": 3, "name": "Speed3", "displayName": "Primeape Scooter", "increment": 0, "cost": 1, "description": "Decease encounter time in 30%" },
-        { "tier": 4, "name": "Speed4", "displayName": "Doduo Rollers", "increment": 0, "cost": 1, "description": "Decease encounter time in 40%" },
-        { "tier": 5, "name": "Speed5", "displayName": "Rapidash Bike", "increment": 0, "cost": 1, "description": "Decease encounter time in 50%" }
+        { "tier": 1, "name": "Speed1", "displayName": "Voltorb Sneakers", "increment": 0, "cost": 1, "description": "Decrease in 10% encounter time" },
+        { "tier": 2, "name": "Speed2", "displayName": "Shelder Skate", "increment": 0, "cost": 1, "description": "Decrease in 20% encounter time" },
+        { "tier": 3, "name": "Speed3", "displayName": "Primeape Scooter", "increment": 0, "cost": 1, "description": "Decrease in 30% encounter time" },
+        { "tier": 4, "name": "Speed4", "displayName": "Doduo Rollers", "increment": 0, "cost": 1, "description": "Decrease in 40% encounter time" },
+        { "tier": 5, "name": "Speed5", "displayName": "Rapidash Bike", "increment": 0, "cost": 1, "description": "Decrease in 50% encounter time" }
       ],
       "loot": [
         { "tier": 1, "name": "Loot1", "displayName": "Potion Loot", "increment": 0, "cost": 1, "description": "Can loot Potion" },
