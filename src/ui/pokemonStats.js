@@ -117,17 +117,23 @@ export function showPokemonStats(idx, location) {
         </div>
     </div>`;
 
+    const v = p.vitamins || {};
+    const getVitHtml = (count, imgName) => {
+        if (!count || count <= 0) return '';
+        return ` <span style="font-size: 12px; margin-left: 2px;">${count}x<img src="Assets/Items/Vitamins/${imgName}.png" style="width: 12px; height: 12px; vertical-align: middle;"></span>`;
+    };
+
     let individualHtml = `
         <div style="display: flex; justify-content: space-around; flex-wrap: wrap; align-items: stretch; gap: 10px;">
             <div style="background: rgba(0,0,0,0.5); padding: 15px; border-radius: 8px; text-align: left; min-width: 150px; flex: 1; display: flex; flex-direction: column;">
                 <h3 style="margin: 0 0 15px 0; text-align: center; border-bottom: 1px solid #555; padding-bottom: 5px;">Actual Stats</h3>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px 10px; font-size: 14px; text-align: center; flex: 1; align-content: center;">
-                    <div>HP<br><b>${p.maxHp}</b></div>
-                    <div>Speed<br><b>${p.currentStats ? p.currentStats.spe : '?'}</b></div>
-                    <div>Atk<br><b>${p.currentStats ? p.currentStats.atk : '?'}</b></div>
-                    <div>SpAtk<br><b>${p.currentStats ? p.currentStats.spa : '?'}</b></div>
-                    <div>Def<br><b>${p.currentStats ? p.currentStats.def : '?'}</b></div>
-                    <div>SpDef<br><b>${p.currentStats ? p.currentStats.spd : '?'}</b></div>
+                    <div>HP<br><b>${p.maxHp}</b>${getVitHtml(v.hp, 'HP Up')}</div>
+                    <div>Speed<br><b>${p.currentStats ? p.currentStats.spe : '?'}</b>${getVitHtml(v.spe, 'Carbo Speed')}</div>
+                    <div>Atk<br><b>${p.currentStats ? p.currentStats.atk : '?'}</b>${getVitHtml(v.atk, 'Protein Atk')}</div>
+                    <div>SpAtk<br><b>${p.currentStats ? p.currentStats.spa : '?'}</b>${getVitHtml(v.spa, 'Calcium SpAtk')}</div>
+                    <div>Def<br><b>${p.currentStats ? p.currentStats.def : '?'}</b>${getVitHtml(v.def, 'Iron Def')}</div>
+                    <div>SpDef<br><b>${p.currentStats ? p.currentStats.spd : '?'}</b>${getVitHtml(v.spd, 'Zinc SpDef')}</div>
                 </div>
             </div>
 
