@@ -176,22 +176,12 @@ input[type="number"] {
 .stats-box h4 { margin: 0 0 5px 0; font-size: 14px;}
 
 #enemy-sprite {
-    height: 100%;
-    min-height: 100px;
-    width: auto;
-    margin-top: 10px;
-    object-fit: contain;
     position: relative;
     z-index: 10;
 }
 
 #player-sprite {
-    height: 100%;
-    min-height: 100px;
-    width: auto;
-    margin-bottom: 10px;
     transform: scaleX(-1); /* Face right */
-    object-fit: contain;
     position: relative;
     z-index: 10;
 }
