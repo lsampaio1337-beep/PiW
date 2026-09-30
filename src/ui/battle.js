@@ -821,14 +821,14 @@ export function showDamage(target, amount, isCrit, moveName = '', moveType = 'No
 
     // Position relatively to the parent container of the image using percentages
     dmgNode.style.left = '50%'; // Center horizontally
-    dmgNode.style.top = '21%'; // Top of the image (relative to sprite container)
+    dmgNode.style.top = '15%'; // Top of the image (relative to sprite container)
     dmgNode.style.transform = 'translate(-50%, -50%)'; // Ensure exact centering
 
     img.appendChild(dmgNode);
 
     // Animate up and fade out
     setTimeout(() => {
-        dmgNode.style.top = '1%'; // Float up relative to the container
+        dmgNode.style.top = '-5%'; // Float up relative to the container
     }, 50);
 
     setTimeout(() => {
