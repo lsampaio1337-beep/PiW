@@ -81,12 +81,6 @@ export function openPokeMarketBuy() {
                 <label style="font-weight: bold; font-size: calc(var(--m-width) * 0.022); color: #2ecc71;">Money: $<span id="market-trainer-money">${state.trainer.money.toLocaleString()}</span></label>
             </div>
 
-            <div id="market-buy-qty-container" style="margin-bottom: calc(var(--m-width) * 0.024); display: flex; align-items: stretch; justify-content: center; gap: calc(var(--m-width) * 0.012);">
-                <label style="display: flex; align-items: center; font-weight: bold; font-size: calc(var(--m-width) * 0.022);">Quantity to Buy:</label>
-                <input type="text" id="market-global-qty" value="1" oninput="window.updateMarketPrices()" style="width: calc(var(--m-width) * 0.097); padding: calc(var(--m-width) * 0.006); font-size: calc(var(--m-width) * 0.022); text-align: center; border-radius: 5px; border: 1px solid #ccc; box-sizing: border-box;">
-                <button onclick="if(window.buySetMax) window.buySetMax()" style="display: flex; align-items: center; justify-content: center; padding: 0 calc(var(--m-width) * 0.012); font-size: calc(var(--m-width) * 0.022); font-weight: bold; border-radius: 5px; cursor: pointer; background: #95a5a6; color: white; border: none; box-sizing: border-box; margin: 0;">Max</button>
-            </div>
-
             <div id="market-buy-content" style="display: flex; flex-wrap: wrap; gap: calc(var(--m-width) * 0.018); justify-content: center; overflow-y: auto; flex: 1; padding: calc(var(--m-width) * 0.012);">
                 <!-- Cards injected here -->
             </div>
@@ -231,11 +225,6 @@ export function renderPokeMarketTab(category) {
 
     content.dataset.category = category;
 
-    const qtyContainer = document.getElementById('market-buy-qty-container');
-    if (qtyContainer) {
-        qtyContainer.style.display = category === 'upgrades' ? 'none' : 'flex';
-    }
-
     let items = [];
     let cols = 6;
 
@@ -324,20 +313,16 @@ export function renderPokeMarketTab(category) {
         if (category === 'stones') displayName = displayName.replace(' Stone', '<br>Stone');
 
         let stock = 0;
-        let maxCapStr = "";
         if (category !== 'upgrades' && state.backpack[category] && state.backpack[category][item.name]) {
             stock = state.backpack[category][item.name];
-        }
-        if (category === 'pokeballs' || category === 'potions') {
-            const type = category === 'pokeballs' ? 'balls' : 'potions';
-            const capacity = getCapacity(state, type);
-            maxCapStr = ` / ${formatMarketNumberDown(capacity)}`;
         }
 
         let buyAction = `window.buyItem('${item.name}', ${item.price}, '${category}')`;
         if (category === 'upgrades') {
             buyAction = `window.buyItem('${item.name}', ${item.price}, '${category}', '${item.upgradeType}')`;
         }
+
+        const safeId = item.name.replace(/\s+/g, '');
 
         html += `
             <div class="market-item-card" data-price="${item.price}" data-id="${item.name}" data-category="${category}"
@@ -346,9 +331,15 @@ export function renderPokeMarketTab(category) {
                 <div style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; margin-bottom: calc(var(--m-width) * 0.006); height: calc(var(--m-width) * 0.038); display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.1;">${displayName}</div>
                 <img src="${item.img}" style="width: calc(var(--m-width) * 0.072); height: calc(var(--m-width) * 0.072); object-fit: contain; margin-bottom: calc(var(--m-width) * 0.006);">
                 ${category !== 'stones' ? `<div style="font-size: calc(var(--m-width) * 0.014); color: #f1c40f; margin-bottom: calc(var(--m-width) * 0.006); line-height: 1.1;">${item.attrLabel}</div>` : ''}
-                ${category !== 'upgrades' ? `<div style="font-size: calc(var(--m-width) * 0.014); color: #bdc3c7; line-height: 1.1; margin-bottom: calc(var(--m-width) * 0.006);">Stock: ${formatMarketNumberDown(stock)}${maxCapStr}</div>` : ''}
+                ${category !== 'upgrades' ? `<div style="font-size: calc(var(--m-width) * 0.014); color: #bdc3c7; line-height: 1.1; margin-bottom: calc(var(--m-width) * 0.006);">Stock: ${formatMarketNumberDown(stock)}</div>` : ''}
                 ${category !== 'upgrades' ? `<div style="font-size: calc(var(--m-width) * 0.014); color: #bdc3c7; line-height: 1.1;">Base: ${formatMarketNumber(item.price)}</div>` : ''}
-                <div class="market-final-price" style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; color: #2ecc71; margin-top: calc(var(--m-width) * 0.006); line-height: 1.1;">$${formatMarketNumber(item.price)}</div>
+
+                <div onclick="event.stopPropagation()" style="display: flex; gap: 5px; margin-top: calc(var(--m-width) * 0.012); align-items: center; justify-content: center; width: 100%;">
+                    <input type="text" id="buy-qty-${safeId}" value="1" oninput="if(window.updateCardPrice) window.updateCardPrice('${item.name}', '${category}')" style="width: calc(var(--m-width) * 0.06); height: calc(var(--m-width) * 0.025); padding: 0 calc(var(--m-width) * 0.006); font-size: calc(var(--m-width) * 0.015); text-align: center; border-radius: 5px; border: 1px solid #ccc; box-sizing: border-box; margin: 0; outline: none; color: black;">
+                    <button onclick="if(window.buyCardSetMax) window.buyCardSetMax('${item.name}', '${category}')" style="display: flex; align-items: center; justify-content: center; padding: 0 calc(var(--m-width) * 0.006); height: calc(var(--m-width) * 0.025); font-size: calc(var(--m-width) * 0.015); font-weight: bold; border-radius: 5px; cursor: pointer; background: #95a5a6; color: white; border: none; box-sizing: border-box; margin: 0;">Max</button>
+                </div>
+
+                <div class="market-final-price" id="buy-total-${safeId}" style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; color: #2ecc71; margin-top: calc(var(--m-width) * 0.006); line-height: 1.1;">$${formatMarketNumber(item.price)}</div>
             </div>
         `;
     });
@@ -359,12 +350,11 @@ export function renderPokeMarketTab(category) {
 }
 
 export function buyItem(itemId, baseCost, category, upgradeType = null) {
-    let qty = 1;
-    if (category !== 'upgrades') {
-        const qtyInput = document.getElementById('market-global-qty');
-        qty = parseMarketQuantity(qtyInput ? qtyInput.value : '1');
-        if (qty <= 0) return;
-    }
+    const safeId = itemId.replace(/\s+/g, '');
+    const qtyInput = document.getElementById(`buy-qty-${safeId}`);
+    let qty = parseMarketQuantity(qtyInput ? qtyInput.value : '1');
+
+    if (qty <= 0) return;
 
     if (category === 'pokeballs' || category === 'potions') {
         const type = category === 'pokeballs' ? 'balls' : 'potions';
@@ -382,7 +372,7 @@ export function buyItem(itemId, baseCost, category, upgradeType = null) {
     if (state.trainer.money >= totalCost) {
         state.trainer.money -= totalCost;
         if (category === 'upgrades') {
-            state.stats.upgrades[upgradeType + 'Tier'] += 1;
+            state.stats.upgrades[upgradeType + 'Tier'] += qty;
         } else {
             if (state.backpack[category][itemId] === undefined) {
                  state.backpack[category][itemId] = 0;
@@ -448,6 +438,86 @@ export function buySetMax() {
     maxQty = Math.max(0, maxQty);
     qtyInput.value = maxQty > 0 ? formatMarketNumberDown(maxQty).replace('~', '') : "0";
     updateMarketPrices();
+}
+
+export function updateCardPrice(itemId, category) {
+    const safeId = itemId.replace(/\s+/g, '');
+    const input = document.getElementById(`buy-qty-${safeId}`);
+    const totalDisplay = document.getElementById(`buy-total-${safeId}`);
+    if (!input || !totalDisplay) return;
+
+    const cards = document.querySelectorAll('.market-item-card');
+    let card = Array.from(cards).find(c => c.dataset.id === itemId && c.dataset.category === category);
+    if (!card) return;
+
+    let basePrice = parseInt(card.dataset.price) || 0;
+    let qty = parseMarketQuantity(input.value);
+
+    // Limit based on capacity for balls and potions
+    if (category === 'pokeballs' || category === 'potions') {
+        const type = category === 'pokeballs' ? 'balls' : 'potions';
+        const currentCount = getCurrentCount(state, type);
+        const capacity = getCapacity(state, type);
+        const spaceLeft = capacity - currentCount;
+
+        if (qty > spaceLeft) {
+            qty = Math.max(0, spaceLeft);
+        }
+    } else {
+        if (qty > 1000000) {
+            qty = 1000000;
+        }
+    }
+
+    if (qty > 0) {
+        input.value = formatMarketNumberDown(qty).replace('~', '');
+    } else {
+        input.value = "0";
+    }
+
+    let totalVal = qty * basePrice;
+    totalDisplay.textContent = "$" + formatMarketNumber(totalVal);
+}
+
+export function buyCardSetMax(itemId, category) {
+    const safeId = itemId.replace(/\s+/g, '');
+    const input = document.getElementById(`buy-qty-${safeId}`);
+
+    const cards = document.querySelectorAll('.market-item-card');
+    let card = Array.from(cards).find(c => c.dataset.id === itemId && c.dataset.category === category);
+    if (!card || !input) return;
+
+    let basePrice = parseInt(card.dataset.price) || 0;
+    let moneyAvailable = state.trainer.money;
+    let maxQty = 1000000;
+
+    if (basePrice > 0) {
+        let affordable = Math.floor(moneyAvailable / basePrice);
+        if (affordable < maxQty) maxQty = affordable;
+    }
+
+    if (category === 'pokeballs' || category === 'potions') {
+        const type = category === 'pokeballs' ? 'balls' : 'potions';
+        const currentCount = getCurrentCount(state, type);
+        const capacity = getCapacity(state, type);
+        const spaceLeft = capacity - currentCount;
+
+        if (spaceLeft < maxQty) {
+            maxQty = spaceLeft;
+        }
+    }
+
+    maxQty = Math.max(0, maxQty);
+
+    if (maxQty > 1000000) {
+        input.value = "1M";
+    } else if (maxQty > 0) {
+        input.value = formatMarketNumberDown(maxQty).replace('~', '');
+    } else {
+        input.value = "0";
+    }
+
+    updateCardPrice(itemId, category);
 }
 
 export function formatMarketNumberDown(num) {
@@ -955,3 +1025,5 @@ window.renderPokeMarketTab = renderPokeMarketTab;
 window.updateMarketPrices = updateMarketPrices;
 window.buySetMax = buySetMax;
 window.buyItem = buyItem;
+window.updateCardPrice = updateCardPrice;
+window.buyCardSetMax = buyCardSetMax;

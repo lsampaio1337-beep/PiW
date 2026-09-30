@@ -6,5 +6,9 @@
 ❯ Checking package manager version
 ✔ Found pnpm@10.30.3
 ✔ Checking your system
-[?25h[56851:0930/163754.292506:ERROR:ozone_platform_x11.cc(246)] Missing X server or $DISPLAY
-[56851:0930/163754.292572:ERROR:env.cc(257)] The platform failed to initialize.  Exiting.
+[?25h[43316:0930/222853.759388:ERROR:bus.cc(407)] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[43316:0930/222853.759468:ERROR:bus.cc(407)] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[43316:0930/222853.759480:ERROR:bus.cc(407)] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[43316:0930/222853.759490:ERROR:bus.cc(407)] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[43316:0930/222853.759501:ERROR:object_proxy.cc(576)] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type:
+[43316:0930/222853.883232:ERROR:bus.cc(407)] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
