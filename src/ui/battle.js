@@ -366,6 +366,25 @@ export function updateBattleArena() {
 
             if (hpContainerEnemy) hpContainerEnemy.style.display = 'flex';
 
+            const enemyDataModals = document.getElementById('enemy-data-modals');
+            if (enemyDataModals) {
+                enemyDataModals.style.display = 'flex';
+
+                const levelEl = document.getElementById('enemy-battle-level');
+                if (levelEl) levelEl.innerText = `Lv. ${enemy.level}`;
+
+                const sumivEl = document.getElementById('enemy-battle-sumiv');
+                if (sumivEl && enemy.ivs) {
+                    const sumIV = enemy.ivs.hp + enemy.ivs.atk + enemy.ivs.def + enemy.ivs.spa + enemy.ivs.spd + enemy.ivs.spe;
+                    sumivEl.innerText = `SumIV: ${sumIV}`;
+                }
+
+                const qtierEl = document.getElementById('enemy-battle-qtier');
+                if (qtierEl && enemy.quality) {
+                    qtierEl.innerText = `Q: ${enemy.quality.toFixed(2)}`;
+                }
+            }
+
             if (hpBarEnemy && hpTextEnemy && hpPctEnemy) {
                 const pct = Math.min(100, (enemy.currentHp / enemy.maxHp) * 100);
                 let color = '#3498db';
@@ -488,6 +507,8 @@ export function updateBattleArena() {
         } else if (battleSystem && battleSystem.isSearching) {
             const hpContainerEnemy = document.getElementById('enemy-battle-hp-container');
             if (hpContainerEnemy) hpContainerEnemy.style.display = 'none';
+            const enemyDataModals = document.getElementById('enemy-data-modals');
+            if (enemyDataModals) enemyDataModals.style.display = 'none';
 
             const elEnemySide = document.getElementById('enemy-side');
             if (elEnemySide) {
@@ -551,6 +572,8 @@ export function updateBattleArena() {
              if (elEnemySide) elEnemySide.style.left = '100%';
              const hpContainerEnemy = document.getElementById('enemy-battle-hp-container');
              if (hpContainerEnemy) hpContainerEnemy.style.display = 'none';
+             const enemyDataModals = document.getElementById('enemy-data-modals');
+             if (enemyDataModals) enemyDataModals.style.display = 'none';
              const hpContainerPlayer = document.getElementById('player-battle-hp-container');
              if (hpContainerPlayer) hpContainerPlayer.style.display = 'none';
 
@@ -607,7 +630,7 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
     defeatContainer.style.position = 'absolute';
 
     // Transfer any floating damage nodes to the clone wrapper so they slide out with it
-    const floatingDamages = elEnemySide.querySelectorAll('.floating-damage');
+    const floatingDamages = elEnemySide.querySelectorAll('.damage-text-node');
     floatingDamages.forEach(node => {
         cloneWrapper.appendChild(node);
     });
@@ -635,6 +658,12 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
     cloneWrapper.style.height = '100%';
     defeatContainer.appendChild(cloneWrapper);
 
+    // Move any existing floating damage texts to the defeat container so they slide out
+    const damageNodes = elEnemySide.querySelectorAll('.damage-text-node');
+    damageNodes.forEach(node => {
+        defeatContainer.appendChild(node);
+    });
+
     // Ensure the container holding all battle sprites acts as parent, or arena if fallback
     const spritesContainer = document.getElementById('battle-sprites-container');
     if (spritesContainer) {
@@ -650,10 +679,17 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
 
     // Briefly hide the original HP container to prevent visual flash before next spawn
     const hpContainerEnemy = document.getElementById('enemy-battle-hp-container');
+    const enemyDataModals = document.getElementById('enemy-data-modals');
     if (hpContainerEnemy) {
         hpContainerEnemy.style.opacity = '0';
         setTimeout(() => {
             if (hpContainerEnemy) hpContainerEnemy.style.opacity = '1';
+        }, 500);
+    }
+    if (enemyDataModals) {
+        enemyDataModals.style.opacity = '0';
+        setTimeout(() => {
+            if (enemyDataModals) enemyDataModals.style.opacity = '1';
         }, 500);
     }
 
@@ -735,7 +771,21 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
     }
 
     // Shrink any floating damages too, so they collapse with the pokemon
-    const clonedDamages = cloneWrapper.querySelectorAll('.floating-damage');
+    const clonedDamages = cloneWrapper.querySelectorAll('.damage-text-node');
+    const clonedModals = cloneWrapper.querySelector('#enemy-data-modals');
+    if (clonedModals) {
+        clonedModals.style.transition = 'all 2000ms linear';
+        clonedModals.style.transformOrigin = 'center center';
+        clonedModals.style.left = '50%';
+        clonedModals.style.opacity = '0';
+        clonedModals.style.transform = 'translate(-50%, -50%) scale(0)';
+
+        setTimeout(() => {
+            if (clonedModals && clonedModals.parentNode) {
+                clonedModals.parentNode.removeChild(clonedModals);
+            }
+        }, 2000);
+    }
     clonedDamages.forEach(dmg => {
         dmg.style.transition = 'opacity 2000ms linear, transform 2000ms linear';
         dmg.style.transformOrigin = 'center center';
@@ -821,7 +871,11 @@ export function showDamage(target, amount, isCrit, moveName = '', moveType = 'No
     // Layout: [Amount] [Icon] [Name] [Effectiveness] [Crit]
     dmgNode.innerHTML = `<span style="font-weight: bold; font-style: ${isCrit ? 'italic' : 'normal'}; display: flex; align-items: center; justify-content: center; text-shadow: 1px 1px 2px black;">${amount} ${typeIconHtml} ${moveName} ${effText}${critText}</span>`;
 
+<<<<<<< HEAD
     dmgNode.classList.add('floating-damage');
+=======
+    dmgNode.classList.add('damage-text-node');
+>>>>>>> origin/main
     dmgNode.style.position = 'absolute';
     dmgNode.style.color = typeColor;
     dmgNode.style.fontSize = isCrit ? '24px' : '18px';
@@ -834,14 +888,14 @@ export function showDamage(target, amount, isCrit, moveName = '', moveType = 'No
 
     // Position relatively to the parent container of the image using percentages
     dmgNode.style.left = '50%'; // Center horizontally
-    dmgNode.style.top = '10%'; // Top of the image (relative to sprite container)
+    dmgNode.style.top = '20%'; // Top of the image (relative to sprite container)
     dmgNode.style.transform = 'translate(-50%, -50%)'; // Ensure exact centering
 
     img.appendChild(dmgNode);
 
     // Animate up and fade out
     setTimeout(() => {
-        dmgNode.style.top = '-10%'; // Float up relative to the container
+        dmgNode.style.top = '0%'; // Float up relative to the container
     }, 50);
 
     setTimeout(() => {
@@ -949,8 +1003,18 @@ export function playCombatAnimations(targetSide, moveType, duration) {
     }
 
     // Instead of vh, use the scale of the images to determine projectile size roughly
-    const projHeight = (atkRect.height / scaleY) * 0.05;
+    const projHeight = (atkRect.height / scaleY) * 0.07;
     const projWidth = projHeight * 2;
+
+    const atkCenterX = atkRect.left + atkRect.width / 2;
+    const atkCenterY = atkRect.top + atkRect.height / 2;
+    const startX = container === document.body ? atkCenterX : (atkCenterX - containerRect.left) / scaleX;
+    const startY = container === document.body ? atkCenterY : (atkCenterY - containerRect.top) / scaleY;
+
+    const defCenterX = defRect.left + defRect.width / 2;
+    const defCenterY = defRect.top + defRect.height / 2;
+    const endX = container === document.body ? defCenterX : (defCenterX - containerRect.left) / scaleX;
+    const endY = container === document.body ? defCenterY : (defCenterY - containerRect.top) / scaleY;
 
     // Create projectile
     const proj = document.createElement('div');
@@ -963,18 +1027,6 @@ export function playCombatAnimations(targetSide, moveType, duration) {
     proj.style.zIndex = '999';
     proj.style.pointerEvents = 'none';
     proj.style.transform = 'translate(-50%, -50%)';
-
-    // Start at attacker center
-    const atkCenterX = atkRect.left + atkRect.width / 2;
-    const atkCenterY = atkRect.top + atkRect.height / 2;
-    const startX = container === document.body ? atkCenterX : (atkCenterX - containerRect.left) / scaleX;
-    const startY = container === document.body ? atkCenterY : (atkCenterY - containerRect.top) / scaleY;
-
-    // End at defender center
-    const defCenterX = defRect.left + defRect.width / 2;
-    const defCenterY = defRect.top + defRect.height / 2;
-    const endX = container === document.body ? defCenterX : (defCenterX - containerRect.left) / scaleX;
-    const endY = container === document.body ? defCenterY : (defCenterY - containerRect.top) / scaleY;
 
     proj.style.left = startX + 'px';
     proj.style.top = startY + 'px';
@@ -1009,32 +1061,32 @@ export function playCombatAnimations(targetSide, moveType, duration) {
         splash.style.pointerEvents = 'none';
         splash.style.transform = 'translate(-50%, -50%)';
 
-        // Phase 1: Grow to 25% of sprite height
-        splash.style.transition = `all ${duration * 0.15}ms linear`;
+        // Phase 1: Grow to 50% of sprite height
+        splash.style.transition = `all ${duration * 0.3}ms linear`;
 
         container.appendChild(splash);
 
         // Trigger reflow
         splash.getBoundingClientRect();
 
-        // Expand to 25% height of sprite from the center
-        const sSize1 = (defRect.height / scaleY) * 0.25;
+        // Expand to 50% height of sprite from the center
+        const sSize1 = (defRect.height / scaleY) * 0.50;
         splash.style.width = sSize1 + 'px';
         splash.style.height = sSize1 + 'px';
         splash.style.opacity = '1';
 
-        // Phase 2: Grow to 50% height and fade out
+        // Phase 2: Grow to 100% height and fade out
         setTimeout(() => {
-            splash.style.transition = `all ${duration * 0.15}ms linear`;
-            const sSize2 = (defRect.height / scaleY) * 0.5;
+            splash.style.transition = `all ${duration * 0.3}ms linear`;
+            const sSize2 = (defRect.height / scaleY) * 1.0;
             splash.style.width = sSize2 + 'px';
             splash.style.height = sSize2 + 'px';
             splash.style.opacity = '0';
-        }, duration * 0.15);
+        }, duration * 0.3);
 
         setTimeout(() => {
             if (splash.parentElement) splash.parentElement.removeChild(splash);
-        }, duration * 0.3);
+        }, duration * 0.6);
 
         // Defender Hit Animation (Shake) using transforms safely
         defImg.style.transition = 'transform 50ms ease-in-out';
