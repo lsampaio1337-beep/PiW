@@ -559,9 +559,13 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
         enemyPokemonSprite.style.transform = 'scale(0.5)';
     }
 
+    // We will calculate a fixed pixel left target for the slide animation since it's just a transition end state.
+    const arenaHeight = arena.offsetHeight || 139;
+    const targetLeft = `-${(arenaHeight * 0.15) * 0.5}px`;
+
     if (elEnemySide) {
         elEnemySide.style.transition = 'left 5s linear';
-        elEnemySide.style.left = '-7.5vh';
+        elEnemySide.style.left = targetLeft;
     }
 
     // 1. Create Pokeball if used
@@ -575,8 +579,11 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
         ball.style.top = `50%`;
         ball.style.bottom = 'auto'; // Reset bottom
         ball.style.transform = 'translate(-50%, -50%)';
-        ball.style.width = '15vh';
-        ball.style.height = '15vh';
+
+        // 15% height is fully responsive natively to the container resizing
+        ball.style.height = '15%';
+        ball.style.width = 'auto'; // Preserves aspect ratio dynamically during resize
+
         ball.style.objectFit = 'contain';
         ball.style.zIndex = '51';
         arena.appendChild(ball);
@@ -585,7 +592,7 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
         void ball.offsetWidth;
 
         ball.style.transition = 'left 5s linear';
-        ball.style.left = '-7.5vh';
+        ball.style.left = targetLeft;
 
         // Add shake animation manually using setInterval since we need to slide too
         let shakeCount = 0;
