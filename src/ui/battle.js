@@ -646,12 +646,7 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
     // Force reflow
     void defeatContainer.offsetWidth;
 
-    // Reset actual enemy side so it's ready for the next slide in immediately
-    elEnemySide.style.transition = 'none';
-    elEnemySide.style.left = '100%';
-    setTimeout(() => {
-        if (elEnemySide) elEnemySide.style.transition = 'left 1s ease-out';
-    }, 50);
+    // Removing manual override of enemy-side to prevent conflict with generateEncounter's isSliding
 
     // Briefly hide the original HP container to prevent visual flash before next spawn
     const hpContainerEnemy = document.getElementById('enemy-battle-hp-container');

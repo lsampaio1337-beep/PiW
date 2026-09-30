@@ -50,7 +50,8 @@ class BattleSystem {
     start() {
 
         if (!this.combatLoop) {
-            this.searchNext();
+            const slideDelay = 1000 / this.state.settings.gameSpeed;
+            this.generateEncounter(slideDelay);
         }
     }
 
@@ -182,7 +183,8 @@ class BattleSystem {
                 if (typeof window.switchView === 'function') {
                     window.switchView("BATTLE_ARENA");
                 }
-                this.searchNext();
+                const slideDelay = 1000 / this.state.settings.gameSpeed;
+            this.generateEncounter(slideDelay);
             };
         } else {
             // Gym completed
@@ -794,11 +796,6 @@ class BattleSystem {
             } // Handled in a simpler way if needed, or we might need to adjust logic
         }
 
-        // Instantly generate the next encounter if we are in the wild
-        if (!this.gymState || !this.gymState.isActive) {
-            this.generateEncounter(0); // instant spawn, skipping searchNext delay
-        }
-
         // Auto Throw Pokeball logic (disable in gyms)
         if (this.state.settings.autoCatch && (!this.gymState || !this.gymState.isActive)) {
             const ballResult = this.throwPokeball();
@@ -1099,10 +1096,11 @@ class BattleSystem {
              this.state.stats.defeatedBosses[this.activeEncounter.name] = true;
         }
 
-        // We handle new spawn instantly at the start of defeat for wild encounters,
-        // so we don't call searchNext() here for wild routes anymore.
         if (this.gymState && this.gymState.isActive) {
             this.handleGymEnemyDefeat();
+        } else {
+            const slideDelay = 1000 / this.state.settings.gameSpeed;
+            this.generateEncounter(slideDelay);
         }
     }
 
@@ -1150,7 +1148,8 @@ class BattleSystem {
             }
         } else {
             // Next pokemon
-            this.searchNext();
+            const slideDelay = 1000 / this.state.settings.gameSpeed;
+            this.generateEncounter(slideDelay);
         }
     }
 
