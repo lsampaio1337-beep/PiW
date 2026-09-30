@@ -1,3 +1,4 @@
+import { checkAndResetDailyChallenges } from './dailyChallenges.js';
 import { state, globals } from '../state.js';
 import * as mathEngine from '../mathEngine.js';
 import { updateUI, showModal } from '../ui.js';
@@ -48,6 +49,7 @@ export function showCheatControlModal() {
     `;
     showModal("Cheat Control", html, "window-cheat-control", "600px");
 }
+
 
 export function cheatAction(action) {
     if (action === 'GodMode') {
@@ -272,9 +274,19 @@ export function cheatAction(action) {
         state.stats.whiteCandies = (state.stats.whiteCandies || 0) + 100;
         updateUI();
     } else if (action === 'RerollDailyChallenges') {
-        if (window.rerollDailyChallenges) {
-            window.rerollDailyChallenges();
+        if (state.stats.dailyChallenges) {
+            state.stats.dailyChallenges.lastDate = null;
+            state.stats.dailyChallenges.hasRerolled = false;
         }
+
+        // This will trigger the regeneration
+        checkAndResetDailyChallenges();
+
+        if (typeof window.updateTopbar === 'function') window.updateTopbar();
+        if (document.getElementById('window-calendar')) {
+            if (typeof window.showCalendar === 'function') window.showCalendar();
+        }
+
     } else if (action === 'NextDailyReward') {
         if (!state.stats.dailyRewards) {
             state.stats.dailyRewards = { daysClaimed: 0, lastClaimDate: null };
@@ -328,7 +340,7 @@ function generatePokedex(isShiny) {
         if (!data) continue;
 
         const level = isShiny ? 100 : 1;
-        const qVal = isShiny ? 2.0 : (Math.random() * 0.99 + 0.01);
+        const qVal = isShiny ? 2.0 : (Math.random() * 1.0 + 0.8);
         const qName = isShiny ? "Shiny" : "Random";
         const ivVal = isShiny ? 100 : Math.floor(Math.random() * 32); // 0-31
 
