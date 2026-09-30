@@ -2226,7 +2226,17 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
                             } else if (type.configKey === 'pokemonBox') {
                                 description = `Pokemon Capacity in Backpack: ${getCapacity(state, 'box')}`;
                             } else if (type.configKey === 'speed') {
-                                description = `Encounter time decreased in ${configItem.increment}`;
+                                if (tier === 1) description = "Encounter time decreased in 10%";
+                                else if (tier === 2) description = "Encounter time decreased in 20%";
+                                else if (tier === 3) description = "Encounter time decreased in 30%";
+                                else if (tier === 4) description = "Encounter time decreased in 40%";
+                                else if (tier >= 5) description = "Encounter time decreased in 50%";
+                            } else if (type.configKey === 'glass') {
+                                if (tier === 1) description = "Show Healthbar at Main View";
+                                else if (tier === 2) description = "Show Healthbar and Damage at Main View";
+                                else if (tier === 3) description = "Show Healthbar, Damage and Level at Main View";
+                                else if (tier === 4) description = "Show Healthbar, Damage, Level and Quality at Main View";
+                                else if (tier >= 5) description = "Show Healthbar, Damage, Level, Quality and SumIV at Main View";
                             } else if (type.configKey === 'loot') {
                                 if (tier === 1) description = "Can loot Potion";
                                 else if (tier === 2) description = "Can loot Potion and Ball";
