@@ -246,4 +246,16 @@ export function showCalendar(tab = 'activities') {
 
     // Bind to window for tab switching
     window.showCalendar = showCalendar;
+
+    // Auto adjust height when switching tabs
+    setTimeout(() => {
+        const win = document.getElementById('window-calendar');
+        if (win) {
+            if (typeof win.adjustHeightForNewContent === 'function') {
+                win.adjustHeightForNewContent();
+            } else if (window.windowManager) {
+                window.windowManager.recalculateWindowSize('window-calendar');
+            }
+        }
+    }, 50);
 }
