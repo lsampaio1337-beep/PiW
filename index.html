@@ -135,7 +135,7 @@
           <div id="main-view-inner-modal" class="floating-window" style="width: 90%; height: auto; max-height: 90%; display: flex; flex-direction: column; overflow: hidden; pointer-events: auto;">
               <div class="window-header" style="position: relative; cursor: default;">
                   <span id="main-view-inner-modal-title">Modal</span>
-                  <span id="btn-close-inner-modal" style="position: absolute; right: 10px; cursor: pointer; color: white; font-weight: bold;">X</span>
+                  <span id="btn-close-inner-modal" style="position: absolute; top: 10px; right: 10px; cursor: pointer; color: white; font-weight: bold;">X</span>
               </div>
               <div class="window-content-container" style="flex: 1; display: flex;">
                   <div id="main-view-inner-modal-content" class="content-panel" style="width: 100%; height: auto; overflow-y: auto;">
@@ -170,7 +170,7 @@
       </div>
 
       <!-- View 2: Battle Arena -->
-      <div id="view-battle-arena" class="game-view" style="display:none;">
+      <div id="view-battle-arena" class="game-view" style="display:none; container-type: inline-size;">
         <div id="combat-arena" style="background-image: url('./Assets/BG/BG.png');">
           <div id="battle-sprites-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;">
             <div id="enemy-side" style="position: absolute; bottom: 20%; left: 100%; display: flex; align-items: center; width: max-content; height: max-content;">
@@ -187,7 +187,7 @@
                           <div id="enemy-battle-hp-bar" style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: #2ecc71; z-index: 0; transition: width 0.3s, background 0.3s; border-radius: 8px;"></div>
                           <div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: flex;">
                               <div id="enemy-battle-hp-text" style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1;">?/?</div>
-                              <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1; font-size: 8px; color: white;">HP</div>
+                              <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1; font-size: 0.84cqw; color: white;">HP</div>
                               <div id="enemy-battle-hp-pct" style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1;">100%</div>
                           </div>
                       </div>
@@ -199,11 +199,11 @@
               <div id="player-sprite-wrapper" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column;">
                   <div style="position: relative; display: inline-block;">
                       <img id="player-pokemon-sprite" src="">
-                      <div style="width: 15vw; height: 14px; background: #222; border: 1px solid #000; border-radius: 8px; position: absolute; top: 100%; left: 50%; transform: translate(-50%, 5px); overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: bold; color: white; text-shadow: 1px 1px 1px black, -1px -1px 1px black, 1px -1px 1px black, -1px 1px 1px black; box-shadow: inset 0px 1px 3px rgba(0,0,0,0.5); z-index: 5;" id="player-battle-hp-container">
+                      <div style="width: 14cqw; height: 1.4cqw; background: #222; border: 1px solid #000; border-radius: 8px; position: absolute; top: 100%; left: 50%; transform: translate(-50%, 5px); overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 0.93cqw; font-weight: bold; color: white; text-shadow: 1px 1px 1px black, -1px -1px 1px black, 1px -1px 1px black, -1px 1px 1px black; box-shadow: inset 0px 1px 3px rgba(0,0,0,0.5); z-index: 5;" id="player-battle-hp-container">
                           <div id="player-battle-hp-bar" style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: #2ecc71; z-index: 0; transition: width 0.3s, background 0.3s; border-radius: 8px;"></div>
                           <div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: flex;">
                               <div id="player-battle-hp-text" style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1;">?/?</div>
-                              <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1; font-size: 8px; color: white;">HP</div>
+                              <div style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1; font-size: 0.84cqw; color: white;">HP</div>
                               <div id="player-battle-hp-pct" style="flex: 1; text-align: center; z-index: 1; display: flex; align-items: center; justify-content: center; line-height: 1;">100%</div>
                           </div>
                       </div>
@@ -218,26 +218,26 @@
           </div>
 
           <!-- Active Items Indicators -->
-          <div id="smartwatch" style="position: absolute; bottom: 10px; left: 10px; display: flex; gap: 10px; z-index: 9999;">
+          <div id="smartwatch" style="position: absolute; top: 50%; left: 10px; transform: translateY(-50%); display: flex; flex-direction: column; gap: 10px; z-index: 9999;">
               <!-- Storage Card -->
               <div id="smartwatch-storage-card" style="width: 30px; height: 30px; background: rgba(0, 0, 0, 0.6); border: 2px solid #3498db; border-radius: 8px; position: relative; display: flex; align-items: center; justify-content: center;">
                   <img id="smartwatch-storage-img" src="Assets/Items/Upgrades/Storage1.png" style="width: 80%; height: 80%; object-fit: contain;">
                   <span id="smartwatch-storage-count" style="position: absolute; bottom: 0px; right: 2px; color: white; font-size: 8px; font-weight: bold; text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;">0/0</span>
                   <img id="smartwatch-storage-full-overlay" src="Assets/Extra/No.png" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; z-index: 2; display: none;">
               </div>
-              <!-- Potion Card -->
-              <div id="smartwatch-potion-card" onclick="window.showActiveItemSelection('potion')" style="width: 30px; height: 30px; background: rgba(0, 0, 0, 0.6); border: 2px solid #3498db; border-radius: 8px; position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer;">
-                  <img id="smartwatch-potion-img" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" style="width: 80%; height: 80%; object-fit: contain;">
-                  <span id="smartwatch-potion-count" style="position: absolute; bottom: 0px; right: 2px; color: white; font-size: 8px; font-weight: bold; text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;"></span>
-              </div>
               <!-- Pokeball Card -->
               <div id="smartwatch-ball-card" onclick="window.showActiveItemSelection('ball')" style="width: 30px; height: 30px; background: rgba(0, 0, 0, 0.6); border: 2px solid #2ecc71; border-radius: 8px; position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer;">
                   <img id="smartwatch-ball-img" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" style="width: 80%; height: 80%; object-fit: contain;">
                   <span id="smartwatch-ball-count" style="position: absolute; bottom: 0px; right: 2px; color: white; font-size: 8px; font-weight: bold; text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;"></span>
               </div>
+              <!-- Potion Card -->
+              <div id="smartwatch-potion-card" onclick="window.showActiveItemSelection('potion')" style="width: 30px; height: 30px; background: rgba(0, 0, 0, 0.6); border: 2px solid #3498db; border-radius: 8px; position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                  <img id="smartwatch-potion-img" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" style="width: 80%; height: 80%; object-fit: contain;">
+                  <span id="smartwatch-potion-count" style="position: absolute; bottom: 0px; right: 2px; color: white; font-size: 8px; font-weight: bold; text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;"></span>
+              </div>
 
               <!-- Item Selection Popup (Hidden by default) -->
-              <div id="smartwatch-item-selection-popup" style="display: none; position: absolute; bottom: 40px; left: 0; background: rgba(0, 0, 0, 0.85); border: 1px solid #555; border-radius: 8px; padding: 10px; flex-direction: row; gap: 8px; z-index: 10000; flex-wrap: nowrap; width: max-content; align-items: flex-start; justify-content: flex-start;">
+              <div id="smartwatch-item-selection-popup" style="display: none; position: absolute; left: 40px; top: 50%; transform: translateY(-50%); background: rgba(0, 0, 0, 0.85); border: 1px solid #555; border-radius: 8px; padding: 10px; flex-direction: row; gap: 8px; z-index: 10000; flex-wrap: nowrap; width: max-content; align-items: flex-start; justify-content: flex-start;">
               </div>
           </div>
         </div>
