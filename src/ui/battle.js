@@ -628,6 +628,12 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
     cloneWrapper.style.height = '100%';
     defeatContainer.appendChild(cloneWrapper);
 
+    // Move any existing floating damage texts to the defeat container so they slide out
+    const damageNodes = elEnemySide.querySelectorAll('.damage-text-node');
+    damageNodes.forEach(node => {
+        defeatContainer.appendChild(node);
+    });
+
     // Ensure the container holding all battle sprites acts as parent, or arena if fallback
     const spritesContainer = document.getElementById('battle-sprites-container');
     if (spritesContainer) {
@@ -809,6 +815,7 @@ export function showDamage(target, amount, isCrit, moveName = '', moveType = 'No
     // Layout: [Amount] [Icon] [Name] [Effectiveness] [Crit]
     dmgNode.innerHTML = `<span style="font-weight: bold; font-style: ${isCrit ? 'italic' : 'normal'}; display: flex; align-items: center; justify-content: center; text-shadow: 1px 1px 2px black;">${amount} ${typeIconHtml} ${moveName} ${effText}${critText}</span>`;
 
+    dmgNode.classList.add('damage-text-node');
     dmgNode.style.position = 'absolute';
     dmgNode.style.color = typeColor;
     dmgNode.style.fontSize = isCrit ? '24px' : '18px';
@@ -821,14 +828,14 @@ export function showDamage(target, amount, isCrit, moveName = '', moveType = 'No
 
     // Position relatively to the parent container of the image using percentages
     dmgNode.style.left = '50%'; // Center horizontally
-    dmgNode.style.top = '15%'; // Top of the image (relative to sprite container)
+    dmgNode.style.top = '20%'; // Top of the image (relative to sprite container)
     dmgNode.style.transform = 'translate(-50%, -50%)'; // Ensure exact centering
 
     img.appendChild(dmgNode);
 
     // Animate up and fade out
     setTimeout(() => {
-        dmgNode.style.top = '-5%'; // Float up relative to the container
+        dmgNode.style.top = '0%'; // Float up relative to the container
     }, 50);
 
     setTimeout(() => {
