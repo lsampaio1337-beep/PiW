@@ -523,6 +523,10 @@ input[type="number"] {
     padding: 0;
 }
 
+#window-pokedex .content-panel {
+    padding: 0 !important;
+}
+
 #window-backpack .content-panel {
     padding: 2%;
     display: flex;
