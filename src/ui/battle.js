@@ -544,26 +544,29 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
         return;
     }
 
-    // Hide original enemy sprite container momentarily until next slide in
     const elEnemySide = document.getElementById('enemy-side');
-    if (elEnemySide) {
-         elEnemySide.style.opacity = '0';
-         setTimeout(() => {
-             if (elEnemySide) elEnemySide.style.opacity = '1';
-         }, 3000);
+    const enemyPokemonSprite = document.getElementById('enemy-pokemon-sprite');
+    const hpContainerEnemy = document.getElementById('enemy-battle-hp-container');
+
+    if (hpContainerEnemy) {
+        hpContainerEnemy.style.transition = 'opacity 2s linear';
+        hpContainerEnemy.style.opacity = '0';
     }
 
-    // Also wipe out enemy HP container and stats
-    const hpContainerEnemy = document.getElementById('enemy-battle-hp-container');
-    if (hpContainerEnemy) {
-        hpContainerEnemy.style.opacity = '0';
-        setTimeout(() => {
-            if (hpContainerEnemy) hpContainerEnemy.style.opacity = '1';
-        }, 3000);
+    if (enemyPokemonSprite) {
+        enemyPokemonSprite.style.transition = 'opacity 2s linear, transform 2s linear';
+        enemyPokemonSprite.style.opacity = '0';
+        enemyPokemonSprite.style.transform = 'scale(0.5)';
+    }
+
+    if (elEnemySide) {
+        elEnemySide.style.transition = 'left 5s linear';
+        elEnemySide.style.left = '-7.5vh';
     }
 
     // 1. Create Pokeball if used
     let ball = null;
+    let shakeInterval = null;
     if (ballResult && ballResult.used && ballResult.ballName) {
         ball = document.createElement('img');
         ball.src = `Assets/Items/Balls/${ballResult.ballName}.png`;
@@ -572,31 +575,30 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
         ball.style.top = `50%`;
         ball.style.bottom = 'auto'; // Reset bottom
         ball.style.transform = 'translate(-50%, -50%)';
-        ball.style.width = '25%';
-        ball.style.height = '25%';
+        ball.style.width = '15vh';
+        ball.style.height = '15vh';
         ball.style.objectFit = 'contain';
         ball.style.zIndex = '51';
         arena.appendChild(ball);
-    }
 
-    // Force reflow
-    if (ball) void ball.offsetWidth;
+        // Force reflow
+        void ball.offsetWidth;
 
-    // Timeline Animations
-    if (ball) {
-        ball.style.transition = 'left 3s linear';
-        ball.style.left = '15%';
+        ball.style.transition = 'left 5s linear';
+        ball.style.left = '-7.5vh';
 
         // Add shake animation manually using setInterval since we need to slide too
         let shakeCount = 0;
-        let shakeInterval = setInterval(() => {
+        shakeInterval = setInterval(() => {
             shakeCount++;
             let rotation = (shakeCount % 2 === 0) ? 15 : -15;
             if (shakeCount % 10 === 0) rotation = 0; // brief pause
             ball.style.transform = `translate(-50%, -50%) rotate(${rotation}deg)`;
         }, 150);
+    }
 
-        setTimeout(() => {
+    setTimeout(() => {
+        if (ball) {
             clearInterval(shakeInterval);
             ball.style.transform = 'translate(-50%, -50%) rotate(0deg)';
 
@@ -606,25 +608,33 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
             } else {
                 ball.src = `Assets/Items/Balls/${ballResult.ballName}N.png`;
             }
+        }
 
-            // Execute capture logic
-            captureCallback();
+        // Execute capture logic
+        captureCallback();
 
-            // Slide off screen for the next 1.5s
-            ball.style.transition = 'left 1.5s linear';
-            ball.style.left = '-10%';
+    }, 3000);
 
-            setTimeout(() => {
-                if (ball.parentElement) ball.parentElement.removeChild(ball);
-            }, 1500);
+    setTimeout(() => {
+        if (ball && ball.parentElement) {
+            ball.parentElement.removeChild(ball);
+        }
 
-        }, 3000);
-    } else {
-        // No ball used, just wait 3s before triggering captureCallback
-        setTimeout(() => {
-            captureCallback();
-        }, 3000);
-    }
+        // Reset enemy sprite styles for next encounter
+        if (enemyPokemonSprite) {
+            enemyPokemonSprite.style.transition = '';
+            enemyPokemonSprite.style.opacity = '';
+            enemyPokemonSprite.style.transform = '';
+        }
+        if (hpContainerEnemy) {
+            hpContainerEnemy.style.transition = '';
+            hpContainerEnemy.style.opacity = '';
+        }
+        if (elEnemySide) {
+            elEnemySide.style.transition = '';
+            elEnemySide.style.left = '';
+        }
+    }, 5000);
 }
 
 
