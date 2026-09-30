@@ -5,26 +5,48 @@ import { VITAMINS } from '../constants.js';
 
 export function showCheatControlModal() {
     const html = `
-        <div style="display: flex; flex-direction: column; gap: 10px;">
-            <button onclick="window.cheatAction('Money')" style="padding: 10px; font-size: 14px; background: #2ecc71; color: white; border: none; border-radius: 5px; cursor: pointer;">Money</button>
-            <button onclick="window.cheatAction('NoMoney')" style="padding: 10px; font-size: 14px; background: #e74c3c; color: white; border: none; border-radius: 5px; cursor: pointer;">NoMoney</button>
-            <button onclick="window.cheatAction('XP')" style="padding: 10px; font-size: 14px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer;">XP</button>
-            <button onclick="window.cheatAction('InfiniteItems')" id="cheat-infinite-items-btn" style="padding: 10px; font-size: 14px; background: ${state.settings.infiniteItems ? '#9b59b6' : '#95a5a6'}; color: white; border: none; border-radius: 5px; cursor: pointer;">Infinite items: ${state.settings.infiniteItems ? 'ON' : 'OFF'}</button>
-            <button onclick="window.cheatAction('Upgrades')" style="padding: 10px; font-size: 14px; background: #f1c40f; color: black; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Upgrades</button>
-            <button onclick="window.cheatAction('Map')" style="padding: 10px; font-size: 14px; background: #e67e22; color: white; border: none; border-radius: 5px; cursor: pointer;">Map</button>
-            <button onclick="window.cheatAction('Pokedex')" style="padding: 10px; font-size: 14px; background: #34495e; color: white; border: none; border-radius: 5px; cursor: pointer;">Pokedex</button>
-            <button onclick="window.cheatAction('PokedexShiny')" style="padding: 10px; font-size: 14px; background: linear-gradient(45deg, #f39c12, #e74c3c, #8e44ad); color: white; border: none; border-radius: 5px; cursor: pointer;">PokedexShiny</button>
-            <button onclick="window.cheatAction('JigglypuffDust')" style="padding: 10px; font-size: 14px; background: #ffb6c1; color: black; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Jigglypuff Dust</button>
-            <button onclick="window.cheatAction('BonusCandy')" style="padding: 10px; font-size: 14px; background: #ecf0f1; color: black; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Bonus Candy</button>
-            <button onclick="window.showTimeLapseModal()" style="padding: 10px; font-size: 14px; background: #8e44ad; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">TimeLapse</button>
-            <button onclick="window.cheatAction('GameSpeed')" style="padding: 10px; font-size: 14px; background: #9b59b6; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Game Speed</button>
-            <button onclick="window.showAddPokemonModal()" style="padding: 10px; font-size: 14px; background: #16a085; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Add Pokemon</button>
-            <button onclick="window.cheatAction('GodMode')" style="padding: 10px; font-size: 14px; background: linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3); color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; text-shadow: 1px 1px 2px black;">God Mode</button>
-            <button onclick="window.cheatAction('RerollDailyChallenges')" style="padding: 10px; font-size: 14px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Reroll Daily Challenges</button>
-            <button onclick="window.cheatAction('NextDailyReward')" style="padding: 10px; font-size: 14px; background: #f1c40f; color: black; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Unlock Next Daily Reward</button>
+        <div style="display: flex; flex-direction: column; gap: 20px; padding-bottom: 10px;">
+
+            <!-- Category: Resources & Wealth -->
+            <div>
+                <h3 style="margin: 0 0 10px 0; border-bottom: 1px solid #555; padding-bottom: 5px; color: #ddd; font-size: 16px;">Resources & Wealth</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <button onclick="window.cheatAction('Money')" style="padding: 10px; font-size: 14px; background: #2ecc71; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Money</button>
+                    <button onclick="window.cheatAction('NoMoney')" style="padding: 10px; font-size: 14px; background: #e74c3c; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">No Money</button>
+                    <button onclick="window.cheatAction('JigglypuffDust')" style="padding: 10px; font-size: 14px; background: #ffb6c1; color: black; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Jigglypuff Dust</button>
+                    <button onclick="window.cheatAction('BonusCandy')" style="padding: 10px; font-size: 14px; background: #ecf0f1; color: black; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Bonus Candy</button>
+                    <button onclick="window.cheatAction('InfiniteItems')" id="cheat-infinite-items-btn" style="padding: 10px; font-size: 14px; background: ${state.settings.infiniteItems ? '#9b59b6' : '#95a5a6'}; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Infinite items: ${state.settings.infiniteItems ? 'ON' : 'OFF'}</button>
+                    <button onclick="window.cheatAction('GodMode')" style="padding: 10px; font-size: 14px; background: linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3); color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; text-shadow: 1px 1px 2px black;">God Mode</button>
+                </div>
+            </div>
+
+            <!-- Category: Progression & Pokémon -->
+            <div>
+                <h3 style="margin: 0 0 10px 0; border-bottom: 1px solid #555; padding-bottom: 5px; color: #ddd; font-size: 16px;">Progression & Pokémon</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <button onclick="window.cheatAction('XP')" style="padding: 10px; font-size: 14px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">XP</button>
+                    <button onclick="window.cheatAction('Upgrades')" style="padding: 10px; font-size: 14px; background: #f1c40f; color: black; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Upgrades</button>
+                    <button onclick="window.cheatAction('Map')" style="padding: 10px; font-size: 14px; background: #e67e22; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Unlock Map</button>
+                    <button onclick="window.showAddPokemonModal()" style="padding: 10px; font-size: 14px; background: #16a085; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Add Pokemon</button>
+                    <button onclick="window.cheatAction('Pokedex')" style="padding: 10px; font-size: 14px; background: #34495e; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Complete Pokedex</button>
+                    <button onclick="window.cheatAction('PokedexShiny')" style="padding: 10px; font-size: 14px; background: linear-gradient(45deg, #f39c12, #e74c3c, #8e44ad); color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Shiny Pokedex</button>
+                </div>
+            </div>
+
+            <!-- Category: Time & Dailies -->
+            <div>
+                <h3 style="margin: 0 0 10px 0; border-bottom: 1px solid #555; padding-bottom: 5px; color: #ddd; font-size: 16px;">Time & Dailies</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <button onclick="window.cheatAction('GameSpeed')" style="padding: 10px; font-size: 14px; background: #9b59b6; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Game Speed</button>
+                    <button onclick="window.showTimeLapseModal()" style="padding: 10px; font-size: 14px; background: #8e44ad; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Time Lapse</button>
+                    <button onclick="window.cheatAction('RerollDailyChallenges')" style="padding: 10px; font-size: 14px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Reroll Daily Challenges</button>
+                    <button onclick="window.cheatAction('NextDailyReward')" style="padding: 10px; font-size: 14px; background: #f1c40f; color: black; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Unlock Next Daily Reward</button>
+                </div>
+            </div>
+
         </div>
     `;
-    showModal("Cheat Control", html, "window-cheat-control", "400px");
+    showModal("Cheat Control", html, "window-cheat-control", "600px");
 }
 
 export function cheatAction(action) {
