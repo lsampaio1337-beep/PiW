@@ -764,10 +764,7 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
 
     const clonedModals = cloneWrapper.querySelector('#enemy-data-modals');
     if (clonedModals) {
-        clonedModals.style.transition = 'opacity 2000ms linear, transform 2000ms linear';
-        clonedModals.style.transformOrigin = 'center center';
-        clonedModals.style.opacity = '0';
-        clonedModals.style.transform = 'translateY(-50%) scale(0.3)';
+        clonedModals.style.display = 'none';
     }
 
     let callbackFired = false;
