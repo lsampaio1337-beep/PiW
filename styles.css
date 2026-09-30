@@ -608,11 +608,11 @@ input[type="number"] {
 }
 ::-webkit-scrollbar-track {
     background: rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
+    border-radius: 10px 0 0 10px;
 }
 ::-webkit-scrollbar-thumb {
     background: #1abc9c;
-    border-radius: 5px;
+    border-radius: 10px 0 0 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
     background: #16a085;
