@@ -9,28 +9,32 @@ export function getRewardForDay(daysClaimed) {
     const d = daysClaimed + 1;
     const dayOfWeek = daysClaimed % 7; // 0 to 6 (Day 1 to Day 7)
 
+    let reward = {};
+
     if (w === 1) {
         switch(dayOfWeek) {
-            case 0: return { items: { "Pokeball": 10 }, potions: { "Tiny Potion": 10 } };
-            case 1: return { items: { "Pokeball": 20 }, potions: { "Small Potion": 10 } };
-            case 2: return { items: { "Greatball": 10 }, potions: { "Regular Potion": 10 } };
-            case 3: return { items: { "Greatball": 20 }, potions: { "Regular Potion": 20 } };
-            case 4: return { items: { "Ultraball": 10 }, potions: { "Big Potion": 5 } };
-            case 5: return { items: { "Ultraball": 20 }, potions: { "Big Potion": 10 } };
-            case 6: return { items: { "Masterball": 1 }, potions: { "Ultra Potion": 2 } };
+            case 0: reward = { items: { "Pokeball": 10 }, potions: { "Tiny Potion": 10 } }; break;
+            case 1: reward = { items: { "Pokeball": 20 }, potions: { "Small Potion": 10 } }; break;
+            case 2: reward = { items: { "Greatball": 10 }, potions: { "Regular Potion": 10 } }; break;
+            case 3: reward = { items: { "Greatball": 20 }, potions: { "Regular Potion": 20 } }; break;
+            case 4: reward = { items: { "Ultraball": 10 }, potions: { "Big Potion": 5 } }; break;
+            case 5: reward = { items: { "Ultraball": 20 }, potions: { "Big Potion": 10 } }; break;
+            case 6: reward = { items: { "Masterball": 1 }, potions: { "Ultra Potion": 2 } }; break;
         }
     } else {
         // Week 2+
         if (dayOfWeek < 6) { // Days 1-6
             const ultraballs = 15 + 5 * (d - 7);
             const hyperPotions = 2 * (d - 7);
-            return { items: { "Ultraball": ultraballs }, potions: { "Huge Potion": hyperPotions } };
+            reward = { items: { "Ultraball": ultraballs }, potions: { "Huge Potion": hyperPotions } };
         } else { // Day 7
             const masterballs = w;
             const ultraPotions = 2 * w;
-            return { items: { "Masterball": masterballs }, potions: { "Ultra Potion": ultraPotions } };
+            reward = { items: { "Masterball": masterballs }, potions: { "Ultra Potion": ultraPotions } };
         }
     }
+    reward.tokens = 1;
+    return reward;
 }
 
 export function getRewardListForWeek(weekNumber) {
@@ -58,6 +62,15 @@ export function checkDailyRewardAvailable() {
     return state.stats.dailyRewards.lastClaimDate !== today;
 }
 
+export function checkAnyDailyChallengeCompleted() {
+    if (!state.stats.dailyChallenges || !state.stats.dailyChallenges.active) return false;
+    if (state.stats.dailyChallenges.hasSeenNotification) return false;
+    for (let c of state.stats.dailyChallenges.active) {
+        if (c.completed) return true;
+    }
+    return false;
+}
+
 export function claimDailyReward(dayIndex) {
     if (!checkDailyRewardAvailable()) return;
 
@@ -82,6 +95,11 @@ export function claimDailyReward(dayIndex) {
         state.backpack.potions[potionName] += reward.potions[potionName];
     }
 
+    if (reward.tokens) {
+        if (!state.trainer.tokens) state.trainer.tokens = 0;
+        state.trainer.tokens += reward.tokens;
+    }
+
     // Update state
     state.stats.dailyRewards.lastClaimDate = getLocalDateString();
     state.stats.dailyRewards.daysClaimed++;
@@ -94,23 +112,44 @@ export function claimDailyReward(dayIndex) {
 // Make globally accessible for the inline onclick handler
 window.claimDailyReward = claimDailyReward;
 
-export function showCalendar() {
-    if (!state.stats.dailyRewards) {
-        state.stats.dailyRewards = { daysClaimed: 0, lastClaimDate: null };
-    }
+window.giveFreeTokens = function() {
+    if (!state.trainer.tokens) state.trainer.tokens = 0;
+    state.trainer.tokens += 10;
+    if (window.showGameAlert) window.showGameAlert("Received 10 Tokens!");
+    if (window.showCalendar) window.showCalendar('shop');
+};
 
-    const isAvailable = checkDailyRewardAvailable();
-    const daysClaimed = state.stats.dailyRewards.daysClaimed;
-    const displayDaysClaimed = isAvailable ? daysClaimed : Math.max(0, daysClaimed - 1);
+window.showCalendar = showCalendar;
+export function showCalendar(tab = 'activities') {
+    let html = `<div style="display: flex; flex-direction: column; width: 100%; height: 100%; box-sizing: border-box;">`;
 
-    const weekNumber = Math.floor(displayDaysClaimed / 7) + 1;
-    const dayOfWeek = displayDaysClaimed % 7;
+    // Tabs
+    html += `
+        <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px; margin-bottom: 10px; align-items: center;">
+            <button onclick="window.showCalendar('activities')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; border-radius: 5px; cursor: pointer; ${tab === 'activities' ? 'background: #3498db; color: white;' : 'background: #2c3e50; color: #bdc3c7; border: 1px solid #7f8c8d;'}">Activities</button>
+            <button onclick="window.showCalendar('shop')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; border-radius: 5px; cursor: pointer; ${tab === 'shop' ? 'background: #3498db; color: white;' : 'background: #2c3e50; color: #bdc3c7; border: 1px solid #7f8c8d;'}">Shop</button>
+            <button onclick="window.giveFreeTokens()" style="padding: 10px 20px; font-size: 16px; font-weight: bold; border-radius: 5px; cursor: pointer; background: #e67e22; color: white; border: none;">Token</button>
+        </div>
+        <div id="calendar-content-area" style="flex: 1; overflow-y: auto;">
+    `;
 
-    const rewardList = getRewardListForWeek(weekNumber);
+    if (tab === 'activities') {
+        if (!state.stats.dailyRewards) {
+            state.stats.dailyRewards = { daysClaimed: 0, lastClaimDate: null };
+        }
 
-    let html = `<div style="text-align: center; color: white; padding: 2%; box-sizing: border-box;">`;
-    html += `<h2 style="margin-top: 0;">Daily Rewards - Week ${weekNumber}</h2>`;
-    html += `<div style="display: flex; gap: 1%; justify-content: center; padding-bottom: 10px; width: 100%;">`;
+        const isAvailable = checkDailyRewardAvailable();
+        const daysClaimed = state.stats.dailyRewards.daysClaimed;
+        const displayDaysClaimed = isAvailable ? daysClaimed : Math.max(0, daysClaimed - 1);
+
+        const weekNumber = Math.floor(displayDaysClaimed / 7) + 1;
+        const dayOfWeek = displayDaysClaimed % 7;
+
+        const rewardList = getRewardListForWeek(weekNumber);
+
+        html += `<div style="text-align: center; color: white; padding: 2%; box-sizing: border-box;">`;
+        html += `<h2 style="margin-top: 0;">Daily Rewards - Week ${weekNumber}</h2>`;
+        html += `<div style="display: flex; gap: 1%; justify-content: center; padding-bottom: 10px; width: 100%;">`;
 
     for (let i = 0; i < 7; i++) {
         const reward = rewardList[i];
@@ -167,6 +206,15 @@ export function showCalendar() {
             `;
         }
 
+        if (reward.tokens) {
+            itemsHtml += `
+                <div style="display: flex; align-items: center; gap: 5px; margin-top: 5px; justify-content: center;">
+                    <img src="Assets/Extra/Token.png" style="width: 24px; height: 24px;" title="Token">
+                    <span style="font-size: 14px;">x${reward.tokens}</span>
+                </div>
+            `;
+        }
+
         html += `
             <div style="${cardStyle}" ${onClickHtml}>
                 <div style="font-weight: bold; margin-bottom: 10px;">Day ${i+1}</div>
@@ -178,13 +226,20 @@ export function showCalendar() {
         `;
     }
 
-    html += `</div>`;
-    html += `<p style="font-size: 12px; color: #ccc; margin-top: 15px;">New rewards available every day. Check back tomorrow!</p>`;
+        html += `</div>`;
 
-    // Inject Daily Challenges
-    html += getDailyChallengesHtml();
+        // Inject Daily Challenges
+        html += getDailyChallengesHtml();
 
-    html += `</div>`;
+        html += `</div>`;
+    } else if (tab === 'shop') {
+        html += window.renderTokenShopHtml ? window.renderTokenShopHtml() : '<div style="color: white; text-align: center;">Loading shop...</div>';
+    }
 
-    showModal("Daily Rewards", html, "window-calendar", "800px", "auto");
+    html += `</div></div>`;
+
+    showModal(titleHtml, html, "window-calendar", "800px", "auto");
+
+    // Bind to window for tab switching
+    window.showCalendar = showCalendar;
 }
