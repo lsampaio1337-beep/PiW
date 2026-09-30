@@ -439,6 +439,7 @@ input[type="number"] {
     box-shadow: 0 4px 15px rgba(0,0,0,0.5);
     overflow: hidden; /* keep header and content clipped */
     pointer-events: auto; /* ensure we can click it */
+    resize: both; /* Every window is resizable */
 }
 
 .window-header {
@@ -507,35 +508,27 @@ input[type="number"] {
 .window-content-container {
     flex: 1;
     position: relative;
-    overflow: hidden;
+    overflow: auto; /* Enable scroll on the window border (container) */
     width: 100%;
-    padding: 0 !important; /* Outer container flush, inner scrolling content will pad 2% */
+    padding: 2%; /* Default padding inside the scrollable container */
     box-sizing: border-box;
 }
 
-/* Default 2% padding for all scrollable window contents. Remove this for specific windows if unwanted */
+/* Modal specific container rules */
 .content-panel {
-    padding: 2%;
+    padding: 0; /* padding moved to .window-content-container */
     box-sizing: border-box;
-}
-
-#window-map .content-panel {
-    padding: 0;
+    overflow: visible !important; /* ensure content doesn't get clipped or scroll inside */
 }
 
 #window-backpack .content-panel {
-    padding: 2%;
     display: flex;
     flex-direction: column;
 }
 
-#window-bonus-candy .window-content-container {
-    padding: 2% !important;
-}
-
-#main-view-window .content-panel,
-#top-bar-window .content-panel,
-#party-window .content-panel {
+#window-map .window-content-container,
+#main-view-window .window-content-container,
+#top-bar-window .window-content-container {
     padding: 0 !important;
 }
 
