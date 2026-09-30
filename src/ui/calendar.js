@@ -121,17 +121,17 @@ window.giveFreeTokens = function() {
 
 window.showCalendar = showCalendar;
 export function showCalendar(tab = 'activities') {
-    let html = `<div style="display: flex; flex-direction: column; width: 100%; height: 100%; box-sizing: border-box;">`;
 
-    // Tabs
-    html += `
-        <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px; margin-bottom: 10px; align-items: center;">
-            <button onclick="window.showCalendar('activities')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; border-radius: 5px; cursor: pointer; ${tab === 'activities' ? 'background: #3498db; color: white;' : 'background: #2c3e50; color: #bdc3c7; border: 1px solid #7f8c8d;'}">Activities</button>
-            <button onclick="window.showCalendar('shop')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; border-radius: 5px; cursor: pointer; ${tab === 'shop' ? 'background: #3498db; color: white;' : 'background: #2c3e50; color: #bdc3c7; border: 1px solid #7f8c8d;'}">Shop</button>
-            <button onclick="window.giveFreeTokens()" style="padding: 10px 20px; font-size: 16px; font-weight: bold; border-radius: 5px; cursor: pointer; background: #e67e22; color: white; border: none;">Token</button>
+    const titleHtml = `
+        <div style="display: inline-flex; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px;" onmousedown="event.stopPropagation()">
+            <button onclick="window.showCalendar('activities')" style="${tab === 'activities' ? 'background: linear-gradient(to bottom, #2ecc71, #27ae60); color: white; border: 1px solid #2ecc71; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.2); font-size: 14px;' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmouseover="this.style.color=\'white\'; this.style.background=\'rgba(255,255,255,0.1)\';" onmouseout="this.style.color=\'rgba(255, 255, 255, 0.7)\'; this.style.background=\'transparent\';'}">Activities</button>
+            <button onclick="window.showCalendar('shop')" style="${tab === 'shop' ? 'background: linear-gradient(to bottom, #2ecc71, #27ae60); color: white; border: 1px solid #2ecc71; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.2); font-size: 14px;' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmouseover="this.style.color=\'white\'; this.style.background=\'rgba(255,255,255,0.1)\';" onmouseout="this.style.color=\'rgba(255, 255, 255, 0.7)\'; this.style.background=\'transparent\';'}">Shop</button>
         </div>
-        <div id="calendar-content-area" style="flex: 1; overflow-y: auto;">
     `;
+
+    let html = `<div style="display: flex; flex-direction: column; width: 100%; height: 100%; box-sizing: border-box;">
+        <div id="calendar-content-area" style="flex: 1; overflow-y: auto;">`;
+
 
     if (tab === 'activities') {
         if (!state.stats.dailyRewards) {
@@ -232,13 +232,20 @@ export function showCalendar(tab = 'activities') {
         html += getDailyChallengesHtml();
 
         html += `</div>`;
+
     } else if (tab === 'shop') {
+        html += `
+            <div style="display: flex; justify-content: center; margin-top: 10px; margin-bottom: 10px;">
+                <button onclick="window.giveFreeTokens()" style="padding: 10px 20px; font-size: 16px; font-weight: bold; border-radius: 5px; cursor: pointer; background: #e67e22; color: white; border: none;">Token</button>
+            </div>
+        `;
         html += window.renderTokenShopHtml ? window.renderTokenShopHtml() : '<div style="color: white; text-align: center;">Loading shop...</div>';
     }
 
+
     html += `</div></div>`;
 
-    showModal("Calendar", html, "window-calendar", "800px", "auto");
+    showModal(titleHtml, html, "window-calendar", "800px", "auto");
 
     // Bind to window for tab switching
     window.showCalendar = showCalendar;
