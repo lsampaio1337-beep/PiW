@@ -628,6 +628,13 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
     // Create a new container to hold the cloned sprite for absolute positioning in arena
     const defeatContainer = document.createElement('div');
     defeatContainer.style.position = 'absolute';
+
+    // Transfer any floating damage nodes to the clone wrapper so they slide out with it
+    const floatingDamages = elEnemySide.querySelectorAll('.damage-text-node');
+    floatingDamages.forEach(node => {
+        cloneWrapper.appendChild(node);
+    });
+
     defeatContainer.style.bottom = '20%';
     defeatContainer.style.left = '35%';
     defeatContainer.style.display = 'flex';
@@ -668,12 +675,7 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
     // Force reflow
     void defeatContainer.offsetWidth;
 
-    // Reset actual enemy side so it's ready for the next slide in immediately
-    elEnemySide.style.transition = 'none';
-    elEnemySide.style.left = '100%';
-    setTimeout(() => {
-        if (elEnemySide) elEnemySide.style.transition = 'left 1s ease-out';
-    }, 50);
+    // Removing manual override of enemy-side to prevent conflict with generateEncounter's isSliding
 
     // Briefly hide the original HP container to prevent visual flash before next spawn
     const hpContainerEnemy = document.getElementById('enemy-battle-hp-container');
@@ -768,6 +770,10 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
         pokemonSprite.style.transform = 'scale(0.3)';
     }
 
+
+    // Shrink any floating damages too, so they collapse with the pokemon
+    const clonedDamages = cloneWrapper.querySelectorAll('.damage-text-node');
+
     const clonedModals = cloneWrapper.querySelector('#enemy-data-modals');
     if (clonedModals) {
         clonedModals.style.transition = 'all 2000ms linear';
@@ -782,6 +788,15 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
             }
         }, 2000);
     }
+
+    clonedDamages.forEach(dmg => {
+        dmg.style.transition = 'opacity 2000ms linear, transform 2000ms linear';
+        dmg.style.transformOrigin = 'center center';
+        dmg.style.opacity = '0';
+        // Combining with its existing translate
+        dmg.style.transform = 'translate(-50%, -50%) scale(0.3)';
+    });
+
 
     let callbackFired = false;
 
@@ -860,7 +875,9 @@ export function showDamage(target, amount, isCrit, moveName = '', moveType = 'No
     // Layout: [Amount] [Icon] [Name] [Effectiveness] [Crit]
     dmgNode.innerHTML = `<span style="font-weight: bold; font-style: ${isCrit ? 'italic' : 'normal'}; display: flex; align-items: center; justify-content: center; text-shadow: 1px 1px 2px black;">${amount} ${typeIconHtml} ${moveName} ${effText}${critText}</span>`;
 
-    dmgNode.classList.add('damage-text-node');
+
+    dmgNode.classList.add('floating-damage');
+
     dmgNode.style.position = 'absolute';
     dmgNode.style.color = typeColor;
     dmgNode.style.fontSize = isCrit ? '24px' : '18px';
