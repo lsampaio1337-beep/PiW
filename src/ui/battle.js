@@ -936,8 +936,18 @@ export function playCombatAnimations(targetSide, moveType, duration) {
     }
 
     // Instead of vh, use the scale of the images to determine projectile size roughly
-    const projHeight = (atkRect.height / scaleY) * 0.05;
+    const projHeight = (atkRect.height / scaleY) * 0.07;
     const projWidth = projHeight * 2;
+
+    const atkCenterX = atkRect.left + atkRect.width / 2;
+    const atkCenterY = atkRect.top + atkRect.height / 2;
+    const startX = container === document.body ? atkCenterX : (atkCenterX - containerRect.left) / scaleX;
+    const startY = container === document.body ? atkCenterY : (atkCenterY - containerRect.top) / scaleY;
+
+    const defCenterX = defRect.left + defRect.width / 2;
+    const defCenterY = defRect.top + defRect.height / 2;
+    const endX = container === document.body ? defCenterX : (defCenterX - containerRect.left) / scaleX;
+    const endY = container === document.body ? defCenterY : (defCenterY - containerRect.top) / scaleY;
 
     // Create projectile
     const proj = document.createElement('div');
@@ -950,18 +960,6 @@ export function playCombatAnimations(targetSide, moveType, duration) {
     proj.style.zIndex = '999';
     proj.style.pointerEvents = 'none';
     proj.style.transform = 'translate(-50%, -50%)';
-
-    // Start at attacker center
-    const atkCenterX = atkRect.left + atkRect.width / 2;
-    const atkCenterY = atkRect.top + atkRect.height / 2;
-    const startX = container === document.body ? atkCenterX : (atkCenterX - containerRect.left) / scaleX;
-    const startY = container === document.body ? atkCenterY : (atkCenterY - containerRect.top) / scaleY;
-
-    // End at defender center
-    const defCenterX = defRect.left + defRect.width / 2;
-    const defCenterY = defRect.top + defRect.height / 2;
-    const endX = container === document.body ? defCenterX : (defCenterX - containerRect.left) / scaleX;
-    const endY = container === document.body ? defCenterY : (defCenterY - containerRect.top) / scaleY;
 
     proj.style.left = startX + 'px';
     proj.style.top = startY + 'px';
@@ -996,32 +994,32 @@ export function playCombatAnimations(targetSide, moveType, duration) {
         splash.style.pointerEvents = 'none';
         splash.style.transform = 'translate(-50%, -50%)';
 
-        // Phase 1: Grow to 25% of sprite height
-        splash.style.transition = `all ${duration * 0.15}ms linear`;
+        // Phase 1: Grow to 50% of sprite height
+        splash.style.transition = `all ${duration * 0.3}ms linear`;
 
         container.appendChild(splash);
 
         // Trigger reflow
         splash.getBoundingClientRect();
 
-        // Expand to 25% height of sprite from the center
-        const sSize1 = (defRect.height / scaleY) * 0.25;
+        // Expand to 50% height of sprite from the center
+        const sSize1 = (defRect.height / scaleY) * 0.50;
         splash.style.width = sSize1 + 'px';
         splash.style.height = sSize1 + 'px';
         splash.style.opacity = '1';
 
-        // Phase 2: Grow to 50% height and fade out
+        // Phase 2: Grow to 100% height and fade out
         setTimeout(() => {
-            splash.style.transition = `all ${duration * 0.15}ms linear`;
-            const sSize2 = (defRect.height / scaleY) * 0.5;
+            splash.style.transition = `all ${duration * 0.3}ms linear`;
+            const sSize2 = (defRect.height / scaleY) * 1.0;
             splash.style.width = sSize2 + 'px';
             splash.style.height = sSize2 + 'px';
             splash.style.opacity = '0';
-        }, duration * 0.15);
+        }, duration * 0.3);
 
         setTimeout(() => {
             if (splash.parentElement) splash.parentElement.removeChild(splash);
-        }, duration * 0.3);
+        }, duration * 0.6);
 
         // Defender Hit Animation (Shake) using transforms safely
         defImg.style.transition = 'transform 50ms ease-in-out';
