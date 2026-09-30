@@ -5,33 +5,13 @@ import { updateUI, showModal } from '../ui.js';
 
 // formatMarketNumberDown is hoisted manually if needed
 function _formatMarketNumberDown(num) {
-    if (num < 1000) return num.toString();
-
-    let suffix = '';
-    let val = num;
-    if (num >= 1000000000000) { suffix = 'T'; val = num / 1000000000000; }
-    else if (num >= 1000000000) { suffix = 'B'; val = num / 1000000000; }
-    else if (num >= 1000000) { suffix = 'M'; val = num / 1000000; }
-    else if (num >= 1000) { suffix = 'K'; val = num / 1000; }
-
-    let rounded = Math.floor(val * 10) / 10;
-    let origRecomputed = rounded;
-    if (suffix === 'T') origRecomputed *= 1000000000000;
-    else if (suffix === 'B') origRecomputed *= 1000000000;
-    else if (suffix === 'M') origRecomputed *= 1000000;
-    else if (suffix === 'K') origRecomputed *= 1000;
-
-    let displayStr = rounded.toString() + suffix;
-    if (origRecomputed !== num) {
-        displayStr = '~' + displayStr;
-    }
-    return displayStr;
+    return num.toLocaleString('en-US');
 }
 
 
 window.sanitizeMarketNumberInput = function(input) {
-    let val = input.value.replace(/\D/g, '');
-    if (val.length > 3) val = val.substring(0, 3);
+    let val = input.value.replace(/[^\d,]/g, '');
+    if (val.length > 9) val = val.substring(0, 9);
     input.value = val;
 };
 
@@ -137,40 +117,14 @@ export function openPokeMarketBuy() {
 
 export function parseMarketQuantity(valStr) {
     if (!valStr) return 1;
-    let val = valStr.toUpperCase().trim();
-    let multiplier = 1;
-    if (val.endsWith('K')) { multiplier = 1000; val = val.slice(0, -1); }
-    else if (val.endsWith('M')) { multiplier = 1000000; val = val.slice(0, -1); }
-    else if (val.endsWith('B')) { multiplier = 1000000000; val = val.slice(0, -1); }
-    else if (val.endsWith('T')) { multiplier = 1000000000000; val = val.slice(0, -1); }
-
+    let val = valStr.replace(/,/g, '').trim();
     let parsed = parseFloat(val);
     if (isNaN(parsed) || parsed <= 0) return 1;
-    return Math.floor(parsed * multiplier);
+    return Math.floor(parsed);
 }
 
 export function formatMarketNumber(num) {
-    if (num < 1000) return num.toString();
-
-    let suffix = '';
-    let val = num;
-    if (num >= 1000000000000) { suffix = 'T'; val = num / 1000000000000; }
-    else if (num >= 1000000000) { suffix = 'B'; val = num / 1000000000; }
-    else if (num >= 1000000) { suffix = 'M'; val = num / 1000000; }
-    else if (num >= 1000) { suffix = 'K'; val = num / 1000; }
-
-    let rounded = Math.ceil(val * 10) / 10;
-    let origRecomputed = rounded;
-    if (suffix === 'T') origRecomputed *= 1000000000000;
-    else if (suffix === 'B') origRecomputed *= 1000000000;
-    else if (suffix === 'M') origRecomputed *= 1000000;
-    else if (suffix === 'K') origRecomputed *= 1000;
-
-    let displayStr = rounded.toString() + suffix;
-    if (origRecomputed !== num) {
-        displayStr = '~' + displayStr;
-    }
-    return displayStr;
+    return num.toLocaleString('en-US');
 }
 
 export function updateMarketPrices() {
@@ -188,12 +142,12 @@ export function updateMarketPrices() {
 
         if (qty > spaceLeft) {
             qty = Math.max(0, spaceLeft);
-            qtyInput.value = qty > 0 ? formatMarketNumberDown(qty).replace('~', '') : "0";
+            qtyInput.value = qty > 0 ? formatMarketNumberDown(qty) : "0";
         }
     } else {
         if (qty > 1000000) {
             qty = 1000000;
-            qtyInput.value = "1M";
+            qtyInput.value = formatMarketNumberDown(qty);
         }
     }
 
@@ -259,11 +213,11 @@ export function renderPokeMarketTab(category) {
             upgradeType: u.type
         }));
     } else if (category === 'pokeballs') {
-        items = state.config.balance.items.pokeballs.map(b => ({
+        items = state.config.balance.items.pokeballs.filter(b => b.name !== 'Masterball').map(b => ({
             name: b.name,
             price: b.price,
             img: `./Assets/Items/Balls/${b.name}.png`,
-            attrLabel: b.name === 'Masterball' ? `Efficiency: 100%` : `Efficiency: ${b.multiplier}x`
+            attrLabel: `Efficiency: ${b.multiplier}x`
         }));
     } else if (category === 'potions') {
         items = state.config.balance.items.potions
@@ -329,7 +283,6 @@ export function renderPokeMarketTab(category) {
                 <img src="${item.img}" style="width: calc(var(--m-width) * 0.072); height: calc(var(--m-width) * 0.072); object-fit: contain; margin-bottom: calc(var(--m-width) * 0.006);">
                 ${category !== 'stones' ? `<div style="font-size: calc(var(--m-width) * 0.014); color: #f1c40f; margin-bottom: calc(var(--m-width) * 0.006); line-height: 1.1;">${item.attrLabel}</div>` : ''}
                 ${category !== 'upgrades' ? `<div style="font-size: calc(var(--m-width) * 0.014); color: #bdc3c7; line-height: 1.1; margin-bottom: calc(var(--m-width) * 0.006);">Stock: ${formatMarketNumberDown(stock)}${maxCapStr}</div>` : ''}
-                ${category !== 'upgrades' ? `<div style="font-size: calc(var(--m-width) * 0.014); color: #bdc3c7; line-height: 1.1;">Base: ${formatMarketNumber(item.price)}</div>` : ''}
                 <div class="market-final-price" style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; color: #2ecc71; margin-top: calc(var(--m-width) * 0.006); line-height: 1.1;">$${formatMarketNumber(item.price)}</div>
             </div>
         `;
@@ -428,7 +381,7 @@ export function buySetMax() {
     }
 
     maxQty = Math.max(0, maxQty);
-    qtyInput.value = maxQty > 0 ? formatMarketNumberDown(maxQty).replace('~', '') : "0";
+    qtyInput.value = maxQty > 0 ? formatMarketNumberDown(maxQty) : "0";
     updateMarketPrices();
 }
 
@@ -602,11 +555,11 @@ export function renderPokeMarketSellTab(category) {
     }
 
     if (category === 'pokeballs') {
-        items = state.config.balance.items.pokeballs.map(b => ({
+        items = state.config.balance.items.pokeballs.filter(b => b.name !== 'Masterball').map(b => ({
             name: b.name,
             buyPrice: b.price,
             img: `./Assets/Items/Balls/${b.name}.png`,
-            attrLabel: b.name === 'Masterball' ? `Efficiency: 100%` : `Efficiency: ${b.multiplier}x`
+            attrLabel: `Efficiency: ${b.multiplier}x`
         }));
     } else if (category === 'potions') {
         items = state.config.balance.items.potions
@@ -710,14 +663,14 @@ export function updateSellItemPrice(itemId, category) {
     if (qty > stock) {
         qty = stock;
         if (stock > 0) {
-            input.value = formatMarketNumberDown(stock).replace('~', '');
+            input.value = formatMarketNumberDown(stock);
         } else {
             input.value = "0";
         }
     }
     if (qty > 1000000) {
         qty = 1000000;
-        input.value = "1M";
+        input.value = formatMarketNumberDown(qty);
     }
 
     let totalVal = qty * baseSellPrice;
@@ -735,9 +688,9 @@ export function sellSetMax(itemId, category) {
     let stock = parseInt(card.dataset.stock) || 0;
 
     if (stock > 1000000) {
-        input.value = "1M";
+        input.value = formatMarketNumberDown(1000000);
     } else {
-        input.value = formatMarketNumberDown(stock).replace('~', '');
+        input.value = formatMarketNumberDown(stock);
     }
 
     updateSellItemPrice(itemId, category);
