@@ -73,12 +73,12 @@ export function showBackpack() {
         const titleHtml = `
             <div style="display: flex; flex-direction: column; width: 100%; text-align: center;">
                 <div>Backpack</div>
-                <div style="display: flex; justify-content: center; gap: 10px; margin-top: 5px;" onmousedown="event.stopPropagation()">
-                    <button onclick="window.renderBackpackTab('pokemon')" style="cursor: pointer; padding: 2px 8px;">Pokémons</button>
-                    <button onclick="window.renderBackpackTab('pokeballs')" style="cursor: pointer; padding: 2px 8px;">Balls</button>
-                    <button onclick="window.renderBackpackTab('potions')" style="cursor: pointer; padding: 2px 8px;">Potions</button>
-                    <button onclick="window.renderBackpackTab('stones')" style="cursor: pointer; padding: 2px 8px;">Stones</button>
-                    <button onclick="window.renderBackpackTab('vitamins')" style="cursor: pointer; padding: 2px 8px;">Vitamins</button>
+                <div id="backpack-main-nav" style="display: inline-flex; justify-content: center; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px; margin: 5px auto 0 auto;" onmousedown="event.stopPropagation()">
+                    <button id="bp-nav-pokemon" onclick="window.renderBackpackTab('pokemon')" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;">Pokémons</button>
+                    <button id="bp-nav-pokeballs" onclick="window.renderBackpackTab('pokeballs')" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;">Balls</button>
+                    <button id="bp-nav-potions" onclick="window.renderBackpackTab('potions')" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;">Potions</button>
+                    <button id="bp-nav-stones" onclick="window.renderBackpackTab('stones')" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;">Stones</button>
+                    <button id="bp-nav-vitamins" onclick="window.renderBackpackTab('vitamins')" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;">Vitamins</button>
                 </div>
             </div>
         `;
@@ -122,9 +122,9 @@ export function renderBackpackTab(tab) {
         pocketTitleHtml = `
             <div style="display: flex; flex-direction: column; width: 100%; text-align: center;">
                 <div>Extra</div>
-                <div style="display: flex; justify-content: center; gap: 10px; margin-top: 5px;" onmousedown="event.stopPropagation()">
-                    <button onclick="window.renderBackpackTab('stones')" style="cursor: pointer; padding: 2px 8px; ${tab === 'stones' ? 'background: #555; color: white;' : ''}">Stones</button>
-                    <button onclick="window.renderBackpackTab('vitamins')" style="cursor: pointer; padding: 2px 8px; ${tab === 'vitamins' ? 'background: #555; color: white;' : ''}">Vitamins</button>
+                <div style="display: inline-flex; justify-content: center; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px; margin: 5px auto 0 auto;" onmousedown="event.stopPropagation()">
+                    <button onclick="window.renderBackpackTab('stones')" style="${tab === 'stones' ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;">Stones</button>
+                    <button onclick="window.renderBackpackTab('vitamins')" style="${tab === 'vitamins' ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;">Vitamins</button>
                 </div>
             </div>
         `;
@@ -136,6 +136,19 @@ export function renderBackpackTab(tab) {
     }
 
     titleSpan.innerHTML = pocketTitleHtml;
+
+    // Update main nav buttons active state
+    const navButtons = ['pokemon', 'pokeballs', 'potions', 'stones', 'vitamins'];
+    navButtons.forEach(navId => {
+        const btn = document.getElementById('bp-nav-' + navId);
+        if (btn) {
+            if (tab === navId) {
+                btn.style.cssText = 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2); border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;';
+            } else {
+                btn.style.cssText = 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;';
+            }
+        }
+    });
 }
 
 export function setActiveItem(type, tierIdx) {
