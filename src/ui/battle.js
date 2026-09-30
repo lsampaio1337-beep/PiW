@@ -936,50 +936,58 @@ export function playCombatAnimations(targetSide, moveType, duration) {
     }
 
     // Instead of vh, use the scale of the images to determine projectile size roughly
-    const projHeight = (atkRect.height / scaleY) * 0.05;
+    const projHeight = (atkRect.height / scaleY) * 0.07;
     const projWidth = projHeight * 2;
 
-    // Create projectile
-    const proj = document.createElement('div');
-    proj.style.position = container === document.body ? 'fixed' : 'absolute';
-    proj.style.width = projWidth + 'px';
-    proj.style.height = projWidth + 'px';
-    proj.style.backgroundColor = color;
-    proj.style.borderRadius = '50%';
-    proj.style.boxShadow = `0 0 ${projHeight}px ${projHeight/2}px ${color}`;
-    proj.style.zIndex = '999';
-    proj.style.pointerEvents = 'none';
-    proj.style.transform = 'translate(-50%, -50%)';
-
-    // Start at attacker center
     const atkCenterX = atkRect.left + atkRect.width / 2;
     const atkCenterY = atkRect.top + atkRect.height / 2;
     const startX = container === document.body ? atkCenterX : (atkCenterX - containerRect.left) / scaleX;
     const startY = container === document.body ? atkCenterY : (atkCenterY - containerRect.top) / scaleY;
 
-    // End at defender center
     const defCenterX = defRect.left + defRect.width / 2;
     const defCenterY = defRect.top + defRect.height / 2;
     const endX = container === document.body ? defCenterX : (defCenterX - containerRect.left) / scaleX;
     const endY = container === document.body ? defCenterY : (defCenterY - containerRect.top) / scaleY;
 
-    proj.style.left = startX + 'px';
-    proj.style.top = startY + 'px';
+    // Create 6 overlapping projectiles
+    const numProjectiles = 6;
+    const projDelay = 20; // ms
 
-    container.appendChild(proj);
+    for (let i = 0; i < numProjectiles; i++) {
+        setTimeout(() => {
+            const proj = document.createElement('div');
+            proj.style.position = container === document.body ? 'fixed' : 'absolute';
+            proj.style.width = projWidth + 'px';
+            proj.style.height = projWidth + 'px';
+            proj.style.backgroundColor = color;
+            proj.style.borderRadius = '50%';
+            proj.style.boxShadow = `0 0 ${projHeight}px ${projHeight/2}px ${color}`;
+            proj.style.zIndex = '999';
+            proj.style.pointerEvents = 'none';
+            proj.style.transform = 'translate(-50%, -50%)';
 
-    // Animate projectile
-    proj.style.transition = `all ${duration}ms linear`;
+            proj.style.left = startX + 'px';
+            proj.style.top = startY + 'px';
 
-    // Trigger reflow
-    proj.getBoundingClientRect();
+            container.appendChild(proj);
 
-    proj.style.left = endX + 'px';
-    proj.style.top = endY + 'px';
+            // Animate projectile
+            proj.style.transition = `all ${duration}ms linear`;
 
+            // Trigger reflow
+            proj.getBoundingClientRect();
+
+            proj.style.left = endX + 'px';
+            proj.style.top = endY + 'px';
+
+            setTimeout(() => {
+                if (proj.parentElement) proj.parentElement.removeChild(proj);
+            }, duration);
+        }, i * projDelay);
+    }
+
+    // Trigger splash and hit animation only once, when the FIRST projectile hits (at `duration`)
     setTimeout(() => {
-        if (proj.parentElement) proj.parentElement.removeChild(proj);
-
         // Splash Effect
         const splash = document.createElement('div');
         splash.style.position = container === document.body ? 'fixed' : 'absolute';
@@ -1004,16 +1012,16 @@ export function playCombatAnimations(targetSide, moveType, duration) {
         // Trigger reflow
         splash.getBoundingClientRect();
 
-        // Expand to 25% height of sprite from the center
-        const sSize1 = (defRect.height / scaleY) * 0.25;
+        // Expand to 50% height of sprite from the center
+        const sSize1 = (defRect.height / scaleY) * 0.50;
         splash.style.width = sSize1 + 'px';
         splash.style.height = sSize1 + 'px';
         splash.style.opacity = '1';
 
-        // Phase 2: Grow to 50% height and fade out
+        // Phase 2: Grow to 100% height and fade out
         setTimeout(() => {
             splash.style.transition = `all ${duration * 0.15}ms linear`;
-            const sSize2 = (defRect.height / scaleY) * 0.5;
+            const sSize2 = (defRect.height / scaleY) * 1.0;
             splash.style.width = sSize2 + 'px';
             splash.style.height = sSize2 + 'px';
             splash.style.opacity = '0';
