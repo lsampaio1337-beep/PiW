@@ -17,6 +17,7 @@ export function showCheatControlModal() {
                     <button onclick="window.cheatAction('JigglypuffDust')" style="padding: 10px; font-size: 14px; background: #ffb6c1; color: black; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Jigglypuff Dust</button>
                     <button onclick="window.cheatAction('BonusCandy')" style="padding: 10px; font-size: 14px; background: #ecf0f1; color: black; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Bonus Candy</button>
                     <button onclick="window.cheatAction('InfiniteItems')" id="cheat-infinite-items-btn" style="padding: 10px; font-size: 14px; background: ${state.settings.infiniteItems ? '#9b59b6' : '#95a5a6'}; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Infinite items: ${state.settings.infiniteItems ? 'ON' : 'OFF'}</button>
+                    <button onclick="window.giveFreeTokens()" style="padding: 10px; font-size: 14px; background: #bdc3c7; color: black; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">+ Token</button>
                     <button onclick="window.cheatAction('GodMode')" style="padding: 10px; font-size: 14px; background: linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3); color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; text-shadow: 1px 1px 2px black;">God Mode</button>
                 </div>
             </div>
