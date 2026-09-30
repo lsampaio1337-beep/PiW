@@ -116,10 +116,11 @@ export function openPokeMarketBuy() {
 }
 
 export function parseMarketQuantity(valStr) {
-    if (!valStr) return 1;
+    if (!valStr) return 0;
     let val = valStr.replace(/,/g, '').trim();
+    if (val === '') return 0;
     let parsed = parseFloat(val);
-    if (isNaN(parsed) || parsed <= 0) return 1;
+    if (isNaN(parsed) || parsed <= 0) return 0;
     return Math.floor(parsed);
 }
 
@@ -131,7 +132,22 @@ export function updateMarketPrices() {
     const qtyInput = document.getElementById('market-global-qty');
     if (!qtyInput) return;
 
-    let qty = parseMarketQuantity(qtyInput.value);
+    let cleanedStr = qtyInput.value.replace(/\D/g, '');
+
+    if (cleanedStr === '') {
+        qtyInput.value = '';
+        document.querySelectorAll('.market-item-card').forEach(card => {
+            const priceLabel = card.querySelector('.market-final-price');
+            if (priceLabel) {
+                priceLabel.textContent = '$0';
+            }
+        });
+        return;
+    }
+
+    let qty = parseInt(cleanedStr, 10);
+    if (isNaN(qty)) qty = 0;
+
     let category = document.getElementById('market-buy-content')?.dataset.category;
 
     if (category === 'pokeballs' || category === 'potions') {
@@ -142,14 +158,23 @@ export function updateMarketPrices() {
 
         if (qty > spaceLeft) {
             qty = Math.max(0, spaceLeft);
-            qtyInput.value = qty > 0 ? formatMarketNumberDown(qty) : "0";
         }
     } else {
         if (qty > 1000000) {
             qty = 1000000;
-            qtyInput.value = formatMarketNumberDown(qty);
         }
     }
+
+    let cursorPosition = qtyInput.selectionStart;
+    let oldLength = qtyInput.value.length;
+    let newStr = formatMarketNumberDown(qty);
+    qtyInput.value = newStr;
+
+    let addedCommas = (newStr.match(/,/g) || []).length - (qtyInput.value.substring(0, oldLength).match(/,/g) || []).length;
+    let newCursorPosition = cursorPosition + addedCommas;
+    try {
+        qtyInput.setSelectionRange(newCursorPosition, newCursorPosition);
+    } catch (e) {}
 
     document.querySelectorAll('.market-item-card').forEach(card => {
         const basePrice = parseInt(card.dataset.price);
@@ -658,20 +683,41 @@ export function updateSellItemPrice(itemId, category) {
     let stock = parseInt(card.dataset.stock) || 0;
     let baseSellPrice = parseInt(card.dataset.basesell) || 0;
 
-    let qty = parseMarketQuantity(input.value);
+    // Clean input to only contain digits
+    let cleanedStr = input.value.replace(/\D/g, '');
+
+    // If empty, allow it so user can delete, but calculate as 0
+    if (cleanedStr === '') {
+        input.value = '';
+        totalDisplay.textContent = "$0";
+        return;
+    }
+
+    let qty = parseInt(cleanedStr, 10);
+    if (isNaN(qty)) qty = 0;
 
     if (qty > stock) {
         qty = stock;
-        if (stock > 0) {
-            input.value = formatMarketNumberDown(stock);
-        } else {
-            input.value = "0";
-        }
     }
     if (qty > 1000000) {
         qty = 1000000;
-        input.value = formatMarketNumberDown(qty);
     }
+
+    // Determine cursor position relative to digits to maintain it after format
+    let cursorPosition = input.selectionStart;
+    let oldLength = input.value.length;
+
+    // Format input value
+    let newStr = formatMarketNumberDown(qty);
+    input.value = newStr;
+
+    // Optional: Attempt to preserve cursor
+    let addedCommas = (newStr.match(/,/g) || []).length - (input.value.substring(0, oldLength).match(/,/g) || []).length;
+    let newCursorPosition = cursorPosition + addedCommas;
+    // We try to set selection range, catching error if element is not focused
+    try {
+        input.setSelectionRange(newCursorPosition, newCursorPosition);
+    } catch (e) {}
 
     let totalVal = qty * baseSellPrice;
     totalDisplay.textContent = "$" + formatMarketNumber(totalVal);
