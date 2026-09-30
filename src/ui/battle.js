@@ -762,6 +762,14 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
         pokemonSprite.style.transform = 'scale(0.3)';
     }
 
+    const clonedModals = cloneWrapper.querySelector('#enemy-data-modals');
+    if (clonedModals) {
+        clonedModals.style.transition = 'opacity 2000ms linear, transform 2000ms linear';
+        clonedModals.style.transformOrigin = 'center center';
+        clonedModals.style.opacity = '0';
+        clonedModals.style.transform = 'translateY(-50%) scale(0.3)';
+    }
+
     let callbackFired = false;
 
     // 2. Change ball sprite at 3 seconds and trigger capture logic
