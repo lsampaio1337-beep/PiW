@@ -34,7 +34,12 @@ function createWindow() {
         if (process.platform === 'win32') {
             fs.writeFileSync('game_ready.txt', 'ready');
         }
-        win.show();
+
+        // Add a small delay before showing to allow Windows DWM to properly composite the transparent window.
+        // This prevents the "pink screen" or "fully transparent and unclickable" bug on launch.
+        setTimeout(() => {
+            win.show();
+        }, 400);
     });
 
     // Handle click-through messages from the renderer process
