@@ -770,8 +770,10 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
         pokemonSprite.style.transform = 'scale(0.3)';
     }
 
+
     // Shrink any floating damages too, so they collapse with the pokemon
     const clonedDamages = cloneWrapper.querySelectorAll('.damage-text-node');
+
     const clonedModals = cloneWrapper.querySelector('#enemy-data-modals');
     if (clonedModals) {
         clonedModals.style.transition = 'all 2000ms linear';
@@ -786,6 +788,7 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
             }
         }, 2000);
     }
+
     clonedDamages.forEach(dmg => {
         dmg.style.transition = 'opacity 2000ms linear, transform 2000ms linear';
         dmg.style.transformOrigin = 'center center';
@@ -793,6 +796,7 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
         // Combining with its existing translate
         dmg.style.transform = 'translate(-50%, -50%) scale(0.3)';
     });
+
 
     let callbackFired = false;
 
@@ -871,11 +875,9 @@ export function showDamage(target, amount, isCrit, moveName = '', moveType = 'No
     // Layout: [Amount] [Icon] [Name] [Effectiveness] [Crit]
     dmgNode.innerHTML = `<span style="font-weight: bold; font-style: ${isCrit ? 'italic' : 'normal'}; display: flex; align-items: center; justify-content: center; text-shadow: 1px 1px 2px black;">${amount} ${typeIconHtml} ${moveName} ${effText}${critText}</span>`;
 
-<<<<<<< HEAD
+
     dmgNode.classList.add('floating-damage');
-=======
-    dmgNode.classList.add('damage-text-node');
->>>>>>> origin/main
+
     dmgNode.style.position = 'absolute';
     dmgNode.style.color = typeColor;
     dmgNode.style.fontSize = isCrit ? '24px' : '18px';
