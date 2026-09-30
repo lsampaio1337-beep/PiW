@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { background: #333; color: white; display: flex; flex-wrap: wrap; gap: 20px; font-family: sans-serif; padding: 20px; }
+        .container { text-align: center; width: 150px; background: #444; border-radius: 10px; padding: 10px; }
+        img { width: 96px; height: 96px; object-fit: contain; }
+
+        /* 10. Tilt & Bob */
+        @keyframes anim10 {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-5px) rotate(5deg); }
+            50% { transform: translateY(0) rotate(0deg); }
+            75% { transform: translateY(-5px) rotate(-5deg); }
+        }
+        .anim-10 { animation: anim10 0.5s infinite linear; }
+    </style>
+</head>
+<body>
+    <script>
+        const pokes = [1, 4, 7, 25, 39, 66, 68, 92, 94, 133, 143, 149, 150, 248, 282, 384, 445, 448, 658, 700];
+        for (let p of pokes) {
+            document.write(`
+                <div class="container">
+                    <div>#${p}</div>
+                    <img src="./Assets/Pokemon%20Sprites/Clean/${p}_Clean.png" class="anim-10" />
+                </div>
+            `);
+        }
+    </script>
+</body>
+</html>
