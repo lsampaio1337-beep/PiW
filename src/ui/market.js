@@ -28,6 +28,22 @@ function _formatMarketNumberDown(num) {
     return displayStr;
 }
 
+
+window.sanitizeMarketNumberInput = function(input) {
+    let val = input.value.replace(/\D/g, '');
+    if (val.length > 3) val = val.substring(0, 3);
+    input.value = val;
+};
+
+window.sanitizeMarketQInput = function(input) {
+    let val = input.value.replace(/\D/g, '');
+    if (val.length > 3) val = val.substring(0, 3);
+    if (val.length > 1) {
+        val = val.substring(0, 1) + '.' + val.substring(1);
+    }
+    input.value = val;
+};
+
 export function setupMarket(vCenter) {
     vCenter.innerHTML = `
         <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: space-between; align-items: center; padding: 0 10%; box-sizing: border-box;">
@@ -447,28 +463,28 @@ export function openPokeMarketSell() {
                     <button onclick="if(window.marketSellSelectedPokemon) window.marketSellSelectedPokemon()" style="padding: calc(var(--m-width) * 0.012) calc(var(--m-width) * 0.024); font-size: calc(var(--m-width) * 0.019); font-weight: bold; border-radius: 5px; background: #e74c3c; color: white; cursor: pointer; border: none;">Sell Selected</button>
                 </div>
 
-                <div id="market-pokemon-filters" style="display: flex; flex-wrap: wrap; gap: calc(var(--m-width) * 0.012); justify-content: center; align-items: center; background: #2c3e50; padding: calc(var(--m-width) * 0.012); border-radius: 8px; border: 1px solid #7f8c8d; width: 100%; box-sizing: border-box;">
+                <div id="market-pokemon-filters" style="display: flex; flex-wrap: nowrap; gap: calc(var(--m-width) * 0.012); justify-content: center; align-items: center; background: #2c3e50; padding: calc(var(--m-width) * 0.012); border-radius: 8px; border: 1px solid #7f8c8d; width: 100%; box-sizing: border-box;">
                     <div style="display: flex; gap: calc(var(--m-width) * 0.006); align-items: center;">
                         <label style="color: white; font-size: calc(var(--m-width) * 0.017);">Name:</label>
                         <input type="text" id="market-filter-name" oninput="if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon')" style="width: calc(var(--m-width) * 0.1); padding: calc(var(--m-width) * 0.006); border-radius: 4px; border: 1px solid #ccc; font-size: calc(var(--m-width) * 0.017);">
                     </div>
                     <div style="display: flex; gap: calc(var(--m-width) * 0.006); align-items: center;">
                         <label style="color: white; font-size: calc(var(--m-width) * 0.017);">Level:</label>
-                        <input type="number" id="market-filter-level-min" placeholder="Min" oninput="if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon')" style="width: calc(var(--m-width) * 0.06); padding: calc(var(--m-width) * 0.006); border-radius: 4px; border: 1px solid #ccc; font-size: calc(var(--m-width) * 0.017);">
+                        <input type="text" id="market-filter-level-min" placeholder="Min" oninput="if(window.sanitizeMarketNumberInput) window.sanitizeMarketNumberInput(this); if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon')" style="width: calc(var(--m-width) * 0.04); padding: calc(var(--m-width) * 0.006); border-radius: 4px; border: 1px solid #ccc; font-size: calc(var(--m-width) * 0.017);">
                         <span style="color: white;">-</span>
-                        <input type="number" id="market-filter-level-max" placeholder="Max" oninput="if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon')" style="width: calc(var(--m-width) * 0.06); padding: calc(var(--m-width) * 0.006); border-radius: 4px; border: 1px solid #ccc; font-size: calc(var(--m-width) * 0.017);">
+                        <input type="text" id="market-filter-level-max" placeholder="Max" oninput="if(window.sanitizeMarketNumberInput) window.sanitizeMarketNumberInput(this); if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon')" style="width: calc(var(--m-width) * 0.04); padding: calc(var(--m-width) * 0.006); border-radius: 4px; border: 1px solid #ccc; font-size: calc(var(--m-width) * 0.017);">
                     </div>
                     <div style="display: flex; gap: calc(var(--m-width) * 0.006); align-items: center;">
                         <label style="color: white; font-size: calc(var(--m-width) * 0.017);">Q:</label>
-                        <input type="number" step="0.01" id="market-filter-q-min" placeholder="Min" oninput="if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon')" style="width: calc(var(--m-width) * 0.06); padding: calc(var(--m-width) * 0.006); border-radius: 4px; border: 1px solid #ccc; font-size: calc(var(--m-width) * 0.017);">
+                        <input type="text" id="market-filter-q-min" placeholder="Min" oninput="if(window.sanitizeMarketQInput) window.sanitizeMarketQInput(this); if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon')" style="width: calc(var(--m-width) * 0.04); padding: calc(var(--m-width) * 0.006); border-radius: 4px; border: 1px solid #ccc; font-size: calc(var(--m-width) * 0.017);">
                         <span style="color: white;">-</span>
-                        <input type="number" step="0.01" id="market-filter-q-max" placeholder="Max" oninput="if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon')" style="width: calc(var(--m-width) * 0.06); padding: calc(var(--m-width) * 0.006); border-radius: 4px; border: 1px solid #ccc; font-size: calc(var(--m-width) * 0.017);">
+                        <input type="text" id="market-filter-q-max" placeholder="Max" oninput="if(window.sanitizeMarketQInput) window.sanitizeMarketQInput(this); if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon')" style="width: calc(var(--m-width) * 0.04); padding: calc(var(--m-width) * 0.006); border-radius: 4px; border: 1px solid #ccc; font-size: calc(var(--m-width) * 0.017);">
                     </div>
                     <div style="display: flex; gap: calc(var(--m-width) * 0.006); align-items: center;">
                         <label style="color: white; font-size: calc(var(--m-width) * 0.017);">SumIV:</label>
-                        <input type="number" id="market-filter-sumiv-min" placeholder="Min" oninput="if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon')" style="width: calc(var(--m-width) * 0.06); padding: calc(var(--m-width) * 0.006); border-radius: 4px; border: 1px solid #ccc; font-size: calc(var(--m-width) * 0.017);">
+                        <input type="text" id="market-filter-sumiv-min" placeholder="Min" oninput="if(window.sanitizeMarketNumberInput) window.sanitizeMarketNumberInput(this); if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon')" style="width: calc(var(--m-width) * 0.04); padding: calc(var(--m-width) * 0.006); border-radius: 4px; border: 1px solid #ccc; font-size: calc(var(--m-width) * 0.017);">
                         <span style="color: white;">-</span>
-                        <input type="number" id="market-filter-sumiv-max" placeholder="Max" oninput="if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon')" style="width: calc(var(--m-width) * 0.06); padding: calc(var(--m-width) * 0.006); border-radius: 4px; border: 1px solid #ccc; font-size: calc(var(--m-width) * 0.017);">
+                        <input type="text" id="market-filter-sumiv-max" placeholder="Max" oninput="if(window.sanitizeMarketNumberInput) window.sanitizeMarketNumberInput(this); if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon')" style="width: calc(var(--m-width) * 0.04); padding: calc(var(--m-width) * 0.006); border-radius: 4px; border: 1px solid #ccc; font-size: calc(var(--m-width) * 0.017);">
                     </div>
                 </div>
             </div>
