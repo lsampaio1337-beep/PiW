@@ -870,9 +870,9 @@ export function playCombatAnimations(targetSide, moveType, duration) {
     });
 
     // Determine the exact clean sprites for precise projectile start and end coordinates
-    // We look for 'img' tags inside the attacker/defender wrappers because the clean sprites are always <img>
-    const atkImgEl = atkImg ? atkImg.querySelector('img') : null;
-    const defImgEl = defImg ? defImg.querySelector('img') : null;
+    // We look for the pokemon image inside the wrapper, specifically skipping the FrameBorder img
+    const atkImgEl = atkImg ? atkImg.querySelector('img:not([src*="FrameBorder"])') : null;
+    const defImgEl = defImg ? defImg.querySelector('img:not([src*="FrameBorder"])') : null;
 
     const atkSpriteImg = atkImgEl || atkImg;
     const defSpriteImg = defImgEl || defImg;
