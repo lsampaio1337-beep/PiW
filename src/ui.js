@@ -46,7 +46,6 @@ import { updateTopbar } from './ui/topbar.js';
 import { updateSidebar } from './ui/sidebar.js';
 import { updateBattleArena, showDamage, playCombatAnimations, triggerDefeatAnimation, showLoot } from './ui/battle.js';
 import { showCalendar } from './ui/calendar.js';
-import './ui/tokenShop.js';
 import { showGiftModal } from './ui/gift.js';
 import { showMap, navigateToLocation, showMapTooltip, hideMapTooltip } from './ui/map.js';
 import { showPokedex, showDexEntry, showSmartCaptureMode, toggleSmartCaptureShinyMode, showSmartCaptureBallSelection, selectSmartCaptureBall } from './ui/pokedex.js';
@@ -86,6 +85,15 @@ window.evolvePokemon = evolvePokemon;
 window.showSettings = showSettings;
 window.exportLog = exportLog;
 window.buyItem = buyItem;
+
+import { renderTokenShopHtml, buyTokenItem, buyTokenUnlock, buyTokenItemRandom, showTokenItemSelect, confirmTokenItemSelect } from './ui/tokenShop.js';
+window.renderTokenShopHtml = renderTokenShopHtml;
+window.buyTokenItem = buyTokenItem;
+window.buyTokenUnlock = buyTokenUnlock;
+window.buyTokenItemRandom = buyTokenItemRandom;
+window.showTokenItemSelect = showTokenItemSelect;
+window.confirmTokenItemSelect = confirmTokenItemSelect;
+
 window.openPokeMarketBuy = openPokeMarketBuy;
 window.renderPokeMarketTab = renderPokeMarketTab;
 window.updateMarketPrices = updateMarketPrices;
@@ -94,6 +102,7 @@ window.forceNextEncounter = forceNextEncounter;
 window.activateCheat = activateCheat;
 
 import { cheatAction } from "./ui/cheatControl.js";
+
 window.cheatAction = cheatAction;
 window.showTimeLapseModal = showTimeLapseModal;
 window.runTimeLapse = runTimeLapse;
