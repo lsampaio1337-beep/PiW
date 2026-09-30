@@ -14,7 +14,7 @@ export function renderTokenShopHtml() {
                 </button>
             </div>
 
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; max-width: 100%;">
+            <div style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; max-width: 100%;">
                 ${getTokenShopItemsHtml()}
             </div>
         </div>
@@ -134,7 +134,7 @@ function getTokenShopItemsHtml() {
         }
 
         html += `
-            <div style="background: #2c3e50; border: 2px solid #f1c40f; border-radius: 8px; padding: 8px; width: 100%; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; text-align: center; justify-content: space-between;">
+            <div style="background: #2c3e50; border: 2px solid #f1c40f; border-radius: 8px; padding: 8px; width: 150px; display: flex; flex-direction: column; align-items: center; text-align: center; justify-content: space-between;">
                 <div style="font-weight: bold; font-size: 12px; margin-bottom: 5px; height: 30px; display: flex; align-items: center;">${item.name}</div>
                 <img src="${item.img}" style="width: 40px; height: 40px; object-fit: contain; margin-bottom: 5px;">
                 <div style="font-size: 10px; color: #bdc3c7; margin-bottom: 10px; flex-grow: 1;">${item.desc}</div>
