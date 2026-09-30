@@ -706,6 +706,15 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
     defeatContainer.style.transition = `left ${slideDuration}ms linear`;
     defeatContainer.style.left = targetLeft;
 
+    // Pokemon Fade and Shrink Animation
+    const pokemonSprite = cloneWrapper.querySelector('img:not([src*="Balls"])');
+    if (pokemonSprite) {
+        pokemonSprite.style.transition = 'opacity 2000ms linear, transform 2000ms linear';
+        pokemonSprite.style.transformOrigin = 'center center';
+        pokemonSprite.style.opacity = '0';
+        pokemonSprite.style.transform = 'scale(0.3)';
+    }
+
     let callbackFired = false;
 
     // 2. Change ball sprite at 3 seconds and trigger capture logic
