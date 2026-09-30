@@ -131,7 +131,7 @@ export function showCalendar(tab = 'activities') {
     `;
 
     html += `
-        <div id="calendar-content-area" style="flex: 1; overflow-y: auto;">
+        <div id="calendar-content-area" style="flex: 1; overflow-y: hidden;">
     `;
 
     if (tab === 'activities') {
@@ -240,6 +240,13 @@ export function showCalendar(tab = 'activities') {
     html += `</div></div>`;
 
     showModal(titleHtml, html, "window-calendar", "800px", "auto");
+
+    setTimeout(() => {
+        const win = document.getElementById('window-calendar');
+        if (win && win.adjustHeightForNewContent) {
+            win.adjustHeightForNewContent();
+        }
+    }, 50);
 
     // Bind to window for tab switching
     window.showCalendar = showCalendar;
