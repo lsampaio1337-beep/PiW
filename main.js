@@ -19,9 +19,9 @@ function createWindow() {
         height: height,
         x: x,
         y: y,
-        transparent: true,
-        backgroundColor: '#00000000',
-        frame: false,
+        transparent: false,
+        backgroundColor: '#000000',
+        frame: true,
         hasShadow: true,
         alwaysOnTop: false, // Don't keep it above other windows
         skipTaskbar: false,
