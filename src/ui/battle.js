@@ -544,22 +544,37 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
         return;
     }
 
-    // Hide original enemy sprite container momentarily until next slide in
-    const elEnemySide = document.getElementById('enemy-side');
-    if (elEnemySide) {
-         elEnemySide.style.opacity = '0';
-         setTimeout(() => {
-             if (elEnemySide) elEnemySide.style.opacity = '1';
-         }, 3000);
-    }
+    // Note: We do not hide the enemy HP container here because the next encounter
+    // is instantly spawned and its HP needs to be displayed immediately.
 
-    // Also wipe out enemy HP container and stats
-    const hpContainerEnemy = document.getElementById('enemy-battle-hp-container');
-    if (hpContainerEnemy) {
-        hpContainerEnemy.style.opacity = '0';
-        setTimeout(() => {
-            if (hpContainerEnemy) hpContainerEnemy.style.opacity = '1';
-        }, 3000);
+    // Determine ball sizes
+    const ballHeight = arena.offsetHeight * 0.25;
+    const ballWidth = ballHeight; // Balls are perfectly square
+
+    // Create Ghost Container
+    const ghostContainer = document.createElement('div');
+    ghostContainer.style.position = 'absolute';
+    ghostContainer.style.left = '35%';
+    ghostContainer.style.bottom = '20%';
+    ghostContainer.style.width = 'max-content';
+    ghostContainer.style.height = 'max-content';
+    ghostContainer.style.zIndex = '50';
+    ghostContainer.style.pointerEvents = 'none'; // so it doesn't block clicks
+
+    // Clone the enemy sprite for the ghost
+    const enemySide = document.getElementById('enemy-side');
+    if (enemySide) {
+        const frameImg = enemySide.querySelector('img[src*="FrameBorder.png"]');
+        if (frameImg) {
+            const ghostFrame = frameImg.cloneNode(true);
+            ghostContainer.appendChild(ghostFrame);
+        }
+        const enemySpriteWrapper = document.getElementById('enemy-sprite-wrapper');
+        if (enemySpriteWrapper) {
+            const ghostSpriteWrapper = enemySpriteWrapper.cloneNode(true);
+            ghostSpriteWrapper.id = ''; // remove ID so it doesn't conflict
+            ghostContainer.appendChild(ghostSpriteWrapper);
+        }
     }
 
     // 1. Create Pokeball if used
@@ -568,64 +583,55 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
         ball = document.createElement('img');
         ball.src = `Assets/Items/Balls/${ballResult.ballName}.png`;
         ball.style.position = 'absolute';
-        ball.style.left = '35%';
-        ball.style.top = `50%`;
-        ball.style.bottom = 'auto'; // Reset bottom
+        ball.style.left = '50%';
+        ball.style.top = '50%';
         ball.style.transform = 'translate(-50%, -50%)';
-        ball.style.width = '25%';
-        ball.style.height = '25%';
+        ball.style.width = `${ballWidth}px`;
+        ball.style.height = `${ballHeight}px`;
         ball.style.objectFit = 'contain';
         ball.style.zIndex = '51';
-        arena.appendChild(ball);
+
+        // Append ball to ghost wrapper so it is centered on the sprite wrapper
+        const ghostWrapper = ghostContainer.querySelector('div'); // The cloned enemy-sprite-wrapper
+        if (ghostWrapper) {
+            ghostWrapper.style.position = 'relative'; // Ensure relative positioning for absolute child
+            ghostWrapper.appendChild(ball);
+        } else {
+            ghostContainer.appendChild(ball);
+        }
     }
 
+    arena.appendChild(ghostContainer);
+
     // Force reflow
-    if (ball) void ball.offsetWidth;
+    void ghostContainer.offsetWidth;
 
     // Timeline Animations
-    if (ball) {
-        ball.style.transition = 'left 3s linear';
-        ball.style.left = '15%';
+    ghostContainer.style.transition = 'left 5s linear';
+    ghostContainer.style.left = `-${ballWidth / 2}px`;
 
-        // Add shake animation manually using setInterval since we need to slide too
-        let shakeCount = 0;
-        let shakeInterval = setInterval(() => {
-            shakeCount++;
-            let rotation = (shakeCount % 2 === 0) ? 15 : -15;
-            if (shakeCount % 10 === 0) rotation = 0; // brief pause
-            ball.style.transform = `translate(-50%, -50%) rotate(${rotation}deg)`;
-        }, 150);
-
-        setTimeout(() => {
-            clearInterval(shakeInterval);
-            ball.style.transform = 'translate(-50%, -50%) rotate(0deg)';
-
-            // 3s mark: decide outcome
+    // 3s mark: decide outcome and trigger callback
+    setTimeout(() => {
+        if (ball) {
             if (ballResult.caught) {
                 ball.src = `Assets/Items/Balls/${ballResult.ballName}Y.png`;
             } else {
                 ball.src = `Assets/Items/Balls/${ballResult.ballName}N.png`;
             }
+        }
 
-            // Execute capture logic
-            captureCallback();
+        // Execute capture logic
+        captureCallback();
+    }, 3000);
 
-            // Slide off screen for the next 1.5s
-            ball.style.transition = 'left 1.5s linear';
-            ball.style.left = '-10%';
-
-            setTimeout(() => {
-                if (ball.parentElement) ball.parentElement.removeChild(ball);
-            }, 1500);
-
-        }, 3000);
-    } else {
-        // No ball used, just wait 3s before triggering captureCallback
-        setTimeout(() => {
-            captureCallback();
-        }, 3000);
-    }
+    // 5s mark: cleanup
+    setTimeout(() => {
+        if (ghostContainer.parentElement) {
+            ghostContainer.parentElement.removeChild(ghostContainer);
+        }
+    }, 5000);
 }
+
 
 
 export function showDamage(target, amount, isCrit, moveName = '', moveType = 'Normal', effectiveness = 1) {
