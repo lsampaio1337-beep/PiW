@@ -50,7 +50,9 @@ class BattleSystem {
     start() {
 
         if (!this.combatLoop) {
-            const slideDelay = 1000 / this.state.settings.gameSpeed;
+            const leaderSpeed = this.state.party[0].currentStats.spe;
+            let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed));
+            slideDelay = Math.max(300, slideDelay) / this.state.settings.gameSpeed;
             this.generateEncounter(slideDelay);
         }
     }
@@ -183,7 +185,9 @@ class BattleSystem {
                 if (typeof window.switchView === 'function') {
                     window.switchView("BATTLE_ARENA");
                 }
-                const slideDelay = 1000 / this.state.settings.gameSpeed;
+                const leaderSpeed = this.state.party[0].currentStats.spe;
+            let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed));
+            slideDelay = Math.max(300, slideDelay) / this.state.settings.gameSpeed;
             this.generateEncounter(slideDelay);
             };
         } else {
@@ -1099,7 +1103,9 @@ class BattleSystem {
         if (this.gymState && this.gymState.isActive) {
             this.handleGymEnemyDefeat();
         } else {
-            const slideDelay = 1000 / this.state.settings.gameSpeed;
+            const leaderSpeed = this.state.party[0].currentStats.spe;
+            let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed));
+            slideDelay = Math.max(300, slideDelay) / this.state.settings.gameSpeed;
             this.generateEncounter(slideDelay);
         }
     }
@@ -1148,7 +1154,9 @@ class BattleSystem {
             }
         } else {
             // Next pokemon
-            const slideDelay = 1000 / this.state.settings.gameSpeed;
+            const leaderSpeed = this.state.party[0].currentStats.spe;
+            let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed));
+            slideDelay = Math.max(300, slideDelay) / this.state.settings.gameSpeed;
             this.generateEncounter(slideDelay);
         }
     }
@@ -1279,7 +1287,9 @@ class BattleSystem {
                 this.handleWipeout();
             } else {
                 // Prepare slide in duration for next pokemon
-                const slideDelay = 1000 / this.state.settings.gameSpeed; // Arbitrary 1s slide in
+                const leaderSpeed = this.state.party[0].currentStats.spe;
+            let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed));
+            slideDelay = Math.max(300, slideDelay) / this.state.settings.gameSpeed; // Arbitrary 1s slide in
                 this.isPlayerPreSlidingIn = true;
                 this.updateUI(); // Move offscreen
 
