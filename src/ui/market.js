@@ -104,8 +104,8 @@ export function openPokeMarketBuy() {
 
     const titleHtml = `
         <div style="display: inline-flex; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px;">
-            <button onclick="window.openPokeMarketBuy()" style="background: linear-gradient(to bottom, #2ecc71, #27ae60); color: white; border: 1px solid #2ecc71; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.2); font-size: 14px;">Buy Items</button>
-            <button onclick="if(window.openPokeMarketSell) window.openPokeMarketSell()" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmouseover="this.style.color='white'; this.style.background='rgba(255,255,255,0.1)';" onmouseout="this.style.color='rgba(255, 255, 255, 0.7)'; this.style.background='transparent';">Sell Items</button>
+            <button onclick="window.openPokeMarketBuy()" style="background: linear-gradient(to bottom, #2ecc71, #27ae60); color: white; border: 1px solid #2ecc71; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.2); font-size: 14px;">Buy</button>
+            <button onclick="if(window.openPokeMarketSell) window.openPokeMarketSell()" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmouseover="this.style.color='white'; this.style.background='rgba(255,255,255,0.1)';" onmouseout="this.style.color='rgba(255, 255, 255, 0.7)'; this.style.background='transparent';">Sell</button>
         </div>
     `;
 
@@ -219,11 +219,10 @@ export function renderPokeMarketTab(category) {
     }
 
     let items = [];
-    let cols = 4;
+    let cols = 6;
 
 
     if (category === 'upgrades') {
-        cols = 3;
 
         let ballTier = state.stats.upgrades.ballsTier || 0;
         let potionTier = state.stats.upgrades.potionsTier || 0;
@@ -260,7 +259,6 @@ export function renderPokeMarketTab(category) {
             upgradeType: u.type
         }));
     } else if (category === 'pokeballs') {
-        cols = 4;
         items = state.config.balance.items.pokeballs.map(b => ({
             name: b.name,
             price: b.price,
@@ -268,7 +266,6 @@ export function renderPokeMarketTab(category) {
             attrLabel: b.name === 'Masterball' ? `Efficiency: 100%` : `Efficiency: ${b.multiplier}x`
         }));
     } else if (category === 'potions') {
-        cols = 6;
         items = state.config.balance.items.potions
             .filter(p => p.name !== 'Max Potion')
             .map(p => {
@@ -283,7 +280,6 @@ export function renderPokeMarketTab(category) {
                 };
             });
     } else if (category === 'stones') {
-        cols = 6;
         const stonePrice = state.config.balance.items.stones.price;
         let stoneKeys = Object.keys(state.backpack.stones);
         stoneKeys.sort((a, b) => a.localeCompare(b));
@@ -303,7 +299,7 @@ export function renderPokeMarketTab(category) {
         return;
     }
 
-    let html = `<div style="display: grid; grid-template-columns: repeat(${cols}, calc(var(--m-width) * 0.145)); gap: calc(var(--m-width) * 0.018); justify-content: center; width: 100%;">`;
+    let html = `<div style="--m-width: min(76vw, 750px); display: grid; grid-template-columns: repeat(${cols}, calc(var(--m-width) * 0.135)); gap: calc(var(--m-width) * 0.018); justify-content: center; width: 100%;">`;
     items.forEach(item => {
         let displayName = item.displayName || item.name;
         if (category === 'potions') displayName = displayName.replace(' Potion', '<br>Potion');
@@ -503,8 +499,8 @@ export function openPokeMarketSell() {
 
     const titleHtml = `
         <div style="display: inline-flex; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px;">
-            <button onclick="window.openPokeMarketBuy()" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmouseover="this.style.color='white'; this.style.background='rgba(255,255,255,0.1)';" onmouseout="this.style.color='rgba(255, 255, 255, 0.7)'; this.style.background='transparent';">Buy Items</button>
-            <button onclick="if(window.openPokeMarketSell) window.openPokeMarketSell()" style="background: linear-gradient(to bottom, #e74c3c, #c0392b); color: white; border: 1px solid #e74c3c; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.2); font-size: 14px;">Sell Items</button>
+            <button onclick="window.openPokeMarketBuy()" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmouseover="this.style.color='white'; this.style.background='rgba(255,255,255,0.1)';" onmouseout="this.style.color='rgba(255, 255, 255, 0.7)'; this.style.background='transparent';">Buy</button>
+            <button onclick="if(window.openPokeMarketSell) window.openPokeMarketSell()" style="background: linear-gradient(to bottom, #e74c3c, #c0392b); color: white; border: 1px solid #e74c3c; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.2); font-size: 14px;">Sell</button>
         </div>
     `;
 
@@ -513,7 +509,7 @@ export function openPokeMarketSell() {
         content.innerHTML = html;
         overlay.style.display = 'flex';
     } else {
-        if (window.showModal) window.showModal('Sell Items', html, 'window-market-sell');
+        if (window.showModal) window.showModal('Sell', html, 'window-market-sell');
 
         const modalBox = document.getElementById('modal-content-box');
         if (modalBox) {
@@ -537,7 +533,7 @@ export function renderPokeMarketSellTab(category) {
     if (!content) return;
 
     let items = [];
-    let cols = 4;
+    let cols = 6;
 
     const pokemonControls = document.getElementById('market-pokemon-sell-controls');
     if (pokemonControls) {
@@ -545,8 +541,7 @@ export function renderPokeMarketSellTab(category) {
     }
 
     if (category === 'pokemon') {
-        cols = 6;
-        let html = `<div style="display: grid; grid-template-columns: repeat(${cols}, calc(var(--m-width) * 0.145)); gap: calc(var(--m-width) * 0.018); justify-content: center; width: 100%;">`;
+        let html = `<div style="--m-width: min(76vw, 750px); display: grid; grid-template-columns: repeat(${cols}, calc(var(--m-width) * 0.135)); gap: calc(var(--m-width) * 0.018); justify-content: center; width: 100%;">`;
 
         const filterName = (document.getElementById('market-filter-name')?.value || '').toLowerCase();
         const filterLevelMin = parseFloat(document.getElementById('market-filter-level-min')?.value);
@@ -607,7 +602,6 @@ export function renderPokeMarketSellTab(category) {
     }
 
     if (category === 'pokeballs') {
-        cols = 4;
         items = state.config.balance.items.pokeballs.map(b => ({
             name: b.name,
             buyPrice: b.price,
@@ -615,7 +609,6 @@ export function renderPokeMarketSellTab(category) {
             attrLabel: b.name === 'Masterball' ? `Efficiency: 100%` : `Efficiency: ${b.multiplier}x`
         }));
     } else if (category === 'potions') {
-        cols = 6;
         items = state.config.balance.items.potions
             .filter(p => p.name !== 'Max Potion')
             .map(p => {
@@ -630,7 +623,6 @@ export function renderPokeMarketSellTab(category) {
                 };
             });
     } else if (category === 'stones') {
-        cols = 6;
         const stonePrice = state.config.balance.items.stones.price;
         let stoneKeysSell = Object.keys(state.backpack.stones).filter(k => !VITAMINS.includes(k));
         stoneKeysSell.sort((a, b) => a.localeCompare(b));
@@ -643,7 +635,6 @@ export function renderPokeMarketSellTab(category) {
             };
         });
     } else if (category === 'vitamins') {
-        cols = 6;
         // Base sell price should be $5. The logic below calculates baseSellPrice = Math.floor(buyPrice * 0.5)
         // Therefore, we set buyPrice to 10 so that baseSellPrice is 5.
         const vitaminBuyPrice = 10;
@@ -656,7 +647,7 @@ export function renderPokeMarketSellTab(category) {
         });
     }
 
-    let html = `<div style="display: grid; grid-template-columns: repeat(${cols}, calc(var(--m-width) * 0.145)); gap: calc(var(--m-width) * 0.018); justify-content: center; width: 100%;">`;
+    let html = `<div style="--m-width: min(76vw, 750px); display: grid; grid-template-columns: repeat(${cols}, calc(var(--m-width) * 0.135)); gap: calc(var(--m-width) * 0.018); justify-content: center; width: 100%;">`;
     items.forEach(item => {
         let displayName = item.displayName || item.name;
         if (category === 'potions') displayName = displayName.replace(' Potion', '<br>Potion');
