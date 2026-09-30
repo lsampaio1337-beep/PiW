@@ -9,8 +9,11 @@ function initDailyChallengesState() {
             lastDate: null,
             rotationIndex: 0,
             active: [],
-            totalCompleted: 0
+            totalCompleted: 0,
+            hasRerolled: false
         };
+    } else if (state.stats.dailyChallenges.hasRerolled === undefined) {
+        state.stats.dailyChallenges.hasRerolled = false;
     }
 }
 
@@ -197,16 +200,32 @@ const CHALLENGE_DEFS = {
 
 function generateActiveChallenges() {
     initDailyChallengesState();
-    let r = state.stats.dailyChallenges.rotationIndex;
 
     let active = [];
+    let validCategories = [];
 
+    let categories = Object.keys(CHALLENGE_DEFS);
+    for (let cat of categories) {
+        let validChallenges = CHALLENGE_DEFS[cat].filter(c => !c.condition || c.condition());
+        if (validChallenges.length > 0) {
+            validCategories.push({ cat, challenges: validChallenges });
+        }
+    }
+
+    // Shuffle valid categories
+    for (let i = validCategories.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [validCategories[i], validCategories[j]] = [validCategories[j], validCategories[i]];
+    }
+
+    // Pick 3 categories
+    let selectedCategories = validCategories.slice(0, 3);
     let group = [];
-    if (CHALLENGE_DEFS.combat.filter(c => !c.condition || c.condition()).length > 0) group.push(CHALLENGE_DEFS.combat.filter(c => !c.condition || c.condition())[r % CHALLENGE_DEFS.combat.filter(c => !c.condition || c.condition()).length]);
-    if (CHALLENGE_DEFS.catching.filter(c => !c.condition || c.condition()).length > 0) group.push(CHALLENGE_DEFS.catching.filter(c => !c.condition || c.condition())[r % CHALLENGE_DEFS.catching.filter(c => !c.condition || c.condition()).length]);
-    if (CHALLENGE_DEFS.economy.filter(c => !c.condition || c.condition()).length > 0) group.push(CHALLENGE_DEFS.economy.filter(c => !c.condition || c.condition())[r % CHALLENGE_DEFS.economy.filter(c => !c.condition || c.condition()).length]);
-    if (CHALLENGE_DEFS.management.filter(c => !c.condition || c.condition()).length > 0) group.push(CHALLENGE_DEFS.management.filter(c => !c.condition || c.condition())[r % CHALLENGE_DEFS.management.filter(c => !c.condition || c.condition()).length]);
-    if (CHALLENGE_DEFS.special.filter(c => !c.condition || c.condition()).length > 0) group.push(CHALLENGE_DEFS.special.filter(c => !c.condition || c.condition())[r % CHALLENGE_DEFS.special.filter(c => !c.condition || c.condition()).length]);
+
+    for (let sc of selectedCategories) {
+        let randomChallenge = sc.challenges[Math.floor(Math.random() * sc.challenges.length)];
+        group.push(randomChallenge);
+    }
 
     for (let c of group) {
         let target = c.getTarget();
@@ -238,6 +257,7 @@ export function checkAndResetDailyChallenges() {
         state.stats.dailyChallenges.rotationIndex++;
         state.stats.dailyChallenges.uniqueCaught = [];
         state.stats.dailyChallenges.hasSeenNotification = true;
+        state.stats.dailyChallenges.hasRerolled = false;
         generateActiveChallenges();
     }
 }
@@ -276,16 +296,13 @@ export function getDailyChallengesHtml() {
                     </div>
                     ${c.completed && !c.claimed ? `<button onclick="window.claimDailyChallengeToken(${i})" style="display: flex; align-items: center; gap: 5px; padding: 5px 10px; font-size: 12px; background: #2ecc71; color: white; border: none; border-radius: 3px; cursor: pointer;">Claim <img src="Assets/Extra/Token.png" style="width: 16px; height: 16px;"></button>` : ''}
                     ${!c.completed ? `<button onclick="window.cheatCompleteDailyChallenge(${i})" style="padding: 5px 10px; font-size: 12px; background: #666; color: white; border: none; border-radius: 3px; cursor: pointer;">Cheat Complete</button>` : ''}
-                    ${!c.completed ? `<button onclick="window.rerollIndividualDailyChallenge(${i})" style="padding: 5px 10px; font-size: 12px; background: #e74c3c; color: white; border: none; border-radius: 3px; cursor: pointer;">Reroll</button>` : ''}
+                    ${!c.completed ? `<button ${state.stats.dailyChallenges.hasRerolled ? 'disabled' : ''} onclick="window.rerollIndividualDailyChallenge(${i})" style="padding: 5px 10px; font-size: 12px; background: ${state.stats.dailyChallenges.hasRerolled ? '#999' : '#e74c3c'}; color: white; border: none; border-radius: 3px; cursor: ${state.stats.dailyChallenges.hasRerolled ? 'not-allowed' : 'pointer'};">Reroll</button>` : ''}
                 </div>
             </div>
         `;
     }
 
     html += `
-            </div>
-            <div style="margin-top: 15px;">
-                <button onclick="window.rerollDailyChallenges()" style="padding: 8px 15px; font-size: 14px; background: #2196F3; color: white; border: none; border-radius: 3px; cursor: pointer;">Reroll Challenges</button>
             </div>
         </div>
     `;
@@ -316,19 +333,14 @@ window.claimDailyChallengeToken = function(index) {
     }
 };
 
-window.rerollDailyChallenges = function() {
-    initDailyChallengesState();
-    state.stats.dailyChallenges.rotationIndex++;
-    generateActiveChallenges();
-    if (typeof showCalendar === 'function') showCalendar();
-};
 
 window.rerollIndividualDailyChallenge = function(index) {
+    if (state.stats.dailyChallenges.hasRerolled) return;
+
     let active = state.stats.dailyChallenges.active;
     if (!active || !active[index]) return;
     if (active[index].completed) return;
 
-    let currentType = active[index].type;
     let categoryLists = {
         combat: CHALLENGE_DEFS.combat.filter(c => !c.condition || c.condition()),
         catching: CHALLENGE_DEFS.catching.filter(c => !c.condition || c.condition()),
@@ -337,31 +349,30 @@ window.rerollIndividualDailyChallenge = function(index) {
         special: CHALLENGE_DEFS.special.filter(c => !c.condition || c.condition())
     };
 
-    // Find the category of the current challenge
-    let currentCategoryKey = null;
-    for (let key in categoryLists) {
-        if (categoryLists[key].some(c => c.type === currentType)) {
-            currentCategoryKey = key;
-            break;
+    // Find which categories are currently active
+    let activeCategories = new Set();
+    for (let c of active) {
+        for (let key in categoryLists) {
+            if (categoryLists[key].some(def => def.type === c.type)) {
+                activeCategories.add(key);
+                break;
+            }
         }
     }
 
-    // Filter out the current category
-    let availableCategories = Object.keys(categoryLists).filter(key => key !== currentCategoryKey && categoryLists[key].length > 0);
+    // Unused categories are those not currently in the active list
+    let unusedCategories = Object.keys(categoryLists).filter(key => !activeCategories.has(key) && categoryLists[key].length > 0);
+
+    // Filter out the current category just in case it wasn't caught by the active list logic
+    let availableCategories = unusedCategories;
 
     if (availableCategories.length === 0) {
-        // Fallback if no other categories are available, just reroll from the same category but a different challenge
-        availableCategories = [currentCategoryKey];
+        // Fallback if no other categories are available
+        availableCategories = Object.keys(categoryLists).filter(key => categoryLists[key].length > 0);
     }
 
     let rCat = availableCategories[Math.floor(Math.random() * availableCategories.length)];
     let possibleChallenges = categoryLists[rCat];
-
-    if (availableCategories.length === 1 && rCat === currentCategoryKey) {
-        // Try to not pick the exact same one
-        possibleChallenges = possibleChallenges.filter(c => c.type !== currentType);
-        if (possibleChallenges.length === 0) possibleChallenges = categoryLists[rCat]; // fallback if only 1 exists
-    }
 
     let newC = possibleChallenges[Math.floor(Math.random() * possibleChallenges.length)];
 
@@ -382,6 +393,8 @@ window.rerollIndividualDailyChallenge = function(index) {
         text: text,
         extra: extra
     };
+
+    state.stats.dailyChallenges.hasRerolled = true;
 
     if (typeof showCalendar === 'function') showCalendar();
 };
