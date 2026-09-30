@@ -276,7 +276,9 @@ function getCurrentCount(state, type) {
     let count = 0;
     if (type === 'balls' || type === 'pokeballs') {
         for (const [key, value] of Object.entries(state.backpack.pokeballs)) {
-            count += value;
+            if (key !== 'Masterball') {
+                count += value;
+            }
         }
     } else if (type === 'potions') {
         for (const [key, value] of Object.entries(state.backpack.potions)) {
