@@ -541,6 +541,11 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
     const arena = document.getElementById('combat-arena');
     const elEnemySide = document.getElementById('enemy-side');
     const mainViewWindow = document.getElementById('main-view-window');
+    const elPlayerSide = document.getElementById('player-side');
+
+    if (elPlayerSide) {
+        elPlayerSide.style.zIndex = '60'; // Ensure player is above the sliding out enemy
+    }
 
     if (!arena || !elEnemySide) {
         captureCallback();
@@ -570,7 +575,7 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
     defeatContainer.style.alignItems = 'center';
     defeatContainer.style.width = 'max-content';
     defeatContainer.style.height = 'max-content';
-    defeatContainer.style.zIndex = '50';
+    defeatContainer.style.zIndex = '10'; // Behind player sprite
 
     // Copy frame border if we need it to look identical (optional but safe)
     const frameBorder = elEnemySide.querySelector('img[alt="Enemy Frame"]');
@@ -587,7 +592,13 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
     cloneWrapper.style.height = '100%';
     defeatContainer.appendChild(cloneWrapper);
 
-    arena.appendChild(defeatContainer);
+    // Ensure the container holding all battle sprites acts as parent, or arena if fallback
+    const spritesContainer = document.getElementById('battle-sprites-container');
+    if (spritesContainer) {
+        spritesContainer.appendChild(defeatContainer);
+    } else {
+        arena.appendChild(defeatContainer);
+    }
 
     // Force reflow
     void defeatContainer.offsetWidth;
@@ -608,16 +619,16 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
         }, 500);
     }
 
-    // Calculate ball size based on 20% of the main view window height
+    // Calculate ball size based on 15% of the main view window height
     let ballSizePx = 50; // fallback
     if (mainViewWindow) {
-        ballSizePx = mainViewWindow.offsetHeight * 0.20;
+        ballSizePx = mainViewWindow.offsetHeight * 0.15;
     }
 
     // Animation variables
     const slideDuration = 5000;
     const captureCheckDelay = 3000;
-    const targetLeft = `-${ballSizePx * 0.5}px`; // -$ where $ is 0.5 * ball width
+    const targetLeft = `-${ballSizePx}px`; // target left: - ball width
 
     // 1. Create Pokeball if used
     let ball = null;
@@ -709,6 +720,7 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
         }
     }, slideDuration);
 }
+
 
 
 
