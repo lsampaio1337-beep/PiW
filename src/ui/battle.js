@@ -610,7 +610,7 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
     // Animation variables
     const slideDuration = 5000;
     const captureCheckDelay = 3000;
-    const targetLeft = '-12.5vh'; // -$ where $ is 0.5 * 25vh
+    const targetLeft = '-10vh'; // -$ where $ is 0.5 * 20vh
 
     // 1. Create Pokeball if used
     let ball = null;
@@ -646,8 +646,8 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
         }
 
         ball.style.transform = 'translate(-50%, -50%)';
-        ball.style.width = '25vh';
-        ball.style.height = '25vh';
+        ball.style.width = '20vh';
+        ball.style.height = '20vh';
         ball.style.objectFit = 'contain';
         ball.style.zIndex = '51';
         attachTarget.appendChild(ball);
