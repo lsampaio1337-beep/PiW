@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { background: #333; color: white; display: flex; flex-wrap: wrap; gap: 20px; font-family: sans-serif; padding: 20px; }
+        .container { text-align: center; width: 150px; background: #444; border-radius: 10px; padding: 10px; }
+        img { width: 96px; height: 96px; object-fit: contain; }
+
+        /* 1. Bob */
+        @keyframes anim1 { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        .anim-1 { animation: anim1 0.5s infinite linear; }
+
+        /* 2. Tilt */
+        @keyframes anim2 { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(10deg); } 75% { transform: rotate(-10deg); } }
+        .anim-2 { animation: anim2 0.5s infinite linear; }
+
+        /* 3. Squish */
+        @keyframes anim3 { 0%, 100% { transform: scaleY(1) scaleX(1); } 50% { transform: scaleY(0.9) scaleX(1.1); } }
+        .anim-3 { animation: anim3 0.5s infinite linear; }
+
+        /* 4. Hop */
+        @keyframes anim4 { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); animation-timing-function: ease-in; } }
+        .anim-4 { animation: anim4 0.5s infinite ease-out; }
+
+        /* 5. Wiggle */
+        @keyframes anim5 { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(5deg); } 75% { transform: rotate(-5deg); } }
+        .anim-5 { animation: anim5 0.2s infinite linear; }
+
+        /* 6. Sway */
+        @keyframes anim6 { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(10px); } }
+        .anim-6 { animation: anim6 0.8s infinite ease-in-out; }
+
+        /* 7. Walk Arc */
+        @keyframes anim7 { 0%, 100% { transform: translate(0, 0) rotate(0deg); } 25% { transform: translate(5px, -5px) rotate(5deg); } 50% { transform: translate(10px, 0) rotate(0deg); } 75% { transform: translate(5px, -5px) rotate(-5deg); } }
+        .anim-7 { animation: anim7 1s infinite linear; }
+
+        /* 8. Skew */
+        @keyframes anim8 { 0%, 100% { transform: skewX(0deg); } 25% { transform: skewX(5deg); } 75% { transform: skewX(-5deg); } }
+        .anim-8 { animation: anim8 0.5s infinite linear; }
+
+        /* 9. Bounce */
+        @keyframes anim9 { 0%, 100% { transform: translateY(0) scaleY(1); } 50% { transform: translateY(-20px) scaleY(1.05); } 90% { transform: translateY(0) scaleY(0.95); } }
+        .anim-9 { animation: anim9 0.6s infinite; }
+
+        /* 10. Tilt & Bob */
+        @keyframes anim10 { 0%, 100% { transform: translateY(0) rotate(0deg); } 25% { transform: translateY(-5px) rotate(5deg); } 50% { transform: translateY(0) rotate(0deg); } 75% { transform: translateY(-5px) rotate(-5deg); } }
+        .anim-10 { animation: anim10 0.5s infinite linear; }
+
+        /* 11. Stretch & Bob */
+        @keyframes anim11 { 0%, 100% { transform: translateY(0) scaleY(1); } 50% { transform: translateY(-10px) scaleY(1.1); } }
+        .anim-11 { animation: anim11 0.5s infinite linear; }
+
+        /* 12. Quick Step */
+        @keyframes anim12 { 0%, 100% { transform: translateY(0) translateX(0); } 25% { transform: translateY(-5px) translateX(2px); } 50% { transform: translateY(0) translateX(4px); } 75% { transform: translateY(-5px) translateX(2px); } }
+        .anim-12 { animation: anim12 0.4s infinite linear; }
+
+        /* 13. Heartbeat (Pulse) */
+        @keyframes anim13 { 0%, 100% { transform: scale(1); } 15% { transform: scale(1.1); } 30% { transform: scale(1); } 45% { transform: scale(1.1); } 60% { transform: scale(1); } }
+        .anim-13 { animation: anim13 1.2s infinite linear; }
+
+        /* 14. Float */
+        @keyframes anim14 { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+        .anim-14 { animation: anim14 2s infinite ease-in-out; }
+
+        /* 15. Trot */
+        @keyframes anim15 { 0%, 100% { transform: translateY(0) rotate(0deg) scaleY(1); } 25% { transform: translateY(-8px) rotate(3deg) scaleY(1.05); } 50% { transform: translateY(0) rotate(0deg) scaleY(0.95); } 75% { transform: translateY(-8px) rotate(-3deg) scaleY(1.05); } }
+        .anim-15 { animation: anim15 0.6s infinite linear; }
+    </style>
+</head>
+<body>
+    <script>
+        for (let i = 1; i <= 15; i++) {
+            document.write(`
+                <div class="container">
+                    <div>Animation ${i}</div>
+                    <img src="file://${process.cwd()}/Assets/Pokemon Sprites/Clean/66_Clean.png" class="anim-${i}" />
+                </div>
+            `);
+        }
+    </script>
+</body>
+</html>

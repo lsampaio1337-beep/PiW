@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { background: #333; color: white; display: flex; flex-wrap: wrap; gap: 20px; font-family: sans-serif; padding: 20px; }
+        .container { text-align: center; width: 150px; background: #444; border-radius: 10px; padding: 10px; }
+        img { width: 96px; height: 96px; object-fit: contain; }
+
+        /* 16. Hop & Squish */
+        @keyframes anim16 {
+            0%, 100% { transform: translateY(0) scaleY(1) scaleX(1); }
+            25% { transform: translateY(0) scaleY(0.9) scaleX(1.1); }
+            50% { transform: translateY(-15px) scaleY(1.05) scaleX(0.95); animation-timing-function: ease-in; }
+            75% { transform: translateY(0) scaleY(0.9) scaleX(1.1); }
+        }
+        .anim-16 { animation: anim16 0.6s infinite; }
+
+        /* 17. Wiggle & Float */
+        @keyframes anim17 {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-4px) rotate(5deg); }
+            50% { transform: translateY(-8px) rotate(0deg); }
+            75% { transform: translateY(-4px) rotate(-5deg); }
+        }
+        .anim-17 { animation: anim17 1s infinite ease-in-out; }
+
+        /* 18. Walk Arc & Squish */
+        @keyframes anim18 {
+            0%, 100% { transform: translate(0, 0) rotate(0deg) scaleY(1); }
+            12.5% { transform: translate(2.5px, -2.5px) rotate(2.5deg) scaleY(0.9); }
+            25% { transform: translate(5px, -5px) rotate(5deg) scaleY(1.05); }
+            50% { transform: translate(10px, 0) rotate(0deg) scaleY(0.9); }
+            75% { transform: translate(5px, -5px) rotate(-5deg) scaleY(1.05); }
+        }
+        .anim-18 { animation: anim18 1s infinite linear; }
+
+        /* 19. Sway & Bob */
+        @keyframes anim19 {
+            0%, 100% { transform: translateX(0) translateY(0); }
+            25% { transform: translateX(5px) translateY(-5px); }
+            50% { transform: translateX(10px) translateY(0); }
+            75% { transform: translateX(5px) translateY(-5px); }
+        }
+        .anim-19 { animation: anim19 0.8s infinite ease-in-out; }
+
+        /* 20. Bob & Squish (Walking feel) */
+        @keyframes anim20 {
+            0%, 100% { transform: translateY(0) scaleY(0.95) scaleX(1.05); }
+            50% { transform: translateY(-8px) scaleY(1.05) scaleX(0.95); }
+        }
+        .anim-20 { animation: anim20 0.5s infinite linear; }
+    </style>
+</head>
+<body>
+    <script>
+        for (let i = 16; i <= 20; i++) {
+            document.write(`
+                <div class="container">
+                    <div>Animation ${i}</div>
+                    <img src="file://${process.cwd()}/Assets/Pokemon Sprites/Clean/66_Clean.png" class="anim-${i}" />
+                </div>
+            `);
+        }
+    </script>
+</body>
+</html>
