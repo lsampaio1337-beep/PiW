@@ -2,26 +2,26 @@ import { VITAMINS } from "../../constants.js";
 import { state } from '../../state.js';
 import { formatQuantity } from './utils.js';
 
-export function renderStonesTab(area) {
-    // 18 stones list hardcoded alphabetically to match the 6x3 grid request precisely
-    const allStones = [
-        "Bug Stone", "Dark Stone", "Dragon Stone", "Electric Stone", "Fairy Stone", "Fighting Stone",
-        "Fire Stone", "Flying Stone", "Ghost Stone", "Grass Stone", "Ground Stone", "Ice Stone",
-        "Normal Stone", "Poison Stone", "Psychic Stone", "Rock Stone", "Steel Stone", "Water Stone"
-    ];
-
+export function renderVitaminsTab(area) {
     let content = `
         <div style="display: flex; flex-direction: column; width: 100%; height: 100%; container-type: inline-size;">
             <div style="display: grid; grid-template-columns: repeat(6, 14.5cqi); gap: 1.5cqi; justify-content: center; align-content: flex-start; width: 100%; padding: 1.2cqi; overflow-y: hidden; overflow-x: hidden; box-sizing: border-box;">
     `;
 
-    for (const name of allStones) {
+    for (const name of VITAMINS) {
         // Fallback to 0 if they don't have it in inventory yet
+        // Since vitamins are stored alongside stones in state currently
         const qty = state.backpack.stones[name] || 0;
 
-        let displayName = name.replace(' Stone', '<br>Stone');
+        let displayName = name;
+        if (name.includes(' ')) {
+            const parts = name.split(' ');
+            if (parts.length === 2) {
+                displayName = `${parts[0]}<br>${parts[1]}`;
+            }
+        }
 
-        const imagePath = `./Assets/Items/Stones/${name}.png`;
+        const imagePath = `./Assets/Items/Vitamins/${name}.png`;
 
         content += `
             <div style="background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; padding: 1cqi; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; box-sizing: border-box;">

@@ -70,7 +70,19 @@ export function showBackpack() {
     `;
 
     if (window.showModal) {
-        window.showModal('Backpack', html, 'window-backpack', '800px', 'auto');
+        const titleHtml = `
+            <div style="display: flex; flex-direction: column; width: 100%; text-align: center;">
+                <div>Backpack</div>
+                <div style="display: flex; justify-content: center; gap: 10px; margin-top: 5px;" onmousedown="event.stopPropagation()">
+                    <button onclick="window.renderBackpackTab('pokemon')" style="cursor: pointer; padding: 2px 8px;">Pokémons</button>
+                    <button onclick="window.renderBackpackTab('pokeballs')" style="cursor: pointer; padding: 2px 8px;">Balls</button>
+                    <button onclick="window.renderBackpackTab('potions')" style="cursor: pointer; padding: 2px 8px;">Potions</button>
+                    <button onclick="window.renderBackpackTab('stones')" style="cursor: pointer; padding: 2px 8px;">Stones</button>
+                    <button onclick="window.renderBackpackTab('vitamins')" style="cursor: pointer; padding: 2px 8px;">Vitamins</button>
+                </div>
+            </div>
+        `;
+        window.showModal(titleHtml, html, 'window-backpack', '800px', 'auto');
         const win = document.getElementById('window-backpack');
         if (win) {
             // Apply maximum height logic for Backpack based on aspect ratio constraint (800 / 1279 * 1350 = ~844px)
@@ -79,6 +91,8 @@ export function showBackpack() {
         }
     }
 }
+
+import { renderVitaminsTab } from './vitamins.js';
 
 export function renderBackpackTab(tab) {
     const area = document.getElementById('backpack-content-area');
@@ -92,19 +106,36 @@ export function renderBackpackTab(tab) {
         if (window.clearPokemonFilter) window.clearPokemonFilter();
     }
 
+    // Default simple titles
+    let pocketTitleHtml = '';
+
     if (tab === 'pokeballs') {
-        titleSpan.innerText = 'Pokéballs';
+        pocketTitleHtml = 'Pokéballs';
         renderPokeballsTab(innerContent);
     } else if (tab === 'potions') {
-        titleSpan.innerText = 'Potions';
+        pocketTitleHtml = 'Potions';
         renderPotionsTab(innerContent);
-    } else if (tab === 'stones') {
-        titleSpan.innerText = 'Extra';
-        renderStonesTab(innerContent);
     } else if (tab === 'pokemon') {
-        titleSpan.innerText = 'Pokémon';
+        pocketTitleHtml = 'Pokémon';
         renderPokemonTab(innerContent);
+    } else if (tab === 'stones' || tab === 'vitamins') {
+        pocketTitleHtml = `
+            <div style="display: flex; flex-direction: column; width: 100%; text-align: center;">
+                <div>Extra</div>
+                <div style="display: flex; justify-content: center; gap: 10px; margin-top: 5px;" onmousedown="event.stopPropagation()">
+                    <button onclick="window.renderBackpackTab('stones')" style="cursor: pointer; padding: 2px 8px; ${tab === 'stones' ? 'background: #555; color: white;' : ''}">Stones</button>
+                    <button onclick="window.renderBackpackTab('vitamins')" style="cursor: pointer; padding: 2px 8px; ${tab === 'vitamins' ? 'background: #555; color: white;' : ''}">Vitamins</button>
+                </div>
+            </div>
+        `;
+        if (tab === 'stones') {
+            renderStonesTab(innerContent);
+        } else {
+            renderVitaminsTab(innerContent);
+        }
     }
+
+    titleSpan.innerHTML = pocketTitleHtml;
 }
 
 export function setActiveItem(type, tierIdx) {
