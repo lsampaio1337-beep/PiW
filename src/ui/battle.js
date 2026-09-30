@@ -625,8 +625,26 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
         const innerWrapper = cloneWrapper.querySelector('div');
         const attachTarget = innerWrapper ? innerWrapper : cloneWrapper;
 
-        ball.style.left = '50%';
-        ball.style.top = '50%';
+        // Ensure ball is relative to the pokemon sprite specifically (the div holding the img)
+        if (innerWrapper) {
+            const img = innerWrapper.querySelector('img');
+            if (img) {
+                // Ball goes on top of pokemon image
+                attachTarget.style.position = 'relative';
+
+                // Usually the img itself acts as the primary content, but attachTarget is the wrapper.
+                // Centering inside attachTarget:
+                ball.style.left = '50%';
+                ball.style.top = '50%';
+            } else {
+                ball.style.left = '50%';
+                ball.style.top = '50%';
+            }
+        } else {
+            ball.style.left = '50%';
+            ball.style.top = '50%';
+        }
+
         ball.style.transform = 'translate(-50%, -50%)';
         ball.style.width = '25vh';
         ball.style.height = '25vh';
@@ -684,6 +702,7 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
         }
     }, slideDuration);
 }
+
 
 
 
