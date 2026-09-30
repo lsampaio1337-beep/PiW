@@ -869,8 +869,16 @@ export function playCombatAnimations(targetSide, moveType, duration) {
         easing: 'ease-in-out'
     });
 
-    const atkRect = atkImg.getBoundingClientRect();
-    const defRect = defImg.getBoundingClientRect();
+    // Determine the exact clean sprites for precise projectile start and end coordinates
+    // We look for 'img' tags inside the attacker/defender wrappers because the clean sprites are always <img>
+    const atkImgEl = atkImg ? atkImg.querySelector('img') : null;
+    const defImgEl = defImg ? defImg.querySelector('img') : null;
+
+    const atkSpriteImg = atkImgEl || atkImg;
+    const defSpriteImg = defImgEl || defImg;
+
+    const atkRect = atkSpriteImg.getBoundingClientRect();
+    const defRect = defSpriteImg.getBoundingClientRect();
     const container = document.getElementById('battle-sprites-container') || document.body;
 
     let containerRect = container.getBoundingClientRect();
@@ -890,9 +898,9 @@ export function playCombatAnimations(targetSide, moveType, duration) {
     const proj = document.createElement('div');
     proj.style.position = container === document.body ? 'fixed' : 'absolute';
     proj.style.width = projWidth + 'px';
-    proj.style.height = projHeight + 'px';
+    proj.style.height = projWidth + 'px';
     proj.style.backgroundColor = color;
-    proj.style.borderRadius = '5px';
+    proj.style.borderRadius = '50%';
     proj.style.boxShadow = `0 0 ${projHeight}px ${projHeight/2}px ${color}`;
     proj.style.zIndex = '999';
     proj.style.pointerEvents = 'none';
@@ -916,7 +924,7 @@ export function playCombatAnimations(targetSide, moveType, duration) {
     container.appendChild(proj);
 
     // Animate projectile
-    proj.style.transition = `all ${duration * 0.8}ms linear`;
+    proj.style.transition = `all ${duration}ms linear`;
 
     // Trigger reflow
     proj.getBoundingClientRect();
@@ -984,7 +992,7 @@ export function playCombatAnimations(targetSide, moveType, duration) {
             updateTransform(defImg);
         }, Math.min(500, duration * 0.3));
 
-    }, duration * 0.8);
+    }, duration);
 }
 
 export function showLoot(lootItems) {

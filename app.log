@@ -1,26 +1,14 @@
 
 > idle-pokemon-world@1.0.0 start /app
-> electron-forge start -- --remote-debugging-port=9222
+> electron-forge start
 
 ❯ Checking your system
 ❯ Checking package manager version
 ✔ Found pnpm@10.30.3
 ✔ Checking your system
-[?25h[39517:0930/044318.413163:ERROR:bus.cc(407)] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
-[39517:0930/044318.413239:ERROR:bus.cc(407)] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
-[39517:0930/044318.413253:ERROR:bus.cc(407)] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
-[39517:0930/044318.413262:ERROR:bus.cc(407)] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
-[39517:0930/044318.413278:ERROR:object_proxy.cc(576)] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type:
-
-DevTools listening on ws://127.0.0.1:9222/devtools/browser/eb9eaae3-f329-4ab0-a798-1d56ffab9b89
-[39517:0930/044318.461116:ERROR:bus.cc(407)] Failed to connect to the bus: Could not pa[36837:0930/050940.999846:ERROR:network_service_instance_impl.cc(613)] Network service crashed, restarting service.
-[36837:0930/050941.026634:ERROR:gpu_process_host.cc(981)] GPU process exited unexpectedly: exit_code=15
-ype (examples of valid types are "tcp" and on UNIX "unix")
-[39517:0930/044329.663177:ERROR:bus.cc(407)] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
-[39517:0930/044329.663189:ERROR:bus.cc(407)] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
-[39517:0930/044333.008321:ERROR:bus.cc(407)] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
-[39517:0930/044333.008366:ERROR:bus.cc(407)] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
-[39517:0930/044333.008412:ERROR:bus.cc(407)] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
-[39517:0930/050941.004949:ERROR:gpu_process_host.cc(981)] GPU process exited unexpectedly: exit_code=15
-[39517:0930/050941.027067:ERROR:network_service_instance_impl.cc(613)] Network service crashed, restarting service.
- ELIFECYCLE  Command failed.
+[?25h[80409:0930/023152.796134:ERROR:bus.cc(407)] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[80409:0930/023152.796381:ERROR:bus.cc(407)] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[80409:0930/023152.796400:ERROR:bus.cc(407)] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[80409:0930/023152.796410:ERROR:bus.cc(407)] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[80409:0930/023152.796421:ERROR:object_proxy.cc(576)] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type:
+[80409:0930/023152.855244:ERROR:bus.cc(407)] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
