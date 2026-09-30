@@ -396,6 +396,29 @@ input[type="number"] {
     animation: walk-water 1.2s infinite ease-in-out;
 }
 
+/* Pokemon Slide Idle Animations */
+@keyframes pokemon-slide-idle {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-5px) rotate(5deg); }
+    50% { transform: translateY(0) rotate(0deg); }
+    75% { transform: translateY(-5px) rotate(-5deg); }
+}
+
+@keyframes pokemon-slide-idle-flipped {
+    0%, 100% { transform: scaleX(-1) translateY(0) rotate(0deg); }
+    25% { transform: scaleX(-1) translateY(-5px) rotate(5deg); }
+    50% { transform: scaleX(-1) translateY(0) rotate(0deg); }
+    75% { transform: scaleX(-1) translateY(-5px) rotate(-5deg); }
+}
+
+.sliding-idle-anim {
+    animation: pokemon-slide-idle 0.5s infinite linear;
+}
+
+.sliding-idle-anim-flipped {
+    animation: pokemon-slide-idle-flipped 0.5s infinite linear;
+}
+
 /* Water Bubbles */
 .water-bubbles {
     position: absolute;
