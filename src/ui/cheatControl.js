@@ -20,6 +20,8 @@ export function showCheatControlModal() {
             <button onclick="window.cheatAction('GameSpeed')" style="padding: 10px; font-size: 14px; background: #9b59b6; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Game Speed</button>
             <button onclick="window.showAddPokemonModal()" style="padding: 10px; font-size: 14px; background: #16a085; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Add Pokemon</button>
             <button onclick="window.cheatAction('GodMode')" style="padding: 10px; font-size: 14px; background: linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3); color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; text-shadow: 1px 1px 2px black;">God Mode</button>
+            <button onclick="window.cheatAction('RerollDailyChallenges')" style="padding: 10px; font-size: 14px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Reroll Daily Challenges</button>
+            <button onclick="window.cheatAction('NextDailyReward')" style="padding: 10px; font-size: 14px; background: #f1c40f; color: black; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Unlock Next Daily Reward</button>
         </div>
     `;
     showModal("Cheat Control", html, "window-cheat-control", "400px");
@@ -247,6 +249,19 @@ export function cheatAction(action) {
     } else if (action === 'BonusCandy') {
         state.stats.whiteCandies = (state.stats.whiteCandies || 0) + 100;
         updateUI();
+    } else if (action === 'RerollDailyChallenges') {
+        if (window.rerollDailyChallenges) {
+            window.rerollDailyChallenges();
+        }
+    } else if (action === 'NextDailyReward') {
+        if (!state.stats.dailyRewards) {
+            state.stats.dailyRewards = { daysClaimed: 0, lastClaimDate: null };
+        }
+        state.stats.dailyRewards.lastClaimDate = null;
+        if (typeof window.updateTopbar === 'function') window.updateTopbar();
+        if (document.getElementById('window-calendar')) {
+            if (typeof window.showCalendar === 'function') window.showCalendar();
+        }
     } else if (action === 'GameSpeed') {
         const speeds = [0.25, 0.5, 1, 2, 5, 10, 25, 50, 100, 500, 1000];
         const currentIndex = speeds.indexOf(state.settings.gameSpeed || 1);
