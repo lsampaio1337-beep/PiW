@@ -2322,12 +2322,36 @@ window.promptExitGame = promptExitGame;
 init();
 
 
-window.showGameAlert = function(message) {
-    let alertBox = document.getElementById('game-alert-toast');
+window.showGameAlert = function(message, attachToElementId = null) {
+    let container = document.body;
+    let isAbsolute = false;
+
+    // If a specific window/container ID is provided, attach the alert relative to it.
+    if (attachToElementId) {
+        const el = document.getElementById(attachToElementId);
+        if (el) {
+            container = el;
+            isAbsolute = true;
+        }
+    }
+
+    // Try to find an existing alert box in the requested container
+    let alertBox = container.querySelector(':scope > #game-alert-toast');
+
     if (!alertBox) {
         alertBox = document.createElement('div');
         alertBox.id = 'game-alert-toast';
-        alertBox.style.position = 'fixed';
+
+        if (isAbsolute) {
+            alertBox.style.position = 'absolute';
+            // Need the container to be relative/absolute so this stays inside
+            if (window.getComputedStyle(container).position === 'static') {
+                container.style.position = 'relative';
+            }
+        } else {
+            alertBox.style.position = 'fixed';
+        }
+
         alertBox.style.top = '20px';
         alertBox.style.left = '50%';
         alertBox.style.transform = 'translateX(-50%)';
@@ -2337,14 +2361,14 @@ window.showGameAlert = function(message) {
         alertBox.style.borderRadius = '10px';
         alertBox.style.border = '2px solid #3498db';
         alertBox.style.boxShadow = '0 4px 15px rgba(0,0,0,0.5)';
-        alertBox.style.zIndex = '9999';
+        alertBox.style.zIndex = '999999';
         alertBox.style.fontSize = '18px';
         alertBox.style.fontWeight = 'bold';
         alertBox.style.textAlign = 'center';
         alertBox.style.pointerEvents = 'none';
         alertBox.style.opacity = '0';
         alertBox.style.transition = 'opacity 0.3s ease-in-out';
-        document.body.appendChild(alertBox);
+        container.appendChild(alertBox);
     }
 
     alertBox.innerHTML = message;

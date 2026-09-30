@@ -179,7 +179,7 @@ function handleTokenPurchase(cost, callback) {
         }, 50);
     } else {
         if (window.showGameAlert) {
-            window.showGameAlert(`Not enough tokens! You need ${cost}.`);
+            window.showGameAlert(`Not enough tokens! You need ${cost}.`, 'window-calendar');
         }
     }
 }
@@ -191,7 +191,7 @@ window.buyTokenItem = function(itemType) {
                 state.backpack.pokeballs["Masterball"] = 0;
             }
             state.backpack.pokeballs["Masterball"] += 1;
-            if (window.showGameAlert) window.showGameAlert("Bought 1x Masterball!");
+            if (window.showGameAlert) window.showGameAlert("Bought 1x Masterball!", 'window-calendar');
         });
     }
 };
@@ -202,7 +202,7 @@ window.buyTokenUnlock = function(unlockKey) {
             state.stats.upgradesUnlocked = {};
         }
         state.stats.upgradesUnlocked[unlockKey] = true;
-        if (window.showGameAlert) window.showGameAlert(`Unlocked ${unlockKey} upgrades!`);
+        if (window.showGameAlert) window.showGameAlert(`Unlocked ${unlockKey} upgrades!`, 'window-calendar');
     });
 };
 
@@ -221,7 +221,7 @@ window.buyTokenItemRandom = function(itemType) {
             if (!state.backpack.stones[itemAwarded]) state.backpack.stones[itemAwarded] = 0;
             state.backpack.stones[itemAwarded] += 1;
         }
-        if (window.showGameAlert) window.showGameAlert(`Got 1x ${itemAwarded}!`);
+        if (window.showGameAlert) window.showGameAlert(`Got 1x ${itemAwarded}!`, 'window-calendar');
     });
 };
 
@@ -270,7 +270,7 @@ window.confirmTokenItemSelect = function(itemName) {
         }
         state.backpack.stones[itemName] += 1;
 
-        if (window.showGameAlert) window.showGameAlert(`Bought 1x ${itemName}!`);
+        if (window.showGameAlert) window.showGameAlert(`Bought 1x ${itemName}!`, 'window-calendar');
         // The handleTokenPurchase already navigates back to 'shop' calendar tab
     });
 };
