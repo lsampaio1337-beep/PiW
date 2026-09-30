@@ -191,10 +191,12 @@ export function renderPokeMarketTab(category) {
         if (btn) {
             if (tab === category) {
                 btn.style.color = 'white';
-                btn.style.background = 'rgba(255, 255, 255, 0.2)';
+                btn.style.background = '#3498db';
+                btn.style.border = '1px solid #3498db';
             } else {
                 btn.style.color = 'rgba(255, 255, 255, 0.7)';
                 btn.style.background = 'transparent';
+                btn.style.border = '1px solid transparent';
             }
         }
     });
@@ -550,10 +552,12 @@ export function renderPokeMarketSellTab(category) {
         if (btn) {
             if (tab === category) {
                 btn.style.color = 'white';
-                btn.style.background = 'rgba(255, 255, 255, 0.2)';
+                btn.style.background = '#3498db';
+                btn.style.border = '1px solid #3498db';
             } else {
                 btn.style.color = 'rgba(255, 255, 255, 0.7)';
                 btn.style.background = 'transparent';
+                btn.style.border = '1px solid transparent';
             }
         }
     });
