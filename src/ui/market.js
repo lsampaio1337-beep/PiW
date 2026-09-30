@@ -283,7 +283,7 @@ export function renderPokeMarketTab(category) {
         return;
     }
 
-    let html = `<div style="display: grid; grid-template-columns: repeat(${cols}, calc(var(--m-width) * 0.145)); gap: calc(var(--m-width) * 0.018); justify-content: center; width: 100%;">`;
+    let html = `<div style="display: grid; grid-template-columns: repeat(${cols}, calc(var(--m-width) * 0.095)); gap: calc(var(--m-width) * 0.012); justify-content: center; width: 100%;">`;
     items.forEach(item => {
         let displayName = item.displayName || item.name;
         if (category === 'potions') displayName = displayName.replace(' Potion', '<br>Potion');
@@ -525,7 +525,7 @@ export function renderPokeMarketSellTab(category) {
     }
 
     if (category === 'pokemon') {
-        let html = `<div style="display: grid; grid-template-columns: repeat(${cols}, calc(var(--m-width) * 0.145)); gap: calc(var(--m-width) * 0.018); justify-content: center; width: 100%;">`;
+        let html = `<div style="display: grid; grid-template-columns: repeat(${cols}, calc(var(--m-width) * 0.095)); gap: calc(var(--m-width) * 0.012); justify-content: center; width: 100%;">`;
 
         const filterName = (document.getElementById('market-filter-name')?.value || '').toLowerCase();
         const filterLevelMin = parseFloat(document.getElementById('market-filter-level-min')?.value);
@@ -631,7 +631,7 @@ export function renderPokeMarketSellTab(category) {
         });
     }
 
-    let html = `<div style="display: grid; grid-template-columns: repeat(${cols}, calc(var(--m-width) * 0.145)); gap: calc(var(--m-width) * 0.018); justify-content: center; width: 100%;">`;
+    let html = `<div style="display: grid; grid-template-columns: repeat(${cols}, calc(var(--m-width) * 0.095)); gap: calc(var(--m-width) * 0.012); justify-content: center; width: 100%;">`;
     items.forEach(item => {
         let displayName = item.displayName || item.name;
         if (category === 'potions') displayName = displayName.replace(' Potion', '<br>Potion');
