@@ -46,6 +46,7 @@ import { updateTopbar } from './ui/topbar.js';
 import { updateSidebar } from './ui/sidebar.js';
 import { updateBattleArena, showDamage, playCombatAnimations, triggerDefeatAnimation, showLoot } from './ui/battle.js';
 import { showCalendar } from './ui/calendar.js';
+import { renderTokenShopHtml, buyTokenItem, buyTokenUnlock, buyTokenItemRandom, showTokenItemSelect, confirmTokenItemSelect } from './ui/tokenShop.js';
 import { showGiftModal } from './ui/gift.js';
 import { showMap, navigateToLocation, showMapTooltip, hideMapTooltip } from './ui/map.js';
 import { showPokedex, showDexEntry, showSmartCaptureMode, toggleSmartCaptureShinyMode, showSmartCaptureBallSelection, selectSmartCaptureBall } from './ui/pokedex.js';
@@ -86,7 +87,6 @@ window.showSettings = showSettings;
 window.exportLog = exportLog;
 window.buyItem = buyItem;
 
-import { renderTokenShopHtml, buyTokenItem, buyTokenUnlock, buyTokenItemRandom, showTokenItemSelect, confirmTokenItemSelect } from './ui/tokenShop.js';
 window.renderTokenShopHtml = renderTokenShopHtml;
 window.buyTokenItem = buyTokenItem;
 window.buyTokenUnlock = buyTokenUnlock;
