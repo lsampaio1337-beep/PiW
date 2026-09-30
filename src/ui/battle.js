@@ -628,7 +628,7 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
     // Create a new container to hold the cloned sprite for absolute positioning in arena
     const defeatContainer = document.createElement('div');
     defeatContainer.style.position = 'absolute';
-    defeatContainer.style.bottom = '20%';
+    defeatContainer.style.bottom = '15%';
     defeatContainer.style.left = '35%';
     defeatContainer.style.display = 'flex';
     defeatContainer.style.alignItems = 'center';
