@@ -2188,10 +2188,13 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
                             <span id="trainer-inner-modal-title">Modal</span>
                             <span id="btn-close-trainer-inner-modal" style="position: absolute; right: 10px; cursor: pointer; color: white; font-weight: bold;">X</span>
                         </div>
-                        <div class="window-content-container" style="flex: 1; display: flex; overflow-y: auto;">
-                            <div id="trainer-inner-modal-content" class="content-panel" style="width: 100%; height: auto; overflow-y: visible;">
+                        <div class="window-content-container" style="flex: 1; display: flex;">
+                            <div class="window-content-scaler" style="width: 100%;">
+                                <div id="trainer-inner-modal-content" class="content-panel" style="width: 100%; height: auto;">
+                                </div>
                             </div>
                         </div>
+                        <div class="window-resize-handle"></div>
                     </div>
                 </div>
             </div>
