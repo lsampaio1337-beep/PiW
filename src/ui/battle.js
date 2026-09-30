@@ -44,10 +44,11 @@ function updateActiveItemsUI() {
         const storageLength = state.storage ? state.storage.length : 0;
         const safeLength = state.safe ? state.safe.length : 0;
         const breedLength = state.breeding ? state.breeding.length : 0;
-        const totalCount = partyLength + storageLength + safeLength + breedLength;
+        const trainLength = state.training ? state.training.length : 0;
+        const totalCount = partyLength + storageLength + safeLength + breedLength + trainLength;
         const maxBox = getCapacity(state, 'box');
 
-        const maxAllowed = maxBox + 6 + 2; // Box capacity + 6 party + 2 daycare
+        const maxAllowed = maxBox; // Base Box capacity handles all Pokemon
         storageCount.textContent = `${totalCount}/${maxAllowed}`;
 
         if (totalCount >= maxAllowed) {
