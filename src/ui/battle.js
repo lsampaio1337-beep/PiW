@@ -605,6 +605,13 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
     // Create a new container to hold the cloned sprite for absolute positioning in arena
     const defeatContainer = document.createElement('div');
     defeatContainer.style.position = 'absolute';
+
+    // Transfer any floating damage nodes to the clone wrapper so they slide out with it
+    const floatingDamages = elEnemySide.querySelectorAll('.floating-damage');
+    floatingDamages.forEach(node => {
+        cloneWrapper.appendChild(node);
+    });
+
     defeatContainer.style.bottom = '20%';
     defeatContainer.style.left = '35%';
     defeatContainer.style.display = 'flex';
@@ -732,6 +739,16 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
         pokemonSprite.style.transform = 'scale(0.3)';
     }
 
+    // Shrink any floating damages too, so they collapse with the pokemon
+    const clonedDamages = cloneWrapper.querySelectorAll('.floating-damage');
+    clonedDamages.forEach(dmg => {
+        dmg.style.transition = 'opacity 2000ms linear, transform 2000ms linear';
+        dmg.style.transformOrigin = 'center center';
+        dmg.style.opacity = '0';
+        // Combining with its existing translate
+        dmg.style.transform = 'translate(-50%, -50%) scale(0.3)';
+    });
+
     let callbackFired = false;
 
     // 2. Change ball sprite at 3 seconds and trigger capture logic
@@ -809,6 +826,7 @@ export function showDamage(target, amount, isCrit, moveName = '', moveType = 'No
     // Layout: [Amount] [Icon] [Name] [Effectiveness] [Crit]
     dmgNode.innerHTML = `<span style="font-weight: bold; font-style: ${isCrit ? 'italic' : 'normal'}; display: flex; align-items: center; justify-content: center; text-shadow: 1px 1px 2px black;">${amount} ${typeIconHtml} ${moveName} ${effText}${critText}</span>`;
 
+    dmgNode.classList.add('floating-damage');
     dmgNode.style.position = 'absolute';
     dmgNode.style.color = typeColor;
     dmgNode.style.fontSize = isCrit ? '24px' : '18px';
