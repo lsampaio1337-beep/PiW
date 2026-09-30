@@ -397,8 +397,13 @@ export function updateBattleArena() {
 
                 if (battleSystem.isSliding) {
                     enemyPokemonSprite.classList.add('sliding-idle-anim');
+                    // Calculate and set animation duration based on slide duration (default 500ms cycle)
+                    const numCycles = Math.ceil(battleSystem.slideDuration / 500);
+                    const newDuration = battleSystem.slideDuration / numCycles;
+                    enemyPokemonSprite.style.animationDuration = `${newDuration}ms`;
                 } else {
                     enemyPokemonSprite.classList.remove('sliding-idle-anim');
+                    enemyPokemonSprite.style.animationDuration = '';
                 }
             }
 
@@ -440,8 +445,13 @@ export function updateBattleArena() {
 
                     if (battleSystem.isSliding) {
                         playerPokemonSprite.classList.add('sliding-idle-anim-flipped');
+                        // Calculate and set animation duration based on slide duration (default 500ms cycle)
+                        const numCycles = Math.ceil(battleSystem.slideDuration / 500);
+                        const newDuration = battleSystem.slideDuration / numCycles;
+                        playerPokemonSprite.style.animationDuration = `${newDuration}ms`;
                     } else {
                         playerPokemonSprite.classList.remove('sliding-idle-anim-flipped');
+                        playerPokemonSprite.style.animationDuration = '';
                     }
                 }
 
@@ -500,6 +510,7 @@ export function updateBattleArena() {
                     playerSpriteWrapper.style.alignItems = 'flex-end';
                     playerPokemonSprite.style.transform = 'scaleX(-1)';
                     playerPokemonSprite.classList.remove('sliding-idle-anim-flipped');
+                    playerPokemonSprite.style.animationDuration = '';
                 }
 
                 const hpContainerPlayer = document.getElementById('player-battle-hp-container');
@@ -544,10 +555,16 @@ export function updateBattleArena() {
              if (hpContainerPlayer) hpContainerPlayer.style.display = 'none';
 
              const enemyPokemonSprite = document.getElementById('enemy-pokemon-sprite');
-             if (enemyPokemonSprite) enemyPokemonSprite.classList.remove('sliding-idle-anim');
+             if (enemyPokemonSprite) {
+                 enemyPokemonSprite.classList.remove('sliding-idle-anim');
+                 enemyPokemonSprite.style.animationDuration = '';
+             }
 
              const playerPokemonSprite = document.getElementById('player-pokemon-sprite');
-             if (playerPokemonSprite) playerPokemonSprite.classList.remove('sliding-idle-anim-flipped');
+             if (playerPokemonSprite) {
+                 playerPokemonSprite.classList.remove('sliding-idle-anim-flipped');
+                 playerPokemonSprite.style.animationDuration = '';
+             }
         }
     }
 
