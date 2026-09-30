@@ -625,6 +625,13 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
         clonedHpContainer.remove();
     }
 
+    // Migrate any floating damage texts from the original wrapper to the clone
+    // so they slide out with the defeated pokemon instead of snapping back to the right
+    const floatingDamages = elEnemySide.querySelectorAll('.floating-damage');
+    floatingDamages.forEach(dmg => {
+        cloneWrapper.appendChild(dmg);
+    });
+
     // Create a new container to hold the cloned sprite for absolute positioning in arena
     const defeatContainer = document.createElement('div');
     defeatContainer.style.position = 'absolute';
@@ -866,6 +873,7 @@ export function showDamage(target, amount, isCrit, moveName = '', moveType = 'No
     if (!img) return;
 
     let dmgNode = document.createElement('div');
+    dmgNode.classList.add('floating-damage');
 
     const typeColor = TYPE_COLORS[moveType] || '#ffffff';
     let critText = isCrit ? ' Crit(1.5x)' : '';
