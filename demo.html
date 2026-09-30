@@ -70,10 +70,11 @@
 <body>
     <script>
         for (let i = 1; i <= 15; i++) {
+            // Use an absolute path or base64. Let's use relative path if we serve it or just simple base64 to be safe.
             document.write(`
                 <div class="container">
                     <div>Animation ${i}</div>
-                    <img src="file://${process.cwd()}/Assets/Pokemon Sprites/Clean/66_Clean.png" class="anim-${i}" />
+                    <img src="./Assets/Pokemon%20Sprites/Clean/66_Clean.png" class="anim-${i}" />
                 </div>
             `);
         }

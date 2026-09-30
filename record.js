@@ -10,6 +10,7 @@ const path = require('path');
         }
     });
     const page = await context.newPage();
+    // Using file protocol but allowing access to local files
     await page.goto('file://' + path.resolve('demo.html'));
 
     // Wait for a few seconds to record
@@ -17,5 +18,9 @@ const path = require('path');
 
     await context.close();
     await browser.close();
-    console.log("Video saved to:", await page.video().path());
+
+    const videoPath = await page.video().path();
+    const fs = require('fs');
+    fs.renameSync(videoPath, path.join(__dirname, 'machop-animations.webm'));
+    console.log("Video saved to:", 'machop-animations.webm');
 })();
