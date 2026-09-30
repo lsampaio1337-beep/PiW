@@ -540,6 +540,7 @@ export function updateBattleArena() {
 export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallback) {
     const arena = document.getElementById('combat-arena');
     const elEnemySide = document.getElementById('enemy-side');
+    const mainViewWindow = document.getElementById('main-view-window');
 
     if (!arena || !elEnemySide) {
         captureCallback();
@@ -607,10 +608,16 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
         }, 500);
     }
 
+    // Calculate ball size based on 20% of the main view window height
+    let ballSizePx = 50; // fallback
+    if (mainViewWindow) {
+        ballSizePx = mainViewWindow.offsetHeight * 0.20;
+    }
+
     // Animation variables
     const slideDuration = 5000;
     const captureCheckDelay = 3000;
-    const targetLeft = '-10vh'; // -$ where $ is 0.5 * 20vh
+    const targetLeft = `-${ballSizePx * 0.5}px`; // -$ where $ is 0.5 * ball width
 
     // 1. Create Pokeball if used
     let ball = null;
@@ -646,8 +653,8 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
         }
 
         ball.style.transform = 'translate(-50%, -50%)';
-        ball.style.width = '20vh';
-        ball.style.height = '20vh';
+        ball.style.width = `${ballSizePx}px`;
+        ball.style.height = `${ballSizePx}px`;
         ball.style.objectFit = 'contain';
         ball.style.zIndex = '51';
         attachTarget.appendChild(ball);
@@ -702,6 +709,7 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
         }
     }, slideDuration);
 }
+
 
 
 
