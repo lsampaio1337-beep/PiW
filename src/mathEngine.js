@@ -283,7 +283,12 @@ function getCurrentCount(state, type) {
             count += value;
         }
     } else if (type === 'box') {
-        count = state.storage ? state.storage.length : 0;
+        const partyLength = state.party ? state.party.length : 0;
+        const storageLength = state.storage ? state.storage.length : 0;
+        const safeLength = state.safe ? state.safe.length : 0;
+        const breedLength = state.breeding ? state.breeding.length : 0;
+        const trainLength = state.training ? state.training.length : 0;
+        count = partyLength + storageLength + safeLength + breedLength + trainLength;
     }
     return count;
 }
