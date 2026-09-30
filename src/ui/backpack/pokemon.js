@@ -187,7 +187,7 @@ export function renderPokemonTab(area) {
             </div>
 
             <!-- Column 2: Storage -->
-            <div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'storage')" style="flex: 4; border: 1px solid #555; padding: 5px; display: flex; flex-direction: column; min-width: 0; min-height: 0; overflow-x: hidden;">
+            <div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, 'storage')" style="flex: 3; border: 1px solid #555; padding: 5px; display: flex; flex-direction: column; min-width: 0; min-height: 0; overflow-x: hidden;">
                 <h4 style="text-align: center; margin-top:0;">Storage</h4>
                 <div id="storage-scroll-container" style="display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: max-content; gap: 5px; overflow-y: auto; overflow-x: hidden; align-content: start; flex-grow: 1; padding-bottom: 20px; min-height: 0;">
     `;

@@ -43,7 +43,7 @@ export function showBackpack() {
                         </svg>
                     </div>
 
-                    <div id="backpack-content-area" onclick="event.stopPropagation()" class="floating-window" style="position: absolute; bottom: 5%; left: 5%; width: 90%; height: auto; max-height: 90%; display: flex; flex-direction: column; z-index: 5; display: none; overflow: hidden;">
+                    <div id="backpack-content-area" onclick="event.stopPropagation()" class="floating-window" style="position: absolute; bottom: 5%; left: 0%; width: 100%; height: auto; max-height: 90%; display: flex; flex-direction: column; z-index: 5; display: none; overflow: hidden;">
                         <div class="window-header" style="position: relative; cursor: default;">
                             <span id="backpack-pocket-title">Pocket</span>
                             <span onclick="document.getElementById('backpack-content-area').style.display='none'" style="position: absolute; right: 10px; cursor: pointer; color: white; font-weight: bold;">X</span>
@@ -60,7 +60,7 @@ export function showBackpack() {
     `;
 
     if (window.showModal) {
-        window.showModal('Backpack', html, 'window-backpack', '1000px', 'auto');
+        window.showModal('Backpack', html, 'window-backpack', '800px', 'auto');
         const win = document.getElementById('window-backpack');
         if (win) {
             // Apply maximum height logic for Backpack based on aspect ratio constraint (800 / 1279 * 1350 = ~844px)
