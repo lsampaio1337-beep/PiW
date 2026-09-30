@@ -70,7 +70,19 @@ export function showBackpack() {
     `;
 
     if (window.showModal) {
-        window.showModal('Backpack', html, 'window-backpack', '800px', 'auto');
+        const titleHtml = `
+            <div style="display: flex; flex-direction: column; width: 100%; text-align: center;">
+                <div>Backpack</div>
+                <div id="backpack-main-nav" style="display: inline-flex; justify-content: center; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px; margin: 5px auto 0 auto;" onmousedown="event.stopPropagation()">
+                    <button id="bp-nav-pokemon" onclick="window.renderBackpackTab('pokemon')" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;">Pokémons</button>
+                    <button id="bp-nav-pokeballs" onclick="window.renderBackpackTab('pokeballs')" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;">Balls</button>
+                    <button id="bp-nav-potions" onclick="window.renderBackpackTab('potions')" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;">Potions</button>
+                    <button id="bp-nav-stones" onclick="window.renderBackpackTab('stones')" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;">Stones</button>
+                    <button id="bp-nav-vitamins" onclick="window.renderBackpackTab('vitamins')" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;">Vitamins</button>
+                </div>
+            </div>
+        `;
+        window.showModal(titleHtml, html, 'window-backpack', '800px', 'auto');
         const win = document.getElementById('window-backpack');
         if (win) {
             // Apply maximum height logic for Backpack based on aspect ratio constraint (800 / 1279 * 1350 = ~844px)
@@ -79,6 +91,8 @@ export function showBackpack() {
         }
     }
 }
+
+import { renderVitaminsTab } from './vitamins.js';
 
 export function renderBackpackTab(tab) {
     const area = document.getElementById('backpack-content-area');
@@ -92,19 +106,49 @@ export function renderBackpackTab(tab) {
         if (window.clearPokemonFilter) window.clearPokemonFilter();
     }
 
+    // Default simple titles
+    let pocketTitleHtml = '';
+
     if (tab === 'pokeballs') {
-        titleSpan.innerText = 'Pokéballs';
+        pocketTitleHtml = 'Pokéballs';
         renderPokeballsTab(innerContent);
     } else if (tab === 'potions') {
-        titleSpan.innerText = 'Potions';
+        pocketTitleHtml = 'Potions';
         renderPotionsTab(innerContent);
-    } else if (tab === 'stones') {
-        titleSpan.innerText = 'Extra';
-        renderStonesTab(innerContent);
     } else if (tab === 'pokemon') {
-        titleSpan.innerText = 'Pokémon';
+        pocketTitleHtml = 'Pokémon';
         renderPokemonTab(innerContent);
+    } else if (tab === 'stones' || tab === 'vitamins') {
+        pocketTitleHtml = `
+            <div style="display: flex; flex-direction: column; width: 100%; text-align: center;">
+                <div>Extra</div>
+                <div style="display: inline-flex; justify-content: center; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px; margin: 5px auto 0 auto;" onmousedown="event.stopPropagation()">
+                    <button onclick="window.renderBackpackTab('stones')" style="${tab === 'stones' ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;">Stones</button>
+                    <button onclick="window.renderBackpackTab('vitamins')" style="${tab === 'vitamins' ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;">Vitamins</button>
+                </div>
+            </div>
+        `;
+        if (tab === 'stones') {
+            renderStonesTab(innerContent);
+        } else {
+            renderVitaminsTab(innerContent);
+        }
     }
+
+    titleSpan.innerHTML = pocketTitleHtml;
+
+    // Update main nav buttons active state
+    const navButtons = ['pokemon', 'pokeballs', 'potions', 'stones', 'vitamins'];
+    navButtons.forEach(navId => {
+        const btn = document.getElementById('bp-nav-' + navId);
+        if (btn) {
+            if (tab === navId) {
+                btn.style.cssText = 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2); border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;';
+            } else {
+                btn.style.cssText = 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;';
+            }
+        }
+    });
 }
 
 export function setActiveItem(type, tierIdx) {
