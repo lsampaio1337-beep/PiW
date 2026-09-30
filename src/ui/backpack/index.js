@@ -53,7 +53,7 @@ export function showBackpack() {
                         </svg>
                     </div>
 
-                    <div id="backpack-content-area" onclick="event.stopPropagation()" class="floating-window" style="position: absolute; bottom: 5%; left: 5%; width: 90%; height: auto; max-height: 90%; display: flex; flex-direction: column; z-index: 5; display: none; overflow: hidden;">
+                    <div id="backpack-content-area" onclick="event.stopPropagation()" class="floating-window" style="position: absolute; bottom: 5%; left: 0%; width: 100%; height: auto; max-height: 90%; display: flex; flex-direction: column; z-index: 5; display: none; overflow: hidden;">
                         <div class="window-header" style="position: relative; cursor: default;">
                             <span id="backpack-pocket-title">Pocket</span>
                             <span onclick="window.closeBackpackPocket()" style="position: absolute; right: 10px; cursor: pointer; color: white; font-weight: bold;">X</span>
