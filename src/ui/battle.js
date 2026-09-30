@@ -13,15 +13,15 @@ function updateActiveItemsUI() {
     const openType = (popup && popup.style.display === 'flex') ? popup.dataset.type : null;
 
     if (potionImg && potionCount && potionCard) {
-        potionCard.style.border = '2px solid #3498db';
-
         if (state.settings.activePotionTier >= 0) {
+            potionCard.style.border = '2px solid #2ecc71'; // Green
             const potionName = state.config.balance.items.potions[state.settings.activePotionTier].name;
             potionImg.src = `./Assets/Items/Potions/${potionName}.png`;
             potionCount.textContent = formatActiveItemQuantity(state.backpack.potions[potionName] || 0);
             potionImg.style.display = 'block';
             potionCount.style.display = 'block';
         } else {
+            potionCard.style.border = '2px solid #3498db'; // Blue
             potionImg.src = "./Assets/Extra/No.png";
             potionCount.textContent = '';
             potionImg.style.display = 'block';
@@ -35,8 +35,6 @@ function updateActiveItemsUI() {
     const storageCard = document.getElementById('smartwatch-storage-card');
 
     if (storageImg && storageCount && storageOverlay && storageCard) {
-        storageCard.style.border = '2px solid #3498db';
-
         const boxTier = state.stats?.upgrades?.boxTier || 0;
         storageImg.src = `./Assets/Items/Upgrades/Storage${Math.max(1, boxTier)}.png`;
 
@@ -52,8 +50,13 @@ function updateActiveItemsUI() {
         storageCount.textContent = `${totalCount}/${maxAllowed}`;
 
         if (totalCount >= maxAllowed) {
+            storageCard.style.border = '2px solid #e74c3c'; // Red
             storageOverlay.style.display = 'block';
+        } else if (totalCount >= maxAllowed * 0.75) {
+            storageCard.style.border = '2px solid orange'; // Orange
+            storageOverlay.style.display = 'none';
         } else {
+            storageCard.style.border = '2px solid #2ecc71'; // Green
             storageOverlay.style.display = 'none';
         }
     }
@@ -63,15 +66,15 @@ function updateActiveItemsUI() {
     const ballCard = document.getElementById('smartwatch-ball-card');
 
     if (ballImg && ballCount && ballCard) {
-        ballCard.style.border = '2px solid #3498db';
-
         if (state.settings.activeBallTier >= 0) {
+            ballCard.style.border = '2px solid #2ecc71'; // Green
             const ballName = state.config.balance.items.pokeballs[state.settings.activeBallTier].name;
             ballImg.src = `./Assets/Items/Balls/${ballName}.png`;
             ballCount.textContent = formatActiveItemQuantity(state.backpack.pokeballs[ballName] || 0);
             ballImg.style.display = 'block';
             ballCount.style.display = 'block';
         } else {
+            ballCard.style.border = '2px solid #3498db'; // Blue
             ballImg.src = "./Assets/Extra/No.png";
             ballCount.textContent = '';
             ballImg.style.display = 'block';
@@ -101,7 +104,7 @@ window.showActiveItemSelection = function(type) {
 
     if (type === 'potion') {
         const isNoActive = state.settings.activePotionTier === -1;
-        const noBorderColor = isNoActive ? '#3498db' : 'orange';
+        const noBorderColor = isNoActive ? '#2ecc71' : '#3498db'; // Green if selected, blue otherwise
         html += `
             <div onclick="window.selectBattleActiveItem('potion', -1)" style="width: 30px; height: 30px; background: rgba(0, 0, 0, 0.6); border: 2px solid ${noBorderColor}; border-radius: 8px; position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer;" title="No Potion">
                 <img src="./Assets/Extra/No.png" style="width: 60%; height: 60%; object-fit: contain;">
@@ -118,7 +121,7 @@ window.showActiveItemSelection = function(type) {
 
             const qty = state.backpack.potions[inventoryName] || 0;
             const isActive = state.settings.activePotionTier === idx;
-            const borderColor = isActive ? '#3498db' : 'orange';
+            const borderColor = isActive ? '#2ecc71' : '#3498db'; // Green if selected, blue otherwise
 
             html += `
                 <div onclick="window.selectBattleActiveItem('potion', ${idx})" style="width: 30px; height: 30px; background: rgba(0, 0, 0, 0.6); border: 2px solid ${borderColor}; border-radius: 8px; position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer;">
@@ -136,7 +139,7 @@ window.showActiveItemSelection = function(type) {
         `;
     } else if (type === 'ball') {
         const isNoActive = state.settings.activeBallTier === -1;
-        const noBorderColor = isNoActive ? '#3498db' : 'orange';
+        const noBorderColor = isNoActive ? '#2ecc71' : '#3498db'; // Green if selected, blue otherwise
         html += `
             <div onclick="window.selectBattleActiveItem('ball', -1)" style="width: 30px; height: 30px; background: rgba(0, 0, 0, 0.6); border: 2px solid ${noBorderColor}; border-radius: 8px; position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer;" title="No Ball">
                 <img src="./Assets/Extra/No.png" style="width: 60%; height: 60%; object-fit: contain;">
@@ -148,7 +151,7 @@ window.showActiveItemSelection = function(type) {
             let b = balls[idx];
             const qty = state.backpack.pokeballs[b.name] || 0;
             const isActive = state.settings.activeBallTier === idx;
-            const borderColor = isActive ? '#3498db' : 'orange';
+            const borderColor = isActive ? '#2ecc71' : '#3498db'; // Green if selected, blue otherwise
 
             html += `
                 <div onclick="window.selectBattleActiveItem('ball', ${idx})" style="width: 30px; height: 30px; background: rgba(0, 0, 0, 0.6); border: 2px solid ${borderColor}; border-radius: 8px; position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer;">
