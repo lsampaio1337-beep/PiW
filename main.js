@@ -2,13 +2,6 @@ const { app, BrowserWindow, ipcMain, screen } = require('electron');
 const path = require('path');
 const fs = require('fs');
 
-// Robust GPU Disabling (Force CPU-only mode)
-app.disableHardwareAcceleration();
-app.commandLine.appendSwitch('disable-gpu');
-app.commandLine.appendSwitch('disable-gpu-compositing');
-app.commandLine.appendSwitch('disable-software-rasterizer');
-app.commandLine.appendSwitch('disable-gpu-rasterization');
-app.commandLine.appendSwitch('disable-gpu-sandbox');
 
 function createWindow() {
     // Get primary display dimensions
@@ -41,7 +34,12 @@ function createWindow() {
         if (process.platform === 'win32') {
             fs.writeFileSync('game_ready.txt', 'ready');
         }
-        win.show();
+
+        // Add a small delay before showing to allow Windows DWM to properly composite the transparent window.
+        // This prevents the "pink screen" or "fully transparent and unclickable" bug on launch.
+        setTimeout(() => {
+            win.show();
+        }, 400);
     });
 
     // Handle click-through messages from the renderer process
