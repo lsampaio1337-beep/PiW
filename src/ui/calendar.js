@@ -123,15 +123,7 @@ window.showCalendar = showCalendar;
 export function showCalendar(tab = 'activities') {
     let html = `<div id="calendar-wrapper" style="display: flex; flex-direction: column; width: 100%; height: 100%; box-sizing: border-box; --m-width: min(90vw, 825px);">`;
 
-    // Tabs
-    html += `
-        <div style="display: flex; gap: calc(var(--m-width) * 0.012); justify-content: center; margin-top: calc(var(--m-width) * 0.012); margin-bottom: calc(var(--m-width) * 0.024); align-items: center;">
-            <button onclick="window.showCalendar('activities')" style="padding: calc(var(--m-width) * 0.012) calc(var(--m-width) * 0.024); font-size: calc(var(--m-width) * 0.019); font-weight: bold; border-radius: 5px; cursor: pointer; ${tab === 'activities' ? 'background: #3498db; color: white;' : 'background: #2c3e50; color: #bdc3c7; border: 1px solid #7f8c8d;'}">Activities</button>
-            <button onclick="window.showCalendar('shop')" style="padding: calc(var(--m-width) * 0.012) calc(var(--m-width) * 0.024); font-size: calc(var(--m-width) * 0.019); font-weight: bold; border-radius: 5px; cursor: pointer; ${tab === 'shop' ? 'background: #3498db; color: white;' : 'background: #2c3e50; color: #bdc3c7; border: 1px solid #7f8c8d;'}">Shop</button>
-            <button onclick="window.giveFreeTokens()" style="padding: calc(var(--m-width) * 0.012) calc(var(--m-width) * 0.024); font-size: calc(var(--m-width) * 0.019); font-weight: bold; border-radius: 5px; cursor: pointer; background: #e67e22; color: white; border: none;">Token</button>
-        </div>
-        <div id="calendar-content-area" style="flex: 1; overflow-y: auto;">
-    `;
+    html += `<div id="calendar-content-area" style="flex: 1; overflow-y: auto; margin-top: 10px;">`;
 
     if (tab === 'activities') {
         if (!state.stats.dailyRewards) {
@@ -239,7 +231,15 @@ export function showCalendar(tab = 'activities') {
 
     html += `</div></div>`;
 
-    showModal("Calendar", html, "window-calendar", "800px", "auto");
+    const titleHtml = `
+        <div style="display: inline-flex; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px;">
+            <button onclick="window.showCalendar('activities')" style="\${tab === 'activities' ? 'background: linear-gradient(to bottom, #2ecc71, #27ae60); color: white; border: 1px solid #2ecc71; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" \${tab !== 'activities' ? 'onmouseover=\\"this.style.color=\\'white\\'; this.style.background=\\'rgba(255,255,255,0.1)\\';\\" onmouseout=\\"this.style.color=\\'rgba(255, 255, 255, 0.7)\\'; this.style.background=\\'transparent\\';\\"' : ''}>Activities</button>
+            <button onclick="window.showCalendar('shop')" style="\${tab === 'shop' ? 'background: linear-gradient(to bottom, #2ecc71, #27ae60); color: white; border: 1px solid #2ecc71; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" \${tab !== 'shop' ? 'onmouseover=\\"this.style.color=\\'white\\'; this.style.background=\\'rgba(255,255,255,0.1)\\';\\" onmouseout=\\"this.style.color=\\'rgba(255, 255, 255, 0.7)\\'; this.style.background=\\'transparent\\';\\"' : ''}>Shop</button>
+            \${tab === 'shop' ? '<button onclick="window.giveFreeTokens()" style="background: linear-gradient(to bottom, #f39c12, #d35400); color: white; border: 1px solid #f39c12; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.2); font-size: 14px; transition: all 0.2s;">Token</button>' : ''}
+        </div>
+    `;
+
+    showModal(titleHtml, html, "window-calendar", "800px", "auto");
 
     // Bind to window for tab switching
     window.showCalendar = showCalendar;
