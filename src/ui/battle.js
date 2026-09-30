@@ -366,6 +366,25 @@ export function updateBattleArena() {
 
             if (hpContainerEnemy) hpContainerEnemy.style.display = 'flex';
 
+            const enemyDataModals = document.getElementById('enemy-data-modals');
+            if (enemyDataModals) {
+                enemyDataModals.style.display = 'flex';
+
+                const levelEl = document.getElementById('enemy-battle-level');
+                if (levelEl) levelEl.innerText = `Lv. ${enemy.level}`;
+
+                const sumivEl = document.getElementById('enemy-battle-sumiv');
+                if (sumivEl && enemy.ivs) {
+                    const sumIV = enemy.ivs.hp + enemy.ivs.atk + enemy.ivs.def + enemy.ivs.spa + enemy.ivs.spd + enemy.ivs.spe;
+                    sumivEl.innerText = `SumIV: ${sumIV}`;
+                }
+
+                const qtierEl = document.getElementById('enemy-battle-qtier');
+                if (qtierEl && enemy.quality) {
+                    qtierEl.innerText = `Q: ${enemy.quality.toFixed(2)}`;
+                }
+            }
+
             if (hpBarEnemy && hpTextEnemy && hpPctEnemy) {
                 const pct = Math.min(100, (enemy.currentHp / enemy.maxHp) * 100);
                 let color = '#3498db';
@@ -488,6 +507,8 @@ export function updateBattleArena() {
         } else if (battleSystem && battleSystem.isSearching) {
             const hpContainerEnemy = document.getElementById('enemy-battle-hp-container');
             if (hpContainerEnemy) hpContainerEnemy.style.display = 'none';
+            const enemyDataModals = document.getElementById('enemy-data-modals');
+            if (enemyDataModals) enemyDataModals.style.display = 'none';
 
             const elEnemySide = document.getElementById('enemy-side');
             if (elEnemySide) {
@@ -551,6 +572,8 @@ export function updateBattleArena() {
              if (elEnemySide) elEnemySide.style.left = '100%';
              const hpContainerEnemy = document.getElementById('enemy-battle-hp-container');
              if (hpContainerEnemy) hpContainerEnemy.style.display = 'none';
+             const enemyDataModals = document.getElementById('enemy-data-modals');
+             if (enemyDataModals) enemyDataModals.style.display = 'none';
              const hpContainerPlayer = document.getElementById('player-battle-hp-container');
              if (hpContainerPlayer) hpContainerPlayer.style.display = 'none';
 
@@ -648,10 +671,17 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
 
     // Briefly hide the original HP container to prevent visual flash before next spawn
     const hpContainerEnemy = document.getElementById('enemy-battle-hp-container');
+    const enemyDataModals = document.getElementById('enemy-data-modals');
     if (hpContainerEnemy) {
         hpContainerEnemy.style.opacity = '0';
         setTimeout(() => {
             if (hpContainerEnemy) hpContainerEnemy.style.opacity = '1';
+        }, 500);
+    }
+    if (enemyDataModals) {
+        enemyDataModals.style.opacity = '0';
+        setTimeout(() => {
+            if (enemyDataModals) enemyDataModals.style.opacity = '1';
         }, 500);
     }
 
@@ -730,6 +760,21 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
         pokemonSprite.style.transformOrigin = 'center center';
         pokemonSprite.style.opacity = '0';
         pokemonSprite.style.transform = 'scale(0.3)';
+    }
+
+    const clonedModals = cloneWrapper.querySelector('#enemy-data-modals');
+    if (clonedModals) {
+        clonedModals.style.transition = 'all 2000ms linear';
+        clonedModals.style.transformOrigin = 'center center';
+        clonedModals.style.left = '50%';
+        clonedModals.style.opacity = '0';
+        clonedModals.style.transform = 'translate(-50%, -50%) scale(0)';
+
+        setTimeout(() => {
+            if (clonedModals && clonedModals.parentNode) {
+                clonedModals.parentNode.removeChild(clonedModals);
+            }
+        }, 2000);
     }
 
     let callbackFired = false;
