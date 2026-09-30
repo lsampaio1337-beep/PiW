@@ -61,11 +61,7 @@ export function openPokeMarketBuy() {
                 <label style="font-weight: bold; font-size: calc(var(--m-width) * 0.022); color: #2ecc71;">Money: $<span id="market-trainer-money">${state.trainer.money.toLocaleString()}</span></label>
             </div>
 
-            <div id="market-buy-qty-container" style="margin-bottom: calc(var(--m-width) * 0.024); display: flex; align-items: stretch; justify-content: center; gap: calc(var(--m-width) * 0.012);">
-                <label style="display: flex; align-items: center; font-weight: bold; font-size: calc(var(--m-width) * 0.022);">Quantity to Buy:</label>
-                <input type="text" id="market-global-qty" value="1" oninput="window.updateMarketPrices()" style="width: calc(var(--m-width) * 0.097); padding: calc(var(--m-width) * 0.006); font-size: calc(var(--m-width) * 0.022); text-align: center; border-radius: 5px; border: 1px solid #ccc; box-sizing: border-box;">
-                <button onclick="if(window.buySetMax) window.buySetMax()" style="display: flex; align-items: center; justify-content: center; padding: 0 calc(var(--m-width) * 0.012); font-size: calc(var(--m-width) * 0.022); font-weight: bold; border-radius: 5px; cursor: pointer; background: #95a5a6; color: white; border: none; box-sizing: border-box; margin: 0;">Max</button>
-            </div>
+
 
             <div id="market-buy-content" style="display: flex; flex-wrap: wrap; gap: calc(var(--m-width) * 0.018); justify-content: center; overflow-y: auto; flex: 1; padding: calc(var(--m-width) * 0.012);">
                 <!-- Cards injected here -->
@@ -87,6 +83,7 @@ export function openPokeMarketBuy() {
                 <button id="market-tab-buy-pokeballs" onclick="window.renderPokeMarketTab('pokeballs')" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;">Balls</button>
                 <button id="market-tab-buy-potions" onclick="window.renderPokeMarketTab('potions')" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;">Potions</button>
                 <button id="market-tab-buy-stones" onclick="window.renderPokeMarketTab('stones')" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;">Stones</button>
+                <button id="market-tab-buy-vitamins" onclick="window.renderPokeMarketTab('vitamins')" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;">Vitamins</button>
                 ${hasUnlockedUpgrades ? `<button id="market-tab-buy-upgrades" onclick="window.renderPokeMarketTab('upgrades')" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;">Upgrades</button>` : ''}
             </div>
         </div>
@@ -131,27 +128,27 @@ export function formatMarketNumber(num) {
     return num.toLocaleString('en-US');
 }
 
-export function updateMarketPrices() {
-    const qtyInput = document.getElementById('market-global-qty');
-    if (!qtyInput) return;
+export function updateBuyItemPrice(itemId, category) {
+    const safeId = itemId.replace(/\s+/g, '');
+    const input = document.getElementById(`buy-qty-${safeId}`);
+    const totalDisplay = document.getElementById(`buy-total-${safeId}`);
+    if (!input || !totalDisplay) return;
 
-    let cleanedStr = qtyInput.value.replace(/\D/g, '');
+    const cards = document.querySelectorAll('.market-item-card');
+    let card = Array.from(cards).find(c => c.dataset.id === itemId && c.dataset.category === category);
+    if (!card) return;
 
+    let baseCost = parseInt(card.dataset.price) || 0;
+
+    let cleanedStr = input.value.replace(/\D/g, '');
     if (cleanedStr === '') {
-        qtyInput.value = '';
-        document.querySelectorAll('.market-item-card').forEach(card => {
-            const priceLabel = card.querySelector('.market-final-price');
-            if (priceLabel) {
-                priceLabel.textContent = '$0';
-            }
-        });
+        input.value = '';
+        totalDisplay.textContent = "$0";
         return;
     }
 
     let qty = parseInt(cleanedStr, 10);
     if (isNaN(qty)) qty = 0;
-
-    let category = document.getElementById('market-buy-content')?.dataset.category;
 
     if (category === 'pokeballs' || category === 'potions') {
         const type = category === 'pokeballs' ? 'balls' : 'potions';
@@ -168,25 +165,19 @@ export function updateMarketPrices() {
         }
     }
 
-    let cursorPosition = qtyInput.selectionStart;
-    let oldLength = qtyInput.value.length;
+    let cursorPosition = input.selectionStart;
+    let oldLength = input.value.length;
     let newStr = formatMarketNumberDown(qty);
-    qtyInput.value = newStr;
+    input.value = newStr;
 
-    let addedCommas = (newStr.match(/,/g) || []).length - (qtyInput.value.substring(0, oldLength).match(/,/g) || []).length;
+    let addedCommas = (newStr.match(/,/g) || []).length - (input.value.substring(0, oldLength).match(/,/g) || []).length;
     let newCursorPosition = cursorPosition + addedCommas;
     try {
-        qtyInput.setSelectionRange(newCursorPosition, newCursorPosition);
+        input.setSelectionRange(newCursorPosition, newCursorPosition);
     } catch (e) {}
 
-    document.querySelectorAll('.market-item-card').forEach(card => {
-        const basePrice = parseInt(card.dataset.price);
-        const finalPrice = basePrice * qty;
-        const priceLabel = card.querySelector('.market-final-price');
-        if (priceLabel) {
-            priceLabel.textContent = '$' + formatMarketNumber(finalPrice);
-        }
-    });
+    let totalVal = qty * baseCost;
+    totalDisplay.textContent = "$" + formatMarketNumber(totalVal);
 }
 
 export function renderPokeMarketTab(category) {
@@ -194,7 +185,7 @@ export function renderPokeMarketTab(category) {
     if (!content) return;
 
     // Highlight active tab
-    const tabs = ['pokeballs', 'potions', 'stones', 'upgrades'];
+    const tabs = ['pokeballs', 'potions', 'stones', 'vitamins', 'upgrades'];
     tabs.forEach(tab => {
         const btn = document.getElementById(`market-tab-buy-${tab}`);
         if (btn) {
@@ -210,10 +201,7 @@ export function renderPokeMarketTab(category) {
 
     content.dataset.category = category;
 
-    const qtyContainer = document.getElementById('market-buy-qty-container');
-    if (qtyContainer) {
-        qtyContainer.style.display = category === 'upgrades' ? 'none' : 'flex';
-    }
+
 
     let items = [];
     let cols = 6;
@@ -277,16 +265,27 @@ export function renderPokeMarketTab(category) {
                 };
             });
     } else if (category === 'stones') {
-        const stonePrice = state.config.balance.items.stones.price;
-        let stoneKeys = Object.keys(state.backpack.stones);
+        let badges = state.stats.badges || 0;
+        let p = badges >= 8 ? 10000 : Math.max(500, 1000 * badges);
+        let stoneKeys = Object.keys(state.backpack.stones).filter(k => !VITAMINS.includes(k));
         stoneKeys.sort((a, b) => a.localeCompare(b));
         items = stoneKeys.map(stoneName => {
-            const isVitamin = VITAMINS.includes(stoneName);
             return {
                 name: stoneName,
-                price: stonePrice,
-                img: isVitamin ? `./Assets/Items/Vitamins/${stoneName}.png` : `./Assets/Items/Stones/${stoneName}.png`,
-                attrLabel: isVitamin ? `Stat Item` : `Evolution Item`
+                price: p,
+                img: `./Assets/Items/Stones/${stoneName}.png`,
+                attrLabel: `Evolution Item`
+            };
+        });
+    } else if (category === 'vitamins') {
+        let badges = state.stats.badges || 0;
+        let p = badges >= 8 ? 10000 : Math.max(2000, 1000 * badges);
+        items = VITAMINS.map(vitaminName => {
+            return {
+                name: vitaminName,
+                price: p,
+                img: `./Assets/Items/Vitamins/${vitaminName}.png`,
+                attrLabel: `Stat Item`
             };
         });
     }
@@ -304,13 +303,9 @@ export function renderPokeMarketTab(category) {
 
         let stock = 0;
         let maxCapStr = "";
-        if (category !== 'upgrades' && state.backpack[category] && state.backpack[category][item.name]) {
-            stock = state.backpack[category][item.name];
-        }
-        if (category === 'pokeballs' || category === 'potions') {
-            const type = category === 'pokeballs' ? 'balls' : 'potions';
-            const capacity = getCapacity(state, type);
-            maxCapStr = ` / ${formatMarketNumberDown(capacity)}`;
+        let targetCategory = category === 'vitamins' ? 'stones' : category;
+        if (category !== 'upgrades' && state.backpack[targetCategory] && state.backpack[targetCategory][item.name]) {
+            stock = state.backpack[targetCategory][item.name];
         }
 
         let buyAction = `window.buyItem('${item.name}', ${item.price}, '${category}')`;
@@ -318,30 +313,52 @@ export function renderPokeMarketTab(category) {
             buyAction = `window.buyItem('${item.name}', ${item.price}, '${category}', '${item.upgradeType}')`;
         }
 
+
+        const safeId = item.name.replace(/\s+/g, '');
+        let buyControls = '';
+        if (category !== 'upgrades') {
+            let maxBtn = (category === 'pokeballs' || category === 'potions') ?
+                `<button onclick="if(window.buySetMaxItem) window.buySetMaxItem('${item.name}', '${category}')" style="display: flex; align-items: center; justify-content: center; padding: 0 calc(var(--m-width) * 0.006); height: calc(var(--m-width) * 0.025); font-size: calc(var(--m-width) * 0.015); font-weight: bold; border-radius: 5px; cursor: pointer; background: #95a5a6; color: white; border: none; box-sizing: border-box; margin: 0;">Max</button>` : '';
+            buyControls = `
+                <div style="display: flex; gap: 5px; margin-top: calc(var(--m-width) * 0.012); align-items: center; justify-content: center; width: 100%;">
+                    <input type="text" id="buy-qty-${safeId}" value="1" oninput="if(window.updateBuyItemPrice) window.updateBuyItemPrice('${item.name}', '${category}')" style="width: calc(var(--m-width) * 0.06); height: calc(var(--m-width) * 0.025); padding: 0 calc(var(--m-width) * 0.006); font-size: calc(var(--m-width) * 0.015); text-align: center; border-radius: 5px; border: 1px solid #ccc; box-sizing: border-box; margin: 0; outline: none;">
+                    ${maxBtn}
+                </div>
+            `;
+        }
+
         html += `
             <div class="market-item-card" data-price="${item.price}" data-id="${item.name}" data-category="${category}"
-                onclick="${buyAction}"
-                style="background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; padding: calc(var(--m-width) * 0.012); text-align: center; cursor: pointer; transition: transform 0.2s; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                style="background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; padding: calc(var(--m-width) * 0.012); text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center;">
                 <div style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; margin-bottom: calc(var(--m-width) * 0.006); height: calc(var(--m-width) * 0.038); display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.1;">${displayName}</div>
                 <img src="${item.img}" style="width: calc(var(--m-width) * 0.072); height: calc(var(--m-width) * 0.072); object-fit: contain; margin-bottom: calc(var(--m-width) * 0.006);">
-                ${category !== 'stones' ? `<div style="font-size: calc(var(--m-width) * 0.014); color: #f1c40f; margin-bottom: calc(var(--m-width) * 0.006); line-height: 1.1;">${item.attrLabel}</div>` : ''}
-                ${category !== 'upgrades' ? `<div style="font-size: calc(var(--m-width) * 0.014); color: #bdc3c7; line-height: 1.1; margin-bottom: calc(var(--m-width) * 0.006);">Stock: ${formatMarketNumberDown(stock)}${maxCapStr}</div>` : ''}
-                <div class="market-final-price" style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; color: #2ecc71; margin-top: calc(var(--m-width) * 0.006); line-height: 1.1;">$${formatMarketNumber(item.price)}</div>
+                ${(category !== 'stones' && category !== 'vitamins') ? `<div style="font-size: calc(var(--m-width) * 0.014); color: #f1c40f; margin-bottom: calc(var(--m-width) * 0.006); line-height: 1.1;">${item.attrLabel}</div>` : ''}
+                ${category !== 'upgrades' ? `<div style="font-size: calc(var(--m-width) * 0.014); color: #bdc3c7; line-height: 1.1; margin-bottom: calc(var(--m-width) * 0.006);">Stock: ${formatMarketNumberDown(stock)}</div>` : ''}
+
+                ${buyControls}
+
+                <div class="market-final-price" id="buy-total-${safeId}" style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; color: #2ecc71; margin-top: calc(var(--m-width) * 0.012); line-height: 1.1;">${formatMarketNumber(item.price)}</div>
+
+                <button onclick="${buyAction}" style="margin-top: calc(var(--m-width) * 0.012); background: #3498db; color: white; border: 2px solid white; border-radius: 8px; padding: 5px 15px; font-size: calc(var(--m-width) * 0.017); font-weight: bold; cursor: pointer; width: 100%;">Buy</button>
             </div>
         `;
     });
     html += `</div>`;
 
     content.innerHTML = html;
-    updateMarketPrices();
+    // Initialization of prices will be handled inherently by value='1' on load
 }
 
 export function buyItem(itemId, baseCost, category, upgradeType = null) {
     let qty = 1;
     if (category !== 'upgrades') {
-        const qtyInput = document.getElementById('market-global-qty');
+        const safeId = itemId.replace(/\s+/g, '');
+        const qtyInput = document.getElementById(`buy-qty-${safeId}`);
         qty = parseMarketQuantity(qtyInput ? qtyInput.value : '1');
-        if (qty <= 0) return;
+        if (qty <= 0) {
+            if(window.showGameAlert) window.showGameAlert("Please enter a valid quantity.");
+            return;
+        }
     }
 
     if (category === 'pokeballs' || category === 'potions') {
@@ -362,10 +379,11 @@ export function buyItem(itemId, baseCost, category, upgradeType = null) {
         if (category === 'upgrades') {
             state.stats.upgrades[upgradeType + 'Tier'] += 1;
         } else {
-            if (state.backpack[category][itemId] === undefined) {
-                 state.backpack[category][itemId] = 0;
+            let targetCategory = category === 'vitamins' ? 'stones' : category;
+            if (state.backpack[targetCategory][itemId] === undefined) {
+                 state.backpack[targetCategory][itemId] = 0;
             }
-            state.backpack[category][itemId] += qty;
+            state.backpack[targetCategory][itemId] += qty;
         }
 
         // Track Daily Challenges
@@ -388,27 +406,20 @@ export function buyItem(itemId, baseCost, category, upgradeType = null) {
 }
 
 
-export function buySetMax() {
-    const qtyInput = document.getElementById('market-global-qty');
-    const content = document.getElementById('market-buy-content');
-    if (!qtyInput || !content) return;
+export function buySetMaxItem(itemId, category) {
+    const safeId = itemId.replace(/\s+/g, '');
+    const input = document.getElementById(`buy-qty-${safeId}`);
 
-    let category = content.dataset.category;
-    if (category === 'upgrades') return; // Should be hidden anyway
+    const cards = document.querySelectorAll('.market-item-card');
+    let card = Array.from(cards).find(c => c.dataset.id === itemId && c.dataset.category === category);
+    if (!card || !input) return;
 
-    let maxQty = 1000000; // default large number
+    let baseCost = parseInt(card.dataset.price) || 0;
+    let maxQty = 1000000;
     let moneyAvailable = state.trainer.money;
 
-    // Find the cheapest item in this category to calculate max based on money, or just calculate space left
-    let minPrice = Infinity;
-    const cards = document.querySelectorAll('.market-item-card');
-    cards.forEach(card => {
-        let price = parseInt(card.dataset.price);
-        if (price < minPrice) minPrice = price;
-    });
-
-    if (minPrice !== Infinity && minPrice > 0) {
-        let affordable = Math.floor(moneyAvailable / minPrice);
+    if (baseCost > 0) {
+        let affordable = Math.floor(moneyAvailable / baseCost);
         if (affordable < maxQty) maxQty = affordable;
     }
 
@@ -424,8 +435,9 @@ export function buySetMax() {
     }
 
     maxQty = Math.max(0, maxQty);
-    qtyInput.value = maxQty > 0 ? formatMarketNumberDown(maxQty) : "0";
-    updateMarketPrices();
+    input.value = maxQty > 0 ? formatMarketNumberDown(maxQty) : "0";
+
+    if (window.updateBuyItemPrice) window.updateBuyItemPrice(itemId, category);
 }
 
 export function formatMarketNumberDown(num) {
@@ -637,25 +649,25 @@ export function renderPokeMarketSellTab(category) {
                 };
             });
     } else if (category === 'stones') {
-        const stonePrice = state.config.balance.items.stones.price;
         let stoneKeysSell = Object.keys(state.backpack.stones).filter(k => !VITAMINS.includes(k));
         stoneKeysSell.sort((a, b) => a.localeCompare(b));
         items = stoneKeysSell.map(stoneName => {
-            const isVitamin = VITAMINS.includes(stoneName);
             return {
                 name: stoneName,
-                buyPrice: stonePrice,
+                buyPrice: 100, // $50 baseSellPrice (since it halves buyPrice)
                 img: `./Assets/Items/Stones/${stoneName}.png`
             };
         });
     } else if (category === 'vitamins') {
-        // Base sell price should be $5. The logic below calculates baseSellPrice = Math.floor(buyPrice * 0.5)
-        // Therefore, we set buyPrice to 10 so that baseSellPrice is 5.
-        const vitaminBuyPrice = 10;
         items = VITAMINS.map(vitaminName => {
+            let sellPrice = 50;
+            if (vitaminName === 'HP Up') sellPrice = 80;
+            if (vitaminName === 'Carbo Speed') sellPrice = 40;
+            if (vitaminName === 'Protein Atk' || vitaminName === 'Calcium SpAtk') sellPrice = 60;
+            if (vitaminName === 'Iron Def' || vitaminName === 'Zinc SpDef') sellPrice = 50;
             return {
                 name: vitaminName,
-                buyPrice: vitaminBuyPrice,
+                buyPrice: sellPrice * 2, // Multiply by 2 so Math.floor(buyPrice * 0.5) equals exact sell price
                 img: `./Assets/Items/Vitamins/${vitaminName}.png`
             };
         });
@@ -951,6 +963,6 @@ window.marketSellSelectedPokemon = function() {
 };
 window.openPokeMarketBuy = openPokeMarketBuy;
 window.renderPokeMarketTab = renderPokeMarketTab;
-window.updateMarketPrices = updateMarketPrices;
-window.buySetMax = buySetMax;
+window.updateBuyItemPrice = updateBuyItemPrice;
+window.buySetMaxItem = buySetMaxItem;
 window.buyItem = buyItem;
