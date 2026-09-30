@@ -561,7 +561,8 @@ window.closeModal = function(windowId) {
 };
 
 
-function showCatchRateModal(showShiny = false, isSubWindow = false) {
+
+export function generateCatchRateHtml(showShiny = false) {
     const balls = ["Pokeball", "Greatball", "Ultraball", "Safariball", "Masterball"];
     const targetTracker = showShiny ? (state.stats.shinyCatchAttempts || {}) : (state.stats.catchAttempts || {});
 
@@ -592,7 +593,7 @@ function showCatchRateModal(showShiny = false, isSubWindow = false) {
 
     let html = `<div style="padding: 2%; box-sizing: border-box;">
     <div style="text-align: center; margin-bottom: 15px;">
-        <button id="btn-catch-rate-shiny-toggle" style="padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer; background: ${showShiny ? '#fbbf24' : '#6b7280'}; color: white; border: none; border-radius: 5px;">
+        <button id="btn-catch-rate-shiny-toggle" onclick="window.showTrainerStats('catch-rate', { showShiny: ${!showShiny} })" style="padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer; background: ${showShiny ? '#fbbf24' : '#6b7280'}; color: white; border: none; border-radius: 5px;">
             ${showShiny ? 'Showing Shiny Attempts (Click to show Normal)' : 'Showing Normal Attempts (Click to show Shiny)'}
         </button>
     </div>
@@ -637,32 +638,25 @@ function showCatchRateModal(showShiny = false, isSubWindow = false) {
     </div>
     </div>`;
 
-    if (isSubWindow) {
-        const innerOverlay = document.getElementById('trainer-inner-modal-overlay');
-        const innerTitle = document.getElementById('trainer-inner-modal-title');
-        const innerContent = document.getElementById('trainer-inner-modal-content');
-        if (innerOverlay && innerTitle && innerContent) {
-            innerTitle.innerText = "Catch Rate Table";
-            innerContent.innerHTML = html;
-            innerContent.style.setProperty('padding', '0px', 'important'); // Keep padding logic
-            innerOverlay.style.display = 'flex';
-        }
-    } else {
-        showModal("Catch Rate Table", html, "window-catch-rate", "800px", "auto");
-        const win = document.getElementById('window-catch-rate');
-        if (win) {
-            const innerContent = win.querySelector('.window-content-container');
-            if (innerContent) {
-                innerContent.style.setProperty('padding', '0px', 'important'); // Let the injected wrapper handle the 5% padding so it sizes nicely
-            }
+    return html;
+}
+
+export function showCatchRateModal(showShiny = false) {
+    const html = generateCatchRateHtml(showShiny);
+    showModal("Catch Rate", html, "window-catch-rate", "800px", "auto");
+    const win = document.getElementById('window-catch-rate');
+    if (win) {
+        const innerContent = win.querySelector('.window-content-container');
+        if (innerContent) {
+            innerContent.style.setProperty('padding', '0px', 'important');
         }
     }
-
+    // We override the button action just for standalone modal use
     setTimeout(() => {
         const btn = document.getElementById('btn-catch-rate-shiny-toggle');
         if (btn) {
             btn.onclick = () => {
-                showCatchRateModal(!showShiny, isSubWindow);
+                showCatchRateModal(!showShiny);
             };
         }
     }, 0);
@@ -2058,238 +2052,208 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
 
     window.updateTopbar = updateTopbar;
 
-    window.showTrainerStats = function() {
+    window.showTrainerStats = function(tab = 'statistics', options = {}) {
         if(checkCombatLock()) return;
-        let badgesHtml = '<div style="display: flex; gap: 10px; margin-top: 10px; justify-content: center; flex-wrap: wrap;">';
-        for (let i = 1; i <= state.trainer.badges; i++) {
-            badgesHtml += `<img src="./Assets/Badges/Badge Kanto ${i}.png" style="width: 40px; height: 40px;" title="Badge ${i}">`;
-        }
-        badgesHtml += '</div>';
 
-        let uniqueSpeciesCaught = 0;
-        if (state.stats.caughtSpecies) {
-            uniqueSpeciesCaught = Object.keys(state.stats.caughtSpecies).length;
-        }
-
-        let playtimeStr = "0h 0m 0s";
-        if (state.stats.playtime) {
-            const totalSec = state.stats.playtime;
-            const h = Math.floor(totalSec / 3600);
-            const m = Math.floor((totalSec % 3600) / 60);
-            const s = totalSec % 60;
-            playtimeStr = `${h}h ${m}m ${s}s`;
-        }
-
-        let highestLevel = 0;
-        let highestQuality = 0;
-        let highestSumIV = 0;
-        let backpackMons = [];
-        if (state.party) backpackMons = backpackMons.concat(state.party);
-        if (state.storage) backpackMons = backpackMons.concat(state.storage);
-        if (state.safe) backpackMons = backpackMons.concat(state.safe);
-
-        backpackMons.forEach(p => {
-            if (!p) return;
-            if (p.level > highestLevel) highestLevel = p.level;
-            if (p.quality > highestQuality) highestQuality = p.quality;
-            if (p.ivs) {
-                const sumIV = (p.ivs.hp || 0) + (p.ivs.atk || 0) + (p.ivs.def || 0) + (p.ivs.spa || 0) + (p.ivs.spd || 0) + (p.ivs.spe || 0);
-                if (sumIV > highestSumIV) highestSumIV = sumIV;
-            }
-        });
-
-        const whiteCandiesClaimed = state.stats.whiteCandies || 0;
-
-        let challengesCompleted = state.stats.completedChallengeIds ? state.stats.completedChallengeIds.length : 0;
-        let maxChallenges = state.config.unlocks ? state.config.unlocks.length : 45;
-
-        let assignmentsCompleted = 0;
-        assignmentsCompleted += (state.stats.qTaskTier || 0);
-        assignmentsCompleted += (state.stats.cTaskTier || 0);
-        assignmentsCompleted += (state.stats.levelTaskTier || 0);
-        assignmentsCompleted += (state.stats.ivTaskTier || 0);
-        assignmentsCompleted += (state.stats.shinySeenTaskTier || 0);
-        assignmentsCompleted += (state.stats.shinyCaughtTaskTier || 0);
-        assignmentsCompleted += (state.stats.finalTaskTier || 0);
-        let maxAssignments = (oakTasks.q ? oakTasks.q.length : 0) +
-                             (oakTasks.c ? oakTasks.c.length : 0) +
-                             (oakTasks.level ? oakTasks.level.length : 0) +
-                             (oakTasks.iv ? oakTasks.iv.length : 0) +
-                             (oakTasks.shinySeen ? oakTasks.shinySeen.length : 0) +
-                             (oakTasks.shinyCaught ? oakTasks.shinyCaught.length : 0) +
-                             (oakTasks.final ? oakTasks.final.length : 0);
-
-        let uniqueShinySpeciesCaught = 0;
-        if (state.stats.caughtShiniesSpecies) {
-            uniqueShinySpeciesCaught = Object.keys(state.stats.caughtShiniesSpecies).length;
-        }
-
-        const trainerHtml = `
-            <div style="position: relative; height: 100%; display: flex; flex-direction: column;">
-                <div style="text-align: left; margin-bottom: 20px;">
-                    <div style="display: flex; gap: 40px; justify-content: space-between;">
-                        <div style="flex: 1;">
-                            <p><b>Time played:</b> ${playtimeStr}</p>
-                            <p><b>Money:</b> $${state.trainer.money.toLocaleString()}</p>
-                        </div>
-                        <div style="flex: 1;">
-                            <p><b>Battles Won:</b> ${(state.stats.battlesWon || 0).toLocaleString()}</p>
-                            <p><b>Faints:</b> ${(state.stats.faints || 0).toLocaleString()}</p>
-                        </div>
-                    </div>
-                    <hr style="margin: 10px 0;">
-                    <div style="display: flex; gap: 40px; justify-content: space-between;">
-                        <div style="flex: 1;">
-                            <p><b>Total Pokémon Captured:</b> ${(state.stats.caught || 0).toLocaleString()}</p>
-                            <p><b>Species Caught:</b> ${uniqueSpeciesCaught} / ${state.config.pokemonData.length}</p>
-                        </div>
-                        <div style="flex: 1;">
-                            <p><b>Shinies Caught:</b> ${(state.stats.shiniesCaught || 0).toLocaleString()}</p>
-                            <p><b>Shiny Species Caught:</b> ${uniqueShinySpeciesCaught} / ${state.config.pokemonData.length}</p>
-                        </div>
-                    </div>
-                    <hr style="margin: 10px 0;">
-                    <div style="display: flex; gap: 40px; justify-content: space-between;">
-                        <div style="flex: 1;">
-                            <p><b>Jigglypuff Grains Used:</b> ${(state.stats.jigglypuffGrainsUsed || 0).toLocaleString()}</p>
-                            <p><b>Daily Rewards Collected:</b> ${(state.stats.dailyRewards ? state.stats.dailyRewards.daysClaimed : 0).toLocaleString()}</p>
-                            <p><b>Professor Oak Assignments Completed:</b> ${assignmentsCompleted}/${maxAssignments}</p>
-                        </div>
-                        <div style="flex: 1;">
-                            <p><b>White Candies Claimed:</b> ${(whiteCandiesClaimed || 0).toLocaleString()}</p>
-                            <p><b>Tokens Earned:</b> ${(state.stats.tokensEarned || 0).toLocaleString()}</p>
-                            <p><b>Progress Challenge Completed:</b> ${challengesCompleted}/${maxChallenges}</p>
-                        </div>
-                    </div>
-                    <hr style="margin: 10px 0;">
-                    <div style="display: flex; gap: 40px; justify-content: space-between;">
-                        <div style="flex: 1;">
-                            <p><b>Highest Level on Backpack:</b> ${highestLevel}</p>
-                            <p><b>Highest Quality on Backpack:</b> ${highestQuality}</p>
-                            <p><b>Highest IV Sum on Backpack:</b> ${highestSumIV}</p>
-                        </div>
-                        <div style="flex: 1;">
-                            <p><b>Highest Level Captured:</b> ${state.stats.highestLevelCaptured || 0}</p>
-                            <p><b>Highest Quality Captured:</b> ${state.stats.highestQualityCaptured || 0}</p>
-                            <p><b>Highest IV Sum Captured:</b> ${state.stats.highestSumIVCaptured || 0}</p>
-                        </div>
-                    </div>
-                </div>
-                <div style="margin-top: auto; text-align: center; display: flex; gap: 10px; justify-content: center; padding-top: 15px;">
-                    <button id="btn-trainer-badges" style="padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer; background: #3b82f6; color: white; border: none; border-radius: 5px;">Badges</button>
-                    <button id="btn-catch-rate" style="padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer; background: #3b82f6; color: white; border: none; border-radius: 5px;">Catch Rate Table</button>
-                    <button id="btn-trainer-upgrades" style="padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer; background: #3b82f6; color: white; border: none; border-radius: 5px;">Upgrades</button>
-                </div>
-
-                <!-- Inner Modal Overlay specifically for the Trainer window -->
-                <div id="trainer-inner-modal-overlay" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 10; align-items: center; justify-content: center; border-radius: inherit;">
-                    <div id="trainer-inner-modal" class="floating-window" style="width: 90%; height: auto; max-height: 90%; display: flex; flex-direction: column; overflow: hidden; pointer-events: auto; position: relative; left: auto; top: auto; transform: none; min-width: auto; min-height: auto;">
-                        <div class="window-header" style="position: relative; cursor: default;">
-                            <span id="trainer-inner-modal-title">Modal</span>
-                            <span id="btn-close-trainer-inner-modal" style="position: absolute; right: 10px; cursor: pointer; color: white; font-weight: bold;">X</span>
-                        </div>
-                        <div class="window-content-container" style="flex: 1; display: flex; overflow-y: auto;">
-                            <div id="trainer-inner-modal-content" class="content-panel" style="width: 100%; height: auto; overflow-y: visible;">
-                            </div>
-                        </div>
-                    </div>
+        let titleHtml = `
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
+                <div style="font-weight: bold; font-size: 18px; color: white;">Trainer</div>
+                <div style="display: inline-flex; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px;">
+                    <button onclick="window.showTrainerStats('statistics')" style="${tab === 'statistics' ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmousedown="event.stopPropagation()">Statistics</button>
+                    <button onclick="window.showTrainerStats('badges')" style="${tab === 'badges' ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmousedown="event.stopPropagation()">Badges</button>
+                    <button onclick="window.showTrainerStats('catch-rate')" style="${tab === 'catch-rate' ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmousedown="event.stopPropagation()">Catch Rate</button>
+                    <button onclick="window.showTrainerStats('upgrades')" style="${tab === 'upgrades' ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmousedown="event.stopPropagation()">Upgrades</button>
                 </div>
             </div>
         `;
 
-        showModal("Trainer", trainerHtml, "window-trainer");
+        let contentHtml = '';
 
-        setTimeout(() => {
-            const innerOverlay = document.getElementById('trainer-inner-modal-overlay');
-            const closeInnerBtn = document.getElementById('btn-close-trainer-inner-modal');
-            if (closeInnerBtn && innerOverlay) {
-                closeInnerBtn.onclick = () => {
-                    innerOverlay.style.display = 'none';
-                };
+        if (tab === 'statistics') {
+            let uniqueSpeciesCaught = 0;
+            if (state.stats.caughtSpecies) {
+                uniqueSpeciesCaught = Object.keys(state.stats.caughtSpecies).length;
             }
 
-            const btnCatchRate = document.getElementById('btn-catch-rate');
-            if (btnCatchRate) {
-                btnCatchRate.onclick = () => {
-                    if(!checkCombatLock()) showCatchRateModal(false, true); // true for subWindow mode
-                };
+            let playtimeStr = "0h 0m 0s";
+            if (state.stats.playtime) {
+                const totalSec = state.stats.playtime;
+                const h = Math.floor(totalSec / 3600);
+                const m = Math.floor((totalSec % 3600) / 60);
+                const s = totalSec % 60;
+                playtimeStr = `${h}h ${m}m ${s}s`;
             }
 
-            const btnTrainerBadges = document.getElementById('btn-trainer-badges');
-            if (btnTrainerBadges) {
-                btnTrainerBadges.onclick = () => {
-                    if(!checkCombatLock()) {
-                        const innerOverlay = document.getElementById('trainer-inner-modal-overlay');
-                        const innerTitle = document.getElementById('trainer-inner-modal-title');
-                        const innerContent = document.getElementById('trainer-inner-modal-content');
-                        if (innerOverlay && innerTitle && innerContent) {
-                            innerTitle.innerText = "Badges";
-                            innerContent.innerHTML = `
-                                <div style="text-align: center; margin-bottom: 20px;">
-                                    ${badgesHtml}
+            let highestLevel = 0;
+            let highestQuality = 0;
+            let highestSumIV = 0;
+            let backpackMons = [];
+            if (state.party) backpackMons = backpackMons.concat(state.party);
+            if (state.storage) backpackMons = backpackMons.concat(state.storage);
+            if (state.safe) backpackMons = backpackMons.concat(state.safe);
+
+            backpackMons.forEach(p => {
+                if (!p) return;
+                if (p.level > highestLevel) highestLevel = p.level;
+                if (p.quality > highestQuality) highestQuality = p.quality;
+                if (p.ivs) {
+                    const sumIV = (p.ivs.hp || 0) + (p.ivs.atk || 0) + (p.ivs.def || 0) + (p.ivs.spa || 0) + (p.ivs.spd || 0) + (p.ivs.spe || 0);
+                    if (sumIV > highestSumIV) highestSumIV = sumIV;
+                }
+            });
+
+            const whiteCandiesClaimed = state.stats.whiteCandies || 0;
+
+            let challengesCompleted = state.stats.completedChallengeIds ? state.stats.completedChallengeIds.length : 0;
+            let maxChallenges = state.config.unlocks ? state.config.unlocks.length : 45;
+
+            let assignmentsCompleted = 0;
+            assignmentsCompleted += (state.stats.qTaskTier || 0);
+            assignmentsCompleted += (state.stats.cTaskTier || 0);
+            assignmentsCompleted += (state.stats.levelTaskTier || 0);
+            assignmentsCompleted += (state.stats.ivTaskTier || 0);
+            assignmentsCompleted += (state.stats.shinySeenTaskTier || 0);
+            assignmentsCompleted += (state.stats.shinyCaughtTaskTier || 0);
+            assignmentsCompleted += (state.stats.finalTaskTier || 0);
+            let maxAssignments = (oakTasks.q ? oakTasks.q.length : 0) +
+                                 (oakTasks.c ? oakTasks.c.length : 0) +
+                                 (oakTasks.level ? oakTasks.level.length : 0) +
+                                 (oakTasks.iv ? oakTasks.iv.length : 0) +
+                                 (oakTasks.shinySeen ? oakTasks.shinySeen.length : 0) +
+                                 (oakTasks.shinyCaught ? oakTasks.shinyCaught.length : 0) +
+                                 (oakTasks.final ? oakTasks.final.length : 0);
+
+            let uniqueShinySpeciesCaught = 0;
+            if (state.stats.caughtShiniesSpecies) {
+                uniqueShinySpeciesCaught = Object.keys(state.stats.caughtShiniesSpecies).length;
+            }
+
+            contentHtml = `
+                <div style="position: relative; height: 100%; display: flex; flex-direction: column;">
+                    <div style="text-align: left; margin-bottom: 20px;">
+                        <div style="display: flex; gap: 40px; justify-content: space-between;">
+                            <div style="flex: 1;">
+                                <p><b>Time played:</b> ${playtimeStr}</p>
+                                <p><b>Money:</b> $${state.trainer.money.toLocaleString()}</p>
+                            </div>
+                            <div style="flex: 1;">
+                                <p><b>Battles Won:</b> ${(state.stats.battlesWon || 0).toLocaleString()}</p>
+                                <p><b>Faints:</b> ${(state.stats.faints || 0).toLocaleString()}</p>
+                            </div>
+                        </div>
+                        <hr style="margin: 10px 0;">
+                        <div style="display: flex; gap: 40px; justify-content: space-between;">
+                            <div style="flex: 1;">
+                                <p><b>Total Pokémon Captured:</b> ${(state.stats.caught || 0).toLocaleString()}</p>
+                                <p><b>Species Caught:</b> ${uniqueSpeciesCaught} / ${state.config.pokemonData.length}</p>
+                            </div>
+                            <div style="flex: 1;">
+                                <p><b>Shinies Caught:</b> ${(state.stats.shiniesCaught || 0).toLocaleString()}</p>
+                                <p><b>Shiny Species Caught:</b> ${uniqueShinySpeciesCaught} / ${state.config.pokemonData.length}</p>
+                            </div>
+                        </div>
+                        <hr style="margin: 10px 0;">
+                        <div style="display: flex; gap: 40px; justify-content: space-between;">
+                            <div style="flex: 1;">
+                                <p><b>Jigglypuff Grains Used:</b> ${(state.stats.jigglypuffGrainsUsed || 0).toLocaleString()}</p>
+                                <p><b>Daily Rewards Collected:</b> ${(state.stats.dailyRewards ? state.stats.dailyRewards.daysClaimed : 0).toLocaleString()}</p>
+                                <p><b>Professor Oak Assignments Completed:</b> ${assignmentsCompleted}/${maxAssignments}</p>
+                            </div>
+                            <div style="flex: 1;">
+                                <p><b>White Candies Claimed:</b> ${(whiteCandiesClaimed || 0).toLocaleString()}</p>
+                                <p><b>Tokens Earned:</b> ${(state.stats.tokensEarned || 0).toLocaleString()}</p>
+                                <p><b>Progress Challenge Completed:</b> ${challengesCompleted}/${maxChallenges}</p>
+                            </div>
+                        </div>
+                        <hr style="margin: 10px 0;">
+                        <div style="display: flex; gap: 40px; justify-content: space-between;">
+                            <div style="flex: 1;">
+                                <p><b>Highest Level on Backpack:</b> ${highestLevel}</p>
+                                <p><b>Highest Quality on Backpack:</b> ${highestQuality}</p>
+                                <p><b>Highest IV Sum on Backpack:</b> ${highestSumIV}</p>
+                            </div>
+                            <div style="flex: 1;">
+                                <p><b>Highest Level Captured:</b> ${state.stats.highestLevelCaptured || 0}</p>
+                                <p><b>Highest Quality Captured:</b> ${state.stats.highestQualityCaptured || 0}</p>
+                                <p><b>Highest IV Sum Captured:</b> ${state.stats.highestSumIVCaptured || 0}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        } else if (tab === 'badges') {
+            let badgesHtml = '<div style="display: flex; gap: 10px; margin-top: 10px; justify-content: center; flex-wrap: wrap;">';
+            for (let i = 1; i <= state.trainer.badges; i++) {
+                badgesHtml += `<img src="./Assets/Badges/Badge Kanto ${i}.png" style="width: 40px; height: 40px;" title="Badge ${i}">`;
+            }
+            badgesHtml += '</div>';
+
+            contentHtml = `
+                <div style="text-align: center; margin-bottom: 20px;">
+                    ${badgesHtml}
+                </div>
+            `;
+        } else if (tab === 'catch-rate') {
+            const showShiny = options.showShiny || false;
+            contentHtml = generateCatchRateHtml(showShiny);
+        } else if (tab === 'upgrades') {
+            contentHtml = '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 10px; padding: 10px;">';
+
+            if (state.stats.upgrades) {
+                const upgradeTypes = [
+                    { key: 'ballsTier', configKey: 'ballPocket' },
+                    { key: 'potionsTier', configKey: 'potionSatchel' },
+                    { key: 'boxTier', configKey: 'pokemonBox' },
+                    { key: 'glassTier', configKey: 'glass' },
+                    { key: 'smartwatchTier', configKey: 'smartwatch' },
+                    { key: 'speedTier', configKey: 'speed' },
+                    { key: 'lootTier', configKey: 'loot' }
+                ];
+
+                upgradeTypes.forEach(type => {
+                    const tier = state.stats.upgrades[type.key] || 0;
+                    if (tier > 0) {
+                        // Show the currently purchased tier (index tier - 1)
+                        const configItem = state.config.balance.expansions[type.configKey][tier - 1];
+                        if (configItem) {
+                            const displayName = configItem.displayName || configItem.name;
+                            contentHtml += `
+                                <div style="background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; padding: 10px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <img src="./Assets/Items/Upgrades/${configItem.name}.png" style="width: 50px; height: 50px; object-fit: contain; margin-bottom: 5px;" alt="${displayName}">
+                                    <div style="font-size: 12px; font-weight: bold; color: white; line-height: 1.1; word-wrap: break-word;">${displayName}</div>
                                 </div>
                             `;
-                            innerContent.style.setProperty('padding', '20px', 'important');
-                            innerOverlay.style.display = 'flex';
                         }
                     }
-                };
+                });
             }
 
-            const btnTrainerUpgrades = document.getElementById('btn-trainer-upgrades');
-            if (btnTrainerUpgrades) {
-                btnTrainerUpgrades.onclick = () => {
-                    if(!checkCombatLock()) {
-                        let upgradesHtml = '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 10px; padding: 10px;">';
+            contentHtml += '</div>';
 
-                        if (state.stats.upgrades) {
-                            const upgradeTypes = [
-                                { key: 'ballsTier', configKey: 'ballPocket' },
-                                { key: 'potionsTier', configKey: 'potionSatchel' },
-                                { key: 'boxTier', configKey: 'pokemonBox' },
-                                { key: 'glassTier', configKey: 'glass' },
-                                { key: 'smartwatchTier', configKey: 'smartwatch' },
-                                { key: 'speedTier', configKey: 'speed' },
-                                { key: 'lootTier', configKey: 'loot' }
-                            ];
-
-                            upgradeTypes.forEach(type => {
-                                const tier = state.stats.upgrades[type.key] || 0;
-                                if (tier > 0) {
-                                    // Show the currently purchased tier (index tier - 1)
-                                    const configItem = state.config.balance.expansions[type.configKey][tier - 1];
-                                    if (configItem) {
-                                        const displayName = configItem.displayName || configItem.name;
-                                        upgradesHtml += `
-                                            <div style="background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; padding: 10px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                                                <img src="./Assets/Items/Upgrades/${configItem.name}.png" style="width: 50px; height: 50px; object-fit: contain; margin-bottom: 5px;" alt="${displayName}">
-                                                <div style="font-size: 12px; font-weight: bold; color: white; line-height: 1.1; word-wrap: break-word;">${displayName}</div>
-                                            </div>
-                                        `;
-                                    }
-                                }
-                            });
-                        }
-
-                        upgradesHtml += '</div>';
-
-                        if (upgradesHtml === '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 10px; padding: 10px;"></div>') {
-                            upgradesHtml = '<div style="text-align: center; padding: 20px; font-style: italic; color: #ccc;">No upgrades purchased yet.</div>';
-                        }
-
-                        const innerOverlay = document.getElementById('trainer-inner-modal-overlay');
-                        const innerTitle = document.getElementById('trainer-inner-modal-title');
-                        const innerContent = document.getElementById('trainer-inner-modal-content');
-                        if (innerOverlay && innerTitle && innerContent) {
-                            innerTitle.innerText = "Upgrades";
-                            innerContent.innerHTML = upgradesHtml;
-                            innerContent.style.setProperty('padding', '20px', 'important');
-                            innerOverlay.style.display = 'flex';
-                        }
-                    }
-                };
+            if (contentHtml === '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 10px; padding: 10px;"></div>') {
+                contentHtml = '<div style="text-align: center; padding: 20px; font-style: italic; color: #ccc;">No upgrades purchased yet.</div>';
             }
-        }, 0);
+        }
+
+        showModal(titleHtml, contentHtml, "window-trainer");
+
+        if (tab === 'catch-rate') {
+            const win = document.getElementById('window-trainer');
+            if (win) {
+                const innerContent = win.querySelector('.window-content-container');
+                if (innerContent) {
+                    innerContent.style.setProperty('padding', '0px', 'important');
+                }
+            }
+        } else {
+            const win = document.getElementById('window-trainer');
+            if (win) {
+                const innerContent = win.querySelector('.window-content-container');
+                if (innerContent) {
+                    innerContent.style.removeProperty('padding'); // Restore default padding if needed, although modal re-renders often reset it. Wait, if it resets, it's fine.
+                }
+            }
+        }
     };
 
     bindBtn('btn-stats', () => {
