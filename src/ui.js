@@ -1,3 +1,4 @@
+import { getCapacity } from "./mathEngine.js";
 import { WindowManager } from './windowManager.js';
 import { setupClickThrough } from './clickThrough.js';
 import { getChallengeData } from './ui/topbar.js';
@@ -2219,11 +2220,11 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
                             const displayName = configItem.displayName || configItem.name;
                             let description = configItem.description || '';
                             if (type.configKey === 'ballPocket') {
-                                description = `Ball Stock Capacity: ${window.mathEngine.getCapacity(state, 'balls')}`;
+                                description = `Ball Stock Capacity: ${getCapacity(state, 'balls')}`;
                             } else if (type.configKey === 'potionSatchel') {
-                                description = `Potion Stock Capacity: ${window.mathEngine.getCapacity(state, 'potions')}`;
+                                description = `Potion Stock Capacity: ${getCapacity(state, 'potions')}`;
                             } else if (type.configKey === 'pokemonBox') {
-                                description = `Pokemon Capacity in Backpack: ${window.mathEngine.getCapacity(state, 'storage')}`;
+                                description = `Pokemon Capacity in Backpack: ${getCapacity(state, 'box')}`;
                             } else if (type.configKey === 'speed') {
                                 description = `Encounter time decreased in ${configItem.increment}`;
                             } else if (type.configKey === 'loot') {
