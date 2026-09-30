@@ -577,8 +577,8 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
         ball.style.left = '50%';
         ball.style.top = '50%';
         ball.style.transform = 'translate(-50%, -50%)';
-        ball.style.width = '10vh';
-        ball.style.height = '10vh';
+        ball.style.width = '15px';
+        ball.style.height = '15px';
         ball.style.objectFit = 'contain';
         ball.style.zIndex = '51';
 
