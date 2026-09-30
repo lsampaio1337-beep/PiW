@@ -339,9 +339,7 @@ export function renderPokeMarketTab(category) {
 
                 ${buyControls}
 
-                <div class="market-final-price" id="buy-total-${safeId}" style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; color: #2ecc71; margin-top: calc(var(--m-width) * 0.012); line-height: 1.1;">${formatMarketNumber(item.price)}</div>
-
-                <button onclick="${buyAction}" style="margin-top: calc(var(--m-width) * 0.012); background: #3498db; color: white; border: 2px solid white; border-radius: 8px; padding: 5px 15px; font-size: calc(var(--m-width) * 0.017); font-weight: bold; cursor: pointer; width: 100%;">Buy</button>
+                <button class="market-final-price" id="buy-total-${safeId}" onclick="${buyAction}" style="margin-top: calc(var(--m-width) * 0.012); background: #2ecc71; color: white; border: 2px solid white; border-radius: 8px; padding: 5px 15px; font-size: calc(var(--m-width) * 0.017); font-weight: bold; cursor: pointer; width: 100%;">${formatMarketNumber(item.price)}</button>
             </div>
         `;
     });
