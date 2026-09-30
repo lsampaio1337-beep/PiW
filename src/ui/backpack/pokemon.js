@@ -51,7 +51,7 @@ function renderSlotUI(p, listName, origIndex, isDraggable) {
     let imageHtml = `<img src="${finalImgSrc}" class="${glowClass}" style="height: 100%; width: 100%; object-fit: contain; z-index: 1;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">`;
 
     return `
-        <div class="${slotClass}" ${dataAttr} style="background: #2c3e50; border: 2px solid #00ffff; border-radius: 10px; aspect-ratio: 1 / 1.5; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 4%; box-sizing: border-box; position: relative; container-type: inline-size; overflow: hidden; ${cursorStyle}; width: 100%; ${selectionStyle}" title="Q=${p.quality.toFixed(2)} & ∑IV=${sumIV}" ${dragAttr} ${clickHandler}>
+        <div class="${slotClass}" ${dataAttr} style="background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; aspect-ratio: 1 / 1.5; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 4%; box-sizing: border-box; position: relative; container-type: inline-size; overflow: hidden; ${cursorStyle}; width: 100%; ${selectionStyle}" title="Q=${p.quality.toFixed(2)} & ∑IV=${sumIV}" ${dragAttr} ${clickHandler}>
             <span style="position: absolute; top: 0; left: 0; font-size: 12cqw; background: black; border-bottom-right-radius: 5px; padding: 2cqw; z-index: 2;">${p._tag || ''}</span>
             <div onclick="event.stopPropagation(); window.showPokemonStatsByUuid('${p.uuid}')" style="position: absolute; top: 2cqw; right: 2cqw; cursor: pointer; background: #34495e; color: white; border-radius: 50%; width: 20cqw; height: 20cqw; text-align: center; display: flex; align-items: center; justify-content: center; font-size: 14cqw; font-weight: bold; z-index: 3;" title="View Info">i</div>
 
@@ -176,7 +176,7 @@ export function renderPokemonTab(area) {
             if (i === 6 && window.pokemonFilters.breedableOnly) {
                 activeBreedStyle = ' border: 2px solid #00ff00; background: rgba(0, 255, 0, 0.2); font-weight: bold; color: #fff;';
             }
-            let extraAttrs = (i === 6) ? `onclick="window.clickEmptyBreedSlot()" style="border: 1px dashed #777; aspect-ratio: 1 / 1.5; display: flex; align-items: center; justify-content: center; container-type: inline-size; color: #777; box-sizing: border-box; cursor: pointer;${activeBreedStyle}"` : `style="border: 1px dashed #777; aspect-ratio: 1 / 1.5; display: flex; align-items: center; justify-content: center; container-type: inline-size; color: #777; box-sizing: border-box;"`;
+            let extraAttrs = (i === 6) ? `onclick="window.clickEmptyBreedSlot()" style="border: 1px dashed #3498db; aspect-ratio: 1 / 1.5; display: flex; align-items: center; justify-content: center; container-type: inline-size; color: #777; box-sizing: border-box; cursor: pointer;${activeBreedStyle}"` : `style="border: 1px dashed #3498db; aspect-ratio: 1 / 1.5; display: flex; align-items: center; justify-content: center; container-type: inline-size; color: #777; box-sizing: border-box;"`;
             content += `<div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, '${dropTarget}')" ${extraAttrs}><span style="font-size: 15cqw; text-align: center;">${label}</span></div>`;
         }
     }
@@ -196,7 +196,7 @@ export function renderPokemonTab(area) {
         let p = state.storage[i];
         content += renderSlotUI(p, 'storage', i, true);
     }
-    content += `<div style="border: 1px dashed #777; aspect-ratio: 1 / 1.5; display: flex; align-items: center; justify-content: center; font-size: 20px; box-sizing: border-box;" title="Empty Slot">+</div>`;
+    content += `<div style="border: 1px dashed #3498db; aspect-ratio: 1 / 1.5; display: flex; align-items: center; justify-content: center; font-size: 20px; box-sizing: border-box;" title="Empty Slot">+</div>`;
 
     content += `
                 </div>
@@ -212,7 +212,7 @@ export function renderPokemonTab(area) {
         let p = state.safe[i];
         content += renderSlotUI(p, 'safe', i, true);
     }
-    content += `<div style="border: 1px dashed #777; aspect-ratio: 1 / 1.5; display: flex; align-items: center; justify-content: center; font-size: 20px; cursor: pointer; box-sizing: border-box;" title="Empty Slot">+</div>`;
+    content += `<div style="border: 1px dashed #3498db; aspect-ratio: 1 / 1.5; display: flex; align-items: center; justify-content: center; font-size: 20px; cursor: pointer; box-sizing: border-box;" title="Empty Slot">+</div>`;
 
     content += `
                 </div>
@@ -742,7 +742,7 @@ window.openDittoTransformModal = function(uuid) {
 
         let imgSrc = `Assets/Pokemon Sprites/Natural/${p.qualityName === 'Shiny' ? id + '_shiny' : id}.png`;
         allPokemonHtml += `
-            <div id="ditto-transform-option-${id}" class="ditto-transform-option" onclick="window.selectDittoTransformTarget('${id}')" style="cursor: pointer; background: #2c3e50; border: 2px solid #00ffff; border-radius: 10px; padding: 10px; text-align: center; transition: all 0.1s;">
+            <div id="ditto-transform-option-${id}" class="ditto-transform-option" onclick="window.selectDittoTransformTarget('${id}')" style="cursor: pointer; background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; padding: 10px; text-align: center; transition: all 0.1s;">
                 <img src="${imgSrc}" style="width: 50px; height: 50px; object-fit: contain;">
                 <div style="color: white; font-size: 12px; margin-top: 5px;">${pd.name}</div>
             </div>
