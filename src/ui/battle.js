@@ -539,93 +539,152 @@ export function updateBattleArena() {
 
 export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallback) {
     const arena = document.getElementById('combat-arena');
-    if (!arena) {
+    const elEnemySide = document.getElementById('enemy-side');
+
+    if (!arena || !elEnemySide) {
         captureCallback();
         return;
     }
 
-    // Hide original enemy sprite container momentarily until next slide in
-    const elEnemySide = document.getElementById('enemy-side');
-    if (elEnemySide) {
-         elEnemySide.style.opacity = '0';
-         setTimeout(() => {
-             if (elEnemySide) elEnemySide.style.opacity = '1';
-         }, 3000);
+    // Duplicate the enemy sprite wrapper for the defeat animation
+    const originalSpriteWrapper = document.getElementById('enemy-sprite-wrapper');
+    if (!originalSpriteWrapper) {
+        captureCallback();
+        return;
     }
 
-    // Also wipe out enemy HP container and stats
+    const cloneWrapper = originalSpriteWrapper.cloneNode(true);
+    // Remove the cloned HP container so it doesn't show in the duplicate
+    const clonedHpContainer = cloneWrapper.querySelector('#enemy-battle-hp-container');
+    if (clonedHpContainer) {
+        clonedHpContainer.remove();
+    }
+
+    // Create a new container to hold the cloned sprite for absolute positioning in arena
+    const defeatContainer = document.createElement('div');
+    defeatContainer.style.position = 'absolute';
+    defeatContainer.style.bottom = '20%';
+    defeatContainer.style.left = '35%';
+    defeatContainer.style.display = 'flex';
+    defeatContainer.style.alignItems = 'center';
+    defeatContainer.style.width = 'max-content';
+    defeatContainer.style.height = 'max-content';
+    defeatContainer.style.zIndex = '50';
+
+    // Copy frame border if we need it to look identical (optional but safe)
+    const frameBorder = elEnemySide.querySelector('img[alt="Enemy Frame"]');
+    if (frameBorder) {
+        const frameClone = frameBorder.cloneNode(true);
+        defeatContainer.appendChild(frameClone);
+    }
+
+    // Add the cloned sprite wrapper
+    cloneWrapper.style.position = 'absolute';
+    cloneWrapper.style.top = '0';
+    cloneWrapper.style.left = '0';
+    cloneWrapper.style.width = '100%';
+    cloneWrapper.style.height = '100%';
+    defeatContainer.appendChild(cloneWrapper);
+
+    arena.appendChild(defeatContainer);
+
+    // Force reflow
+    void defeatContainer.offsetWidth;
+
+    // Reset actual enemy side so it's ready for the next slide in immediately
+    elEnemySide.style.transition = 'none';
+    elEnemySide.style.left = '100%';
+    setTimeout(() => {
+        if (elEnemySide) elEnemySide.style.transition = 'left 1s ease-out';
+    }, 50);
+
+    // Briefly hide the original HP container to prevent visual flash before next spawn
     const hpContainerEnemy = document.getElementById('enemy-battle-hp-container');
     if (hpContainerEnemy) {
         hpContainerEnemy.style.opacity = '0';
         setTimeout(() => {
             if (hpContainerEnemy) hpContainerEnemy.style.opacity = '1';
-        }, 3000);
+        }, 500);
     }
+
+    // Animation variables
+    const slideDuration = 5000;
+    const captureCheckDelay = 3000;
+    const targetLeft = '-12.5vh'; // -$ where $ is 0.5 * 25vh
 
     // 1. Create Pokeball if used
     let ball = null;
+    let shakeInterval = null;
     if (ballResult && ballResult.used && ballResult.ballName) {
         ball = document.createElement('img');
         ball.src = `Assets/Items/Balls/${ballResult.ballName}.png`;
         ball.style.position = 'absolute';
-        ball.style.left = '35%';
-        ball.style.top = `50%`;
-        ball.style.bottom = 'auto'; // Reset bottom
+
+        // Find the inner wrapper if it exists (usually the div inside #enemy-sprite-wrapper),
+        // fallback to cloneWrapper itself to guarantee it renders safely.
+        const innerWrapper = cloneWrapper.querySelector('div');
+        const attachTarget = innerWrapper ? innerWrapper : cloneWrapper;
+
+        ball.style.left = '50%';
+        ball.style.top = '50%';
         ball.style.transform = 'translate(-50%, -50%)';
-        ball.style.width = '25%';
-        ball.style.height = '25%';
+        ball.style.width = '25vh';
+        ball.style.height = '25vh';
         ball.style.objectFit = 'contain';
         ball.style.zIndex = '51';
-        arena.appendChild(ball);
-    }
+        attachTarget.appendChild(ball);
 
-    // Force reflow
-    if (ball) void ball.offsetWidth;
-
-    // Timeline Animations
-    if (ball) {
-        ball.style.transition = 'left 3s linear';
-        ball.style.left = '15%';
-
-        // Add shake animation manually using setInterval since we need to slide too
+        // Add shake animation
         let shakeCount = 0;
-        let shakeInterval = setInterval(() => {
+        shakeInterval = setInterval(() => {
             shakeCount++;
             let rotation = (shakeCount % 2 === 0) ? 15 : -15;
             if (shakeCount % 10 === 0) rotation = 0; // brief pause
             ball.style.transform = `translate(-50%, -50%) rotate(${rotation}deg)`;
         }, 150);
+    }
 
-        setTimeout(() => {
+    // Force reflow again if ball added
+    if (ball) void ball.offsetWidth;
+
+    // Timeline Animations
+    defeatContainer.style.transition = `left ${slideDuration}ms linear`;
+    defeatContainer.style.left = targetLeft;
+
+    let callbackFired = false;
+
+    // 2. Change ball sprite at 3 seconds and trigger capture logic
+    setTimeout(() => {
+        if (ball) {
             clearInterval(shakeInterval);
-            ball.style.transform = 'translate(-50%, -50%) rotate(0deg)';
-
-            // 3s mark: decide outcome
+            ball.style.transform = 'translate(-50%, -50%)'; // Reset rotation
             if (ballResult.caught) {
                 ball.src = `Assets/Items/Balls/${ballResult.ballName}Y.png`;
             } else {
                 ball.src = `Assets/Items/Balls/${ballResult.ballName}N.png`;
             }
+        }
 
-            // Execute capture logic
+        // Trigger capture callback early to process game logic, UI handles itself independently
+        if (!callbackFired) {
+            callbackFired = true;
             captureCallback();
+        }
+    }, captureCheckDelay);
 
-            // Slide off screen for the next 1.5s
-            ball.style.transition = 'left 1.5s linear';
-            ball.style.left = '-10%';
-
-            setTimeout(() => {
-                if (ball.parentElement) ball.parentElement.removeChild(ball);
-            }, 1500);
-
-        }, 3000);
-    } else {
-        // No ball used, just wait 3s before triggering captureCallback
-        setTimeout(() => {
+    // 3. Remove clone wrapper after animation
+    setTimeout(() => {
+        if (defeatContainer && defeatContainer.parentNode) {
+            defeatContainer.parentNode.removeChild(defeatContainer);
+        }
+        // Safety callback fallback
+        if (!callbackFired) {
+            callbackFired = true;
             captureCallback();
-        }, 3000);
-    }
+        }
+    }, slideDuration);
 }
+
 
 
 export function showDamage(target, amount, isCrit, moveName = '', moveType = 'Normal', effectiveness = 1) {
