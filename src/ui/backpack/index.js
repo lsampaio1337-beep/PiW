@@ -60,7 +60,7 @@ export function showBackpack() {
     `;
 
     if (window.showModal) {
-        window.showModal('Backpack', html, 'window-backpack', '800px', 'auto');
+        window.showModal('Backpack', html, 'window-backpack', '1000px', 'auto');
         const win = document.getElementById('window-backpack');
         if (win) {
             // Apply maximum height logic for Backpack based on aspect ratio constraint (800 / 1279 * 1350 = ~844px)
