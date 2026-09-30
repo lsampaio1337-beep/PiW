@@ -949,45 +949,35 @@ export function playCombatAnimations(targetSide, moveType, duration) {
     const endX = container === document.body ? defCenterX : (defCenterX - containerRect.left) / scaleX;
     const endY = container === document.body ? defCenterY : (defCenterY - containerRect.top) / scaleY;
 
-    // Create 6 overlapping projectiles
-    const numProjectiles = 6;
-    const projDelay = 20; // ms
+    // Create projectile
+    const proj = document.createElement('div');
+    proj.style.position = container === document.body ? 'fixed' : 'absolute';
+    proj.style.width = projWidth + 'px';
+    proj.style.height = projWidth + 'px';
+    proj.style.backgroundColor = color;
+    proj.style.borderRadius = '50%';
+    proj.style.boxShadow = `0 0 ${projHeight}px ${projHeight/2}px ${color}`;
+    proj.style.zIndex = '999';
+    proj.style.pointerEvents = 'none';
+    proj.style.transform = 'translate(-50%, -50%)';
 
-    for (let i = 0; i < numProjectiles; i++) {
-        setTimeout(() => {
-            const proj = document.createElement('div');
-            proj.style.position = container === document.body ? 'fixed' : 'absolute';
-            proj.style.width = projWidth + 'px';
-            proj.style.height = projWidth + 'px';
-            proj.style.backgroundColor = color;
-            proj.style.borderRadius = '50%';
-            proj.style.boxShadow = `0 0 ${projHeight}px ${projHeight/2}px ${color}`;
-            proj.style.zIndex = '999';
-            proj.style.pointerEvents = 'none';
-            proj.style.transform = 'translate(-50%, -50%)';
+    proj.style.left = startX + 'px';
+    proj.style.top = startY + 'px';
 
-            proj.style.left = startX + 'px';
-            proj.style.top = startY + 'px';
+    container.appendChild(proj);
 
-            container.appendChild(proj);
+    // Animate projectile
+    proj.style.transition = `all ${duration}ms linear`;
 
-            // Animate projectile
-            proj.style.transition = `all ${duration}ms linear`;
+    // Trigger reflow
+    proj.getBoundingClientRect();
 
-            // Trigger reflow
-            proj.getBoundingClientRect();
+    proj.style.left = endX + 'px';
+    proj.style.top = endY + 'px';
 
-            proj.style.left = endX + 'px';
-            proj.style.top = endY + 'px';
-
-            setTimeout(() => {
-                if (proj.parentElement) proj.parentElement.removeChild(proj);
-            }, duration);
-        }, i * projDelay);
-    }
-
-    // Trigger splash and hit animation only once, when the FIRST projectile hits (at `duration`)
     setTimeout(() => {
+        if (proj.parentElement) proj.parentElement.removeChild(proj);
+
         // Splash Effect
         const splash = document.createElement('div');
         splash.style.position = container === document.body ? 'fixed' : 'absolute';
@@ -1004,8 +994,8 @@ export function playCombatAnimations(targetSide, moveType, duration) {
         splash.style.pointerEvents = 'none';
         splash.style.transform = 'translate(-50%, -50%)';
 
-        // Phase 1: Grow to 25% of sprite height
-        splash.style.transition = `all ${duration * 0.15}ms linear`;
+        // Phase 1: Grow to 50% of sprite height
+        splash.style.transition = `all ${duration * 0.3}ms linear`;
 
         container.appendChild(splash);
 
@@ -1020,16 +1010,16 @@ export function playCombatAnimations(targetSide, moveType, duration) {
 
         // Phase 2: Grow to 100% height and fade out
         setTimeout(() => {
-            splash.style.transition = `all ${duration * 0.15}ms linear`;
+            splash.style.transition = `all ${duration * 0.3}ms linear`;
             const sSize2 = (defRect.height / scaleY) * 1.0;
             splash.style.width = sSize2 + 'px';
             splash.style.height = sSize2 + 'px';
             splash.style.opacity = '0';
-        }, duration * 0.15);
+        }, duration * 0.3);
 
         setTimeout(() => {
             if (splash.parentElement) splash.parentElement.removeChild(splash);
-        }, duration * 0.3);
+        }, duration * 0.6);
 
         // Defender Hit Animation (Shake) using transforms safely
         defImg.style.transition = 'transform 50ms ease-in-out';
