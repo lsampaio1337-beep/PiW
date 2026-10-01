@@ -355,7 +355,11 @@ class BattleSystem {
              setTimeout(() => {
                  this.isFainting = false;
                  if (this.multiplayerState.currentPokemonIndex >= this.multiplayerState.opponentParty.length) {
-                     alert("You won the multiplayer battle!");
+                     if (typeof window.showGameAlert === 'function') {
+                         window.showGameAlert("You won the multiplayer battle!", "main-view-inner-modal-overlay");
+                     } else {
+                         alert("You won the multiplayer battle!");
+                     }
                      this.stopMultiplayerBattle();
                  } else {
                      const leaderSpeed = this.state.party[0].currentStats.spe;
@@ -375,7 +379,11 @@ class BattleSystem {
 
                  if (this.state.party.length === 0) {
                      this.isFainting = false;
-                     alert("You lost the multiplayer battle.");
+                     if (typeof window.showGameAlert === 'function') {
+                         window.showGameAlert("You lost the multiplayer battle.", "main-view-inner-modal-overlay");
+                     } else {
+                         alert("You lost the multiplayer battle.");
+                     }
                      this.stopMultiplayerBattle();
                  } else {
                      this.isFainting = false;
