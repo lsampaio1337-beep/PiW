@@ -426,7 +426,7 @@ window.showChallengesModal = function() {
 
             let cData = getChallengeData(unlock);
             let isExtra = extraChallengeAreas.includes(unlock.areaId);
-            let rewardsStr = unlock.unlocks ? unlock.unlocks.join(", ") : "Next Area";
+            let rewardsStr = unlock.unlocks ? unlock.unlocks.join(" + ") : "Next Area";
             if (unlock.areaId === "Fossil Revival Lab") rewardsStr += " + Multiplayer Mode";
             if (unlock.gift) rewardsStr += " + Gift";
 
@@ -497,7 +497,7 @@ window.showChallengesModal = function() {
              // Fake the data slightly to make it look completed, though getChallengeData will naturally evaluate to true
              let pData = getChallengeData(pUnlock);
 
-             let pRewards = pUnlock.unlocks ? pUnlock.unlocks.join(", ") : "Next Area";
+             let pRewards = pUnlock.unlocks ? pUnlock.unlocks.join(" + ") : "Next Area";
              if (pUnlock.areaId === "Fossil Revival Lab") pRewards += " + Multiplayer Mode";
              if (pUnlock.gift) pRewards += " + Gift";
 
@@ -1601,7 +1601,7 @@ async function init() {
                 // Get the reward from the LAST completed challenge
                 if (cIndex > 0) {
                     let pUnlock = state.config.unlocks[cIndex - 1];
-                    lastRoute = pUnlock.unlocks ? pUnlock.unlocks.join(", ") : "Next Area";
+                    lastRoute = pUnlock.unlocks ? pUnlock.unlocks.join(" + ") : "Next Area";
                     if (pUnlock.areaId === "Fossil Revival Lab") lastRoute += " + Multiplayer Mode";
                 }
             }
