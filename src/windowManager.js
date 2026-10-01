@@ -346,10 +346,7 @@ export class WindowManager {
             if (!isResizing) return;
 
             const dx = e.clientX - startX;
-
-            // Apply a higher minimum width specifically for the top-bar to prevent flex clipping
-            const minWidth = winElement.id === 'top-bar-window' ? 600 : 200;
-            let newWidth = Math.max(minWidth, startWidth + dx);
+            let newWidth = Math.max(200, startWidth + dx); // minimum width 200px
 
             if (winElement._originalWidth && winElement._originalRatio) {
                 const headerH = headerElement ? headerElement.offsetHeight : 0;
@@ -496,13 +493,16 @@ export class WindowManager {
             currentOriginalWidth = newOriginalWidth;
         }
 
-        if (newOriginalWidth > currentOriginalWidth) {
-            // Content needs more width, we must grow
-            const growthRatio = newOriginalWidth / currentOriginalWidth;
+        if (newOriginalWidth > currentOriginalWidth || windowId === 'top-bar-window') {
+            // Content needs more width, we must grow (or if top-bar-window, always perfectly match fit content)
+            let growthRatio = newOriginalWidth / currentOriginalWidth;
+            if (isNaN(growthRatio) || !isFinite(growthRatio)) growthRatio = 1;
+
             scalerElement.style.setProperty('--original-width', newOriginalWidth + 'px');
+            if (windowId === 'top-bar-window') winElement._originalWidth = newOriginalWidth;
 
             // Scale up the window width by the same ratio
-            if (oldWidth && oldWidth.endsWith('px')) {
+            if (oldWidth && oldWidth.endsWith('px') && windowId !== 'top-bar-window') {
                 const currentWidth = parseInt(oldWidth);
                 winElement.style.width = (currentWidth * growthRatio) + 'px';
             } else {
