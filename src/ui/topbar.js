@@ -180,6 +180,23 @@ export function updateTopbar() {
             bonusCandyContainer.style.display = 'none';
         }
     }
+    const multiplayerContainer = document.getElementById('multiplayer-container');
+    const multiplayerExclamation = document.getElementById('multiplayer-exclamation');
+    if (multiplayerContainer && multiplayerExclamation) {
+        // Unlock Multiplayer after Challenge 5 (Fossil Revival Lab) is completed
+        if (state.stats.completedChallengeIds && state.stats.completedChallengeIds.includes('Fossil Revival Lab')) {
+            multiplayerContainer.style.display = 'inline-block';
+            if (!state.stats.hasSeenMultiplayerIcon) {
+                multiplayerExclamation.style.display = 'block';
+            } else {
+                multiplayerExclamation.style.display = 'none';
+            }
+        } else {
+            multiplayerContainer.style.display = 'none';
+            multiplayerExclamation.style.display = 'none';
+        }
+    }
+
     const giftContainer = document.getElementById('gift-container');
     const giftNotification = document.getElementById('gift-notification');
     if (giftContainer && giftNotification) {
@@ -287,6 +304,7 @@ export function getChallengeText() {
         if (unlock) {
             const extraChallengeAreas = ["Casino", "Small Fishing Spot", "Fighting Dojo", "Big Fishing Spot", "Fossil Revival Lab", "Trade With Friends Hub", "Power Plant", "Seafoam Islands", "Victory Road", "Cerulean Cave"];
             let unlocks = "Unlocks: " + (unlock.unlocks ? unlock.unlocks.join(', ') : "Next Area");
+            if (activeId === "Fossil Revival Lab") unlocks += " + Multiplayer Mode";
             let displayName = unlock.challengeName || activeId;
             return `Next Challenge: ${displayName} - ${unlocks}`;
         }

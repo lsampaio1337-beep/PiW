@@ -418,6 +418,7 @@ window.showChallengesModal = function() {
             let cData = getChallengeData(unlock);
             let isExtra = extraChallengeAreas.includes(unlock.areaId);
             let rewardsStr = unlock.unlocks ? unlock.unlocks.join(", ") : "Next Area";
+            if (unlock.areaId === "Fossil Revival Lab") rewardsStr += " + Multiplayer Mode";
             if (unlock.gift) rewardsStr += " + Gift";
 
             let displayName = unlock.challengeName || (isExtra ? 'Extra Challenge - ' + unlock.areaId : 'Challenge - ' + unlock.areaId);
@@ -488,6 +489,7 @@ window.showChallengesModal = function() {
              let pData = getChallengeData(pUnlock);
 
              let pRewards = pUnlock.unlocks ? pUnlock.unlocks.join(", ") : "Next Area";
+             if (pUnlock.areaId === "Fossil Revival Lab") pRewards += " + Multiplayer Mode";
              if (pUnlock.gift) pRewards += " + Gift";
 
              let displayName = pUnlock.challengeName || (isExtra ? 'Extra Challenge - ' + pUnlock.areaId : 'Challenge - ' + pUnlock.areaId);
@@ -1459,6 +1461,7 @@ async function init() {
 
     const startNewGame = () => {
         state.stats.hasSeenGiftIcon = false;
+        state.stats.hasSeenMultiplayerIcon = false;
         state.stats.hasSeenZzZTutorial = true;
         if (splashScreen) splashScreen.style.display = 'none';
         if (saveManagerModal) window.windowManager.toggleWindow('save-manager-modal', false);
@@ -1590,6 +1593,7 @@ async function init() {
                 if (cIndex > 0) {
                     let pUnlock = state.config.unlocks[cIndex - 1];
                     lastRoute = pUnlock.unlocks ? pUnlock.unlocks.join(", ") : "Next Area";
+                    if (pUnlock.areaId === "Fossil Revival Lab") lastRoute += " + Multiplayer Mode";
                 }
             }
 
@@ -1961,7 +1965,12 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
 
 
     bindBtn('btn-toggle-party', () => { window.windowManager.toggleWindow('party-window'); });
-    bindBtn('btn-multiplayer', () => { window.openMultiplayerModal(); });
+    bindBtn('btn-multiplayer', () => {
+        state.stats.hasSeenMultiplayerIcon = true;
+        storage.save(state);
+        updateTopbar();
+        window.openMultiplayerModal();
+    });
     bindBtn('btn-toggle-main', () => { window.windowManager.toggleWindow('main-view-window'); });
     bindBtn('btn-map', () => {
         if(!checkCombatLock()) {
