@@ -57,9 +57,6 @@ importers:
       electron:
         specifier: ^34.2.0
         version: 34.5.8
-      playwright:
-        specifier: ^1.63.0
-        version: 1.63.0
 
 packages:
 
