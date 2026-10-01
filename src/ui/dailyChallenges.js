@@ -202,32 +202,47 @@ function generateActiveChallenges() {
     initDailyChallengesState();
 
     let active = [];
-    let validCategories = [];
+    let group = [];
+    let rotationIndex = state.stats.dailyChallenges.rotationIndex;
 
-    let categories = Object.keys(CHALLENGE_DEFS);
-    for (let cat of categories) {
-        let validChallenges = CHALLENGE_DEFS[cat].filter(c => !c.condition || c.condition());
-        if (validChallenges.length > 0) {
-            validCategories.push({ cat, challenges: validChallenges });
+    const getChallengeById = (id) => {
+        for (let cat in CHALLENGE_DEFS) {
+            let found = CHALLENGE_DEFS[cat].find(c => c.id === id);
+            if (found) return found;
+        }
+        return null;
+    };
+
+    if (rotationIndex === 0) {
+        group.push(getChallengeById(1));  // The Rival
+        group.push(getChallengeById(10)); // Gotta Catch 'Em All
+        group.push(getChallengeById(19)); // Heal in PokeCenter
+    } else if (rotationIndex === 1) {
+        group.push(getChallengeById(24)); // Team Builder
+        group.push(getChallengeById(16)); // Market Mogul
+        group.push(getChallengeById(8));  // Quality Hunter
+    } else {
+        let validCategories = [];
+        let categories = Object.keys(CHALLENGE_DEFS);
+        for (let cat of categories) {
+            let validChallenges = CHALLENGE_DEFS[cat].filter(c => !c.condition || c.condition());
+            if (validChallenges.length > 0) {
+                validCategories.push({ cat, challenges: validChallenges });
+            }
+        }
+        for (let i = validCategories.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [validCategories[i], validCategories[j]] = [validCategories[j], validCategories[i]];
+        }
+        let selectedCategories = validCategories.slice(0, 3);
+        for (let sc of selectedCategories) {
+            let randomChallenge = sc.challenges[Math.floor(Math.random() * sc.challenges.length)];
+            group.push(randomChallenge);
         }
     }
 
-    // Shuffle valid categories
-    for (let i = validCategories.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [validCategories[i], validCategories[j]] = [validCategories[j], validCategories[i]];
-    }
-
-    // Pick 3 categories
-    let selectedCategories = validCategories.slice(0, 3);
-    let group = [];
-
-    for (let sc of selectedCategories) {
-        let randomChallenge = sc.challenges[Math.floor(Math.random() * sc.challenges.length)];
-        group.push(randomChallenge);
-    }
-
     for (let c of group) {
+        if (!c) continue;
         let target = c.getTarget();
         let extra = c.getExtra ? c.getExtra() : null;
         let text = c.text.replace('$', target);
@@ -343,40 +358,54 @@ window.rerollIndividualDailyChallenge = function(index) {
     if (!active || !active[index]) return;
     if (active[index].completed) return;
 
-    let categoryLists = {
-        combat: CHALLENGE_DEFS.combat.filter(c => !c.condition || c.condition()),
-        catching: CHALLENGE_DEFS.catching.filter(c => !c.condition || c.condition()),
-        economy: CHALLENGE_DEFS.economy.filter(c => !c.condition || c.condition()),
-        management: CHALLENGE_DEFS.management.filter(c => !c.condition || c.condition()),
-        special: CHALLENGE_DEFS.special.filter(c => !c.condition || c.condition())
+    let newC = null;
+    let rotationIndex = state.stats.dailyChallenges.rotationIndex;
+
+    const getChallengeById = (id) => {
+        for (let cat in CHALLENGE_DEFS) {
+            let found = CHALLENGE_DEFS[cat].find(c => c.id === id);
+            if (found) return found;
+        }
+        return null;
     };
 
-    // Find which categories are currently active
-    let activeCategories = new Set();
-    for (let c of active) {
-        for (let key in categoryLists) {
-            if (categoryLists[key].some(def => def.type === c.type)) {
-                activeCategories.add(key);
-                break;
+    if (rotationIndex === 0) {
+        newC = getChallengeById(21); // Level Up
+    } else if (rotationIndex === 1) {
+        newC = getChallengeById(31); // Species Master
+    }
+
+    if (!newC) {
+        let categoryLists = {
+            combat: CHALLENGE_DEFS.combat.filter(c => !c.condition || c.condition()),
+            catching: CHALLENGE_DEFS.catching.filter(c => !c.condition || c.condition()),
+            economy: CHALLENGE_DEFS.economy.filter(c => !c.condition || c.condition()),
+            management: CHALLENGE_DEFS.management.filter(c => !c.condition || c.condition()),
+            special: CHALLENGE_DEFS.special.filter(c => !c.condition || c.condition())
+        };
+
+        let activeCategories = new Set();
+        for (let c of active) {
+            for (let key in categoryLists) {
+                if (categoryLists[key].some(def => def.type === c.type)) {
+                    activeCategories.add(key);
+                    break;
+                }
             }
         }
+
+        let unusedCategories = Object.keys(categoryLists).filter(key => !activeCategories.has(key) && categoryLists[key].length > 0);
+        let availableCategories = unusedCategories;
+
+        if (availableCategories.length === 0) {
+            availableCategories = Object.keys(categoryLists).filter(key => categoryLists[key].length > 0);
+        }
+
+        let rCat = availableCategories[Math.floor(Math.random() * availableCategories.length)];
+        let possibleChallenges = categoryLists[rCat];
+
+        newC = possibleChallenges[Math.floor(Math.random() * possibleChallenges.length)];
     }
-
-    // Unused categories are those not currently in the active list
-    let unusedCategories = Object.keys(categoryLists).filter(key => !activeCategories.has(key) && categoryLists[key].length > 0);
-
-    // Filter out the current category just in case it wasn't caught by the active list logic
-    let availableCategories = unusedCategories;
-
-    if (availableCategories.length === 0) {
-        // Fallback if no other categories are available
-        availableCategories = Object.keys(categoryLists).filter(key => categoryLists[key].length > 0);
-    }
-
-    let rCat = availableCategories[Math.floor(Math.random() * availableCategories.length)];
-    let possibleChallenges = categoryLists[rCat];
-
-    let newC = possibleChallenges[Math.floor(Math.random() * possibleChallenges.length)];
 
     let target = newC.getTarget();
     let extra = newC.getExtra ? newC.getExtra() : null;
