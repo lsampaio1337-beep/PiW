@@ -28,13 +28,16 @@ export function setupGlobalEventListeners() {
                 contentContainer.style.display = '';
                 topBarWindow.style.width = topBarWindow.dataset.originalWidth || '1100px';
                 topBarWindow.style.minHeight = '';
+                if (topBarWindow.dataset.originalHeight) topBarWindow.style.height = topBarWindow.dataset.originalHeight;
                 if (window.windowManager) window.windowManager._constrainAllWindows();
             } else {
                 // Minimize
                 topBarWindow.dataset.originalWidth = topBarWindow.style.width;
+                topBarWindow.dataset.originalHeight = topBarWindow.style.height;
                 contentContainer.style.display = 'none';
                 topBarWindow.style.width = '300px'; // Minimal width for title + buttons
                 topBarWindow.style.minHeight = '0';
+                topBarWindow.style.height = 'auto'; // Only display title
             }
         });
     }
