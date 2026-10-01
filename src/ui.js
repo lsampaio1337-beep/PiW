@@ -15,12 +15,21 @@ import { trackDailyChallenge, checkAndResetDailyChallenges } from './ui/dailyCha
 window.dismissDaycareMessage = function() {
     state.stats.hasSeenDaycare = true;
     document.getElementById('daycare-first-time-overlay').style.display = 'none';
-    if (Storage) {
-        Storage.save(state);
-    } else if (window.storageRef) {
+    if (window.storageRef) {
         window.storageRef.save(state);
     }
     updateUI();
+};
+
+window.dismissBonusCandyMessage = function() {
+    state.stats.hasSeenBonusCandyModal = true;
+    const overlay = document.getElementById('bonus-candy-first-time-overlay');
+    if (overlay) {
+        overlay.style.display = 'none';
+    }
+    if (window.storageRef) {
+        window.storageRef.save(state);
+    }
 };
 
 export const TYPE_COLORS = {

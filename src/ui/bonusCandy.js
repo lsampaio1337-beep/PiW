@@ -1,5 +1,6 @@
 import { state, globals } from '../state.js';
 import { showModal, updateUI } from '../ui.js';
+import { WHITE_CANDY_DEFEAT_REQUIREMENT } from '../constants.js';
 
 function getCandyCost(color, currentOwned) {
     const owned = currentOwned || 0;
@@ -13,8 +14,8 @@ function getCandyCost(color, currentOwned) {
 export function showBonusCandyModal() {
     const defeats = state.stats.bonusCandyDefeats || 0;
     const isClaimable = false; // Auto claims now
-    const progressTextLeft = `${defeats}/100`;
-    const progressPct = (defeats / 100) * 100;
+    const progressTextLeft = `${defeats}/${WHITE_CANDY_DEFEAT_REQUIREMENT}`;
+    const progressPct = (defeats / WHITE_CANDY_DEFEAT_REQUIREMENT) * 100;
 
     // Ensure candyPurchaseHistory exists
     if (!state.stats.candyPurchaseHistory) {
@@ -90,9 +91,28 @@ export function showBonusCandyModal() {
                 </div>
             </div>
         </div>
+
+        <!-- Bonus Candy First-Time Overlay (Inner Modal) -->
+        <div id="bonus-candy-first-time-overlay" style="display: ${!state.stats.hasSeenBonusCandyModal ? 'flex' : 'none'}; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10000; background: rgba(0, 0, 0, 0.7); flex-direction: column; align-items: center; justify-content: center; border-radius: 8px;">
+            <div style="background: #34495e; padding: 20px; border-radius: 10px; border: 2px solid #00ffff; text-align: center; color: white; max-width: 80%;">
+                <div id="bonus-candy-intro-text" style="margin-top: 0; font-size: 16px;">
+                    <p>Here you can find delicious candies!</p>
+                    <p>In order to earn a white candy you need to defeat ${WHITE_CANDY_DEFEAT_REQUIREMENT} wild Pokémons</p>
+                    <p>When claimed white candies can be trade to different flavors with different effects.</p>
+                    <p>Each time a flavored candy is traded, the next one will have its price increased by its initial value.</p>
+                </div>
+                <button id="btn-dismiss-bonus-candy" onclick="window.dismissBonusCandyMessage()" style="padding: 10px 20px; background: #2ecc71; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: 10px; font-size: 16px;">Enjoy!</button>
+            </div>
+        </div>
     `;
 
     showModal("Bonus Candy", html, "window-bonus-candy", "800px", "auto");
+
+    // Ensure the inner content container has relative positioning so the absolute overlay maps correctly to it
+    const modalContent = document.querySelector('#window-bonus-candy .window-content-container');
+    if (modalContent) {
+        modalContent.style.position = 'relative';
+    }
 }
 
 function renderCandyOption(color, effectText, cost, currentOwned, currentEffect, imageFile) {
