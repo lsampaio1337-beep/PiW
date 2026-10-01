@@ -96,6 +96,13 @@ export function setupGlobalEventListeners() {
         });
     }
 
+    const dismissZzZBtn = document.getElementById('btn-dismiss-zzz');
+    if (dismissZzZBtn) {
+        dismissZzZBtn.addEventListener('click', () => {
+            if (window.dismissZzZMessage) window.dismissZzZMessage();
+        });
+    }
+
     const daycareTrainBtn = document.getElementById('btn-daycare-train');
     if (daycareTrainBtn) {
         daycareTrainBtn.addEventListener('click', () => {
