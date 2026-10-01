@@ -188,7 +188,7 @@ class BattleSystem {
                 const leaderSpeed = this.state.party[0].currentStats.spe;
             let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed));
             slideDelay = Math.max(300, slideDelay) / this.state.settings.gameSpeed;
-            this.generateEncounter(slideDelay);
+            this.generateGymEncounter(slideDelay);
             };
         } else {
             // Gym completed
@@ -1157,7 +1157,7 @@ class BattleSystem {
             const leaderSpeed = this.state.party[0].currentStats.spe;
             let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed));
             slideDelay = Math.max(300, slideDelay) / this.state.settings.gameSpeed;
-            this.generateEncounter(slideDelay);
+            this.generateGymEncounter(slideDelay);
         }
     }
 
