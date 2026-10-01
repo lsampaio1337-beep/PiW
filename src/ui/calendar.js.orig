@@ -2,6 +2,7 @@ import { state } from '../state.js';
 import { showModal } from '../ui.js';
 import { updateTopbar } from './topbar.js';
 import { getDailyChallengesHtml } from './dailyChallenges.js';
+import { getCapacity, getCurrentCount } from '../mathEngine.js';
 
 
 export function getRewardForDay(daysClaimed) {
@@ -80,24 +81,51 @@ export function claimDailyReward(dayIndex) {
 
     const reward = getRewardForDay(state.stats.dailyRewards.daysClaimed);
 
-    // Grant items
+    // Check capacity first
+    let canCollect = true;
     for (let ballName in reward.items) {
-        if (!state.backpack.pokeballs[ballName]) {
-             state.backpack.pokeballs[ballName] = 0;
+        let qty = reward.items[ballName];
+        let currentBalls = getCurrentCount(state, 'balls');
+        let maxBalls = getCapacity(state, 'balls');
+        let spaceLeft = maxBalls - currentBalls;
+        if (ballName === 'Masterball') spaceLeft = Infinity;
+
+        if (qty > spaceLeft) {
+            if (window.showGameAlert) window.showGameAlert("Can't collect Ball and Potion due to its maximum capacity", "window-calendar");
+            return; // Abort entirely
         }
-        state.backpack.pokeballs[ballName] += reward.items[ballName];
     }
 
     for (let potionName in reward.potions) {
-        if (!state.backpack.potions[potionName]) {
-             state.backpack.potions[potionName] = 0;
+        let qty = reward.potions[potionName];
+        let currentPotions = getCurrentCount(state, 'potions');
+        let maxPotions = getCapacity(state, 'potions');
+        let spaceLeft = maxPotions - currentPotions;
+
+        if (qty > spaceLeft) {
+            if (window.showGameAlert) window.showGameAlert("Can't collect Ball and Potion due to its maximum capacity", "window-calendar");
+            return; // Abort entirely
         }
-        state.backpack.potions[potionName] += reward.potions[potionName];
+    }
+
+    // Grant items
+    for (let ballName in reward.items) {
+        let qty = reward.items[ballName];
+        if (!state.backpack.pokeballs[ballName]) state.backpack.pokeballs[ballName] = 0;
+        state.backpack.pokeballs[ballName] += qty;
+    }
+
+    for (let potionName in reward.potions) {
+        let qty = reward.potions[potionName];
+        if (!state.backpack.potions[potionName]) state.backpack.potions[potionName] = 0;
+        state.backpack.potions[potionName] += qty;
     }
 
     if (reward.tokens) {
         if (!state.trainer.tokens) state.trainer.tokens = 0;
         state.trainer.tokens += reward.tokens;
+        if (!state.stats.tokensEarned) state.stats.tokensEarned = 0;
+        state.stats.tokensEarned += reward.tokens;
     }
 
     // Update state
@@ -123,13 +151,17 @@ window.showCalendar = showCalendar;
 export function showCalendar(tab = 'activities') {
     let html = `<div style="display: flex; flex-direction: column; width: 100%; height: 100%; box-sizing: border-box;">`;
 
-    // Tabs
-    html += `
-        <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px; margin-bottom: 10px; align-items: center;">
-            <button onclick="window.showCalendar('activities')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; border-radius: 5px; cursor: pointer; ${tab === 'activities' ? 'background: #3498db; color: white;' : 'background: #2c3e50; color: #bdc3c7; border: 1px solid #7f8c8d;'}">Activities</button>
-            <button onclick="window.showCalendar('shop')" style="padding: 10px 20px; font-size: 16px; font-weight: bold; border-radius: 5px; cursor: pointer; ${tab === 'shop' ? 'background: #3498db; color: white;' : 'background: #2c3e50; color: #bdc3c7; border: 1px solid #7f8c8d;'}">Shop</button>
-            <button onclick="window.giveFreeTokens()" style="padding: 10px 20px; font-size: 16px; font-weight: bold; border-radius: 5px; cursor: pointer; background: #e67e22; color: white; border: none;">Token</button>
+    let titleHtml = `
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
+            <div style="font-weight: bold; font-size: 18px; color: white;">Daily Calendar</div>
+            <div style="display: inline-flex; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px;">
+                <button onclick="window.showCalendar('activities')" style="${tab === 'activities' ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;">Activities</button>
+                <button onclick="window.showCalendar('shop')" style="${tab === 'shop' ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;">Shop</button>
+            </div>
         </div>
+    `;
+
+    html += `
         <div id="calendar-content-area" style="flex: 1; overflow-y: auto;">
     `;
 
@@ -207,10 +239,11 @@ export function showCalendar(tab = 'activities') {
         }
 
         if (reward.tokens) {
+            cardStyle += ' border-color: #3498db; color: white;';
             itemsHtml += `
                 <div style="display: flex; align-items: center; gap: 5px; margin-top: 5px; justify-content: center;">
                     <img src="Assets/Extra/Token.png" style="width: 24px; height: 24px;" title="Token">
-                    <span style="font-size: 14px;">x${reward.tokens}</span>
+                    <span style="font-size: 14px; color: white;">x${reward.tokens}</span>
                 </div>
             `;
         }
@@ -242,4 +275,16 @@ export function showCalendar(tab = 'activities') {
 
     // Bind to window for tab switching
     window.showCalendar = showCalendar;
+
+    // Auto adjust height when switching tabs
+    setTimeout(() => {
+        const win = document.getElementById('window-calendar');
+        if (win) {
+            if (typeof win.adjustHeightForNewContent === 'function') {
+                win.adjustHeightForNewContent();
+            } else if (window.windowManager) {
+                window.windowManager.recalculateWindowSize('window-calendar');
+            }
+        }
+    }, 50);
 }

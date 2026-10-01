@@ -1342,13 +1342,39 @@ class BattleSystem {
             if (Math.random() < (lootMultiplier % 1)) dropQuantity += 1;
 
             if (Math.random() < 0.5) {
-                if (!this.state.backpack.pokeballs[ballDrop]) this.state.backpack.pokeballs[ballDrop] = 0;
-                this.state.backpack.pokeballs[ballDrop] += dropQuantity;
-                lootedItemsThisBattle[ballDrop] = (lootedItemsThisBattle[ballDrop] || 0) + dropQuantity;
+                const currentBalls = mathEngine.getCurrentCount(this.state, 'balls');
+                const maxBalls = mathEngine.getCapacity(this.state, 'balls');
+                if (currentBalls + dropQuantity > maxBalls && ballDrop !== 'Masterball') {
+                    const spaceLeft = maxBalls - currentBalls;
+                    if (spaceLeft > 0) {
+                        if (!this.state.backpack.pokeballs[ballDrop]) this.state.backpack.pokeballs[ballDrop] = 0;
+                        this.state.backpack.pokeballs[ballDrop] += spaceLeft;
+                        lootedItemsThisBattle[ballDrop] = (lootedItemsThisBattle[ballDrop] || 0) + spaceLeft;
+                    }
+                    lootedItemsThisBattle[ballDrop + '_missed'] = 'missed';
+                    if (typeof window !== 'undefined' && typeof window.showGameAlert === 'function' && !this.state.isTimeLapsing) window.showGameAlert("Can't collect Ball due to its maximum capacity", "view-battle-arena");
+                } else {
+                    if (!this.state.backpack.pokeballs[ballDrop]) this.state.backpack.pokeballs[ballDrop] = 0;
+                    this.state.backpack.pokeballs[ballDrop] += dropQuantity;
+                    lootedItemsThisBattle[ballDrop] = (lootedItemsThisBattle[ballDrop] || 0) + dropQuantity;
+                }
             } else {
-                if (!this.state.backpack.potions[potionDrop]) this.state.backpack.potions[potionDrop] = 0;
-                this.state.backpack.potions[potionDrop] += dropQuantity;
-                lootedItemsThisBattle[potionDrop] = (lootedItemsThisBattle[potionDrop] || 0) + dropQuantity;
+                const currentPotions = mathEngine.getCurrentCount(this.state, 'potions');
+                const maxPotions = mathEngine.getCapacity(this.state, 'potions');
+                if (currentPotions + dropQuantity > maxPotions) {
+                    const spaceLeft = maxPotions - currentPotions;
+                    if (spaceLeft > 0) {
+                        if (!this.state.backpack.potions[potionDrop]) this.state.backpack.potions[potionDrop] = 0;
+                        this.state.backpack.potions[potionDrop] += spaceLeft;
+                        lootedItemsThisBattle[potionDrop] = (lootedItemsThisBattle[potionDrop] || 0) + spaceLeft;
+                    }
+                    lootedItemsThisBattle[potionDrop + '_missed'] = 'missed';
+                    if (typeof window !== 'undefined' && typeof window.showGameAlert === 'function' && !this.state.isTimeLapsing) window.showGameAlert("Can't collect Potion due to its maximum capacity", "view-battle-arena");
+                } else {
+                    if (!this.state.backpack.potions[potionDrop]) this.state.backpack.potions[potionDrop] = 0;
+                    this.state.backpack.potions[potionDrop] += dropQuantity;
+                    lootedItemsThisBattle[potionDrop] = (lootedItemsThisBattle[potionDrop] || 0) + dropQuantity;
+                }
             }
         }
 
@@ -1381,9 +1407,22 @@ class BattleSystem {
             let ballDropQty = Math.floor(lootMultiplier);
             if (Math.random() < (lootMultiplier % 1)) ballDropQty += 1;
 
-            if (!this.state.backpack.pokeballs) this.state.backpack.pokeballs = {};
-            this.state.backpack.pokeballs[ballTierName] = (this.state.backpack.pokeballs[ballTierName] || 0) + ballDropQty;
-            lootedItemsThisBattle[ballTierName] = (lootedItemsThisBattle[ballTierName] || 0) + ballDropQty;
+            const currentBalls = mathEngine.getCurrentCount(this.state, 'balls');
+            const maxBalls = mathEngine.getCapacity(this.state, 'balls');
+            if (currentBalls + ballDropQty > maxBalls && ballTierName !== 'Masterball') {
+                const spaceLeft = maxBalls - currentBalls;
+                if (spaceLeft > 0) {
+                    if (!this.state.backpack.pokeballs) this.state.backpack.pokeballs = {};
+                    this.state.backpack.pokeballs[ballTierName] = (this.state.backpack.pokeballs[ballTierName] || 0) + spaceLeft;
+                    lootedItemsThisBattle[ballTierName] = (lootedItemsThisBattle[ballTierName] || 0) + spaceLeft;
+                }
+                lootedItemsThisBattle[ballTierName + '_missed'] = 'missed';
+                if (typeof window !== 'undefined' && typeof window.showGameAlert === 'function' && !this.state.isTimeLapsing) window.showGameAlert("Can't collect Ball due to its maximum capacity", "view-battle-arena");
+            } else {
+                if (!this.state.backpack.pokeballs) this.state.backpack.pokeballs = {};
+                this.state.backpack.pokeballs[ballTierName] = (this.state.backpack.pokeballs[ballTierName] || 0) + ballDropQty;
+                lootedItemsThisBattle[ballTierName] = (lootedItemsThisBattle[ballTierName] || 0) + ballDropQty;
+            }
         }
 
         // Roll for Potion drop
@@ -1391,9 +1430,22 @@ class BattleSystem {
             let potionDropQty = Math.floor(lootMultiplier);
             if (Math.random() < (lootMultiplier % 1)) potionDropQty += 1;
 
-            if (!this.state.backpack.potions) this.state.backpack.potions = {};
-            this.state.backpack.potions[potionTierName] = (this.state.backpack.potions[potionTierName] || 0) + potionDropQty;
-            lootedItemsThisBattle[potionTierName] = (lootedItemsThisBattle[potionTierName] || 0) + potionDropQty;
+            const currentPotions = mathEngine.getCurrentCount(this.state, 'potions');
+            const maxPotions = mathEngine.getCapacity(this.state, 'potions');
+            if (currentPotions + potionDropQty > maxPotions) {
+                const spaceLeft = maxPotions - currentPotions;
+                if (spaceLeft > 0) {
+                    if (!this.state.backpack.potions) this.state.backpack.potions = {};
+                    this.state.backpack.potions[potionTierName] = (this.state.backpack.potions[potionTierName] || 0) + spaceLeft;
+                    lootedItemsThisBattle[potionTierName] = (lootedItemsThisBattle[potionTierName] || 0) + spaceLeft;
+                }
+                lootedItemsThisBattle[potionTierName + '_missed'] = 'missed';
+                if (typeof window !== 'undefined' && typeof window.showGameAlert === 'function' && !this.state.isTimeLapsing) window.showGameAlert("Can't collect Potion due to its maximum capacity", "view-battle-arena");
+            } else {
+                if (!this.state.backpack.potions) this.state.backpack.potions = {};
+                this.state.backpack.potions[potionTierName] = (this.state.backpack.potions[potionTierName] || 0) + potionDropQty;
+                lootedItemsThisBattle[potionTierName] = (lootedItemsThisBattle[potionTierName] || 0) + potionDropQty;
+            }
         }
 
         if (Object.keys(lootedItemsThisBattle).length > 0 && typeof window.showLoot === 'function' && !this.state.isTimeLapsing) {
@@ -1697,6 +1749,7 @@ class BattleSystem {
             simulatedTimeMs: 0,
             xpEarned: 0,
             itemsLooted: {},
+            itemsMissed: {},
             caughtPokemonList: []
         };
 
@@ -2090,17 +2143,43 @@ class BattleSystem {
                 if (lootTier >= 2 && Math.random() < itemDropChance) {
                     let ballDropQty = Math.floor(lootMultiplier);
                     if (Math.random() < (lootMultiplier % 1)) ballDropQty += 1;
-                    if (!this.state.backpack.pokeballs) this.state.backpack.pokeballs = {};
-                    this.state.backpack.pokeballs[ballTierName] = (this.state.backpack.pokeballs[ballTierName] || 0) + ballDropQty;
-                    results.itemsLooted[ballTierName] = (results.itemsLooted[ballTierName] || 0) + ballDropQty;
+
+                    const currentBalls = mathEngine.getCurrentCount(this.state, 'balls');
+                    const maxBalls = mathEngine.getCapacity(this.state, 'balls');
+                    if (currentBalls + ballDropQty > maxBalls && ballTierName !== 'Masterball') {
+                        const spaceLeft = maxBalls - currentBalls;
+                        if (spaceLeft > 0) {
+                            if (!this.state.backpack.pokeballs) this.state.backpack.pokeballs = {};
+                            this.state.backpack.pokeballs[ballTierName] = (this.state.backpack.pokeballs[ballTierName] || 0) + spaceLeft;
+                            results.itemsLooted[ballTierName] = (results.itemsLooted[ballTierName] || 0) + spaceLeft;
+                        }
+                        results.itemsMissed[ballTierName] = (results.itemsMissed[ballTierName] || 0) + (ballDropQty - spaceLeft);
+                    } else {
+                        if (!this.state.backpack.pokeballs) this.state.backpack.pokeballs = {};
+                        this.state.backpack.pokeballs[ballTierName] = (this.state.backpack.pokeballs[ballTierName] || 0) + ballDropQty;
+                        results.itemsLooted[ballTierName] = (results.itemsLooted[ballTierName] || 0) + ballDropQty;
+                    }
                 }
 
                 if (lootTier >= 1 && Math.random() < itemDropChance) {
                     let potionDropQty = Math.floor(lootMultiplier);
                     if (Math.random() < (lootMultiplier % 1)) potionDropQty += 1;
-                    if (!this.state.backpack.potions) this.state.backpack.potions = {};
-                    this.state.backpack.potions[potionTierName] = (this.state.backpack.potions[potionTierName] || 0) + potionDropQty;
-                    results.itemsLooted[potionTierName] = (results.itemsLooted[potionTierName] || 0) + potionDropQty;
+
+                    const currentPotions = mathEngine.getCurrentCount(this.state, 'potions');
+                    const maxPotions = mathEngine.getCapacity(this.state, 'potions');
+                    if (currentPotions + potionDropQty > maxPotions) {
+                        const spaceLeft = maxPotions - currentPotions;
+                        if (spaceLeft > 0) {
+                            if (!this.state.backpack.potions) this.state.backpack.potions = {};
+                            this.state.backpack.potions[potionTierName] = (this.state.backpack.potions[potionTierName] || 0) + spaceLeft;
+                            results.itemsLooted[potionTierName] = (results.itemsLooted[potionTierName] || 0) + spaceLeft;
+                        }
+                        results.itemsMissed[potionTierName] = (results.itemsMissed[potionTierName] || 0) + (potionDropQty - spaceLeft);
+                    } else {
+                        if (!this.state.backpack.potions) this.state.backpack.potions = {};
+                        this.state.backpack.potions[potionTierName] = (this.state.backpack.potions[potionTierName] || 0) + potionDropQty;
+                        results.itemsLooted[potionTierName] = (results.itemsLooted[potionTierName] || 0) + potionDropQty;
+                    }
                 }
 
                 this.state.stats.battlesWon++;

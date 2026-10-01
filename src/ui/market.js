@@ -380,9 +380,11 @@ export function newBuyItem(itemId, baseCost, category, upgradeType = null) {
         const type = category === 'pokeballs' ? 'balls' : 'potions';
         const currentCount = getCurrentCount(state, type);
         const capacity = getCapacity(state, type);
-        const spaceLeft = capacity - currentCount;
+        let spaceLeft = capacity - currentCount;
+        if (itemId === 'Masterball') spaceLeft = Infinity;
         if (qty > spaceLeft) {
-            window.showGameAlert(`Not enough space! You can only buy ${spaceLeft} more ${category}.`, getMarketAlertTarget());
+            const nameToDisplay = category === 'pokeballs' ? 'Ball' : 'Potion';
+            window.showGameAlert(`Not enough space! You can only buy ${spaceLeft} more ${category}`, "market-buy-wrapper");
             return;
         }
     }

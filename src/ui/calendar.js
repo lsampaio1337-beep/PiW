@@ -2,6 +2,7 @@ import { state } from '../state.js';
 import { showModal } from '../ui.js';
 import { updateTopbar } from './topbar.js';
 import { getDailyChallengesHtml } from './dailyChallenges.js';
+import { getCapacity, getCurrentCount } from '../mathEngine.js';
 
 
 export function getRewardForDay(daysClaimed) {
@@ -80,19 +81,55 @@ export function claimDailyReward(dayIndex) {
 
     const reward = getRewardForDay(state.stats.dailyRewards.daysClaimed);
 
-    // Grant items
+    // Check capacity first
+    let failBall = false;
+    let failPotion = false;
+
     for (let ballName in reward.items) {
-        if (!state.backpack.pokeballs[ballName]) {
-             state.backpack.pokeballs[ballName] = 0;
+        let qty = reward.items[ballName];
+        let currentBalls = getCurrentCount(state, 'balls');
+        let maxBalls = getCapacity(state, 'balls');
+        let spaceLeft = maxBalls - currentBalls;
+        if (ballName === 'Masterball') spaceLeft = Infinity;
+
+        if (qty > spaceLeft) {
+            failBall = true;
         }
-        state.backpack.pokeballs[ballName] += reward.items[ballName];
     }
 
     for (let potionName in reward.potions) {
-        if (!state.backpack.potions[potionName]) {
-             state.backpack.potions[potionName] = 0;
+        let qty = reward.potions[potionName];
+        let currentPotions = getCurrentCount(state, 'potions');
+        let maxPotions = getCapacity(state, 'potions');
+        let spaceLeft = maxPotions - currentPotions;
+
+        if (qty > spaceLeft) {
+            failPotion = true;
         }
-        state.backpack.potions[potionName] += reward.potions[potionName];
+    }
+
+    if (failBall || failPotion) {
+        if (failBall && failPotion) {
+            if (window.showGameAlert) window.showGameAlert("Can't collect Ball and Potion due to its maximum capacity", "window-calendar");
+        } else if (failBall) {
+            if (window.showGameAlert) window.showGameAlert("Can't collect Ball due to its maximum capacity", "window-calendar");
+        } else if (failPotion) {
+            if (window.showGameAlert) window.showGameAlert("Can't collect Potion due to its maximum capacity", "window-calendar");
+        }
+        return; // Abort entirely
+    }
+
+    // Grant items
+    for (let ballName in reward.items) {
+        let qty = reward.items[ballName];
+        if (!state.backpack.pokeballs[ballName]) state.backpack.pokeballs[ballName] = 0;
+        state.backpack.pokeballs[ballName] += qty;
+    }
+
+    for (let potionName in reward.potions) {
+        let qty = reward.potions[potionName];
+        if (!state.backpack.potions[potionName]) state.backpack.potions[potionName] = 0;
+        state.backpack.potions[potionName] += qty;
     }
 
     if (reward.tokens) {

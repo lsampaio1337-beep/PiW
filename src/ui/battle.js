@@ -1143,8 +1143,12 @@ export function showLoot(lootItems) {
 
     let html = '';
     for (let i = 0; i < keys.length; i++) {
-        const itemName = keys[i];
+        let itemName = keys[i];
         const count = lootItems[itemName];
+        const isMissed = itemName.endsWith('_missed');
+        if (isMissed) {
+            itemName = itemName.replace('_missed', '');
+        }
 
         let imgFolder = 'Balls';
         if (itemName.includes('Potion')) imgFolder = 'Potions';
@@ -1154,7 +1158,7 @@ export function showLoot(lootItems) {
         html += `
             <div style="width: 30px; height: 30px; background: rgba(0, 0, 0, 0.6); border: 1px solid #f1c40f; border-radius: 4px; position: relative; display: flex; align-items: center; justify-content: center;">
                 <img src="Assets/Items/${imgFolder}/${itemName}.png" style="width: 80%; height: 80%; object-fit: contain;">
-                <span style="position: absolute; bottom: -2px; right: 0px; color: white; font-size: 8px; font-weight: bold; text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;">${count}</span>
+                ${isMissed ? `<img src="Assets/Extra/No.png" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; z-index: 2;">` : ''}
             </div>
         `;
     }
