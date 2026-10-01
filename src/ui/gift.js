@@ -22,7 +22,7 @@ window.claimPendingGift = function(index) {
             let spaceLeft = maxBalls - currentBalls;
             if (qty > spaceLeft) {
                 qty = Math.max(0, spaceLeft);
-                if (window.showGameAlert) window.showGameAlert("Can't collect Ball due to its maximum capacity");
+                if (window.showGameAlert) window.showGameAlert("Can't collect Ball due to its maximum capacity", "window-gifts");
             }
         } else if (isPotion) {
             let currentPotions = getCurrentCount(state, 'potions');
@@ -30,7 +30,7 @@ window.claimPendingGift = function(index) {
             let spaceLeft = maxPotions - currentPotions;
             if (qty > spaceLeft) {
                 qty = Math.max(0, spaceLeft);
-                if (window.showGameAlert) window.showGameAlert("Can't collect Potion due to its maximum capacity");
+                if (window.showGameAlert) window.showGameAlert("Can't collect Potion due to its maximum capacity", "window-gifts");
             }
         }
 

@@ -91,7 +91,7 @@ export function claimDailyReward(dayIndex) {
 
         if (qty > spaceLeft) {
             qty = Math.max(0, spaceLeft);
-            if (window.showGameAlert) window.showGameAlert("Can't collect Ball due to its maximum capacity");
+            if (window.showGameAlert) window.showGameAlert("Can't collect Ball due to its maximum capacity", "window-calendar");
         }
         if (qty > 0) {
             if (!state.backpack.pokeballs[ballName]) state.backpack.pokeballs[ballName] = 0;
@@ -107,7 +107,7 @@ export function claimDailyReward(dayIndex) {
 
         if (qty > spaceLeft) {
             qty = Math.max(0, spaceLeft);
-            if (window.showGameAlert) window.showGameAlert("Can't collect Potion due to its maximum capacity");
+            if (window.showGameAlert) window.showGameAlert("Can't collect Potion due to its maximum capacity", "window-calendar");
         }
         if (qty > 0) {
             if (!state.backpack.potions[potionName]) state.backpack.potions[potionName] = 0;

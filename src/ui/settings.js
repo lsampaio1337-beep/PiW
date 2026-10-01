@@ -92,9 +92,6 @@ window.showTimeLapseResults = function(results) {
 
     for (let itemName in results.itemsLooted) {
         let count = results.itemsLooted[itemName];
-        if (count === 'missed') {
-            count = results.itemsMissed ? results.itemsMissed[itemName] : 0;
-        }
         if (count > 0) {
             let imgFolder = "";
             let basePrice = 0;

@@ -349,7 +349,7 @@ export function buyItem(itemId, baseCost, category, upgradeType = null) {
         if (itemId === 'Masterball') spaceLeft = Infinity;
         if (qty > spaceLeft) {
             const nameToDisplay = category === 'pokeballs' ? 'Ball' : 'Potion';
-            window.showGameAlert(`Can't collect ${nameToDisplay} due to its maximum capacity`);
+            window.showGameAlert(`Can't buy ${nameToDisplay} due to its maximum capacity`, "market-buy-wrapper");
             return;
         }
     }
