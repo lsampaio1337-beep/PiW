@@ -25,7 +25,7 @@ def run_cuj(page):
     ''')
     page.wait_for_timeout(1000)
 
-    # Switch to Sell Mode
+    # Switch to Sell Mode Pokemon tab explicitly
     page.evaluate("if (window.openPokeMarketSell) { window.openPokeMarketSell('pokemon'); }")
     page.wait_for_timeout(1000)
 
