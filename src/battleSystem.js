@@ -2026,8 +2026,8 @@ class BattleSystem {
                 let dropRate = 0;
                 const evoStage = this.getEvolutionStage(this.activeEncounter.id);
 
-                if (evoStage === 2) dropRate = 0.01;
-                else if (evoStage >= 3) dropRate = 0.02;
+                if (evoStage === 2) dropRate = 0.005;
+                else if (evoStage >= 3) dropRate = 0.01;
 
                 if (this.activeEncounter.qualityName === "Shiny" && evoStage >= 2) {
                     dropRate = 1.0;
@@ -2053,7 +2053,7 @@ class BattleSystem {
                 }
 
                 // Vitamin drops
-                if (lootTier >= 4 && sumIV > 500 && this.activeEncounter?.quality > 1.6 && Math.random() < (0.05 * lootMultiplier)) {
+                if (lootTier >= 4 && sumIV > 500 && this.activeEncounter?.quality > 1.6 && Math.random() < (0.1 * lootMultiplier)) {
                     const vitamins = VITAMINS;
                     const randomVitamin = vitamins[Math.floor(Math.random() * vitamins.length)];
 
