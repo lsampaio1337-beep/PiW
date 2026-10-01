@@ -349,7 +349,7 @@ window.cheatProgressChallenge = function(targetAreaId) {
 };
 
 window.showChallengesModal = function() {
-    const extraChallengeAreas = ['Casino', 'Small Fishing Spot', 'Fighting Dojo', 'Big Fishing Spot', 'Fossil Revival Lab', 'Trade With Friends Hub', 'Power Plant', 'Seafoam Islands', 'Victory Road'];
+    const extraChallengeAreas = ['Casino', 'Small Fishing Spot', 'Fighting Dojo', 'Big Fishing Spot', 'Fossil Revival Lab', 'Trade With Friends Hub', 'Power Plant', 'Seafoam Islands', 'Victory Road', 'Cerulean Cave'];
 
     if (!state.config.unlocks) return;
 
