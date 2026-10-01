@@ -43,6 +43,7 @@ export const TYPE_COLORS = {
     "Steel": "#869ba7",
     "Water": "#6391c7",
 };
+import { openMultiplayerModal } from './ui/multiplayer.js';
 import { updateTopbar } from './ui/topbar.js';
 import { updateSidebar } from './ui/sidebar.js';
 import { updateBattleArena, showDamage, playCombatAnimations, triggerDefeatAnimation, showLoot } from './ui/battle.js';
@@ -1931,6 +1932,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
 
 
     bindBtn('btn-toggle-party', () => { window.windowManager.toggleWindow('party-window'); });
+    bindBtn('btn-multiplayer', () => { window.openMultiplayerModal(); });
     bindBtn('btn-toggle-main', () => { window.windowManager.toggleWindow('main-view-window'); });
     bindBtn('btn-map', () => {
         if(!checkCombatLock()) {
@@ -2313,6 +2315,8 @@ export const promptExitGame = () => {
 };
 
 window.promptExitGame = promptExitGame;
+window.openMultiplayerModal = openMultiplayerModal;
+
 
 // Ensure the UI script runs
 init();

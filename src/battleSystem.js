@@ -14,6 +14,13 @@ class BattleSystem {
 
         this.consecutiveHeals = 0;
 
+
+        this.multiplayerState = {
+            isActive: false,
+            opponentParty: null,
+            currentPokemonIndex: 0
+        };
+
         this.gymState = {
             isActive: false,
             gym: null,
@@ -105,6 +112,257 @@ class BattleSystem {
         }
 
         return bestMove;
+    }
+
+
+    startMultiplayerBattle(opponentParty) {
+        this.stop();
+        this.multiplayerState = {
+            isActive: true,
+            opponentParty: opponentParty,
+            currentPokemonIndex: 0
+        };
+
+        if (typeof window.switchView === 'function') {
+            window.switchView("BATTLE_ARENA");
+        }
+
+        const leaderSpeed = this.state.party[0].currentStats.spe;
+        let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed));
+        slideDelay = Math.max(300, slideDelay) / this.state.settings.gameSpeed;
+
+        this.generateMultiplayerEncounter(slideDelay);
+    }
+
+    stopMultiplayerBattle() {
+        this.multiplayerState.isActive = false;
+        this.multiplayerState.opponentParty = null;
+        this.multiplayerState.currentPokemonIndex = 0;
+        this.stop();
+
+        // Restore party from backup
+        import('./ui/multiplayer.js').then((mp) => {
+            if (mp.originalParty && mp.originalParty.length > 0) {
+                // Restore the original party array, overriding the shifted one
+                this.state.party.length = 0;
+                mp.originalParty.forEach(p => {
+                     // Heal them up too just in case
+                     p.currentHp = p.maxHp;
+                     this.state.party.push(p);
+                });
+            }
+            alert("Multiplayer battle ended.");
+
+            if (typeof window.switchView === 'function') {
+                window.switchView("PROF_OAK_LAB");
+            }
+
+            // Re-generate idle encounter
+            const leaderSpeed = this.state.party[0] ? this.state.party[0].currentStats.spe : 100;
+            let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed));
+            slideDelay = Math.max(300, slideDelay) / this.state.settings.gameSpeed;
+            this.generateEncounter(slideDelay);
+        });
+    }
+
+    generateMultiplayerEncounter(slideDelay) {
+        if (!this.multiplayerState.opponentParty) return;
+
+        const pokemonDef = this.multiplayerState.opponentParty[this.multiplayerState.currentPokemonIndex];
+        if (!pokemonDef) {
+            this.stopMultiplayerBattle();
+            return;
+        }
+
+        const pokemonBase = this.state.config.pokemonData.find(p => p.id === pokemonDef.id);
+
+        let stats = { ...pokemonDef.currentStats };
+
+        this.activeEncounter = {
+            id: pokemonDef.id,
+            uuid: pokemonDef.uuid,
+            name: pokemonBase.name,
+            level: pokemonDef.level,
+            maxHp: pokemonDef.maxHp,
+            currentHp: pokemonDef.currentHp,
+            types: pokemonDef.types,
+            quality: pokemonDef.quality,
+            qualityName: pokemonDef.qualityName,
+            isShiny: pokemonDef.isShiny,
+            currentStats: stats,
+            isBoss: false,
+            catchRate: 0
+        };
+
+        this.updateUI();
+
+        if (this.state.settings.smartCapture && typeof window.updateSmartCaptureIcon === 'function') {
+            window.updateSmartCaptureIcon();
+        }
+
+        if (typeof window.triggerSlideAnimation === 'function') {
+            window.triggerSlideAnimation(slideDelay);
+        }
+
+        this.isSearching = false;
+
+        this.combatLoop = setTimeout(() => {
+            const playerPokemon = this.state.party[0];
+            const enemyPokemon = this.activeEncounter;
+
+            // In Multiplayer, the host calculates everything, but we still need turn order based on speed
+            if (playerPokemon.currentStats.spe >= enemyPokemon.currentStats.spe) {
+                this.executeMultiplayerTurn(playerPokemon, enemyPokemon);
+            } else {
+                this.executeMultiplayerTurn(enemyPokemon, playerPokemon);
+            }
+        }, slideDelay);
+    }
+
+    handleMultiplayerEvent(event) {
+        if (!this.multiplayerState.isActive) return;
+
+        if (event.type === 'attack') {
+            const defender = event.target === 'player' ? this.state.party[0] : this.activeEncounter;
+            const attacker = event.target === 'player' ? this.activeEncounter : this.state.party[0];
+
+            const animDuration = 500 / this.state.settings.gameSpeed;
+            if (typeof window.playCombatAnimations === 'function') {
+                window.playCombatAnimations(event.target, event.moveType, animDuration);
+            }
+
+            setTimeout(() => {
+                defender.currentHp = event.newHp;
+
+                if (typeof window.showDamage === 'function') {
+                    window.showDamage(event.target, event.damage, event.isCritical, event.effectiveness);
+                }
+
+                this.updateUI();
+
+                if (event.fainted) {
+                    this.handleMultiplayerDefeat(defender);
+                }
+            }, animDuration);
+        }
+    }
+
+    executeMultiplayerTurn(attacker, defender) {
+        import('./ui/multiplayer.js').then((mp) => {
+            if (!mp.isHost) return; // Only host calculates combat
+
+            if (this.isFainting) return;
+            if (!this.activeEncounter) return;
+
+            const move = this.getBestMove(attacker, defender);
+            const isPhysical = move.category === 'Physical';
+            const atkStat = isPhysical ? attacker.currentStats.atk : attacker.currentStats.spa;
+            const defStat = isPhysical ? defender.currentStats.def : defender.currentStats.spd;
+            const eff = this.getTypeEffectiveness(move.type, defender.types);
+
+            const hit = mathEngine.calculateDamage(attacker.level, move.power, atkStat, defStat, eff, attacker.quality);
+
+            const targetSide = attacker === this.state.party[0] ? 'enemy' : 'player';
+            const animDuration = 500 / this.state.settings.gameSpeed;
+
+            if (typeof window.playCombatAnimations === 'function') {
+                window.playCombatAnimations(targetSide, move.type, animDuration);
+            }
+
+            let fainted = false;
+
+            setTimeout(() => {
+                defender.currentHp -= hit.damage;
+                if (defender.currentHp <= 0) {
+                    defender.currentHp = 0;
+                    fainted = true;
+                }
+
+                if (typeof window.showDamage === 'function') {
+                    window.showDamage(targetSide, hit.damage, hit.isCritical, hit.effectiveness);
+                }
+
+                // Send result to client
+                if (mp.connection) {
+                     mp.connection.send({
+                         type: 'combatEvent',
+                         event: {
+                             type: 'attack',
+                             target: targetSide === 'enemy' ? 'player' : 'enemy', // Invert target for the client
+                             damage: hit.damage,
+                             newHp: defender.currentHp,
+                             isCritical: hit.isCritical,
+                             effectiveness: hit.effectiveness,
+                             moveType: move.type,
+                             fainted: fainted
+                         }
+                     });
+                }
+
+                this.updateUI();
+
+                if (fainted) {
+                    this.handleMultiplayerDefeat(defender);
+                } else {
+                    const delay = Math.max(200, 1000 / this.state.settings.gameSpeed);
+                    this.combatLoop = setTimeout(() => {
+                        this.executeMultiplayerTurn(defender, attacker);
+                    }, delay);
+                }
+            }, animDuration);
+        });
+    }
+
+    handleMultiplayerDefeat(defeated) {
+        this.isFainting = true;
+        this.stop(); // Clear loop
+
+        if (defeated === this.activeEncounter) {
+             if (typeof window.triggerDefeatAnimation === 'function') {
+                 window.triggerDefeatAnimation('enemy');
+             }
+
+             this.multiplayerState.currentPokemonIndex++;
+
+             setTimeout(() => {
+                 this.isFainting = false;
+                 if (this.multiplayerState.currentPokemonIndex >= this.multiplayerState.opponentParty.length) {
+                     alert("You won the multiplayer battle!");
+                     this.stopMultiplayerBattle();
+                 } else {
+                     const leaderSpeed = this.state.party[0].currentStats.spe;
+                     let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed));
+                     slideDelay = Math.max(300, slideDelay) / this.state.settings.gameSpeed;
+                     this.generateMultiplayerEncounter(slideDelay);
+                 }
+             }, 1000);
+        } else {
+             if (typeof window.triggerDefeatAnimation === 'function') {
+                 window.triggerDefeatAnimation('player');
+             }
+             // Wait for defeat animation
+             setTimeout(() => {
+                 this.state.party.shift(); // Remove fainted pokemon
+                 this.updateUI();
+
+                 if (this.state.party.length === 0) {
+                     this.isFainting = false;
+                     alert("You lost the multiplayer battle.");
+                     this.stopMultiplayerBattle();
+                 } else {
+                     this.isFainting = false;
+                     const playerPokemon = this.state.party[0];
+                     const enemyPokemon = this.activeEncounter;
+                     const delay = Math.max(200, 1000 / this.state.settings.gameSpeed);
+
+                     if (playerPokemon.currentStats.spe >= enemyPokemon.currentStats.spe) {
+                         this.combatLoop = setTimeout(() => this.executeMultiplayerTurn(playerPokemon, enemyPokemon), delay);
+                     } else {
+                         this.combatLoop = setTimeout(() => this.executeMultiplayerTurn(enemyPokemon, playerPokemon), delay);
+                     }
+                 }
+             }, 1000);
+        }
     }
 
     startGymBattle(gymName) {
