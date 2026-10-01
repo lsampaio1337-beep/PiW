@@ -539,6 +539,10 @@ input[type="number"] {
     box-sizing: border-box;
 }
 
+#top-bar-window > .window-content-container {
+    overflow: visible;
+}
+
 /* Default 2% padding for all scrollable window contents. Remove this for specific windows if unwanted */
 .content-panel {
     padding: 2%;

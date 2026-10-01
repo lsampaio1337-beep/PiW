@@ -346,7 +346,10 @@ export class WindowManager {
             if (!isResizing) return;
 
             const dx = e.clientX - startX;
-            let newWidth = Math.max(200, startWidth + dx); // minimum width 200px
+
+            // Apply a higher minimum width specifically for the top-bar to prevent flex clipping
+            const minWidth = winElement.id === 'top-bar-window' ? 600 : 200;
+            let newWidth = Math.max(minWidth, startWidth + dx);
 
             if (winElement._originalWidth && winElement._originalRatio) {
                 const headerH = headerElement ? headerElement.offsetHeight : 0;
