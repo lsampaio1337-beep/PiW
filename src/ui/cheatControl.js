@@ -285,7 +285,7 @@ export function cheatAction(action) {
 
         if (typeof window.updateTopbar === 'function') window.updateTopbar();
         if (document.getElementById('window-calendar')) {
-            if (typeof window.showCalendar === 'function') window.showCalendar();
+            if (typeof window.showCalendar === 'function' && document.getElementById('window-calendar') && document.getElementById('window-calendar').offsetParent !== null) window.showCalendar();
         }
 
     } else if (action === 'NextDailyReward') {
@@ -295,7 +295,7 @@ export function cheatAction(action) {
         state.stats.dailyRewards.lastClaimDate = null;
         if (typeof window.updateTopbar === 'function') window.updateTopbar();
         if (document.getElementById('window-calendar')) {
-            if (typeof window.showCalendar === 'function') window.showCalendar();
+            if (typeof window.showCalendar === 'function' && document.getElementById('window-calendar') && document.getElementById('window-calendar').offsetParent !== null) window.showCalendar();
         }
     } else if (action === 'GameSpeed') {
         const speeds = [0.25, 0.5, 1, 2, 5, 10, 25, 50, 100, 500, 1000];

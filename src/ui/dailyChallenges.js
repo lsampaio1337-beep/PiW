@@ -317,9 +317,9 @@ window.cheatCompleteDailyChallenge = function(index) {
     if (active && active[index] && !active[index].completed) {
         active[index].progress = active[index].target;
         active[index].completed = true;
-        state.stats.dailyChallenges.hasSeenNotification = !!document.getElementById('window-calendar');
+        state.stats.dailyChallenges.hasSeenNotification = !!(document.getElementById('window-calendar') && document.getElementById('window-calendar').offsetParent !== null);
         if (typeof window.updateTopbar === 'function') window.updateTopbar();
-        if (typeof showCalendar === 'function' && document.getElementById('window-calendar')) showCalendar(); // Refresh UI
+        if (typeof showCalendar === 'function' && document.getElementById('window-calendar') && document.getElementById('window-calendar').offsetParent !== null) showCalendar(); // Refresh UI
     }
 };
 
@@ -333,7 +333,7 @@ window.claimDailyChallengeToken = function(index) {
         state.stats.tokensEarned += 1;
         state.stats.dailyChallenges.totalCompleted++;
         if (typeof window.updateTopbar === 'function') window.updateTopbar();
-        if (typeof showCalendar === 'function' && document.getElementById('window-calendar')) showCalendar(); // Refresh UI
+        if (typeof showCalendar === 'function' && document.getElementById('window-calendar') && document.getElementById('window-calendar').offsetParent !== null) showCalendar(); // Refresh UI
     }
 };
 
@@ -400,7 +400,7 @@ window.rerollIndividualDailyChallenge = function(index) {
 
     state.stats.dailyChallenges.hasRerolled = true;
 
-    if (typeof showCalendar === 'function' && document.getElementById('window-calendar')) showCalendar();
+    if (typeof showCalendar === 'function' && document.getElementById('window-calendar') && document.getElementById('window-calendar').offsetParent !== null) showCalendar();
 };
 
 // Tracking Hook function for integration in other modules
@@ -507,7 +507,7 @@ window.trackDailyChallenge = function(type, data = {}) {
             if (c.progress >= c.target) {
                 c.progress = c.target;
                 c.completed = true;
-                state.stats.dailyChallenges.hasSeenNotification = !!document.getElementById('window-calendar');
+                state.stats.dailyChallenges.hasSeenNotification = !!(document.getElementById('window-calendar') && document.getElementById('window-calendar').offsetParent !== null);
                 if (typeof window.updateTopbar === 'function') window.updateTopbar();
             }
             updated = true;
@@ -515,7 +515,7 @@ window.trackDailyChallenge = function(type, data = {}) {
     }
     if (updated) {
         if (document.getElementById('window-calendar')) {
-            if (typeof showCalendar === 'function' && document.getElementById('window-calendar')) showCalendar();
+            if (typeof showCalendar === 'function' && document.getElementById('window-calendar') && document.getElementById('window-calendar').offsetParent !== null) showCalendar();
         }
     }
 };

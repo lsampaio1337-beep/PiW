@@ -145,7 +145,7 @@ export function claimDailyReward(dayIndex) {
 
     // Refresh UI
     updateTopbar();
-    showCalendar();
+    if (document.getElementById('window-calendar') && document.getElementById('window-calendar').offsetParent !== null) showCalendar();
 }
 
 // Make globally accessible for the inline onclick handler
@@ -155,7 +155,7 @@ window.giveFreeTokens = function() {
     if (!state.trainer.tokens) state.trainer.tokens = 0;
     state.trainer.tokens += 10;
     if (window.showGameAlert) window.showGameAlert("Received 10 Tokens!");
-    if (window.showCalendar) window.showCalendar('shop');
+    if (window.showCalendar && document.getElementById('window-calendar') && document.getElementById('window-calendar').offsetParent !== null) window.showCalendar('shop');
 };
 
 window.showCalendar = showCalendar;
