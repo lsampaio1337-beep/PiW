@@ -1,4 +1,4 @@
-import { VITAMINS } from "./constants.js";
+import { VITAMINS, WHITE_CANDY_DEFEAT_REQUIREMENT } from "./constants.js";
 // src/battleSystem.js
 import * as mathEngine from './mathEngine.js';
 
@@ -1085,8 +1085,8 @@ class BattleSystem {
 
         // Bonus Candy Defeats Tracker
         this.state.stats.bonusCandyDefeats = (this.state.stats.bonusCandyDefeats || 0) + 1;
-        if (this.state.stats.bonusCandyDefeats >= 100) {
-            this.state.stats.bonusCandyDefeats -= 100;
+        if (this.state.stats.bonusCandyDefeats >= WHITE_CANDY_DEFEAT_REQUIREMENT) {
+            this.state.stats.bonusCandyDefeats -= WHITE_CANDY_DEFEAT_REQUIREMENT;
             this.state.stats.whiteCandies = (this.state.stats.whiteCandies || 0) + 1;
             // Never reset hasSeenBonusCandyIcon so the exclamation mark never reappears
         }
@@ -1970,8 +1970,8 @@ class BattleSystem {
                 }
 
                 this.state.stats.bonusCandyDefeats = (this.state.stats.bonusCandyDefeats || 0) + 1;
-                if (this.state.stats.bonusCandyDefeats >= 100) {
-                    this.state.stats.bonusCandyDefeats -= 100;
+                if (this.state.stats.bonusCandyDefeats >= WHITE_CANDY_DEFEAT_REQUIREMENT) {
+                    this.state.stats.bonusCandyDefeats -= WHITE_CANDY_DEFEAT_REQUIREMENT;
                     this.state.stats.whiteCandies = (this.state.stats.whiteCandies || 0) + 1;
                 }
 
