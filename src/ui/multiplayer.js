@@ -93,10 +93,41 @@ export async function completeConnection(encodedAnswer) {
     }
 }
 
+function updateBattleButtonUI() {
+    const btn = document.getElementById('btn-mp-battle');
+    if (!btn) return;
+
+    if (!dataChannel || dataChannel.readyState !== 'open') {
+        btn.disabled = true;
+        btn.style.background = '#95a5a6';
+        btn.style.cursor = 'not-allowed';
+        btn.innerText = 'Battle';
+        return;
+    }
+
+    btn.disabled = false;
+    btn.style.cursor = 'pointer';
+
+    if (isMultiplayerReady.local) {
+        btn.style.background = '#f39c12'; // Orange/Yellowish for waiting
+        btn.innerText = 'Waiting Opponent';
+    } else if (isMultiplayerReady.remote) {
+        btn.style.background = '#2ecc71'; // Green
+        btn.innerText = 'Opponent ready';
+    } else {
+        btn.style.background = '#2ecc71'; // Green
+        btn.innerText = 'Start Battle';
+    }
+}
+
 function setupDataChannel(channel) {
     channel.onopen = () => {
-        document.getElementById('multiplayer-status').innerText = 'Connected!';
-        document.getElementById('multiplayer-ready-btn').style.display = 'block';
+        const connBtn = document.getElementById('btn-mp-connection-status');
+        if (connBtn) {
+            connBtn.style.background = '#2ecc71';
+            connBtn.innerText = 'Connected';
+        }
+        updateBattleButtonUI();
 
         // Send our party data to the opponent
         channel.send(JSON.stringify({ type: 'party', party: state.party }));
@@ -108,7 +139,8 @@ function setupDataChannel(channel) {
             opponentParty = data.party;
             checkReadyState();
         } else if (data.type === 'ready') {
-            isMultiplayerReady.remote = true;
+            isMultiplayerReady.remote = data.state;
+            updateBattleButtonUI();
             checkReadyState();
         } else if (data.type === 'combatEvent') {
             if (globals.battleSystem) {
@@ -126,18 +158,23 @@ function setupDataChannel(channel) {
     };
 }
 
-export function setLocalReady() {
+export function toggleLocalReady() {
     if (!dataChannel || dataChannel.readyState !== 'open') return;
-    isMultiplayerReady.local = true;
-    document.getElementById('multiplayer-ready-btn').disabled = true;
-    document.getElementById('multiplayer-ready-btn').innerText = 'Waiting for opponent...';
-    dataChannel.send(JSON.stringify({ type: 'ready' }));
+
+    isMultiplayerReady.local = !isMultiplayerReady.local;
+    updateBattleButtonUI();
+
+    dataChannel.send(JSON.stringify({ type: 'ready', state: isMultiplayerReady.local }));
     checkReadyState();
 }
 
 function checkReadyState() {
     if (isMultiplayerReady.local && isMultiplayerReady.remote && opponentParty) {
-        document.getElementById('multiplayer-status').innerText = 'Starting Battle...';
+        const btn = document.getElementById('btn-mp-battle');
+        if (btn) {
+            btn.innerText = 'Starting Battle...';
+            btn.disabled = true;
+        }
         setTimeout(() => {
              if (window.closeModal) window.closeModal();
              if (globals.battleSystem) globals.battleSystem.startMultiplayerBattle(opponentParty);
@@ -147,31 +184,31 @@ function checkReadyState() {
 
 export function openMultiplayerModal() {
     let html = `
-        <div style="text-align: center; color: white;">
-            <p>Connect with a friend to battle using your current active party!</p>
+        <div style="text-align: center; color: white; display: flex; flex-direction: column; gap: 20px; padding-bottom: 20px;">
+            <p style="margin: 0;">Connect with a friend to battle using your current active party!</p>
 
-            <div style="display: flex; justify-content: space-around; margin-top: 20px;">
-                <div style="background: rgba(0,0,0,0.5); padding: 20px; border-radius: 10px; width: 45%;">
-                    <h3>Host Game</h3>
-                    <button id="btn-mp-host" style="padding: 10px; cursor: pointer;">1. Generate Offer Code</button>
+            <div style="display: flex; justify-content: space-around; gap: 20px;">
+                <div style="background: rgba(0,0,0,0.5); padding: 20px; border-radius: 10px; width: 45%; box-sizing: border-box;">
+                    <h3 style="margin-top: 0;">Host Game</h3>
+                    <button id="btn-mp-host" style="padding: 10px; cursor: pointer; width: 100%;">1. Generate Offer Code</button>
                     <p style="margin-top: 10px; font-size: 12px;">Send this code to your friend:</p>
                     <div id="multiplayer-host-id" style="background: #222; padding: 10px; min-height: 20px; word-break: break-all; user-select: all; font-size: 10px; max-height: 80px; overflow-y: auto;">Waiting...</div>
                     <p style="margin-top: 10px; font-size: 12px;">Paste your friend's Answer Code here:</p>
                     <input type="text" id="mp-host-answer-input" placeholder="Paste Answer Code" style="width: 100%; padding: 5px; box-sizing: border-box; font-size: 10px;">
-                    <button id="btn-mp-complete" style="padding: 10px; margin-top: 5px; cursor: pointer;">3. Complete Connection</button>
+                    <button id="btn-mp-complete" style="padding: 10px; margin-top: 10px; cursor: pointer; width: 100%;">3. Complete Connection</button>
                 </div>
 
-                <div style="background: rgba(0,0,0,0.5); padding: 20px; border-radius: 10px; width: 45%;">
-                    <h3>Join Game</h3>
+                <div style="background: rgba(0,0,0,0.5); padding: 20px; border-radius: 10px; width: 45%; box-sizing: border-box;">
+                    <h3 style="margin-top: 0;">Join Game</h3>
                     <p style="margin-top: 10px; font-size: 12px;">Paste Host's Offer Code here:</p>
                     <input type="text" id="mp-join-input" placeholder="Paste Code Here" style="width: 100%; padding: 5px; box-sizing: border-box; font-size: 10px;">
-                    <button id="btn-mp-join" style="padding: 10px; margin-top: 5px; cursor: pointer;">2. Generate Answer Code</button>
+                    <button id="btn-mp-join" style="padding: 10px; margin-top: 10px; cursor: pointer; width: 100%;">2. Generate Answer Code</button>
                 </div>
             </div>
 
-            <div style="margin-top: 20px;">
-                <h3 id="multiplayer-status" style="color: #2ecc71;">Not Connected</h3>
-                <button id="multiplayer-ready-btn" style="display: none; padding: 15px 30px; font-size: 18px; cursor: pointer; background: #e74c3c; color: white; border: none; border-radius: 5px; margin: 10px auto;">Ready!</button>
+            <div style="display: flex; justify-content: center; gap: 20px;">
+                <button id="btn-mp-connection-status" disabled style="padding: 15px 30px; font-size: 18px; font-weight: bold; background: #e74c3c; color: white; border: none; border-radius: 5px; opacity: 1; cursor: default;">No Connection</button>
+                <button id="btn-mp-battle" disabled style="padding: 15px 30px; font-size: 18px; font-weight: bold; background: #95a5a6; color: white; border: none; border-radius: 5px; cursor: not-allowed;">Battle</button>
             </div>
         </div>
     `;
@@ -199,8 +236,8 @@ export function openMultiplayerModal() {
                 };
             }
 
-            const btnReady = document.getElementById('multiplayer-ready-btn');
-            if (btnReady) btnReady.onclick = setLocalReady;
+            const btnBattle = document.getElementById('btn-mp-battle');
+            if (btnBattle) btnBattle.onclick = toggleLocalReady;
         }, 100);
     }
 }
