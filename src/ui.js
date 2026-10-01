@@ -2171,7 +2171,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
                             </div>
                             <div style="flex: 1;">
                                 <p><b>White Candies Claimed:</b> ${(whiteCandiesClaimed || 0).toLocaleString()}</p>
-                                <p><b>Tokens Earned:</b> ${(state.stats.tokensEarned || 0).toLocaleString()}</p>
+                                <p><b>Daily Tokens Earned:</b> ${(state.stats.tokensEarned || 0).toLocaleString()}</p>
                                 <p><b>Progress Challenge Completed:</b> ${challengesCompleted}/${maxChallenges}</p>
                             </div>
                         </div>
