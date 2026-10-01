@@ -128,12 +128,12 @@ export function getChallengeData(unlock) {
     return { isMet, textParts };
 }
 
-export function updateTopbar() {
+export function updateMainControl() {
     const battleSystem = globals.battleSystem;
     const inGym = battleSystem && battleSystem.gymState && battleSystem.gymState.isActive;
     const noPokemon = state.party.length === 0 && state.storage.length === 0;
     const lockMenus = inGym || noPokemon;
-    const navButtons = document.getElementById('nav-buttons');
+    const navButtons = document.getElementById('main-control');
     if (navButtons) {
         navButtons.style.pointerEvents = lockMenus ? 'none' : 'auto';
         navButtons.style.opacity = lockMenus ? '0.5' : '1.0';
@@ -284,8 +284,31 @@ export function updateTopbar() {
         }
     }
     // Auto-adjust width of the Main Control window if new icons appeared
-    if (window.windowManager) {
-        window.windowManager.autoAdjustWidth('top-bar-window');
+    const mainControlWindow = document.getElementById('main-control-window');
+    const mainControl = document.getElementById('main-control');
+    if (mainControlWindow && mainControl) {
+        // Count visible top level children in main-control (icons + dividers)
+        let visibleCount = 0;
+        for (let child of mainControl.children) {
+            if (window.getComputedStyle(child).display !== 'none') {
+                visibleCount++;
+            }
+        }
+
+        if (!mainControlWindow._lastVisibleIconCount) {
+             mainControlWindow._lastVisibleIconCount = visibleCount;
+        } else if (visibleCount > mainControlWindow._lastVisibleIconCount) {
+             // New icon added, increase width proportionally to keep existing icons the same size
+             const currentWidth = parseFloat(mainControlWindow.style.width) || mainControlWindow.offsetWidth;
+             const increaseRatio = visibleCount / mainControlWindow._lastVisibleIconCount;
+             mainControlWindow.style.width = (currentWidth * increaseRatio) + 'px';
+             mainControlWindow._lastVisibleIconCount = visibleCount;
+             if (window.windowManager) {
+                 window.windowManager.saveWindowData('main-control-window');
+             }
+        } else if (visibleCount < mainControlWindow._lastVisibleIconCount) {
+            mainControlWindow._lastVisibleIconCount = visibleCount;
+        }
     }
 }
 
