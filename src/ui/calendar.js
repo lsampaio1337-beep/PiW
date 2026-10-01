@@ -98,6 +98,8 @@ export function claimDailyReward(dayIndex) {
     if (reward.tokens) {
         if (!state.trainer.tokens) state.trainer.tokens = 0;
         state.trainer.tokens += reward.tokens;
+        if (!state.stats.tokensEarned) state.stats.tokensEarned = 0;
+        state.stats.tokensEarned += reward.tokens;
     }
 
     // Update state
@@ -211,10 +213,11 @@ export function showCalendar(tab = 'activities') {
         }
 
         if (reward.tokens) {
+            cardStyle += ' border-color: #3498db; color: white;';
             itemsHtml += `
                 <div style="display: flex; align-items: center; gap: 5px; margin-top: 5px; justify-content: center;">
                     <img src="Assets/Extra/Token.png" style="width: 24px; height: 24px;" title="Token">
-                    <span style="font-size: 14px;">x${reward.tokens}</span>
+                    <span style="font-size: 14px; color: white;">x${reward.tokens}</span>
                 </div>
             `;
         }

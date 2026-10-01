@@ -357,7 +357,9 @@ window.showChallengesModal = function() {
 
     // Active Challenges Sector
     let activeChallengesCount = state.stats.activeChallenges ? state.stats.activeChallenges.length : 0;
-    let completedChallengesCount = state.stats.completedChallengeIds ? state.stats.completedChallengeIds.length : 0;
+    let completedChallengesCount = state.stats.completedChallengeIds ?
+        (state.config.unlocks ? state.stats.completedChallengeIds.filter(id => state.config.unlocks.some(u => u.areaId === id)).length : state.stats.completedChallengeIds.length)
+        : 0;
     let totalChallengesCount = activeChallengesCount + completedChallengesCount;
 
     html += `<div style="border: 1px solid #555; padding: 10px; border-radius: 5px; background-color: rgba(0,0,0,0.5);">
@@ -446,7 +448,13 @@ window.showChallengesModal = function() {
     html += `</div></div>`;
 
     // Past Challenges Sector
-    let completedCount = state.stats.completedChallengeIds ? state.stats.completedChallengeIds.length : 0;
+    let completedCount = state.stats.completedChallengeIds ?
+        (state.config.unlocks ? state.stats.completedChallengeIds.filter(id => state.config.unlocks.some(u => u.areaId === id)).length : state.stats.completedChallengeIds.length)
+        : 0;
+    let actualCompletedIds = state.stats.completedChallengeIds ?
+        (state.config.unlocks ? state.stats.completedChallengeIds.filter(id => state.config.unlocks.some(u => u.areaId === id)) : state.stats.completedChallengeIds)
+        : [];
+
     if (state.stats.completed150Challenge) completedCount++;
 
     if (completedCount > 0) {
@@ -467,8 +475,8 @@ window.showChallengesModal = function() {
         }
 
 
-        for (let i = completedCount - 1; i >= 0; i--) {
-             let completedId = state.stats.completedChallengeIds[i];
+        for (let i = actualCompletedIds.length - 1; i >= 0; i--) {
+             let completedId = actualCompletedIds[i];
              let pUnlock = state.config.unlocks.find(u => u.areaId === completedId);
              if (!pUnlock) continue;
 
@@ -2126,7 +2134,9 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
 
             const whiteCandiesClaimed = state.stats.whiteCandies || 0;
 
-            let challengesCompleted = state.stats.completedChallengeIds ? state.stats.completedChallengeIds.length : 0;
+            let challengesCompleted = state.stats.completedChallengeIds ?
+                (state.config.unlocks ? state.stats.completedChallengeIds.filter(id => state.config.unlocks.some(u => u.areaId === id)).length : state.stats.completedChallengeIds.length)
+                : 0;
             let maxChallenges = state.config.unlocks ? state.config.unlocks.length : 45;
 
             let assignmentsCompleted = 0;
@@ -2183,7 +2193,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
                             </div>
                             <div style="flex: 1;">
                                 <p><b>White Candies Claimed:</b> ${(whiteCandiesClaimed || 0).toLocaleString()}</p>
-                                <p><b>Tokens Earned:</b> ${(state.stats.tokensEarned || 0).toLocaleString()}</p>
+                                <p><b>Daily Tokens Earned:</b> ${(state.stats.tokensEarned || 0).toLocaleString()}</p>
                                 <p><b>Progress Challenge Completed:</b> ${challengesCompleted}/${maxChallenges}</p>
                             </div>
                         </div>
