@@ -56,7 +56,7 @@ import { showBonusCandyModal } from './ui/bonusCandy.js';
 window.showBonusCandyModal = showBonusCandyModal;
 window.showGiftModal = showGiftModal;
 import { showSettings, exportLog, showAddPokemonModal, forceNextEncounter, activateCheat, showTimeLapseModal, runTimeLapse } from './ui/settings.js';
-import { setupMarket, buyItem, openPokeMarketBuy, renderPokeMarketTab, updateMarketPrices } from './ui/market.js';
+import { setupMarket, buyItem, openPokeMarketBuy, renderPokeMarketTab } from './ui/market.js';
 import { showBackpack, renderBackpackTab, setActiveItem, setAutoPotionThreshold } from './ui/backpack/index.js';
 import { dragStart, dragOver, handleDrop } from './ui/backpack/pokemon.js';
 
@@ -89,7 +89,6 @@ window.exportLog = exportLog;
 window.buyItem = buyItem;
 window.openPokeMarketBuy = openPokeMarketBuy;
 window.renderPokeMarketTab = renderPokeMarketTab;
-window.updateMarketPrices = updateMarketPrices;
 window.showAddPokemonModal = showAddPokemonModal;
 window.forceNextEncounter = forceNextEncounter;
 window.activateCheat = activateCheat;
@@ -2318,8 +2317,22 @@ window.promptExitGame = promptExitGame;
 init();
 
 
-window.showGameAlert = function(message) {
-    let alertBox = document.getElementById('game-alert-toast');
+window.showGameAlert = function(message, attachToElementId = null) {
+    let container = document.body;
+    let isAbsolute = false;
+
+    // If a specific window/container ID is provided, attach the alert relative to it.
+    if (attachToElementId) {
+        const el = document.getElementById(attachToElementId);
+        if (el) {
+            container = el;
+            isAbsolute = true;
+        }
+    }
+
+    // Try to find an existing alert box in the requested container
+    let alertBox = container.querySelector(':scope > #game-alert-toast');
+
     if (!alertBox) {
         alertBox = document.createElement('div');
         alertBox.id = 'game-alert-toast';
@@ -2329,7 +2342,7 @@ window.showGameAlert = function(message) {
         alertBox.style.borderRadius = '10px';
         alertBox.style.border = '2px solid #3498db';
         alertBox.style.boxShadow = '0 4px 15px rgba(0,0,0,0.5)';
-        alertBox.style.zIndex = '9999';
+        alertBox.style.zIndex = '999999';
         alertBox.style.fontSize = '18px';
         alertBox.style.fontWeight = 'bold';
         alertBox.style.textAlign = 'center';
