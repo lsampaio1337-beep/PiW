@@ -248,12 +248,15 @@ export function updateBattleArena() {
     updateActiveItemsUI();
 
     const battleSystem = globals.battleSystem;
-    const inGym = battleSystem && battleSystem.gymState && battleSystem.gymState.isActive;
+        const inGym = battleSystem && battleSystem.gymState && battleSystem.gymState.isActive;
     const inGymCombat = inGym && battleSystem.gymState.inCombat;
+    const inMultiplayer = battleSystem && battleSystem.multiplayerState && battleSystem.multiplayerState.isActive;
 
     const combatArena = document.getElementById('combat-arena');
     if (combatArena) {
-        if (inGymCombat) {
+                if (inMultiplayer) {
+            combatArena.style.backgroundImage = `url('./Assets/BG/BG-Cassino.jpg')`;
+        } else if (inGymCombat) {
             const gym = battleSystem.gymState.gym;
             if (gym.name === "Indigo Plateau") {
                 const trainerIndex = battleSystem.gymState.currentTrainerIndex;
