@@ -105,8 +105,8 @@ This document provides a comprehensive overview of all formulas, game mechanics,
 - **Route 1**: Default
 - **Pewter Gym**: Defeat Route 2 (x15)
 - **Route 3**: Earn Boulder Badge
-- **Mt. Moon**: Catch Spearow (x1)
-- **Cerulean Gym**: Defeat Mt. Moon (x50)
+- **Mount Moon**: Catch Spearow (x1)
+- **Cerulean Gym**: Defeat Mount Moon (x50)
 - **Route 5,6**: Earn Cascade Badge
 - **Vermilion Gym**: Catch Meowth (x2), Oddish (x2)
 - **Route 11**: Earn Thunder Badge
