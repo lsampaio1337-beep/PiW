@@ -65,14 +65,7 @@ export function openPokeMarketBuy() {
     const hasUnlockedUpgrades = true;
 
     const html = `
-        <div id="market-buy-wrapper" style="display: flex; flex-direction: column; width: 100%; height: 100%; margin-top: 0px; --m-width: min(90vw, 825px);">
-
-
-            <div style="padding-top: calc(var(--m-width) * 0.02); margin-bottom: calc(var(--m-width) * 0.015); display: flex; align-items: center; justify-content: center; gap: calc(var(--m-width) * 0.012);">
-                <label style="font-weight: bold; font-size: calc(var(--m-width) * 0.022); color: #2ecc71;">$<span id="market-trainer-money">${state.trainer.money.toLocaleString()}</span></label>
-            </div>
-
-
+        <div id="market-buy-wrapper" style="display: flex; flex-direction: column; width: 100%; height: auto; margin-top: 0px; --m-width: min(90vw, 825px);">
             <div id="market-buy-content" style="display: flex; flex-wrap: wrap; gap: calc(var(--m-width) * 0.018); justify-content: center; overflow-y: auto; flex: 1; padding: calc(var(--m-width) * 0.012);">
                 <!-- Cards injected here -->
             </div>
@@ -85,9 +78,10 @@ export function openPokeMarketBuy() {
 
     const titleHtml = `
         <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
-            <div style="display: inline-flex; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px;">
+            <div style="display: inline-flex; align-items: center; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px;">
                 <button onclick="window.openPokeMarketBuy()" style="background: linear-gradient(to bottom, #2ecc71, #27ae60); color: white; border: 1px solid #2ecc71; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.2); font-size: 14px;">Buy</button>
                 <button onclick="if(window.openPokeMarketSell) window.openPokeMarketSell()" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmouseover="this.style.color='white'; this.style.background='rgba(255,255,255,0.1)';" onmouseout="this.style.color='rgba(255, 255, 255, 0.7)'; this.style.background='transparent';">Sell</button>
+                <div style="color: white; font-weight: bold; font-size: 16px; padding: 0 10px;">$<span id="market-trainer-money">${state.trainer.money.toLocaleString()}</span></div>
             </div>
             <div style="display: inline-flex; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px;">
                 <button id="market-tab-buy-pokeballs" onclick="window.renderPokeMarketTab('pokeballs')" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;">Balls</button>
@@ -425,13 +419,7 @@ export function newBuyItem(itemId, baseCost, category, upgradeType = null) {
 
 export function openPokeMarketSell() {
     const html = `
-        <div id="market-sell-wrapper" style="display: flex; flex-direction: column; width: 100%; height: 100%; margin-top: 0px; --m-width: min(90vw, 825px);">
-
-
-            <div style="padding-top: calc(var(--m-width) * 0.02); margin-bottom: calc(var(--m-width) * 0.015); display: flex; align-items: center; justify-content: center; gap: calc(var(--m-width) * 0.012);">
-                <label style="font-weight: bold; font-size: calc(var(--m-width) * 0.022); color: #2ecc71;">$<span id="market-trainer-money-sell">${state.trainer.money.toLocaleString()}</span></label>
-            </div>
-
+        <div id="market-sell-wrapper" style="display: flex; flex-direction: column; width: 100%; height: auto; margin-top: 0px; --m-width: min(90vw, 825px);">
             <div id="market-pokemon-sell-controls" style="display: none; flex-direction: column; align-items: center; justify-content: center; margin-bottom: calc(var(--m-width) * 0.015); gap: calc(var(--m-width) * 0.012);">
                 <div style="font-size: calc(var(--m-width) * 0.022); font-weight: bold; color: white;">Selected: <span id="market-pokemon-sell-count">0</span> | Total: $<span id="market-pokemon-sell-total">0</span></div>
                 <div style="display: flex; gap: calc(var(--m-width) * 0.012);">
@@ -480,9 +468,10 @@ export function openPokeMarketSell() {
 
     const titleHtml = `
         <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
-            <div style="display: inline-flex; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px;">
+            <div style="display: inline-flex; align-items: center; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px;">
                 <button onclick="window.openPokeMarketBuy()" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmouseover="this.style.color='white'; this.style.background='rgba(255,255,255,0.1)';" onmouseout="this.style.color='rgba(255, 255, 255, 0.7)'; this.style.background='transparent';">Buy</button>
                 <button onclick="if(window.openPokeMarketSell) window.openPokeMarketSell()" style="background: linear-gradient(to bottom, #e74c3c, #c0392b); color: white; border: 1px solid #e74c3c; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.2); font-size: 14px;">Sell</button>
+                <div style="color: white; font-weight: bold; font-size: 16px; padding: 0 10px;">$<span id="market-trainer-money-sell">${state.trainer.money.toLocaleString()}</span></div>
             </div>
             <div style="display: inline-flex; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px;">
                 <button id="market-tab-sell-pokeballs" onclick="if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokeballs')" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;">Balls</button>
