@@ -82,7 +82,9 @@ export function claimDailyReward(dayIndex) {
     const reward = getRewardForDay(state.stats.dailyRewards.daysClaimed);
 
     // Check capacity first
-    let canCollect = true;
+    let failBall = false;
+    let failPotion = false;
+
     for (let ballName in reward.items) {
         let qty = reward.items[ballName];
         let currentBalls = getCurrentCount(state, 'balls');
@@ -91,8 +93,7 @@ export function claimDailyReward(dayIndex) {
         if (ballName === 'Masterball') spaceLeft = Infinity;
 
         if (qty > spaceLeft) {
-            if (window.showGameAlert) window.showGameAlert("Can't collect Ball due to its maximum capacity", "window-calendar");
-            return; // Abort entirely
+            failBall = true;
         }
     }
 
@@ -103,9 +104,19 @@ export function claimDailyReward(dayIndex) {
         let spaceLeft = maxPotions - currentPotions;
 
         if (qty > spaceLeft) {
-            if (window.showGameAlert) window.showGameAlert("Can't collect Potion due to its maximum capacity", "window-calendar");
-            return; // Abort entirely
+            failPotion = true;
         }
+    }
+
+    if (failBall || failPotion) {
+        if (failBall && failPotion) {
+            if (window.showGameAlert) window.showGameAlert("Can't collect Ball and Potion due to its maximum capacity", "window-calendar");
+        } else if (failBall) {
+            if (window.showGameAlert) window.showGameAlert("Can't collect Ball due to its maximum capacity", "window-calendar");
+        } else if (failPotion) {
+            if (window.showGameAlert) window.showGameAlert("Can't collect Potion due to its maximum capacity", "window-calendar");
+        }
+        return; // Abort entirely
     }
 
     // Grant items

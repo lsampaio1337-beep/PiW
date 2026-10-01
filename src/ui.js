@@ -2355,7 +2355,6 @@ window.showGameAlert = function(message, attachToElementId = null) {
     let container = document.body;
     let isAbsolute = false;
 
-    // If a specific window/container ID is provided, attach the alert relative to it.
     if (attachToElementId) {
         const el = document.getElementById(attachToElementId);
         if (el) {
@@ -2364,51 +2363,49 @@ window.showGameAlert = function(message, attachToElementId = null) {
         }
     }
 
-    // Try to find an existing alert box in the requested container
-    let alertBox = container.querySelector(':scope > #game-alert-toast');
+    let alertBox = document.createElement('div');
+    alertBox.className = 'game-alert-toast';
 
-    if (!alertBox) {
-        alertBox = document.createElement('div');
-        alertBox.id = 'game-alert-toast';
-
-        if (isAbsolute) {
-            alertBox.style.position = 'absolute';
-            // Need the container to be relative/absolute so this stays inside
-            if (window.getComputedStyle(container).position === 'static') {
-                container.style.position = 'relative';
-            }
-        } else {
-            alertBox.style.position = 'fixed';
+    if (isAbsolute) {
+        alertBox.style.position = 'absolute';
+        if (window.getComputedStyle(container).position === 'static') {
+            container.style.position = 'relative';
         }
-
-        alertBox.style.top = '20px';
-        alertBox.style.left = '50%';
-        alertBox.style.transform = 'translateX(-50%)';
-        alertBox.style.backgroundColor = 'rgba(0, 0, 0, 0.85)';
-        alertBox.style.color = '#fff';
-        alertBox.style.padding = '15px 30px';
-        alertBox.style.borderRadius = '10px';
-        alertBox.style.border = '2px solid #3498db';
-        alertBox.style.boxShadow = '0 4px 15px rgba(0,0,0,0.5)';
-        alertBox.style.zIndex = '999999';
-        alertBox.style.fontSize = '18px';
-        alertBox.style.fontWeight = 'bold';
-        alertBox.style.textAlign = 'center';
-        alertBox.style.pointerEvents = 'none';
-        alertBox.style.opacity = '0';
-        alertBox.style.transition = 'opacity 0.3s ease-in-out';
-        container.appendChild(alertBox);
+    } else {
+        alertBox.style.position = 'fixed';
     }
 
+    alertBox.style.top = '20px';
+    alertBox.style.left = '50%';
+    alertBox.style.transform = 'translateX(-50%)';
+    alertBox.style.backgroundColor = 'rgba(0, 0, 0, 0.85)';
+    alertBox.style.color = '#fff';
+    alertBox.style.padding = '15px 30px';
+    alertBox.style.borderRadius = '10px';
+    alertBox.style.border = '2px solid #3498db';
+    alertBox.style.boxShadow = '0 4px 15px rgba(0,0,0,0.5)';
+    alertBox.style.zIndex = '999999';
+    alertBox.style.fontSize = '18px';
+    alertBox.style.fontWeight = 'bold';
+    alertBox.style.textAlign = 'center';
+    alertBox.style.pointerEvents = 'none';
+    alertBox.style.opacity = '0';
+    alertBox.style.transition = 'opacity 0.3s ease-in-out';
     alertBox.innerHTML = message;
+
+    container.appendChild(alertBox);
+
+    // Trigger reflow to ensure the transition runs
+    void alertBox.offsetWidth;
     alertBox.style.opacity = '1';
 
-    if (window.gameAlertTimeout) {
-        clearTimeout(window.gameAlertTimeout);
-    }
-
-    window.gameAlertTimeout = setTimeout(() => {
+    setTimeout(() => {
         alertBox.style.opacity = '0';
+        setTimeout(() => {
+            if (alertBox.parentElement) {
+                alertBox.parentElement.removeChild(alertBox);
+            }
+        }, 300); // Wait for fade out
     }, 2500);
 };
 
