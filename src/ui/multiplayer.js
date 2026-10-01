@@ -38,7 +38,8 @@ export async function hostGame() {
             // Trickle ICE finished, now SDP contains all ICE candidates.
             const offer = JSON.stringify(peerConnection.localDescription);
             const encodedOffer = btoa(offer);
-            document.getElementById('multiplayer-host-id').innerText = encodedOffer;
+            const el = document.getElementById('multiplayer-host-id');
+            if(el) el.value = encodedOffer;
         }
     };
 
@@ -63,7 +64,8 @@ export async function joinGame(encodedOffer) {
             // Trickle ICE finished
             const answer = JSON.stringify(peerConnection.localDescription);
             const encodedAnswer = btoa(answer);
-            document.getElementById('mp-join-input').value = encodedAnswer;
+            const el = document.getElementById('multiplayer-client-id');
+            if (el) el.value = encodedAnswer;
             alert("Answer generated! Send the new code below back to the host.");
         }
     };
@@ -192,7 +194,10 @@ export function openMultiplayerModal() {
                     <h3 style="margin-top: 0;">Host Game</h3>
                     <button id="btn-mp-host" style="padding: 10px; cursor: pointer; width: 100%;">1. Generate Offer Code</button>
                     <p style="margin-top: 10px; font-size: 12px;">Send this code to your friend:</p>
-                    <div id="multiplayer-host-id" style="background: #222; padding: 10px; min-height: 20px; word-break: break-all; user-select: all; font-size: 10px; max-height: 80px; overflow-y: auto;">Waiting...</div>
+                    <div style="display: flex; gap: 5px; align-items: center;">
+                        <input type="text" id="multiplayer-host-id" readonly placeholder="Waiting..." style="flex: 1; padding: 5px; box-sizing: border-box; font-size: 10px; background: #222; color: white; border: 1px solid #555;">
+                        <button id="btn-copy-host" style="padding: 5px; cursor: pointer; font-size: 10px;">Copy</button>
+                    </div>
                     <p style="margin-top: 10px; font-size: 12px;">Paste your friend's Answer Code here:</p>
                     <input type="text" id="mp-host-answer-input" placeholder="Paste Answer Code" style="width: 100%; padding: 5px; box-sizing: border-box; font-size: 10px;">
                     <button id="btn-mp-complete" style="padding: 10px; margin-top: 10px; cursor: pointer; width: 100%;">3. Complete Connection</button>
@@ -203,6 +208,12 @@ export function openMultiplayerModal() {
                     <p style="margin-top: 10px; font-size: 12px;">Paste Host's Offer Code here:</p>
                     <input type="text" id="mp-join-input" placeholder="Paste Code Here" style="width: 100%; padding: 5px; box-sizing: border-box; font-size: 10px;">
                     <button id="btn-mp-join" style="padding: 10px; margin-top: 10px; cursor: pointer; width: 100%;">2. Generate Answer Code</button>
+
+                    <p style="margin-top: 10px; font-size: 12px;">Send this Answer Code back to Host:</p>
+                    <div style="display: flex; gap: 5px; align-items: center;">
+                        <input type="text" id="multiplayer-client-id" readonly placeholder="Waiting..." style="flex: 1; padding: 5px; box-sizing: border-box; font-size: 10px; background: #222; color: white; border: 1px solid #555;">
+                        <button id="btn-copy-client" style="padding: 5px; cursor: pointer; font-size: 10px;">Copy</button>
+                    </div>
                 </div>
             </div>
 
@@ -233,6 +244,33 @@ export function openMultiplayerModal() {
                 btnComplete.onclick = () => {
                     const answerId = document.getElementById('mp-host-answer-input').value.trim();
                     if (answerId) completeConnection(answerId);
+                };
+            }
+
+
+            const btnCopyHost = document.getElementById('btn-copy-host');
+            if (btnCopyHost) {
+                btnCopyHost.onclick = () => {
+                    const el = document.getElementById('multiplayer-host-id');
+                    if (el && el.value) {
+                        navigator.clipboard.writeText(el.value).then(() => {
+                            btnCopyHost.innerText = 'Copied!';
+                            setTimeout(() => btnCopyHost.innerText = 'Copy', 2000);
+                        });
+                    }
+                };
+            }
+
+            const btnCopyClient = document.getElementById('btn-copy-client');
+            if (btnCopyClient) {
+                btnCopyClient.onclick = () => {
+                    const el = document.getElementById('multiplayer-client-id');
+                    if (el && el.value) {
+                        navigator.clipboard.writeText(el.value).then(() => {
+                            btnCopyClient.innerText = 'Copied!';
+                            setTimeout(() => btnCopyClient.innerText = 'Copy', 2000);
+                        });
+                    }
                 };
             }
 

@@ -88,6 +88,7 @@ class BattleSystem {
         let maxExpectedDamage = -1;
 
         // In a full implementation, attacker.moves would have populated Move objects
+        if (!attacker.moves) return null;
         for (const move of attacker.moves) {
             // Very simplified: skip if missing data
             if (!move || move.power === 0) continue;
@@ -190,6 +191,7 @@ class BattleSystem {
             qualityName: pokemonDef.qualityName,
             isShiny: pokemonDef.isShiny,
             currentStats: stats,
+            moves: pokemonDef.moves || this.getLearnsetMoves(pokemonBase, pokemonDef.level),
             isBoss: false,
             catchRate: 0
         };
@@ -205,8 +207,13 @@ class BattleSystem {
         }
 
         this.isSearching = false;
+        this.isSliding = true;
+        this.slideDuration = slideDelay;
 
         this.combatLoop = setTimeout(() => {
+            this.isSliding = false;
+            this.updateUI();
+
             const playerPokemon = this.state.party[0];
             const enemyPokemon = this.activeEncounter;
 
@@ -254,7 +261,8 @@ class BattleSystem {
             if (this.isFainting) return;
             if (!this.activeEncounter) return;
 
-            const move = this.getBestMove(attacker, defender);
+            let move = this.getBestMove(attacker, defender);
+            if (!move) move = { name: 'Struggle', type: 'Normal', category: 'Physical', power: 50 };
             const isPhysical = move.category === 'Physical';
             const atkStat = isPhysical ? attacker.currentStats.atk : attacker.currentStats.spa;
             const defStat = isPhysical ? defender.currentStats.def : defender.currentStats.spd;
@@ -283,8 +291,8 @@ class BattleSystem {
                 }
 
                 // Send result to client
-                if (mp.connection) {
-                     mp.connection.send({
+                if (mp.dataChannel) {
+                     mp.dataChannel.send(JSON.stringify({
                          type: 'combatEvent',
                          event: {
                              type: 'attack',
@@ -296,7 +304,7 @@ class BattleSystem {
                              moveType: move.type,
                              fainted: fainted
                          }
-                     });
+                     }));
                 }
 
                 this.updateUI();
