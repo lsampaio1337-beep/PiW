@@ -262,6 +262,12 @@ export function updateBattleArena() {
     const inGymCombat = inGym && battleSystem.gymState.inCombat;
     const inMultiplayer = battleSystem && battleSystem.multiplayerState && battleSystem.multiplayerState.isActive;
 
+    const plainsRoutes = ["Route 1","Route 2","Route 3","Route 4","Route 24","Route 25","Route 9","Route 10","Power Plant","Route 5","Fighting Dojo","Route 7","Route 6","Route 8","Route 11","Route 12","Cycling Road","Route 13","Route 14","Route 15","Pokémon Mansion","Trade With Friends Hub","Route 22","Route 23","Victory Road"];
+    const waterRoutes = ["Small Fishing Spot","Sea Routes","Seafoam Islands","Big Fishing Spot"];
+    const caveRoutes = ["Mount Moon","Cerulean Cave","Pokémon Tower","Rock Tunnel","Fossil Revival","Mythical and Legendaries"];
+    const scrollingRoutes = ["Viridian Forest","Route 1","Route 2","Route 3","Route 4","Route 24","Route 25","Route 9","Route 10","Power Plant","Route 5","Fighting Dojo","Route 7","Route 6","Route 8","Route 11","Route 12","Cycling Road","Route 13","Route 14","Route 15","Pokémon Mansion","Trade With Friends Hub","Route 22","Route 23","Victory Road","Small Fishing Spot","Sea Routes","Seafoam Islands","Big Fishing Spot","Mount Moon","Cerulean Cave","Pokémon Tower","Rock Tunnel","Fossil Revival","Mythical and Legendaries"];
+
+
     const combatArena = document.getElementById('combat-arena');
     if (combatArena) {
                 if (inMultiplayer) {
@@ -300,14 +306,18 @@ export function updateBattleArena() {
              combatArena.style.backgroundImage = `url('./Assets/BG/BG-Cassino.jpg')`;
         } else if (state.currentRoute === 'Viridian Forest') {
             combatArena.style.backgroundImage = `url('./Assets/BG/BGForest.png')`;
-        } else if (state.currentRoute === 'Route 1' || state.currentRoute === 'Victory Road') {
+        } else if (plainsRoutes.includes(state.currentRoute)) {
             combatArena.style.backgroundImage = `url('./Assets/BG/BGPlains.png')`;
+        } else if (waterRoutes.includes(state.currentRoute)) {
+            combatArena.style.backgroundImage = `url('./Assets/BG/BGWater.png')`;
+        } else if (caveRoutes.includes(state.currentRoute)) {
+            combatArena.style.backgroundImage = `url('./Assets/BG/BGCave.png')`;
         } else {
             combatArena.style.backgroundImage = `url('./Assets/BG/BG.png')`;
         }
 
-        // Handle Viridian Forest BG sizing and positioning
-        if ((state.currentRoute === 'Viridian Forest' || state.currentRoute === 'Route 1' || state.currentRoute === 'Victory Road') && !inGymCombat) {
+        // Handle BG sizing and positioning for scrolling routes
+        if (scrollingRoutes.includes(state.currentRoute) && !inGymCombat) {
             combatArena.style.backgroundSize = 'auto 100%';
             combatArena.style.backgroundRepeat = 'repeat-x';
 
