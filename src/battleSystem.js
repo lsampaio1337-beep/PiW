@@ -167,7 +167,6 @@ class BattleSystem {
                      this.state.party.push(p);
                 });
             }
-            alert("Multiplayer battle ended.");
 
             if (typeof window.switchView === 'function') {
                 window.switchView("PROF_OAK_LAB");
@@ -178,6 +177,25 @@ class BattleSystem {
             let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed));
             slideDelay = Math.max(300, slideDelay) / this.state.settings.gameSpeed;
             this.generateEncounter(slideDelay);
+
+            // Re-open multiplayer modal and reset ready states so players stay connected
+            if (typeof window.resetMultiplayerReady === 'function') {
+                window.resetMultiplayerReady();
+            }
+            if (typeof window.openMultiplayerModal === 'function') {
+                const hostStatus = typeof window.getMultiplayerIsHost === 'function' ? window.getMultiplayerIsHost() : false;
+                window.openMultiplayerModal(hostStatus ? 'host' : 'join');
+            }
+        }).catch(err => {
+            console.error("Error importing multiplayer:", err);
+            // Fallback: Re-open multiplayer modal and reset ready states so players stay connected
+            if (typeof window.resetMultiplayerReady === 'function') {
+                window.resetMultiplayerReady();
+            }
+            if (typeof window.openMultiplayerModal === 'function') {
+                const hostStatus = typeof window.getMultiplayerIsHost === 'function' ? window.getMultiplayerIsHost() : false;
+                window.openMultiplayerModal(hostStatus ? 'host' : 'join');
+            }
         });
     }
 
@@ -351,8 +369,14 @@ class BattleSystem {
              setTimeout(() => {
                  this.isFainting = false;
                  if (this.multiplayerState.currentPokemonIndex >= this.multiplayerState.opponentParty.length) {
-                     alert("You won the multiplayer battle!");
                      this.stopMultiplayerBattle();
+                     setTimeout(() => {
+                         if (typeof window.showGameAlert === 'function') {
+                             window.showGameAlert("You won the multiplayer battle!", "window-multiplayer");
+                         } else {
+                             alert("You won the multiplayer battle!");
+                         }
+                     }, 100);
                  } else {
                      const leaderSpeed = this.state.party[0].currentStats.spe;
                      let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed));
@@ -371,8 +395,14 @@ class BattleSystem {
 
                  if (this.state.party.length === 0) {
                      this.isFainting = false;
-                     alert("You lost the multiplayer battle.");
                      this.stopMultiplayerBattle();
+                     setTimeout(() => {
+                         if (typeof window.showGameAlert === 'function') {
+                             window.showGameAlert("You lost the multiplayer battle.", "window-multiplayer");
+                         } else {
+                             alert("You lost the multiplayer battle.");
+                         }
+                     }, 100);
                  } else {
                      this.isFainting = false;
                      const playerPokemon = this.state.party[0];
