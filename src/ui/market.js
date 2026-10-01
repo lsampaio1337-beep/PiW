@@ -107,6 +107,7 @@ export function openPokeMarketBuy() {
                 <button id="market-tab-buy-pokeballs" onclick="window.renderPokeMarketTab('pokeballs')" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;">Balls</button>
                 <button id="market-tab-buy-potions" onclick="window.renderPokeMarketTab('potions')" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;">Potions</button>
                 <button id="market-tab-buy-stones" onclick="window.renderPokeMarketTab('stones')" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;">Stones</button>
+                <button id="market-tab-buy-vitamins" onclick="window.renderPokeMarketTab('vitamins')" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;">Vitamins</button>
                 ${hasUnlockedUpgrades ? `<button id="market-tab-buy-upgrades" onclick="window.renderPokeMarketTab('upgrades')" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;">Upgrades</button>` : ''}
             </div>
         </div>
@@ -176,46 +177,12 @@ export function formatMarketNumber(num) {
     return displayStr;
 }
 
-export function updateMarketPrices() {
-    const qtyInput = document.getElementById('market-global-qty');
-    if (!qtyInput) return;
-
-    let qty = parseMarketQuantity(qtyInput.value);
-    let category = document.getElementById('market-buy-content')?.dataset.category;
-
-    if (category === 'pokeballs' || category === 'potions') {
-        const type = category === 'pokeballs' ? 'balls' : 'potions';
-        const currentCount = getCurrentCount(state, type);
-        const capacity = getCapacity(state, type);
-        const spaceLeft = capacity - currentCount;
-
-        if (qty > spaceLeft) {
-            qty = Math.max(0, spaceLeft);
-            qtyInput.value = qty > 0 ? formatMarketNumberDown(qty).replace('~', '') : "0";
-        }
-    } else {
-        if (qty > 1000000) {
-            qty = 1000000;
-            qtyInput.value = "1M";
-        }
-    }
-
-    document.querySelectorAll('.market-item-card').forEach(card => {
-        const basePrice = parseInt(card.dataset.price);
-        const finalPrice = basePrice * qty;
-        const priceLabel = card.querySelector('.market-final-price');
-        if (priceLabel) {
-            priceLabel.textContent = '$' + formatMarketNumber(finalPrice);
-        }
-    });
-}
-
 export function renderPokeMarketTab(category) {
     const content = document.getElementById('market-buy-content');
     if (!content) return;
 
     // Highlight active tab
-    const tabs = ['pokeballs', 'potions', 'stones', 'upgrades'];
+    const tabs = ['pokeballs', 'potions', 'stones', 'vitamins', 'upgrades'];
     tabs.forEach(tab => {
         const btn = document.getElementById(`market-tab-buy-${tab}`);
         if (btn) {
@@ -298,16 +265,27 @@ export function renderPokeMarketTab(category) {
                 };
             });
     } else if (category === 'stones') {
-        const stonePrice = state.config.balance.items.stones.price;
-        let stoneKeys = Object.keys(state.backpack.stones);
+        const badges = state.trainer.badges || 0;
+        const stonePrice = badges >= 8 ? 10000 : Math.max(500, 1000 * badges);
+        let stoneKeys = Object.keys(state.backpack.stones).filter(k => !VITAMINS.includes(k));
         stoneKeys.sort((a, b) => a.localeCompare(b));
         items = stoneKeys.map(stoneName => {
-            const isVitamin = VITAMINS.includes(stoneName);
             return {
                 name: stoneName,
                 price: stonePrice,
-                img: isVitamin ? `./Assets/Items/Vitamins/${stoneName}.png` : `./Assets/Items/Stones/${stoneName}.png`,
-                attrLabel: isVitamin ? `Stat Item` : `Evolution Item`
+                img: `./Assets/Items/Stones/${stoneName}.png`,
+                attrLabel: `Evolution Item`
+            };
+        });
+    } else if (category === 'vitamins') {
+        const badges = state.trainer.badges || 0;
+        const vitaminPrice = badges >= 8 ? 10000 : Math.max(2000, 1000 * badges);
+        items = VITAMINS.map(vitaminName => {
+            return {
+                name: vitaminName,
+                price: vitaminPrice,
+                img: `./Assets/Items/Vitamins/${vitaminName}.png`,
+                attrLabel: `Stat Item`
             };
         });
     }
@@ -325,8 +303,9 @@ export function renderPokeMarketTab(category) {
 
         let stock = 0;
         let maxCapStr = "";
-        if (category !== 'upgrades' && state.backpack[category] && state.backpack[category][item.name]) {
-            stock = state.backpack[category][item.name];
+        const targetCategory = category === 'vitamins' ? 'stones' : category;
+        if (category !== 'upgrades' && state.backpack[targetCategory] && state.backpack[targetCategory][item.name]) {
+            stock = state.backpack[targetCategory][item.name];
         }
         if (category === 'pokeballs' || category === 'potions') {
             const type = category === 'pokeballs' ? 'balls' : 'potions';
@@ -355,16 +334,10 @@ export function renderPokeMarketTab(category) {
     html += `</div>`;
 
     content.innerHTML = html;
-    updateMarketPrices();
 }
 
 export function buyItem(itemId, baseCost, category, upgradeType = null) {
     let qty = 1;
-    if (category !== 'upgrades') {
-        const qtyInput = document.getElementById('market-global-qty');
-        qty = parseMarketQuantity(qtyInput ? qtyInput.value : '1');
-        if (qty <= 0) return;
-    }
 
     if (category === 'pokeballs' || category === 'potions') {
         const type = category === 'pokeballs' ? 'balls' : 'potions';
@@ -384,10 +357,11 @@ export function buyItem(itemId, baseCost, category, upgradeType = null) {
         if (category === 'upgrades') {
             state.stats.upgrades[upgradeType + 'Tier'] += 1;
         } else {
-            if (state.backpack[category][itemId] === undefined) {
-                 state.backpack[category][itemId] = 0;
+            const targetCategory = category === 'vitamins' ? 'stones' : category;
+            if (state.backpack[targetCategory][itemId] === undefined) {
+                 state.backpack[targetCategory][itemId] = 0;
             }
-            state.backpack[category][itemId] += qty;
+            state.backpack[targetCategory][itemId] += qty;
         }
 
         // Track Daily Challenges
@@ -409,46 +383,6 @@ export function buyItem(itemId, baseCost, category, upgradeType = null) {
     }
 }
 
-
-export function buySetMax() {
-    const qtyInput = document.getElementById('market-global-qty');
-    const content = document.getElementById('market-buy-content');
-    if (!qtyInput || !content) return;
-
-    let category = content.dataset.category;
-    if (category === 'upgrades') return; // Should be hidden anyway
-
-    let maxQty = 1000000; // default large number
-    let moneyAvailable = state.trainer.money;
-
-    // Find the cheapest item in this category to calculate max based on money, or just calculate space left
-    let minPrice = Infinity;
-    const cards = document.querySelectorAll('.market-item-card');
-    cards.forEach(card => {
-        let price = parseInt(card.dataset.price);
-        if (price < minPrice) minPrice = price;
-    });
-
-    if (minPrice !== Infinity && minPrice > 0) {
-        let affordable = Math.floor(moneyAvailable / minPrice);
-        if (affordable < maxQty) maxQty = affordable;
-    }
-
-    if (category === 'pokeballs' || category === 'potions') {
-        const type = category === 'pokeballs' ? 'balls' : 'potions';
-        const currentCount = getCurrentCount(state, type);
-        const capacity = getCapacity(state, type);
-        const spaceLeft = capacity - currentCount;
-
-        if (spaceLeft < maxQty) {
-            maxQty = spaceLeft;
-        }
-    }
-
-    maxQty = Math.max(0, maxQty);
-    qtyInput.value = maxQty > 0 ? formatMarketNumberDown(maxQty).replace('~', '') : "0";
-    updateMarketPrices();
-}
 
 export function formatMarketNumberDown(num) {
     return _formatMarketNumberDown(num);
@@ -659,25 +593,32 @@ export function renderPokeMarketSellTab(category) {
                 };
             });
     } else if (category === 'stones') {
-        const stonePrice = state.config.balance.items.stones.price;
         let stoneKeysSell = Object.keys(state.backpack.stones).filter(k => !VITAMINS.includes(k));
         stoneKeysSell.sort((a, b) => a.localeCompare(b));
         items = stoneKeysSell.map(stoneName => {
-            const isVitamin = VITAMINS.includes(stoneName);
             return {
                 name: stoneName,
-                buyPrice: stonePrice,
+                sellPrice: 50,
                 img: `./Assets/Items/Stones/${stoneName}.png`
             };
         });
     } else if (category === 'vitamins') {
-        // Base sell price should be $5. The logic below calculates baseSellPrice = Math.floor(buyPrice * 0.5)
-        // Therefore, we set buyPrice to 10 so that baseSellPrice is 5.
-        const vitaminBuyPrice = 10;
+        const getVitaminSellPrice = (vitaminName) => {
+            switch(vitaminName) {
+                case 'HP Up': return 80;
+                case 'Carbo Speed': return 40;
+                case 'Protein Atk':
+                case 'Calcium SpAtk': return 60;
+                case 'Iron Def':
+                case 'Zinc SpDef': return 50;
+                default: return 50;
+            }
+        };
+
         items = VITAMINS.map(vitaminName => {
             return {
                 name: vitaminName,
-                buyPrice: vitaminBuyPrice,
+                sellPrice: getVitaminSellPrice(vitaminName),
                 img: `./Assets/Items/Vitamins/${vitaminName}.png`
             };
         });
@@ -689,7 +630,7 @@ export function renderPokeMarketSellTab(category) {
         if (category === 'potions') displayName = displayName.replace(' Potion', '<br>Potion');
         if (category === 'stones') displayName = displayName.replace(' Stone', '<br>Stone');
 
-        const baseSellPrice = Math.floor(item.buyPrice * 0.5);
+        const baseSellPrice = item.sellPrice !== undefined ? item.sellPrice : Math.floor(item.buyPrice * 0.5);
         let stock = 0;
         let maxCapStr = "";
         const targetCategory = category === 'vitamins' ? 'stones' : category;
@@ -952,6 +893,4 @@ window.marketSellSelectedPokemon = function() {
 };
 window.openPokeMarketBuy = openPokeMarketBuy;
 window.renderPokeMarketTab = renderPokeMarketTab;
-window.updateMarketPrices = updateMarketPrices;
-window.buySetMax = buySetMax;
 window.buyItem = buyItem;

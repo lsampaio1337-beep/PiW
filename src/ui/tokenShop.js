@@ -3,18 +3,15 @@ import { VITAMINS } from '../constants.js';
 
 export function renderTokenShopHtml() {
     let html = `
-        <div style="display: flex; flex-direction: column; align-items: center; padding: 20px; color: white;">
-            <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+        <div style="display: flex; flex-direction: column; align-items: center; padding: 20px; color: white; box-sizing: border-box; width: 100%;">
+            <div style="display: flex; justify-content: center; width: 100%; margin-bottom: 20px;">
                 <div style="display: flex; align-items: center; gap: 10px; background: rgba(0,0,0,0.5); padding: 10px 20px; border-radius: 10px; border: 2px solid #f1c40f;">
-                    <img src="Assets/Extra/Token.png" style="width: 32px; height: 32px;">
-                    <span style="font-size: 24px; font-weight: bold; color: #f1c40f;">Tokens: ${state.trainer.tokens || 0}</span>
+                    <img src="Assets/Extra/Token.png" style="width: 48px; height: 48px; object-fit: contain;">
+                    <span style="font-size: 24px; font-weight: bold; color: #f1c40f; display: flex; align-items: center;">Daily Tokens: ${state.trainer.tokens || 0}</span>
                 </div>
-                <button onclick="window.giveFreeTokens()" style="background: #e67e22; color: white; border: none; border-radius: 10px; padding: 10px 20px; font-weight: bold; cursor: pointer; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); transition: transform 0.1s;">
-                    + Token
-                </button>
             </div>
 
-            <div style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; max-width: 100%;">
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; justify-content: center; width: 100%;">
                 ${getTokenShopItemsHtml()}
             </div>
         </div>
@@ -134,7 +131,7 @@ function getTokenShopItemsHtml() {
         }
 
         html += `
-            <div style="background: #2c3e50; border: 2px solid #f1c40f; border-radius: 8px; padding: 8px; width: 150px; display: flex; flex-direction: column; align-items: center; text-align: center; justify-content: space-between;">
+            <div style="background: #2c3e50; border: 2px solid #3498db; border-radius: 8px; padding: 8px; display: flex; flex-direction: column; align-items: center; text-align: center; justify-content: space-between; box-sizing: border-box; width: 100%;">
                 <div style="font-weight: bold; font-size: 12px; margin-bottom: 5px; height: 30px; display: flex; align-items: center;">${item.name}</div>
                 <img src="${item.img}" style="width: 40px; height: 40px; object-fit: contain; margin-bottom: 5px;">
                 <div style="font-size: 10px; color: #bdc3c7; margin-bottom: 10px; flex-grow: 1;">${item.desc}</div>
@@ -169,9 +166,20 @@ function handleTokenPurchase(cost, callback) {
             window.showCalendar('shop');
         }
         if (window.updateUI) window.updateUI();
+
+        setTimeout(() => {
+            const win = document.getElementById('window-calendar');
+            if (win) {
+                if (typeof win.adjustHeightForNewContent === 'function') {
+                    win.adjustHeightForNewContent();
+                } else if (window.windowManager) {
+                    window.windowManager.recalculateWindowSize('window-calendar');
+                }
+            }
+        }, 50);
     } else {
         if (window.showGameAlert) {
-            window.showGameAlert(`Not enough tokens! You need ${cost}.`);
+            window.showGameAlert(`Not enough tokens! You need ${cost}.`, 'window-calendar');
         }
     }
 }
@@ -183,7 +191,7 @@ window.buyTokenItem = function(itemType) {
                 state.backpack.pokeballs["Masterball"] = 0;
             }
             state.backpack.pokeballs["Masterball"] += 1;
-            if (window.showGameAlert) window.showGameAlert("Bought 1x Masterball!");
+            if (window.showGameAlert) window.showGameAlert("Bought 1x Masterball!", 'window-calendar');
         });
     }
 };
@@ -194,7 +202,7 @@ window.buyTokenUnlock = function(unlockKey) {
             state.stats.upgradesUnlocked = {};
         }
         state.stats.upgradesUnlocked[unlockKey] = true;
-        if (window.showGameAlert) window.showGameAlert(`Unlocked ${unlockKey} upgrades!`);
+        if (window.showGameAlert) window.showGameAlert(`Unlocked ${unlockKey} upgrades!`, 'window-calendar');
     });
 };
 
@@ -213,7 +221,7 @@ window.buyTokenItemRandom = function(itemType) {
             if (!state.backpack.stones[itemAwarded]) state.backpack.stones[itemAwarded] = 0;
             state.backpack.stones[itemAwarded] += 1;
         }
-        if (window.showGameAlert) window.showGameAlert(`Got 1x ${itemAwarded}!`);
+        if (window.showGameAlert) window.showGameAlert(`Got 1x ${itemAwarded}!`, 'window-calendar');
     });
 };
 
@@ -262,7 +270,7 @@ window.confirmTokenItemSelect = function(itemName) {
         }
         state.backpack.stones[itemName] += 1;
 
-        if (window.showGameAlert) window.showGameAlert(`Bought 1x ${itemName}!`);
+        if (window.showGameAlert) window.showGameAlert(`Bought 1x ${itemName}!`, 'window-calendar');
         // The handleTokenPurchase already navigates back to 'shop' calendar tab
     });
 };
