@@ -21,23 +21,21 @@ window.claimPendingGift = function(index) {
             let maxBalls = getCapacity(state, 'balls');
             let spaceLeft = maxBalls - currentBalls;
             if (qty > spaceLeft) {
-                qty = Math.max(0, spaceLeft);
                 if (window.showGameAlert) window.showGameAlert("Can't collect Ball due to its maximum capacity", "window-gifts");
+                return; // Abort entirely
             }
         } else if (isPotion) {
             let currentPotions = getCurrentCount(state, 'potions');
             let maxPotions = getCapacity(state, 'potions');
             let spaceLeft = maxPotions - currentPotions;
             if (qty > spaceLeft) {
-                qty = Math.max(0, spaceLeft);
                 if (window.showGameAlert) window.showGameAlert("Can't collect Potion due to its maximum capacity", "window-gifts");
+                return; // Abort entirely
             }
         }
 
-        if (qty > 0) {
-            if (!state.backpack[gift.item]) state.backpack[gift.item] = 0;
-            state.backpack[gift.item] += qty;
-        }
+        if (!state.backpack[gift.item]) state.backpack[gift.item] = 0;
+        state.backpack[gift.item] += qty;
     } else if (gift.type === 'badge') {
         state.trainer.badges++;
     }
