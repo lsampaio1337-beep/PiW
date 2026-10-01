@@ -4,7 +4,10 @@ import { state, globals } from '../state.js';
 import { getCapacity } from '../mathEngine.js';
 
 
+
 function updateActiveItemsUI() {
+    const smartwatchTier = state.stats?.upgrades?.smartwatchTier || 0;
+
     const potionImg = document.getElementById('smartwatch-potion-img');
     const potionCount = document.getElementById('smartwatch-potion-count');
     const potionCard = document.getElementById('smartwatch-potion-card');
@@ -13,6 +16,7 @@ function updateActiveItemsUI() {
     const openType = (popup && popup.style.display === 'flex') ? popup.dataset.type : null;
 
     if (potionImg && potionCount && potionCard) {
+        potionCard.style.display = smartwatchTier >= 2 ? 'flex' : 'none';
         if (state.settings.activePotionTier >= 0) {
             potionCard.style.border = '2px solid #2ecc71'; // Green
             const potionName = state.config.balance.items.potions[state.settings.activePotionTier].name;
@@ -66,6 +70,7 @@ function updateActiveItemsUI() {
     const ballCard = document.getElementById('smartwatch-ball-card');
 
     if (ballImg && ballCount && ballCard) {
+        ballCard.style.display = smartwatchTier >= 1 ? 'flex' : 'none';
         if (state.settings.activeBallTier >= 0) {
             ballCard.style.border = '2px solid #2ecc71'; // Green
             const ballName = state.config.balance.items.pokeballs[state.settings.activeBallTier].name;
@@ -91,6 +96,7 @@ function formatActiveItemQuantity(q) {
 }
 
 window.showActiveItemSelection = function(type) {
+    const smartwatchTier = state.stats?.upgrades?.smartwatchTier || 0;
     const popup = document.getElementById('smartwatch-item-selection-popup');
     if (!popup) return;
 
@@ -162,11 +168,13 @@ window.showActiveItemSelection = function(type) {
         }
 
         // Add Pokedex icon for Smart Capture Mode
-        html += `
-            <div onclick="window.showSmartCaptureMode(); document.getElementById('smartwatch-item-selection-popup').style.display = 'none';" style="width: 30px; height: 30px; background: rgba(0, 0, 0, 0.6); border: 2px solid #3498db; border-radius: 8px; position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer;" title="Smart Capture Mode">
-                <img src="./Assets/Extra/IconPokedex.png" style="width: 80%; height: 80%; object-fit: contain;">
-            </div>
-        `;
+        if (smartwatchTier >= 3) {
+            html += `
+                <div onclick="window.showSmartCaptureMode(); document.getElementById('smartwatch-item-selection-popup').style.display = 'none';" style="width: 30px; height: 30px; background: rgba(0, 0, 0, 0.6); border: 2px solid #3498db; border-radius: 8px; position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer;" title="Smart Capture Mode">
+                    <img src="./Assets/Extra/IconPokedex.png" style="width: 80%; height: 80%; object-fit: contain;">
+                </div>
+            `;
+        }
     } else if (type === 'threshold') {
         html += `
             <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 5px; width: 120px;">
@@ -368,24 +376,31 @@ export function updateBattleArena() {
             const hpTextEnemy = document.getElementById('enemy-battle-hp-text');
             const hpPctEnemy = document.getElementById('enemy-battle-hp-pct');
 
-            if (hpContainerEnemy) hpContainerEnemy.style.display = 'flex';
+
+        const glassTier = state.stats?.upgrades?.glassTier || 0;
+            if (hpContainerEnemy) hpContainerEnemy.style.display = glassTier >= 1 ? 'flex' : 'none';
 
             const enemyDataModals = document.getElementById('enemy-data-modals');
             if (enemyDataModals) {
-                enemyDataModals.style.display = 'flex';
+                enemyDataModals.style.display = glassTier >= 3 ? 'flex' : 'none';
 
                 const levelEl = document.getElementById('enemy-battle-level');
-                if (levelEl) levelEl.innerText = `Lv. ${enemy.level}`;
-
-                const sumivEl = document.getElementById('enemy-battle-sumiv');
-                if (sumivEl && enemy.ivs) {
-                    const sumIV = enemy.ivs.hp + enemy.ivs.atk + enemy.ivs.def + enemy.ivs.spa + enemy.ivs.spd + enemy.ivs.spe;
-                    sumivEl.innerText = `SumIV: ${sumIV}`;
+                if (levelEl) {
+                    levelEl.innerText = `Lv. ${enemy.level}`;
+                    levelEl.style.display = glassTier >= 3 ? 'block' : 'none';
                 }
 
                 const qtierEl = document.getElementById('enemy-battle-qtier');
                 if (qtierEl && enemy.quality) {
                     qtierEl.innerText = `Q: ${enemy.quality.toFixed(2)}`;
+                    qtierEl.style.display = glassTier >= 4 ? 'block' : 'none';
+                }
+
+                const sumivEl = document.getElementById('enemy-battle-sumiv');
+                if (sumivEl && enemy.ivs) {
+                    const sumIV = enemy.ivs.hp + enemy.ivs.atk + enemy.ivs.def + enemy.ivs.spa + enemy.ivs.spd + enemy.ivs.spe;
+                    sumivEl.innerText = `SumIV: ${sumIV}`;
+                    sumivEl.style.display = glassTier >= 5 ? 'block' : 'none';
                 }
             }
 
@@ -842,6 +857,10 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
 
 
 export function showDamage(target, amount, isCrit, moveName = '', moveType = 'Normal', effectiveness = 1) {
+    if (target === 'enemy') {
+        const glassTier = state.stats?.upgrades?.glassTier || 0;
+        if (glassTier < 2) return;
+    }
     const battleSystem = globals.battleSystem;
     let containerId = target === 'player' ? 'player-side' : 'enemy-side';
 

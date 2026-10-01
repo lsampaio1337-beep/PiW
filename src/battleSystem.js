@@ -47,11 +47,25 @@ class BattleSystem {
         return this.evolutionStageMap[pokemonId] || 1;
     }
 
+    getLootTier() {
+        return this.state.stats?.upgrades?.lootTier || 0;
+    }
+
+    getSpeedMultiplier() {
+        const tier = this.state.stats?.upgrades?.speedTier || 0;
+        if (tier === 1) return 0.9;
+        if (tier === 2) return 0.8;
+        if (tier === 3) return 0.7;
+        if (tier === 4) return 0.6;
+        if (tier >= 5) return 0.5;
+        return 1.0;
+    }
+
     start() {
 
         if (!this.combatLoop) {
             const leaderSpeed = this.state.party[0].currentStats.spe;
-            let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed));
+            let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed)) * this.getSpeedMultiplier();
             slideDelay = Math.max(300, slideDelay) / this.state.settings.gameSpeed;
             this.generateEncounter(slideDelay);
         }
@@ -186,7 +200,7 @@ class BattleSystem {
                     window.switchView("BATTLE_ARENA");
                 }
                 const leaderSpeed = this.state.party[0].currentStats.spe;
-            let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed));
+            let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed)) * this.getSpeedMultiplier();
             slideDelay = Math.max(300, slideDelay) / this.state.settings.gameSpeed;
             this.generateEncounter(slideDelay);
             };
@@ -270,7 +284,7 @@ class BattleSystem {
 
         // Speed Delays: Search Time: BaseSearchTime(3.0s) * (100 / (100 + Speed)), minimum 0.30s
         const leaderSpeed = this.state.party[0].currentStats.spe;
-        let delay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed));
+        let delay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed)) * this.getSpeedMultiplier();
         delay = Math.max(300, delay) / this.state.settings.gameSpeed;
 
         // Start encounter generation after search delay, slide duration will be same as search delay
@@ -980,7 +994,7 @@ class BattleSystem {
             dropRate = 1.0;
         }
 
-        if (Math.random() < (dropRate * lootMultiplier) && this.activeEncounter.types && this.activeEncounter.types.length > 0) {
+        if (this.getLootTier() >= 3 && Math.random() < (dropRate * lootMultiplier) && this.activeEncounter.types && this.activeEncounter.types.length > 0) {
             const types = this.activeEncounter.types;
             const randomType = types[Math.floor(Math.random() * types.length)];
             const stoneName = `${randomType} Stone`;
@@ -1001,7 +1015,7 @@ class BattleSystem {
         }
 
         // Vitamin drops
-        if (sumIV > 500 && this.activeEncounter?.quality > 1.6 && Math.random() < (0.05 * lootMultiplier)) {
+        if (this.getLootTier() >= 4 && sumIV > 500 && this.activeEncounter?.quality > 1.6 && Math.random() < (0.05 * lootMultiplier)) {
             const vitamins = VITAMINS;
             const randomVitamin = vitamins[Math.floor(Math.random() * vitamins.length)];
 
@@ -1014,7 +1028,7 @@ class BattleSystem {
 
         let customDropChance = (2.0 * (sumIV / 600.0)) / 100.0;
 
-        if (Math.random() < (customDropChance * lootMultiplier)) {
+        if (this.getLootTier() >= 1 && Math.random() < (customDropChance * lootMultiplier)) {
             let ballDrop = "Pokeball";
             let potionDrop = "Tiny Potion";
             let level = this.activeEncounter.level;
@@ -1027,11 +1041,14 @@ class BattleSystem {
             let dropQuantity = Math.floor(lootMultiplier);
             if (Math.random() < (lootMultiplier % 1)) dropQuantity += 1;
 
-            if (Math.random() < 0.5) {
+            // If tier 2+, 50/50 for ball or potion. If tier 1, always potion.
+            if (this.getLootTier() >= 2 && Math.random() < 0.5) {
+                if (!this.state.backpack.pokeballs) this.state.backpack.pokeballs = {};
                 if (!this.state.backpack.pokeballs[ballDrop]) this.state.backpack.pokeballs[ballDrop] = 0;
                 this.state.backpack.pokeballs[ballDrop] += dropQuantity;
                 lootedItemsThisBattle[ballDrop] = (lootedItemsThisBattle[ballDrop] || 0) + dropQuantity;
             } else {
+                if (!this.state.backpack.potions) this.state.backpack.potions = {};
                 if (!this.state.backpack.potions[potionDrop]) this.state.backpack.potions[potionDrop] = 0;
                 this.state.backpack.potions[potionDrop] += dropQuantity;
                 lootedItemsThisBattle[potionDrop] = (lootedItemsThisBattle[potionDrop] || 0) + dropQuantity;
@@ -1104,7 +1121,7 @@ class BattleSystem {
             this.handleGymEnemyDefeat();
         } else {
             const leaderSpeed = this.state.party[0].currentStats.spe;
-            let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed));
+            let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed)) * this.getSpeedMultiplier();
             slideDelay = Math.max(300, slideDelay) / this.state.settings.gameSpeed;
             this.generateEncounter(slideDelay);
         }
@@ -1155,7 +1172,7 @@ class BattleSystem {
         } else {
             // Next pokemon
             const leaderSpeed = this.state.party[0].currentStats.spe;
-            let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed));
+            let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed)) * this.getSpeedMultiplier();
             slideDelay = Math.max(300, slideDelay) / this.state.settings.gameSpeed;
             this.generateEncounter(slideDelay);
         }
@@ -1288,7 +1305,7 @@ class BattleSystem {
             } else {
                 // Prepare slide in duration for next pokemon
                 const leaderSpeed = this.state.party[0].currentStats.spe;
-            let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed));
+            let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed)) * this.getSpeedMultiplier();
             slideDelay = Math.max(300, slideDelay) / this.state.settings.gameSpeed; // Arbitrary 1s slide in
                 this.isPlayerPreSlidingIn = true;
                 this.updateUI(); // Move offscreen
@@ -1517,7 +1534,7 @@ class BattleSystem {
             let enemySpe = this.activeEncounter.currentStats ? this.activeEncounter.currentStats.spe : 10;
 
             // Accurate search time to mimic Natural play at 1x speed
-            let searchTime = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpe));
+            let searchTime = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpe)) * this.getSpeedMultiplier();
             searchTime = Math.max(300, searchTime);
 
             // Add slide-in animation delay that occurs in Natural play (1000ms at 1x speed)
@@ -1715,7 +1732,7 @@ class BattleSystem {
                     dropRate = 1.0;
                 }
 
-                if (Math.random() < (dropRate * lootMultiplier) && this.activeEncounter.types && this.activeEncounter.types.length > 0) {
+                if (this.getLootTier() >= 3 && Math.random() < (dropRate * lootMultiplier) && this.activeEncounter.types && this.activeEncounter.types.length > 0) {
                     const types = this.activeEncounter.types;
                     const randomType = types[Math.floor(Math.random() * types.length)];
                     const stoneName = `${randomType} Stone`;
@@ -1735,7 +1752,7 @@ class BattleSystem {
                 }
 
                 // Vitamin drops
-                if (sumIV > 500 && this.activeEncounter?.quality > 1.6 && Math.random() < (0.05 * lootMultiplier)) {
+                if (this.getLootTier() >= 4 && sumIV > 500 && this.activeEncounter?.quality > 1.6 && Math.random() < (0.05 * lootMultiplier)) {
                     const vitamins = VITAMINS;
                     const randomVitamin = vitamins[Math.floor(Math.random() * vitamins.length)];
 
