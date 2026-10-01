@@ -19,6 +19,15 @@ export function initMultiplayer() {
     originalParty = [];
 }
 
+
+function safeEncode(obj) {
+    return btoa(unescape(encodeURIComponent(JSON.stringify(obj))));
+}
+
+function safeDecode(str) {
+    return JSON.parse(decodeURIComponent(escape(atob(str.trim()))));
+}
+
 const rtcConfig = {
     iceServers: [{ urls: 'stun:stun.l.google.com:19302' }]
 };
@@ -36,8 +45,8 @@ export async function hostGame() {
     peerConnection.onicecandidate = (event) => {
         if (event.candidate === null) {
             // Trickle ICE finished, now SDP contains all ICE candidates.
-            const offer = JSON.stringify(peerConnection.localDescription);
-            const encodedOffer = btoa(offer);
+
+            const encodedOffer = safeEncode(peerConnection.localDescription);
             const el = document.getElementById('multiplayer-host-id');
             if(el) el.value = encodedOffer;
         }
@@ -62,8 +71,8 @@ export async function joinGame(encodedOffer) {
     peerConnection.onicecandidate = (event) => {
         if (event.candidate === null) {
             // Trickle ICE finished
-            const answer = JSON.stringify(peerConnection.localDescription);
-            const encodedAnswer = btoa(answer);
+
+            const encodedAnswer = safeEncode(peerConnection.localDescription);
             const el = document.getElementById('multiplayer-client-id');
             if (el) el.value = encodedAnswer;
             alert("Answer generated! Send the new code below back to the host.");
@@ -71,8 +80,7 @@ export async function joinGame(encodedOffer) {
     };
 
     try {
-        const offerStr = atob(encodedOffer);
-        const offerDesc = new window.RTCSessionDescription(JSON.parse(offerStr));
+        const offerDesc = new window.RTCSessionDescription(safeDecode(encodedOffer));
         await peerConnection.setRemoteDescription(offerDesc);
 
         const answer = await peerConnection.createAnswer();
@@ -86,8 +94,7 @@ export async function joinGame(encodedOffer) {
 export async function completeConnection(encodedAnswer) {
     if (!peerConnection || !isHost) return;
     try {
-        const answerStr = atob(encodedAnswer);
-        const answerDesc = new window.RTCSessionDescription(JSON.parse(answerStr));
+        const answerDesc = new window.RTCSessionDescription(safeDecode(encodedAnswer));
         await peerConnection.setRemoteDescription(answerDesc);
     } catch (e) {
         alert("Invalid Answer Code.");
@@ -179,7 +186,7 @@ function checkReadyState() {
         }
         setTimeout(() => {
              if (window.closeModal) window.closeModal();
-             if (globals.battleSystem) globals.battleSystem.startMultiplayerBattle(opponentParty);
+             if (globals.battleSystem) globals.battleSystem.startMultiplayerBattle(opponentParty, isHost);
         }, 1000);
     }
 }

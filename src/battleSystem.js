@@ -116,11 +116,12 @@ class BattleSystem {
     }
 
 
-    startMultiplayerBattle(opponentParty) {
+    startMultiplayerBattle(opponentParty, isHost) {
         this.stop();
         this.multiplayerState = {
             isActive: true,
             opponentParty: opponentParty,
+            isHost: isHost,
             currentPokemonIndex: 0
         };
 
@@ -207,6 +208,7 @@ class BattleSystem {
         }
 
         this.isSearching = false;
+        this.isFainting = false;
         this.isSliding = true;
         this.slideDuration = slideDelay;
 
@@ -255,8 +257,8 @@ class BattleSystem {
     }
 
     executeMultiplayerTurn(attacker, defender) {
+        if (!this.multiplayerState.isHost) return; // Only host calculates combat
         import('./ui/multiplayer.js').then((mp) => {
-            if (!mp.isHost) return; // Only host calculates combat
 
             if (this.isFainting) return;
             if (!this.activeEncounter) return;
