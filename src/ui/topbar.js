@@ -183,7 +183,7 @@ export function updateTopbar() {
     const multiplayerContainer = document.getElementById('multiplayer-container');
     const multiplayerExclamation = document.getElementById('multiplayer-exclamation');
     if (multiplayerContainer && multiplayerExclamation) {
-        // Unlock Multiplayer after Challenge 5 (Fossil Revival Lab) is completed
+        // Show exclamation on Multiplayer after Challenge 5 (Fossil Revival Lab) is completed
         if (state.stats.completedChallengeIds && state.stats.completedChallengeIds.includes('Fossil Revival Lab')) {
             multiplayerContainer.style.display = 'inline-block';
             if (!state.stats.hasSeenMultiplayerIcon) {
