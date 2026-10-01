@@ -531,6 +531,12 @@ window.showChallengesModal = function() {
         if (contentContainer) {
             contentContainer.style.overflowY = 'auto';
         }
+
+        setTimeout(() => {
+            if (typeof win.adjustHeightForNewContent === 'function') {
+                win.adjustHeightForNewContent();
+            }
+        }, 50);
     }
 };
 window.dragOver = dragOver;
