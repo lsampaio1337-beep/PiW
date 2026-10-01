@@ -291,7 +291,6 @@ export function getDailyChallengesHtml() {
             <div style="background: rgba(0,0,0,0.4); border: 1px solid #444; border-radius: 5px; padding: 10px; display: flex; align-items: center; justify-content: space-between;">
                 <div style="flex: 1; text-align: left; color: ${color}; text-decoration: ${textDec}; font-size: 14px; display: flex; align-items: center; gap: 5px;">
                     ${c.text}
-                    ${c.completed && !c.claimed && state.stats.dailyChallenges.hasSeenNotification === false ? `<img src="Assets/Extra/ExclamationMark.png" style="width: 16px; height: 16px;">` : ''}
                 </div>
                 <div style="display: flex; align-items: center; gap: 10px;">
                     <div style="font-weight: bold; color: ${color}; white-space: nowrap; font-size: 14px;">
@@ -318,7 +317,7 @@ window.cheatCompleteDailyChallenge = function(index) {
     if (active && active[index] && !active[index].completed) {
         active[index].progress = active[index].target;
         active[index].completed = true;
-        state.stats.dailyChallenges.hasSeenNotification = false;
+        state.stats.dailyChallenges.hasSeenNotification = !!document.getElementById('window-calendar');
         if (typeof window.updateTopbar === 'function') window.updateTopbar();
         if (typeof showCalendar === 'function' && document.getElementById('window-calendar')) showCalendar(); // Refresh UI
     }
@@ -508,7 +507,7 @@ window.trackDailyChallenge = function(type, data = {}) {
             if (c.progress >= c.target) {
                 c.progress = c.target;
                 c.completed = true;
-                state.stats.dailyChallenges.hasSeenNotification = false;
+                state.stats.dailyChallenges.hasSeenNotification = !!document.getElementById('window-calendar');
                 if (typeof window.updateTopbar === 'function') window.updateTopbar();
             }
             updated = true;
@@ -516,7 +515,7 @@ window.trackDailyChallenge = function(type, data = {}) {
     }
     if (updated) {
         if (document.getElementById('window-calendar')) {
-            if (typeof showCalendar === 'function') showCalendar();
+            if (typeof showCalendar === 'function' && document.getElementById('window-calendar')) showCalendar();
         }
     }
 };
