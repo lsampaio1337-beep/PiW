@@ -102,6 +102,15 @@ export function openPokeMarketBuy() {
         title.innerHTML = titleHtml;
         content.innerHTML = html;
         overlay.style.display = 'flex';
+
+        const innerModal = document.getElementById('main-view-inner-modal');
+        if (innerModal) {
+            innerModal.style.height = 'auto';
+            const innerContent = document.getElementById('main-view-inner-modal-content');
+            if (innerContent) {
+                innerContent.style.height = 'auto';
+            }
+        }
     } else {
         showModal('Market', html, 'window-market');
 
@@ -152,9 +161,14 @@ export function renderPokeMarketTab(category) {
         const btn = document.getElementById(`market-tab-buy-${tab}`);
         if (btn) {
             if (tab === category) {
-                btn.style.background = 'linear-gradient(to bottom, #3498db, #2980b9)';
+                if (btn.id.includes('market-tab-sell-')) {
+                    btn.style.background = 'linear-gradient(to bottom, #e74c3c, #c0392b)';
+                    btn.style.border = '1px solid #e74c3c';
+                } else {
+                    btn.style.background = 'linear-gradient(to bottom, #3498db, #2980b9)';
+                    btn.style.border = '1px solid #3498db';
+                }
                 btn.style.color = 'white';
-                btn.style.border = '1px solid #3498db';
                 btn.style.boxShadow = '0 2px 4px rgba(0,0,0,0.2)';
             } else {
                 btn.style.background = 'transparent';
@@ -171,6 +185,24 @@ export function renderPokeMarketTab(category) {
 
     let items = [];
     let cols = 6;
+
+    // Clear filter if tab is switched
+    if (category === 'pokemon') {
+        const filterName = document.getElementById('market-filter-name');
+        if (filterName && filterName.dataset.cleared !== 'true') {
+            filterName.value = '';
+            document.getElementById('market-filter-level-min').value = '';
+            document.getElementById('market-filter-level-max').value = '';
+            document.getElementById('market-filter-q-min').value = '';
+            document.getElementById('market-filter-q-max').value = '';
+            document.getElementById('market-filter-sumiv-min').value = '';
+            document.getElementById('market-filter-sumiv-max').value = '';
+            filterName.dataset.cleared = 'true';
+        }
+    } else {
+        const filterName = document.getElementById('market-filter-name');
+        if (filterName) filterName.dataset.cleared = 'false';
+    }
 
 
     if (category === 'upgrades') {
@@ -430,14 +462,15 @@ export function openPokeMarketSell() {
             </div>
 
             <div id="market-pokemon-sell-controls" style="display: none; flex-direction: column; align-items: center; justify-content: center; margin-bottom: calc(var(--m-width) * 0.015); gap: calc(var(--m-width) * 0.012);">
-                <div style="font-size: calc(var(--m-width) * 0.022); font-weight: bold; color: white;">Selected: <span id="market-pokemon-sell-count">0</span> | Total: $<span id="market-pokemon-sell-total">0</span></div>
+                <div style="font-size: calc(var(--m-width) * 0.022); font-weight: bold; color: white;">Selected: <span id="market-pokemon-sell-count">0</span> | Total: $<span id="market-pokemon-sell-total">0</span> <span style="cursor:pointer;" onclick="if(window.toggleMarketFilter) window.toggleMarketFilter()">🔍</span></div>
                 <div style="display: flex; gap: calc(var(--m-width) * 0.012);">
                     <button onclick="if(window.marketSelectAllPokemonForSale) window.marketSelectAllPokemonForSale()" style="padding: calc(var(--m-width) * 0.012) calc(var(--m-width) * 0.024); font-size: calc(var(--m-width) * 0.019); font-weight: bold; border-radius: 5px; background: #3498db; color: white; cursor: pointer; border: none;">Select Visible</button>
                     <button onclick="if(window.marketDeselectAllPokemonForSale) window.marketDeselectAllPokemonForSale()" style="padding: calc(var(--m-width) * 0.012) calc(var(--m-width) * 0.024); font-size: calc(var(--m-width) * 0.019); font-weight: bold; border-radius: 5px; background: #95a5a6; color: white; cursor: pointer; border: none;">Deselect All</button>
                     <button onclick="if(window.marketSellSelectedPokemon) window.marketSellSelectedPokemon()" style="padding: calc(var(--m-width) * 0.012) calc(var(--m-width) * 0.024); font-size: calc(var(--m-width) * 0.019); font-weight: bold; border-radius: 5px; background: #e74c3c; color: white; cursor: pointer; border: none;">Sell Selected</button>
                 </div>
 
-                <div id="market-pokemon-filters" style="display: flex; flex-wrap: nowrap; gap: calc(var(--m-width) * 0.012); justify-content: center; align-items: center; background: #2c3e50; padding: calc(var(--m-width) * 0.012); border-radius: 8px; border: 1px solid #7f8c8d; width: 100%; box-sizing: border-box;">
+                <hr style="width: 80%; border: 0; height: 1px; background: #34495e; margin: calc(var(--m-width) * 0.015) 0;">
+                <div id="market-pokemon-filters" style="display: none; flex-wrap: nowrap; gap: calc(var(--m-width) * 0.012); justify-content: center; align-items: center; background: #2c3e50; padding: calc(var(--m-width) * 0.012); border-radius: 8px; border: 1px solid #7f8c8d; width: 100%; box-sizing: border-box;">
                     <div style="display: flex; gap: calc(var(--m-width) * 0.006); align-items: center;">
                         <label style="color: white; font-size: calc(var(--m-width) * 0.017);">Name:</label>
                         <input type="text" id="market-filter-name" oninput="if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon')" style="width: calc(var(--m-width) * 0.1); padding: calc(var(--m-width) * 0.006); border-radius: 4px; border: 1px solid #ccc; font-size: calc(var(--m-width) * 0.017);">
@@ -495,6 +528,15 @@ export function openPokeMarketSell() {
         title.innerHTML = titleHtml;
         content.innerHTML = html;
         overlay.style.display = 'flex';
+
+        const innerModal = document.getElementById('main-view-inner-modal');
+        if (innerModal) {
+            innerModal.style.height = 'auto';
+            const innerContent = document.getElementById('main-view-inner-modal-content');
+            if (innerContent) {
+                innerContent.style.height = 'auto';
+            }
+        }
     } else {
         if (window.showModal) window.showModal('Sell', html, 'window-market-sell');
 
@@ -525,9 +567,14 @@ export function renderPokeMarketSellTab(category) {
         const btn = document.getElementById(`market-tab-sell-${tab}`);
         if (btn) {
             if (tab === category) {
-                btn.style.background = 'linear-gradient(to bottom, #3498db, #2980b9)';
+                if (btn.id.includes('market-tab-sell-')) {
+                    btn.style.background = 'linear-gradient(to bottom, #e74c3c, #c0392b)';
+                    btn.style.border = '1px solid #e74c3c';
+                } else {
+                    btn.style.background = 'linear-gradient(to bottom, #3498db, #2980b9)';
+                    btn.style.border = '1px solid #3498db';
+                }
                 btn.style.color = 'white';
-                btn.style.border = '1px solid #3498db';
                 btn.style.boxShadow = '0 2px 4px rgba(0,0,0,0.2)';
             } else {
                 btn.style.background = 'transparent';
@@ -540,6 +587,24 @@ export function renderPokeMarketSellTab(category) {
 
     let items = [];
     let cols = 6;
+
+    // Clear filter if tab is switched
+    if (category === 'pokemon') {
+        const filterName = document.getElementById('market-filter-name');
+        if (filterName && filterName.dataset.cleared !== 'true') {
+            filterName.value = '';
+            document.getElementById('market-filter-level-min').value = '';
+            document.getElementById('market-filter-level-max').value = '';
+            document.getElementById('market-filter-q-min').value = '';
+            document.getElementById('market-filter-q-max').value = '';
+            document.getElementById('market-filter-sumiv-min').value = '';
+            document.getElementById('market-filter-sumiv-max').value = '';
+            filterName.dataset.cleared = 'true';
+        }
+    } else {
+        const filterName = document.getElementById('market-filter-name');
+        if (filterName) filterName.dataset.cleared = 'false';
+    }
 
     const pokemonControls = document.getElementById('market-pokemon-sell-controls');
     if (pokemonControls) {
@@ -591,7 +656,7 @@ export function renderPokeMarketSellTab(category) {
             else if (p.qualityName === "Regular") glowClass = "glow-regular";
 
             let isSelected = window.marketSelectedPokemonForSale && window.marketSelectedPokemonForSale.has(p.uuid);
-            let selectionStyle = isSelected ? 'outline: 3px solid #00ff00; outline-offset: -3px; background: rgba(0,255,0,0.2);' : 'background: #2c3e50; border: 2px solid #777;';
+            let selectionStyle = isSelected ? 'outline: 3px solid #e74c3c; outline-offset: -3px; background: rgba(231,76,60,0.2);' : 'background: #2c3e50; border: 2px solid #777;';
 
             html += `
                 <div onclick="if(window.toggleMarketPokemonSaleSelection) window.toggleMarketPokemonSaleSelection('${p.uuid}')"
@@ -944,3 +1009,18 @@ window.updateBuyItemPrice = updateBuyItemPrice;
 window.buySetMax = buySetMax;
 
 window.updateMarketPokemonSellCount = updateMarketPokemonSellCount;
+
+window.toggleMarketFilter = function() {
+    const filters = document.getElementById('market-pokemon-filters');
+    if (filters) {
+        if (filters.style.display === 'none' || !filters.style.display) {
+            filters.style.display = 'flex';
+        } else {
+            filters.style.display = 'none';
+        }
+    }
+    const innerModal = document.getElementById('main-view-inner-modal');
+    if (innerModal && typeof innerModal.adjustHeightForNewContent === 'function') {
+        innerModal.adjustHeightForNewContent();
+    }
+};
