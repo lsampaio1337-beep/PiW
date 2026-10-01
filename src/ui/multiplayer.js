@@ -19,6 +19,13 @@ export function initMultiplayer() {
     originalParty = [];
 }
 
+window.getMultiplayerIsHost = () => isHost;
+
+export function resetMultiplayerReady() {
+    isMultiplayerReady.local = false;
+    isMultiplayerReady.remote = false;
+}
+
 
 function safeEncode(obj) {
     return btoa(unescape(encodeURIComponent(JSON.stringify(obj))));
@@ -75,7 +82,6 @@ export async function joinGame(encodedOffer) {
             const encodedAnswer = safeEncode(peerConnection.localDescription);
             const el = document.getElementById('multiplayer-client-id');
             if (el) el.value = encodedAnswer;
-            alert("Answer generated! Send the new code below back to the host.");
         }
     };
 
@@ -116,15 +122,11 @@ function updateBattleButtonUI() {
 
     btn.disabled = false;
     btn.style.cursor = 'pointer';
+    btn.style.background = '#2ecc71'; // Green
 
     if (isMultiplayerReady.local) {
-        btn.style.background = '#f39c12'; // Orange/Yellowish for waiting
-        btn.innerText = 'Waiting Opponent';
-    } else if (isMultiplayerReady.remote) {
-        btn.style.background = '#2ecc71'; // Green
-        btn.innerText = 'Opponent ready';
+        btn.innerText = 'Starting Battle...';
     } else {
-        btn.style.background = '#2ecc71'; // Green
         btn.innerText = 'Start Battle';
     }
 }
@@ -135,6 +137,33 @@ function setupDataChannel(channel) {
         if (connBtn) {
             connBtn.style.background = '#2ecc71';
             connBtn.innerText = 'Connected';
+            connBtn.disabled = false;
+            connBtn.style.cursor = 'pointer';
+
+            // Allow disconnection by clicking
+            connBtn.onclick = () => {
+                if (peerConnection) {
+                    peerConnection.close();
+                }
+                initMultiplayer();
+                connBtn.style.background = '#e74c3c';
+                connBtn.innerText = 'Not Connected';
+                connBtn.disabled = true;
+                connBtn.style.cursor = 'default';
+                connBtn.onmouseenter = null;
+                connBtn.onmouseleave = null;
+                updateBattleButtonUI();
+            };
+
+            // Hover effect
+            connBtn.onmouseenter = () => {
+                connBtn.style.background = '#e74c3c';
+                connBtn.innerText = 'Disconnect';
+            };
+            connBtn.onmouseleave = () => {
+                connBtn.style.background = '#2ecc71';
+                connBtn.innerText = 'Connected';
+            };
         }
         updateBattleButtonUI();
 
@@ -190,6 +219,8 @@ function checkReadyState() {
         }, 1000);
     }
 }
+
+window.resetMultiplayerReady = resetMultiplayerReady;
 
 window.openMultiplayerModal = function(tab = 'host') {
     openMultiplayerModal(tab);
@@ -277,7 +308,7 @@ export function openMultiplayerModal(tab = 'host') {
 
             <div style="display: flex; justify-content: center; gap: 20px;">
                 <div style="display: flex; width: 220px;">
-                    <button id="btn-mp-connection-status" disabled style="width: 100%; padding: 15px 0; font-size: 18px; font-weight: bold; background: #e74c3c; color: white; border: none; border-radius: 5px; opacity: 1; cursor: default;">No Connection</button>
+                    <button id="btn-mp-connection-status" disabled style="width: 100%; padding: 15px 0; font-size: 18px; font-weight: bold; background: #e74c3c; color: white; border: none; border-radius: 5px; opacity: 1; cursor: default;">Not Connected</button>
                 </div>
                 <div style="display: flex; width: 220px;">
                     <button id="btn-mp-battle" disabled style="width: 100%; padding: 15px 0; font-size: 18px; font-weight: bold; background: #95a5a6; color: white; border: none; border-radius: 5px; cursor: not-allowed;">Battle</button>

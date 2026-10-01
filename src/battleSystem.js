@@ -153,7 +153,6 @@ class BattleSystem {
                      this.state.party.push(p);
                 });
             }
-            alert("Multiplayer battle ended.");
 
             if (typeof window.switchView === 'function') {
                 window.switchView("PROF_OAK_LAB");
@@ -164,6 +163,25 @@ class BattleSystem {
             let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed));
             slideDelay = Math.max(300, slideDelay) / this.state.settings.gameSpeed;
             this.generateEncounter(slideDelay);
+
+            // Re-open multiplayer modal and reset ready states so players stay connected
+            if (typeof window.resetMultiplayerReady === 'function') {
+                window.resetMultiplayerReady();
+            }
+            if (typeof window.openMultiplayerModal === 'function') {
+                const hostStatus = typeof window.getMultiplayerIsHost === 'function' ? window.getMultiplayerIsHost() : false;
+                window.openMultiplayerModal(hostStatus ? 'host' : 'join');
+            }
+        }).catch(err => {
+            console.error("Error importing multiplayer:", err);
+            // Fallback: Re-open multiplayer modal and reset ready states so players stay connected
+            if (typeof window.resetMultiplayerReady === 'function') {
+                window.resetMultiplayerReady();
+            }
+            if (typeof window.openMultiplayerModal === 'function') {
+                const hostStatus = typeof window.getMultiplayerIsHost === 'function' ? window.getMultiplayerIsHost() : false;
+                window.openMultiplayerModal(hostStatus ? 'host' : 'join');
+            }
         });
     }
 
