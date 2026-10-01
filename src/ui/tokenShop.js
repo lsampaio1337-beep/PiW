@@ -88,16 +88,6 @@ function getTokenShopItemsHtml() {
             action: 'window.buyTokenUnlock("speed")'
         },
         {
-            id: 'unlock_glasses',
-            name: 'Unlock Glasses Upgrade',
-            img: 'Assets/Items/Upgrades/Glass1.png',
-            desc: 'Allow you to buy upgrades that display visual information while in battle.',
-            price: 1,
-            isUnlock: true,
-            unlockKey: 'glass',
-            action: 'window.buyTokenUnlock("glass")'
-        },
-        {
             id: 'unlock_loot',
             name: 'Unlock Loot Upgrade',
             img: 'Assets/Items/Upgrades/Loot1.png',
