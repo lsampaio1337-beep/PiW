@@ -46,9 +46,9 @@ const balance = {
         { "tier": 5, "name": "Glass5", "displayName": "Master Glasses", "increment": 0, "cost": 5000, "description": "Show IV<br>in Main View" }
       ],
       "smartwatch": [
-        { "tier": 1, "name": "Smartwatch1", "displayName": "Ball Watch", "increment": 0, "cost": 1, "description": "Select Ball<br>in Main View" },
-        { "tier": 2, "name": "Smartwatch2", "displayName": "Potion Watch", "increment": 0, "cost": 1, "description": "Select Potion<br>in Main View" },
-        { "tier": 3, "name": "Smartwatch3", "displayName": "Smart Ball Watch", "increment": 0, "cost": 1, "description": "Select Ball<br>Smart Mode" }
+        { "tier": 1, "name": "Smartwatch1", "displayName": "Ball Watch", "increment": 0, "cost": 20, "description": "Select Ball<br>in Main View" },
+        { "tier": 2, "name": "Smartwatch2", "displayName": "Potion Watch", "increment": 0, "cost": 200, "description": "Select Potion<br>in Main View" },
+        { "tier": 3, "name": "Smartwatch3", "displayName": "Smart Ball Watch", "increment": 0, "cost": 2000, "description": "Select Ball<br>Smart Mode" }
       ],
       "speed": [
         { "tier": 1, "name": "Speed1", "displayName": "Voltorb Sneakers", "increment": 0, "cost": 10, "description": "Decrease in 10% encounter time" },

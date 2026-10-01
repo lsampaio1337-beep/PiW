@@ -61,7 +61,8 @@ export function setupMarket(vCenter) {
 }
 
 export function openPokeMarketBuy() {
-    const hasUnlockedUpgrades = state.stats.upgradesUnlocked && Object.keys(state.stats.upgradesUnlocked).some(k => state.stats.upgradesUnlocked[k]);
+    // Glass is available by default now, so upgrades are always unlocked.
+    const hasUnlockedUpgrades = true;
 
     const html = `
         <div id="market-buy-wrapper" style="display: flex; flex-direction: column; width: 100%; height: 100%; margin-top: 0px; --m-width: min(90vw, 825px);">
@@ -196,7 +197,7 @@ export function renderPokeMarketTab(category) {
         if (ballUpgrade && unlocked['balls']) items.push({ ...ballUpgrade, type: 'balls', img: './Assets/Items/Upgrades/' + ballUpgrade.name + '.png', attrLabel: '+' + ballUpgrade.increment + ' Balls<br>in stock' });
         if (potionUpgrade && unlocked['potions']) items.push({ ...potionUpgrade, type: 'potions', img: './Assets/Items/Upgrades/' + potionUpgrade.name + '.png', attrLabel: '+' + potionUpgrade.increment + ' Potions<br>in stock' });
         if (boxUpgrade && unlocked['box']) items.push({ ...boxUpgrade, type: 'box', img: './Assets/Items/Upgrades/' + boxUpgrade.name + '.png', attrLabel: '+' + boxUpgrade.increment + ' Pokemons<br>in backpack' });
-        if (glassUpgrade && unlocked['glass']) items.push({ ...glassUpgrade, type: 'glass', img: './Assets/Items/Upgrades/' + glassUpgrade.name + '.png', attrLabel: glassUpgrade.description });
+        if (glassUpgrade) items.push({ ...glassUpgrade, type: 'glass', img: './Assets/Items/Upgrades/' + glassUpgrade.name + '.png', attrLabel: glassUpgrade.description });
         if (smartwatchUpgrade && unlocked['smartwatch']) items.push({ ...smartwatchUpgrade, type: 'smartwatch', img: './Assets/Items/Upgrades/' + smartwatchUpgrade.name + '.png', attrLabel: smartwatchUpgrade.description });
         if (speedUpgrade && unlocked['speed']) items.push({ ...speedUpgrade, type: 'speed', img: './Assets/Items/Upgrades/' + speedUpgrade.name + '.png', attrLabel: speedUpgrade.description });
         if (lootUpgrade && unlocked['loot']) items.push({ ...lootUpgrade, type: 'loot', img: './Assets/Items/Upgrades/' + lootUpgrade.name + '.png', attrLabel: lootUpgrade.description });
