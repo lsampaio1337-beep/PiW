@@ -1121,6 +1121,28 @@ export function switchView(viewName) {
         document.getElementById('view-casino').style.display = 'block';
     } else if (viewName === 'DAYCARE_HUB') {
         document.getElementById('view-daycare').style.display = 'block';
+
+        // Populate dynamic texts based on required battles
+        const breedBattles = state.dayCareRef ? state.dayCareRef.slot1.requiredBattles : 100;
+        const trainBattles = state.dayCareRef ? state.dayCareRef.slot2.requiredBattles : 100;
+
+        const introText = document.getElementById('daycare-intro-text');
+        if (introText) {
+            introText.innerHTML = `
+                <p>Now you are able to use Daycare!</p>
+                <p>You can adjust pokemon on daycare here or directly in your backpack.</p>
+                <br>
+                <p>In order to Breed, you need 2 Pokémons with the same Quality Value. They will generate an egg that will hatch after ${breedBattles} fights. You can drag 2 Pokémons to the Breed Spot or you can click on Breed Spot to automatically filter Pokémons that can be inserted there. The egg will hatch and the Pokémon will have an increased Quality Value of a random number between 0 and 0.1 to a maximum of 1.99, keeping the highest SumIV of both parents. Remember that the process can’t be interrupted.</p>
+                <br>
+                <p>To Train, you just need to insert the desired Pokémon in the Train Spot. It will train its SumIV and it will gain +1 point in it every ${trainBattles} fights.</p>
+            `;
+        }
+
+        const trainDesc = document.getElementById('daycare-train-desc');
+        if (trainDesc) trainDesc.innerHTML = `Insert any Pokémon and gain +1 SumIV after ${trainBattles} fights.`;
+
+        const breedDesc = document.getElementById('daycare-breed-desc');
+        if (breedDesc) breedDesc.innerHTML = `Insert 2 Pokémons with same Quality Value to increase it to a random number between 0 and 0.1 to a maximum of 1.99 after ${breedBattles} fights.`;
     }
 }
 
