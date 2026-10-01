@@ -98,6 +98,8 @@ export function claimDailyReward(dayIndex) {
     if (reward.tokens) {
         if (!state.trainer.tokens) state.trainer.tokens = 0;
         state.trainer.tokens += reward.tokens;
+        if (!state.stats.tokensEarned) state.stats.tokensEarned = 0;
+        state.stats.tokensEarned += reward.tokens;
     }
 
     // Update state
