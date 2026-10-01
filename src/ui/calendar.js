@@ -67,7 +67,7 @@ export function checkAnyDailyChallengeCompleted() {
     if (!state.stats.dailyChallenges || !state.stats.dailyChallenges.active) return false;
     if (state.stats.dailyChallenges.hasSeenNotification) return false;
     for (let c of state.stats.dailyChallenges.active) {
-        if (c.completed) return true;
+        if (c.completed && !c.claimed) return true;
     }
     return false;
 }
@@ -160,6 +160,13 @@ window.giveFreeTokens = function() {
 
 window.showCalendar = showCalendar;
 export function showCalendar(tab = 'activities') {
+    if (state.stats.dailyChallenges) {
+        state.stats.dailyChallenges.hasSeenNotification = true;
+    }
+    if (typeof window.updateTopbar === 'function') {
+        window.updateTopbar();
+    }
+
     let html = `<div style="display: flex; flex-direction: column; width: 100%; height: 100%; box-sizing: border-box;">`;
 
     let titleHtml = `

@@ -111,7 +111,9 @@ const CHALLENGE_DEFS = {
             }
             let speciesArr = Array.from(availableSpecies);
             if (speciesArr.length === 0) return 'Pidgey';
-            return speciesArr[Math.floor(Math.random() * speciesArr.length)];
+            let pid = speciesArr[Math.floor(Math.random() * speciesArr.length)];
+            let pData = state.config.pokemonData.find(p => p.id === pid);
+            return pData ? pData.name : pid;
         } },
         { id: 3, text: "Endurance: Defeat $ Pokémon without fainting, healing, or swaping.", getTarget: () => 10 + (state.trainer.badges * 5), type: 'defeat_endurance' },
         { id: 4, text: "Speedrunner: Defeat a Pokémon in 1 turn $ times.", getTarget: () => Math.max(5, Math.floor((state.stats.completedChallenges || 0) * 0.5)), type: 'defeat_1_turn', condition: () => state.trainer.badges >= 1 },
@@ -287,8 +289,9 @@ export function getDailyChallengesHtml() {
 
         html += `
             <div style="background: rgba(0,0,0,0.4); border: 1px solid #444; border-radius: 5px; padding: 10px; display: flex; align-items: center; justify-content: space-between;">
-                <div style="flex: 1; text-align: left; color: ${color}; text-decoration: ${textDec}; font-size: 14px;">
+                <div style="flex: 1; text-align: left; color: ${color}; text-decoration: ${textDec}; font-size: 14px; display: flex; align-items: center; gap: 5px;">
                     ${c.text}
+                    ${c.completed && !c.claimed && state.stats.dailyChallenges.hasSeenNotification === false ? `<img src="Assets/Extra/ExclamationMark.png" style="width: 16px; height: 16px;">` : ''}
                 </div>
                 <div style="display: flex; align-items: center; gap: 10px;">
                     <div style="font-weight: bold; color: ${color}; white-space: nowrap; font-size: 14px;">
@@ -317,7 +320,7 @@ window.cheatCompleteDailyChallenge = function(index) {
         active[index].completed = true;
         state.stats.dailyChallenges.hasSeenNotification = false;
         if (typeof window.updateTopbar === 'function') window.updateTopbar();
-        if (typeof showCalendar === 'function') showCalendar(); // Refresh UI
+        if (typeof showCalendar === 'function' && document.getElementById('window-calendar')) showCalendar(); // Refresh UI
     }
 };
 
@@ -331,7 +334,7 @@ window.claimDailyChallengeToken = function(index) {
         state.stats.tokensEarned += 1;
         state.stats.dailyChallenges.totalCompleted++;
         if (typeof window.updateTopbar === 'function') window.updateTopbar();
-        if (typeof showCalendar === 'function') showCalendar(); // Refresh UI
+        if (typeof showCalendar === 'function' && document.getElementById('window-calendar')) showCalendar(); // Refresh UI
     }
 };
 
@@ -398,7 +401,7 @@ window.rerollIndividualDailyChallenge = function(index) {
 
     state.stats.dailyChallenges.hasRerolled = true;
 
-    if (typeof showCalendar === 'function') showCalendar();
+    if (typeof showCalendar === 'function' && document.getElementById('window-calendar')) showCalendar();
 };
 
 // Tracking Hook function for integration in other modules
