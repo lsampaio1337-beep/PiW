@@ -9,12 +9,22 @@
   <!-- Top Bar (Icons) -->
 
   <div id="top-bar-window" class="floating-window" style="display: none; width: 1100px; height: auto; overflow: visible;">
-    <div id="top-bar-header" class="window-header" style="position: relative;">Main Control<span class="btn-exit-game" style="position: absolute; right: 10px; cursor: pointer; color: white; font-weight: bold;">X</span></div>
+    <div id="top-bar-header" class="window-header" style="position: relative; display: flex; justify-content: space-between; align-items: center;">
+      <span style="flex-grow: 1; text-align: center;">Main Control</span>
+      <div style="position: absolute; right: 10px; display: flex; gap: 10px; z-index: 10;">
+        <span id="btn-minimize-main-control" style="cursor: pointer; color: white; font-weight: bold; padding: 0 5px;">-</span>
+        <span id="btn-minimize-all-game" style="cursor: pointer; color: white; font-weight: bold; padding: 0 5px;">--</span>
+        <span class="btn-exit-game" style="cursor: pointer; color: white; font-weight: bold; padding: 0 5px;">X</span>
+      </div>
+    </div>
     <div class="window-content-container">
         <div class="window-content-scaler">
     <div id="top-bar">
 
     <div id="nav-buttons">
+      <img src="Assets/Extra/IconMainView.png" id="btn-toggle-main" class="nav-icon" title="Main View">
+      <img src="Assets/Extra/IconTeam.png" id="btn-toggle-party" class="nav-icon" title="Team">
+      <span class="nav-divider"></span>
       <div style="position: relative; display: inline-block; height: 100%;">
         <img src="Assets/Extra/IconMap.png" id="btn-map" class="nav-icon" title="Map" style="display: block;">
         <img src="Assets/Extra/ExclamationMark.png" id="map-notification" style="display: none; position: absolute; top: -5px; right: -5px; width: 15px; height: auto; pointer-events: none; z-index: 10;">
@@ -28,6 +38,7 @@
       <img src="Assets/Extra/IconMultiplayer.png" id="btn-multiplayer" class="nav-icon" title="Multiplayer">
       <img src="Assets/Extra/IconMainView.png" id="btn-toggle-main" class="nav-icon" title="Main View">
       <span class="nav-divider"></span>
+
 
 
 
