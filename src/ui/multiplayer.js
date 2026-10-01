@@ -206,14 +206,20 @@ export function openMultiplayerModal() {
                         <button id="btn-copy-host" style="padding: 5px; cursor: pointer; font-size: 10px;">Copy</button>
                     </div>
                     <p style="margin-top: 10px; font-size: 12px;">Paste your friend's Answer Code here:</p>
-                    <input type="text" id="mp-host-answer-input" placeholder="Paste Answer Code" style="width: 100%; padding: 5px; box-sizing: border-box; font-size: 10px;">
+                    <div style="display: flex; gap: 5px; align-items: center;">
+                        <input type="text" id="mp-host-answer-input" placeholder="Paste Answer Code" style="flex: 1; padding: 5px; box-sizing: border-box; font-size: 10px;">
+                        <button id="btn-paste-host" style="padding: 5px; cursor: pointer; font-size: 10px;">Paste</button>
+                    </div>
                     <button id="btn-mp-complete" style="padding: 10px; margin-top: 10px; cursor: pointer; width: 100%;">3. Complete Connection</button>
                 </div>
 
                 <div style="background: rgba(0,0,0,0.5); padding: 20px; border-radius: 10px; width: 45%; box-sizing: border-box;">
                     <h3 style="margin-top: 0;">Join Game</h3>
                     <p style="margin-top: 10px; font-size: 12px;">Paste Host's Offer Code here:</p>
-                    <input type="text" id="mp-join-input" placeholder="Paste Code Here" style="width: 100%; padding: 5px; box-sizing: border-box; font-size: 10px;">
+                    <div style="display: flex; gap: 5px; align-items: center;">
+                        <input type="text" id="mp-join-input" placeholder="Paste Code Here" style="flex: 1; padding: 5px; box-sizing: border-box; font-size: 10px;">
+                        <button id="btn-paste-join" style="padding: 5px; cursor: pointer; font-size: 10px;">Paste</button>
+                    </div>
                     <button id="btn-mp-join" style="padding: 10px; margin-top: 10px; cursor: pointer; width: 100%;">2. Generate Answer Code</button>
 
                     <p style="margin-top: 10px; font-size: 12px;">Send this Answer Code back to Host:</p>
@@ -255,30 +261,88 @@ export function openMultiplayerModal() {
             }
 
 
+            function copyToClipboard(inputEl, btnEl) {
+                if (!inputEl || !inputEl.value) return;
+
+                // Attempt standard navigator clipboard
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(inputEl.value).then(() => {
+                        btnEl.innerText = 'Copied!';
+                        setTimeout(() => btnEl.innerText = 'Copy', 2000);
+                    }).catch(err => {
+                        console.error('Clipboard write failed:', err);
+                        fallbackCopy(inputEl, btnEl);
+                    });
+                } else {
+                    fallbackCopy(inputEl, btnEl);
+                }
+            }
+
+            function fallbackCopy(inputEl, btnEl) {
+                try {
+                    inputEl.select();
+                    inputEl.setSelectionRange(0, 99999); // For mobile devices
+                    document.execCommand('copy');
+
+                    // Deselect
+                    window.getSelection().removeAllRanges();
+
+                    btnEl.innerText = 'Copied!';
+                    setTimeout(() => btnEl.innerText = 'Copy', 2000);
+                } catch (err) {
+                    console.error('Fallback copy failed:', err);
+                    alert("Copy failed. Please manually copy the code.");
+                }
+            }
+
             const btnCopyHost = document.getElementById('btn-copy-host');
             if (btnCopyHost) {
                 btnCopyHost.onclick = () => {
-                    const el = document.getElementById('multiplayer-host-id');
-                    if (el && el.value) {
-                        navigator.clipboard.writeText(el.value).then(() => {
-                            btnCopyHost.innerText = 'Copied!';
-                            setTimeout(() => btnCopyHost.innerText = 'Copy', 2000);
-                        });
-                    }
+                    copyToClipboard(document.getElementById('multiplayer-host-id'), btnCopyHost);
                 };
             }
 
             const btnCopyClient = document.getElementById('btn-copy-client');
             if (btnCopyClient) {
                 btnCopyClient.onclick = () => {
-                    const el = document.getElementById('multiplayer-client-id');
-                    if (el && el.value) {
-                        navigator.clipboard.writeText(el.value).then(() => {
-                            btnCopyClient.innerText = 'Copied!';
-                            setTimeout(() => btnCopyClient.innerText = 'Copy', 2000);
-                        });
-                    }
+                    copyToClipboard(document.getElementById('multiplayer-client-id'), btnCopyClient);
                 };
+            }
+
+
+            async function pasteFromClipboard(inputEl, btnEl) {
+                if (!inputEl) return;
+                try {
+                    if (navigator.clipboard && navigator.clipboard.readText) {
+                        const text = await navigator.clipboard.readText();
+                        inputEl.value = text;
+                        btnEl.innerText = 'Pasted!';
+                        setTimeout(() => btnEl.innerText = 'Paste', 2000);
+                    } else {
+                        // Fallback paste is generally restricted by browsers, alert user
+                        inputEl.focus();
+                        if (document.execCommand('paste')) {
+                             btnEl.innerText = 'Pasted!';
+                             setTimeout(() => btnEl.innerText = 'Paste', 2000);
+                        } else {
+                             alert("Please use Ctrl+V or Right-Click -> Paste.");
+                        }
+                    }
+                } catch (err) {
+                    console.error('Paste failed:', err);
+                    inputEl.focus();
+                    alert("Please use Ctrl+V or Right-Click -> Paste.");
+                }
+            }
+
+            const btnPasteHost = document.getElementById('btn-paste-host');
+            if (btnPasteHost) {
+                btnPasteHost.onclick = () => pasteFromClipboard(document.getElementById('mp-host-answer-input'), btnPasteHost);
+            }
+
+            const btnPasteJoin = document.getElementById('btn-paste-join');
+            if (btnPasteJoin) {
+                btnPasteJoin.onclick = () => pasteFromClipboard(document.getElementById('mp-join-input'), btnPasteJoin);
             }
 
             const btnBattle = document.getElementById('btn-mp-battle');
