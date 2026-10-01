@@ -139,24 +139,24 @@ export function updateTopbar() {
         navButtons.style.opacity = lockMenus ? '0.5' : '1.0';
     }
 
-    const mainViewTimerDisplay = document.getElementById('main-view-timer');
-    if (mainViewTimerDisplay) {
-        if (state.currentView === "BATTLE_ARENA") {
-            mainViewTimerDisplay.style.display = 'inline-block';
+    const timerRoute = document.getElementById('main-view-timer-route');
+    const timerTotal = document.getElementById('main-view-timer-total');
+    if (timerRoute && timerTotal) {
+        const routeSec = state.stats.battleModeTimer || 0;
+        const totalSec = state.stats.playtime || 0;
 
-            const totalSec = state.stats.battleModeTimer || 0;
-            const d = Math.floor(totalSec / 86400);
-            const h = Math.floor((totalSec % 86400) / 3600);
-            const m = Math.floor((totalSec % 3600) / 60);
-            const s = Math.floor(totalSec % 60);
+        const formatTime = (secs) => {
+            const d = Math.floor(secs / 86400);
+            const h = Math.floor((secs % 86400) / 3600);
+            const m = Math.floor((secs % 3600) / 60);
+            const s = Math.floor(secs % 60);
             let timeStr = `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-            if (d >= 1) {
-                timeStr = `${d}d ${timeStr}`;
-            }
-            mainViewTimerDisplay.innerText = timeStr;
-        } else {
-            mainViewTimerDisplay.style.display = 'none';
-        }
+            if (d >= 1) timeStr = `${d}d ${timeStr}`;
+            return timeStr;
+        };
+
+        timerRoute.innerText = `${formatTime(routeSec)} (route)`;
+        timerTotal.innerText = `(total) ${formatTime(totalSec)}`;
     }
 
     const elChallengeText = document.getElementById('current-challenge-text');
