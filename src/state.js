@@ -70,7 +70,7 @@ export const state = {
             balls: false,
             potions: false,
             box: false,
-            glass: false,
+            glass: true,
             smartwatch: false,
             speed: false,
             loot: false
