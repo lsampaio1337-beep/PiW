@@ -1319,7 +1319,7 @@ function gameClockTick() {
         checkAndResetDailyChallenges();
     }
 
-    if (state.stats.playtime === 60) {
+    if (state.stats.playtime === 3600) {
         updateTopbar();
     }
 
@@ -1459,7 +1459,7 @@ async function init() {
 
     const startNewGame = () => {
         state.stats.hasSeenGiftIcon = false;
-        state.stats.hasSeenZzZTutorial = true;
+        state.stats.hasSeenZzZTutorial = false;
         if (splashScreen) splashScreen.style.display = 'none';
         if (saveManagerModal) window.windowManager.toggleWindow('save-manager-modal', false);
         window.windowManager.toggleWindow('top-bar-window', true);
@@ -2030,9 +2030,11 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
 
             const htmlContent = `
                 <div class="content-panel" style="display: flex; flex-direction: column; gap: 15px; width: 100%; box-sizing: border-box;">
-                    <div id="zzz-tutorial-section" style="display: ${tutorialDisplay}; background: rgba(255,255,255,0.05); border: 1px dashed #475569; border-radius: 8px; padding: 15px; margin-bottom: 10px; text-align: left;">
-                        <div style="color: #cbd5e1; font-size: 14px; margin-bottom: 8px;"><b>Welcome to ZzZ Mode!</b></div>
-                        <div style="color: #94a3b8; font-size: 13px; line-height: 1.4;">Earn <b>Jigglypuff Dust</b> simply by playing the game (1 minute active = 1 grain). You can spend these grains to allow your Pokémon to farm offline when you close the game (1 grain = 1 minute of offline farming).</div>
+                    <div id="zzz-tutorial-section" style="display: ${tutorialDisplay}; background: #34495e; padding: 20px; border-radius: 10px; border: 2px solid #00ffff; text-align: center; color: white; margin-bottom: 10px;">
+                        <p style="margin-top: 0;">Welcome to ZzZ Mode!</p>
+                        <p>You will earn 1 grain of Jigglypuff Dust for every minute you play.</p>
+                        <p>Each grain will grant 1 minute of offline farming.</p>
+                        <p style="margin-bottom: 0;">Sleep well!</p>
                     </div>
 
                     <div style="display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.2); border-radius: 8px; padding: 20px; border: 1px solid #334155; gap: 20px;">
