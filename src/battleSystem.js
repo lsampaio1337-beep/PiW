@@ -61,6 +61,20 @@ class BattleSystem {
         return 1.0;
     }
 
+    getLootTier() {
+        return this.state.stats?.upgrades?.lootTier || 0;
+    }
+
+    getSpeedMultiplier() {
+        const tier = this.state.stats?.upgrades?.speedTier || 0;
+        if (tier === 1) return 0.9;
+        if (tier === 2) return 0.8;
+        if (tier === 3) return 0.7;
+        if (tier === 4) return 0.6;
+        if (tier >= 5) return 0.5;
+        return 1.0;
+    }
+
     start() {
 
         if (!this.combatLoop) {
@@ -1080,7 +1094,7 @@ class BattleSystem {
         }
 
         // Roll for Ball drop
-        if (this.getLootTier() >= 2 && Math.random() < itemDropChance) {
+        if (Math.random() < itemDropChance) {
             let ballDropQty = Math.floor(lootMultiplier);
             if (Math.random() < (lootMultiplier % 1)) ballDropQty += 1;
 
@@ -1090,7 +1104,7 @@ class BattleSystem {
         }
 
         // Roll for Potion drop
-        if (this.getLootTier() >= 1 && Math.random() < itemDropChance) {
+        if (Math.random() < itemDropChance) {
             let potionDropQty = Math.floor(lootMultiplier);
             if (Math.random() < (lootMultiplier % 1)) potionDropQty += 1;
 
@@ -1786,7 +1800,7 @@ class BattleSystem {
                     potionTierName = "Huge Potion";
                 }
 
-                if (this.getLootTier() >= 2 && Math.random() < itemDropChance) {
+                if (Math.random() < itemDropChance) {
                     let ballDropQty = Math.floor(lootMultiplier);
                     if (Math.random() < (lootMultiplier % 1)) ballDropQty += 1;
                     if (!this.state.backpack.pokeballs) this.state.backpack.pokeballs = {};
@@ -1794,7 +1808,7 @@ class BattleSystem {
                     results.itemsLooted[ballTierName] = (results.itemsLooted[ballTierName] || 0) + ballDropQty;
                 }
 
-                if (this.getLootTier() >= 1 && Math.random() < itemDropChance) {
+                if (Math.random() < itemDropChance) {
                     let potionDropQty = Math.floor(lootMultiplier);
                     if (Math.random() < (lootMultiplier % 1)) potionDropQty += 1;
                     if (!this.state.backpack.potions) this.state.backpack.potions = {};

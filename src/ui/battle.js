@@ -5,6 +5,7 @@ import { getCapacity } from '../mathEngine.js';
 
 
 
+
 function updateActiveItemsUI() {
     const smartwatchTier = state.stats?.upgrades?.smartwatchTier || 0;
 
