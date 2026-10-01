@@ -142,9 +142,12 @@ export function showGiftModal() {
     html += `</div>`;
 
     showModal("Gifts", html, "window-gifts");
+
+    // Automatically adjust height to fit new items
     const win = document.getElementById("window-gifts");
-    if (win) {
-        win.style.maxHeight = '800px';
+    if (win && win.adjustHeightForNewContent) {
+        setTimeout(() => {
+            win.adjustHeightForNewContent();
+        }, 50);
     }
-    if (window.windowManager) window.windowManager.recalculateWindowSize('window-gifts');
 }
