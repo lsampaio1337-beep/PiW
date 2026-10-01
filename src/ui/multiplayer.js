@@ -318,7 +318,7 @@ export function openMultiplayerModal(tab = 'host') {
     `;
 
     if (window.showModal) {
-        window.showModal(titleHtml, html);
+        window.showModal(titleHtml, html, "window-multiplayer");
 
         setTimeout(() => {
             const btnHost = document.getElementById('btn-mp-host');

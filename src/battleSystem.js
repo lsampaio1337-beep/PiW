@@ -355,12 +355,14 @@ class BattleSystem {
              setTimeout(() => {
                  this.isFainting = false;
                  if (this.multiplayerState.currentPokemonIndex >= this.multiplayerState.opponentParty.length) {
-                     if (typeof window.showGameAlert === 'function') {
-                         window.showGameAlert("You won the multiplayer battle!", "main-view-inner-modal-overlay");
-                     } else {
-                         alert("You won the multiplayer battle!");
-                     }
                      this.stopMultiplayerBattle();
+                     setTimeout(() => {
+                         if (typeof window.showGameAlert === 'function') {
+                             window.showGameAlert("You won the multiplayer battle!", "window-multiplayer");
+                         } else {
+                             alert("You won the multiplayer battle!");
+                         }
+                     }, 100);
                  } else {
                      const leaderSpeed = this.state.party[0].currentStats.spe;
                      let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed));
@@ -379,12 +381,14 @@ class BattleSystem {
 
                  if (this.state.party.length === 0) {
                      this.isFainting = false;
-                     if (typeof window.showGameAlert === 'function') {
-                         window.showGameAlert("You lost the multiplayer battle.", "main-view-inner-modal-overlay");
-                     } else {
-                         alert("You lost the multiplayer battle.");
-                     }
                      this.stopMultiplayerBattle();
+                     setTimeout(() => {
+                         if (typeof window.showGameAlert === 'function') {
+                             window.showGameAlert("You lost the multiplayer battle.", "window-multiplayer");
+                         } else {
+                             alert("You lost the multiplayer battle.");
+                         }
+                     }, 100);
                  } else {
                      this.isFainting = false;
                      const playerPokemon = this.state.party[0];
