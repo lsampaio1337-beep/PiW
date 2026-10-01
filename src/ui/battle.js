@@ -256,6 +256,7 @@ document.addEventListener('click', (e) => {
 export function updateBattleArena() {
     updateActiveItemsUI();
 
+    const glassTier = state.stats?.upgrades?.glassTier || 0;
     const battleSystem = globals.battleSystem;
         const inGym = battleSystem && battleSystem.gymState && battleSystem.gymState.isActive;
     const inGymCombat = inGym && battleSystem.gymState.inCombat;
@@ -381,7 +382,6 @@ export function updateBattleArena() {
             const hpPctEnemy = document.getElementById('enemy-battle-hp-pct');
 
 
-        const glassTier = state.stats?.upgrades?.glassTier || 0;
             if (hpContainerEnemy) hpContainerEnemy.style.display = glassTier >= 1 ? 'flex' : 'none';
 
             const enemyDataModals = document.getElementById('enemy-data-modals');
@@ -502,7 +502,7 @@ export function updateBattleArena() {
                 const hpTextPlayer = document.getElementById('player-battle-hp-text');
                 const hpPctPlayer = document.getElementById('player-battle-hp-pct');
 
-                if (hpContainerPlayer) hpContainerPlayer.style.display = 'flex';
+                if (hpContainerPlayer) hpContainerPlayer.style.display = glassTier >= 1 ? 'flex' : 'none';
 
                 if (hpBarPlayer && hpTextPlayer && hpPctPlayer) {
                     const pct = Math.min(100, (leader.currentHp / leader.maxHp) * 100);
@@ -562,7 +562,7 @@ export function updateBattleArena() {
                 const hpTextPlayer = document.getElementById('player-battle-hp-text');
                 const hpPctPlayer = document.getElementById('player-battle-hp-pct');
 
-                if (hpContainerPlayer) hpContainerPlayer.style.display = 'flex';
+                if (hpContainerPlayer) hpContainerPlayer.style.display = glassTier >= 1 ? 'flex' : 'none';
 
                 if (hpBarPlayer && hpTextPlayer && hpPctPlayer) {
                     const pct = Math.min(100, (leader.currentHp / leader.maxHp) * 100);
@@ -861,10 +861,8 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
 
 
 export function showDamage(target, amount, isCrit, moveName = '', moveType = 'Normal', effectiveness = 1) {
-    if (target === 'enemy') {
-        const glassTier = state.stats?.upgrades?.glassTier || 0;
-        if (glassTier < 2) return;
-    }
+    const glassTier = state.stats?.upgrades?.glassTier || 0;
+    if (glassTier < 2) return;
     const battleSystem = globals.battleSystem;
     let containerId = target === 'player' ? 'player-side' : 'enemy-side';
 
