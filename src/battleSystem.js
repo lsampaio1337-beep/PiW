@@ -1080,7 +1080,7 @@ class BattleSystem {
         }
 
         // Roll for Ball drop
-        if (Math.random() < itemDropChance) {
+        if (this.getLootTier() >= 2 && Math.random() < itemDropChance) {
             let ballDropQty = Math.floor(lootMultiplier);
             if (Math.random() < (lootMultiplier % 1)) ballDropQty += 1;
 
@@ -1090,7 +1090,7 @@ class BattleSystem {
         }
 
         // Roll for Potion drop
-        if (Math.random() < itemDropChance) {
+        if (this.getLootTier() >= 1 && Math.random() < itemDropChance) {
             let potionDropQty = Math.floor(lootMultiplier);
             if (Math.random() < (lootMultiplier % 1)) potionDropQty += 1;
 
@@ -1786,7 +1786,7 @@ class BattleSystem {
                     potionTierName = "Huge Potion";
                 }
 
-                if (Math.random() < itemDropChance) {
+                if (this.getLootTier() >= 2 && Math.random() < itemDropChance) {
                     let ballDropQty = Math.floor(lootMultiplier);
                     if (Math.random() < (lootMultiplier % 1)) ballDropQty += 1;
                     if (!this.state.backpack.pokeballs) this.state.backpack.pokeballs = {};
@@ -1794,7 +1794,7 @@ class BattleSystem {
                     results.itemsLooted[ballTierName] = (results.itemsLooted[ballTierName] || 0) + ballDropQty;
                 }
 
-                if (Math.random() < itemDropChance) {
+                if (this.getLootTier() >= 1 && Math.random() < itemDropChance) {
                     let potionDropQty = Math.floor(lootMultiplier);
                     if (Math.random() < (lootMultiplier % 1)) potionDropQty += 1;
                     if (!this.state.backpack.potions) this.state.backpack.potions = {};
