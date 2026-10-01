@@ -74,17 +74,11 @@ export function openPokeMarketBuy() {
     const hasUnlockedUpgrades = state.stats.upgradesUnlocked && Object.keys(state.stats.upgradesUnlocked).some(k => state.stats.upgradesUnlocked[k]);
 
     const html = `
-        <div id="market-buy-wrapper" style="display: flex; flex-direction: column; width: 100%; height: 100%; margin-top: 0px; --m-width: min(90vw, 825px);">
+        <div id="market-buy-wrapper" style="display: flex; flex-direction: column; width: 100%; height: 100%; margin-top: 10px; --m-width: min(90vw, 825px);">
 
 
-            <div style="margin-bottom: calc(var(--m-width) * 0.015); display: flex; align-items: center; justify-content: center; gap: calc(var(--m-width) * 0.012);">
+            <div style="margin-bottom: calc(var(--m-width) * 0.024); display: flex; align-items: center; justify-content: center; gap: calc(var(--m-width) * 0.012);">
                 <label style="font-weight: bold; font-size: calc(var(--m-width) * 0.022); color: #2ecc71;">Money: $<span id="market-trainer-money">${state.trainer.money.toLocaleString()}</span></label>
-            </div>
-
-            <div id="market-buy-qty-container" style="margin-bottom: calc(var(--m-width) * 0.015); display: flex; align-items: stretch; justify-content: center; gap: calc(var(--m-width) * 0.012);">
-                <label style="display: flex; align-items: center; font-weight: bold; font-size: calc(var(--m-width) * 0.022);">Quantity to Buy:</label>
-                <input type="text" id="market-global-qty" value="1" oninput="window.updateMarketPrices()" style="width: calc(var(--m-width) * 0.097); padding: calc(var(--m-width) * 0.006); font-size: calc(var(--m-width) * 0.022); text-align: center; border-radius: 5px; border: 1px solid #ccc; box-sizing: border-box;">
-                <button onclick="if(window.buySetMax) window.buySetMax()" style="display: flex; align-items: center; justify-content: center; padding: 0 calc(var(--m-width) * 0.012); font-size: calc(var(--m-width) * 0.022); font-weight: bold; border-radius: 5px; cursor: pointer; background: #95a5a6; color: white; border: none; box-sizing: border-box; margin: 0;">Max</button>
             </div>
 
             <div id="market-buy-content" style="display: flex; flex-wrap: wrap; gap: calc(var(--m-width) * 0.018); justify-content: center; overflow-y: auto; flex: 1; padding: calc(var(--m-width) * 0.012);">
@@ -126,7 +120,7 @@ export function openPokeMarketBuy() {
             modalBox.style.width = 'max-content';
             modalBox.style.height = 'max-content';
             modalBox.style.maxWidth = '90%';
-            modalBox.style.maxHeight = '95%';
+            modalBox.style.maxHeight = '90%';
         }
     }
 
@@ -390,14 +384,14 @@ export function formatMarketNumberDown(num) {
 
 export function openPokeMarketSell() {
     const html = `
-        <div id="market-sell-wrapper" style="display: flex; flex-direction: column; width: 100%; height: 100%; margin-top: 0px; --m-width: min(90vw, 825px);">
+        <div id="market-sell-wrapper" style="display: flex; flex-direction: column; width: 100%; height: 100%; margin-top: 10px; --m-width: min(90vw, 825px);">
 
 
-            <div style="margin-bottom: calc(var(--m-width) * 0.015); display: flex; align-items: center; justify-content: center; gap: calc(var(--m-width) * 0.012);">
+            <div style="margin-bottom: calc(var(--m-width) * 0.024); display: flex; align-items: center; justify-content: center; gap: calc(var(--m-width) * 0.012);">
                 <label style="font-weight: bold; font-size: calc(var(--m-width) * 0.022); color: #2ecc71;">Money: $<span id="market-trainer-money-sell">${state.trainer.money.toLocaleString()}</span></label>
             </div>
 
-            <div id="market-pokemon-sell-controls" style="display: none; flex-direction: column; align-items: center; justify-content: center; margin-bottom: calc(var(--m-width) * 0.015); gap: calc(var(--m-width) * 0.012);">
+            <div id="market-pokemon-sell-controls" style="display: none; flex-direction: column; align-items: center; justify-content: center; margin-bottom: calc(var(--m-width) * 0.024); gap: calc(var(--m-width) * 0.012);">
                 <div style="font-size: calc(var(--m-width) * 0.022); font-weight: bold; color: white;">Selected: <span id="market-pokemon-sell-count">0</span> | Total: $<span id="market-pokemon-sell-total">0</span></div>
                 <div style="display: flex; gap: calc(var(--m-width) * 0.012);">
                     <button onclick="if(window.marketSelectAllPokemonForSale) window.marketSelectAllPokemonForSale()" style="padding: calc(var(--m-width) * 0.012) calc(var(--m-width) * 0.024); font-size: calc(var(--m-width) * 0.019); font-weight: bold; border-radius: 5px; background: #3498db; color: white; cursor: pointer; border: none;">Select Visible</button>
@@ -472,7 +466,7 @@ export function openPokeMarketSell() {
             modalBox.style.width = 'max-content';
             modalBox.style.height = 'max-content';
             modalBox.style.maxWidth = '90%';
-            modalBox.style.maxHeight = '95%';
+            modalBox.style.maxHeight = '90%';
         }
     }
 
