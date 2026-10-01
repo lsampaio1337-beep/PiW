@@ -11,17 +11,22 @@ with sync_playwright() as p:
     page.evaluate('window.selectStarter(1)')
     page.wait_for_timeout(2000)
 
-    # Check width behavior when collapsed with original autoAdjustWidth implementation.
-    # The title should remain centered due to `flex-grow: 1; text-align: center`, and when the container gets very small, the title text will truncate and the buttons will stay visible.
-
+    # Hide other windows to clearly see top-bar-window
     page.evaluate("document.querySelectorAll('.floating-window').forEach(w => { if(w.id !== 'top-bar-window') w.style.display = 'none'; })")
 
-    # Hide main container and test autoAdjustWidth behavior for very small widths
-    page.evaluate("document.querySelector('#top-bar-window .window-content-container').style.display = 'none'")
-    page.evaluate("document.getElementById('top-bar-window').style.minHeight = ''")
-    page.evaluate("document.getElementById('top-bar-window').style.width = '100px'")
-    page.evaluate("window.windowManager.autoAdjustWidth('top-bar-window')")
+    # Enable and test normal size
+    page.locator('#top-bar-window').screenshot(path='topbar_fix_normal_zoom.png')
 
-    page.locator('#top-bar-window').screenshot(path='topbar_fix_auto_adjust.png')
+    # Simulate unlocking an icon
+    page.evaluate("document.getElementById('multiplayer-container').style.display = 'inline-block'")
+    page.evaluate("window.windowManager.autoAdjustWidth('top-bar-window')")
+    page.wait_for_timeout(500)
+    page.locator('#top-bar-window').screenshot(path='topbar_fix_expanded_zoom.png')
+
+    # Test hiding an icon
+    page.evaluate("document.getElementById('multiplayer-container').style.display = 'none'")
+    page.evaluate("window.windowManager.autoAdjustWidth('top-bar-window')")
+    page.wait_for_timeout(500)
+    page.locator('#top-bar-window').screenshot(path='topbar_fix_shrunk_zoom.png')
 
     browser.close()

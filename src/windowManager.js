@@ -486,33 +486,40 @@ export class WindowManager {
 
         const newOriginalWidth = Math.ceil(scalerElement.getBoundingClientRect().width);
 
-        // Check if we need to grow original width
+        if (newOriginalWidth <= 0) {
+            // Restore positioning and abort if zero (e.g. window is display:none)
+            scalerElement.style.position = oldPosition;
+            scalerElement.style.transform = oldScale;
+            scalerElement.style.width = scalerElement.style.getPropertyValue('--original-width') || 'auto';
+            return;
+        }
+
         const currentOriginalWidthStr = scalerElement.style.getPropertyValue('--original-width');
         let currentOriginalWidth = parseInt(currentOriginalWidthStr);
         if (isNaN(currentOriginalWidth) || currentOriginalWidth <= 0) {
             currentOriginalWidth = newOriginalWidth;
         }
 
-        if (newOriginalWidth > currentOriginalWidth) {
-            // Content needs more width, we must grow
-            const growthRatio = newOriginalWidth / currentOriginalWidth;
-            scalerElement.style.setProperty('--original-width', newOriginalWidth + 'px');
+        // Adjust original width to exactly match the current content's natural width
+        scalerElement.style.setProperty('--original-width', newOriginalWidth + 'px');
 
-            // Scale up the window width by the same ratio
-            if (oldWidth && oldWidth.endsWith('px')) {
-                const currentWidth = parseInt(oldWidth);
-                winElement.style.width = (currentWidth * growthRatio) + 'px';
-            } else {
-                winElement.style.width = newOriginalWidth + 'px';
-            }
+        // Update winElement's tracking cache to reflect the exact new content width
+        if (winElement._originalWidth) {
+            winElement._originalWidth = newOriginalWidth;
+        }
 
+        // Check if we need to scale the outer window to maintain proportional zoom.
+        // We only scale the outer window if it has a fixed px width and we have a valid previous unscaled width.
+        if (oldWidth && oldWidth.endsWith('px') && currentOriginalWidth > 0 && newOriginalWidth !== currentOriginalWidth) {
+            const currentWidth = parseInt(oldWidth);
+            // Re-calculate the outer window width by maintaining the current scale factor:
+            // scaleFactor = currentWidth / currentOriginalWidth
+            // newWidth = newOriginalWidth * scaleFactor
+            const scaleFactor = currentWidth / currentOriginalWidth;
+            winElement.style.width = (newOriginalWidth * scaleFactor) + 'px';
             this.saveWindowData(windowId);
-        } else if (newOriginalWidth > 0 && (!currentOriginalWidthStr || isNaN(parseInt(currentOriginalWidthStr)))) {
-            // Initializing original width if it wasn't set yet
-            scalerElement.style.setProperty('--original-width', newOriginalWidth + 'px');
-            if (!oldWidth || oldWidth === 'auto') {
-                winElement.style.width = Math.max(1100, newOriginalWidth) + 'px';
-            }
+        } else if (!oldWidth || oldWidth === 'auto') {
+            winElement.style.width = Math.max(1100, newOriginalWidth) + 'px';
         }
 
         // Restore positioning
