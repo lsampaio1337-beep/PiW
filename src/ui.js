@@ -57,7 +57,7 @@ import { showBonusCandyModal } from './ui/bonusCandy.js';
 window.showBonusCandyModal = showBonusCandyModal;
 window.showGiftModal = showGiftModal;
 import { showSettings, exportLog, showAddPokemonModal, forceNextEncounter, activateCheat, showTimeLapseModal, runTimeLapse } from './ui/settings.js';
-import { setupMarket, buyItem, openPokeMarketBuy, renderPokeMarketTab } from './ui/market.js';
+import { setupMarket, buyItem, openPokeMarketBuy, renderPokeMarketTab, updateBuyItemPrice, buySetMax } from './ui/market.js';
 import { showBackpack, renderBackpackTab, setActiveItem, setAutoPotionThreshold } from './ui/backpack/index.js';
 import { dragStart, dragOver, handleDrop } from './ui/backpack/pokemon.js';
 
@@ -88,6 +88,8 @@ window.evolvePokemon = evolvePokemon;
 window.showSettings = showSettings;
 window.exportLog = exportLog;
 window.buyItem = buyItem;
+window.updateBuyItemPrice = updateBuyItemPrice;
+window.buySetMax = buySetMax;
 window.openPokeMarketBuy = openPokeMarketBuy;
 window.renderPokeMarketTab = renderPokeMarketTab;
 window.showAddPokemonModal = showAddPokemonModal;

@@ -9,12 +9,22 @@
   <!-- Top Bar (Icons) -->
 
   <div id="top-bar-window" class="floating-window" style="display: none; width: 1100px; height: auto; overflow: visible;">
-    <div id="top-bar-header" class="window-header" style="position: relative;">Main Control<span class="btn-exit-game" style="position: absolute; right: 10px; cursor: pointer; color: white; font-weight: bold;">X</span></div>
+    <div id="top-bar-header" class="window-header" style="position: relative; display: flex; justify-content: space-between; align-items: center;">
+      <span style="flex-grow: 1; text-align: center;">Main Control</span>
+      <div style="position: absolute; right: 10px; display: flex; gap: 10px; z-index: 10;">
+        <span id="btn-minimize-main-control" style="cursor: pointer; color: white; font-weight: bold; padding: 0 5px;">-</span>
+        <span id="btn-minimize-all-game" style="cursor: pointer; color: white; font-weight: bold; padding: 0 5px;">--</span>
+        <span class="btn-exit-game" style="cursor: pointer; color: white; font-weight: bold; padding: 0 5px;">X</span>
+      </div>
+    </div>
     <div class="window-content-container">
         <div class="window-content-scaler">
     <div id="top-bar">
 
     <div id="nav-buttons">
+      <img src="Assets/Extra/IconMainView.png" id="btn-toggle-main" class="nav-icon" title="Main View">
+      <img src="Assets/Extra/IconTeam.png" id="btn-toggle-party" class="nav-icon" title="Team">
+      <span class="nav-divider"></span>
       <div style="position: relative; display: inline-block; height: 100%;">
         <img src="Assets/Extra/IconMap.png" id="btn-map" class="nav-icon" title="Map" style="display: block;">
         <img src="Assets/Extra/ExclamationMark.png" id="map-notification" style="display: none; position: absolute; top: -5px; right: -5px; width: 15px; height: auto; pointer-events: none; z-index: 10;">
@@ -23,13 +33,8 @@
       <img src="Assets/Extra/IconPokedex.png" id="btn-dex" class="nav-icon" title="Pokedex">
       <img src="Assets/Extra/IconTrainer.png" id="btn-stats" class="nav-icon" title="Trainer">
 
-
-      <img src="Assets/Extra/IconTeam.png" id="btn-toggle-party" class="nav-icon" title="Team">
-      <img src="Assets/Extra/Icon3.png" id="btn-multiplayer" class="nav-icon" title="Multiplayer">
-      <img src="Assets/Extra/IconMainView.png" id="btn-toggle-main" class="nav-icon" title="Main View">
+      <img src="Assets/Extra/IconMultiplayer.png" id="btn-multiplayer" class="nav-icon" title="Multiplayer">
       <span class="nav-divider"></span>
-
-
 
       <div id="bonus-candy-container" style="position: relative; display: none; height: 100%;">
           <img src="Assets/Extra/BonusCandy.png" id="btn-bonus-candy" class="nav-icon" title="Bonus Candy">
@@ -346,7 +351,7 @@
     <script type="module" src="src/ui.js"></script>
 
 <script type="module">
-    import { setupMarket, openPokeMarketSell, renderPokeMarketSellTab, updateSellItemPrice, sellSetMax, sellMarketItem } from './src/ui/market.js';
+    import { setupMarket, openPokeMarketSell, renderPokeMarketSellTab, updateSellItemPrice, sellSetMax, sellMarketItem, updateBuyItemPrice, buySetMax } from './src/ui/market.js';
     import { state, globals } from './src/state.js';
     import { updateUI, showModal, switchView } from './src/ui.js';
     import { navigateToLocation } from './src/ui/map.js';
@@ -357,6 +362,8 @@
     window.updateSellItemPrice = updateSellItemPrice;
     window.sellSetMax = sellSetMax;
     window.sellMarketItem = sellMarketItem;
+    window.updateBuyItemPrice = updateBuyItemPrice;
+    window.buySetMax = buySetMax;
     window.state = state;
     window.globals = globals;
     window.updateUI = updateUI;

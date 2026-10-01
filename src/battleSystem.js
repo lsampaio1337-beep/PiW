@@ -28,6 +28,19 @@ class BattleSystem {
         };
     }
 
+    getSpeedMultiplier() {
+        const speedTier = this.state.stats?.upgrades?.speedTier || 0;
+        // Tier 0: 1.0 (100% time)
+        // Tier 1: 0.9 (90% time)
+        // Tier 5+: 0.5 (50% time)
+        const mult = 1.0 - (speedTier * 0.1);
+        return Math.max(0.5, mult);
+    }
+
+    getLootTier() {
+        return this.state.stats?.upgrades?.lootTier || 0;
+    }
+
 
     getEvolutionStage(pokemonId) {
         if (!this.evolutionStageMap) {
@@ -58,7 +71,8 @@ class BattleSystem {
 
         if (!this.combatLoop) {
             const leaderSpeed = this.state.party[0].currentStats.spe;
-            let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed));
+            const speedMult = this.getSpeedMultiplier();
+            let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed)) * speedMult;
             slideDelay = Math.max(300, slideDelay) / this.state.settings.gameSpeed;
             this.generateEncounter(slideDelay);
         }
@@ -153,7 +167,6 @@ class BattleSystem {
                      this.state.party.push(p);
                 });
             }
-            alert("Multiplayer battle ended.");
 
             if (typeof window.switchView === 'function') {
                 window.switchView("PROF_OAK_LAB");
@@ -164,6 +177,25 @@ class BattleSystem {
             let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed));
             slideDelay = Math.max(300, slideDelay) / this.state.settings.gameSpeed;
             this.generateEncounter(slideDelay);
+
+            // Re-open multiplayer modal and reset ready states so players stay connected
+            if (typeof window.resetMultiplayerReady === 'function') {
+                window.resetMultiplayerReady();
+            }
+            if (typeof window.openMultiplayerModal === 'function') {
+                const hostStatus = typeof window.getMultiplayerIsHost === 'function' ? window.getMultiplayerIsHost() : false;
+                window.openMultiplayerModal(hostStatus ? 'host' : 'join');
+            }
+        }).catch(err => {
+            console.error("Error importing multiplayer:", err);
+            // Fallback: Re-open multiplayer modal and reset ready states so players stay connected
+            if (typeof window.resetMultiplayerReady === 'function') {
+                window.resetMultiplayerReady();
+            }
+            if (typeof window.openMultiplayerModal === 'function') {
+                const hostStatus = typeof window.getMultiplayerIsHost === 'function' ? window.getMultiplayerIsHost() : false;
+                window.openMultiplayerModal(hostStatus ? 'host' : 'join');
+            }
         });
     }
 
@@ -337,8 +369,14 @@ class BattleSystem {
              setTimeout(() => {
                  this.isFainting = false;
                  if (this.multiplayerState.currentPokemonIndex >= this.multiplayerState.opponentParty.length) {
-                     alert("You won the multiplayer battle!");
                      this.stopMultiplayerBattle();
+                     setTimeout(() => {
+                         if (typeof window.showGameAlert === 'function') {
+                             window.showGameAlert("You won the multiplayer battle!", "window-multiplayer");
+                         } else {
+                             alert("You won the multiplayer battle!");
+                         }
+                     }, 100);
                  } else {
                      const leaderSpeed = this.state.party[0].currentStats.spe;
                      let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed));
@@ -357,8 +395,14 @@ class BattleSystem {
 
                  if (this.state.party.length === 0) {
                      this.isFainting = false;
-                     alert("You lost the multiplayer battle.");
                      this.stopMultiplayerBattle();
+                     setTimeout(() => {
+                         if (typeof window.showGameAlert === 'function') {
+                             window.showGameAlert("You lost the multiplayer battle.", "window-multiplayer");
+                         } else {
+                             alert("You lost the multiplayer battle.");
+                         }
+                     }, 100);
                  } else {
                      this.isFainting = false;
                      const playerPokemon = this.state.party[0];
@@ -454,7 +498,8 @@ class BattleSystem {
                     window.switchView("BATTLE_ARENA");
                 }
                 const leaderSpeed = this.state.party[0].currentStats.spe;
-            let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed));
+                const speedMult = this.getSpeedMultiplier();
+            let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed)) * speedMult;
             slideDelay = Math.max(300, slideDelay) / this.state.settings.gameSpeed;
             this.generateGymEncounter(slideDelay);
             };
@@ -538,7 +583,8 @@ class BattleSystem {
 
         // Speed Delays: Search Time: BaseSearchTime(3.0s) * (100 / (100 + Speed)), minimum 0.30s
         const leaderSpeed = this.state.party[0].currentStats.spe;
-        let delay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed));
+        const speedMult = this.getSpeedMultiplier();
+        let delay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed)) * speedMult;
         delay = Math.max(300, delay) / this.state.settings.gameSpeed;
 
         // Start encounter generation after search delay, slide duration will be same as search delay
@@ -1424,7 +1470,8 @@ class BattleSystem {
             this.handleGymEnemyDefeat();
         } else {
             const leaderSpeed = this.state.party[0].currentStats.spe;
-            let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed));
+            const speedMult = this.getSpeedMultiplier();
+            let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed)) * speedMult;
             slideDelay = Math.max(300, slideDelay) / this.state.settings.gameSpeed;
             this.generateEncounter(slideDelay);
         }
@@ -1475,7 +1522,8 @@ class BattleSystem {
         } else {
             // Next pokemon
             const leaderSpeed = this.state.party[0].currentStats.spe;
-            let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed));
+            const speedMult = this.getSpeedMultiplier();
+            let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed)) * speedMult;
             slideDelay = Math.max(300, slideDelay) / this.state.settings.gameSpeed;
             this.generateGymEncounter(slideDelay);
         }
@@ -1608,7 +1656,8 @@ class BattleSystem {
             } else {
                 // Prepare slide in duration for next pokemon
                 const leaderSpeed = this.state.party[0].currentStats.spe;
-            let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed));
+                const speedMult = this.getSpeedMultiplier();
+            let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed)) * speedMult;
             slideDelay = Math.max(300, slideDelay) / this.state.settings.gameSpeed; // Arbitrary 1s slide in
                 this.isPlayerPreSlidingIn = true;
                 this.updateUI(); // Move offscreen
@@ -2026,17 +2075,18 @@ class BattleSystem {
                 }
 
                 // Add loot drops
+                const lootTier = this.getLootTier();
                 let dropRate = 0;
                 const evoStage = this.getEvolutionStage(this.activeEncounter.id);
 
-                if (evoStage === 2) dropRate = 0.01;
-                else if (evoStage >= 3) dropRate = 0.02;
+                if (evoStage === 2) dropRate = 0.005;
+                else if (evoStage >= 3) dropRate = 0.01;
 
                 if (this.activeEncounter.qualityName === "Shiny" && evoStage >= 2) {
                     dropRate = 1.0;
                 }
 
-                if (Math.random() < (dropRate * lootMultiplier) && this.activeEncounter.types && this.activeEncounter.types.length > 0) {
+                if (lootTier >= 3 && Math.random() < (dropRate * lootMultiplier) && this.activeEncounter.types && this.activeEncounter.types.length > 0) {
                     const types = this.activeEncounter.types;
                     const randomType = types[Math.floor(Math.random() * types.length)];
                     const stoneName = `${randomType} Stone`;
@@ -2056,7 +2106,7 @@ class BattleSystem {
                 }
 
                 // Vitamin drops
-                if (sumIV > 500 && this.activeEncounter?.quality > 1.6 && Math.random() < (0.05 * lootMultiplier)) {
+                if (lootTier >= 4 && sumIV > 500 && this.activeEncounter?.quality > 1.6 && Math.random() < (0.1 * lootMultiplier)) {
                     const vitamins = VITAMINS;
                     const randomVitamin = vitamins[Math.floor(Math.random() * vitamins.length)];
 
@@ -2090,7 +2140,7 @@ class BattleSystem {
                     potionTierName = "Huge Potion";
                 }
 
-                if (Math.random() < itemDropChance) {
+                if (lootTier >= 2 && Math.random() < itemDropChance) {
                     let ballDropQty = Math.floor(lootMultiplier);
                     if (Math.random() < (lootMultiplier % 1)) ballDropQty += 1;
 
@@ -2111,7 +2161,7 @@ class BattleSystem {
                     }
                 }
 
-                if (Math.random() < itemDropChance) {
+                if (lootTier >= 1 && Math.random() < itemDropChance) {
                     let potionDropQty = Math.floor(lootMultiplier);
                     if (Math.random() < (lootMultiplier % 1)) potionDropQty += 1;
 

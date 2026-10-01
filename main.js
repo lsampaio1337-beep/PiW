@@ -45,6 +45,14 @@ function createWindow() {
     });
 
     // Handle click-through messages from the renderer process
+    ipcMain.on('minimize-game', (event) => {
+        const webContents = event.sender;
+        const currentWindow = BrowserWindow.fromWebContents(webContents);
+        if (currentWindow) {
+            currentWindow.minimize();
+        }
+    });
+
     ipcMain.on('set-ignore-mouse-events', (event, ignore, options) => {
         const webContents = event.sender;
         const currentWindow = BrowserWindow.fromWebContents(webContents);
