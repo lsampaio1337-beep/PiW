@@ -2,6 +2,7 @@ import { VITAMINS } from "../constants.js";
 import { state } from '../state.js';
 import { updateUI } from '../ui.js';
 import { showModal } from '../ui.js';
+import { getCapacity, getCurrentCount } from '../mathEngine.js';
 
 window.claimPendingGift = function(index) {
     if (!state.stats.pendingGifts || index < 0 || index >= state.stats.pendingGifts.length) return;
@@ -10,8 +11,33 @@ window.claimPendingGift = function(index) {
 
     if (gift.type === 'item') {
         if (!state.backpack) state.backpack = {};
-        if (!state.backpack[gift.item]) state.backpack[gift.item] = 0;
-        state.backpack[gift.item] += gift.count || 1;
+        let qty = gift.count || 1;
+
+        let isBall = gift.item.includes('ball') || gift.item.includes('Ball');
+        let isPotion = gift.item.includes('Potion');
+
+        if (isBall && gift.item !== 'Masterball') {
+            let currentBalls = getCurrentCount(state, 'balls');
+            let maxBalls = getCapacity(state, 'balls');
+            let spaceLeft = maxBalls - currentBalls;
+            if (qty > spaceLeft) {
+                qty = Math.max(0, spaceLeft);
+                if (window.showGameAlert) window.showGameAlert("Can't collect Ball due to its maximum capacity");
+            }
+        } else if (isPotion) {
+            let currentPotions = getCurrentCount(state, 'potions');
+            let maxPotions = getCapacity(state, 'potions');
+            let spaceLeft = maxPotions - currentPotions;
+            if (qty > spaceLeft) {
+                qty = Math.max(0, spaceLeft);
+                if (window.showGameAlert) window.showGameAlert("Can't collect Potion due to its maximum capacity");
+            }
+        }
+
+        if (qty > 0) {
+            if (!state.backpack[gift.item]) state.backpack[gift.item] = 0;
+            state.backpack[gift.item] += qty;
+        }
     } else if (gift.type === 'badge') {
         state.trainer.badges++;
     }

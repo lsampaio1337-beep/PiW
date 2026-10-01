@@ -2,6 +2,7 @@ import { state } from '../state.js';
 import { showModal } from '../ui.js';
 import { updateTopbar } from './topbar.js';
 import { getDailyChallengesHtml } from './dailyChallenges.js';
+import { getCapacity, getCurrentCount } from '../mathEngine.js';
 
 
 export function getRewardForDay(daysClaimed) {
@@ -82,17 +83,36 @@ export function claimDailyReward(dayIndex) {
 
     // Grant items
     for (let ballName in reward.items) {
-        if (!state.backpack.pokeballs[ballName]) {
-             state.backpack.pokeballs[ballName] = 0;
+        let qty = reward.items[ballName];
+        let currentBalls = getCurrentCount(state, 'balls');
+        let maxBalls = getCapacity(state, 'balls');
+        let spaceLeft = maxBalls - currentBalls;
+        if (ballName === 'Masterball') spaceLeft = Infinity;
+
+        if (qty > spaceLeft) {
+            qty = Math.max(0, spaceLeft);
+            if (window.showGameAlert) window.showGameAlert("Can't collect Ball due to its maximum capacity");
         }
-        state.backpack.pokeballs[ballName] += reward.items[ballName];
+        if (qty > 0) {
+            if (!state.backpack.pokeballs[ballName]) state.backpack.pokeballs[ballName] = 0;
+            state.backpack.pokeballs[ballName] += qty;
+        }
     }
 
     for (let potionName in reward.potions) {
-        if (!state.backpack.potions[potionName]) {
-             state.backpack.potions[potionName] = 0;
+        let qty = reward.potions[potionName];
+        let currentPotions = getCurrentCount(state, 'potions');
+        let maxPotions = getCapacity(state, 'potions');
+        let spaceLeft = maxPotions - currentPotions;
+
+        if (qty > spaceLeft) {
+            qty = Math.max(0, spaceLeft);
+            if (window.showGameAlert) window.showGameAlert("Can't collect Potion due to its maximum capacity");
         }
-        state.backpack.potions[potionName] += reward.potions[potionName];
+        if (qty > 0) {
+            if (!state.backpack.potions[potionName]) state.backpack.potions[potionName] = 0;
+            state.backpack.potions[potionName] += qty;
+        }
     }
 
     if (reward.tokens) {
