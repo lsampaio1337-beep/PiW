@@ -2033,26 +2033,27 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
         }
     });
 
-        bindBtn('btn-sleep', () => {
-        if(!checkCombatLock()) {
+        window.showZzZMode = () => {
+            if(checkCombatLock()) return;
             state.stats.hasSeenZzZIcon = true;
             storage.save(state);
             updateTopbar();
 
             const grains = state.stats.jigglypuffGrains || 0;
-            const tutorialDisplay = (!state.stats.hasSeenZzZTutorial) ? 'block' : 'none';
             if (!state.stats.hasSeenZzZTutorial) {
-                state.stats.hasSeenZzZTutorial = true;
-                storage.save(state);
+                document.getElementById('zzz-first-time-overlay').style.display = 'flex';
+
+                document.getElementById('btn-dismiss-zzz').onclick = () => {
+                    document.getElementById('zzz-first-time-overlay').style.display = 'none';
+                    state.stats.hasSeenZzZTutorial = true;
+                    storage.save(state);
+                    window.showZzZMode(); // re-trigger to show modal
+                };
+                return;
             }
 
             const htmlContent = `
                 <div class="content-panel" style="display: flex; flex-direction: column; gap: 15px; width: 100%; box-sizing: border-box;">
-                    <div id="zzz-tutorial-section" style="display: ${tutorialDisplay}; background: rgba(255,255,255,0.05); border: 1px dashed #475569; border-radius: 8px; padding: 15px; margin-bottom: 10px; text-align: left;">
-                        <div style="color: #cbd5e1; font-size: 14px; margin-bottom: 8px;"><b>Welcome to ZzZ Mode!</b></div>
-                        <div style="color: #94a3b8; font-size: 13px; line-height: 1.4;">Earn <b>Jigglypuff Dust</b> simply by playing the game (1 minute active = 1 grain). You can spend these grains to allow your Pokémon to farm offline when you close the game (1 grain = 1 minute of offline farming).</div>
-                    </div>
-
                     <div style="display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.2); border-radius: 8px; padding: 20px; border: 1px solid #334155; gap: 20px;">
                         <div style="flex: 1; display: flex; justify-content: flex-end;">
                             <img src="Assets/Extra/Jigglypuff Dust.png" style="width: 120px; height: auto; filter: drop-shadow(0 0 10px rgba(255, 192, 203, 0.4));">
@@ -2090,8 +2091,8 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
                 storage.save(state);
                 window.close();
             };
-        }
-    });
+        };
+        bindBtn('btn-sleep', window.showZzZMode);
 
     window.showBackpackAndFocus = (tab) => {
         if(!checkCombatLock()) {
