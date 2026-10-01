@@ -55,6 +55,7 @@ export const state = {
         jigglypuffGrains: 0,
         jigglypuffGrainsUsed: 0,
         hasSeenZzZTutorial: false,
+        hasSeenMultiplayerIcon: false,
         newRoutes: [],
         hasUnseenMap: false,
         upgrades: {
