@@ -45,8 +45,12 @@ export class WindowManager {
         const resizeHandle = winElement.querySelector('.window-resize-handle');
         const contentScaler = winElement.querySelector('.window-content-scaler');
 
-        if (resizeHandle && contentScaler) {
-            this._setupResize(winElement, resizeHandle, contentScaler, headerElement);
+        if (resizeHandle) {
+            if (contentScaler) {
+                this._setupResize(winElement, resizeHandle, contentScaler, headerElement);
+            } else {
+                this._setupResizeNative(winElement, resizeHandle, headerElement);
+            }
         }
 
 
@@ -472,7 +476,7 @@ export class WindowManager {
         if (!winElement) return;
 
         const scalerElement = winElement.querySelector('.window-content-scaler');
-        if (!scalerElement) return;
+        if (!scalerElement) return; // Scale handled differently for native flex windows
 
         // Briefly measure natural width of content without constraints
         const oldScale = scalerElement.style.transform;
@@ -772,7 +776,7 @@ export class WindowManager {
             let left = 50;
             let top = 50;
 
-            const mainView = document.getElementById('top-bar-window');
+            const mainView = document.getElementById('main-control-window');
             if (mainView && mainView.style.display !== 'none') {
                 const rect = mainView.getBoundingClientRect();
                 left = rect.left;
@@ -801,3 +805,47 @@ export class WindowManager {
 
 
 }
+
+    _setupResizeNative(winElement, handleElement, headerElement) {
+        let isResizing = false;
+        let startX, startY;
+        let startWidth, startHeight;
+        let aspectRatio;
+
+        handleElement.addEventListener('mousedown', (e) => {
+            isResizing = true;
+            startX = e.clientX;
+            startY = e.clientY;
+
+            startWidth = winElement.offsetWidth;
+            startHeight = winElement.offsetHeight;
+            aspectRatio = startWidth / startHeight;
+
+            this.focusWindow(winElement);
+            e.stopPropagation();
+            e.preventDefault();
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isResizing) return;
+
+            const dx = e.clientX - startX;
+            let newWidth = Math.max(300, startWidth + dx);
+
+            // Limit by container width
+            if (newWidth > this.containerWidth) newWidth = this.containerWidth;
+
+            let newHeight = newWidth / aspectRatio;
+
+            winElement.style.width = newWidth + 'px';
+            winElement.style.height = newHeight + 'px';
+        });
+
+        document.addEventListener('mouseup', () => {
+            if (isResizing) {
+                isResizing = false;
+                this._constrainAllWindows();
+                this.saveWindowData(winElement.id);
+            }
+        });
+    }

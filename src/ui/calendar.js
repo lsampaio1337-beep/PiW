@@ -1,6 +1,6 @@
 import { state } from '../state.js';
 import { showModal } from '../ui.js';
-import { updateTopbar } from './topbar.js';
+import { updateMainControl } from './mainControl.js';
 import { getDailyChallengesHtml } from './dailyChallenges.js';
 import { getCapacity, getCurrentCount } from '../mathEngine.js';
 
@@ -144,7 +144,7 @@ export function claimDailyReward(dayIndex) {
     state.stats.dailyRewards.daysClaimed++;
 
     // Refresh UI
-    updateTopbar();
+    updateMainControl();
     showCalendar();
 }
 

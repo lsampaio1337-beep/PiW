@@ -17,27 +17,27 @@ export function setupGlobalEventListeners() {
     const minimizeMainBtn = document.getElementById('btn-minimize-main-control');
     if (minimizeMainBtn) {
         minimizeMainBtn.addEventListener('click', () => {
-            const topBarWindow = document.getElementById('top-bar-window');
-            const contentContainer = topBarWindow.querySelector('.window-content-container');
-            if (!contentContainer || !topBarWindow) return;
+            const mainControlWindow = document.getElementById('main-control-window');
+            const contentContainer = mainControlWindow.querySelector('.window-content-container');
+            if (!contentContainer || !mainControlWindow) return;
 
             const isMinimized = contentContainer.style.display === 'none';
 
             if (isMinimized) {
                 // Restore
                 contentContainer.style.display = '';
-                topBarWindow.style.width = topBarWindow.dataset.originalWidth || '1100px';
-                topBarWindow.style.minHeight = '';
-                if (topBarWindow.dataset.originalHeight) topBarWindow.style.height = topBarWindow.dataset.originalHeight;
+                mainControlWindow.style.width = mainControlWindow.dataset.originalWidth || '1100px';
+                mainControlWindow.style.minHeight = '';
+                if (mainControlWindow.dataset.originalHeight) mainControlWindow.style.height = mainControlWindow.dataset.originalHeight;
                 if (window.windowManager) window.windowManager._constrainAllWindows();
             } else {
                 // Minimize
-                topBarWindow.dataset.originalWidth = topBarWindow.style.width;
-                topBarWindow.dataset.originalHeight = topBarWindow.style.height;
+                mainControlWindow.dataset.originalWidth = mainControlWindow.style.width;
+                mainControlWindow.dataset.originalHeight = mainControlWindow.style.height;
                 contentContainer.style.display = 'none';
-                topBarWindow.style.width = '300px'; // Minimal width for title + buttons
-                topBarWindow.style.minHeight = '0';
-                topBarWindow.style.height = 'auto'; // Only display title
+                mainControlWindow.style.width = '300px'; // Minimal width for title + buttons
+                mainControlWindow.style.minHeight = '0';
+                mainControlWindow.style.height = 'auto'; // Only display title
             }
         });
     }

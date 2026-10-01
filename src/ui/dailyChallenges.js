@@ -1,5 +1,5 @@
 import { state } from '../state.js';
-import { updateTopbar } from './topbar.js';
+import { updateMainControl } from './mainControl.js';
 import { showCalendar } from './calendar.js';
 
 // Setup default state if missing
@@ -316,7 +316,7 @@ window.cheatCompleteDailyChallenge = function(index) {
         active[index].progress = active[index].target;
         active[index].completed = true;
         state.stats.dailyChallenges.hasSeenNotification = false;
-        if (typeof window.updateTopbar === 'function') window.updateTopbar();
+        if (typeof window.updateMainControl === 'function') window.updateMainControl();
         if (typeof showCalendar === 'function') showCalendar(); // Refresh UI
     }
 };
@@ -330,7 +330,7 @@ window.claimDailyChallengeToken = function(index) {
         if (!state.stats.tokensEarned) state.stats.tokensEarned = 0;
         state.stats.tokensEarned += 1;
         state.stats.dailyChallenges.totalCompleted++;
-        if (typeof window.updateTopbar === 'function') window.updateTopbar();
+        if (typeof window.updateMainControl === 'function') window.updateMainControl();
         if (typeof showCalendar === 'function') showCalendar(); // Refresh UI
     }
 };
@@ -506,7 +506,7 @@ window.trackDailyChallenge = function(type, data = {}) {
                 c.progress = c.target;
                 c.completed = true;
                 state.stats.dailyChallenges.hasSeenNotification = false;
-                if (typeof window.updateTopbar === 'function') window.updateTopbar();
+                if (typeof window.updateMainControl === 'function') window.updateMainControl();
             }
             updated = true;
         }
