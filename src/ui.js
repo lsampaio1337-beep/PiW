@@ -2336,20 +2336,6 @@ window.showGameAlert = function(message, attachToElementId = null) {
     if (!alertBox) {
         alertBox = document.createElement('div');
         alertBox.id = 'game-alert-toast';
-
-        if (isAbsolute) {
-            alertBox.style.position = 'absolute';
-            // Need the container to be relative/absolute so this stays inside
-            if (window.getComputedStyle(container).position === 'static') {
-                container.style.position = 'relative';
-            }
-        } else {
-            alertBox.style.position = 'fixed';
-        }
-
-        alertBox.style.top = '20px';
-        alertBox.style.left = '50%';
-        alertBox.style.transform = 'translateX(-50%)';
         alertBox.style.backgroundColor = 'rgba(0, 0, 0, 0.85)';
         alertBox.style.color = '#fff';
         alertBox.style.padding = '15px 30px';
@@ -2363,6 +2349,48 @@ window.showGameAlert = function(message, attachToElementId = null) {
         alertBox.style.pointerEvents = 'none';
         alertBox.style.opacity = '0';
         alertBox.style.transition = 'opacity 0.3s ease-in-out';
+    }
+
+    let container = document.body;
+    let topWin = null;
+    let maxZ = -1;
+    if (window.windowManager && window.windowManager.windows) {
+        window.windowManager.windows.forEach(win => {
+            if (win.style.display !== 'none') {
+                let z = parseInt(win.style.zIndex) || 0;
+                if (z > maxZ) {
+                    maxZ = z;
+                    topWin = win;
+                }
+            }
+        });
+    }
+
+    const innerModalOverlay = document.getElementById('main-view-inner-modal-overlay');
+    if (innerModalOverlay && innerModalOverlay.style.display !== 'none') {
+        const innerModal = document.getElementById('main-view-inner-modal');
+        if (innerModal) {
+            // Because innerModal acts as the top container for Market etc.
+            container = innerModal;
+        }
+    } else if (topWin) {
+        container = topWin;
+    }
+
+    if (container !== document.body) {
+        alertBox.style.position = 'absolute';
+        alertBox.style.top = '10px';
+        alertBox.style.left = '50%';
+        alertBox.style.transform = 'translateX(-50%)';
+    } else {
+        alertBox.style.position = 'fixed';
+        alertBox.style.top = '20px';
+        alertBox.style.left = '50%';
+        alertBox.style.transform = 'translateX(-50%)';
+    }
+
+    if (alertBox.parentElement !== container) {
+        if (alertBox.parentElement) alertBox.parentElement.removeChild(alertBox);
         container.appendChild(alertBox);
     }
 
