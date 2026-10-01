@@ -346,7 +346,7 @@
     <script type="module" src="src/ui.js"></script>
 
 <script type="module">
-    import { setupMarket, openPokeMarketSell, renderPokeMarketSellTab, updateSellItemPrice, sellSetMax, sellMarketItem } from './src/ui/market.js';
+    import { setupMarket, openPokeMarketSell, renderPokeMarketSellTab, updateSellItemPrice, sellSetMax, sellMarketItem, updateBuyItemPrice, buySetMax } from './src/ui/market.js';
     import { state, globals } from './src/state.js';
     import { updateUI, showModal, switchView } from './src/ui.js';
     import { navigateToLocation } from './src/ui/map.js';
@@ -357,6 +357,8 @@
     window.updateSellItemPrice = updateSellItemPrice;
     window.sellSetMax = sellSetMax;
     window.sellMarketItem = sellMarketItem;
+    window.updateBuyItemPrice = updateBuyItemPrice;
+    window.buySetMax = buySetMax;
     window.state = state;
     window.globals = globals;
     window.updateUI = updateUI;
