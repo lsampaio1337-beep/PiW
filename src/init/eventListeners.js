@@ -3,6 +3,42 @@ import { promptExitGame } from '../ui.js';
 
 export function setupGlobalEventListeners() {
     // Top Bar & Save Manager Exits
+
+    const minimizeAllBtn = document.getElementById('btn-minimize-all-game');
+    if (minimizeAllBtn) {
+        minimizeAllBtn.addEventListener('click', () => {
+            if (window.require) {
+                const { ipcRenderer } = window.require('electron');
+                ipcRenderer.send('minimize-game');
+            }
+        });
+    }
+
+    const minimizeMainBtn = document.getElementById('btn-minimize-main-control');
+    if (minimizeMainBtn) {
+        minimizeMainBtn.addEventListener('click', () => {
+            const topBarWindow = document.getElementById('top-bar-window');
+            const contentContainer = topBarWindow.querySelector('.window-content-container');
+            if (!contentContainer || !topBarWindow) return;
+
+            const isMinimized = contentContainer.style.display === 'none';
+
+            if (isMinimized) {
+                // Restore
+                contentContainer.style.display = '';
+                topBarWindow.style.width = topBarWindow.dataset.originalWidth || '1100px';
+                topBarWindow.style.minHeight = '';
+                if (window.windowManager) window.windowManager._constrainAllWindows();
+            } else {
+                // Minimize
+                topBarWindow.dataset.originalWidth = topBarWindow.style.width;
+                contentContainer.style.display = 'none';
+                topBarWindow.style.width = '300px'; // Minimal width for title + buttons
+                topBarWindow.style.minHeight = '0';
+            }
+        });
+    }
+
     const exitButtons = document.querySelectorAll('.btn-exit-game');
     exitButtons.forEach(btn => {
         btn.addEventListener('click', () => {
