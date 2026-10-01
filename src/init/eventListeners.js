@@ -96,14 +96,6 @@ export function setupGlobalEventListeners() {
         });
     }
 
-    // Bonus Candy
-    const dismissBonusCandyBtn = document.getElementById('btn-dismiss-bonus-candy');
-    if (dismissBonusCandyBtn) {
-        dismissBonusCandyBtn.addEventListener('click', () => {
-            if (window.dismissBonusCandyMessage) window.dismissBonusCandyMessage();
-        });
-    }
-
     const daycareTrainBtn = document.getElementById('btn-daycare-train');
     if (daycareTrainBtn) {
         daycareTrainBtn.addEventListener('click', () => {

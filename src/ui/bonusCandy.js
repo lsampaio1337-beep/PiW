@@ -91,22 +91,27 @@ export function showBonusCandyModal() {
                 </div>
             </div>
         </div>
+
+        <!-- Bonus Candy First-Time Overlay (Inner Modal) -->
+        <div id="bonus-candy-first-time-overlay" style="display: ${!state.stats.hasSeenBonusCandyModal ? 'flex' : 'none'}; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10000; background: rgba(0, 0, 0, 0.7); flex-direction: column; align-items: center; justify-content: center; border-radius: 8px;">
+            <div style="background: #34495e; padding: 20px; border-radius: 10px; border: 2px solid #ff00ff; text-align: center; color: white; max-width: 80%;">
+                <div id="bonus-candy-intro-text" style="margin-top: 0; font-size: 16px;">
+                    <p>Here you can find delicious candies!</p>
+                    <p>In order to earn a white candy you need to defeat ${WHITE_CANDY_DEFEAT_REQUIREMENT} wild Pokémons</p>
+                    <p>When claimed white candies can be trade to different flavors with different effects.</p>
+                    <p>Each time a flavored candy is traded, the next one will have its price increased by its initial value.</p>
+                </div>
+                <button id="btn-dismiss-bonus-candy" onclick="window.dismissBonusCandyMessage()" style="padding: 10px 20px; background: #2ecc71; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: 10px; font-size: 16px;">Enjoy!</button>
+            </div>
+        </div>
     `;
 
     showModal("Bonus Candy", html, "window-bonus-candy", "800px", "auto");
 
-    if (!state.stats.hasSeenBonusCandyModal) {
-        const overlay = document.getElementById('bonus-candy-first-time-overlay');
-        const introText = document.getElementById('bonus-candy-intro-text');
-        if (overlay && introText) {
-            introText.innerHTML = `
-                <p>Here you can find delicious candies!</p>
-                <p>In order to earn a white candy you need to defeat ${WHITE_CANDY_DEFEAT_REQUIREMENT} wild Pokémons</p>
-                <p>When claimed white candies can be trade to different flavors with different effects.</p>
-                <p>Each time a flavored candy is traded, the next one will have its price increased by its initial value.</p>
-            `;
-            overlay.style.display = 'flex';
-        }
+    // Ensure the inner content container has relative positioning so the absolute overlay maps correctly to it
+    const modalContent = document.querySelector('#window-bonus-candy .window-content-container');
+    if (modalContent) {
+        modalContent.style.position = 'relative';
     }
 }
 
