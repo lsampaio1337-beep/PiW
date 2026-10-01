@@ -1213,6 +1213,7 @@ function selectStarter(id) {
         quality: q,
         ivs: ivs,
         currentStats: stats,
+        bst: pData.hp + pData.atk + pData.def + pData.spa + pData.spd + pData.spe,
         maxHp: stats.hp,
         currentHp: stats.hp,
         moves: [{name: "Tackle", power: 40, type: "Normal", category: "Physical"}] // Basic start

@@ -64,9 +64,15 @@ export function openPokeMarketBuy() {
     const hasUnlockedUpgrades = state.stats.upgradesUnlocked && Object.keys(state.stats.upgradesUnlocked).some(k => state.stats.upgradesUnlocked[k]);
 
     const html = `
-        <div id="market-buy-wrapper" style="display: flex; flex-direction: column; width: 100%; margin-top: 0px; --m-width: min(90vw, 825px);">
+        <div id="market-buy-wrapper" style="display: flex; flex-direction: column; width: 100%; height: 100%; margin-top: 0px; --m-width: min(90vw, 825px);">
 
-            <div id="market-buy-content" style="display: flex; flex-wrap: wrap; gap: calc(var(--m-width) * 0.018); justify-content: center; padding: calc(var(--m-width) * 0.012);">
+
+            <div style="padding-top: calc(var(--m-width) * 0.02); margin-bottom: calc(var(--m-width) * 0.015); display: flex; align-items: center; justify-content: center; gap: calc(var(--m-width) * 0.012);">
+                <label style="font-weight: bold; font-size: calc(var(--m-width) * 0.022); color: white;">$<span id="market-trainer-money">${state.trainer.money.toLocaleString()}</span></label>
+            </div>
+
+
+            <div id="market-buy-content" style="display: flex; flex-wrap: wrap; gap: calc(var(--m-width) * 0.018); justify-content: center; overflow-y: auto; flex: 1; padding: calc(var(--m-width) * 0.012);">
                 <!-- Cards injected here -->
             </div>
         </div>
@@ -77,10 +83,9 @@ export function openPokeMarketBuy() {
     const content = document.getElementById('main-view-inner-modal-content');
 
     const titleHtml = `
-        <div style="display: flex; flex-direction: column; align-items: center; gap: 5px; position: relative; width: 100%;">
-            <div style="position: absolute; right: 40px; top: 0px; font-weight: bold; font-size: 16px; color: #2ecc71;">$<span id="market-trainer-money">${state.trainer.money.toLocaleString()}</span></div>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
             <div style="display: inline-flex; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px;">
-                <button onclick="window.openPokeMarketBuy()" style="background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.2); font-size: 14px;">Buy</button>
+                <button onclick="window.openPokeMarketBuy()" style="background: linear-gradient(to bottom, #2ecc71, #27ae60); color: white; border: 1px solid #2ecc71; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.2); font-size: 14px;">Buy</button>
                 <button onclick="if(window.openPokeMarketSell) window.openPokeMarketSell()" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmouseover="this.style.color='white'; this.style.background='rgba(255,255,255,0.1)';" onmouseout="this.style.color='rgba(255, 255, 255, 0.7)'; this.style.background='transparent';">Sell</button>
             </div>
             <div style="display: inline-flex; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px;">
@@ -417,20 +422,22 @@ export function newBuyItem(itemId, baseCost, category, upgradeType = null) {
 
 export function openPokeMarketSell() {
     const html = `
-        <div id="market-sell-wrapper" style="display: flex; flex-direction: column; width: 100%; margin-top: 0px; --m-width: min(90vw, 825px);">
+        <div id="market-sell-wrapper" style="display: flex; flex-direction: column; width: 100%; height: 100%; margin-top: 0px; --m-width: min(90vw, 825px);">
+
+
+            <div style="padding-top: calc(var(--m-width) * 0.02); margin-bottom: calc(var(--m-width) * 0.015); display: flex; align-items: center; justify-content: center; gap: calc(var(--m-width) * 0.012);">
+                <label style="font-weight: bold; font-size: calc(var(--m-width) * 0.022); color: white;">$<span id="market-trainer-money-sell">${state.trainer.money.toLocaleString()}</span></label>
+            </div>
 
             <div id="market-pokemon-sell-controls" style="display: none; flex-direction: column; align-items: center; justify-content: center; margin-bottom: calc(var(--m-width) * 0.015); gap: calc(var(--m-width) * 0.012);">
-                <div style="font-size: calc(var(--m-width) * 0.022); font-weight: bold; color: white;">
-                    Selected: <span id="market-pokemon-sell-count">0</span> | Total: $<span id="market-pokemon-sell-total">0</span>
-                    <span onclick="if(window.toggleMarketFilter) window.toggleMarketFilter()" style="cursor: pointer; margin-left: 10px;">🔍</span>
-                </div>
+                <div style="font-size: calc(var(--m-width) * 0.022); font-weight: bold; color: white;">Selected: <span id="market-pokemon-sell-count">0</span> | Total: $<span id="market-pokemon-sell-total">0</span></div>
                 <div style="display: flex; gap: calc(var(--m-width) * 0.012);">
                     <button onclick="if(window.marketSelectAllPokemonForSale) window.marketSelectAllPokemonForSale()" style="padding: calc(var(--m-width) * 0.012) calc(var(--m-width) * 0.024); font-size: calc(var(--m-width) * 0.019); font-weight: bold; border-radius: 5px; background: #3498db; color: white; cursor: pointer; border: none;">Select Visible</button>
                     <button onclick="if(window.marketDeselectAllPokemonForSale) window.marketDeselectAllPokemonForSale()" style="padding: calc(var(--m-width) * 0.012) calc(var(--m-width) * 0.024); font-size: calc(var(--m-width) * 0.019); font-weight: bold; border-radius: 5px; background: #95a5a6; color: white; cursor: pointer; border: none;">Deselect All</button>
                     <button onclick="if(window.marketSellSelectedPokemon) window.marketSellSelectedPokemon()" style="padding: calc(var(--m-width) * 0.012) calc(var(--m-width) * 0.024); font-size: calc(var(--m-width) * 0.019); font-weight: bold; border-radius: 5px; background: #e74c3c; color: white; cursor: pointer; border: none;">Sell Selected</button>
                 </div>
 
-                <div id="market-pokemon-filters" style="display: none; flex-wrap: nowrap; gap: calc(var(--m-width) * 0.012); justify-content: center; align-items: center; background: #2c3e50; padding: calc(var(--m-width) * 0.012); border-radius: 8px; border: 1px solid #7f8c8d; width: 100%; box-sizing: border-box;">
+                <div id="market-pokemon-filters" style="display: flex; flex-wrap: nowrap; gap: calc(var(--m-width) * 0.012); justify-content: center; align-items: center; background: #2c3e50; padding: calc(var(--m-width) * 0.012); border-radius: 8px; border: 1px solid #7f8c8d; width: 100%; box-sizing: border-box;">
                     <div style="display: flex; gap: calc(var(--m-width) * 0.006); align-items: center;">
                         <label style="color: white; font-size: calc(var(--m-width) * 0.017);">Name:</label>
                         <input type="text" id="market-filter-name" oninput="if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon')" style="width: calc(var(--m-width) * 0.1); padding: calc(var(--m-width) * 0.006); border-radius: 4px; border: 1px solid #ccc; font-size: calc(var(--m-width) * 0.017);">
@@ -454,10 +461,9 @@ export function openPokeMarketSell() {
                         <input type="text" id="market-filter-sumiv-max" placeholder="Max" oninput="if(window.sanitizeMarketNumberInput) window.sanitizeMarketNumberInput(this); if(window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon')" style="width: calc(var(--m-width) * 0.04); padding: calc(var(--m-width) * 0.006); border-radius: 4px; border: 1px solid #ccc; font-size: calc(var(--m-width) * 0.017);">
                     </div>
                 </div>
-                <div style="width: 100%; height: 2px; background: rgba(255,255,255,0.2); margin-top: calc(var(--m-width) * 0.012);"></div>
             </div>
 
-            <div id="market-sell-content" style="display: flex; flex-wrap: wrap; gap: calc(var(--m-width) * 0.018); justify-content: center; padding: calc(var(--m-width) * 0.012);">
+            <div id="market-sell-content" style="display: flex; flex-wrap: wrap; gap: calc(var(--m-width) * 0.018); justify-content: center; overflow-y: auto; flex: 1; padding: calc(var(--m-width) * 0.012);">
                 <!-- Cards injected here -->
             </div>
         </div>
@@ -470,8 +476,7 @@ export function openPokeMarketSell() {
     const content = document.getElementById('main-view-inner-modal-content');
 
     const titleHtml = `
-        <div style="display: flex; flex-direction: column; align-items: center; gap: 5px; position: relative; width: 100%;">
-            <div style="position: absolute; right: 40px; top: 0px; font-weight: bold; font-size: 16px; color: #2ecc71;">$<span id="market-trainer-money-sell">${state.trainer.money.toLocaleString()}</span></div>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
             <div style="display: inline-flex; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px;">
                 <button onclick="window.openPokeMarketBuy()" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmouseover="this.style.color='white'; this.style.background='rgba(255,255,255,0.1)';" onmouseout="this.style.color='rgba(255, 255, 255, 0.7)'; this.style.background='transparent';">Buy</button>
                 <button onclick="if(window.openPokeMarketSell) window.openPokeMarketSell()" style="background: linear-gradient(to bottom, #e74c3c, #c0392b); color: white; border: 1px solid #e74c3c; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.2); font-size: 14px;">Sell</button>
@@ -514,26 +519,15 @@ export function renderPokeMarketSellTab(category) {
     const content = document.getElementById('market-sell-content');
     if (!content) return;
 
-    // Check if category changed to clear filter
-    if (content.dataset.category !== category) {
-        content.dataset.category = category;
-        if (category === 'pokemon') {
-            const filterInputs = document.querySelectorAll('#market-pokemon-filters input');
-            filterInputs.forEach(input => input.value = '');
-            const filterPanel = document.getElementById('market-pokemon-filters');
-            if (filterPanel) filterPanel.style.display = 'none';
-        }
-    }
-
     // Highlight active tab
     const tabs = ['pokeballs', 'potions', 'stones', 'vitamins', 'pokemon'];
     tabs.forEach(tab => {
         const btn = document.getElementById(`market-tab-sell-${tab}`);
         if (btn) {
             if (tab === category) {
-                btn.style.background = 'linear-gradient(to bottom, #e74c3c, #c0392b)';
+                btn.style.background = 'linear-gradient(to bottom, #3498db, #2980b9)';
                 btn.style.color = 'white';
-                btn.style.border = '1px solid #e74c3c';
+                btn.style.border = '1px solid #3498db';
                 btn.style.boxShadow = '0 2px 4px rgba(0,0,0,0.2)';
             } else {
                 btn.style.background = 'transparent';
@@ -566,7 +560,13 @@ export function renderPokeMarketSellTab(category) {
         state.storage.forEach(p => {
         if (!p.uuid) p.uuid = Math.random().toString(36).substring(2, 15);
             let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
-            let pEv = calculatePP(p.bst, p.level, p.quality, sumIV);
+            let pBst = p.bst;
+            if (!pBst && p.id && state.config && state.config.pokemonData) {
+                const pd = state.config.pokemonData.find(pd => pd.id === p.id);
+                if (pd) pBst = pd.hp + pd.atk + pd.def + pd.spa + pd.spd + pd.spe;
+            }
+            if (!pBst) pBst = 300;
+            let pEv = calculatePP(pBst, p.level, p.quality, sumIV);
 
             let pName = p.name || p.id;
             if (typeof p.id === 'number' && state.config && state.config.pokemonData) {
@@ -591,7 +591,7 @@ export function renderPokeMarketSellTab(category) {
             else if (p.qualityName === "Regular") glowClass = "glow-regular";
 
             let isSelected = window.marketSelectedPokemonForSale && window.marketSelectedPokemonForSale.has(p.uuid);
-            let selectionStyle = isSelected ? 'outline: 3px solid #e74c3c; outline-offset: -3px; background: rgba(231,76,60,0.2);' : 'background: #2c3e50; border: 2px solid #777;';
+            let selectionStyle = isSelected ? 'outline: 3px solid #00ff00; outline-offset: -3px; background: rgba(0,255,0,0.2);' : 'background: #2c3e50; border: 2px solid #777;';
 
             html += `
                 <div onclick="if(window.toggleMarketPokemonSaleSelection) window.toggleMarketPokemonSaleSelection('${p.uuid}')"
@@ -603,7 +603,7 @@ export function renderPokeMarketSellTab(category) {
                     <div style="font-size: calc(var(--m-width) * 0.014); color: #bdc3c7; line-height: 1.1;">Lv. ${p.level}</div>
                     <div style="font-size: calc(var(--m-width) * 0.014); color: #f1c40f; line-height: 1.1;">Q: ${p.quality.toFixed(2)}</div>
                     <div style="font-size: calc(var(--m-width) * 0.014); color: #3498db; line-height: 1.1;">∑IV: ${sumIV}</div>
-                    <div style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; color: #2ecc71; margin-top: calc(var(--m-width) * 0.012); line-height: 1.1;">$${formatMarketNumber(pEv)}</div>
+                    <div style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; color: white; margin-top: calc(var(--m-width) * 0.012); line-height: 1.1;">$${formatMarketNumber(pEv)}</div>
                 </div>
             `;
         });
@@ -800,17 +800,6 @@ export function sellMarketItem(itemId, baseSellPrice, category) {
 window.openPokeMarketSell = openPokeMarketSell;
 window.renderPokeMarketSellTab = renderPokeMarketSellTab;
 window.updateSellItemPrice = updateSellItemPrice;
-
-window.toggleMarketFilter = function() {
-    const filterPanel = document.getElementById('market-pokemon-filters');
-    if (filterPanel) {
-        if (filterPanel.style.display === 'none' || !filterPanel.style.display) {
-            filterPanel.style.display = 'flex';
-        } else {
-            filterPanel.style.display = 'none';
-        }
-    }
-};
 window.sellSetMax = sellSetMax;
 window.sellMarketItem = sellMarketItem;
 
@@ -879,7 +868,13 @@ function updateMarketPokemonSellCount() {
         if (!p.uuid) p.uuid = Math.random().toString(36).substring(2, 15);
             if (window.marketSelectedPokemonForSale.has(p.uuid)) {
                 let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
-                let pEv = calculatePP(p.bst, p.level, p.quality, sumIV);
+                let pBst = p.bst;
+            if (!pBst && p.id && state.config && state.config.pokemonData) {
+                const pd = state.config.pokemonData.find(pd => pd.id === p.id);
+                if (pd) pBst = pd.hp + pd.atk + pd.def + pd.spa + pd.spd + pd.spe;
+            }
+            if (!pBst) pBst = 300;
+            let pEv = calculatePP(pBst, p.level, p.quality, sumIV);
                 totalGain += pEv;
             }
         });
@@ -898,7 +893,13 @@ window.marketSellSelectedPokemon = function() {
     state.storage = state.storage.filter(p => {
         if (window.marketSelectedPokemonForSale.has(p.uuid)) {
             let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
-            let pEv = calculatePP(p.bst, p.level, p.quality, sumIV);
+            let pBst = p.bst;
+            if (!pBst && p.id && state.config && state.config.pokemonData) {
+                const pd = state.config.pokemonData.find(pd => pd.id === p.id);
+                if (pd) pBst = pd.hp + pd.atk + pd.def + pd.spa + pd.spd + pd.spe;
+            }
+            if (!pBst) pBst = 300;
+            let pEv = calculatePP(pBst, p.level, p.quality, sumIV);
             totalGain += pEv;
             return false;
         }
@@ -941,3 +942,5 @@ window.renderPokeMarketTab = renderPokeMarketTab;
 window.buyItem = buyItem;
 window.updateBuyItemPrice = updateBuyItemPrice;
 window.buySetMax = buySetMax;
+
+window.updateMarketPokemonSellCount = updateMarketPokemonSellCount;
