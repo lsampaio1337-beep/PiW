@@ -38,13 +38,6 @@ export function runTimeLapse() {
     const unit = unitEl.value;
 
     if (!isNaN(duration) && duration > 0) {
-        // Close modals
-        document.getElementById('modal-overlay').style.display = 'none';
-        if (window.windowManager) {
-            window.windowManager.closeDynamicWindow('window-timelapse');
-            window.windowManager.closeDynamicWindow('window-settings');
-        }
-
         let elapsedMs = 0;
         if (unit === 'hours') {
             elapsedMs = duration * 3600 * 1000;
@@ -106,9 +99,10 @@ window.showTimeLapseResults = function(results) {
             if (state.config.balance.items.pokeballs.find(b => b.name === itemName)) {
                 imgFolder = "Balls";
                 basePrice = state.config.balance.items.pokeballs.find(b => b.name === itemName).price;
-            } else if (state.config.balance.items.potions.find(p => p.name === itemName)) {
+            } else if (state.config.balance.items.potions.find(p => p.name === itemName || (p.name === 'Big' && itemName === 'Big Potion'))) {
                 imgFolder = "Potions";
-                basePrice = state.config.balance.items.potions.find(p => p.name === itemName).price;
+                const potionObj = state.config.balance.items.potions.find(p => p.name === itemName || (p.name === 'Big' && itemName === 'Big Potion'));
+                basePrice = potionObj.price;
             } else if (VITAMINS.includes(itemName)) {
                 imgFolder = "Vitamins";
                 basePrice = state.config.balance.items.stones.price * 2;
@@ -137,8 +131,9 @@ window.showTimeLapseResults = function(results) {
         valItemsUsedBuy += ballPrice * results.ballsUsed;
     }
     if (results.potionsUsed > 0 && state.settings.activePotionTier >= 0) {
-        const potionName = state.config.balance.items.potions[state.settings.activePotionTier].name;
+        let potionName = state.config.balance.items.potions[state.settings.activePotionTier].name;
         const potionPrice = state.config.balance.items.potions[state.settings.activePotionTier].price;
+        if (potionName === 'Big') potionName = 'Big Potion';
         itemsUsedHtml += `${results.potionsUsed}x <img src="Assets/Items/Potions/${potionName}.png" style="width: 20px; height: 20px; vertical-align: middle;" title="${potionName}"> / `;
         valItemsUsedBuy += potionPrice * results.potionsUsed;
     }

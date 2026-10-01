@@ -308,9 +308,11 @@ export function renderPokeMarketTab(category) {
             stock = state.backpack[targetCategory][item.name];
         }
         if (category === 'pokeballs' || category === 'potions') {
-            const type = category === 'pokeballs' ? 'balls' : 'potions';
-            const capacity = getCapacity(state, type);
-            maxCapStr = ` / ${formatMarketNumberDown(capacity)}`;
+            if (item.name !== 'Masterball') {
+                const type = category === 'pokeballs' ? 'balls' : 'potions';
+                const capacity = getCapacity(state, type);
+                maxCapStr = ` / ${formatMarketNumberDown(capacity)}`;
+            }
         }
 
         let buyAction = `window.buyItem('${item.name}', ${item.price}, '${category}')`;
@@ -638,9 +640,11 @@ export function renderPokeMarketSellTab(category) {
             stock = state.backpack[targetCategory][item.name];
         }
         if (category === 'pokeballs' || category === 'potions') {
-            const type = category === 'pokeballs' ? 'balls' : 'potions';
-            const capacity = getCapacity(state, type);
-            maxCapStr = ` / ${formatMarketNumberDown(capacity)}`;
+            if (item.name !== 'Masterball') {
+                const type = category === 'pokeballs' ? 'balls' : 'potions';
+                const capacity = getCapacity(state, type);
+                maxCapStr = ` / ${formatMarketNumberDown(capacity)}`;
+            }
         }
 
         const safeId = item.name.replace(/\s+/g, '');
