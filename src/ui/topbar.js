@@ -285,7 +285,7 @@ export function getChallengeText() {
         let activeId = state.stats.activeChallenges[0];
         let unlock = state.config.unlocks.find(u => u.areaId === activeId);
         if (unlock) {
-            const extraChallengeAreas = ["Casino", "Small Fishing Spot", "Fighting Dojo", "Big Fishing Spot", "Fossil Revival Lab", "Trade With Friends Hub", "Power Plant", "Seafoam Islands", "Victory Road"];
+            const extraChallengeAreas = ["Casino", "Small Fishing Spot", "Fighting Dojo", "Big Fishing Spot", "Fossil Revival Lab", "Trade With Friends Hub", "Power Plant", "Seafoam Islands", "Victory Road", "Cerulean Cave"];
             let unlocks = "Unlocks: " + (unlock.unlocks ? unlock.unlocks.join(', ') : "Next Area");
             let displayName = unlock.challengeName || activeId;
             return `Next Challenge: ${displayName} - ${unlocks}`;
