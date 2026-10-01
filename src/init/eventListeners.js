@@ -23,21 +23,53 @@ export function setupGlobalEventListeners() {
 
             const isMinimized = contentContainer.style.display === 'none';
 
+            const headerElement = document.getElementById('top-bar-header');
+            const titleElement = document.getElementById('top-bar-title');
+            const buttonsElement = document.getElementById('top-bar-buttons');
+
             if (isMinimized) {
                 // Restore
                 contentContainer.style.display = '';
                 topBarWindow.style.width = topBarWindow.dataset.originalWidth || '1100px';
                 topBarWindow.style.minHeight = '';
                 if (topBarWindow.dataset.originalHeight) topBarWindow.style.height = topBarWindow.dataset.originalHeight;
+
+                // Restore centered layout
+                if (titleElement) {
+                    titleElement.style.flexGrow = '1';
+                    titleElement.style.textAlign = 'center';
+                    titleElement.style.paddingRight = '0';
+                }
+                if (buttonsElement) {
+                    buttonsElement.style.position = 'absolute';
+                    buttonsElement.style.right = '10px';
+                }
+                if (headerElement) {
+                    headerElement.style.gap = '0';
+                }
+
                 if (window.windowManager) window.windowManager._constrainAllWindows();
             } else {
                 // Minimize
                 topBarWindow.dataset.originalWidth = topBarWindow.style.width;
                 topBarWindow.dataset.originalHeight = topBarWindow.style.height;
                 contentContainer.style.display = 'none';
-                topBarWindow.style.width = '300px'; // Minimal width for title + buttons
+                topBarWindow.style.width = 'fit-content'; // Minimal width for title + buttons
                 topBarWindow.style.minHeight = '0';
                 topBarWindow.style.height = 'auto'; // Only display title
+
+                // Set left-aligned layout for fit-content
+                if (titleElement) {
+                    titleElement.style.flexGrow = '0';
+                    titleElement.style.textAlign = 'left';
+                    titleElement.style.paddingRight = '10px';
+                }
+                if (buttonsElement) {
+                    buttonsElement.style.position = 'static';
+                }
+                if (headerElement) {
+                    headerElement.style.gap = '10px';
+                }
             }
         });
     }
