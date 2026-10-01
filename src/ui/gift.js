@@ -120,7 +120,7 @@ export function showGiftModal() {
     showModal("Gifts", html, "window-gifts");
     const win = document.getElementById("window-gifts");
     if (win) {
-        win.style.maxHeight = '800px';
+        win.style.maxHeight = 'none'; // Unconstrain height to fit all content
     }
     if (window.windowManager) window.windowManager.recalculateWindowSize('window-gifts');
 }
