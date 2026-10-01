@@ -21,6 +21,19 @@ class BattleSystem {
         };
     }
 
+    getSpeedMultiplier() {
+        const speedTier = this.state.stats?.upgrades?.speedTier || 0;
+        // Tier 0: 1.0 (100% time)
+        // Tier 1: 0.9 (90% time)
+        // Tier 5+: 0.5 (50% time)
+        const mult = 1.0 - (speedTier * 0.1);
+        return Math.max(0.5, mult);
+    }
+
+    getLootTier() {
+        return this.state.stats?.upgrades?.lootTier || 0;
+    }
+
 
     getEvolutionStage(pokemonId) {
         if (!this.evolutionStageMap) {
@@ -1711,6 +1724,7 @@ class BattleSystem {
                 }
 
                 // Add loot drops
+                const lootTier = this.getLootTier();
                 let dropRate = 0;
                 const evoStage = this.getEvolutionStage(this.activeEncounter.id);
 
@@ -1721,7 +1735,7 @@ class BattleSystem {
                     dropRate = 1.0;
                 }
 
-                if (Math.random() < (dropRate * lootMultiplier) && this.activeEncounter.types && this.activeEncounter.types.length > 0) {
+                if (lootTier >= 3 && Math.random() < (dropRate * lootMultiplier) && this.activeEncounter.types && this.activeEncounter.types.length > 0) {
                     const types = this.activeEncounter.types;
                     const randomType = types[Math.floor(Math.random() * types.length)];
                     const stoneName = `${randomType} Stone`;
@@ -1741,7 +1755,7 @@ class BattleSystem {
                 }
 
                 // Vitamin drops
-                if (sumIV > 500 && this.activeEncounter?.quality > 1.6 && Math.random() < (0.05 * lootMultiplier)) {
+                if (lootTier >= 4 && sumIV > 500 && this.activeEncounter?.quality > 1.6 && Math.random() < (0.05 * lootMultiplier)) {
                     const vitamins = VITAMINS;
                     const randomVitamin = vitamins[Math.floor(Math.random() * vitamins.length)];
 
@@ -1775,7 +1789,7 @@ class BattleSystem {
                     potionTierName = "Huge Potion";
                 }
 
-                if (Math.random() < itemDropChance) {
+                if (lootTier >= 2 && Math.random() < itemDropChance) {
                     let ballDropQty = Math.floor(lootMultiplier);
                     if (Math.random() < (lootMultiplier % 1)) ballDropQty += 1;
                     if (!this.state.backpack.pokeballs) this.state.backpack.pokeballs = {};
@@ -1783,7 +1797,7 @@ class BattleSystem {
                     results.itemsLooted[ballTierName] = (results.itemsLooted[ballTierName] || 0) + ballDropQty;
                 }
 
-                if (Math.random() < itemDropChance) {
+                if (lootTier >= 1 && Math.random() < itemDropChance) {
                     let potionDropQty = Math.floor(lootMultiplier);
                     if (Math.random() < (lootMultiplier % 1)) potionDropQty += 1;
                     if (!this.state.backpack.potions) this.state.backpack.potions = {};
