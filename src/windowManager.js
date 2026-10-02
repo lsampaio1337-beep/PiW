@@ -72,8 +72,8 @@ export class WindowManager {
                 this.focusWindow(winElement);
 
                 // Load dimensions if saved
-                if (state && state.settings && state.settings.windowSettings && state.settings.windowSettings[windowId]) {
-                    const savedSettings = state.settings.windowSettings[windowId];
+                if (window.state && window.state.settings && window.state.settings.windowSettings && window.state.settings.windowSettings[windowId]) {
+                    const savedSettings = window.state.settings.windowSettings[windowId];
                     if (savedSettings.width) winElement.style.width = savedSettings.width;
                     if (savedSettings.height) winElement.style.height = savedSettings.height;
                     if (savedSettings.left) winElement.style.left = savedSettings.left;
@@ -226,10 +226,20 @@ export class WindowManager {
         document.addEventListener('mousemove', (e) => {
             if (!isResizing) return;
             const dx = e.clientX - startX;
-            // Since it needs to be proportional, we will use dx to change both width and height based on original aspect ratio
+            const dy = e.clientY - startY;
+
             const originalRatio = startWidth / startHeight;
-            let newWidth = Math.max(200, startWidth + dx);
-            let newHeight = newWidth / originalRatio;
+
+            // Allow both horizontal and vertical drags to increase scale proportionately
+            let scale;
+            if (Math.abs(dx) > Math.abs(dy)) {
+                scale = (startWidth + dx) / startWidth;
+            } else {
+                scale = (startHeight + dy) / startHeight;
+            }
+
+            const newWidth = Math.max(150, startWidth * scale);
+            const newHeight = newWidth / originalRatio;
 
             winElement.style.width = newWidth + 'px';
             winElement.style.height = newHeight + 'px';
@@ -525,7 +535,31 @@ export class WindowManager {
         if (!winElement) return;
 
         const scalerElement = winElement.querySelector('.window-content-scaler');
-        if (!scalerElement) return;
+        if (!scalerElement) {
+            if (windowId === 'main-control-window') {
+                const container = winElement.querySelector('.window-content-container');
+                if (container) {
+                    // Allow intrinsic width measurement
+                    winElement.style.width = 'max-content';
+                    const targetWidth = winElement.scrollWidth;
+
+                    // Explicitly set only the width in pixels for subsequent scaling
+                    winElement.style.width = `${targetWidth}px`;
+
+                    // Ensure the state exists before modifying
+                    if (window.state && window.state.settings && window.state.settings.windowSettings && window.state.settings.windowSettings[windowId]) {
+                        window.state.settings.windowSettings[windowId].width = winElement.style.width;
+                        if (winElement.style.height && winElement.style.height !== 'auto') {
+                            window.state.settings.windowSettings[windowId].height = winElement.style.height;
+                        }
+                        if (window.storageRef) {
+                            window.storageRef.save(window.state);
+                        }
+                    }
+                }
+            }
+            return;
+        }
 
         // Briefly measure natural width of content without constraints
         const oldScale = scalerElement.style.transform;

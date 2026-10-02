@@ -1,0 +1,65 @@
+<<<<<<< SEARCH
+    autoAdjustWidth(windowId) {
+        const winElement = document.getElementById(windowId);
+        if (winElement) {
+            // First measure the max-content width
+            winElement.style.width = 'max-content';
+            const targetWidth = winElement.scrollWidth;
+
+            // If the window has an inline height set (due to resizing),
+            // maintain the aspect ratio so icons scale appropriately
+            const currentHeight = parseInt(winElement.style.height);
+            const currentWidth = parseInt(winElement.style.width); // this is max-content now, so we need previous
+
+            // We just measure ratio based on the actual bounding rect before we changed it
+            // So we need to reset to get rect
+
+            // Calculate what the height should be to maintain the previous aspect ratio
+            const originalWidth = parseInt(winElement.dataset.lastWidth) || targetWidth;
+            const originalHeight = parseInt(winElement.dataset.lastHeight) || parseInt(winElement.style.height);
+
+            if (originalHeight && originalWidth && windowId === 'main-control-window') {
+                const ratio = originalWidth / originalHeight;
+                winElement.style.height = `${targetWidth / ratio}px`;
+            }
+
+            winElement.style.width = `${targetWidth}px`;
+
+            // Save state
+            winElement.dataset.lastWidth = targetWidth;
+            winElement.dataset.lastHeight = parseInt(winElement.style.height) || currentHeight;
+
+            if (window.state && window.state.settings && window.state.settings.windowSettings && window.state.settings.windowSettings[windowId]) {
+                window.state.settings.windowSettings[windowId].width = winElement.style.width;
+                if (winElement.style.height) {
+                    window.state.settings.windowSettings[windowId].height = winElement.style.height;
+                }
+                if (window.storageRef) {
+                    window.storageRef.save(window.state);
+                }
+            }
+        }
+    }
+=======
+    autoAdjustWidth(windowId) {
+        const winElement = document.getElementById(windowId);
+        if (winElement) {
+            // Temporarily set width to max-content to accurately measure natural content width
+            winElement.style.width = 'max-content';
+            const targetWidth = winElement.scrollWidth;
+
+            // Restore width explicitly in pixels to allow subsequent scaling/resizing to work
+            winElement.style.width = `${targetWidth}px`;
+
+            if (window.state && window.state.settings && window.state.settings.windowSettings && window.state.settings.windowSettings[windowId]) {
+                window.state.settings.windowSettings[windowId].width = winElement.style.width;
+                if (winElement.style.height) {
+                    window.state.settings.windowSettings[windowId].height = winElement.style.height;
+                }
+                if (window.storageRef) {
+                    window.storageRef.save(window.state);
+                }
+            }
+        }
+    }
+>>>>>>> REPLACE
