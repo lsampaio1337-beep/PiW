@@ -153,9 +153,9 @@ export function renderPokeMarketTab(category) {
         const btn = document.getElementById(`market-tab-buy-${tab}`);
         if (btn) {
             if (tab === category) {
-                btn.style.background = 'linear-gradient(to bottom, #3498db, #2980b9)';
+                btn.style.background = 'linear-gradient(to bottom, #2ecc71, #27ae60)';
                 btn.style.color = 'white';
-                btn.style.border = '1px solid #3498db';
+                btn.style.border = '1px solid #2ecc71';
                 btn.style.boxShadow = '0 2px 4px rgba(0,0,0,0.2)';
             } else {
                 btn.style.background = 'transparent';
@@ -258,7 +258,7 @@ export function renderPokeMarketTab(category) {
     }
 
     if (category === 'upgrades' && items.length === 0) {
-        content.innerHTML = `<div style="text-align: center; font-size: calc(var(--m-width) * 0.024); color: white; width: 100%; margin-top: calc(var(--m-width) * 0.05);">No available upgrade to be bought.</div>`;
+        content.innerHTML = `<div style="text-align: center; font-size: calc(var(--m-width) * 0.024); color: white; width: 100%; margin-top: calc(var(--m-width) * 0.05); padding-bottom: calc(var(--m-width) * 0.05);">No available upgrade to be bought.</div>`;
         return;
     }
 
@@ -528,9 +528,9 @@ export function renderPokeMarketSellTab(category) {
         const btn = document.getElementById(`market-tab-sell-${tab}`);
         if (btn) {
             if (tab === category) {
-                btn.style.background = 'linear-gradient(to bottom, #3498db, #2980b9)';
+                btn.style.background = 'linear-gradient(to bottom, #e74c3c, #c0392b)';
                 btn.style.color = 'white';
-                btn.style.border = '1px solid #3498db';
+                btn.style.border = '1px solid #e74c3c';
                 btn.style.boxShadow = '0 2px 4px rgba(0,0,0,0.2)';
             } else {
                 btn.style.background = 'transparent';
