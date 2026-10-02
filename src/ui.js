@@ -1214,6 +1214,8 @@ function selectStarter(id) {
         spe: mathEngine.calculateStat(pData.spe, ivs.spe, level, q),
     };
 
+    const bst = pData.hp + pData.atk + pData.def + pData.spa + pData.spd + pData.spe;
+
     const starter = {
         id: pData.id,
         name: pData.name,
@@ -1226,6 +1228,10 @@ function selectStarter(id) {
         currentStats: stats,
         maxHp: stats.hp,
         currentHp: stats.hp,
+        bst: bst,
+        evxp: mathEngine.calculateEVXP(bst, level, q, ivs.hp + ivs.atk + ivs.def + ivs.spa + ivs.spd + ivs.spe),
+        evm: mathEngine.calculateEVM(bst, level, q, ivs.hp + ivs.atk + ivs.def + ivs.spa + ivs.spd + ivs.spe),
+        pp: mathEngine.calculatePP(bst, level, q, ivs.hp + ivs.atk + ivs.def + ivs.spa + ivs.spd + ivs.spe),
         moves: [{name: "Tackle", power: 40, type: "Normal", category: "Physical"}] // Basic start
     };
 
@@ -1256,6 +1262,10 @@ function selectStarter(id) {
         currentStats: { ...stats },
         maxHp: stats.hp,
         currentHp: stats.hp,
+        bst: bst,
+        evxp: mathEngine.calculateEVXP(bst, level, q, ivs.hp + ivs.atk + ivs.def + ivs.spa + ivs.spd + ivs.spe),
+        evm: mathEngine.calculateEVM(bst, level, q, ivs.hp + ivs.atk + ivs.def + ivs.spa + ivs.spd + ivs.spe),
+        pp: mathEngine.calculatePP(bst, level, q, ivs.hp + ivs.atk + ivs.def + ivs.spa + ivs.spd + ivs.spe),
         moves: [{name: "Tackle", power: 40, type: "Normal", category: "Physical"}] // Basic start
     };
     state.party.push(starterCopy);
