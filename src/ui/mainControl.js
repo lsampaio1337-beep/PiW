@@ -1,6 +1,6 @@
 import { state, globals } from '../state.js';
 import * as mathEngine from "../mathEngine.js";
-import { checkDailyRewardAvailable } from './calendar.js';
+import { checkDailyRewardAvailable, checkAnyDailyChallengeCompleted } from './calendar.js';
 
 function getStatusHtml(isMet) {
     return isMet ? ` <span style="color: green;">[Complete]</span>` : "";
@@ -128,10 +128,22 @@ export function getChallengeData(unlock) {
     return { isMet, textParts };
 }
 
-export function updateTopbar() {
+export function updateMainControl() {
     const battleSystem = globals.battleSystem;
     const inGym = battleSystem && battleSystem.gymState && battleSystem.gymState.isActive;
     const noPokemon = state.party.length === 0 && state.storage.length === 0;
+
+    let isFinalChallengeCompleted = state.stats.completedChallengeIds && state.stats.completedChallengeIds.includes('Indigo Plateau');
+
+    const mainControlTitle = document.getElementById('main-control-title');
+    if (mainControlTitle) {
+        if (isFinalChallengeCompleted) {
+            mainControlTitle.innerText = "Main Control (Kanto)";
+        } else {
+            mainControlTitle.innerText = "Main Control";
+        }
+    }
+
     const lockMenus = inGym || noPokemon;
     const navButtons = document.getElementById('nav-buttons');
     if (navButtons) {
@@ -139,24 +151,24 @@ export function updateTopbar() {
         navButtons.style.opacity = lockMenus ? '0.5' : '1.0';
     }
 
-    const mainViewTimerDisplay = document.getElementById('main-view-timer');
-    if (mainViewTimerDisplay) {
-        if (state.currentView === "BATTLE_ARENA") {
-            mainViewTimerDisplay.style.display = 'inline-block';
+    const timerRoute = document.getElementById('main-view-timer-route');
+    const timerTotal = document.getElementById('main-view-timer-total');
+    if (timerRoute && timerTotal) {
+        const routeSec = state.stats.battleModeTimer || 0;
+        const totalSec = state.stats.playtime || 0;
 
-            const totalSec = state.stats.battleModeTimer || 0;
-            const d = Math.floor(totalSec / 86400);
-            const h = Math.floor((totalSec % 86400) / 3600);
-            const m = Math.floor((totalSec % 3600) / 60);
-            const s = Math.floor(totalSec % 60);
+        const formatTime = (secs) => {
+            const d = Math.floor(secs / 86400);
+            const h = Math.floor((secs % 86400) / 3600);
+            const m = Math.floor((secs % 3600) / 60);
+            const s = Math.floor(secs % 60);
             let timeStr = `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-            if (d >= 1) {
-                timeStr = `${d}d ${timeStr}`;
-            }
-            mainViewTimerDisplay.innerText = timeStr;
-        } else {
-            mainViewTimerDisplay.style.display = 'none';
-        }
+            if (d >= 1) timeStr = `${d}d ${timeStr}`;
+            return timeStr;
+        };
+
+        timerRoute.innerText = `${formatTime(routeSec)} (route)`;
+        timerTotal.innerText = `(total) ${formatTime(totalSec)}`;
     }
 
     const elChallengeText = document.getElementById('current-challenge-text');
@@ -165,7 +177,7 @@ export function updateTopbar() {
     const bonusCandyContainer = document.getElementById('bonus-candy-container');
     const exclamation = document.getElementById('bonus-candy-exclamation');
     if (exclamation && bonusCandyContainer) {
-        if (state.stats.bonusCandyDefeats >= 250) {
+        if (state.stats.whiteCandies > 0) {
             bonusCandyContainer.style.display = 'inline-block';
             if (!state.stats.hasSeenBonusCandyIcon) {
                 exclamation.style.display = 'block';
@@ -180,6 +192,23 @@ export function updateTopbar() {
             bonusCandyContainer.style.display = 'none';
         }
     }
+    const multiplayerContainer = document.getElementById('multiplayer-container');
+    const multiplayerExclamation = document.getElementById('multiplayer-exclamation');
+    if (multiplayerContainer && multiplayerExclamation) {
+        // Unlock Multiplayer after Challenge 5 (Fossil Revival Lab) is completed
+        if (state.stats.completedChallengeIds && state.stats.completedChallengeIds.includes('Fossil Revival Lab')) {
+            multiplayerContainer.style.display = 'inline-block';
+            if (!state.stats.hasSeenMultiplayerIcon) {
+                multiplayerExclamation.style.display = 'block';
+            } else {
+                multiplayerExclamation.style.display = 'none';
+            }
+        } else {
+            multiplayerContainer.style.display = 'none';
+            multiplayerExclamation.style.display = 'none';
+        }
+    }
+
     const giftContainer = document.getElementById('gift-container');
     const giftNotification = document.getElementById('gift-notification');
     if (giftContainer && giftNotification) {
@@ -201,7 +230,7 @@ export function updateTopbar() {
 
     const calendarNotification = document.getElementById('calendar-notification');
     if (calendarNotification) {
-        if (checkDailyRewardAvailable()) {
+        if (checkDailyRewardAvailable() || checkAnyDailyChallengeCompleted()) {
             calendarNotification.style.display = 'block';
         } else {
             calendarNotification.style.display = 'none';
@@ -225,7 +254,8 @@ export function updateTopbar() {
 
     const mapNotification = document.getElementById('map-notification');
     if (mapNotification) {
-        if (state.stats.hasUnseenMap || state.stats.showMapOakNotification) {
+        let isFinalChallengeCompleted = state.stats.completedChallengeIds && state.stats.completedChallengeIds.includes('Indigo Plateau');
+        if (state.stats.hasUnseenMap || state.stats.showMapOakNotification || (isFinalChallengeCompleted && !state.stats.hasSeenJohtoMap)) {
             mapNotification.style.display = 'block';
         } else {
             mapNotification.style.display = 'none';
@@ -254,7 +284,7 @@ export function updateTopbar() {
     const sleepNotification = document.getElementById('sleep-notification');
 
     if (sleepContainer && sleepNotification) {
-        if (state.stats.playtime && state.stats.playtime >= 60) {
+        if (state.stats.playtime && state.stats.playtime >= 3600) {
             sleepContainer.style.display = 'inline-block';
             if (!state.stats.hasSeenZzZIcon) {
                 sleepNotification.style.display = 'block';
@@ -268,7 +298,7 @@ export function updateTopbar() {
     }
     // Auto-adjust width of the Main Control window if new icons appeared
     if (window.windowManager) {
-        window.windowManager.autoAdjustWidth('top-bar-window');
+        window.windowManager.autoAdjustWidth('main-control-window');
     }
 }
 
@@ -285,8 +315,9 @@ export function getChallengeText() {
         let activeId = state.stats.activeChallenges[0];
         let unlock = state.config.unlocks.find(u => u.areaId === activeId);
         if (unlock) {
-            const extraChallengeAreas = ["Casino", "Small Fishing Spot", "Fighting Dojo", "Big Fishing Spot", "Fossil Revival Lab", "Trade With Friends Hub", "Power Plant", "Seafoam Islands", "Victory Road"];
-            let unlocks = "Unlocks: " + (unlock.unlocks ? unlock.unlocks.join(', ') : "Next Area");
+            const extraChallengeAreas = ["Casino", "Small Fishing Spot", "Fighting Dojo", "Big Fishing Spot", "Fossil Revival Lab", "Trade With Friends Hub", "Power Plant", "Seafoam Islands", "Victory Road", "Cerulean Cave"];
+            let unlocks = "Unlocks: " + (unlock.unlocks ? unlock.unlocks.join(' + ') : "Next Area");
+            if (activeId === "Fossil Revival Lab") unlocks += " + Multiplayer Mode";
             let displayName = unlock.challengeName || activeId;
             return `Next Challenge: ${displayName} - ${unlocks}`;
         }

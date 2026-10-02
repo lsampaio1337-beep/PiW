@@ -471,6 +471,13 @@ export class WindowManager {
         const winElement = document.getElementById(windowId);
         if (!winElement) return;
 
+        if (windowId === 'main-control-window') {
+            winElement.style.width = 'max-content';
+            const scrollW = winElement.scrollWidth;
+            winElement.style.width = scrollW + 'px';
+            return;
+        }
+
         const scalerElement = winElement.querySelector('.window-content-scaler');
         if (!scalerElement) return;
 
@@ -772,7 +779,7 @@ export class WindowManager {
             let left = 50;
             let top = 50;
 
-            const mainView = document.getElementById('top-bar-window');
+            const mainView = document.getElementById('main-control-window');
             if (mainView && mainView.style.display !== 'none') {
                 const rect = mainView.getBoundingClientRect();
                 left = rect.left;
