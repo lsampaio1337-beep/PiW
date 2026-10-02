@@ -1118,6 +1118,8 @@ export function switchView(viewName) {
     const overlay = document.getElementById('main-view-inner-modal-overlay');
     if (overlay) {
         overlay.style.display = 'none';
+        const moneyDisplay = document.getElementById('inner-modal-money-display');
+        if (moneyDisplay) moneyDisplay.style.display = 'none';
     }
 
     if (viewName === 'BATTLE_ARENA') {
@@ -2186,7 +2188,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
                         <div style="display: flex; gap: 40px; justify-content: space-between;">
                             <div style="flex: 1;">
                                 <p><b>Time played:</b> ${playtimeStr}</p>
-                                <p><b>Money:</b> $${state.trainer.money.toLocaleString()}</p>
+                                <p><b>$:</b> ${state.trainer.money.toLocaleString()}</p>
                             </div>
                             <div style="flex: 1;">
                                 <p><b>Battles Won:</b> ${(state.stats.battlesWon || 0).toLocaleString()}</p>

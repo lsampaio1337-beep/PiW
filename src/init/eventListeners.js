@@ -77,6 +77,8 @@ export function setupGlobalEventListeners() {
         closeInnerBtn.addEventListener('click', () => {
             const overlay = document.getElementById('main-view-inner-modal-overlay');
             if (overlay) overlay.style.display = 'none';
+            const moneyDisplay = document.getElementById('inner-modal-money-display');
+            if (moneyDisplay) moneyDisplay.style.display = 'none';
         });
     }
 
