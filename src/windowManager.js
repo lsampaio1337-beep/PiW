@@ -74,6 +74,14 @@ export class WindowManager {
                         if (savedSettings.height) winElement.style.height = savedSettings.height;
                         if (savedSettings.left) winElement.style.left = savedSettings.left;
                         if (savedSettings.top) winElement.style.top = savedSettings.top;
+                    } else if (windowId === 'main-control-window') {
+                        // For a new game, make sure main control starts perfectly adjusted to avoid 80x80 bug
+                        winElement.style.width = 'auto';
+                        winElement.style.height = 'auto';
+                        if (typeof winElement.resetResizeDims === 'function') {
+                            winElement.resetResizeDims();
+                        }
+                        setTimeout(() => this.autoAdjustWidth(windowId), 100);
                     }
                 }
             } else {
@@ -297,8 +305,8 @@ export class WindowManager {
         };
 
         winElement.resetResizeDims = () => {
-            originalWidth = 0;
-            originalHeight = 0;
+            winElement._originalWidth = 0;
+            winElement._originalHeight = 0;
             initDims();
         };
 
@@ -506,10 +514,18 @@ export class WindowManager {
             currentOriginalWidth = newOriginalWidth;
         }
 
+        // When content grows, we might also want to reset height to re-measure proportion accurately.
+        // Also if we have a locked main control, new height needs to be evaluated.
+
+        let newOriginalHeight = Math.ceil(scalerElement.getBoundingClientRect().height);
+        // Sometimes height is bounded by min height or other properties, so let's use offsetHeight of content
+        // if possible, but actually bounding client rect height is natural height since we cleared transform and constraints.
+
         if (newOriginalWidth > currentOriginalWidth) {
             // Content needs more width, we must grow
             const growthRatio = newOriginalWidth / currentOriginalWidth;
             scalerElement.style.setProperty('--original-width', newOriginalWidth + 'px');
+            if (newOriginalHeight > 0) scalerElement.style.setProperty('--original-height', newOriginalHeight + 'px');
 
             // Scale up the window width by the same ratio
             if (oldWidth && oldWidth.endsWith('px')) {
@@ -523,17 +539,37 @@ export class WindowManager {
 
             // Important: Update internal resizing properties to lock the new proportion
             winElement._originalWidth = newOriginalWidth;
-            if (winElement._originalHeight) {
+            if (newOriginalHeight > 0) winElement._originalHeight = newOriginalHeight;
+
+            if (typeof winElement.resetResizeDims === 'function') {
+                winElement.resetResizeDims();
+            } else if (winElement._originalHeight) {
                 winElement._originalRatio = winElement._originalWidth / winElement._originalHeight;
             }
         } else if (newOriginalWidth > 0 && (!currentOriginalWidthStr || isNaN(parseInt(currentOriginalWidthStr)))) {
             // Initializing original width if it wasn't set yet
             scalerElement.style.setProperty('--original-width', newOriginalWidth + 'px');
+            if (newOriginalHeight > 0) scalerElement.style.setProperty('--original-height', newOriginalHeight + 'px');
             if (!oldWidth || oldWidth === 'auto') {
                 // Do not clamp the initial explicit width so the flexbox handles scaling gracefully during first load
             }
             winElement._originalWidth = newOriginalWidth;
-            if (winElement._originalHeight) {
+            if (newOriginalHeight > 0) winElement._originalHeight = newOriginalHeight;
+
+            if (typeof winElement.resetResizeDims === 'function') {
+                winElement.resetResizeDims();
+            } else if (winElement._originalHeight) {
+                winElement._originalRatio = winElement._originalWidth / winElement._originalHeight;
+            }
+        } else if (newOriginalWidth !== currentOriginalWidth) {
+            // Even if it shrinks, we should allow re-evaluating the proportion.
+            winElement._originalWidth = newOriginalWidth;
+            if (newOriginalHeight > 0) winElement._originalHeight = newOriginalHeight;
+            scalerElement.style.setProperty('--original-width', newOriginalWidth + 'px');
+            if (newOriginalHeight > 0) scalerElement.style.setProperty('--original-height', newOriginalHeight + 'px');
+            if (typeof winElement.resetResizeDims === 'function') {
+                winElement.resetResizeDims();
+            } else if (winElement._originalHeight) {
                 winElement._originalRatio = winElement._originalWidth / winElement._originalHeight;
             }
         }
