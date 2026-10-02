@@ -77,6 +77,8 @@ export function setupGlobalEventListeners() {
         closeInnerBtn.addEventListener('click', () => {
             const overlay = document.getElementById('main-view-inner-modal-overlay');
             if (overlay) overlay.style.display = 'none';
+            const moneyDisplay = document.getElementById('inner-modal-money-display');
+            if (moneyDisplay) moneyDisplay.style.display = 'none';
         });
     }
 
@@ -85,6 +87,26 @@ export function setupGlobalEventListeners() {
     if (safariBtn) {
         safariBtn.addEventListener('click', () => {
             if (window.enterSafariZone) window.enterSafariZone();
+        });
+    }
+
+    // Oak Tutorial
+    const oakTutorialSkipBtn = document.getElementById('btn-oak-tutorial-skip');
+    if (oakTutorialSkipBtn) {
+        oakTutorialSkipBtn.addEventListener('click', () => {
+            if (window.skipOakTutorial) window.skipOakTutorial();
+        });
+    }
+    const oakTutorialProceedBtn = document.getElementById('btn-oak-tutorial-proceed');
+    if (oakTutorialProceedBtn) {
+        oakTutorialProceedBtn.addEventListener('click', () => {
+            if (window.proceedOakTutorial) window.proceedOakTutorial();
+        });
+    }
+    const oakTutorialConcludeBtn = document.getElementById('btn-oak-tutorial-conclude');
+    if (oakTutorialConcludeBtn) {
+        oakTutorialConcludeBtn.addEventListener('click', () => {
+            if (window.concludeOakTutorial) window.concludeOakTutorial();
         });
     }
 

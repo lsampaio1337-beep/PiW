@@ -21,6 +21,67 @@ window.dismissDaycareMessage = function() {
     updateUI();
 };
 
+const oakTutorialMessages = [
+    "<p>Hello, Trainer!</p><p>Here I will give you some tips for introduce you to game.</p><p>Do you want a tutorial guide to help you understand better the game or do you want to skip and start the game?</p>",
+    "<p>This game runs only on the Main Control Tab.</p><p>It is in there that you will open and close all modules</p><p>This module you are seeing it is called “Main View” and it will display all the visual when battling or shopping.</p>",
+    "<p>Icons are displayed in the Main Control Tab. You will be able to open modules with them.</p><p>The first two modules are “Main View” and “Team View”, and they will help when you are in battle mode.</p>",
+    "<p>Next set of icons will help you to play the game.</p><p>Map will let you travel to different spots and places.</p><p>Backpack will allow you to see items and Pokémons.</p><p>Pokedex with bring all info of Pokémons.</p><p>Trainer have Statistics of the game.</p>",
+    "<p>Next set of icon are “Objectives Related”</p><p>Here we have Daily Calendar. It will have daily challenges and rewards you each day you play. It also have a shop to spend Daily Tokens earned… Make sure to expend them on upgrades!</p><p>Next is the Progress Challenges. Completing the Challenge grants a new spot to travel and may grant some gifts.</p>",
+    "<p>The last set of icons are related to settings.</p><p>The first is “Help”. In there you can find information about the whole game (with formulas).</p><p>“Settings” will let you change configurations of the game.</p><p>If you want to leave game, just go to the “Exit” icon.</p>",
+    "<p>Along the gameplay, some new icons will appear in Main Control.</p><p>But don’t worry, you will be told what they are.</p>",
+    "<p>On maps you can find places that are HUB for interactions.</p><p>You are at “Professor Oak Lab” now, and I have some assignments for you… make sure to conclude them to earn boosts.</p>",
+    "<p>Now you are all set!</p><p>If you need more help, make sure to open the Help Module!</p><p>Have fun and CATCH THEM ALL!</p>"
+];
+let currentOakTutorialIndex = 0;
+
+window.skipOakTutorial = function() {
+    state.stats.hasSeenOakTutorial = true;
+    const overlay = document.getElementById('oak-tutorial-overlay');
+    if (overlay) overlay.style.display = 'none';
+    if (window.storageRef) window.storageRef.save(state);
+};
+
+window.proceedOakTutorial = function() {
+    currentOakTutorialIndex++;
+    if (currentOakTutorialIndex >= oakTutorialMessages.length - 1) {
+        // Switch to the conclude button on the last message
+        document.getElementById('btn-oak-tutorial-skip').style.display = 'none';
+        document.getElementById('btn-oak-tutorial-proceed').style.display = 'none';
+        document.getElementById('btn-oak-tutorial-conclude').style.display = 'inline-block';
+    } else {
+        document.getElementById('btn-oak-tutorial-proceed').innerText = `Proceed ${currentOakTutorialIndex + 1}/${oakTutorialMessages.length - 1}`;
+    }
+
+    if (currentOakTutorialIndex < oakTutorialMessages.length) {
+        document.getElementById('oak-tutorial-text').innerHTML = oakTutorialMessages[currentOakTutorialIndex];
+    }
+};
+
+window.concludeOakTutorial = function() {
+    window.skipOakTutorial();
+};
+
+export function showOakTutorialIfNeeded() {
+    if (!state.stats.hasSeenOakTutorial) {
+        const overlay = document.getElementById('oak-tutorial-overlay');
+        if (overlay) {
+            currentOakTutorialIndex = 0;
+            document.getElementById('oak-tutorial-text').innerHTML = oakTutorialMessages[currentOakTutorialIndex];
+
+            // Reset buttons visibility
+            document.getElementById('btn-oak-tutorial-skip').style.display = 'inline-block';
+
+            const proceedBtn = document.getElementById('btn-oak-tutorial-proceed');
+            proceedBtn.innerText = `Proceed 1/${oakTutorialMessages.length - 1}`;
+            proceedBtn.style.display = 'inline-block';
+
+            document.getElementById('btn-oak-tutorial-conclude').style.display = 'none';
+
+            overlay.style.display = 'flex';
+        }
+    }
+}
+
 
 window.dismissBonusCandyMessage = function() {
     state.stats.hasSeenBonusCandyModal = true;
@@ -1119,6 +1180,8 @@ export function switchView(viewName) {
     const overlay = document.getElementById('main-view-inner-modal-overlay');
     if (overlay) {
         overlay.style.display = 'none';
+        const moneyDisplay = document.getElementById('inner-modal-money-display');
+        if (moneyDisplay) moneyDisplay.style.display = 'none';
     }
 
     if (viewName === 'BATTLE_ARENA') {
@@ -1129,6 +1192,7 @@ export function switchView(viewName) {
 
     if (viewName === 'PROF_OAK_LAB') {
         document.getElementById('view-prof-oak-lab').style.display = 'block';
+        showOakTutorialIfNeeded();
         renderOakLab();
     } else if (viewName === 'SAFARI_HUB') {
         document.getElementById('view-safari-hub').style.display = 'flex';
@@ -1215,6 +1279,8 @@ function selectStarter(id) {
         spe: mathEngine.calculateStat(pData.spe, ivs.spe, level, q),
     };
 
+    const bst = pData.hp + pData.atk + pData.def + pData.spa + pData.spd + pData.spe;
+
     const starter = {
         id: pData.id,
         name: pData.name,
@@ -1227,6 +1293,10 @@ function selectStarter(id) {
         currentStats: stats,
         maxHp: stats.hp,
         currentHp: stats.hp,
+        bst: bst,
+        evxp: mathEngine.calculateEVXP(bst, level, q, ivs.hp + ivs.atk + ivs.def + ivs.spa + ivs.spd + ivs.spe),
+        evm: mathEngine.calculateEVM(bst, level, q, ivs.hp + ivs.atk + ivs.def + ivs.spa + ivs.spd + ivs.spe),
+        pp: mathEngine.calculatePP(bst, level, q, ivs.hp + ivs.atk + ivs.def + ivs.spa + ivs.spd + ivs.spe),
         moves: [{name: "Tackle", power: 40, type: "Normal", category: "Physical"}] // Basic start
     };
 
@@ -1257,6 +1327,10 @@ function selectStarter(id) {
         currentStats: { ...stats },
         maxHp: stats.hp,
         currentHp: stats.hp,
+        bst: bst,
+        evxp: mathEngine.calculateEVXP(bst, level, q, ivs.hp + ivs.atk + ivs.def + ivs.spa + ivs.spd + ivs.spe),
+        evm: mathEngine.calculateEVM(bst, level, q, ivs.hp + ivs.atk + ivs.def + ivs.spa + ivs.spd + ivs.spe),
+        pp: mathEngine.calculatePP(bst, level, q, ivs.hp + ivs.atk + ivs.def + ivs.spa + ivs.spd + ivs.spe),
         moves: [{name: "Tackle", power: 40, type: "Normal", category: "Physical"}] // Basic start
     };
     state.party.push(starterCopy);
@@ -1470,6 +1544,7 @@ async function init() {
     const profilesContainer = document.getElementById('profiles-container');
 
     const startNewGame = () => {
+        state.stats.hasSeenOakTutorial = false;
         state.stats.hasSeenGiftIcon = false;
         state.stats.hasSeenMultiplayerIcon = false;
         state.stats.hasSeenZzZTutorial = false;
@@ -2205,7 +2280,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
                         <div style="display: flex; gap: 40px; justify-content: space-between;">
                             <div style="flex: 1;">
                                 <p><b>Time played:</b> ${playtimeStr}</p>
-                                <p><b>Money:</b> $${state.trainer.money.toLocaleString()}</p>
+                                <p><b>$</b> ${state.trainer.money.toLocaleString()}</p>
                             </div>
                             <div style="flex: 1;">
                                 <p><b>Battles Won:</b> ${(state.stats.battlesWon || 0).toLocaleString()}</p>

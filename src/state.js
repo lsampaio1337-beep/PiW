@@ -54,10 +54,12 @@ export const state = {
         dailyChallenges: { lastDate: null, rotationIndex: 0, active: [], totalCompleted: 0 },
         jigglypuffGrains: 0,
         jigglypuffGrainsUsed: 0,
+        hasSeenOakTutorial: false,
         hasSeenZzZTutorial: false,
         hasSeenMultiplayerIcon: false,
         newRoutes: [],
         hasUnseenMap: false,
+        hasSeenJohtoMap: false,
         upgrades: {
             ballsTier: 0,
             potionsTier: 0,
