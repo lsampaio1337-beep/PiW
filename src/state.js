@@ -58,6 +58,7 @@ export const state = {
         hasSeenMultiplayerIcon: false,
         newRoutes: [],
         hasUnseenMap: false,
+        hasSeenJohtoMap: false,
         upgrades: {
             ballsTier: 0,
             potionsTier: 0,

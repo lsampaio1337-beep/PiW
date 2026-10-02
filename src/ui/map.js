@@ -22,6 +22,17 @@ const parseAreaNames = (id) => {
     return result;
 };
 
+window.currentMapRegion = 'Kanto';
+
+window.switchMapRegion = function(region) {
+    if (region === 'Johto' && !state.stats.hasSeenJohtoMap) {
+        state.stats.hasSeenJohtoMap = true;
+        updateUI(); // to clear the top bar map exclamation mark
+    }
+    window.currentMapRegion = region;
+    showMap();
+};
+
 export function showMap() {
     if (state.stats.hasUnseenMap || state.stats.showMapOakNotification) {
         state.stats.hasUnseenMap = false;
@@ -49,13 +60,31 @@ export function showMap() {
         });
     }
 
+    let isFinalChallengeCompleted = state.stats.completedChallengeIds && state.stats.completedChallengeIds.includes('Indigo Plateau');
+    let regionButtonsHtml = '';
+    if (isFinalChallengeCompleted) {
+        let exclamationHtml = !state.stats.hasSeenJohtoMap ? `<img src="Assets/Extra/ExclamationMark.png" style="position: absolute; top: -5px; right: -5px; width: 15px; height: auto; pointer-events: none; z-index: 10;">` : '';
+        regionButtonsHtml = `
+            <div style="display: flex; justify-content: center; margin-bottom: 10px;">
+                <div style="display: inline-flex; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px;">
+                    <button onclick="window.switchMapRegion('Kanto')" style="${window.currentMapRegion === 'Kanto' ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s; position: relative;" onmousedown="event.stopPropagation()">Kanto</button>
+                    <button onclick="window.switchMapRegion('Johto')" style="${window.currentMapRegion === 'Johto' ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s; position: relative;" onmousedown="event.stopPropagation()">Johto${exclamationHtml}</button>
+                </div>
+            </div>
+        `;
+    }
+
+    let mapImage = window.currentMapRegion === 'Johto' ? './Assets/Map/2 Johto Map.png' : './Assets/Map/Kanto Map.png';
+
     let html = `
-        <div id="interactive-map" style="position: relative; width: 100%; aspect-ratio: 16/11; background-image: url('./Assets/Map/Kanto Map.png'); background-size: 100% 100%; background-repeat: no-repeat; background-position: center;">
+        ${regionButtonsHtml}
+        <div id="interactive-map" style="position: relative; width: 100%; aspect-ratio: 16/11; background-image: url('${mapImage}'); background-size: 100% 100%; background-repeat: no-repeat; background-position: center;">
     `;
 
-    for (const [locationId, locationData] of Object.entries(state.config.mapCoordinates)) {
-        const locationName = locationData.name;
-        const coords = locationData;
+    if (window.currentMapRegion === 'Kanto') {
+        for (const [locationId, locationData] of Object.entries(state.config.mapCoordinates)) {
+            const locationName = locationData.name;
+            const coords = locationData;
 
         let isUnlocked = unlockedAreas.has(locationName);
 
@@ -130,6 +159,7 @@ export function showMap() {
                      ${showCheckmark ? '<div style="position:absolute; top:-5px; right:-5px; background:green; color:white; border-radius:50%; width:15px; height:15px; font-size:10px; line-height:15px; text-align:center;">✓</div>' : ''}
                 </div>
             `;
+        }
         }
     }
 
