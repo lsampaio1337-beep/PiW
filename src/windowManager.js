@@ -507,11 +507,21 @@ export class WindowManager {
             }
 
             this.saveWindowData(windowId);
+
+            // Important: Update internal resizing properties to lock the new proportion
+            winElement._originalWidth = newOriginalWidth;
+            if (winElement._originalHeight) {
+                winElement._originalRatio = winElement._originalWidth / winElement._originalHeight;
+            }
         } else if (newOriginalWidth > 0 && (!currentOriginalWidthStr || isNaN(parseInt(currentOriginalWidthStr)))) {
             // Initializing original width if it wasn't set yet
             scalerElement.style.setProperty('--original-width', newOriginalWidth + 'px');
             if (!oldWidth || oldWidth === 'auto') {
                 winElement.style.width = newOriginalWidth + 'px';
+            }
+            winElement._originalWidth = newOriginalWidth;
+            if (winElement._originalHeight) {
+                winElement._originalRatio = winElement._originalWidth / winElement._originalHeight;
             }
         }
 
@@ -772,7 +782,7 @@ export class WindowManager {
             let left = 50;
             let top = 50;
 
-            const mainView = document.getElementById('main-control-window');
+            const mainView = document.getElementById('top-bar-window');
             if (mainView && mainView.style.display !== 'none') {
                 const rect = mainView.getBoundingClientRect();
                 left = rect.left;
