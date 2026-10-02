@@ -132,6 +132,18 @@ export function updateTopbar() {
     const battleSystem = globals.battleSystem;
     const inGym = battleSystem && battleSystem.gymState && battleSystem.gymState.isActive;
     const noPokemon = state.party.length === 0 && state.storage.length === 0;
+
+    let isFinalChallengeCompleted = state.stats.completedChallengeIds && state.stats.completedChallengeIds.includes('Indigo Plateau');
+
+    const mainControlTitle = document.getElementById('main-control-title');
+    if (mainControlTitle) {
+        if (isFinalChallengeCompleted) {
+            mainControlTitle.innerText = "Main Control (Kanto)";
+        } else {
+            mainControlTitle.innerText = "Main Control";
+        }
+    }
+
     const lockMenus = inGym || noPokemon;
     const navButtons = document.getElementById('nav-buttons');
     if (navButtons) {
@@ -242,7 +254,8 @@ export function updateTopbar() {
 
     const mapNotification = document.getElementById('map-notification');
     if (mapNotification) {
-        if (state.stats.hasUnseenMap || state.stats.showMapOakNotification) {
+        let isFinalChallengeCompleted = state.stats.completedChallengeIds && state.stats.completedChallengeIds.includes('Indigo Plateau');
+        if (state.stats.hasUnseenMap || state.stats.showMapOakNotification || (isFinalChallengeCompleted && !state.stats.hasSeenJohtoMap)) {
             mapNotification.style.display = 'block';
         } else {
             mapNotification.style.display = 'none';
