@@ -8,8 +8,9 @@
 <body>
   <!-- Top Bar (Icons) -->
 
-  <div id="top-bar-window" class="floating-window" style="display: none; width: 1100px; height: auto; overflow: visible;">
+  <div id="top-bar-window" class="floating-window" data-width-only="true" style="display: none; width: 1100px; height: auto; overflow: visible;">
     <div id="top-bar-header" class="window-header" style="position: relative; display: flex; justify-content: space-between; align-items: center;">
+      <span class="window-dims-display" style="position: absolute; left: 10px; top: 5px; color: white; font-size: 12px; font-weight: normal; z-index: 100;"></span>
       <span id="main-control-title" style="flex-grow: 1; text-align: center;">Main Control</span>
       <div style="position: absolute; right: 10px; display: flex; gap: 10px; z-index: 10;">
         <span id="btn-minimize-main-control" style="cursor: pointer; color: white; font-weight: bold; padding: 0 5px;">-</span>
@@ -18,7 +19,6 @@
       </div>
     </div>
     <div class="window-content-container">
-        <div class="window-content-scaler">
     <div id="top-bar">
 
     <div id="nav-buttons">
@@ -68,10 +68,8 @@
     </div>
   </div>
 
-      </div>
     </div>
     <div class="window-resize-handle"></div>
-    </div>
   </div>
 
   <!-- Splash Screen / Save Manager -->
