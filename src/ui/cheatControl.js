@@ -283,7 +283,7 @@ export function cheatAction(action) {
         // This will trigger the regeneration
         checkAndResetDailyChallenges();
 
-        if (typeof window.updateTopbar === 'function') window.updateTopbar();
+        if (typeof window.updateMainControl === 'function') window.updateMainControl();
         if (document.getElementById('window-calendar')) {
             if (typeof window.showCalendar === 'function' && document.getElementById('window-calendar') && document.getElementById('window-calendar').offsetParent !== null) window.showCalendar();
         }
@@ -293,7 +293,7 @@ export function cheatAction(action) {
             state.stats.dailyRewards = { daysClaimed: 0, lastClaimDate: null };
         }
         state.stats.dailyRewards.lastClaimDate = null;
-        if (typeof window.updateTopbar === 'function') window.updateTopbar();
+        if (typeof window.updateMainControl === 'function') window.updateMainControl();
         if (document.getElementById('window-calendar')) {
             if (typeof window.showCalendar === 'function' && document.getElementById('window-calendar') && document.getElementById('window-calendar').offsetParent !== null) window.showCalendar();
         }

@@ -45,9 +45,15 @@ export class WindowManager {
         const resizeHandle = winElement.querySelector('.window-resize-handle');
         const contentScaler = winElement.querySelector('.window-content-scaler');
 
-        if (resizeHandle && contentScaler) {
-            this._setupResize(winElement, resizeHandle, contentScaler, headerElement);
+
+        if (resizeHandle) {
+            if (contentScaler) {
+                this._setupResize(winElement, resizeHandle, contentScaler, headerElement);
+            } else {
+                this._setupSimpleResize(winElement, resizeHandle);
+            }
         }
+
 
 
     }
@@ -64,6 +70,15 @@ export class WindowManager {
             if (forceShow || winElement.style.display === 'none') {
                 winElement.style.display = 'flex';
                 this.focusWindow(winElement);
+
+                // Load dimensions if saved
+                if (state && state.settings && state.settings.windowSettings && state.settings.windowSettings[windowId]) {
+                    const savedSettings = state.settings.windowSettings[windowId];
+                    if (savedSettings.width) winElement.style.width = savedSettings.width;
+                    if (savedSettings.height) winElement.style.height = savedSettings.height;
+                    if (savedSettings.left) winElement.style.left = savedSettings.left;
+                    if (savedSettings.top) winElement.style.top = savedSettings.top;
+                }
             } else {
                 winElement.style.display = 'none';
             }
@@ -191,7 +206,44 @@ export class WindowManager {
         });
     }
 
-        _setupResize(winElement, handleElement, scalerElement, headerElement) {
+
+    _setupSimpleResize(winElement, handleElement) {
+        let isResizing = false;
+        let startX, startY;
+        let startWidth, startHeight;
+
+        handleElement.addEventListener('mousedown', (e) => {
+            isResizing = true;
+            startX = e.clientX;
+            startY = e.clientY;
+            startWidth = winElement.offsetWidth;
+            startHeight = winElement.offsetHeight;
+            this.focusWindow(winElement);
+            e.stopPropagation();
+            e.preventDefault();
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isResizing) return;
+            const dx = e.clientX - startX;
+            const dy = e.clientY - startY;
+            let newWidth = Math.max(200, startWidth + dx);
+            let newHeight = Math.max(100, startHeight + dy);
+
+            winElement.style.width = newWidth + 'px';
+            winElement.style.height = newHeight + 'px';
+        });
+
+        document.addEventListener('mouseup', () => {
+            if (isResizing) {
+                isResizing = false;
+                this._constrainAllWindows();
+                this.saveWindowData(winElement.id);
+            }
+        });
+    }
+
+    _setupResize(winElement, handleElement, scalerElement, headerElement) {
         let isResizing = false;
         let startX, startY;
         let startWidth, startHeight;

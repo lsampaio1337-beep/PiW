@@ -1,7 +1,7 @@
 import { getCapacity } from "./mathEngine.js";
 import { WindowManager } from './windowManager.js';
 import { setupClickThrough } from './clickThrough.js';
-import { getChallengeData } from './ui/topbar.js';
+import { getChallengeData } from './ui/mainControl.js';
 
 import * as mathEngine from "./mathEngine.js";
 import BattleSystem from "./battleSystem.js";
@@ -53,7 +53,7 @@ export const TYPE_COLORS = {
     "Water": "#6391c7",
 };
 import { openMultiplayerModal } from './ui/multiplayer.js';
-import { updateTopbar } from './ui/topbar.js';
+import { updateMainControl } from './ui/mainControl.js';
 import { updateSidebar } from './ui/sidebar.js';
 import { updateBattleArena, showDamage, playCombatAnimations, triggerDefeatAnimation, showLoot } from './ui/battle.js';
 import { showCalendar } from './ui/calendar.js';
@@ -1167,7 +1167,7 @@ export function switchView(viewName) {
 }
 
 export function updateUI() {
-    updateTopbar();
+    updateMainControl();
     updateSidebar();
     updateBattleArena();
 }
@@ -1313,10 +1313,10 @@ function gameClockTick() {
 
     if (state.currentView === "BATTLE_ARENA") {
         state.stats.battleModeTimer = (state.stats.battleModeTimer || 0) + 1;
-        updateTopbar();
+        updateMainControl();
     } else {
         state.stats.battleModeTimer = 0;
-        updateTopbar();
+        updateMainControl();
     }
 
     // Award Jigglypuff Dust grains (1 grain per minute)
@@ -1331,7 +1331,7 @@ function gameClockTick() {
     }
 
     if (state.stats.playtime === 60) {
-        updateTopbar();
+        updateMainControl();
     }
 
     // Schedule next tick
@@ -1455,7 +1455,7 @@ async function init() {
     setupClickThrough();
 
     // Register floating windows
-    window.windowManager.registerWindow('top-bar-window', 'top-bar-header', '10%', '5%');
+    window.windowManager.registerWindow('main-control-window', 'main-control-header', '10%', '5%');
     window.windowManager.registerWindow('party-window', 'party-header', '5%', '15%');
     window.windowManager.registerWindow('main-view-window', 'main-view-header', '30%', '15%');
 
@@ -1474,7 +1474,7 @@ async function init() {
         state.stats.hasSeenZzZTutorial = true;
         if (splashScreen) splashScreen.style.display = 'none';
         if (saveManagerModal) window.windowManager.toggleWindow('save-manager-modal', false);
-        window.windowManager.toggleWindow('top-bar-window', true);
+        window.windowManager.toggleWindow('main-control-window', true);
         window.windowManager.toggleWindow('party-window', true);
         window.windowManager.toggleWindow('main-view-window', true);
 
@@ -1656,7 +1656,7 @@ async function init() {
                     // Load Action
                     splashScreen.style.display = 'none';
                     window.windowManager.toggleWindow('save-manager-modal', false);
-                    window.windowManager.toggleWindow('top-bar-window', true);
+                    window.windowManager.toggleWindow('main-control-window', true);
                     window.windowManager.toggleWindow('party-window', true);
                     window.windowManager.toggleWindow('main-view-window', true);
 
@@ -1977,7 +1977,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
     bindBtn('btn-multiplayer', () => {
         state.stats.hasSeenMultiplayerIcon = true;
         storage.save(state);
-        updateTopbar();
+        updateMainControl();
         window.openMultiplayerModal();
     });
     bindBtn('btn-toggle-main', () => { window.windowManager.toggleWindow('main-view-window'); });
@@ -2003,7 +2003,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
         if(!checkCombatLock()) {
             state.stats.hasSeenBonusCandyIcon = true;
             storage.save(state);
-            updateTopbar();
+            updateMainControl();
             showBonusCandyModal();
 
         }
@@ -2019,7 +2019,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
             showCalendar();
             if (state.stats.dailyChallenges) {
                 state.stats.dailyChallenges.hasSeenNotification = true;
-                updateTopbar();
+                updateMainControl();
             }
         }
     });
@@ -2027,7 +2027,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
         if(!checkCombatLock()) {
             state.stats.hasSeenGiftIcon = true;
             storage.save(state);
-            updateTopbar();
+            updateMainControl();
             showGiftModal();
 
         }
@@ -2037,7 +2037,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
         if(!checkCombatLock()) {
             state.stats.hasSeenZzZIcon = true;
             storage.save(state);
-            updateTopbar();
+            updateMainControl();
 
             const grains = state.stats.jigglypuffGrains || 0;
             const tutorialDisplay = (!state.stats.hasSeenZzZTutorial) ? 'block' : 'none';
@@ -2100,7 +2100,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
         }
     };
 
-    window.updateTopbar = updateTopbar;
+    window.updateMainControl = updateMainControl;
 
     window.showTrainerStats = function(tab = 'statistics', options = {}) {
         if(checkCombatLock()) return;

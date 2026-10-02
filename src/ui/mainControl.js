@@ -128,7 +128,7 @@ export function getChallengeData(unlock) {
     return { isMet, textParts };
 }
 
-export function updateTopbar() {
+export function updateMainControl() {
     const battleSystem = globals.battleSystem;
     const inGym = battleSystem && battleSystem.gymState && battleSystem.gymState.isActive;
     const noPokemon = state.party.length === 0 && state.storage.length === 0;
@@ -285,7 +285,7 @@ export function updateTopbar() {
     }
     // Auto-adjust width of the Main Control window if new icons appeared
     if (window.windowManager) {
-        window.windowManager.autoAdjustWidth('top-bar-window');
+        window.windowManager.autoAdjustWidth('main-control-window');
     }
 }
 
