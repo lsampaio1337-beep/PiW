@@ -19,6 +19,8 @@ test('test main control renders and resizes without errors', async ({ page }) =>
     if (await newGameBtn.isVisible()) {
         await newGameBtn.click();
 
+
+
         // Choose starter
         await page.waitForTimeout(500);
         const starterBtn = page.locator('#btn-start-charmander');
@@ -37,6 +39,7 @@ test('test main control renders and resizes without errors', async ({ page }) =>
 
     await page.waitForTimeout(1000);
 
+
     // Check if main control is visible and has reasonable width
     const mainControl = page.locator('#main-control-window');
     await expect(mainControl).toBeVisible();
@@ -44,11 +47,14 @@ test('test main control renders and resizes without errors', async ({ page }) =>
     const boundingBox = await mainControl.boundingBox();
     console.log(`Main Control Bounding Box: ${JSON.stringify(boundingBox)}`);
 
+
     // Ensure height > 0
     expect(boundingBox.height).toBeGreaterThan(0);
 
     console.log('--- CONSOLE LOGS ---');
     logs.forEach(log => console.log(log));
+
+
 
     await page.screenshot({ path: '/home/jules/verification/screenshots/main_control_verify_final.png' });
 });
