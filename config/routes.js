@@ -1,5 +1,9 @@
 const routes = [
   {
+    "name": "Spot",
+    "spawns": []
+  },
+  {
     "name": "Route 1",
     "spawns": [
       {

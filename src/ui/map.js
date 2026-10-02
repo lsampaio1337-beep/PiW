@@ -158,6 +158,59 @@ export function showMap() {
             `;
         }
         }
+    } else if (window.currentMapRegion === 'Johto') {
+        for (const [locationId, locationData] of Object.entries(state.config.johtoMapCoordinates || {})) {
+            const locationName = locationData.name;
+            const coords = locationData;
+
+            let isUnlocked = true; // Unlocked by default as requested
+
+            if (isUnlocked) {
+                let markerImg = './Assets/Extra/Spot.png';
+                let showCheckmark = false;
+                let isClickable = true;
+                let hasNewNotification = false;
+
+                if (locationId === 'johto_oak_lab') {
+                    markerImg = './Assets/Extra/Spot_Oak.png';
+                }
+                else if (locationId === 'pokemon_center___market') {
+                    markerImg = './Assets/Extra/Spot_PCPM.png';
+                }
+
+                // Standardize spot sizes
+                let markerWidth = "24px";
+                let markerHeight = "24px";
+                let dropShadow = "none";
+
+                if (locationId === 'pokemon_center___market') {
+                    markerWidth = "32px";
+                    markerHeight = "32px";
+                } else if (['johto_oak_lab'].includes(locationId)) {
+                    markerWidth = "28px";
+                    markerHeight = "28px";
+                }
+
+                if (markerImg !== './Assets/Extra/Spot.png') {
+                    // Solid black outline (4-axis) and a larger soft white glow
+                    dropShadow = "drop-shadow(1px 0px 0 #000) drop-shadow(-1px 0px 0 #000) drop-shadow(0px 1px 0 #000) drop-shadow(0px -1px 0 #000) drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.8))";
+                }
+
+                let markerClass = hasNewNotification ? 'map-marker pulse-marker' : 'map-marker';
+
+                html += `
+                    <div class="${markerClass}"
+                         data-location="${locationName.replace(/'/g, "&#39;")}"
+                         title="${locationName.replace(/'/g, "&#39;")}"
+                         style="position: absolute; left: ${coords.x}%; top: ${coords.y}%; width: ${markerWidth}; height: ${markerHeight}; background-image: url('${markerImg}'); background-size: contain; background-repeat: no-repeat; transform: translate(-50%, -50%); filter: ${dropShadow}; cursor: ${isClickable ? 'pointer' : 'default'};"
+                         ${isClickable ? `onclick="window.navigateToLocation('${locationName.replace(/'/g, "\\'")}')"` : ''}
+                         onmousemove="window.showMapTooltip(event, '${locationName.replace(/'/g, "\\'")}')"
+                         onmouseout="window.hideMapTooltip()">
+                         ${showCheckmark ? '<div style="position:absolute; top:-5px; right:-5px; background:green; color:white; border-radius:50%; width:15px; height:15px; font-size:10px; line-height:15px; text-align:center;">✓</div>' : ''}
+                    </div>
+                `;
+            }
+        }
     }
 
     html += `
@@ -197,6 +250,14 @@ export function navigateToLocation(locationName) {
              if (battleSystem.gymState) battleSystem.gymState.isActive = false;
         }
         switchView("PROF_OAK_LAB");
+    } else if (locationName === "Johto Oak Lab") {
+        if (battleSystem) {
+             battleSystem.stop();
+             battleSystem.activeEncounter = null;
+             battleSystem.isSearching = false;
+             if (battleSystem.gymState) battleSystem.gymState.isActive = false;
+        }
+        switchView("JOHTO_OAK_LAB");
     } else if (locationName === "Safari Zone") {
         if (battleSystem) {
             battleSystem.stop();
