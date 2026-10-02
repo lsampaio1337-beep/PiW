@@ -48,6 +48,8 @@ window.proceedOakTutorial = function() {
         document.getElementById('btn-oak-tutorial-skip').style.display = 'none';
         document.getElementById('btn-oak-tutorial-proceed').style.display = 'none';
         document.getElementById('btn-oak-tutorial-conclude').style.display = 'inline-block';
+    } else {
+        document.getElementById('btn-oak-tutorial-proceed').innerText = `Proceed ${currentOakTutorialIndex + 1}/${oakTutorialMessages.length - 1}`;
     }
 
     if (currentOakTutorialIndex < oakTutorialMessages.length) {
@@ -68,7 +70,11 @@ export function showOakTutorialIfNeeded() {
 
             // Reset buttons visibility
             document.getElementById('btn-oak-tutorial-skip').style.display = 'inline-block';
-            document.getElementById('btn-oak-tutorial-proceed').style.display = 'inline-block';
+
+            const proceedBtn = document.getElementById('btn-oak-tutorial-proceed');
+            proceedBtn.innerText = `Proceed 1/${oakTutorialMessages.length - 1}`;
+            proceedBtn.style.display = 'inline-block';
+
             document.getElementById('btn-oak-tutorial-conclude').style.display = 'none';
 
             overlay.style.display = 'flex';
