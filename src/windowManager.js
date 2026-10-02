@@ -58,17 +58,31 @@ export class WindowManager {
         }
     }
 
+
     toggleWindow(windowId, forceShow = false) {
         const winElement = document.getElementById(windowId);
         if (winElement) {
             if (forceShow || winElement.style.display === 'none') {
                 winElement.style.display = 'flex';
                 this.focusWindow(winElement);
+
+                // ONLY apply saved settings the VERY FIRST TIME it is toggled on (or initialized)
+                if (!winElement.dataset.settingsLoaded) {
+                    winElement.dataset.settingsLoaded = "true";
+                    if (window.state && window.state.settings && window.state.settings.windowSettings && window.state.settings.windowSettings[windowId]) {
+                        const savedSettings = window.state.settings.windowSettings[windowId];
+                        if (savedSettings.width) winElement.style.width = savedSettings.width;
+                        if (savedSettings.height) winElement.style.height = savedSettings.height;
+                        if (savedSettings.left) winElement.style.left = savedSettings.left;
+                        if (savedSettings.top) winElement.style.top = savedSettings.top;
+                    }
+                }
             } else {
                 winElement.style.display = 'none';
             }
         }
     }
+
 
 
 
