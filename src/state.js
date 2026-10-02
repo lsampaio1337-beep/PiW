@@ -1,4 +1,4 @@
-export const state = {
+export const REGION_TEMPLATE = {
     trainer: {
         money: 0,
         badges: 0,
@@ -26,7 +26,6 @@ export const state = {
         caught: 0,
         shiniesSeen: 0,
         shiniesCaught: 0,
-        playtime: 0,
         faints: 0,
         tokensEarned: 0,
         completedChallenges: 0,
@@ -54,13 +53,13 @@ export const state = {
         dailyChallenges: { lastDate: null, rotationIndex: 0, active: [], totalCompleted: 0 },
         jigglypuffGrains: 0,
         jigglypuffGrainsUsed: 0,
-        hasSeenOakTutorial: false,
-        hasSeenZzZTutorial: false,
-        hasSeenMultiplayerIcon: false,
         newRoutes: [],
         hasUnseenMap: false,
-        hasSeenJohtoMap: false,
-        hasPickedJohtoStarter: false,
+        hasPickedStarter: false,
+        seenSpecies: {},
+        caughtSpecies: {},
+        seenShiniesSpecies: {},
+        caughtShiniesSpecies: {},
         upgrades: {
             ballsTier: 0,
             potionsTier: 0,
@@ -80,6 +79,22 @@ export const state = {
             loot: false
         }
     },
+    currentRoute: "Route 1",
+    currentRegionName: "Kanto"
+};
+
+export const state = {
+    ...JSON.parse(JSON.stringify(REGION_TEMPLATE)),
+    globalStats: {
+        playtime: 0,
+        hasSeenOakTutorial: false,
+        hasSeenZzZTutorial: false,
+        hasSeenMultiplayerIcon: false,
+        hasSeenGiftIcon: false,
+        hasSeenJohtoMap: false,
+        hasSeenDaycare: false,
+        hasSeenBonusCandyModal: false
+    },
     settings: {
         gameSpeed: 1.0,
         autoPotion: true,
@@ -91,9 +106,10 @@ export const state = {
         smartCapture: {},
         smartCaptureShiny: {}
     },
-    currentRoute: "Route 1",
+    regions: {},
     config: {}
 };
+
 
 // Global reference for battle system
 export let globals = {
@@ -102,4 +118,33 @@ export let globals = {
 
 export function setBattleSystem(system) {
     globals.battleSystem = system;
+}
+
+export function swapRegion(newRegionName) {
+    if (state.currentRegionName === newRegionName) return;
+
+    // Pack current region
+    const currentRegion = state.currentRegionName;
+    state.regions[currentRegion] = {};
+    for (let key in REGION_TEMPLATE) {
+        state.regions[currentRegion][key] = JSON.parse(JSON.stringify(state[key]));
+    }
+
+    // Initialize or unpack new region
+    if (!state.regions[newRegionName]) {
+        state.regions[newRegionName] = JSON.parse(JSON.stringify(REGION_TEMPLATE));
+        state.regions[newRegionName].currentRegionName = newRegionName;
+        // set starting route
+        if (newRegionName === 'Johto') {
+            state.regions[newRegionName].currentRoute = 'Route 29';
+            state.regions[newRegionName].stats.activeChallenges = ['Route 29'];
+        }
+    }
+
+    // Mount new region to root state
+    for (let key in REGION_TEMPLATE) {
+        state[key] = state.regions[newRegionName][key];
+    }
+
+    state.currentRegionName = newRegionName;
 }

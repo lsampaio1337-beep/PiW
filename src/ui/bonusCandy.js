@@ -93,7 +93,7 @@ export function showBonusCandyModal() {
         </div>
 
         <!-- Bonus Candy First-Time Overlay (Inner Modal) -->
-        <div id="bonus-candy-first-time-overlay" style="display: ${!state.stats.hasSeenBonusCandyModal ? 'flex' : 'none'}; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10000; background: rgba(0, 0, 0, 0.7); flex-direction: column; align-items: center; justify-content: center; border-radius: 8px;">
+        <div id="bonus-candy-first-time-overlay" style="display: ${!state.globalStats.hasSeenBonusCandyModal ? 'flex' : 'none'}; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10000; background: rgba(0, 0, 0, 0.7); flex-direction: column; align-items: center; justify-content: center; border-radius: 8px;">
             <div style="background: #34495e; padding: 20px; border-radius: 10px; border: 2px solid #00ffff; text-align: center; color: white; max-width: 80%;">
                 <div id="bonus-candy-intro-text" style="margin-top: 0; font-size: 16px;">
                     <p>Here you can find delicious candies!</p>

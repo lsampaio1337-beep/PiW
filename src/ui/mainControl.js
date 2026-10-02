@@ -155,7 +155,7 @@ export function updateMainControl() {
     const timerTotal = document.getElementById('main-view-timer-total');
     if (timerRoute && timerTotal) {
         const routeSec = state.stats.battleModeTimer || 0;
-        const totalSec = state.stats.playtime || 0;
+        const totalSec = state.globalStats.playtime || 0;
 
         const formatTime = (secs) => {
             const d = Math.floor(secs / 86400);
@@ -198,7 +198,7 @@ export function updateMainControl() {
         // Unlock Multiplayer after Challenge 5 (Fossil Revival Lab) is completed
         if (state.stats.completedChallengeIds && state.stats.completedChallengeIds.includes('Fossil Revival Lab')) {
             multiplayerContainer.style.display = 'inline-block';
-            if (!state.stats.hasSeenMultiplayerIcon) {
+            if (!state.globalStats.hasSeenMultiplayerIcon) {
                 multiplayerExclamation.style.display = 'block';
             } else {
                 multiplayerExclamation.style.display = 'none';
@@ -214,12 +214,12 @@ export function updateMainControl() {
     if (giftContainer && giftNotification) {
         if (state.stats.pendingGifts && state.stats.pendingGifts.length > 0) {
             giftContainer.style.display = 'inline-block';
-            if (!state.stats.hasSeenGiftIcon) {
+            if (!state.globalStats.hasSeenGiftIcon) {
                 giftNotification.style.display = 'block';
             } else {
                 giftNotification.style.display = 'none';
             }
-        } else if (state.stats.hasSeenGiftIcon) {
+        } else if (state.globalStats.hasSeenGiftIcon) {
             giftContainer.style.display = 'inline-block';
             giftNotification.style.display = 'none';
         } else {
@@ -255,7 +255,7 @@ export function updateMainControl() {
     const mapNotification = document.getElementById('map-notification');
     if (mapNotification) {
         let isFinalChallengeCompleted = state.stats.completedChallengeIds && state.stats.completedChallengeIds.includes('Indigo Plateau');
-        if (state.stats.hasUnseenMap || state.stats.showMapOakNotification || (isFinalChallengeCompleted && !state.stats.hasSeenJohtoMap)) {
+        if (state.stats.hasUnseenMap || state.stats.showMapOakNotification || (isFinalChallengeCompleted && !state.globalStats.hasSeenJohtoMap)) {
             mapNotification.style.display = 'block';
         } else {
             mapNotification.style.display = 'none';
@@ -284,7 +284,7 @@ export function updateMainControl() {
     const sleepNotification = document.getElementById('sleep-notification');
 
     if (sleepContainer && sleepNotification) {
-        if (state.stats.playtime && state.stats.playtime >= 3600) {
+        if (state.globalStats.playtime && state.globalStats.playtime >= 3600) {
             sleepContainer.style.display = 'inline-block';
             if (!state.stats.hasSeenZzZIcon) {
                 sleepNotification.style.display = 'block';

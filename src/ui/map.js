@@ -1,4 +1,4 @@
-import { state, globals } from '../state.js';
+import { state, globals, swapRegion } from '../state.js';
 import { updateUI, switchView } from '../ui.js';
 import { setupMarket } from './market.js';
 
@@ -25,11 +25,29 @@ const parseAreaNames = (id) => {
 window.currentMapRegion = 'Kanto';
 
 window.switchMapRegion = function(region) {
-    if (region === 'Johto' && !state.stats.hasSeenJohtoMap) {
-        state.stats.hasSeenJohtoMap = true;
-        updateUI(); // to clear the top bar map exclamation mark
+    if (region === 'Johto' && !state.globalStats.hasSeenJohtoMap) {
+        state.globalStats.hasSeenJohtoMap = true;
     }
+
+    // Stop battle completely before swapping
+    if (globals.battleSystem) {
+         globals.battleSystem.stop();
+         globals.battleSystem.activeEncounter = null;
+         globals.battleSystem.isSearching = false;
+         if (globals.battleSystem.gymState) globals.battleSystem.gymState.isActive = false;
+    }
+
+    swapRegion(region);
     window.currentMapRegion = region;
+
+    // Navigate to default location for region when swapping
+    if (region === 'Johto' && state.currentRoute === 'Route 29') {
+        window.navigateToLocation('Professor Oak Lab');
+    } else {
+        window.navigateToLocation(state.currentRoute || (region === 'Johto' ? 'Route 29' : 'Route 1'));
+    }
+
+    updateUI();
     showMap();
 };
 
@@ -63,7 +81,7 @@ export function showMap() {
     let isFinalChallengeCompleted = state.stats.completedChallengeIds && state.stats.completedChallengeIds.includes('Indigo Plateau');
     let regionButtonsHtml = '';
     if (isFinalChallengeCompleted) {
-        let exclamationHtml = !state.stats.hasSeenJohtoMap ? `<img src="Assets/Extra/ExclamationMark.png" style="position: absolute; top: -5px; right: -5px; width: 15px; height: auto; pointer-events: none; z-index: 10;">` : '';
+        let exclamationHtml = !state.globalStats.hasSeenJohtoMap ? `<img src="Assets/Extra/ExclamationMark.png" style="position: absolute; top: -5px; right: -5px; width: 15px; height: auto; pointer-events: none; z-index: 10;">` : '';
         regionButtonsHtml = `
             <div style="display: inline-flex; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px;">
                 <button onclick="window.switchMapRegion('Kanto')" style="${window.currentMapRegion === 'Kanto' ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s; position: relative;" onmousedown="event.stopPropagation()">Kanto</button>
@@ -399,7 +417,7 @@ export function navigateToLocation(locationName) {
         // Append to the viewCasino container
         viewCasino.insertAdjacentHTML('beforeend', html);
     } else if (locationName === "Daycare") {
-        if (!state.stats.hasSeenDaycare) {
+        if (!state.globalStats.hasSeenDaycare) {
             document.getElementById('daycare-first-time-overlay').style.display = 'flex';
         } else {
             document.getElementById('daycare-first-time-overlay').style.display = 'none';

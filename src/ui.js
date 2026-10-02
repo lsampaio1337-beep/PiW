@@ -13,7 +13,7 @@ import { state, setBattleSystem, globals } from './state.js';
 import { trackDailyChallenge, checkAndResetDailyChallenges } from './ui/dailyChallenges.js';
 
 window.dismissDaycareMessage = function() {
-    state.stats.hasSeenDaycare = true;
+    state.globalStats.hasSeenDaycare = true;
     document.getElementById('daycare-first-time-overlay').style.display = 'none';
     if (window.storageRef) {
         window.storageRef.save(state);
@@ -35,7 +35,7 @@ const oakTutorialMessages = [
 let currentOakTutorialIndex = 0;
 
 window.skipOakTutorial = function() {
-    state.stats.hasSeenOakTutorial = true;
+    state.globalStats.hasSeenOakTutorial = true;
     const overlay = document.getElementById('oak-tutorial-overlay');
     if (overlay) overlay.style.display = 'none';
     if (window.storageRef) window.storageRef.save(state);
@@ -62,7 +62,7 @@ window.concludeOakTutorial = function() {
 };
 
 export function showOakTutorialIfNeeded() {
-    if (!state.stats.hasSeenOakTutorial) {
+    if (!state.globalStats.hasSeenOakTutorial) {
         const overlay = document.getElementById('oak-tutorial-overlay');
         if (overlay) {
             currentOakTutorialIndex = 0;
@@ -84,7 +84,7 @@ export function showOakTutorialIfNeeded() {
 
 
 window.dismissBonusCandyMessage = function() {
-    state.stats.hasSeenBonusCandyModal = true;
+    state.globalStats.hasSeenBonusCandyModal = true;
     const overlay = document.getElementById('bonus-candy-first-time-overlay');
     if (overlay) {
         overlay.style.display = 'none';
@@ -211,7 +211,7 @@ window.completeChallenge = function(targetAreaId) {
         if (unlock.gift) {
             if (!state.stats.pendingGifts) state.stats.pendingGifts = [];
             state.stats.pendingGifts.push({ type: 'item', item: unlock.gift.item || unlock.gift, count: unlock.gift.count || 1 });
-            state.stats.hasSeenGiftIcon = false;
+            state.globalStats.hasSeenGiftIcon = false;
         }
         if (unlock.unlocks) {
             for (let newRoute of unlock.unlocks) {
@@ -1138,7 +1138,7 @@ export function renderJohtoOakLab() {
     const johtoOakLabContent = document.getElementById("johto-oak-lab-content");
     if (!johtoOakLabContent) return;
 
-    if (!state.stats.hasPickedJohtoStarter) {
+    if (!state.stats.hasPickedStarter) {
         // Show starter selection
         johtoOakLabContent.innerHTML = `
             <div style="background-color: rgba(0,0,0,0.8); display: inline-block; padding: 30px; margin-top: 50px; border-radius: 8px;">
@@ -1279,6 +1279,7 @@ export function switchView(viewName) {
 }
 
 export function updateUI() {
+    window.currentMapRegion = state.currentRegionName || 'Kanto';
     updateMainControl();
     updateSidebar();
     updateBattleArena();
@@ -1310,7 +1311,7 @@ async function loadConfigs() {
 
 window.selectJohtoStarter = selectJohtoStarter;
 function selectJohtoStarter(id) {
-    if (state.stats.hasPickedJohtoStarter) return;
+    if (state.stats.hasPickedStarter) return;
 
     const pData = state.config.pokemonData.find(p => p.id === id);
     const q = 1.40; // Fixed Rare
@@ -1354,7 +1355,7 @@ function selectJohtoStarter(id) {
         state.storage.push(starter);
     }
 
-    state.stats.hasPickedJohtoStarter = true;
+    state.stats.hasPickedStarter = true;
     storage.save(state);
 
     // Refresh UI
@@ -1486,8 +1487,8 @@ window.restartGameClock = function() {
 function gameClockTick() {
     const speed = (state.settings && state.settings.gameSpeed) || 1;
 
-    if (!state.stats.playtime) state.stats.playtime = 0;
-    state.stats.playtime++;
+    if (!state.globalStats.playtime) state.globalStats.playtime = 0;
+    state.globalStats.playtime++;
 
     if (state.currentView === "BATTLE_ARENA") {
         state.stats.battleModeTimer = (state.stats.battleModeTimer || 0) + 1;
@@ -1498,17 +1499,17 @@ function gameClockTick() {
     }
 
     // Award Jigglypuff Dust grains (1 grain per minute)
-    if (state.stats.playtime % 60 === 0 && state.stats.playtime > 0) {
+    if (state.globalStats.playtime % 60 === 0 && state.globalStats.playtime > 0) {
         state.stats.jigglypuffGrains = (state.stats.jigglypuffGrains || 0) + 1;
         updateUI(); // Reflect new grains
     }
 
     // Daily Challenge Check
-    if (state.stats.playtime % 10 === 0) {
+    if (state.globalStats.playtime % 10 === 0) {
         checkAndResetDailyChallenges();
     }
 
-    if (state.stats.playtime === 60) {
+    if (state.globalStats.playtime === 60) {
         updateMainControl();
     }
 
@@ -1647,10 +1648,10 @@ async function init() {
     const profilesContainer = document.getElementById('profiles-container');
 
     const startNewGame = () => {
-        state.stats.hasSeenOakTutorial = false;
-        state.stats.hasSeenGiftIcon = false;
-        state.stats.hasSeenMultiplayerIcon = false;
-        state.stats.hasSeenZzZTutorial = false;
+        state.globalStats.hasSeenOakTutorial = false;
+        state.globalStats.hasSeenGiftIcon = false;
+        state.globalStats.hasSeenMultiplayerIcon = false;
+        state.globalStats.hasSeenZzZTutorial = false;
         if (splashScreen) splashScreen.style.display = 'none';
         if (saveManagerModal) window.windowManager.toggleWindow('save-manager-modal', false);
         window.windowManager.toggleWindow('main-control-window', true);
@@ -1856,6 +1857,26 @@ async function init() {
                         return target;
                     };
                     deepMerge(state, pData);
+
+                    // Migrate old save data to new globalStats structure
+                    if (pData.stats) {
+                        if (pData.stats.playtime !== undefined) state.globalStats.playtime = pData.stats.playtime;
+                        if (pData.stats.hasSeenOakTutorial !== undefined) state.globalStats.hasSeenOakTutorial = pData.stats.hasSeenOakTutorial;
+                        if (pData.stats.hasSeenZzZTutorial !== undefined) state.globalStats.hasSeenZzZTutorial = pData.stats.hasSeenZzZTutorial;
+                        if (pData.stats.hasSeenMultiplayerIcon !== undefined) state.globalStats.hasSeenMultiplayerIcon = pData.stats.hasSeenMultiplayerIcon;
+                        if (pData.stats.hasSeenGiftIcon !== undefined) state.globalStats.hasSeenGiftIcon = pData.stats.hasSeenGiftIcon;
+                        if (pData.stats.hasSeenJohtoMap !== undefined) state.globalStats.hasSeenJohtoMap = pData.stats.hasSeenJohtoMap;
+                        if (pData.stats.hasSeenDaycare !== undefined) state.globalStats.hasSeenDaycare = pData.stats.hasSeenDaycare;
+                        if (pData.stats.hasSeenBonusCandyModal !== undefined) state.globalStats.hasSeenBonusCandyModal = pData.stats.hasSeenBonusCandyModal;
+                    }
+
+
+                    if (!state.currentRegionName) {
+                        state.currentRegionName = 'Kanto';
+                    }
+                    if (!state.regions) {
+                        state.regions = {};
+                    }
 
                     // Fallback for older saves
                     if (state.settings.autoPotionThreshold === undefined) {
@@ -2154,7 +2175,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
 
     bindBtn('btn-toggle-party', () => { window.windowManager.toggleWindow('party-window'); });
     bindBtn('btn-multiplayer', () => {
-        state.stats.hasSeenMultiplayerIcon = true;
+        state.globalStats.hasSeenMultiplayerIcon = true;
         storage.save(state);
         updateMainControl();
         window.openMultiplayerModal();
@@ -2204,7 +2225,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
     });
     bindBtn('btn-gift', () => {
         if(!checkCombatLock()) {
-            state.stats.hasSeenGiftIcon = true;
+            state.globalStats.hasSeenGiftIcon = true;
             storage.save(state);
             updateMainControl();
             showGiftModal();
@@ -2214,7 +2235,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
 
         window.showZzZConfirmationModal = function() {
             const grains = state.stats.jigglypuffGrains || 0;
-            const showTutorial = !state.stats.hasSeenZzZTutorial;
+            const showTutorial = !state.globalStats.hasSeenZzZTutorial;
             const htmlContent = `
                 <div class="content-panel" style="display: flex; flex-direction: column; gap: 15px; width: 100%; box-sizing: border-box; position: relative;">
                     ${showTutorial ? `
@@ -2259,7 +2280,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
                 const dismissBtn = document.getElementById('btn-dismiss-zzz-inner');
                 if (dismissBtn) {
                     dismissBtn.onclick = () => {
-                        state.stats.hasSeenZzZTutorial = true;
+                        state.globalStats.hasSeenZzZTutorial = true;
                         storage.save(state);
                         const overlay = document.getElementById('zzz-tutorial-overlay-inner');
                         if (overlay) overlay.style.display = 'none';
@@ -2323,8 +2344,8 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
             }
 
             let playtimeStr = "0h 0m 0s";
-            if (state.stats.playtime) {
-                const totalSec = state.stats.playtime;
+            if (state.globalStats.playtime) {
+                const totalSec = state.globalStats.playtime;
                 const h = Math.floor(totalSec / 3600);
                 const m = Math.floor((totalSec % 3600) / 60);
                 const s = totalSec % 60;
