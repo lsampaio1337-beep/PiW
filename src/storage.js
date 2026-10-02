@@ -169,7 +169,7 @@ export default class Storage {
                 const regionKeys = ['trainer', 'party', 'box', 'storage', 'safe', 'breeding', 'training', 'backpack', 'stats', 'currentRoute'];
                 for (let key of regionKeys) {
                     if (state[key] !== undefined) {
-                        state.regions[state.activeRegion][key] = JSON.parse(JSON.stringify(state[key]));
+                        state.regions[state.activeRegion][key] = JSON.parse(JSON.stringify(state[key], (k, v) => (k === 'config' || k === 'dayCareRef' ? undefined : v)));
                     }
                 }
             }

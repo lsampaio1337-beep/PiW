@@ -133,7 +133,7 @@ export function updateTopbar() {
     const inGym = battleSystem && battleSystem.gymState && battleSystem.gymState.isActive;
     const noPokemon = state.party.length === 0 && state.storage.length === 0;
 
-    let isFinalChallengeCompleted = state.stats.completedChallengeIds && state.stats.completedChallengeIds.includes('Indigo Plateau');
+    let isFinalChallengeCompleted = (state.stats.completedChallengeIds && state.stats.completedChallengeIds.includes('Indigo Plateau')) || (state.regions && state.regions.Kanto && state.regions.Kanto.stats && state.regions.Kanto.stats.completedChallengeIds && state.regions.Kanto.stats.completedChallengeIds.includes('Indigo Plateau'));
 
 
     const mainControlTitle = document.getElementById('main-control-title');
@@ -200,7 +200,7 @@ export function updateTopbar() {
     const multiplayerExclamation = document.getElementById('multiplayer-exclamation');
     if (multiplayerContainer && multiplayerExclamation) {
         // Unlock Multiplayer after Challenge 5 (Fossil Revival Lab) is completed
-        if (state.stats.completedChallengeIds && state.stats.completedChallengeIds.includes('Fossil Revival Lab')) {
+        if ((state.stats.completedChallengeIds && state.stats.completedChallengeIds.includes('Fossil Revival Lab')) || (state.regions && state.regions.Kanto && state.regions.Kanto.stats && state.regions.Kanto.stats.completedChallengeIds && state.regions.Kanto.stats.completedChallengeIds.includes('Fossil Revival Lab'))) {
             multiplayerContainer.style.display = 'inline-block';
             if (!state.globalStats.hasSeenMultiplayerIcon) {
                 multiplayerExclamation.style.display = 'block';
@@ -258,7 +258,7 @@ export function updateTopbar() {
 
     const mapNotification = document.getElementById('map-notification');
     if (mapNotification) {
-        let isFinalChallengeCompleted = state.stats.completedChallengeIds && state.stats.completedChallengeIds.includes('Indigo Plateau');
+        let isFinalChallengeCompleted = (state.stats.completedChallengeIds && state.stats.completedChallengeIds.includes('Indigo Plateau')) || (state.regions && state.regions.Kanto && state.regions.Kanto.stats && state.regions.Kanto.stats.completedChallengeIds && state.regions.Kanto.stats.completedChallengeIds.includes('Indigo Plateau'));
         if (state.globalStats.hasUnseenMap || state.stats.showMapOakNotification || (isFinalChallengeCompleted && !state.globalStats.hasSeenJohtoMap)) {
             mapNotification.style.display = 'block';
         } else {

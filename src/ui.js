@@ -1857,6 +1857,12 @@ async function init() {
                     };
                     deepMerge(state, pData);
 
+                    // Sync the active region to the map UI
+                    if (state.activeRegion) {
+                        window.currentMapRegion = state.activeRegion;
+                    }
+
+
                     // Fallback for older saves
                     if (state.settings.autoPotionThreshold === undefined) {
                         state.settings.autoPotionThreshold = 25;
