@@ -111,7 +111,9 @@ const CHALLENGE_DEFS = {
             }
             let speciesArr = Array.from(availableSpecies);
             if (speciesArr.length === 0) return 'Pidgey';
-            return speciesArr[Math.floor(Math.random() * speciesArr.length)];
+            let pid = speciesArr[Math.floor(Math.random() * speciesArr.length)];
+            let pData = state.config.pokemonData.find(p => p.id === pid);
+            return pData ? pData.name : pid;
         } },
         { id: 3, text: "Endurance: Defeat $ Pokémon without fainting, healing, or swaping.", getTarget: () => 10 + (state.trainer.badges * 5), type: 'defeat_endurance' },
         { id: 4, text: "Speedrunner: Defeat a Pokémon in 1 turn $ times.", getTarget: () => Math.max(5, Math.floor((state.stats.completedChallenges || 0) * 0.5)), type: 'defeat_1_turn', condition: () => state.trainer.badges >= 1 },
@@ -302,7 +304,7 @@ export function getDailyChallengesHtml() {
 
         html += `
             <div style="background: rgba(0,0,0,0.4); border: 1px solid #444; border-radius: 5px; padding: 10px; display: flex; align-items: center; justify-content: space-between;">
-                <div style="flex: 1; text-align: left; color: ${color}; text-decoration: ${textDec}; font-size: 14px;">
+                <div style="flex: 1; text-align: left; color: ${color}; text-decoration: ${textDec}; font-size: 14px; display: flex; align-items: center; gap: 5px;">
                     ${c.text}
                 </div>
                 <div style="display: flex; align-items: center; gap: 10px;">
@@ -330,9 +332,9 @@ window.cheatCompleteDailyChallenge = function(index) {
     if (active && active[index] && !active[index].completed) {
         active[index].progress = active[index].target;
         active[index].completed = true;
-        state.stats.dailyChallenges.hasSeenNotification = false;
+        state.stats.dailyChallenges.hasSeenNotification = !!(document.getElementById('window-calendar') && document.getElementById('window-calendar').offsetParent !== null);
         if (typeof window.updateTopbar === 'function') window.updateTopbar();
-        if (typeof showCalendar === 'function') showCalendar(); // Refresh UI
+        if (typeof showCalendar === 'function' && document.getElementById('window-calendar') && document.getElementById('window-calendar').offsetParent !== null) showCalendar(); // Refresh UI
     }
 };
 
@@ -346,7 +348,7 @@ window.claimDailyChallengeToken = function(index) {
         state.stats.tokensEarned += 1;
         state.stats.dailyChallenges.totalCompleted++;
         if (typeof window.updateTopbar === 'function') window.updateTopbar();
-        if (typeof showCalendar === 'function') showCalendar(); // Refresh UI
+        if (typeof showCalendar === 'function' && document.getElementById('window-calendar') && document.getElementById('window-calendar').offsetParent !== null) showCalendar(); // Refresh UI
     }
 };
 
@@ -427,7 +429,7 @@ window.rerollIndividualDailyChallenge = function(index) {
 
     state.stats.dailyChallenges.hasRerolled = true;
 
-    if (typeof showCalendar === 'function') showCalendar();
+    if (typeof showCalendar === 'function' && document.getElementById('window-calendar') && document.getElementById('window-calendar').offsetParent !== null) showCalendar();
 };
 
 // Tracking Hook function for integration in other modules
@@ -534,7 +536,7 @@ window.trackDailyChallenge = function(type, data = {}) {
             if (c.progress >= c.target) {
                 c.progress = c.target;
                 c.completed = true;
-                state.stats.dailyChallenges.hasSeenNotification = false;
+                state.stats.dailyChallenges.hasSeenNotification = !!(document.getElementById('window-calendar') && document.getElementById('window-calendar').offsetParent !== null);
                 if (typeof window.updateTopbar === 'function') window.updateTopbar();
             }
             updated = true;
@@ -542,7 +544,7 @@ window.trackDailyChallenge = function(type, data = {}) {
     }
     if (updated) {
         if (document.getElementById('window-calendar')) {
-            if (typeof showCalendar === 'function') showCalendar();
+            if (typeof showCalendar === 'function' && document.getElementById('window-calendar') && document.getElementById('window-calendar').offsetParent !== null) showCalendar();
         }
     }
 };

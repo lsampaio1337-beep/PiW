@@ -152,7 +152,7 @@ function handleTokenPurchase(cost, callback) {
     if ((state.trainer.tokens || 0) >= cost) {
         state.trainer.tokens -= cost;
         callback();
-        if (window.showCalendar) {
+        if (window.showCalendar && document.getElementById('window-calendar') && document.getElementById('window-calendar').offsetParent !== null) {
             window.showCalendar('shop');
         }
         if (window.updateUI) window.updateUI();
