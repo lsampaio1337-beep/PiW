@@ -507,11 +507,21 @@ export class WindowManager {
             }
 
             this.saveWindowData(windowId);
+
+            // Important: Update internal resizing properties to lock the new proportion
+            winElement._originalWidth = newOriginalWidth;
+            if (winElement._originalHeight) {
+                winElement._originalRatio = winElement._originalWidth / winElement._originalHeight;
+            }
         } else if (newOriginalWidth > 0 && (!currentOriginalWidthStr || isNaN(parseInt(currentOriginalWidthStr)))) {
             // Initializing original width if it wasn't set yet
             scalerElement.style.setProperty('--original-width', newOriginalWidth + 'px');
             if (!oldWidth || oldWidth === 'auto') {
-                winElement.style.width = Math.max(1100, newOriginalWidth) + 'px';
+                winElement.style.width = newOriginalWidth + 'px';
+            }
+            winElement._originalWidth = newOriginalWidth;
+            if (winElement._originalHeight) {
+                winElement._originalRatio = winElement._originalWidth / winElement._originalHeight;
             }
         }
 

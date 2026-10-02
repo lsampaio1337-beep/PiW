@@ -17,7 +17,7 @@ export function setupGlobalEventListeners() {
     const minimizeMainBtn = document.getElementById('btn-minimize-main-control');
     if (minimizeMainBtn) {
         minimizeMainBtn.addEventListener('click', () => {
-            const topBarWindow = document.getElementById('top-bar-window');
+            const topBarWindow = document.getElementById('main-control-window');
             const contentContainer = topBarWindow.querySelector('.window-content-container');
             if (!contentContainer || !topBarWindow) return;
 
@@ -26,7 +26,7 @@ export function setupGlobalEventListeners() {
             if (isMinimized) {
                 // Restore
                 contentContainer.style.display = '';
-                topBarWindow.style.width = topBarWindow.dataset.originalWidth || '1100px';
+                topBarWindow.style.width = topBarWindow.dataset.originalWidth || 'auto';
                 topBarWindow.style.minHeight = '';
                 if (topBarWindow.dataset.originalHeight) topBarWindow.style.height = topBarWindow.dataset.originalHeight;
                 if (window.windowManager) window.windowManager._constrainAllWindows();

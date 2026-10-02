@@ -1,6 +1,6 @@
 import { state } from '../state.js';
 import { showModal } from '../ui.js';
-import { updateTopbar } from './topbar.js';
+import { updateMainControl } from './mainControl.js';
 import { getDailyChallengesHtml } from './dailyChallenges.js';
 import { getCapacity, getCurrentCount } from '../mathEngine.js';
 
@@ -144,7 +144,7 @@ export function claimDailyReward(dayIndex) {
     state.stats.dailyRewards.daysClaimed++;
 
     // Refresh UI
-    updateTopbar();
+    updateMainControl();
     if (document.getElementById('window-calendar') && document.getElementById('window-calendar').offsetParent !== null) showCalendar();
 }
 
@@ -163,8 +163,8 @@ export function showCalendar(tab = 'activities') {
     if (state.stats.dailyChallenges) {
         state.stats.dailyChallenges.hasSeenNotification = true;
     }
-    if (typeof window.updateTopbar === 'function') {
-        window.updateTopbar();
+    if (typeof window.updateMainControl === 'function') {
+        window.updateMainControl();
     }
 
     let html = `<div style="display: flex; flex-direction: column; width: 100%; height: 100%; box-sizing: border-box;">`;
