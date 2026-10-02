@@ -60,6 +60,7 @@ export const state = {
         newRoutes: [],
         hasUnseenMap: false,
         hasSeenJohtoMap: false,
+        hasPickedJohtoStarter: false,
         upgrades: {
             ballsTier: 0,
             potionsTier: 0,
