@@ -1134,6 +1134,50 @@ window.showOakLabModal = function() {
     }
 };
 
+export function renderJohtoOakLab() {
+    const johtoOakLabContent = document.getElementById("johto-oak-lab-content");
+    if (!johtoOakLabContent) return;
+
+    if (!state.stats.hasPickedJohtoStarter) {
+        // Show starter selection
+        johtoOakLabContent.innerHTML = `
+            <div style="background-color: rgba(0,0,0,0.8); display: inline-block; padding: 30px; margin-top: 50px; border-radius: 8px;">
+                <h2>Choose your Starter Pokémon</h2>
+                <div class="starter-choices">
+                  <button onclick="window.selectJohtoStarter(1)">
+                    <img src="Assets/Pokemon Sprites/Natural/1.png" style="width: 80px; height: 80px;"><br>Bulbasaur
+                  </button>
+                  <button onclick="window.selectJohtoStarter(4)">
+                    <img src="Assets/Pokemon Sprites/Natural/4.png" style="width: 80px; height: 80px;"><br>Charmander
+                  </button>
+                  <button onclick="window.selectJohtoStarter(7)">
+                    <img src="Assets/Pokemon Sprites/Natural/7.png" style="width: 80px; height: 80px;"><br>Squirtle
+                  </button>
+                </div>
+            </div>
+        `;
+    } else {
+        // Show assignments
+        let exclamationHtml = state.stats.showOakLobbyNotification
+            ? `<img src="Assets/Extra/ExclamationMark.png" style="position: absolute; top: -5px; right: -5px; width: 20px; height: auto; pointer-events: none; z-index: 10;">`
+            : ``;
+
+        johtoOakLabContent.innerHTML = `
+            <div style="background-color: rgba(0,0,0,0.85); display: inline-block; padding: 20px; margin-top: 20px; border-radius: 8px; width: 400px; color: white; text-align: center;">
+                <h2 style="margin-top:0;">Professor Elm Lab</h2>
+                <p style="font-size: 12px; color: #ccc; margin-bottom: 15px;">Complete assignments to unlock global bonuses.</p>
+
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <div style="position: relative; display: inline-block; width: 100%;">
+                        <button onclick="window.showOakLabModal()" style="width: 100%; box-sizing: border-box; padding: 10px; font-size: 12px; cursor: pointer;">Assignments and Boosters</button>
+                        ${exclamationHtml}
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+}
+
 export function renderOakLab() {
     const oakLabDiv = document.getElementById("view-prof-oak-lab");
     if (!oakLabDiv) return;
@@ -1194,6 +1238,9 @@ export function switchView(viewName) {
         document.getElementById('view-prof-oak-lab').style.display = 'block';
         showOakTutorialIfNeeded();
         renderOakLab();
+    } else if (viewName === 'JOHTO_OAK_LAB') {
+        document.getElementById('view-johto-oak-lab').style.display = 'block';
+        renderJohtoOakLab();
     } else if (viewName === 'SAFARI_HUB') {
         document.getElementById('view-safari-hub').style.display = 'flex';
     } else if (viewName === 'BATTLE_ARENA') {
@@ -1238,7 +1285,7 @@ export function updateUI() {
 }
 
 async function loadConfigs() {
-    const [pokemonData, routes, gyms, balance, moves, types, mapCoordinates] = await Promise.all([
+    const [pokemonData, routes, gyms, balance, moves, types, mapCoordinates, johtoMapCoordinates] = await Promise.all([
       import('../config/pokemonData.js').then(m => m.default),
       import('../config/routes.js').then(m => m.routes),
       import('../config/gyms.js').then(m => m.default),
@@ -1246,6 +1293,7 @@ async function loadConfigs() {
       import('../config/moves.js').then(m => m.default),
       import('../config/types.js').then(m => m.default),
       import('../config/mapCoordinates.js').then(m => m.default),
+      import('../config/johtoMapCoordinates.js').then(m => m.default),
     ]);
 
     state.config.pokemonData = pokemonData;
@@ -1257,6 +1305,61 @@ async function loadConfigs() {
     state.config.moves = moves;
     state.config.types = types;
     state.config.mapCoordinates = mapCoordinates;
+    state.config.johtoMapCoordinates = johtoMapCoordinates;
+}
+
+window.selectJohtoStarter = selectJohtoStarter;
+function selectJohtoStarter(id) {
+    if (state.stats.hasPickedJohtoStarter) return;
+
+    const pData = state.config.pokemonData.find(p => p.id === id);
+    const q = 1.40; // Fixed Rare
+    const qName = "Rare";
+    const ivs = {hp: 50, atk: 50, def: 50, spa: 50, spd: 50, spe: 50};
+    const level = 1;
+
+    const stats = {
+        hp: mathEngine.calculateHP(pData.hp, ivs.hp, level, q),
+        atk: mathEngine.calculateStat(pData.atk, ivs.atk, level, q),
+        def: mathEngine.calculateStat(pData.def, ivs.def, level, q),
+        spa: mathEngine.calculateStat(pData.spa, ivs.spa, level, q),
+        spd: mathEngine.calculateStat(pData.spd, ivs.spd, level, q),
+        spe: mathEngine.calculateStat(pData.spe, ivs.spe, level, q),
+    };
+
+    const bst = pData.hp + pData.atk + pData.def + pData.spa + pData.spd + pData.spe;
+
+    const starter = {
+        id: pData.id,
+        name: pData.name,
+        types: pData.types,
+        level: level,
+        xp: 0,
+        qualityName: qName,
+        quality: q,
+        ivs: ivs,
+        currentStats: stats,
+        maxHp: stats.hp,
+        currentHp: stats.hp,
+        bst: bst,
+        evxp: mathEngine.calculateEVXP(bst, level, q, ivs.hp + ivs.atk + ivs.def + ivs.spa + ivs.spd + ivs.spe),
+        evm: mathEngine.calculateEVM(bst, level, q, ivs.hp + ivs.atk + ivs.def + ivs.spa + ivs.spd + ivs.spe),
+        pp: mathEngine.calculatePP(bst, level, q, ivs.hp + ivs.atk + ivs.def + ivs.spa + ivs.spd + ivs.spe),
+        moves: [{name: "Tackle", power: 40, type: "Normal", category: "Physical"}] // Basic start
+    };
+
+    if (state.party.length < 6) {
+        state.party.push(starter);
+    } else {
+        state.storage.push(starter);
+    }
+
+    state.stats.hasPickedJohtoStarter = true;
+    storage.save(state);
+
+    // Refresh UI
+    updateSidebar();
+    renderJohtoOakLab();
 }
 
 window.selectStarter = selectStarter;
