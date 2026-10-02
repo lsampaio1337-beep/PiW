@@ -65,11 +65,9 @@ export function showMap() {
     if (isFinalChallengeCompleted) {
         let exclamationHtml = !state.stats.hasSeenJohtoMap ? `<img src="Assets/Extra/ExclamationMark.png" style="position: absolute; top: -5px; right: -5px; width: 15px; height: auto; pointer-events: none; z-index: 10;">` : '';
         regionButtonsHtml = `
-            <div style="display: flex; justify-content: center; margin-bottom: 10px;">
-                <div style="display: inline-flex; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px;">
-                    <button onclick="window.switchMapRegion('Kanto')" style="${window.currentMapRegion === 'Kanto' ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s; position: relative;" onmousedown="event.stopPropagation()">Kanto</button>
-                    <button onclick="window.switchMapRegion('Johto')" style="${window.currentMapRegion === 'Johto' ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s; position: relative;" onmousedown="event.stopPropagation()">Johto${exclamationHtml}</button>
-                </div>
+            <div style="display: inline-flex; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px;">
+                <button onclick="window.switchMapRegion('Kanto')" style="${window.currentMapRegion === 'Kanto' ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s; position: relative;" onmousedown="event.stopPropagation()">Kanto</button>
+                <button onclick="window.switchMapRegion('Johto')" style="${window.currentMapRegion === 'Johto' ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s; position: relative;" onmousedown="event.stopPropagation()">Johto${exclamationHtml}</button>
             </div>
         `;
     }
@@ -77,7 +75,6 @@ export function showMap() {
     let mapImage = window.currentMapRegion === 'Johto' ? './Assets/Map/2 Johto Map.png' : './Assets/Map/Kanto Map.png';
 
     let html = `
-        ${regionButtonsHtml}
         <div id="interactive-map" style="position: relative; width: 100%; aspect-ratio: 16/11; background-image: url('${mapImage}'); background-size: 100% 100%; background-repeat: no-repeat; background-position: center;">
     `;
 
@@ -167,9 +164,19 @@ export function showMap() {
         </div>
     `;
 
+    let titleHtml = `
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
+            <div style="font-weight: bold; font-size: 18px; color: white;">Map</div>
+            ${regionButtonsHtml}
+        </div>
+    `;
 
     if (window.showModal) {
-        window.showModal('Map', html, 'window-map');
+        if (isFinalChallengeCompleted) {
+            window.showModal(titleHtml, html, 'window-map');
+        } else {
+            window.showModal('Map', html, 'window-map');
+        }
     }
 }
 
