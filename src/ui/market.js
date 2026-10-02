@@ -82,6 +82,11 @@ export function openPokeMarketBuy() {
     const overlay = document.getElementById('main-view-inner-modal-overlay');
     const title = document.getElementById('main-view-inner-modal-title');
     const content = document.getElementById('main-view-inner-modal-content');
+    const moneyDisplay = document.getElementById('inner-modal-money-display');
+    if (moneyDisplay) {
+        moneyDisplay.textContent = `$ ${state.trainer.money.toLocaleString()}`;
+        moneyDisplay.style.display = 'block';
+    }
 
     const titleHtml = `
         <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
@@ -413,8 +418,10 @@ export function newBuyItem(itemId, baseCost, category, upgradeType = null) {
         }
 
         updateUI();
-        const moneyLabel = document.getElementById('market-trainer-money');
-        if (moneyLabel) moneyLabel.textContent = state.trainer.money.toLocaleString();
+        const moneyDisplay = document.getElementById('inner-modal-money-display');
+        if (moneyDisplay) {
+            moneyDisplay.textContent = `$ ${state.trainer.money.toLocaleString()}`;
+        }
         window.showGameAlert(`Bought ${qty.toLocaleString()}x ${itemId} for ${totalCost.toLocaleString()}!`, getMarketAlertTarget());
         renderPokeMarketTab(category);
     } else {
@@ -426,11 +433,6 @@ export function newBuyItem(itemId, baseCost, category, upgradeType = null) {
 export function openPokeMarketSell() {
     const html = `
         <div id="market-sell-wrapper" style="display: flex; flex-direction: column; width: 100%; height: 100%; margin-top: 0px; --m-width: min(90vw, 825px);">
-
-
-            <div style="padding-top: calc(var(--m-width) * 0.02); margin-bottom: calc(var(--m-width) * 0.015); display: flex; align-items: center; justify-content: center; gap: calc(var(--m-width) * 0.012);">
-                <label style="font-weight: bold; font-size: calc(var(--m-width) * 0.022); color: #2ecc71;">$<span id="market-trainer-money-sell">${state.trainer.money.toLocaleString()}</span></label>
-            </div>
 
             <div id="market-pokemon-sell-controls" style="display: none; flex-direction: column; align-items: center; justify-content: center; margin-bottom: calc(var(--m-width) * 0.015); gap: calc(var(--m-width) * 0.012);">
                 <div style="font-size: calc(var(--m-width) * 0.022); font-weight: bold; color: white;">Selected: <span id="market-pokemon-sell-count">0</span> | Total: $<span id="market-pokemon-sell-total">0</span> <span onclick="if(window.toggleMarketPokemonFilters) window.toggleMarketPokemonFilters()" style="cursor: pointer; user-select: none;">🔍</span></div>
@@ -477,6 +479,11 @@ export function openPokeMarketSell() {
     const overlay = document.getElementById('main-view-inner-modal-overlay');
     const title = document.getElementById('main-view-inner-modal-title');
     const content = document.getElementById('main-view-inner-modal-content');
+    const moneyDisplay = document.getElementById('inner-modal-money-display');
+    if (moneyDisplay) {
+        moneyDisplay.textContent = `$ ${state.trainer.money.toLocaleString()}`;
+        moneyDisplay.style.display = 'block';
+    }
 
     const titleHtml = `
         <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
@@ -799,9 +806,9 @@ export function sellMarketItem(itemId, baseSellPrice, category) {
         state.trainer.money += totalValue;
 
         if (window.updateUI) window.updateUI();
-        const moneyLabel = document.getElementById('market-trainer-money-sell');
-        if (moneyLabel) {
-            moneyLabel.textContent = state.trainer.money.toLocaleString();
+        const moneyDisplay = document.getElementById('inner-modal-money-display');
+        if (moneyDisplay) {
+            moneyDisplay.textContent = `$ ${state.trainer.money.toLocaleString()}`;
         }
 
         if(window.showGameAlert) window.showGameAlert(`Sold ${formatMarketNumber(qty)}x ${itemId} for ${formatMarketNumber(totalValue)}!`, getMarketAlertTarget());
@@ -948,9 +955,9 @@ window.marketSellSelectedPokemon = function() {
 
     if (window.updateUI) window.updateUI();
 
-    const moneyLabel = document.getElementById('market-trainer-money-sell');
-    if (moneyLabel) {
-        moneyLabel.textContent = state.trainer.money.toLocaleString();
+    const moneyDisplay = document.getElementById('inner-modal-money-display');
+    if (moneyDisplay) {
+        moneyDisplay.textContent = `$ ${state.trainer.money.toLocaleString()}`;
     }
 
     updateMarketPokemonSellCount();
