@@ -78,7 +78,7 @@ export function openPokeMarketBuy() {
     const content = document.getElementById('main-view-inner-modal-content');
     const moneyDisplay = document.getElementById('inner-modal-money-display');
     if (moneyDisplay) {
-        moneyDisplay.textContent = `$: ${state.trainer.money.toLocaleString()}`;
+        moneyDisplay.textContent = `$ ${state.trainer.money.toLocaleString()}`;
         moneyDisplay.style.display = 'block';
     }
 
@@ -414,7 +414,7 @@ export function newBuyItem(itemId, baseCost, category, upgradeType = null) {
         updateUI();
         const moneyDisplay = document.getElementById('inner-modal-money-display');
         if (moneyDisplay) {
-            moneyDisplay.textContent = `$: ${state.trainer.money.toLocaleString()}`;
+            moneyDisplay.textContent = `$ ${state.trainer.money.toLocaleString()}`;
         }
         window.showGameAlert(`Bought ${qty.toLocaleString()}x ${itemId} for ${totalCost.toLocaleString()}!`, getMarketAlertTarget());
         renderPokeMarketTab(category);
@@ -475,7 +475,7 @@ export function openPokeMarketSell() {
     const content = document.getElementById('main-view-inner-modal-content');
     const moneyDisplay = document.getElementById('inner-modal-money-display');
     if (moneyDisplay) {
-        moneyDisplay.textContent = `$: ${state.trainer.money.toLocaleString()}`;
+        moneyDisplay.textContent = `$ ${state.trainer.money.toLocaleString()}`;
         moneyDisplay.style.display = 'block';
     }
 
@@ -784,7 +784,7 @@ export function sellMarketItem(itemId, baseSellPrice, category) {
         if (window.updateUI) window.updateUI();
         const moneyDisplay = document.getElementById('inner-modal-money-display');
         if (moneyDisplay) {
-            moneyDisplay.textContent = `$: ${state.trainer.money.toLocaleString()}`;
+            moneyDisplay.textContent = `$ ${state.trainer.money.toLocaleString()}`;
         }
 
         if(window.showGameAlert) window.showGameAlert(`Sold ${formatMarketNumber(qty)}x ${itemId} for ${formatMarketNumber(totalValue)}!`, getMarketAlertTarget());
@@ -910,7 +910,7 @@ window.marketSellSelectedPokemon = function() {
 
     const moneyDisplay = document.getElementById('inner-modal-money-display');
     if (moneyDisplay) {
-        moneyDisplay.textContent = `$: ${state.trainer.money.toLocaleString()}`;
+        moneyDisplay.textContent = `$ ${state.trainer.money.toLocaleString()}`;
     }
 
     updateMarketPokemonSellCount();
