@@ -716,7 +716,7 @@ export class WindowManager {
         const header = document.getElementById(windowId + '-header');
         if (header && title) {
             header.style.position = 'relative';
-            header.innerHTML = `${title}<span onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('${windowId}')" style="position: absolute; top: 10px; right: 10px; cursor: pointer; color: white; font-weight: bold; font-size: 16px; padding: 5px; z-index: 10;">X</span>`;
+            header.innerHTML = `${title}<span onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('${windowId}')" style="position: absolute; top: 5px; right: 5px; font-size: 12px; font-weight: bold; line-height: 1; padding: 0; cursor: pointer; color: white; z-index: 10;">X</span>`;
         }
 
         const contentPanel = document.getElementById(windowId + '-content');
