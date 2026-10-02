@@ -226,9 +226,10 @@ export class WindowManager {
         document.addEventListener('mousemove', (e) => {
             if (!isResizing) return;
             const dx = e.clientX - startX;
-            const dy = e.clientY - startY;
+            // Since it needs to be proportional, we will use dx to change both width and height based on original aspect ratio
+            const originalRatio = startWidth / startHeight;
             let newWidth = Math.max(200, startWidth + dx);
-            let newHeight = Math.max(100, startHeight + dy);
+            let newHeight = newWidth / originalRatio;
 
             winElement.style.width = newWidth + 'px';
             winElement.style.height = newHeight + 'px';
