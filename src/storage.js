@@ -32,14 +32,92 @@ export default class Storage {
         }
     }
 
+
+    migrateToRegions(profileData) {
+        if (!profileData) return profileData;
+        if (profileData.regions && profileData.activeRegion) {
+            return profileData; // Already migrated
+        }
+
+        console.log("Migrating save file to support Regions...");
+
+        // Start with a clone of the old data to pull global things
+        let newData = JSON.parse(JSON.stringify(profileData));
+
+        // Create the region structure
+        newData.activeRegion = 'Kanto';
+        newData.regions = {
+            Kanto: {},
+            Johto: {
+                trainer: { money: 0, badges: 0, tokens: 0 },
+                party: [], box: [], storage: [], safe: [], breeding: [], training: [],
+                backpack: {
+                    pokeballs: { "Pokeball": 0, "Greatball": 0, "Ultraball": 0, "Safariball": 0, "Masterball": 0 },
+                    potions: { "Tiny Potion": 0, "Small Potion": 0, "Regular Potion": 0, "Big Potion": 0, "Huge Potion": 0, "Ultra Potion": 0 },
+                    stones: { "Normal Stone": 0, "Fire Stone": 0, "Water Stone": 0, "Grass Stone": 0, "Electric Stone": 0, "Ice Stone": 0, "Fighting Stone": 0, "Poison Stone": 0, "Ground Stone": 0, "Flying Stone": 0, "Psychic Stone": 0, "Bug Stone": 0, "Rock Stone": 0, "Ghost Stone": 0, "Dragon Stone": 0, "Steel Stone": 0, "Dark Stone": 0, "Fairy Stone": 0 }
+                },
+                stats: {
+                    battlesWon: 0, caught: 0, shiniesSeen: 0, shiniesCaught: 0, faints: 0, completedChallenges: 0,
+                    activeChallenges: ["Route 1"], completedChallengeIds: [],
+                    qTaskTier: 0, cTaskTier: 0, shinySeenTaskTier: 0, shinyCaughtTaskTier: 0, levelTaskTier: 0,
+                    caughtLvl15: 0, caughtLvl30: 0, caughtLvl45: 0, caughtLvl60: 0, caughtLvl75: 0, ivTaskTier: 0,
+                    bonusCandyDefeats: 0, whiteCandies: 0, greenCandies: 0, purpleCandies: 0, blackYellowCandies: 0, rainbowCandies: 0, candyPurchaseHistory: [],
+                    dailyRewards: { daysClaimed: 0, lastClaimDate: null }, dailyChallenges: { lastDate: null, rotationIndex: 0, active: [], totalCompleted: 0 },
+                    jigglypuffGrains: 0, jigglypuffGrainsUsed: 0, hasSeenOakTutorial: false, hasSeenZzZTutorial: false, newRoutes: [], hasPickedStarter: false,
+                    upgrades: { ballsTier: 0, potionsTier: 0, boxTier: 0, glassTier: 0, smartwatchTier: 0, speedTier: 0, lootTier: 0 },
+                    upgradesUnlocked: { balls: false, potions: false, box: false, glass: true, smartwatch: false, speed: false, loot: false }
+                },
+                currentRoute: "Route 1"
+            }
+        };
+
+        // Move all root-level regional data into Kanto
+        const regionKeys = ['trainer', 'party', 'box', 'storage', 'safe', 'breeding', 'training', 'backpack', 'currentRoute'];
+        for (let key of regionKeys) {
+            if (profileData[key] !== undefined) {
+                newData.regions.Kanto[key] = profileData[key];
+                // Keep it at root too so the game can access it directly
+            }
+        }
+
+        // Migrate stats. Some go global, some stay in region (Kanto)
+        if (profileData.stats) {
+            newData.globalStats = {
+                playtime: profileData.stats.playtime || 0,
+                tokensEarned: profileData.stats.tokensEarned || 0,
+                hasSeenMultiplayerIcon: profileData.stats.hasSeenMultiplayerIcon || false,
+                hasUnseenMap: profileData.stats.hasUnseenMap || false,
+                hasSeenJohtoMap: profileData.stats.hasSeenJohtoMap || false
+            };
+
+            // Clean global stats out of Kanto's stats
+            let kantoStats = JSON.parse(JSON.stringify(profileData.stats));
+            delete kantoStats.playtime;
+            delete kantoStats.tokensEarned;
+            delete kantoStats.hasSeenMultiplayerIcon;
+            delete kantoStats.hasUnseenMap;
+            delete kantoStats.hasSeenJohtoMap;
+            kantoStats.hasPickedStarter = profileData.stats.hasPickedJohtoStarter || true; // they already played
+
+            newData.regions.Kanto.stats = kantoStats;
+
+            // Re-assign the cleaned Kanto stats to root so root reflects Kanto accurately
+            newData.stats = kantoStats;
+        }
+
+        return newData;
+    }
+
     getProfileData(profileId) {
         try {
             const data = window.localStorage.getItem(profileId);
-            return data ? JSON.parse(data) : null;
+            let parsed = data ? JSON.parse(data) : null;
+            return this.migrateToRegions(parsed);
         } catch (e) {
             return null;
         }
     }
+
 
     deleteProfile(profileId) {
         try {
@@ -79,13 +157,25 @@ export default class Storage {
         return newProfileId;
     }
 
+
     save(state) {
         if (!this.currentProfileId) {
             console.error("Cannot save: No current profile selected.");
             return;
         }
         try {
+            // Before saving, ensure the active region's data in the root is synced back to its region slot
+            if (state.activeRegion && state.regions && state.regions[state.activeRegion]) {
+                const regionKeys = ['trainer', 'party', 'box', 'storage', 'safe', 'breeding', 'training', 'backpack', 'stats', 'currentRoute'];
+                for (let key of regionKeys) {
+                    if (state[key] !== undefined) {
+                        state.regions[state.activeRegion][key] = JSON.parse(JSON.stringify(state[key]));
+                    }
+                }
+            }
+
             // Simple replacer to avoid the specific dayCareRef circular issue and config without breaking legitimate duplicate objects
+
             const jsonString = JSON.stringify(state, (key, value) => {
                 if (key === 'config') return undefined;
                 if (key === 'dayCareRef') return undefined;

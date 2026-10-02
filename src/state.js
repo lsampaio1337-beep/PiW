@@ -1,4 +1,4 @@
-export const state = {
+export const REGION_TEMPLATE = {
     trainer: {
         money: 0,
         badges: 0,
@@ -26,9 +26,7 @@ export const state = {
         caught: 0,
         shiniesSeen: 0,
         shiniesCaught: 0,
-        playtime: 0,
         faints: 0,
-        tokensEarned: 0,
         completedChallenges: 0,
         activeChallenges: ["Route 1"],
         completedChallengeIds: [],
@@ -56,11 +54,8 @@ export const state = {
         jigglypuffGrainsUsed: 0,
         hasSeenOakTutorial: false,
         hasSeenZzZTutorial: false,
-        hasSeenMultiplayerIcon: false,
         newRoutes: [],
-        hasUnseenMap: false,
-        hasSeenJohtoMap: false,
-        hasPickedJohtoStarter: false,
+        hasPickedStarter: false,
         upgrades: {
             ballsTier: 0,
             potionsTier: 0,
@@ -80,6 +75,23 @@ export const state = {
             loot: false
         }
     },
+    currentRoute: "Route 1"
+};
+
+export const state = {
+    globalStats: {
+        playtime: 0,
+        tokensEarned: 0,
+        hasSeenMultiplayerIcon: false,
+        hasUnseenMap: false,
+        hasSeenJohtoMap: false
+    },
+    activeRegion: 'Kanto',
+    regions: {
+        Kanto: JSON.parse(JSON.stringify(REGION_TEMPLATE)),
+        Johto: JSON.parse(JSON.stringify(REGION_TEMPLATE))
+    },
+    ...JSON.parse(JSON.stringify(REGION_TEMPLATE)),
     settings: {
         gameSpeed: 1.0,
         autoPotion: true,
@@ -91,7 +103,6 @@ export const state = {
         smartCapture: {},
         smartCaptureShiny: {}
     },
-    currentRoute: "Route 1",
     config: {}
 };
 

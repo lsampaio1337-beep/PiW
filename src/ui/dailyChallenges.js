@@ -344,8 +344,8 @@ window.claimDailyChallengeToken = function(index) {
         active[index].claimed = true;
         if (!state.trainer.tokens) state.trainer.tokens = 0;
         state.trainer.tokens += 1;
-        if (!state.stats.tokensEarned) state.stats.tokensEarned = 0;
-        state.stats.tokensEarned += 1;
+        if (!state.globalStats.tokensEarned) state.globalStats.tokensEarned = 0;
+        state.globalStats.tokensEarned += 1;
         state.stats.dailyChallenges.totalCompleted++;
         if (typeof window.updateTopbar === 'function') window.updateTopbar();
         if (typeof showCalendar === 'function' && document.getElementById('window-calendar') && document.getElementById('window-calendar').offsetParent !== null) showCalendar(); // Refresh UI
