@@ -425,7 +425,7 @@ export function newBuyItem(itemId, baseCost, category, upgradeType = null) {
 
 export function openPokeMarketSell() {
     const html = `
-        <div id="market-sell-wrapper" style="display: flex; flex-direction: column; width: 100%; height: 100%; margin-top: 0px; --m-width: min(90vw, 825px);">
+        <div id="market-sell-wrapper" style="display: flex; flex-direction: column; width: 100%; height: 100%; margin-top: 0px; overflow-y: auto; --m-width: min(90vw, 825px);">
 
 
             <div style="padding-top: calc(var(--m-width) * 0.02); margin-bottom: calc(var(--m-width) * 0.015); display: flex; align-items: center; justify-content: center; gap: calc(var(--m-width) * 0.012);">
@@ -466,7 +466,7 @@ export function openPokeMarketSell() {
                 </div>
             </div>
 
-            <div id="market-sell-content" style="display: flex; flex-wrap: wrap; gap: calc(var(--m-width) * 0.018); justify-content: center; overflow-y: auto; flex: 1; padding: calc(var(--m-width) * 0.012);">
+            <div id="market-sell-content" style="display: flex; flex-wrap: wrap; gap: calc(var(--m-width) * 0.018); justify-content: center; padding: calc(var(--m-width) * 0.012);">
                 <!-- Cards injected here -->
             </div>
         </div>
