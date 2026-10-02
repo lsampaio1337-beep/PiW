@@ -45,9 +45,7 @@ export class WindowManager {
         const resizeHandle = winElement.querySelector('.window-resize-handle');
         const contentScaler = winElement.querySelector('.window-content-scaler');
 
-        if (winElement.dataset.widthOnly === 'true' && resizeHandle) {
-            this._setupWidthOnlyResize(winElement, resizeHandle, headerElement);
-        } else if (resizeHandle && contentScaler) {
+        if (resizeHandle && contentScaler) {
             this._setupResize(winElement, resizeHandle, contentScaler, headerElement);
         }
 
@@ -344,6 +342,13 @@ export class WindowManager {
             e.preventDefault();
         });
 
+        const updateDimsDisplay = () => {
+            const dimsDisplay = headerElement ? headerElement.querySelector('.window-dims-display') : null;
+            if (dimsDisplay) {
+                dimsDisplay.innerText = `${winElement.offsetWidth}x${winElement.offsetHeight}`;
+            }
+        };
+
         document.addEventListener('mousemove', (e) => {
             if (!isResizing) return;
 
@@ -380,6 +385,8 @@ export class WindowManager {
                 }
 
                 scalerElement.style.transform = `scale(${scale})`;
+
+                updateDimsDisplay();
             }
         });
 
@@ -393,63 +400,22 @@ export class WindowManager {
 
         const observer = new MutationObserver((mutations) => {
             mutations.forEach((mutation) => {
-                if (mutation.attributeName === 'style' && winElement.style.display !== 'none' && !winElement._originalWidth) {
-                    setTimeout(initDims, 50);
+                if (mutation.attributeName === 'style') {
+                    if (winElement.style.display !== 'none' && !winElement._originalWidth) {
+                        setTimeout(initDims, 50);
+                    }
+                    updateDimsDisplay();
                 }
             });
         });
         observer.observe(winElement, { attributes: true });
 
-        setTimeout(initDims, 100);
-    }
-
-    _setupWidthOnlyResize(winElement, handleElement, headerElement) {
-        let isResizing = false;
-        let startX;
-        let startWidth;
-
-        const updateDimsDisplay = () => {
-            const dimsDisplay = headerElement.querySelector('.window-dims-display');
-            if (dimsDisplay) {
-                dimsDisplay.innerText = `${winElement.offsetWidth}x${winElement.offsetHeight}`;
-            }
-        };
-
-        handleElement.addEventListener('mousedown', (e) => {
-            isResizing = true;
-            startX = e.clientX;
-            startWidth = winElement.offsetWidth;
-
-            this.focusWindow(winElement);
-            e.stopPropagation();
-            e.preventDefault();
-        });
-
-        document.addEventListener('mousemove', (e) => {
-            if (!isResizing) return;
-
-            const dx = e.clientX - startX;
-            let newWidth = Math.max(200, startWidth + dx); // minimum width 200px
-
-            // max width screen boundary
-            let maxW = this.containerWidth;
-            if (newWidth > maxW) newWidth = maxW;
-
-            winElement.style.width = newWidth + 'px';
+        setTimeout(() => {
+            initDims();
             updateDimsDisplay();
-        });
-
-        document.addEventListener('mouseup', () => {
-            if (isResizing) {
-                isResizing = false;
-                this._constrainAllWindows();
-                this.saveWindowData(winElement.id);
-            }
-        });
-
-        // Initialize dims on start
-        setTimeout(updateDimsDisplay, 100);
+        }, 100);
     }
+
 
     setWindowProportions(windowId, widthToHeightRatio) {
         const winElement = document.getElementById(windowId);
@@ -522,27 +488,7 @@ export class WindowManager {
         if (!winElement) return;
 
         const scalerElement = winElement.querySelector('.window-content-scaler');
-        if (!scalerElement) {
-            if (winElement.dataset.widthOnly === 'true') {
-                const contentContainer = winElement.querySelector('.window-content-container') || winElement;
-                const oldWidth = winElement.style.width;
-                contentContainer.style.width = 'max-content';
-                const newWidth = Math.ceil(contentContainer.getBoundingClientRect().width);
-                contentContainer.style.width = '';
-
-                let finalWidth = newWidth;
-                if (finalWidth > this.containerWidth) finalWidth = this.containerWidth;
-
-                winElement.style.width = finalWidth + 'px';
-                this.saveWindowData(windowId);
-
-                const dimsDisplay = winElement.querySelector('.window-dims-display');
-                if (dimsDisplay) {
-                    dimsDisplay.innerText = `${winElement.offsetWidth}x${winElement.offsetHeight}`;
-                }
-            }
-            return;
-        }
+        if (!scalerElement) return;
 
         // Briefly measure natural width of content without constraints
         const oldScale = scalerElement.style.transform;
@@ -581,7 +527,9 @@ export class WindowManager {
             // Initializing original width if it wasn't set yet
             scalerElement.style.setProperty('--original-width', newOriginalWidth + 'px');
             if (!oldWidth || oldWidth === 'auto') {
-                winElement.style.width = Math.max(1100, newOriginalWidth) + 'px';
+                // If it's top-bar-window, let's keep it at 750px initially instead of 1100
+                const initialW = windowId === 'top-bar-window' ? 750 : 1100;
+                winElement.style.width = Math.max(initialW, newOriginalWidth) + 'px';
             }
         }
 
