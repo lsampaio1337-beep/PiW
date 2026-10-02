@@ -22,20 +22,53 @@ const parseAreaNames = (id) => {
     return result;
 };
 
+
 window.currentMapRegion = 'Kanto';
 
 window.switchMapRegion = function(region) {
-    if (region === 'Johto' && !state.stats.hasSeenJohtoMap) {
-        state.stats.hasSeenJohtoMap = true;
+    if (region === 'Johto' && !state.globalStats.hasSeenJohtoMap) {
+        state.globalStats.hasSeenJohtoMap = true;
         updateUI(); // to clear the top bar map exclamation mark
     }
     window.currentMapRegion = region;
+
+    // Swap game logic
+    if (state.activeRegion !== region) {
+        // 1. Save current root data back to its region slot
+        if (state.activeRegion && state.regions && state.regions[state.activeRegion]) {
+            const regionKeys = ['trainer', 'party', 'box', 'storage', 'safe', 'breeding', 'training', 'backpack', 'stats', 'currentRoute'];
+            for (let key of regionKeys) {
+                if (state[key] !== undefined) {
+                    state.regions[state.activeRegion][key] = JSON.parse(JSON.stringify(state[key]));
+                }
+            }
+        }
+
+        // 2. Load the new region into the root
+        state.activeRegion = region;
+        const regionKeys = ['trainer', 'party', 'box', 'storage', 'safe', 'breeding', 'training', 'backpack', 'stats', 'currentRoute'];
+        for (let key of regionKeys) {
+            state[key] = JSON.parse(JSON.stringify(state.regions[region][key]));
+        }
+
+        // Save immediately to persist the swap
+        if (window.storageRef) window.storageRef.save(state);
+    }
+
+    if (region === 'Johto' && !state.stats.hasPickedStarter) {
+        switchView("PROF_OAK_LAB");
+    } else {
+        switchView(state.currentRoute);
+    }
+
+    updateUI();
     showMap();
 };
 
+
 export function showMap() {
-    if (state.stats.hasUnseenMap || state.stats.showMapOakNotification) {
-        state.stats.hasUnseenMap = false;
+    if (state.globalStats.hasUnseenMap || state.stats.showMapOakNotification) {
+        state.globalStats.hasUnseenMap = false;
         state.stats.showMapOakNotification = false;
         updateUI();
     }
@@ -63,7 +96,7 @@ export function showMap() {
     let isFinalChallengeCompleted = state.stats.completedChallengeIds && state.stats.completedChallengeIds.includes('Indigo Plateau');
     let regionButtonsHtml = '';
     if (isFinalChallengeCompleted) {
-        let exclamationHtml = !state.stats.hasSeenJohtoMap ? `<img src="Assets/Extra/ExclamationMark.png" style="position: absolute; top: -5px; right: -5px; width: 15px; height: auto; pointer-events: none; z-index: 10;">` : '';
+        let exclamationHtml = !state.globalStats.hasSeenJohtoMap ? `<img src="Assets/Extra/ExclamationMark.png" style="position: absolute; top: -5px; right: -5px; width: 15px; height: auto; pointer-events: none; z-index: 10;">` : '';
         regionButtonsHtml = `
             <div style="display: inline-flex; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px;">
                 <button onclick="window.switchMapRegion('Kanto')" style="${window.currentMapRegion === 'Kanto' ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s; position: relative;" onmousedown="event.stopPropagation()">Kanto</button>

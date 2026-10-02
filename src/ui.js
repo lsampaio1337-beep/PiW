@@ -179,7 +179,7 @@ window.completeChallenge = function(targetAreaId) {
         if (!state.stats.newRoutes.includes("Mythical and Legendaries")) {
             state.stats.newRoutes.push("Mythical and Legendaries");
         }
-        state.stats.hasUnseenMap = true;
+        state.globalStats.hasUnseenMap = true;
         updateUI();
         const challengeWin = document.getElementById('window-challenges');
         if (challengeWin && challengeWin.style.display !== 'none') {
@@ -225,7 +225,7 @@ window.completeChallenge = function(targetAreaId) {
                 }
             }
             if (unlock.unlocks.length > 0) {
-                state.stats.hasUnseenMap = true;
+                state.globalStats.hasUnseenMap = true;
             }
         }
     }
@@ -1138,7 +1138,7 @@ export function renderJohtoOakLab() {
     const johtoOakLabContent = document.getElementById("johto-oak-lab-content");
     if (!johtoOakLabContent) return;
 
-    if (!state.stats.hasPickedJohtoStarter) {
+    if (!state.stats.hasPickedStarter) {
         // Show starter selection
         johtoOakLabContent.innerHTML = `
             <div style="background-color: rgba(0,0,0,0.8); display: inline-block; padding: 30px; margin-top: 50px; border-radius: 8px;">
@@ -1310,7 +1310,7 @@ async function loadConfigs() {
 
 window.selectJohtoStarter = selectJohtoStarter;
 function selectJohtoStarter(id) {
-    if (state.stats.hasPickedJohtoStarter) return;
+    if (state.stats.hasPickedStarter) return;
 
     const pData = state.config.pokemonData.find(p => p.id === id);
     const q = 1.40; // Fixed Rare
@@ -1354,7 +1354,7 @@ function selectJohtoStarter(id) {
         state.storage.push(starter);
     }
 
-    state.stats.hasPickedJohtoStarter = true;
+    state.stats.hasPickedStarter = true;
     storage.save(state);
 
     // Refresh UI
@@ -1486,8 +1486,8 @@ window.restartGameClock = function() {
 function gameClockTick() {
     const speed = (state.settings && state.settings.gameSpeed) || 1;
 
-    if (!state.stats.playtime) state.stats.playtime = 0;
-    state.stats.playtime++;
+    if (!state.globalStats.playtime) state.globalStats.playtime = 0;
+    state.globalStats.playtime++;
 
     if (state.currentView === "BATTLE_ARENA") {
         state.stats.battleModeTimer = (state.stats.battleModeTimer || 0) + 1;
@@ -1498,17 +1498,17 @@ function gameClockTick() {
     }
 
     // Award Jigglypuff Dust grains (1 grain per minute)
-    if (state.stats.playtime % 60 === 0 && state.stats.playtime > 0) {
+    if (state.globalStats.playtime % 60 === 0 && state.globalStats.playtime > 0) {
         state.stats.jigglypuffGrains = (state.stats.jigglypuffGrains || 0) + 1;
         updateUI(); // Reflect new grains
     }
 
     // Daily Challenge Check
-    if (state.stats.playtime % 10 === 0) {
+    if (state.globalStats.playtime % 10 === 0) {
         checkAndResetDailyChallenges();
     }
 
-    if (state.stats.playtime === 60) {
+    if (state.globalStats.playtime === 60) {
         updateTopbar();
     }
 
@@ -1649,7 +1649,7 @@ async function init() {
     const startNewGame = () => {
         state.stats.hasSeenOakTutorial = false;
         state.stats.hasSeenGiftIcon = false;
-        state.stats.hasSeenMultiplayerIcon = false;
+        state.globalStats.hasSeenMultiplayerIcon = false;
         state.stats.hasSeenZzZTutorial = false;
         if (splashScreen) splashScreen.style.display = 'none';
         if (saveManagerModal) window.windowManager.toggleWindow('save-manager-modal', false);
@@ -2154,7 +2154,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
 
     bindBtn('btn-toggle-party', () => { window.windowManager.toggleWindow('party-window'); });
     bindBtn('btn-multiplayer', () => {
-        state.stats.hasSeenMultiplayerIcon = true;
+        state.globalStats.hasSeenMultiplayerIcon = true;
         storage.save(state);
         updateTopbar();
         window.openMultiplayerModal();
@@ -2323,8 +2323,8 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
             }
 
             let playtimeStr = "0h 0m 0s";
-            if (state.stats.playtime) {
-                const totalSec = state.stats.playtime;
+            if (state.globalStats.playtime) {
+                const totalSec = state.globalStats.playtime;
                 const h = Math.floor(totalSec / 3600);
                 const m = Math.floor((totalSec % 3600) / 60);
                 const s = totalSec % 60;
@@ -2410,7 +2410,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
                             </div>
                             <div style="flex: 1;">
                                 <p><b>White Candies Claimed:</b> ${(whiteCandiesClaimed || 0).toLocaleString()}</p>
-                                <p><b>Daily Tokens Earned:</b> ${(state.stats.tokensEarned || 0).toLocaleString()}</p>
+                                <p><b>Daily Tokens Earned:</b> ${(state.globalStats.tokensEarned || 0).toLocaleString()}</p>
                                 <p><b>Progress Challenge Completed:</b> ${challengesCompleted}/${maxChallenges}</p>
                             </div>
                         </div>
