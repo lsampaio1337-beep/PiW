@@ -22,15 +22,15 @@ window.dismissDaycareMessage = function() {
 };
 
 const oakTutorialMessages = [
-    "Hello, Trainer!\nHere I will give you some tips for introduce you to game.\nDo you want a tutorial guide to help you understand better the game or do you want to skip and start the game?",
-    "This game runs only on the Main Control Tab.\nIt is in there that you will open and close all modules\nThis module you are seeing it is called “Main View” and it will display all the visual when battling or shopping.",
-    "Icons are displayed in the Main Control Tab. You will be able to open modules with them.\nThe first two modules are “Main View” and “Team View”, and they will help when you are in battle mode.",
-    "Next set of icons will help you to play the game.\nMap will let you travel to different spots and places.\nBackpack will allow you to see items and Pokémons.\nPokedex with bring all info of Pokémons.\nTrainer have Statistics of the game.",
-    "Next set of icon are “Objectives Related”\nHere we have Daily Calendar. It will have daily challenges and rewards you each day you play. It also have a shop to spend Daily Tokens earned… Make sure to expend them on upgrades!\nNext is the Progress Challenges. Completing the Challenge grants a new spot to travel and may grant some gifts.",
-    "The last set of icons are related to settings.\nThe first is “Help”. In there you can find information about the whole game (with formulas).\n“Settings” will let you change configurations of the game.\nIf you want to leave game, just go to the “Exit” icon.",
-    "Along the gameplay, some new icons will appear in Main Control.\nBut don’t worry, you will be told what they are.",
-    "On maps you can find places that are HUB for interactions.\nYou are at “Professor Oak Lab” now, and I have some assignments for you… make sure to conclude them to earn boosts.",
-    "Now you are all set!\nIf you need more help, make sure to open the Help Module!\nHave fun and CATCH THEM ALL!"
+    "<p>Hello, Trainer!</p><p>Here I will give you some tips for introduce you to game.</p><p>Do you want a tutorial guide to help you understand better the game or do you want to skip and start the game?</p>",
+    "<p>This game runs only on the Main Control Tab.</p><p>It is in there that you will open and close all modules</p><p>This module you are seeing it is called “Main View” and it will display all the visual when battling or shopping.</p>",
+    "<p>Icons are displayed in the Main Control Tab. You will be able to open modules with them.</p><p>The first two modules are “Main View” and “Team View”, and they will help when you are in battle mode.</p>",
+    "<p>Next set of icons will help you to play the game.</p><p>Map will let you travel to different spots and places.</p><p>Backpack will allow you to see items and Pokémons.</p><p>Pokedex with bring all info of Pokémons.</p><p>Trainer have Statistics of the game.</p>",
+    "<p>Next set of icon are “Objectives Related”</p><p>Here we have Daily Calendar. It will have daily challenges and rewards you each day you play. It also have a shop to spend Daily Tokens earned… Make sure to expend them on upgrades!</p><p>Next is the Progress Challenges. Completing the Challenge grants a new spot to travel and may grant some gifts.</p>",
+    "<p>The last set of icons are related to settings.</p><p>The first is “Help”. In there you can find information about the whole game (with formulas).</p><p>“Settings” will let you change configurations of the game.</p><p>If you want to leave game, just go to the “Exit” icon.</p>",
+    "<p>Along the gameplay, some new icons will appear in Main Control.</p><p>But don’t worry, you will be told what they are.</p>",
+    "<p>On maps you can find places that are HUB for interactions.</p><p>You are at “Professor Oak Lab” now, and I have some assignments for you… make sure to conclude them to earn boosts.</p>",
+    "<p>Now you are all set!</p><p>If you need more help, make sure to open the Help Module!</p><p>Have fun and CATCH THEM ALL!</p>"
 ];
 let currentOakTutorialIndex = 0;
 
@@ -53,7 +53,7 @@ window.proceedOakTutorial = function() {
     }
 
     if (currentOakTutorialIndex < oakTutorialMessages.length) {
-        document.getElementById('oak-tutorial-text').innerText = oakTutorialMessages[currentOakTutorialIndex];
+        document.getElementById('oak-tutorial-text').innerHTML = oakTutorialMessages[currentOakTutorialIndex];
     }
 };
 
@@ -66,7 +66,7 @@ export function showOakTutorialIfNeeded() {
         const overlay = document.getElementById('oak-tutorial-overlay');
         if (overlay) {
             currentOakTutorialIndex = 0;
-            document.getElementById('oak-tutorial-text').innerText = oakTutorialMessages[currentOakTutorialIndex];
+            document.getElementById('oak-tutorial-text').innerHTML = oakTutorialMessages[currentOakTutorialIndex];
 
             // Reset buttons visibility
             document.getElementById('btn-oak-tutorial-skip').style.display = 'inline-block';
