@@ -58,17 +58,30 @@ export class WindowManager {
         }
     }
 
+
     toggleWindow(windowId, forceShow = false) {
         const winElement = document.getElementById(windowId);
         if (winElement) {
             if (forceShow || winElement.style.display === 'none') {
                 winElement.style.display = 'flex';
                 this.focusWindow(winElement);
+
+                if (!winElement.dataset.settingsLoaded) {
+                    winElement.dataset.settingsLoaded = 'true';
+                    if (window.state && window.state.settings && window.state.settings.windowSettings && window.state.settings.windowSettings[windowId]) {
+                        const savedSettings = window.state.settings.windowSettings[windowId];
+                        if (savedSettings.width) winElement.style.width = savedSettings.width;
+                        if (savedSettings.height) winElement.style.height = savedSettings.height;
+                        if (savedSettings.left) winElement.style.left = savedSettings.left;
+                        if (savedSettings.top) winElement.style.top = savedSettings.top;
+                    }
+                }
             } else {
                 winElement.style.display = 'none';
             }
         }
     }
+
 
 
 
@@ -517,7 +530,7 @@ export class WindowManager {
             // Initializing original width if it wasn't set yet
             scalerElement.style.setProperty('--original-width', newOriginalWidth + 'px');
             if (!oldWidth || oldWidth === 'auto') {
-                winElement.style.width = newOriginalWidth + 'px';
+                // Do not clamp the initial explicit width so the flexbox handles scaling gracefully during first load
             }
             winElement._originalWidth = newOriginalWidth;
             if (winElement._originalHeight) {
