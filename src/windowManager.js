@@ -545,9 +545,7 @@ export class WindowManager {
             winElement._originalWidth = newOriginalWidth;
             if (newOriginalHeight > 0) winElement._originalHeight = newOriginalHeight;
 
-            if (typeof winElement.resetResizeDims === 'function') {
-                winElement.resetResizeDims();
-            } else if (winElement._originalHeight) {
+            if (winElement._originalHeight) {
                 winElement._originalRatio = winElement._originalWidth / winElement._originalHeight;
             }
 
@@ -580,20 +578,17 @@ export class WindowManager {
             winElement._originalWidth = newOriginalWidth;
             if (newOriginalHeight > 0) winElement._originalHeight = newOriginalHeight;
 
-            if (typeof winElement.resetResizeDims === 'function') {
-                winElement.resetResizeDims();
-            } else if (winElement._originalHeight) {
+            if (winElement._originalHeight) {
                 winElement._originalRatio = winElement._originalWidth / winElement._originalHeight;
             }
         } else if (newOriginalWidth !== currentOriginalWidth) {
-            // Re-evaluate proportion
+            // Re-evaluate proportion without forcing growth
             winElement._originalWidth = newOriginalWidth;
             if (newOriginalHeight > 0) winElement._originalHeight = newOriginalHeight;
             scalerElement.style.setProperty('--original-width', newOriginalWidth + 'px');
+            if (newOriginalHeight > 0) scalerElement.style.setProperty('--original-height', newOriginalHeight + 'px');
 
-            if (typeof winElement.resetResizeDims === 'function') {
-                winElement.resetResizeDims();
-            } else if (winElement._originalHeight) {
+            if (winElement._originalHeight) {
                 winElement._originalRatio = winElement._originalWidth / winElement._originalHeight;
             }
         }
