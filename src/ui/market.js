@@ -84,7 +84,7 @@ export function openPokeMarketBuy() {
     const content = document.getElementById('main-view-inner-modal-content');
     const moneyDisplay = document.getElementById('inner-modal-money-display');
     if (moneyDisplay) {
-        moneyDisplay.textContent = `$ ${state.trainer.money.toLocaleString()}`;
+        moneyDisplay.textContent = `${state.trainer.money.toLocaleString()}`;
         moneyDisplay.style.display = 'block';
     }
 
@@ -267,7 +267,7 @@ export function renderPokeMarketTab(category) {
         return;
     }
 
-    let html = `<div style="--m-width: min(76vw, 750px); display: grid; grid-template-columns: repeat(${cols}, calc(var(--m-width) * 0.135)); gap: calc(var(--m-width) * 0.018); justify-content: center; width: 100%;">`;
+    let html = `<div style="--m-width: min(76vw, 750px); display: flex; flex-wrap: wrap; gap: calc(var(--m-width) * 0.018); justify-content: center; width: 100%;">`;
     items.forEach(item => {
         let displayName = item.displayName || item.name;
         if (category === 'potions') displayName = displayName.replace(' Potion', '<br>Potion');
@@ -287,7 +287,7 @@ export function renderPokeMarketTab(category) {
 
         html += `
             <div class="market-item-card" data-price="${item.price}" data-id="${item.name}" data-category="${category}"
-                style="background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; padding: calc(var(--m-width) * 0.012); text-align: center; transition: transform 0.2s; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                style="width: calc(var(--m-width) * 0.135); background: #2c3e50; border: 2px solid #2ecc71; border-radius: 10px; padding: calc(var(--m-width) * 0.012); text-align: center; transition: transform 0.2s; display: flex; flex-direction: column; align-items: center; justify-content: center;">
                 <div style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; margin-bottom: calc(var(--m-width) * 0.006); height: calc(var(--m-width) * 0.038); display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.1;">${displayName}</div>
                 <img src="${item.img}" style="width: calc(var(--m-width) * 0.072); height: calc(var(--m-width) * 0.072); object-fit: contain; margin-bottom: calc(var(--m-width) * 0.006);">
                 ${category !== 'stones' ? `<div style="font-size: calc(var(--m-width) * 0.014); color: #f1c40f; margin-bottom: calc(var(--m-width) * 0.006); line-height: 1.1;">${item.attrLabel}</div>` : ''}
@@ -420,7 +420,7 @@ export function newBuyItem(itemId, baseCost, category, upgradeType = null) {
         updateUI();
         const moneyDisplay = document.getElementById('inner-modal-money-display');
         if (moneyDisplay) {
-            moneyDisplay.textContent = `$ ${state.trainer.money.toLocaleString()}`;
+            moneyDisplay.textContent = `${state.trainer.money.toLocaleString()}`;
         }
         window.showGameAlert(`Bought ${qty.toLocaleString()}x ${itemId} for ${totalCost.toLocaleString()}!`, getMarketAlertTarget());
         renderPokeMarketTab(category);
@@ -481,7 +481,7 @@ export function openPokeMarketSell() {
     const content = document.getElementById('main-view-inner-modal-content');
     const moneyDisplay = document.getElementById('inner-modal-money-display');
     if (moneyDisplay) {
-        moneyDisplay.textContent = `$ ${state.trainer.money.toLocaleString()}`;
+        moneyDisplay.textContent = `${state.trainer.money.toLocaleString()}`;
         moneyDisplay.style.display = 'block';
     }
 
@@ -568,7 +568,7 @@ export function renderPokeMarketSellTab(category) {
     }
 
     if (category === 'pokemon') {
-        let html = `<div style="--m-width: min(76vw, 750px); display: grid; grid-template-columns: repeat(${cols}, calc(var(--m-width) * 0.135)); gap: calc(var(--m-width) * 0.018); justify-content: center; width: 100%;">`;
+        let html = `<div style="--m-width: min(76vw, 750px); display: flex; flex-wrap: wrap; gap: calc(var(--m-width) * 0.018); justify-content: center; width: 100%;">`;
 
         const filterName = (document.getElementById('market-filter-name')?.value || '').toLowerCase();
         const filterLevelMin = parseFloat(document.getElementById('market-filter-level-min')?.value);
@@ -617,7 +617,7 @@ export function renderPokeMarketSellTab(category) {
 
             html += `
                 <div onclick="if(window.toggleMarketPokemonSaleSelection) window.toggleMarketPokemonSaleSelection('${p.uuid}')"
-                    style="${selectionStyle} border-radius: 10px; padding: calc(var(--m-width) * 0.012); text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; position: relative;">
+                    style="width: calc(var(--m-width) * 0.135); ${selectionStyle} border-radius: 10px; padding: calc(var(--m-width) * 0.012); text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; position: relative;">
                     <div style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; margin-bottom: calc(var(--m-width) * 0.006); line-height: 1.1; color: white;">${pName}</div>
                     <div style="flex: 1; width: 100%; display: flex; align-items: center; justify-content: center; position: relative; height: calc(var(--m-width) * 0.072); margin-bottom: calc(var(--m-width) * 0.006);">
                         <img src="${imgSrc}" class="${glowClass}" style="max-height: 100%; max-width: 100%; object-fit: contain; z-index: 1;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
@@ -688,7 +688,7 @@ export function renderPokeMarketSellTab(category) {
         });
     }
 
-    let html = `<div style="--m-width: min(76vw, 750px); display: grid; grid-template-columns: repeat(${cols}, calc(var(--m-width) * 0.135)); gap: calc(var(--m-width) * 0.018); justify-content: center; width: 100%;">`;
+    let html = `<div style="--m-width: min(76vw, 750px); display: flex; flex-wrap: wrap; gap: calc(var(--m-width) * 0.018); justify-content: center; width: 100%;">`;
     items.forEach(item => {
         let displayName = item.displayName || item.name;
         if (category === 'potions') displayName = displayName.replace(' Potion', '<br>Potion');
@@ -705,7 +705,7 @@ export function renderPokeMarketSellTab(category) {
 
         html += `
             <div class="market-item-card" data-basesell="${baseSellPrice}" data-id="${item.name}" data-category="${category}" data-stock="${stock}"
-                style="background: #2c3e50; border: 2px solid #e74c3c; border-radius: 10px; padding: calc(var(--m-width) * 0.012); text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                style="width: calc(var(--m-width) * 0.135); background: #2c3e50; border: 2px solid #e74c3c; border-radius: 10px; padding: calc(var(--m-width) * 0.012); text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center;">
                 <div style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; margin-bottom: calc(var(--m-width) * 0.006); height: calc(var(--m-width) * 0.038); display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.1;">${displayName}</div>
                 <img src="${item.img}" style="width: calc(var(--m-width) * 0.072); height: calc(var(--m-width) * 0.072); object-fit: contain; margin-bottom: calc(var(--m-width) * 0.006);">
                 ${item.attrLabel ? `<div style="font-size: calc(var(--m-width) * 0.014); color: #f1c40f; margin-bottom: calc(var(--m-width) * 0.006); line-height: 1.1;">${item.attrLabel}</div>` : ''}
@@ -808,7 +808,7 @@ export function sellMarketItem(itemId, baseSellPrice, category) {
         if (window.updateUI) window.updateUI();
         const moneyDisplay = document.getElementById('inner-modal-money-display');
         if (moneyDisplay) {
-            moneyDisplay.textContent = `$ ${state.trainer.money.toLocaleString()}`;
+            moneyDisplay.textContent = `${state.trainer.money.toLocaleString()}`;
         }
 
         if(window.showGameAlert) window.showGameAlert(`Sold ${formatMarketNumber(qty)}x ${itemId} for ${formatMarketNumber(totalValue)}!`, getMarketAlertTarget());
@@ -957,7 +957,7 @@ window.marketSellSelectedPokemon = function() {
 
     const moneyDisplay = document.getElementById('inner-modal-money-display');
     if (moneyDisplay) {
-        moneyDisplay.textContent = `$ ${state.trainer.money.toLocaleString()}`;
+        moneyDisplay.textContent = `${state.trainer.money.toLocaleString()}`;
     }
 
     updateMarketPokemonSellCount();
