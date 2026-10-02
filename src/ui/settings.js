@@ -55,7 +55,7 @@ export function runTimeLapse() {
             state.stats.playtime = (state.stats.playtime || 0) + simulatedSeconds;
             state.stats.battleModeTimer = (state.stats.battleModeTimer || 0) + simulatedSeconds;
 
-            if (window.updateTopbar) window.updateTopbar();
+            if (window.updateMainControl) window.updateMainControl();
 
             window.showTimeLapseResults(results);
         }

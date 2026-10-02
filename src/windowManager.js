@@ -511,7 +511,7 @@ export class WindowManager {
             // Initializing original width if it wasn't set yet
             scalerElement.style.setProperty('--original-width', newOriginalWidth + 'px');
             if (!oldWidth || oldWidth === 'auto') {
-                winElement.style.width = Math.max(1100, newOriginalWidth) + 'px';
+                winElement.style.width = newOriginalWidth + 'px';
             }
         }
 
@@ -772,7 +772,7 @@ export class WindowManager {
             let left = 50;
             let top = 50;
 
-            const mainView = document.getElementById('top-bar-window');
+            const mainView = document.getElementById('main-control-window');
             if (mainView && mainView.style.display !== 'none') {
                 const rect = mainView.getBoundingClientRect();
                 left = rect.left;
