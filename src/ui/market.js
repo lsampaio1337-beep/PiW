@@ -67,6 +67,12 @@ export function openPokeMarketBuy() {
     const html = `
         <div id="market-buy-wrapper" style="display: flex; flex-direction: column; width: 100%; height: 100%; margin-top: 0px; --m-width: min(90vw, 825px);">
 
+
+            <div style="padding-top: calc(var(--m-width) * 0.02); margin-bottom: calc(var(--m-width) * 0.015); display: flex; align-items: center; justify-content: center; gap: calc(var(--m-width) * 0.012);">
+                <label style="font-weight: bold; font-size: calc(var(--m-width) * 0.022); color: #2ecc71;">$<span id="market-trainer-money">${state.trainer.money.toLocaleString()}</span></label>
+            </div>
+
+
             <div id="market-buy-content" style="display: flex; flex-wrap: wrap; gap: calc(var(--m-width) * 0.018); justify-content: center; overflow-y: auto; flex: 1; padding: calc(var(--m-width) * 0.018);">
                 <!-- Cards injected here -->
             </div>
