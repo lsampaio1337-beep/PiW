@@ -1512,7 +1512,7 @@ class BattleSystem {
                 if (gymIndex !== -1 && this.state.trainer.badges === gymIndex) {
                     if (!this.state.stats.pendingGifts) this.state.stats.pendingGifts = [];
                     this.state.stats.pendingGifts.push({ type: 'badge', gymName: gym.name, gymIndex: gymIndex });
-                    this.state.stats.hasSeenGiftIcon = false;
+                    this.state.globalStats.hasSeenGiftIcon = false;
                 }
             }
             this.updateGymUI();

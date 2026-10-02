@@ -192,8 +192,8 @@ const CHALLENGE_DEFS = {
         { id: 25, text: "ZzZ: Sleep $ minutes.", getTarget: () => Math.max(1, Math.floor(0.1 * (state.stats.jigglypuffGrains || 0))), type: 'sleep_minutes' }
     ],
     special: [
-        { id: 26, text: "Daycare Manager: Gain $ IV in daycare.", getTarget: () => 10 + (state.stats.highestLevelCaptured || 0), type: 'daycare_iv', condition: () => state.stats.hasSeenDaycare },
-        { id: 27, text: "Breeder: Hatch $ Eggs from the Daycare.", getTarget: () => Math.random() < 0.5 ? 1 : 2, type: 'hatch_eggs', condition: () => state.stats.hasSeenDaycare },
+        { id: 26, text: "Daycare Manager: Gain $ IV in daycare.", getTarget: () => 10 + (state.stats.highestLevelCaptured || 0), type: 'daycare_iv', condition: () => state.globalStats.hasSeenDaycare },
+        { id: 27, text: "Breeder: Hatch $ Eggs from the Daycare.", getTarget: () => Math.random() < 0.5 ? 1 : 2, type: 'hatch_eggs', condition: () => state.globalStats.hasSeenDaycare },
         { id: 28, text: "Safari Tourist: Catch $ Pokémon in the Safari Zone.", getTarget: () => 5 + ((state.stats.completedChallenges || 0) * 2), type: 'safari_catch', condition: () => state.stats.completedChallengeIds && state.stats.completedChallengeIds.includes("Fuchsia City") },
         { id: 29, text: "High Roller: Catch $ Pokémon in the Casino.", getTarget: () => 5 * Math.max(1, state.trainer.badges), type: 'casino_catch', condition: () => state.stats.completedChallengeIds && state.stats.completedChallengeIds.includes('Casino') },
         { id: 30, text: "Lucky Spinner: See 1 Shiny Pokémon in the Casino.", getTarget: () => 1, type: 'casino_shiny', condition: () => state.stats.completedChallengeIds && state.stats.completedChallengeIds.includes('Casino') }
