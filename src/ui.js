@@ -1682,6 +1682,7 @@ async function init() {
     });
 
     if (validProfiles.length > 0 && saveManagerModal && splashScreen) {
+        window.windowManager.toggleWindow('save-manager-modal', true);
         splashScreen.style.display = 'flex';
         if (saveManagerModal) saveManagerModal.style.display = 'flex';
 
@@ -2112,7 +2113,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
 
     } else {
         if (splashScreen) splashScreen.style.display = 'flex';
-        if (saveManagerModal) saveManagerModal.style.display = 'flex';
+        if (saveManagerModal) window.windowManager.toggleWindow('save-manager-modal', true);
 
         document.getElementById('btn-new-profile').onclick = startNewGame;
     }
