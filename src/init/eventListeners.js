@@ -88,6 +88,26 @@ export function setupGlobalEventListeners() {
         });
     }
 
+    // Oak Tutorial
+    const oakTutorialSkipBtn = document.getElementById('btn-oak-tutorial-skip');
+    if (oakTutorialSkipBtn) {
+        oakTutorialSkipBtn.addEventListener('click', () => {
+            if (window.skipOakTutorial) window.skipOakTutorial();
+        });
+    }
+    const oakTutorialProceedBtn = document.getElementById('btn-oak-tutorial-proceed');
+    if (oakTutorialProceedBtn) {
+        oakTutorialProceedBtn.addEventListener('click', () => {
+            if (window.proceedOakTutorial) window.proceedOakTutorial();
+        });
+    }
+    const oakTutorialConcludeBtn = document.getElementById('btn-oak-tutorial-conclude');
+    if (oakTutorialConcludeBtn) {
+        oakTutorialConcludeBtn.addEventListener('click', () => {
+            if (window.concludeOakTutorial) window.concludeOakTutorial();
+        });
+    }
+
     // Daycare
     const dismissDaycareBtn = document.getElementById('btn-dismiss-daycare');
     if (dismissDaycareBtn) {

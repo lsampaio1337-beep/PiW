@@ -21,6 +21,61 @@ window.dismissDaycareMessage = function() {
     updateUI();
 };
 
+const oakTutorialMessages = [
+    "Hello, Trainer!\nHere I will give you some tips for introduce you to game.\nDo you want a tutorial guide to help you understand better the game or do you want to skip and start the game?",
+    "This game runs only on the Main Control Tab.\nIt is in there that you will open and close all modules\nThis module you are seeing it is called “Main View” and it will display all the visual when battling or shopping.",
+    "Icons are displayed in the Main Control Tab. You will be able to open modules with them.\nThe first two modules are “Main View” and “Team View”, and they will help when you are in battle mode.",
+    "Next set of icons will help you to play the game.\nMap will let you travel to different spots and places.\nBackpack will allow you to see items and Pokémons.\nPokedex with bring all info of Pokémons.\nTrainer have Statistics of the game.",
+    "Next set of icon are “Objectives Related”\nHere we have Daily Calendar. It will have daily challenges and rewards you each day you play. It also have a shop to spend Daily Tokens earned… Make sure to expend them on upgrades!\nNext is the Progress Challenges. Completing the Challenge grants a new spot to travel and may grant some gifts.",
+    "The last set of icons are related to settings.\nThe first is “Help”. In there you can find information about the whole game (with formulas).\n“Settings” will let you change configurations of the game.\nIf you want to leave game, just go to the “Exit” icon.",
+    "Along the gameplay, some new icons will appear in Main Control.\nBut don’t worry, you will be told what they are.",
+    "On maps you can find places that are HUB for interactions.\nYou are at “Professor Oak Lab” now, and I have some assignments for you… make sure to conclude them to earn boosts.",
+    "Now you are all set!\nIf you need more help, make sure to open the Help Module!\nHave fun and CATCH THEM ALL!"
+];
+let currentOakTutorialIndex = 0;
+
+window.skipOakTutorial = function() {
+    state.stats.hasSeenOakTutorial = true;
+    const overlay = document.getElementById('oak-tutorial-overlay');
+    if (overlay) overlay.style.display = 'none';
+    if (window.storageRef) window.storageRef.save(state);
+};
+
+window.proceedOakTutorial = function() {
+    currentOakTutorialIndex++;
+    if (currentOakTutorialIndex >= oakTutorialMessages.length - 1) {
+        // Switch to the conclude button on the last message
+        document.getElementById('btn-oak-tutorial-skip').style.display = 'none';
+        document.getElementById('btn-oak-tutorial-proceed').style.display = 'none';
+        document.getElementById('btn-oak-tutorial-conclude').style.display = 'inline-block';
+    }
+
+    if (currentOakTutorialIndex < oakTutorialMessages.length) {
+        document.getElementById('oak-tutorial-text').innerText = oakTutorialMessages[currentOakTutorialIndex];
+    }
+};
+
+window.concludeOakTutorial = function() {
+    window.skipOakTutorial();
+};
+
+export function showOakTutorialIfNeeded() {
+    if (!state.stats.hasSeenOakTutorial) {
+        const overlay = document.getElementById('oak-tutorial-overlay');
+        if (overlay) {
+            currentOakTutorialIndex = 0;
+            document.getElementById('oak-tutorial-text').innerText = oakTutorialMessages[currentOakTutorialIndex];
+
+            // Reset buttons visibility
+            document.getElementById('btn-oak-tutorial-skip').style.display = 'inline-block';
+            document.getElementById('btn-oak-tutorial-proceed').style.display = 'inline-block';
+            document.getElementById('btn-oak-tutorial-conclude').style.display = 'none';
+
+            overlay.style.display = 'flex';
+        }
+    }
+}
+
 
 window.dismissBonusCandyMessage = function() {
     state.stats.hasSeenBonusCandyModal = true;
@@ -1129,6 +1184,7 @@ export function switchView(viewName) {
 
     if (viewName === 'PROF_OAK_LAB') {
         document.getElementById('view-prof-oak-lab').style.display = 'block';
+        showOakTutorialIfNeeded();
         renderOakLab();
     } else if (viewName === 'SAFARI_HUB') {
         document.getElementById('view-safari-hub').style.display = 'flex';
@@ -1470,6 +1526,7 @@ async function init() {
     const profilesContainer = document.getElementById('profiles-container');
 
     const startNewGame = () => {
+        state.stats.hasSeenOakTutorial = false;
         state.stats.hasSeenGiftIcon = false;
         state.stats.hasSeenMultiplayerIcon = false;
         state.stats.hasSeenZzZTutorial = false;
