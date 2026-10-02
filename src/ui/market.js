@@ -67,8 +67,7 @@ export function openPokeMarketBuy() {
     const html = `
         <div id="market-buy-wrapper" style="display: flex; flex-direction: column; width: 100%; height: 100%; margin-top: 0px; --m-width: min(90vw, 825px);">
 
-
-            <div id="market-buy-content" style="display: flex; flex-wrap: wrap; gap: calc(var(--m-width) * 0.018); justify-content: center; overflow-y: auto; flex: 1; padding: calc(var(--m-width) * 0.018); box-sizing: border-box;">
+            <div id="market-buy-content" style="display: flex; flex-wrap: wrap; gap: calc(var(--m-width) * 0.018); justify-content: center; overflow-y: scroll; flex: 1; padding: calc(var(--m-width) * 0.018); box-sizing: border-box;">
                 <!-- Cards injected here -->
             </div>
         </div>
@@ -463,7 +462,7 @@ export function openPokeMarketSell() {
                 </div>
             </div>
 
-            <div id="market-sell-content" style="display: flex; flex-wrap: wrap; gap: calc(var(--m-width) * 0.018); justify-content: center; overflow-y: auto; flex: 1; padding: calc(var(--m-width) * 0.018); box-sizing: border-box;">
+            <div id="market-sell-content" style="display: flex; flex-wrap: wrap; gap: calc(var(--m-width) * 0.018); justify-content: center; overflow-y: scroll; flex: 1; padding: calc(var(--m-width) * 0.018); box-sizing: border-box;">
                 <!-- Cards injected here -->
             </div>
         </div>
