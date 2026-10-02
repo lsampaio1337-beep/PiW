@@ -21,16 +21,6 @@ window.dismissDaycareMessage = function() {
     updateUI();
 };
 
-window.dismissZzZMessage = function() {
-    state.stats.hasSeenZzZTutorial = true;
-    document.getElementById('zzz-first-time-overlay').style.display = 'none';
-    if (window.storageRef) {
-        window.storageRef.save(state);
-    }
-    if (window.showZzZConfirmationModal) {
-        window.showZzZConfirmationModal();
-    }
-};
 
 window.dismissBonusCandyMessage = function() {
     state.stats.hasSeenBonusCandyModal = true;
@@ -2046,8 +2036,22 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
 
         window.showZzZConfirmationModal = function() {
             const grains = state.stats.jigglypuffGrains || 0;
+            const showTutorial = !state.stats.hasSeenZzZTutorial;
             const htmlContent = `
-                <div class="content-panel" style="display: flex; flex-direction: column; gap: 15px; width: 100%; box-sizing: border-box;">
+                <div class="content-panel" style="display: flex; flex-direction: column; gap: 15px; width: 100%; box-sizing: border-box; position: relative;">
+                    ${showTutorial ? `
+                    <div id="zzz-tutorial-overlay-inner" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000; background: rgba(0, 0, 0, 0.7); display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 8px;">
+                        <div style="background: #34495e; padding: 20px; border-radius: 10px; border: 2px solid #00ffff; text-align: center; color: white; max-width: 80%;">
+                            <div style="margin-top: 0; font-size: 16px;">
+                                <p>Welcome to ZzZ Mode!</p>
+                                <p>You will earn 1 grain of Jigglypuff Dust for every minute you play.</p>
+                                <p>Each grain will grant 1 minute of offline farming.</p>
+                                <p>Sleep well!</p>
+                            </div>
+                            <button id="btn-dismiss-zzz-inner" style="padding: 10px 20px; background: #2ecc71; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: 10px; font-size: 16px;">Ok.</button>
+                        </div>
+                    </div>
+                    ` : ''}
                     <div style="display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.2); border-radius: 8px; padding: 20px; border: 1px solid #334155; gap: 20px;">
                         <div style="flex: 1; display: flex; justify-content: flex-end;">
                             <img src="Assets/Extra/Jigglypuff Dust.png" style="width: 120px; height: auto; filter: drop-shadow(0 0 10px rgba(255, 192, 203, 0.4));">
@@ -2073,6 +2077,18 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
             }
             if (window.windowManager) window.windowManager.recalculateWindowSize('window-zzz-confirmation');
 
+            if (showTutorial) {
+                const dismissBtn = document.getElementById('btn-dismiss-zzz-inner');
+                if (dismissBtn) {
+                    dismissBtn.onclick = () => {
+                        state.stats.hasSeenZzZTutorial = true;
+                        storage.save(state);
+                        const overlay = document.getElementById('zzz-tutorial-overlay-inner');
+                        if (overlay) overlay.style.display = 'none';
+                    };
+                }
+            }
+
             document.getElementById('btn-zzz-no').onclick = () => {
                 if(window.windowManager) window.windowManager.closeDynamicWindow('window-zzz-confirmation');
             };
@@ -2092,12 +2108,6 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
             state.stats.hasSeenZzZIcon = true;
             storage.save(state);
             updateTopbar();
-
-            if (!state.stats.hasSeenZzZTutorial) {
-                document.getElementById('zzz-first-time-overlay').style.display = 'flex';
-                return;
-            }
-
             window.showZzZConfirmationModal();
         }
     });
