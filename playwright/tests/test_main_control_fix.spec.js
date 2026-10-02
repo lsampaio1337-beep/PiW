@@ -15,7 +15,7 @@ test('test main control renders and resizes without errors', async ({ page }) =>
     await page.waitForTimeout(1000);
 
     // Click "New Game"
-    const newGameBtn = page.locator('#btn-new-game');
+    const newGameBtn = page.locator('#btn-new-profile');
     if (await newGameBtn.isVisible()) {
         await newGameBtn.click();
 
