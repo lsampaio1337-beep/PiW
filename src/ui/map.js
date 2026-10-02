@@ -93,7 +93,9 @@ export function showMap() {
         { name: 'Paldea', mapFile: '10 Paldea Map.png', width: 1280, height: 905 }
     ];
 
-    if (isFinalChallengeCompleted) {
+    let hasUnlockedJohto = state.globalStats.hasSeenJohtoMap || isFinalChallengeCompleted || window.currentMapRegion !== 'Kanto';
+
+    if (hasUnlockedJohto) {
         let exclamationHtml = !state.globalStats.hasSeenJohtoMap ? `<img src="Assets/Extra/ExclamationMark.png" style="position: absolute; top: -5px; right: -5px; width: 15px; height: auto; pointer-events: none; z-index: 10;">` : '';
 
         let buttonsHtml = regions.map(r => {
@@ -268,10 +270,14 @@ export function showMap() {
     `;
 
     if (window.showModal) {
-        if (isFinalChallengeCompleted) {
-            window.showModal(titleHtml, html, 'window-map');
+        // Calculate max width for typical screens
+        const ar = currentRegionObj.width / currentRegionObj.height;
+        const targetWidth = Math.min(1000, window.innerHeight * 0.8 * ar) + "px";
+
+        if (hasUnlockedJohto) {
+            window.showModal(titleHtml, html, 'window-map', targetWidth);
         } else {
-            window.showModal('Map', html, 'window-map');
+            window.showModal('Map', html, 'window-map', targetWidth);
         }
     }
 }
