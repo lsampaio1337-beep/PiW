@@ -1762,8 +1762,14 @@ async function init() {
 
             // Format playtime
             let playtimeStr = "0h 0m 0s";
-            if (pData.stats && pData.stats.playtime) {
-                const totalSec = pData.stats.playtime;
+            let totalSec = 0;
+            if (pData.globalStats && pData.globalStats.playtime !== undefined) {
+                totalSec = pData.globalStats.playtime;
+            } else if (pData.stats && pData.stats.playtime !== undefined) {
+                totalSec = pData.stats.playtime;
+            }
+
+            if (totalSec > 0) {
                 const h = Math.floor(totalSec / 3600);
                 const m = Math.floor((totalSec % 3600) / 60);
                 const s = totalSec % 60;
