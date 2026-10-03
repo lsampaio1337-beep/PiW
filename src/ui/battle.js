@@ -1162,7 +1162,7 @@ function processLevelUpQueue() {
     const msgText = isDaycare ? `Level Up in Daycare! Lv. ${newLvl}` : `Level Up! Lv. ${newLvl}`;
 
     // Style the node
-    lvlUpNode.innerHTML = `<span style="font-weight: bold; font-style: italic; display: flex; align-items: center; justify-content: center; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0px 0px 10px #000;">${msgText}</span>`;
+    lvlUpNode.innerHTML = `<span style="font-weight: bold; font-style: italic; display: flex; align-items: center; justify-content: center; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0 0 10px #000, 0 0 20px #000, 0 0 30px #000, 0 0 40px #000, 0 0 50px #000;">${msgText}</span>`;
     lvlUpNode.classList.add('floating-damage');
 
     lvlUpNode.style.position = 'absolute';
