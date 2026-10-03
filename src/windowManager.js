@@ -220,6 +220,7 @@ export class WindowManager {
 
 
         winElement.adjustHeightForNewContent = () => {
+            if (winElement.id === 'window-map') return;
 
             if (!winElement._originalWidth) {
                 initDims();
