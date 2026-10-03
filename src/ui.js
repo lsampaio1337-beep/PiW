@@ -117,7 +117,7 @@ export const TYPE_COLORS = {
 import { openMultiplayerModal } from './ui/multiplayer.js';
 import { updateMainControl } from './ui/mainControl.js';
 import { updateSidebar } from './ui/sidebar.js';
-import { updateBattleArena, showDamage, playCombatAnimations, triggerDefeatAnimation, showLoot } from './ui/battle.js';
+import { updateBattleArena, showDamage, playCombatAnimations, triggerDefeatAnimation, showLoot, showLevelUp } from './ui/battle.js';
 import { showCalendar } from './ui/calendar.js';
 import './ui/tokenShop.js';
 import { showGiftModal } from './ui/gift.js';
@@ -612,6 +612,7 @@ window.showDamage = showDamage;
 window.playCombatAnimations = playCombatAnimations;
 window.triggerDefeatAnimation = triggerDefeatAnimation;
 window.showLoot = showLoot;
+window.showLevelUp = showLevelUp;
 window.setLeader = function(idx) {
     if (typeof window.trackDailyChallenge === 'function') window.trackDailyChallenge('defeat_endurance', { streak: 0 });
     if (idx === 0) return;

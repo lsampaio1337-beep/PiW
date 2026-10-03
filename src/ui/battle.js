@@ -1142,6 +1142,66 @@ export function playCombatAnimations(targetSide, moveType, duration) {
     }, duration);
 }
 
+let levelUpQueue = [];
+let isDisplayingLevelUp = false;
+
+function processLevelUpQueue() {
+    if (isDisplayingLevelUp || levelUpQueue.length === 0) return;
+
+    isDisplayingLevelUp = true;
+    const { pokemonName, newLvl, isDaycare } = levelUpQueue.shift();
+
+    const arena = document.getElementById('combat-arena');
+    if (!arena) {
+        isDisplayingLevelUp = false;
+        processLevelUpQueue();
+        return;
+    }
+
+    const lvlUpNode = document.createElement('div');
+    const msgText = isDaycare ? `Level Up in Daycare! Lv. ${newLvl}` : `Level Up! Lv. ${newLvl}`;
+
+    // Style the node
+    lvlUpNode.innerHTML = `<span style="font-weight: bold; font-style: italic; display: flex; align-items: center; justify-content: center; text-shadow: 1px 1px 4px #000, 0px 0px 10px #f1c40f;">${msgText}</span>`;
+    lvlUpNode.classList.add('floating-damage');
+
+    lvlUpNode.style.position = 'absolute';
+    lvlUpNode.style.color = '#f1c40f'; // Golden yellow color
+    lvlUpNode.style.fontSize = '28px';
+    lvlUpNode.style.fontWeight = 'bold';
+    lvlUpNode.style.pointerEvents = 'none';
+    lvlUpNode.style.transition = 'all 1s ease-out';
+    lvlUpNode.style.zIndex = '150';
+    lvlUpNode.style.whiteSpace = 'nowrap';
+
+    // Center it in the combat arena
+    lvlUpNode.style.left = '50%';
+    lvlUpNode.style.top = '40%';
+    lvlUpNode.style.transform = 'translate(-50%, -50%)';
+
+    arena.appendChild(lvlUpNode);
+
+    // Animate up and fade out
+    setTimeout(() => {
+        lvlUpNode.style.top = '20%';
+    }, 50);
+
+    setTimeout(() => {
+        lvlUpNode.style.opacity = '0';
+    }, 2000);
+
+    setTimeout(() => {
+        if (lvlUpNode.parentElement) lvlUpNode.parentElement.removeChild(lvlUpNode);
+        isDisplayingLevelUp = false;
+        processLevelUpQueue();
+    }, 3000);
+}
+
+export function showLevelUp(pokemonName, newLvl, isDaycare) {
+    levelUpQueue.push({ pokemonName, newLvl, isDaycare });
+    processLevelUpQueue();
+}
+
 export function showLoot(lootItems) {
     const container = document.getElementById('battle-loot-container');
     if (!container) return;
