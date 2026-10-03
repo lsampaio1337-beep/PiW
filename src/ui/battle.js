@@ -1162,11 +1162,11 @@ function processLevelUpQueue() {
     const msgText = isDaycare ? `Level Up in Daycare! Lv. ${newLvl}` : `Level Up! Lv. ${newLvl}`;
 
     // Style the node
-    lvlUpNode.innerHTML = `<span style="font-weight: bold; font-style: italic; display: flex; align-items: center; justify-content: center; text-shadow: 1px 1px 4px #000, 0px 0px 10px #f1c40f;">${msgText}</span>`;
+    lvlUpNode.innerHTML = `<span style="font-weight: bold; font-style: italic; display: flex; align-items: center; justify-content: center; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0px 0px 10px #000;">${msgText}</span>`;
     lvlUpNode.classList.add('floating-damage');
 
     lvlUpNode.style.position = 'absolute';
-    lvlUpNode.style.color = '#f1c40f'; // Golden yellow color
+    lvlUpNode.style.color = 'white'; // White color
     lvlUpNode.style.fontSize = '28px';
     lvlUpNode.style.fontWeight = 'bold';
     lvlUpNode.style.pointerEvents = 'none';
