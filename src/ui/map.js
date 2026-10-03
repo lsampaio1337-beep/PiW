@@ -80,20 +80,45 @@ export function showMap() {
 
     let isFinalChallengeCompleted = state.stats.completedChallengeIds && state.stats.completedChallengeIds.includes('Indigo Plateau');
     let regionButtonsHtml = '';
-    if (isFinalChallengeCompleted) {
+    const regions = [
+        { name: 'Kanto', mapFile: 'Kanto Map.png', width: 2571, height: 1818 },
+        { name: 'Johto', mapFile: '2 Johto Map.png', width: 1961, height: 1316 },
+        { name: 'Hoenn', mapFile: '3 Hoenn Map.png', width: 1250, height: 884 },
+        { name: 'Sinnoh', mapFile: '4 Sinnoh Map.png', width: 1024, height: 724 },
+        { name: 'Unova', mapFile: '5 Unova Map.png', width: 1280, height: 837 },
+        { name: 'Kalos', mapFile: '6 Kalos Map.png', width: 1032, height: 676 },
+        { name: 'Alola', mapFile: '7 1 Alola Map.png', width: 1280, height: 905 },
+        { name: 'Galar', mapFile: '8 Galar Map.png', width: 1554, height: 2198 },
+        { name: 'Hisui', mapFile: '9 Hisui Map.png', width: 1280, height: 711 },
+        { name: 'Paldea', mapFile: '10 Paldea Map.png', width: 1280, height: 905 }
+    ];
+
+    let hasUnlockedJohto = state.globalStats.hasSeenJohtoMap || isFinalChallengeCompleted || window.currentMapRegion !== 'Kanto';
+
+    if (hasUnlockedJohto) {
         let exclamationHtml = !state.globalStats.hasSeenJohtoMap ? `<img src="Assets/Extra/ExclamationMark.png" style="position: absolute; top: -5px; right: -5px; width: 15px; height: auto; pointer-events: none; z-index: 10;">` : '';
+
+        let buttonsHtml = regions.map(r => {
+            let extra = r.name === 'Johto' ? exclamationHtml : '';
+            let style = window.currentMapRegion === r.name
+                ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);'
+                : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;';
+            return `<button onclick="window.switchMapRegion('${r.name}')" style="${style} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s; position: relative;" onmousedown="event.stopPropagation()">${r.name}${extra}</button>`;
+        }).join('');
+
         regionButtonsHtml = `
-            <div style="display: inline-flex; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px;">
-                <button onclick="window.switchMapRegion('Kanto')" style="${window.currentMapRegion === 'Kanto' ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s; position: relative;" onmousedown="event.stopPropagation()">Kanto</button>
-                <button onclick="window.switchMapRegion('Johto')" style="${window.currentMapRegion === 'Johto' ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s; position: relative;" onmousedown="event.stopPropagation()">Johto${exclamationHtml}</button>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px;">
+                ${buttonsHtml}
             </div>
         `;
     }
 
-    let mapImage = window.currentMapRegion === 'Johto' ? './Assets/Map/2 Johto Map.png' : './Assets/Map/Kanto Map.png';
+    const currentRegionObj = regions.find(r => r.name === window.currentMapRegion) || regions[0];
+    let mapImage = `./Assets/Map/${currentRegionObj.mapFile}`;
+    let aspectRatio = `${currentRegionObj.width} / ${currentRegionObj.height}`;
 
     let html = `
-        <div id="interactive-map" style="position: relative; width: 100%; aspect-ratio: 16/11; background-image: url('${mapImage}'); background-size: 100% 100%; background-repeat: no-repeat; background-position: center;">
+        <div id="interactive-map" style="position: relative; width: 100%; aspect-ratio: ${aspectRatio}; background-image: url('${mapImage}'); background-size: 100% 100%; background-repeat: no-repeat; background-position: center;">
     `;
 
     if (window.currentMapRegion === 'Kanto') {
@@ -229,6 +254,8 @@ export function showMap() {
                 `;
             }
         }
+    } else {
+        // Empty map fallback for new regions, rendering just the background with no markers yet.
     }
 
     html += `
@@ -243,10 +270,14 @@ export function showMap() {
     `;
 
     if (window.showModal) {
-        if (isFinalChallengeCompleted) {
-            window.showModal(titleHtml, html, 'window-map');
+        // Calculate max width for typical screens
+        const ar = currentRegionObj.width / currentRegionObj.height;
+        const targetWidth = Math.min(1000, window.innerHeight * 0.8 * ar) + "px";
+
+        if (hasUnlockedJohto) {
+            window.showModal(titleHtml, html, 'window-map', targetWidth);
         } else {
-            window.showModal('Map', html, 'window-map');
+            window.showModal('Map', html, 'window-map', targetWidth);
         }
     }
 }

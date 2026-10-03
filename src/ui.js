@@ -749,6 +749,27 @@ export function showCatchRateModal(showShiny = false) {
 export function showModal(title, htmlContent, windowId = 'dynamic-modal', width = '800px', height = 'auto') {
     if (window.windowManager) {
         window.windowManager.createDynamicWindow(windowId, title, htmlContent, width, height);
+
+        // Ensure map window resizes properly without gaps
+        if (windowId === 'window-map') {
+            const winEl = document.getElementById(windowId);
+            if (winEl) {
+                winEl.style.width = width;
+                winEl.style.height = 'auto'; // allow height to match content wrapper
+
+                // Remove internal padding from map content panel
+                const contentPanel = winEl.querySelector('.content-panel');
+                if (contentPanel) {
+                    contentPanel.style.padding = '0';
+                    contentPanel.style.overflow = 'hidden'; // no scrolling needed for map
+                }
+                const scaler = winEl.querySelector('.window-content-scaler');
+                if (scaler) {
+                    scaler.style.height = '100%';
+                    scaler.style.width = '100%';
+                }
+            }
+        }
     }
 }
 
