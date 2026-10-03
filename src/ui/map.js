@@ -81,7 +81,7 @@ export function showMap() {
     let isFinalChallengeCompleted = state.stats.completedChallengeIds && state.stats.completedChallengeIds.includes('Indigo Plateau');
     let regionButtonsHtml = '';
     const regions = [
-        { name: 'Kanto', mapFile: 'Kanto Map.png', width: 2571, height: 1818 },
+        { name: 'Kanto', mapFile: '1 Kanto Map.png', width: 2571, height: 1818 },
         { name: 'Johto', mapFile: '2 Johto Map.png', width: 1961, height: 1316 },
         { name: 'Hoenn', mapFile: '3 Hoenn Map.png', width: 1250, height: 884 },
         { name: 'Sinnoh', mapFile: '4 Sinnoh Map.png', width: 1024, height: 724 },
@@ -94,6 +94,7 @@ export function showMap() {
     ];
 
     let hasUnlockedJohto = state.globalStats.hasSeenJohtoMap || isFinalChallengeCompleted || window.currentMapRegion !== 'Kanto';
+    if (isFinalChallengeCompleted) { state.globalStats.hasSeenJohtoMap = true; hasUnlockedJohto = true; }
 
     if (hasUnlockedJohto) {
         let exclamationHtml = !state.globalStats.hasSeenJohtoMap ? `<img src="Assets/Extra/ExclamationMark.png" style="position: absolute; top: -5px; right: -5px; width: 15px; height: auto; pointer-events: none; z-index: 10;">` : '';
@@ -278,6 +279,23 @@ export function showMap() {
             window.showModal(titleHtml, html, 'window-map', targetWidth);
         } else {
             window.showModal('Map', html, 'window-map', targetWidth);
+        }
+        if (window.windowManager) {
+            const winEl = document.getElementById('window-map');
+            if (winEl) {
+                const contentPanel = winEl.querySelector('.content-panel');
+                if (contentPanel) { contentPanel.style.padding = '0'; }
+                const header = winEl.querySelector('.window-header');
+                const headerH = header ? header.offsetHeight : 30;
+                const widthVal = parseFloat(targetWidth);
+                const targetHeight = (widthVal / (currentRegionObj.width / currentRegionObj.height)) + headerH;
+                winEl.style.height = targetHeight + 'px';
+                const scaler = winEl.querySelector('.window-content-scaler');
+                if (scaler) {
+                    scaler.style.height = '100%';
+                    scaler.style.width = '100%';
+                }
+            }
         }
     }
 }
