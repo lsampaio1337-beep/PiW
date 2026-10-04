@@ -28,11 +28,15 @@ export function resetMultiplayerReady() {
 
 
 function safeEncode(obj) {
-    return btoa(unescape(encodeURIComponent(JSON.stringify(obj))));
+    const bytes = new TextEncoder().encode(JSON.stringify(obj));
+    const binString = Array.from(bytes, (byte) => String.fromCodePoint(byte)).join("");
+    return btoa(binString);
 }
 
 function safeDecode(str) {
-    return JSON.parse(decodeURIComponent(escape(atob(str.trim()))));
+    const binString = atob(str.trim());
+    const bytes = Uint8Array.from(binString, (m) => m.codePointAt(0));
+    return JSON.parse(new TextDecoder().decode(bytes));
 }
 
 const rtcConfig = {
