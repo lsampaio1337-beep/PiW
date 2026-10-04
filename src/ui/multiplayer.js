@@ -32,7 +32,26 @@ function safeEncode(obj) {
 }
 
 function safeDecode(str) {
-    return JSON.parse(decodeURIComponent(escape(atob(str.trim()))));
+    try {
+        const decodedString = decodeURIComponent(escape(atob(str.trim())));
+        const parsedObject = JSON.parse(decodedString);
+
+        if (!parsedObject || typeof parsedObject !== 'object') {
+            throw new Error("Invalid payload format.");
+        }
+
+        if (typeof parsedObject.type !== 'string' || typeof parsedObject.sdp !== 'string') {
+            throw new Error("Missing or invalid 'type' or 'sdp' in payload.");
+        }
+
+        return {
+            type: parsedObject.type,
+            sdp: parsedObject.sdp
+        };
+    } catch (error) {
+        console.error("Failed to decode connection code:", error);
+        throw new Error("Invalid connection code.");
+    }
 }
 
 const rtcConfig = {
