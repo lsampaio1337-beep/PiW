@@ -8,7 +8,7 @@ import { calculatePP } from '../../mathEngine.js';
 
 // Helper to render a consistent Pokemon slot UI
 function renderSlotUI(p, listName, origIndex, isDraggable) {
-    if (!p.uuid) p.uuid = Math.random().toString(36).substring(2, 15);
+    if (!p.uuid) p.uuid = crypto.randomUUID();
     let imgSrc = `Assets/Pokemon Sprites/Natural/${p.qualityName === 'Shiny' ? p.id + '_shiny' : p.id}.png`;
     let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
     let dragAttr = isDraggable ? `draggable="true" ondragstart="window.dragStart(event, '${listName}', '${p.uuid}')"` : '';

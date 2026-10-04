@@ -573,7 +573,7 @@ export function renderPokeMarketSellTab(category) {
         const filterSumIVMax = parseFloat(document.getElementById('market-filter-sumiv-max')?.value);
 
         state.storage.forEach(p => {
-        if (!p.uuid) p.uuid = Math.random().toString(36).substring(2, 15);
+        if (!p.uuid) p.uuid = crypto.randomUUID();
             let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
 
             if (p.bst === undefined) {
@@ -861,7 +861,7 @@ window.marketSelectAllPokemonForSale = function() {
     const filterSumIVMax = parseFloat(document.getElementById('market-filter-sumiv-max')?.value);
 
     state.storage.forEach(p => {
-        if (!p.uuid) p.uuid = Math.random().toString(36).substring(2, 15);
+        if (!p.uuid) p.uuid = crypto.randomUUID();
         let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
 
         let pName = p.name || p.id;
@@ -892,7 +892,7 @@ function updateMarketPokemonSellCount() {
 
         let totalGain = 0;
         state.storage.forEach(p => {
-        if (!p.uuid) p.uuid = Math.random().toString(36).substring(2, 15);
+        if (!p.uuid) p.uuid = crypto.randomUUID();
             if (window.marketSelectedPokemonForSale.has(p.uuid)) {
                 let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
                 if (p.bst === undefined) {
