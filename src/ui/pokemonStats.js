@@ -1,7 +1,7 @@
 import { getSpeciesDataHtml, buildEvolutionLineHtml } from "./pokedex.js";
 import { state } from '../state.js';
 import { updateUI, showModal } from '../ui.js';
-import { formatType, formatTypes } from './pokedex.js';
+import { formatType } from './pokedex.js';
 
 
 function getEvolveRequirements(p, evo, state) {
