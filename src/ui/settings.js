@@ -1,6 +1,6 @@
 import { VITAMINS } from "../constants.js";
 import { state, globals } from '../state.js';
-import { updateUI, showModal } from '../ui.js';
+import { showModal } from '../ui.js';
 import * as mathEngine from '../mathEngine.js';
 
 export function showSettings() {
