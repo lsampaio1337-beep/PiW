@@ -37,23 +37,23 @@ function getEvolveRequirements(p, evo, state) {
 export function showPokemonStatsByUuid(uuid) {
     let p = null;
     let location = '';
-    let idx = state.party.findIndex(x => x.uuid === uuid);
-    if (idx !== -1) { p = state.party[idx]; location = 'party'; }
-    else {
-        idx = state.breeding.findIndex(x => x.uuid === uuid);
-        if (idx !== -1) { p = state.breeding[idx]; location = 'breeding'; }
-        else {
-            idx = state.training.findIndex(x => x.uuid === uuid);
-            if (idx !== -1) { p = state.training[idx]; location = 'training'; }
-            else {
-                idx = state.storage.findIndex(x => x.uuid === uuid);
-                if (idx !== -1) { p = state.storage[idx]; location = 'storage'; }
-                else {
-                    idx = state.safe.findIndex(x => x.uuid === uuid);
-                    if (idx !== -1) { p = state.safe[idx]; location = 'safe'; }
-                }
+    let idx = -1;
+
+    const lists = ['party', 'breeding', 'training', 'storage', 'safe'];
+    for (let i = 0; i < lists.length; i++) {
+        const listName = lists[i];
+        const list = state[listName];
+        if (!list) continue;
+
+        for (let j = 0; j < list.length; j++) {
+            if (list[j].uuid === uuid) {
+                p = list[j];
+                location = listName;
+                idx = j;
+                break;
             }
         }
+        if (p) break;
     }
 
     if (!p) return;
