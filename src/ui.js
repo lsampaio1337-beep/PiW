@@ -2001,12 +2001,6 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
                             state.zzzTimestamp = null;
                             storage.save(state);
 
-
-                            function formatFarmMoney(num) {
-                                if (num === 0) return "0";
-                                return num.toLocaleString('en-US').replace(/,/g, '.');
-                            }
-
                             // Format Time based on actual simulated time returned by the engine
                             let totalSeconds = Math.floor(displayTimeMs / 1000);
                             let d = Math.floor(totalSeconds / (3600 * 24));
