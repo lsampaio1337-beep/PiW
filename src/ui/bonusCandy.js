@@ -1,4 +1,4 @@
-import { state, globals } from '../state.js';
+import { state } from '../state.js';
 import { showModal, updateUI } from '../ui.js';
 import { WHITE_CANDY_DEFEAT_REQUIREMENT } from '../constants.js';
 
