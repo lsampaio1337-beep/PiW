@@ -125,16 +125,8 @@ export function showDexEntry(id) {
 
 export function buildEvolutionLineHtml(pData, state) {
     let baseId = pData.id;
-    let foundPrev = true;
-    while(foundPrev) {
-        foundPrev = false;
-        for (const pd of state.config.pokemonData) {
-            if (pd.evolutions && pd.evolutions.some(e => e.to === baseId)) {
-                baseId = pd.id;
-                foundPrev = true;
-                break;
-            }
-        }
+    while (state.config.evolutionParents && state.config.evolutionParents[baseId] !== undefined) {
+        baseId = state.config.evolutionParents[baseId];
     }
 
     function buildTree(currentId) {
