@@ -28,11 +28,17 @@ export function resetMultiplayerReady() {
 
 
 function safeEncode(obj) {
-    return btoa(unescape(encodeURIComponent(JSON.stringify(obj))));
+    const jsonStr = JSON.stringify(obj);
+    const bytes = new TextEncoder().encode(jsonStr);
+    const binString = Array.from(bytes, (byte) => String.fromCodePoint(byte)).join('');
+    return btoa(binString);
 }
 
 function safeDecode(str) {
-    return JSON.parse(decodeURIComponent(escape(atob(str.trim()))));
+    const binString = atob(str.trim());
+    const bytes = Uint8Array.from(binString, (m) => m.codePointAt(0));
+    const jsonStr = new TextDecoder().decode(bytes);
+    return JSON.parse(jsonStr);
 }
 
 const rtcConfig = {
