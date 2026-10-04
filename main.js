@@ -2,13 +2,12 @@ const { app, BrowserWindow, ipcMain, screen } = require('electron');
 const path = require('path');
 const fs = require('fs');
 
-// Robust GPU Disabling (Force CPU-only mode)
-app.disableHardwareAcceleration();
-app.commandLine.appendSwitch('disable-gpu');
-app.commandLine.appendSwitch('disable-gpu-compositing');
-app.commandLine.appendSwitch('disable-software-rasterizer');
-app.commandLine.appendSwitch('disable-gpu-rasterization');
-app.commandLine.appendSwitch('disable-gpu-sandbox');
+// Fix transparency issues conditionally rather than disabling hardware acceleration entirely
+if (process.platform === 'linux') {
+    app.commandLine.appendSwitch('enable-transparent-visuals');
+    // Hardware acceleration must be disabled on Linux for transparency to work properly
+    app.disableHardwareAcceleration();
+}
 
 function createWindow() {
     // Get primary display dimensions
