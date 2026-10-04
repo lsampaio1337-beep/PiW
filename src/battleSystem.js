@@ -226,7 +226,8 @@ class BattleSystem {
             currentStats: stats,
             moves: pokemonDef.moves || this.getLearnsetMoves(pokemonBase, pokemonDef.level),
             isBoss: false,
-            catchRate: 0
+            catchRate: 0,
+            xp: mathEngine.calculateTotalXP(pokemonDef.level)
         };
 
         this.updateUI();
@@ -682,7 +683,8 @@ class BattleSystem {
             evm: mathEngine.calculateEVM(bst, level, q.q, totalIV),
             pp: mathEngine.calculatePP(bst, level, q.q, totalIV),
             bst: bst,
-            moves: this.getLearnsetMoves(pokemonBase, level)
+            moves: this.getLearnsetMoves(pokemonBase, level),
+            xp: mathEngine.calculateTotalXP(level)
         };
 
         this.isSearching = false;
@@ -819,7 +821,8 @@ class BattleSystem {
             pp: mathEngine.calculatePP(bst, level, q.q, totalIV),
             bst: bst,
             moves: this.getLearnsetMoves(pokemonBase, level),
-            isDisguisedDitto: isDisguisedDitto
+            isDisguisedDitto: isDisguisedDitto,
+            xp: mathEngine.calculateTotalXP(level)
         };
 
         this.isSearching = false;
@@ -1163,8 +1166,6 @@ class BattleSystem {
                             delete caughtPokemon.isDisguisedDitto;
                         }
 
-                        // Fix the level 100 jump bug by setting xp explicitly to the exact minimum needed for their captured level
-                        caughtPokemon.xp = mathEngine.calculateTotalXP(caughtPokemon.level);
                         this.state.storage.push(caughtPokemon);
                         this.state.stats.caught++;
                         if (defeatedEncounter.qualityName === "Shiny") {
@@ -1895,7 +1896,8 @@ class BattleSystem {
                 currentHp: stats.hp,
                 evxp: evxp, evm: evm, pp: pp,
                 bst: bst,
-                moves: this.getLearnsetMoves(pokemonBase, level)
+                moves: this.getLearnsetMoves(pokemonBase, level),
+                xp: mathEngine.calculateTotalXP(level)
             };
 
             let leaderSpe = leader.currentStats ? leader.currentStats.spe : 10;
@@ -2057,7 +2059,6 @@ class BattleSystem {
                         if (!this.state.stats.caughtSpecies) this.state.stats.caughtSpecies = {};
                         this.state.stats.caughtSpecies[trackingName] = (this.state.stats.caughtSpecies[trackingName] || 0) + 1;
 
-                        caughtPokemon.xp = mathEngine.calculateTotalXP(caughtPokemon.level);
                         this.state.storage.push(caughtPokemon);
                         results.caughtPokemonList.push(caughtPokemon);
                         this.state.stats.caught++;
