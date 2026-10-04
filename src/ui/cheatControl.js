@@ -1,5 +1,5 @@
 import { checkAndResetDailyChallenges } from './dailyChallenges.js';
-import { state, globals } from '../state.js';
+import { state } from '../state.js';
 import * as mathEngine from '../mathEngine.js';
 import { updateUI, showModal } from '../ui.js';
 import { VITAMINS } from '../constants.js';
