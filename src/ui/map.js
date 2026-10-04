@@ -43,6 +43,8 @@ window.switchMapRegion = function(region) {
     // Navigate to default location for region when swapping
     if (region === 'Johto' && state.currentRoute === 'Route 29') {
         window.navigateToLocation('Professor Oak Lab');
+    } else if (region !== 'Kanto' && region !== 'Johto' && !state.currentRoute) {
+        window.navigateToLocation('Professor Lab');
     } else {
         window.navigateToLocation(state.currentRoute || (region === 'Johto' ? 'Route 29' : 'Route 1'));
     }
@@ -256,7 +258,24 @@ export function showMap() {
             }
         }
     } else {
-        // Empty map fallback for new regions, rendering just the background with no markers yet.
+        // Fallback for new regions: render a Professor spot at 50,50
+        let coords = { x: 50, y: 50 };
+        let locationName = "Professor Lab";
+        let markerImg = './Assets/Extra/Spot_Oak.png';
+        let markerWidth = "28px";
+        let markerHeight = "28px";
+        let dropShadow = "drop-shadow(1px 0px 0 #000) drop-shadow(-1px 0px 0 #000) drop-shadow(0px 1px 0 #000) drop-shadow(0px -1px 0 #000) drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.8))";
+
+        html += `
+            <div class="map-marker"
+                 data-location="${locationName.replace(/'/g, "&#39;")}"
+                 title="${locationName.replace(/'/g, "&#39;")}"
+                 style="position: absolute; left: ${coords.x}%; top: ${coords.y}%; width: ${markerWidth}; height: ${markerHeight}; background-image: url('${markerImg}'); background-size: contain; background-repeat: no-repeat; transform: translate(-50%, -50%); filter: ${dropShadow}; cursor: pointer;"
+                 onclick="window.navigateToLocation('${locationName.replace(/'/g, "\'")}')"
+                 onmousemove="window.showMapTooltip(event, '${locationName.replace(/'/g, "\'")}')"
+                 onmouseout="window.hideMapTooltip()">
+            </div>
+        `;
     }
 
     html += `
@@ -325,6 +344,14 @@ export function navigateToLocation(locationName) {
              if (battleSystem.gymState) battleSystem.gymState.isActive = false;
         }
         switchView("JOHTO_OAK_LAB");
+    } else if (locationName === "Professor Lab") {
+        if (battleSystem) {
+             battleSystem.stop();
+             battleSystem.activeEncounter = null;
+             battleSystem.isSearching = false;
+             if (battleSystem.gymState) battleSystem.gymState.isActive = false;
+        }
+        switchView("GENERIC_LAB");
     } else if (locationName === "Safari Zone") {
         if (battleSystem) {
             battleSystem.stop();
