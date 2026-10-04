@@ -20,3 +20,21 @@ test('calculateStat with vitamins', () => {
     const statMaxVitamins = mathEngine.calculateStat(49, 31, 50, 1.0, 20);
     expect(statMaxVitamins).toBe(82);
 });
+
+test('getLevelFromXP calculates correct level from total XP', () => {
+    // 0 XP should be level 1
+    expect(mathEngine.getLevelFromXP(0)).toBe(1);
+
+    // XP needed for Level 2 is calculateReqXP(1) which is 52
+    const xpForLevel2 = mathEngine.calculateReqXP(1); // 52
+    expect(mathEngine.getLevelFromXP(xpForLevel2 - 1)).toBe(1); // Almost level 2
+    expect(mathEngine.getLevelFromXP(xpForLevel2)).toBe(2); // Exactly level 2
+
+    // XP needed for Level 3 is calculateReqXP(1) + calculateReqXP(2)
+    const xpForLevel3 = xpForLevel2 + mathEngine.calculateReqXP(2); // 52 + 90 = 142
+    expect(mathEngine.getLevelFromXP(xpForLevel3 - 1)).toBe(2);
+    expect(mathEngine.getLevelFromXP(xpForLevel3)).toBe(3);
+
+    // Extremely high XP should cap at level 100
+    expect(mathEngine.getLevelFromXP(999999999)).toBe(100);
+});
