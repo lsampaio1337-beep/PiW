@@ -1,4 +1,4 @@
-import { state, globals } from '../state.js';
+import { state } from '../state.js';
 import * as mathEngine from "../mathEngine.js";
 
 // Ensure global functions that are referenced in HTML exist on window object
