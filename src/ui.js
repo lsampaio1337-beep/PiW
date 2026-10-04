@@ -916,8 +916,13 @@ window.cheatCompleteOakTask = function(type) {
     }
     if (type === 'final') {
         if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
-        for (let p of state.config.pokemonData) {
-            state.stats.caughtSpecies[p.name] = (state.stats.caughtSpecies[p.name] || 0) + 1;
+        const caught = state.stats.caughtSpecies;
+        const data = state.config.pokemonData;
+        if (Object.keys(caught).length < data.length) {
+            for (let i = 0, len = data.length; i < len; i++) {
+                const name = data[i].name;
+                if (!caught[name]) caught[name] = 1;
+            }
         }
     }
     window.showOakLabModal();
