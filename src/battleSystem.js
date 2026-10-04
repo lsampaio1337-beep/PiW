@@ -28,6 +28,18 @@ class BattleSystem {
         };
     }
 
+    getPokemonBase(id) {
+        if (!this.pokemonBaseMap) {
+            this.pokemonBaseMap = new Map();
+            if (this.state.config && this.state.config.pokemonData) {
+                for (const p of this.state.config.pokemonData) {
+                    this.pokemonBaseMap.set(p.id, p);
+                }
+            }
+        }
+        return this.pokemonBaseMap.get(id);
+    }
+
     getSpeedMultiplier() {
         const speedTier = this.state.stats?.upgrades?.speedTier || 0;
         // Tier 0: 1.0 (100% time)
@@ -208,7 +220,7 @@ class BattleSystem {
             return;
         }
 
-        const pokemonBase = this.state.config.pokemonData.find(p => p.id === pokemonDef.id);
+        const pokemonBase = this.getPokemonBase(pokemonDef.id);
 
         let stats = { ...pokemonDef.currentStats };
 
@@ -620,7 +632,7 @@ class BattleSystem {
         const pokemonDef = trainer.team[this.gymState.currentPokemonIndex];
         if (!pokemonDef) return; // Should have been handled in defeat
 
-        const pokemonBase = this.state.config.pokemonData.find(p => p.id === pokemonDef.id);
+        const pokemonBase = this.getPokemonBase(pokemonDef.id);
         const level = pokemonDef.level;
 
         // Gym leaders and trainers have fixed quality (e.g. Regular or Uncommon)
@@ -707,7 +719,7 @@ class BattleSystem {
 
         if (this.state.nextForcedEncounter) {
             const forced = this.state.nextForcedEncounter;
-            pokemonBase = this.state.config.pokemonData.find(p => p.id === forced.id) || this.state.config.pokemonData[0];
+            pokemonBase = this.getPokemonBase(forced.id) || this.state.config.pokemonData[0];
             level = forced.level;
 
             const qName = forced.qValue >= 2.0 ? "Shiny" : "Custom";
@@ -754,7 +766,7 @@ class BattleSystem {
                 }
             }
 
-            let actualPokemonBase = this.state.config.pokemonData.find(p => p.id === selectedSpawn.pokemonId);
+            let actualPokemonBase = this.getPokemonBase(selectedSpawn.pokemonId);
             pokemonBase = actualPokemonBase;
             level = Math.floor(Math.random() * (selectedSpawn.maxLevel - selectedSpawn.minLevel + 1)) + selectedSpawn.minLevel;
 
@@ -763,7 +775,7 @@ class BattleSystem {
                 const otherSpawns = route.spawns.filter(s => s.pokemonId !== 132);
                 if (otherSpawns.length > 0) {
                     const disguiseSpawn = otherSpawns[Math.floor(Math.random() * otherSpawns.length)];
-                    pokemonBase = this.state.config.pokemonData.find(p => p.id === disguiseSpawn.pokemonId);
+                    pokemonBase = this.getPokemonBase(disguiseSpawn.pokemonId);
                 }
             }
 
@@ -1128,7 +1140,7 @@ class BattleSystem {
                         let trackingTypes = defeatedEncounter.types || [];
 
                         if (caughtPokemon.isDisguisedDitto) {
-                            const dittoBase = this.state.config.pokemonData.find(p => p.id === 132);
+                            const dittoBase = this.getPokemonBase(132);
                             caughtPokemon.id = 132;
                             caughtPokemon.name = "Ditto";
                             caughtPokemon.types = ["Normal"];
@@ -1590,7 +1602,7 @@ class BattleSystem {
                 window.trackDailyChallenge('gain_levels', { amount: levelsGained });
             }
             // re-calc stats
-            const pBase = this.state.config.pokemonData.find(p => p.id === pokemon.id);
+            const pBase = this.getPokemonBase(pokemon.id);
             if (pBase) {
                 const vitamins = pokemon.vitamins || {};
                 pokemon.maxHp = mathEngine.calculateHP(pBase.hp, pokemon.ivs.hp, pokemon.level, pokemon.quality, vitamins.hp || 0);
@@ -1628,7 +1640,7 @@ class BattleSystem {
                 fainted.id = 132;
                 fainted.name = 'Ditto';
 
-                const newBase = this.state.config.pokemonData.find(pd => pd.id === 132);
+                const newBase = this.getPokemonBase(132);
                 if (newBase) {
                     fainted.types = newBase.types;
                     fainted.bst = newBase.hp + newBase.atk + newBase.def + newBase.spa + newBase.spd + newBase.spe;
@@ -1844,7 +1856,7 @@ class BattleSystem {
                 continue;
             }
 
-            pokemonBase = this.state.config.pokemonData.find(p => p.id === selectedSpawn.pokemonId);
+            pokemonBase = this.getPokemonBase(selectedSpawn.pokemonId);
             level = Math.floor(Math.random() * (selectedSpawn.maxLevel - selectedSpawn.minLevel + 1)) + selectedSpawn.minLevel;
 
             if (this.state.currentRoute === "Route 1") {
@@ -2020,7 +2032,7 @@ class BattleSystem {
                         let trackingName = this.activeEncounter.name;
 
                         if (caughtPokemon.isDisguisedDitto) {
-                            const dittoBase = this.state.config.pokemonData.find(p => p.id === 132);
+                            const dittoBase = this.getPokemonBase(132);
                             caughtPokemon.id = 132;
                             caughtPokemon.name = "Ditto";
                             caughtPokemon.types = ["Normal"];
@@ -2210,7 +2222,7 @@ class BattleSystem {
                     fainted.id = 132;
                     fainted.name = 'Ditto';
 
-                    const newBase = this.state.config.pokemonData.find(pd => pd.id === 132);
+                    const newBase = this.getPokemonBase(132);
                     if (newBase) {
                         fainted.types = newBase.types;
                         fainted.bst = newBase.hp + newBase.atk + newBase.def + newBase.spa + newBase.spd + newBase.spe;
