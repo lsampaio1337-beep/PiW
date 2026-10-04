@@ -96,12 +96,14 @@ window.showTimeLapseResults = function(results) {
             let imgFolder = "";
             let basePrice = 0;
 
-            if (state.config.balance.items.pokeballs.find(b => b.name === itemName)) {
+            let pokeballObj = state.config.balance.items.pokeballs.find(b => b.name === itemName);
+            let potionObj = !pokeballObj ? state.config.balance.items.potions.find(p => p.name === itemName || (p.name === 'Big' && itemName === 'Big Potion')) : null;
+
+            if (pokeballObj) {
                 imgFolder = "Balls";
-                basePrice = state.config.balance.items.pokeballs.find(b => b.name === itemName).price;
-            } else if (state.config.balance.items.potions.find(p => p.name === itemName || (p.name === 'Big' && itemName === 'Big Potion'))) {
+                basePrice = pokeballObj.price;
+            } else if (potionObj) {
                 imgFolder = "Potions";
-                const potionObj = state.config.balance.items.potions.find(p => p.name === itemName || (p.name === 'Big' && itemName === 'Big Potion'));
                 basePrice = potionObj.price;
             } else if (VITAMINS.includes(itemName)) {
                 imgFolder = "Vitamins";
