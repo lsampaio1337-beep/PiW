@@ -1646,13 +1646,15 @@ class BattleSystem {
                     // Moves
                     let getLearnsetMoves = (pokemonBase, level) => {
                         let learned = [];
+                        let learnedNames = new Set();
                         for (let i = 1; i <= level; i++) {
                             if (pokemonBase.learnset && pokemonBase.learnset[i]) {
                                 const moveNames = pokemonBase.learnset[i];
                                 for (const mName of moveNames) {
                                     const moveData = this.state.config.moves[mName];
-                                    if (moveData && !learned.find(lm => lm.name === mName)) {
+                                    if (moveData && !learnedNames.has(mName)) {
                                         learned.push(moveData);
+                                        learnedNames.add(mName);
                                     }
                                 }
                             }
@@ -2223,11 +2225,15 @@ class BattleSystem {
                         fainted.currentHp = Math.min(fainted.currentHp, fainted.maxHp);
 
                         let learned = [];
+                        let learnedNames = new Set();
                         for (let i = 1; i <= fainted.level; i++) {
                             if (newBase.learnset && newBase.learnset[i]) {
                                 for (const mName of newBase.learnset[i]) {
                                     const moveData = this.state.config.moves[mName];
-                                    if (moveData && !learned.find(lm => lm.name === mName)) learned.push(moveData);
+                                    if (moveData && !learnedNames.has(mName)) {
+                                        learned.push(moveData);
+                                        learnedNames.add(mName);
+                                    }
                                 }
                             }
                         }
