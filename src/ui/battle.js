@@ -1142,6 +1142,43 @@ export function playCombatAnimations(targetSide, moveType, duration) {
     }, duration);
 }
 
+let levelUpQueue = [];
+let isDisplayingLevelUp = false;
+
+function processLevelUpQueue() {
+    if (isDisplayingLevelUp || levelUpQueue.length === 0) return;
+
+    isDisplayingLevelUp = true;
+    const { pokemonName, newLvl, isDaycare } = levelUpQueue.shift();
+
+    const arena = document.getElementById('combat-arena');
+    if (!arena) {
+        isDisplayingLevelUp = false;
+        processLevelUpQueue();
+        return;
+    }
+
+    const lvlUpNode = document.createElement('div');
+    const msgText = isDaycare ? `Level Up in Daycare! Lv. ${newLvl}` : `Level Up! Lv. ${newLvl}`;
+
+    lvlUpNode.innerText = msgText;
+    lvlUpNode.classList.add('level-up-text-anim');
+
+    arena.appendChild(lvlUpNode);
+
+    // Clean up node and process next in queue after animation ends (3s)
+    setTimeout(() => {
+        if (lvlUpNode.parentElement) lvlUpNode.parentElement.removeChild(lvlUpNode);
+        isDisplayingLevelUp = false;
+        processLevelUpQueue();
+    }, 3000);
+}
+
+export function showLevelUp(pokemonName, newLvl, isDaycare) {
+    levelUpQueue.push({ pokemonName, newLvl, isDaycare });
+    processLevelUpQueue();
+}
+
 export function showLoot(lootItems) {
     const container = document.getElementById('battle-loot-container');
     if (!container) return;

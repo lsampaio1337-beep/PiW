@@ -1265,7 +1265,7 @@ class BattleSystem {
         // Daycare logic
         if (this.state.dayCareRef) {
             this.state.dayCareRef.tickBattle();
-            this.state.dayCareRef.grantPassiveXP(evxp, (pkmn, amt) => this.grantXP(pkmn, amt));
+            this.state.dayCareRef.grantPassiveXP(evxp, (pkmn, amt) => this.grantXP(pkmn, amt, true));
         }
 
         // Loot Bonus Calculation
@@ -1273,7 +1273,7 @@ class BattleSystem {
         const moneyMultiplier = 1 + (0.01 * (this.state.stats.greenCandies || 0));
 
         // Award XP and Money (EV)
-        this.grantXP(leader, evxp);
+        this.grantXP(leader, evxp, false);
         if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') window.trackDailyChallenge('gain_exp', { amount: evxp });
         let earned = Math.floor(evm * moneyMultiplier);
         this.state.trainer.money += earned;
@@ -1579,6 +1579,11 @@ class BattleSystem {
         if (newLvl > pokemon.level) {
             let levelsGained = newLvl - pokemon.level;
             pokemon.level = newLvl;
+
+            // Trigger Level Up animation
+            if (typeof window !== 'undefined' && typeof window.showLevelUp === 'function' && !this.state.isTimeLapsing) {
+                window.showLevelUp(pokemon.name, newLvl, isDaycare);
+            }
 
             // Track Daily Challenges
             if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') {
@@ -2076,7 +2081,7 @@ class BattleSystem {
 
                 const lootMultiplier = 1 + (0.0025 * (this.state.stats.greenCandies || 0));
                 const moneyMultiplier = 1 + (0.01 * (this.state.stats.greenCandies || 0));
-                this.grantXP(leader, evxp);
+                this.grantXP(leader, evxp, false);
         if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') window.trackDailyChallenge('gain_exp', { amount: evxp });
                 let earnedZzZ = Math.floor(evm * moneyMultiplier);
                 this.state.trainer.money += earnedZzZ;
