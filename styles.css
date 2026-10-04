@@ -274,14 +274,27 @@ input[type="number"] {
     /* No glow */
 }
 
-@keyframes pulseMistyGlow {
-    0% { text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000, 0 0 10px #000, 0 0 10px #000, 0 0 20px #000, 0 0 20px #000, 0 0 40px #000, 0 0 40px #000, 0 0 60px #000, 0 0 60px #000, 0 0 80px #000, 0 0 80px #000, 0 0 100px #000, 0 0 100px #000, 0 0 150px #000, 0 0 150px #000, 0 0 200px #000, 0 0 200px #000, 0 0 250px #000, 0 0 250px #000, 0 0 300px #000, 0 0 300px #000; }
-    50% { text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000, 0 0 20px #000, 0 0 20px #000, 0 0 40px #000, 0 0 40px #000, 0 0 80px #000, 0 0 80px #000, 0 0 120px #000, 0 0 120px #000, 0 0 160px #000, 0 0 160px #000, 0 0 200px #000, 0 0 200px #000, 0 0 300px #000, 0 0 300px #000, 0 0 400px #000, 0 0 400px #000, 0 0 500px #000, 0 0 500px #000, 0 0 600px #000, 0 0 600px #000; }
-    100% { text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000, 0 0 10px #000, 0 0 10px #000, 0 0 20px #000, 0 0 20px #000, 0 0 40px #000, 0 0 40px #000, 0 0 60px #000, 0 0 60px #000, 0 0 80px #000, 0 0 80px #000, 0 0 100px #000, 0 0 100px #000, 0 0 150px #000, 0 0 150px #000, 0 0 200px #000, 0 0 200px #000, 0 0 250px #000, 0 0 250px #000, 0 0 300px #000, 0 0 300px #000; }
+@keyframes growAndFade {
+    0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+    20% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+    80% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
 }
 
-.misty-glow-anim {
-    animation: pulseMistyGlow 1.5s infinite ease-in-out;
+.level-up-text-anim {
+    color: #f1c40f; /* Golden font */
+    -webkit-text-stroke: 1.5px #c0392b; /* Dark red outline */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* Soft, performant drop shadow */
+    animation: growAndFade 3s forwards;
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    font-size: 32px;
+    font-weight: bold;
+    font-style: italic;
+    pointer-events: none;
+    z-index: 150;
+    white-space: nowrap;
 }
 
 @keyframes pulseMarker {

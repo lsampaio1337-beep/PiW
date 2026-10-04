@@ -1161,35 +1161,12 @@ function processLevelUpQueue() {
     const lvlUpNode = document.createElement('div');
     const msgText = isDaycare ? `Level Up in Daycare! Lv. ${newLvl}` : `Level Up! Lv. ${newLvl}`;
 
-    // Style the node
-    lvlUpNode.innerHTML = `<span class="misty-glow-anim" style="font-weight: bold; font-style: italic; display: flex; align-items: center; justify-content: center;">${msgText}</span>`;
-    lvlUpNode.classList.add('floating-damage');
-
-    lvlUpNode.style.position = 'absolute';
-    lvlUpNode.style.color = 'white'; // White color
-    lvlUpNode.style.fontSize = '28px';
-    lvlUpNode.style.fontWeight = 'bold';
-    lvlUpNode.style.pointerEvents = 'none';
-    lvlUpNode.style.transition = 'all 1s ease-out';
-    lvlUpNode.style.zIndex = '150';
-    lvlUpNode.style.whiteSpace = 'nowrap';
-
-    // Center it in the combat arena
-    lvlUpNode.style.left = '50%';
-    lvlUpNode.style.top = '40%';
-    lvlUpNode.style.transform = 'translate(-50%, -50%)';
+    lvlUpNode.innerText = msgText;
+    lvlUpNode.classList.add('level-up-text-anim');
 
     arena.appendChild(lvlUpNode);
 
-    // Animate up and fade out
-    setTimeout(() => {
-        lvlUpNode.style.top = '20%';
-    }, 50);
-
-    setTimeout(() => {
-        lvlUpNode.style.opacity = '0';
-    }, 2000);
-
+    // Clean up node and process next in queue after animation ends (3s)
     setTimeout(() => {
         if (lvlUpNode.parentElement) lvlUpNode.parentElement.removeChild(lvlUpNode);
         isDisplayingLevelUp = false;
