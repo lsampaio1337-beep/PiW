@@ -28,6 +28,7 @@ export default class Storage {
             const data = window.localStorage.getItem(this.masterKey);
             return data ? JSON.parse(data) : [];
         } catch (e) {
+            console.warn("Failed to parse profiles data from localStorage:", e);
             return [];
         }
     }
@@ -37,6 +38,7 @@ export default class Storage {
             const data = window.localStorage.getItem(profileId);
             return data ? JSON.parse(data) : null;
         } catch (e) {
+            console.warn(`Failed to parse profile data for ${profileId}:`, e);
             return null;
         }
     }
