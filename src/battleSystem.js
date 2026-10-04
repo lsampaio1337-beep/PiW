@@ -1551,16 +1551,26 @@ class BattleSystem {
     }
 
     grantXP(pokemon, amount) {
-        let levelTaskTier = this.state.stats.levelTaskTier || 0;
-        let bonus = 0;
-        if (levelTaskTier >= 1 && pokemon.level < 15) bonus += 0.5;
-        if (levelTaskTier >= 2 && pokemon.level < 30) bonus += 0.5;
-        if (levelTaskTier >= 3 && pokemon.level < 45) bonus += 0.5;
-        if (levelTaskTier >= 4 && pokemon.level < 60) bonus += 0.5;
-        if (levelTaskTier >= 5 && pokemon.level < 75) bonus += 0.5;
-        // Purple Candy XP Bonus
-        const xpMultiplier = 1 + (0.02 * (this.state.stats.purpleCandies || 0));
-        amount = amount * (1 + bonus) * xpMultiplier;
+        if (pokemon.level === 1) {
+            amount = Math.ceil((mathEngine.calculateTotalXP(2) - mathEngine.calculateTotalXP(1)) / 3);
+        } else if (pokemon.level === 2) {
+            amount = Math.ceil((mathEngine.calculateTotalXP(3) - mathEngine.calculateTotalXP(2)) / 4);
+        } else if (pokemon.level === 3) {
+            amount = Math.ceil((mathEngine.calculateTotalXP(4) - mathEngine.calculateTotalXP(3)) / 5);
+        } else if (pokemon.level === 4) {
+            amount = Math.ceil((mathEngine.calculateTotalXP(5) - mathEngine.calculateTotalXP(4)) / 6);
+        } else {
+            let levelTaskTier = this.state.stats.levelTaskTier || 0;
+            let bonus = 0;
+            if (levelTaskTier >= 1 && pokemon.level < 15) bonus += 0.5;
+            if (levelTaskTier >= 2 && pokemon.level < 30) bonus += 0.5;
+            if (levelTaskTier >= 3 && pokemon.level < 45) bonus += 0.5;
+            if (levelTaskTier >= 4 && pokemon.level < 60) bonus += 0.5;
+            if (levelTaskTier >= 5 && pokemon.level < 75) bonus += 0.5;
+            // Purple Candy XP Bonus
+            const xpMultiplier = 1 + (0.02 * (this.state.stats.purpleCandies || 0));
+            amount = amount * (1 + bonus) * xpMultiplier;
+        }
 
         pokemon.xp += amount;
 
