@@ -130,6 +130,79 @@ test.describe('DayCare', () => {
             expect(result.isFinished).toBe(true);
             expect(result.isBreeding).toBe(false);
         });
+
+        test('completeBreeding returns early if no pokemon in slot1', async ({ page }) => {
+            const result = await page.evaluate(() => {
+                const dayCare = new window.DayCare({});
+                dayCare.slot1.pokemon = null;
+                dayCare.slot1.isBreeding = true;
+                dayCare.slot1.isFinished = false;
+                dayCare.completeBreeding();
+                return {
+                    isFinished: dayCare.slot1.isFinished,
+                    isBreeding: dayCare.slot1.isBreeding
+                };
+            });
+
+            expect(result.isFinished).toBe(false);
+            expect(result.isBreeding).toBe(true);
+        });
+
+        test('completeBreeding maintains qualityName when quality is between 1.70 and 1.98', async ({ page }) => {
+            const result = await page.evaluate(() => {
+                const dayCare = new window.DayCare({});
+                // Force random to 0 so we just test the exact threshold mapping
+                const originalRandom = Math.random;
+                Math.random = () => 0;
+
+                dayCare.slot1.pokemon = { quality: 1.75, qualityName: 'OriginalName' };
+                dayCare.slot1.isBreeding = true;
+                dayCare.completeBreeding();
+
+                Math.random = originalRandom; // restore
+                return {
+                    quality: dayCare.slot1.pokemon.quality,
+                    qualityName: dayCare.slot1.pokemon.qualityName
+                };
+            });
+
+            expect(result.quality).toBe(1.75);
+            expect(result.qualityName).toBe('OriginalName');
+        });
+
+        test('completeBreeding caps quality at 1.99', async ({ page }) => {
+            const result = await page.evaluate(() => {
+                const dayCare = new window.DayCare({});
+                const originalRandom = Math.random;
+                Math.random = () => 0.99; // maximum random value (gives 0.1 increase)
+
+                dayCare.slot1.pokemon = { quality: 1.95, qualityName: 'Normal' };
+                dayCare.slot1.isBreeding = true;
+                dayCare.completeBreeding();
+
+                Math.random = originalRandom;
+                return dayCare.slot1.pokemon.quality;
+            });
+
+            expect(result).toBe(1.99); // 1.95 + 0.1 = 2.05, should cap to 1.99
+        });
+
+        test('completeBreeding calls window.trackDailyChallenge with hatch_eggs', async ({ page }) => {
+            const called = await page.evaluate(() => {
+                const dayCare = new window.DayCare({});
+                dayCare.slot1.pokemon = { quality: 1.0, qualityName: 'Normal' };
+
+                window.calledChallenge = null;
+                window.trackDailyChallenge = (challengeId) => {
+                    window.calledChallenge = challengeId;
+                };
+
+                dayCare.completeBreeding();
+                return window.calledChallenge;
+            });
+
+            expect(called).toBe('hatch_eggs');
+        });
     });
 
     test.describe('Training Logic', () => {
@@ -216,6 +289,45 @@ test.describe('DayCare', () => {
             expect(result.cycles).toBe(1);
             const totalIV = result.ivs.hp + result.ivs.atk + result.ivs.def + result.ivs.spa + result.ivs.spd + result.ivs.spe;
             expect(totalIV).toBe(61);
+        });
+
+        test('completeTrainingCycle increments trainingCyclesCompleted if already set', async ({ page }) => {
+            const cycles = await page.evaluate(() => {
+                const dayCare = new window.DayCare({});
+                dayCare.slot2.pokemon = {
+                    ivs: { hp: 99, atk: 99, def: 99, spa: 99, spd: 99, spe: 99 },
+                    trainingCyclesCompleted: 5
+                };
+                dayCare.completeTrainingCycle();
+                return dayCare.slot2.pokemon.trainingCyclesCompleted;
+            });
+
+            expect(cycles).toBe(6);
+        });
+
+        test('completeTrainingCycle calls window.trackDailyChallenge with daycare_iv', async ({ page }) => {
+            const calledInfo = await page.evaluate(() => {
+                const dayCare = new window.DayCare({});
+                dayCare.slot2.pokemon = {
+                    ivs: { hp: 99, atk: 99, def: 99, spa: 99, spd: 99, spe: 99 }
+                };
+
+                window.calledChallenge = null;
+                window.calledOpts = null;
+                window.trackDailyChallenge = (challengeId, opts) => {
+                    window.calledChallenge = challengeId;
+                    window.calledOpts = opts;
+                };
+
+                dayCare.completeTrainingCycle();
+                return {
+                    challenge: window.calledChallenge,
+                    opts: window.calledOpts
+                };
+            });
+
+            expect(calledInfo.challenge).toBe('daycare_iv');
+            expect(calledInfo.opts).toEqual({ amount: 1 });
         });
     });
 
