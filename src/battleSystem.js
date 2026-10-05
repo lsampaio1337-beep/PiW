@@ -1538,8 +1538,15 @@ class BattleSystem {
         if (!this.state.config || !this.state.config.unlocks) return;
         if (!this.state.stats.activeChallenges || this.state.stats.activeChallenges.length === 0) return;
 
+        if (!this._unlocksCache) {
+            this._unlocksCache = new Map();
+            for (let u of this.state.config.unlocks) {
+                this._unlocksCache.set(u.areaId, u);
+            }
+        }
+
         for (let activeId of this.state.stats.activeChallenges) {
-            let unlock = this.state.config.unlocks.find(u => u.areaId === activeId);
+            let unlock = this._unlocksCache.get(activeId);
             if (!unlock) continue;
 
             let req = unlock.requirements;
