@@ -433,3 +433,49 @@ test('getLevelFromXP calculates correct level from total XP', () => {
     // Extremely high XP should cap at level 100
     expect(mathEngine.getLevelFromXP(999999999)).toBe(100);
 });
+
+test('calculateHP edge and error cases', () => {
+    // Zero level
+    expect(mathEngine.calculateHP(45, 31, 0, 1.0)).toBe(10);
+
+    // Negative values
+    expect(mathEngine.calculateHP(-45, -31, 50, 1.0)).toBe(-1);
+
+    // Floating point level (should ideally be integer but testing math)
+    expect(mathEngine.calculateHP(45, 31, 50.5, 1.0)).toBe(121);
+
+    // Zero quality
+    expect(mathEngine.calculateHP(45, 31, 50, 0)).toBe(0);
+
+    // Extreme quality
+    expect(mathEngine.calculateHP(45, 31, 50, 100)).toBe(12050);
+
+    // Negative quality
+    expect(mathEngine.calculateHP(45, 31, 50, -1)).toBe(-121);
+
+    // Negative vitamins
+    expect(mathEngine.calculateHP(45, 31, 50, 1.0, -20)).toBe(96);
+});
+
+test('calculateStat edge and error cases', () => {
+    // Zero level
+    expect(mathEngine.calculateStat(49, 31, 0, 1.0)).toBe(5);
+
+    // Negative values
+    expect(mathEngine.calculateStat(-49, -31, 50, 1.0)).toBe(-60);
+
+    // Floating point level
+    expect(mathEngine.calculateStat(49, 31, 50.5, 1.0)).toBe(70);
+
+    // Zero quality
+    expect(mathEngine.calculateStat(49, 31, 50, 0)).toBe(0);
+
+    // Extreme quality
+    expect(mathEngine.calculateStat(49, 31, 50, 100)).toBe(6950);
+
+    // Negative quality
+    expect(mathEngine.calculateStat(49, 31, 50, -1)).toBe(-70);
+
+    // Negative vitamins
+    expect(mathEngine.calculateStat(49, 31, 50, 1.0, -20)).toBe(55);
+});
