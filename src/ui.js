@@ -879,7 +879,6 @@ window.claimOakTaskReward = function(type) {
 
 window.cheatCompleteOakTask = function(type) {
     let tier = 0;
-    let req = 0;
     let statName = "";
     if (type === 'q') {
         tier = state.stats.qTaskTier || 0;
