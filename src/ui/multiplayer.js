@@ -34,9 +34,31 @@ function safeEncode(obj) {
 }
 
 function safeDecode(str) {
-    const binString = atob(str.trim());
-    const bytes = Uint8Array.from(binString, (m) => m.codePointAt(0));
-    return JSON.parse(new TextDecoder().decode(bytes));
+    try {
+        const binString = atob(str.trim());
+        const bytes = Uint8Array.from(binString, (m) => m.codePointAt(0));
+        const parsed = JSON.parse(new TextDecoder().decode(bytes));
+
+        if (!parsed || typeof parsed !== 'object') {
+            throw new Error('Payload is not an object');
+        }
+
+        const validTypes = ['offer', 'answer', 'pranswer', 'rollback'];
+        if (!validTypes.includes(parsed.type)) {
+            throw new Error('Invalid or missing type');
+        }
+
+        if (typeof parsed.sdp !== 'string') {
+            throw new Error('Invalid or missing sdp');
+        }
+
+        return {
+            type: parsed.type,
+            sdp: parsed.sdp
+        };
+    } catch (e) {
+        throw new Error('Failed to securely decode payload: ' + e.message);
+    }
 }
 
 const rtcConfig = {
