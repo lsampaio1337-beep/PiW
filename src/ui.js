@@ -1121,16 +1121,12 @@ window.showOakLabModal = function() {
         if (innerModal) {
             // Apply a specific class for Oak Lab modal instead of hacking inline styles permanently
             innerModal.classList.add('oak-lab-inner-modal');
-            innerModal.style.width = '70%';
-            innerModal.style.aspectRatio = '4/3';
         }
 
         // Ensure cleanup when the modal is closed
         const cleanUp = () => {
             if (innerModal) {
                 innerModal.classList.remove('oak-lab-inner-modal');
-                innerModal.style.width = '90%';
-                innerModal.style.aspectRatio = '';
             }
             overlay.style.display = 'none';
         };

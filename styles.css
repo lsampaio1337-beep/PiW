@@ -646,3 +646,9 @@ input[type="number"] {
     background-color: rgba(255, 255, 255, 0.3);
     border-radius: 1px;
 }
+
+/* Oak Lab Inner Modal styling */
+.oak-lab-inner-modal {
+    width: 70% !important;
+    aspect-ratio: 4/3 !important;
+}
