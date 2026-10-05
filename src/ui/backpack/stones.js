@@ -1,4 +1,3 @@
-import { VITAMINS } from "../../constants.js";
 import { state } from '../../state.js';
 import { formatQuantity } from './utils.js';
 
