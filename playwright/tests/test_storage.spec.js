@@ -192,4 +192,134 @@ test.describe('Storage Class Tests', () => {
     expect(storage.getProfiles()).toContain(p1);
     expect(global.window.localStorage.getItem(p1)).toBeNull();
   });
+
+  test('setCurrentProfile: updates currentProfileId', () => {
+    const storage = new Storage();
+    storage.setCurrentProfile('my_profile');
+    expect(storage.currentProfileId).toBe('my_profile');
+  });
+
+  test('load: returns null if no current profile selected', () => {
+    const storage = new Storage();
+    expect(storage.load()).toBeNull();
+  });
+
+  test('reset: does nothing if no current profile selected', () => {
+    const storage = new Storage();
+    // Simply should not throw
+    storage.reset();
+  });
+
+  test('exportLog: triggers file download with stats', () => {
+    const storage = new Storage();
+
+    // Save original globals
+    const originalBlob = global.Blob;
+    const originalURL = global.URL;
+    const originalDocument = global.document;
+
+    // Mock Blob and URL
+    global.Blob = class Blob {
+      constructor(content, options) {
+        this.content = content;
+        this.options = options;
+      }
+    };
+    global.URL = {
+      createObjectURL: () => 'blob:mock-url'
+    };
+
+    // Mock document
+    const mockAnchor = {
+      click: () => { mockAnchor.clicked = true; }
+    };
+    global.document = {
+      createElement: (tag) => {
+        if (tag === 'a') return mockAnchor;
+        return {};
+      },
+      body: {
+        appendChild: () => {},
+        removeChild: () => {}
+      }
+    };
+
+    const mockState = {
+      stats: { battlesWon: 10, caught: 5 },
+      party: [
+        { name: 'Bulbasaur', level: 5 },
+        { name: 'Charmander', level: 6 }
+      ]
+    };
+
+    storage.exportLog(mockState);
+    expect(mockAnchor.clicked).toBe(true);
+    expect(mockAnchor.href).toBe('blob:mock-url');
+    expect(mockAnchor.download).toBe('export_log.txt');
+
+    // Restore original globals
+    global.Blob = originalBlob;
+    global.URL = originalURL;
+    global.document = originalDocument;
+  });
+
+  test('processCheat: processes valid GS cheat', () => {
+    const storage = new Storage();
+    const mockState = { settings: { gameSpeed: 1 } };
+    storage.processCheat('GS2.5', mockState);
+    expect(mockState.settings.gameSpeed).toBe(2.5);
+  });
+
+  test('processCheat: processes valid M cheat', () => {
+    const storage = new Storage();
+    const mockState = { trainer: { money: 100 } };
+    storage.processCheat('M500', mockState);
+    expect(mockState.trainer.money).toBe(600);
+  });
+
+  test('processCheat: processes valid XP cheat', () => {
+    const storage = new Storage();
+    const mockState = {
+      trainer: { xp: 50 },
+      party: [{ xp: 20 }]
+    };
+    storage.processCheat('XP100', mockState);
+    expect(mockState.trainer.xp).toBe(150);
+    expect(mockState.party[0].xp).toBe(120);
+  });
+
+  test('processCheat: processes valid XP cheat with empty party', () => {
+    const storage = new Storage();
+    const mockState = {
+      trainer: { xp: 50 },
+      party: []
+    };
+    storage.processCheat('XP100', mockState);
+    expect(mockState.trainer.xp).toBe(150);
+  });
+
+  test('processCheat: ignores invalid or unrecognized cheats', () => {
+    const storage = new Storage();
+    const mockState = {
+      settings: { gameSpeed: 1 },
+      trainer: { money: 100, xp: 50 },
+      party: [{ xp: 20 }]
+    };
+
+    // Invalid numeric formats
+    storage.processCheat('GSabc', mockState);
+    expect(mockState.settings.gameSpeed).toBe(1);
+
+    storage.processCheat('Mxyz', mockState);
+    expect(mockState.trainer.money).toBe(100);
+
+    storage.processCheat('XPdef', mockState);
+    expect(mockState.trainer.xp).toBe(50);
+
+    // Unrecognized commands
+    storage.processCheat('INVALID', mockState);
+
+    // Empty command
+    storage.processCheat('', mockState);
+});
 });

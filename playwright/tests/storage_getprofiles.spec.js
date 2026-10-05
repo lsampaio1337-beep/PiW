@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 
 test('Storage getProfiles error handling returns empty array', async ({ page }) => {
     // Navigate to the app to initialize things (use the same pattern as test_profile_load_playtime.spec.js)
-    await page.goto('http://localhost:3000/index.html');
+    await page.goto('http://localhost:8080/index.html');
 
     // Wait for the storageRef to be attached to the window
     await page.waitForFunction(() => window.storageRef !== undefined);
