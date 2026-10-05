@@ -2676,7 +2676,7 @@ window.showGameAlert = function(message, attachToElementId = null) {
     alertBox.style.pointerEvents = 'none';
     alertBox.style.opacity = '0';
     alertBox.style.transition = 'opacity 0.3s ease-in-out';
-    alertBox.innerHTML = message;
+    alertBox.textContent = message;
 
     container.appendChild(alertBox);
 
