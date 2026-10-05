@@ -53,15 +53,18 @@ class BattleSystem {
                 }
             }
             this.evolutionStageMap = {};
-            for (let p of this.state.config.pokemonData) {
-                let stage = 1;
-                let currentId = p.id;
-                while (evolveFromMap[currentId]) {
-                    stage++;
-                    currentId = evolveFromMap[currentId];
-                    if (stage > 5) break;
+            const getStage = (id) => {
+                if (this.evolutionStageMap[id]) return this.evolutionStageMap[id];
+                if (!evolveFromMap[id]) {
+                    this.evolutionStageMap[id] = 1;
+                    return 1;
                 }
-                this.evolutionStageMap[p.id] = stage;
+                const stage = getStage(evolveFromMap[id]) + 1;
+                this.evolutionStageMap[id] = stage > 5 ? 5 : stage;
+                return this.evolutionStageMap[id];
+            };
+            for (let p of this.state.config.pokemonData) {
+                this.evolutionStageMap[p.id] = getStage(p.id);
             }
         }
         return this.evolutionStageMap[pokemonId] || 1;
