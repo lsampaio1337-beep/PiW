@@ -687,21 +687,20 @@ window.selectDittoTransformTarget = function(idStr) {
 
 window.openDittoTransformModal = function(uuid) {
     let p = null;
-    let location = '';
     let idx = state.party.findIndex(x => x.uuid === uuid);
-    if (idx !== -1) { p = state.party[idx]; location = 'party'; }
+    if (idx !== -1) { p = state.party[idx]; }
     else {
         idx = state.breeding.findIndex(x => x.uuid === uuid);
-        if (idx !== -1) { p = state.breeding[idx]; location = 'breeding'; }
+        if (idx !== -1) { p = state.breeding[idx]; }
         else {
             idx = state.training.findIndex(x => x.uuid === uuid);
-            if (idx !== -1) { p = state.training[idx]; location = 'training'; }
+            if (idx !== -1) { p = state.training[idx]; }
             else {
                 idx = state.storage.findIndex(x => x.uuid === uuid);
-                if (idx !== -1) { p = state.storage[idx]; location = 'storage'; }
+                if (idx !== -1) { p = state.storage[idx]; }
                 else {
                     idx = state.safe.findIndex(x => x.uuid === uuid);
-                    if (idx !== -1) { p = state.safe[idx]; location = 'safe'; }
+                    if (idx !== -1) { p = state.safe[idx]; }
                 }
             }
         }
