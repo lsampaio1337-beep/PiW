@@ -916,11 +916,15 @@ window.cheatCompleteOakTask = function(type) {
     if (type === 'final') {
         if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
         const caught = state.stats.caughtSpecies;
-        const data = state.config.pokemonData;
-        if (Object.keys(caught).length < data.length) {
-            for (let i = 0, len = data.length; i < len; i++) {
-                const name = data[i].name;
-                if (!caught[name]) caught[name] = 1;
+        const names = state.config.allPokemonNames || state.config.pokemonData.map(p => p.name);
+
+        let caughtCount = 0;
+        for (let _ in caught) caughtCount++;
+
+        if (caughtCount < names.length) {
+            for (let i = 0, len = names.length; i < len; i++) {
+                const name = names[i];
+                if (caught[name] === undefined) caught[name] = 1;
             }
         }
     }
@@ -1332,6 +1336,7 @@ async function loadConfigs() {
     state.config.types = types;
     state.config.mapCoordinates = mapCoordinates;
     state.config.johtoMapCoordinates = johtoMapCoordinates;
+    state.config.allPokemonNames = pokemonData.map(p => p.name);
 
     // Precompute evolution parents for O(1) lookups
     const evolutionParents = {};
