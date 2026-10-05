@@ -573,6 +573,7 @@ export function updateBattleArena() {
 /* removed TYPE_COLORS */
 
 
+
 export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallback) {
     const arena = document.getElementById('combat-arena');
     const elEnemySide = document.getElementById('enemy-side');
@@ -588,25 +589,42 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
         return;
     }
 
-    // Duplicate the enemy sprite wrapper for the defeat animation
     const originalSpriteWrapper = document.getElementById('enemy-sprite-wrapper');
     if (!originalSpriteWrapper) {
         captureCallback();
         return;
     }
 
+    const { cloneWrapper, defeatContainer } = setupDefeatClone(originalSpriteWrapper, elEnemySide, arena);
+
+    temporarilyHideEnemyUI();
+
+    let ballSizePx = 50; // fallback
+    if (mainViewWindow) {
+        ballSizePx = mainViewWindow.offsetHeight * 0.15;
+    }
+
+    const { ball, shakeInterval } = createPokeballAnimation(ballResult, cloneWrapper, ballSizePx);
+
+    const slideDuration = 5000;
+    const captureCheckDelay = 3000;
+    const targetLeft = `-${ballSizePx}px`;
+
+    startDefeatAnimations(defeatContainer, cloneWrapper, targetLeft, slideDuration);
+
+    scheduleDefeatCallbacks(ball, ballResult, shakeInterval, captureCallback, defeatContainer, captureCheckDelay, slideDuration);
+}
+
+function setupDefeatClone(originalSpriteWrapper, elEnemySide, arena) {
     const cloneWrapper = originalSpriteWrapper.cloneNode(true);
-    // Remove the cloned HP container so it doesn't show in the duplicate
     const clonedHpContainer = cloneWrapper.querySelector('#enemy-battle-hp-container');
     if (clonedHpContainer) {
         clonedHpContainer.remove();
     }
 
-    // Create a new container to hold the cloned sprite for absolute positioning in arena
     const defeatContainer = document.createElement('div');
     defeatContainer.style.position = 'absolute';
 
-    // Transfer any floating damage nodes to the clone wrapper so they slide out with it
     const floatingDamages = elEnemySide.querySelectorAll('.damage-text-node');
     floatingDamages.forEach(node => {
         cloneWrapper.appendChild(node);
@@ -620,14 +638,12 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
     defeatContainer.style.height = 'max-content';
     defeatContainer.style.zIndex = '10'; // Behind player sprite
 
-    // Copy frame border if we need it to look identical (optional but safe)
     const frameBorder = elEnemySide.querySelector('img[alt="Enemy Frame"]');
     if (frameBorder) {
         const frameClone = frameBorder.cloneNode(true);
         defeatContainer.appendChild(frameClone);
     }
 
-    // Add the cloned sprite wrapper
     cloneWrapper.style.position = 'absolute';
     cloneWrapper.style.top = '0';
     cloneWrapper.style.left = '0';
@@ -635,13 +651,11 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
     cloneWrapper.style.height = '100%';
     defeatContainer.appendChild(cloneWrapper);
 
-    // Move any existing floating damage texts to the defeat container so they slide out
     const damageNodes = elEnemySide.querySelectorAll('.damage-text-node');
     damageNodes.forEach(node => {
         defeatContainer.appendChild(node);
     });
 
-    // Ensure the container holding all battle sprites acts as parent, or arena if fallback
     const spritesContainer = document.getElementById('battle-sprites-container');
     if (spritesContainer) {
         spritesContainer.appendChild(defeatContainer);
@@ -652,9 +666,10 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
     // Force reflow
     void defeatContainer.offsetWidth;
 
-    // Removing manual override of enemy-side to prevent conflict with generateEncounter's isSliding
+    return { cloneWrapper, defeatContainer };
+}
 
-    // Briefly hide the original HP container to prevent visual flash before next spawn
+function temporarilyHideEnemyUI() {
     const hpContainerEnemy = document.getElementById('enemy-battle-hp-container');
     const enemyDataModals = document.getElementById('enemy-data-modals');
     if (hpContainerEnemy) {
@@ -669,40 +684,24 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
             if (enemyDataModals) enemyDataModals.style.opacity = '1';
         }, 500);
     }
+}
 
-    // Calculate ball size based on 15% of the main view window height
-    let ballSizePx = 50; // fallback
-    if (mainViewWindow) {
-        ballSizePx = mainViewWindow.offsetHeight * 0.15;
-    }
-
-    // Animation variables
-    const slideDuration = 5000;
-    const captureCheckDelay = 3000;
-    const targetLeft = `-${ballSizePx}px`; // target left: - ball width
-
-    // 1. Create Pokeball if used
+function createPokeballAnimation(ballResult, cloneWrapper, ballSizePx) {
     let ball = null;
     let shakeInterval = null;
+
     if (ballResult && ballResult.used && ballResult.ballName) {
         ball = document.createElement('img');
         ball.src = `Assets/Items/Balls/${ballResult.ballName}.png`;
         ball.style.position = 'absolute';
 
-        // Find the inner wrapper if it exists (usually the div inside #enemy-sprite-wrapper),
-        // fallback to cloneWrapper itself to guarantee it renders safely.
         const innerWrapper = cloneWrapper.querySelector('div');
         const attachTarget = innerWrapper ? innerWrapper : cloneWrapper;
 
-        // Ensure ball is relative to the pokemon sprite specifically (the div holding the img)
         if (innerWrapper) {
             const img = innerWrapper.querySelector('img');
             if (img) {
-                // Ball goes on top of pokemon image
                 attachTarget.style.position = 'relative';
-
-                // Usually the img itself acts as the primary content, but attachTarget is the wrapper.
-                // Centering inside attachTarget:
                 ball.style.left = '50%';
                 ball.style.top = '50%';
             } else {
@@ -721,24 +720,24 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
         ball.style.zIndex = '51';
         attachTarget.appendChild(ball);
 
-        // Add shake animation
         let shakeCount = 0;
         shakeInterval = setInterval(() => {
             shakeCount++;
             let rotation = (shakeCount % 2 === 0) ? 15 : -15;
-            if (shakeCount % 10 === 0) rotation = 0; // brief pause
+            if (shakeCount % 10 === 0) rotation = 0;
             ball.style.transform = `translate(-50%, -50%) rotate(${rotation}deg)`;
         }, 150);
+
+        void ball.offsetWidth;
     }
 
-    // Force reflow again if ball added
-    if (ball) void ball.offsetWidth;
+    return { ball, shakeInterval };
+}
 
-    // Timeline Animations
+function startDefeatAnimations(defeatContainer, cloneWrapper, targetLeft, slideDuration) {
     defeatContainer.style.transition = `left ${slideDuration}ms linear`;
     defeatContainer.style.left = targetLeft;
 
-    // Pokemon Fade and Shrink Animation
     const pokemonSprite = cloneWrapper.querySelector('img:not([src*="Balls"])');
     if (pokemonSprite) {
         pokemonSprite.style.transition = 'opacity 2000ms linear, transform 2000ms linear';
@@ -747,8 +746,6 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
         pokemonSprite.style.transform = 'scale(0.3)';
     }
 
-
-    // Shrink any floating damages too, so they collapse with the pokemon
     const clonedDamages = cloneWrapper.querySelectorAll('.damage-text-node');
 
     const clonedModals = cloneWrapper.querySelector('#enemy-data-modals');
@@ -770,18 +767,17 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
         dmg.style.transition = 'opacity 2000ms linear, transform 2000ms linear';
         dmg.style.transformOrigin = 'center center';
         dmg.style.opacity = '0';
-        // Combining with its existing translate
         dmg.style.transform = 'translate(-50%, -50%) scale(0.3)';
     });
+}
 
-
+function scheduleDefeatCallbacks(ball, ballResult, shakeInterval, captureCallback, defeatContainer, captureCheckDelay, slideDuration) {
     let callbackFired = false;
 
-    // 2. Change ball sprite at 3 seconds and trigger capture logic
     setTimeout(() => {
         if (ball) {
             clearInterval(shakeInterval);
-            ball.style.transform = 'translate(-50%, -50%)'; // Reset rotation
+            ball.style.transform = 'translate(-50%, -50%)';
             if (ballResult.caught) {
                 ball.src = `Assets/Items/Balls/${ballResult.ballName}Y.png`;
             } else {
@@ -789,19 +785,16 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
             }
         }
 
-        // Trigger capture callback early to process game logic, UI handles itself independently
         if (!callbackFired) {
             callbackFired = true;
             captureCallback();
         }
     }, captureCheckDelay);
 
-    // 3. Remove clone wrapper after animation
     setTimeout(() => {
         if (defeatContainer && defeatContainer.parentNode) {
             defeatContainer.parentNode.removeChild(defeatContainer);
         }
-        // Safety callback fallback
         if (!callbackFired) {
             callbackFired = true;
             captureCallback();
