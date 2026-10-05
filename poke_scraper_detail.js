@@ -38,15 +38,13 @@ async function scrapeDetails() {
                 }
 
                 let container = $('body');
+                let relevantContainers = [];
                 if (targetTabId) {
                      // targetTabId usually looks like `#tab-basic-11002` but moves are under `#tab-moves-XXX`.
-                     // Wait, PokemonDB puts the entire moves section in a separate tab list sometimes!
-                     // Actually, the main container for the specific form's pokedex entry is often `div[id^="tab-basic-"]`.
-                     // The moves for that form are inside `div[id^="tab-moves-"]`.
-
-                     // E.g. Mega Charizard X has its own row in the pokedex. Let's look for "Moves learnt by level up" within the entire page but specifically for this form if possible.
-                     // Actually, if we look at the page source, PokemonDB provides multiple tables. Each table is inside a div that corresponds to a tab.
-                     // Let's refine how we find the moves table.
+                     relevantContainers.push(targetTabId);
+                     if (targetTabId.startsWith('#tab-basic-')) {
+                         relevantContainers.push(targetTabId.replace('#tab-basic-', '#tab-moves-'));
+                     }
                 }
 
                 // E.g. Charizard Mega X moves:
@@ -60,16 +58,6 @@ async function scrapeDetails() {
                 // If a form has a different movepool, it might be in its own tab.
                 // Let's just find the `h3:contains("Moves learnt by level up")` that is visible or corresponds to the latest game.
 
-                // For simplicity and to satisfy the reviewer, we will find the h3 that is most relevant.
-                // If it's a specific form (like Galarian), the tab text might say "Galarian".
-                let relevantContainers = [];
-                if (p.extraName) {
-                    $('.sv-tabs-tab-list a').each((idx, el) => {
-                        if ($(el).text().includes(p.extraName)) {
-                            relevantContainers.push($(el).attr('href'));
-                        }
-                    });
-                }
 
                 let searchScope = $('body');
                 if (relevantContainers.length > 0) {
