@@ -7,9 +7,8 @@ export function setupGlobalEventListeners() {
     const minimizeAllBtn = document.getElementById('btn-minimize-all-game');
     if (minimizeAllBtn) {
         minimizeAllBtn.addEventListener('click', () => {
-            if (window.require) {
-                const { ipcRenderer } = window.require('electron');
-                ipcRenderer.send('minimize-game');
+            if (window.electronAPI) {
+                window.electronAPI.send('minimize-game');
             }
         });
     }

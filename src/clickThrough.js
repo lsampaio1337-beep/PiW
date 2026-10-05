@@ -1,5 +1,3 @@
-let ipcRenderer; try { ipcRenderer = require('electron').ipcRenderer; } catch (e) {}
-
 function setupClickThrough() {
     let ignoreMouse = false;
 
@@ -29,7 +27,9 @@ function setupClickThrough() {
 
         if (shouldIgnore !== ignoreMouse) {
             ignoreMouse = shouldIgnore;
-            ipcRenderer.send('set-ignore-mouse-events', ignoreMouse, { forward: ignoreMouse });
+            if (window.electronAPI) {
+                window.electronAPI.send('set-ignore-mouse-events', ignoreMouse, { forward: ignoreMouse });
+            }
         }
     });
 }
