@@ -574,23 +574,24 @@ export function updateBattleArena() {
 
 
 
+function getDefeatAnimationElements() {
+    return {
+        arena: document.getElementById('combat-arena'),
+        elEnemySide: document.getElementById('enemy-side'),
+        mainViewWindow: document.getElementById('main-view-window'),
+        elPlayerSide: document.getElementById('player-side'),
+        originalSpriteWrapper: document.getElementById('enemy-sprite-wrapper')
+    };
+}
+
 export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallback) {
-    const arena = document.getElementById('combat-arena');
-    const elEnemySide = document.getElementById('enemy-side');
-    const mainViewWindow = document.getElementById('main-view-window');
-    const elPlayerSide = document.getElementById('player-side');
+    const { arena, elEnemySide, mainViewWindow, elPlayerSide, originalSpriteWrapper } = getDefeatAnimationElements();
 
     if (elPlayerSide) {
         elPlayerSide.style.zIndex = '60'; // Ensure player is above the sliding out enemy
     }
 
-    if (!arena || !elEnemySide) {
-        captureCallback();
-        return;
-    }
-
-    const originalSpriteWrapper = document.getElementById('enemy-sprite-wrapper');
-    if (!originalSpriteWrapper) {
+    if (!arena || !elEnemySide || !originalSpriteWrapper) {
         captureCallback();
         return;
     }
@@ -599,10 +600,7 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
 
     temporarilyHideEnemyUI();
 
-    let ballSizePx = 50; // fallback
-    if (mainViewWindow) {
-        ballSizePx = mainViewWindow.offsetHeight * 0.15;
-    }
+    const ballSizePx = mainViewWindow ? mainViewWindow.offsetHeight * 0.15 : 50;
 
     const { ball, shakeInterval } = createPokeballAnimation(ballResult, cloneWrapper, ballSizePx);
 
@@ -615,21 +613,30 @@ export function triggerDefeatAnimation(activeEncounter, ballResult, captureCallb
     scheduleDefeatCallbacks(ball, ballResult, shakeInterval, captureCallback, defeatContainer, captureCheckDelay, slideDuration);
 }
 
-function setupDefeatClone(originalSpriteWrapper, elEnemySide, arena) {
+function prepareCloneWrapper(originalSpriteWrapper, elEnemySide) {
     const cloneWrapper = originalSpriteWrapper.cloneNode(true);
     const clonedHpContainer = cloneWrapper.querySelector('#enemy-battle-hp-container');
     if (clonedHpContainer) {
         clonedHpContainer.remove();
     }
 
-    const defeatContainer = document.createElement('div');
-    defeatContainer.style.position = 'absolute';
+    cloneWrapper.style.position = 'absolute';
+    cloneWrapper.style.top = '0';
+    cloneWrapper.style.left = '0';
+    cloneWrapper.style.width = '100%';
+    cloneWrapper.style.height = '100%';
 
     const floatingDamages = elEnemySide.querySelectorAll('.damage-text-node');
     floatingDamages.forEach(node => {
         cloneWrapper.appendChild(node);
     });
 
+    return cloneWrapper;
+}
+
+function createDefeatContainer(elEnemySide) {
+    const defeatContainer = document.createElement('div');
+    defeatContainer.style.position = 'absolute';
     defeatContainer.style.bottom = '20%';
     defeatContainer.style.left = '35%';
     defeatContainer.style.display = 'flex';
@@ -644,17 +651,19 @@ function setupDefeatClone(originalSpriteWrapper, elEnemySide, arena) {
         defeatContainer.appendChild(frameClone);
     }
 
-    cloneWrapper.style.position = 'absolute';
-    cloneWrapper.style.top = '0';
-    cloneWrapper.style.left = '0';
-    cloneWrapper.style.width = '100%';
-    cloneWrapper.style.height = '100%';
-    defeatContainer.appendChild(cloneWrapper);
-
     const damageNodes = elEnemySide.querySelectorAll('.damage-text-node');
     damageNodes.forEach(node => {
         defeatContainer.appendChild(node);
     });
+
+    return defeatContainer;
+}
+
+function setupDefeatClone(originalSpriteWrapper, elEnemySide, arena) {
+    const cloneWrapper = prepareCloneWrapper(originalSpriteWrapper, elEnemySide);
+    const defeatContainer = createDefeatContainer(elEnemySide);
+
+    defeatContainer.appendChild(cloneWrapper);
 
     const spritesContainer = document.getElementById('battle-sprites-container');
     if (spritesContainer) {
@@ -734,10 +743,12 @@ function createPokeballAnimation(ballResult, cloneWrapper, ballSizePx) {
     return { ball, shakeInterval };
 }
 
-function startDefeatAnimations(defeatContainer, cloneWrapper, targetLeft, slideDuration) {
+function animateContainerSlide(defeatContainer, targetLeft, slideDuration) {
     defeatContainer.style.transition = `left ${slideDuration}ms linear`;
     defeatContainer.style.left = targetLeft;
+}
 
+function animatePokemonSprite(cloneWrapper) {
     const pokemonSprite = cloneWrapper.querySelector('img:not([src*="Balls"])');
     if (pokemonSprite) {
         pokemonSprite.style.transition = 'opacity 2000ms linear, transform 2000ms linear';
@@ -745,9 +756,9 @@ function startDefeatAnimations(defeatContainer, cloneWrapper, targetLeft, slideD
         pokemonSprite.style.opacity = '0';
         pokemonSprite.style.transform = 'scale(0.3)';
     }
+}
 
-    const clonedDamages = cloneWrapper.querySelectorAll('.damage-text-node');
-
+function animateModals(cloneWrapper) {
     const clonedModals = cloneWrapper.querySelector('#enemy-data-modals');
     if (clonedModals) {
         clonedModals.style.transition = 'all 2000ms linear';
@@ -762,13 +773,23 @@ function startDefeatAnimations(defeatContainer, cloneWrapper, targetLeft, slideD
             }
         }, 2000);
     }
+}
 
+function animateDamageTexts(cloneWrapper) {
+    const clonedDamages = cloneWrapper.querySelectorAll('.damage-text-node');
     clonedDamages.forEach(dmg => {
         dmg.style.transition = 'opacity 2000ms linear, transform 2000ms linear';
         dmg.style.transformOrigin = 'center center';
         dmg.style.opacity = '0';
         dmg.style.transform = 'translate(-50%, -50%) scale(0.3)';
     });
+}
+
+function startDefeatAnimations(defeatContainer, cloneWrapper, targetLeft, slideDuration) {
+    animateContainerSlide(defeatContainer, targetLeft, slideDuration);
+    animatePokemonSprite(cloneWrapper);
+    animateModals(cloneWrapper);
+    animateDamageTexts(cloneWrapper);
 }
 
 function scheduleDefeatCallbacks(ball, ballResult, shakeInterval, captureCallback, defeatContainer, captureCheckDelay, slideDuration) {
