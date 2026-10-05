@@ -1263,6 +1263,9 @@ export function switchView(viewName) {
     } else if (viewName === 'JOHTO_OAK_LAB') {
         document.getElementById('view-johto-oak-lab').style.display = 'block';
         renderJohtoOakLab();
+    } else if (viewName === 'GENERIC_LAB') {
+        document.getElementById('view-generic-lab').style.display = 'block';
+        renderGenericLab();
     } else if (viewName === 'SAFARI_HUB') {
         document.getElementById('view-safari-hub').style.display = 'flex';
     } else if (viewName === 'BATTLE_ARENA') {
@@ -2695,3 +2698,112 @@ window.switchView = switchView;
 
 window.initGame = init;
 window.startGame = startGame;
+
+
+window.selectGenericStarter = function(pokemonId) {
+    if (state.stats.hasPickedStarter) return; // Prevent multiple clicks
+
+    const data = state.config.pokemonData[pokemonId];
+    if (data) {
+        state.stats.hasPickedStarter = true;
+        // Starter is added at level 5
+        let starter = {
+            id: pokemonId,
+            level: 5,
+            xp: 0,
+            nickname: data.name
+        };
+        // Generate random DVs for starter
+        starter.dv = {
+            hp: Math.floor(Math.random() * 16),
+            attack: Math.floor(Math.random() * 16),
+            defense: Math.floor(Math.random() * 16),
+            special: Math.floor(Math.random() * 16),
+            speed: Math.floor(Math.random() * 16)
+        };
+        starter.shiny = false;
+        if (Math.random() < (1 / 8192)) {
+            starter.shiny = true;
+            state.globalStats.shiniesSeen = (state.globalStats.shiniesSeen || 0) + 1;
+            state.globalStats.shiniesCaught = (state.globalStats.shiniesCaught || 0) + 1;
+        }
+
+        state.party.push(starter);
+        state.stats.caught = (state.stats.caught || 0) + 1;
+        state.stats.dex = state.stats.dex || {};
+        state.stats.dex[pokemonId] = true;
+
+        if (window.updateUI) window.updateUI();
+        if (window.renderParty) window.renderParty();
+
+        // Refresh the generic lab to show assignments
+        renderGenericLab();
+        Storage.save(state);
+    }
+};
+
+export function renderGenericLab() {
+    const labContent = document.getElementById("generic-lab-content");
+    const labView = document.getElementById("view-generic-lab");
+    if (!labContent || !labView) return;
+
+    let currentRegion = window.currentMapRegion || 'Kanto';
+
+    // Fallback if there is no specific background for this region, default to Kanto
+    let bgImage = `./Assets/BG/Labs/FullSize/BG_1_Kanto_Professor_Oak_Lab.png`;
+    const regionBgMap = {
+        'Kanto': 'BG_1_Kanto_Professor_Oak_Lab.png',
+        'Johto': 'BG_2_Johto_Professor_Elm_Lab.png',
+        'Hoenn': 'BG_3_Hoenn_Professor_Birch_Lab.png',
+        'Sinnoh': 'BG_4_Sinnoh_Professor_Rowan_Lab.png',
+        'Unova': 'BG_5_Unova_Professor_Juniper_Lab.png',
+        'Kalos': 'BG_6_Kalos_Professor_Sycamore_Lab.png',
+        'Alola': 'BG_7_Alola_Professor_Kukui_Lab.png',
+        'Galar': 'BG_8_Galar_Professor_Magnolia_Lab.png',
+        'Hisui': 'BG_9_Hisui_Professor_Laventon_Lab.png',
+        'Paldea': 'BG_10_Paldea_Turo_Lab.png'
+    };
+
+    if (regionBgMap[currentRegion]) {
+        bgImage = `./Assets/BG/Labs/FullSize/${regionBgMap[currentRegion]}`;
+    }
+
+    labView.style.backgroundImage = `url('${bgImage}')`;
+
+    if (!state.stats.hasPickedStarter) {
+        // Show starter selection
+        labContent.innerHTML = `
+            <div style="background-color: rgba(0,0,0,0.8); display: inline-block; padding: 30px; margin-top: 50px; border-radius: 8px;">
+                <h2>Choose your Starter Pokémon</h2>
+                <div class="starter-choices">
+                  <button onclick="window.selectGenericStarter(1)">
+                    <img src="Assets/Pokemon Sprites/Natural/1.png" style="width: 80px; height: 80px;"><br>Bulbasaur
+                  </button>
+                  <button onclick="window.selectGenericStarter(4)">
+                    <img src="Assets/Pokemon Sprites/Natural/4.png" style="width: 80px; height: 80px;"><br>Charmander
+                  </button>
+                  <button onclick="window.selectGenericStarter(7)">
+                    <img src="Assets/Pokemon Sprites/Natural/7.png" style="width: 80px; height: 80px;"><br>Squirtle
+                  </button>
+                </div>
+            </div>
+        `;
+    } else {
+        // Show assignments (identical to Kanto layout)
+        let exclamationHtml = state.stats.showOakLobbyNotification
+            ? `<img src="Assets/Extra/ExclamationMark.png" style="position: absolute; top: -5px; right: -5px; width: 20px; height: auto; pointer-events: none; z-index: 10;">`
+            : ``;
+
+        labContent.innerHTML = `
+            <div style="background-color: rgba(0,0,0,0.85); display: inline-block; padding: 20px; margin-top: 20px; border-radius: 8px; width: 400px; color: white; text-align: center;">
+                <h2 style="margin-top:0;">Professor Lab</h2>
+                <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
+                    <div style="position: relative;">
+                        <button onclick="window.showOakLabModal()" style="width: 100%; box-sizing: border-box; padding: 10px; font-size: 12px; cursor: pointer;">Assignments and Boosters</button>
+                        ${exclamationHtml}
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+}
