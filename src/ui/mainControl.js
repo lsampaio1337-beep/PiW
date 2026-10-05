@@ -1,5 +1,4 @@
 import { state, globals } from '../state.js';
-import * as mathEngine from "../mathEngine.js";
 import { checkDailyRewardAvailable, checkAnyDailyChallengeCompleted } from './calendar.js';
 
 function getStatusHtml(isMet) {
