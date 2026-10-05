@@ -1327,6 +1327,17 @@ async function loadConfigs() {
     state.config.types = types;
     state.config.mapCoordinates = mapCoordinates;
     state.config.johtoMapCoordinates = johtoMapCoordinates;
+
+    // Precompute evolution parents for O(1) lookups
+    const evolutionParents = {};
+    for (const pd of state.config.pokemonData) {
+        if (pd.evolutions) {
+            for (const evo of pd.evolutions) {
+                evolutionParents[evo.to] = pd.id;
+            }
+        }
+    }
+    state.config.evolutionParents = evolutionParents;
 }
 
 window.selectJohtoStarter = selectJohtoStarter;
