@@ -41,6 +41,25 @@ test.describe('DayCare', () => {
         expect(state.slot2.requiredBattles).toBe(100);
     });
 
+    test.describe('Null state handling', () => {
+        test('tickBattle does nothing if pokemon are null', async ({ page }) => {
+            const result = await page.evaluate(() => {
+                const dayCare = new window.DayCare({});
+                dayCare.slot1.pokemon = null;
+                dayCare.slot2.pokemon = null;
+                dayCare.slot1.battles = 0;
+                dayCare.slot2.battles = 0;
+                dayCare.tickBattle();
+                return {
+                    slot1Battles: dayCare.slot1.battles,
+                    slot2Battles: dayCare.slot2.battles
+                };
+            });
+            expect(result.slot1Battles).toBe(0);
+            expect(result.slot2Battles).toBe(0);
+        });
+    });
+
     test.describe('Breeding Logic', () => {
         test('tickBattle increments battles when breeding', async ({ page }) => {
             const battles = await page.evaluate(() => {
@@ -74,6 +93,51 @@ test.describe('DayCare', () => {
                 return dayCare.slot1.battles;
             });
             expect(battles).toBe(0);
+        });
+
+        test('completeBreeding returns early if no pokemon in slot1', async ({ page }) => {
+            const result = await page.evaluate(() => {
+                const dayCare = new window.DayCare({});
+                dayCare.slot1.pokemon = null;
+                dayCare.slot1.isBreeding = true;
+                dayCare.completeBreeding();
+                return {
+                    isFinished: dayCare.slot1.isFinished,
+                    isBreeding: dayCare.slot1.isBreeding
+                };
+            });
+            expect(result.isFinished).toBe(false);
+            expect(result.isBreeding).toBe(true);
+        });
+
+        test('completeBreeding tracks daily challenge', async ({ page }) => {
+            const tracked = await page.evaluate(() => {
+                const dayCare = new window.DayCare({});
+                dayCare.slot1.pokemon = { quality: 1.0, qualityName: 'Normal' };
+                dayCare.slot1.isBreeding = true;
+                window.trackedChallenge = null;
+                window.trackDailyChallenge = (challengeId) => { window.trackedChallenge = challengeId; };
+                dayCare.completeBreeding();
+                return window.trackedChallenge;
+            });
+            expect(tracked).toBe('hatch_eggs');
+        });
+
+        test('completeBreeding preserves qualityName when quality is between 1.70 and 1.98', async ({ page }) => {
+            const result = await page.evaluate(() => {
+                const dayCare = new window.DayCare({});
+                // With random increase up to 0.1, set starting quality to 1.75 to ensure result is between 1.75 and 1.85
+                dayCare.slot1.pokemon = { quality: 1.75, qualityName: 'Rare' };
+                dayCare.slot1.isBreeding = true;
+                dayCare.completeBreeding();
+                return {
+                    quality: dayCare.slot1.pokemon.quality,
+                    qualityName: dayCare.slot1.pokemon.qualityName
+                };
+            });
+            expect(result.quality).toBeGreaterThanOrEqual(1.75);
+            expect(result.quality).toBeLessThanOrEqual(1.85);
+            expect(result.qualityName).toBe('Rare');
         });
 
         test('completeBreeding increases quality and sets finished flags', async ({ page }) => {
@@ -157,6 +221,51 @@ test.describe('DayCare', () => {
                 return dayCare.slot2.battles;
             });
             expect(battles).toBe(100);
+        });
+
+        test('completeTrainingCycle increments existing trainingCyclesCompleted', async ({ page }) => {
+            const cycles = await page.evaluate(() => {
+                const dayCare = new window.DayCare({});
+                dayCare.slot2.pokemon = {
+                    ivs: { hp: 100, atk: 100, def: 100, spa: 100, spd: 100, spe: 100 },
+                    trainingCyclesCompleted: 5
+                };
+                dayCare.completeTrainingCycle();
+                return dayCare.slot2.pokemon.trainingCyclesCompleted;
+            });
+            expect(cycles).toBe(6);
+        });
+
+        test('completeTrainingCycle does not increase stats if totalIV >= 600', async ({ page }) => {
+            const result = await page.evaluate(() => {
+                const dayCare = new window.DayCare({});
+                dayCare.slot2.pokemon = {
+                    ivs: { hp: 100, atk: 100, def: 100, spa: 100, spd: 100, spe: 100 }
+                };
+                dayCare.completeTrainingCycle();
+                return dayCare.slot2.pokemon.ivs;
+            });
+            expect(result.hp).toBe(100);
+            expect(result.atk).toBe(100);
+        });
+
+        test('completeTrainingCycle tracks daily challenge', async ({ page }) => {
+            const tracked = await page.evaluate(() => {
+                const dayCare = new window.DayCare({});
+                dayCare.slot2.pokemon = {
+                    ivs: { hp: 10, atk: 10, def: 10, spa: 10, spd: 10, spe: 10 }
+                };
+                window.trackedChallenge = null;
+                window.trackedChallengeAmount = null;
+                window.trackDailyChallenge = (challengeId, opts) => {
+                    window.trackedChallenge = challengeId;
+                    window.trackedChallengeAmount = opts ? opts.amount : null;
+                };
+                dayCare.completeTrainingCycle();
+                return { id: window.trackedChallenge, amount: window.trackedChallengeAmount };
+            });
+            expect(tracked.id).toBe('daycare_iv');
+            expect(tracked.amount).toBe(1);
         });
 
         test('completeTrainingCycle increases a sub-100 IV and resets battles', async ({ page }) => {
