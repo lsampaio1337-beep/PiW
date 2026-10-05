@@ -253,377 +253,321 @@ document.addEventListener('click', (e) => {
 });
 
 
+
+function updateBattleBackground(combatArena, state, battleSystem, inGymCombat, inMultiplayer) {
+    const plainsRoutes = ["Route 1","Route 2","Route 3","Route 4","Route 24","Route 25","Route 9","Route 10","Power Plant","Route 5","Fighting Dojo","Route 7","Route 6","Route 8","Route 11","Route 12","Cycling Road","Route 13","Route 14","Route 15","Pokémon Mansion","Trade With Friends Hub","Route 22","Route 23","Victory Road"];
+    const waterRoutes = ["Small Fishing Spot","Sea Routes","Seafoam Islands","Big Fishing Spot"];
+    const caveRoutes = ["Mount Moon","Cerulean Cave","Pokémon Tower","Rock Tunnel","Fossil Revival","Mythical and Legendaries"];
+
+    if (inMultiplayer) {
+        combatArena.style.backgroundImage = `url('./Assets/BG/BG-Cassino.jpg')`;
+    } else if (inGymCombat) {
+        const gym = battleSystem.gymState.gym;
+        if (gym.name === "Indigo Plateau") {
+            const trainerIndex = battleSystem.gymState.currentTrainerIndex;
+            const trainerBGs = [
+                'BG-Elite4-1Lorelei.png',
+                'BG-Elite4-2Bruno.png',
+                'BG-Elite4-3Agatha.png',
+                'BG-Elite4-4Lance.png',
+                'BG-Elite4-5Champion.png'
+            ];
+            const bgImage = trainerBGs[trainerIndex] || 'BG.png';
+            combatArena.style.backgroundImage = `url('./Assets/BG/${bgImage}')`;
+        } else {
+            const gymIndex = state.config.gyms.findIndex(g => g.name === gym.name);
+            const gymBGs = [
+                'BG-Gym-1-Pewter-Rock.png',
+                'BG-Gym-2-Cerulean-Water.png',
+                'BG-Gym-3-Vermilion-Electric.png',
+                'BG-Gym-4-Celadon-Grass.png',
+                'BG-Gym-5-Fuchsia-Poison.png',
+                'BG-Gym-6-Saffron-Psychic.png',
+                'BG-Gym-7-Cinnabar-Fire.png',
+                'BG-Gym-8-Viridian-Ground.png'
+            ];
+            const bgImage = gymBGs[gymIndex] || 'BG.png';
+            combatArena.style.backgroundImage = `url('./Assets/BG/${bgImage}')`;
+        }
+    } else if (state.currentRoute === 'Safari Zone') {
+        combatArena.style.backgroundImage = `url('./Assets/BG/BG-SafariZone.png')`;
+    } else if (state.currentRoute && state.currentRoute.startsWith('Casino')) {
+         combatArena.style.backgroundImage = `url('./Assets/BG/BG-Cassino.jpg')`;
+    } else if (state.currentRoute === 'Viridian Forest') {
+        combatArena.style.backgroundImage = `url('./Assets/BG/BGForest.png')`;
+    } else if (plainsRoutes.includes(state.currentRoute)) {
+        combatArena.style.backgroundImage = `url('./Assets/BG/BGPlains.png')`;
+    } else if (waterRoutes.includes(state.currentRoute)) {
+        combatArena.style.backgroundImage = `url('./Assets/BG/BGWater.png')`;
+    } else if (caveRoutes.includes(state.currentRoute)) {
+        combatArena.style.backgroundImage = `url('./Assets/BG/BGCave.png')`;
+    } else {
+        combatArena.style.backgroundImage = `url('./Assets/BG/BG.png')`;
+    }
+}
+
+function updateBackgroundSliding(combatArena, state, battleSystem, inGymCombat) {
+    const scrollingRoutes = ["Viridian Forest","Route 1","Route 2","Route 3","Route 4","Route 24","Route 25","Route 9","Route 10","Power Plant","Route 5","Fighting Dojo","Route 7","Route 6","Route 8","Route 11","Route 12","Cycling Road","Route 13","Route 14","Route 15","Pokémon Mansion","Trade With Friends Hub","Route 22","Route 23","Victory Road","Small Fishing Spot","Sea Routes","Seafoam Islands","Big Fishing Spot","Mount Moon","Cerulean Cave","Pokémon Tower","Rock Tunnel","Fossil Revival","Mythical and Legendaries"];
+
+    if (scrollingRoutes.includes(state.currentRoute) && !inGymCombat) {
+        combatArena.style.backgroundSize = 'auto 100%';
+        combatArena.style.backgroundRepeat = 'repeat-x';
+
+        // Background sliding logic
+        if (battleSystem && battleSystem.isSearching) {
+            if (combatArena.dataset.slidingState !== 'searching') {
+                combatArena.dataset.slidingState = 'searching';
+                combatArena.style.transition = 'none';
+                if (combatArena.dataset.bgAnimationInterval) {
+                    clearInterval(parseInt(combatArena.dataset.bgAnimationInterval));
+                }
+                let pos = parseFloat(combatArena.style.backgroundPositionX) || 0;
+                combatArena.dataset.bgAnimationInterval = setInterval(() => {
+                    const gameSpeed = (state && state.settings && state.settings.gameSpeed) ? state.settings.gameSpeed : 1;
+                    const slideDelay = 1000 / gameSpeed;
+                    const moveDistance = 4.0625; // Reduced by 75%
+                    const ticksPerSlide = slideDelay / 33;
+                    const pctPerTick = moveDistance / ticksPerSlide;
+                    pos += pctPerTick;
+                    combatArena.style.backgroundPositionX = `${pos}%`;
+                }, 33);
+            }
+        } else if (battleSystem && battleSystem.isSliding) {
+            if (combatArena.dataset.slidingState !== 'sliding') {
+                combatArena.dataset.slidingState = 'sliding';
+                if (combatArena.dataset.bgAnimationInterval) {
+                    clearInterval(parseInt(combatArena.dataset.bgAnimationInterval));
+                    combatArena.dataset.bgAnimationInterval = '';
+                }
+                let pos = parseFloat(combatArena.style.backgroundPositionX) || 0;
+                combatArena.style.transition = `background-position-x ${battleSystem.slideDuration}ms linear`;
+
+                // Trigger reflow
+                void combatArena.offsetWidth;
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        combatArena.style.backgroundPositionX = `${pos + 4.0625}%`;
+                    });
+                });
+            }
+        } else {
+            if (combatArena.dataset.slidingState !== 'idle') {
+                combatArena.dataset.slidingState = 'idle';
+                if (combatArena.dataset.bgAnimationInterval) {
+                    clearInterval(parseInt(combatArena.dataset.bgAnimationInterval));
+                    combatArena.dataset.bgAnimationInterval = '';
+                }
+                // Keep the current position but remove transition
+                combatArena.style.transition = 'none';
+            }
+        }
+    } else {
+        // Reset to default
+        combatArena.style.backgroundSize = '100% 100%';
+        combatArena.style.backgroundPositionX = 'center';
+        combatArena.style.transition = 'none';
+        if (combatArena.dataset.bgAnimationInterval) {
+            clearInterval(parseInt(combatArena.dataset.bgAnimationInterval));
+            combatArena.dataset.bgAnimationInterval = '';
+        }
+    }
+}
+
+function getHpColor(pct) {
+    if (pct <= 0) return '#000000';
+    if (pct < 25) return '#e74c3c';
+    if (pct < 50) return '#e67e22';
+    if (pct < 75) return '#f1c40f';
+    return '#2ecc71';
+}
+
+function updateEnemyUI(enemy, battleSystem, glassTier, isSearching = false) {
+    const hpContainerEnemy = document.getElementById('enemy-battle-hp-container');
+    const hpBarEnemy = document.getElementById('enemy-battle-hp-bar');
+    const hpTextEnemy = document.getElementById('enemy-battle-hp-text');
+    const hpPctEnemy = document.getElementById('enemy-battle-hp-pct');
+    const enemyDataModals = document.getElementById('enemy-data-modals');
+    const elEnemySide = document.getElementById('enemy-side');
+    const enemySpriteWrapper = document.getElementById('enemy-sprite-wrapper');
+    const enemyPokemonSprite = document.getElementById('enemy-pokemon-sprite');
+
+    if (isSearching || !enemy) {
+        if (hpContainerEnemy) hpContainerEnemy.style.display = 'none';
+        if (enemyDataModals) enemyDataModals.style.display = 'none';
+        if (elEnemySide) {
+            elEnemySide.style.transition = 'none';
+            elEnemySide.style.left = '100%';
+            elEnemySide.style.opacity = '1';
+        }
+        if (enemyPokemonSprite && !enemy) {
+            enemyPokemonSprite.classList.remove('sliding-idle-anim');
+            enemyPokemonSprite.style.animationDuration = '';
+        }
+        return;
+    }
+
+    if (hpContainerEnemy) hpContainerEnemy.style.display = glassTier >= 1 ? 'flex' : 'none';
+
+    if (enemyDataModals) {
+        enemyDataModals.style.display = glassTier >= 3 ? 'flex' : 'none';
+
+        const levelEl = document.getElementById('enemy-battle-level');
+        if (levelEl) {
+            levelEl.innerText = `Lv. ${enemy.level}`;
+            levelEl.style.display = glassTier >= 3 ? 'block' : 'none';
+        }
+
+        const qtierEl = document.getElementById('enemy-battle-qtier');
+        if (qtierEl && enemy.quality) {
+            qtierEl.innerText = `Q: ${enemy.quality.toFixed(2)}`;
+            qtierEl.style.display = glassTier >= 4 ? 'block' : 'none';
+        }
+
+        const sumivEl = document.getElementById('enemy-battle-sumiv');
+        if (sumivEl && enemy.ivs) {
+            const sumIV = enemy.ivs.hp + enemy.ivs.atk + enemy.ivs.def + enemy.ivs.spa + enemy.ivs.spd + enemy.ivs.spe;
+            sumivEl.innerText = `SumIV: ${sumIV}`;
+            sumivEl.style.display = glassTier >= 5 ? 'block' : 'none';
+        }
+    }
+
+    if (hpBarEnemy && hpTextEnemy && hpPctEnemy) {
+        const pct = Math.min(100, (enemy.currentHp / enemy.maxHp) * 100);
+        hpBarEnemy.style.width = `${pct}%`;
+        hpBarEnemy.style.background = getHpColor(pct);
+        hpTextEnemy.innerText = `${Math.floor(enemy.currentHp)}/${enemy.maxHp}`;
+        hpPctEnemy.innerText = `${Math.floor(pct)}%`;
+    }
+
+    if (enemySpriteWrapper && enemyPokemonSprite) {
+        let enemyId = enemy.isDisguisedDitto ? 132 : enemy.id;
+        let spriteSuffix = enemy.qualityName === 'Shiny' ? '_shiny_Clean.png' : '_Clean.png';
+        enemyPokemonSprite.src = `Assets/Pokemon Sprites/Clean/${enemyId}${spriteSuffix}`;
+
+        const isFlying = enemy.types && (enemy.types.includes('Flying') || enemy.types.includes('Wind'));
+        enemySpriteWrapper.style.justifyContent = isFlying ? 'flex-start' : 'flex-end';
+        enemySpriteWrapper.style.alignItems = 'flex-start';
+        enemyPokemonSprite.style.transform = 'none';
+
+        if (battleSystem.isSliding) {
+            enemyPokemonSprite.classList.add('sliding-idle-anim');
+            const numCycles = Math.ceil(battleSystem.slideDuration / 500);
+            const newDuration = battleSystem.slideDuration / numCycles;
+            enemyPokemonSprite.style.animationDuration = `${newDuration}ms`;
+        } else {
+            enemyPokemonSprite.classList.remove('sliding-idle-anim');
+            enemyPokemonSprite.style.animationDuration = '';
+        }
+    }
+
+    if (elEnemySide) {
+        if (battleSystem.isSliding) {
+            if (elEnemySide.dataset.sliding !== 'true') {
+                elEnemySide.dataset.sliding = 'true';
+                elEnemySide.style.transition = 'none';
+                elEnemySide.style.left = '100%';
+                // Trigger reflow
+                void elEnemySide.offsetWidth;
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        elEnemySide.style.transition = `left ${battleSystem.slideDuration}ms linear`;
+                        elEnemySide.style.left = '35%';
+                    });
+                });
+            }
+        } else {
+            elEnemySide.dataset.sliding = 'false';
+            elEnemySide.style.transition = 'none';
+            elEnemySide.style.left = '35%';
+        }
+    }
+}
+
+function updatePlayerUI(leader, battleSystem, glassTier, isSearching = false) {
+    const elPlayerSide = document.getElementById('player-side');
+    const playerSpriteWrapper = document.getElementById('player-sprite-wrapper');
+    const playerPokemonSprite = document.getElementById('player-pokemon-sprite');
+    const hpContainerPlayer = document.getElementById('player-battle-hp-container');
+    const hpBarPlayer = document.getElementById('player-battle-hp-bar');
+    const hpTextPlayer = document.getElementById('player-battle-hp-text');
+    const hpPctPlayer = document.getElementById('player-battle-hp-pct');
+
+    if (!leader) {
+        if (hpContainerPlayer) hpContainerPlayer.style.display = 'none';
+        if (playerPokemonSprite) {
+            playerPokemonSprite.classList.remove('sliding-idle-anim-flipped');
+            playerPokemonSprite.style.animationDuration = '';
+        }
+        return;
+    }
+
+    if (elPlayerSide) {
+        if (playerSpriteWrapper && playerPokemonSprite) {
+            let spriteSuffix = leader.qualityName === 'Shiny' ? '_shiny_Clean.png' : '_Clean.png';
+            playerPokemonSprite.src = `Assets/Pokemon Sprites/Clean/${leader.id}${spriteSuffix}`;
+
+            const isFlying = leader.types && (leader.types.includes('Flying') || leader.types.includes('Wind'));
+            playerSpriteWrapper.style.justifyContent = isFlying ? 'flex-start' : 'flex-end';
+            playerSpriteWrapper.style.alignItems = 'flex-end';
+            playerPokemonSprite.style.transform = 'scaleX(-1)';
+
+            if (battleSystem.isSliding && !isSearching) {
+                playerPokemonSprite.classList.add('sliding-idle-anim-flipped');
+                const numCycles = Math.ceil(battleSystem.slideDuration / 500);
+                const newDuration = battleSystem.slideDuration / numCycles;
+                playerPokemonSprite.style.animationDuration = `${newDuration}ms`;
+            } else {
+                playerPokemonSprite.classList.remove('sliding-idle-anim-flipped');
+                playerPokemonSprite.style.animationDuration = '';
+            }
+        }
+
+        if (hpContainerPlayer) hpContainerPlayer.style.display = glassTier >= 1 ? 'flex' : 'none';
+
+        if (hpBarPlayer && hpTextPlayer && hpPctPlayer) {
+            const pct = Math.min(100, (leader.currentHp / leader.maxHp) * 100);
+            hpBarPlayer.style.width = `${pct}%`;
+            hpBarPlayer.style.background = getHpColor(pct);
+            hpTextPlayer.innerText = `${Math.floor(leader.currentHp)}/${leader.maxHp}`;
+            hpPctPlayer.innerText = `${Math.floor(pct)}%`;
+        }
+
+        if (leader.currentHp <= 0) {
+            elPlayerSide.style.transition = 'opacity 2s linear';
+            elPlayerSide.style.opacity = '0';
+        } else {
+            elPlayerSide.style.transition = 'none';
+            elPlayerSide.style.opacity = '1';
+        }
+    }
+}
+
 export function updateBattleArena() {
     updateActiveItemsUI();
 
     const glassTier = state.stats?.upgrades?.glassTier || 0;
     const battleSystem = globals.battleSystem;
-        const inGym = battleSystem && battleSystem.gymState && battleSystem.gymState.isActive;
+    const inGym = battleSystem && battleSystem.gymState && battleSystem.gymState.isActive;
     const inGymCombat = inGym && battleSystem.gymState.inCombat;
     const inMultiplayer = battleSystem && battleSystem.multiplayerState && battleSystem.multiplayerState.isActive;
 
-    const plainsRoutes = ["Route 1","Route 2","Route 3","Route 4","Route 24","Route 25","Route 9","Route 10","Power Plant","Route 5","Fighting Dojo","Route 7","Route 6","Route 8","Route 11","Route 12","Cycling Road","Route 13","Route 14","Route 15","Pokémon Mansion","Trade With Friends Hub","Route 22","Route 23","Victory Road"];
-    const waterRoutes = ["Small Fishing Spot","Sea Routes","Seafoam Islands","Big Fishing Spot"];
-    const caveRoutes = ["Mount Moon","Cerulean Cave","Pokémon Tower","Rock Tunnel","Fossil Revival","Mythical and Legendaries"];
-    const scrollingRoutes = ["Viridian Forest","Route 1","Route 2","Route 3","Route 4","Route 24","Route 25","Route 9","Route 10","Power Plant","Route 5","Fighting Dojo","Route 7","Route 6","Route 8","Route 11","Route 12","Cycling Road","Route 13","Route 14","Route 15","Pokémon Mansion","Trade With Friends Hub","Route 22","Route 23","Victory Road","Small Fishing Spot","Sea Routes","Seafoam Islands","Big Fishing Spot","Mount Moon","Cerulean Cave","Pokémon Tower","Rock Tunnel","Fossil Revival","Mythical and Legendaries"];
-
-
     const combatArena = document.getElementById('combat-arena');
     if (combatArena) {
-                if (inMultiplayer) {
-            combatArena.style.backgroundImage = `url('./Assets/BG/BG-Cassino.jpg')`;
-        } else if (inGymCombat) {
-            const gym = battleSystem.gymState.gym;
-            if (gym.name === "Indigo Plateau") {
-                const trainerIndex = battleSystem.gymState.currentTrainerIndex;
-                const trainerBGs = [
-                    'BG-Elite4-1Lorelei.png',
-                    'BG-Elite4-2Bruno.png',
-                    'BG-Elite4-3Agatha.png',
-                    'BG-Elite4-4Lance.png',
-                    'BG-Elite4-5Champion.png'
-                ];
-                const bgImage = trainerBGs[trainerIndex] || 'BG.png';
-                combatArena.style.backgroundImage = `url('./Assets/BG/${bgImage}')`;
-            } else {
-                const gymIndex = state.config.gyms.findIndex(g => g.name === gym.name);
-                const gymBGs = [
-                    'BG-Gym-1-Pewter-Rock.png',
-                    'BG-Gym-2-Cerulean-Water.png',
-                    'BG-Gym-3-Vermilion-Electric.png',
-                    'BG-Gym-4-Celadon-Grass.png',
-                    'BG-Gym-5-Fuchsia-Poison.png',
-                    'BG-Gym-6-Saffron-Psychic.png',
-                    'BG-Gym-7-Cinnabar-Fire.png',
-                    'BG-Gym-8-Viridian-Ground.png'
-                ];
-                const bgImage = gymBGs[gymIndex] || 'BG.png';
-                combatArena.style.backgroundImage = `url('./Assets/BG/${bgImage}')`;
-            }
-        } else if (state.currentRoute === 'Safari Zone') {
-            combatArena.style.backgroundImage = `url('./Assets/BG/BG-SafariZone.png')`;
-        } else if (state.currentRoute && state.currentRoute.startsWith('Casino')) {
-             combatArena.style.backgroundImage = `url('./Assets/BG/BG-Cassino.jpg')`;
-        } else if (state.currentRoute === 'Viridian Forest') {
-            combatArena.style.backgroundImage = `url('./Assets/BG/BGForest.png')`;
-        } else if (plainsRoutes.includes(state.currentRoute)) {
-            combatArena.style.backgroundImage = `url('./Assets/BG/BGPlains.png')`;
-        } else if (waterRoutes.includes(state.currentRoute)) {
-            combatArena.style.backgroundImage = `url('./Assets/BG/BGWater.png')`;
-        } else if (caveRoutes.includes(state.currentRoute)) {
-            combatArena.style.backgroundImage = `url('./Assets/BG/BGCave.png')`;
-        } else {
-            combatArena.style.backgroundImage = `url('./Assets/BG/BG.png')`;
-        }
-
-        // Handle BG sizing and positioning for scrolling routes
-        if (scrollingRoutes.includes(state.currentRoute) && !inGymCombat) {
-            combatArena.style.backgroundSize = 'auto 100%';
-            combatArena.style.backgroundRepeat = 'repeat-x';
-
-            // Background sliding logic
-            if (battleSystem && battleSystem.isSearching) {
-                if (combatArena.dataset.slidingState !== 'searching') {
-                    combatArena.dataset.slidingState = 'searching';
-                    combatArena.style.transition = 'none';
-                    if (combatArena.dataset.bgAnimationInterval) {
-                        clearInterval(parseInt(combatArena.dataset.bgAnimationInterval));
-                    }
-                    let pos = parseFloat(combatArena.style.backgroundPositionX) || 0;
-                    combatArena.dataset.bgAnimationInterval = setInterval(() => {
-                        const gameSpeed = (state && state.settings && state.settings.gameSpeed) ? state.settings.gameSpeed : 1;
-                        const slideDelay = 1000 / gameSpeed;
-                        const moveDistance = 4.0625; // Reduced by 75%
-                        const ticksPerSlide = slideDelay / 33;
-                        const pctPerTick = moveDistance / ticksPerSlide;
-                        pos += pctPerTick;
-                        combatArena.style.backgroundPositionX = `${pos}%`;
-                    }, 33);
-                }
-            } else if (battleSystem && battleSystem.isSliding) {
-                if (combatArena.dataset.slidingState !== 'sliding') {
-                    combatArena.dataset.slidingState = 'sliding';
-                    if (combatArena.dataset.bgAnimationInterval) {
-                        clearInterval(parseInt(combatArena.dataset.bgAnimationInterval));
-                        combatArena.dataset.bgAnimationInterval = '';
-                    }
-                    let pos = parseFloat(combatArena.style.backgroundPositionX) || 0;
-                    combatArena.style.transition = `background-position-x ${battleSystem.slideDuration}ms linear`;
-
-                    // Trigger reflow
-                    void combatArena.offsetWidth;
-                    requestAnimationFrame(() => {
-                        requestAnimationFrame(() => {
-                            combatArena.style.backgroundPositionX = `${pos + 4.0625}%`;
-                        });
-                    });
-                }
-            } else {
-                if (combatArena.dataset.slidingState !== 'idle') {
-                    combatArena.dataset.slidingState = 'idle';
-                    if (combatArena.dataset.bgAnimationInterval) {
-                        clearInterval(parseInt(combatArena.dataset.bgAnimationInterval));
-                        combatArena.dataset.bgAnimationInterval = '';
-                    }
-                    // Keep the current position but remove transition
-                    combatArena.style.transition = 'none';
-                }
-            }
-        } else {
-            // Reset to default
-            combatArena.style.backgroundSize = '100% 100%';
-            combatArena.style.backgroundPositionX = 'center';
-            combatArena.style.transition = 'none';
-            if (combatArena.dataset.bgAnimationInterval) {
-                clearInterval(parseInt(combatArena.dataset.bgAnimationInterval));
-                combatArena.dataset.bgAnimationInterval = '';
-            }
-        }
+        updateBattleBackground(combatArena, state, battleSystem, inGymCombat, inMultiplayer);
+        updateBackgroundSliding(combatArena, state, battleSystem, inGymCombat);
     }
 
-    // Use standard combat arena for all battles
     if (battleSystem && battleSystem.activeEncounter) {
-        const enemy = battleSystem.activeEncounter;
-
-        // Enemy HP UI
-            const hpContainerEnemy = document.getElementById('enemy-battle-hp-container');
-            const hpBarEnemy = document.getElementById('enemy-battle-hp-bar');
-            const hpTextEnemy = document.getElementById('enemy-battle-hp-text');
-            const hpPctEnemy = document.getElementById('enemy-battle-hp-pct');
-
-
-            if (hpContainerEnemy) hpContainerEnemy.style.display = glassTier >= 1 ? 'flex' : 'none';
-
-            const enemyDataModals = document.getElementById('enemy-data-modals');
-            if (enemyDataModals) {
-                enemyDataModals.style.display = glassTier >= 3 ? 'flex' : 'none';
-
-                const levelEl = document.getElementById('enemy-battle-level');
-                if (levelEl) {
-                    levelEl.innerText = `Lv. ${enemy.level}`;
-                    levelEl.style.display = glassTier >= 3 ? 'block' : 'none';
-                }
-
-                const qtierEl = document.getElementById('enemy-battle-qtier');
-                if (qtierEl && enemy.quality) {
-                    qtierEl.innerText = `Q: ${enemy.quality.toFixed(2)}`;
-                    qtierEl.style.display = glassTier >= 4 ? 'block' : 'none';
-                }
-
-                const sumivEl = document.getElementById('enemy-battle-sumiv');
-                if (sumivEl && enemy.ivs) {
-                    const sumIV = enemy.ivs.hp + enemy.ivs.atk + enemy.ivs.def + enemy.ivs.spa + enemy.ivs.spd + enemy.ivs.spe;
-                    sumivEl.innerText = `SumIV: ${sumIV}`;
-                    sumivEl.style.display = glassTier >= 5 ? 'block' : 'none';
-                }
-            }
-
-            if (hpBarEnemy && hpTextEnemy && hpPctEnemy) {
-                const pct = Math.min(100, (enemy.currentHp / enemy.maxHp) * 100);
-                let color = '#3498db';
-                if (pct <= 0) color = '#000000';
-                else if (pct < 25) color = '#e74c3c';
-                else if (pct < 50) color = '#e67e22';
-                else if (pct < 75) color = '#f1c40f';
-                else if (pct < 100) color = '#2ecc71';
-
-                hpBarEnemy.style.width = `${pct}%`;
-                hpBarEnemy.style.background = color;
-                hpTextEnemy.innerText = `${Math.floor(enemy.currentHp)}/${enemy.maxHp}`;
-                hpPctEnemy.innerText = `${Math.floor(pct)}%`;
-            }
-
-            const elEnemySide = document.getElementById('enemy-side');
-
-            const enemySpriteWrapper = document.getElementById('enemy-sprite-wrapper');
-            const enemyPokemonSprite = document.getElementById('enemy-pokemon-sprite');
-            if (enemySpriteWrapper && enemyPokemonSprite) {
-                let enemyId = enemy.isDisguisedDitto ? 132 : enemy.id;
-                let spriteSuffix = enemy.qualityName === 'Shiny' ? '_shiny_Clean.png' : '_Clean.png';
-                enemyPokemonSprite.src = `Assets/Pokemon Sprites/Clean/${enemyId}${spriteSuffix}`;
-
-                const isFlying = enemy.types && (enemy.types.includes('Flying') || enemy.types.includes('Wind'));
-                enemySpriteWrapper.style.justifyContent = isFlying ? 'flex-start' : 'flex-end';
-                enemySpriteWrapper.style.alignItems = 'flex-start';
-                enemyPokemonSprite.style.transform = 'none';
-
-                if (battleSystem.isSliding) {
-                    enemyPokemonSprite.classList.add('sliding-idle-anim');
-                    // Calculate and set animation duration based on slide duration (default 500ms cycle)
-                    const numCycles = Math.ceil(battleSystem.slideDuration / 500);
-                    const newDuration = battleSystem.slideDuration / numCycles;
-                    enemyPokemonSprite.style.animationDuration = `${newDuration}ms`;
-                } else {
-                    enemyPokemonSprite.classList.remove('sliding-idle-anim');
-                    enemyPokemonSprite.style.animationDuration = '';
-                }
-            }
-
-            if (elEnemySide) {
-                if (battleSystem.isSliding) {
-                    if (elEnemySide.dataset.sliding !== 'true') {
-                        elEnemySide.dataset.sliding = 'true';
-                        elEnemySide.style.transition = 'none';
-                        elEnemySide.style.left = '100%';
-                        // Trigger reflow
-                        void elEnemySide.offsetWidth;
-                        requestAnimationFrame(() => {
-                            requestAnimationFrame(() => {
-                                elEnemySide.style.transition = `left ${battleSystem.slideDuration}ms linear`;
-                                elEnemySide.style.left = '35%';
-                            });
-                        });
-                    }
-                } else {
-                    elEnemySide.dataset.sliding = 'false';
-                    elEnemySide.style.transition = 'none';
-                    elEnemySide.style.left = '35%';
-                }
-            }
-
-            const leader = state.party[0];
-            const elPlayerSide = document.getElementById('player-side');
-            if (leader && elPlayerSide) {
-                const playerSpriteWrapper = document.getElementById('player-sprite-wrapper');
-                const playerPokemonSprite = document.getElementById('player-pokemon-sprite');
-                if (playerSpriteWrapper && playerPokemonSprite) {
-                    let spriteSuffix = leader.qualityName === 'Shiny' ? '_shiny_Clean.png' : '_Clean.png';
-                    playerPokemonSprite.src = `Assets/Pokemon Sprites/Clean/${leader.id}${spriteSuffix}`;
-
-                    const isFlying = leader.types && (leader.types.includes('Flying') || leader.types.includes('Wind'));
-                    playerSpriteWrapper.style.justifyContent = isFlying ? 'flex-start' : 'flex-end';
-                    playerSpriteWrapper.style.alignItems = 'flex-end';
-                    playerPokemonSprite.style.transform = 'scaleX(-1)';
-
-                    if (battleSystem.isSliding) {
-                        playerPokemonSprite.classList.add('sliding-idle-anim-flipped');
-                        // Calculate and set animation duration based on slide duration (default 500ms cycle)
-                        const numCycles = Math.ceil(battleSystem.slideDuration / 500);
-                        const newDuration = battleSystem.slideDuration / numCycles;
-                        playerPokemonSprite.style.animationDuration = `${newDuration}ms`;
-                    } else {
-                        playerPokemonSprite.classList.remove('sliding-idle-anim-flipped');
-                        playerPokemonSprite.style.animationDuration = '';
-                    }
-                }
-
-                const hpContainerPlayer = document.getElementById('player-battle-hp-container');
-                const hpBarPlayer = document.getElementById('player-battle-hp-bar');
-                const hpTextPlayer = document.getElementById('player-battle-hp-text');
-                const hpPctPlayer = document.getElementById('player-battle-hp-pct');
-
-                if (hpContainerPlayer) hpContainerPlayer.style.display = glassTier >= 1 ? 'flex' : 'none';
-
-                if (hpBarPlayer && hpTextPlayer && hpPctPlayer) {
-                    const pct = Math.min(100, (leader.currentHp / leader.maxHp) * 100);
-                    let color = '#3498db';
-                    if (pct <= 0) color = '#000000';
-                    else if (pct < 25) color = '#e74c3c';
-                    else if (pct < 50) color = '#e67e22';
-                    else if (pct < 75) color = '#f1c40f';
-                    else if (pct < 100) color = '#2ecc71';
-
-                    hpBarPlayer.style.width = `${pct}%`;
-                    hpBarPlayer.style.background = color;
-                    hpTextPlayer.innerText = `${Math.floor(leader.currentHp)}/${leader.maxHp}`;
-                    hpPctPlayer.innerText = `${Math.floor(pct)}%`;
-                }
-
-                if (leader.currentHp <= 0) {
-                    elPlayerSide.style.transition = 'opacity 2s linear';
-                    elPlayerSide.style.opacity = '0';
-                } else {
-                    elPlayerSide.style.transition = 'none';
-                    elPlayerSide.style.opacity = '1';
-                }
-            }
-        } else if (battleSystem && battleSystem.isSearching) {
-            const hpContainerEnemy = document.getElementById('enemy-battle-hp-container');
-            if (hpContainerEnemy) hpContainerEnemy.style.display = 'none';
-            const enemyDataModals = document.getElementById('enemy-data-modals');
-            if (enemyDataModals) enemyDataModals.style.display = 'none';
-
-            const elEnemySide = document.getElementById('enemy-side');
-            if (elEnemySide) {
-                elEnemySide.style.transition = 'none';
-                elEnemySide.style.left = '100%';
-                elEnemySide.style.opacity = '1';
-            }
-
-            const leader = state.party[0];
-            const elPlayerSide = document.getElementById('player-side');
-            if (leader && elPlayerSide) {
-                const playerSpriteWrapper = document.getElementById('player-sprite-wrapper');
-                const playerPokemonSprite = document.getElementById('player-pokemon-sprite');
-                if (playerSpriteWrapper && playerPokemonSprite) {
-                    let spriteSuffix = leader.qualityName === 'Shiny' ? '_shiny_Clean.png' : '_Clean.png';
-                    playerPokemonSprite.src = `Assets/Pokemon Sprites/Clean/${leader.id}${spriteSuffix}`;
-
-                    const isFlying = leader.types && (leader.types.includes('Flying') || leader.types.includes('Wind'));
-                    playerSpriteWrapper.style.justifyContent = isFlying ? 'flex-start' : 'flex-end';
-                    playerSpriteWrapper.style.alignItems = 'flex-end';
-                    playerPokemonSprite.style.transform = 'scaleX(-1)';
-                    playerPokemonSprite.classList.remove('sliding-idle-anim-flipped');
-                    playerPokemonSprite.style.animationDuration = '';
-                }
-
-                const hpContainerPlayer = document.getElementById('player-battle-hp-container');
-                const hpBarPlayer = document.getElementById('player-battle-hp-bar');
-                const hpTextPlayer = document.getElementById('player-battle-hp-text');
-                const hpPctPlayer = document.getElementById('player-battle-hp-pct');
-
-                if (hpContainerPlayer) hpContainerPlayer.style.display = glassTier >= 1 ? 'flex' : 'none';
-
-                if (hpBarPlayer && hpTextPlayer && hpPctPlayer) {
-                    const pct = Math.min(100, (leader.currentHp / leader.maxHp) * 100);
-                    let color = '#3498db';
-                    if (pct <= 0) color = '#000000';
-                    else if (pct < 25) color = '#e74c3c';
-                    else if (pct < 50) color = '#e67e22';
-                    else if (pct < 75) color = '#f1c40f';
-                    else if (pct < 100) color = '#2ecc71';
-
-                    hpBarPlayer.style.width = `${pct}%`;
-                    hpBarPlayer.style.background = color;
-                    hpTextPlayer.innerText = `${Math.floor(leader.currentHp)}/${leader.maxHp}`;
-                    hpPctPlayer.innerText = `${Math.floor(pct)}%`;
-                }
-
-                if (leader.currentHp <= 0) {
-                    elPlayerSide.style.transition = 'opacity 2s linear';
-                    elPlayerSide.style.opacity = '0';
-                } else {
-                    elPlayerSide.style.transition = 'none';
-                    elPlayerSide.style.opacity = '1';
-                }
-            } else {
-                const hpContainerPlayer = document.getElementById('player-battle-hp-container');
-                if (hpContainerPlayer) hpContainerPlayer.style.display = 'none';
-            }
-        } else {
-             const elEnemySide = document.getElementById('enemy-side');
-             if (elEnemySide) elEnemySide.style.left = '100%';
-             const hpContainerEnemy = document.getElementById('enemy-battle-hp-container');
-             if (hpContainerEnemy) hpContainerEnemy.style.display = 'none';
-             const enemyDataModals = document.getElementById('enemy-data-modals');
-             if (enemyDataModals) enemyDataModals.style.display = 'none';
-             const hpContainerPlayer = document.getElementById('player-battle-hp-container');
-             if (hpContainerPlayer) hpContainerPlayer.style.display = 'none';
-
-             const enemyPokemonSprite = document.getElementById('enemy-pokemon-sprite');
-             if (enemyPokemonSprite) {
-                 enemyPokemonSprite.classList.remove('sliding-idle-anim');
-                 enemyPokemonSprite.style.animationDuration = '';
-             }
-
-             const playerPokemonSprite = document.getElementById('player-pokemon-sprite');
-             if (playerPokemonSprite) {
-                 playerPokemonSprite.classList.remove('sliding-idle-anim-flipped');
-                 playerPokemonSprite.style.animationDuration = '';
-             }
-        }
+        updateEnemyUI(battleSystem.activeEncounter, battleSystem, glassTier, false);
+        updatePlayerUI(state.party[0], battleSystem, glassTier, false);
+    } else if (battleSystem && battleSystem.isSearching) {
+        updateEnemyUI(null, battleSystem, glassTier, true);
+        updatePlayerUI(state.party[0], battleSystem, glassTier, true);
+    } else {
+        updateEnemyUI(null, battleSystem, glassTier, false);
+        updatePlayerUI(null, battleSystem, glassTier, false);
     }
-
+}
 
 
 /* removed TYPE_COLORS */
