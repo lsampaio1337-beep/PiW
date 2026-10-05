@@ -10,7 +10,7 @@ export function getMarketAlertTarget() {
 }
 
 import { calculatePP, getCapacity, getCurrentCount } from "../mathEngine.js";
-import { state, globals } from '../state.js';
+import { state } from '../state.js';
 import { updateUI, showModal } from '../ui.js';
 
 // formatMarketNumberDown is hoisted manually if needed
