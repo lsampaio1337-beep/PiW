@@ -1,4 +1,4 @@
-import { state, globals } from '../state.js';
+import { state } from '../state.js';
 import * as mathEngine from "../mathEngine.js";
 
 // Ensure global functions that are referenced in HTML exist on window object
@@ -8,7 +8,7 @@ import * as mathEngine from "../mathEngine.js";
 
 let lastTeamCount = -1;
 
-export function updateSidebar() {
+export function updateTeamWindow() {
     const partyDiv = document.getElementById('party-list');
     if (!partyDiv) return;
     partyDiv.innerHTML = '';
@@ -16,6 +16,7 @@ export function updateSidebar() {
         const d = document.createElement('div');
         d.className = 'party-slot';
         d.style.position = 'relative';
+        d.style.border = '2px solid #3498db';
 
         // Calculate XP relative to current level
         const currentLevelXp = mathEngine.calculateTotalXP(p.level);
@@ -128,13 +129,9 @@ export function updateSidebar() {
     if (lastTeamCount !== -1 && currentTeamCount !== lastTeamCount) {
         if (window.windowManager) {
             setTimeout(() => {
-                if (lastTeamCount === 0 && currentTeamCount > 0) {
-                    window.windowManager.recalculateWindowSize('party-window');
-                } else {
-                    const win = document.getElementById('party-window');
-                    if (win && typeof win.adjustHeightForNewContent === 'function') {
-                        win.adjustHeightForNewContent();
-                    }
+                const win = document.getElementById('party-window');
+                if (win && typeof win.adjustHeightForNewContent === 'function') {
+                    win.adjustHeightForNewContent();
                 }
             }, 10);
         }
@@ -201,7 +198,7 @@ function renderDayCareSlot(container, p, battles, maxBattles, type) {
     }
 
     container.innerHTML = `
-        <div class="party-slot" style="position: relative;">
+        <div class="party-slot" style="position: relative; border: 2px solid #3498db;">
             <div style="display: flex; width: 100%; align-items: stretch; height: 100%; min-height: 55px;">
             <!-- Left Column: Sprite -->
             <div style="flex: 0 0 50px; display: flex; align-items: center; justify-content: center; position: relative;">
