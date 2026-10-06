@@ -1205,7 +1205,8 @@ export function renderJohtoOakLab() {
 }
 
 export function renderOakLab() {
-    const oakLabDiv = document.getElementById("view-prof-oak-lab");
+    // Target the inner container instead of the whole view so we don't overwrite the dynamic background
+    const oakLabDiv = document.getElementById("kanto-oak-lab-content");
     if (!oakLabDiv) return;
 
     // Check if player has pokemon
@@ -2793,7 +2794,11 @@ export function renderGenericLab() {
 
     let currentRegion = window.currentMapRegion || 'Kanto';
 
-    // Fallback if there is no specific background for this region, default to Kanto
+    // Clean up any old dynamic professors
+    const oldProfessor = labView.querySelector('.dynamic-professor');
+    if (oldProfessor) oldProfessor.remove();
+
+    // Fallback to old full-size backgrounds if a dynamic sprite layout isn't configured yet
     let bgImage = `./Assets/BG/Labs/FullSize/BG_1_Kanto_Professor_Oak_Lab.png`;
     const regionBgMap = {
         'Kanto': 'BG_1_Kanto_Professor_Oak_Lab.png',
@@ -2808,11 +2813,31 @@ export function renderGenericLab() {
         'Paldea': 'BG_10_Paldea_Turo_Lab.png'
     };
 
-    if (regionBgMap[currentRegion]) {
-        bgImage = `./Assets/BG/Labs/FullSize/${regionBgMap[currentRegion]}`;
-    }
+    // Dictionary for dynamic region sprites with Pillow mapping parameters
+    const dynamicSprites = {
+        'Hoenn': {
+            file: '3_Hoenn_Professor_Birch.png',
+            css: 'position: absolute; left: 38.473%; top: 7.990%; width: 84.532%; height: 147.005%; z-index: 0;'
+        }
+        // Kanto and Johto are hardcoded in their specific views.
+    };
 
-    labView.style.backgroundImage = `url('${bgImage}')`;
+    if (dynamicSprites[currentRegion]) {
+        // Use generic background
+        labView.style.backgroundImage = `url('./Assets/BG/Lab/BG-Lab.png')`;
+
+        // Inject the sprite image
+        let profImg = document.createElement('img');
+        profImg.src = `./Assets/BG/Lab/Professors/${dynamicSprites[currentRegion].file}`;
+        profImg.style.cssText = dynamicSprites[currentRegion].css;
+        profImg.className = 'dynamic-professor';
+        labView.insertBefore(profImg, labContent);
+    } else {
+        if (regionBgMap[currentRegion]) {
+            bgImage = `./Assets/BG/Labs/FullSize/${regionBgMap[currentRegion]}`;
+        }
+        labView.style.backgroundImage = `url('${bgImage}')`;
+    }
 
     if (!state.stats.hasPickedStarter) {
         // Show starter selection
