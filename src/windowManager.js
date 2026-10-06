@@ -561,12 +561,13 @@ export class WindowManager {
                 }
                 winElement.style.width = (newOriginalWidth + horizontalPadding) + 'px';
             }
-        } else if (newOriginalWidth > currentOriginalWidth) {
-            // Content needs more width, we must grow
+        } else if (newOriginalWidth !== currentOriginalWidth) {
+            // Content needs more or less width, we must adjust
             const growthRatio = newOriginalWidth / currentOriginalWidth;
             scalerElement.style.setProperty('--original-width', newOriginalWidth + 'px');
+            if (newOriginalHeight > 0) scalerElement.style.setProperty('--original-height', newOriginalHeight + 'px');
 
-            // Scale up the window width by the same ratio
+            // Scale up or down the window width by the same ratio
             if (oldWidth && oldWidth.endsWith('px')) {
                 const currentWidth = parseInt(oldWidth);
                 winElement.style.width = (currentWidth * growthRatio) + 'px';
@@ -578,16 +579,6 @@ export class WindowManager {
 
             winElement._originalWidth = newOriginalWidth;
             if (newOriginalHeight > 0) winElement._originalHeight = newOriginalHeight;
-
-            if (winElement._originalHeight) {
-                winElement._originalRatio = winElement._originalWidth / winElement._originalHeight;
-            }
-        } else if (newOriginalWidth !== currentOriginalWidth) {
-            // Re-evaluate proportion without forcing growth
-            winElement._originalWidth = newOriginalWidth;
-            if (newOriginalHeight > 0) winElement._originalHeight = newOriginalHeight;
-            scalerElement.style.setProperty('--original-width', newOriginalWidth + 'px');
-            if (newOriginalHeight > 0) scalerElement.style.setProperty('--original-height', newOriginalHeight + 'px');
 
             if (winElement._originalHeight) {
                 winElement._originalRatio = winElement._originalWidth / winElement._originalHeight;
