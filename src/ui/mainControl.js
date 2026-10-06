@@ -137,7 +137,8 @@ export function updateMainControl() {
     const mainControlTitle = document.getElementById('main-control-title');
     if (mainControlTitle) {
         if (isFinalChallengeCompleted) {
-            mainControlTitle.innerText = "Main Control (Kanto)";
+            const regionName = state.currentRegionName || "Kanto";
+            mainControlTitle.innerText = `Main Control (${regionName})`;
         } else {
             mainControlTitle.innerText = "Main Control";
         }

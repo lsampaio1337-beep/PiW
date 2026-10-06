@@ -1746,6 +1746,26 @@ class BattleSystem {
         this.stop();
         this.activeEncounter = null;
 
+        if (this.state.party.length === 0) {
+            // No pokemon were selected, do not display message of fainted team and go to professor lab
+            const labRoute = (this.state.currentRegionName === 'Kanto' || this.state.currentRegionName === 'Johto') ? "Professor Oak Lab" : "Professor Lab";
+            this.state.currentRoute = labRoute;
+
+            if (this.gymState) {
+                this.gymState.isActive = false;
+                this.gymState.gym = null;
+                this.gymState.inCombat = false;
+            }
+            if (typeof window.switchView === 'function') {
+                window.switchView("PROF_OAK_LAB");
+            }
+            if (typeof window.navigateToLocation === 'function') {
+                window.navigateToLocation(labRoute);
+            }
+            this.updateUI();
+            return;
+        }
+
         // Track faint
         this.state.stats.faints = (this.state.stats.faints || 0) + 1;
 
