@@ -1308,7 +1308,7 @@ export function switchView(viewName) {
 }
 
 export function updateUI() {
-    window.currentMapRegion = state.currentRegionName || 'Kanto';
+    window.currentMapRegion = window.currentMapRegion || state.currentRegionName || 'Kanto';
     updateMainControl();
     updateTeamWindow();
     updateBattleArena();
