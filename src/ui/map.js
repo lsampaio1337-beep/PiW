@@ -130,6 +130,13 @@ function generateRegionButtonsHtml(regions, hasUnlockedJohto) {
 function getUnlockedAreas() {
     let unlockedAreas = new Set();
     unlockedAreas.add("Professor Oak Lab");
+    unlockedAreas.add("Johto Oak Lab");
+    unlockedAreas.add("Professor Lab");
+
+    if (!state.stats.hasPickedStarter) {
+        return unlockedAreas;
+    }
+
     unlockedAreas.add("PokeCenter & PokeMarket");
 
     if (state.stats.completed150Challenge) {
@@ -185,7 +192,9 @@ function generateMarkersForRegion(region, unlockedAreas) {
             const locationName = locationData.name;
             const coords = locationData;
 
-            // Johto areas are unlocked by default as requested in original code
+            let isUnlocked = unlockedAreas.has(locationName);
+            if (!isUnlocked) continue;
+
             html += generateMarkerHtml(locationId, locationName, coords, true, false, false);
         }
     } else {

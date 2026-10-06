@@ -144,7 +144,7 @@ export function updateMainControl() {
         }
     }
 
-    const lockMenus = inGym || noPokemon;
+    const lockMenus = inGym || noPokemon || !state.stats.hasPickedStarter;
     const navButtons = document.getElementById('main-control');
     if (navButtons) {
         navButtons.style.pointerEvents = lockMenus ? 'none' : 'auto';
