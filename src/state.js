@@ -1,0 +1,160 @@
+export const REGION_TEMPLATE = {
+    trainer: {
+        money: 0,
+        badges: 0,
+        tokens: 0
+    },
+    party: [],
+    box: [],
+    storage: [],
+    safe: [],
+    breeding: [],
+    training: [],
+    backpack: {
+        pokeballs: { "Pokeball": 0, "Greatball": 0, "Ultraball": 0, "Safariball": 0, "Masterball": 0 },
+        potions: { "Tiny Potion": 0, "Small Potion": 0, "Regular Potion": 0, "Big Potion": 0, "Huge Potion": 0, "Ultra Potion": 0 },
+        stones: {
+            "Normal Stone": 0, "Fire Stone": 0, "Water Stone": 0, "Grass Stone": 0,
+            "Electric Stone": 0, "Ice Stone": 0, "Fighting Stone": 0, "Poison Stone": 0,
+            "Ground Stone": 0, "Flying Stone": 0, "Psychic Stone": 0, "Bug Stone": 0,
+            "Rock Stone": 0, "Ghost Stone": 0, "Dragon Stone": 0, "Steel Stone": 0,
+            "Dark Stone": 0, "Fairy Stone": 0
+        }
+    },
+    stats: {
+        battlesWon: 0,
+        caught: 0,
+        shiniesSeen: 0,
+        shiniesCaught: 0,
+        faints: 0,
+        tokensEarned: 0,
+        completedChallenges: 0,
+        activeChallenges: ["Route 1"],
+        completedChallengeIds: [],
+        qTaskTier: 0,
+        cTaskTier: 0,
+        shinySeenTaskTier: 0,
+        shinyCaughtTaskTier: 0,
+        levelTaskTier: 0,
+        caughtLvl15: 0,
+        caughtLvl30: 0,
+        caughtLvl45: 0,
+        caughtLvl60: 0,
+        caughtLvl75: 0,
+        ivTaskTier: 0,
+        bonusCandyDefeats: 0,
+        whiteCandies: 0,
+        greenCandies: 0,
+        purpleCandies: 0,
+        blackYellowCandies: 0,
+        rainbowCandies: 0,
+        candyPurchaseHistory: [],
+        dailyRewards: { daysClaimed: 0, lastClaimDate: null },
+        dailyChallenges: { lastDate: null, rotationIndex: 0, active: [], totalCompleted: 0 },
+        jigglypuffGrains: 0,
+        jigglypuffGrainsUsed: 0,
+        newRoutes: [],
+        hasUnseenMap: false,
+        hasPickedStarter: false,
+        seenSpecies: {},
+        caughtSpecies: {},
+        seenShiniesSpecies: {},
+        caughtShiniesSpecies: {},
+        upgrades: {
+            ballsTier: 0,
+            potionsTier: 0,
+            boxTier: 0,
+            glassTier: 0,
+            smartwatchTier: 0,
+            speedTier: 0,
+            lootTier: 0
+        },
+        upgradesUnlocked: {
+            balls: false,
+            potions: false,
+            box: false,
+            glass: true,
+            smartwatch: false,
+            speed: false,
+            loot: false
+        }
+    },
+    currentRoute: "Route 1",
+    currentRegionName: "Kanto"
+};
+
+export const state = {
+    ...JSON.parse(JSON.stringify(REGION_TEMPLATE)),
+    globalStats: {
+        playtime: 0,
+        hasSeenOakTutorial: false,
+        hasSeenZzZTutorial: false,
+        hasSeenMultiplayerIcon: false,
+        hasSeenGiftIcon: false,
+        hasSeenJohtoMap: false,
+        hasSeenDaycare: false,
+        hasSeenBonusCandyModal: false
+    },
+    settings: {
+        gameSpeed: 1.0,
+        autoPotion: true,
+        autoPotionThreshold: 25,
+        activePotionTier: 0, // Tiny
+        autoCatch: true,
+        activeBallTier: 0, // Pokeball
+        windowSettings: {}, // Stores window positions and sizes
+        smartCapture: {},
+        smartCaptureShiny: {}
+    },
+    regions: {},
+    config: {}
+};
+
+
+// Global reference for battle system
+export let globals = {
+    battleSystem: null
+};
+
+export function setBattleSystem(system) {
+    globals.battleSystem = system;
+}
+
+export function checkFinalChallengeCompleted() {
+    if (state.stats.completedChallengeIds && state.stats.completedChallengeIds.includes('Indigo Plateau')) {
+        return true;
+    }
+    if (state.regions && state.regions['Kanto'] && state.regions['Kanto'].stats && state.regions['Kanto'].stats.completedChallengeIds && state.regions['Kanto'].stats.completedChallengeIds.includes('Indigo Plateau')) {
+        return true;
+    }
+    return false;
+}
+
+export function swapRegion(newRegionName) {
+    if (state.currentRegionName === newRegionName) return;
+
+    // Pack current region
+    const currentRegion = state.currentRegionName;
+    state.regions[currentRegion] = {};
+    for (let key in REGION_TEMPLATE) {
+        state.regions[currentRegion][key] = JSON.parse(JSON.stringify(state[key]));
+    }
+
+    // Initialize or unpack new region
+    if (!state.regions[newRegionName]) {
+        state.regions[newRegionName] = JSON.parse(JSON.stringify(REGION_TEMPLATE));
+        state.regions[newRegionName].currentRegionName = newRegionName;
+        // set starting route
+        if (newRegionName === 'Johto') {
+            state.regions[newRegionName].currentRoute = 'Route 29';
+            state.regions[newRegionName].stats.activeChallenges = ['Route 29'];
+        }
+    }
+
+    // Mount new region to root state
+    for (let key in REGION_TEMPLATE) {
+        state[key] = state.regions[newRegionName][key];
+    }
+
+    state.currentRegionName = newRegionName;
+}
