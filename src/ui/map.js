@@ -252,8 +252,8 @@ export function showMap() {
         { name: 'Paldea', mapFile: '10 Paldea Map.png', width: 1280, height: 905 }
     ];
 
-    let showRegionBar = isFinalChallengeCompleted;
     if (isFinalChallengeCompleted) { state.globalStats.hasSeenJohtoMap = true; }
+    let showRegionBar = isFinalChallengeCompleted || state.globalStats.hasSeenJohtoMap;
 
     let regionButtonsHtml = generateRegionButtonsHtml(regions, showRegionBar);
 
