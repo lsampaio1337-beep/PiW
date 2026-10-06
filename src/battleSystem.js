@@ -57,26 +57,47 @@ class BattleSystem {
     getEvolutionStage(pokemonId) {
         if (!this.evolutionStageMap) {
             const evolveFromMap = {};
-            for (let p of this.state.config.pokemonData) {
+            const pokemonData = this.state.config.pokemonData;
+            const len = pokemonData.length;
+
+            // First pass: Build the reverse lookup map
+            for (let i = 0; i < len; i++) {
+                const p = pokemonData[i];
                 if (p.evolutions) {
-                    for (let evo of p.evolutions) {
-                        evolveFromMap[evo.to] = p.id;
+                    const evos = p.evolutions;
+                    for (let j = 0; j < evos.length; j++) {
+                        evolveFromMap[evos[j].to] = p.id;
                     }
                 }
             }
+
             this.evolutionStageMap = {};
-            const getStage = (id) => {
-                if (this.evolutionStageMap[id]) return this.evolutionStageMap[id];
-                if (!evolveFromMap[id]) {
-                    this.evolutionStageMap[id] = 1;
-                    return 1;
+
+            // Second pass: Calculate stages iteratively using an array for path to avoid recursion
+            for (let i = 0; i < len; i++) {
+                let id = pokemonData[i].id;
+
+                if (this.evolutionStageMap[id]) continue;
+
+                let stage = 1;
+                const path = [];
+
+                // Trace back to the base form or a previously calculated stage
+                while (id && !this.evolutionStageMap[id]) {
+                    path.push(id);
+                    id = evolveFromMap[id];
                 }
-                const stage = getStage(evolveFromMap[id]) + 1;
-                this.evolutionStageMap[id] = stage > 5 ? 5 : stage;
-                return this.evolutionStageMap[id];
-            };
-            for (let p of this.state.config.pokemonData) {
-                this.evolutionStageMap[p.id] = getStage(p.id);
+
+                // If we found a previously calculated stage, start from there
+                if (id) {
+                    stage = this.evolutionStageMap[id] + 1;
+                }
+
+                // Assign stages forward along the path
+                for (let j = path.length - 1; j >= 0; j--) {
+                    this.evolutionStageMap[path[j]] = stage > 5 ? 5 : stage;
+                    stage++;
+                }
             }
         }
         return this.evolutionStageMap[pokemonId] || 1;
