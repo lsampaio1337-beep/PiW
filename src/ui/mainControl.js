@@ -144,7 +144,10 @@ export function updateMainControl() {
         }
     }
 
-    const lockMenus = inGym || noPokemon || !state.stats.hasPickedStarter;
+    // Legacy saves might not have hasPickedStarter but will have party/storage
+    const isStarterPending = !state.stats.hasPickedStarter && noPokemon;
+
+    const lockMenus = inGym || noPokemon || isStarterPending;
     const navButtons = document.getElementById('main-control');
     if (navButtons) {
         navButtons.style.pointerEvents = lockMenus ? 'none' : 'auto';

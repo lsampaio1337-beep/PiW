@@ -2216,7 +2216,10 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
             alert("You cannot access this menu during a Gym Battle!");
             return true;
         }
-        if (!state.stats.hasPickedStarter) {
+        const noPokemon = state.party.length === 0 && state.storage.length === 0;
+        const isStarterPending = !state.stats.hasPickedStarter && noPokemon;
+
+        if (isStarterPending) {
             alert("You must select a starter Pokémon first!");
             return true;
         }

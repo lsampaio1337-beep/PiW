@@ -133,7 +133,10 @@ function getUnlockedAreas() {
     unlockedAreas.add("Johto Oak Lab");
     unlockedAreas.add("Professor Lab");
 
-    if (!state.stats.hasPickedStarter) {
+    const noPokemon = state.party.length === 0 && state.storage.length === 0;
+    const isStarterPending = !state.stats.hasPickedStarter && noPokemon;
+
+    if (isStarterPending) {
         return unlockedAreas;
     }
 
