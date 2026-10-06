@@ -218,11 +218,6 @@ function setupMapWindowDimensions(currentRegionObj, targetWidth) {
 }
 
 export function showMap() {
-    if (!state.stats.mapUnlocked) {
-        showModal('Locked', 'You have not unlocked the map yet. Defeat more leaders.', 'window-map');
-        return;
-    }
-
     if (state.stats.hasUnseenMap || state.stats.showMapOakNotification) {
         state.stats.hasUnseenMap = false;
         state.stats.showMapOakNotification = false;
@@ -245,10 +240,10 @@ export function showMap() {
         { name: 'Paldea', mapFile: '10 Paldea Map.png', width: 1280, height: 905 }
     ];
 
-    let hasUnlockedJohto = state.globalStats.hasSeenJohtoMap || isFinalChallengeCompleted || window.currentMapRegion !== 'Kanto';
-    if (isFinalChallengeCompleted) { state.globalStats.hasSeenJohtoMap = true; hasUnlockedJohto = true; }
+    let showRegionBar = isFinalChallengeCompleted;
+    if (isFinalChallengeCompleted) { state.globalStats.hasSeenJohtoMap = true; }
 
-    let regionButtonsHtml = generateRegionButtonsHtml(regions, hasUnlockedJohto);
+    let regionButtonsHtml = generateRegionButtonsHtml(regions, showRegionBar);
 
     const currentRegionObj = regions.find(r => r.name === window.currentMapRegion) || regions[0];
     let mapImage = `./Assets/Map/${currentRegionObj.mapFile}`;
@@ -276,7 +271,7 @@ export function showMap() {
         const ar = currentRegionObj.width / currentRegionObj.height;
         const targetWidth = Math.min(1000, window.innerHeight * 0.8 * ar) + "px";
 
-        if (hasUnlockedJohto) {
+        if (showRegionBar) {
             window.showModal(titleHtml, html, 'window-map', targetWidth);
         } else {
             window.showModal('Map', html, 'window-map', targetWidth);
