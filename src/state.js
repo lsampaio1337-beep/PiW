@@ -120,6 +120,16 @@ export function setBattleSystem(system) {
     globals.battleSystem = system;
 }
 
+export function checkFinalChallengeCompleted() {
+    if (state.stats.completedChallengeIds && state.stats.completedChallengeIds.includes('Indigo Plateau')) {
+        return true;
+    }
+    if (state.regions && state.regions['Kanto'] && state.regions['Kanto'].stats && state.regions['Kanto'].stats.completedChallengeIds && state.regions['Kanto'].stats.completedChallengeIds.includes('Indigo Plateau')) {
+        return true;
+    }
+    return false;
+}
+
 export function swapRegion(newRegionName) {
     if (state.currentRegionName === newRegionName) return;
 

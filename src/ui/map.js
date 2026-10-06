@@ -1,4 +1,4 @@
-import { state, globals, swapRegion } from '../state.js';
+import { state, globals, swapRegion, checkFinalChallengeCompleted } from '../state.js';
 import { updateUI, switchView } from '../ui.js';
 import { setupMarket } from './market.js';
 
@@ -226,7 +226,7 @@ export function showMap() {
 
     let unlockedAreas = getUnlockedAreas();
 
-    let isFinalChallengeCompleted = state.stats.completedChallengeIds && state.stats.completedChallengeIds.includes('Indigo Plateau');
+    let isFinalChallengeCompleted = checkFinalChallengeCompleted();
     const regions = [
         { name: 'Kanto', mapFile: '1 Kanto Map.png', width: 2571, height: 1818 },
         { name: 'Johto', mapFile: '2 Johto Map.png', width: 1961, height: 1316 },

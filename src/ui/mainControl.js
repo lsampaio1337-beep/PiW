@@ -1,4 +1,4 @@
-import { state, globals } from '../state.js';
+import { state, globals, checkFinalChallengeCompleted } from '../state.js';
 import { checkDailyRewardAvailable, checkAnyDailyChallengeCompleted } from './calendar.js';
 
 function getStatusHtml(isMet) {
@@ -132,7 +132,7 @@ export function updateMainControl() {
     const inGym = battleSystem && battleSystem.gymState && battleSystem.gymState.isActive;
     const noPokemon = state.party.length === 0 && state.storage.length === 0;
 
-    let isFinalChallengeCompleted = state.stats.completedChallengeIds && state.stats.completedChallengeIds.includes('Indigo Plateau');
+    let isFinalChallengeCompleted = checkFinalChallengeCompleted();
 
     const mainControlTitle = document.getElementById('main-control-title');
     if (mainControlTitle) {
@@ -254,7 +254,7 @@ export function updateMainControl() {
 
     const mapNotification = document.getElementById('map-notification');
     if (mapNotification) {
-        let isFinalChallengeCompleted = state.stats.completedChallengeIds && state.stats.completedChallengeIds.includes('Indigo Plateau');
+        let isFinalChallengeCompleted = checkFinalChallengeCompleted();
         if (state.stats.hasUnseenMap || state.stats.showMapOakNotification || (isFinalChallengeCompleted && !state.globalStats.hasSeenJohtoMap)) {
             mapNotification.style.display = 'block';
         } else {
