@@ -116,7 +116,7 @@ export const TYPE_COLORS = {
 };
 import { openMultiplayerModal } from './ui/multiplayer.js';
 import { updateMainControl } from './ui/mainControl.js';
-import { updateSidebar } from './ui/sidebar.js';
+import { updateTeamWindow } from './ui/teamWindow.js';
 import { updateBattleArena, showDamage, playCombatAnimations, triggerDefeatAnimation, showLoot, showLevelUp } from './ui/battle.js';
 import { showCalendar } from './ui/calendar.js';
 import './ui/tokenShop.js';
@@ -1310,7 +1310,7 @@ export function switchView(viewName) {
 export function updateUI() {
     window.currentMapRegion = state.currentRegionName || 'Kanto';
     updateMainControl();
-    updateSidebar();
+    updateTeamWindow();
     updateBattleArena();
 }
 
@@ -1400,7 +1400,7 @@ function selectJohtoStarter(id) {
     storage.save(state);
 
     // Refresh UI
-    updateSidebar();
+    updateTeamWindow();
     renderJohtoOakLab();
 }
 
@@ -1457,7 +1457,7 @@ function selectStarter(id) {
         }
         if (typeof partyWindow.adjustHeightForNewContent === 'function') partyWindow.adjustHeightForNewContent();
     }
-    updateSidebar();
+    updateTeamWindow();
 
     // Add identical pokemon to Team
     const starterCopy = {
@@ -1484,7 +1484,7 @@ function selectStarter(id) {
     if (partyWindow && window.windowManager) {
         if (typeof partyWindow.adjustHeightForNewContent === 'function') partyWindow.adjustHeightForNewContent();
     }
-    updateSidebar();
+    updateTeamWindow();
 
     // Remove similar pokemon from Team
     state.party.pop();
@@ -1493,7 +1493,7 @@ function selectStarter(id) {
     if (partyWindow && window.windowManager) {
         if (typeof partyWindow.adjustHeightForNewContent === 'function') partyWindow.adjustHeightForNewContent();
     }
-    updateSidebar();
+    updateTeamWindow();
 
     // Continue normal game flow
     const navButtons = document.getElementById('main-control');
