@@ -140,6 +140,16 @@ function getRegionStats(regionName) {
 function getUnlockedAreas() {
     let unlockedAreas = new Set();
     unlockedAreas.add("Professor Oak Lab");
+    unlockedAreas.add("Johto Oak Lab");
+    unlockedAreas.add("Professor Lab");
+
+    const noPokemon = state.party.length === 0 && state.storage.length === 0;
+    const isStarterPending = !state.stats.hasPickedStarter && noPokemon;
+
+    if (isStarterPending) {
+        return unlockedAreas;
+    }
+
     unlockedAreas.add("PokeCenter & PokeMarket");
 
     let targetStats = getRegionStats(window.currentMapRegion) || state.stats;
@@ -197,7 +207,9 @@ function generateMarkersForRegion(region, unlockedAreas) {
             const locationName = locationData.name;
             const coords = locationData;
 
-            // Johto areas are unlocked by default as requested in original code
+            let isUnlocked = unlockedAreas.has(locationName);
+            if (!isUnlocked) continue;
+
             html += generateMarkerHtml(locationId, locationName, coords, true, false, false);
         }
     } else {
@@ -252,8 +264,8 @@ export function showMap() {
         { name: 'Paldea', mapFile: '10 Paldea Map.png', width: 1280, height: 905 }
     ];
 
-    let showRegionBar = isFinalChallengeCompleted;
     if (isFinalChallengeCompleted) { state.globalStats.hasSeenJohtoMap = true; }
+    let showRegionBar = isFinalChallengeCompleted || state.globalStats.hasSeenJohtoMap;
 
     let regionButtonsHtml = generateRegionButtonsHtml(regions, showRegionBar);
 
