@@ -46,13 +46,16 @@ def parse_region(url):
                     else:
                         method = "Unknown"
 
+                    # Normalize methods to merge "Walking", "Headbutt", "Headbutt (Special)"
+                    method_lower = method.lower()
+                    if "walking" in method_lower or "headbutt" in method_lower:
+                        method = "Walking/Headbutt"
+
                     headers_row = table.find('tr')
                     ths = headers_row.find_all(['th', 'td']) if headers_row else []
 
-                    # Store active rowspans. Dictionary format: {column_index: {"rowspan": int, "element": soup_element}}
                     active_rowspans = {}
 
-                    # Keep track of actual column indices accounting for colspans in the header
                     header_cols = []
                     for th in ths:
                         text = th.text.strip()
@@ -73,7 +76,6 @@ def parse_region(url):
                         if not cells and not active_rowspans:
                             continue
 
-                        # Reconstruct the row considering rowspans and colspans
                         actual_row = []
                         cell_idx = 0
                         col_idx = 0
@@ -98,7 +100,6 @@ def parse_region(url):
                                         col_idx += 1
                                     cell_idx += 1
                                 else:
-                                    # If we ran out of cells but still expect columns, just append None
                                     actual_row.append(None)
                                     col_idx += 1
 
@@ -144,7 +145,6 @@ if __name__ == "__main__":
     url = 'https://pokemondb.net/location'
     data = parse_region(url)
 
-    # Merge duplicate pokemon on same location and method
     merged = {}
     for d in data:
         key = (d['Location'], d['Pokemon'], d['Method'])
