@@ -53,18 +53,103 @@ window.switchMapRegion = function(region) {
     showMap();
 };
 
-export function showMap() {
-    if (state.stats.hasUnseenMap || state.stats.showMapOakNotification) {
-        state.stats.hasUnseenMap = false;
-        state.stats.showMapOakNotification = false;
-        updateUI();
+
+function generateMarkerHtml(locationId, locationName, coords, isUnlocked, hasNewNotification, showCheckmark) {
+    if (!isUnlocked) return '';
+
+    let markerImg = './Assets/Extra/Spot.png';
+    let isClickable = true;
+
+    if (locationId === 'professor_oak_lab' || locationId === 'johto_oak_lab') {
+        markerImg = './Assets/Extra/Spot_Oak.png';
+    } else if (locationId === 'pokemon_center___market') {
+        markerImg = './Assets/Extra/Spot_PCPM.png';
+    } else if (locationId === 'indigo_plateu') {
+        markerImg = './Assets/Extra/Spot_E4.png';
+    } else if (locationId === 'safari_zone') {
+        markerImg = './Assets/Extra/Spot_Safariball.png';
+    } else if (locationId === 'casino') {
+        markerImg = './Assets/Extra/Spot_Casino.png';
+    } else if (locationId === 'daycare') {
+        markerImg = './Assets/Map/Spot_Daycare.png';
+    } else if (locationId === 'pewter_gym') {
+        markerImg = './Assets/Badges/Badge Kanto 1.png';
+    } else if (locationId === 'cerulean_gym') {
+        markerImg = './Assets/Badges/Badge Kanto 2.png';
+    } else if (locationId === 'vermilion_gym') {
+        markerImg = './Assets/Badges/Badge Kanto 3.png';
+    } else if (locationId === 'celadon_gym') {
+        markerImg = './Assets/Badges/Badge Kanto 4.png';
+    } else if (locationId === 'fuchsia_gym') {
+        markerImg = './Assets/Badges/Badge Kanto 5.png';
+    } else if (locationId === 'saffron_gym') {
+        markerImg = './Assets/Badges/Badge Kanto 6.png';
+    } else if (locationId === 'cinnabar_gym') {
+        markerImg = './Assets/Badges/Badge Kanto 7.png';
+    } else if (locationId === 'viridian_gym') {
+        markerImg = './Assets/Badges/Badge Kanto 8.png';
     }
 
+    // Standardize spot sizes
+    let markerWidth = "24px";
+    let markerHeight = "24px";
+    let dropShadow = "none";
+
+    if (locationId === 'pokemon_center___market') {
+        markerWidth = "32px";
+        markerHeight = "32px";
+    } else if (['professor_oak_lab', 'johto_oak_lab', 'indigo_plateu', 'safari_zone', 'casino', 'daycare'].includes(locationId)) {
+        markerWidth = "28px";
+        markerHeight = "28px";
+    }
+
+    if (markerImg !== './Assets/Extra/Spot.png') {
+        // Solid black outline (4-axis) and a larger soft white glow
+        dropShadow = "drop-shadow(1px 0px 0 #000) drop-shadow(-1px 0px 0 #000) drop-shadow(0px 1px 0 #000) drop-shadow(0px -1px 0 #000) drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.8))";
+    }
+
+    let markerClass = hasNewNotification ? 'map-marker pulse-marker' : 'map-marker';
+    let safeLocationName = locationName.replace(/'/g, "&#39;");
+    let jsLocationName = locationName.replace(/'/g, "\\'");
+
+    return `
+        <div class="${markerClass}"
+             data-location="${safeLocationName}"
+             title="${safeLocationName}"
+             style="position: absolute; left: ${coords.x}%; top: ${coords.y}%; width: ${markerWidth}; height: ${markerHeight}; background-image: url('${markerImg}'); background-size: contain; background-repeat: no-repeat; transform: translate(-50%, -50%); filter: ${dropShadow}; cursor: ${isClickable ? 'pointer' : 'default'};"
+             ${isClickable ? `onclick="window.navigateToLocation('${jsLocationName}')"` : ''}
+             onmousemove="window.showMapTooltip(event, '${jsLocationName}')"
+             onmouseout="window.hideMapTooltip()">
+             ${showCheckmark ? '<div style="position:absolute; top:-5px; right:-5px; background:green; color:white; border-radius:50%; width:15px; height:15px; font-size:10px; line-height:15px; text-align:center;">✓</div>' : ''}
+        </div>
+    `;
+}
+
+function generateRegionButtonsHtml(regions, hasUnlockedJohto) {
+    if (!hasUnlockedJohto) return '';
+
+    let exclamationHtml = !state.globalStats.hasSeenJohtoMap ? `<img src="Assets/Extra/ExclamationMark.png" style="position: absolute; top: -5px; right: -5px; width: 15px; height: auto; pointer-events: none; z-index: 10;">` : '';
+
+    let buttonsHtml = regions.map(r => {
+        let extra = r.name === 'Johto' ? exclamationHtml : '';
+        let style = window.currentMapRegion === r.name
+            ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);'
+            : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;';
+        return `<button onclick="window.switchMapRegion('${r.name}')" style="${style} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s; position: relative;" onmousedown="event.stopPropagation()">${r.name}${extra}</button>`;
+    }).join('');
+
+    return `
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px;">
+            ${buttonsHtml}
+        </div>
+    `;
+}
+
+function getUnlockedAreas() {
     let unlockedAreas = new Set();
     unlockedAreas.add("Professor Oak Lab");
     unlockedAreas.add("PokeCenter & PokeMarket");
 
-    // Check if 150 unique species are caught
     if (state.stats.completed150Challenge) {
         unlockedAreas.add("Mythical and Legendaries");
     }
@@ -79,9 +164,92 @@ export function showMap() {
             parseAreaNames(id).forEach(area => unlockedAreas.add(area));
         });
     }
+    return unlockedAreas;
+}
+
+function generateMarkersForRegion(region, unlockedAreas) {
+    let html = '';
+    if (region === 'Kanto') {
+        for (const [locationId, locationData] of Object.entries(state.config.mapCoordinates)) {
+            const locationName = locationData.name;
+            const coords = locationData;
+            let isUnlocked = unlockedAreas.has(locationName);
+            if (!isUnlocked) continue;
+
+            let hasNewNotification = false;
+            let showCheckmark = false;
+
+            if (state.stats.newRoutes && state.stats.newRoutes.some(r => parseAreaNames(r).includes(locationName))) {
+                hasNewNotification = true;
+            }
+            if (locationId === 'professor_oak_lab' && state.stats.showOakMarkerPulse) {
+                hasNewNotification = true;
+            }
+
+            // Checkmarks for gyms
+            if (locationId === 'pewter_gym' && state.trainer.badges >= 1) showCheckmark = true;
+            if (locationId === 'cerulean_gym' && state.trainer.badges >= 2) showCheckmark = true;
+            if (locationId === 'vermilion_gym' && state.trainer.badges >= 3) showCheckmark = true;
+            if (locationId === 'celadon_gym' && state.trainer.badges >= 4) showCheckmark = true;
+            if (locationId === 'fuchsia_gym' && state.trainer.badges >= 5) showCheckmark = true;
+            if (locationId === 'saffron_gym' && state.trainer.badges >= 6) showCheckmark = true;
+            if (locationId === 'cinnabar_gym' && state.trainer.badges >= 7) showCheckmark = true;
+            if (locationId === 'viridian_gym' && state.trainer.badges >= 8) showCheckmark = true;
+
+            html += generateMarkerHtml(locationId, locationName, coords, true, hasNewNotification, showCheckmark);
+        }
+    } else if (region === 'Johto') {
+        for (const [locationId, locationData] of Object.entries(state.config.johtoMapCoordinates || {})) {
+            const locationName = locationData.name;
+            const coords = locationData;
+
+            // Johto areas are unlocked by default as requested in original code
+            html += generateMarkerHtml(locationId, locationName, coords, true, false, false);
+        }
+    } else {
+        // Fallback for new regions
+        let coords = { x: 50, y: 50 };
+        let locationName = "Professor Lab";
+        html += generateMarkerHtml("professor_oak_lab", locationName, coords, true, false, false);
+    }
+    return html;
+}
+
+function setupMapWindowDimensions(currentRegionObj, targetWidth) {
+    if (window.windowManager) {
+        const winEl = document.getElementById('window-map');
+        if (winEl) {
+            const contentPanel = winEl.querySelector('.content-panel');
+            if (contentPanel) { contentPanel.style.padding = '0'; }
+            const header = winEl.querySelector('.window-header');
+            const headerH = header ? header.offsetHeight : 30;
+            const widthVal = parseFloat(targetWidth);
+            const targetHeight = (widthVal / (currentRegionObj.width / currentRegionObj.height)) + headerH;
+            winEl.style.height = targetHeight + 'px';
+            const scaler = winEl.querySelector('.window-content-scaler');
+            if (scaler) {
+                scaler.style.height = '100%';
+                scaler.style.width = '100%';
+            }
+        }
+    }
+}
+
+export function showMap() {
+    if (!state.stats.mapUnlocked) {
+        showModal('Locked', 'You have not unlocked the map yet. Defeat more leaders.', 'window-map');
+        return;
+    }
+
+    if (state.stats.hasUnseenMap || state.stats.showMapOakNotification) {
+        state.stats.hasUnseenMap = false;
+        state.stats.showMapOakNotification = false;
+        updateUI();
+    }
+
+    let unlockedAreas = getUnlockedAreas();
 
     let isFinalChallengeCompleted = state.stats.completedChallengeIds && state.stats.completedChallengeIds.includes('Indigo Plateau');
-    let regionButtonsHtml = '';
     const regions = [
         { name: 'Kanto', mapFile: '1 Kanto Map.png', width: 2571, height: 1818 },
         { name: 'Johto', mapFile: '2 Johto Map.png', width: 1961, height: 1316 },
@@ -98,23 +266,7 @@ export function showMap() {
     let hasUnlockedJohto = state.globalStats.hasSeenJohtoMap || isFinalChallengeCompleted || window.currentMapRegion !== 'Kanto';
     if (isFinalChallengeCompleted) { state.globalStats.hasSeenJohtoMap = true; hasUnlockedJohto = true; }
 
-    if (hasUnlockedJohto) {
-        let exclamationHtml = !state.globalStats.hasSeenJohtoMap ? `<img src="Assets/Extra/ExclamationMark.png" style="position: absolute; top: -5px; right: -5px; width: 15px; height: auto; pointer-events: none; z-index: 10;">` : '';
-
-        let buttonsHtml = regions.map(r => {
-            let extra = r.name === 'Johto' ? exclamationHtml : '';
-            let style = window.currentMapRegion === r.name
-                ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);'
-                : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;';
-            return `<button onclick="window.switchMapRegion('${r.name}')" style="${style} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s; position: relative;" onmousedown="event.stopPropagation()">${r.name}${extra}</button>`;
-        }).join('');
-
-        regionButtonsHtml = `
-            <div style="display: flex; flex-wrap: wrap; justify-content: center; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px;">
-                ${buttonsHtml}
-            </div>
-        `;
-    }
+    let regionButtonsHtml = generateRegionButtonsHtml(regions, hasUnlockedJohto);
 
     const currentRegionObj = regions.find(r => r.name === window.currentMapRegion) || regions[0];
     let mapImage = `./Assets/Map/${currentRegionObj.mapFile}`;
@@ -124,159 +276,7 @@ export function showMap() {
         <div id="interactive-map" style="position: relative; width: 100%; aspect-ratio: ${aspectRatio}; background-image: url('${mapImage}'); background-size: 100% 100%; background-repeat: no-repeat; background-position: center;">
     `;
 
-    if (window.currentMapRegion === 'Kanto') {
-        for (const [locationId, locationData] of Object.entries(state.config.mapCoordinates)) {
-            const locationName = locationData.name;
-            const coords = locationData;
-
-        let isUnlocked = unlockedAreas.has(locationName);
-
-        if (isUnlocked) {
-
-            let markerImg = './Assets/Extra/Spot.png';
-            let showCheckmark = false;
-            let isClickable = true;
-            let hasNewNotification = false;
-
-            if (state.stats.newRoutes && state.stats.newRoutes.some(r => parseAreaNames(r).includes(locationName))) {
-                hasNewNotification = true;
-            }
-
-            if (locationId === 'professor_oak_lab') {
-                markerImg = './Assets/Extra/Spot_Oak.png';
-                if (state.stats.showOakMarkerPulse) {
-                    hasNewNotification = true;
-                }
-            }
-            else if (locationId === 'pokemon_center___market') markerImg = './Assets/Extra/Spot_PCPM.png';
-            else if (locationId === 'indigo_plateu') markerImg = './Assets/Extra/Spot_E4.png';
-            else if (locationId === 'safari_zone') markerImg = './Assets/Extra/Spot_Safariball.png';
-            else if (locationId === 'casino') { markerImg = './Assets/Extra/Spot_Casino.png'; }
-            else if (['mount_moon', 'rock_tunnel', 'cerulean_cave', 'seafoam_islands', 'diglett_s_cave'].includes(locationId)) markerImg = './Assets/Extra/Spot.png';
-            else if (locationId === 'small_fishing_spot') markerImg = './Assets/Extra/Spot.png';
-            else if (locationId === 'big_fishing_spot') markerImg = './Assets/Extra/Spot.png';
-            else if (locationId === 'fighting_dojo') markerImg = './Assets/Extra/Spot.png';
-            else if (locationId === 'fossil_revival') markerImg = './Assets/Extra/Spot.png';
-            else if (locationId === 'pok_mon_mansion') markerImg = './Assets/Extra/Spot.png';
-            else if (locationId === 'trade_with_friends_hub') markerImg = './Assets/Extra/Spot.png';
-            else if (locationId === 'daycare') markerImg = './Assets/Map/Spot_Daycare.png';
-            else if (locationId === 'mythical_and_legendaries') markerImg = './Assets/Extra/Spot.png';
-            else if (locationId === 'pewter_gym') { markerImg = './Assets/Badges/Badge Kanto 1.png'; if (state.trainer.badges >= 1) showCheckmark = true; }
-            else if (locationId === 'cerulean_gym') { markerImg = './Assets/Badges/Badge Kanto 2.png'; if (state.trainer.badges >= 2) showCheckmark = true; }
-            else if (locationId === 'vermilion_gym') { markerImg = './Assets/Badges/Badge Kanto 3.png'; if (state.trainer.badges >= 3) showCheckmark = true; }
-            else if (locationId === 'celadon_gym') { markerImg = './Assets/Badges/Badge Kanto 4.png'; if (state.trainer.badges >= 4) showCheckmark = true; }
-            else if (locationId === 'fuchsia_gym') { markerImg = './Assets/Badges/Badge Kanto 5.png'; if (state.trainer.badges >= 5) showCheckmark = true; }
-            else if (locationId === 'saffron_gym') { markerImg = './Assets/Badges/Badge Kanto 6.png'; if (state.trainer.badges >= 6) showCheckmark = true; }
-            else if (locationId === 'cinnabar_gym') { markerImg = './Assets/Badges/Badge Kanto 7.png'; if (state.trainer.badges >= 7) showCheckmark = true; }
-            else if (locationId === 'viridian_gym') { markerImg = './Assets/Badges/Badge Kanto 8.png'; if (state.trainer.badges >= 8) showCheckmark = true; }
-
-            // Standardize spot sizes
-            let markerWidth = "24px";
-            let markerHeight = "24px";
-            let dropShadow = "none";
-
-            if (locationId === 'pokemon_center___market') {
-                markerWidth = "32px";
-                markerHeight = "32px";
-            } else if (['professor_oak_lab', 'indigo_plateu', 'safari_zone', 'casino', 'daycare'].includes(locationId)) {
-                markerWidth = "28px";
-                markerHeight = "28px";
-            }
-
-            if (markerImg !== './Assets/Extra/Spot.png') {
-                // Solid black outline (4-axis) and a larger soft white glow
-                dropShadow = "drop-shadow(1px 0px 0 #000) drop-shadow(-1px 0px 0 #000) drop-shadow(0px 1px 0 #000) drop-shadow(0px -1px 0 #000) drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.8))";
-            }
-
-
-            let markerClass = hasNewNotification ? 'map-marker pulse-marker' : 'map-marker';
-
-            html += `
-                <div class="${markerClass}"
-                     data-location="${locationName.replace(/'/g, "&#39;")}"
-                     title="${locationName.replace(/'/g, "&#39;")}"
-                     style="position: absolute; left: ${coords.x}%; top: ${coords.y}%; width: ${markerWidth}; height: ${markerHeight}; background-image: url('${markerImg}'); background-size: contain; background-repeat: no-repeat; transform: translate(-50%, -50%); filter: ${dropShadow}; cursor: ${isClickable ? 'pointer' : 'default'};"
-                     ${isClickable ? `onclick="window.navigateToLocation('${locationName.replace(/'/g, "\\'")}')"` : ''}
-                     onmousemove="window.showMapTooltip(event, '${locationName.replace(/'/g, "\\'")}')"
-                     onmouseout="window.hideMapTooltip()">
-                     ${showCheckmark ? '<div style="position:absolute; top:-5px; right:-5px; background:green; color:white; border-radius:50%; width:15px; height:15px; font-size:10px; line-height:15px; text-align:center;">✓</div>' : ''}
-                </div>
-            `;
-        }
-        }
-    } else if (window.currentMapRegion === 'Johto') {
-        for (const [locationId, locationData] of Object.entries(state.config.johtoMapCoordinates || {})) {
-            const locationName = locationData.name;
-            const coords = locationData;
-
-            let isUnlocked = true; // Unlocked by default as requested
-
-            if (isUnlocked) {
-                let markerImg = './Assets/Extra/Spot.png';
-                let showCheckmark = false;
-                let isClickable = true;
-                let hasNewNotification = false;
-
-                if (locationId === 'johto_oak_lab') {
-                    markerImg = './Assets/Extra/Spot_Oak.png';
-                }
-                else if (locationId === 'pokemon_center___market') {
-                    markerImg = './Assets/Extra/Spot_PCPM.png';
-                }
-
-                // Standardize spot sizes
-                let markerWidth = "24px";
-                let markerHeight = "24px";
-                let dropShadow = "none";
-
-                if (locationId === 'pokemon_center___market') {
-                    markerWidth = "32px";
-                    markerHeight = "32px";
-                } else if (['johto_oak_lab'].includes(locationId)) {
-                    markerWidth = "28px";
-                    markerHeight = "28px";
-                }
-
-                if (markerImg !== './Assets/Extra/Spot.png') {
-                    // Solid black outline (4-axis) and a larger soft white glow
-                    dropShadow = "drop-shadow(1px 0px 0 #000) drop-shadow(-1px 0px 0 #000) drop-shadow(0px 1px 0 #000) drop-shadow(0px -1px 0 #000) drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.8))";
-                }
-
-                let markerClass = hasNewNotification ? 'map-marker pulse-marker' : 'map-marker';
-
-                html += `
-                    <div class="${markerClass}"
-                         data-location="${locationName.replace(/'/g, "&#39;")}"
-                         title="${locationName.replace(/'/g, "&#39;")}"
-                         style="position: absolute; left: ${coords.x}%; top: ${coords.y}%; width: ${markerWidth}; height: ${markerHeight}; background-image: url('${markerImg}'); background-size: contain; background-repeat: no-repeat; transform: translate(-50%, -50%); filter: ${dropShadow}; cursor: ${isClickable ? 'pointer' : 'default'};"
-                         ${isClickable ? `onclick="window.navigateToLocation('${locationName.replace(/'/g, "\\'")}')"` : ''}
-                         onmousemove="window.showMapTooltip(event, '${locationName.replace(/'/g, "\\'")}')"
-                         onmouseout="window.hideMapTooltip()">
-                         ${showCheckmark ? '<div style="position:absolute; top:-5px; right:-5px; background:green; color:white; border-radius:50%; width:15px; height:15px; font-size:10px; line-height:15px; text-align:center;">✓</div>' : ''}
-                    </div>
-                `;
-            }
-        }
-    } else {
-        // Fallback for new regions: render a Professor spot at 50,50
-        let coords = { x: 50, y: 50 };
-        let locationName = "Professor Lab";
-        let markerImg = './Assets/Extra/Spot_Oak.png';
-        let markerWidth = "28px";
-        let markerHeight = "28px";
-        let dropShadow = "drop-shadow(1px 0px 0 #000) drop-shadow(-1px 0px 0 #000) drop-shadow(0px 1px 0 #000) drop-shadow(0px -1px 0 #000) drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.8))";
-
-        html += `
-            <div class="map-marker"
-                 data-location="${locationName.replace(/'/g, "&#39;")}"
-                 title="${locationName.replace(/'/g, "&#39;")}"
-                 style="position: absolute; left: ${coords.x}%; top: ${coords.y}%; width: ${markerWidth}; height: ${markerHeight}; background-image: url('${markerImg}'); background-size: contain; background-repeat: no-repeat; transform: translate(-50%, -50%); filter: ${dropShadow}; cursor: pointer;"
-                 onclick="window.navigateToLocation('${locationName.replace(/'/g, "\'")}')"
-                 onmousemove="window.showMapTooltip(event, '${locationName.replace(/'/g, "\'")}')"
-                 onmouseout="window.hideMapTooltip()">
-            </div>
-        `;
-    }
+    html += generateMarkersForRegion(window.currentMapRegion, unlockedAreas);
 
     html += `
         </div>
@@ -299,23 +299,8 @@ export function showMap() {
         } else {
             window.showModal('Map', html, 'window-map', targetWidth);
         }
-        if (window.windowManager) {
-            const winEl = document.getElementById('window-map');
-            if (winEl) {
-                const contentPanel = winEl.querySelector('.content-panel');
-                if (contentPanel) { contentPanel.style.padding = '0'; }
-                const header = winEl.querySelector('.window-header');
-                const headerH = header ? header.offsetHeight : 30;
-                const widthVal = parseFloat(targetWidth);
-                const targetHeight = (widthVal / (currentRegionObj.width / currentRegionObj.height)) + headerH;
-                winEl.style.height = targetHeight + 'px';
-                const scaler = winEl.querySelector('.window-content-scaler');
-                if (scaler) {
-                    scaler.style.height = '100%';
-                    scaler.style.width = '100%';
-                }
-            }
-        }
+
+        setupMapWindowDimensions(currentRegionObj, targetWidth);
     }
 }
 
