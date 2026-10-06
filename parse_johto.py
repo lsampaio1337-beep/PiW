@@ -39,10 +39,8 @@ def parse_region(url):
 
             for table in s.find_all('table'):
                 prev_h2 = table.find_previous('h2')
-                # Strict check for generation 2
                 if prev_h2 and prev_h2.get('id') == 'gen2':
                     prev_h3 = table.find_previous('h3')
-                    # Sometimes the method is in an h4 if there's multiple methods
                     if prev_h3 and prev_h3.find_previous('h2') == prev_h2:
                         method = prev_h3.text.strip()
                     else:
@@ -50,25 +48,72 @@ def parse_region(url):
 
                     headers_row = table.find('tr')
                     ths = headers_row.find_all(['th', 'td']) if headers_row else []
-                    header_names = [th.text.strip() for th in ths]
 
-                    level_idx = header_names.index('Levels') if 'Levels' in header_names else -1
-                    rarity_idx = header_names.index('Rarity') if 'Rarity' in header_names else -1
+                    # Store active rowspans. Dictionary format: {column_index: {"rowspan": int, "element": soup_element}}
+                    active_rowspans = {}
+
+                    # Keep track of actual column indices accounting for colspans in the header
+                    header_cols = []
+                    for th in ths:
+                        text = th.text.strip()
+                        colspan = int(th.get('colspan', 1))
+                        for _ in range(colspan):
+                            header_cols.append(text)
+
+                    level_col = -1
+                    rarity_col = -1
+                    for i, th in enumerate(header_cols):
+                        if 'Levels' in th:
+                            level_col = i
+                        if 'Rarity' in th:
+                            rarity_col = i
 
                     for row in table.find_all('tr')[1:]:
                         cells = row.find_all('td')
-                        if not cells:
+                        if not cells and not active_rowspans:
                             continue
 
-                        pokemon = cells[0].text.strip()
+                        # Reconstruct the row considering rowspans and colspans
+                        actual_row = []
+                        cell_idx = 0
+                        col_idx = 0
+
+                        while col_idx < len(header_cols):
+                            if col_idx in active_rowspans:
+                                actual_row.append(active_rowspans[col_idx]["element"])
+                                active_rowspans[col_idx]["rowspan"] -= 1
+                                if active_rowspans[col_idx]["rowspan"] == 0:
+                                    del active_rowspans[col_idx]
+                                col_idx += 1
+                            else:
+                                if cell_idx < len(cells):
+                                    cell = cells[cell_idx]
+                                    colspan = int(cell.get('colspan', 1))
+                                    rowspan = int(cell.get('rowspan', 1))
+
+                                    for _ in range(colspan):
+                                        actual_row.append(cell)
+                                        if rowspan > 1:
+                                            active_rowspans[col_idx] = {"rowspan": rowspan - 1, "element": cell}
+                                        col_idx += 1
+                                    cell_idx += 1
+                                else:
+                                    # If we ran out of cells but still expect columns, just append None
+                                    actual_row.append(None)
+                                    col_idx += 1
+
+                        if not actual_row or actual_row[0] is None:
+                            continue
+
+                        pokemon = actual_row[0].text.strip()
 
                         level = ""
-                        if level_idx != -1 and level_idx < len(cells):
-                            level = cells[level_idx].text.strip()
+                        if level_col != -1 and level_col < len(actual_row) and actual_row[level_col]:
+                            level = actual_row[level_col].text.strip()
 
                         rarity = "Unknown"
-                        if rarity_idx != -1 and rarity_idx < len(cells):
-                            img = cells[rarity_idx].find('img')
+                        if rarity_col != -1 and rarity_col < len(actual_row) and actual_row[rarity_col]:
+                            img = actual_row[rarity_col].find('img')
                             if img and 'title' in img.attrs:
                                 rarity = img['title']
 
@@ -76,9 +121,8 @@ def parse_region(url):
                             pct = "100%"
                         else:
                             pct = rarity_map.get(rarity, rarity)
-                            if pct == "Unknown" and rarity_idx != -1 and rarity_idx < len(cells):
-                                # Also check for text if it's there
-                                pct_match = re.search(r'\d+%', cells[rarity_idx].get_text())
+                            if pct == "Unknown" and rarity_col != -1 and rarity_col < len(actual_row) and actual_row[rarity_col]:
+                                pct_match = re.search(r'\d+%', actual_row[rarity_col].get_text())
                                 if pct_match:
                                     pct = pct_match.group(0)
 
@@ -112,7 +156,7 @@ if __name__ == "__main__":
 
         if d['Level']:
             merged[key]['Level'].add(d['Level'])
-        if d['Percentage']:
+        if d['Percentage'] and d['Percentage'] != 'Unknown':
             merged[key]['Percentage'].add(d['Percentage'])
 
     final_data = []
@@ -121,7 +165,7 @@ if __name__ == "__main__":
 
         pcts = list(vals['Percentage'])
         pcts.sort()
-        pct_str = ", ".join(pcts)
+        pct_str = ", ".join(pcts) if pcts else "Unknown"
 
         final_data.append({
             'Location': loc,
