@@ -43,7 +43,7 @@ function generateMarkerHtml(locationId, locationName, coords, isUnlocked, hasNew
     let isClickable = true;
 
     if (locationId === 'professor_oak_lab' || locationId === 'johto_oak_lab') {
-        markerImg = './Assets/Extra/Spot_Oak.png';
+        markerImg = './Assets/Extra/Spot_Lab.png';
     } else if (locationId === 'pokemon_center___market') {
         markerImg = './Assets/Extra/Spot_PCPM.png';
     } else if (locationId === 'indigo_plateu') {
