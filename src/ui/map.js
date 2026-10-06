@@ -143,16 +143,26 @@ function getUnlockedAreas() {
     unlockedAreas.add("Johto Oak Lab");
     unlockedAreas.add("Professor Lab");
 
-    const noPokemon = state.party.length === 0 && state.storage.length === 0;
-    const isStarterPending = !state.stats.hasPickedStarter && noPokemon;
-
-    if (isStarterPending) {
-        return unlockedAreas;
-    }
-
     let targetStats = getRegionStats(window.currentMapRegion);
 
     if (!targetStats) {
+        return unlockedAreas;
+    }
+
+    // Determine if the player has no pokemon *in the targeted region*
+    // For the current region, we check state.party and state.storage.
+    // For other regions, we need to check state.regions[...].party and state.regions[...].storage.
+    let targetParty = state.party;
+    let targetStorage = state.storage;
+    if (window.currentMapRegion !== state.currentRegionName && state.regions && state.regions[window.currentMapRegion]) {
+        targetParty = state.regions[window.currentMapRegion].party || [];
+        targetStorage = state.regions[window.currentMapRegion].storage || [];
+    }
+
+    const noPokemon = targetParty.length === 0 && targetStorage.length === 0;
+    const isStarterPending = !targetStats.hasPickedStarter && noPokemon;
+
+    if (isStarterPending) {
         return unlockedAreas;
     }
 
