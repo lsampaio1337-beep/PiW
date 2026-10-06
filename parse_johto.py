@@ -6,14 +6,14 @@ import re
 
 headers = {'User-Agent': 'Mozilla/5.0'}
 
-rarity_map = {
-    'Common': '30%',
-    'Uncommon': '15%',
-    'Rare': '5%',
-    'Super Rare': '1%',
-    'Limited': '1%',
-    'Always': '100%',
-    'Unknown': 'Unknown'
+# Map rarity to an integer weight
+rarity_map_int = {
+    'Common': 30,
+    'Uncommon': 15,
+    'Rare': 5,
+    'Super Rare': 1,
+    'Limited': 1,
+    'Always': 100
 }
 
 def parse_region(url):
@@ -46,7 +46,6 @@ def parse_region(url):
                     else:
                         method = "Unknown"
 
-                    # Normalize methods to merge "Walking", "Headbutt", "Headbutt (Special)"
                     method_lower = method.lower()
                     if "walking" in method_lower or "headbutt" in method_lower:
                         method = "Walking/Headbutt"
@@ -55,7 +54,6 @@ def parse_region(url):
                     ths = headers_row.find_all(['th', 'td']) if headers_row else []
 
                     active_rowspans = {}
-
                     header_cols = []
                     for th in ths:
                         text = th.text.strip()
@@ -118,21 +116,24 @@ def parse_region(url):
                             if img and 'title' in img.attrs:
                                 rarity = img['title']
 
+                        pct_weight = 0
                         if method in ['Gift', 'Trade', 'Fossil']:
-                            pct = "100%"
+                            pct_weight = 100
                         else:
-                            pct = rarity_map.get(rarity, rarity)
-                            if pct == "Unknown" and rarity_col != -1 and rarity_col < len(actual_row) and actual_row[rarity_col]:
-                                pct_match = re.search(r'\d+%', actual_row[rarity_col].get_text())
-                                if pct_match:
-                                    pct = pct_match.group(0)
+                            if rarity in rarity_map_int:
+                                pct_weight = rarity_map_int[rarity]
+                            else:
+                                if rarity_col != -1 and rarity_col < len(actual_row) and actual_row[rarity_col]:
+                                    pct_match = re.search(r'(\d+)%', actual_row[rarity_col].get_text())
+                                    if pct_match:
+                                        pct_weight = int(pct_match.group(1))
 
                         all_data.append({
                             'Location': location_name,
                             'Pokemon': pokemon,
                             'Method': method,
                             'Level': level,
-                            'Percentage': pct
+                            'Weight': pct_weight
                         })
         except Exception as e:
             print(f"Error parsing {location_name}: {e}")
@@ -145,36 +146,89 @@ if __name__ == "__main__":
     url = 'https://pokemondb.net/location'
     data = parse_region(url)
 
+    # 1. Merge duplicates per Location, Pokemon, Method
     merged = {}
     for d in data:
         key = (d['Location'], d['Pokemon'], d['Method'])
         if key not in merged:
             merged[key] = {
                 'Level': set(),
-                'Percentage': set()
+                'Weight': 0
             }
 
         if d['Level']:
             merged[key]['Level'].add(d['Level'])
-        if d['Percentage'] and d['Percentage'] != 'Unknown':
-            merged[key]['Percentage'].add(d['Percentage'])
+
+        # The user's request: "I want the % of appearance to sum 100% for each route in each method."
+        # If the same pokemon appears in the morning and night, it takes up a proportional amount of the encounter table for that method.
+        # So we should sum the weights for a pokemon within that route/method, THEN normalize the whole route/method.
+        merged[key]['Weight'] += d['Weight']
+
+    # 2. Sum total weights per Location and Method to normalize to 100%
+    totals = {}
+    for (loc, pkmn, method), vals in merged.items():
+        totals_key = (loc, method)
+        if totals_key not in totals:
+            totals[totals_key] = 0
+        totals[totals_key] += vals['Weight']
 
     final_data = []
+
     for (loc, pkmn, method), vals in merged.items():
         levels = ", ".join(sorted(vals['Level']))
 
-        pcts = list(vals['Percentage'])
-        pcts.sort()
-        pct_str = ", ".join(pcts) if pcts else "Unknown"
+        total_weight = totals[(loc, method)]
+        if total_weight > 0:
+            normalized_pct = (vals['Weight'] / total_weight) * 100
+
+            # Format to drop decimal if it's .0, else keep decimal.
+            # Or just store as float and let Excel handle formatting, which allows exact summing to 100.
+            pct_val = round(normalized_pct, 2)
+            pct_str = f"{pct_val}%"
+        else:
+            pct_str = "Unknown"
 
         final_data.append({
             'Location': loc,
             'Pokemon Name': pkmn,
             'Method': method,
             'Level': levels,
-            '% of appearance': pct_str
+            '% of appearance': pct_str,
+            '_raw_pct': normalized_pct
         })
 
+    # We can perform a safety check and adjust the largest value by the floating point error to ensure exactly 100%
     df = pd.DataFrame(final_data)
+
+    # Round robin adjustment per group to make it EXACTLY 100%
+    for (loc, method), group in df.groupby(['Location', 'Method']):
+        if group['_raw_pct'].sum() > 0:
+            # We want exact 100% formatted strings.
+            # Convert raw_pct to integer percentages or rounded floats that perfectly sum to 100.
+            # Using standard Largest Remainder Method for exactly 100% rounding
+
+            raw_pcts = group['_raw_pct'].values
+
+            # For 2 decimal places precision: multiply by 100, use LRM, divide by 100
+            scaled = raw_pcts * 100
+            floored = [int(v) for v in scaled]
+            remainders = [v - int(v) for v in scaled]
+
+            diff = 10000 - sum(floored) # 100.00% * 100
+
+            # sort by remainders
+            indices = list(range(len(raw_pcts)))
+            indices.sort(key=lambda i: remainders[i], reverse=True)
+
+            for i in range(diff):
+                floored[indices[i]] += 1
+
+            final_pcts = [v / 100.0 for v in floored]
+
+            # Assign back formatted strings
+            for i, idx in enumerate(group.index):
+                df.at[idx, '% of appearance'] = f"{final_pcts[i]:.2f}%"
+
+    df = df.drop(columns=['_raw_pct'])
     df.to_excel('Johto.xlsx', index=False)
     print("Saved to Johto.xlsx")
