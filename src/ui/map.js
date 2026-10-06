@@ -150,9 +150,13 @@ function getUnlockedAreas() {
         return unlockedAreas;
     }
 
-    unlockedAreas.add("PokeCenter & PokeMarket");
+    let targetStats = getRegionStats(window.currentMapRegion);
 
-    let targetStats = getRegionStats(window.currentMapRegion) || state.stats;
+    if (!targetStats) {
+        return unlockedAreas;
+    }
+
+    unlockedAreas.add("PokeCenter & PokeMarket");
 
     if (targetStats.completed150Challenge) {
         unlockedAreas.add("Mythical and Legendaries");
