@@ -29,25 +29,7 @@ window.switchMapRegion = function(region) {
         state.globalStats.hasSeenJohtoMap = true;
     }
 
-    // Stop battle completely before swapping
-    if (globals.battleSystem) {
-         globals.battleSystem.stop();
-         globals.battleSystem.activeEncounter = null;
-         globals.battleSystem.isSearching = false;
-         if (globals.battleSystem.gymState) globals.battleSystem.gymState.isActive = false;
-    }
-
-    swapRegion(region);
     window.currentMapRegion = region;
-
-    // Navigate to default location for region when swapping
-    if (region === 'Johto' && state.currentRoute === 'Route 29') {
-        window.navigateToLocation('Professor Oak Lab');
-    } else if (region !== 'Kanto' && region !== 'Johto' && !state.currentRoute) {
-        window.navigateToLocation('Professor Lab');
-    } else {
-        window.navigateToLocation(state.currentRoute || (region === 'Johto' ? 'Route 29' : 'Route 1'));
-    }
 
     updateUI();
     showMap();
@@ -305,6 +287,17 @@ export function showMap() {
 }
 
 export function navigateToLocation(locationName) {
+    if (window.currentMapRegion && window.currentMapRegion !== state.currentRegionName) {
+        // Stop battle completely before swapping
+        if (globals.battleSystem) {
+             globals.battleSystem.stop();
+             globals.battleSystem.activeEncounter = null;
+             globals.battleSystem.isSearching = false;
+             if (globals.battleSystem.gymState) globals.battleSystem.gymState.isActive = false;
+        }
+        swapRegion(window.currentMapRegion);
+    }
+
     if (state.stats.newRoutes && state.stats.newRoutes.some(r => parseAreaNames(r).includes(locationName))) {
         state.stats.newRoutes = state.stats.newRoutes.filter(r => !parseAreaNames(r).includes(locationName));
     }
