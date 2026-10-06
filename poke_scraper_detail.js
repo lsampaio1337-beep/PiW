@@ -42,8 +42,9 @@ async function scrapeDetails() {
                 if (targetTabId) {
                      // targetTabId usually looks like `#tab-basic-11002` but moves are under `#tab-moves-XXX`.
                      relevantContainers.push(targetTabId);
-                     if (targetTabId.startsWith('#tab-basic-')) {
-                         relevantContainers.push(targetTabId.replace('#tab-basic-', '#tab-moves-'));
+                     const matchId = targetTabId.match(/-(\d+)$/);
+                     if (matchId) {
+                         relevantContainers.push(`#tab-moves-${matchId[1]}`);
                      }
                 }
 
