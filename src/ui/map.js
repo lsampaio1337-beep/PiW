@@ -29,25 +29,7 @@ window.switchMapRegion = function(region) {
         state.globalStats.hasSeenJohtoMap = true;
     }
 
-    // Stop battle completely before swapping
-    if (globals.battleSystem) {
-         globals.battleSystem.stop();
-         globals.battleSystem.activeEncounter = null;
-         globals.battleSystem.isSearching = false;
-         if (globals.battleSystem.gymState) globals.battleSystem.gymState.isActive = false;
-    }
-
-    swapRegion(region);
     window.currentMapRegion = region;
-
-    // Navigate to default location for region when swapping
-    if (region === 'Johto' && state.currentRoute === 'Route 29') {
-        window.navigateToLocation('Professor Oak Lab');
-    } else if (region !== 'Kanto' && region !== 'Johto' && !state.currentRoute) {
-        window.navigateToLocation('Professor Lab');
-    } else {
-        window.navigateToLocation(state.currentRoute || (region === 'Johto' ? 'Route 29' : 'Route 1'));
-    }
 
     updateUI();
     showMap();
@@ -236,11 +218,6 @@ function setupMapWindowDimensions(currentRegionObj, targetWidth) {
 }
 
 export function showMap() {
-    if (!state.stats.mapUnlocked) {
-        showModal('Locked', 'You have not unlocked the map yet. Defeat more leaders.', 'window-map');
-        return;
-    }
-
     if (state.stats.hasUnseenMap || state.stats.showMapOakNotification) {
         state.stats.hasUnseenMap = false;
         state.stats.showMapOakNotification = false;
@@ -263,10 +240,10 @@ export function showMap() {
         { name: 'Paldea', mapFile: '10 Paldea Map.png', width: 1280, height: 905 }
     ];
 
-    let hasUnlockedJohto = state.globalStats.hasSeenJohtoMap || isFinalChallengeCompleted || window.currentMapRegion !== 'Kanto';
-    if (isFinalChallengeCompleted) { state.globalStats.hasSeenJohtoMap = true; hasUnlockedJohto = true; }
+    let showRegionBar = isFinalChallengeCompleted;
+    if (isFinalChallengeCompleted) { state.globalStats.hasSeenJohtoMap = true; }
 
-    let regionButtonsHtml = generateRegionButtonsHtml(regions, hasUnlockedJohto);
+    let regionButtonsHtml = generateRegionButtonsHtml(regions, showRegionBar);
 
     const currentRegionObj = regions.find(r => r.name === window.currentMapRegion) || regions[0];
     let mapImage = `./Assets/Map/${currentRegionObj.mapFile}`;
@@ -294,7 +271,7 @@ export function showMap() {
         const ar = currentRegionObj.width / currentRegionObj.height;
         const targetWidth = Math.min(1000, window.innerHeight * 0.8 * ar) + "px";
 
-        if (hasUnlockedJohto) {
+        if (showRegionBar) {
             window.showModal(titleHtml, html, 'window-map', targetWidth);
         } else {
             window.showModal('Map', html, 'window-map', targetWidth);
@@ -305,6 +282,17 @@ export function showMap() {
 }
 
 export function navigateToLocation(locationName) {
+    if (window.currentMapRegion && window.currentMapRegion !== state.currentRegionName) {
+        // Stop battle completely before swapping
+        if (globals.battleSystem) {
+             globals.battleSystem.stop();
+             globals.battleSystem.activeEncounter = null;
+             globals.battleSystem.isSearching = false;
+             if (globals.battleSystem.gymState) globals.battleSystem.gymState.isActive = false;
+        }
+        swapRegion(window.currentMapRegion);
+    }
+
     if (state.stats.newRoutes && state.stats.newRoutes.some(r => parseAreaNames(r).includes(locationName))) {
         state.stats.newRoutes = state.stats.newRoutes.filter(r => !parseAreaNames(r).includes(locationName));
     }
