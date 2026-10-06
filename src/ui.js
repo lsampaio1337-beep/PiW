@@ -9,7 +9,7 @@ import DayCare from "./dayCare.js";
 import Storage from "./storage.js";
 
 // Import State and modules
-import { state, setBattleSystem, globals } from './state.js';
+import { state, setBattleSystem, globals, checkFinalChallengeCompleted } from './state.js';
 import { trackDailyChallenge, checkAndResetDailyChallenges } from './ui/dailyChallenges.js';
 
 window.dismissDaycareMessage = function() {
@@ -440,7 +440,7 @@ window.showChallengesModal = function() {
                 <div style="display: flex; flex-direction: column; gap: 15px;">`;
 
     // The 150 Challenge should only appear if the Final Challenge (Indigo Plateau) has been completed
-    let isFinalChallengeCompleted = state.stats.completedChallengeIds && state.stats.completedChallengeIds.includes('Indigo Plateau');
+    let isFinalChallengeCompleted = checkFinalChallengeCompleted();
     let hasActive150Challenge = isFinalChallengeCompleted && !state.stats.completed150Challenge;
 
     if (activeChallengesCount === 0 && !hasActive150Challenge) {

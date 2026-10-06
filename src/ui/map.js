@@ -1,4 +1,4 @@
-import { state, globals, swapRegion } from '../state.js';
+import { state, globals, swapRegion, checkFinalChallengeCompleted } from '../state.js';
 import { updateUI, switchView } from '../ui.js';
 import { setupMarket } from './market.js';
 
@@ -127,22 +127,34 @@ function generateRegionButtonsHtml(regions, hasUnlockedJohto) {
     `;
 }
 
+function getRegionStats(regionName) {
+    if (regionName === state.currentRegionName) {
+        return state.stats;
+    }
+    if (state.regions && state.regions[regionName] && state.regions[regionName].stats) {
+        return state.regions[regionName].stats;
+    }
+    return null;
+}
+
 function getUnlockedAreas() {
     let unlockedAreas = new Set();
     unlockedAreas.add("Professor Oak Lab");
     unlockedAreas.add("PokeCenter & PokeMarket");
 
-    if (state.stats.completed150Challenge) {
+    let targetStats = getRegionStats(window.currentMapRegion) || state.stats;
+
+    if (targetStats.completed150Challenge) {
         unlockedAreas.add("Mythical and Legendaries");
     }
 
-    if (state.stats.completedChallengeIds) {
-        state.stats.completedChallengeIds.forEach(id => {
+    if (targetStats.completedChallengeIds) {
+        targetStats.completedChallengeIds.forEach(id => {
             parseAreaNames(id).forEach(area => unlockedAreas.add(area));
         });
     }
-    if (state.stats.activeChallenges) {
-        state.stats.activeChallenges.forEach(id => {
+    if (targetStats.activeChallenges) {
+        targetStats.activeChallenges.forEach(id => {
             parseAreaNames(id).forEach(area => unlockedAreas.add(area));
         });
     }
@@ -226,7 +238,7 @@ export function showMap() {
 
     let unlockedAreas = getUnlockedAreas();
 
-    let isFinalChallengeCompleted = state.stats.completedChallengeIds && state.stats.completedChallengeIds.includes('Indigo Plateau');
+    let isFinalChallengeCompleted = checkFinalChallengeCompleted();
     const regions = [
         { name: 'Kanto', mapFile: '1 Kanto Map.png', width: 2571, height: 1818 },
         { name: 'Johto', mapFile: '2 Johto Map.png', width: 1961, height: 1316 },
