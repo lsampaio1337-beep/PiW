@@ -39,21 +39,21 @@ window.switchMapRegion = function(region) {
 function generateMarkerHtml(locationId, locationName, coords, isUnlocked, hasNewNotification, showCheckmark) {
     if (!isUnlocked) return '';
 
-    let markerImg = './Assets/Extra/Spot.png';
+    let markerImg = './Assets/Map/Spots/Spot.png';
     let isClickable = true;
 
     if (locationId === 'professor_oak_lab' || locationId === 'johto_oak_lab') {
-        markerImg = './Assets/Extra/Spot_Lab.png';
+        markerImg = './Assets/Map/Spots/Spot_Lab.png';
     } else if (locationId === 'pokemon_center___market') {
-        markerImg = './Assets/Extra/Spot_PCPM.png';
+        markerImg = './Assets/Map/Spots/Spot_PCPM.png';
     } else if (locationId === 'indigo_plateu') {
-        markerImg = './Assets/Extra/Spot_E4.png';
+        markerImg = './Assets/Map/Spots/Spot_E4.png';
     } else if (locationId === 'safari_zone') {
-        markerImg = './Assets/Extra/Spot_Safariball.png';
+        markerImg = './Assets/Map/Spots/Spot_Safariball.png';
     } else if (locationId === 'casino') {
-        markerImg = './Assets/Extra/Spot_Casino.png';
+        markerImg = './Assets/Map/Spots/Spot_Casino.png';
     } else if (locationId === 'daycare') {
-        markerImg = './Assets/Map/Spot_Daycare.png';
+        markerImg = './Assets/Map/Spots/Spot_Daycare.png';
     } else if (locationId === 'pewter_gym') {
         markerImg = './Assets/Badges/Badge Kanto 1.png';
     } else if (locationId === 'cerulean_gym') {
@@ -85,7 +85,7 @@ function generateMarkerHtml(locationId, locationName, coords, isUnlocked, hasNew
         markerHeight = "28px";
     }
 
-    if (markerImg !== './Assets/Extra/Spot.png') {
+    if (markerImg !== './Assets/Map/Spots/Spot.png') {
         // Solid black outline (4-axis) and a larger soft white glow
         dropShadow = "drop-shadow(1px 0px 0 #000) drop-shadow(-1px 0px 0 #000) drop-shadow(0px 1px 0 #000) drop-shadow(0px -1px 0 #000) drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.8))";
     }
