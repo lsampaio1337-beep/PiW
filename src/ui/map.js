@@ -55,21 +55,21 @@ function generateMarkerHtml(locationId, locationName, coords, isUnlocked, hasNew
     } else if (locationId === 'daycare') {
         markerImg = './Assets/Map/Spot_Daycare.png';
     } else if (locationId === 'pewter_gym') {
-        markerImg = './Assets/Badges/Badge Kanto 1.png';
+        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Kanto', 1)}`;
     } else if (locationId === 'cerulean_gym') {
-        markerImg = './Assets/Badges/Badge Kanto 2.png';
+        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Kanto', 2)}`;
     } else if (locationId === 'vermilion_gym') {
-        markerImg = './Assets/Badges/Badge Kanto 3.png';
+        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Kanto', 3)}`;
     } else if (locationId === 'celadon_gym') {
-        markerImg = './Assets/Badges/Badge Kanto 4.png';
+        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Kanto', 4)}`;
     } else if (locationId === 'fuchsia_gym') {
-        markerImg = './Assets/Badges/Badge Kanto 5.png';
+        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Kanto', 5)}`;
     } else if (locationId === 'saffron_gym') {
-        markerImg = './Assets/Badges/Badge Kanto 6.png';
+        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Kanto', 6)}`;
     } else if (locationId === 'cinnabar_gym') {
-        markerImg = './Assets/Badges/Badge Kanto 7.png';
+        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Kanto', 7)}`;
     } else if (locationId === 'viridian_gym') {
-        markerImg = './Assets/Badges/Badge Kanto 8.png';
+        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Kanto', 8)}`;
     }
 
     // Standardize spot sizes
