@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sprite Composer</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            display: flex;
+            gap: 20px;
+        }
+        .controls {
+            width: 350px;
+            padding: 20px;
+            background: #f0f0f0;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .control-group {
+            margin-bottom: 15px;
+        }
+        .control-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .control-group input[type="range"] {
+            width: 100%;
+        }
+        .canvas-container {
+            position: relative;
+            overflow: hidden; /* Nothing beyond border */
+            border: 2px dashed #ccc;
+            background: #e9e9e9;
+            /* Will resize to background image */
+            min-width: 300px;
+            min-height: 300px;
+            display: inline-block;
+        }
+        #bg-image {
+            display: block;
+            pointer-events: none; /* Ignore clicks on bg */
+            transform-origin: top left;
+        }
+        #sprite-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            cursor: move;
+            transform-origin: center center;
+            /* Outline for visibility while editing */
+            outline: 1px dashed rgba(255, 0, 0, 0.5);
+            display: none;
+        }
+        #sprite-image {
+            display: block;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .resize-handle {
+            position: absolute;
+            bottom: -5px;
+            right: -5px;
+            width: 15px;
+            height: 15px;
+            background: red;
+            cursor: nwse-resize;
+            border-radius: 50%;
+        }
+        #output {
+            margin-top: 20px;
+            width: 100%;
+            height: 150px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+        input[type="file"] {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="controls">
+        <h2>Settings</h2>
+
+        <div class="control-group">
+            <label>Background Image</label>
+            <input type="file" id="bg-upload" accept="image/*">
+            <input type="text" id="bg-name" placeholder="Background Name" readonly>
+        </div>
+
+        <div class="control-group">
+            <label>Sprite Image</label>
+            <input type="file" id="sprite-upload" accept="image/*">
+            <input type="text" id="sprite-name" placeholder="Sprite Name" readonly>
+        </div>
+
+        <div class="control-group">
+            <label>Position X: <span id="val-x">0</span>px</label>
+            <input type="range" id="slider-x" min="-1000" max="2000" value="0">
+        </div>
+
+        <div class="control-group">
+            <label>Position Y: <span id="val-y">0</span>px</label>
+            <input type="range" id="slider-y" min="-1000" max="2000" value="0">
+        </div>
+
+        <div class="control-group">
+            <label>Size (Width): <span id="val-size">100</span>px</label>
+            <input type="range" id="slider-size" min="10" max="1000" value="100">
+        </div>
+
+        <div class="control-group">
+            <label>Tilt (Angle): <span id="val-tilt">0</span>&deg;</label>
+            <input type="range" id="slider-tilt" min="-180" max="180" value="0">
+        </div>
+
+        <div class="control-group">
+            <label>Constrain Proportions</label>
+            <input type="checkbox" id="constrain-proportions" checked>
+        </div>
+
+        <button id="btn-save" style="width: 100%; padding: 10px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">Save Config</button>
+
+        <textarea id="output" readonly placeholder="Output will appear here..."></textarea>
+    </div>
+
+    <div class="canvas-container" id="canvas">
+        <img id="bg-image" src="" alt="">
+        <div id="sprite-container">
+            <img id="sprite-image" src="" alt="">
+            <div class="resize-handle" id="resize-handle"></div>
+        </div>
+    </div>
+
+    <script>
+        // State
+        const state = {
+            bgName: '',
+            spriteName: '',
+            x: 0,
+            y: 0,
+            width: 100,
+            height: 100,
+            angle: 0,
+            aspectRatio: 1
+        };
+
+        // Elements
+        const canvas = document.getElementById('canvas');
+        const bgImage = document.getElementById('bg-image');
+        const spriteContainer = document.getElementById('sprite-container');
+        const spriteImage = document.getElementById('sprite-image');
+
+        const sliderX = document.getElementById('slider-x');
+        const sliderY = document.getElementById('slider-y');
+        const sliderSize = document.getElementById('slider-size');
+        const sliderTilt = document.getElementById('slider-tilt');
+
+        const valX = document.getElementById('val-x');
+        const valY = document.getElementById('val-y');
+        const valSize = document.getElementById('val-size');
+        const valTilt = document.getElementById('val-tilt');
+
+        const bgUpload = document.getElementById('bg-upload');
+        const spriteUpload = document.getElementById('sprite-upload');
+        const bgNameInput = document.getElementById('bg-name');
+        const spriteNameInput = document.getElementById('sprite-name');
+
+        const constrainCheckbox = document.getElementById('constrain-proportions');
+
+        // Update visual representation
+        function updateVisuals() {
+            spriteContainer.style.left = state.x + 'px';
+            spriteContainer.style.top = state.y + 'px';
+            spriteContainer.style.width = state.width + 'px';
+            spriteContainer.style.height = state.height + 'px';
+            spriteContainer.style.transform = \`rotate(\${state.angle}deg)\`;
+
+            // Update sliders and text
+            sliderX.value = state.x;
+            sliderY.value = state.y;
+            sliderSize.value = state.width;
+            sliderTilt.value = state.angle;
+
+            valX.textContent = Math.round(state.x);
+            valY.textContent = Math.round(state.y);
+            valSize.textContent = Math.round(state.width);
+            valTilt.textContent = Math.round(state.angle);
+        }
+
+        // Handle File Uploads
+        bgUpload.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                state.bgName = file.name;
+                bgNameInput.value = file.name;
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    bgImage.src = event.target.result;
+                    bgImage.onload = () => {
+                        canvas.style.width = bgImage.naturalWidth + 'px';
+                        canvas.style.height = bgImage.naturalHeight + 'px';
+
+                        // Update slider max based on bg size
+                        sliderX.max = bgImage.naturalWidth * 1.5;
+                        sliderY.max = bgImage.naturalHeight * 1.5;
+                        sliderX.min = -bgImage.naturalWidth / 2;
+                        sliderY.min = -bgImage.naturalHeight / 2;
+                    };
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        spriteUpload.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                state.spriteName = file.name;
+                spriteNameInput.value = file.name;
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    spriteImage.src = event.target.result;
+                    spriteImage.onload = () => {
+                        spriteContainer.style.display = 'block';
+                        state.aspectRatio = spriteImage.naturalWidth / spriteImage.naturalHeight;
+                        state.width = spriteImage.naturalWidth;
+                        state.height = spriteImage.naturalHeight;
+                        state.x = (canvas.offsetWidth / 2) - (state.width / 2);
+                        state.y = (canvas.offsetHeight / 2) - (state.height / 2);
+                        updateVisuals();
+                    };
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Sliders Listeners
+        sliderX.addEventListener('input', (e) => {
+            state.x = parseFloat(e.target.value);
+            updateVisuals();
+        });
+        sliderY.addEventListener('input', (e) => {
+            state.y = parseFloat(e.target.value);
+            updateVisuals();
+        });
+        sliderSize.addEventListener('input', (e) => {
+            state.width = parseFloat(e.target.value);
+            if (constrainCheckbox.checked) {
+                state.height = state.width / state.aspectRatio;
+            }
+            updateVisuals();
+        });
+        sliderTilt.addEventListener('input', (e) => {
+            state.angle = parseFloat(e.target.value);
+            updateVisuals();
+        });
+
+        // Dragging Logic
+        let isDragging = false;
+        let dragStartX, dragStartY;
+        let spriteStartX, spriteStartY;
+
+        spriteContainer.addEventListener('mousedown', (e) => {
+            if (e.target === document.getElementById('resize-handle')) return; // handled separately
+            isDragging = true;
+            dragStartX = e.clientX;
+            dragStartY = e.clientY;
+            spriteStartX = state.x;
+            spriteStartY = state.y;
+            e.preventDefault();
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            if (isDragging) {
+                const dx = e.clientX - dragStartX;
+                const dy = e.clientY - dragStartY;
+                state.x = spriteStartX + dx;
+                state.y = spriteStartY + dy;
+                updateVisuals();
+            }
+            if (isResizing) {
+                const dx = e.clientX - resizeStartX;
+                const dy = e.clientY - resizeStartY;
+
+                // For simplicity, resize based on x movement
+                let newWidth = resizeStartWidth + dx;
+                if (newWidth < 10) newWidth = 10;
+
+                state.width = newWidth;
+                if (constrainCheckbox.checked) {
+                    state.height = state.width / state.aspectRatio;
+                }
+                updateVisuals();
+            }
+        });
+
+        window.addEventListener('mouseup', () => {
+            isDragging = false;
+            isResizing = false;
+        });
+
+        // Resizing Logic
+        const resizeHandle = document.getElementById('resize-handle');
+        let isResizing = false;
+        let resizeStartX, resizeStartY;
+        let resizeStartWidth, resizeStartHeight;
+
+        resizeHandle.addEventListener('mousedown', (e) => {
+            isResizing = true;
+            resizeStartX = e.clientX;
+            resizeStartY = e.clientY;
+            resizeStartWidth = state.width;
+            resizeStartHeight = state.height;
+            e.stopPropagation();
+            e.preventDefault();
+        });
+
+        // Save Logic
+        const btnSave = document.getElementById('btn-save');
+        const output = document.getElementById('output');
+
+        btnSave.addEventListener('click', () => {
+            const data = {
+                background: state.bgName,
+                sprite: state.spriteName,
+                position: {
+                    x: Math.round(state.x),
+                    y: Math.round(state.y)
+                },
+                size: {
+                    width: Math.round(state.width),
+                    height: Math.round(state.height)
+                },
+                angle: Math.round(state.angle)
+            };
+            output.value = JSON.stringify(data, null, 2);
+        });
+
+    </script>
+</body>
+</html>
