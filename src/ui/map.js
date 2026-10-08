@@ -39,21 +39,19 @@ window.switchMapRegion = function(region) {
 function generateMarkerHtml(locationId, locationName, coords, isUnlocked, hasNewNotification, showCheckmark) {
     if (!isUnlocked) return '';
 
-    let markerImg = './Assets/Extra/Spot.png';
+    let markerImg = './Assets/Map/Spots/Spot.png';
     let isClickable = true;
 
     if (locationId === 'professor_oak_lab' || locationId === 'johto_oak_lab') {
-        markerImg = './Assets/Extra/Spot_Lab.png';
+        markerImg = './Assets/Map/Spots/Spot_Lab.png';
     } else if (locationId === 'pokemon_center___market') {
-        markerImg = './Assets/Extra/Spot_PCPM.png';
-    } else if (locationId === 'indigo_plateu') {
-        markerImg = './Assets/Extra/Spot_E4.png';
+        markerImg = './Assets/Map/Spots/Spot_PCPM.png';
     } else if (locationId === 'safari_zone') {
-        markerImg = './Assets/Extra/Spot_Safariball.png';
+        markerImg = './Assets/Map/Spots/Spot_Safariball.png';
     } else if (locationId === 'casino') {
-        markerImg = './Assets/Extra/Spot_Casino.png';
+        markerImg = './Assets/Map/Spots/Spot_Casino.png';
     } else if (locationId === 'daycare') {
-        markerImg = './Assets/Map/Spot_Daycare.png';
+        markerImg = './Assets/Map/Spots/Spot_Daycare.png';
     } else if (locationId === 'pewter_gym') {
         markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Kanto', 1)}`;
     } else if (locationId === 'cerulean_gym') {
