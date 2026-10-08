@@ -273,19 +273,17 @@ export function showSmartCaptureMode() {
     const gridEl = document.getElementById('smart-capture-grid');
     const savedScrollTop = gridEl ? gridEl.scrollTop : 0;
 
-    let headerHtml = `
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding: 0 10px;">
-            <div style="font-size: 14px; font-weight: bold;">Smart Capture Mode</div>
-            <div>
-                <label style="cursor: pointer; display: flex; align-items: center; gap: 5px; font-size: 12px;">
-                    <input type="checkbox" id="smart-capture-shiny-toggle" ${isSmartCaptureShinyMode ? 'checked' : ''} onchange="window.toggleSmartCaptureShinyMode()">
-                    Shiny Mode
-                </label>
+    let titleHtml = `
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
+            <div style="font-weight: bold; font-size: 18px; color: white;">Smart Capture Mode</div>
+            <div style="display: inline-flex; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px;">
+                <button onclick="window.setSmartCaptureShinyMode(false)" style="${!isSmartCaptureShinyMode ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmousedown="event.stopPropagation()">Normal</button>
+                <button onclick="window.setSmartCaptureShinyMode(true)" style="${isSmartCaptureShinyMode ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmousedown="event.stopPropagation()">Shiny</button>
             </div>
         </div>
     `;
 
-    let html = headerHtml + `<div id="smart-capture-grid" style="display:flex; flex-wrap:wrap; justify-content:center; max-height:400px; overflow-y:auto; gap:10px;">`;
+    let html = `<div id="smart-capture-grid" style="display:flex; flex-wrap:wrap; justify-content:center; max-height:400px; overflow-y:auto; gap:10px; margin-top: 15px;">`;
 
     if (!state.config.pokemonData) {
         html += "<p>Loading Pokedex data...</p>";
@@ -343,7 +341,7 @@ export function showSmartCaptureMode() {
     }
 
     html += `</div>`;
-    showModal("Smart Capture Mode", html, "window-smart-capture");
+    showModal(titleHtml, html, "window-smart-capture");
 
     // Restore scroll position
     setTimeout(() => {
@@ -354,8 +352,8 @@ export function showSmartCaptureMode() {
     }, 10);
 }
 
-export function toggleSmartCaptureShinyMode() {
-    isSmartCaptureShinyMode = !isSmartCaptureShinyMode;
+export function setSmartCaptureShinyMode(isShiny) {
+    isSmartCaptureShinyMode = isShiny;
     showSmartCaptureMode();
 }
 
