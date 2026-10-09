@@ -1500,6 +1500,21 @@ function selectJohtoStarter(id) {
     }
 
     state.stats.hasPickedStarter = true;
+
+    if (!state.stats.newRoutes) state.stats.newRoutes = [];
+    if (!state.stats.newRoutes.includes("PokeCenter & PokeMarket")) {
+        state.stats.newRoutes.push("PokeCenter & PokeMarket");
+    }
+    if (state.stats.activeChallenges) {
+        for (let challenge of state.stats.activeChallenges) {
+            if (!state.stats.newRoutes.includes(challenge)) {
+                state.stats.newRoutes.push(challenge);
+            }
+        }
+    }
+    state.stats.hasUnseenMap = true;
+    if (window.updateMainControl) window.updateMainControl();
+
     storage.save(state);
 
     // Refresh UI
@@ -1606,6 +1621,21 @@ function selectStarter(id) {
     }
 
     startGame();
+
+    if (!state.stats.newRoutes) state.stats.newRoutes = [];
+    if (!state.stats.newRoutes.includes("PokeCenter & PokeMarket")) {
+        state.stats.newRoutes.push("PokeCenter & PokeMarket");
+    }
+    if (state.stats.activeChallenges) {
+        for (let challenge of state.stats.activeChallenges) {
+            if (!state.stats.newRoutes.includes(challenge)) {
+                state.stats.newRoutes.push(challenge);
+            }
+        }
+    }
+    state.stats.hasUnseenMap = true;
+    if (window.updateMainControl) window.updateMainControl();
+
     storage.save(state);
     renderOakLab();
 }
@@ -2898,6 +2928,20 @@ window.selectGenericStarter = function(pokemonId) {
         state.stats.caught = (state.stats.caught || 0) + 1;
         state.stats.dex = state.stats.dex || {};
         state.stats.dex[pokemonId] = true;
+
+        if (!state.stats.newRoutes) state.stats.newRoutes = [];
+        if (!state.stats.newRoutes.includes("PokeCenter & PokeMarket")) {
+            state.stats.newRoutes.push("PokeCenter & PokeMarket");
+        }
+        if (state.stats.activeChallenges) {
+            for (let challenge of state.stats.activeChallenges) {
+                if (!state.stats.newRoutes.includes(challenge)) {
+                    state.stats.newRoutes.push(challenge);
+                }
+            }
+        }
+        state.stats.hasUnseenMap = true;
+        if (window.updateMainControl) window.updateMainControl();
 
         if (window.updateUI) window.updateUI();
         if (window.renderParty) window.renderParty();
