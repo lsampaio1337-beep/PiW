@@ -1644,7 +1644,24 @@ function gameClockTick() {
 
     // Award Jigglypuff Dust grains (1 grain per minute)
     if (state.globalStats.playtime % 60 === 0 && state.globalStats.playtime > 0) {
-        state.stats.jigglypuffGrains = (state.stats.jigglypuffGrains || 0) + 1;
+        // Current active region
+        if (state.stats && state.stats.hasPickedStarter) {
+            state.stats.jigglypuffGrains = (state.stats.jigglypuffGrains || 0) + 1;
+        }
+
+        // Other unlocked regions
+        if (state.regions) {
+            for (let regionName in state.regions) {
+                // Skip the current active region to avoid double counting if it's somehow in both places during a swap
+                if (regionName === state.currentRegionName) continue;
+
+                let regionData = state.regions[regionName];
+                if (regionData && regionData.stats && regionData.stats.hasPickedStarter) {
+                    regionData.stats.jigglypuffGrains = (regionData.stats.jigglypuffGrains || 0) + 1;
+                }
+            }
+        }
+
         updateUI(); // Reflect new grains
     }
 
