@@ -9,14 +9,19 @@
             font-family: sans-serif;
             margin: 20px;
             display: flex;
+            flex-direction: row-reverse; /* Move dashboard to the right */
+            justify-content: flex-end;
             gap: 20px;
+            background-color: #121212; /* Night mode background */
+            color: #e0e0e0; /* Night mode text */
         }
         .controls {
             width: 350px;
             padding: 20px;
-            background: #f0f0f0;
+            background: #1e1e1e; /* Night mode panel */
             border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            color: #e0e0e0;
         }
         .control-group {
             margin-bottom: 15px;
@@ -32,8 +37,8 @@
         .canvas-container {
             position: relative;
             overflow: hidden; /* Nothing beyond border */
-            border: 2px dashed #ccc;
-            background: #e9e9e9;
+            border: 2px dashed #555;
+            background: #2a2a2a; /* Night mode canvas background */
             /* Will resize to background image */
             min-width: 300px;
             min-height: 300px;
@@ -76,9 +81,15 @@
             height: 150px;
             font-family: monospace;
             white-space: pre-wrap;
+            background: #2d2d2d;
+            color: #4CAF50;
+            border: 1px solid #444;
+            padding: 5px;
+            box-sizing: border-box;
         }
         input[type="file"] {
             margin-bottom: 10px;
+            color: #e0e0e0;
         }
     </style>
 </head>
@@ -90,13 +101,11 @@
         <div class="control-group">
             <label>Background Image</label>
             <input type="file" id="bg-upload" accept="image/*">
-            <input type="text" id="bg-name" placeholder="Background Name" readonly>
         </div>
 
         <div class="control-group">
             <label>Sprite Image</label>
             <input type="file" id="sprite-upload" accept="image/*">
-            <input type="text" id="sprite-name" placeholder="Sprite Name" readonly>
         </div>
 
         <div class="control-group">
@@ -168,8 +177,6 @@
 
         const bgUpload = document.getElementById('bg-upload');
         const spriteUpload = document.getElementById('sprite-upload');
-        const bgNameInput = document.getElementById('bg-name');
-        const spriteNameInput = document.getElementById('sprite-name');
 
         const constrainCheckbox = document.getElementById('constrain-proportions');
 
@@ -198,7 +205,6 @@
             const file = e.target.files[0];
             if (file) {
                 state.bgName = file.name;
-                bgNameInput.value = file.name;
                 const reader = new FileReader();
                 reader.onload = (event) => {
                     bgImage.src = event.target.result;
@@ -221,7 +227,6 @@
             const file = e.target.files[0];
             if (file) {
                 state.spriteName = file.name;
-                spriteNameInput.value = file.name;
                 const reader = new FileReader();
                 reader.onload = (event) => {
                     spriteImage.src = event.target.result;
