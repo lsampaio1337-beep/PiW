@@ -1045,11 +1045,18 @@ class BattleSystem {
         // Smart Capture Mode override (only if outside Safari Zone, checked later)
         if (this.activeEncounter && this.state.settings.smartCapture) {
             let overrideTier;
-            if (this.activeEncounter.qualityName === "Shiny" && this.state.settings.smartCaptureShiny && this.state.settings.smartCaptureShiny[this.activeEncounter.id] !== undefined) {
-                overrideTier = this.state.settings.smartCaptureShiny[this.activeEncounter.id];
+            if (this.activeEncounter.qualityName === "Shiny") {
+                if (this.state.settings.smartCaptureShiny && this.state.settings.smartCaptureShiny[this.activeEncounter.id] !== undefined) {
+                    overrideTier = this.state.settings.smartCaptureShiny[this.activeEncounter.id];
+                } else if (this.state.settings.globalSmartCaptureShiny !== undefined) {
+                    overrideTier = this.state.settings.globalSmartCaptureShiny;
+                }
             } else {
-                overrideTier = this.state.settings.smartCapture[this.activeEncounter.id];
+                if (this.state.settings.smartCapture[this.activeEncounter.id] !== undefined) {
+                    overrideTier = this.state.settings.smartCapture[this.activeEncounter.id];
+                }
             }
+
             if (overrideTier !== undefined) {
                 tier = overrideTier;
             }

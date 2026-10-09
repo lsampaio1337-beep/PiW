@@ -104,7 +104,8 @@ export const state = {
         activeBallTier: 0, // Pokeball
         windowSettings: {}, // Stores window positions and sizes
         smartCapture: {},
-        smartCaptureShiny: {}
+        smartCaptureShiny: {},
+        globalSmartCaptureShiny: undefined
     },
     regions: {},
     config: {}
