@@ -342,6 +342,23 @@ export function showSmartCaptureMode() {
     }
 
     html += `</div>`;
+
+    // Add the inner modal structure for ball selections/global settings
+    html += `
+        <div id="smart-capture-inner-modal-overlay" onclick="if(event.target === this) { this.style.display = 'none'; }" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 10; align-items: flex-start; justify-content: center; padding: 20px 0; box-sizing: border-box;">
+            <div id="smart-capture-inner-modal" class="floating-window" style="width: 90%; height: auto; max-height: calc(100% - 40px); display: flex; flex-direction: column; overflow: hidden; pointer-events: auto;">
+                <div class="window-header" style="position: relative; cursor: default;">
+                    <span id="smart-capture-inner-modal-title">Modal</span>
+                    <span id="btn-close-smart-capture-inner-modal" onclick="document.getElementById('smart-capture-inner-modal-overlay').style.display = 'none';" style="position: absolute; top: 5px; right: 5px; font-size: 12px; font-weight: bold; line-height: 1; padding: 0; cursor: pointer; color: white;">X</span>
+                </div>
+                <div class="window-content-container" style="flex: 1; display: flex;">
+                    <div id="smart-capture-inner-modal-content" class="content-panel" style="width: 100%; height: auto; overflow-y: auto;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
     showModal(titleHtml, html, "window-smart-capture");
 
     // Restore scroll position
@@ -398,7 +415,25 @@ export function showSmartCaptureBallSelection(id) {
     }
 
     html += `</div>`;
-    showModal(`Select ball to ${isSmartCaptureShinyMode ? 'Shiny ' : ''}${pData.name}`, html, "window-smart-capture-ball");
+
+    const titleHtml = `
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
+            <div style="font-weight: bold; font-size: 18px; color: white;">Select ball to ${isSmartCaptureShinyMode ? 'Shiny ' : ''}${pData.name}</div>
+        </div>
+    `;
+
+    const overlay = document.getElementById('smart-capture-inner-modal-overlay');
+    const title = document.getElementById('smart-capture-inner-modal-title');
+    const content = document.getElementById('smart-capture-inner-modal-content');
+
+    if (overlay && title && content) {
+        title.innerHTML = titleHtml;
+        content.innerHTML = html;
+        overlay.style.display = 'flex';
+    } else {
+        // Fallback just in case
+        showModal(titleHtml, html, "window-smart-capture-ball");
+    }
 }
 
 export function selectSmartCaptureBall(id, tier) {
@@ -492,7 +527,24 @@ export function showSmartCaptureGlobal() {
 
     let html = `<div style="display: flex; width: 100%; max-width: 600px;">${normalHtml}${shinyHtml}</div>`;
 
-    showModal(`Global Smart Capture Default`, html, "window-smart-capture-global");
+    const titleHtml = `
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
+            <div style="font-weight: bold; font-size: 18px; color: white;">Global Smart Capture Default</div>
+        </div>
+    `;
+
+    const overlay = document.getElementById('smart-capture-inner-modal-overlay');
+    const title = document.getElementById('smart-capture-inner-modal-title');
+    const content = document.getElementById('smart-capture-inner-modal-content');
+
+    if (overlay && title && content) {
+        title.innerHTML = titleHtml;
+        content.innerHTML = html;
+        overlay.style.display = 'flex';
+    } else {
+        // Fallback just in case
+        showModal(titleHtml, html, "window-smart-capture-global");
+    }
 }
 
 export function selectGlobalSmartCaptureBall(isShiny, tier) {
