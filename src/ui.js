@@ -1298,7 +1298,7 @@ export function renderJohtoOakLab() {
 
                 <div style="display: flex; flex-direction: column; gap: 10px;">
                     <div style="position: relative; display: inline-block; width: 100%;">
-                        <button onclick="window.showOakLabModal()" style="width: 100%; box-sizing: border-box; padding: 10px; font-size: 12px; cursor: pointer;">Assignments and Boosters</button>
+                        <button onclick="window.showOakLabModal()" class="action-btn action-btn-primary" style="width: 100%;">Assignments and Boosters</button>
                         ${exclamationHtml}
                     </div>
                 </div>
@@ -1332,7 +1332,7 @@ export function renderOakLab() {
 
             <div style="display: flex; flex-direction: column; gap: 10px;">
                 <div style="position: relative; display: inline-block; width: 100%;">
-                    <button onclick="window.showOakLabModal()" style="width: 100%; box-sizing: border-box; padding: 10px; font-size: 12px; cursor: pointer;">Assignments and Boosters</button>
+                    <button onclick="window.showOakLabModal()" class="action-btn action-btn-primary" style="width: 100%;">Assignments and Boosters</button>
                     ${exclamationHtml}
                 </div>
             </div>
@@ -3009,7 +3009,7 @@ export function renderGenericLab() {
                 <h2 style="margin-top:0;">Professor Lab</h2>
                 <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
                     <div style="position: relative;">
-                        <button onclick="window.showOakLabModal()" style="width: 100%; box-sizing: border-box; padding: 10px; font-size: 12px; cursor: pointer;">Assignments and Boosters</button>
+                        <button onclick="window.showOakLabModal()" class="action-btn action-btn-primary" style="width: 100%;">Assignments and Boosters</button>
                         ${exclamationHtml}
                     </div>
                 </div>

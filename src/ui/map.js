@@ -556,7 +556,7 @@ export function navigateToLocation(locationName) {
         let buttonHtml = '';
         if (gymConfig) {
             let buttonText = lookupName === "Indigo Plateau" ? "Challange Elite 4 and Champion" : "Battle Gym";
-            buttonHtml = `<button onclick="window.startGymBattle('${lookupName}')" style="padding: 10px 20px; font-size: 16px; margin-top: 10px; cursor: pointer;">${buttonText}</button>`;
+            buttonHtml = `<button onclick="window.startGymBattle('${lookupName}')" class="action-btn action-btn-danger" style="margin-top: 10px;">${buttonText}</button>`;
         }
 
         vGym.innerHTML = `
