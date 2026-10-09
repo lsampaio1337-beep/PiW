@@ -39,10 +39,9 @@
             overflow: hidden; /* Nothing beyond border */
             border: 2px dashed #555;
             background: #2a2a2a; /* Night mode canvas background */
-            /* Will resize to background image */
-            min-width: 300px;
-            min-height: 300px;
+            /* Will resize to match background image exactly */
             display: inline-block;
+            line-height: 0; /* Prevents tiny gap below image */
         }
         #bg-image {
             display: block;
@@ -156,7 +155,11 @@
             width: 100,
             height: 100,
             angle: 0,
-            aspectRatio: 1
+            aspectRatio: 1,
+            bgNaturalWidth: 0,
+            bgNaturalHeight: 0,
+            spriteNaturalWidth: 0,
+            spriteNaturalHeight: 0
         };
 
         // Elements
@@ -209,6 +212,8 @@
                 reader.onload = (event) => {
                     bgImage.src = event.target.result;
                     bgImage.onload = () => {
+                        state.bgNaturalWidth = bgImage.naturalWidth;
+                        state.bgNaturalHeight = bgImage.naturalHeight;
                         canvas.style.width = bgImage.naturalWidth + 'px';
                         canvas.style.height = bgImage.naturalHeight + 'px';
 
@@ -231,6 +236,8 @@
                 reader.onload = (event) => {
                     spriteImage.src = event.target.result;
                     spriteImage.onload = () => {
+                        state.spriteNaturalWidth = spriteImage.naturalWidth;
+                        state.spriteNaturalHeight = spriteImage.naturalHeight;
                         spriteContainer.style.display = 'block';
                         state.aspectRatio = spriteImage.naturalWidth / spriteImage.naturalHeight;
                         state.width = spriteImage.naturalWidth;
@@ -330,18 +337,35 @@
         const output = document.getElementById('output');
 
         btnSave.addEventListener('click', () => {
+            // Calculate relative positioning
+            // Position relative to background size (0.0 to 1.0)
+            const relativeX = state.bgNaturalWidth ? (state.x / state.bgNaturalWidth) : 0;
+            const relativeY = state.bgNaturalHeight ? (state.y / state.bgNaturalHeight) : 0;
+
+            // Size relative to sprite's own original size (e.g. 1.5 for 150% scale)
+            const scaleWidth = state.spriteNaturalWidth ? (state.width / state.spriteNaturalWidth) : 1;
+            const scaleHeight = state.spriteNaturalHeight ? (state.height / state.spriteNaturalHeight) : 1;
+
             const data = {
+                _description: "Position (rel_x, rel_y) is relative to the background boundaries (0.0 to 1.0). Size (scale_x, scale_y) is a multiplier relative to the sprite's original size. Tilt is rotation around the center of the sprite.",
                 background: state.bgName,
                 sprite: state.spriteName,
                 position: {
-                    x: Math.round(state.x),
-                    y: Math.round(state.y)
+                    rel_x: Number(relativeX.toFixed(4)),
+                    rel_y: Number(relativeY.toFixed(4)),
+                    px_x: Math.round(state.x),
+                    px_y: Math.round(state.y)
                 },
                 size: {
-                    width: Math.round(state.width),
-                    height: Math.round(state.height)
+                    scale_x: Number(scaleWidth.toFixed(4)),
+                    scale_y: Number(scaleHeight.toFixed(4)),
+                    px_width: Math.round(state.width),
+                    px_height: Math.round(state.height)
                 },
-                angle: Math.round(state.angle)
+                tilt: {
+                    angle_deg: Math.round(state.angle),
+                    origin: "center center"
+                }
             };
             output.value = JSON.stringify(data, null, 2);
         });
