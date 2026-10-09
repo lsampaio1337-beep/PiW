@@ -10,7 +10,7 @@
             margin: 20px;
             display: flex;
             flex-direction: row-reverse; /* Move dashboard to the right */
-            justify-content: flex-end;
+            justify-content: flex-start;
             gap: 20px;
             background-color: #121212; /* Night mode background */
             color: #e0e0e0; /* Night mode text */
@@ -186,7 +186,7 @@
             spriteContainer.style.top = state.y + 'px';
             spriteContainer.style.width = state.width + 'px';
             spriteContainer.style.height = state.height + 'px';
-            spriteContainer.style.transform = \`rotate(\${state.angle}deg)\`;
+            spriteContainer.style.transform = `rotate(${state.angle}deg)`;
 
             // Update sliders and text
             sliderX.value = state.x;
