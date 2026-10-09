@@ -267,6 +267,7 @@ export function getSpeciesDataHtml(pData, state) {
 }
 
 let isSmartCaptureShinyMode = false;
+let isSmartCaptureGlobalMode = false;
 
 export function showSmartCaptureMode() {
     // Preserve scroll position if window is already open
@@ -277,71 +278,141 @@ export function showSmartCaptureMode() {
         <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
             <div style="font-weight: bold; font-size: 18px; color: white;">Smart Capture Mode</div>
             <div style="display: inline-flex; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px;">
-                <button onclick="window.setSmartCaptureShinyMode(false)" style="${!isSmartCaptureShinyMode ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmousedown="event.stopPropagation()">Normal</button>
-                <button onclick="window.showSmartCaptureGlobal()" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmousedown="event.stopPropagation()">Global</button>
-                <button onclick="window.setSmartCaptureShinyMode(true)" style="${isSmartCaptureShinyMode ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmousedown="event.stopPropagation()">Shiny</button>
+                <button onclick="window.setSmartCaptureShinyMode(false)" style="${!isSmartCaptureShinyMode && !isSmartCaptureGlobalMode ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmousedown="event.stopPropagation()">Normal</button>
+                <button onclick="window.setSmartCaptureGlobalMode()" style="${isSmartCaptureGlobalMode ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmousedown="event.stopPropagation()">Global</button>
+                <button onclick="window.setSmartCaptureShinyMode(true)" style="${isSmartCaptureShinyMode && !isSmartCaptureGlobalMode ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmousedown="event.stopPropagation()">Shiny</button>
             </div>
         </div>
     `;
 
     let html = `<div id="smart-capture-grid" style="display:flex; flex-wrap:wrap; justify-content:center; max-height:400px; overflow-y:auto; gap:10px; margin-top: 15px;">`;
 
-    if (!state.config.pokemonData) {
-        html += "<p>Loading Pokedex data...</p>";
-    } else {
-        // Iterate up to 151
-        for(let i = 1; i <= 151; i++) {
-            const pData = state.config.pokemonData.find(p => p.id === i);
-            if (!pData) continue;
+    if (isSmartCaptureGlobalMode) {
+        const balls = state.config.balance.items.pokeballs;
 
-            const isSeen = hasSeenSpecies(i, state);
-            const isCaught = hasCaughtSpecies(i, state);
-            const hasSeenShiny = state.stats.seenShiniesSpecies && state.stats.seenShiniesSpecies[pData.name];
-            const hasCaughtShiny = state.stats.caughtShiniesSpecies && state.stats.caughtShiniesSpecies[pData.name];
+        // Normal Global Section
+        let normalHtml = `<div style="flex: 1; display: flex; flex-direction: column; align-items: center; border-bottom: 1px solid #555; padding-bottom: 10px; margin-bottom: 10px; width: 100%;">`;
+        normalHtml += `<div style="font-weight: bold; font-size: 16px; color: white; margin-bottom: 10px;">Normal</div>`;
+        normalHtml += `<div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; width: 100%;">`;
 
-            let filter = (isCaught || hasCaughtShiny) ? "none" : "brightness(0)";
-            let cursor = "pointer";
-            let onClick = `onclick="window.showSmartCaptureBallSelection(${i})"`;
-            let displayName = (isSeen || hasSeenShiny || isCaught || hasCaughtShiny) ? pData.name : "???";
+        // Ignore Option for Normal Global
+        let activeNormalBorder = state.settings.activeBallTier === -1 ? '#2ecc71' : '#555';
+        normalHtml += `
+            <div onclick="window.selectGlobalSmartCaptureBall(false, -1)" style="width: 60px; height: 60px; background: rgba(0,0,0,0.6); border: 2px solid ${activeNormalBorder}; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; padding: 5px; box-sizing: border-box;">
+                <img src="Assets/Extra/No.png" style="width: 30px; height: 30px; object-fit: contain;">
+                <span style="font-size: 10px; color: white; margin-top: 5px;">Ignore</span>
+            </div>
+        `;
 
-            let cardClass = "pokedex-card";
-            // Set width dynamically assuming a ~10px gap to fit exactly 9 items per row
-            let cardStyle = "width: calc((100% / 9) - 10px); text-align: center; font-size: 10px; box-sizing: border-box; position: relative; cursor: pointer;";
+        for (let idx = 0; idx < balls.length; idx++) {
+            let b = balls[idx];
+            const isActive = state.settings.activeBallTier === idx;
+            const borderColor = isActive ? '#2ecc71' : '#555';
 
-            if (hasCaughtShiny) {
-                cardClass += " pokedex-card-shiny pokedex-card-shiny-rotate";
-            } else if (hasSeenShiny) {
-                cardClass += " pokedex-card-shiny";
-            } else if (isCaught) {
-                // Keep default blue border from 'pokedex-card'
-            } else {
-                // Not captured -> no border
-                cardStyle += " border: 2px solid transparent; background: transparent;";
-            }
-
-            // Which ball is selected?
-            let selectedBallTier = isSmartCaptureShinyMode ? state.settings.smartCaptureShiny[pData.id] : state.settings.smartCapture[pData.id];
-            let ballIconHtml = '';
-            if (selectedBallTier !== undefined && selectedBallTier >= 0 && selectedBallTier < state.config.balance.items.pokeballs.length) {
-                let bName = state.config.balance.items.pokeballs[selectedBallTier].name;
-                ballIconHtml = `<img src="Assets/Items/Balls/${bName}.png" style="position: absolute; top: 2px; right: 2px; width: 16px; height: 16px; filter: drop-shadow(1px 1px 0 black); pointer-events: none;">`;
-            } else if (selectedBallTier === -1) {
-                ballIconHtml = `<img src="Assets/Extra/No.png" style="position: absolute; top: 2px; right: 2px; width: 16px; height: 16px; filter: drop-shadow(1px 1px 0 black); pointer-events: none;" title="Ignore">`;
-            }
-
-            // Sprite based on shiny mode
-            let spriteUrl = isSmartCaptureShinyMode ? `Assets/Pokemon Sprites/Natural/${i}_shiny.png` : `Assets/Pokemon Sprites/Natural/${i}.png`;
-
-            html += `<div class="${cardClass}" style="${cardStyle}" ${onClick}>
-                ${ballIconHtml}
-                <div style="font-weight:bold;">#${i}</div>
-                <div style="font-size: 9px; margin-bottom: 2px;">${displayName}</div>
-                <img src="${spriteUrl}" style="width: 50px; height: 50px; filter: ${filter}; cursor: ${cursor}; pointer-events: none;">
-            </div>`;
+            normalHtml += `
+                <div onclick="window.selectGlobalSmartCaptureBall(false, ${idx})" style="width: 60px; height: 60px; background: rgba(0, 0, 0, 0.6); border: 2px solid ${borderColor}; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; padding: 5px; box-sizing: border-box;">
+                    <img src="./Assets/Items/Balls/${b.name}.png" style="width: 30px; height: 30px; object-fit: contain;">
+                    <span style="font-size: 9px; color: white; margin-top: 5px; text-align: center;">${b.name}</span>
+                </div>
+            `;
         }
-    }
+        normalHtml += `</div></div>`;
 
-    html += `</div>`;
+        // Shiny Global Section
+        let shinyHtml = `<div style="flex: 1; display: flex; flex-direction: column; align-items: center; width: 100%;">`;
+        shinyHtml += `<div style="font-weight: bold; font-size: 16px; color: white; margin-bottom: 10px;">Shiny</div>`;
+        shinyHtml += `<div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; width: 100%;">`;
+
+        // Follow Global for Shiny
+        let activeShinyFollow = state.settings.globalSmartCaptureShiny === undefined ? '#2ecc71' : '#555';
+        shinyHtml += `
+            <div onclick="window.selectGlobalSmartCaptureBall(true, undefined)" style="width: 60px; height: 60px; background: rgba(0,0,0,0.6); border: 2px solid ${activeShinyFollow}; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; padding: 5px; box-sizing: border-box;">
+                <span style="font-size: 10px; font-weight: bold; color: white; text-align: center;">Follow Global</span>
+            </div>
+        `;
+
+        // Ignore Option for Shiny Global
+        let activeShinyIgnore = state.settings.globalSmartCaptureShiny === -1 ? '#2ecc71' : '#555';
+        shinyHtml += `
+            <div onclick="window.selectGlobalSmartCaptureBall(true, -1)" style="width: 60px; height: 60px; background: rgba(0,0,0,0.6); border: 2px solid ${activeShinyIgnore}; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; padding: 5px; box-sizing: border-box;">
+                <img src="Assets/Extra/No.png" style="width: 30px; height: 30px; object-fit: contain;">
+                <span style="font-size: 10px; color: white; margin-top: 5px;">Ignore</span>
+            </div>
+        `;
+
+        for (let idx = 0; idx < balls.length; idx++) {
+            let b = balls[idx];
+            const isActive = state.settings.globalSmartCaptureShiny === idx;
+            const borderColor = isActive ? '#2ecc71' : '#555';
+
+            shinyHtml += `
+                <div onclick="window.selectGlobalSmartCaptureBall(true, ${idx})" style="width: 60px; height: 60px; background: rgba(0, 0, 0, 0.6); border: 2px solid ${borderColor}; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; padding: 5px; box-sizing: border-box;">
+                    <img src="./Assets/Items/Balls/${b.name}.png" style="width: 30px; height: 30px; object-fit: contain;">
+                    <span style="font-size: 9px; color: white; margin-top: 5px; text-align: center;">${b.name}</span>
+                </div>
+            `;
+        }
+        shinyHtml += `</div></div>`;
+
+        html += `<div style="display: flex; flex-direction: column; width: 100%; max-width: 600px; margin: 0 auto;">${normalHtml}${shinyHtml}</div>`;
+        html += `</div>`;
+    } else {
+        if (!state.config.pokemonData) {
+            html += "<p>Loading Pokedex data...</p>";
+        } else {
+            // Iterate up to 151
+            for(let i = 1; i <= 151; i++) {
+                const pData = state.config.pokemonData.find(p => p.id === i);
+                if (!pData) continue;
+
+                const isSeen = hasSeenSpecies(i, state);
+                const isCaught = hasCaughtSpecies(i, state);
+                const hasSeenShiny = state.stats.seenShiniesSpecies && state.stats.seenShiniesSpecies[pData.name];
+                const hasCaughtShiny = state.stats.caughtShiniesSpecies && state.stats.caughtShiniesSpecies[pData.name];
+
+                let filter = (isCaught || hasCaughtShiny) ? "none" : "brightness(0)";
+                let cursor = "pointer";
+                let onClick = `onclick="window.showSmartCaptureBallSelection(${i})"`;
+                let displayName = (isSeen || hasSeenShiny || isCaught || hasCaughtShiny) ? pData.name : "???";
+
+                let cardClass = "pokedex-card";
+                // Set width dynamically assuming a ~10px gap to fit exactly 9 items per row
+                let cardStyle = "width: calc((100% / 9) - 10px); text-align: center; font-size: 10px; box-sizing: border-box; position: relative; cursor: pointer;";
+
+                if (hasCaughtShiny) {
+                    cardClass += " pokedex-card-shiny pokedex-card-shiny-rotate";
+                } else if (hasSeenShiny) {
+                    cardClass += " pokedex-card-shiny";
+                } else if (isCaught) {
+                    // Keep default blue border from 'pokedex-card'
+                } else {
+                    // Not captured -> no border
+                    cardStyle += " border: 2px solid transparent; background: transparent;";
+                }
+
+                // Which ball is selected?
+                let selectedBallTier = isSmartCaptureShinyMode ? state.settings.smartCaptureShiny[pData.id] : state.settings.smartCapture[pData.id];
+                let ballIconHtml = '';
+                if (selectedBallTier !== undefined && selectedBallTier >= 0 && selectedBallTier < state.config.balance.items.pokeballs.length) {
+                    let bName = state.config.balance.items.pokeballs[selectedBallTier].name;
+                    ballIconHtml = `<img src="Assets/Items/Balls/${bName}.png" style="position: absolute; top: 2px; right: 2px; width: 16px; height: 16px; filter: drop-shadow(1px 1px 0 black); pointer-events: none;">`;
+                } else if (selectedBallTier === -1) {
+                    ballIconHtml = `<img src="Assets/Extra/No.png" style="position: absolute; top: 2px; right: 2px; width: 16px; height: 16px; filter: drop-shadow(1px 1px 0 black); pointer-events: none;" title="Ignore">`;
+                }
+
+                // Sprite based on shiny mode
+                let spriteUrl = isSmartCaptureShinyMode ? `Assets/Pokemon Sprites/Natural/${i}_shiny.png` : `Assets/Pokemon Sprites/Natural/${i}.png`;
+
+                html += `<div class="${cardClass}" style="${cardStyle}" ${onClick}>
+                    ${ballIconHtml}
+                    <div style="font-weight:bold;">#${i}</div>
+                    <div style="font-size: 9px; margin-bottom: 2px;">${displayName}</div>
+                    <img src="${spriteUrl}" style="width: 50px; height: 50px; filter: ${filter}; cursor: ${cursor}; pointer-events: none;">
+                </div>`;
+            }
+        }
+        html += `</div>`;
+    }
 
     // Add the inner modal structure for ball selections/global settings
     html += `
@@ -372,8 +443,14 @@ export function showSmartCaptureMode() {
 
 export function setSmartCaptureShinyMode(isShiny) {
     isSmartCaptureShinyMode = isShiny;
+    isSmartCaptureGlobalMode = false;
     showSmartCaptureMode();
 }
+
+window.setSmartCaptureGlobalMode = function() {
+    isSmartCaptureGlobalMode = true;
+    showSmartCaptureMode();
+};
 
 export function showSmartCaptureBallSelection(id) {
     const pData = state.config.pokemonData.find(p => p.id === id);
@@ -458,95 +535,8 @@ export function selectSmartCaptureBall(id, tier) {
     showSmartCaptureMode();
     showSmartCaptureBallSelection(id);
 }
-export function showSmartCaptureGlobal() {
-    const balls = state.config.balance.items.pokeballs;
 
-    // Normal Global Section
-    let normalHtml = `<div style="flex: 1; display: flex; flex-direction: column; align-items: center; border-right: 1px solid #555; padding-right: 10px;">`;
-    normalHtml += `<div style="font-weight: bold; font-size: 16px; color: white; margin-bottom: 10px;">Normal</div>`;
-    normalHtml += `<div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">`;
-
-    // Ignore Option for Normal Global
-    let activeNormalBorder = state.settings.activeBallTier === -1 ? '#2ecc71' : '#555';
-    normalHtml += `
-        <div onclick="window.selectGlobalSmartCaptureBall(false, -1)" style="width: 60px; height: 60px; background: rgba(0,0,0,0.6); border: 2px solid ${activeNormalBorder}; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; padding: 5px; box-sizing: border-box;">
-            <img src="Assets/Extra/No.png" style="width: 30px; height: 30px; object-fit: contain;">
-            <span style="font-size: 10px; color: white; margin-top: 5px;">Ignore</span>
-        </div>
-    `;
-
-    for (let idx = 0; idx < balls.length; idx++) {
-        let b = balls[idx];
-        const isActive = state.settings.activeBallTier === idx;
-        const borderColor = isActive ? '#2ecc71' : '#555';
-
-        normalHtml += `
-            <div onclick="window.selectGlobalSmartCaptureBall(false, ${idx})" style="width: 60px; height: 60px; background: rgba(0, 0, 0, 0.6); border: 2px solid ${borderColor}; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; padding: 5px; box-sizing: border-box;">
-                <img src="./Assets/Items/Balls/${b.name}.png" style="width: 30px; height: 30px; object-fit: contain;">
-                <span style="font-size: 9px; color: white; margin-top: 5px; text-align: center;">${b.name}</span>
-            </div>
-        `;
-    }
-    normalHtml += `</div></div>`;
-
-    // Shiny Global Section
-    let shinyHtml = `<div style="flex: 1; display: flex; flex-direction: column; align-items: center; padding-left: 10px;">`;
-    shinyHtml += `<div style="font-weight: bold; font-size: 16px; color: white; margin-bottom: 10px;">Shiny</div>`;
-    shinyHtml += `<div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">`;
-
-    // Follow Global for Shiny
-    let activeShinyFollow = state.settings.globalSmartCaptureShiny === undefined ? '#2ecc71' : '#555';
-    shinyHtml += `
-        <div onclick="window.selectGlobalSmartCaptureBall(true, undefined)" style="width: 60px; height: 60px; background: rgba(0,0,0,0.6); border: 2px solid ${activeShinyFollow}; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; padding: 5px; box-sizing: border-box;">
-            <span style="font-size: 10px; font-weight: bold; color: white; text-align: center;">Follow Global</span>
-        </div>
-    `;
-
-    // Ignore Option for Shiny Global
-    let activeShinyIgnore = state.settings.globalSmartCaptureShiny === -1 ? '#2ecc71' : '#555';
-    shinyHtml += `
-        <div onclick="window.selectGlobalSmartCaptureBall(true, -1)" style="width: 60px; height: 60px; background: rgba(0,0,0,0.6); border: 2px solid ${activeShinyIgnore}; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; padding: 5px; box-sizing: border-box;">
-            <img src="Assets/Extra/No.png" style="width: 30px; height: 30px; object-fit: contain;">
-            <span style="font-size: 10px; color: white; margin-top: 5px;">Ignore</span>
-        </div>
-    `;
-
-    for (let idx = 0; idx < balls.length; idx++) {
-        let b = balls[idx];
-        const isActive = state.settings.globalSmartCaptureShiny === idx;
-        const borderColor = isActive ? '#2ecc71' : '#555';
-
-        shinyHtml += `
-            <div onclick="window.selectGlobalSmartCaptureBall(true, ${idx})" style="width: 60px; height: 60px; background: rgba(0, 0, 0, 0.6); border: 2px solid ${borderColor}; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; padding: 5px; box-sizing: border-box;">
-                <img src="./Assets/Items/Balls/${b.name}.png" style="width: 30px; height: 30px; object-fit: contain;">
-                <span style="font-size: 9px; color: white; margin-top: 5px; text-align: center;">${b.name}</span>
-            </div>
-        `;
-    }
-    shinyHtml += `</div></div>`;
-
-    let html = `<div style="display: flex; width: 100%; max-width: 600px;">${normalHtml}${shinyHtml}</div>`;
-
-    const titleHtml = `
-        <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
-            <div style="font-weight: bold; font-size: 18px; color: white;">Global Smart Capture Default</div>
-        </div>
-    `;
-
-    const overlay = document.getElementById('smart-capture-inner-modal-overlay');
-    const title = document.getElementById('smart-capture-inner-modal-title');
-    const content = document.getElementById('smart-capture-inner-modal-content');
-
-    if (overlay && title && content) {
-        title.innerHTML = titleHtml;
-        content.innerHTML = html;
-        overlay.style.display = 'flex';
-    } else {
-        // Fallback just in case
-        showModal(titleHtml, html, "window-smart-capture-global");
-    }
-}
-
+window.selectGlobalSmartCaptureBall = selectGlobalSmartCaptureBall;
 export function selectGlobalSmartCaptureBall(isShiny, tier) {
     if (isShiny) {
         state.settings.globalSmartCaptureShiny = tier;
@@ -569,5 +559,6 @@ export function selectGlobalSmartCaptureBall(isShiny, tier) {
         window.storageRef.save(state);
     }
 
-    showSmartCaptureGlobal();
+    // Refresh the view
+    showSmartCaptureMode();
 }
