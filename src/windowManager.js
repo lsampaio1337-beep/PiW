@@ -839,17 +839,16 @@ export class WindowManager {
             if (savedSettings.left) winElement.style.left = savedSettings.left;
             if (savedSettings.top) winElement.style.top = savedSettings.top;
         } else {
+            const winRect = winElement.getBoundingClientRect();
             let left = 50;
-            let top = 50;
+            let top = (this.containerHeight - winRect.height) / 2;
 
             const mainView = document.getElementById('top-bar-window');
             if (mainView && mainView.style.display !== 'none') {
                 const rect = mainView.getBoundingClientRect();
                 left = rect.left;
-                top = rect.bottom; // directly below (vertical)
             }
 
-            const winRect = winElement.getBoundingClientRect();
             if (left < 0) left = 0;
             if (top < 0) top = 0;
             if (left + winRect.width > this.containerWidth) left = this.containerWidth - winRect.width;
