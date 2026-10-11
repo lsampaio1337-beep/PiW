@@ -80,7 +80,7 @@ function updateActiveItemsUI() {
             ballImg.style.display = 'block';
             ballCount.style.display = 'block';
         } else {
-            ballCard.style.border = '2px solid #3498db'; // Blue
+            ballCard.style.border = '2px solid #2ecc71'; // Green
             ballImg.src = "./Assets/Extra/No.png";
             ballCount.textContent = '';
             ballImg.style.display = 'block';
