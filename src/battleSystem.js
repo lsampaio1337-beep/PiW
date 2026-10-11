@@ -509,11 +509,11 @@ class BattleSystem {
                 const buttonText = isLeader ? `Fight Gym Leader` : `Fight Gym Trainer`;
 
                 if (index < this.gymState.currentTrainerIndex) {
-                    return `<button disabled style="padding: 10px; opacity: 0.5; width: 100%;">${buttonText} (Defeated)</button>`;
+                    return `<button disabled class="action-btn" style="opacity: 0.5; width: 100%;">${buttonText} (Defeated)</button>`;
                 } else if (index === this.gymState.currentTrainerIndex) {
-                    return `<button id="btn-start-gym-battle" onclick="window.battleEngine.startNextGymBattle()" style="padding: 10px; font-weight: bold; background-color: #2ecc71; color: white; border: none; cursor: pointer; width: 100%;">${buttonText} (${t.name})</button>`;
+                    return `<button id="btn-start-gym-battle" class="action-btn action-btn-primary" onclick="window.battleEngine.startNextGymBattle()" style="width: 100%;">${buttonText} (${t.name})</button>`;
                 } else {
-                    return `<button disabled style="padding: 10px; opacity: 0.5; width: 100%;">${buttonText} (${t.name})</button>`;
+                    return `<button disabled class="action-btn" style="opacity: 0.5; width: 100%;">${buttonText} (${t.name})</button>`;
                 }
             }).join('');
 
@@ -523,7 +523,7 @@ class BattleSystem {
                     <h3>Gym Lobby</h3>
                     <p style="font-size: 14px; margin-bottom: 10px;">You may heal and organize your party.</p>
                     ${trainerButtonsHtml}
-                    <button onclick="window.battleEngine.stopGymBattle()" style="padding: 10px; background: #e74c3c; border: none; color: white; border-radius: 3px; cursor: pointer; margin-top: 10px; width: 100%;">Flee Gym</button>
+                    <button class="action-btn action-btn-danger" onclick="window.battleEngine.stopGymBattle()" style="margin-top: 10px; width: 100%;">Flee Gym</button>
                 </div>
             `;
             // Temporary expose for the button
@@ -546,7 +546,7 @@ class BattleSystem {
             contentArea.innerHTML = `
                 <h3>You defeated ${gym.leader}!</h3>
                 <p>A Gift is awaiting for you.</p>
-                <button onclick="window.battleEngine.stopGymBattle()" style="padding: 10px 20px; cursor: pointer;">Leave</button>
+                <button class="action-btn action-btn-primary" onclick="window.battleEngine.stopGymBattle()" style="margin-top: 10px; width: 100%;">Leave</button>
             `;
             window.battleEngine = this;
         }

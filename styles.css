@@ -652,3 +652,32 @@ input[type="number"] {
     width: 70% !important;
     aspect-ratio: 4/3 !important;
 }
+
+/* --- Action Buttons --- */
+.action-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    color: white;
+    text-align: center;
+}
+.action-btn:active {
+    transform: scale(0.98);
+}
+.action-btn-primary {
+    background-color: #3498db;
+}
+.action-btn-primary:hover {
+    background-color: #2980b9;
+}
+.action-btn-danger {
+    background-color: #e74c3c;
+}
+.action-btn-danger:hover {
+    background-color: #c0392b;
+}
