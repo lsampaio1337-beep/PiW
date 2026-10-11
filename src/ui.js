@@ -1291,9 +1291,8 @@ export function renderJohtoOakLab() {
             : ``;
 
         johtoOakLabContent.innerHTML = `
-            <div style="background-color: rgba(0,0,0,0.85); position: absolute; left: 15%; top: 50%; transform: translateY(-50%); padding: 20px; border-radius: 8px; width: 400px; color: white; text-align: center;">
+            <div style="background-color: rgba(0,0,0,0.85); position: absolute; left: 15%; top: 50%; transform: translateY(-50%); padding: 20px; border-radius: 8px; width: 250px; color: white; text-align: center;">
                 <h2 style="margin-top:0;">Professor Elm Lab</h2>
-                <p style="font-size: 12px; color: #ccc; margin-bottom: 15px;">Complete assignments to unlock global bonuses.</p>
 
                 <div style="display: flex; flex-direction: column; gap: 10px;">
                     <div style="position: relative; display: inline-block; width: 100%;">
@@ -1325,9 +1324,8 @@ export function renderOakLab() {
         : ``;
 
     oakLabDiv.innerHTML = `
-        <div style="background-color: rgba(0,0,0,0.85); position: absolute; left: 15%; top: 50%; transform: translateY(-50%); padding: 20px; border-radius: 8px; width: 400px; color: white; text-align: center;">
+        <div style="background-color: rgba(0,0,0,0.85); position: absolute; left: 15%; top: 50%; transform: translateY(-50%); padding: 20px; border-radius: 8px; width: 250px; color: white; text-align: center;">
             <h2 style="margin-top:0;">Professor Oak Lab</h2>
-            <p style="font-size: 12px; color: #ccc; margin-bottom: 15px;">Complete assignments to unlock global bonuses.</p>
 
             <div style="display: flex; flex-direction: column; gap: 10px;">
                 <div style="position: relative; display: inline-block; width: 100%;">
@@ -3004,10 +3002,10 @@ export function renderGenericLab() {
             : ``;
 
         labContent.innerHTML = `
-            <div style="background-color: rgba(0,0,0,0.85); position: absolute; left: 15%; top: 50%; transform: translateY(-50%); padding: 20px; border-radius: 8px; width: 400px; color: white; text-align: center;">
+            <div style="background-color: rgba(0,0,0,0.85); position: absolute; left: 15%; top: 50%; transform: translateY(-50%); padding: 20px; border-radius: 8px; width: 250px; color: white; text-align: center;">
                 <h2 style="margin-top:0;">Professor Lab</h2>
-                <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
-                    <div style="position: relative;">
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <div style="position: relative; display: inline-block; width: 100%;">
                         <button onclick="window.showOakLabModal()" class="action-btn action-btn-primary" style="width: 100%;">Assignments and Boosters</button>
                         ${exclamationHtml}
                     </div>
