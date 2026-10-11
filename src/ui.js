@@ -1269,7 +1269,7 @@ export function renderJohtoOakLab() {
     if (!state.stats.hasPickedStarter) {
         // Show starter selection
         johtoOakLabContent.innerHTML = `
-            <div style="background-color: rgba(0,0,0,0.8); display: inline-block; padding: 30px; margin-top: 50px; border-radius: 8px;">
+            <div style="background-color: rgba(0,0,0,0.8); position: absolute; left: 15%; top: 50%; transform: translateY(-50%); padding: 30px; border-radius: 8px;">
                 <h2>Choose your Starter Pokémon</h2>
                 <div class="starter-choices">
                   <button onclick="window.selectJohtoStarter(1)">
@@ -1291,7 +1291,7 @@ export function renderJohtoOakLab() {
             : ``;
 
         johtoOakLabContent.innerHTML = `
-            <div style="background-color: rgba(0,0,0,0.85); display: inline-block; padding: 20px; margin-top: 20px; border-radius: 8px; width: 400px; color: white; text-align: center;">
+            <div style="background-color: rgba(0,0,0,0.85); position: absolute; left: 15%; top: 50%; transform: translateY(-50%); padding: 20px; border-radius: 8px; width: 400px; color: white; text-align: center;">
                 <h2 style="margin-top:0;">Professor Elm Lab</h2>
                 <p style="font-size: 12px; color: #ccc; margin-bottom: 15px;">Complete assignments to unlock global bonuses.</p>
 
@@ -1325,7 +1325,7 @@ export function renderOakLab() {
         : ``;
 
     oakLabDiv.innerHTML = `
-        <div style="background-color: rgba(0,0,0,0.85); display: inline-block; padding: 20px; margin-top: 20px; border-radius: 8px; width: 400px; color: white; text-align: center;">
+        <div style="background-color: rgba(0,0,0,0.85); position: absolute; left: 15%; top: 50%; transform: translateY(-50%); padding: 20px; border-radius: 8px; width: 400px; color: white; text-align: center;">
             <h2 style="margin-top:0;">Professor Oak Lab</h2>
             <p style="font-size: 12px; color: #ccc; margin-bottom: 15px;">Complete assignments to unlock global bonuses.</p>
 
@@ -2982,7 +2982,7 @@ export function renderGenericLab() {
     if (!state.stats.hasPickedStarter) {
         // Show starter selection
         labContent.innerHTML = `
-            <div style="background-color: rgba(0,0,0,0.8); display: inline-block; padding: 30px; margin-top: 50px; border-radius: 8px;">
+            <div style="background-color: rgba(0,0,0,0.8); position: absolute; left: 15%; top: 50%; transform: translateY(-50%); padding: 30px; border-radius: 8px;">
                 <h2>Choose your Starter Pokémon</h2>
                 <div class="starter-choices">
                   <button onclick="window.selectGenericStarter(1)">
@@ -3004,7 +3004,7 @@ export function renderGenericLab() {
             : ``;
 
         labContent.innerHTML = `
-            <div style="background-color: rgba(0,0,0,0.85); display: inline-block; padding: 20px; margin-top: 20px; border-radius: 8px; width: 400px; color: white; text-align: center;">
+            <div style="background-color: rgba(0,0,0,0.85); position: absolute; left: 15%; top: 50%; transform: translateY(-50%); padding: 20px; border-radius: 8px; width: 400px; color: white; text-align: center;">
                 <h2 style="margin-top:0;">Professor Lab</h2>
                 <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
                     <div style="position: relative;">
