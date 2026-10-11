@@ -1246,19 +1246,8 @@ window.showOakLabModal = function() {
             innerModal.classList.add('oak-lab-inner-modal');
 
             originalModalMarginLeft = innerModal.style.marginLeft;
-
-            // Attempt to calculate exact left border of the active lab inner window
-            // Active lab window typically has an inner block containing the button, which is 400px wide and centered
-            const centerCol = document.getElementById('center-col');
-            if (centerCol) {
-                const centerColWidth = centerCol.clientWidth;
-                // Since the inner block is 400px wide and centered:
-                // Left position = (centerColWidth - 400) / 2
-                let leftPos = (centerColWidth - 400) / 2;
-                if (leftPos < 0) leftPos = 0;
-
-                innerModal.style.marginLeft = `${leftPos}px`;
-            }
+            // Set margin-left to 15% to align exactly with the lab's inner window
+            innerModal.style.marginLeft = '15%';
         }
 
         // Ensure cleanup when the modal is closed
@@ -1324,7 +1313,7 @@ export function renderJohtoOakLab() {
             : ``;
 
         johtoOakLabContent.innerHTML = `
-            <div style="background-color: rgba(0,0,0,0.85); display: inline-block; padding: 20px; margin-top: 20px; border-radius: 8px; width: 400px; color: white; text-align: center;">
+            <div style="background-color: rgba(0,0,0,0.85); position: absolute; left: 15%; top: 50%; transform: translateY(-50%); padding: 20px; border-radius: 8px; width: 400px; color: white; text-align: center;">
                 <h2 style="margin-top:0;">Professor Elm Lab</h2>
                 <p style="font-size: 12px; color: #ccc; margin-bottom: 15px;">Complete assignments to unlock global bonuses.</p>
 
@@ -1358,7 +1347,7 @@ export function renderOakLab() {
         : ``;
 
     oakLabDiv.innerHTML = `
-        <div style="background-color: rgba(0,0,0,0.85); display: inline-block; padding: 20px; margin-top: 20px; border-radius: 8px; width: 400px; color: white; text-align: center;">
+        <div style="background-color: rgba(0,0,0,0.85); position: absolute; left: 15%; top: 50%; transform: translateY(-50%); padding: 20px; border-radius: 8px; width: 400px; color: white; text-align: center;">
             <h2 style="margin-top:0;">Professor Oak Lab</h2>
             <p style="font-size: 12px; color: #ccc; margin-bottom: 15px;">Complete assignments to unlock global bonuses.</p>
 
@@ -3037,7 +3026,7 @@ export function renderGenericLab() {
             : ``;
 
         labContent.innerHTML = `
-            <div style="background-color: rgba(0,0,0,0.85); display: inline-block; padding: 20px; margin-top: 20px; border-radius: 8px; width: 400px; color: white; text-align: center;">
+            <div style="background-color: rgba(0,0,0,0.85); position: absolute; left: 15%; top: 50%; transform: translateY(-50%); padding: 20px; border-radius: 8px; width: 400px; color: white; text-align: center;">
                 <h2 style="margin-top:0;">Professor Lab</h2>
                 <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
                     <div style="position: relative;">
