@@ -1226,18 +1226,51 @@ window.showOakLabModal = function() {
         title.innerText = "Assignments and Boosters";
         content.innerHTML = html;
 
+        // Save original overlay styles to restore on close
+        const originalOverlayStyles = {
+            alignItems: overlay.style.alignItems,
+            justifyContent: overlay.style.justifyContent,
+            padding: overlay.style.padding
+        };
+
+        // Vertically center, left align
+        overlay.style.alignItems = 'center';
+        overlay.style.justifyContent = 'flex-start';
+        overlay.style.padding = '0';
+
         // Dynamically style the inner modal for Oak Lab to 70% width and proportional scale
         const innerModal = document.getElementById('main-view-inner-modal');
+        let originalModalMarginLeft = '';
         if (innerModal) {
             // Apply a specific class for Oak Lab modal instead of hacking inline styles permanently
             innerModal.classList.add('oak-lab-inner-modal');
+
+            originalModalMarginLeft = innerModal.style.marginLeft;
+
+            // Attempt to calculate exact left border of the active lab inner window
+            // Active lab window typically has an inner block containing the button, which is 400px wide and centered
+            const centerCol = document.getElementById('center-col');
+            if (centerCol) {
+                const centerColWidth = centerCol.clientWidth;
+                // Since the inner block is 400px wide and centered:
+                // Left position = (centerColWidth - 400) / 2
+                let leftPos = (centerColWidth - 400) / 2;
+                if (leftPos < 0) leftPos = 0;
+
+                innerModal.style.marginLeft = `${leftPos}px`;
+            }
         }
 
         // Ensure cleanup when the modal is closed
         const cleanUp = () => {
             if (innerModal) {
                 innerModal.classList.remove('oak-lab-inner-modal');
+                innerModal.style.marginLeft = originalModalMarginLeft;
             }
+            overlay.style.alignItems = originalOverlayStyles.alignItems;
+            overlay.style.justifyContent = originalOverlayStyles.justifyContent;
+            overlay.style.padding = originalOverlayStyles.padding;
+
             overlay.style.display = 'none';
         };
 
