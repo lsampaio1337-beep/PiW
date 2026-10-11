@@ -520,8 +520,7 @@ class BattleSystem {
             // Rest phase UI
             contentArea.innerHTML = `
                 <div id="gym-rest-area" style="display: flex; flex-direction: column; gap: 10px; width: 100%;">
-                    <h3>Gym Lobby</h3>
-                    <p style="font-size: 14px; margin-bottom: 10px;">You may heal and organize your party.</p>
+                    <p style="font-size: 14px; margin-bottom: 10px;">You may organize your party.</p>
                     ${trainerButtonsHtml}
                     <button class="action-btn action-btn-danger" onclick="window.battleEngine.stopGymBattle()" style="margin-top: 10px; width: 100%;">Flee Gym</button>
                 </div>
