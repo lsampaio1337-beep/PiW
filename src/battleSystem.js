@@ -479,6 +479,11 @@ class BattleSystem {
         const contentArea = document.getElementById("gym-content-area");
         if (!vGym || !contentArea) return;
 
+        const gymTitleHeader = document.getElementById("gym-title-header");
+        if (gymTitleHeader) {
+            gymTitleHeader.style.display = "none";
+        }
+
         const gym = this.gymState.gym;
         if (!gym) return;
 
