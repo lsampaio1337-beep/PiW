@@ -205,38 +205,25 @@ const gyms = [
         "name": "Gym Trainer #4",
         "team": [
           {
-            "id": 43,
+            "id": 69,
             "level": 49
           },
           {
-            "id": 44,
+            "id": 69,
+            "level": 49
+          },
+          {
+            "id": 43,
+            "level": 50
+          },
+          {
+            "id": 43,
             "level": 50
           }
         ]
       },
       {
         "name": "Gym Trainer #5",
-        "team": [
-          {
-            "id": 69,
-            "level": 49
-          },
-          {
-            "id": 69,
-            "level": 49
-          },
-          {
-            "id": 43,
-            "level": 50
-          },
-          {
-            "id": 43,
-            "level": 50
-          }
-        ]
-      },
-      {
-        "name": "Gym Trainer #6",
         "team": [
           {
             "id": 1,
