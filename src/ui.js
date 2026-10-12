@@ -1036,7 +1036,7 @@ window.cheatCompleteOakTask = function(type) {
 window.showOakLabModal = function() {
     if (state.stats.showOakLobbyNotification) {
         state.stats.showOakLobbyNotification = false;
-        renderOakLab(); // Clear the notification from the lobby button
+        renderGenericLab(); // Clear the notification from the lobby button
     }
 
     let html = `<div class="content-panel" style="display:flex; flex-direction:column; gap:15px; text-align:left; height: 100%; overflow-y: auto;">`;
@@ -1262,80 +1262,7 @@ window.showOakLabModal = function() {
     }
 };
 
-export function renderJohtoOakLab() {
-    const johtoOakLabContent = document.getElementById("johto-oak-lab-content");
-    if (!johtoOakLabContent) return;
 
-    if (!state.stats.hasPickedStarter) {
-        // Show starter selection
-        johtoOakLabContent.innerHTML = `
-            <div style="background-color: rgba(0,0,0,0.8); position: absolute; left: 15%; top: 50%; transform: translateY(-50%); padding: 30px; border-radius: 8px;">
-                <h2>Choose your Starter Pokémon</h2>
-                <div class="starter-choices">
-                  <button onclick="window.selectJohtoStarter(1)">
-                    <img src="Assets/Pokemon Sprites/Natural/1.png" style="width: 80px; height: 80px;"><br>Bulbasaur
-                  </button>
-                  <button onclick="window.selectJohtoStarter(4)">
-                    <img src="Assets/Pokemon Sprites/Natural/4.png" style="width: 80px; height: 80px;"><br>Charmander
-                  </button>
-                  <button onclick="window.selectJohtoStarter(7)">
-                    <img src="Assets/Pokemon Sprites/Natural/7.png" style="width: 80px; height: 80px;"><br>Squirtle
-                  </button>
-                </div>
-            </div>
-        `;
-    } else {
-        // Show assignments
-        let exclamationHtml = state.stats.showOakLobbyNotification
-            ? `<img src="Assets/Extra/ExclamationMark.png" style="position: absolute; top: -5px; right: -5px; width: 20px; height: auto; pointer-events: none; z-index: 10;">`
-            : ``;
-
-        johtoOakLabContent.innerHTML = `
-            <div style="background-color: rgba(0,0,0,0.85); position: absolute; left: 15%; top: 50%; transform: translateY(-50%); padding: 20px; border-radius: 8px; width: 250px; color: white; text-align: center;">
-                <h2 style="margin-top:0;">Professor Elm Lab</h2>
-
-                <div style="display: flex; flex-direction: column; gap: 10px;">
-                    <div style="position: relative; display: inline-block; width: 100%;">
-                        <button onclick="window.showOakLabModal()" class="action-btn action-btn-primary" style="width: 100%;">Assignments and Boosters</button>
-                        ${exclamationHtml}
-                    </div>
-                </div>
-            </div>
-        `;
-    }
-}
-
-export function renderOakLab() {
-    const oakLabContent = document.getElementById("prof-oak-lab-content");
-    if (!oakLabContent) return;
-
-    // Check if player has pokemon
-    if (state.party.length === 0 && state.storage.length === 0) {
-        return; // still selecting starter, handled in index.html
-    }
-
-    if (state.stats.showOakMarkerPulse) {
-        state.stats.showOakMarkerPulse = false;
-        // updateUI(); could be called here to refresh map icon but it's done dynamically in topbar
-    }
-
-    let exclamationHtml = state.stats.showOakLobbyNotification
-        ? `<img src="Assets/Extra/ExclamationMark.png" style="position: absolute; top: -5px; right: -5px; width: 20px; height: auto; pointer-events: none; z-index: 10;">`
-        : ``;
-
-    oakLabContent.innerHTML = `
-        <div style="background-color: rgba(0,0,0,0.85); position: absolute; left: 15%; top: 50%; transform: translateY(-50%); padding: 20px; border-radius: 8px; width: 250px; color: white; text-align: center;">
-            <h2 style="margin-top:0;">Professor Oak Lab</h2>
-
-            <div style="display: flex; flex-direction: column; gap: 10px;">
-                <div style="position: relative; display: inline-block; width: 100%;">
-                    <button onclick="window.showOakLabModal()" class="action-btn action-btn-primary" style="width: 100%;">Assignments and Boosters</button>
-                    ${exclamationHtml}
-                </div>
-            </div>
-        </div>
-    `;
-}
 
 // Main View has 2 modes:
 // 1. Hub Mode: The taller one (where you visit places such as casino, market, professor oak, safari, gyms).
@@ -1360,15 +1287,11 @@ export function switchView(viewName) {
         if (window.windowManager) window.windowManager.setWindowProportions('main-view-window', MAIN_VIEW_HUB_MODE_RATIO);
     }
 
-    if (viewName === 'PROF_OAK_LAB') {
-        document.getElementById('view-prof-oak-lab').style.display = 'block';
-        showOakTutorialIfNeeded();
-        renderOakLab();
-    } else if (viewName === 'JOHTO_OAK_LAB') {
-        document.getElementById('view-johto-oak-lab').style.display = 'block';
-        renderJohtoOakLab();
-    } else if (viewName === 'GENERIC_LAB') {
+    if (viewName === 'PROF_OAK_LAB' || viewName === 'JOHTO_OAK_LAB' || viewName === 'GENERIC_LAB') {
         document.getElementById('view-generic-lab').style.display = 'block';
+        if (viewName === 'PROF_OAK_LAB') {
+            showOakTutorialIfNeeded();
+        }
         renderGenericLab();
     } else if (viewName === 'SAFARI_HUB') {
         document.getElementById('view-safari-hub').style.display = 'flex';
@@ -1516,7 +1439,7 @@ function selectJohtoStarter(id) {
 
     // Refresh UI
     updateTeamWindow();
-    renderJohtoOakLab();
+    renderGenericLab();
 }
 
 window.selectStarter = selectStarter;
@@ -1634,7 +1557,7 @@ function selectStarter(id) {
     if (window.updateMainControl) window.updateMainControl();
 
     storage.save(state);
-    renderOakLab();
+    renderGenericLab();
 }
 
 let gameClockTimeout = null;
@@ -2954,36 +2877,68 @@ export function renderGenericLab() {
     const labView = document.getElementById("view-generic-lab");
     if (!labContent || !labView) return;
 
+    if (state.stats.showOakMarkerPulse) {
+        state.stats.showOakMarkerPulse = false;
+    }
+
     let currentRegion = window.currentMapRegion || 'Kanto';
 
-    const regionProfMap = {
-        'Kanto': '1_Kanto_Professor_Oak.png',
-        'Johto': '2_Johto_Professor_Elm.png',
-        'Hoenn': '3_Hoenn_Professor_Birch.png',
-        'Sinnoh': '4_Sinnoh_Professor_Rowan.png',
-        'Unova': '5_Unova_Professor_Juniper.png',
-        'Kalos': '6_Kalos_Professor_Sycamore.png',
-        'Alola': '7_Alola_Professor_Kukui.png',
-        'Galar': '8_Galar_Professor_Magnolia.png',
-        'Hisui': '9_Hisui_Professor_Laventon.png',
-        'Paldea': '10_Paldea_Turo.png'
+    const labConfigs = {
+        'Kanto': { sprite: "1_Kanto_Professor_Oak.png", position: { rel_x: 0.5861, rel_y: 0.016, px_width: 595, px_height: 1326 } },
+        'Johto': { sprite: "2_Johto_Professor_Elm.png", position: { rel_x: 0.5628, rel_y: 0.037, px_width: 624, px_height: 1256 } },
+        'Hoenn': { sprite: "3_Hoenn_Professor_Birch.png", position: { rel_x: 0.4272, rel_y: 0.0395, px_width: 1000, px_height: 948 } },
+        'Sinnoh': { sprite: "4_Sinnoh_Professor_Rowan.png", position: { rel_x: 0.5881, rel_y: 0.0415, px_width: 452, px_height: 957 } },
+        'Unova': { sprite: "5_Unova_Professor_Juniper.png", position: { rel_x: 0.6294, rel_y: 0.019, px_width: 526, px_height: 1280 } },
+        'Kalos': { sprite: "6_Kalos_Professor_Sycamore.png", position: { rel_x: 0.4889, rel_y: 0.053, px_width: 873, px_height: 1371 } },
+        'Alola': { sprite: "7_Alola_Professor_Kukui.png", position: { rel_x: 0.5853, rel_y: 0.046, px_width: 597, px_height: 1415 } },
+        'Galar': { sprite: "8_Galar_Professor_Magnolia.png", position: { rel_x: 0.6311, rel_y: 0.035, px_width: 458, px_height: 1264 } },
+        'Hisui': { sprite: "9_Hisui_Professor_Laventon.png", position: { rel_x: 0.5833, rel_y: 0.02, px_width: 612, px_height: 1367 } },
+        'Paldea': { sprite: "10_Paldea_Turo.png", position: { rel_x: 0.5872, rel_y: 0.042, px_width: 475, px_height: 1184 } }
     };
 
-    let profSprite = `./Assets/Lab/1_Kanto_Professor_Oak.png`;
-    if (regionProfMap[currentRegion]) {
-        profSprite = `./Assets/Lab/${regionProfMap[currentRegion]}`;
-    }
+    const config = labConfigs[currentRegion] || labConfigs['Kanto'];
+    const profSprite = `./Assets/Lab/${config.sprite}`;
 
     const profImg = document.getElementById("prof-generic-sprite");
     if (profImg) {
         profImg.src = profSprite;
+        profImg.style.left = `${config.position.rel_x * 100}%`;
+        profImg.style.top = `${config.position.rel_y * 100}%`;
+        profImg.style.width = `${(config.position.px_width / 1800) * 100}%`;
+        profImg.style.height = `${(config.position.px_height / 1000) * 100}%`;
     }
 
     if (!state.stats.hasPickedStarter) {
         // Show starter selection
-        labContent.innerHTML = `
-            <div style="background-color: rgba(0,0,0,0.8); position: absolute; left: 15%; top: 50%; transform: translateY(-50%); padding: 30px; border-radius: 8px;">
-                <h2>Choose your Starter Pokémon</h2>
+        let starterHtml = '';
+        if (currentRegion === 'Kanto') {
+            starterHtml = `
+                <div class="starter-choices">
+                  <button onclick="window.selectStarter(1)">
+                    <img src="Assets/Pokemon Sprites/Natural/1.png" style="width: 80px; height: 80px;"><br>Bulbasaur
+                  </button>
+                  <button onclick="window.selectStarter(4)">
+                    <img src="Assets/Pokemon Sprites/Natural/4.png" style="width: 80px; height: 80px;"><br>Charmander
+                  </button>
+                  <button onclick="window.selectStarter(7)">
+                    <img src="Assets/Pokemon Sprites/Natural/7.png" style="width: 80px; height: 80px;"><br>Squirtle
+                  </button>
+                </div>`;
+        } else if (currentRegion === 'Johto') {
+            starterHtml = `
+                <div class="starter-choices">
+                  <button onclick="window.selectJohtoStarter(1)">
+                    <img src="Assets/Pokemon Sprites/Natural/1.png" style="width: 80px; height: 80px;"><br>Bulbasaur
+                  </button>
+                  <button onclick="window.selectJohtoStarter(4)">
+                    <img src="Assets/Pokemon Sprites/Natural/4.png" style="width: 80px; height: 80px;"><br>Charmander
+                  </button>
+                  <button onclick="window.selectJohtoStarter(7)">
+                    <img src="Assets/Pokemon Sprites/Natural/7.png" style="width: 80px; height: 80px;"><br>Squirtle
+                  </button>
+                </div>`;
+        } else {
+            starterHtml = `
                 <div class="starter-choices">
                   <button onclick="window.selectGenericStarter(1)">
                     <img src="Assets/Pokemon Sprites/Natural/1.png" style="width: 80px; height: 80px;"><br>Bulbasaur
@@ -2994,7 +2949,13 @@ export function renderGenericLab() {
                   <button onclick="window.selectGenericStarter(7)">
                     <img src="Assets/Pokemon Sprites/Natural/7.png" style="width: 80px; height: 80px;"><br>Squirtle
                   </button>
-                </div>
+                </div>`;
+        }
+
+        labContent.innerHTML = `
+            <div style="background-color: rgba(0,0,0,0.8); position: absolute; left: 15%; top: 50%; transform: translateY(-50%); padding: 30px; border-radius: 8px;">
+                <h2>Choose your Starter Pokémon</h2>
+                ${starterHtml}
             </div>
         `;
     } else {
