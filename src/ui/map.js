@@ -318,6 +318,16 @@ export function showMap() {
 }
 
 export function navigateToLocation(locationName) {
+    if (globals.battleSystem && globals.battleSystem.gymState && globals.battleSystem.gymState.isActive) {
+        if (window.closeModal) {
+            window.closeModal('window-map');
+            window.closeModal();
+        } else if (window.windowManager) {
+            window.windowManager.closeDynamicWindow('window-map');
+        }
+        return;
+    }
+
     if (window.currentMapRegion && window.currentMapRegion !== state.currentRegionName) {
         // Stop battle completely before swapping
         if (globals.battleSystem) {
