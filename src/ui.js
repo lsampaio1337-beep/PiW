@@ -2915,39 +2915,39 @@ export function renderGenericLab() {
             starterHtml = `
                 <div class="starter-choices">
                   <button onclick="window.selectStarter(1)">
-                    <img src="Assets/Pokemon Sprites/Natural/1.png" style="width: 80px; height: 80px;"><br>Bulbasaur
+                    <img src="Assets/Pokemon Sprites/Natural/Gen5/0001_Bulbasaur.png" style="width: 80px; height: 80px;"><br>Bulbasaur
                   </button>
                   <button onclick="window.selectStarter(4)">
-                    <img src="Assets/Pokemon Sprites/Natural/4.png" style="width: 80px; height: 80px;"><br>Charmander
+                    <img src="Assets/Pokemon Sprites/Natural/Gen5/0004_Charmander.png" style="width: 80px; height: 80px;"><br>Charmander
                   </button>
                   <button onclick="window.selectStarter(7)">
-                    <img src="Assets/Pokemon Sprites/Natural/7.png" style="width: 80px; height: 80px;"><br>Squirtle
+                    <img src="Assets/Pokemon Sprites/Natural/Gen5/0007_Squirtle.png" style="width: 80px; height: 80px;"><br>Squirtle
                   </button>
                 </div>`;
         } else if (currentRegion === 'Johto') {
             starterHtml = `
                 <div class="starter-choices">
                   <button onclick="window.selectJohtoStarter(1)">
-                    <img src="Assets/Pokemon Sprites/Natural/1.png" style="width: 80px; height: 80px;"><br>Bulbasaur
+                    <img src="Assets/Pokemon Sprites/Natural/Gen5/0001_Bulbasaur.png" style="width: 80px; height: 80px;"><br>Bulbasaur
                   </button>
                   <button onclick="window.selectJohtoStarter(4)">
-                    <img src="Assets/Pokemon Sprites/Natural/4.png" style="width: 80px; height: 80px;"><br>Charmander
+                    <img src="Assets/Pokemon Sprites/Natural/Gen5/0004_Charmander.png" style="width: 80px; height: 80px;"><br>Charmander
                   </button>
                   <button onclick="window.selectJohtoStarter(7)">
-                    <img src="Assets/Pokemon Sprites/Natural/7.png" style="width: 80px; height: 80px;"><br>Squirtle
+                    <img src="Assets/Pokemon Sprites/Natural/Gen5/0007_Squirtle.png" style="width: 80px; height: 80px;"><br>Squirtle
                   </button>
                 </div>`;
         } else {
             starterHtml = `
                 <div class="starter-choices">
                   <button onclick="window.selectGenericStarter(1)">
-                    <img src="Assets/Pokemon Sprites/Natural/1.png" style="width: 80px; height: 80px;"><br>Bulbasaur
+                    <img src="Assets/Pokemon Sprites/Natural/Gen5/0001_Bulbasaur.png" style="width: 80px; height: 80px;"><br>Bulbasaur
                   </button>
                   <button onclick="window.selectGenericStarter(4)">
-                    <img src="Assets/Pokemon Sprites/Natural/4.png" style="width: 80px; height: 80px;"><br>Charmander
+                    <img src="Assets/Pokemon Sprites/Natural/Gen5/0004_Charmander.png" style="width: 80px; height: 80px;"><br>Charmander
                   </button>
                   <button onclick="window.selectGenericStarter(7)">
-                    <img src="Assets/Pokemon Sprites/Natural/7.png" style="width: 80px; height: 80px;"><br>Squirtle
+                    <img src="Assets/Pokemon Sprites/Natural/Gen5/0007_Squirtle.png" style="width: 80px; height: 80px;"><br>Squirtle
                   </button>
                 </div>`;
         }
@@ -2977,3 +2977,11 @@ export function renderGenericLab() {
         `;
     }
 }
+
+window.getSpriteUrl = function(id, isShiny = false) {
+    if (!state || !state.config || !state.config.pokemonData) return '';
+    const pData = state.config.pokemonData.find(pd => pd.id == id);
+    if (!pData) return '';
+    const paddedId = id.toString().padStart(4, '0');
+    return `Assets/Pokemon Sprites/Natural/Gen5/${paddedId}_${pData.name}${isShiny ? '_shiny' : ''}.png`;
+};
