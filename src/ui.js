@@ -2956,26 +2956,28 @@ export function renderGenericLab() {
 
     let currentRegion = window.currentMapRegion || 'Kanto';
 
-    // Fallback if there is no specific background for this region, default to Kanto
-    let bgImage = `./Assets/BG/Labs/FullSize/BG_1_Kanto_Professor_Oak_Lab.png`;
-    const regionBgMap = {
-        'Kanto': 'BG_1_Kanto_Professor_Oak_Lab.png',
-        'Johto': 'BG_2_Johto_Professor_Elm_Lab.png',
-        'Hoenn': 'BG_3_Hoenn_Professor_Birch_Lab.png',
-        'Sinnoh': 'BG_4_Sinnoh_Professor_Rowan_Lab.png',
-        'Unova': 'BG_5_Unova_Professor_Juniper_Lab.png',
-        'Kalos': 'BG_6_Kalos_Professor_Sycamore_Lab.png',
-        'Alola': 'BG_7_Alola_Professor_Kukui_Lab.png',
-        'Galar': 'BG_8_Galar_Professor_Magnolia_Lab.png',
-        'Hisui': 'BG_9_Hisui_Professor_Laventon_Lab.png',
-        'Paldea': 'BG_10_Paldea_Turo_Lab.png'
+    const regionProfMap = {
+        'Kanto': '1_Kanto_Professor_Oak.png',
+        'Johto': '2_Johto_Professor_Elm.png',
+        'Hoenn': '3_Hoenn_Professor_Birch.png',
+        'Sinnoh': '4_Sinnoh_Professor_Rowan.png',
+        'Unova': '5_Unova_Professor_Juniper.png',
+        'Kalos': '6_Kalos_Professor_Sycamore.png',
+        'Alola': '7_Alola_Professor_Kukui.png',
+        'Galar': '8_Galar_Professor_Magnolia.png',
+        'Hisui': '9_Hisui_Professor_Laventon.png',
+        'Paldea': '10_Paldea_Turo.png'
     };
 
-    if (regionBgMap[currentRegion]) {
-        bgImage = `./Assets/BG/Labs/FullSize/${regionBgMap[currentRegion]}`;
+    let profSprite = `./Assets/Lab/1_Kanto_Professor_Oak.png`;
+    if (regionProfMap[currentRegion]) {
+        profSprite = `./Assets/Lab/${regionProfMap[currentRegion]}`;
     }
 
-    labView.style.backgroundImage = `url('${bgImage}')`;
+    const profImg = document.getElementById("prof-generic-sprite");
+    if (profImg) {
+        profImg.src = profSprite;
+    }
 
     if (!state.stats.hasPickedStarter) {
         // Show starter selection
