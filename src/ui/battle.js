@@ -394,8 +394,10 @@ function updatePokemonSpriteUI(spriteWrapper, pokemonSprite, pokemon, battleSyst
     if (!spriteWrapper || !pokemonSprite) return;
 
     let pokemonId = pokemon.isDisguisedDitto ? 132 : pokemon.id;
-    let spriteSuffix = pokemon.qualityName === 'Shiny' ? '_shiny_Clean.png' : '_Clean.png';
-    pokemonSprite.src = `Assets/Pokemon Sprites/Clean/${pokemonId}${spriteSuffix}`;
+    let spriteSuffix = pokemon.qualityName === 'Shiny' ? '_shiny_clean.png' : '_clean.png';
+    let paddedId = String(pokemonId).padStart(4, '0');
+    let pokemonName = state.config.pokemonData.find(p => p.id === pokemonId)?.name || 'Unknown';
+    pokemonSprite.src = `Assets/Pokemon Sprites/Clean/Gen5/${paddedId}_${pokemonName}${spriteSuffix}`;
 
     const isFlying = pokemon.types && (pokemon.types.includes('Flying') || pokemon.types.includes('Wind'));
     spriteWrapper.style.justifyContent = isFlying ? 'flex-start' : 'flex-end';
