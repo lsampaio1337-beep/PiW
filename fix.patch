@@ -1,0 +1,38 @@
+--- src/ui/map.js
++++ src/ui/map.js
+@@ -128,21 +128,30 @@ function getRegionStats(regionName) {
+     if (regionName === state.currentRegionName) {
+         return state.stats;
+     }
+     if (state.regions && state.regions[regionName] && state.regions[regionName].stats) {
+         return state.regions[regionName].stats;
+     }
+     return null;
+ }
+
+ function getUnlockedAreas() {
+     let unlockedAreas = new Set();
+     unlockedAreas.add("Professor Oak Lab");
+     unlockedAreas.add("PokeCenter & PokeMarket");
+
+-    if (state.stats.completed150Challenge) {
++    let targetStats = getRegionStats(window.currentMapRegion) || state.stats;
++
++    if (targetStats.completed150Challenge) {
+         unlockedAreas.add("Mythical and Legendaries");
+     }
+
+-    if (state.stats.completedChallengeIds) {
+-        state.stats.completedChallengeIds.forEach(id => {
++    if (targetStats.completedChallengeIds) {
++        targetStats.completedChallengeIds.forEach(id => {
+             parseAreaNames(id).forEach(area => unlockedAreas.add(area));
+         });
+     }
+-    if (state.stats.activeChallenges) {
+-        state.stats.activeChallenges.forEach(id => {
++    if (targetStats.activeChallenges) {
++        targetStats.activeChallenges.forEach(id => {
+             parseAreaNames(id).forEach(area => unlockedAreas.add(area));
+         });
+     }
