@@ -1306,8 +1306,8 @@ export function renderJohtoOakLab() {
 }
 
 export function renderOakLab() {
-    const oakLabDiv = document.getElementById("view-prof-oak-lab");
-    if (!oakLabDiv) return;
+    const oakLabContent = document.getElementById("prof-oak-lab-content");
+    if (!oakLabContent) return;
 
     // Check if player has pokemon
     if (state.party.length === 0 && state.storage.length === 0) {
@@ -1323,7 +1323,7 @@ export function renderOakLab() {
         ? `<img src="Assets/Extra/ExclamationMark.png" style="position: absolute; top: -5px; right: -5px; width: 20px; height: auto; pointer-events: none; z-index: 10;">`
         : ``;
 
-    oakLabDiv.innerHTML = `
+    oakLabContent.innerHTML = `
         <div style="background-color: rgba(0,0,0,0.85); position: absolute; left: 15%; top: 50%; transform: translateY(-50%); padding: 20px; border-radius: 8px; width: 250px; color: white; text-align: center;">
             <h2 style="margin-top:0;">Professor Oak Lab</h2>
 
