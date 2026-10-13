@@ -22,21 +22,39 @@ export function setupGlobalEventListeners() {
 
             const isMinimized = contentContainer.style.display === 'none';
 
+            const header = document.getElementById('main-control-header');
+
             if (isMinimized) {
                 // Restore
                 contentContainer.style.display = '';
-                topBarWindow.style.width = topBarWindow.dataset.originalWidth || 'auto';
+                topBarWindow.style.width = topBarWindow.dataset.originalWidth || 'max-content';
+                topBarWindow.style.minWidth = topBarWindow.dataset.originalMinWidth || 'max-content';
                 topBarWindow.style.minHeight = '';
                 if (topBarWindow.dataset.originalHeight) topBarWindow.style.height = topBarWindow.dataset.originalHeight;
+                if (header) {
+                    header.style.justifyContent = 'center';
+                }
                 if (window.windowManager) window.windowManager._constrainAllWindows();
+
+                // Ensure layout recalculates for the flex container
+                const mainControl = document.getElementById('main-control');
+                if (mainControl) {
+                    mainControl.style.width = 'max-content';
+                }
             } else {
                 // Minimize
                 topBarWindow.dataset.originalWidth = topBarWindow.style.width;
+                topBarWindow.dataset.originalMinWidth = topBarWindow.style.minWidth;
                 topBarWindow.dataset.originalHeight = topBarWindow.style.height;
+
                 contentContainer.style.display = 'none';
-                topBarWindow.style.width = '300px'; // Minimal width for title + buttons
+                topBarWindow.style.width = 'min-content'; // Shrink exactly to the header's contents
+                topBarWindow.style.minWidth = '0'; // Remove hardcoded min-width bounds so it can shrink fully
                 topBarWindow.style.minHeight = '0';
                 topBarWindow.style.height = 'auto'; // Only display title
+                if (header) {
+                    header.style.justifyContent = 'flex-start'; // Align title left when minimized
+                }
             }
         });
     }
