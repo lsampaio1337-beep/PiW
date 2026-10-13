@@ -1339,7 +1339,7 @@ export function updateUI() {
 
 async function loadConfigs() {
     const [pokemonJsonRes, routes, gyms, balance, moves, types, mapCoordinates, johtoMapCoordinates] = await Promise.all([
-      fetch('../data/pokemon.json').then(res => res.json()),
+      fetch('./data/pokemon.json').then(res => res.json()),
       import('../config/routes.js').then(m => m.routes),
       import('../config/gyms.js').then(m => m.default),
       import('../config/balance.js').then(m => m.default),
