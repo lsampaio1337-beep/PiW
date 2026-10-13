@@ -42,13 +42,13 @@ export function setupGlobalEventListeners() {
                 topBarWindow.dataset.originalHeight = topBarWindow.style.height;
                 contentContainer.style.display = 'none';
                 topBarWindow.style.width = 'max-content'; // Strictly fit title + buttons on one line
-                topBarWindow.style.minWidth = '150px';
+                topBarWindow.style.minWidth = '160px'; // Ensure enough space so padding works
                 topBarWindow.style.minHeight = '0';
                 topBarWindow.style.height = 'auto'; // Only display title
                 if (header) {
                     header.style.textAlign = 'left'; // Align title left when minimized
                     header.style.whiteSpace = 'nowrap';
-                    header.style.paddingRight = '60px'; // ensure space for absolute positioned buttons so they don't overlap text
+                    header.style.paddingRight = '75px'; // ensure space for absolute positioned buttons so they don't overlap text
                 }
             }
         });
