@@ -520,8 +520,8 @@ class BattleSystem {
                 gymLeaderSprite.style.display = "block";
                 gymLeaderSprite.style.left = `${assetConfig.position.rel_x * 100}%`;
                 gymLeaderSprite.style.top = `${assetConfig.position.rel_y * 100}%`;
-                gymLeaderSprite.style.width = `calc(${(assetConfig.size.px_width / 1800) * 100}% * ${assetConfig.size.scale_x})`;
-                gymLeaderSprite.style.height = `calc(${(assetConfig.size.px_height / 1000) * 100}% * ${assetConfig.size.scale_y})`;
+                gymLeaderSprite.style.width = `${(assetConfig.size.px_width / 1800) * 100}%`;
+                gymLeaderSprite.style.height = `${(assetConfig.size.px_height / 1000) * 100}%`;
                 gymLeaderSprite.style.transform = `rotate(${assetConfig.tilt.angle_deg}deg)`;
                 gymLeaderSprite.style.transformOrigin = assetConfig.tilt.origin;
             }

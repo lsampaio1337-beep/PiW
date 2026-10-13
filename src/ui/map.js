@@ -562,9 +562,6 @@ export function navigateToLocation(locationName) {
         }
 
         vGym.innerHTML = `
-            <!-- Gym Leader Sprite Overlay -->
-            <img id="gym-leader-sprite" src="" style="display:none; position: absolute; z-index: 0; pointer-events: none;">
-
             <div style="background-color: rgba(0,0,0,0.8); display: flex; flex-direction: column; align-items: center; padding: 20px; border-radius: 8px; position: absolute; left: 15%; top: 50%; transform: translateY(-50%); min-width: 300px; z-index: 10;">
                 <h2 id="gym-title-header">${locationName}</h2>
                 <div id="gym-content-area" style="position: relative; width: 100%; text-align: center; display: flex; flex-direction: column; gap: 10px; align-items: center;">
@@ -587,8 +584,8 @@ export function navigateToLocation(locationName) {
                 gymLeaderSprite.style.display = "block";
                 gymLeaderSprite.style.left = `${assetConfig.position.rel_x * 100}%`;
                 gymLeaderSprite.style.top = `${assetConfig.position.rel_y * 100}%`;
-                gymLeaderSprite.style.width = `calc(${(assetConfig.size.px_width / 1800) * 100}% * ${assetConfig.size.scale_x})`;
-                gymLeaderSprite.style.height = `calc(${(assetConfig.size.px_height / 1000) * 100}% * ${assetConfig.size.scale_y})`;
+                gymLeaderSprite.style.width = `${(assetConfig.size.px_width / 1800) * 100}%`;
+                gymLeaderSprite.style.height = `${(assetConfig.size.px_height / 1000) * 100}%`;
                 gymLeaderSprite.style.transform = `rotate(${assetConfig.tilt.angle_deg}deg)`;
                 gymLeaderSprite.style.transformOrigin = assetConfig.tilt.origin;
             }
