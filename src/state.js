@@ -146,7 +146,11 @@ export function swapRegion(newRegionName) {
         state.regions[newRegionName] = JSON.parse(JSON.stringify(REGION_TEMPLATE));
         state.regions[newRegionName].currentRegionName = newRegionName;
         // set starting route
-        if (newRegionName === 'Johto') {
+        const firstRoute = state.config && state.config.firstRoutes && state.config.firstRoutes[newRegionName] ? state.config.firstRoutes[newRegionName] : null;
+        if (firstRoute) {
+            state.regions[newRegionName].currentRoute = firstRoute;
+            state.regions[newRegionName].stats.activeChallenges = [firstRoute];
+        } else if (newRegionName === 'Johto') {
             state.regions[newRegionName].currentRoute = 'Route 29';
             state.regions[newRegionName].stats.activeChallenges = ['Route 29'];
         }

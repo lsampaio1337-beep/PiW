@@ -1338,7 +1338,7 @@ export function updateUI() {
 }
 
 async function loadConfigs() {
-    const [pokemonData, routes, gyms, balance, moves, types, mapCoordinates, johtoMapCoordinates] = await Promise.all([
+    const [pokemonData, routes, gyms, balance, moves, types, mapCoordinates, johtoMapCoordinates, firstRoutes] = await Promise.all([
       import('../config/pokemonData.js').then(m => m.default),
       import('../config/routes.js').then(m => m.routes),
       import('../config/gyms.js').then(m => m.default),
@@ -1347,6 +1347,7 @@ async function loadConfigs() {
       import('../config/types.js').then(m => m.default),
       import('../config/mapCoordinates.js').then(m => m.default),
       import('../config/johtoMapCoordinates.js').then(m => m.default),
+      import('../config/firstRoutes.js').then(m => m.default),
     ]);
 
     state.config.pokemonData = pokemonData;
@@ -1359,6 +1360,7 @@ async function loadConfigs() {
     state.config.types = types;
     state.config.mapCoordinates = mapCoordinates;
     state.config.johtoMapCoordinates = johtoMapCoordinates;
+    state.config.firstRoutes = firstRoutes;
     state.config.allPokemonNames = pokemonData.map(p => p.name);
 
     // Precompute evolution parents for O(1) lookups
@@ -1487,6 +1489,13 @@ function selectStarter(id) {
     if (!state.stats.newRoutes.includes("PokeCenter & PokeMarket")) {
         state.stats.newRoutes.push("PokeCenter & PokeMarket");
     }
+
+    // Dynamically unlock the first route for the current region
+    let firstRoute = state.config.firstRoutes ? state.config.firstRoutes[state.currentRegionName] : null;
+    if (firstRoute && !state.stats.newRoutes.includes(firstRoute)) {
+        state.stats.newRoutes.push(firstRoute);
+    }
+
     if (state.stats.activeChallenges) {
         for (let challenge of state.stats.activeChallenges) {
             if (!state.stats.newRoutes.includes(challenge)) {
