@@ -27,28 +27,33 @@ export function setupGlobalEventListeners() {
             if (isMinimized) {
                 // Restore
                 contentContainer.style.display = '';
-                topBarWindow.style.width = topBarWindow.dataset.originalWidth || 'auto';
+                topBarWindow.style.width = topBarWindow.dataset.originalWidth || 'max-content';
+                topBarWindow.style.minWidth = topBarWindow.dataset.originalMinWidth || 'max-content';
                 topBarWindow.style.minHeight = '';
                 if (topBarWindow.dataset.originalHeight) topBarWindow.style.height = topBarWindow.dataset.originalHeight;
                 if (header) {
-                    header.style.textAlign = ''; // Restore default center alignment
-                    header.style.whiteSpace = '';
-                    header.style.paddingRight = ''; // Restore padding
+                    header.style.justifyContent = 'center';
                 }
                 if (window.windowManager) window.windowManager._constrainAllWindows();
+
+                // Ensure layout recalculates for the flex container
+                const mainControl = document.getElementById('main-control');
+                if (mainControl) {
+                    mainControl.style.width = 'max-content';
+                }
             } else {
                 // Minimize
                 topBarWindow.dataset.originalWidth = topBarWindow.style.width;
+                topBarWindow.dataset.originalMinWidth = topBarWindow.style.minWidth;
                 topBarWindow.dataset.originalHeight = topBarWindow.style.height;
+
                 contentContainer.style.display = 'none';
-                topBarWindow.style.width = 'max-content'; // Strictly fit title + buttons on one line
-                topBarWindow.style.minWidth = '160px'; // Ensure enough space so padding works
+                topBarWindow.style.width = 'min-content'; // Shrink exactly to the header's contents
+                topBarWindow.style.minWidth = '0'; // Remove hardcoded min-width bounds so it can shrink fully
                 topBarWindow.style.minHeight = '0';
                 topBarWindow.style.height = 'auto'; // Only display title
                 if (header) {
-                    header.style.textAlign = 'left'; // Align title left when minimized
-                    header.style.whiteSpace = 'nowrap';
-                    header.style.paddingRight = '75px'; // ensure space for absolute positioned buttons so they don't overlap text
+                    header.style.justifyContent = 'flex-start'; // Align title left when minimized
                 }
             }
         });
