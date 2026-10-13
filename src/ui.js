@@ -1373,74 +1373,23 @@ async function loadConfigs() {
     state.config.evolutionParents = evolutionParents;
 }
 
-window.selectJohtoStarter = selectJohtoStarter;
-function selectJohtoStarter(id) {
-    if (state.stats.hasPickedStarter) return;
 
-    const pData = state.config.pokemonData.find(p => p.id === id);
-    const q = 1.40; // Fixed Rare
-    const qName = "Rare";
-    const ivs = {hp: 50, atk: 50, def: 50, spa: 50, spd: 50, spe: 50};
-    const level = 1;
 
-    const stats = {
-        hp: mathEngine.calculateHP(pData.hp, ivs.hp, level, q),
-        atk: mathEngine.calculateStat(pData.atk, ivs.atk, level, q),
-        def: mathEngine.calculateStat(pData.def, ivs.def, level, q),
-        spa: mathEngine.calculateStat(pData.spa, ivs.spa, level, q),
-        spd: mathEngine.calculateStat(pData.spd, ivs.spd, level, q),
-        spe: mathEngine.calculateStat(pData.spe, ivs.spe, level, q),
-    };
 
-    const bst = pData.hp + pData.atk + pData.def + pData.spa + pData.spd + pData.spe;
-
-    const starter = {
-        id: pData.id,
-        name: pData.name,
-        types: pData.types,
-        level: level,
-        xp: 0,
-        qualityName: qName,
-        quality: q,
-        ivs: ivs,
-        currentStats: stats,
-        maxHp: stats.hp,
-        currentHp: stats.hp,
-        bst: bst,
-        evxp: mathEngine.calculateEVXP(bst, level, q, ivs.hp + ivs.atk + ivs.def + ivs.spa + ivs.spd + ivs.spe),
-        evm: mathEngine.calculateEVM(bst, level, q, ivs.hp + ivs.atk + ivs.def + ivs.spa + ivs.spd + ivs.spe),
-        pp: mathEngine.calculatePP(bst, level, q, ivs.hp + ivs.atk + ivs.def + ivs.spa + ivs.spd + ivs.spe),
-        moves: [{name: "Tackle", power: 40, type: "Normal", category: "Physical"}] // Basic start
-    };
-
-    if (state.party.length < 6) {
-        state.party.push(starter);
-    } else {
-        state.storage.push(starter);
+function returnToLab() {
+    let labRoute = "Professor Lab";
+    let labView = "GENERIC_LAB";
+    if (state.currentRegionName === "Kanto") {
+        labRoute = "Professor Oak Lab";
+        labView = "PROF_OAK_LAB";
+    } else if (state.currentRegionName === "Johto") {
+        labRoute = "Johto Oak Lab";
+        labView = "JOHTO_OAK_LAB";
     }
-
-    state.stats.hasPickedStarter = true;
-
-    if (!state.stats.newRoutes) state.stats.newRoutes = [];
-    if (!state.stats.newRoutes.includes("PokeCenter & PokeMarket")) {
-        state.stats.newRoutes.push("PokeCenter & PokeMarket");
-    }
-    if (state.stats.activeChallenges) {
-        for (let challenge of state.stats.activeChallenges) {
-            if (!state.stats.newRoutes.includes(challenge)) {
-                state.stats.newRoutes.push(challenge);
-            }
-        }
-    }
-    state.stats.hasUnseenMap = true;
-    if (window.updateMainControl) window.updateMainControl();
-
-    storage.save(state);
-
-    // Refresh UI
-    updateTeamWindow();
-    renderGenericLab();
+    state.currentRoute = labRoute;
+    switchView(labView);
 }
+window.returnToLab = returnToLab;
 
 window.selectStarter = selectStarter;
 function selectStarter(id) {
@@ -1484,8 +1433,8 @@ function selectStarter(id) {
     };
 
     state.party.push(starter);
-    state.currentRoute = "Professor Oak Lab";
-    switchView("PROF_OAK_LAB");
+    state.stats.hasPickedStarter = true;
+    returnToLab();
 
     // Refresh window after adding chosen pokemon
     const partyWindow = document.getElementById('party-window');
@@ -1533,15 +1482,7 @@ function selectStarter(id) {
     }
     updateTeamWindow();
 
-    // Continue normal game flow
-    const navButtons = document.getElementById('main-control');
-    if (navButtons) {
-        navButtons.style.pointerEvents = 'auto';
-        navButtons.style.opacity = '1.0';
-    }
-
-    startGame();
-
+    // Setup initial routes correctly so player is not softlocked
     if (!state.stats.newRoutes) state.stats.newRoutes = [];
     if (!state.stats.newRoutes.includes("PokeCenter & PokeMarket")) {
         state.stats.newRoutes.push("PokeCenter & PokeMarket");
@@ -1556,7 +1497,23 @@ function selectStarter(id) {
     state.stats.hasUnseenMap = true;
     if (window.updateMainControl) window.updateMainControl();
 
+    // Only set dex / caught properly
+    state.stats.caught = (state.stats.caught || 0) + 1;
+    state.stats.dex = state.stats.dex || {};
+    state.stats.dex[id] = true;
+
     storage.save(state);
+
+    // Continue normal game flow
+    const navButtons = document.getElementById('main-control');
+    if (navButtons) {
+        navButtons.style.pointerEvents = 'auto';
+        navButtons.style.opacity = '1.0';
+    }
+
+    startGame();
+
+    // Refresh generic lab after assigning to display Assignments UI
     renderGenericLab();
 }
 
@@ -2081,8 +2038,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
                             storage.save(state);
                             if(window.windowManager) window.windowManager.closeDynamicWindow('window-zzz-resume');
                             // Start normally at Oak's lab
-                            state.currentRoute = "Professor Oak Lab";
-                            switchView("PROF_OAK_LAB");
+                            returnToLab();
                         };
 
                         document.getElementById('btn-zzz-resume-yes').onclick = () => {
@@ -2232,18 +2188,15 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
                                     state.currentRoute = "Casino";
                                     window.navigateToLocation("Casino");
                                 } else {
-                                    state.currentRoute = "Professor Oak Lab";
-                                    switchView("PROF_OAK_LAB");
+                                    returnToLab();
                                 }
                             } else {
-                                state.currentRoute = "Professor Oak Lab";
-                                switchView("PROF_OAK_LAB");
+                                returnToLab();
                             }
                         };
                     } else {
                         // Saved profiles always start at Oak's Lab and are free to explore
-                        state.currentRoute = "Professor Oak Lab";
-                        switchView("PROF_OAK_LAB");
+                        returnToLab();
                     }
                 }
             };
@@ -2816,61 +2769,7 @@ window.initGame = init;
 window.startGame = startGame;
 
 
-window.selectGenericStarter = function(pokemonId) {
-    if (state.stats.hasPickedStarter) return; // Prevent multiple clicks
 
-    const data = state.config.pokemonData[pokemonId];
-    if (data) {
-        state.stats.hasPickedStarter = true;
-        // Starter is added at level 5
-        let starter = {
-            id: pokemonId,
-            level: 5,
-            xp: 0,
-            nickname: data.name
-        };
-        // Generate random DVs for starter
-        starter.dv = {
-            hp: Math.floor(Math.random() * 16),
-            attack: Math.floor(Math.random() * 16),
-            defense: Math.floor(Math.random() * 16),
-            special: Math.floor(Math.random() * 16),
-            speed: Math.floor(Math.random() * 16)
-        };
-        starter.shiny = false;
-        if (Math.random() < (1 / 8192)) {
-            starter.shiny = true;
-            state.globalStats.shiniesSeen = (state.globalStats.shiniesSeen || 0) + 1;
-            state.globalStats.shiniesCaught = (state.globalStats.shiniesCaught || 0) + 1;
-        }
-
-        state.party.push(starter);
-        state.stats.caught = (state.stats.caught || 0) + 1;
-        state.stats.dex = state.stats.dex || {};
-        state.stats.dex[pokemonId] = true;
-
-        if (!state.stats.newRoutes) state.stats.newRoutes = [];
-        if (!state.stats.newRoutes.includes("PokeCenter & PokeMarket")) {
-            state.stats.newRoutes.push("PokeCenter & PokeMarket");
-        }
-        if (state.stats.activeChallenges) {
-            for (let challenge of state.stats.activeChallenges) {
-                if (!state.stats.newRoutes.includes(challenge)) {
-                    state.stats.newRoutes.push(challenge);
-                }
-            }
-        }
-        state.stats.hasUnseenMap = true;
-        if (window.updateMainControl) window.updateMainControl();
-
-        if (window.updateUI) window.updateUI();
-        if (window.renderParty) window.renderParty();
-
-        // Refresh the generic lab to show assignments
-        renderGenericLab();
-        Storage.save(state);
-    }
-};
 
 export function renderGenericLab() {
     const labContent = document.getElementById("generic-lab-content");
@@ -2911,8 +2810,7 @@ export function renderGenericLab() {
     if (!state.stats.hasPickedStarter) {
         // Show starter selection
         let starterHtml = '';
-        if (currentRegion === 'Kanto') {
-            starterHtml = `
+        starterHtml = `
                 <div class="starter-choices">
                   <button onclick="window.selectStarter(1)">
                     <img src="Assets/Pokemon Sprites/Natural/Gen5/0001_Bulbasaur.png" style="width: 80px; height: 80px;"><br>Bulbasaur
@@ -2924,33 +2822,6 @@ export function renderGenericLab() {
                     <img src="Assets/Pokemon Sprites/Natural/Gen5/0007_Squirtle.png" style="width: 80px; height: 80px;"><br>Squirtle
                   </button>
                 </div>`;
-        } else if (currentRegion === 'Johto') {
-            starterHtml = `
-                <div class="starter-choices">
-                  <button onclick="window.selectJohtoStarter(1)">
-                    <img src="Assets/Pokemon Sprites/Natural/Gen5/0001_Bulbasaur.png" style="width: 80px; height: 80px;"><br>Bulbasaur
-                  </button>
-                  <button onclick="window.selectJohtoStarter(4)">
-                    <img src="Assets/Pokemon Sprites/Natural/Gen5/0004_Charmander.png" style="width: 80px; height: 80px;"><br>Charmander
-                  </button>
-                  <button onclick="window.selectJohtoStarter(7)">
-                    <img src="Assets/Pokemon Sprites/Natural/Gen5/0007_Squirtle.png" style="width: 80px; height: 80px;"><br>Squirtle
-                  </button>
-                </div>`;
-        } else {
-            starterHtml = `
-                <div class="starter-choices">
-                  <button onclick="window.selectGenericStarter(1)">
-                    <img src="Assets/Pokemon Sprites/Natural/Gen5/0001_Bulbasaur.png" style="width: 80px; height: 80px;"><br>Bulbasaur
-                  </button>
-                  <button onclick="window.selectGenericStarter(4)">
-                    <img src="Assets/Pokemon Sprites/Natural/Gen5/0004_Charmander.png" style="width: 80px; height: 80px;"><br>Charmander
-                  </button>
-                  <button onclick="window.selectGenericStarter(7)">
-                    <img src="Assets/Pokemon Sprites/Natural/Gen5/0007_Squirtle.png" style="width: 80px; height: 80px;"><br>Squirtle
-                  </button>
-                </div>`;
-        }
 
         labContent.innerHTML = `
             <div style="background-color: rgba(0,0,0,0.8); position: absolute; left: 15%; top: 50%; transform: translateY(-50%); padding: 30px; border-radius: 8px;">
