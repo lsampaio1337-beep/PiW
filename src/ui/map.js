@@ -585,15 +585,6 @@ export function navigateToLocation(locationName) {
             bgImg = "BG-IndigoPlateau.png";
         }
 
-        // Apply background logic the same way lab does it, by setting innerHTML with the images
-        let bgHtml = "";
-        if (bgImg === "BG-IndigoPlateau.png") {
-            bgHtml = `<img src="./Assets/Gym/BG/${bgImg}" onerror="this.src='./Assets/BG/${bgImg}'" style="position: absolute; width: 100%; height: 100%; object-fit: cover; z-index: -1;">`;
-        } else {
-            bgHtml = `<img src="./Assets/Gym/BG/${bgImg}" onerror="this.src='./Assets/BG/${bgImg}'" style="position: absolute; width: 100%; height: 100%; object-fit: cover; z-index: -1;">`;
-        }
-
-
         // Stop current battle system
         if (battleSystem) {
             battleSystem.stop();
@@ -603,6 +594,14 @@ export function navigateToLocation(locationName) {
         if (gymConfig) {
             let buttonText = lookupName === "Indigo Plateau" ? "Challange Elite 4 and Champion" : "Battle Gym";
             buttonHtml = `<button onclick="window.startGymBattle('${lookupName}')" class="action-btn action-btn-primary" style="margin-top: 10px; z-index: 2; position: relative;">${buttonText}</button>`;
+        }
+
+        // Apply background logic the same way lab does it, by setting innerHTML with the images
+        let bgHtml = "";
+        if (bgImg === "BG-IndigoPlateau.png") {
+            bgHtml = `<img src="./Assets/BG/${bgImg}" onerror="this.src='./Assets/BG/BG.png'" style="position: absolute; width: 100%; height: 100%; object-fit: cover; z-index: -1;">`;
+        } else {
+            bgHtml = `<img src="./Assets/Gym/BG/${bgImg}" onerror="this.src='./Assets/BG/BG.png'" style="position: absolute; width: 100%; height: 100%; object-fit: cover; z-index: -1;">`;
         }
 
         vGym.innerHTML = `
@@ -615,12 +614,11 @@ export function navigateToLocation(locationName) {
                 </div>
             </div>
         `;
-        if (bgImg) {
-            vGym.style.backgroundImage = `url('./Assets/BG/${bgImg}')`;
-            vGym.style.backgroundSize = "cover";
-            vGym.style.height = "100%";
-            vGym.style.position = "relative";
-        }
+        // Remove existing background image style if it existed
+        vGym.style.backgroundImage = "none";
+        vGym.style.backgroundSize = "cover";
+        vGym.style.height = "100%";
+        vGym.style.position = "relative";
     } else {
         switchView("BATTLE_ARENA");
         if (battleSystem) {

@@ -283,31 +283,9 @@ function updateBattleBackground(combatArena, state, battleSystem, inGymCombat, i
                 const assetConfig = state.config.gymAssets[gym.leader];
                 bgImage = assetConfig.background;
                 bgPath = './Assets/Gym/BG/';
-            } else {
-                // Legacy fallback for Kanto
-                const gymIndex = state.config.gyms.findIndex(g => g.name === gym.name);
-                const gymBGs = [
-                    'BG-Gym-1-Pewter-Rock.png',
-                    'BG-Gym-2-Cerulean-Water.png',
-                    'BG-Gym-3-Vermilion-Electric.png',
-                    'BG-Gym-4-Celadon-Grass.png',
-                    'BG-Gym-5-Fuchsia-Poison.png',
-                    'BG-Gym-6-Saffron-Psychic.png',
-                    'BG-Gym-7-Cinnabar-Fire.png',
-                    'BG-Gym-8-Viridian-Ground.png'
-                ];
-                bgImage = gymBGs[gymIndex] || 'BG.png';
             }
 
             combatArena.style.backgroundImage = `url('${bgPath}${bgImage}')`;
-
-            // Allow fallback to generic BG path if Gym/BG fails
-            if (bgPath === './Assets/Gym/BG/') {
-                // In a browser, we can't trivially catch CSS background image load errors.
-                // However, the requested task mentions "Make gym background the same way lab is"
-                // which generally refers to the HUB modal.
-                // For the combat arena, we just point to the background file directly.
-            }
         }
     } else if (state.currentRoute === 'Safari Zone') {
         combatArena.style.backgroundImage = `url('./Assets/BG/BG-SafariZone.png')`;
