@@ -509,7 +509,7 @@ class BattleSystem {
             if (gymLeaderSprite) gymLeaderSprite.style.display = "none";
         } else if (gym.spriteName && this.state.config.gymAssets && this.state.config.gymAssets[gym.spriteName]) {
             const assetConfig = this.state.config.gymAssets[gym.spriteName];
-            vGym.style.backgroundImage = `url('./Assets/Gym/BG/${assetConfig.background}')`;
+            vGym.style.backgroundImage = `url('./Assets/BG/${assetConfig.background}')`;
             vGym.style.backgroundSize = "100% 100%";
             vGym.style.height = "100%";
             vGym.style.position = "relative";

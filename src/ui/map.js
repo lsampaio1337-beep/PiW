@@ -574,7 +574,7 @@ export function navigateToLocation(locationName) {
 
         if (gymConfig && gymConfig.spriteName && state.config.gymAssets && state.config.gymAssets[gymConfig.spriteName]) {
             const assetConfig = state.config.gymAssets[gymConfig.spriteName];
-            vGym.style.backgroundImage = `url('./Assets/Gym/BG/${assetConfig.background}')`;
+            vGym.style.backgroundImage = `url('./Assets/BG/${assetConfig.background}')`;
             vGym.style.backgroundSize = "100% 100%";
             vGym.style.height = "100%";
             vGym.style.position = "relative";
