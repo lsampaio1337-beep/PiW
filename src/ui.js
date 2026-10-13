@@ -263,6 +263,35 @@ window.badgeMapping = {
     }
 };
 
+
+import _pokemonData from '../config/pokemonData.js';
+
+window.getPokemonSpritePath = function(id, isShiny, isClean) {
+    const padId = String(id).padStart(4, '0');
+    let pokemonName = "Unknown";
+
+    // Find pokemon name from static config or state
+    let pd = null;
+    if (state && state.config && state.config.pokemonData) {
+        pd = state.config.pokemonData.find(p => p.id === parseInt(id));
+    } else if (typeof _pokemonData !== 'undefined') {
+        pd = _pokemonData.find(p => p.id === parseInt(id));
+    }
+
+    if (pd) {
+        pokemonName = pd.name;
+    }
+
+    const shinySuffix = isShiny ? "_shiny" : "";
+    const cleanSuffix = isClean ? "_clean" : "";
+
+    if (isClean) {
+        return `Assets/Pokemon Sprites/Clean/Gen5/${padId}_${pokemonName}${shinySuffix}${cleanSuffix}.png`;
+    } else {
+        return `Assets/Pokemon Sprites/Natural/Gen5/${padId}_${pokemonName}${shinySuffix}.png`;
+    }
+};
+
 window.getBadgeFileName = function(region, number) {
     if (window.badgeMapping[region] && window.badgeMapping[region][number]) {
         return window.badgeMapping[region][number];
@@ -2915,39 +2944,39 @@ export function renderGenericLab() {
             starterHtml = `
                 <div class="starter-choices">
                   <button onclick="window.selectStarter(1)">
-                    <img src="Assets/Pokemon Sprites/Natural/1.png" style="width: 80px; height: 80px;"><br>Bulbasaur
+                    <img src=window.getPokemonSpritePath(1, false, false)} style="width: 80px; height: 80px;"><br>Bulbasaur
                   </button>
                   <button onclick="window.selectStarter(4)">
-                    <img src="Assets/Pokemon Sprites/Natural/4.png" style="width: 80px; height: 80px;"><br>Charmander
+                    <img src=window.getPokemonSpritePath(4, false, false)} style="width: 80px; height: 80px;"><br>Charmander
                   </button>
                   <button onclick="window.selectStarter(7)">
-                    <img src="Assets/Pokemon Sprites/Natural/7.png" style="width: 80px; height: 80px;"><br>Squirtle
+                    <img src=window.getPokemonSpritePath(7, false, false)} style="width: 80px; height: 80px;"><br>Squirtle
                   </button>
                 </div>`;
         } else if (currentRegion === 'Johto') {
             starterHtml = `
                 <div class="starter-choices">
                   <button onclick="window.selectJohtoStarter(1)">
-                    <img src="Assets/Pokemon Sprites/Natural/1.png" style="width: 80px; height: 80px;"><br>Bulbasaur
+                    <img src=window.getPokemonSpritePath(1, false, false)} style="width: 80px; height: 80px;"><br>Bulbasaur
                   </button>
                   <button onclick="window.selectJohtoStarter(4)">
-                    <img src="Assets/Pokemon Sprites/Natural/4.png" style="width: 80px; height: 80px;"><br>Charmander
+                    <img src=window.getPokemonSpritePath(4, false, false)} style="width: 80px; height: 80px;"><br>Charmander
                   </button>
                   <button onclick="window.selectJohtoStarter(7)">
-                    <img src="Assets/Pokemon Sprites/Natural/7.png" style="width: 80px; height: 80px;"><br>Squirtle
+                    <img src=window.getPokemonSpritePath(7, false, false)} style="width: 80px; height: 80px;"><br>Squirtle
                   </button>
                 </div>`;
         } else {
             starterHtml = `
                 <div class="starter-choices">
                   <button onclick="window.selectGenericStarter(1)">
-                    <img src="Assets/Pokemon Sprites/Natural/1.png" style="width: 80px; height: 80px;"><br>Bulbasaur
+                    <img src=window.getPokemonSpritePath(1, false, false)} style="width: 80px; height: 80px;"><br>Bulbasaur
                   </button>
                   <button onclick="window.selectGenericStarter(4)">
-                    <img src="Assets/Pokemon Sprites/Natural/4.png" style="width: 80px; height: 80px;"><br>Charmander
+                    <img src=window.getPokemonSpritePath(4, false, false)} style="width: 80px; height: 80px;"><br>Charmander
                   </button>
                   <button onclick="window.selectGenericStarter(7)">
-                    <img src="Assets/Pokemon Sprites/Natural/7.png" style="width: 80px; height: 80px;"><br>Squirtle
+                    <img src=window.getPokemonSpritePath(7, false, false)} style="width: 80px; height: 80px;"><br>Squirtle
                   </button>
                 </div>`;
         }

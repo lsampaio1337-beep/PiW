@@ -395,7 +395,7 @@ function updatePokemonSpriteUI(spriteWrapper, pokemonSprite, pokemon, battleSyst
 
     let pokemonId = pokemon.isDisguisedDitto ? 132 : pokemon.id;
     let spriteSuffix = pokemon.qualityName === 'Shiny' ? '_shiny_Clean.png' : '_Clean.png';
-    pokemonSprite.src = `Assets/Pokemon Sprites/Clean/${pokemonId}${spriteSuffix}`;
+    pokemonSprite.src = window.getPokemonSpritePath(pokemonId, isShiny, true);
 
     const isFlying = pokemon.types && (pokemon.types.includes('Flying') || pokemon.types.includes('Wind'));
     spriteWrapper.style.justifyContent = isFlying ? 'flex-start' : 'flex-end';
