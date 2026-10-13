@@ -30,17 +30,26 @@ export function setupGlobalEventListeners() {
                 topBarWindow.style.width = topBarWindow.dataset.originalWidth || 'auto';
                 topBarWindow.style.minHeight = '';
                 if (topBarWindow.dataset.originalHeight) topBarWindow.style.height = topBarWindow.dataset.originalHeight;
-                if (header) header.style.textAlign = ''; // Restore default center alignment
+                if (header) {
+                    header.style.textAlign = ''; // Restore default center alignment
+                    header.style.whiteSpace = '';
+                    header.style.paddingRight = ''; // Restore padding
+                }
                 if (window.windowManager) window.windowManager._constrainAllWindows();
             } else {
                 // Minimize
                 topBarWindow.dataset.originalWidth = topBarWindow.style.width;
                 topBarWindow.dataset.originalHeight = topBarWindow.style.height;
                 contentContainer.style.display = 'none';
-                topBarWindow.style.width = '180px'; // Minimal width for title + buttons
+                topBarWindow.style.width = 'max-content'; // Strictly fit title + buttons on one line
+                topBarWindow.style.minWidth = '150px';
                 topBarWindow.style.minHeight = '0';
                 topBarWindow.style.height = 'auto'; // Only display title
-                if (header) header.style.textAlign = 'left'; // Align title left when minimized
+                if (header) {
+                    header.style.textAlign = 'left'; // Align title left when minimized
+                    header.style.whiteSpace = 'nowrap';
+                    header.style.paddingRight = '60px'; // ensure space for absolute positioned buttons so they don't overlap text
+                }
             }
         });
     }
