@@ -2,6 +2,7 @@ const gyms = [
   {
     "id": "pewter",
     "name": "Pewter Gym",
+    "spriteName": "GymLeader_Kanto_1_Brock_Rock.png",
     "leader": "Brock",
     "levelRequirement": 0,
     "trainers": [
@@ -36,6 +37,7 @@ const gyms = [
   {
     "id": "cerulean",
     "name": "Cerulean Gym",
+    "spriteName": "GymLeader_Kanto_2_Misty_Water.png",
     "leader": "Misty",
     "levelRequirement": 0,
     "trainers": [
@@ -87,6 +89,7 @@ const gyms = [
   {
     "id": "vermilion",
     "name": "Vermilion Gym",
+    "spriteName": "GymLeader_Kanto_3_LtSurge_Electric.png",
     "leader": "Lt. Surge",
     "levelRequirement": 0,
     "trainers": [
@@ -155,6 +158,7 @@ const gyms = [
   {
     "id": "celadon",
     "name": "Celadon Gym",
+    "spriteName": "GymLeader_Kanto_4_Erikac_Grass.png",
     "leader": "Erika",
     "levelRequirement": 0,
     "trainers": [
@@ -257,6 +261,7 @@ const gyms = [
   {
     "id": "fuchsia",
     "name": "Fuchsia Gym",
+    "spriteName": "GymLeader_Kanto_5_Koga_Poison.png",
     "leader": "Koga",
     "levelRequirement": 0,
     "trainers": [
@@ -358,6 +363,7 @@ const gyms = [
   {
     "id": "saffron",
     "name": "Saffron Gym",
+    "spriteName": "GymLeader_Kanto_6_Sabrina_Psychic.png",
     "leader": "Sabrina",
     "levelRequirement": 0,
     "trainers": [
@@ -434,6 +440,7 @@ const gyms = [
   {
     "id": "cinnabar",
     "name": "Cinnabar Gym",
+    "spriteName": "GymLeader_Kanto_7_Blaine_Fire.png",
     "leader": "Blaine",
     "levelRequirement": 0,
     "trainers": [
@@ -518,6 +525,7 @@ const gyms = [
   {
     "id": "viridian",
     "name": "Viridian Gym",
+    "spriteName": "GymLeader_Kanto_8_Giovanni_Ground.png",
     "leader": "Giovanni",
     "levelRequirement": 0,
     "trainers": [

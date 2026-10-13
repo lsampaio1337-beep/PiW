@@ -488,6 +488,7 @@ class BattleSystem {
         if (!gym) return;
 
         // Apply elite 4 background during rest phase if applicable
+        // Apply elite 4 background during rest phase if applicable
         if (gym.name === "Indigo Plateau") {
             const trainerBGs = [
                 'BG-Elite4-1Lorelei.png',
@@ -503,6 +504,27 @@ class BattleSystem {
             const bgImage = trainerBGs[trainerIndex] || 'BG.png';
             vGym.style.backgroundImage = `url('./Assets/BG/${bgImage}')`;
             vGym.style.backgroundSize = "cover";
+
+            const gymLeaderSprite = document.getElementById("gym-leader-sprite");
+            if (gymLeaderSprite) gymLeaderSprite.style.display = "none";
+        } else if (gym.spriteName && this.state.config.gymAssets && this.state.config.gymAssets[gym.spriteName]) {
+            const assetConfig = this.state.config.gymAssets[gym.spriteName];
+            vGym.style.backgroundImage = `url('./Assets/Gym/BG/${assetConfig.background}')`;
+            vGym.style.backgroundSize = "100% 100%";
+            vGym.style.height = "100%";
+            vGym.style.position = "relative";
+
+            const gymLeaderSprite = document.getElementById("gym-leader-sprite");
+            if (gymLeaderSprite) {
+                gymLeaderSprite.src = `./Assets/Gym/GymLeaders/${assetConfig.sprite}`;
+                gymLeaderSprite.style.display = "block";
+                gymLeaderSprite.style.left = `${assetConfig.position.rel_x * 100}%`;
+                gymLeaderSprite.style.top = `${assetConfig.position.rel_y * 100}%`;
+                gymLeaderSprite.style.width = `calc(${(assetConfig.size.px_width / 1800) * 100}% * ${assetConfig.size.scale_x})`;
+                gymLeaderSprite.style.height = `calc(${(assetConfig.size.px_height / 1000) * 100}% * ${assetConfig.size.scale_y})`;
+                gymLeaderSprite.style.transform = `rotate(${assetConfig.tilt.angle_deg}deg)`;
+                gymLeaderSprite.style.transformOrigin = assetConfig.tilt.origin;
+            }
         }
 
         const trainer = gym.trainers[this.gymState.currentTrainerIndex];

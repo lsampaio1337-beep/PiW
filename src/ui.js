@@ -1338,7 +1338,7 @@ export function updateUI() {
 }
 
 async function loadConfigs() {
-    const [pokemonData, routes, gyms, balance, moves, types, mapCoordinates, johtoMapCoordinates] = await Promise.all([
+    const [pokemonData, routes, gyms, balance, moves, types, mapCoordinates, johtoMapCoordinates, gymAssets] = await Promise.all([
       import('../config/pokemonData.js').then(m => m.default),
       import('../config/routes.js').then(m => m.routes),
       import('../config/gyms.js').then(m => m.default),
@@ -1347,12 +1347,14 @@ async function loadConfigs() {
       import('../config/types.js').then(m => m.default),
       import('../config/mapCoordinates.js').then(m => m.default),
       import('../config/johtoMapCoordinates.js').then(m => m.default),
+      import('../config/gymAssets.js').then(m => m.default),
     ]);
 
     state.config.pokemonData = pokemonData;
     state.config.routes = routes;
     const unlocksModule = await import('../config/routes.js');
     state.config.unlocks = unlocksModule.unlocks;
+    state.config.gymAssets = gymAssets;
     state.config.gyms = gyms;
     state.config.balance = balance;
     state.config.moves = moves;
