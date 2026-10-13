@@ -85,7 +85,7 @@ export function showPokedex() {
             html += `<div class="${cardClass}" style="${cardStyle}">
                 <div style="font-weight:bold;">#${i}</div>
                 <div style="font-size: 9px; margin-bottom: 2px;">${displayName}</div>
-                <img src="Assets/Pokemon Sprites/Natural/${i}.png" style="width: 50px; height: 50px; filter: ${filter}; cursor: ${cursor};" ${onClick}>
+                <img src="${window.getSpriteUrl(i, false)}" style="width: 50px; height: 50px; filter: ${filter}; cursor: ${cursor};" ${onClick}>
             </div>`;
         }
     }
@@ -107,10 +107,10 @@ export function showDexEntry(id) {
     const html = `
         <div class="content-panel" style="text-align:center; height: 100%; overflow-y: auto;">
             <h2>#${pData.id} ${pData.name}</h2>
-            <img id="dex-sprite-${pData.id}" src="Assets/Pokemon Sprites/Natural/${pData.id}.png" style="width: 100px; height: 100px;">
+            <img id="dex-sprite-${pData.id}" src="${window.getSpriteUrl(pData.id, false)}" style="width: 100px; height: 100px;">
             <div style="margin-bottom: 10px;">
-                <button style="${buttonStyle}" onclick="document.getElementById('dex-sprite-${pData.id}').src = 'Assets/Pokemon Sprites/Natural/${pData.id}_shiny.png'">Shiny</button>
-                <button style="${buttonStyle}" onclick="document.getElementById('dex-sprite-${pData.id}').src = 'Assets/Pokemon Sprites/Natural/${pData.id}.png'">Normal</button>
+                <button style="${buttonStyle}" onclick="document.getElementById('dex-sprite-${pData.id}').src = '${window.getSpriteUrl(pData.id, true)}'">Shiny</button>
+                <button style="${buttonStyle}" onclick="document.getElementById('dex-sprite-${pData.id}').src = '${window.getSpriteUrl(pData.id, false)}'">Normal</button>
             </div>
 
             <p><b>Type:</b> ${pData.types.map(t => formatType(t)).join(' ')}</p>
@@ -142,7 +142,7 @@ export function buildEvolutionLineHtml(pData, state) {
         let displayName = isRevealed ? pd.name : "???";
 
         let html = `<div style="display: flex; flex-direction: column; align-items: center; margin: 5px;">
-            <img src="Assets/Pokemon Sprites/Natural/${pd.id}.png" style="width: 50px; height: 50px; filter: ${filter}; cursor: ${cursor};" ${onClick} title="${displayName}">
+            <img src="${window.getSpriteUrl(pd.id, false)}" style="width: 50px; height: 50px; filter: ${filter}; cursor: ${cursor};" ${onClick} title="${displayName}">
             <span style="font-size: 10px; cursor: ${cursor};" ${onClick}>${displayName}</span>
         </div>`;
 
@@ -401,7 +401,7 @@ export function showSmartCaptureMode() {
                 }
 
                 // Sprite based on shiny mode
-                let spriteUrl = isSmartCaptureShinyMode ? `Assets/Pokemon Sprites/Natural/${i}_shiny.png` : `Assets/Pokemon Sprites/Natural/${i}.png`;
+                let spriteUrl = isSmartCaptureShinyMode ? window.getSpriteUrl(i, true) : window.getSpriteUrl(i, false);
 
                 html += `<div class="${cardClass}" style="${cardStyle}" ${onClick}>
                     ${ballIconHtml}
