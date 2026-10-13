@@ -542,15 +542,7 @@ export function navigateToLocation(locationName) {
         let bgImg = "";
         let lookupName = locationName;
 
-        if (locationName.includes("Pewter")) bgImg = "BG-Gym-1-Pewter-Rock.png";
-        else if (locationName.includes("Cerulean")) bgImg = "BG-Gym-2-Cerulean-Water.png";
-        else if (locationName.includes("Vermilion")) bgImg = "BG-Gym-3-Vermilion-Electric.png";
-        else if (locationName.includes("Celadon")) bgImg = "BG-Gym-4-Celadon-Grass.png";
-        else if (locationName.includes("Fuchsia")) bgImg = "BG-Gym-5-Fuchsia-Poison.png";
-        else if (locationName.includes("Saffron")) bgImg = "BG-Gym-6-Saffron-Psychic.png";
-        else if (locationName.includes("Cinnabar")) bgImg = "BG-Gym-7-Cinnabar-Fire.png";
-        else if (locationName.includes("Viridian Gym")) bgImg = "BG-Gym-8-Viridian-Ground.png";
-        else if (locationName === "Indigo Plateau") {
+        if (locationName === "Indigo Plateau") {
             bgImg = "BG-IndigoPlateau.png";
             lookupName = "Indigo Plateau"; // Correct spelling for the gyms config
         }
@@ -570,18 +562,44 @@ export function navigateToLocation(locationName) {
         }
 
         vGym.innerHTML = `
-            <div style="background-color: rgba(0,0,0,0.8); display: flex; flex-direction: column; align-items: center; padding: 20px; border-radius: 8px; position: absolute; left: 15%; top: 50%; transform: translateY(-50%); min-width: 300px;">
+            <!-- Gym Leader Sprite Overlay -->
+            <img id="gym-leader-sprite" src="" style="display:none; position: absolute; z-index: 0; pointer-events: none;">
+
+            <div style="background-color: rgba(0,0,0,0.8); display: flex; flex-direction: column; align-items: center; padding: 20px; border-radius: 8px; position: absolute; left: 15%; top: 50%; transform: translateY(-50%); min-width: 300px; z-index: 10;">
                 <h2 id="gym-title-header">${locationName}</h2>
                 <div id="gym-content-area" style="position: relative; width: 100%; text-align: center; display: flex; flex-direction: column; gap: 10px; align-items: center;">
                     ${buttonHtml}
                 </div>
             </div>
         `;
-        if (bgImg) {
+
+        const gymLeaderSprite = document.getElementById("gym-leader-sprite");
+
+        if (gymConfig && gymConfig.spriteName && state.config.gymAssets && state.config.gymAssets[gymConfig.spriteName]) {
+            const assetConfig = state.config.gymAssets[gymConfig.spriteName];
+            vGym.style.backgroundImage = `url('./Assets/Gym/BG/${assetConfig.background}')`;
+            vGym.style.backgroundSize = "100% 100%";
+            vGym.style.height = "100%";
+            vGym.style.position = "relative";
+
+            if (gymLeaderSprite) {
+                gymLeaderSprite.src = `./Assets/Gym/GymLeaders/${assetConfig.sprite}`;
+                gymLeaderSprite.style.display = "block";
+                gymLeaderSprite.style.left = `${assetConfig.position.rel_x * 100}%`;
+                gymLeaderSprite.style.top = `${assetConfig.position.rel_y * 100}%`;
+                gymLeaderSprite.style.width = `calc(${(assetConfig.size.px_width / 1800) * 100}% * ${assetConfig.size.scale_x})`;
+                gymLeaderSprite.style.height = `calc(${(assetConfig.size.px_height / 1000) * 100}% * ${assetConfig.size.scale_y})`;
+                gymLeaderSprite.style.transform = `rotate(${assetConfig.tilt.angle_deg}deg)`;
+                gymLeaderSprite.style.transformOrigin = assetConfig.tilt.origin;
+            }
+        } else if (bgImg) {
             vGym.style.backgroundImage = `url('./Assets/BG/${bgImg}')`;
             vGym.style.backgroundSize = "cover";
             vGym.style.height = "100%";
             vGym.style.position = "relative";
+            if (gymLeaderSprite) {
+                gymLeaderSprite.style.display = "none";
+            }
         }
     } else {
         switchView("BATTLE_ARENA");
