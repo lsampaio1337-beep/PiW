@@ -539,24 +539,60 @@ export function navigateToLocation(locationName) {
         setupMarket(vCenter);
     } else if (locationName.includes("Gym") || locationName === "Indigo Plateau") {
         switchView("GYM");
-        let bgImg = "";
         let lookupName = locationName;
 
-        if (locationName.includes("Pewter")) bgImg = "BG-Gym-1-Pewter-Rock.png";
-        else if (locationName.includes("Cerulean")) bgImg = "BG-Gym-2-Cerulean-Water.png";
-        else if (locationName.includes("Vermilion")) bgImg = "BG-Gym-3-Vermilion-Electric.png";
-        else if (locationName.includes("Celadon")) bgImg = "BG-Gym-4-Celadon-Grass.png";
-        else if (locationName.includes("Fuchsia")) bgImg = "BG-Gym-5-Fuchsia-Poison.png";
-        else if (locationName.includes("Saffron")) bgImg = "BG-Gym-6-Saffron-Psychic.png";
-        else if (locationName.includes("Cinnabar")) bgImg = "BG-Gym-7-Cinnabar-Fire.png";
-        else if (locationName.includes("Viridian Gym")) bgImg = "BG-Gym-8-Viridian-Ground.png";
-        else if (locationName === "Indigo Plateau") {
-            bgImg = "BG-IndigoPlateau.png";
+        if (locationName === "Indigo Plateau") {
             lookupName = "Indigo Plateau"; // Correct spelling for the gyms config
         }
 
         const vGym = document.getElementById("view-gym");
-        const gymConfig = state.config.gyms.find(g => g.name === lookupName);
+        const gymConfig = state.config.gyms ? state.config.gyms.find(g => g.name === lookupName) : null;
+
+        let bgImg = "BG.png"; // Fallback
+        let spriteHtml = "";
+
+        if (gymConfig && state.config.gymAssets) {
+            const assetConfig = state.config.gymAssets[gymConfig.leader];
+            if (assetConfig) {
+                bgImg = assetConfig.background;
+                const s = assetConfig;
+                // Base width/height assumption is 1800x1000 like in memory/lab overlays
+                const scaleX = s.size.scale_x;
+                const scaleY = s.size.scale_y;
+                const widthPercent = (s.size.px_width / 1800) * 100 * scaleX;
+                // For tilt angle, standard CSS rotation is clockwise, Python PIL needs counter-clockwise.
+                // In JSON `angle_deg` is given.
+                const rotate = s.tilt.angle_deg ? `rotate(${s.tilt.angle_deg}deg)` : '';
+                const left = s.position.rel_x * 100;
+                const top = s.position.rel_y * 100;
+                const transformOrigin = s.tilt.origin || "center center";
+
+                spriteHtml = `
+                    <img src="./Assets/Gym/GymLeaders/${s.sprite}" style="
+                        position: absolute;
+                        left: ${left}%;
+                        top: ${top}%;
+                        width: ${widthPercent}%;
+                        transform: ${rotate};
+                        transform-origin: ${transformOrigin};
+                        pointer-events: none;
+                    ">
+                `;
+            } else if (locationName === "Indigo Plateau") {
+                bgImg = "BG-IndigoPlateau.png";
+            }
+        } else if (locationName === "Indigo Plateau") {
+            bgImg = "BG-IndigoPlateau.png";
+        }
+
+        // Apply background logic the same way lab does it, by setting innerHTML with the images
+        let bgHtml = "";
+        if (bgImg === "BG-IndigoPlateau.png") {
+            bgHtml = `<img src="./Assets/Gym/BG/${bgImg}" onerror="this.src='./Assets/BG/${bgImg}'" style="position: absolute; width: 100%; height: 100%; object-fit: cover; z-index: -1;">`;
+        } else {
+            bgHtml = `<img src="./Assets/Gym/BG/${bgImg}" onerror="this.src='./Assets/BG/${bgImg}'" style="position: absolute; width: 100%; height: 100%; object-fit: cover; z-index: -1;">`;
+        }
+
 
         // Stop current battle system
         if (battleSystem) {
@@ -566,12 +602,14 @@ export function navigateToLocation(locationName) {
         let buttonHtml = '';
         if (gymConfig) {
             let buttonText = lookupName === "Indigo Plateau" ? "Challange Elite 4 and Champion" : "Battle Gym";
-            buttonHtml = `<button onclick="window.startGymBattle('${lookupName}')" class="action-btn action-btn-primary" style="margin-top: 10px;">${buttonText}</button>`;
+            buttonHtml = `<button onclick="window.startGymBattle('${lookupName}')" class="action-btn action-btn-primary" style="margin-top: 10px; z-index: 2; position: relative;">${buttonText}</button>`;
         }
 
         vGym.innerHTML = `
-            <div style="background-color: rgba(0,0,0,0.8); display: flex; flex-direction: column; align-items: center; padding: 20px; border-radius: 8px; position: absolute; left: 15%; top: 50%; transform: translateY(-50%); min-width: 300px;">
-                <h2 id="gym-title-header">${locationName}</h2>
+            ${bgHtml}
+            ${spriteHtml}
+            <div style="background-color: rgba(0,0,0,0.8); display: flex; flex-direction: column; align-items: center; padding: 20px; border-radius: 8px; position: absolute; left: 15%; top: 50%; transform: translateY(-50%); min-width: 300px; z-index: 2;">
+                <h2 id="gym-title-header" style="color: white; margin-bottom: 10px;">${locationName}</h2>
                 <div id="gym-content-area" style="position: relative; width: 100%; text-align: center; display: flex; flex-direction: column; gap: 10px; align-items: center;">
                     ${buttonHtml}
                 </div>
