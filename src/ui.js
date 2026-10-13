@@ -1338,8 +1338,8 @@ export function updateUI() {
 }
 
 async function loadConfigs() {
-    const [pokemonData, routes, gyms, balance, moves, types, mapCoordinates, johtoMapCoordinates] = await Promise.all([
-      import('../config/pokemonData.js').then(m => m.default),
+    const [pokemonJsonRes, routes, gyms, balance, moves, types, mapCoordinates, johtoMapCoordinates] = await Promise.all([
+      fetch('./data/pokemon.json').then(res => res.json()),
       import('../config/routes.js').then(m => m.routes),
       import('../config/gyms.js').then(m => m.default),
       import('../config/balance.js').then(m => m.default),
@@ -1349,7 +1349,38 @@ async function loadConfigs() {
       import('../config/johtoMapCoordinates.js').then(m => m.default),
     ]);
 
-    state.config.pokemonData = pokemonData;
+    let processedPokemonData = [];
+    let seenIds = new Set();
+    for (const key of Object.keys(pokemonJsonRes)) {
+        const p = pokemonJsonRes[key];
+        const id = parseInt(p["#"], 10);
+        if (!seenIds.has(id)) {
+            let evolutions = [];
+            if (p.Evolution && p.Evolution.steps) {
+                evolutions = p.Evolution.steps
+                    .filter(step => step.from === p["#"])
+                    .map(step => ({ to: parseInt(step.to, 10), level: parseInt(step.level, 10) || step.level }));
+            }
+
+            processedPokemonData.push({
+                ...p,
+                id: id,
+                name: p.Name,
+                types: p.Type,
+                hp: parseInt(p.BST.HP, 10),
+                atk: parseInt(p.BST.Attack, 10),
+                def: parseInt(p.BST.Def, 10),
+                spa: parseInt(p.BST.SpAtk, 10),
+                spd: parseInt(p.BST.SpDef, 10),
+                spe: parseInt(p.BST.Speed, 10),
+                learnset: p.Moves ? p.Moves.map(m => ({ level: parseInt(m.Lv, 10) || 1, move: m.Name })) : [],
+                evolutions: evolutions
+            });
+            seenIds.add(id);
+        }
+    }
+
+    state.config.pokemonData = processedPokemonData;
     state.config.routes = routes;
     const unlocksModule = await import('../config/routes.js');
     state.config.unlocks = unlocksModule.unlocks;
@@ -1359,7 +1390,7 @@ async function loadConfigs() {
     state.config.types = types;
     state.config.mapCoordinates = mapCoordinates;
     state.config.johtoMapCoordinates = johtoMapCoordinates;
-    state.config.allPokemonNames = pokemonData.map(p => p.name);
+    state.config.allPokemonNames = processedPokemonData.map(p => p.name);
 
     // Precompute evolution parents for O(1) lookups
     const evolutionParents = {};
