@@ -159,3 +159,19 @@ export function swapRegion(newRegionName) {
 
     state.currentRegionName = newRegionName;
 }
+
+window.getCurrentRoutes = function() {
+    if (!state.config) return [];
+    if (state.currentRegionName === 'Johto' && state.config.johtoRoutes) {
+        return state.config.johtoRoutes;
+    }
+    return state.config.routes || [];
+};
+
+window.getCurrentUnlocks = function() {
+    if (!state.config) return [];
+    if (state.currentRegionName === 'Johto' && state.config.johtoUnlocks) {
+        return state.config.johtoUnlocks;
+    }
+    return state.config.unlocks || [];
+};

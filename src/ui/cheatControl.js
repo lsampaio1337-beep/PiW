@@ -216,8 +216,8 @@ export function cheatAction(action) {
         if (!state.stats.newRoutes) state.stats.newRoutes = [];
 
         // Unlock all maps from routes
-        if (state.config.routes) {
-            state.config.routes.forEach(route => {
+        if (window.getCurrentRoutes()) {
+            window.getCurrentRoutes().forEach(route => {
                 if (!state.stats.completedChallengeIds.includes(route.name)) {
                     state.stats.completedChallengeIds.push(route.name);
                 }
@@ -228,8 +228,8 @@ export function cheatAction(action) {
         }
 
         // Unlock all unlocks from config
-        if (state.config.unlocks) {
-            state.config.unlocks.forEach(unlock => {
+        if (window.getCurrentUnlocks()) {
+            window.getCurrentUnlocks().forEach(unlock => {
                 if (!state.stats.completedChallengeIds.includes(unlock.areaId)) {
                     state.stats.completedChallengeIds.push(unlock.areaId);
                 }

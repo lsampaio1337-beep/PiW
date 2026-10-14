@@ -636,8 +636,8 @@ export function showMapTooltip(e, locationName) {
                 info += `Trainers: ${gym.trainers.length - 1}<br>`;
             }
         }
-    } else if (state.config.routes) {
-        const route = state.config.routes.find(r => r.name === locationName);
+    } else if (window.getCurrentRoutes()) {
+        const route = window.getCurrentRoutes().find(r => r.name === locationName);
         if (route) {
             // Find overall min and max level for the route
             let minLvl = 100;
