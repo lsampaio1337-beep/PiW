@@ -487,6 +487,12 @@ class BattleSystem {
         const gym = this.gymState.gym;
         if (!gym) return;
 
+        // Ensure no previous dynamic UI overlays
+        const existingDynamicBg = document.getElementById('dynamic-gym-bg-ui');
+        if (existingDynamicBg) {
+            existingDynamicBg.remove();
+        }
+
         // Apply elite 4 background during rest phase if applicable
         if (gym.name === "Indigo Plateau") {
             const trainerBGs = [
@@ -503,6 +509,56 @@ class BattleSystem {
             const bgImage = trainerBGs[trainerIndex] || 'BG.png';
             vGym.style.backgroundImage = `url('./Assets/BG/${bgImage}')`;
             vGym.style.backgroundSize = "cover";
+        } else {
+            // Check for dynamic background config
+            if (this.state.config && this.state.config.gymAssets && this.state.config.gymAssets[gym.leader]) {
+                const assetConfig = this.state.config.gymAssets[gym.leader];
+                const spritePath = `./Assets/Gym/GymLeaders/${assetConfig.sprite}`;
+                const bgPath = `./Assets/Gym/BG/${assetConfig.background}`;
+
+                const dynamicBg = document.createElement('div');
+                dynamicBg.id = 'dynamic-gym-bg-ui';
+                dynamicBg.style.position = 'absolute';
+                dynamicBg.style.top = '0';
+                dynamicBg.style.left = '0';
+                dynamicBg.style.width = '100%';
+                dynamicBg.style.height = '100%';
+                dynamicBg.style.zIndex = '0';
+                dynamicBg.style.backgroundImage = `url('${bgPath}')`;
+                dynamicBg.style.backgroundSize = '100% 100%';
+                dynamicBg.style.overflow = 'hidden';
+
+                dynamicBg.innerHTML = `
+                    <img src="${spritePath}" style="
+                        position: absolute;
+                        left: ${assetConfig.position.rel_x * 100}%;
+                        top: ${assetConfig.position.rel_y * 100}%;
+                        width: calc((${assetConfig.size.px_width} / 1800) * 100% * ${assetConfig.size.scale_x});
+                        transform: rotate(${assetConfig.tilt.angle_deg}deg);
+                        transform-origin: ${assetConfig.tilt.origin};
+                        pointer-events: none;
+                    ">
+                `;
+
+                vGym.style.backgroundImage = 'none';
+                vGym.style.position = 'relative'; // Ensure relative positioning
+                vGym.insertBefore(dynamicBg, vGym.firstChild);
+            } else {
+                const gymIndex = this.state.config.gyms.findIndex(g => g.name === gym.name);
+                const gymBGs = [
+                    'BG-Gym-1-Pewter-Rock.png',
+                    'BG-Gym-2-Cerulean-Water.png',
+                    'BG-Gym-3-Vermilion-Electric.png',
+                    'BG-Gym-4-Celadon-Grass.png',
+                    'BG-Gym-5-Fuchsia-Poison.png',
+                    'BG-Gym-6-Saffron-Psychic.png',
+                    'BG-Gym-7-Cinnabar-Fire.png',
+                    'BG-Gym-8-Viridian-Ground.png'
+                ];
+                const bgImage = gymBGs[gymIndex] || 'BG.png';
+                vGym.style.backgroundImage = `url('./Assets/BG/${bgImage}')`;
+                vGym.style.backgroundSize = "cover";
+            }
         }
 
         const trainer = gym.trainers[this.gymState.currentTrainerIndex];

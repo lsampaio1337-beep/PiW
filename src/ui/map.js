@@ -569,19 +569,47 @@ export function navigateToLocation(locationName) {
             buttonHtml = `<button onclick="window.startGymBattle('${lookupName}')" class="action-btn action-btn-primary" style="margin-top: 10px;">${buttonText}</button>`;
         }
 
+        let dynamicBgHtml = '';
+        if (gymConfig && state.config.gymAssets && state.config.gymAssets[gymConfig.leader]) {
+            const assetConfig = state.config.gymAssets[gymConfig.leader];
+            const spritePath = `./Assets/Gym/GymLeaders/${assetConfig.sprite}`;
+            const bgPath = `./Assets/Gym/BG/${assetConfig.background}`;
+
+            // Remove the static bgImg so it doesn't override the dynamic one
+            bgImg = "";
+
+            dynamicBgHtml = `
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background-image: url('${bgPath}'); background-size: 100% 100%; overflow: hidden;">
+                    <img src="${spritePath}" style="
+                        position: absolute;
+                        left: ${assetConfig.position.rel_x * 100}%;
+                        top: ${assetConfig.position.rel_y * 100}%;
+                        width: calc((${assetConfig.size.px_width} / 1800) * 100% * ${assetConfig.size.scale_x});
+                        transform: rotate(${assetConfig.tilt.angle_deg}deg);
+                        transform-origin: ${assetConfig.tilt.origin};
+                        pointer-events: none;
+                    ">
+                </div>
+            `;
+        }
+
         vGym.innerHTML = `
-            <div style="background-color: rgba(0,0,0,0.8); display: flex; flex-direction: column; align-items: center; padding: 20px; border-radius: 8px; position: absolute; left: 15%; top: 50%; transform: translateY(-50%); min-width: 300px;">
-                <h2 id="gym-title-header">${locationName}</h2>
+            ${dynamicBgHtml}
+            <div style="background-color: rgba(0,0,0,0.8); display: flex; flex-direction: column; align-items: center; padding: 20px; border-radius: 8px; position: absolute; left: 15%; top: 50%; transform: translateY(-50%); min-width: 300px; z-index: 1;">
+                <h2 id="gym-title-header" style="margin-top: 0; color: white;">${locationName}</h2>
                 <div id="gym-content-area" style="position: relative; width: 100%; text-align: center; display: flex; flex-direction: column; gap: 10px; align-items: center;">
                     ${buttonHtml}
                 </div>
             </div>
         `;
+
+        vGym.style.position = "relative";
+        vGym.style.height = "100%";
         if (bgImg) {
             vGym.style.backgroundImage = `url('./Assets/BG/${bgImg}')`;
             vGym.style.backgroundSize = "cover";
-            vGym.style.height = "100%";
-            vGym.style.position = "relative";
+        } else {
+            vGym.style.backgroundImage = "none";
         }
     } else {
         switchView("BATTLE_ARENA");
