@@ -533,7 +533,7 @@ class BattleSystem {
                         position: absolute;
                         left: ${assetConfig.position.rel_x * 100}%;
                         top: ${assetConfig.position.rel_y * 100}%;
-                        width: calc((${assetConfig.size.px_width} / 1800) * 100% * ${assetConfig.size.scale_x});
+                        width: ${(assetConfig.size.px_width / 1800) * 100}%;
                         transform: rotate(${assetConfig.tilt.angle_deg}deg);
                         transform-origin: ${assetConfig.tilt.origin};
                         pointer-events: none;
