@@ -5,6 +5,7 @@
   "description": "An idle Pokemon combat and management game.",
   "main": "main.js",
   "scripts": {
+    "postinstall": "node scripts/downloadSprites.js",
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make"
