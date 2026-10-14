@@ -22,21 +22,25 @@ export function setupGlobalEventListeners() {
 
             const isMinimized = contentContainer.style.display === 'none';
 
+            const header = document.getElementById('main-control-header');
+
             if (isMinimized) {
                 // Restore
                 contentContainer.style.display = '';
                 topBarWindow.style.width = topBarWindow.dataset.originalWidth || 'auto';
                 topBarWindow.style.minHeight = '';
                 if (topBarWindow.dataset.originalHeight) topBarWindow.style.height = topBarWindow.dataset.originalHeight;
+                if (header) header.style.textAlign = ''; // Restore to default center
                 if (window.windowManager) window.windowManager._constrainAllWindows();
             } else {
                 // Minimize
                 topBarWindow.dataset.originalWidth = topBarWindow.style.width;
                 topBarWindow.dataset.originalHeight = topBarWindow.style.height;
                 contentContainer.style.display = 'none';
-                topBarWindow.style.width = '300px'; // Minimal width for title + buttons
+                topBarWindow.style.width = '200px'; // Minimal width for title + buttons
                 topBarWindow.style.minHeight = '0';
                 topBarWindow.style.height = 'auto'; // Only display title
+                if (header) header.style.textAlign = 'left'; // Left align title
             }
         });
     }
