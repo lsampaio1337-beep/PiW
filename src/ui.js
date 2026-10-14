@@ -2809,18 +2809,29 @@ export function renderGenericLab() {
 
     if (!state.stats.hasPickedStarter) {
         // Show starter selection
-        let starterHtml = '';
-        starterHtml = `
+        const regionStarters = {
+            'Kanto': [1, 4, 7],
+            'Johto': [152, 155, 158],
+            'Hoenn': [252, 255, 258],
+            'Sinnoh': [387, 390, 393],
+            'Unova': [495, 498, 501]
+        };
+        const starterIds = regionStarters[currentRegion] || regionStarters['Kanto'];
+
+        let starterButtonsHtml = starterIds.map(id => {
+            const p = state.config.pokemonData.find(p => p.id === id);
+            const name = p ? p.name : 'Unknown';
+            const paddedId = id.toString().padStart(4, '0');
+            const spriteSrc = `Assets/Pokemon Sprites/Natural/Gen5/${paddedId}_${name}.png`;
+            return `
+                  <button onclick="window.selectStarter(${id})">
+                    <img src="${spriteSrc}" style="width: 80px; height: 80px;"><br>${name}
+                  </button>`;
+        }).join('');
+
+        let starterHtml = `
                 <div class="starter-choices">
-                  <button onclick="window.selectStarter(1)">
-                    <img src="Assets/Pokemon Sprites/Natural/Gen5/0001_Bulbasaur.png" style="width: 80px; height: 80px;"><br>Bulbasaur
-                  </button>
-                  <button onclick="window.selectStarter(4)">
-                    <img src="Assets/Pokemon Sprites/Natural/Gen5/0004_Charmander.png" style="width: 80px; height: 80px;"><br>Charmander
-                  </button>
-                  <button onclick="window.selectStarter(7)">
-                    <img src="Assets/Pokemon Sprites/Natural/Gen5/0007_Squirtle.png" style="width: 80px; height: 80px;"><br>Squirtle
-                  </button>
+${starterButtonsHtml}
                 </div>`;
 
         labContent.innerHTML = `
