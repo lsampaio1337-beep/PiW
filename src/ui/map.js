@@ -579,7 +579,7 @@ export function navigateToLocation(locationName) {
             bgImg = "";
 
             dynamicBgHtml = `
-                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background-image: url('${bgPath}'); background-size: 100% 100%; overflow: hidden;">
+                <div id="dynamic-gym-bg-ui" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; background-image: url('${bgPath}'); background-size: 100% 100%; overflow: hidden;">
                     <img src="${spritePath}" style="
                         position: absolute;
                         left: ${assetConfig.position.rel_x * 100}%;
@@ -597,7 +597,7 @@ export function navigateToLocation(locationName) {
             ${dynamicBgHtml}
             <div style="background-color: rgba(0,0,0,0.8); display: flex; flex-direction: column; align-items: center; padding: 20px; border-radius: 8px; position: absolute; left: 15%; top: 50%; transform: translateY(-50%); min-width: 300px; z-index: 1;">
                 <h2 id="gym-title-header" style="margin-top: 0; color: white;">${locationName}</h2>
-                <div id="gym-content-area" style="position: relative; width: 100%; text-align: center; display: flex; flex-direction: column; gap: 10px; align-items: center;">
+                <div id="gym-content-area" style="position: relative; width: 100%; text-align: center; display: flex; flex-direction: column; gap: 10px; align-items: center; z-index: 2;">
                     ${buttonHtml}
                 </div>
             </div>
