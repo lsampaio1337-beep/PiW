@@ -264,7 +264,7 @@ export function showMap() {
 
     const regions = [
         { name: 'Kanto', mapFile: '1 Kanto Map.png', width: 2571, height: 1818 },
-        { name: 'Johto', mapFile: '2 Johto Map.png', width: 1961, height: 1316 },
+        { name: 'Johto', mapFile: '2 Johto Map.png', width: 1500, height: 658 },
         { name: 'Hoenn', mapFile: '3 Hoenn Map.png', width: 1250, height: 884 },
         { name: 'Sinnoh', mapFile: '4 Sinnoh Map.png', width: 1024, height: 724 },
         { name: 'Unova', mapFile: '5 Unova Map.png', width: 1280, height: 837 },
