@@ -13,45 +13,6 @@ export function setupGlobalEventListeners() {
         });
     }
 
-    const minimizeMainBtn = document.getElementById('btn-minimize-main-control');
-    if (minimizeMainBtn) {
-        minimizeMainBtn.addEventListener('click', () => {
-            const topBarWindow = document.getElementById('main-control-window');
-            const contentContainer = topBarWindow.querySelector('.window-content-container');
-            if (!contentContainer || !topBarWindow) return;
-
-            const isMinimized = contentContainer.style.display === 'none';
-
-            if (isMinimized) {
-                // Restore
-                // Instead of clearing display, properly restore it to the original layout block type
-                // We can fetch from a saved dataset or fallback to flex.
-                if (contentContainer.dataset.originalDisplay) {
-                    contentContainer.style.display = contentContainer.dataset.originalDisplay;
-                } else {
-                    contentContainer.style.removeProperty('display');
-                }
-                topBarWindow.style.minHeight = '';
-                if (topBarWindow.dataset.originalHeight) topBarWindow.style.height = topBarWindow.dataset.originalHeight;
-                if (window.windowManager) {
-                    window.windowManager._constrainAllWindows();
-                }
-
-                // Trigger native resize to safely update content scaling without overriding explicit user-set dimensions
-                requestAnimationFrame(() => {
-                    window.dispatchEvent(new Event("resize"));
-                });
-            } else {
-                // Minimize
-                topBarWindow.dataset.originalHeight = topBarWindow.style.height;
-                contentContainer.dataset.originalDisplay = contentContainer.style.display;
-                contentContainer.style.display = 'none';
-                topBarWindow.style.minHeight = '0';
-                topBarWindow.style.height = 'auto'; // Only display title
-            }
-        });
-    }
-
     const exitButtons = document.querySelectorAll('.btn-exit-game');
     exitButtons.forEach(btn => {
         btn.addEventListener('click', () => {
