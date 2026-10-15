@@ -173,6 +173,9 @@ window.getCurrentRoutes = function() {
     if (state.currentRegionName === 'Johto' && state.config.johtoRoutes) {
         return state.config.johtoRoutes;
     }
+    if (state.currentRegionName === 'Hoenn' && state.config.hoennRoutes) {
+        return state.config.hoennRoutes;
+    }
     return state.config.routes || [];
 };
 
@@ -180,6 +183,9 @@ window.getCurrentUnlocks = function() {
     if (!state.config) return [];
     if (state.currentRegionName === 'Johto' && state.config.johtoUnlocks) {
         return state.config.johtoUnlocks;
+    }
+    if (state.currentRegionName === 'Hoenn' && state.config.hoennUnlocks) {
+        return state.config.hoennUnlocks;
     }
     return state.config.unlocks || [];
 };

@@ -1362,6 +1362,13 @@ async function loadConfigs() {
     } catch (e) {
         console.warn("Failed to load johto routes");
     }
+    try {
+        const hoennModule = await import('../config/hoennRoutes.js');
+        state.config.hoennRoutes = hoennModule.hoennRoutes;
+        state.config.hoennUnlocks = hoennModule.hoennUnlocks;
+    } catch (e) {
+        console.warn("Failed to load hoenn routes");
+    }
     state.config.gyms = gyms;
     state.config.gymAssets = gymAssets;
     state.config.balance = balance;
