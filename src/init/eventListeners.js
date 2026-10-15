@@ -53,7 +53,13 @@ export function setupGlobalEventListeners() {
                 }
                 if (window.windowManager) {
                     window.windowManager._constrainAllWindows();
-                    window.windowManager.autoAdjustWidth('main-control-window');
+
+                    // Try specific resize adjustment for content height without clearing explicit original scales
+                    if (typeof topBarWindow.adjustHeightForNewContent === 'function') {
+                         topBarWindow.adjustHeightForNewContent();
+                    } else {
+                         window.windowManager.autoAdjustWidth('main-control-window');
+                    }
                 }
             } else {
                 // Minimize
