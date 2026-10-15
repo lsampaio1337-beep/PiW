@@ -53,13 +53,13 @@ export function setupGlobalEventListeners() {
                 }
                 if (window.windowManager) {
                     window.windowManager._constrainAllWindows();
+                }
 
-                    // Try specific resize adjustment for content height without clearing explicit original scales
-                    if (typeof topBarWindow.adjustHeightForNewContent === 'function') {
-                         topBarWindow.adjustHeightForNewContent();
-                    } else {
-                         window.windowManager.autoAdjustWidth('main-control-window');
-                    }
+                // When restoring, we must make sure the explicit hardcoded inline width hasn't broken internal scaling trackers
+                // Without resetting them, subsequent resizes will compound the math errors and make the window jump back to previous states or grow indefinitely.
+                if (typeof topBarWindow.resetResizeDims === 'function') {
+                    topBarWindow.resetResizeDims();
+                    if (window.windowManager) window.windowManager.autoAdjustWidth('main-control-window');
                 }
             } else {
                 // Minimize
