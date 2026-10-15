@@ -224,6 +224,32 @@ function generateMarkersForRegion(region, unlockedAreas) {
 
             html += generateMarkerHtml(locationId, locationName, coords, true, false, false);
         }
+    } else if (region === 'Hoenn') {
+        for (const [locationId, locationData] of Object.entries(state.config.hoennMapCoordinates || {})) {
+            const locationName = locationData.name;
+            const coords = locationData;
+
+            let isUnlocked = unlockedAreas.has(locationName);
+            if (!isUnlocked) continue;
+
+            let hasNewNotification = false;
+            let showCheckmark = false;
+
+            if (state.stats.newRoutes && state.stats.newRoutes.some(r => parseAreaNames(r).includes(locationName))) {
+                hasNewNotification = true;
+            }
+
+            if (locationId === 'rustboro_gym' && state.trainer.badges >= 1) showCheckmark = true;
+            if (locationId === 'dewford_gym' && state.trainer.badges >= 2) showCheckmark = true;
+            if (locationId === 'mauville_gym' && state.trainer.badges >= 3) showCheckmark = true;
+            if (locationId === 'lavaridge_gym' && state.trainer.badges >= 4) showCheckmark = true;
+            if (locationId === 'petalburg_gym' && state.trainer.badges >= 5) showCheckmark = true;
+            if (locationId === 'fortree_gym' && state.trainer.badges >= 6) showCheckmark = true;
+            if (locationId === 'mossdeep_gym' && state.trainer.badges >= 7) showCheckmark = true;
+            if (locationId === 'sootopolis_gym' && state.trainer.badges >= 8) showCheckmark = true;
+
+            html += generateMarkerHtml(locationId, locationName, coords, true, hasNewNotification, showCheckmark);
+        }
     } else {
         // Fallback for new regions
         let coords = { x: 50, y: 50 };

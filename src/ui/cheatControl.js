@@ -262,6 +262,13 @@ export function cheatAction(action) {
             });
         }
 
+        // Unlock from hoennMapCoordinates
+        if (state.config.hoennMapCoordinates) {
+            Object.values(state.config.hoennMapCoordinates).forEach(coord => {
+                if (coord.name) unlockArea(coord.name);
+            });
+        }
+
         // Ensure Casino spots and machines are unlocked
         unlockArea('Casino');
 
