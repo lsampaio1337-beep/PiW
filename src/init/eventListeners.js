@@ -31,7 +31,11 @@ export function setupGlobalEventListeners() {
                 // Restore
                 // Instead of clearing display, properly restore it to the original layout block type
                 // We can fetch from a saved dataset or fallback to flex.
-                contentContainer.style.display = contentContainer.dataset.originalDisplay || 'flex';
+                if (contentContainer.dataset.originalDisplay) {
+                    contentContainer.style.display = contentContainer.dataset.originalDisplay;
+                } else {
+                    contentContainer.style.removeProperty('display');
+                }
                 topBarWindow.style.width = topBarWindow.dataset.originalWidth || 'auto';
                 topBarWindow.style.minWidth = '0'; // Restore min-width
                 topBarWindow.style.minHeight = '';
@@ -55,12 +59,10 @@ export function setupGlobalEventListeners() {
                     window.windowManager._constrainAllWindows();
                 }
 
-                // When restoring, we must make sure the explicit hardcoded inline width hasn't broken internal scaling trackers
-                // Without resetting them, subsequent resizes will compound the math errors and make the window jump back to previous states or grow indefinitely.
-                if (typeof topBarWindow.resetResizeDims === 'function') {
-                    topBarWindow.resetResizeDims();
-                    if (window.windowManager) window.windowManager.autoAdjustWidth('main-control-window');
-                }
+                // Trigger native resize to safely update content scaling without overriding explicit user-set dimensions
+                requestAnimationFrame(() => {
+                    window.dispatchEvent(new Event("resize"));
+                });
             } else {
                 // Minimize
                 topBarWindow.dataset.originalWidth = topBarWindow.style.width;
