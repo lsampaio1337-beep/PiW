@@ -42,16 +42,32 @@ function generateMarkerHtml(locationId, locationName, coords, isUnlocked, hasNew
     let markerImg = './Assets/Map/Spots/Spot.png';
     let isClickable = true;
 
-    if (locationId === 'professor_oak_lab' || locationId === 'johto_oak_lab') {
+    if (locationId === 'professor_oak_lab' || locationId === 'johto_oak_lab' || locationId === 'professor_lab') {
         markerImg = './Assets/Map/Spots/Spot_Lab.png';
-    } else if (locationId === 'pokemon_center___market') {
+    } else if (locationId === 'pokemon_center___market' || locationId === 'pokecenter_pokemarket') {
         markerImg = './Assets/Map/Spots/Spot_PCPM.png';
-    } else if (locationId === 'safari_zone') {
+    } else if (locationId === 'safari_zone' || locationId === 'kanto_safari_zone') {
         markerImg = './Assets/Map/Spots/Spot_Safariball.png';
-    } else if (locationId === 'casino') {
+    } else if (locationId === 'casino' || locationId === 'goldenrood_game_corner') {
         markerImg = './Assets/Map/Spots/Spot_Casino.png';
     } else if (locationId === 'daycare') {
         markerImg = './Assets/Map/Spots/Spot_Daycare.png';
+    } else if (locationId === 'violet_gym') {
+        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Johto', 1)}`;
+    } else if (locationId === 'azalea_gym') {
+        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Johto', 2)}`;
+    } else if (locationId === 'goldenrood_gym') {
+        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Johto', 3)}`;
+    } else if (locationId === 'ecruteak_gym') {
+        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Johto', 4)}`;
+    } else if (locationId === 'cianwood_gym') {
+        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Johto', 5)}`;
+    } else if (locationId === 'olivini_gym') {
+        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Johto', 6)}`;
+    } else if (locationId === 'mahogany_gym') {
+        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Johto', 7)}`;
+    } else if (locationId === 'blackthorn_gym') {
+        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Johto', 8)}`;
     } else if (locationId === 'pewter_gym') {
         markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Kanto', 1)}`;
     } else if (locationId === 'cerulean_gym') {
@@ -75,10 +91,10 @@ function generateMarkerHtml(locationId, locationName, coords, isUnlocked, hasNew
     let markerHeight = "24px";
     let dropShadow = "none";
 
-    if (locationId === 'pokemon_center___market') {
+    if (locationId === 'pokemon_center___market' || locationId === 'pokecenter_pokemarket') {
         markerWidth = "32px";
         markerHeight = "32px";
-    } else if (['professor_oak_lab', 'johto_oak_lab', 'indigo_plateu', 'safari_zone', 'casino', 'daycare'].includes(locationId)) {
+    } else if (['professor_oak_lab', 'johto_oak_lab', 'professor_lab', 'indigo_plateu', 'safari_zone', 'kanto_safari_zone', 'casino', 'goldenrood_game_corner', 'daycare'].includes(locationId)) {
         markerWidth = "28px";
         markerHeight = "28px";
     }
