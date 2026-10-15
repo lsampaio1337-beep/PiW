@@ -121,14 +121,22 @@ export function setBattleSystem(system) {
     globals.battleSystem = system;
 }
 
-export function checkFinalChallengeCompleted() {
-    if (state.stats.completedChallengeIds && state.stats.completedChallengeIds.includes('Indigo Plateau')) {
-        return true;
+export function checkFinalChallengeCompleted(regionName = 'Kanto') {
+    let stats;
+    if (state.currentRegionName === regionName || (!state.currentRegionName && regionName === 'Kanto')) {
+        stats = state.stats;
+    } else if (state.regions && state.regions[regionName] && state.regions[regionName].stats) {
+        stats = state.regions[regionName].stats;
     }
-    if (state.regions && state.regions['Kanto'] && state.regions['Kanto'].stats && state.regions['Kanto'].stats.completedChallengeIds && state.regions['Kanto'].stats.completedChallengeIds.includes('Indigo Plateau')) {
-        return true;
-    }
-    return false;
+
+    if (!stats || !stats.completedChallengeIds) return false;
+
+    let finalChallenge = state.config && state.config.routes ? state.config.routes.find(r => r.challengeName === "Final Challenge") : null;
+    let finalChallengeId = finalChallenge ? finalChallenge.areaId : (regionName === 'Kanto' ? 'Indigo Plateau' : null);
+
+    if (!finalChallengeId) return false;
+
+    return stats.completedChallengeIds.includes(finalChallengeId);
 }
 
 export function swapRegion(newRegionName) {
