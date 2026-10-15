@@ -1,8 +1,8 @@
 const mapCoordinates = {
   "route_1": {
     "name": "Route 1",
-    "x": 24.3,
-    "y": 56.14
+    "x": 24.29,
+    "y": 54.66
   },
   "viridian_gym": {
     "name": "Viridian Gym",
@@ -234,15 +234,20 @@ const mapCoordinates = {
     "x": 32.76,
     "y": 93.24
   },
-  "professor_oak_lab": {
-    "name": "Professor Oak Lab",
-    "x": 25,
-    "y": 66.33
+  "professor_lab": {
+    "name": "Professor Lab",
+    "x": 24.72,
+    "y": 68.21
   },
   "trade_with_friends_hub": {
     "name": "Trade With Friends Hub",
-    "x": 22.97,
-    "y": 62.84
+    "x": 21.47,
+    "y": 62.16
+  },
+  "battle_stadium": {
+    "name": "Battle Stadium",
+    "x": 26.6,
+    "y": 62.4
   },
   "daycare": {
     "name": "Daycare",

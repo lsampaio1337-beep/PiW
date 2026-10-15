@@ -1815,7 +1815,7 @@ class BattleSystem {
 
         if (this.state.party.length === 0) {
             // No pokemon were selected, do not display message of fainted team and go to professor lab
-            const labRoute = (this.state.currentRegionName === 'Kanto' || this.state.currentRegionName === 'Johto') ? "Professor Oak Lab" : "Professor Lab";
+            const labRoute = (this.state.currentRegionName === 'Kanto' || this.state.currentRegionName === 'Johto') ? "Professor Lab" : "Professor Lab";
             this.state.currentRoute = labRoute;
 
             if (this.gymState) {

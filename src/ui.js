@@ -29,7 +29,7 @@ const oakTutorialMessages = [
     "<p>Next set of icon are “Objectives Related”</p><p>Here we have Daily Calendar. It will have daily challenges and rewards you each day you play. It also have a shop to spend Daily Tokens earned… Make sure to expend them on upgrades!</p><p>Next is the Progress Challenges. Completing the Challenge grants a new spot to travel and may grant some gifts.</p>",
     "<p>The last set of icons are related to settings.</p><p>The first is “Help”. In there you can find information about the whole game (with formulas).</p><p>“Settings” will let you change configurations of the game.</p><p>If you want to leave game, just go to the “Exit” icon.</p>",
     "<p>Along the gameplay, some new icons will appear in Main Control.</p><p>But don’t worry, you will be told what they are.</p>",
-    "<p>On maps you can find places that are HUB for interactions.</p><p>You are at “Professor Oak Lab” now, and I have some assignments for you… make sure to conclude them to earn boosts.</p>",
+    "<p>On maps you can find places that are HUB for interactions.</p><p>You are at “Professor Lab” now, and I have some assignments for you… make sure to conclude them to earn boosts.</p>",
     "<p>Now you are all set!</p><p>If you need more help, make sure to open the Help Module!</p><p>Have fun and CATCH THEM ALL!</p>"
 ];
 let currentOakTutorialIndex = 0;
@@ -1398,7 +1398,7 @@ function returnToLab() {
     let labRoute = "Professor Lab";
     let labView = "GENERIC_LAB";
     if (state.currentRegionName === "Kanto") {
-        labRoute = "Professor Oak Lab";
+        labRoute = "Professor Lab";
         labView = "PROF_OAK_LAB";
     } else if (state.currentRegionName === "Johto") {
         labRoute = "Johto Oak Lab";
