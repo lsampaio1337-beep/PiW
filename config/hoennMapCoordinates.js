@@ -84,6 +84,11 @@ const hoennMapCoordinates = {
     "x": 31.44,
     "y": 39.40
   },
+  "lavaridge_gym": {
+    "name": "Lavaridge Gym",
+    "x": 15.28,
+    "y": 25.0
+  },
   "111": {
     "name": "111",
     "x": 31.84,
@@ -168,6 +173,11 @@ const hoennMapCoordinates = {
     "name": "Mount Pyre",
     "x": 61.20,
     "y": 30.35
+  },
+  "mossdeep_gym": {
+    "name": "Mossdeep Gym",
+    "x": 86.24,
+    "y": 35.0
   },
   "123": {
     "name": "123",
