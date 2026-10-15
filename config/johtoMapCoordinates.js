@@ -39,8 +39,8 @@ const johtoMapCoordinates = {
     "x": 25.62,
     "y": 62.95
   },
-  "azalea_town": {
-    "name": "Azalea Town",
+  "azalea_gym": {
+    "name": "Azalea Gym",
     "x": 28.01,
     "y": 79.55
   },

@@ -1823,7 +1823,7 @@ export const johtoUnlocks = [
     "challengeName": "Challenge 8",
     "areaId": "Ruins of Alph",
     "unlocks": [
-      "Azalea Town"
+      "Azalea Gym"
     ],
     "requirements": {
       "defeatSpecific": {
@@ -1838,7 +1838,7 @@ export const johtoUnlocks = [
   },
   {
     "challengeName": "Challenge 9",
-    "areaId": "Azalea Town",
+    "areaId": "Azalea Gym",
     "unlocks": [
       "Ilex Forest"
     ],
