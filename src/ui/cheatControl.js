@@ -215,6 +215,15 @@ export function cheatAction(action) {
         if (!state.stats.completedChallengeIds) state.stats.completedChallengeIds = [];
         if (!state.stats.newRoutes) state.stats.newRoutes = [];
 
+        const unlockArea = (name) => {
+            if (!state.stats.completedChallengeIds.includes(name)) {
+                state.stats.completedChallengeIds.push(name);
+            }
+            if (!state.stats.newRoutes.includes(name)) {
+                state.stats.newRoutes.push(name);
+            }
+        };
+
         // Unlock all maps from routes
         if (window.getCurrentRoutes()) {
             window.getCurrentRoutes().forEach(route => {
@@ -234,30 +243,30 @@ export function cheatAction(action) {
                     state.stats.completedChallengeIds.push(unlock.areaId);
                 }
                 if (unlock.unlocks) {
-                     unlock.unlocks.forEach(newRoute => {
-                         if (!state.stats.newRoutes.includes(newRoute)) {
-                             state.stats.newRoutes.push(newRoute);
-                         }
-                     });
+                     unlock.unlocks.forEach(newRoute => unlockArea(newRoute));
                 }
             });
         }
 
-        // Ensure Casino spots and machines are unlocked
-        if (!state.stats.completedChallengeIds.includes('Casino')) {
-            state.stats.completedChallengeIds.push('Casino');
-        }
-        if (!state.stats.newRoutes.includes('Casino')) {
-            state.stats.newRoutes.push('Casino');
+        // Unlock from mapCoordinates
+        if (state.config.mapCoordinates) {
+            Object.values(state.config.mapCoordinates).forEach(coord => {
+                if (coord.name) unlockArea(coord.name);
+            });
         }
 
+        // Unlock from johtoMapCoordinates
+        if (state.config.johtoMapCoordinates) {
+            Object.values(state.config.johtoMapCoordinates).forEach(coord => {
+                if (coord.name) unlockArea(coord.name);
+            });
+        }
+
+        // Ensure Casino spots and machines are unlocked
+        unlockArea('Casino');
+
         // Ensure Daycare is unlocked
-        if (!state.stats.completedChallengeIds.includes('Daycare')) {
-            state.stats.completedChallengeIds.push('Daycare');
-        }
-        if (!state.stats.newRoutes.includes('Daycare')) {
-            state.stats.newRoutes.push('Daycare');
-        }
+        unlockArea('Daycare');
 
         // Complete all progress challenges.
         // This is primarily driven by activeChallenges and completedChallengeIds.

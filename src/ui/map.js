@@ -105,17 +105,17 @@ function generateMarkerHtml(locationId, locationName, coords, isUnlocked, hasNew
     `;
 }
 
-function generateRegionButtonsHtml(regions, hasUnlockedJohto) {
-    if (!hasUnlockedJohto) return '';
+function generateRegionButtonsHtml(unlockedRegions, allRegions) {
+    if (!unlockedRegions || unlockedRegions.length <= 1) return '';
 
     let exclamationHtml = !state.globalStats.hasSeenJohtoMap ? `<img src="Assets/Extra/ExclamationMark.png" style="position: absolute; top: -5px; right: -5px; width: 15px; height: auto; pointer-events: none; z-index: 10;">` : '';
 
-    let buttonsHtml = regions.map(r => {
-        let extra = r.name === 'Johto' ? exclamationHtml : '';
-        let style = window.currentMapRegion === r.name
+    let buttonsHtml = unlockedRegions.map(rName => {
+        let extra = rName === 'Johto' ? exclamationHtml : '';
+        let style = window.currentMapRegion === rName
             ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);'
             : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;';
-        return `<button onclick="window.switchMapRegion('${r.name}')" style="${style} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s; position: relative;" onmousedown="event.stopPropagation()">${r.name}${extra}</button>`;
+        return `<button onclick="window.switchMapRegion('${rName}')" style="${style} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s; position: relative;" onmousedown="event.stopPropagation()">${rName}${extra}</button>`;
     }).join('');
 
     return `
@@ -262,10 +262,9 @@ export function showMap() {
 
     let unlockedAreas = getUnlockedAreas();
 
-    let isFinalChallengeCompleted = checkFinalChallengeCompleted();
     const regions = [
         { name: 'Kanto', mapFile: '1 Kanto Map.png', width: 2571, height: 1818 },
-        { name: 'Johto', mapFile: '2 Johto Map.png', width: 1961, height: 1316 },
+        { name: 'Johto', mapFile: '2 Johto Map.png', width: 1500, height: 658 },
         { name: 'Hoenn', mapFile: '3 Hoenn Map.png', width: 1250, height: 884 },
         { name: 'Sinnoh', mapFile: '4 Sinnoh Map.png', width: 1024, height: 724 },
         { name: 'Unova', mapFile: '5 Unova Map.png', width: 1280, height: 837 },
@@ -276,10 +275,19 @@ export function showMap() {
         { name: 'Paldea', mapFile: '10 Paldea Map.png', width: 1280, height: 905 }
     ];
 
-    if (isFinalChallengeCompleted) { state.globalStats.hasSeenJohtoMap = true; }
-    let showRegionBar = isFinalChallengeCompleted || state.globalStats.hasSeenJohtoMap;
+    let unlockedRegions = [regions[0].name]; // Kanto is always unlocked
+    for (let i = 0; i < regions.length - 1; i++) {
+        if (checkFinalChallengeCompleted(regions[i].name)) {
+            unlockedRegions.push(regions[i + 1].name);
+        } else {
+            // Once a region hasn't been completed, we stop unlocking
+            break;
+        }
+    }
 
-    let regionButtonsHtml = generateRegionButtonsHtml(regions, showRegionBar);
+    if (unlockedRegions.includes('Johto')) { state.globalStats.hasSeenJohtoMap = true; }
+
+    let regionButtonsHtml = generateRegionButtonsHtml(unlockedRegions, regions);
 
     const currentRegionObj = regions.find(r => r.name === window.currentMapRegion) || regions[0];
     let mapImage = `./Assets/Map/${currentRegionObj.mapFile}`;
@@ -307,7 +315,7 @@ export function showMap() {
         const ar = currentRegionObj.width / currentRegionObj.height;
         const targetWidth = Math.min(1000, window.innerHeight * 0.8 * ar) + "px";
 
-        if (showRegionBar) {
+        if (unlockedRegions.length > 1 || state.globalStats.hasSeenJohtoMap) {
             window.showModal(titleHtml, html, 'window-map', targetWidth);
         } else {
             window.showModal('Map', html, 'window-map', targetWidth);
@@ -565,23 +573,51 @@ export function navigateToLocation(locationName) {
 
         let buttonHtml = '';
         if (gymConfig) {
-            let buttonText = lookupName === "Indigo Plateau" ? "Challange Elite 4 and Champion" : "Battle Gym";
+            let buttonText = lookupName === "Indigo Plateau" ? "Challenge" : "Battle Gym";
             buttonHtml = `<button onclick="window.startGymBattle('${lookupName}')" class="action-btn action-btn-primary" style="margin-top: 10px;">${buttonText}</button>`;
         }
 
+        let dynamicBgHtml = '';
+        if (gymConfig && state.config.gymAssets && state.config.gymAssets[gymConfig.leader]) {
+            const assetConfig = state.config.gymAssets[gymConfig.leader];
+            const spritePath = `./Assets/Gym/GymLeaders/${assetConfig.sprite}`;
+            const bgPath = `./Assets/Gym/BG/${assetConfig.background}`;
+
+            // Remove the static bgImg so it doesn't override the dynamic one
+            bgImg = "";
+
+            dynamicBgHtml = `
+                <div id="dynamic-gym-bg-ui" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; background-image: url('${bgPath}'); background-size: 100% 100%; overflow: hidden;">
+                    <img src="${spritePath}" style="
+                        position: absolute;
+                        left: ${assetConfig.position.rel_x * 100}%;
+                        top: ${assetConfig.position.rel_y * 100}%;
+                        width: ${(assetConfig.size.px_width / 1800) * 100}%;
+                        transform: rotate(${assetConfig.tilt.angle_deg}deg);
+                        transform-origin: ${assetConfig.tilt.origin};
+                        pointer-events: none;
+                    ">
+                </div>
+            `;
+        }
+
         vGym.innerHTML = `
-            <div style="background-color: rgba(0,0,0,0.8); display: flex; flex-direction: column; align-items: center; padding: 20px; border-radius: 8px; position: absolute; left: 15%; top: 50%; transform: translateY(-50%); min-width: 300px;">
-                <h2 id="gym-title-header">${locationName}</h2>
-                <div id="gym-content-area" style="position: relative; width: 100%; text-align: center; display: flex; flex-direction: column; gap: 10px; align-items: center;">
+            ${dynamicBgHtml}
+            <div style="background-color: rgba(0,0,0,0.8); display: flex; flex-direction: column; align-items: center; padding: 20px; border-radius: 8px; position: absolute; left: 15%; top: 50%; transform: translateY(-50%); min-width: 300px; z-index: 1;">
+                <h2 id="gym-title-header" style="margin-top: 0; color: white;">${locationName}</h2>
+                <div id="gym-content-area" style="position: relative; width: 100%; text-align: center; display: flex; flex-direction: column; gap: 10px; align-items: center; z-index: 2;">
                     ${buttonHtml}
                 </div>
             </div>
         `;
+
+        vGym.style.position = "relative";
+        vGym.style.height = "100%";
         if (bgImg) {
             vGym.style.backgroundImage = `url('./Assets/BG/${bgImg}')`;
             vGym.style.backgroundSize = "cover";
-            vGym.style.height = "100%";
-            vGym.style.position = "relative";
+        } else {
+            vGym.style.backgroundImage = "none";
         }
     } else {
         switchView("BATTLE_ARENA");

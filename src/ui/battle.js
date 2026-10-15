@@ -260,6 +260,12 @@ const SCROLLING_ROUTES = ["Viridian Forest"].concat(PLAINS_ROUTES, WATER_ROUTES,
 
 function updateBattleBackground(combatArena, state, battleSystem, inGymCombat, inMultiplayer) {
 
+    // Ensure we clean up dynamic gym background anytime we update backgrounds, except when handling gym combat explicitly
+    if (!inGymCombat) {
+        const existingDynamic = document.getElementById('dynamic-gym-bg-arena');
+        if (existingDynamic) existingDynamic.remove();
+    }
+
     if (inMultiplayer) {
         combatArena.style.backgroundImage = `url('./Assets/BG/BG-Cassino.jpg')`;
     } else if (inGymCombat) {
@@ -276,19 +282,59 @@ function updateBattleBackground(combatArena, state, battleSystem, inGymCombat, i
             const bgImage = trainerBGs[trainerIndex] || 'BG.png';
             combatArena.style.backgroundImage = `url('./Assets/BG/${bgImage}')`;
         } else {
-            const gymIndex = state.config.gyms.findIndex(g => g.name === gym.name);
-            const gymBGs = [
-                'BG-Gym-1-Pewter-Rock.png',
-                'BG-Gym-2-Cerulean-Water.png',
-                'BG-Gym-3-Vermilion-Electric.png',
-                'BG-Gym-4-Celadon-Grass.png',
-                'BG-Gym-5-Fuchsia-Poison.png',
-                'BG-Gym-6-Saffron-Psychic.png',
-                'BG-Gym-7-Cinnabar-Fire.png',
-                'BG-Gym-8-Viridian-Ground.png'
-            ];
-            const bgImage = gymBGs[gymIndex] || 'BG.png';
-            combatArena.style.backgroundImage = `url('./Assets/BG/${bgImage}')`;
+            // Remove previous dynamic gym bg if it exists
+            const existingDynamic = document.getElementById('dynamic-gym-bg-arena');
+            if (existingDynamic) {
+                existingDynamic.remove();
+            }
+
+            if (state.config.gymAssets && state.config.gymAssets[gym.leader]) {
+                const assetConfig = state.config.gymAssets[gym.leader];
+                const spritePath = `./Assets/Gym/GymLeaders/${assetConfig.sprite}`;
+                const bgPath = `./Assets/Gym/BG/${assetConfig.background}`;
+
+                const dynamicBg = document.createElement('div');
+                dynamicBg.id = 'dynamic-gym-bg-arena';
+                dynamicBg.style.position = 'absolute';
+                dynamicBg.style.top = '0';
+                dynamicBg.style.left = '0';
+                dynamicBg.style.width = '100%';
+                dynamicBg.style.height = '100%';
+                dynamicBg.style.zIndex = '0'; // Behind combat elements but above raw background
+                dynamicBg.style.backgroundImage = `url('${bgPath}')`;
+                dynamicBg.style.backgroundSize = '100% 100%';
+                dynamicBg.style.overflow = 'hidden';
+
+                dynamicBg.innerHTML = `
+                    <img src="${spritePath}" style="
+                        position: absolute;
+                        left: ${assetConfig.position.rel_x * 100}%;
+                        top: ${assetConfig.position.rel_y * 100}%;
+                        width: ${(assetConfig.size.px_width / 1800) * 100}%;
+                        transform: rotate(${assetConfig.tilt.angle_deg}deg);
+                        transform-origin: ${assetConfig.tilt.origin};
+                        pointer-events: none;
+                    ">
+                `;
+
+                combatArena.style.backgroundImage = 'none';
+                combatArena.style.position = 'relative'; // Ensure relative positioning
+                combatArena.insertBefore(dynamicBg, combatArena.firstChild);
+            } else {
+                const gymIndex = state.config.gyms.findIndex(g => g.name === gym.name);
+                const gymBGs = [
+                    'BG-Gym-1-Pewter-Rock.png',
+                    'BG-Gym-2-Cerulean-Water.png',
+                    'BG-Gym-3-Vermilion-Electric.png',
+                    'BG-Gym-4-Celadon-Grass.png',
+                    'BG-Gym-5-Fuchsia-Poison.png',
+                    'BG-Gym-6-Saffron-Psychic.png',
+                    'BG-Gym-7-Cinnabar-Fire.png',
+                    'BG-Gym-8-Viridian-Ground.png'
+                ];
+                const bgImage = gymBGs[gymIndex] || 'BG.png';
+                combatArena.style.backgroundImage = `url('./Assets/BG/${bgImage}')`;
+            }
         }
     } else if (state.currentRoute === 'Safari Zone') {
         combatArena.style.backgroundImage = `url('./Assets/BG/BG-SafariZone.png')`;

@@ -604,9 +604,9 @@ const gyms = [
     ]
   },
   {
-    "id": "elitefour1-lorelei",
-    "name": "Elite Four #1 - Lorelei",
-    "leader": "Lorelei",
+    "id": "indigoplateau",
+    "name": "Indigo Plateau",
+    "leader": "Champion",
     "levelRequirement": 0,
     "trainers": [
       {
@@ -633,15 +633,7 @@ const gyms = [
             "level": 96
           }
         ]
-      }
-    ]
-  },
-  {
-    "id": "elitefour2-bruno",
-    "name": "Elite Four #2 - Bruno",
-    "leader": "Bruno",
-    "levelRequirement": 0,
-    "trainers": [
+      },
       {
         "name": "Elite Four #2 - Bruno",
         "team": [
@@ -666,15 +658,7 @@ const gyms = [
             "level": 97
           }
         ]
-      }
-    ]
-  },
-  {
-    "id": "elitefour3-agatha",
-    "name": "Elite Four #3 - Agatha",
-    "leader": "Agatha",
-    "levelRequirement": 0,
-    "trainers": [
+      },
       {
         "name": "Elite Four #3 - Agatha",
         "team": [
@@ -699,15 +683,7 @@ const gyms = [
             "level": 98
           }
         ]
-      }
-    ]
-  },
-  {
-    "id": "elitefour4-lance",
-    "name": "Elite Four #4 - Lance",
-    "leader": "Lance",
-    "levelRequirement": 0,
-    "trainers": [
+      },
       {
         "name": "Elite Four #4 - Lance",
         "team": [
@@ -732,15 +708,7 @@ const gyms = [
             "level": 99
           }
         ]
-      }
-    ]
-  },
-  {
-    "id": "champion",
-    "name": "Champion",
-    "leader": "Champion",
-    "levelRequirement": 0,
-    "trainers": [
+      },
       {
         "name": "Champion",
         "team": [
