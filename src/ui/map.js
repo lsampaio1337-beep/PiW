@@ -235,18 +235,12 @@ function generateMarkersForRegion(region, unlockedAreas) {
             const locationName = locationData.name;
             const coords = locationData;
 
-            let isUnlocked = unlockedAreas.has(locationName);
-            if (!isUnlocked) continue;
-
             html += generateMarkerHtml(locationId, locationName, coords, true, false, false);
         }
     } else if (region === 'Hoenn') {
         for (const [locationId, locationData] of Object.entries(state.config.hoennMapCoordinates || {})) {
             const locationName = locationData.name;
             const coords = locationData;
-
-            let isUnlocked = unlockedAreas.has(locationName);
-            if (!isUnlocked) continue;
 
             let hasNewNotification = false;
             let showCheckmark = false;
@@ -320,8 +314,8 @@ export function showMap() {
         { name: 'Paldea', mapFile: '10 Paldea Map.png', width: 1280, height: 905 }
     ];
 
-    let unlockedRegions = [regions[0].name]; // Kanto is always unlocked
-    for (let i = 0; i < regions.length - 1; i++) {
+    let unlockedRegions = [regions[0].name, regions[1].name, regions[2].name, regions[3].name, regions[4].name]; // Kanto through Unova are always unlocked
+    for (let i = 4; i < regions.length - 1; i++) {
         if (checkFinalChallengeCompleted(regions[i].name)) {
             unlockedRegions.push(regions[i + 1].name);
         } else {
