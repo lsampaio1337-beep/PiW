@@ -38,8 +38,8 @@ export function setupGlobalEventListeners() {
                 topBarWindow.dataset.originalWidth = topBarWindow.style.width;
                 topBarWindow.dataset.originalHeight = topBarWindow.style.height;
                 contentContainer.style.display = 'none';
-                topBarWindow.style.width = '200px'; // Minimal width for title + buttons
-                topBarWindow.style.minWidth = '200px'; // Enforce minimum width
+                topBarWindow.style.width = '250px'; // Minimal width for title + buttons
+                topBarWindow.style.minWidth = '250px'; // Enforce minimum width
                 topBarWindow.style.minHeight = '0';
                 topBarWindow.style.height = 'auto'; // Only display title
                 if (header) header.style.textAlign = 'left'; // Left align title
