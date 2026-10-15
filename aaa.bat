@@ -33,7 +33,7 @@ echo Please wait while the game installs dependencies and starts up...
 
 REM Install dependencies
 echo [1/2] Installing dependencies...
-call npm install --ignore-scripts --no-audit --no-fund
+call npm install --no-audit --no-fund
 if %ERRORLEVEL% neq 0 (
     echo.
     echo [ERROR] Failed to install dependencies.
