@@ -618,6 +618,14 @@ export function navigateToLocation(locationName) {
             lookupName = "Indigo Plateau"; // Correct spelling for the gyms config
         }
 
+        // Redirect to Johto rematches if in Johto region
+        if (window.currentMapRegion === 'Johto') {
+            const kantoGyms = ["Pewter Gym", "Cerulean Gym", "Vermilion Gym", "Celadon Gym", "Fuchsia Gym", "Saffron Gym", "Cinnabar Gym", "Viridian Gym", "Indigo Plateau"];
+            if (kantoGyms.includes(lookupName)) {
+                lookupName = "Johto " + lookupName;
+            }
+        }
+
         const vGym = document.getElementById("view-gym");
         const gymConfig = state.config.gyms.find(g => g.name === lookupName);
 
@@ -628,7 +636,7 @@ export function navigateToLocation(locationName) {
 
         let buttonHtml = '';
         if (gymConfig) {
-            let buttonText = lookupName === "Indigo Plateau" ? "Challenge" : "Battle Gym";
+            let buttonText = lookupName.includes("Indigo Plateau") ? "Challenge" : "Battle Gym";
             buttonHtml = `<button onclick="window.startGymBattle('${lookupName}')" class="action-btn action-btn-primary" style="margin-top: 10px;">${buttonText}</button>`;
         }
 
@@ -719,6 +727,13 @@ export function showMapTooltip(e, locationName) {
     // Fetch info to show on tooltip
     if (locationName.includes("Gym") || locationName === "Indigo Plateau") {
         let lookupName = locationName;
+
+        if (window.currentMapRegion === 'Johto') {
+            const kantoGyms = ["Pewter Gym", "Cerulean Gym", "Vermilion Gym", "Celadon Gym", "Fuchsia Gym", "Saffron Gym", "Cinnabar Gym", "Viridian Gym", "Indigo Plateau"];
+            if (kantoGyms.includes(lookupName)) {
+                lookupName = "Johto " + lookupName;
+            }
+        }
 
         if (state.config.gyms) {
             const gym = state.config.gyms.find(g => g.name === lookupName);
