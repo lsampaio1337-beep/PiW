@@ -181,6 +181,7 @@ function getUnlockedAreas() {
     }
 
     unlockedAreas.add("PokeCenter & PokeMarket");
+    unlockedAreas.add("Daycare");
 
     if (targetStats.completed150Challenge) {
         unlockedAreas.add("Mythical and Legendaries");
@@ -233,6 +234,8 @@ function generateMarkersForRegion(region, unlockedAreas) {
     } else if (region === 'Johto') {
         for (const [locationId, locationData] of Object.entries(state.config.johtoMapCoordinates || {})) {
             const locationName = locationData.name;
+            let isUnlocked = unlockedAreas.has(locationName);
+            if (!isUnlocked) continue;
             const coords = locationData;
 
             html += generateMarkerHtml(locationId, locationName, coords, true, false, false);
@@ -240,6 +243,8 @@ function generateMarkersForRegion(region, unlockedAreas) {
     } else if (region === 'Hoenn') {
         for (const [locationId, locationData] of Object.entries(state.config.hoennMapCoordinates || {})) {
             const locationName = locationData.name;
+            let isUnlocked = unlockedAreas.has(locationName);
+            if (!isUnlocked) continue;
             const coords = locationData;
 
             let hasNewNotification = false;
