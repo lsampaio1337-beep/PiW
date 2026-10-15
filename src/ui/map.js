@@ -565,7 +565,7 @@ export function navigateToLocation(locationName) {
 
         let buttonHtml = '';
         if (gymConfig) {
-            let buttonText = lookupName === "Indigo Plateau" ? "Challange Elite 4 and Champion" : "Battle Gym";
+            let buttonText = lookupName === "Indigo Plateau" ? "Challenge" : "Battle Gym";
             buttonHtml = `<button onclick="window.startGymBattle('${lookupName}')" class="action-btn action-btn-primary" style="margin-top: 10px;">${buttonText}</button>`;
         }
 
