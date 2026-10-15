@@ -29,7 +29,13 @@ export function setupGlobalEventListeners() {
 
             if (isMinimized) {
                 // Restore
-                contentContainer.style.display = '';
+                // Instead of clearing display, properly restore it to the original layout block type
+                // We can fetch from a saved dataset or fallback to flex.
+                if (contentContainer.dataset.originalDisplay) {
+                    contentContainer.style.display = contentContainer.dataset.originalDisplay;
+                } else {
+                    contentContainer.style.removeProperty('display');
+                }
                 topBarWindow.style.width = topBarWindow.dataset.originalWidth || 'auto';
                 topBarWindow.style.minWidth = '0'; // Restore min-width
                 topBarWindow.style.minHeight = '';
@@ -49,11 +55,19 @@ export function setupGlobalEventListeners() {
                     titleSpan.style.whiteSpace = 'normal';
                     titleSpan.style.marginRight = '0';
                 }
-                if (window.windowManager) window.windowManager._constrainAllWindows();
+                if (window.windowManager) {
+                    window.windowManager._constrainAllWindows();
+                }
+
+                // Trigger native resize to safely update content scaling without overriding explicit user-set dimensions
+                requestAnimationFrame(() => {
+                    window.dispatchEvent(new Event("resize"));
+                });
             } else {
                 // Minimize
                 topBarWindow.dataset.originalWidth = topBarWindow.style.width;
                 topBarWindow.dataset.originalHeight = topBarWindow.style.height;
+                contentContainer.dataset.originalDisplay = contentContainer.style.display;
                 contentContainer.style.display = 'none';
                 topBarWindow.style.width = 'max-content'; // Auto adjust to content
                 topBarWindow.style.minWidth = 'max-content'; // Enforce minimum width
