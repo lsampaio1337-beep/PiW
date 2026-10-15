@@ -242,7 +242,9 @@ function setupMapWindowDimensions(currentRegionObj, targetWidth) {
             const header = winEl.querySelector('.window-header');
             const headerH = header ? header.offsetHeight : 30;
             const widthVal = parseFloat(targetWidth);
-            const targetHeight = (widthVal / (currentRegionObj.width / currentRegionObj.height)) + headerH;
+            const ratio = currentRegionObj.width / currentRegionObj.height;
+            window.windowManager.setWindowProportions('window-map', ratio);
+            const targetHeight = (widthVal / ratio) + headerH;
             winEl.style.height = targetHeight + 'px';
             const scaler = winEl.querySelector('.window-content-scaler');
             if (scaler) {
