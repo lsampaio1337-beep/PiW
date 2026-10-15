@@ -305,8 +305,8 @@ window.completeChallenge = function(targetAreaId) {
     if (!state.stats.activeChallenges.includes(targetAreaId)) return;
 
     let unlock = null;
-    if (state.config.unlocks) {
-        unlock = state.config.unlocks.find(u => u.areaId === targetAreaId);
+    if (window.getCurrentUnlocks()) {
+        unlock = window.getCurrentUnlocks().find(u => u.areaId === targetAreaId);
     }
 
     if (unlock) {
@@ -423,7 +423,7 @@ window.cheatProgressChallenge = function(targetAreaId) {
     }
     if (!targetAreaId && state.stats.activeChallenges && state.stats.activeChallenges.length > 0) targetAreaId = state.stats.activeChallenges[0];
     if (!targetAreaId) return;
-    let unlock = state.config.unlocks.find(u => u.areaId === targetAreaId);
+    let unlock = window.getCurrentUnlocks().find(u => u.areaId === targetAreaId);
     if (!unlock) return;
 
     let req = unlock.requirements;
@@ -526,14 +526,14 @@ window.cheatProgressChallenge = function(targetAreaId) {
 window.showChallengesModal = function() {
     const extraChallengeAreas = ['Casino', 'Small Fishing Spot', 'Fighting Dojo', 'Big Fishing Spot', 'Fossil Revival Lab', 'Trade With Friends Hub', 'Power Plant', 'Seafoam Islands', 'Victory Road', 'Cerulean Cave'];
 
-    if (!state.config.unlocks) return;
+    if (!window.getCurrentUnlocks()) return;
 
     let html = `<div id="challenges-content-wrapper" class="content-panel" style="display:flex; flex-direction:column; gap:15px; text-align:left;">`;
 
     // Active Challenges Sector
     let activeChallengesCount = state.stats.activeChallenges ? state.stats.activeChallenges.length : 0;
     let completedChallengesCount = state.stats.completedChallengeIds ?
-        (state.config.unlocks ? state.stats.completedChallengeIds.filter(id => state.config.unlocks.some(u => u.areaId === id)).length : state.stats.completedChallengeIds.length)
+        (window.getCurrentUnlocks() ? state.stats.completedChallengeIds.filter(id => window.getCurrentUnlocks().some(u => u.areaId === id)).length : state.stats.completedChallengeIds.length)
         : 0;
     let totalChallengesCount = activeChallengesCount + completedChallengesCount;
 
@@ -585,7 +585,7 @@ window.showChallengesModal = function() {
 
     if (activeChallengesCount > 0) {
         for (let activeId of state.stats.activeChallenges) {
-            let unlock = state.config.unlocks.find(u => u.areaId === activeId);
+            let unlock = window.getCurrentUnlocks().find(u => u.areaId === activeId);
             if (!unlock) continue;
 
             let cData = getChallengeData(unlock);
@@ -625,10 +625,10 @@ window.showChallengesModal = function() {
 
     // Past Challenges Sector
     let completedCount = state.stats.completedChallengeIds ?
-        (state.config.unlocks ? state.stats.completedChallengeIds.filter(id => state.config.unlocks.some(u => u.areaId === id)).length : state.stats.completedChallengeIds.length)
+        (window.getCurrentUnlocks() ? state.stats.completedChallengeIds.filter(id => window.getCurrentUnlocks().some(u => u.areaId === id)).length : state.stats.completedChallengeIds.length)
         : 0;
     let actualCompletedIds = state.stats.completedChallengeIds ?
-        (state.config.unlocks ? state.stats.completedChallengeIds.filter(id => state.config.unlocks.some(u => u.areaId === id)) : state.stats.completedChallengeIds)
+        (window.getCurrentUnlocks() ? state.stats.completedChallengeIds.filter(id => window.getCurrentUnlocks().some(u => u.areaId === id)) : state.stats.completedChallengeIds)
         : [];
 
     if (state.stats.completed150Challenge) completedCount++;
@@ -653,7 +653,7 @@ window.showChallengesModal = function() {
 
         for (let i = actualCompletedIds.length - 1; i >= 0; i--) {
              let completedId = actualCompletedIds[i];
-             let pUnlock = state.config.unlocks.find(u => u.areaId === completedId);
+             let pUnlock = window.getCurrentUnlocks().find(u => u.areaId === completedId);
              if (!pUnlock) continue;
 
              let isExtra = extraChallengeAreas.includes(pUnlock.areaId);
@@ -1354,6 +1354,13 @@ async function loadConfigs() {
     state.config.routes = routes;
     const unlocksModule = await import('../config/routes.js');
     state.config.unlocks = unlocksModule.unlocks;
+    try {
+        const johtoModule = await import('../config/johtoRoutes.js');
+        state.config.johtoRoutes = johtoModule.johtoRoutes;
+        state.config.johtoUnlocks = johtoModule.johtoUnlocks;
+    } catch (e) {
+        console.warn("Failed to load johto routes");
+    }
     state.config.gyms = gyms;
     state.config.gymAssets = gymAssets;
     state.config.balance = balance;
@@ -1848,15 +1855,15 @@ async function init() {
 
             // Get last route unlocked
             let lastRoute = "None";
-            if (pData.stats && pData.stats.completedChallenges !== undefined && state.config.unlocks) {
-                const unlocksLength = state.config.unlocks.length;
+            if (pData.stats && pData.stats.completedChallenges !== undefined && window.getCurrentUnlocks()) {
+                const unlocksLength = window.getCurrentUnlocks().length;
                 let cIndex = pData.stats.completedChallenges;
                 // Cap to max
                 if (cIndex > unlocksLength) cIndex = unlocksLength;
 
                 // Get the reward from the LAST completed challenge
                 if (cIndex > 0) {
-                    let pUnlock = state.config.unlocks[cIndex - 1];
+                    let pUnlock = window.getCurrentUnlocks()[cIndex - 1];
                     lastRoute = pUnlock.unlocks ? pUnlock.unlocks.join(" + ") : "Next Area";
                     if (pUnlock.areaId === "Fossil Revival Lab") lastRoute += " + Multiplayer Mode";
                 }
@@ -1999,10 +2006,10 @@ async function init() {
 
                     // Complete challenge arrays mapping for older saves
                     if (state.stats.completedChallenges > 0 && state.stats.completedChallengeIds && state.stats.completedChallengeIds.length === 0) {
-                        if (state.config.unlocks) {
-                            let maxIndex = Math.min(state.stats.completedChallenges, state.config.unlocks.length);
+                        if (window.getCurrentUnlocks()) {
+                            let maxIndex = Math.min(state.stats.completedChallenges, window.getCurrentUnlocks().length);
                             for (let i = 0; i < maxIndex; i++) {
-                                let unlock = state.config.unlocks[i];
+                                let unlock = window.getCurrentUnlocks()[i];
                                 state.stats.completedChallengeIds.push(unlock.areaId);
 
                                 // Emulate the unlock logic to find the active challenges at that point
@@ -2473,9 +2480,9 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
             const whiteCandiesClaimed = state.stats.whiteCandies || 0;
 
             let challengesCompleted = state.stats.completedChallengeIds ?
-                (state.config.unlocks ? state.stats.completedChallengeIds.filter(id => state.config.unlocks.some(u => u.areaId === id)).length : state.stats.completedChallengeIds.length)
+                (window.getCurrentUnlocks() ? state.stats.completedChallengeIds.filter(id => window.getCurrentUnlocks().some(u => u.areaId === id)).length : state.stats.completedChallengeIds.length)
                 : 0;
-            let maxChallenges = state.config.unlocks ? state.config.unlocks.length : 45;
+            let maxChallenges = window.getCurrentUnlocks() ? window.getCurrentUnlocks().length : 45;
 
             let assignmentsCompleted = 0;
             assignmentsCompleted += (state.stats.qTaskTier || 0);

@@ -840,7 +840,7 @@ class BattleSystem {
             this.state.nextForcedEncounter = null;
         } else {
             // Find route spawns based on state.currentRoute
-            const route = this.state.config.routes.find(r => r.name === this.state.currentRoute);
+            const route = window.getCurrentRoutes().find(r => r.name === this.state.currentRoute);
             if (!route) return;
 
             const rand = Math.random();
@@ -1640,12 +1640,12 @@ class BattleSystem {
 
     checkRouteUnlocks() {
         // Evaluate active challenge defeat trackers
-        if (!this.state.config || !this.state.config.unlocks) return;
+        if (!this.state.config || !window.getCurrentUnlocks()) return;
         if (!this.state.stats.activeChallenges || this.state.stats.activeChallenges.length === 0) return;
 
         if (!this._unlocksCache) {
             this._unlocksCache = new Map();
-            for (let u of this.state.config.unlocks) {
+            for (let u of window.getCurrentUnlocks()) {
                 this._unlocksCache.set(u.areaId, u);
             }
         }
@@ -1922,7 +1922,7 @@ class BattleSystem {
         // Ensure we don't simulate too many frames and hang the browser if time is huge
         // Limit to approx max of 111h of simulation steps, but it evaluates fast
         const maxTime = Math.min(elapsedMs, 111 * 60 * 60 * 1000);
-        const route = this.state.config.routes.find(r => r.name === this.state.currentRoute);
+        const route = window.getCurrentRoutes().find(r => r.name === this.state.currentRoute);
 
         if (!route && this.state.currentRoute !== "Casino - Eeveelutions" && !this.state.currentRoute.startsWith("Casino")) {
             return results; // Can't farm without a route

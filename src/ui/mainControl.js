@@ -268,9 +268,9 @@ export function updateMainControl() {
     const challengesNotification = document.getElementById('challenges-notification');
     if (challengesNotification) {
         let anyMet = false;
-        if (state.config && state.config.unlocks && state.stats.activeChallenges) {
+        if (state.config && window.getCurrentUnlocks() && state.stats.activeChallenges) {
             for (let activeId of state.stats.activeChallenges) {
-                let unlock = state.config.unlocks.find(u => u.areaId === activeId);
+                let unlock = window.getCurrentUnlocks().find(u => u.areaId === activeId);
                 if (unlock) {
                     let cData = getChallengeData(unlock);
                     if (cData.isMet) {
@@ -316,7 +316,7 @@ export function getChallengeText() {
     // If only one, provide basic info
     if (activeCount === 1) {
         let activeId = state.stats.activeChallenges[0];
-        let unlock = state.config.unlocks.find(u => u.areaId === activeId);
+        let unlock = window.getCurrentUnlocks().find(u => u.areaId === activeId);
         if (unlock) {
             let unlocks = "Unlocks: " + (unlock.unlocks ? unlock.unlocks.join(' + ') : "Next Area");
             if (activeId === "Fossil Revival Lab") unlocks += " + Multiplayer Mode";

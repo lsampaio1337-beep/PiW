@@ -225,14 +225,23 @@ export function cheatAction(action) {
         };
 
         // Unlock all maps from routes
-        if (state.config.routes) {
-            state.config.routes.forEach(route => unlockArea(route.name));
+        if (window.getCurrentRoutes()) {
+            window.getCurrentRoutes().forEach(route => {
+                if (!state.stats.completedChallengeIds.includes(route.name)) {
+                    state.stats.completedChallengeIds.push(route.name);
+                }
+                if (!state.stats.newRoutes.includes(route.name)) {
+                    state.stats.newRoutes.push(route.name);
+                }
+            });
         }
 
         // Unlock all unlocks from config
-        if (state.config.unlocks) {
-            state.config.unlocks.forEach(unlock => {
-                unlockArea(unlock.areaId);
+        if (window.getCurrentUnlocks()) {
+            window.getCurrentUnlocks().forEach(unlock => {
+                if (!state.stats.completedChallengeIds.includes(unlock.areaId)) {
+                    state.stats.completedChallengeIds.push(unlock.areaId);
+                }
                 if (unlock.unlocks) {
                      unlock.unlocks.forEach(newRoute => unlockArea(newRoute));
                 }

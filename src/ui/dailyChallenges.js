@@ -51,15 +51,15 @@ const CHALLENGE_DEFS = {
         { id: 1, text: "The Rival: Defeat $ Pokémon with the same (or higher) level as your Pokémon.", getTarget: () => 10, type: 'defeat_level' },
         { id: 2, text: "Type Master: Defeat $ {extra} Pokémon.", getTarget: () => 10 + ((state.stats.completedChallengeIds ? state.stats.completedChallengeIds.length : 0) * 2), type: 'defeat_type', getExtra: () => {
             let availableTypes = new Set();
-            if (state.config && state.config.routes && state.stats.completedChallengeIds) {
+            if (state.config && window.getCurrentRoutes() && state.stats.completedChallengeIds) {
 
                 let unlockedAreas = new Set();
                 state.stats.completedChallengeIds.forEach(id => {
                     parseAreaNames(id).forEach(area => unlockedAreas.add(area));
                 });
 
-                if (state.config.unlocks) {
-                    for (let unlock of state.config.unlocks) {
+                if (window.getCurrentUnlocks()) {
+                    for (let unlock of window.getCurrentUnlocks()) {
                         if (state.stats.completedChallengeIds.includes(unlock.areaId)) {
                             unlock.unlocks.forEach(u => parseAreaNames(u).forEach(a => unlockedAreas.add(a)));
                         }
@@ -69,7 +69,7 @@ const CHALLENGE_DEFS = {
                 unlockedAreas.add('Route 1');
 
                 for (let area of unlockedAreas) {
-                    let route = state.config.routes.find(r => r.name === area);
+                    let route = window.getCurrentRoutes().find(r => r.name === area);
                     if (route && route.spawns) {
                         for (let s of route.spawns) {
                             let pData = state.config.pokemonData.find(pd => pd.id === s.pokemonId);
@@ -84,14 +84,14 @@ const CHALLENGE_DEFS = {
         } },
         { id: 31, text: "Species Master: Defeat $ {extra}.", getTarget: () => 10 + ((state.stats.completedChallengeIds ? state.stats.completedChallengeIds.length : 0) * 2), type: 'defeat_species', getExtra: () => {
             let availableSpecies = new Set();
-            if (state.config && state.config.routes && state.stats.completedChallengeIds) {
+            if (state.config && window.getCurrentRoutes() && state.stats.completedChallengeIds) {
                 let unlockedAreas = new Set();
                 state.stats.completedChallengeIds.forEach(id => {
                     parseAreaNames(id).forEach(area => unlockedAreas.add(area));
                 });
 
-                if (state.config.unlocks) {
-                    for (let unlock of state.config.unlocks) {
+                if (window.getCurrentUnlocks()) {
+                    for (let unlock of window.getCurrentUnlocks()) {
                         if (state.stats.completedChallengeIds.includes(unlock.areaId)) {
                             unlock.unlocks.forEach(u => parseAreaNames(u).forEach(a => unlockedAreas.add(a)));
                         }
@@ -101,7 +101,7 @@ const CHALLENGE_DEFS = {
                 unlockedAreas.add('Route 1');
 
                 for (let area of unlockedAreas) {
-                    let route = state.config.routes.find(r => r.name === area);
+                    let route = window.getCurrentRoutes().find(r => r.name === area);
                     if (route && route.spawns) {
                         for (let s of route.spawns) {
                             availableSpecies.add(s.pokemonId);
@@ -144,15 +144,15 @@ const CHALLENGE_DEFS = {
         } },
         { id: 14, text: "Type Enthusiast: Catch $ {extra} Pokémon.", getTarget: () => 5 + (state.trainer.badges * 2), type: 'catch_type', getExtra: () => {
             let availableTypes = new Set();
-            if (state.config && state.config.routes && state.stats.completedChallengeIds) {
+            if (state.config && window.getCurrentRoutes() && state.stats.completedChallengeIds) {
 
                 let unlockedAreas = new Set();
                 state.stats.completedChallengeIds.forEach(id => {
                     parseAreaNames(id).forEach(area => unlockedAreas.add(area));
                 });
 
-                if (state.config.unlocks) {
-                    for (let unlock of state.config.unlocks) {
+                if (window.getCurrentUnlocks()) {
+                    for (let unlock of window.getCurrentUnlocks()) {
                         if (state.stats.completedChallengeIds.includes(unlock.areaId)) {
                             unlock.unlocks.forEach(u => parseAreaNames(u).forEach(a => unlockedAreas.add(a)));
                         }
@@ -162,7 +162,7 @@ const CHALLENGE_DEFS = {
                 unlockedAreas.add('Route 1');
 
                 for (let area of unlockedAreas) {
-                    let route = state.config.routes.find(r => r.name === area);
+                    let route = window.getCurrentRoutes().find(r => r.name === area);
                     if (route && route.spawns) {
                         for (let s of route.spawns) {
                             let pData = state.config.pokemonData.find(pd => pd.id === s.pokemonId);
