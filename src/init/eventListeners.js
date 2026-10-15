@@ -22,11 +22,6 @@ export function setupGlobalEventListeners() {
 
             const isMinimized = contentContainer.style.display === 'none';
 
-            const header = document.getElementById('main-control-header');
-
-            const buttonContainer = header ? header.querySelector('div') : null;
-            const titleSpan = header ? header.querySelector('#main-control-title') : null;
-
             if (isMinimized) {
                 // Restore
                 // Instead of clearing display, properly restore it to the original layout block type
@@ -36,25 +31,8 @@ export function setupGlobalEventListeners() {
                 } else {
                     contentContainer.style.removeProperty('display');
                 }
-                topBarWindow.style.width = topBarWindow.dataset.originalWidth || 'auto';
-                topBarWindow.style.minWidth = '0'; // Restore min-width
                 topBarWindow.style.minHeight = '';
                 if (topBarWindow.dataset.originalHeight) topBarWindow.style.height = topBarWindow.dataset.originalHeight;
-                if (header) {
-                    header.style.textAlign = ''; // Restore to default center
-                    header.style.display = 'block'; // Restore default block display
-                    header.style.justifyContent = '';
-                    header.style.alignItems = '';
-                }
-                if (buttonContainer) {
-                    buttonContainer.style.position = 'absolute';
-                    buttonContainer.style.right = '5px';
-                    buttonContainer.style.top = '5px';
-                }
-                if (titleSpan) {
-                    titleSpan.style.whiteSpace = 'normal';
-                    titleSpan.style.marginRight = '0';
-                }
                 if (window.windowManager) {
                     window.windowManager._constrainAllWindows();
                 }
@@ -65,28 +43,11 @@ export function setupGlobalEventListeners() {
                 });
             } else {
                 // Minimize
-                topBarWindow.dataset.originalWidth = topBarWindow.style.width;
                 topBarWindow.dataset.originalHeight = topBarWindow.style.height;
                 contentContainer.dataset.originalDisplay = contentContainer.style.display;
                 contentContainer.style.display = 'none';
-                topBarWindow.style.width = 'max-content'; // Auto adjust to content
-                topBarWindow.style.minWidth = 'max-content'; // Enforce minimum width
                 topBarWindow.style.minHeight = '0';
                 topBarWindow.style.height = 'auto'; // Only display title
-
-                if (header) {
-                    header.style.textAlign = 'left'; // Left align title
-                    header.style.display = 'flex';
-                    header.style.justifyContent = 'space-between';
-                    header.style.alignItems = 'center';
-                }
-                if (buttonContainer) {
-                    buttonContainer.style.position = 'static';
-                }
-                if (titleSpan) {
-                    titleSpan.style.whiteSpace = 'nowrap';
-                    titleSpan.style.marginRight = '10px';
-                }
             }
         });
     }
