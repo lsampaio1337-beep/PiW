@@ -279,13 +279,9 @@ export function showMap() {
     ];
 
     let unlockedRegions = [regions[0].name]; // Kanto is always unlocked
-    for (let i = 0; i < regions.length - 1; i++) {
-        if (checkFinalChallengeCompleted(regions[i].name)) {
-            unlockedRegions.push(regions[i + 1].name);
-        } else {
-            // Once a region hasn't been completed, we stop unlocking
-            break;
-        }
+
+    if (checkFinalChallengeCompleted('Kanto')) {
+        unlockedRegions.push('Johto', 'Hoenn', 'Sinnoh', 'Unova');
     }
 
     if (unlockedRegions.includes('Johto')) { state.globalStats.hasSeenJohtoMap = true; }
