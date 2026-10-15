@@ -220,7 +220,15 @@ export class WindowManager {
 
 
         winElement.adjustHeightForNewContent = () => {
-            if (winElement.id === 'window-map') return;
+            if (winElement.id === 'window-map') {
+                if (winElement._mapAspectRatio) {
+                    const currentWidth = winElement.offsetWidth || parseInt(winElement.style.width) || 800;
+                    const headerH = headerElement ? headerElement.offsetHeight : 0;
+                    const targetHeight = (currentWidth / winElement._mapAspectRatio) + headerH;
+                    winElement.style.height = targetHeight + 'px';
+                }
+                return;
+            }
 
             if (!winElement._originalWidth) {
                 initDims();
@@ -378,7 +386,16 @@ export class WindowManager {
             const dx = e.clientX - startX;
             let newWidth = Math.max(200, startWidth + dx); // minimum width 200px
 
-            if (winElement._originalWidth && winElement._originalRatio) {
+            if (winElement.id === 'window-map' && winElement._mapAspectRatio) {
+                const headerH = headerElement ? headerElement.offsetHeight : 0;
+                let maxWFromHeight = (this.containerHeight - headerH) * winElement._mapAspectRatio;
+                let maxW = Math.min(this.containerWidth, maxWFromHeight);
+                if (newWidth > maxW) newWidth = maxW;
+
+                const targetHeight = (newWidth / winElement._mapAspectRatio) + headerH;
+                winElement.style.width = newWidth + 'px';
+                winElement.style.height = targetHeight + 'px';
+            } else if (winElement._originalWidth && winElement._originalRatio) {
                 const headerH = headerElement ? headerElement.offsetHeight : 0;
 
                 let contentContainer = winElement.querySelector('.window-content-container');

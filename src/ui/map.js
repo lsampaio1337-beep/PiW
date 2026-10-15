@@ -242,12 +242,15 @@ function setupMapWindowDimensions(currentRegionObj, targetWidth) {
             const header = winEl.querySelector('.window-header');
             const headerH = header ? header.offsetHeight : 30;
             const widthVal = parseFloat(targetWidth);
-            const targetHeight = (widthVal / (currentRegionObj.width / currentRegionObj.height)) + headerH;
+            const aspectRatio = currentRegionObj.width / currentRegionObj.height;
+            const targetHeight = (widthVal / aspectRatio) + headerH;
             winEl.style.height = targetHeight + 'px';
+            winEl._mapAspectRatio = aspectRatio;
             const scaler = winEl.querySelector('.window-content-scaler');
             if (scaler) {
                 scaler.style.height = '100%';
                 scaler.style.width = '100%';
+                scaler.style.transform = 'none';
             }
         }
     }
