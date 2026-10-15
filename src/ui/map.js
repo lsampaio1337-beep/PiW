@@ -198,6 +198,10 @@ function getUnlockedAreas() {
 
     unlockedAreas.add("PokeCenter & PokeMarket");
 
+    if (window.currentMapRegion === "Johto") {
+        unlockedAreas.add("Daycare");
+    }
+
     if (targetStats.completed150Challenge) {
         unlockedAreas.add("Mythical and Legendaries");
     }
