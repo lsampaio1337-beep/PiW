@@ -68,6 +68,22 @@ function generateMarkerHtml(locationId, locationName, coords, isUnlocked, hasNew
         markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Johto', 7)}`;
     } else if (locationId === 'blackthorn_gym') {
         markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Johto', 8)}`;
+    } else if (locationId === 'rustboro_gym') {
+        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Hoenn', 1)}`;
+    } else if (locationId === 'dewford_gym') {
+        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Hoenn', 2)}`;
+    } else if (locationId === 'mauville_gym') {
+        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Hoenn', 3)}`;
+    } else if (locationId === 'lavaridge_gym') {
+        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Hoenn', 4)}`;
+    } else if (locationId === 'petalburg_gym') {
+        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Hoenn', 5)}`;
+    } else if (locationId === 'fortree_gym') {
+        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Hoenn', 6)}`;
+    } else if (locationId === 'mossdeep_gym') {
+        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Hoenn', 7)}`;
+    } else if (locationId === 'sootopolis_gym') {
+        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Hoenn', 8)}`;
     } else if (locationId === 'pewter_gym') {
         markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Kanto', 1)}`;
     } else if (locationId === 'cerulean_gym') {
