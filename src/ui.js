@@ -532,10 +532,6 @@ window.showChallengesModal = function() {
 
     // Active Challenges Sector
     let activeChallengesCount = state.stats.activeChallenges ? state.stats.activeChallenges.length : 0;
-    let completedChallengesCount = state.stats.completedChallengeIds ?
-        (window.getCurrentUnlocks() ? state.stats.completedChallengeIds.filter(id => window.getCurrentUnlocks().some(u => u.areaId === id)).length : state.stats.completedChallengeIds.length)
-        : 0;
-    let totalChallengesCount = activeChallengesCount + completedChallengesCount;
 
     html += `<div style="border: 1px solid #555; padding: 10px; border-radius: 5px; background-color: rgba(0,0,0,0.5);">
                 <h3 style="margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; font-size: 16px;">${activeChallengesCount > 1 ? 'Active Challenges' : 'Active Challenge'}</h3>
