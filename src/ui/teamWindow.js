@@ -1,3 +1,4 @@
+import { escapeHtml } from "../utils/escape.js";
 import { state } from '../state.js';
 import * as mathEngine from "../mathEngine.js";
 
@@ -74,7 +75,7 @@ export function updateTeamWindow() {
                     <!-- Top Floor: Name/Level and Buttons -->
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <div style="line-height: 1; display: flex; align-items: baseline; gap: 4px;">
-                            <span style="font-weight: bold; font-size: 12px; text-shadow: 1px 1px 1px rgba(0,0,0,0.8); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${p.name}</span>
+                            <span style="font-weight: bold; font-size: 12px; text-shadow: 1px 1px 1px rgba(0,0,0,0.8); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${escapeHtml(p.name)}</span>
                             <span style="font-size: 10px; text-shadow: 1px 1px 1px rgba(0,0,0,0.8);">Lv.${p.level}</span>
                         </div>
                         <div style="display: flex; align-items: center; gap: 4px; pointer-events: auto; position: relative; z-index: 10;">
@@ -210,7 +211,7 @@ function renderDayCareSlot(container, p, battles, maxBattles, type) {
                 <!-- Top Floor: Name/Level -->
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <div style="line-height: 1; display: flex; align-items: baseline; gap: 4px;">
-                        <span style="font-weight: bold; font-size: 12px; text-shadow: 1px 1px 1px rgba(0,0,0,0.8); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${p.name}</span>
+                        <span style="font-weight: bold; font-size: 12px; text-shadow: 1px 1px 1px rgba(0,0,0,0.8); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${escapeHtml(p.name)}</span>
                         <span style="font-size: 10px; text-shadow: 1px 1px 1px rgba(0,0,0,0.8);">Lv.${p.level}</span>
                     </div>
                     <div style="display: flex; align-items: center; gap: 4px; pointer-events: auto; position: relative; z-index: 10;">
