@@ -1309,7 +1309,7 @@ export function switchView(viewName) {
         if (window.windowManager) window.windowManager.setWindowProportions('main-view-window', MAIN_VIEW_HUB_MODE_RATIO);
     }
 
-    if (viewName === 'PROFESSOR_LAB' || viewName === 'JOHTO_PROFESSOR_LAB' || viewName === 'PROFESSOR_LAB') {
+    if (viewName === 'PROFESSOR_LAB' || viewName === 'JOHTO_PROFESSOR_LAB' || viewName === 'HOENN_PROFESSOR_LAB') {
         document.getElementById('view-professor-lab').style.display = 'block';
         if (viewName === 'PROFESSOR_LAB') {
             showProfTutorialIfNeeded();
@@ -1431,6 +1431,9 @@ function returnToLab() {
     } else if (state.currentRegionName === "Johto") {
         labRoute = "Johto Professor Lab";
         labView = "JOHTO_PROFESSOR_LAB";
+    } else if (state.currentRegionName === "Hoenn") {
+        labRoute = "Professor Lab";
+        labView = "HOENN_PROFESSOR_LAB";
     }
     state.currentRoute = labRoute;
     switchView(labView);
