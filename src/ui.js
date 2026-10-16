@@ -1018,10 +1018,9 @@ window.cheatCompleteOakTask = function(type) {
     if (type === 'final') {
         if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
         const caught = state.stats.caughtSpecies;
-        const names = state.config.allPokemonNames || state.config.pokemonData.map(p => p.name);
+        const names = state.config.allPokemonNames || (state.config.allPokemonNames = state.config.pokemonData.map(p => p.name));
 
-        let caughtCount = 0;
-        for (let _ in caught) caughtCount++;
+        let caughtCount = Object.keys(caught).length;
 
         if (caughtCount < names.length) {
             for (let i = 0, len = names.length; i < len; i++) {
