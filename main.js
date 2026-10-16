@@ -32,6 +32,7 @@ function createWindow() {
         webPreferences: {
             nodeIntegration: false,
             contextIsolation: true,
+            webSecurity: false, // Allow fetch on file:// protocol for local JSON resources
             preload: path.join(__dirname, 'preload.js')
         }
     });
