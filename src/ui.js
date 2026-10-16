@@ -2836,28 +2836,42 @@ export function renderGenericLab() {
         };
         const starterIds = regionStarters[currentRegion] || regionStarters['Kanto'];
 
-        let starterButtonsHtml = starterIds.map(id => {
+        labContent.innerHTML = ''; // Clear existing content
+
+        const container = document.createElement('div');
+        container.style.cssText = 'background-color: rgba(0,0,0,0.8); position: absolute; left: 15%; top: 50%; transform: translateY(-50%); padding: 30px; border-radius: 8px;';
+
+        const heading = document.createElement('h2');
+        heading.textContent = 'Choose your Starter Pokémon';
+        container.appendChild(heading);
+
+        const choicesDiv = document.createElement('div');
+        choicesDiv.className = 'starter-choices';
+
+        starterIds.forEach(id => {
             const p = state.config.pokemonData.find(p => p.id === id);
             const name = p ? p.name : 'Unknown';
             const paddedId = id.toString().padStart(4, '0');
             const spriteSrc = `Assets/Pokemon Sprites/Natural/Gen5/${paddedId}_${name}.png`;
-            return `
-                  <button onclick="window.selectStarter(${id})">
-                    <img src="${spriteSrc}" style="width: 80px; height: 80px;"><br>${name}
-                  </button>`;
-        }).join('');
 
-        let starterHtml = `
-                <div class="starter-choices">
-${starterButtonsHtml}
-                </div>`;
+            const btn = document.createElement('button');
+            btn.onclick = () => window.selectStarter(id);
 
-        labContent.innerHTML = `
-            <div style="background-color: rgba(0,0,0,0.8); position: absolute; left: 15%; top: 50%; transform: translateY(-50%); padding: 30px; border-radius: 8px;">
-                <h2>Choose your Starter Pokémon</h2>
-                ${starterHtml}
-            </div>
-        `;
+            const img = document.createElement('img');
+            img.src = spriteSrc;
+            img.style.cssText = 'width: 80px; height: 80px;';
+            btn.appendChild(img);
+
+            btn.appendChild(document.createElement('br'));
+
+            const nameNode = document.createTextNode(name);
+            btn.appendChild(nameNode);
+
+            choicesDiv.appendChild(btn);
+        });
+
+        container.appendChild(choicesDiv);
+        labContent.appendChild(container);
     } else {
         // Show assignments (identical to Kanto layout)
         let exclamationHtml = state.stats.showOakLobbyNotification
