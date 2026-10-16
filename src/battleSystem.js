@@ -2,6 +2,16 @@ import { VITAMINS, WHITE_CANDY_DEFEAT_REQUIREMENT } from "./constants.js";
 // src/battleSystem.js
 import * as mathEngine from './mathEngine.js';
 
+function escapeHTML(str) {
+    if (!str) return '';
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+}
+
 class BattleSystem {
     constructor(gameState, updateUI) {
         this.state = gameState; // reference to global game state
@@ -572,9 +582,9 @@ class BattleSystem {
                 if (index < this.gymState.currentTrainerIndex) {
                     return `<button disabled class="action-btn" style="opacity: 0.5; width: 100%;">${buttonText} (Defeated)</button>`;
                 } else if (index === this.gymState.currentTrainerIndex) {
-                    return `<button id="btn-start-gym-battle" class="action-btn action-btn-primary" onclick="window.battleEngine.startNextGymBattle()" style="width: 100%;">${buttonText} (${t.name})</button>`;
+                    return `<button id="btn-start-gym-battle" class="action-btn action-btn-primary" onclick="window.battleEngine.startNextGymBattle()" style="width: 100%;">${buttonText} (${escapeHTML(t.name)})</button>`;
                 } else {
-                    return `<button disabled class="action-btn" style="opacity: 0.5; width: 100%;">${buttonText} (${t.name})</button>`;
+                    return `<button disabled class="action-btn" style="opacity: 0.5; width: 100%;">${buttonText} (${escapeHTML(t.name)})</button>`;
                 }
             }).join('');
 
@@ -604,7 +614,7 @@ class BattleSystem {
         } else {
             // Gym completed
             contentArea.innerHTML = `
-                <h3>You defeated ${gym.leader}!</h3>
+                <h3>You defeated ${escapeHTML(gym.leader)}!</h3>
                 <p>A Gift is awaiting for you.</p>
                 <button class="action-btn action-btn-primary" onclick="window.battleEngine.stopGymBattle()" style="margin-top: 10px; width: 100%;">Leave</button>
             `;
