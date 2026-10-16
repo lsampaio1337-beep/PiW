@@ -303,7 +303,6 @@ class BattleSystem {
 
         if (event.type === 'attack') {
             const defender = event.target === 'player' ? this.state.party[0] : this.activeEncounter;
-            const attacker = event.target === 'player' ? this.activeEncounter : this.state.party[0];
 
             const animDuration = 500 / this.state.settings.gameSpeed;
             if (typeof window.playCombatAnimations === 'function') {
