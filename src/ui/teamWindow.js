@@ -1,3 +1,4 @@
+import { escapeHtml } from "../utils/escape.js";
 import { state } from '../state.js';
 import * as mathEngine from "../mathEngine.js";
 
