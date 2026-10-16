@@ -5,8 +5,12 @@ const fs = require('fs');
 // Fix transparency issues conditionally rather than disabling hardware acceleration entirely
 if (process.platform === 'linux') {
     app.commandLine.appendSwitch('enable-transparent-visuals');
-    // Hardware acceleration must be disabled on Linux for transparency to work properly
-    app.disableHardwareAcceleration();
+
+    // Disable hardware acceleration only if we're not running on Wayland.
+    // X11 still requires hardware acceleration to be disabled for transparency.
+    if (!process.env.WAYLAND_DISPLAY && process.env.XDG_SESSION_TYPE !== 'wayland') {
+        app.disableHardwareAcceleration();
+    }
 }
 
 function createWindow() {
@@ -39,7 +43,14 @@ function createWindow() {
     win.once('ready-to-show', () => {
         // Create a signal file to let the launcher know the game is ready
         if (process.platform === 'win32') {
-            fs.writeFileSync('game_ready.txt', 'ready');
+            try {
+                fs.writeFileSync('game_ready.txt', 'ready', { flag: 'wx' });
+            } catch (err) {
+                // Ignore EEXIST if the file is already there, but log other errors
+                if (err.code !== 'EEXIST') {
+                    console.error('Failed to write game_ready.txt:', err);
+                }
+            }
         }
         win.show();
     });

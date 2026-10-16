@@ -1,5 +1,24 @@
 import { VITAMINS } from "../constants.js";
 
+const VITAMINS_SET = new Set(VITAMINS);
+
+function escapeHTML(str) {
+    if (!str) return str;
+    return str.toString()
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+}
+
+function escapeJS(str) {
+    if (!str) return str;
+    return str.toString()
+        .replace(/\\/g, '\\\\')
+        .replace(/'/g, '\\\'')
+        .replace(/"/g, '\\"');
+}
 
 export function getMarketAlertTarget() {
     const innerModal = document.getElementById('main-view-inner-modal');
@@ -233,7 +252,7 @@ export function renderPokeMarketTab(category) {
     } else if (category === 'stones') {
         const badges = state.trainer.badges || 0;
         const stonePrice = badges >= 8 ? 10000 : Math.max(500, 1000 * badges);
-        let stoneKeys = Object.keys(state.backpack.stones).filter(k => !VITAMINS.includes(k));
+        let stoneKeys = Object.keys(state.backpack.stones).filter(k => !VITAMINS_SET.has(k));
         stoneKeys.sort((a, b) => a.localeCompare(b));
         items = stoneKeys.map(stoneName => {
             return {
@@ -264,6 +283,7 @@ export function renderPokeMarketTab(category) {
     let html = `<div style="--m-width: min(76vw, 750px); display: flex; flex-wrap: wrap; gap: calc(var(--m-width) * 0.018); justify-content: center; width: 100%;">`;
     items.forEach(item => {
         let displayName = item.displayName || item.name;
+        displayName = escapeHTML(displayName);
         if (category === 'potions') displayName = displayName.replace(' Potion', '<br>Potion');
         if (category === 'stones') displayName = displayName.replace(' Stone', '<br>Stone');
 
@@ -273,25 +293,33 @@ export function renderPokeMarketTab(category) {
             stock = state.backpack[targetCategory][item.name];
         }
 
-        const safeId = item.name.replace(/\s+/g, '');
-        let buyAction = `if(window.buyItem) window.buyItem('${item.name}', ${item.price}, '${category}')`;
+        const safeId = escapeHTML(item.name.replace(/\s+/g, ''));
+        const safeItemNameHTML = escapeHTML(item.name);
+        const safeItemNameJS = escapeHTML(escapeJS(item.name));
+
+        let buyAction = `if(window.buyItem) window.buyItem('${safeItemNameJS}', ${item.price}, '${category}')`;
         if (category === 'upgrades') {
-            buyAction = `if(window.buyItem) window.buyItem('${item.name}', ${item.price}, '${category}', '${item.upgradeType}')`;
+            const safeUpgradeTypeJS = escapeHTML(escapeJS(item.upgradeType));
+            buyAction = `if(window.buyItem) window.buyItem('${safeItemNameJS}', ${item.price}, '${category}', '${safeUpgradeTypeJS}')`;
         }
 
+        const safeAttrLabel = item.attrLabel ? escapeHTML(item.attrLabel) : '';
+
+        const safeImgSrc = escapeHTML(item.img);
+
         html += `
-            <div class="market-item-card" data-price="${item.price}" data-id="${item.name}" data-category="${category}"
+            <div class="market-item-card" data-price="${item.price}" data-id="${safeItemNameHTML}" data-category="${category}"
                 style="width: calc(16.666% - calc(var(--m-width) * 0.018 * 5 / 6)); background: #2c3e50; border: 2px solid #2ecc71; border-radius: 10px; padding: calc(var(--m-width) * 0.012); text-align: center; transition: transform 0.2s; display: flex; flex-direction: column; align-items: center; justify-content: center; box-sizing: border-box;">
                 <div style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; margin-bottom: calc(var(--m-width) * 0.006); height: calc(var(--m-width) * 0.038); display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.1;">${displayName}</div>
-                <img src="${item.img}" style="width: calc(var(--m-width) * 0.072); height: calc(var(--m-width) * 0.072); object-fit: contain; margin-bottom: calc(var(--m-width) * 0.006);">
-                ${category !== 'stones' ? `<div style="font-size: calc(var(--m-width) * 0.014); color: #f1c40f; margin-bottom: calc(var(--m-width) * 0.006); line-height: 1.1;">${item.attrLabel}</div>` : ''}
+                <img src="${safeImgSrc}" style="width: calc(var(--m-width) * 0.072); height: calc(var(--m-width) * 0.072); object-fit: contain; margin-bottom: calc(var(--m-width) * 0.006);">
+                ${category !== 'stones' ? `<div style="font-size: calc(var(--m-width) * 0.014); color: #f1c40f; margin-bottom: calc(var(--m-width) * 0.006); line-height: 1.1;">${safeAttrLabel}</div>` : ''}
                 ${category !== 'upgrades' ? `<div style="font-size: calc(var(--m-width) * 0.014); color: #bdc3c7; line-height: 1.1; margin-bottom: calc(var(--m-width) * 0.006);">Stock: ${formatMarketNumberDown(stock)}</div>` : ''}
 
                 ${category !== 'upgrades' ? `
                 <div style="display: flex; gap: 5px; margin-top: calc(var(--m-width) * 0.006); align-items: center; justify-content: center; width: 100%;">
-                    <input type="text" id="buy-qty-${safeId}" value="1" oninput="if(window.updateBuyItemPrice) window.updateBuyItemPrice('${item.name}', '${category}', ${item.price})" style="width: calc(var(--m-width) * 0.06); height: calc(var(--m-width) * 0.025); padding: 0 calc(var(--m-width) * 0.006); font-size: calc(var(--m-width) * 0.015); text-align: center; border-radius: 5px; border: 1px solid #ccc; box-sizing: border-box; margin: 0; outline: none;">
+                    <input type="text" id="buy-qty-${safeId}" value="1" oninput="if(window.updateBuyItemPrice) window.updateBuyItemPrice('${safeItemNameJS}', '${category}', ${item.price})" style="width: calc(var(--m-width) * 0.06); height: calc(var(--m-width) * 0.025); padding: 0 calc(var(--m-width) * 0.006); font-size: calc(var(--m-width) * 0.015); text-align: center; border-radius: 5px; border: 1px solid #ccc; box-sizing: border-box; margin: 0; outline: none;">
                     ${(category === 'pokeballs' || category === 'potions') ? `
-                    <button onclick="if(window.buySetMax) window.buySetMax('${item.name}', '${category}', ${item.price})" style="display: flex; align-items: center; justify-content: center; padding: 0 calc(var(--m-width) * 0.006); height: calc(var(--m-width) * 0.025); font-size: calc(var(--m-width) * 0.015); font-weight: bold; border-radius: 5px; cursor: pointer; background: #95a5a6; color: white; border: none; box-sizing: border-box; margin: 0;">Max</button>
+                    <button onclick="if(window.buySetMax) window.buySetMax('${safeItemNameJS}', '${category}', ${item.price})" style="display: flex; align-items: center; justify-content: center; padding: 0 calc(var(--m-width) * 0.006); height: calc(var(--m-width) * 0.025); font-size: calc(var(--m-width) * 0.015); font-weight: bold; border-radius: 5px; cursor: pointer; background: #95a5a6; color: white; border: none; box-sizing: border-box; margin: 0;">Max</button>
                     ` : ''}
                 </div>
                 ` : ''}
@@ -572,21 +600,29 @@ export function renderPokeMarketSellTab(category) {
         const filterSumIVMin = parseFloat(document.getElementById('market-filter-sumiv-min')?.value);
         const filterSumIVMax = parseFloat(document.getElementById('market-filter-sumiv-max')?.value);
 
+        const pokemonDataMap = new Map();
+        if (state.config && state.config.pokemonData) {
+            for (let i = 0; i < state.config.pokemonData.length; i++) {
+                const pd = state.config.pokemonData[i];
+                pokemonDataMap.set(pd.id, pd);
+            }
+        }
+
         state.storage.forEach(p => {
         if (!p.uuid) p.uuid = crypto.randomUUID();
             let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
 
             if (p.bst === undefined) {
-                if (typeof p.id === 'number' && state.config && state.config.pokemonData) {
-                    const pd = state.config.pokemonData.find(pd => pd.id === p.id);
+                if (typeof p.id === 'number' && pokemonDataMap.size > 0) {
+                    const pd = pokemonDataMap.get(p.id);
                     if (pd) p.bst = pd.hp + pd.atk + pd.def + pd.spa + pd.spd + pd.spe;
                 }
             }
             let pEv = calculatePP(p.bst || 300, p.level, p.quality, sumIV); // Fallback to 300 if bst still missing
 
             let pName = p.name || p.id;
-            if (typeof p.id === 'number' && state.config && state.config.pokemonData) {
-                const pd = state.config.pokemonData.find(pd => pd.id === p.id);
+            if (typeof p.id === 'number' && pokemonDataMap.size > 0) {
+                const pd = pokemonDataMap.get(p.id);
                 if (pd) pName = p.name || pd.name;
             }
             if (filterName && !(pName && pName.toString().toLowerCase().includes(filterName)) && !(p.id && p.id.toString().toLowerCase().includes(filterName))) return;
@@ -608,11 +644,12 @@ export function renderPokeMarketSellTab(category) {
 
             let isSelected = window.marketSelectedPokemonForSale && window.marketSelectedPokemonForSale.has(p.uuid);
             let selectionStyle = isSelected ? 'outline: 3px solid #ff0000; outline-offset: -3px; background: rgba(255,0,0,0.2);' : 'background: #2c3e50; border: 2px solid #777;';
+            let safePName = escapeHTML(pName);
 
             html += `
                 <div onclick="if(window.toggleMarketPokemonSaleSelection) window.toggleMarketPokemonSaleSelection('${p.uuid}')"
                     style="width: calc(16.666% - calc(var(--m-width) * 0.018 * 5 / 6)); box-sizing: border-box; ${selectionStyle} border-radius: 10px; padding: calc(var(--m-width) * 0.012); text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; position: relative;">
-                    <div style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; margin-bottom: calc(var(--m-width) * 0.006); line-height: 1.1; color: white;">${pName}</div>
+                    <div style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; margin-bottom: calc(var(--m-width) * 0.006); line-height: 1.1; color: white;">${safePName}</div>
                     <div style="flex: 1; width: 100%; display: flex; align-items: center; justify-content: center; position: relative; height: calc(var(--m-width) * 0.072); margin-bottom: calc(var(--m-width) * 0.006);">
                         <img src="${imgSrc}" class="${glowClass}" style="max-height: 100%; max-width: 100%; object-fit: contain; z-index: 1;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
                     </div>
@@ -651,7 +688,7 @@ export function renderPokeMarketSellTab(category) {
                 };
             });
     } else if (category === 'stones') {
-        let stoneKeysSell = Object.keys(state.backpack.stones).filter(k => !VITAMINS.includes(k));
+        let stoneKeysSell = Object.keys(state.backpack.stones).filter(k => !VITAMINS_SET.has(k));
         stoneKeysSell.sort((a, b) => a.localeCompare(b));
         items = stoneKeysSell.map(stoneName => {
             return {
@@ -685,6 +722,7 @@ export function renderPokeMarketSellTab(category) {
     let html = `<div style="--m-width: min(76vw, 750px); display: flex; flex-wrap: wrap; gap: calc(var(--m-width) * 0.018); justify-content: center; width: 100%;">`;
     items.forEach(item => {
         let displayName = item.displayName || item.name;
+        displayName = escapeHTML(displayName);
         if (category === 'potions') displayName = displayName.replace(' Potion', '<br>Potion');
         if (category === 'stones') displayName = displayName.replace(' Stone', '<br>Stone');
 
@@ -695,22 +733,27 @@ export function renderPokeMarketSellTab(category) {
         if (state.backpack[targetCategory] && state.backpack[targetCategory][item.name]) {
             stock = state.backpack[targetCategory][item.name];
         }
-        const safeId = item.name.replace(/\s+/g, '');
+        const safeId = escapeHTML(item.name.replace(/\s+/g, ''));
+        const safeItemNameHTML = escapeHTML(item.name);
+        const safeItemNameJS = escapeHTML(escapeJS(item.name));
+        const safeAttrLabel = item.attrLabel ? escapeHTML(item.attrLabel) : '';
+
+        const safeImgSrc = escapeHTML(item.img);
 
         html += `
-            <div class="market-item-card" data-basesell="${baseSellPrice}" data-id="${item.name}" data-category="${category}" data-stock="${stock}"
+            <div class="market-item-card" data-basesell="${baseSellPrice}" data-id="${safeItemNameHTML}" data-category="${category}" data-stock="${stock}"
                 style="width: calc(16.666% - calc(var(--m-width) * 0.018 * 5 / 6)); box-sizing: border-box; background: #2c3e50; border: 2px solid #e74c3c; border-radius: 10px; padding: calc(var(--m-width) * 0.012); text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center;">
                 <div style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; margin-bottom: calc(var(--m-width) * 0.006); height: calc(var(--m-width) * 0.038); display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.1;">${displayName}</div>
-                <img src="${item.img}" style="width: calc(var(--m-width) * 0.072); height: calc(var(--m-width) * 0.072); object-fit: contain; margin-bottom: calc(var(--m-width) * 0.006);">
-                ${item.attrLabel ? `<div style="font-size: calc(var(--m-width) * 0.014); color: #f1c40f; margin-bottom: calc(var(--m-width) * 0.006); line-height: 1.1;">${item.attrLabel}</div>` : ''}
+                <img src="${safeImgSrc}" style="width: calc(var(--m-width) * 0.072); height: calc(var(--m-width) * 0.072); object-fit: contain; margin-bottom: calc(var(--m-width) * 0.006);">
+                ${safeAttrLabel ? `<div style="font-size: calc(var(--m-width) * 0.014); color: #f1c40f; margin-bottom: calc(var(--m-width) * 0.006); line-height: 1.1;">${safeAttrLabel}</div>` : ''}
                 <div style="font-size: calc(var(--m-width) * 0.014); color: #bdc3c7; line-height: 1.1;">Stock: ${formatMarketNumberDown(stock)}</div>
 
                 <div style="display: flex; gap: 5px; margin-top: calc(var(--m-width) * 0.012); align-items: center; justify-content: center; width: 100%;">
-                    <input type="text" id="sell-qty-${safeId}" value="${stock > 0 ? 1 : 0}" oninput="if(window.updateSellItemPrice) window.updateSellItemPrice('${item.name}', '${category}')" style="width: calc(var(--m-width) * 0.06); height: calc(var(--m-width) * 0.025); padding: 0 calc(var(--m-width) * 0.006); font-size: calc(var(--m-width) * 0.015); text-align: center; border-radius: 5px; border: 1px solid #ccc; box-sizing: border-box; margin: 0; outline: none;">
-                    <button onclick="if(window.sellSetMax) window.sellSetMax('${item.name}', '${category}')" style="display: flex; align-items: center; justify-content: center; padding: 0 calc(var(--m-width) * 0.006); height: calc(var(--m-width) * 0.025); font-size: calc(var(--m-width) * 0.015); font-weight: bold; border-radius: 5px; cursor: pointer; background: #95a5a6; color: white; border: none; box-sizing: border-box; margin: 0;">Max</button>
+                    <input type="text" id="sell-qty-${safeId}" value="${stock > 0 ? 1 : 0}" oninput="if(window.updateSellItemPrice) window.updateSellItemPrice('${safeItemNameJS}', '${category}')" style="width: calc(var(--m-width) * 0.06); height: calc(var(--m-width) * 0.025); padding: 0 calc(var(--m-width) * 0.006); font-size: calc(var(--m-width) * 0.015); text-align: center; border-radius: 5px; border: 1px solid #ccc; box-sizing: border-box; margin: 0; outline: none;">
+                    <button onclick="if(window.sellSetMax) window.sellSetMax('${safeItemNameJS}', '${category}')" style="display: flex; align-items: center; justify-content: center; padding: 0 calc(var(--m-width) * 0.006); height: calc(var(--m-width) * 0.025); font-size: calc(var(--m-width) * 0.015); font-weight: bold; border-radius: 5px; cursor: pointer; background: #95a5a6; color: white; border: none; box-sizing: border-box; margin: 0;">Max</button>
                 </div>
 
-                <button id="sell-btn-${safeId}" onclick="if(window.sellMarketItem) window.sellMarketItem('${item.name}', ${baseSellPrice}, '${category}')" style="margin-top: calc(var(--m-width) * 0.012); background: #e74c3c; color: white; border: 2px solid white; border-radius: 8px; padding: 5px 15px; font-size: calc(var(--m-width) * 0.017); font-weight: bold; cursor: pointer; width: 100%;">$${formatMarketNumber(stock > 0 ? baseSellPrice : 0)}</button>
+                <button id="sell-btn-${safeId}" onclick="if(window.sellMarketItem) window.sellMarketItem('${safeItemNameJS}', ${baseSellPrice}, '${category}')" style="margin-top: calc(var(--m-width) * 0.012); background: #e74c3c; color: white; border: 2px solid white; border-radius: 8px; padding: 5px 15px; font-size: calc(var(--m-width) * 0.017); font-weight: bold; cursor: pointer; width: 100%;">$${formatMarketNumber(stock > 0 ? baseSellPrice : 0)}</button>
             </div>
         `;
     });
@@ -860,13 +903,21 @@ window.marketSelectAllPokemonForSale = function() {
     const filterSumIVMin = parseFloat(document.getElementById('market-filter-sumiv-min')?.value);
     const filterSumIVMax = parseFloat(document.getElementById('market-filter-sumiv-max')?.value);
 
+    const pokemonDataMap = new Map();
+    if (state.config && state.config.pokemonData) {
+        for (let i = 0; i < state.config.pokemonData.length; i++) {
+            const pd = state.config.pokemonData[i];
+            pokemonDataMap.set(pd.id, pd);
+        }
+    }
+
     state.storage.forEach(p => {
         if (!p.uuid) p.uuid = crypto.randomUUID();
         let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
 
         let pName = p.name || p.id;
-        if (typeof p.id === 'number' && state.config && state.config.pokemonData) {
-            const pd = state.config.pokemonData.find(pd => pd.id === p.id);
+        if (typeof p.id === 'number' && pokemonDataMap.size > 0) {
+            const pd = pokemonDataMap.get(p.id);
             if (pd) pName = p.name || pd.name;
         }
         if (filterName && !(pName && pName.toString().toLowerCase().includes(filterName)) && !(p.id && p.id.toString().toLowerCase().includes(filterName))) return;
@@ -891,13 +942,22 @@ function updateMarketPokemonSellCount() {
         let count = window.marketSelectedPokemonForSale.size;
 
         let totalGain = 0;
+
+        const pokemonDataMap = new Map();
+        if (state.config && state.config.pokemonData) {
+            for (let i = 0; i < state.config.pokemonData.length; i++) {
+                const pd = state.config.pokemonData[i];
+                pokemonDataMap.set(pd.id, pd);
+            }
+        }
+
         state.storage.forEach(p => {
         if (!p.uuid) p.uuid = crypto.randomUUID();
             if (window.marketSelectedPokemonForSale.has(p.uuid)) {
                 let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
                 if (p.bst === undefined) {
-                    if (typeof p.id === 'number' && state.config && state.config.pokemonData) {
-                        const pd = state.config.pokemonData.find(pd => pd.id === p.id);
+                    if (typeof p.id === 'number' && pokemonDataMap.size > 0) {
+                        const pd = pokemonDataMap.get(p.id);
                         if (pd) p.bst = pd.hp + pd.atk + pd.def + pd.spa + pd.spd + pd.spe;
                     }
                 }
@@ -917,12 +977,20 @@ window.marketSellSelectedPokemon = function() {
     let numSold = window.marketSelectedPokemonForSale.size;
     let totalGain = 0;
 
+    const pokemonDataMap = new Map();
+    if (state.config && state.config.pokemonData) {
+        for (let i = 0; i < state.config.pokemonData.length; i++) {
+            const pd = state.config.pokemonData[i];
+            pokemonDataMap.set(pd.id, pd);
+        }
+    }
+
     state.storage = state.storage.filter(p => {
         if (window.marketSelectedPokemonForSale.has(p.uuid)) {
             let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
             if (p.bst === undefined) {
-                if (typeof p.id === 'number' && state.config && state.config.pokemonData) {
-                    const pd = state.config.pokemonData.find(pd => pd.id === p.id);
+                if (typeof p.id === 'number' && pokemonDataMap.size > 0) {
+                    const pd = pokemonDataMap.get(p.id);
                     if (pd) p.bst = pd.hp + pd.atk + pd.def + pd.spa + pd.spd + pd.spe;
                 }
             }

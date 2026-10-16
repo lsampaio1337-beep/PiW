@@ -356,7 +356,10 @@ window.completeChallenge = function(targetAreaId) {
         }
         if (unlock.requirements.catchSpecies) {
              for (let s of unlock.requirements.catchSpecies) {
-                 if (state.stats.caughtSpecies) delete state.stats.caughtSpecies[s.species];
+                 if (state.stats.caughtSpecies && state.stats.caughtSpecies[s.species] !== undefined) {
+                     delete state.stats.caughtSpecies[s.species];
+                     state.stats.caughtSpeciesCount = Math.max(0, (state.stats.caughtSpeciesCount || 0) - 1);
+                 }
              }
         }
         if (unlock.requirements.catchSpeciesByRarity) {
@@ -374,7 +377,10 @@ window.completeChallenge = function(targetAreaId) {
              if (unlock.requirements.catchEachFromSlotMachine.machines) {
                  for (let m of unlock.requirements.catchEachFromSlotMachine.machines) {
                      for (let s of m) {
-                         if (state.stats.caughtSpecies) delete state.stats.caughtSpecies[s];
+                         if (state.stats.caughtSpecies && state.stats.caughtSpecies[s] !== undefined) {
+                             delete state.stats.caughtSpecies[s];
+                             state.stats.caughtSpeciesCount = Math.max(0, (state.stats.caughtSpeciesCount || 0) - 1);
+                         }
                      }
                  }
              }
@@ -398,9 +404,13 @@ window.cheatProgressChallenge = function(targetAreaId) {
     if (targetAreaId === '150_challenge') {
         if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
         let count = 0;
-        for (let i = 0; i < state.config.pokemonData.length; i++) {
+        const len = state.config.pokemonData.length;
+        for (let i = 0; i < len; i++) {
              if (count >= 150) break;
              let p = state.config.pokemonData[i];
+             if (!state.stats.caughtSpecies[p.name]) {
+                 state.stats.caughtSpeciesCount = (state.stats.caughtSpeciesCount || 0) + 1;
+             }
              state.stats.caughtSpecies[p.name] = 1;
              count++;
         }
@@ -412,10 +422,12 @@ window.cheatProgressChallenge = function(targetAreaId) {
         setTimeout(() => {
             const modal = document.getElementById('window-challenges');
             if (modal) {
-                const completeBtns = Array.from(modal.querySelectorAll('button')).filter(btn => btn.innerText.includes('Complete'));
-                if (completeBtns.length > 0) {
-                    const specificBtn = completeBtns.find(btn => btn.getAttribute('onclick') && btn.getAttribute('onclick').includes('150_challenge'));
-                    if (specificBtn) specificBtn.click();
+                const buttons = modal.querySelectorAll('button[onclick*="150_challenge"]');
+                for (let i = 0; i < buttons.length; i++) {
+                    if (buttons[i].innerText.includes('Complete')) {
+                        buttons[i].click();
+                        break;
+                    }
                 }
             }
         }, 100);
@@ -437,7 +449,12 @@ window.cheatProgressChallenge = function(targetAreaId) {
         }
         if (req.catchSpecies) {
             if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
-            req.catchSpecies.forEach(r => state.stats.caughtSpecies[r.species] = (state.stats.caughtSpecies[r.species] || 0) + r.count);
+            req.catchSpecies.forEach(r => {
+                if (!state.stats.caughtSpecies[r.species]) {
+                    state.stats.caughtSpeciesCount = (state.stats.caughtSpeciesCount || 0) + 1;
+                }
+                state.stats.caughtSpecies[r.species] = (state.stats.caughtSpecies[r.species] || 0) + r.count;
+            });
         }
         if (req.catchSpeciesByRarity) {
             if (!state.stats.challengeCaughtSpecific) state.stats.challengeCaughtSpecific = {};
@@ -458,10 +475,16 @@ window.cheatProgressChallenge = function(targetAreaId) {
             if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
             if (req.catchEachFromSlotMachine.machines) {
                 req.catchEachFromSlotMachine.machines.forEach(m => {
+                    if (!state.stats.caughtSpecies[m[0]]) {
+                        state.stats.caughtSpeciesCount = (state.stats.caughtSpeciesCount || 0) + 1;
+                    }
                     state.stats.caughtSpecies[m[0]] = (state.stats.caughtSpecies[m[0]] || 0) + 1;
                 });
             } else if (req.catchEachFromSlotMachine.speciesList) {
                 req.catchEachFromSlotMachine.speciesList.forEach(s => {
+                    if (!state.stats.caughtSpecies[s]) {
+                        state.stats.caughtSpeciesCount = (state.stats.caughtSpeciesCount || 0) + 1;
+                    }
                     state.stats.caughtSpecies[s] = (state.stats.caughtSpecies[s] || 0) + 1;
                 });
             }
@@ -510,13 +533,24 @@ window.cheatProgressChallenge = function(targetAreaId) {
     setTimeout(() => {
         const modal = document.getElementById('window-challenges');
         if (modal) {
-            const completeBtns = Array.from(modal.querySelectorAll('button')).filter(btn => btn.innerText.includes('Complete'));
-            if (completeBtns.length > 0) {
-                // Find the specific complete button for this area
-                const safeAreaId = targetAreaId.replace(/'/g, "\\'");
-                const specificBtn = completeBtns.find(btn => btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(safeAreaId));
-                if (specificBtn) specificBtn.click();
-                else completeBtns[0].click();
+            const safeAreaId = targetAreaId.replace(/'/g, "\\'");
+            const buttons = modal.querySelectorAll(`button[onclick*="${safeAreaId}"]`);
+            let clicked = false;
+            for (let i = 0; i < buttons.length; i++) {
+                if (buttons[i].innerText.includes('Complete')) {
+                    buttons[i].click();
+                    clicked = true;
+                    break;
+                }
+            }
+            if (!clicked) {
+                const anyCompleteButtons = modal.querySelectorAll('button');
+                for (let i = 0; i < anyCompleteButtons.length; i++) {
+                    if (anyCompleteButtons[i].innerText.includes('Complete')) {
+                        anyCompleteButtons[i].click();
+                        break;
+                    }
+                }
             }
         }
     }, 100);
@@ -532,10 +566,6 @@ window.showChallengesModal = function() {
 
     // Active Challenges Sector
     let activeChallengesCount = state.stats.activeChallenges ? state.stats.activeChallenges.length : 0;
-    let completedChallengesCount = state.stats.completedChallengeIds ?
-        (window.getCurrentUnlocks() ? state.stats.completedChallengeIds.filter(id => window.getCurrentUnlocks().some(u => u.areaId === id)).length : state.stats.completedChallengeIds.length)
-        : 0;
-    let totalChallengesCount = activeChallengesCount + completedChallengesCount;
 
     html += `<div style="border: 1px solid #555; padding: 10px; border-radius: 5px; background-color: rgba(0,0,0,0.5);">
                 <h3 style="margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; font-size: 16px;">${activeChallengesCount > 1 ? 'Active Challenges' : 'Active Challenge'}</h3>
@@ -551,7 +581,7 @@ window.showChallengesModal = function() {
     }
 
     if (hasActive150Challenge) {
-        let uniqueSpeciesCaught = state.stats.caughtSpecies ? Object.keys(state.stats.caughtSpecies).length : 0;
+        let uniqueSpeciesCaught = (state.stats.caughtSpeciesCount || 0);
         let isMet = uniqueSpeciesCaught >= 150;
         let displayName = "The 150 Challenge";
         let rewardsStr = "Mythical and Legendary Spot";
@@ -961,7 +991,7 @@ window.getOakTaskAvailableCount = function() {
     // Final
     let finalTier = state.stats.finalTaskTier || 0;
     if (finalTier < oakTasks.final.length) {
-        let currentSpeciesCount = state.stats.caughtSpecies ? Object.keys(state.stats.caughtSpecies).length : 0;
+        let currentSpeciesCount = (state.stats.caughtSpeciesCount || 0);
         let totalSpecies = state.config.pokemonData.length;
         if (currentSpeciesCount >= totalSpecies) count++;
     }
@@ -1019,10 +1049,9 @@ window.cheatCompleteOakTask = function(type) {
     if (type === 'final') {
         if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
         const caught = state.stats.caughtSpecies;
-        const names = state.config.allPokemonNames || state.config.pokemonData.map(p => p.name);
+        const names = state.config.allPokemonNames || (state.config.allPokemonNames = state.config.pokemonData.map(p => p.name));
 
-        let caughtCount = 0;
-        for (let _ in caught) caughtCount++;
+        let caughtCount = Object.keys(caught).length;
 
         if (caughtCount < names.length) {
             for (let i = 0, len = names.length; i < len; i++) {
@@ -1207,7 +1236,7 @@ window.showOakLabModal = function() {
 
     // Final Card
     let finalTier = state.stats.finalTaskTier || 0;
-    let finalCurrentVal = state.stats.caughtSpecies ? Object.keys(state.stats.caughtSpecies).length : 0;
+    let finalCurrentVal = (state.stats.caughtSpeciesCount || 0);
     if (finalTier >= oakTasks.final.length && oakTasks.final.length > 0) {
         finalCurrentVal = state.config.pokemonData.length;
     }
@@ -1230,7 +1259,6 @@ window.showOakLabModal = function() {
         // Dynamically style the inner modal for Oak Lab to 70% width and proportional scale
         const innerModal = document.getElementById('main-view-inner-modal');
         if (innerModal) {
-            // Apply a specific class for Oak Lab modal instead of hacking inline styles permanently
             innerModal.classList.add('oak-lab-inner-modal');
         }
 
@@ -1315,12 +1343,24 @@ export function switchView(viewName) {
 
         const introText = document.getElementById('daycare-intro-text');
         if (introText) {
-            introText.innerHTML = `
-                <p>Now you are able to use Daycare!</p>
-                <p>You can adjust pokemon on daycare here or directly in your backpack.</p>
-                <p>In order to Breed, you need 2 Pokémons with the same Quality Value. They will generate an egg that will hatch after ${breedBattles} fights. You can drag 2 Pokémons to the Breed Spot or you can click on Breed Spot to automatically filter Pokémons that can be inserted there. The egg will hatch and the Pokémon will have an increased Quality Value of a random number between 0 and 0.1 to a maximum of 1.99, keeping the highest SumIV of both parents. Remember that the process can’t be interrupted.</p>
-                <p>To Train, you just need to insert the desired Pokémon in the Train Spot. It will train its SumIV and it will gain +1 point in it every ${trainBattles} fights.</p>
-            `;
+            introText.innerHTML = ''; // Clear existing content
+
+            const p1 = document.createElement('p');
+            p1.textContent = 'Now you are able to use Daycare!';
+
+            const p2 = document.createElement('p');
+            p2.textContent = 'You can adjust pokemon on daycare here or directly in your backpack.';
+
+            const p3 = document.createElement('p');
+            p3.textContent = `In order to Breed, you need 2 Pokémons with the same Quality Value. They will generate an egg that will hatch after ${Number(breedBattles)} fights. You can drag 2 Pokémons to the Breed Spot or you can click on Breed Spot to automatically filter Pokémons that can be inserted there. The egg will hatch and the Pokémon will have an increased Quality Value of a random number between 0 and 0.1 to a maximum of 1.99, keeping the highest SumIV of both parents. Remember that the process can’t be interrupted.`;
+
+            const p4 = document.createElement('p');
+            p4.textContent = `To Train, you just need to insert the desired Pokémon in the Train Spot. It will train its SumIV and it will gain +1 point in it every ${Number(trainBattles)} fights.`;
+
+            introText.appendChild(p1);
+            introText.appendChild(p2);
+            introText.appendChild(p3);
+            introText.appendChild(p4);
         }
 
         const trainBtn = document.getElementById('btn-daycare-train');
@@ -1537,7 +1577,6 @@ function selectStarter(id) {
 }
 
 let gameClockTimeout = null;
-let lastTickTime = null;
 
 window.restartGameClock = function() {
     if (gameClockTimeout) {
@@ -1978,6 +2017,13 @@ async function init() {
                     };
                     deepMerge(state, pData);
 
+                    // Initialize caughtSpeciesCount for older saves
+                    if (state.stats && state.stats.caughtSpecies) {
+                        state.stats.caughtSpeciesCount = Object.keys(state.stats.caughtSpecies).length;
+                    } else if (state.stats) {
+                        state.stats.caughtSpeciesCount = 0;
+                    }
+
                     // Migrate old save data to new globalStats structure
                     if (pData.stats) {
                         if (pData.stats.playtime !== undefined) state.globalStats.playtime = pData.stats.playtime;
@@ -2201,7 +2247,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
                                 state.currentRoute = "PokeCenter & PokeMarket";
                                 window.navigateToLocation("PokeCenter & PokeMarket");
                             } else if (results.outOfMoney) {
-                                if (state.currentRoute === "Safari Zone") {
+                                if (["Safari Zone", "Kanto Safari Zone"].includes(state.currentRoute)) {
                                     switchView("SAFARI_HUB");
                                 } else if (state.currentRoute && state.currentRoute.startsWith("Casino - ")) {
                                     state.currentRoute = "Casino";
@@ -2457,7 +2503,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
         if (tab === 'statistics') {
             let uniqueSpeciesCaught = 0;
             if (state.stats.caughtSpecies) {
-                uniqueSpeciesCaught = Object.keys(state.stats.caughtSpecies).length;
+                uniqueSpeciesCaught = (state.stats.caughtSpeciesCount || 0);
             }
 
             let playtimeStr = "0h 0m 0s";
@@ -2773,7 +2819,7 @@ window.enterSafariZone = () => {
         window.globals.battleSystem.activeEncounter = null;
         window.globals.battleSystem.isSearching = false;
         if (window.globals.battleSystem.gymState) window.globals.battleSystem.gymState.isActive = false;
-        window.globals.battleSystem.state.currentRoute = "Safari Zone";
+        window.globals.battleSystem.state.currentRoute = window.currentSafariZone || "Safari Zone";
         window.globals.battleSystem.searchNext();
 
     }
@@ -2837,28 +2883,42 @@ export function renderGenericLab() {
         };
         const starterIds = regionStarters[currentRegion] || regionStarters['Kanto'];
 
-        let starterButtonsHtml = starterIds.map(id => {
+        labContent.innerHTML = ''; // Clear existing content
+
+        const container = document.createElement('div');
+        container.style.cssText = 'background-color: rgba(0,0,0,0.8); position: absolute; left: 15%; top: 50%; transform: translateY(-50%); padding: 30px; border-radius: 8px;';
+
+        const heading = document.createElement('h2');
+        heading.textContent = 'Choose your Starter Pokémon';
+        container.appendChild(heading);
+
+        const choicesDiv = document.createElement('div');
+        choicesDiv.className = 'starter-choices';
+
+        starterIds.forEach(id => {
             const p = state.config.pokemonData.find(p => p.id === id);
             const name = p ? p.name : 'Unknown';
             const paddedId = id.toString().padStart(4, '0');
             const spriteSrc = `Assets/Pokemon Sprites/Natural/Gen5/${paddedId}_${name}.png`;
-            return `
-                  <button onclick="window.selectStarter(${id})">
-                    <img src="${spriteSrc}" style="width: 80px; height: 80px;"><br>${name}
-                  </button>`;
-        }).join('');
 
-        let starterHtml = `
-                <div class="starter-choices">
-${starterButtonsHtml}
-                </div>`;
+            const btn = document.createElement('button');
+            btn.onclick = () => window.selectStarter(id);
 
-        labContent.innerHTML = `
-            <div style="background-color: rgba(0,0,0,0.8); position: absolute; left: 15%; top: 50%; transform: translateY(-50%); padding: 30px; border-radius: 8px;">
-                <h2>Choose your Starter Pokémon</h2>
-                ${starterHtml}
-            </div>
-        `;
+            const img = document.createElement('img');
+            img.src = spriteSrc;
+            img.style.cssText = 'width: 80px; height: 80px;';
+            btn.appendChild(img);
+
+            btn.appendChild(document.createElement('br'));
+
+            const nameNode = document.createTextNode(name);
+            btn.appendChild(nameNode);
+
+            choicesDiv.appendChild(btn);
+        });
+
+        container.appendChild(choicesDiv);
+        labContent.appendChild(container);
     } else {
         // Show assignments (identical to Kanto layout)
         let exclamationHtml = state.stats.showOakLobbyNotification

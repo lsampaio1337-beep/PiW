@@ -647,10 +647,20 @@ input[type="number"] {
     border-radius: 1px;
 }
 
+#main-view-inner-modal {
+    width: 90%;
+    height: auto;
+    max-height: calc(100% - 40px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    pointer-events: auto;
+}
+
 /* Oak Lab Inner Modal styling */
-.oak-lab-inner-modal {
-    width: 70% !important;
-    aspect-ratio: 4/3 !important;
+#main-view-inner-modal.oak-lab-inner-modal {
+    width: 70%;
+    aspect-ratio: 4/3;
 }
 
 /* --- Action Buttons --- */

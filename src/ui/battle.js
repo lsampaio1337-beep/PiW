@@ -3,7 +3,15 @@ import { TYPE_COLORS } from '../ui.js';
 import { state, globals } from '../state.js';
 import { getCapacity } from '../mathEngine.js';
 
-
+function escapeHtml(unsafe) {
+    if (unsafe == null) return '';
+    return String(unsafe)
+         .replace(/&/g, "&amp;")
+         .replace(/</g, "&lt;")
+         .replace(/>/g, "&gt;")
+         .replace(/"/g, "&quot;")
+         .replace(/'/g, "&#039;");
+}
 
 
 function updateActiveItemsUI() {
@@ -305,17 +313,16 @@ function updateBattleBackground(combatArena, state, battleSystem, inGymCombat, i
                 dynamicBg.style.backgroundSize = '100% 100%';
                 dynamicBg.style.overflow = 'hidden';
 
-                dynamicBg.innerHTML = `
-                    <img src="${spritePath}" style="
-                        position: absolute;
-                        left: ${assetConfig.position.rel_x * 100}%;
-                        top: ${assetConfig.position.rel_y * 100}%;
-                        width: ${(assetConfig.size.px_width / 1800) * 100}%;
-                        transform: rotate(${assetConfig.tilt.angle_deg}deg);
-                        transform-origin: ${assetConfig.tilt.origin};
-                        pointer-events: none;
-                    ">
-                `;
+                const img = document.createElement('img');
+                img.src = spritePath;
+                img.style.position = 'absolute';
+                img.style.left = `${assetConfig.position.rel_x * 100}%`;
+                img.style.top = `${assetConfig.position.rel_y * 100}%`;
+                img.style.width = `${(assetConfig.size.px_width / 1800) * 100}%`;
+                img.style.transform = `rotate(${assetConfig.tilt.angle_deg}deg)`;
+                img.style.transformOrigin = assetConfig.tilt.origin;
+                img.style.pointerEvents = 'none';
+                dynamicBg.appendChild(img);
 
                 combatArena.style.backgroundImage = 'none';
                 combatArena.style.position = 'relative'; // Ensure relative positioning
@@ -336,7 +343,7 @@ function updateBattleBackground(combatArena, state, battleSystem, inGymCombat, i
                 combatArena.style.backgroundImage = `url('./Assets/BG/${bgImage}')`;
             }
         }
-    } else if (state.currentRoute === 'Safari Zone') {
+    } else if (["Safari Zone", "Kanto Safari Zone"].includes(state.currentRoute)) {
         combatArena.style.backgroundImage = `url('./Assets/BG/BG-SafariZone.png')`;
     } else if (state.currentRoute && state.currentRoute.startsWith('Casino')) {
          combatArena.style.backgroundImage = `url('./Assets/BG/BG-Cassino.jpg')`;
@@ -879,7 +886,7 @@ export function showDamage(target, amount, isCrit, moveName = '', moveType = 'No
             entry.style.marginBottom = '2px';
             const attacker = target === 'player' ? 'Enemy' : 'You';
             const typeColor = TYPE_COLORS[moveType] || '#ffffff';
-            entry.innerHTML = `${attacker} used <b style="color:${typeColor}">${moveName}</b> for <span style="color:${typeColor}">${amount}</span> dmg!`;
+            entry.innerHTML = `${attacker} used <b style="color:${typeColor}">${escapeHtml(moveName)}</b> for <span style="color:${typeColor}">${escapeHtml(amount)}</span> dmg!`;
             log.appendChild(entry);
 
             // Keep only last 4 entries
@@ -896,11 +903,11 @@ export function showDamage(target, amount, isCrit, moveName = '', moveType = 'No
 
     const typeColor = TYPE_COLORS[moveType] || '#ffffff';
     let critText = isCrit ? ' Crit(1.5x)' : '';
-    let effText = `${effectiveness}x`;
-    let typeIconHtml = `<img src="Assets/Extra/Type ${moveType}.png" style="width: 20px; height: 20px; vertical-align: middle; margin: 0 4px;" />`;
+    let effText = escapeHtml(`${effectiveness}x`);
+    let typeIconHtml = `<img src="Assets/Extra/Type ${escapeHtml(moveType)}.png" style="width: 20px; height: 20px; vertical-align: middle; margin: 0 4px;" />`;
 
     // Layout: [Amount] [Icon] [Name] [Effectiveness] [Crit]
-    dmgNode.innerHTML = `<span style="font-weight: bold; font-style: ${isCrit ? 'italic' : 'normal'}; display: flex; align-items: center; justify-content: center; text-shadow: 1px 1px 2px black;">${amount} ${typeIconHtml} ${moveName} ${effText}${critText}</span>`;
+    dmgNode.innerHTML = `<span style="font-weight: bold; font-style: ${isCrit ? 'italic' : 'normal'}; display: flex; align-items: center; justify-content: center; text-shadow: 1px 1px 2px black;">${escapeHtml(amount)} ${typeIconHtml} ${escapeHtml(moveName)} ${effText}${escapeHtml(critText)}</span>`;
 
 
     dmgNode.classList.add('floating-damage');

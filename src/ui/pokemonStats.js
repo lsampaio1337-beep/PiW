@@ -33,25 +33,43 @@ function getEvolveRequirements(p, evo, state) {
     };
 }
 
-export function showPokemonStatsByUuid(uuid) {
+export function showPokemonStatsByUuid(uuid, listName = null) {
     let p = null;
     let location = '';
-    let idx = state.party.findIndex(x => x.uuid === uuid);
-    if (idx !== -1) { p = state.party[idx]; location = 'party'; }
-    else {
-        idx = state.breeding.findIndex(x => x.uuid === uuid);
-        if (idx !== -1) { p = state.breeding[idx]; location = 'breeding'; }
-        else {
-            idx = state.training.findIndex(x => x.uuid === uuid);
-            if (idx !== -1) { p = state.training[idx]; location = 'training'; }
-            else {
-                idx = state.storage.findIndex(x => x.uuid === uuid);
-                if (idx !== -1) { p = state.storage[idx]; location = 'storage'; }
-                else {
-                    idx = state.safe.findIndex(x => x.uuid === uuid);
-                    if (idx !== -1) { p = state.safe[idx]; location = 'safe'; }
+    let idx = -1;
+
+    // Fast path: check the known array reference first
+    if (listName && state[listName]) {
+        const arr = state[listName];
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i].uuid === uuid) {
+                p = arr[i];
+                location = listName;
+                idx = i;
+                break;
+            }
+        }
+    }
+
+    // Fallback: check all locations if not found
+    if (!p) {
+        const locations = ['party', 'breeding', 'training', 'storage', 'safe'];
+        for (let i = 0; i < locations.length; i++) {
+            const loc = locations[i];
+            if (loc === listName) continue; // Skip what we already checked
+
+            const arr = state[loc];
+            if (!arr) continue;
+
+            for (let j = 0; j < arr.length; j++) {
+                if (arr[j].uuid === uuid) {
+                    p = arr[j];
+                    location = loc;
+                    idx = j;
+                    break;
                 }
             }
+            if (p) break;
         }
     }
 
@@ -233,6 +251,7 @@ export function evolvePokemon(location, idx, toId) {
     // Evolving counts as catching for the pokedex
     if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
     if (!state.stats.caughtSpecies[newBase.name]) {
+        state.stats.caughtSpeciesCount = (state.stats.caughtSpeciesCount || 0) + 1;
         state.stats.caughtSpecies[newBase.name] = true;
         state.stats.caught++;
     }

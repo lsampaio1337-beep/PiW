@@ -58,6 +58,7 @@ export const REGION_TEMPLATE = {
         hasPickedStarter: false,
         seenSpecies: {},
         caughtSpecies: {},
+        caughtSpeciesCount: 0,
         seenShiniesSpecies: {},
         caughtShiniesSpecies: {},
         upgrades: {

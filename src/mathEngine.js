@@ -224,7 +224,7 @@ function generateIVs(stats = {}, isShiny = false) {
     };
 }
 
-function calculateDamage(level, power, attackStat, defenseStat, typeEffectiveness, quality) {
+function calculateDamage(level, power, attackStat, defenseStat, typeEffectiveness) {
     // BaseDamage = floor(((Level + 5) / 125) * ((Power * AttackStat) / DefenseStat) + 2)
     // Modifier involves type, critical, random. But do NOT include direct Quality multiplier as per AGENTS.md / constraints!
     // Memory: "Base damage calculation modifiers involve type effectiveness, critical hits, and random variance, but they do NOT include a direct Quality multiplier since Quality is already factored into the Attack and Defense stats."
@@ -281,7 +281,7 @@ function getCurrentCount(state, type) {
             }
         }
     } else if (type === 'potions') {
-        for (const [key, value] of Object.entries(state.backpack.potions)) {
+        for (const value of Object.values(state.backpack.potions)) {
             count += value;
         }
     } else if (type === 'box') {

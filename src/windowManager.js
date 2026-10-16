@@ -75,7 +75,7 @@ export class WindowManager {
                         if (savedSettings.left) winElement.style.left = savedSettings.left;
                         if (savedSettings.top) winElement.style.top = savedSettings.top;
                     } else if (windowId === 'main-control-window') {
-                        winElement.style.width = 'auto';
+                        winElement.style.width = 'max-content';
                         winElement.style.height = 'auto';
                         setTimeout(() => {
                             if (typeof winElement.resetResizeDims === 'function') {
@@ -566,18 +566,6 @@ export class WindowManager {
             if (winElement._originalHeight) {
                 winElement._originalRatio = winElement._originalWidth / winElement._originalHeight;
             }
-
-            // If main-control-window is uninitialized, assign the calculated max-content width to the actual element width
-            // to allow it to wrap properly, avoiding the 80x80 initial bug where the wrapper is small.
-            if (windowId === 'main-control-window' && (!oldWidth || oldWidth === 'auto' || parseInt(oldWidth) < 150)) {
-                let contentContainer = winElement.querySelector('.window-content-container');
-                let horizontalPadding = 0;
-                if (contentContainer) {
-                    const style = window.getComputedStyle(contentContainer);
-                    horizontalPadding = parseFloat(style.paddingLeft || 0) + parseFloat(style.paddingRight || 0);
-                }
-                winElement.style.width = (newOriginalWidth + horizontalPadding) + 'px';
-            }
         } else if (newOriginalWidth !== currentOriginalWidth) {
             // Content needs more or less width, we must adjust
             const growthRatio = newOriginalWidth / currentOriginalWidth;
@@ -803,7 +791,26 @@ export class WindowManager {
         const header = document.getElementById(windowId + '-header');
         if (header && title) {
             header.style.position = 'relative';
-            header.innerHTML = `${title}<span onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('${windowId}')" style="position: absolute; top: 5px; right: 5px; font-size: 12px; font-weight: bold; line-height: 1; padding: 0; cursor: pointer; color: white; z-index: 10;">X</span>`;
+            header.textContent = title;
+
+            const closeBtn = document.createElement('span');
+            closeBtn.textContent = 'X';
+            closeBtn.style.position = 'absolute';
+            closeBtn.style.top = '5px';
+            closeBtn.style.right = '5px';
+            closeBtn.style.fontSize = '12px';
+            closeBtn.style.fontWeight = 'bold';
+            closeBtn.style.lineHeight = '1';
+            closeBtn.style.padding = '0';
+            closeBtn.style.cursor = 'pointer';
+            closeBtn.style.color = 'white';
+            closeBtn.style.zIndex = '10';
+            closeBtn.onclick = () => {
+                if(window.windowManager) {
+                    window.windowManager.closeDynamicWindow(windowId);
+                }
+            };
+            header.appendChild(closeBtn);
         }
 
         const contentPanel = document.getElementById(windowId + '-content');
