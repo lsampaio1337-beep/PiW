@@ -2839,11 +2839,24 @@ export function renderGenericLab() {
         let starterButtonsHtml = starterIds.map(id => {
             const p = state.config.pokemonData.find(p => p.id === id);
             const name = p ? p.name : 'Unknown';
+
+            const escapeHTML = (str) => {
+                return str.toString()
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#039;');
+            };
+
+            const escapedName = escapeHTML(name);
             const paddedId = id.toString().padStart(4, '0');
             const spriteSrc = `Assets/Pokemon Sprites/Natural/Gen5/${paddedId}_${name}.png`;
+            const escapedSpriteSrc = escapeHTML(spriteSrc);
+
             return `
                   <button onclick="window.selectStarter(${id})">
-                    <img src="${spriteSrc}" style="width: 80px; height: 80px;"><br>${name}
+                    <img src="${escapedSpriteSrc}" style="width: 80px; height: 80px;"><br>${escapedName}
                   </button>`;
         }).join('');
 
