@@ -244,8 +244,8 @@ const johtoMapCoordinates = {
     "x": 85.91,
     "y": 41.47
   },
-  "celladon_gym": {
-    "name": "Celladon Gym",
+  "celadon_gym": {
+    "name": "Celadon Gym",
     "x": 78.91,
     "y": 46.84
   },

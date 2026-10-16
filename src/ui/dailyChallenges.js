@@ -130,7 +130,7 @@ const CHALLENGE_DEFS = {
             if (state.trainer.badges >= 7) pool.push('Safariball');
             return pool[Math.floor(Math.random() * pool.length)];
         } },
-        { id: 10, text: "Gotta Catch 'Em All: Catch 2 different species of Pokémon today.", getTarget: () => 2, type: 'catch_different_species', condition: () => Object.keys(state.stats.caughtSpecies || {}).length < 148 },
+        { id: 10, text: "Gotta Catch 'Em All: Catch 2 different species of Pokémon today.", getTarget: () => 2, type: 'catch_different_species', condition: () => (state.stats.caughtSpeciesCount || 0) < 148 },
         { id: 11, text: "Rare: Catch $ Rare Pokémon.", getTarget: () => 2 + state.trainer.badges, type: 'catch_rare' },
         { id: 12, text: "Weak: Catch $ Weak Pokémon.", getTarget: () => 2 + state.trainer.badges, type: 'catch_weak' },
         { id: 13, text: "Specific Species: Catch $ {extra}.", getTarget: () => Math.max(5, (state.stats.completedChallengeIds ? state.stats.completedChallengeIds.length : 1)), type: 'catch_species', getExtra: () => {

@@ -61,23 +61,23 @@ export function setupGlobalEventListeners() {
         });
     }
 
-    // Oak Tutorial
-    const oakTutorialSkipBtn = document.getElementById('btn-oak-tutorial-skip');
-    if (oakTutorialSkipBtn) {
-        oakTutorialSkipBtn.addEventListener('click', () => {
-            if (window.skipOakTutorial) window.skipOakTutorial();
+    // Professor Tutorial
+    const profTutorialSkipBtn = document.getElementById('btn-prof-tutorial-skip');
+    if (profTutorialSkipBtn) {
+        profTutorialSkipBtn.addEventListener('click', () => {
+            if (window.skipProfTutorial) window.skipProfTutorial();
         });
     }
-    const oakTutorialProceedBtn = document.getElementById('btn-oak-tutorial-proceed');
-    if (oakTutorialProceedBtn) {
-        oakTutorialProceedBtn.addEventListener('click', () => {
-            if (window.proceedOakTutorial) window.proceedOakTutorial();
+    const profTutorialProceedBtn = document.getElementById('btn-prof-tutorial-proceed');
+    if (profTutorialProceedBtn) {
+        profTutorialProceedBtn.addEventListener('click', () => {
+            if (window.proceedProfTutorial) window.proceedProfTutorial();
         });
     }
-    const oakTutorialConcludeBtn = document.getElementById('btn-oak-tutorial-conclude');
-    if (oakTutorialConcludeBtn) {
-        oakTutorialConcludeBtn.addEventListener('click', () => {
-            if (window.concludeOakTutorial) window.concludeOakTutorial();
+    const profTutorialConcludeBtn = document.getElementById('btn-prof-tutorial-conclude');
+    if (profTutorialConcludeBtn) {
+        profTutorialConcludeBtn.addEventListener('click', () => {
+            if (window.concludeProfTutorial) window.concludeProfTutorial();
         });
     }
 

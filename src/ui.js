@@ -23,7 +23,7 @@ window.dismissDaycareMessage = function() {
     updateUI();
 };
 
-const oakTutorialMessages = [
+const profTutorialMessages = [
     "<p>Hello, Trainer!</p><p>Here I will give you some tips for introduce you to game.</p><p>Do you want a tutorial guide to help you understand better the game or do you want to skip and start the game?</p>",
     "<p>This game runs only on the Main Control Tab.</p><p>It is in there that you will open and close all modules</p><p>This module you are seeing it is called “Main View” and it will display all the visual when battling or shopping.</p>",
     "<p>Icons are displayed in the Main Control Tab. You will be able to open modules with them.</p><p>The first two modules are “Main View” and “Team View”, and they will help when you are in battle mode.</p>",
@@ -34,50 +34,50 @@ const oakTutorialMessages = [
     "<p>On maps you can find places that are HUB for interactions.</p><p>You are at “Professor Lab” now, and I have some assignments for you… make sure to conclude them to earn boosts.</p>",
     "<p>Now you are all set!</p><p>If you need more help, make sure to open the Help Module!</p><p>Have fun and CATCH THEM ALL!</p>"
 ];
-let currentOakTutorialIndex = 0;
+let currentProfTutorialIndex = 0;
 
-window.skipOakTutorial = function() {
-    state.globalStats.hasSeenOakTutorial = true;
-    const overlay = document.getElementById('oak-tutorial-overlay');
+window.skipProfTutorial = function() {
+    state.globalStats.hasSeenProfTutorial = true;
+    const overlay = document.getElementById('prof-tutorial-overlay');
     if (overlay) overlay.style.display = 'none';
     if (window.storageRef) window.storageRef.save(state);
 };
 
-window.proceedOakTutorial = function() {
-    currentOakTutorialIndex++;
-    if (currentOakTutorialIndex >= oakTutorialMessages.length - 1) {
+window.proceedProfTutorial = function() {
+    currentProfTutorialIndex++;
+    if (currentProfTutorialIndex >= profTutorialMessages.length - 1) {
         // Switch to the conclude button on the last message
-        document.getElementById('btn-oak-tutorial-skip').style.display = 'none';
-        document.getElementById('btn-oak-tutorial-proceed').style.display = 'none';
-        document.getElementById('btn-oak-tutorial-conclude').style.display = 'inline-block';
+        document.getElementById('btn-prof-tutorial-skip').style.display = 'none';
+        document.getElementById('btn-prof-tutorial-proceed').style.display = 'none';
+        document.getElementById('btn-prof-tutorial-conclude').style.display = 'inline-block';
     } else {
-        document.getElementById('btn-oak-tutorial-proceed').innerText = `Proceed ${currentOakTutorialIndex + 1}/${oakTutorialMessages.length - 1}`;
+        document.getElementById('btn-prof-tutorial-proceed').innerText = `Proceed ${currentProfTutorialIndex + 1}/${profTutorialMessages.length - 1}`;
     }
 
-    if (currentOakTutorialIndex < oakTutorialMessages.length) {
-        document.getElementById('oak-tutorial-text').innerHTML = oakTutorialMessages[currentOakTutorialIndex];
+    if (currentProfTutorialIndex < profTutorialMessages.length) {
+        document.getElementById('prof-tutorial-text').innerHTML = profTutorialMessages[currentProfTutorialIndex];
     }
 };
 
-window.concludeOakTutorial = function() {
-    window.skipOakTutorial();
+window.concludeProfTutorial = function() {
+    window.skipProfTutorial();
 };
 
-export function showOakTutorialIfNeeded() {
-    if (!state.globalStats.hasSeenOakTutorial) {
-        const overlay = document.getElementById('oak-tutorial-overlay');
+export function showProfTutorialIfNeeded() {
+    if (!state.globalStats.hasSeenProfTutorial) {
+        const overlay = document.getElementById('prof-tutorial-overlay');
         if (overlay) {
-            currentOakTutorialIndex = 0;
-            document.getElementById('oak-tutorial-text').innerHTML = oakTutorialMessages[currentOakTutorialIndex];
+            currentProfTutorialIndex = 0;
+            document.getElementById('prof-tutorial-text').innerHTML = profTutorialMessages[currentProfTutorialIndex];
 
             // Reset buttons visibility
-            document.getElementById('btn-oak-tutorial-skip').style.display = 'inline-block';
+            document.getElementById('btn-prof-tutorial-skip').style.display = 'inline-block';
 
-            const proceedBtn = document.getElementById('btn-oak-tutorial-proceed');
-            proceedBtn.innerText = `Proceed 1/${oakTutorialMessages.length - 1}`;
+            const proceedBtn = document.getElementById('btn-prof-tutorial-proceed');
+            proceedBtn.innerText = `Proceed 1/${profTutorialMessages.length - 1}`;
             proceedBtn.style.display = 'inline-block';
 
-            document.getElementById('btn-oak-tutorial-conclude').style.display = 'none';
+            document.getElementById('btn-prof-tutorial-conclude').style.display = 'none';
 
             overlay.style.display = 'flex';
         }
@@ -358,7 +358,10 @@ window.completeChallenge = function(targetAreaId) {
         }
         if (unlock.requirements.catchSpecies) {
              for (let s of unlock.requirements.catchSpecies) {
-                 if (state.stats.caughtSpecies) delete state.stats.caughtSpecies[s.species];
+                 if (state.stats.caughtSpecies && state.stats.caughtSpecies[s.species] !== undefined) {
+                     delete state.stats.caughtSpecies[s.species];
+                     state.stats.caughtSpeciesCount = Math.max(0, (state.stats.caughtSpeciesCount || 0) - 1);
+                 }
              }
         }
         if (unlock.requirements.catchSpeciesByRarity) {
@@ -376,7 +379,10 @@ window.completeChallenge = function(targetAreaId) {
              if (unlock.requirements.catchEachFromSlotMachine.machines) {
                  for (let m of unlock.requirements.catchEachFromSlotMachine.machines) {
                      for (let s of m) {
-                         if (state.stats.caughtSpecies) delete state.stats.caughtSpecies[s];
+                         if (state.stats.caughtSpecies && state.stats.caughtSpecies[s] !== undefined) {
+                             delete state.stats.caughtSpecies[s];
+                             state.stats.caughtSpeciesCount = Math.max(0, (state.stats.caughtSpeciesCount || 0) - 1);
+                         }
                      }
                  }
              }
@@ -403,6 +409,9 @@ window.cheatProgressChallenge = function(targetAreaId) {
         for (let i = 0; i < state.config.pokemonData.length; i++) {
              if (count >= 150) break;
              let p = state.config.pokemonData[i];
+             if (!state.stats.caughtSpecies[p.name]) {
+                 state.stats.caughtSpeciesCount = (state.stats.caughtSpeciesCount || 0) + 1;
+             }
              state.stats.caughtSpecies[p.name] = 1;
              count++;
         }
@@ -439,7 +448,12 @@ window.cheatProgressChallenge = function(targetAreaId) {
         }
         if (req.catchSpecies) {
             if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
-            req.catchSpecies.forEach(r => state.stats.caughtSpecies[r.species] = (state.stats.caughtSpecies[r.species] || 0) + r.count);
+            req.catchSpecies.forEach(r => {
+                if (!state.stats.caughtSpecies[r.species]) {
+                    state.stats.caughtSpeciesCount = (state.stats.caughtSpeciesCount || 0) + 1;
+                }
+                state.stats.caughtSpecies[r.species] = (state.stats.caughtSpecies[r.species] || 0) + r.count;
+            });
         }
         if (req.catchSpeciesByRarity) {
             if (!state.stats.challengeCaughtSpecific) state.stats.challengeCaughtSpecific = {};
@@ -460,10 +474,16 @@ window.cheatProgressChallenge = function(targetAreaId) {
             if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
             if (req.catchEachFromSlotMachine.machines) {
                 req.catchEachFromSlotMachine.machines.forEach(m => {
+                    if (!state.stats.caughtSpecies[m[0]]) {
+                        state.stats.caughtSpeciesCount = (state.stats.caughtSpeciesCount || 0) + 1;
+                    }
                     state.stats.caughtSpecies[m[0]] = (state.stats.caughtSpecies[m[0]] || 0) + 1;
                 });
             } else if (req.catchEachFromSlotMachine.speciesList) {
                 req.catchEachFromSlotMachine.speciesList.forEach(s => {
+                    if (!state.stats.caughtSpecies[s]) {
+                        state.stats.caughtSpeciesCount = (state.stats.caughtSpeciesCount || 0) + 1;
+                    }
                     state.stats.caughtSpecies[s] = (state.stats.caughtSpecies[s] || 0) + 1;
                 });
             }
@@ -544,15 +564,16 @@ window.showChallengesModal = function() {
                 <div style="display: flex; flex-direction: column; gap: 15px;">`;
 
     // The 150 Challenge should only appear if the Final Challenge (Indigo Plateau) has been completed
-    let isFinalChallengeCompleted = checkFinalChallengeCompleted();
-    let hasActive150Challenge = isFinalChallengeCompleted && !state.stats.completed150Challenge;
+    let isFinalChallengeCompleted = checkFinalChallengeCompleted(state.currentRegionName);
+    let isKanto = !state.currentRegionName || state.currentRegionName === 'Kanto';
+    let hasActive150Challenge = isKanto && isFinalChallengeCompleted && !state.stats.completed150Challenge;
 
     if (activeChallengesCount === 0 && !hasActive150Challenge) {
         html += `<div style="text-align: center; font-size: 16px; color: #aaa;">No active Challenge</div>`;
     }
 
     if (hasActive150Challenge) {
-        let uniqueSpeciesCaught = state.stats.caughtSpecies ? Object.keys(state.stats.caughtSpecies).length : 0;
+        let uniqueSpeciesCaught = (state.stats.caughtSpeciesCount || 0);
         let isMet = uniqueSpeciesCaught >= 150;
         let displayName = "The 150 Challenge";
         let rewardsStr = "Mythical and Legendary Spot";
@@ -633,7 +654,7 @@ window.showChallengesModal = function() {
         (window.getCurrentUnlocks() ? state.stats.completedChallengeIds.filter(id => window.getCurrentUnlocks().some(u => u.areaId === id)) : state.stats.completedChallengeIds)
         : [];
 
-    if (state.stats.completed150Challenge) completedCount++;
+    if (isKanto && state.stats.completed150Challenge) completedCount++;
 
     if (completedCount > 0) {
         let pastTitle = completedCount === 1 ? "Past Challenge" : "Past Challenges";
@@ -642,7 +663,7 @@ window.showChallengesModal = function() {
                     <div style="display: flex; flex-direction: column; gap: 10px;">`;
 
         // Render 150 Challenge in Past Challenges if completed
-        if (state.stats.completed150Challenge) {
+        if (isKanto && state.stats.completed150Challenge) {
             html += `<div style="border: 1px solid #333; padding: 10px; border-radius: 5px; background-color: rgba(255,255,255,0.05);">
                           <div style="color: #ff9800; font-weight: bold; margin-bottom: 5px;">The 150 Challenge</div>
                           <ul style="margin-top: 0; margin-bottom: 5px; padding-left: 20px; font-size: 14px;">
@@ -878,7 +899,7 @@ export function showModal(title, htmlContent, windowId = 'dynamic-modal', width 
     }
 }
 
-const oakTasks = {
+const profTasks = {
     q: [
         { req: 50, stat: 'weakPlusCaptures', text: "Capture 50 Weak+ Pokemons", reward: "Low Quality Booster", effect: "+15% Quality Bonus" },
         { req: 100, stat: 'regularPlusCaptures', text: "Capture 100 Regular+ Pokemons", reward: "Regular Quality Booster", effect: "+30% Quality Bonus" },
@@ -920,49 +941,49 @@ const oakTasks = {
     ]
 };
 
-window.getOakTaskAvailableCount = function() {
+window.getProfTaskAvailableCount = function() {
     let count = 0;
 
     // Quality
     let qTier = state.stats.qTaskTier || 0;
-    if (qTier < oakTasks.q.length) {
-        if ((state.stats[oakTasks.q[qTier].stat] || 0) >= oakTasks.q[qTier].req) count++;
+    if (qTier < profTasks.q.length) {
+        if ((state.stats[profTasks.q[qTier].stat] || 0) >= profTasks.q[qTier].req) count++;
     }
 
     // Catch
     let cTier = state.stats.cTaskTier || 0;
-    if (cTier < oakTasks.c.length) {
-        if ((state.stats.caught || 0) >= oakTasks.c[cTier].req) count++;
+    if (cTier < profTasks.c.length) {
+        if ((state.stats.caught || 0) >= profTasks.c[cTier].req) count++;
     }
 
     // IV
     let ivTier = state.stats.ivTaskTier || 0;
-    if (ivTier < oakTasks.iv.length) {
-        if ((state.stats[oakTasks.iv[ivTier].stat] || 0) >= oakTasks.iv[ivTier].req) count++;
+    if (ivTier < profTasks.iv.length) {
+        if ((state.stats[profTasks.iv[ivTier].stat] || 0) >= profTasks.iv[ivTier].req) count++;
     }
 
     // Level
     let levelTier = state.stats.levelTaskTier || 0;
-    if (levelTier < oakTasks.level.length) {
-        if ((state.stats[oakTasks.level[levelTier].stat] || 0) >= oakTasks.level[levelTier].req) count++;
+    if (levelTier < profTasks.level.length) {
+        if ((state.stats[profTasks.level[levelTier].stat] || 0) >= profTasks.level[levelTier].req) count++;
     }
 
     // Shiny Seen
     let seenTier = state.stats.shinySeenTaskTier || 0;
-    if (seenTier < oakTasks.shinySeen.length) {
-        if ((state.stats.shiniesSeen || 0) >= oakTasks.shinySeen[seenTier].req) count++;
+    if (seenTier < profTasks.shinySeen.length) {
+        if ((state.stats.shiniesSeen || 0) >= profTasks.shinySeen[seenTier].req) count++;
     }
 
     // Shiny Caught
     let caughtTier = state.stats.shinyCaughtTaskTier || 0;
-    if (caughtTier < oakTasks.shinyCaught.length) {
-        if ((state.stats.shiniesCaught || 0) >= oakTasks.shinyCaught[caughtTier].req) count++;
+    if (caughtTier < profTasks.shinyCaught.length) {
+        if ((state.stats.shiniesCaught || 0) >= profTasks.shinyCaught[caughtTier].req) count++;
     }
 
     // Final
     let finalTier = state.stats.finalTaskTier || 0;
-    if (finalTier < oakTasks.final.length) {
-        let currentSpeciesCount = state.stats.caughtSpecies ? Object.keys(state.stats.caughtSpecies).length : 0;
+    if (finalTier < profTasks.final.length) {
+        let currentSpeciesCount = (state.stats.caughtSpeciesCount || 0);
         let totalSpecies = state.config.pokemonData.length;
         if (currentSpeciesCount >= totalSpecies) count++;
     }
@@ -970,7 +991,7 @@ window.getOakTaskAvailableCount = function() {
     return count;
 };
 
-window.claimOakTaskReward = function(type) {
+window.claimProfTaskReward = function(type) {
     if (type === 'q') state.stats.qTaskTier = (state.stats.qTaskTier || 0) + 1;
     if (type === 'c') state.stats.cTaskTier = (state.stats.cTaskTier || 0) + 1;
     if (type === 'level') state.stats.levelTaskTier = (state.stats.levelTaskTier || 0) + 1;
@@ -978,43 +999,43 @@ window.claimOakTaskReward = function(type) {
     if (type === 'shinyCaught') state.stats.shinyCaughtTaskTier = (state.stats.shinyCaughtTaskTier || 0) + 1;
     if (type === 'iv') state.stats.ivTaskTier = (state.stats.ivTaskTier || 0) + 1;
     if (type === 'final') state.stats.finalTaskTier = (state.stats.finalTaskTier || 0) + 1;
-    window.showOakLabModal();
+    window.showProfLabModal();
 };
 
-window.cheatCompleteOakTask = function(type) {
+window.cheatCompleteProfTask = function(type) {
     let tier = 0;
     let statName = "";
     if (type === 'q') {
         tier = state.stats.qTaskTier || 0;
-        if (tier < oakTasks.q.length) {
-            statName = oakTasks.q[tier].stat;
-            state.stats[statName] = Math.max(state.stats[statName] || 0, oakTasks.q[tier].req);
+        if (tier < profTasks.q.length) {
+            statName = profTasks.q[tier].stat;
+            state.stats[statName] = Math.max(state.stats[statName] || 0, profTasks.q[tier].req);
         }
     }
     if (type === 'c') {
         tier = state.stats.cTaskTier || 0;
-        if (tier < oakTasks.c.length) state.stats.caught = Math.max(state.stats.caught || 0, oakTasks.c[tier].req);
+        if (tier < profTasks.c.length) state.stats.caught = Math.max(state.stats.caught || 0, profTasks.c[tier].req);
     }
     if (type === 'shinySeen') {
         tier = state.stats.shinySeenTaskTier || 0;
-        if (tier < oakTasks.shinySeen.length) state.stats.shiniesSeen = Math.max(state.stats.shiniesSeen || 0, oakTasks.shinySeen[tier].req);
+        if (tier < profTasks.shinySeen.length) state.stats.shiniesSeen = Math.max(state.stats.shiniesSeen || 0, profTasks.shinySeen[tier].req);
     }
     if (type === 'shinyCaught') {
         tier = state.stats.shinyCaughtTaskTier || 0;
-        if (tier < oakTasks.shinyCaught.length) state.stats.shiniesCaught = Math.max(state.stats.shiniesCaught || 0, oakTasks.shinyCaught[tier].req);
+        if (tier < profTasks.shinyCaught.length) state.stats.shiniesCaught = Math.max(state.stats.shiniesCaught || 0, profTasks.shinyCaught[tier].req);
     }
     if (type === 'level') {
         tier = state.stats.levelTaskTier || 0;
-        if (tier < oakTasks.level.length) {
-            statName = oakTasks.level[tier].stat;
-            state.stats[statName] = Math.max(state.stats[statName] || 0, oakTasks.level[tier].req);
+        if (tier < profTasks.level.length) {
+            statName = profTasks.level[tier].stat;
+            state.stats[statName] = Math.max(state.stats[statName] || 0, profTasks.level[tier].req);
         }
     }
     if (type === 'iv') {
         tier = state.stats.ivTaskTier || 0;
-        if (tier < oakTasks.iv.length) {
-            statName = oakTasks.iv[tier].stat;
-            state.stats[statName] = Math.max(state.stats[statName] || 0, oakTasks.iv[tier].req);
+        if (tier < profTasks.iv.length) {
+            statName = profTasks.iv[tier].stat;
+            state.stats[statName] = Math.max(state.stats[statName] || 0, profTasks.iv[tier].req);
         }
     }
     if (type === 'final') {
@@ -1032,13 +1053,13 @@ window.cheatCompleteOakTask = function(type) {
             }
         }
     }
-    window.showOakLabModal();
+    window.showProfLabModal();
 };
 
-window.showOakLabModal = function() {
-    if (state.stats.showOakLobbyNotification) {
-        state.stats.showOakLobbyNotification = false;
-        renderGenericLab(); // Clear the notification from the lobby button
+window.showProfLabModal = function() {
+    if (state.stats.showProfLobbyNotification) {
+        state.stats.showProfLobbyNotification = false;
+        renderProfessorLab(); // Clear the notification from the lobby button
     }
 
     let html = `<div class="content-panel" style="display:flex; flex-direction:column; gap:15px; text-align:left; height: 100%; overflow-y: auto;">`;
@@ -1054,7 +1075,7 @@ window.showOakLabModal = function() {
         let barHtml = "";
         if (isComplete) {
             barHtml = `
-                <div onclick="window.claimOakTaskReward('${type}')" style="width: 100%; box-sizing: border-box; background-color: #4CAF50; border-radius: 4px; padding: 5px; text-align: center; cursor: pointer; color: white; font-weight: bold; margin-top: 5px;">
+                <div onclick="window.claimProfTaskReward('${type}')" style="width: 100%; box-sizing: border-box; background-color: #4CAF50; border-radius: 4px; padding: 5px; text-align: center; cursor: pointer; color: white; font-weight: bold; margin-top: 5px;">
                     ${task.reward}
                 </div>
             `;
@@ -1074,7 +1095,7 @@ window.showOakLabModal = function() {
             <div style="margin-bottom: 10px; font-size: 12px;">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <span>${task.text}</span>
-                    <button onclick="window.cheatCompleteOakTask('${type}')" style="padding: 2px 5px; font-size: 8px; cursor: pointer; background: #d9534f; color: white; border: none; border-radius: 3px;">Cheat Complete</button>
+                    <button onclick="window.cheatCompleteProfTask('${type}')" style="padding: 2px 5px; font-size: 8px; cursor: pointer; background: #d9534f; color: white; border: none; border-radius: 3px;">Cheat Complete</button>
                 </div>
                 ${barHtml}
             </div>
@@ -1121,47 +1142,47 @@ window.showOakLabModal = function() {
     // Quality Card
     let qTier = state.stats.qTaskTier || 0;
     let qCurrentVal = 0;
-    if (qTier < oakTasks.q.length) {
-        qCurrentVal = state.stats[oakTasks.q[qTier].stat] || 0;
-    } else if (oakTasks.q.length > 0) {
-        qCurrentVal = state.stats[oakTasks.q[oakTasks.q.length - 1].stat] || 0;
+    if (qTier < profTasks.q.length) {
+        qCurrentVal = state.stats[profTasks.q[qTier].stat] || 0;
+    } else if (profTasks.q.length > 0) {
+        qCurrentVal = state.stats[profTasks.q[profTasks.q.length - 1].stat] || 0;
     }
-    html += renderCard("Quality Assignment", 'q', qCurrentVal, qTier, oakTasks.q, false);
+    html += renderCard("Quality Assignment", 'q', qCurrentVal, qTier, profTasks.q, false);
 
     // Catch Card
-    html += renderCard("Catch Assignment", 'c', state.stats.caught || 0, state.stats.cTaskTier || 0, oakTasks.c, false);
+    html += renderCard("Catch Assignment", 'c', state.stats.caught || 0, state.stats.cTaskTier || 0, profTasks.c, false);
 
     // IV Card
     let ivTier = state.stats.ivTaskTier || 0;
     let ivCurrentVal = 0;
-    if (ivTier < oakTasks.iv.length) {
-        ivCurrentVal = state.stats[oakTasks.iv[ivTier].stat] || 0;
-    } else if (oakTasks.iv.length > 0) {
-        ivCurrentVal = state.stats[oakTasks.iv[oakTasks.iv.length - 1].stat] || 0; // fallback if completed
+    if (ivTier < profTasks.iv.length) {
+        ivCurrentVal = state.stats[profTasks.iv[ivTier].stat] || 0;
+    } else if (profTasks.iv.length > 0) {
+        ivCurrentVal = state.stats[profTasks.iv[profTasks.iv.length - 1].stat] || 0; // fallback if completed
     }
-    html += renderCard("IV Assignment", 'iv', ivCurrentVal, ivTier, oakTasks.iv, false);
+    html += renderCard("IV Assignment", 'iv', ivCurrentVal, ivTier, profTasks.iv, false);
 
     // Level Card
     let levelTier = state.stats.levelTaskTier || 0;
     let levelCurrentVal = 0;
-    if (levelTier < oakTasks.level.length) {
-        levelCurrentVal = state.stats[oakTasks.level[levelTier].stat] || 0;
-    } else if (oakTasks.level.length > 0) {
-        levelCurrentVal = state.stats[oakTasks.level[oakTasks.level.length - 1].stat] || 0; // fallback if completed
+    if (levelTier < profTasks.level.length) {
+        levelCurrentVal = state.stats[profTasks.level[levelTier].stat] || 0;
+    } else if (profTasks.level.length > 0) {
+        levelCurrentVal = state.stats[profTasks.level[profTasks.level.length - 1].stat] || 0; // fallback if completed
     }
-    html += renderCard("Level Assignment", 'level', levelCurrentVal, levelTier, oakTasks.level, true);
+    html += renderCard("Level Assignment", 'level', levelCurrentVal, levelTier, profTasks.level, true);
 
     // Shiny Card (Combined seen and caught, keeps all rewards but obsolete regular seen shiny is removed by good shiny)
     let seenTier = state.stats.shinySeenTaskTier || 0;
     let caughtTier = state.stats.shinyCaughtTaskTier || 0;
 
-    let shinySeenTaskHtml = renderActiveTask('shinySeen', state.stats.shiniesSeen || 0, seenTier, oakTasks.shinySeen);
-    let shinyCaughtTaskHtml = renderActiveTask('shinyCaught', state.stats.shiniesCaught || 0, caughtTier, oakTasks.shinyCaught);
+    let shinySeenTaskHtml = renderActiveTask('shinySeen', state.stats.shiniesSeen || 0, seenTier, profTasks.shinySeen);
+    let shinyCaughtTaskHtml = renderActiveTask('shinyCaught', state.stats.shiniesCaught || 0, caughtTier, profTasks.shinyCaught);
 
     let shinyTitle = "Shiny Assignment";
 
     // Only show "Assignment: Completed" once if both are done
-    if (seenTier >= oakTasks.shinySeen.length && caughtTier >= oakTasks.shinyCaught.length) {
+    if (seenTier >= profTasks.shinySeen.length && caughtTier >= profTasks.shinyCaught.length) {
         shinyTitle = "Shiny Reward";
         shinySeenTaskHtml = "";
         shinyCaughtTaskHtml = "";
@@ -1169,21 +1190,21 @@ window.showOakLabModal = function() {
         // If one is complete but not the other, we don't want duplicate "Assignment: Completed" texts
         // if they rendered their own individual completions. Since we only want a single "Completed" when BOTH are done,
         // we strip out the individual "Assignment: Completed" if it exists.
-        if (seenTier >= oakTasks.shinySeen.length) shinySeenTaskHtml = "";
-        if (caughtTier >= oakTasks.shinyCaught.length) shinyCaughtTaskHtml = "";
+        if (seenTier >= profTasks.shinySeen.length) shinySeenTaskHtml = "";
+        if (caughtTier >= profTasks.shinyCaught.length) shinyCaughtTaskHtml = "";
     }
 
     let shinyRewardsHtml = "";
 
     // Shiny Seen rewards logic (Good Shiny replaces Regular Shiny)
     for (let i = 0; i < seenTier; i++) {
-        let rewardName = oakTasks.shinySeen[i].reward;
+        let rewardName = profTasks.shinySeen[i].reward;
         // If Good Shiny (tier index 1) is unlocked, we skip Regular Shiny (tier index 0)
         if (seenTier > 1 && i === 0) continue;
 
         shinyRewardsHtml += `
             <div style="font-size: 9px; margin-top: 5px; padding-left: 5px; border-left: 2px solid #4CAF50;">
-                <b>${rewardName}</b>: <span style="color: #4CAF50;">${oakTasks.shinySeen[i].effect}</span>
+                <b>${rewardName}</b>: <span style="color: #4CAF50;">${profTasks.shinySeen[i].effect}</span>
             </div>
         `;
     }
@@ -1192,7 +1213,7 @@ window.showOakLabModal = function() {
     for (let i = 0; i < caughtTier; i++) {
         shinyRewardsHtml += `
             <div style="font-size: 9px; margin-top: 5px; padding-left: 5px; border-left: 2px solid #4CAF50;">
-                <b>${oakTasks.shinyCaught[i].reward}</b>: <span style="color: #4CAF50;">${oakTasks.shinyCaught[i].effect}</span>
+                <b>${profTasks.shinyCaught[i].reward}</b>: <span style="color: #4CAF50;">${profTasks.shinyCaught[i].effect}</span>
             </div>
         `;
     }
@@ -1208,16 +1229,16 @@ window.showOakLabModal = function() {
 
     // Final Card
     let finalTier = state.stats.finalTaskTier || 0;
-    let finalCurrentVal = state.stats.caughtSpecies ? Object.keys(state.stats.caughtSpecies).length : 0;
-    if (finalTier >= oakTasks.final.length && oakTasks.final.length > 0) {
+    let finalCurrentVal = (state.stats.caughtSpeciesCount || 0);
+    if (finalTier >= profTasks.final.length && profTasks.final.length > 0) {
         finalCurrentVal = state.config.pokemonData.length;
     }
     // Update req dynamically if it differs (for example, if new Pokemon are added)
-    if (oakTasks.final.length > 0) {
-        oakTasks.final[0].req = state.config.pokemonData.length;
-        oakTasks.final[0].text = `Capture ${state.config.pokemonData.length} Pokemon species`;
+    if (profTasks.final.length > 0) {
+        profTasks.final[0].req = state.config.pokemonData.length;
+        profTasks.final[0].text = `Capture ${state.config.pokemonData.length} Pokemon species`;
     }
-    html += renderCard("Final Assignment", 'final', finalCurrentVal, finalTier, oakTasks.final, true);
+    html += renderCard("Final Assignment", 'final', finalCurrentVal, finalTier, profTasks.final, true);
 
     html += `</div>`;
 
@@ -1228,17 +1249,16 @@ window.showOakLabModal = function() {
         title.innerText = "Assignments and Boosters";
         content.innerHTML = html;
 
-        // Dynamically style the inner modal for Oak Lab to 70% width and proportional scale
+        // Dynamically style the inner modal for Professor Lab to 70% width and proportional scale
         const innerModal = document.getElementById('main-view-inner-modal');
         if (innerModal) {
-            // Apply a specific class for Oak Lab modal instead of hacking inline styles permanently
-            innerModal.classList.add('oak-lab-inner-modal');
+            innerModal.classList.add('prof-lab-inner-modal');
         }
 
         // Ensure cleanup when the modal is closed
         const cleanUp = () => {
             if (innerModal) {
-                innerModal.classList.remove('oak-lab-inner-modal');
+                innerModal.classList.remove('prof-lab-inner-modal');
             }
             overlay.style.display = 'none';
         };
@@ -1267,7 +1287,7 @@ window.showOakLabModal = function() {
 
 
 // Main View has 2 modes:
-// 1. Hub Mode: The taller one (where you visit places such as casino, market, professor oak, safari, gyms).
+// 1. Hub Mode: The taller one (where you visit places such as casino, market, professor lab, safari, gyms).
 const MAIN_VIEW_HUB_MODE_RATIO = 1.8;
 // 2. Battle Mode: The shorter one (where battle occurs).
 const MAIN_VIEW_BATTLE_MODE_RATIO = 5.75;
@@ -1289,12 +1309,12 @@ export function switchView(viewName) {
         if (window.windowManager) window.windowManager.setWindowProportions('main-view-window', MAIN_VIEW_HUB_MODE_RATIO);
     }
 
-    if (viewName === 'PROF_OAK_LAB' || viewName === 'JOHTO_OAK_LAB' || viewName === 'GENERIC_LAB') {
-        document.getElementById('view-generic-lab').style.display = 'block';
-        if (viewName === 'PROF_OAK_LAB') {
-            showOakTutorialIfNeeded();
+    if (viewName === 'PROFESSOR_LAB' || viewName === 'JOHTO_PROFESSOR_LAB' || viewName === 'PROFESSOR_LAB') {
+        document.getElementById('view-professor-lab').style.display = 'block';
+        if (viewName === 'PROFESSOR_LAB') {
+            showProfTutorialIfNeeded();
         }
-        renderGenericLab();
+        renderProfessorLab();
     } else if (viewName === 'SAFARI_HUB') {
         document.getElementById('view-safari-hub').style.display = 'flex';
     } else if (viewName === 'BATTLE_ARENA') {
@@ -1404,13 +1424,13 @@ async function loadConfigs() {
 
 function returnToLab() {
     let labRoute = "Professor Lab";
-    let labView = "GENERIC_LAB";
+    let labView = "PROFESSOR_LAB";
     if (state.currentRegionName === "Kanto") {
         labRoute = "Professor Lab";
-        labView = "PROF_OAK_LAB";
+        labView = "PROFESSOR_LAB";
     } else if (state.currentRegionName === "Johto") {
-        labRoute = "Johto Oak Lab";
-        labView = "JOHTO_OAK_LAB";
+        labRoute = "Johto Professor Lab";
+        labView = "JOHTO_PROFESSOR_LAB";
     }
     state.currentRoute = labRoute;
     switchView(labView);
@@ -1540,7 +1560,7 @@ function selectStarter(id) {
     startGame();
 
     // Refresh generic lab after assigning to display Assignments UI
-    renderGenericLab();
+    renderProfessorLab();
 }
 
 let gameClockTimeout = null;
@@ -1742,7 +1762,7 @@ async function init() {
     const profilesContainer = document.getElementById('profiles-container');
 
     const startNewGame = () => {
-        state.globalStats.hasSeenOakTutorial = false;
+        state.globalStats.hasSeenProfTutorial = false;
         state.globalStats.hasSeenGiftIcon = false;
         state.globalStats.hasSeenMultiplayerIcon = false;
         state.globalStats.hasSeenZzZTutorial = false;
@@ -1759,7 +1779,7 @@ async function init() {
             navButtons.style.opacity = '0.5';
         }
 
-        switchView("PROF_OAK_LAB");
+        switchView("PROFESSOR_LAB");
         // Don't call startGame yet, the user must choose a pokemon first.
     };
     window.startNewGame = startNewGame;
@@ -1985,10 +2005,17 @@ async function init() {
                     };
                     deepMerge(state, pData);
 
+                    // Initialize caughtSpeciesCount for older saves
+                    if (state.stats && state.stats.caughtSpecies) {
+                        state.stats.caughtSpeciesCount = Object.keys(state.stats.caughtSpecies).length;
+                    } else if (state.stats) {
+                        state.stats.caughtSpeciesCount = 0;
+                    }
+
                     // Migrate old save data to new globalStats structure
                     if (pData.stats) {
                         if (pData.stats.playtime !== undefined) state.globalStats.playtime = pData.stats.playtime;
-                        if (pData.stats.hasSeenOakTutorial !== undefined) state.globalStats.hasSeenOakTutorial = pData.stats.hasSeenOakTutorial;
+                        if (pData.stats.hasSeenProfTutorial !== undefined) state.globalStats.hasSeenProfTutorial = pData.stats.hasSeenProfTutorial;
                         if (pData.stats.hasSeenZzZTutorial !== undefined) state.globalStats.hasSeenZzZTutorial = pData.stats.hasSeenZzZTutorial;
                         if (pData.stats.hasSeenMultiplayerIcon !== undefined) state.globalStats.hasSeenMultiplayerIcon = pData.stats.hasSeenMultiplayerIcon;
                         if (pData.stats.hasSeenGiftIcon !== undefined) state.globalStats.hasSeenGiftIcon = pData.stats.hasSeenGiftIcon;
@@ -2063,7 +2090,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
                             state.zzzTimestamp = null;
                             storage.save(state);
                             if(window.windowManager) window.windowManager.closeDynamicWindow('window-zzz-resume');
-                            // Start normally at Oak's lab
+                            // Start normally at Professor's lab
                             returnToLab();
                         };
 
@@ -2208,7 +2235,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
                                 state.currentRoute = "PokeCenter & PokeMarket";
                                 window.navigateToLocation("PokeCenter & PokeMarket");
                             } else if (results.outOfMoney) {
-                                if (state.currentRoute === "Safari Zone") {
+                                if (["Safari Zone", "Kanto Safari Zone"].includes(state.currentRoute)) {
                                     switchView("SAFARI_HUB");
                                 } else if (state.currentRoute && state.currentRoute.startsWith("Casino - ")) {
                                     state.currentRoute = "Casino";
@@ -2221,7 +2248,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
                             }
                         };
                     } else {
-                        // Saved profiles always start at Oak's Lab and are free to explore
+                        // Saved profiles always start at Professor's lab and are free to explore
                         returnToLab();
                     }
                 }
@@ -2249,7 +2276,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
         document.getElementById('btn-new-profile').onclick = startNewGame;
     }
 
-    // Bind buttons (they might be missing if bypass Oak)
+    // Bind buttons (they might be missing if bypass Professor Lab)
     const btnBulbasaur = document.getElementById('choose-bulbasaur');
     if (btnBulbasaur) btnBulbasaur.onclick = () => selectStarter(1);
 
@@ -2458,7 +2485,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
         if (tab === 'statistics') {
             let uniqueSpeciesCaught = 0;
             if (state.stats.caughtSpecies) {
-                uniqueSpeciesCaught = Object.keys(state.stats.caughtSpecies).length;
+                uniqueSpeciesCaught = (state.stats.caughtSpeciesCount || 0);
             }
 
             let playtimeStr = "0h 0m 0s";
@@ -2503,13 +2530,13 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
             assignmentsCompleted += (state.stats.shinySeenTaskTier || 0);
             assignmentsCompleted += (state.stats.shinyCaughtTaskTier || 0);
             assignmentsCompleted += (state.stats.finalTaskTier || 0);
-            let maxAssignments = (oakTasks.q ? oakTasks.q.length : 0) +
-                                 (oakTasks.c ? oakTasks.c.length : 0) +
-                                 (oakTasks.level ? oakTasks.level.length : 0) +
-                                 (oakTasks.iv ? oakTasks.iv.length : 0) +
-                                 (oakTasks.shinySeen ? oakTasks.shinySeen.length : 0) +
-                                 (oakTasks.shinyCaught ? oakTasks.shinyCaught.length : 0) +
-                                 (oakTasks.final ? oakTasks.final.length : 0);
+            let maxAssignments = (profTasks.q ? profTasks.q.length : 0) +
+                                 (profTasks.c ? profTasks.c.length : 0) +
+                                 (profTasks.level ? profTasks.level.length : 0) +
+                                 (profTasks.iv ? profTasks.iv.length : 0) +
+                                 (profTasks.shinySeen ? profTasks.shinySeen.length : 0) +
+                                 (profTasks.shinyCaught ? profTasks.shinyCaught.length : 0) +
+                                 (profTasks.final ? profTasks.final.length : 0);
 
             let uniqueShinySpeciesCaught = 0;
             if (state.stats.caughtShiniesSpecies) {
@@ -2545,7 +2572,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
                             <div style="flex: 1;">
                                 <p><b>Jigglypuff Grains Used:</b> ${(state.stats.jigglypuffGrainsUsed || 0).toLocaleString()}</p>
                                 <p><b>Daily Rewards Collected:</b> ${(state.stats.dailyRewards ? state.stats.dailyRewards.daysClaimed : 0).toLocaleString()}</p>
-                                <p><b>Professor Oak Assignments Completed:</b> ${assignmentsCompleted}/${maxAssignments}</p>
+                                <p><b>Professor Lab Assignments Completed:</b> ${assignmentsCompleted}/${maxAssignments}</p>
                             </div>
                             <div style="flex: 1;">
                                 <p><b>White Candies Claimed:</b> ${(whiteCandiesClaimed || 0).toLocaleString()}</p>
@@ -2773,7 +2800,7 @@ window.enterSafariZone = () => {
         window.globals.battleSystem.activeEncounter = null;
         window.globals.battleSystem.isSearching = false;
         if (window.globals.battleSystem.gymState) window.globals.battleSystem.gymState.isActive = false;
-        window.globals.battleSystem.state.currentRoute = "Safari Zone";
+        window.globals.battleSystem.state.currentRoute = window.currentSafariZone || "Safari Zone";
         window.globals.battleSystem.searchNext();
 
     }
@@ -2790,13 +2817,13 @@ window.startGame = startGame;
 
 
 
-export function renderGenericLab() {
+export function renderProfessorLab() {
     const labContent = document.getElementById("generic-lab-content");
-    const labView = document.getElementById("view-generic-lab");
+    const labView = document.getElementById("view-professor-lab");
     if (!labContent || !labView) return;
 
-    if (state.stats.showOakMarkerPulse) {
-        state.stats.showOakMarkerPulse = false;
+    if (state.stats.showProfMarkerPulse) {
+        state.stats.showProfMarkerPulse = false;
     }
 
     let currentRegion = window.currentMapRegion || 'Kanto';
@@ -2861,7 +2888,7 @@ ${starterButtonsHtml}
         `;
     } else {
         // Show assignments (identical to Kanto layout)
-        let exclamationHtml = state.stats.showOakLobbyNotification
+        let exclamationHtml = state.stats.showProfLobbyNotification
             ? `<img src="Assets/Extra/ExclamationMark.png" style="position: absolute; top: -5px; right: -5px; width: 20px; height: auto; pointer-events: none; z-index: 10;">`
             : ``;
 
@@ -2870,7 +2897,7 @@ ${starterButtonsHtml}
                 <h2 style="margin-top:0;">Professor Lab</h2>
                 <div style="display: flex; flex-direction: column; gap: 10px;">
                     <div style="position: relative; display: inline-block; width: 100%;">
-                        <button onclick="window.showOakLabModal()" class="action-btn action-btn-primary" style="width: 100%;">Assignments and Boosters</button>
+                        <button onclick="window.showProfLabModal()" class="action-btn action-btn-primary" style="width: 100%;">Assignments and Boosters</button>
                         ${exclamationHtml}
                     </div>
                 </div>

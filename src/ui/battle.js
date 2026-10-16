@@ -336,7 +336,7 @@ function updateBattleBackground(combatArena, state, battleSystem, inGymCombat, i
                 combatArena.style.backgroundImage = `url('./Assets/BG/${bgImage}')`;
             }
         }
-    } else if (state.currentRoute === 'Safari Zone') {
+    } else if (["Safari Zone", "Kanto Safari Zone"].includes(state.currentRoute)) {
         combatArena.style.backgroundImage = `url('./Assets/BG/BG-SafariZone.png')`;
     } else if (state.currentRoute && state.currentRoute.startsWith('Casino')) {
          combatArena.style.backgroundImage = `url('./Assets/BG/BG-Cassino.jpg')`;

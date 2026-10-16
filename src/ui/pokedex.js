@@ -51,20 +51,26 @@ export function showPokedex() {
     if (!state.config.pokemonData) {
         html += "<p>Loading Pokedex data...</p>";
     } else {
-        // Iterate up to 151
-        for(let i = 1; i <= 151; i++) {
-            const pData = state.config.pokemonData.find(p => p.id === i);
-            if (!pData) continue;
+        const regionName = state.currentRegionName || 'Kanto';
+        let regionIdField = 'kanto_id';
+        if (regionName === 'Johto') regionIdField = 'johto_id';
+        else if (regionName === 'Hoenn') regionIdField = 'hoenn_id';
+        else if (regionName === 'Sinnoh') regionIdField = 'sinnoh_id';
+        else if (regionName === 'Unova') regionIdField = 'unova_id';
 
-            const isSeen = hasSeenSpecies(i, state);
-            const isCaught = hasCaughtSpecies(i, state);
+        const regionalDex = state.config.pokemonData.filter(p => p[regionIdField] !== undefined);
+        regionalDex.sort((a, b) => a[regionIdField] - b[regionIdField]);
+
+        for(const pData of regionalDex) {
+            const isSeen = hasSeenSpecies(pData.id, state);
+            const isCaught = hasCaughtSpecies(pData.id, state);
             const hasSeenShiny = state.stats.seenShiniesSpecies && state.stats.seenShiniesSpecies[pData.name];
             const hasCaughtShiny = state.stats.caughtShiniesSpecies && state.stats.caughtShiniesSpecies[pData.name];
 
             const isRevealed = isCaught || hasCaughtShiny;
             let filter = isRevealed ? "none" : "brightness(0)";
             let cursor = isRevealed ? "pointer" : "default";
-            let onClick = isRevealed ? `onclick="window.showDexEntry(${i})"` : "";
+            let onClick = isRevealed ? `onclick="window.showDexEntry(${pData.id})"` : "";
             let displayName = isRevealed ? pData.name : "???";
 
             let cardClass = "pokedex-card";
@@ -83,15 +89,16 @@ export function showPokedex() {
             }
 
             html += `<div class="${cardClass}" style="${cardStyle}">
-                <div style="font-weight:bold;">#${i}</div>
+                <div style="font-weight:bold;">#${pData[regionIdField]}</div>
                 <div style="font-size: 9px; margin-bottom: 2px;">${displayName}</div>
-                <img src="${window.getSpriteUrl(i, false)}" style="width: 50px; height: 50px; filter: ${filter}; cursor: ${cursor};" ${onClick}>
+                <img src="${window.getSpriteUrl(pData.id, false)}" style="width: 50px; height: 50px; filter: ${filter}; cursor: ${cursor};" ${onClick}>
             </div>`;
         }
     }
 
     html += `</div>`;
-    showModal("Pokedex", html, "window-pokedex");
+    const regionName = state.currentRegionName || 'Kanto';
+    showModal(`${regionName} Pokedex`, html, "window-pokedex");
 }
 
 export function showDexEntry(id) {
@@ -360,19 +367,25 @@ export function showSmartCaptureMode() {
         if (!state.config.pokemonData) {
             html += "<p>Loading Pokedex data...</p>";
         } else {
-            // Iterate up to 151
-            for(let i = 1; i <= 151; i++) {
-                const pData = state.config.pokemonData.find(p => p.id === i);
-                if (!pData) continue;
+            const regionName = state.currentRegionName || 'Kanto';
+            let regionIdField = 'kanto_id';
+            if (regionName === 'Johto') regionIdField = 'johto_id';
+            else if (regionName === 'Hoenn') regionIdField = 'hoenn_id';
+            else if (regionName === 'Sinnoh') regionIdField = 'sinnoh_id';
+            else if (regionName === 'Unova') regionIdField = 'unova_id';
 
-                const isSeen = hasSeenSpecies(i, state);
-                const isCaught = hasCaughtSpecies(i, state);
+            const regionalDex = state.config.pokemonData.filter(p => p[regionIdField] !== undefined);
+            regionalDex.sort((a, b) => a[regionIdField] - b[regionIdField]);
+
+            for(const pData of regionalDex) {
+                const isSeen = hasSeenSpecies(pData.id, state);
+                const isCaught = hasCaughtSpecies(pData.id, state);
                 const hasSeenShiny = state.stats.seenShiniesSpecies && state.stats.seenShiniesSpecies[pData.name];
                 const hasCaughtShiny = state.stats.caughtShiniesSpecies && state.stats.caughtShiniesSpecies[pData.name];
 
                 let filter = (isCaught || hasCaughtShiny) ? "none" : "brightness(0)";
                 let cursor = "pointer";
-                let onClick = `onclick="window.showSmartCaptureBallSelection(${i})"`;
+                let onClick = `onclick="window.showSmartCaptureBallSelection(${pData.id})"`;
                 let displayName = (isSeen || hasSeenShiny || isCaught || hasCaughtShiny) ? pData.name : "???";
 
                 let cardClass = "pokedex-card";
@@ -401,11 +414,11 @@ export function showSmartCaptureMode() {
                 }
 
                 // Sprite based on shiny mode
-                let spriteUrl = isSmartCaptureShinyMode ? window.getSpriteUrl(i, true) : window.getSpriteUrl(i, false);
+                let spriteUrl = isSmartCaptureShinyMode ? window.getSpriteUrl(pData.id, true) : window.getSpriteUrl(pData.id, false);
 
                 html += `<div class="${cardClass}" style="${cardStyle}" ${onClick}>
                     ${ballIconHtml}
-                    <div style="font-weight:bold;">#${i}</div>
+                    <div style="font-weight:bold;">#${pData[regionIdField]}</div>
                     <div style="font-size: 9px; margin-bottom: 2px;">${displayName}</div>
                     <img src="${spriteUrl}" style="width: 50px; height: 50px; filter: ${filter}; cursor: ${cursor}; pointer-events: none;">
                 </div>`;

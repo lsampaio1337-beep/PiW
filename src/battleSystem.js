@@ -2,6 +2,16 @@ import { VITAMINS, WHITE_CANDY_DEFEAT_REQUIREMENT } from "./constants.js";
 // src/battleSystem.js
 import * as mathEngine from './mathEngine.js';
 
+function escapeHTML(str) {
+    if (!str) return '';
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+}
+
 class BattleSystem {
     constructor(gameState, updateUI) {
         this.state = gameState; // reference to global game state
@@ -205,7 +215,7 @@ class BattleSystem {
             }
 
             if (typeof window.switchView === 'function') {
-                window.switchView("PROF_OAK_LAB");
+                window.switchView("PROFESSOR_LAB");
             }
 
             // Re-generate idle encounter
@@ -570,9 +580,9 @@ class BattleSystem {
                 if (index < this.gymState.currentTrainerIndex) {
                     return `<button disabled class="action-btn" style="opacity: 0.5; width: 100%;">${buttonText} (Defeated)</button>`;
                 } else if (index === this.gymState.currentTrainerIndex) {
-                    return `<button id="btn-start-gym-battle" class="action-btn action-btn-primary" onclick="window.battleEngine.startNextGymBattle()" style="width: 100%;">${buttonText} (${t.name})</button>`;
+                    return `<button id="btn-start-gym-battle" class="action-btn action-btn-primary" onclick="window.battleEngine.startNextGymBattle()" style="width: 100%;">${buttonText} (${escapeHTML(t.name)})</button>`;
                 } else {
-                    return `<button disabled class="action-btn" style="opacity: 0.5; width: 100%;">${buttonText} (${t.name})</button>`;
+                    return `<button disabled class="action-btn" style="opacity: 0.5; width: 100%;">${buttonText} (${escapeHTML(t.name)})</button>`;
                 }
             }).join('');
 
@@ -602,7 +612,7 @@ class BattleSystem {
         } else {
             // Gym completed
             contentArea.innerHTML = `
-                <h3>You defeated ${gym.leader}!</h3>
+                <h3>You defeated ${escapeHTML(gym.leader)}!</h3>
                 <p>A Gift is awaiting for you.</p>
                 <button class="action-btn action-btn-primary" onclick="window.battleEngine.stopGymBattle()" style="margin-top: 10px; width: 100%;">Leave</button>
             `;
@@ -633,7 +643,7 @@ class BattleSystem {
             return;
         }
 
-        if (this.state.currentRoute === "Safari Zone") {
+        if (["Safari Zone", "Kanto Safari Zone"].includes(this.state.currentRoute)) {
             const safariCost = this.state.config.balance.safariZonePrice || 500;
             if (this.state.trainer.money < safariCost) {
                 this.stop();
@@ -1120,7 +1130,7 @@ class BattleSystem {
             }
         }
 
-        let isSafariZone = this.state.currentRoute === "Safari Zone";
+        let isSafariZone = ["Safari Zone", "Kanto Safari Zone"].includes(this.state.currentRoute);
         let ballName;
         let multiplier;
 
@@ -1279,7 +1289,7 @@ class BattleSystem {
                             if (!this.state.stats.caughtShiniesSpecies) this.state.stats.caughtShiniesSpecies = {};
                             this.state.stats.caughtShiniesSpecies[trackingName] = true;
                         }
-                        // Track captures for Oak Tasks (Weak+, Regular+, Uncommon+, Rare+, Epic+)
+                        // Track captures for Professor Tasks (Weak+, Regular+, Uncommon+, Rare+, Epic+)
                         let qName = defeatedEncounter.qualityName || "Regular";
                         if (["Weak", "Regular", "Uncommon", "Rare", "Epic", "Shiny", "Legendary", "Boss"].includes(qName)) {
                             this.state.stats.weakPlusCaptures = (this.state.stats.weakPlusCaptures || 0) + 1;
@@ -1312,7 +1322,7 @@ class BattleSystem {
                             window.trackDailyChallenge('catch_species', { species: caughtPokemon.name });
                             window.trackDailyChallenge('catch_type', { types: caughtPokemon.types });
                             window.trackDailyChallenge('catch_ball_tier', { ball: this.activeEncounter.caughtBall });
-                            if (this.state.currentRoute === 'Safari Zone') window.trackDailyChallenge('safari_catch');
+                            if (["Safari Zone", "Kanto Safari Zone"].includes(this.state.currentRoute)) window.trackDailyChallenge('safari_catch');
                             if (this.state.currentRoute === 'Casino') window.trackDailyChallenge('casino_catch'); // Would need species tracking logic inside trackDailyChallenge if we fully implement it
                         }
                         if (sumIV < 300) this.state.stats.caughtIVUnder300 = (this.state.stats.caughtIVUnder300 || 0) + 1;
@@ -1329,6 +1339,9 @@ class BattleSystem {
 
                         // Track species catches for unlocks
                         if (!this.state.stats.caughtSpecies) this.state.stats.caughtSpecies = {};
+                        if (!this.state.stats.caughtSpecies[trackingName]) {
+                            this.state.stats.caughtSpeciesCount = (this.state.stats.caughtSpeciesCount || 0) + 1;
+                        }
                         this.state.stats.caughtSpecies[trackingName] = (this.state.stats.caughtSpecies[trackingName] || 0) + 1;
 
                         // Track specific typings
@@ -1822,7 +1835,7 @@ class BattleSystem {
                 this.gymState.inCombat = false;
             }
             if (typeof window.switchView === 'function') {
-                window.switchView("PROF_OAK_LAB");
+                window.switchView("PROFESSOR_LAB");
             }
             if (typeof window.navigateToLocation === 'function') {
                 window.navigateToLocation(labRoute);
@@ -1928,7 +1941,7 @@ class BattleSystem {
 
         let encounterCost = 0;
         let requiresPayment = false;
-        if (this.state.currentRoute === "Safari Zone") {
+        if (["Safari Zone", "Kanto Safari Zone"].includes(this.state.currentRoute)) {
             encounterCost = this.state.config.balance.safariZonePrice || 500;
             requiresPayment = true;
         } else if (this.state.currentRoute && this.state.currentRoute.startsWith("Casino - ")) {
@@ -2191,6 +2204,9 @@ class BattleSystem {
                         }
 
                         if (!this.state.stats.caughtSpecies) this.state.stats.caughtSpecies = {};
+                        if (!this.state.stats.caughtSpecies[trackingName]) {
+                            this.state.stats.caughtSpeciesCount = (this.state.stats.caughtSpeciesCount || 0) + 1;
+                        }
                         this.state.stats.caughtSpecies[trackingName] = (this.state.stats.caughtSpecies[trackingName] || 0) + 1;
 
                         // Fix the level 100 jump bug by setting xp explicitly to the exact minimum needed for their captured level

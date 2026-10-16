@@ -58,6 +58,7 @@ export const REGION_TEMPLATE = {
         hasPickedStarter: false,
         seenSpecies: {},
         caughtSpecies: {},
+        caughtSpeciesCount: 0,
         seenShiniesSpecies: {},
         caughtShiniesSpecies: {},
         upgrades: {
@@ -87,7 +88,7 @@ export const state = {
     ...JSON.parse(JSON.stringify(REGION_TEMPLATE)),
     globalStats: {
         playtime: 0,
-        hasSeenOakTutorial: false,
+        hasSeenProfTutorial: false,
         hasSeenZzZTutorial: false,
         hasSeenMultiplayerIcon: false,
         hasSeenGiftIcon: false,
@@ -131,8 +132,15 @@ export function checkFinalChallengeCompleted(regionName = 'Kanto') {
 
     if (!stats || !stats.completedChallengeIds) return false;
 
-    let finalChallenge = state.config && state.config.routes ? state.config.routes.find(r => r.challengeName === "Final Challenge") : null;
-    let finalChallengeId = finalChallenge ? finalChallenge.areaId : (regionName === 'Kanto' ? 'Indigo Plateau' : null);
+    let routes = state.config && state.config.routes ? state.config.routes : [];
+    if (regionName === 'Johto' && state.config && state.config.johtoRoutes) {
+        routes = state.config.johtoRoutes;
+    } else if (regionName === 'Hoenn' && state.config && state.config.hoennRoutes) {
+        routes = state.config.hoennRoutes;
+    }
+
+    let finalChallenge = routes.find(r => r.challengeName === "Final Challenge");
+    let finalChallengeId = finalChallenge ? finalChallenge.areaId : (regionName === 'Kanto' ? 'Indigo Plateau' : (regionName === 'Johto' ? 'Mt. Silver' : null));
 
     if (!finalChallengeId) return false;
 

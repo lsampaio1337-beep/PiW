@@ -101,7 +101,7 @@ input[type="number"] {
     overflow: hidden;
 }
 
-#view-prof-oak-lab {
+#view-professor-lab {
     background-image: url('./Assets/BG/BG-Professor-Oak-Lab.png');
     background-size: 100% 100%;
     text-align: center;
@@ -647,10 +647,20 @@ input[type="number"] {
     border-radius: 1px;
 }
 
-/* Oak Lab Inner Modal styling */
-.oak-lab-inner-modal {
-    width: 70% !important;
-    aspect-ratio: 4/3 !important;
+#main-view-inner-modal {
+    width: 90%;
+    height: auto;
+    max-height: calc(100% - 40px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    pointer-events: auto;
+}
+
+/* Professor Lab Inner Modal styling */
+#main-view-inner-modal.prof-lab-inner-modal {
+    width: 70%;
+    aspect-ratio: 4/3;
 }
 
 /* --- Action Buttons --- */
