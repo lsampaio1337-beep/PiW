@@ -158,7 +158,7 @@ function updateBattleButtonUI() {
 }
 
 function setupDataChannel(channel) {
-    channel.onopen = () => {
+    const handleOpen = () => {
         const connBtn = document.getElementById('btn-mp-connection-status');
         if (connBtn) {
             connBtn.style.background = '#2ecc71';
@@ -196,6 +196,11 @@ function setupDataChannel(channel) {
         // Send our party data to the opponent
         channel.send(JSON.stringify({ type: 'party', party: state.party }));
     };
+
+    channel.onopen = handleOpen;
+    if (channel.readyState === 'open') {
+        handleOpen();
+    }
 
     channel.onmessage = (event) => {
         const data = JSON.parse(event.data);
@@ -241,7 +246,14 @@ function checkReadyState() {
         }
         setTimeout(() => {
              if (window.closeModal) window.closeModal();
-             if (globals.battleSystem) globals.battleSystem.startMultiplayerBattle(opponentParty, isHost);
+             // Host needs to initiate the start locally as well
+             if (globals.battleSystem) {
+                 globals.battleSystem.startMultiplayerBattle(opponentParty, isHost);
+             } else if (window.globals && window.globals.battleSystem) {
+                 window.globals.battleSystem.startMultiplayerBattle(opponentParty, isHost);
+             } else {
+                 console.error("Globals.battleSystem is not available");
+             }
         }, 1000);
     }
 }

@@ -12,6 +12,8 @@ import Storage from "./storage.js";
 import { state, setBattleSystem, globals, checkFinalChallengeCompleted } from './state.js';
 import { trackDailyChallenge, checkAndResetDailyChallenges } from './ui/dailyChallenges.js';
 
+window.globals = globals;
+
 window.dismissDaycareMessage = function() {
     state.globalStats.hasSeenDaycare = true;
     document.getElementById('daycare-first-time-overlay').style.display = 'none';
