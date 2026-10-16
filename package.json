@@ -7,7 +7,8 @@
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
-    "make": "electron-forge make"
+    "make": "electron-forge make",
+    "test": "node --test scripts/test_storage_reset.mjs"
   },
   "repository": {
     "type": "git",
