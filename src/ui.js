@@ -1225,7 +1225,6 @@ window.showOakLabModal = function() {
         // Dynamically style the inner modal for Oak Lab to 70% width and proportional scale
         const innerModal = document.getElementById('main-view-inner-modal');
         if (innerModal) {
-            // Apply a specific class for Oak Lab modal instead of hacking inline styles permanently
             innerModal.classList.add('oak-lab-inner-modal');
         }
 
