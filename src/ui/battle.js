@@ -2,16 +2,7 @@ import { VITAMINS } from "../constants.js";
 import { TYPE_COLORS } from '../ui.js';
 import { state, globals } from '../state.js';
 import { getCapacity } from '../mathEngine.js';
-
-function escapeHtml(unsafe) {
-    if (unsafe == null) return '';
-    return String(unsafe)
-         .replace(/&/g, "&amp;")
-         .replace(/</g, "&lt;")
-         .replace(/>/g, "&gt;")
-         .replace(/"/g, "&quot;")
-         .replace(/'/g, "&#039;");
-}
+import { escapeHtml } from '../utils/escape.js';
 
 
 function updateActiveItemsUI() {
