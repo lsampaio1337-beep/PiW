@@ -2,17 +2,6 @@ const { app, BrowserWindow, ipcMain, screen } = require('electron');
 const path = require('path');
 const fs = require('fs');
 
-// Fix transparency issues conditionally rather than disabling hardware acceleration entirely
-if (process.platform === 'linux') {
-    app.commandLine.appendSwitch('enable-transparent-visuals');
-
-    // Disable hardware acceleration only if we're not running on Wayland.
-    // X11 still requires hardware acceleration to be disabled for transparency.
-    if (!process.env.WAYLAND_DISPLAY && process.env.XDG_SESSION_TYPE !== 'wayland') {
-        app.disableHardwareAcceleration();
-    }
-}
-
 function createWindow() {
     // Get primary display dimensions
     const { x, y, width, height } = screen.getPrimaryDisplay().workArea;
@@ -22,10 +11,10 @@ function createWindow() {
         height: height,
         x: x,
         y: y,
-        transparent: true,
-        backgroundColor: '#00000000',
+        transparent: false,
+        backgroundColor: '#000000',
         frame: false,
-        hasShadow: true,
+        hasShadow: false,
         alwaysOnTop: false, // Don't keep it above other windows
         skipTaskbar: false,
         show: false,
@@ -44,7 +33,8 @@ function createWindow() {
         // Create a signal file to let the launcher know the game is ready
         if (process.platform === 'win32') {
             try {
-                fs.writeFileSync('game_ready.txt', 'ready', { flag: 'wx' });
+                const readyFilePath = path.join(app.getAppPath(), 'game_ready.txt');
+                fs.writeFileSync(readyFilePath, 'ready', { flag: 'wx' });
             } catch (err) {
                 // Ignore EEXIST if the file is already there, but log other errors
                 if (err.code !== 'EEXIST') {
