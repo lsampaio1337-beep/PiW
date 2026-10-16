@@ -412,10 +412,12 @@ window.cheatProgressChallenge = function(targetAreaId) {
         setTimeout(() => {
             const modal = document.getElementById('window-challenges');
             if (modal) {
-                const completeBtns = Array.from(modal.querySelectorAll('button')).filter(btn => btn.innerText.includes('Complete'));
-                if (completeBtns.length > 0) {
-                    const specificBtn = completeBtns.find(btn => btn.getAttribute('onclick') && btn.getAttribute('onclick').includes('150_challenge'));
-                    if (specificBtn) specificBtn.click();
+                const buttons = modal.querySelectorAll('button[onclick*="150_challenge"]');
+                for (let i = 0; i < buttons.length; i++) {
+                    if (buttons[i].innerText.includes('Complete')) {
+                        buttons[i].click();
+                        break;
+                    }
                 }
             }
         }, 100);
@@ -510,13 +512,24 @@ window.cheatProgressChallenge = function(targetAreaId) {
     setTimeout(() => {
         const modal = document.getElementById('window-challenges');
         if (modal) {
-            const completeBtns = Array.from(modal.querySelectorAll('button')).filter(btn => btn.innerText.includes('Complete'));
-            if (completeBtns.length > 0) {
-                // Find the specific complete button for this area
-                const safeAreaId = targetAreaId.replace(/'/g, "\\'");
-                const specificBtn = completeBtns.find(btn => btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(safeAreaId));
-                if (specificBtn) specificBtn.click();
-                else completeBtns[0].click();
+            const safeAreaId = targetAreaId.replace(/'/g, "\\'");
+            const buttons = modal.querySelectorAll(`button[onclick*="${safeAreaId}"]`);
+            let clicked = false;
+            for (let i = 0; i < buttons.length; i++) {
+                if (buttons[i].innerText.includes('Complete')) {
+                    buttons[i].click();
+                    clicked = true;
+                    break;
+                }
+            }
+            if (!clicked) {
+                const anyCompleteButtons = modal.querySelectorAll('button');
+                for (let i = 0; i < anyCompleteButtons.length; i++) {
+                    if (anyCompleteButtons[i].innerText.includes('Complete')) {
+                        anyCompleteButtons[i].click();
+                        break;
+                    }
+                }
             }
         }
     }, 100);
