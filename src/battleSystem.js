@@ -721,9 +721,6 @@ class BattleSystem {
         const pokemonBase = this.getPokemonBase(pokemonDef.id);
         const level = pokemonDef.level;
 
-        // Gym leaders and trainers have fixed quality (e.g. Regular or Uncommon)
-        const isLeader = this.gymState.currentTrainerIndex === gym.trainers.length - 1;
-
         let gymIndex = this.state.config.gyms.findIndex(g => g.name === gym.name);
         if (gymIndex === -1) gymIndex = 0; // Fallback
 
