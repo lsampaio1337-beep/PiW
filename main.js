@@ -14,19 +14,18 @@ if (process.platform === 'linux') {
 
 function createWindow() {
     // Get primary display dimensions
-    const { x, y, width, height } = screen.getPrimaryDisplay().workArea;
+    const { width, height } = screen.getPrimaryDisplay().workArea;
 
     const isWindows = process.platform === 'win32';
 
     const win = new BrowserWindow({
         width: width,
         height: height,
-        x: x,
-        y: y,
-        transparent: true,
-        backgroundColor: '#00000000',
+        center: true,
+        transparent: !isWindows, // Transparency on Windows can cause the window to be completely invisible
+        backgroundColor: isWindows ? '#000000' : '#00000000',
         frame: false,
-        hasShadow: !isWindows, // Shadows with transparent windows on Windows can cause the window to fail to render
+        hasShadow: true,
         alwaysOnTop: false, // Don't keep it above other windows
         skipTaskbar: false,
         show: false,
@@ -36,8 +35,6 @@ function createWindow() {
             preload: path.join(__dirname, 'preload.js')
         }
     });
-
-    win.setBounds({ x, y, width, height });
 
     win.loadFile('index.html');
 
