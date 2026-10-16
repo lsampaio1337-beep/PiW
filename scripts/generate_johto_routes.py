@@ -424,7 +424,6 @@ def parse_requirements(req_str, area_id):
         req_str_fixed = req_str.replace("Get 1 Articuno Get 1 Zapdos Get 1 Moltres", "Get 1 Articuno, Get 1 Zapdos, Get 1 Moltres")
         req_str_fixed = req_str_fixed.replace("Capture 1 Hitmonlee Capture 1 Hitmonchan Capture 1 Hitmontop", "Capture 1 Hitmonlee, Capture 1 Hitmonchan, Capture 1 Hitmontop")
         req_str_fixed = req_str_fixed.replace("Defeat 1 Raikou, Defeat 1 Entei, Defeat 1 Suicune", "Defeat 1 Raikou, Defeat 1 Entei, Defeat 1 Suicune") # already correct
-        req_str_fixed = req_str_fixed.replace("Catch 1 Nidoran♀ and 1 Nidoran♂", "Catch 1 Nidoran♀, Catch 1 Nidoran♂")
 
         parts = req_str_fixed.replace(" and ", ",").split(",")
         for part in parts:
