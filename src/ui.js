@@ -542,8 +542,9 @@ window.showChallengesModal = function() {
                 <div style="display: flex; flex-direction: column; gap: 15px;">`;
 
     // The 150 Challenge should only appear if the Final Challenge (Indigo Plateau) has been completed
-    let isFinalChallengeCompleted = checkFinalChallengeCompleted();
-    let hasActive150Challenge = isFinalChallengeCompleted && !state.stats.completed150Challenge;
+    let isFinalChallengeCompleted = checkFinalChallengeCompleted(state.currentRegionName);
+    let isKanto = !state.currentRegionName || state.currentRegionName === 'Kanto';
+    let hasActive150Challenge = isKanto && isFinalChallengeCompleted && !state.stats.completed150Challenge;
 
     if (activeChallengesCount === 0 && !hasActive150Challenge) {
         html += `<div style="text-align: center; font-size: 16px; color: #aaa;">No active Challenge</div>`;
@@ -631,7 +632,7 @@ window.showChallengesModal = function() {
         (window.getCurrentUnlocks() ? state.stats.completedChallengeIds.filter(id => window.getCurrentUnlocks().some(u => u.areaId === id)) : state.stats.completedChallengeIds)
         : [];
 
-    if (state.stats.completed150Challenge) completedCount++;
+    if (isKanto && state.stats.completed150Challenge) completedCount++;
 
     if (completedCount > 0) {
         let pastTitle = completedCount === 1 ? "Past Challenge" : "Past Challenges";
@@ -640,7 +641,7 @@ window.showChallengesModal = function() {
                     <div style="display: flex; flex-direction: column; gap: 10px;">`;
 
         // Render 150 Challenge in Past Challenges if completed
-        if (state.stats.completed150Challenge) {
+        if (isKanto && state.stats.completed150Challenge) {
             html += `<div style="border: 1px solid #333; padding: 10px; border-radius: 5px; background-color: rgba(255,255,255,0.05);">
                           <div style="color: #ff9800; font-weight: bold; margin-bottom: 5px;">The 150 Challenge</div>
                           <ul style="margin-top: 0; margin-bottom: 5px; padding-left: 20px; font-size: 14px;">
