@@ -1273,7 +1273,7 @@ class BattleSystem {
                         }
 
                         // Fix the level 100 jump bug by setting xp explicitly to the exact minimum needed for their captured level
-                        caughtPokemon.xp = mathEngine.calculateTotalXP(caughtPokemon.level);
+                        caughtPokemon.xp = mathEngine.calculateTotalXP(Math.min(caughtPokemon.level, 100));
                         this.state.storage.push(caughtPokemon);
                         this.state.stats.caught++;
                         if (defeatedEncounter.qualityName === "Shiny") {
@@ -2196,7 +2196,7 @@ class BattleSystem {
                         this.state.stats.caughtSpecies[trackingName] = (this.state.stats.caughtSpecies[trackingName] || 0) + 1;
 
                         // Fix the level 100 jump bug by setting xp explicitly to the exact minimum needed for their captured level
-                        caughtPokemon.xp = mathEngine.calculateTotalXP(caughtPokemon.level);
+                        caughtPokemon.xp = mathEngine.calculateTotalXP(Math.min(caughtPokemon.level, 100));
                         this.state.storage.push(caughtPokemon);
                         results.caughtPokemonList.push(caughtPokemon);
                         this.state.stats.caught++;
