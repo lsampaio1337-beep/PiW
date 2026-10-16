@@ -404,8 +404,7 @@ window.cheatProgressChallenge = function(targetAreaId) {
     if (targetAreaId === '150_challenge') {
         if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
         let count = 0;
-        const len = state.config.pokemonData.length;
-        for (let i = 0; i < len; i++) {
+        for (let i = 0; i < state.config.pokemonData.length; i++) {
              if (count >= 150) break;
              let p = state.config.pokemonData[i];
              if (!state.stats.caughtSpecies[p.name]) {
