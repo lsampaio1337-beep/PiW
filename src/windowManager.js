@@ -75,7 +75,7 @@ export class WindowManager {
                         if (savedSettings.left) winElement.style.left = savedSettings.left;
                         if (savedSettings.top) winElement.style.top = savedSettings.top;
                     } else if (windowId === 'main-control-window') {
-                        winElement.style.width = 'auto';
+                        winElement.style.width = 'max-content';
                         winElement.style.height = 'auto';
                         setTimeout(() => {
                             if (typeof winElement.resetResizeDims === 'function') {
@@ -565,18 +565,6 @@ export class WindowManager {
 
             if (winElement._originalHeight) {
                 winElement._originalRatio = winElement._originalWidth / winElement._originalHeight;
-            }
-
-            // If main-control-window is uninitialized, assign the calculated max-content width to the actual element width
-            // to allow it to wrap properly, avoiding the 80x80 initial bug where the wrapper is small.
-            if (windowId === 'main-control-window' && (!oldWidth || oldWidth === 'auto' || parseInt(oldWidth) < 150)) {
-                let contentContainer = winElement.querySelector('.window-content-container');
-                let horizontalPadding = 0;
-                if (contentContainer) {
-                    const style = window.getComputedStyle(contentContainer);
-                    horizontalPadding = parseFloat(style.paddingLeft || 0) + parseFloat(style.paddingRight || 0);
-                }
-                winElement.style.width = (newOriginalWidth + horizontalPadding) + 'px';
             }
         } else if (newOriginalWidth !== currentOriginalWidth) {
             // Content needs more or less width, we must adjust
