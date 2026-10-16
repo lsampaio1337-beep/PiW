@@ -10,12 +10,12 @@ const hoennMapCoordinates = {
     "y": 61.92
   },
   "101": {
-    "name": "101",
+    "name": "Route 101",
     "x": 19.76,
     "y": 66.44
   },
   "102": {
-    "name": "102",
+    "name": "Route 102",
     "x": 16.88,
     "y": 59.99
   },
@@ -40,12 +40,12 @@ const hoennMapCoordinates = {
     "y": 87.82
   },
   "103": {
-    "name": "103",
+    "name": "Route 103",
     "x": 23.84,
     "y": 53.88
   },
   "104": {
-    "name": "104",
+    "name": "Route 104",
     "x": 7.92,
     "y": 65.08
   },
@@ -55,7 +55,7 @@ const hoennMapCoordinates = {
     "y": 57.16
   },
   "116": {
-    "name": "116",
+    "name": "Route 116",
     "x": 13.60,
     "y": 41.67
   },
@@ -65,17 +65,17 @@ const hoennMapCoordinates = {
     "y": 76.51
   },
   "110": {
-    "name": "110",
+    "name": "Route 110",
     "x": 31.52,
     "y": 47.66
   },
   "107": {
-    "name": "107",
+    "name": "Route 107",
     "x": 22.00,
     "y": 88.61
   },
   "117": {
-    "name": "117",
+    "name": "Route 117",
     "x": 25.44,
     "y": 37.93
   },
@@ -90,7 +90,7 @@ const hoennMapCoordinates = {
     "y": 25.0
   },
   "111": {
-    "name": "111",
+    "name": "Route 111",
     "x": 31.84,
     "y": 26.62
   },
@@ -100,7 +100,7 @@ const hoennMapCoordinates = {
     "y": 17.57
   },
   "113": {
-    "name": "113",
+    "name": "Route 113",
     "x": 28.48,
     "y": 9.09
   },
@@ -110,7 +110,7 @@ const hoennMapCoordinates = {
     "y": 22.89
   },
   "114": {
-    "name": "114",
+    "name": "Route 114",
     "x": 15.28,
     "y": 10.78
   },
@@ -120,17 +120,17 @@ const hoennMapCoordinates = {
     "y": 19.61
   },
   "115": {
-    "name": "115",
+    "name": "Route 115",
     "x": 9.92,
     "y": 31.37
   },
   "118": {
-    "name": "118",
+    "name": "Route 118",
     "x": 41.68,
     "y": 37.93
   },
   "119": {
-    "name": "119",
+    "name": "Route 119",
     "x": 41.68,
     "y": 17.69
   },
@@ -145,12 +145,12 @@ const hoennMapCoordinates = {
     "y": 8.52
   },
   "120": {
-    "name": "120",
+    "name": "Route 120",
     "x": 53.44,
     "y": 18.36
   },
   "121": {
-    "name": "121",
+    "name": "Route 121",
     "x": 62.00,
     "y": 23.23
   },
@@ -180,7 +180,7 @@ const hoennMapCoordinates = {
     "y": 35.0
   },
   "123": {
-    "name": "123",
+    "name": "Route 123",
     "x": 51.92,
     "y": 38.05
   },
