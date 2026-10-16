@@ -637,7 +637,9 @@ export function navigateToLocation(locationName) {
             buttonHtml = `<button onclick="window.startGymBattle('${lookupName}')" class="action-btn action-btn-primary" style="margin-top: 10px;">${buttonText}</button>`;
         }
 
-        let dynamicBgHtml = '';
+        vGym.innerHTML = '';
+
+        let dynamicBgElement = null;
         if (gymConfig && state.config.gymAssets && state.config.gymAssets[gymConfig.leader]) {
             const assetConfig = state.config.gymAssets[gymConfig.leader];
             const spritePath = `./Assets/Gym/GymLeaders/${assetConfig.sprite}`;
@@ -646,30 +648,82 @@ export function navigateToLocation(locationName) {
             // Remove the static bgImg so it doesn't override the dynamic one
             bgImg = "";
 
-            dynamicBgHtml = `
-                <div id="dynamic-gym-bg-ui" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; background-image: url('${bgPath}'); background-size: 100% 100%; overflow: hidden;">
-                    <img src="${spritePath}" style="
-                        position: absolute;
-                        left: ${assetConfig.position.rel_x * 100}%;
-                        top: ${assetConfig.position.rel_y * 100}%;
-                        width: ${(assetConfig.size.px_width / 1800) * 100}%;
-                        transform: rotate(${assetConfig.tilt.angle_deg}deg);
-                        transform-origin: ${assetConfig.tilt.origin};
-                        pointer-events: none;
-                    ">
-                </div>
-            `;
+            dynamicBgElement = document.createElement('div');
+            dynamicBgElement.id = 'dynamic-gym-bg-ui';
+            dynamicBgElement.style.position = 'absolute';
+            dynamicBgElement.style.top = '0';
+            dynamicBgElement.style.left = '0';
+            dynamicBgElement.style.width = '100%';
+            dynamicBgElement.style.height = '100%';
+            dynamicBgElement.style.zIndex = '0';
+            dynamicBgElement.style.backgroundImage = `url('${bgPath}')`;
+            dynamicBgElement.style.backgroundSize = '100% 100%';
+            dynamicBgElement.style.overflow = 'hidden';
+
+            const spriteImg = document.createElement('img');
+            spriteImg.src = spritePath;
+            spriteImg.style.position = 'absolute';
+            spriteImg.style.left = `${assetConfig.position.rel_x * 100}%`;
+            spriteImg.style.top = `${assetConfig.position.rel_y * 100}%`;
+            spriteImg.style.width = `${(assetConfig.size.px_width / 1800) * 100}%`;
+            spriteImg.style.transform = `rotate(${assetConfig.tilt.angle_deg}deg)`;
+            spriteImg.style.transformOrigin = assetConfig.tilt.origin;
+            spriteImg.style.pointerEvents = 'none';
+
+            dynamicBgElement.appendChild(spriteImg);
         }
 
-        vGym.innerHTML = `
-            ${dynamicBgHtml}
-            <div style="background-color: rgba(0,0,0,0.8); display: flex; flex-direction: column; align-items: center; padding: 20px; border-radius: 8px; position: absolute; left: 15%; top: 50%; transform: translateY(-50%); min-width: 300px; z-index: 1;">
-                <h2 id="gym-title-header" style="margin-top: 0; color: white;">${locationName}</h2>
-                <div id="gym-content-area" style="position: relative; width: 100%; text-align: center; display: flex; flex-direction: column; gap: 10px; align-items: center; z-index: 2;">
-                    ${buttonHtml}
-                </div>
-            </div>
-        `;
+        if (dynamicBgElement) {
+            vGym.appendChild(dynamicBgElement);
+        }
+
+        // Create inner container
+        const gymContainer = document.createElement('div');
+        gymContainer.style.backgroundColor = 'rgba(0,0,0,0.8)';
+        gymContainer.style.display = 'flex';
+        gymContainer.style.flexDirection = 'column';
+        gymContainer.style.alignItems = 'center';
+        gymContainer.style.padding = '20px';
+        gymContainer.style.borderRadius = '8px';
+        gymContainer.style.position = 'absolute';
+        gymContainer.style.left = '15%';
+        gymContainer.style.top = '50%';
+        gymContainer.style.transform = 'translateY(-50%)';
+        gymContainer.style.minWidth = '300px';
+        gymContainer.style.zIndex = '1';
+
+        const gymHeader = document.createElement('h2');
+        gymHeader.id = 'gym-title-header';
+        gymHeader.style.marginTop = '0';
+        gymHeader.style.color = 'white';
+        // Use textContent to safely inject the locationName
+        gymHeader.textContent = locationName;
+        gymContainer.appendChild(gymHeader);
+
+        const gymContentArea = document.createElement('div');
+        gymContentArea.id = 'gym-content-area';
+        gymContentArea.style.position = 'relative';
+        gymContentArea.style.width = '100%';
+        gymContentArea.style.textAlign = 'center';
+        gymContentArea.style.display = 'flex';
+        gymContentArea.style.flexDirection = 'column';
+        gymContentArea.style.gap = '10px';
+        gymContentArea.style.alignItems = 'center';
+        gymContentArea.style.zIndex = '2';
+
+        // innerHTML for buttonHtml is safe because it's locally built using literal string and known `lookupName` (which is also checked against gyms keys)
+        // But let's build the button directly to be perfectly safe
+        if (gymConfig) {
+            const btn = document.createElement('button');
+            btn.className = 'action-btn action-btn-primary';
+            btn.style.marginTop = '10px';
+            btn.textContent = lookupName === "Indigo Plateau" ? "Challenge" : "Battle Gym";
+            btn.onclick = () => window.startGymBattle(lookupName);
+            gymContentArea.appendChild(btn);
+        }
+
+        gymContainer.appendChild(gymContentArea);
+        vGym.appendChild(gymContainer);
 
         vGym.style.position = "relative";
         vGym.style.height = "100%";

@@ -528,17 +528,17 @@ class BattleSystem {
                 dynamicBg.style.backgroundSize = '100% 100%';
                 dynamicBg.style.overflow = 'hidden';
 
-                dynamicBg.innerHTML = `
-                    <img src="${spritePath}" style="
-                        position: absolute;
-                        left: ${assetConfig.position.rel_x * 100}%;
-                        top: ${assetConfig.position.rel_y * 100}%;
-                        width: ${(assetConfig.size.px_width / 1800) * 100}%;
-                        transform: rotate(${assetConfig.tilt.angle_deg}deg);
-                        transform-origin: ${assetConfig.tilt.origin};
-                        pointer-events: none;
-                    ">
-                `;
+                const spriteImg = document.createElement('img');
+                spriteImg.src = spritePath;
+                spriteImg.style.position = 'absolute';
+                spriteImg.style.left = `${assetConfig.position.rel_x * 100}%`;
+                spriteImg.style.top = `${assetConfig.position.rel_y * 100}%`;
+                spriteImg.style.width = `${(assetConfig.size.px_width / 1800) * 100}%`;
+                spriteImg.style.transform = `rotate(${assetConfig.tilt.angle_deg}deg)`;
+                spriteImg.style.transformOrigin = assetConfig.tilt.origin;
+                spriteImg.style.pointerEvents = 'none';
+
+                dynamicBg.appendChild(spriteImg);
 
                 vGym.style.backgroundImage = 'none';
                 vGym.style.position = 'relative'; // Ensure relative positioning
@@ -565,27 +565,58 @@ class BattleSystem {
 
 
         if (trainer) {
-            let trainerButtonsHtml = gym.trainers.map((t, index) => {
+            contentArea.innerHTML = '';
+
+            const restArea = document.createElement('div');
+            restArea.id = 'gym-rest-area';
+            restArea.style.display = 'flex';
+            restArea.style.flexDirection = 'column';
+            restArea.style.gap = '10px';
+            restArea.style.width = '100%';
+
+            const p = document.createElement('p');
+            p.style.fontSize = '14px';
+            p.style.marginBottom = '10px';
+            p.textContent = 'You may organize your party.';
+            restArea.appendChild(p);
+
+            // Build buttons safely
+            gym.trainers.forEach((t, index) => {
                 const isLeader = index === gym.trainers.length - 1;
                 const buttonText = isLeader ? `Fight Gym Leader` : `Fight Gym Trainer`;
 
-                if (index < this.gymState.currentTrainerIndex) {
-                    return `<button disabled class="action-btn" style="opacity: 0.5; width: 100%;">${buttonText} (Defeated)</button>`;
-                } else if (index === this.gymState.currentTrainerIndex) {
-                    return `<button id="btn-start-gym-battle" class="action-btn action-btn-primary" onclick="window.battleEngine.startNextGymBattle()" style="width: 100%;">${buttonText} (${t.name})</button>`;
-                } else {
-                    return `<button disabled class="action-btn" style="opacity: 0.5; width: 100%;">${buttonText} (${t.name})</button>`;
-                }
-            }).join('');
+                const btn = document.createElement('button');
+                btn.style.width = '100%';
 
-            // Rest phase UI
-            contentArea.innerHTML = `
-                <div id="gym-rest-area" style="display: flex; flex-direction: column; gap: 10px; width: 100%;">
-                    <p style="font-size: 14px; margin-bottom: 10px;">You may organize your party.</p>
-                    ${trainerButtonsHtml}
-                    <button class="action-btn action-btn-danger" onclick="window.battleEngine.stopGymBattle()" style="margin-top: 10px; width: 100%;">Flee Gym</button>
-                </div>
-            `;
+                if (index < this.gymState.currentTrainerIndex) {
+                    btn.disabled = true;
+                    btn.className = 'action-btn';
+                    btn.style.opacity = '0.5';
+                    btn.textContent = `${buttonText} (Defeated)`;
+                } else if (index === this.gymState.currentTrainerIndex) {
+                    btn.id = 'btn-start-gym-battle';
+                    btn.className = 'action-btn action-btn-primary';
+                    btn.textContent = `${buttonText} (${t.name})`;
+                    btn.onclick = () => window.battleEngine.startNextGymBattle();
+                } else {
+                    btn.disabled = true;
+                    btn.className = 'action-btn';
+                    btn.style.opacity = '0.5';
+                    btn.textContent = `${buttonText} (${t.name})`;
+                }
+                restArea.appendChild(btn);
+            });
+
+            const fleeBtn = document.createElement('button');
+            fleeBtn.className = 'action-btn action-btn-danger';
+            fleeBtn.style.marginTop = '10px';
+            fleeBtn.style.width = '100%';
+            fleeBtn.textContent = 'Flee Gym';
+            fleeBtn.onclick = () => window.battleEngine.stopGymBattle();
+            restArea.appendChild(fleeBtn);
+
+            contentArea.appendChild(restArea);
+
             // Temporary expose for the button
             window.battleEngine = this;
 
@@ -603,11 +634,24 @@ class BattleSystem {
             };
         } else {
             // Gym completed
-            contentArea.innerHTML = `
-                <h3>You defeated ${gym.leader}!</h3>
-                <p>A Gift is awaiting for you.</p>
-                <button class="action-btn action-btn-primary" onclick="window.battleEngine.stopGymBattle()" style="margin-top: 10px; width: 100%;">Leave</button>
-            `;
+            contentArea.innerHTML = '';
+
+            const h3 = document.createElement('h3');
+            h3.textContent = `You defeated ${gym.leader}!`;
+            contentArea.appendChild(h3);
+
+            const p = document.createElement('p');
+            p.textContent = 'A Gift is awaiting for you.';
+            contentArea.appendChild(p);
+
+            const leaveBtn = document.createElement('button');
+            leaveBtn.className = 'action-btn action-btn-primary';
+            leaveBtn.style.marginTop = '10px';
+            leaveBtn.style.width = '100%';
+            leaveBtn.textContent = 'Leave';
+            leaveBtn.onclick = () => window.battleEngine.stopGymBattle();
+            contentArea.appendChild(leaveBtn);
+
             window.battleEngine = this;
         }
     }
