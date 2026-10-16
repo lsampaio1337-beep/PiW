@@ -500,12 +500,12 @@ input[type="number"] {
 
 /* Modal Overlay overrides */
 .transparent-overlay {
-    background-color: rgba(0, 0, 0, 0.7) !important;
-    pointer-events: auto; /* Since click-through is disabled, we need normal modal behavior */
+    background-color: transparent !important;
+    pointer-events: none; /* Let clicks pass through overlay */
 }
 
 .transparent-overlay > * {
-    pointer-events: auto;
+    pointer-events: auto; /* But allow clicking on the modal content itself */
 }
 
 /* Resizable Window Additions */

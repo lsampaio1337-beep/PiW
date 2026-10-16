@@ -2,6 +2,10 @@ const { app, BrowserWindow, ipcMain, screen } = require('electron');
 const path = require('path');
 const fs = require('fs');
 
+// Robust fix for blank/black windows on Windows
+// This disables hardware acceleration which is the #1 cause of black screens in Electron
+app.disableHardwareAcceleration();
+
 function createWindow() {
     // Get primary display dimensions
     const { x, y, width, height } = screen.getPrimaryDisplay().workArea;
@@ -30,7 +34,17 @@ function createWindow() {
     win.loadFile('index.html');
 
     win.once('ready-to-show', () => {
+        win.show();
+        // Fallback for forcing a repaint
+        setTimeout(() => {
+             win.show();
+             win.focus();
+        }, 200);
+    });
+
+    win.webContents.on('did-finish-load', () => {
         // Create a signal file to let the launcher know the game is ready
+        // Only write this AFTER the app has successfully loaded to avoid false positives
         if (process.platform === 'win32') {
             try {
                 const readyFilePath = path.join(app.getAppPath(), 'game_ready.txt');
@@ -42,7 +56,6 @@ function createWindow() {
                 }
             }
         }
-        win.show();
     });
 
     // Handle click-through messages from the renderer process
