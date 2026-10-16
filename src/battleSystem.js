@@ -26,6 +26,10 @@ class BattleSystem {
             gym: null,
             currentTrainerIndex: 0
         };
+        this.gymIndexMap = new Map();
+        if (this.state.config.gyms) {
+            this.state.config.gyms.forEach((g, i) => this.gymIndexMap.set(g.name, i));
+        }
     }
 
     getPokemonBase(id) {
@@ -544,7 +548,7 @@ class BattleSystem {
                 vGym.style.position = 'relative'; // Ensure relative positioning
                 vGym.insertBefore(dynamicBg, vGym.firstChild);
             } else {
-                const gymIndex = this.state.config.gyms.findIndex(g => g.name === gym.name);
+                const gymIndex = this.gymIndexMap.get(gym.name) !== undefined ? this.gymIndexMap.get(gym.name) : -1;
                 const gymBGs = [
                     'BG-Gym-1-Pewter-Rock.png',
                     'BG-Gym-2-Cerulean-Water.png',
@@ -724,7 +728,7 @@ class BattleSystem {
         // Gym leaders and trainers have fixed quality (e.g. Regular or Uncommon)
         const isLeader = this.gymState.currentTrainerIndex === gym.trainers.length - 1;
 
-        let gymIndex = this.state.config.gyms.findIndex(g => g.name === gym.name);
+        let gymIndex = this.gymIndexMap.get(gym.name) !== undefined ? this.gymIndexMap.get(gym.name) : -1;
         if (gymIndex === -1) gymIndex = 0; // Fallback
 
         // Map Gym Index to QValue and SumIV
@@ -1617,7 +1621,7 @@ class BattleSystem {
                     window.trackDailyChallenge('defeat_gym_leader');
                 }
 
-                const gymIndex = this.state.config.gyms.findIndex(g => g.name === gym.name);
+                const gymIndex = this.gymIndexMap.get(gym.name) !== undefined ? this.gymIndexMap.get(gym.name) : -1;
                 if (gymIndex !== -1 && this.state.trainer.badges === gymIndex) {
                     if (!this.state.stats.pendingGifts) this.state.stats.pendingGifts = [];
                     this.state.stats.pendingGifts.push({ type: 'badge', gymName: gym.name, gymIndex: gymIndex });
