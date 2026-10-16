@@ -72,7 +72,7 @@ const CHALLENGE_DEFS = {
                     let route = window.getCurrentRoutes().find(r => r.name === area);
                     if (route && route.spawns) {
                         for (let s of route.spawns) {
-                            let pData = state.config.pokemonData.find(pd => pd.id === s.pokemonId);
+                            let pData = state.config.pokemonData[s.pokemonId - 1];
                             if (pData && pData.types) pData.types.forEach(t => availableTypes.add(t));
                         }
                     }
@@ -112,7 +112,7 @@ const CHALLENGE_DEFS = {
             let speciesArr = Array.from(availableSpecies);
             if (speciesArr.length === 0) return 'Pidgey';
             let pid = speciesArr[Math.floor(Math.random() * speciesArr.length)];
-            let pData = state.config.pokemonData.find(p => p.id === pid);
+            let pData = state.config.pokemonData[pid - 1];
             return pData ? pData.name : pid;
         } },
         { id: 3, text: "Endurance: Defeat $ Pokémon without fainting, healing, or swaping.", getTarget: () => 10 + (state.trainer.badges * 5), type: 'defeat_endurance' },
@@ -165,7 +165,7 @@ const CHALLENGE_DEFS = {
                     let route = window.getCurrentRoutes().find(r => r.name === area);
                     if (route && route.spawns) {
                         for (let s of route.spawns) {
-                            let pData = state.config.pokemonData.find(pd => pd.id === s.pokemonId);
+                            let pData = state.config.pokemonData[s.pokemonId - 1];
                             if (pData && pData.types) pData.types.forEach(t => availableTypes.add(t));
                         }
                     }
