@@ -281,7 +281,7 @@ function getCurrentCount(state, type) {
             }
         }
     } else if (type === 'potions') {
-        for (const value of Object.values(state.backpack.potions)) {
+        for (const [key, value] of Object.entries(state.backpack.potions)) {
             count += value;
         }
     } else if (type === 'box') {
