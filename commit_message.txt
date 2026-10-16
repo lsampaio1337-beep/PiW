@@ -1,0 +1,10 @@
+⚡ Optimize showPokemonStatsByUuid lookup performance
+
+💡 What:
+- Updated `showPokemonStatsByUuid` to accept an optional `listName` parameter.
+- Replaced the sequential `.findIndex()` cascade with a fast loop that prioritizes the provided `listName` array reference.
+- Updated caller sites in `src/ui/backpack/pokemon.js` and `src/ui/teamWindow.js` to provide the corresponding `listName` (e.g. 'storage', 'breeding', 'training').
+
+🎯 Why:
+- Prevents checking every single box array (party, breeding, training, storage, safe) every time a Pokémon's info is clicked.
+- `.findIndex()` introduces callback overhead which accumulates with large arrays. Using a fast loop directly alongside the known array reference effectively bounds the search space strictly to the known array, making it practically O(1) in terms of array hops and significantly reducing CPU cycles.
