@@ -1329,28 +1329,44 @@ class BattleSystem {
                         if (caughtPokemon.level >= 60) this.state.stats.caughtLvl60 = (this.state.stats.caughtLvl60 || 0) + 1;
                         if (caughtPokemon.level >= 75) this.state.stats.caughtLvl75 = (this.state.stats.caughtLvl75 || 0) + 1;
 
+                        let stats = this.state.stats;
+
                         // Track species catches for unlocks
-                        if (!this.state.stats.caughtSpecies) this.state.stats.caughtSpecies = {};
-                        this.state.stats.caughtSpecies[trackingName] = (this.state.stats.caughtSpecies[trackingName] || 0) + 1;
+                        let caughtSpecies = stats.caughtSpecies;
+                        if (!caughtSpecies) {
+                            caughtSpecies = {};
+                            stats.caughtSpecies = caughtSpecies;
+                        }
+                        caughtSpecies[trackingName] = (caughtSpecies[trackingName] || 0) + 1;
 
                         // Track specific typings
-                        if (!this.state.stats.caughtSpecific) this.state.stats.caughtSpecific = {};
-                        if (!this.state.stats.challengeCaughtSpecific) this.state.stats.challengeCaughtSpecific = {};
+                        let caughtSpecific = stats.caughtSpecific;
+                        if (!caughtSpecific) {
+                            caughtSpecific = {};
+                            stats.caughtSpecific = caughtSpecific;
+                        }
+                        let challengeCaughtSpecific = stats.challengeCaughtSpecific;
+                        if (!challengeCaughtSpecific) {
+                            challengeCaughtSpecific = {};
+                            stats.challengeCaughtSpecific = challengeCaughtSpecific;
+                        }
 
                         qName = defeatedEncounter.qualityName || "Regular";
 
                         if (trackingTypes) {
+                              let qNameSuffix = "_" + qName;
+                              let anySuffix = "_Any";
                               for (let t of trackingTypes) {
-                                  this.state.stats.caughtSpecific[t] = (this.state.stats.caughtSpecific[t] || 0) + 1;
-                                  let typeRarityKey = t + "_" + qName;
-                                  let typeAnyKey = t + "_Any";
-                                  this.state.stats.challengeCaughtSpecific[typeRarityKey] = (this.state.stats.challengeCaughtSpecific[typeRarityKey] || 0) + 1;
-                                  this.state.stats.challengeCaughtSpecific[typeAnyKey] = (this.state.stats.challengeCaughtSpecific[typeAnyKey] || 0) + 1;
+                                  caughtSpecific[t] = (caughtSpecific[t] || 0) + 1;
+                                  let typeRarityKey = t + qNameSuffix;
+                                  let typeAnyKey = t + anySuffix;
+                                  challengeCaughtSpecific[typeRarityKey] = (challengeCaughtSpecific[typeRarityKey] || 0) + 1;
+                                  challengeCaughtSpecific[typeAnyKey] = (challengeCaughtSpecific[typeAnyKey] || 0) + 1;
                               }
                         }
 
                         let speciesRarityKey = trackingName + "_" + qName;
-                        this.state.stats.challengeCaughtSpecific[speciesRarityKey] = (this.state.stats.challengeCaughtSpecific[speciesRarityKey] || 0) + 1;
+                        challengeCaughtSpecific[speciesRarityKey] = (challengeCaughtSpecific[speciesRarityKey] || 0) + 1;
                     }
                 };
 
@@ -2192,8 +2208,13 @@ class BattleSystem {
                             delete caughtPokemon.isDisguisedDitto;
                         }
 
-                        if (!this.state.stats.caughtSpecies) this.state.stats.caughtSpecies = {};
-                        this.state.stats.caughtSpecies[trackingName] = (this.state.stats.caughtSpecies[trackingName] || 0) + 1;
+                        let stats = this.state.stats;
+                        let caughtSpecies = stats.caughtSpecies;
+                        if (!caughtSpecies) {
+                            caughtSpecies = {};
+                            stats.caughtSpecies = caughtSpecies;
+                        }
+                        caughtSpecies[trackingName] = (caughtSpecies[trackingName] || 0) + 1;
 
                         // Fix the level 100 jump bug by setting xp explicitly to the exact minimum needed for their captured level
                         caughtPokemon.xp = mathEngine.calculateTotalXP(caughtPokemon.level);
