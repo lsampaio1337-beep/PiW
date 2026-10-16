@@ -1,5 +1,6 @@
 import { VITAMINS } from "../constants.js";
 
+const VITAMINS_SET = new Set(VITAMINS);
 
 function escapeHTML(str) {
     if (!str) return str;
@@ -251,7 +252,7 @@ export function renderPokeMarketTab(category) {
     } else if (category === 'stones') {
         const badges = state.trainer.badges || 0;
         const stonePrice = badges >= 8 ? 10000 : Math.max(500, 1000 * badges);
-        let stoneKeys = Object.keys(state.backpack.stones).filter(k => !VITAMINS.includes(k));
+        let stoneKeys = Object.keys(state.backpack.stones).filter(k => !VITAMINS_SET.has(k));
         stoneKeys.sort((a, b) => a.localeCompare(b));
         items = stoneKeys.map(stoneName => {
             return {
@@ -687,7 +688,7 @@ export function renderPokeMarketSellTab(category) {
                 };
             });
     } else if (category === 'stones') {
-        let stoneKeysSell = Object.keys(state.backpack.stones).filter(k => !VITAMINS.includes(k));
+        let stoneKeysSell = Object.keys(state.backpack.stones).filter(k => !VITAMINS_SET.has(k));
         stoneKeysSell.sort((a, b) => a.localeCompare(b));
         items = stoneKeysSell.map(stoneName => {
             return {
