@@ -114,12 +114,12 @@ export const TYPE_COLORS = {
     "Steel": "#869ba7",
     "Water": "#6391c7",
 };
-import { openMultiplayerModal } from './ui/multiplayer.js';
 import { updateMainControl } from './ui/mainControl.js';
 import { updateTeamWindow } from './ui/teamWindow.js';
 import { updateBattleArena, showDamage, playCombatAnimations, triggerDefeatAnimation, showLoot, showLevelUp } from './ui/battle.js';
 import { showCalendar } from './ui/calendar.js';
 import './ui/tokenShop.js';
+import './ui/multiplayer.js';
 import { showGiftModal } from './ui/gift.js';
 import { showMap, navigateToLocation, showMapTooltip, hideMapTooltip } from './ui/map.js';
 import { showPokedex, showDexEntry, showSmartCaptureMode, setSmartCaptureShinyMode, showSmartCaptureBallSelection, selectSmartCaptureBall, selectGlobalSmartCaptureBall } from './ui/pokedex.js';
@@ -1305,6 +1305,12 @@ export function switchView(viewName) {
         document.getElementById('view-gym').style.display = 'block';
     } else if (viewName === 'CASINO_HUB') {
         document.getElementById('view-casino').style.display = 'block';
+    } else if (viewName === 'BATTLE_STADIUM') {
+        document.getElementById('view-battle-stadium').style.display = 'flex';
+        // Initialize multiplayer when entering the view if it's not already set up
+        if (typeof window.initMultiplayerView === 'function') {
+            window.initMultiplayerView();
+        }
     } else if (viewName === 'DAYCARE_HUB') {
         document.getElementById('view-daycare').style.display = 'block';
 
@@ -2290,12 +2296,6 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
 
 
     bindBtn('btn-toggle-party', () => { window.windowManager.toggleWindow('party-window'); });
-    bindBtn('btn-multiplayer', () => {
-        state.globalStats.hasSeenMultiplayerIcon = true;
-        storage.save(state);
-        updateMainControl();
-        window.openMultiplayerModal();
-    });
     bindBtn('btn-toggle-main', () => { window.windowManager.toggleWindow('main-view-window'); });
     bindBtn('btn-map', () => {
         if(!checkCombatLock()) {
@@ -2700,7 +2700,6 @@ export const promptExitGame = () => {
 };
 
 window.promptExitGame = promptExitGame;
-window.openMultiplayerModal = openMultiplayerModal;
 
 
 // Ensure the UI script runs

@@ -214,23 +214,21 @@ class BattleSystem {
             slideDelay = Math.max(300, slideDelay) / this.state.settings.gameSpeed;
             this.generateEncounter(slideDelay);
 
-            // Re-open multiplayer modal and reset ready states so players stay connected
+            // Switch view back to battle stadium and reset ready states so players stay connected
             if (typeof window.resetMultiplayerReady === 'function') {
                 window.resetMultiplayerReady();
             }
-            if (typeof window.openMultiplayerModal === 'function') {
-                const hostStatus = typeof window.getMultiplayerIsHost === 'function' ? window.getMultiplayerIsHost() : false;
-                window.openMultiplayerModal(hostStatus ? 'host' : 'join');
+            if (typeof window.switchView === 'function') {
+                window.switchView("BATTLE_STADIUM");
             }
         }).catch(err => {
             console.error("Error importing multiplayer:", err);
-            // Fallback: Re-open multiplayer modal and reset ready states so players stay connected
+            // Fallback: Switch view back to battle stadium and reset ready states so players stay connected
             if (typeof window.resetMultiplayerReady === 'function') {
                 window.resetMultiplayerReady();
             }
-            if (typeof window.openMultiplayerModal === 'function') {
-                const hostStatus = typeof window.getMultiplayerIsHost === 'function' ? window.getMultiplayerIsHost() : false;
-                window.openMultiplayerModal(hostStatus ? 'host' : 'join');
+            if (typeof window.switchView === 'function') {
+                window.switchView("BATTLE_STADIUM");
             }
         });
     }

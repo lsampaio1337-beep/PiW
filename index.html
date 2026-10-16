@@ -33,11 +33,6 @@
                 <img src="Assets/Extra/IconPokedex.png" id="btn-dex" class="nav-icon" title="Pokedex">
                 <img src="Assets/Extra/IconTrainer.png" id="btn-stats" class="nav-icon" title="Trainer">
 
-                <div id="multiplayer-container" style="position: relative; display: none; height: 100%;">
-                    <img src="Assets/Extra/IconMultiplayer.png" id="btn-multiplayer" class="nav-icon" title="Multiplayer">
-                    <img src="Assets/Extra/ExclamationMark.png" id="multiplayer-exclamation" style="position: absolute; top: -5px; right: -5px; width: 15px; height: auto; display: none; pointer-events: none; z-index: 10;">
-                </div>
-
                 <span class="nav-divider"></span>
 
                 <div id="bonus-candy-container" style="position: relative; display: none; height: 100%;">
@@ -283,7 +278,63 @@
         </div>
       </div>
 
-      <!-- View 6: Daycare Hub -->
+      <!-- View 6: Battle Stadium -->
+      <div id="view-battle-stadium" class="game-view" style="display:none; background-image: url('./Assets/BG/BG.png'); background-size: 100% 100%; height: 100%; position: relative; align-items: center; justify-content: center; flex-direction: column;">
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 5px; margin-bottom: 20px;">
+              <div style="font-weight: bold; font-size: 24px; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">Multiplayer</div>
+              <div style="display: inline-flex; background: rgba(0, 0, 0, 0.4); border-radius: 20px; padding: 3px; gap: 5px;">
+                  <button id="btn-tab-host" onclick="window.switchMultiplayerTab('host')" style="background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2); border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;">Host</button>
+                  <button id="btn-tab-join" onclick="window.switchMultiplayerTab('join')" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;">Join</button>
+              </div>
+          </div>
+
+          <div style="text-align: center; color: white; display: flex; flex-direction: column; gap: 20px; padding-bottom: 20px; min-width: 400px;">
+              <p style="margin: 0; text-shadow: 1px 1px 2px rgba(0,0,0,0.8);">Connect with a friend to battle using your current active party!</p>
+
+              <div style="display: flex; justify-content: center; width: 100%;">
+                  <div id="mp-host-container" style="display: block; background: rgba(0,0,0,0.8); padding: 20px; border-radius: 10px; width: 100%; box-sizing: border-box; border: 1px solid #555;">
+                      <button id="btn-mp-host" style="padding: 10px; width: 100%; background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2); border-radius: 5px; font-weight: bold; cursor: pointer; transition: all 0.2s;">Generate Code</button>
+                      <p style="margin-top: 15px; font-size: 14px;">Send this code to your friend:</p>
+                      <div style="display: flex; gap: 5px; align-items: center;">
+                          <input type="text" id="multiplayer-host-id" readonly placeholder="Waiting..." style="flex: 1; padding: 8px; box-sizing: border-box; font-size: 12px; background: #222; color: white; border: 1px solid #555; border-radius: 5px;">
+                          <button id="btn-copy-host" style="padding: 8px 12px; font-size: 12px; background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2); border-radius: 5px; font-weight: bold; cursor: pointer; transition: all 0.2s;">Copy</button>
+                      </div>
+                      <p style="margin-top: 20px; font-size: 14px;">Paste your friend's Answer Code here:</p>
+                      <div style="display: flex; gap: 5px; align-items: center;">
+                          <input type="text" id="mp-host-answer-input" placeholder="Paste Answer Code" style="flex: 1; padding: 8px; box-sizing: border-box; font-size: 12px; border-radius: 5px; background: white; color: black;">
+                          <button id="btn-paste-host" style="padding: 8px 12px; font-size: 12px; background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2); border-radius: 5px; font-weight: bold; cursor: pointer; transition: all 0.2s;">Paste</button>
+                      </div>
+                      <button id="btn-mp-complete" style="padding: 10px; margin-top: 15px; width: 100%; background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2); border-radius: 5px; font-weight: bold; cursor: pointer; transition: all 0.2s;">Connect</button>
+                  </div>
+
+                  <div id="mp-join-container" style="display: none; background: rgba(0,0,0,0.8); padding: 20px; border-radius: 10px; width: 100%; box-sizing: border-box; border: 1px solid #555;">
+                      <p style="margin-top: 0; font-size: 14px;">Paste Host's Offer Code here:</p>
+                      <div style="display: flex; gap: 5px; align-items: center;">
+                          <input type="text" id="mp-join-input" placeholder="Paste Code Here" style="flex: 1; padding: 8px; box-sizing: border-box; font-size: 12px; border-radius: 5px; background: white; color: black;">
+                          <button id="btn-paste-join" style="padding: 8px 12px; font-size: 12px; background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2); border-radius: 5px; font-weight: bold; cursor: pointer; transition: all 0.2s;">Paste</button>
+                      </div>
+                      <button id="btn-mp-join" style="padding: 10px; margin-top: 15px; width: 100%; background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2); border-radius: 5px; font-weight: bold; cursor: pointer; transition: all 0.2s;">Generate Code</button>
+
+                      <p style="margin-top: 20px; font-size: 14px;">Send this Answer Code back to Host:</p>
+                      <div style="display: flex; gap: 5px; align-items: center;">
+                          <input type="text" id="multiplayer-client-id" readonly placeholder="Waiting..." style="flex: 1; padding: 8px; box-sizing: border-box; font-size: 12px; background: #222; color: white; border: 1px solid #555; border-radius: 5px;">
+                          <button id="btn-copy-client" style="padding: 8px 12px; font-size: 12px; background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2); border-radius: 5px; font-weight: bold; cursor: pointer; transition: all 0.2s;">Copy</button>
+                      </div>
+                  </div>
+              </div>
+
+              <div style="display: flex; justify-content: center; gap: 20px;">
+                  <div style="display: flex; width: 220px;">
+                      <button id="btn-mp-connection-status" disabled style="width: 100%; padding: 15px 0; font-size: 18px; font-weight: bold; background: #e74c3c; color: white; border: none; border-radius: 5px; opacity: 1; cursor: default;">Not Connected</button>
+                  </div>
+                  <div style="display: flex; width: 220px;">
+                      <button id="btn-mp-battle" disabled style="width: 100%; padding: 15px 0; font-size: 18px; font-weight: bold; background: #95a5a6; color: white; border: none; border-radius: 5px; cursor: not-allowed;">Battle</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <!-- View 7: Daycare Hub -->
       <div id="view-daycare" class="game-view" style="display:none; background-image: url('./Assets/BG/BG-Daycare.png'); background-size: 100% 100%; background-position: center; height: 100%; position: relative;">
         <!-- Daycare First-Time Overlay -->
         <div id="daycare-first-time-overlay" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000; background: rgba(0, 0, 0, 0.7); flex-direction: column; align-items: center; justify-content: center;">
