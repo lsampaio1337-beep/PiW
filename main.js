@@ -43,14 +43,7 @@ function createWindow() {
     win.once('ready-to-show', () => {
         // Create a signal file to let the launcher know the game is ready
         if (process.platform === 'win32') {
-            try {
-                fs.writeFileSync('game_ready.txt', 'ready', { flag: 'wx' });
-            } catch (err) {
-                // Ignore EEXIST if the file is already there, but log other errors
-                if (err.code !== 'EEXIST') {
-                    console.error('Failed to write game_ready.txt:', err);
-                }
-            }
+            fs.writeFileSync('game_ready.txt', 'ready');
         }
         win.show();
     });
