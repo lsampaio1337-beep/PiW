@@ -27,8 +27,8 @@ function simulateGame() {
         let wildDef = mathEngine.calculateStat(70, 15, wildLevel, 1.0);
         let wildHp = mathEngine.calculateHP(70, 15, wildLevel, 1.0);
 
-        let myDamage = Math.floor(mathEngine.calculateDamage(currentLevel, 60, myAtk, wildDef, 1.0).damage * 0.925);
-        let wildDamage = Math.floor(mathEngine.calculateDamage(wildLevel, 50, wildAtk, myDef, 1.0).damage * 0.925);
+        let myDamage = Math.floor(mathEngine.calculateDamage(currentLevel, 60, myAtk, wildDef, 1.0, 1.0).damage * 0.925);
+        let wildDamage = Math.floor(mathEngine.calculateDamage(wildLevel, 50, wildAtk, myDef, 1.0, 1.0).damage * 0.925);
 
         let hitsToKill = Math.ceil(wildHp / Math.max(1, myDamage));
         let hitsToDie = Math.ceil(myHp / Math.max(1, wildDamage));

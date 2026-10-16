@@ -50,7 +50,7 @@ async function runTest() {
             let wildDef = 6;
             let wildHp = 12;
 
-            let damage = mathEngine.calculateDamage(leader.level, 40, myAtk, wildDef, 1.0).damage;
+            let damage = mathEngine.calculateDamage(leader.level, 40, myAtk, wildDef, 1.0, 1.4).damage;
             let hits = Math.ceil(wildHp / Math.max(1, damage));
 
             let attackDelay = Math.max(250, 2.0 * 1000 * (100 / (100 + mySpeed))) / 1000;
