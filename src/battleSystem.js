@@ -2,6 +2,19 @@ import { VITAMINS, WHITE_CANDY_DEFEAT_REQUIREMENT } from "./constants.js";
 // src/battleSystem.js
 import * as mathEngine from './mathEngine.js';
 
+function escapeHTML(str) {
+    if (typeof str !== 'string') return str;
+    return str.replace(/[&<>'"]/g,
+        tag => ({
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            "'": '&#39;',
+            '"': '&quot;'
+        }[tag] || tag)
+    );
+}
+
 class BattleSystem {
     constructor(gameState, updateUI) {
         this.state = gameState; // reference to global game state
@@ -568,13 +581,14 @@ class BattleSystem {
             let trainerButtonsHtml = gym.trainers.map((t, index) => {
                 const isLeader = index === gym.trainers.length - 1;
                 const buttonText = isLeader ? `Fight Gym Leader` : `Fight Gym Trainer`;
+                const safeName = escapeHTML(t.name);
 
                 if (index < this.gymState.currentTrainerIndex) {
                     return `<button disabled class="action-btn" style="opacity: 0.5; width: 100%;">${buttonText} (Defeated)</button>`;
                 } else if (index === this.gymState.currentTrainerIndex) {
-                    return `<button id="btn-start-gym-battle" class="action-btn action-btn-primary" onclick="window.battleEngine.startNextGymBattle()" style="width: 100%;">${buttonText} (${t.name})</button>`;
+                    return `<button id="btn-start-gym-battle" class="action-btn action-btn-primary" onclick="window.battleEngine.startNextGymBattle()" style="width: 100%;">${buttonText} (${safeName})</button>`;
                 } else {
-                    return `<button disabled class="action-btn" style="opacity: 0.5; width: 100%;">${buttonText} (${t.name})</button>`;
+                    return `<button disabled class="action-btn" style="opacity: 0.5; width: 100%;">${buttonText} (${safeName})</button>`;
                 }
             }).join('');
 
@@ -603,8 +617,9 @@ class BattleSystem {
             };
         } else {
             // Gym completed
+            const safeLeaderName = escapeHTML(gym.leader);
             contentArea.innerHTML = `
-                <h3>You defeated ${gym.leader}!</h3>
+                <h3>You defeated ${safeLeaderName}!</h3>
                 <p>A Gift is awaiting for you.</p>
                 <button class="action-btn action-btn-primary" onclick="window.battleEngine.stopGymBattle()" style="margin-top: 10px; width: 100%;">Leave</button>
             `;
