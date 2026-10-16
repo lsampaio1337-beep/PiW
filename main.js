@@ -5,12 +5,8 @@ const fs = require('fs');
 // Fix transparency issues conditionally rather than disabling hardware acceleration entirely
 if (process.platform === 'linux') {
     app.commandLine.appendSwitch('enable-transparent-visuals');
-
-    // Disable hardware acceleration only if we're not running on Wayland.
-    // X11 still requires hardware acceleration to be disabled for transparency.
-    if (!process.env.WAYLAND_DISPLAY && process.env.XDG_SESSION_TYPE !== 'wayland') {
-        app.disableHardwareAcceleration();
-    }
+    // Hardware acceleration must be disabled on Linux for transparency to work properly
+    app.disableHardwareAcceleration();
 }
 
 function createWindow() {
