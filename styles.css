@@ -101,7 +101,7 @@ input[type="number"] {
     overflow: hidden;
 }
 
-#view-prof-oak-lab {
+#view-professor-lab {
     background-image: url('./Assets/BG/BG-Professor-Oak-Lab.png');
     background-size: 100% 100%;
     text-align: center;
@@ -657,8 +657,8 @@ input[type="number"] {
     pointer-events: auto;
 }
 
-/* Oak Lab Inner Modal styling */
-#main-view-inner-modal.oak-lab-inner-modal {
+/* Professor Lab Inner Modal styling */
+#main-view-inner-modal.prof-lab-inner-modal {
     width: 70%;
     aspect-ratio: 4/3;
 }

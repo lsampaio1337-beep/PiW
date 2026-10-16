@@ -240,25 +240,25 @@ export function updateMainControl() {
         }
     }
 
-    // Oak Task Notification Tracking
-    if (window.getOakTaskAvailableCount) {
-        let currentOakTasksCount = window.getOakTaskAvailableCount();
-        if (currentOakTasksCount > (state.stats.oakTasksAvailableCount || 0)) {
-            state.stats.showMapOakNotification = true;
-            state.stats.showOakMarkerPulse = true;
-            state.stats.showOakLobbyNotification = true;
-        } else if (currentOakTasksCount === 0) {
-            state.stats.showMapOakNotification = false;
-            state.stats.showOakMarkerPulse = false;
-            state.stats.showOakLobbyNotification = false;
+    // Professor Task Notification Tracking
+    if (window.getProfTaskAvailableCount) {
+        let currentProfTasksCount = window.getProfTaskAvailableCount();
+        if (currentProfTasksCount > (state.stats.profTasksAvailableCount || 0)) {
+            state.stats.showMapProfNotification = true;
+            state.stats.showProfMarkerPulse = true;
+            state.stats.showProfLobbyNotification = true;
+        } else if (currentProfTasksCount === 0) {
+            state.stats.showMapProfNotification = false;
+            state.stats.showProfMarkerPulse = false;
+            state.stats.showProfLobbyNotification = false;
         }
-        state.stats.oakTasksAvailableCount = currentOakTasksCount;
+        state.stats.profTasksAvailableCount = currentProfTasksCount;
     }
 
     const mapNotification = document.getElementById('map-notification');
     if (mapNotification) {
         let isFinalChallengeCompleted = checkFinalChallengeCompleted();
-        if (state.stats.hasUnseenMap || state.stats.showMapOakNotification || (isFinalChallengeCompleted && !state.globalStats.hasSeenJohtoMap)) {
+        if (state.stats.hasUnseenMap || state.stats.showMapProfNotification || (isFinalChallengeCompleted && !state.globalStats.hasSeenJohtoMap)) {
             mapNotification.style.display = 'block';
         } else {
             mapNotification.style.display = 'none';

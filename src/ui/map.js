@@ -47,7 +47,7 @@ window.switchMapRegion = function(region) {
 
 
 
-const LARGE_SPOT_LOCATIONS = new Set(['professor_oak_lab', 'johto_oak_lab', 'professor_lab', 'indigo_plateu', 'safari_zone', 'kanto_safari_zone', 'casino', 'goldenrood_game_corner', 'daycare']);
+const LARGE_SPOT_LOCATIONS = new Set(['professor_lab', 'johto_professor_lab', 'professor_lab', 'indigo_plateu', 'safari_zone', 'kanto_safari_zone', 'casino', 'goldenrood_game_corner', 'daycare']);
 
 function generateMarkerHtml(locationId, locationName, coords, isUnlocked, hasNewNotification, showCheckmark) {
     if (!isUnlocked) return '';
@@ -55,7 +55,7 @@ function generateMarkerHtml(locationId, locationName, coords, isUnlocked, hasNew
     let markerImg = './Assets/Map/Spots/Spot.png';
     let isClickable = true;
 
-    if (locationId === 'professor_oak_lab' || locationId === 'johto_oak_lab' || locationId === 'professor_lab') {
+    if (locationId === 'professor_lab' || locationId === 'johto_professor_lab' || locationId === 'professor_lab') {
         markerImg = './Assets/Map/Spots/Spot_Lab.png';
     } else if (locationId === 'pokemon_center___market' || locationId === 'pokecenter_pokemarket') {
         markerImg = './Assets/Map/Spots/Spot_PCPM.png';
@@ -183,7 +183,7 @@ function getRegionStats(regionName) {
 function getUnlockedAreas() {
     let unlockedAreas = new Set();
     unlockedAreas.add("Professor Lab");
-    unlockedAreas.add("Johto Oak Lab");
+    unlockedAreas.add("Johto Professor Lab");
     unlockedAreas.add("Professor Lab");
 
     let targetStats = getRegionStats(window.currentMapRegion);
@@ -247,7 +247,7 @@ function generateMarkersForRegion(region, unlockedAreas) {
             if (state.stats.newRoutes && state.stats.newRoutes.some(r => parseAreaNames(r).includes(locationName))) {
                 hasNewNotification = true;
             }
-            if (locationId === 'professor_oak_lab' && state.stats.showOakMarkerPulse) {
+            if (locationId === 'professor_lab' && state.stats.showProfMarkerPulse) {
                 hasNewNotification = true;
             }
 
@@ -297,7 +297,7 @@ function generateMarkersForRegion(region, unlockedAreas) {
         // Fallback for new regions
         let coords = { x: 50, y: 50 };
         let locationName = "Professor Lab";
-        html += generateMarkerHtml("professor_oak_lab", locationName, coords, true, false, false);
+        html += generateMarkerHtml("professor_lab", locationName, coords, true, false, false);
     }
     return html;
 }
@@ -326,9 +326,9 @@ function setupMapWindowDimensions(currentRegionObj, targetWidth) {
 }
 
 export function showMap() {
-    if (state.stats.hasUnseenMap || state.stats.showMapOakNotification) {
+    if (state.stats.hasUnseenMap || state.stats.showMapProfNotification) {
         state.stats.hasUnseenMap = false;
-        state.stats.showMapOakNotification = false;
+        state.stats.showMapProfNotification = false;
         updateUI();
     }
 
@@ -434,15 +434,15 @@ export function navigateToLocation(locationName) {
              battleSystem.isSearching = false;
              if (battleSystem.gymState) battleSystem.gymState.isActive = false;
         }
-        switchView("PROF_OAK_LAB");
-    } else if (locationName === "Johto Oak Lab") {
+        switchView("PROFESSOR_LAB");
+    } else if (locationName === "Johto Professor Lab") {
         if (battleSystem) {
              battleSystem.stop();
              battleSystem.activeEncounter = null;
              battleSystem.isSearching = false;
              if (battleSystem.gymState) battleSystem.gymState.isActive = false;
         }
-        switchView("JOHTO_OAK_LAB");
+        switchView("JOHTO_PROFESSOR_LAB");
     } else if (locationName === "Professor Lab") {
         if (battleSystem) {
              battleSystem.stop();
