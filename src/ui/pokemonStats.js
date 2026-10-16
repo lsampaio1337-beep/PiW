@@ -33,43 +33,25 @@ function getEvolveRequirements(p, evo, state) {
     };
 }
 
-export function showPokemonStatsByUuid(uuid, listName = null) {
+export function showPokemonStatsByUuid(uuid) {
     let p = null;
     let location = '';
-    let idx = -1;
-
-    // Fast path: check the known array reference first
-    if (listName && state[listName]) {
-        const arr = state[listName];
-        for (let i = 0; i < arr.length; i++) {
-            if (arr[i].uuid === uuid) {
-                p = arr[i];
-                location = listName;
-                idx = i;
-                break;
-            }
-        }
-    }
-
-    // Fallback: check all locations if not found
-    if (!p) {
-        const locations = ['party', 'breeding', 'training', 'storage', 'safe'];
-        for (let i = 0; i < locations.length; i++) {
-            const loc = locations[i];
-            if (loc === listName) continue; // Skip what we already checked
-
-            const arr = state[loc];
-            if (!arr) continue;
-
-            for (let j = 0; j < arr.length; j++) {
-                if (arr[j].uuid === uuid) {
-                    p = arr[j];
-                    location = loc;
-                    idx = j;
-                    break;
+    let idx = state.party.findIndex(x => x.uuid === uuid);
+    if (idx !== -1) { p = state.party[idx]; location = 'party'; }
+    else {
+        idx = state.breeding.findIndex(x => x.uuid === uuid);
+        if (idx !== -1) { p = state.breeding[idx]; location = 'breeding'; }
+        else {
+            idx = state.training.findIndex(x => x.uuid === uuid);
+            if (idx !== -1) { p = state.training[idx]; location = 'training'; }
+            else {
+                idx = state.storage.findIndex(x => x.uuid === uuid);
+                if (idx !== -1) { p = state.storage[idx]; location = 'storage'; }
+                else {
+                    idx = state.safe.findIndex(x => x.uuid === uuid);
+                    if (idx !== -1) { p = state.safe[idx]; location = 'safe'; }
                 }
             }
-            if (p) break;
         }
     }
 
