@@ -215,7 +215,7 @@ class BattleSystem {
             }
 
             if (typeof window.switchView === 'function') {
-                window.switchView("PROF_OAK_LAB");
+                window.switchView("PROFESSOR_LAB");
             }
 
             // Re-generate idle encounter
@@ -1287,7 +1287,7 @@ class BattleSystem {
                             if (!this.state.stats.caughtShiniesSpecies) this.state.stats.caughtShiniesSpecies = {};
                             this.state.stats.caughtShiniesSpecies[trackingName] = true;
                         }
-                        // Track captures for Oak Tasks (Weak+, Regular+, Uncommon+, Rare+, Epic+)
+                        // Track captures for Professor Tasks (Weak+, Regular+, Uncommon+, Rare+, Epic+)
                         let qName = defeatedEncounter.qualityName || "Regular";
                         if (["Weak", "Regular", "Uncommon", "Rare", "Epic", "Shiny", "Legendary", "Boss"].includes(qName)) {
                             this.state.stats.weakPlusCaptures = (this.state.stats.weakPlusCaptures || 0) + 1;
@@ -1833,7 +1833,7 @@ class BattleSystem {
                 this.gymState.inCombat = false;
             }
             if (typeof window.switchView === 'function') {
-                window.switchView("PROF_OAK_LAB");
+                window.switchView("PROFESSOR_LAB");
             }
             if (typeof window.navigateToLocation === 'function') {
                 window.navigateToLocation(labRoute);

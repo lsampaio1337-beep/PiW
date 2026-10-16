@@ -88,7 +88,7 @@ export const state = {
     ...JSON.parse(JSON.stringify(REGION_TEMPLATE)),
     globalStats: {
         playtime: 0,
-        hasSeenOakTutorial: false,
+        hasSeenProfTutorial: false,
         hasSeenZzZTutorial: false,
         hasSeenMultiplayerIcon: false,
         hasSeenGiftIcon: false,
