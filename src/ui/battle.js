@@ -879,7 +879,21 @@ export function showDamage(target, amount, isCrit, moveName = '', moveType = 'No
             entry.style.marginBottom = '2px';
             const attacker = target === 'player' ? 'Enemy' : 'You';
             const typeColor = TYPE_COLORS[moveType] || '#ffffff';
-            entry.innerHTML = `${attacker} used <b style="color:${typeColor}">${moveName}</b> for <span style="color:${typeColor}">${amount}</span> dmg!`;
+                        entry.textContent = attacker + ' used ';
+
+            const b = document.createElement('b');
+            b.style.color = typeColor;
+            b.textContent = moveName;
+            entry.appendChild(b);
+
+            entry.appendChild(document.createTextNode(' for '));
+
+            const span = document.createElement('span');
+            span.style.color = typeColor;
+            span.textContent = amount;
+            entry.appendChild(span);
+
+            entry.appendChild(document.createTextNode(' dmg!'));
             log.appendChild(entry);
 
             // Keep only last 4 entries
@@ -897,10 +911,26 @@ export function showDamage(target, amount, isCrit, moveName = '', moveType = 'No
     const typeColor = TYPE_COLORS[moveType] || '#ffffff';
     let critText = isCrit ? ' Crit(1.5x)' : '';
     let effText = `${effectiveness}x`;
-    let typeIconHtml = `<img src="Assets/Extra/Type ${moveType}.png" style="width: 20px; height: 20px; vertical-align: middle; margin: 0 4px;" />`;
+        const span = document.createElement('span');
+    span.style.fontWeight = 'bold';
+    span.style.fontStyle = isCrit ? 'italic' : 'normal';
+    span.style.display = 'flex';
+    span.style.alignItems = 'center';
+    span.style.justifyContent = 'center';
+    span.style.textShadow = '1px 1px 2px black';
 
-    // Layout: [Amount] [Icon] [Name] [Effectiveness] [Crit]
-    dmgNode.innerHTML = `<span style="font-weight: bold; font-style: ${isCrit ? 'italic' : 'normal'}; display: flex; align-items: center; justify-content: center; text-shadow: 1px 1px 2px black;">${amount} ${typeIconHtml} ${moveName} ${effText}${critText}</span>`;
+    span.textContent = amount + ' ';
+
+    const imgType = document.createElement('img');
+    imgType.src = `Assets/Extra/Type ${moveType}.png`;
+    imgType.style.width = '20px';
+    imgType.style.height = '20px';
+    imgType.style.verticalAlign = 'middle';
+    imgType.style.margin = '0 4px';
+    span.appendChild(imgType);
+
+    span.appendChild(document.createTextNode(' ' + moveName + ' ' + effText + critText));
+    dmgNode.appendChild(span);
 
 
     dmgNode.classList.add('floating-damage');
