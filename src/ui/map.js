@@ -169,7 +169,7 @@ function getRegionStats(regionName) {
 
 function getUnlockedAreas() {
     let unlockedAreas = new Set();
-    unlockedAreas.add("Professor Oak Lab");
+    unlockedAreas.add("Professor Lab");
     unlockedAreas.add("Johto Oak Lab");
     unlockedAreas.add("Professor Lab");
 
@@ -410,7 +410,7 @@ export function navigateToLocation(locationName) {
     state.currentRoute = locationName;
     if (window.closeModal) window.closeModal();
 
-    if (locationName === "Professor Oak Lab") {
+    if (locationName === "Professor Lab") {
         if (battleSystem) {
              battleSystem.stop();
              battleSystem.activeEncounter = null;
