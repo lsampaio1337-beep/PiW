@@ -578,7 +578,7 @@ export function renderPokeMarketSellTab(category) {
 
             if (p.bst === undefined) {
                 if (typeof p.id === 'number' && state.config && state.config.pokemonData) {
-                    const pd = state.config.pokemonData.find(pd => pd.id === p.id);
+                    const pd = state.config.pokemonData[p.id - 1];
                     if (pd) p.bst = pd.hp + pd.atk + pd.def + pd.spa + pd.spd + pd.spe;
                 }
             }
@@ -586,7 +586,7 @@ export function renderPokeMarketSellTab(category) {
 
             let pName = p.name || p.id;
             if (typeof p.id === 'number' && state.config && state.config.pokemonData) {
-                const pd = state.config.pokemonData.find(pd => pd.id === p.id);
+                const pd = state.config.pokemonData[p.id - 1];
                 if (pd) pName = p.name || pd.name;
             }
             if (filterName && !(pName && pName.toString().toLowerCase().includes(filterName)) && !(p.id && p.id.toString().toLowerCase().includes(filterName))) return;
@@ -866,7 +866,7 @@ window.marketSelectAllPokemonForSale = function() {
 
         let pName = p.name || p.id;
         if (typeof p.id === 'number' && state.config && state.config.pokemonData) {
-            const pd = state.config.pokemonData.find(pd => pd.id === p.id);
+            const pd = state.config.pokemonData[p.id - 1];
             if (pd) pName = p.name || pd.name;
         }
         if (filterName && !(pName && pName.toString().toLowerCase().includes(filterName)) && !(p.id && p.id.toString().toLowerCase().includes(filterName))) return;
@@ -897,7 +897,7 @@ function updateMarketPokemonSellCount() {
                 let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
                 if (p.bst === undefined) {
                     if (typeof p.id === 'number' && state.config && state.config.pokemonData) {
-                        const pd = state.config.pokemonData.find(pd => pd.id === p.id);
+                        const pd = state.config.pokemonData[p.id - 1];
                         if (pd) p.bst = pd.hp + pd.atk + pd.def + pd.spa + pd.spd + pd.spe;
                     }
                 }
@@ -922,7 +922,7 @@ window.marketSellSelectedPokemon = function() {
             let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
             if (p.bst === undefined) {
                 if (typeof p.id === 'number' && state.config && state.config.pokemonData) {
-                    const pd = state.config.pokemonData.find(pd => pd.id === p.id);
+                    const pd = state.config.pokemonData[p.id - 1];
                     if (pd) p.bst = pd.hp + pd.atk + pd.def + pd.spa + pd.spd + pd.spe;
                 }
             }

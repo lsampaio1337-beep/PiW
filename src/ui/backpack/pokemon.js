@@ -731,7 +731,7 @@ window.openDittoTransformModal = function(uuid) {
     const sortedIds = Array.from(uniqueIds).sort((a, b) => a - b);
 
     sortedIds.forEach(id => {
-        const pd = state.config.pokemonData.find(d => d.id === id);
+        const pd = state.config.pokemonData[id - 1];
         if(!pd) return;
 
         let imgSrc = window.getSpriteUrl(id, p.qualityName === 'Shiny');
@@ -793,7 +793,7 @@ window.transformDitto = function(dittoUuid, targetIdOverride) {
             p.id = 132;
             p.name = 'Ditto';
 
-            const newBase = state.config.pokemonData.find(pd => pd.id === 132);
+            const newBase = state.config.pokemonData[132 - 1];
             if (newBase) {
                 p.types = newBase.types;
                 p.bst = newBase.hp + newBase.atk + newBase.def + newBase.spa + newBase.spd + newBase.spe;
@@ -830,7 +830,7 @@ window.transformDitto = function(dittoUuid, targetIdOverride) {
         }
     } else {
         // Transform
-        const targetBase = state.config.pokemonData.find(pd => pd.id === targetId);
+        const targetBase = state.config.pokemonData[targetId - 1];
         if(!targetBase) return;
 
         p.isTransformed = true;

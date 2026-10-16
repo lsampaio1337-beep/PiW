@@ -442,7 +442,7 @@ function updatePokemonSpriteUI(spriteWrapper, pokemonSprite, pokemon, battleSyst
     let pokemonId = pokemon.isDisguisedDitto ? 132 : pokemon.id;
     let spriteSuffix = pokemon.qualityName === 'Shiny' ? '_shiny_clean.png' : '_clean.png';
     let paddedId = String(pokemonId).padStart(4, '0');
-    let pokemonName = state.config.pokemonData.find(p => p.id === pokemonId)?.name || 'Unknown';
+    let pokemonName = state.config.pokemonData[pokemonId - 1]?.name || 'Unknown';
     pokemonSprite.src = `Assets/Pokemon Sprites/Clean/Gen5/${paddedId}_${pokemonName}${spriteSuffix}`;
 
     const isFlying = pokemon.types && (pokemon.types.includes('Flying') || pokemon.types.includes('Wind'));
@@ -979,7 +979,7 @@ export function playCombatAnimations(targetSide, moveType, duration) {
              const pIdx = battleSystem.gymState.currentPokemonIndex;
              if (gym.trainers[tIdx] && gym.trainers[tIdx].team && gym.trainers[tIdx].team[pIdx]) {
                  let tId = gym.trainers[tIdx].team[pIdx].id;
-                 let pd = state.config.pokemonData.find(p => p.id === tId);
+                 let pd = state.config.pokemonData[tId - 1];
                  if (pd) atkTypes = pd.types || [];
              }
         } else if (battleSystem.activeEncounter) {

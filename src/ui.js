@@ -1414,7 +1414,7 @@ function selectStarter(id) {
     if (!storage.currentProfileId) {
         storage.createNewProfile();
     }
-    const pData = state.config.pokemonData.find(p => p.id === id);
+    const pData = state.config.pokemonData[id - 1];
     const q = 1.40; // Fixed Rare
     const qName = "Rare";
     const ivs = {hp: 50, atk: 50, def: 50, spa: 50, spd: 50, spe: 50};
@@ -2837,7 +2837,7 @@ export function renderGenericLab() {
         const starterIds = regionStarters[currentRegion] || regionStarters['Kanto'];
 
         let starterButtonsHtml = starterIds.map(id => {
-            const p = state.config.pokemonData.find(p => p.id === id);
+            const p = state.config.pokemonData[id - 1];
             const name = p ? p.name : 'Unknown';
             const paddedId = id.toString().padStart(4, '0');
             const spriteSrc = `Assets/Pokemon Sprites/Natural/Gen5/${paddedId}_${name}.png`;
@@ -2880,7 +2880,7 @@ ${starterButtonsHtml}
 
 window.getSpriteUrl = function(id, isShiny = false) {
     if (!state || !state.config || !state.config.pokemonData) return '';
-    const pData = state.config.pokemonData.find(pd => pd.id == id);
+    const pData = state.config.pokemonData[id - 1];
     if (!pData) return '';
     const paddedId = id.toString().padStart(4, '0');
     return `Assets/Pokemon Sprites/Natural/Gen5/${paddedId}_${pData.name}${isShiny ? '_shiny' : ''}.png`;
