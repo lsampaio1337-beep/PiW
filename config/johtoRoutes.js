@@ -1387,12 +1387,59 @@ export const johtoRoutes = [
         "minLevel": 55,
         "maxLevel": 60,
         "chance": 0.1
+      }
+    ]
+  },
+  {
+    "name": "Kanto Safari Zone",
+    "spawns": [
+      {
+        "pokemonId": 34,
+        "minLevel": 82,
+        "maxLevel": 88,
+        "chance": 0.1
+      },
+      {
+        "pokemonId": 31,
+        "minLevel": 82,
+        "maxLevel": 88,
+        "chance": 0.1
+      },
+      {
+        "pokemonId": 112,
+        "minLevel": 82,
+        "maxLevel": 88,
+        "chance": 0.1
       },
       {
         "pokemonId": 212,
-        "minLevel": 56,
-        "maxLevel": 61,
+        "minLevel": 82,
+        "maxLevel": 88,
         "chance": 0.1
+      },
+      {
+        "pokemonId": 128,
+        "minLevel": 81,
+        "maxLevel": 87,
+        "chance": 0.1
+      },
+      {
+        "pokemonId": 113,
+        "minLevel": 81,
+        "maxLevel": 87,
+        "chance": 0.15
+      },
+      {
+        "pokemonId": 50,
+        "minLevel": 77,
+        "maxLevel": 83,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 51,
+        "minLevel": 80,
+        "maxLevel": 86,
+        "chance": 0.15
       }
     ]
   },
