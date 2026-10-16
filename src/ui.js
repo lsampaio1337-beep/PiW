@@ -1569,6 +1569,7 @@ function selectStarter(id) {
 }
 
 let gameClockTimeout = null;
+let lastTickTime = null;
 
 window.restartGameClock = function() {
     if (gameClockTimeout) {
