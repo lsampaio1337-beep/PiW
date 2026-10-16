@@ -140,6 +140,9 @@ export function cheatAction(action) {
             if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
             if (!state.stats.seenShiniesSpecies) state.stats.seenShiniesSpecies = {};
             if (!state.stats.caughtShiniesSpecies) state.stats.caughtShiniesSpecies = {};
+            if (!state.stats.caughtSpecies[mewtwoData.name]) {
+                state.stats.caughtSpeciesCount = (state.stats.caughtSpeciesCount || 0) + 1;
+            }
             state.stats.caughtSpecies[mewtwoData.name] = (state.stats.caughtSpecies[mewtwoData.name] || 0) + 1;
             state.stats.seenShiniesSpecies[mewtwoData.name] = true;
             state.stats.caughtShiniesSpecies[mewtwoData.name] = (state.stats.caughtShiniesSpecies[mewtwoData.name] || 0) + 1;
@@ -415,6 +418,9 @@ function generatePokedex(isShiny) {
         state.storage.push(newMon);
 
         // Update Pokedex Collection counts
+        if (!state.stats.caughtSpecies[data.name]) {
+            state.stats.caughtSpeciesCount = (state.stats.caughtSpeciesCount || 0) + 1;
+        }
         state.stats.caughtSpecies[data.name] = (state.stats.caughtSpecies[data.name] || 0) + 1;
         if (isShiny) {
             state.stats.seenShiniesSpecies[data.name] = true;

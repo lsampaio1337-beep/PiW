@@ -233,6 +233,7 @@ export function evolvePokemon(location, idx, toId) {
     // Evolving counts as catching for the pokedex
     if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
     if (!state.stats.caughtSpecies[newBase.name]) {
+        state.stats.caughtSpeciesCount = (state.stats.caughtSpeciesCount || 0) + 1;
         state.stats.caughtSpecies[newBase.name] = true;
         state.stats.caught++;
     }
