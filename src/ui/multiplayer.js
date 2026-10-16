@@ -158,7 +158,7 @@ function updateBattleButtonUI() {
 }
 
 function setupDataChannel(channel) {
-    channel.onopen = () => {
+    const handleOpen = () => {
         const connBtn = document.getElementById('btn-mp-connection-status');
         if (connBtn) {
             connBtn.style.background = '#2ecc71';
@@ -196,6 +196,11 @@ function setupDataChannel(channel) {
         // Send our party data to the opponent
         channel.send(JSON.stringify({ type: 'party', party: state.party }));
     };
+
+    channel.onopen = handleOpen;
+    if (channel.readyState === 'open') {
+        handleOpen();
+    }
 
     channel.onmessage = (event) => {
         const data = JSON.parse(event.data);
@@ -241,16 +246,19 @@ function checkReadyState() {
         }
         setTimeout(() => {
              if (window.closeModal) window.closeModal();
-             if (globals.battleSystem) globals.battleSystem.startMultiplayerBattle(opponentParty, isHost);
+             // Host needs to initiate the start locally as well
+             if (globals.battleSystem) {
+                 globals.battleSystem.startMultiplayerBattle(opponentParty, isHost);
+             } else if (window.globals && window.globals.battleSystem) {
+                 window.globals.battleSystem.startMultiplayerBattle(opponentParty, isHost);
+             } else {
+                 console.error("Globals.battleSystem is not available");
+             }
         }, 1000);
     }
 }
 
 window.resetMultiplayerReady = resetMultiplayerReady;
-
-window.openMultiplayerModal = function(tab = 'host') {
-    openMultiplayerModal(tab);
-};
 
 window.switchMultiplayerTab = function(tab) {
     const hostContainer = document.getElementById('mp-host-container');
@@ -283,176 +291,106 @@ window.switchMultiplayerTab = function(tab) {
     }
 };
 
-export function openMultiplayerModal(tab = 'host') {
-    const btnStyle = "background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2); border-radius: 5px; font-weight: bold; cursor: pointer; transition: all 0.2s;";
+window.initMultiplayerView = function() {
+    window.switchMultiplayerTab('host');
 
-    let titleHtml = `
-        <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
-            <div style="font-weight: bold; font-size: 18px; color: white;">Multiplayer</div>
-            <div style="display: inline-flex; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px;">
-                <button id="btn-tab-host" onclick="window.switchMultiplayerTab('host')" style="${tab === 'host' ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmousedown="event.stopPropagation()">Host</button>
-                <button id="btn-tab-join" onclick="window.switchMultiplayerTab('join')" style="${tab === 'join' ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmousedown="event.stopPropagation()">Join</button>
-            </div>
-        </div>
-    `;
+    const btnHost = document.getElementById('btn-mp-host');
+    if (btnHost) btnHost.onclick = hostGame;
 
-    let html = `
-        <div style="text-align: center; color: white; display: flex; flex-direction: column; gap: 20px; padding-bottom: 20px; min-width: 400px;">
-            <p style="margin: 0;">Connect with a friend to battle using your current active party!</p>
-
-            <div style="display: flex; justify-content: center; width: 100%;">
-                <div id="mp-host-container" style="display: ${tab === 'host' ? 'block' : 'none'}; background: rgba(0,0,0,0.5); padding: 20px; border-radius: 10px; width: 100%; box-sizing: border-box;">
-                    <button id="btn-mp-host" style="padding: 10px; width: 100%; ${btnStyle}">Generate Code</button>
-                    <p style="margin-top: 15px; font-size: 14px;">Send this code to your friend:</p>
-                    <div style="display: flex; gap: 5px; align-items: center;">
-                        <input type="text" id="multiplayer-host-id" readonly placeholder="Waiting..." style="flex: 1; padding: 8px; box-sizing: border-box; font-size: 12px; background: #222; color: white; border: 1px solid #555; border-radius: 5px;">
-                        <button id="btn-copy-host" style="padding: 8px 12px; font-size: 12px; ${btnStyle}">Copy</button>
-                    </div>
-                    <p style="margin-top: 20px; font-size: 14px;">Paste your friend's Answer Code here:</p>
-                    <div style="display: flex; gap: 5px; align-items: center;">
-                        <input type="text" id="mp-host-answer-input" placeholder="Paste Answer Code" style="flex: 1; padding: 8px; box-sizing: border-box; font-size: 12px; border-radius: 5px;">
-                        <button id="btn-paste-host" style="padding: 8px 12px; font-size: 12px; ${btnStyle}">Paste</button>
-                    </div>
-                    <button id="btn-mp-complete" style="padding: 10px; margin-top: 15px; width: 100%; ${btnStyle}">Connect</button>
-                </div>
-
-                <div id="mp-join-container" style="display: ${tab === 'join' ? 'block' : 'none'}; background: rgba(0,0,0,0.5); padding: 20px; border-radius: 10px; width: 100%; box-sizing: border-box;">
-                    <p style="margin-top: 0; font-size: 14px;">Paste Host's Offer Code here:</p>
-                    <div style="display: flex; gap: 5px; align-items: center;">
-                        <input type="text" id="mp-join-input" placeholder="Paste Code Here" style="flex: 1; padding: 8px; box-sizing: border-box; font-size: 12px; border-radius: 5px;">
-                        <button id="btn-paste-join" style="padding: 8px 12px; font-size: 12px; ${btnStyle}">Paste</button>
-                    </div>
-                    <button id="btn-mp-join" style="padding: 10px; margin-top: 15px; width: 100%; ${btnStyle}">Generate Code</button>
-
-                    <p style="margin-top: 20px; font-size: 14px;">Send this Answer Code back to Host:</p>
-                    <div style="display: flex; gap: 5px; align-items: center;">
-                        <input type="text" id="multiplayer-client-id" readonly placeholder="Waiting..." style="flex: 1; padding: 8px; box-sizing: border-box; font-size: 12px; background: #222; color: white; border: 1px solid #555; border-radius: 5px;">
-                        <button id="btn-copy-client" style="padding: 8px 12px; font-size: 12px; ${btnStyle}">Copy</button>
-                    </div>
-                </div>
-            </div>
-
-            <div style="display: flex; justify-content: center; gap: 20px;">
-                <div style="display: flex; width: 220px;">
-                    <button id="btn-mp-connection-status" disabled style="width: 100%; padding: 15px 0; font-size: 18px; font-weight: bold; background: #e74c3c; color: white; border: none; border-radius: 5px; opacity: 1; cursor: default;">Not Connected</button>
-                </div>
-                <div style="display: flex; width: 220px;">
-                    <button id="btn-mp-battle" disabled style="width: 100%; padding: 15px 0; font-size: 18px; font-weight: bold; background: #95a5a6; color: white; border: none; border-radius: 5px; cursor: not-allowed;">Battle</button>
-                </div>
-            </div>
-        </div>
-    `;
-
-    if (window.showModal) {
-        window.showModal(titleHtml, html, "window-multiplayer");
-
-        setTimeout(() => {
-            const btnHost = document.getElementById('btn-mp-host');
-            if (btnHost) btnHost.onclick = hostGame;
-
-            const btnJoin = document.getElementById('btn-mp-join');
-            if (btnJoin) {
-                btnJoin.onclick = () => {
-                    const hostId = document.getElementById('mp-join-input').value.trim();
-                    if (hostId) joinGame(hostId);
-                };
-            }
-
-            const btnComplete = document.getElementById('btn-mp-complete');
-            if (btnComplete) {
-                btnComplete.onclick = () => {
-                    const answerId = document.getElementById('mp-host-answer-input').value.trim();
-                    if (answerId) completeConnection(answerId);
-                };
-            }
-
-
-            function copyToClipboard(inputEl, btnEl) {
-                if (!inputEl || !inputEl.value) return;
-
-                // Attempt standard navigator clipboard
-                if (navigator.clipboard && navigator.clipboard.writeText) {
-                    navigator.clipboard.writeText(inputEl.value).then(() => {
-                        btnEl.innerText = 'Copied!';
-                        setTimeout(() => btnEl.innerText = 'Copy', 2000);
-                    }).catch(err => {
-                        console.error('Clipboard write failed:', err);
-                        fallbackCopy(inputEl, btnEl);
-                    });
-                } else {
-                    fallbackCopy(inputEl, btnEl);
-                }
-            }
-
-            function fallbackCopy(inputEl, btnEl) {
-                try {
-                    inputEl.select();
-                    inputEl.setSelectionRange(0, 99999); // For mobile devices
-                    document.execCommand('copy');
-
-                    // Deselect
-                    window.getSelection().removeAllRanges();
-
-                    btnEl.innerText = 'Copied!';
-                    setTimeout(() => btnEl.innerText = 'Copy', 2000);
-                } catch (err) {
-                    console.error('Fallback copy failed:', err);
-                    alert("Copy failed. Please manually copy the code.");
-                }
-            }
-
-            const btnCopyHost = document.getElementById('btn-copy-host');
-            if (btnCopyHost) {
-                btnCopyHost.onclick = () => {
-                    copyToClipboard(document.getElementById('multiplayer-host-id'), btnCopyHost);
-                };
-            }
-
-            const btnCopyClient = document.getElementById('btn-copy-client');
-            if (btnCopyClient) {
-                btnCopyClient.onclick = () => {
-                    copyToClipboard(document.getElementById('multiplayer-client-id'), btnCopyClient);
-                };
-            }
-
-
-            async function pasteFromClipboard(inputEl, btnEl) {
-                if (!inputEl) return;
-                try {
-                    if (navigator.clipboard && navigator.clipboard.readText) {
-                        const text = await navigator.clipboard.readText();
-                        inputEl.value = text;
-                        btnEl.innerText = 'Pasted!';
-                        setTimeout(() => btnEl.innerText = 'Paste', 2000);
-                    } else {
-                        // Fallback paste is generally restricted by browsers, alert user
-                        inputEl.focus();
-                        if (document.execCommand('paste')) {
-                             btnEl.innerText = 'Pasted!';
-                             setTimeout(() => btnEl.innerText = 'Paste', 2000);
-                        } else {
-                             alert("Please use Ctrl+V or Right-Click -> Paste.");
-                        }
-                    }
-                } catch (err) {
-                    console.error('Paste failed:', err);
-                    inputEl.focus();
-                    alert("Please use Ctrl+V or Right-Click -> Paste.");
-                }
-            }
-
-            const btnPasteHost = document.getElementById('btn-paste-host');
-            if (btnPasteHost) {
-                btnPasteHost.onclick = () => pasteFromClipboard(document.getElementById('mp-host-answer-input'), btnPasteHost);
-            }
-
-            const btnPasteJoin = document.getElementById('btn-paste-join');
-            if (btnPasteJoin) {
-                btnPasteJoin.onclick = () => pasteFromClipboard(document.getElementById('mp-join-input'), btnPasteJoin);
-            }
-
-            const btnBattle = document.getElementById('btn-mp-battle');
-            if (btnBattle) btnBattle.onclick = toggleLocalReady;
-        }, 100);
+    const btnJoin = document.getElementById('btn-mp-join');
+    if (btnJoin) {
+        btnJoin.onclick = () => {
+            const hostId = document.getElementById('mp-join-input').value.trim();
+            if (hostId) joinGame(hostId);
+        };
     }
-}
+
+    const btnComplete = document.getElementById('btn-mp-complete');
+    if (btnComplete) {
+        btnComplete.onclick = () => {
+            const answerId = document.getElementById('mp-host-answer-input').value.trim();
+            if (answerId) completeConnection(answerId);
+        };
+    }
+
+    function copyToClipboard(inputEl, btnEl) {
+        if (!inputEl || !inputEl.value) return;
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(inputEl.value).then(() => {
+                btnEl.innerText = 'Copied!';
+                setTimeout(() => btnEl.innerText = 'Copy', 2000);
+            }).catch(err => {
+                console.error('Clipboard write failed:', err);
+                fallbackCopy(inputEl, btnEl);
+            });
+        } else {
+            fallbackCopy(inputEl, btnEl);
+        }
+    }
+
+    function fallbackCopy(inputEl, btnEl) {
+        try {
+            inputEl.select();
+            inputEl.setSelectionRange(0, 99999);
+            document.execCommand('copy');
+            window.getSelection().removeAllRanges();
+            btnEl.innerText = 'Copied!';
+            setTimeout(() => btnEl.innerText = 'Copy', 2000);
+        } catch (err) {
+            console.error('Fallback copy failed:', err);
+            alert("Copy failed. Please manually copy the code.");
+        }
+    }
+
+    const btnCopyHost = document.getElementById('btn-copy-host');
+    if (btnCopyHost) {
+        btnCopyHost.onclick = () => {
+            copyToClipboard(document.getElementById('multiplayer-host-id'), btnCopyHost);
+        };
+    }
+
+    const btnCopyClient = document.getElementById('btn-copy-client');
+    if (btnCopyClient) {
+        btnCopyClient.onclick = () => {
+            copyToClipboard(document.getElementById('multiplayer-client-id'), btnCopyClient);
+        };
+    }
+
+    async function pasteFromClipboard(inputEl, btnEl) {
+        if (!inputEl) return;
+        try {
+            if (navigator.clipboard && navigator.clipboard.readText) {
+                const text = await navigator.clipboard.readText();
+                inputEl.value = text;
+                btnEl.innerText = 'Pasted!';
+                setTimeout(() => btnEl.innerText = 'Paste', 2000);
+            } else {
+                inputEl.focus();
+                if (document.execCommand('paste')) {
+                     btnEl.innerText = 'Pasted!';
+                     setTimeout(() => btnEl.innerText = 'Paste', 2000);
+                } else {
+                     alert("Please use Ctrl+V or Right-Click -> Paste.");
+                }
+            }
+        } catch (err) {
+            console.error('Paste failed:', err);
+            inputEl.focus();
+            alert("Please use Ctrl+V or Right-Click -> Paste.");
+        }
+    }
+
+    const btnPasteHost = document.getElementById('btn-paste-host');
+    if (btnPasteHost) {
+        btnPasteHost.onclick = () => pasteFromClipboard(document.getElementById('mp-host-answer-input'), btnPasteHost);
+    }
+
+    const btnPasteJoin = document.getElementById('btn-paste-join');
+    if (btnPasteJoin) {
+        btnPasteJoin.onclick = () => pasteFromClipboard(document.getElementById('mp-join-input'), btnPasteJoin);
+    }
+
+    const btnBattle = document.getElementById('btn-mp-battle');
+    if (btnBattle) btnBattle.onclick = toggleLocalReady;
+};

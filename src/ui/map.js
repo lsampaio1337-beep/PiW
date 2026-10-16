@@ -55,6 +55,8 @@ function generateMarkerHtml(locationId, locationName, coords, isUnlocked, hasNew
         markerImg = './Assets/Map/Spots/Spot_Casino.png';
     } else if (locationId === 'daycare') {
         markerImg = './Assets/Map/Spots/Spot_Daycare.png';
+    } else if (locationId === 'battle_stadium') {
+        markerImg = './Assets/Map/Spots/Spot_BattleStadium.png';
     } else if (locationId === 'violet_gym') {
         markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Johto', 1)}`;
     } else if (locationId === 'azalea_gym') {
@@ -113,7 +115,7 @@ function generateMarkerHtml(locationId, locationName, coords, isUnlocked, hasNew
     if (locationId === 'pokemon_center___market' || locationId === 'pokecenter_pokemarket') {
         markerWidth = "32px";
         markerHeight = "32px";
-    } else if (LARGE_SPOT_LOCATIONS.has(locationId)) {
+    } else if (['professor_oak_lab', 'johto_oak_lab', 'professor_lab', 'indigo_plateu', 'safari_zone', 'kanto_safari_zone', 'casino', 'goldenrood_game_corner', 'daycare', 'battle_stadium'].includes(locationId)) {
         markerWidth = "28px";
         markerHeight = "28px";
     }
@@ -417,7 +419,15 @@ export function navigateToLocation(locationName) {
     state.currentRoute = locationName;
     if (window.closeModal) window.closeModal();
 
-    if (locationName === "Professor Lab") {
+    if (locationName === "Battle Stadium") {
+        if (battleSystem) {
+             battleSystem.stop();
+             battleSystem.activeEncounter = null;
+             battleSystem.isSearching = false;
+             if (battleSystem.gymState) battleSystem.gymState.isActive = false;
+        }
+        switchView("BATTLE_STADIUM");
+    } else if (locationName === "Professor Lab") {
         if (battleSystem) {
              battleSystem.stop();
              battleSystem.activeEncounter = null;

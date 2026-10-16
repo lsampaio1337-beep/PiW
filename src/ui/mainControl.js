@@ -195,22 +195,6 @@ export function updateMainControl() {
             bonusCandyContainer.style.display = 'none';
         }
     }
-    const multiplayerContainer = document.getElementById('multiplayer-container');
-    const multiplayerExclamation = document.getElementById('multiplayer-exclamation');
-    if (multiplayerContainer && multiplayerExclamation) {
-        // Unlock Multiplayer after Challenge 5 (Fossil Revival Lab) is completed
-        if (state.stats.completedChallengeIds && state.stats.completedChallengeIds.includes('Fossil Revival Lab')) {
-            multiplayerContainer.style.display = 'inline-block';
-            if (!state.globalStats.hasSeenMultiplayerIcon) {
-                multiplayerExclamation.style.display = 'block';
-            } else {
-                multiplayerExclamation.style.display = 'none';
-            }
-        } else {
-            multiplayerContainer.style.display = 'none';
-            multiplayerExclamation.style.display = 'none';
-        }
-    }
 
     const giftContainer = document.getElementById('gift-container');
     const giftNotification = document.getElementById('gift-notification');
