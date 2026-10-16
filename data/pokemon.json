@@ -51,7 +51,9 @@
         "level": 55,
         "move": "Solar Beam"
       }
-    ]
+    ],
+    "kanto_id": 1,
+    "johto_id": 226
   },
   {
     "id": 2,
@@ -105,7 +107,9 @@
         "level": 55,
         "move": "Solar Beam"
       }
-    ]
+    ],
+    "kanto_id": 2,
+    "johto_id": 227
   },
   {
     "id": 3,
@@ -154,7 +158,9 @@
         "level": 55,
         "move": "Solar Beam"
       }
-    ]
+    ],
+    "kanto_id": 3,
+    "johto_id": 228
   },
   {
     "id": 4,
@@ -211,7 +217,9 @@
         "level": 54,
         "move": "Flare Blitz"
       }
-    ]
+    ],
+    "kanto_id": 4,
+    "johto_id": 229
   },
   {
     "id": 5,
@@ -268,7 +276,9 @@
         "level": 54,
         "move": "Flare Blitz"
       }
-    ]
+    ],
+    "kanto_id": 5,
+    "johto_id": 230
   },
   {
     "id": 6,
@@ -325,7 +335,9 @@
         "level": 54,
         "move": "Flare Blitz"
       }
-    ]
+    ],
+    "kanto_id": 6,
+    "johto_id": 231
   },
   {
     "id": 7,
@@ -374,7 +386,9 @@
         "level": 45,
         "move": "Liquidation"
       }
-    ]
+    ],
+    "kanto_id": 7,
+    "johto_id": 232
   },
   {
     "id": 8,
@@ -423,7 +437,9 @@
         "level": 45,
         "move": "Liquidation"
       }
-    ]
+    ],
+    "kanto_id": 8,
+    "johto_id": 233
   },
   {
     "id": 9,
@@ -467,7 +483,9 @@
         "level": 45,
         "move": "Liquidation"
       }
-    ]
+    ],
+    "kanto_id": 9,
+    "johto_id": 234
   },
   {
     "id": 10,
@@ -496,7 +514,9 @@
         "level": 9,
         "move": "Bug Bite"
       }
-    ]
+    ],
+    "kanto_id": 10,
+    "johto_id": 24
   },
   {
     "id": 11,
@@ -516,7 +536,9 @@
         "level": 10
       }
     ],
-    "learnset": []
+    "learnset": [],
+    "kanto_id": 11,
+    "johto_id": 25
   },
   {
     "id": 12,
@@ -561,7 +583,9 @@
         "level": 32,
         "move": "Bug Buzz"
       }
-    ]
+    ],
+    "kanto_id": 12,
+    "johto_id": 26
   },
   {
     "id": 13,
@@ -587,7 +611,9 @@
         "level": 1,
         "move": "Poison Sting"
       }
-    ]
+    ],
+    "kanto_id": 13,
+    "johto_id": 27
   },
   {
     "id": 14,
@@ -613,7 +639,9 @@
         "level": 1,
         "move": "Poison Sting"
       }
-    ]
+    ],
+    "kanto_id": 14,
+    "johto_id": 28
   },
   {
     "id": 15,
@@ -658,7 +686,9 @@
         "level": 40,
         "move": "Drill Run"
       }
-    ]
+    ],
+    "kanto_id": 15,
+    "johto_id": 29
   },
   {
     "id": 16,
@@ -712,7 +742,9 @@
         "level": 50,
         "move": "Brave Bird"
       }
-    ]
+    ],
+    "kanto_id": 16,
+    "johto_id": 10
   },
   {
     "id": 17,
@@ -766,7 +798,9 @@
         "level": 50,
         "move": "Brave Bird"
       }
-    ]
+    ],
+    "kanto_id": 17,
+    "johto_id": 11
   },
   {
     "id": 18,
@@ -815,7 +849,9 @@
         "level": 50,
         "move": "Brave Bird"
       }
-    ]
+    ],
+    "kanto_id": 18,
+    "johto_id": 12
   },
   {
     "id": 19,
@@ -880,7 +916,10 @@
         "level": 34,
         "move": "Endeavor"
       }
-    ]
+    ],
+    "kanto_id": 19,
+    "johto_id": 17,
+    "unova_id": 59
   },
   {
     "id": 20,
@@ -940,7 +979,10 @@
         "level": 44,
         "move": "Endeavor"
       }
-    ]
+    ],
+    "kanto_id": 20,
+    "johto_id": 18,
+    "unova_id": 60
   },
   {
     "id": 21,
@@ -990,7 +1032,9 @@
         "level": 36,
         "move": "Drill Peck"
       }
-    ]
+    ],
+    "kanto_id": 21,
+    "johto_id": 13
   },
   {
     "id": 22,
@@ -1047,7 +1091,9 @@
         "level": 45,
         "move": "Drill Run"
       }
-    ]
+    ],
+    "kanto_id": 22,
+    "johto_id": 14
   },
   {
     "id": 23,
@@ -1096,7 +1142,9 @@
         "level": 49,
         "move": "Gunk Shot"
       }
-    ]
+    ],
+    "kanto_id": 23,
+    "johto_id": 50
   },
   {
     "id": 24,
@@ -1140,7 +1188,9 @@
         "level": 49,
         "move": "Gunk Shot"
       }
-    ]
+    ],
+    "kanto_id": 24,
+    "johto_id": 51
   },
   {
     "id": 25,
@@ -1193,7 +1243,11 @@
         "level": 99,
         "move": "Volt Tackle"
       }
-    ]
+    ],
+    "kanto_id": 25,
+    "johto_id": 22,
+    "hoenn_id": 156,
+    "sinnoh_id": 104
   },
   {
     "id": 26,
@@ -1237,7 +1291,11 @@
         "level": 99,
         "move": "Volt Tackle"
       }
-    ]
+    ],
+    "kanto_id": 26,
+    "johto_id": 23,
+    "hoenn_id": 157,
+    "sinnoh_id": 105
   },
   {
     "id": 27,
@@ -1261,7 +1319,11 @@
         "level": 101
       }
     ],
-    "learnset": []
+    "learnset": [],
+    "kanto_id": 27,
+    "johto_id": 48,
+    "hoenn_id": 112,
+    "unova_id": 113
   },
   {
     "id": 28,
@@ -1276,11 +1338,15 @@
     "spd": 55,
     "spe": 65,
     "evolutions": [],
-    "learnset": []
+    "learnset": [],
+    "kanto_id": 28,
+    "johto_id": 49,
+    "hoenn_id": 113,
+    "unova_id": 114
   },
   {
     "id": 29,
-    "name": "Nidoran♀",
+    "name": "Nidoran\u2640",
     "types": [
       "Poison"
     ],
@@ -1325,7 +1391,9 @@
         "level": 55,
         "move": "Earth Power"
       }
-    ]
+    ],
+    "kanto_id": 29,
+    "johto_id": 95
   },
   {
     "id": 30,
@@ -1374,7 +1442,9 @@
         "level": 71,
         "move": "Earth Power"
       }
-    ]
+    ],
+    "kanto_id": 30,
+    "johto_id": 96
   },
   {
     "id": 31,
@@ -1427,11 +1497,13 @@
         "level": 1,
         "move": "Superpower"
       }
-    ]
+    ],
+    "kanto_id": 31,
+    "johto_id": 97
   },
   {
     "id": 32,
-    "name": "Nidoran♂",
+    "name": "Nidoran\u2642",
     "types": [
       "Poison"
     ],
@@ -1476,7 +1548,9 @@
         "level": 55,
         "move": "Earth Power"
       }
-    ]
+    ],
+    "kanto_id": 32,
+    "johto_id": 98
   },
   {
     "id": 33,
@@ -1525,7 +1599,9 @@
         "level": 71,
         "move": "Earth Power"
       }
-    ]
+    ],
+    "kanto_id": 33,
+    "johto_id": 99
   },
   {
     "id": 34,
@@ -1578,7 +1654,9 @@
         "level": 1,
         "move": "Sludge Wave"
       }
-    ]
+    ],
+    "kanto_id": 34,
+    "johto_id": 100
   },
   {
     "id": 35,
@@ -1639,7 +1717,11 @@
         "level": 55,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "kanto_id": 35,
+    "johto_id": 41,
+    "sinnoh_id": 100,
+    "unova_id": 89
   },
   {
     "id": 36,
@@ -1699,7 +1781,11 @@
         "level": 55,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "kanto_id": 36,
+    "johto_id": 42,
+    "sinnoh_id": 101,
+    "unova_id": 90
   },
   {
     "id": 37,
@@ -1723,7 +1809,11 @@
         "level": 101
       }
     ],
-    "learnset": []
+    "learnset": [],
+    "kanto_id": 37,
+    "johto_id": 125,
+    "hoenn_id": 153,
+    "unova_id": 248
   },
   {
     "id": 38,
@@ -1738,7 +1828,11 @@
     "spd": 100,
     "spe": 100,
     "evolutions": [],
-    "learnset": []
+    "learnset": [],
+    "kanto_id": 38,
+    "johto_id": 126,
+    "hoenn_id": 154,
+    "unova_id": 249
   },
   {
     "id": 39,
@@ -1804,7 +1898,11 @@
         "level": 53,
         "move": "Moonblast"
       }
-    ]
+    ],
+    "kanto_id": 39,
+    "johto_id": 44,
+    "hoenn_id": 138,
+    "unova_id": 282
   },
   {
     "id": 40,
@@ -1865,7 +1963,11 @@
         "level": 53,
         "move": "Moonblast"
       }
-    ]
+    ],
+    "kanto_id": 40,
+    "johto_id": 45,
+    "hoenn_id": 139,
+    "unova_id": 283
   },
   {
     "id": 41,
@@ -1919,7 +2021,12 @@
         "level": 50,
         "move": "Leech Life"
       }
-    ]
+    ],
+    "kanto_id": 41,
+    "johto_id": 37,
+    "hoenn_id": 63,
+    "sinnoh_id": 28,
+    "unova_id": 61
   },
   {
     "id": 42,
@@ -1973,7 +2080,12 @@
         "level": 50,
         "move": "Leech Life"
       }
-    ]
+    ],
+    "kanto_id": 42,
+    "johto_id": 38,
+    "hoenn_id": 64,
+    "sinnoh_id": 29,
+    "unova_id": 62
   },
   {
     "id": 43,
@@ -2019,7 +2131,10 @@
         "level": 40,
         "move": "Petal Dance"
       }
-    ]
+    ],
+    "kanto_id": 43,
+    "johto_id": 83,
+    "hoenn_id": 88
   },
   {
     "id": 44,
@@ -2069,7 +2184,10 @@
         "level": 50,
         "move": "Petal Dance"
       }
-    ]
+    ],
+    "kanto_id": 44,
+    "johto_id": 84,
+    "hoenn_id": 89
   },
   {
     "id": 45,
@@ -2110,7 +2228,10 @@
         "level": 1,
         "move": "Petal Dance"
       }
-    ]
+    ],
+    "kanto_id": 45,
+    "johto_id": 85,
+    "hoenn_id": 90
   },
   {
     "id": 46,
@@ -2152,7 +2273,9 @@
         "level": 47,
         "move": "Energy Ball"
       }
-    ]
+    ],
+    "kanto_id": 46,
+    "johto_id": 70
   },
   {
     "id": 47,
@@ -2189,7 +2312,9 @@
         "level": 47,
         "move": "Energy Ball"
       }
-    ]
+    ],
+    "kanto_id": 47,
+    "johto_id": 71
   },
   {
     "id": 48,
@@ -2243,7 +2368,9 @@
         "level": 47,
         "move": "Psychic"
       }
-    ]
+    ],
+    "kanto_id": 48,
+    "johto_id": 108
   },
   {
     "id": 49,
@@ -2292,7 +2419,9 @@
         "level": 55,
         "move": "Psychic"
       }
-    ]
+    ],
+    "kanto_id": 49,
+    "johto_id": 109
   },
   {
     "id": 50,
@@ -2316,7 +2445,9 @@
         "level": 26
       }
     ],
-    "learnset": []
+    "learnset": [],
+    "kanto_id": 50,
+    "johto_id": 132
   },
   {
     "id": 51,
@@ -2336,7 +2467,9 @@
         "level": 35,
         "move": "Sand Tomb"
       }
-    ]
+    ],
+    "kanto_id": 51,
+    "johto_id": 133
   },
   {
     "id": 52,
@@ -2364,7 +2497,9 @@
         "level": 28
       }
     ],
-    "learnset": []
+    "learnset": [],
+    "kanto_id": 52,
+    "johto_id": 136
   },
   {
     "id": 53,
@@ -2384,7 +2519,9 @@
         "level": 80,
         "move": "Power Gem"
       }
-    ]
+    ],
+    "kanto_id": 53,
+    "johto_id": 137
   },
   {
     "id": 54,
@@ -2433,7 +2570,12 @@
         "level": 24,
         "move": "Aqua Tail"
       }
-    ]
+    ],
+    "kanto_id": 54,
+    "johto_id": 138,
+    "hoenn_id": 158,
+    "sinnoh_id": 43,
+    "unova_id": 28
   },
   {
     "id": 55,
@@ -2485,7 +2627,12 @@
         "level": 40,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "kanto_id": 55,
+    "johto_id": 139,
+    "hoenn_id": 159,
+    "sinnoh_id": 44,
+    "unova_id": 29
   },
   {
     "id": 56,
@@ -2554,7 +2701,9 @@
         "level": 54,
         "move": "Dynamic Punch"
       }
-    ]
+    ],
+    "kanto_id": 56,
+    "johto_id": 134
   },
   {
     "id": 57,
@@ -2627,7 +2776,9 @@
         "level": 54,
         "move": "Dynamic Punch"
       }
-    ]
+    ],
+    "kanto_id": 57,
+    "johto_id": 135
   },
   {
     "id": 58,
@@ -2651,7 +2802,10 @@
         "level": 101
       }
     ],
-    "learnset": []
+    "learnset": [],
+    "kanto_id": 58,
+    "johto_id": 127,
+    "unova_id": 51
   },
   {
     "id": 59,
@@ -2671,7 +2825,10 @@
         "level": 80,
         "move": "Extreme Speed"
       }
-    ]
+    ],
+    "kanto_id": 59,
+    "johto_id": 128,
+    "unova_id": 52
   },
   {
     "id": 60,
@@ -2724,7 +2881,9 @@
         "level": 54,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "kanto_id": 60,
+    "johto_id": 72
   },
   {
     "id": 61,
@@ -2781,7 +2940,9 @@
         "level": 66,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "kanto_id": 61,
+    "johto_id": 73
   },
   {
     "id": 62,
@@ -2806,7 +2967,9 @@
         "level": 1,
         "move": "Bubble Beam"
       }
-    ]
+    ],
+    "kanto_id": 62,
+    "johto_id": 74
   },
   {
     "id": 63,
@@ -2826,7 +2989,11 @@
         "level": 16
       }
     ],
-    "learnset": []
+    "learnset": [],
+    "kanto_id": 63,
+    "johto_id": 89,
+    "hoenn_id": 39,
+    "sinnoh_id": 20
   },
   {
     "id": 64,
@@ -2867,7 +3034,11 @@
         "level": 45,
         "move": "Future Sight"
       }
-    ]
+    ],
+    "kanto_id": 64,
+    "johto_id": 90,
+    "hoenn_id": 40,
+    "sinnoh_id": 21
   },
   {
     "id": 65,
@@ -2903,7 +3074,11 @@
         "level": 45,
         "move": "Future Sight"
       }
-    ]
+    ],
+    "kanto_id": 65,
+    "johto_id": 91,
+    "hoenn_id": 41,
+    "sinnoh_id": 22
   },
   {
     "id": 66,
@@ -2960,7 +3135,11 @@
         "level": 54,
         "move": "Dynamic Punch"
       }
-    ]
+    ],
+    "kanto_id": 66,
+    "johto_id": 140,
+    "hoenn_id": 73,
+    "sinnoh_id": 40
   },
   {
     "id": 67,
@@ -3017,7 +3196,11 @@
         "level": 54,
         "move": "Dynamic Punch"
       }
-    ]
+    ],
+    "kanto_id": 67,
+    "johto_id": 141,
+    "hoenn_id": 74,
+    "sinnoh_id": 41
   },
   {
     "id": 68,
@@ -3073,7 +3256,11 @@
         "level": 54,
         "move": "Dynamic Punch"
       }
-    ]
+    ],
+    "kanto_id": 68,
+    "johto_id": 142,
+    "hoenn_id": 75,
+    "sinnoh_id": 42
   },
   {
     "id": 69,
@@ -3135,7 +3322,9 @@
         "level": 48,
         "move": "Leaf Storm"
       }
-    ]
+    ],
+    "kanto_id": 69,
+    "johto_id": 64
   },
   {
     "id": 70,
@@ -3197,7 +3386,9 @@
         "level": 48,
         "move": "Leaf Storm"
       }
-    ]
+    ],
+    "kanto_id": 70,
+    "johto_id": 65
   },
   {
     "id": 71,
@@ -3258,7 +3449,9 @@
         "level": 48,
         "move": "Leaf Storm"
       }
-    ]
+    ],
+    "kanto_id": 71,
+    "johto_id": 66
   },
   {
     "id": 72,
@@ -3324,7 +3517,11 @@
         "level": 48,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "kanto_id": 72,
+    "johto_id": 162,
+    "hoenn_id": 66,
+    "sinnoh_id": 136
   },
   {
     "id": 73,
@@ -3385,7 +3582,11 @@
         "level": 58,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "kanto_id": 73,
+    "johto_id": 163,
+    "hoenn_id": 67,
+    "sinnoh_id": 137
   },
   {
     "id": 74,
@@ -3410,7 +3611,11 @@
         "level": 25
       }
     ],
-    "learnset": []
+    "learnset": [],
+    "kanto_id": 74,
+    "johto_id": 34,
+    "hoenn_id": 57,
+    "sinnoh_id": 31
   },
   {
     "id": 75,
@@ -3435,7 +3640,11 @@
         "level": 101
       }
     ],
-    "learnset": []
+    "learnset": [],
+    "kanto_id": 75,
+    "johto_id": 35,
+    "hoenn_id": 58,
+    "sinnoh_id": 32
   },
   {
     "id": 76,
@@ -3451,7 +3660,11 @@
     "spd": 65,
     "spe": 45,
     "evolutions": [],
-    "learnset": []
+    "learnset": [],
+    "kanto_id": 76,
+    "johto_id": 36,
+    "hoenn_id": 59,
+    "sinnoh_id": 33
   },
   {
     "id": 77,
@@ -3504,7 +3717,10 @@
         "level": 47,
         "move": "Flare Blitz"
       }
-    ]
+    ],
+    "kanto_id": 77,
+    "johto_id": 201,
+    "sinnoh_id": 90
   },
   {
     "id": 78,
@@ -3548,7 +3764,10 @@
         "level": 47,
         "move": "Flare Blitz"
       }
-    ]
+    ],
+    "kanto_id": 78,
+    "johto_id": 202,
+    "sinnoh_id": 91
   },
   {
     "id": 79,
@@ -3618,7 +3837,9 @@
         "level": 42,
         "move": "Psychic"
       }
-    ]
+    ],
+    "kanto_id": 79,
+    "johto_id": 80
   },
   {
     "id": 80,
@@ -3639,7 +3860,9 @@
         "level": 120,
         "move": "Future Sight"
       }
-    ]
+    ],
+    "kanto_id": 80,
+    "johto_id": 81
   },
   {
     "id": 81,
@@ -3693,7 +3916,11 @@
         "level": 52,
         "move": "Zap Cannon"
       }
-    ]
+    ],
+    "kanto_id": 81,
+    "johto_id": 118,
+    "hoenn_id": 82,
+    "unova_id": 48
   },
   {
     "id": 82,
@@ -3747,7 +3974,11 @@
         "level": 64,
         "move": "Zap Cannon"
       }
-    ]
+    ],
+    "kanto_id": 82,
+    "johto_id": 119,
+    "hoenn_id": 83,
+    "unova_id": 49
   },
   {
     "id": 83,
@@ -3813,7 +4044,9 @@
         "level": 65,
         "move": "Brave Bird"
       }
-    ]
+    ],
+    "kanto_id": 83,
+    "johto_id": 158
   },
   {
     "id": 84,
@@ -3871,7 +4104,10 @@
         "level": 43,
         "move": "Thrash"
       }
-    ]
+    ],
+    "kanto_id": 84,
+    "johto_id": 199,
+    "hoenn_id": 92
   },
   {
     "id": 85,
@@ -3924,7 +4160,10 @@
         "level": 50,
         "move": "Thrash"
       }
-    ]
+    ],
+    "kanto_id": 85,
+    "johto_id": 200,
+    "hoenn_id": 93
   },
   {
     "id": 86,
@@ -3985,7 +4224,10 @@
         "level": 47,
         "move": "Ice Beam"
       }
-    ]
+    ],
+    "kanto_id": 86,
+    "johto_id": 176,
+    "unova_id": 265
   },
   {
     "id": 87,
@@ -4042,7 +4284,10 @@
         "level": 55,
         "move": "Ice Beam"
       }
-    ]
+    ],
+    "kanto_id": 87,
+    "johto_id": 177,
+    "unova_id": 266
   },
   {
     "id": 88,
@@ -4066,7 +4311,11 @@
         "level": 38
       }
     ],
-    "learnset": []
+    "learnset": [],
+    "kanto_id": 88,
+    "johto_id": 116,
+    "hoenn_id": 106,
+    "unova_id": 64
   },
   {
     "id": 89,
@@ -4081,7 +4330,11 @@
     "spd": 100,
     "spe": 50,
     "evolutions": [],
-    "learnset": []
+    "learnset": [],
+    "kanto_id": 89,
+    "johto_id": 117,
+    "hoenn_id": 107,
+    "unova_id": 65
   },
   {
     "id": 90,
@@ -4134,7 +4387,9 @@
         "level": 48,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "kanto_id": 90,
+    "johto_id": 169
   },
   {
     "id": 91,
@@ -4187,7 +4442,9 @@
         "level": 5,
         "move": "Razor Shell"
       }
-    ]
+    ],
+    "kanto_id": 91,
+    "johto_id": 170
   },
   {
     "id": 92,
@@ -4233,7 +4490,10 @@
         "level": 40,
         "move": "Shadow Ball"
       }
-    ]
+    ],
+    "kanto_id": 92,
+    "johto_id": 58,
+    "sinnoh_id": 69
   },
   {
     "id": 93,
@@ -4291,7 +4551,10 @@
         "level": 55,
         "move": "Phantom Force"
       }
-    ]
+    ],
+    "kanto_id": 93,
+    "johto_id": 59,
+    "sinnoh_id": 70
   },
   {
     "id": 94,
@@ -4344,7 +4607,10 @@
         "level": 55,
         "move": "Phantom Force"
       }
-    ]
+    ],
+    "kanto_id": 94,
+    "johto_id": 60,
+    "sinnoh_id": 71
   },
   {
     "id": 95,
@@ -4410,7 +4676,11 @@
         "level": 62,
         "move": "Head Smash"
       }
-    ]
+    ],
+    "kanto_id": 95,
+    "johto_id": 62,
+    "sinnoh_id": 34,
+    "unova_id": 71
   },
   {
     "id": 96,
@@ -4463,7 +4733,9 @@
         "level": 49,
         "move": "Future Sight"
       }
-    ]
+    ],
+    "kanto_id": 96,
+    "johto_id": 87
   },
   {
     "id": 97,
@@ -4511,7 +4783,9 @@
         "level": 56,
         "move": "Future Sight"
       }
-    ]
+    ],
+    "kanto_id": 97,
+    "johto_id": 88
   },
   {
     "id": 98,
@@ -4572,7 +4846,9 @@
         "level": 48,
         "move": "Guillotine"
       }
-    ]
+    ],
+    "kanto_id": 98,
+    "johto_id": 164
   },
   {
     "id": 99,
@@ -4632,7 +4908,9 @@
         "level": 60,
         "move": "Guillotine"
       }
-    ]
+    ],
+    "kanto_id": 99,
+    "johto_id": 165
   },
   {
     "id": 100,
@@ -4656,7 +4934,10 @@
         "level": 101
       }
     ],
-    "learnset": []
+    "learnset": [],
+    "kanto_id": 100,
+    "johto_id": 120,
+    "hoenn_id": 84
   },
   {
     "id": 101,
@@ -4671,7 +4952,10 @@
     "spd": 80,
     "spe": 150,
     "evolutions": [],
-    "learnset": []
+    "learnset": [],
+    "kanto_id": 101,
+    "johto_id": 121,
+    "hoenn_id": 85
   },
   {
     "id": 102,
@@ -4729,7 +5013,9 @@
         "level": 55,
         "move": "Solar Beam"
       }
-    ]
+    ],
+    "kanto_id": 102,
+    "johto_id": 104
   },
   {
     "id": 103,
@@ -4794,7 +5080,9 @@
         "level": 1,
         "move": "Wood Hammer"
       }
-    ]
+    ],
+    "kanto_id": 103,
+    "johto_id": 105
   },
   {
     "id": 104,
@@ -4847,7 +5135,9 @@
         "level": 48,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "kanto_id": 104,
+    "johto_id": 203
   },
   {
     "id": 105,
@@ -4907,7 +5197,9 @@
         "level": 60,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "kanto_id": 105,
+    "johto_id": 204
   },
   {
     "id": 106,
@@ -4975,7 +5267,9 @@
         "level": 50,
         "move": "Axe Kick"
       }
-    ]
+    ],
+    "kanto_id": 106,
+    "johto_id": 144
   },
   {
     "id": 107,
@@ -5043,7 +5337,9 @@
         "level": 44,
         "move": "Focus Punch"
       }
-    ]
+    ],
+    "kanto_id": 107,
+    "johto_id": 145
   },
   {
     "id": 108,
@@ -5088,7 +5384,10 @@
         "level": 43,
         "move": "Giga Impact"
       }
-    ]
+    ],
+    "kanto_id": 108,
+    "johto_id": 178,
+    "unova_id": 284
   },
   {
     "id": 109,
@@ -5149,7 +5448,11 @@
         "level": 44,
         "move": "Explosion"
       }
-    ]
+    ],
+    "kanto_id": 109,
+    "johto_id": 114,
+    "hoenn_id": 108,
+    "unova_id": 46
   },
   {
     "id": 110,
@@ -5169,7 +5472,11 @@
         "level": 35,
         "move": "Double Hit"
       }
-    ]
+    ],
+    "kanto_id": 110,
+    "johto_id": 115,
+    "hoenn_id": 109,
+    "unova_id": 47
   },
   {
     "id": 111,
@@ -5239,7 +5546,10 @@
         "level": 60,
         "move": "Horn Drill"
       }
-    ]
+    ],
+    "kanto_id": 111,
+    "johto_id": 206,
+    "hoenn_id": 169
   },
   {
     "id": 112,
@@ -5309,7 +5619,10 @@
         "level": 68,
         "move": "Horn Drill"
       }
-    ]
+    ],
+    "kanto_id": 112,
+    "johto_id": 207,
+    "hoenn_id": 170
   },
   {
     "id": 113,
@@ -5362,7 +5675,10 @@
         "level": 48,
         "move": "Last Resort"
       }
-    ]
+    ],
+    "kanto_id": 113,
+    "johto_id": 217,
+    "sinnoh_id": 97
   },
   {
     "id": 114,
@@ -5403,7 +5719,10 @@
         "level": 34,
         "move": "Ancient Power"
       }
-    ]
+    ],
+    "kanto_id": 114,
+    "johto_id": 179,
+    "unova_id": 217
   },
   {
     "id": 115,
@@ -5447,7 +5766,9 @@
         "level": 54,
         "move": "Dynamic Punch"
       }
-    ]
+    ],
+    "kanto_id": 115,
+    "johto_id": 205
   },
   {
     "id": 116,
@@ -5496,7 +5817,10 @@
         "level": 45,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "kanto_id": 116,
+    "johto_id": 186,
+    "hoenn_id": 184
   },
   {
     "id": 117,
@@ -5545,7 +5869,10 @@
         "level": 51,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "kanto_id": 117,
+    "johto_id": 187,
+    "hoenn_id": 185
   },
   {
     "id": 118,
@@ -5594,7 +5921,11 @@
         "level": 50,
         "move": "Horn Drill"
       }
-    ]
+    ],
+    "kanto_id": 118,
+    "johto_id": 78,
+    "hoenn_id": 50,
+    "sinnoh_id": 78
   },
   {
     "id": 119,
@@ -5638,7 +5969,11 @@
         "level": 58,
         "move": "Horn Drill"
       }
-    ]
+    ],
+    "kanto_id": 119,
+    "johto_id": 79,
+    "hoenn_id": 51,
+    "sinnoh_id": 79
   },
   {
     "id": 120,
@@ -5699,7 +6034,11 @@
         "level": 56,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "kanto_id": 120,
+    "johto_id": 167,
+    "hoenn_id": 143,
+    "unova_id": 238
   },
   {
     "id": 121,
@@ -5764,7 +6103,11 @@
         "level": 56,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "kanto_id": 121,
+    "johto_id": 168,
+    "hoenn_id": 144,
+    "unova_id": 239
   },
   {
     "id": 122,
@@ -5785,7 +6128,10 @@
         "level": 42
       }
     ],
-    "learnset": []
+    "learnset": [],
+    "kanto_id": 122,
+    "johto_id": 156,
+    "sinnoh_id": 95
   },
   {
     "id": 123,
@@ -5843,7 +6189,9 @@
         "level": 46,
         "move": "Lunge"
       }
-    ]
+    ],
+    "kanto_id": 123,
+    "johto_id": 110
   },
   {
     "id": 124,
@@ -5892,7 +6240,9 @@
         "level": 58,
         "move": "Blizzard"
       }
-    ]
+    ],
+    "kanto_id": 124,
+    "johto_id": 153
   },
   {
     "id": 125,
@@ -5953,7 +6303,10 @@
         "level": 64,
         "move": "Giga Impact"
       }
-    ]
+    ],
+    "kanto_id": 125,
+    "johto_id": 155,
+    "unova_id": 57
   },
   {
     "id": 126,
@@ -6014,7 +6367,10 @@
         "level": 64,
         "move": "Hyper Beam"
       }
-    ]
+    ],
+    "kanto_id": 126,
+    "johto_id": 151,
+    "unova_id": 54
   },
   {
     "id": 127,
@@ -6058,7 +6414,11 @@
         "level": 50,
         "move": "Close Combat"
       }
-    ]
+    ],
+    "kanto_id": 127,
+    "johto_id": 112,
+    "hoenn_id": 167,
+    "unova_id": 146
   },
   {
     "id": 128,
@@ -6110,7 +6470,9 @@
         "level": 60,
         "move": "Giga Impact"
       }
-    ]
+    ],
+    "kanto_id": 128,
+    "johto_id": 148
   },
   {
     "id": 129,
@@ -6135,7 +6497,11 @@
         "level": 15,
         "move": "Tackle"
       }
-    ]
+    ],
+    "kanto_id": 129,
+    "johto_id": 76,
+    "hoenn_id": 52,
+    "sinnoh_id": 23
   },
   {
     "id": 130,
@@ -6192,7 +6558,11 @@
         "level": 55,
         "move": "Hyper Beam"
       }
-    ]
+    ],
+    "kanto_id": 130,
+    "johto_id": 77,
+    "hoenn_id": 53,
+    "sinnoh_id": 24
   },
   {
     "id": 131,
@@ -6241,7 +6611,10 @@
         "level": 65,
         "move": "Sheer Cold"
       }
-    ]
+    ],
+    "kanto_id": 131,
+    "johto_id": 219,
+    "unova_id": 242
   },
   {
     "id": 132,
@@ -6256,7 +6629,10 @@
     "spd": 48,
     "spe": 48,
     "evolutions": [],
-    "learnset": []
+    "learnset": [],
+    "kanto_id": 132,
+    "johto_id": 92,
+    "unova_id": 261
   },
   {
     "id": 133,
@@ -6333,7 +6709,10 @@
         "level": 50,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "kanto_id": 133,
+    "johto_id": 180,
+    "unova_id": 91
   },
   {
     "id": 134,
@@ -6381,7 +6760,10 @@
         "level": 50,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "kanto_id": 134,
+    "johto_id": 181,
+    "unova_id": 92
   },
   {
     "id": 135,
@@ -6433,7 +6815,10 @@
         "level": 50,
         "move": "Thunder"
       }
-    ]
+    ],
+    "kanto_id": 135,
+    "johto_id": 182,
+    "unova_id": 93
   },
   {
     "id": 136,
@@ -6485,7 +6870,10 @@
         "level": 50,
         "move": "Flare Blitz"
       }
-    ]
+    ],
+    "kanto_id": 136,
+    "johto_id": 183,
+    "unova_id": 94
   },
   {
     "id": 137,
@@ -6530,7 +6918,9 @@
         "level": 55,
         "move": "Zap Cannon"
       }
-    ]
+    ],
+    "kanto_id": 137,
+    "johto_id": 215
   },
   {
     "id": 138,
@@ -6588,7 +6978,9 @@
         "level": 60,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "kanto_id": 138,
+    "johto_id": 220
   },
   {
     "id": 139,
@@ -6645,7 +7037,9 @@
         "level": 70,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "kanto_id": 139,
+    "johto_id": 221
   },
   {
     "id": 140,
@@ -6703,7 +7097,9 @@
         "level": 60,
         "move": "Stone Edge"
       }
-    ]
+    ],
+    "kanto_id": 140,
+    "johto_id": 222
   },
   {
     "id": 141,
@@ -6768,7 +7164,9 @@
         "level": 70,
         "move": "Stone Edge"
       }
-    ]
+    ],
+    "kanto_id": 141,
+    "johto_id": 223
   },
   {
     "id": 142,
@@ -6829,7 +7227,9 @@
         "level": 60,
         "move": "Giga Impact"
       }
-    ]
+    ],
+    "kanto_id": 142,
+    "johto_id": 224
   },
   {
     "id": 143,
@@ -6905,7 +7305,10 @@
         "level": 56,
         "move": "Giga Impact"
       }
-    ]
+    ],
+    "kanto_id": 143,
+    "johto_id": 225,
+    "sinnoh_id": 113
   },
   {
     "id": 144,
@@ -6921,7 +7324,9 @@
     "spd": 125,
     "spe": 85,
     "evolutions": [],
-    "learnset": []
+    "learnset": [],
+    "kanto_id": 144,
+    "johto_id": 235
   },
   {
     "id": 145,
@@ -6937,7 +7342,9 @@
     "spd": 90,
     "spe": 100,
     "evolutions": [],
-    "learnset": []
+    "learnset": [],
+    "kanto_id": 145,
+    "johto_id": 236
   },
   {
     "id": 146,
@@ -6953,7 +7360,9 @@
     "spd": 85,
     "spe": 90,
     "evolutions": [],
-    "learnset": []
+    "learnset": [],
+    "kanto_id": 146,
+    "johto_id": 237
   },
   {
     "id": 147,
@@ -7010,7 +7419,9 @@
         "level": 60,
         "move": "Hyper Beam"
       }
-    ]
+    ],
+    "kanto_id": 147,
+    "johto_id": 241
   },
   {
     "id": 148,
@@ -7067,7 +7478,9 @@
         "level": 60,
         "move": "Hyper Beam"
       }
-    ]
+    ],
+    "kanto_id": 148,
+    "johto_id": 242
   },
   {
     "id": 149,
@@ -7124,7 +7537,9 @@
         "level": 60,
         "move": "Hyper Beam"
       }
-    ]
+    ],
+    "kanto_id": 149,
+    "johto_id": 243
   },
   {
     "id": 150,
@@ -7172,7 +7587,9 @@
         "level": 88,
         "move": "Future Sight"
       }
-    ]
+    ],
+    "kanto_id": 150,
+    "johto_id": 249
   },
   {
     "id": 151,
@@ -7204,7 +7621,9 @@
         "level": 100,
         "move": "Psychic"
       }
-    ]
+    ],
+    "kanto_id": 151,
+    "johto_id": 250
   },
   {
     "id": 152,
@@ -7253,7 +7672,8 @@
         "level": 56,
         "move": "Leaf Storm"
       }
-    ]
+    ],
+    "johto_id": 1
   },
   {
     "id": 153,
@@ -7302,7 +7722,8 @@
         "level": 56,
         "move": "Leaf Storm"
       }
-    ]
+    ],
+    "johto_id": 2
   },
   {
     "id": 154,
@@ -7346,7 +7767,8 @@
         "level": 56,
         "move": "Leaf Storm"
       }
-    ]
+    ],
+    "johto_id": 3
   },
   {
     "id": 155,
@@ -7419,7 +7841,8 @@
         "level": 64,
         "move": "Eruption"
       }
-    ]
+    ],
+    "johto_id": 4
   },
   {
     "id": 156,
@@ -7496,7 +7919,8 @@
         "level": 75,
         "move": "Eruption"
       }
-    ]
+    ],
+    "johto_id": 5
   },
   {
     "id": 157,
@@ -7568,7 +7992,8 @@
         "level": 74,
         "move": "Overheat"
       }
-    ]
+    ],
+    "johto_id": 6
   },
   {
     "id": 158,
@@ -7625,7 +8050,8 @@
         "level": 56,
         "move": "Outrage"
       }
-    ]
+    ],
+    "johto_id": 7
   },
   {
     "id": 159,
@@ -7682,7 +8108,8 @@
         "level": 56,
         "move": "Outrage"
       }
-    ]
+    ],
+    "johto_id": 8
   },
   {
     "id": 160,
@@ -7738,7 +8165,8 @@
         "level": 56,
         "move": "Outrage"
       }
-    ]
+    ],
+    "johto_id": 9
   },
   {
     "id": 161,
@@ -7787,7 +8215,8 @@
         "level": 47,
         "move": "Hyper Voice"
       }
-    ]
+    ],
+    "johto_id": 19
   },
   {
     "id": 162,
@@ -7831,7 +8260,8 @@
         "level": 56,
         "move": "Hyper Voice"
       }
-    ]
+    ],
+    "johto_id": 20
   },
   {
     "id": 163,
@@ -7893,7 +8323,9 @@
         "level": 39,
         "move": "Dream Eater"
       }
-    ]
+    ],
+    "johto_id": 15,
+    "sinnoh_id": 106
   },
   {
     "id": 164,
@@ -7954,7 +8386,9 @@
         "level": 53,
         "move": "Dream Eater"
       }
-    ]
+    ],
+    "johto_id": 16,
+    "sinnoh_id": 107
   },
   {
     "id": 165,
@@ -8004,7 +8438,8 @@
         "level": 40,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "johto_id": 30
   },
   {
     "id": 166,
@@ -8053,7 +8488,8 @@
         "level": 47,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "johto_id": 31
   },
   {
     "id": 167,
@@ -8123,7 +8559,8 @@
         "level": 44,
         "move": "Megahorn"
       }
-    ]
+    ],
+    "johto_id": 32
   },
   {
     "id": 168,
@@ -8188,7 +8625,8 @@
         "level": 44,
         "move": "Megahorn"
       }
-    ]
+    ],
+    "johto_id": 33
   },
   {
     "id": 169,
@@ -8241,7 +8679,11 @@
         "level": 53,
         "move": "Brave Bird"
       }
-    ]
+    ],
+    "johto_id": 39,
+    "hoenn_id": 65,
+    "sinnoh_id": 30,
+    "unova_id": 63
   },
   {
     "id": 170,
@@ -8295,7 +8737,9 @@
         "level": 44,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "johto_id": 174,
+    "hoenn_id": 181
   },
   {
     "id": 171,
@@ -8344,7 +8788,9 @@
         "level": 54,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "johto_id": 175,
+    "hoenn_id": 182
   },
   {
     "id": 172,
@@ -8393,7 +8839,10 @@
         "level": 99,
         "move": "Volt Tackle"
       }
-    ]
+    ],
+    "johto_id": 21,
+    "hoenn_id": 155,
+    "sinnoh_id": 103
   },
   {
     "id": 173,
@@ -8450,7 +8899,10 @@
         "level": 55,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "johto_id": 40,
+    "sinnoh_id": 99,
+    "unova_id": 88
   },
   {
     "id": 174,
@@ -8500,7 +8952,10 @@
         "level": 20,
         "move": "Take Down"
       }
-    ]
+    ],
+    "johto_id": 43,
+    "hoenn_id": 137,
+    "unova_id": 281
   },
   {
     "id": 175,
@@ -8541,7 +8996,8 @@
         "level": 43,
         "move": "Moonblast"
       }
-    ]
+    ],
+    "johto_id": 46
   },
   {
     "id": 176,
@@ -8591,7 +9047,8 @@
         "level": 43,
         "move": "Moonblast"
       }
-    ]
+    ],
+    "johto_id": 47
   },
   {
     "id": 177,
@@ -8633,7 +9090,9 @@
         "level": 45,
         "move": "Future Sight"
       }
-    ]
+    ],
+    "johto_id": 159,
+    "hoenn_id": 162
   },
   {
     "id": 178,
@@ -8674,7 +9133,9 @@
         "level": 55,
         "move": "Future Sight"
       }
-    ]
+    ],
+    "johto_id": 160,
+    "hoenn_id": 163
   },
   {
     "id": 179,
@@ -8715,7 +9176,9 @@
         "level": 45,
         "move": "Thunder"
       }
-    ]
+    ],
+    "johto_id": 53,
+    "unova_id": 25
   },
   {
     "id": 180,
@@ -8756,7 +9219,9 @@
         "level": 45,
         "move": "Thunder"
       }
-    ]
+    ],
+    "johto_id": 54,
+    "unova_id": 26
   },
   {
     "id": 181,
@@ -8800,7 +9265,9 @@
         "level": 50,
         "move": "Zap Cannon"
       }
-    ]
+    ],
+    "johto_id": 55,
+    "unova_id": 27
   },
   {
     "id": 182,
@@ -8840,7 +9307,9 @@
         "level": 1,
         "move": "Petal Dance"
       }
-    ]
+    ],
+    "johto_id": 86,
+    "hoenn_id": 91
   },
   {
     "id": 183,
@@ -8906,7 +9375,11 @@
         "level": 36,
         "move": "Superpower"
       }
-    ]
+    ],
+    "johto_id": 130,
+    "hoenn_id": 55,
+    "sinnoh_id": 125,
+    "unova_id": 31
   },
   {
     "id": 184,
@@ -8967,7 +9440,11 @@
         "level": 50,
         "move": "Superpower"
       }
-    ]
+    ],
+    "johto_id": 131,
+    "hoenn_id": 56,
+    "sinnoh_id": 126,
+    "unova_id": 32
   },
   {
     "id": 185,
@@ -9031,7 +9508,9 @@
         "level": 48,
         "move": "Head Smash"
       }
-    ]
+    ],
+    "johto_id": 106,
+    "sinnoh_id": 93
   },
   {
     "id": 186,
@@ -9055,7 +9534,8 @@
         "level": 1,
         "move": "Pound"
       }
-    ]
+    ],
+    "johto_id": 75
   },
   {
     "id": 187,
@@ -9113,7 +9593,8 @@
         "level": 35,
         "move": "Bounce"
       }
-    ]
+    ],
+    "johto_id": 67
   },
   {
     "id": 188,
@@ -9171,7 +9652,8 @@
         "level": 41,
         "move": "Bounce"
       }
-    ]
+    ],
+    "johto_id": 68
   },
   {
     "id": 189,
@@ -9224,7 +9706,8 @@
         "level": 49,
         "move": "Bounce"
       }
-    ]
+    ],
+    "johto_id": 69
   },
   {
     "id": 190,
@@ -9273,7 +9756,9 @@
         "level": 43,
         "move": "Last Resort"
       }
-    ]
+    ],
+    "johto_id": 122,
+    "sinnoh_id": 63
   },
   {
     "id": 191,
@@ -9330,7 +9815,9 @@
         "level": 39,
         "move": "Seed Bomb"
       }
-    ]
+    ],
+    "johto_id": 102,
+    "unova_id": 20
   },
   {
     "id": 192,
@@ -9394,7 +9881,9 @@
         "level": 50,
         "move": "Petal Blizzard"
       }
-    ]
+    ],
+    "johto_id": 103,
+    "unova_id": 21
   },
   {
     "id": 193,
@@ -9456,7 +9945,9 @@
         "level": 57,
         "move": "Bug Buzz"
       }
-    ]
+    ],
+    "johto_id": 101,
+    "unova_id": 286
   },
   {
     "id": 194,
@@ -9506,7 +9997,9 @@
         "level": 40,
         "move": "Earthquake"
       }
-    ]
+    ],
+    "johto_id": 56,
+    "sinnoh_id": 117
   },
   {
     "id": 195,
@@ -9547,7 +10040,9 @@
         "level": 52,
         "move": "Earthquake"
       }
-    ]
+    ],
+    "johto_id": 57,
+    "sinnoh_id": 118
   },
   {
     "id": 196,
@@ -9591,7 +10086,9 @@
         "level": 55,
         "move": "Future Sight"
       }
-    ]
+    ],
+    "johto_id": 184,
+    "unova_id": 95
   },
   {
     "id": 197,
@@ -9635,7 +10132,9 @@
         "level": 50,
         "move": "Crunch"
       }
-    ]
+    ],
+    "johto_id": 185,
+    "unova_id": 96
   },
   {
     "id": 198,
@@ -9689,7 +10188,9 @@
         "level": 50,
         "move": "Sucker Punch"
       }
-    ]
+    ],
+    "johto_id": 208,
+    "sinnoh_id": 74
   },
   {
     "id": 199,
@@ -9714,7 +10215,8 @@
         "level": 65,
         "move": "Stomp"
       }
-    ]
+    ],
+    "johto_id": 82
   },
   {
     "id": 200,
@@ -9763,7 +10265,9 @@
         "level": 50,
         "move": "Power Gem"
       }
-    ]
+    ],
+    "johto_id": 214,
+    "sinnoh_id": 72
   },
   {
     "id": 201,
@@ -9783,7 +10287,9 @@
         "level": 1,
         "move": "Hidden Power"
       }
-    ]
+    ],
+    "johto_id": 61,
+    "sinnoh_id": 114
   },
   {
     "id": 202,
@@ -9807,7 +10313,9 @@
         "level": 1,
         "move": "Mirror Coat"
       }
-    ]
+    ],
+    "johto_id": 107,
+    "hoenn_id": 161
   },
   {
     "id": 203,
@@ -9869,7 +10377,10 @@
         "level": 50,
         "move": "Psychic"
       }
-    ]
+    ],
+    "johto_id": 147,
+    "hoenn_id": 164,
+    "sinnoh_id": 121
   },
   {
     "id": 204,
@@ -9930,7 +10441,8 @@
         "level": 45,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "johto_id": 93
   },
   {
     "id": 205,
@@ -9991,7 +10503,8 @@
         "level": 50,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "johto_id": 94
   },
   {
     "id": 206,
@@ -10052,7 +10565,9 @@
         "level": 52,
         "move": "Endeavor"
       }
-    ]
+    ],
+    "johto_id": 52,
+    "unova_id": 35
   },
   {
     "id": 207,
@@ -10114,7 +10629,9 @@
         "level": 45,
         "move": "Crabhammer"
       }
-    ]
+    ],
+    "johto_id": 189,
+    "unova_id": 221
   },
   {
     "id": 208,
@@ -10179,7 +10696,10 @@
         "level": 62,
         "move": "Head Smash"
       }
-    ]
+    ],
+    "johto_id": 63,
+    "sinnoh_id": 35,
+    "unova_id": 72
   },
   {
     "id": 209,
@@ -10244,7 +10764,8 @@
         "level": 49,
         "move": "Crunch"
       }
-    ]
+    ],
+    "johto_id": 123
   },
   {
     "id": 210,
@@ -10308,7 +10829,8 @@
         "level": 59,
         "move": "Crunch"
       }
-    ]
+    ],
+    "johto_id": 124
   },
   {
     "id": 211,
@@ -10329,7 +10851,8 @@
         "level": 101
       }
     ],
-    "learnset": []
+    "learnset": [],
+    "johto_id": 161
   },
   {
     "id": 212,
@@ -10386,7 +10909,8 @@
         "level": 48,
         "move": "Iron Head"
       }
-    ]
+    ],
+    "johto_id": 111
   },
   {
     "id": 213,
@@ -10431,7 +10955,9 @@
         "level": 60,
         "move": "Stone Edge"
       }
-    ]
+    ],
+    "johto_id": 166,
+    "unova_id": 232
   },
   {
     "id": 214,
@@ -10488,7 +11014,11 @@
         "level": 50,
         "move": "Close Combat"
       }
-    ]
+    ],
+    "johto_id": 113,
+    "hoenn_id": 168,
+    "sinnoh_id": 62,
+    "unova_id": 145
   },
   {
     "id": 215,
@@ -10513,7 +11043,10 @@
         "level": 101
       }
     ],
-    "learnset": []
+    "learnset": [],
+    "johto_id": 213,
+    "sinnoh_id": 144,
+    "unova_id": 252
   },
   {
     "id": 216,
@@ -10574,7 +11107,8 @@
         "level": 41,
         "move": "Thrash"
       }
-    ]
+    ],
+    "johto_id": 193
   },
   {
     "id": 217,
@@ -10639,7 +11173,8 @@
         "level": 64,
         "move": "Hammer Arm"
       }
-    ]
+    ],
+    "johto_id": 194
   },
   {
     "id": 218,
@@ -10704,7 +11239,9 @@
         "level": 50,
         "move": "Earth Power"
       }
-    ]
+    ],
+    "johto_id": 211,
+    "hoenn_id": 103
   },
   {
     "id": 219,
@@ -10765,7 +11302,9 @@
         "level": 54,
         "move": "Flamethrower"
       }
-    ]
+    ],
+    "johto_id": 212,
+    "hoenn_id": 104
   },
   {
     "id": 220,
@@ -10823,7 +11362,9 @@
         "level": 50,
         "move": "Blizzard"
       }
-    ]
+    ],
+    "johto_id": 191,
+    "unova_id": 258
   },
   {
     "id": 221,
@@ -10889,7 +11430,9 @@
         "level": 65,
         "move": "Thrash"
       }
-    ]
+    ],
+    "johto_id": 192,
+    "unova_id": 259
   },
   {
     "id": 222,
@@ -10943,7 +11486,10 @@
         "level": 55,
         "move": "Mirror Coat"
       }
-    ]
+    ],
+    "johto_id": 171,
+    "hoenn_id": 180,
+    "unova_id": 237
   },
   {
     "id": 223,
@@ -10992,7 +11538,10 @@
         "level": 43,
         "move": "Hyper Beam"
       }
-    ]
+    ],
+    "johto_id": 172,
+    "sinnoh_id": 132,
+    "unova_id": 235
   },
   {
     "id": 224,
@@ -11040,7 +11589,10 @@
         "level": 43,
         "move": "Hyper Beam"
       }
-    ]
+    ],
+    "johto_id": 173,
+    "sinnoh_id": 133,
+    "unova_id": 236
   },
   {
     "id": 225,
@@ -11089,7 +11641,9 @@
         "level": 40,
         "move": "Blizzard"
       }
-    ]
+    ],
+    "johto_id": 190,
+    "unova_id": 254
   },
   {
     "id": 226,
@@ -11134,7 +11688,10 @@
         "level": 47,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "johto_id": 197,
+    "sinnoh_id": 141,
+    "unova_id": 234
   },
   {
     "id": 227,
@@ -11187,7 +11744,10 @@
         "level": 56,
         "move": "Brave Bird"
       }
-    ]
+    ],
+    "johto_id": 198,
+    "hoenn_id": 115,
+    "unova_id": 203
   },
   {
     "id": 228,
@@ -11237,7 +11797,8 @@
         "level": 49,
         "move": "Crunch"
       }
-    ]
+    ],
+    "johto_id": 209
   },
   {
     "id": 229,
@@ -11294,7 +11855,8 @@
         "level": 55,
         "move": "Overheat"
       }
-    ]
+    ],
+    "johto_id": 210
   },
   {
     "id": 230,
@@ -11347,7 +11909,9 @@
         "level": 72,
         "move": "Wave Crash"
       }
-    ]
+    ],
+    "johto_id": 188,
+    "hoenn_id": 186
   },
   {
     "id": 231,
@@ -11400,7 +11964,9 @@
         "level": 42,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "johto_id": 195,
+    "hoenn_id": 165
   },
   {
     "id": 232,
@@ -11464,7 +12030,9 @@
         "level": 50,
         "move": "Giga Impact"
       }
-    ]
+    ],
+    "johto_id": 196,
+    "hoenn_id": 166
   },
   {
     "id": 233,
@@ -11513,7 +12081,8 @@
         "level": 60,
         "move": "Hyper Beam"
       }
-    ]
+    ],
+    "johto_id": 216
   },
   {
     "id": 234,
@@ -11558,7 +12127,8 @@
         "level": 55,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "johto_id": 129
   },
   {
     "id": 235,
@@ -11573,7 +12143,8 @@
     "spd": 45,
     "spe": 75,
     "evolutions": [],
-    "learnset": []
+    "learnset": [],
+    "johto_id": 157
   },
   {
     "id": 236,
@@ -11610,7 +12181,8 @@
         "level": 1,
         "move": "Tackle"
       }
-    ]
+    ],
+    "johto_id": 143
   },
   {
     "id": 237,
@@ -11670,7 +12242,8 @@
         "level": 44,
         "move": "Endeavor"
       }
-    ]
+    ],
+    "johto_id": 146
   },
   {
     "id": 238,
@@ -11724,7 +12297,8 @@
         "level": 48,
         "move": "Blizzard"
       }
-    ]
+    ],
+    "johto_id": 152
   },
   {
     "id": 239,
@@ -11781,7 +12355,9 @@
         "level": 48,
         "move": "Thunder"
       }
-    ]
+    ],
+    "johto_id": 154,
+    "unova_id": 56
   },
   {
     "id": 240,
@@ -11838,7 +12414,9 @@
         "level": 48,
         "move": "Fire Blast"
       }
-    ]
+    ],
+    "johto_id": 150,
+    "unova_id": 53
   },
   {
     "id": 241,
@@ -11886,7 +12464,8 @@
         "level": 55,
         "move": "High Horsepower"
       }
-    ]
+    ],
+    "johto_id": 149
   },
   {
     "id": 242,
@@ -11934,7 +12513,9 @@
         "level": 48,
         "move": "Last Resort"
       }
-    ]
+    ],
+    "johto_id": 218,
+    "sinnoh_id": 98
   },
   {
     "id": 243,
@@ -11994,7 +12575,8 @@
         "level": 78,
         "move": "Zap Cannon"
       }
-    ]
+    ],
+    "johto_id": 238
   },
   {
     "id": 244,
@@ -12050,7 +12632,8 @@
         "level": 78,
         "move": "Eruption"
       }
-    ]
+    ],
+    "johto_id": 239
   },
   {
     "id": 245,
@@ -12110,7 +12693,8 @@
         "level": 78,
         "move": "Blizzard"
       }
-    ]
+    ],
+    "johto_id": 240
   },
   {
     "id": 246,
@@ -12172,7 +12756,9 @@
         "level": 48,
         "move": "Hyper Beam"
       }
-    ]
+    ],
+    "johto_id": 244,
+    "unova_id": 292
   },
   {
     "id": 247,
@@ -12234,7 +12820,9 @@
         "level": 48,
         "move": "Hyper Beam"
       }
-    ]
+    ],
+    "johto_id": 245,
+    "unova_id": 293
   },
   {
     "id": 248,
@@ -12299,7 +12887,9 @@
         "level": 56,
         "move": "Giga Impact"
       }
-    ]
+    ],
+    "johto_id": 246,
+    "unova_id": 294
   },
   {
     "id": 249,
@@ -12348,7 +12938,8 @@
         "level": 90,
         "move": "Sky Attack"
       }
-    ]
+    ],
+    "johto_id": 247
   },
   {
     "id": 250,
@@ -12401,7 +12992,8 @@
         "level": 99,
         "move": "Overheat"
       }
-    ]
+    ],
+    "johto_id": 248
   },
   {
     "id": 251,
@@ -12438,7 +13030,8 @@
         "level": 90,
         "move": "Leaf Storm"
       }
-    ]
+    ],
+    "johto_id": 251
   },
   {
     "id": 252,
@@ -12495,7 +13088,8 @@
         "level": 55,
         "move": "Leaf Storm"
       }
-    ]
+    ],
+    "hoenn_id": 1
   },
   {
     "id": 253,
@@ -12564,7 +13158,8 @@
         "level": 55,
         "move": "Leaf Storm"
       }
-    ]
+    ],
+    "hoenn_id": 2
   },
   {
     "id": 254,
@@ -12628,7 +13223,8 @@
         "level": 55,
         "move": "Leaf Storm"
       }
-    ]
+    ],
+    "hoenn_id": 3
   },
   {
     "id": 255,
@@ -12685,7 +13281,8 @@
         "level": 55,
         "move": "Flare Blitz"
       }
-    ]
+    ],
+    "hoenn_id": 4
   },
   {
     "id": 256,
@@ -12747,7 +13344,8 @@
         "level": 55,
         "move": "Flare Blitz"
       }
-    ]
+    ],
+    "hoenn_id": 5
   },
   {
     "id": 257,
@@ -12808,7 +13406,8 @@
         "level": 58,
         "move": "Brave Bird"
       }
-    ]
+    ],
+    "hoenn_id": 6
   },
   {
     "id": 258,
@@ -12877,7 +13476,8 @@
         "level": 55,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "hoenn_id": 7
   },
   {
     "id": 259,
@@ -12955,7 +13555,8 @@
         "level": 55,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "hoenn_id": 8
   },
   {
     "id": 260,
@@ -13032,7 +13633,8 @@
         "level": 60,
         "move": "Sludge Wave"
       }
-    ]
+    ],
+    "hoenn_id": 9
   },
   {
     "id": 261,
@@ -13081,7 +13683,8 @@
         "level": 44,
         "move": "Play Rough"
       }
-    ]
+    ],
+    "hoenn_id": 10
   },
   {
     "id": 262,
@@ -13141,7 +13744,8 @@
         "level": 56,
         "move": "Play Rough"
       }
-    ]
+    ],
+    "hoenn_id": 11
   },
   {
     "id": 263,
@@ -13198,7 +13802,8 @@
         "level": 36,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "hoenn_id": 12
   },
   {
     "id": 264,
@@ -13259,7 +13864,8 @@
         "level": 48,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "hoenn_id": 13
   },
   {
     "id": 265,
@@ -13292,7 +13898,9 @@
         "level": 6,
         "move": "Tackle"
       }
-    ]
+    ],
+    "hoenn_id": 14,
+    "sinnoh_id": 48
   },
   {
     "id": 266,
@@ -13321,7 +13929,9 @@
         "level": 6,
         "move": "Tackle"
       }
-    ]
+    ],
+    "hoenn_id": 15,
+    "sinnoh_id": 49
   },
   {
     "id": 267,
@@ -13366,7 +13976,9 @@
         "level": 43,
         "move": "Bug Buzz"
       }
-    ]
+    ],
+    "hoenn_id": 16,
+    "sinnoh_id": 50
   },
   {
     "id": 268,
@@ -13395,7 +14007,9 @@
         "level": 6,
         "move": "Tackle"
       }
-    ]
+    ],
+    "hoenn_id": 17,
+    "sinnoh_id": 51
   },
   {
     "id": 269,
@@ -13440,7 +14054,9 @@
         "level": 43,
         "move": "Bug Buzz"
       }
-    ]
+    ],
+    "hoenn_id": 18,
+    "sinnoh_id": 52
   },
   {
     "id": 270,
@@ -13498,7 +14114,8 @@
         "level": 43,
         "move": "Energy Ball"
       }
-    ]
+    ],
+    "hoenn_id": 19
   },
   {
     "id": 271,
@@ -13572,7 +14189,8 @@
         "level": 64,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "hoenn_id": 20
   },
   {
     "id": 272,
@@ -13597,7 +14215,8 @@
         "level": 1,
         "move": "Fake Out"
       }
-    ]
+    ],
+    "hoenn_id": 21
   },
   {
     "id": 273,
@@ -13654,7 +14273,8 @@
         "level": 33,
         "move": "Explosion"
       }
-    ]
+    ],
+    "hoenn_id": 22
   },
   {
     "id": 274,
@@ -13724,7 +14344,8 @@
         "level": 57,
         "move": "Leaf Blade"
       }
-    ]
+    ],
+    "hoenn_id": 23
   },
   {
     "id": 275,
@@ -13753,7 +14374,8 @@
         "level": 1,
         "move": "Payback"
       }
-    ]
+    ],
+    "hoenn_id": 24
   },
   {
     "id": 276,
@@ -13807,7 +14429,8 @@
         "level": 45,
         "move": "Reversal"
       }
-    ]
+    ],
+    "hoenn_id": 25
   },
   {
     "id": 277,
@@ -13872,7 +14495,8 @@
         "level": 57,
         "move": "Reversal"
       }
-    ]
+    ],
+    "hoenn_id": 26
   },
   {
     "id": 278,
@@ -13918,7 +14542,10 @@
         "level": 45,
         "move": "Hurricane"
       }
-    ]
+    ],
+    "hoenn_id": 27,
+    "sinnoh_id": 119,
+    "unova_id": 212
   },
   {
     "id": 279,
@@ -13971,7 +14598,10 @@
         "level": 62,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "hoenn_id": 28,
+    "sinnoh_id": 120,
+    "unova_id": 213
   },
   {
     "id": 280,
@@ -14025,7 +14655,8 @@
         "level": 58,
         "move": "Future Sight"
       }
-    ]
+    ],
+    "hoenn_id": 29
   },
   {
     "id": 281,
@@ -14083,7 +14714,8 @@
         "level": 58,
         "move": "Future Sight"
       }
-    ]
+    ],
+    "hoenn_id": 30
   },
   {
     "id": 282,
@@ -14136,7 +14768,8 @@
         "level": 58,
         "move": "Future Sight"
       }
-    ]
+    ],
+    "hoenn_id": 31
   },
   {
     "id": 283,
@@ -14170,7 +14803,8 @@
         "level": 17,
         "move": "Bubble Beam"
       }
-    ]
+    ],
+    "hoenn_id": 32
   },
   {
     "id": 284,
@@ -14215,7 +14849,8 @@
         "level": 44,
         "move": "Bug Buzz"
       }
-    ]
+    ],
+    "hoenn_id": 33
   },
   {
     "id": 285,
@@ -14260,7 +14895,8 @@
         "level": 36,
         "move": "Seed Bomb"
       }
-    ]
+    ],
+    "hoenn_id": 34
   },
   {
     "id": 286,
@@ -14321,7 +14957,8 @@
         "level": 55,
         "move": "Focus Punch"
       }
-    ]
+    ],
+    "hoenn_id": 35
   },
   {
     "id": 287,
@@ -14370,7 +15007,9 @@
         "level": 38,
         "move": "Play Rough"
       }
-    ]
+    ],
+    "hoenn_id": 36,
+    "unova_id": 276
   },
   {
     "id": 288,
@@ -14423,7 +15062,9 @@
         "level": 43,
         "move": "Reversal"
       }
-    ]
+    ],
+    "hoenn_id": 37,
+    "unova_id": 277
   },
   {
     "id": 289,
@@ -14475,7 +15116,9 @@
         "level": 63,
         "move": "Hammer Arm"
       }
-    ]
+    ],
+    "hoenn_id": 38,
+    "unova_id": 278
   },
   {
     "id": 290,
@@ -14529,7 +15172,8 @@
         "level": 40,
         "move": "Dig"
       }
-    ]
+    ],
+    "hoenn_id": 42
   },
   {
     "id": 291,
@@ -14594,7 +15238,8 @@
         "level": 64,
         "move": "X-Scissor"
       }
-    ]
+    ],
+    "hoenn_id": 43
   },
   {
     "id": 292,
@@ -14655,7 +15300,8 @@
         "level": 64,
         "move": "Phantom Force"
       }
-    ]
+    ],
+    "hoenn_id": 44
   },
   {
     "id": 293,
@@ -14700,7 +15346,8 @@
         "level": 45,
         "move": "Hyper Voice"
       }
-    ]
+    ],
+    "hoenn_id": 45
   },
   {
     "id": 294,
@@ -14749,7 +15396,8 @@
         "level": 57,
         "move": "Hyper Voice"
       }
-    ]
+    ],
+    "hoenn_id": 46
   },
   {
     "id": 295,
@@ -14817,7 +15465,8 @@
         "level": 81,
         "move": "Hyper Beam"
       }
-    ]
+    ],
+    "hoenn_id": 47
   },
   {
     "id": 296,
@@ -14878,7 +15527,8 @@
         "level": 46,
         "move": "Heavy Slam"
       }
-    ]
+    ],
+    "hoenn_id": 48
   },
   {
     "id": 297,
@@ -14942,7 +15592,8 @@
         "level": 60,
         "move": "Headlong Rush"
       }
-    ]
+    ],
+    "hoenn_id": 49
   },
   {
     "id": 298,
@@ -14980,7 +15631,10 @@
         "level": 15,
         "move": "Bounce"
       }
-    ]
+    ],
+    "hoenn_id": 54,
+    "sinnoh_id": 124,
+    "unova_id": 30
   },
   {
     "id": 299,
@@ -15041,7 +15695,9 @@
         "level": 43,
         "move": "Zap Cannon"
       }
-    ]
+    ],
+    "hoenn_id": 60,
+    "unova_id": 164
   },
   {
     "id": 300,
@@ -15098,7 +15754,9 @@
         "level": 46,
         "move": "Play Rough"
       }
-    ]
+    ],
+    "hoenn_id": 61,
+    "unova_id": 78
   },
   {
     "id": 301,
@@ -15150,7 +15808,9 @@
         "level": 1,
         "move": "Tackle"
       }
-    ]
+    ],
+    "hoenn_id": 62,
+    "unova_id": 79
   },
   {
     "id": 302,
@@ -15211,7 +15871,8 @@
         "level": 56,
         "move": "Phantom Force"
       }
-    ]
+    ],
+    "hoenn_id": 68
   },
   {
     "id": 303,
@@ -15260,7 +15921,8 @@
         "level": 55,
         "move": "Dynamic Punch"
       }
-    ]
+    ],
+    "hoenn_id": 69
   },
   {
     "id": 304,
@@ -15326,7 +15988,9 @@
         "level": 66,
         "move": "Head Smash"
       }
-    ]
+    ],
+    "hoenn_id": 70,
+    "unova_id": 166
   },
   {
     "id": 305,
@@ -15392,7 +16056,9 @@
         "level": 66,
         "move": "Head Smash"
       }
-    ]
+    ],
+    "hoenn_id": 71,
+    "unova_id": 167
   },
   {
     "id": 306,
@@ -15453,7 +16119,9 @@
         "level": 66,
         "move": "Head Smash"
       }
-    ]
+    ],
+    "hoenn_id": 72,
+    "unova_id": 168
   },
   {
     "id": 307,
@@ -15503,7 +16171,9 @@
         "level": 52,
         "move": "Dynamic Punch"
       }
-    ]
+    ],
+    "hoenn_id": 76,
+    "sinnoh_id": 86
   },
   {
     "id": 308,
@@ -15548,7 +16218,9 @@
         "level": 52,
         "move": "Dynamic Punch"
       }
-    ]
+    ],
+    "hoenn_id": 77,
+    "sinnoh_id": 87
   },
   {
     "id": 309,
@@ -15609,7 +16281,8 @@
         "level": 50,
         "move": "Thunder"
       }
-    ]
+    ],
+    "hoenn_id": 78
   },
   {
     "id": 310,
@@ -15669,7 +16342,8 @@
         "level": 50,
         "move": "Thunder"
       }
-    ]
+    ],
+    "hoenn_id": 79
   },
   {
     "id": 311,
@@ -15713,7 +16387,8 @@
         "level": 43,
         "move": "Thunder"
       }
-    ]
+    ],
+    "hoenn_id": 80
   },
   {
     "id": 312,
@@ -15757,7 +16432,8 @@
         "level": 43,
         "move": "Thunder"
       }
-    ]
+    ],
+    "hoenn_id": 81
   },
   {
     "id": 313,
@@ -15805,7 +16481,8 @@
         "level": 47,
         "move": "Infestation"
       }
-    ]
+    ],
+    "hoenn_id": 86
   },
   {
     "id": 314,
@@ -15849,7 +16526,8 @@
         "level": 47,
         "move": "Infestation"
       }
-    ]
+    ],
+    "hoenn_id": 87
   },
   {
     "id": 315,
@@ -15899,7 +16577,10 @@
         "level": 55,
         "move": "Leaf Storm"
       }
-    ]
+    ],
+    "hoenn_id": 94,
+    "sinnoh_id": 26,
+    "unova_id": 134
   },
   {
     "id": 316,
@@ -15960,7 +16641,8 @@
         "level": 60,
         "move": "Explosion"
       }
-    ]
+    ],
+    "hoenn_id": 95
   },
   {
     "id": 317,
@@ -16016,7 +16698,8 @@
         "level": 60,
         "move": "Explosion"
       }
-    ]
+    ],
+    "hoenn_id": 96
   },
   {
     "id": 318,
@@ -16070,7 +16753,8 @@
         "level": 54,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "hoenn_id": 97
   },
   {
     "id": 319,
@@ -16123,7 +16807,8 @@
         "level": 54,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "hoenn_id": 98
   },
   {
     "id": 320,
@@ -16188,7 +16873,9 @@
         "level": 48,
         "move": "Water Spout"
       }
-    ]
+    ],
+    "hoenn_id": 99,
+    "unova_id": 240
   },
   {
     "id": 321,
@@ -16248,7 +16935,9 @@
         "level": 54,
         "move": "Water Spout"
       }
-    ]
+    ],
+    "hoenn_id": 100,
+    "unova_id": 241
   },
   {
     "id": 322,
@@ -16310,7 +16999,9 @@
         "level": 55,
         "move": "Heat Crash"
       }
-    ]
+    ],
+    "hoenn_id": 101,
+    "unova_id": 204
   },
   {
     "id": 323,
@@ -16367,7 +17058,9 @@
         "level": 55,
         "move": "Heat Crash"
       }
-    ]
+    ],
+    "hoenn_id": 102,
+    "unova_id": 205
   },
   {
     "id": 324,
@@ -16427,7 +17120,8 @@
         "level": 64,
         "move": "Eruption"
       }
-    ]
+    ],
+    "hoenn_id": 105
   },
   {
     "id": 325,
@@ -16476,7 +17170,9 @@
         "level": 55,
         "move": "Future Sight"
       }
-    ]
+    ],
+    "hoenn_id": 110,
+    "unova_id": 206
   },
   {
     "id": 326,
@@ -16524,7 +17220,9 @@
         "level": 55,
         "move": "Future Sight"
       }
-    ]
+    ],
+    "hoenn_id": 111,
+    "unova_id": 207
   },
   {
     "id": 327,
@@ -16572,7 +17270,8 @@
         "level": 55,
         "move": "Thrash"
       }
-    ]
+    ],
+    "hoenn_id": 114
   },
   {
     "id": 328,
@@ -16637,7 +17336,9 @@
         "level": 48,
         "move": "Fissure"
       }
-    ]
+    ],
+    "hoenn_id": 116,
+    "unova_id": 121
   },
   {
     "id": 329,
@@ -16703,7 +17404,9 @@
         "level": 62,
         "move": "Boomburst"
       }
-    ]
+    ],
+    "hoenn_id": 117,
+    "unova_id": 122
   },
   {
     "id": 330,
@@ -16764,7 +17467,9 @@
         "level": 68,
         "move": "Boomburst"
       }
-    ]
+    ],
+    "hoenn_id": 118,
+    "unova_id": 123
   },
   {
     "id": 331,
@@ -16817,7 +17522,8 @@
         "level": 42,
         "move": "Energy Ball"
       }
-    ]
+    ],
+    "hoenn_id": 119
   },
   {
     "id": 332,
@@ -16866,7 +17572,8 @@
         "level": 44,
         "move": "Energy Ball"
       }
-    ]
+    ],
+    "hoenn_id": 120
   },
   {
     "id": 333,
@@ -16920,7 +17627,9 @@
         "level": 55,
         "move": "Dragon Rush"
       }
-    ]
+    ],
+    "hoenn_id": 121,
+    "unova_id": 246
   },
   {
     "id": 334,
@@ -16969,7 +17678,9 @@
         "level": 55,
         "move": "Dragon Rush"
       }
-    ]
+    ],
+    "hoenn_id": 122,
+    "unova_id": 247
   },
   {
     "id": 335,
@@ -17021,7 +17732,9 @@
         "level": 50,
         "move": "Close Combat"
       }
-    ]
+    ],
+    "hoenn_id": 123,
+    "unova_id": 186
   },
   {
     "id": 336,
@@ -17077,7 +17790,9 @@
         "level": 52,
         "move": "Gunk Shot"
       }
-    ]
+    ],
+    "hoenn_id": 124,
+    "unova_id": 187
   },
   {
     "id": 337,
@@ -17134,7 +17849,9 @@
         "level": 50,
         "move": "Explosion"
       }
-    ]
+    ],
+    "hoenn_id": 125,
+    "unova_id": 214
   },
   {
     "id": 338,
@@ -17191,7 +17908,9 @@
         "level": 50,
         "move": "Explosion"
       }
-    ]
+    ],
+    "hoenn_id": 126,
+    "unova_id": 215
   },
   {
     "id": 339,
@@ -17249,7 +17968,9 @@
         "level": 48,
         "move": "Fissure"
       }
-    ]
+    ],
+    "hoenn_id": 127,
+    "sinnoh_id": 80
   },
   {
     "id": 340,
@@ -17310,7 +18031,9 @@
         "level": 56,
         "move": "Fissure"
       }
-    ]
+    ],
+    "hoenn_id": 128,
+    "sinnoh_id": 81
   },
   {
     "id": 341,
@@ -17371,7 +18094,9 @@
         "level": 52,
         "move": "Guillotine"
       }
-    ]
+    ],
+    "hoenn_id": 129,
+    "unova_id": 279
   },
   {
     "id": 342,
@@ -17428,7 +18153,9 @@
         "level": 64,
         "move": "Guillotine"
       }
-    ]
+    ],
+    "hoenn_id": 130,
+    "unova_id": 280
   },
   {
     "id": 343,
@@ -17490,7 +18217,9 @@
         "level": 42,
         "move": "Explosion"
       }
-    ]
+    ],
+    "hoenn_id": 131,
+    "unova_id": 169
   },
   {
     "id": 344,
@@ -17551,7 +18280,9 @@
         "level": 48,
         "move": "Explosion"
       }
-    ]
+    ],
+    "hoenn_id": 132,
+    "unova_id": 170
   },
   {
     "id": 345,
@@ -17609,7 +18340,8 @@
         "level": 44,
         "move": "Energy Ball"
       }
-    ]
+    ],
+    "hoenn_id": 133
   },
   {
     "id": 346,
@@ -17662,7 +18394,8 @@
         "level": 48,
         "move": "Energy Ball"
       }
-    ]
+    ],
+    "hoenn_id": 134
   },
   {
     "id": 347,
@@ -17728,7 +18461,8 @@
         "level": 44,
         "move": "X-Scissor"
       }
-    ]
+    ],
+    "hoenn_id": 135
   },
   {
     "id": 348,
@@ -17789,7 +18523,8 @@
         "level": 48,
         "move": "X-Scissor"
       }
-    ]
+    ],
+    "hoenn_id": 136
   },
   {
     "id": 349,
@@ -17814,7 +18549,9 @@
         "level": 15,
         "move": "Tackle"
       }
-    ]
+    ],
+    "hoenn_id": 140,
+    "sinnoh_id": 138
   },
   {
     "id": 350,
@@ -17866,7 +18603,9 @@
         "level": 52,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "hoenn_id": 141,
+    "sinnoh_id": 139
   },
   {
     "id": 351,
@@ -17922,7 +18661,9 @@
         "level": 45,
         "move": "Hurricane"
       }
-    ]
+    ],
+    "hoenn_id": 142,
+    "unova_id": 163
   },
   {
     "id": 352,
@@ -17970,7 +18711,8 @@
         "level": 54,
         "move": "Power Whip"
       }
-    ]
+    ],
+    "hoenn_id": 145
   },
   {
     "id": 353,
@@ -18019,7 +18761,9 @@
         "level": 48,
         "move": "Gunk Shot"
       }
-    ]
+    ],
+    "hoenn_id": 146,
+    "unova_id": 210
   },
   {
     "id": 354,
@@ -18067,7 +18811,9 @@
         "level": 48,
         "move": "Gunk Shot"
       }
-    ]
+    ],
+    "hoenn_id": 147,
+    "unova_id": 211
   },
   {
     "id": 355,
@@ -18116,7 +18862,8 @@
         "level": 44,
         "move": "Future Sight"
       }
-    ]
+    ],
+    "hoenn_id": 148
   },
   {
     "id": 356,
@@ -18181,7 +18928,8 @@
         "level": 48,
         "move": "Future Sight"
       }
-    ]
+    ],
+    "hoenn_id": 149
   },
   {
     "id": 357,
@@ -18234,7 +18982,9 @@
         "level": 56,
         "move": "Solar Beam"
       }
-    ]
+    ],
+    "hoenn_id": 150,
+    "unova_id": 288
   },
   {
     "id": 358,
@@ -18278,7 +19028,9 @@
         "level": 48,
         "move": "Boomburst"
       }
-    ]
+    ],
+    "hoenn_id": 151,
+    "sinnoh_id": 83
   },
   {
     "id": 359,
@@ -18326,7 +19078,9 @@
         "level": 48,
         "move": "Future Sight"
       }
-    ]
+    ],
+    "hoenn_id": 152,
+    "unova_id": 216
   },
   {
     "id": 360,
@@ -18355,7 +19109,8 @@
         "level": 1,
         "move": "Mirror Coat"
       }
-    ]
+    ],
+    "hoenn_id": 160
   },
   {
     "id": 361,
@@ -18412,7 +19167,8 @@
         "level": 50,
         "move": "Blizzard"
       }
-    ]
+    ],
+    "hoenn_id": 171
   },
   {
     "id": 362,
@@ -18464,7 +19220,8 @@
         "level": 55,
         "move": "Explosion"
       }
-    ]
+    ],
+    "hoenn_id": 172
   },
   {
     "id": 363,
@@ -18510,7 +19267,9 @@
         "level": 43,
         "move": "Blizzard"
       }
-    ]
+    ],
+    "hoenn_id": 173,
+    "unova_id": 243
   },
   {
     "id": 364,
@@ -18556,7 +19315,9 @@
         "level": 43,
         "move": "Blizzard"
       }
-    ]
+    ],
+    "hoenn_id": 174,
+    "unova_id": 244
   },
   {
     "id": 365,
@@ -18597,7 +19358,9 @@
         "level": 43,
         "move": "Blizzard"
       }
-    ]
+    ],
+    "hoenn_id": 175,
+    "unova_id": 245
   },
   {
     "id": 366,
@@ -18630,7 +19393,8 @@
         "level": 1,
         "move": "Whirlpool"
       }
-    ]
+    ],
+    "hoenn_id": 176
   },
   {
     "id": 367,
@@ -18690,7 +19454,8 @@
         "level": 50,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "hoenn_id": 177
   },
   {
     "id": 368,
@@ -18742,7 +19507,8 @@
         "level": 50,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "hoenn_id": 178
   },
   {
     "id": 369,
@@ -18799,7 +19565,8 @@
         "level": 55,
         "move": "Head Smash"
       }
-    ]
+    ],
+    "hoenn_id": 179
   },
   {
     "id": 370,
@@ -18843,7 +19610,8 @@
         "level": 46,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "hoenn_id": 183
   },
   {
     "id": 371,
@@ -18904,7 +19672,8 @@
         "level": 55,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "hoenn_id": 187
   },
   {
     "id": 372,
@@ -18965,7 +19734,8 @@
         "level": 55,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "hoenn_id": 188
   },
   {
     "id": 373,
@@ -19026,7 +19796,8 @@
         "level": 60,
         "move": "Air Slash"
       }
-    ]
+    ],
+    "hoenn_id": 189
   },
   {
     "id": 374,
@@ -19052,7 +19823,9 @@
         "level": 1,
         "move": "Tackle"
       }
-    ]
+    ],
+    "hoenn_id": 190,
+    "unova_id": 262
   },
   {
     "id": 375,
@@ -19110,7 +19883,9 @@
         "level": 58,
         "move": "Hyper Beam"
       }
-    ]
+    ],
+    "hoenn_id": 191,
+    "unova_id": 263
   },
   {
     "id": 376,
@@ -19175,7 +19950,9 @@
         "level": 58,
         "move": "Hyper Beam"
       }
-    ]
+    ],
+    "hoenn_id": 192,
+    "unova_id": 264
   },
   {
     "id": 377,
@@ -19239,7 +20016,8 @@
         "level": 78,
         "move": "Explosion"
       }
-    ]
+    ],
+    "hoenn_id": 193
   },
   {
     "id": 378,
@@ -19303,7 +20081,8 @@
         "level": 78,
         "move": "Explosion"
       }
-    ]
+    ],
+    "hoenn_id": 194
   },
   {
     "id": 379,
@@ -19371,7 +20150,8 @@
         "level": 78,
         "move": "Explosion"
       }
-    ]
+    ],
+    "hoenn_id": 195
   },
   {
     "id": 380,
@@ -19436,7 +20216,8 @@
         "level": 65,
         "move": "Psychic"
       }
-    ]
+    ],
+    "hoenn_id": 196
   },
   {
     "id": 381,
@@ -19501,7 +20282,8 @@
         "level": 65,
         "move": "Air Slash"
       }
-    ]
+    ],
+    "hoenn_id": 197
   },
   {
     "id": 382,
@@ -19569,7 +20351,8 @@
         "level": 72,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "hoenn_id": 198
   },
   {
     "id": 383,
@@ -19649,7 +20432,8 @@
         "level": 81,
         "move": "Solar Beam"
       }
-    ]
+    ],
+    "hoenn_id": 199
   },
   {
     "id": 384,
@@ -19718,7 +20502,8 @@
         "level": 90,
         "move": "Hyper Beam"
       }
-    ]
+    ],
+    "hoenn_id": 200
   },
   {
     "id": 385,
@@ -19771,7 +20556,8 @@
         "level": 98,
         "move": "Doom Desire"
       }
-    ]
+    ],
+    "hoenn_id": 201
   },
   {
     "id": 386,
@@ -19786,7 +20572,8 @@
     "spd": 50,
     "spe": 150,
     "evolutions": [],
-    "learnset": []
+    "learnset": [],
+    "hoenn_id": 202
   },
   {
     "id": 387,
@@ -19839,7 +20626,8 @@
         "level": 45,
         "move": "Leaf Storm"
       }
-    ]
+    ],
+    "sinnoh_id": 1
   },
   {
     "id": 388,
@@ -19892,7 +20680,8 @@
         "level": 52,
         "move": "Leaf Storm"
       }
-    ]
+    ],
+    "sinnoh_id": 2
   },
   {
     "id": 389,
@@ -19949,7 +20738,8 @@
         "level": 63,
         "move": "Headlong Rush"
       }
-    ]
+    ],
+    "sinnoh_id": 3
   },
   {
     "id": 390,
@@ -20002,7 +20792,8 @@
         "level": 47,
         "move": "Flamethrower"
       }
-    ]
+    ],
+    "sinnoh_id": 4
   },
   {
     "id": 391,
@@ -20060,7 +20851,8 @@
         "level": 56,
         "move": "Flare Blitz"
       }
-    ]
+    ],
+    "sinnoh_id": 5
   },
   {
     "id": 392,
@@ -20117,7 +20909,8 @@
         "level": 65,
         "move": "Raging Fury"
       }
-    ]
+    ],
+    "sinnoh_id": 6
   },
   {
     "id": 393,
@@ -20174,7 +20967,8 @@
         "level": 43,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "sinnoh_id": 7
   },
   {
     "id": 394,
@@ -20231,7 +21025,8 @@
         "level": 50,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "sinnoh_id": 8
   },
   {
     "id": 395,
@@ -20292,7 +21087,8 @@
         "level": 66,
         "move": "Wave Crash"
       }
-    ]
+    ],
+    "sinnoh_id": 9
   },
   {
     "id": 396,
@@ -20346,7 +21142,8 @@
         "level": 49,
         "move": "Brave Bird"
       }
-    ]
+    ],
+    "sinnoh_id": 10
   },
   {
     "id": 397,
@@ -20400,7 +21197,8 @@
         "level": 49,
         "move": "Brave Bird"
       }
-    ]
+    ],
+    "sinnoh_id": 11
   },
   {
     "id": 398,
@@ -20453,7 +21251,8 @@
         "level": 49,
         "move": "Brave Bird"
       }
-    ]
+    ],
+    "sinnoh_id": 12
   },
   {
     "id": 399,
@@ -20494,7 +21293,8 @@
         "level": 40,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "sinnoh_id": 13
   },
   {
     "id": 400,
@@ -20539,7 +21339,8 @@
         "level": 40,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "sinnoh_id": 14
   },
   {
     "id": 401,
@@ -20572,7 +21373,8 @@
         "level": 16,
         "move": "Bug Bite"
       }
-    ]
+    ],
+    "sinnoh_id": 15
   },
   {
     "id": 402,
@@ -20616,7 +21418,8 @@
         "level": 46,
         "move": "Bug Buzz"
       }
-    ]
+    ],
+    "sinnoh_id": 16
   },
   {
     "id": 403,
@@ -20669,7 +21472,8 @@
         "level": 48,
         "move": "Wild Charge"
       }
-    ]
+    ],
+    "sinnoh_id": 17
   },
   {
     "id": 404,
@@ -20722,7 +21526,8 @@
         "level": 68,
         "move": "Wild Charge"
       }
-    ]
+    ],
+    "sinnoh_id": 18
   },
   {
     "id": 405,
@@ -20770,7 +21575,8 @@
         "level": 80,
         "move": "Wild Charge"
       }
-    ]
+    ],
+    "sinnoh_id": 19
   },
   {
     "id": 406,
@@ -20796,7 +21602,9 @@
         "level": 1,
         "move": "Absorb"
       }
-    ]
+    ],
+    "sinnoh_id": 25,
+    "unova_id": 133
   },
   {
     "id": 407,
@@ -20841,7 +21649,9 @@
         "level": 55,
         "move": "Leaf Storm"
       }
-    ]
+    ],
+    "sinnoh_id": 27,
+    "unova_id": 135
   },
   {
     "id": 408,
@@ -20894,7 +21704,8 @@
         "level": 46,
         "move": "Head Smash"
       }
-    ]
+    ],
+    "sinnoh_id": 36
   },
   {
     "id": 409,
@@ -20942,7 +21753,8 @@
         "level": 58,
         "move": "Head Smash"
       }
-    ]
+    ],
+    "sinnoh_id": 37
   },
   {
     "id": 410,
@@ -20988,7 +21800,8 @@
         "level": 46,
         "move": "Heavy Slam"
       }
-    ]
+    ],
+    "sinnoh_id": 38
   },
   {
     "id": 411,
@@ -21029,7 +21842,8 @@
         "level": 58,
         "move": "Heavy Slam"
       }
-    ]
+    ],
+    "sinnoh_id": 39
   },
   {
     "id": 412,
@@ -21061,7 +21875,8 @@
         "level": 20
       }
     ],
-    "learnset": []
+    "learnset": [],
+    "sinnoh_id": 45
   },
   {
     "id": 413,
@@ -21077,7 +21892,8 @@
     "spd": 105,
     "spe": 36,
     "evolutions": [],
-    "learnset": []
+    "learnset": [],
+    "sinnoh_id": 46
   },
   {
     "id": 414,
@@ -21122,7 +21938,8 @@
         "level": 43,
         "move": "Bug Buzz"
       }
-    ]
+    ],
+    "sinnoh_id": 47
   },
   {
     "id": 415,
@@ -21156,7 +21973,9 @@
         "level": 1,
         "move": "Struggle Bug"
       }
-    ]
+    ],
+    "sinnoh_id": 53,
+    "unova_id": 142
   },
   {
     "id": 416,
@@ -21213,7 +22032,9 @@
         "level": 40,
         "move": "Attack Order"
       }
-    ]
+    ],
+    "sinnoh_id": 54,
+    "unova_id": 143
   },
   {
     "id": 417,
@@ -21269,7 +22090,8 @@
         "level": 49,
         "move": "Thunder"
       }
-    ]
+    ],
+    "sinnoh_id": 55
   },
   {
     "id": 418,
@@ -21338,7 +22160,9 @@
         "level": 49,
         "move": "Wave Crash"
       }
-    ]
+    ],
+    "sinnoh_id": 56,
+    "unova_id": 149
   },
   {
     "id": 419,
@@ -21406,7 +22230,9 @@
         "level": 62,
         "move": "Wave Crash"
       }
-    ]
+    ],
+    "sinnoh_id": 57,
+    "unova_id": 150
   },
   {
     "id": 420,
@@ -21451,7 +22277,8 @@
         "level": 47,
         "move": "Petal Dance"
       }
-    ]
+    ],
+    "sinnoh_id": 58
   },
   {
     "id": 421,
@@ -21491,7 +22318,8 @@
         "level": 47,
         "move": "Petal Dance"
       }
-    ]
+    ],
+    "sinnoh_id": 59
   },
   {
     "id": 422,
@@ -21540,7 +22368,8 @@
         "level": 35,
         "move": "Earth Power"
       }
-    ]
+    ],
+    "sinnoh_id": 60
   },
   {
     "id": 423,
@@ -21585,7 +22414,8 @@
         "level": 39,
         "move": "Earth Power"
       }
-    ]
+    ],
+    "sinnoh_id": 61
   },
   {
     "id": 424,
@@ -21629,7 +22459,8 @@
         "level": 43,
         "move": "Last Resort"
       }
-    ]
+    ],
+    "sinnoh_id": 64
   },
   {
     "id": 425,
@@ -21683,7 +22514,9 @@
         "level": 44,
         "move": "Explosion"
       }
-    ]
+    ],
+    "sinnoh_id": 65,
+    "unova_id": 208
   },
   {
     "id": 426,
@@ -21732,7 +22565,9 @@
         "level": 54,
         "move": "Explosion"
       }
-    ]
+    ],
+    "sinnoh_id": 66,
+    "unova_id": 209
   },
   {
     "id": 427,
@@ -21781,7 +22616,9 @@
         "level": 52,
         "move": "Dynamic Punch"
       }
-    ]
+    ],
+    "sinnoh_id": 67,
+    "unova_id": 80
   },
   {
     "id": 428,
@@ -21837,7 +22674,9 @@
         "level": 52,
         "move": "Dynamic Punch"
       }
-    ]
+    ],
+    "sinnoh_id": 68,
+    "unova_id": 81
   },
   {
     "id": 429,
@@ -21873,7 +22712,8 @@
         "level": 1,
         "move": "Power Gem"
       }
-    ]
+    ],
+    "sinnoh_id": 73
   },
   {
     "id": 430,
@@ -21918,7 +22758,8 @@
         "level": 65,
         "move": "Comeuppance"
       }
-    ]
+    ],
+    "sinnoh_id": 75
   },
   {
     "id": 431,
@@ -21959,7 +22800,8 @@
         "level": 40,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "sinnoh_id": 76
   },
   {
     "id": 432,
@@ -21995,7 +22837,8 @@
         "level": 40,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "sinnoh_id": 77
   },
   {
     "id": 433,
@@ -22036,7 +22879,8 @@
         "level": 34,
         "move": "Psychic"
       }
-    ]
+    ],
+    "sinnoh_id": 82
   },
   {
     "id": 434,
@@ -22098,7 +22942,8 @@
         "level": 42,
         "move": "Explosion"
       }
-    ]
+    ],
+    "sinnoh_id": 84
   },
   {
     "id": 435,
@@ -22151,7 +22996,8 @@
         "level": 48,
         "move": "Explosion"
       }
-    ]
+    ],
+    "sinnoh_id": 85
   },
   {
     "id": 436,
@@ -22201,7 +23047,9 @@
         "level": 44,
         "move": "Future Sight"
       }
-    ]
+    ],
+    "sinnoh_id": 88,
+    "unova_id": 250
   },
   {
     "id": 437,
@@ -22250,7 +23098,9 @@
         "level": 50,
         "move": "Future Sight"
       }
-    ]
+    ],
+    "sinnoh_id": 89,
+    "unova_id": 251
   },
   {
     "id": 438,
@@ -22303,7 +23153,8 @@
         "level": 44,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "sinnoh_id": 92
   },
   {
     "id": 439,
@@ -22357,7 +23208,8 @@
         "level": 48,
         "move": "Psychic"
       }
-    ]
+    ],
+    "sinnoh_id": 94
   },
   {
     "id": 440,
@@ -22390,7 +23242,8 @@
         "level": 16,
         "move": "Covet"
       }
-    ]
+    ],
+    "sinnoh_id": 96
   },
   {
     "id": 441,
@@ -22431,7 +23284,8 @@
         "level": 52,
         "move": "Hurricane"
       }
-    ]
+    ],
+    "sinnoh_id": 102
   },
   {
     "id": 442,
@@ -22480,7 +23334,8 @@
         "level": 60,
         "move": "Dream Eater"
       }
-    ]
+    ],
+    "sinnoh_id": 108
   },
   {
     "id": 443,
@@ -22542,7 +23397,8 @@
         "level": 60,
         "move": "Dragon Rush"
       }
-    ]
+    ],
+    "sinnoh_id": 109
   },
   {
     "id": 444,
@@ -22604,7 +23460,8 @@
         "level": 60,
         "move": "Dragon Rush"
       }
-    ]
+    ],
+    "sinnoh_id": 110
   },
   {
     "id": 445,
@@ -22661,7 +23518,8 @@
         "level": 60,
         "move": "Dragon Rush"
       }
-    ]
+    ],
+    "sinnoh_id": 111
   },
   {
     "id": 446,
@@ -22714,7 +23572,8 @@
         "level": 52,
         "move": "Last Resort"
       }
-    ]
+    ],
+    "sinnoh_id": 112
   },
   {
     "id": 447,
@@ -22755,7 +23614,9 @@
         "level": 28,
         "move": "Bulldoze"
       }
-    ]
+    ],
+    "sinnoh_id": 115,
+    "unova_id": 33
   },
   {
     "id": 448,
@@ -22808,7 +23669,9 @@
         "level": 54,
         "move": "Close Combat"
       }
-    ]
+    ],
+    "sinnoh_id": 116,
+    "unova_id": 34
   },
   {
     "id": 449,
@@ -22861,7 +23724,8 @@
         "level": 44,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "sinnoh_id": 122
   },
   {
     "id": 450,
@@ -22913,7 +23777,8 @@
         "level": 44,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "sinnoh_id": 123
   },
   {
     "id": 451,
@@ -22959,7 +23824,9 @@
         "level": 43,
         "move": "Crunch"
       }
-    ]
+    ],
+    "sinnoh_id": 127,
+    "unova_id": 201
   },
   {
     "id": 452,
@@ -23000,7 +23867,9 @@
         "level": 43,
         "move": "Crunch"
       }
-    ]
+    ],
+    "sinnoh_id": 128,
+    "unova_id": 202
   },
   {
     "id": 453,
@@ -23058,7 +23927,9 @@
         "level": 48,
         "move": "Belch"
       }
-    ]
+    ],
+    "sinnoh_id": 129,
+    "unova_id": 290
   },
   {
     "id": 454,
@@ -23111,7 +23982,9 @@
         "level": 54,
         "move": "Belch"
       }
-    ]
+    ],
+    "sinnoh_id": 130,
+    "unova_id": 291
   },
   {
     "id": 455,
@@ -23147,7 +24020,9 @@
         "level": 43,
         "move": "Energy Ball"
       }
-    ]
+    ],
+    "sinnoh_id": 131,
+    "unova_id": 289
   },
   {
     "id": 456,
@@ -23196,7 +24071,8 @@
         "level": 45,
         "move": "Bounce"
       }
-    ]
+    ],
+    "sinnoh_id": 134
   },
   {
     "id": 457,
@@ -23240,7 +24116,8 @@
         "level": 53,
         "move": "Bounce"
       }
-    ]
+    ],
+    "sinnoh_id": 135
   },
   {
     "id": 458,
@@ -23290,7 +24167,9 @@
         "level": 47,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "sinnoh_id": 140,
+    "unova_id": 233
   },
   {
     "id": 459,
@@ -23340,7 +24219,8 @@
         "level": 53,
         "move": "Leaf Storm"
       }
-    ]
+    ],
+    "sinnoh_id": 142
   },
   {
     "id": 460,
@@ -23385,7 +24265,8 @@
         "level": 53,
         "move": "Leaf Storm"
       }
-    ]
+    ],
+    "sinnoh_id": 143
   },
   {
     "id": 461,
@@ -23450,7 +24331,9 @@
         "level": 66,
         "move": "Dark Pulse"
       }
-    ]
+    ],
+    "sinnoh_id": 145,
+    "unova_id": 253
   },
   {
     "id": 462,
@@ -23507,7 +24390,8 @@
         "level": 64,
         "move": "Zap Cannon"
       }
-    ]
+    ],
+    "unova_id": 50
   },
   {
     "id": 463,
@@ -23547,7 +24431,8 @@
         "level": 43,
         "move": "Giga Impact"
       }
-    ]
+    ],
+    "unova_id": 285
   },
   {
     "id": 464,
@@ -23660,7 +24545,8 @@
         "level": 52,
         "move": "Sludge Bomb"
       }
-    ]
+    ],
+    "unova_id": 218
   },
   {
     "id": 466,
@@ -23716,7 +24602,8 @@
         "level": 64,
         "move": "Giga Impact"
       }
-    ]
+    ],
+    "unova_id": 58
   },
   {
     "id": 467,
@@ -23772,7 +24659,8 @@
         "level": 64,
         "move": "Hyper Beam"
       }
-    ]
+    ],
+    "unova_id": 55
   },
   {
     "id": 468,
@@ -23878,7 +24766,8 @@
         "level": 49,
         "move": "U-turn"
       }
-    ]
+    ],
+    "unova_id": 287
   },
   {
     "id": 470,
@@ -23926,7 +24815,8 @@
         "level": 50,
         "move": "Leaf Storm"
       }
-    ]
+    ],
+    "unova_id": 97
   },
   {
     "id": 471,
@@ -23978,7 +24868,8 @@
         "level": 50,
         "move": "Blizzard"
       }
-    ]
+    ],
+    "unova_id": 98
   },
   {
     "id": 472,
@@ -24043,7 +24934,8 @@
         "level": 45,
         "move": "Crabhammer"
       }
-    ]
+    ],
+    "unova_id": 222
   },
   {
     "id": 473,
@@ -24108,7 +25000,8 @@
         "level": 65,
         "move": "Thrash"
       }
-    ]
+    ],
+    "unova_id": 260
   },
   {
     "id": 474,
@@ -24250,7 +25143,8 @@
         "level": 43,
         "move": "Zap Cannon"
       }
-    ]
+    ],
+    "unova_id": 165
   },
   {
     "id": 477,
@@ -24456,7 +25350,8 @@
         "level": 84,
         "move": "Mystical Power"
       }
-    ]
+    ],
+    "sinnoh_id": 146
   },
   {
     "id": 481,
@@ -24500,7 +25395,8 @@
         "level": 84,
         "move": "Mystical Power"
       }
-    ]
+    ],
+    "sinnoh_id": 147
   },
   {
     "id": 482,
@@ -24556,7 +25452,8 @@
         "level": 84,
         "move": "Mystical Power"
       }
-    ]
+    ],
+    "sinnoh_id": 148
   },
   {
     "id": 483,
@@ -24621,7 +25518,8 @@
         "level": 88,
         "move": "Roar of Time"
       }
-    ]
+    ],
+    "sinnoh_id": 149
   },
   {
     "id": 484,
@@ -24678,7 +25576,8 @@
         "level": 88,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "sinnoh_id": 150
   },
   {
     "id": 485,
@@ -24955,7 +25854,8 @@
         "level": 61,
         "move": "Dive"
       }
-    ]
+    ],
+    "sinnoh_id": 151
   },
   {
     "id": 491,
@@ -25147,7 +26047,8 @@
         "level": 91,
         "move": "Final Gambit"
       }
-    ]
+    ],
+    "unova_id": 0
   },
   {
     "id": 495,
@@ -25204,7 +26105,8 @@
         "level": 40,
         "move": "Leaf Storm"
       }
-    ]
+    ],
+    "unova_id": 1
   },
   {
     "id": 496,
@@ -25261,7 +26163,8 @@
         "level": 48,
         "move": "Leaf Storm"
       }
-    ]
+    ],
+    "unova_id": 2
   },
   {
     "id": 497,
@@ -25313,7 +26216,8 @@
         "level": 56,
         "move": "Leaf Storm"
       }
-    ]
+    ],
+    "unova_id": 3
   },
   {
     "id": 498,
@@ -25370,7 +26274,8 @@
         "level": 56,
         "move": "Head Smash"
       }
-    ]
+    ],
+    "unova_id": 4
   },
   {
     "id": 499,
@@ -25428,7 +26333,8 @@
         "level": 56,
         "move": "Head Smash"
       }
-    ]
+    ],
+    "unova_id": 5
   },
   {
     "id": 500,
@@ -25485,7 +26391,8 @@
         "level": 56,
         "move": "Head Smash"
       }
-    ]
+    ],
+    "unova_id": 6
   },
   {
     "id": 501,
@@ -25546,7 +26453,8 @@
         "level": 43,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "unova_id": 7
   },
   {
     "id": 502,
@@ -25611,7 +26519,8 @@
         "level": 53,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "unova_id": 8
   },
   {
     "id": 503,
@@ -25647,7 +26556,8 @@
         "level": 90,
         "move": "Sacred Sword"
       }
-    ]
+    ],
+    "unova_id": 9
   },
   {
     "id": 504,
@@ -25684,7 +26594,8 @@
         "level": 21,
         "move": "Super Fang"
       }
-    ]
+    ],
+    "unova_id": 10
   },
   {
     "id": 505,
@@ -25728,7 +26639,8 @@
         "level": 50,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "unova_id": 11
   },
   {
     "id": 506,
@@ -25785,7 +26697,8 @@
         "level": 48,
         "move": "Giga Impact"
       }
-    ]
+    ],
+    "unova_id": 22
   },
   {
     "id": 507,
@@ -25842,7 +26755,8 @@
         "level": 66,
         "move": "Giga Impact"
       }
-    ]
+    ],
+    "unova_id": 23
   },
   {
     "id": 508,
@@ -25906,7 +26820,8 @@
         "level": 78,
         "move": "Giga Impact"
       }
-    ]
+    ],
+    "unova_id": 24
   },
   {
     "id": 509,
@@ -25955,7 +26870,8 @@
         "level": 52,
         "move": "Play Rough"
       }
-    ]
+    ],
+    "unova_id": 12
   },
   {
     "id": 510,
@@ -25999,7 +26915,8 @@
         "level": 52,
         "move": "Play Rough"
       }
-    ]
+    ],
+    "unova_id": 13
   },
   {
     "id": 511,
@@ -26060,7 +26977,8 @@
         "level": 43,
         "move": "Focus Blast"
       }
-    ]
+    ],
+    "unova_id": 37
   },
   {
     "id": 512,
@@ -26116,7 +27034,8 @@
         "level": 43,
         "move": "Focus Blast"
       }
-    ]
+    ],
+    "unova_id": 38
   },
   {
     "id": 513,
@@ -26177,7 +27096,8 @@
         "level": 43,
         "move": "Focus Blast"
       }
-    ]
+    ],
+    "unova_id": 39
   },
   {
     "id": 514,
@@ -26233,7 +27153,8 @@
         "level": 43,
         "move": "Focus Blast"
       }
-    ]
+    ],
+    "unova_id": 40
   },
   {
     "id": 515,
@@ -26290,7 +27211,8 @@
         "level": 43,
         "move": "Focus Blast"
       }
-    ]
+    ],
+    "unova_id": 41
   },
   {
     "id": 516,
@@ -26342,7 +27264,8 @@
         "level": 43,
         "move": "Focus Blast"
       }
-    ]
+    ],
+    "unova_id": 42
   },
   {
     "id": 517,
@@ -26387,7 +27310,8 @@
         "level": 48,
         "move": "Future Sight"
       }
-    ]
+    ],
+    "unova_id": 86
   },
   {
     "id": 518,
@@ -26427,7 +27351,8 @@
         "level": 48,
         "move": "Future Sight"
       }
-    ]
+    ],
+    "unova_id": 87
   },
   {
     "id": 519,
@@ -26469,7 +27394,8 @@
         "level": 44,
         "move": "Sky Attack"
       }
-    ]
+    ],
+    "unova_id": 14
   },
   {
     "id": 520,
@@ -26511,7 +27437,8 @@
         "level": 56,
         "move": "Sky Attack"
       }
-    ]
+    ],
+    "unova_id": 15
   },
   {
     "id": 521,
@@ -26548,7 +27475,8 @@
         "level": 66,
         "move": "Sky Attack"
       }
-    ]
+    ],
+    "unova_id": 16
   },
   {
     "id": 522,
@@ -26601,7 +27529,8 @@
         "level": 40,
         "move": "Thrash"
       }
-    ]
+    ],
+    "unova_id": 147
   },
   {
     "id": 523,
@@ -26649,7 +27578,8 @@
         "level": 53,
         "move": "Thrash"
       }
-    ]
+    ],
+    "unova_id": 148
   },
   {
     "id": 524,
@@ -26702,7 +27632,8 @@
         "level": 44,
         "move": "Explosion"
       }
-    ]
+    ],
+    "unova_id": 68
   },
   {
     "id": 525,
@@ -26759,7 +27690,8 @@
         "level": 54,
         "move": "Explosion"
       }
-    ]
+    ],
+    "unova_id": 69
   },
   {
     "id": 526,
@@ -26811,7 +27743,8 @@
         "level": 54,
         "move": "Explosion"
       }
-    ]
+    ],
+    "unova_id": 70
   },
   {
     "id": 527,
@@ -26865,7 +27798,8 @@
         "level": 50,
         "move": "Future Sight"
       }
-    ]
+    ],
+    "unova_id": 66
   },
   {
     "id": 528,
@@ -26914,7 +27848,8 @@
         "level": 50,
         "move": "Future Sight"
       }
-    ]
+    ],
+    "unova_id": 67
   },
   {
     "id": 529,
@@ -26975,7 +27910,8 @@
         "level": 46,
         "move": "Earthquake"
       }
-    ]
+    ],
+    "unova_id": 76
   },
   {
     "id": 530,
@@ -27044,7 +27980,8 @@
         "level": 50,
         "move": "Megahorn"
       }
-    ]
+    ],
+    "unova_id": 77
   },
   {
     "id": 531,
@@ -27092,7 +28029,8 @@
         "level": 48,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "unova_id": 36
   },
   {
     "id": 532,
@@ -27153,7 +28091,8 @@
         "level": 48,
         "move": "Focus Punch"
       }
-    ]
+    ],
+    "unova_id": 73
   },
   {
     "id": 533,
@@ -27214,7 +28153,8 @@
         "level": 60,
         "move": "Focus Punch"
       }
-    ]
+    ],
+    "unova_id": 74
   },
   {
     "id": 534,
@@ -27270,7 +28210,8 @@
         "level": 60,
         "move": "Focus Punch"
       }
-    ]
+    ],
+    "unova_id": 75
   },
   {
     "id": 535,
@@ -27331,7 +28272,8 @@
         "level": 48,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "unova_id": 228
   },
   {
     "id": 536,
@@ -27393,7 +28335,8 @@
         "level": 60,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "unova_id": 229
   },
   {
     "id": 537,
@@ -27454,7 +28397,8 @@
         "level": 70,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "unova_id": 230
   },
   {
     "id": 538,
@@ -27506,7 +28450,8 @@
         "level": 58,
         "move": "Dynamic Punch"
       }
-    ]
+    ],
+    "unova_id": 267
   },
   {
     "id": 539,
@@ -27558,7 +28503,8 @@
         "level": 58,
         "move": "Dynamic Punch"
       }
-    ]
+    ],
+    "unova_id": 268
   },
   {
     "id": 540,
@@ -27604,7 +28550,8 @@
         "level": 43,
         "move": "Flail"
       }
-    ]
+    ],
+    "unova_id": 17
   },
   {
     "id": 541,
@@ -27650,7 +28597,8 @@
         "level": 43,
         "move": "Flail"
       }
-    ]
+    ],
+    "unova_id": 18
   },
   {
     "id": 542,
@@ -27699,7 +28647,8 @@
         "level": 50,
         "move": "Leaf Storm"
       }
-    ]
+    ],
+    "unova_id": 19
   },
   {
     "id": 543,
@@ -27749,7 +28698,8 @@
         "level": 52,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "unova_id": 43
   },
   {
     "id": 544,
@@ -27799,7 +28749,8 @@
         "level": 52,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "unova_id": 44
   },
   {
     "id": 545,
@@ -27856,7 +28807,8 @@
         "level": 56,
         "move": "Megahorn"
       }
-    ]
+    ],
+    "unova_id": 45
   },
   {
     "id": 546,
@@ -27910,7 +28862,8 @@
         "level": 48,
         "move": "Solar Beam"
       }
-    ]
+    ],
+    "unova_id": 82
   },
   {
     "id": 547,
@@ -27971,7 +28924,8 @@
         "level": 1,
         "move": "Solar Beam"
       }
-    ]
+    ],
+    "unova_id": 83
   },
   {
     "id": 548,
@@ -28020,7 +28974,8 @@
         "level": 42,
         "move": "Leaf Storm"
       }
-    ]
+    ],
+    "unova_id": 84
   },
   {
     "id": 549,
@@ -28035,7 +28990,8 @@
     "spd": 75,
     "spe": 90,
     "evolutions": [],
-    "learnset": []
+    "learnset": [],
+    "unova_id": 85
   },
   {
     "id": 550,
@@ -28059,7 +29015,8 @@
         "level": 101
       }
     ],
-    "learnset": []
+    "learnset": [],
+    "unova_id": 104
   },
   {
     "id": 551,
@@ -28117,7 +29074,8 @@
         "level": 50,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "unova_id": 99
   },
   {
     "id": 552,
@@ -28175,7 +29133,8 @@
         "level": 50,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "unova_id": 100
   },
   {
     "id": 553,
@@ -28232,7 +29191,8 @@
         "level": 58,
         "move": "Outrage"
       }
-    ]
+    ],
+    "unova_id": 101
   },
   {
     "id": 554,
@@ -28256,7 +29216,8 @@
         "level": 101
       }
     ],
-    "learnset": []
+    "learnset": [],
+    "unova_id": 102
   },
   {
     "id": 555,
@@ -28271,7 +29232,8 @@
     "spd": 55,
     "spe": 95,
     "evolutions": [],
-    "learnset": []
+    "learnset": [],
+    "unova_id": 103
   },
   {
     "id": 556,
@@ -28323,7 +29285,8 @@
         "level": 56,
         "move": "Petal Dance"
       }
-    ]
+    ],
+    "unova_id": 119
   },
   {
     "id": 557,
@@ -28381,7 +29344,8 @@
         "level": 48,
         "move": "Rock Wrecker"
       }
-    ]
+    ],
+    "unova_id": 115
   },
   {
     "id": 558,
@@ -28434,7 +29398,8 @@
         "level": 56,
         "move": "Rock Wrecker"
       }
-    ]
+    ],
+    "unova_id": 116
   },
   {
     "id": 559,
@@ -28492,7 +29457,8 @@
         "level": 52,
         "move": "Head Smash"
       }
-    ]
+    ],
+    "unova_id": 117
   },
   {
     "id": 560,
@@ -28545,7 +29511,8 @@
         "level": 52,
         "move": "Head Smash"
       }
-    ]
+    ],
+    "unova_id": 118
   },
   {
     "id": 561,
@@ -28590,7 +29557,8 @@
         "level": 55,
         "move": "Sky Attack"
       }
-    ]
+    ],
+    "unova_id": 120
   },
   {
     "id": 562,
@@ -28614,7 +29582,8 @@
         "level": 101
       }
     ],
-    "learnset": []
+    "learnset": [],
+    "unova_id": 124
   },
   {
     "id": 563,
@@ -28654,7 +29623,8 @@
         "level": 46,
         "move": "Phantom Force"
       }
-    ]
+    ],
+    "unova_id": 125
   },
   {
     "id": 564,
@@ -28716,7 +29686,8 @@
         "level": 42,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "unova_id": 126
   },
   {
     "id": 565,
@@ -28773,7 +29744,8 @@
         "level": 46,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "unova_id": 127
   },
   {
     "id": 566,
@@ -28843,7 +29815,8 @@
         "level": 45,
         "move": "Endeavor"
       }
-    ]
+    ],
+    "unova_id": 128
   },
   {
     "id": 567,
@@ -28908,7 +29881,8 @@
         "level": 51,
         "move": "Endeavor"
       }
-    ]
+    ],
+    "unova_id": 129
   },
   {
     "id": 568,
@@ -28969,7 +29943,8 @@
         "level": 53,
         "move": "Explosion"
       }
-    ]
+    ],
+    "unova_id": 105
   },
   {
     "id": 569,
@@ -29029,7 +30004,8 @@
         "level": 53,
         "move": "Explosion"
       }
-    ]
+    ],
+    "unova_id": 106
   },
   {
     "id": 570,
@@ -29053,7 +30029,8 @@
         "level": 30
       }
     ],
-    "learnset": []
+    "learnset": [],
+    "unova_id": 151
   },
   {
     "id": 571,
@@ -29068,7 +30045,8 @@
     "spd": 60,
     "spe": 105,
     "evolutions": [],
-    "learnset": []
+    "learnset": [],
+    "unova_id": 152
   },
   {
     "id": 572,
@@ -29117,7 +30095,8 @@
         "level": 48,
         "move": "Last Resort"
       }
-    ]
+    ],
+    "unova_id": 107
   },
   {
     "id": 573,
@@ -29141,7 +30120,8 @@
         "level": 1,
         "move": "Pound"
       }
-    ]
+    ],
+    "unova_id": 108
   },
   {
     "id": 574,
@@ -29186,7 +30166,8 @@
         "level": 44,
         "move": "Future Sight"
       }
-    ]
+    ],
+    "unova_id": 136
   },
   {
     "id": 575,
@@ -29227,7 +30208,8 @@
         "level": 52,
         "move": "Future Sight"
       }
-    ]
+    ],
+    "unova_id": 137
   },
   {
     "id": 576,
@@ -29267,7 +30249,8 @@
         "level": 56,
         "move": "Future Sight"
       }
-    ]
+    ],
+    "unova_id": 138
   },
   {
     "id": 577,
@@ -29312,7 +30295,8 @@
         "level": 44,
         "move": "Future Sight"
       }
-    ]
+    ],
+    "unova_id": 139
   },
   {
     "id": 578,
@@ -29357,7 +30341,8 @@
         "level": 52,
         "move": "Future Sight"
       }
-    ]
+    ],
+    "unova_id": 140
   },
   {
     "id": 579,
@@ -29397,7 +30382,8 @@
         "level": 56,
         "move": "Future Sight"
       }
-    ]
+    ],
+    "unova_id": 141
   },
   {
     "id": 580,
@@ -29451,7 +30437,8 @@
         "level": 46,
         "move": "Hurricane"
       }
-    ]
+    ],
+    "unova_id": 153
   },
   {
     "id": 581,
@@ -29500,7 +30487,8 @@
         "level": 55,
         "move": "Hurricane"
       }
-    ]
+    ],
+    "unova_id": 154
   },
   {
     "id": 582,
@@ -29549,7 +30537,8 @@
         "level": 58,
         "move": "Blizzard"
       }
-    ]
+    ],
+    "unova_id": 255
   },
   {
     "id": 583,
@@ -29598,7 +30587,8 @@
         "level": 58,
         "move": "Blizzard"
       }
-    ]
+    ],
+    "unova_id": 256
   },
   {
     "id": 584,
@@ -29646,7 +30636,8 @@
         "level": 58,
         "move": "Blizzard"
       }
-    ]
+    ],
+    "unova_id": 257
   },
   {
     "id": 585,
@@ -29700,7 +30691,8 @@
         "level": 42,
         "move": "Solar Beam"
       }
-    ]
+    ],
+    "unova_id": 159
   },
   {
     "id": 586,
@@ -29753,7 +30745,8 @@
         "level": 52,
         "move": "Solar Beam"
       }
-    ]
+    ],
+    "unova_id": 160
   },
   {
     "id": 587,
@@ -29802,7 +30795,8 @@
         "level": 52,
         "move": "Discharge"
       }
-    ]
+    ],
+    "unova_id": 144
   },
   {
     "id": 588,
@@ -29863,7 +30857,8 @@
         "level": 48,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "unova_id": 155
   },
   {
     "id": 589,
@@ -29940,7 +30935,8 @@
         "level": 52,
         "move": "Metal Burst"
       }
-    ]
+    ],
+    "unova_id": 156
   },
   {
     "id": 590,
@@ -29986,7 +30982,8 @@
         "level": 62,
         "move": "Leaf Storm"
       }
-    ]
+    ],
+    "unova_id": 161
   },
   {
     "id": 591,
@@ -30027,7 +31024,8 @@
         "level": 62,
         "move": "Leaf Storm"
       }
-    ]
+    ],
+    "unova_id": 162
   },
   {
     "id": 592,
@@ -30093,7 +31091,8 @@
         "level": 48,
         "move": "Water Spout"
       }
-    ]
+    ],
+    "unova_id": 180
   },
   {
     "id": 593,
@@ -30154,7 +31153,8 @@
         "level": 54,
         "move": "Water Spout"
       }
-    ]
+    ],
+    "unova_id": 181
   },
   {
     "id": 594,
@@ -30194,7 +31194,8 @@
         "level": 55,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "unova_id": 182
   },
   {
     "id": 595,
@@ -30252,7 +31253,8 @@
         "level": 48,
         "move": "Bug Buzz"
       }
-    ]
+    ],
+    "unova_id": 173
   },
   {
     "id": 596,
@@ -30305,7 +31307,8 @@
         "level": 56,
         "move": "Bug Buzz"
       }
-    ]
+    ],
+    "unova_id": 174
   },
   {
     "id": 597,
@@ -30359,7 +31362,8 @@
         "level": 50,
         "move": "Explosion"
       }
-    ]
+    ],
+    "unova_id": 175
   },
   {
     "id": 598,
@@ -30412,7 +31416,8 @@
         "level": 56,
         "move": "Explosion"
       }
-    ]
+    ],
+    "unova_id": 176
   },
   {
     "id": 599,
@@ -30465,7 +31470,8 @@
         "level": 48,
         "move": "Hyper Beam"
       }
-    ]
+    ],
+    "unova_id": 130
   },
   {
     "id": 600,
@@ -30518,7 +31524,8 @@
         "level": 54,
         "move": "Hyper Beam"
       }
-    ]
+    ],
+    "unova_id": 131
   },
   {
     "id": 601,
@@ -30566,7 +31573,8 @@
         "level": 56,
         "move": "Hyper Beam"
       }
-    ]
+    ],
+    "unova_id": 132
   },
   {
     "id": 602,
@@ -30595,7 +31603,8 @@
         "level": 1,
         "move": "Tackle"
       }
-    ]
+    ],
+    "unova_id": 177
   },
   {
     "id": 603,
@@ -30652,7 +31661,8 @@
         "level": 50,
         "move": "Super Fang"
       }
-    ]
+    ],
+    "unova_id": 178
   },
   {
     "id": 604,
@@ -30712,7 +31722,8 @@
         "level": 50,
         "move": "Super Fang"
       }
-    ]
+    ],
+    "unova_id": 179
   },
   {
     "id": 605,
@@ -30753,7 +31764,8 @@
         "level": 60,
         "move": "Psychic"
       }
-    ]
+    ],
+    "unova_id": 188
   },
   {
     "id": 606,
@@ -30789,7 +31801,8 @@
         "level": 68,
         "move": "Psychic"
       }
-    ]
+    ],
+    "unova_id": 189
   },
   {
     "id": 607,
@@ -30835,7 +31848,8 @@
         "level": 52,
         "move": "Overheat"
       }
-    ]
+    ],
+    "unova_id": 190
   },
   {
     "id": 608,
@@ -30881,7 +31895,8 @@
         "level": 52,
         "move": "Overheat"
       }
-    ]
+    ],
+    "unova_id": 191
   },
   {
     "id": 609,
@@ -30922,7 +31937,8 @@
         "level": 52,
         "move": "Overheat"
       }
-    ]
+    ],
+    "unova_id": 192
   },
   {
     "id": 610,
@@ -30991,7 +32007,8 @@
         "level": 48,
         "move": "Giga Impact"
       }
-    ]
+    ],
+    "unova_id": 183
   },
   {
     "id": 611,
@@ -31060,7 +32077,8 @@
         "level": 56,
         "move": "Giga Impact"
       }
-    ]
+    ],
+    "unova_id": 184
   },
   {
     "id": 612,
@@ -31124,7 +32142,8 @@
         "level": 60,
         "move": "Giga Impact"
       }
-    ]
+    ],
+    "unova_id": 185
   },
   {
     "id": 613,
@@ -31185,7 +32204,8 @@
         "level": 42,
         "move": "Sheer Cold"
       }
-    ]
+    ],
+    "unova_id": 195
   },
   {
     "id": 614,
@@ -31249,7 +32269,8 @@
         "level": 51,
         "move": "Superpower"
       }
-    ]
+    ],
+    "unova_id": 196
   },
   {
     "id": 615,
@@ -31301,7 +32322,8 @@
         "level": 65,
         "move": "Sheer Cold"
       }
-    ]
+    ],
+    "unova_id": 197
   },
   {
     "id": 616,
@@ -31354,7 +32376,8 @@
         "level": 48,
         "move": "Final Gambit"
       }
-    ]
+    ],
+    "unova_id": 157
   },
   {
     "id": 617,
@@ -31422,7 +32445,8 @@
         "level": 48,
         "move": "Final Gambit"
       }
-    ]
+    ],
+    "unova_id": 158
   },
   {
     "id": 618,
@@ -31438,7 +32462,8 @@
     "spd": 99,
     "spe": 32,
     "evolutions": [],
-    "learnset": []
+    "learnset": [],
+    "unova_id": 231
   },
   {
     "id": 619,
@@ -31499,7 +32524,8 @@
         "level": 60,
         "move": "High Jump Kick"
       }
-    ]
+    ],
+    "unova_id": 219
   },
   {
     "id": 620,
@@ -31555,7 +32581,8 @@
         "level": 66,
         "move": "High Jump Kick"
       }
-    ]
+    ],
+    "unova_id": 220
   },
   {
     "id": 621,
@@ -31611,7 +32638,8 @@
         "level": 55,
         "move": "Superpower"
       }
-    ]
+    ],
+    "unova_id": 270
   },
   {
     "id": 622,
@@ -31669,7 +32697,8 @@
         "level": 65,
         "move": "Dynamic Punch"
       }
-    ]
+    ],
+    "unova_id": 271
   },
   {
     "id": 623,
@@ -31722,7 +32751,8 @@
         "level": 65,
         "move": "Dynamic Punch"
       }
-    ]
+    ],
+    "unova_id": 272
   },
   {
     "id": 624,
@@ -31780,7 +32810,8 @@
         "level": 65,
         "move": "Guillotine"
       }
-    ]
+    ],
+    "unova_id": 223
   },
   {
     "id": 625,
@@ -31842,7 +32873,8 @@
         "level": 71,
         "move": "Guillotine"
       }
-    ]
+    ],
+    "unova_id": 224
   },
   {
     "id": 626,
@@ -31894,7 +32926,8 @@
         "level": 55,
         "move": "Giga Impact"
       }
-    ]
+    ],
+    "unova_id": 269
   },
   {
     "id": 627,
@@ -31952,7 +32985,8 @@
         "level": 72,
         "move": "Brave Bird"
       }
-    ]
+    ],
+    "unova_id": 109
   },
   {
     "id": 628,
@@ -31973,7 +33007,8 @@
         "level": 40,
         "move": "Rock Smash"
       }
-    ]
+    ],
+    "unova_id": 110
   },
   {
     "id": 629,
@@ -32019,7 +33054,8 @@
         "level": 72,
         "move": "Brave Bird"
       }
-    ]
+    ],
+    "unova_id": 111
   },
   {
     "id": 630,
@@ -32064,7 +33100,8 @@
         "level": 80,
         "move": "Brave Bird"
       }
-    ]
+    ],
+    "unova_id": 112
   },
   {
     "id": 631,
@@ -32128,7 +33165,8 @@
         "level": 60,
         "move": "Flare Blitz"
       }
-    ]
+    ],
+    "unova_id": 193
   },
   {
     "id": 632,
@@ -32189,7 +33227,8 @@
         "level": 56,
         "move": "Guillotine"
       }
-    ]
+    ],
+    "unova_id": 194
   },
   {
     "id": 633,
@@ -32259,7 +33298,8 @@
         "level": 60,
         "move": "Outrage"
       }
-    ]
+    ],
+    "unova_id": 273
   },
   {
     "id": 634,
@@ -32333,7 +33373,8 @@
         "level": 66,
         "move": "Outrage"
       }
-    ]
+    ],
+    "unova_id": 274
   },
   {
     "id": 635,
@@ -32410,7 +33451,8 @@
         "level": 76,
         "move": "Hyper Beam"
       }
-    ]
+    ],
+    "unova_id": 275
   },
   {
     "id": 636,
@@ -32472,7 +33514,8 @@
         "level": 66,
         "move": "Flare Blitz"
       }
-    ]
+    ],
+    "unova_id": 171
   },
   {
     "id": 637,
@@ -32553,7 +33596,8 @@
         "level": 70,
         "move": "Fire Blast"
       }
-    ]
+    ],
+    "unova_id": 172
   },
   {
     "id": 638,
@@ -32618,7 +33662,8 @@
         "level": 70,
         "move": "Close Combat"
       }
-    ]
+    ],
+    "unova_id": 225
   },
   {
     "id": 639,
@@ -32687,7 +33732,8 @@
         "level": 78,
         "move": "Head Smash"
       }
-    ]
+    ],
+    "unova_id": 226
   },
   {
     "id": 640,
@@ -32752,7 +33798,8 @@
         "level": 70,
         "move": "Close Combat"
       }
-    ]
+    ],
+    "unova_id": 227
   },
   {
     "id": 641,
@@ -32767,7 +33814,8 @@
     "spd": 80,
     "spe": 111,
     "evolutions": [],
-    "learnset": []
+    "learnset": [],
+    "unova_id": 198
   },
   {
     "id": 642,
@@ -32783,7 +33831,8 @@
     "spd": 80,
     "spe": 111,
     "evolutions": [],
-    "learnset": []
+    "learnset": [],
+    "unova_id": 199
   },
   {
     "id": 643,
@@ -32852,7 +33901,8 @@
         "level": 88,
         "move": "Blue Flare"
       }
-    ]
+    ],
+    "unova_id": 295
   },
   {
     "id": 644,
@@ -32921,7 +33971,8 @@
         "level": 88,
         "move": "Bolt Strike"
       }
-    ]
+    ],
+    "unova_id": 296
   },
   {
     "id": 645,
@@ -32937,7 +33988,8 @@
     "spd": 80,
     "spe": 101,
     "evolutions": [],
-    "learnset": []
+    "learnset": [],
+    "unova_id": 200
   },
   {
     "id": 646,
@@ -32953,7 +34005,8 @@
     "spd": 90,
     "spe": 95,
     "evolutions": [],
-    "learnset": []
+    "learnset": [],
+    "unova_id": 297
   },
   {
     "id": 647,
@@ -32969,7 +34022,8 @@
     "spd": 90,
     "spe": 108,
     "evolutions": [],
-    "learnset": []
+    "learnset": [],
+    "unova_id": 298
   },
   {
     "id": 648,
@@ -32985,7 +34039,8 @@
     "spd": 128,
     "spe": 90,
     "evolutions": [],
-    "learnset": []
+    "learnset": [],
+    "unova_id": 299
   },
   {
     "id": 649,
@@ -33050,7 +34105,8 @@
         "level": 91,
         "move": "Self-Destruct"
       }
-    ]
+    ],
+    "unova_id": 300
   },
   {
     "id": 650,
@@ -34020,7 +35076,7 @@
   },
   {
     "id": 669,
-    "name": "Flabébé",
+    "name": "Flab\u00e9b\u00e9",
     "types": [
       "Fairy"
     ],
