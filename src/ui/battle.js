@@ -313,16 +313,17 @@ function updateBattleBackground(combatArena, state, battleSystem, inGymCombat, i
                 dynamicBg.style.backgroundSize = '100% 100%';
                 dynamicBg.style.overflow = 'hidden';
 
-                const img = document.createElement('img');
-                img.src = spritePath;
-                img.style.position = 'absolute';
-                img.style.left = `${assetConfig.position.rel_x * 100}%`;
-                img.style.top = `${assetConfig.position.rel_y * 100}%`;
-                img.style.width = `${(assetConfig.size.px_width / 1800) * 100}%`;
-                img.style.transform = `rotate(${assetConfig.tilt.angle_deg}deg)`;
-                img.style.transformOrigin = assetConfig.tilt.origin;
-                img.style.pointerEvents = 'none';
-                dynamicBg.appendChild(img);
+                dynamicBg.innerHTML = `
+                    <img src="${spritePath}" style="
+                        position: absolute;
+                        left: ${assetConfig.position.rel_x * 100}%;
+                        top: ${assetConfig.position.rel_y * 100}%;
+                        width: ${(assetConfig.size.px_width / 1800) * 100}%;
+                        transform: rotate(${assetConfig.tilt.angle_deg}deg);
+                        transform-origin: ${assetConfig.tilt.origin};
+                        pointer-events: none;
+                    ">
+                `;
 
                 combatArena.style.backgroundImage = 'none';
                 combatArena.style.position = 'relative'; // Ensure relative positioning
