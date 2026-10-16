@@ -2,16 +2,7 @@ const { app, BrowserWindow, ipcMain, screen } = require('electron');
 const path = require('path');
 const fs = require('fs');
 
-// Fix transparency issues conditionally rather than disabling hardware acceleration entirely
-if (process.platform === 'linux') {
-    app.commandLine.appendSwitch('enable-transparent-visuals');
-
-    // Disable hardware acceleration only if we're not running on Wayland.
-    // X11 still requires hardware acceleration to be disabled for transparency.
-    if (!process.env.WAYLAND_DISPLAY && process.env.XDG_SESSION_TYPE !== 'wayland') {
-        app.disableHardwareAcceleration();
-    }
-}
+// Transparency disabled; no need to append enable-transparent-visuals or disable hw acceleration
 
 function createWindow() {
     // Get primary display dimensions
@@ -22,8 +13,8 @@ function createWindow() {
         height: height,
         x: x,
         y: y,
-        transparent: true,
-        backgroundColor: '#00000000',
+        transparent: false,
+        backgroundColor: '#000000', // Changed to opaque black to prevent transparency issues
         frame: false,
         hasShadow: true,
         alwaysOnTop: false, // Don't keep it above other windows
