@@ -75,7 +75,7 @@ const johtoMapCoordinates = {
     "y": 73.02
   },
   "daycare": {
-    "name": "DayCare",
+    "name": "Daycare",
     "x": 24.13,
     "y": 68.48
   },
