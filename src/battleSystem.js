@@ -1337,6 +1337,9 @@ class BattleSystem {
 
                         // Track species catches for unlocks
                         if (!this.state.stats.caughtSpecies) this.state.stats.caughtSpecies = {};
+                        if (!this.state.stats.caughtSpecies[trackingName]) {
+                            this.state.stats.caughtSpeciesCount = (this.state.stats.caughtSpeciesCount || 0) + 1;
+                        }
                         this.state.stats.caughtSpecies[trackingName] = (this.state.stats.caughtSpecies[trackingName] || 0) + 1;
 
                         // Track specific typings
@@ -2199,6 +2202,9 @@ class BattleSystem {
                         }
 
                         if (!this.state.stats.caughtSpecies) this.state.stats.caughtSpecies = {};
+                        if (!this.state.stats.caughtSpecies[trackingName]) {
+                            this.state.stats.caughtSpeciesCount = (this.state.stats.caughtSpeciesCount || 0) + 1;
+                        }
                         this.state.stats.caughtSpecies[trackingName] = (this.state.stats.caughtSpecies[trackingName] || 0) + 1;
 
                         // Fix the level 100 jump bug by setting xp explicitly to the exact minimum needed for their captured level

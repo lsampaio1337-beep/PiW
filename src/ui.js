@@ -356,7 +356,10 @@ window.completeChallenge = function(targetAreaId) {
         }
         if (unlock.requirements.catchSpecies) {
              for (let s of unlock.requirements.catchSpecies) {
-                 if (state.stats.caughtSpecies) delete state.stats.caughtSpecies[s.species];
+                 if (state.stats.caughtSpecies && state.stats.caughtSpecies[s.species] !== undefined) {
+                     delete state.stats.caughtSpecies[s.species];
+                     state.stats.caughtSpeciesCount = Math.max(0, (state.stats.caughtSpeciesCount || 0) - 1);
+                 }
              }
         }
         if (unlock.requirements.catchSpeciesByRarity) {
@@ -374,7 +377,10 @@ window.completeChallenge = function(targetAreaId) {
              if (unlock.requirements.catchEachFromSlotMachine.machines) {
                  for (let m of unlock.requirements.catchEachFromSlotMachine.machines) {
                      for (let s of m) {
-                         if (state.stats.caughtSpecies) delete state.stats.caughtSpecies[s];
+                         if (state.stats.caughtSpecies && state.stats.caughtSpecies[s] !== undefined) {
+                             delete state.stats.caughtSpecies[s];
+                             state.stats.caughtSpeciesCount = Math.max(0, (state.stats.caughtSpeciesCount || 0) - 1);
+                         }
                      }
                  }
              }
@@ -402,6 +408,9 @@ window.cheatProgressChallenge = function(targetAreaId) {
         for (let i = 0; i < len; i++) {
              if (count >= 150) break;
              let p = state.config.pokemonData[i];
+             if (!state.stats.caughtSpecies[p.name]) {
+                 state.stats.caughtSpeciesCount = (state.stats.caughtSpeciesCount || 0) + 1;
+             }
              state.stats.caughtSpecies[p.name] = 1;
              count++;
         }
@@ -440,7 +449,12 @@ window.cheatProgressChallenge = function(targetAreaId) {
         }
         if (req.catchSpecies) {
             if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
-            req.catchSpecies.forEach(r => state.stats.caughtSpecies[r.species] = (state.stats.caughtSpecies[r.species] || 0) + r.count);
+            req.catchSpecies.forEach(r => {
+                if (!state.stats.caughtSpecies[r.species]) {
+                    state.stats.caughtSpeciesCount = (state.stats.caughtSpeciesCount || 0) + 1;
+                }
+                state.stats.caughtSpecies[r.species] = (state.stats.caughtSpecies[r.species] || 0) + r.count;
+            });
         }
         if (req.catchSpeciesByRarity) {
             if (!state.stats.challengeCaughtSpecific) state.stats.challengeCaughtSpecific = {};
@@ -461,10 +475,16 @@ window.cheatProgressChallenge = function(targetAreaId) {
             if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
             if (req.catchEachFromSlotMachine.machines) {
                 req.catchEachFromSlotMachine.machines.forEach(m => {
+                    if (!state.stats.caughtSpecies[m[0]]) {
+                        state.stats.caughtSpeciesCount = (state.stats.caughtSpeciesCount || 0) + 1;
+                    }
                     state.stats.caughtSpecies[m[0]] = (state.stats.caughtSpecies[m[0]] || 0) + 1;
                 });
             } else if (req.catchEachFromSlotMachine.speciesList) {
                 req.catchEachFromSlotMachine.speciesList.forEach(s => {
+                    if (!state.stats.caughtSpecies[s]) {
+                        state.stats.caughtSpeciesCount = (state.stats.caughtSpeciesCount || 0) + 1;
+                    }
                     state.stats.caughtSpecies[s] = (state.stats.caughtSpecies[s] || 0) + 1;
                 });
             }
@@ -560,7 +580,7 @@ window.showChallengesModal = function() {
     }
 
     if (hasActive150Challenge) {
-        let uniqueSpeciesCaught = state.stats.caughtSpecies ? Object.keys(state.stats.caughtSpecies).length : 0;
+        let uniqueSpeciesCaught = (state.stats.caughtSpeciesCount || 0);
         let isMet = uniqueSpeciesCaught >= 150;
         let displayName = "The 150 Challenge";
         let rewardsStr = "Mythical and Legendary Spot";
@@ -970,7 +990,7 @@ window.getOakTaskAvailableCount = function() {
     // Final
     let finalTier = state.stats.finalTaskTier || 0;
     if (finalTier < oakTasks.final.length) {
-        let currentSpeciesCount = state.stats.caughtSpecies ? Object.keys(state.stats.caughtSpecies).length : 0;
+        let currentSpeciesCount = (state.stats.caughtSpeciesCount || 0);
         let totalSpecies = state.config.pokemonData.length;
         if (currentSpeciesCount >= totalSpecies) count++;
     }
@@ -1216,7 +1236,7 @@ window.showOakLabModal = function() {
 
     // Final Card
     let finalTier = state.stats.finalTaskTier || 0;
-    let finalCurrentVal = state.stats.caughtSpecies ? Object.keys(state.stats.caughtSpecies).length : 0;
+    let finalCurrentVal = (state.stats.caughtSpeciesCount || 0);
     if (finalTier >= oakTasks.final.length && oakTasks.final.length > 0) {
         finalCurrentVal = state.config.pokemonData.length;
     }
@@ -1997,6 +2017,13 @@ async function init() {
                     };
                     deepMerge(state, pData);
 
+                    // Initialize caughtSpeciesCount for older saves
+                    if (state.stats && state.stats.caughtSpecies) {
+                        state.stats.caughtSpeciesCount = Object.keys(state.stats.caughtSpecies).length;
+                    } else if (state.stats) {
+                        state.stats.caughtSpeciesCount = 0;
+                    }
+
                     // Migrate old save data to new globalStats structure
                     if (pData.stats) {
                         if (pData.stats.playtime !== undefined) state.globalStats.playtime = pData.stats.playtime;
@@ -2476,7 +2503,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
         if (tab === 'statistics') {
             let uniqueSpeciesCaught = 0;
             if (state.stats.caughtSpecies) {
-                uniqueSpeciesCaught = Object.keys(state.stats.caughtSpecies).length;
+                uniqueSpeciesCaught = (state.stats.caughtSpeciesCount || 0);
             }
 
             let playtimeStr = "0h 0m 0s";
