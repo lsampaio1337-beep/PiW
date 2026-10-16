@@ -3,7 +3,8 @@
 function calculateHP(baseHp, ivHp, level, quality, vitamins = 0) {
     // HP = floor(((2 * BaseHP + IV_HP) * Level / 100 + Level + 10) * Q)
     const baseFinal = Math.floor((((2 * baseHp + ivHp) * level / 100) + level + 10) * quality);
-    return baseFinal + Math.floor(baseFinal * (vitamins / 100));
+    const totalHP = baseFinal + Math.floor(baseFinal * (vitamins / 100));
+    return Math.max(1, totalHP);
 }
 
 function calculateStat(baseStat, ivStat, level, quality, vitamins = 0) {
