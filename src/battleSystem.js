@@ -340,7 +340,7 @@ class BattleSystem {
             const defStat = isPhysical ? defender.currentStats.def : defender.currentStats.spd;
             const eff = this.getTypeEffectiveness(move.type, defender.types);
 
-            const hit = mathEngine.calculateDamage(attacker.level, move.power, atkStat, defStat, eff, attacker.quality);
+            const hit = mathEngine.calculateDamage(attacker.level, move.power, atkStat, defStat, eff);
 
             const targetSide = attacker === this.state.party[0] ? 'enemy' : 'player';
             const animDuration = 500 / this.state.settings.gameSpeed;
@@ -1019,7 +1019,7 @@ class BattleSystem {
         const defStat = isPhysical ? defender.currentStats.def : defender.currentStats.spd;
         const eff = this.getTypeEffectiveness(move.type, defender.types);
 
-        const hit = mathEngine.calculateDamage(attacker.level, move.power, atkStat, defStat, eff, attacker.quality);
+        const hit = mathEngine.calculateDamage(attacker.level, move.power, atkStat, defStat, eff);
 
         const targetSide = attacker === leader ? 'enemy' : 'player';
         const animDuration = 500 / this.state.settings.gameSpeed;
@@ -2085,7 +2085,7 @@ class BattleSystem {
                 const defStat = isPhysical ? defender.currentStats.def : defender.currentStats.spd;
                 const eff = this.getTypeEffectiveness(move.type, defender.types);
 
-                const hit = mathEngine.calculateDamage(attacker.level, move.power, atkStat, defStat, eff, attacker.quality);
+                const hit = mathEngine.calculateDamage(attacker.level, move.power, atkStat, defStat, eff);
                 defender.currentHp -= hit.damage;
 
                 return false; // Not a potion, just an attack
