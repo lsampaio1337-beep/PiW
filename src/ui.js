@@ -2751,7 +2751,18 @@ window.openMultiplayerModal = openMultiplayerModal;
 
 
 // Ensure the UI script runs
-init();
+init().catch(err => {
+    console.error("Initialization error:", err);
+    // Fallback to force error display onto the screen
+    document.body.style.backgroundColor = '#1e1e1e';
+    document.body.innerHTML = `
+        <div style="color: red; padding: 20px; font-family: monospace; z-index: 999999; position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: auto; background: rgba(0,0,0,0.9);">
+            <h2>Fatal Initialization Error</h2>
+            <p>${err.message}</p>
+            <pre style="white-space: pre-wrap;">${err.stack}</pre>
+        </div>
+    `;
+});
 
 
 window.showGameAlert = function(message, attachToElementId = null) {
