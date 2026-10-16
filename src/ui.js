@@ -1343,24 +1343,12 @@ export function switchView(viewName) {
 
         const introText = document.getElementById('daycare-intro-text');
         if (introText) {
-            introText.innerHTML = ''; // Clear existing content
-
-            const p1 = document.createElement('p');
-            p1.textContent = 'Now you are able to use Daycare!';
-
-            const p2 = document.createElement('p');
-            p2.textContent = 'You can adjust pokemon on daycare here or directly in your backpack.';
-
-            const p3 = document.createElement('p');
-            p3.textContent = `In order to Breed, you need 2 Pokémons with the same Quality Value. They will generate an egg that will hatch after ${Number(breedBattles)} fights. You can drag 2 Pokémons to the Breed Spot or you can click on Breed Spot to automatically filter Pokémons that can be inserted there. The egg will hatch and the Pokémon will have an increased Quality Value of a random number between 0 and 0.1 to a maximum of 1.99, keeping the highest SumIV of both parents. Remember that the process can’t be interrupted.`;
-
-            const p4 = document.createElement('p');
-            p4.textContent = `To Train, you just need to insert the desired Pokémon in the Train Spot. It will train its SumIV and it will gain +1 point in it every ${Number(trainBattles)} fights.`;
-
-            introText.appendChild(p1);
-            introText.appendChild(p2);
-            introText.appendChild(p3);
-            introText.appendChild(p4);
+            introText.innerHTML = `
+                <p>Now you are able to use Daycare!</p>
+                <p>You can adjust pokemon on daycare here or directly in your backpack.</p>
+                <p>In order to Breed, you need 2 Pokémons with the same Quality Value. They will generate an egg that will hatch after ${breedBattles} fights. You can drag 2 Pokémons to the Breed Spot or you can click on Breed Spot to automatically filter Pokémons that can be inserted there. The egg will hatch and the Pokémon will have an increased Quality Value of a random number between 0 and 0.1 to a maximum of 1.99, keeping the highest SumIV of both parents. Remember that the process can’t be interrupted.</p>
+                <p>To Train, you just need to insert the desired Pokémon in the Train Spot. It will train its SumIV and it will gain +1 point in it every ${trainBattles} fights.</p>
+            `;
         }
 
         const trainBtn = document.getElementById('btn-daycare-train');
