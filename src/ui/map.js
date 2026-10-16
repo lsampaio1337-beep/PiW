@@ -2,16 +2,6 @@ import { state, globals, swapRegion, checkFinalChallengeCompleted } from '../sta
 import { updateUI, switchView } from '../ui.js';
 import { setupMarket } from './market.js';
 
-function escapeHTML(str) {
-    if (!str) return '';
-    return String(str)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
-}
-
 const parseAreaNames = (id) => {
     let result = [];
     if (id.includes(",")) {
@@ -134,8 +124,8 @@ function generateMarkerHtml(locationId, locationName, coords, isUnlocked, hasNew
     }
 
     let markerClass = hasNewNotification ? 'map-marker pulse-marker' : 'map-marker';
-    let safeLocationName = escapeHTML(locationName);
-    let jsLocationName = locationName.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+    let safeLocationName = locationName.replace(/'/g, "&#39;");
+    let jsLocationName = locationName.replace(/'/g, "\\'");
 
     return `
         <div class="${markerClass}"
@@ -647,8 +637,7 @@ export function navigateToLocation(locationName) {
         let buttonHtml = '';
         if (gymConfig) {
             let buttonText = lookupName === "Indigo Plateau" ? "Challenge" : "Battle Gym";
-            let jsLookupName = lookupName.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
-            buttonHtml = `<button onclick="window.startGymBattle('${jsLookupName}')" class="action-btn action-btn-primary" style="margin-top: 10px;">${escapeHTML(buttonText)}</button>`;
+            buttonHtml = `<button onclick="window.startGymBattle('${lookupName}')" class="action-btn action-btn-primary" style="margin-top: 10px;">${buttonText}</button>`;
         }
 
         let dynamicBgHtml = '';
@@ -678,7 +667,7 @@ export function navigateToLocation(locationName) {
         vGym.innerHTML = `
             ${dynamicBgHtml}
             <div style="background-color: rgba(0,0,0,0.8); display: flex; flex-direction: column; align-items: center; padding: 20px; border-radius: 8px; position: absolute; left: 15%; top: 50%; transform: translateY(-50%); min-width: 300px; z-index: 1;">
-                <h2 id="gym-title-header" style="margin-top: 0; color: white;">${escapeHTML(locationName)}</h2>
+                <h2 id="gym-title-header" style="margin-top: 0; color: white;">${locationName}</h2>
                 <div id="gym-content-area" style="position: relative; width: 100%; text-align: center; display: flex; flex-direction: column; gap: 10px; align-items: center; z-index: 2;">
                     ${buttonHtml}
                 </div>
@@ -733,7 +722,7 @@ export function showMapTooltip(e, locationName) {
     tooltip.style.padding = padding + 'px';
     tooltip.style.borderRadius = borderRadius + 'px';
 
-    let info = `<strong>${escapeHTML(locationName)}</strong><br>`;
+    let info = `<strong>${locationName}</strong><br>`;
 
     // Fetch info to show on tooltip
     if (locationName.includes("Gym") || locationName === "Indigo Plateau") {
@@ -742,7 +731,7 @@ export function showMapTooltip(e, locationName) {
         if (state.config.gyms) {
             const gym = state.config.gyms.find(g => g.name === lookupName);
             if (gym) {
-                info += `Leader: ${escapeHTML(gym.leader)}<br>`;
+                info += `Leader: ${gym.leader}<br>`;
                 info += `Trainers: ${gym.trainers.length - 1}<br>`;
             }
         }
@@ -766,7 +755,7 @@ export function showMapTooltip(e, locationName) {
                     const pd = state.config.pokemonData[s.pokemonId - 1]; // Use O(1) lookup
                     if (pd) pName = pd.name;
                 }
-                info += `- ${escapeHTML(pName)} (Lvl: ${s.minLevel}-${s.maxLevel}, ${Math.round(s.chance * 100)}%)<br>`;
+                info += `- ${pName} (Lvl: ${s.minLevel}-${s.maxLevel}, ${Math.round(s.chance * 100)}%)<br>`;
             });
         } else {
             info += `Hub Area<br>`;
