@@ -438,10 +438,11 @@ export function navigateToLocation(locationName) {
              if (battleSystem.gymState) battleSystem.gymState.isActive = false;
         }
         switchView("GENERIC_LAB");
-    } else if (locationName === "Safari Zone") {
+    } else if (["Safari Zone", "Kanto Safari Zone"].includes(locationName)) {
         if (battleSystem) {
             battleSystem.stop();
         }
+        window.currentSafariZone = locationName;
         switchView("SAFARI_HUB");
         const msg = document.getElementById("safari-welcome-msg");
         if (msg) {
