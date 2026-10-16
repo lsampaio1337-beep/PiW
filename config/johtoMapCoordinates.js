@@ -199,11 +199,6 @@ const johtoMapCoordinates = {
     "x": 35.94,
     "y": 37.92
   },
-  "mt_silver": {
-    "name": "Mt. Silver",
-    "x": 54.24,
-    "y": 44.86
-  },
   "viridian_forest": {
     "name": "Viridian Forest",
     "x": 67.46,
@@ -304,20 +299,40 @@ const johtoMapCoordinates = {
     "x": 87.43,
     "y": 37.92
   },
-  "legendaries_nest": {
-    "name": "Legendaries Nest",
-    "x": 63.8,
-    "y": 38.25
+  "red": {
+    "name": "Red",
+    "x": 59.2,
+    "y": 27.58
   },
-  "mythical_and_legendaries_spot": {
-    "name": "Mythical and Legendaries Spot",
-    "x": 56.59,
-    "y": 38.25
+  "mount_silver": {
+    "name": "Mount Silver",
+    "x": 60,
+    "y": 37.61
+  },
+  "victory_road": {
+    "name": "Victory Road",
+    "x": 60.07,
+    "y": 47.19
   },
   "indigo_plateau": {
     "name": "Indigo Plateau",
-    "x": 59.13,
-    "y": 27.1
+    "x": 54.4,
+    "y": 48.25
+  },
+  "legendaries_nest": {
+    "name": "Legendaries Nest",
+    "x": 63.93,
+    "y": 34.57
+  },
+  "mythical_and_legendaries_spot": {
+    "name": "Mythical and Legendaries Spot",
+    "x": 55.8,
+    "y": 34.57
+  },
+  "battle_stadium": {
+    "name": "Battle Stadium",
+    "x": 68.87,
+    "y": 61.02
   }
 };
 export default johtoMapCoordinates;
