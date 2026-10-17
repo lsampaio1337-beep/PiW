@@ -266,6 +266,11 @@ window.badgeMapping = {
 };
 
 window.getBadgeFileName = function(region, number) {
+    if (region === 'Johto' && number > 8) {
+        region = 'Kanto';
+        number = number - 8;
+    }
+
     if (window.badgeMapping[region] && window.badgeMapping[region][number]) {
         return window.badgeMapping[region][number];
     }
