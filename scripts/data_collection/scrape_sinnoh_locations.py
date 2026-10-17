@@ -27,7 +27,6 @@ def fetch_sinnoh_routes():
                         'url': POKEMONDB_BASE_URL + link.get('href')
                     })
 
-    # Define standard progression order for Sinnoh
     order_list = [
         "Twinleaf Town", "Route 201", "Lake Verity", "Route 202", "Jubilife City",
         "Route 204", "Ravaged Path", "Route 203", "Oreburgh Gate", "Oreburgh City",
@@ -78,7 +77,6 @@ def fetch_sinnoh_routes():
 
 
 def fetch_platinum_dex():
-    """Fetch the expanded Platinum regional Pokedex to map Pokemon to Regional IDs (1-210)"""
     res = requests.get(f"{POKEMONDB_BASE_URL}/pokedex/game/platinum", headers=HEADERS)
     soup = BeautifulSoup(res.text, 'html.parser')
     dex = {}
@@ -126,94 +124,129 @@ def parse_location(url, route_name, progress_order, plat_dex):
     raw_encounters = []
 
     for table in tables:
-        tbody = table.find('tbody')
-        if not tbody: continue
+        # Check all tbodies (some methods are separated by tbodies in the same table)
+        tbodies = table.find_all('tbody')
+        if not tbodies: continue
 
-        first_tr = tbody.find('tr')
-        if not first_tr: continue
-        first_tds = first_tr.find_all('td')
-        if len(first_tds) < 2: continue
-
-        games_col = first_tds[1]
-        icons = games_col.find_all('span', class_='igame')
-        first_games = [ic.text for ic in icons]
-        if not first_games:
-            first_games = games_col.text.split()
-
-        if set(first_games).intersection({'BD', 'SP'}) and not set(first_games).intersection({'D', 'P', 'Pt'}):
-            continue
-
-        method = "Walking" # Default
-        prev = table.find_previous_sibling(['h2', 'h3', 'h4'])
-        if prev:
-            text = prev.text.strip()
-            if 'Generation' not in text:
-                method = text
-
+        # Pokemon DB usually defines columns in thead. Let's find columns.
         ths = table.find('thead').find_all('th') if table.find('thead') else table.find_all('th')
         col_names = [th.text.strip() for th in ths]
 
         poke_idx = col_names.index('Pokémon') if 'Pokémon' in col_names else -1
         games_idx = col_names.index('Games') if 'Games' in col_names else -1
         rarity_idx = col_names.index('Rarity') if 'Rarity' in col_names else -1
+        levels_idx = col_names.index('Levels') if 'Levels' in col_names else -1
 
         if poke_idx == -1: continue
 
-        for tr in tbody.find_all('tr'):
-            tds = tr.find_all('td')
-            if len(tds) <= max(poke_idx, games_idx, rarity_idx) if rarity_idx > -1 else poke_idx: continue
+        method_from_heading = "Walking" # Default
+        prev = table.find_previous_sibling(['h2', 'h3', 'h4'])
+        if prev:
+            text = prev.text.strip()
+            if 'Generation' not in text:
+                method_from_heading = text
 
-            poke_node = tds[poke_idx].find('a', class_='ent-name')
-            if not poke_node: continue
-            poke_name = poke_node.text.strip()
+        for tbody in tbodies:
+            # Check for sub-header in the first row of tbody
+            first_tr = tbody.find('tr')
+            if not first_tr: continue
 
-            row_games = []
-            if games_idx > -1:
-                row_icons = tds[games_idx].find_all('span', class_='igame')
-                if row_icons:
-                    row_games = [ic.text for ic in row_icons]
-                else:
-                    row_games = tds[games_idx].text.split()
+            sub_method = method_from_heading
+            th = first_tr.find('th')
+            if th and th.get('colspan'):
+                # it's a sub-header defining method!
+                sub_method_text = th.text.strip()
+                if sub_method_text and sub_method_text != "Pokémon FireRed in GBA slot":
+                   sub_method = sub_method_text
+                elif sub_method_text == "Pokémon FireRed in GBA slot":
+                   sub_method = "Dual-slot"
 
-            row_gen4 = set(row_games).intersection({'D', 'P', 'Pt'})
-            if not row_gen4: continue
+            for tr in tbody.find_all('tr'):
+                tds = tr.find_all('td')
+                if not tds: continue
+                # We expect enough columns
+                if len(tds) <= max(poke_idx, games_idx, rarity_idx if rarity_idx > -1 else 0): continue
 
-            row_method = method
-            for i, col in enumerate(col_names):
-                if i >= len(tds): continue
-                val = tds[i].text.strip()
-                if val:
-                    if col == 'Swarm': row_method = 'Swarm'
-                    elif 'GBA' in col or 'slot' in col.lower(): row_method = 'Dual-slot'
-                    elif 'Radar' in col: row_method = 'Poké Radar'
+                poke_node = tds[poke_idx].find('a', class_='ent-name')
+                if not poke_node: continue
+                poke_name = poke_node.text.strip()
 
-            small = tds[poke_idx].find('small')
-            if small:
-                extra = small.text.strip()
-                if 'Swarm' in extra: row_method = 'Swarm'
-                elif 'Radar' in extra or 'Poké Radar' in extra: row_method = 'Poké Radar'
-                elif 'GBA' in extra or 'slot' in extra: row_method = 'Dual-slot'
+                row_games = []
+                if games_idx > -1:
+                    row_icons = tds[games_idx].find_all('span', class_='igame')
+                    if row_icons:
+                        row_games = [ic.text for ic in row_icons]
+                    else:
+                        row_games = tds[games_idx].text.split()
 
-            if 'Details' in col_names:
-                det_idx = col_names.index('Details')
-                if det_idx < len(tds):
-                    det_text = tds[det_idx].text.strip()
-                    if 'Starter' in det_text or 'Gift' in det_text or 'Fossil' in det_text:
-                        row_method = 'Gift/Event/Fossil'
+                row_gen4 = set(row_games).intersection({'D', 'P', 'Pt'})
+                if not row_gen4: continue
 
-            rate = 100.0
-            if rarity_idx > -1:
-                rate_text = tds[rarity_idx].text.strip()
-                rates = [float(r.replace('%', '').strip()) for r in rate_text.split('/') if r.replace('%', '').strip().replace('.','',1).isdigit()]
-                if rates:
-                    rate = sum(rates) / len(rates)
+                row_method = sub_method
+                for i, col in enumerate(col_names):
+                    if i >= len(tds): continue
+                    val = tds[i].text.strip()
+                    if val:
+                        if col == 'Swarm': row_method = 'Swarm'
+                        elif 'GBA' in col or 'slot' in col.lower(): row_method = 'Dual-slot'
+                        elif 'Radar' in col: row_method = 'Poké Radar'
 
-            raw_encounters.append({
-                'pokemon': poke_name,
-                'method': row_method,
-                'rate': rate,
-                'games': list(row_gen4)
-            })
+                small = tds[poke_idx].find('small')
+                if small:
+                    extra = small.text.strip()
+                    if 'Swarm' in extra: row_method = 'Swarm'
+                    elif 'Radar' in extra or 'Poké Radar' in extra: row_method = 'Poké Radar'
+                    elif 'GBA' in extra or 'slot' in extra: row_method = 'Dual-slot'
+
+                if 'Details' in col_names:
+                    det_idx = col_names.index('Details')
+                    if det_idx < len(tds):
+                        det_text = tds[det_idx].text.strip()
+                        if 'Starter' in det_text or 'Gift' in det_text or 'Fossil' in det_text:
+                            row_method = 'Gift/Event/Fossil'
+
+                rate = 100.0
+                rate_found = False
+                for td in tds:
+                    # Rarity text might be like 10%
+                    if '%' in td.text:
+                        rate_text = td.text.strip()
+                        rates = [float(r.replace('%', '').strip()) for r in rate_text.split('/') if r.replace('%', '').strip().replace('.','',1).isdigit()]
+                        if rates:
+                            rate = sum(rates) / len(rates)
+                            rate_found = True
+                            break
+
+                if not rate_found:
+                    # Look for rarity icons
+                    for td in tds:
+                        imgs = td.find_all('img')
+                        for img in imgs:
+                            alt = img.get('alt', '').lower()
+                            if alt in ['common', 'uncommon', 'rare', 'very rare']:
+                                if alt == 'common': rate = 50.0
+                                elif alt == 'uncommon': rate = 20.0
+                                elif alt == 'rare': rate = 5.0
+                                elif alt == 'very rare': rate = 1.0
+                                rate_found = True
+                                break
+                        if rate_found:
+                            break
+
+                # Extract level
+                level = ""
+                for td in tds:
+                    if td.get('class') and 'cell-num' in td.get('class'):
+                        level = td.text.strip()
+                        break
+
+                raw_encounters.append({
+                    'pokemon': poke_name,
+                    'method': row_method,
+                    'rate': rate,
+                    'games': list(row_gen4),
+                    'level': level
+                })
 
     grouped = defaultdict(list)
     for enc in raw_encounters:
@@ -224,6 +257,32 @@ def parse_location(url, route_name, progress_order, plat_dex):
         total_rate = sum(item['rate'] for item in items)
         avg_rate = total_rate / len(items)
 
+        # Merge levels (e.g., if DP is "2-3" and Pt is "3-4", combine them)
+        levels_set = set()
+        for i in items:
+            if i['level']:
+                for p in i['level'].split(','):
+                    levels_set.add(p.strip())
+
+        # Extract all numbers to find min and max if there are ranges
+        all_nums = []
+        for l in levels_set:
+            parts = l.split('-')
+            for p in parts:
+                if p.isdigit():
+                    all_nums.append(int(p))
+
+        if len(all_nums) > 0:
+            min_l = min(all_nums)
+            max_l = max(all_nums)
+            if min_l == max_l:
+                merged_level = str(min_l)
+            else:
+                merged_level = f"{min_l}-{max_l}"
+        else:
+            merged_level = ", ".join(sorted(list(levels_set)))
+
+
         regional_id = plat_dex.get(poke, "")
 
         merged_encounters.append({
@@ -232,7 +291,8 @@ def parse_location(url, route_name, progress_order, plat_dex):
             'Pokemon ID Regional': regional_id,
             'Pokemon Name': poke,
             'Method': method,
-            'Rate': avg_rate
+            'Rate': avg_rate,
+            'Level': merged_level
         })
 
     method_groups = defaultdict(list)
@@ -253,6 +313,7 @@ def parse_location(url, route_name, progress_order, plat_dex):
 
     return final_encounters
 
+
 def main():
     print("Fetching Sinnoh Routes...")
     routes = fetch_sinnoh_routes()
@@ -266,7 +327,7 @@ def main():
         time.sleep(0.1) # Be nice to the server
 
     df = pd.DataFrame(all_data)
-    cols = ['Progress Order', 'Route / Place', 'Pokemon ID Regional', 'Pokemon Name', 'Method', '% of appearance']
+    cols = ['Progress Order', 'Route / Place', 'Pokemon ID Regional', 'Pokemon Name', 'Method', 'Level', '% of appearance']
     df = df[cols]
 
     output_file = 'Sinnoh_Location_Data.xlsx'
