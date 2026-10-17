@@ -1933,7 +1933,8 @@ export const johtoUnlocks = [
     "areaId": "Goldenrod Gym",
     "unlocks": [
       "Route 35",
-      "Extra Challenge (Roaming)"
+      "Extra Challenge (Roaming)",
+      "Challenge 13"
     ],
     "requirements": {
       "earnBadge": {
