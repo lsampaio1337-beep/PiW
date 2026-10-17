@@ -3,21 +3,23 @@ import { showModal } from '../ui.js';
 const helpContent = {
     "Core Mechanics": {
         "Stats & Formulas": {
-            "Stat Calculations": `
+            "HP Calculation": `
                 <h3>HP Calculation</h3>
                 <p>HP determines how much damage a Pokémon can take before fainting. It is calculated as:</p>
                 <ul>
                     <li><strong>Formula</strong>: <code>Math.floor(0.01 * (2 * BaseHP + IV) * Level) + Level + 10</code></li>
                     <li>The result is then multiplied by the Pokémon's <strong>Quality Multiplier</strong>.</li>
                 </ul>
-                <h3>Other Stats (ATK, DEF, SPA, SPD, SPE)</h3>
+            `,
+            "Other Stats (ATK, DEF, SPA, SPD, SPE)": `
+                <h3>Other Stats</h3>
                 <p>These stats control damage dealt, damage mitigated, and combat delay.</p>
                 <ul>
                     <li><strong>Formula</strong>: <code>Math.floor(0.01 * (2 * BaseStat + IV) * Level) + 5</code></li>
                     <li>The result is then multiplied by the <strong>Quality Multiplier</strong>.</li>
                 </ul>
             `,
-            "Combat Damage": `
+            "Damage Formula": `
                 <h3>Damage Formula</h3>
                 <p>Damage scaling depends on whether an attack is Physical (ATK vs DEF) or Special (SPA vs SPD).</p>
                 <ul>
@@ -28,18 +30,18 @@ const helpContent = {
                 </ul>
                 <p><em>Critical Hits</em>: There is a base 4% chance to strike a critical hit, which multiplies final damage by 1.5x.</p>
             `,
-            "Turn Speed": `
+            "Combat Speed & Delay": `
                 <h3>Combat Delay Calculations</h3>
                 <p>Actions operate on a cooldown timer governed by Speed (SPE).</p>
                 <ul>
-                    <li><strong>Attack Delay</strong>: Base 2.0 seconds. Reduced significantly by higher Speed stats.</li>
-                    <li><strong>Encounter Transition Delay</strong>: Base 3.0 seconds. Reduced by the active Pokémon's Speed.</li>
+                    <li><strong>Attack Delay</strong>: Base 2.0 seconds. Reduced significantly by higher Speed stats. Formula: <code>100 / (Speed + 50)</code></li>
+                    <li><strong>Encounter Transition Delay</strong>: Base 3.0 seconds. Reduced by the active Pokémon's Speed. Formula: <code>2.0 * (100 / (Speed + 50))</code></li>
                 </ul>
                 <p>Faster Pokémon attack more frequently and transition between wild encounters much faster, heavily increasing XP and item rates over time.</p>
             `
         },
         "Experience System": {
-            "Gaining XP": `
+            "EVXP Calculation": `
                 <h3>EVXP Calculation</h3>
                 <p>Defeating a wild Pokémon grants EVXP (Effort Value Experience).</p>
                 <ul>
@@ -47,9 +49,11 @@ const helpContent = {
                     <li><strong>Multipliers</strong>: Multiplied by the defeated Pokémon's Quality and IV scaling.</li>
                     <li><strong>Boosts</strong>: Increased globally by your Professor Oak Task Tier and active Purple Candies.</li>
                 </ul>
+            `,
+            "Leveling Requirements": `
                 <h3>Leveling Requirements</h3>
                 <p>The required XP to reach the next level grows exponentially: <code>100 * (Next Level ^ 2)</code>.</p>
-                <p>The maximum level cap for any Pokémon is 100.</p>
+                <p>The maximum level cap for any Pokémon is 100. However, extra XP can still be gathered for rankings and stats.</p>
             `
         }
     },
@@ -63,6 +67,8 @@ const helpContent = {
                     <li>High quality (e.g., Shiny, Epic) and high IV Pokémon heavily penalize the catch rate.</li>
                     <li>The absolute minimum Base Chance is always clamped to 1%.</li>
                 </ul>
+            `,
+            "Catch Multipliers": `
                 <h3>Multipliers</h3>
                 <p>Once the base chance is determined, it is modified by:</p>
                 <ul>
@@ -72,7 +78,7 @@ const helpContent = {
                     <li><strong>Shiny Grace</strong>: Shiny Pokémon receive an automatic catch rate multiplier to prevent accidental losses.</li>
                 </ul>
             `,
-            "Pokéballs": `
+            "Available Pokéballs": `
                 <h3>Available Balls</h3>
                 <ul>
                     <li><strong>Pokéball ($2)</strong>: Standard catching tool. 1.0x modifier.</li>
@@ -108,7 +114,7 @@ const helpContent = {
     },
     "Items & Economy": {
         "Currency & Wealth": {
-            "EVM System": `
+            "Earning EVM": `
                 <h3>Earning Money</h3>
                 <p>EVM (Effort Value Money) is the primary currency. It is dropped by defeating wild Pokémon.</p>
                 <ul>
@@ -116,7 +122,7 @@ const helpContent = {
                     <li><strong>Boosts</strong>: Multiply your final EVM drops by using Green Candies.</li>
                 </ul>
             `,
-            "Market Economics": `
+            "Selling & Market": `
                 <h3>Selling Pokémon</h3>
                 <p>Selling Pokémon is a massive source of income in the mid-to-late game.</p>
                 <ul>
@@ -129,7 +135,7 @@ const helpContent = {
         "Consumables": {
             "Potions": `
                 <h3>Healing</h3>
-                <p>Potions restore missing HP to your active or benched Pokémon.</p>
+                <p>Potions restore missing HP to your active or benched Pokémon. They can be bought at the Market or found as loot.</p>
                 <ul>
                     <li><strong>Tiny Potion ($3)</strong>: Restores 25 HP.</li>
                     <li><strong>Small Potion ($25)</strong>: Restores 100 HP.</li>
@@ -142,7 +148,7 @@ const helpContent = {
             `,
             "Candies": `
                 <h3>Permanent Passive Boosts</h3>
-                <p>Candies provide global, permanent account buffs when consumed.</p>
+                <p>Candies provide global, permanent account buffs when consumed. They are accessed via the Bonus Candy icon.</p>
                 <ul>
                     <li><strong>White Candy</strong>: A currency candy earned passively every 250 wild defeats. Can be traded to the Professor for other colored candies.</li>
                     <li><strong>Green Candy</strong>: Boosts Wealth/Loot Probability by +3% per candy.</li>
@@ -197,7 +203,7 @@ const helpContent = {
         "Offline Mechanics": {
             "Idle Simulation": `
                 <h3>How It Works</h3>
-                <p>ZzZ Mode allows your game to play itself while the application is closed.</p>
+                <p>ZzZ Mode allows your game to play itself while the application is closed or while you step away.</p>
                 <ul>
                     <li><strong>Grains</strong>: Requires Jigglypuff Grains. 1 Grain = 1 Minute of offline time. Grains are earned passively by keeping the game open (1 per active minute).</li>
                     <li><strong>Simulation Integrity</strong>: The offline engine mathematically perfectly simulates the exact same combat formulas, speed delays, catch rates, and RNG rolls as the live game. It simply removes the visual rendering to process hours of gameplay in milliseconds.</li>
@@ -210,6 +216,129 @@ const helpContent = {
                     <li>You run out of Jigglypuff Grains (Maximum time reached).</li>
                     <li>Your entire active party faints due to lack of potions or tough enemies.</li>
                     <li>You run out of funds while simulating a fee-based zone like the Casino.</li>
+                </ul>
+            `
+        }
+    },
+    "UI Navigation Icons": {
+        "Core Screens": {
+            "Main View <img src='Assets/Extra/IconMainView.png' style='height: 20px; vertical-align: middle;'>": `
+                <h3>Main View</h3>
+                <p>The core gameplay screen where active combat and encounters take place.</p>
+                <ul>
+                    <li>Watch your active Pokémon battle wild spawns.</li>
+                    <li>View real-time damage, health bars, and combat logs.</li>
+                    <li>Access quick catch options and run mechanics.</li>
+                </ul>
+            `,
+            "Team <img src='Assets/Extra/IconTeam.png' style='height: 20px; vertical-align: middle;'>": `
+                <h3>Team (Party)</h3>
+                <p>Manage your active party of up to 6 Pokémon.</p>
+                <ul>
+                    <li>View stats, moves, and held items.</li>
+                    <li>Heal individual Pokémon or use max potions.</li>
+                    <li>Rearrange party order. The first conscious Pokémon will be sent into battle.</li>
+                </ul>
+            `,
+            "Map <img src='Assets/Extra/IconMap.png' style='height: 20px; vertical-align: middle;'>": `
+                <h3>Map</h3>
+                <p>Navigate the world of Pokémon.</p>
+                <ul>
+                    <li>Travel between Routes, Cities, and special zones (Safari, Casino).</li>
+                    <li>View Gym locations and challenge Gym Leaders.</li>
+                    <li>Areas are unlocked by completing Progress Challenges.</li>
+                </ul>
+            `,
+            "Backpack <img src='Assets/Extra/IconBackpack.png' style='height: 20px; vertical-align: middle;'>": `
+                <h3>Backpack (Inventory)</h3>
+                <p>Store and manage your items and captured Pokémon.</p>
+                <ul>
+                    <li><strong>Items:</strong> View potions, Pokéballs, evolutionary stones, and key items.</li>
+                    <li><strong>PC (Storage):</strong> Access all captured Pokémon not currently in your party. You can filter, sort, and transfer them.</li>
+                </ul>
+            `,
+            "Pokedex <img src='Assets/Extra/IconPokedex.png' style='height: 20px; vertical-align: middle;'>": `
+                <h3>Pokédex & Smart Capture</h3>
+                <p>An encyclopedia of all Pokémon you've seen and caught.</p>
+                <ul>
+                    <li>View base stats, types, and encountered/caught metrics.</li>
+                    <li><strong>Smart Capture:</strong> Configure auto-catch rules based on species, quality, and IVs. You can set it to automatically use specific balls or ignore certain encounters entirely to speed up farming.</li>
+                </ul>
+            `,
+            "Trainer <img src='Assets/Extra/IconTrainer.png' style='height: 20px; vertical-align: middle;'>": `
+                <h3>Trainer Profile</h3>
+                <p>View your personal statistics and achievements.</p>
+                <ul>
+                    <li>Track total encounters, money earned, and overall playtime.</li>
+                    <li>View your current Badge collection.</li>
+                    <li>See your Professor Oak Task Tier and progress towards the next rank.</li>
+                </ul>
+            `
+        },
+        "Features & Progression": {
+            "Bonus Candy <img src='Assets/Extra/BonusCandy.png' style='height: 20px; vertical-align: middle;'>": `
+                <h3>Bonus Candy</h3>
+                <p>The central hub for purchasing and managing your permanent passive buffs.</p>
+                <ul>
+                    <li>Trade in White Candies (earned passively) for Green, Purple, Black Yellow, or Rainbow Candies.</li>
+                    <li>These candies provide global, permanent account buffs when consumed.</li>
+                    <li>See the <strong>Consumables -> Candies</strong> help section for exact buff numbers.</li>
+                </ul>
+            `,
+            "Gift <img src='Assets/Extra/IconGift.png' style='height: 20px; vertical-align: middle;'>": `
+                <h3>Gift (Promocodes)</h3>
+                <p>Claim special rewards and promotional items.</p>
+                <ul>
+                    <li>Enter secret codes provided by the developer or community events to receive free items, money, or rare Pokémon.</li>
+                </ul>
+            `,
+            "Calendar <img src='Assets/Extra/IconCalendar.png' style='height: 20px; vertical-align: middle;'>": `
+                <h3>Daily Calendar</h3>
+                <p>Login rewards and daily bonuses.</p>
+                <ul>
+                    <li>Claim a new reward every real-world day you open the game.</li>
+                    <li>Rewards scale in value the longer your consecutive streak is.</li>
+                    <li>Missing a day resets the streak.</li>
+                </ul>
+            `,
+            "Progress Challenges <img src='Assets/Extra/ProgressChallange.png' style='height: 20px; vertical-align: middle;'>": `
+                <h3>Progress Challenges</h3>
+                <p>Track your current route objectives.</p>
+                <ul>
+                    <li>Displays exactly what you need to do to unlock the next Route or City.</li>
+                    <li>Objectives include defeating X enemies, catching specific Pokémon, or beating a Gym Leader.</li>
+                    <li>Once completed, the next area on the Map becomes accessible.</li>
+                </ul>
+            `,
+            "ZzZ Mode <img src='Assets/Extra/IconSleep.png' style='height: 20px; vertical-align: middle;'>": `
+                <h3>ZzZ Mode (Idle Simulation)</h3>
+                <p>Configure and launch the offline gameplay simulator.</p>
+                <ul>
+                    <li>Spend Jigglypuff Grains to simulate hours of gameplay in seconds.</li>
+                    <li>You must configure your target area and ensure you have enough Potions and Pokéballs before starting.</li>
+                    <li>See the <strong>ZzZ Mode</strong> help section for deeper mechanics.</li>
+                </ul>
+            `
+        },
+        "System Options": {
+            "Help <img src='Assets/Extra/IconHelp.png' style='height: 20px; vertical-align: middle;'>": `
+                <h3>Help</h3>
+                <p>You are here! This comprehensive guide explains all mechanics, formulas, and UI elements.</p>
+            `,
+            "Settings <img src='Assets/Extra/IconSettings.png' style='height: 20px; vertical-align: middle;'>": `
+                <h3>Settings</h3>
+                <p>Customize your game experience.</p>
+                <ul>
+                    <li>Adjust audio volumes (Music, SFX, Cries).</li>
+                    <li>Toggle visual effects and performance options.</li>
+                    <li>Access Save/Load functions or perform a Hard Reset (deletes all data).</li>
+                </ul>
+            `,
+            "Exit <img src='Assets/Extra/IconExit.png' style='height: 20px; vertical-align: middle;'>": `
+                <h3>Exit</h3>
+                <p>Safely save and close the game.</p>
+                <ul>
+                    <li>The game auto-saves frequently, but using the Exit button guarantees a final save is written to disk before closing the application.</li>
                 </ul>
             `
         }
@@ -227,7 +356,7 @@ export function showHelp() {
             sidebarHTML += `<div style="font-weight: bold; color: #bdc3c7; margin-top: 5px; margin-bottom: 3px; margin-left: 10px; font-size: 14px;">${subCategory}</div>`;
 
             for (const [groupName, content] of Object.entries(groups)) {
-                const targetId = `help_content_${majorTopic.replace(/[^a-zA-Z0-9]/g, '_')}_${groupName.replace(/[^a-zA-Z0-9]/g, '_')}`;
+                const targetId = `help_content_${majorTopic.replace(/[^a-zA-Z0-9]/g, '_')}_${subCategory.replace(/[^a-zA-Z0-9]/g, '_')}_${groupName.replace(/[^a-zA-Z0-9]/g, '_')}`;
 
                 const btnBg = isFirst ? '#3498db' : 'transparent';
                 sidebarHTML += `<div class="help-nav-btn" data-target="${targetId}" style="cursor: pointer; padding: 4px; margin-left: 20px; color: white; background-color: ${btnBg}; border-radius: 3px; font-size: 13px; margin-bottom: 2px;" onmouseover="this.style.backgroundColor='#2980b9'" onmouseout="if(!this.classList.contains('active-help-btn')) this.style.backgroundColor='transparent'">${groupName}</div>`;
@@ -243,7 +372,7 @@ export function showHelp() {
     for (const [majorTopic, subCategories] of Object.entries(helpContent)) {
         for (const [subCategory, groups] of Object.entries(subCategories)) {
             for (const [groupName, content] of Object.entries(groups)) {
-                const targetId = `help_content_${majorTopic.replace(/[^a-zA-Z0-9]/g, '_')}_${groupName.replace(/[^a-zA-Z0-9]/g, '_')}`;
+                const targetId = `help_content_${majorTopic.replace(/[^a-zA-Z0-9]/g, '_')}_${subCategory.replace(/[^a-zA-Z0-9]/g, '_')}_${groupName.replace(/[^a-zA-Z0-9]/g, '_')}`;
 
                 const displayStyle = isFirst ? 'block' : 'none';
                 contentHTML += `<div id="${targetId}" class="help-section" style="display: ${displayStyle}; color: white; line-height: 1.6;">
