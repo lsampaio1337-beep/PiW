@@ -165,6 +165,9 @@ export function swapRegion(newRegionName) {
         if (newRegionName === 'Johto') {
             state.regions[newRegionName].currentRoute = 'Route 29';
             state.regions[newRegionName].stats.activeChallenges = ['Route 29'];
+        } else if (newRegionName === 'Hoenn') {
+            state.regions[newRegionName].currentRoute = 'Route 101';
+            state.regions[newRegionName].stats.activeChallenges = ['Route 101'];
         }
     }
 
