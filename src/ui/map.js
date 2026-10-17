@@ -491,7 +491,7 @@ export function navigateToLocation(locationName) {
                 </div>
                 <div style="display: flex; justify-content: space-evenly; align-items: center; width: 100%; height: 100%; padding: 15px; box-sizing: border-box;">
                     <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
-                        <img src="./Assets/Extra/Casino Starter Troupe.png" alt="Starter Troupe" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
+                        <img src="./Assets/Extra/${window.currentMapRegion === 'Johto' ? 'Casino Starter Troupe Johto.png' : 'Casino Starter Troupe.png'}" alt="Starter Troupe" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
                         <div onclick="window.startCasinoEncounter(false, 'Casino - Starter Troupe')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter ($${state.config.balance.casinoPrices?.standard || 75})"></div>
                         <div onclick="window.startCasinoEncounter(true, 'Casino - Starter Troupe')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny ($${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
                     </div>
@@ -500,7 +500,7 @@ export function navigateToLocation(locationName) {
             if (isUnlockedByAreaId('Casino')) {
                 machinesHtml += `
                     <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
-                        <img src="./Assets/Extra/Casino Mid Troupe.png" alt="Mid Troupe" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
+                        <img src="./Assets/Extra/${window.currentMapRegion === 'Johto' ? 'Casino Babies Johto.png' : 'Casino Mid Troupe.png'}" alt="${window.currentMapRegion === 'Johto' ? 'Babies' : 'Mid Troupe'}" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
                         <div onclick="window.startCasinoEncounter(false, 'Casino - Mid Troupe')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter ($${state.config.balance.casinoPrices?.standard || 75})"></div>
                         <div onclick="window.startCasinoEncounter(true, 'Casino - Mid Troupe')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny ($${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
                     </div>
@@ -510,7 +510,7 @@ export function navigateToLocation(locationName) {
             if (isUnlockedByAreaId('Big Fishing Spot')) {
                 machinesHtml += `
                     <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
-                        <img src="./Assets/Extra/Casino Late Troupe.png" alt="Late Troupe" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
+                        <img src="./Assets/Extra/${window.currentMapRegion === 'Johto' ? 'Casino Late Troupe Johto.png' : 'Casino Late Troupe.png'}" alt="Late Troupe" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
                         <div onclick="window.startCasinoEncounter(false, 'Casino - Late Troupe')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter ($${state.config.balance.casinoPrices?.standard || 75})"></div>
                         <div onclick="window.startCasinoEncounter(true, 'Casino - Late Troupe')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny ($${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
                     </div>
@@ -520,7 +520,7 @@ export function navigateToLocation(locationName) {
             if (isUnlockedByAreaId('Small Fishing Spot')) {
                 machinesHtml += `
                     <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
-                        <img src="./Assets/Extra/Casino Eeveelutions.png" alt="Eeveelutions" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
+                        <img src="./Assets/Extra/${window.currentMapRegion === 'Johto' ? 'Casino Eeveelutions Jhoto.png' : 'Casino Eeveelutions.png'}" alt="Eeveelutions" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
                         <div onclick="window.startCasinoEncounter(false, 'Casino - Eeveelutions')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter ($${state.config.balance.casinoPrices?.standard || 75})"></div>
                         <div onclick="window.startCasinoEncounter(true, 'Casino - Eeveelutions')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny ($${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
                     </div>
@@ -530,7 +530,7 @@ export function navigateToLocation(locationName) {
             if (isUnlockedByAreaId('Fighting Dojo')) {
                 machinesHtml += `
                     <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
-                        <img src="./Assets/Extra/Casino Special Spot.png" alt="Special Spot" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
+                        <img src="./Assets/Extra/${window.currentMapRegion === 'Johto' ? 'Casino Special Spot Johto.png' : 'Casino Special Spot.png'}" alt="Special Spot" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
                         <div onclick="window.startCasinoEncounter(false, 'Casino - Special Spot')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter ($${state.config.balance.casinoPrices?.standard || 75})"></div>
                         <div onclick="window.startCasinoEncounter(true, 'Casino - Special Spot')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny ($${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
                     </div>
@@ -553,11 +553,11 @@ export function navigateToLocation(locationName) {
         if(casinoContent) casinoContent.style.display = 'none';
 
         let bgImg = '';
-        if (locationName === 'Casino - Starter Troupe') bgImg = 'Casino Starter Troupe.png';
-        if (locationName === 'Casino - Mid Troupe') bgImg = 'Casino Mid Troupe.png';
-        if (locationName === 'Casino - Late Troupe') bgImg = 'Casino Late Troupe.png';
-        if (locationName === 'Casino - Eeveelutions') bgImg = 'Casino Eeveelutions.png';
-        if (locationName === 'Casino - Special Spot') bgImg = 'Casino Special Spot.png';
+        if (locationName === 'Casino - Starter Troupe') bgImg = window.currentMapRegion === 'Johto' ? 'Casino Starter Troupe Johto.png' : 'Casino Starter Troupe.png';
+        if (locationName === 'Casino - Mid Troupe') bgImg = window.currentMapRegion === 'Johto' ? 'Casino Babies Johto.png' : 'Casino Mid Troupe.png';
+        if (locationName === 'Casino - Late Troupe') bgImg = window.currentMapRegion === 'Johto' ? 'Casino Late Troupe Johto.png' : 'Casino Late Troupe.png';
+        if (locationName === 'Casino - Eeveelutions') bgImg = window.currentMapRegion === 'Johto' ? 'Casino Eeveelutions Jhoto.png' : 'Casino Eeveelutions.png';
+        if (locationName === 'Casino - Special Spot') bgImg = window.currentMapRegion === 'Johto' ? 'Casino Special Spot Johto.png' : 'Casino Special Spot.png';
 
         const viewCasino = document.getElementById("view-casino");
         viewCasino.style.backgroundImage = `url('./Assets/Extra/${bgImg}')`;
