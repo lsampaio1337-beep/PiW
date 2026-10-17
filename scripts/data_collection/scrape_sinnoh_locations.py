@@ -140,7 +140,13 @@ def parse_location(url, route_name, progress_order, plat_dex):
         if poke_idx == -1: continue
 
         method_from_heading = "Walking" # Default
-        prev = table.find_previous_sibling(['h2', 'h3', 'h4'])
+
+        # Check if table is inside a resp-scroll div
+        target = table
+        if table.parent and table.parent.name == 'div' and 'resp-scroll' in table.parent.get('class', []):
+            target = table.parent
+
+        prev = target.find_previous_sibling(['h2', 'h3', 'h4'])
         if prev:
             text = prev.text.strip()
             if 'Generation' not in text:
