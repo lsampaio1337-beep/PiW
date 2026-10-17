@@ -217,7 +217,7 @@ const helpContent = {
 };
 
 export function showHelp() {
-    let sidebarHTML = '<div id="help-sidebar" style="width: 300px; border-right: 2px solid #1abc9c; padding: 10px; box-sizing: border-box; overflow-y: scroll; background-color: #2c3e50;">';
+    let sidebarHTML = '<div id="help-sidebar" style="width: 300px; border-right: 2px solid #1abc9c; padding: 10px; box-sizing: border-box; overflow-y: auto; background-color: #2c3e50; height: 100%;">';
     let isFirst = true;
 
     for (const [majorTopic, subCategories] of Object.entries(helpContent)) {
@@ -237,7 +237,7 @@ export function showHelp() {
     }
     sidebarHTML += '</div>';
 
-    let contentHTML = '<div id="help-content-area" style="flex: 1; padding: 20px; box-sizing: border-box; overflow-y: auto; background-color: #34495e;">';
+    let contentHTML = '<div id="help-content-area" style="flex: 1; padding: 20px; box-sizing: border-box; overflow-y: auto; background-color: #34495e; height: 100%;">';
     isFirst = true;
 
     for (const [majorTopic, subCategories] of Object.entries(helpContent)) {
@@ -257,7 +257,7 @@ export function showHelp() {
     contentHTML += '</div>';
 
     const helpHTML = `
-        <div style="display: flex; flex-direction: row; height: 100%; width: 100%;">
+        <div style="display: flex; flex-direction: row; height: 100%; width: 100%; overflow: hidden;">
             ${sidebarHTML}
             ${contentHTML}
         </div>
