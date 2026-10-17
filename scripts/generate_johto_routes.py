@@ -265,7 +265,7 @@ challenges_data_raw = [
     ["Challenge 9", "Azalea Town", "Earn Hive Badge (Badge 2)", "Ilex Forest"],
     ["Challenge 10", "Ilex Forest", "Catch 1 Rare+ Paras", "Route 34 + 5 Greatball"],
     ["Challenge 11", "Route 34", "Catch 2 Ditto", "Goldenrod Gym + Goldenrod Game Corner"],
-    ["Challenge 12", "Goldenrod Gym", "Earn Plain Badge (Badge 3)", "Route 35 + Extra Challenge (Roaming) + Challenge 13"],
+    ["Challenge 12", "Goldenrod Gym", "Earn Plain Badge (Badge 3)", "Route 35 + Extra Challenge (Roaming)"],
     ["Challenge 13", "Route 35", "Catch 1 Nidoran♀ and 1 Nidoran♂", "Small Fishing Spot"],
     ["Challenge 14", "Small Fishing Spot", "Catch 2 Dratini", "National Park + 2 Dragon Stones"],
     ["Challenge 15", "National Park", "Defeat 4 Scyther and Defeat 4 Pinsir", "Route 36 + 2 Bug Stones"],
@@ -310,7 +310,7 @@ challenges_data_raw = [
     ["Extra Challenge (Roaming)", "Roaming", "Defeat 1 Raikou, Defeat 1 Entei, Defeat 1 Suicune", "Mythical and Legendaries Spot + 1 Masterball"],
     ["Kanto Extra Challenge 1", "Casino Starter Trupe", "Capture all 6 starters", "Casino Babies + 1 Grass Stone + 1 Fire Stone + 1 Water Stone"],
     ["Kanto Extra Challenge 2", "Casino Babies", "Evolve Pikachu into Raichu", "Casino Special Spot + 1 Masterball"],
-    ["Kanto Extra Challenge 3", "Cassino Special Spot", "Evolve Porygon into Porygon2", "Casino Eeveelutions + Dojo + 1 Masterball"],
+    ["Kanto Extra Challenge 3", "Cassino Special Spot", "Evolve Porygon into Porygon2", "Casino Eeveelution + Dojo + 1 Masterball"],
     ["Kanto Extra Challenge 4", "Dojo", "Capture 1 Hitmonlee Capture 1 Hitmonchan Capture 1 Hitmontop", "Casino Late Trupe + 2 Fighting Stones"],
     ["Kanto Extra Challenge 5", "Casino Late Trupe", "Catch 1 Venusaur Catch 1 Charizard Catch 1 Blastoise", "Legendaries Nest + 2 Grass Stones + 2 Fire Stones + 2 Water Stones + 1 Masterball"],
     ["Kanto Extra Challenge 6", "Legendaries Nest", "Get 1 Articuno Get 1 Zapdos Get 1 Moltres", "Mythical and Legendaries Spot + 2 Masterball"]
@@ -431,6 +431,7 @@ def parse_requirements(req_str, area_id):
         # "Get 1 Articuno Get 1 Zapdos Get 1 Moltres"
         req_str_fixed = req_str.replace("Get 1 Articuno Get 1 Zapdos Get 1 Moltres", "Get 1 Articuno, Get 1 Zapdos, Get 1 Moltres")
         req_str_fixed = req_str_fixed.replace("Capture 1 Hitmonlee Capture 1 Hitmonchan Capture 1 Hitmontop", "Capture 1 Hitmonlee, Capture 1 Hitmonchan, Capture 1 Hitmontop")
+        req_str_fixed = req_str_fixed.replace("Capture all 6 starters", "Catch 1 Bulbasaur, Catch 1 Charmander, Catch 1 Squirtle, Catch 1 Chikorita, Catch 1 Cyndaquil, Catch 1 Totodile")
         req_str_fixed = req_str_fixed.replace("Defeat 1 Raikou, Defeat 1 Entei, Defeat 1 Suicune", "Defeat 1 Raikou, Defeat 1 Entei, Defeat 1 Suicune") # already correct
         req_str_fixed = req_str_fixed.replace("Catch 1 Venusaur Catch 1 Charizard Catch 1 Blastoise", "Catch 1 Venusaur, Catch 1 Charizard, Catch 1 Blastoise")
         req_str_fixed = req_str_fixed.replace("Catch 1 Ledyba and Catch 1 Spinarak", "Catch 1 Ledyba, Catch 1 Spinarak")
@@ -459,7 +460,8 @@ def parse_requirements(req_str, area_id):
                     elif "Red Gyarados" in spec:
                          catch_species.append({"species": "Gyarados", "count": count})
                     elif spec == "all 6 starters":
-                         catch_species = [{"species": s, "count": 1} for s in ["Bulbasaur", "Charmander", "Squirtle", "Chikorita", "Cyndaquil", "Totodile"]]
+                        for s in ["Bulbasaur", "Charmander", "Squirtle", "Chikorita", "Cyndaquil", "Totodile"]:
+                            catch_species.append({"species": s, "count": 1})
                     else:
                         catch_species.append({"species": spec, "count": count})
             elif part.startswith("Defeat"):

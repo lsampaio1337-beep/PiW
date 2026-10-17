@@ -1933,8 +1933,7 @@ export const johtoUnlocks = [
     "areaId": "Goldenrod Gym",
     "unlocks": [
       "Route 35",
-      "Extra Challenge (Roaming)",
-      "Challenge 13"
+      "Extra Challenge (Roaming)"
     ],
     "requirements": {
       "earnBadge": {
@@ -2669,7 +2668,34 @@ export const johtoUnlocks = [
     "unlocks": [
       "Casino Babies"
     ],
-    "requirements": {},
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Bulbasaur",
+          "count": 1
+        },
+        {
+          "species": "Charmander",
+          "count": 1
+        },
+        {
+          "species": "Squirtle",
+          "count": 1
+        },
+        {
+          "species": "Chikorita",
+          "count": 1
+        },
+        {
+          "species": "Cyndaquil",
+          "count": 1
+        },
+        {
+          "species": "Totodile",
+          "count": 1
+        }
+      ]
+    },
     "gifts": [
       {
         "item": "Grass Stone",
@@ -2710,7 +2736,7 @@ export const johtoUnlocks = [
     "challengeName": "Kanto Extra Challenge 3",
     "areaId": "Cassino Special Spot",
     "unlocks": [
-      "Casino Eeveelutions",
+      "Casino Eeveelution",
       "Dojo"
     ],
     "requirements": {
