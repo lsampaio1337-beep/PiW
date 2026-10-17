@@ -5,7 +5,7 @@
   "description": "An idle Pokemon combat and management game.",
   "main": "main.js",
   "scripts": {
-    "test": "playwright test",
+    "test": "jest",
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make"

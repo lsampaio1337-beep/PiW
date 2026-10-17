@@ -317,7 +317,13 @@ window.completeChallenge = function(targetAreaId) {
     }
 
     if (unlock) {
-        if (unlock.gift) {
+        if (unlock.gifts) {
+            if (!state.stats.pendingGifts) state.stats.pendingGifts = [];
+            for (let g of unlock.gifts) {
+                state.stats.pendingGifts.push({ type: 'item', item: g.item, count: g.count });
+            }
+            state.globalStats.hasSeenGiftIcon = false;
+        } else if (unlock.gift) {
             if (!state.stats.pendingGifts) state.stats.pendingGifts = [];
             state.stats.pendingGifts.push({ type: 'item', item: unlock.gift.item || unlock.gift, count: unlock.gift.count || 1 });
             state.globalStats.hasSeenGiftIcon = false;
@@ -361,6 +367,7 @@ window.completeChallenge = function(targetAreaId) {
         if (unlock.requirements.defeatSpecific) {
              if (state.stats.challengeSpecificDefeats) delete state.stats.challengeSpecificDefeats[unlock.requirements.defeatSpecific.name];
         }
+
         if (unlock.requirements.defeatMultipleSpecific) {
              if (state.stats.challengeSpecificDefeats) {
                  for (let ds of unlock.requirements.defeatMultipleSpecific) {
@@ -458,6 +465,7 @@ window.cheatProgressChallenge = function(targetAreaId) {
             if (!state.stats.challengeSpecificDefeats) state.stats.challengeSpecificDefeats = {};
             state.stats.challengeSpecificDefeats[req.defeatSpecific.name] = Math.max(state.stats.challengeSpecificDefeats[req.defeatSpecific.name] || 0, req.defeatSpecific.count);
         }
+
         if (req.defeatMultipleSpecific) {
             if (!state.stats.challengeSpecificDefeats) state.stats.challengeSpecificDefeats = {};
             for (let ds of req.defeatMultipleSpecific) {
@@ -532,6 +540,7 @@ window.cheatProgressChallenge = function(targetAreaId) {
             if (!state.stats.challengeSpecificDefeats) state.stats.challengeSpecificDefeats = {};
             state.stats.challengeSpecificDefeats[req.defeatSpecific.name] = req.defeatSpecific.count;
         }
+
         if (req.defeatMultipleSpecific) {
             if (!state.stats.challengeSpecificDefeats) state.stats.challengeSpecificDefeats = {};
             for (let ds of req.defeatMultipleSpecific) {
@@ -639,7 +648,7 @@ window.showChallengesModal = function() {
             let isExtra = extraChallengeAreas.includes(unlock.areaId);
             let rewardsStr = unlock.unlocks ? unlock.unlocks.join(" + ") : "Next Area";
             if (unlock.areaId === "Fossil Revival Lab") rewardsStr += " + Multiplayer Mode";
-            if (unlock.gift) rewardsStr += " + Gift";
+            if (unlock.gift || unlock.gifts) rewardsStr += " + Gift";
 
             let displayName = unlock.challengeName || (isExtra ? 'Extra Challenge - ' + unlock.areaId : 'Challenge - ' + unlock.areaId);
 
@@ -710,7 +719,7 @@ window.showChallengesModal = function() {
 
              let pRewards = pUnlock.unlocks ? pUnlock.unlocks.join(" + ") : "Next Area";
              if (pUnlock.areaId === "Fossil Revival Lab") pRewards += " + Multiplayer Mode";
-             if (pUnlock.gift) pRewards += " + Gift";
+             if (pUnlock.gift || pUnlock.gifts) pRewards += " + Gift";
 
              let displayName = pUnlock.challengeName || (isExtra ? 'Extra Challenge - ' + pUnlock.areaId : 'Challenge - ' + pUnlock.areaId);
 
