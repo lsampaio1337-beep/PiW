@@ -538,6 +538,14 @@ input[type="number"] {
     flex-direction: column;
 }
 
+#window-help .content-panel {
+    padding: 0 !important;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden !important;
+    height: 100%;
+}
+
 #window-bonus-candy .window-content-container {
     padding: 2% !important;
 }
