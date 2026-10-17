@@ -96,11 +96,6 @@ pokemon_data_raw = [
     ["", "Mt. Mortar", "Onix", "42 – 47", 0.1],
     ["", "Mt. Mortar", "Tyrogue", "42 – 47", 0.1],
     ["", "Mt. Mortar", "Misdreavus", "43 – 48", 0.1],
-    ["", "Route 43", "Furret", "43 – 48", 0.3],
-    ["", "Route 43", "Venonat", "43 – 48", 0.25],
-    ["", "Route 43", "Aipom", "43 – 48", 0.2],
-    ["", "Route 43", "Venomoth", "43 – 48", 0.15],
-    ["", "Route 43", "Girafarig", "45 – 50", 0.1],
     ["", "Standard Fishing Spot", "Seaking", "48 – 54", 0.35],
     ["", "Standard Fishing Spot", "Kingler", "48 – 54", 0.3],
     ["", "Standard Fishing Spot", "Poliwhirl", "49 – 55", 0.25],
@@ -111,10 +106,6 @@ pokemon_data_raw = [
     ["", "Ice Path", "Golbat", "54 – 59", 0.15],
     ["", "Ice Path", "Sneasel", "53 – 58", 0.1],
     ["", "Ice Path", "Jynx", "54 – 60", 0.1],
-    ["", "Route 44", "Weepinbell", "55 – 61", 0.35],
-    ["", "Route 44", "Tangela", "55 – 61", 0.3],
-    ["", "Route 44", "Lickitung", "56 – 62", 0.2],
-    ["", "Route 44", "Heracross", "57 – 63", 0.15],
     ["", "Route 45", "Graveler", "58 – 64", 0.25],
     ["", "Route 45", "Gligar", "58 – 64", 0.25],
     ["", "Route 45", "Phanpy", "57 – 63", 0.2],
@@ -158,67 +149,67 @@ pokemon_data_raw = [
     ["Sidequest", "Roaming", "Raikou", 50, 0.3333333333333333],
     ["Sidequest", "Roaming", "Entei", 50, 0.3333333333333333],
     ["Sidequest", "Roaming", "Suicune", 50, 0.3333333333333333],
-    ["", "Viridian Forest", "Oddish", "70 – 76", 0.25],
-    ["", "Viridian Forest", "Gloom", "70 – 76", 0.25],
-    ["", "Viridian Forest", "Butterfree", "71 – 77", 0.15],
-    ["", "Viridian Forest", "Beedrill", "71 – 77", 0.15],
-    ["", "Viridian Forest", "Vileplume", "72 – 78", 0.1],
-    ["", "Viridian Forest", "Bellossom", "72 – 78", 0.1],
-    ["", "Mount Moon", "Geodude", "74 – 81", 0.25],
-    ["", "Mount Moon", "Gravler", "75 – 82", 0.2],
-    ["", "Mount Moon", "Golbat", "74 – 81", 0.25],
-    ["", "Mount Moon", "Onix", "75 – 82", 0.15],
-    ["", "Mount Moon", "Crobat", "75 – 82", 0.15],
-    ["", "Route 8", "Mr. Mime", "80 – 85", 0.2],
-    ["", "Route 8", "Kadabra", "80 – 85", 0.2],
-    ["", "Route 8", "Slowpoke", "80 – 85", 0.4],
-    ["", "Rock Tunnel", "Golbat", "28 – 33", 0.3],
-    ["", "Rock Tunnel", "Golem", "30 – 35", 0.25],
-    ["", "Rock Tunnel", "Steelix", "30 – 35", 0.15],
-    ["", "Rock Tunnel", "Crobat", "31 – 36", 0.3],
-    ["", "Route 11", "Hypno", "40 – 46", 0.15],
-    ["", "Route 11", "Snorlax", "45 – 48", 0.1],
-    ["", "Route 11", "Grimer", "42 – 47", 0.25],
-    ["", "Route 11", "Slowking", "46 – 50", 0.1],
-    ["", "Route 11", "Horsea", "45 – 50", 0.25],
-    ["", "Route 11", "Seadra", "47 – 53", 0.15],
-    ["", "Cycling Road", "Doduo", "47 – 53", 0.25],
-    ["", "Cycling Road", "Fearow", "49 – 55", 0.25],
-    ["", "Cycling Road", "Dodrio", "51 – 56", 0.2],
-    ["", "Cycling Road", "Pidgeot", "51 – 57", 0.2],
-    ["", "Cycling Road", "Snorlax", "50 – 55", 0.1],
-    ["", "Fossil Revival", "Omanyte", "48 – 54", 0.3],
-    ["", "Fossil Revival", "Kabuto", "48 – 54", 0.3],
-    ["", "Fossil Revival", "Aerodactyl", "52 – 58", 0.1],
-    ["", "Fossil Revival", "Omastar", "52 – 58", 0.15],
-    ["", "Fossil Revival", "Kabutops", "52 – 58", 0.15],
-    ["", "Safari Zone", "Nidorino", "51 – 56", 0.15],
-    ["", "Safari Zone", "Nidorina", "51 – 56", 0.15],
-    ["", "Safari Zone", "Rhyhorn", "52 – 57", 0.15],
-    ["", "Safari Zone", "Murkrow", "52 – 57", 0.1],
-    ["", "Safari Zone", "Tauros", "53 – 58", 0.1],
-    ["", "Safari Zone", "Kangaskhan", "53 – 58", 0.15],
-    ["", "Safari Zone", "Chansey", "55 – 60", 0.1],
-    ["", "Safari Zone", "Scizor", "56 – 61", 0.1],
-    ["", "Sea Routes", "Seel", "56 – 62", 0.25],
-    ["", "Sea Routes", "Seaking", "57 – 63", 0.25],
-    ["", "Sea Routes", "Dewgong", "61 – 67", 0.15],
-    ["", "Sea Routes", "Tentacruel", "61 – 67", 0.15],
-    ["", "Sea Routes", "Starmie", "62 – 68", 0.1],
-    ["", "Sea Routes", "Kingdra", "63 – 69", 0.1],
-    ["", "Pokemansion", "Koffing", "62 – 67", 0.2],
-    ["", "Pokemansion", "Slugma", "62 – 67", 0.2],
-    ["", "Pokemansion", "Houndour", "63 – 68", 0.2],
-    ["", "Pokemansion", "Magmar", "65 – 70", 0.15],
-    ["", "Pokemansion", "Weezing", "67 – 72", 0.15],
-    ["", "Pokemansion", "Magcargo", "66 – 71", 0.05],
-    ["", "Pokemansion", "Houndoom", "67 – 72", 0.05],
-    ["Sidequest", "Casino Starter Trupe", "Bulbasaur", "35 – 40", "16.67%"],
-    ["Sidequest", "Casino Starter Trupe", "Charmander", "35 – 40", "16.67%"],
-    ["Sidequest", "Casino Starter Trupe", "Squirtle", "35 – 40", "16.67%"],
-    ["Sidequest", "Casino Starter Trupe", "Chikorita", "35 – 40", "16.67%"],
-    ["Sidequest", "Casino Starter Trupe", "Cyndaquil", "35 – 40", "16.67%"],
-    ["Sidequest", "Casino Starter Trupe", "Totodile", "35 – 40", "16.67%"],
+    ["", "Viridian Forest", "Oddish", "72 – 76", 0.25],
+    ["", "Viridian Forest", "Gloom", "72 – 76", 0.25],
+    ["", "Viridian Forest", "Butterfree", "74 – 78", 0.15],
+    ["", "Viridian Forest", "Beedrill", "74 – 78", 0.15],
+    ["", "Viridian Forest", "Vileplume", "75 – 78", 0.1],
+    ["", "Viridian Forest", "Bellossom", "75 – 78", 0.1],
+    ["", "Mount Moon", "Geodude", "76 – 80", 0.25],
+    ["", "Mount Moon", "Golbat", "76 – 81", 0.25],
+    ["", "Mount Moon", "Graveler", "78 – 82", 0.2],
+    ["", "Mount Moon", "Onix", "77 – 81", 0.15],
+    ["", "Mount Moon", "Crobat", "78 – 82", 0.15],
+    ["", "Rock Tunnel", "Golbat", "79 – 83", 0.3],
+    ["", "Rock Tunnel", "Golem", "81 – 85", 0.25],
+    ["", "Rock Tunnel", "Steelix", "81 – 85", 0.25],
+    ["", "Rock Tunnel", "Crobat", "81 – 85", 0.2],
+    ["", "Route 8", "Slowpoke", "82 – 86", 0.4],
+    ["", "Route 8", "Kadabra", "83 – 87", 0.3],
+    ["", "Route 8", "Mr. Mime", "83 – 87", 0.3],
+    ["", "Route 12", "Grimer", "84 – 88", 0.25],
+    ["", "Route 12", "Horsea", "84 – 88", 0.25],
+    ["", "Route 12", "Hypno", "85 – 89", 0.2],
+    ["", "Route 12", "Seadra", "86 – 89", 0.15],
+    ["", "Route 12", "Slowking", "86 – 89", 0.1],
+    ["", "Route 12", "Snorlax", "88 – 89", 0.05],
+    ["", "Safari Zone", "Nidorino", "86 – 90", 0.15],
+    ["", "Safari Zone", "Nidorina", "86 – 90", 0.15],
+    ["", "Safari Zone", "Rhyhorn", "87 – 90", 0.15],
+    ["", "Safari Zone", "Kangaskhan", "87 – 91", 0.15],
+    ["", "Safari Zone", "Murkrow", "87 – 90", 0.1],
+    ["", "Safari Zone", "Tauros", "88 – 91", 0.1],
+    ["", "Safari Zone", "Chansey", "88 – 91", 0.1],
+    ["", "Safari Zone", "Scizor", "89 – 91", 0.1],
+    ["", "Cycling Road", "Doduo", "88 – 92", 0.25],
+    ["", "Cycling Road", "Fearow", "88 – 92", 0.25],
+    ["", "Cycling Road", "Dodrio", "90 – 93", 0.2],
+    ["", "Cycling Road", "Pidgeot", "90 – 93", 0.2],
+    ["", "Cycling Road", "Snorlax", "92 – 93", 0.1],
+    ["", "Sea Routes", "Seel", "90 – 94", 0.25],
+    ["", "Sea Routes", "Seaking", "90 – 94", 0.25],
+    ["", "Sea Routes", "Dewgong", "91 – 94", 0.15],
+    ["", "Sea Routes", "Tentacruel", "91 – 94", 0.15],
+    ["", "Sea Routes", "Starmie", "92 – 94", 0.1],
+    ["", "Sea Routes", "Kingdra", "92 – 94", 0.1],
+    ["", "Fossil Revival", "Omanyte", "91 – 93", 0.3],
+    ["", "Fossil Revival", "Kabuto", "91 – 93", 0.3],
+    ["", "Fossil Revival", "Aerodactyl", "94 – 95", 0.1],
+    ["", "Fossil Revival", "Omastar", "92 – 94", 0.15],
+    ["", "Fossil Revival", "Kabutops", "92 – 94", 0.15],
+    ["", "Pokémon Mansion", "Koffing", "91 – 95", 0.2],
+    ["", "Pokémon Mansion", "Slugma", "91 – 95", 0.2],
+    ["", "Pokémon Mansion", "Houndour", "91 – 95", 0.2],
+    ["", "Pokémon Mansion", "Magmar", "92 – 95", 0.15],
+    ["", "Pokémon Mansion", "Weezing", "93 – 95", 0.15],
+    ["", "Pokémon Mansion", "Magcargo", "93 – 95", 0.05],
+    ["", "Pokémon Mansion", "Houndoom", "93 – 95", 0.05],
+    ["Sidequest", "Casino Starter Trupe", "Bulbasaur", "80 – 85", "16.67%"],
+    ["Sidequest", "Casino Starter Trupe", "Charmander", "80 – 85", "16.67%"],
+    ["Sidequest", "Casino Starter Trupe", "Squirtle", "80 – 85", "16.67%"],
+    ["Sidequest", "Casino Starter Trupe", "Chikorita", "80 – 85", "16.67%"],
+    ["Sidequest", "Casino Starter Trupe", "Cyndaquil", "80 – 85", "16.67%"],
+    ["Sidequest", "Casino Starter Trupe", "Totodile", "80 – 85", "16.67%"],
     ["Sidequest", "Casino Babies", "Pichu", "84 – 89", 0.15],
     ["Sidequest", "Casino Babies", "Cleffa", "84 – 89", 0.15],
     ["Sidequest", "Casino Babies", "Igglybuff", "84 – 89", 0.15],
@@ -227,19 +218,34 @@ pokemon_data_raw = [
     ["Sidequest", "Casino Babies", "Magby", "84 – 89", 0.1],
     ["Sidequest", "Casino Babies", "Smoochum", "84 – 89", 0.1],
     ["Sidequest", "Casino Babies", "Blissey", "84 – 89", 0.1],
-    ["Sidequest", "Cassino Special Spot", "Lickitung", "50 – 55", 0.3],
-    ["Sidequest", "Cassino Special Spot", "Porygon", "50 – 55", 0.3],
-    ["Sidequest", "Cassino Special Spot", "Lapras", "50 – 55", 0.3],
-    ["Sidequest", "Cassino Special Spot", "Porygon2", "52 – 56", 0.1],
-    ["Sidequest", "Dojo", "Tyrogue", "38 – 44", 0.4],
-    ["Sidequest", "Dojo", "Hitmonlee", "40 – 45", 0.2],
-    ["Sidequest", "Dojo", "Hitmonchan", "40 – 45", 0.2],
-    ["Sidequest", "Dojo", "Hitmontop", "40 – 45", 0.2],
-    ["Sidequest", "Legendaries Nest", "Articuno", 85, 0.2],
-    ["Sidequest", "Legendaries Nest", "Zapdos", 85, 0.2],
-    ["Sidequest", "Legendaries Nest", "Moltres", 85, 0.2],
-    ["Sidequest", "Legendaries Nest", "Ho-Oh", 90, 0.2],
-    ["Sidequest", "Legendaries Nest", "Lugia", 90, 0.2],
+    ["Sidequest", "Casino Special Spot", "Lickitung", "84 – 89", 0.3],
+    ["Sidequest", "Casino Special Spot", "Porygon", "84 – 89", 0.3],
+    ["Sidequest", "Casino Special Spot", "Lapras", "84 – 89", 0.3],
+    ["Sidequest", "Casino Special Spot", "Porygon2", "85 – 90", 0.1],
+    ["Sidequest", "Casino Eeveelution", "Eevee", "85 – 90", 0.2],
+    ["Sidequest", "Casino Eeveelution", "Vaporeon", "86 – 91", 0.1],
+    ["Sidequest", "Casino Eeveelution", "Jolteon", "86 – 91", 0.1],
+    ["Sidequest", "Casino Eeveelution", "Flareon", "86 – 91", 0.1],
+    ["Sidequest", "Casino Eeveelution", "Espeon", "86 – 91", 0.1],
+    ["Sidequest", "Casino Eeveelution", "Umbreon", "86 – 91", 0.1],
+    ["Sidequest", "Casino Eeveelution", "Leafeon", "86 – 91", 0.1],
+    ["Sidequest", "Casino Eeveelution", "Glaceon", "86 – 91", 0.1],
+    ["Sidequest", "Casino Eeveelution", "Sylveon", "86 – 91", 0.1],
+    ["Sidequest", "Dojo", "Tyrogue", "88 – 92", 0.4],
+    ["Sidequest", "Dojo", "Hitmonlee", "89 – 93", 0.2],
+    ["Sidequest", "Dojo", "Hitmonchan", "89 – 93", 0.2],
+    ["Sidequest", "Dojo", "Hitmontop", "89 – 93", 0.2],
+    ["Sidequest", "Casino Late Trupe", "Venusaur", "90 – 94", 0.17],
+    ["Sidequest", "Casino Late Trupe", "Charizard", "90 – 94", 0.17],
+    ["Sidequest", "Casino Late Trupe", "Blastoise", "90 – 94", 0.17],
+    ["Sidequest", "Casino Late Trupe", "Meganium", "90 – 94", 0.17],
+    ["Sidequest", "Casino Late Trupe", "Typhlosion", "90 – 94", 0.17],
+    ["Sidequest", "Casino Late Trupe", "Feraligatr", "90 – 94", 0.17],
+    ["Sidequest", "Legendaries Nest", "Articuno", 95, 0.2],
+    ["Sidequest", "Legendaries Nest", "Zapdos", 95, 0.2],
+    ["Sidequest", "Legendaries Nest", "Moltres", 95, 0.2],
+    ["Sidequest", "Legendaries Nest", "Ho-Oh", 96, 0.2],
+    ["Sidequest", "Legendaries Nest", "Lugia", 96, 0.2],
     ["Sidequest", "Mythical and Legendaries Spot", "Raikou", 97, 0.2],
     ["Sidequest", "Mythical and Legendaries Spot", "Entei", 97, 0.2],
     ["Sidequest", "Mythical and Legendaries Spot", "Suicune", 97, 0.2],
@@ -247,68 +253,67 @@ pokemon_data_raw = [
     ["Sidequest", "Mythical and Legendaries Spot", "Mewtwo", 98, 0.13333333333333333],
     ["Sidequest", "Mythical and Legendaries Spot", "Celebi", 99, 0.13333333333333333]
 ]
-
 challenges_data_raw = [
     ["Challenge 1", "Route 29", "Defeat 25 Pokémon on Route 29", "Route 30"],
     ["Challenge 2", "Route 30", "Catch 1 Ledyba and Catch 1 Spinarak", "Route 31"],
-    ["Challenge 3", "Route 31", "Defeat 10 Bellsprout", "Violet City"],
-    ["Challenge 4", "Violet City", "Earn Zephyr Badge (Badge 1)", "Route 32"],
+    ["Challenge 3", "Route 31", "Defeat 10 Bellsprout", "Violet Gym"],
+    ["Challenge 4", "Violet Gym", "Earn Zephyr Badge (Badge 1)", "Route 32"],
     ["Challenge 5", "Route 32", "Catch 1 Rare+ Pokémon from Route 32", "Tiny Fishing Spot + 5 Ultraball"],
     ["Challenge 6", "Tiny Fishing Spot", "Catch 5 Water-type Pokémon", "Route 33"],
     ["Challenge 7", "Route 33", "Catch 2 Mareep", "Ruins of Alph"],
     ["Challenge 8", "Ruins of Alph", "Defeat 20 Unown", "Azalea Town + Water Stones"],
     ["Challenge 9", "Azalea Town", "Earn Hive Badge (Badge 2)", "Ilex Forest"],
     ["Challenge 10", "Ilex Forest", "Catch 1 Rare+ Paras", "Route 34 + 5 Greatball"],
-    ["Challenge 11", "Route 34", "Catch 2 Ditto", "Goldenrod City + Goldenrod Game Corner"],
-    ["Challenge 12", "Goldenrod City", "Earn Plain Badge (Badge 3)", "Route 35"],
+    ["Challenge 11", "Route 34", "Catch 2 Ditto", "Goldenrod Gym + Goldenrod Game Corner"],
+    ["Challenge 12", "Goldenrod Gym", "Earn Plain Badge (Badge 3)", "Route 35 + Extra Challenge (Roaming)"],
     ["Challenge 13", "Route 35", "Catch 1 Nidoran♀ and 1 Nidoran♂", "Small Fishing Spot"],
     ["Challenge 14", "Small Fishing Spot", "Catch 2 Dratini", "National Park + 2 Dragon Stones"],
     ["Challenge 15", "National Park", "Defeat 4 Scyther and Defeat 4 Pinsir", "Route 36 + 2 Bug Stones"],
     ["Challenge 16", "Route 36", "Defeat 5 Sudowoodo", "Route 37"],
     ["Challenge 17", "Route 37", "Catch 1 Ledian and Catch 1 Ariados", "Burned Tower"],
-    ["Challenge 18", "Burned Tower", "Defeat 3 Magmar", "Ecruteak City + 2 Fire Stones"],
-    ["Challenge 19", "Ecruteak City", "Earn Fog Badge (Badge 4)", "Route 38"],
+    ["Challenge 18", "Burned Tower", "Defeat 3 Magmar", "Ecruteak Gym + 2 Fire Stones"],
+    ["Challenge 19", "Ecruteak Gym", "Earn Fog Badge (Badge 4)", "Route 38"],
     ["Challenge 20", "Route 38", "Catch 1 Tauros", "Route 39 + Normal Stone"],
-    ["Challenge 21", "Route 39", "Catch 1 Farfetch'd", "Cianwood City"],
-    ["Challenge 22", "Cianwood City", "Earn Storm Badge (Badge 5)", "Route 42"],
+    ["Challenge 21", "Route 39", "Catch 1 Farfetch'd", "Cianwood Gym"],
+    ["Challenge 22", "Cianwood Gym", "Earn Storm Badge (Badge 5)", "Route 42"],
     ["Challenge 23", "Route 42", "Defeat 10 Mankey", "Mt. Mortar + Fighting Stone"],
-    ["Challenge 24", "Mt. Mortar", "Catch 1 Ghost-type Pokémon", "Route 43 + Ghost Stone"],
-    ["Challenge 25", "Route 43", "Catch 1 Rare+ Girafarig", "Olivine City"],
-    ["Challenge 26", "Olivine City", "Earn Mineral Badge (Badge 6)", "Standard Fishing Spot"],
-    ["Challenge 27", "Standard Fishing Spot", "Catch 1 Lanturn", "Ice Path"],
-    ["Challenge 28", "Ice Path", "Defeat 2 Jynx", "Mahogany Town + 2 Ice Stones"],
-    ["Challenge 29", "Mahogany Town", "Earn Glacier Badge (Badge 7)", "Route 44"],
-    ["Challenge 30", "Route 44", "Defeat 100 Pokémon on Route 44", "Route 45"],
-    ["Challenge 31", "Route 45", "Catch 1 Weak Pineco", "Blackthorn City + 10 Ultraball"],
-    ["Challenge 32", "Blackthorn City", "Earn Rising Badge (Badge 8)", "Big Fishing Spot"],
-    ["Challenge 33", "Big Fishing Spot", "Catch 1 Mantine", "Dark Cave"],
-    ["Challenge 34", "Dark Cave", "Defeat 20 Dunsparce", "Route 46"],
-    ["Challenge 35", "Route 46", "Defeat 10 Skarmory", "Viridian City + Steel Stone"],
-    ["Challenge 36", "Viridian Forest", "Capture 2 Bellossom", "Pewter City + Fossil Revival"],
-    ["Challenge 37", "Pewter City", "Badge 9", "Mount Moon + Badge 9"],
-    ["Challenge 38", "Mount Moon", "Capture 1 Crobat", "Cerulean City + Rock Tunnel"],
-    ["Challenge 39", "Cerulean City", "Badge 10", "Vermilion City + Diglet Cave + Badge 10"],
-    ["Challenge 40", "Vermilion City", "Badge 11", "Route 8 + Badge 11"],
-    ["Challenge 41", "Route 8", "Defeat 20 Slowpoke", "Celadon City  + Casino Starter Trupe"],
-    ["Challenge 42", "Celadon City", "Badge 12", "Saffron City + Badge 12"],
-    ["Challenge 43", "Saffron City", "Badge 13", "Route 12 + Badge 13"],
-    ["Challenge 44", "Route 12", "Capture 1 Snorlax", "Fuschia  City + Safari Zone"],
-    ["Challenge 45", "Fuschia City", "Badge 14", "Cycling Road + Sea Routes + Badge 14"],
-    ["Challenge 46", "Sea Routes", "Defeat 100 pokemons on Sea Routes", "Cinnabar Island + Pokemansion"],
-    ["Challenge 47", "Cinnabar Island", "Badge 15", "Viridian City + Trade With Friends Hub + Badge 15"],
-    ["Challenge 48", "Viridian City", "Badge 16", "Indigo Plateau + Badge 16 + 1 Masterball"],
-    ["Johto Extra Challenge 1", "Goldenrod Game Corner", "Catch 8 Eevee", "Team Rocket HQ + Roaming Legendaries + 1 Masterball"],
+    ["Challenge 24", "Mt. Mortar", "Catch 1 Ghost-type Pokémon", "Olivine Gym + Ghost Stone"],
+    ["Challenge 25", "Olivine Gym", "Earn Mineral Badge (Badge 6)", "Standard Fishing Spot"],
+    ["Challenge 26", "Standard Fishing Spot", "Catch 1 Lanturn", "Ice Path"],
+    ["Challenge 27", "Ice Path", "Defeat 2 Jynx", "Mahogany Town + 2 Ice Stones"],
+    ["Challenge 28", "Mahogany Town", "Earn Glacier Badge (Badge 7)", "Route 45"],
+    ["Challenge 29", "Route 45", "Catch 1 Weak Pineco", "Blackthorn Gym + 10 Ultraball"],
+    ["Challenge 30", "Blackthorn Gym", "Earn Rising Badge (Badge 8)", "Big Fishing Spot"],
+    ["Challenge 31", "Big Fishing Spot", "Catch 1 Mantine", "Dark Cave"],
+    ["Challenge 32", "Dark Cave", "Defeat 20 Dunsparce", "Route 46"],
+    ["Challenge 33", "Route 46", "Defeat 10 Skarmory", "Indigo Plateau + Steel Stone"],
+    ["Johto Final Challenge", "Indigo Plateau", "Defeat all Elite 4 and Defeat Champion", "Viridian Forest + 2 Masterball"],
+    ["Challenge 34", "Viridian Forest", "Capture 2 Bellossom", "Pewter Gym + Fossil Revival"],
+    ["Challenge 35", "Pewter Gym", "Badge 9", "Mount Moon + Badge 9"],
+    ["Challenge 36", "Mount Moon", "Capture 1 Crobat", "Cerulean Gym + Rock Tunnel"],
+    ["Challenge 37", "Cerulean Gym", "Badge 10", "Vermilion Gym + Badge 10"],
+    ["Challenge 38", "Vermilion Gym", "Badge 11", "Route 8 + Badge 11"],
+    ["Challenge 39", "Route 8", "Defeat 20 Slowpoke", "Celadon Gym  + Casino Starter Trupe"],
+    ["Challenge 40", "Celadon Gym", "Badge 12", "Saffron Gym + Badge 12"],
+    ["Challenge 41", "Saffron Gym", "Badge 13", "Route 12 + Badge 13"],
+    ["Challenge 42", "Route 12", "Capture 1 Snorlax", "Fuschia Gym + Safari Zone"],
+    ["Challenge 43", "Fuschia Gym", "Badge 14", "Cycling Road + Sea Routes + Badge 14"],
+    ["Challenge 44", "Sea Routes", "Defeat 100 pokemons on Sea Routes", "Cinnabar Gym + Pokemansion"],
+    ["Challenge 45", "Cinnabar Gym", "Badge 15", "Viridian Gym + Trade With Friends Hub + Badge 15"],
+    ["Challenge 46", "Viridian Gym", "Badge 16", "Red + Badge 16 + 1 Masterball"],
+    ["Final Challenge", "Red", "Defeat Red", "Travel to a new Region"],
+    ["Johto Extra Challenge 1", "Goldenrod Game Corner", "Defeat 8 Eevee", "Team Rocket HQ + 1 Masterball"],
     ["Johto Extra Challenge 2", "Team Rocket HQ", "Defeat 10 Voltorb", "Lake of Rage + 1 Masterball"],
     ["Johto Extra Challenge 3", "Lake of Rage", "Catch 1 Red Gyarados", "Mt. Silver + 1 Masterball"],
-    ["Johto Extra Challenge 4", "Mt. Silver", "Catch 5 Larvitar", "Ilex Forest 2 + 1 Masterball"],
+    ["Johto Extra Challenge 4", "Mt. Silver", "Catch 5 Larvitar", "Ilex Forest 2 + 1 Masterball + 2 Dark Stones"],
     ["Johto Extra Challenge 5", "Ilex Forest 2", "Catch 1 Celebi", "Mythical and Legendaries Spot + 2 Masterball"],
     ["Extra Challenge (Roaming)", "Roaming", "Defeat 1 Raikou, Defeat 1 Entei, Defeat 1 Suicune", "Mythical and Legendaries Spot + 1 Masterball"],
-    ["Kanto Extra Challenge 1", "Casino Starter Trupe", "Capture all 6 starters", "Cassino Babies + 4 Grass Stones + 4Fire Stones + 4 Water Stones"],
+    ["Kanto Extra Challenge 1", "Casino Starter Trupe", "Capture all 6 starters", "Casino Babies + 1 Grass Stone + 1 Fire Stone + 1 Water Stone"],
     ["Kanto Extra Challenge 2", "Casino Babies", "Evolve Pikachu into Raichu", "Casino Special Spot + 1 Masterball"],
-    ["Kanto Extra Challenge 3", "Cassino Special Spot", "Evolve Porygon into Porygon2", "Dojo + 1 Masterball"],
-    ["Kanto Extra Challenge 4", "Dojo", "Capture 1 Hitmonlee Capture 1 Hitmonchan Capture 1 Hitmontop", "Legendaries Nest + 2 Fighting Stones + 1 Masterball"],
-    ["Kanto Extra Challenge 5", "Legendaries Nest", "Get 1 Articuno Get 1 Zapdos Get 1 Moltres", "Mythical and Legendaries Spot + 2 Masterball"],
-    ["Final Challenge", "Indigo Plateau", "Defeat all Elite 4 and Defeat Champion", "Prestige / Region Reset"]
+    ["Kanto Extra Challenge 3", "Cassino Special Spot", "Evolve Porygon into Porygon2", "Casino Eeveelution + Dojo + 1 Masterball"],
+    ["Kanto Extra Challenge 4", "Dojo", "Capture 1 Hitmonlee Capture 1 Hitmonchan Capture 1 Hitmontop", "Casino Late Trupe + 2 Fighting Stones"],
+    ["Kanto Extra Challenge 5", "Casino Late Trupe", "Catch 1 Venusaur Catch 1 Charizard Catch 1 Blastoise", "Legendaries Nest + 2 Grass Stones + 2 Fire Stones + 2 Water Stones + 1 Masterball"],
+    ["Kanto Extra Challenge 6", "Legendaries Nest", "Get 1 Articuno Get 1 Zapdos Get 1 Moltres", "Mythical and Legendaries Spot + 2 Masterball"]
 ]
 
 # Load pokemon data
@@ -345,6 +350,7 @@ for entry in pokemon_data_raw:
     pkmn_lookup = pkmn
     if pkmn == "Gravler": pkmn_lookup = "Graveler"
     if pkmn == "Ho-Oh": pkmn_lookup = "Ho-oh"
+    if pkmn == "Cassino Special Spot": pkmn_lookup = "Casino Special Spot"
 
     pkmn_id = pokemon_name_to_id.get(pkmn_lookup)
     if not pkmn_id:
@@ -386,7 +392,7 @@ def parse_gift(gift_str):
                 item = item.replace("Stones", "Stone")
             parsed_gifts.append({"item": item, "count": 1})
 
-    return parsed_gifts[0] if parsed_gifts else None
+    return parsed_gifts if parsed_gifts else None
 
 def parse_requirements(req_str, area_id):
     reqs = {}
@@ -408,6 +414,8 @@ def parse_requirements(req_str, area_id):
              reqs["earnBadge"] = {"name": f"Badge {match.group(1)}", "leader": "Unknown", "badgeCount": int(match.group(1))}
     elif "Defeat all Elite 4" in req_str:
         reqs["defeatEliteFourAndChampion"] = True
+    elif req_str == "Defeat Red":
+        reqs["defeatRed"] = True
     elif "Catch 1 Weak Pineco" in req_str:
         reqs["catchSpeciesByQuality"] = [{"species": "Pineco", "quality": "Weak", "count": 1}]
     elif "Evolve" in req_str:
@@ -423,7 +431,13 @@ def parse_requirements(req_str, area_id):
         # "Get 1 Articuno Get 1 Zapdos Get 1 Moltres"
         req_str_fixed = req_str.replace("Get 1 Articuno Get 1 Zapdos Get 1 Moltres", "Get 1 Articuno, Get 1 Zapdos, Get 1 Moltres")
         req_str_fixed = req_str_fixed.replace("Capture 1 Hitmonlee Capture 1 Hitmonchan Capture 1 Hitmontop", "Capture 1 Hitmonlee, Capture 1 Hitmonchan, Capture 1 Hitmontop")
+        req_str_fixed = req_str_fixed.replace("Capture all 6 starters", "Catch 1 Bulbasaur, Catch 1 Charmander, Catch 1 Squirtle, Catch 1 Chikorita, Catch 1 Cyndaquil, Catch 1 Totodile")
         req_str_fixed = req_str_fixed.replace("Defeat 1 Raikou, Defeat 1 Entei, Defeat 1 Suicune", "Defeat 1 Raikou, Defeat 1 Entei, Defeat 1 Suicune") # already correct
+        req_str_fixed = req_str_fixed.replace("Catch 1 Venusaur Catch 1 Charizard Catch 1 Blastoise", "Catch 1 Venusaur, Catch 1 Charizard, Catch 1 Blastoise")
+        req_str_fixed = req_str_fixed.replace("Catch 1 Ledyba and Catch 1 Spinarak", "Catch 1 Ledyba, Catch 1 Spinarak")
+        req_str_fixed = req_str_fixed.replace("Catch 1 Nidoran♀ and 1 Nidoran♂", "Catch 1 Nidoran♀, Catch 1 Nidoran♂")
+        req_str_fixed = req_str_fixed.replace("Defeat 4 Scyther and Defeat 4 Pinsir", "Defeat 4 Scyther, Defeat 4 Pinsir")
+        req_str_fixed = req_str_fixed.replace("Catch 1 Ledian and Catch 1 Ariados", "Catch 1 Ledian, Catch 1 Ariados")
 
         parts = req_str_fixed.replace(" and ", ",").split(",")
         for part in parts:
@@ -446,7 +460,8 @@ def parse_requirements(req_str, area_id):
                     elif "Red Gyarados" in spec:
                          catch_species.append({"species": "Gyarados", "count": count})
                     elif spec == "all 6 starters":
-                         catch_species = [{"species": s, "count": 1} for s in ["Bulbasaur", "Charmander", "Squirtle", "Chikorita", "Cyndaquil", "Totodile"]]
+                        for s in ["Bulbasaur", "Charmander", "Squirtle", "Chikorita", "Cyndaquil", "Totodile"]:
+                            catch_species.append({"species": s, "count": 1})
                     else:
                         catch_species.append({"species": spec, "count": count})
             elif part.startswith("Defeat"):
@@ -478,8 +493,11 @@ for entry in challenges_data_raw:
     parts = unlocks_str.split('+')
     for i, p in enumerate(parts):
         p = p.strip()
-        if "Stone" in p or "ball" in p:
-             gifts.append(p)
+        if "Stone" in p or "ball" in p or "Masterball" in p:
+             if "Stone" in p or "ball" in p or "Masterball" in p:
+                  gifts.append(p)
+             else:
+                  unlocks_list.append(p)
         elif "Badge" in p and "Badge 9" not in unlocks_str and "Badge 10" not in unlocks_str and "Badge 11" not in unlocks_str and "Badge 12" not in unlocks_str and "Badge 13" not in unlocks_str and "Badge 14" not in unlocks_str and "Badge 15" not in unlocks_str and "Badge 16" not in unlocks_str:
              pass
         else:
@@ -496,7 +514,7 @@ for entry in challenges_data_raw:
         "requirements": reqs_obj
     }
     if gift_obj:
-        unlock["gift"] = gift_obj
+        unlock["gifts"] = gift_obj
 
     unlocks.append(unlock)
 

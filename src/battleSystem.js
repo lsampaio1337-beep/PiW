@@ -1648,6 +1648,13 @@ class BattleSystem {
                 // Record the defeated boss
                 if (!this.state.stats.defeatedBosses) this.state.stats.defeatedBosses = {};
                 this.state.stats.defeatedBosses[gym.leader] = true;
+                if (gym.name === "Indigo Plateau") {
+                    this.state.stats.defeatedBosses["Elite 4 Lorelei"] = true;
+                    this.state.stats.defeatedBosses["Champion Rival"] = true;
+                }
+                if (gym.name === "Red") {
+                    this.state.stats.defeatedBosses["Red"] = true;
+                }
                 if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') {
                     window.trackDailyChallenge('defeat_gym_leader');
                 }
