@@ -434,7 +434,11 @@ export function navigateToLocation(locationName) {
              battleSystem.isSearching = false;
              if (battleSystem.gymState) battleSystem.gymState.isActive = false;
         }
-        switchView("PROFESSOR_LAB");
+        if (state.currentRegionName === 'Hoenn') {
+            switchView("HOENN_PROFESSOR_LAB");
+        } else {
+            switchView("PROFESSOR_LAB");
+        }
     } else if (locationName === "Johto Professor Lab") {
         if (battleSystem) {
              battleSystem.stop();
@@ -443,14 +447,6 @@ export function navigateToLocation(locationName) {
              if (battleSystem.gymState) battleSystem.gymState.isActive = false;
         }
         switchView("JOHTO_PROFESSOR_LAB");
-    } else if (locationName === "Professor Lab") {
-        if (battleSystem) {
-             battleSystem.stop();
-             battleSystem.activeEncounter = null;
-             battleSystem.isSearching = false;
-             if (battleSystem.gymState) battleSystem.gymState.isActive = false;
-        }
-        switchView("GENERIC_LAB");
     } else if (["Safari Zone", "Kanto Safari Zone"].includes(locationName)) {
         if (battleSystem) {
             battleSystem.stop();
