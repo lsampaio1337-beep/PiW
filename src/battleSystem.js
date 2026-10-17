@@ -418,7 +418,7 @@ class BattleSystem {
                      this.stopMultiplayerBattle();
                      setTimeout(() => {
                          if (typeof window.showGameAlert === 'function') {
-                             window.showGameAlert("You won the multiplayer battle!", "window-multiplayer");
+                             window.showGameAlert("You won the multiplayer battle!", "view-battle-stadium");
                          } else {
                              alert("You won the multiplayer battle!");
                          }
@@ -444,7 +444,7 @@ class BattleSystem {
                      this.stopMultiplayerBattle();
                      setTimeout(() => {
                          if (typeof window.showGameAlert === 'function') {
-                             window.showGameAlert("You lost the multiplayer battle.", "window-multiplayer");
+                             window.showGameAlert("You lost the multiplayer battle.", "view-battle-stadium");
                          } else {
                              alert("You lost the multiplayer battle.");
                          }
