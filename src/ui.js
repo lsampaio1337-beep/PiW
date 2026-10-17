@@ -1423,6 +1423,8 @@ async function loadConfigs() {
 
 
 function returnToLab() {
+    window.currentMapRegion = state.currentRegionName || 'Kanto';
+
     let labRoute = "Professor Lab";
     let labView = "PROFESSOR_LAB";
     if (state.currentRegionName === "Kanto") {
