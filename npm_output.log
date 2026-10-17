@@ -2,4 +2,13 @@
 > idle-pokemon-world@1.0.0 start
 > electron-forge start
 
-sh: 1: electron-forge: not found
+❯ Checking your system
+❯ Checking package manager version
+✔ Found npm@11.11.0
+✔ Checking your system
+[?25h[89393:1017/013650.939787:ERROR:bus.cc(407)] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[89393:1017/013650.940565:ERROR:bus.cc(407)] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[89393:1017/013650.940596:ERROR:bus.cc(407)] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[89393:1017/013650.940607:ERROR:bus.cc(407)] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
+[89393:1017/013650.940619:ERROR:object_proxy.cc(576)] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type:
+[89393:1017/013651.069921:ERROR:bus.cc(407)] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")

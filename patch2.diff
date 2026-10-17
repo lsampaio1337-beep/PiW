@@ -1,0 +1,9 @@
+--- src/ui.js
++++ src/ui.js
+@@ -10,6 +10,7 @@
+ // Import State and modules
+ import { state, setBattleSystem, globals, checkFinalChallengeCompleted } from './state.js';
+ import { trackDailyChallenge, checkAndResetDailyChallenges } from './ui/dailyChallenges.js';
++import { showHelp } from './ui/help.js';
+
+ window.globals = globals;
