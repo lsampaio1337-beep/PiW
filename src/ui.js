@@ -356,6 +356,13 @@ window.completeChallenge = function(targetAreaId) {
         if (unlock.requirements.defeatSpecific) {
              if (state.stats.challengeSpecificDefeats) delete state.stats.challengeSpecificDefeats[unlock.requirements.defeatSpecific.name];
         }
+        if (unlock.requirements.defeatMultipleSpecific) {
+             if (state.stats.challengeSpecificDefeats) {
+                 for (let ds of unlock.requirements.defeatMultipleSpecific) {
+                     delete state.stats.challengeSpecificDefeats[ds.name];
+                 }
+             }
+        }
         if (unlock.requirements.catchSpecies) {
              for (let s of unlock.requirements.catchSpecies) {
                  if (state.stats.caughtSpecies && state.stats.caughtSpecies[s.species] !== undefined) {
@@ -446,6 +453,12 @@ window.cheatProgressChallenge = function(targetAreaId) {
             if (!state.stats.challengeSpecificDefeats) state.stats.challengeSpecificDefeats = {};
             state.stats.challengeSpecificDefeats[req.defeatSpecific.name] = Math.max(state.stats.challengeSpecificDefeats[req.defeatSpecific.name] || 0, req.defeatSpecific.count);
         }
+        if (req.defeatMultipleSpecific) {
+            if (!state.stats.challengeSpecificDefeats) state.stats.challengeSpecificDefeats = {};
+            for (let ds of req.defeatMultipleSpecific) {
+                state.stats.challengeSpecificDefeats[ds.name] = Math.max(state.stats.challengeSpecificDefeats[ds.name] || 0, ds.count);
+            }
+        }
         if (req.catchSpecies) {
             if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
             req.catchSpecies.forEach(r => {
@@ -513,6 +526,12 @@ window.cheatProgressChallenge = function(targetAreaId) {
         if (req.defeatSpecific) {
             if (!state.stats.challengeSpecificDefeats) state.stats.challengeSpecificDefeats = {};
             state.stats.challengeSpecificDefeats[req.defeatSpecific.name] = req.defeatSpecific.count;
+        }
+        if (req.defeatMultipleSpecific) {
+            if (!state.stats.challengeSpecificDefeats) state.stats.challengeSpecificDefeats = {};
+            for (let ds of req.defeatMultipleSpecific) {
+                state.stats.challengeSpecificDefeats[ds.name] = ds.count;
+            }
         }
         if (req.defeatEliteFourAndChampion) {
             if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};

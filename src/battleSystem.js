@@ -851,20 +851,44 @@ class BattleSystem {
             const route = window.getCurrentRoutes().find(r => r.name === this.state.currentRoute);
             if (!route) return;
 
-            const rand = Math.random();
-            let cumulative = 0;
-            let selectedSpawn = route.spawns[0];
-            for (const spawn of route.spawns) {
-                cumulative += spawn.chance;
-                if (rand <= cumulative) {
-                    selectedSpawn = spawn;
-                    break;
+            let actualPokemonBase;
+            let isRoamingEncounter = false;
+
+            // Check if Roaming challenge is active for the 1% beast spawn
+            if (this.state.stats.activeChallenges && this.state.stats.activeChallenges.includes("Roaming")) {
+                if (Math.random() < 0.01) {
+                    isRoamingEncounter = true;
                 }
             }
 
-            let actualPokemonBase = this.getPokemonBase(selectedSpawn.pokemonId);
-            pokemonBase = actualPokemonBase;
-            level = Math.floor(Math.random() * (selectedSpawn.maxLevel - selectedSpawn.minLevel + 1)) + selectedSpawn.minLevel;
+            if (isRoamingEncounter) {
+                // Randomly select Raikou (243), Entei (244), or Suicune (245)
+                const beasts = [243, 244, 245];
+                const selectedBeastId = beasts[Math.floor(Math.random() * beasts.length)];
+                actualPokemonBase = this.getPokemonBase(selectedBeastId);
+                pokemonBase = actualPokemonBase;
+
+                // Level = Player Pokemon + 10 (min 30, max 70)
+                const playerLevel = this.state.party[0] ? this.state.party[0].level : 1;
+                level = playerLevel + 10;
+                if (level < 30) level = 30;
+                if (level > 70) level = 70;
+            } else {
+                const rand = Math.random();
+                let cumulative = 0;
+                let selectedSpawn = route.spawns[0];
+                for (const spawn of route.spawns) {
+                    cumulative += spawn.chance;
+                    if (rand <= cumulative) {
+                        selectedSpawn = spawn;
+                        break;
+                    }
+                }
+
+                actualPokemonBase = this.getPokemonBase(selectedSpawn.pokemonId);
+                pokemonBase = actualPokemonBase;
+                level = Math.floor(Math.random() * (selectedSpawn.maxLevel - selectedSpawn.minLevel + 1)) + selectedSpawn.minLevel;
+            }
 
             if (pokemonBase.id === 132 && route.spawns.length > 1) {
                 isDisguisedDitto = true;
@@ -1673,6 +1697,14 @@ class BattleSystem {
             if (req.defeatSpecific && this.activeEncounter.name === req.defeatSpecific.name) {
                  if (!this.state.stats.challengeSpecificDefeats) this.state.stats.challengeSpecificDefeats = {};
                  this.state.stats.challengeSpecificDefeats[this.activeEncounter.name] = (this.state.stats.challengeSpecificDefeats[this.activeEncounter.name] || 0) + 1;
+            }
+
+            if (req.defeatMultipleSpecific) {
+                const targetMatch = req.defeatMultipleSpecific.find(t => t.name === this.activeEncounter.name);
+                if (targetMatch) {
+                     if (!this.state.stats.challengeSpecificDefeats) this.state.stats.challengeSpecificDefeats = {};
+                     this.state.stats.challengeSpecificDefeats[this.activeEncounter.name] = (this.state.stats.challengeSpecificDefeats[this.activeEncounter.name] || 0) + 1;
+                }
             }
         }
     }
