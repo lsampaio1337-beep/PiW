@@ -11,6 +11,7 @@ import Storage from "./storage.js";
 // Import State and modules
 import { state, setBattleSystem, globals, checkFinalChallengeCompleted } from './state.js';
 import { trackDailyChallenge, checkAndResetDailyChallenges } from './ui/dailyChallenges.js';
+import { showHelp } from './ui/help.js';
 
 window.globals = globals;
 
@@ -2739,6 +2740,10 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
 
     bindBtn('btn-settings', () => {
         if(!checkCombatLock()) showSettings();
+    });
+
+    bindBtn('btn-help', () => {
+        if(!checkCombatLock()) showHelp();
     });
 
     bindBtn('btn-exit', () => {
