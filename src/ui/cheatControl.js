@@ -28,7 +28,7 @@ export function showCheatControlModal() {
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
                     <button onclick="window.cheatAction('XP')" style="padding: 10px; font-size: 14px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">XP</button>
                     <button onclick="window.cheatAction('Upgrades')" style="padding: 10px; font-size: 14px; background: #f1c40f; color: black; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Upgrades</button>
-                    <button onclick="window.cheatAction('Map')" style="padding: 10px; font-size: 14px; background: #e67e22; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Unlock Map</button>
+                    <button onclick="window.cheatAction('Map')" style="padding: 10px; font-size: 14px; background: #e67e22; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Complete Progress Challenge</button>
                     <button onclick="window.showAddPokemonModal()" style="padding: 10px; font-size: 14px; background: #16a085; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Add Pokemon</button>
                     <button onclick="window.cheatAction('Pokedex')" style="padding: 10px; font-size: 14px; background: #34495e; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Complete Pokedex</button>
                     <button onclick="window.cheatAction('PokedexShiny')" style="padding: 10px; font-size: 14px; background: linear-gradient(45deg, #f39c12, #e74c3c, #8e44ad); color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Shiny Pokedex</button>
@@ -355,8 +355,17 @@ function generatePokedex(isShiny) {
     if (!state.stats.seenShiniesSpecies) state.stats.seenShiniesSpecies = {};
     if (!state.stats.caughtShiniesSpecies) state.stats.caughtShiniesSpecies = {};
 
-    for (let id = 1; id <= 151; id++) {
-        const data = state.config.pokemonData[id - 1];
+    const regionName = state.currentRegionName || 'Kanto';
+    let regionIdField = 'kanto_id';
+    if (regionName === 'Johto') regionIdField = 'johto_id';
+    else if (regionName === 'Hoenn') regionIdField = 'hoenn_id';
+    else if (regionName === 'Sinnoh') regionIdField = 'sinnoh_id';
+    else if (regionName === 'Unova') regionIdField = 'unova_id';
+
+    const regionalDex = state.config.pokemonData.filter(p => p && p[regionIdField] !== undefined);
+    regionalDex.sort((a, b) => a[regionIdField] - b[regionIdField]);
+
+    for (const data of regionalDex) {
         if (!data) continue;
 
         const level = isShiny ? 100 : 1;
