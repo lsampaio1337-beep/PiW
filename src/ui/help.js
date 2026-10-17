@@ -217,7 +217,7 @@ const helpContent = {
 };
 
 export function showHelp() {
-    let sidebarHTML = '<div id="help-sidebar" style="width: 250px; border-right: 2px solid #1abc9c; padding: 10px; box-sizing: border-box; overflow-y: auto; background-color: #2c3e50;">';
+    let sidebarHTML = '<div id="help-sidebar" style="width: 300px; border-right: 2px solid #1abc9c; padding: 10px; box-sizing: border-box; overflow-y: auto; background-color: #2c3e50;">';
     let isFirst = true;
 
     for (const [majorTopic, subCategories] of Object.entries(helpContent)) {
@@ -264,7 +264,7 @@ export function showHelp() {
     `;
 
     // Inject into the DOM
-    showModal("Encyclopedia & Guide", helpHTML, "window-help", "850px", "650px");
+    showModal("Help", helpHTML, "window-help", "1200px", "700px");
 
     // Manually attach event listeners after the modal has been injected to avoid innerHTML <script> execution blocks
     setTimeout(() => {
