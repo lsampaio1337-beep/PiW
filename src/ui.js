@@ -583,7 +583,7 @@ window.cheatProgressChallenge = function(targetAreaId) {
 };
 
 window.showChallengesModal = function() {
-    const extraChallengeAreas = ['Casino', 'Small Fishing Spot', 'Fighting Dojo', 'Big Fishing Spot', 'Fossil Revival Lab', 'Trade With Friends Hub', 'Power Plant', 'Seafoam Islands', 'Victory Road', 'Cerulean Cave'];
+    const extraChallengeAreas = ['Casino', 'Small Fishing Spot', 'Fighting Dojo', 'Big Fishing Spot', 'Fossil Revival Lab', 'Trade With Friends Hub', 'Power Plant', 'Seafoam Islands', 'Victory Road', 'Cerulean Cave', 'Goldenrod Game Corner', 'Team Rocket HQ', 'Lake of Rage', 'Mt. Silver', 'Ilex Forest 2', 'Roaming', 'Casino Starter Trupe', 'Casino Babies', 'Cassino Special Spot', 'Casino Special Spot', 'Casino Eeveelution', 'Dojo', 'Casino Late Trupe', 'Legendaries Nest'];
 
     if (!window.getCurrentUnlocks()) return;
 

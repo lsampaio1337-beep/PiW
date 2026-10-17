@@ -1933,7 +1933,8 @@ export const johtoUnlocks = [
     "areaId": "Goldenrod Gym",
     "unlocks": [
       "Route 35",
-      "Extra Challenge (Roaming)"
+      "Extra Challenge (Roaming)",
+      "Challenge 13"
     ],
     "requirements": {
       "earnBadge": {
@@ -2442,7 +2443,7 @@ export const johtoUnlocks = [
     "challengeName": "Challenge 42",
     "areaId": "Route 12",
     "unlocks": [
-      "Fuschia  Gym",
+      "Fuschia Gym",
       "Safari Zone"
     ],
     "requirements": {
@@ -2473,7 +2474,7 @@ export const johtoUnlocks = [
     "challengeName": "Challenge 44",
     "areaId": "Sea Routes",
     "unlocks": [
-      "Cinnabar Island",
+      "Cinnabar Gym",
       "Pokemansion"
     ],
     "requirements": {
@@ -2485,7 +2486,7 @@ export const johtoUnlocks = [
   },
   {
     "challengeName": "Challenge 45",
-    "areaId": "Cinnabar Island",
+    "areaId": "Cinnabar Gym",
     "unlocks": [
       "Viridian Gym",
       "Trade With Friends Hub"
@@ -2532,8 +2533,7 @@ export const johtoUnlocks = [
     "challengeName": "Johto Extra Challenge 1",
     "areaId": "Goldenrod Game Corner",
     "unlocks": [
-      "Team Rocket HQ",
-      "Roaming Legendaries"
+      "Team Rocket HQ"
     ],
     "requirements": {
       "defeatSpecific": {
