@@ -265,7 +265,7 @@ challenges_data_raw = [
     ["Challenge 9", "Azalea Town", "Earn Hive Badge (Badge 2)", "Ilex Forest"],
     ["Challenge 10", "Ilex Forest", "Catch 1 Rare+ Paras", "Route 34 + 5 Greatball"],
     ["Challenge 11", "Route 34", "Catch 2 Ditto", "Goldenrod Gym + Goldenrod Game Corner"],
-    ["Challenge 12", "Goldenrod Gym", "Earn Plain Badge (Badge 3)", "Route 35"],
+    ["Challenge 12", "Goldenrod Gym", "Earn Plain Badge (Badge 3)", "Route 35 + Extra Challenge (Roaming)"],
     ["Challenge 13", "Route 35", "Catch 1 Nidoran♀ and 1 Nidoran♂", "Small Fishing Spot"],
     ["Challenge 14", "Small Fishing Spot", "Catch 2 Dratini", "National Park + 2 Dragon Stones"],
     ["Challenge 15", "National Park", "Defeat 4 Scyther and Defeat 4 Pinsir", "Route 36 + 2 Bug Stones"],
@@ -286,7 +286,8 @@ challenges_data_raw = [
     ["Challenge 30", "Blackthorn Gym", "Earn Rising Badge (Badge 8)", "Big Fishing Spot"],
     ["Challenge 31", "Big Fishing Spot", "Catch 1 Mantine", "Dark Cave"],
     ["Challenge 32", "Dark Cave", "Defeat 20 Dunsparce", "Route 46"],
-    ["Challenge 33", "Route 46", "Defeat 10 Skarmory", "Viridian Gym + Steel Stone"],
+    ["Challenge 33", "Route 46", "Defeat 10 Skarmory", "Indigo Plateau + Steel Stone"],
+    ["Johto Final Challenge", "Indigo Plateau", "Defeat all Elite 4 and Defeat Champion", "Viridian Forest + 2 Masterball"],
     ["Challenge 34", "Viridian Forest", "Capture 2 Bellossom", "Pewter Gym + Fossil Revival"],
     ["Challenge 35", "Pewter Gym", "Badge 9", "Mount Moon + Badge 9"],
     ["Challenge 36", "Mount Moon", "Capture 1 Crobat", "Cerulean Gym + Rock Tunnel"],
@@ -299,7 +300,8 @@ challenges_data_raw = [
     ["Challenge 43", "Fuschia Gym", "Badge 14", "Cycling Road + Sea Routes + Badge 14"],
     ["Challenge 44", "Sea Routes", "Defeat 100 pokemons on Sea Routes", "Cinnabar Island + Pokemansion"],
     ["Challenge 45", "Cinnabar Island", "Badge 15", "Viridian Gym + Trade With Friends Hub + Badge 15"],
-    ["Challenge 46", "Viridian Gym", "Badge 16", "Indigo Plateau + Badge 16 + 1 Masterball"],
+    ["Challenge 46", "Viridian Gym", "Badge 16", "Red + Badge 16 + 1 Masterball"],
+    ["Final Challenge", "Red", "Defeat Red", "Travel to a new Region"],
     ["Johto Extra Challenge 1", "Goldenrod Game Corner", "Defeat 8 Eevee", "Team Rocket HQ + Roaming Legendaries + 1 Masterball"],
     ["Johto Extra Challenge 2", "Team Rocket HQ", "Defeat 10 Voltorb", "Lake of Rage + 1 Masterball"],
     ["Johto Extra Challenge 3", "Lake of Rage", "Catch 1 Red Gyarados", "Mt. Silver + 1 Masterball"],
@@ -311,8 +313,7 @@ challenges_data_raw = [
     ["Kanto Extra Challenge 3", "Cassino Special Spot", "Evolve Porygon into Porygon2", "Casino Eeveelutions + Dojo + 1 Masterball"],
     ["Kanto Extra Challenge 4", "Dojo", "Capture 1 Hitmonlee Capture 1 Hitmonchan Capture 1 Hitmontop", "Casino Late Trupe + 2 Fighting Stones"],
     ["Kanto Extra Challenge 5", "Casino Late Trupe", "Catch 1 Venusaur Catch 1 Charizard Catch 1 Blastoise", "Legendaries Nest + 2 Grass Stones + 2 Fire Stones + 2 Water Stones + 1 Masterball"],
-    ["Kanto Extra Challenge 6", "Legendaries Nest", "Get 1 Articuno Get 1 Zapdos Get 1 Moltres", "Mythical and Legendaries Spot + 2 Masterball"],
-    ["Final Challenge", "Indigo Plateau", "Defeat all Elite 4 and Defeat Champion", "Travel to a new Region"]
+    ["Kanto Extra Challenge 6", "Legendaries Nest", "Get 1 Articuno Get 1 Zapdos Get 1 Moltres", "Mythical and Legendaries Spot + 2 Masterball"]
 ]
 
 # Load pokemon data
@@ -413,6 +414,8 @@ def parse_requirements(req_str, area_id):
              reqs["earnBadge"] = {"name": f"Badge {match.group(1)}", "leader": "Unknown", "badgeCount": int(match.group(1))}
     elif "Defeat all Elite 4" in req_str:
         reqs["defeatEliteFourAndChampion"] = True
+    elif req_str == "Defeat Red":
+        reqs["defeatRed"] = True
     elif "Catch 1 Weak Pineco" in req_str:
         reqs["catchSpeciesByQuality"] = [{"species": "Pineco", "quality": "Weak", "count": 1}]
     elif "Evolve" in req_str:

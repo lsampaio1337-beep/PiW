@@ -552,6 +552,10 @@ window.cheatProgressChallenge = function(targetAreaId) {
             state.stats.defeatedBosses["Elite 4 Lorelei"] = true;
             state.stats.defeatedBosses["Champion Rival"] = true;
         }
+        if (req.defeatRed) {
+            if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};
+            state.stats.defeatedBosses["Red"] = true;
+        }
     }
         if (window.updateUI) window.updateUI();
     const challengeWinCheat = document.getElementById('window-challenges');

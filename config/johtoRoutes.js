@@ -1932,7 +1932,8 @@ export const johtoUnlocks = [
     "challengeName": "Challenge 12",
     "areaId": "Goldenrod Gym",
     "unlocks": [
-      "Route 35"
+      "Route 35",
+      "Extra Challenge (Roaming)"
     ],
     "requirements": {
       "earnBadge": {
@@ -2290,7 +2291,7 @@ export const johtoUnlocks = [
     "challengeName": "Challenge 33",
     "areaId": "Route 46",
     "unlocks": [
-      "Viridian Gym"
+      "Indigo Plateau"
     ],
     "requirements": {
       "defeatSpecific": {
@@ -2302,6 +2303,22 @@ export const johtoUnlocks = [
       {
         "item": "Steel Stone",
         "count": 1
+      }
+    ]
+  },
+  {
+    "challengeName": "Johto Final Challenge",
+    "areaId": "Indigo Plateau",
+    "unlocks": [
+      "Viridian Forest"
+    ],
+    "requirements": {
+      "defeatEliteFourAndChampion": true
+    },
+    "gifts": [
+      {
+        "item": "Masterball",
+        "count": 2
       }
     ]
   },
@@ -2485,7 +2502,7 @@ export const johtoUnlocks = [
     "challengeName": "Challenge 46",
     "areaId": "Viridian Gym",
     "unlocks": [
-      "Indigo Plateau"
+      "Red"
     ],
     "requirements": {
       "earnBadge": {
@@ -2500,6 +2517,16 @@ export const johtoUnlocks = [
         "count": 1
       }
     ]
+  },
+  {
+    "challengeName": "Final Challenge",
+    "areaId": "Red",
+    "unlocks": [
+      "Travel to a new Region"
+    ],
+    "requirements": {
+      "defeatRed": true
+    }
   },
   {
     "challengeName": "Johto Extra Challenge 1",
@@ -2799,15 +2826,5 @@ export const johtoUnlocks = [
         "count": 2
       }
     ]
-  },
-  {
-    "challengeName": "Final Challenge",
-    "areaId": "Indigo Plateau",
-    "unlocks": [
-      "Travel to a new Region"
-    ],
-    "requirements": {
-      "defeatEliteFourAndChampion": true
-    }
   }
 ];

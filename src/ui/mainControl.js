@@ -131,6 +131,11 @@ export function getChallengeData(unlock) {
         if (!beatenE4) isMet = false;
         textParts.push(`Defeat all Elite 4 and Defeat Champion${getStatusHtml(beatenE4)}`);
     }
+    if (req.defeatRed) {
+        let beatenRed = state.stats.defeatedBosses && state.stats.defeatedBosses["Red"];
+        if (!beatenRed) isMet = false;
+        textParts.push(`Defeat Red${getStatusHtml(beatenRed)}`);
+    }
 
     return { isMet, textParts };
 }
