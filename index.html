@@ -279,57 +279,65 @@
       </div>
 
       <!-- View 6: Battle Stadium -->
-      <div id="view-battle-stadium" class="game-view" style="display:none; background-image: url('./Assets/BG/BG.png'); background-size: 100% 100%; height: 100%; position: relative; align-items: center; justify-content: center; flex-direction: column;">
-          <div style="display: flex; flex-direction: column; align-items: center; gap: 5px; margin-bottom: 20px;">
-              <div style="font-weight: bold; font-size: 24px; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">Multiplayer</div>
-              <div style="display: inline-flex; background: rgba(0, 0, 0, 0.4); border-radius: 20px; padding: 3px; gap: 5px;">
-                  <button id="btn-tab-host" onclick="window.switchMultiplayerTab('host')" style="background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2); border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;">Host</button>
-                  <button id="btn-tab-join" onclick="window.switchMultiplayerTab('join')" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;">Join</button>
+      <div id="view-battle-stadium" class="game-view" style="display:none; background-image: url('./Assets/BG/BG.png'); background-size: 100% 100%; height: 100%; position: relative; align-items: center; justify-content: flex-start; flex-direction: column; overflow-y: auto; box-sizing: border-box; padding: 15px 10px;">
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 5px; margin-bottom: 5px; flex-shrink: 0;">
+              <div style="font-weight: bold; font-size: 20px; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">Multiplayer</div>
+              <div style="display: inline-flex; background: rgba(0, 0, 0, 0.6); border-radius: 20px; padding: 3px; gap: 5px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);">
+                  <button id="btn-tab-host" onclick="window.switchMultiplayerTab('host')" style="background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2); border-radius: 15px; padding: 4px 15px; font-weight: bold; cursor: pointer; font-size: 12px; transition: all 0.2s;">Host</button>
+                  <button id="btn-tab-join" onclick="window.switchMultiplayerTab('join')" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 4px 15px; font-weight: bold; cursor: pointer; font-size: 12px; transition: all 0.2s;">Join</button>
               </div>
           </div>
 
-          <div style="text-align: center; color: white; display: flex; flex-direction: column; gap: 20px; padding-bottom: 20px; min-width: 400px;">
-              <p style="margin: 0; text-shadow: 1px 1px 2px rgba(0,0,0,0.8);">Connect with a friend to battle using your current active party!</p>
+          <div style="text-align: center; color: white; display: flex; flex-direction: column; gap: 5px; width: 100%; max-width: 450px; flex-shrink: 0;">
+              <p style="margin: 0; font-size: 11px; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); background: rgba(0,0,0,0.4); padding: 5px 10px; border-radius: 8px;">Connect with a friend to battle using your current active party!</p>
 
               <div style="display: flex; justify-content: center; width: 100%;">
-                  <div id="mp-host-container" style="display: block; background: rgba(0,0,0,0.8); padding: 20px; border-radius: 10px; width: 100%; box-sizing: border-box; border: 1px solid #555;">
-                      <button id="btn-mp-host" style="padding: 10px; width: 100%; background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2); border-radius: 5px; font-weight: bold; cursor: pointer; transition: all 0.2s;">Generate Code</button>
-                      <p style="margin-top: 15px; font-size: 14px;">Send this code to your friend:</p>
-                      <div style="display: flex; gap: 5px; align-items: center;">
-                          <input type="text" id="multiplayer-host-id" readonly placeholder="Waiting..." style="flex: 1; padding: 8px; box-sizing: border-box; font-size: 12px; background: #222; color: white; border: 1px solid #555; border-radius: 5px;">
-                          <button id="btn-copy-host" style="padding: 8px 12px; font-size: 12px; background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2); border-radius: 5px; font-weight: bold; cursor: pointer; transition: all 0.2s;">Copy</button>
+                  <div id="mp-host-container" style="display: block; background: rgba(20, 25, 30, 0.95); padding: 10px; border-radius: 8px; width: 100%; box-sizing: border-box; border: 1px solid #34495e; box-shadow: 0 4px 8px rgba(0,0,0,0.5);">
+                      <button id="btn-mp-host" style="padding: 6px; width: 100%; background: linear-gradient(to bottom, #2ecc71, #27ae60); color: white; border: 1px solid #27ae60; box-shadow: 0 2px 4px rgba(0,0,0,0.2); border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 12px; transition: all 0.2s;">Generate Code</button>
+
+                      <div style="margin-top: 6px; background: rgba(0,0,0,0.4); padding: 6px; border-radius: 6px; border: 1px solid #444;">
+                          <p style="margin: 0 0 3px 0; font-size: 11px; color: #ccc; text-align: left;">1. Send this code to your friend:</p>
+                          <div style="display: flex; gap: 5px; align-items: center;">
+                              <input type="text" id="multiplayer-host-id" readonly placeholder="Waiting..." style="flex: 1; padding: 4px 6px; box-sizing: border-box; font-size: 11px; background: #111; color: #1abc9c; border: 1px solid #555; border-radius: 4px; font-family: monospace;">
+                              <button id="btn-copy-host" style="padding: 4px 8px; font-size: 11px; background: linear-gradient(to bottom, #34495e, #2c3e50); color: white; border: 1px solid #555; border-radius: 4px; font-weight: bold; cursor: pointer; transition: all 0.2s;">Copy</button>
+                          </div>
                       </div>
-                      <p style="margin-top: 20px; font-size: 14px;">Paste your friend's Answer Code here:</p>
-                      <div style="display: flex; gap: 5px; align-items: center;">
-                          <input type="text" id="mp-host-answer-input" placeholder="Paste Answer Code" style="flex: 1; padding: 8px; box-sizing: border-box; font-size: 12px; border-radius: 5px; background: white; color: black;">
-                          <button id="btn-paste-host" style="padding: 8px 12px; font-size: 12px; background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2); border-radius: 5px; font-weight: bold; cursor: pointer; transition: all 0.2s;">Paste</button>
+
+                      <div style="margin-top: 6px; background: rgba(0,0,0,0.4); padding: 6px; border-radius: 6px; border: 1px solid #444;">
+                          <p style="margin: 0 0 3px 0; font-size: 11px; color: #ccc; text-align: left;">2. Paste your friend's Answer Code here:</p>
+                          <div style="display: flex; gap: 5px; align-items: center;">
+                              <input type="text" id="mp-host-answer-input" placeholder="Paste Answer Code" style="flex: 1; padding: 4px 6px; box-sizing: border-box; font-size: 11px; border-radius: 4px; background: #fff; color: #000; border: 1px solid #ccc; font-family: monospace;">
+                              <button id="btn-paste-host" style="padding: 4px 8px; font-size: 11px; background: linear-gradient(to bottom, #34495e, #2c3e50); color: white; border: 1px solid #555; border-radius: 4px; font-weight: bold; cursor: pointer; transition: all 0.2s;">Paste</button>
+                          </div>
                       </div>
-                      <button id="btn-mp-complete" style="padding: 10px; margin-top: 15px; width: 100%; background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2); border-radius: 5px; font-weight: bold; cursor: pointer; transition: all 0.2s;">Connect</button>
+
+                      <button id="btn-mp-complete" style="padding: 6px; margin-top: 6px; width: 100%; background: linear-gradient(to bottom, #9b59b6, #8e44ad); color: white; border: 1px solid #8e44ad; box-shadow: 0 2px 4px rgba(0,0,0,0.2); border-radius: 5px; font-weight: bold; font-size: 12px; cursor: pointer; transition: all 0.2s;">Connect</button>
                   </div>
 
-                  <div id="mp-join-container" style="display: none; background: rgba(0,0,0,0.8); padding: 20px; border-radius: 10px; width: 100%; box-sizing: border-box; border: 1px solid #555;">
-                      <p style="margin-top: 0; font-size: 14px;">Paste Host's Offer Code here:</p>
-                      <div style="display: flex; gap: 5px; align-items: center;">
-                          <input type="text" id="mp-join-input" placeholder="Paste Code Here" style="flex: 1; padding: 8px; box-sizing: border-box; font-size: 12px; border-radius: 5px; background: white; color: black;">
-                          <button id="btn-paste-join" style="padding: 8px 12px; font-size: 12px; background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2); border-radius: 5px; font-weight: bold; cursor: pointer; transition: all 0.2s;">Paste</button>
+                  <div id="mp-join-container" style="display: none; background: rgba(20, 25, 30, 0.95); padding: 10px; border-radius: 8px; width: 100%; box-sizing: border-box; border: 1px solid #34495e; box-shadow: 0 4px 8px rgba(0,0,0,0.5);">
+                      <div style="background: rgba(0,0,0,0.4); padding: 6px; border-radius: 6px; border: 1px solid #444;">
+                          <p style="margin: 0 0 3px 0; font-size: 11px; color: #ccc; text-align: left;">1. Paste Host's Offer Code here:</p>
+                          <div style="display: flex; gap: 5px; align-items: center;">
+                              <input type="text" id="mp-join-input" placeholder="Paste Code Here" style="flex: 1; padding: 4px 6px; box-sizing: border-box; font-size: 11px; border-radius: 4px; background: #fff; color: #000; border: 1px solid #ccc; font-family: monospace;">
+                              <button id="btn-paste-join" style="padding: 4px 8px; font-size: 11px; background: linear-gradient(to bottom, #34495e, #2c3e50); color: white; border: 1px solid #555; border-radius: 4px; font-weight: bold; cursor: pointer; transition: all 0.2s;">Paste</button>
+                          </div>
                       </div>
-                      <button id="btn-mp-join" style="padding: 10px; margin-top: 15px; width: 100%; background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2); border-radius: 5px; font-weight: bold; cursor: pointer; transition: all 0.2s;">Generate Code</button>
 
-                      <p style="margin-top: 20px; font-size: 14px;">Send this Answer Code back to Host:</p>
-                      <div style="display: flex; gap: 5px; align-items: center;">
-                          <input type="text" id="multiplayer-client-id" readonly placeholder="Waiting..." style="flex: 1; padding: 8px; box-sizing: border-box; font-size: 12px; background: #222; color: white; border: 1px solid #555; border-radius: 5px;">
-                          <button id="btn-copy-client" style="padding: 8px 12px; font-size: 12px; background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2); border-radius: 5px; font-weight: bold; cursor: pointer; transition: all 0.2s;">Copy</button>
+                      <button id="btn-mp-join" style="padding: 6px; margin-top: 6px; width: 100%; background: linear-gradient(to bottom, #2ecc71, #27ae60); color: white; border: 1px solid #27ae60; box-shadow: 0 2px 4px rgba(0,0,0,0.2); border-radius: 5px; font-weight: bold; font-size: 12px; cursor: pointer; transition: all 0.2s;">Generate Code</button>
+
+                      <div style="margin-top: 6px; background: rgba(0,0,0,0.4); padding: 6px; border-radius: 6px; border: 1px solid #444;">
+                          <p style="margin: 0 0 3px 0; font-size: 11px; color: #ccc; text-align: left;">2. Send this Answer Code back to Host:</p>
+                          <div style="display: flex; gap: 5px; align-items: center;">
+                              <input type="text" id="multiplayer-client-id" readonly placeholder="Waiting..." style="flex: 1; padding: 4px 6px; box-sizing: border-box; font-size: 11px; background: #111; color: #1abc9c; border: 1px solid #555; border-radius: 4px; font-family: monospace;">
+                              <button id="btn-copy-client" style="padding: 4px 8px; font-size: 11px; background: linear-gradient(to bottom, #34495e, #2c3e50); color: white; border: 1px solid #555; border-radius: 4px; font-weight: bold; cursor: pointer; transition: all 0.2s;">Copy</button>
+                          </div>
                       </div>
                   </div>
               </div>
 
-              <div style="display: flex; justify-content: center; gap: 20px;">
-                  <div style="display: flex; width: 220px;">
-                      <button id="btn-mp-connection-status" disabled style="width: 100%; padding: 15px 0; font-size: 18px; font-weight: bold; background: #e74c3c; color: white; border: none; border-radius: 5px; opacity: 1; cursor: default;">Not Connected</button>
-                  </div>
-                  <div style="display: flex; width: 220px;">
-                      <button id="btn-mp-battle" disabled style="width: 100%; padding: 15px 0; font-size: 18px; font-weight: bold; background: #95a5a6; color: white; border: none; border-radius: 5px; cursor: not-allowed;">Battle</button>
-                  </div>
+              <div style="display: flex; justify-content: space-between; gap: 10px; width: 100%; margin-top: 0px;">
+                  <button id="btn-mp-connection-status" disabled style="flex: 1; padding: 6px 0; font-size: 13px; font-weight: bold; background: #e74c3c; color: white; border: 1px solid #c0392b; border-radius: 5px; opacity: 1; cursor: default; box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);">Not Connected</button>
+                  <button id="btn-mp-battle" disabled style="flex: 1; padding: 6px 0; font-size: 13px; font-weight: bold; background: #95a5a6; color: white; border: 1px solid #7f8c8d; border-radius: 5px; cursor: not-allowed; box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);">Battle</button>
               </div>
           </div>
       </div>
