@@ -118,6 +118,14 @@ export function getChallengeData(unlock) {
         textParts.push(`Defeat ${req.defeatSpecific.count} ${req.defeatSpecific.name} ${countDisplay(defeated, req.defeatSpecific.count)}${getStatusHtml(defeated >= req.defeatSpecific.count)}`);
     }
 
+    if (req.defeatMultipleSpecific) {
+        for (let target of req.defeatMultipleSpecific) {
+            let defeated = state.stats.challengeSpecificDefeats ? (state.stats.challengeSpecificDefeats[target.name] || 0) : 0;
+            if (defeated < target.count) isMet = false;
+            textParts.push(`Defeat ${target.count} ${target.name} ${countDisplay(defeated, target.count)}${getStatusHtml(defeated >= target.count)}`);
+        }
+    }
+
     if (req.defeatEliteFourAndChampion) {
         let beatenE4 = state.stats.defeatedBosses && (state.stats.defeatedBosses["Elite 4 Lorelei"] || state.stats.defeatedBosses["Lorelei"]) && state.stats.defeatedBosses["Champion Rival"];
         if (!beatenE4) isMet = false;
