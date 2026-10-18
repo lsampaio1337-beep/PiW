@@ -1216,13 +1216,13 @@ export const johtoRoutes = [
         "pokemonId": 33,
         "minLevel": 86,
         "maxLevel": 90,
-        "chance": 0.15
+        "chance": 0.25
       },
       {
         "pokemonId": 30,
         "minLevel": 86,
         "maxLevel": 90,
-        "chance": 0.15
+        "chance": 0.25
       },
       {
         "pokemonId": 111,
@@ -1243,22 +1243,51 @@ export const johtoRoutes = [
         "chance": 0.1
       },
       {
-        "pokemonId": 128,
-        "minLevel": 88,
-        "maxLevel": 91,
-        "chance": 0.1
-      },
-      {
         "pokemonId": 113,
         "minLevel": 88,
         "maxLevel": 91,
         "chance": 0.1
+      }
+    ]
+  },
+  {
+    "name": "Kanto Safari Zone",
+    "spawns": [
+      {
+        "pokemonId": 34,
+        "minLevel": 88,
+        "maxLevel": 93,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 31,
+        "minLevel": 88,
+        "maxLevel": 93,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 112,
+        "minLevel": 88,
+        "maxLevel": 93,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 113,
+        "minLevel": 88,
+        "maxLevel": 93,
+        "chance": 0.2
       },
       {
         "pokemonId": 212,
-        "minLevel": 89,
-        "maxLevel": 91,
-        "chance": 0.1
+        "minLevel": 88,
+        "maxLevel": 93,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 128,
+        "minLevel": 88,
+        "maxLevel": 93,
+        "chance": 0.2
       }
     ]
   },
@@ -2443,7 +2472,8 @@ export const johtoUnlocks = [
     "areaId": "Route 12",
     "unlocks": [
       "Fuschia Gym",
-      "Safari Zone"
+      "Safari Zone",
+      "Kanto Safari Zone"
     ],
     "requirements": {
       "catchSpecies": [
