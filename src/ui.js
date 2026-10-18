@@ -384,6 +384,22 @@ window.completeChallenge = function(targetAreaId) {
                  }
              }
         }
+        if (unlock.requirements.catchByRarity) {
+            if (state.stats.challengeCaughtSpecific) {
+                let rarities = ["Weak", "Regular", "Uncommon", "Rare", "Epic", "Shiny", "Legendary", "Mythical"];
+                let targetRarities = [unlock.requirements.catchByRarity.rarity];
+                if (unlock.requirements.catchByRarity.rarity.endsWith('+')) {
+                    let baseRarity = unlock.requirements.catchByRarity.rarity.slice(0, -1);
+                    let idx = rarities.indexOf(baseRarity);
+                    if (idx !== -1) {
+                        targetRarities = rarities.slice(idx);
+                    }
+                }
+                for (let r of targetRarities) {
+                    delete state.stats.challengeCaughtSpecific["Any_" + r];
+                }
+            }
+        }
         if (unlock.requirements.catchSpeciesByRarity) {
              for (let s of unlock.requirements.catchSpeciesByRarity) {
                  if (state.stats.challengeCaughtSpecific) delete state.stats.challengeCaughtSpecific[s.species + "_" + s.rarity];
@@ -514,6 +530,12 @@ window.cheatProgressChallenge = function(targetAreaId) {
                     state.stats.caughtSpecies[s] = (state.stats.caughtSpecies[s] || 0) + 1;
                 });
             }
+        }
+        if (req.catchByRarity) {
+             let baseRarity = req.catchByRarity.rarity.replace('+', '');
+             let key = "Any_" + baseRarity;
+             if (!state.stats.challengeCaughtSpecific) state.stats.challengeCaughtSpecific = {};
+             state.stats.challengeCaughtSpecific[key] = (state.stats.challengeCaughtSpecific[key] || 0) + req.catchByRarity.count;
         }
         if (req.catchByRarityAndType) {
              let key = req.catchByRarityAndType.type + "_" + req.catchByRarityAndType.rarity;

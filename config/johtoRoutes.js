@@ -1818,7 +1818,7 @@ export const johtoUnlocks = [
     ],
     "requirements": {
       "catchByRarity": {
-        "rarity": "Rare",
+        "rarity": "Rare+",
         "count": 1
       }
     },

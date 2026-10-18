@@ -92,6 +92,30 @@ export function getChallengeData(unlock) {
         }
     }
 
+    if (req.catchByRarity) {
+        let rarities = ["Weak", "Regular", "Uncommon", "Rare", "Epic", "Shiny", "Legendary", "Mythical"];
+        let targetRarities = [req.catchByRarity.rarity];
+
+        let displayRarity = req.catchByRarity.rarity;
+        if (req.catchByRarity.rarity.endsWith('+')) {
+            let baseRarity = req.catchByRarity.rarity.slice(0, -1);
+            let idx = rarities.indexOf(baseRarity);
+            if (idx !== -1) {
+                targetRarities = rarities.slice(idx);
+            }
+        }
+
+        let caughtCount = 0;
+        if (state.stats.challengeCaughtSpecific) {
+            for (let r of targetRarities) {
+                caughtCount += state.stats.challengeCaughtSpecific["Any_" + r] || 0;
+            }
+        }
+
+        if (caughtCount < req.catchByRarity.count) isMet = false;
+        textParts.push(`Catch ${req.catchByRarity.count} ${displayRarity} Pokémon from ${unlock.areaId} ${countDisplay(caughtCount, req.catchByRarity.count)}${getStatusHtml(caughtCount >= req.catchByRarity.count)}`);
+    }
+
     if (req.catchByRarityAndType) {
         let caughtKey = req.catchByRarityAndType.type + "_" + req.catchByRarityAndType.rarity;
         let caughtCount = state.stats.challengeCaughtSpecific ? (state.stats.challengeCaughtSpecific[caughtKey] || 0) : 0;
