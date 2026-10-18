@@ -260,7 +260,32 @@ function generateMarkersForRegion(region, unlockedAreas) {
             const locationName = locationData.name;
             const coords = locationData;
 
-            html += generateMarkerHtml(locationId, locationName, coords, true, false, false);
+            let hasNewNotification = false;
+            let showCheckmark = false;
+
+            if (state.stats.newRoutes && state.stats.newRoutes.some(r => parseAreaNames(r).includes(locationName))) {
+                hasNewNotification = true;
+            }
+
+            if (locationId === 'violet_gym' && state.trainer.badges >= 9) showCheckmark = true;
+            if (locationId === 'azalea_gym' && state.trainer.badges >= 10) showCheckmark = true;
+            if (locationId === 'goldenrood_gym' && state.trainer.badges >= 11) showCheckmark = true;
+            if (locationId === 'ecruteak_gym' && state.trainer.badges >= 12) showCheckmark = true;
+            if (locationId === 'cianwood_gym' && state.trainer.badges >= 13) showCheckmark = true;
+            if (locationId === 'olivini_gym' && state.trainer.badges >= 14) showCheckmark = true;
+            if (locationId === 'mahogany_gym' && state.trainer.badges >= 15) showCheckmark = true;
+            if (locationId === 'blackthorn_gym' && state.trainer.badges >= 16) showCheckmark = true;
+
+            if (locationId === 'pewter_gym' && state.trainer.badges >= 1) showCheckmark = true;
+            if (locationId === 'cerulean_gym' && state.trainer.badges >= 2) showCheckmark = true;
+            if (locationId === 'vermilion_gym' && state.trainer.badges >= 3) showCheckmark = true;
+            if (locationId === 'celadon_gym' && state.trainer.badges >= 4) showCheckmark = true;
+            if (locationId === 'fuchsia_gym' && state.trainer.badges >= 5) showCheckmark = true;
+            if (locationId === 'saffron_gym' && state.trainer.badges >= 6) showCheckmark = true;
+            if (locationId === 'cinnabar_gym' && state.trainer.badges >= 7) showCheckmark = true;
+            if (locationId === 'viridian_gym' && state.trainer.badges >= 8) showCheckmark = true;
+
+            html += generateMarkerHtml(locationId, locationName, coords, true, hasNewNotification, showCheckmark);
         }
     } else if (region === 'Hoenn') {
         for (const [locationId, locationData] of Object.entries(state.config.hoennMapCoordinates || {})) {
@@ -274,14 +299,56 @@ function generateMarkersForRegion(region, unlockedAreas) {
                 hasNewNotification = true;
             }
 
-            if (locationId === 'rustboro_gym' && state.trainer.badges >= 1) showCheckmark = true;
-            if (locationId === 'dewford_gym' && state.trainer.badges >= 2) showCheckmark = true;
-            if (locationId === 'mauville_gym' && state.trainer.badges >= 3) showCheckmark = true;
-            if (locationId === 'lavaridge_gym' && state.trainer.badges >= 4) showCheckmark = true;
-            if (locationId === 'petalburg_gym' && state.trainer.badges >= 5) showCheckmark = true;
-            if (locationId === 'fortree_gym' && state.trainer.badges >= 6) showCheckmark = true;
-            if (locationId === 'mossdeep_gym' && state.trainer.badges >= 7) showCheckmark = true;
-            if (locationId === 'sootopolis_gym' && state.trainer.badges >= 8) showCheckmark = true;
+            if (locationId === 'rustboro_gym' && state.trainer.badges >= 17) showCheckmark = true;
+            if (locationId === 'dewford_gym' && state.trainer.badges >= 18) showCheckmark = true;
+            if (locationId === 'mauville_gym' && state.trainer.badges >= 19) showCheckmark = true;
+            if (locationId === 'lavaridge_gym' && state.trainer.badges >= 20) showCheckmark = true;
+            if (locationId === 'petalburg_gym' && state.trainer.badges >= 21) showCheckmark = true;
+            if (locationId === 'fortree_gym' && state.trainer.badges >= 22) showCheckmark = true;
+            if (locationId === 'mossdeep_gym' && state.trainer.badges >= 23) showCheckmark = true;
+            if (locationId === 'sootopolis_gym' && state.trainer.badges >= 24) showCheckmark = true;
+
+            html += generateMarkerHtml(locationId, locationName, coords, true, hasNewNotification, showCheckmark);
+        }
+    } else if (region === 'Sinnoh') {
+        for (const [locationId, locationData] of Object.entries(state.config.sinnohMapCoordinates || {})) {
+            const locationName = locationData.name;
+            const coords = locationData;
+
+            let hasNewNotification = false;
+            let showCheckmark = false;
+            if (state.stats.newRoutes && state.stats.newRoutes.some(r => parseAreaNames(r).includes(locationName))) {
+                hasNewNotification = true;
+            }
+            if (locationId === 'oreburgh_gym' && state.trainer.badges >= 25) showCheckmark = true;
+            if (locationId === 'eterna_gym' && state.trainer.badges >= 26) showCheckmark = true;
+            if (locationId === 'veilstone_gym' && state.trainer.badges >= 27) showCheckmark = true;
+            if (locationId === 'pastoria_gym' && state.trainer.badges >= 28) showCheckmark = true;
+            if (locationId === 'hearthome_gym' && state.trainer.badges >= 29) showCheckmark = true;
+            if (locationId === 'canalave_gym' && state.trainer.badges >= 30) showCheckmark = true;
+            if (locationId === 'snowpoint_gym' && state.trainer.badges >= 31) showCheckmark = true;
+            if (locationId === 'sunyshore_gym' && state.trainer.badges >= 32) showCheckmark = true;
+
+            html += generateMarkerHtml(locationId, locationName, coords, true, hasNewNotification, showCheckmark);
+        }
+    } else if (region === 'Unova') {
+        for (const [locationId, locationData] of Object.entries(state.config.unovaMapCoordinates || {})) {
+            const locationName = locationData.name;
+            const coords = locationData;
+
+            let hasNewNotification = false;
+            let showCheckmark = false;
+            if (state.stats.newRoutes && state.stats.newRoutes.some(r => parseAreaNames(r).includes(locationName))) {
+                hasNewNotification = true;
+            }
+            if (locationId === 'striaton_gym' && state.trainer.badges >= 33) showCheckmark = true;
+            if (locationId === 'nacrene_gym' && state.trainer.badges >= 34) showCheckmark = true;
+            if (locationId === 'burgh_gym' && state.trainer.badges >= 35) showCheckmark = true;
+            if (locationId === 'nimbasa_gym' && state.trainer.badges >= 36) showCheckmark = true;
+            if (locationId === 'driftveil_gym' && state.trainer.badges >= 37) showCheckmark = true;
+            if (locationId === 'mistralton_gym' && state.trainer.badges >= 38) showCheckmark = true;
+            if (locationId === 'icirrus_gym' && state.trainer.badges >= 39) showCheckmark = true;
+            if (locationId === 'opelucid_gym' && state.trainer.badges >= 40) showCheckmark = true;
 
             html += generateMarkerHtml(locationId, locationName, coords, true, hasNewNotification, showCheckmark);
         }
