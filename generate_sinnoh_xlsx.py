@@ -617,8 +617,52 @@ sinnoh_data = [
 columns = ["Progress Order", "Route / Place", "Pokemon Name", "Method", "Level", "% of appearance"]
 df = pd.DataFrame(sinnoh_data, columns=columns)
 
+# Group by Progress Order to get the set of Pokemon for each
+order_groups = df.groupby("Progress Order")
+unique_orders = df["Progress Order"].unique()
+
+kept_orders = []
+kept_pokemon_sets = []
+
+for order in unique_orders:
+    current_pokemon = set(order_groups.get_group(order)["Pokemon Name"])
+
+    if not kept_orders:
+        # Keep the first one unconditionally
+        kept_orders.append(order)
+        kept_pokemon_sets.append(current_pokemon)
+    else:
+        # Check against all previously kept orders
+        should_keep = True
+        for prev_pokemon in kept_pokemon_sets:
+            # new pokemon added = elements in current_pokemon but NOT in prev_pokemon
+            new_pokemon_count = len(current_pokemon - prev_pokemon)
+            if new_pokemon_count <= 1:
+                should_keep = False
+                break
+
+        if should_keep:
+            kept_orders.append(order)
+            kept_pokemon_sets.append(current_pokemon)
+
+# Filter the dataframe to only include kept orders
+df_filtered = df[df["Progress Order"].isin(kept_orders)].copy()
+
+# Determine First Appearance
+seen_pokemon = set()
+first_appearance_list = []
+
+for pokemon in df_filtered["Pokemon Name"]:
+    if pokemon not in seen_pokemon:
+        first_appearance_list.append("Yes")
+        seen_pokemon.add(pokemon)
+    else:
+        first_appearance_list.append("No")
+
+df_filtered["First Appearance"] = first_appearance_list
+
 output_filename = "Sinnoh_Complete.xlsx"
 with pd.ExcelWriter(output_filename, engine="openpyxl") as writer:
-    df.to_excel(writer, index=False, sheet_name="Sheet1")
+    df_filtered.to_excel(writer, index=False, sheet_name="Sheet1")
 
-print(f"Planilha '{output_filename}' gerada com sucesso com {len(df)} registros.")
+print(f"Planilha '{output_filename}' gerada com sucesso com {len(df_filtered)} registros (após filtragem).")
