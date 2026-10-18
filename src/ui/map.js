@@ -205,6 +205,7 @@ function getUnlockedAreas() {
 
     if (window.currentMapRegion === "Johto") {
         unlockedAreas.add("Daycare");
+        unlockedAreas.add("Route 29");
     }
 
     if (targetStats.completed150Challenge) {
@@ -259,8 +260,17 @@ function generateMarkersForRegion(region, unlockedAreas) {
         for (const [locationId, locationData] of Object.entries(state.config.johtoMapCoordinates || {})) {
             const locationName = locationData.name;
             const coords = locationData;
+            let isUnlocked = unlockedAreas.has(locationName);
+            if (!isUnlocked) continue;
 
-            html += generateMarkerHtml(locationId, locationName, coords, true, false, false);
+            let hasNewNotification = false;
+            let showCheckmark = false;
+
+            if (state.stats.newRoutes && state.stats.newRoutes.some(r => parseAreaNames(r).includes(locationName))) {
+                hasNewNotification = true;
+            }
+
+            html += generateMarkerHtml(locationId, locationName, coords, true, hasNewNotification, showCheckmark);
         }
     } else if (region === 'Hoenn') {
         for (const [locationId, locationData] of Object.entries(state.config.hoennMapCoordinates || {})) {
