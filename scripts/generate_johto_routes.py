@@ -261,8 +261,8 @@ challenges_data_raw = [
     ["Challenge 5", "Route 32", "Catch 1 Rare+ Pokémon from Route 32", "Tiny Fishing Spot + 5 Ultraball"],
     ["Challenge 6", "Tiny Fishing Spot", "Catch 5 Water-type Pokémon", "Route 33"],
     ["Challenge 7", "Route 33", "Catch 2 Mareep", "Ruins of Alph"],
-    ["Challenge 8", "Ruins of Alph", "Defeat 20 Unown", "Azalea Town + Water Stones"],
-    ["Challenge 9", "Azalea Town", "Earn Hive Badge (Badge 2)", "Ilex Forest"],
+    ["Challenge 8", "Ruins of Alph", "Defeat 20 Unown", "Azalea Gym + Water Stones"],
+    ["Challenge 9", "Azalea Gym", "Earn Hive Badge (Badge 2)", "Ilex Forest"],
     ["Challenge 10", "Ilex Forest", "Catch 1 Rare+ Paras", "Route 34 + 5 Greatball"],
     ["Challenge 11", "Route 34", "Catch 2 Ditto", "Goldenrod Gym + Goldenrod Game Corner"],
     ["Challenge 12", "Goldenrod Gym", "Earn Plain Badge (Badge 3)", "Route 35 + Extra Challenge (Roaming)"],
@@ -281,8 +281,8 @@ challenges_data_raw = [
     ["Challenge 25", "Mount Mortar", "Catch 1 Ghost-type Pokémon", "Olivine Gym + Ghost Stone"],
     ["Challenge 26", "Olivine Gym", "Earn Mineral Badge (Badge 6)", "Standard Fishing Spot"],
     ["Challenge 27", "Standard Fishing Spot", "Catch 1 Lanturn", "Ice Path"],
-    ["Challenge 28", "Ice Path", "Defeat 2 Jynx", "Mahogany Town + 2 Ice Stones"],
-    ["Challenge 29", "Mahogany Town", "Earn Glacier Badge (Badge 7)", "Route 45"],
+    ["Challenge 28", "Ice Path", "Defeat 2 Jynx", "Mahogany Gym + 2 Ice Stones"],
+    ["Challenge 29", "Mahogany Gym", "Earn Glacier Badge (Badge 7)", "Route 45"],
     ["Challenge 30", "Route 45", "Catch 1 Weak Pineco", "Blackthorn Gym + 10 Ultraball"],
     ["Challenge 31", "Blackthorn Gym", "Earn Rising Badge (Badge 8)", "Big Fishing Spot"],
     ["Challenge 32", "Big Fishing Spot", "Catch 1 Mantine", "Dark Cave"],
@@ -395,6 +395,25 @@ def parse_gift(gift_str):
 
     return parsed_gifts if parsed_gifts else None
 
+leader_mapping = {
+        "Zephyr Badge": "Falkner",
+        "Hive Badge": "Bugsy",
+        "Plain Badge": "Whitney",
+        "Fog Badge": "Morty",
+        "Storm Badge": "Chuck",
+        "Mineral Badge": "Jasmine",
+        "Glacier Badge": "Pryce",
+        "Rising Badge": "Clair",
+        "Badge 9": "Brock",
+        "Badge 10": "Misty",
+        "Badge 11": "Lt. Surge",
+        "Badge 12": "Erika",
+        "Badge 13": "Sabrina",
+        "Badge 14": "Koga",
+        "Badge 15": "Blaine",
+        "Badge 16": "Giovanni"
+}
+
 def parse_requirements(req_str, area_id):
     reqs = {}
     if "Defeat" in req_str and "Pokémon on" in req_str:
@@ -408,11 +427,11 @@ def parse_requirements(req_str, area_id):
     elif "Earn" in req_str and "Badge" in req_str:
         match = re.search(r'Earn (.+? Badge) \(Badge (\d+)\)', req_str)
         if match:
-            reqs["earnBadge"] = {"name": match.group(1), "leader": "Unknown", "badgeCount": int(match.group(2))}
+            reqs["earnBadge"] = {"name": match.group(1), "leader": leader_mapping.get(match.group(1), "Unknown"), "badgeCount": int(match.group(2))}
     elif "Badge" in req_str and "Earn" not in req_str and len(req_str.split()) <= 2:
         match = re.search(r'Badge (\d+)', req_str)
         if match:
-             reqs["earnBadge"] = {"name": f"Badge {match.group(1)}", "leader": "Unknown", "badgeCount": int(match.group(1))}
+             reqs["earnBadge"] = {"name": f"Badge {match.group(1)}", "leader": leader_mapping.get(f"Badge {match.group(1)}", "Unknown"), "badgeCount": int(match.group(1))}
     elif "Defeat all Elite 4" in req_str:
         reqs["defeatEliteFourAndChampion"] = True
     elif req_str == "Defeat Red":
