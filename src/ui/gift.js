@@ -44,7 +44,11 @@ window.claimPendingGift = function(index) {
         state.stats.claimedGifts = [];
         // For backwards compatibility, populate existing badges
         for (let i = 0; i < state.trainer.badges - (gift.type === 'badge' ? 1 : 0); i++) {
-            state.stats.claimedGifts.push({ type: 'badge', gymIndex: i });
+            let gymIndex = i;
+            if (state.currentRegionName === 'Johto') {
+                gymIndex = (i < 8) ? i + 9 : i - 8;
+            }
+            state.stats.claimedGifts.push({ type: 'badge', gymIndex: gymIndex });
         }
     }
     state.stats.claimedGifts.push(gift);
@@ -99,7 +103,11 @@ export function showGiftModal() {
     if (!state.stats.claimedGifts && state.trainer.badges > 0) {
         state.stats.claimedGifts = [];
         for (let i = 0; i < state.trainer.badges; i++) {
-            state.stats.claimedGifts.push({ type: 'badge', gymIndex: i });
+            let gymIndex = i;
+            if (state.currentRegionName === 'Johto') {
+                gymIndex = (i < 8) ? i + 9 : i - 8;
+            }
+            state.stats.claimedGifts.push({ type: 'badge', gymIndex: gymIndex });
         }
     }
 
