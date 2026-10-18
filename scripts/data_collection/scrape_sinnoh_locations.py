@@ -307,8 +307,18 @@ def parse_location(url, route_name, progress_order, plat_dex):
             'Level': merged_level
         })
 
-    method_groups = defaultdict(list)
+
+    # User requested: If a pokemon appears more than 1 time at the same route, keep only 1 register
+    # We will track seen pokemon in this route and keep the first one we process.
+    seen_pokemon = set()
+    deduped_encounters = []
     for enc in merged_encounters:
+        if enc['Pokemon Name'] not in seen_pokemon:
+            deduped_encounters.append(enc)
+            seen_pokemon.add(enc['Pokemon Name'])
+
+    method_groups = defaultdict(list)
+    for enc in deduped_encounters:
         method_groups[enc['Method']].append(enc)
 
     final_encounters = []
