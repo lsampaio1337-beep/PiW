@@ -67,7 +67,7 @@ function generateMarkerHtml(locationId, locationName, coords, isUnlocked, hasNew
         markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Johto', 4)}`;
     } else if (locationId === 'cianwood_gym') {
         markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Johto', 5)}`;
-    } else if (locationId === 'olivini_gym') {
+    } else if (locationId === 'olivine_gym') {
         markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Johto', 6)}`;
     } else if (locationId === 'mahogany_gym') {
         markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Johto', 7)}`;
