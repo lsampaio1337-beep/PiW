@@ -759,7 +759,9 @@ export function showMapTooltip(e, locationName) {
                 let pName = "Unknown";
                 if (state.config.pokemonData) {
                     const pd = state.config.pokemonData[s.pokemonId - 1]; // Use O(1) lookup
-                    if (pd) pName = pd.name;
+                    if (pd) {
+                        pName = s.forceShiny && pd.name === "Gyarados" ? "Red Gyarados" : pd.name;
+                    }
                 }
                 info += `- ${pName} (Lvl: ${s.minLevel}-${s.maxLevel}, ${Math.round(s.chance * 100)}%)<br>`;
             });
