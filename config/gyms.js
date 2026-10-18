@@ -739,6 +739,62 @@ const gyms = [
         ]
       }
     ]
+  },
+  {
+    "id": "violet",
+    "name": "Violet Gym",
+    "leader": "Falkner",
+    "levelRequirement": 0,
+    "trainers": []
+  },
+  {
+    "id": "azalea",
+    "name": "Azalea Gym",
+    "leader": "Bugsy",
+    "levelRequirement": 0,
+    "trainers": []
+  },
+  {
+    "id": "goldenrod",
+    "name": "Goldenrod Gym",
+    "leader": "Whitney",
+    "levelRequirement": 0,
+    "trainers": []
+  },
+  {
+    "id": "ecruteak",
+    "name": "Ecruteak Gym",
+    "leader": "Morty",
+    "levelRequirement": 0,
+    "trainers": []
+  },
+  {
+    "id": "cianwood",
+    "name": "Cianwood Gym",
+    "leader": "Chuck",
+    "levelRequirement": 0,
+    "trainers": []
+  },
+  {
+    "id": "olivine",
+    "name": "Olivine Gym",
+    "leader": "Jasmine",
+    "levelRequirement": 0,
+    "trainers": []
+  },
+  {
+    "id": "mahogany",
+    "name": "Mahogany Gym",
+    "leader": "Pryce",
+    "levelRequirement": 0,
+    "trainers": []
+  },
+  {
+    "id": "blackthorn",
+    "name": "Blackthorn Gym",
+    "leader": "Clair",
+    "levelRequirement": 0,
+    "trainers": []
   }
 ];
 export default gyms;

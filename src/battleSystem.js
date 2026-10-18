@@ -561,7 +561,16 @@ class BattleSystem {
                     'BG-Gym-5-Fuchsia-Poison.png',
                     'BG-Gym-6-Saffron-Psychic.png',
                     'BG-Gym-7-Cinnabar-Fire.png',
-                    'BG-Gym-8-Viridian-Ground.png'
+                    'BG-Gym-8-Viridian-Ground.png',
+                    'BG-IndigoPlateau.png',
+                    '../Gym/BG/BG_Gym_Flying.png',
+                    '../Gym/BG/BG_Gym_Bug.png',
+                    '../Gym/BG/BG_Gym_Normal.png',
+                    '../Gym/BG/BG_Gym_Ghost.png',
+                    '../Gym/BG/BG_Gym_Fighting.png',
+                    '../Gym/BG/BG_Gym_Steel.png',
+                    '../Gym/BG/BG_Gym_Ice.png',
+                    '../Gym/BG/BG_Gym_Dragon.png'
                 ];
                 const bgImage = gymBGs[gymIndex] || 'BG.png';
                 vGym.style.backgroundImage = `url('./Assets/BG/${bgImage}')`;
@@ -741,8 +750,8 @@ class BattleSystem {
         // ...
         // Gym 8 (Index 7): Q=1.55, SumIV=480 => IV=80
         // E4 (Index 8): Q=1.6, SumIV=510 => IV=85
-        let qValue = 1.2 + (gymIndex * 0.05);
-        let sumIV = 270 + (gymIndex * 30);
+        let qValue = 1.2 + (this.state.trainer.badges * 0.05);
+        let sumIV = 270 + (this.state.trainer.badges * 30);
         let ivValue = sumIV / 6;
 
         let qualityName = "Gym"; // You can keep a standard name or map it if desired
@@ -1664,7 +1673,7 @@ class BattleSystem {
                 }
 
                 const gymIndex = this.state.config.gyms.findIndex(g => g.name === gym.name);
-                if (gymIndex !== -1 && this.state.trainer.badges === gymIndex) {
+                if (gymIndex !== -1 && this.state.trainer.badges === (this.state.currentRegionName === 'Johto' ? (gymIndex > 8 ? gymIndex - 9 : gymIndex + 8) : gymIndex)) {
                     if (!this.state.stats.pendingGifts) this.state.stats.pendingGifts = [];
                     this.state.stats.pendingGifts.push({ type: 'badge', gymName: gym.name, gymIndex: gymIndex });
                     this.state.globalStats.hasSeenGiftIcon = false;
