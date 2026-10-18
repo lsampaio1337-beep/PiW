@@ -153,19 +153,17 @@ def parse_location(url, route_name, progress_order, plat_dex):
                 method_from_heading = text
 
         for tbody in tbodies:
-            # Check for sub-header in the first row of tbody
-            first_tr = tbody.find('tr')
-            if not first_tr: continue
-
             sub_method = method_from_heading
-            th = first_tr.find('th')
-            if th and th.get('colspan'):
-                # it's a sub-header defining method!
-                sub_method_text = th.text.strip()
-                if sub_method_text and sub_method_text != "Pokémon FireRed in GBA slot":
-                   sub_method = sub_method_text
-                elif sub_method_text == "Pokémon FireRed in GBA slot":
-                   sub_method = "Dual-slot"
+            # Check for sub-header inside tbody (e.g. Swarm, GBA slot)
+            for tr in tbody.find_all('tr'):
+                th = tr.find('th')
+                if th and th.get('colspan'):
+                    sub_method_text = th.text.strip()
+                    if sub_method_text:
+                        if 'GBA slot' in sub_method_text or 'Ruby' in sub_method_text or 'Sapphire' in sub_method_text or 'Emerald' in sub_method_text or 'FireRed' in sub_method_text or 'LeafGreen' in sub_method_text:
+                           sub_method = "Dual-slot"
+                        else:
+                           sub_method = sub_method_text
 
             for tr in tbody.find_all('tr'):
                 tds = tr.find_all('td')
@@ -245,6 +243,14 @@ def parse_location(url, route_name, progress_order, plat_dex):
                     if td.get('class') and 'cell-num' in td.get('class'):
                         level = td.text.strip()
                         break
+
+
+                # Exclude specific special methods requested by user.
+                # We only want standard "Pokémon" tables (Walking, Surfing, Rods, etc.)
+                # If row_method indicates it's GBA slot, Swarm, Radar, Gift, etc. we skip it.
+                skip_methods = ['Swarm', 'Dual-slot', 'Poké Radar', 'PokeRadar', 'Radar', 'Gift', 'Event', 'Fossil']
+                if any(sm in row_method for sm in skip_methods):
+                    continue
 
                 raw_encounters.append({
                     'pokemon': poke_name,
