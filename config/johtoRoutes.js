@@ -575,7 +575,7 @@ export const johtoRoutes = [
     ]
   },
   {
-    "name": "Route 42",
+    "name": "Route 47",
     "spawns": [
       {
         "pokemonId": 56,
@@ -616,7 +616,7 @@ export const johtoRoutes = [
     ]
   },
   {
-    "name": "Mt. Mortar",
+    "name": "Mount Mortar",
     "spawns": [
       {
         "pokemonId": 74,
@@ -1818,7 +1818,7 @@ export const johtoUnlocks = [
     ],
     "requirements": {
       "catchByRarity": {
-        "rarity": "Rare+",
+        "rarity": "Rare",
         "count": 1
       }
     },
@@ -1933,7 +1933,7 @@ export const johtoUnlocks = [
     "areaId": "Goldenrod Gym",
     "unlocks": [
       "Route 35",
-      "Roaming"
+      "Extra Challenge (Roaming)"
     ],
     "requirements": {
       "earnBadge": {
@@ -2113,7 +2113,7 @@ export const johtoUnlocks = [
     "challengeName": "Challenge 22",
     "areaId": "Cianwood Gym",
     "unlocks": [
-      "Route 42"
+      "Route 47"
     ],
     "requirements": {
       "earnBadge": {
@@ -2125,15 +2125,34 @@ export const johtoUnlocks = [
   },
   {
     "challengeName": "Challenge 23",
-    "areaId": "Route 42",
+    "areaId": "Route 47",
     "unlocks": [
-      "Mt. Mortar"
+      "Safari Zone"
     ],
     "requirements": {
-      "defeatSpecific": {
-        "name": "Mankey",
-        "count": 10
+      "defeatCountRoute": {
+        "route": "Route 47",
+        "count": 50
       }
+    }
+  },
+  {
+    "challengeName": "Challenge 24",
+    "areaId": "Safari Zone",
+    "unlocks": [
+      "Mount Mortar"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Nidorino",
+          "count": 1
+        },
+        {
+          "species": "Nidorina",
+          "count": 1
+        }
+      ]
     },
     "gifts": [
       {
@@ -2143,8 +2162,8 @@ export const johtoUnlocks = [
     ]
   },
   {
-    "challengeName": "Challenge 24",
-    "areaId": "Mt. Mortar",
+    "challengeName": "Challenge 25",
+    "areaId": "Mount Mortar",
     "unlocks": [
       "Olivine Gym"
     ],
@@ -2162,7 +2181,7 @@ export const johtoUnlocks = [
     ]
   },
   {
-    "challengeName": "Challenge 25",
+    "challengeName": "Challenge 26",
     "areaId": "Olivine Gym",
     "unlocks": [
       "Standard Fishing Spot"
@@ -2176,7 +2195,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 26",
+    "challengeName": "Challenge 27",
     "areaId": "Standard Fishing Spot",
     "unlocks": [
       "Ice Path"
@@ -2191,7 +2210,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 27",
+    "challengeName": "Challenge 28",
     "areaId": "Ice Path",
     "unlocks": [
       "Mahogany Town"
@@ -2210,7 +2229,7 @@ export const johtoUnlocks = [
     ]
   },
   {
-    "challengeName": "Challenge 28",
+    "challengeName": "Challenge 29",
     "areaId": "Mahogany Town",
     "unlocks": [
       "Route 45"
@@ -2224,7 +2243,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 29",
+    "challengeName": "Challenge 30",
     "areaId": "Route 45",
     "unlocks": [
       "Blackthorn Gym"
@@ -2246,7 +2265,7 @@ export const johtoUnlocks = [
     ]
   },
   {
-    "challengeName": "Challenge 30",
+    "challengeName": "Challenge 31",
     "areaId": "Blackthorn Gym",
     "unlocks": [
       "Big Fishing Spot"
@@ -2260,7 +2279,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 31",
+    "challengeName": "Challenge 32",
     "areaId": "Big Fishing Spot",
     "unlocks": [
       "Dark Cave"
@@ -2275,7 +2294,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 32",
+    "challengeName": "Challenge 33",
     "areaId": "Dark Cave",
     "unlocks": [
       "Route 46"
@@ -2288,7 +2307,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 33",
+    "challengeName": "Challenge 34",
     "areaId": "Route 46",
     "unlocks": [
       "Indigo Plateau"
@@ -2323,7 +2342,7 @@ export const johtoUnlocks = [
     ]
   },
   {
-    "challengeName": "Challenge 34",
+    "challengeName": "Challenge 35",
     "areaId": "Viridian Forest",
     "unlocks": [
       "Pewter Gym",
@@ -2339,7 +2358,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 35",
+    "challengeName": "Challenge 36",
     "areaId": "Pewter Gym",
     "unlocks": [
       "Mount Moon"
@@ -2353,7 +2372,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 36",
+    "challengeName": "Challenge 37",
     "areaId": "Mount Moon",
     "unlocks": [
       "Cerulean Gym",
@@ -2369,7 +2388,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 37",
+    "challengeName": "Challenge 38",
     "areaId": "Cerulean Gym",
     "unlocks": [
       "Vermilion Gym"
@@ -2383,7 +2402,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 38",
+    "challengeName": "Challenge 39",
     "areaId": "Vermilion Gym",
     "unlocks": [
       "Route 8"
@@ -2397,7 +2416,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 39",
+    "challengeName": "Challenge 40",
     "areaId": "Route 8",
     "unlocks": [
       "Celadon Gym",
@@ -2411,7 +2430,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 40",
+    "challengeName": "Challenge 41",
     "areaId": "Celadon Gym",
     "unlocks": [
       "Saffron Gym"
@@ -2425,7 +2444,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 41",
+    "challengeName": "Challenge 42",
     "areaId": "Saffron Gym",
     "unlocks": [
       "Route 12"
@@ -2439,7 +2458,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 42",
+    "challengeName": "Challenge 43",
     "areaId": "Route 12",
     "unlocks": [
       "Fuschia Gym",
@@ -2455,7 +2474,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 43",
+    "challengeName": "Challenge 44",
     "areaId": "Fuschia Gym",
     "unlocks": [
       "Cycling Road",
@@ -2470,7 +2489,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 44",
+    "challengeName": "Challenge 45",
     "areaId": "Sea Routes",
     "unlocks": [
       "Cinnabar Gym",
@@ -2484,7 +2503,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 45",
+    "challengeName": "Challenge 46",
     "areaId": "Cinnabar Gym",
     "unlocks": [
       "Viridian Gym",
@@ -2499,7 +2518,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 46",
+    "challengeName": "Challenge 47",
     "areaId": "Viridian Gym",
     "unlocks": [
       "Red"
