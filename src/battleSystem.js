@@ -901,6 +901,10 @@ class BattleSystem {
 
             q = mathEngine.generateQuality(this.state.stats, this.state.casinoDoubleShiny);
 
+            if (!isRoamingEncounter && selectedSpawn && selectedSpawn.forceShiny) {
+                q = { name: "Shiny", q: 2.00 };
+            }
+
             // Track seen for pokedex using actual encounter (Ditto or regular)
             if (q.name === "Shiny") {
                 if (this.state.currentRoute === 'Casino') {
@@ -2043,6 +2047,10 @@ class BattleSystem {
             }
 
             q = mathEngine.generateQuality(this.state.stats, this.state.casinoDoubleShiny);
+
+            if (selectedSpawn && selectedSpawn.forceShiny) {
+                q = { name: "Shiny", q: 2.00 };
+            }
 
             if (!this.state.stats.seenSpecies) this.state.stats.seenSpecies = {};
             this.state.stats.seenSpecies[pokemonBase.name] = true;
