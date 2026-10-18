@@ -853,6 +853,7 @@ class BattleSystem {
 
             let actualPokemonBase;
             let isRoamingEncounter = false;
+            let selectedSpawn;
 
             // Check if Roaming challenge is active for the 1% beast spawn
             if (this.state.stats.activeChallenges && this.state.stats.activeChallenges.includes("Roaming")) {
@@ -876,7 +877,7 @@ class BattleSystem {
             } else {
                 const rand = Math.random();
                 let cumulative = 0;
-                let selectedSpawn = route.spawns[0];
+                selectedSpawn = route.spawns[0];
                 for (const spawn of route.spawns) {
                     cumulative += spawn.chance;
                     if (rand <= cumulative) {
@@ -900,6 +901,10 @@ class BattleSystem {
             }
 
             q = mathEngine.generateQuality(this.state.stats, this.state.casinoDoubleShiny);
+
+            if (!isRoamingEncounter && selectedSpawn && selectedSpawn.forceShiny) {
+                q = { name: "Shiny", q: 2.00 };
+            }
 
             // Track seen for pokedex using actual encounter (Ditto or regular)
             if (q.name === "Shiny") {
@@ -2043,6 +2048,10 @@ class BattleSystem {
             }
 
             q = mathEngine.generateQuality(this.state.stats, this.state.casinoDoubleShiny);
+
+            if (selectedSpawn && selectedSpawn.forceShiny) {
+                q = { name: "Shiny", q: 2.00 };
+            }
 
             if (!this.state.stats.seenSpecies) this.state.stats.seenSpecies = {};
             this.state.stats.seenSpecies[pokemonBase.name] = true;
