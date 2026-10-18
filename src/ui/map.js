@@ -627,6 +627,14 @@ export function navigateToLocation(locationName) {
         else if (locationName.includes("Saffron")) bgImg = "BG-Gym-6-Saffron-Psychic.png";
         else if (locationName.includes("Cinnabar")) bgImg = "BG-Gym-7-Cinnabar-Fire.png";
         else if (locationName.includes("Viridian Gym")) bgImg = "BG-Gym-8-Viridian-Ground.png";
+        else if (locationName.includes("Violet")) bgImg = "BG-Gym-9-Violet-Flying.png";
+        else if (locationName.includes("Azalea")) bgImg = "BG-Gym-10-Azalea-Bug.png";
+        else if (locationName.includes("Goldenro") || locationName.includes("Goldenrood")) bgImg = "BG-Gym-11-Goldenrod-Normal.png";
+        else if (locationName.includes("Ecruteak")) bgImg = "BG-Gym-12-Ecruteak-Ghost.png";
+        else if (locationName.includes("Cianwood")) bgImg = "BG-Gym-13-Cianwood-Fighting.png";
+        else if (locationName.includes("Olivin") || locationName.includes("Olivini")) bgImg = "BG-Gym-14-Olivine-Steel.png";
+        else if (locationName.includes("Mahogany")) bgImg = "BG-Gym-15-Mahogany-Ice.png";
+        else if (locationName.includes("Blackthorn")) bgImg = "BG-Gym-16-Blackthorn-Dragon.png";
         else if (locationName === "Indigo Plateau") {
             bgImg = "BG-IndigoPlateau.png";
             lookupName = "Indigo Plateau"; // Correct spelling for the gyms config
