@@ -584,8 +584,6 @@ window.cheatProgressChallenge = function(targetAreaId) {
 };
 
 window.showChallengesModal = function() {
-    const extraChallengeAreas = ['Casino', 'Small Fishing Spot', 'Fighting Dojo', 'Big Fishing Spot', 'Fossil Revival Lab', 'Trade With Friends Hub', 'Power Plant', 'Seafoam Islands', 'Victory Road', 'Cerulean Cave', 'Goldenrod Game Corner', 'Team Rocket HQ', 'Lake of Rage', 'Mt. Silver', 'Ilex Forest 2', 'Roaming', 'Casino Starter Trupe', 'Casino Babies', 'Casino Special Spot', 'Cassino Special Spot', 'Casino Eeveelution', 'Dojo', 'Casino Late Trupe', 'Legendaries Nest'];
-
     if (!window.getCurrentUnlocks()) return;
 
     let html = `<div id="challenges-content-wrapper" class="content-panel" style="display:flex; flex-direction:column; gap:15px; text-align:left;">`;
@@ -650,7 +648,7 @@ window.showChallengesModal = function() {
             if (!unlock) continue;
 
             let cData = getChallengeData(unlock);
-            let isExtra = extraChallengeAreas.includes(unlock.areaId);
+            let isExtra = unlock.challengeName && unlock.challengeName.includes("Extra");
             let rewardsStr = unlock.unlocks ? unlock.unlocks.join(" + ") : "Next Area";
             if (unlock.areaId === "Fossil Revival Lab") rewardsStr += " + Multiplayer Mode";
             if (unlock.gift || unlock.gifts) rewardsStr += " + Gift";
@@ -717,7 +715,7 @@ window.showChallengesModal = function() {
              let pUnlock = window.getCurrentUnlocks().find(u => u.areaId === completedId);
              if (!pUnlock) continue;
 
-             let isExtra = extraChallengeAreas.includes(pUnlock.areaId);
+             let isExtra = pUnlock.challengeName && pUnlock.challengeName.includes("Extra");
 
              // Fake the data slightly to make it look completed, though getChallengeData will naturally evaluate to true
              let pData = getChallengeData(pUnlock);

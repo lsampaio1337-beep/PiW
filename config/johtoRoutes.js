@@ -1933,7 +1933,7 @@ export const johtoUnlocks = [
     "areaId": "Goldenrod Gym",
     "unlocks": [
       "Route 35",
-      "Extra Challenge (Roaming)"
+      "Roaming"
     ],
     "requirements": {
       "earnBadge": {
@@ -2734,7 +2734,7 @@ export const johtoUnlocks = [
   },
   {
     "challengeName": "Kanto Extra Challenge 3",
-    "areaId": "Cassino Special Spot",
+    "areaId": "Casino Special Spot",
     "unlocks": [
       "Casino Eeveelution",
       "Dojo"
