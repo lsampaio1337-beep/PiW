@@ -333,6 +333,11 @@ const johtoMapCoordinates = {
     "name": "Battle Stadium",
     "x": 68.87,
     "y": 61.02
+  },
+  "trade_with_friends_hub": {
+    "name": "Trade With Friends Hub",
+    "x": 21.47,
+    "y": 62.16
   }
 };
 export default johtoMapCoordinates;

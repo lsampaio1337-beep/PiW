@@ -140,7 +140,7 @@ export function checkFinalChallengeCompleted(regionName = 'Kanto') {
     }
 
     let finalChallenge = routes.find(r => r.challengeName === "Final Challenge");
-    let finalChallengeId = finalChallenge ? finalChallenge.areaId : (regionName === 'Kanto' ? 'Indigo Plateau' : (regionName === 'Johto' ? 'Mt. Silver' : null));
+    let finalChallengeId = finalChallenge ? finalChallenge.areaId : (regionName === 'Kanto' ? 'Indigo Plateau' : (regionName === 'Johto' ? 'Mount Silver' : null));
 
     if (!finalChallengeId) return false;
 
