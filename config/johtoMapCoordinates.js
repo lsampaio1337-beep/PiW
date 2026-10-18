@@ -119,8 +119,8 @@ const johtoMapCoordinates = {
     "x": 19.2,
     "y": 38.75
   },
-  "olivini_gym": {
-    "name": "Olivini Gym",
+  "olivine_gym": {
+    "name": "Olivine Gym",
     "x": 19.31,
     "y": 48.25
   },
