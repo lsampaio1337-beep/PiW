@@ -1841,7 +1841,7 @@ export const johtoUnlocks = [
     "requirements": {
       "earnBadge": {
         "name": "Zephyr Badge",
-        "leader": "Unknown",
+        "leader": "Falkner",
         "badgeCount": 1
       }
     }
@@ -1921,7 +1921,7 @@ export const johtoUnlocks = [
     "requirements": {
       "earnBadge": {
         "name": "Hive Badge",
-        "leader": "Unknown",
+        "leader": "Bugsy",
         "badgeCount": 2
       }
     }
@@ -1974,7 +1974,7 @@ export const johtoUnlocks = [
     "requirements": {
       "earnBadge": {
         "name": "Plain Badge",
-        "leader": "Unknown",
+        "leader": "Whitney",
         "badgeCount": 3
       }
     }
@@ -2104,7 +2104,7 @@ export const johtoUnlocks = [
     "requirements": {
       "earnBadge": {
         "name": "Fog Badge",
-        "leader": "Unknown",
+        "leader": "Morty",
         "badgeCount": 4
       }
     }
@@ -2154,7 +2154,7 @@ export const johtoUnlocks = [
     "requirements": {
       "earnBadge": {
         "name": "Storm Badge",
-        "leader": "Unknown",
+        "leader": "Chuck",
         "badgeCount": 5
       }
     }
@@ -2206,7 +2206,7 @@ export const johtoUnlocks = [
     "requirements": {
       "earnBadge": {
         "name": "Mineral Badge",
-        "leader": "Unknown",
+        "leader": "Jasmine",
         "badgeCount": 6
       }
     }
@@ -2254,7 +2254,7 @@ export const johtoUnlocks = [
     "requirements": {
       "earnBadge": {
         "name": "Glacier Badge",
-        "leader": "Unknown",
+        "leader": "Pryce",
         "badgeCount": 7
       }
     }
@@ -2290,7 +2290,7 @@ export const johtoUnlocks = [
     "requirements": {
       "earnBadge": {
         "name": "Rising Badge",
-        "leader": "Unknown",
+        "leader": "Clair",
         "badgeCount": 8
       }
     }
@@ -2383,7 +2383,7 @@ export const johtoUnlocks = [
     "requirements": {
       "earnBadge": {
         "name": "Badge 9",
-        "leader": "Unknown",
+        "leader": "Brock",
         "badgeCount": 9
       }
     }
@@ -2413,7 +2413,7 @@ export const johtoUnlocks = [
     "requirements": {
       "earnBadge": {
         "name": "Badge 10",
-        "leader": "Unknown",
+        "leader": "Misty",
         "badgeCount": 10
       }
     }
@@ -2427,7 +2427,7 @@ export const johtoUnlocks = [
     "requirements": {
       "earnBadge": {
         "name": "Badge 11",
-        "leader": "Unknown",
+        "leader": "Lt. Surge",
         "badgeCount": 11
       }
     }
@@ -2455,7 +2455,7 @@ export const johtoUnlocks = [
     "requirements": {
       "earnBadge": {
         "name": "Badge 12",
-        "leader": "Unknown",
+        "leader": "Erika",
         "badgeCount": 12
       }
     }
@@ -2469,7 +2469,7 @@ export const johtoUnlocks = [
     "requirements": {
       "earnBadge": {
         "name": "Badge 13",
-        "leader": "Unknown",
+        "leader": "Sabrina",
         "badgeCount": 13
       }
     }
@@ -2501,7 +2501,7 @@ export const johtoUnlocks = [
     "requirements": {
       "earnBadge": {
         "name": "Badge 14",
-        "leader": "Unknown",
+        "leader": "Koga",
         "badgeCount": 14
       }
     }
@@ -2530,7 +2530,7 @@ export const johtoUnlocks = [
     "requirements": {
       "earnBadge": {
         "name": "Badge 15",
-        "leader": "Unknown",
+        "leader": "Blaine",
         "badgeCount": 15
       }
     }
@@ -2544,7 +2544,7 @@ export const johtoUnlocks = [
     "requirements": {
       "earnBadge": {
         "name": "Badge 16",
-        "leader": "Unknown",
+        "leader": "Giovanni",
         "badgeCount": 16
       }
     },
