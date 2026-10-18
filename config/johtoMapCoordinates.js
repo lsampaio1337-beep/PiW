@@ -29,13 +29,13 @@ const johtoMapCoordinates = {
     "x": 33.26,
     "y": 48.08
   },
-  "goldenrood_gym": {
-    "name": "Goldenrood Gym",
+  "goldenrod_gym": {
+    "name": "Goldenrod Gym",
     "x": 23.44,
     "y": 59.4
   },
-  "goldenrood_game_corner": {
-    "name": "Goldenrood Game Corner",
+  "goldenrod_game_corner": {
+    "name": "Goldenrod Game Corner",
     "x": 25.62,
     "y": 62.95
   },

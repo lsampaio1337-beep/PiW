@@ -95,14 +95,14 @@ export const johtoRoutes = [
     "spawns": [
       {
         "pokemonId": 194,
-        "minLevel": 6,
-        "maxLevel": 10,
+        "minLevel": 7,
+        "maxLevel": 11,
         "chance": 0.2
       },
       {
         "pokemonId": 41,
-        "minLevel": 6,
-        "maxLevel": 10,
+        "minLevel": 7,
+        "maxLevel": 11,
         "chance": 0.3
       },
       {
@@ -113,8 +113,8 @@ export const johtoRoutes = [
       },
       {
         "pokemonId": 187,
-        "minLevel": 7,
-        "maxLevel": 10,
+        "minLevel": 8,
+        "maxLevel": 11,
         "chance": 0.3
       }
     ]
@@ -160,8 +160,8 @@ export const johtoRoutes = [
       },
       {
         "pokemonId": 90,
-        "minLevel": 9,
-        "maxLevel": 13,
+        "minLevel": 8,
+        "maxLevel": 12,
         "chance": 0.1
       }
     ]
@@ -171,20 +171,20 @@ export const johtoRoutes = [
     "spawns": [
       {
         "pokemonId": 201,
-        "minLevel": 10,
-        "maxLevel": 14,
+        "minLevel": 6,
+        "maxLevel": 10,
         "chance": 0.7
       },
       {
         "pokemonId": 177,
-        "minLevel": 11,
-        "maxLevel": 15,
+        "minLevel": 7,
+        "maxLevel": 11,
         "chance": 0.2
       },
       {
         "pokemonId": 235,
-        "minLevel": 11,
-        "maxLevel": 15,
+        "minLevel": 7,
+        "maxLevel": 11,
         "chance": 0.1
       }
     ]
@@ -194,26 +194,26 @@ export const johtoRoutes = [
     "spawns": [
       {
         "pokemonId": 74,
-        "minLevel": 10,
-        "maxLevel": 14,
+        "minLevel": 9,
+        "maxLevel": 13,
         "chance": 0.2
       },
       {
         "pokemonId": 21,
-        "minLevel": 10,
-        "maxLevel": 14,
+        "minLevel": 9,
+        "maxLevel": 13,
         "chance": 0.3
       },
       {
         "pokemonId": 179,
-        "minLevel": 11,
-        "maxLevel": 15,
+        "minLevel": 9,
+        "maxLevel": 13,
         "chance": 0.2
       },
       {
         "pokemonId": 163,
-        "minLevel": 10,
-        "maxLevel": 14,
+        "minLevel": 9,
+        "maxLevel": 13,
         "chance": 0.3
       }
     ]
@@ -1836,7 +1836,7 @@ export const johtoUnlocks = [
     "challengeName": "Challenge 4",
     "areaId": "Violet Gym",
     "unlocks": [
-      "Route 32"
+      "Ruins of Alph"
     ],
     "requirements": {
       "earnBadge": {
@@ -1848,56 +1848,9 @@ export const johtoUnlocks = [
   },
   {
     "challengeName": "Challenge 5",
-    "areaId": "Route 32",
-    "unlocks": [
-      "Tiny Fishing Spot"
-    ],
-    "requirements": {
-      "catchByRarity": {
-        "rarity": "Rare",
-        "count": 1
-      }
-    },
-    "gifts": [
-      {
-        "item": "Ultraball",
-        "count": 5
-      }
-    ]
-  },
-  {
-    "challengeName": "Challenge 6",
-    "areaId": "Tiny Fishing Spot",
-    "unlocks": [
-      "Route 33"
-    ],
-    "requirements": {
-      "catchByType": {
-        "type": "Water",
-        "count": 5
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 7",
-    "areaId": "Route 33",
-    "unlocks": [
-      "Ruins of Alph"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Mareep",
-          "count": 2
-        }
-      ]
-    }
-  },
-  {
-    "challengeName": "Challenge 8",
     "areaId": "Ruins of Alph",
     "unlocks": [
-      "Azalea Town"
+      "Route 32"
     ],
     "requirements": {
       "defeatSpecific": {
@@ -1911,6 +1864,56 @@ export const johtoUnlocks = [
         "count": 1
       }
     ]
+  },
+  {
+    "challengeName": "Challenge 6",
+    "areaId": "Route 32",
+    "unlocks": [
+      "Tiny Fishing Spot"
+    ],
+    "requirements": {
+      "catchSpeciesByRarity": [
+        {
+          "species": "Any",
+          "rarity": "Rare",
+          "count": 1
+        }
+      ]
+    },
+    "gifts": [
+      {
+        "item": "Ultraball",
+        "count": 5
+      }
+    ]
+  },
+  {
+    "challengeName": "Challenge 7",
+    "areaId": "Tiny Fishing Spot",
+    "unlocks": [
+      "Route 33"
+    ],
+    "requirements": {
+      "catchByType": {
+        "type": "Water",
+        "count": 5
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 8",
+    "areaId": "Route 33",
+    "unlocks": [
+      "Azalea Town"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Mareep",
+          "count": 2
+        }
+      ]
+    }
   },
   {
     "challengeName": "Challenge 9",
@@ -1953,7 +1956,8 @@ export const johtoUnlocks = [
     "areaId": "Route 34",
     "unlocks": [
       "Goldenrod Gym",
-      "Goldenrod Game Corner"
+      "Goldenrod Game Corner",
+      "Daycare"
     ],
     "requirements": {
       "catchSpecies": [
@@ -1983,16 +1987,16 @@ export const johtoUnlocks = [
     "challengeName": "Challenge 13",
     "areaId": "Route 35",
     "unlocks": [
-      "Small Fishing Spot"
+      "National Park"
     ],
     "requirements": {
       "catchSpecies": [
         {
-          "species": "Nidoran\u2640",
+          "species": "Nidoran♀",
           "count": 1
         },
         {
-          "species": "Nidoran\u2642",
+          "species": "Nidoran♂",
           "count": 1
         }
       ]
@@ -2000,27 +2004,6 @@ export const johtoUnlocks = [
   },
   {
     "challengeName": "Challenge 14",
-    "areaId": "Small Fishing Spot",
-    "unlocks": [
-      "National Park"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Dratini",
-          "count": 2
-        }
-      ]
-    },
-    "gifts": [
-      {
-        "item": "Dragon Stone",
-        "count": 2
-      }
-    ]
-  },
-  {
-    "challengeName": "Challenge 15",
     "areaId": "National Park",
     "unlocks": [
       "Route 36"
@@ -2045,7 +2028,7 @@ export const johtoUnlocks = [
     ]
   },
   {
-    "challengeName": "Challenge 16",
+    "challengeName": "Challenge 15",
     "areaId": "Route 36",
     "unlocks": [
       "Route 37"
@@ -2058,7 +2041,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 17",
+    "challengeName": "Challenge 16",
     "areaId": "Route 37",
     "unlocks": [
       "Burned Tower"
@@ -2077,7 +2060,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 18",
+    "challengeName": "Challenge 17",
     "areaId": "Burned Tower",
     "unlocks": [
       "Ecruteak Gym"
@@ -2096,7 +2079,7 @@ export const johtoUnlocks = [
     ]
   },
   {
-    "challengeName": "Challenge 19",
+    "challengeName": "Challenge 18",
     "areaId": "Ecruteak Gym",
     "unlocks": [
       "Route 38"
@@ -2110,7 +2093,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 20",
+    "challengeName": "Challenge 19",
     "areaId": "Route 38",
     "unlocks": [
       "Route 39"
@@ -2131,10 +2114,10 @@ export const johtoUnlocks = [
     ]
   },
   {
-    "challengeName": "Challenge 21",
+    "challengeName": "Challenge 20",
     "areaId": "Route 39",
     "unlocks": [
-      "Cianwood Gym"
+      "Small Fishing Spot"
     ],
     "requirements": {
       "catchSpecies": [
@@ -2144,6 +2127,27 @@ export const johtoUnlocks = [
         }
       ]
     }
+  },
+  {
+    "challengeName": "Challenge 21",
+    "areaId": "Small Fishing Spot",
+    "unlocks": [
+      "Cianwood Gym"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Dratini",
+          "count": 2
+        }
+      ]
+    },
+    "gifts": [
+      {
+        "item": "Dragon Stone",
+        "count": 2
+      }
+    ]
   },
   {
     "challengeName": "Challenge 22",
