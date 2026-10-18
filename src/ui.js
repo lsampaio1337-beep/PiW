@@ -1455,6 +1455,20 @@ async function loadConfigs() {
     } catch (e) {
         console.warn("Failed to load hoenn routes");
     }
+    try {
+        const sinnohModule = await import('../config/sinnohRoutes.js');
+        state.config.sinnohRoutes = sinnohModule.sinnohRoutes;
+        state.config.sinnohUnlocks = []; // For now
+    } catch (e) {
+        console.warn("Failed to load sinnoh routes");
+    }
+    try {
+        const unovaModule = await import('../config/unovaRoutes.js');
+        state.config.unovaRoutes = unovaModule.unovaRoutes;
+        state.config.unovaUnlocks = []; // For now
+    } catch (e) {
+        console.warn("Failed to load unova routes");
+    }
     state.config.gyms = gyms;
     state.config.gymAssets = gymAssets;
     state.config.balance = balance;

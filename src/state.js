@@ -137,10 +137,14 @@ export function checkFinalChallengeCompleted(regionName = 'Kanto') {
         routes = state.config.johtoRoutes;
     } else if (regionName === 'Hoenn' && state.config && state.config.hoennRoutes) {
         routes = state.config.hoennRoutes;
+    } else if (regionName === 'Sinnoh' && state.config && state.config.sinnohRoutes) {
+        routes = state.config.sinnohRoutes;
+    } else if (regionName === 'Unova' && state.config && state.config.unovaRoutes) {
+        routes = state.config.unovaRoutes;
     }
 
     let finalChallenge = routes.find(r => r.challengeName === "Final Challenge");
-    let finalChallengeId = finalChallenge ? finalChallenge.areaId : (regionName === 'Kanto' ? 'Indigo Plateau' : (regionName === 'Johto' ? 'Mt. Silver' : null));
+    let finalChallengeId = finalChallenge ? finalChallenge.areaId : (regionName === 'Kanto' ? 'Indigo Plateau' : (regionName === 'Johto' ? 'Mt. Silver' : (regionName === 'Hoenn' ? 'Battle Frontier' : (regionName === 'Sinnoh' ? 'Spear Pillar' : (regionName === 'Unova' ? 'Giant Chasm' : null)))));
 
     if (!finalChallengeId) return false;
 
@@ -187,6 +191,12 @@ window.getCurrentRoutes = function() {
     if (state.currentRegionName === 'Hoenn' && state.config.hoennRoutes) {
         return state.config.hoennRoutes;
     }
+    if (state.currentRegionName === 'Sinnoh' && state.config.sinnohRoutes) {
+        return state.config.sinnohRoutes;
+    }
+    if (state.currentRegionName === 'Unova' && state.config.unovaRoutes) {
+        return state.config.unovaRoutes;
+    }
     return state.config.routes || [];
 };
 
@@ -197,6 +207,12 @@ window.getCurrentUnlocks = function() {
     }
     if (state.currentRegionName === 'Hoenn' && state.config.hoennUnlocks) {
         return state.config.hoennUnlocks;
+    }
+    if (state.currentRegionName === 'Sinnoh' && state.config.sinnohUnlocks) {
+        return state.config.sinnohUnlocks;
+    }
+    if (state.currentRegionName === 'Unova' && state.config.unovaUnlocks) {
+        return state.config.unovaUnlocks;
     }
     return state.config.unlocks || [];
 };
