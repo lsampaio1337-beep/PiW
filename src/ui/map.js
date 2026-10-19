@@ -348,8 +348,8 @@ export function showMap() {
         { name: 'Paldea', mapFile: '10 Paldea Map.png', width: 1280, height: 905 }
     ];
 
-    let unlockedRegions = [regions[0].name, regions[1].name, regions[2].name, regions[3].name, regions[4].name]; // Kanto through Unova are always unlocked
-    for (let i = 4; i < regions.length - 1; i++) {
+    let unlockedRegions = [regions[0].name]; // Only Kanto unlocked initially
+    for (let i = 0; i < regions.length - 1; i++) {
         if (checkFinalChallengeCompleted(regions[i].name)) {
             unlockedRegions.push(regions[i + 1].name);
         } else {
