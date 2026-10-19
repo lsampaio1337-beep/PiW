@@ -745,56 +745,559 @@ const gyms = [
     "name": "Violet Gym",
     "leader": "Falkner",
     "levelRequirement": 0,
-    "trainers": []
+    "trainers": [
+      {
+        "name": "Bird Keeper Abe",
+        "team": [
+          {
+            "id": 21,
+            "level": 8
+          }
+        ]
+      },
+      {
+        "name": "Bird Keeper Rod",
+        "team": [
+          {
+            "id": 16,
+            "level": 7
+          },
+          {
+            "id": 16,
+            "level": 7
+          }
+        ]
+      },
+      {
+        "name": "Leader Falkner",
+        "team": [
+          {
+            "id": 16,
+            "level": 8
+          },
+          {
+            "id": 17,
+            "level": 10
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "azalea",
     "name": "Azalea Gym",
     "leader": "Bugsy",
     "levelRequirement": 0,
-    "trainers": []
+    "trainers": [
+      {
+        "name": "Bug Catcher Al",
+        "team": [
+          {
+            "id": 10,
+            "level": 13
+          },
+          {
+            "id": 13,
+            "level": 13
+          }
+        ]
+      },
+      {
+        "name": "Bug Catcher Benny",
+        "team": [
+          {
+            "id": 13,
+            "level": 12
+          },
+          {
+            "id": 14,
+            "level": 13
+          },
+          {
+            "id": 15,
+            "level": 14
+          }
+        ]
+      },
+      {
+        "name": "Bug Catcher Josh",
+        "team": [
+          {
+            "id": 46,
+            "level": 13
+          },
+          {
+            "id": 46,
+            "level": 13
+          },
+          {
+            "id": 46,
+            "level": 13
+          }
+        ]
+      },
+      {
+        "name": "Twins Amy & May",
+        "team": [
+          {
+            "id": 167,
+            "level": 14
+          },
+          {
+            "id": 165,
+            "level": 14
+          }
+        ]
+      },
+      {
+        "name": "Leader Bugsy",
+        "team": [
+          {
+            "id": 11,
+            "level": 15
+          },
+          {
+            "id": 14,
+            "level": 15
+          },
+          {
+            "id": 123,
+            "level": 17
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "goldenrod",
     "name": "Goldenrod Gym",
     "leader": "Whitney",
     "levelRequirement": 0,
-    "trainers": []
+    "trainers": [
+      {
+        "name": "Beauty Victoria",
+        "team": [
+          {
+            "id": 161,
+            "level": 18
+          },
+          {
+            "id": 161,
+            "level": 18
+          },
+          {
+            "id": 161,
+            "level": 19
+          }
+        ]
+      },
+      {
+        "name": "Beauty Samantha",
+        "team": [
+          {
+            "id": 52,
+            "level": 19
+          },
+          {
+            "id": 52,
+            "level": 19
+          }
+        ]
+      },
+      {
+        "name": "Lass Carrie",
+        "team": [
+          {
+            "id": 209,
+            "level": 20
+          }
+        ]
+      },
+      {
+        "name": "Lass Bridget",
+        "team": [
+          {
+            "id": 39,
+            "level": 19
+          },
+          {
+            "id": 39,
+            "level": 19
+          },
+          {
+            "id": 39,
+            "level": 19
+          }
+        ]
+      },
+      {
+        "name": "Leader Whitney",
+        "team": [
+          {
+            "id": 35,
+            "level": 21
+          },
+          {
+            "id": 241,
+            "level": 23
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "ecruteak",
     "name": "Ecruteak Gym",
     "leader": "Morty",
     "levelRequirement": 0,
-    "trainers": []
+    "trainers": [
+      {
+        "name": "Sage Ping",
+        "team": [
+          {
+            "id": 92,
+            "level": 30
+          },
+          {
+            "id": 92,
+            "level": 30
+          },
+          {
+            "id": 92,
+            "level": 30
+          },
+          {
+            "id": 92,
+            "level": 30
+          },
+          {
+            "id": 92,
+            "level": 30
+          }
+        ]
+      },
+      {
+        "name": "Medium Martha",
+        "team": [
+          {
+            "id": 92,
+            "level": 30
+          },
+          {
+            "id": 93,
+            "level": 31
+          },
+          {
+            "id": 92,
+            "level": 30
+          }
+        ]
+      },
+      {
+        "name": "Sage Jeffrey",
+        "team": [
+          {
+            "id": 93,
+            "level": 31
+          }
+        ]
+      },
+      {
+        "name": "Medium Grace",
+        "team": [
+          {
+            "id": 93,
+            "level": 32
+          },
+          {
+            "id": 93,
+            "level": 32
+          }
+        ]
+      },
+      {
+        "name": "Leader Morty",
+        "team": [
+          {
+            "id": 92,
+            "level": 31
+          },
+          {
+            "id": 93,
+            "level": 32
+          },
+          {
+            "id": 93,
+            "level": 32
+          },
+          {
+            "id": 94,
+            "level": 34
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "cianwood",
     "name": "Cianwood Gym",
     "leader": "Chuck",
     "levelRequirement": 0,
-    "trainers": []
+    "trainers": [
+      {
+        "name": "Black Belt Yoshi",
+        "team": [
+          {
+            "id": 106,
+            "level": 39
+          }
+        ]
+      },
+      {
+        "name": "Black Belt Lao",
+        "team": [
+          {
+            "id": 107,
+            "level": 39
+          }
+        ]
+      },
+      {
+        "name": "Black Belt Nob",
+        "team": [
+          {
+            "id": 66,
+            "level": 38
+          },
+          {
+            "id": 67,
+            "level": 40
+          }
+        ]
+      },
+      {
+        "name": "Black Belt Lung",
+        "team": [
+          {
+            "id": 56,
+            "level": 38
+          },
+          {
+            "id": 56,
+            "level": 38
+          },
+          {
+            "id": 57,
+            "level": 40
+          }
+        ]
+      },
+      {
+        "name": "Leader Chuck",
+        "team": [
+          {
+            "id": 57,
+            "level": 41
+          },
+          {
+            "id": 62,
+            "level": 43
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "olivine",
     "name": "Olivine Gym",
     "leader": "Jasmine",
     "levelRequirement": 0,
-    "trainers": []
+    "trainers": [
+      {
+        "name": "Leader Jasmine",
+        "team": [
+          {
+            "id": 81,
+            "level": 46
+          },
+          {
+            "id": 81,
+            "level": 46
+          },
+          {
+            "id": 208,
+            "level": 49
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "mahogany",
     "name": "Mahogany Gym",
     "leader": "Pryce",
     "levelRequirement": 0,
-    "trainers": []
+    "trainers": [
+      {
+        "name": "Boarder Ronald",
+        "team": [
+          {
+            "id": 86,
+            "level": 55
+          },
+          {
+            "id": 86,
+            "level": 55
+          },
+          {
+            "id": 87,
+            "level": 56
+          }
+        ]
+      },
+      {
+        "name": "Boarder Brad",
+        "team": [
+          {
+            "id": 220,
+            "level": 56
+          },
+          {
+            "id": 220,
+            "level": 56
+          }
+        ]
+      },
+      {
+        "name": "Skier Roxanne",
+        "team": [
+          {
+            "id": 124,
+            "level": 57
+          }
+        ]
+      },
+      {
+        "name": "Skier Clarissa",
+        "team": [
+          {
+            "id": 87,
+            "level": 57
+          }
+        ]
+      },
+      {
+        "name": "Boarder Douglas",
+        "team": [
+          {
+            "id": 90,
+            "level": 55
+          },
+          {
+            "id": 90,
+            "level": 55
+          },
+          {
+            "id": 91,
+            "level": 57
+          }
+        ]
+      },
+      {
+        "name": "Leader Pryce",
+        "team": [
+          {
+            "id": 86,
+            "level": 56
+          },
+          {
+            "id": 87,
+            "level": 57
+          },
+          {
+            "id": 221,
+            "level": 59
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "blackthorn",
     "name": "Blackthorn Gym",
     "leader": "Clair",
     "levelRequirement": 0,
-    "trainers": []
+    "trainers": [
+      {
+        "name": "Cooltrainer Paul",
+        "team": [
+          {
+            "id": 147,
+            "level": 63
+          },
+          {
+            "id": 147,
+            "level": 63
+          },
+          {
+            "id": 147,
+            "level": 63
+          }
+        ]
+      },
+      {
+        "name": "Cooltrainer Mike",
+        "team": [
+          {
+            "id": 148,
+            "level": 65
+          }
+        ]
+      },
+      {
+        "name": "Cooltrainer Lola",
+        "team": [
+          {
+            "id": 147,
+            "level": 64
+          },
+          {
+            "id": 148,
+            "level": 65
+          }
+        ]
+      },
+      {
+        "name": "Cooltrainer Fran",
+        "team": [
+          {
+            "id": 117,
+            "level": 65
+          }
+        ]
+      },
+      {
+        "name": "Leader Clair",
+        "team": [
+          {
+            "id": 148,
+            "level": 66
+          },
+          {
+            "id": 148,
+            "level": 66
+          },
+          {
+            "id": 130,
+            "level": 66
+          },
+          {
+            "id": 230,
+            "level": 68
+          }
+        ]
+      }
+    ]
   }
 ];
 export default gyms;
