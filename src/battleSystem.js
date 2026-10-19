@@ -750,9 +750,16 @@ class BattleSystem {
         // ...
         // Gym 8 (Index 7): Q=1.55, SumIV=480 => IV=80
         // E4 (Index 8): Q=1.6, SumIV=510 => IV=85
-        let qValue = 1.2 + (this.state.trainer.badges * 0.05);
-        let sumIV = 270 + (this.state.trainer.badges * 30);
-        let ivValue = sumIV / 6;
+        let qValue;
+        let sumIV;
+        if (this.state.currentRegionName === 'Johto') {
+            qValue = 1.2 + (this.state.trainer.badges * 0.025);
+            sumIV = 300 + (this.state.trainer.badges * 15);
+        } else {
+            qValue = 1.2 + (this.state.trainer.badges * 0.05);
+            sumIV = 300 + (this.state.trainer.badges * 30);
+        }
+        let ivValue = Math.ceil(sumIV / 6);
 
         let qualityName = "Gym"; // You can keep a standard name or map it if desired
         if (qValue >= 1.6) qualityName = "Legendary";
