@@ -1210,55 +1210,84 @@ export const johtoRoutes = [
     ]
   },
   {
-    "name": "Safari Zone",
+    "name": "Kanto Safari Zone",
     "spawns": [
       {
-        "pokemonId": 33,
+        "pokemonId": 34,
         "minLevel": 86,
         "maxLevel": 90,
-        "chance": 0.15
+        "chance": 0.10
       },
       {
-        "pokemonId": 30,
+        "pokemonId": 31,
         "minLevel": 86,
         "maxLevel": 90,
-        "chance": 0.15
+        "chance": 0.10
       },
       {
-        "pokemonId": 111,
+        "pokemonId": 112,
         "minLevel": 87,
         "maxLevel": 90,
         "chance": 0.15
-      },
-      {
-        "pokemonId": 115,
-        "minLevel": 87,
-        "maxLevel": 91,
-        "chance": 0.15
-      },
-      {
-        "pokemonId": 198,
-        "minLevel": 87,
-        "maxLevel": 90,
-        "chance": 0.1
       },
       {
         "pokemonId": 128,
-        "minLevel": 88,
+        "minLevel": 87,
         "maxLevel": 91,
-        "chance": 0.1
+        "chance": 0.20
+      },
+      {
+        "pokemonId": 212,
+        "minLevel": 87,
+        "maxLevel": 90,
+        "chance": 0.20
       },
       {
         "pokemonId": 113,
         "minLevel": 88,
         "maxLevel": 91,
-        "chance": 0.1
+        "chance": 0.25
+      }
+    ]
+  },
+  {
+    "name": "Safari Zone",
+    "spawns": [
+      {
+        "pokemonId": 33,
+        "minLevel": 39,
+        "maxLevel": 44,
+        "chance": 0.25
       },
       {
-        "pokemonId": 212,
-        "minLevel": 89,
-        "maxLevel": 91,
-        "chance": 0.1
+        "pokemonId": 30,
+        "minLevel": 39,
+        "maxLevel": 44,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 111,
+        "minLevel": 40,
+        "maxLevel": 45,
+        "chance": 0.15
+      },
+      {
+        "pokemonId": 115,
+        "minLevel": 40,
+        "maxLevel": 45,
+        "chance": 0.15
+      },
+      {
+        "pokemonId": 198,
+        "minLevel": 39,
+        "maxLevel": 44,
+        "chance": 0.10
+      },
+      {
+        "pokemonId": 113,
+        "minLevel": 39,
+        "maxLevel": 44,
+        "chance": 0.10
       }
     ]
   },
@@ -2438,7 +2467,8 @@ export const johtoUnlocks = [
     "challengeName": "Challenge 41",
     "areaId": "Celadon Gym",
     "unlocks": [
-      "Saffron Gym"
+      "Saffron Gym",
+      "Kanto Safari Zone"
     ],
     "requirements": {
       "earnBadge": {
@@ -2466,8 +2496,7 @@ export const johtoUnlocks = [
     "challengeName": "Challenge 43",
     "areaId": "Route 12",
     "unlocks": [
-      "Fuschia Gym",
-      "Safari Zone"
+      "Fuschia Gym"
     ],
     "requirements": {
       "catchSpecies": [
