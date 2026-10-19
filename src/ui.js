@@ -1434,8 +1434,8 @@ async function loadConfigs() {
       import('../config/mapCoordinates.js').then(m => m.default),
       import('../config/johtoMapCoordinates.js').then(m => m.default),
       import('../config/hoennMapCoordinates.js').then(m => m.default),
-      import('../config/unovaMapCoordinates.js').then(m => m.default),
       import('../config/sinnohMapCoordinates.js').then(m => m.default),
+      import('../config/unovaMapCoordinates.js').then(m => m.default),
       import('../config/gymAssets.js').then(m => m.default),
     ]);
 
