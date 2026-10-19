@@ -239,6 +239,13 @@ export function cheatAction(action) {
             });
         }
 
+        // Unlock from sinnohMapCoordinates
+        if (state.config.sinnohMapCoordinates) {
+            Object.values(state.config.sinnohMapCoordinates).forEach(coord => {
+                if (coord.name) unlockArea(coord.name);
+            });
+        }
+
         // Unlock all unlocks from config
         if (window.getCurrentUnlocks()) {
             window.getCurrentUnlocks().forEach(unlock => {
