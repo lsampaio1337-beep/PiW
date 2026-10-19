@@ -1424,7 +1424,7 @@ export function updateUI() {
 }
 
 async function loadConfigs() {
-    const [pokemonData, routes, gyms, balance, moves, types, mapCoordinates, johtoMapCoordinates, hoennMapCoordinates, unovaMapCoordinates, gymAssets] = await Promise.all([
+    const [pokemonData, routes, gyms, balance, moves, types, mapCoordinates, johtoMapCoordinates, hoennMapCoordinates, sinnohMapCoordinates, unovaMapCoordinates, gymAssets] = await Promise.all([
       fetch(new URL('../data/pokemon.json', import.meta.url)).then(res => res.json()),
       import('../config/routes.js').then(m => m.routes),
       import('../config/gyms.js').then(m => m.default),
@@ -1435,6 +1435,7 @@ async function loadConfigs() {
       import('../config/johtoMapCoordinates.js').then(m => m.default),
       import('../config/hoennMapCoordinates.js').then(m => m.default),
       import('../config/unovaMapCoordinates.js').then(m => m.default),
+      import('../config/sinnohMapCoordinates.js').then(m => m.default),
       import('../config/gymAssets.js').then(m => m.default),
     ]);
 
@@ -1479,6 +1480,7 @@ async function loadConfigs() {
     state.config.johtoMapCoordinates = johtoMapCoordinates;
     state.config.hoennMapCoordinates = hoennMapCoordinates;
     state.config.unovaMapCoordinates = unovaMapCoordinates;
+    state.config.sinnohMapCoordinates = sinnohMapCoordinates;
     state.config.allPokemonNames = pokemonData.map(p => p.name);
 
     // Precompute evolution parents for O(1) lookups

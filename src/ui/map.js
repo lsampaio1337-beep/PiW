@@ -255,6 +255,22 @@ function generateMarkersForRegion(region, unlockedAreas) {
 
             html += generateMarkerHtml(locationId, locationName, coords, true, hasNewNotification, showCheckmark);
         }
+    } else if (region === 'Sinnoh') {
+        for (const [locationId, locationData] of Object.entries(state.config.sinnohMapCoordinates || {})) {
+            const locationName = locationData.name;
+            const coords = locationData;
+            let isUnlocked = unlockedAreas.has(locationName);
+            if (!isUnlocked) continue;
+
+            let hasNewNotification = false;
+            let showCheckmark = false;
+
+            if (state.stats.newRoutes && state.stats.newRoutes.some(r => parseAreaNames(r).includes(locationName))) {
+                hasNewNotification = true;
+            }
+
+            html += generateMarkerHtml(locationId, locationName, coords, true, hasNewNotification, showCheckmark);
+        }
     } else if (region === 'Johto') {
         for (const [locationId, locationData] of Object.entries(state.config.johtoMapCoordinates || {})) {
             const locationName = locationData.name;
