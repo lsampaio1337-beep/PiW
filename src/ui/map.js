@@ -37,7 +37,7 @@ window.switchMapRegion = function(region) {
 
 
 
-const LARGE_SPOT_LOCATIONS = new Set(['professor_lab', 'johto_professor_lab', 'professor_lab', 'indigo_plateu', 'safari_zone', 'kanto_safari_zone', 'casino', 'goldenrood_game_corner', 'daycare']);
+const LARGE_SPOT_LOCATIONS = new Set(['professor_lab', 'johto_professor_lab', 'professor_lab', 'indigo_plateu', 'safari_zone', 'kanto_safari_zone', 'casino', 'goldenrod_game_corner', 'daycare']);
 
 function generateMarkerHtml(locationId, locationName, coords, isUnlocked, hasNewNotification, showCheckmark) {
     if (!isUnlocked) return '';
@@ -51,7 +51,7 @@ function generateMarkerHtml(locationId, locationName, coords, isUnlocked, hasNew
         markerImg = './Assets/Map/Spots/Spot_PCPM.png';
     } else if (locationId === 'safari_zone' || locationId === 'kanto_safari_zone') {
         markerImg = './Assets/Map/Spots/Spot_Safariball.png';
-    } else if (locationId === 'casino' || locationId === 'goldenrood_game_corner') {
+    } else if (locationId === 'casino' || locationId === 'goldenrod_game_corner') {
         markerImg = './Assets/Map/Spots/Spot_Casino.png';
     } else if (locationId === 'daycare') {
         markerImg = './Assets/Map/Spots/Spot_Daycare.png';
@@ -61,7 +61,7 @@ function generateMarkerHtml(locationId, locationName, coords, isUnlocked, hasNew
         markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Johto', 1)}`;
     } else if (locationId === 'azalea_gym') {
         markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Johto', 2)}`;
-    } else if (locationId === 'goldenrood_gym') {
+    } else if (locationId === 'goldenrod_gym') {
         markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Johto', 3)}`;
     } else if (locationId === 'ecruteak_gym') {
         markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Johto', 4)}`;
@@ -115,7 +115,7 @@ function generateMarkerHtml(locationId, locationName, coords, isUnlocked, hasNew
     if (locationId === 'pokemon_center___market' || locationId === 'pokecenter_pokemarket') {
         markerWidth = "32px";
         markerHeight = "32px";
-    } else if (['professor_oak_lab', 'johto_oak_lab', 'professor_lab', 'indigo_plateu', 'safari_zone', 'kanto_safari_zone', 'casino', 'goldenrood_game_corner', 'daycare', 'battle_stadium'].includes(locationId)) {
+    } else if (['professor_oak_lab', 'johto_oak_lab', 'professor_lab', 'indigo_plateu', 'safari_zone', 'kanto_safari_zone', 'casino', 'goldenrod_game_corner', 'daycare', 'battle_stadium'].includes(locationId)) {
         markerWidth = "28px";
         markerHeight = "28px";
     }
@@ -204,7 +204,6 @@ function getUnlockedAreas() {
     unlockedAreas.add("PokeCenter & PokeMarket");
 
     if (window.currentMapRegion === "Johto") {
-        unlockedAreas.add("Daycare");
         unlockedAreas.add("Route 29");
     }
 
@@ -358,8 +357,8 @@ export function showMap() {
         { name: 'Paldea', mapFile: '10 Paldea Map.png', width: 1280, height: 905 }
     ];
 
-    let unlockedRegions = [regions[0].name, regions[1].name, regions[2].name, regions[3].name, regions[4].name]; // Kanto through Unova are always unlocked
-    for (let i = 4; i < regions.length - 1; i++) {
+    let unlockedRegions = [regions[0].name]; // Only Kanto unlocked initially
+    for (let i = 0; i < regions.length - 1; i++) {
         if (checkFinalChallengeCompleted(regions[i].name)) {
             unlockedRegions.push(regions[i + 1].name);
         } else {

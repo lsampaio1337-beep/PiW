@@ -570,7 +570,7 @@ function updatePlayerUI(leader, battleSystem, glassTier, isSearching = false) {
 
     if (elPlayerSide) {
         if (leader) {
-            updatePokemonSpriteUI(playerSpriteWrapper, playerPokemonSprite, leader, battleSystem, true, battleSystem.isSliding && !isSearching);
+            updatePokemonSpriteUI(playerSpriteWrapper, playerPokemonSprite, leader, battleSystem, true, battleSystem.isSliding || isSearching);
             updateHpBarUI(hpBarPlayer, hpTextPlayer, hpPctPlayer, leader.currentHp, leader.maxHp);
         }
 
