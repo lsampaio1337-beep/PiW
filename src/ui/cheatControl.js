@@ -272,6 +272,13 @@ export function cheatAction(action) {
             });
         }
 
+        // Unlock from unovaMapCoordinates
+        if (state.config.unovaMapCoordinates) {
+            Object.values(state.config.unovaMapCoordinates).forEach(coord => {
+                if (coord.name) unlockArea(coord.name);
+            });
+        }
+
         // Ensure Casino spots and machines are unlocked
         unlockArea('Casino');
 

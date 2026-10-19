@@ -303,6 +303,29 @@ function generateMarkersForRegion(region, unlockedAreas) {
 
             html += generateMarkerHtml(locationId, locationName, coords, true, hasNewNotification, showCheckmark);
         }
+    } else if (region === 'Unova') {
+        for (const [locationId, locationData] of Object.entries(state.config.unovaMapCoordinates || {})) {
+            const locationName = locationData.name;
+            const coords = locationData;
+
+            let hasNewNotification = false;
+            let showCheckmark = false;
+
+            if (state.stats.newRoutes && state.stats.newRoutes.some(r => parseAreaNames(r).includes(locationName))) {
+                hasNewNotification = true;
+            }
+
+            if (locationId === 'aspertia_gym' && state.trainer.badges >= 1) showCheckmark = true;
+            if (locationId === 'virbank_gym' && state.trainer.badges >= 2) showCheckmark = true;
+            if (locationId === 'castelia_gym' && state.trainer.badges >= 3) showCheckmark = true;
+            if (locationId === 'nimbasa_gym' && state.trainer.badges >= 4) showCheckmark = true;
+            if (locationId === 'driftveil_gym' && state.trainer.badges >= 5) showCheckmark = true;
+            if (locationId === 'mistralton_gym' && state.trainer.badges >= 6) showCheckmark = true;
+            if (locationId === 'opelucid_gym' && state.trainer.badges >= 7) showCheckmark = true;
+            if (locationId === 'humilau_gym' && state.trainer.badges >= 8) showCheckmark = true;
+
+            html += generateMarkerHtml(locationId, locationName, coords, true, hasNewNotification, showCheckmark);
+        }
     } else {
         // Fallback for new regions
         let coords = { x: 50, y: 50 };
