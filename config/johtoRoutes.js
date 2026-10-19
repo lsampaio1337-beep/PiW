@@ -937,20 +937,13 @@ export const johtoRoutes = [
         "pokemonId": 129,
         "minLevel": 48,
         "maxLevel": 55,
-        "chance": 0.90
+        "chance": 0.95
       },
       {
         "pokemonId": 130,
         "minLevel": 55,
         "maxLevel": 60,
-        "chance": 0.09
-      },
-      {
-        "pokemonId": 130,
-        "minLevel": 60,
-        "maxLevel": 60,
-        "chance": 0.01,
-        "forceShiny": true
+        "chance": 0.05
       }
     ]
   },
@@ -1223,13 +1216,13 @@ export const johtoRoutes = [
         "pokemonId": 33,
         "minLevel": 86,
         "maxLevel": 90,
-        "chance": 0.25
+        "chance": 0.15
       },
       {
         "pokemonId": 30,
         "minLevel": 86,
         "maxLevel": 90,
-        "chance": 0.25
+        "chance": 0.15
       },
       {
         "pokemonId": 111,
@@ -1250,51 +1243,22 @@ export const johtoRoutes = [
         "chance": 0.1
       },
       {
+        "pokemonId": 128,
+        "minLevel": 88,
+        "maxLevel": 91,
+        "chance": 0.1
+      },
+      {
         "pokemonId": 113,
         "minLevel": 88,
         "maxLevel": 91,
         "chance": 0.1
-      }
-    ]
-  },
-  {
-    "name": "Kanto Safari Zone",
-    "spawns": [
-      {
-        "pokemonId": 34,
-        "minLevel": 88,
-        "maxLevel": 93,
-        "chance": 0.12
-      },
-      {
-        "pokemonId": 31,
-        "minLevel": 88,
-        "maxLevel": 93,
-        "chance": 0.12
-      },
-      {
-        "pokemonId": 112,
-        "minLevel": 88,
-        "maxLevel": 93,
-        "chance": 0.16
-      },
-      {
-        "pokemonId": 113,
-        "minLevel": 88,
-        "maxLevel": 93,
-        "chance": 0.2
       },
       {
         "pokemonId": 212,
-        "minLevel": 88,
-        "maxLevel": 93,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 128,
-        "minLevel": 88,
-        "maxLevel": 93,
-        "chance": 0.2
+        "minLevel": 89,
+        "maxLevel": 91,
+        "chance": 0.1
       }
     ]
   },
@@ -1917,7 +1881,7 @@ export const johtoUnlocks = [
   },
   {
     "challengeName": "Challenge 9",
-    "areaId": "Azalea Town",
+    "areaId": "Azalea Gym",
     "unlocks": [
       "Ilex Forest"
     ],
@@ -2253,7 +2217,7 @@ export const johtoUnlocks = [
     "challengeName": "Challenge 28",
     "areaId": "Ice Path",
     "unlocks": [
-      "Mahogany Town"
+      "Mahogany Gym"
     ],
     "requirements": {
       "defeatSpecific": {
@@ -2270,7 +2234,7 @@ export const johtoUnlocks = [
   },
   {
     "challengeName": "Challenge 29",
-    "areaId": "Mahogany Town",
+    "areaId": "Mahogany Gym",
     "unlocks": [
       "Route 45"
     ],
@@ -2502,8 +2466,7 @@ export const johtoUnlocks = [
     "areaId": "Route 12",
     "unlocks": [
       "Fuschia Gym",
-      "Safari Zone",
-      "Kanto Safari Zone"
+      "Safari Zone"
     ],
     "requirements": {
       "catchSpecies": [

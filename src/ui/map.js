@@ -269,6 +269,15 @@ function generateMarkersForRegion(region, unlockedAreas) {
                 hasNewNotification = true;
             }
 
+            if (locationId === 'violet_gym' && state.trainer.badges >= 1) showCheckmark = true;
+            if (locationId === 'azalea_gym' && state.trainer.badges >= 2) showCheckmark = true;
+            if (locationId === 'goldenrood_gym' && state.trainer.badges >= 3) showCheckmark = true;
+            if (locationId === 'ecruteak_gym' && state.trainer.badges >= 4) showCheckmark = true;
+            if (locationId === 'cianwood_gym' && state.trainer.badges >= 5) showCheckmark = true;
+            if (locationId === 'olivine_gym' && state.trainer.badges >= 6) showCheckmark = true;
+            if (locationId === 'mahogany_gym' && state.trainer.badges >= 7) showCheckmark = true;
+            if (locationId === 'blackthorn_gym' && state.trainer.badges >= 8) showCheckmark = true;
+
             html += generateMarkerHtml(locationId, locationName, coords, true, hasNewNotification, showCheckmark);
         }
     } else if (region === 'Hoenn') {
