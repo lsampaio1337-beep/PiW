@@ -4,7 +4,7 @@ const sinnohMapCoordinates = {
     "x": 18.46,
     "y": 89.43
   },
-  "201": {
+  "route_201": {
     "name": "Route 201",
     "x": 20.02,
     "y": 82.11
@@ -30,7 +30,7 @@ const sinnohMapCoordinates = {
     "y": 54.21
   },
   "hearthome_gym": {
-    "name": "Hearthome  Gym",
+    "name": "Hearthome Gym",
     "x": 54.1,
     "y": 64.02
   },
@@ -54,17 +54,17 @@ const sinnohMapCoordinates = {
     "x": 90.82,
     "y": 73.83
   },
-  "204": {
+  "route_204": {
     "name": "Route 204",
     "x": 26.37,
     "y": 65.68
   },
-  "205": {
+  "route_205": {
     "name": "Route 205",
     "x": 30.96,
     "y": 51.59
   },
-  "207": {
+  "route_207": {
     "name": "Route 207",
     "x": 39.65,
     "y": 63.33
@@ -79,32 +79,32 @@ const sinnohMapCoordinates = {
     "x": 31.15,
     "y": 42.61
   },
-  "211": {
+  "route_211": {
     "name": "Route 211",
     "x": 43.65,
     "y": 41.37
   },
-  "mount_coronet": {
-    "name": "Mount Coronet",
+  "mt_coronet": {
+    "name": "Mt. Coronet",
     "x": 44.73,
     "y": 57.8
   },
-  "208": {
+  "route_208": {
     "name": "Route 208",
     "x": 49.22,
     "y": 65.54
   },
-  "209": {
+  "route_209": {
     "name": "Route 209",
     "x": 61.62,
     "y": 65.81
   },
-  "214": {
+  "route_214": {
     "name": "Route 214",
     "x": 76.27,
     "y": 61.95
   },
-  "213": {
+  "route_213": {
     "name": "Route 213",
     "x": 71.78,
     "y": 76.45
@@ -114,7 +114,7 @@ const sinnohMapCoordinates = {
     "x": 64.16,
     "y": 73.13
   },
-  "212": {
+  "route_212": {
     "name": "Route 212",
     "x": 55.76,
     "y": 81.42
@@ -124,12 +124,12 @@ const sinnohMapCoordinates = {
     "x": 25.78,
     "y": 47.86
   },
-  "218": {
+  "route_218": {
     "name": "Route 218",
     "x": 18.65,
     "y": 69.68
   },
-  "215": {
+  "route_215": {
     "name": "Route 215",
     "x": 67.09,
     "y": 49.79
@@ -154,7 +154,7 @@ const sinnohMapCoordinates = {
     "x": 82.62,
     "y": 63.74
   },
-  "222": {
+  "route_222": {
     "name": "Route 222",
     "x": 83.89,
     "y": 72.31
@@ -164,22 +164,22 @@ const sinnohMapCoordinates = {
     "x": 85.74,
     "y": 48.83
   },
-  "224": {
+  "route_224": {
     "name": "Route 224",
     "x": 91.02,
     "y": 39.3
   },
-  "221": {
+  "route_221": {
     "name": "Route 221",
     "x": 34.18,
     "y": 91.23
   },
-  "225": {
+  "route_225": {
     "name": "Route 225",
     "x": 64.94,
     "y": 28.52
   },
-  "227": {
+  "route_227": {
     "name": "Route 227",
     "x": 75.1,
     "y": 22.58
@@ -189,12 +189,12 @@ const sinnohMapCoordinates = {
     "x": 74.61,
     "y": 14.43
   },
-  "228": {
+  "route_228": {
     "name": "Route 228",
     "x": 78.91,
     "y": 28.52
   },
-  "229": {
+  "route_229": {
     "name": "Route 229",
     "x": 79.78,
     "y": 34.6
