@@ -48,6 +48,15 @@ export function getChallengeData(unlock) {
         }
     }
 
+    if (req.catchSpeciesByQuality) {
+        for (let spec of req.catchSpeciesByQuality) {
+            let caughtKey = spec.species + "_" + spec.quality;
+            let caughtCount = state.stats.challengeCaughtSpecific ? (state.stats.challengeCaughtSpecific[caughtKey] || 0) : 0;
+            if (caughtCount < spec.count) isMet = false;
+            textParts.push(`Catch ${spec.count} ${spec.quality} ${formatSpecies(spec.species)} ${countDisplay(caughtCount, spec.count)}${getStatusHtml(caughtCount >= spec.count)}`);
+        }
+    }
+
     if (req.catchSpeciesAnyOf) {
          for (let specGroup of req.catchSpeciesAnyOf) {
              let caughtCount = 0;
