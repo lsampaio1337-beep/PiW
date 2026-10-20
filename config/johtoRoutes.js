@@ -1897,7 +1897,7 @@ export const johtoUnlocks = [
     "challengeName": "Challenge 8",
     "areaId": "Route 33",
     "unlocks": [
-      "Azalea Town"
+      "Azalea Gym"
     ],
     "requirements": {
       "catchSpecies": [
