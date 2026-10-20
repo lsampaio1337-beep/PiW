@@ -105,6 +105,22 @@ function generateMarkerHtml(locationId, locationName, coords, isUnlocked, hasNew
         markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Kanto', 7)}`;
     } else if (locationId === 'viridian_gym') {
         markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Kanto', 8)}`;
+    } else if (locationId === 'aspertia_gym') {
+        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Unova', 1)}`;
+    } else if (locationId === 'virbank_gym') {
+        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Unova', 2)}`;
+    } else if (locationId === 'castelia_gym') {
+        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Unova', 3)}`;
+    } else if (locationId === 'nimbasa_gym') {
+        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Unova', 4)}`;
+    } else if (locationId === 'driftveil_gym') {
+        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Unova', 5)}`;
+    } else if (locationId === 'mistralton_gym') {
+        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Unova', 6)}`;
+    } else if (locationId === 'opelucid_gym') {
+        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Unova', 7)}`;
+    } else if (locationId === 'humilau_gym') {
+        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Unova', 8)}`;
     }
 
     // Standardize spot sizes

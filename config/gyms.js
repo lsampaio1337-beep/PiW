@@ -1306,6 +1306,28 @@ const gyms = [
     "levelRequirement": 0,
     "trainers": [
       {
+        "name": "Gym Trainer #1",
+        "team": [
+          {
+            "id": 504,
+            "level": 9
+          },
+          {
+            "id": 506,
+            "level": 9
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          {
+            "id": 506,
+            "level": 11
+          }
+        ]
+      },
+      {
         "name": "Leader Cheren",
         "team": [
           {
@@ -1327,6 +1349,32 @@ const gyms = [
     "levelRequirement": 0,
     "trainers": [
       {
+        "name": "Gym Trainer #1",
+        "team": [
+          {
+            "id": 88,
+            "level": 14
+          },
+          {
+            "id": 109,
+            "level": 14
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          {
+            "id": 543,
+            "level": 14
+          },
+          {
+            "id": 544,
+            "level": 14
+          }
+        ]
+      },
+      {
         "name": "Leader Roxie",
         "team": [
           {
@@ -1347,6 +1395,54 @@ const gyms = [
     "leader": "Burgh",
     "levelRequirement": 0,
     "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          {
+            "id": 540,
+            "level": 20
+          },
+          {
+            "id": 541,
+            "level": 20
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          {
+            "id": 557,
+            "level": 20
+          },
+          {
+            "id": 540,
+            "level": 20
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #3",
+        "team": [
+          {
+            "id": 540,
+            "level": 21
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #4",
+        "team": [
+          {
+            "id": 542,
+            "level": 20
+          },
+          {
+            "id": 540,
+            "level": 20
+          }
+        ]
+      },
       {
         "name": "Leader Burgh",
         "team": [
@@ -1373,6 +1469,45 @@ const gyms = [
     "levelRequirement": 0,
     "trainers": [
       {
+        "name": "Gym Trainer #1",
+        "team": [
+          {
+            "id": 587,
+            "level": 27
+          },
+          {
+            "id": 595,
+            "level": 27
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          {
+            "id": 180,
+            "level": 27
+          },
+          {
+            "id": 587,
+            "level": 27
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #3",
+        "team": [
+          {
+            "id": 522,
+            "level": 27
+          },
+          {
+            "id": 180,
+            "level": 27
+          }
+        ]
+      },
+      {
         "name": "Leader Elesa",
         "team": [
           {
@@ -1397,6 +1532,45 @@ const gyms = [
     "leader": "Clay",
     "levelRequirement": 0,
     "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          {
+            "id": 551,
+            "level": 31
+          },
+          {
+            "id": 552,
+            "level": 31
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          {
+            "id": 27,
+            "level": 30
+          },
+          {
+            "id": 28,
+            "level": 30
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #3",
+        "team": [
+          {
+            "id": 529,
+            "level": 31
+          },
+          {
+            "id": 530,
+            "level": 31
+          }
+        ]
+      },
       {
         "name": "Leader Clay",
         "team": [
@@ -1423,6 +1597,49 @@ const gyms = [
     "levelRequirement": 0,
     "trainers": [
       {
+        "name": "Gym Trainer #1",
+        "team": [
+          {
+            "id": 527,
+            "level": 37
+          },
+          {
+            "id": 528,
+            "level": 37
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          {
+            "id": 227,
+            "level": 37
+          },
+          {
+            "id": 581,
+            "level": 37
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #3",
+        "team": [
+          {
+            "id": 527,
+            "level": 36
+          },
+          {
+            "id": 566,
+            "level": 36
+          },
+          {
+            "id": 528,
+            "level": 36
+          }
+        ]
+      },
+      {
         "name": "Leader Skyla",
         "team": [
           {
@@ -1448,6 +1665,41 @@ const gyms = [
     "levelRequirement": 0,
     "trainers": [
       {
+        "name": "Gym Trainer #1",
+        "team": [
+          {
+            "id": 610,
+            "level": 46
+          },
+          {
+            "id": 611,
+            "level": 46
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          {
+            "id": 621,
+            "level": 45
+          },
+          {
+            "id": 330,
+            "level": 45
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #3",
+        "team": [
+          {
+            "id": 632,
+            "level": 46
+          }
+        ]
+      },
+      {
         "name": "Leader Drayden",
         "team": [
           {
@@ -1472,6 +1724,45 @@ const gyms = [
     "leader": "Marlon",
     "levelRequirement": 0,
     "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          {
+            "id": 564,
+            "level": 48
+          },
+          {
+            "id": 565,
+            "level": 48
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          {
+            "id": 320,
+            "level": 47
+          },
+          {
+            "id": 321,
+            "level": 47
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #3",
+        "team": [
+          {
+            "id": 592,
+            "level": 48
+          },
+          {
+            "id": 593,
+            "level": 48
+          }
+        ]
+      },
       {
         "name": "Leader Marlon",
         "team": [
