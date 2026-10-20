@@ -2037,7 +2037,7 @@ async function init() {
 
             if (pData.isZzZMode) {
                 const sleepImg = document.createElement('img');
-                sleepImg.src = "Assets/Extra/IconSleep.png";
+                sleepImg.src = "Assets/Extra/Icons/IconSleep.png";
                 sleepImg.style.height = "100%";
                 sleepImg.style.maxHeight = "60px";
                 sleepImg.style.marginLeft = "10px";
@@ -2974,7 +2974,7 @@ ${starterButtonsHtml}
     } else {
         // Show assignments (identical to Kanto layout)
         let exclamationHtml = state.stats.showProfLobbyNotification
-            ? `<img src="Assets/Extra/ExclamationMark.png" style="position: absolute; top: -5px; right: -5px; width: 20px; height: auto; pointer-events: none; z-index: 10;">`
+            ? `<img src="Assets/Extra/Icons/ExclamationMark.png" style="position: absolute; top: -5px; right: -5px; width: 20px; height: auto; pointer-events: none; z-index: 10;">`
             : ``;
 
         labContent.innerHTML = `

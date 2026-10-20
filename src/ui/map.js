@@ -145,7 +145,7 @@ function generateMarkerHtml(locationId, locationName, coords, isUnlocked, hasNew
 function generateRegionButtonsHtml(unlockedRegions, allRegions) {
     if (!unlockedRegions || unlockedRegions.length <= 1) return '';
 
-    let exclamationHtml = !state.globalStats.hasSeenJohtoMap ? `<img src="Assets/Extra/ExclamationMark.png" style="position: absolute; top: -5px; right: -5px; width: 15px; height: auto; pointer-events: none; z-index: 10;">` : '';
+    let exclamationHtml = !state.globalStats.hasSeenJohtoMap ? `<img src="Assets/Extra/Icons/ExclamationMark.png" style="position: absolute; top: -5px; right: -5px; width: 15px; height: auto; pointer-events: none; z-index: 10;">` : '';
 
     let buttonsHtml = unlockedRegions.map(rName => {
         let extra = rName === 'Johto' ? exclamationHtml : '';
