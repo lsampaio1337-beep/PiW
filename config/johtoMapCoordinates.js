@@ -329,10 +329,15 @@ const johtoMapCoordinates = {
     "x": 55.8,
     "y": 34.57
   },
+  "trade_with_friends_hub": {
+    "name": "Trade With Friends Hub",
+    "x": 67.47,
+    "y": 61.32
+  },
   "battle_stadium": {
     "name": "Battle Stadium",
-    "x": 68.87,
-    "y": 61.02
+    "x": 70.20,
+    "y": 61.32
   }
 };
 export default johtoMapCoordinates;

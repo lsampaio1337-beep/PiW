@@ -2541,7 +2541,8 @@ export const johtoUnlocks = [
     "areaId": "Cinnabar Gym",
     "unlocks": [
       "Viridian Gym",
-      "Trade With Friends Hub"
+      "Trade With Friends Hub",
+      "Battle Stadium"
     ],
     "requirements": {
       "earnBadge": {

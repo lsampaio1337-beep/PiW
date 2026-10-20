@@ -37,7 +37,7 @@ window.switchMapRegion = function(region) {
 
 
 
-const LARGE_SPOT_LOCATIONS = new Set(['professor_lab', 'johto_professor_lab', 'professor_lab', 'indigo_plateu', 'safari_zone', 'kanto_safari_zone', 'casino', 'goldenrod_game_corner', 'daycare']);
+const LARGE_SPOT_LOCATIONS = new Set(['professor_lab', 'johto_professor_lab', 'professor_lab', 'indigo_plateu', 'safari_zone', 'kanto_safari_zone', 'casino', 'goldenrod_game_corner', 'daycare', 'trade_with_friends_hub', 'battle_stadium']);
 
 function generateMarkerHtml(locationId, locationName, coords, isUnlocked, hasNewNotification, showCheckmark) {
     if (!isUnlocked) return '';
@@ -131,7 +131,7 @@ function generateMarkerHtml(locationId, locationName, coords, isUnlocked, hasNew
     if (locationId === 'pokemon_center___market' || locationId === 'pokecenter_pokemarket') {
         markerWidth = "32px";
         markerHeight = "32px";
-    } else if (['professor_oak_lab', 'johto_oak_lab', 'professor_lab', 'indigo_plateu', 'safari_zone', 'kanto_safari_zone', 'casino', 'goldenrod_game_corner', 'daycare', 'battle_stadium'].includes(locationId)) {
+    } else if (['professor_oak_lab', 'johto_oak_lab', 'professor_lab', 'indigo_plateu', 'safari_zone', 'kanto_safari_zone', 'casino', 'goldenrod_game_corner', 'daycare', 'battle_stadium', 'trade_with_friends_hub'].includes(locationId)) {
         markerWidth = "28px";
         markerHeight = "28px";
     }
