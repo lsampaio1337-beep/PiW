@@ -379,8 +379,10 @@ function updateBackgroundSliding(combatArena, state, battleSystem, inGymCombat) 
                 let pos = parseFloat(combatArena.style.backgroundPositionX) || 0;
                 combatArena.dataset.bgAnimationInterval = setInterval(() => {
                     const gameSpeed = (state && state.settings && state.settings.gameSpeed) ? state.settings.gameSpeed : 1;
-                    const slideDelay = 1000 / gameSpeed;
-                    const moveDistance = 65; // Same as wild pokemon sliding distance
+                    // Ensure the slideDelay used here matches what the battle system would use for slideDuration
+                    // It uses exactly 1000 / gameSpeed
+                    const slideDelay = battleSystem.searchDuration || (1000 / gameSpeed);
+                    const moveDistance = 4.0625; // Original distance
                     const ticksPerSlide = slideDelay / 33;
                     const pctPerTick = moveDistance / ticksPerSlide;
                     pos += pctPerTick;
@@ -401,7 +403,7 @@ function updateBackgroundSliding(combatArena, state, battleSystem, inGymCombat) 
                 void combatArena.offsetWidth;
                 requestAnimationFrame(() => {
                     requestAnimationFrame(() => {
-                        combatArena.style.backgroundPositionX = `${pos + 65}%`;
+                        combatArena.style.backgroundPositionX = `${pos + 4.0625}%`;
                     });
                 });
             }

@@ -702,6 +702,8 @@ class BattleSystem {
         let delay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed)) * speedMult;
         delay = Math.max(300, delay) / this.state.settings.gameSpeed;
 
+        this.searchDuration = delay;
+
         // Start encounter generation after search delay, slide duration will be same as search delay
         this.combatLoop = setTimeout(() => {
             if (this.gymState.isActive) {
