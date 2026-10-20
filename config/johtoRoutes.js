@@ -948,7 +948,7 @@ export const johtoRoutes = [
     ]
   },
   {
-    "name": "Mt. Silver",
+    "name": "Mount Silver",
     "spawns": [
       {
         "pokemonId": 232,
@@ -2623,7 +2623,7 @@ export const johtoUnlocks = [
     "challengeName": "Johto Extra Challenge 3",
     "areaId": "Lake of Rage",
     "unlocks": [
-      "Mt. Silver"
+      "Mount Silver"
     ],
     "requirements": {
       "catchSpecies": [
@@ -2642,7 +2642,7 @@ export const johtoUnlocks = [
   },
   {
     "challengeName": "Johto Extra Challenge 4",
-    "areaId": "Mt. Silver",
+    "areaId": "Mount Silver",
     "unlocks": [
       "Ilex Forest 2"
     ],
