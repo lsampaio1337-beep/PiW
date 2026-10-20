@@ -203,9 +203,21 @@ function getUnlockedAreas() {
 
     unlockedAreas.add("PokeCenter & PokeMarket");
 
+
     if (window.currentMapRegion === "Johto") {
         unlockedAreas.add("Route 29");
     }
+    if (window.currentMapRegion === "Hoenn") {
+        unlockedAreas.add("Route 101");
+    }
+    if (window.currentMapRegion === "Sinnoh") {
+        unlockedAreas.add("Route 201");
+    }
+    if (window.currentMapRegion === "Unova") {
+        unlockedAreas.add("Aspertia City");
+        unlockedAreas.add("Route 19");
+    }
+
 
     if (targetStats.completed150Challenge) {
         unlockedAreas.add("Mythical and Legendaries");
