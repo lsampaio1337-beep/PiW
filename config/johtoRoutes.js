@@ -1036,7 +1036,7 @@ export const johtoRoutes = [
     ]
   },
   {
-    "name": "Roaming",
+    "name": "Extra Challenge (Roaming)",
     "spawns": [
       {
         "pokemonId": 243,
@@ -2706,7 +2706,7 @@ export const johtoUnlocks = [
   },
   {
     "challengeName": "Extra Challenge (Roaming)",
-    "areaId": "Roaming",
+    "areaId": "Extra Challenge (Roaming)",
     "unlocks": [
       "Mythical and Legendaries Spot"
     ],
