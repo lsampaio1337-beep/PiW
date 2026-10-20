@@ -906,7 +906,7 @@ export function showDamage(target, amount, isCrit, moveName = '', moveType = 'No
     const typeColor = TYPE_COLORS[moveType] || '#ffffff';
     let critText = isCrit ? ' Crit(1.5x)' : '';
     let effText = `${effectiveness}x`;
-    let typeIconHtml = `<img src="Assets/Extra/Type ${moveType}.png" style="width: 20px; height: 20px; vertical-align: middle; margin: 0 4px;" />`;
+    let typeIconHtml = `<img src="Assets/Extra/Types/Type ${moveType}.png" style="width: 20px; height: 20px; vertical-align: middle; margin: 0 4px;" />`;
 
     // Layout: [Amount] [Icon] [Name] [Effectiveness] [Crit]
     dmgNode.innerHTML = `<span style="font-weight: bold; font-style: ${isCrit ? 'italic' : 'normal'}; display: flex; align-items: center; justify-content: center; text-shadow: 1px 1px 2px black;">${amount} ${typeIconHtml} ${moveName} ${effText}${critText}</span>`;
