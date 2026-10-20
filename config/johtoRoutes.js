@@ -2485,8 +2485,7 @@ export const johtoUnlocks = [
     "challengeName": "Challenge 41",
     "areaId": "Celadon Gym",
     "unlocks": [
-      "Saffron Gym",
-      "Kanto Safari Zone"
+      "Saffron Gym"
     ],
     "requirements": {
       "earnBadge": {
@@ -2514,7 +2513,8 @@ export const johtoUnlocks = [
     "challengeName": "Challenge 43",
     "areaId": "Route 12",
     "unlocks": [
-      "Fuschia Gym"
+      "Fuschia Gym",
+      "Kanto Safari Zone"
     ],
     "requirements": {
       "catchSpecies": [
