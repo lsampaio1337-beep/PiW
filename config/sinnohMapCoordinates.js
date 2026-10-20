@@ -30,7 +30,7 @@ const sinnohMapCoordinates = {
     "y": 54.21
   },
   "hearthome_gym": {
-    "name": "Hearthome  Gym",
+    "name": "Hearthome Gym",
     "x": 54.1,
     "y": 64.02
   },

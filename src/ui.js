@@ -1460,7 +1460,7 @@ async function loadConfigs() {
     try {
         const sinnohModule = await import('../config/sinnohRoutes.js');
         state.config.sinnohRoutes = sinnohModule.sinnohRoutes;
-        state.config.sinnohUnlocks = []; // For now
+        state.config.sinnohUnlocks = sinnohModule.sinnohUnlocks;
     } catch (e) {
         console.warn("Failed to load sinnoh routes");
     }

@@ -1299,5 +1299,241 @@ const gyms = [
       }
     ]
   }
+,
+  {
+    "id": "oreburgh",
+    "name": "Oreburgh Gym",
+    "leader": "Roark",
+    "levelRequirement": 0,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          { "id": 74, "level": 11 }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          { "id": 74, "level": 9 },
+          { "id": 74, "level": 9 }
+        ]
+      },
+      {
+        "name": "Leader Roark",
+        "team": [
+          { "id": 74, "level": 12 },
+          { "id": 95, "level": 12 },
+          { "id": 408, "level": 14 }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "eterna",
+    "name": "Eterna Gym",
+    "leader": "Gardenia",
+    "levelRequirement": 0,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          { "id": 420, "level": 17 },
+          { "id": 315, "level": 17 }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          { "id": 407, "level": 19 }
+        ]
+      },
+      {
+        "name": "Leader Gardenia",
+        "team": [
+          { "id": 387, "level": 20 },
+          { "id": 421, "level": 20 },
+          { "id": 407, "level": 22 }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hearthome",
+    "name": "Hearthome Gym",
+    "leader": "Fantina",
+    "levelRequirement": 0,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          { "id": 92, "level": 22 },
+          { "id": 93, "level": 23 }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          { "id": 200, "level": 24 }
+        ]
+      },
+      {
+        "name": "Leader Fantina",
+        "team": [
+          { "id": 355, "level": 24 },
+          { "id": 93, "level": 24 },
+          { "id": 429, "level": 26 }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "veilstone",
+    "name": "Veilstone Gym",
+    "leader": "Maylene",
+    "levelRequirement": 0,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          { "id": 66, "level": 26 },
+          { "id": 66, "level": 26 },
+          { "id": 66, "level": 26 }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          { "id": 307, "level": 28 }
+        ]
+      },
+      {
+        "name": "Leader Maylene",
+        "team": [
+          { "id": 307, "level": 28 },
+          { "id": 67, "level": 29 },
+          { "id": 448, "level": 32 }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "pastoria",
+    "name": "Pastoria Gym",
+    "leader": "Crasher Wake",
+    "levelRequirement": 0,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          { "id": 418, "level": 31 }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          { "id": 130, "level": 31 },
+          { "id": 130, "level": 31 }
+        ]
+      },
+      {
+        "name": "Leader Crasher Wake",
+        "team": [
+          { "id": 130, "level": 33 },
+          { "id": 195, "level": 34 },
+          { "id": 419, "level": 37 }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "canalave",
+    "name": "Canalave Gym",
+    "leader": "Byron",
+    "levelRequirement": 0,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          { "id": 208, "level": 37 }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          { "id": 81, "level": 35 },
+          { "id": 82, "level": 35 }
+        ]
+      },
+      {
+        "name": "Leader Byron",
+        "team": [
+          { "id": 82, "level": 37 },
+          { "id": 208, "level": 38 },
+          { "id": 411, "level": 41 }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "snowpoint",
+    "name": "Snowpoint Gym",
+    "leader": "Candice",
+    "levelRequirement": 0,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          { "id": 459, "level": 39 }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          { "id": 215, "level": 39 },
+          { "id": 73, "level": 39 }
+        ]
+      },
+      {
+        "name": "Leader Candice",
+        "team": [
+          { "id": 215, "level": 40 },
+          { "id": 221, "level": 40 },
+          { "id": 460, "level": 42 },
+          { "id": 478, "level": 44 }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sunyshore",
+    "name": "Sunyshore Gym",
+    "leader": "Volkner",
+    "levelRequirement": 0,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          { "id": 100, "level": 44 },
+          { "id": 101, "level": 44 }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          { "id": 405, "level": 44 }
+        ]
+      },
+      {
+        "name": "Leader Volkner",
+        "team": [
+          { "id": 135, "level": 46 },
+          { "id": 26, "level": 46 },
+          { "id": 405, "level": 48 },
+          { "id": 466, "level": 50 }
+        ]
+      }
+    ]
+  }
 ];
 export default gyms;
