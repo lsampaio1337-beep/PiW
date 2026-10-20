@@ -237,6 +237,11 @@ function getUnlockedAreas() {
             parseAreaNames(id).forEach(area => unlockedAreas.add(area));
         });
     }
+
+    if (unlockedAreas.has("Ilex Forest 2")) {
+        unlockedAreas.delete("Ilex Forest");
+    }
+
     return unlockedAreas;
 }
 

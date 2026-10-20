@@ -992,27 +992,39 @@ export const johtoRoutes = [
     "name": "Ilex Forest 2",
     "spawns": [
       {
+        "pokemonId": 47,
+        "minLevel": 77,
+        "maxLevel": 82,
+        "chance": 0.30
+      },
+      {
         "pokemonId": 12,
-        "minLevel": 80,
-        "maxLevel": 86,
-        "chance": 0.35
+        "minLevel": 77,
+        "maxLevel": 82,
+        "chance": 0.20
       },
       {
         "pokemonId": 15,
-        "minLevel": 80,
-        "maxLevel": 86,
-        "chance": 0.35
+        "minLevel": 77,
+        "maxLevel": 82,
+        "chance": 0.20
       },
       {
-        "pokemonId": 47,
-        "minLevel": 82,
-        "maxLevel": 88,
-        "chance": 0.25
+        "pokemonId": 164,
+        "minLevel": 79,
+        "maxLevel": 83,
+        "chance": 0.15
+      },
+      {
+        "pokemonId": 103,
+        "minLevel": 79,
+        "maxLevel": 83,
+        "chance": 0.10
       },
       {
         "pokemonId": 251,
-        "minLevel": 90,
-        "maxLevel": 90,
+        "minLevel": 85,
+        "maxLevel": 85,
         "chance": 0.05
       }
     ]
