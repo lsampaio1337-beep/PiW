@@ -5,7 +5,7 @@ export function formatType(typeStr) {
     if (!typeStr || !TYPE_COLORS[typeStr]) return typeStr;
     const color = TYPE_COLORS[typeStr];
     return `<span style="color: ${color}; display: inline-flex; align-items: center; gap: 4px;">
-                <img src="Assets/Extra/Type ${typeStr}.png" style="height: 14px;"> ${typeStr}
+                <img src="Assets/Extra/Types/Type ${typeStr}.png" style="height: 14px;"> ${typeStr}
             </span>`;
 }
 
