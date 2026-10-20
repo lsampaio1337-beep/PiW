@@ -105,6 +105,22 @@ function generateMarkerHtml(locationId, locationName, coords, isUnlocked, hasNew
         markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Kanto', 7)}`;
     } else if (locationId === 'viridian_gym') {
         markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Kanto', 8)}`;
+    } else if (locationId === 'oreburgh_gym') {
+        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Sinnoh', 1)}`;
+    } else if (locationId === 'eterna_gym') {
+        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Sinnoh', 2)}`;
+    } else if (locationId === 'hearthome_gym') {
+        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Sinnoh', 3)}`;
+    } else if (locationId === 'veilstone_gym') {
+        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Sinnoh', 4)}`;
+    } else if (locationId === 'pastoria_gym') {
+        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Sinnoh', 5)}`;
+    } else if (locationId === 'canalave_gym') {
+        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Sinnoh', 6)}`;
+    } else if (locationId === 'snowpoint_gym') {
+        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Sinnoh', 7)}`;
+    } else if (locationId === 'sunyshore_gym') {
+        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Sinnoh', 8)}`;
     }
 
     // Standardize spot sizes
@@ -252,6 +268,14 @@ function generateMarkersForRegion(region, unlockedAreas) {
             if (locationId === 'saffron_gym' && state.trainer.badges >= 6) showCheckmark = true;
             if (locationId === 'cinnabar_gym' && state.trainer.badges >= 7) showCheckmark = true;
             if (locationId === 'viridian_gym' && state.trainer.badges >= 8) showCheckmark = true;
+            if (locationId === 'oreburgh_gym' && state.trainer.badges >= 1) showCheckmark = true;
+            if (locationId === 'eterna_gym' && state.trainer.badges >= 2) showCheckmark = true;
+            if (locationId === 'hearthome_gym' && state.trainer.badges >= 3) showCheckmark = true;
+            if (locationId === 'veilstone_gym' && state.trainer.badges >= 4) showCheckmark = true;
+            if (locationId === 'pastoria_gym' && state.trainer.badges >= 5) showCheckmark = true;
+            if (locationId === 'canalave_gym' && state.trainer.badges >= 6) showCheckmark = true;
+            if (locationId === 'snowpoint_gym' && state.trainer.badges >= 7) showCheckmark = true;
+            if (locationId === 'sunyshore_gym' && state.trainer.badges >= 8) showCheckmark = true;
 
             html += generateMarkerHtml(locationId, locationName, coords, true, hasNewNotification, showCheckmark);
         }
