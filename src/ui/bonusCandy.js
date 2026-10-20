@@ -31,19 +31,19 @@ export function showBonusCandyModal() {
         else if (history[i] === 'Purple Candy') candyImg = 'XPCandy.png';
         else if (history[i] === 'Black Yellow Candy') candyImg = 'CatchCandy.png';
         else if (history[i] === 'Rainbow Candy') candyImg = 'ShinyCandy.png';
-        candyBankHTML += `<img src="Assets/Extra/${candyImg}" style="width: 30px; height: 30px; margin: 2px;" title="${history[i]}" onerror="this.style.display='none'">`;
+        candyBankHTML += `<img src="Assets/Extra/Candies/${candyImg}" style="width: 30px; height: 30px; margin: 2px;" title="${history[i]}" onerror="this.style.display='none'">`;
     }
     // Append unspent white candies
     const unspentWhite = state.stats.whiteCandies || 0;
     for (let i = 0; i < unspentWhite; i++) {
-        candyBankHTML += `<img src="Assets/Extra/WhiteCandy.png" style="width: 30px; height: 30px; margin: 2px;" title="White Candy" onerror="this.style.display='none'">`;
+        candyBankHTML += `<img src="Assets/Extra/Candies/WhiteCandy.png" style="width: 30px; height: 30px; margin: 2px;" title="White Candy" onerror="this.style.display='none'">`;
     }
 
     const html = `
         <div style="text-align: center; font-family: sans-serif; box-sizing: border-box;">
             <div style="margin-bottom: 10px;">
                 <h2 style="margin: 0; display: inline-block; vertical-align: middle;">White Candies: ${state.stats.whiteCandies || 0}</h2>
-                <img src="Assets/Extra/WhiteCandy.png" style="width: 30px; height: 30px; vertical-align: middle; margin-left: 10px;" onerror="this.style.display='none'">
+                <img src="Assets/Extra/Candies/WhiteCandy.png" style="width: 30px; height: 30px; vertical-align: middle; margin-left: 10px;" onerror="this.style.display='none'">
             </div>
 
             <div style="margin-bottom: 20px;">
@@ -143,7 +143,7 @@ function renderCandyOption(color, effectText, cost, currentOwned, currentEffect,
 
     return `
         <div style="background-color: #222; border: 1px solid #444; border-radius: 8px; padding: 15px; display: flex; flex-direction: column; align-items: center; position: relative; min-height: 120px; justify-content: center; ${isMaxed ? 'opacity: 0.5;' : ''}">
-            <img src="Assets/Extra/${imageFile}" ${isMaxed ? '' : `onclick="window.buyBonusCandy('${color}')"`} style="width: 60px; height: 60px; position: absolute; ${verticalAlign} ${horizontalAlign} ${isMaxed ? '' : 'cursor: pointer;'} border-radius: 5px; box-shadow: 0 0 5px rgba(255,255,255,0.5);" onerror="this.style.display='none'" title="${isMaxed ? 'MAXED' : `Click to buy ${color}`}">
+            <img src="Assets/Extra/Candies/${imageFile}" ${isMaxed ? '' : `onclick="window.buyBonusCandy('${color}')"`} style="width: 60px; height: 60px; position: absolute; ${verticalAlign} ${horizontalAlign} ${isMaxed ? '' : 'cursor: pointer;'} border-radius: 5px; box-shadow: 0 0 5px rgba(255,255,255,0.5);" onerror="this.style.display='none'" title="${isMaxed ? 'MAXED' : `Click to buy ${color}`}">
             <div style="font-size: 18px; font-weight: bold; margin-bottom: 5px; ${titleStyle}">${color}</div>
             <div style="font-size: 14px; margin-bottom: 5px; text-align: center;">Effect: ${effectText}</div>
             <div style="font-size: 12px; margin-bottom: 5px; text-align: center; color: #88ff88;">Current Bonus: ${currentEffect}</div>
