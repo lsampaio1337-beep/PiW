@@ -45,24 +45,30 @@ export const johtoRoutes = [
         "pokemonId": 10,
         "minLevel": 3,
         "maxLevel": 6,
-        "chance": 0.3
+        "chance": 0.25
       },
       {
         "pokemonId": 13,
         "minLevel": 3,
         "maxLevel": 6,
-        "chance": 0.3
+        "chance": 0.25
       },
       {
         "pokemonId": 165,
         "minLevel": 4,
         "maxLevel": 7,
-        "chance": 0.2
+        "chance": 0.15
       },
       {
         "pokemonId": 167,
         "minLevel": 4,
         "maxLevel": 7,
+        "chance": 0.15
+      },
+      {
+        "pokemonId": 46,
+        "minLevel": 3,
+        "maxLevel": 6,
         "chance": 0.2
       }
     ]
