@@ -3254,6 +3254,38 @@ const gymAssets = {
       "origin": "center center"
     }
   }
+,
+  "Marlon": {
+    "_description": "Position (rel_x, rel_y) is relative to the background boundaries (0.0 to 1.0). Size (scale_x, scale_y) is a multiplier relative to the sprite's original size. Tilt is rotation around the center of the sprite.",
+    "background": "BG_Gym_Water.png",
+    "sprite": "GymLeader_Unova2_8_Marlon_Water.png",
+    "position": {
+      "rel_x": 0.5,
+      "rel_y": 0.1,
+      "px_x": 900,
+      "px_y": 100
+    },
+    "scale": {
+      "scale_x": 0.8,
+      "scale_y": 0.8
+    },
+    "tilt": 0.0
+  },
+  "GymLeader_Unova2_8_Marlon_Water.png": {
+    "_description": "Position (rel_x, rel_y) is relative to the background boundaries (0.0 to 1.0). Size (scale_x, scale_y) is a multiplier relative to the sprite's original size. Tilt is rotation around the center of the sprite.",
+    "background": "BG_Gym_Water.png",
+    "sprite": "GymLeader_Unova2_8_Marlon_Water.png",
+    "position": {
+      "rel_x": 0.5,
+      "rel_y": 0.1,
+      "px_x": 900,
+      "px_y": 100
+    },
+    "scale": {
+      "scale_x": 0.8,
+      "scale_y": 0.8
+    },
+    "tilt": 0.0
+  }
 };
-
 export default gymAssets;

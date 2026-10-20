@@ -1298,6 +1298,198 @@ const gyms = [
         ]
       }
     ]
+  },
+  {
+    "id": "aspertia",
+    "name": "Aspertia Gym",
+    "leader": "Cheren",
+    "levelRequirement": 0,
+    "trainers": [
+      {
+        "name": "Leader Cheren",
+        "team": [
+          {
+            "id": 504,
+            "level": 11
+          },
+          {
+            "id": 506,
+            "level": 13
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "virbank",
+    "name": "Virbank Gym",
+    "leader": "Roxie",
+    "levelRequirement": 0,
+    "trainers": [
+      {
+        "name": "Leader Roxie",
+        "team": [
+          {
+            "id": 109,
+            "level": 16
+          },
+          {
+            "id": 544,
+            "level": 18
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "castelia",
+    "name": "Castelia Gym",
+    "leader": "Burgh",
+    "levelRequirement": 0,
+    "trainers": [
+      {
+        "name": "Leader Burgh",
+        "team": [
+          {
+            "id": 541,
+            "level": 22
+          },
+          {
+            "id": 557,
+            "level": 22
+          },
+          {
+            "id": 542,
+            "level": 24
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "nimbasa",
+    "name": "Nimbasa Gym",
+    "leader": "Elesa",
+    "levelRequirement": 0,
+    "trainers": [
+      {
+        "name": "Leader Elesa",
+        "team": [
+          {
+            "id": 587,
+            "level": 28
+          },
+          {
+            "id": 180,
+            "level": 28
+          },
+          {
+            "id": 523,
+            "level": 30
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "driftveil",
+    "name": "Driftveil Gym",
+    "leader": "Clay",
+    "levelRequirement": 0,
+    "trainers": [
+      {
+        "name": "Leader Clay",
+        "team": [
+          {
+            "id": 552,
+            "level": 31
+          },
+          {
+            "id": 28,
+            "level": 31
+          },
+          {
+            "id": 530,
+            "level": 33
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mistralton",
+    "name": "Mistralton Gym",
+    "leader": "Skyla",
+    "levelRequirement": 0,
+    "trainers": [
+      {
+        "name": "Leader Skyla",
+        "team": [
+          {
+            "id": 528,
+            "level": 37
+          },
+          {
+            "id": 227,
+            "level": 37
+          },
+          {
+            "id": 581,
+            "level": 39
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "opelucid",
+    "name": "Opelucid Gym",
+    "leader": "Drayden",
+    "levelRequirement": 0,
+    "trainers": [
+      {
+        "name": "Leader Drayden",
+        "team": [
+          {
+            "id": 621,
+            "level": 46
+          },
+          {
+            "id": 330,
+            "level": 46
+          },
+          {
+            "id": 612,
+            "level": 48
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "humilau",
+    "name": "Humilau Gym",
+    "leader": "Marlon",
+    "levelRequirement": 0,
+    "trainers": [
+      {
+        "name": "Leader Marlon",
+        "team": [
+          {
+            "id": 565,
+            "level": 49
+          },
+          {
+            "id": 321,
+            "level": 49
+          },
+          {
+            "id": 593,
+            "level": 51
+          }
+        ]
+      }
+    ]
   }
 ];
 export default gyms;
