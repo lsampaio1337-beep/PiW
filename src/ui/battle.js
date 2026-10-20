@@ -339,7 +339,15 @@ function updateBattleBackground(combatArena, state, battleSystem, inGymCombat, i
                     '../Gym/BG/BG_Gym_Fighting.png',
                     '../Gym/BG/BG_Gym_Steel.png',
                     '../Gym/BG/BG_Gym_Ice.png',
-                    '../Gym/BG/BG_Gym_Dragon.png'
+                    '../Gym/BG/BG_Gym_Dragon.png',
+                    '../Gym/BG/BG_Gym_Rock.png',
+                    '../Gym/BG/BG_Gym_Fighting.png',
+                    '../Gym/BG/BG_Gym_Electric.png',
+                    '../Gym/BG/BG_Gym_Fire.png',
+                    '../Gym/BG/BG_Gym_Normal.png',
+                    '../Gym/BG/BG_Gym_Flying.png',
+                    '../Gym/BG/BG_Gym_Psychic.png',
+                    '../Gym/BG/BG_Gym_Water.png'
                 ];
                 const bgImage = gymBGs[gymIndex] || 'BG.png';
                 combatArena.style.backgroundImage = `url('./Assets/BG/${bgImage}')`;

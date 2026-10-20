@@ -549,10 +549,16 @@ window.cheatProgressChallenge = function(targetAreaId) {
         }
         if (req.earnBadge) {
             // Only give badge if they don't have it yet to prevent duplicates if cheated multiple times
-            const hasPending = state.stats.pendingGifts && state.stats.pendingGifts.some(g => g.type === 'badge' && g.gymIndex === req.earnBadge.badgeCount - 1);
+            let expectedGlobalIndex = req.earnBadge.badgeCount - 1;
+            if (window.currentMapRegion === 'Johto' || state.currentRegionName === 'Johto') expectedGlobalIndex += 9;
+            else if (window.currentMapRegion === 'Hoenn' || state.currentRegionName === 'Hoenn') expectedGlobalIndex += 17;
+            const hasPending = state.stats.pendingGifts && state.stats.pendingGifts.some(g => g.type === 'badge' && g.gymIndex === expectedGlobalIndex);
             if (state.trainer.badges < req.earnBadge.badgeCount && !hasPending) {
                  if (!state.stats.pendingGifts) state.stats.pendingGifts = [];
-                 state.stats.pendingGifts.push({ type: 'badge', gymName: req.earnBadge.name.replace(' Badge', ''), gymIndex: req.earnBadge.badgeCount - 1 });
+                 let globalGymIndex = req.earnBadge.badgeCount - 1;
+                 if (window.currentMapRegion === 'Johto' || state.currentRegionName === 'Johto') globalGymIndex += 9;
+                 else if (window.currentMapRegion === 'Hoenn' || state.currentRegionName === 'Hoenn') globalGymIndex += 17;
+                 state.stats.pendingGifts.push({ type: 'badge', gymName: req.earnBadge.name.replace(' Badge', ''), gymIndex: globalGymIndex });
                  // Do not auto-increment badges, the gift claim will do it
             }
         }

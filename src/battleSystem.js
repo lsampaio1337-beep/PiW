@@ -570,7 +570,15 @@ class BattleSystem {
                     '../Gym/BG/BG_Gym_Fighting.png',
                     '../Gym/BG/BG_Gym_Steel.png',
                     '../Gym/BG/BG_Gym_Ice.png',
-                    '../Gym/BG/BG_Gym_Dragon.png'
+                    '../Gym/BG/BG_Gym_Dragon.png',
+                    '../Gym/BG/BG_Gym_Rock.png',
+                    '../Gym/BG/BG_Gym_Fighting.png',
+                    '../Gym/BG/BG_Gym_Electric.png',
+                    '../Gym/BG/BG_Gym_Fire.png',
+                    '../Gym/BG/BG_Gym_Normal.png',
+                    '../Gym/BG/BG_Gym_Flying.png',
+                    '../Gym/BG/BG_Gym_Psychic.png',
+                    '../Gym/BG/BG_Gym_Water.png'
                 ];
                 const bgImage = gymBGs[gymIndex] || 'BG.png';
                 vGym.style.backgroundImage = `url('./Assets/BG/${bgImage}')`;
@@ -1685,7 +1693,13 @@ class BattleSystem {
                 }
 
                 const gymIndex = this.state.config.gyms.findIndex(g => g.name === gym.name);
-                if (gymIndex !== -1 && this.state.trainer.badges === (this.state.currentRegionName === 'Johto' ? (gymIndex > 8 ? gymIndex - 9 : gymIndex + 8) : gymIndex)) {
+                let expectedBadges = gymIndex;
+                if (this.state.currentRegionName === 'Johto') {
+                    expectedBadges = gymIndex > 8 ? gymIndex - 9 : gymIndex + 8;
+                } else if (this.state.currentRegionName === 'Hoenn') {
+                    expectedBadges = gymIndex - 17;
+                }
+                if (gymIndex !== -1 && this.state.trainer.badges === expectedBadges) {
                     if (!this.state.stats.pendingGifts) this.state.stats.pendingGifts = [];
                     this.state.stats.pendingGifts.push({ type: 'badge', gymName: gym.name, gymIndex: gymIndex });
                     this.state.globalStats.hasSeenGiftIcon = false;

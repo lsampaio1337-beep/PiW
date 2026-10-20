@@ -1299,5 +1299,360 @@ const gyms = [
       }
     ]
   }
+,
+
+  {
+    "name": "Rustboro Gym",
+    "leader": "Roxanne",
+    "levelRequirement": 0,
+    "trainers": [
+      {
+        "name": "Youngster Tommy",
+        "team": [
+          {
+            "id": 74,
+            "level": 10
+          },
+          {
+            "id": 74,
+            "level": 10
+          }
+        ]
+      },
+      {
+        "name": "Hiker Marc",
+        "team": [
+          {
+            "id": 74,
+            "level": 10
+          },
+          {
+            "id": 74,
+            "level": 10
+          }
+        ]
+      },
+      {
+        "name": "Leader Roxanne",
+        "team": [
+          {
+            "id": 74,
+            "level": 14
+          },
+          {
+            "id": 299,
+            "level": 15
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Dewford Gym",
+    "leader": "Brawly",
+    "levelRequirement": 0,
+    "trainers": [
+      {
+        "name": "Battle Girl Laura",
+        "team": [
+          {
+            "id": 307,
+            "level": 13
+          }
+        ]
+      },
+      {
+        "name": "Black Belt Takao",
+        "team": [
+          {
+            "id": 66,
+            "level": 13
+          }
+        ]
+      },
+      {
+        "name": "Leader Brawly",
+        "team": [
+          {
+            "id": 66,
+            "level": 17
+          },
+          {
+            "id": 296,
+            "level": 18
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Mauville Gym",
+    "leader": "Wattson",
+    "levelRequirement": 0,
+    "trainers": [
+      {
+        "name": "Youngster Ben",
+        "team": [
+          {
+            "id": 263,
+            "level": 17
+          },
+          {
+            "id": 316,
+            "level": 17
+          }
+        ]
+      },
+      {
+        "name": "Guitarist Kirk",
+        "team": [
+          {
+            "id": 100,
+            "level": 17
+          },
+          {
+            "id": 81,
+            "level": 17
+          }
+        ]
+      },
+      {
+        "name": "Leader Wattson",
+        "team": [
+          {
+            "id": 100,
+            "level": 22
+          },
+          {
+            "id": 82,
+            "level": 22
+          },
+          {
+            "id": 310,
+            "level": 23
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Lavaridge Gym",
+    "leader": "Flannery",
+    "levelRequirement": 0,
+    "trainers": [
+      {
+        "name": "Hiker Eli",
+        "team": [
+          {
+            "id": 322,
+            "level": 23
+          }
+        ]
+      },
+      {
+        "name": "Kindler Jace",
+        "team": [
+          {
+            "id": 218,
+            "level": 23
+          }
+        ]
+      },
+      {
+        "name": "Leader Flannery",
+        "team": [
+          {
+            "id": 218,
+            "level": 26
+          },
+          {
+            "id": 218,
+            "level": 26
+          },
+          {
+            "id": 324,
+            "level": 28
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Petalburg Gym",
+    "leader": "Norman",
+    "levelRequirement": 0,
+    "trainers": [
+      {
+        "name": "Cooltrainer Mary",
+        "team": [
+          {
+            "id": 301,
+            "level": 26
+          }
+        ]
+      },
+      {
+        "name": "Cooltrainer George",
+        "team": [
+          {
+            "id": 288,
+            "level": 26
+          }
+        ]
+      },
+      {
+        "name": "Leader Norman",
+        "team": [
+          {
+            "id": 289,
+            "level": 28
+          },
+          {
+            "id": 288,
+            "level": 30
+          },
+          {
+            "id": 289,
+            "level": 31
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Fortree Gym",
+    "leader": "Winona",
+    "levelRequirement": 0,
+    "trainers": [
+      {
+        "name": "Bird Keeper Jared",
+        "team": [
+          {
+            "id": 84,
+            "level": 30
+          }
+        ]
+      },
+      {
+        "name": "Bird Keeper Edward",
+        "team": [
+          {
+            "id": 279,
+            "level": 30
+          }
+        ]
+      },
+      {
+        "name": "Leader Winona",
+        "team": [
+          {
+            "id": 333,
+            "level": 31
+          },
+          {
+            "id": 279,
+            "level": 30
+          },
+          {
+            "id": 227,
+            "level": 32
+          },
+          {
+            "id": 334,
+            "level": 33
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Mossdeep Gym",
+    "leader": "Tate and Liza",
+    "levelRequirement": 0,
+    "trainers": [
+      {
+        "name": "Psychic Preston",
+        "team": [
+          {
+            "id": 281,
+            "level": 36
+          }
+        ]
+      },
+      {
+        "name": "Psychic Maura",
+        "team": [
+          {
+            "id": 64,
+            "level": 36
+          }
+        ]
+      },
+      {
+        "name": "Leader Tate and Liza",
+        "team": [
+          {
+            "id": 337,
+            "level": 42
+          },
+          {
+            "id": 338,
+            "level": 42
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Sootopolis Gym",
+    "leader": "Wallace",
+    "levelRequirement": 0,
+    "trainers": [
+      {
+        "name": "Beauty Olivia",
+        "team": [
+          {
+            "id": 370,
+            "level": 39
+          }
+        ]
+      },
+      {
+        "name": "Lass Crissy",
+        "team": [
+          {
+            "id": 118,
+            "level": 39
+          }
+        ]
+      },
+      {
+        "name": "Leader Wallace",
+        "team": [
+          {
+            "id": 370,
+            "level": 40
+          },
+          {
+            "id": 340,
+            "level": 42
+          },
+          {
+            "id": 364,
+            "level": 40
+          },
+          {
+            "id": 119,
+            "level": 42
+          },
+          {
+            "id": 350,
+            "level": 43
+          }
+        ]
+      }
+    ]
+  }
+
 ];
 export default gyms;
