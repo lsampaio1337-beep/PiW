@@ -222,7 +222,7 @@ const helpContent = {
     },
     "UI Navigation Icons": {
         "Core Screens": {
-            "Main View <img src='Assets/Extra/IconMainView.png' style='height: 20px; vertical-align: middle;'>": `
+            "Main View <img src='Assets/Extra/Icons/IconMainView.png' style='height: 20px; vertical-align: middle;'>": `
                 <h3>Main View</h3>
                 <p>The core gameplay screen where active combat and encounters take place.</p>
                 <ul>
@@ -231,7 +231,7 @@ const helpContent = {
                     <li>Access quick catch options and run mechanics.</li>
                 </ul>
             `,
-            "Team <img src='Assets/Extra/IconTeam.png' style='height: 20px; vertical-align: middle;'>": `
+            "Team <img src='Assets/Extra/Icons/IconTeam.png' style='height: 20px; vertical-align: middle;'>": `
                 <h3>Team (Party)</h3>
                 <p>Manage your active party of up to 6 Pokémon.</p>
                 <ul>
@@ -240,7 +240,7 @@ const helpContent = {
                     <li>Rearrange party order. The first conscious Pokémon will be sent into battle.</li>
                 </ul>
             `,
-            "Map <img src='Assets/Extra/IconMap.png' style='height: 20px; vertical-align: middle;'>": `
+            "Map <img src='Assets/Extra/Icons/IconMap.png' style='height: 20px; vertical-align: middle;'>": `
                 <h3>Map</h3>
                 <p>Navigate the world of Pokémon.</p>
                 <ul>
@@ -249,7 +249,7 @@ const helpContent = {
                     <li>Areas are unlocked by completing Progress Challenges.</li>
                 </ul>
             `,
-            "Backpack <img src='Assets/Extra/IconBackpack.png' style='height: 20px; vertical-align: middle;'>": `
+            "Backpack <img src='Assets/Extra/Icons/IconBackpack.png' style='height: 20px; vertical-align: middle;'>": `
                 <h3>Backpack (Inventory)</h3>
                 <p>Store and manage your items and captured Pokémon.</p>
                 <ul>
@@ -257,7 +257,7 @@ const helpContent = {
                     <li><strong>PC (Storage):</strong> Access all captured Pokémon not currently in your party. You can filter, sort, and transfer them.</li>
                 </ul>
             `,
-            "Pokedex <img src='Assets/Extra/IconPokedex.png' style='height: 20px; vertical-align: middle;'>": `
+            "Pokedex <img src='Assets/Extra/Icons/IconPokedex.png' style='height: 20px; vertical-align: middle;'>": `
                 <h3>Pokédex & Smart Capture</h3>
                 <p>An encyclopedia of all Pokémon you've seen and caught.</p>
                 <ul>
@@ -265,7 +265,7 @@ const helpContent = {
                     <li><strong>Smart Capture:</strong> Configure auto-catch rules based on species, quality, and IVs. You can set it to automatically use specific balls or ignore certain encounters entirely to speed up farming.</li>
                 </ul>
             `,
-            "Trainer <img src='Assets/Extra/IconTrainer.png' style='height: 20px; vertical-align: middle;'>": `
+            "Trainer <img src='Assets/Extra/Icons/IconTrainer.png' style='height: 20px; vertical-align: middle;'>": `
                 <h3>Trainer Profile</h3>
                 <p>View your personal statistics and achievements.</p>
                 <ul>
@@ -276,7 +276,7 @@ const helpContent = {
             `
         },
         "Features & Progression": {
-            "Bonus Candy <img src='Assets/Extra/BonusCandy.png' style='height: 20px; vertical-align: middle;'>": `
+            "Bonus Candy <img src='Assets/Extra/Icons/BonusCandy.png' style='height: 20px; vertical-align: middle;'>": `
                 <h3>Bonus Candy</h3>
                 <p>The central hub for purchasing and managing your permanent passive buffs.</p>
                 <ul>
@@ -285,14 +285,14 @@ const helpContent = {
                     <li>See the <strong>Consumables -> Candies</strong> help section for exact buff numbers.</li>
                 </ul>
             `,
-            "Gift <img src='Assets/Extra/IconGift.png' style='height: 20px; vertical-align: middle;'>": `
+            "Gift <img src='Assets/Extra/Icons/IconGift.png' style='height: 20px; vertical-align: middle;'>": `
                 <h3>Gift (Promocodes)</h3>
                 <p>Claim special rewards and promotional items.</p>
                 <ul>
                     <li>Enter secret codes provided by the developer or community events to receive free items, money, or rare Pokémon.</li>
                 </ul>
             `,
-            "Calendar <img src='Assets/Extra/IconCalendar.png' style='height: 20px; vertical-align: middle;'>": `
+            "Calendar <img src='Assets/Extra/Icons/IconCalendar.png' style='height: 20px; vertical-align: middle;'>": `
                 <h3>Daily Calendar</h3>
                 <p>Login rewards and daily bonuses.</p>
                 <ul>
@@ -301,7 +301,7 @@ const helpContent = {
                     <li>Missing a day resets the streak.</li>
                 </ul>
             `,
-            "Progress Challenges <img src='Assets/Extra/ProgressChallange.png' style='height: 20px; vertical-align: middle;'>": `
+            "Progress Challenges <img src='Assets/Extra/Icons/ProgressChallange.png' style='height: 20px; vertical-align: middle;'>": `
                 <h3>Progress Challenges</h3>
                 <p>Track your current route objectives.</p>
                 <ul>
@@ -310,7 +310,7 @@ const helpContent = {
                     <li>Once completed, the next area on the Map becomes accessible.</li>
                 </ul>
             `,
-            "ZzZ Mode <img src='Assets/Extra/IconSleep.png' style='height: 20px; vertical-align: middle;'>": `
+            "ZzZ Mode <img src='Assets/Extra/Icons/IconSleep.png' style='height: 20px; vertical-align: middle;'>": `
                 <h3>ZzZ Mode (Idle Simulation)</h3>
                 <p>Configure and launch the offline gameplay simulator.</p>
                 <ul>
@@ -321,11 +321,11 @@ const helpContent = {
             `
         },
         "System Options": {
-            "Help <img src='Assets/Extra/IconHelp.png' style='height: 20px; vertical-align: middle;'>": `
+            "Help <img src='Assets/Extra/Icons/IconHelp.png' style='height: 20px; vertical-align: middle;'>": `
                 <h3>Help</h3>
                 <p>You are here! This comprehensive guide explains all mechanics, formulas, and UI elements.</p>
             `,
-            "Settings <img src='Assets/Extra/IconSettings.png' style='height: 20px; vertical-align: middle;'>": `
+            "Settings <img src='Assets/Extra/Icons/IconSettings.png' style='height: 20px; vertical-align: middle;'>": `
                 <h3>Settings</h3>
                 <p>Customize your game experience.</p>
                 <ul>
@@ -334,7 +334,7 @@ const helpContent = {
                     <li>Access Save/Load functions or perform a Hard Reset (deletes all data).</li>
                 </ul>
             `,
-            "Exit <img src='Assets/Extra/IconExit.png' style='height: 20px; vertical-align: middle;'>": `
+            "Exit <img src='Assets/Extra/Icons/IconExit.png' style='height: 20px; vertical-align: middle;'>": `
                 <h3>Exit</h3>
                 <p>Safely save and close the game.</p>
                 <ul>
