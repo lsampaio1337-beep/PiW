@@ -1299,5 +1299,523 @@ const gyms = [
       }
     ]
   }
+,
+  {
+    "id": "aspertia",
+    "name": "Aspertia City Gym",
+    "leader": "Cheren",
+    "levelRequirement": 0,
+    "trainers": [
+      {
+        "name": "Youngster Dan",
+        "team": [
+          {
+            "id": 504,
+            "level": 9
+          }
+        ]
+      },
+      {
+        "name": "Lass Rita",
+        "team": [
+          {
+            "id": 506,
+            "level": 9
+          }
+        ]
+      },
+      {
+        "name": "Leader Cheren",
+        "team": [
+          {
+            "id": 504,
+            "level": 11
+          },
+          {
+            "id": 506,
+            "level": 13
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "virbank",
+    "name": "Virbank City Gym",
+    "leader": "Roxie",
+    "levelRequirement": 0,
+    "trainers": [
+      {
+        "name": "Roughneck Nicky",
+        "team": [
+          {
+            "id": 88,
+            "level": 14
+          },
+          {
+            "id": 109,
+            "level": 14
+          }
+        ]
+      },
+      {
+        "name": "Guitarist Lou",
+        "team": [
+          {
+            "id": 544,
+            "level": 14
+          },
+          {
+            "id": 109,
+            "level": 14
+          }
+        ]
+      },
+      {
+        "name": "Leader Roxie",
+        "team": [
+          {
+            "id": 109,
+            "level": 16
+          },
+          {
+            "id": 544,
+            "level": 18
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "castelia",
+    "name": "Castelia City Gym",
+    "leader": "Burgh",
+    "levelRequirement": 0,
+    "trainers": [
+      {
+        "name": "Harlequin Rick",
+        "team": [
+          {
+            "id": 540,
+            "level": 20
+          },
+          {
+            "id": 557,
+            "level": 20
+          }
+        ]
+      },
+      {
+        "name": "Harlequin Jack",
+        "team": [
+          {
+            "id": 415,
+            "level": 20
+          },
+          {
+            "id": 541,
+            "level": 20
+          }
+        ]
+      },
+      {
+        "name": "Harlequin Louis",
+        "team": [
+          {
+            "id": 557,
+            "level": 20
+          },
+          {
+            "id": 541,
+            "level": 20
+          }
+        ]
+      },
+      {
+        "name": "Leader Burgh",
+        "team": [
+          {
+            "id": 541,
+            "level": 22
+          },
+          {
+            "id": 557,
+            "level": 22
+          },
+          {
+            "id": 542,
+            "level": 24
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "nimbasa",
+    "name": "Nimbasa City Gym",
+    "leader": "Elesa",
+    "levelRequirement": 0,
+    "trainers": [
+      {
+        "name": "Rich Boy Rolan",
+        "team": [
+          {
+            "id": 522,
+            "level": 27
+          }
+        ]
+      },
+      {
+        "name": "Beauty Nikola",
+        "team": [
+          {
+            "id": 239,
+            "level": 27
+          },
+          {
+            "id": 180,
+            "level": 27
+          }
+        ]
+      },
+      {
+        "name": "Beauty Fleming",
+        "team": [
+          {
+            "id": 180,
+            "level": 27
+          },
+          {
+            "id": 522,
+            "level": 27
+          }
+        ]
+      },
+      {
+        "name": "Leader Elesa",
+        "team": [
+          {
+            "id": 587,
+            "level": 28
+          },
+          {
+            "id": 180,
+            "level": 28
+          },
+          {
+            "id": 523,
+            "level": 30
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "driftveil",
+    "name": "Driftveil City Gym",
+    "leader": "Clay",
+    "levelRequirement": 0,
+    "trainers": [
+      {
+        "name": "Worker Noel",
+        "team": [
+          {
+            "id": 343,
+            "level": 31
+          }
+        ]
+      },
+      {
+        "name": "Worker Tavarius",
+        "team": [
+          {
+            "id": 529,
+            "level": 31
+          },
+          {
+            "id": 343,
+            "level": 31
+          }
+        ]
+      },
+      {
+        "name": "Worker Niel",
+        "team": [
+          {
+            "id": 343,
+            "level": 31
+          },
+          {
+            "id": 551,
+            "level": 31
+          }
+        ]
+      },
+      {
+        "name": "Worker Isaac",
+        "team": [
+          {
+            "id": 551,
+            "level": 31
+          }
+        ]
+      },
+      {
+        "name": "Leader Clay",
+        "team": [
+          {
+            "id": 552,
+            "level": 31
+          },
+          {
+            "id": 28,
+            "level": 31
+          },
+          {
+            "id": 530,
+            "level": 33
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mistralton",
+    "name": "Mistralton City Gym",
+    "leader": "Skyla",
+    "levelRequirement": 0,
+    "trainers": [
+      {
+        "name": "Pilot Brady",
+        "team": [
+          {
+            "id": 528,
+            "level": 37
+          }
+        ]
+      },
+      {
+        "name": "Pilot Chase",
+        "team": [
+          {
+            "id": 561,
+            "level": 37
+          }
+        ]
+      },
+      {
+        "name": "Pilot Hubert",
+        "team": [
+          {
+            "id": 566,
+            "level": 37
+          },
+          {
+            "id": 521,
+            "level": 37
+          }
+        ]
+      },
+      {
+        "name": "Pilot Jared",
+        "team": [
+          {
+            "id": 521,
+            "level": 37
+          },
+          {
+            "id": 580,
+            "level": 37
+          }
+        ]
+      },
+      {
+        "name": "Pilot Cliff",
+        "team": [
+          {
+            "id": 528,
+            "level": 37
+          },
+          {
+            "id": 561,
+            "level": 37
+          }
+        ]
+      },
+      {
+        "name": "Leader Skyla",
+        "team": [
+          {
+            "id": 528,
+            "level": 37
+          },
+          {
+            "id": 227,
+            "level": 37
+          },
+          {
+            "id": 581,
+            "level": 39
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "opelucid",
+    "name": "Opelucid City Gym",
+    "leader": "Drayden",
+    "levelRequirement": 0,
+    "trainers": [
+      {
+        "name": "Veteran Hugo",
+        "team": [
+          {
+            "id": 611,
+            "level": 46
+          }
+        ]
+      },
+      {
+        "name": "Veteran Kim",
+        "team": [
+          {
+            "id": 611,
+            "level": 46
+          }
+        ]
+      },
+      {
+        "name": "Veteran Don",
+        "team": [
+          {
+            "id": 611,
+            "level": 46
+          }
+        ]
+      },
+      {
+        "name": "Veteran Ron",
+        "team": [
+          {
+            "id": 611,
+            "level": 46
+          }
+        ]
+      },
+      {
+        "name": "Veteran Clara",
+        "team": [
+          {
+            "id": 611,
+            "level": 46
+          }
+        ]
+      },
+      {
+        "name": "Leader Drayden",
+        "team": [
+          {
+            "id": 621,
+            "level": 46
+          },
+          {
+            "id": 330,
+            "level": 46
+          },
+          {
+            "id": 612,
+            "level": 48
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "humilau",
+    "name": "Humilau City Gym",
+    "leader": "Marlon",
+    "levelRequirement": 0,
+    "trainers": [
+      {
+        "name": "Ace Trainer Doyle",
+        "team": [
+          {
+            "id": 320,
+            "level": 47
+          },
+          {
+            "id": 458,
+            "level": 47
+          }
+        ]
+      },
+      {
+        "name": "Ace Trainer Mel",
+        "team": [
+          {
+            "id": 594,
+            "level": 48
+          }
+        ]
+      },
+      {
+        "name": "Ace Trainer Al",
+        "team": [
+          {
+            "id": 550,
+            "level": 47
+          },
+          {
+            "id": 550,
+            "level": 47
+          }
+        ]
+      },
+      {
+        "name": "Ace Trainer Janelle",
+        "team": [
+          {
+            "id": 458,
+            "level": 47
+          },
+          {
+            "id": 320,
+            "level": 47
+          }
+        ]
+      },
+      {
+        "name": "Ace Trainer Santino",
+        "team": [
+          {
+            "id": 320,
+            "level": 47
+          },
+          {
+            "id": 594,
+            "level": 47
+          }
+        ]
+      },
+      {
+        "name": "Leader Marlon",
+        "team": [
+          {
+            "id": 565,
+            "level": 49
+          },
+          {
+            "id": 321,
+            "level": 49
+          },
+          {
+            "id": 593,
+            "level": 51
+          }
+        ]
+      }
+    ]
+  }
 ];
 export default gyms;

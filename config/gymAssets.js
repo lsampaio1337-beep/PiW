@@ -3254,6 +3254,49 @@ const gymAssets = {
       "origin": "center center"
     }
   }
+,
+  "Marlon": {
+    "_description": "Auto-added generic position",
+    "background": "BG_Gym_Water.png",
+    "sprite": "GymLeader_Unova2_8_Marlon_Water.png",
+    "position": {
+      "rel_x": 0.55,
+      "rel_y": 0.05,
+      "px_x": 1000,
+      "px_y": 50
+    },
+    "size": {
+      "scale_x": 1.2,
+      "scale_y": 1.2,
+      "px_width": 1000,
+      "px_height": 1000
+    },
+    "tilt": {
+      "angle_deg": 0,
+      "origin": "center center"
+    }
+  },
+  "GymLeader_Unova2_8_Marlon_Water.png": {
+    "_description": "Auto-added generic position",
+    "background": "BG_Gym_Water.png",
+    "sprite": "GymLeader_Unova2_8_Marlon_Water.png",
+    "position": {
+      "rel_x": 0.55,
+      "rel_y": 0.05,
+      "px_x": 1000,
+      "px_y": 50
+    },
+    "size": {
+      "scale_x": 1.2,
+      "scale_y": 1.2,
+      "px_width": 1000,
+      "px_height": 1000
+    },
+    "tilt": {
+      "angle_deg": 0,
+      "origin": "center center"
+    }
+  }
 };
 
 export default gymAssets;

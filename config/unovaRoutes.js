@@ -3537,3 +3537,498 @@ export const unovaRoutes = [
     ]
   }
 ];
+
+export const unovaUnlocks = [
+  {
+    "challengeName": "Challenge 1",
+    "areaId": "Floccesy Ranch",
+    "unlocks": [
+      "Route 20"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Patrat",
+          "count": 2
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 2",
+    "areaId": "Route 20",
+    "unlocks": [
+      "Aspertia Gym"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Purrloin",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 3",
+    "areaId": "Aspertia Gym",
+    "unlocks": [
+      "Virbank City"
+    ],
+    "requirements": {
+      "earnBadge": {
+        "name": "Basic Badge",
+        "leader": "Cheren",
+        "badgeCount": 1
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 4",
+    "areaId": "Virbank City",
+    "unlocks": [
+      "Virbank Complex"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Virbank City",
+        "count": 20
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 5",
+    "areaId": "Virbank Complex",
+    "unlocks": [
+      "Virbank Gym"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Magnemite",
+          "count": 1
+        },
+        {
+          "species": "Koffing",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 6",
+    "areaId": "Virbank Gym",
+    "unlocks": [
+      "Castelia City"
+    ],
+    "requirements": {
+      "earnBadge": {
+        "name": "Toxic Badge",
+        "leader": "Roxie",
+        "badgeCount": 2
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 7",
+    "areaId": "Castelia City",
+    "unlocks": [
+      "Castelia Sewers"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Castelia City",
+        "count": 20
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 8",
+    "areaId": "Castelia Sewers",
+    "unlocks": [
+      "Castelia Gym"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Zubat",
+          "count": 2
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 9",
+    "areaId": "Castelia Gym",
+    "unlocks": [
+      "Route 4"
+    ],
+    "requirements": {
+      "earnBadge": {
+        "name": "Insect Badge",
+        "leader": "Burgh",
+        "badgeCount": 3
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 10",
+    "areaId": "Route 4",
+    "unlocks": [
+      "Nimbasa City"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Sandile",
+          "count": 2
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 11",
+    "areaId": "Nimbasa City",
+    "unlocks": [
+      "Nimbasa Gym"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Nimbasa City",
+        "count": 20
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 12",
+    "areaId": "Nimbasa Gym",
+    "unlocks": [
+      "Route 5"
+    ],
+    "requirements": {
+      "earnBadge": {
+        "name": "Bolt Badge",
+        "leader": "Elesa",
+        "badgeCount": 4
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 13",
+    "areaId": "Route 5",
+    "unlocks": [
+      "Driftveil Drawbridge"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Gothita",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 14",
+    "areaId": "Driftveil Drawbridge",
+    "unlocks": [
+      "Driftveil Gym"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Ducklett",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 15",
+    "areaId": "Driftveil Gym",
+    "unlocks": [
+      "Route 6"
+    ],
+    "requirements": {
+      "earnBadge": {
+        "name": "Quake Badge",
+        "leader": "Clay",
+        "badgeCount": 5
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 16",
+    "areaId": "Route 6",
+    "unlocks": [
+      "Chargestone Cave"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Deerling",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 17",
+    "areaId": "Chargestone Cave",
+    "unlocks": [
+      "Route 7"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Joltik",
+          "count": 2
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 18",
+    "areaId": "Route 7",
+    "unlocks": [
+      "Mistralton City"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Foongus",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 19",
+    "areaId": "Mistralton City",
+    "unlocks": [
+      "Mistralton Gym"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Mistralton City",
+        "count": 20
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 20",
+    "areaId": "Mistralton Gym",
+    "unlocks": [
+      "Route 12"
+    ],
+    "requirements": {
+      "earnBadge": {
+        "name": "Jet Badge",
+        "leader": "Skyla",
+        "badgeCount": 6
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 21",
+    "areaId": "Route 12",
+    "unlocks": [
+      "Undella Town"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Heracross",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 22",
+    "areaId": "Undella Town",
+    "unlocks": [
+      "Route 13"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Undella Town",
+        "count": 20
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 23",
+    "areaId": "Route 13",
+    "unlocks": [
+      "Route 14"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Tangela",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 24",
+    "areaId": "Route 14",
+    "unlocks": [
+      "Route 15"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Mienfoo",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 25",
+    "areaId": "Route 15",
+    "unlocks": [
+      "Marvelous Bridge"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Pupitar",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 26",
+    "areaId": "Marvelous Bridge",
+    "unlocks": [
+      "Route 9"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Swanna",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 27",
+    "areaId": "Route 9",
+    "unlocks": [
+      "Opelucid City"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Garbodor",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 28",
+    "areaId": "Opelucid City",
+    "unlocks": [
+      "Opelucid Gym"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Opelucid City",
+        "count": 20
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 29",
+    "areaId": "Opelucid Gym",
+    "unlocks": [
+      "Route 22"
+    ],
+    "requirements": {
+      "earnBadge": {
+        "name": "Legend Badge",
+        "leader": "Drayden",
+        "badgeCount": 7
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 30",
+    "areaId": "Route 22",
+    "unlocks": [
+      "Giant Chasm"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Amoonguss",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 31",
+    "areaId": "Giant Chasm",
+    "unlocks": [
+      "Route 21"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Piloswine",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 32",
+    "areaId": "Route 21",
+    "unlocks": [
+      "Humilau Gym"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Mantine",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 33",
+    "areaId": "Humilau Gym",
+    "unlocks": [
+      "Victory Road"
+    ],
+    "requirements": {
+      "earnBadge": {
+        "name": "Wave Badge",
+        "leader": "Marlon",
+        "badgeCount": 8
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 34",
+    "areaId": "Victory Road",
+    "unlocks": [
+      "Indigo Plateau"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Victory Road",
+        "count": 200
+      }
+    }
+  }
+];

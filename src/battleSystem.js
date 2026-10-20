@@ -570,7 +570,15 @@ class BattleSystem {
                     '../Gym/BG/BG_Gym_Fighting.png',
                     '../Gym/BG/BG_Gym_Steel.png',
                     '../Gym/BG/BG_Gym_Ice.png',
-                    '../Gym/BG/BG_Gym_Dragon.png'
+                                        '../Gym/BG/BG_Gym_Dragon.png',
+                    '../Gym/BG/BG_Gym_Normal.png',
+                    '../Gym/BG/BG_Gym_Poison.png',
+                    '../Gym/BG/BG_Gym_Bug.png',
+                    '../Gym/BG/BG_Gym_Electric.png',
+                    '../Gym/BG/BG_Gym_Ground.png',
+                    '../Gym/BG/BG_Gym_Flying.png',
+                    '../Gym/BG/BG_Gym_Dragon.png',
+                    '../Gym/BG/BG_Gym_Water.png'
                 ];
                 const bgImage = gymBGs[gymIndex] || 'BG.png';
                 vGym.style.backgroundImage = `url('./Assets/BG/${bgImage}')`;
