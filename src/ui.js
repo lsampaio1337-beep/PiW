@@ -1467,7 +1467,7 @@ async function loadConfigs() {
     try {
         const unovaModule = await import('../config/unovaRoutes.js');
         state.config.unovaRoutes = unovaModule.unovaRoutes;
-        state.config.unovaUnlocks = []; // For now
+        state.config.unovaUnlocks = unovaModule.unovaUnlocks || [];
     } catch (e) {
         console.warn("Failed to load unova routes");
     }
