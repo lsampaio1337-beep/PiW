@@ -584,7 +584,7 @@ class BattleSystem {
         if (trainer) {
             let trainerButtonsHtml = gym.trainers.map((t, index) => {
                 const isLeader = index === gym.trainers.length - 1;
-                const buttonText = isLeader ? `Fight Gym Leader` : `Fight Gym Trainer`;
+                const buttonText = isLeader ? `Fight Gym Leader` : `Fight Gym Member`;
 
                 if (index < this.gymState.currentTrainerIndex) {
                     return `<button disabled class="action-btn" style="opacity: 0.5; width: 100%;">${buttonText} (Defeated)</button>`;
