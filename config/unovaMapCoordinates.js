@@ -62,7 +62,7 @@ const unovaMapCoordinates = {
   "virbank_complex": {
     "name": "Virbank Complex",
     "x": 21.75,
-    "y": 76.4
+    "y": 76.39
   },
   "castelia_city": {
     "name": "Castelia City",
@@ -82,7 +82,7 @@ const unovaMapCoordinates = {
   "4": {
     "name": "Route 4",
     "x": 51.25,
-    "y": 68.24
+    "y": 68.23
   },
   "desert_resort": {
     "name": "Desert Resort",
@@ -176,7 +176,7 @@ const unovaMapCoordinates = {
   },
   "10": {
     "name": "Route 10",
-    "x": 51.42,
+    "x": 51.41,
     "y": 18.41
   },
   "victory_road": {
@@ -186,8 +186,8 @@ const unovaMapCoordinates = {
   },
   "18": {
     "name": "Route 18",
-    "x": 76.4,
-    "y": 90.37
+    "x": 76.39,
+    "y": 90.36
   },
   "giant_chasm": {
     "name": "Giant Chasm",
@@ -217,7 +217,7 @@ const unovaMapCoordinates = {
   "21": {
     "name": "Route 21",
     "x": 88.04,
-    "y": 29.05
+    "y": 29.04
   },
   "underground_ruins": {
     "name": "Underground Ruins",
@@ -232,11 +232,11 @@ const unovaMapCoordinates = {
   "indigo_plateau": {
     "name": "Indigo Plateau",
     "x": 60.39,
-    "y": 3.83
+    "y": 3.82
   },
   "tiny_fishing_spot": {
     "name": "Tiny Fishing Spot",
-    "x": 16.82,
+    "x": 16.81,
     "y": 72.56
   },
   "small_fishing_spot": {
@@ -252,7 +252,7 @@ const unovaMapCoordinates = {
   "big_fishing_spot": {
     "name": "Big Fishing Spot",
     "x": 67.18,
-    "y": 75.04
+    "y": 75.03
   },
   "surfing_spot": {
     "name": "Surfing Spot",
