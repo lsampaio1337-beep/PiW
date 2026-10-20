@@ -130,7 +130,7 @@ import { showPokemonStats, showPokemonStatsByUuid, evolvePokemon } from './ui/po
 import { showBonusCandyModal } from './ui/bonusCandy.js';
 window.showBonusCandyModal = showBonusCandyModal;
 window.showGiftModal = showGiftModal;
-import { showSettings, exportLog, showAddPokemonModal, forceNextEncounter, activateCheat, showTimeLapseModal, runTimeLapse } from './ui/settings.js';
+import { showSettings, exportLog, showAddPokemonModal, forceNextEncounter, activateCheat, showTimeLapseModal, runTimeLapse, showBgSpeedSliderModal } from './ui/settings.js';
 import { setupMarket, buyItem, openPokeMarketBuy, renderPokeMarketTab, updateBuyItemPrice, buySetMax } from './ui/market.js';
 import { showBackpack, renderBackpackTab, setActiveItem, setAutoPotionThreshold } from './ui/backpack/index.js';
 import { dragStart, dragOver, handleDrop } from './ui/backpack/pokemon.js';
@@ -161,6 +161,7 @@ window.showPokemonStats = showPokemonStats;
 window.showPokemonStatsByUuid = showPokemonStatsByUuid;
 window.evolvePokemon = evolvePokemon;
 window.showSettings = showSettings;
+window.showBgSpeedSliderModal = showBgSpeedSliderModal;
 window.exportLog = exportLog;
 window.buyItem = buyItem;
 window.updateBuyItemPrice = updateBuyItemPrice;
@@ -1721,6 +1722,9 @@ function startGame() {
     bs.start();
 
     state.settings.gameSpeed = 1; // Reset to 1 on load
+    if (state.settings.bgSlideMultiplier === undefined) {
+        state.settings.bgSlideMultiplier = 1.0;
+    }
 
     // Start playtime tracker
     window.restartGameClock();

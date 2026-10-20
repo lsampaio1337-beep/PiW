@@ -9,9 +9,39 @@ export function showSettings() {
 
     const settingsHTML = `
         <button onclick="window.exportLog()">Export Save Log</button>
+        <button onclick="window.showBgSpeedSliderModal()" style="margin-left: 10px; background-color: #3498db; color: white;">BG Speed</button>
         <button onclick="window.activateCheat()" style="margin-left: 10px; background-color: #c0392b; color: white;">Cheat</button>
     `;
     showModal("Settings", settingsHTML, "window-settings");
+}
+
+window.handleBgSlideMultiplierChange = function(val) {
+    state.settings.bgSlideMultiplier = parseFloat(val);
+    const display = document.getElementById('bg-speed-slider-val');
+    if (display) {
+        display.innerText = state.settings.bgSlideMultiplier.toFixed(2) + 'x';
+    }
+    if (window.storageRef) {
+        window.storageRef.save(state);
+    }
+};
+
+export function showBgSpeedSliderModal() {
+    if (state.settings.bgSlideMultiplier === undefined) {
+        state.settings.bgSlideMultiplier = 1.0;
+    }
+    const currentSpeed = state.settings.bgSlideMultiplier.toFixed(2);
+    const html = `
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 15px; text-align: center; color: white; padding: 20px;">
+            <div style="font-size: 16px; font-weight: bold;">Background Speed: <span id="bg-speed-slider-val" style="color: #4CAF50;">${currentSpeed}x</span></div>
+            <input type="range" id="bg-speed-slider-settings" min="0" max="3" step="0.05" value="${state.settings.bgSlideMultiplier}" style="width: 100%; cursor: pointer; accent-color: #3498db;" oninput="window.handleBgSlideMultiplierChange(this.value)">
+            <div style="display: flex; justify-content: space-between; font-size: 12px; color: #ccc; width: 100%;">
+                <span>0.00x</span>
+                <span>3.00x</span>
+            </div>
+        </div>
+    `;
+    showModal("Background Speed", html, "window-bg-speed", '300px');
 }
 
 export function showTimeLapseModal() {

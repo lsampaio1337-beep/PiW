@@ -98,6 +98,7 @@ export const state = {
     },
     settings: {
         gameSpeed: 1.0,
+        bgSlideMultiplier: 1.0,
         autoPotion: true,
         autoPotionThreshold: 25,
         activePotionTier: 0, // Tiny

@@ -379,8 +379,9 @@ function updateBackgroundSliding(combatArena, state, battleSystem, inGymCombat) 
                 let pos = parseFloat(combatArena.style.backgroundPositionX) || 0;
                 combatArena.dataset.bgAnimationInterval = setInterval(() => {
                     const gameSpeed = (state && state.settings && state.settings.gameSpeed) ? state.settings.gameSpeed : 1;
+                    const bgMultiplier = (state && state.settings && state.settings.bgSlideMultiplier !== undefined) ? state.settings.bgSlideMultiplier : 1;
                     const slideDelay = 1000 / gameSpeed;
-                    const moveDistance = 4.0625; // Reduced by 75%
+                    const moveDistance = 4.0625 * bgMultiplier; // Reduced by 75% and applied multiplier
                     const ticksPerSlide = slideDelay / 33;
                     const pctPerTick = moveDistance / ticksPerSlide;
                     pos += pctPerTick;
@@ -397,11 +398,14 @@ function updateBackgroundSliding(combatArena, state, battleSystem, inGymCombat) 
                 let pos = parseFloat(combatArena.style.backgroundPositionX) || 0;
                 combatArena.style.transition = `background-position-x ${battleSystem.slideDuration}ms linear`;
 
+                const bgMultiplier = (state && state.settings && state.settings.bgSlideMultiplier !== undefined) ? state.settings.bgSlideMultiplier : 1;
+                const distanceToMove = 4.0625 * bgMultiplier;
+
                 // Trigger reflow
                 void combatArena.offsetWidth;
                 requestAnimationFrame(() => {
                     requestAnimationFrame(() => {
-                        combatArena.style.backgroundPositionX = `${pos + 4.0625}%`;
+                        combatArena.style.backgroundPositionX = `${pos + distanceToMove}%`;
                     });
                 });
             }
