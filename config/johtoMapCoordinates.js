@@ -69,6 +69,11 @@ const johtoMapCoordinates = {
     "x": 25.04,
     "y": 79.38
   },
+  "ilex_forest_2": {
+    "name": "Ilex Forest 2",
+    "x": 25.04,
+    "y": 79.38
+  },
   "route_34": {
     "name": "Route 34",
     "x": 26.74,
