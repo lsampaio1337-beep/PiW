@@ -170,6 +170,15 @@ export function getChallengeData(unlock) {
         textParts.push(`Defeat Red${getStatusHtml(beatenRed)}`);
     }
 
+    if (req.completeChallenges) {
+        let completedIds = state.stats.completedChallengeIds || [];
+        for (let target of req.completeChallenges) {
+            let completed = completedIds.includes(target);
+            if (!completed) isMet = false;
+            textParts.push(`Complete Extra Challenge - ${target}${getStatusHtml(completed)}`);
+        }
+    }
+
     return { isMet, textParts };
 }
 
