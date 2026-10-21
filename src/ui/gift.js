@@ -72,9 +72,18 @@ export function showGiftModal() {
         html += `<h3 style="margin-top: 0; margin-bottom: 10px;">Pending Gifts</h3>`;
         html += `<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 20px;">`;
 
-        pending.forEach((gift, index) => {
+        let displayPending = pending.map((gift, index) => ({ gift, index }));
+        if (state.currentRegionName === 'Johto') {
+            displayPending.sort((a, b) => {
+                if (a.gift.type !== 'badge' || b.gift.type !== 'badge') return 0;
+                let aVal = a.gift.gymIndex >= 9 ? a.gift.gymIndex - 17 : a.gift.gymIndex;
+                let bVal = b.gift.gymIndex >= 9 ? b.gift.gymIndex - 17 : b.gift.gymIndex;
+                return aVal - bVal;
+            });
+        }
+        displayPending.forEach(({gift, index}) => {
             if (gift.type === 'badge') {
-                const badgeNum = state.currentRegionName === 'Johto' ? (gift.gymIndex > 8 ? gift.gymIndex - 8 : gift.gymIndex + 9) : gift.gymIndex + 1;
+                const badgeNum = state.currentRegionName === 'Johto' ? (gift.gymIndex === 8 ? 0 : (gift.gymIndex > 8 ? gift.gymIndex - 8 : gift.gymIndex + 9)) : gift.gymIndex + 1;
                 html += `
                     <div onclick="window.claimPendingGift(${index})" style="cursor: pointer; padding: 10px; border: 1px solid #ccc; border-radius: 5px; background: rgba(0,0,0,0.5); transition: background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(0,0,0,0.5)'">
                         <img src="./Assets/Gym/Badges/${window.getBadgeFileName(state.currentRegionName || 'Kanto', badgeNum)}" style="width: 50px; height: 50px;" title="${gift.gymName} Badge">
@@ -120,9 +129,19 @@ export function showGiftModal() {
         html += `<h3 style="margin-top: 0; margin-bottom: 10px;">Collected Gifts</h3>`;
         html += `<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">`;
 
-        claimed.forEach((gift) => {
+        // Sort badges if we are in Johto so Johto badges (9-16) appear before Kanto badges (0-7)
+        let displayClaimed = [...claimed];
+        if (state.currentRegionName === 'Johto') {
+            displayClaimed.sort((a, b) => {
+                if (a.type !== 'badge' || b.type !== 'badge') return 0;
+                let aVal = a.gymIndex >= 9 ? a.gymIndex - 17 : a.gymIndex;
+                let bVal = b.gymIndex >= 9 ? b.gymIndex - 17 : b.gymIndex;
+                return aVal - bVal;
+            });
+        }
+        displayClaimed.forEach((gift) => {
             if (gift.type === 'badge') {
-                const badgeNum = state.currentRegionName === 'Johto' ? (gift.gymIndex > 8 ? gift.gymIndex - 8 : gift.gymIndex + 9) : gift.gymIndex + 1;
+                const badgeNum = state.currentRegionName === 'Johto' ? (gift.gymIndex === 8 ? 0 : (gift.gymIndex > 8 ? gift.gymIndex - 8 : gift.gymIndex + 9)) : gift.gymIndex + 1;
                 html += `
                     <div style="padding: 10px; border: 1px solid #444; border-radius: 5px; background: rgba(0,0,0,0.2);">
                         <img src="./Assets/Gym/Badges/${window.getBadgeFileName(state.currentRegionName || 'Kanto', badgeNum)}" style="width: 50px; height: 50px; filter: drop-shadow(0 0 5px gold);" title="${gift.gymName ? gift.gymName + ' Badge' : 'Badge'}">
