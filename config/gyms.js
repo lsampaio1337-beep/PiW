@@ -1307,16 +1307,16 @@ const gyms = [
     "levelRequirement": 0,
     "trainers": [
       {
-        "name": "Gym Trainer #1",
+        "name": "Youngster Jonathon",
         "team": [
           { "id": 74, "level": 11 }
         ]
       },
       {
-        "name": "Gym Trainer #2",
+        "name": "Youngster Darius",
         "team": [
           { "id": 74, "level": 9 },
-          { "id": 74, "level": 9 }
+          { "id": 95, "level": 9 }
         ]
       },
       {
@@ -1336,16 +1336,30 @@ const gyms = [
     "levelRequirement": 0,
     "trainers": [
       {
-        "name": "Gym Trainer #1",
+        "name": "Lass Caroline",
         "team": [
           { "id": 420, "level": 17 },
           { "id": 315, "level": 17 }
         ]
       },
       {
-        "name": "Gym Trainer #2",
+        "name": "Aroma Lady Jenna",
         "team": [
-          { "id": 407, "level": 19 }
+          { "id": 406, "level": 15 },
+          { "id": 406, "level": 16 },
+          { "id": 406, "level": 17 }
+        ]
+      },
+      {
+        "name": "Aroma Lady Angela",
+        "team": [
+          { "id": 315, "level": 19 }
+        ]
+      },
+      {
+        "name": "Beauty Lindsay",
+        "team": [
+          { "id": 315, "level": 17 }
         ]
       },
       {
@@ -1365,15 +1379,43 @@ const gyms = [
     "levelRequirement": 0,
     "trainers": [
       {
-        "name": "Gym Trainer #1",
+        "name": "Youngster Donny",
         "team": [
-          { "id": 92, "level": 22 },
-          { "id": 93, "level": 23 }
+          { "id": 92, "level": 20 },
+          { "id": 425, "level": 22 }
         ]
       },
       {
-        "name": "Gym Trainer #2",
+        "name": "Lass Molly",
         "team": [
+          { "id": 200, "level": 23 }
+        ]
+      },
+      {
+        "name": "School Kid Chance",
+        "team": [
+          { "id": 92, "level": 23 }
+        ]
+      },
+      {
+        "name": "School Kid Mackenzie",
+        "team": [
+          { "id": 425, "level": 21 },
+          { "id": 425, "level": 21 }
+        ]
+      },
+      {
+        "name": "Ace Trainer Allen",
+        "team": [
+          { "id": 92, "level": 21 },
+          { "id": 92, "level": 22 },
+          { "id": 93, "level": 24 }
+        ]
+      },
+      {
+        "name": "Ace Trainer Catherine",
+        "team": [
+          { "id": 93, "level": 23 },
           { "id": 200, "level": 24 }
         ]
       },
@@ -1394,17 +1436,32 @@ const gyms = [
     "levelRequirement": 0,
     "trainers": [
       {
-        "name": "Gym Trainer #1",
+        "name": "Black Belt Colby",
         "team": [
-          { "id": 66, "level": 26 },
-          { "id": 66, "level": 26 },
-          { "id": 66, "level": 26 }
+          { "id": 67, "level": 23 },
+          { "id": 67, "level": 25 },
+          { "id": 67, "level": 27 }
         ]
       },
       {
-        "name": "Gym Trainer #2",
+        "name": "Black Belt Darren",
         "team": [
-          { "id": 307, "level": 28 }
+          { "id": 66, "level": 25 },
+          { "id": 307, "level": 25 },
+          { "id": 67, "level": 25 }
+        ]
+      },
+      {
+        "name": "Black Belt Rafael",
+        "team": [
+          { "id": 453, "level": 26 },
+          { "id": 67, "level": 26 }
+        ]
+      },
+      {
+        "name": "Black Belt Jeffery",
+        "team": [
+          { "id": 214, "level": 28 }
         ]
       },
       {
@@ -1424,16 +1481,46 @@ const gyms = [
     "levelRequirement": 0,
     "trainers": [
       {
-        "name": "Gym Trainer #1",
+        "name": "Tuber Jacky",
         "team": [
-          { "id": 418, "level": 31 }
+          { "id": 399, "level": 32 }
         ]
       },
       {
-        "name": "Gym Trainer #2",
+        "name": "Fisherman Walter",
         "team": [
+          { "id": 340, "level": 33 }
+        ]
+      },
+      {
+        "name": "Sailor Damian",
+        "team": [
+          { "id": 278, "level": 31 },
+          { "id": 279, "level": 31 }
+        ]
+      },
+      {
+        "name": "Tuber Caitlyn",
+        "team": [
+          { "id": 298, "level": 27 },
+          { "id": 184, "level": 31 },
+          { "id": 183, "level": 29 }
+        ]
+      },
+      {
+        "name": "Fisherman Erick",
+        "team": [
+          { "id": 118, "level": 28 },
           { "id": 130, "level": 31 },
-          { "id": 130, "level": 31 }
+          { "id": 119, "level": 31 }
+        ]
+      },
+      {
+        "name": "Sailor Samson",
+        "team": [
+          { "id": 278, "level": 29 },
+          { "id": 422, "level": 30 },
+          { "id": 55, "level": 31 }
         ]
       },
       {
@@ -1453,16 +1540,51 @@ const gyms = [
     "levelRequirement": 0,
     "trainers": [
       {
-        "name": "Gym Trainer #1",
+        "name": "Black Belt Ricky",
         "team": [
+          { "id": 208, "level": 38 }
+        ]
+      },
+      {
+        "name": "Worker Gary",
+        "team": [
+          { "id": 81, "level": 37 }
+        ]
+      },
+      {
+        "name": "Worker Jackson",
+        "team": [
+          { "id": 81, "level": 34 },
+          { "id": 81, "level": 34 },
+          { "id": 81, "level": 34 }
+        ]
+      },
+      {
+        "name": "Ace Trainer Cesar",
+        "team": [
+          { "id": 212, "level": 40 }
+        ]
+      },
+      {
+        "name": "Worker Gerardo",
+        "team": [
+          { "id": 81, "level": 35 },
+          { "id": 81, "level": 35 }
+        ]
+      },
+      {
+        "name": "Black Belt David",
+        "team": [
+          { "id": 208, "level": 35 },
           { "id": 208, "level": 37 }
         ]
       },
       {
-        "name": "Gym Trainer #2",
+        "name": "Ace Trainer Breanna",
         "team": [
-          { "id": 81, "level": 35 },
-          { "id": 82, "level": 35 }
+          { "id": 436, "level": 35 },
+          { "id": 436, "level": 36 },
+          { "id": 436, "level": 38 }
         ]
       },
       {
@@ -1482,16 +1604,45 @@ const gyms = [
     "levelRequirement": 0,
     "trainers": [
       {
-        "name": "Gym Trainer #1",
+        "name": "Ace Trainer Anton",
         "team": [
-          { "id": 459, "level": 39 }
+          { "id": 362, "level": 44 }
         ]
       },
       {
-        "name": "Gym Trainer #2",
+        "name": "Ace Trainer Alicia",
         "team": [
-          { "id": 215, "level": 39 },
-          { "id": 73, "level": 39 }
+          { "id": 215, "level": 40 },
+          { "id": 215, "level": 43 }
+        ]
+      },
+      {
+        "name": "Ace Trainer Savannah",
+        "team": [
+          { "id": 361, "level": 39 },
+          { "id": 361, "level": 40 },
+          { "id": 362, "level": 42 }
+        ]
+      },
+      {
+        "name": "Ace Trainer Sergio",
+        "team": [
+          { "id": 459, "level": 41 },
+          { "id": 215, "level": 42 }
+        ]
+      },
+      {
+        "name": "Ace Trainer Brenna",
+        "team": [
+          { "id": 215, "level": 40 },
+          { "id": 361, "level": 40 },
+          { "id": 459, "level": 41 }
+        ]
+      },
+      {
+        "name": "Ace Trainer Isaiah",
+        "team": [
+          { "id": 221, "level": 44 }
         ]
       },
       {
@@ -1512,16 +1663,59 @@ const gyms = [
     "levelRequirement": 0,
     "trainers": [
       {
-        "name": "Gym Trainer #1",
+        "name": "School Kid Tiera",
         "team": [
-          { "id": 100, "level": 44 },
-          { "id": 101, "level": 44 }
+          { "id": 417, "level": 47 }
         ]
       },
       {
-        "name": "Gym Trainer #2",
+        "name": "School Kid Forrest",
         "team": [
-          { "id": 405, "level": 44 }
+          { "id": 82, "level": 47 }
+        ]
+      },
+      {
+        "name": "Guitarist Jerry",
+        "team": [
+          { "id": 81, "level": 44 },
+          { "id": 404, "level": 44 },
+          { "id": 404, "level": 44 }
+        ]
+      },
+      {
+        "name": "Poké Kid Meghan",
+        "team": [
+          { "id": 25, "level": 42 },
+          { "id": 25, "level": 42 },
+          { "id": 25, "level": 42 },
+          { "id": 25, "level": 42 }
+        ]
+      },
+      {
+        "name": "Guitarist Lonnie",
+        "team": [
+          { "id": 26, "level": 47 }
+        ]
+      },
+      {
+        "name": "Ace Trainer Destiny",
+        "team": [
+          { "id": 125, "level": 47 },
+          { "id": 26, "level": 48 }
+        ]
+      },
+      {
+        "name": "Guitarist Preston",
+        "team": [
+          { "id": 404, "level": 45 },
+          { "id": 404, "level": 45 }
+        ]
+      },
+      {
+        "name": "Ace Trainer Zachery",
+        "team": [
+          { "id": 125, "level": 47 },
+          { "id": 82, "level": 48 }
         ]
       },
       {
