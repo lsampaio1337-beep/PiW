@@ -199,16 +199,6 @@ const sinnohMapCoordinates = {
     "x": 79.78,
     "y": 34.6
   },
-  "tiny_fishing_spot": {
-    "name": "Tiny Fishing Spot",
-    "x": 13.96,
-    "y": 82.8
-  },
-  "small_fishing_spot": {
-    "name": "Small Fishing Spot",
-    "x": 71.97,
-    "y": 67.33
-  },
   "diving_spot": {
     "name": "Diving Spot",
     "x": 73.83,
