@@ -3801,6 +3801,379 @@ const gyms = [
       }
     ]
   },
+{
+    "id": "ilima",
+    "name": "Ilima's Trial",
+    "leader": "Ilima",
+    "levelRequirement": 100,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          { "id": 19, "level": 10 }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          { "id": 734, "level": 10 }
+        ]
+      },
+      {
+        "name": "Captain Ilima",
+        "team": [
+          { "id": 734, "level": 11 },
+          { "id": 235, "level": 12 }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lana",
+    "name": "Lana's Trial",
+    "leader": "Lana",
+    "levelRequirement": 110,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          { "id": 60, "level": 18 }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          { "id": 129, "level": 18 }
+        ]
+      },
+      {
+        "name": "Captain Lana",
+        "team": [
+          { "id": 170, "level": 20 },
+          { "id": 90, "level": 20 },
+          { "id": 752, "level": 22 }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "kiawe",
+    "name": "Kiawe's Trial",
+    "leader": "Kiawe",
+    "levelRequirement": 120,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          { "id": 661, "level": 22 }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          { "id": 757, "level": 22 }
+        ]
+      },
+      {
+        "name": "Captain Kiawe",
+        "team": [
+          { "id": 58, "level": 24 },
+          { "id": 662, "level": 24 },
+          { "id": 105, "level": 26 }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mallow",
+    "name": "Mallow's Trial",
+    "leader": "Mallow",
+    "levelRequirement": 130,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          { "id": 753, "level": 24 }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          { "id": 761, "level": 24 }
+        ]
+      },
+      {
+        "name": "Captain Mallow",
+        "team": [
+          { "id": 709, "level": 26 },
+          { "id": 756, "level": 26 },
+          { "id": 763, "level": 28 }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hala",
+    "name": "Grand Trial Hala",
+    "leader": "Hala",
+    "levelRequirement": 140,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          { "id": 56, "level": 26 }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          { "id": 66, "level": 26 }
+        ]
+      },
+      {
+        "name": "Kahuna Hala",
+        "team": [
+          { "id": 66, "level": 28 },
+          { "id": 296, "level": 28 },
+          { "id": 739, "level": 30 }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sophocles",
+    "name": "Sophocles' Trial",
+    "leader": "Sophocles",
+    "levelRequirement": 150,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          { "id": 25, "level": 30 }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          { "id": 81, "level": 30 }
+        ]
+      },
+      {
+        "name": "Captain Sophocles",
+        "team": [
+          { "id": 777, "level": 32 },
+          { "id": 462, "level": 32 },
+          { "id": 466, "level": 33 },
+          { "id": 738, "level": 33 },
+          { "id": 76, "level": 34 }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "olivia",
+    "name": "Grand Trial Olivia",
+    "leader": "Olivia",
+    "levelRequirement": 160,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          { "id": 744, "level": 32 }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          { "id": 299, "level": 32 }
+        ]
+      },
+      {
+        "name": "Kahuna Olivia",
+        "team": [
+          { "id": 347, "level": 34 },
+          { "id": 345, "level": 34 },
+          { "id": 745, "level": 36 }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "acerola",
+    "name": "Acerola's Trial",
+    "leader": "Acerola",
+    "levelRequirement": 170,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          { "id": 92, "level": 36 }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          { "id": 353, "level": 36 }
+        ]
+      },
+      {
+        "name": "Captain Acerola",
+        "team": [
+          { "id": 302, "level": 38 },
+          { "id": 426, "level": 38 },
+          { "id": 781, "level": 39 },
+          { "id": 478, "level": 39 },
+          { "id": 770, "level": 40 }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "nanu",
+    "name": "Grand Trial Nanu",
+    "leader": "Nanu",
+    "levelRequirement": 180,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          { "id": 19, "level": 38 }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          { "id": 88, "level": 38 }
+        ]
+      },
+      {
+        "name": "Kahuna Nanu",
+        "team": [
+          { "id": 302, "level": 40 },
+          { "id": 552, "level": 40 },
+          { "id": 53, "level": 42 }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mina",
+    "name": "Mina's Trial",
+    "leader": "Mina",
+    "levelRequirement": 190,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          { "id": 35, "level": 42 }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          { "id": 175, "level": 42 }
+        ]
+      },
+      {
+        "name": "Captain Mina",
+        "team": [
+          { "id": 707, "level": 44 },
+          { "id": 210, "level": 44 },
+          { "id": 756, "level": 45 },
+          { "id": 40, "level": 45 },
+          { "id": 743, "level": 46 }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hapu",
+    "name": "Grand Trial Hapu",
+    "leader": "Hapu",
+    "levelRequirement": 200,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          { "id": 50, "level": 46 }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          { "id": 749, "level": 46 }
+        ]
+      },
+      {
+        "name": "Kahuna Hapu",
+        "team": [
+          { "id": 623, "level": 48 },
+          { "id": 423, "level": 48 },
+          { "id": 330, "level": 49 },
+          { "id": 750, "level": 50 }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "alola_league",
+    "name": "Alola Elite Four",
+    "leader": "Champion",
+    "levelRequirement": 210,
+    "trainers": [
+      {
+        "name": "Elite Four #1 - Molayne",
+        "team": [
+          { "id": 707, "level": 55 },
+          { "id": 625, "level": 55 },
+          { "id": 462, "level": 55 },
+          { "id": 376, "level": 55 },
+          { "id": 51, "level": 56 }
+        ]
+      },
+      {
+        "name": "Elite Four #2 - Olivia",
+        "team": [
+          { "id": 348, "level": 55 },
+          { "id": 346, "level": 55 },
+          { "id": 526, "level": 55 },
+          { "id": 476, "level": 55 },
+          { "id": 745, "level": 56 }
+        ]
+      },
+      {
+        "name": "Elite Four #3 - Acerola",
+        "team": [
+          { "id": 354, "level": 55 },
+          { "id": 426, "level": 55 },
+          { "id": 781, "level": 55 },
+          { "id": 478, "level": 55 },
+          { "id": 770, "level": 56 }
+        ]
+      },
+      {
+        "name": "Elite Four #4 - Kahili",
+        "team": [
+          { "id": 628, "level": 55 },
+          { "id": 701, "level": 55 },
+          { "id": 741, "level": 55 },
+          { "id": 630, "level": 55 },
+          { "id": 733, "level": 56 }
+        ]
+      },
+      {
+        "name": "Champion",
+        "team": [
+          { "id": 26, "level": 58 },
+          { "id": 136, "level": 58 },
+          { "id": 128, "level": 58 },
+          { "id": 715, "level": 59 },
+          { "id": 740, "level": 59 },
+          { "id": 730, "level": 60 }
+        ]
+      }
+    ]
+  },
   {
     "id": "turffield",
     "name": "Turffield Gym",
