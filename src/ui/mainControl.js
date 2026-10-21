@@ -31,6 +31,14 @@ export function getChallengeData(unlock) {
         textParts.push(`Defeat ${reqCount} Pokémon${routeText} ${countDisplay(defeats, reqCount)}${getStatusHtml(defeats >= reqCount)}`);
     }
 
+    if (req.requireCompletedChallenges) {
+        for (let challengeId of req.requireCompletedChallenges) {
+            let isCompleted = state.stats.completedChallengeIds && state.stats.completedChallengeIds.includes(challengeId);
+            if (!isCompleted) isMet = false;
+            textParts.push(`Complete challenge: ${challengeId} ${getStatusHtml(isCompleted)}`);
+        }
+    }
+
     if (req.catchSpecies) {
         for (let spec of req.catchSpecies) {
             let caughtCount = state.stats.caughtSpecies ? (state.stats.caughtSpecies[spec.species] || 0) : 0;
