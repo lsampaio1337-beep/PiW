@@ -1386,7 +1386,7 @@ export const johtoRoutes = [
     ]
   },
   {
-    "name": "Fossil Revival",
+    "name": "Fossil Revival Lab",
     "spawns": [
       {
         "pokemonId": 138,
@@ -2426,7 +2426,7 @@ export const johtoUnlocks = [
     "areaId": "Viridian Forest",
     "unlocks": [
       "Pewter Gym",
-      "Fossil Revival"
+      "Fossil Revival Lab"
     ],
     "requirements": {
       "catchSpecies": [

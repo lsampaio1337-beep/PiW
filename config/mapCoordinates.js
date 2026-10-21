@@ -219,8 +219,8 @@ const mapCoordinates = {
     "x": 64.59,
     "y": 45.86
   },
-  "fossil_revival": {
-    "name": "Fossil Revival",
+  "fossil_revival_lab": {
+    "name": "Fossil Revival Lab",
     "x": 25.06,
     "y": 15.21
   },
