@@ -219,8 +219,8 @@ const johtoMapCoordinates = {
     "x": 69.13,
     "y": 23.8
   },
-  "fossil_revival": {
-    "name": "Fossil Revival",
+  "fossil_revival_lab": {
+    "name": "Fossil Revival Lab",
     "x": 70.69,
     "y": 18.76
   },

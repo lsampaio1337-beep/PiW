@@ -1447,7 +1447,7 @@ const routes = [
     ]
   },
   {
-    "name": "Fossil Revival",
+    "name": "Fossil Revival Lab",
     "spawns": [
       {
         "pokemonId": 142,
