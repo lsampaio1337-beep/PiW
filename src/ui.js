@@ -267,6 +267,8 @@ window.badgeMapping = {
 };
 
 window.getBadgeFileName = function(region, number) {
+    if (region === 'Unova') region = 'Unova2';
+
     if (region === 'Johto' && number > 8) {
         region = 'Kanto';
         number = number - 8;
