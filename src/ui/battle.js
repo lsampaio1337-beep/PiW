@@ -172,7 +172,7 @@ window.showActiveItemSelection = function(type) {
         if (smartwatchTier >= 3) {
             html += `
                 <div onclick="window.showSmartCaptureMode(); document.getElementById('smartwatch-item-selection-popup').style.display = 'none';" style="width: 30px; height: 30px; background: rgba(0, 0, 0, 0.6); border: 2px solid #3498db; border-radius: 8px; position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer;" title="Smart Capture Mode">
-                    <img src="./Assets/Extra/IconPokedex.png" style="width: 80%; height: 80%; object-fit: contain;">
+                    <img src="./Assets/Extra/Icons/IconPokedex.png" style="width: 80%; height: 80%; object-fit: contain;">
                 </div>
             `;
         }
