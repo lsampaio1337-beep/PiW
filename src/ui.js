@@ -440,6 +440,23 @@ window.cheatProgressChallenge = function(targetAreaId) {
             state.stats.defeatedBosses["Elite 4 Lorelei"] = true;
             state.stats.defeatedBosses["Champion Rival"] = true;
         }
+
+        if (req.defeatJohtoChampion) {
+            if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};
+            state.stats.defeatedBosses["Johto Champion"] = true;
+        }
+        if (req.defeatHoennChampion) {
+            if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};
+            state.stats.defeatedBosses["Hoenn Champion"] = true;
+        }
+        if (req.defeatSinnohChampion) {
+            if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};
+            state.stats.defeatedBosses["Sinnoh Champion"] = true;
+        }
+        if (req.defeatUnovaChampion) {
+            if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};
+            state.stats.defeatedBosses["Unova Champion"] = true;
+        }
         if (req.defeatRed) {
             if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};
             state.stats.defeatedBosses["Red"] = true;

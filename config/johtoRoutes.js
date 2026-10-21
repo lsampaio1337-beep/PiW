@@ -2412,7 +2412,7 @@ export const johtoUnlocks = [
       "Viridian Forest"
     ],
     "requirements": {
-      "defeatEliteFourAndChampion": true
+      "defeatJohtoChampion": true
     },
     "gifts": [
       {

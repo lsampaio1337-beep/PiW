@@ -164,6 +164,27 @@ export function getChallengeData(unlock) {
         if (!beatenE4) isMet = false;
         textParts.push(`Defeat all Elite 4 and Defeat Champion${getStatusHtml(beatenE4)}`);
     }
+
+    if (req.defeatJohtoChampion) {
+        let beaten = state.stats.defeatedBosses && state.stats.defeatedBosses["Johto Champion"];
+        if (!beaten) isMet = false;
+        textParts.push(`Defeat Johto Champion${getStatusHtml(beaten)}`);
+    }
+    if (req.defeatHoennChampion) {
+        let beaten = state.stats.defeatedBosses && state.stats.defeatedBosses["Hoenn Champion"];
+        if (!beaten) isMet = false;
+        textParts.push(`Defeat Hoenn Champion${getStatusHtml(beaten)}`);
+    }
+    if (req.defeatSinnohChampion) {
+        let beaten = state.stats.defeatedBosses && state.stats.defeatedBosses["Sinnoh Champion"];
+        if (!beaten) isMet = false;
+        textParts.push(`Defeat Sinnoh Champion${getStatusHtml(beaten)}`);
+    }
+    if (req.defeatUnovaChampion) {
+        let beaten = state.stats.defeatedBosses && state.stats.defeatedBosses["Unova Champion"];
+        if (!beaten) isMet = false;
+        textParts.push(`Defeat Unova Champion${getStatusHtml(beaten)}`);
+    }
     if (req.defeatRed) {
         let beatenRed = state.stats.defeatedBosses && state.stats.defeatedBosses["Red"];
         if (!beatenRed) isMet = false;

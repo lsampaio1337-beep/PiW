@@ -1679,6 +1679,18 @@ class BattleSystem {
                     this.state.stats.defeatedBosses["Elite 4 Lorelei"] = true;
                     this.state.stats.defeatedBosses["Champion Rival"] = true;
                 }
+                if (enemy.name === "Champion" || enemy.name === "Champion Wallace" || enemy.name === "Champion Iris") {
+                    if (!this.state.stats.defeatedBosses) this.state.stats.defeatedBosses = {};
+                    if (gym.name === "Indigo Plateau (Johto)") {
+                        this.state.stats.defeatedBosses["Johto Champion"] = true;
+                    } else if (gym.name === "Ever Grande City") {
+                        this.state.stats.defeatedBosses["Hoenn Champion"] = true;
+                    } else if (gym.name === "Sinnoh Pokemon League") {
+                        this.state.stats.defeatedBosses["Sinnoh Champion"] = true;
+                    } else if (gym.name === "Unova Elite Four") {
+                        this.state.stats.defeatedBosses["Unova Champion"] = true;
+                    }
+                }
                 if (gym.name === "Red") {
                     this.state.stats.defeatedBosses["Red"] = true;
                 }

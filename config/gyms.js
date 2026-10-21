@@ -1301,6 +1301,65 @@ const gyms = [
   }
 ,
       {
+    "id": "johto_league",
+    "name": "Indigo Plateau (Johto)",
+    "leader": "Champion",
+    "levelRequirement": 40,
+    "trainers": [
+      {
+        "name": "Elite Four #1 - Will",
+        "team": [
+          { "id": 178, "level": 40 },
+          { "id": 124, "level": 41 },
+          { "id": 103, "level": 41 },
+          { "id": 80, "level": 41 },
+          { "id": 178, "level": 42 }
+        ]
+      },
+      {
+        "name": "Elite Four #2 - Koga",
+        "team": [
+          { "id": 168, "level": 40 },
+          { "id": 205, "level": 43 },
+          { "id": 89, "level": 42 },
+          { "id": 49, "level": 41 },
+          { "id": 169, "level": 44 }
+        ]
+      },
+      {
+        "name": "Elite Four #3 - Bruno",
+        "team": [
+          { "id": 237, "level": 42 },
+          { "id": 106, "level": 42 },
+          { "id": 107, "level": 42 },
+          { "id": 95, "level": 43 },
+          { "id": 68, "level": 46 }
+        ]
+      },
+      {
+        "name": "Elite Four #4 - Karen",
+        "team": [
+          { "id": 197, "level": 42 },
+          { "id": 45, "level": 42 },
+          { "id": 198, "level": 44 },
+          { "id": 94, "level": 45 },
+          { "id": 229, "level": 47 }
+        ]
+      },
+      {
+        "name": "Champion",
+        "team": [
+          { "id": 130, "level": 44 },
+          { "id": 149, "level": 47 },
+          { "id": 149, "level": 47 },
+          { "id": 142, "level": 46 },
+          { "id": 6, "level": 46 },
+          { "id": 149, "level": 50 }
+        ]
+      }
+    ]
+  },
+  {
       "id": "rustboro",
       "name": "Rustboro Gym",
       "leader": "Roxanne",
@@ -2314,6 +2373,65 @@ const gyms = [
           { "id": 26, "level": 46 },
           { "id": 405, "level": 48 },
           { "id": 466, "level": 50 }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sinnoh_league",
+    "name": "Sinnoh Pokemon League",
+    "leader": "Champion",
+    "levelRequirement": 49,
+    "trainers": [
+      {
+        "name": "Elite Four #1 - Aaron",
+        "team": [
+          { "id": 469, "level": 49 },
+          { "id": 212, "level": 49 },
+          { "id": 416, "level": 50 },
+          { "id": 214, "level": 51 },
+          { "id": 452, "level": 53 }
+        ]
+      },
+      {
+        "name": "Elite Four #2 - Bertha",
+        "team": [
+          { "id": 340, "level": 50 },
+          { "id": 472, "level": 53 },
+          { "id": 450, "level": 52 },
+          { "id": 76, "level": 52 },
+          { "id": 464, "level": 55 }
+        ]
+      },
+      {
+        "name": "Elite Four #3 - Flint",
+        "team": [
+          { "id": 229, "level": 52 },
+          { "id": 136, "level": 55 },
+          { "id": 78, "level": 53 },
+          { "id": 392, "level": 55 },
+          { "id": 467, "level": 57 }
+        ]
+      },
+      {
+        "name": "Elite Four #4 - Lucian",
+        "team": [
+          { "id": 122, "level": 53 },
+          { "id": 196, "level": 55 },
+          { "id": 437, "level": 54 },
+          { "id": 65, "level": 56 },
+          { "id": 475, "level": 59 }
+        ]
+      },
+      {
+        "name": "Champion",
+        "team": [
+          { "id": 442, "level": 58 },
+          { "id": 407, "level": 58 },
+          { "id": 468, "level": 60 },
+          { "id": 448, "level": 60 },
+          { "id": 350, "level": 58 },
+          { "id": 445, "level": 62 }
         ]
       }
     ]
