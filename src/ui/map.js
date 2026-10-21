@@ -577,7 +577,7 @@ export function navigateToLocation(locationName) {
 
         // Reset Casino background to default lobby if it was changed
         const viewCasino = document.getElementById("view-casino");
-        viewCasino.style.backgroundImage = "url('./Assets/BG/BG-Cassino.jpg')";
+        viewCasino.style.backgroundImage = "url('./Assets/BG/Casino.png')";
         const casinoContent = document.getElementById("casino-content");
         if(casinoContent) casinoContent.style.display = 'block';
 
@@ -749,7 +749,7 @@ export function navigateToLocation(locationName) {
         else if (locationName.includes("Cinnabar")) bgImg = "BG-Gym-7-Cinnabar-Fire.png";
         else if (locationName.includes("Viridian Gym")) bgImg = "BG-Gym-8-Viridian-Ground.png";
         else if (locationName === "Indigo Plateau") {
-            bgImg = "BG-IndigoPlateau.png";
+            bgImg = "IndigoPlateau.png";
             lookupName = "Indigo Plateau"; // Correct spelling for the gyms config
         }
 
