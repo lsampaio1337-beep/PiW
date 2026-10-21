@@ -72,7 +72,16 @@ export function showGiftModal() {
         html += `<h3 style="margin-top: 0; margin-bottom: 10px;">Pending Gifts</h3>`;
         html += `<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 20px;">`;
 
-        pending.forEach((gift, index) => {
+        let displayPending = pending.map((gift, index) => ({ gift, index }));
+        if (state.currentRegionName === 'Johto') {
+            displayPending.sort((a, b) => {
+                if (a.gift.type !== 'badge' || b.gift.type !== 'badge') return 0;
+                let aVal = a.gift.gymIndex >= 9 ? a.gift.gymIndex - 17 : a.gift.gymIndex;
+                let bVal = b.gift.gymIndex >= 9 ? b.gift.gymIndex - 17 : b.gift.gymIndex;
+                return aVal - bVal;
+            });
+        }
+        displayPending.forEach(({gift, index}) => {
             if (gift.type === 'badge') {
                 const badgeNum = state.currentRegionName === 'Johto' ? (gift.gymIndex === 8 ? 0 : (gift.gymIndex > 8 ? gift.gymIndex - 8 : gift.gymIndex + 9)) : gift.gymIndex + 1;
                 html += `
@@ -120,7 +129,17 @@ export function showGiftModal() {
         html += `<h3 style="margin-top: 0; margin-bottom: 10px;">Collected Gifts</h3>`;
         html += `<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">`;
 
-        claimed.forEach((gift) => {
+        // Sort badges if we are in Johto so Johto badges (9-16) appear before Kanto badges (0-7)
+        let displayClaimed = [...claimed];
+        if (state.currentRegionName === 'Johto') {
+            displayClaimed.sort((a, b) => {
+                if (a.type !== 'badge' || b.type !== 'badge') return 0;
+                let aVal = a.gymIndex >= 9 ? a.gymIndex - 17 : a.gymIndex;
+                let bVal = b.gymIndex >= 9 ? b.gymIndex - 17 : b.gymIndex;
+                return aVal - bVal;
+            });
+        }
+        displayClaimed.forEach((gift) => {
             if (gift.type === 'badge') {
                 const badgeNum = state.currentRegionName === 'Johto' ? (gift.gymIndex === 8 ? 0 : (gift.gymIndex > 8 ? gift.gymIndex - 8 : gift.gymIndex + 9)) : gift.gymIndex + 1;
                 html += `
