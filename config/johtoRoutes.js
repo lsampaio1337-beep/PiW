@@ -2220,7 +2220,7 @@ export const johtoUnlocks = [
     "challengeName": "Challenge 24",
     "areaId": "Safari Zone",
     "unlocks": [
-      "Mount Mortar"
+      "Olivine Gym"
     ],
     "requirements": {
       "catchSpecies": [
@@ -2243,9 +2243,23 @@ export const johtoUnlocks = [
   },
   {
     "challengeName": "Challenge 25",
+    "areaId": "Olivine Gym",
+    "unlocks": [
+      "Mount Mortar"
+    ],
+    "requirements": {
+      "earnBadge": {
+        "name": "Mineral Badge",
+        "leader": "Jasmine",
+        "badgeCount": 6
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 26",
     "areaId": "Mount Mortar",
     "unlocks": [
-      "Olivine Gym"
+      "Mahogany Gym"
     ],
     "requirements": {
       "catchByType": {
@@ -2261,21 +2275,21 @@ export const johtoUnlocks = [
     ]
   },
   {
-    "challengeName": "Challenge 26",
-    "areaId": "Olivine Gym",
+    "challengeName": "Challenge 27",
+    "areaId": "Mahogany Gym",
     "unlocks": [
       "Standard Fishing Spot"
     ],
     "requirements": {
       "earnBadge": {
-        "name": "Mineral Badge",
-        "leader": "Jasmine",
-        "badgeCount": 6
+        "name": "Glacier Badge",
+        "leader": "Pryce",
+        "badgeCount": 7
       }
     }
   },
   {
-    "challengeName": "Challenge 27",
+    "challengeName": "Challenge 28",
     "areaId": "Standard Fishing Spot",
     "unlocks": [
       "Ice Path"
@@ -2290,10 +2304,10 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 28",
+    "challengeName": "Challenge 29",
     "areaId": "Ice Path",
     "unlocks": [
-      "Mahogany Gym"
+      "Route 45"
     ],
     "requirements": {
       "defeatSpecific": {
@@ -2307,20 +2321,6 @@ export const johtoUnlocks = [
         "count": 2
       }
     ]
-  },
-  {
-    "challengeName": "Challenge 29",
-    "areaId": "Mahogany Gym",
-    "unlocks": [
-      "Route 45"
-    ],
-    "requirements": {
-      "earnBadge": {
-        "name": "Glacier Badge",
-        "leader": "Pryce",
-        "badgeCount": 7
-      }
-    }
   },
   {
     "challengeName": "Challenge 30",
