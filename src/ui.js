@@ -267,6 +267,8 @@ window.badgeMapping = {
 };
 
 window.getBadgeFileName = function(region, number) {
+    if (region === 'Unova') region = 'Unova2';
+
     if (region === 'Johto' && number > 8) {
         region = 'Kanto';
         number = number - 8;
@@ -1477,7 +1479,7 @@ async function loadConfigs() {
     try {
         const unovaModule = await import('../config/unovaRoutes.js');
         state.config.unovaRoutes = unovaModule.unovaRoutes;
-        state.config.unovaUnlocks = []; // For now
+        state.config.unovaUnlocks = unovaModule.unovaUnlocks || [];
     } catch (e) {
         console.warn("Failed to load unova routes");
     }
