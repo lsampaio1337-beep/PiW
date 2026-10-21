@@ -1539,7 +1539,7 @@ const gyms = [
     "id": "aspertia",
     "name": "Aspertia Gym",
     "leader": "Cheren",
-    "levelRequirement": 0,
+    "levelRequirement": 10,
     "trainers": [
       {
         "name": "Gym Trainer #1",
@@ -1568,7 +1568,7 @@ const gyms = [
     "id": "virbank",
     "name": "Virbank Gym",
     "leader": "Roxie",
-    "levelRequirement": 0,
+    "levelRequirement": 15,
     "trainers": [
       {
         "name": "Gym Trainer #1",
@@ -1597,20 +1597,20 @@ const gyms = [
     "id": "castelia",
     "name": "Castelia Gym",
     "leader": "Burgh",
-    "levelRequirement": 0,
+    "levelRequirement": 20,
     "trainers": [
       {
         "name": "Gym Trainer #1",
         "team": [
           { "id": 541, "level": 20 },
-          { "id": 557, "level": 20 }
+          { "id": 415, "level": 20 }
         ]
       },
       {
         "name": "Gym Trainer #2",
         "team": [
-          { "id": 541, "level": 20 },
-          { "id": 543, "level": 20 }
+          { "id": 557, "level": 20 },
+          { "id": 541, "level": 20 }
         ]
       },
       {
@@ -1620,27 +1620,26 @@ const gyms = [
           { "id": 557, "level": 22 },
           { "id": 542, "level": 24 }
         ]
-      }
-    ]
+      }]
   },
   {
     "id": "nimbasa",
     "name": "Nimbasa Gym",
     "leader": "Elesa",
-    "levelRequirement": 0,
+    "levelRequirement": 25,
     "trainers": [
       {
         "name": "Gym Trainer #1",
         "team": [
-          { "id": 587, "level": 27 },
+          { "id": 239, "level": 27 },
           { "id": 180, "level": 27 }
         ]
       },
       {
         "name": "Gym Trainer #2",
         "team": [
-          { "id": 180, "level": 27 },
-          { "id": 523, "level": 27 }
+          { "id": 522, "level": 27 },
+          { "id": 239, "level": 27 }
         ]
       },
       {
@@ -1650,27 +1649,26 @@ const gyms = [
           { "id": 180, "level": 28 },
           { "id": 523, "level": 30 }
         ]
-      }
-    ]
+      }]
   },
   {
     "id": "driftveil",
     "name": "Driftveil Gym",
     "leader": "Clay",
-    "levelRequirement": 0,
+    "levelRequirement": 30,
     "trainers": [
       {
         "name": "Gym Trainer #1",
         "team": [
-          { "id": 552, "level": 31 },
-          { "id": 552, "level": 31 }
+          { "id": 529, "level": 30 },
+          { "id": 343, "level": 30 }
         ]
       },
       {
         "name": "Gym Trainer #2",
         "team": [
-          { "id": 28, "level": 31 },
-          { "id": 28, "level": 31 }
+          { "id": 551, "level": 30 },
+          { "id": 529, "level": 30 }
         ]
       },
       {
@@ -1680,27 +1678,26 @@ const gyms = [
           { "id": 28, "level": 31 },
           { "id": 530, "level": 33 }
         ]
-      }
-    ]
+      }]
   },
   {
     "id": "mistralton",
     "name": "Mistralton Gym",
     "leader": "Skyla",
-    "levelRequirement": 0,
+    "levelRequirement": 35,
     "trainers": [
       {
         "name": "Gym Trainer #1",
         "team": [
           { "id": 528, "level": 37 },
-          { "id": 528, "level": 37 }
+          { "id": 521, "level": 37 }
         ]
       },
       {
         "name": "Gym Trainer #2",
         "team": [
-          { "id": 227, "level": 37 },
-          { "id": 227, "level": 37 }
+          { "id": 580, "level": 36 },
+          { "id": 528, "level": 36 }
         ]
       },
       {
@@ -1710,27 +1707,26 @@ const gyms = [
           { "id": 227, "level": 37 },
           { "id": 581, "level": 39 }
         ]
-      }
-    ]
+      }]
   },
   {
     "id": "opelucid",
     "name": "Opelucid Gym",
     "leader": "Drayden",
-    "levelRequirement": 0,
+    "levelRequirement": 42,
     "trainers": [
       {
         "name": "Gym Trainer #1",
         "team": [
-          { "id": 621, "level": 46 },
-          { "id": 621, "level": 46 }
+          { "id": 611, "level": 45 },
+          { "id": 621, "level": 45 }
         ]
       },
       {
         "name": "Gym Trainer #2",
         "team": [
-          { "id": 330, "level": 46 },
-          { "id": 330, "level": 46 }
+          { "id": 611, "level": 44 },
+          { "id": 621, "level": 44 }
         ]
       },
       {
@@ -1740,27 +1736,26 @@ const gyms = [
           { "id": 330, "level": 46 },
           { "id": 612, "level": 48 }
         ]
-      }
-    ]
+      }]
   },
   {
     "id": "humilau",
     "name": "Humilau Gym",
     "leader": "Marlon",
-    "levelRequirement": 0,
+    "levelRequirement": 46,
     "trainers": [
       {
         "name": "Gym Trainer #1",
         "team": [
-          { "id": 565, "level": 49 },
-          { "id": 565, "level": 49 }
+          { "id": 419, "level": 47 },
+          { "id": 226, "level": 47 }
         ]
       },
       {
         "name": "Gym Trainer #2",
         "team": [
-          { "id": 321, "level": 49 },
-          { "id": 321, "level": 49 }
+          { "id": 365, "level": 48 },
+          { "id": 594, "level": 48 }
         ]
       },
       {
@@ -1770,8 +1765,7 @@ const gyms = [
           { "id": 321, "level": 49 },
           { "id": 593, "level": 51 }
         ]
-      }
-    ]
+      }]
   }
 ];
 export default gyms;
