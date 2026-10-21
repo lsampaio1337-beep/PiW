@@ -189,6 +189,11 @@ const hoennMapCoordinates = {
     "x": 93.52,
     "y": 34.99
   },
+  "ever_grande_city": {
+    "name": "Ever Grande City",
+    "x": 86.66,
+    "y": 48.18
+  },
   "victory_road": {
     "name": "Victory Road",
     "x": 94.16,

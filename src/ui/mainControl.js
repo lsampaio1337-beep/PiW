@@ -162,7 +162,28 @@ export function getChallengeData(unlock) {
     if (req.defeatEliteFourAndChampion) {
         let beatenE4 = state.stats.defeatedBosses && (state.stats.defeatedBosses["Elite 4 Lorelei"] || state.stats.defeatedBosses["Lorelei"]) && state.stats.defeatedBosses["Champion Rival"];
         if (!beatenE4) isMet = false;
-        textParts.push(`Defeat all Elite 4 and Defeat Champion${getStatusHtml(beatenE4)}`);
+        textParts.push(`Win Kanto Pokémon League${getStatusHtml(beatenE4)}`);
+    }
+
+    if (req.defeatJohtoChampion) {
+        let beaten = state.stats.defeatedBosses && state.stats.defeatedBosses["Johto Champion"];
+        if (!beaten) isMet = false;
+        textParts.push(`Win Johto Pokémon League${getStatusHtml(beaten)}`);
+    }
+    if (req.defeatHoennChampion) {
+        let beaten = state.stats.defeatedBosses && state.stats.defeatedBosses["Hoenn Champion"];
+        if (!beaten) isMet = false;
+        textParts.push(`Win Hoenn Pokémon League${getStatusHtml(beaten)}`);
+    }
+    if (req.defeatSinnohChampion) {
+        let beaten = state.stats.defeatedBosses && state.stats.defeatedBosses["Sinnoh Champion"];
+        if (!beaten) isMet = false;
+        textParts.push(`Win Sinnoh Pokémon League${getStatusHtml(beaten)}`);
+    }
+    if (req.defeatUnovaChampion) {
+        let beaten = state.stats.defeatedBosses && state.stats.defeatedBosses["Unova Champion"];
+        if (!beaten) isMet = false;
+        textParts.push(`Win Unova Pokémon League${getStatusHtml(beaten)}`);
     }
     if (req.defeatRed) {
         let beatenRed = state.stats.defeatedBosses && state.stats.defeatedBosses["Red"];

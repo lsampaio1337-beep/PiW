@@ -320,7 +320,7 @@ const johtoMapCoordinates = {
     "y": 47.19
   },
   "indigo_plateau": {
-    "name": "Indigo Plateau",
+    "name": "Indigo Plateau (Johto)",
     "x": 54.4,
     "y": 48.25
   },

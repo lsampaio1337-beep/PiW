@@ -164,6 +164,11 @@ const sinnohMapCoordinates = {
     "x": 85.74,
     "y": 48.83
   },
+  "sinnoh_pokemon_league": {
+    "name": "Sinnoh Pokemon League",
+    "x": 86.66,
+    "y": 42.18
+  },
   "224": {
     "name": "Route 224",
     "x": 91.02,

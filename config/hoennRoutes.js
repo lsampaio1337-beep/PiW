@@ -1677,6 +1677,22 @@ export const hoennUnlocks = [
   { "challengeName": "Challenge 43", "areaId": "Victory Road", "unlocks": ["Sky Pillar"], "requirements": { "defeatCountRoute": { "route": "Victory Road", "count": 200 } } },
   { "challengeName": "Challenge 44", "areaId": "Sky Pillar", "unlocks": ["Mythical and Legendaries Spot", "Trick House", "Mauville Game Corner"], "requirements": { "catchSpecies": [{ "species": "Altaria", "count": 1 }, { "species": "Claydol", "count": 1 }] } },
   { "challengeName": "Challenge 45", "areaId": "Mythical and Legendaries Spot", "unlocks": [], "requirements": { "defeatSpecific": { "name": "Deoxys", "count": 1 } } },
+  {
+    "challengeName": "Hoenn Final Challenge",
+    "areaId": "Ever Grande City",
+    "unlocks": [
+      "New Region to Travel"
+    ],
+    "requirements": {
+      "defeatHoennChampion": true
+    },
+    "gifts": [
+      {
+        "item": "Masterball",
+        "count": 2
+      }
+    ]
+  },
   { "challengeName": "Extra Challenge A 1", "areaId": "Trick House", "unlocks": ["Rustboro Fossil Lab"], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "defeatCountRoute": { "route": "Trick House", "count": 20 } } },
   { "challengeName": "Extra Challenge A 2", "areaId": "Rustboro Fossil Lab", "unlocks": ["Abandoned Ship"], "gift": { "item": "Root Fossil", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Lileep", "count": 1 }, { "species": "Anorith", "count": 1 }] } },
   { "challengeName": "Extra Challenge A 3", "areaId": "Abandoned Ship", "unlocks": ["Enemy Hideout"], "gift": { "item": "Deep Sea Scale", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Tentacruel", "count": 1 }] } },

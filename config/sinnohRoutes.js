@@ -4048,7 +4048,7 @@ export const sinnohUnlocks = [
   { "challengeName": "Challenge 54", "areaId": "Turnback Cave", "unlocks": [], "gift": { "item": "Ghost Stone", "count": 2 }, "requirements": { "catchSpeciesByRarity": [{ "species": "Bronzong", "rarity": "Rare", "count": 1 }] } },
   { "challengeName": "Challenge 55", "areaId": "Route 222", "unlocks": ["Sunyshore Gym", "Big Fishing Spot"], "requirements": { "catchSpecies": [{ "species": "Magneton", "count": 1 }, { "species": "Electabuzz", "count": 1 }] } },
   { "challengeName": "Challenge 56", "areaId": "Sunyshore Gym", "unlocks": ["Victory Road"], "requirements": { "earnBadge": { "name": "Beacon Badge", "leader": "Volkner", "badgeCount": 8 } } },
-  { "challengeName": "Challenge 57", "areaId": "Victory Road", "unlocks": ["Route 224"], "requirements": { "defeatCountRoute": { "route": "Victory Road", "count": 300 } } },
+  { "challengeName": "Challenge 57", "areaId": "Victory Road", "unlocks": ["Route 224", "Sinnoh Pokemon League"], "requirements": { "defeatCountRoute": { "route": "Victory Road", "count": 300 } } },
   { "challengeName": "Challenge 58", "areaId": "Route 224", "unlocks": ["Route 221", "Route 225"], "requirements": { "catchSpecies": [{ "species": "Roselia", "count": 1 }] } },
   { "challengeName": "Challenge 59", "areaId": "Route 221", "unlocks": [], "requirements": { "catchSpecies": [{ "species": "Sudowoodo", "count": 1 }] } },
   { "challengeName": "Challenge 60", "areaId": "Route 225", "unlocks": ["Route 226"], "requirements": { "catchSpecies": [{ "species": "Raticate", "count": 1 }] } },
@@ -4061,6 +4061,22 @@ export const sinnohUnlocks = [
   { "challengeName": "Challenge 67", "areaId": "Newmoon Island", "unlocks": ["Flower Paradise"], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Darkrai", "count": 1 }] } },
   { "challengeName": "Challenge 68", "areaId": "Flower Paradise", "unlocks": ["Hall of Origin", "Roaming Sinnoh"], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Shaymin", "count": 1 }] } },
   { "challengeName": "Challenge 69", "areaId": "Hall of Origin", "unlocks": [], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Arceus", "count": 1 }] } },
+  {
+    "challengeName": "Sinnoh Final Challenge",
+    "areaId": "Sinnoh Pokemon League",
+    "unlocks": [
+      "New Region to Travel"
+    ],
+    "requirements": {
+      "defeatSinnohChampion": true
+    },
+    "gifts": [
+      {
+        "item": "Masterball",
+        "count": 2
+      }
+    ]
+  },
   { "challengeName": "Extra Challenge (Roaming)", "areaId": "Roaming Sinnoh", "unlocks": ["Huge Fishing Spot"], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Cresselia", "count": 1 }, { "species": "Mesprit", "count": 1 }] } },
   { "challengeName": "Extra Challenge A 3", "areaId": "Regular Fishing Spot", "unlocks": [], "gift": { "item": "Water Stone", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Remoraid", "count": 2 }] } },
   { "challengeName": "Extra Challenge A 4", "areaId": "Big Fishing Spot", "unlocks": [], "gift": { "item": "Water Stone", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Octillery", "count": 1 }] } },

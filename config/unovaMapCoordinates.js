@@ -179,6 +179,11 @@ const unovaMapCoordinates = {
     "x": 51.41,
     "y": 18.41
   },
+  "unova_elite_four": {
+    "name": "Unova Elite Four",
+    "x": 80.66,
+    "y": 12.18
+  },
   "victory_road": {
     "name": "Victory Road",
     "x": 69.69,
