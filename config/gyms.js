@@ -3019,5 +3019,1864 @@ const gyms = [
         }
       ]
     }
+,
+
+  {
+    "id": "santalune",
+    "name": "Santalune Gym",
+    "leader": "Viola",
+    "levelRequirement": 50,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          {
+            "id": 165,
+            "level": 10
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          {
+            "id": 665,
+            "level": 10
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #3",
+        "team": [
+          {
+            "id": 14,
+            "level": 7
+          },
+          {
+            "id": 415,
+            "level": 9
+          }
+        ]
+      },
+      {
+        "name": "Leader Viola",
+        "team": [
+          {
+            "id": 283,
+            "level": 10
+          },
+          {
+            "id": 666,
+            "level": 12
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cyllage",
+    "name": "Cyllage Gym",
+    "leader": "Grant",
+    "levelRequirement": 60,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          {
+            "id": 557,
+            "level": 21
+          },
+          {
+            "id": 369,
+            "level": 23
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          {
+            "id": 111,
+            "level": 24
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #3",
+        "team": [
+          {
+            "id": 142,
+            "level": 24
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #4",
+        "team": [
+          {
+            "id": 345,
+            "level": 24
+          }
+        ]
+      },
+      {
+        "name": "Leader Grant",
+        "team": [
+          {
+            "id": 698,
+            "level": 25
+          },
+          {
+            "id": 696,
+            "level": 25
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "shalour",
+    "name": "Shalour Gym",
+    "leader": "Korrina",
+    "levelRequirement": 70,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          {
+            "id": 307,
+            "level": 33
+          },
+          {
+            "id": 619,
+            "level": 33
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          {
+            "id": 674,
+            "level": 31
+          },
+          {
+            "id": 538,
+            "level": 32
+          },
+          {
+            "id": 67,
+            "level": 33
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #3",
+        "team": [
+          {
+            "id": 214,
+            "level": 34
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #4",
+        "team": [
+          {
+            "id": 539,
+            "level": 33
+          },
+          {
+            "id": 297,
+            "level": 35
+          }
+        ]
+      },
+      {
+        "name": "Leader Korrina",
+        "team": [
+          {
+            "id": 619,
+            "level": 29
+          },
+          {
+            "id": 67,
+            "level": 28
+          },
+          {
+            "id": 701,
+            "level": 32
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "coumarine",
+    "name": "Coumarine Gym",
+    "leader": "Ramos",
+    "levelRequirement": 80,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          {
+            "id": 512,
+            "level": 32
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          {
+            "id": 315,
+            "level": 29
+          },
+          {
+            "id": 413,
+            "level": 29
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #3",
+        "team": [
+          {
+            "id": 44,
+            "level": 29
+          },
+          {
+            "id": 103,
+            "level": 31
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #4",
+        "team": [
+          {
+            "id": 597,
+            "level": 30
+          },
+          {
+            "id": 455,
+            "level": 30
+          }
+        ]
+      },
+      {
+        "name": "Leader Ramos",
+        "team": [
+          {
+            "id": 189,
+            "level": 30
+          },
+          {
+            "id": 673,
+            "level": 34
+          },
+          {
+            "id": 70,
+            "level": 31
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lumiose",
+    "name": "Lumiose Gym",
+    "leader": "Clemont",
+    "levelRequirement": 90,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          {
+            "id": 702,
+            "level": 34
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          {
+            "id": 26,
+            "level": 35
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #3",
+        "team": [
+          {
+            "id": 181,
+            "level": 36
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #4",
+        "team": [
+          {
+            "id": 311,
+            "level": 34
+          },
+          {
+            "id": 312,
+            "level": 34
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #5",
+        "team": [
+          {
+            "id": 101,
+            "level": 35
+          },
+          {
+            "id": 587,
+            "level": 36
+          }
+        ]
+      },
+      {
+        "name": "Leader Clemont",
+        "team": [
+          {
+            "id": 587,
+            "level": 35
+          },
+          {
+            "id": 82,
+            "level": 35
+          },
+          {
+            "id": 695,
+            "level": 37
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "laverre",
+    "name": "Laverre Gym",
+    "leader": "Valerie",
+    "levelRequirement": 100,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          {
+            "id": 184,
+            "level": 38
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          {
+            "id": 683,
+            "level": 40
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #3",
+        "team": [
+          {
+            "id": 685,
+            "level": 40
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #4",
+        "team": [
+          {
+            "id": 281,
+            "level": 38
+          }
+        ]
+      },
+      {
+        "name": "Leader Valerie",
+        "team": [
+          {
+            "id": 303,
+            "level": 38
+          },
+          {
+            "id": 122,
+            "level": 39
+          },
+          {
+            "id": 700,
+            "level": 42
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "anistar",
+    "name": "Anistar Gym",
+    "leader": "Olympia",
+    "levelRequirement": 110,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          {
+            "id": 103,
+            "level": 46
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          {
+            "id": 308,
+            "level": 46
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #3",
+        "team": [
+          {
+            "id": 579,
+            "level": 46
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #4",
+        "team": [
+          {
+            "id": 202,
+            "level": 46
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #5",
+        "team": [
+          {
+            "id": 561,
+            "level": 46
+          }
+        ]
+      },
+      {
+        "name": "Leader Olympia",
+        "team": [
+          {
+            "id": 561,
+            "level": 44
+          },
+          {
+            "id": 199,
+            "level": 45
+          },
+          {
+            "id": 678,
+            "level": 48
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "snowbelle",
+    "name": "Snowbelle Gym",
+    "leader": "Wulfric",
+    "levelRequirement": 120,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          {
+            "id": 614,
+            "level": 54
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          {
+            "id": 583,
+            "level": 52
+          },
+          {
+            "id": 124,
+            "level": 53
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #3",
+        "team": [
+          {
+            "id": 615,
+            "level": 52
+          },
+          {
+            "id": 221,
+            "level": 53
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #4",
+        "team": [
+          {
+            "id": 91,
+            "level": 54
+          }
+        ]
+      },
+      {
+        "name": "Leader Wulfric",
+        "team": [
+          {
+            "id": 460,
+            "level": 56
+          },
+          {
+            "id": 615,
+            "level": 55
+          },
+          {
+            "id": 713,
+            "level": 59
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "kalos_elite_four",
+    "name": "Kalos Elite Four",
+    "leader": "Champion",
+    "levelRequirement": 130,
+    "trainers": [
+      {
+        "name": "Elite Four #1 - Malva",
+        "team": [
+          {
+            "id": 668,
+            "level": 63
+          },
+          {
+            "id": 324,
+            "level": 63
+          },
+          {
+            "id": 663,
+            "level": 65
+          },
+          {
+            "id": 609,
+            "level": 63
+          }
+        ]
+      },
+      {
+        "name": "Elite Four #2 - Siebold",
+        "team": [
+          {
+            "id": 693,
+            "level": 63
+          },
+          {
+            "id": 121,
+            "level": 63
+          },
+          {
+            "id": 130,
+            "level": 63
+          },
+          {
+            "id": 689,
+            "level": 65
+          }
+        ]
+      },
+      {
+        "name": "Elite Four #3 - Wikstrom",
+        "team": [
+          {
+            "id": 707,
+            "level": 63
+          },
+          {
+            "id": 476,
+            "level": 63
+          },
+          {
+            "id": 212,
+            "level": 63
+          },
+          {
+            "id": 681,
+            "level": 65
+          }
+        ]
+      },
+      {
+        "name": "Elite Four #4 - Drasna",
+        "team": [
+          {
+            "id": 691,
+            "level": 63
+          },
+          {
+            "id": 334,
+            "level": 63
+          },
+          {
+            "id": 621,
+            "level": 63
+          },
+          {
+            "id": 715,
+            "level": 65
+          }
+        ]
+      },
+      {
+        "name": "Champion",
+        "team": [
+          {
+            "id": 701,
+            "level": 64
+          },
+          {
+            "id": 697,
+            "level": 65
+          },
+          {
+            "id": 699,
+            "level": 65
+          },
+          {
+            "id": 711,
+            "level": 65
+          },
+          {
+            "id": 706,
+            "level": 66
+          },
+          {
+            "id": 282,
+            "level": 68
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "turffield",
+    "name": "Turffield Gym",
+    "leader": "Milo",
+    "levelRequirement": 140,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          {
+            "id": 829,
+            "level": 16
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          {
+            "id": 761,
+            "level": 16
+          },
+          {
+            "id": 43,
+            "level": 16
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #3",
+        "team": [
+          {
+            "id": 761,
+            "level": 17
+          },
+          {
+            "id": 43,
+            "level": 17
+          }
+        ]
+      },
+      {
+        "name": "Leader Milo",
+        "team": [
+          {
+            "id": 829,
+            "level": 19
+          },
+          {
+            "id": 830,
+            "level": 20
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hulbury",
+    "name": "Hulbury Gym",
+    "leader": "Nessa",
+    "levelRequirement": 150,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          {
+            "id": 195,
+            "level": 21
+          },
+          {
+            "id": 688,
+            "level": 21
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          {
+            "id": 846,
+            "level": 22
+          },
+          {
+            "id": 833,
+            "level": 22
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #3",
+        "team": [
+          {
+            "id": 846,
+            "level": 22
+          },
+          {
+            "id": 833,
+            "level": 23
+          }
+        ]
+      },
+      {
+        "name": "Leader Nessa",
+        "team": [
+          {
+            "id": 834,
+            "level": 22
+          },
+          {
+            "id": 846,
+            "level": 23
+          },
+          {
+            "id": 834,
+            "level": 24
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "motostoke",
+    "name": "Motostoke Gym",
+    "leader": "Kabu",
+    "levelRequirement": 160,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          {
+            "id": 37,
+            "level": 25
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          {
+            "id": 850,
+            "level": 26
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #3",
+        "team": [
+          {
+            "id": 757,
+            "level": 26
+          },
+          {
+            "id": 850,
+            "level": 26
+          }
+        ]
+      },
+      {
+        "name": "Leader Kabu",
+        "team": [
+          {
+            "id": 38,
+            "level": 25
+          },
+          {
+            "id": 59,
+            "level": 25
+          },
+          {
+            "id": 851,
+            "level": 27
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "stow_on_side",
+    "name": "Stow-on-Side Gym",
+    "leader": "Bea",
+    "levelRequirement": 170,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          {
+            "id": 759,
+            "level": 31
+          },
+          {
+            "id": 760,
+            "level": 32
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          {
+            "id": 865,
+            "level": 32
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #3",
+        "team": [
+          {
+            "id": 237,
+            "level": 33
+          },
+          {
+            "id": 67,
+            "level": 34
+          }
+        ]
+      },
+      {
+        "name": "Leader Bea",
+        "team": [
+          {
+            "id": 237,
+            "level": 34
+          },
+          {
+            "id": 67,
+            "level": 34
+          },
+          {
+            "id": 865,
+            "level": 35
+          },
+          {
+            "id": 68,
+            "level": 36
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ballonlea",
+    "name": "Ballonlea Gym",
+    "leader": "Opal",
+    "levelRequirement": 180,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          {
+            "id": 682,
+            "level": 34
+          },
+          {
+            "id": 684,
+            "level": 34
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          {
+            "id": 682,
+            "level": 35
+          },
+          {
+            "id": 684,
+            "level": 35
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #3",
+        "team": [
+          {
+            "id": 685,
+            "level": 36
+          },
+          {
+            "id": 683,
+            "level": 36
+          }
+        ]
+      },
+      {
+        "name": "Leader Opal",
+        "team": [
+          {
+            "id": 110,
+            "level": 36
+          },
+          {
+            "id": 303,
+            "level": 36
+          },
+          {
+            "id": 468,
+            "level": 37
+          },
+          {
+            "id": 869,
+            "level": 38
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "circhester",
+    "name": "Circhester Gym",
+    "leader": "Gordie",
+    "levelRequirement": 190,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          {
+            "id": 525,
+            "level": 38
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          {
+            "id": 213,
+            "level": 39
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #3",
+        "team": [
+          {
+            "id": 838,
+            "level": 39
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #4",
+        "team": [
+          {
+            "id": 526,
+            "level": 40
+          }
+        ]
+      },
+      {
+        "name": "Leader Gordie",
+        "team": [
+          {
+            "id": 688,
+            "level": 40
+          },
+          {
+            "id": 213,
+            "level": 40
+          },
+          {
+            "id": 874,
+            "level": 41
+          },
+          {
+            "id": 839,
+            "level": 42
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "spikemuth",
+    "name": "Spikemuth Gym",
+    "leader": "Piers",
+    "levelRequirement": 200,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          {
+            "id": 264,
+            "level": 42
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          {
+            "id": 435,
+            "level": 43
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #3",
+        "team": [
+          {
+            "id": 510,
+            "level": 43
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #4",
+        "team": [
+          {
+            "id": 560,
+            "level": 44
+          }
+        ]
+      },
+      {
+        "name": "Leader Piers",
+        "team": [
+          {
+            "id": 560,
+            "level": 44
+          },
+          {
+            "id": 687,
+            "level": 45
+          },
+          {
+            "id": 435,
+            "level": 45
+          },
+          {
+            "id": 862,
+            "level": 46
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hammerlocke",
+    "name": "Hammerlocke Gym",
+    "leader": "Raihan",
+    "levelRequirement": 210,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          {
+            "id": 705,
+            "level": 45
+          },
+          {
+            "id": 330,
+            "level": 45
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          {
+            "id": 705,
+            "level": 45
+          },
+          {
+            "id": 330,
+            "level": 45
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #3",
+        "team": [
+          {
+            "id": 884,
+            "level": 46
+          },
+          {
+            "id": 706,
+            "level": 46
+          }
+        ]
+      },
+      {
+        "name": "Leader Raihan",
+        "team": [
+          {
+            "id": 526,
+            "level": 46
+          },
+          {
+            "id": 330,
+            "level": 47
+          },
+          {
+            "id": 844,
+            "level": 46
+          },
+          {
+            "id": 884,
+            "level": 48
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "wyndon",
+    "name": "Wyndon Stadium",
+    "leader": "Champion",
+    "levelRequirement": 220,
+    "trainers": [
+      {
+        "name": "Champion Cup #1 - Marnie",
+        "team": [
+          {
+            "id": 510,
+            "level": 59
+          },
+          {
+            "id": 454,
+            "level": 59
+          },
+          {
+            "id": 560,
+            "level": 59
+          },
+          {
+            "id": 877,
+            "level": 59
+          },
+          {
+            "id": 861,
+            "level": 60
+          }
+        ]
+      },
+      {
+        "name": "Champion Cup #2 - Bede",
+        "team": [
+          {
+            "id": 303,
+            "level": 61
+          },
+          {
+            "id": 282,
+            "level": 61
+          },
+          {
+            "id": 78,
+            "level": 61
+          },
+          {
+            "id": 858,
+            "level": 62
+          }
+        ]
+      },
+      {
+        "name": "Champion Cup #3 - Hop",
+        "team": [
+          {
+            "id": 832,
+            "level": 69
+          },
+          {
+            "id": 823,
+            "level": 70
+          },
+          {
+            "id": 143,
+            "level": 68
+          },
+          {
+            "id": 871,
+            "level": 69
+          },
+          {
+            "id": 815,
+            "level": 70
+          }
+        ]
+      },
+      {
+        "name": "Champion",
+        "team": [
+          {
+            "id": 681,
+            "level": 62
+          },
+          {
+            "id": 612,
+            "level": 63
+          },
+          {
+            "id": 537,
+            "level": 64
+          },
+          {
+            "id": 866,
+            "level": 64
+          },
+          {
+            "id": 887,
+            "level": 62
+          },
+          {
+            "id": 6,
+            "level": 65
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cortondo",
+    "name": "Cortondo Gym",
+    "leader": "Katy",
+    "levelRequirement": 230,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          {
+            "id": 187,
+            "level": 13
+          },
+          {
+            "id": 917,
+            "level": 13
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          {
+            "id": 415,
+            "level": 13
+          },
+          {
+            "id": 917,
+            "level": 13
+          }
+        ]
+      },
+      {
+        "name": "Leader Katy",
+        "team": [
+          {
+            "id": 919,
+            "level": 14
+          },
+          {
+            "id": 917,
+            "level": 14
+          },
+          {
+            "id": 216,
+            "level": 15
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "artazon",
+    "name": "Artazon Gym",
+    "leader": "Brassius",
+    "levelRequirement": 240,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          {
+            "id": 548,
+            "level": 16
+          },
+          {
+            "id": 187,
+            "level": 16
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          {
+            "id": 928,
+            "level": 17
+          }
+        ]
+      },
+      {
+        "name": "Leader Brassius",
+        "team": [
+          {
+            "id": 548,
+            "level": 16
+          },
+          {
+            "id": 928,
+            "level": 16
+          },
+          {
+            "id": 185,
+            "level": 17
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "levincia",
+    "name": "Levincia Gym",
+    "leader": "Iono",
+    "levelRequirement": 250,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          {
+            "id": 179,
+            "level": 22
+          },
+          {
+            "id": 25,
+            "level": 22
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          {
+            "id": 180,
+            "level": 23
+          }
+        ]
+      },
+      {
+        "name": "Leader Iono",
+        "team": [
+          {
+            "id": 940,
+            "level": 23
+          },
+          {
+            "id": 939,
+            "level": 23
+          },
+          {
+            "id": 82,
+            "level": 23
+          },
+          {
+            "id": 429,
+            "level": 24
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cascarrafa",
+    "name": "Cascarrafa Gym",
+    "leader": "Kofu",
+    "levelRequirement": 260,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          {
+            "id": 976,
+            "level": 28
+          },
+          {
+            "id": 739,
+            "level": 28
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          {
+            "id": 961,
+            "level": 28
+          }
+        ]
+      },
+      {
+        "name": "Leader Kofu",
+        "team": [
+          {
+            "id": 976,
+            "level": 29
+          },
+          {
+            "id": 961,
+            "level": 29
+          },
+          {
+            "id": 740,
+            "level": 30
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "medali",
+    "name": "Medali Gym",
+    "leader": "Larry",
+    "levelRequirement": 270,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          {
+            "id": 216,
+            "level": 34
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          {
+            "id": 775,
+            "level": 34
+          },
+          {
+            "id": 216,
+            "level": 34
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #3",
+        "team": [
+          {
+            "id": 982,
+            "level": 34
+          }
+        ]
+      },
+      {
+        "name": "Leader Larry",
+        "team": [
+          {
+            "id": 775,
+            "level": 35
+          },
+          {
+            "id": 982,
+            "level": 35
+          },
+          {
+            "id": 398,
+            "level": 36
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "montenevera",
+    "name": "Montenevera Gym",
+    "leader": "Ryme",
+    "levelRequirement": 280,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          {
+            "id": 354,
+            "level": 40
+          },
+          {
+            "id": 972,
+            "level": 40
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          {
+            "id": 972,
+            "level": 40
+          },
+          {
+            "id": 429,
+            "level": 40
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #3",
+        "team": [
+          {
+            "id": 778,
+            "level": 40
+          },
+          {
+            "id": 972,
+            "level": 40
+          }
+        ]
+      },
+      {
+        "name": "Leader Ryme",
+        "team": [
+          {
+            "id": 354,
+            "level": 41
+          },
+          {
+            "id": 972,
+            "level": 41
+          },
+          {
+            "id": 778,
+            "level": 41
+          },
+          {
+            "id": 849,
+            "level": 42
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "alfornada",
+    "name": "Alfornada Gym",
+    "leader": "Tulip",
+    "levelRequirement": 290,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          {
+            "id": 281,
+            "level": 43
+          },
+          {
+            "id": 475,
+            "level": 43
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          {
+            "id": 955,
+            "level": 43
+          },
+          {
+            "id": 956,
+            "level": 43
+          }
+        ]
+      },
+      {
+        "name": "Leader Tulip",
+        "team": [
+          {
+            "id": 981,
+            "level": 44
+          },
+          {
+            "id": 282,
+            "level": 44
+          },
+          {
+            "id": 956,
+            "level": 44
+          },
+          {
+            "id": 671,
+            "level": 45
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "glaseado",
+    "name": "Glaseado Gym",
+    "leader": "Grusha",
+    "levelRequirement": 300,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          {
+            "id": 974,
+            "level": 46
+          },
+          {
+            "id": 873,
+            "level": 46
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #2",
+        "team": [
+          {
+            "id": 614,
+            "level": 46
+          },
+          {
+            "id": 713,
+            "level": 46
+          }
+        ]
+      },
+      {
+        "name": "Gym Trainer #3",
+        "team": [
+          {
+            "id": 873,
+            "level": 46
+          },
+          {
+            "id": 974,
+            "level": 46
+          }
+        ]
+      },
+      {
+        "name": "Leader Grusha",
+        "team": [
+          {
+            "id": 873,
+            "level": 47
+          },
+          {
+            "id": 614,
+            "level": 47
+          },
+          {
+            "id": 975,
+            "level": 47
+          },
+          {
+            "id": 334,
+            "level": 48
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "paldea_elite_four",
+    "name": "Paldea Elite Four",
+    "leader": "Champion",
+    "levelRequirement": 310,
+    "trainers": [
+      {
+        "name": "Elite Four #1 - Rika",
+        "team": [
+          {
+            "id": 340,
+            "level": 57
+          },
+          {
+            "id": 323,
+            "level": 57
+          },
+          {
+            "id": 232,
+            "level": 57
+          },
+          {
+            "id": 51,
+            "level": 57
+          },
+          {
+            "id": 980,
+            "level": 58
+          }
+        ]
+      },
+      {
+        "name": "Elite Four #2 - Poppy",
+        "team": [
+          {
+            "id": 879,
+            "level": 58
+          },
+          {
+            "id": 462,
+            "level": 58
+          },
+          {
+            "id": 437,
+            "level": 58
+          },
+          {
+            "id": 823,
+            "level": 58
+          },
+          {
+            "id": 959,
+            "level": 59
+          }
+        ]
+      },
+      {
+        "name": "Elite Four #3 - Larry",
+        "team": [
+          {
+            "id": 357,
+            "level": 59
+          },
+          {
+            "id": 741,
+            "level": 59
+          },
+          {
+            "id": 334,
+            "level": 59
+          },
+          {
+            "id": 398,
+            "level": 59
+          },
+          {
+            "id": 973,
+            "level": 60
+          }
+        ]
+      },
+      {
+        "name": "Elite Four #4 - Hassel",
+        "team": [
+          {
+            "id": 715,
+            "level": 60
+          },
+          {
+            "id": 612,
+            "level": 60
+          },
+          {
+            "id": 691,
+            "level": 60
+          },
+          {
+            "id": 841,
+            "level": 60
+          },
+          {
+            "id": 998,
+            "level": 61
+          }
+        ]
+      },
+      {
+        "name": "Champion",
+        "team": [
+          {
+            "id": 956,
+            "level": 61
+          },
+          {
+            "id": 673,
+            "level": 61
+          },
+          {
+            "id": 976,
+            "level": 61
+          },
+          {
+            "id": 713,
+            "level": 61
+          },
+          {
+            "id": 983,
+            "level": 61
+          },
+          {
+            "id": 970,
+            "level": 62
+          }
+        ]
+      }
+    ]
+  }
+
 ];
 export default gyms;
