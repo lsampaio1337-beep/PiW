@@ -1776,6 +1776,35 @@ export const johtoRoutes = [
         "chance": 0.13333333333333333
       }
     ]
+  },
+  {
+    "name": "Trade With Friends Hub",
+    "spawns": [
+      {
+        "pokemonId": 65,
+        "minLevel": 91,
+        "maxLevel": 95,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 68,
+        "minLevel": 91,
+        "maxLevel": 95,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 76,
+        "minLevel": 91,
+        "maxLevel": 95,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 94,
+        "minLevel": 91,
+        "maxLevel": 95,
+        "chance": 0.25
+      }
+    ]
   }
 ];
 
