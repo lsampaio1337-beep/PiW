@@ -2717,7 +2717,7 @@ export const johtoUnlocks = [
     "challengeName": "Johto Extra Challenge 5",
     "areaId": "Ilex Forest 2",
     "unlocks": [
-      "Mythical and Legendaries Spot"
+      "Extra Final Challenge"
     ],
     "requirements": {
       "catchSpecies": [
@@ -2738,7 +2738,7 @@ export const johtoUnlocks = [
     "challengeName": "Extra Challenge (Roaming)",
     "areaId": "Extra Challenge (Roaming)",
     "unlocks": [
-      "Mythical and Legendaries Spot"
+      "Extra Final Challenge"
     ],
     "requirements": {
       "defeatMultipleSpecific": [
@@ -2929,7 +2929,7 @@ export const johtoUnlocks = [
     "challengeName": "Kanto Extra Challenge 6",
     "areaId": "Legendaries Nest",
     "unlocks": [
-      "Mythical and Legendaries Spot"
+      "Extra Final Challenge"
     ],
     "requirements": {
       "catchSpecies": [
@@ -2953,5 +2953,19 @@ export const johtoUnlocks = [
         "count": 2
       }
     ]
+  },
+  {
+    "challengeName": "Extra Final Challenge",
+    "areaId": "Extra Final Challenge",
+    "unlocks": [
+      "Mythical and Legendaries Spot"
+    ],
+    "requirements": {
+      "completeChallenges": [
+        "Johto Extra Challenge 5",
+        "Extra Challenge (Roaming)",
+        "Kanto Extra Challenge 6"
+      ]
+    }
   }
 ];

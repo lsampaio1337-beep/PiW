@@ -170,6 +170,32 @@ export function getChallengeData(unlock) {
         textParts.push(`Defeat Red${getStatusHtml(beatenRed)}`);
     }
 
+    if (req.completeChallenges) {
+        let completedIds = state.stats.completedChallengeIds || [];
+        for (let target of req.completeChallenges) {
+            // target could be either an areaId or a challengeName
+            let match = null;
+            if (typeof window !== 'undefined' && window.getCurrentUnlocks) {
+                match = window.getCurrentUnlocks().find(u => u.challengeName === target || u.areaId === target);
+            }
+            // fallback for finding the areaId manually to ensure it won't break
+            if (!match && state.config) {
+                let allUnlocks = [];
+                if (state.config.unlocks) allUnlocks = allUnlocks.concat(state.config.unlocks);
+                if (state.config.johtoUnlocks) allUnlocks = allUnlocks.concat(state.config.johtoUnlocks);
+                if (state.config.hoennUnlocks) allUnlocks = allUnlocks.concat(state.config.hoennUnlocks);
+                if (state.config.sinnohUnlocks) allUnlocks = allUnlocks.concat(state.config.sinnohUnlocks);
+                if (state.config.unovaUnlocks) allUnlocks = allUnlocks.concat(state.config.unovaUnlocks);
+                match = allUnlocks.find(u => u && (u.challengeName === target || u.areaId === target));
+            }
+
+            let checkId = match ? match.areaId : target;
+            let completed = completedIds.includes(checkId);
+            if (!completed) isMet = false;
+            textParts.push(`Complete ${target}${getStatusHtml(completed)}`);
+        }
+    }
+
     return { isMet, textParts };
 }
 
