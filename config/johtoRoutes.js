@@ -2390,7 +2390,7 @@ export const johtoUnlocks = [
     "challengeName": "Challenge 34",
     "areaId": "Route 46",
     "unlocks": [
-      "Indigo Plateau"
+      "Indigo Plateau (Johto)"
     ],
     "requirements": {
       "defeatSpecific": {
@@ -2407,7 +2407,7 @@ export const johtoUnlocks = [
   },
   {
     "challengeName": "Johto Final Challenge",
-    "areaId": "Indigo Plateau",
+    "areaId": "Indigo Plateau (Johto)",
     "unlocks": [
       "Viridian Forest"
     ],
