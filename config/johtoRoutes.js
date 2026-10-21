@@ -2962,9 +2962,9 @@ export const johtoUnlocks = [
     ],
     "requirements": {
       "completeChallenges": [
-        "Ilex Forest 2",
+        "Johto Extra Challenge 5",
         "Extra Challenge (Roaming)",
-        "Legendaries Nest"
+        "Kanto Extra Challenge 6"
       ]
     }
   }
