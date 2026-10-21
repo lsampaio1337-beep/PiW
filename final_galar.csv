@@ -1,0 +1,829 @@
+Progression Order,Route / Place,Pokemon ID Regional,Pokemon Name,Method,% of appearance
+1,Slumbering Weald,340,Whiscash,fishing,60.0
+1,Slumbering Weald,129,Magikarp,fishing,20.0
+1,Slumbering Weald,339,Barboach,fishing,20.0
+1,Slumbering Weald,819,Skwovet,walk,25.0
+1,Slumbering Weald,110,Weezing,walk,15.0
+1,Slumbering Weald,517,Munna,walk,12.5
+1,Slumbering Weald,821,Rookidee,walk,10.0
+1,Slumbering Weald,823,Corviknight,walk,10.0
+1,Slumbering Weald,163,Hoothoot,walk,7.5
+1,Slumbering Weald,826,Orbeetle,walk,7.5
+1,Slumbering Weald,824,Blipbug,walk,5.0
+1,Slumbering Weald,12,Butterfree,walk,2.5
+1,Slumbering Weald,618,Stunfisk,walk,2.5
+1,Slumbering Weald,736,Grubbin,walk,2.5
+2,Route 1,819,Skwovet,walk,29.03
+2,Route 1,821,Rookidee,walk,19.35
+2,Route 1,824,Blipbug,walk,19.35
+2,Route 1,10,Caterpie,walk,9.68
+2,Route 1,831,Wooloo,walk,9.68
+2,Route 1,736,Grubbin,walk,6.45
+2,Route 1,163,Hoothoot,walk,3.23
+2,Route 1,827,Nickit,walk,3.23
+3,Route 2,129,Magikarp,fishing,80.0
+3,Route 2,833,Chewtle,fishing,15.0
+3,Route 2,846,Arrokuda,fishing,5.0
+3,Route 2,846,Arrokuda,surfing,70.0
+3,Route 2,847,Barraskewda,surfing,28.0
+3,Route 2,130,Gyarados,surfing,2.0
+3,Route 2,824,Blipbug,walk,20.78
+3,Route 2,819,Skwovet,walk,19.74
+3,Route 2,821,Rookidee,walk,14.29
+3,Route 2,270,Lotad,walk,10.39
+3,Route 2,273,Seedot,walk,10.39
+3,Route 2,827,Nickit,walk,7.79
+3,Route 2,509,Purrloin,walk,5.19
+3,Route 2,833,Chewtle,walk,5.19
+3,Route 2,163,Hoothoot,walk,2.6
+3,Route 2,835,Yamper,walk,2.6
+3,Route 2,263,Zigzagoon,walk,1.04
+4,Rolling Fields,819,Skwovet,berry tree,80.0
+4,Rolling Fields,420,Cherubi,berry tree,20.0
+4,Rolling Fields,225,Delibird,walk,29.21
+4,Rolling Fields,220,Swinub,walk,26.97
+4,Rolling Fields,582,Vanillite,walk,16.85
+4,Rolling Fields,361,Snorunt,walk,13.48
+4,Rolling Fields,11,Metapod,walk,6.74
+4,Rolling Fields,236,Tyrogue,walk,3.37
+4,Rolling Fields,659,Bunnelby,walk,3.37
+5,Dappled Grove,819,Skwovet,berry tree,70.0
+5,Dappled Grove,420,Cherubi,berry tree,30.0
+5,Dappled Grove,225,Delibird,walk,35.82
+5,Dappled Grove,361,Snorunt,walk,23.88
+5,Dappled Grove,582,Vanillite,walk,17.91
+5,Dappled Grove,599,Klink,walk,11.94
+5,Dappled Grove,659,Bunnelby,walk,4.48
+5,Dappled Grove,271,Lombre,walk,2.99
+5,Dappled Grove,274,Nuzleaf,walk,2.99
+6,Watchtower Ruins,420,Cherubi,berry tree,50.0
+6,Watchtower Ruins,819,Skwovet,berry tree,50.0
+6,Watchtower Ruins,225,Delibird,walk,30.0
+6,Watchtower Ruins,459,Snover,walk,20.0
+6,Watchtower Ruins,361,Snorunt,walk,15.0
+6,Watchtower Ruins,92,Gastly,walk,12.5
+6,Watchtower Ruins,355,Duskull,walk,10.0
+6,Watchtower Ruins,509,Purrloin,walk,7.5
+6,Watchtower Ruins,425,Drifloon,walk,5.0
+7,East Lake Axewell,129,Magikarp,fishing,50.0
+7,East Lake Axewell,118,Goldeen,fishing,25.0
+7,East Lake Axewell,90,Shellder,fishing,20.0
+7,East Lake Axewell,746,Wishiwashi,fishing,5.0
+7,East Lake Axewell,582,Vanillite,surfing,75.0
+7,East Lake Axewell,118,Goldeen,surfing,15.0
+7,East Lake Axewell,90,Shellder,surfing,5.0
+7,East Lake Axewell,278,Wingull,surfing,5.0
+7,East Lake Axewell,361,Snorunt,walk,32.43
+7,East Lake Axewell,582,Vanillite,walk,24.32
+7,East Lake Axewell,459,Snover,walk,16.22
+7,East Lake Axewell,572,Minccino,walk,10.81
+7,East Lake Axewell,674,Pancham,walk,8.11
+7,East Lake Axewell,759,Stufful,walk,8.11
+8,West Lake Axewell,129,Magikarp,fishing,50.0
+8,West Lake Axewell,118,Goldeen,fishing,35.0
+8,West Lake Axewell,223,Remoraid,fishing,10.0
+8,West Lake Axewell,746,Wishiwashi,fishing,5.0
+8,West Lake Axewell,582,Vanillite,surfing,70.0
+8,West Lake Axewell,129,Magikarp,surfing,15.0
+8,West Lake Axewell,592,Frillish,surfing,10.0
+8,West Lake Axewell,118,Goldeen,surfing,5.0
+8,West Lake Axewell,582,Vanillite,walk,31.37
+8,West Lake Axewell,599,Klink,walk,25.49
+8,West Lake Axewell,225,Delibird,walk,23.53
+8,West Lake Axewell,535,Tympole,walk,7.84
+8,West Lake Axewell,659,Bunnelby,walk,7.84
+8,West Lake Axewell,98,Krabby,walk,3.92
+9,Axew's Eye,820,Greedent,berry tree,75.0
+9,Axew's Eye,420,Cherubi,berry tree,25.0
+9,Axew's Eye,129,Magikarp,fishing,50.0
+9,Axew's Eye,224,Octillery,fishing,25.0
+9,Axew's Eye,746,Wishiwashi,fishing,20.0
+9,Axew's Eye,130,Gyarados,fishing,5.0
+9,Axew's Eye,459,Snover,walk,29.03
+9,Axew's Eye,599,Klink,walk,25.81
+9,Axew's Eye,437,Bronzong,walk,16.13
+9,Axew's Eye,225,Delibird,walk,12.9
+9,Axew's Eye,660,Diggersby,walk,6.45
+9,Axew's Eye,760,Bewear,walk,6.45
+9,Axew's Eye,583,Vanillish,walk,3.23
+10,South Lake Miloch,129,Magikarp,fishing,50.0
+10,South Lake Miloch,223,Remoraid,fishing,40.0
+10,South Lake Miloch,339,Barboach,fishing,9.0
+10,South Lake Miloch,771,Pyukumuku,fishing,1.0
+10,South Lake Miloch,582,Vanillite,surfing,60.0
+10,South Lake Miloch,425,Drifloon,surfing,25.0
+10,South Lake Miloch,118,Goldeen,surfing,10.0
+10,South Lake Miloch,339,Barboach,surfing,5.0
+10,South Lake Miloch,582,Vanillite,walk,38.1
+10,South Lake Miloch,599,Klink,walk,20.63
+10,South Lake Miloch,459,Snover,walk,19.05
+10,South Lake Miloch,341,Corphish,walk,12.7
+10,South Lake Miloch,66,Machop,walk,6.35
+10,South Lake Miloch,225,Delibird,walk,3.17
+11,Route 3,819,Skwovet,berry tree,80.0
+11,Route 3,420,Cherubi,berry tree,20.0
+11,Route 3,263,Zigzagoon,walk,17.67
+11,Route 3,821,Rookidee,walk,16.28
+11,Route 3,829,Gossifleur,walk,13.95
+11,Route 3,66,Machop,walk,9.3
+11,Route 3,674,Pancham,walk,9.3
+11,Route 3,37,Vulpix,walk,6.98
+11,Route 3,58,Growlithe,walk,6.98
+11,Route 3,749,Mudbray,walk,6.98
+11,Route 3,434,Stunky,walk,4.65
+11,Route 3,599,Klink,walk,4.19
+11,Route 3,568,Trubbish,walk,2.33
+11,Route 3,236,Tyrogue,walk,0.93
+11,Route 3,850,Sizzlipede,walk,0.47
+12,Galar Mine,837,Rolycoly,walk,32.5
+12,Galar Mine,524,Roggenrola,walk,16.25
+12,Galar Mine,532,Timburr,walk,16.25
+12,Galar Mine,50,Diglett,walk,12.5
+12,Galar Mine,527,Woobat,walk,12.5
+12,Galar Mine,529,Drilbur,walk,10.0
+13,Route 4,819,Skwovet,berry tree,100.0
+13,Route 4,129,Magikarp,fishing,70.0
+13,Route 4,833,Chewtle,fishing,20.0
+13,Route 4,118,Goldeen,fishing,10.0
+13,Route 4,309,Electrike,walk,19.32
+13,Route 4,52,Meowth,walk,18.68
+13,Route 4,831,Wooloo,walk,16.1
+13,Route 4,835,Yamper,walk,12.88
+13,Route 4,868,Milcery,walk,12.88
+13,Route 4,595,Joltik,walk,6.44
+13,Route 4,710,Pumpkaboo,walk,3.38
+13,Route 4,742,Cutiefly,walk,3.22
+13,Route 4,406,Budew,walk,2.58
+13,Route 4,25,Pikachu,walk,1.93
+13,Route 4,133,Eevee,walk,1.93
+13,Route 4,597,Ferroseed,walk,0.64
+14,Route 5,819,Skwovet,berry tree,100.0
+14,Route 5,129,Magikarp,fishing,70.0
+14,Route 5,833,Chewtle,fishing,20.0
+14,Route 5,118,Goldeen,fishing,10.0
+14,Route 5,759,Stufful,walk,15.73
+14,Route 5,825,Dottler,walk,11.69
+14,Route 5,682,Spritzee,walk,9.89
+14,Route 5,684,Swirlix,walk,9.89
+14,Route 5,271,Lombre,walk,8.99
+14,Route 5,274,Nuzleaf,walk,8.99
+14,Route 5,677,Espurr,walk,8.99
+14,Route 5,572,Minccino,walk,7.87
+14,Route 5,202,Wobbuffet,walk,4.49
+14,Route 5,840,Applin,walk,4.49
+14,Route 5,83,Farfetch'd,walk,2.25
+14,Route 5,290,Nincada,walk,2.25
+14,Route 5,425,Drifloon,walk,2.25
+14,Route 5,751,Dewpider,walk,2.25
+15,Hulbury,846,Arrokuda,fishing,50.0
+15,Hulbury,170,Chinchou,fishing,20.0
+15,Hulbury,833,Chewtle,fishing,15.0
+15,Hulbury,550,Basculin,fishing,10.0
+15,Hulbury,746,Wishiwashi,fishing,5.0
+16,Galar Mine No. 2,339,Barboach,fishing,55.0
+16,Galar Mine No. 2,833,Chewtle,fishing,30.0
+16,Galar Mine No. 2,341,Corphish,fishing,15.0
+16,Galar Mine No. 2,767,Wimpod,walk,19.15
+16,Galar Mine No. 2,422,Shellos,walk,14.89
+16,Galar Mine No. 2,453,Croagunk,walk,12.77
+16,Galar Mine No. 2,559,Scraggy,walk,12.77
+16,Galar Mine No. 2,714,Noibat,walk,12.77
+16,Galar Mine No. 2,688,Binacle,walk,10.64
+16,Galar Mine No. 2,213,Shuckle,walk,6.38
+16,Galar Mine No. 2,833,Chewtle,walk,6.38
+16,Galar Mine No. 2,618,Stunfisk,walk,4.26
+17,Motostoke,129,Magikarp,fishing,50.0
+17,Motostoke,833,Chewtle,fishing,40.0
+17,Motostoke,339,Barboach,fishing,10.0
+18,Motostoke Outskirts,164,Noctowl,walk,15.46
+18,Motostoke Outskirts,453,Croagunk,walk,14.43
+18,Motostoke Outskirts,559,Scraggy,walk,14.43
+18,Motostoke Outskirts,185,Sudowoodo,walk,12.37
+18,Motostoke Outskirts,524,Roggenrola,walk,12.37
+18,Motostoke Outskirts,624,Pawniard,walk,8.25
+18,Motostoke Outskirts,109,Koffing,walk,6.19
+18,Motostoke Outskirts,833,Chewtle,walk,4.12
+18,Motostoke Outskirts,856,Hatenna,walk,4.12
+18,Motostoke Outskirts,538,Throh,walk,2.06
+18,Motostoke Outskirts,539,Sawk,walk,2.06
+18,Motostoke Outskirts,757,Salandit,walk,2.06
+18,Motostoke Outskirts,859,Impidimp,walk,2.06
+19,North Lake Miloch,420,Cherubi,berry tree,50.0
+19,North Lake Miloch,819,Skwovet,berry tree,50.0
+19,North Lake Miloch,129,Magikarp,fishing,58.0
+19,North Lake Miloch,339,Barboach,fishing,40.0
+19,North Lake Miloch,550,Basculin,fishing,2.0
+19,North Lake Miloch,582,Vanillite,surfing,60.0
+19,North Lake Miloch,425,Drifloon,surfing,25.0
+19,North Lake Miloch,592,Frillish,surfing,10.0
+19,North Lake Miloch,339,Barboach,surfing,5.0
+19,North Lake Miloch,582,Vanillite,walk,31.58
+19,North Lake Miloch,225,Delibird,walk,21.05
+19,North Lake Miloch,459,Snover,walk,15.79
+19,North Lake Miloch,599,Klink,walk,13.16
+19,North Lake Miloch,434,Stunky,walk,10.53
+19,North Lake Miloch,361,Snorunt,walk,5.26
+19,North Lake Miloch,509,Purrloin,walk,2.63
+20,Motostoke Riverbank,820,Greedent,berry tree,50.0
+20,Motostoke Riverbank,819,Skwovet,berry tree,35.0
+20,Motostoke Riverbank,420,Cherubi,berry tree,15.0
+20,Motostoke Riverbank,846,Arrokuda,fishing,50.0
+20,Motostoke Riverbank,550,Basculin,fishing,35.0
+20,Motostoke Riverbank,847,Barraskewda,fishing,10.0
+20,Motostoke Riverbank,747,Mareanie,fishing,5.0
+20,Motostoke Riverbank,582,Vanillite,surfing,65.0
+20,Motostoke Riverbank,846,Arrokuda,surfing,20.0
+20,Motostoke Riverbank,550,Basculin,surfing,10.0
+20,Motostoke Riverbank,458,Mantyke,surfing,5.0
+20,Motostoke Riverbank,215,Sneasel,walk,25.88
+20,Motostoke Riverbank,582,Vanillite,walk,17.65
+20,Motostoke Riverbank,509,Purrloin,walk,14.12
+20,Motostoke Riverbank,822,Corvisquire,walk,14.12
+20,Motostoke Riverbank,624,Pawniard,walk,10.59
+20,Motostoke Riverbank,597,Ferroseed,walk,7.06
+20,Motostoke Riverbank,742,Cutiefly,walk,7.06
+20,Motostoke Riverbank,561,Sigilyph,walk,3.53
+21,Bridge Field,820,Greedent,berry tree,75.0
+21,Bridge Field,420,Cherubi,berry tree,25.0
+21,Bridge Field,129,Magikarp,fishing,30.0
+21,Bridge Field,834,Drednaw,fishing,30.0
+21,Bridge Field,171,Lanturn,fishing,25.0
+21,Bridge Field,211,Qwilfish,fishing,10.0
+21,Bridge Field,130,Gyarados,fishing,5.0
+21,Bridge Field,582,Vanillite,surfing,55.0
+21,Bridge Field,211,Qwilfish,surfing,20.0
+21,Bridge Field,686,Inkay,surfing,15.0
+21,Bridge Field,118,Goldeen,surfing,10.0
+21,Bridge Field,215,Sneasel,walk,24.14
+21,Bridge Field,613,Cubchoo,walk,20.69
+21,Bridge Field,686,Inkay,walk,13.79
+21,Bridge Field,263,Zigzagoon,walk,6.9
+21,Bridge Field,303,Mawile,walk,6.9
+21,Bridge Field,536,Palpitoad,walk,6.9
+21,Bridge Field,582,Vanillite,walk,6.9
+21,Bridge Field,878,Cufant,walk,6.9
+21,Bridge Field,597,Ferroseed,walk,3.45
+21,Bridge Field,714,Noibat,walk,3.45
+22,Stony Wilderness,215,Sneasel,walk,25.42
+22,Stony Wilderness,624,Pawniard,walk,20.34
+22,Stony Wilderness,613,Cubchoo,walk,16.95
+22,Stony Wilderness,263,Zigzagoon,walk,6.78
+22,Stony Wilderness,343,Baltoy,walk,6.78
+22,Stony Wilderness,436,Bronzor,walk,6.78
+22,Stony Wilderness,622,Golett,walk,6.78
+22,Stony Wilderness,859,Impidimp,walk,6.78
+22,Stony Wilderness,597,Ferroseed,walk,3.39
+23,Dusty Bowl,847,Barraskewda,fishing,50.0
+23,Dusty Bowl,171,Lanturn,fishing,35.0
+23,Dusty Bowl,211,Qwilfish,fishing,10.0
+23,Dusty Bowl,130,Gyarados,fishing,5.0
+23,Dusty Bowl,459,Snover,walk,21.28
+23,Dusty Bowl,437,Bronzong,walk,17.02
+23,Dusty Bowl,220,Swinub,walk,14.89
+23,Dusty Bowl,303,Mawile,walk,14.89
+23,Dusty Bowl,600,Klang,walk,12.77
+23,Dusty Bowl,857,Hattrem,walk,8.51
+23,Dusty Bowl,613,Cubchoo,walk,6.38
+23,Dusty Bowl,598,Ferrothorn,walk,4.26
+24,Giant's Mirror,820,Greedent,berry tree,75.0
+24,Giant's Mirror,420,Cherubi,berry tree,25.0
+24,Giant's Mirror,834,Drednaw,fishing,50.0
+24,Giant's Mirror,747,Mareanie,fishing,35.0
+24,Giant's Mirror,170,Chinchou,fishing,10.0
+24,Giant's Mirror,130,Gyarados,fishing,5.0
+24,Giant's Mirror,624,Pawniard,walk,27.78
+24,Giant's Mirror,582,Vanillite,walk,19.44
+24,Giant's Mirror,220,Swinub,walk,16.67
+24,Giant's Mirror,459,Snover,walk,11.11
+24,Giant's Mirror,613,Cubchoo,walk,11.11
+24,Giant's Mirror,66,Machop,walk,5.56
+24,Giant's Mirror,109,Koffing,walk,5.56
+24,Giant's Mirror,177,Natu,walk,2.78
+25,Hammerlocke Hills,820,Greedent,berry tree,75.0
+25,Hammerlocke Hills,420,Cherubi,berry tree,25.0
+25,Hammerlocke Hills,215,Sneasel,walk,25.85
+25,Hammerlocke Hills,361,Snorunt,walk,23.91
+25,Hammerlocke Hills,582,Vanillite,walk,16.16
+25,Hammerlocke Hills,679,Honedge,walk,9.69
+25,Hammerlocke Hills,202,Wobbuffet,walk,6.46
+25,Hammerlocke Hills,599,Klink,walk,6.46
+25,Hammerlocke Hills,686,Inkay,walk,6.46
+25,Hammerlocke Hills,67,Machoke,walk,3.23
+25,Hammerlocke Hills,710,Pumpkaboo,walk,1.78
+26,Giant's Cap,820,Greedent,berry tree,75.0
+26,Giant's Cap,420,Cherubi,berry tree,25.0
+26,Giant's Cap,118,Goldeen,fishing,50.0
+26,Giant's Cap,98,Krabby,fishing,35.0
+26,Giant's Cap,341,Corphish,fishing,10.0
+26,Giant's Cap,130,Gyarados,fishing,5.0
+26,Giant's Cap,215,Sneasel,walk,20.0
+26,Giant's Cap,361,Snorunt,walk,20.0
+26,Giant's Cap,582,Vanillite,walk,17.5
+26,Giant's Cap,624,Pawniard,walk,15.0
+26,Giant's Cap,225,Delibird,walk,10.0
+26,Giant's Cap,264,Linoone,walk,5.0
+26,Giant's Cap,572,Minccino,walk,5.0
+26,Giant's Cap,825,Dottler,walk,5.0
+26,Giant's Cap,447,Riolu,walk,2.5
+27,Giant's Seat,820,Greedent,berry tree,70.0
+27,Giant's Seat,420,Cherubi,berry tree,30.0
+27,Giant's Seat,90,Shellder,fishing,60.0
+27,Giant's Seat,771,Pyukumuku,fishing,25.0
+27,Giant's Seat,130,Gyarados,fishing,10.0
+27,Giant's Seat,91,Cloyster,fishing,5.0
+27,Giant's Seat,459,Snover,walk,39.34
+27,Giant's Seat,225,Delibird,walk,18.03
+27,Giant's Seat,361,Snorunt,walk,16.39
+27,Giant's Seat,436,Bronzor,walk,13.11
+27,Giant's Seat,220,Swinub,walk,9.84
+27,Giant's Seat,760,Bewear,walk,3.28
+28,Lake of Outrage,820,Greedent,berry tree,95.0
+28,Lake of Outrage,420,Cherubi,berry tree,5.0
+28,Lake of Outrage,847,Barraskewda,fishing,50.0
+28,Lake of Outrage,171,Lanturn,fishing,35.0
+28,Lake of Outrage,211,Qwilfish,fishing,10.0
+28,Lake of Outrage,130,Gyarados,fishing,5.0
+28,Lake of Outrage,582,Vanillite,surfing,65.0
+28,Lake of Outrage,458,Mantyke,surfing,20.0
+28,Lake of Outrage,226,Mantine,surfing,10.0
+28,Lake of Outrage,847,Barraskewda,surfing,5.0
+28,Lake of Outrage,863,Perrserker,walk,19.75
+28,Lake of Outrage,601,Klinklang,walk,14.81
+28,Lake of Outrage,625,Bisharp,walk,12.35
+28,Lake of Outrage,680,Doublade,walk,12.35
+28,Lake of Outrage,584,Vanilluxe,walk,9.88
+28,Lake of Outrage,823,Corviknight,walk,8.64
+28,Lake of Outrage,623,Golurk,walk,6.42
+28,Lake of Outrage,777,Togedemaru,walk,6.42
+28,Lake of Outrage,132,Ditto,walk,4.94
+28,Lake of Outrage,875,Eiscue,walk,2.47
+28,Lake of Outrage,879,Copperajah,walk,0.99
+28,Lake of Outrage,884,Duraludon,walk,0.99
+29,Route 6,820,Greedent,berry tree,100.0
+29,Route 6,129,Magikarp,fishing,70.0
+29,Route 6,834,Drednaw,fishing,20.0
+29,Route 6,118,Goldeen,fishing,10.0
+29,Route 6,562,Yamask,walk,17.5
+29,Route 6,843,Silicobra,walk,15.0
+29,Route 6,694,Helioptile,walk,14.5
+29,Route 6,51,Dugtrio,walk,10.0
+29,Route 6,355,Duskull,walk,9.0
+29,Route 6,631,Heatmor,walk,6.25
+29,Route 6,632,Durant,walk,6.25
+29,Route 6,449,Hippopotas,walk,5.0
+29,Route 6,451,Skorupi,walk,5.0
+29,Route 6,556,Maractus,walk,5.0
+29,Route 6,324,Torkoal,walk,2.5
+29,Route 6,328,Trapinch,walk,1.5
+29,Route 6,610,Axew,walk,1.5
+29,Route 6,701,Hawlucha,walk,1.0
+30,Route 7,820,Greedent,berry tree,100.0
+30,Route 7,863,Perrserker,walk,16.0
+30,Route 7,848,Toxel,walk,13.33
+30,Route 7,596,Galvantula,walk,10.67
+30,Route 7,823,Corviknight,walk,10.67
+30,Route 7,828,Thievul,walk,10.67
+30,Route 7,510,Liepard,walk,6.67
+30,Route 7,588,Karrablast,walk,6.67
+30,Route 7,616,Shelmet,walk,6.67
+30,Route 7,537,Seismitoad,walk,5.33
+30,Route 7,678,Meowstic,walk,5.33
+30,Route 7,686,Inkay,walk,5.33
+30,Route 7,877,Morpeko,walk,2.67
+31,Route 8,844,Sandaconda,walk,13.95
+31,Route 8,622,Golett,walk,11.63
+31,Route 8,111,Rhyhorn,walk,9.3
+31,Route 8,624,Pawniard,walk,9.3
+31,Route 8,525,Boldore,walk,8.14
+31,Route 8,533,Gurdurr,walk,8.14
+31,Route 8,356,Dusclops,walk,6.98
+31,Route 8,93,Haunter,walk,4.65
+31,Route 8,437,Bronzong,walk,4.65
+31,Route 8,627,Rufflet,walk,4.65
+31,Route 8,629,Vullaby,walk,4.65
+31,Route 8,450,Hippowdon,walk,3.72
+31,Route 8,337,Lunatone,walk,2.33
+31,Route 8,338,Solrock,walk,2.33
+31,Route 8,452,Drapion,walk,2.33
+31,Route 8,777,Togedemaru,walk,2.33
+31,Route 8,870,Falinks,walk,0.93
+32,Route 9,224,Octillery,fishing,60.0
+32,Route 9,746,Wishiwashi,fishing,30.0
+32,Route 9,771,Pyukumuku,fishing,10.0
+32,Route 9,279,Pelipper,surfing,40.0
+32,Route 9,211,Qwilfish,surfing,30.0
+32,Route 9,458,Mantyke,surfing,25.0
+32,Route 9,593,Jellicent,surfing,5.0
+32,Route 9,279,Pelipper,walk,20.0
+32,Route 9,845,Cramorant,walk,20.0
+32,Route 9,224,Octillery,walk,15.0
+32,Route 9,99,Kingler,walk,12.5
+32,Route 9,593,Jellicent,walk,10.0
+32,Route 9,747,Mareanie,walk,10.0
+32,Route 9,423,Gastrodon,walk,7.5
+32,Route 9,771,Pyukumuku,walk,2.5
+32,Route 9,871,Pincurchin,walk,2.5
+33,Glimwood Tangle,860,Morgrem,walk,16.15
+33,Glimwood Tangle,756,Shiinotic,walk,14.8
+33,Glimwood Tangle,857,Hattrem,walk,12.11
+33,Glimwood Tangle,77,Ponyta,walk,8.08
+33,Glimwood Tangle,682,Spritzee,walk,8.08
+33,Glimwood Tangle,684,Swirlix,walk,8.08
+33,Glimwood Tangle,708,Phantump,walk,8.08
+33,Glimwood Tangle,854,Sinistea,walk,8.08
+33,Glimwood Tangle,765,Oranguru,walk,7.27
+33,Glimwood Tangle,766,Passimian,walk,5.25
+33,Glimwood Tangle,876,Indeedee,walk,4.04
+34,Route 10,122,Mr. Mime,walk,19.8
+34,Route 10,459,Snover,walk,14.85
+34,Route 10,583,Vanillish,walk,14.85
+34,Route 10,460,Abomasnow,walk,13.86
+34,Route 10,614,Beartic,walk,12.38
+34,Route 10,613,Cubchoo,walk,7.43
+34,Route 10,215,Sneasel,walk,6.93
+34,Route 10,872,Snom,walk,4.95
+34,Route 10,554,Darumaka,walk,2.48
+34,Route 10,874,Stonjourner,walk,0.99
+34,Route 10,875,Eiscue,walk,0.99
+34,Route 10,884,Duraludon,walk,0.5
+35,Fields of Honor,819,Skwovet,berry tree,70.0
+35,Fields of Honor,840,Applin,berry tree,30.0
+35,Fields of Honor,129,Magikarp,fishing,50.0
+35,Fields of Honor,223,Remoraid,fishing,40.0
+35,Fields of Honor,224,Octillery,fishing,10.0
+35,Fields of Honor,72,Tentacool,surfing,35.0
+35,Fields of Honor,278,Wingull,surfing,35.0
+35,Fields of Honor,458,Mantyke,surfing,30.0
+35,Fields of Honor,427,Buneary,walk,34.13
+35,Fields of Honor,39,Jigglypuff,walk,24.6
+35,Fields of Honor,824,Blipbug,walk,23.81
+35,Fields of Honor,440,Happiny,walk,7.94
+35,Fields of Honor,63,Abra,walk,3.97
+35,Fields of Honor,707,Klefki,walk,3.97
+35,Fields of Honor,113,Chansey,walk,1.59
+36,Soothing Wetlands,819,Skwovet,berry tree,70.0
+36,Soothing Wetlands,840,Applin,berry tree,30.0
+36,Soothing Wetlands,129,Magikarp,fishing,50.0
+36,Soothing Wetlands,339,Barboach,fishing,40.0
+36,Soothing Wetlands,340,Whiscash,fishing,10.0
+36,Soothing Wetlands,451,Skorupi,walk,32.09
+36,Soothing Wetlands,616,Shelmet,walk,22.39
+36,Soothing Wetlands,206,Dunsparce,walk,17.16
+36,Soothing Wetlands,194,Wooper,walk,11.94
+36,Soothing Wetlands,440,Happiny,walk,7.46
+36,Soothing Wetlands,108,Lickitung,walk,3.73
+36,Soothing Wetlands,626,Bouffalant,walk,3.73
+36,Soothing Wetlands,113,Chansey,walk,1.49
+37,Brawlers' Cave,60,Poliwag,surfing,50.0
+37,Brawlers' Cave,339,Barboach,surfing,50.0
+37,Brawlers' Cave,293,Whismur,walk,56.0
+37,Brawlers' Cave,54,Psyduck,walk,16.0
+37,Brawlers' Cave,527,Woobat,walk,16.0
+37,Brawlers' Cave,108,Lickitung,walk,5.0
+37,Brawlers' Cave,298,Azurill,walk,5.0
+37,Brawlers' Cave,113,Chansey,walk,2.0
+38,Challenge Beach,819,Skwovet,berry tree,70.0
+38,Challenge Beach,840,Applin,berry tree,30.0
+38,Challenge Beach,129,Magikarp,fishing,50.0
+38,Challenge Beach,746,Wishiwashi,fishing,40.0
+38,Challenge Beach,781,Dhelmise,fishing,10.0
+38,Challenge Beach,81,Magnemite,walk,28.0
+38,Challenge Beach,54,Psyduck,walk,16.0
+38,Challenge Beach,39,Jigglypuff,walk,15.0
+38,Challenge Beach,427,Buneary,walk,15.0
+38,Challenge Beach,824,Blipbug,walk,15.0
+38,Challenge Beach,440,Happiny,walk,5.0
+38,Challenge Beach,702,Dedenne,walk,2.5
+38,Challenge Beach,877,Morpeko,walk,2.5
+38,Challenge Beach,113,Chansey,walk,1.0
+39,Challenge Road,524,Roggenrola,walk,34.8
+39,Challenge Road,824,Blipbug,walk,22.06
+39,Challenge Road,619,Mienfoo,walk,15.2
+39,Challenge Road,757,Salandit,walk,11.76
+39,Challenge Road,440,Happiny,walk,7.35
+39,Challenge Road,227,Skarmory,walk,3.68
+39,Challenge Road,744,Rockruff,walk,3.68
+39,Challenge Road,113,Chansey,walk,1.47
+40,Courageous Cavern,129,Magikarp,fishing,50.0
+40,Courageous Cavern,90,Shellder,fishing,40.0
+40,Courageous Cavern,91,Cloyster,fishing,10.0
+40,Courageous Cavern,72,Tentacool,surfing,60.0
+40,Courageous Cavern,852,Clobbopus,surfing,40.0
+40,Courageous Cavern,833,Chewtle,walk,63.93
+40,Courageous Cavern,527,Woobat,walk,13.11
+40,Courageous Cavern,767,Wimpod,walk,13.11
+40,Courageous Cavern,557,Dwebble,walk,4.1
+40,Courageous Cavern,871,Pincurchin,walk,4.1
+40,Courageous Cavern,113,Chansey,walk,1.64
+41,Loop Lagoon,819,Skwovet,berry tree,70.0
+41,Loop Lagoon,840,Applin,berry tree,30.0
+41,Loop Lagoon,129,Magikarp,fishing,50.0
+41,Loop Lagoon,90,Shellder,fishing,40.0
+41,Loop Lagoon,91,Cloyster,fishing,10.0
+41,Loop Lagoon,72,Tentacool,surfing,45.0
+41,Loop Lagoon,278,Wingull,surfing,30.0
+41,Loop Lagoon,852,Clobbopus,surfing,25.0
+41,Loop Lagoon,852,Clobbopus,walk,32.09
+41,Loop Lagoon,824,Blipbug,walk,22.39
+41,Loop Lagoon,278,Wingull,walk,17.16
+41,Loop Lagoon,747,Mareanie,walk,11.94
+41,Loop Lagoon,440,Happiny,walk,7.46
+41,Loop Lagoon,557,Dwebble,walk,3.73
+41,Loop Lagoon,871,Pincurchin,walk,3.73
+41,Loop Lagoon,113,Chansey,walk,1.49
+42,Training Lowlands,819,Skwovet,berry tree,70.0
+42,Training Lowlands,840,Applin,berry tree,30.0
+42,Training Lowlands,129,Magikarp,fishing,50.0
+42,Training Lowlands,318,Carvanha,fishing,40.0
+42,Training Lowlands,319,Sharpedo,fishing,10.0
+42,Training Lowlands,341,Corphish,surfing,45.0
+42,Training Lowlands,846,Arrokuda,surfing,45.0
+42,Training Lowlands,845,Cramorant,surfing,10.0
+42,Training Lowlands,506,Lillipup,walk,39.18
+42,Training Lowlands,824,Blipbug,walk,20.5
+42,Training Lowlands,128,Tauros,walk,10.93
+42,Training Lowlands,241,Miltank,walk,10.93
+42,Training Lowlands,440,Happiny,walk,6.83
+42,Training Lowlands,123,Scyther,walk,3.42
+42,Training Lowlands,127,Pinsir,walk,3.42
+42,Training Lowlands,214,Heracross,walk,3.42
+42,Training Lowlands,113,Chansey,walk,1.37
+43,Warm-Up Tunnel,27,Sandshrew,walk,56.0
+43,Warm-Up Tunnel,104,Cubone,walk,32.0
+43,Warm-Up Tunnel,115,Kangaskhan,walk,5.0
+43,Warm-Up Tunnel,324,Torkoal,walk,5.0
+43,Warm-Up Tunnel,113,Chansey,walk,2.0
+44,Potbottom Desert,551,Sandile,walk,53.33
+44,Potbottom Desert,111,Rhyhorn,walk,30.48
+44,Potbottom Desert,324,Torkoal,walk,4.76
+44,Potbottom Desert,627,Rufflet,walk,4.76
+44,Potbottom Desert,629,Vullaby,walk,4.76
+44,Potbottom Desert,113,Chansey,walk,1.9
+45,Workout Sea,819,Skwovet,berry tree,70.0
+45,Workout Sea,840,Applin,berry tree,30.0
+45,Workout Sea,129,Magikarp,fishing,50.0
+45,Workout Sea,223,Remoraid,fishing,40.0
+45,Workout Sea,224,Octillery,fishing,10.0
+45,Workout Sea,458,Mantyke,surfing,33.02
+45,Workout Sea,278,Wingull,surfing,28.3
+45,Workout Sea,72,Tentacool,surfing,26.42
+45,Workout Sea,690,Skrelp,surfing,4.72
+45,Workout Sea,692,Clauncher,surfing,4.72
+45,Workout Sea,130,Gyarados,surfing,0.94
+45,Workout Sea,691,Dragalge,surfing,0.94
+45,Workout Sea,693,Clawitzer,surfing,0.94
+45,Workout Sea,132,Ditto,walk,46.28
+45,Workout Sea,824,Blipbug,walk,24.79
+45,Workout Sea,102,Exeggcute,walk,19.01
+45,Workout Sea,440,Happiny,walk,8.26
+45,Workout Sea,113,Chansey,walk,1.65
+46,Stepping-Stone Sea,819,Skwovet,berry tree,54.55
+46,Stepping-Stone Sea,840,Applin,berry tree,27.27
+46,Stepping-Stone Sea,841,Flapple,berry tree,9.09
+46,Stepping-Stone Sea,842,Appletun,berry tree,9.09
+46,Stepping-Stone Sea,129,Magikarp,fishing,60.0
+46,Stepping-Stone Sea,746,Wishiwashi,fishing,40.0
+46,Stepping-Stone Sea,278,Wingull,surfing,28.3
+46,Stepping-Stone Sea,72,Tentacool,surfing,26.42
+46,Stepping-Stone Sea,592,Frillish,surfing,18.87
+46,Stepping-Stone Sea,458,Mantyke,surfing,14.15
+46,Stepping-Stone Sea,690,Skrelp,surfing,4.72
+46,Stepping-Stone Sea,692,Clauncher,surfing,4.72
+46,Stepping-Stone Sea,130,Gyarados,surfing,0.94
+46,Stepping-Stone Sea,691,Dragalge,surfing,0.94
+46,Stepping-Stone Sea,693,Clawitzer,surfing,0.94
+46,Stepping-Stone Sea,278,Wingull,walk,46.33
+46,Stepping-Stone Sea,819,Skwovet,walk,16.95
+46,Stepping-Stone Sea,824,Blipbug,walk,16.95
+46,Stepping-Stone Sea,102,Exeggcute,walk,12.99
+46,Stepping-Stone Sea,440,Happiny,walk,5.65
+46,Stepping-Stone Sea,113,Chansey,walk,1.13
+47,Insular Sea,819,Skwovet,berry tree,70.0
+47,Insular Sea,840,Applin,berry tree,30.0
+47,Insular Sea,129,Magikarp,fishing,60.0
+47,Insular Sea,746,Wishiwashi,fishing,40.0
+47,Insular Sea,278,Wingull,surfing,28.3
+47,Insular Sea,72,Tentacool,surfing,26.42
+47,Insular Sea,116,Horsea,surfing,18.87
+47,Insular Sea,458,Mantyke,surfing,14.15
+47,Insular Sea,690,Skrelp,surfing,4.72
+47,Insular Sea,692,Clauncher,surfing,4.72
+47,Insular Sea,130,Gyarados,surfing,0.94
+47,Insular Sea,691,Dragalge,surfing,0.94
+47,Insular Sea,693,Clawitzer,surfing,0.94
+47,Insular Sea,102,Exeggcute,walk,30.0
+47,Insular Sea,278,Wingull,walk,30.0
+47,Insular Sea,824,Blipbug,walk,30.0
+47,Insular Sea,440,Happiny,walk,10.0
+48,Honeycalm Sea,129,Magikarp,fishing,60.0
+48,Honeycalm Sea,746,Wishiwashi,fishing,40.0
+48,Honeycalm Sea,278,Wingull,surfing,28.3
+48,Honeycalm Sea,72,Tentacool,surfing,26.42
+48,Honeycalm Sea,320,Wailmer,surfing,18.87
+48,Honeycalm Sea,458,Mantyke,surfing,14.15
+48,Honeycalm Sea,690,Skrelp,surfing,4.72
+48,Honeycalm Sea,692,Clauncher,surfing,4.72
+48,Honeycalm Sea,130,Gyarados,surfing,0.94
+48,Honeycalm Sea,691,Dragalge,surfing,0.94
+48,Honeycalm Sea,693,Clawitzer,surfing,0.94
+48,Honeycalm Sea,72,Tentacool,walk,50.0
+48,Honeycalm Sea,319,Sharpedo,walk,50.0
+49,Honeycalm Island,129,Magikarp,fishing,60.0
+49,Honeycalm Island,746,Wishiwashi,fishing,40.0
+49,Honeycalm Island,278,Wingull,surfing,28.3
+49,Honeycalm Island,72,Tentacool,surfing,26.42
+49,Honeycalm Island,320,Wailmer,surfing,18.87
+49,Honeycalm Island,458,Mantyke,surfing,14.15
+49,Honeycalm Island,690,Skrelp,surfing,4.72
+49,Honeycalm Island,692,Clauncher,surfing,4.72
+49,Honeycalm Island,130,Gyarados,surfing,0.94
+49,Honeycalm Island,691,Dragalge,surfing,0.94
+49,Honeycalm Island,693,Clawitzer,surfing,0.94
+49,Honeycalm Island,415,Combee,walk,46.28
+49,Honeycalm Island,824,Blipbug,walk,24.79
+49,Honeycalm Island,548,Petilil,walk,19.01
+49,Honeycalm Island,440,Happiny,walk,8.26
+49,Honeycalm Island,113,Chansey,walk,1.65
+50,Forest of Focus,819,Skwovet,berry tree,60.0
+50,Forest of Focus,840,Applin,berry tree,30.0
+50,Forest of Focus,587,Emolga,berry tree,10.0
+50,Forest of Focus,118,Goldeen,fishing,40.0
+50,Forest of Focus,129,Magikarp,fishing,40.0
+50,Forest of Focus,846,Arrokuda,fishing,20.0
+50,Forest of Focus,341,Corphish,surfing,45.0
+50,Forest of Focus,846,Arrokuda,surfing,45.0
+50,Forest of Focus,845,Cramorant,surfing,10.0
+50,Forest of Focus,543,Venipede,walk,30.94
+50,Forest of Focus,588,Karrablast,walk,21.58
+50,Forest of Focus,590,Foongus,walk,16.55
+50,Forest of Focus,114,Tangela,walk,11.51
+50,Forest of Focus,440,Happiny,walk,7.19
+50,Forest of Focus,25,Pikachu,walk,3.6
+50,Forest of Focus,765,Oranguru,walk,3.6
+50,Forest of Focus,766,Passimian,walk,3.6
+50,Forest of Focus,113,Chansey,walk,1.44
+51,Slippery Slope,819,Skwovet,berry tree,70.0
+51,Slippery Slope,820,Greedent,berry tree,30.0
+51,Slippery Slope,221,Piloswine,walk,16.81
+51,Slippery Slope,872,Snom,walk,15.94
+51,Slippery Slope,220,Swinub,walk,14.49
+51,Slippery Slope,238,Smoochum,walk,14.49
+51,Slippery Slope,439,Mime Jr.,walk,14.49
+51,Slippery Slope,615,Cryogonal,walk,11.59
+51,Slippery Slope,124,Jynx,walk,5.8
+51,Slippery Slope,698,Amaura,walk,5.8
+51,Slippery Slope,531,Audino,walk,0.58
+52,Frostpoint Field,819,Skwovet,berry tree,70.0
+52,Frostpoint Field,820,Greedent,berry tree,30.0
+52,Frostpoint Field,460,Abomasnow,walk,19.5
+52,Frostpoint Field,238,Smoochum,walk,12.5
+52,Frostpoint Field,439,Mime Jr.,walk,12.5
+52,Frostpoint Field,459,Snover,walk,12.5
+52,Frostpoint Field,582,Vanillite,walk,12.5
+52,Frostpoint Field,583,Vanillish,walk,10.0
+52,Frostpoint Field,615,Cryogonal,walk,10.0
+52,Frostpoint Field,124,Jynx,walk,5.0
+52,Frostpoint Field,698,Amaura,walk,5.0
+52,Frostpoint Field,531,Audino,walk,0.5
+53,Giant's Bed,819,Skwovet,berry tree,80.0
+53,Giant's Bed,820,Greedent,berry tree,20.0
+53,Giant's Bed,129,Magikarp,fishing,20.0
+53,Giant's Bed,339,Barboach,fishing,20.0
+53,Giant's Bed,550,Basculin,fishing,20.0
+53,Giant's Bed,130,Gyarados,fishing,15.0
+53,Giant's Bed,340,Whiscash,fishing,15.0
+53,Giant's Bed,345,Lileep,fishing,10.0
+53,Giant's Bed,29,Nidoran♀,walk,12.61
+53,Giant's Bed,32,Nidoran♂,walk,12.61
+53,Giant's Bed,439,Mime Jr.,walk,12.01
+53,Giant's Bed,582,Vanillite,walk,12.01
+53,Giant's Bed,616,Shelmet,walk,12.01
+53,Giant's Bed,874,Stonjourner,walk,9.01
+53,Giant's Bed,437,Bronzong,walk,8.11
+53,Giant's Bed,361,Snorunt,walk,6.01
+53,Giant's Bed,583,Vanillish,walk,6.01
+53,Giant's Bed,615,Cryogonal,walk,6.01
+53,Giant's Bed,359,Absol,walk,3.0
+53,Giant's Bed,531,Audino,walk,0.6
+54,Old Cemetery,854,Sinistea,walk,13.49
+54,Old Cemetery,29,Nidoran♀,walk,12.46
+54,Old Cemetery,32,Nidoran♂,walk,12.46
+54,Old Cemetery,582,Vanillite,walk,12.46
+54,Old Cemetery,439,Mime Jr.,walk,11.07
+54,Old Cemetery,588,Karrablast,walk,11.07
+54,Old Cemetery,583,Vanillish,walk,8.3
+54,Old Cemetery,615,Cryogonal,walk,8.3
+54,Old Cemetery,886,Drakloak,walk,6.23
+54,Old Cemetery,359,Absol,walk,3.46
+54,Old Cemetery,531,Audino,walk,0.69
+55,Snowslide Slope,129,Magikarp,fishing,45.0
+55,Snowslide Slope,550,Basculin,fishing,40.0
+55,Snowslide Slope,130,Gyarados,fishing,15.0
+55,Snowslide Slope,439,Mime Jr.,walk,15.76
+55,Snowslide Slope,582,Vanillite,walk,15.76
+55,Snowslide Slope,872,Snom,walk,14.71
+55,Snowslide Slope,374,Beldum,walk,12.18
+55,Snowslide Slope,361,Snorunt,walk,6.3
+55,Snowslide Slope,554,Darumaka,walk,6.3
+55,Snowslide Slope,583,Vanillish,walk,6.3
+55,Snowslide Slope,614,Beartic,walk,6.3
+55,Snowslide Slope,615,Cryogonal,walk,6.3
+55,Snowslide Slope,698,Amaura,walk,6.3
+55,Snowslide Slope,359,Absol,walk,3.15
+55,Snowslide Slope,531,Audino,walk,0.63
+56,Path to the Peak,873,Frosmoth,walk,70.0
+56,Path to the Peak,872,Snom,walk,19.0
+56,Path to the Peak,359,Absol,walk,10.0
+56,Path to the Peak,531,Audino,walk,1.0
+57,Tunnel to the Top,41,Zubat,walk,36.36
+57,Tunnel to the Top,703,Carbink,walk,21.82
+57,Tunnel to the Top,361,Snorunt,walk,18.18
+57,Tunnel to the Top,371,Bagon,walk,9.09
+57,Tunnel to the Top,443,Gible,walk,9.09
+57,Tunnel to the Top,35,Clefairy,walk,4.55
+57,Tunnel to the Top,531,Audino,walk,0.91
+58,Roaring-Sea Caves,129,Magikarp,surfing,16.67
+58,Roaring-Sea Caves,138,Omanyte,surfing,16.67
+58,Roaring-Sea Caves,140,Kabuto,surfing,16.67
+58,Roaring-Sea Caves,339,Barboach,surfing,16.67
+58,Roaring-Sea Caves,550,Basculin,surfing,16.67
+58,Roaring-Sea Caves,583,Vanillish,surfing,15.83
+58,Roaring-Sea Caves,349,Feebas,surfing,0.83
+58,Roaring-Sea Caves,41,Zubat,walk,36.36
+58,Roaring-Sea Caves,703,Carbink,walk,21.82
+58,Roaring-Sea Caves,221,Piloswine,walk,18.18
+58,Roaring-Sea Caves,246,Larvitar,walk,9.09
+58,Roaring-Sea Caves,633,Deino,walk,9.09
+58,Roaring-Sea Caves,447,Riolu,walk,4.55
+58,Roaring-Sea Caves,531,Audino,walk,0.91
+59,Frigid Sea,129,Magikarp,fishing,30.0
+59,Frigid Sea,550,Basculin,fishing,30.0
+59,Frigid Sea,320,Wailmer,fishing,20.0
+59,Frigid Sea,130,Gyarados,fishing,15.0
+59,Frigid Sea,781,Dhelmise,fishing,5.0
+59,Frigid Sea,713,Avalugg,surfing,24.19
+59,Frigid Sea,320,Wailmer,surfing,23.72
+59,Frigid Sea,583,Vanillish,surfing,13.95
+59,Frigid Sea,615,Cryogonal,surfing,13.95
+59,Frigid Sea,875,Eiscue,surfing,13.95
+59,Frigid Sea,564,Tirtouga,surfing,9.3
+59,Frigid Sea,131,Lapras,surfing,0.93
+59,Frigid Sea,439,Mime Jr.,walk,13.66
+59,Frigid Sea,582,Vanillite,walk,13.66
+59,Frigid Sea,712,Bergmite,walk,13.66
+59,Frigid Sea,363,Spheal,walk,13.11
+59,Frigid Sea,713,Avalugg,walk,12.57
+59,Frigid Sea,583,Vanillish,walk,8.2
+59,Frigid Sea,614,Beartic,walk,8.2
+59,Frigid Sea,875,Eiscue,walk,8.2
+59,Frigid Sea,564,Tirtouga,walk,5.46
+59,Frigid Sea,359,Absol,walk,2.73
+59,Frigid Sea,531,Audino,walk,0.55
+60,Three-Point Pass,437,Bronzong,walk,15.0
+60,Three-Point Pass,436,Bronzor,walk,12.5
+60,Three-Point Pass,439,Mime Jr.,walk,12.5
+60,Three-Point Pass,582,Vanillite,walk,12.5
+60,Three-Point Pass,712,Bergmite,walk,12.5
+60,Three-Point Pass,531,Audino,walk,10.0
+60,Three-Point Pass,713,Avalugg,walk,10.0
+60,Three-Point Pass,344,Claydol,walk,7.5
+60,Three-Point Pass,615,Cryogonal,walk,5.0
+60,Three-Point Pass,583,Vanillish,walk,2.0
+60,Three-Point Pass,359,Absol,walk,0.5
+61,Ballimere Lake,819,Skwovet,berry tree,60.0
+61,Ballimere Lake,820,Greedent,berry tree,30.0
+61,Ballimere Lake,446,Munchlax,berry tree,10.0
+61,Ballimere Lake,550,Basculin,surfing,100.0
+61,Ballimere Lake,439,Mime Jr.,walk,50.0
+61,Ballimere Lake,819,Skwovet,walk,50.0
+62,Lakeside Cave,41,Zubat,walk,18.18
+62,Lakeside Cave,304,Aron,walk,18.18
+62,Lakeside Cave,703,Carbink,walk,13.64
+62,Lakeside Cave,838,Carkol,walk,13.64
+62,Lakeside Cave,302,Sableye,walk,9.09
+62,Lakeside Cave,303,Mawile,walk,9.09
+62,Lakeside Cave,597,Ferroseed,walk,9.09
+62,Lakeside Cave,715,Noivern,walk,8.18
+62,Lakeside Cave,531,Audino,walk,0.91
+63,Giant's Foot,819,Skwovet,berry tree,80.0
+63,Giant's Foot,820,Greedent,berry tree,20.0
+63,Giant's Foot,129,Magikarp,fishing,20.0
+63,Giant's Foot,339,Barboach,fishing,20.0
+63,Giant's Foot,550,Basculin,fishing,20.0
+63,Giant's Foot,130,Gyarados,fishing,15.0
+63,Giant's Foot,340,Whiscash,fishing,15.0
+63,Giant's Foot,345,Lileep,fishing,10.0
+63,Giant's Foot,436,Bronzor,walk,12.05
+63,Giant's Foot,439,Mime Jr.,walk,12.05
+63,Giant's Foot,582,Vanillite,walk,12.05
+63,Giant's Foot,878,Cufant,walk,12.05
+63,Giant's Foot,879,Copperajah,walk,10.84
+63,Giant's Foot,874,Stonjourner,walk,7.23
+63,Giant's Foot,437,Bronzong,walk,6.75
+63,Giant's Foot,344,Claydol,walk,4.82
+63,Giant's Foot,361,Snorunt,walk,4.82
+63,Giant's Foot,566,Archen,walk,4.82
+63,Giant's Foot,583,Vanillish,walk,4.82
+63,Giant's Foot,615,Cryogonal,walk,4.82
+63,Giant's Foot,359,Absol,walk,2.41
+63,Giant's Foot,531,Audino,walk,0.48
