@@ -563,10 +563,14 @@ window.cheatProgressChallenge = function(targetAreaId) {
         }
         if (req.earnBadge) {
             // Only give badge if they don't have it yet to prevent duplicates if cheated multiple times
-            const hasPending = state.stats.pendingGifts && state.stats.pendingGifts.some(g => g.type === 'badge' && g.gymIndex === req.earnBadge.badgeCount - 1);
+            let reqGymIndex = req.earnBadge.badgeCount - 1;
+            if (state.currentRegionName === 'Johto') {
+                reqGymIndex = req.earnBadge.badgeCount <= 8 ? req.earnBadge.badgeCount + 8 : req.earnBadge.badgeCount - 9;
+            }
+            const hasPending = state.stats.pendingGifts && state.stats.pendingGifts.some(g => g.type === 'badge' && g.gymIndex === reqGymIndex);
             if (state.trainer.badges < req.earnBadge.badgeCount && !hasPending) {
                  if (!state.stats.pendingGifts) state.stats.pendingGifts = [];
-                 state.stats.pendingGifts.push({ type: 'badge', gymName: req.earnBadge.name.replace(' Badge', ''), gymIndex: req.earnBadge.badgeCount - 1 });
+                 state.stats.pendingGifts.push({ type: 'badge', gymName: req.earnBadge.name.replace(' Badge', ''), gymIndex: reqGymIndex });
                  // Do not auto-increment badges, the gift claim will do it
             }
         }

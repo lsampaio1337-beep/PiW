@@ -74,10 +74,20 @@ export function showGiftModal() {
 
         pending.forEach((gift, index) => {
             if (gift.type === 'badge') {
-                const badgeNum = state.currentRegionName === 'Johto' ? (gift.gymIndex > 8 ? gift.gymIndex - 8 : gift.gymIndex + 9) : gift.gymIndex + 1;
+                let badgeRegion = state.currentRegionName || 'Kanto';
+                let badgeNum = gift.gymIndex + 1;
+                if (state.currentRegionName === 'Johto') {
+                    if (gift.gymIndex > 8) {
+                        badgeRegion = 'Johto';
+                        badgeNum = gift.gymIndex - 8;
+                    } else {
+                        badgeRegion = 'Kanto';
+                        badgeNum = gift.gymIndex + 1;
+                    }
+                }
                 html += `
                     <div onclick="window.claimPendingGift(${index})" style="cursor: pointer; padding: 10px; border: 1px solid #ccc; border-radius: 5px; background: rgba(0,0,0,0.5); transition: background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(0,0,0,0.5)'">
-                        <img src="./Assets/Gym/Badges/${window.getBadgeFileName(state.currentRegionName || 'Kanto', badgeNum)}" style="width: 50px; height: 50px;" title="${gift.gymName} Badge">
+                        <img src="./Assets/Gym/Badges/${window.getBadgeFileName(badgeRegion, badgeNum)}" style="width: 50px; height: 50px;" title="${gift.gymName} Badge">
                     </div>
                 `;
             } else if (gift.type === 'item') {
@@ -122,10 +132,20 @@ export function showGiftModal() {
 
         claimed.forEach((gift) => {
             if (gift.type === 'badge') {
-                const badgeNum = state.currentRegionName === 'Johto' ? (gift.gymIndex > 8 ? gift.gymIndex - 8 : gift.gymIndex + 9) : gift.gymIndex + 1;
+                let badgeRegion = state.currentRegionName || 'Kanto';
+                let badgeNum = gift.gymIndex + 1;
+                if (state.currentRegionName === 'Johto') {
+                    if (gift.gymIndex > 8) {
+                        badgeRegion = 'Johto';
+                        badgeNum = gift.gymIndex - 8;
+                    } else {
+                        badgeRegion = 'Kanto';
+                        badgeNum = gift.gymIndex + 1;
+                    }
+                }
                 html += `
                     <div style="padding: 10px; border: 1px solid #444; border-radius: 5px; background: rgba(0,0,0,0.2);">
-                        <img src="./Assets/Gym/Badges/${window.getBadgeFileName(state.currentRegionName || 'Kanto', badgeNum)}" style="width: 50px; height: 50px; filter: drop-shadow(0 0 5px gold);" title="${gift.gymName ? gift.gymName + ' Badge' : 'Badge'}">
+                        <img src="./Assets/Gym/Badges/${window.getBadgeFileName(badgeRegion, badgeNum)}" style="width: 50px; height: 50px; filter: drop-shadow(0 0 5px gold);" title="${gift.gymName ? gift.gymName + ' Badge' : 'Badge'}">
                     </div>
                 `;
             } else if (gift.type === 'item') {
