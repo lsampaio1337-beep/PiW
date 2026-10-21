@@ -15,6 +15,12 @@ import { showHelp } from './ui/help.js';
 
 window.globals = globals;
 
+import { profTutorialMessages, showProfTutorialIfNeeded, skipProfTutorial, proceedProfTutorial, concludeProfTutorial } from './ui/tutorials/profTutorial.js';
+window.skipProfTutorial = skipProfTutorial;
+window.proceedProfTutorial = proceedProfTutorial;
+window.concludeProfTutorial = concludeProfTutorial;
+export { showProfTutorialIfNeeded };
+
 window.dismissDaycareMessage = function() {
     state.globalStats.hasSeenDaycare = true;
     document.getElementById('daycare-first-time-overlay').style.display = 'none';
@@ -24,66 +30,6 @@ window.dismissDaycareMessage = function() {
     updateUI();
 };
 
-const profTutorialMessages = [
-    "<p>Hello, Trainer!</p><p>Here I will give you some tips for introduce you to game.</p><p>Do you want a tutorial guide to help you understand better the game or do you want to skip and start the game?</p>",
-    "<p>This game runs only on the Main Control Tab.</p><p>It is in there that you will open and close all modules</p><p>This module you are seeing it is called “Main View” and it will display all the visual when battling or shopping.</p>",
-    "<p>Icons are displayed in the Main Control Tab. You will be able to open modules with them.</p><p>The first two modules are “Main View” and “Team View”, and they will help when you are in battle mode.</p>",
-    "<p>Next set of icons will help you to play the game.</p><p>Map will let you travel to different spots and places.</p><p>Backpack will allow you to see items and Pokémons.</p><p>Pokedex with bring all info of Pokémons.</p><p>Trainer have Statistics of the game.</p>",
-    "<p>Next set of icon are “Objectives Related”</p><p>Here we have Daily Calendar. It will have daily challenges and rewards you each day you play. It also have a shop to spend Daily Tokens earned… Make sure to expend them on upgrades!</p><p>Next is the Progress Challenges. Completing the Challenge grants a new spot to travel and may grant some gifts.</p>",
-    "<p>The last set of icons are related to settings.</p><p>The first is “Help”. In there you can find information about the whole game (with formulas).</p><p>“Settings” will let you change configurations of the game.</p><p>If you want to leave game, just go to the “Exit” icon.</p>",
-    "<p>Along the gameplay, some new icons will appear in Main Control.</p><p>But don’t worry, you will be told what they are.</p>",
-    "<p>On maps you can find places that are HUB for interactions.</p><p>You are at “Professor Lab” now, and I have some assignments for you… make sure to conclude them to earn boosts.</p>",
-    "<p>Now you are all set!</p><p>If you need more help, make sure to open the Help Module!</p><p>Have fun and CATCH THEM ALL!</p>"
-];
-let currentProfTutorialIndex = 0;
-
-window.skipProfTutorial = function() {
-    state.globalStats.hasSeenProfTutorial = true;
-    const overlay = document.getElementById('prof-tutorial-overlay');
-    if (overlay) overlay.style.display = 'none';
-    if (window.storageRef) window.storageRef.save(state);
-};
-
-window.proceedProfTutorial = function() {
-    currentProfTutorialIndex++;
-    if (currentProfTutorialIndex >= profTutorialMessages.length - 1) {
-        // Switch to the conclude button on the last message
-        document.getElementById('btn-prof-tutorial-skip').style.display = 'none';
-        document.getElementById('btn-prof-tutorial-proceed').style.display = 'none';
-        document.getElementById('btn-prof-tutorial-conclude').style.display = 'inline-block';
-    } else {
-        document.getElementById('btn-prof-tutorial-proceed').innerText = `Proceed ${currentProfTutorialIndex + 1}/${profTutorialMessages.length - 1}`;
-    }
-
-    if (currentProfTutorialIndex < profTutorialMessages.length) {
-        document.getElementById('prof-tutorial-text').innerHTML = profTutorialMessages[currentProfTutorialIndex];
-    }
-};
-
-window.concludeProfTutorial = function() {
-    window.skipProfTutorial();
-};
-
-export function showProfTutorialIfNeeded() {
-    if (!state.globalStats.hasSeenProfTutorial) {
-        const overlay = document.getElementById('prof-tutorial-overlay');
-        if (overlay) {
-            currentProfTutorialIndex = 0;
-            document.getElementById('prof-tutorial-text').innerHTML = profTutorialMessages[currentProfTutorialIndex];
-
-            // Reset buttons visibility
-            document.getElementById('btn-prof-tutorial-skip').style.display = 'inline-block';
-
-            const proceedBtn = document.getElementById('btn-prof-tutorial-proceed');
-            proceedBtn.innerText = `Proceed 1/${profTutorialMessages.length - 1}`;
-            proceedBtn.style.display = 'inline-block';
-
-            document.getElementById('btn-prof-tutorial-conclude').style.display = 'none';
-
-            overlay.style.display = 'flex';
-        }
-    }
-}
 
 
 window.dismissBonusCandyMessage = function() {
@@ -172,114 +118,15 @@ window.forceNextEncounter = forceNextEncounter;
 window.activateCheat = activateCheat;
 
 import { cheatAction } from "./ui/cheatControl.js";
+import { getSpriteUrl } from './utils/sprites.js';
+window.getSpriteUrl = getSpriteUrl;
 
-window.badgeMapping = {
-    "Galar": {
-        "1": "Badge_Galar_1_Grass Badge_Grass.png",
-        "2": "Badge_Galar_2_Water Badge_Water.png",
-        "3": "Badge_Galar_3_Fire Badge_Fire.png",
-        "4": "Badge_Galar_4_Fighting Badge_Fighting.png",
-        "5": "Badge_Galar_5_Fairy Badge_Fairy.png",
-        "6": "Badge_Galar_6_Rock Badge_Rock.png",
-        "7": "Badge_Galar_7_Dark Badge_Dark.png",
-        "8": "Badge_Galar_8_Dragon Badge_Dragon.png"
-    },
-    "Hoenn": {
-        "1": "Badge_Hoenn_1_Stone_Rock.png",
-        "2": "Badge_Hoenn_2_Knuckle_Fighting.png",
-        "3": "Badge_Hoenn_3_Dynamo_Electric.png",
-        "4": "Badge_Hoenn_4_Heat_Fire.png",
-        "5": "Badge_Hoenn_5_Balance_Normal.png",
-        "6": "Badge_Hoenn_6_Feather_Flying.png",
-        "7": "Badge_Hoenn_7_Mind_Psychic.png",
-        "8": "Badge_Hoenn_8_Rain_Water.png"
-    },
-    "Johto": {
-        "1": "Badge_Johto_1_Zephyr_Flying.png",
-        "2": "Badge_Johto_2_Hive_Bug.png",
-        "3": "Badge_Johto_3_Plain_Normal.png",
-        "4": "Badge_Johto_4_Fog_Ghost.png",
-        "5": "Badge_Johto_5_Storm_Fighting.png",
-        "6": "Badge_Johto_6_Mineral_Steel.png",
-        "7": "Badge_Johto_7_Glacier_Ice.png",
-        "8": "Badge_Johto_8_Rising_Dragon.png"
-    },
-    "Kalos": {
-        "1": "Badge_Kalos_1_BugBadge_Bug.png",
-        "2": "Badge_Kalos_2_CliffBadge_Rock.png",
-        "3": "Badge_Kalos_3_RumbleBadge_Fighting.png",
-        "4": "Badge_Kalos_4_PlantBadge_Grass.png",
-        "5": "Badge_Kalos_5_VoltageBadge_Electric.png",
-        "6": "Badge_Kalos_6_FairyBadge_Fairy.png",
-        "7": "Badge_Kalos_7_PsychicBadge_Psychic.png",
-        "8": "Badge_Kalos_8_IcebergBadge_Ice.png"
-    },
-    "Kanto": {
-        "1": "Badge_Kanto_1_Boulder_Rock.png",
-        "2": "Badge_Kanto_2_Cascade_Water.png",
-        "3": "Badge_Kanto_3_Thunder_Electric.png",
-        "4": "Badge_Kanto_4_Rainbow_Grass.png",
-        "5": "Badge_Kanto_5_Soul_Poison.png",
-        "6": "Badge_Kanto_6_Marsh_Psychic.png",
-        "7": "Badge_Kanto_7_Volcano_Fire.png",
-        "8": "Badge_Kanto_8_Earth_Ground.png"
-    },
-    "Paldea": {
-        "1": "Badge_Paldea_1_Bug Badge_Bug.png",
-        "2": "Badge_Paldea_2_Grass Badge_Grass.png",
-        "3": "Badge_Paldea_3_Electric Badge_Electric.png",
-        "4": "Badge_Paldea_4_Water Badge_Water.png",
-        "5": "Badge_Paldea_5_Normal Badge_Normal.png",
-        "6": "Badge_Paldea_6_Ghost Badge_Ghost.png",
-        "7": "Badge_Paldea_7_Psychic Badge_Psychic.png",
-        "8": "Badge_Paldea_8_Ice Badge_Ice.png"
-    },
-    "Sinnoh": {
-        "1": "Badge_Sinnoh_1_Coal_Rock.png",
-        "2": "Badge_Sinnoh_2_Forest_Grass.png",
-        "3": "Badge_Sinnoh_3_Cobble_Fighting.png",
-        "4": "Badge_Sinnoh_4_Fen_Water.png",
-        "5": "Badge_Sinnoh_5_Relic_Ghost.png",
-        "6": "Badge_Sinnoh_6_Mine_Steel.png",
-        "7": "Badge_Sinnoh_7_Icicle_Ice.png",
-        "8": "Badge_Sinnoh_8_Beacon_Electric.png"
-    },
-    "Unova1": {
-        "1": "Badge_Unova1_1_TrioBadge_mix.png",
-        "2": "Badge_Unova1_2_BasicBadge_Normal.png",
-        "3": "Badge_Unova1_3_InsectBadge_Bug.png",
-        "4": "Badge_Unova1_4_BoltBadge_Electric.png",
-        "5": "Badge_Unova1_5_QuakeBadge_Ground.png",
-        "6": "Badge_Unova1_6_JetBadge_Flying.png",
-        "7": "Badge_Unova1_7_FreezeBadge_Ice.png",
-        "8": "Badge_Unova1_8_LegendBadge_Dragon.png"
-    },
-    "Unova2": {
-        "1": "Badge_Unova2_1_BasicBadge_Normal.png",
-        "2": "Badge_Unova2_2_ToxicBadge_Poison.png",
-        "3": "Badge_Unova2_3_InsectBadge_Bug.png",
-        "4": "Badge_Unova2_4_BoltBadge_Electric.png",
-        "5": "Badge_Unova2_5_QuakeBadge_Ground.png",
-        "6": "Badge_Unova2_6_JetBadge_Flying.png",
-        "7": "Badge_Unova2_7_LegendBadge_Dragon.png",
-        "8": "Badge_Unova2_8_WaveBadge_Water.png"
-    }
-};
 
-window.getBadgeFileName = function(region, number) {
-    if (region === 'Unova') region = 'Unova2';
+import { badgeMapping, getBadgeFileName } from './utils/badges.js';
+window.badgeMapping = badgeMapping;
+window.getBadgeFileName = (region, number) => getBadgeFileName(region, number, window.badgeMapping);
 
-    if (region === 'Johto' && number > 8) {
-        region = 'Kanto';
-        number = number - 8;
-    }
 
-    if (window.badgeMapping[region] && window.badgeMapping[region][number]) {
-        return window.badgeMapping[region][number];
-    }
-    // Fallback if mapping not found, though ideally we won't hit this
-    return `Badge_${region}_${number}.png`;
-};
 window.cheatAction = cheatAction;
 window.showTimeLapseModal = showTimeLapseModal;
 window.runTimeLapse = runTimeLapse;
@@ -3006,10 +2853,3 @@ ${starterButtonsHtml}
     }
 }
 
-window.getSpriteUrl = function(id, isShiny = false) {
-    if (!state || !state.config || !state.config.pokemonData) return '';
-    const pData = state.config.pokemonData.find(pd => pd.id == id);
-    if (!pData) return '';
-    const paddedId = id.toString().padStart(4, '0');
-    return `Assets/Pokemon Sprites/Natural/Gen5/${paddedId}_${pData.name}${isShiny ? '_shiny' : ''}.png`;
-};
