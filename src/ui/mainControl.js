@@ -35,7 +35,14 @@ export function getChallengeData(unlock) {
         for (let challengeId of req.requireCompletedChallenges) {
             let isCompleted = state.stats.completedChallengeIds && state.stats.completedChallengeIds.includes(challengeId);
             if (!isCompleted) isMet = false;
-            textParts.push(`Complete challenge: ${challengeId} ${getStatusHtml(isCompleted)}`);
+
+            // Use user-friendly names instead of areaId in the UI text if we know them
+            let displayName = challengeId;
+            if (challengeId === "Ilex Forest 2") displayName = "Johto Extra Challenge 5";
+            else if (challengeId === "Legendaries Nest") displayName = "Kanto Extra Challenge 6";
+            else if (challengeId === "Extra Challenge (Roaming)") displayName = "Roaming Extra Challenge";
+
+            textParts.push(`Complete challenge: ${displayName} ${getStatusHtml(isCompleted)}`);
         }
     }
 

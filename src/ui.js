@@ -513,6 +513,7 @@ window.cheatProgressChallenge = function(targetAreaId) {
         if (req.requireCompletedChallenges) {
             if (!state.stats.completedChallengeIds) state.stats.completedChallengeIds = [];
             for (let challengeId of req.requireCompletedChallenges) {
+                // Cheat to force it to complete if it requires completing challenges
                 if (!state.stats.completedChallengeIds.includes(challengeId)) {
                     state.stats.completedChallengeIds.push(challengeId);
                 }
