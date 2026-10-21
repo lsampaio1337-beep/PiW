@@ -349,7 +349,6 @@ export function getChallengeText() {
         let unlock = window.getCurrentUnlocks().find(u => u.areaId === activeId);
         if (unlock) {
             let unlocks = "Unlocks: " + (unlock.unlocks ? unlock.unlocks.join(' + ') : "Next Area");
-            if (activeId === "Fossil Revival Lab") unlocks += " + Multiplayer Mode";
             let displayName = unlock.challengeName || activeId;
             return `Next Challenge: ${displayName} - ${unlocks}`;
         }

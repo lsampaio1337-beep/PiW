@@ -684,7 +684,6 @@ window.showChallengesModal = function() {
             let cData = getChallengeData(unlock);
             let isExtra = unlock.challengeName && unlock.challengeName.includes("Extra");
             let rewardsStr = unlock.unlocks ? unlock.unlocks.join(" + ") : "Next Area";
-            if (unlock.areaId === "Fossil Revival Lab") rewardsStr += " + Multiplayer Mode";
             if (unlock.gift || unlock.gifts) rewardsStr += " + Gift";
 
             let displayName = unlock.challengeName || (isExtra ? 'Extra Challenge - ' + unlock.areaId : 'Challenge - ' + unlock.areaId);
@@ -755,7 +754,6 @@ window.showChallengesModal = function() {
              let pData = getChallengeData(pUnlock);
 
              let pRewards = pUnlock.unlocks ? pUnlock.unlocks.join(" + ") : "Next Area";
-             if (pUnlock.areaId === "Fossil Revival Lab") pRewards += " + Multiplayer Mode";
              if (pUnlock.gift || pUnlock.gifts) pRewards += " + Gift";
 
              let displayName = pUnlock.challengeName || (isExtra ? 'Extra Challenge - ' + pUnlock.areaId : 'Challenge - ' + pUnlock.areaId);
@@ -1995,7 +1993,6 @@ async function init() {
                 if (cIndex > 0) {
                     let pUnlock = window.getCurrentUnlocks()[cIndex - 1];
                     lastRoute = pUnlock.unlocks ? pUnlock.unlocks.join(" + ") : "Next Area";
-                    if (pUnlock.areaId === "Fossil Revival Lab") lastRoute += " + Multiplayer Mode";
                 }
             }
 
