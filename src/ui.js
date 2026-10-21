@@ -352,6 +352,22 @@ window.completeChallenge = function(targetAreaId) {
     state.stats.activeChallenges = state.stats.activeChallenges.filter(id => id !== targetAreaId);
     state.stats.completedChallengeIds.push(targetAreaId);
 
+    // Look for any active challenge that has requireCompletedChallenges and see if it's now met
+    // (to allow sequential completion)
+    for (let activeId of state.stats.activeChallenges) {
+        let activeUnlock = window.getCurrentUnlocks().find(u => u.areaId === activeId);
+        if (activeUnlock && activeUnlock.requirements && activeUnlock.requirements.requireCompletedChallenges) {
+            let allMet = true;
+            for (let reqId of activeUnlock.requirements.requireCompletedChallenges) {
+                if (!state.stats.completedChallengeIds.includes(reqId)) allMet = false;
+            }
+            // Automatically complete it so it doesn't just sit in the active list waiting to be clicked
+            if (allMet) {
+                setTimeout(() => window.completeChallenge(activeId), 0);
+            }
+        }
+    }
+
     // Also increment integer for backwards compatibility with any existing simple checks
     state.stats.completedChallenges = (state.stats.completedChallenges || 0) + 1;
 
@@ -494,6 +510,14 @@ window.cheatProgressChallenge = function(targetAreaId) {
             if (!state.stats.challengeSpecificDefeats) state.stats.challengeSpecificDefeats = {};
             for (let ds of req.defeatMultipleSpecific) {
                 state.stats.challengeSpecificDefeats[ds.name] = Math.max(state.stats.challengeSpecificDefeats[ds.name] || 0, ds.count);
+            }
+        }
+        if (req.requireCompletedChallenges) {
+            if (!state.stats.completedChallengeIds) state.stats.completedChallengeIds = [];
+            for (let challengeId of req.requireCompletedChallenges) {
+                if (!state.stats.completedChallengeIds.includes(challengeId)) {
+                    state.stats.completedChallengeIds.push(challengeId);
+                }
             }
         }
         if (req.catchSpecies) {
