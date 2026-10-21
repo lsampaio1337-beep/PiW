@@ -26,6 +26,42 @@ export const sinnohRoutes = [
     "name": "Lake Verity",
     "spawns": [
       {
+            "pokemonId": 129,
+            "minLevel": 10,
+            "maxLevel": 40,
+            "chance": 0
+      },
+      {
+            "pokemonId": 60,
+            "minLevel": 10,
+            "maxLevel": 40,
+            "chance": 0
+      },
+      {
+            "pokemonId": 223,
+            "minLevel": 10,
+            "maxLevel": 40,
+            "chance": 0
+      },
+      {
+            "pokemonId": 339,
+            "minLevel": 10,
+            "maxLevel": 40,
+            "chance": 0
+      },
+      {
+            "pokemonId": 456,
+            "minLevel": 10,
+            "maxLevel": 40,
+            "chance": 0
+      },
+      {
+            "pokemonId": 118,
+            "minLevel": 10,
+            "maxLevel": 40,
+            "chance": 0
+      },
+      {
         "pokemonId": 396,
         "minLevel": 2,
         "maxLevel": 4,
@@ -2307,6 +2343,48 @@ export const sinnohRoutes = [
     "name": "Lake Valor",
     "spawns": [
       {
+            "pokemonId": 318,
+            "minLevel": 10,
+            "maxLevel": 40,
+            "chance": 0
+      },
+      {
+            "pokemonId": 366,
+            "minLevel": 10,
+            "maxLevel": 40,
+            "chance": 0
+      },
+      {
+            "pokemonId": 422,
+            "minLevel": 10,
+            "maxLevel": 40,
+            "chance": 0
+      },
+      {
+            "pokemonId": 370,
+            "minLevel": 10,
+            "maxLevel": 40,
+            "chance": 0
+      },
+      {
+            "pokemonId": 457,
+            "minLevel": 10,
+            "maxLevel": 40,
+            "chance": 0
+      },
+      {
+            "pokemonId": 116,
+            "minLevel": 10,
+            "maxLevel": 40,
+            "chance": 0
+      },
+      {
+            "pokemonId": 170,
+            "minLevel": 10,
+            "maxLevel": 40,
+            "chance": 0
+      },
+      {
         "pokemonId": 397,
         "minLevel": 34,
         "maxLevel": 40,
@@ -3676,94 +3754,6 @@ export const sinnohRoutes = [
     ]
   },
   {
-    "name": "Tiny Fishing Spot",
-    "spawns": [
-      {
-        "pokemonId": 129,
-        "minLevel": 10,
-        "maxLevel": 40,
-        "chance": 0.0
-      },
-      {
-        "pokemonId": 60,
-        "minLevel": 10,
-        "maxLevel": 40,
-        "chance": 0.0
-      },
-      {
-        "pokemonId": 223,
-        "minLevel": 10,
-        "maxLevel": 40,
-        "chance": 0.0
-      },
-      {
-        "pokemonId": 339,
-        "minLevel": 10,
-        "maxLevel": 40,
-        "chance": 0.0
-      },
-      {
-        "pokemonId": 456,
-        "minLevel": 10,
-        "maxLevel": 40,
-        "chance": 0.0
-      },
-      {
-        "pokemonId": 118,
-        "minLevel": 10,
-        "maxLevel": 40,
-        "chance": 0.0
-      }
-    ]
-  },
-  {
-    "name": "Small Fishing Spot",
-    "spawns": [
-      {
-        "pokemonId": 318,
-        "minLevel": 10,
-        "maxLevel": 40,
-        "chance": 0.0
-      },
-      {
-        "pokemonId": 366,
-        "minLevel": 10,
-        "maxLevel": 40,
-        "chance": 0.0
-      },
-      {
-        "pokemonId": 422,
-        "minLevel": 10,
-        "maxLevel": 40,
-        "chance": 0.0
-      },
-      {
-        "pokemonId": 370,
-        "minLevel": 10,
-        "maxLevel": 40,
-        "chance": 0.0
-      },
-      {
-        "pokemonId": 457,
-        "minLevel": 10,
-        "maxLevel": 40,
-        "chance": 0.0
-      },
-      {
-        "pokemonId": 116,
-        "minLevel": 10,
-        "maxLevel": 40,
-        "chance": 0.0
-      },
-      {
-        "pokemonId": 170,
-        "minLevel": 10,
-        "maxLevel": 40,
-        "chance": 0.0
-      }
-    ]
-  },
-  {
     "name": "Regular Fishing Spot",
     "spawns": [
       {
@@ -4034,7 +4024,7 @@ export const sinnohUnlocks = [
   { "challengeName": "Challenge 30", "areaId": "Route 214", "unlocks": ["Ruin Maniac Tunnel", "Valor Lakefront"], "requirements": { "catchSpecies": [{ "species": "Houndour", "count": 1 }, { "species": "Girafarig", "count": 1 }] } },
   { "challengeName": "Challenge 31", "areaId": "Ruin Maniac Tunnel", "unlocks": [], "gift": { "item": "Ground Stone", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Hippopotas", "count": 2 }] } },
   { "challengeName": "Challenge 32", "areaId": "Valor Lakefront", "unlocks": ["Route 213"], "requirements": { "defeatCountRoute": { "route": "Valor Lakefront", "count": 150 } } },
-  { "challengeName": "Challenge 33", "areaId": "Route 213", "unlocks": ["Great Marsh", "Pastoria Gym"], "requirements": { "catchSpecies": [{ "species": "Chatot", "count": 1 }] } },
+  { "challengeName": "Challenge 33", "areaId": "Route 213", "unlocks": ["Great Marsh", "Pastoria Gym", "Regular Fishing Spot"], "requirements": { "catchSpecies": [{ "species": "Chatot", "count": 1 }] } },
   { "challengeName": "Challenge 34", "areaId": "Great Marsh", "unlocks": [], "gift": { "item": "Poison Stone", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Carnivine", "count": 1 }, { "species": "Skorupi", "count": 1 }, { "species": "Croagunk", "count": 1 }] } },
   { "challengeName": "Challenge 35", "areaId": "Pastoria Gym", "unlocks": ["Route 212"], "requirements": { "earnBadge": { "name": "Fen Badge", "leader": "Crasher Wake", "badgeCount": 5 } } },
   { "challengeName": "Challenge 36", "areaId": "Route 212", "unlocks": ["Trophy Garden"], "requirements": { "catchSpecies": [{ "species": "Kirlia", "count": 1 }] } },
@@ -4056,7 +4046,7 @@ export const sinnohUnlocks = [
   { "challengeName": "Challenge 52", "areaId": "Distortion World", "unlocks": ["Sendoff Spring"], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Giratina", "count": 1 }] } },
   { "challengeName": "Challenge 53", "areaId": "Sendoff Spring", "unlocks": ["Turnback Cave", "Route 222"], "requirements": { "catchSpecies": [{ "species": "Bibarel", "count": 1 }] } },
   { "challengeName": "Challenge 54", "areaId": "Turnback Cave", "unlocks": [], "gift": { "item": "Ghost Stone", "count": 2 }, "requirements": { "catchSpeciesByRarity": [{ "species": "Bronzong", "rarity": "Rare", "count": 1 }] } },
-  { "challengeName": "Challenge 55", "areaId": "Route 222", "unlocks": ["Sunyshore Gym"], "requirements": { "catchSpecies": [{ "species": "Magneton", "count": 1 }, { "species": "Electabuzz", "count": 1 }] } },
+  { "challengeName": "Challenge 55", "areaId": "Route 222", "unlocks": ["Sunyshore Gym", "Big Fishing Spot"], "requirements": { "catchSpecies": [{ "species": "Magneton", "count": 1 }, { "species": "Electabuzz", "count": 1 }] } },
   { "challengeName": "Challenge 56", "areaId": "Sunyshore Gym", "unlocks": ["Victory Road"], "requirements": { "earnBadge": { "name": "Beacon Badge", "leader": "Volkner", "badgeCount": 8 } } },
   { "challengeName": "Challenge 57", "areaId": "Victory Road", "unlocks": ["Route 224"], "requirements": { "defeatCountRoute": { "route": "Victory Road", "count": 300 } } },
   { "challengeName": "Challenge 58", "areaId": "Route 224", "unlocks": ["Route 221", "Route 225"], "requirements": { "catchSpecies": [{ "species": "Roselia", "count": 1 }] } },
@@ -4071,11 +4061,9 @@ export const sinnohUnlocks = [
   { "challengeName": "Challenge 67", "areaId": "Newmoon Island", "unlocks": ["Flower Paradise"], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Darkrai", "count": 1 }] } },
   { "challengeName": "Challenge 68", "areaId": "Flower Paradise", "unlocks": ["Hall of Origin", "Roaming Sinnoh"], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Shaymin", "count": 1 }] } },
   { "challengeName": "Challenge 69", "areaId": "Hall of Origin", "unlocks": [], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Arceus", "count": 1 }] } },
-  { "challengeName": "Extra Challenge (Roaming)", "areaId": "Roaming Sinnoh", "unlocks": ["Tiny Fishing Spot"], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Cresselia", "count": 1 }, { "species": "Mesprit", "count": 1 }] } },
-  { "challengeName": "Extra Challenge A 1", "areaId": "Tiny Fishing Spot", "unlocks": ["Small Fishing Spot"], "gift": { "item": "Water Stone", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Magikarp", "count": 5 }] } },
-  { "challengeName": "Extra Challenge A 2", "areaId": "Small Fishing Spot", "unlocks": ["Regular Fishing Spot"], "gift": { "item": "Water Stone", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Goldeen", "count": 2 }] } },
-  { "challengeName": "Extra Challenge A 3", "areaId": "Regular Fishing Spot", "unlocks": ["Big Fishing Spot"], "gift": { "item": "Water Stone", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Remoraid", "count": 2 }] } },
-  { "challengeName": "Extra Challenge A 4", "areaId": "Big Fishing Spot", "unlocks": ["Huge Fishing Spot"], "gift": { "item": "Water Stone", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Octillery", "count": 1 }] } },
+  { "challengeName": "Extra Challenge (Roaming)", "areaId": "Roaming Sinnoh", "unlocks": ["Huge Fishing Spot"], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Cresselia", "count": 1 }, { "species": "Mesprit", "count": 1 }] } },
+  { "challengeName": "Extra Challenge A 3", "areaId": "Regular Fishing Spot", "unlocks": [], "gift": { "item": "Water Stone", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Remoraid", "count": 2 }] } },
+  { "challengeName": "Extra Challenge A 4", "areaId": "Big Fishing Spot", "unlocks": [], "gift": { "item": "Water Stone", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Octillery", "count": 1 }] } },
   { "challengeName": "Extra Challenge A 5", "areaId": "Huge Fishing Spot", "unlocks": ["Surfing Spot", "Diving Spot"], "gift": { "item": "Water Stone", "count": 2 }, "requirements": { "catchSpecies": [{ "species": "Gyarados", "count": 1 }] } },
   { "challengeName": "Extra Challenge A 6", "areaId": "Surfing Spot", "unlocks": [], "gift": { "item": "Water Stone", "count": 2 }, "requirements": { "catchSpecies": [{ "species": "Tentacruel", "count": 1 }] } },
   { "challengeName": "Extra Challenge A 7", "areaId": "Diving Spot", "unlocks": [], "gift": { "item": "Water Stone", "count": 2 }, "requirements": { "catchSpecies": [{ "species": "Lumineon", "count": 1 }] } }
