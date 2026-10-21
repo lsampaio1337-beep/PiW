@@ -267,7 +267,7 @@ function updateBattleBackground(combatArena, state, battleSystem, inGymCombat, i
     }
 
     if (inMultiplayer) {
-        combatArena.style.backgroundImage = `url('./Assets/BG/BG-Cassino.jpg')`;
+        combatArena.style.backgroundImage = `url('./Assets/BG/Casino.png')`;
     } else if (inGymCombat) {
         const gym = battleSystem.gymState.gym;
         if (gym.name === "Indigo Plateau") {
@@ -279,7 +279,7 @@ function updateBattleBackground(combatArena, state, battleSystem, inGymCombat, i
                 'BG-Elite4-4Lance.png',
                 'BG-Elite4-5Champion.png'
             ];
-            const bgImage = trainerBGs[trainerIndex] || 'BG.png';
+            const bgImage = trainerBGs[trainerIndex] || 'BattleMode/Test.png';
             combatArena.style.backgroundImage = `url('./Assets/BG/${bgImage}')`;
         } else {
             // Remove previous dynamic gym bg if it exists
@@ -331,7 +331,7 @@ function updateBattleBackground(combatArena, state, battleSystem, inGymCombat, i
                     'BG-Gym-6-Saffron-Psychic.png',
                     'BG-Gym-7-Cinnabar-Fire.png',
                     'BG-Gym-8-Viridian-Ground.png',
-                    'BG-IndigoPlateau.png',
+                    'IndigoPlateau.png',
                     '../Gym/BG/BG_Gym_Flying.png',
                     '../Gym/BG/BG_Gym_Bug.png',
                     '../Gym/BG/BG_Gym_Normal.png',
@@ -341,24 +341,24 @@ function updateBattleBackground(combatArena, state, battleSystem, inGymCombat, i
                     '../Gym/BG/BG_Gym_Ice.png',
                     '../Gym/BG/BG_Gym_Dragon.png'
                 ];
-                const bgImage = gymBGs[gymIndex] || 'BG.png';
+                const bgImage = gymBGs[gymIndex] || 'BattleMode/Test.png';
                 combatArena.style.backgroundImage = `url('./Assets/BG/${bgImage}')`;
             }
         }
     } else if (["Safari Zone", "Kanto Safari Zone"].includes(state.currentRoute)) {
-        combatArena.style.backgroundImage = `url('./Assets/BG/BG-SafariZone.png')`;
+        combatArena.style.backgroundImage = `url('./Assets/BG/SafariZone.png')`;
     } else if (state.currentRoute && state.currentRoute.startsWith('Casino')) {
-         combatArena.style.backgroundImage = `url('./Assets/BG/BG-Cassino.jpg')`;
+         combatArena.style.backgroundImage = `url('./Assets/BG/Casino.png')`;
     } else if (state.currentRoute === 'Viridian Forest') {
-        combatArena.style.backgroundImage = `url('./Assets/BG/BGForest.png')`;
+        combatArena.style.backgroundImage = `url('./Assets/BG/BattleMode/Forest.png')`;
     } else if (PLAINS_ROUTES.includes(state.currentRoute)) {
-        combatArena.style.backgroundImage = `url('./Assets/BG/BGPlains.png')`;
+        combatArena.style.backgroundImage = `url('./Assets/BG/BattleMode/Plains.png')`;
     } else if (WATER_ROUTES.includes(state.currentRoute)) {
-        combatArena.style.backgroundImage = `url('./Assets/BG/BGWater.png')`;
+        combatArena.style.backgroundImage = `url('./Assets/BG/BattleMode/Water.png')`;
     } else if (CAVE_ROUTES.includes(state.currentRoute)) {
-        combatArena.style.backgroundImage = `url('./Assets/BG/BGCave.png')`;
+        combatArena.style.backgroundImage = `url('./Assets/BG/BattleMode/Cave.png')`;
     } else {
-        combatArena.style.backgroundImage = `url('./Assets/BG/BG.png')`;
+        combatArena.style.backgroundImage = `url('./Assets/BG/BattleMode/Test.png')`;
     }
 }
 

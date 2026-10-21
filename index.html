@@ -172,7 +172,7 @@
         <div id="generic-lab-content" style="position: relative; z-index: 10; width: 100%; height: 100%;"></div>
       </div>
 
-      <div id="view-safari-hub" class="game-view" style="display:none; background: url('Assets/BG/BG-SafariZone.png') no-repeat center center; background-size: 100% 100%; width: 100%; height: 100%; position: relative;">
+      <div id="view-safari-hub" class="game-view" style="display:none; background: url('Assets/BG/SafariZone.png') no-repeat center center; background-size: 100% 100%; width: 100%; height: 100%; position: relative;">
         <div style="position: absolute; top: 30%; left: 50%; transform: translateX(-50%); text-align: center; color: white; background: rgba(0,0,0,0.8); padding: 20px; border-radius: 10px; font-size: 20px; width: 60%; font-family: monospace;">
           <p id="safari-welcome-msg">Welcome to Safari Zone! Here we charge a fee of $500 per battle you have and you can use our SafariBalls at will.<br><br>Do you wanna enter Safari Zone?</p>
           <button id="btn-enter-safari" style="margin-top: 20px; padding: 10px 20px; font-size: 18px; cursor: pointer; background: #ffcc00; border: none; border-radius: 5px; color: black; font-weight: bold;">Enter ($500)</button>
@@ -181,7 +181,7 @@
 
       <!-- View 2: Battle Arena -->
       <div id="view-battle-arena" class="game-view" style="display:none; container-type: inline-size;">
-        <div id="combat-arena" style="background-image: url('./Assets/BG/BG.png');">
+        <div id="combat-arena" style="background-image: url('./Assets/BG/BattleMode/Test.png');">
           <div id="battle-sprites-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;">
             <div id="enemy-side" style="position: absolute; bottom: 20%; left: 100%; display: flex; align-items: center; width: max-content; height: max-content;">
               <img src="Assets/Pokemon Sprites/Extra/FrameBorder.png" style="width: 96px; height: 96px; opacity: 0;" alt="Enemy Frame">
@@ -257,7 +257,7 @@
       </div>
 
       <!-- View 3: PokeCenter & PokeMarket -->
-      <div id="view-center-market" class="game-view" style="display:none; background-image: url('./Assets/BG/BG-PCPM.png'); background-size: 100% 100%; background-position: center; height: 100%; position: relative;">
+      <div id="view-center-market" class="game-view" style="display:none; background-image: url('./Assets/BG/PCPM.png'); background-size: 100% 100%; background-position: center; height: 100%; position: relative;">
         <h2>PokeCenter & PokeMarket</h2>
         <p>Work in Progress...</p>
       </div>
@@ -269,7 +269,7 @@
       </div>
 
       <!-- View 5: Casino Hub -->
-      <div id="view-casino" class="game-view" style="display:none; background-image: url('./Assets/BG/BG-Cassino.jpg'); text-align: center; background-size: 100% 100%; height: 100%; position: relative;">
+      <div id="view-casino" class="game-view" style="display:none; background-image: url('./Assets/BG/Casino.png'); text-align: center; background-size: 100% 100%; height: 100%; position: relative;">
         <!-- Casino Content Container, so we can hide/show lobby vs specific background overlays -->
         <div id="casino-content" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
             <div id="casino-buttons-container" style="display: flex; flex-direction: row; gap: 10px;">
@@ -279,7 +279,7 @@
       </div>
 
       <!-- View 6: Battle Stadium -->
-      <div id="view-battle-stadium" class="game-view" style="display:none; background-image: url('./Assets/BG/BG.png'); background-size: 100% 100%; height: 100%; position: relative; align-items: center; justify-content: flex-start; flex-direction: column; overflow-y: auto; box-sizing: border-box; padding: 15px 10px;">
+      <div id="view-battle-stadium" class="game-view" style="display:none; background-image: url('./Assets/BG/BattleMode/Test.png'); background-size: 100% 100%; height: 100%; position: relative; align-items: center; justify-content: flex-start; flex-direction: column; overflow-y: auto; box-sizing: border-box; padding: 15px 10px;">
           <div style="display: flex; flex-direction: column; align-items: center; gap: 5px; margin-bottom: 5px; flex-shrink: 0;">
               <div style="font-weight: bold; font-size: 20px; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">Multiplayer</div>
               <div style="display: inline-flex; background: rgba(0, 0, 0, 0.6); border-radius: 20px; padding: 3px; gap: 5px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);">
@@ -343,7 +343,7 @@
       </div>
 
       <!-- View 7: Daycare Hub -->
-      <div id="view-daycare" class="game-view" style="display:none; background-image: url('./Assets/BG/BG-Daycare.png'); background-size: 100% 100%; background-position: center; height: 100%; position: relative;">
+      <div id="view-daycare" class="game-view" style="display:none; background-image: url('./Assets/BG/Daycare.png'); background-size: 100% 100%; background-position: center; height: 100%; position: relative;">
         <!-- Daycare First-Time Overlay -->
         <div id="daycare-first-time-overlay" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000; background: rgba(0, 0, 0, 0.7); flex-direction: column; align-items: center; justify-content: center;">
             <div style="background: #34495e; padding: 20px; border-radius: 10px; border: 2px solid #00ffff; text-align: center; color: white; max-width: 80%;">

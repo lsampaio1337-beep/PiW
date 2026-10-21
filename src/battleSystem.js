@@ -514,7 +514,7 @@ class BattleSystem {
             if (trainerIndex >= trainerBGs.length) {
                 trainerIndex = trainerBGs.length - 1; // Keep Champion BG after beating them
             }
-            const bgImage = trainerBGs[trainerIndex] || 'BG.png';
+            const bgImage = trainerBGs[trainerIndex] || 'BattleMode/Test.png';
             vGym.style.backgroundImage = `url('./Assets/BG/${bgImage}')`;
             vGym.style.backgroundSize = "cover";
         } else {
@@ -562,7 +562,7 @@ class BattleSystem {
                     'BG-Gym-6-Saffron-Psychic.png',
                     'BG-Gym-7-Cinnabar-Fire.png',
                     'BG-Gym-8-Viridian-Ground.png',
-                    'BG-IndigoPlateau.png',
+                    'IndigoPlateau.png',
                     '../Gym/BG/BG_Gym_Flying.png',
                     '../Gym/BG/BG_Gym_Bug.png',
                     '../Gym/BG/BG_Gym_Normal.png',
@@ -572,7 +572,7 @@ class BattleSystem {
                     '../Gym/BG/BG_Gym_Ice.png',
                     '../Gym/BG/BG_Gym_Dragon.png'
                 ];
-                const bgImage = gymBGs[gymIndex] || 'BG.png';
+                const bgImage = gymBGs[gymIndex] || 'BattleMode/Test.png';
                 vGym.style.backgroundImage = `url('./Assets/BG/${bgImage}')`;
                 vGym.style.backgroundSize = "cover";
             }
