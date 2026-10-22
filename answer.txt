@@ -1,0 +1,136 @@
+
+==================== RESULTS ====================
+
+Which one from 2nd gen is not in game but can be obtained via evolution?
+169 - Crobat
+178 - Xatu
+181 - Ampharos
+184 - Azumarill
+186 - Politoed
+188 - Skiploom
+189 - Jumpluff
+192 - Sunflora
+196 - Espeon
+197 - Umbreon
+205 - Forretress
+208 - Steelix
+210 - Granbull
+212 - Scizor
+221 - Piloswine
+224 - Octillery
+237 - Hitmontop
+247 - Pupitar
+248 - Tyranitar
+
+Which one from 2nd gen is not in game and cannot be obtained?
+152 - Chikorita
+153 - Bayleef
+154 - Meganium
+155 - Cyndaquil
+156 - Quilava
+157 - Typhlosion
+158 - Totodile
+159 - Croconaw
+160 - Feraligatr
+172 - Pichu
+173 - Cleffa
+174 - Igglybuff
+175 - Togepi
+176 - Togetic
+182 - Bellossom
+198 - Murkrow
+199 - Slowking
+218 - Slugma
+219 - Magcargo
+228 - Houndour
+229 - Houndoom
+230 - Kingdra
+233 - Porygon2
+238 - Smoochum
+239 - Elekid
+240 - Magby
+242 - Blissey
+
+Which one from 1st gen is not in game but can be obtained via evolution?
+18 - Pidgeot
+28 - Sandslash
+30 - Nidorina
+31 - Nidoqueen
+33 - Nidorino
+34 - Nidoking
+38 - Ninetales
+40 - Wigglytuff
+53 - Persian
+57 - Primeape
+59 - Arcanine
+62 - Poliwrath
+64 - Kadabra
+65 - Alakazam
+68 - Machamp
+71 - Victreebel
+76 - Golem
+78 - Rapidash
+82 - Magneton
+85 - Dodrio
+91 - Cloyster
+93 - Haunter
+94 - Gengar
+97 - Hypno
+103 - Exeggutor
+105 - Marowak
+106 - Hitmonlee
+107 - Hitmonchan
+121 - Starmie
+134 - Vaporeon
+135 - Jolteon
+136 - Flareon
+149 - Dragonite
+
+Which one from 1st gen is not in game and cannot be obtained?
+1 - Bulbasaur
+2 - Ivysaur
+3 - Venusaur
+4 - Charmander
+5 - Charmeleon
+6 - Charizard
+7 - Squirtle
+8 - Wartortle
+9 - Blastoise
+25 - Pikachu
+26 - Raichu
+35 - Clefairy
+36 - Clefable
+43 - Oddish
+44 - Gloom
+45 - Vileplume
+50 - Diglett
+51 - Dugtrio
+79 - Slowpoke
+80 - Slowbro
+86 - Seel
+87 - Dewgong
+88 - Grimer
+89 - Muk
+111 - Rhyhorn
+112 - Rhydon
+113 - Chansey
+115 - Kangaskhan
+116 - Horsea
+117 - Seadra
+122 - Mr. Mime
+125 - Electabuzz
+131 - Lapras
+137 - Porygon
+138 - Omanyte
+139 - Omastar
+140 - Kabuto
+141 - Kabutops
+142 - Aerodactyl
+143 - Snorlax
+144 - Articuno
+145 - Zapdos
+146 - Moltres
+150 - Mewtwo
+151 - Mew
+
+=================================================
