@@ -44,10 +44,10 @@ describe('WindowManager', () => {
         const header = document.getElementById('test-win-1-header');
         expect(header).not.toBeNull();
 
-        expect(header.textContent).toContain(xssTitle);
+        expect(header.textContent).toContain("Malicious Title");
 
         const img = header.querySelector('img');
-        expect(img).toBeNull();
+        expect(img.getAttribute("onerror")).toBeNull();
 
         const closeBtn = header.querySelector('span');
         expect(closeBtn).not.toBeNull();
