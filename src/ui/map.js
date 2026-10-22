@@ -439,22 +439,7 @@ export function showMap() {
         { name: 'Paldea', mapFile: '10 Paldea Map.png', width: 1280, height: 905 }
     ];
 
-    let unlockedRegions = [
-        regions[0].name, // Kanto
-        regions[1].name, // Johto
-        regions[2].name, // Hoenn
-        regions[3].name, // Sinnoh
-        regions[4].name  // Unova
-    ]; // First 5 regions unlocked initially
-
-    for (let i = 4; i < regions.length - 1; i++) {
-        if (checkFinalChallengeCompleted(regions[i].name)) {
-            unlockedRegions.push(regions[i + 1].name);
-        } else {
-            // Once a region hasn't been completed, we stop unlocking
-            break;
-        }
-    }
+    let unlockedRegions = regions.map(r => r.name);
 
     if (unlockedRegions.includes('Johto')) { state.globalStats.hasSeenJohtoMap = true; }
 
