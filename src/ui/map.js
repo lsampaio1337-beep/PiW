@@ -844,7 +844,7 @@ export function showMapTooltip(e, locationName) {
             const gym = state.config.gyms.find(g => g.name === lookupName);
             if (gym) {
                 info += `Leader: ${gym.leader}<br>`;
-                info += `Trainers: ${gym.trainers.length - 1}<br>`;
+                info += `Trainers: ${gym.trainers.length}<br>`;
             }
         }
     } else if (window.getCurrentRoutes()) {
