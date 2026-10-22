@@ -10,6 +10,7 @@ import Storage from "./storage.js";
 
 // Import State and modules
 import { state, setBattleSystem, globals, checkFinalChallengeCompleted } from './state.js';
+import { pokedexIndexes } from '../config/pokedexIndexes.js';
 import { trackDailyChallenge, checkAndResetDailyChallenges } from './ui/dailyChallenges.js';
 import { showHelp } from './ui/help.js';
 
@@ -2441,6 +2442,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
                     <button onclick="window.showTrainerStats('badges')" style="${tab === 'badges' ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmousedown="event.stopPropagation()">Badges</button>
                     <button onclick="window.showTrainerStats('catch-rate')" style="${tab === 'catch-rate' ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmousedown="event.stopPropagation()">Catch Rate</button>
                     <button onclick="window.showTrainerStats('upgrades')" style="${tab === 'upgrades' ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmousedown="event.stopPropagation()">Upgrades</button>
+                    <button onclick="window.showTrainerStats('medals')" style="${tab === 'medals' ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmousedown="event.stopPropagation()">Medals</button>
                 </div>
             </div>
         `;
@@ -2646,6 +2648,55 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
             if (contentHtml === '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; padding: 15px;"></div>') {
                 contentHtml = '<div style="text-align: center; padding: 20px; font-style: italic; color: #ccc;">No upgrades purchased yet.</div>';
             }
+        } else if (tab === 'medals') {
+            contentHtml = '<div style="display: flex; flex-direction: column; gap: 20px; padding: 15px;">';
+
+            const supportedRegions = ['Kanto', 'Johto', 'Hoenn', 'Sinnoh', 'Unova', 'Kalos', 'Alola', 'Galar', 'Hisui', 'Paldea'];
+            let anyMedalsEarned = false;
+
+            supportedRegions.forEach(regionName => {
+                let regionStats;
+                if (regionName === 'Kanto' || (!state.currentRegionName && regionName === 'Kanto')) {
+                    regionStats = state.stats;
+                } else if (state.regions && state.regions[regionName]) {
+                    regionStats = state.regions[regionName].stats;
+                }
+
+                if (!regionStats) return;
+
+                let hasFirst = false;
+                if (regionName === 'Johto') {
+                    if (regionStats.completedChallengeIds && regionStats.completedChallengeIds.includes('Red')) {
+                        hasFirst = true;
+                    }
+                } else {
+                    if (checkFinalChallengeCompleted(regionName)) {
+                        hasFirst = true;
+                    }
+                }
+
+                const dexLength = pokedexIndexes.regional[regionName.toLowerCase()] ? pokedexIndexes.regional[regionName.toLowerCase()].length : Infinity;
+                let hasSecond = (regionStats.caughtSpeciesCount || 0) >= dexLength;
+                let hasThird = Object.keys(regionStats.caughtShiniesSpecies || {}).length >= dexLength;
+
+                if (hasFirst || hasSecond || hasThird) {
+                    anyMedalsEarned = true;
+                    contentHtml += `<div style="display: flex; gap: 15px; justify-content: center; align-items: center; background: rgba(0, 0, 0, 0.2); padding: 15px; border-radius: 10px; border: 1px solid #334155;">`;
+                    if (hasFirst) contentHtml += `<img src="./Assets/Extra/Medals/${regionName} First.png" style="width: 100px; height: 100px; object-fit: contain;">`;
+                    if (hasSecond) contentHtml += `<img src="./Assets/Extra/Medals/${regionName} Second.png" style="width: 100px; height: 100px; object-fit: contain;">`;
+                    if (hasThird) contentHtml += `<img src="./Assets/Extra/Medals/${regionName} Third.png" style="width: 100px; height: 100px; object-fit: contain;">`;
+                    contentHtml += `</div>`;
+                }
+            });
+
+            if (!anyMedalsEarned) {
+                contentHtml += `
+                    <div style="text-align: center; padding: 40px; color: #94a3b8; font-style: italic;">
+                        No medals earned yet.<br><br>Complete regional challenges and catch Pokémon to earn medals!
+                    </div>
+                `;
+            }
+            contentHtml += '</div>';
         }
 
         showModal(titleHtml, contentHtml, "window-trainer");
