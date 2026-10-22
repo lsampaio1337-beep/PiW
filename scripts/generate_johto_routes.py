@@ -448,16 +448,21 @@ def parse_requirements(req_str, area_id):
         catch_rare = []
 
         # We need to split by "and" or "," but first fix specific edge cases
-        # "Get 1 Articuno Get 1 Zapdos Get 1 Moltres"
-        req_str_fixed = req_str.replace("Get 1 Articuno Get 1 Zapdos Get 1 Moltres", "Get 1 Articuno, Get 1 Zapdos, Get 1 Moltres")
-        req_str_fixed = req_str_fixed.replace("Capture 1 Hitmonlee Capture 1 Hitmonchan Capture 1 Hitmontop", "Capture 1 Hitmonlee, Capture 1 Hitmonchan, Capture 1 Hitmontop")
-        req_str_fixed = req_str_fixed.replace("Capture all 6 starters", "Catch 1 Bulbasaur, Catch 1 Charmander, Catch 1 Squirtle, Catch 1 Chikorita, Catch 1 Cyndaquil, Catch 1 Totodile")
-        req_str_fixed = req_str_fixed.replace("Defeat 1 Raikou, Defeat 1 Entei, Defeat 1 Suicune", "Defeat 1 Raikou, Defeat 1 Entei, Defeat 1 Suicune") # already correct
-        req_str_fixed = req_str_fixed.replace("Catch 1 Venusaur Catch 1 Charizard Catch 1 Blastoise", "Catch 1 Venusaur, Catch 1 Charizard, Catch 1 Blastoise")
-        req_str_fixed = req_str_fixed.replace("Catch 1 Ledyba and Catch 1 Spinarak", "Catch 1 Ledyba, Catch 1 Spinarak")
-        req_str_fixed = req_str_fixed.replace("Catch 1 Nidoran♀ and 1 Nidoran♂", "Catch 1 Nidoran♀, Catch 1 Nidoran♂")
-        req_str_fixed = req_str_fixed.replace("Defeat 4 Scyther and Defeat 4 Pinsir", "Defeat 4 Scyther, Defeat 4 Pinsir")
-        req_str_fixed = req_str_fixed.replace("Catch 1 Ledian and Catch 1 Ariados", "Catch 1 Ledian, Catch 1 Ariados")
+        # Specific replacement for starters
+        req_str_fixed = req_str.replace("Capture all 6 starters", "Catch 1 Bulbasaur, Catch 1 Charmander, Catch 1 Squirtle, Catch 1 Chikorita, Catch 1 Cyndaquil, Catch 1 Totodile")
+
+        # Replace " and " with ", "
+        req_str_fixed = req_str_fixed.replace(" and ", ", ")
+
+        # Insert a comma before action verbs if missing
+        req_str_fixed = re.sub(r'(?<!,)\s+(?=(Catch|Capture|Get|Defeat)\b)', ', ', req_str_fixed)
+
+        # Handle implied action verbs (e.g., "Catch 1 A, 1 B" -> "Catch 1 A, Catch 1 B")
+        while True:
+            new_str = re.sub(r'\b(Catch|Capture|Get|Defeat)\s+([^,]+),\s+(\d+\s+[^,]+)', r'\1 \2, \1 \3', req_str_fixed)
+            if new_str == req_str_fixed:
+                break
+            req_str_fixed = new_str
 
         parts = req_str_fixed.replace(" and ", ",").split(",")
         for part in parts:
