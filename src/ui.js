@@ -1494,6 +1494,9 @@ function selectStarter(id) {
     if (!state.stats.newRoutes.includes("PokeCenter & PokeMarket")) {
         state.stats.newRoutes.push("PokeCenter & PokeMarket");
     }
+    if (!state.stats.newRoutes.includes("Daycare")) {
+        state.stats.newRoutes.push("Daycare");
+    }
     if (state.stats.activeChallenges) {
         for (let challenge of state.stats.activeChallenges) {
             if (!state.stats.newRoutes.includes(challenge)) {

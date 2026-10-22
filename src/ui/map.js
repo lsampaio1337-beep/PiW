@@ -234,6 +234,7 @@ function getUnlockedAreas() {
     }
 
     unlockedAreas.add("PokeCenter & PokeMarket");
+    unlockedAreas.add("Daycare");
 
     if (window.currentMapRegion === "Johto") {
         unlockedAreas.add("Route 29");
@@ -317,6 +318,8 @@ function generateMarkersForRegion(region, unlockedAreas) {
     } else if (region === 'Johto') {
         for (const [locationId, locationData] of Object.entries(state.config.johtoMapCoordinates || {})) {
             const locationName = locationData.name;
+            let isUnlocked = unlockedAreas.has(locationName);
+            if (!isUnlocked) continue;
             const coords = locationData;
             let isUnlocked = unlockedAreas.has(locationName);
             if (!isUnlocked) continue;
@@ -342,6 +345,8 @@ function generateMarkersForRegion(region, unlockedAreas) {
     } else if (region === 'Hoenn') {
         for (const [locationId, locationData] of Object.entries(state.config.hoennMapCoordinates || {})) {
             const locationName = locationData.name;
+            let isUnlocked = unlockedAreas.has(locationName);
+            if (!isUnlocked) continue;
             const coords = locationData;
 
             let hasNewNotification = false;
