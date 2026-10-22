@@ -132,15 +132,40 @@ class BattleSystem {
     }
 
     getTypeEffectiveness(moveType, defenderTypes) {
-        let effectiveness = 1.0;
-        if (!this.state.config.types[moveType]) return effectiveness;
+        if (!this._typeEffectivenessCache) {
+            this._typeEffectivenessCache = new Map();
+        }
 
-        for (const defType of defenderTypes) {
-            if (this.state.config.types[moveType][defType] !== undefined) {
-                effectiveness *= this.state.config.types[moveType][defType];
+        let cacheForMove = this._typeEffectivenessCache.get(moveType);
+        if (cacheForMove === undefined) {
+            cacheForMove = new Map();
+            this._typeEffectivenessCache.set(moveType, cacheForMove);
+        }
+
+        const len = defenderTypes.length;
+        let key = defenderTypes[0];
+        if (len === 2) {
+             key += defenderTypes[1];
+        } else if (len > 2) {
+             key = defenderTypes.join('');
+        }
+
+        let eff = cacheForMove.get(key);
+        if (eff !== undefined) return eff;
+
+        eff = 1.0;
+        const moveData = this.state.config.types[moveType];
+        if (moveData) {
+            for (let i = 0; i < len; i++) {
+                const defType = defenderTypes[i];
+                if (moveData[defType] !== undefined) {
+                    eff *= moveData[defType];
+                }
             }
         }
-        return effectiveness;
+
+        cacheForMove.set(key, eff);
+        return eff;
     }
 
     getBestMove(attacker, defender) {
