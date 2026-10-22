@@ -13,6 +13,18 @@ function escapeHTML(str) {
 }
 
 class BattleSystem {
+
+    cloneEncounter(encounter) {
+        if (!encounter) return null;
+        return {
+            ...encounter,
+            types: encounter.types ? [...encounter.types] : undefined,
+            ivs: encounter.ivs ? { ...encounter.ivs } : undefined,
+            currentStats: encounter.currentStats ? { ...encounter.currentStats } : undefined,
+            moves: encounter.moves ? encounter.moves.map(m => ({ ...m })) : undefined
+        };
+    }
+
     constructor(gameState, updateUI) {
         this.state = gameState; // reference to global game state
         this.updateUI = updateUI; // callback to update UI
@@ -997,7 +1009,7 @@ class BattleSystem {
         for (const ls of pokemonBase.learnset) {
             if (level >= ls.level) {
                 if (this.state.config.moves[ls.move]) {
-                    const moveData = JSON.parse(JSON.stringify(this.state.config.moves[ls.move]));
+                    const moveData = { ...this.state.config.moves[ls.move] };
                     moveData.name = ls.move;
                     learned.push(moveData);
                 }
@@ -1286,7 +1298,7 @@ class BattleSystem {
             if (ballResult.used) {
                 const processCapture = () => {
                     if (ballResult.caught) {
-                        let caughtPokemon = JSON.parse(JSON.stringify(defeatedEncounter));
+                        let caughtPokemon = this.cloneEncounter(defeatedEncounter);
 
                         let trackingName = defeatedEncounter.name;
                         let trackingTypes = defeatedEncounter.types || [];
@@ -2247,7 +2259,7 @@ class BattleSystem {
                 if (this.state.settings.autoCatch) {
                     const ballResult = this.throwPokeball();
                     if (ballResult.caught) {
-                        let caughtPokemon = JSON.parse(JSON.stringify(this.activeEncounter));
+                        let caughtPokemon = this.cloneEncounter(this.activeEncounter);
                         let trackingName = this.activeEncounter.name;
 
                         if (caughtPokemon.isDisguisedDitto) {
