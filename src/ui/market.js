@@ -13,6 +13,18 @@ import { calculatePP, getCapacity, getCurrentCount } from "../mathEngine.js";
 import { state } from '../state.js';
 import { updateUI, showModal } from '../ui.js';
 
+
+function escapeHtml(unsafe) {
+    if (!unsafe && unsafe !== 0) return '';
+    return String(unsafe)
+         .replace(/&/g, "&amp;")
+         .replace(/</g, "&lt;")
+         .replace(/>/g, "&gt;")
+         .replace(/"/g, "&quot;")
+         .replace(/'/g, "&#039;");
+}
+
+
 // formatMarketNumberDown is hoisted manually if needed
 function _formatMarketNumberDown(num) {
     return num.toLocaleString();
@@ -263,7 +275,7 @@ export function renderPokeMarketTab(category) {
 
     let html = `<div style="--m-width: min(76vw, 750px); display: flex; flex-wrap: wrap; gap: calc(var(--m-width) * 0.018); justify-content: center; width: 100%;">`;
     items.forEach(item => {
-        let displayName = item.displayName || item.name;
+        let displayName = escapeHtml(item.displayName || item.name);
         if (category === 'potions') displayName = displayName.replace(' Potion', '<br>Potion');
         if (category === 'stones') displayName = displayName.replace(' Stone', '<br>Stone');
 
@@ -612,7 +624,7 @@ export function renderPokeMarketSellTab(category) {
             html += `
                 <div onclick="if(window.toggleMarketPokemonSaleSelection) window.toggleMarketPokemonSaleSelection('${p.uuid}')"
                     style="width: calc(16.666% - calc(var(--m-width) * 0.018 * 5 / 6)); box-sizing: border-box; ${selectionStyle} border-radius: 10px; padding: calc(var(--m-width) * 0.012); text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; position: relative;">
-                    <div style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; margin-bottom: calc(var(--m-width) * 0.006); line-height: 1.1; color: white;">${pName}</div>
+                    <div style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; margin-bottom: calc(var(--m-width) * 0.006); line-height: 1.1; color: white;">${escapeHtml(pName)}</div>
                     <div style="flex: 1; width: 100%; display: flex; align-items: center; justify-content: center; position: relative; height: calc(var(--m-width) * 0.072); margin-bottom: calc(var(--m-width) * 0.006);">
                         <img src="${imgSrc}" class="${glowClass}" style="max-height: 100%; max-width: 100%; object-fit: contain; z-index: 1;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
                     </div>
@@ -684,7 +696,7 @@ export function renderPokeMarketSellTab(category) {
 
     let html = `<div style="--m-width: min(76vw, 750px); display: flex; flex-wrap: wrap; gap: calc(var(--m-width) * 0.018); justify-content: center; width: 100%;">`;
     items.forEach(item => {
-        let displayName = item.displayName || item.name;
+        let displayName = escapeHtml(item.displayName || item.name);
         if (category === 'potions') displayName = displayName.replace(' Potion', '<br>Potion');
         if (category === 'stones') displayName = displayName.replace(' Stone', '<br>Stone');
 
