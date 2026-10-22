@@ -161,10 +161,6 @@ function getColorHex(colorName) {
     return 'white';
 }
 
-window.claimWhiteCandy = function() {
-    // Deprecated now that it auto-claims
-};
-
 window.buyBonusCandy = function(color) {
     if (color === 'Rainbow Candy' && (state.stats.rainbowCandies || 0) >= 7) {
         alert("Maximum Rainbow Candies reached!");
