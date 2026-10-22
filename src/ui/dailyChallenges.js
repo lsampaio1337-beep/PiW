@@ -68,11 +68,17 @@ const CHALLENGE_DEFS = {
 
                 unlockedAreas.add('Route 1');
 
+                let routeMap = new Map();
+                for (let r of window.getCurrentRoutes()) routeMap.set(r.name, r);
+
+                let pokemonMap = new Map();
+                for (let p of state.config.pokemonData) pokemonMap.set(p.id, p);
+
                 for (let area of unlockedAreas) {
-                    let route = window.getCurrentRoutes().find(r => r.name === area);
+                    let route = routeMap.get(area);
                     if (route && route.spawns) {
                         for (let s of route.spawns) {
-                            let pData = state.config.pokemonData.find(pd => pd.id === s.pokemonId);
+                            let pData = pokemonMap.get(s.pokemonId);
                             if (pData && pData.types) pData.types.forEach(t => availableTypes.add(t));
                         }
                     }
@@ -100,8 +106,11 @@ const CHALLENGE_DEFS = {
 
                 unlockedAreas.add('Route 1');
 
+                let routeMap = new Map();
+                for (let r of window.getCurrentRoutes()) routeMap.set(r.name, r);
+
                 for (let area of unlockedAreas) {
-                    let route = window.getCurrentRoutes().find(r => r.name === area);
+                    let route = routeMap.get(area);
                     if (route && route.spawns) {
                         for (let s of route.spawns) {
                             availableSpecies.add(s.pokemonId);
@@ -161,11 +170,17 @@ const CHALLENGE_DEFS = {
 
                 unlockedAreas.add('Route 1');
 
+                let routeMap = new Map();
+                for (let r of window.getCurrentRoutes()) routeMap.set(r.name, r);
+
+                let pokemonMap = new Map();
+                for (let p of state.config.pokemonData) pokemonMap.set(p.id, p);
+
                 for (let area of unlockedAreas) {
-                    let route = window.getCurrentRoutes().find(r => r.name === area);
+                    let route = routeMap.get(area);
                     if (route && route.spawns) {
                         for (let s of route.spawns) {
-                            let pData = state.config.pokemonData.find(pd => pd.id === s.pokemonId);
+                            let pData = pokemonMap.get(s.pokemonId);
                             if (pData && pData.types) pData.types.forEach(t => availableTypes.add(t));
                         }
                     }
