@@ -411,8 +411,7 @@ window.rerollIndividualDailyChallenge = function(index) {
             }
         }
 
-        let unusedCategories = Object.keys(categoryLists).filter(key => !activeCategories.has(key) && categoryLists[key].length > 0);
-        let availableCategories = unusedCategories;
+        let availableCategories = Object.keys(categoryLists).filter(key => !activeCategories.has(key) && categoryLists[key].length > 0);
 
         if (availableCategories.length === 0) {
             availableCategories = Object.keys(categoryLists).filter(key => categoryLists[key].length > 0);
