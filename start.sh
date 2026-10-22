@@ -1,2 +1,3 @@
-export NODE_PATH=/app/node_modules
-npm run start > app.log 2>&1 &
+#!/bin/bash
+npx serve . -l 3000 &
+echo $! > serve.pid
