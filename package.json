@@ -8,7 +8,8 @@
     "test": "jest",
     "start": "electron-forge start",
     "package": "electron-forge package",
-    "make": "electron-forge make"
+    "make": "electron-forge make",
+    "test": "node scripts/test_mathEngine.mjs"
   },
   "repository": {
     "type": "git",
