@@ -567,9 +567,9 @@ export class WindowManager {
                 winElement._originalRatio = winElement._originalWidth / winElement._originalHeight;
             }
 
-            // If main-control-window is uninitialized, assign the calculated max-content width to the actual element width
+            // If window is uninitialized, assign the calculated max-content width to the actual element width
             // to allow it to wrap properly, avoiding the 80x80 initial bug where the wrapper is small.
-            if (windowId === 'main-control-window' && (!oldWidth || oldWidth === 'auto' || parseInt(oldWidth) < 150)) {
+            if (!oldWidth || oldWidth === 'auto' || parseInt(oldWidth) < 150) {
                 let contentContainer = winElement.querySelector('.window-content-container');
                 let horizontalPadding = 0;
                 if (contentContainer) {
