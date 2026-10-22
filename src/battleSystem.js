@@ -997,7 +997,7 @@ class BattleSystem {
         for (const ls of pokemonBase.learnset) {
             if (level >= ls.level) {
                 if (this.state.config.moves[ls.move]) {
-                    const moveData = JSON.parse(JSON.stringify(this.state.config.moves[ls.move]));
+                    const moveData = { ...this.state.config.moves[ls.move] };
                     moveData.name = ls.move;
                     learned.push(moveData);
                 }
