@@ -36,38 +36,27 @@ rarity_weights = {
     'interact': 100
 }
 
-def fetch_kalos_regional_dex():
-    url = "https://pokemondb.net/pokedex/game/x-y"
+def fetch_pokemon_bst():
+    url = f"{base_url}/pokedex/all"
     response = requests.get(url)
     soup = BeautifulSoup(response.content, 'html.parser')
 
     mapping = {}
-
-    headings = soup.find_all('h2')
-    for h2 in headings:
-        prefix = ""
-        if 'Central' in h2.text: prefix = "Central"
-        elif 'Coastal' in h2.text: prefix = "Coastal"
-        elif 'Mountain' in h2.text: prefix = "Mountain"
-
-        if prefix:
-            container = h2.find_next_sibling('div', class_='infocard-list')
-            if container:
-                for card in container.find_all('div', class_='infocard'):
-                    small_tags = card.find_all('small')
-                    regional_id = ""
-                    if len(small_tags) >= 1:
-                        regional_id = small_tags[0].text.strip()
-
-                    a_tag = card.find('a', class_='ent-name')
-                    if a_tag:
-                        name = a_tag.text.strip()
-                        # If a Pokemon is in multiple dexes somehow, keep the first one found or overwrite, X/Y has unique assignments mostly
-                        mapping[name] = f"{prefix} {regional_id}".strip()
-
+    table = soup.find('table', id='pokedex')
+    if table:
+        tbody = table.find('tbody')
+        for tr in tbody.find_all('tr'):
+            tds = tr.find_all('td')
+            if len(tds) >= 5:
+                a_tag = tds[1].find('a', class_='ent-name')
+                if a_tag:
+                    name = a_tag.text.strip()
+                    bst = tds[3].text.strip()
+                    if name not in mapping:
+                        mapping[name] = bst
     return mapping
 
-kalos_regional_dex = fetch_kalos_regional_dex()
+bst_map = fetch_pokemon_bst()
 
 def fetch_kalos_locations():
     url = f"{base_url}/location"
@@ -114,6 +103,21 @@ def parse_encounter_table(table, method_name):
             x_col = tds[1]
             y_col = tds[2]
 
+            level_str = ""
+            for idx in range(3, len(tds)):
+                col = tds[idx]
+                class_list = col.get('class', [])
+                if isinstance(class_list, str):
+                    class_list = [class_list]
+
+                if 'cell-num' in class_list or re.match(r'^[\d\-]+$', col.text.strip()):
+                    if idx == 4:
+                        level_str = col.text.strip()
+                        break
+
+            if not level_str and len(tds) >= 5:
+                 level_str = tds[4].text.strip()
+
             x_active = 'cell-loc-game-blank' not in x_col.get('class', [])
             y_active = 'cell-loc-game-blank' not in y_col.get('class', [])
 
@@ -124,7 +128,7 @@ def parse_encounter_table(table, method_name):
             if img_tag and img_tag.get('title'):
                 title = img_tag.get('title').lower()
                 weight = rarity_weights.get(title, 10)
-            elif rate_col.text.strip():
+            elif rate_col.text.strip() and not re.match(r'^[\d\-]+$', rate_col.text.strip()):
                 text = rate_col.text.strip().lower()
                 weight = rarity_weights.get(text, 10)
                 if 'one' in text or 'choice' in text or 'interact' in text:
@@ -136,7 +140,7 @@ def parse_encounter_table(table, method_name):
             y_pct = weight if y_active else 0
 
             if x_pct == 0 and y_pct == 0:
-                text = rate_col.text.strip().lower()
+                text = rate_col.text.strip().lower() if rate_col.text.strip() else ""
                 if 'one' in text or 'choice' in text or 'interact' in text:
                     x_pct = 100
                     y_pct = 100
@@ -146,12 +150,10 @@ def parse_encounter_table(table, method_name):
                     y_pct = 100
                     method_name = 'static'
 
-            regional_id = kalos_regional_dex.get(pokemon_name, "")
-
             if x_pct > 0 or y_pct > 0:
                 encounters.append({
-                    'pokemon_id': regional_id,
                     'pokemon_name': pokemon_name,
+                    'level': level_str,
                     'method_raw': method_name,
                     'x_pct': x_pct,
                     'y_pct': y_pct
@@ -199,74 +201,169 @@ def scrape_location(url, location_name):
 
     return all_encounters
 
+def merge_levels(level_list):
+    nums = []
+    for lvl in level_list:
+        lvl = str(lvl).strip()
+        if not lvl or lvl == 'nan':
+            continue
+        matches = re.findall(r'\d+', lvl)
+        nums.extend([int(m) for m in matches])
+
+    if not nums:
+        return ""
+
+    min_lvl = min(nums)
+    max_lvl = max(nums)
+    if min_lvl == max_lvl:
+        return str(min_lvl)
+    else:
+        return f"{min_lvl}-{max_lvl}"
+
+def is_almost_similar(route_a_set, route_b_set):
+    """
+    Returns True if the sets are identical, or if they differ by at most
+    1 Pokemon (added, removed, or swapped).
+    """
+    # If route B has 1 new pokemon (B - A == 1) and missing 1 (A - B == 1) it's a swap (1 diff).
+    # If B is identical (0, 0)
+    # If B has 1 extra (1, 0) or 1 missing (0, 1)
+    diff_a_b = len(route_a_set - route_b_set)
+    diff_b_a = len(route_b_set - route_a_set)
+    return diff_a_b <= 1 and diff_b_a <= 1
+
 def process_data(locations):
-    all_data = []
+    # Phase 1: Scrape all data and organize by route
+    scraped_routes_data = []
 
     for i, loc_name in enumerate(progression_list):
-        print(f"Processing {loc_name}...")
         if loc_name not in locations:
-            print(f"Warning: {loc_name} not found in scraped locations.")
-            all_data.append({
-                'Progress Order': i + 1,
-                'Route / Place': loc_name,
-                'Pokemon ID Regional': '',
-                'Pokemon Name': '',
-                'Method': '',
-                '% of appearance': ''
-            })
+            scraped_routes_data.append({'name': loc_name, 'raw_data': [], 'pokemon_set': set()})
             continue
 
         encounters = scrape_location(locations[loc_name], loc_name)
 
         if not encounters:
-            all_data.append({
-                'Progress Order': i + 1,
-                'Route / Place': loc_name,
-                'Pokemon ID Regional': '',
-                'Pokemon Name': '',
-                'Method': '',
-                '% of appearance': ''
-            })
+            scraped_routes_data.append({'name': loc_name, 'raw_data': [], 'pokemon_set': set()})
             continue
 
         processed_encounters = []
+        pokemon_set = set()
         for e in encounters:
             method = standardize_method(e['method_raw'])
             combined_weight = (e['x_pct'] + e['y_pct']) / 2.0
 
+            if e['pokemon_name']:
+                pokemon_set.add(e['pokemon_name'])
+
             processed_encounters.append({
-                'pokemon_id': e['pokemon_id'],
                 'pokemon_name': e['pokemon_name'],
+                'level': e['level'],
                 'method': method,
                 'weight': combined_weight
             })
 
+        scraped_routes_data.append({
+            'name': loc_name,
+            'raw_data': processed_encounters,
+            'pokemon_set': pokemon_set
+        })
+        time.sleep(0.5)
+
+    # Phase 2: Filter routes based on similarity
+    kept_routes = []
+    for current_route in scraped_routes_data:
+        if not current_route['pokemon_set']:
+            # Keep empty routes (like cities with no wild encounters) ?
+            # Or should empty routes be removed if they are similar to another empty route?
+            # A symmetric diff of empty set vs empty set is 0. So second empty route is removed.
+            # Let's see if the user wants cities kept. The previous plan included them.
+            # However, technically empty set vs empty set has sym_diff=0. So all towns would be deleted except the first.
+            # Let's bypass the check for entirely empty routes so we don't accidentally remove towns.
+            kept_routes.append(current_route)
+            continue
+
+        is_similar = False
+        for previous_route in kept_routes:
+            if not previous_route['pokemon_set']:
+                continue # don't compare against empty towns
+
+            if is_almost_similar(current_route['pokemon_set'], previous_route['pokemon_set']):
+                print(f"Dropping {current_route['name']} because it is almost similar to {previous_route['name']}")
+                is_similar = True
+                break
+
+        if not is_similar:
+            kept_routes.append(current_route)
+
+    # Phase 3: Finalize formatting, calculating percentages, and tracking '1st?'
+    all_data = []
+    seen_pokemon = set()
+
+    order = 1
+    for route in kept_routes:
+        loc_name = route['name']
+        raw_data = route['raw_data']
+
+        if not raw_data:
+            all_data.append({
+                'Progress Order': order,
+                'Route / Place': loc_name,
+                'Pokemon Name': '',
+                'Level': '',
+                'BST': '',
+                'Method': '',
+                '% of appearance': '',
+                '1st?': ''
+            })
+            order += 1
+            continue
+
         from collections import defaultdict
-        grouped = defaultdict(lambda: defaultdict(float))
+        grouped_weights = defaultdict(lambda: defaultdict(float))
+        grouped_levels = defaultdict(lambda: defaultdict(list))
 
-        for e in processed_encounters:
-            grouped[e['method']][(e['pokemon_id'], e['pokemon_name'])] += e['weight']
+        for e in raw_data:
+            p_name = e['pokemon_name']
+            m = e['method']
+            grouped_weights[m][p_name] += e['weight']
+            if e['level']:
+                grouped_levels[m][p_name].append(e['level'])
 
-        for method, pokes in grouped.items():
+        for method, pokes in grouped_weights.items():
             total_weight = sum(pokes.values())
             if total_weight > 0:
-                for (pid, pname), weight in pokes.items():
+                for pname, weight in pokes.items():
                     normalized_pct = (weight / total_weight) * 100.0
+                    merged_level = merge_levels(grouped_levels[method][pname])
+                    bst = bst_map.get(pname, "")
+
+                    is_first = "No"
+                    if pname not in seen_pokemon:
+                        is_first = "Yes"
+                        seen_pokemon.add(pname)
+
                     all_data.append({
-                        'Progress Order': i + 1,
+                        'Progress Order': order,
                         'Route / Place': loc_name,
-                        'Pokemon ID Regional': pid,
                         'Pokemon Name': pname,
+                        'Level': merged_level,
+                        'BST': bst,
                         'Method': method,
-                        '% of appearance': round(normalized_pct, 2)
+                        '% of appearance': round(normalized_pct, 2),
+                        '1st?': is_first
                     })
 
-        time.sleep(0.5)
+        order += 1
 
     return all_data
 
 locations_map = fetch_kalos_locations()
 final_data = process_data(locations_map)
 df = pd.DataFrame(final_data)
+
+# Reorder columns to exactly match user request order with new columns
+df = df[['Progress Order', 'Route / Place', 'Pokemon Name', 'Level', 'BST', 'Method', '% of appearance', '1st?']]
+
 df.to_excel("kalos_routes.xlsx", index=False)
 print("Data saved to kalos_routes.xlsx")
