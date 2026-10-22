@@ -295,15 +295,14 @@ window.completeChallenge = function(targetAreaId) {
 window.cheatProgressChallenge = function(targetAreaId) {
     if (targetAreaId === '150_challenge') {
         if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
-        let count = 0;
+        state.stats.caughtSpeciesCount = state.stats.caughtSpeciesCount || 0;
         for (let i = 0; i < state.config.pokemonData.length; i++) {
-             if (count >= 150) break;
+             if (state.stats.caughtSpeciesCount >= 150) break;
              let p = state.config.pokemonData[i];
              if (!state.stats.caughtSpecies[p.name]) {
-                 state.stats.caughtSpeciesCount = (state.stats.caughtSpeciesCount || 0) + 1;
+                 state.stats.caughtSpeciesCount++;
+                 state.stats.caughtSpecies[p.name] = 1;
              }
-             state.stats.caughtSpecies[p.name] = 1;
-             count++;
         }
         if (window.updateUI) window.updateUI();
         const challengeWinCheat = document.getElementById('window-challenges');
