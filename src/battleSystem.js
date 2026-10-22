@@ -50,6 +50,45 @@ class BattleSystem {
         return this.pokemonBaseMap.get(id);
     }
 
+    getSpawnForRoute(route) {
+        if (!route || !route.spawns || route.spawns.length === 0) {
+            return null;
+        }
+
+        // Fast path for single spawn routes (no need to generate random number)
+        if (route.spawns.length === 1) {
+            return route.spawns[0];
+        }
+
+        // Cache the CDF on the route object
+        if (!route._cumulativeChances) {
+            route._cumulativeChances = new Float64Array(route.spawns.length);
+            let acc = 0;
+            for (let i = 0; i < route.spawns.length; i++) {
+                acc += route.spawns[i].chance;
+                route._cumulativeChances[i] = acc;
+            }
+        }
+
+        const rand = Math.random();
+        let low = 0;
+        let high = route.spawns.length - 1;
+        let mid;
+        const cdf = route._cumulativeChances;
+
+        // Binary search
+        while (low < high) {
+            mid = (low + high) >> 1;
+            if (rand > cdf[mid]) {
+                low = mid + 1;
+            } else {
+                high = mid;
+            }
+        }
+
+        return route.spawns[low] || route.spawns[0];
+    }
+
     getSpeedMultiplier() {
         const speedTier = this.state.stats?.upgrades?.speedTier || 0;
         // Tier 0: 1.0 (100% time)
@@ -893,16 +932,7 @@ class BattleSystem {
                 if (level < 30) level = 30;
                 if (level > 70) level = 70;
             } else {
-                const rand = Math.random();
-                let cumulative = 0;
-                selectedSpawn = route.spawns[0];
-                for (const spawn of route.spawns) {
-                    cumulative += spawn.chance;
-                    if (rand <= cumulative) {
-                        selectedSpawn = spawn;
-                        break;
-                    }
-                }
+                selectedSpawn = this.getSpawnForRoute(route);
 
                 actualPokemonBase = this.getPokemonBase(selectedSpawn.pokemonId);
                 pokemonBase = actualPokemonBase;
@@ -2054,16 +2084,7 @@ class BattleSystem {
             let ivs;
 
             // Simplify spawn logic for background
-            const rand = Math.random();
-            let cumulative = 0;
-            let selectedSpawn = route.spawns[0];
-            for (const spawn of route.spawns) {
-                cumulative += spawn.chance;
-                if (rand <= cumulative) {
-                    selectedSpawn = spawn;
-                    break;
-                }
-            }
+            let selectedSpawn = this.getSpawnForRoute(route);
             if(!selectedSpawn) {
                 totalSimTime += 5000;
                 continue;
