@@ -2477,10 +2477,19 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
 
             const whiteCandiesClaimed = state.stats.whiteCandies || 0;
 
-            let challengesCompleted = state.stats.completedChallengeIds ?
-                (window.getCurrentUnlocks() ? state.stats.completedChallengeIds.filter(id => window.getCurrentUnlocks().some(u => u.areaId === id)).length : state.stats.completedChallengeIds.length)
-                : 0;
-            let maxChallenges = window.getCurrentUnlocks() ? window.getCurrentUnlocks().length : 45;
+            let challengesCompleted = 0;
+            let maxChallenges = 45;
+            const currentUnlocks = window.getCurrentUnlocks();
+
+            if (currentUnlocks) {
+                maxChallenges = currentUnlocks.length;
+                if (state.stats.completedChallengeIds) {
+                    const unlockIds = new Set(currentUnlocks.map(u => u.areaId));
+                    challengesCompleted = state.stats.completedChallengeIds.filter(id => unlockIds.has(id)).length;
+                }
+            } else if (state.stats.completedChallengeIds) {
+                challengesCompleted = state.stats.completedChallengeIds.length;
+            }
 
             let assignmentsCompleted = 0;
             assignmentsCompleted += (state.stats.qTaskTier || 0);
