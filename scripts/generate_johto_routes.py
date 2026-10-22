@@ -287,8 +287,8 @@ challenges_data_raw = [
     ["Challenge 31", "Blackthorn Gym", "Earn Rising Badge (Badge 8)", "Big Fishing Spot"],
     ["Challenge 32", "Big Fishing Spot", "Catch 1 Mantine", "Dark Cave"],
     ["Challenge 33", "Dark Cave", "Defeat 20 Dunsparce", "Route 46"],
-    ["Challenge 34", "Route 46", "Defeat 10 Skarmory", "Indigo Plateau + Steel Stone"],
-    ["Johto Final Challenge", "Indigo Plateau", "Defeat all Elite 4 and Defeat Champion", "Viridian Forest + 2 Masterball"],
+    ["Challenge 34", "Route 46", "Defeat 10 Skarmory", "Pokemon League + Steel Stone"],
+    ["Johto Final Challenge", "Pokemon League", "Defeat all Pokemon League and Defeat Champion", "Viridian Forest + 2 Masterball"],
     ["Challenge 35", "Viridian Forest", "Capture 2 Bellossom", "Pewter Gym + Fossil Revival"],
     ["Challenge 36", "Pewter Gym", "Badge 9", "Mount Moon + Badge 9"],
     ["Challenge 37", "Mount Moon", "Capture 1 Crobat", "Cerulean Gym + Rock Tunnel"],
@@ -432,7 +432,7 @@ def parse_requirements(req_str, area_id):
         match = re.search(r'Badge (\d+)', req_str)
         if match:
              reqs["earnBadge"] = {"name": f"Badge {match.group(1)}", "leader": leader_mapping.get(f"Badge {match.group(1)}", "Unknown"), "badgeCount": int(match.group(1))}
-    elif "Defeat all Elite 4" in req_str:
+    elif "Defeat all Pokemon League" in req_str:
         reqs["defeatEliteFourAndChampion"] = True
     elif req_str == "Defeat Red":
         reqs["defeatRed"] = True

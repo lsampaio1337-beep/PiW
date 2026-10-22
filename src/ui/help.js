@@ -172,7 +172,7 @@ const helpContent = {
             `,
             "Gym Battles": `
                 <h3>Dynamic Scaling</h3>
-                <p>Gym Trainers and Elite 4 members do not have static stats. They scale dynamically based on your progression tier.</p>
+                <p>Gym Trainers and Pokemon League members do not have static stats. They scale dynamically based on your progression tier.</p>
                 <ul>
                     <li><strong>Auto-Healing</strong>: Between individual Gym Trainer battles, your entire party is instantly healed to 100%.</li>
                     <li><strong>Items Locked</strong>: Auto-potions and manual item usage are disabled during Gym Battles.</li>

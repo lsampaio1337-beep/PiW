@@ -20,7 +20,7 @@ const mapCoordinates = {
     "y": 14.34
   },
   "indigo_plateau": {
-    "name": "Indigo Plateau",
+    "name": "Pokemon League",
     "x": 12.62,
     "y": 5.46
   },

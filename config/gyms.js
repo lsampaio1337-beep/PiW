@@ -604,13 +604,13 @@ const gyms = [
     ]
   },
   {
-    "id": "indigoplateau",
-    "name": "Indigo Plateau",
+    "id": "pokemonleague",
+    "name": "Pokemon League",
     "leader": "Champion",
     "levelRequirement": 0,
     "trainers": [
       {
-        "name": "Elite Four #1 - Lorelei",
+        "name": "Pokemon League #1 - Lorelei",
         "team": [
           {
             "id": 87,
@@ -635,7 +635,7 @@ const gyms = [
         ]
       },
       {
-        "name": "Elite Four #2 - Bruno",
+        "name": "Pokemon League #2 - Bruno",
         "team": [
           {
             "id": 95,
@@ -660,7 +660,7 @@ const gyms = [
         ]
       },
       {
-        "name": "Elite Four #3 - Agatha",
+        "name": "Pokemon League #3 - Agatha",
         "team": [
           {
             "id": 94,
@@ -685,7 +685,7 @@ const gyms = [
         ]
       },
       {
-        "name": "Elite Four #4 - Lance",
+        "name": "Pokemon League #4 - Lance",
         "team": [
           {
             "id": 130,
@@ -1302,12 +1302,12 @@ const gyms = [
 ,
       {
     "id": "johto_league",
-    "name": "Indigo Plateau (Johto)",
+    "name": "Pokemon League (Johto)",
     "leader": "Champion",
     "levelRequirement": 40,
     "trainers": [
       {
-        "name": "Elite Four #1 - Will",
+        "name": "Pokemon League #1 - Will",
         "team": [
           { "id": 178, "level": 40 },
           { "id": 124, "level": 41 },
@@ -1317,7 +1317,7 @@ const gyms = [
         ]
       },
       {
-        "name": "Elite Four #2 - Koga",
+        "name": "Pokemon League #2 - Koga",
         "team": [
           { "id": 168, "level": 40 },
           { "id": 205, "level": 43 },
@@ -1327,7 +1327,7 @@ const gyms = [
         ]
       },
       {
-        "name": "Elite Four #3 - Bruno",
+        "name": "Pokemon League #3 - Bruno",
         "team": [
           { "id": 237, "level": 42 },
           { "id": 106, "level": 42 },
@@ -1337,7 +1337,7 @@ const gyms = [
         ]
       },
       {
-        "name": "Elite Four #4 - Karen",
+        "name": "Pokemon League #4 - Karen",
         "team": [
           { "id": 197, "level": 42 },
           { "id": 45, "level": 42 },
@@ -1818,7 +1818,7 @@ const gyms = [
       "levelRequirement": 0,
       "trainers": [
         {
-          "name": "Elite Four #1 - Sidney",
+          "name": "Pokemon League #1 - Sidney",
           "team": [
             {
               "id": 262,
@@ -1843,7 +1843,7 @@ const gyms = [
           ]
         },
         {
-          "name": "Elite Four #2 - Phoebe",
+          "name": "Pokemon League #2 - Phoebe",
           "team": [
             {
               "id": 356,
@@ -1868,7 +1868,7 @@ const gyms = [
           ]
         },
         {
-          "name": "Elite Four #3 - Glacia",
+          "name": "Pokemon League #3 - Glacia",
           "team": [
             {
               "id": 364,
@@ -1893,7 +1893,7 @@ const gyms = [
           ]
         },
         {
-          "name": "Elite Four #4 - Drake",
+          "name": "Pokemon League #4 - Drake",
           "team": [
             {
               "id": 372,
@@ -2384,7 +2384,7 @@ const gyms = [
     "levelRequirement": 49,
     "trainers": [
       {
-        "name": "Elite Four #1 - Aaron",
+        "name": "Pokemon League #1 - Aaron",
         "team": [
           { "id": 469, "level": 49 },
           { "id": 212, "level": 49 },
@@ -2394,7 +2394,7 @@ const gyms = [
         ]
       },
       {
-        "name": "Elite Four #2 - Bertha",
+        "name": "Pokemon League #2 - Bertha",
         "team": [
           { "id": 340, "level": 50 },
           { "id": 472, "level": 53 },
@@ -2404,7 +2404,7 @@ const gyms = [
         ]
       },
       {
-        "name": "Elite Four #3 - Flint",
+        "name": "Pokemon League #3 - Flint",
         "team": [
           { "id": 229, "level": 52 },
           { "id": 136, "level": 55 },
@@ -2414,7 +2414,7 @@ const gyms = [
         ]
       },
       {
-        "name": "Elite Four #4 - Lucian",
+        "name": "Pokemon League #4 - Lucian",
         "team": [
           { "id": 122, "level": 53 },
           { "id": 196, "level": 55 },
@@ -3017,13 +3017,13 @@ const gyms = [
       ]
     },
     {
-      "id": "unova_elite_four",
-      "name": "Unova Elite Four",
+      "id": "unova_pokemon_league",
+      "name": "Unova Pokemon League",
       "leader": "Champion",
       "levelRequirement": 50,
       "trainers": [
         {
-          "name": "Elite Four #1 - Shauntal",
+          "name": "Pokemon League #1 - Shauntal",
           "team": [
             {
               "id": 563,
@@ -3044,7 +3044,7 @@ const gyms = [
           ]
         },
         {
-          "name": "Elite Four #2 - Grimsley",
+          "name": "Pokemon League #2 - Grimsley",
           "team": [
             {
               "id": 510,
@@ -3065,7 +3065,7 @@ const gyms = [
           ]
         },
         {
-          "name": "Elite Four #3 - Caitlin",
+          "name": "Pokemon League #3 - Caitlin",
           "team": [
             {
               "id": 518,
@@ -3086,7 +3086,7 @@ const gyms = [
           ]
         },
         {
-          "name": "Elite Four #4 - Marshal",
+          "name": "Pokemon League #4 - Marshal",
           "team": [
             {
               "id": 538,
@@ -3681,13 +3681,13 @@ const gyms = [
     ]
   },
   {
-    "id": "kalos_elite_four",
-    "name": "Kalos Elite Four",
+    "id": "kalos_pokemon_league",
+    "name": "Kalos Pokemon League",
     "leader": "Champion",
     "levelRequirement": 130,
     "trainers": [
       {
-        "name": "Elite Four #1 - Malva",
+        "name": "Pokemon League #1 - Malva",
         "team": [
           {
             "id": 668,
@@ -3708,7 +3708,7 @@ const gyms = [
         ]
       },
       {
-        "name": "Elite Four #2 - Siebold",
+        "name": "Pokemon League #2 - Siebold",
         "team": [
           {
             "id": 693,
@@ -3729,7 +3729,7 @@ const gyms = [
         ]
       },
       {
-        "name": "Elite Four #3 - Wikstrom",
+        "name": "Pokemon League #3 - Wikstrom",
         "team": [
           {
             "id": 707,
@@ -3750,7 +3750,7 @@ const gyms = [
         ]
       },
       {
-        "name": "Elite Four #4 - Drasna",
+        "name": "Pokemon League #4 - Drasna",
         "team": [
           {
             "id": 691,
@@ -4117,12 +4117,12 @@ const gyms = [
   },
   {
     "id": "alola_league",
-    "name": "Alola Elite Four",
+    "name": "Alola Pokemon League",
     "leader": "Champion",
     "levelRequirement": 210,
     "trainers": [
       {
-        "name": "Elite Four #1 - Molayne",
+        "name": "Pokemon League #1 - Molayne",
         "team": [
           { "id": 707, "level": 55 },
           { "id": 625, "level": 55 },
@@ -4132,7 +4132,7 @@ const gyms = [
         ]
       },
       {
-        "name": "Elite Four #2 - Olivia",
+        "name": "Pokemon League #2 - Olivia",
         "team": [
           { "id": 348, "level": 55 },
           { "id": 346, "level": 55 },
@@ -4142,7 +4142,7 @@ const gyms = [
         ]
       },
       {
-        "name": "Elite Four #3 - Acerola",
+        "name": "Pokemon League #3 - Acerola",
         "team": [
           { "id": 354, "level": 55 },
           { "id": 426, "level": 55 },
@@ -4152,7 +4152,7 @@ const gyms = [
         ]
       },
       {
-        "name": "Elite Four #4 - Kahili",
+        "name": "Pokemon League #4 - Kahili",
         "team": [
           { "id": 628, "level": 55 },
           { "id": 701, "level": 55 },
@@ -5232,13 +5232,13 @@ const gyms = [
     ]
   },
   {
-    "id": "paldea_elite_four",
-    "name": "Paldea Elite Four",
+    "id": "paldea_pokemon_league",
+    "name": "Paldea Pokemon League",
     "leader": "Champion",
     "levelRequirement": 310,
     "trainers": [
       {
-        "name": "Elite Four #1 - Rika",
+        "name": "Pokemon League #1 - Rika",
         "team": [
           {
             "id": 340,
@@ -5263,7 +5263,7 @@ const gyms = [
         ]
       },
       {
-        "name": "Elite Four #2 - Poppy",
+        "name": "Pokemon League #2 - Poppy",
         "team": [
           {
             "id": 879,
@@ -5288,7 +5288,7 @@ const gyms = [
         ]
       },
       {
-        "name": "Elite Four #3 - Larry",
+        "name": "Pokemon League #3 - Larry",
         "team": [
           {
             "id": 357,
@@ -5313,7 +5313,7 @@ const gyms = [
         ]
       },
       {
-        "name": "Elite Four #4 - Hassel",
+        "name": "Pokemon League #4 - Hassel",
         "team": [
           {
             "id": 715,

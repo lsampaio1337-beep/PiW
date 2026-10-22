@@ -3611,7 +3611,7 @@ export const unovaUnlocks = [
   { "challengeName": "Challenge 37", "areaId": "Route 18", "unlocks": [], "requirements": { "catchSpecies": [{ "species": "Crustle", "count": 1 }, { "species": "Scrafty", "count": 1 }] } },
   { "challengeName": "Challenge 38", "areaId": "Giant Chasm", "unlocks": ["Seaside Cave", "Route 21"], "requirements": { "catchSpecies": [{ "species": "Metang", "count": 1 }, { "species": "Piloswine", "count": 1 }] } },
   { "challengeName": "Challenge 39", "areaId": "Village Bridge", "unlocks": [], "requirements": { "catchSpecies": [{ "species": "Lapras", "count": 1 }] } },
-  { "challengeName": "Challenge 40", "areaId": "Route 23", "unlocks": ["Underground Ruins", "Strange House", "Unova Elite Four"], "requirements": { "catchSpecies": [{ "species": "Amoonguss", "count": 1 }] } },
+  { "challengeName": "Challenge 40", "areaId": "Route 23", "unlocks": ["Underground Ruins", "Strange House", "Unova Pokemon League"], "requirements": { "catchSpecies": [{ "species": "Amoonguss", "count": 1 }] } },
   { "challengeName": "Challenge 41", "areaId": "Reversal Mountain", "unlocks": ["Plasma Frigate"], "requirements": { "catchSpecies": [{ "species": "Camerupt", "count": 1 }, { "species": "Skarmory", "count": 1 }] } },
   { "challengeName": "Challenge 42", "areaId": "Seaside Cave", "unlocks": [], "requirements": { "catchSpecies": [{ "species": "Gigalith", "count": 1 }] } },
   { "challengeName": "Challenge 43", "areaId": "Route 21", "unlocks": ["Big Fishing Spot"], "requirements": { "catchSpecies": [{ "species": "Jellicent", "count": 1 }, { "species": "Mantine", "count": 1 }] } },
@@ -3620,7 +3620,7 @@ export const unovaUnlocks = [
   { "challengeName": "Challenge 46", "areaId": "Strange House", "unlocks": [], "requirements": { "catchSpecies": [{ "species": "Banette", "count": 1 }, { "species": "Gengar", "count": 1 }] } },
   {
     "challengeName": "Unova Final Challenge",
-    "areaId": "Unova Elite Four",
+    "areaId": "Unova Pokemon League",
     "unlocks": [
       "New Region to Travel"
     ],

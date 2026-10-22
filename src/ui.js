@@ -437,7 +437,7 @@ window.cheatProgressChallenge = function(targetAreaId) {
         }
         if (req.defeatEliteFourAndChampion) {
             if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};
-            state.stats.defeatedBosses["Elite 4 Lorelei"] = true;
+            state.stats.defeatedBosses["Pokemon League Lorelei"] = true;
             state.stats.defeatedBosses["Champion Rival"] = true;
         }
 
@@ -503,7 +503,7 @@ window.showChallengesModal = function() {
                 <h3 style="margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; font-size: 16px;">${activeChallengesCount > 1 ? 'Active Challenges' : 'Active Challenge'}</h3>
                 <div style="display: flex; flex-direction: column; gap: 15px;">`;
 
-    // The 150 Challenge should only appear if the Final Challenge (Indigo Plateau) has been completed
+    // The 150 Challenge should only appear if the Final Challenge (Pokemon League) has been completed
     let isFinalChallengeCompleted = checkFinalChallengeCompleted(state.currentRegionName);
     let isKanto = !state.currentRegionName || state.currentRegionName === 'Kanto';
     let hasActive150Challenge = isKanto && isFinalChallengeCompleted && !state.stats.completed150Challenge;

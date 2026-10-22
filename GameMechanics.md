@@ -90,8 +90,8 @@ This document provides a comprehensive overview of all formulas, game mechanics,
 
 ## 3. Game Progression & Scaling
 
-### Gyms & Elite 4 Scaling
-- Gym trainers and Elite 4 dynamically scale based on the gym's progression index (0 to 8).
+### Gyms & Pokemon League Scaling
+- Gym trainers and Pokemon League dynamically scale based on the gym's progression index (0 to 8).
 - **Quality (QValue)** = `1.2 + (GymIndex * 0.05)`
 - **SumIV** = `270 + (GymIndex * 30)`, distributed evenly across all 6 stats.
 - **Rest Phase**: Auto-heals the entire party between gym trainer battles. Auto-potions are disabled in gym battles.
@@ -131,8 +131,8 @@ This document provides a comprehensive overview of all formulas, game mechanics,
 - **Viridian Gym**: Earn Volcano Badge
 - **Route 22**: Earn Earth Badge
 - **Route 23**: Defeat Route 22 (x350)
-- **Elite 4**: Catch Nidoking/Nidoqueen (Rare x1)
-- **Prestige / Region Reset**: Defeat Elite 4 Champion
+- **Pokemon League**: Catch Nidoking/Nidoqueen (Rare x1)
+- **Prestige / Region Reset**: Defeat Pokemon League Champion
 - **Small Fishing Spot**: Catch Bulbasaur, Charmander, Squirtle in Casino
 - **Fighting Dojo**: Catch Magikarp (Epic x1), Slot Machine (Ivysaur/Charmeleon/Wartortle)
 - **Big Fishing Spot**: Catch Hitmonchan/Hitmonlee (Rare x1), Slot Machine (Eeveelutions)
@@ -144,8 +144,8 @@ This document provides a comprehensive overview of all formulas, game mechanics,
 - **Cerulean Cave**: Defeat Moltres (x5)
 
 
-### Gym Leaders & Elite 4 Data
-*(Note: Gyms and Elite 4 dynamically scale their IV and Quality based on their progression index. See Gyms & Elite 4 Scaling above)*
+### Gym Leaders & Pokemon League Data
+*(Note: Gyms and Pokemon League dynamically scale their IV and Quality based on their progression index. See Gyms & Pokemon League Scaling above)*
 
 #### Pewter Gym (Leader: Brock)
 - **Leader Brock**
@@ -200,32 +200,32 @@ This document provides a comprehensive overview of all formulas, game mechanics,
   - Nidoking (Lv. 89)
   - Rhydon (Lv. 90)
 
-#### Elite Four #1 - Lorelei (Leader: Lorelei)
-- **Elite Four #1 - Lorelei**
+#### Pokemon League #1 - Lorelei (Leader: Lorelei)
+- **Pokemon League #1 - Lorelei**
   - Dewgong (Lv. 94)
   - Cloyster (Lv. 94)
   - Slowbro (Lv. 95)
   - Jynx (Lv. 95)
   - Lapras (Lv. 96)
 
-#### Elite Four #2 - Bruno (Leader: Bruno)
-- **Elite Four #2 - Bruno**
+#### Pokemon League #2 - Bruno (Leader: Bruno)
+- **Pokemon League #2 - Bruno**
   - Onix (Lv. 95)
   - Hitmonchan (Lv. 95)
   - Hitmonlee (Lv. 96)
   - Onix (Lv. 96)
   - Machamp (Lv. 97)
 
-#### Elite Four #3 - Agatha (Leader: Agatha)
-- **Elite Four #3 - Agatha**
+#### Pokemon League #3 - Agatha (Leader: Agatha)
+- **Pokemon League #3 - Agatha**
   - Gengar (Lv. 96)
   - Golbat (Lv. 96)
   - Haunter (Lv. 97)
   - Arbok (Lv. 97)
   - Gengar (Lv. 98)
 
-#### Elite Four #4 - Lance (Leader: Lance)
-- **Elite Four #4 - Lance**
+#### Pokemon League #4 - Lance (Leader: Lance)
+- **Pokemon League #4 - Lance**
   - Gyarados (Lv. 97)
   - Dragonair (Lv. 97)
   - Dragonair (Lv. 98)
