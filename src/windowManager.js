@@ -576,7 +576,14 @@ export class WindowManager {
                     const style = window.getComputedStyle(contentContainer);
                     horizontalPadding = parseFloat(style.paddingLeft || 0) + parseFloat(style.paddingRight || 0);
                 }
-                winElement.style.width = (newOriginalWidth + horizontalPadding) + 'px';
+                let winBorder = 0;
+                let winPadding = 0;
+                const winStyle = window.getComputedStyle(winElement);
+                if (winStyle) {
+                    winBorder = parseFloat(winStyle.borderLeftWidth || 0) + parseFloat(winStyle.borderRightWidth || 0);
+                    winPadding = parseFloat(winStyle.paddingLeft || 0) + parseFloat(winStyle.paddingRight || 0);
+                }
+                winElement.style.width = (newOriginalWidth + horizontalPadding + winBorder + winPadding) + 'px';
             }
         } else if (newOriginalWidth !== currentOriginalWidth) {
             // Content needs more or less width, we must adjust
