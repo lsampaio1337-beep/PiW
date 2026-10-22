@@ -26,7 +26,6 @@ def fetch_pokemon_bst():
                         full_name = name + " " + form_tag.text.strip()
 
                     bst = cols[3].text.strip()
-
                     if name not in bst_dict:
                         bst_dict[name] = bst
 
@@ -35,9 +34,7 @@ def fetch_pokemon_bst():
                         bst_dict[name + " (Hisuian)"] = bst
                         bst_dict[name + " (Hisuian Form)"] = bst
 
-                    # Handle cloaks and forms generally
                     bst_dict[full_name] = bst
-
     return bst_dict
 
 def scrape_encounters(bst_dict):
@@ -78,8 +75,11 @@ def scrape_encounters(bst_dict):
         "Cloudcap Pass", "Space-Time Distortion"
     ]
 
+    routes_pokemon = {}
+
     for route in routes:
-        print(f"Scraping {route['name']}...")
+        route_name = route['name']
+        print(f"Scraping {route_name}...")
         resp = requests.get(route['url'])
         route_soup = BeautifulSoup(resp.content, 'html.parser')
 
@@ -105,25 +105,64 @@ def scrape_encounters(bst_dict):
                         pokemon_in_route[pokemon_name] = level
 
         if len(pokemon_in_route) > 0:
-            percent = round(100.0 / len(pokemon_in_route), 2)
+            routes_pokemon[route_name] = pokemon_in_route
 
-            order_index = hisui_progression_order.index(route['name']) if route['name'] in hisui_progression_order else 999
+    filtered_routes_pokemon = {}
+    accepted_route_names = []
 
-            for p, lvl in pokemon_in_route.items():
+    for r_name in hisui_progression_order:
+        if r_name in routes_pokemon:
+            pokemon_dict = routes_pokemon[r_name]
+            p_set = set(pokemon_dict.keys())
 
-                # Check different form names for BST mapping
-                p_clean = re.sub(r' (Plant|Sandy|Trash) Cloak', '', p)
-                bst = bst_dict.get(p + " Hisuian", bst_dict.get(p + " Hisuian Form", bst_dict.get(p_clean, bst_dict.get(p, "—"))))
+            is_similar = False
+            for accepted_r in accepted_route_names:
+                prev_dict = filtered_routes_pokemon[accepted_r]
+                prev_set = set(prev_dict.keys())
 
-                all_encounters.append({
-                    "ProgressionSort": order_index,
-                    "Route / Place": route['name'],
-                    "Pokemon Name": p,
-                    "Level": lvl,
-                    "BST": bst,
-                    "Method": "Walk",
-                    "% of appearance": percent
-                })
+                diff_a_b = len(p_set - prev_set)
+                diff_b_a = len(prev_set - p_set)
+
+                if diff_a_b == 0 and diff_b_a == 0:
+                    print(f"Skipping '{r_name}' because it is IDENTICAL to '{accepted_r}'")
+                    is_similar = True
+                    break
+
+                if diff_a_b <= 1 and diff_b_a <= 1:
+                    print(f"Skipping '{r_name}' because it has only 1 different pokemon from '{accepted_r}'")
+                    is_similar = True
+                    break
+
+            if not is_similar:
+                filtered_routes_pokemon[r_name] = pokemon_dict
+                accepted_route_names.append(r_name)
+
+    print(f"Total routes remaining after filtering: {len(accepted_route_names)} out of {len(routes)}")
+
+    seen_pokemon = set()
+
+    for r_name in accepted_route_names:
+        pokemon_dict = filtered_routes_pokemon[r_name]
+        percent = round(100.0 / len(pokemon_dict), 2)
+        order_index = hisui_progression_order.index(r_name)
+
+        for p, lvl in pokemon_dict.items():
+            p_clean = re.sub(r' (Plant|Sandy|Trash) Cloak', '', p)
+            bst = bst_dict.get(p + " Hisuian", bst_dict.get(p + " Hisuian Form", bst_dict.get(p_clean, bst_dict.get(p, "—"))))
+
+            is_first = "Yes" if p not in seen_pokemon else "No"
+            seen_pokemon.add(p)
+
+            all_encounters.append({
+                "ProgressionSort": order_index,
+                "Route / Place": r_name,
+                "Pokemon Name": p,
+                "Level": lvl,
+                "BST": bst,
+                "Method": "Walk",
+                "% of appearance": percent,
+                "1st?": is_first
+            })
 
     return all_encounters
 
@@ -146,7 +185,8 @@ def process_and_save_data(encounters):
         'Level',
         'BST',
         'Method',
-        '% of appearance'
+        '% of appearance',
+        '1st?'
     ]
     df = df[columns_order]
 
