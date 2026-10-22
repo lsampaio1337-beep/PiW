@@ -115,9 +115,62 @@ df = df.sort_values(['Progression Order', 'Route / Place', 'Method', '% of appea
 cols = ['Progression Order'] + [col for col in df.columns if col != 'Progression Order']
 df = df[cols]
 
-# Save final
-df.to_csv("final_galar.csv", index=False)
-df.to_excel("Galar_Pokemon_Locations.xlsx", index=False)
+# --- NEW LOGIC: Filter almost similar routes ---
+# A route is removed if its unique Pokemon set differs by 0 or 1 Pokemon
+# from ANY previously accepted route.
 
-print("Progression logic added and file saved.")
-print(df.head(20))
+accepted_routes = []
+accepted_route_sets = {}
+
+# Get routes in chronological order
+ordered_routes = df['Route / Place'].drop_duplicates().tolist()
+
+for route in ordered_routes:
+    # Get set of all Pokemon names on this route
+    route_pokemon = set(df[df['Route / Place'] == route]['Pokemon Name'].unique())
+
+    is_similar = False
+    for prev_route, prev_set in accepted_route_sets.items():
+        # symmetric_difference gives us elements in A not in B, plus elements in B not in A.
+        # If the length of symmetric difference is 0, they are identical.
+        # If the length is 1, they differ by exactly 1 Pokemon overall.
+        diff_len = len(route_pokemon.symmetric_difference(prev_set))
+
+        if diff_len <= 1:
+            print(f"Removing '{route}' because it is almost similar to '{prev_route}' (Difference: {diff_len})")
+            is_similar = True
+            break
+
+    if not is_similar:
+        accepted_routes.append(route)
+        accepted_route_sets[route] = route_pokemon
+
+# Filter dataframe to only include accepted routes
+df_filtered = df[df['Route / Place'].isin(accepted_routes)].copy()
+
+# --- NEW LOGIC: Calculate "1st?" Column ---
+seen_pokemon = set()
+first_time_list = []
+
+# Because we need this strictly ordered chronologically by route,
+# and df_filtered is already sorted by Progression Order, we can just iterate.
+for idx, row in df_filtered.iterrows():
+    pkmn = row['Pokemon Name']
+    if pkmn not in seen_pokemon:
+        first_time_list.append("Yes")
+        seen_pokemon.add(pkmn)
+    else:
+        first_time_list.append("No")
+
+df_filtered['1st?'] = first_time_list
+
+# Reorder columns to final requested format
+final_cols = ['Progression Order', 'Route / Place', 'Pokemon Name', 'Level', 'BST', 'Method', '% of appearance', '1st?']
+df_filtered = df_filtered[final_cols]
+
+# Save final
+df_filtered.to_csv("final_galar.csv", index=False)
+df_filtered.to_excel("Galar_Pokemon_Locations.xlsx", index=False)
+
+print("Progression logic added, routes filtered, '1st?' column calculated, and file saved.")
+print(f"Total routes remaining: {len(accepted_routes)}")
