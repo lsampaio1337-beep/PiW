@@ -502,7 +502,7 @@ class BattleSystem {
         }
 
         // Apply elite 4 background during rest phase if applicable
-        if (gym.name === "Indigo Plateau") {
+        if (gym.name === "Pokemon League") {
             const trainerBGs = [
                 'BG-Elite4-1Lorelei.png',
                 'BG-Elite4-2Bruno.png',
@@ -1675,19 +1675,19 @@ class BattleSystem {
                 // Record the defeated boss
                 if (!this.state.stats.defeatedBosses) this.state.stats.defeatedBosses = {};
                 this.state.stats.defeatedBosses[gym.leader] = true;
-                if (gym.name === "Indigo Plateau") {
-                    this.state.stats.defeatedBosses["Elite 4 Lorelei"] = true;
+                if (gym.name === "Pokemon League") {
+                    this.state.stats.defeatedBosses["Pokemon League Lorelei"] = true;
                     this.state.stats.defeatedBosses["Champion Rival"] = true;
                 }
                 if (enemy.name === "Champion" || enemy.name === "Champion Wallace" || enemy.name === "Champion Iris") {
                     if (!this.state.stats.defeatedBosses) this.state.stats.defeatedBosses = {};
-                    if (gym.name === "Indigo Plateau (Johto)") {
+                    if (gym.name === "Pokemon League (Johto)") {
                         this.state.stats.defeatedBosses["Johto Champion"] = true;
                     } else if (gym.name === "Ever Grande City") {
                         this.state.stats.defeatedBosses["Hoenn Champion"] = true;
                     } else if (gym.name === "Sinnoh Pokemon League") {
                         this.state.stats.defeatedBosses["Sinnoh Champion"] = true;
-                    } else if (gym.name === "Unova Elite Four") {
+                    } else if (gym.name === "Unova Pokemon League") {
                         this.state.stats.defeatedBosses["Unova Champion"] = true;
                     }
                 }

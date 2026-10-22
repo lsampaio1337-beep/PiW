@@ -160,7 +160,7 @@ export function getChallengeData(unlock) {
     }
 
     if (req.defeatEliteFourAndChampion) {
-        let beatenE4 = state.stats.defeatedBosses && (state.stats.defeatedBosses["Elite 4 Lorelei"] || state.stats.defeatedBosses["Lorelei"]) && state.stats.defeatedBosses["Champion Rival"];
+        let beatenE4 = state.stats.defeatedBosses && (state.stats.defeatedBosses["Pokemon League Lorelei"] || state.stats.defeatedBosses["Lorelei"]) && state.stats.defeatedBosses["Champion Rival"];
         if (!beatenE4) isMet = false;
         textParts.push(`Win Kanto Pokémon League${getStatusHtml(beatenE4)}`);
     }

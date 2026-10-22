@@ -270,7 +270,7 @@ function updateBattleBackground(combatArena, state, battleSystem, inGymCombat, i
         combatArena.style.backgroundImage = `url('./Assets/BG/Casino.png')`;
     } else if (inGymCombat) {
         const gym = battleSystem.gymState.gym;
-        if (gym.name === "Indigo Plateau") {
+        if (gym.name === "Pokemon League") {
             const trainerIndex = battleSystem.gymState.currentTrainerIndex;
             const trainerBGs = [
                 'BG-Elite4-1Lorelei.png',

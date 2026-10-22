@@ -2390,7 +2390,7 @@ export const johtoUnlocks = [
     "challengeName": "Challenge 34",
     "areaId": "Route 46",
     "unlocks": [
-      "Indigo Plateau (Johto)"
+      "Pokemon League (Johto)"
     ],
     "requirements": {
       "defeatSpecific": {
@@ -2407,7 +2407,7 @@ export const johtoUnlocks = [
   },
   {
     "challengeName": "Johto Final Challenge",
-    "areaId": "Indigo Plateau (Johto)",
+    "areaId": "Pokemon League (Johto)",
     "unlocks": [
       "Viridian Forest"
     ],

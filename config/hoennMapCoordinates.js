@@ -185,7 +185,7 @@ const hoennMapCoordinates = {
     "y": 38.05
   },
   "indigo_plateau": {
-    "name": "Indigo Plateau",
+    "name": "Pokemon League",
     "x": 93.52,
     "y": 34.99
   },

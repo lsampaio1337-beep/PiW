@@ -179,8 +179,8 @@ const unovaMapCoordinates = {
     "x": 51.41,
     "y": 18.41
   },
-  "unova_elite_four": {
-    "name": "Unova Elite Four",
+  "unova_pokemon_league": {
+    "name": "Unova Pokemon League",
     "x": 80.66,
     "y": 12.18
   },
@@ -235,7 +235,7 @@ const unovaMapCoordinates = {
     "y": 39.92
   },
   "indigo_plateau": {
-    "name": "Indigo Plateau",
+    "name": "Pokemon League",
     "x": 60.39,
     "y": 3.82
   },
