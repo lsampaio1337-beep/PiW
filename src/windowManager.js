@@ -803,7 +803,23 @@ export class WindowManager {
         const header = document.getElementById(windowId + '-header');
         if (header && title) {
             header.style.position = 'relative';
-            header.innerHTML = `${title}<span onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('${windowId}')" style="position: absolute; top: 5px; right: 5px; font-size: 12px; font-weight: bold; line-height: 1; padding: 0; cursor: pointer; color: white; z-index: 10;">X</span>`;
+            header.textContent = title;
+            const closeBtn = document.createElement('span');
+            closeBtn.textContent = 'X';
+            closeBtn.style.position = 'absolute';
+            closeBtn.style.top = '5px';
+            closeBtn.style.right = '5px';
+            closeBtn.style.fontSize = '12px';
+            closeBtn.style.fontWeight = 'bold';
+            closeBtn.style.lineHeight = '1';
+            closeBtn.style.padding = '0';
+            closeBtn.style.cursor = 'pointer';
+            closeBtn.style.color = 'white';
+            closeBtn.style.zIndex = '10';
+            closeBtn.onclick = () => {
+                if (window.windowManager) window.windowManager.closeDynamicWindow(windowId);
+            };
+            header.appendChild(closeBtn);
         }
 
         const contentPanel = document.getElementById(windowId + '-content');
