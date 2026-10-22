@@ -122,6 +122,11 @@ def parse_route_page(url, route_name):
                     elif rate_text.lower() == 'gift' or rate_text.lower() == 'one' or rate_text.lower() == 'choice':
                         rate_val = 100.0
 
+                # Level is in column 4
+                level_str = ""
+                if len(cols) > 4:
+                    level_str = cols[4].text.strip()
+
                 if rate_val > 0:
                     data.append({
                         'route': route_name,
@@ -130,7 +135,8 @@ def parse_route_page(url, route_name):
                         'method': current_method,
                         'weather': current_weather,
                         'rate': rate_val,
-                        'games': games_str
+                        'games': games_str,
+                        'level': level_str
                     })
 
         current_element = current_element.find_next_sibling()

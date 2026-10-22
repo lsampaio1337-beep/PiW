@@ -1,0 +1,829 @@
+Route / Place,Pokemon Name,Level,BST,Method,% of appearance
+Axew's Eye,Cherubi,35-40,275,berry tree,25.0
+Axew's Eye,Greedent,35-40,460,berry tree,75.0
+Axew's Eye,Magikarp,35-40,200,fishing,50.0
+Axew's Eye,Gyarados,35-40,540,fishing,5.0
+Axew's Eye,Octillery,35-40,480,fishing,25.0
+Axew's Eye,Wishiwashi,35-40,175,fishing,20.0
+Axew's Eye,Delibird,35-40,330,walk,12.9
+Axew's Eye,Bronzong,36-40,500,walk,16.13
+Axew's Eye,Snover,"35-40, 36-40",334,walk,29.03
+Axew's Eye,Vanillish,36-40,395,walk,3.23
+Axew's Eye,Klink,35-40,300,walk,25.81
+Axew's Eye,Diggersby,35-40,423,walk,6.45
+Axew's Eye,Bewear,36-40,500,walk,6.45
+Ballimere Lake,Munchlax,60-65,390,berry tree,10.0
+Ballimere Lake,Skwovet,60-65,275,berry tree,60.0
+Ballimere Lake,Greedent,60-65,460,berry tree,30.0
+Ballimere Lake,Basculin,60-65,460,surfing,100.0
+Ballimere Lake,Mime Jr.,60-65,310,walk,50.0
+Ballimere Lake,Skwovet,60-65,275,walk,50.0
+Brawlers' Cave,Poliwag,40-45,300,surfing,50.0
+Brawlers' Cave,Barboach,40-45,288,surfing,50.0
+Brawlers' Cave,Psyduck,13-18,320,walk,16.0
+Brawlers' Cave,Lickitung,13-18,385,walk,5.0
+Brawlers' Cave,Chansey,13-18,450,walk,2.0
+Brawlers' Cave,Whismur,13-18,240,walk,56.0
+Brawlers' Cave,Azurill,13-18,190,walk,5.0
+Brawlers' Cave,Woobat,13-18,323,walk,16.0
+Bridge Field,Cherubi,26-28,275,berry tree,25.0
+Bridge Field,Greedent,26-28,460,berry tree,75.0
+Bridge Field,Magikarp,26-28,200,fishing,30.0
+Bridge Field,Gyarados,26-28,540,fishing,5.0
+Bridge Field,Lanturn,26-28,460,fishing,25.0
+Bridge Field,Qwilfish,26-28,440,fishing,10.0
+Bridge Field,Drednaw,26-28,485,fishing,30.0
+Bridge Field,Goldeen,40-43,320,surfing,10.0
+Bridge Field,Qwilfish,40-43,440,surfing,20.0
+Bridge Field,Vanillite,40-43,305,surfing,55.0
+Bridge Field,Inkay,40-43,288,surfing,15.0
+Bridge Field,Sneasel,"26-28, 27-29",430,walk,24.14
+Bridge Field,Zigzagoon,27-29,240,walk,6.9
+Bridge Field,Mawile,26-28,380,walk,6.9
+Bridge Field,Palpitoad,26-28,384,walk,6.9
+Bridge Field,Vanillite,26-28,305,walk,6.9
+Bridge Field,Ferroseed,26-28,305,walk,3.45
+Bridge Field,Cubchoo,"26-28, 27-29",305,walk,20.69
+Bridge Field,Inkay,26-28,288,walk,13.79
+Bridge Field,Noibat,27-29,245,walk,3.45
+Bridge Field,Cufant,27-29,330,walk,6.9
+Challenge Beach,Skwovet,13-18,275,berry tree,70.0
+Challenge Beach,Applin,13-18,260,berry tree,30.0
+Challenge Beach,Magikarp,13-18,200,fishing,50.0
+Challenge Beach,Wishiwashi,13-18,175,fishing,40.0
+Challenge Beach,Dhelmise,13-18,517,fishing,10.0
+Challenge Beach,Jigglypuff,13-18,270,walk,15.0
+Challenge Beach,Psyduck,10-15,320,walk,16.0
+Challenge Beach,Magnemite,10-15,325,walk,28.0
+Challenge Beach,Chansey,10-15,450,walk,1.0
+Challenge Beach,Buneary,13-18,350,walk,15.0
+Challenge Beach,Happiny,13-18,220,walk,5.0
+Challenge Beach,Dedenne,10-15,431,walk,2.5
+Challenge Beach,Blipbug,13-18,180,walk,15.0
+Challenge Beach,Morpeko,10-15,436,walk,2.5
+Challenge Road,Chansey,"10-15, 16-21",450,walk,1.47
+Challenge Road,Skarmory,"10-15, 16-21",465,walk,3.68
+Challenge Road,Happiny,19-24,220,walk,7.35
+Challenge Road,Roggenrola,"19-24, 10-15, 16-21",280,walk,34.8
+Challenge Road,Mienfoo,"19-24, 10-15, 16-21",350,walk,15.2
+Challenge Road,Rockruff,"10-15, 16-21",280,walk,3.68
+Challenge Road,Salandit,"10-15, 16-21",320,walk,11.76
+Challenge Road,Blipbug,19-24,180,walk,22.06
+Courageous Cavern,Shellder,16-21,305,fishing,40.0
+Courageous Cavern,Cloyster,16-21,525,fishing,10.0
+Courageous Cavern,Magikarp,16-21,200,fishing,50.0
+Courageous Cavern,Tentacool,40-45,335,surfing,60.0
+Courageous Cavern,Clobbopus,40-45,310,surfing,40.0
+Courageous Cavern,Chansey,13-18,450,walk,1.64
+Courageous Cavern,Woobat,13-18,323,walk,13.11
+Courageous Cavern,Dwebble,13-18,325,walk,4.1
+Courageous Cavern,Wimpod,13-18,230,walk,13.11
+Courageous Cavern,Chewtle,"16-21, 13-18",284,walk,63.93
+Courageous Cavern,Pincurchin,13-18,435,walk,4.1
+Dappled Grove,Cherubi,11-15,275,berry tree,30.0
+Dappled Grove,Skwovet,11-15,275,berry tree,70.0
+Dappled Grove,Delibird,13-15,330,walk,35.82
+Dappled Grove,Lombre,13-15,340,walk,2.99
+Dappled Grove,Nuzleaf,13-15,340,walk,2.99
+Dappled Grove,Snorunt,11-15,300,walk,23.88
+Dappled Grove,Vanillite,"11-15, 13-15",305,walk,17.91
+Dappled Grove,Klink,11-15,300,walk,11.94
+Dappled Grove,Bunnelby,"11-15, 13-15",237,walk,4.48
+Dusty Bowl,Gyarados,40-45,540,fishing,5.0
+Dusty Bowl,Lanturn,40-45,460,fishing,35.0
+Dusty Bowl,Qwilfish,40-45,440,fishing,10.0
+Dusty Bowl,Barraskewda,40-45,490,fishing,50.0
+Dusty Bowl,Swinub,42-47,250,walk,14.89
+Dusty Bowl,Mawile,42-47,380,walk,14.89
+Dusty Bowl,Bronzong,40-45,500,walk,17.02
+Dusty Bowl,Snover,42-47,334,walk,21.28
+Dusty Bowl,Ferrothorn,40-45,489,walk,4.26
+Dusty Bowl,Klang,40-45,440,walk,12.77
+Dusty Bowl,Cubchoo,42-47,305,walk,6.38
+Dusty Bowl,Hattrem,40-45,370,walk,8.51
+East Lake Axewell,Shellder,8-12,305,fishing,20.0
+East Lake Axewell,Goldeen,8-12,320,fishing,25.0
+East Lake Axewell,Magikarp,8-12,200,fishing,50.0
+East Lake Axewell,Wishiwashi,8-12,175,fishing,5.0
+East Lake Axewell,Shellder,40-43,305,surfing,5.0
+East Lake Axewell,Goldeen,40-43,320,surfing,15.0
+East Lake Axewell,Wingull,40-43,270,surfing,5.0
+East Lake Axewell,Vanillite,40-43,305,surfing,75.0
+East Lake Axewell,Snorunt,10-15,300,walk,32.43
+East Lake Axewell,Snover,8-12,334,walk,16.22
+East Lake Axewell,Minccino,8-12,300,walk,10.81
+East Lake Axewell,Vanillite,8-12,305,walk,24.32
+East Lake Axewell,Pancham,10-15,348,walk,8.11
+East Lake Axewell,Stufful,"8-12, 10-15",340,walk,8.11
+Fields of Honor,Skwovet,13-18,275,berry tree,70.0
+Fields of Honor,Applin,13-18,260,berry tree,30.0
+Fields of Honor,Magikarp,13-18,200,fishing,50.0
+Fields of Honor,Remoraid,13-18,300,fishing,40.0
+Fields of Honor,Octillery,13-18,480,fishing,10.0
+Fields of Honor,Tentacool,40-45,335,surfing,35.0
+Fields of Honor,Wingull,40-45,270,surfing,35.0
+Fields of Honor,Mantyke,40-45,345,surfing,30.0
+Fields of Honor,Jigglypuff,"13-18, 10-15",270,walk,24.6
+Fields of Honor,Abra,10-15,310,walk,3.97
+Fields of Honor,Chansey,10-15,450,walk,1.59
+Fields of Honor,Buneary,"13-18, 10-15",350,walk,34.13
+Fields of Honor,Happiny,13-18,220,walk,7.94
+Fields of Honor,Klefki,10-15,470,walk,3.97
+Fields of Honor,Blipbug,13-18,180,walk,23.81
+Forest of Focus,Emolga,13-18,428,berry tree,10.0
+Forest of Focus,Skwovet,13-18,275,berry tree,60.0
+Forest of Focus,Applin,13-18,260,berry tree,30.0
+Forest of Focus,Goldeen,13-18,320,fishing,40.0
+Forest of Focus,Magikarp,13-18,200,fishing,40.0
+Forest of Focus,Arrokuda,13-18,280,fishing,20.0
+Forest of Focus,Corphish,40-45,308,surfing,45.0
+Forest of Focus,Cramorant,40-45,475,surfing,10.0
+Forest of Focus,Arrokuda,40-45,280,surfing,45.0
+Forest of Focus,Pikachu,10-15,320,walk,3.6
+Forest of Focus,Chansey,10-15,450,walk,1.44
+Forest of Focus,Tangela,10-15,435,walk,11.51
+Forest of Focus,Happiny,13-18,220,walk,7.19
+Forest of Focus,Venipede,"13-18, 10-15",260,walk,30.94
+Forest of Focus,Karrablast,13-18,315,walk,21.58
+Forest of Focus,Foongus,"13-18, 10-15",294,walk,16.55
+Forest of Focus,Oranguru,10-15,490,walk,3.6
+Forest of Focus,Passimian,10-15,490,walk,3.6
+Frigid Sea,Magikarp,60-65,200,fishing,30.0
+Frigid Sea,Gyarados,60-65,540,fishing,15.0
+Frigid Sea,Wailmer,60-65,400,fishing,20.0
+Frigid Sea,Basculin,60-65,460,fishing,30.0
+Frigid Sea,Dhelmise,60-65,517,fishing,5.0
+Frigid Sea,Lapras,60-65,535,surfing,0.93
+Frigid Sea,Wailmer,60-65,400,surfing,23.72
+Frigid Sea,Tirtouga,60-65,355,surfing,9.3
+Frigid Sea,Vanillish,60-65,395,surfing,13.95
+Frigid Sea,Cryogonal,60-65,515,surfing,13.95
+Frigid Sea,Avalugg,60-65,514,surfing,24.19
+Frigid Sea,Eiscue,60-65,470,surfing,13.95
+Frigid Sea,Absol,60-65,465,walk,2.73
+Frigid Sea,Spheal,60-65,290,walk,13.11
+Frigid Sea,Mime Jr.,60-65,310,walk,13.66
+Frigid Sea,Audino,60-65,445,walk,0.55
+Frigid Sea,Tirtouga,60-65,355,walk,5.46
+Frigid Sea,Vanillite,60-65,305,walk,13.66
+Frigid Sea,Vanillish,60-65,395,walk,8.2
+Frigid Sea,Beartic,60-65,505,walk,8.2
+Frigid Sea,Bergmite,60-65,304,walk,13.66
+Frigid Sea,Avalugg,60-65,514,walk,12.57
+Frigid Sea,Eiscue,60-65,470,walk,8.2
+Frostpoint Field,Skwovet,60-65,275,berry tree,70.0
+Frostpoint Field,Greedent,60-65,460,berry tree,30.0
+Frostpoint Field,Jynx,60-65,455,walk,5.0
+Frostpoint Field,Smoochum,60-65,305,walk,12.5
+Frostpoint Field,Mime Jr.,60-65,310,walk,12.5
+Frostpoint Field,Snover,60-65,334,walk,12.5
+Frostpoint Field,Abomasnow,60-65,494,walk,19.5
+Frostpoint Field,Audino,60-65,445,walk,0.5
+Frostpoint Field,Vanillite,60-65,305,walk,12.5
+Frostpoint Field,Vanillish,60-65,395,walk,10.0
+Frostpoint Field,Cryogonal,60-65,515,walk,10.0
+Frostpoint Field,Amaura,60-65,362,walk,5.0
+Galar Mine,Diglett,"11-15, 11-14",265,walk,12.5
+Galar Mine,Roggenrola,"11-15, 11-14",280,walk,16.25
+Galar Mine,Woobat,"11-15, 11-14",323,walk,12.5
+Galar Mine,Drilbur,"11-15, 11-14",328,walk,10.0
+Galar Mine,Timburr,"11-15, 11-14",305,walk,16.25
+Galar Mine,Rolycoly,"11-15, 11-14",240,walk,32.5
+Galar Mine No. 2,Barboach,20-24,288,fishing,55.0
+Galar Mine No. 2,Corphish,20-24,308,fishing,15.0
+Galar Mine No. 2,Chewtle,20-24,284,fishing,30.0
+Galar Mine No. 2,Shuckle,20-24,505,walk,6.38
+Galar Mine No. 2,Shellos,20-24,325,walk,14.89
+Galar Mine No. 2,Croagunk,20-24,300,walk,12.77
+Galar Mine No. 2,Scraggy,20-24,348,walk,12.77
+Galar Mine No. 2,Stunfisk,20-24,471,walk,4.26
+Galar Mine No. 2,Binacle,20-24,306,walk,10.64
+Galar Mine No. 2,Noibat,20-24,245,walk,12.77
+Galar Mine No. 2,Wimpod,20-24,230,walk,19.15
+Galar Mine No. 2,Chewtle,20-24,284,walk,6.38
+Giant's Bed,Skwovet,60-65,275,berry tree,80.0
+Giant's Bed,Greedent,60-65,460,berry tree,20.0
+Giant's Bed,Magikarp,60-65,200,fishing,20.0
+Giant's Bed,Gyarados,60-65,540,fishing,15.0
+Giant's Bed,Barboach,60-65,288,fishing,20.0
+Giant's Bed,Whiscash,60-65,468,fishing,15.0
+Giant's Bed,Lileep,60-65,355,fishing,10.0
+Giant's Bed,Basculin,60-65,460,fishing,20.0
+Giant's Bed,Nidoran♀,60-65,275,walk,12.61
+Giant's Bed,Nidoran♂,60-65,273,walk,12.61
+Giant's Bed,Absol,60-65,465,walk,3.0
+Giant's Bed,Snorunt,60-65,300,walk,6.01
+Giant's Bed,Bronzong,60-65,500,walk,8.11
+Giant's Bed,Mime Jr.,60-65,310,walk,12.01
+Giant's Bed,Audino,60-65,445,walk,0.6
+Giant's Bed,Vanillite,60-65,305,walk,12.01
+Giant's Bed,Vanillish,60-65,395,walk,6.01
+Giant's Bed,Cryogonal,60-65,515,walk,6.01
+Giant's Bed,Shelmet,60-65,305,walk,12.01
+Giant's Bed,Stonjourner,60-65,470,walk,9.01
+Giant's Cap,Cherubi,26-28,275,berry tree,25.0
+Giant's Cap,Greedent,26-28,460,berry tree,75.0
+Giant's Cap,Krabby,26-28,325,fishing,35.0
+Giant's Cap,Goldeen,26-28,320,fishing,50.0
+Giant's Cap,Gyarados,26-28,540,fishing,5.0
+Giant's Cap,Corphish,26-28,308,fishing,10.0
+Giant's Cap,Sneasel,28-30,430,walk,20.0
+Giant's Cap,Delibird,26-28,330,walk,10.0
+Giant's Cap,Linoone,28-30,420,walk,5.0
+Giant's Cap,Snorunt,26-28,300,walk,20.0
+Giant's Cap,Riolu,28-30,285,walk,2.5
+Giant's Cap,Minccino,28-30,300,walk,5.0
+Giant's Cap,Vanillite,28-30,305,walk,17.5
+Giant's Cap,Pawniard,26-28,340,walk,15.0
+Giant's Cap,Dottler,26-28,335,walk,5.0
+Giant's Foot,Skwovet,60-65,275,berry tree,80.0
+Giant's Foot,Greedent,60-65,460,berry tree,20.0
+Giant's Foot,Magikarp,60-65,200,fishing,20.0
+Giant's Foot,Gyarados,60-65,540,fishing,15.0
+Giant's Foot,Barboach,60-65,288,fishing,20.0
+Giant's Foot,Whiscash,60-65,468,fishing,15.0
+Giant's Foot,Lileep,60-65,355,fishing,10.0
+Giant's Foot,Basculin,60-65,460,fishing,20.0
+Giant's Foot,Claydol,60-65,500,walk,4.82
+Giant's Foot,Absol,60-65,465,walk,2.41
+Giant's Foot,Snorunt,60-65,300,walk,4.82
+Giant's Foot,Bronzor,60-65,300,walk,12.05
+Giant's Foot,Bronzong,60-65,500,walk,6.75
+Giant's Foot,Mime Jr.,60-65,310,walk,12.05
+Giant's Foot,Audino,60-65,445,walk,0.48
+Giant's Foot,Archen,60-65,401,walk,4.82
+Giant's Foot,Vanillite,60-65,305,walk,12.05
+Giant's Foot,Vanillish,60-65,395,walk,4.82
+Giant's Foot,Cryogonal,60-65,515,walk,4.82
+Giant's Foot,Stonjourner,60-65,470,walk,7.23
+Giant's Foot,Cufant,60-65,330,walk,12.05
+Giant's Foot,Copperajah,60-65,500,walk,10.84
+Giant's Mirror,Cherubi,26-28,275,berry tree,25.0
+Giant's Mirror,Greedent,26-28,460,berry tree,75.0
+Giant's Mirror,Gyarados,26-28,540,fishing,5.0
+Giant's Mirror,Chinchou,26-28,330,fishing,10.0
+Giant's Mirror,Mareanie,26-28,305,fishing,35.0
+Giant's Mirror,Drednaw,26-28,485,fishing,50.0
+Giant's Mirror,Machop,26-28,305,walk,5.56
+Giant's Mirror,Koffing,26-28,340,walk,5.56
+Giant's Mirror,Natu,28-30,320,walk,2.78
+Giant's Mirror,Swinub,26-28,250,walk,16.67
+Giant's Mirror,Snover,26-28,334,walk,11.11
+Giant's Mirror,Vanillite,28-30,305,walk,19.44
+Giant's Mirror,Cubchoo,"26-28, 28-30",305,walk,11.11
+Giant's Mirror,Pawniard,28-30,340,walk,27.78
+Giant's Seat,Cherubi,30-35,275,berry tree,30.0
+Giant's Seat,Greedent,30-35,460,berry tree,70.0
+Giant's Seat,Shellder,30-35,305,fishing,60.0
+Giant's Seat,Cloyster,30-35,525,fishing,5.0
+Giant's Seat,Gyarados,30-35,540,fishing,10.0
+Giant's Seat,Pyukumuku,30-35,410,fishing,25.0
+Giant's Seat,Swinub,30-35,250,walk,9.84
+Giant's Seat,Delibird,"30-35, 33-38",330,walk,18.03
+Giant's Seat,Snorunt,33-38,300,walk,16.39
+Giant's Seat,Bronzor,"30-35, 33-38",300,walk,13.11
+Giant's Seat,Snover,33-38,334,walk,39.34
+Giant's Seat,Bewear,30-35,500,walk,3.28
+Glimwood Tangle,Ponyta,34-36,410,walk,8.08
+Glimwood Tangle,Spritzee,34-36,341,walk,8.08
+Glimwood Tangle,Swirlix,34-36,341,walk,8.08
+Glimwood Tangle,Phantump,34-36,309,walk,8.08
+Glimwood Tangle,Shiinotic,34-36,405,walk,14.8
+Glimwood Tangle,Oranguru,34-36,490,walk,7.27
+Glimwood Tangle,Passimian,34-36,490,walk,5.25
+Glimwood Tangle,Sinistea,34-36,308,walk,8.08
+Glimwood Tangle,Hattrem,34-36,370,walk,12.11
+Glimwood Tangle,Morgrem,34-36,370,walk,16.15
+Glimwood Tangle,Indeedee,34-36,475,walk,4.04
+Hammerlocke Hills,Cherubi,28-30,275,berry tree,25.0
+Hammerlocke Hills,Greedent,28-30,460,berry tree,75.0
+Hammerlocke Hills,Machoke,29-31,405,walk,3.23
+Hammerlocke Hills,Wobbuffet,29-31,405,walk,6.46
+Hammerlocke Hills,Sneasel,29-31,430,walk,25.85
+Hammerlocke Hills,Snorunt,"28-30, 29-31",300,walk,23.91
+Hammerlocke Hills,Vanillite,28-30,305,walk,16.16
+Hammerlocke Hills,Klink,28-30,300,walk,6.46
+Hammerlocke Hills,Honedge,28-30,325,walk,9.69
+Hammerlocke Hills,Inkay,28-30,288,walk,6.46
+Hammerlocke Hills,Pumpkaboo,29-31,335,walk,1.78
+Honeycalm Island,Magikarp,43-48,200,fishing,60.0
+Honeycalm Island,Wishiwashi,43-48,175,fishing,40.0
+Honeycalm Island,Tentacool,40-45,335,surfing,26.42
+Honeycalm Island,Gyarados,40-45,540,surfing,0.94
+Honeycalm Island,Wingull,40-45,270,surfing,28.3
+Honeycalm Island,Wailmer,40-45,400,surfing,18.87
+Honeycalm Island,Mantyke,40-45,345,surfing,14.15
+Honeycalm Island,Skrelp,40-45,320,surfing,4.72
+Honeycalm Island,Dragalge,40-45,494,surfing,0.94
+Honeycalm Island,Clauncher,40-45,330,surfing,4.72
+Honeycalm Island,Clawitzer,40-45,500,surfing,0.94
+Honeycalm Island,Chansey,40-45,450,walk,1.65
+Honeycalm Island,Combee,"43-48, 40-45",244,walk,46.28
+Honeycalm Island,Happiny,43-48,220,walk,8.26
+Honeycalm Island,Petilil,"43-48, 40-45",280,walk,19.01
+Honeycalm Island,Blipbug,43-48,180,walk,24.79
+Honeycalm Sea,Magikarp,43-48,200,fishing,60.0
+Honeycalm Sea,Wishiwashi,43-48,175,fishing,40.0
+Honeycalm Sea,Tentacool,40-45,335,surfing,26.42
+Honeycalm Sea,Gyarados,40-45,540,surfing,0.94
+Honeycalm Sea,Wingull,40-45,270,surfing,28.3
+Honeycalm Sea,Wailmer,40-45,400,surfing,18.87
+Honeycalm Sea,Mantyke,40-45,345,surfing,14.15
+Honeycalm Sea,Skrelp,40-45,320,surfing,4.72
+Honeycalm Sea,Dragalge,40-45,494,surfing,0.94
+Honeycalm Sea,Clauncher,40-45,330,surfing,4.72
+Honeycalm Sea,Clawitzer,40-45,500,surfing,0.94
+Honeycalm Sea,Tentacool,43-48,335,walk,50.0
+Honeycalm Sea,Sharpedo,40-45,460,walk,50.0
+Hulbury,Chinchou,20-24,330,fishing,20.0
+Hulbury,Basculin,20-24,460,fishing,10.0
+Hulbury,Wishiwashi,20-24,175,fishing,5.0
+Hulbury,Chewtle,20-24,284,fishing,15.0
+Hulbury,Arrokuda,20-24,280,fishing,50.0
+Insular Sea,Skwovet,43-48,275,berry tree,70.0
+Insular Sea,Applin,43-48,260,berry tree,30.0
+Insular Sea,Magikarp,43-48,200,fishing,60.0
+Insular Sea,Wishiwashi,43-48,175,fishing,40.0
+Insular Sea,Tentacool,40-45,335,surfing,26.42
+Insular Sea,Horsea,40-45,295,surfing,18.87
+Insular Sea,Gyarados,40-45,540,surfing,0.94
+Insular Sea,Wingull,40-45,270,surfing,28.3
+Insular Sea,Mantyke,40-45,345,surfing,14.15
+Insular Sea,Skrelp,40-45,320,surfing,4.72
+Insular Sea,Dragalge,40-45,494,surfing,0.94
+Insular Sea,Clauncher,40-45,330,surfing,4.72
+Insular Sea,Clawitzer,40-45,500,surfing,0.94
+Insular Sea,Exeggcute,43-48,325,walk,30.0
+Insular Sea,Wingull,43-48,270,walk,30.0
+Insular Sea,Happiny,43-48,220,walk,10.0
+Insular Sea,Blipbug,43-48,180,walk,30.0
+Lake of Outrage,Cherubi,50-52,275,berry tree,5.0
+Lake of Outrage,Greedent,50-52,460,berry tree,95.0
+Lake of Outrage,Gyarados,50-52,540,fishing,5.0
+Lake of Outrage,Lanturn,50-52,460,fishing,35.0
+Lake of Outrage,Qwilfish,50-52,440,fishing,10.0
+Lake of Outrage,Barraskewda,50-52,490,fishing,50.0
+Lake of Outrage,Mantine,40-43,485,surfing,10.0
+Lake of Outrage,Mantyke,40-43,345,surfing,20.0
+Lake of Outrage,Vanillite,40-43,305,surfing,65.0
+Lake of Outrage,Barraskewda,40-43,490,surfing,5.0
+Lake of Outrage,Ditto,55-58,288,walk,4.94
+Lake of Outrage,Vanilluxe,55-58,535,walk,9.88
+Lake of Outrage,Klinklang,55-58,520,walk,14.81
+Lake of Outrage,Golurk,55-58,483,walk,6.42
+Lake of Outrage,Bisharp,55-58,490,walk,12.35
+Lake of Outrage,Doublade,50-52,448,walk,12.35
+Lake of Outrage,Togedemaru,50-52,435,walk,6.42
+Lake of Outrage,Corviknight,50-52,495,walk,8.64
+Lake of Outrage,Perrserker,50-52,440,walk,19.75
+Lake of Outrage,Eiscue,50-52,470,walk,2.47
+Lake of Outrage,Copperajah,55-58,500,walk,0.99
+Lake of Outrage,Duraludon,50-52,535,walk,0.99
+Lakeside Cave,Zubat,60-65,245,walk,18.18
+Lakeside Cave,Sableye,60-65,380,walk,9.09
+Lakeside Cave,Mawile,60-65,380,walk,9.09
+Lakeside Cave,Aron,60-65,330,walk,18.18
+Lakeside Cave,Audino,60-65,445,walk,0.91
+Lakeside Cave,Ferroseed,60-65,305,walk,9.09
+Lakeside Cave,Carbink,60-65,500,walk,13.64
+Lakeside Cave,Noivern,60-65,535,walk,8.18
+Lakeside Cave,Carkol,60-65,410,walk,13.64
+Loop Lagoon,Skwovet,19-24,275,berry tree,70.0
+Loop Lagoon,Applin,19-24,260,berry tree,30.0
+Loop Lagoon,Shellder,19-24,305,fishing,40.0
+Loop Lagoon,Cloyster,19-24,525,fishing,10.0
+Loop Lagoon,Magikarp,19-24,200,fishing,50.0
+Loop Lagoon,Tentacool,40-45,335,surfing,45.0
+Loop Lagoon,Wingull,40-45,270,surfing,30.0
+Loop Lagoon,Clobbopus,40-45,310,surfing,25.0
+Loop Lagoon,Chansey,16-21,450,walk,1.49
+Loop Lagoon,Wingull,"19-24, 16-21",270,walk,17.16
+Loop Lagoon,Happiny,19-24,220,walk,7.46
+Loop Lagoon,Dwebble,16-21,325,walk,3.73
+Loop Lagoon,Mareanie,16-21,305,walk,11.94
+Loop Lagoon,Blipbug,19-24,180,walk,22.39
+Loop Lagoon,Clobbopus,"19-24, 16-21",310,walk,32.09
+Loop Lagoon,Pincurchin,16-21,435,walk,3.73
+Motostoke,Magikarp,7-11,200,fishing,50.0
+Motostoke,Barboach,7-11,288,fishing,10.0
+Motostoke,Chewtle,7-11,284,fishing,40.0
+Motostoke Outskirts,Koffing,22-26,340,walk,6.19
+Motostoke Outskirts,Noctowl,22-26,452,walk,15.46
+Motostoke Outskirts,Sudowoodo,22-26,410,walk,12.37
+Motostoke Outskirts,Croagunk,21-24,300,walk,14.43
+Motostoke Outskirts,Roggenrola,21-24,280,walk,12.37
+Motostoke Outskirts,Throh,22-26,465,walk,2.06
+Motostoke Outskirts,Sawk,22-26,465,walk,2.06
+Motostoke Outskirts,Scraggy,21-24,348,walk,14.43
+Motostoke Outskirts,Pawniard,21-24,340,walk,8.25
+Motostoke Outskirts,Salandit,22-26,320,walk,2.06
+Motostoke Outskirts,Chewtle,21-24,284,walk,4.12
+Motostoke Outskirts,Hatenna,22-26,265,walk,4.12
+Motostoke Outskirts,Impidimp,21-24,265,walk,2.06
+Motostoke Riverbank,Cherubi,26-28,275,berry tree,15.0
+Motostoke Riverbank,Skwovet,26-28,275,berry tree,35.0
+Motostoke Riverbank,Greedent,26-28,460,berry tree,50.0
+Motostoke Riverbank,Basculin,26-28,460,fishing,35.0
+Motostoke Riverbank,Mareanie,26-28,305,fishing,5.0
+Motostoke Riverbank,Arrokuda,26-28,280,fishing,50.0
+Motostoke Riverbank,Barraskewda,26-28,490,fishing,10.0
+Motostoke Riverbank,Mantyke,40-43,345,surfing,5.0
+Motostoke Riverbank,Basculin,40-43,460,surfing,10.0
+Motostoke Riverbank,Vanillite,40-43,305,surfing,65.0
+Motostoke Riverbank,Arrokuda,40-43,280,surfing,20.0
+Motostoke Riverbank,Sneasel,"26-28, 28-30",430,walk,25.88
+Motostoke Riverbank,Purrloin,"26-28, 28-30",281,walk,14.12
+Motostoke Riverbank,Sigilyph,26-28,490,walk,3.53
+Motostoke Riverbank,Vanillite,"26-28, 28-30",305,walk,17.65
+Motostoke Riverbank,Ferroseed,26-28,305,walk,7.06
+Motostoke Riverbank,Pawniard,"26-28, 28-30",340,walk,10.59
+Motostoke Riverbank,Cutiefly,"26-28, 28-30",304,walk,7.06
+Motostoke Riverbank,Corvisquire,26-28,365,walk,14.12
+North Lake Miloch,Cherubi,14-16,275,berry tree,50.0
+North Lake Miloch,Skwovet,14-16,275,berry tree,50.0
+North Lake Miloch,Magikarp,14-16,200,fishing,58.0
+North Lake Miloch,Barboach,14-16,288,fishing,40.0
+North Lake Miloch,Basculin,14-16,460,fishing,2.0
+North Lake Miloch,Barboach,42-45,288,surfing,5.0
+North Lake Miloch,Drifloon,42-45,348,surfing,25.0
+North Lake Miloch,Vanillite,42-45,305,surfing,60.0
+North Lake Miloch,Frillish,42-45,335,surfing,10.0
+North Lake Miloch,Delibird,"14-15, 14-16",330,walk,21.05
+North Lake Miloch,Snorunt,"14-15, 14-16, 26-28",300,walk,5.26
+North Lake Miloch,Stunky,"14-15, 14-16",329,walk,10.53
+North Lake Miloch,Snover,"14-15, 14-16",334,walk,15.79
+North Lake Miloch,Purrloin,26-28,281,walk,2.63
+North Lake Miloch,Vanillite,26-28,305,walk,31.58
+North Lake Miloch,Klink,26-28,300,walk,13.16
+Old Cemetery,Nidoran♀,60-65,275,walk,12.46
+Old Cemetery,Nidoran♂,60-65,273,walk,12.46
+Old Cemetery,Absol,60-65,465,walk,3.46
+Old Cemetery,Mime Jr.,60-65,310,walk,11.07
+Old Cemetery,Audino,60-65,445,walk,0.69
+Old Cemetery,Vanillite,60-65,305,walk,12.46
+Old Cemetery,Vanillish,60-65,395,walk,8.3
+Old Cemetery,Karrablast,60-65,315,walk,11.07
+Old Cemetery,Cryogonal,60-65,515,walk,8.3
+Old Cemetery,Sinistea,60-65,308,walk,13.49
+Old Cemetery,Drakloak,60-65,410,walk,6.23
+Path to the Peak,Absol,60-65,465,walk,10.0
+Path to the Peak,Audino,60-65,445,walk,1.0
+Path to the Peak,Snom,60-65,185,walk,19.0
+Path to the Peak,Frosmoth,60-65,475,walk,70.0
+Potbottom Desert,Rhyhorn,"10-15, 19-24",345,walk,30.48
+Potbottom Desert,Chansey,"10-15, 19-24",450,walk,1.9
+Potbottom Desert,Torkoal,"10-15, 19-24",470,walk,4.76
+Potbottom Desert,Sandile,"10-15, 19-24",292,walk,53.33
+Potbottom Desert,Rufflet,19-24,350,walk,4.76
+Potbottom Desert,Vullaby,10-15,370,walk,4.76
+Roaring-Sea Caves,Magikarp,60-65,200,surfing,16.67
+Roaring-Sea Caves,Omanyte,60-65,355,surfing,16.67
+Roaring-Sea Caves,Kabuto,60-65,355,surfing,16.67
+Roaring-Sea Caves,Barboach,60-65,288,surfing,16.67
+Roaring-Sea Caves,Feebas,60-65,200,surfing,0.83
+Roaring-Sea Caves,Basculin,60-65,460,surfing,16.67
+Roaring-Sea Caves,Vanillish,60-65,395,surfing,15.83
+Roaring-Sea Caves,Zubat,60-65,245,walk,36.36
+Roaring-Sea Caves,Piloswine,60-65,450,walk,18.18
+Roaring-Sea Caves,Larvitar,60-65,300,walk,9.09
+Roaring-Sea Caves,Riolu,60-65,285,walk,4.55
+Roaring-Sea Caves,Audino,60-65,445,walk,0.91
+Roaring-Sea Caves,Deino,60-65,300,walk,9.09
+Roaring-Sea Caves,Carbink,60-65,500,walk,21.82
+Rolling Fields,Cherubi,7-10,275,berry tree,20.0
+Rolling Fields,Skwovet,7-10,275,berry tree,80.0
+Rolling Fields,Metapod,7-10,205,walk,6.74
+Rolling Fields,Swinub,"7-9, 7-10",250,walk,26.97
+Rolling Fields,Delibird,"7-9, 7-10",330,walk,29.21
+Rolling Fields,Tyrogue,7-10,210,walk,3.37
+Rolling Fields,Snorunt,"7-9, 7-10",300,walk,13.48
+Rolling Fields,Vanillite,7-10,305,walk,16.85
+Rolling Fields,Bunnelby,"7-9, 7-10",237,walk,3.37
+Route 1,Caterpie,2-5,195,walk,9.68
+Route 1,Hoothoot,2-5,262,walk,3.23
+Route 1,Grubbin,2-5,300,walk,6.45
+Route 1,Skwovet,"2-5, 3-6",275,walk,29.03
+Route 1,Rookidee,3-6,245,walk,19.35
+Route 1,Blipbug,2-5,180,walk,19.35
+Route 1,Nickit,3-6,245,walk,3.23
+Route 1,Wooloo,3-6,270,walk,9.68
+Route 10,Mr. Mime,45-48,460,walk,19.8
+Route 10,Sneasel,45-48,430,walk,6.93
+Route 10,Snover,45-48,334,walk,14.85
+Route 10,Abomasnow,44-46,494,walk,13.86
+Route 10,Darumaka,44-46,315,walk,2.48
+Route 10,Vanillish,44-46,395,walk,14.85
+Route 10,Cubchoo,45-48,305,walk,7.43
+Route 10,Beartic,44-46,505,walk,12.38
+Route 10,Snom,44-46,185,walk,4.95
+Route 10,Stonjourner,44-46,470,walk,0.99
+Route 10,Eiscue,44-46,470,walk,0.99
+Route 10,Duraludon,45-48,535,walk,0.5
+Route 2,Magikarp,4-6,200,fishing,80.0
+Route 2,Chewtle,4-6,284,fishing,15.0
+Route 2,Arrokuda,4-6,280,fishing,5.0
+Route 2,Gyarados,38-40,540,surfing,2.0
+Route 2,Arrokuda,38-40,280,surfing,70.0
+Route 2,Barraskewda,38-40,490,surfing,28.0
+Route 2,Hoothoot,4-6,262,walk,2.6
+Route 2,Zigzagoon,5-7,240,walk,1.04
+Route 2,Lotad,4-6,220,walk,10.39
+Route 2,Seedot,4-6,220,walk,10.39
+Route 2,Purrloin,4-6,281,walk,5.19
+Route 2,Skwovet,5-7,275,walk,19.74
+Route 2,Rookidee,"4-6, 5-7",245,walk,14.29
+Route 2,Blipbug,4-6,180,walk,20.78
+Route 2,Nickit,5-7,245,walk,7.79
+Route 2,Chewtle,5-7,284,walk,5.19
+Route 2,Yamper,5-7,270,walk,2.6
+Route 3,Cherubi,8-13,275,berry tree,20.0
+Route 3,Skwovet,8-13,275,berry tree,80.0
+Route 3,Vulpix,10-14,299,walk,6.98
+Route 3,Growlithe,10-14,350,walk,6.98
+Route 3,Machop,8-13,305,walk,9.3
+Route 3,Tyrogue,10-14,210,walk,0.93
+Route 3,Zigzagoon,10-14,240,walk,17.67
+Route 3,Stunky,10-14,329,walk,4.65
+Route 3,Trubbish,10-14,329,walk,2.33
+Route 3,Klink,8-13,300,walk,4.19
+Route 3,Pancham,8-13,348,walk,9.3
+Route 3,Mudbray,8-13,385,walk,6.98
+Route 3,Rookidee,8-13,245,walk,16.28
+Route 3,Gossifleur,10-14,250,walk,13.95
+Route 3,Sizzlipede,8-13,305,walk,0.47
+Route 4,Skwovet,13-15,275,berry tree,100.0
+Route 4,Goldeen,13-15,320,fishing,10.0
+Route 4,Magikarp,13-15,200,fishing,70.0
+Route 4,Chewtle,13-15,284,fishing,20.0
+Route 4,Pikachu,14-16,320,walk,1.93
+Route 4,Meowth,"13-15, 14-16",290,walk,18.68
+Route 4,Eevee,14-16,325,walk,1.93
+Route 4,Electrike,14-16,295,walk,19.32
+Route 4,Budew,13-15,280,walk,2.58
+Route 4,Joltik,13-15,319,walk,6.44
+Route 4,Ferroseed,13-15,305,walk,0.64
+Route 4,Pumpkaboo,14-16,335,walk,3.38
+Route 4,Cutiefly,13-15,304,walk,3.22
+Route 4,Wooloo,13-15,270,walk,16.1
+Route 4,Yamper,14-16,270,walk,12.88
+Route 4,Milcery,13-15,270,walk,12.88
+Route 5,Skwovet,16-18,275,berry tree,100.0
+Route 5,Goldeen,16-18,320,fishing,10.0
+Route 5,Magikarp,16-18,200,fishing,70.0
+Route 5,Chewtle,16-18,284,fishing,20.0
+Route 5,Farfetch'd,19-21,377,walk,2.25
+Route 5,Wobbuffet,19-21,405,walk,4.49
+Route 5,Lombre,16-18,340,walk,8.99
+Route 5,Nuzleaf,16-18,340,walk,8.99
+Route 5,Nincada,16-18,266,walk,2.25
+Route 5,Drifloon,19-21,348,walk,2.25
+Route 5,Minccino,19-21,300,walk,7.87
+Route 5,Espurr,16-18,355,walk,8.99
+Route 5,Spritzee,"16-18, 19-21",341,walk,9.89
+Route 5,Swirlix,"16-18, 19-21",341,walk,9.89
+Route 5,Dewpider,16-18,269,walk,2.25
+Route 5,Stufful,19-21,340,walk,15.73
+Route 5,Dottler,16-18,335,walk,11.69
+Route 5,Applin,16-18,260,walk,4.49
+Route 6,Greedent,28-30,460,berry tree,100.0
+Route 6,Goldeen,28-30,320,fishing,10.0
+Route 6,Magikarp,28-30,200,fishing,70.0
+Route 6,Drednaw,28-30,485,fishing,20.0
+Route 6,Dugtrio,29-33,425,walk,10.0
+Route 6,Torkoal,28-30,470,walk,2.5
+Route 6,Trapinch,29-33,290,walk,1.5
+Route 6,Duskull,28-30,295,walk,9.0
+Route 6,Hippopotas,28-30,330,walk,5.0
+Route 6,Skorupi,28-30,330,walk,5.0
+Route 6,Maractus,29-33,461,walk,5.0
+Route 6,Yamask,29-33,303,walk,17.5
+Route 6,Axew,29-33,320,walk,1.5
+Route 6,Heatmor,28-30,484,walk,6.25
+Route 6,Durant,28-30,484,walk,6.25
+Route 6,Helioptile,29-33,289,walk,14.5
+Route 6,Hawlucha,28-30,500,walk,1.0
+Route 6,Silicobra,28-30,315,walk,15.0
+Route 7,Greedent,36-40,460,berry tree,100.0
+Route 7,Liepard,"28-40, 37-41",446,walk,6.67
+Route 7,Seismitoad,28-40,509,walk,5.33
+Route 7,Karrablast,28-40,315,walk,6.67
+Route 7,Galvantula,37-41,472,walk,10.67
+Route 7,Shelmet,28-40,305,walk,6.67
+Route 7,Meowstic,28-40,466,walk,5.33
+Route 7,Inkay,37-41,288,walk,5.33
+Route 7,Corviknight,28-40,495,walk,10.67
+Route 7,Thievul,37-41,455,walk,10.67
+Route 7,Toxel,28-40,242,walk,13.33
+Route 7,Perrserker,37-41,440,walk,16.0
+Route 7,Morpeko,37-41,436,walk,2.67
+Route 8,Haunter,38-40,405,walk,4.65
+Route 8,Rhyhorn,38-40,345,walk,9.3
+Route 8,Lunatone,39-41,460,walk,2.33
+Route 8,Solrock,39-41,460,walk,2.33
+Route 8,Dusclops,38-40,455,walk,6.98
+Route 8,Bronzong,38-40,500,walk,4.65
+Route 8,Hippowdon,38-40,525,walk,3.72
+Route 8,Drapion,38-40,500,walk,2.33
+Route 8,Boldore,39-41,390,walk,8.14
+Route 8,Gurdurr,39-41,405,walk,8.14
+Route 8,Golett,39-41,303,walk,11.63
+Route 8,Pawniard,39-41,340,walk,9.3
+Route 8,Rufflet,39-41,350,walk,4.65
+Route 8,Vullaby,39-41,370,walk,4.65
+Route 8,Togedemaru,39-41,435,walk,2.33
+Route 8,Sandaconda,38-40,510,walk,13.95
+Route 8,Falinks,38-40,470,walk,0.93
+Route 9,Octillery,38-42,480,fishing,60.0
+Route 9,Wishiwashi,38-42,175,fishing,30.0
+Route 9,Pyukumuku,38-42,410,fishing,10.0
+Route 9,Qwilfish,39-43,440,surfing,30.0
+Route 9,Pelipper,39-43,440,surfing,40.0
+Route 9,Mantyke,39-43,345,surfing,25.0
+Route 9,Jellicent,39-43,480,surfing,5.0
+Route 9,Kingler,38-42,475,walk,12.5
+Route 9,Octillery,38-42,480,walk,15.0
+Route 9,Pelipper,41-44,440,walk,20.0
+Route 9,Gastrodon,41-44,475,walk,7.5
+Route 9,Jellicent,41-44,480,walk,10.0
+Route 9,Mareanie,41-44,305,walk,10.0
+Route 9,Pyukumuku,41-44,410,walk,2.5
+Route 9,Cramorant,38-42,475,walk,20.0
+Route 9,Pincurchin,38-42,435,walk,2.5
+Slippery Slope,Skwovet,60-65,275,berry tree,70.0
+Slippery Slope,Greedent,60-65,460,berry tree,30.0
+Slippery Slope,Jynx,60-65,455,walk,5.8
+Slippery Slope,Swinub,60-65,250,walk,14.49
+Slippery Slope,Piloswine,60-65,450,walk,16.81
+Slippery Slope,Smoochum,60-65,305,walk,14.49
+Slippery Slope,Mime Jr.,60-65,310,walk,14.49
+Slippery Slope,Audino,60-65,445,walk,0.58
+Slippery Slope,Cryogonal,60-65,515,walk,11.59
+Slippery Slope,Amaura,60-65,362,walk,5.8
+Slippery Slope,Snom,60-65,185,walk,15.94
+Slumbering Weald,Magikarp,45-47,200,fishing,20.0
+Slumbering Weald,Barboach,45-47,288,fishing,20.0
+Slumbering Weald,Whiscash,45-47,468,fishing,60.0
+Slumbering Weald,Butterfree,45-47,395,walk,2.5
+Slumbering Weald,Weezing,45-47,490,walk,15.0
+Slumbering Weald,Hoothoot,2-3,262,walk,7.5
+Slumbering Weald,Munna,45-47,292,walk,12.5
+Slumbering Weald,Stunfisk,45-47,471,walk,2.5
+Slumbering Weald,Grubbin,2-3,300,walk,2.5
+Slumbering Weald,Skwovet,2-3,275,walk,25.0
+Slumbering Weald,Rookidee,2-3,245,walk,10.0
+Slumbering Weald,Corviknight,45-47,495,walk,10.0
+Slumbering Weald,Blipbug,2-3,180,walk,5.0
+Slumbering Weald,Orbeetle,45-47,505,walk,7.5
+Snowslide Slope,Magikarp,60-65,200,fishing,45.0
+Snowslide Slope,Gyarados,60-65,540,fishing,15.0
+Snowslide Slope,Basculin,60-65,460,fishing,40.0
+Snowslide Slope,Absol,60-65,465,walk,3.15
+Snowslide Slope,Snorunt,60-65,300,walk,6.3
+Snowslide Slope,Beldum,60-65,300,walk,12.18
+Snowslide Slope,Mime Jr.,60-65,310,walk,15.76
+Snowslide Slope,Audino,60-65,445,walk,0.63
+Snowslide Slope,Darumaka,60-65,315,walk,6.3
+Snowslide Slope,Vanillite,60-65,305,walk,15.76
+Snowslide Slope,Vanillish,60-65,395,walk,6.3
+Snowslide Slope,Beartic,60-65,505,walk,6.3
+Snowslide Slope,Cryogonal,60-65,515,walk,6.3
+Snowslide Slope,Amaura,60-65,362,walk,6.3
+Snowslide Slope,Snom,60-65,185,walk,14.71
+Soothing Wetlands,Skwovet,13-18,275,berry tree,70.0
+Soothing Wetlands,Applin,13-18,260,berry tree,30.0
+Soothing Wetlands,Magikarp,13-18,200,fishing,50.0
+Soothing Wetlands,Barboach,13-18,288,fishing,40.0
+Soothing Wetlands,Whiscash,13-18,468,fishing,10.0
+Soothing Wetlands,Lickitung,10-15,385,walk,3.73
+Soothing Wetlands,Chansey,10-15,450,walk,1.49
+Soothing Wetlands,Wooper,10-15,210,walk,11.94
+Soothing Wetlands,Dunsparce,"13-18, 10-15",415,walk,17.16
+Soothing Wetlands,Happiny,13-18,220,walk,7.46
+Soothing Wetlands,Skorupi,"13-18, 10-15",330,walk,32.09
+Soothing Wetlands,Shelmet,13-18,305,walk,22.39
+Soothing Wetlands,Bouffalant,10-15,490,walk,3.73
+South Lake Miloch,Magikarp,11-13,200,fishing,50.0
+South Lake Miloch,Remoraid,11-13,300,fishing,40.0
+South Lake Miloch,Barboach,11-13,288,fishing,9.0
+South Lake Miloch,Pyukumuku,11-13,410,fishing,1.0
+South Lake Miloch,Goldeen,41-44,320,surfing,10.0
+South Lake Miloch,Barboach,41-44,288,surfing,5.0
+South Lake Miloch,Drifloon,41-44,348,surfing,25.0
+South Lake Miloch,Vanillite,41-44,305,surfing,60.0
+South Lake Miloch,Machop,"11-13, 14-16",305,walk,6.35
+South Lake Miloch,Delibird,14-16,330,walk,3.17
+South Lake Miloch,Corphish,11-13,308,walk,12.7
+South Lake Miloch,Snover,11-13,334,walk,19.05
+South Lake Miloch,Vanillite,14-16,305,walk,38.1
+South Lake Miloch,Klink,"11-13, 14-16",300,walk,20.63
+Stepping-Stone Sea,Skwovet,43-48,275,berry tree,54.55
+Stepping-Stone Sea,Applin,43-48,260,berry tree,27.27
+Stepping-Stone Sea,Flapple,43-48,485,berry tree,9.09
+Stepping-Stone Sea,Appletun,43-48,485,berry tree,9.09
+Stepping-Stone Sea,Magikarp,43-48,200,fishing,60.0
+Stepping-Stone Sea,Wishiwashi,43-48,175,fishing,40.0
+Stepping-Stone Sea,Tentacool,40-45,335,surfing,26.42
+Stepping-Stone Sea,Gyarados,40-45,540,surfing,0.94
+Stepping-Stone Sea,Wingull,40-45,270,surfing,28.3
+Stepping-Stone Sea,Mantyke,40-45,345,surfing,14.15
+Stepping-Stone Sea,Frillish,40-45,335,surfing,18.87
+Stepping-Stone Sea,Skrelp,40-45,320,surfing,4.72
+Stepping-Stone Sea,Dragalge,40-45,494,surfing,0.94
+Stepping-Stone Sea,Clauncher,40-45,330,surfing,4.72
+Stepping-Stone Sea,Clawitzer,40-45,500,surfing,0.94
+Stepping-Stone Sea,Exeggcute,"43-48, 40-45",325,walk,12.99
+Stepping-Stone Sea,Chansey,40-45,450,walk,1.13
+Stepping-Stone Sea,Wingull,40-45,270,walk,46.33
+Stepping-Stone Sea,Happiny,43-48,220,walk,5.65
+Stepping-Stone Sea,Skwovet,43-48,275,walk,16.95
+Stepping-Stone Sea,Blipbug,43-48,180,walk,16.95
+Stony Wilderness,Sneasel,"26-28, 28-30",430,walk,25.42
+Stony Wilderness,Zigzagoon,28-30,240,walk,6.78
+Stony Wilderness,Baltoy,28-30,300,walk,6.78
+Stony Wilderness,Bronzor,28-30,300,walk,6.78
+Stony Wilderness,Ferroseed,28-30,305,walk,3.39
+Stony Wilderness,Cubchoo,"26-28, 28-30",305,walk,16.95
+Stony Wilderness,Golett,28-30,303,walk,6.78
+Stony Wilderness,Pawniard,26-28,340,walk,20.34
+Stony Wilderness,Impidimp,26-28,265,walk,6.78
+Three-Point Pass,Claydol,60-65,500,walk,7.5
+Three-Point Pass,Absol,60-65,465,walk,0.5
+Three-Point Pass,Bronzor,60-65,300,walk,12.5
+Three-Point Pass,Bronzong,60-65,500,walk,15.0
+Three-Point Pass,Mime Jr.,60-65,310,walk,12.5
+Three-Point Pass,Audino,60-65,445,walk,10.0
+Three-Point Pass,Vanillite,60-65,305,walk,12.5
+Three-Point Pass,Vanillish,60-65,395,walk,2.0
+Three-Point Pass,Cryogonal,60-65,515,walk,5.0
+Three-Point Pass,Bergmite,60-65,304,walk,12.5
+Three-Point Pass,Avalugg,60-65,514,walk,10.0
+Training Lowlands,Skwovet,16-21,275,berry tree,70.0
+Training Lowlands,Applin,16-21,260,berry tree,30.0
+Training Lowlands,Magikarp,16-21,200,fishing,50.0
+Training Lowlands,Carvanha,16-21,305,fishing,40.0
+Training Lowlands,Sharpedo,16-21,460,fishing,10.0
+Training Lowlands,Corphish,40-45,308,surfing,45.0
+Training Lowlands,Cramorant,40-45,475,surfing,10.0
+Training Lowlands,Arrokuda,40-45,280,surfing,45.0
+Training Lowlands,Chansey,"10-15, 13-18",450,walk,1.37
+Training Lowlands,Scyther,"10-15, 13-18",500,walk,3.42
+Training Lowlands,Pinsir,13-18,500,walk,3.42
+Training Lowlands,Tauros,"10-15, 13-18",490,walk,10.93
+Training Lowlands,Heracross,10-15,500,walk,3.42
+Training Lowlands,Miltank,"10-15, 13-18",490,walk,10.93
+Training Lowlands,Happiny,16-21,220,walk,6.83
+Training Lowlands,Lillipup,"16-21, 10-15, 13-18",275,walk,39.18
+Training Lowlands,Blipbug,16-21,180,walk,20.5
+Tunnel to the Top,Clefairy,60-65,323,walk,4.55
+Tunnel to the Top,Zubat,60-65,245,walk,36.36
+Tunnel to the Top,Snorunt,60-65,300,walk,18.18
+Tunnel to the Top,Bagon,60-65,300,walk,9.09
+Tunnel to the Top,Gible,60-65,300,walk,9.09
+Tunnel to the Top,Audino,60-65,445,walk,0.91
+Tunnel to the Top,Carbink,60-65,500,walk,21.82
+Warm-Up Tunnel,Sandshrew,16-21,300,walk,56.0
+Warm-Up Tunnel,Cubone,16-21,320,walk,32.0
+Warm-Up Tunnel,Chansey,16-21,450,walk,2.0
+Warm-Up Tunnel,Kangaskhan,16-21,490,walk,5.0
+Warm-Up Tunnel,Torkoal,16-21,470,walk,5.0
+Watchtower Ruins,Cherubi,11-14,275,berry tree,50.0
+Watchtower Ruins,Skwovet,11-14,275,berry tree,50.0
+Watchtower Ruins,Gastly,26-29,310,walk,12.5
+Watchtower Ruins,Delibird,26-29,330,walk,30.0
+Watchtower Ruins,Duskull,11-14,295,walk,10.0
+Watchtower Ruins,Snorunt,11-14,300,walk,15.0
+Watchtower Ruins,Drifloon,11-14,348,walk,5.0
+Watchtower Ruins,Snover,11-14,334,walk,20.0
+Watchtower Ruins,Purrloin,26-29,281,walk,7.5
+West Lake Axewell,Goldeen,7-11,320,fishing,35.0
+West Lake Axewell,Magikarp,7-11,200,fishing,50.0
+West Lake Axewell,Remoraid,7-11,300,fishing,10.0
+West Lake Axewell,Wishiwashi,7-11,175,fishing,5.0
+West Lake Axewell,Goldeen,38-40,320,surfing,5.0
+West Lake Axewell,Magikarp,38-40,200,surfing,15.0
+West Lake Axewell,Vanillite,38-40,305,surfing,70.0
+West Lake Axewell,Frillish,38-40,335,surfing,10.0
+West Lake Axewell,Krabby,8-14,325,walk,3.92
+West Lake Axewell,Delibird,7-11,330,walk,23.53
+West Lake Axewell,Tympole,8-14,294,walk,7.84
+West Lake Axewell,Vanillite,"7-11, 8-14",305,walk,31.37
+West Lake Axewell,Klink,"7-11, 8-14",300,walk,25.49
+West Lake Axewell,Bunnelby,7-11,237,walk,7.84
+Workout Sea,Skwovet,43-48,275,berry tree,70.0
+Workout Sea,Applin,43-48,260,berry tree,30.0
+Workout Sea,Magikarp,43-48,200,fishing,50.0
+Workout Sea,Remoraid,43-48,300,fishing,40.0
+Workout Sea,Octillery,43-48,480,fishing,10.0
+Workout Sea,Tentacool,40-45,335,surfing,26.42
+Workout Sea,Gyarados,40-45,540,surfing,0.94
+Workout Sea,Wingull,40-45,270,surfing,28.3
+Workout Sea,Mantyke,40-45,345,surfing,33.02
+Workout Sea,Skrelp,40-45,320,surfing,4.72
+Workout Sea,Dragalge,40-45,494,surfing,0.94
+Workout Sea,Clauncher,40-45,330,surfing,4.72
+Workout Sea,Clawitzer,40-45,500,surfing,0.94
+Workout Sea,Exeggcute,"43-48, 40-45",325,walk,19.01
+Workout Sea,Chansey,40-45,450,walk,1.65
+Workout Sea,Ditto,"43-48, 40-45",288,walk,46.28
+Workout Sea,Happiny,43-48,220,walk,8.26
+Workout Sea,Blipbug,43-48,180,walk,24.79

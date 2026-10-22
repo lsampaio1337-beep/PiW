@@ -1,0 +1,980 @@
+route,pokemon_id,pokemon_name,method,weather,rate,games,level
+Route 1,0819,Skwovet,Walking,All Weather,40.0,Sw/Sh,2-5
+Route 1,0824,Blipbug,Walking,All Weather,30.0,Sw/Sh,2-5
+Route 1,0010,Caterpie,Walking,All Weather,15.0,Sw/Sh,2-5
+Route 1,0736,Grubbin,Walking,All Weather,10.0,Sw/Sh,2-5
+Route 1,0163,Hoothoot,Walking,All Weather,5.0,Sw/Sh,2-5
+Route 1,0819,Skwovet,Walking - Overworld,All Weather,50.0,Sw/Sh,3-6
+Route 1,0821,Rookidee,Walking - Overworld,All Weather,30.0,Sw/Sh,3-6
+Route 1,0831,Wooloo,Walking - Overworld,All Weather,15.0,Sw/Sh,3-6
+Route 1,0827,Nickit,Walking - Overworld,All Weather,5.0,Sw/Sh,3-6
+Route 2,0824,Blipbug,Walking,All Weather,40.0,Sw/Sh,4-6
+Route 2,0821,Rookidee,Walking,All Weather,25.0,Sw/Sh,4-6
+Route 2,0270,Lotad,Walking,All Weather,20.0,Sw/Sh,4-6
+Route 2,0273,Seedot,Walking,All Weather,20.0,Sw/Sh,4-6
+Route 2,0509,Purrloin,Walking,All Weather,10.0,Sw/Sh,4-6
+Route 2,0163,Hoothoot,Walking,All Weather,5.0,Sw/Sh,4-6
+Route 2,0846,Arrokuda,Surfing,All Weather,70.0,Sw/Sh,38-40
+Route 2,0847,Barraskewda,Surfing,All Weather,28.0,Sw/Sh,38-40
+Route 2,0130,Gyarados,Surfing,All Weather,2.0,Sw/Sh,38-40
+Route 2,0129,Magikarp,Super Rod,All Weather,80.0,Sw/Sh,4-6
+Route 2,0833,Chewtle,Super Rod,All Weather,15.0,Sw/Sh,4-6
+Route 2,0846,Arrokuda,Super Rod,All Weather,5.0,Sw/Sh,4-6
+Route 2,0819,Skwovet,Walking - Overworld,All Weather,38.0,Sw/Sh,5-7
+Route 2,0821,Rookidee,Walking - Overworld,All Weather,30.0,Sw/Sh,5-7
+Route 2,0827,Nickit,Walking - Overworld,All Weather,15.0,Sw/Sh,5-7
+Route 2,0833,Chewtle,Walking - Overworld,All Weather,10.0,Sw/Sh,5-7
+Route 2,0835,Yamper,Walking - Overworld,All Weather,5.0,Sw/Sh,5-7
+Route 2,0263,Zigzagoon,Walking - Overworld,All Weather,2.0,Sw/Sh,5-7
+Route 3,0821,Rookidee,Walking,All Weather,35.0,Sw/Sh,8-13
+Route 3,0066,Machop,Walking,All Weather,20.0,Sw/Sh,8-13
+Route 3,0674,Pancham,Walking,All Weather,20.0,Sw/Sh,8-13
+Route 3,0749,Mudbray,Walking,All Weather,15.0,Sw/Sh,8-13
+Route 3,0599,Klink,Walking,All Weather,9.0,Sw/Sh,8-13
+Route 3,0850,Sizzlipede,Walking,All Weather,1.0,Sw/Sh,8-13
+Route 3,0819,Skwovet,Shaking Trees,All Weather,80.0,Sw/Sh,8-13
+Route 3,0420,Cherubi,Shaking Trees,All Weather,20.0,Sw/Sh,8-13
+Route 3,0263,Zigzagoon,Walking - Overworld,All Weather,38.0,Sw/Sh,10-14
+Route 3,0829,Gossifleur,Walking - Overworld,All Weather,30.0,Sw/Sh,10-14
+Route 3,0037,Vulpix,Walking - Overworld,All Weather,15.0,Sw/Sh,10-14
+Route 3,0058,Growlithe,Walking - Overworld,All Weather,15.0,Sw/Sh,10-14
+Route 3,0434,Stunky,Walking - Overworld,All Weather,10.0,Sw/Sh,10-14
+Route 3,0568,Trubbish,Walking - Overworld,All Weather,5.0,Sw/Sh,10-14
+Route 3,0236,Tyrogue,Walking - Overworld,All Weather,2.0,Sw/Sh,10-14
+Route 4,0052,Meowth,Walking,All Weather,35.0,Sw/Sh,13-15
+Route 4,0831,Wooloo,Walking,All Weather,25.0,Sw/Sh,13-15
+Route 4,0868,Milcery,Walking,All Weather,20.0,Sw/Sh,13-15
+Route 4,0595,Joltik,Walking,All Weather,10.0,Sw/Sh,13-15
+Route 4,0742,Cutiefly,Walking,All Weather,5.0,Sw/Sh,13-15
+Route 4,0406,Budew,Walking,All Weather,4.0,Sw/Sh,13-15
+Route 4,0597,Ferroseed,Walking,All Weather,1.0,Sw/Sh,13-15
+Route 4,0129,Magikarp,Super Rod,All Weather,70.0,Sw/Sh,13-15
+Route 4,0833,Chewtle,Super Rod,All Weather,20.0,Sw/Sh,13-15
+Route 4,0118,Goldeen,Super Rod,All Weather,10.0,Sw/Sh,13-15
+Route 4,0819,Skwovet,Shaking Trees,All Weather,100.0,Sw/Sh,13-15
+Route 4,0309,Electrike,Walking - Overworld,All Weather,30.0,Sw/Sh,14-16
+Route 4,0052,Meowth,Walking - Overworld,All Weather,23.0,Sw/Sh,14-16
+Route 4,0835,Yamper,Walking - Overworld,All Weather,20.0,Sw/Sh,14-16
+Route 4,0710,Pumpkaboo,Walking - Overworld,All Weather,10.0,Sw/Sh,14-16
+Route 4,0025,Pikachu,Walking - Overworld,All Weather,5.0,Sw/Sh,14-16
+Route 4,0133,Eevee,Walking - Overworld,All Weather,5.0,Sw/Sh,14-16
+Route 4,0710,Pumpkaboo,Walking - Overworld,All Weather,5.0,Sw/Sh,14-16
+Route 4,0710,Pumpkaboo,Walking - Overworld,All Weather,5.0,Sw/Sh,14-16
+Route 4,0025,Pikachu,Walking - Overworld,All Weather,1.0,Sw/Sh,14-16
+Route 4,0133,Eevee,Walking - Overworld,All Weather,1.0,Sw/Sh,14-16
+Route 4,0710,Pumpkaboo,Walking - Overworld,All Weather,1.0,Sw/Sh,14-16
+Route 5,0825,Dottler,Walking,All Weather,26.0,Sw/Sh,16-18
+Route 5,0271,Lombre,Walking,All Weather,20.0,Sw/Sh,16-18
+Route 5,0274,Nuzleaf,Walking,All Weather,20.0,Sw/Sh,16-18
+Route 5,0677,Espurr,Walking,All Weather,20.0,Sw/Sh,16-18
+Route 5,0682,Spritzee,Walking,All Weather,14.0,Sw/Sh,16-18
+Route 5,0684,Swirlix,Walking,All Weather,14.0,Sw/Sh,16-18
+Route 5,0840,Applin,Walking,All Weather,10.0,Sw/Sh,16-18
+Route 5,0290,Nincada,Walking,All Weather,5.0,Sw/Sh,16-18
+Route 5,0751,Dewpider,Walking,All Weather,5.0,Sw/Sh,16-18
+Route 5,0129,Magikarp,Super Rod,All Weather,70.0,Sw/Sh,16-18
+Route 5,0833,Chewtle,Super Rod,All Weather,20.0,Sw/Sh,16-18
+Route 5,0118,Goldeen,Super Rod,All Weather,10.0,Sw/Sh,16-18
+Route 5,0819,Skwovet,Shaking Trees,All Weather,100.0,Sw/Sh,16-18
+Route 5,0759,Stufful,Walking - Overworld,All Weather,35.0,Sw/Sh,19-21
+Route 5,0682,Spritzee,Walking - Overworld,All Weather,30.0,Sw/Sh,19-21
+Route 5,0684,Swirlix,Walking - Overworld,All Weather,30.0,Sw/Sh,19-21
+Route 5,0572,Minccino,Walking - Overworld,All Weather,20.0,Sw/Sh,19-21
+Route 5,0572,Minccino,Walking - Overworld,All Weather,15.0,Sw/Sh,19-21
+Route 5,0202,Wobbuffet,Walking - Overworld,All Weather,10.0,Sw/Sh,19-21
+Route 5,0425,Drifloon,Walking - Overworld,All Weather,5.0,Sw/Sh,19-21
+Route 5,0083,Farfetch'd,Walking - Overworld,All Weather,5.0,Sw/Sh,19-21
+Route 6,0843,Silicobra,Walking,All Weather,30.0,Sw/Sh,28-30
+Route 6,0631,Heatmor,Walking,All Weather,20.0,Sw/Sh,28-30
+Route 6,0632,Durant,Walking,All Weather,20.0,Sw/Sh,28-30
+Route 6,0355,Duskull,Walking,All Weather,18.0,Sw/Sh,28-30
+Route 6,0449,Hippopotas,Walking,All Weather,10.0,Sw/Sh,28-30
+Route 6,0451,Skorupi,Walking,All Weather,10.0,Sw/Sh,28-30
+Route 6,0324,Torkoal,Walking,All Weather,5.0,Sw/Sh,28-30
+Route 6,0631,Heatmor,Walking,All Weather,5.0,Sw/Sh,28-30
+Route 6,0632,Durant,Walking,All Weather,5.0,Sw/Sh,28-30
+Route 6,0701,Hawlucha,Walking,All Weather,2.0,Sw/Sh,28-30
+Route 6,0129,Magikarp,Super Rod,All Weather,70.0,Sw/Sh,28-30
+Route 6,0834,Drednaw,Super Rod,All Weather,20.0,Sw/Sh,28-30
+Route 6,0118,Goldeen,Super Rod,All Weather,10.0,Sw/Sh,28-30
+Route 6,0820,Greedent,Shaking Trees,All Weather,100.0,Sw/Sh,28-30
+Route 6,0562,Yamask,Walking - Overworld,All Weather,35.0,Sw/Sh,29-33
+Route 6,0694,Helioptile,Walking - Overworld,All Weather,29.0,Sw/Sh,29-33
+Route 6,0051,Dugtrio,Walking - Overworld,All Weather,20.0,Sw/Sh,29-33
+Route 6,0556,Maractus,Walking - Overworld,All Weather,10.0,Sw/Sh,29-33
+Route 6,0328,Trapinch,Walking - Overworld,All Weather,5.0,Sw/Sh,29-33
+Route 6,0610,Axew,Walking - Overworld,All Weather,5.0,Sw/Sh,29-33
+Route 6,0328,Trapinch,Walking - Overworld,All Weather,1.0,Sw/Sh,29-33
+Route 6,0610,Axew,Walking - Overworld,All Weather,1.0,Sw/Sh,29-33
+Route 7,0848,Toxel,Walking,Snowstorm,25.0,Sw/Sh,28-40
+Route 7,0588,Karrablast,Walking,Snowstorm,20.0,Sw/Sh,28-40
+Route 7,0616,Shelmet,Walking,Snowstorm,20.0,Sw/Sh,28-40
+Route 7,0823,Corviknight,Walking,Snowstorm,20.0,Sw/Sh,28-40
+Route 7,0510,Liepard,Walking,Snowstorm,10.0,Sw/Sh,28-40
+Route 7,0537,Seismitoad,Walking,Snowstorm,10.0,Sw/Sh,28-40
+Route 7,0678,Meowstic,Walking,Snowstorm,10.0,Sw/Sh,28-40
+Route 7,0678,Meowstic,Walking,Snowstorm,10.0,Sw/Sh,28-40
+Route 7,0588,Karrablast,Walking,Snowstorm,5.0,Sw/Sh,28-40
+Route 7,0616,Shelmet,Walking,Snowstorm,5.0,Sw/Sh,28-40
+Route 7,0820,Greedent,Shaking Trees,Snowstorm,100.0,Sw/Sh,36-40
+Route 7,0863,Perrserker,Walking - Overworld,All Weather,30.0,Sw/Sh,37-41
+Route 7,0596,Galvantula,Walking - Overworld,All Weather,20.0,Sw/Sh,37-41
+Route 7,0828,Thievul,Walking - Overworld,All Weather,20.0,Sw/Sh,37-41
+Route 7,0510,Liepard,Walking - Overworld,All Weather,15.0,Sw/Sh,37-41
+Route 7,0686,Inkay,Walking - Overworld,All Weather,10.0,Sw/Sh,37-41
+Route 7,0877,Morpeko,Walking - Overworld,All Weather,5.0,Sw/Sh,37-41
+Route 8,0844,Sandaconda,Walking,All Weather,30.0,Sw/Sh,38-40
+Route 8,0111,Rhyhorn,Walking,All Weather,20.0,Sw/Sh,38-40
+Route 8,0356,Dusclops,Walking,All Weather,15.0,Sw/Sh,38-40
+Route 8,0093,Haunter,Walking,All Weather,10.0,Sw/Sh,38-40
+Route 8,0437,Bronzong,Walking,All Weather,10.0,Sw/Sh,38-40
+Route 8,0450,Hippowdon,Walking,All Weather,8.0,Sw/Sh,38-40
+Route 8,0452,Drapion,Walking,All Weather,5.0,Sw/Sh,38-40
+Route 8,0870,Falinks,Walking,All Weather,2.0,Sw/Sh,38-40
+Route 8,0525,Boldore,Walking - Overworld,All Weather,25.0,Sw/Sh,39-41
+Route 8,0533,Gurdurr,Walking - Overworld,All Weather,25.0,Sw/Sh,39-41
+Route 8,0622,Golett,Walking - Overworld,All Weather,25.0,Sw/Sh,39-41
+Route 8,0624,Pawniard,Walking - Overworld,All Weather,20.0,Sw/Sh,39-41
+Route 8,0525,Boldore,Walking - Overworld,All Weather,10.0,Sw/Sh,39-41
+Route 8,0533,Gurdurr,Walking - Overworld,All Weather,10.0,Sw/Sh,39-41
+Route 8,0627,Rufflet,Walking - Overworld,All Weather,10.0,Sw/Sh,39-41
+Route 8,0629,Vullaby,Walking - Overworld,All Weather,10.0,Sw/Sh,39-41
+Route 8,0337,Lunatone,Walking - Overworld,All Weather,5.0,Sw/Sh,39-41
+Route 8,0338,Solrock,Walking - Overworld,All Weather,5.0,Sw/Sh,39-41
+Route 8,0777,Togedemaru,Walking - Overworld,All Weather,5.0,Sw/Sh,39-41
+Route 9,0845,Cramorant,Walking,All Weather,40.0,Sw/Sh,38-42
+Route 9,0224,Octillery,Walking,All Weather,30.0,Sw/Sh,38-42
+Route 9,0099,Kingler,Walking,All Weather,25.0,Sw/Sh,38-42
+Route 9,0871,Pincurchin,Walking,All Weather,5.0,Sw/Sh,38-42
+Route 9,0279,Pelipper,Surfing,All Weather,40.0,Sw/Sh,39-43
+Route 9,0211,Qwilfish,Surfing,All Weather,30.0,Sw/Sh,39-43
+Route 9,0458,Mantyke,Surfing,All Weather,25.0,Sw/Sh,39-43
+Route 9,0593,Jellicent,Surfing,All Weather,5.0,Sw/Sh,39-43
+Route 9,0224,Octillery,Super Rod,All Weather,60.0,Sw/Sh,38-42
+Route 9,0746,Wishiwashi,Super Rod,All Weather,30.0,Sw/Sh,38-42
+Route 9,0771,Pyukumuku,Super Rod,All Weather,10.0,Sw/Sh,38-42
+Route 9,0279,Pelipper,Walking - Overworld,All Weather,40.0,Sw/Sh,41-44
+Route 9,0593,Jellicent,Walking - Overworld,All Weather,35.0,Sw/Sh,41-44
+Route 9,0747,Mareanie,Walking - Overworld,All Weather,35.0,Sw/Sh,41-44
+Route 9,0423,Gastrodon,Walking - Overworld,All Weather,15.0,Sw/Sh,41-44
+Route 9,0593,Jellicent,Walking - Overworld,All Weather,5.0,Sw/Sh,41-44
+Route 9,0747,Mareanie,Walking - Overworld,All Weather,5.0,Sw/Sh,41-44
+Route 9,0771,Pyukumuku,Walking - Overworld,All Weather,5.0,Sw/Sh,41-44
+Route 10,0583,Vanillish,Walking,All Weather,30.0,Sw/Sh,44-46
+Route 10,0460,Abomasnow,Walking,All Weather,28.0,Sw/Sh,44-46
+Route 10,0614,Beartic,Walking,All Weather,25.0,Sw/Sh,44-46
+Route 10,0872,Snom,Walking,All Weather,10.0,Sw/Sh,44-46
+Route 10,0554,Darumaka,Walking,All Weather,5.0,Sw/Sh,44-46
+Route 10,0874,Stonjourner,Walking,All Weather,2.0,Sw/Sh,44-46
+Route 10,0875,Eiscue,Walking,All Weather,2.0,Sw/Sh,44-46
+Route 10,0122,Mr. Mime,Walking - Overworld,Snowstorm,40.0,Sw/Sh,45-48
+Route 10,0459,Snover,Walking - Overworld,Snowstorm,30.0,Sw/Sh,45-48
+Route 10,0613,Cubchoo,Walking - Overworld,Snowstorm,15.0,Sw/Sh,45-48
+Route 10,0215,Sneasel,Walking - Overworld,Snowstorm,14.0,Sw/Sh,45-48
+Route 10,0884,Duraludon,Walking - Overworld,Snowstorm,1.0,Sw/Sh,45-48
+Axew's Eye,0599,Klink,Walking,Snowstorm,40.0,Sw/Sh,35-40
+Axew's Eye,0459,Snover,Walking,Snowstorm,30.0,Sw/Sh,35-40
+Axew's Eye,0225,Delibird,Walking,Snowstorm,20.0,Sw/Sh,35-40
+Axew's Eye,0660,Diggersby,Walking,Snowstorm,10.0,Sw/Sh,35-40
+Axew's Eye,0129,Magikarp,Super Rod,Snowstorm,50.0,Sw/Sh,35-40
+Axew's Eye,0224,Octillery,Super Rod,Snowstorm,25.0,Sw/Sh,35-40
+Axew's Eye,0746,Wishiwashi,Super Rod,Snowstorm,20.0,Sw/Sh,35-40
+Axew's Eye,0130,Gyarados,Super Rod,Snowstorm,5.0,Sw/Sh,35-40
+Axew's Eye,0820,Greedent,Shaking Trees,Snowstorm,75.0,Sw/Sh,35-40
+Axew's Eye,0420,Cherubi,Shaking Trees,Snowstorm,25.0,Sw/Sh,35-40
+Axew's Eye,0459,Snover,Walking - Overworld,Snowstorm,60.0,Sw/Sh,36-40
+Axew's Eye,0437,Bronzong,Walking - Overworld,Snowstorm,25.0,Sw/Sh,36-40
+Axew's Eye,0760,Bewear,Walking - Overworld,Snowstorm,10.0,Sw/Sh,36-40
+Axew's Eye,0583,Vanillish,Walking - Overworld,Snowstorm,5.0,Sw/Sh,36-40
+Ballimere Lake,0439,Mime Jr.,Walking,Snowstorm,100.0,Sw/Sh,60-65
+Ballimere Lake,0550,Basculin,Surfing,Snowstorm,100.0,Sw/Sh,60-65
+Ballimere Lake,0550,Basculin,Surfing,Snowstorm,100.0,Sw/Sh,60-65
+Ballimere Lake,0819,Skwovet,Shaking Trees,Snowstorm,60.0,Sw/Sh,60-65
+Ballimere Lake,0820,Greedent,Shaking Trees,Snowstorm,30.0,Sw/Sh,60-65
+Ballimere Lake,0446,Munchlax,Shaking Trees,Snowstorm,10.0,Sw/Sh,60-65
+Ballimere Lake,0819,Skwovet,Walking - Overworld,Snowstorm,100.0,Sw/Sh,60-65
+Brawlers' Cave,0060,Poliwag,Surfing,All Weather,50.0,Sw/Sh,40-45
+Brawlers' Cave,0339,Barboach,Surfing,All Weather,50.0,Sw/Sh,40-45
+Brawlers' Cave,0293,Whismur,Walking - Overworld,Snowstorm,56.0,Sw/Sh,13-18
+Brawlers' Cave,0054,Psyduck,Walking - Overworld,Snowstorm,16.0,Sw/Sh,13-18
+Brawlers' Cave,0527,Woobat,Walking - Overworld,Snowstorm,16.0,Sw/Sh,13-18
+Brawlers' Cave,0108,Lickitung,Walking - Overworld,Snowstorm,5.0,Sw/Sh,13-18
+Brawlers' Cave,0298,Azurill,Walking - Overworld,Snowstorm,5.0,Sw/Sh,13-18
+Brawlers' Cave,0113,Chansey,Walking - Overworld,Snowstorm,2.0,Sw/Sh,13-18
+Bridge Field,0215,Sneasel,Walking,Snowstorm,30.0,Sw/Sh,26-28
+Bridge Field,0613,Cubchoo,Walking,Snowstorm,25.0,Sw/Sh,26-28
+Bridge Field,0686,Inkay,Walking,Snowstorm,20.0,Sw/Sh,26-28
+Bridge Field,0303,Mawile,Walking,Snowstorm,10.0,Sw/Sh,26-28
+Bridge Field,0536,Palpitoad,Walking,Snowstorm,10.0,Sw/Sh,26-28
+Bridge Field,0582,Vanillite,Walking,Snowstorm,10.0,Sw/Sh,26-28
+Bridge Field,0597,Ferroseed,Walking,Snowstorm,5.0,Sw/Sh,26-28
+Bridge Field,0582,Vanillite,Surfing,Snowstorm,55.0,Sw/Sh,40-43
+Bridge Field,0211,Qwilfish,Surfing,Snowstorm,20.0,Sw/Sh,40-43
+Bridge Field,0686,Inkay,Surfing,Snowstorm,15.0,Sw/Sh,40-43
+Bridge Field,0118,Goldeen,Surfing,Snowstorm,10.0,Sw/Sh,40-43
+Bridge Field,0129,Magikarp,Super Rod,Snowstorm,30.0,Sw/Sh,26-28
+Bridge Field,0834,Drednaw,Super Rod,Snowstorm,30.0,Sw/Sh,26-28
+Bridge Field,0171,Lanturn,Super Rod,Snowstorm,25.0,Sw/Sh,26-28
+Bridge Field,0211,Qwilfish,Super Rod,Snowstorm,10.0,Sw/Sh,26-28
+Bridge Field,0130,Gyarados,Super Rod,Snowstorm,5.0,Sw/Sh,26-28
+Bridge Field,0820,Greedent,Shaking Trees,Snowstorm,75.0,Sw/Sh,26-28
+Bridge Field,0420,Cherubi,Shaking Trees,Snowstorm,25.0,Sw/Sh,26-28
+Bridge Field,0215,Sneasel,Walking - Overworld,Snowstorm,40.0,Sw/Sh,27-29
+Bridge Field,0613,Cubchoo,Walking - Overworld,Snowstorm,35.0,Sw/Sh,27-29
+Bridge Field,0878,Cufant,Walking - Overworld,Snowstorm,10.0,Sw/Sh,27-29
+Bridge Field,0263,Zigzagoon,Walking - Overworld,Snowstorm,10.0,Sw/Sh,27-29
+Bridge Field,0714,Noibat,Walking - Overworld,Snowstorm,5.0,Sw/Sh,27-29
+Challenge Beach,0039,Jigglypuff,Walking,Snowstorm,30.0,Sw/Sh,13-18
+Challenge Beach,0427,Buneary,Walking,Snowstorm,30.0,Sw/Sh,13-18
+Challenge Beach,0824,Blipbug,Walking,Snowstorm,30.0,Sw/Sh,13-18
+Challenge Beach,0440,Happiny,Walking,Snowstorm,10.0,Sw/Sh,13-18
+Challenge Beach,0129,Magikarp,Super Rod,Snowstorm,50.0,Sw/Sh,13-18
+Challenge Beach,0746,Wishiwashi,Super Rod,Snowstorm,40.0,Sw/Sh,13-18
+Challenge Beach,0781,Dhelmise,Super Rod,Snowstorm,10.0,Sw/Sh,13-18
+Challenge Beach,0819,Skwovet,Shaking Trees,Snowstorm,70.0,Sw/Sh,13-18
+Challenge Beach,0840,Applin,Shaking Trees,Snowstorm,30.0,Sw/Sh,13-18
+Challenge Beach,0081,Magnemite,Walking - Overworld,Snowstorm,56.0,Sw/Sh,10-15
+Challenge Beach,0054,Psyduck,Walking - Overworld,Snowstorm,32.0,Sw/Sh,10-15
+Challenge Beach,0702,Dedenne,Walking - Overworld,Snowstorm,5.0,Sw/Sh,10-15
+Challenge Beach,0877,Morpeko,Walking - Overworld,Snowstorm,5.0,Sw/Sh,10-15
+Challenge Beach,0113,Chansey,Walking - Overworld,Snowstorm,2.0,Sw/Sh,10-15
+Challenge Road,0524,Roggenrola,Walking,Snowstorm,30.0,Sw/Sh,19-24
+Challenge Road,0619,Mienfoo,Walking,Snowstorm,30.0,Sw/Sh,19-24
+Challenge Road,0824,Blipbug,Walking,Snowstorm,30.0,Sw/Sh,19-24
+Challenge Road,0440,Happiny,Walking,Snowstorm,10.0,Sw/Sh,19-24
+Challenge Road,0524,Roggenrola,Walking - Overworld,Snowstorm,56.0,Sw/Sh,10-15
+Challenge Road,0524,Roggenrola,Walking - Overworld,Snowstorm,56.0,Sw/Sh,16-21
+Challenge Road,0619,Mienfoo,Walking - Overworld,Snowstorm,16.0,Sw/Sh,10-15
+Challenge Road,0619,Mienfoo,Walking - Overworld,Snowstorm,16.0,Sw/Sh,16-21
+Challenge Road,0757,Salandit,Walking - Overworld,Snowstorm,16.0,Sw/Sh,10-15
+Challenge Road,0757,Salandit,Walking - Overworld,Snowstorm,16.0,Sw/Sh,16-21
+Challenge Road,0227,Skarmory,Walking - Overworld,Snowstorm,5.0,Sw/Sh,10-15
+Challenge Road,0227,Skarmory,Walking - Overworld,Snowstorm,5.0,Sw/Sh,16-21
+Challenge Road,0744,Rockruff,Walking - Overworld,Snowstorm,5.0,Sw/Sh,10-15
+Challenge Road,0744,Rockruff,Walking - Overworld,Snowstorm,5.0,Sw/Sh,16-21
+Challenge Road,0113,Chansey,Walking - Overworld,Snowstorm,2.0,Sw/Sh,10-15
+Challenge Road,0113,Chansey,Walking - Overworld,Snowstorm,2.0,Sw/Sh,16-21
+Courageous Cavern,0833,Chewtle,Walking,All Weather,100.0,Sw/Sh,16-21
+Courageous Cavern,0072,Tentacool,Surfing,All Weather,60.0,Sw/Sh,40-45
+Courageous Cavern,0852,Clobbopus,Surfing,All Weather,40.0,Sw/Sh,40-45
+Courageous Cavern,0129,Magikarp,Super Rod,All Weather,50.0,Sw/Sh,16-21
+Courageous Cavern,0090,Shellder,Super Rod,All Weather,40.0,Sw/Sh,16-21
+Courageous Cavern,0091,Cloyster,Super Rod,All Weather,10.0,Sw/Sh,16-21
+Courageous Cavern,0833,Chewtle,Walking - Overworld,Snowstorm,56.0,Sw/Sh,13-18
+Courageous Cavern,0527,Woobat,Walking - Overworld,Snowstorm,16.0,Sw/Sh,13-18
+Courageous Cavern,0767,Wimpod,Walking - Overworld,Snowstorm,16.0,Sw/Sh,13-18
+Courageous Cavern,0557,Dwebble,Walking - Overworld,Snowstorm,5.0,Sw/Sh,13-18
+Courageous Cavern,0871,Pincurchin,Walking - Overworld,Snowstorm,5.0,Sw/Sh,13-18
+Courageous Cavern,0113,Chansey,Walking - Overworld,Snowstorm,2.0,Sw/Sh,13-18
+Dappled Grove,0361,Snorunt,Walking,Snowstorm,40.0,Sw/Sh,11-15
+Dappled Grove,0582,Vanillite,Walking,Snowstorm,35.0,Sw/Sh,11-15
+Dappled Grove,0599,Klink,Walking,Snowstorm,20.0,Sw/Sh,11-15
+Dappled Grove,0659,Bunnelby,Walking,Snowstorm,5.0,Sw/Sh,11-15
+Dappled Grove,0819,Skwovet,Shaking Trees,Snowstorm,70.0,Sw/Sh,11-15
+Dappled Grove,0420,Cherubi,Shaking Trees,Snowstorm,30.0,Sw/Sh,11-15
+Dappled Grove,0225,Delibird,Walking - Overworld,Snowstorm,60.0,Sw/Sh,13-15
+Dappled Grove,0582,Vanillite,Walking - Overworld,Snowstorm,25.0,Sw/Sh,13-15
+Dappled Grove,0659,Bunnelby,Walking - Overworld,Snowstorm,10.0,Sw/Sh,13-15
+Dappled Grove,0271,Lombre,Walking - Overworld,Snowstorm,5.0,Sw/Sh,13-15
+Dappled Grove,0274,Nuzleaf,Walking - Overworld,Snowstorm,5.0,Sw/Sh,13-15
+Dusty Bowl,0437,Bronzong,Walking,Snowstorm,40.0,Sw/Sh,40-45
+Dusty Bowl,0600,Klang,Walking,Snowstorm,30.0,Sw/Sh,40-45
+Dusty Bowl,0857,Hattrem,Walking,Snowstorm,20.0,Sw/Sh,40-45
+Dusty Bowl,0598,Ferrothorn,Walking,Snowstorm,10.0,Sw/Sh,40-45
+Dusty Bowl,0847,Barraskewda,Super Rod,Snowstorm,50.0,Sw/Sh,40-45
+Dusty Bowl,0171,Lanturn,Super Rod,Snowstorm,35.0,Sw/Sh,40-45
+Dusty Bowl,0211,Qwilfish,Super Rod,Snowstorm,10.0,Sw/Sh,40-45
+Dusty Bowl,0130,Gyarados,Super Rod,Snowstorm,5.0,Sw/Sh,40-45
+Dusty Bowl,0459,Snover,Walking - Overworld,Snowstorm,50.0,Sw/Sh,42-47
+Dusty Bowl,0220,Swinub,Walking - Overworld,Snowstorm,35.0,Sw/Sh,42-47
+Dusty Bowl,0303,Mawile,Walking - Overworld,Snowstorm,35.0,Sw/Sh,42-47
+Dusty Bowl,0613,Cubchoo,Walking - Overworld,Snowstorm,15.0,Sw/Sh,42-47
+East Lake Axewell,0582,Vanillite,Walking,Snowstorm,45.0,Sw/Sh,8-12
+East Lake Axewell,0459,Snover,Walking,Snowstorm,30.0,Sw/Sh,8-12
+East Lake Axewell,0572,Minccino,Walking,Snowstorm,20.0,Sw/Sh,8-12
+East Lake Axewell,0759,Stufful,Walking,Snowstorm,5.0,Sw/Sh,8-12
+East Lake Axewell,0582,Vanillite,Surfing,Snowstorm,75.0,Sw/Sh,40-43
+East Lake Axewell,0118,Goldeen,Surfing,Snowstorm,15.0,Sw/Sh,40-43
+East Lake Axewell,0090,Shellder,Surfing,Snowstorm,5.0,Sw/Sh,40-43
+East Lake Axewell,0278,Wingull,Surfing,Snowstorm,5.0,Sw/Sh,40-43
+East Lake Axewell,0129,Magikarp,Super Rod,Snowstorm,50.0,Sw/Sh,8-12
+East Lake Axewell,0118,Goldeen,Super Rod,Snowstorm,25.0,Sw/Sh,8-12
+East Lake Axewell,0090,Shellder,Super Rod,Snowstorm,20.0,Sw/Sh,8-12
+East Lake Axewell,0746,Wishiwashi,Super Rod,Snowstorm,5.0,Sw/Sh,8-12
+East Lake Axewell,0361,Snorunt,Walking - Overworld,Snowstorm,60.0,Sw/Sh,10-15
+East Lake Axewell,0759,Stufful,Walking - Overworld,Snowstorm,25.0,Sw/Sh,10-15
+East Lake Axewell,0674,Pancham,Walking - Overworld,Snowstorm,15.0,Sw/Sh,10-15
+Fields of Honor,0039,Jigglypuff,Walking,Snowstorm,30.0,Sw/Sh,13-18
+Fields of Honor,0427,Buneary,Walking,Snowstorm,30.0,Sw/Sh,13-18
+Fields of Honor,0824,Blipbug,Walking,Snowstorm,30.0,Sw/Sh,13-18
+Fields of Honor,0440,Happiny,Walking,Snowstorm,10.0,Sw/Sh,13-18
+Fields of Honor,0072,Tentacool,Surfing,Snowstorm,35.0,Sw/Sh,40-45
+Fields of Honor,0278,Wingull,Surfing,Snowstorm,35.0,Sw/Sh,40-45
+Fields of Honor,0458,Mantyke,Surfing,Snowstorm,30.0,Sw/Sh,40-45
+Fields of Honor,0129,Magikarp,Super Rod,Snowstorm,50.0,Sw/Sh,13-18
+Fields of Honor,0223,Remoraid,Super Rod,Snowstorm,40.0,Sw/Sh,13-18
+Fields of Honor,0224,Octillery,Super Rod,Snowstorm,10.0,Sw/Sh,13-18
+Fields of Honor,0819,Skwovet,Shaking Trees,Snowstorm,70.0,Sw/Sh,13-18
+Fields of Honor,0840,Applin,Shaking Trees,Snowstorm,30.0,Sw/Sh,13-18
+Fields of Honor,0427,Buneary,Walking - Overworld,Snowstorm,56.0,Sw/Sh,10-15
+Fields of Honor,0039,Jigglypuff,Walking - Overworld,Snowstorm,32.0,Sw/Sh,10-15
+Fields of Honor,0063,Abra,Walking - Overworld,Snowstorm,5.0,Sw/Sh,10-15
+Fields of Honor,0707,Klefki,Walking - Overworld,Snowstorm,5.0,Sw/Sh,10-15
+Fields of Honor,0113,Chansey,Walking - Overworld,Snowstorm,2.0,Sw/Sh,10-15
+Forest of Focus,0543,Venipede,Walking,Snowstorm,30.0,Sw/Sh,13-18
+Forest of Focus,0588,Karrablast,Walking,Snowstorm,30.0,Sw/Sh,13-18
+Forest of Focus,0590,Foongus,Walking,Snowstorm,30.0,Sw/Sh,13-18
+Forest of Focus,0440,Happiny,Walking,Snowstorm,10.0,Sw/Sh,13-18
+Forest of Focus,0341,Corphish,Surfing,All Weather,45.0,Sw/Sh,40-45
+Forest of Focus,0846,Arrokuda,Surfing,All Weather,45.0,Sw/Sh,40-45
+Forest of Focus,0845,Cramorant,Surfing,All Weather,10.0,Sw/Sh,40-45
+Forest of Focus,0118,Goldeen,Super Rod,All Weather,40.0,Sw/Sh,13-18
+Forest of Focus,0129,Magikarp,Super Rod,All Weather,40.0,Sw/Sh,13-18
+Forest of Focus,0846,Arrokuda,Super Rod,All Weather,20.0,Sw/Sh,13-18
+Forest of Focus,0819,Skwovet,Shaking Trees,All Weather,60.0,Sw/Sh,13-18
+Forest of Focus,0840,Applin,Shaking Trees,All Weather,30.0,Sw/Sh,13-18
+Forest of Focus,0587,Emolga,Shaking Trees,All Weather,10.0,Sw/Sh,13-18
+Forest of Focus,0543,Venipede,Walking - Overworld,Snowstorm,56.0,Sw/Sh,10-15
+Forest of Focus,0114,Tangela,Walking - Overworld,Snowstorm,16.0,Sw/Sh,10-15
+Forest of Focus,0590,Foongus,Walking - Overworld,Snowstorm,16.0,Sw/Sh,10-15
+Forest of Focus,0025,Pikachu,Walking - Overworld,Snowstorm,5.0,Sw/Sh,10-15
+Forest of Focus,0765,Oranguru,Walking - Overworld,Snowstorm,5.0,Sw/Sh,10-15
+Forest of Focus,0766,Passimian,Walking - Overworld,Snowstorm,5.0,Sw/Sh,10-15
+Forest of Focus,0113,Chansey,Walking - Overworld,Snowstorm,2.0,Sw/Sh,10-15
+Frigid Sea,0363,Spheal,Walking,Snowstorm,25.0,Sw/Sh,60-65
+Frigid Sea,0439,Mime Jr.,Walking,Snowstorm,25.0,Sw/Sh,60-65
+Frigid Sea,0582,Vanillite,Walking,Snowstorm,25.0,Sw/Sh,60-65
+Frigid Sea,0712,Bergmite,Walking,Snowstorm,25.0,Sw/Sh,60-65
+Frigid Sea,0713,Avalugg,Surfing,Snowstorm,30.0,Sw/Sh,60-65
+Frigid Sea,0320,Wailmer,Surfing,Snowstorm,29.0,Sw/Sh,60-65
+Frigid Sea,0320,Wailmer,Surfing,Snowstorm,22.0,Sw/Sh,60-65
+Frigid Sea,0713,Avalugg,Surfing,Snowstorm,22.0,Sw/Sh,60-65
+Frigid Sea,0583,Vanillish,Surfing,Snowstorm,15.0,Sw/Sh,60-65
+Frigid Sea,0615,Cryogonal,Surfing,Snowstorm,15.0,Sw/Sh,60-65
+Frigid Sea,0875,Eiscue,Surfing,Snowstorm,15.0,Sw/Sh,60-65
+Frigid Sea,0564,Tirtouga,Surfing,Snowstorm,10.0,Sw/Sh,60-65
+Frigid Sea,0131,Lapras,Surfing,Snowstorm,1.0,Sw/Sh,60-65
+Frigid Sea,0129,Magikarp,Super Rod,Snowstorm,30.0,Sw/Sh,60-65
+Frigid Sea,0550,Basculin,Super Rod,Snowstorm,30.0,Sw/Sh,60-65
+Frigid Sea,0550,Basculin,Super Rod,Snowstorm,30.0,Sw/Sh,60-65
+Frigid Sea,0320,Wailmer,Super Rod,Snowstorm,20.0,Sw/Sh,60-65
+Frigid Sea,0130,Gyarados,Super Rod,Snowstorm,15.0,Sw/Sh,60-65
+Frigid Sea,0781,Dhelmise,Super Rod,Snowstorm,5.0,Sw/Sh,60-65
+Frigid Sea,0363,Spheal,Walking - Overworld,Snowstorm,27.0,Sw/Sh,60-65
+Frigid Sea,0713,Avalugg,Walking - Overworld,Snowstorm,27.0,Sw/Sh,60-65
+Frigid Sea,0363,Spheal,Walking - Overworld,Snowstorm,20.0,Sw/Sh,60-65
+Frigid Sea,0713,Avalugg,Walking - Overworld,Snowstorm,19.0,Sw/Sh,60-65
+Frigid Sea,0583,Vanillish,Walking - Overworld,Snowstorm,15.0,Sw/Sh,60-65
+Frigid Sea,0614,Beartic,Walking - Overworld,Snowstorm,15.0,Sw/Sh,60-65
+Frigid Sea,0875,Eiscue,Walking - Overworld,Snowstorm,15.0,Sw/Sh,60-65
+Frigid Sea,0564,Tirtouga,Walking - Overworld,Snowstorm,10.0,Sw/Sh,60-65
+Frigid Sea,0359,Absol,Walking - Overworld,Snowstorm,5.0,Sw/Sh,60-65
+Frigid Sea,0531,Audino,Walking - Overworld,Snowstorm,1.0,Sw/Sh,60-65
+Frostpoint Field,0238,Smoochum,Walking,Snowstorm,25.0,Sw/Sh,60-65
+Frostpoint Field,0439,Mime Jr.,Walking,Snowstorm,25.0,Sw/Sh,60-65
+Frostpoint Field,0459,Snover,Walking,Snowstorm,25.0,Sw/Sh,60-65
+Frostpoint Field,0582,Vanillite,Walking,Snowstorm,25.0,Sw/Sh,60-65
+Frostpoint Field,0819,Skwovet,Shaking Trees,Snowstorm,70.0,Sw/Sh,60-65
+Frostpoint Field,0820,Greedent,Shaking Trees,Snowstorm,30.0,Sw/Sh,60-65
+Frostpoint Field,0460,Abomasnow,Walking - Overworld,Snowstorm,39.0,Sw/Sh,60-65
+Frostpoint Field,0583,Vanillish,Walking - Overworld,Snowstorm,20.0,Sw/Sh,60-65
+Frostpoint Field,0615,Cryogonal,Walking - Overworld,Snowstorm,20.0,Sw/Sh,60-65
+Frostpoint Field,0124,Jynx,Walking - Overworld,Snowstorm,10.0,Sw/Sh,60-65
+Frostpoint Field,0698,Amaura,Walking - Overworld,Snowstorm,10.0,Sw/Sh,60-65
+Frostpoint Field,0531,Audino,Walking - Overworld,Snowstorm,1.0,Sw/Sh,60-65
+Galar Mine,0524,Roggenrola,Walking,All Weather,30.0,Sw/Sh,11-15
+Galar Mine,0532,Timburr,Walking,All Weather,30.0,Sw/Sh,11-15
+Galar Mine,0837,Rolycoly,Walking,All Weather,30.0,Sw/Sh,11-15
+Galar Mine,0050,Diglett,Walking,All Weather,15.0,Sw/Sh,11-15
+Galar Mine,0527,Woobat,Walking,All Weather,10.0,Sw/Sh,11-15
+Galar Mine,0529,Drilbur,Walking,All Weather,10.0,Sw/Sh,11-15
+Galar Mine,0524,Roggenrola,Walking,All Weather,5.0,Sw/Sh,11-15
+Galar Mine,0532,Timburr,Walking,All Weather,5.0,Sw/Sh,11-15
+Galar Mine,0837,Rolycoly,Walking - Overworld,All Weather,35.0,Sw/Sh,11-14
+Galar Mine,0524,Roggenrola,Walking - Overworld,All Weather,25.0,Sw/Sh,11-14
+Galar Mine,0532,Timburr,Walking - Overworld,All Weather,25.0,Sw/Sh,11-14
+Galar Mine,0527,Woobat,Walking - Overworld,All Weather,15.0,Sw/Sh,11-14
+Galar Mine,0050,Diglett,Walking - Overworld,All Weather,10.0,Sw/Sh,11-14
+Galar Mine,0529,Drilbur,Walking - Overworld,All Weather,10.0,Sw/Sh,11-14
+Galar Mine,0524,Roggenrola,Walking - Overworld,All Weather,5.0,Sw/Sh,11-14
+Galar Mine,0532,Timburr,Walking - Overworld,All Weather,5.0,Sw/Sh,11-14
+Galar Mine No. 2,0714,Noibat,Walking,All Weather,20.0,Sw/Sh,20-24
+Galar Mine No. 2,0767,Wimpod,Walking,All Weather,20.0,Sw/Sh,20-24
+Galar Mine No. 2,0559,Scraggy,Walking,All Weather,15.0,Sw/Sh,20-24
+Galar Mine No. 2,0213,Shuckle,Walking,All Weather,10.0,Sw/Sh,20-24
+Galar Mine No. 2,0422,Shellos,Walking,All Weather,10.0,Sw/Sh,20-24
+Galar Mine No. 2,0688,Binacle,Walking,All Weather,10.0,Sw/Sh,20-24
+Galar Mine No. 2,0833,Chewtle,Walking,All Weather,10.0,Sw/Sh,20-24
+Galar Mine No. 2,0618,Stunfisk,Walking,All Weather,5.0,Sw/Sh,20-24
+Galar Mine No. 2,0339,Barboach,Super Rod,All Weather,55.0,Sw/Sh,20-24
+Galar Mine No. 2,0833,Chewtle,Super Rod,All Weather,30.0,Sw/Sh,20-24
+Galar Mine No. 2,0341,Corphish,Super Rod,All Weather,15.0,Sw/Sh,20-24
+Galar Mine No. 2,0422,Shellos,Walking - Overworld,All Weather,25.0,Sw/Sh,20-24
+Galar Mine No. 2,0767,Wimpod,Walking - Overworld,All Weather,25.0,Sw/Sh,20-24
+Galar Mine No. 2,0453,Croagunk,Walking - Overworld,All Weather,15.0,Sw/Sh,20-24
+Galar Mine No. 2,0559,Scraggy,Walking - Overworld,All Weather,15.0,Sw/Sh,20-24
+Galar Mine No. 2,0688,Binacle,Walking - Overworld,All Weather,15.0,Sw/Sh,20-24
+Galar Mine No. 2,0714,Noibat,Walking - Overworld,All Weather,10.0,Sw/Sh,20-24
+Galar Mine No. 2,0213,Shuckle,Walking - Overworld,All Weather,5.0,Sw/Sh,20-24
+Galar Mine No. 2,0833,Chewtle,Walking - Overworld,All Weather,5.0,Sw/Sh,20-24
+Giant's Bed,0029,Nidoran♀,Walking,Snowstorm,20.0,Sw/Sh,60-65
+Giant's Bed,0032,Nidoran♂,Walking,Snowstorm,20.0,Sw/Sh,60-65
+Giant's Bed,0439,Mime Jr.,Walking,Snowstorm,20.0,Sw/Sh,60-65
+Giant's Bed,0582,Vanillite,Walking,Snowstorm,20.0,Sw/Sh,60-65
+Giant's Bed,0616,Shelmet,Walking,Snowstorm,20.0,Sw/Sh,60-65
+Giant's Bed,0129,Magikarp,Super Rod,Snowstorm,20.0,Sw/Sh,60-65
+Giant's Bed,0339,Barboach,Super Rod,Snowstorm,20.0,Sw/Sh,60-65
+Giant's Bed,0550,Basculin,Super Rod,Snowstorm,20.0,Sw/Sh,60-65
+Giant's Bed,0550,Basculin,Super Rod,Snowstorm,20.0,Sw/Sh,60-65
+Giant's Bed,0130,Gyarados,Super Rod,Snowstorm,15.0,Sw/Sh,60-65
+Giant's Bed,0340,Whiscash,Super Rod,Snowstorm,15.0,Sw/Sh,60-65
+Giant's Bed,0345,Lileep,Super Rod,Snowstorm,10.0,Sw/Sh,60-65
+Giant's Bed,0819,Skwovet,Shaking Trees,Snowstorm,80.0,Sw/Sh,60-65
+Giant's Bed,0820,Greedent,Shaking Trees,Snowstorm,20.0,Sw/Sh,60-65
+Giant's Bed,0029,Nidoran♀,Walking - Overworld,Snowstorm,24.0,Sw/Sh,60-65
+Giant's Bed,0032,Nidoran♂,Walking - Overworld,Snowstorm,24.0,Sw/Sh,60-65
+Giant's Bed,0029,Nidoran♀,Walking - Overworld,Snowstorm,19.0,Sw/Sh,60-65
+Giant's Bed,0032,Nidoran♂,Walking - Overworld,Snowstorm,19.0,Sw/Sh,60-65
+Giant's Bed,0437,Bronzong,Walking - Overworld,Snowstorm,16.0,Sw/Sh,60-65
+Giant's Bed,0874,Stonjourner,Walking - Overworld,Snowstorm,15.0,Sw/Sh,60-65
+Giant's Bed,0437,Bronzong,Walking - Overworld,Snowstorm,11.0,Sw/Sh,60-65
+Giant's Bed,0361,Snorunt,Walking - Overworld,Snowstorm,10.0,Sw/Sh,60-65
+Giant's Bed,0583,Vanillish,Walking - Overworld,Snowstorm,10.0,Sw/Sh,60-65
+Giant's Bed,0615,Cryogonal,Walking - Overworld,Snowstorm,10.0,Sw/Sh,60-65
+Giant's Bed,0359,Absol,Walking - Overworld,Snowstorm,5.0,Sw/Sh,60-65
+Giant's Bed,0531,Audino,Walking - Overworld,Snowstorm,1.0,Sw/Sh,60-65
+Giant's Cap,0361,Snorunt,Walking,Snowstorm,40.0,Sw/Sh,26-28
+Giant's Cap,0624,Pawniard,Walking,Snowstorm,30.0,Sw/Sh,26-28
+Giant's Cap,0225,Delibird,Walking,Snowstorm,20.0,Sw/Sh,26-28
+Giant's Cap,0825,Dottler,Walking,Snowstorm,10.0,Sw/Sh,26-28
+Giant's Cap,0118,Goldeen,Super Rod,Snowstorm,50.0,Sw/Sh,26-28
+Giant's Cap,0098,Krabby,Super Rod,Snowstorm,35.0,Sw/Sh,26-28
+Giant's Cap,0341,Corphish,Super Rod,Snowstorm,10.0,Sw/Sh,26-28
+Giant's Cap,0130,Gyarados,Super Rod,Snowstorm,5.0,Sw/Sh,26-28
+Giant's Cap,0820,Greedent,Shaking Trees,Snowstorm,75.0,Sw/Sh,26-28
+Giant's Cap,0420,Cherubi,Shaking Trees,Snowstorm,25.0,Sw/Sh,26-28
+Giant's Cap,0215,Sneasel,Walking - Overworld,Snowstorm,40.0,Sw/Sh,28-30
+Giant's Cap,0582,Vanillite,Walking - Overworld,Snowstorm,35.0,Sw/Sh,28-30
+Giant's Cap,0572,Minccino,Walking - Overworld,Snowstorm,10.0,Sw/Sh,28-30
+Giant's Cap,0264,Linoone,Walking - Overworld,Snowstorm,10.0,Sw/Sh,28-30
+Giant's Cap,0447,Riolu,Walking - Overworld,Snowstorm,5.0,Sw/Sh,28-30
+Giant's Foot,0436,Bronzor,Walking,Snowstorm,25.0,Sw/Sh,60-65
+Giant's Foot,0439,Mime Jr.,Walking,Snowstorm,25.0,Sw/Sh,60-65
+Giant's Foot,0582,Vanillite,Walking,Snowstorm,25.0,Sw/Sh,60-65
+Giant's Foot,0878,Cufant,Walking,Snowstorm,25.0,Sw/Sh,60-65
+Giant's Foot,0129,Magikarp,Super Rod,Snowstorm,20.0,Sw/Sh,60-65
+Giant's Foot,0339,Barboach,Super Rod,Snowstorm,20.0,Sw/Sh,60-65
+Giant's Foot,0550,Basculin,Super Rod,Snowstorm,20.0,Sw/Sh,60-65
+Giant's Foot,0550,Basculin,Super Rod,Snowstorm,20.0,Sw/Sh,60-65
+Giant's Foot,0130,Gyarados,Super Rod,Snowstorm,15.0,Sw/Sh,60-65
+Giant's Foot,0340,Whiscash,Super Rod,Snowstorm,15.0,Sw/Sh,60-65
+Giant's Foot,0345,Lileep,Super Rod,Snowstorm,10.0,Sw/Sh,60-65
+Giant's Foot,0819,Skwovet,Shaking Trees,Snowstorm,80.0,Sw/Sh,60-65
+Giant's Foot,0820,Greedent,Shaking Trees,Snowstorm,20.0,Sw/Sh,60-65
+Giant's Foot,0879,Copperajah,Walking - Overworld,Snowstorm,26.0,Sw/Sh,60-65
+Giant's Foot,0879,Copperajah,Walking - Overworld,Snowstorm,19.0,Sw/Sh,60-65
+Giant's Foot,0437,Bronzong,Walking - Overworld,Snowstorm,18.0,Sw/Sh,60-65
+Giant's Foot,0874,Stonjourner,Walking - Overworld,Snowstorm,15.0,Sw/Sh,60-65
+Giant's Foot,0344,Claydol,Walking - Overworld,Snowstorm,10.0,Sw/Sh,60-65
+Giant's Foot,0361,Snorunt,Walking - Overworld,Snowstorm,10.0,Sw/Sh,60-65
+Giant's Foot,0437,Bronzong,Walking - Overworld,Snowstorm,10.0,Sw/Sh,60-65
+Giant's Foot,0566,Archen,Walking - Overworld,Snowstorm,10.0,Sw/Sh,60-65
+Giant's Foot,0583,Vanillish,Walking - Overworld,Snowstorm,10.0,Sw/Sh,60-65
+Giant's Foot,0615,Cryogonal,Walking - Overworld,Snowstorm,10.0,Sw/Sh,60-65
+Giant's Foot,0359,Absol,Walking - Overworld,Snowstorm,5.0,Sw/Sh,60-65
+Giant's Foot,0531,Audino,Walking - Overworld,Snowstorm,1.0,Sw/Sh,60-65
+Giant's Mirror,0220,Swinub,Walking,Snowstorm,30.0,Sw/Sh,26-28
+Giant's Mirror,0613,Cubchoo,Walking,Snowstorm,30.0,Sw/Sh,26-28
+Giant's Mirror,0459,Snover,Walking,Snowstorm,20.0,Sw/Sh,26-28
+Giant's Mirror,0066,Machop,Walking,Snowstorm,10.0,Sw/Sh,26-28
+Giant's Mirror,0109,Koffing,Walking,Snowstorm,10.0,Sw/Sh,26-28
+Giant's Mirror,0834,Drednaw,Super Rod,Snowstorm,50.0,Sw/Sh,26-28
+Giant's Mirror,0747,Mareanie,Super Rod,Snowstorm,35.0,Sw/Sh,26-28
+Giant's Mirror,0170,Chinchou,Super Rod,Snowstorm,10.0,Sw/Sh,26-28
+Giant's Mirror,0130,Gyarados,Super Rod,Snowstorm,5.0,Sw/Sh,26-28
+Giant's Mirror,0820,Greedent,Shaking Trees,Snowstorm,75.0,Sw/Sh,26-28
+Giant's Mirror,0420,Cherubi,Shaking Trees,Snowstorm,25.0,Sw/Sh,26-28
+Giant's Mirror,0624,Pawniard,Walking - Overworld,Snowstorm,50.0,Sw/Sh,28-30
+Giant's Mirror,0582,Vanillite,Walking - Overworld,Snowstorm,35.0,Sw/Sh,28-30
+Giant's Mirror,0613,Cubchoo,Walking - Overworld,Snowstorm,10.0,Sw/Sh,28-30
+Giant's Mirror,0177,Natu,Walking - Overworld,Snowstorm,5.0,Sw/Sh,28-30
+Giant's Seat,0225,Delibird,Walking,Snowstorm,50.0,Sw/Sh,30-35
+Giant's Seat,0436,Bronzor,Walking,Snowstorm,30.0,Sw/Sh,30-35
+Giant's Seat,0220,Swinub,Walking,Snowstorm,15.0,Sw/Sh,30-35
+Giant's Seat,0760,Bewear,Walking,Snowstorm,5.0,Sw/Sh,30-35
+Giant's Seat,0090,Shellder,Super Rod,Snowstorm,60.0,Sw/Sh,30-35
+Giant's Seat,0771,Pyukumuku,Super Rod,Snowstorm,25.0,Sw/Sh,30-35
+Giant's Seat,0130,Gyarados,Super Rod,Snowstorm,10.0,Sw/Sh,30-35
+Giant's Seat,0091,Cloyster,Super Rod,Snowstorm,5.0,Sw/Sh,30-35
+Giant's Seat,0820,Greedent,Shaking Trees,Snowstorm,70.0,Sw/Sh,30-35
+Giant's Seat,0420,Cherubi,Shaking Trees,Snowstorm,30.0,Sw/Sh,30-35
+Giant's Seat,0459,Snover,Walking - Overworld,Snowstorm,60.0,Sw/Sh,33-38
+Giant's Seat,0361,Snorunt,Walking - Overworld,Snowstorm,25.0,Sw/Sh,33-38
+Giant's Seat,0436,Bronzor,Walking - Overworld,Snowstorm,10.0,Sw/Sh,33-38
+Giant's Seat,0225,Delibird,Walking - Overworld,Snowstorm,5.0,Sw/Sh,33-38
+Glimwood Tangle,0756,Shiinotic,Walking,All Weather,20.0,Sw/Sh,34-36
+Glimwood Tangle,0860,Morgrem,Walking,All Weather,20.0,Sw/Sh,34-36
+Glimwood Tangle,0756,Shiinotic,Walking,All Weather,15.0,Sw/Sh,34-36
+Glimwood Tangle,0857,Hattrem,Walking,All Weather,15.0,Sw/Sh,34-36
+Glimwood Tangle,0682,Spritzee,Walking,All Weather,10.0,Sw/Sh,34-36
+Glimwood Tangle,0684,Swirlix,Walking,All Weather,10.0,Sw/Sh,34-36
+Glimwood Tangle,0708,Phantump,Walking,All Weather,10.0,Sw/Sh,34-36
+Glimwood Tangle,0854,Sinistea,Walking,All Weather,10.0,Sw/Sh,34-36
+Glimwood Tangle,0857,Hattrem,Walking,All Weather,10.0,Sw/Sh,34-36
+Glimwood Tangle,0077,Ponyta,Walking,All Weather,10.0,Sw/Sh,34-36
+Glimwood Tangle,0765,Oranguru,Walking,All Weather,9.0,Sw/Sh,34-36
+Glimwood Tangle,0766,Passimian,Walking,All Weather,9.0,Sw/Sh,34-36
+Glimwood Tangle,0876,Indeedee,Walking,All Weather,5.0,Sw/Sh,34-36
+Glimwood Tangle,0876,Indeedee,Walking,All Weather,5.0,Sw/Sh,34-36
+Glimwood Tangle,0756,Shiinotic,Walking - Overworld,All Weather,20.0,Sw/Sh,34-36
+Glimwood Tangle,0857,Hattrem,Walking - Overworld,All Weather,20.0,Sw/Sh,34-36
+Glimwood Tangle,0860,Morgrem,Walking - Overworld,All Weather,20.0,Sw/Sh,34-36
+Glimwood Tangle,0684,Swirlix,Walking - Overworld,All Weather,10.0,Sw/Sh,34-36
+Glimwood Tangle,0708,Phantump,Walking - Overworld,All Weather,10.0,Sw/Sh,34-36
+Glimwood Tangle,0854,Sinistea,Walking - Overworld,All Weather,10.0,Sw/Sh,34-36
+Glimwood Tangle,0876,Indeedee,Walking - Overworld,All Weather,5.0,Sw/Sh,34-36
+Glimwood Tangle,0766,Passimian,Walking - Overworld,All Weather,4.0,Sw/Sh,34-36
+Hammerlocke Hills,0361,Snorunt,Walking,Snowstorm,40.0,Sw/Sh,28-30
+Hammerlocke Hills,0582,Vanillite,Walking,Snowstorm,25.0,Sw/Sh,28-30
+Hammerlocke Hills,0679,Honedge,Walking,Snowstorm,15.0,Sw/Sh,28-30
+Hammerlocke Hills,0599,Klink,Walking,Snowstorm,10.0,Sw/Sh,28-30
+Hammerlocke Hills,0686,Inkay,Walking,Snowstorm,10.0,Sw/Sh,28-30
+Hammerlocke Hills,0820,Greedent,Shaking Trees,Snowstorm,75.0,Sw/Sh,28-30
+Hammerlocke Hills,0420,Cherubi,Shaking Trees,Snowstorm,25.0,Sw/Sh,28-30
+Hammerlocke Hills,0215,Sneasel,Walking - Overworld,Snowstorm,40.0,Sw/Sh,29-31
+Hammerlocke Hills,0361,Snorunt,Walking - Overworld,Snowstorm,34.0,Sw/Sh,29-31
+Hammerlocke Hills,0202,Wobbuffet,Walking - Overworld,Snowstorm,10.0,Sw/Sh,29-31
+Hammerlocke Hills,0067,Machoke,Walking - Overworld,Snowstorm,5.0,Sw/Sh,29-31
+Hammerlocke Hills,0710,Pumpkaboo,Walking - Overworld,Snowstorm,5.0,Sw/Sh,29-31
+Hammerlocke Hills,0710,Pumpkaboo,Walking - Overworld,Snowstorm,3.0,Sw/Sh,29-31
+Hammerlocke Hills,0710,Pumpkaboo,Walking - Overworld,Snowstorm,2.0,Sw/Sh,29-31
+Hammerlocke Hills,0710,Pumpkaboo,Walking - Overworld,Snowstorm,1.0,Sw/Sh,29-31
+Honeycalm Island,0415,Combee,Walking,All Weather,30.0,Sw/Sh,43-48
+Honeycalm Island,0548,Petilil,Walking,All Weather,30.0,Sw/Sh,43-48
+Honeycalm Island,0824,Blipbug,Walking,All Weather,30.0,Sw/Sh,43-48
+Honeycalm Island,0440,Happiny,Walking,All Weather,10.0,Sw/Sh,43-48
+Honeycalm Island,0278,Wingull,Surfing,Snowstorm,30.0,Sw/Sh,40-45
+Honeycalm Island,0072,Tentacool,Surfing,Snowstorm,28.0,Sw/Sh,40-45
+Honeycalm Island,0320,Wailmer,Surfing,Snowstorm,20.0,Sw/Sh,40-45
+Honeycalm Island,0458,Mantyke,Surfing,Snowstorm,15.0,Sw/Sh,40-45
+Honeycalm Island,0690,Skrelp,Surfing,Snowstorm,5.0,Sw/Sh,40-45
+Honeycalm Island,0692,Clauncher,Surfing,Snowstorm,5.0,Sw/Sh,40-45
+Honeycalm Island,0130,Gyarados,Surfing,Snowstorm,1.0,Sw/Sh,40-45
+Honeycalm Island,0691,Dragalge,Surfing,Snowstorm,1.0,Sw/Sh,40-45
+Honeycalm Island,0693,Clawitzer,Surfing,Snowstorm,1.0,Sw/Sh,40-45
+Honeycalm Island,0129,Magikarp,Super Rod,Snowstorm,60.0,Sw/Sh,43-48
+Honeycalm Island,0746,Wishiwashi,Super Rod,Snowstorm,40.0,Sw/Sh,43-48
+Honeycalm Island,0415,Combee,Walking - Overworld,Snowstorm,82.0,Sw/Sh,40-45
+Honeycalm Island,0548,Petilil,Walking - Overworld,Snowstorm,16.0,Sw/Sh,40-45
+Honeycalm Island,0113,Chansey,Walking - Overworld,Snowstorm,2.0,Sw/Sh,40-45
+Honeycalm Sea,0072,Tentacool,Walking,All Weather,100.0,Sw/Sh,43-48
+Honeycalm Sea,0278,Wingull,Surfing,Snowstorm,30.0,Sw/Sh,40-45
+Honeycalm Sea,0072,Tentacool,Surfing,Snowstorm,28.0,Sw/Sh,40-45
+Honeycalm Sea,0320,Wailmer,Surfing,Snowstorm,20.0,Sw/Sh,40-45
+Honeycalm Sea,0458,Mantyke,Surfing,Snowstorm,15.0,Sw/Sh,40-45
+Honeycalm Sea,0690,Skrelp,Surfing,Snowstorm,5.0,Sw/Sh,40-45
+Honeycalm Sea,0692,Clauncher,Surfing,Snowstorm,5.0,Sw/Sh,40-45
+Honeycalm Sea,0130,Gyarados,Surfing,Snowstorm,1.0,Sw/Sh,40-45
+Honeycalm Sea,0691,Dragalge,Surfing,Snowstorm,1.0,Sw/Sh,40-45
+Honeycalm Sea,0693,Clawitzer,Surfing,Snowstorm,1.0,Sw/Sh,40-45
+Honeycalm Sea,0129,Magikarp,Super Rod,Snowstorm,60.0,Sw/Sh,43-48
+Honeycalm Sea,0746,Wishiwashi,Super Rod,Snowstorm,40.0,Sw/Sh,43-48
+Honeycalm Sea,0319,Sharpedo,Walking - Overworld,All Weather,100.0,Sw/Sh,40-45
+Hulbury,0846,Arrokuda,Super Rod,All Weather,50.0,Sw/Sh,20-24
+Hulbury,0170,Chinchou,Super Rod,All Weather,20.0,Sw/Sh,20-24
+Hulbury,0833,Chewtle,Super Rod,All Weather,15.0,Sw/Sh,20-24
+Hulbury,0550,Basculin,Super Rod,All Weather,10.0,Sw/Sh,20-24
+Hulbury,0550,Basculin,Super Rod,All Weather,10.0,Sw/Sh,20-24
+Hulbury,0746,Wishiwashi,Super Rod,All Weather,5.0,Sw/Sh,20-24
+Insular Sea,0102,Exeggcute,Walking,All Weather,30.0,Sw/Sh,43-48
+Insular Sea,0278,Wingull,Walking,All Weather,30.0,Sw/Sh,43-48
+Insular Sea,0824,Blipbug,Walking,All Weather,30.0,Sw/Sh,43-48
+Insular Sea,0440,Happiny,Walking,All Weather,10.0,Sw/Sh,43-48
+Insular Sea,0278,Wingull,Surfing,Snowstorm,30.0,Sw/Sh,40-45
+Insular Sea,0072,Tentacool,Surfing,Snowstorm,28.0,Sw/Sh,40-45
+Insular Sea,0116,Horsea,Surfing,Snowstorm,20.0,Sw/Sh,40-45
+Insular Sea,0458,Mantyke,Surfing,Snowstorm,15.0,Sw/Sh,40-45
+Insular Sea,0690,Skrelp,Surfing,Snowstorm,5.0,Sw/Sh,40-45
+Insular Sea,0692,Clauncher,Surfing,Snowstorm,5.0,Sw/Sh,40-45
+Insular Sea,0130,Gyarados,Surfing,Snowstorm,1.0,Sw/Sh,40-45
+Insular Sea,0691,Dragalge,Surfing,Snowstorm,1.0,Sw/Sh,40-45
+Insular Sea,0693,Clawitzer,Surfing,Snowstorm,1.0,Sw/Sh,40-45
+Insular Sea,0129,Magikarp,Super Rod,Snowstorm,60.0,Sw/Sh,43-48
+Insular Sea,0746,Wishiwashi,Super Rod,Snowstorm,40.0,Sw/Sh,43-48
+Insular Sea,0819,Skwovet,Shaking Trees,Snowstorm,70.0,Sw/Sh,43-48
+Insular Sea,0840,Applin,Shaking Trees,Snowstorm,30.0,Sw/Sh,43-48
+Lake of Outrage,0863,Perrserker,Walking,Snowstorm,40.0,Sw/Sh,50-52
+Lake of Outrage,0680,Doublade,Walking,Snowstorm,25.0,Sw/Sh,50-52
+Lake of Outrage,0823,Corviknight,Walking,Snowstorm,20.0,Sw/Sh,50-52
+Lake of Outrage,0823,Corviknight,Walking,Snowstorm,15.0,Sw/Sh,50-52
+Lake of Outrage,0777,Togedemaru,Walking,Snowstorm,13.0,Sw/Sh,50-52
+Lake of Outrage,0875,Eiscue,Walking,Snowstorm,5.0,Sw/Sh,50-52
+Lake of Outrage,0884,Duraludon,Walking,Snowstorm,2.0,Sw/Sh,50-52
+Lake of Outrage,0582,Vanillite,Surfing,Snowstorm,65.0,Sw/Sh,40-43
+Lake of Outrage,0458,Mantyke,Surfing,Snowstorm,20.0,Sw/Sh,40-43
+Lake of Outrage,0226,Mantine,Surfing,Snowstorm,10.0,Sw/Sh,40-43
+Lake of Outrage,0847,Barraskewda,Surfing,Snowstorm,5.0,Sw/Sh,40-43
+Lake of Outrage,0847,Barraskewda,Super Rod,Snowstorm,50.0,Sw/Sh,50-52
+Lake of Outrage,0171,Lanturn,Super Rod,Snowstorm,35.0,Sw/Sh,50-52
+Lake of Outrage,0211,Qwilfish,Super Rod,Snowstorm,10.0,Sw/Sh,50-52
+Lake of Outrage,0130,Gyarados,Super Rod,Snowstorm,5.0,Sw/Sh,50-52
+Lake of Outrage,0820,Greedent,Shaking Trees,Snowstorm,95.0,Sw/Sh,50-52
+Lake of Outrage,0420,Cherubi,Shaking Trees,Snowstorm,5.0,Sw/Sh,50-52
+Lake of Outrage,0601,Klinklang,Walking - Overworld,Snowstorm,30.0,Sw/Sh,55-58
+Lake of Outrage,0625,Bisharp,Walking - Overworld,Snowstorm,25.0,Sw/Sh,55-58
+Lake of Outrage,0584,Vanilluxe,Walking - Overworld,Snowstorm,20.0,Sw/Sh,55-58
+Lake of Outrage,0623,Golurk,Walking - Overworld,Snowstorm,13.0,Sw/Sh,55-58
+Lake of Outrage,0132,Ditto,Walking - Overworld,Snowstorm,10.0,Sw/Sh,55-58
+Lake of Outrage,0879,Copperajah,Walking - Overworld,Snowstorm,2.0,Sw/Sh,55-58
+Lakeside Cave,0041,Zubat,Walking - Overworld,All Weather,20.0,Sw/Sh,60-65
+Lakeside Cave,0304,Aron,Walking - Overworld,All Weather,20.0,Sw/Sh,60-65
+Lakeside Cave,0703,Carbink,Walking - Overworld,All Weather,15.0,Sw/Sh,60-65
+Lakeside Cave,0838,Carkol,Walking - Overworld,All Weather,15.0,Sw/Sh,60-65
+Lakeside Cave,0302,Sableye,Walking - Overworld,All Weather,10.0,Sw/Sh,60-65
+Lakeside Cave,0303,Mawile,Walking - Overworld,All Weather,10.0,Sw/Sh,60-65
+Lakeside Cave,0597,Ferroseed,Walking - Overworld,All Weather,10.0,Sw/Sh,60-65
+Lakeside Cave,0715,Noivern,Walking - Overworld,All Weather,9.0,Sw/Sh,60-65
+Lakeside Cave,0531,Audino,Walking - Overworld,All Weather,1.0,Sw/Sh,60-65
+Loop Lagoon,0278,Wingull,Walking,Snowstorm,30.0,Sw/Sh,19-24
+Loop Lagoon,0824,Blipbug,Walking,Snowstorm,30.0,Sw/Sh,19-24
+Loop Lagoon,0852,Clobbopus,Walking,Snowstorm,30.0,Sw/Sh,19-24
+Loop Lagoon,0440,Happiny,Walking,Snowstorm,10.0,Sw/Sh,19-24
+Loop Lagoon,0072,Tentacool,Surfing,Snowstorm,45.0,Sw/Sh,40-45
+Loop Lagoon,0278,Wingull,Surfing,Snowstorm,30.0,Sw/Sh,40-45
+Loop Lagoon,0852,Clobbopus,Surfing,Snowstorm,25.0,Sw/Sh,40-45
+Loop Lagoon,0129,Magikarp,Super Rod,Snowstorm,50.0,Sw/Sh,19-24
+Loop Lagoon,0090,Shellder,Super Rod,Snowstorm,40.0,Sw/Sh,19-24
+Loop Lagoon,0091,Cloyster,Super Rod,Snowstorm,10.0,Sw/Sh,19-24
+Loop Lagoon,0819,Skwovet,Shaking Trees,Snowstorm,70.0,Sw/Sh,19-24
+Loop Lagoon,0840,Applin,Shaking Trees,Snowstorm,30.0,Sw/Sh,19-24
+Loop Lagoon,0852,Clobbopus,Walking - Overworld,Snowstorm,56.0,Sw/Sh,16-21
+Loop Lagoon,0278,Wingull,Walking - Overworld,Snowstorm,16.0,Sw/Sh,16-21
+Loop Lagoon,0747,Mareanie,Walking - Overworld,Snowstorm,16.0,Sw/Sh,16-21
+Loop Lagoon,0557,Dwebble,Walking - Overworld,Snowstorm,5.0,Sw/Sh,16-21
+Loop Lagoon,0871,Pincurchin,Walking - Overworld,Snowstorm,5.0,Sw/Sh,16-21
+Loop Lagoon,0113,Chansey,Walking - Overworld,Snowstorm,2.0,Sw/Sh,16-21
+Motostoke,0129,Magikarp,Super Rod,All Weather,50.0,Sw/Sh,7-11
+Motostoke,0833,Chewtle,Super Rod,All Weather,40.0,Sw/Sh,7-11
+Motostoke,0339,Barboach,Super Rod,All Weather,10.0,Sw/Sh,7-11
+Motostoke Outskirts,0453,Croagunk,Walking,All Weather,35.0,Sw/Sh,21-24
+Motostoke Outskirts,0559,Scraggy,Walking,All Weather,35.0,Sw/Sh,21-24
+Motostoke Outskirts,0524,Roggenrola,Walking,All Weather,30.0,Sw/Sh,21-24
+Motostoke Outskirts,0624,Pawniard,Walking,All Weather,20.0,Sw/Sh,21-24
+Motostoke Outskirts,0833,Chewtle,Walking,All Weather,10.0,Sw/Sh,21-24
+Motostoke Outskirts,0859,Impidimp,Walking,All Weather,5.0,Sw/Sh,21-24
+Motostoke Outskirts,0164,Noctowl,Walking - Overworld,All Weather,40.0,Sw/Sh,22-26
+Motostoke Outskirts,0164,Noctowl,Walking - Overworld,All Weather,35.0,Sw/Sh,22-26
+Motostoke Outskirts,0185,Sudowoodo,Walking - Overworld,All Weather,30.0,Sw/Sh,22-26
+Motostoke Outskirts,0109,Koffing,Walking - Overworld,All Weather,15.0,Sw/Sh,22-26
+Motostoke Outskirts,0856,Hatenna,Walking - Overworld,All Weather,10.0,Sw/Sh,22-26
+Motostoke Outskirts,0538,Throh,Walking - Overworld,All Weather,5.0,Sw/Sh,22-26
+Motostoke Outskirts,0539,Sawk,Walking - Overworld,All Weather,5.0,Sw/Sh,22-26
+Motostoke Outskirts,0757,Salandit,Walking - Overworld,All Weather,5.0,Sw/Sh,22-26
+Motostoke Riverbank,0624,Pawniard,Walking,Snowstorm,35.0,Sw/Sh,26-28
+Motostoke Riverbank,0215,Sneasel,Walking,Snowstorm,30.0,Sw/Sh,26-28
+Motostoke Riverbank,0822,Corvisquire,Walking,Snowstorm,20.0,Sw/Sh,26-28
+Motostoke Riverbank,0597,Ferroseed,Walking,Snowstorm,10.0,Sw/Sh,26-28
+Motostoke Riverbank,0561,Sigilyph,Walking,Snowstorm,5.0,Sw/Sh,26-28
+Motostoke Riverbank,0582,Vanillite,Surfing,Snowstorm,65.0,Sw/Sh,40-43
+Motostoke Riverbank,0846,Arrokuda,Surfing,Snowstorm,20.0,Sw/Sh,40-43
+Motostoke Riverbank,0550,Basculin,Surfing,Snowstorm,10.0,Sw/Sh,40-43
+Motostoke Riverbank,0550,Basculin,Surfing,Snowstorm,10.0,Sw/Sh,40-43
+Motostoke Riverbank,0458,Mantyke,Surfing,Snowstorm,5.0,Sw/Sh,40-43
+Motostoke Riverbank,0846,Arrokuda,Super Rod,Snowstorm,50.0,Sw/Sh,26-28
+Motostoke Riverbank,0550,Basculin,Super Rod,Snowstorm,35.0,Sw/Sh,26-28
+Motostoke Riverbank,0550,Basculin,Super Rod,Snowstorm,35.0,Sw/Sh,26-28
+Motostoke Riverbank,0847,Barraskewda,Super Rod,Snowstorm,10.0,Sw/Sh,26-28
+Motostoke Riverbank,0747,Mareanie,Super Rod,Snowstorm,5.0,Sw/Sh,26-28
+Motostoke Riverbank,0820,Greedent,Shaking Trees,Snowstorm,50.0,Sw/Sh,26-28
+Motostoke Riverbank,0819,Skwovet,Shaking Trees,Snowstorm,35.0,Sw/Sh,26-28
+Motostoke Riverbank,0420,Cherubi,Shaking Trees,Snowstorm,15.0,Sw/Sh,26-28
+Motostoke Riverbank,0215,Sneasel,Walking - Overworld,Snowstorm,40.0,Sw/Sh,26-28
+Motostoke Riverbank,0215,Sneasel,Walking - Overworld,Snowstorm,40.0,Sw/Sh,28-30
+Motostoke Riverbank,0582,Vanillite,Walking - Overworld,Snowstorm,25.0,Sw/Sh,26-28
+Motostoke Riverbank,0582,Vanillite,Walking - Overworld,Snowstorm,25.0,Sw/Sh,28-30
+Motostoke Riverbank,0509,Purrloin,Walking - Overworld,Snowstorm,20.0,Sw/Sh,26-28
+Motostoke Riverbank,0509,Purrloin,Walking - Overworld,Snowstorm,20.0,Sw/Sh,28-30
+Motostoke Riverbank,0742,Cutiefly,Walking - Overworld,Snowstorm,10.0,Sw/Sh,26-28
+Motostoke Riverbank,0742,Cutiefly,Walking - Overworld,Snowstorm,10.0,Sw/Sh,28-30
+Motostoke Riverbank,0624,Pawniard,Walking - Overworld,Snowstorm,5.0,Sw/Sh,26-28
+Motostoke Riverbank,0624,Pawniard,Walking - Overworld,Snowstorm,5.0,Sw/Sh,28-30
+North Lake Miloch,0225,Delibird,Walking,Snowstorm,40.0,Sw/Sh,14-15
+North Lake Miloch,0225,Delibird,Walking,Snowstorm,40.0,Sw/Sh,14-16
+North Lake Miloch,0459,Snover,Walking,Snowstorm,30.0,Sw/Sh,14-15
+North Lake Miloch,0459,Snover,Walking,Snowstorm,30.0,Sw/Sh,14-16
+North Lake Miloch,0434,Stunky,Walking,Snowstorm,20.0,Sw/Sh,14-15
+North Lake Miloch,0434,Stunky,Walking,Snowstorm,20.0,Sw/Sh,14-16
+North Lake Miloch,0361,Snorunt,Walking,Snowstorm,10.0,Sw/Sh,14-15
+North Lake Miloch,0361,Snorunt,Walking,Snowstorm,10.0,Sw/Sh,14-16
+North Lake Miloch,0582,Vanillite,Surfing,Snowstorm,60.0,Sw/Sh,42-45
+North Lake Miloch,0425,Drifloon,Surfing,Snowstorm,25.0,Sw/Sh,42-45
+North Lake Miloch,0592,Frillish,Surfing,Snowstorm,10.0,Sw/Sh,42-45
+North Lake Miloch,0339,Barboach,Surfing,Snowstorm,5.0,Sw/Sh,42-45
+North Lake Miloch,0129,Magikarp,Super Rod,Snowstorm,58.0,Sw/Sh,14-16
+North Lake Miloch,0339,Barboach,Super Rod,Snowstorm,40.0,Sw/Sh,14-16
+North Lake Miloch,0550,Basculin,Super Rod,Snowstorm,2.0,Sw/Sh,14-16
+North Lake Miloch,0550,Basculin,Super Rod,Snowstorm,2.0,Sw/Sh,14-16
+North Lake Miloch,0420,Cherubi,Shaking Trees,Snowstorm,50.0,Sw/Sh,14-16
+North Lake Miloch,0819,Skwovet,Shaking Trees,Snowstorm,50.0,Sw/Sh,14-16
+North Lake Miloch,0582,Vanillite,Walking - Overworld,Snowstorm,60.0,Sw/Sh,26-28
+North Lake Miloch,0599,Klink,Walking - Overworld,Snowstorm,25.0,Sw/Sh,26-28
+North Lake Miloch,0361,Snorunt,Walking - Overworld,Snowstorm,10.0,Sw/Sh,26-28
+North Lake Miloch,0509,Purrloin,Walking - Overworld,Snowstorm,5.0,Sw/Sh,26-28
+Old Cemetery,0582,Vanillite,Walking,Snowstorm,18.0,Sw/Sh,60-65
+Old Cemetery,0854,Sinistea,Walking,Snowstorm,18.0,Sw/Sh,60-65
+Old Cemetery,0029,Nidoran♀,Walking,Snowstorm,16.0,Sw/Sh,60-65
+Old Cemetery,0032,Nidoran♂,Walking,Snowstorm,16.0,Sw/Sh,60-65
+Old Cemetery,0439,Mime Jr.,Walking,Snowstorm,16.0,Sw/Sh,60-65
+Old Cemetery,0588,Karrablast,Walking,Snowstorm,16.0,Sw/Sh,60-65
+Old Cemetery,0854,Sinistea,Walking - Overworld,Snowstorm,21.0,Sw/Sh,60-65
+Old Cemetery,0029,Nidoran♀,Walking - Overworld,Snowstorm,20.0,Sw/Sh,60-65
+Old Cemetery,0032,Nidoran♂,Walking - Overworld,Snowstorm,20.0,Sw/Sh,60-65
+Old Cemetery,0583,Vanillish,Walking - Overworld,Snowstorm,12.0,Sw/Sh,60-65
+Old Cemetery,0615,Cryogonal,Walking - Overworld,Snowstorm,12.0,Sw/Sh,60-65
+Old Cemetery,0886,Drakloak,Walking - Overworld,Snowstorm,9.0,Sw/Sh,60-65
+Old Cemetery,0359,Absol,Walking - Overworld,Snowstorm,5.0,Sw/Sh,60-65
+Old Cemetery,0531,Audino,Walking - Overworld,Snowstorm,1.0,Sw/Sh,60-65
+Path to the Peak,0873,Frosmoth,Walking - Overworld,Snowstorm,70.0,Sw/Sh,60-65
+Path to the Peak,0872,Snom,Walking - Overworld,Snowstorm,19.0,Sw/Sh,60-65
+Path to the Peak,0359,Absol,Walking - Overworld,Snowstorm,10.0,Sw/Sh,60-65
+Path to the Peak,0531,Audino,Walking - Overworld,Snowstorm,1.0,Sw/Sh,60-65
+Potbottom Desert,0551,Sandile,Walking - Overworld,Snowstorm,56.0,Sw/Sh,10-15
+Potbottom Desert,0551,Sandile,Walking - Overworld,Snowstorm,56.0,Sw/Sh,19-24
+Potbottom Desert,0111,Rhyhorn,Walking - Overworld,Snowstorm,32.0,Sw/Sh,10-15
+Potbottom Desert,0111,Rhyhorn,Walking - Overworld,Snowstorm,32.0,Sw/Sh,19-24
+Potbottom Desert,0324,Torkoal,Walking - Overworld,Snowstorm,5.0,Sw/Sh,10-15
+Potbottom Desert,0324,Torkoal,Walking - Overworld,Snowstorm,5.0,Sw/Sh,19-24
+Potbottom Desert,0627,Rufflet,Walking - Overworld,Snowstorm,5.0,Sw/Sh,19-24
+Potbottom Desert,0629,Vullaby,Walking - Overworld,Snowstorm,5.0,Sw/Sh,10-15
+Potbottom Desert,0113,Chansey,Walking - Overworld,Snowstorm,2.0,Sw/Sh,10-15
+Potbottom Desert,0113,Chansey,Walking - Overworld,Snowstorm,2.0,Sw/Sh,19-24
+Roaring-Sea Caves,0129,Magikarp,Surfing,Snowstorm,20.0,Sw/Sh,60-65
+Roaring-Sea Caves,0138,Omanyte,Surfing,Snowstorm,20.0,Sw/Sh,60-65
+Roaring-Sea Caves,0140,Kabuto,Surfing,Snowstorm,20.0,Sw/Sh,60-65
+Roaring-Sea Caves,0339,Barboach,Surfing,Snowstorm,20.0,Sw/Sh,60-65
+Roaring-Sea Caves,0550,Basculin,Surfing,Snowstorm,20.0,Sw/Sh,60-65
+Roaring-Sea Caves,0550,Basculin,Surfing,Snowstorm,20.0,Sw/Sh,60-65
+Roaring-Sea Caves,0583,Vanillish,Surfing,Snowstorm,19.0,Sw/Sh,60-65
+Roaring-Sea Caves,0349,Feebas,Surfing,Snowstorm,1.0,Sw/Sh,60-65
+Roaring-Sea Caves,0041,Zubat,Walking - Overworld,All Weather,40.0,Sw/Sh,60-65
+Roaring-Sea Caves,0703,Carbink,Walking - Overworld,All Weather,24.0,Sw/Sh,60-65
+Roaring-Sea Caves,0221,Piloswine,Walking - Overworld,All Weather,20.0,Sw/Sh,60-65
+Roaring-Sea Caves,0246,Larvitar,Walking - Overworld,All Weather,10.0,Sw/Sh,60-65
+Roaring-Sea Caves,0633,Deino,Walking - Overworld,All Weather,10.0,Sw/Sh,60-65
+Roaring-Sea Caves,0447,Riolu,Walking - Overworld,All Weather,5.0,Sw/Sh,60-65
+Roaring-Sea Caves,0531,Audino,Walking - Overworld,All Weather,1.0,Sw/Sh,60-65
+Rolling Fields,0220,Swinub,Walking,Snowstorm,40.0,Sw/Sh,7-9
+Rolling Fields,0220,Swinub,Walking,Snowstorm,40.0,Sw/Sh,7-10
+Rolling Fields,0225,Delibird,Walking,Snowstorm,35.0,Sw/Sh,7-9
+Rolling Fields,0225,Delibird,Walking,Snowstorm,35.0,Sw/Sh,7-10
+Rolling Fields,0361,Snorunt,Walking,Snowstorm,20.0,Sw/Sh,7-9
+Rolling Fields,0361,Snorunt,Walking,Snowstorm,20.0,Sw/Sh,7-10
+Rolling Fields,0659,Bunnelby,Walking,Snowstorm,5.0,Sw/Sh,7-9
+Rolling Fields,0659,Bunnelby,Walking,Snowstorm,5.0,Sw/Sh,7-10
+Rolling Fields,0819,Skwovet,Shaking Trees,Snowstorm,80.0,Sw/Sh,7-10
+Rolling Fields,0420,Cherubi,Shaking Trees,Snowstorm,20.0,Sw/Sh,7-10
+Rolling Fields,0225,Delibird,Walking - Overworld,Snowstorm,60.0,Sw/Sh,7-10
+Rolling Fields,0582,Vanillite,Walking - Overworld,Snowstorm,25.0,Sw/Sh,7-10
+Rolling Fields,0011,Metapod,Walking - Overworld,Snowstorm,10.0,Sw/Sh,7-10
+Rolling Fields,0236,Tyrogue,Walking - Overworld,Snowstorm,5.0,Sw/Sh,7-10
+Slippery Slope,0220,Swinub,Walking,Snowstorm,25.0,Sw/Sh,60-65
+Slippery Slope,0238,Smoochum,Walking,Snowstorm,25.0,Sw/Sh,60-65
+Slippery Slope,0439,Mime Jr.,Walking,Snowstorm,25.0,Sw/Sh,60-65
+Slippery Slope,0872,Snom,Walking,Snowstorm,25.0,Sw/Sh,60-65
+Slippery Slope,0819,Skwovet,Shaking Trees,Snowstorm,70.0,Sw/Sh,60-65
+Slippery Slope,0820,Greedent,Shaking Trees,Snowstorm,30.0,Sw/Sh,60-65
+Slippery Slope,0872,Snom,Walking - Overworld,Snowstorm,30.0,Sw/Sh,60-65
+Slippery Slope,0221,Piloswine,Walking - Overworld,Snowstorm,29.0,Sw/Sh,60-65
+Slippery Slope,0615,Cryogonal,Walking - Overworld,Snowstorm,20.0,Sw/Sh,60-65
+Slippery Slope,0124,Jynx,Walking - Overworld,Snowstorm,10.0,Sw/Sh,60-65
+Slippery Slope,0698,Amaura,Walking - Overworld,Snowstorm,10.0,Sw/Sh,60-65
+Slippery Slope,0531,Audino,Walking - Overworld,Snowstorm,1.0,Sw/Sh,60-65
+Slumbering Weald,0819,Skwovet,Walking,All Weather,50.0,Sw/Sh,2-3
+Slumbering Weald,0110,Weezing,Walking,All Weather,30.0,Sw/Sh,45-47
+Slumbering Weald,0517,Munna,Walking,All Weather,25.0,Sw/Sh,45-47
+Slumbering Weald,0821,Rookidee,Walking,All Weather,20.0,Sw/Sh,2-3
+Slumbering Weald,0823,Corviknight,Walking,All Weather,20.0,Sw/Sh,45-47
+Slumbering Weald,0163,Hoothoot,Walking,All Weather,15.0,Sw/Sh,2-3
+Slumbering Weald,0826,Orbeetle,Walking,All Weather,15.0,Sw/Sh,45-47
+Slumbering Weald,0824,Blipbug,Walking,All Weather,10.0,Sw/Sh,2-3
+Slumbering Weald,0012,Butterfree,Walking,All Weather,5.0,Sw/Sh,45-47
+Slumbering Weald,0736,Grubbin,Walking,All Weather,5.0,Sw/Sh,2-3
+Slumbering Weald,0618,Stunfisk,Walking,All Weather,5.0,Sw/Sh,45-47
+Slumbering Weald,0340,Whiscash,Super Rod,All Weather,60.0,Sw/Sh,45-47
+Slumbering Weald,0129,Magikarp,Super Rod,All Weather,20.0,Sw/Sh,45-47
+Slumbering Weald,0339,Barboach,Super Rod,All Weather,20.0,Sw/Sh,45-47
+Snowslide Slope,0374,Beldum,Walking,Snowstorm,25.0,Sw/Sh,60-65
+Snowslide Slope,0439,Mime Jr.,Walking,Snowstorm,25.0,Sw/Sh,60-65
+Snowslide Slope,0582,Vanillite,Walking,Snowstorm,25.0,Sw/Sh,60-65
+Snowslide Slope,0872,Snom,Walking,Snowstorm,25.0,Sw/Sh,60-65
+Snowslide Slope,0129,Magikarp,Super Rod,Snowstorm,45.0,Sw/Sh,60-65
+Snowslide Slope,0550,Basculin,Super Rod,Snowstorm,40.0,Sw/Sh,60-65
+Snowslide Slope,0550,Basculin,Super Rod,Snowstorm,40.0,Sw/Sh,60-65
+Snowslide Slope,0130,Gyarados,Super Rod,Snowstorm,15.0,Sw/Sh,60-65
+Snowslide Slope,0872,Snom,Walking - Overworld,Snowstorm,25.0,Sw/Sh,60-65
+Snowslide Slope,0872,Snom,Walking - Overworld,Snowstorm,20.0,Sw/Sh,60-65
+Snowslide Slope,0374,Beldum,Walking - Overworld,Snowstorm,19.0,Sw/Sh,60-65
+Snowslide Slope,0374,Beldum,Walking - Overworld,Snowstorm,14.0,Sw/Sh,60-65
+Snowslide Slope,0361,Snorunt,Walking - Overworld,Snowstorm,10.0,Sw/Sh,60-65
+Snowslide Slope,0583,Vanillish,Walking - Overworld,Snowstorm,10.0,Sw/Sh,60-65
+Snowslide Slope,0614,Beartic,Walking - Overworld,Snowstorm,10.0,Sw/Sh,60-65
+Snowslide Slope,0615,Cryogonal,Walking - Overworld,Snowstorm,10.0,Sw/Sh,60-65
+Snowslide Slope,0698,Amaura,Walking - Overworld,Snowstorm,10.0,Sw/Sh,60-65
+Snowslide Slope,0554,Darumaka,Walking - Overworld,Snowstorm,10.0,Sw/Sh,60-65
+Snowslide Slope,0359,Absol,Walking - Overworld,Snowstorm,5.0,Sw/Sh,60-65
+Snowslide Slope,0531,Audino,Walking - Overworld,Snowstorm,1.0,Sw/Sh,60-65
+Soothing Wetlands,0206,Dunsparce,Walking,Snowstorm,30.0,Sw/Sh,13-18
+Soothing Wetlands,0451,Skorupi,Walking,Snowstorm,30.0,Sw/Sh,13-18
+Soothing Wetlands,0616,Shelmet,Walking,Snowstorm,30.0,Sw/Sh,13-18
+Soothing Wetlands,0440,Happiny,Walking,Snowstorm,10.0,Sw/Sh,13-18
+Soothing Wetlands,0129,Magikarp,Super Rod,Snowstorm,50.0,Sw/Sh,13-18
+Soothing Wetlands,0339,Barboach,Super Rod,Snowstorm,40.0,Sw/Sh,13-18
+Soothing Wetlands,0340,Whiscash,Super Rod,Snowstorm,10.0,Sw/Sh,13-18
+Soothing Wetlands,0819,Skwovet,Shaking Trees,Snowstorm,70.0,Sw/Sh,13-18
+Soothing Wetlands,0840,Applin,Shaking Trees,Snowstorm,30.0,Sw/Sh,13-18
+Soothing Wetlands,0451,Skorupi,Walking - Overworld,Snowstorm,56.0,Sw/Sh,10-15
+Soothing Wetlands,0194,Wooper,Walking - Overworld,Snowstorm,16.0,Sw/Sh,10-15
+Soothing Wetlands,0206,Dunsparce,Walking - Overworld,Snowstorm,16.0,Sw/Sh,10-15
+Soothing Wetlands,0108,Lickitung,Walking - Overworld,Snowstorm,5.0,Sw/Sh,10-15
+Soothing Wetlands,0626,Bouffalant,Walking - Overworld,Snowstorm,5.0,Sw/Sh,10-15
+Soothing Wetlands,0113,Chansey,Walking - Overworld,Snowstorm,2.0,Sw/Sh,10-15
+South Lake Miloch,0599,Klink,Walking,Snowstorm,40.0,Sw/Sh,11-13
+South Lake Miloch,0459,Snover,Walking,Snowstorm,30.0,Sw/Sh,11-13
+South Lake Miloch,0341,Corphish,Walking,Snowstorm,20.0,Sw/Sh,11-13
+South Lake Miloch,0066,Machop,Walking,Snowstorm,10.0,Sw/Sh,11-13
+South Lake Miloch,0582,Vanillite,Surfing,Snowstorm,60.0,Sw/Sh,41-44
+South Lake Miloch,0425,Drifloon,Surfing,Snowstorm,25.0,Sw/Sh,41-44
+South Lake Miloch,0118,Goldeen,Surfing,Snowstorm,10.0,Sw/Sh,41-44
+South Lake Miloch,0339,Barboach,Surfing,Snowstorm,5.0,Sw/Sh,41-44
+South Lake Miloch,0129,Magikarp,Super Rod,Snowstorm,50.0,Sw/Sh,11-13
+South Lake Miloch,0223,Remoraid,Super Rod,Snowstorm,40.0,Sw/Sh,11-13
+South Lake Miloch,0339,Barboach,Super Rod,Snowstorm,9.0,Sw/Sh,11-13
+South Lake Miloch,0771,Pyukumuku,Super Rod,Snowstorm,1.0,Sw/Sh,11-13
+South Lake Miloch,0582,Vanillite,Walking - Overworld,Snowstorm,60.0,Sw/Sh,14-16
+South Lake Miloch,0599,Klink,Walking - Overworld,Snowstorm,25.0,Sw/Sh,14-16
+South Lake Miloch,0066,Machop,Walking - Overworld,Snowstorm,10.0,Sw/Sh,14-16
+South Lake Miloch,0225,Delibird,Walking - Overworld,Snowstorm,5.0,Sw/Sh,14-16
+Stepping-Stone Sea,0102,Exeggcute,Walking,All Weather,30.0,Sw/Sh,43-48
+Stepping-Stone Sea,0819,Skwovet,Walking,All Weather,30.0,Sw/Sh,43-48
+Stepping-Stone Sea,0824,Blipbug,Walking,All Weather,30.0,Sw/Sh,43-48
+Stepping-Stone Sea,0440,Happiny,Walking,All Weather,10.0,Sw/Sh,43-48
+Stepping-Stone Sea,0278,Wingull,Surfing,Snowstorm,30.0,Sw/Sh,40-45
+Stepping-Stone Sea,0072,Tentacool,Surfing,Snowstorm,28.0,Sw/Sh,40-45
+Stepping-Stone Sea,0592,Frillish,Surfing,Snowstorm,20.0,Sw/Sh,40-45
+Stepping-Stone Sea,0458,Mantyke,Surfing,Snowstorm,15.0,Sw/Sh,40-45
+Stepping-Stone Sea,0690,Skrelp,Surfing,Snowstorm,5.0,Sw/Sh,40-45
+Stepping-Stone Sea,0692,Clauncher,Surfing,Snowstorm,5.0,Sw/Sh,40-45
+Stepping-Stone Sea,0130,Gyarados,Surfing,Snowstorm,1.0,Sw/Sh,40-45
+Stepping-Stone Sea,0691,Dragalge,Surfing,Snowstorm,1.0,Sw/Sh,40-45
+Stepping-Stone Sea,0693,Clawitzer,Surfing,Snowstorm,1.0,Sw/Sh,40-45
+Stepping-Stone Sea,0129,Magikarp,Super Rod,Snowstorm,60.0,Sw/Sh,43-48
+Stepping-Stone Sea,0746,Wishiwashi,Super Rod,Snowstorm,40.0,Sw/Sh,43-48
+Stepping-Stone Sea,0819,Skwovet,Shaking Trees,Snowstorm,60.0,Sw/Sh,43-48
+Stepping-Stone Sea,0840,Applin,Shaking Trees,Snowstorm,30.0,Sw/Sh,43-48
+Stepping-Stone Sea,0841,Flapple,Shaking Trees,Snowstorm,10.0,Sw/Sh,43-48
+Stepping-Stone Sea,0842,Appletun,Shaking Trees,Snowstorm,10.0,Sw/Sh,43-48
+Stepping-Stone Sea,0278,Wingull,Walking - Overworld,Snowstorm,82.0,Sw/Sh,40-45
+Stepping-Stone Sea,0102,Exeggcute,Walking - Overworld,Snowstorm,16.0,Sw/Sh,40-45
+Stepping-Stone Sea,0113,Chansey,Walking - Overworld,Snowstorm,2.0,Sw/Sh,40-45
+Stony Wilderness,0215,Sneasel,Walking,Snowstorm,40.0,Sw/Sh,26-28
+Stony Wilderness,0624,Pawniard,Walking,Snowstorm,30.0,Sw/Sh,26-28
+Stony Wilderness,0613,Cubchoo,Walking,Snowstorm,20.0,Sw/Sh,26-28
+Stony Wilderness,0859,Impidimp,Walking,Snowstorm,10.0,Sw/Sh,26-28
+Stony Wilderness,0215,Sneasel,Walking - Overworld,Snowstorm,35.0,Sw/Sh,28-30
+Stony Wilderness,0613,Cubchoo,Walking - Overworld,Snowstorm,30.0,Sw/Sh,28-30
+Stony Wilderness,0343,Baltoy,Walking - Overworld,Snowstorm,10.0,Sw/Sh,28-30
+Stony Wilderness,0436,Bronzor,Walking - Overworld,Snowstorm,10.0,Sw/Sh,28-30
+Stony Wilderness,0622,Golett,Walking - Overworld,Snowstorm,10.0,Sw/Sh,28-30
+Stony Wilderness,0263,Zigzagoon,Walking - Overworld,Snowstorm,10.0,Sw/Sh,28-30
+Stony Wilderness,0597,Ferroseed,Walking - Overworld,Snowstorm,5.0,Sw/Sh,28-30
+Three-Point Pass,0436,Bronzor,Walking,Snowstorm,25.0,Sw/Sh,60-65
+Three-Point Pass,0439,Mime Jr.,Walking,Snowstorm,25.0,Sw/Sh,60-65
+Three-Point Pass,0582,Vanillite,Walking,Snowstorm,25.0,Sw/Sh,60-65
+Three-Point Pass,0712,Bergmite,Walking,Snowstorm,25.0,Sw/Sh,60-65
+Three-Point Pass,0437,Bronzong,Walking - Overworld,Snowstorm,30.0,Sw/Sh,60-65
+Three-Point Pass,0531,Audino,Walking - Overworld,Snowstorm,20.0,Sw/Sh,60-65
+Three-Point Pass,0713,Avalugg,Walking - Overworld,Snowstorm,20.0,Sw/Sh,60-65
+Three-Point Pass,0344,Claydol,Walking - Overworld,Snowstorm,15.0,Sw/Sh,60-65
+Three-Point Pass,0615,Cryogonal,Walking - Overworld,Snowstorm,10.0,Sw/Sh,60-65
+Three-Point Pass,0583,Vanillish,Walking - Overworld,Snowstorm,4.0,Sw/Sh,60-65
+Three-Point Pass,0359,Absol,Walking - Overworld,Snowstorm,1.0,Sw/Sh,60-65
+Training Lowlands,0506,Lillipup,Walking,Snowstorm,60.0,Sw/Sh,16-21
+Training Lowlands,0824,Blipbug,Walking,Snowstorm,30.0,Sw/Sh,16-21
+Training Lowlands,0440,Happiny,Walking,Snowstorm,10.0,Sw/Sh,16-21
+Training Lowlands,0341,Corphish,Surfing,All Weather,45.0,Sw/Sh,40-45
+Training Lowlands,0846,Arrokuda,Surfing,All Weather,45.0,Sw/Sh,40-45
+Training Lowlands,0845,Cramorant,Surfing,All Weather,10.0,Sw/Sh,40-45
+Training Lowlands,0129,Magikarp,Super Rod,All Weather,50.0,Sw/Sh,16-21
+Training Lowlands,0318,Carvanha,Super Rod,All Weather,40.0,Sw/Sh,16-21
+Training Lowlands,0319,Sharpedo,Super Rod,All Weather,10.0,Sw/Sh,16-21
+Training Lowlands,0819,Skwovet,Shaking Trees,All Weather,70.0,Sw/Sh,16-21
+Training Lowlands,0840,Applin,Shaking Trees,All Weather,30.0,Sw/Sh,16-21
+Training Lowlands,0506,Lillipup,Walking - Overworld,Snowstorm,56.0,Sw/Sh,10-15
+Training Lowlands,0506,Lillipup,Walking - Overworld,Snowstorm,56.0,Sw/Sh,13-18
+Training Lowlands,0128,Tauros,Walking - Overworld,Snowstorm,16.0,Sw/Sh,10-15
+Training Lowlands,0128,Tauros,Walking - Overworld,Snowstorm,16.0,Sw/Sh,13-18
+Training Lowlands,0241,Miltank,Walking - Overworld,Snowstorm,16.0,Sw/Sh,10-15
+Training Lowlands,0241,Miltank,Walking - Overworld,Snowstorm,16.0,Sw/Sh,13-18
+Training Lowlands,0123,Scyther,Walking - Overworld,Snowstorm,5.0,Sw/Sh,10-15
+Training Lowlands,0123,Scyther,Walking - Overworld,Snowstorm,5.0,Sw/Sh,13-18
+Training Lowlands,0127,Pinsir,Walking - Overworld,Snowstorm,5.0,Sw/Sh,13-18
+Training Lowlands,0214,Heracross,Walking - Overworld,Snowstorm,5.0,Sw/Sh,10-15
+Training Lowlands,0113,Chansey,Walking - Overworld,Snowstorm,2.0,Sw/Sh,10-15
+Training Lowlands,0113,Chansey,Walking - Overworld,Snowstorm,2.0,Sw/Sh,13-18
+Tunnel to the Top,0041,Zubat,Walking - Overworld,All Weather,40.0,Sw/Sh,60-65
+Tunnel to the Top,0703,Carbink,Walking - Overworld,All Weather,24.0,Sw/Sh,60-65
+Tunnel to the Top,0361,Snorunt,Walking - Overworld,All Weather,20.0,Sw/Sh,60-65
+Tunnel to the Top,0371,Bagon,Walking - Overworld,All Weather,10.0,Sw/Sh,60-65
+Tunnel to the Top,0443,Gible,Walking - Overworld,All Weather,10.0,Sw/Sh,60-65
+Tunnel to the Top,0035,Clefairy,Walking - Overworld,All Weather,5.0,Sw/Sh,60-65
+Tunnel to the Top,0531,Audino,Walking - Overworld,All Weather,1.0,Sw/Sh,60-65
+Warm-Up Tunnel,0027,Sandshrew,Walking - Overworld,Snowstorm,56.0,Sw/Sh,16-21
+Warm-Up Tunnel,0104,Cubone,Walking - Overworld,Snowstorm,32.0,Sw/Sh,16-21
+Warm-Up Tunnel,0115,Kangaskhan,Walking - Overworld,Snowstorm,5.0,Sw/Sh,16-21
+Warm-Up Tunnel,0324,Torkoal,Walking - Overworld,Snowstorm,5.0,Sw/Sh,16-21
+Warm-Up Tunnel,0113,Chansey,Walking - Overworld,Snowstorm,2.0,Sw/Sh,16-21
+Watchtower Ruins,0459,Snover,Walking,Snowstorm,40.0,Sw/Sh,11-14
+Watchtower Ruins,0361,Snorunt,Walking,Snowstorm,30.0,Sw/Sh,11-14
+Watchtower Ruins,0355,Duskull,Walking,Snowstorm,20.0,Sw/Sh,11-14
+Watchtower Ruins,0425,Drifloon,Walking,Snowstorm,10.0,Sw/Sh,11-14
+Watchtower Ruins,0420,Cherubi,Shaking Trees,Snowstorm,50.0,Sw/Sh,11-14
+Watchtower Ruins,0819,Skwovet,Shaking Trees,Snowstorm,50.0,Sw/Sh,11-14
+Watchtower Ruins,0225,Delibird,Walking - Overworld,Snowstorm,60.0,Sw/Sh,26-29
+Watchtower Ruins,0092,Gastly,Walking - Overworld,Snowstorm,25.0,Sw/Sh,26-29
+Watchtower Ruins,0509,Purrloin,Walking - Overworld,Snowstorm,15.0,Sw/Sh,26-29
+West Lake Axewell,0599,Klink,Walking,Snowstorm,40.0,Sw/Sh,7-11
+West Lake Axewell,0225,Delibird,Walking,Snowstorm,30.0,Sw/Sh,7-11
+West Lake Axewell,0582,Vanillite,Walking,Snowstorm,20.0,Sw/Sh,7-11
+West Lake Axewell,0659,Bunnelby,Walking,Snowstorm,10.0,Sw/Sh,7-11
+West Lake Axewell,0582,Vanillite,Surfing,Snowstorm,70.0,Sw/Sh,38-40
+West Lake Axewell,0129,Magikarp,Surfing,Snowstorm,15.0,Sw/Sh,38-40
+West Lake Axewell,0592,Frillish,Surfing,Snowstorm,10.0,Sw/Sh,38-40
+West Lake Axewell,0118,Goldeen,Surfing,Snowstorm,5.0,Sw/Sh,38-40
+West Lake Axewell,0129,Magikarp,Super Rod,Snowstorm,50.0,Sw/Sh,7-11
+West Lake Axewell,0118,Goldeen,Super Rod,Snowstorm,35.0,Sw/Sh,7-11
+West Lake Axewell,0223,Remoraid,Super Rod,Snowstorm,10.0,Sw/Sh,7-11
+West Lake Axewell,0746,Wishiwashi,Super Rod,Snowstorm,5.0,Sw/Sh,7-11
+West Lake Axewell,0582,Vanillite,Walking - Overworld,Snowstorm,60.0,Sw/Sh,8-14
+West Lake Axewell,0599,Klink,Walking - Overworld,Snowstorm,25.0,Sw/Sh,8-14
+West Lake Axewell,0535,Tympole,Walking - Overworld,Snowstorm,10.0,Sw/Sh,8-14
+West Lake Axewell,0098,Krabby,Walking - Overworld,Snowstorm,5.0,Sw/Sh,8-14
+Workout Sea,0102,Exeggcute,Walking,All Weather,30.0,Sw/Sh,43-48
+Workout Sea,0132,Ditto,Walking,All Weather,30.0,Sw/Sh,43-48
+Workout Sea,0824,Blipbug,Walking,All Weather,30.0,Sw/Sh,43-48
+Workout Sea,0440,Happiny,Walking,All Weather,10.0,Sw/Sh,43-48
+Workout Sea,0458,Mantyke,Surfing,Snowstorm,35.0,Sw/Sh,40-45
+Workout Sea,0278,Wingull,Surfing,Snowstorm,30.0,Sw/Sh,40-45
+Workout Sea,0072,Tentacool,Surfing,Snowstorm,28.0,Sw/Sh,40-45
+Workout Sea,0690,Skrelp,Surfing,Snowstorm,5.0,Sw/Sh,40-45
+Workout Sea,0692,Clauncher,Surfing,Snowstorm,5.0,Sw/Sh,40-45
+Workout Sea,0130,Gyarados,Surfing,Snowstorm,1.0,Sw/Sh,40-45
+Workout Sea,0691,Dragalge,Surfing,Snowstorm,1.0,Sw/Sh,40-45
+Workout Sea,0693,Clawitzer,Surfing,Snowstorm,1.0,Sw/Sh,40-45
+Workout Sea,0129,Magikarp,Super Rod,Snowstorm,50.0,Sw/Sh,43-48
+Workout Sea,0223,Remoraid,Super Rod,Snowstorm,40.0,Sw/Sh,43-48
+Workout Sea,0224,Octillery,Super Rod,Snowstorm,10.0,Sw/Sh,43-48
+Workout Sea,0819,Skwovet,Shaking Trees,Snowstorm,70.0,Sw/Sh,43-48
+Workout Sea,0840,Applin,Shaking Trees,Snowstorm,30.0,Sw/Sh,43-48
+Workout Sea,0132,Ditto,Walking - Overworld,Snowstorm,82.0,Sw/Sh,40-45
+Workout Sea,0102,Exeggcute,Walking - Overworld,Snowstorm,16.0,Sw/Sh,40-45
+Workout Sea,0113,Chansey,Walking - Overworld,Snowstorm,2.0,Sw/Sh,40-45
