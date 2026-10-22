@@ -320,7 +320,7 @@ const johtoMapCoordinates = {
     "y": 47.19
   },
   "indigo_plateau": {
-    "name": "Pokemon League (Johto)",
+    "name": "Johto Pokemon League",
     "x": 54.4,
     "y": 48.25
   },

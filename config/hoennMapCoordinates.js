@@ -185,12 +185,12 @@ const hoennMapCoordinates = {
     "y": 38.05
   },
   "indigo_plateau": {
-    "name": "Pokemon League",
+    "name": "Hoenn Pokemon League",
     "x": 93.52,
     "y": 34.99
   },
   "ever_grande_city": {
-    "name": "Ever Grande City",
+    "name": "Hoenn Pokemon League",
     "x": 86.66,
     "y": 48.18
   },

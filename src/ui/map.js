@@ -720,7 +720,7 @@ export function navigateToLocation(locationName) {
         switchView("POKEMON_CENTER_MARKET");
         const vCenter = document.getElementById("view-center-market");
         setupMarket(vCenter);
-    } else if (locationName.includes("Gym") || locationName === "Pokemon League") {
+    } else if (locationName.includes("Gym") || locationName.includes("Pokemon League")) {
         switchView("GYM");
         let bgImg = "";
         let lookupName = locationName;
@@ -733,9 +733,9 @@ export function navigateToLocation(locationName) {
         else if (locationName.includes("Saffron")) bgImg = "BG-Gym-6-Saffron-Psychic.png";
         else if (locationName.includes("Cinnabar")) bgImg = "BG-Gym-7-Cinnabar-Fire.png";
         else if (locationName.includes("Viridian Gym")) bgImg = "BG-Gym-8-Viridian-Ground.png";
-        else if (locationName === "Pokemon League") {
+        else if (locationName === "Kanto Pokemon League") {
             bgImg = "IndigoPlateau.png";
-            lookupName = "Pokemon League"; // Correct spelling for the gyms config
+            lookupName = "Kanto Pokemon League";
         }
 
         const vGym = document.getElementById("view-gym");
@@ -748,7 +748,7 @@ export function navigateToLocation(locationName) {
 
         let buttonHtml = '';
         if (gymConfig) {
-            let buttonText = lookupName === "Pokemon League" ? "Challenge" : "Battle Gym";
+            let buttonText = lookupName.includes("Pokemon League") ? "Challenge" : "Battle Gym";
             buttonHtml = `<button onclick="window.startGymBattle('${lookupName}')" class="action-btn action-btn-primary" style="margin-top: 10px;">${buttonText}</button>`;
         }
 
@@ -837,7 +837,7 @@ export function showMapTooltip(e, locationName) {
     let info = `<strong>${locationName}</strong><br>`;
 
     // Fetch info to show on tooltip
-    if (locationName.includes("Gym") || locationName === "Pokemon League") {
+    if (locationName.includes("Gym") || locationName.includes("Pokemon League")) {
         let lookupName = locationName;
 
         if (state.config.gyms) {

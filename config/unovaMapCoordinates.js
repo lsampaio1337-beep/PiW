@@ -235,7 +235,7 @@ const unovaMapCoordinates = {
     "y": 39.92
   },
   "indigo_plateau": {
-    "name": "Pokemon League",
+    "name": "Unova Pokemon League",
     "x": 60.39,
     "y": 3.82
   },

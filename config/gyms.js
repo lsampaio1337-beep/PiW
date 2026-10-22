@@ -605,7 +605,7 @@ const gyms = [
   },
   {
     "id": "pokemonleague",
-    "name": "Pokemon League",
+    "name": "Kanto Pokemon League",
     "leader": "Champion",
     "levelRequirement": 0,
     "trainers": [
@@ -1302,7 +1302,7 @@ const gyms = [
 ,
       {
     "id": "johto_league",
-    "name": "Pokemon League (Johto)",
+    "name": "Johto Pokemon League",
     "leader": "Champion",
     "levelRequirement": 40,
     "trainers": [
@@ -1813,7 +1813,7 @@ const gyms = [
     },
     {
       "id": "evergrande",
-      "name": "Ever Grande City",
+      "name": "Hoenn Pokemon League",
       "leader": "Champion",
       "levelRequirement": 0,
       "trainers": [
