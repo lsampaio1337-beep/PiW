@@ -1615,8 +1615,8 @@ export const unlocks = [
   { "challengeName": "Challenge 32", "areaId": "Cinnabar Gym", "unlocks": ["Viridian Gym"], "requirements": { "earnBadge": { "name": "Volcano Badge", "leader": "Blaine", "badgeCount": 7 } } },
   { "challengeName": "Challenge 33", "areaId": "Viridian Gym", "unlocks": ["Route 22"], "requirements": { "earnBadge": { "name": "Earth Badge", "leader": "Giovanni", "badgeCount": 8 } } },
   { "challengeName": "Challenge 34", "areaId": "Route 22", "unlocks": ["Route 23"], "gift": { "item": "Big Potion", "count": 10 }, "requirements": { "defeatCountRoute": { "route": "Route 22", "count": 350 } } },
-  { "challengeName": "Challenge 35", "areaId": "Route 23", "unlocks": ["Pokemon League"], "requirements": { "catchSpeciesAnyOfByRarity": [{ "species": ["Nidoking", "Nidoqueen"], "rarity": "Rare", "count": 1 }] } },
-  { "challengeName": "Final Challenge", "areaId": "Pokemon League", "unlocks": ["New Region to Travel"], "requirements": { "defeatEliteFourAndChampion": true } },
+  { "challengeName": "Challenge 35", "areaId": "Route 23", "unlocks": ["Kanto Pokemon League"], "requirements": { "catchSpeciesAnyOfByRarity": [{ "species": ["Nidoking", "Nidoqueen"], "rarity": "Rare", "count": 1 }] } },
+  { "challengeName": "Final Challenge", "areaId": "Kanto Pokemon League", "unlocks": ["New Region to Travel"], "requirements": { "defeatEliteFourAndChampion": true } },
   { "challengeName": "Extra Challenge 1", "areaId": "Casino", "unlocks": ["Small Fishing Spot", "Casino - Mid Troupe"], "gift": { "item": "Ultraball", "count": 10 }, "requirements": { "catchSpecies": [{ "species": "Bulbasaur", "count": 1 }, { "species": "Charmander", "count": 1 }, { "species": "Squirtle", "count": 1 }] } },
   { "challengeName": "Extra Challenge 2", "areaId": "Small Fishing Spot", "unlocks": ["Fighting Dojo", "Casino - Eeveelutions"], "gift": { "item": "Ultraball", "count": 10 }, "requirements": { "catchSpeciesByRarity": [{ "species": "Magikarp", "rarity": "Epic", "count": 1 }], "catchEachFromSlotMachine": { "machines": [["Ivysaur", "Charmeleon", "Wartortle"]] } } },
   { "challengeName": "Extra Challenge 3", "areaId": "Fighting Dojo", "unlocks": ["Big Fishing Spot", "Casino - Special Spot"], "gift": { "item": "Fighting Stone", "count": 3 }, "requirements": { "catchSpeciesByRarity": [{ "species": "Hitmonchan", "rarity": "Rare", "count": 1 }, { "species": "Hitmonlee", "rarity": "Rare", "count": 1 }, { "species": "Eevee", "rarity": "Rare", "count": 1 }] } },
@@ -1626,7 +1626,7 @@ export const unlocks = [
   { "challengeName": "Extra Challenge 7", "areaId": "Power Plant", "unlocks": ["Seafoam Islands"], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "defeatSpecific": { "name": "Zapdos", "count": 5 } } },
   { "challengeName": "Extra Challenge 8", "areaId": "Seafoam Islands", "unlocks": ["Victory Road"], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "defeatSpecific": { "name": "Articuno", "count": 5 } } },
   { "challengeName": "Extra Challenge 9", "areaId": "Victory Road", "unlocks": ["Cerulean Cave"], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "defeatSpecific": { "name": "Moltres", "count": 5 } } },
-  { "challengeName": "Extra Challenge 10", "areaId": "Cerulean Cave", "unlocks": ["Pokemon League"], "gift": { "item": "Masterball", "count": 2 }, "requirements": { "defeatSpecific": { "name": "Mewtwo", "count": 5 } } }
+  { "challengeName": "Extra Challenge 10", "areaId": "Cerulean Cave", "unlocks": ["Kanto Pokemon League"], "gift": { "item": "Masterball", "count": 2 }, "requirements": { "defeatSpecific": { "name": "Mewtwo", "count": 5 } } }
 ];
 
 export { routes };

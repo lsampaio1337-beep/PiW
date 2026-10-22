@@ -1679,7 +1679,7 @@ export const hoennUnlocks = [
   { "challengeName": "Challenge 45", "areaId": "Mythical and Legendaries Spot", "unlocks": [], "requirements": { "defeatSpecific": { "name": "Deoxys", "count": 1 } } },
   {
     "challengeName": "Hoenn Final Challenge",
-    "areaId": "Ever Grande City",
+    "areaId": "Hoenn Pokemon League",
     "unlocks": [
       "New Region to Travel"
     ],

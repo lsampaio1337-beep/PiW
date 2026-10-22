@@ -502,7 +502,7 @@ class BattleSystem {
         }
 
         // Apply elite 4 background during rest phase if applicable
-        if (gym.name === "Pokemon League") {
+        if (gym.name === "Kanto Pokemon League") {
             const trainerBGs = [
                 'BG-Elite4-1Lorelei.png',
                 'BG-Elite4-2Bruno.png',
@@ -1675,15 +1675,15 @@ class BattleSystem {
                 // Record the defeated boss
                 if (!this.state.stats.defeatedBosses) this.state.stats.defeatedBosses = {};
                 this.state.stats.defeatedBosses[gym.leader] = true;
-                if (gym.name === "Pokemon League") {
+                if (gym.name === "Kanto Pokemon League") {
                     this.state.stats.defeatedBosses["Pokemon League Lorelei"] = true;
                     this.state.stats.defeatedBosses["Champion Rival"] = true;
                 }
                 if (enemy.name === "Champion" || enemy.name === "Champion Wallace" || enemy.name === "Champion Iris") {
                     if (!this.state.stats.defeatedBosses) this.state.stats.defeatedBosses = {};
-                    if (gym.name === "Pokemon League (Johto)") {
+                    if (gym.name === "Johto Pokemon League") {
                         this.state.stats.defeatedBosses["Johto Champion"] = true;
-                    } else if (gym.name === "Ever Grande City") {
+                    } else if (gym.name === "Hoenn Pokemon League") {
                         this.state.stats.defeatedBosses["Hoenn Champion"] = true;
                     } else if (gym.name === "Sinnoh Pokemon League") {
                         this.state.stats.defeatedBosses["Sinnoh Champion"] = true;
