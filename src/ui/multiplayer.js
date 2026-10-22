@@ -194,7 +194,7 @@ function setupDataChannel(channel) {
         updateBattleButtonUI();
 
         // Send our party data to the opponent
-        channel.send(JSON.stringify({ type: 'party', party: state.party }));
+        channel.send(JSON.stringify({ type: 'party', party: state.party, region: state.currentRegionName }));
     };
 
     channel.onopen = handleOpen;
@@ -205,6 +205,25 @@ function setupDataChannel(channel) {
     channel.onmessage = (event) => {
         const data = JSON.parse(event.data);
         if (data.type === 'party') {
+            if (data.region !== state.currentRegionName) {
+                alert("Cannot connect! You must be in the same region as your opponent.");
+                if (peerConnection) {
+                    peerConnection.close();
+                }
+                initMultiplayer();
+
+                const connBtn = document.getElementById('btn-mp-connection-status');
+                if (connBtn) {
+                    connBtn.style.background = '#e74c3c';
+                    connBtn.innerText = 'Not Connected';
+                    connBtn.disabled = true;
+                    connBtn.style.cursor = 'default';
+                    connBtn.onmouseenter = null;
+                    connBtn.onmouseleave = null;
+                }
+                updateBattleButtonUI();
+                return;
+            }
             opponentParty = data.party;
             checkReadyState();
         } else if (data.type === 'ready') {
