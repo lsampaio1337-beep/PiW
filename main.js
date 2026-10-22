@@ -5,7 +5,11 @@ const fs = require('fs');
 // Fix transparency issues conditionally rather than disabling hardware acceleration entirely
 if (process.platform === 'linux') {
     app.commandLine.appendSwitch('enable-transparent-visuals');
-    // Hardware acceleration must be disabled on Linux for transparency to work properly
+}
+
+// Hardware acceleration must be disabled on Linux for transparency to work properly,
+// and on Windows to prevent it from freezing videos (e.g., YouTube in Chrome) playing in the background behind the transparent window.
+if (process.platform === 'linux' || process.platform === 'win32') {
     app.disableHardwareAcceleration();
 }
 
