@@ -1,26 +1,46 @@
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
-import json
+import numpy as np
+import re
 
-def fetch_hisui_pokedex():
-    print("Getting Hisui pokedex to map Names to Regional IDs...")
-    pokedex_url = "https://pokemondb.net/pokedex/game/legends-arceus"
-    response = requests.get(pokedex_url)
+def fetch_pokemon_bst():
+    print("Getting Pokemon BST data...")
+    url = "https://pokemondb.net/pokedex/all"
+    response = requests.get(url)
     soup = BeautifulSoup(response.content, 'html.parser')
-    cards = soup.find_all('div', class_='infocard')
-    hisui_pokedex = {}
-    for card in cards:
-        id_tag = card.find('small')
-        if id_tag:
-            pid = id_tag.text.strip().replace('#', '')
-            name_tag = card.find('a', class_='ent-name')
-            if name_tag:
-                name = name_tag.text.strip()
-                hisui_pokedex[name] = pid
-    return hisui_pokedex
+    table = soup.find('table', id='pokedex')
 
-def scrape_encounters(hisui_pokedex):
+    bst_dict = {}
+    if table:
+        rows = table.find('tbody').find_all('tr')
+        for row in rows:
+            cols = row.find_all('td')
+            if len(cols) >= 4:
+                name_tag = cols[1].find('a')
+                if name_tag:
+                    name = name_tag.text.strip()
+                    form_tag = cols[1].find('small')
+                    full_name = name
+                    if form_tag:
+                        full_name = name + " " + form_tag.text.strip()
+
+                    bst = cols[3].text.strip()
+
+                    if name not in bst_dict:
+                        bst_dict[name] = bst
+
+                    if "Hisuian" in full_name:
+                        bst_dict[full_name] = bst
+                        bst_dict[name + " (Hisuian)"] = bst
+                        bst_dict[name + " (Hisuian Form)"] = bst
+
+                    # Handle cloaks and forms generally
+                    bst_dict[full_name] = bst
+
+    return bst_dict
+
+def scrape_encounters(bst_dict):
     print("Fetching Hisui locations...")
     locations_url = "https://pokemondb.net/location"
     response = requests.get(locations_url)
@@ -33,40 +53,6 @@ def scrape_encounters(hisui_pokedex):
     print(f"Found {len(routes)} Hisui locations.")
 
     all_encounters = []
-    for route in routes:
-        print(f"Scraping {route['name']}...")
-        resp = requests.get(route['url'])
-        route_soup = BeautifulSoup(resp.content, 'html.parser')
-
-        tables = route_soup.find_all('table')
-        pokemon_in_route = set()
-
-        for table in tables:
-            rows = table.find('tbody').find_all('tr') if table.find('tbody') else []
-            for row in rows:
-                cols = row.find_all('td')
-                if len(cols) > 0:
-                    pokemon_name = cols[0].text.strip()
-                    if pokemon_name in hisui_pokedex:
-                        pokemon_in_route.add(pokemon_name)
-
-        if len(pokemon_in_route) > 0:
-            percent = round(100.0 / len(pokemon_in_route), 2)
-            for p in pokemon_in_route:
-                all_encounters.append({
-                    "Route / Place": route['name'],
-                    "Pokemon ID Regional": hisui_pokedex[p],
-                    "Pokemon Name": p,
-                    "Method": "Walk",
-                    "% of appearance": percent
-                })
-        else:
-            print(f"No valid Pokemon found for {route['name']}.")
-
-    return all_encounters
-
-def process_and_save_data(encounters):
-    df = pd.DataFrame(encounters)
 
     hisui_progression_order = [
         "Jubilife Village", "Aspiration Hill", "Horseshoe Plains", "Floaro Gardens",
@@ -92,20 +78,57 @@ def process_and_save_data(encounters):
         "Cloudcap Pass", "Space-Time Distortion"
     ]
 
-    unique_routes = df['Route / Place'].unique()
-    for route in unique_routes:
-        if route not in hisui_progression_order:
-            hisui_progression_order.append(route)
+    for route in routes:
+        print(f"Scraping {route['name']}...")
+        resp = requests.get(route['url'])
+        route_soup = BeautifulSoup(resp.content, 'html.parser')
 
-    order_mapping = {route: i + 1 for i, route in enumerate(hisui_progression_order)}
-    df['Progression Order'] = df['Route / Place'].map(order_mapping)
+        tables = route_soup.find_all('table')
+        pokemon_in_route = {}
 
-    def adjust_percentages(group):
-        total = group['% of appearance'].sum()
-        diff = 100.0 - total
-        if abs(diff) > 0.001:
-            group.loc[group.index[0], '% of appearance'] += diff
-        return group
+        for table in tables:
+            headers = [th.text.strip() for th in table.find('thead').find_all('th')] if table.find('thead') else []
+            level_idx = headers.index('Levels') if 'Levels' in headers else -1
+
+            rows = table.find('tbody').find_all('tr') if table.find('tbody') else []
+            for row in rows:
+                cols = row.find_all('td')
+                if len(cols) > 0:
+                    pokemon_name = cols[0].text.strip()
+                    level = ""
+                    if level_idx != -1 and len(cols) > level_idx:
+                        lvl_text = cols[level_idx].text.strip()
+                        if lvl_text != "—":
+                            level = lvl_text
+
+                    if pokemon_name not in pokemon_in_route:
+                        pokemon_in_route[pokemon_name] = level
+
+        if len(pokemon_in_route) > 0:
+            percent = round(100.0 / len(pokemon_in_route), 2)
+
+            order_index = hisui_progression_order.index(route['name']) if route['name'] in hisui_progression_order else 999
+
+            for p, lvl in pokemon_in_route.items():
+
+                # Check different form names for BST mapping
+                p_clean = re.sub(r' (Plant|Sandy|Trash) Cloak', '', p)
+                bst = bst_dict.get(p + " Hisuian", bst_dict.get(p + " Hisuian Form", bst_dict.get(p_clean, bst_dict.get(p, "—"))))
+
+                all_encounters.append({
+                    "ProgressionSort": order_index,
+                    "Route / Place": route['name'],
+                    "Pokemon Name": p,
+                    "Level": lvl,
+                    "BST": bst,
+                    "Method": "Walk",
+                    "% of appearance": percent
+                })
+
+    return all_encounters
+
+def process_and_save_data(encounters):
+    df = pd.DataFrame(encounters)
 
     for (route, method), group in df.groupby(['Route / Place', 'Method']):
         total = group['% of appearance'].sum()
@@ -115,23 +138,25 @@ def process_and_save_data(encounters):
             df.at[first_idx, '% of appearance'] += diff
 
     df['% of appearance'] = df['% of appearance'].round(2)
-    df = df.sort_values(by=['Progression Order', 'Route / Place', 'Pokemon ID Regional'])
+    df = df.sort_values(by=['ProgressionSort', 'Pokemon Name'])
 
     columns_order = [
-        'Progression Order',
         'Route / Place',
-        'Pokemon ID Regional',
         'Pokemon Name',
+        'Level',
+        'BST',
         'Method',
         '% of appearance'
     ]
     df = df[columns_order]
 
+    df['Level'] = df['Level'].replace('', np.nan)
+
     output_filename = 'hisui_routes.xlsx'
-    df.to_excel(output_filename, index=False)
+    df.to_excel(output_filename, index=False, na_rep='')
     print(f"Data processed and saved to {output_filename}")
 
 if __name__ == "__main__":
-    pokedex = fetch_hisui_pokedex()
-    raw_data = scrape_encounters(pokedex)
+    bst_data = fetch_pokemon_bst()
+    raw_data = scrape_encounters(bst_data)
     process_and_save_data(raw_data)
