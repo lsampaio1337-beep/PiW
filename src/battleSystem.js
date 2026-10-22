@@ -1755,7 +1755,7 @@ class BattleSystem {
         }
     }
 
-    grantXP(pokemon, amount) {
+    grantXP(pokemon, amount, isDaycare = false) {
         if (pokemon.level === 1) {
             amount = Math.ceil((mathEngine.calculateTotalXP(2) - mathEngine.calculateTotalXP(1)) / 3);
         } else if (pokemon.level === 2) {
