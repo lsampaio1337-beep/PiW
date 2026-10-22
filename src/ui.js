@@ -586,12 +586,18 @@ window.showChallengesModal = function() {
     html += `</div></div>`;
 
     // Past Challenges Sector
-    let completedCount = state.stats.completedChallengeIds ?
-        (window.getCurrentUnlocks() ? state.stats.completedChallengeIds.filter(id => window.getCurrentUnlocks().some(u => u.areaId === id)).length : state.stats.completedChallengeIds.length)
-        : 0;
-    let actualCompletedIds = state.stats.completedChallengeIds ?
-        (window.getCurrentUnlocks() ? state.stats.completedChallengeIds.filter(id => window.getCurrentUnlocks().some(u => u.areaId === id)) : state.stats.completedChallengeIds)
-        : [];
+    let actualCompletedIds = [];
+    let completedCount = 0;
+    if (state.stats.completedChallengeIds) {
+        const unlocks = window.getCurrentUnlocks();
+        if (unlocks) {
+            const unlockSet = new Set(unlocks.map(u => u.areaId));
+            actualCompletedIds = state.stats.completedChallengeIds.filter(id => unlockSet.has(id));
+        } else {
+            actualCompletedIds = state.stats.completedChallengeIds;
+        }
+        completedCount = actualCompletedIds.length;
+    }
 
     if (isKanto && state.stats.completed150Challenge) completedCount++;
 
