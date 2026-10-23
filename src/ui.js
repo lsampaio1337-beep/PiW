@@ -2582,7 +2582,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
         } else if (tab === 'medals') {
             const regions = ['Kanto', 'Johto', 'Hoenn', 'Sinnoh', 'Unova', 'Kalos', 'Alola', 'Galar', 'Hisui', 'Paldea'];
 
-            let medalsHtml = '<div style="display: grid; grid-template-columns: repeat(5, 1fr); grid-template-rows: auto auto; gap: 20px; padding: 15px; height: 100%; overflow-y: auto;">';
+            let medalsHtml = '<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; padding: 15px; height: 100%; overflow-y: auto;">';
 
             regions.forEach(region => {
                 let caughtCount = 0;
@@ -2627,27 +2627,13 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
                 const hasSecond = totalInRegion > 0 && caughtCount >= totalInRegion;
                 const hasThird = totalInRegion > 0 && shinyCount >= totalInRegion;
 
-                if (hasThird) {
-                    medalsHtml += `
-                        <div style="text-align: center; display: flex; align-items: center; justify-content: center; filter: drop-shadow(0 0 10px rgba(255, 215, 0, 1));">
-                            <img src="Assets/Extra/Medals/${region} Third.png" alt="${region} Third" style="width: 64px; height: 64px; image-rendering: pixelated;" onerror="this.src='Assets/Extra/Medals/Kanto Third.png'" title="${region} Third">
-                        </div>
-                    `;
-                } else if (hasSecond) {
-                    medalsHtml += `
-                        <div style="text-align: center; display: flex; align-items: center; justify-content: center; filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.8));">
-                            <img src="Assets/Extra/Medals/${region} Second.png" alt="${region} Second" style="width: 64px; height: 64px; image-rendering: pixelated;" onerror="this.src='Assets/Extra/Medals/Kanto Second.png'" title="${region} Second">
-                        </div>
-                    `;
-                } else if (hasFirst) {
-                    medalsHtml += `
-                        <div style="text-align: center; display: flex; align-items: center; justify-content: center; filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));">
-                            <img src="Assets/Extra/Medals/${region} First.png" alt="${region} First" style="width: 64px; height: 64px; image-rendering: pixelated;" onerror="this.src='Assets/Extra/Medals/Kanto First.png'" title="${region} First">
-                        </div>
-                    `;
-                } else {
-                    medalsHtml += `<div></div>`;
-                }
+                medalsHtml += `
+                    <div style="background: rgba(0, 0, 0, 0.5); border-radius: 8px; padding: 10px; display: flex; justify-content: space-around; align-items: center;">
+                        <img src="Assets/Extra/Medals/${region} First.png" alt="${region} First" style="width: 48px; height: 48px; image-rendering: pixelated; ${hasFirst ? 'filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));' : 'filter: grayscale(100%); opacity: 0.5;'}" onerror="this.src='Assets/Extra/Medals/Kanto First.png'" title="${region} First">
+                        <img src="Assets/Extra/Medals/${region} Second.png" alt="${region} Second" style="width: 48px; height: 48px; image-rendering: pixelated; ${hasSecond ? 'filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.8));' : 'filter: grayscale(100%); opacity: 0.5;'}" onerror="this.src='Assets/Extra/Medals/Kanto Second.png'" title="${region} Second">
+                        <img src="Assets/Extra/Medals/${region} Third.png" alt="${region} Third" style="width: 48px; height: 48px; image-rendering: pixelated; ${hasThird ? 'filter: drop-shadow(0 0 10px rgba(255, 215, 0, 1));' : 'filter: grayscale(100%); opacity: 0.5;'}" onerror="this.src='Assets/Extra/Medals/Kanto Third.png'" title="${region} Third">
+                    </div>
+                `;
             });
 
             medalsHtml += '</div>';
