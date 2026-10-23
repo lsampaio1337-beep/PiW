@@ -1,4 +1,36 @@
-import { calculateDamage } from '../src/mathEngine.js';
+import { calculateDamage, calculateHP } from '../src/mathEngine.js';
+
+describe('calculateHP', () => {
+    test('should calculate standard HP correctly without vitamins', () => {
+        // Base: 50, IV: 15, Level: 10, Quality: 1.0, Vitamins: 0
+        // baseFinal = floor((((2*50 + 15) * 10 / 100) + 10 + 10) * 1.0) = floor(11.5 + 20) = 31
+        expect(calculateHP(50, 15, 10, 1.0)).toBe(31);
+    });
+
+    test('should calculate HP correctly with vitamins applied', () => {
+        // Base: 50, IV: 15, Level: 10, Quality: 1.0, Vitamins: 20
+        // baseFinal = 31, + floor(31 * 20/100) = 31 + 6 = 37
+        expect(calculateHP(50, 15, 10, 1.0, 20)).toBe(37);
+    });
+
+    test('should calculate HP correctly for low/min boundary stats', () => {
+        // Base: 10, IV: 0, Level: 1, Quality: 0.8
+        // baseFinal = floor((((2*10 + 0) * 1 / 100) + 1 + 10) * 0.8) = floor((0.2 + 11) * 0.8) = floor(8.96) = 8
+        expect(calculateHP(10, 0, 1, 0.8)).toBe(8);
+    });
+
+    test('should calculate HP correctly for high/max boundary stats', () => {
+        // Base: 255, IV: 100, Level: 100, Quality: 2.0
+        // baseFinal = floor((((2*255 + 100) * 100 / 100) + 100 + 10) * 2.0) = floor((610 + 110) * 2.0) = 1440
+        expect(calculateHP(255, 100, 100, 2.0)).toBe(1440);
+    });
+
+    test('should explicitly test flooring operations for fractional results', () => {
+        // Base: 33, IV: 3, Level: 3, Quality: 1.0
+        // baseFinal = floor((((2*33 + 3) * 3 / 100) + 3 + 10) * 1.0) = floor(2.07 + 13) = 15
+        expect(calculateHP(33, 3, 3, 1.0)).toBe(15);
+    });
+});
 
 describe('calculateDamage', () => {
     beforeEach(() => {
