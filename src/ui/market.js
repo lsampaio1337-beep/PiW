@@ -585,28 +585,23 @@ export function renderPokeMarketSellTab(category) {
         const filterSumIVMin = parseFloat(document.getElementById('market-filter-sumiv-min')?.value);
         const filterSumIVMax = parseFloat(document.getElementById('market-filter-sumiv-max')?.value);
 
+        const map = getPokemonDataMap();
         state.storage.forEach(p => {
         if (!p.uuid) p.uuid = crypto.randomUUID();
             let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
 
             if (p.bst === undefined) {
-                if (typeof p.id === 'number') {
-                    const map = getPokemonDataMap();
-                    if (map) {
-                        const pd = map.get(p.id);
-                        if (pd) p.bst = pd.hp + pd.atk + pd.def + pd.spa + pd.spd + pd.spe;
-                    }
+                if (typeof p.id === 'number' && map) {
+                    const pd = map.get(p.id);
+                    if (pd) p.bst = pd.hp + pd.atk + pd.def + pd.spa + pd.spd + pd.spe;
                 }
             }
             let pEv = calculatePP(p.bst || 300, p.level, p.quality, sumIV); // Fallback to 300 if bst still missing
 
             let pName = p.name || p.id;
-            if (typeof p.id === 'number') {
-                const map = getPokemonDataMap();
-                if (map) {
-                    const pd = map.get(p.id);
-                    if (pd) pName = p.name || pd.name;
-                }
+            if (typeof p.id === 'number' && map) {
+                const pd = map.get(p.id);
+                if (pd) pName = p.name || pd.name;
             }
             if (filterName && !(pName && pName.toString().toLowerCase().includes(filterName)) && !(p.id && p.id.toString().toLowerCase().includes(filterName))) return;
             if (!isNaN(filterLevelMin) && p.level < filterLevelMin) return;
@@ -879,17 +874,15 @@ window.marketSelectAllPokemonForSale = function() {
     const filterSumIVMin = parseFloat(document.getElementById('market-filter-sumiv-min')?.value);
     const filterSumIVMax = parseFloat(document.getElementById('market-filter-sumiv-max')?.value);
 
+    const map = getPokemonDataMap();
     state.storage.forEach(p => {
         if (!p.uuid) p.uuid = crypto.randomUUID();
         let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
 
         let pName = p.name || p.id;
-        if (typeof p.id === 'number') {
-                const map = getPokemonDataMap();
-                if (map) {
-                    const pd = map.get(p.id);
-                    if (pd) pName = p.name || pd.name;
-                }
+        if (typeof p.id === 'number' && map) {
+                const pd = map.get(p.id);
+                if (pd) pName = p.name || pd.name;
             }
         if (filterName && !(pName && pName.toString().toLowerCase().includes(filterName)) && !(p.id && p.id.toString().toLowerCase().includes(filterName))) return;
         if (!isNaN(filterLevelMin) && p.level < filterLevelMin) return;
@@ -913,17 +906,15 @@ function updateMarketPokemonSellCount() {
         let count = window.marketSelectedPokemonForSale.size;
 
         let totalGain = 0;
+        const map = getPokemonDataMap();
         state.storage.forEach(p => {
         if (!p.uuid) p.uuid = crypto.randomUUID();
             if (window.marketSelectedPokemonForSale.has(p.uuid)) {
                 let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
                 if (p.bst === undefined) {
-                    if (typeof p.id === 'number') {
-                    const map = getPokemonDataMap();
-                    if (map) {
-                        const pd = map.get(p.id);
-                        if (pd) p.bst = pd.hp + pd.atk + pd.def + pd.spa + pd.spd + pd.spe;
-                    }
+                    if (typeof p.id === 'number' && map) {
+                    const pd = map.get(p.id);
+                    if (pd) p.bst = pd.hp + pd.atk + pd.def + pd.spa + pd.spd + pd.spe;
                 }
                 }
                 let pEv = calculatePP(p.bst || 300, p.level, p.quality, sumIV);
@@ -941,17 +932,15 @@ window.marketSellSelectedPokemon = function() {
 
     let numSold = window.marketSelectedPokemonForSale.size;
     let totalGain = 0;
+    const map = getPokemonDataMap();
 
     state.storage = state.storage.filter(p => {
         if (window.marketSelectedPokemonForSale.has(p.uuid)) {
             let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
             if (p.bst === undefined) {
-                if (typeof p.id === 'number') {
-                    const map = getPokemonDataMap();
-                    if (map) {
-                        const pd = map.get(p.id);
-                        if (pd) p.bst = pd.hp + pd.atk + pd.def + pd.spa + pd.spd + pd.spe;
-                    }
+                if (typeof p.id === 'number' && map) {
+                    const pd = map.get(p.id);
+                    if (pd) p.bst = pd.hp + pd.atk + pd.def + pd.spa + pd.spd + pd.spe;
                 }
             }
             let pEv = calculatePP(p.bst || 300, p.level, p.quality, sumIV);
