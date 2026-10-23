@@ -29,14 +29,20 @@ main_game_order = [
     "Route 3",
     "Galar Mine",
     "Route 4",
+    "Turffield Gym",
     "Route 5",
+    "Route 5 Daycare",
     "Galar Mine No. 2",
+    "Hulbury Gym",
     "Motostoke Outskirts",
+    "Motostoke Gym",
     "Watchtower Ruins",
     "Axew's Eye",
     "Slumbering Weald",
     "Route 6",
+    "Bridge Field Daycare",
     "Bridge Field",
+    "Stow-on-Side Gym",
     "Stony Wilderness",
     "Dusty Bowl",
     "Giant's Cap",
@@ -45,16 +51,21 @@ main_game_order = [
     "Route 7",
     "Route 8",
     "Glimwood Tangle",
+    "Ballonlea Gym",
     "Route 9",
+    "Circhester Gym",
     "Lake of Outrage",
+    "Spikemuth Gym",
     "Route 10",
-    "Slumbering Weald 2"
+    "Hammerlocke Gym",
+    "Slumbering Weald 2",
+    "Pokemon League"
 ]
 
-# Add any main game routes that I might have missed from the provided list
-for route in ["Hulbury"]:
-    if route in encounters_by_route and route not in main_game_order:
-        main_game_order.insert(main_game_order.index("Galar Mine No. 2") + 1, route)
+# Clean up order (insert Hulbury if we missed it and it's valid, remove Giant's Seat if no encounters)
+main_game_order = [r for r in main_game_order if r in encounters_by_route or 'Gym' in r or 'League' in r or 'Daycare' in r]
+if "Hulbury" in encounters_by_route and "Hulbury" not in main_game_order:
+    main_game_order.insert(main_game_order.index("Galar Mine No. 2") + 1, "Hulbury")
 
 # Isle of Armor Routes (Scale 70-100)
 isle_of_armor_order = [
@@ -86,10 +97,8 @@ crown_tundra_order = [
 # Verify all routes are covered
 all_ordered_routes = main_game_order + isle_of_armor_order + crown_tundra_order
 unmapped_routes = [r for r in encounters_by_route.keys() if r not in all_ordered_routes]
-print(f"Unmapped routes (will be added at end of main): {unmapped_routes}")
-
 for r in unmapped_routes:
-    main_game_order.append(r)
+    main_game_order.insert(-1, r) # Insert right before Pokemon League
 
 # 2. Build Sheet 1 (Paths)
 sheet1_data = []
@@ -101,33 +110,22 @@ def generate_level_range(index, total_routes, min_lvl, max_lvl):
     step = (max_lvl - min_lvl) / (total_routes - 1)
     start_lvl = int(min_lvl + index * step)
     end_lvl = int(min_lvl + (index + 1) * step) if index < total_routes - 1 else max_lvl
-    # Add a little fuzziness/overlap
     end_lvl = min(max_lvl, end_lvl + 2)
     return f"{start_lvl}-{end_lvl}"
 
 def generate_percentages(num_pokemon):
-    # Rough distribution: common, uncommon, rare
-    if num_pokemon == 1:
-        return [100]
-    elif num_pokemon == 2:
-        return [60, 40]
-    elif num_pokemon == 3:
-        return [40, 35, 25]
-    elif num_pokemon == 4:
-        return [30, 25, 25, 20]
-    elif num_pokemon == 5:
-        return [25, 25, 20, 15, 15]
+    if num_pokemon == 1: return [100]
+    elif num_pokemon == 2: return [60, 40]
+    elif num_pokemon == 3: return [40, 35, 25]
+    elif num_pokemon == 4: return [30, 25, 25, 20]
+    elif num_pokemon == 5: return [25, 25, 20, 15, 15]
 
-    # Generic distribution for >5
     base = 100 // num_pokemon
     remainder = 100 % num_pokemon
     distribution = [base] * num_pokemon
-
-    # Add remainder to first few (most common)
     for i in range(remainder):
         distribution[i] += 1
 
-    # Introduce some variance (make first half more common, second half rarer)
     half = num_pokemon // 2
     for i in range(half):
         shift = 2
@@ -137,9 +135,10 @@ def generate_percentages(num_pokemon):
 
     return distribution
 
-# Process Main Game
-for i, route in enumerate([r for r in main_game_order if r in encounters_by_route]):
-    level_range = generate_level_range(i, len([r for r in main_game_order if r in encounters_by_route]), 1, 70)
+# Process Main Game for Sheet 1
+main_routes_only = [r for r in main_game_order if 'Gym' not in r and 'League' not in r and 'Daycare' not in r]
+for i, route in enumerate(main_routes_only):
+    level_range = generate_level_range(i, len(main_routes_only), 1, 70)
     pokemons = encounters_by_route[route]
     percentages = generate_percentages(len(pokemons))
 
@@ -155,9 +154,8 @@ for i, route in enumerate([r for r in main_game_order if r in encounters_by_rout
     order_counter += 1
 
 # Process Isle of Armor (Extra Chain 1)
-ioa_start_order = order_counter
-for i, route in enumerate([r for r in isle_of_armor_order if r in encounters_by_route]):
-    level_range = generate_level_range(i, len([r for r in isle_of_armor_order if r in encounters_by_route]), 70, 100)
+for i, route in enumerate(isle_of_armor_order):
+    level_range = generate_level_range(i, len(isle_of_armor_order), 70, 100)
     pokemons = encounters_by_route[route]
     percentages = generate_percentages(len(pokemons))
 
@@ -172,8 +170,8 @@ for i, route in enumerate([r for r in isle_of_armor_order if r in encounters_by_
         })
 
 # Process Crown Tundra (Extra Chain 2)
-for i, route in enumerate([r for r in crown_tundra_order if r in encounters_by_route]):
-    level_range = generate_level_range(i, len([r for r in crown_tundra_order if r in encounters_by_route]), 70, 100)
+for i, route in enumerate(crown_tundra_order):
+    level_range = generate_level_range(i, len(crown_tundra_order), 70, 100)
     pokemons = encounters_by_route[route]
     percentages = generate_percentages(len(pokemons))
 
@@ -190,51 +188,58 @@ for i, route in enumerate([r for r in crown_tundra_order if r in encounters_by_r
 df1 = pd.DataFrame(sheet1_data)
 
 # 3. Build Sheet 2 (Challenges)
-# Interleave Gyms, Daycares, and League into the main progression
+# EVERY route and gym must be sequentially unlocked.
 sheet2_data = []
-challenge_counter = 1
 
-def add_challenge(name, req, reward):
-    global challenge_counter
+# Main Game Chain
+for i in range(len(main_game_order) - 1):
+    current_node = main_game_order[i]
+    next_node = main_game_order[i+1]
     sheet2_data.append({
-        "Challenge Name": f"Challenge {challenge_counter}" if not name.startswith("Extra") else name,
-        "Name": name,
-        "Requisite": req,
-        "Rewards": reward
+        "Challenge Name": f"Challenge {i+1}",
+        "Requisite": f"Clear {current_node}",
+        "Rewards": f"Unlocks {next_node}"
     })
-    if not name.startswith("Extra"):
-        challenge_counter += 1
+# Capstone main challenge
+sheet2_data.append({
+    "Challenge Name": f"Challenge {len(main_game_order)}",
+    "Requisite": f"Clear {main_game_order[-1]}",
+    "Rewards": "Unlocks Isle of Armor & Crown Tundra"
+})
 
-# Main game progression
-add_challenge("Turffield Gym", "Clear Route 4", "Unlocks Route 5")
-add_challenge("Route 5 Daycare", "Clear Route 5", "Unlocks Galar Mine No. 2")
-add_challenge("Hulbury Gym", "Clear Galar Mine No. 2", "Unlocks Motostoke Outskirts")
-add_challenge("Motostoke Gym", "Clear Motostoke Outskirts", "Unlocks Watchtower Ruins")
-add_challenge("Bridge Field Daycare", "Clear Route 6", "Unlocks Bridge Field")
-add_challenge("Stow-on-Side Gym", "Clear Bridge Field", "Unlocks Stony Wilderness")
-add_challenge("Ballonlea Gym", "Clear Glimwood Tangle", "Unlocks Route 9")
-add_challenge("Circhester Gym", "Clear Route 9", "Unlocks Lake of Outrage")
-add_challenge("Spikemuth Gym", "Clear Lake of Outrage", "Unlocks Route 10")
-add_challenge("Hammerlocke Gym", "Clear Route 10", "Unlocks Slumbering Weald 2")
-add_challenge("Pokemon League", "Clear Slumbering Weald 2", "Unlocks Isle of Armor & Crown Tundra")
+# Extra Chain 1 (Isle of Armor)
+for i in range(len(isle_of_armor_order) - 1):
+    current_node = isle_of_armor_order[i]
+    next_node = isle_of_armor_order[i+1]
+    sheet2_data.append({
+        "Challenge Name": f"Extra Challenge $1-{i+1}",
+        "Requisite": f"Clear {current_node}",
+        "Rewards": f"Unlocks {next_node}"
+    })
+sheet2_data.append({
+    "Challenge Name": f"Extra Challenge $1-{len(isle_of_armor_order)}",
+    "Requisite": f"Clear {isle_of_armor_order[-1]}",
+    "Rewards": "Isle of Armor Completed"
+})
 
-# Isle of Armor progression (Extra Challenge $1)
-e1_routes = [r for r in isle_of_armor_order if r in encounters_by_route]
-for i in range(len(e1_routes) - 1):
-    add_challenge(f"Extra Challenge $1-{i+1}", f"Clear {e1_routes[i]}", f"Unlocks {e1_routes[i+1]}")
-add_challenge(f"Extra Challenge $1-{len(e1_routes)}", f"Clear {e1_routes[-1]}", "Isle of Armor Completed")
+# Extra Chain 2 (Crown Tundra)
+for i in range(len(crown_tundra_order) - 1):
+    current_node = crown_tundra_order[i]
+    next_node = crown_tundra_order[i+1]
+    sheet2_data.append({
+        "Challenge Name": f"Extra Challenge $2-{i+1}",
+        "Requisite": f"Clear {current_node}",
+        "Rewards": f"Unlocks {next_node}"
+    })
+sheet2_data.append({
+    "Challenge Name": f"Extra Challenge $2-{len(crown_tundra_order)}",
+    "Requisite": f"Clear {crown_tundra_order[-1]}",
+    "Rewards": "Crown Tundra Completed"
+})
 
-# Crown Tundra progression (Extra Challenge $2)
-e2_routes = [r for r in crown_tundra_order if r in encounters_by_route]
-for i in range(len(e2_routes) - 1):
-    add_challenge(f"Extra Challenge $2-{i+1}", f"Clear {e2_routes[i]}", f"Unlocks {e2_routes[i+1]}")
-add_challenge(f"Extra Challenge $2-{len(e2_routes)}", f"Clear {e2_routes[-1]}", "Crown Tundra Completed")
-
-df2 = pd.DataFrame(sheet2_data)[["Challenge Name", "Requisite", "Rewards"]] # Exclude temporary "Name" column
-
+df2 = pd.DataFrame(sheet2_data)
 
 # 4. Build Sheet 3 (Unlisted Pokemon)
-# Given the raw list, we will generate some iconic unlisted ones (Starters, Legendaries, etc.)
 unlisted_pokemon = [
     {"Pokemon Name": "Grookey", "Pokemon Type": "Grass", "Path to be include": "Route 1", "Obtained?": "No"},
     {"Pokemon Name": "Thwackey", "Pokemon Type": "Grass", "Path to be include": "Route 1", "Obtained?": "Yes"},
@@ -264,4 +269,4 @@ with pd.ExcelWriter("Galar_Paths.xlsx", engine="openpyxl") as writer:
     df2.to_excel(writer, sheet_name="Challenges", index=False)
     df3.to_excel(writer, sheet_name="Unlisted Pokemon", index=False)
 
-print("Excel file generated successfully!")
+print("Excel file generated successfully with sequential challenges!")
