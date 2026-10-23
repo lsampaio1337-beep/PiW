@@ -221,14 +221,23 @@ function setupDataChannel(channel) {
             return;
         }
 
-        if (!data || typeof data !== 'object') {
+        if (!data || typeof data !== 'object' || Array.isArray(data)) {
             console.warn("Multiplayer message is not an object");
+            return;
+        }
+
+        if (typeof data.type !== 'string') {
+            console.warn("Multiplayer message missing valid type string");
             return;
         }
 
         if (data.type === 'party') {
             if (!Array.isArray(data.party)) {
                 console.warn("Multiplayer party message missing valid party array");
+                return;
+            }
+            if (typeof data.region !== 'string') {
+                console.warn("Multiplayer party message missing valid region string");
                 return;
             }
             if (data.region !== state.currentRegionName) {
@@ -253,11 +262,15 @@ function setupDataChannel(channel) {
             opponentParty = data.party;
             checkReadyState();
         } else if (data.type === 'ready') {
+            if (typeof data.state !== 'boolean') {
+                console.warn("Multiplayer ready message missing valid boolean state");
+                return;
+            }
             isMultiplayerReady.remote = Boolean(data.state);
             updateBattleButtonUI();
             checkReadyState();
         } else if (data.type === 'combatEvent') {
-            if (!data.event || typeof data.event !== 'object') {
+            if (!data.event || typeof data.event !== 'object' || Array.isArray(data.event)) {
                 console.warn("Multiplayer combatEvent message missing valid event object");
                 return;
             }
