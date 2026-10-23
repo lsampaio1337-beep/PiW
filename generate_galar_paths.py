@@ -1,5 +1,6 @@
 import pandas as pd
 import json
+import random
 
 # Load parsed raw data
 with open('raw_encounters.json', 'r') as f:
@@ -12,10 +13,20 @@ for e in encounters:
     pokemon = e['Pokemon Name']
     if route not in encounters_by_route:
         encounters_by_route[route] = []
-    encounters_by_route[route].append(pokemon)
+    if pokemon not in encounters_by_route[route]:
+        encounters_by_route[route].append(pokemon)
 
-# 1. Define progression orders
-# Main Game Routes (Scale 1-70)
+# Base starters at 30% progression
+base_starters = ["Grookey", "Scorbunny", "Sobble"]
+# Mid starters at 60% progression
+mid_starters = ["Thwackey", "Raboot", "Drizzile"]
+
+# Inject Kubfu to Fields of Honor
+if "Fields of Honor" not in encounters_by_route:
+    encounters_by_route["Fields of Honor"] = []
+if "Kubfu" not in encounters_by_route["Fields of Honor"]:
+    encounters_by_route["Fields of Honor"].append("Kubfu")
+
 main_game_order = [
     "Route 1",
     "Route 2",
@@ -24,7 +35,6 @@ main_game_order = [
     "West Lake Axewell",
     "East Lake Axewell",
     "South Lake Miloch",
-    "Giant's Seat", # Note: not in list, skipping if no encounters
     "North Lake Miloch",
     "Route 3",
     "Galar Mine",
@@ -58,54 +68,155 @@ main_game_order = [
     "Spikemuth Gym",
     "Route 10",
     "Hammerlocke Gym",
-    "Slumbering Weald 2",
     "Pokemon League"
 ]
 
-# Clean up order (insert Hulbury if we missed it and it's valid, remove Giant's Seat if no encounters)
-main_game_order = [r for r in main_game_order if r in encounters_by_route or 'Gym' in r or 'League' in r or 'Daycare' in r]
+# Ensure missing main game routes are added
 if "Hulbury" in encounters_by_route and "Hulbury" not in main_game_order:
     main_game_order.insert(main_game_order.index("Galar Mine No. 2") + 1, "Hulbury")
 
-# Isle of Armor Routes (Scale 70-100)
-isle_of_armor_order = [
-    "Fields of Honor",
-    "Soothing Wetlands",
-    "Forest of Focus",
-    "Challenge Beach",
-    "Brawlers' Cave",
-    "Challenge Road",
-    "Training Lowlands",
-    "Warm-Up Tunnel",
-    "Workout Sea",
-    "Stepping-Stone Sea",
-    "Honeycalm Island"
+main_routes_only = [r for r in main_game_order if 'Gym' not in r and 'League' not in r and 'Daycare' not in r]
+
+# Inject starters
+# 30% of main_routes_only is about index 8
+idx_30 = int(len(main_routes_only) * 0.3)
+route_30 = main_routes_only[idx_30]
+if route_30 not in encounters_by_route:
+    encounters_by_route[route_30] = []
+for p in base_starters:
+    if p not in encounters_by_route[route_30]:
+        encounters_by_route[route_30].append(p)
+
+# 60% of main_routes_only is about index 16
+idx_60 = int(len(main_routes_only) * 0.6)
+route_60 = main_routes_only[idx_60]
+if route_60 not in encounters_by_route:
+    encounters_by_route[route_60] = []
+for p in mid_starters:
+    if p not in encounters_by_route[route_60]:
+        encounters_by_route[route_60].append(p)
+
+extra_chains = [
+    {
+        "id": "1",
+        "name": "Zacian & Zamazenta",
+        "routes": ["Slumbering Weald 2", "Energy Plant"],
+        "bosses": ["Zacian", "Zamazenta"]
+    },
+    {
+        "id": "2",
+        "name": "Regis",
+        "routes": ["Rock Peak Ruins", "Iceberg Ruins", "Iron Ruins", "Split-Decision Ruins"],
+        "bosses": ["Regieleki", "Regidrago"]
+    },
+    {
+        "id": "3",
+        "name": "Horses",
+        "routes": ["Slippery Slope", "Old Cemetery", "Path to the Peak", "Crown Shrine"],
+        "bosses": ["Glastrier", "Spectrier"]
+    },
+    {
+        "id": "4",
+        "name": "Kings",
+        "routes": ["Roaring-Sea Caves", "Frigid Sea", "Tunnel to the Top", "Tower Summit"],
+        "bosses": ["Calyrex", "Eternatus"]
+    },
+    {
+        "id": "5",
+        "name": "Birds",
+        "routes": ["Giant's Foot", "Lakeside Cave", "Dyna Tree Hill"],
+        "bosses": ["Articuno", "Zapdos", "Moltres"]
+    },
+    {
+        "id": "6",
+        "name": "Isle of Armor Plains",
+        "routes": ["Fields of Honor", "Soothing Wetlands", "Forest of Focus", "Training Lowlands", "Brawlers' Cave"],
+        "bosses": []
+    },
+    {
+        "id": "7",
+        "name": "Isle of Armor Sea",
+        "routes": ["Challenge Beach", "Workout Sea", "Stepping-Stone Sea", "Honeycalm Island"],
+        "bosses": []
+    },
+    {
+        "id": "8",
+        "name": "Isle of Armor Mountains",
+        "routes": ["Challenge Road", "Warm-Up Tunnel", "Potbottom Desert"],
+        "bosses": ["Urshifu"]
+    }
 ]
 
-# Crown Tundra Routes (Scale 70-100)
-crown_tundra_order = [
-    "Slippery Slope",
-    "Frigid Sea",
-    "Roaring-Sea Caves",
-    "Lakeside Cave",
-    "Old Cemetery",
-    "Giant's Foot",
-    "Path to the Peak",
-    "Tunnel to the Top"
-]
+# Ensure we create empty encounter lists for all new routes
+for chain in extra_chains:
+    for route in chain["routes"]:
+        if route not in encounters_by_route:
+            encounters_by_route[route] = []
 
-# Verify all routes are covered
-all_ordered_routes = main_game_order + isle_of_armor_order + crown_tundra_order
-unmapped_routes = [r for r in encounters_by_route.keys() if r not in all_ordered_routes]
-for r in unmapped_routes:
-    main_game_order.insert(-1, r) # Insert right before Pokemon League
+    # Add bosses to the final route
+    if chain["bosses"]:
+        final_route = chain["routes"][-1]
+        for boss in chain["bosses"]:
+            if boss not in encounters_by_route[final_route]:
+                encounters_by_route[final_route].append(boss)
 
-# 2. Build Sheet 1 (Paths)
-sheet1_data = []
-order_counter = 1
+seen_pokemon = set()
+backup_galar_pokemon = ["Rookidee", "Corvisquire", "Corviknight", "Blipbug", "Dottler", "Orbeetle", "Nickit", "Thievul", "Gossifleur", "Eldegoss", "Wooloo", "Dubwool", "Chewtle", "Drednaw", "Yamper", "Boltund", "Rolycoly", "Carkol", "Coalossal", "Applin", "Flapple", "Appletun", "Silicobra", "Sandaconda", "Cramorant", "Arrokuda", "Barraskewda", "Toxel", "Toxtricity", "Sizzlipede", "Centiskorch", "Clobbopus", "Grapploct", "Sinistea", "Polteageist", "Hatenna", "Hattrem", "Hatterene", "Impidimp", "Morgrem", "Grimmsnarl", "Obstagoon", "Perrserker", "Cursola", "Sirfetch'd", "Mr. Rime", "Runerigus", "Milcery", "Alcremie", "Falinks", "Pincurchin", "Snom", "Frosmoth", "Stonjourner", "Eiscue", "Indeedee", "Morpeko", "Cufant", "Copperajah", "Dracozolt", "Arctozolt", "Dracovish", "Arctovish", "Duraludon", "Dreepy", "Drakloak", "Dragapult"]
 
-def generate_level_range(index, total_routes, min_lvl, max_lvl):
-    if total_routes == 1:
+def enforce_route_rules(route, pokemons):
+    global seen_pokemon
+
+    # Keep bosses if they are in this list
+    is_final_route = False
+    for chain in extra_chains:
+        if route == chain["routes"][-1]:
+            is_final_route = True
+
+    # Figure out which are new
+    new_pokes = [p for p in pokemons if p not in seen_pokemon]
+    old_pokes = [p for p in pokemons if p in seen_pokemon]
+
+    required_new = 2 if len(pokemons) >= 5 else 1
+
+    # We must have `required_new` new pokemons
+    while len(new_pokes) < required_new:
+        if not backup_galar_pokemon:
+            break
+        # Grab a random new one
+        random.shuffle(backup_galar_pokemon)
+        cand = backup_galar_pokemon.pop()
+        if cand not in seen_pokemon and cand not in pokemons:
+            new_pokes.append(cand)
+
+    # Combine
+    final_list = new_pokes + old_pokes
+
+    # Truncate to max 9, but don't lose the new pokes or the bosses!
+    if len(final_list) > 9:
+        # Prioritize new_pokes, then bosses
+        bosses_here = []
+        if is_final_route:
+            for chain in extra_chains:
+                if route == chain["routes"][-1]:
+                    for b in chain["bosses"]:
+                        if b in final_list:
+                            bosses_here.append(b)
+
+        keep = set(new_pokes + bosses_here)
+        remaining = [p for p in final_list if p not in keep]
+        while len(keep) < 9 and remaining:
+            keep.add(remaining.pop(0))
+        final_list = list(keep)
+
+    for p in final_list:
+        seen_pokemon.add(p)
+
+    return final_list
+
+def generate_level_range(index, total_routes, min_lvl, max_lvl, is_boss=False):
+    if is_boss:
+        return "100"
+    if total_routes <= 1:
         return f"{min_lvl}-{max_lvl}"
     step = (max_lvl - min_lvl) / (total_routes - 1)
     start_lvl = int(min_lvl + index * step)
@@ -114,32 +225,27 @@ def generate_level_range(index, total_routes, min_lvl, max_lvl):
     return f"{start_lvl}-{end_lvl}"
 
 def generate_percentages(num_pokemon):
+    if num_pokemon == 0: return []
     if num_pokemon == 1: return [100]
     elif num_pokemon == 2: return [60, 40]
     elif num_pokemon == 3: return [40, 35, 25]
     elif num_pokemon == 4: return [30, 25, 25, 20]
     elif num_pokemon == 5: return [25, 25, 20, 15, 15]
+    elif num_pokemon == 6: return [20, 20, 20, 15, 15, 10]
+    elif num_pokemon == 7: return [20, 15, 15, 15, 15, 10, 10]
+    elif num_pokemon == 8: return [15, 15, 15, 15, 10, 10, 10, 10]
+    elif num_pokemon == 9: return [15, 15, 15, 15, 10, 10, 10, 5, 5]
+    else: return [100//num_pokemon]*num_pokemon
 
-    base = 100 // num_pokemon
-    remainder = 100 % num_pokemon
-    distribution = [base] * num_pokemon
-    for i in range(remainder):
-        distribution[i] += 1
+# Build Sheet 1
+sheet1_data = []
+order_counter = 1
 
-    half = num_pokemon // 2
-    for i in range(half):
-        shift = 2
-        if distribution[-(i+1)] > shift:
-            distribution[i] += shift
-            distribution[-(i+1)] -= shift
-
-    return distribution
-
-# Process Main Game for Sheet 1
-main_routes_only = [r for r in main_game_order if 'Gym' not in r and 'League' not in r and 'Daycare' not in r]
+# Process Main Game
 for i, route in enumerate(main_routes_only):
     level_range = generate_level_range(i, len(main_routes_only), 1, 70)
-    pokemons = encounters_by_route[route]
+    pokemons = encounters_by_route.get(route, [])
+    pokemons = enforce_route_rules(route, pokemons)
     percentages = generate_percentages(len(pokemons))
 
     for p_idx, pokemon in enumerate(pokemons):
@@ -153,42 +259,56 @@ for i, route in enumerate(main_routes_only):
         })
     order_counter += 1
 
-# Process Isle of Armor (Extra Chain 1)
-for i, route in enumerate(isle_of_armor_order):
-    level_range = generate_level_range(i, len(isle_of_armor_order), 70, 100)
-    pokemons = encounters_by_route[route]
-    percentages = generate_percentages(len(pokemons))
+# Process Extra Chains
+for chain in extra_chains:
+    for i, route in enumerate(chain["routes"]):
+        is_final = (i == len(chain["routes"]) - 1)
 
-    for p_idx, pokemon in enumerate(pokemons):
-        sheet1_data.append({
-            "Order": f"E1-{i+1}",
-            "Route/Place": route,
-            "Secondary": "",
-            "Pokemon Name": pokemon,
-            "Level": level_range,
-            "% Appearance": percentages[p_idx]
-        })
+        pokemons = encounters_by_route.get(route, [])
+        pokemons = enforce_route_rules(route, pokemons)
 
-# Process Crown Tundra (Extra Chain 2)
-for i, route in enumerate(crown_tundra_order):
-    level_range = generate_level_range(i, len(crown_tundra_order), 70, 100)
-    pokemons = encounters_by_route[route]
-    percentages = generate_percentages(len(pokemons))
+        # If it's the final route with bosses, bosses get Level 100
+        bosses = chain["bosses"]
+        regular_pokes = [p for p in pokemons if p not in bosses]
+        final_bosses = [p for p in pokemons if p in bosses]
 
-    for p_idx, pokemon in enumerate(pokemons):
-        sheet1_data.append({
-            "Order": f"E2-{i+1}",
-            "Route/Place": route,
-            "Secondary": "",
-            "Pokemon Name": pokemon,
-            "Level": level_range,
-            "% Appearance": percentages[p_idx]
-        })
+        # Assign percentages
+        if is_final and len(final_bosses) > 0:
+            # Bosses are guaranteed / specific encounter
+            for p in regular_pokes:
+                sheet1_data.append({
+                    "Order": f"E{chain['id']}-{i+1}",
+                    "Route/Place": route,
+                    "Secondary": "",
+                    "Pokemon Name": p,
+                    "Level": generate_level_range(i, len(chain["routes"]), 70, 95),
+                    "% Appearance": 100 // max(len(regular_pokes), 1)
+                })
+            for p in final_bosses:
+                sheet1_data.append({
+                    "Order": f"E{chain['id']}-{i+1}",
+                    "Route/Place": route,
+                    "Secondary": "Boss",
+                    "Pokemon Name": p,
+                    "Level": "100",
+                    "% Appearance": 100 // len(final_bosses)
+                })
+        else:
+            level_range = generate_level_range(i, len(chain["routes"]), 70, 100)
+            percentages = generate_percentages(len(pokemons))
+            for p_idx, p in enumerate(pokemons):
+                sheet1_data.append({
+                    "Order": f"E{chain['id']}-{i+1}",
+                    "Route/Place": route,
+                    "Secondary": "",
+                    "Pokemon Name": p,
+                    "Level": level_range,
+                    "% Appearance": percentages[p_idx]
+                })
 
 df1 = pd.DataFrame(sheet1_data)
 
-# 3. Build Sheet 2 (Challenges)
-# EVERY route and gym must be sequentially unlocked.
+# Build Sheet 2 (Challenges)
 sheet2_data = []
 
 # Main Game Chain
@@ -200,73 +320,48 @@ for i in range(len(main_game_order) - 1):
         "Requisite": f"Clear {current_node}",
         "Rewards": f"Unlocks {next_node}"
     })
-# Capstone main challenge
+# Capstone main challenge unlocks all Extra Chains starts
 sheet2_data.append({
     "Challenge Name": f"Challenge {len(main_game_order)}",
     "Requisite": f"Clear {main_game_order[-1]}",
-    "Rewards": "Unlocks Isle of Armor & Crown Tundra"
+    "Rewards": "Unlocks all DLC Chains (Slumbering Weald 2, Rock Peak Ruins, Slippery Slope, etc.)"
 })
 
-# Extra Chain 1 (Isle of Armor)
-for i in range(len(isle_of_armor_order) - 1):
-    current_node = isle_of_armor_order[i]
-    next_node = isle_of_armor_order[i+1]
-    sheet2_data.append({
-        "Challenge Name": f"Extra Challenge $1-{i+1}",
-        "Requisite": f"Clear {current_node}",
-        "Rewards": f"Unlocks {next_node}"
-    })
-sheet2_data.append({
-    "Challenge Name": f"Extra Challenge $1-{len(isle_of_armor_order)}",
-    "Requisite": f"Clear {isle_of_armor_order[-1]}",
-    "Rewards": "Isle of Armor Completed"
-})
+# Extra Chains
+for chain in extra_chains:
+    routes = chain["routes"]
+    for i in range(len(routes) - 1):
+        sheet2_data.append({
+            "Challenge Name": f"Extra Challenge ${chain['id']}-{i+1}",
+            "Requisite": f"Clear {routes[i]}",
+            "Rewards": f"Unlocks {routes[i+1]}"
+        })
 
-# Extra Chain 2 (Crown Tundra)
-for i in range(len(crown_tundra_order) - 1):
-    current_node = crown_tundra_order[i]
-    next_node = crown_tundra_order[i+1]
+    reward_str = f"Completed {chain['name']}"
+    if chain["bosses"]:
+        reward_str += f" (Defeated {' & '.join(chain['bosses'])})"
+
     sheet2_data.append({
-        "Challenge Name": f"Extra Challenge $2-{i+1}",
-        "Requisite": f"Clear {current_node}",
-        "Rewards": f"Unlocks {next_node}"
+        "Challenge Name": f"Extra Challenge ${chain['id']}-{len(routes)}",
+        "Requisite": f"Clear {routes[-1]}",
+        "Rewards": reward_str
     })
-sheet2_data.append({
-    "Challenge Name": f"Extra Challenge $2-{len(crown_tundra_order)}",
-    "Requisite": f"Clear {crown_tundra_order[-1]}",
-    "Rewards": "Crown Tundra Completed"
-})
 
 df2 = pd.DataFrame(sheet2_data)
 
-# 4. Build Sheet 3 (Unlisted Pokemon)
+# Build Sheet 3 (Unlisted Pokemon)
+# We don't include Starters or final bosses in Sheet 3 anymore because they are in the routes!
 unlisted_pokemon = [
-    {"Pokemon Name": "Grookey", "Pokemon Type": "Grass", "Path to be include": "Route 1", "Obtained?": "No"},
-    {"Pokemon Name": "Thwackey", "Pokemon Type": "Grass", "Path to be include": "Route 1", "Obtained?": "Yes"},
-    {"Pokemon Name": "Rillaboom", "Pokemon Type": "Grass", "Path to be include": "Route 1", "Obtained?": "Yes"},
-    {"Pokemon Name": "Scorbunny", "Pokemon Type": "Fire", "Path to be include": "Route 1", "Obtained?": "No"},
-    {"Pokemon Name": "Raboot", "Pokemon Type": "Fire", "Path to be include": "Route 1", "Obtained?": "Yes"},
-    {"Pokemon Name": "Cinderace", "Pokemon Type": "Fire", "Path to be include": "Route 1", "Obtained?": "Yes"},
-    {"Pokemon Name": "Sobble", "Pokemon Type": "Water", "Path to be include": "Route 1", "Obtained?": "No"},
-    {"Pokemon Name": "Drizzile", "Pokemon Type": "Water", "Path to be include": "Route 1", "Obtained?": "Yes"},
-    {"Pokemon Name": "Inteleon", "Pokemon Type": "Water", "Path to be include": "Route 1", "Obtained?": "Yes"},
-    {"Pokemon Name": "Zacian", "Pokemon Type": "Fairy", "Path to be include": "Slumbering Weald 2", "Obtained?": "No"},
-    {"Pokemon Name": "Zamazenta", "Pokemon Type": "Fighting", "Path to be include": "Slumbering Weald 2", "Obtained?": "No"},
-    {"Pokemon Name": "Eternatus", "Pokemon Type": "Poison/Dragon", "Path to be include": "Hammerlocke Hills", "Obtained?": "No"},
-    {"Pokemon Name": "Kubfu", "Pokemon Type": "Fighting", "Path to be include": "Fields of Honor", "Obtained?": "No"},
-    {"Pokemon Name": "Urshifu", "Pokemon Type": "Fighting/Dark", "Path to be include": "Fields of Honor", "Obtained?": "Yes"},
-    {"Pokemon Name": "Calyrex", "Pokemon Type": "Psychic/Grass", "Path to be include": "Crown Shrine", "Obtained?": "No"},
-    {"Pokemon Name": "Regieleki", "Pokemon Type": "Electric", "Path to be include": "Split-Decision Ruins", "Obtained?": "No"},
-    {"Pokemon Name": "Regidrago", "Pokemon Type": "Dragon", "Path to be include": "Split-Decision Ruins", "Obtained?": "No"},
-    {"Pokemon Name": "Glastrier", "Pokemon Type": "Ice", "Path to be include": "Crown Shrine", "Obtained?": "No"},
-    {"Pokemon Name": "Spectrier", "Pokemon Type": "Ghost", "Path to be include": "Crown Shrine", "Obtained?": "No"}
+    {"Pokemon Name": "Rillaboom", "Pokemon Type": "Grass", "Path to be include": "-", "Obtained?": "Yes (Evolution)"},
+    {"Pokemon Name": "Cinderace", "Pokemon Type": "Fire", "Path to be include": "-", "Obtained?": "Yes (Evolution)"},
+    {"Pokemon Name": "Inteleon", "Pokemon Type": "Water", "Path to be include": "-", "Obtained?": "Yes (Evolution)"},
 ]
 df3 = pd.DataFrame(unlisted_pokemon)
 
-# 5. Export to Excel
+# Export to Excel
 with pd.ExcelWriter("Galar_Paths.xlsx", engine="openpyxl") as writer:
     df1.to_excel(writer, sheet_name="Paths", index=False)
     df2.to_excel(writer, sheet_name="Challenges", index=False)
     df3.to_excel(writer, sheet_name="Unlisted Pokemon", index=False)
 
-print("Excel file generated successfully with sequential challenges!")
+print("Excel file regenerated with multiple short extra chains, strict route sizes, starters, and lvl 100 legendaries!")
