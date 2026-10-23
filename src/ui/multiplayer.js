@@ -203,8 +203,24 @@ function setupDataChannel(channel) {
     }
 
     channel.onmessage = (event) => {
-        const data = JSON.parse(event.data);
+        let data;
+        try {
+            data = JSON.parse(event.data);
+        } catch (e) {
+            console.warn("Received malformed multiplayer message", e);
+            return;
+        }
+
+        if (!data || typeof data !== 'object') {
+            console.warn("Multiplayer message is not an object");
+            return;
+        }
+
         if (data.type === 'party') {
+            if (!Array.isArray(data.party)) {
+                console.warn("Multiplayer party message missing valid party array");
+                return;
+            }
             if (data.region !== state.currentRegionName) {
                 alert("Cannot connect! You must be in the same region as your opponent.");
                 if (peerConnection) {
@@ -227,10 +243,14 @@ function setupDataChannel(channel) {
             opponentParty = data.party;
             checkReadyState();
         } else if (data.type === 'ready') {
-            isMultiplayerReady.remote = data.state;
+            isMultiplayerReady.remote = Boolean(data.state);
             updateBattleButtonUI();
             checkReadyState();
         } else if (data.type === 'combatEvent') {
+            if (!data.event || typeof data.event !== 'object') {
+                console.warn("Multiplayer combatEvent message missing valid event object");
+                return;
+            }
             if (globals.battleSystem) {
                  globals.battleSystem.handleMultiplayerEvent(data.event);
             }
