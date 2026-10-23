@@ -27,8 +27,8 @@ def extract_national_ids(pokedex_url):
 kanto_ids = extract_national_ids('https://pokeapi.co/api/v2/pokedex/2/')
 johto_ids = extract_national_ids('https://pokeapi.co/api/v2/pokedex/3/')
 hoenn_ids = extract_national_ids('https://pokeapi.co/api/v2/pokedex/4/')
-sinnoh_ids = extract_national_ids('https://pokeapi.co/api/v2/pokedex/5/')
-unova_ids = extract_national_ids('https://pokeapi.co/api/v2/pokedex/8/')
+sinnoh_ids = extract_national_ids('https://pokeapi.co/api/v2/pokedex/6/')
+unova_ids = extract_national_ids('https://pokeapi.co/api/v2/pokedex/9/')
 
 print(f"Kanto length: {len(kanto_ids)}")
 print(f"Johto length: {len(johto_ids)}")
