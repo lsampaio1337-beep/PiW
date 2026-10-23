@@ -11,6 +11,11 @@ encounters_by_route = {}
 for e in encounters:
     route = e['Route / Place']
     pokemon = e['Pokemon Name']
+
+    # Exclude Urshifu completely
+    if pokemon == "Urshifu":
+        continue
+
     if route not in encounters_by_route:
         encounters_by_route[route] = []
     if pokemon not in encounters_by_route[route]:
@@ -21,7 +26,7 @@ base_starters = ["Grookey", "Scorbunny", "Sobble"]
 # Mid starters at 60% progression
 mid_starters = ["Thwackey", "Raboot", "Drizzile"]
 
-# Inject Kubfu to Fields of Honor
+# Inject Kubfu to Fields of Honor (But no Urshifu anywhere)
 if "Fields of Honor" not in encounters_by_route:
     encounters_by_route["Fields of Honor"] = []
 if "Kubfu" not in encounters_by_route["Fields of Honor"]:
@@ -96,54 +101,43 @@ for p in mid_starters:
     if p not in encounters_by_route[route_60]:
         encounters_by_route[route_60].append(p)
 
+# We want exactly 5 chains based on the 5 boss groups provided.
+# We will split the DLC (Isle of Armor & Crown Tundra) routes sensibly across these 5 chains.
 extra_chains = [
     {
         "id": "1",
-        "name": "Zacian & Zamazenta",
-        "routes": ["Slumbering Weald 2", "Energy Plant"],
+        "name": "Heroes of Galar",
+        # Sensible path: start at Slumbering Weald depths, head to Isle of armor dojo area, end at Energy Plant
+        "routes": ["Slumbering Weald 2", "Fields of Honor", "Forest of Focus", "Training Lowlands", "Energy Plant"],
         "bosses": ["Zacian", "Zamazenta"]
     },
     {
         "id": "2",
-        "name": "Regis",
-        "routes": ["Rock Peak Ruins", "Iceberg Ruins", "Iron Ruins", "Split-Decision Ruins"],
+        "name": "The Regis",
+        # Sensible path: Isle of armor caves/roads -> Crown Tundra Ruins
+        "routes": ["Brawlers' Cave", "Challenge Road", "Warm-Up Tunnel", "Potbottom Desert", "Rock Peak Ruins", "Iceberg Ruins", "Iron Ruins", "Split-Decision Ruins"],
         "bosses": ["Regieleki", "Regidrago"]
     },
     {
         "id": "3",
-        "name": "Horses",
+        "name": "The Steeds",
+        # Sensible path: Crown Tundra snowy plains -> Crown Shrine
         "routes": ["Slippery Slope", "Old Cemetery", "Path to the Peak", "Crown Shrine"],
         "bosses": ["Glastrier", "Spectrier"]
     },
     {
         "id": "4",
-        "name": "Kings",
+        "name": "The Kings",
+        # Sensible path: Crown Tundra caves & sea -> Tower Summit
         "routes": ["Roaring-Sea Caves", "Frigid Sea", "Tunnel to the Top", "Tower Summit"],
         "bosses": ["Calyrex", "Eternatus"]
     },
     {
         "id": "5",
-        "name": "Birds",
-        "routes": ["Giant's Foot", "Lakeside Cave", "Dyna Tree Hill"],
+        "name": "The Legendary Birds",
+        # Sensible path: Isle of Armor Sea -> Crown Tundra Lakes/Trees
+        "routes": ["Challenge Beach", "Workout Sea", "Stepping-Stone Sea", "Honeycalm Island", "Soothing Wetlands", "Giant's Foot", "Lakeside Cave", "Dyna Tree Hill"],
         "bosses": ["Articuno", "Zapdos", "Moltres"]
-    },
-    {
-        "id": "6",
-        "name": "Isle of Armor Plains",
-        "routes": ["Fields of Honor", "Soothing Wetlands", "Forest of Focus", "Training Lowlands", "Brawlers' Cave"],
-        "bosses": []
-    },
-    {
-        "id": "7",
-        "name": "Isle of Armor Sea",
-        "routes": ["Challenge Beach", "Workout Sea", "Stepping-Stone Sea", "Honeycalm Island"],
-        "bosses": []
-    },
-    {
-        "id": "8",
-        "name": "Isle of Armor Mountains",
-        "routes": ["Challenge Road", "Warm-Up Tunnel", "Potbottom Desert"],
-        "bosses": ["Urshifu"]
     }
 ]
 
@@ -274,28 +268,42 @@ for chain in extra_chains:
 
         # Assign percentages
         if is_final and len(final_bosses) > 0:
-            # Bosses are guaranteed / specific encounter
-            for p in regular_pokes:
-                sheet1_data.append({
-                    "Order": f"E{chain['id']}-{i+1}",
-                    "Route/Place": route,
-                    "Secondary": "",
-                    "Pokemon Name": p,
-                    "Level": generate_level_range(i, len(chain["routes"]), 70, 95),
-                    "% Appearance": 100 // max(len(regular_pokes), 1)
-                })
-            for p in final_bosses:
-                sheet1_data.append({
-                    "Order": f"E{chain['id']}-{i+1}",
-                    "Route/Place": route,
-                    "Secondary": "Boss",
-                    "Pokemon Name": p,
-                    "Level": "100",
-                    "% Appearance": 100 // len(final_bosses)
-                })
+            # Safe rounding for percentages so it adds to exactly 100 on boss routes
+            if len(regular_pokes) > 0:
+                base_pct = 100 // len(regular_pokes)
+                rem_pct = 100 % len(regular_pokes)
+                for p_idx, p in enumerate(regular_pokes):
+                    pct = base_pct + (1 if p_idx < rem_pct else 0)
+                    sheet1_data.append({
+                        "Order": f"E{chain['id']}-{i+1}",
+                        "Route/Place": route,
+                        "Secondary": "",
+                        "Pokemon Name": p,
+                        "Level": generate_level_range(i, len(chain["routes"]), 70, 95),
+                        "% Appearance": pct
+                    })
+            if len(final_bosses) > 0:
+                base_pct = 100 // len(final_bosses)
+                rem_pct = 100 % len(final_bosses)
+                for p_idx, p in enumerate(final_bosses):
+                    pct = base_pct + (1 if p_idx < rem_pct else 0)
+                    sheet1_data.append({
+                        "Order": f"E{chain['id']}-{i+1}",
+                        "Route/Place": route,
+                        "Secondary": "Boss",
+                        "Pokemon Name": p,
+                        "Level": "100",
+                        "% Appearance": pct
+                    })
         else:
             level_range = generate_level_range(i, len(chain["routes"]), 70, 100)
             percentages = generate_percentages(len(pokemons))
+
+            # fix rounding issues from predefined lists
+            if sum(percentages) != 100 and len(percentages) > 0:
+                diff = 100 - sum(percentages)
+                percentages[0] += diff
+
             for p_idx, p in enumerate(pokemons):
                 sheet1_data.append({
                     "Order": f"E{chain['id']}-{i+1}",
@@ -324,7 +332,7 @@ for i in range(len(main_game_order) - 1):
 sheet2_data.append({
     "Challenge Name": f"Challenge {len(main_game_order)}",
     "Requisite": f"Clear {main_game_order[-1]}",
-    "Rewards": "Unlocks all DLC Chains (Slumbering Weald 2, Rock Peak Ruins, Slippery Slope, etc.)"
+    "Rewards": "Unlocks all 5 DLC Chains (Heroes, Regis, Steeds, Kings, Birds)"
 })
 
 # Extra Chains
@@ -355,6 +363,7 @@ unlisted_pokemon = [
     {"Pokemon Name": "Rillaboom", "Pokemon Type": "Grass", "Path to be include": "-", "Obtained?": "Yes (Evolution)"},
     {"Pokemon Name": "Cinderace", "Pokemon Type": "Fire", "Path to be include": "-", "Obtained?": "Yes (Evolution)"},
     {"Pokemon Name": "Inteleon", "Pokemon Type": "Water", "Path to be include": "-", "Obtained?": "Yes (Evolution)"},
+    {"Pokemon Name": "Urshifu", "Pokemon Type": "Fighting/Dark", "Path to be include": "-", "Obtained?": "No (Excluded per instructions)"},
 ]
 df3 = pd.DataFrame(unlisted_pokemon)
 
@@ -364,4 +373,4 @@ with pd.ExcelWriter("Galar_Paths.xlsx", engine="openpyxl") as writer:
     df2.to_excel(writer, sheet_name="Challenges", index=False)
     df3.to_excel(writer, sheet_name="Unlisted Pokemon", index=False)
 
-print("Excel file regenerated with multiple short extra chains, strict route sizes, starters, and lvl 100 legendaries!")
+print("Excel file generated correctly with 5 exact chains and no Urshifu!")
