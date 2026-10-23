@@ -1,4 +1,54 @@
-import { calculateDamage } from '../src/mathEngine.js';
+import { calculateDamage, calculateStat } from '../src/mathEngine.js';
+
+describe('calculateStat', () => {
+    // Stat = floor(((2 * BaseStat + IV_Stat) * Level / 100 + 5) * Q)
+    // baseFinal + floor(baseFinal * (vitamins / 100))
+
+    test('should calculate stat correctly without vitamins', () => {
+        // BaseStat = 50, IV = 15, Level = 50, Q = 1.0
+        // (2 * 50 + 15) = 115
+        // 115 * 50 / 100 = 57.5
+        // 57.5 + 5 = 62.5
+        // floor(62.5 * 1.0) = 62
+        const result = calculateStat(50, 15, 50, 1.0);
+        expect(result).toBe(62);
+    });
+
+    test('should calculate stat correctly with vitamins', () => {
+        // baseFinal = 62
+        // vitamins = 10 -> baseFinal * 10 / 100 = 6.2
+        // floor(6.2) = 6
+        // total = 62 + 6 = 68
+        const result = calculateStat(50, 15, 50, 1.0, 10);
+        expect(result).toBe(68);
+    });
+
+    test('should apply quality multiplier correctly', () => {
+        // BaseStat = 100, IV = 31, Level = 100, Q = 1.5
+        // (2 * 100 + 31) = 231
+        // 231 * 100 / 100 = 231
+        // 231 + 5 = 236
+        // floor(236 * 1.5) = 354
+        const result = calculateStat(100, 31, 100, 1.5);
+        expect(result).toBe(354);
+    });
+
+    test('should handle level 1 correctly', () => {
+        // BaseStat = 10, IV = 0, Level = 1, Q = 0.8
+        // (2 * 10 + 0) = 20
+        // 20 * 1 / 100 = 0.2
+        // 0.2 + 5 = 5.2
+        // floor(5.2 * 0.8) = floor(4.16) = 4
+        const result = calculateStat(10, 0, 1, 0.8);
+        expect(result).toBe(4);
+    });
+
+    test('should default vitamins to 0 if not provided', () => {
+        const resultWithVitaminsZero = calculateStat(50, 15, 50, 1.0, 0);
+        const resultWithoutVitamins = calculateStat(50, 15, 50, 1.0);
+        expect(resultWithoutVitamins).toBe(resultWithVitaminsZero);
+    });
+});
 
 describe('calculateDamage', () => {
     beforeEach(() => {
