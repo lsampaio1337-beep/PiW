@@ -2,3 +2,10 @@ node_modules/
 out/
 test-results/
 coverage/
+fetch_kalos.js\nkalos_species.json\nparsed_dex.json\n
+partition.js\npartition.json\n
+locations.js\nlocations.json\n
+distribute.js\nnew_sheet1.json\n
+build_sheet2.js\nnew_sheet2.json\n
+build_sheet3.js\nnew_sheet3.json\n
+generate_final.js\n
