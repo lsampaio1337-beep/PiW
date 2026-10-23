@@ -1,0 +1,1238 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/http/server.py", line 1329, in <module>
+    test(
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/http/server.py", line 1276, in test
+    with ServerClass(addr, HandlerClass) as httpd:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/socketserver.py", line 457, in __init__
+    self.server_bind()
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/http/server.py", line 1323, in server_bind
+    return super().server_bind()
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/http/server.py", line 140, in server_bind
+    socketserver.TCPServer.server_bind(self)
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/socketserver.py", line 478, in server_bind
+    self.socket.bind(self.server_address)
+OSError: [Errno 98] Address already in use
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /Assets/Extra/Icons/IconTeam.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /Assets/Extra/Icons/IconMainView.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /src/ui.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /Assets/Extra/Icons/IconMap.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /Assets/Extra/Icons/ExclamationMark.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /Assets/Extra/Icons/IconBackpack.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /Assets/Extra/Icons/IconPokedex.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /Assets/Extra/Icons/IconGift.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /Assets/Extra/Icons/BonusCandy.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /Assets/Extra/Icons/IconTrainer.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /Assets/Extra/Icons/IconCalendar.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /Assets/Extra/Icons/ProgressChallange.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /Assets/Extra/Icons/IconHelp.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /Assets/Extra/Icons/IconSleep.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /Assets/Extra/Icons/IconSettings.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /Assets/Extra/Icons/IconExit.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /Assets/Extra/Logo.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /Assets/Lab/1_Kanto_Professor_Oak.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /Assets/Pokemon%20Sprites/Extra/FrameBorder.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /src/mathEngine.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /src/windowManager.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /src/clickThrough.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /src/ui/mainControl.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /src/battleSystem.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /src/dayCare.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /src/state.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /src/storage.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /src/ui/dailyChallenges.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /src/ui/help.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /src/ui/tutorials/profTutorial.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /src/ui/teamWindow.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /src/ui/battle.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /src/ui/calendar.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /src/ui/tokenShop.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /src/ui/multiplayer.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /src/ui/gift.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /src/ui/map.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /src/ui/pokedex.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /src/ui/pokemonStats.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /src/ui/bonusCandy.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /src/ui/settings.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /src/ui/market.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /src/ui/backpack/index.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /src/ui/backpack/pokemon.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /src/ui/cheatControl.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /src/utils/sprites.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /src/utils/badges.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /src/init/eventListeners.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /src/constants.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /Assets/Items/Upgrades/Storage1.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /Assets/Extra/No.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /src/ui/backpack/pokeballs.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /src/ui/backpack/potions.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /src/ui/backpack/stones.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /src/ui/backpack/vitamins.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /src/ui/backpack/utils.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /data/pokemon.json HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /config/routes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /config/gyms.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /config/balance.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /config/types.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /config/moves.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /config/mapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /config/gymAssets.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /config/johtoRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /config/johtoMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /config/hoennRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:04] "GET /config/hoennMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:05] "GET /config/sinnohRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:05] "GET /config/sinnohMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:05] "GET /config/unovaRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:05] "GET /config/unovaMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:05] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:31:05] "GET /config/kalosRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:31:05] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:31:05] "GET /config/kalosMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:31:05] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:31:05] "GET /config/alolaRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:31:05] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:31:05] "GET /config/alolaMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:31:05] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:31:05] "GET /config/galarRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:31:05] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:31:05] "GET /config/galarMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:31:05] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:31:05] "GET /config/hisuiRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:31:05] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:31:05] "GET /config/hisuiMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:31:05] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:31:05] "GET /config/paldeaRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:31:05] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:31:05] "GET /config/paldeaMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:31:05] "GET /Assets/Extra/LogoBG.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /Assets/Extra/Icons/IconMainView.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /Assets/Extra/Icons/IconTeam.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /src/ui.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /Assets/Extra/Icons/IconBackpack.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /Assets/Extra/Icons/IconMap.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /Assets/Extra/Icons/ExclamationMark.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /src/ui/market.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /src/state.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /src/ui/map.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /src/init/eventListeners.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /src/mathEngine.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /src/windowManager.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /src/clickThrough.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /src/ui/mainControl.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /src/ui/dailyChallenges.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /src/storage.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /src/ui/help.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /src/battleSystem.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /src/ui/tutorials/profTutorial.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /src/dayCare.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /src/ui/teamWindow.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /src/ui/calendar.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /src/ui/tokenShop.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /src/ui/battle.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /src/ui/gift.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /src/ui/multiplayer.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /src/ui/pokedex.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /src/ui/pokemonStats.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /src/ui/bonusCandy.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /src/ui/settings.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /src/ui/backpack/index.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /src/ui/backpack/pokemon.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /src/ui/cheatControl.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /src/utils/sprites.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /src/constants.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /Assets/Extra/Icons/IconPokedex.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /src/utils/badges.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /Assets/Extra/Icons/IconTrainer.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /src/ui/backpack/pokeballs.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /src/ui/backpack/potions.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /src/ui/backpack/stones.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /src/ui/backpack/vitamins.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /Assets/Extra/Icons/BonusCandy.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /Assets/Extra/Icons/IconGift.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /Assets/Extra/Icons/IconCalendar.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /src/ui/backpack/utils.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /Assets/Extra/Icons/ProgressChallange.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /Assets/Extra/Icons/IconSleep.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /Assets/Extra/Icons/IconHelp.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /Assets/Extra/Icons/IconSettings.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /Assets/Extra/Icons/IconExit.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /Assets/Extra/Logo.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /Assets/Lab/1_Kanto_Professor_Oak.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /Assets/Pokemon%20Sprites/Extra/FrameBorder.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /Assets/Items/Upgrades/Storage1.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /Assets/Extra/No.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /data/pokemon.json HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /config/routes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /config/gyms.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /config/balance.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /config/moves.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /config/types.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /config/mapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /config/gymAssets.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /config/johtoRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /config/johtoMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /config/hoennRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /config/hoennMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /config/sinnohRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /config/sinnohMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /config/unovaRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /config/unovaMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /config/kalosRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /config/kalosMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /config/alolaRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /config/alolaMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /config/galarRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /config/galarMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /config/hisuiRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /config/hisuiMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /config/paldeaRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /config/paldeaMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:31:44] "GET /Assets/Extra/LogoBG.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /Assets/Extra/Icons/IconTeam.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /src/ui.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /Assets/Extra/Icons/IconMainView.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /Assets/Extra/Icons/ExclamationMark.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /Assets/Extra/Icons/IconBackpack.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /Assets/Extra/Icons/IconMap.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /src/ui/market.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /src/state.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /src/ui/map.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /src/mathEngine.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /src/init/eventListeners.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /src/windowManager.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /src/clickThrough.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /src/ui/mainControl.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /src/battleSystem.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /src/storage.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /src/dayCare.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /src/ui/dailyChallenges.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /src/ui/help.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /src/ui/tutorials/profTutorial.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /src/ui/teamWindow.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /src/ui/battle.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /src/ui/calendar.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /src/ui/tokenShop.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /src/ui/multiplayer.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /src/ui/gift.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /src/ui/pokedex.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /src/ui/pokemonStats.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /src/ui/bonusCandy.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /src/ui/settings.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /src/ui/backpack/index.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /src/ui/cheatControl.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /src/ui/backpack/pokemon.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /src/utils/sprites.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /src/utils/badges.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /src/constants.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /Assets/Extra/Icons/IconPokedex.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /src/ui/backpack/stones.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /src/ui/backpack/potions.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /Assets/Extra/Icons/IconTrainer.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /src/ui/backpack/pokeballs.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /Assets/Extra/Icons/BonusCandy.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /Assets/Extra/Icons/IconGift.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /src/ui/backpack/vitamins.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /src/ui/backpack/utils.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /Assets/Extra/Icons/ProgressChallange.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /Assets/Extra/Icons/IconCalendar.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /Assets/Extra/Icons/IconHelp.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /Assets/Extra/Icons/IconSleep.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /Assets/Extra/Icons/IconSettings.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /Assets/Extra/Icons/IconExit.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /data/pokemon.json HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /config/routes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /Assets/Extra/Logo.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /config/gyms.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /config/balance.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /config/moves.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /config/types.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /config/mapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /config/gymAssets.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /Assets/Pokemon%20Sprites/Extra/FrameBorder.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /Assets/Lab/1_Kanto_Professor_Oak.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /Assets/Items/Upgrades/Storage1.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /Assets/Extra/No.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /config/johtoRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /config/johtoMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /config/hoennRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /config/hoennMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /config/sinnohRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /config/sinnohMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /config/unovaRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /config/unovaMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /config/kalosRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /config/kalosMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /config/alolaRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /config/alolaMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /config/galarRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /config/galarMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /config/hisuiRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /config/hisuiMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /config/paldeaRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /config/paldeaMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:32:59] "GET /Assets/Extra/LogoBG.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /Assets/Extra/Icons/IconMainView.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /src/ui.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /Assets/Extra/Icons/IconMap.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /Assets/Extra/Icons/IconTeam.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /Assets/Extra/Icons/ExclamationMark.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /Assets/Extra/Icons/IconBackpack.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /Assets/Extra/Icons/IconPokedex.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /src/ui/market.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /src/ui/map.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /src/state.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /src/mathEngine.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /src/init/eventListeners.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /src/windowManager.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /src/ui/mainControl.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /src/clickThrough.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /src/ui/dailyChallenges.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /src/storage.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /src/dayCare.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /src/battleSystem.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /src/ui/help.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /src/ui/tutorials/profTutorial.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /src/ui/teamWindow.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /src/ui/battle.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /src/ui/calendar.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /src/ui/multiplayer.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /src/ui/tokenShop.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /src/ui/pokemonStats.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /src/ui/gift.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /src/ui/pokedex.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /src/ui/bonusCandy.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /src/ui/backpack/index.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /src/ui/settings.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /src/ui/backpack/pokemon.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /src/ui/cheatControl.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /src/utils/sprites.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /src/utils/badges.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /src/constants.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /Assets/Extra/Icons/IconTrainer.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /src/ui/backpack/pokeballs.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /src/ui/backpack/potions.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /Assets/Extra/Icons/BonusCandy.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /src/ui/backpack/stones.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /Assets/Extra/Icons/IconGift.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /src/ui/backpack/vitamins.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /Assets/Extra/Icons/IconCalendar.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /src/ui/backpack/utils.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /Assets/Extra/Icons/ProgressChallange.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /Assets/Extra/Icons/IconSleep.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /Assets/Extra/Icons/IconHelp.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /Assets/Extra/Icons/IconSettings.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /Assets/Extra/Icons/IconExit.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /Assets/Extra/Logo.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /Assets/Lab/1_Kanto_Professor_Oak.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /Assets/Pokemon%20Sprites/Extra/FrameBorder.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /data/pokemon.json HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /config/routes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /config/gyms.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /config/balance.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /config/moves.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /config/types.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /config/mapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /config/gymAssets.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /Assets/Items/Upgrades/Storage1.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /Assets/Extra/No.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /config/johtoRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /config/johtoMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /config/hoennRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /config/hoennMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /config/sinnohRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /config/sinnohMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /config/unovaRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /config/unovaMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /config/kalosRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /config/kalosMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /config/alolaRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /config/alolaMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /config/galarRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /config/galarMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /config/hisuiRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /config/hisuiMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /config/paldeaRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /config/paldeaMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:33:52] "GET /Assets/Extra/LogoBG.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /src/ui.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /Assets/Extra/Icons/IconMainView.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /Assets/Extra/Icons/IconTeam.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /Assets/Extra/Icons/IconMap.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /Assets/Extra/Icons/ExclamationMark.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /Assets/Extra/Icons/IconPokedex.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /Assets/Extra/Icons/IconBackpack.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /Assets/Extra/Icons/IconTrainer.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /src/ui/market.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /src/state.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /src/ui/map.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /src/init/eventListeners.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /src/windowManager.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /src/mathEngine.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /src/clickThrough.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /src/ui/mainControl.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /src/battleSystem.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /src/dayCare.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /src/storage.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /src/ui/dailyChallenges.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /src/ui/help.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /src/ui/tutorials/profTutorial.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /src/ui/teamWindow.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /src/ui/battle.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /src/ui/calendar.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /src/ui/tokenShop.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /src/ui/multiplayer.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /src/ui/gift.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /src/ui/pokedex.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /src/ui/bonusCandy.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /src/ui/pokemonStats.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /src/ui/settings.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /src/ui/backpack/pokemon.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /src/ui/backpack/index.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /src/ui/cheatControl.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /src/utils/sprites.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /src/utils/badges.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /src/constants.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /Assets/Extra/Icons/BonusCandy.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /Assets/Extra/Icons/IconGift.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /Assets/Extra/Icons/IconCalendar.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /src/ui/backpack/potions.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /src/ui/backpack/pokeballs.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /src/ui/backpack/stones.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /src/ui/backpack/vitamins.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /Assets/Extra/Icons/IconSleep.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /src/ui/backpack/utils.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /Assets/Extra/Icons/ProgressChallange.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /Assets/Extra/Icons/IconSettings.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /Assets/Extra/Icons/IconHelp.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /Assets/Extra/Icons/IconExit.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /Assets/Extra/Logo.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /Assets/Lab/1_Kanto_Professor_Oak.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /Assets/Items/Upgrades/Storage1.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /Assets/Pokemon%20Sprites/Extra/FrameBorder.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /Assets/Extra/No.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /data/pokemon.json HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /config/routes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /config/gyms.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /config/balance.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /config/moves.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /config/types.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /config/mapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /config/gymAssets.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /config/johtoRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /config/johtoMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /config/hoennRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /config/hoennMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /config/sinnohRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /config/sinnohMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /config/unovaRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:16] "GET /config/unovaMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:17] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:34:17] "GET /config/kalosRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:34:17] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:34:17] "GET /config/kalosMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:34:17] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:34:17] "GET /config/alolaRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:34:17] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:34:17] "GET /config/alolaMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:34:17] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:34:17] "GET /config/galarRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:34:17] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:34:17] "GET /config/galarMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:34:17] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:34:17] "GET /config/hisuiRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:34:17] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:34:17] "GET /config/hisuiMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:34:17] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:34:17] "GET /config/paldeaRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:34:17] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:34:17] "GET /config/paldeaMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:34:17] "GET /Assets/Extra/LogoBG.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /src/ui.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /Assets/Extra/Icons/IconMainView.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /Assets/Extra/Icons/IconTeam.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /Assets/Extra/Icons/IconMap.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /Assets/Extra/Icons/IconBackpack.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /Assets/Extra/Icons/ExclamationMark.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /src/ui/market.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /src/state.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /src/ui/map.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /src/init/eventListeners.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /src/mathEngine.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /src/windowManager.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /src/ui/mainControl.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /src/clickThrough.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /src/battleSystem.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /src/dayCare.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /src/storage.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /src/ui/dailyChallenges.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /src/ui/help.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /src/ui/tutorials/profTutorial.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /src/ui/battle.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /src/ui/teamWindow.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /src/ui/calendar.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /src/ui/tokenShop.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /src/ui/gift.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /src/ui/multiplayer.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /src/ui/pokedex.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /src/ui/pokemonStats.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /src/ui/bonusCandy.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /src/ui/settings.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /src/ui/backpack/index.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /src/ui/backpack/pokemon.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /src/ui/cheatControl.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /src/utils/badges.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /src/utils/sprites.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /src/constants.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /Assets/Extra/Icons/IconPokedex.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /src/ui/backpack/pokeballs.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /Assets/Extra/Icons/IconTrainer.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /src/ui/backpack/potions.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /src/ui/backpack/stones.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /src/ui/backpack/vitamins.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /Assets/Extra/Icons/BonusCandy.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /Assets/Extra/Icons/IconGift.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /Assets/Extra/Icons/IconCalendar.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /Assets/Extra/Icons/ProgressChallange.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /src/ui/backpack/utils.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /Assets/Extra/Icons/IconSleep.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /Assets/Extra/Icons/IconHelp.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /Assets/Extra/Icons/IconSettings.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /Assets/Extra/Icons/IconExit.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /Assets/Extra/Logo.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /Assets/Lab/1_Kanto_Professor_Oak.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /config/routes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /config/balance.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /data/pokemon.json HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /config/gyms.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /config/moves.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /config/types.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /config/mapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /config/gymAssets.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /Assets/Pokemon%20Sprites/Extra/FrameBorder.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /Assets/Items/Upgrades/Storage1.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /Assets/Extra/No.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /config/johtoRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /config/johtoMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /config/hoennRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /config/hoennMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /config/sinnohRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /config/sinnohMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:34] "GET /config/unovaRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:35] "GET /config/unovaMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:35] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:34:35] "GET /config/kalosRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:34:35] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:34:35] "GET /config/kalosMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:34:35] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:34:35] "GET /config/alolaRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:34:35] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:34:35] "GET /config/alolaMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:34:35] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:34:35] "GET /config/galarRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:34:35] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:34:35] "GET /config/galarMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:34:35] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:34:35] "GET /config/hisuiRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:34:35] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:34:35] "GET /config/hisuiMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:34:35] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:34:35] "GET /config/paldeaRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:34:35] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:34:35] "GET /config/paldeaMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:34:35] "GET /Assets/Extra/LogoBG.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /src/ui.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /Assets/Extra/Icons/IconMainView.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /Assets/Extra/Icons/IconTeam.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /Assets/Extra/Icons/ExclamationMark.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /Assets/Extra/Icons/IconMap.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /Assets/Extra/Icons/IconBackpack.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /src/ui/map.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /src/state.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /src/init/eventListeners.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /src/ui/market.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /src/mathEngine.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /src/ui/mainControl.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /src/battleSystem.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /src/windowManager.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /src/clickThrough.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /src/dayCare.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /src/storage.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /src/ui/dailyChallenges.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /src/ui/tutorials/profTutorial.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /src/ui/help.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /src/ui/teamWindow.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /src/ui/battle.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /src/ui/calendar.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /src/ui/tokenShop.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /src/ui/pokedex.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /src/ui/pokemonStats.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /src/ui/gift.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /src/ui/bonusCandy.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /src/ui/multiplayer.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /src/ui/settings.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /src/ui/backpack/index.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /src/ui/backpack/pokemon.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /src/ui/cheatControl.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /src/utils/sprites.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /src/utils/badges.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /Assets/Extra/Icons/IconPokedex.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /src/constants.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /Assets/Extra/Icons/IconTrainer.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /Assets/Extra/Icons/BonusCandy.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /Assets/Extra/Icons/IconGift.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /src/ui/backpack/potions.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /src/ui/backpack/pokeballs.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /src/ui/backpack/stones.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /src/ui/backpack/vitamins.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /Assets/Extra/Icons/ProgressChallange.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /Assets/Extra/Icons/IconCalendar.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /src/ui/backpack/utils.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /Assets/Extra/Icons/IconSleep.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /Assets/Extra/Icons/IconHelp.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /Assets/Extra/Icons/IconSettings.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /Assets/Extra/Icons/IconExit.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /Assets/Extra/Logo.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /Assets/Lab/1_Kanto_Professor_Oak.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /Assets/Pokemon%20Sprites/Extra/FrameBorder.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /data/pokemon.json HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /config/gyms.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /config/routes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /config/moves.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /config/balance.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /config/types.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /config/mapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /Assets/Items/Upgrades/Storage1.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /Assets/Extra/No.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /config/gymAssets.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /config/johtoRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /config/johtoMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /config/hoennRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /config/hoennMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /config/sinnohRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /config/sinnohMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /config/unovaRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /config/unovaMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /config/kalosRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /config/kalosMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /config/alolaRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /config/alolaMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /config/galarRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /config/galarMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /config/hisuiRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /config/hisuiMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /config/paldeaRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /config/paldeaMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:34:58] "GET /Assets/Extra/LogoBG.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:59] "GET /Assets/Pokemon%20Sprites/Natural/Gen5/0001_Bulbasaur.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:59] "GET /Assets/Pokemon%20Sprites/Natural/Gen5/0007_Squirtle.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:59] "GET /Assets/Pokemon%20Sprites/Natural/Gen5/0004_Charmander.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:34:59] "GET /Assets/Lab/BG_Lab.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /Assets/Extra/Icons/IconMainView.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /Assets/Extra/Icons/IconTeam.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /src/ui.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /Assets/Extra/Icons/IconMap.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /Assets/Extra/Icons/ExclamationMark.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /Assets/Extra/Icons/IconPokedex.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /Assets/Extra/Icons/IconBackpack.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /Assets/Extra/Icons/IconTrainer.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /Assets/Extra/Icons/BonusCandy.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /src/state.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /src/init/eventListeners.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /src/ui/market.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /src/ui/map.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /src/mathEngine.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /src/windowManager.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /src/clickThrough.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /src/dayCare.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /src/ui/mainControl.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /src/battleSystem.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /src/storage.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /src/ui/dailyChallenges.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /src/ui/help.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /src/ui/tutorials/profTutorial.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /src/ui/battle.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /src/ui/teamWindow.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /src/ui/calendar.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /src/ui/tokenShop.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /src/ui/multiplayer.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /src/ui/gift.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /src/ui/pokedex.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /src/ui/pokemonStats.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /src/ui/bonusCandy.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /src/ui/backpack/index.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /src/ui/settings.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /src/ui/backpack/pokemon.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /src/ui/cheatControl.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /src/utils/badges.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /src/utils/sprites.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /src/constants.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /Assets/Extra/Icons/ProgressChallange.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /Assets/Extra/Icons/IconGift.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /Assets/Extra/Icons/IconCalendar.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /Assets/Extra/Icons/IconSleep.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /src/ui/backpack/potions.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /src/ui/backpack/pokeballs.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /src/ui/backpack/stones.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /src/ui/backpack/vitamins.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /Assets/Extra/Icons/IconHelp.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /Assets/Extra/Icons/IconSettings.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /Assets/Extra/Logo.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /Assets/Extra/Icons/IconExit.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /src/ui/backpack/utils.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /Assets/Lab/1_Kanto_Professor_Oak.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /Assets/Pokemon%20Sprites/Extra/FrameBorder.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /Assets/Items/Upgrades/Storage1.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /Assets/Extra/No.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /data/pokemon.json HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /config/routes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /config/gyms.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /config/balance.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /config/moves.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /config/types.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /config/mapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /config/gymAssets.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /config/johtoRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /config/johtoMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /config/hoennRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /config/hoennMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /config/sinnohRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /config/sinnohMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /config/unovaRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /config/unovaMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /config/kalosRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /config/kalosMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /config/alolaRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /config/alolaMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /config/galarRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /config/galarMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /config/hisuiRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /config/hisuiMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /config/paldeaRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /config/paldeaMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:36:00] "GET /Assets/Extra/LogoBG.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /Assets/Extra/Icons/IconTeam.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /src/ui.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /Assets/Extra/Icons/IconMainView.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /Assets/Extra/Icons/IconMap.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /Assets/Extra/Icons/ExclamationMark.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /Assets/Extra/Icons/IconBackpack.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /src/ui/market.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /src/state.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /src/ui/map.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /src/mathEngine.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /src/windowManager.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /src/init/eventListeners.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /src/ui/mainControl.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /src/clickThrough.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /src/dayCare.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /src/battleSystem.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /src/storage.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /src/ui/dailyChallenges.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /src/ui/help.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /src/ui/teamWindow.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /src/ui/tutorials/profTutorial.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /src/ui/battle.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /src/ui/multiplayer.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /src/ui/calendar.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /src/ui/gift.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /src/ui/tokenShop.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /src/ui/pokedex.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /src/ui/pokemonStats.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /src/ui/bonusCandy.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /src/ui/settings.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /src/ui/backpack/pokemon.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /src/ui/backpack/index.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /src/ui/cheatControl.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /src/utils/sprites.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /src/utils/badges.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /src/constants.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /Assets/Extra/Icons/IconPokedex.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /src/ui/backpack/pokeballs.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /Assets/Extra/Icons/IconTrainer.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /src/ui/backpack/potions.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /src/ui/backpack/stones.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /src/ui/backpack/vitamins.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /Assets/Extra/Icons/BonusCandy.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /Assets/Extra/Icons/IconGift.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /Assets/Extra/Icons/IconCalendar.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /src/ui/backpack/utils.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /Assets/Extra/Icons/ProgressChallange.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /Assets/Extra/Icons/IconSleep.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /Assets/Extra/Icons/IconHelp.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /Assets/Extra/Icons/IconSettings.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /Assets/Extra/Icons/IconExit.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /Assets/Extra/Logo.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /Assets/Lab/1_Kanto_Professor_Oak.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /config/routes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /config/gyms.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /data/pokemon.json HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /config/balance.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /config/moves.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /config/types.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /config/mapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /config/gymAssets.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /Assets/Pokemon%20Sprites/Extra/FrameBorder.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /Assets/Items/Upgrades/Storage1.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /Assets/Extra/No.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /config/johtoRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /config/johtoMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /config/hoennRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /config/hoennMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /config/sinnohRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:36:45] "GET /config/sinnohMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /Assets/Extra/Icons/IconMainView.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /src/ui.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /Assets/Extra/Icons/IconTeam.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /Assets/Extra/Icons/ExclamationMark.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /Assets/Extra/Icons/IconBackpack.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /Assets/Extra/Icons/IconMap.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /Assets/Extra/Icons/IconPokedex.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /src/ui/market.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /src/state.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /src/ui/map.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /src/init/eventListeners.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /src/mathEngine.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /src/clickThrough.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /src/windowManager.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /src/ui/mainControl.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /src/battleSystem.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /src/storage.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /src/ui/dailyChallenges.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /src/dayCare.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /src/ui/help.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /src/ui/tutorials/profTutorial.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /src/ui/teamWindow.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /src/ui/battle.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /src/ui/calendar.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /src/ui/tokenShop.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /src/ui/multiplayer.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /src/ui/gift.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /src/ui/pokedex.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /src/ui/pokemonStats.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /src/ui/bonusCandy.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /src/ui/backpack/index.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /src/ui/settings.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /src/ui/cheatControl.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /src/utils/sprites.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /src/ui/backpack/pokemon.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /src/utils/badges.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /src/constants.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /Assets/Extra/Icons/IconTrainer.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /Assets/Extra/Icons/BonusCandy.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /Assets/Extra/Icons/IconGift.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /Assets/Extra/Icons/IconCalendar.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /src/ui/backpack/pokeballs.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /src/ui/backpack/potions.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /src/ui/backpack/stones.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /src/ui/backpack/vitamins.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /src/ui/backpack/utils.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /Assets/Extra/Icons/ProgressChallange.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /Assets/Extra/Icons/IconHelp.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /Assets/Extra/Icons/IconSleep.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /Assets/Extra/Icons/IconSettings.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /Assets/Extra/Icons/IconExit.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /Assets/Extra/Logo.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /Assets/Lab/1_Kanto_Professor_Oak.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /Assets/Pokemon%20Sprites/Extra/FrameBorder.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /Assets/Items/Upgrades/Storage1.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /data/pokemon.json HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /config/routes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /config/gyms.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /config/balance.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /config/moves.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /config/types.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /config/mapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /config/gymAssets.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /Assets/Extra/No.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /config/johtoRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /config/johtoMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /config/hoennRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /config/hoennMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /config/sinnohRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /config/sinnohMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /config/unovaRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /config/unovaMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /config/kalosRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /config/kalosMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /config/alolaRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /config/alolaMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /config/galarRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /config/galarMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /config/hisuiRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /config/hisuiMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /config/paldeaRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /config/paldeaMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:37:03] "GET /Assets/Extra/LogoBG.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /Assets/Extra/Icons/IconMainView.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /Assets/Extra/Icons/IconTeam.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /src/ui.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /Assets/Extra/Icons/ExclamationMark.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /Assets/Extra/Icons/IconMap.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /Assets/Extra/Icons/IconBackpack.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /src/ui/market.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /src/state.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /src/ui/map.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /src/init/eventListeners.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /src/mathEngine.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /src/clickThrough.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /src/windowManager.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /src/ui/mainControl.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /src/battleSystem.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /src/storage.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /src/dayCare.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /src/ui/dailyChallenges.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /src/ui/help.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /src/ui/tutorials/profTutorial.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /src/ui/teamWindow.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /src/ui/battle.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /src/ui/calendar.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /src/ui/gift.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /src/ui/multiplayer.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /src/ui/tokenShop.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /src/ui/bonusCandy.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /src/ui/pokedex.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /src/ui/pokemonStats.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /src/ui/settings.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /src/ui/backpack/index.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /src/ui/cheatControl.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /src/ui/backpack/pokemon.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /src/utils/sprites.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /src/utils/badges.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /Assets/Extra/Icons/IconPokedex.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /src/constants.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /Assets/Extra/Icons/IconTrainer.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /Assets/Extra/Icons/BonusCandy.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /src/ui/backpack/pokeballs.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /src/ui/backpack/potions.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /src/ui/backpack/stones.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /src/ui/backpack/vitamins.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /Assets/Extra/Icons/IconGift.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /src/ui/backpack/utils.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /Assets/Extra/Icons/IconCalendar.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /Assets/Extra/Icons/ProgressChallange.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /Assets/Extra/Icons/IconSleep.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /Assets/Extra/Icons/IconHelp.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /Assets/Extra/Icons/IconSettings.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /Assets/Extra/Icons/IconExit.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /Assets/Extra/Logo.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /data/pokemon.json HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /config/routes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /config/gyms.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /config/balance.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /config/moves.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /config/types.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /config/mapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /config/gymAssets.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /Assets/Lab/1_Kanto_Professor_Oak.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /Assets/Pokemon%20Sprites/Extra/FrameBorder.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /Assets/Items/Upgrades/Storage1.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /Assets/Extra/No.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /config/johtoRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /config/johtoMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /config/hoennRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /config/hoennMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /config/sinnohRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /config/sinnohMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /config/unovaRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /config/unovaMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /config/kalosRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /config/kalosMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /config/alolaRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /config/alolaMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /config/galarRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /config/galarMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /config/hisuiRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /config/hisuiMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /config/paldeaRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /config/paldeaMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:37:29] "GET /Assets/Extra/LogoBG.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /Assets/Extra/Icons/IconMainView.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /Assets/Extra/Icons/IconTeam.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /src/ui.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /Assets/Extra/Icons/IconMap.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /Assets/Extra/Icons/ExclamationMark.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /Assets/Extra/Icons/IconBackpack.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /src/state.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /src/ui/market.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /src/ui/map.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /src/init/eventListeners.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /Assets/Extra/Icons/IconPokedex.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /src/mathEngine.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /src/windowManager.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /src/ui/mainControl.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /src/clickThrough.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /src/battleSystem.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /src/dayCare.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /src/storage.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /src/ui/dailyChallenges.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /src/ui/help.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /src/ui/tutorials/profTutorial.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /src/ui/teamWindow.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /src/ui/battle.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /src/ui/calendar.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /src/ui/tokenShop.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /src/ui/gift.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /src/ui/multiplayer.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /src/ui/pokedex.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /src/ui/pokemonStats.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /src/ui/bonusCandy.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /src/ui/settings.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /src/ui/backpack/index.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /src/ui/backpack/pokemon.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /src/ui/cheatControl.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /src/utils/sprites.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /src/utils/badges.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /src/constants.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /Assets/Extra/Icons/IconTrainer.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /src/ui/backpack/pokeballs.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /src/ui/backpack/potions.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /src/ui/backpack/vitamins.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /src/ui/backpack/stones.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /Assets/Extra/Icons/BonusCandy.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /Assets/Extra/Icons/IconGift.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /Assets/Extra/Icons/IconCalendar.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /Assets/Extra/Icons/ProgressChallange.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /Assets/Extra/Icons/IconSleep.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /src/ui/backpack/utils.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /Assets/Extra/Icons/IconHelp.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /Assets/Extra/Icons/IconSettings.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /Assets/Extra/Logo.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /Assets/Extra/Icons/IconExit.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /Assets/Lab/1_Kanto_Professor_Oak.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /Assets/Pokemon%20Sprites/Extra/FrameBorder.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /config/gyms.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /config/routes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /data/pokemon.json HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /config/balance.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /config/moves.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /config/types.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /config/mapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /Assets/Items/Upgrades/Storage1.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /Assets/Extra/No.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /config/gymAssets.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /config/johtoRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /config/johtoMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /config/hoennRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /config/hoennMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /config/sinnohRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /config/sinnohMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /config/unovaRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /config/unovaMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /config/kalosRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /config/kalosMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /config/alolaRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /config/alolaMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /config/galarRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /config/galarMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /config/hisuiRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /config/hisuiMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /config/paldeaRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /config/paldeaMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /Assets/Extra/LogoBG.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /Assets/Pokemon%20Sprites/Natural/Gen5/0001_Bulbasaur.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /Assets/Lab/BG_Lab.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /Assets/Pokemon%20Sprites/Natural/Gen5/0007_Squirtle.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:42:17] "GET /Assets/Pokemon%20Sprites/Natural/Gen5/0004_Charmander.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /Assets/Extra/Icons/IconTeam.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /Assets/Extra/Icons/IconMainView.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /src/ui.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /Assets/Extra/Icons/IconBackpack.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /Assets/Extra/Icons/ExclamationMark.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /src/ui/market.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /Assets/Extra/Icons/IconMap.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /src/state.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /src/ui/map.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /src/init/eventListeners.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /src/mathEngine.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /src/windowManager.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /src/clickThrough.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /src/ui/mainControl.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /src/battleSystem.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /src/dayCare.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /src/storage.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /src/ui/help.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /src/ui/dailyChallenges.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /src/ui/tutorials/profTutorial.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /src/ui/battle.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /src/ui/calendar.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /src/ui/teamWindow.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /src/ui/tokenShop.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /src/ui/multiplayer.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /src/ui/gift.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /src/ui/pokedex.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /src/ui/pokemonStats.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /src/ui/bonusCandy.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /src/ui/settings.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /src/ui/backpack/index.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /src/ui/cheatControl.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /src/ui/backpack/pokemon.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /src/utils/sprites.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /src/utils/badges.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /src/constants.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /Assets/Extra/Icons/IconPokedex.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /Assets/Extra/Icons/IconTrainer.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /src/ui/backpack/pokeballs.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /src/ui/backpack/potions.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /src/ui/backpack/stones.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /src/ui/backpack/vitamins.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /Assets/Extra/Icons/BonusCandy.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /Assets/Extra/Icons/IconGift.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /Assets/Extra/Icons/IconCalendar.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /Assets/Extra/Icons/ProgressChallange.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /src/ui/backpack/utils.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /Assets/Extra/Icons/IconSleep.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /Assets/Extra/Icons/IconHelp.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /Assets/Extra/Icons/IconSettings.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /Assets/Extra/Icons/IconExit.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /Assets/Extra/Logo.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /Assets/Lab/1_Kanto_Professor_Oak.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /data/pokemon.json HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /config/gyms.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /config/routes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /config/balance.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /config/types.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /config/gymAssets.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /config/moves.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /config/mapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /Assets/Pokemon%20Sprites/Extra/FrameBorder.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /Assets/Items/Upgrades/Storage1.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /Assets/Extra/No.png HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /config/johtoRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /config/johtoMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /config/hoennRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /config/hoennMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /config/sinnohRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /config/sinnohMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /config/unovaRoutes.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /config/unovaMapCoordinates.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /config/kalosRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /config/kalosMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /config/alolaRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /config/alolaMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /config/galarRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /config/galarMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /config/hisuiRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /config/hisuiMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /config/paldeaRoutes.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] code 404, message File not found
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /config/paldeaMapCoordinates.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Oct/2026 05:43:02] "GET /Assets/Extra/LogoBG.png HTTP/1.1" 200 -
