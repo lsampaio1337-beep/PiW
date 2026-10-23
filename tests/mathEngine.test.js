@@ -1,4 +1,4 @@
-import { calculateDamage } from '../src/mathEngine.js';
+import { calculateDamage, calculateReqXP } from '../src/mathEngine.js';
 
 describe('calculateDamage', () => {
     beforeEach(() => {
@@ -198,5 +198,39 @@ describe('calculateDamage', () => {
         const resultQ2 = calculateDamage(level, power, attackStat, defenseStat, typeEffectiveness, 2.0);
 
         expect(resultQ1).toEqual(resultQ2);
+    });
+});
+
+describe('calculateReqXP', () => {
+    test('should calculate correct XP for level 1 (minimum level)', () => {
+        const result = calculateReqXP(1);
+        // Formula: floor((4 + 496 * (0 / 98)^1.60) * (5 + 8 * 1))
+        // = floor((4 + 0) * (13)) = 52
+        expect(result).toBe(52);
+    });
+
+    test('should calculate correct XP for a mid-level (e.g. level 50)', () => {
+        const result = calculateReqXP(50);
+        expect(result).toBe(67885);
+    });
+
+    test('should calculate correct XP for level 99', () => {
+        const result = calculateReqXP(99);
+        expect(result).toBe(398500);
+    });
+
+    test('should calculate correct XP for level 100 (maximum level)', () => {
+        const result = calculateReqXP(100);
+        expect(result).toBe(409038);
+    });
+
+    test('should handle edge case level 0 (returns NaN due to fractional power of negative number)', () => {
+        const result = calculateReqXP(0);
+        expect(result).toBeNaN();
+    });
+
+    test('should handle edge case negative level (returns NaN due to fractional power of negative number)', () => {
+        const result = calculateReqXP(-1);
+        expect(result).toBeNaN();
     });
 });
