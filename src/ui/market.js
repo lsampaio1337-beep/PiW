@@ -11,6 +11,19 @@ export function getMarketAlertTarget() {
 
 import { calculatePP, getCapacity, getCurrentCount } from "../mathEngine.js";
 import { state } from '../state.js';
+
+// Helper to get a map of Pokemon Data for O(1) lookups
+let _cachedPokemonDataMap = null;
+function getPokemonDataMap() {
+    if (!_cachedPokemonDataMap && state.config && state.config.pokemonData) {
+        _cachedPokemonDataMap = new Map();
+        for (let i = 0; i < state.config.pokemonData.length; i++) {
+            _cachedPokemonDataMap.set(state.config.pokemonData[i].id, state.config.pokemonData[i]);
+        }
+    }
+    return _cachedPokemonDataMap;
+}
+
 import { updateUI, showModal } from '../ui.js';
 
 // formatMarketNumberDown is hoisted manually if needed
@@ -577,17 +590,23 @@ export function renderPokeMarketSellTab(category) {
             let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
 
             if (p.bst === undefined) {
-                if (typeof p.id === 'number' && state.config && state.config.pokemonData) {
-                    const pd = state.config.pokemonData.find(pd => pd.id === p.id);
-                    if (pd) p.bst = pd.hp + pd.atk + pd.def + pd.spa + pd.spd + pd.spe;
+                if (typeof p.id === 'number') {
+                    const map = getPokemonDataMap();
+                    if (map) {
+                        const pd = map.get(p.id);
+                        if (pd) p.bst = pd.hp + pd.atk + pd.def + pd.spa + pd.spd + pd.spe;
+                    }
                 }
             }
             let pEv = calculatePP(p.bst || 300, p.level, p.quality, sumIV); // Fallback to 300 if bst still missing
 
             let pName = p.name || p.id;
-            if (typeof p.id === 'number' && state.config && state.config.pokemonData) {
-                const pd = state.config.pokemonData.find(pd => pd.id === p.id);
-                if (pd) pName = p.name || pd.name;
+            if (typeof p.id === 'number') {
+                const map = getPokemonDataMap();
+                if (map) {
+                    const pd = map.get(p.id);
+                    if (pd) pName = p.name || pd.name;
+                }
             }
             if (filterName && !(pName && pName.toString().toLowerCase().includes(filterName)) && !(p.id && p.id.toString().toLowerCase().includes(filterName))) return;
             if (!isNaN(filterLevelMin) && p.level < filterLevelMin) return;
@@ -865,10 +884,13 @@ window.marketSelectAllPokemonForSale = function() {
         let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
 
         let pName = p.name || p.id;
-        if (typeof p.id === 'number' && state.config && state.config.pokemonData) {
-            const pd = state.config.pokemonData.find(pd => pd.id === p.id);
-            if (pd) pName = p.name || pd.name;
-        }
+        if (typeof p.id === 'number') {
+                const map = getPokemonDataMap();
+                if (map) {
+                    const pd = map.get(p.id);
+                    if (pd) pName = p.name || pd.name;
+                }
+            }
         if (filterName && !(pName && pName.toString().toLowerCase().includes(filterName)) && !(p.id && p.id.toString().toLowerCase().includes(filterName))) return;
         if (!isNaN(filterLevelMin) && p.level < filterLevelMin) return;
         if (!isNaN(filterLevelMax) && p.level > filterLevelMax) return;
@@ -896,10 +918,13 @@ function updateMarketPokemonSellCount() {
             if (window.marketSelectedPokemonForSale.has(p.uuid)) {
                 let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
                 if (p.bst === undefined) {
-                    if (typeof p.id === 'number' && state.config && state.config.pokemonData) {
-                        const pd = state.config.pokemonData.find(pd => pd.id === p.id);
+                    if (typeof p.id === 'number') {
+                    const map = getPokemonDataMap();
+                    if (map) {
+                        const pd = map.get(p.id);
                         if (pd) p.bst = pd.hp + pd.atk + pd.def + pd.spa + pd.spd + pd.spe;
                     }
+                }
                 }
                 let pEv = calculatePP(p.bst || 300, p.level, p.quality, sumIV);
                 totalGain += pEv;
@@ -921,9 +946,12 @@ window.marketSellSelectedPokemon = function() {
         if (window.marketSelectedPokemonForSale.has(p.uuid)) {
             let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
             if (p.bst === undefined) {
-                if (typeof p.id === 'number' && state.config && state.config.pokemonData) {
-                    const pd = state.config.pokemonData.find(pd => pd.id === p.id);
-                    if (pd) p.bst = pd.hp + pd.atk + pd.def + pd.spa + pd.spd + pd.spe;
+                if (typeof p.id === 'number') {
+                    const map = getPokemonDataMap();
+                    if (map) {
+                        const pd = map.get(p.id);
+                        if (pd) p.bst = pd.hp + pd.atk + pd.def + pd.spa + pd.spd + pd.spe;
+                    }
                 }
             }
             let pEv = calculatePP(p.bst || 300, p.level, p.quality, sumIV);
