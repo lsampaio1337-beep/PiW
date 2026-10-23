@@ -2656,7 +2656,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
 
             supportedRegions.forEach(regionName => {
                 let regionStats;
-                if (regionName === 'Kanto' || (!state.currentRegionName && regionName === 'Kanto')) {
+                if (state.currentRegionName === regionName || (!state.currentRegionName && regionName === 'Kanto')) {
                     regionStats = state.stats;
                 } else if (state.regions && state.regions[regionName]) {
                     regionStats = state.regions[regionName].stats;
@@ -2676,8 +2676,10 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
                 }
 
                 const dexLength = pokedexIndexes.regional[regionName.toLowerCase()] ? pokedexIndexes.regional[regionName.toLowerCase()].length : Infinity;
-                let hasSecond = (regionStats.caughtSpeciesCount || 0) >= dexLength;
-                let hasThird = Object.keys(regionStats.caughtShiniesSpecies || {}).length >= dexLength;
+
+                let isCurrentRegion = (state.currentRegionName === regionName || (!state.currentRegionName && regionName === 'Kanto'));
+                let hasSecond = isCurrentRegion && ((regionStats.caughtSpeciesCount || 0) >= dexLength);
+                let hasThird = isCurrentRegion && (Object.keys(regionStats.caughtShiniesSpecies || {}).length >= dexLength);
 
                 if (hasFirst || hasSecond || hasThird) {
                     anyMedalsEarned = true;

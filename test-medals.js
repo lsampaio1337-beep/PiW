@@ -10,71 +10,37 @@ const { chromium } = require('playwright');
     console.log('Navigating to local server...');
     await page.goto('http://localhost:8080');
 
-    // Wait for New Game button
-    await page.waitForSelector('button:has-text("New Game")');
-    await page.click('button:has-text("New Game")');
+    // Wait a bit for initial load
+    await page.waitForTimeout(2000);
 
-    // Wait for the window manager to finish transition
-    await page.waitForTimeout(500);
-
-    // Skip Tutorial button
-    await page.waitForSelector('button:has-text("Skip")');
-    await page.click('button:has-text("Skip")');
-
-    // Wait a moment for starters to load
-    await page.waitForTimeout(1000);
-
-    // Click on bulbasaur image
+    console.log('Hiding overlays and forcing Trainer Stats...');
     await page.evaluate(() => {
-        const starterImgs = document.querySelectorAll('img[src*="sprites/"]');
-        if (starterImgs.length > 0) {
-            starterImgs[0].click();
-        }
-    });
+        // Hide overlays
+        const overlays = document.querySelectorAll('#introOverlay, #gameOverlay, .window-container, .modal-backdrop');
+        overlays.forEach(o => o.style.display = 'none');
 
-    console.log('Waiting for showTrainerStats...');
-    await page.waitForFunction(() => typeof window.showTrainerStats === 'function', { timeout: 10000 });
-
-    // Wait another second for initialization
-    await page.waitForTimeout(1000);
-
-    console.log('Injecting state and opening Trainer Stats...');
-    await page.evaluate(() => {
-        // Mock a state
+        // Setup state
         window.state = window.state || { stats: {} };
         window.state.stats = window.state.stats || {};
-        window.state.stats.caughtSpecific = window.state.stats.caughtSpecific || {};
-        window.state.stats.shinyCaughtSpecific = window.state.stats.shinyCaughtSpecific || {};
-        window.state.stats.completedChallengeIds = window.state.stats.completedChallengeIds || [];
+        window.state.currentRegionName = 'Johto';
+        window.state.regions = {
+            'Kanto': {
+                stats: {
+                    completedChallengeIds: ['Champion Blue'],
+                    caughtSpeciesCount: 151,
+                    caughtShiniesSpecies: {}
+                }
+            }
+        };
 
-        // Kanto: All 3 Medals
-        window.state.stats.completedChallengeIds.push('Champion Blue');
         for (let i = 1; i <= 151; i++) {
-            window.state.stats.caughtSpecific[i] = 1;
-            window.state.stats.shinyCaughtSpecific[i] = 1;
+            window.state.regions['Kanto'].stats.caughtShiniesSpecies[i] = 1;
         }
 
-        // Johto: 2 Medals (Bronze, Silver)
-        window.state.stats.completedChallengeIds.push('Red');
-        for (let i = 152; i <= 251; i++) {
-            window.state.stats.caughtSpecific[i] = 1;
-        }
-
-        // Unova: 1 Medal (Bronze)
-        window.state.stats.completedChallengeIds.push('Champion Alder');
-
-        // Find the trainer stats button and click it to open the window normally
-        const trainerBtn = document.querySelector('img[src="Assets/UI/trainer_icon.png"]');
-        if (trainerBtn) {
-            trainerBtn.click();
-        } else {
-            console.error('Trainer button not found by img src. Trying function...');
-            window.showTrainerStats();
-        }
+        // Show Trainer Stats
+        window.showTrainerStats();
     });
 
-    // Wait for the window to appear
-    console.log('Waiting for Trainer Stats window to appear...');
     await page.waitForTimeout(1000);
 
     console.log('Switching to Medals tab...');
@@ -82,15 +48,22 @@ const { chromium } = require('playwright');
         const medalsTabBtn = document.querySelector('button[onclick*="medals"]');
         if (medalsTabBtn) {
             medalsTabBtn.click();
-        } else {
-            console.error('Medals tab button not found in DOM!');
         }
+
+        // Bring to front and ensure visible
+        const windows = document.querySelectorAll('.window-container');
+        windows.forEach(w => {
+            if (w.innerHTML.includes('Trainer Stats')) {
+                w.style.display = 'block';
+                w.style.zIndex = 9999;
+                w.style.opacity = 1;
+            }
+        });
     });
 
-    console.log('Waiting 2 seconds for images to load and UI to render...');
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(1000);
 
-    const screenshotPath = '/home/jules/verification/screenshots/verification20.png';
+    const screenshotPath = '/home/jules/verification/screenshots/verification-johto-medals.png';
     await page.screenshot({ path: screenshotPath });
     console.log(`Screenshot saved to ${screenshotPath}`);
 
