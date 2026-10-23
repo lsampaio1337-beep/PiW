@@ -2252,7 +2252,8 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
     if (btnSquirtle) btnSquirtle.onclick = () => selectStarter(7);
 
     // Bind Hub Buttons
-    const checkCombatLock = () => {
+    window.checkCombatLock = () => {
+    const checkCombatLock = window.checkCombatLock;
         if (globals.battleSystem && globals.battleSystem.gymState && globals.battleSystem.gymState.isActive && globals.battleSystem.gymState.inCombat) {
             alert("You cannot access this menu during a Gym Battle!");
             return true;
