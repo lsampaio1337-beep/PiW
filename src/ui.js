@@ -332,6 +332,7 @@ window.cheatProgressChallenge = function(targetAreaId) {
             state.stats.challengeRouteDefeats = Math.max(state.stats.challengeRouteDefeats || 0, req.defeatCountRoute.count);
         }
         if (req.defeatSpecific) {
+            if (req.defeatSpecific.name === '__proto__' || req.defeatSpecific.name === 'constructor' || req.defeatSpecific.name === 'prototype') return;
             if (!state.stats.challengeSpecificDefeats) state.stats.challengeSpecificDefeats = {};
             state.stats.challengeSpecificDefeats[req.defeatSpecific.name] = Math.max(state.stats.challengeSpecificDefeats[req.defeatSpecific.name] || 0, req.defeatSpecific.count);
         }
@@ -339,12 +340,14 @@ window.cheatProgressChallenge = function(targetAreaId) {
         if (req.defeatMultipleSpecific) {
             if (!state.stats.challengeSpecificDefeats) state.stats.challengeSpecificDefeats = {};
             for (let ds of req.defeatMultipleSpecific) {
+                if (ds.name === '__proto__' || ds.name === 'constructor' || ds.name === 'prototype') continue;
                 state.stats.challengeSpecificDefeats[ds.name] = Math.max(state.stats.challengeSpecificDefeats[ds.name] || 0, ds.count);
             }
         }
         if (req.catchSpecies) {
             if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
             req.catchSpecies.forEach(r => {
+                if (r.species === '__proto__' || r.species === 'constructor' || r.species === 'prototype') return;
                 if (!state.stats.caughtSpecies[r.species]) {
                     state.stats.caughtSpeciesCount = (state.stats.caughtSpeciesCount || 0) + 1;
                 }
@@ -355,6 +358,7 @@ window.cheatProgressChallenge = function(targetAreaId) {
             if (!state.stats.challengeCaughtSpecific) state.stats.challengeCaughtSpecific = {};
             req.catchSpeciesByRarity.forEach(r => {
                 let key = r.species + "_" + r.rarity;
+                if (key === '__proto__' || key === 'constructor' || key === 'prototype') return;
                 state.stats.challengeCaughtSpecific[key] = (state.stats.challengeCaughtSpecific[key] || 0) + r.count;
             });
         }
@@ -362,6 +366,7 @@ window.cheatProgressChallenge = function(targetAreaId) {
             if (!state.stats.challengeCaughtSpecific) state.stats.challengeCaughtSpecific = {};
             req.catchSpeciesByQuality.forEach(r => {
                 let key = r.species + "_" + r.quality;
+                if (key === '__proto__' || key === 'constructor' || key === 'prototype') return;
                 state.stats.challengeCaughtSpecific[key] = (state.stats.challengeCaughtSpecific[key] || 0) + r.count;
             });
         }
@@ -370,6 +375,7 @@ window.cheatProgressChallenge = function(targetAreaId) {
             req.catchSpeciesAnyOfByRarity.forEach(r => {
                 // Cheat by catching the first one in the list
                 let key = r.species[0] + "_" + r.rarity;
+                if (key === '__proto__' || key === 'constructor' || key === 'prototype') return;
                 state.stats.challengeCaughtSpecific[key] = (state.stats.challengeCaughtSpecific[key] || 0) + r.count;
             });
         }
@@ -377,6 +383,7 @@ window.cheatProgressChallenge = function(targetAreaId) {
             if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
             if (req.catchEachFromSlotMachine.machines) {
                 req.catchEachFromSlotMachine.machines.forEach(m => {
+                    if (m[0] === '__proto__' || m[0] === 'constructor' || m[0] === 'prototype') return;
                     if (!state.stats.caughtSpecies[m[0]]) {
                         state.stats.caughtSpeciesCount = (state.stats.caughtSpeciesCount || 0) + 1;
                     }
@@ -384,6 +391,7 @@ window.cheatProgressChallenge = function(targetAreaId) {
                 });
             } else if (req.catchEachFromSlotMachine.speciesList) {
                 req.catchEachFromSlotMachine.speciesList.forEach(s => {
+                    if (s === '__proto__' || s === 'constructor' || s === 'prototype') return;
                     if (!state.stats.caughtSpecies[s]) {
                         state.stats.caughtSpeciesCount = (state.stats.caughtSpeciesCount || 0) + 1;
                     }
@@ -394,16 +402,19 @@ window.cheatProgressChallenge = function(targetAreaId) {
         if (req.catchByRarity) {
              let baseRarity = req.catchByRarity.rarity.replace('+', '');
              let key = "Any_" + baseRarity;
+             if (key === '__proto__' || key === 'constructor' || key === 'prototype') return;
              if (!state.stats.challengeCaughtSpecific) state.stats.challengeCaughtSpecific = {};
              state.stats.challengeCaughtSpecific[key] = (state.stats.challengeCaughtSpecific[key] || 0) + req.catchByRarity.count;
         }
         if (req.catchByRarityAndType) {
              let key = req.catchByRarityAndType.type + "_" + req.catchByRarityAndType.rarity;
+             if (key === '__proto__' || key === 'constructor' || key === 'prototype') return;
              if (!state.stats.challengeCaughtSpecific) state.stats.challengeCaughtSpecific = {};
              state.stats.challengeCaughtSpecific[key] = (state.stats.challengeCaughtSpecific[key] || 0) + req.catchByRarityAndType.count;
         }
         if (req.catchByType) {
             let typeKey = req.catchByType.type + "_Any";
+            if (typeKey === '__proto__' || typeKey === 'constructor' || typeKey === 'prototype') return;
             if (!state.stats.challengeCaughtSpecific) state.stats.challengeCaughtSpecific = {};
             state.stats.challengeCaughtSpecific[typeKey] = (state.stats.challengeCaughtSpecific[typeKey] || 0) + req.catchByType.count;
         }
@@ -424,6 +435,7 @@ window.cheatProgressChallenge = function(targetAreaId) {
             state.stats.challengeRouteDefeats = req.defeatCountRoute.count;
         }
         if (req.defeatSpecific) {
+            if (req.defeatSpecific.name === '__proto__' || req.defeatSpecific.name === 'constructor' || req.defeatSpecific.name === 'prototype') return;
             if (!state.stats.challengeSpecificDefeats) state.stats.challengeSpecificDefeats = {};
             state.stats.challengeSpecificDefeats[req.defeatSpecific.name] = req.defeatSpecific.count;
         }
@@ -431,6 +443,7 @@ window.cheatProgressChallenge = function(targetAreaId) {
         if (req.defeatMultipleSpecific) {
             if (!state.stats.challengeSpecificDefeats) state.stats.challengeSpecificDefeats = {};
             for (let ds of req.defeatMultipleSpecific) {
+                if (ds.name === '__proto__' || ds.name === 'constructor' || ds.name === 'prototype') continue;
                 state.stats.challengeSpecificDefeats[ds.name] = ds.count;
             }
         }
@@ -1941,6 +1954,7 @@ async function init() {
                         if (typeof source !== 'object' || source === null) return source;
                         if (Array.isArray(source)) return source;
                         for (const key of Object.keys(source)) {
+                            if (key === '__proto__' || key === 'constructor' || key === 'prototype') continue;
                             if (source[key] instanceof Object && !Array.isArray(source[key])) {
                                 if (!target[key]) target[key] = {};
                                 deepMerge(target[key], source[key]);
