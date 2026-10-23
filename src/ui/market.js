@@ -917,12 +917,20 @@ window.marketSellSelectedPokemon = function() {
     let numSold = window.marketSelectedPokemonForSale.size;
     let totalGain = 0;
 
+    let pokemonDataMap = null;
+    if (state.config && state.config.pokemonData) {
+        pokemonDataMap = new Map();
+        for (const pd of state.config.pokemonData) {
+            pokemonDataMap.set(pd.id, pd);
+        }
+    }
+
     state.storage = state.storage.filter(p => {
         if (window.marketSelectedPokemonForSale.has(p.uuid)) {
             let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
             if (p.bst === undefined) {
-                if (typeof p.id === 'number' && state.config && state.config.pokemonData) {
-                    const pd = state.config.pokemonData.find(pd => pd.id === p.id);
+                if (typeof p.id === 'number' && pokemonDataMap) {
+                    const pd = pokemonDataMap.get(p.id);
                     if (pd) p.bst = pd.hp + pd.atk + pd.def + pd.spa + pd.spd + pd.spe;
                 }
             }
