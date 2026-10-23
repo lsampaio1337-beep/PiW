@@ -1252,9 +1252,9 @@ export function switchView(viewName) {
         if (window.windowManager) window.windowManager.setWindowProportions('main-view-window', MAIN_VIEW_HUB_MODE_RATIO);
     }
 
-    if (viewName === 'PROFESSOR_LAB' || viewName === 'JOHTO_PROFESSOR_LAB' || viewName === 'HOENN_PROFESSOR_LAB') {
+    if (viewName.includes('PROFESSOR_LAB')) {
         document.getElementById('view-professor-lab').style.display = 'block';
-        if (viewName === 'PROFESSOR_LAB') {
+        if (viewName === 'PROFESSOR_LAB' || state.currentRegionName === 'Kanto' || !state.globalStats.hasSeenProfTutorial) {
             showProfTutorialIfNeeded();
         }
         renderProfessorLab();
@@ -1309,7 +1309,7 @@ export function updateUI() {
 }
 
 async function loadConfigs() {
-    const [pokemonData, routes, gyms, balance, moves, types, mapCoordinates, johtoMapCoordinates, hoennMapCoordinates, sinnohMapCoordinates, unovaMapCoordinates, gymAssets] = await Promise.all([
+    const [pokemonData, routes, gyms, balance, moves, types, mapCoordinates, gymAssets] = await Promise.all([
       fetch(new URL('../data/pokemon.json', import.meta.url)).then(res => res.json()),
       import('../config/routes.js').then(m => m.routes),
       import('../config/gyms.js').then(m => m.default),
@@ -1317,10 +1317,6 @@ async function loadConfigs() {
       import('../config/moves.js').then(m => m.default),
       import('../config/types.js').then(m => m.default),
       import('../config/mapCoordinates.js').then(m => m.default),
-      import('../config/johtoMapCoordinates.js').then(m => m.default),
-      import('../config/hoennMapCoordinates.js').then(m => m.default),
-      import('../config/sinnohMapCoordinates.js').then(m => m.default),
-      import('../config/unovaMapCoordinates.js').then(m => m.default),
       import('../config/gymAssets.js').then(m => m.default),
     ]);
 
@@ -1328,44 +1324,32 @@ async function loadConfigs() {
     state.config.routes = routes;
     const unlocksModule = await import('../config/routes.js');
     state.config.unlocks = unlocksModule.unlocks;
-    try {
-        const johtoModule = await import('../config/johtoRoutes.js');
-        state.config.johtoRoutes = johtoModule.johtoRoutes;
-        state.config.johtoUnlocks = johtoModule.johtoUnlocks;
-    } catch (e) {
-        console.warn("Failed to load johto routes");
+
+    const regions = ['Johto', 'Hoenn', 'Sinnoh', 'Unova', 'Kalos', 'Alola', 'Galar', 'Hisui', 'Paldea'];
+    for (const region of regions) {
+        const prefix = region.toLowerCase();
+        try {
+            const module = await import(`../config/${prefix}Routes.js`);
+            state.config[`${prefix}Routes`] = module[`${prefix}Routes`];
+            state.config[`${prefix}Unlocks`] = module[`${prefix}Unlocks`] || [];
+        } catch (e) {
+            // It's expected that some regions might not have route files yet
+        }
+
+        try {
+            const mapModule = await import(`../config/${prefix}MapCoordinates.js`);
+            state.config[`${prefix}MapCoordinates`] = mapModule.default;
+        } catch (e) {
+            // Expected for regions that don't have map coords
+        }
     }
-    try {
-        const hoennModule = await import('../config/hoennRoutes.js');
-        state.config.hoennRoutes = hoennModule.hoennRoutes;
-        state.config.hoennUnlocks = hoennModule.hoennUnlocks;
-    } catch (e) {
-        console.warn("Failed to load hoenn routes");
-    }
-    try {
-        const sinnohModule = await import('../config/sinnohRoutes.js');
-        state.config.sinnohRoutes = sinnohModule.sinnohRoutes;
-        state.config.sinnohUnlocks = sinnohModule.sinnohUnlocks;
-    } catch (e) {
-        console.warn("Failed to load sinnoh routes");
-    }
-    try {
-        const unovaModule = await import('../config/unovaRoutes.js');
-        state.config.unovaRoutes = unovaModule.unovaRoutes;
-        state.config.unovaUnlocks = unovaModule.unovaUnlocks || [];
-    } catch (e) {
-        console.warn("Failed to load unova routes");
-    }
+
     state.config.gyms = gyms;
     state.config.gymAssets = gymAssets;
     state.config.balance = balance;
     state.config.moves = moves;
     state.config.types = types;
     state.config.mapCoordinates = mapCoordinates;
-    state.config.johtoMapCoordinates = johtoMapCoordinates;
-    state.config.hoennMapCoordinates = hoennMapCoordinates;
-    state.config.unovaMapCoordinates = unovaMapCoordinates;
-    state.config.sinnohMapCoordinates = sinnohMapCoordinates;
     state.config.allPokemonNames = pokemonData.map(p => p.name);
 
     // Precompute evolution parents for O(1) lookups
@@ -1388,16 +1372,14 @@ function returnToLab() {
 
     let labRoute = "Professor Lab";
     let labView = "PROFESSOR_LAB";
-    if (state.currentRegionName === "Kanto") {
-        labRoute = "Professor Lab";
-        labView = "PROFESSOR_LAB";
-    } else if (state.currentRegionName === "Johto") {
+
+    if (state.currentRegionName === "Johto") {
         labRoute = "Johto Professor Lab";
         labView = "JOHTO_PROFESSOR_LAB";
     } else if (state.currentRegionName === "Hoenn") {
-        labRoute = "Professor Lab";
         labView = "HOENN_PROFESSOR_LAB";
     }
+
     state.currentRoute = labRoute;
     switchView(labView);
 }
@@ -2563,10 +2545,28 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
             `;
         } else if (tab === 'badges') {
             let badgesHtml = '<div style="display: flex; gap: 10px; margin-top: 10px; justify-content: center; flex-wrap: wrap;">';
-            const region = window.currentMapRegion || state.currentRegionName || 'Kanto';
-            for (let i = 1; i <= state.trainer.badges; i++) {
-                const badgeFile = window.getBadgeFileName(region, i);
-                badgesHtml += `<img src="./Assets/Gym/Badges/${badgeFile}" style="width: 40px; height: 40px;" title="Badge ${i}">`;
+
+            // To be consistent with gift mapping, we dynamically map badge icons according to sequential gym unlocks
+            for (let i = 0; i < state.trainer.badges; i++) {
+                let badgeRegion = 'Kanto';
+                let badgeNum = i + 1;
+
+                if (state.config && state.config.gyms) {
+                    let currentRegionGyms = 0;
+                    for (let j = 0; j <= i; j++) {
+                        if (state.config.gyms[j] && state.config.gyms[j].name.includes("Gym")) {
+                            currentRegionGyms++;
+                        }
+                    }
+
+                    let regionIndex = Math.floor((currentRegionGyms - 1) / 8);
+                    const regions = ['Kanto', 'Johto', 'Hoenn', 'Sinnoh', 'Unova2', 'Kalos', 'Alola', 'Galar', 'Hisui', 'Paldea'];
+                    badgeRegion = regions[regionIndex] || 'Kanto';
+                    badgeNum = ((currentRegionGyms - 1) % 8) + 1;
+                }
+
+                const badgeFile = window.getBadgeFileName(badgeRegion, badgeNum);
+                badgesHtml += `<img src="./Assets/Gym/Badges/${badgeFile}" style="width: 40px; height: 40px;" title="Badge ${i + 1}">`;
             }
             badgesHtml += '</div>';
 
