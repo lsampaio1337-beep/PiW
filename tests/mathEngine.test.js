@@ -1,4 +1,40 @@
-import { calculateDamage } from '../src/mathEngine.js';
+import { calculateDamage, calculateHP } from '../src/mathEngine.js';
+
+describe('calculateHP', () => {
+    test('should calculate HP correctly without vitamins', () => {
+        // formula: Math.floor((((2 * baseHp + ivHp) * level / 100) + level + 10) * quality)
+        // let base = 50, iv = 31, level = 50, quality = 1.0
+        // (2*50 + 31) = 131 * 50 / 100 = 65.5 + 50 + 10 = 125.5 -> floor -> 125
+        expect(calculateHP(50, 31, 50, 1.0)).toBe(125);
+    });
+
+    test('should apply quality correctly', () => {
+        // let base = 50, iv = 31, level = 50, quality = 1.2
+        // (131 * 0.5 + 60) = 125.5 * 1.2 = 150.6 -> floor -> 150
+        expect(calculateHP(50, 31, 50, 1.2)).toBe(150);
+    });
+
+    test('should calculate correctly with 0 IVs', () => {
+        // let base = 50, iv = 0, level = 50, quality = 1.0
+        // (100 * 0.5 + 60) = 50 + 60 = 110
+        expect(calculateHP(50, 0, 50, 1.0)).toBe(110);
+    });
+
+    test('should calculate correctly with low level', () => {
+        // let base = 50, iv = 31, level = 1, quality = 1.0
+        // (131 * 0.01 + 11) = 1.31 + 11 = 12.31 -> 12
+        expect(calculateHP(50, 31, 1, 1.0)).toBe(12);
+    });
+
+    test('should apply vitamins correctly', () => {
+        // let base = 50, iv = 31, level = 50, quality = 1.0
+        // baseFinal = 125
+        // vitamins = 10 -> baseFinal + Math.floor(125 * 0.10) = 125 + 12 = 137
+        expect(calculateHP(50, 31, 50, 1.0, 10)).toBe(137);
+        // vitamins = 25 -> 125 + Math.floor(125 * 0.25 = 31.25) = 125 + 31 = 156
+        expect(calculateHP(50, 31, 50, 1.0, 25)).toBe(156);
+    });
+});
 
 describe('calculateDamage', () => {
     beforeEach(() => {
