@@ -28,6 +28,10 @@ function createWindow() {
         webPreferences: {
             nodeIntegration: false,
             contextIsolation: true,
+            webSecurity: true,
+            sandbox: true,
+            allowRunningInsecureContent: false,
+            webviewTag: false,
             preload: path.join(__dirname, 'preload.js')
         }
     });
