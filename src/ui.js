@@ -1874,7 +1874,7 @@ async function init() {
             btn.style.backgroundColor = "#FFC107"; // Big Yellow Button
             btn.style.color = "black";
             btn.style.border = "4px solid black";
-            btn.style.borderRadius = "5px";
+            btn.style.borderRadius = "25px";
             btn.style.textAlign = "left";
             btn.style.fontWeight = "bold";
             btn.style.width = "75%";
@@ -2234,6 +2234,11 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
         if (saveManagerModal) saveManagerModal.style.display = 'flex';
 
         document.getElementById('btn-new-profile').onclick = startNewGame;
+        if (profilesContainer) profilesContainer.style.display = 'none';
+
+        // Also hide rename/delete buttons if no profiles exist to center the New Game button properly
+        const renameDeleteRow = document.getElementById('btn-rename-profile').parentElement;
+        if (renameDeleteRow) renameDeleteRow.style.display = 'none';
     }
 
     // Bind buttons (they might be missing if bypass Professor Lab)
