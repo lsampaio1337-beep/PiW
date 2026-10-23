@@ -1861,7 +1861,7 @@ async function init() {
             btn.style.cursor = "pointer";
             btn.style.backgroundColor = "#FFC107"; // Big Yellow Button
             btn.style.color = "black";
-            btn.style.border = "none";
+            btn.style.border = "4px solid black";
             btn.style.borderRadius = "5px";
             btn.style.textAlign = "left";
             btn.style.fontWeight = "bold";

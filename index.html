@@ -72,10 +72,12 @@
   </div>
 
   <!-- Splash Screen / Save Manager -->
-  <div id="splash-screen" class="transparent-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: transparent; z-index: 1000; display: flex; justify-content: center; align-items: center; pointer-events: none;">
+  <div id="splash-screen" class="transparent-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); backdrop-filter: blur(5px); z-index: 1000; display: flex; flex-direction: column; justify-content: center; align-items: center; pointer-events: none;">
 
-    <div id="save-manager-modal" class="floating-window" style="display: none; background-color: #34495e; pointer-events: auto; border-radius: 8px; text-align: center; border: 2px solid #1abc9c; max-width: 90vw; max-height: 90vh; width: 50vw; min-width: 400px; flex-direction: column; resize: both; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
-        <div id="save-manager-header" class="window-header" style="position: relative;">Select a Game<span class="btn-exit-game" style="position: absolute; top: 5px; right: 5px; font-size: 12px; font-weight: bold; line-height: 1; padding: 0; cursor: pointer; color: white;">X</span></div>
+
+    <div id="save-manager-modal" class="floating-window" style="display: none; background-image: url('Assets/Extra/LogoBG.png'); background-size: cover; background-position: center; pointer-events: auto; border-radius: 12px; text-align: center; border: none; max-width: 90vw; max-height: 70vh; width: 50vw; min-width: 400px; flex-direction: column; resize: both; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.8);">
+        <div id="save-manager-header" class="window-header" style="position: relative; background: rgba(0, 0, 0, 0.5);">Select a Game<span class="btn-exit-game" style="position: absolute; top: 5px; right: 5px; font-size: 12px; font-weight: bold; line-height: 1; padding: 0; cursor: pointer; color: white;">X</span></div>
+        <img src="Assets/Extra/Logo.png" alt="Logo" style="max-width: 80%; max-height: 150px; margin: 25px auto 10px auto; filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3)); animation: pulse 2s infinite;">
         <h2 id="save-action-title" style="margin: 0; padding-top: 10px; font-size: 1.2rem; display: none;"></h2>
         <div class="content-panel" style="display: flex; flex-direction: column; gap: 2vh; flex-grow: 1; overflow-y: auto;">
 
@@ -84,10 +86,10 @@
         </div>
 
         <div style="display: flex; flex-direction: column; gap: 1vh; justify-content: center; margin-top: 1vh; width: 75%; margin-left: auto; margin-right: auto;">
-            <button id="btn-new-profile" style="padding: 1vh 1vw; font-size: 1rem; font-weight: bold; cursor: pointer; background-color: #FFC107; color: black; border: none; border-radius: 5px; width: 100%;">New Game</button>
+            <button id="btn-new-profile" style="padding: 1vh 1vw; font-size: 1rem; font-weight: bold; cursor: pointer; background-color: #FFC107; color: black; border: 4px solid black; border-radius: 5px; width: 100%;">New Game</button>
             <div style="display: flex; gap: 1vw; width: 100%;">
-                <button id="btn-rename-profile" style="padding: 1vh 1vw; font-size: 1rem; font-weight: bold; cursor: pointer; background-color: #3498db; color: white; border: none; border-radius: 5px; flex: 1;">Rename</button>
-                <button id="btn-delete-profile" style="padding: 1vh 1vw; font-size: 1rem; font-weight: bold; cursor: pointer; background-color: #f44336; color: white; border: none; border-radius: 5px; flex: 1;">Delete</button>
+                <button id="btn-rename-profile" style="padding: 1vh 1vw; font-size: 1rem; font-weight: bold; cursor: pointer; background-color: #3498db; color: white; border: 4px solid black; border-radius: 5px; flex: 1;">Rename</button>
+                <button id="btn-delete-profile" style="padding: 1vh 1vw; font-size: 1rem; font-weight: bold; cursor: pointer; background-color: #f44336; color: white; border: 4px solid black; border-radius: 5px; flex: 1;">Delete</button>
             </div>
         </div>
         </div>
