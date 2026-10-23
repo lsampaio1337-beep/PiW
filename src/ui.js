@@ -2221,6 +2221,11 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
         if (saveManagerModal) saveManagerModal.style.display = 'flex';
 
         document.getElementById('btn-new-profile').onclick = startNewGame;
+        if (profilesContainer) profilesContainer.style.display = 'none';
+
+        // Also hide rename/delete buttons if no profiles exist to center the New Game button properly
+        const renameDeleteRow = document.getElementById('btn-rename-profile').parentElement;
+        if (renameDeleteRow) renameDeleteRow.style.display = 'none';
     }
 
     // Bind buttons (they might be missing if bypass Professor Lab)
