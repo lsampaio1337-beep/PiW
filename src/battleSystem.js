@@ -1274,7 +1274,9 @@ class BattleSystem {
         const totalIV = this.activeEncounter.ivs.hp + this.activeEncounter.ivs.atk + this.activeEncounter.ivs.def + this.activeEncounter.ivs.spa + this.activeEncounter.ivs.spd + this.activeEncounter.ivs.spe;
         const chance = mathEngine.calculateCatchChance(this.activeEncounter.bst, this.activeEncounter.level, this.activeEncounter.quality, totalIV, multiplier, this.state.stats, this.activeEncounter.qualityName === "Shiny");
 
-        const caught = (Math.random() * 100) <= chance;
+        const randomArray = new Uint32Array(1);
+        crypto.getRandomValues(randomArray);
+        const caught = ((randomArray[0] / (0xFFFFFFFF + 1)) * 100) <= chance;
 
         // Track catch attempts per pokemon
         if (!this.state.stats.catchAttempts) this.state.stats.catchAttempts = {};
