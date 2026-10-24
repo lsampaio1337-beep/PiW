@@ -26,6 +26,21 @@ function getPokemonDataMap() {
 
 import { updateUI, showModal } from '../ui.js';
 
+function safeSetHTML(element, htmlContent) {
+    if (window.windowManager && typeof window.windowManager._parseAndSanitizeToElement === 'function') {
+        element.innerHTML = '';
+        window.windowManager._parseAndSanitizeToElement(htmlContent, element);
+    } else {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlContent, 'text/html');
+        element.innerHTML = '';
+        while (doc.body.firstChild) {
+            element.appendChild(doc.body.firstChild);
+        }
+    }
+}
+
+
 window.sanitizeMarketNumberInput = function(input) {
     let val = input.value.replace(/\D/g, '');
     if (val.length > 3) val = val.substring(0, 3);
@@ -42,14 +57,14 @@ window.sanitizeMarketQInput = function(input) {
 };
 
 export function setupMarket(vCenter) {
-    vCenter.innerHTML = `
+    safeSetHTML(vCenter, `
         <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: space-between; align-items: center; padding: 0 10%; box-sizing: border-box;">
             <button id="btn-heal-all" style="background: #3498db; color: white; border: 3px solid white; border-radius: 12px; padding: 15px 30px; font-size: 24px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.5); margin-top: -20%;">Heal</button>
             <div style="display: flex; flex-direction: column; gap: 20px; margin-top: -20%;">
                 <button id="btn-market-market" style="background: #f1c40f; color: black; border: 3px solid white; border-radius: 12px; padding: 15px 30px; font-size: 24px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.5);">Market</button>
             </div>
         </div>
-    `;
+    `);
 
     document.getElementById('btn-heal-all').addEventListener('click', () => {
         state.party.forEach(p => p.currentHp = p.maxHp);
@@ -106,8 +121,8 @@ export function openPokeMarketBuy() {
     `;
 
     if (overlay && title && content) {
-        title.innerHTML = titleHtml;
-        content.innerHTML = html;
+        safeSetHTML(title, titleHtml);
+        safeSetHTML(content, html);
         overlay.style.display = 'flex';
     } else {
         showModal('Market', html, 'window-market');
@@ -264,7 +279,7 @@ export function renderPokeMarketTab(category) {
     }
 
     if (category === 'upgrades' && items.length === 0) {
-        content.innerHTML = `<div style="text-align: center; font-size: calc(var(--m-width) * 0.024); color: white; width: 100%; margin-top: calc(var(--m-width) * 0.05); padding-bottom: calc(var(--m-width) * 0.05);">No available upgrade to be bought.</div>`;
+        safeSetHTML(content, `<div style="text-align: center; font-size: calc(var(--m-width) * 0.024); color: white; width: 100%; margin-top: calc(var(--m-width) * 0.05); padding-bottom: calc(var(--m-width) * 0.05);">No available upgrade to be bought.</div>`);
         return;
     }
 
@@ -309,7 +324,7 @@ export function renderPokeMarketTab(category) {
     });
     html += `</div>`;
 
-    content.innerHTML = html;
+    safeSetHTML(content, html);
 }
 
 export function buyItem(itemId, baseCost, category, upgradeType = null) { return newBuyItem(itemId, baseCost, category, upgradeType); }
@@ -503,8 +518,8 @@ export function openPokeMarketSell() {
     `;
 
     if (overlay && title && content) {
-        title.innerHTML = titleHtml;
-        content.innerHTML = html;
+        safeSetHTML(title, titleHtml);
+        safeSetHTML(content, html);
         overlay.style.display = 'flex';
     } else {
         if (window.showModal) window.showModal('Sell', html, 'window-market-sell');
@@ -638,7 +653,7 @@ export function renderPokeMarketSellTab(category) {
         });
 
         html += `</div>`;
-        content.innerHTML = html;
+        safeSetHTML(content, html);
         return;
     }
 
@@ -729,7 +744,7 @@ export function renderPokeMarketSellTab(category) {
     });
     html += `</div>`;
 
-    content.innerHTML = html;
+    safeSetHTML(content, html);
 }
 
 export function updateSellItemPrice(itemId, category) {
