@@ -1912,10 +1912,10 @@ export const johtoUnlocks = [
       "Tiny Fishing Spot"
     ],
     "requirements": {
-      "catchSpeciesByRarity": [
+      "catchSpeciesByQuality": [
         {
           "species": "Any",
-          "rarity": "Rare",
+          "quality": "Rare",
           "count": 1
         }
       ]
@@ -1976,10 +1976,10 @@ export const johtoUnlocks = [
       "Route 34"
     ],
     "requirements": {
-      "catchSpeciesByRarity": [
+      "catchSpeciesByQuality": [
         {
           "species": "Paras",
-          "rarity": "Rare",
+          "quality": "Rare",
           "count": 1
         }
       ]

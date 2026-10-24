@@ -479,9 +479,9 @@ def parse_requirements(req_str, area_id):
                     elif "Rare+" in spec:
                         clean_spec = spec.replace("Rare+ Pokémon from Route 32", "Any").replace("Rare+ ", "").strip()
                         if clean_spec == "Any":
-                            reqs["catchByRarity"] = {"rarity": "Rare", "count": count}
+                            reqs["catchByQuality"] = {"quality": "Rare", "count": count}
                         else:
-                            catch_rare.append({"species": clean_spec, "rarity": "Rare", "count": count})
+                            catch_rare.append({"species": clean_spec, "quality": "Rare", "count": count})
                     elif "Red Gyarados" in spec:
                          catch_species.append({"species": "Gyarados", "count": count})
                     elif spec == "all 6 starters":
@@ -504,7 +504,7 @@ def parse_requirements(req_str, area_id):
             else:
                  reqs["defeatMultipleSpecific"] = defeat_specific
         if catch_rare:
-            reqs["catchSpeciesByRarity"] = catch_rare
+            reqs["catchSpeciesByQuality"] = catch_rare
 
     return reqs
 
