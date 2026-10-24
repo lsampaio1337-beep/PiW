@@ -62,6 +62,23 @@ class BattleSystem {
         return this.pokemonBaseMap.get(id);
     }
 
+
+    getRoute(routeName) {
+        const currentRegion = this.state.currentRegionName;
+        // Build or rebuild cache if region changed or if it doesn't exist
+        if (!this._routeMapCache || this._routeMapCache.region !== currentRegion) {
+            const routes = window.getCurrentRoutes();
+            const map = new Map();
+            if (routes) {
+                for (const r of routes) {
+                    map.set(r.name, r);
+                }
+            }
+            this._routeMapCache = { region: currentRegion, map: map };
+        }
+        return this._routeMapCache.map.get(routeName);
+    }
+
     getSpawnForRoute(route) {
         if (!route || !route.spawns || route.spawns.length === 0) {
             return null;
@@ -942,7 +959,7 @@ class BattleSystem {
             this.state.nextForcedEncounter = null;
         } else {
             // Find route spawns based on state.currentRoute
-            const route = window.getCurrentRoutes().find(r => r.name === this.state.currentRoute);
+            const route = this.getRoute(this.state.currentRoute);
             if (!route) return;
 
             let actualPokemonBase;
@@ -2079,7 +2096,7 @@ class BattleSystem {
         // Ensure we don't simulate too many frames and hang the browser if time is huge
         // Limit to approx max of 111h of simulation steps, but it evaluates fast
         const maxTime = Math.min(elapsedMs, 111 * 60 * 60 * 1000);
-        const route = window.getCurrentRoutes().find(r => r.name === this.state.currentRoute);
+        const route = this.getRoute(this.state.currentRoute);
 
         if (!route && this.state.currentRoute !== "Casino - Eeveelutions" && !this.state.currentRoute.startsWith("Casino")) {
             return results; // Can't farm without a route
