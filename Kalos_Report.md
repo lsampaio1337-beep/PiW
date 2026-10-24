@@ -34,3 +34,11 @@ All human-readable instructions in the `Requisite` column of Sheet 2 have been s
 - Replaced route capture varieties with the explicit `catchSpeciesAnyOf` criteria.
 - Replaced Legendary/Mythical Final Chain captures with `catchSpeciesByQuality` (e.g., `catchSpeciesByQuality: { species: ['Articuno', 'Zapdos', 'Moltres'], quality: 'Legendary', count: 1 }`).
 - Replaced Starter Depot captures with exact `catchSpecies` criteria arrays mapping directly to the 6 starter Pokemon.
+
+## 4. Strength-Based Chronological Pokemon Distribution (Sheet 1)
+To ensure that early routes aren't populated by vastly overpowered or fully-evolved Pokemon (e.g. encountering Nidoqueen in Route 3):
+- **Base Stat Total (BST) Sorting:** I aggregated the BST values for all ~397 normal Pokemon using the internal game configurations.
+- **Chronological Mapping:** The entire pool of normal Pokemon was sorted from weakest (lowest BST) to strongest (highest BST).
+- **Redistribution:** These Pokemon were then distributed sequentially from `Route 2` (Level 1-5) all the way to the final post-game chains (Level 95-100).
+  - This guarantees that early locations exclusively feature unevolved, low-tier Pokemon (e.g., Caterpie, Weedle, Pidgey, Bidoof).
+  - High-tier and Stage 2 evolved Pokemon (e.g., Nidoqueen, Garchomp, Tyranitar) are strictly sequestered to late-game and post-game locations where the level encounters correctly exceed their evolution requirements.

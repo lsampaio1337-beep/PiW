@@ -22,3 +22,7 @@ fix_kalos.js\n
 parse_challenges.js\ncurrent_challenges.json\n
 fix_challenges.js\nnew_challenges.json\n
 apply_challenges.js\n
+parse_map.js\nextracted_map.json\n
+fetch_power.js\npower_data.json\n
+redistribute.js\nnew_sheet1.json\n
+rebuild_excel.js\n
