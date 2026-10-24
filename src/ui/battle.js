@@ -890,7 +890,24 @@ export function showDamage(target, amount, isCrit, moveName = '', moveType = 'No
             entry.style.marginBottom = '2px';
             const attacker = target === 'player' ? 'Enemy' : 'You';
             const typeColor = TYPE_COLORS[moveType] || '#ffffff';
-            entry.innerHTML = `${attacker} used <b style="color:${typeColor}">${moveName}</b> for <span style="color:${typeColor}">${amount}</span> dmg!`;
+
+            // Mitigate XSS: Build elements safely
+            entry.textContent = `${attacker} used `;
+
+            const bNode = document.createElement('b');
+            bNode.style.color = typeColor;
+            bNode.textContent = moveName;
+            entry.appendChild(bNode);
+
+            entry.appendChild(document.createTextNode(' for '));
+
+            const spanNode = document.createElement('span');
+            spanNode.style.color = typeColor;
+            spanNode.textContent = amount;
+            entry.appendChild(spanNode);
+
+            entry.appendChild(document.createTextNode(' dmg!'));
+
             log.appendChild(entry);
 
             // Keep only last 4 entries
@@ -908,11 +925,30 @@ export function showDamage(target, amount, isCrit, moveName = '', moveType = 'No
     const typeColor = TYPE_COLORS[moveType] || '#ffffff';
     let critText = isCrit ? ' Crit(1.5x)' : '';
     let effText = `${effectiveness}x`;
-    let typeIconHtml = `<img src="Assets/Extra/Types/Type ${moveType}.png" style="width: 20px; height: 20px; vertical-align: middle; margin: 0 4px;" />`;
+
+    // Mitigate XSS: Build inner node safely
+    const innerSpan = document.createElement('span');
+    innerSpan.style.fontWeight = 'bold';
+    innerSpan.style.fontStyle = isCrit ? 'italic' : 'normal';
+    innerSpan.style.display = 'flex';
+    innerSpan.style.alignItems = 'center';
+    innerSpan.style.justifyContent = 'center';
+    innerSpan.style.textShadow = '1px 1px 2px black';
 
     // Layout: [Amount] [Icon] [Name] [Effectiveness] [Crit]
-    dmgNode.innerHTML = `<span style="font-weight: bold; font-style: ${isCrit ? 'italic' : 'normal'}; display: flex; align-items: center; justify-content: center; text-shadow: 1px 1px 2px black;">${amount} ${typeIconHtml} ${moveName} ${effText}${critText}</span>`;
+    innerSpan.appendChild(document.createTextNode(`${amount} `));
 
+    const iconImg = document.createElement('img');
+    iconImg.src = `Assets/Extra/Types/Type ${moveType}.png`;
+    iconImg.style.width = '20px';
+    iconImg.style.height = '20px';
+    iconImg.style.verticalAlign = 'middle';
+    iconImg.style.margin = '0 4px';
+    innerSpan.appendChild(iconImg);
+
+    innerSpan.appendChild(document.createTextNode(` ${moveName} ${effText}${critText}`));
+
+    dmgNode.appendChild(innerSpan);
 
     dmgNode.classList.add('floating-damage');
 
