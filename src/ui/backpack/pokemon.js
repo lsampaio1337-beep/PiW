@@ -812,12 +812,15 @@ window.transformDitto = function(dittoUuid, targetIdOverride) {
                 // Moves
                 let getLearnsetMoves = function(pokemonBase, level) {
                     let learned = [];
-                    for (let i = 1; i <= level; i++) {
-                        if (pokemonBase.learnset && pokemonBase.learnset[i]) {
-                            const moveNames = pokemonBase.learnset[i];
-                            for (const mName of moveNames) {
-                                const moveData = state.config.moves[mName];
-                                if (moveData && !learned.find(lm => lm.name === mName)) {
+                    let learnedSet = new Set();
+                    if (pokemonBase.learnset) {
+                        for (const ls of pokemonBase.learnset) {
+                            if (level >= ls.level) {
+                                const moveName = ls.move;
+                                if (state.config.moves[moveName] && !learnedSet.has(moveName)) {
+                                    learnedSet.add(moveName);
+                                    const moveData = { ...state.config.moves[moveName] };
+                                    moveData.name = moveName;
                                     learned.push(moveData);
                                 }
                             }
@@ -854,12 +857,15 @@ window.transformDitto = function(dittoUuid, targetIdOverride) {
             // Replicate the moveset logic
             let getLearnsetMoves = function(pokemonBase, level) {
                 let learned = [];
-                for (let i = 1; i <= level; i++) {
-                    if (pokemonBase.learnset && pokemonBase.learnset[i]) {
-                        const moveNames = pokemonBase.learnset[i];
-                        for (const mName of moveNames) {
-                            const moveData = state.config.moves[mName];
-                            if (moveData && !learned.find(lm => lm.name === mName)) {
+                let learnedSet = new Set();
+                if (pokemonBase.learnset) {
+                    for (const ls of pokemonBase.learnset) {
+                        if (level >= ls.level) {
+                            const moveName = ls.move;
+                            if (state.config.moves[moveName] && !learnedSet.has(moveName)) {
+                                learnedSet.add(moveName);
+                                const moveData = { ...state.config.moves[moveName] };
+                                moveData.name = moveName;
                                 learned.push(moveData);
                             }
                         }
