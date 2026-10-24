@@ -1,17 +1,28 @@
-# Kalos Path Rebalance & Starter Adjustments Report
+# Kalos Path Rebalance & Expanded Chain Adjustments Report
 
 ## 1. Routes & Map Adjustments (Sheet 1)
-- **Starter Depots Restructured:** Removed the old regional depots and implemented the requested unified depots:
-    - **`Starter Depot`**: Contains exactly **Rowlet, Litten, Popplio, Bulbasaur, Charmander, and Squirtle**. The levels are set to 40-45, and the appearance probability is evenly distributed (16.66% each).
-    - **`Starter Evolved Depot`**: Contains exactly **Dartrix, Torracat, Brionne, Ivysaur, Charmeleon, and Blastoise**. The levels are set to 45-50, and the appearance probability is evenly distributed (16.66% each).
-- **Final Halls Restructured:** As per your exact specifications, the Ultra Rares were stripped from the final legendary spots, leaving only the requested groups with their requested levels and % chances:
-    - **`Ultimate Chamber`**: Volcanion, Diancie, Hoopa, Mewtwo (Levels 100-110, 25% each).
-    - **`Team Flare Secret HQ Hall`**: Yveltal, Zygarde, Xerneas (Levels 110-120, 33% each).
-    - **`Sea Spirit Den Hall`**: Articuno, Zapdos, Moltres (Level 100, 33% each).
-- **Intermediate Chains Created:** Any intermediate spots mentioned in your challenge list (like `Path to Sea Spirit Den`, `Underground Chambers`, etc.) were dynamically created in the map logic and populated with 5 mid-to-high level normal Pokemon so they function properly.
+- **Early-Game Extra Chain Separation:** `Cyllage City (Fishing)`, `Reflection Cave`, `Tower of Mastery`, and `Coumarine City` were systematically bypassed in the main linear sequence. They now exist distinctly to form the early parallel chain (Extra Challenge A). Their levels were re-leveled to appropriately sit between 25-45.
+- **Main Sequence Gap Fixing:** Recalculated the Main Route progression scaling from Level 1 up to Level 70 natively so that skipping the aforementioned 4 spots doesn't break the natural level climb to the Kalos League.
+- **Renames:**
+  - Renamed `2nd spot for Extra Challenge B` to `Sea Spirit Den Outer Depths`.
+  - Renamed `2nd spot for Extra Challenge C` to `2nd spot for Extra Challenge E` to match the newly shifted alphabet designations.
+- **Specific Post-Game Level Adjustments:** Explicitly hardcoded the required level ranges for the Extra Chains:
+  - `Starter Depot`: 40-45
+  - `Starter Evolved Depot`: 45-51
+  - `Kiloude City`: 50-57
+  - `Friend Safari`: 55-62
+  - `Battle Maison`: 63-70
+  - The parallel #1, #2, #3, and #4 spots leading up to the final legendary chambers in chains C, D, and E were precisely clamped to: (70-77), (77-84), (84-91), and (91-98) respectively.
 
 ## 2. Challenges & Unlock Progression (Sheet 2)
-- **Challenge 35 (Coumarine City Gym):** Updated specifically to `Unlock Coumarine City (Fishing) AND Unlock Starter Depot`.
-- **Extra Challenge A (Starters):** Rebuilt strictly using your exact text. Now sequences through capturing Starters, catching evolved forms, unlocking Kiloude City, Friend Safari, Battle Maison, and finally rewarding 1 Masterball.
-- **Final Challenge (Kalos Pokemon League):** Successfully mapped to unlock the three distinct post-game chain starters: `Path to Sea Spirit Den` (Chain B), `Path to Team Flare Secret HQ` (Chain C), and `Path to Secret Ruins` (Chain D).
-- **Extra Challenge Chains (B, C, D):** Completely reconstructed 1:1 based on your exact text and format. They now sequentially unlock paths like `Team Flare Secret HQ Gate` and `Garden Chambers`, culminating in capturing the specific legendaries inside their final Halls for the reward of 2 Masterballs per chain.
+- **Main Challenge Re-mapping:** Skipped the extracted paths seamlessly.
+- **Gym Unlocks for Parallel Chains:**
+  - `Cyllage City Gym` challenge was explicitly configured to unlock the next main game spot **AND** `Cyllage City (Fishing)`, acting as the gateway for Extra Challenge A.
+  - `Coumarine City Gym` challenge was explicitly configured to unlock the next main game spot **AND** `Starter Depot`, acting as the gateway for Extra Challenge B.
+- **Parallel Chains Remapped:**
+  - **Extra Challenge A:** Formed using the extracted mid-game locations (`Cyllage City (Fishing) -> Reflection Cave -> Tower of Mastery -> Coumarine City`) culminating in a `1 Masterball` reward.
+  - **Extra Challenge B:** This handles the exact starter progression requested originally in A.
+  - **Extra Challenge C:** This handles the exact Sea Spirit Den progression requested originally in B.
+  - **Extra Challenge D:** This remains the exact Secret Ruins / Diancie progression.
+  - **Extra Challenge E:** This handles the exact Team Flare Secret HQ progression requested originally in C.
+- **Final Challenge:** The `Defeat Kalos Champion` reward was explicitly coded to unlock the 1st step of the three major legendary chains: `Path to Sea Spirit Den (C)`, `Path to Secret Ruins (D)`, and `Path to Team Flare Secret HQ (E)`.
