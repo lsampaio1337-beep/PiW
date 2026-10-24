@@ -533,7 +533,6 @@ export function openPokeMarketSell() {
 }
 
 export function renderPokeMarketSellTab(category) {
-    const map = getPokemonDataMap();
     const content = document.getElementById('market-sell-content');
     if (!content) return;
 
@@ -870,7 +869,6 @@ window.toggleMarketPokemonFilters = function() {
 };
 
 window.marketSelectAllPokemonForSale = function() {
-    const map = getPokemonDataMap();
     if (!window.marketSelectedPokemonForSale) window.marketSelectedPokemonForSale = new Set();
 
     const filterName = (document.getElementById('market-filter-name')?.value || '').toLowerCase();
@@ -909,7 +907,6 @@ window.marketSelectAllPokemonForSale = function() {
 };
 
 function updateMarketPokemonSellCount() {
-    const map = getPokemonDataMap();
     const countSpan = document.getElementById('market-pokemon-sell-count');
     const totalSpan = document.getElementById('market-pokemon-sell-total');
     if (countSpan && totalSpan && window.marketSelectedPokemonForSale) {
@@ -940,7 +937,6 @@ function updateMarketPokemonSellCount() {
 }
 
 window.marketSellSelectedPokemon = function() {
-    const map = getPokemonDataMap();
     if (!window.marketSelectedPokemonForSale || window.marketSelectedPokemonForSale.size === 0) return;
 
     let numSold = window.marketSelectedPokemonForSale.size;
