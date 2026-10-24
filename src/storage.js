@@ -99,7 +99,6 @@ export default class Storage {
             safeState.lastPlayed = Date.now();
 
             window.localStorage.setItem(this.currentProfileId, JSON.stringify(safeState));
-            console.log(`Game Saved to localStorage profile ${this.currentProfileId}.`);
         } catch(e) {
             console.error("Save failed:", e);
         }
