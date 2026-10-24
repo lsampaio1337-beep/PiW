@@ -1131,7 +1131,7 @@ window.showProfLabModal = function() {
         shinyCaughtTaskHtml = "";
     } else {
         // If one is complete but not the other, we don't want duplicate "Assignment: Completed" texts
-        // if they rendered their own individual completions. Since we only want a single "Completed" when BOTH are done,
+        // rendering their own individual completions. Since we only want a single "Completed" when BOTH are done,
         // we strip out the individual "Assignment: Completed" if it exists.
         if (seenTier >= profTasks.shinySeen.length) shinySeenTaskHtml = "";
         if (caughtTier >= profTasks.shinyCaught.length) shinyCaughtTaskHtml = "";
