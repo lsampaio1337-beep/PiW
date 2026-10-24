@@ -32,9 +32,6 @@ function createWindow() {
             sandbox: true,
             allowRunningInsecureContent: false,
             webviewTag: false,
-            navigateOnDragDrop: false,
-            safeDialogs: true,
-            disableBlinkFeatures: 'Auxclick',
             preload: path.join(__dirname, 'preload.js')
         }
     });
@@ -76,21 +73,6 @@ app.whenReady().then(() => {
         if (BrowserWindow.getAllWindows().length === 0) {
             createWindow();
         }
-    });
-
-    app.on('web-contents-created', (event, contents) => {
-        // Disable navigation to any other origin
-        contents.on('will-navigate', (event, navigationUrl) => {
-            const parsedUrl = new URL(navigationUrl);
-            if (parsedUrl.protocol !== 'file:') {
-                event.preventDefault();
-            }
-        });
-
-        // Disable creation of new windows
-        contents.setWindowOpenHandler(() => {
-            return { action: 'deny' };
-        });
     });
 });
 
