@@ -26,12 +26,6 @@ function getPokemonDataMap() {
 
 import { updateUI, showModal } from '../ui.js';
 
-// formatMarketNumberDown is hoisted manually if needed
-function _formatMarketNumberDown(num) {
-    return num.toLocaleString();
-}
-
-
 window.sanitizeMarketNumberInput = function(input) {
     let val = input.value.replace(/\D/g, '');
     if (val.length > 3) val = val.substring(0, 3);
@@ -322,7 +316,7 @@ export function buyItem(itemId, baseCost, category, upgradeType = null) { return
 
 
 export function formatMarketNumberDown(num) {
-    return _formatMarketNumberDown(num);
+    return num.toLocaleString();
 }
 
 export function updateBuyItemPrice(itemId, category, basePrice) {
