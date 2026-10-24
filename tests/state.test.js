@@ -1,4 +1,24 @@
-import { checkFinalChallengeCompleted, state, swapRegion, REGION_TEMPLATE } from '../src/state.js';
+import { checkFinalChallengeCompleted, state, swapRegion, REGION_TEMPLATE, globals, setBattleSystem } from '../src/state.js';
+
+describe('setBattleSystem', () => {
+    afterEach(() => {
+        globals.battleSystem = null; // Reset between tests
+    });
+
+    it('should set globals.battleSystem to the provided system object', () => {
+        const mockSystem = { startBattle: jest.fn() };
+        setBattleSystem(mockSystem);
+        expect(globals.battleSystem).toBe(mockSystem);
+    });
+
+    it('should handle setting it to null or undefined', () => {
+        setBattleSystem(null);
+        expect(globals.battleSystem).toBe(null);
+
+        setBattleSystem(undefined);
+        expect(globals.battleSystem).toBe(undefined);
+    });
+});
 
 describe('checkFinalChallengeCompleted', () => {
     beforeEach(() => {
