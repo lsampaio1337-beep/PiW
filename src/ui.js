@@ -999,7 +999,8 @@ window.cheatCompleteProfTask = function(type) {
         const caught = state.stats.caughtSpecies;
         const names = state.config.allPokemonNames || state.config.pokemonData.map(p => p.name);
 
-        let caughtCount = Object.keys(caught).length;
+        let caughtCount = 0;
+        for (let _ in caught) caughtCount++;
 
         if (caughtCount < names.length) {
             for (let i = 0, len = names.length; i < len; i++) {
