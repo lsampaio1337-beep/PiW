@@ -6,6 +6,16 @@ import * as mathEngine from "../mathEngine.js";
 // they need to be defined elsewhere and attached to window, or attached here.
 // Let's attach them in the main ui.js or where appropriate.
 
+function escapeHTML(str) {
+    if (!str) return '';
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+}
+
 let lastTeamCount = -1;
 
 export function updateTeamWindow() {
@@ -57,7 +67,7 @@ export function updateTeamWindow() {
         else if (p.qualityName === "Uncommon") glowClass = "glow-uncommon";
         else if (p.qualityName === "Regular") glowClass = "glow-regular";
 
-        d.innerHTML = `
+        const htmlContent = `
             <div style="display: flex; width: 100%; align-items: stretch; height: 100%; min-height: 55px;">
                 <!-- Left Column: Sprite -->
                 <div style="flex: 0 0 50px; display: flex; align-items: center; justify-content: center; position: relative;">
@@ -74,7 +84,7 @@ export function updateTeamWindow() {
                     <!-- Top Floor: Name/Level and Buttons -->
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <div style="line-height: 1; display: flex; align-items: baseline; gap: 4px;">
-                            <span style="font-weight: bold; font-size: 12px; text-shadow: 1px 1px 1px rgba(0,0,0,0.8); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${p.name}</span>
+                            <span style="font-weight: bold; font-size: 12px; text-shadow: 1px 1px 1px rgba(0,0,0,0.8); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${escapeHTML(p.name)}</span>
                             <span style="font-size: 10px; text-shadow: 1px 1px 1px rgba(0,0,0,0.8);">Lv.${p.level}</span>
                         </div>
                         <div style="display: flex; align-items: center; gap: 4px; pointer-events: auto; position: relative; z-index: 10;">
@@ -103,6 +113,11 @@ export function updateTeamWindow() {
                 </div>
             </div>
         `;
+        const doc = new DOMParser().parseFromString(htmlContent, 'text/html');
+        d.innerHTML = '';
+        while (doc.body.firstChild) {
+            d.appendChild(doc.body.firstChild);
+        }
         partyDiv.appendChild(d);
     });
 
@@ -143,7 +158,12 @@ export function updateTeamWindow() {
 function renderDayCareSlot(container, p, battles, maxBattles, type) {
     if (!container) return;
     if (!p) {
-        container.innerHTML = ``;
+        const htmlContent = ``;
+    const doc = new DOMParser().parseFromString(htmlContent, 'text/html');
+    container.innerHTML = '';
+    while (doc.body.firstChild) {
+        container.appendChild(doc.body.firstChild);
+    }
         container.style.display = 'none';
         return;
     }
@@ -197,7 +217,7 @@ function renderDayCareSlot(container, p, battles, maxBattles, type) {
         rightText = `${initialIV}+${cycles}`;
     }
 
-    container.innerHTML = `
+    const htmlContent = `
         <div class="party-slot" style="position: relative; border: 2px solid #3498db;">
             <div style="display: flex; width: 100%; align-items: stretch; height: 100%; min-height: 55px;">
             <!-- Left Column: Sprite -->
@@ -210,7 +230,7 @@ function renderDayCareSlot(container, p, battles, maxBattles, type) {
                 <!-- Top Floor: Name/Level -->
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <div style="line-height: 1; display: flex; align-items: baseline; gap: 4px;">
-                        <span style="font-weight: bold; font-size: 12px; text-shadow: 1px 1px 1px rgba(0,0,0,0.8); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${p.name}</span>
+                        <span style="font-weight: bold; font-size: 12px; text-shadow: 1px 1px 1px rgba(0,0,0,0.8); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${escapeHTML(p.name)}</span>
                         <span style="font-size: 10px; text-shadow: 1px 1px 1px rgba(0,0,0,0.8);">Lv.${p.level}</span>
                     </div>
                     <div style="display: flex; align-items: center; gap: 4px; pointer-events: auto; position: relative; z-index: 10;">
@@ -239,4 +259,9 @@ function renderDayCareSlot(container, p, battles, maxBattles, type) {
             </div>
         </div>
     `;
+    const doc = new DOMParser().parseFromString(htmlContent, 'text/html');
+    container.innerHTML = '';
+    while (doc.body.firstChild) {
+        container.appendChild(doc.body.firstChild);
+    }
 }
