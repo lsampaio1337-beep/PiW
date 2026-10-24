@@ -2252,8 +2252,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
     if (btnSquirtle) btnSquirtle.onclick = () => selectStarter(7);
 
     // Bind Hub Buttons
-    window.checkCombatLock = () => {
-    const checkCombatLock = window.checkCombatLock;
+    const checkCombatLock = () => {
         if (globals.battleSystem && globals.battleSystem.gymState && globals.battleSystem.gymState.isActive && globals.battleSystem.gymState.inCombat) {
             alert("You cannot access this menu during a Gym Battle!");
             return true;
@@ -2601,7 +2600,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
         } else if (tab === 'medals') {
             const regions = ['Kanto', 'Johto', 'Hoenn', 'Sinnoh', 'Unova', 'Kalos', 'Alola', 'Galar', 'Hisui', 'Paldea'];
 
-            let medalsHtml = '<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; padding: 15px; height: 100%; overflow-y: auto; box-sizing: border-box; align-content: start;">';
+            let medalsHtml = '<div style="display: grid; grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(5, 1fr); gap: 10px; padding: 10px; height: 100%; overflow: hidden; box-sizing: border-box;">';
 
             regions.forEach(region => {
                 let caughtCount = 0;
@@ -2648,24 +2647,34 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
 
                 medalsHtml += `
                     <div
-                        style="background: rgba(0, 0, 0, 0.2); border-radius: 10px; padding: 15px; border: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-around; align-items: center; box-sizing: border-box; transition: all 0.2s ease-in-out;"
-                        onmouseover="this.style.background='rgba(255, 255, 255, 0.1)'; this.style.borderColor='rgba(255, 255, 255, 0.5)'; this.style.boxShadow='0 0 15px rgba(255, 255, 255, 0.4)';"
-                        onmouseout="this.style.background='rgba(0, 0, 0, 0.2)'; this.style.borderColor='rgba(255, 255, 255, 0.1)'; this.style.boxShadow='none';"
+                        class="medal-item"
+                        style="background: rgba(0, 0, 0, 0.2); border-radius: 10px; padding: 10px 15px; border: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-around; align-items: center; box-sizing: border-box; transition: all 0.2s ease-in-out; min-height: 0;"
                     >
                         <div style="text-align: center; ${!hasFirst ? 'filter: grayscale(100%) opacity(0.5);' : 'filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));'}">
-                            <img src="Assets/Extra/Medals/${region} First.png" alt="${region} First" style="width: 64px; height: 64px; image-rendering: pixelated;" onerror="this.src='Assets/Extra/Medals/Kanto First.png'">
+                            <img src="Assets/Extra/Medals/${region} First.png" alt="${region} First" style="width: 100%; max-width: 64px; max-height: 100%; object-fit: contain; image-rendering: pixelated;" onerror="this.src='Assets/Extra/Medals/Kanto First.png'">
                         </div>
                         <div style="text-align: center; ${!hasSecond ? 'filter: grayscale(100%) opacity(0.5);' : 'filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.8));'}">
-                            <img src="Assets/Extra/Medals/${region} Second.png" alt="${region} Second" style="width: 64px; height: 64px; image-rendering: pixelated;" onerror="this.src='Assets/Extra/Medals/Kanto Second.png'">
+                            <img src="Assets/Extra/Medals/${region} Second.png" alt="${region} Second" style="width: 100%; max-width: 64px; max-height: 100%; object-fit: contain; image-rendering: pixelated;" onerror="this.src='Assets/Extra/Medals/Kanto Second.png'">
                         </div>
                         <div style="text-align: center; ${!hasThird ? 'filter: grayscale(100%) opacity(0.5);' : 'filter: drop-shadow(0 0 10px rgba(255, 215, 0, 1));'}">
-                            <img src="Assets/Extra/Medals/${region} Third.png" alt="${region} Third" style="width: 64px; height: 64px; image-rendering: pixelated;" onerror="this.src='Assets/Extra/Medals/Kanto Third.png'">
+                            <img src="Assets/Extra/Medals/${region} Third.png" alt="${region} Third" style="width: 100%; max-width: 64px; max-height: 100%; object-fit: contain; image-rendering: pixelated;" onerror="this.src='Assets/Extra/Medals/Kanto Third.png'">
                         </div>
                     </div>
                 `;
             });
 
             medalsHtml += '</div>';
+
+            medalsHtml += `
+                <style>
+                    .medal-item:hover {
+                        background: rgba(255, 255, 255, 0.1) !important;
+                        border-color: rgba(255, 255, 255, 0.5) !important;
+                        box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+                    }
+                </style>
+            `;
+
             contentHtml = medalsHtml;
         } else if (tab === 'upgrades') {
             contentHtml = '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; padding: 15px;">';
