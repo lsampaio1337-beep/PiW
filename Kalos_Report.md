@@ -42,3 +42,10 @@ To ensure that early routes aren't populated by vastly overpowered or fully-evol
 - **Redistribution:** These Pokemon were then distributed sequentially from `Route 2` (Level 1-5) all the way to the final post-game chains (Level 95-100).
   - This guarantees that early locations exclusively feature unevolved, low-tier Pokemon (e.g., Caterpie, Weedle, Pidgey, Bidoof).
   - High-tier and Stage 2 evolved Pokemon (e.g., Nidoqueen, Garchomp, Tyranitar) are strictly sequestered to late-game and post-game locations where the level encounters correctly exceed their evolution requirements.
+
+## 5. Human-Readable Challenge Formatting (Sheet 2)
+As requested, all strictly coded criteria objects in the `Requisite` column have been converted back into natural, human-readable wording:
+- E.g., `defeatCountRoute: { route: 'Route 2', count: 25 }` is now `Defeat 25 pokemon from Route 2`.
+- E.g., `earnBadge: { badge: 'Bug Badge', leader: 'Viola' }` is now `Earn the Bug Badge from Viola`.
+- E.g., `catchSpecies: { species: ['Rowlet', 'Litten', 'Popplio'], count: 1 }` is now `Catch 1 Rowlet, 1 Litten, and 1 Popplio`.
+- E.g., `catchSpeciesByQuality: { species: ['Articuno', 'Zapdos', 'Moltres'], quality: 'Legendary', count: 1 }` is now `Catch 1 Legendary Articuno, 1 Legendary Zapdos, and 1 Legendary Moltres`.

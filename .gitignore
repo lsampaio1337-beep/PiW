@@ -26,3 +26,4 @@ parse_map.js\nextracted_map.json\n
 fetch_power.js\npower_data.json\n
 redistribute.js\nnew_sheet1.json\n
 rebuild_excel.js\n
+parse_and_fix.js\n
