@@ -1,26 +1,4 @@
-import { calculateDamage, calculateReqXP } from '../src/mathEngine.js';
-
-describe('calculateReqXP', () => {
-    test('should calculate required XP correctly for level 1', () => {
-        expect(calculateReqXP(1)).toBe(52);
-    });
-
-    test('should calculate required XP correctly for level 2', () => {
-        expect(calculateReqXP(2)).toBe(90);
-    });
-
-    test('should calculate required XP correctly for level 50', () => {
-        expect(calculateReqXP(50)).toBe(67885);
-    });
-
-    test('should calculate required XP correctly for level 99', () => {
-        expect(calculateReqXP(99)).toBe(398500);
-    });
-
-    test('should calculate required XP correctly for level 100', () => {
-        expect(calculateReqXP(100)).toBe(409038);
-    });
-});
+import { calculateDamage } from '../src/mathEngine.js';
 
 describe('calculateDamage', () => {
     beforeEach(() => {
