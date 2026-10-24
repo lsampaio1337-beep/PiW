@@ -294,7 +294,7 @@ window.completeChallenge = function(targetAreaId) {
 
 window.cheatProgressChallenge = function(targetAreaId) {
     if (targetAreaId === '150_challenge') {
-        if (!state.stats.caughtSpecies) state.stats.caughtSpecies = Object.create(null);
+        if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
         state.stats.caughtSpeciesCount = state.stats.caughtSpeciesCount || 0;
         for (let i = 0; i < state.config.pokemonData.length; i++) {
              if (state.stats.caughtSpeciesCount >= 150) break;
@@ -333,19 +333,19 @@ window.cheatProgressChallenge = function(targetAreaId) {
         }
         if (req.defeatSpecific) {
             if (req.defeatSpecific.name === '__proto__' || req.defeatSpecific.name === 'constructor' || req.defeatSpecific.name === 'prototype') return;
-            if (!state.stats.challengeSpecificDefeats) state.stats.challengeSpecificDefeats = Object.create(null);
+            if (!state.stats.challengeSpecificDefeats) state.stats.challengeSpecificDefeats = {};
             state.stats.challengeSpecificDefeats[req.defeatSpecific.name] = Math.max(state.stats.challengeSpecificDefeats[req.defeatSpecific.name] || 0, req.defeatSpecific.count);
         }
 
         if (req.defeatMultipleSpecific) {
-            if (!state.stats.challengeSpecificDefeats) state.stats.challengeSpecificDefeats = Object.create(null);
+            if (!state.stats.challengeSpecificDefeats) state.stats.challengeSpecificDefeats = {};
             for (let ds of req.defeatMultipleSpecific) {
                 if (ds.name === '__proto__' || ds.name === 'constructor' || ds.name === 'prototype') continue;
                 state.stats.challengeSpecificDefeats[ds.name] = Math.max(state.stats.challengeSpecificDefeats[ds.name] || 0, ds.count);
             }
         }
         if (req.catchSpecies) {
-            if (!state.stats.caughtSpecies) state.stats.caughtSpecies = Object.create(null);
+            if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
             req.catchSpecies.forEach(r => {
                 if (r.species === '__proto__' || r.species === 'constructor' || r.species === 'prototype') return;
                 if (!state.stats.caughtSpecies[r.species]) {
@@ -355,7 +355,7 @@ window.cheatProgressChallenge = function(targetAreaId) {
             });
         }
         if (req.catchSpeciesByRarity) {
-            if (!state.stats.challengeCaughtSpecific) state.stats.challengeCaughtSpecific = Object.create(null);
+            if (!state.stats.challengeCaughtSpecific) state.stats.challengeCaughtSpecific = {};
             req.catchSpeciesByRarity.forEach(r => {
                 let key = r.species + "_" + r.rarity;
                 if (key === '__proto__' || key === 'constructor' || key === 'prototype') return;
@@ -363,7 +363,7 @@ window.cheatProgressChallenge = function(targetAreaId) {
             });
         }
         if (req.catchSpeciesByQuality) {
-            if (!state.stats.challengeCaughtSpecific) state.stats.challengeCaughtSpecific = Object.create(null);
+            if (!state.stats.challengeCaughtSpecific) state.stats.challengeCaughtSpecific = {};
             req.catchSpeciesByQuality.forEach(r => {
                 let key = r.species + "_" + r.quality;
                 if (key === '__proto__' || key === 'constructor' || key === 'prototype') return;
@@ -371,7 +371,7 @@ window.cheatProgressChallenge = function(targetAreaId) {
             });
         }
         if (req.catchSpeciesAnyOfByRarity) {
-            if (!state.stats.challengeCaughtSpecific) state.stats.challengeCaughtSpecific = Object.create(null);
+            if (!state.stats.challengeCaughtSpecific) state.stats.challengeCaughtSpecific = {};
             req.catchSpeciesAnyOfByRarity.forEach(r => {
                 // Cheat by catching the first one in the list
                 let key = r.species[0] + "_" + r.rarity;
@@ -380,7 +380,7 @@ window.cheatProgressChallenge = function(targetAreaId) {
             });
         }
         if (req.catchEachFromSlotMachine) {
-            if (!state.stats.caughtSpecies) state.stats.caughtSpecies = Object.create(null);
+            if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
             if (req.catchEachFromSlotMachine.machines) {
                 req.catchEachFromSlotMachine.machines.forEach(m => {
                     if (m[0] === '__proto__' || m[0] === 'constructor' || m[0] === 'prototype') return;
@@ -403,19 +403,19 @@ window.cheatProgressChallenge = function(targetAreaId) {
              let baseRarity = req.catchByRarity.rarity.replace('+', '');
              let key = "Any_" + baseRarity;
              if (key === '__proto__' || key === 'constructor' || key === 'prototype') return;
-             if (!state.stats.challengeCaughtSpecific) state.stats.challengeCaughtSpecific = Object.create(null);
+             if (!state.stats.challengeCaughtSpecific) state.stats.challengeCaughtSpecific = {};
              state.stats.challengeCaughtSpecific[key] = (state.stats.challengeCaughtSpecific[key] || 0) + req.catchByRarity.count;
         }
         if (req.catchByRarityAndType) {
              let key = req.catchByRarityAndType.type + "_" + req.catchByRarityAndType.rarity;
              if (key === '__proto__' || key === 'constructor' || key === 'prototype') return;
-             if (!state.stats.challengeCaughtSpecific) state.stats.challengeCaughtSpecific = Object.create(null);
+             if (!state.stats.challengeCaughtSpecific) state.stats.challengeCaughtSpecific = {};
              state.stats.challengeCaughtSpecific[key] = (state.stats.challengeCaughtSpecific[key] || 0) + req.catchByRarityAndType.count;
         }
         if (req.catchByType) {
             let typeKey = req.catchByType.type + "_Any";
             if (typeKey === '__proto__' || typeKey === 'constructor' || typeKey === 'prototype') return;
-            if (!state.stats.challengeCaughtSpecific) state.stats.challengeCaughtSpecific = Object.create(null);
+            if (!state.stats.challengeCaughtSpecific) state.stats.challengeCaughtSpecific = {};
             state.stats.challengeCaughtSpecific[typeKey] = (state.stats.challengeCaughtSpecific[typeKey] || 0) + req.catchByType.count;
         }
         if (req.earnBadge) {
@@ -436,41 +436,41 @@ window.cheatProgressChallenge = function(targetAreaId) {
         }
         if (req.defeatSpecific) {
             if (req.defeatSpecific.name === '__proto__' || req.defeatSpecific.name === 'constructor' || req.defeatSpecific.name === 'prototype') return;
-            if (!state.stats.challengeSpecificDefeats) state.stats.challengeSpecificDefeats = Object.create(null);
+            if (!state.stats.challengeSpecificDefeats) state.stats.challengeSpecificDefeats = {};
             state.stats.challengeSpecificDefeats[req.defeatSpecific.name] = req.defeatSpecific.count;
         }
 
         if (req.defeatMultipleSpecific) {
-            if (!state.stats.challengeSpecificDefeats) state.stats.challengeSpecificDefeats = Object.create(null);
+            if (!state.stats.challengeSpecificDefeats) state.stats.challengeSpecificDefeats = {};
             for (let ds of req.defeatMultipleSpecific) {
                 if (ds.name === '__proto__' || ds.name === 'constructor' || ds.name === 'prototype') continue;
                 state.stats.challengeSpecificDefeats[ds.name] = ds.count;
             }
         }
         if (req.defeatEliteFourAndChampion) {
-            if (!state.stats.defeatedBosses) state.stats.defeatedBosses = Object.create(null);
+            if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};
             state.stats.defeatedBosses["Pokemon League Lorelei"] = true;
             state.stats.defeatedBosses["Champion Rival"] = true;
         }
 
         if (req.defeatJohtoChampion) {
-            if (!state.stats.defeatedBosses) state.stats.defeatedBosses = Object.create(null);
+            if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};
             state.stats.defeatedBosses["Johto Champion"] = true;
         }
         if (req.defeatHoennChampion) {
-            if (!state.stats.defeatedBosses) state.stats.defeatedBosses = Object.create(null);
+            if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};
             state.stats.defeatedBosses["Hoenn Champion"] = true;
         }
         if (req.defeatSinnohChampion) {
-            if (!state.stats.defeatedBosses) state.stats.defeatedBosses = Object.create(null);
+            if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};
             state.stats.defeatedBosses["Sinnoh Champion"] = true;
         }
         if (req.defeatUnovaChampion) {
-            if (!state.stats.defeatedBosses) state.stats.defeatedBosses = Object.create(null);
+            if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};
             state.stats.defeatedBosses["Unova Champion"] = true;
         }
         if (req.defeatRed) {
-            if (!state.stats.defeatedBosses) state.stats.defeatedBosses = Object.create(null);
+            if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};
             state.stats.defeatedBosses["Red"] = true;
         }
     }
@@ -995,7 +995,7 @@ window.cheatCompleteProfTask = function(type) {
         }
     }
     if (type === 'final') {
-        if (!state.stats.caughtSpecies) state.stats.caughtSpecies = Object.create(null);
+        if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
         const caught = state.stats.caughtSpecies;
         const names = state.config.allPokemonNames || state.config.pokemonData.map(p => p.name);
 
@@ -1955,7 +1955,7 @@ async function init() {
                         for (const key of Object.keys(source)) {
                             if (key === '__proto__' || key === 'constructor' || key === 'prototype') continue;
                             if (source[key] instanceof Object && !Array.isArray(source[key])) {
-                                if (!target[key]) target[key] = Object.create(null);
+                                if (!target[key]) target[key] = {};
                                 deepMerge(target[key], source[key]);
                             } else {
                                 target[key] = source[key];
@@ -1989,7 +1989,7 @@ async function init() {
                         state.currentRegionName = 'Kanto';
                     }
                     if (!state.regions) {
-                        state.regions = Object.create(null);
+                        state.regions = {};
                     }
 
                     // Fallback for older saves
