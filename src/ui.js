@@ -2386,12 +2386,16 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
             };
 
             document.getElementById('btn-zzz-yes').onclick = () => {
-                state.isZzZMode = true;
-                state.zzzTimestamp = Date.now();
+                state.stats.isZzZMode = true;
+                state.stats.zzzTimestamp = Date.now();
                 state.settings.isSleepModeActive = true;
                 state.stats.lastSaveTime = Date.now();
                 storage.save(state);
-                window.close();
+
+                if (window.windowManager) {
+                    window.windowManager.closeAllDynamicWindows();
+                }
+                updateMainControl();
             };
 };
 
@@ -2400,7 +2404,11 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
             state.stats.hasSeenZzZIcon = true;
             storage.save(state);
             updateMainControl();
-            window.showZzZConfirmationModal();
+            if (state.stats.isZzZMode) {
+                window.promptWakeUp();
+            } else {
+                window.showZzZConfirmationModal();
+            }
         }
     });
 
