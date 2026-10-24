@@ -247,6 +247,17 @@ export function updateMainControl() {
         navButtons.style.opacity = lockMenus ? '0.5' : '1.0';
     }
 
+    // Hide icons if ZzZ Mode is active for this region
+    if (state.stats.isZzZMode) {
+        const icons = document.querySelectorAll('.nav-icon');
+        icons.forEach(icon => {
+            if (icon.id !== 'btn-map' && icon.id !== 'btn-sleep') {
+                icon.style.display = 'none';
+            }
+        });
+        return; // Skip standard visibility logic
+    }
+
     const timerRoute = document.getElementById('main-view-timer-route');
     const timerTotal = document.getElementById('main-view-timer-total');
     if (timerRoute && timerTotal) {

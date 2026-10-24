@@ -2021,7 +2021,9 @@ async function init() {
 
                     startGame();
 
-                    if (state.isZzZMode) {
+                    if (state.stats.isZzZMode) {
+                        window.showZzZResumeModal();
+                    } else if (state.isZzZMode) {
                         const resumeHtml = `
     <div class="content-panel" style="display: flex; flex-direction: column; gap: 15px; width: 100%; text-align: center;">
         <p style="color: white; margin: 0;">Do you want to collect the farm while Sleeping?</p>
@@ -2035,6 +2037,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
 
                         document.getElementById('btn-zzz-resume-no').onclick = () => {
                             state.isZzZMode = false;
+                            state.stats.isZzZMode = false;
                             state.zzzTimestamp = null;
                             storage.save(state);
                             if(window.windowManager) window.windowManager.closeDynamicWindow('window-zzz-resume');
@@ -2071,6 +2074,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
                             trackDailyChallenge('sleep_minutes', { amount: Math.floor(actualTimeConsumedMs / 60000) });
 
                             state.isZzZMode = false;
+                            state.stats.isZzZMode = false;
                             state.zzzTimestamp = null;
                             storage.save(state);
 
@@ -2386,12 +2390,25 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
             };
 
             document.getElementById('btn-zzz-yes').onclick = () => {
-                state.isZzZMode = true;
+                state.stats.isZzZMode = true;
                 state.zzzTimestamp = Date.now();
                 state.settings.isSleepModeActive = true;
                 state.stats.lastSaveTime = Date.now();
+
+                // Set region name in zzz state if cross-region support needs it
+                state.stats.zzzRegion = state.currentRegionName || 'Kanto';
+
+                if (window.windowManager) {
+                    window.windowManager.hideAllExcept(['window-main-control']);
+                }
+
+                if (window.updateMainControl) {
+                    window.updateMainControl();
+                }
+
                 storage.save(state);
-                window.close();
+
+                if (window.windowManager) window.windowManager.closeDynamicWindow('window-zzz-confirmation');
             };
 };
 
@@ -2956,3 +2973,95 @@ ${starterButtonsHtml}
     }
 }
 
+
+window.showZzZResumeModal = function() {
+    const resumeHtml = `
+    <div class="content-panel" style="display: flex; flex-direction: column; gap: 15px; width: 100%; text-align: center;">
+        <p style="color: white; margin: 0;">Do you want to wake up and collect your farm?</p>
+        <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px;">
+            <button id="btn-zzz-resume-yes" style="padding: 10px; font-size: 16px; font-weight: bold; cursor: pointer; background-color: #4CAF50; color: white; border: none; border-radius: 5px; flex: 1;">Yes</button>
+            <button id="btn-zzz-resume-no" style="padding: 10px; font-size: 16px; font-weight: bold; cursor: pointer; background-color: #f44336; color: white; border: none; border-radius: 5px; flex: 1;">No</button>
+        </div>
+    </div>
+`;
+    showModal("Wake Up", resumeHtml, "window-zzz-resume", "400px");
+
+    document.getElementById('btn-zzz-resume-no').onclick = () => {
+        state.stats.isZzZMode = false;
+        state.zzzTimestamp = null;
+        if(window.windowManager) {
+            window.windowManager.closeDynamicWindow('window-zzz-resume');
+        }
+        window.updateMainControl();
+        storage.save(state);
+    };
+
+    document.getElementById('btn-zzz-resume-yes').onclick = () => {
+        if(window.windowManager) window.windowManager.closeDynamicWindow('window-zzz-resume');
+
+        let timeElapsedMs = Date.now() - (state.zzzTimestamp || Date.now());
+        timeElapsedMs = Math.max(0, timeElapsedMs);
+
+        let availableGrains = state.stats.jigglypuffGrains || 0;
+        let maxTimeMs = availableGrains * 60000;
+
+        if (timeElapsedMs > maxTimeMs) {
+            timeElapsedMs = maxTimeMs;
+        }
+
+        const results = globals.battleSystem.runFastForward(timeElapsedMs);
+
+        let displayTimeMs = results.simulatedTimeMs !== undefined ? results.simulatedTimeMs : timeElapsedMs;
+        let actualTimeConsumedMs = Math.min(displayTimeMs, maxTimeMs);
+        let consumedGrains = Math.ceil(actualTimeConsumedMs / 60000);
+
+        state.stats.jigglypuffGrains = Math.max(0, availableGrains - consumedGrains);
+        state.stats.jigglypuffGrainsUsed = (state.stats.jigglypuffGrainsUsed || 0) + consumedGrains;
+
+        trackDailyChallenge('sleep_minutes', { amount: Math.floor(actualTimeConsumedMs / 60000) });
+
+        state.stats.isZzZMode = false;
+        state.zzzTimestamp = null;
+
+        window.updateMainControl();
+        storage.save(state);
+
+        let resultsHtml = `
+        <div class="content-panel" style="display: flex; flex-direction: column; gap: 15px; width: 100%; text-align: center;">
+            <h3 style="margin-top: 0; color: #fbbf24;">Welcome Back!</h3>
+            <p style="color: #94a3b8; font-size: 14px;">Time Slept: ${Math.floor(actualTimeConsumedMs / 60000)} minutes</p>
+            <p style="color: #94a3b8; font-size: 14px;">Jigglypuff Dust Consumed: ${consumedGrains} grains</p>
+        `;
+
+        if (results.fainted) {
+            resultsHtml += `<p style="color: #ef4444; font-weight: bold;">Your party fainted during the dream!</p>`;
+        } else if (results.outOfMoney) {
+            resultsHtml += `<p style="color: #fb923c; font-weight: bold;">You ran out of money for PokeBalls!</p>`;
+        }
+
+        resultsHtml += `
+            <div style="display: flex; flex-direction: column; gap: 8px; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 5px; text-align: left;">
+                <div style="color: #4ade80;">Battles Won: ${results.battlesWon}</div>
+                <div style="color: #3b82f6;">EXP Gained: ${results.expGained.toLocaleString()}</div>
+                <div style="color: #fbbf24;">Money Gained: $${results.moneyGained.toLocaleString()}</div>
+                <div style="color: #a78bfa;">Pokemon Caught: ${results.pokemonCaught}</div>
+            </div>
+            <button id="btn-zzz-results-close-dynamic" style="padding: 12px; font-size: 16px; font-weight: bold; cursor: pointer; background: linear-gradient(to right, #10b981, #059669); color: white; border: 1px solid #34d399; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); margin-top: 15px; width: 100%; text-transform: uppercase; letter-spacing: 1px;">Claim Rewards</button>
+        </div>
+        `;
+
+        showModal("ZzZ Mode Complete", resultsHtml, "window-zzz-rewards");
+
+        document.getElementById('btn-zzz-results-close-dynamic').onclick = () => {
+            if(window.windowManager) window.windowManager.closeDynamicWindow('window-zzz-rewards');
+        };
+
+        if (results.fainted) {
+            state.currentRoute = "PokeCenter & PokeMarket";
+            window.navigateToLocation("PokeCenter & PokeMarket");
+        } else if (results.outOfMoney) {
+            state.currentRoute = "PokeCenter & PokeMarket";
+            window.navigateToLocation("PokeCenter & PokeMarket");
+        }
+    };
+};

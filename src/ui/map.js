@@ -263,6 +263,34 @@ function getUnlockedAreas() {
 
 function generateMarkersForRegion(region, unlockedAreas) {
     let html = '';
+
+    // Check if the current target region is in ZzZ Mode
+    let isTargetRegionZzZ = false;
+    let targetStats = state.stats;
+    if (state.currentRegionName !== region) {
+        if (state.regions && state.regions[region]) {
+            targetStats = state.regions[region].stats;
+        }
+    }
+    if (targetStats && targetStats.isZzZMode) {
+        isTargetRegionZzZ = true;
+    }
+
+    if (isTargetRegionZzZ) {
+        html += `<img src="Assets/Pokemon Sprites/Natural/Gen1/0039_Jigglypuff.png" title="Click here to wake up!" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 300px; z-index: 1000; cursor: pointer; filter: drop-shadow(0 0 10px white); animation: pulseZzZ 2s infinite;" onclick="
+            window.swapRegion('${region}');
+            window.showZzZResumeModal();
+        ">`;
+        html += `<style>
+            @keyframes pulseZzZ {
+                0% { transform: translate(-50%, -50%) scale(1); filter: drop-shadow(0 0 10px white); }
+                50% { transform: translate(-50%, -50%) scale(1.1); filter: drop-shadow(0 0 20px #fbcfe8); }
+                100% { transform: translate(-50%, -50%) scale(1); filter: drop-shadow(0 0 10px white); }
+            }
+        </style>`;
+        return html;
+    }
+
     if (region === 'Kanto') {
         for (const [locationId, locationData] of Object.entries(state.config.mapCoordinates)) {
             const locationName = locationData.name;
