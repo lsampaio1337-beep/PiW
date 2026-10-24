@@ -746,12 +746,6 @@ export function navigateToLocation(locationName) {
             battleSystem.stop();
         }
 
-        let buttonHtml = '';
-        if (gymConfig) {
-            let buttonText = lookupName.includes("Pokemon League") ? "Challenge" : "Battle Gym";
-            buttonHtml = `<button onclick="window.startGymBattle('${lookupName}')" class="action-btn action-btn-primary" style="margin-top: 10px;">${buttonText}</button>`;
-        }
-
         let dynamicBgHtml = '';
         if (gymConfig && state.config.gymAssets && state.config.gymAssets[gymConfig.leader]) {
             const assetConfig = state.config.gymAssets[gymConfig.leader];
@@ -779,12 +773,27 @@ export function navigateToLocation(locationName) {
         vGym.innerHTML = `
             ${dynamicBgHtml}
             <div style="background-color: rgba(0,0,0,0.8); display: flex; flex-direction: column; align-items: center; padding: 20px; border-radius: 8px; position: absolute; left: 15%; top: 50%; transform: translateY(-50%); min-width: 300px; z-index: 1;">
-                <h2 id="gym-title-header" style="margin-top: 0; color: white;">${locationName}</h2>
+                <h2 id="gym-title-header" style="margin-top: 0; color: white;"></h2>
                 <div id="gym-content-area" style="position: relative; width: 100%; text-align: center; display: flex; flex-direction: column; gap: 10px; align-items: center; z-index: 2;">
-                    ${buttonHtml}
                 </div>
             </div>
         `;
+
+        const headerEl = vGym.querySelector('#gym-title-header');
+        if (headerEl) {
+            headerEl.textContent = locationName;
+        }
+
+        const contentArea = vGym.querySelector('#gym-content-area');
+        if (gymConfig && contentArea) {
+            let buttonText = lookupName.includes("Pokemon League") ? "Challenge" : "Battle Gym";
+            const btn = document.createElement('button');
+            btn.className = "action-btn action-btn-primary";
+            btn.style.marginTop = "10px";
+            btn.textContent = buttonText;
+            btn.onclick = () => { window.startGymBattle(lookupName); };
+            contentArea.appendChild(btn);
+        }
 
         vGym.style.position = "relative";
         vGym.style.height = "100%";
