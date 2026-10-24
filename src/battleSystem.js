@@ -1477,9 +1477,9 @@ class BattleSystem {
                         let speciesRarityKey = trackingName + "_" + qName;
                         this.state.stats.challengeCaughtSpecific[speciesRarityKey] = (this.state.stats.challengeCaughtSpecific[speciesRarityKey] || 0) + 1;
 
-                        // Track purely by rarity (ignoring type/species)
-                        let rarityOnlyKey = "Any_" + qName;
-                        this.state.stats.challengeCaughtSpecific[rarityOnlyKey] = (this.state.stats.challengeCaughtSpecific[rarityOnlyKey] || 0) + 1;
+                        // Track purely by quality (ignoring type/species)
+                        let qualityOnlyKey = "Any_" + qName;
+                        this.state.stats.challengeCaughtSpecific[qualityOnlyKey] = (this.state.stats.challengeCaughtSpecific[qualityOnlyKey] || 0) + 1;
                     }
                 };
 

@@ -233,34 +233,29 @@ window.completeChallenge = function(targetAreaId) {
                  }
              }
         }
-        if (unlock.requirements.catchByRarity) {
+        if (unlock.requirements.catchByQuality) {
             if (state.stats.challengeCaughtSpecific) {
-                let rarities = ["Weak", "Regular", "Uncommon", "Rare", "Epic", "Shiny", "Legendary", "Mythical"];
-                let targetRarities = [unlock.requirements.catchByRarity.rarity];
-                if (unlock.requirements.catchByRarity.rarity.endsWith('+')) {
-                    let baseRarity = unlock.requirements.catchByRarity.rarity.slice(0, -1);
-                    let idx = rarities.indexOf(baseRarity);
+                let qualities = ["Weak", "Regular", "Uncommon", "Rare", "Epic", "Shiny", "Legendary", "Mythical"];
+                let targetQualities = [unlock.requirements.catchByQuality.quality];
+                if (unlock.requirements.catchByQuality.quality.endsWith('+')) {
+                    let baseQuality = unlock.requirements.catchByQuality.quality.slice(0, -1);
+                    let idx = qualities.indexOf(baseQuality);
                     if (idx !== -1) {
-                        targetRarities = rarities.slice(idx);
+                        targetQualities = qualities.slice(idx);
                     }
                 }
-                for (let r of targetRarities) {
+                for (let r of targetQualities) {
                     delete state.stats.challengeCaughtSpecific["Any_" + r];
                 }
             }
-        }
-        if (unlock.requirements.catchSpeciesByRarity) {
-             for (let s of unlock.requirements.catchSpeciesByRarity) {
-                 if (state.stats.challengeCaughtSpecific) delete state.stats.challengeCaughtSpecific[s.species + "_" + s.rarity];
-             }
         }
         if (unlock.requirements.catchSpeciesByQuality) {
              for (let s of unlock.requirements.catchSpeciesByQuality) {
                  if (state.stats.challengeCaughtSpecific) delete state.stats.challengeCaughtSpecific[s.species + "_" + s.quality];
              }
         }
-        if (unlock.requirements.catchByRarityAndType) {
-             if (state.stats.challengeCaughtSpecific) delete state.stats.challengeCaughtSpecific[unlock.requirements.catchByRarityAndType.type + "_" + unlock.requirements.catchByRarityAndType.rarity];
+        if (unlock.requirements.catchByQualityAndType) {
+             if (state.stats.challengeCaughtSpecific) delete state.stats.challengeCaughtSpecific[unlock.requirements.catchByQualityAndType.type + "_" + unlock.requirements.catchByQualityAndType.quality];
         }
         if (unlock.requirements.catchByType) {
              if (state.stats.challengeCaughtSpecific) delete state.stats.challengeCaughtSpecific[unlock.requirements.catchByType.type + "_Any"];
@@ -354,14 +349,6 @@ window.cheatProgressChallenge = function(targetAreaId) {
                 state.stats.caughtSpecies[r.species] = (state.stats.caughtSpecies[r.species] || 0) + r.count;
             });
         }
-        if (req.catchSpeciesByRarity) {
-            if (!state.stats.challengeCaughtSpecific) state.stats.challengeCaughtSpecific = {};
-            req.catchSpeciesByRarity.forEach(r => {
-                let key = r.species + "_" + r.rarity;
-                if (key === '__proto__' || key === 'constructor' || key === 'prototype') return;
-                state.stats.challengeCaughtSpecific[key] = (state.stats.challengeCaughtSpecific[key] || 0) + r.count;
-            });
-        }
         if (req.catchSpeciesByQuality) {
             if (!state.stats.challengeCaughtSpecific) state.stats.challengeCaughtSpecific = {};
             req.catchSpeciesByQuality.forEach(r => {
@@ -370,11 +357,11 @@ window.cheatProgressChallenge = function(targetAreaId) {
                 state.stats.challengeCaughtSpecific[key] = (state.stats.challengeCaughtSpecific[key] || 0) + r.count;
             });
         }
-        if (req.catchSpeciesAnyOfByRarity) {
+        if (req.catchSpeciesAnyOfByQuality) {
             if (!state.stats.challengeCaughtSpecific) state.stats.challengeCaughtSpecific = {};
-            req.catchSpeciesAnyOfByRarity.forEach(r => {
+            req.catchSpeciesAnyOfByQuality.forEach(r => {
                 // Cheat by catching the first one in the list
-                let key = r.species[0] + "_" + r.rarity;
+                let key = r.species[0] + "_" + r.quality;
                 if (key === '__proto__' || key === 'constructor' || key === 'prototype') return;
                 state.stats.challengeCaughtSpecific[key] = (state.stats.challengeCaughtSpecific[key] || 0) + r.count;
             });
@@ -399,18 +386,18 @@ window.cheatProgressChallenge = function(targetAreaId) {
                 });
             }
         }
-        if (req.catchByRarity) {
-             let baseRarity = req.catchByRarity.rarity.replace('+', '');
-             let key = "Any_" + baseRarity;
+        if (req.catchByQuality) {
+             let baseQuality = req.catchByQuality.quality.replace('+', '');
+             let key = "Any_" + baseQuality;
              if (key === '__proto__' || key === 'constructor' || key === 'prototype') return;
              if (!state.stats.challengeCaughtSpecific) state.stats.challengeCaughtSpecific = {};
-             state.stats.challengeCaughtSpecific[key] = (state.stats.challengeCaughtSpecific[key] || 0) + req.catchByRarity.count;
+             state.stats.challengeCaughtSpecific[key] = (state.stats.challengeCaughtSpecific[key] || 0) + req.catchByQuality.count;
         }
-        if (req.catchByRarityAndType) {
-             let key = req.catchByRarityAndType.type + "_" + req.catchByRarityAndType.rarity;
+        if (req.catchByQualityAndType) {
+             let key = req.catchByQualityAndType.type + "_" + req.catchByQualityAndType.quality;
              if (key === '__proto__' || key === 'constructor' || key === 'prototype') return;
              if (!state.stats.challengeCaughtSpecific) state.stats.challengeCaughtSpecific = {};
-             state.stats.challengeCaughtSpecific[key] = (state.stats.challengeCaughtSpecific[key] || 0) + req.catchByRarityAndType.count;
+             state.stats.challengeCaughtSpecific[key] = (state.stats.challengeCaughtSpecific[key] || 0) + req.catchByQualityAndType.count;
         }
         if (req.catchByType) {
             let typeKey = req.catchByType.type + "_Any";

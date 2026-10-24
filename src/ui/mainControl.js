@@ -39,12 +39,12 @@ export function getChallengeData(unlock) {
         }
     }
 
-    if (req.catchSpeciesByRarity) {
-        for (let spec of req.catchSpeciesByRarity) {
-            let caughtKey = spec.species + "_" + spec.rarity;
+    if (req.catchSpeciesByQuality) {
+        for (let spec of req.catchSpeciesByQuality) {
+            let caughtKey = spec.species + "_" + spec.quality;
             let caughtCount = state.stats.challengeCaughtSpecific ? (state.stats.challengeCaughtSpecific[caughtKey] || 0) : 0;
             if (caughtCount < spec.count) isMet = false;
-            textParts.push(`Catch ${spec.count} ${spec.rarity} ${formatSpecies(spec.species)} ${countDisplay(caughtCount, spec.count)}${getStatusHtml(caughtCount >= spec.count)}`);
+            textParts.push(`Catch ${spec.count} ${spec.quality} ${formatSpecies(spec.species)} ${countDisplay(caughtCount, spec.count)}${getStatusHtml(caughtCount >= spec.count)}`);
         }
     }
 
@@ -69,16 +69,16 @@ export function getChallengeData(unlock) {
          }
     }
 
-    if (req.catchSpeciesAnyOfByRarity) {
-         for (let specGroup of req.catchSpeciesAnyOfByRarity) {
+    if (req.catchSpeciesAnyOfByQuality) {
+         for (let specGroup of req.catchSpeciesAnyOfByQuality) {
              let caughtCount = 0;
              for (let s of specGroup.species) {
-                 let caughtKey = s + "_" + specGroup.rarity;
+                 let caughtKey = s + "_" + specGroup.quality;
                  caughtCount += state.stats.challengeCaughtSpecific ? (state.stats.challengeCaughtSpecific[caughtKey] || 0) : 0;
              }
              if (caughtCount < specGroup.count) isMet = false;
              let speciesList = specGroup.species.map(formatSpecies).join(' or ');
-             textParts.push(`Catch ${specGroup.count} ${specGroup.rarity} ${speciesList} ${countDisplay(caughtCount, specGroup.count)}${getStatusHtml(caughtCount >= specGroup.count)}`);
+             textParts.push(`Catch ${specGroup.count} ${specGroup.quality} ${speciesList} ${countDisplay(caughtCount, specGroup.count)}${getStatusHtml(caughtCount >= specGroup.count)}`);
          }
     }
 
@@ -101,35 +101,35 @@ export function getChallengeData(unlock) {
         }
     }
 
-    if (req.catchByRarity) {
-        let rarities = ["Weak", "Regular", "Uncommon", "Rare", "Epic", "Shiny", "Legendary", "Mythical"];
-        let targetRarities = [req.catchByRarity.rarity];
+    if (req.catchByQuality) {
+        let qualities = ["Weak", "Regular", "Uncommon", "Rare", "Epic", "Shiny", "Legendary", "Mythical"];
+        let targetQualities = [req.catchByQuality.quality];
 
-        let displayRarity = req.catchByRarity.rarity;
-        if (req.catchByRarity.rarity.endsWith('+')) {
-            let baseRarity = req.catchByRarity.rarity.slice(0, -1);
-            let idx = rarities.indexOf(baseRarity);
+        let displayQuality = req.catchByQuality.quality;
+        if (req.catchByQuality.quality.endsWith('+')) {
+            let baseQuality = req.catchByQuality.quality.slice(0, -1);
+            let idx = qualities.indexOf(baseQuality);
             if (idx !== -1) {
-                targetRarities = rarities.slice(idx);
+                targetQualities = qualities.slice(idx);
             }
         }
 
         let caughtCount = 0;
         if (state.stats.challengeCaughtSpecific) {
-            for (let r of targetRarities) {
+            for (let r of targetQualities) {
                 caughtCount += state.stats.challengeCaughtSpecific["Any_" + r] || 0;
             }
         }
 
-        if (caughtCount < req.catchByRarity.count) isMet = false;
-        textParts.push(`Catch ${req.catchByRarity.count} ${displayRarity} Pokémon from ${unlock.areaId} ${countDisplay(caughtCount, req.catchByRarity.count)}${getStatusHtml(caughtCount >= req.catchByRarity.count)}`);
+        if (caughtCount < req.catchByQuality.count) isMet = false;
+        textParts.push(`Catch ${req.catchByQuality.count} ${displayQuality} Pokémon from ${unlock.areaId} ${countDisplay(caughtCount, req.catchByQuality.count)}${getStatusHtml(caughtCount >= req.catchByQuality.count)}`);
     }
 
-    if (req.catchByRarityAndType) {
-        let caughtKey = req.catchByRarityAndType.type + "_" + req.catchByRarityAndType.rarity;
+    if (req.catchByQualityAndType) {
+        let caughtKey = req.catchByQualityAndType.type + "_" + req.catchByQualityAndType.quality;
         let caughtCount = state.stats.challengeCaughtSpecific ? (state.stats.challengeCaughtSpecific[caughtKey] || 0) : 0;
-        if (caughtCount < req.catchByRarityAndType.count) isMet = false;
-        textParts.push(`Catch ${req.catchByRarityAndType.count} ${req.catchByRarityAndType.rarity} ${req.catchByRarityAndType.type}-type ${countDisplay(caughtCount, req.catchByRarityAndType.count)}${getStatusHtml(caughtCount >= req.catchByRarityAndType.count)}`);
+        if (caughtCount < req.catchByQualityAndType.count) isMet = false;
+        textParts.push(`Catch ${req.catchByQualityAndType.count} ${req.catchByQualityAndType.quality} ${req.catchByQualityAndType.type}-type ${countDisplay(caughtCount, req.catchByQualityAndType.count)}${getStatusHtml(caughtCount >= req.catchByQualityAndType.count)}`);
     }
 
     if (req.catchByType) {
