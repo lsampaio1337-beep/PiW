@@ -34,12 +34,6 @@ function safeEncode(obj) {
 }
 
 function safeDecode(str) {
-    if (typeof str !== 'string') {
-        throw new Error('Payload must be a string');
-    }
-    if (str.length > 100000) {
-        throw new Error('Payload too large');
-    }
     try {
         const binString = atob(str.trim());
         const bytes = Uint8Array.from(binString, (m) => m.codePointAt(0));
@@ -61,10 +55,6 @@ function safeDecode(str) {
 
         if (typeof parsed.sdp !== 'string') {
             throw new Error('Invalid or missing sdp');
-        }
-
-        if (!parsed.sdp.startsWith('v=')) {
-            throw new Error('SDP must start with v=');
         }
 
         return {
