@@ -135,3 +135,63 @@ describe('Storage.processCheat', () => {
         expect(consoleSpy).not.toHaveBeenCalled();
     });
 });
+
+    describe('Storage.getProfileData', () => {
+        let storage;
+        let warnSpy;
+
+        beforeEach(() => {
+            storage = new Storage();
+            warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+        });
+
+        afterEach(() => {
+            warnSpy.mockRestore();
+        });
+
+        test('should return parsed data when valid JSON is retrieved', () => {
+            const profileData = { name: 'Player1', level: 10 };
+            window.localStorage.getItem.mockReturnValueOnce(JSON.stringify(profileData));
+
+            const result = storage.getProfileData('test_profile');
+            expect(window.localStorage.getItem).toHaveBeenCalledWith('test_profile');
+            expect(result).toEqual(profileData);
+            expect(warnSpy).not.toHaveBeenCalled();
+        });
+
+        test('should return null when localStorage returns null', () => {
+            window.localStorage.getItem.mockReturnValueOnce(null);
+
+            const result = storage.getProfileData('empty_profile');
+            expect(window.localStorage.getItem).toHaveBeenCalledWith('empty_profile');
+            expect(result).toBeNull();
+            expect(warnSpy).not.toHaveBeenCalled();
+        });
+
+        test('should return null and log warning when JSON is malformed', () => {
+            window.localStorage.getItem.mockReturnValueOnce('{invalid_json}');
+
+            const result = storage.getProfileData('bad_json_profile');
+            expect(window.localStorage.getItem).toHaveBeenCalledWith('bad_json_profile');
+            expect(result).toBeNull();
+            expect(warnSpy).toHaveBeenCalledWith(
+                'Failed to parse profile data for bad_json_profile:',
+                expect.any(SyntaxError)
+            );
+        });
+
+        test('should return null and log warning when localStorage.getItem throws an error', () => {
+            const mockError = new Error('Access Denied');
+            window.localStorage.getItem.mockImplementationOnce(() => {
+                throw mockError;
+            });
+
+            const result = storage.getProfileData('error_profile');
+            expect(window.localStorage.getItem).toHaveBeenCalledWith('error_profile');
+            expect(result).toBeNull();
+            expect(warnSpy).toHaveBeenCalledWith(
+                'Failed to parse profile data for error_profile:',
+                mockError
+            );
+        });
+    });
