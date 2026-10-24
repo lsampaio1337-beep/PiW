@@ -26,3 +26,11 @@
   - **Extra Challenge D:** This remains the exact Secret Ruins / Diancie progression.
   - **Extra Challenge E:** This handles the exact Team Flare Secret HQ progression requested originally in C.
 - **Final Challenge:** The `Defeat Kalos Champion` reward was explicitly coded to unlock the 1st step of the three major legendary chains: `Path to Sea Spirit Den (C)`, `Path to Secret Ruins (D)`, and `Path to Team Flare Secret HQ (E)`.
+
+## 3. Strict Challenge Criteria Reformatting (Sheet 2)
+All human-readable instructions in the `Requisite` column of Sheet 2 have been strictly converted to the requested game-engine format keywords:
+- Replaced Gym Leader encounters with the explicit `earnBadge` criteria (e.g., `earnBadge: { badge: 'Bug Badge', leader: 'Viola' }`).
+- Replaced standard route grinding with the explicitly mapped `defeatCountRoute` criteria (e.g., `defeatCountRoute: { route: 'Route 2', count: 25 }`). The counts scale dynamically based on the challenge tier (up to 300).
+- Replaced route capture varieties with the explicit `catchSpeciesAnyOf` criteria.
+- Replaced Legendary/Mythical Final Chain captures with `catchSpeciesByQuality` (e.g., `catchSpeciesByQuality: { species: ['Articuno', 'Zapdos', 'Moltres'], quality: 'Legendary', count: 1 }`).
+- Replaced Starter Depot captures with exact `catchSpecies` criteria arrays mapping directly to the 6 starter Pokemon.

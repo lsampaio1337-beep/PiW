@@ -19,3 +19,6 @@ build_sheet2.js\nnew_sheet2.json\n
 build_sheet3.js\nnew_sheet3.json\n
 fix_kalos.js\n
 fix_kalos.js\n
+parse_challenges.js\ncurrent_challenges.json\n
+fix_challenges.js\nnew_challenges.json\n
+apply_challenges.js\n
