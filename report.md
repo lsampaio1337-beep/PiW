@@ -1,23 +1,18 @@
 # Paldea Paths & Challenges Update Report
 
-## 1. 1-Pokémon Route Merges
-- Checked for 1-Pokémon Routes. The only 1-length routes were Boss/Town areas (which have no wild Pokémon) and were kept intact.
-- No 1-Pokémon routes were successfully merged (either none existed or no valid target).
+## 1. Challenge Renaming & Alignment
+- **Pre-League Extra Chains (A to G)**:
+  - Separated the optional geographical areas into exactly 7 distinct chains.
+  - Aligned them to Gym milestones: Extra Challenge A unlocks after beating Cortondo Gym, B unlocks after Artazon Gym, etc., up through Gym 7.
+  - Guaranteed each chain has exactly 3 to 5 granular challenges.
 
-## 2. Ultra Rare / Legendary Relocations
-- Removed **Wo-Chien** from `South Province (Area One) - Main`
-- Removed **Roaring Moon** from `The Great Crater of Paldea - Deepest Level - Cave`
-- Removed **Iron Valiant** from `The Great Crater of Paldea - Deepest Level - Cave`
-- Removed **Koraidon** from `The Great Crater of Paldea - Deepest Level - Rocky`
-- Removed **Miraidon** from `The Great Crater of Paldea - Deepest Level - Rocky`
-- Removed **Roaring Moon** from `The Great Crater of Paldea - Hidden Cave`
-- Removed **Iron Valiant** from `The Great Crater of Paldea - Hidden Cave`
+## 2. Post-League Boss Chains (H, I, J, K)
+- **Extra Challenge H (Loyal Plaza)**: Unlocks after Pokemon League. Concludes at `H 4`, which exclusively contains the DLC Legendaries: Okidogi, Munkidori, Fezandipiti, and Pecharunt.
+- **Extra Challenge I (Ruins)**: Unlocks after Pokemon League. Concludes at `I 4`, containing the Treasures of Ruin: Wo-Chien, Chien-Pao, Ting-Lu, and Chi-Yu.
+- **Extra Challenge J (Titan's Gathering)**: Unlocks after Pokemon League. Concludes at `J 3` as an ultimate Titan boss rush.
+- **Extra Challenge K (Team Star Crew)**: Unlocks after Pokemon League. Concludes at `K 3` representing a full Team Star gauntlet.
 
-**New Final Locations (Post-League):**
-- **The Great Crater (Hidden Cave)**: Koraidon, Miraidon, Roaring Moon, Iron Valiant
-- **Treasures of Ruin (Shrines)**: Wo-Chien, Chien-Pao, Ting-Lu, Chi-Yu
-
-## 3. Challenge Reward Formatting & Chains
-- Formatted all Challenge Rewards to strictly state `Unlocks {Next Spot}`.
-- Pre-League Chains: Main Progression, Titans (Extra 1), Team Star (Extra 2), Geographic (Extra 3-7).
-- Post-League Chains: The Great Crater (Extra 8), Treasures of Ruin (Extra 9).
+## 3. The Final Extra Challenge
+- Added a conclusive "Final Extra Challenge" sequence that requires the player to complete H4, I4, J3, and K3.
+- The absolute final spot in this chain (`Zero Gate`) exclusively houses Koraidon, Miraidon, and Terapagos.
+- All challenge requirements map strictly to `Unlocks {Next Spot}` format.
