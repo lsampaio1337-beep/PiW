@@ -1,33 +1,33 @@
 # Alola Routes and Challenges - Changes Report
 
-## 1. Routes & Special Locations
-All rare, legendary, and mythical Pokémon have been explicitly grouped into dedicated special end-point locations according to your instructions:
-* **Sacred Shrine**: Tapu Koko, Tapu Lele, Tapu Bulu, Tapu Fini.
-* **Obsidian Sphere**: Cosmog, Cosmoem (via evolution from Cosmog), Solgaleo, Lunala, Necrozma.
-* **The Interdimensional Rift**: All Ultra Beasts (Nihilego, Buzzwole, Pheromosa, Xurkitree, Celesteela, Kartana, Guzzlord, Poipole, Stakataka, Blacephalon).
-* **Aether Paradise Secret Lab**: Type: Null, Ditto, Porygon.
-* **Shopping Mall Antiquities**: Magearna (Event).
-* **Ten Carat Hill Deepest Cave**: Marshadow (Event).
-* **Aether Paradise Restricted Area**: Zeraora (Event).
+## 1. Special Encounters & Relocations
+* **Ditto Relocation**: Order #13 (previously solely Ditto) was removed. Ditto has been logically relocated to Route 10 Main Area to ensure it is not isolated.
+* **Amaura Insertion**: Amaura was inserted into Route 8 Fossil Restoration Center.
+* **Special Mythical / Legendary Locations Setup**:
+    * **Sacred Shrine**: Contains Tapu Koko, Tapu Lele, Tapu Bulu, and Tapu Fini.
+    * **Obsidian Sphere**: Contains Cosmog, Cosmoem, Solgaleo, Lunala, and Necrozma.
+    * **The Interdimensional Rift**: Contains exclusively the 10 Ultra Beasts (Nihilego, Buzzwole, Pheromosa, Xurkitree, Celesteela, Kartana, Guzzlord, Poipole, Stakataka, Blacephalon).
+    * **The Zenith Anomaly**: A newly created final location for the Trio (Magearna, Marshadow, Zeraora).
 
-## 2. Route Merges (Solitary Encounters)
-To ensure no route has only 1 or 2 Pokémon, a consolidation script was executed. Any standard route that originally contained fewer than 3 Pokémon was dynamically merged into the preceding valid route area. This maintains an engaging diversity per node without isolating sparse encounters. (Exception: Boss nodes and the special locations listed above, which intentionally have targeted encounters).
+## 2. Route Constraints Enforcement
+* Standard routes with fewer than 3 Pokémon were dynamically merged into adjacent nodes to maintain encounter density.
+* Large routes (>9 Pokémon) were automatically split (e.g., The Interdimensional Rift Part 1 and Part 2) with a 50/50 division to prevent any subsequent part from having only 1 Pokémon leftover.
 
-## 3. Challenges Restructuring
-The Challenges have been rewritten to strictly state "Unlocks [Spot]" in the Rewards column.
-Furthermore, the **6 Extra Quest Chains** were explicitly delineated:
+## 3. Extra Challenge Chains Reorganization
+Exactly 6 Extra Challenge Chains were established to strictly mirror geographic proximity and progression logic:
 
-### Pre-League Extra Quests:
-* **Extra Challenge $1:** Aether Foundation Exploration (Unlocks Aether Paradise Secret Lab).
-* **Extra Challenge $2:** Sacred Shrine Investigation (Unlocks Sacred Shrine to capture Tapus).
-* **Extra Challenge $3:** The Obsidian Phenomenon (Unlocks Obsidian Sphere to capture Cosmog/Solgaleo/Lunala/Necrozma).
-* **Extra Challenge $4:** The Deep Caverns (Unlocks Ten Carat Hill Deepest Cave for Marshadow).
+### Pre-League (4 Chains):
+* **Extra Challenge 1 (Starter Depot)**: 5 total challenges starting after Defeating Captain Lana. Leads through Route 6 -> Royal Avenue -> Pikachu Valley -> Heahea Surf Spot -> **Starter Depot** (Contains all 3 base Alolan starters and their 2nd stage evolutions).
+* **Extra Challenge 2 (Obsidian Sphere)**: 4 total challenges starting after Defeating Captain Sophocles. Leads through Blush Mountain -> Ula'ula Meadow -> Lake of the Sunne -> **Obsidian Sphere** (Cosmog, etc).
+* **Extra Challenge 3 (Sacred Shrine)**: 3 total challenges starting after Defeating Kahuna Hala. Leads through Route 3 -> Memorial Hill -> **Sacred Shrine** (Tapus).
+* **Extra Challenge 4 (Aether Paradise)**: 3 total challenges starting after Defeating Kahuna Nanu. Leads through Route 15 -> Aether Paradise Labs -> **Aether Paradise Secret Lab** (Type: Null, Porygon, Silvally).
 
-### Post-League Extra Quests (Endgame):
-* **Extra Challenge $5:** Ultra Space Anomalies (Progresses through Poni routes, ending at **The Interdimensional Rift** for all Ultra Beasts).
-* **Extra Challenge $6:** The Final Mythicals (Progresses through Poni routes/Melemele, ending in **Shopping Mall Antiquities** for Magearna and **Aether Paradise Restricted Area** for Zeraora).
+### Post-League (2 Chains):
+* **Extra Challenge 5 (The Interdimensional Rift)**: Starts immediately after Defeating Champion Hau. Leads through Poni Grove -> Poni Plains -> Resolution Cave -> **The Interdimensional Rift**.
+* **Extra Challenge 6 (The Zenith Anomaly)**: **Strictly unlocks only after The Interdimensional Rift is completed**, fulfilling the request to gate the Trio behind the Ultra Beasts. Leads through Poni Coast -> **The Zenith Anomaly**.
 
-These post-league quests strictly terminate in nodes that contain the ultra-rare/mythical Pokémon, serving as ultimate endgame rewards.
+## 4. Challenge Verification
+Every single node explicitly writes "Unlocks [Spot]" to clearly show the progression map.
 
-## 4. Missing Pokémon Sheet
-The 3rd sheet accurately reflects all previously missing Generation 7 Pokémon and their designated insertion points (whether added to standard routes or specifically mapped to the new special locations). It includes evolution notes where applicable.
+## 5. Missing Pokémon List
+Sheet 3 was successfully reconstructed. It highlights all explicitly placed Generation 7 Pokémon and their designated path assignments, keeping tracking transparent.
