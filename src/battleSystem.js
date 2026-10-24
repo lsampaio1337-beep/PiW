@@ -1938,7 +1938,7 @@ class BattleSystem {
                     fainted.currentHp = Math.min(fainted.currentHp, fainted.maxHp);
 
                     // Moves
-                    fainted.moves = this.getLearnsetMoves(newBase, fainted.level).slice(-4);
+                    fainted.moves = this.getLearnsetMoves(newBase, fainted.level);
                 }
             }
             this.state.party.push(fainted);
@@ -2521,7 +2521,7 @@ class BattleSystem {
                         fainted.currentStats.spe = Math.floor((((2 * newBase.spe + fainted.ivs.spe) * fainted.level / 100) + 5) * fainted.quality);
                         fainted.currentHp = Math.min(fainted.currentHp, fainted.maxHp);
 
-                        fainted.moves = this.getLearnsetMoves(newBase, fainted.level).slice(-4);
+                        fainted.moves = this.getLearnsetMoves(newBase, fainted.level);
                     }
                 }
 
