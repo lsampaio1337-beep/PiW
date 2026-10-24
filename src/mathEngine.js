@@ -7,9 +7,7 @@ function calculateHP(baseHp, ivHp, level, quality, vitamins = 0) {
 }
 
 function calculateStat(baseStat, ivStat, level, quality, vitamins = 0) {
-    // Stat = floor(((2 * BaseStat + IV_Stat) * Level / 100 + 5) * Q)
-    const baseFinal = Math.floor((((2 * baseStat + ivStat) * level / 100) + 5) * quality);
-    return baseFinal + Math.floor(baseFinal * (vitamins / 100));
+    return Math.floor((Math.floor(((2 * baseStat + ivStat + Math.floor(vitamins / 4)) * level) / 100) + 5) * quality);
 }
 
 function calculateReqXP(level) {
