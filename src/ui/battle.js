@@ -873,6 +873,17 @@ function scheduleDefeatCallbacks(ball, ballResult, shakeInterval, captureCallbac
 
 
 
+
+function escapeHTML(str) {
+    if (str === null || str === undefined) return '';
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+}
+
 export function showDamage(target, amount, isCrit, moveName = '', moveType = 'Normal', effectiveness = 1) {
     const glassTier = state.stats?.upgrades?.glassTier || 0;
     if (glassTier < 2) return;
@@ -890,7 +901,13 @@ export function showDamage(target, amount, isCrit, moveName = '', moveType = 'No
             entry.style.marginBottom = '2px';
             const attacker = target === 'player' ? 'Enemy' : 'You';
             const typeColor = TYPE_COLORS[moveType] || '#ffffff';
-            entry.innerHTML = `${attacker} used <b style="color:${typeColor}">${moveName}</b> for <span style="color:${typeColor}">${amount}</span> dmg!`;
+            const safeMoveName = escapeHTML(moveName);
+            const safeAmount = escapeHTML(amount);
+            const htmlContent = `${attacker} used <b style="color:${typeColor}">${safeMoveName}</b> for <span style="color:${typeColor}">${safeAmount}</span> dmg!`;
+            const doc = new DOMParser().parseFromString(htmlContent, 'text/html');
+            while (doc.body.firstChild) {
+                entry.appendChild(doc.body.firstChild);
+            }
             log.appendChild(entry);
 
             // Keep only last 4 entries
@@ -908,10 +925,20 @@ export function showDamage(target, amount, isCrit, moveName = '', moveType = 'No
     const typeColor = TYPE_COLORS[moveType] || '#ffffff';
     let critText = isCrit ? ' Crit(1.5x)' : '';
     let effText = `${effectiveness}x`;
-    let typeIconHtml = `<img src="Assets/Extra/Types/Type ${moveType}.png" style="width: 20px; height: 20px; vertical-align: middle; margin: 0 4px;" />`;
+    const safeMoveType = escapeHTML(moveType);
+    let typeIconHtml = `<img src="Assets/Extra/Types/Type ${safeMoveType}.png" style="width: 20px; height: 20px; vertical-align: middle; margin: 0 4px;" />`;
 
     // Layout: [Amount] [Icon] [Name] [Effectiveness] [Crit]
-    dmgNode.innerHTML = `<span style="font-weight: bold; font-style: ${isCrit ? 'italic' : 'normal'}; display: flex; align-items: center; justify-content: center; text-shadow: 1px 1px 2px black;">${amount} ${typeIconHtml} ${moveName} ${effText}${critText}</span>`;
+    const safeAmount = escapeHTML(amount);
+    const safeMoveName = escapeHTML(moveName);
+    const safeEffText = escapeHTML(effText);
+    const safeCritText = escapeHTML(critText);
+    const htmlContent2 = `<span style="font-weight: bold; font-style: ${isCrit ? 'italic' : 'normal'}; display: flex; align-items: center; justify-content: center; text-shadow: 1px 1px 2px black;">${safeAmount} ${typeIconHtml} ${safeMoveName} ${safeEffText}${safeCritText}</span>`;
+
+    const doc2 = new DOMParser().parseFromString(htmlContent2, 'text/html');
+    while (doc2.body.firstChild) {
+        dmgNode.appendChild(doc2.body.firstChild);
+    }
 
 
     dmgNode.classList.add('floating-damage');
