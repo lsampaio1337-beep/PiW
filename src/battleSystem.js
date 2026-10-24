@@ -629,17 +629,17 @@ class BattleSystem {
                 dynamicBg.style.backgroundSize = '100% 100%';
                 dynamicBg.style.overflow = 'hidden';
 
-                dynamicBg.innerHTML = `
-                    <img src="${spritePath}" style="
-                        position: absolute;
-                        left: ${assetConfig.position.rel_x * 100}%;
-                        top: ${assetConfig.position.rel_y * 100}%;
-                        width: ${(assetConfig.size.px_width / 1800) * 100}%;
-                        transform: rotate(${assetConfig.tilt.angle_deg}deg);
-                        transform-origin: ${assetConfig.tilt.origin};
-                        pointer-events: none;
-                    ">
-                `;
+                const spriteImg = document.createElement('img');
+                spriteImg.src = spritePath;
+                spriteImg.style.position = 'absolute';
+                spriteImg.style.left = `${assetConfig.position.rel_x * 100}%`;
+                spriteImg.style.top = `${assetConfig.position.rel_y * 100}%`;
+                spriteImg.style.width = `${(assetConfig.size.px_width / 1800) * 100}%`;
+                spriteImg.style.transform = `rotate(${assetConfig.tilt.angle_deg}deg)`;
+                spriteImg.style.transformOrigin = assetConfig.tilt.origin;
+                spriteImg.style.pointerEvents = 'none';
+
+                dynamicBg.appendChild(spriteImg);
 
                 vGym.style.backgroundImage = 'none';
                 vGym.style.position = 'relative'; // Ensure relative positioning
