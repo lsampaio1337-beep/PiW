@@ -1,4 +1,50 @@
-import { calculateDamage, calculateReqXP } from '../src/mathEngine.js';
+import { calculateHP, calculateDamage, calculateReqXP } from '../src/mathEngine.js';
+
+describe('calculateHP', () => {
+    test('should calculate standard HP correctly', () => {
+        // BaseHp 50, IV 15, Level 50, Q 1.0, Vitamins 0
+        // baseFinal = floor(((2 * 50 + 15) * 50 / 100) + 50 + 10) * 1.0
+        // = floor((115 * 50 / 100) + 60)
+        // = floor(57.5 + 60) = 117
+        expect(calculateHP(50, 15, 50, 1.0)).toBe(117);
+    });
+
+    test('should calculate HP correctly for level 1 edge case', () => {
+        // BaseHp 10, IV 0, Level 1, Q 1.0, Vitamins 0
+        // baseFinal = floor(((2 * 10 + 0) * 1 / 100) + 1 + 10) * 1.0
+        // = floor((20 * 1 / 100) + 11) = 11
+        expect(calculateHP(10, 0, 1, 1.0)).toBe(11);
+    });
+
+    test('should calculate HP correctly for level 100 edge case with max IVs', () => {
+        // BaseHp 255, IV 100, Level 100, Q 2.0 (Shiny), Vitamins 0
+        // baseFinal = floor((((2 * 255 + 100) * 100 / 100) + 100 + 10) * 2.0)
+        // = floor((610 + 110) * 2.0) = floor(720 * 2.0) = 1440
+        expect(calculateHP(255, 100, 100, 2.0)).toBe(1440);
+    });
+
+    test('should apply vitamins bonus correctly', () => {
+        // BaseHp 50, IV 15, Level 50, Q 1.0, Vitamins 10
+        // baseFinal = 117
+        // total = 117 + floor(117 * (10 / 100)) = 117 + 11 = 128
+        expect(calculateHP(50, 15, 50, 1.0, 10)).toBe(128);
+    });
+
+    test('should handle extreme quality multipliers', () => {
+        // Q = 0.8 (Weak)
+        // BaseHp 50, IV 15, Level 50, Q 0.8, Vitamins 0
+        // baseFinal = floor((((2 * 50 + 15) * 50 / 100) + 50 + 10) * 0.8)
+        // = floor((57.5 + 60) * 0.8) = floor(117.5 * 0.8) = floor(94) = 94
+        expect(calculateHP(50, 15, 50, 0.8)).toBe(94);
+    });
+
+    test('should handle zero base hp and zero IVs', () => {
+        // BaseHp 0, IV 0, Level 50, Q 1.0, Vitamins 0
+        // baseFinal = floor((((0) * 50 / 100) + 50 + 10) * 1.0)
+        // = floor(60) = 60
+        expect(calculateHP(0, 0, 50, 1.0)).toBe(60);
+    });
+});
 
 describe('calculateReqXP', () => {
     test('should calculate required XP correctly for level 1', () => {
