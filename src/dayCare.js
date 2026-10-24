@@ -67,7 +67,7 @@ class DayCare {
         p.quality += randIncrease;
 
         // Fix floating point precision
-        p.quality = Math.round((p.quality + Number.EPSILON) * 100) / 100;
+        p.quality = Number(p.quality.toFixed(2));
 
         p.quality = Math.min(1.99, p.quality);
 
