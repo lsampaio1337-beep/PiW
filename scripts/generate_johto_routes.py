@@ -454,24 +454,27 @@ def parse_requirements(req_str, area_id):
         # Replace " and " with ", "
         req_str_fixed = req_str_fixed.replace(" and ", ", ")
 
-        # Insert a comma before action verbs if missing
-        req_str_fixed = re.sub(r'(?<!,)\s+(?=(Catch|Capture|Get|Defeat)\b)', ', ', req_str_fixed)
+        # Insert a comma before action verbs if missing, avoiding double commas
+        req_str_fixed = re.sub(r'(?<!^)(?<!,\s)(?<!,)\s*\b(Catch|Capture|Get|Defeat)\b', r', \1', req_str_fixed)
 
-        # Handle implied action verbs (e.g., "Catch 1 A, 1 B" -> "Catch 1 A, Catch 1 B")
-        while True:
-            new_str = re.sub(r'\b(Catch|Capture|Get|Defeat)\s+([^,]+),\s+(\d+\s+[^,]+)', r'\1 \2, \1 \3', req_str_fixed)
-            if new_str == req_str_fixed:
-                break
-            req_str_fixed = new_str
+        parts = [p.strip() for p in req_str_fixed.split(",")]
+        current_verb = "Catch" # Default fallback
 
-        parts = req_str_fixed.replace(" and ", ",").split(",")
         for part in parts:
-            part = part.strip()
-            if part.startswith("Catch") or part.startswith("Capture") or part.startswith("Get"):
-                match = re.search(r'(?:Catch|Capture|Get) (\d+) (.+)', part)
-                if match:
-                    count = int(match.group(1))
-                    spec = match.group(2)
+            if not part:
+                continue
+
+            # Match Verb (optional), Count, Subject
+            match = re.match(r'^(?:(Catch|Capture|Get|Defeat)\s+)?(\d+)\s+(.+)$', part, re.IGNORECASE)
+            if match:
+                verb = match.group(1)
+                if verb:
+                    current_verb = verb.capitalize()
+
+                count = int(match.group(2))
+                spec = match.group(3).strip()
+
+                if current_verb in ["Catch", "Capture", "Get"]:
                     if spec == "Water-type Pokémon":
                         reqs["catchByType"] = {"type": "Water", "count": count}
                     elif spec == "Ghost-type Pokémon":
@@ -489,11 +492,7 @@ def parse_requirements(req_str, area_id):
                             catch_species.append({"species": s, "count": 1})
                     else:
                         catch_species.append({"species": spec, "count": count})
-            elif part.startswith("Defeat"):
-                match = re.search(r'Defeat (\d+) (.+)', part)
-                if match:
-                    count = int(match.group(1))
-                    spec = match.group(2)
+                elif current_verb == "Defeat":
                     defeat_specific.append({"name": spec, "count": count})
 
         if catch_species:
