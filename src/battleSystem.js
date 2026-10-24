@@ -713,11 +713,17 @@ class BattleSystem {
             };
         } else {
             // Gym completed
-            contentArea.innerHTML = `
+            const htmlContent = `
                 <h3>You defeated ${escapeHTML(gym.leader)}!</h3>
                 <p>A Gift is awaiting for you.</p>
                 <button class="action-btn action-btn-primary" onclick="window.battleEngine.stopGymBattle()" style="margin-top: 10px; width: 100%;">Leave</button>
             `;
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(htmlContent, 'text/html');
+            contentArea.innerHTML = '';
+            while (doc.body.firstChild) {
+                contentArea.appendChild(doc.body.firstChild);
+            }
             window.battleEngine = this;
         }
     }
