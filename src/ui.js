@@ -2867,6 +2867,16 @@ window.startGame = startGame;
 
 
 
+function escapeHTML(str) {
+    if (!str) return '';
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+}
+
 export function renderProfessorLab() {
     const labContent = document.getElementById("generic-lab-content");
     const labView = document.getElementById("view-professor-lab");
@@ -2921,7 +2931,7 @@ export function renderProfessorLab() {
             const spriteSrc = `Assets/Pokemon Sprites/Natural/Gen5/${paddedId}_${name}.png`;
             return `
                   <button onclick="window.selectStarter(${id})">
-                    <img src="${spriteSrc}" style="width: 80px; height: 80px;"><br>${name}
+                    <img src="${escapeHTML(spriteSrc)}" style="width: 80px; height: 80px;"><br>${escapeHTML(name)}
                   </button>`;
         }).join('');
 
