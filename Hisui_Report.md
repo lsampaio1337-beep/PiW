@@ -1,42 +1,44 @@
 # Hisui Region - Paths and Challenges Adjustments Report
 
-This document reports all the final modifications made to the `Hisui_Paths.xlsx` spreadsheet based on the final review rules.
+This document reports all the final modifications made to the `Hisui_Paths.xlsx` spreadsheet based on the final structural requirements.
 
-## 1. Route Encounter Clean-up
-* **Elimination of Single-Pokemon Routes:** A programmatic rule was enforced verifying that no standard exploration route contains exactly 1 Pokémon. If a route had 1 Pokémon, a secondary Pokémon was pulled from the unassigned Hisui Pokédex based on its BST scaling.
-* **Minimum requirements enforced:**
-  * Every route has at least 1 previously unseen Pokémon.
-  * Every route with >=5 Pokémon introduces at least 2 unseen Pokémon.
-  * Standard routes have a minimum of 2 Pokémon.
+## 1. Gym Placement & Main Progression Fixes
+* **Gym - Arcanine:** Locked at Main Challenge 26. (Unlocks Veilstone Cape).
+* **Gym - Electrode:** Locked at Main Challenge 37. (Unlocks Clamberclaw Cliffs).
+* **Gym - Avalugg:** Locked at Main Challenge 48. (Unlocks Icebound Falls).
+* **Adaman, Irida, Ingo:** Removed from the Main Progression to de-clutter the storyline. They have been placed in the Extra Challenge routes where they fit natively.
+* **Pokemon League:** Adjusted to route 50 to cap off the main sequence perfectly.
 
-## 2. Ultra Rare / Legendary / Mythical Special Places
-All Legendaries and Mythicals have been strictly isolated from standard progression routes and assigned to their own thematic "Special Places" acting as the final unlock of post-League Extra Challenge chains.
+## 2. Route & Pokemon Relocations
+* **Scarlet Bog (Route 19):** Manually removed `Hippopotas` and `Electrode`.
+* **Space-Time Distortion:** Now includes `Electrode`, `Avalugg`, and `Arcanine` alongside `Kleavor` and `Lilligant`.
+* **Firespit Island:** `Heatran` relocated here to avoid leaving it isolated in an artificial route.
+* **Moonview Arena:** Added `Shaymin` alongside `Darkrai` and `Cresselia`.
+* **Enforced Validation:** A strict programmatic check guarantees that no route has only 1 Pokémon. Fallbacks exist to populate sparse routes with additional scaled Pokémon.
 
-Here is the complete list of Special Places and their inhabitants:
-* **Lake of Trials**: Uxie, Mesprit, Azelf
-* **Incarnate Fields**: Tornadus, Thundurus, Landorus, Enamorus
-* **Moonview Arena**: Cresselia, Darkrai
-* **Firespit Island (Inner)**: Heatran
-* **Snowpoint Temple (Basement)**: Regigigas
-* **Seaside Hollow**: Phione, Manaphy
-* **Floaro Gardens (Secret)**: Shaymin
-* **Shrouded Ruins (Wisp)**: Spiritomb
-* **Citadel of Etertime**: Arceus, Dialga, Palkia, Giratina
+## 3. Extra Challenge Overhaul (A through F)
+Extra Challenges were completely redesigned from scratch to mirror the user's explicit template. All rewards matching the required `Masterball` counts were appended at the end of their respective chains.
 
-## 3. Challenge Distribution and Refinements
-The Extra Challenges have been fully audited and split into logical quest chains occurring both Before and After the Pokémon League.
-
-* **Pre-League Extra Challenges:**
-  * **Fishing Spot Chains:** 5 challenges dedicated to unlocking the grouped fishing spots across the map.
-  * **Exploration Chain:** Unlocks optional late-game areas like Obsidian Falls and Sandgem Flats.
-  * **Wisps & Distortions:** Two challenges unlocking Shrouded Ruins (Wisp) for Spiritomb, and the Space-Time Distortion for rift-exclusives.
-
-* **Post-League Extra Challenges:**
-  * **Myths of the Lakes and Skies:** Questline exploring Lake Verity -> Lake Valor -> unlocking **Lake of Trials**. A parallel challenge unlocks **Incarnate Fields**.
-  * **Ancient Guardians:** Questline exploring Wayward Cave to unlock **Snowpoint Temple (Basement)**. Another challenge unlocks **Firespit Island (Inner)**.
-  * **Shadows & Seas:** Questline unlocking **Moonview Arena**, and exploring Seaside Hollow to unlock **Floaro Gardens (Secret)**.
-  * **The Ultimate Challenge:** A final master challenge requiring 100% completion of all Main and Extra Challenges to unlock the true final location: **Citadel of Etertime**.
-
-* **Reward Formatting Verification:**
-  * Checked every single Extra Challenge. Every requirement strictly dictates an action (e.g. "Capture 50 Flying Type", "Defeat 10 Pokemon in [X]").
-  * Every reward is perfectly formatted as `"Unlock [Next Spot]"`. The spot unlocked in the reward strictly matches the name of a Route/Place present in the Paths sheet.
+* **Extra Challenge A (5 Quests):**
+  * Starts after defeating Gym Arcanine.
+  * Unlocks: Gym Warden Ingo, Cobalt Fishing Spot, Ginkgo Landing, Shrouded Ruins, Sandgem Flats.
+* **Extra Challenge B (5 Quests):**
+  * Starts after defeating Gym Electrode.
+  * Unlocks: Coronet Fishing Spot, Cloudpool Ridge routes, and **Space-Time Distortion** at quest 4.
+  * Final Quest (B 5): Requires capturing Kleavor, Arcanine, Lilligant, Electrode, Avalugg. (Reward: 1 Masterball).
+* **Extra Challenge C (4 Quests):**
+  * Starts after defeating Gym Avalugg.
+  * Unlocks: Wayward Cave, Seagrass Haven, and **Moonview Arena** at quest 3.
+  * Final Quest (C 4): Requires capturing Darkrai, Shaymin, Cresselia. (Reward: 1 Masterball).
+* **Extra Challenge D (4 Quests):**
+  * Starts after defeating Gym Avalugg.
+  * Unlocks: Alabaster Fishing Spot, Worn Bridge, and **Incarnate Fields** at quest 3.
+  * Final Quest (D 4): Requires capturing Tornadus, Thundurus, Landorus, Enamorus. (Reward: 2 Masterball).
+* **Extra Challenge E (4 Quests):**
+  * Starts after defeating Gym Avalugg.
+  * Unlocks: Lake Verity, Lake Valor, and **Lake of Trials** at quest 3.
+  * Final Quest (E 4): Requires capturing Uxie, Mesprit, Azelf. (Reward: 2 Masterball).
+* **Extra Challenge F (4 Quests):**
+  * Starts after defeating Gym Avalugg.
+  * Unlocks: Gym Adaman, Gym Irida, and **Citadel of Etertime** at quest 3.
+  * Final Quest (F 4): Requires capturing Arceus, Dialga, Palkia, Giratina. (Reward: 3 Masterball).
