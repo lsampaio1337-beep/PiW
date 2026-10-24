@@ -629,17 +629,20 @@ class BattleSystem {
                 dynamicBg.style.backgroundSize = '100% 100%';
                 dynamicBg.style.overflow = 'hidden';
 
-                dynamicBg.innerHTML = `
-                    <img src="${spritePath}" style="
+                const imgStr = `
+                    <img src="${escapeHTML(spritePath)}" style="
                         position: absolute;
                         left: ${assetConfig.position.rel_x * 100}%;
                         top: ${assetConfig.position.rel_y * 100}%;
                         width: ${(assetConfig.size.px_width / 1800) * 100}%;
                         transform: rotate(${assetConfig.tilt.angle_deg}deg);
-                        transform-origin: ${assetConfig.tilt.origin};
+                        transform-origin: ${escapeHTML(assetConfig.tilt.origin)};
                         pointer-events: none;
                     ">
                 `;
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(imgStr, 'text/html');
+                dynamicBg.replaceChildren(...doc.body.childNodes);
 
                 vGym.style.backgroundImage = 'none';
                 vGym.style.position = 'relative'; // Ensure relative positioning
@@ -680,22 +683,26 @@ class BattleSystem {
                 const buttonText = isLeader ? `Fight Gym Leader` : `Fight Gym Trainer`;
 
                 if (index < this.gymState.currentTrainerIndex) {
-                    return `<button disabled class="action-btn" style="opacity: 0.5; width: 100%;">${buttonText} (Defeated)</button>`;
+                    return `<button disabled class="action-btn" style="opacity: 0.5; width: 100%;">${escapeHTML(buttonText)} (Defeated)</button>`;
                 } else if (index === this.gymState.currentTrainerIndex) {
-                    return `<button id="btn-start-gym-battle" class="action-btn action-btn-primary" onclick="window.battleEngine.startNextGymBattle()" style="width: 100%;">${buttonText} (${escapeHTML(t.name)})</button>`;
+                    return `<button id="btn-start-gym-battle" class="action-btn action-btn-primary" onclick="window.battleEngine.startNextGymBattle()" style="width: 100%;">${escapeHTML(buttonText)} (${escapeHTML(t.name)})</button>`;
                 } else {
-                    return `<button disabled class="action-btn" style="opacity: 0.5; width: 100%;">${buttonText} (${escapeHTML(t.name)})</button>`;
+                    return `<button disabled class="action-btn" style="opacity: 0.5; width: 100%;">${escapeHTML(buttonText)} (${escapeHTML(t.name)})</button>`;
                 }
             }).join('');
 
             // Rest phase UI
-            contentArea.innerHTML = `
+            const restHtml = `
                 <div id="gym-rest-area" style="display: flex; flex-direction: column; gap: 10px; width: 100%;">
                     <p style="font-size: 14px; margin-bottom: 10px;">You may organize your party.</p>
                     ${trainerButtonsHtml}
                     <button class="action-btn action-btn-danger" onclick="window.battleEngine.stopGymBattle()" style="margin-top: 10px; width: 100%;">Flee Gym</button>
                 </div>
             `;
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(restHtml, 'text/html');
+            contentArea.replaceChildren(...doc.body.childNodes);
+
             // Temporary expose for the button
             window.battleEngine = this;
 
@@ -713,11 +720,15 @@ class BattleSystem {
             };
         } else {
             // Gym completed
-            contentArea.innerHTML = `
+            const completedHtml = `
                 <h3>You defeated ${escapeHTML(gym.leader)}!</h3>
                 <p>A Gift is awaiting for you.</p>
                 <button class="action-btn action-btn-primary" onclick="window.battleEngine.stopGymBattle()" style="margin-top: 10px; width: 100%;">Leave</button>
             `;
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(completedHtml, 'text/html');
+            contentArea.replaceChildren(...doc.body.childNodes);
+
             window.battleEngine = this;
         }
     }
