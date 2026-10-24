@@ -1,5 +1,6 @@
 export function formatQuantity(q) {
-    if (q >= 1000000) return Math.floor(q / 1000000) + 'm';
-    if (q >= 1000) return Math.floor(q / 1000) + 'k';
-    return q;
+    if (q >= 1000000000) return (q / 1000000000).toFixed(1) + 'b';
+    if (q >= 1000000) return (q / 1000000).toFixed(1) + 'm';
+    if (q >= 1000) return (q / 1000).toFixed(1) + 'k';
+    return q.toString();
 }
