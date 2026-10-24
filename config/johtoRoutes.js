@@ -1684,37 +1684,37 @@ export const johtoRoutes = [
       {
         "pokemonId": 3,
         "minLevel": 90,
-        "maxLevel": 94,
+        "maxLevel": 98,
         "chance": 0.17
       },
       {
         "pokemonId": 6,
         "minLevel": 90,
-        "maxLevel": 94,
+        "maxLevel": 98,
         "chance": 0.17
       },
       {
         "pokemonId": 9,
         "minLevel": 90,
-        "maxLevel": 94,
+        "maxLevel": 98,
         "chance": 0.17
       },
       {
         "pokemonId": 154,
         "minLevel": 90,
-        "maxLevel": 94,
+        "maxLevel": 98,
         "chance": 0.17
       },
       {
         "pokemonId": 157,
         "minLevel": 90,
-        "maxLevel": 94,
+        "maxLevel": 98,
         "chance": 0.17
       },
       {
         "pokemonId": 160,
         "minLevel": 90,
-        "maxLevel": 94,
+        "maxLevel": 98,
         "chance": 0.17
       }
     ]
@@ -1724,32 +1724,32 @@ export const johtoRoutes = [
     "spawns": [
       {
         "pokemonId": 144,
-        "minLevel": 95,
-        "maxLevel": 95,
+        "minLevel": 98,
+        "maxLevel": 98,
         "chance": 0.2
       },
       {
         "pokemonId": 145,
-        "minLevel": 95,
-        "maxLevel": 95,
+        "minLevel": 98,
+        "maxLevel": 98,
         "chance": 0.2
       },
       {
         "pokemonId": 146,
-        "minLevel": 95,
-        "maxLevel": 95,
+        "minLevel": 98,
+        "maxLevel": 98,
         "chance": 0.2
       },
       {
         "pokemonId": 250,
-        "minLevel": 96,
-        "maxLevel": 96,
+        "minLevel": 105,
+        "maxLevel": 105,
         "chance": 0.2
       },
       {
         "pokemonId": 249,
-        "minLevel": 96,
-        "maxLevel": 96,
+        "minLevel": 105,
+        "maxLevel": 105,
         "chance": 0.2
       }
     ]
@@ -1759,38 +1759,38 @@ export const johtoRoutes = [
     "spawns": [
       {
         "pokemonId": 243,
-        "minLevel": 97,
-        "maxLevel": 97,
+        "minLevel": 105,
+        "maxLevel": 105,
         "chance": 0.2
       },
       {
         "pokemonId": 244,
-        "minLevel": 97,
-        "maxLevel": 97,
+        "minLevel": 105,
+        "maxLevel": 105,
         "chance": 0.2
       },
       {
         "pokemonId": 245,
-        "minLevel": 97,
-        "maxLevel": 97,
+        "minLevel": 105,
+        "maxLevel": 105,
         "chance": 0.2
       },
       {
         "pokemonId": 151,
-        "minLevel": 98,
-        "maxLevel": 98,
+        "minLevel": 110,
+        "maxLevel": 110,
         "chance": 0.13333333333333333
       },
       {
         "pokemonId": 150,
-        "minLevel": 98,
-        "maxLevel": 98,
+        "minLevel": 110,
+        "maxLevel": 110,
         "chance": 0.13333333333333333
       },
       {
         "pokemonId": 251,
-        "minLevel": 99,
-        "maxLevel": 99,
+        "minLevel": 110,
+        "maxLevel": 110,
         "chance": 0.13333333333333333
       }
     ]
