@@ -1,4 +1,4 @@
-import { calculateDamage, calculateReqXP } from '../src/mathEngine.js';
+import { calculateDamage, calculateReqXP, calculateStat } from '../src/mathEngine.js';
 
 describe('calculateReqXP', () => {
     test('should calculate required XP correctly for level 1', () => {
@@ -220,5 +220,67 @@ describe('calculateDamage', () => {
         const resultQ2 = calculateDamage(level, power, attackStat, defenseStat, typeEffectiveness, 2.0);
 
         expect(resultQ1).toEqual(resultQ2);
+    });
+});
+
+describe('calculateStat', () => {
+    test('should calculate standard stat correctly for level 1 (no vitamins, base quality)', () => {
+        const baseStat = 50;
+        const ivStat = 15;
+        const level = 1;
+        const quality = 1.0;
+        const vitamins = 0;
+
+        expect(calculateStat(baseStat, ivStat, level, quality, vitamins)).toBe(6);
+    });
+
+    test('should scale correctly for higher levels (level 50)', () => {
+        const baseStat = 50;
+        const ivStat = 31;
+        const level = 50;
+        const quality = 1.0;
+        const vitamins = 0;
+
+        expect(calculateStat(baseStat, ivStat, level, quality, vitamins)).toBe(70);
+    });
+
+    test('should apply quality multiplier correctly', () => {
+        const baseStat = 50;
+        const ivStat = 31;
+        const level = 50;
+        const quality = 1.5;
+        const vitamins = 0;
+
+        expect(calculateStat(baseStat, ivStat, level, quality, vitamins)).toBe(105);
+    });
+
+    test('should apply vitamin bonuses correctly', () => {
+        const baseStat = 50;
+        const ivStat = 31;
+        const level = 50;
+        const quality = 1.0;
+        const vitamins = 10;
+
+        expect(calculateStat(baseStat, ivStat, level, quality, vitamins)).toBe(71);
+    });
+
+    test('should floor decimal results correctly after applying quality', () => {
+        const baseStat = 50;
+        const ivStat = 31;
+        const level = 50;
+        const quality = 1.15;
+        const vitamins = 0;
+
+        expect(calculateStat(baseStat, ivStat, level, quality, vitamins)).toBe(80);
+    });
+
+    test('should handle 0 base stats and 0 IVs', () => {
+        const baseStat = 0;
+        const ivStat = 0;
+        const level = 100;
+        const quality = 1.0;
+        const vitamins = 0;
+
+        expect(calculateStat(baseStat, ivStat, level, quality, vitamins)).toBe(5);
     });
 });
