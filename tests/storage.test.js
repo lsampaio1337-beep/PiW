@@ -135,3 +135,51 @@ describe('Storage.processCheat', () => {
         expect(consoleSpy).not.toHaveBeenCalled();
     });
 });
+
+describe('Storage.reset', () => {
+    let storage;
+    let consoleLogSpy;
+    let consoleErrorSpy;
+
+    beforeEach(() => {
+        storage = new Storage();
+        consoleLogSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
+        consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+        // Clear all mocks to ensure clean state for window.localStorage from previous tests
+        jest.clearAllMocks();
+    });
+
+    afterEach(() => {
+        consoleLogSpy.mockRestore();
+        consoleErrorSpy.mockRestore();
+    });
+
+    test('should return early if currentProfileId is not set', () => {
+        storage.currentProfileId = null;
+        storage.reset();
+        expect(window.localStorage.removeItem).not.toHaveBeenCalled();
+        expect(consoleLogSpy).not.toHaveBeenCalled();
+        expect(consoleErrorSpy).not.toHaveBeenCalled();
+    });
+
+    test('should remove the current profile from localStorage and log success', () => {
+        storage.currentProfileId = 'test_profile_id';
+        storage.reset();
+        expect(window.localStorage.removeItem).toHaveBeenCalledWith('test_profile_id');
+        expect(consoleLogSpy).toHaveBeenCalledWith("Save data cleared for current profile.");
+        expect(consoleErrorSpy).not.toHaveBeenCalled();
+    });
+
+    test('should catch and log error if localStorage.removeItem fails', () => {
+        storage.currentProfileId = 'test_profile_id';
+        const mockError = new Error('Storage error');
+        window.localStorage.removeItem.mockImplementationOnce(() => {
+            throw mockError;
+        });
+
+        storage.reset();
+        expect(window.localStorage.removeItem).toHaveBeenCalledWith('test_profile_id');
+        expect(consoleErrorSpy).toHaveBeenCalledWith("Failed to clear save:", mockError);
+        expect(consoleLogSpy).not.toHaveBeenCalled();
+    });
+});
