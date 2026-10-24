@@ -1,33 +1,26 @@
 # Alola Routes and Challenges - Changes Report
 
-## 1. Special Encounters & Relocations
-* **Ditto Relocation**: Order #13 (previously solely Ditto) was removed. Ditto has been logically relocated to Route 10 Main Area to ensure it is not isolated.
-* **Amaura Insertion**: Amaura was inserted into Route 8 Fossil Restoration Center.
-* **Special Mythical / Legendary Locations Setup**:
-    * **Sacred Shrine**: Contains Tapu Koko, Tapu Lele, Tapu Bulu, and Tapu Fini.
-    * **Obsidian Sphere**: Contains Cosmog, Cosmoem, Solgaleo, Lunala, and Necrozma.
-    * **The Interdimensional Rift**: Contains exclusively the 10 Ultra Beasts (Nihilego, Buzzwole, Pheromosa, Xurkitree, Celesteela, Kartana, Guzzlord, Poipole, Stakataka, Blacephalon).
-    * **The Zenith Anomaly**: A newly created final location for the Trio (Magearna, Marshadow, Zeraora).
+## 1. Challenge Merging and Deletion
+* **Challenge 1 Removed**: The first route (Starter / Route 1) is unlocked by default, therefore the 'Start the Game' challenge has been removed from the list, directly starting counting from the actual first completion threshold.
+* **Challenge 16 & 17 Merge**: Per your explicit request, the former Challenge 16 was updated to grant a dual-reward: *Unlocks Captain Lana and Wela Volcano Park Main Area*. Challenge 17 was subsequently removed, and all proceeding challenges were decremented by 1 to maintain sequential integrity.
 
-## 2. Route Constraints Enforcement
-* Standard routes with fewer than 3 Pokémon were dynamically merged into adjacent nodes to maintain encounter density.
-* Large routes (>9 Pokémon) were automatically split (e.g., The Interdimensional Rift Part 1 and Part 2) with a 50/50 division to prevent any subsequent part from having only 1 Pokémon leftover.
+## 2. Route Constraints Enforcement & Level Scaling Fixes
+* *The Interdimensional Rift* is now strictly 1 unified place (no longer split into Part 1 and Part 2) despite having 10 Ultra Beasts.
+* Explicit level scaling overrides were implemented:
+   * **The Zenith Anomaly** = Levels 95-100
+   * **Sacred Shrine** = Level 100
+   * **The Interdimensional Rift** = Level 110
+   * **Obsidian Sphere** = Level 120 (Solgaleo, Lunala, Necrozma)
+   * **Obsidian Tesseract** = Cosmog & Cosmoem at Level 100, while the box legendaries stay at 120.
 
 ## 3. Extra Challenge Chains Reorganization
-Exactly 6 Extra Challenge Chains were established to strictly mirror geographic proximity and progression logic:
+Five distinct Extra Challenge Chains were established, precisely matching lengths and designations requested:
 
-### Pre-League (4 Chains):
-* **Extra Challenge 1 (Starter Depot)**: 5 total challenges starting after Defeating Captain Lana. Leads through Route 6 -> Royal Avenue -> Pikachu Valley -> Heahea Surf Spot -> **Starter Depot** (Contains all 3 base Alolan starters and their 2nd stage evolutions).
-* **Extra Challenge 2 (Obsidian Sphere)**: 4 total challenges starting after Defeating Captain Sophocles. Leads through Blush Mountain -> Ula'ula Meadow -> Lake of the Sunne -> **Obsidian Sphere** (Cosmog, etc).
-* **Extra Challenge 3 (Sacred Shrine)**: 3 total challenges starting after Defeating Kahuna Hala. Leads through Route 3 -> Memorial Hill -> **Sacred Shrine** (Tapus).
-* **Extra Challenge 4 (Aether Paradise)**: 3 total challenges starting after Defeating Kahuna Nanu. Leads through Route 15 -> Aether Paradise Labs -> **Aether Paradise Secret Lab** (Type: Null, Porygon, Silvally).
+* **Extra Challenge A**: Re-labeled from Pre-League 1. 4 challenges in total. Culminates in `Starter Depot`.
+* **Extra Challenge B**: Post-League. 4 challenges in total. Culminates in `The Zenith Anomaly`.
+* **Extra Challenge C**: Post-League. 5 challenges in total. Culminates in `Sacred Shrine`.
+* **Extra Challenge D**: Post-League. 5 challenges in total. Culminates in `The Interdimensional Rift`.
+* **Extra Challenge E**: Post-League. 6 challenges in total. Flowing through `Obsidian Sphere`, its final challenge transforms the location into the `Obsidian Tesseract`.
 
-### Post-League (2 Chains):
-* **Extra Challenge 5 (The Interdimensional Rift)**: Starts immediately after Defeating Champion Hau. Leads through Poni Grove -> Poni Plains -> Resolution Cave -> **The Interdimensional Rift**.
-* **Extra Challenge 6 (The Zenith Anomaly)**: **Strictly unlocks only after The Interdimensional Rift is completed**, fulfilling the request to gate the Trio behind the Ultra Beasts. Leads through Poni Coast -> **The Zenith Anomaly**.
-
-## 4. Challenge Verification
-Every single node explicitly writes "Unlocks [Spot]" to clearly show the progression map.
-
-## 5. Missing Pokémon List
-Sheet 3 was successfully reconstructed. It highlights all explicitly placed Generation 7 Pokémon and their designated path assignments, keeping tracking transparent.
+## 4. Missing Pokémon List
+Sheet 3 remains updated. All required Generation 7 missing Pokémons are explicitly tracked, correctly labeled as `(Added)` or `(Evolution)`, ensuring 100% regional compliance.
