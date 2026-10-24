@@ -130,9 +130,11 @@ window.showActiveItemSelection = function(type) {
             const isActive = state.settings.activePotionTier === idx;
             const borderColor = isActive ? '#2ecc71' : '#3498db'; // Green if selected, blue otherwise
 
+            const safeInventoryName = inventoryName.replace(/[^a-zA-Z0-9 _-]/g, '');
+
             html += `
                 <div onclick="window.selectBattleActiveItem('potion', ${idx})" style="width: 30px; height: 30px; background: rgba(0, 0, 0, 0.6); border: 2px solid ${borderColor}; border-radius: 8px; position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer;">
-                    <img src="./Assets/Items/Potions/${inventoryName}.png" style="width: 80%; height: 80%; object-fit: contain;">
+                    <img src="./Assets/Items/Potions/${safeInventoryName}.png" style="width: 80%; height: 80%; object-fit: contain;">
                     <span style="position: absolute; bottom: 0px; right: 2px; color: white; font-size: 8px; font-weight: bold; text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;">${formatActiveItemQuantity(qty)}</span>
                 </div>
             `;
@@ -160,9 +162,11 @@ window.showActiveItemSelection = function(type) {
             const isActive = state.settings.activeBallTier === idx;
             const borderColor = isActive ? '#2ecc71' : '#3498db'; // Green if selected, blue otherwise
 
+            const safeBallName = b.name.replace(/[^a-zA-Z0-9 _-]/g, '');
+
             html += `
                 <div onclick="window.selectBattleActiveItem('ball', ${idx})" style="width: 30px; height: 30px; background: rgba(0, 0, 0, 0.6); border: 2px solid ${borderColor}; border-radius: 8px; position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer;">
-                    <img src="./Assets/Items/Balls/${b.name}.png" style="width: 80%; height: 80%; object-fit: contain;">
+                    <img src="./Assets/Items/Balls/${safeBallName}.png" style="width: 80%; height: 80%; object-fit: contain;">
                     <span style="position: absolute; bottom: 0px; right: 2px; color: white; font-size: 8px; font-weight: bold; text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;">${formatActiveItemQuantity(qty)}</span>
                 </div>
             `;
@@ -305,17 +309,17 @@ function updateBattleBackground(combatArena, state, battleSystem, inGymCombat, i
                 dynamicBg.style.backgroundSize = '100% 100%';
                 dynamicBg.style.overflow = 'hidden';
 
-                dynamicBg.innerHTML = `
-                    <img src="${spritePath}" style="
-                        position: absolute;
-                        left: ${assetConfig.position.rel_x * 100}%;
-                        top: ${assetConfig.position.rel_y * 100}%;
-                        width: ${(assetConfig.size.px_width / 1800) * 100}%;
-                        transform: rotate(${assetConfig.tilt.angle_deg}deg);
-                        transform-origin: ${assetConfig.tilt.origin};
-                        pointer-events: none;
-                    ">
-                `;
+                dynamicBg.innerHTML = '';
+                const img = document.createElement('img');
+                img.src = spritePath;
+                img.style.position = 'absolute';
+                img.style.left = `${assetConfig.position.rel_x * 100}%`;
+                img.style.top = `${assetConfig.position.rel_y * 100}%`;
+                img.style.width = `${(assetConfig.size.px_width / 1800) * 100}%`;
+                img.style.transform = `rotate(${assetConfig.tilt.angle_deg}deg)`;
+                img.style.transformOrigin = assetConfig.tilt.origin;
+                img.style.pointerEvents = 'none';
+                dynamicBg.appendChild(img);
 
                 combatArena.style.backgroundImage = 'none';
                 combatArena.style.position = 'relative'; // Ensure relative positioning
@@ -890,7 +894,26 @@ export function showDamage(target, amount, isCrit, moveName = '', moveType = 'No
             entry.style.marginBottom = '2px';
             const attacker = target === 'player' ? 'Enemy' : 'You';
             const typeColor = TYPE_COLORS[moveType] || '#ffffff';
-            entry.innerHTML = `${attacker} used <b style="color:${typeColor}">${moveName}</b> for <span style="color:${typeColor}">${amount}</span> dmg!`;
+
+            const attackerText = document.createTextNode(`${attacker} used `);
+            const moveNameBold = document.createElement('b');
+            moveNameBold.style.color = typeColor;
+            moveNameBold.textContent = moveName;
+
+            const forText = document.createTextNode(` for `);
+
+            const amountSpan = document.createElement('span');
+            amountSpan.style.color = typeColor;
+            amountSpan.textContent = amount;
+
+            const dmgText = document.createTextNode(` dmg!`);
+
+            entry.appendChild(attackerText);
+            entry.appendChild(moveNameBold);
+            entry.appendChild(forText);
+            entry.appendChild(amountSpan);
+            entry.appendChild(dmgText);
+
             log.appendChild(entry);
 
             // Keep only last 4 entries
@@ -911,7 +934,30 @@ export function showDamage(target, amount, isCrit, moveName = '', moveType = 'No
     let typeIconHtml = `<img src="Assets/Extra/Types/Type ${moveType}.png" style="width: 20px; height: 20px; vertical-align: middle; margin: 0 4px;" />`;
 
     // Layout: [Amount] [Icon] [Name] [Effectiveness] [Crit]
-    dmgNode.innerHTML = `<span style="font-weight: bold; font-style: ${isCrit ? 'italic' : 'normal'}; display: flex; align-items: center; justify-content: center; text-shadow: 1px 1px 2px black;">${amount} ${typeIconHtml} ${moveName} ${effText}${critText}</span>`;
+    const span = document.createElement('span');
+    span.style.fontWeight = 'bold';
+    span.style.fontStyle = isCrit ? 'italic' : 'normal';
+    span.style.display = 'flex';
+    span.style.alignItems = 'center';
+    span.style.justifyContent = 'center';
+    span.style.textShadow = '1px 1px 2px black';
+
+    const amountText = document.createTextNode(`${amount} `);
+
+    const typeIconImg = document.createElement('img');
+    typeIconImg.src = `Assets/Extra/Types/Type ${moveType}.png`;
+    typeIconImg.style.width = '20px';
+    typeIconImg.style.height = '20px';
+    typeIconImg.style.verticalAlign = 'middle';
+    typeIconImg.style.margin = '0 4px';
+
+    const nameEffCritText = document.createTextNode(` ${moveName} ${effText}${critText}`);
+
+    span.appendChild(amountText);
+    span.appendChild(typeIconImg);
+    span.appendChild(nameEffCritText);
+
+    dmgNode.appendChild(span);
 
 
     dmgNode.classList.add('floating-damage');
@@ -1189,7 +1235,12 @@ export function showLoot(lootItems) {
     const keys = Object.keys(lootItems);
     if (keys.length === 0) return;
 
-    let html = '';
+    const row = document.createElement('div');
+    row.style.display = 'flex';
+    row.style.gap = '5px';
+    row.style.transition = 'opacity 0.5s ease-in-out';
+    row.style.opacity = '1';
+
     for (let i = 0; i < keys.length; i++) {
         let itemName = keys[i];
         const count = lootItems[itemName];
@@ -1203,20 +1254,41 @@ export function showLoot(lootItems) {
         else if (itemName.includes('Stone')) imgFolder = 'Stones';
         else if (VITAMINS.includes(itemName)) imgFolder = 'Vitamins';
 
-        html += `
-            <div style="width: 30px; height: 30px; background: rgba(0, 0, 0, 0.6); border: 1px solid #f1c40f; border-radius: 4px; position: relative; display: flex; align-items: center; justify-content: center;">
-                <img src="Assets/Items/${imgFolder}/${itemName}.png" style="width: 80%; height: 80%; object-fit: contain;">
-                ${isMissed ? `<img src="Assets/Extra/No.png" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; z-index: 2;">` : ''}
-            </div>
-        `;
-    }
+        const itemContainer = document.createElement('div');
+        itemContainer.style.width = '30px';
+        itemContainer.style.height = '30px';
+        itemContainer.style.background = 'rgba(0, 0, 0, 0.6)';
+        itemContainer.style.border = '1px solid #f1c40f';
+        itemContainer.style.borderRadius = '4px';
+        itemContainer.style.position = 'relative';
+        itemContainer.style.display = 'flex';
+        itemContainer.style.alignItems = 'center';
+        itemContainer.style.justifyContent = 'center';
 
-    const row = document.createElement('div');
-    row.style.display = 'flex';
-    row.style.gap = '5px';
-    row.style.transition = 'opacity 0.5s ease-in-out';
-    row.style.opacity = '1';
-    row.innerHTML = html;
+        const img = document.createElement('img');
+        // Sanitizing the path just to be extra safe against path traversal
+        const safeItemName = itemName.replace(/[^a-zA-Z0-9 _-]/g, '');
+        img.src = `Assets/Items/${imgFolder}/${safeItemName}.png`;
+        img.style.width = '80%';
+        img.style.height = '80%';
+        img.style.objectFit = 'contain';
+        itemContainer.appendChild(img);
+
+        if (isMissed) {
+            const noImg = document.createElement('img');
+            noImg.src = 'Assets/Extra/No.png';
+            noImg.style.position = 'absolute';
+            noImg.style.top = '0';
+            noImg.style.left = '0';
+            noImg.style.width = '100%';
+            noImg.style.height = '100%';
+            noImg.style.objectFit = 'contain';
+            noImg.style.zIndex = '2';
+            itemContainer.appendChild(noImg);
+        }
+
+        row.appendChild(itemContainer);
+    }
 
     container.prepend(row);
     container.style.display = 'flex';
