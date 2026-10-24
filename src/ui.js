@@ -2583,7 +2583,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
         } else if (tab === 'medals') {
             const regions = ['Kanto', 'Johto', 'Hoenn', 'Sinnoh', 'Unova', 'Kalos', 'Alola', 'Galar', 'Hisui', 'Paldea'];
 
-            let medalsHtml = '<div style="display: flex; flex-direction: column; gap: 20px; padding: 15px; height: 100%; overflow-y: auto;">';
+            let medalsHtml = '<div style="display: grid; grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(5, 1fr); gap: 10px; padding: 10px; height: 100%; overflow: hidden; box-sizing: border-box;">';
 
             regions.forEach(region => {
                 let caughtCount = 0;
@@ -2629,29 +2629,35 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
                 const hasThird = totalInRegion > 0 && shinyCount >= totalInRegion;
 
                 medalsHtml += `
-                    <div style="background: rgba(0, 0, 0, 0.2); border-radius: 10px; padding: 15px; border: 1px solid rgba(255, 255, 255, 0.1);">
-                        <h3 style="margin-top: 0; margin-bottom: 15px; text-align: center; color: #f1c40f; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);">${region} Medals</h3>
-                        <div style="display: flex; justify-content: space-around; align-items: center;">
-                            <div style="text-align: center; ${!hasFirst ? 'filter: grayscale(100%) opacity(0.5);' : 'filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));'}">
-                                <img src="Assets/Extra/Medals/${region} First.png" alt="${region} First" style="width: 64px; height: 64px; image-rendering: pixelated;" onerror="this.src='Assets/Extra/Medals/Kanto First.png'">
-                                <div style="margin-top: 5px; font-size: 12px; font-weight: bold; color: ${hasFirst ? '#fff' : '#888'};">First</div>
-                            </div>
-                            <div style="text-align: center; ${!hasSecond ? 'filter: grayscale(100%) opacity(0.5);' : 'filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.8));'}">
-                                <img src="Assets/Extra/Medals/${region} Second.png" alt="${region} Second" style="width: 64px; height: 64px; image-rendering: pixelated;" onerror="this.src='Assets/Extra/Medals/Kanto Second.png'">
-                                <div style="margin-top: 5px; font-size: 12px; font-weight: bold; color: ${hasSecond ? '#fff' : '#888'};">Second</div>
-                                <div style="font-size: 10px; color: #aaa;">${caughtCount}/${totalInRegion}</div>
-                            </div>
-                            <div style="text-align: center; ${!hasThird ? 'filter: grayscale(100%) opacity(0.5);' : 'filter: drop-shadow(0 0 10px rgba(255, 215, 0, 1));'}">
-                                <img src="Assets/Extra/Medals/${region} Third.png" alt="${region} Third" style="width: 64px; height: 64px; image-rendering: pixelated;" onerror="this.src='Assets/Extra/Medals/Kanto Third.png'">
-                                <div style="margin-top: 5px; font-size: 12px; font-weight: bold; color: ${hasThird ? '#fff' : '#888'};">Third</div>
-                                <div style="font-size: 10px; color: #aaa;">${shinyCount}/${totalInRegion}</div>
-                            </div>
+                    <div
+                        class="medal-item"
+                        style="background: rgba(0, 0, 0, 0.2); border-radius: 10px; padding: 10px 15px; border: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-around; align-items: center; box-sizing: border-box; transition: all 0.2s ease-in-out; min-height: 0;"
+                    >
+                        <div style="text-align: center; ${!hasFirst ? 'filter: grayscale(100%) opacity(0.5);' : 'filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));'}">
+                            <img src="Assets/Extra/Medals/${region} First.png" alt="${region} First" style="width: 100%; max-width: 64px; max-height: 100%; object-fit: contain; image-rendering: pixelated;" onerror="this.src='Assets/Extra/Medals/Kanto First.png'">
+                        </div>
+                        <div style="text-align: center; ${!hasSecond ? 'filter: grayscale(100%) opacity(0.5);' : 'filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.8));'}">
+                            <img src="Assets/Extra/Medals/${region} Second.png" alt="${region} Second" style="width: 100%; max-width: 64px; max-height: 100%; object-fit: contain; image-rendering: pixelated;" onerror="this.src='Assets/Extra/Medals/Kanto Second.png'">
+                        </div>
+                        <div style="text-align: center; ${!hasThird ? 'filter: grayscale(100%) opacity(0.5);' : 'filter: drop-shadow(0 0 10px rgba(255, 215, 0, 1));'}">
+                            <img src="Assets/Extra/Medals/${region} Third.png" alt="${region} Third" style="width: 100%; max-width: 64px; max-height: 100%; object-fit: contain; image-rendering: pixelated;" onerror="this.src='Assets/Extra/Medals/Kanto Third.png'">
                         </div>
                     </div>
                 `;
             });
 
             medalsHtml += '</div>';
+
+            medalsHtml += `
+                <style>
+                    .medal-item:hover {
+                        background: rgba(255, 255, 255, 0.1) !important;
+                        border-color: rgba(255, 255, 255, 0.5) !important;
+                        box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+                    }
+                </style>
+            `;
+
             contentHtml = medalsHtml;
         } else if (tab === 'upgrades') {
             contentHtml = '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; padding: 15px;">';
