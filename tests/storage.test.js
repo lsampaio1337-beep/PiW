@@ -135,3 +135,65 @@ describe('Storage.processCheat', () => {
         expect(consoleSpy).not.toHaveBeenCalled();
     });
 });
+
+describe('Storage.getProfiles', () => {
+    let storage;
+    let consoleWarnSpy;
+
+    beforeAll(() => {
+        // Mock localStorage if not already mocked
+        if (!window.localStorage) {
+            Object.defineProperty(window, 'localStorage', {
+                value: {
+                    getItem: jest.fn(() => null),
+                    setItem: jest.fn(),
+                    removeItem: jest.fn()
+                },
+                writable: true
+            });
+        }
+    });
+
+    beforeEach(() => {
+        storage = new Storage();
+        consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+        jest.clearAllMocks();
+    });
+
+    afterEach(() => {
+        consoleWarnSpy.mockRestore();
+    });
+
+    test('should return parsed array when valid JSON is in localStorage', () => {
+        window.localStorage.getItem.mockReturnValueOnce(JSON.stringify(['profile1', 'profile2']));
+        const profiles = storage.getProfiles();
+        expect(profiles).toEqual(['profile1', 'profile2']);
+        expect(window.localStorage.getItem).toHaveBeenCalledWith(storage.masterKey);
+    });
+
+    test('should return empty array when localStorage returns null', () => {
+        window.localStorage.getItem.mockReturnValueOnce(null);
+        const profiles = storage.getProfiles();
+        expect(profiles).toEqual([]);
+    });
+
+    test('should return empty array and warn when localStorage throws an error', () => {
+        const error = new Error('localStorage is disabled');
+        window.localStorage.getItem.mockImplementationOnce(() => {
+            throw error;
+        });
+        const profiles = storage.getProfiles();
+        expect(profiles).toEqual([]);
+        expect(consoleWarnSpy).toHaveBeenCalledWith('Failed to parse profiles data from localStorage:', error);
+    });
+
+    test('should return empty array and warn when JSON.parse throws an error (malformed JSON)', () => {
+        window.localStorage.getItem.mockReturnValueOnce('not-valid-json');
+        const profiles = storage.getProfiles();
+        expect(profiles).toEqual([]);
+        expect(consoleWarnSpy).toHaveBeenCalledWith(
+            'Failed to parse profiles data from localStorage:',
+            expect.any(Error)
+        );
+    });
+});
