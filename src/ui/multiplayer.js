@@ -43,12 +43,7 @@ function safeDecode(str) {
     try {
         const binString = atob(str.trim());
         const bytes = Uint8Array.from(binString, (m) => m.codePointAt(0));
-        const parsed = JSON.parse(new TextDecoder().decode(bytes), (key, value) => {
-            if (key === '__proto__' || key === 'constructor' || key === 'prototype') {
-                return undefined;
-            }
-            return value;
-        });
+        const parsed = JSON.parse(new TextDecoder().decode(bytes));
 
         if (!parsed || typeof parsed !== 'object') {
             throw new Error('Payload is not an object');
@@ -229,12 +224,7 @@ function setupDataChannel(channel) {
 
         let data;
         try {
-            data = JSON.parse(event.data, (key, value) => {
-                if (key === '__proto__' || key === 'constructor' || key === 'prototype') {
-                    return undefined;
-                }
-                return value;
-            });
+            data = JSON.parse(event.data);
         } catch (e) {
             console.warn("Received malformed multiplayer message", e);
             return;
