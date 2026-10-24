@@ -2036,7 +2036,6 @@ class BattleSystem {
             this.state.party[index] = currentLeader;
             this.updateUI();
 
-            // if in battle, resetting turn timers
             if (this.activeEncounter && this.combatLoop) {
                 clearTimeout(this.combatLoop);
                 this.scheduleTurn();
