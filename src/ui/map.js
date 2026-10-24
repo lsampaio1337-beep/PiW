@@ -453,7 +453,16 @@ export function showMap() {
         <div id="interactive-map" style="position: relative; width: 100%; aspect-ratio: ${aspectRatio}; background-image: url('${mapImage}'); background-size: 100% 100%; background-repeat: no-repeat; background-position: center;">
     `;
 
-    html += generateMarkersForRegion(window.currentMapRegion, unlockedAreas);
+    let targetStats = getRegionStats(window.currentMapRegion);
+    if (targetStats && targetStats.isZzZMode) {
+        html += \`
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; cursor: pointer; display: flex; align-items: center; justify-content: center; background-color: rgba(0, 0, 0, 0.4);" onclick="window.showZzZResumeModal('\${window.currentMapRegion}')">
+                <img src="./Assets/Extra/Jigglypuff Dust.png" style="max-width: 80%; max-height: 80%; object-fit: contain; pointer-events: none;" alt="Dust" />
+            </div>
+        \`;
+    } else {
+        html += generateMarkersForRegion(window.currentMapRegion, unlockedAreas);
+    }
 
     html += `
         </div>
