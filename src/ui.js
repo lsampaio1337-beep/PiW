@@ -2051,7 +2051,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
                         document.getElementById('btn-zzz-resume-no').onclick = () => {
                             state.isZzZMode = false;
                             state.stats.isZzZMode = false;
-                            state.zzzTimestamp = null;
+                            state.stats.zzzTimestamp = null;
                             storage.save(state);
                             if(window.windowManager) window.windowManager.closeDynamicWindow('window-zzz-resume');
                             // Start normally at Professor's lab
@@ -2062,7 +2062,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
                             if(window.windowManager) window.windowManager.closeDynamicWindow('window-zzz-resume');
 
                             // Simulate sleep farm
-                            let timeElapsedMs = Date.now() - (state.zzzTimestamp || Date.now());
+                            let timeElapsedMs = Date.now() - (state.stats.zzzTimestamp || state.zzzTimestamp || Date.now());
                             timeElapsedMs = Math.max(0, timeElapsedMs); // Prevent negative time if system clock changes
 
                             // Cap time elapsed by grains
@@ -2088,7 +2088,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
 
                             state.isZzZMode = false;
                             state.stats.isZzZMode = false;
-                            state.zzzTimestamp = null;
+                            state.stats.zzzTimestamp = null;
                             storage.save(state);
 
                             // Format Time based on actual simulated time returned by the engine
@@ -2404,15 +2404,18 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
 
             document.getElementById('btn-zzz-yes').onclick = () => {
                 state.stats.isZzZMode = true;
-                state.zzzTimestamp = Date.now();
+                state.stats.zzzTimestamp = Date.now();
                 state.settings.isSleepModeActive = true;
                 state.stats.lastSaveTime = Date.now();
 
-                // Set region name in zzz state if cross-region support needs it
-                state.stats.zzzRegion = state.currentRegionName || 'Kanto';
-
+                // Hide dynamic windows since we are entering sleep mode for this region
                 if (window.windowManager) {
-                    window.windowManager.hideAllExcept(['window-main-control']);
+                    const excluded = ['window-main-control', 'window-zzz-confirmation', 'window-zzz-resume', 'window-map'];
+                    document.querySelectorAll('.window-container').forEach(el => {
+                        if (!excluded.includes(el.id)) {
+                            el.style.display = 'none';
+                        }
+                    });
                 }
 
                 if (window.updateMainControl) {
@@ -2430,7 +2433,11 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
             state.stats.hasSeenZzZIcon = true;
             storage.save(state);
             updateMainControl();
-            window.showZzZConfirmationModal();
+            if (state.stats.isZzZMode) {
+                window.showZzZResumeModal();
+            } else {
+                window.showZzZConfirmationModal();
+            }
         }
     });
 
@@ -2995,7 +3002,7 @@ window.showZzZResumeModal = function() {
 
     document.getElementById('btn-zzz-resume-no').onclick = () => {
         state.stats.isZzZMode = false;
-        state.zzzTimestamp = null;
+        state.stats.zzzTimestamp = null;
         if(window.windowManager) {
             window.windowManager.closeDynamicWindow('window-zzz-resume');
         }
@@ -3006,7 +3013,7 @@ window.showZzZResumeModal = function() {
     document.getElementById('btn-zzz-resume-yes').onclick = () => {
         if(window.windowManager) window.windowManager.closeDynamicWindow('window-zzz-resume');
 
-        let timeElapsedMs = Date.now() - (state.zzzTimestamp || Date.now());
+        let timeElapsedMs = Date.now() - (state.stats.zzzTimestamp || state.zzzTimestamp || Date.now());
         timeElapsedMs = Math.max(0, timeElapsedMs);
 
         let availableGrains = state.stats.jigglypuffGrains || 0;
@@ -3028,7 +3035,7 @@ window.showZzZResumeModal = function() {
         trackDailyChallenge('sleep_minutes', { amount: Math.floor(actualTimeConsumedMs / 60000) });
 
         state.stats.isZzZMode = false;
-        state.zzzTimestamp = null;
+        state.stats.zzzTimestamp = null;
 
         window.updateMainControl();
         storage.save(state);

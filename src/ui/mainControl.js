@@ -247,15 +247,28 @@ export function updateMainControl() {
         navButtons.style.opacity = lockMenus ? '0.5' : '1.0';
     }
 
-    // Hide icons if ZzZ Mode is active for this region
+    // Disable icons with visual cue if ZzZ Mode is active for this region
     if (state.stats.isZzZMode) {
         const icons = document.querySelectorAll('.nav-icon');
         icons.forEach(icon => {
             if (icon.id !== 'btn-map' && icon.id !== 'btn-sleep') {
-                icon.style.display = 'none';
+                icon.style.pointerEvents = 'none';
+                icon.style.opacity = '0.3';
+                icon.style.filter = 'grayscale(100%)';
+            } else {
+                icon.style.pointerEvents = 'auto';
+                icon.style.opacity = '1';
+                icon.style.filter = 'none';
             }
         });
-        return; // Skip standard visibility logic
+        // Do not return here, we still want to show UI components that may be active or keep their state updated
+    } else {
+        const icons = document.querySelectorAll('.nav-icon');
+        icons.forEach(icon => {
+            icon.style.pointerEvents = 'auto';
+            icon.style.opacity = '1';
+            icon.style.filter = 'none';
+        });
     }
 
     const timerRoute = document.getElementById('main-view-timer-route');

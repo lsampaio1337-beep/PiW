@@ -23,6 +23,7 @@ const parseAreaNames = (id) => {
 };
 
 window.currentMapRegion = 'Kanto';
+window.swapRegion = swapRegion;
 
 window.switchMapRegion = function(region) {
     if (region === 'Johto' && !state.globalStats.hasSeenJohtoMap) {
@@ -277,7 +278,7 @@ function generateMarkersForRegion(region, unlockedAreas) {
     }
 
     if (isTargetRegionZzZ) {
-        html += `<img src="Assets/Pokemon Sprites/Natural/Gen1/0039_Jigglypuff.png" title="Click here to wake up!" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 300px; z-index: 1000; cursor: pointer; filter: drop-shadow(0 0 10px white); animation: pulseZzZ 2s infinite;" onclick="
+        html += `<img src="Assets/Extra/Jigglypuff Dust.png" title="Click here to wake up!" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 150px; z-index: 1000; cursor: pointer; filter: drop-shadow(0 0 10px white); animation: pulseZzZ 2s infinite;" onclick="
             window.swapRegion('${region}');
             window.showZzZResumeModal();
         ">`;

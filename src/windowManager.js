@@ -15,14 +15,6 @@ export class WindowManager {
         });
     }
 
-    hideAllExcept(exceptIds) {
-        document.querySelectorAll('.window-container').forEach(el => {
-            if (!exceptIds.includes(el.id)) {
-                el.style.display = 'none';
-            }
-        });
-    }
-
     _parseAndSanitizeToElement(htmlString, targetElement) {
             // Parse HTML safely in an inactive document to prevent automatic resource fetching (e.g. CSRF via img tags).
             const parser = new DOMParser();
