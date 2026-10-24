@@ -2583,7 +2583,7 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
         } else if (tab === 'medals') {
             const regions = ['Kanto', 'Johto', 'Hoenn', 'Sinnoh', 'Unova', 'Kalos', 'Alola', 'Galar', 'Hisui', 'Paldea'];
 
-            let medalsHtml = '<div style="display: grid; grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(5, 1fr); gap: 10px; padding: 10px; height: 100%; overflow: hidden; padding-bottom: 24px; box-sizing: border-box;">';
+            let medalsHtml = '<div style="display: grid; grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(5, 1fr); gap: 10px; padding: 10px; height: calc(100% - 10px); padding-bottom: 24px; overflow-y: auto; box-sizing: border-box;">';
 
             regions.forEach(region => {
                 let caughtCount = 0;

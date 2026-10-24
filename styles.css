@@ -528,7 +528,8 @@ input[type="number"] {
     padding: 0;
 }
 
-#window-pokedex .content-panel {
+#window-pokedex .content-panel,
+#window-trainer .content-panel {
     padding: 0 !important;
 }
 
