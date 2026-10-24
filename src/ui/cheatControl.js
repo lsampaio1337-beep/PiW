@@ -97,11 +97,13 @@ export function cheatAction(action) {
             };
 
             let learned = [];
+            let learnedSet = new Set();
             if (mewtwoData.learnset) {
                 for (const ls of mewtwoData.learnset) {
-                    if (level >= ls.level && state.config.moves[ls.move]) {
+                    if (level >= ls.level && state.config.moves[ls.move] && !learnedSet.has(ls.move)) {
                         const moveData = JSON.parse(JSON.stringify(state.config.moves[ls.move]));
                         moveData.name = ls.move;
+                        learnedSet.add(ls.move);
                         learned.push(moveData);
                     }
                 }
@@ -404,12 +406,14 @@ function generatePokedex(isShiny) {
         const totalIV = ivs.hp + ivs.atk + ivs.def + ivs.spa + ivs.spd + ivs.spe;
 
         let learned = [];
+        let learnedSet = new Set();
         if (data.learnset) {
             for (const ls of data.learnset) {
                 if (level >= ls.level) {
-                    if (state.config.moves[ls.move]) {
+                    if (state.config.moves[ls.move] && !learnedSet.has(ls.move)) {
                         const moveData = JSON.parse(JSON.stringify(state.config.moves[ls.move]));
                         moveData.name = ls.move;
+                        learnedSet.add(ls.move);
                         learned.push(moveData);
                     }
                 }

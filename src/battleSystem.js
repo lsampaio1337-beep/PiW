@@ -1061,11 +1061,13 @@ class BattleSystem {
     getLearnsetMoves(pokemonBase, level) {
         if (!pokemonBase.learnset) return [];
         let learned = [];
+        let learnedSet = new Set();
         for (const ls of pokemonBase.learnset) {
             if (level >= ls.level) {
-                if (this.state.config.moves[ls.move]) {
+                if (this.state.config.moves[ls.move] && !learnedSet.has(ls.move)) {
                     const moveData = { ...this.state.config.moves[ls.move] };
                     moveData.name = ls.move;
+                    learnedSet.add(ls.move);
                     learned.push(moveData);
                 }
             }
@@ -1918,12 +1920,14 @@ class BattleSystem {
                     // Moves
                     let getLearnsetMoves = (pokemonBase, level) => {
                         let learned = [];
+                        let learnedSet = new Set();
                         for (let i = 1; i <= level; i++) {
                             if (pokemonBase.learnset && pokemonBase.learnset[i]) {
                                 const moveNames = pokemonBase.learnset[i];
                                 for (const mName of moveNames) {
                                     const moveData = this.state.config.moves[mName];
-                                    if (moveData && !learned.find(lm => lm.name === mName)) {
+                                    if (moveData && !learnedSet.has(mName)) {
+                                        learnedSet.add(mName);
                                         learned.push(moveData);
                                     }
                                 }
@@ -2516,11 +2520,15 @@ class BattleSystem {
                         fainted.currentHp = Math.min(fainted.currentHp, fainted.maxHp);
 
                         let learned = [];
+                        let learnedSet = new Set();
                         for (let i = 1; i <= fainted.level; i++) {
                             if (newBase.learnset && newBase.learnset[i]) {
                                 for (const mName of newBase.learnset[i]) {
                                     const moveData = this.state.config.moves[mName];
-                                    if (moveData && !learned.find(lm => lm.name === mName)) learned.push(moveData);
+                                    if (moveData && !learnedSet.has(mName)) {
+                                        learnedSet.add(mName);
+                                        learned.push(moveData);
+                                    }
                                 }
                             }
                         }
