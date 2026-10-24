@@ -533,6 +533,7 @@ export function openPokeMarketSell() {
 }
 
 export function renderPokeMarketSellTab(category) {
+    const map = getPokemonDataMap();
     const content = document.getElementById('market-sell-content');
     if (!content) return;
 
@@ -591,7 +592,6 @@ export function renderPokeMarketSellTab(category) {
 
             if (p.bst === undefined) {
                 if (typeof p.id === 'number') {
-                    const map = getPokemonDataMap();
                     if (map) {
                         const pd = map.get(p.id);
                         if (pd) p.bst = pd.hp + pd.atk + pd.def + pd.spa + pd.spd + pd.spe;
@@ -602,7 +602,6 @@ export function renderPokeMarketSellTab(category) {
 
             let pName = p.name || p.id;
             if (typeof p.id === 'number') {
-                const map = getPokemonDataMap();
                 if (map) {
                     const pd = map.get(p.id);
                     if (pd) pName = p.name || pd.name;
@@ -869,6 +868,7 @@ window.toggleMarketPokemonFilters = function() {
 };
 
 window.marketSelectAllPokemonForSale = function() {
+    const map = getPokemonDataMap();
     if (!window.marketSelectedPokemonForSale) window.marketSelectedPokemonForSale = new Set();
 
     const filterName = (document.getElementById('market-filter-name')?.value || '').toLowerCase();
@@ -885,7 +885,6 @@ window.marketSelectAllPokemonForSale = function() {
 
         let pName = p.name || p.id;
         if (typeof p.id === 'number') {
-                const map = getPokemonDataMap();
                 if (map) {
                     const pd = map.get(p.id);
                     if (pd) pName = p.name || pd.name;
@@ -907,6 +906,7 @@ window.marketSelectAllPokemonForSale = function() {
 };
 
 function updateMarketPokemonSellCount() {
+    const map = getPokemonDataMap();
     const countSpan = document.getElementById('market-pokemon-sell-count');
     const totalSpan = document.getElementById('market-pokemon-sell-total');
     if (countSpan && totalSpan && window.marketSelectedPokemonForSale) {
@@ -919,7 +919,6 @@ function updateMarketPokemonSellCount() {
                 let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
                 if (p.bst === undefined) {
                     if (typeof p.id === 'number') {
-                    const map = getPokemonDataMap();
                     if (map) {
                         const pd = map.get(p.id);
                         if (pd) p.bst = pd.hp + pd.atk + pd.def + pd.spa + pd.spd + pd.spe;
@@ -937,6 +936,7 @@ function updateMarketPokemonSellCount() {
 }
 
 window.marketSellSelectedPokemon = function() {
+    const map = getPokemonDataMap();
     if (!window.marketSelectedPokemonForSale || window.marketSelectedPokemonForSale.size === 0) return;
 
     let numSold = window.marketSelectedPokemonForSale.size;
@@ -947,7 +947,6 @@ window.marketSellSelectedPokemon = function() {
             let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
             if (p.bst === undefined) {
                 if (typeof p.id === 'number') {
-                    const map = getPokemonDataMap();
                     if (map) {
                         const pd = map.get(p.id);
                         if (pd) p.bst = pd.hp + pd.atk + pd.def + pd.spa + pd.spd + pd.spe;
