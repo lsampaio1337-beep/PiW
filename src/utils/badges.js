@@ -44,8 +44,8 @@ export const badgeMapping = {
         "2": "Badge_Kanto_2_Cascade_Water.png",
         "3": "Badge_Kanto_3_Thunder_Electric.png",
         "4": "Badge_Kanto_4_Rainbow_Grass.png",
-        "5": "Badge_Kanto_5_Soul_Poison.png",
-        "6": "Badge_Kanto_6_Marsh_Psychic.png",
+        "5": "Badge_Kanto_5_Marsh_Psychic.png",
+        "6": "Badge_Kanto_6_Soul_Poison.png",
         "7": "Badge_Kanto_7_Volcano_Fire.png",
         "8": "Badge_Kanto_8_Earth_Ground.png"
     },
