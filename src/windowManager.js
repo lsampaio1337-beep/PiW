@@ -89,7 +89,7 @@ export class WindowManager {
                                 'showMapTooltip', 'showModal', 'showPokemonStats', 'showPokemonStatsByUuid', 'showProfLabModal',
                                 'showSmartCaptureBallSelection', 'showSmartCaptureMode', 'showTimeLapseModal', 'showTimeLapseResults',
                                 'showTokenItemSelect', 'showTrainerStats', 'showVitaminsModal', 'showZzZConfirmationModal',
-                                'skipProfTutorial', 'startCasinoEncounter', 'startGymBattle', 'startNewGame', 'switchMapRegion',
+                                'skipProfTutorial', 'startCasinoEncounter', 'startGymBattle', 'startNewGame', 'switchMapRegion', 'promptWakeUpRegion',
                                 'switchMultiplayerTab', 'switchView', 'toggleMarketPokemonFilters', 'toggleMarketPokemonSaleSelection',
                                 'toggleSaleSelection', 'trackDailyChallenge', 'transformDitto', 'updateBuyItemPrice',
                                 'updateMainControl', 'updatePokemonFilter', 'updateSellItemPrice', 'updateSmartCaptureIcon',
@@ -137,6 +137,7 @@ export class WindowManager {
                                         if (s === 'null') return null;
                                         if (s === 'undefined') return undefined;
                                         if (!isNaN(s) && s !== '') return Number(s);
+                                        if (s === 'this.value') return this.value;
                                         return s;
                                     });
                                     window[funcName](...processedArgs);
@@ -180,6 +181,7 @@ export class WindowManager {
                                         if (s === 'null') return null;
                                         if (s === 'undefined') return undefined;
                                         if (!isNaN(s) && s !== '') return Number(s);
+                                        if (s === 'this.value') return this.value;
                                         return s;
                                     });
                                     window[objName][funcName](...processedArgs);
@@ -216,11 +218,7 @@ export class WindowManager {
             });
 
 
-            targetElement.innerHTML = '';
-            // Move nodes from the parsed body document into the active DOM
-            while (body.firstChild) {
-                targetElement.appendChild(body.firstChild);
-            }
+            targetElement.replaceChildren(...body.childNodes);
     }
 
 

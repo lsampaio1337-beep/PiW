@@ -450,9 +450,7 @@ def parse_requirements(req_str, area_id):
         # We need to split by "and" or "," but first fix specific edge cases
         # Specific replacement for starters
         req_str_fixed = req_str.replace("Capture all 6 starters", "Catch 1 Bulbasaur, Catch 1 Charmander, Catch 1 Squirtle, Catch 1 Chikorita, Catch 1 Cyndaquil, Catch 1 Totodile")
-        req_str_fixed = req_str_fixed.replace("Capture 1 Hitmonlee Capture 1 Hitmonchan Capture 1 Hitmontop", "Capture 1 Hitmonlee, Capture 1 Hitmonchan, Capture 1 Hitmontop")
-        req_str_fixed = req_str_fixed.replace("Catch 1 Venusaur Catch 1 Charizard Catch 1 Blastoise", "Catch 1 Venusaur, Catch 1 Charizard, Catch 1 Blastoise")
-        req_str_fixed = req_str_fixed.replace("Get 1 Articuno Get 1 Zapdos Get 1 Moltres", "Get 1 Articuno, Get 1 Zapdos, Get 1 Moltres")
+        req_str_fixed = re.sub(r"(?<!\band)(?<!,)\s+(Catch|Capture|Get|Defeat)\b", r", \1", req_str_fixed, flags=re.IGNORECASE)
 
         # Replace " and " with ", "
         req_str_fixed = req_str_fixed.replace(" and ", ", ")

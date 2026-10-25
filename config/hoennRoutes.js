@@ -1711,7 +1711,7 @@ export const hoennUnlocks = [
   { "challengeName": "Extra Challenge B 5", "areaId": "Sealed Chamber", "unlocks": ["Ancient Ruins"], "gift": { "item": "Masterball", "count": 2 }, "requirements": { "defeatSpecific": { "name": "Relicanth", "count": 1 } } },
   { "challengeName": "Extra Challenge B 6", "areaId": "Ancient Ruins", "unlocks": ["Key to Nebula Fissure"], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Regirock", "count": 1 }, { "species": "Regice", "count": 1 }, { "species": "Registeel", "count": 1 }] } },
   { "challengeName": "Extra Challenge (Roaming)", "areaId": "Roaming Hoenn Skies", "unlocks": ["Key to Nebula Fissure"], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "defeatMultipleSpecific": [{ "name": "Latias", "count": 1 }, { "name": "Latios", "count": 1 }] } },
-  { "challengeName": "Key to Nebula Fissure", "areaId": "Key to Nebula Fissure", "unlocks": ["Nebula Fissure"], "requirements": { "completeChallenges": ["Hoenn Pokemon League", "Weather Climax Cave", "Ancient Ruins", "Roaming Hoenn Skies"] } },
+  { "challengeName": "Key to Nebula Fissure", "areaId": "Key to Nebula Fissure", "unlocks": ["Nebula Fissure"], "requirements": { "completeChallenges": ["Extra Challenge A 5", "Extra Challenge B 6", "Extra Challenge (Roaming)"] } },
   { "challengeName": "Nebula Fissure Challenge", "areaId": "Nebula Fissure", "unlocks": [], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "defeatSpecific": { "name": "Deoxys", "count": 1 } } }
 ]
 ;

@@ -254,7 +254,7 @@ document.addEventListener('click', (e) => {
 
 const PLAINS_ROUTES = ["Route 1","Route 2","Route 3","Route 4","Route 24","Route 25","Route 9","Route 10","Power Plant","Route 5","Fighting Dojo","Route 7","Route 6","Route 8","Route 11","Route 12","Cycling Road","Route 13","Route 14","Route 15","Pokémon Mansion","Trade With Friends Hub","Route 22","Route 23","Victory Road"];
 const WATER_ROUTES = ["Small Fishing Spot","Sea Routes","Seafoam Islands","Big Fishing Spot"];
-const CAVE_ROUTES = ["Mount Moon","Cerulean Cave","Pokémon Tower","Rock Tunnel","Fossil Revival Lab","Mythical and Legendaries"];
+const CAVE_ROUTES = ["Mount Moon","Cerulean Cave","Pokémon Tower","Rock Tunnel","Fossil Revival Lab","Temporal Sanctuary Spot"];
 const SCROLLING_ROUTES = ["Viridian Forest"].concat(PLAINS_ROUTES, WATER_ROUTES, CAVE_ROUTES);
 
 
@@ -305,17 +305,18 @@ function updateBattleBackground(combatArena, state, battleSystem, inGymCombat, i
                 dynamicBg.style.backgroundSize = '100% 100%';
                 dynamicBg.style.overflow = 'hidden';
 
-                dynamicBg.innerHTML = `
-                    <img src="${spritePath}" style="
-                        position: absolute;
-                        left: ${assetConfig.position.rel_x * 100}%;
-                        top: ${assetConfig.position.rel_y * 100}%;
-                        width: ${(assetConfig.size.px_width / 1800) * 100}%;
-                        transform: rotate(${assetConfig.tilt.angle_deg}deg);
-                        transform-origin: ${assetConfig.tilt.origin};
-                        pointer-events: none;
-                    ">
-                `;
+                const imgNode = document.createElement('img');
+                imgNode.src = spritePath;
+                imgNode.style.position = 'absolute';
+                imgNode.style.left = `${assetConfig.position.rel_x * 100}%`;
+                imgNode.style.top = `${assetConfig.position.rel_y * 100}%`;
+                imgNode.style.width = `${(assetConfig.size.px_width / 1800) * 100}%`;
+                imgNode.style.transform = `rotate(${assetConfig.tilt.angle_deg}deg)`;
+                imgNode.style.transformOrigin = assetConfig.tilt.origin;
+                imgNode.style.pointerEvents = 'none';
+
+                // Clear any existing children just in case, though it should be empty
+                dynamicBg.replaceChildren(imgNode);
 
                 combatArena.style.backgroundImage = 'none';
                 combatArena.style.position = 'relative'; // Ensure relative positioning
@@ -891,7 +892,7 @@ export function showDamage(target, amount, isCrit, moveName = '', moveType = 'No
             const attacker = target === 'player' ? 'Enemy' : 'You';
             const typeColor = TYPE_COLORS[moveType] || '#ffffff';
 
-            // Mitigate XSS: Build elements safely
+            // Mitigate XSS: Build inner node safely
             entry.textContent = `${attacker} used `;
 
             const bNode = document.createElement('b');

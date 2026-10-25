@@ -329,8 +329,8 @@ const johtoMapCoordinates = {
     "x": 63.93,
     "y": 34.57
   },
-  "mythical_and_legendaries_spot": {
-    "name": "Mythical and Legendaries Spot",
+  "temporal_sanctuary_spot": {
+    "name": "Temporal Sanctuary Spot",
     "x": 55.8,
     "y": 34.57
   },

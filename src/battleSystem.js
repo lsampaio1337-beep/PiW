@@ -73,7 +73,14 @@ class BattleSystem {
         const routes = window.getCurrentRoutes();
         let foundRoute = undefined;
         if (routes) {
-            foundRoute = routes.find(r => r.name === routeName);
+            if (this._routeMapRegion !== currentRegion || !this._routeMap) {
+                this._routeMap = new Map();
+                for (let i = 0; i < routes.length; i++) {
+                    this._routeMap.set(routes[i].name, routes[i]);
+                }
+                this._routeMapRegion = currentRegion;
+            }
+            foundRoute = this._routeMap.get(routeName);
         }
 
         this._cachedRouteName = routeName;
@@ -1001,7 +1008,7 @@ class BattleSystem {
             let selectedSpawn;
 
             // Check if Roaming challenge is active for the 1% beast spawn
-            if (this.state.stats.activeChallenges && this.state.stats.activeChallenges.includes("Roaming")) {
+            if (this.state.stats.activeChallenges && this.state.stats.activeChallenges.includes("Extra Challenge (Roaming)")) {
                 if (Math.random() < 0.01) {
                     isRoamingEncounter = true;
                 }
@@ -1932,6 +1939,7 @@ class BattleSystem {
 
                 // Learn new moves
                 pokemon.moves = this.getLearnsetMoves(pBase, pokemon.level);
+                // Performance optimized: move lookup is now O(1) via Set in getLearnsetMoves
             }
         }
     }
