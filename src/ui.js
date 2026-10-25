@@ -460,6 +460,34 @@ window.cheatProgressChallenge = function(targetAreaId) {
             if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};
             state.stats.defeatedBosses["Red"] = true;
         }
+        if (req.completeChallenges) {
+            if (!state.stats.completedChallengeIds) state.stats.completedChallengeIds = [];
+            for (let target of req.completeChallenges) {
+                // Try to find actual areaId
+                let match = null;
+                if (typeof window !== 'undefined' && window.getCurrentUnlocks) {
+                    match = window.getCurrentUnlocks().find(u => u.challengeName === target || u.areaId === target);
+                }
+                let checkId = match ? match.areaId : target;
+                if (!state.stats.completedChallengeIds.includes(checkId)) {
+                    state.stats.completedChallengeIds.push(checkId);
+                }
+            }
+        }
+        if (req.completeAnyOfChallenges) {
+            if (!state.stats.completedChallengeIds) state.stats.completedChallengeIds = [];
+            if (req.completeAnyOfChallenges.length > 0) {
+                let target = req.completeAnyOfChallenges[0];
+                let match = null;
+                if (typeof window !== 'undefined' && window.getCurrentUnlocks) {
+                    match = window.getCurrentUnlocks().find(u => u.challengeName === target || u.areaId === target);
+                }
+                let checkId = match ? match.areaId : target;
+                if (!state.stats.completedChallengeIds.includes(checkId)) {
+                    state.stats.completedChallengeIds.push(checkId);
+                }
+            }
+        }
     }
         if (window.updateUI) window.updateUI();
     const challengeWinCheat = document.getElementById('window-challenges');

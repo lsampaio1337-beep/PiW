@@ -217,6 +217,35 @@ export function getChallengeData(unlock) {
         }
     }
 
+    if (req.completeAnyOfChallenges) {
+        let completedIds = state.stats.completedChallengeIds || [];
+        let anyCompleted = false;
+        let targetsText = [];
+        for (let target of req.completeAnyOfChallenges) {
+            let match = null;
+            if (typeof window !== 'undefined' && window.getCurrentUnlocks) {
+                match = window.getCurrentUnlocks().find(u => u.challengeName === target || u.areaId === target);
+            }
+            if (!match && state.config) {
+                let allUnlocks = [];
+                if (state.config.unlocks) allUnlocks = allUnlocks.concat(state.config.unlocks);
+                if (state.config.johtoUnlocks) allUnlocks = allUnlocks.concat(state.config.johtoUnlocks);
+                if (state.config.hoennUnlocks) allUnlocks = allUnlocks.concat(state.config.hoennUnlocks);
+                if (state.config.sinnohUnlocks) allUnlocks = allUnlocks.concat(state.config.sinnohUnlocks);
+                if (state.config.unovaUnlocks) allUnlocks = allUnlocks.concat(state.config.unovaUnlocks);
+                match = allUnlocks.find(u => u && (u.challengeName === target || u.areaId === target));
+            }
+
+            let checkId = match ? match.areaId : target;
+            if (completedIds.includes(checkId)) {
+                anyCompleted = true;
+            }
+            targetsText.push(target);
+        }
+        if (!anyCompleted) isMet = false;
+        textParts.push(`Complete any of: ${targetsText.join(', ')}${getStatusHtml(anyCompleted)}`);
+    }
+
     return { isMet, textParts };
 }
 
