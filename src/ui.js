@@ -2940,19 +2940,20 @@ export function renderProfessorLab() {
 ${starterButtonsHtml}
                 </div>`;
 
-        labContent.innerHTML = `
+        const labContentHtml = `
             <div style="background-color: rgba(0,0,0,0.8); position: absolute; left: 15%; top: 50%; transform: translateY(-50%); padding: 30px; border-radius: 8px;">
                 <h2>Choose your Starter Pokémon</h2>
                 ${starterHtml}
             </div>
         `;
+        window.windowManager._parseAndSanitizeToElement(labContentHtml, labContent);
     } else {
         // Show assignments (identical to Kanto layout)
         let exclamationHtml = state.stats.showProfLobbyNotification
             ? `<img src="Assets/Extra/Icons/ExclamationMark.png" style="position: absolute; top: -5px; right: -5px; width: 20px; height: auto; pointer-events: none; z-index: 10;">`
             : ``;
 
-        labContent.innerHTML = `
+        const labContentHtml = `
             <div style="background-color: rgba(0,0,0,0.85); position: absolute; left: 15%; top: 50%; transform: translateY(-50%); padding: 20px; border-radius: 8px; width: 250px; color: white; text-align: center;">
                 <h2 style="margin-top:0;">Professor Lab</h2>
                 <div style="display: flex; flex-direction: column; gap: 10px;">
@@ -2963,6 +2964,7 @@ ${starterButtonsHtml}
                 </div>
             </div>
         `;
+        window.windowManager._parseAndSanitizeToElement(labContentHtml, labContent);
     }
 }
 
