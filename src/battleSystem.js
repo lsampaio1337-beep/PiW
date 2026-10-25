@@ -65,18 +65,22 @@ class BattleSystem {
 
     getRoute(routeName) {
         const currentRegion = this.state.currentRegionName;
-        // Build or rebuild cache if region changed or if it doesn't exist
-        if (!this._routeMapCache || this._routeMapCache.region !== currentRegion) {
-            const routes = window.getCurrentRoutes();
-            const map = new Map();
-            if (routes) {
-                for (const r of routes) {
-                    map.set(r.name, r);
-                }
-            }
-            this._routeMapCache = { region: currentRegion, map: map };
+
+        if (this._cachedRouteName === routeName && this._cachedRegionName === currentRegion) {
+            return this._cachedRoute;
         }
-        return this._routeMapCache.map.get(routeName);
+
+        const routes = window.getCurrentRoutes();
+        let foundRoute = undefined;
+        if (routes) {
+            foundRoute = routes.find(r => r.name === routeName);
+        }
+
+        this._cachedRouteName = routeName;
+        this._cachedRegionName = currentRegion;
+        this._cachedRoute = foundRoute;
+
+        return foundRoute;
     }
 
     getGym(gymName) {
