@@ -139,7 +139,6 @@ ${state.party.map((p, i) => `${i+1}. ${p.name} Lv.${p.level}`).join('\n')}
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
-            console.log("Log exported.");
         } catch(e) {
             console.error("Log export failed:", e);
         }
