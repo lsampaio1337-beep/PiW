@@ -2022,179 +2022,15 @@ async function init() {
                     startGame();
 
                     if (state.isZzZMode) {
-                        const resumeHtml = `
-    <div class="content-panel" style="display: flex; flex-direction: column; gap: 15px; width: 100%; text-align: center;">
-        <p style="color: white; margin: 0;">Do you want to collect the farm while Sleeping?</p>
-        <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px;">
-            <button id="btn-zzz-resume-yes" style="padding: 10px; font-size: 16px; font-weight: bold; cursor: pointer; background-color: #4CAF50; color: white; border: none; border-radius: 5px; flex: 1;">Yes</button>
-            <button id="btn-zzz-resume-no" style="padding: 10px; font-size: 16px; font-weight: bold; cursor: pointer; background-color: #f44336; color: white; border: none; border-radius: 5px; flex: 1;">No</button>
-        </div>
-    </div>
-`;
-showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
+                        // For a clean load into sleep mode we don't start at lab. We just wait for wakeup.
+                        if (globals.battleSystem) globals.battleSystem.stop();
 
-                        document.getElementById('btn-zzz-resume-no').onclick = () => {
-                            state.isZzZMode = false;
-                            state.zzzTimestamp = null;
-                            storage.save(state);
-                            if(window.windowManager) window.windowManager.closeDynamicWindow('window-zzz-resume');
-                            // Start normally at Professor's lab
-                            returnToLab();
-                        };
-
-                        document.getElementById('btn-zzz-resume-yes').onclick = () => {
-                            if(window.windowManager) window.windowManager.closeDynamicWindow('window-zzz-resume');
-
-                            // Simulate sleep farm
-                            let timeElapsedMs = Date.now() - (state.zzzTimestamp || Date.now());
-                            timeElapsedMs = Math.max(0, timeElapsedMs); // Prevent negative time if system clock changes
-
-                            // Cap time elapsed by grains
-                            let availableGrains = state.stats.jigglypuffGrains || 0;
-                            let maxTimeMs = availableGrains * 60000;
-
-                            if (timeElapsedMs > maxTimeMs) {
-                                timeElapsedMs = maxTimeMs;
+                        document.querySelectorAll('.nav-icon').forEach(icon => {
+                            if (icon.id !== 'btn-sleep') {
+                                icon.style.pointerEvents = 'none';
+                                icon.style.filter = 'grayscale(100%)';
                             }
-
-                            const results = globals.battleSystem.runFastForward(timeElapsedMs);
-
-                            let displayTimeMs = results.simulatedTimeMs !== undefined ? results.simulatedTimeMs : timeElapsedMs;
-
-                            // Make sure to cap the max time back to max available grains to avoid overdraft when resuming from save/etc.
-                            let actualTimeConsumedMs = Math.min(displayTimeMs, maxTimeMs);
-                            let consumedGrains = Math.ceil(actualTimeConsumedMs / 60000);
-                            state.stats.jigglypuffGrains = Math.max(0, availableGrains - consumedGrains);
-                            state.stats.jigglypuffGrainsUsed = (state.stats.jigglypuffGrainsUsed || 0) + consumedGrains;
-
-                            // Track Daily Challenges
-                            trackDailyChallenge('sleep_minutes', { amount: Math.floor(actualTimeConsumedMs / 60000) });
-
-                            state.isZzZMode = false;
-                            state.zzzTimestamp = null;
-                            storage.save(state);
-
-                            // Format Time based on actual simulated time returned by the engine
-                            let totalSeconds = Math.floor(displayTimeMs / 1000);
-                            let d = Math.floor(totalSeconds / (3600 * 24));
-                            let h = Math.floor((totalSeconds % (3600 * 24)) / 3600);
-                            let m = Math.floor((totalSeconds % 3600) / 60);
-                            let s = totalSeconds % 60;
-
-                            let timeStr = "";
-                            if (d > 0) timeStr += `${d}d`;
-                            if (h > 0 || d > 0) timeStr += `${h}h`;
-                            if (m > 0 || h > 0 || d > 0) timeStr += `${m}m`;
-                            timeStr += `${s}s`; // Always display seconds
-
-                            // Items Used Names
-                            let ballUsedStr = "No Ball Used";
-                            let ballIconStr = `<div style="font-size: 18px; color: #64748b; margin-bottom: 5px;">-</div>`;
-                            if (state.settings.activeBallTier >= 0) {
-                                const ballName = state.config.balance.items.pokeballs[state.settings.activeBallTier].name;
-                                ballUsedStr = `${results.ballsUsed} ${ballName}s`;
-                                ballIconStr = `<img src="Assets/Items/Balls/${ballName}.png" style="width: 30px; height: 30px; margin-bottom: 5px;" alt="${ballName}">`;
-                            }
-
-                            let potionUsedStr = "No Potion Used";
-                            let potionIconStr = `<div style="font-size: 18px; color: #64748b; margin-bottom: 5px;">-</div>`;
-                            if (state.settings.activePotionTier >= 0) {
-                                const potionName = state.config.balance.items.potions[state.settings.activePotionTier].name;
-                                potionUsedStr = `${results.potionsUsed} ${potionName}s`;
-                                potionIconStr = `<img src="Assets/Items/Potions/${potionName}.png" style="width: 30px; height: 30px; margin-bottom: 5px;" alt="${potionName}">`;
-                            }
-
-                            let faintedBanner = "";
-                            if (results.fainted) {
-                                faintedBanner = `<div style="background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; border-radius: 8px; padding: 10px; color: #fca5a5; text-align: center; font-weight: bold; margin-top: 5px;">❌ Farm Stopped: Party Fainted</div>`;
-                            } else if (results.outOfMoney) {
-                                faintedBanner = `<div style="background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; border-radius: 8px; padding: 10px; color: #fca5a5; text-align: center; font-weight: bold; margin-top: 5px;">❌ Farm Stopped: No money to buy more entries</div>`;
-                            } else if (results.simulatedTimeMs !== undefined && results.simulatedTimeMs >= maxTimeMs) {
-                                faintedBanner = `<div style="background: rgba(234, 179, 8, 0.2); border: 1px solid #facc15; border-radius: 8px; padding: 10px; color: #fde047; text-align: center; font-weight: bold; margin-top: 5px;">❌ Farm Stopped: Jigglypuff Dust ended</div>`;
-                            } else {
-                                faintedBanner = `<div style="background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; border-radius: 8px; padding: 10px; color: #6ee7b7; text-align: center; font-weight: bold; margin-top: 5px;">✅ Farm Stopped: Logged in a save</div>`;
-                            }
-
-                            // Show results modal
-
-
-                            const resultsHtml = `
-                                <div class="content-panel">
-                                <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.3); padding: 8px 12px; border-radius: 8px; margin-bottom: 15px;">
-                                    <div style="font-size: 14px; color: #cbd5e1;">📍 <b>Route:</b> ${state.currentRoute}</div>
-                                    <div style="font-size: 14px; color: #cbd5e1;">⏳ <b>Time:</b> ${timeStr.trim()}</div>
-                                </div>
-
-                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-
-                                    <!-- Money Earned -->
-                                    <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid #10b981; border-radius: 8px; padding: 12px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                                        <div style="font-size: 11px; color: #6ee7b7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;">Money Earned</div>
-                                        <div style="font-size: 18px; font-weight: bold; color: #10b981;">+$${Math.floor(results.moneyEarned).toLocaleString('pt-BR')}</div>
-                                    </div>
-
-                                    <!-- XP Earned -->
-                                    <div style="background: rgba(59, 130, 246, 0.1); border: 1px solid #3b82f6; border-radius: 8px; padding: 12px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                                        <div style="font-size: 11px; color: #93c5fd; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;">XP Earned</div>
-                                        <div style="font-size: 18px; font-weight: bold; color: #3b82f6;">+${Math.floor(results.xpEarned).toLocaleString('pt-BR')} XP</div>
-                                    </div>
-
-                                    <!-- Caught Card -->
-                                    <div style="background: rgba(255,255,255,0.05); border: 1px solid #475569; border-radius: 8px; padding: 12px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                                        <div style="font-size: 11px; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;">Pokémon Caught</div>
-                                        <div style="font-size: 18px; font-weight: bold; color: #fff;">${results.caught}/${results.encounters}</div>
-                                    </div>
-
-                                    <!-- Shinies Card -->
-                                    <div style="background: rgba(255,255,255,0.05); border: 1px solid #475569; border-radius: 8px; padding: 12px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; overflow: hidden;">
-                                        ${results.shinies > 0 ? '<div style="position: absolute; top: -10px; left: -10px; width: 150%; height: 150%; background: radial-gradient(circle, rgba(168,85,247,0.2) 0%, transparent 70%); pointer-events: none;"></div>' : ''}
-                                        <div style="font-size: 11px; color: #d8b4fe; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; z-index: 1;">Shinies Caught</div>
-                                        <div style="font-size: 18px; font-weight: bold; color: #fff; z-index: 1;">${results.shinies}/${results.shinyEncounters}</div>
-                                    </div>
-
-                                    <!-- Items Used Header -->
-                                    <div style="grid-column: span 2; border-bottom: 1px solid #334155; padding-bottom: 5px; margin-top: 5px; color: #94a3b8; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; text-align: center;">Resources Used</div>
-
-                                    <!-- Balls Used -->
-                                    <div style="background: rgba(0,0,0,0.2); border: 1px dashed #475569; border-radius: 8px; padding: 10px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                                        ${ballIconStr}
-                                        <div style="font-size: 12px; color: #cbd5e1;">${ballUsedStr}</div>
-                                    </div>
-
-                                    <!-- Potions Used -->
-                                    <div style="background: rgba(0,0,0,0.2); border: 1px dashed #475569; border-radius: 8px; padding: 10px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                                        ${potionIconStr}
-                                        <div style="font-size: 12px; color: #cbd5e1;">${potionUsedStr}</div>
-                                    </div>
-
-                                </div>
-                                ${faintedBanner}
-                                <button id="btn-zzz-results-close-dynamic" style="padding: 12px; font-size: 16px; font-weight: bold; cursor: pointer; background: linear-gradient(to right, #10b981, #059669); color: white; border: 1px solid #34d399; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); margin-top: 15px; width: 100%; text-transform: uppercase; letter-spacing: 1px;">Claim Rewards</button>
-                                </div>
-                            `;
-                            showModal("ZzZ Mode", resultsHtml, "window-zzz-rewards");
-
-                            document.getElementById('btn-zzz-results-close-dynamic').onclick = () => {
-                                if(window.windowManager) window.windowManager.closeDynamicWindow('window-zzz-rewards');
-                            };
-
-
-                            if (results.fainted) {
-                                state.currentRoute = "PokeCenter & PokeMarket";
-                                window.navigateToLocation("PokeCenter & PokeMarket");
-                            } else if (results.outOfMoney) {
-                                if (["Safari Zone", "Kanto Safari Zone"].includes(state.currentRoute)) {
-                                    switchView("SAFARI_HUB");
-                                } else if (state.currentRoute && state.currentRoute.startsWith("Casino - ")) {
-                                    state.currentRoute = "Casino";
-                                    window.navigateToLocation("Casino");
-                                } else {
-                                    returnToLab();
-                                }
-                            } else {
-                                returnToLab();
-                            }
-                        };
+                        });
                     } else {
                         // Saved profiles always start at Professor's lab and are free to explore
                         returnToLab();
@@ -2391,16 +2227,38 @@ showModal("Sleep Mode", resumeHtml, "window-zzz-resume", "400px");
                 state.settings.isSleepModeActive = true;
                 state.stats.lastSaveTime = Date.now();
                 storage.save(state);
-                window.close();
+
+                if (window.windowManager) {
+                    const winsToClose = [...window.windowManager.windows];
+                    winsToClose.forEach(win => {
+                        if (win.id !== 'main-control-window' && win.id !== 'window-zzz-confirmation') {
+                            window.windowManager.closeDynamicWindow(win.id);
+                        }
+                    });
+                    window.windowManager.closeDynamicWindow('window-zzz-confirmation');
+                }
+
+                if (globals.battleSystem) globals.battleSystem.stop();
+
+                document.querySelectorAll('.nav-icon').forEach(icon => {
+                    if (icon.id !== 'btn-sleep') {
+                        icon.style.pointerEvents = 'none';
+                        icon.style.filter = 'grayscale(100%)';
+                    }
+                });
             };
 };
 
         bindBtn('btn-sleep', () => {
         if(!checkCombatLock()) {
-            state.stats.hasSeenZzZIcon = true;
-            storage.save(state);
-            updateMainControl();
-            window.showZzZConfirmationModal();
+            if (state.isZzZMode) {
+                window.showWakeUpModal();
+            } else {
+                state.stats.hasSeenZzZIcon = true;
+                storage.save(state);
+                updateMainControl();
+                window.showZzZConfirmationModal();
+            }
         }
     });
 
@@ -2956,3 +2814,197 @@ ${starterButtonsHtml}
     }
 }
 
+
+
+window.simulateSleepFarm = function() {
+    // Simulate sleep farm
+    let timeElapsedMs = Date.now() - (state.zzzTimestamp || Date.now());
+    timeElapsedMs = Math.max(0, timeElapsedMs); // Prevent negative time if system clock changes
+
+    // Cap time elapsed by grains
+    let availableGrains = state.stats.jigglypuffGrains || 0;
+    let maxTimeMs = availableGrains * 60000;
+
+    if (timeElapsedMs > maxTimeMs) {
+        timeElapsedMs = maxTimeMs;
+    }
+
+    const results = globals.battleSystem.runFastForward(timeElapsedMs);
+
+    let displayTimeMs = results.simulatedTimeMs !== undefined ? results.simulatedTimeMs : timeElapsedMs;
+
+    // Make sure to cap the max time back to max available grains to avoid overdraft when resuming from save/etc.
+    let actualTimeConsumedMs = Math.min(displayTimeMs, maxTimeMs);
+    let consumedGrains = Math.ceil(actualTimeConsumedMs / 60000);
+    state.stats.jigglypuffGrains = Math.max(0, availableGrains - consumedGrains);
+    state.stats.jigglypuffGrainsUsed = (state.stats.jigglypuffGrainsUsed || 0) + consumedGrains;
+
+    // Track Daily Challenges
+    trackDailyChallenge('sleep_minutes', { amount: Math.floor(actualTimeConsumedMs / 60000) });
+
+    state.isZzZMode = false;
+    state.zzzTimestamp = null;
+    storage.save(state);
+
+    // Format Time based on actual simulated time returned by the engine
+    let totalSeconds = Math.floor(displayTimeMs / 1000);
+    let d = Math.floor(totalSeconds / (3600 * 24));
+    let h = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+    let m = Math.floor((totalSeconds % 3600) / 60);
+    let s = totalSeconds % 60;
+
+    let timeStr = "";
+    if (d > 0) timeStr += `${d}d`;
+    if (h > 0 || d > 0) timeStr += `${h}h`;
+    if (m > 0 || h > 0 || d > 0) timeStr += `${m}m`;
+    timeStr += `${s}s`; // Always display seconds
+
+    // Items Used Names
+    let ballUsedStr = "No Ball Used";
+    let ballIconStr = `<div style="font-size: 18px; color: #64748b; margin-bottom: 5px;">-</div>`;
+    if (state.settings.activeBallTier >= 0) {
+        const ballName = state.config.balance.items.pokeballs[state.settings.activeBallTier].name;
+        ballUsedStr = `${results.ballsUsed} ${ballName}s`;
+        ballIconStr = `<img src="Assets/Items/Balls/${ballName}.png" style="width: 30px; height: 30px; margin-bottom: 5px;" alt="${ballName}">`;
+    }
+
+    let potionUsedStr = "No Potion Used";
+    let potionIconStr = `<div style="font-size: 18px; color: #64748b; margin-bottom: 5px;">-</div>`;
+    if (state.settings.activePotionTier >= 0) {
+        const potionName = state.config.balance.items.potions[state.settings.activePotionTier].name;
+        potionUsedStr = `${results.potionsUsed} ${potionName}s`;
+        potionIconStr = `<img src="Assets/Items/Potions/${potionName}.png" style="width: 30px; height: 30px; margin-bottom: 5px;" alt="${potionName}">`;
+    }
+
+    let faintedBanner = "";
+    if (results.fainted) {
+        faintedBanner = `<div style="background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; border-radius: 8px; padding: 10px; color: #fca5a5; text-align: center; font-weight: bold; margin-top: 5px;">❌ Farm Stopped: Party Fainted</div>`;
+    } else if (results.outOfMoney) {
+        faintedBanner = `<div style="background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; border-radius: 8px; padding: 10px; color: #fca5a5; text-align: center; font-weight: bold; margin-top: 5px;">❌ Farm Stopped: No money to buy more entries</div>`;
+    } else if (results.simulatedTimeMs !== undefined && results.simulatedTimeMs >= maxTimeMs) {
+        faintedBanner = `<div style="background: rgba(234, 179, 8, 0.2); border: 1px solid #facc15; border-radius: 8px; padding: 10px; color: #fde047; text-align: center; font-weight: bold; margin-top: 5px;">❌ Farm Stopped: Jigglypuff Dust ended</div>`;
+    } else {
+        faintedBanner = `<div style="background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; border-radius: 8px; padding: 10px; color: #6ee7b7; text-align: center; font-weight: bold; margin-top: 5px;">✅ Farm Stopped: Logged in a save</div>`;
+    }
+
+    // Show results modal
+
+
+    const resultsHtml = `
+        <div class="content-panel">
+        <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.3); padding: 8px 12px; border-radius: 8px; margin-bottom: 15px;">
+            <div style="font-size: 14px; color: #cbd5e1;">📍 <b>Route:</b> ${state.currentRoute}</div>
+            <div style="font-size: 14px; color: #cbd5e1;">⏳ <b>Time:</b> ${timeStr.trim()}</div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+
+            <!-- Money Earned -->
+            <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid #10b981; border-radius: 8px; padding: 12px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                <div style="font-size: 11px; color: #6ee7b7; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;">Money Earned</div>
+                <div style="font-size: 18px; font-weight: bold; color: #10b981;">+$${Math.floor(results.moneyEarned).toLocaleString('pt-BR')}</div>
+            </div>
+
+            <!-- XP Earned -->
+            <div style="background: rgba(59, 130, 246, 0.1); border: 1px solid #3b82f6; border-radius: 8px; padding: 12px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                <div style="font-size: 11px; color: #93c5fd; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;">XP Earned</div>
+                <div style="font-size: 18px; font-weight: bold; color: #3b82f6;">+${Math.floor(results.xpEarned).toLocaleString('pt-BR')} XP</div>
+            </div>
+
+            <!-- Caught Card -->
+            <div style="background: rgba(255,255,255,0.05); border: 1px solid #475569; border-radius: 8px; padding: 12px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                <div style="font-size: 11px; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;">Pokémon Caught</div>
+                <div style="font-size: 18px; font-weight: bold; color: #fff;">${results.caught}/${results.encounters}</div>
+                <div style="font-size: 10px; color: #cbd5e1; margin-top: 5px;">Encounters</div>
+            </div>
+
+            <!-- Shinies Card -->
+            <div style="background: rgba(250, 204, 21, 0.1); border: 1px solid #facc15; border-radius: 8px; padding: 12px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                <div style="font-size: 11px; color: #fde047; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;">Shiny Caught</div>
+                <div style="font-size: 18px; font-weight: bold; color: #facc15;">${results.shinies}/${results.shinyEncounters}</div>
+                <div style="font-size: 10px; color: #fef08a; margin-top: 5px;">Encounters</div>
+            </div>
+
+            <!-- Consumables Card: Balls -->
+            <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid #475569; border-radius: 8px; padding: 12px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                <div style="font-size: 11px; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;">Balls Used</div>
+                ${ballIconStr}
+                <div style="font-size: 12px; font-weight: bold; color: #fff;">${ballUsedStr}</div>
+            </div>
+
+            <!-- Consumables Card: Potions -->
+            <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid #475569; border-radius: 8px; padding: 12px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                <div style="font-size: 11px; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;">Potions Used</div>
+                ${potionIconStr}
+                <div style="font-size: 12px; font-weight: bold; color: #fff;">${potionUsedStr}</div>
+            </div>
+        </div>
+
+        <!-- Banner directly indicating faint or end -->
+        ${faintedBanner}
+        <button id="btn-zzz-results-close-dynamic" style="padding: 12px; font-size: 16px; font-weight: bold; cursor: pointer; background: linear-gradient(to right, #10b981, #059669); color: white; border: 1px solid #34d399; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); margin-top: 15px; width: 100%; text-transform: uppercase; letter-spacing: 1px;">Claim Rewards</button>
+        </div>
+    `;
+
+    showModal("ZzZ Mode", resultsHtml, "window-zzz-rewards");
+
+    document.getElementById('btn-zzz-results-close-dynamic').onclick = () => {
+        if(window.windowManager) window.windowManager.closeDynamicWindow('window-zzz-rewards');
+
+        if (results.fainted) {
+            state.currentRoute = "PokeCenter & PokeMarket";
+            window.navigateToLocation("PokeCenter & PokeMarket");
+        } else if (results.outOfMoney) {
+            if (["Safari Zone", "Kanto Safari Zone"].includes(state.currentRoute)) {
+                switchView("SAFARI_HUB");
+            } else if (state.currentRoute && state.currentRoute.startsWith("Casino - ")) {
+                state.currentRoute = "Casino";
+                window.navigateToLocation("Casino");
+            } else {
+                returnToLab();
+            }
+        } else {
+            returnToLab();
+        }
+    };
+
+};
+
+
+window.showWakeUpModal = function() {
+    const resumeHtml = `
+    <div class="content-panel" style="display: flex; flex-direction: column; gap: 15px; width: 100%; text-align: center;">
+        <p style="color: white; margin: 0;">Do you want to wake up and collect your offline farm?</p>
+        <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px;">
+            <button id="btn-zzz-wakeup-yes" style="padding: 10px; font-size: 16px; font-weight: bold; cursor: pointer; background-color: #4CAF50; color: white; border: none; border-radius: 5px; flex: 1;">Yes</button>
+            <button id="btn-zzz-wakeup-no" style="padding: 10px; font-size: 16px; font-weight: bold; cursor: pointer; background-color: #f44336; color: white; border: none; border-radius: 5px; flex: 1;">No</button>
+        </div>
+    </div>
+    `;
+    showModal("Wake Up?", resumeHtml, "window-zzz-wakeup", "400px");
+
+    document.getElementById('btn-zzz-wakeup-no').onclick = () => {
+        if(window.windowManager) window.windowManager.closeDynamicWindow('window-zzz-wakeup');
+    };
+
+    document.getElementById('btn-zzz-wakeup-yes').onclick = () => {
+        if(window.windowManager) window.windowManager.closeDynamicWindow('window-zzz-wakeup');
+
+        // Restore icons
+        document.querySelectorAll('.nav-icon').forEach(icon => {
+            icon.style.pointerEvents = 'auto';
+            icon.style.filter = 'none';
+        });
+
+        // Restart the game components naturally when waking up
+        if (state.currentRoute === 'Professor Lab' || state.currentRoute === 'PokeCenter & PokeMarket') {
+             // In these areas it's safe to just let it sit
+        } else {
+             if (globals.battleSystem && state.currentRoute !== undefined) {
+                  window.navigateToLocation(state.currentRoute);
+             }
+        }
+
+        window.simulateSleepFarm();
+    };
+};
