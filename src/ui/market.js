@@ -57,16 +57,30 @@ window.sanitizeMarketQInput = function(input) {
 };
 
 export function setupMarket(vCenter) {
-    safeSetHTML(vCenter, `
-        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: space-between; align-items: center; padding: 0 10%; box-sizing: border-box;">
-            <button id="btn-heal-all" style="background: #3498db; color: white; border: 3px solid white; border-radius: 12px; padding: 15px 30px; font-size: 24px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.5); margin-top: -20%;">Heal</button>
-            <div style="display: flex; flex-direction: column; gap: 20px; margin-top: -20%;">
-                <button id="btn-market-market" style="background: #f1c40f; color: black; border: 3px solid white; border-radius: 12px; padding: 15px 30px; font-size: 24px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.5);">Market</button>
-            </div>
-        </div>
-    `);
+    vCenter.replaceChildren();
 
-    document.getElementById('btn-heal-all').addEventListener('click', () => {
+    const container = document.createElement('div');
+    container.style.cssText = "position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: space-between; align-items: center; padding: 0 10%; box-sizing: border-box;";
+
+    const btnHealAll = document.createElement('button');
+    btnHealAll.id = 'btn-heal-all';
+    btnHealAll.style.cssText = "background: #3498db; color: white; border: 3px solid white; border-radius: 12px; padding: 15px 30px; font-size: 24px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.5); margin-top: -20%;";
+    btnHealAll.textContent = 'Heal';
+
+    const rightPanel = document.createElement('div');
+    rightPanel.style.cssText = "display: flex; flex-direction: column; gap: 20px; margin-top: -20%;";
+
+    const btnMarket = document.createElement('button');
+    btnMarket.id = 'btn-market-market';
+    btnMarket.style.cssText = "background: #f1c40f; color: black; border: 3px solid white; border-radius: 12px; padding: 15px 30px; font-size: 24px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.5);";
+    btnMarket.textContent = 'Market';
+
+    rightPanel.appendChild(btnMarket);
+    container.appendChild(btnHealAll);
+    container.appendChild(rightPanel);
+    vCenter.appendChild(container);
+
+    btnHealAll.addEventListener('click', () => {
         state.party.forEach(p => p.currentHp = p.maxHp);
         if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') window.trackDailyChallenge('heal_center');
         state.storage.forEach(p => p.currentHp = p.maxHp);
