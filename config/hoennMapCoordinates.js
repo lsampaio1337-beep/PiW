@@ -228,6 +228,16 @@ const hoennMapCoordinates = {
     "name": "Mirage Island",
     "x": 85.20,
     "y": 53.88
+  },
+  "key_to_nebula_fissure": {
+    "name": "Key to Nebula Fissure",
+    "x": 80.00,
+    "y": 60.00
+  },
+  "nebula_fissure": {
+    "name": "Nebula Fissure",
+    "x": 85.00,
+    "y": 65.00
   }
 };
 export default hoennMapCoordinates;
