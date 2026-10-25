@@ -68,7 +68,7 @@ export function updateTeamWindow() {
         else if (p.qualityName === "Uncommon") glowClass = "glow-uncommon";
         else if (p.qualityName === "Regular") glowClass = "glow-regular";
 
-        d.innerHTML = `
+        window.windowManager._parseAndSanitizeToElement(`
             <div style="display: flex; width: 100%; align-items: stretch; height: 100%; min-height: 55px;">
                 <!-- Left Column: Sprite -->
                 <div style="flex: 0 0 50px; display: flex; align-items: center; justify-content: center; position: relative;">
@@ -113,7 +113,7 @@ export function updateTeamWindow() {
                     </div>
                 </div>
             </div>
-        `;
+        `, d);
         partyDiv.appendChild(d);
     });
 
@@ -208,7 +208,7 @@ function renderDayCareSlot(container, p, battles, maxBattles, type) {
         rightText = `${initialIV}+${cycles}`;
     }
 
-    container.innerHTML = `
+    window.windowManager._parseAndSanitizeToElement(`
         <div class="party-slot" style="position: relative; border: 2px solid #3498db;">
             <div style="display: flex; width: 100%; align-items: stretch; height: 100%; min-height: 55px;">
             <!-- Left Column: Sprite -->
@@ -249,5 +249,5 @@ function renderDayCareSlot(container, p, battles, maxBattles, type) {
             </div>
             </div>
         </div>
-    `;
+    `, container);
 }
