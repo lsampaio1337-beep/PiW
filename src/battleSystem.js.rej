@@ -1,0 +1,15 @@
+--- battleSystem.js
++++ battleSystem.js
+@@ -2534,8 +2534,9 @@
+                         }
+                     }
+                 }
+-            } else {
+-                results.fainted = true;
+-                break;
+             }
++            if (leader.currentHp <= 0) {
++                results.fainted = true;
++                break;
++            }
+         }
