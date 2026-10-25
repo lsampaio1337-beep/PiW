@@ -49,7 +49,6 @@ export default class Storage {
             let profiles = this.getProfiles();
             profiles = profiles.filter(id => id !== profileId);
             window.localStorage.setItem(this.masterKey, JSON.stringify(profiles));
-            console.log(`Profile ${profileId} deleted.`);
         } catch (e) {
             console.error("Failed to delete profile:", e);
         }
