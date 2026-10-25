@@ -6,6 +6,10 @@ import { getCapacity, getCurrentCount } from '../mathEngine.js';
 
 
 export function getRewardForDay(daysClaimed) {
+    if (typeof daysClaimed !== 'number' || !Number.isInteger(daysClaimed) || daysClaimed < 0) {
+        throw new Error('daysClaimed must be a non-negative integer');
+    }
+
     const w = Math.floor(daysClaimed / 7) + 1;
     const d = daysClaimed + 1;
     const dayOfWeek = daysClaimed % 7; // 0 to 6 (Day 1 to Day 7)

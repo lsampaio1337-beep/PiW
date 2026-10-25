@@ -20,6 +20,25 @@ jest.mock('../../src/mathEngine.js', () => ({
 
 describe('calendar logic', () => {
     describe('getRewardForDay', () => {
+
+        describe('Edge Cases and Error Conditions', () => {
+            test('Throws error for negative input', () => {
+                expect(() => getRewardForDay(-1)).toThrow('daysClaimed must be a non-negative integer');
+            });
+            test('Throws error for undefined input', () => {
+                expect(() => getRewardForDay(undefined)).toThrow('daysClaimed must be a non-negative integer');
+            });
+            test('Throws error for null input', () => {
+                expect(() => getRewardForDay(null)).toThrow('daysClaimed must be a non-negative integer');
+            });
+            test('Throws error for string input', () => {
+                expect(() => getRewardForDay('1')).toThrow('daysClaimed must be a non-negative integer');
+            });
+            test('Throws error for float input', () => {
+                expect(() => getRewardForDay(1.5)).toThrow('daysClaimed must be a non-negative integer');
+            });
+        });
+
         describe('Week 1 (daysClaimed 0-6)', () => {
             test('Day 1 (daysClaimed 0)', () => {
                 const reward = getRewardForDay(0);

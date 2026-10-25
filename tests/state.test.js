@@ -180,3 +180,143 @@ describe('swapRegion', () => {
         expect(state.trainer.money).toBe(999); // Johto was packed and unpacked correctly
     });
 });
+
+describe('window.getCurrentRoutes', () => {
+    beforeEach(() => {
+        state.currentRegionName = "Kanto";
+        state.config = {
+            routes: ['KantoRoute'],
+            johtoRoutes: ['JohtoRoute'],
+            hoennRoutes: ['HoennRoute'],
+            sinnohRoutes: ['SinnohRoute'],
+            unovaRoutes: ['UnovaRoute']
+        };
+    });
+
+    afterEach(() => {
+        state.config = {};
+    });
+
+    it('should return empty array if state.config is missing', () => {
+        state.config = undefined;
+        expect(window.getCurrentRoutes()).toEqual([]);
+    });
+
+    it('should return config.routes as fallback', () => {
+        expect(window.getCurrentRoutes()).toEqual(['KantoRoute']);
+    });
+
+    it('should return johtoRoutes for Johto', () => {
+        state.currentRegionName = 'Johto';
+        expect(window.getCurrentRoutes()).toEqual(['JohtoRoute']);
+    });
+
+    it('should return hoennRoutes for Hoenn', () => {
+        state.currentRegionName = 'Hoenn';
+        expect(window.getCurrentRoutes()).toEqual(['HoennRoute']);
+    });
+
+    it('should return sinnohRoutes for Sinnoh', () => {
+        state.currentRegionName = 'Sinnoh';
+        expect(window.getCurrentRoutes()).toEqual(['SinnohRoute']);
+    });
+
+    it('should return unovaRoutes for Unova', () => {
+        state.currentRegionName = 'Unova';
+        expect(window.getCurrentRoutes()).toEqual(['UnovaRoute']);
+    });
+
+    it('should return fallback if region routes missing', () => {
+        state.currentRegionName = 'Unova';
+        state.config.unovaRoutes = undefined;
+        expect(window.getCurrentRoutes()).toEqual(['KantoRoute']);
+    });
+});
+
+describe('window.getCurrentUnlocks', () => {
+    beforeEach(() => {
+        state.currentRegionName = "Kanto";
+        state.config = {
+            unlocks: ['KantoUnlock'],
+            johtoUnlocks: ['JohtoUnlock'],
+            hoennUnlocks: ['HoennUnlock'],
+            sinnohUnlocks: ['SinnohUnlock'],
+            unovaUnlocks: ['UnovaUnlock']
+        };
+    });
+
+    afterEach(() => {
+        state.config = {};
+    });
+
+    it('should return empty array if state.config is missing', () => {
+        state.config = undefined;
+        expect(window.getCurrentUnlocks()).toEqual([]);
+    });
+
+    it('should return config.unlocks as fallback', () => {
+        expect(window.getCurrentUnlocks()).toEqual(['KantoUnlock']);
+    });
+
+    it('should return johtoUnlocks for Johto', () => {
+        state.currentRegionName = 'Johto';
+        expect(window.getCurrentUnlocks()).toEqual(['JohtoUnlock']);
+    });
+
+    it('should return hoennUnlocks for Hoenn', () => {
+        state.currentRegionName = 'Hoenn';
+        expect(window.getCurrentUnlocks()).toEqual(['HoennUnlock']);
+    });
+
+    it('should return sinnohUnlocks for Sinnoh', () => {
+        state.currentRegionName = 'Sinnoh';
+        expect(window.getCurrentUnlocks()).toEqual(['SinnohUnlock']);
+    });
+
+    it('should return unovaUnlocks for Unova', () => {
+        state.currentRegionName = 'Unova';
+        expect(window.getCurrentUnlocks()).toEqual(['UnovaUnlock']);
+    });
+
+    it('should return fallback if region unlocks missing', () => {
+        state.currentRegionName = 'Unova';
+        state.config.unovaUnlocks = undefined;
+        expect(window.getCurrentUnlocks()).toEqual(['KantoUnlock']);
+    });
+});
+
+describe('checkFinalChallengeCompleted additional tests', () => {
+    beforeEach(() => {
+        state.currentRegionName = "Kanto";
+        state.stats = JSON.parse(JSON.stringify(REGION_TEMPLATE.stats));
+        state.regions = {};
+        state.config = {};
+    });
+
+    it('should use hoennRoutes when checking Hoenn final challenge', () => {
+        state.config.hoennRoutes = [
+            { challengeName: 'Final Challenge', areaId: 'Hoenn Custom Final' }
+        ];
+        state.currentRegionName = "Hoenn";
+        state.stats.completedChallengeIds = ['Hoenn Custom Final'];
+        expect(checkFinalChallengeCompleted('Hoenn')).toBe(true);
+    });
+
+    it('should use sinnohRoutes when checking Sinnoh final challenge', () => {
+        state.config.sinnohRoutes = [
+            { challengeName: 'Final Challenge', areaId: 'Sinnoh Custom Final' }
+        ];
+        state.currentRegionName = "Sinnoh";
+        state.stats.completedChallengeIds = ['Sinnoh Custom Final'];
+        expect(checkFinalChallengeCompleted('Sinnoh')).toBe(true);
+    });
+
+    it('should use unovaRoutes when checking Unova final challenge', () => {
+        state.config.unovaRoutes = [
+            { challengeName: 'Final Challenge', areaId: 'Unova Custom Final' }
+        ];
+        state.currentRegionName = "Unova";
+        state.stats.completedChallengeIds = ['Unova Custom Final'];
+        expect(checkFinalChallengeCompleted('Unova')).toBe(true);
+    });
+});

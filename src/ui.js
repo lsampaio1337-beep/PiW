@@ -88,6 +88,22 @@ state.dayCareRef = dayCare;
 state.storageRef = storage;
 
 // Attach exported methods to window so inline HTML onclicks work
+window.updateZzZModeUI = function() {
+    if (state.isZzZMode) {
+        document.querySelectorAll('.nav-icon').forEach(icon => {
+            if (icon.id !== 'btn-sleep' && icon.id !== 'btn-exit' && icon.id !== 'btn-map') {
+                icon.style.pointerEvents = 'none';
+                icon.style.filter = 'grayscale(100%)';
+            }
+        });
+    } else {
+        document.querySelectorAll('.nav-icon').forEach(icon => {
+            icon.style.pointerEvents = 'auto';
+            icon.style.filter = 'none';
+        });
+    }
+};
+
 window.showMap = showMap;
 window.navigateToLocation = navigateToLocation;
 window.showMapTooltip = showMapTooltip;
@@ -132,7 +148,6 @@ window.showTimeLapseModal = showTimeLapseModal;
 window.runTimeLapse = runTimeLapse;
 window.dragStart = dragStart;
 window.completeChallenge = function(targetAreaId) {
-
     if (!state.stats.activeChallenges) {
         state.stats.activeChallenges = ["Route 1"];
     }
@@ -295,8 +310,9 @@ window.cheatProgressChallenge = function(targetAreaId) {
         if (req.defeatMultipleSpecific) {
             if (!state.stats.challengeSpecificDefeats) state.stats.challengeSpecificDefeats = {};
             for (let ds of req.defeatMultipleSpecific) {
-                if (ds.name === '__proto__' || ds.name === 'constructor' || ds.name === 'prototype') continue;
-                state.stats.challengeSpecificDefeats[ds.name] = Math.max(state.stats.challengeSpecificDefeats[ds.name] || 0, ds.count);
+                let key = ds.name || ds.pokemonId;
+                if (key === '__proto__' || key === 'constructor' || key === 'prototype') continue;
+                state.stats.challengeSpecificDefeats[key] = Math.max(state.stats.challengeSpecificDefeats[key] || 0, ds.count);
             }
         }
         if (req.catchSpecies) {
@@ -424,8 +440,9 @@ window.cheatProgressChallenge = function(targetAreaId) {
         if (req.defeatMultipleSpecific) {
             if (!state.stats.challengeSpecificDefeats) state.stats.challengeSpecificDefeats = {};
             for (let ds of req.defeatMultipleSpecific) {
-                if (ds.name === '__proto__' || ds.name === 'constructor' || ds.name === 'prototype') continue;
-                state.stats.challengeSpecificDefeats[ds.name] = ds.count;
+                let key = ds.name || ds.pokemonId;
+                if (key === '__proto__' || key === 'constructor' || key === 'prototype') continue;
+                state.stats.challengeSpecificDefeats[key] = Math.max(state.stats.challengeSpecificDefeats[key] || 0, ds.count);
             }
         }
         if (req.defeatEliteFourAndChampion) {
@@ -454,6 +471,17 @@ window.cheatProgressChallenge = function(targetAreaId) {
             if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};
             state.stats.defeatedBosses["Red"] = true;
         }
+        if (req.completeChallenges) {
+            if (!state.stats.completedChallengeIds) state.stats.completedChallengeIds = [];
+            for (let c of req.completeChallenges) {
+                let match = window.getCurrentUnlocks().find(u => u.challengeName === c || u.areaId === c);
+                let idToPush = match ? match.areaId : c;
+                if (!state.stats.completedChallengeIds.includes(idToPush)) {
+                    state.stats.completedChallengeIds.push(idToPush);
+                }
+            }
+        }
+
     }
         if (window.updateUI) window.updateUI();
     const challengeWinCheat = document.getElementById('window-challenges');
@@ -1149,7 +1177,11 @@ window.showProfLabModal = function() {
     const content = document.getElementById('main-view-inner-modal-content');
     if (overlay && title && content) {
         title.innerText = "Assignments and Boosters";
-        content.innerHTML = html;
+        if (window.windowManager) {
+            window.windowManager._parseAndSanitizeToElement(html, content);
+        } else {
+            content.innerHTML = html;
+        }
 
         // Dynamically style the inner modal for Professor Lab to 70% width and proportional scale
         const innerModal = document.getElementById('main-view-inner-modal');
@@ -1996,12 +2028,20 @@ async function init() {
                         // For a clean load into sleep mode we don't start at lab. We just wait for wakeup.
                         if (globals.battleSystem) globals.battleSystem.stop();
 
-                        document.querySelectorAll('.nav-icon').forEach(icon => {
-                            if (icon.id !== 'btn-sleep' && icon.id !== 'btn-exit' && icon.id !== 'btn-map') {
-                                icon.style.pointerEvents = 'none';
-                                icon.style.filter = 'grayscale(100%)';
-                            }
-                        });
+                        window.updateZzZModeUI();
+
+                        // Close existing windows except main-control, which should be updated.
+                        if (window.windowManager) {
+                            const winsToClose = [...window.windowManager.windows];
+                            winsToClose.forEach(win => {
+                                if (win.id !== 'main-control-window') {
+                                    window.windowManager.closeDynamicWindow(win.id);
+                                }
+                            });
+                        }
+
+                        window.promptWakeUpRegion(state.currentRegionName);
+
                     } else {
                         // Saved profiles always start at Professor's lab and are free to explore
                         returnToLab();
@@ -2213,12 +2253,7 @@ async function init() {
 
                 if (globals.battleSystem) globals.battleSystem.stop();
 
-                document.querySelectorAll('.nav-icon').forEach(icon => {
-                    if (icon.id !== 'btn-sleep' && icon.id !== 'btn-exit' && icon.id !== 'btn-map') {
-                        icon.style.pointerEvents = 'none';
-                        icon.style.filter = 'grayscale(100%)';
-                    }
-                });
+                window.updateZzZModeUI();
             };
 };
 
@@ -2755,47 +2790,101 @@ export function renderProfessorLab() {
         };
         const starterIds = regionStarters[currentRegion] || regionStarters['Kanto'];
 
-        let starterButtonsHtml = starterIds.map(id => {
+        let containerDiv = document.createElement('div');
+        containerDiv.style.backgroundColor = 'rgba(0,0,0,0.8)';
+        containerDiv.style.position = 'absolute';
+        containerDiv.style.left = '15%';
+        containerDiv.style.top = '50%';
+        containerDiv.style.transform = 'translateY(-50%)';
+        containerDiv.style.padding = '30px';
+        containerDiv.style.borderRadius = '8px';
+
+        let h2 = document.createElement('h2');
+        h2.textContent = 'Choose your Starter Pokémon';
+        containerDiv.appendChild(h2);
+
+        let starterChoices = document.createElement('div');
+        starterChoices.className = 'starter-choices';
+
+        starterIds.forEach(id => {
             const p = state.config.pokemonData.find(p => p.id === id);
             const name = p ? p.name : 'Unknown';
             const paddedId = id.toString().padStart(4, '0');
             const spriteSrc = `Assets/Pokemon Sprites/Natural/Gen5/${paddedId}_${name}.png`;
-            return `
-                  <button onclick="window.selectStarter(${id})">
-                    <img src="${escapeHTML(spriteSrc)}" style="width: 80px; height: 80px;"><br>${escapeHTML(name)}
-                  </button>`;
-        }).join('');
 
-        let starterHtml = `
-                <div class="starter-choices">
-${starterButtonsHtml}
-                </div>`;
+            const btn = document.createElement('button');
+            btn.onclick = () => window.selectStarter(id);
 
-        const labContentHtml = `
-            <div style="background-color: rgba(0,0,0,0.8); position: absolute; left: 15%; top: 50%; transform: translateY(-50%); padding: 30px; border-radius: 8px;">
-                <h2>Choose your Starter Pokémon</h2>
-                ${starterHtml}
-            </div>
-        `;
-        window.windowManager._parseAndSanitizeToElement(labContentHtml, labContent);
+            const img = document.createElement('img');
+            img.src = spriteSrc;
+            img.style.width = '80px';
+            img.style.height = '80px';
+
+            const br = document.createElement('br');
+
+            const textNode = document.createTextNode(name);
+
+            btn.appendChild(img);
+            btn.appendChild(br);
+            btn.appendChild(textNode);
+            starterChoices.appendChild(btn);
+        });
+
+        containerDiv.appendChild(starterChoices);
+        labContent.replaceChildren(containerDiv);
     } else {
         // Show assignments (identical to Kanto layout)
-        let exclamationHtml = state.stats.showProfLobbyNotification
-            ? `<img src="Assets/Extra/Icons/ExclamationMark.png" style="position: absolute; top: -5px; right: -5px; width: 20px; height: auto; pointer-events: none; z-index: 10;">`
-            : ``;
+        let containerDiv = document.createElement('div');
+        containerDiv.style.backgroundColor = 'rgba(0,0,0,0.85)';
+        containerDiv.style.position = 'absolute';
+        containerDiv.style.left = '15%';
+        containerDiv.style.top = '50%';
+        containerDiv.style.transform = 'translateY(-50%)';
+        containerDiv.style.padding = '20px';
+        containerDiv.style.borderRadius = '8px';
+        containerDiv.style.width = '250px';
+        containerDiv.style.color = 'white';
+        containerDiv.style.textAlign = 'center';
 
-        const labContentHtml = `
-            <div style="background-color: rgba(0,0,0,0.85); position: absolute; left: 15%; top: 50%; transform: translateY(-50%); padding: 20px; border-radius: 8px; width: 250px; color: white; text-align: center;">
-                <h2 style="margin-top:0;">Professor Lab</h2>
-                <div style="display: flex; flex-direction: column; gap: 10px;">
-                    <div style="position: relative; display: inline-block; width: 100%;">
-                        <button onclick="window.showProfLabModal()" class="action-btn action-btn-primary" style="width: 100%;">Assignments and Boosters</button>
-                        ${exclamationHtml}
-                    </div>
-                </div>
-            </div>
-        `;
-        window.windowManager._parseAndSanitizeToElement(labContentHtml, labContent);
+        let h2 = document.createElement('h2');
+        h2.style.marginTop = '0';
+        h2.textContent = 'Professor Lab';
+        containerDiv.appendChild(h2);
+
+        let flexDiv = document.createElement('div');
+        flexDiv.style.display = 'flex';
+        flexDiv.style.flexDirection = 'column';
+        flexDiv.style.gap = '10px';
+
+        let innerDiv = document.createElement('div');
+        innerDiv.style.position = 'relative';
+        innerDiv.style.display = 'inline-block';
+        innerDiv.style.width = '100%';
+
+        let btn = document.createElement('button');
+        btn.onclick = () => window.showProfLabModal();
+        btn.className = 'action-btn action-btn-primary';
+        btn.style.width = '100%';
+        btn.textContent = 'Assignments and Boosters';
+        innerDiv.appendChild(btn);
+
+        if (state.stats.showProfLobbyNotification) {
+            let img = document.createElement('img');
+            img.src = 'Assets/Extra/Icons/ExclamationMark.png';
+            img.style.position = 'absolute';
+            img.style.top = '-5px';
+            img.style.right = '-5px';
+            img.style.width = '20px';
+            img.style.height = 'auto';
+            img.style.pointerEvents = 'none';
+            img.style.zIndex = '10';
+            innerDiv.appendChild(img);
+        }
+
+        flexDiv.appendChild(innerDiv);
+        containerDiv.appendChild(flexDiv);
+
+        labContent.replaceChildren(containerDiv);
     }
 }
 
@@ -2956,7 +3045,7 @@ window.simulateSleepFarm = function() {
 };
 
 
-window.showWakeUpModal = function() {
+window.promptWakeUpRegion = function(regionName) {
     const resumeHtml = `
     <div class="content-panel" style="display: flex; flex-direction: column; gap: 15px; width: 100%; text-align: center;">
         <p style="color: white; margin: 0;">Do you want to wake up and collect your offline farm?</p>
@@ -2966,7 +3055,7 @@ window.showWakeUpModal = function() {
         </div>
     </div>
     `;
-    showModal("Wake Up?", resumeHtml, "window-zzz-wakeup", "400px");
+    showModal(`Wake Up ${regionName}?`, resumeHtml, "window-zzz-wakeup", "400px");
 
     document.getElementById('btn-zzz-wakeup-no').onclick = () => {
         if(window.windowManager) window.windowManager.closeDynamicWindow('window-zzz-wakeup');
@@ -2974,16 +3063,20 @@ window.showWakeUpModal = function() {
 
     document.getElementById('btn-zzz-wakeup-yes').onclick = () => {
         if(window.windowManager) window.windowManager.closeDynamicWindow('window-zzz-wakeup');
+        if (window.closeModal) window.closeModal();
 
-        // Restore icons
-        document.querySelectorAll('.nav-icon').forEach(icon => {
-            icon.style.pointerEvents = 'auto';
-            icon.style.filter = 'none';
-        });
+        if (state.currentRegionName !== regionName) {
+            window.currentMapRegion = regionName;
+            if (typeof globals.swapRegion === 'function') globals.swapRegion(regionName);
+            // Force a swap to the region being woken up. We use navigateToLocation with the region's current route.
+            let targetRoute = state.regions[regionName]?.currentRoute || 'Professor Lab';
+            window.navigateToLocation(targetRoute);
+        }
 
         // Restart the game components naturally when waking up
         if (state.currentRoute === 'Professor Lab' || state.currentRoute === 'PokeCenter & PokeMarket') {
              // In these areas it's safe to just let it sit
+             if (window.windowManager) window.windowManager.toggleWindow('main-view-window', true);
         } else {
              if (globals.battleSystem && state.currentRoute !== undefined) {
                   window.navigateToLocation(state.currentRoute);
@@ -2991,5 +3084,10 @@ window.showWakeUpModal = function() {
         }
 
         window.simulateSleepFarm();
+        window.updateZzZModeUI();
     };
+};
+
+window.showWakeUpModal = function() {
+    window.promptWakeUpRegion(state.currentRegionName);
 };
