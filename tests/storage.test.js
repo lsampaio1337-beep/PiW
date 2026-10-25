@@ -171,15 +171,23 @@ describe('Storage.reset', () => {
     });
 
     test('should catch and log error if localStorage.removeItem fails', () => {
+        // Setup state
         storage.currentProfileId = 'test_profile_id';
         const mockError = new Error('Storage error');
+
+        // Mock localStorage.removeItem to throw an error
         window.localStorage.removeItem.mockImplementationOnce(() => {
             throw mockError;
         });
 
+        // Execute reset
         storage.reset();
+
+        // Verify it was called correctly
         expect(window.localStorage.removeItem).toHaveBeenCalledWith('test_profile_id');
+        // Verify error was caught and logged
         expect(consoleErrorSpy).toHaveBeenCalledWith("Failed to clear save:", mockError);
+        // Verify success log was not called
         expect(consoleLogSpy).not.toHaveBeenCalled();
     });
 });
