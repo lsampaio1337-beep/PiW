@@ -239,7 +239,6 @@ export function getSpeciesDataHtml(pData, state) {
     `;
     if (pData.learnset) {
         pData.learnset.forEach(m => {
-            if (m.move === "Self-Destruct") return; // Hidden passive move
             let mData = state.config.moves[m.move];
             movesHtml += `<tr style="border-bottom: 1px solid #444;">
                 <td>${m.level}</td>
