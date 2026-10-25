@@ -111,7 +111,7 @@ export default class Storage {
         try {
             // Keep the profile ID but clear the data inside it, so New Game starts fresh
             window.localStorage.removeItem(this.currentProfileId);
-        } catch(e) {
+        } catch (e) {
             console.error("Failed to clear save:", e);
         }
     }
