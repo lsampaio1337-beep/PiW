@@ -460,6 +460,28 @@ window.cheatProgressChallenge = function(targetAreaId) {
             if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};
             state.stats.defeatedBosses["Red"] = true;
         }
+        if (req.completeChallenges) {
+            if (!state.stats.completedChallengeIds) state.stats.completedChallengeIds = [];
+            for (let c of req.completeChallenges) {
+                let match = window.getCurrentUnlocks().find(u => u.challengeName === c || u.areaId === c);
+                let idToPush = match ? match.areaId : c;
+                if (!state.stats.completedChallengeIds.includes(idToPush)) {
+                    state.stats.completedChallengeIds.push(idToPush);
+                }
+            }
+        }
+        if (req.completeAnyOfChallenges) {
+            if (!state.stats.completedChallengeIds) state.stats.completedChallengeIds = [];
+            if (req.completeAnyOfChallenges.length > 0) {
+                let firstC = req.completeAnyOfChallenges[0];
+                let match = window.getCurrentUnlocks().find(u => u.challengeName === firstC || u.areaId === firstC);
+                let idToPush = match ? match.areaId : firstC;
+                if (!state.stats.completedChallengeIds.includes(idToPush)) {
+                    state.stats.completedChallengeIds.push(idToPush);
+                }
+            }
+        }
+
     }
         if (window.updateUI) window.updateUI();
     const challengeWinCheat = document.getElementById('window-challenges');
