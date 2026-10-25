@@ -229,12 +229,8 @@ export function updateMainControl() {
 
     const mainControlTitle = document.getElementById('main-control-title');
     if (mainControlTitle) {
-        if (isFinalChallengeCompleted) {
-            const regionName = state.currentRegionName || "Kanto";
-            mainControlTitle.innerText = `Main Control (${regionName})`;
-        } else {
-            mainControlTitle.innerText = "Main Control";
-        }
+        const regionName = state.currentRegionName || "Kanto";
+        mainControlTitle.innerText = `Main Control (${regionName})`;
     }
 
     // Legacy saves might not have hasPickedStarter but will have party/storage

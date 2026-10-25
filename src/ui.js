@@ -3047,6 +3047,7 @@ window.promptWakeUpRegion = function(regionName) {
         // Restart the game components naturally when waking up
         if (state.currentRoute === 'Professor Lab' || state.currentRoute === 'PokeCenter & PokeMarket') {
              // In these areas it's safe to just let it sit
+             if (window.windowManager) window.windowManager.toggleWindow('main-view-window', true);
         } else {
              if (globals.battleSystem && state.currentRoute !== undefined) {
                   window.navigateToLocation(state.currentRoute);

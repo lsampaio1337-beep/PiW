@@ -529,6 +529,12 @@ export function navigateToLocation(locationName) {
     state.currentRoute = locationName;
     if (window.closeModal) window.closeModal();
 
+    // Ensure main view and party windows are open when navigating, especially to places like Professor Lab
+    if (window.windowManager) {
+        window.windowManager.toggleWindow('main-view-window', true);
+        window.windowManager.toggleWindow('party-window', true);
+    }
+
     if (locationName === "Battle Stadium") {
         if (battleSystem) {
              battleSystem.stop();
