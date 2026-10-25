@@ -121,3 +121,62 @@ describe('checkFinalChallengeCompleted', () => {
         expect(checkFinalChallengeCompleted()).toBe(true);
     });
 });
+
+describe('swapRegion', () => {
+    beforeEach(() => {
+        // Reset state before each test
+        state.currentRegionName = "Kanto";
+        for (let key in REGION_TEMPLATE) {
+            state[key] = JSON.parse(JSON.stringify(REGION_TEMPLATE[key]));
+        }
+        state.regions = {};
+        state.config = {};
+    });
+
+    it('should do nothing if newRegionName is the same as currentRegionName', () => {
+        state.trainer.money = 100;
+        swapRegion('Kanto');
+        expect(state.trainer.money).toBe(100);
+        expect(Object.keys(state.regions).length).toBe(0);
+    });
+
+    it('should pack current region into state.regions', () => {
+        state.trainer.money = 500;
+        swapRegion('Johto');
+        expect(state.regions['Kanto']).toBeDefined();
+        expect(state.regions['Kanto'].trainer.money).toBe(500);
+    });
+
+    it('should initialize a new region if it does not exist in state.regions', () => {
+        swapRegion('Sinnoh');
+        expect(state.currentRegionName).toBe('Sinnoh');
+        expect(state.regions['Sinnoh']).toBeDefined();
+        expect(state.trainer.money).toBe(0); // From REGION_TEMPLATE
+    });
+
+    it('should set starting route and active challenges for Johto specifically', () => {
+        swapRegion('Johto');
+        expect(state.regions['Johto'].currentRoute).toBe('Route 29');
+        expect(state.regions['Johto'].stats.activeChallenges).toContain('Route 29');
+        expect(state.stats.activeChallenges).toContain('Route 29'); // Check that it was mounted
+    });
+
+    it('should set starting route and active challenges for Hoenn specifically', () => {
+        swapRegion('Hoenn');
+        expect(state.regions['Hoenn'].currentRoute).toBe('Route 101');
+        expect(state.regions['Hoenn'].stats.activeChallenges).toContain('Route 101');
+        expect(state.stats.activeChallenges).toContain('Route 101'); // Check that it was mounted
+    });
+
+    it('should unpack and mount an existing region from state.regions', () => {
+        // Simulate playing in Johto, then going back to Kanto, then back to Johto
+        swapRegion('Johto');
+        state.trainer.money = 999;
+
+        swapRegion('Kanto');
+        expect(state.trainer.money).toBe(0); // Back to Kanto, which had 0
+
+        swapRegion('Johto');
+        expect(state.trainer.money).toBe(999); // Johto was packed and unpacked correctly
+    });
+});
