@@ -281,6 +281,9 @@ class BattleSystem {
             // Very simplified: skip if missing data
             if (!move || move.power === 0) continue;
 
+            // Exclude Explosion and Self-Destruct from active selection
+            if (move.name === "Explosion" || move.name === "Self-Destruct") continue;
+
             const isPhysical = move.category === 'Physical';
             const atkStat = isPhysical ? attacker.currentStats.atk : attacker.currentStats.spa;
             const defStat = isPhysical ? defender.currentStats.def : defender.currentStats.spd;
@@ -498,6 +501,42 @@ class BattleSystem {
                     window.showDamage(targetSide, hit.damage, hit.isCritical, hit.effectiveness);
                 }
 
+                let attackerFainted = false;
+                let expHit = null;
+                let explosionMove = null;
+
+                if (fainted) {
+                    explosionMove = defender.moves ? defender.moves.find(m => m.name === 'Explosion' || m.name === 'Self-Destruct') : null;
+                    if (defender.moves) {
+                        const hasExplosion = defender.moves.find(m => m.name === 'Explosion');
+                        if (hasExplosion) {
+                            explosionMove = hasExplosion;
+                        }
+                    }
+
+                    if (explosionMove && attacker.currentHp > 0) {
+                        const isPhysical = explosionMove.category === 'Physical';
+                        const atkStat = isPhysical ? defender.currentStats.atk : defender.currentStats.spa;
+                        const defStat = isPhysical ? attacker.currentStats.def : attacker.currentStats.spd;
+                        const expEff = this.getTypeEffectiveness(explosionMove.type, attacker.types);
+                        expHit = mathEngine.calculateDamage(defender.level, explosionMove.power, atkStat, defStat, expEff, defender.quality);
+
+                        attacker.currentHp -= expHit.damage;
+                        if (attacker.currentHp <= 0) {
+                            attacker.currentHp = 0;
+                            attackerFainted = true;
+                        }
+
+                        const attackerSide = targetSide === 'enemy' ? 'player' : 'enemy';
+                        if (typeof window.playCombatAnimations === 'function') {
+                            window.playCombatAnimations(attackerSide, explosionMove.type, animDuration);
+                        }
+                        if (typeof window.showDamage === 'function') {
+                            window.showDamage(attackerSide, expHit.damage, expHit.isCritical, explosionMove.name, explosionMove.type, expEff);
+                        }
+                    }
+                }
+
                 // Send result to client
                 if (mp.dataChannel) {
                      mp.dataChannel.send(JSON.stringify({
@@ -513,12 +552,39 @@ class BattleSystem {
                              fainted: fainted
                          }
                      }));
+
+                     if (explosionMove && expHit) {
+                         const invertedAttackerSide = targetSide === 'enemy' ? 'enemy' : 'player'; // Double inverted
+                         mp.dataChannel.send(JSON.stringify({
+                             type: 'combatEvent',
+                             event: {
+                                 type: 'attack',
+                                 target: invertedAttackerSide,
+                                 damage: expHit.damage,
+                                 newHp: attacker.currentHp,
+                                 isCritical: expHit.isCritical,
+                                 effectiveness: expHit.effectiveness,
+                                 moveType: explosionMove.type,
+                                 fainted: attackerFainted
+                             }
+                         }));
+                     }
                 }
 
                 this.updateUI();
 
                 if (fainted) {
-                    this.handleMultiplayerDefeat(defender);
+                    if (defender === this.activeEncounter) {
+                        this.handleMultiplayerDefeat(defender);
+                        if (attackerFainted) {
+                            this.handleMultiplayerDefeat(attacker);
+                        }
+                    } else {
+                        this.handleMultiplayerDefeat(defender);
+                        if (attackerFainted) {
+                            this.handleMultiplayerDefeat(attacker);
+                        }
+                    }
                 } else {
                     const delay = Math.max(200, 1000 / this.state.settings.gameSpeed);
                     this.combatLoop = setTimeout(() => {
@@ -1223,11 +1289,44 @@ class BattleSystem {
             this.updateUI();
 
             if (defender.currentHp <= 0) {
+                let explosionMove = defender.moves ? defender.moves.find(m => m.name === 'Explosion' || m.name === 'Self-Destruct') : null;
+                if (defender.moves) {
+                    const hasExplosion = defender.moves.find(m => m.name === 'Explosion');
+                    if (hasExplosion) {
+                        explosionMove = hasExplosion;
+                    }
+                }
+
+                if (explosionMove && attacker.currentHp > 0) {
+                    const isPhysical = explosionMove.category === 'Physical';
+                    const atkStat = isPhysical ? defender.currentStats.atk : defender.currentStats.spa;
+                    const defStat = isPhysical ? attacker.currentStats.def : attacker.currentStats.spd;
+                    const expEff = this.getTypeEffectiveness(explosionMove.type, attacker.types);
+                    const expHit = mathEngine.calculateDamage(defender.level, explosionMove.power, atkStat, defStat, expEff, defender.quality);
+
+                    attacker.currentHp -= expHit.damage;
+                    const attackerSide = targetSide === 'enemy' ? 'player' : 'enemy';
+
+                    if (typeof window.playCombatAnimations === 'function') {
+                        window.playCombatAnimations(attackerSide, explosionMove.type, animDuration);
+                    }
+                    if (typeof window.showDamage === 'function') {
+                        window.showDamage(attackerSide, expHit.damage, expHit.isCritical, explosionMove.name, explosionMove.type, expEff);
+                    }
+                    this.updateUI();
+                }
+
                 if (defender === this.activeEncounter) {
                     this.handleEnemyDefeat();
+                    if (attacker.currentHp <= 0 && !this.isFainting) {
+                        this.handleFaint();
+                    }
                 } else {
                     if (!this.isFainting) {
                         this.handleFaint();
+                    }
+                    if (attacker.currentHp <= 0) {
+                        this.handleEnemyDefeat();
                     }
                 }
             } else {
@@ -2287,6 +2386,26 @@ class BattleSystem {
                 const hit = mathEngine.calculateDamage(attacker.level, move.power, atkStat, defStat, eff, attacker.quality);
                 defender.currentHp -= hit.damage;
 
+                if (defender.currentHp <= 0) {
+                    let explosionMove = defender.moves ? defender.moves.find(m => m.name === 'Explosion' || m.name === 'Self-Destruct') : null;
+                    if (defender.moves) {
+                        const hasExplosion = defender.moves.find(m => m.name === 'Explosion');
+                        if (hasExplosion) {
+                            explosionMove = hasExplosion;
+                        }
+                    }
+
+                    if (explosionMove && attacker.currentHp > 0) {
+                        const isPhys = explosionMove.category === 'Physical';
+                        const aStat = isPhys ? defender.currentStats.atk : defender.currentStats.spa;
+                        const dStat = isPhys ? attacker.currentStats.def : attacker.currentStats.spd;
+                        const expEff = this.getTypeEffectiveness(explosionMove.type, attacker.types);
+                        const expHit = mathEngine.calculateDamage(defender.level, explosionMove.power, aStat, dStat, expEff, defender.quality);
+
+                        attacker.currentHp -= expHit.damage;
+                    }
+                }
+
                 return false; // Not a potion, just an attack
             };
 
@@ -2312,9 +2431,11 @@ class BattleSystem {
             combatTime += 500;
 
             // End of combat logic
-            if (leader.currentHp > 0) {
+
+            // Check enemy defeat logic first in case of mutual faints
+            if (this.activeEncounter.currentHp <= 0) {
                 // Out of combat insta-heal if threshold is met, identical to handleEnemyDefeat
-                if (this.state.settings.autoPotion) {
+                if (leader.currentHp > 0 && this.state.settings.autoPotion) {
                     let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 25;
                     while ((leader.currentHp / leader.maxHp) * 100 <= threshold) {
                         if (!this.tryUsePotion(leader)) break;
@@ -2539,7 +2660,9 @@ class BattleSystem {
                 }
 
                 this.state.stats.battlesWon++;
-            } else {
+            }
+
+            if (leader.currentHp <= 0) {
                 leader.currentHp = 0;
                 const fainted = this.state.party.shift();
 
