@@ -79,6 +79,30 @@ class BattleSystem {
         return this._routeMapCache.map.get(routeName);
     }
 
+    getGym(gymName) {
+        if (!this._gymMapCache) {
+            this._gymMapCache = new Map();
+            if (this.state.config && this.state.config.gyms) {
+                for (const g of this.state.config.gyms) {
+                    this._gymMapCache.set(g.name, g);
+                }
+            }
+        }
+        return this._gymMapCache.get(gymName);
+    }
+
+    getPokeballConfig(ballName) {
+        if (!this._pokeballMapCache) {
+            this._pokeballMapCache = new Map();
+            if (this.state.config && this.state.config.balance && this.state.config.balance.items && this.state.config.balance.items.pokeballs) {
+                for (const b of this.state.config.balance.items.pokeballs) {
+                    this._pokeballMapCache.set(b.name, b);
+                }
+            }
+        }
+        return this._pokeballMapCache.get(ballName);
+    }
+
     getSpawnForRoute(route) {
         if (!route || !route.spawns || route.spawns.length === 0) {
             return null;
@@ -559,7 +583,7 @@ class BattleSystem {
     }
 
     startGymBattle(gymName) {
-        const gym = this.state.config.gyms.find(g => g.name === gymName);
+        const gym = this.getGym(gymName);
         if (!gym) return;
 
         this.stop();
@@ -1269,7 +1293,7 @@ class BattleSystem {
         let multiplier;
 
         if (isSafariZone) {
-            let safariBallConfig = this.state.config.balance.items.pokeballs.find(b => b.name === "Safariball");
+            let safariBallConfig = this.getPokeballConfig("Safariball");
             ballName = "Safariball";
             multiplier = safariBallConfig ? safariBallConfig.multiplier : 1.5;
             this.state.stats.ballsThrown = (this.state.stats.ballsThrown || 0) + 1;
