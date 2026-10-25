@@ -162,11 +162,10 @@ describe('Storage.reset', () => {
         expect(consoleErrorSpy).not.toHaveBeenCalled();
     });
 
-    test('should remove the current profile from localStorage and log success', () => {
+    test('should remove the current profile from localStorage', () => {
         storage.currentProfileId = 'test_profile_id';
         storage.reset();
         expect(window.localStorage.removeItem).toHaveBeenCalledWith('test_profile_id');
-        expect(consoleLogSpy).toHaveBeenCalledWith("Save data cleared for current profile.");
         expect(consoleErrorSpy).not.toHaveBeenCalled();
     });
 

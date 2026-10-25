@@ -262,6 +262,23 @@ function getUnlockedAreas() {
 }
 
 function generateMarkersForRegion(region, unlockedAreas) {
+    let isSleeping = false;
+    if (state.currentRegionName === region) {
+        isSleeping = state.isZzZMode;
+    } else if (state.regions && state.regions[region]) {
+        isSleeping = state.regions[region].isZzZMode;
+    }
+
+    if (isSleeping) {
+        return `
+            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); cursor: pointer; text-align: center; z-index: 1000;" onclick="window.promptWakeUpRegion('${region}')" title="Wake Up ${region}">
+                <img src="./Assets/Extra/Jigglypuff Dust.png" style="width: 150px; height: auto; filter: drop-shadow(0 0 15px rgba(255, 192, 203, 0.8)); animation: pulse 2s infinite;">
+                <div style="color: white; font-weight: bold; margin-top: 10px; font-size: 18px; text-shadow: 0 2px 4px black;">ZzZ Mode</div>
+                <div style="color: #fbcfe8; font-size: 14px; text-shadow: 0 1px 2px black;">Click to Wake Up</div>
+            </div>
+        `;
+    }
+
     let html = '';
     if (region === 'Kanto') {
         for (const [locationId, locationData] of Object.entries(state.config.mapCoordinates)) {
@@ -501,6 +518,7 @@ export function navigateToLocation(locationName) {
              if (globals.battleSystem.gymState) globals.battleSystem.gymState.isActive = false;
         }
         swapRegion(window.currentMapRegion);
+        if (window.updateZzZModeUI) window.updateZzZModeUI();
     }
 
     if (state.stats.newRoutes && state.stats.newRoutes.some(r => parseAreaNames(r).includes(locationName))) {

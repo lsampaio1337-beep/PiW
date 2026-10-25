@@ -81,7 +81,9 @@ export const REGION_TEMPLATE = {
         }
     },
     currentRoute: "Route 1",
-    currentRegionName: "Kanto"
+    currentRegionName: "Kanto",
+    isZzZMode: false,
+    zzzTimestamp: null
 };
 
 export const state = {
