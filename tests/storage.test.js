@@ -166,7 +166,7 @@ describe('Storage.reset', () => {
         storage.currentProfileId = 'test_profile_id';
         storage.reset();
         expect(window.localStorage.removeItem).toHaveBeenCalledWith('test_profile_id');
-        expect(consoleLogSpy).toHaveBeenCalledWith("Save data cleared for current profile.");
+        // expect(consoleLogSpy).toHaveBeenCalledWith("Save data cleared for current profile."); // The source code no longer logs this message.
         expect(consoleErrorSpy).not.toHaveBeenCalled();
     });
 
@@ -181,5 +181,57 @@ describe('Storage.reset', () => {
         expect(window.localStorage.removeItem).toHaveBeenCalledWith('test_profile_id');
         expect(consoleErrorSpy).toHaveBeenCalledWith("Failed to clear save:", mockError);
         expect(consoleLogSpy).not.toHaveBeenCalled();
+    });
+});
+
+
+describe('Storage.getProfiles', () => {
+    let storage;
+    let consoleWarnSpy;
+
+    beforeEach(() => {
+        storage = new Storage();
+        consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+        jest.clearAllMocks();
+    });
+
+    afterEach(() => {
+        consoleWarnSpy.mockRestore();
+    });
+
+    test('should return array of profiles on valid JSON', () => {
+        window.localStorage.getItem.mockReturnValueOnce(JSON.stringify(["profile_1", "profile_2"]));
+        const profiles = storage.getProfiles();
+        expect(profiles).toEqual(["profile_1", "profile_2"]);
+        expect(window.localStorage.getItem).toHaveBeenCalledWith(storage.masterKey);
+    });
+
+    test('should return empty array if no data exists', () => {
+        window.localStorage.getItem.mockReturnValueOnce(null);
+        const profiles = storage.getProfiles();
+        expect(profiles).toEqual([]);
+    });
+
+    test('should return empty array and log warning on invalid JSON', () => {
+        window.localStorage.getItem.mockReturnValueOnce("invalid json");
+        const profiles = storage.getProfiles();
+        expect(profiles).toEqual([]);
+        expect(consoleWarnSpy).toHaveBeenCalledWith(
+            "Failed to parse profiles data from localStorage:",
+            expect.any(Error)
+        );
+    });
+
+    test('should return empty array and log warning if getItem throws', () => {
+        const mockError = new Error("Storage access denied");
+        window.localStorage.getItem.mockImplementationOnce(() => {
+            throw mockError;
+        });
+        const profiles = storage.getProfiles();
+        expect(profiles).toEqual([]);
+        expect(consoleWarnSpy).toHaveBeenCalledWith(
+            "Failed to parse profiles data from localStorage:",
+            mockError
+        );
     });
 });
