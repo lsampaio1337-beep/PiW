@@ -848,7 +848,13 @@ export function showMapTooltip(e, locationName) {
             }
         }
     } else if (window.getCurrentRoutes()) {
-        const route = window.getCurrentRoutes().find(r => r.name === locationName);
+        let route = null;
+        if (globals.battleSystem && typeof globals.battleSystem.getRoute === 'function') {
+            route = globals.battleSystem.getRoute(locationName);
+        } else {
+            route = window.getCurrentRoutes().find(r => r.name === locationName);
+        }
+
         if (route) {
             // Find overall min and max level for the route
             let minLvl = 100;
