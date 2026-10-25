@@ -536,7 +536,12 @@
         "level": 10
       }
     ],
-    "learnset": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Tackle"
+      }
+    ],
     "kanto_id": 11,
     "johto_id": 25
   },
@@ -1319,7 +1324,44 @@
         "level": 101
       }
     ],
-    "learnset": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Scratch"
+      },
+      {
+        "level": 3,
+        "move": "Poison Sting"
+      },
+      {
+        "level": 9,
+        "move": "Rollout"
+      },
+      {
+        "level": 12,
+        "move": "Fury Cutter"
+      },
+      {
+        "level": 21,
+        "move": "Swift"
+      },
+      {
+        "level": 24,
+        "move": "Fury Swipes"
+      },
+      {
+        "level": 30,
+        "move": "Slash"
+      },
+      {
+        "level": 33,
+        "move": "Dig"
+      },
+      {
+        "level": 45,
+        "move": "Earthquake"
+      }
+    ],
     "kanto_id": 27,
     "johto_id": 48,
     "hoenn_id": 112,
@@ -1338,7 +1380,44 @@
     "spd": 55,
     "spe": 65,
     "evolutions": [],
-    "learnset": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Poison Sting"
+      },
+      {
+        "level": 1,
+        "move": "Scratch"
+      },
+      {
+        "level": 9,
+        "move": "Rollout"
+      },
+      {
+        "level": 12,
+        "move": "Fury Cutter"
+      },
+      {
+        "level": 21,
+        "move": "Swift"
+      },
+      {
+        "level": 26,
+        "move": "Fury Swipes"
+      },
+      {
+        "level": 36,
+        "move": "Slash"
+      },
+      {
+        "level": 41,
+        "move": "Dig"
+      },
+      {
+        "level": 61,
+        "move": "Earthquake"
+      }
+    ],
     "kanto_id": 28,
     "johto_id": 49,
     "hoenn_id": 113,
@@ -1346,7 +1425,7 @@
   },
   {
     "id": 29,
-    "name": "Nidoran\u2640",
+    "name": "Nidoran♀",
     "types": [
       "Poison"
     ],
@@ -1503,7 +1582,7 @@
   },
   {
     "id": 32,
-    "name": "Nidoran\u2642",
+    "name": "Nidoran♂",
     "types": [
       "Poison"
     ],
@@ -1809,7 +1888,28 @@
         "level": 101
       }
     ],
-    "learnset": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Ember"
+      },
+      {
+        "level": 8,
+        "move": "Quick Attack"
+      },
+      {
+        "level": 32,
+        "move": "Flamethrower"
+      },
+      {
+        "level": 40,
+        "move": "Fire Spin"
+      },
+      {
+        "level": 52,
+        "move": "Fire Blast"
+      }
+    ],
     "kanto_id": 37,
     "johto_id": 125,
     "hoenn_id": 153,
@@ -1828,7 +1928,16 @@
     "spd": 100,
     "spe": 100,
     "evolutions": [],
-    "learnset": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Flamethrower"
+      },
+      {
+        "level": 1,
+        "move": "Quick Attack"
+      }
+    ],
     "kanto_id": 38,
     "johto_id": 126,
     "hoenn_id": 154,
@@ -2445,7 +2554,40 @@
         "level": 26
       }
     ],
-    "learnset": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Scratch"
+      },
+      {
+        "level": 8,
+        "move": "Astonish"
+      },
+      {
+        "level": 12,
+        "move": "Mud-Slap"
+      },
+      {
+        "level": 24,
+        "move": "Slash"
+      },
+      {
+        "level": 32,
+        "move": "Dig"
+      },
+      {
+        "level": 36,
+        "move": "Earth Power"
+      },
+      {
+        "level": 40,
+        "move": "Earthquake"
+      },
+      {
+        "level": 44,
+        "move": "Fissure"
+      }
+    ],
     "kanto_id": 50,
     "johto_id": 132
   },
@@ -2497,7 +2639,36 @@
         "level": 28
       }
     ],
-    "learnset": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Fake Out"
+      },
+      {
+        "level": 8,
+        "move": "Scratch"
+      },
+      {
+        "level": 12,
+        "move": "Pay Day"
+      },
+      {
+        "level": 16,
+        "move": "Bite"
+      },
+      {
+        "level": 29,
+        "move": "Fury Swipes"
+      },
+      {
+        "level": 36,
+        "move": "Slash"
+      },
+      {
+        "level": 44,
+        "move": "Play Rough"
+      }
+    ],
     "kanto_id": 52,
     "johto_id": 136
   },
@@ -2802,7 +2973,40 @@
         "level": 101
       }
     ],
-    "learnset": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Ember"
+      },
+      {
+        "level": 8,
+        "move": "Bite"
+      },
+      {
+        "level": 12,
+        "move": "Flame Wheel"
+      },
+      {
+        "level": 32,
+        "move": "Crunch"
+      },
+      {
+        "level": 36,
+        "move": "Take Down"
+      },
+      {
+        "level": 40,
+        "move": "Flamethrower"
+      },
+      {
+        "level": 48,
+        "move": "Play Rough"
+      },
+      {
+        "level": 56,
+        "move": "Flare Blitz"
+      }
+    ],
     "kanto_id": 58,
     "johto_id": 127,
     "unova_id": 51
@@ -2989,7 +3193,12 @@
         "level": 16
       }
     ],
-    "learnset": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Tackle"
+      }
+    ],
     "kanto_id": 63,
     "johto_id": 89,
     "hoenn_id": 39,
@@ -3611,7 +3820,40 @@
         "level": 25
       }
     ],
-    "learnset": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 10,
+        "move": "Rollout"
+      },
+      {
+        "level": 16,
+        "move": "Rock Throw"
+      },
+      {
+        "level": 24,
+        "move": "Self-Destruct"
+      },
+      {
+        "level": 34,
+        "move": "Earthquake"
+      },
+      {
+        "level": 36,
+        "move": "Explosion"
+      },
+      {
+        "level": 40,
+        "move": "Double-Edge"
+      },
+      {
+        "level": 42,
+        "move": "Stone Edge"
+      }
+    ],
     "kanto_id": 74,
     "johto_id": 34,
     "hoenn_id": 57,
@@ -3640,7 +3882,40 @@
         "level": 101
       }
     ],
-    "learnset": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 10,
+        "move": "Rollout"
+      },
+      {
+        "level": 16,
+        "move": "Rock Throw"
+      },
+      {
+        "level": 24,
+        "move": "Self-Destruct"
+      },
+      {
+        "level": 40,
+        "move": "Earthquake"
+      },
+      {
+        "level": 44,
+        "move": "Explosion"
+      },
+      {
+        "level": 50,
+        "move": "Double-Edge"
+      },
+      {
+        "level": 54,
+        "move": "Stone Edge"
+      }
+    ],
     "kanto_id": 75,
     "johto_id": 35,
     "hoenn_id": 58,
@@ -3660,7 +3935,40 @@
     "spd": 65,
     "spe": 45,
     "evolutions": [],
-    "learnset": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Heavy Slam"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 16,
+        "move": "Rock Throw"
+      },
+      {
+        "level": 24,
+        "move": "Self-Destruct"
+      },
+      {
+        "level": 40,
+        "move": "Earthquake"
+      },
+      {
+        "level": 44,
+        "move": "Explosion"
+      },
+      {
+        "level": 50,
+        "move": "Double-Edge"
+      },
+      {
+        "level": 54,
+        "move": "Stone Edge"
+      }
+    ],
     "kanto_id": 76,
     "johto_id": 36,
     "hoenn_id": 59,
@@ -4311,7 +4619,36 @@
         "level": 38
       }
     ],
-    "learnset": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Pound"
+      },
+      {
+        "level": 7,
+        "move": "Mud-Slap"
+      },
+      {
+        "level": 15,
+        "move": "Sludge"
+      },
+      {
+        "level": 18,
+        "move": "Mud Shot"
+      },
+      {
+        "level": 29,
+        "move": "Sludge Bomb"
+      },
+      {
+        "level": 32,
+        "move": "Sludge Wave"
+      },
+      {
+        "level": 40,
+        "move": "Gunk Shot"
+      }
+    ],
     "kanto_id": 88,
     "johto_id": 116,
     "hoenn_id": 106,
@@ -4330,7 +4667,36 @@
     "spd": 100,
     "spe": 50,
     "evolutions": [],
-    "learnset": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Mud-Slap"
+      },
+      {
+        "level": 1,
+        "move": "Pound"
+      },
+      {
+        "level": 15,
+        "move": "Sludge"
+      },
+      {
+        "level": 18,
+        "move": "Mud Shot"
+      },
+      {
+        "level": 29,
+        "move": "Sludge Bomb"
+      },
+      {
+        "level": 32,
+        "move": "Sludge Wave"
+      },
+      {
+        "level": 40,
+        "move": "Gunk Shot"
+      }
+    ],
     "kanto_id": 89,
     "johto_id": 117,
     "hoenn_id": 107,
@@ -4934,7 +5300,36 @@
         "level": 101
       }
     ],
-    "learnset": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 9,
+        "move": "Spark"
+      },
+      {
+        "level": 11,
+        "move": "Rollout"
+      },
+      {
+        "level": 20,
+        "move": "Swift"
+      },
+      {
+        "level": 26,
+        "move": "Self-Destruct"
+      },
+      {
+        "level": 37,
+        "move": "Discharge"
+      },
+      {
+        "level": 41,
+        "move": "Explosion"
+      }
+    ],
     "kanto_id": 100,
     "johto_id": 120,
     "hoenn_id": 84
@@ -4952,7 +5347,36 @@
     "spd": 80,
     "spe": 150,
     "evolutions": [],
-    "learnset": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 9,
+        "move": "Spark"
+      },
+      {
+        "level": 11,
+        "move": "Rollout"
+      },
+      {
+        "level": 20,
+        "move": "Swift"
+      },
+      {
+        "level": 26,
+        "move": "Self-Destruct"
+      },
+      {
+        "level": 41,
+        "move": "Discharge"
+      },
+      {
+        "level": 47,
+        "move": "Explosion"
+      }
+    ],
     "kanto_id": 101,
     "johto_id": 121,
     "hoenn_id": 85
@@ -6128,7 +6552,28 @@
         "level": 42
       }
     ],
-    "learnset": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Pound"
+      },
+      {
+        "level": 12,
+        "move": "Confusion"
+      },
+      {
+        "level": 28,
+        "move": "Psybeam"
+      },
+      {
+        "level": 44,
+        "move": "Dazzling Gleam"
+      },
+      {
+        "level": 48,
+        "move": "Psychic"
+      }
+    ],
     "kanto_id": 122,
     "johto_id": 156,
     "sinnoh_id": 95
@@ -6629,7 +7074,12 @@
     "spd": 48,
     "spe": 48,
     "evolutions": [],
-    "learnset": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Tackle"
+      }
+    ],
     "kanto_id": 132,
     "johto_id": 92,
     "unova_id": 261
@@ -7324,7 +7774,40 @@
     "spd": 125,
     "spe": 85,
     "evolutions": [],
-    "learnset": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Gust"
+      },
+      {
+        "level": 5,
+        "move": "Powder Snow"
+      },
+      {
+        "level": 15,
+        "move": "Ice Shard"
+      },
+      {
+        "level": 25,
+        "move": "Ancient Power"
+      },
+      {
+        "level": 45,
+        "move": "Ice Beam"
+      },
+      {
+        "level": 55,
+        "move": "Hurricane"
+      },
+      {
+        "level": 65,
+        "move": "Blizzard"
+      },
+      {
+        "level": 70,
+        "move": "Sheer Cold"
+      }
+    ],
     "kanto_id": 144,
     "johto_id": 235
   },
@@ -7342,7 +7825,36 @@
     "spd": 90,
     "spe": 100,
     "evolutions": [],
-    "learnset": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Peck"
+      },
+      {
+        "level": 15,
+        "move": "Pluck"
+      },
+      {
+        "level": 25,
+        "move": "Ancient Power"
+      },
+      {
+        "level": 35,
+        "move": "Drill Peck"
+      },
+      {
+        "level": 45,
+        "move": "Discharge"
+      },
+      {
+        "level": 55,
+        "move": "Thunder"
+      },
+      {
+        "level": 70,
+        "move": "Zap Cannon"
+      }
+    ],
     "kanto_id": 145,
     "johto_id": 236
   },
@@ -7360,7 +7872,36 @@
     "spd": 85,
     "spe": 90,
     "evolutions": [],
-    "learnset": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Gust"
+      },
+      {
+        "level": 5,
+        "move": "Ember"
+      },
+      {
+        "level": 15,
+        "move": "Wing Attack"
+      },
+      {
+        "level": 25,
+        "move": "Ancient Power"
+      },
+      {
+        "level": 35,
+        "move": "Air Slash"
+      },
+      {
+        "level": 55,
+        "move": "Hurricane"
+      },
+      {
+        "level": 70,
+        "move": "Sky Attack"
+      }
+    ],
     "kanto_id": 146,
     "johto_id": 237
   },
@@ -10851,7 +11392,32 @@
         "level": 101
       }
     ],
-    "learnset": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Poison Sting"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 8,
+        "move": "Water Gun"
+      },
+      {
+        "level": 28,
+        "move": "Poison Jab"
+      },
+      {
+        "level": 32,
+        "move": "Pin Missile"
+      },
+      {
+        "level": 48,
+        "move": "Aqua Tail"
+      }
+    ],
     "johto_id": 161
   },
   {
@@ -11043,7 +11609,32 @@
         "level": 101
       }
     ],
-    "learnset": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Scratch"
+      },
+      {
+        "level": 12,
+        "move": "Quick Attack"
+      },
+      {
+        "level": 18,
+        "move": "Metal Claw"
+      },
+      {
+        "level": 24,
+        "move": "Icy Wind"
+      },
+      {
+        "level": 30,
+        "move": "Fury Swipes"
+      },
+      {
+        "level": 60,
+        "move": "Slash"
+      }
+    ],
     "johto_id": 213,
     "sinnoh_id": 144,
     "unova_id": 252
@@ -12143,7 +12734,12 @@
     "spd": 45,
     "spe": 75,
     "evolutions": [],
-    "learnset": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Tackle"
+      }
+    ],
     "johto_id": 157
   },
   {
@@ -20572,7 +21168,28 @@
     "spd": 50,
     "spe": 150,
     "evolutions": [],
-    "learnset": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Wrap"
+      },
+      {
+        "level": 7,
+        "move": "Night Shade"
+      },
+      {
+        "level": 31,
+        "move": "Psychic"
+      },
+      {
+        "level": 49,
+        "move": "Zen Headbutt"
+      },
+      {
+        "level": 73,
+        "move": "Hyper Beam"
+      }
+    ],
     "hoenn_id": 202
   },
   {
@@ -21875,7 +22492,16 @@
         "level": 20
       }
     ],
-    "learnset": [],
+    "learnset": [
+      {
+        "level": 10,
+        "move": "Tackle"
+      },
+      {
+        "level": 15,
+        "move": "Bug Bite"
+      }
+    ],
     "sinnoh_id": 45
   },
   {
@@ -21892,7 +22518,40 @@
     "spd": 105,
     "spe": 36,
     "evolutions": [],
-    "learnset": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Bug Bite"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 23,
+        "move": "Confusion"
+      },
+      {
+        "level": 26,
+        "move": "Razor Leaf"
+      },
+      {
+        "level": 32,
+        "move": "Psybeam"
+      },
+      {
+        "level": 38,
+        "move": "Flail"
+      },
+      {
+        "level": 44,
+        "move": "Psychic"
+      },
+      {
+        "level": 50,
+        "move": "Bug Buzz"
+      }
+    ],
     "sinnoh_id": 46
   },
   {
@@ -25734,7 +26393,28 @@
     "spd": 120,
     "spe": 90,
     "evolutions": [],
-    "learnset": []
+    "learnset": [
+      {
+        "level": 14,
+        "move": "Ancient Power"
+      },
+      {
+        "level": 21,
+        "move": "Hex"
+      },
+      {
+        "level": 28,
+        "move": "Slash"
+      },
+      {
+        "level": 56,
+        "move": "Aura Sphere"
+      },
+      {
+        "level": 70,
+        "move": "Earth Power"
+      }
+    ]
   },
   {
     "id": 488,
@@ -25926,7 +26606,12 @@
     "spd": 100,
     "spe": 100,
     "evolutions": [],
-    "learnset": []
+    "learnset": [
+      {
+        "level": 46,
+        "move": "Play Rough"
+      }
+    ]
   },
   {
     "id": 493,
@@ -28990,7 +29675,20 @@
     "spd": 75,
     "spe": 90,
     "evolutions": [],
-    "learnset": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Absorb"
+      },
+      {
+        "level": 1,
+        "move": "Giga Drain"
+      },
+      {
+        "level": 1,
+        "move": "Mega Drain"
+      }
+    ],
     "unova_id": 85
   },
   {
@@ -29015,7 +29713,48 @@
         "level": 101
       }
     ],
-    "learnset": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Water Gun"
+      },
+      {
+        "level": 4,
+        "move": "Tackle"
+      },
+      {
+        "level": 8,
+        "move": "Flail"
+      },
+      {
+        "level": 12,
+        "move": "Aqua Jet"
+      },
+      {
+        "level": 16,
+        "move": "Bite"
+      },
+      {
+        "level": 24,
+        "move": "Headbutt"
+      },
+      {
+        "level": 32,
+        "move": "Crunch"
+      },
+      {
+        "level": 36,
+        "move": "Take Down"
+      },
+      {
+        "level": 48,
+        "move": "Thrash"
+      },
+      {
+        "level": 52,
+        "move": "Double-Edge"
+      }
+    ],
     "unova_id": 104
   },
   {
@@ -29216,7 +29955,40 @@
         "level": 101
       }
     ],
-    "learnset": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Ember"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 8,
+        "move": "Bite"
+      },
+      {
+        "level": 24,
+        "move": "Headbutt"
+      },
+      {
+        "level": 28,
+        "move": "Fire Punch"
+      },
+      {
+        "level": 40,
+        "move": "Flare Blitz"
+      },
+      {
+        "level": 44,
+        "move": "Thrash"
+      },
+      {
+        "level": 48,
+        "move": "Superpower"
+      }
+    ],
     "unova_id": 102
   },
   {
@@ -29232,7 +30004,44 @@
     "spd": 55,
     "spe": 95,
     "evolutions": [],
-    "learnset": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Bite"
+      },
+      {
+        "level": 1,
+        "move": "Ember"
+      },
+      {
+        "level": 1,
+        "move": "Hammer Arm"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 24,
+        "move": "Headbutt"
+      },
+      {
+        "level": 28,
+        "move": "Fire Punch"
+      },
+      {
+        "level": 44,
+        "move": "Flare Blitz"
+      },
+      {
+        "level": 50,
+        "move": "Thrash"
+      },
+      {
+        "level": 56,
+        "move": "Superpower"
+      }
+    ],
     "unova_id": 103
   },
   {
@@ -29582,7 +30391,28 @@
         "level": 101
       }
     ],
-    "learnset": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Astonish"
+      },
+      {
+        "level": 8,
+        "move": "Night Shade"
+      },
+      {
+        "level": 24,
+        "move": "Hex"
+      },
+      {
+        "level": 40,
+        "move": "Shadow Ball"
+      },
+      {
+        "level": 44,
+        "move": "Dark Pulse"
+      }
+    ],
     "unova_id": 124
   },
   {
@@ -30029,7 +30859,16 @@
         "level": 30
       }
     ],
-    "learnset": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Scratch"
+      },
+      {
+        "level": 12,
+        "move": "Fury Swipes"
+      }
+    ],
     "unova_id": 151
   },
   {
@@ -30045,7 +30884,16 @@
     "spd": 60,
     "spe": 105,
     "evolutions": [],
-    "learnset": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Scratch"
+      },
+      {
+        "level": 12,
+        "move": "Fury Swipes"
+      }
+    ],
     "unova_id": 152
   },
   {
@@ -32462,7 +33310,48 @@
     "spd": 99,
     "spe": 32,
     "evolutions": [],
-    "learnset": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Mud-Slap"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 1,
+        "move": "Water Gun"
+      },
+      {
+        "level": 10,
+        "move": "Mud Shot"
+      },
+      {
+        "level": 15,
+        "move": "Revenge"
+      },
+      {
+        "level": 35,
+        "move": "Bounce"
+      },
+      {
+        "level": 40,
+        "move": "Muddy Water"
+      },
+      {
+        "level": 45,
+        "move": "Discharge"
+      },
+      {
+        "level": 50,
+        "move": "Flail"
+      },
+      {
+        "level": 55,
+        "move": "Fissure"
+      }
+    ],
     "unova_id": 231
   },
   {
@@ -33814,7 +34703,44 @@
     "spd": 80,
     "spe": 111,
     "evolutions": [],
-    "learnset": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Astonish"
+      },
+      {
+        "level": 1,
+        "move": "Gust"
+      },
+      {
+        "level": 15,
+        "move": "Bite"
+      },
+      {
+        "level": 20,
+        "move": "Air Cutter"
+      },
+      {
+        "level": 35,
+        "move": "Air Slash"
+      },
+      {
+        "level": 40,
+        "move": "Crunch"
+      },
+      {
+        "level": 55,
+        "move": "Hammer Arm"
+      },
+      {
+        "level": 65,
+        "move": "Hurricane"
+      },
+      {
+        "level": 70,
+        "move": "Thrash"
+      }
+    ],
     "unova_id": 198
   },
   {
@@ -33831,7 +34757,36 @@
     "spd": 80,
     "spe": 111,
     "evolutions": [],
-    "learnset": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Astonish"
+      },
+      {
+        "level": 15,
+        "move": "Bite"
+      },
+      {
+        "level": 40,
+        "move": "Crunch"
+      },
+      {
+        "level": 45,
+        "move": "Discharge"
+      },
+      {
+        "level": 55,
+        "move": "Hammer Arm"
+      },
+      {
+        "level": 65,
+        "move": "Thunder"
+      },
+      {
+        "level": 70,
+        "move": "Thrash"
+      }
+    ],
     "unova_id": 199
   },
   {
@@ -33988,7 +34943,40 @@
     "spd": 80,
     "spe": 101,
     "evolutions": [],
-    "learnset": [],
+    "learnset": [
+      {
+        "level": 20,
+        "move": "Rock Tomb"
+      },
+      {
+        "level": 35,
+        "move": "Rock Slide"
+      },
+      {
+        "level": 40,
+        "move": "Earth Power"
+      },
+      {
+        "level": 50,
+        "move": "Stone Edge"
+      },
+      {
+        "level": 55,
+        "move": "Hammer Arm"
+      },
+      {
+        "level": 65,
+        "move": "Earthquake"
+      },
+      {
+        "level": 70,
+        "move": "Outrage"
+      },
+      {
+        "level": 75,
+        "move": "Fissure"
+      }
+    ],
     "unova_id": 200
   },
   {
@@ -34005,7 +34993,40 @@
     "spd": 90,
     "spe": 95,
     "evolutions": [],
-    "learnset": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Ancient Power"
+      },
+      {
+        "level": 8,
+        "move": "Slash"
+      },
+      {
+        "level": 24,
+        "move": "Dragon Pulse"
+      },
+      {
+        "level": 32,
+        "move": "Ice Beam"
+      },
+      {
+        "level": 40,
+        "move": "Hyper Voice"
+      },
+      {
+        "level": 56,
+        "move": "Blizzard"
+      },
+      {
+        "level": 72,
+        "move": "Outrage"
+      },
+      {
+        "level": 88,
+        "move": "Sheer Cold"
+      }
+    ],
     "unova_id": 297
   },
   {
@@ -34022,7 +35043,36 @@
     "spd": 90,
     "spe": 108,
     "evolutions": [],
-    "learnset": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Aqua Jet"
+      },
+      {
+        "level": 7,
+        "move": "Bubble Beam"
+      },
+      {
+        "level": 21,
+        "move": "Double Kick"
+      },
+      {
+        "level": 35,
+        "move": "Aqua Tail"
+      },
+      {
+        "level": 42,
+        "move": "Take Down"
+      },
+      {
+        "level": 63,
+        "move": "Hydro Pump"
+      },
+      {
+        "level": 70,
+        "move": "Close Combat"
+      }
+    ],
     "unova_id": 298
   },
   {
@@ -34039,7 +35089,32 @@
     "spd": 128,
     "spe": 90,
     "evolutions": [],
-    "learnset": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Confusion"
+      },
+      {
+        "level": 1,
+        "move": "Quick Attack"
+      },
+      {
+        "level": 31,
+        "move": "Psybeam"
+      },
+      {
+        "level": 57,
+        "move": "Psychic"
+      },
+      {
+        "level": 64,
+        "move": "Hyper Voice"
+      },
+      {
+        "level": 78,
+        "move": "Close Combat"
+      }
+    ],
     "unova_id": 299
   },
   {
@@ -35076,7 +36151,7 @@
   },
   {
     "id": 669,
-    "name": "Flab\u00e9b\u00e9",
+    "name": "Flabébé",
     "types": [
       "Fairy"
     ],
@@ -35561,7 +36636,32 @@
     "spd": 81,
     "spe": 104,
     "evolutions": [],
-    "learnset": []
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Disarming Voice"
+      },
+      {
+        "level": 1,
+        "move": "Fake Out"
+      },
+      {
+        "level": 1,
+        "move": "Scratch"
+      },
+      {
+        "level": 9,
+        "move": "Confusion"
+      },
+      {
+        "level": 21,
+        "move": "Psybeam"
+      },
+      {
+        "level": 54,
+        "move": "Psychic"
+      }
+    ]
   },
   {
     "id": 679,
@@ -35677,7 +36777,32 @@
     "spd": 140,
     "spe": 60,
     "evolutions": [],
-    "learnset": []
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Aerial Ace"
+      },
+      {
+        "level": 1,
+        "move": "Fury Cutter"
+      },
+      {
+        "level": 1,
+        "move": "Iron Head"
+      },
+      {
+        "level": 1,
+        "move": "Night Slash"
+      },
+      {
+        "level": 1,
+        "move": "Slash"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      }
+    ]
   },
   {
     "id": 682,
@@ -37160,7 +38285,24 @@
         "level": 101
       }
     ],
-    "learnset": []
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Astonish"
+      },
+      {
+        "level": 12,
+        "move": "Razor Leaf"
+      },
+      {
+        "level": 20,
+        "move": "Bullet Seed"
+      },
+      {
+        "level": 36,
+        "move": "Shadow Ball"
+      }
+    ]
   },
   {
     "id": 711,
@@ -37176,7 +38318,32 @@
     "spd": 75,
     "spe": 84,
     "evolutions": [],
-    "learnset": []
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Astonish"
+      },
+      {
+        "level": 1,
+        "move": "Explosion"
+      },
+      {
+        "level": 1,
+        "move": "Moonblast"
+      },
+      {
+        "level": 12,
+        "move": "Razor Leaf"
+      },
+      {
+        "level": 20,
+        "move": "Bullet Seed"
+      },
+      {
+        "level": 36,
+        "move": "Shadow Ball"
+      }
+    ]
   },
   {
     "id": 712,
@@ -37497,7 +38664,32 @@
     "spd": 95,
     "spe": 95,
     "evolutions": [],
-    "learnset": []
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Bite"
+      },
+      {
+        "level": 16,
+        "move": "Dig"
+      },
+      {
+        "level": 32,
+        "move": "Crunch"
+      },
+      {
+        "level": 40,
+        "move": "Dragon Pulse"
+      },
+      {
+        "level": 80,
+        "move": "Earthquake"
+      },
+      {
+        "level": 88,
+        "move": "Outrage"
+      }
+    ]
   },
   {
     "id": 719,
@@ -37562,7 +38754,32 @@
     "spd": 130,
     "spe": 70,
     "evolutions": [],
-    "learnset": []
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Confusion"
+      },
+      {
+        "level": 6,
+        "move": "Astonish"
+      },
+      {
+        "level": 19,
+        "move": "Psybeam"
+      },
+      {
+        "level": 46,
+        "move": "Zen Headbutt"
+      },
+      {
+        "level": 55,
+        "move": "Shadow Ball"
+      },
+      {
+        "level": 75,
+        "move": "Psychic"
+      }
+    ]
   },
   {
     "id": 721,
@@ -38658,7 +39875,28 @@
     "spd": 70,
     "spe": 93,
     "evolutions": [],
-    "learnset": []
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Pound"
+      },
+      {
+        "level": 6,
+        "move": "Peck"
+      },
+      {
+        "level": 13,
+        "move": "Air Cutter"
+      },
+      {
+        "level": 36,
+        "move": "Air Slash"
+      },
+      {
+        "level": 47,
+        "move": "Hurricane"
+      }
+    ]
   },
   {
     "id": 742,
@@ -38825,7 +40063,40 @@
     "spd": 65,
     "spe": 112,
     "evolutions": [],
-    "learnset": []
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Quick Attack"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 12,
+        "move": "Rock Throw"
+      },
+      {
+        "level": 20,
+        "move": "Bite"
+      },
+      {
+        "level": 24,
+        "move": "Rock Tomb"
+      },
+      {
+        "level": 36,
+        "move": "Rock Slide"
+      },
+      {
+        "level": 42,
+        "move": "Crunch"
+      },
+      {
+        "level": 60,
+        "move": "Stone Edge"
+      }
+    ]
   },
   {
     "id": 746,
@@ -38840,7 +40111,24 @@
     "spd": 25,
     "spe": 40,
     "evolutions": [],
-    "learnset": []
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Water Gun"
+      },
+      {
+        "level": 32,
+        "move": "Aqua Tail"
+      },
+      {
+        "level": 44,
+        "move": "Hydro Pump"
+      },
+      {
+        "level": 48,
+        "move": "Double-Edge"
+      }
+    ]
   },
   {
     "id": 747,
@@ -40295,7 +41583,44 @@
     "spd": 100,
     "spe": 60,
     "evolutions": [],
-    "learnset": []
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 8,
+        "move": "Rollout"
+      },
+      {
+        "level": 15,
+        "move": "Swift"
+      },
+      {
+        "level": 17,
+        "move": "Ancient Power"
+      },
+      {
+        "level": 22,
+        "move": "Self-Destruct"
+      },
+      {
+        "level": 29,
+        "move": "Take Down"
+      },
+      {
+        "level": 38,
+        "move": "Power Gem"
+      },
+      {
+        "level": 43,
+        "move": "Double-Edge"
+      },
+      {
+        "level": 50,
+        "move": "Explosion"
+      }
+    ]
   },
   {
     "id": 775,
@@ -41057,7 +42382,12 @@
         "level": 43
       }
     ],
-    "learnset": []
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Tackle"
+      }
+    ]
   },
   {
     "id": 790,
@@ -41081,7 +42411,12 @@
         "level": 53
       }
     ],
-    "learnset": []
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Tackle"
+      }
+    ]
   },
   {
     "id": 791,
@@ -44061,7 +45396,24 @@
     "spd": 70,
     "spe": 75,
     "evolutions": [],
-    "learnset": []
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Acid"
+      },
+      {
+        "level": 1,
+        "move": "Flail"
+      },
+      {
+        "level": 36,
+        "move": "Discharge"
+      },
+      {
+        "level": 40,
+        "move": "Poison Jab"
+      }
+    ]
   },
   {
     "id": 850,
@@ -45272,7 +46624,32 @@
     "spd": 90,
     "spe": 50,
     "evolutions": [],
-    "learnset": []
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Powder Snow"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 18,
+        "move": "Icy Wind"
+      },
+      {
+        "level": 24,
+        "move": "Headbutt"
+      },
+      {
+        "level": 54,
+        "move": "Surf"
+      },
+      {
+        "level": 60,
+        "move": "Blizzard"
+      }
+    ]
   },
   {
     "id": 876,
@@ -45288,7 +46665,20 @@
     "spd": 95,
     "spe": 95,
     "evolutions": [],
-    "learnset": []
+    "learnset": [
+      {
+        "level": 10,
+        "move": "Disarming Voice"
+      },
+      {
+        "level": 15,
+        "move": "Psybeam"
+      },
+      {
+        "level": 35,
+        "move": "Psychic"
+      }
+    ]
   },
   {
     "id": 877,
@@ -45304,7 +46694,32 @@
     "spd": 58,
     "spe": 97,
     "evolutions": [],
-    "learnset": []
+    "learnset": [
+      {
+        "level": 15,
+        "move": "Quick Attack"
+      },
+      {
+        "level": 25,
+        "move": "Bite"
+      },
+      {
+        "level": 30,
+        "move": "Spark"
+      },
+      {
+        "level": 45,
+        "move": "Bullet Seed"
+      },
+      {
+        "level": 50,
+        "move": "Crunch"
+      },
+      {
+        "level": 60,
+        "move": "Thrash"
+      }
+    ]
   },
   {
     "id": 878,
@@ -45939,7 +47354,44 @@
     "spd": 115,
     "spe": 138,
     "evolutions": [],
-    "learnset": []
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Bite"
+      },
+      {
+        "level": 1,
+        "move": "Metal Claw"
+      },
+      {
+        "level": 1,
+        "move": "Quick Attack"
+      },
+      {
+        "level": 11,
+        "move": "Slash"
+      },
+      {
+        "level": 33,
+        "move": "Iron Head"
+      },
+      {
+        "level": 55,
+        "move": "Crunch"
+      },
+      {
+        "level": 66,
+        "move": "Moonblast"
+      },
+      {
+        "level": 77,
+        "move": "Close Combat"
+      },
+      {
+        "level": 88,
+        "move": "Giga Impact"
+      }
+    ]
   },
   {
     "id": 889,
@@ -45954,7 +47406,44 @@
     "spd": 115,
     "spe": 138,
     "evolutions": [],
-    "learnset": []
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Bite"
+      },
+      {
+        "level": 1,
+        "move": "Metal Claw"
+      },
+      {
+        "level": 1,
+        "move": "Quick Attack"
+      },
+      {
+        "level": 11,
+        "move": "Slash"
+      },
+      {
+        "level": 33,
+        "move": "Iron Head"
+      },
+      {
+        "level": 55,
+        "move": "Crunch"
+      },
+      {
+        "level": 66,
+        "move": "Moonblast"
+      },
+      {
+        "level": 77,
+        "move": "Close Combat"
+      },
+      {
+        "level": 88,
+        "move": "Giga Impact"
+      }
+    ]
   },
   {
     "id": 890,
@@ -46084,7 +47573,32 @@
     "spd": 60,
     "spe": 97,
     "evolutions": [],
-    "learnset": []
+    "learnset": [
+      {
+        "level": 12,
+        "move": "Aerial Ace"
+      },
+      {
+        "level": 20,
+        "move": "Headbutt"
+      },
+      {
+        "level": 24,
+        "move": "Brick Break"
+      },
+      {
+        "level": 36,
+        "move": "Iron Head"
+      },
+      {
+        "level": 40,
+        "move": "Dynamic Punch"
+      },
+      {
+        "level": 48,
+        "move": "Close Combat"
+      }
+    ]
   },
   {
     "id": 893,
@@ -46385,7 +47899,36 @@
     "spd": 80,
     "spe": 80,
     "evolutions": [],
-    "learnset": []
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Confusion"
+      },
+      {
+        "level": 1,
+        "move": "Mega Drain"
+      },
+      {
+        "level": 1,
+        "move": "Pound"
+      },
+      {
+        "level": 16,
+        "move": "Giga Drain"
+      },
+      {
+        "level": 56,
+        "move": "Psychic"
+      },
+      {
+        "level": 80,
+        "move": "Solar Beam"
+      },
+      {
+        "level": 88,
+        "move": "Future Sight"
+      }
+    ]
   },
   {
     "id": 899,
@@ -46560,7 +48103,52 @@
     "spd": 75,
     "spe": 78,
     "evolutions": [],
-    "learnset": []
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Shadow Ball"
+      },
+      {
+        "level": 1,
+        "move": "Water Gun"
+      },
+      {
+        "level": 4,
+        "move": "Tackle"
+      },
+      {
+        "level": 8,
+        "move": "Flail"
+      },
+      {
+        "level": 12,
+        "move": "Aqua Jet"
+      },
+      {
+        "level": 16,
+        "move": "Bite"
+      },
+      {
+        "level": 24,
+        "move": "Headbutt"
+      },
+      {
+        "level": 32,
+        "move": "Crunch"
+      },
+      {
+        "level": 36,
+        "move": "Take Down"
+      },
+      {
+        "level": 48,
+        "move": "Thrash"
+      },
+      {
+        "level": 52,
+        "move": "Double-Edge"
+      }
+    ]
   },
   {
     "id": 903,
@@ -46694,7 +48282,36 @@
     "spd": 80,
     "spe": 106,
     "evolutions": [],
-    "learnset": []
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Astonish"
+      },
+      {
+        "level": 15,
+        "move": "Twister"
+      },
+      {
+        "level": 20,
+        "move": "Draining Kiss"
+      },
+      {
+        "level": 40,
+        "move": "Dazzling Gleam"
+      },
+      {
+        "level": 55,
+        "move": "Superpower"
+      },
+      {
+        "level": 65,
+        "move": "Moonblast"
+      },
+      {
+        "level": 70,
+        "move": "Outrage"
+      }
+    ]
   },
   {
     "id": 906,
@@ -47351,7 +48968,40 @@
     "spd": 80,
     "spe": 65,
     "evolutions": [],
-    "learnset": []
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 5,
+        "move": "Disarming Voice"
+      },
+      {
+        "level": 12,
+        "move": "Mud Shot"
+      },
+      {
+        "level": 17,
+        "move": "Dig"
+      },
+      {
+        "level": 23,
+        "move": "Headbutt"
+      },
+      {
+        "level": 26,
+        "move": "Take Down"
+      },
+      {
+        "level": 42,
+        "move": "Double-Edge"
+      },
+      {
+        "level": 48,
+        "move": "Earth Power"
+      }
+    ]
   },
   {
     "id": 917,
@@ -47862,7 +49512,32 @@
     "spd": 75,
     "spe": 111,
     "evolutions": [],
-    "learnset": []
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Pound"
+      },
+      {
+        "level": 11,
+        "move": "Super Fang"
+      },
+      {
+        "level": 14,
+        "move": "Double Hit"
+      },
+      {
+        "level": 18,
+        "move": "Bullet Seed"
+      },
+      {
+        "level": 29,
+        "move": "Play Rough"
+      },
+      {
+        "level": 33,
+        "move": "Hyper Voice"
+      }
+    ]
   },
   {
     "id": 926,
@@ -48156,7 +49831,28 @@
     "spd": 51,
     "spe": 92,
     "evolutions": [],
-    "learnset": []
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Peck"
+      },
+      {
+        "level": 6,
+        "move": "Quick Attack"
+      },
+      {
+        "level": 13,
+        "move": "Aerial Ace"
+      },
+      {
+        "level": 17,
+        "move": "Fury Attack"
+      },
+      {
+        "level": 42,
+        "move": "Brave Bird"
+      }
+    ]
   },
   {
     "id": 932,
@@ -50063,7 +51759,32 @@
     "spd": 62,
     "spe": 100,
     "evolutions": [],
-    "learnset": []
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Water Gun"
+      },
+      {
+        "level": 7,
+        "move": "Astonish"
+      },
+      {
+        "level": 13,
+        "move": "Aqua Jet"
+      },
+      {
+        "level": 17,
+        "move": "Double Hit"
+      },
+      {
+        "level": 39,
+        "move": "Aqua Tail"
+      },
+      {
+        "level": 50,
+        "move": "Hydro Pump"
+      }
+    ]
   },
   {
     "id": 965,
@@ -50870,7 +52591,24 @@
     "spd": 95,
     "spe": 82,
     "evolutions": [],
-    "learnset": []
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Water Gun"
+      },
+      {
+        "level": 17,
+        "move": "Water Pulse"
+      },
+      {
+        "level": 39,
+        "move": "Muddy Water"
+      },
+      {
+        "level": 52,
+        "move": "Dragon Pulse"
+      }
+    ]
   },
   {
     "id": 979,
@@ -51060,7 +52798,36 @@
     "spd": 75,
     "spe": 55,
     "evolutions": [],
-    "learnset": []
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Flail"
+      },
+      {
+        "level": 4,
+        "move": "Mud-Slap"
+      },
+      {
+        "level": 8,
+        "move": "Rollout"
+      },
+      {
+        "level": 20,
+        "move": "Ancient Power"
+      },
+      {
+        "level": 24,
+        "move": "Drill Run"
+      },
+      {
+        "level": 48,
+        "move": "Double-Edge"
+      },
+      {
+        "level": 56,
+        "move": "Hurricane"
+      }
+    ]
   },
   {
     "id": 983,
@@ -52098,7 +53865,16 @@
         "level": 101
       }
     ],
-    "learnset": []
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Astonish"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      }
+    ]
   },
   {
     "id": 1000,
@@ -53104,7 +54880,32 @@
     "spd": 96,
     "spe": 110,
     "evolutions": [],
-    "learnset": []
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Quick Attack"
+      },
+      {
+        "level": 1,
+        "move": "Vine Whip"
+      },
+      {
+        "level": 18,
+        "move": "Slam"
+      },
+      {
+        "level": 54,
+        "move": "Power Whip"
+      },
+      {
+        "level": 60,
+        "move": "Superpower"
+      },
+      {
+        "level": 66,
+        "move": "Wood Hammer"
+      }
+    ]
   },
   {
     "id": 1018,
@@ -53485,7 +55286,32 @@
     "spd": 85,
     "spe": 60,
     "evolutions": [],
-    "learnset": []
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Tri Attack"
+      },
+      {
+        "level": 10,
+        "move": "Ancient Power"
+      },
+      {
+        "level": 20,
+        "move": "Headbutt"
+      },
+      {
+        "level": 40,
+        "move": "Earth Power"
+      },
+      {
+        "level": 50,
+        "move": "Heavy Slam"
+      },
+      {
+        "level": 70,
+        "move": "Double-Edge"
+      }
+    ]
   },
   {
     "id": 1025,
