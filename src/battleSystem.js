@@ -1932,6 +1932,7 @@ class BattleSystem {
 
                 // Learn new moves
                 pokemon.moves = this.getLearnsetMoves(pBase, pokemon.level);
+                // Performance optimized: move lookup is now O(1) via Set in getLearnsetMoves
             }
         }
     }
