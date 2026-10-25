@@ -89,7 +89,7 @@ export class WindowManager {
                                 'showMapTooltip', 'showModal', 'showPokemonStats', 'showPokemonStatsByUuid', 'showProfLabModal',
                                 'showSmartCaptureBallSelection', 'showSmartCaptureMode', 'showTimeLapseModal', 'showTimeLapseResults',
                                 'showTokenItemSelect', 'showTrainerStats', 'showVitaminsModal', 'showZzZConfirmationModal',
-                                'skipProfTutorial', 'startCasinoEncounter', 'startGymBattle', 'startNewGame', 'switchMapRegion',
+                                'skipProfTutorial', 'startCasinoEncounter', 'startGymBattle', 'startNewGame', 'switchMapRegion', 'promptWakeUpRegion',
                                 'switchMultiplayerTab', 'switchView', 'toggleMarketPokemonFilters', 'toggleMarketPokemonSaleSelection',
                                 'toggleSaleSelection', 'trackDailyChallenge', 'transformDitto', 'updateBuyItemPrice',
                                 'updateMainControl', 'updatePokemonFilter', 'updateSellItemPrice', 'updateSmartCaptureIcon',

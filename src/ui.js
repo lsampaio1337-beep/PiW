@@ -88,6 +88,22 @@ state.dayCareRef = dayCare;
 state.storageRef = storage;
 
 // Attach exported methods to window so inline HTML onclicks work
+window.updateZzZModeUI = function() {
+    if (state.isZzZMode) {
+        document.querySelectorAll('.nav-icon').forEach(icon => {
+            if (icon.id !== 'btn-sleep' && icon.id !== 'btn-exit' && icon.id !== 'btn-map') {
+                icon.style.pointerEvents = 'none';
+                icon.style.filter = 'grayscale(100%)';
+            }
+        });
+    } else {
+        document.querySelectorAll('.nav-icon').forEach(icon => {
+            icon.style.pointerEvents = 'auto';
+            icon.style.filter = 'none';
+        });
+    }
+};
+
 window.showMap = showMap;
 window.navigateToLocation = navigateToLocation;
 window.showMapTooltip = showMapTooltip;
@@ -2054,12 +2070,20 @@ async function init() {
                         // For a clean load into sleep mode we don't start at lab. We just wait for wakeup.
                         if (globals.battleSystem) globals.battleSystem.stop();
 
-                        document.querySelectorAll('.nav-icon').forEach(icon => {
-                            if (icon.id !== 'btn-sleep' && icon.id !== 'btn-exit' && icon.id !== 'btn-map') {
-                                icon.style.pointerEvents = 'none';
-                                icon.style.filter = 'grayscale(100%)';
-                            }
-                        });
+                        window.updateZzZModeUI();
+
+                        // Close existing windows except main-control, which should be updated.
+                        if (window.windowManager) {
+                            const winsToClose = [...window.windowManager.windows];
+                            winsToClose.forEach(win => {
+                                if (win.id !== 'main-control-window') {
+                                    window.windowManager.closeDynamicWindow(win.id);
+                                }
+                            });
+                        }
+
+                        window.promptWakeUpRegion(state.currentRegionName);
+
                     } else {
                         // Saved profiles always start at Professor's lab and are free to explore
                         returnToLab();
@@ -2271,12 +2295,7 @@ async function init() {
 
                 if (globals.battleSystem) globals.battleSystem.stop();
 
-                document.querySelectorAll('.nav-icon').forEach(icon => {
-                    if (icon.id !== 'btn-sleep' && icon.id !== 'btn-exit' && icon.id !== 'btn-map') {
-                        icon.style.pointerEvents = 'none';
-                        icon.style.filter = 'grayscale(100%)';
-                    }
-                });
+                window.updateZzZModeUI();
             };
 };
 
@@ -3068,7 +3087,7 @@ window.simulateSleepFarm = function() {
 };
 
 
-window.showWakeUpModal = function() {
+window.promptWakeUpRegion = function(regionName) {
     const resumeHtml = `
     <div class="content-panel" style="display: flex; flex-direction: column; gap: 15px; width: 100%; text-align: center;">
         <p style="color: white; margin: 0;">Do you want to wake up and collect your offline farm?</p>
@@ -3078,7 +3097,7 @@ window.showWakeUpModal = function() {
         </div>
     </div>
     `;
-    showModal("Wake Up?", resumeHtml, "window-zzz-wakeup", "400px");
+    showModal(`Wake Up ${regionName}?`, resumeHtml, "window-zzz-wakeup", "400px");
 
     document.getElementById('btn-zzz-wakeup-no').onclick = () => {
         if(window.windowManager) window.windowManager.closeDynamicWindow('window-zzz-wakeup');
@@ -3086,16 +3105,20 @@ window.showWakeUpModal = function() {
 
     document.getElementById('btn-zzz-wakeup-yes').onclick = () => {
         if(window.windowManager) window.windowManager.closeDynamicWindow('window-zzz-wakeup');
+        if (window.closeModal) window.closeModal();
 
-        // Restore icons
-        document.querySelectorAll('.nav-icon').forEach(icon => {
-            icon.style.pointerEvents = 'auto';
-            icon.style.filter = 'none';
-        });
+        if (state.currentRegionName !== regionName) {
+            window.currentMapRegion = regionName;
+            if (typeof globals.swapRegion === 'function') globals.swapRegion(regionName);
+            // Force a swap to the region being woken up. We use navigateToLocation with the region's current route.
+            let targetRoute = state.regions[regionName]?.currentRoute || 'Professor Lab';
+            window.navigateToLocation(targetRoute);
+        }
 
         // Restart the game components naturally when waking up
         if (state.currentRoute === 'Professor Lab' || state.currentRoute === 'PokeCenter & PokeMarket') {
              // In these areas it's safe to just let it sit
+             if (window.windowManager) window.windowManager.toggleWindow('main-view-window', true);
         } else {
              if (globals.battleSystem && state.currentRoute !== undefined) {
                   window.navigateToLocation(state.currentRoute);
@@ -3103,5 +3126,10 @@ window.showWakeUpModal = function() {
         }
 
         window.simulateSleepFarm();
+        window.updateZzZModeUI();
     };
+};
+
+window.showWakeUpModal = function() {
+    window.promptWakeUpRegion(state.currentRegionName);
 };
