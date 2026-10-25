@@ -1105,7 +1105,15 @@
       "Speed": "30"
     },
     "detailUrl": "https://pokemondb.net/pokedex/metapod",
-    "moves": [],
+    "moves": [
+      {
+        "Lv": "1",
+        "Name": "Tackle",
+        "Type": "Normal",
+        "Category": "Physical",
+        "Power": "40"
+      }
+    ],
     "evolutions": {
       "family": [
         "0010",
@@ -6223,7 +6231,15 @@
       "Speed": "90"
     },
     "detailUrl": "https://pokemondb.net/pokedex/abra",
-    "moves": [],
+    "moves": [
+      {
+        "Lv": "1",
+        "Name": "Tackle",
+        "Type": "Normal",
+        "Category": "Physical",
+        "Power": "40"
+      }
+    ],
     "evolutions": {
       "family": [
         "0063",
@@ -13497,7 +13513,15 @@
       "Speed": "48"
     },
     "detailUrl": "https://pokemondb.net/pokedex/ditto",
-    "moves": [],
+    "moves": [
+      {
+        "Lv": "1",
+        "Name": "Tackle",
+        "Type": "Normal",
+        "Category": "Physical",
+        "Power": "40"
+      }
+    ],
     "evolutions": {
       "family": [],
       "steps": []
@@ -24069,7 +24093,15 @@
       "Speed": "75"
     },
     "detailUrl": "https://pokemondb.net/pokedex/smeargle",
-    "moves": [],
+    "moves": [
+      {
+        "Lv": "1",
+        "Name": "Tackle",
+        "Type": "Normal",
+        "Category": "Physical",
+        "Power": "40"
+      }
+    ],
     "evolutions": {
       "family": [],
       "steps": []
@@ -85436,7 +85468,15 @@
       "Speed": "37"
     },
     "detailUrl": "https://pokemondb.net/pokedex/cosmog",
-    "moves": [],
+    "moves": [
+      {
+        "Lv": "1",
+        "Name": "Tackle",
+        "Type": "Normal",
+        "Category": "Physical",
+        "Power": "40"
+      }
+    ],
     "evolutions": {
       "family": [
         "0789",
@@ -85481,7 +85521,15 @@
       "Speed": "37"
     },
     "detailUrl": "https://pokemondb.net/pokedex/cosmog",
-    "moves": [],
+    "moves": [
+      {
+        "Lv": "1",
+        "Name": "Tackle",
+        "Type": "Normal",
+        "Category": "Physical",
+        "Power": "40"
+      }
+    ],
     "evolutions": {
       "family": [
         "0789",
@@ -85526,7 +85574,15 @@
       "Speed": "37"
     },
     "detailUrl": "https://pokemondb.net/pokedex/cosmoem",
-    "moves": [],
+    "moves": [
+      {
+        "Lv": "1",
+        "Name": "Tackle",
+        "Type": "Normal",
+        "Category": "Physical",
+        "Power": "40"
+      }
+    ],
     "evolutions": {
       "family": [
         "0789",
@@ -85571,7 +85627,15 @@
       "Speed": "37"
     },
     "detailUrl": "https://pokemondb.net/pokedex/cosmoem",
-    "moves": [],
+    "moves": [
+      {
+        "Lv": "1",
+        "Name": "Tackle",
+        "Type": "Normal",
+        "Category": "Physical",
+        "Power": "40"
+      }
+    ],
     "evolutions": {
       "family": [
         "0789",
