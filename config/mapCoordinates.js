@@ -84,8 +84,8 @@ const mapCoordinates = {
     "x": 80.32,
     "y": 55.19
   },
-  "diglett_s_cave": {
-    "name": "Diglett's Cave",
+  "digglett_cave": {
+    "name": "Digglett Cave",
     "x": 70.83,
     "y": 51.7
   },
@@ -254,10 +254,20 @@ const mapCoordinates = {
     "x": 61.58,
     "y": 25.05
   },
-  "mythical_and_legendaries": {
-    "name": "Mythical and Legendaries",
+  "indigo_summit": {
+    "name": "Indigo Summit",
     "x": 35.77,
     "y": 3.38
+  },
+  "150_challenge_area": {
+    "name": "150 Challenge Area",
+    "x": 48.0,
+    "y": 48.0
+  },
+  "key_for_indigo_summit": {
+    "name": "Key for Indigo Summit",
+    "x": 48.0,
+    "y": 48.0
   }
 };
 export default mapCoordinates;

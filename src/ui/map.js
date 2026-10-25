@@ -239,10 +239,6 @@ function getUnlockedAreas() {
         unlockedAreas.add("Route 29");
     }
 
-    if (targetStats.completed150Challenge) {
-        unlockedAreas.add("Temporal Sanctuary Spot");
-    }
-
     if (targetStats.completedChallengeIds) {
         targetStats.completedChallengeIds.forEach(id => {
             parseAreaNames(id).forEach(area => unlockedAreas.add(area));
