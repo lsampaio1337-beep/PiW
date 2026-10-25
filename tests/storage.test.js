@@ -136,6 +136,64 @@ describe('Storage.processCheat', () => {
     });
 });
 
+describe('Storage.getProfileData', () => {
+    let storage;
+    let consoleWarnSpy;
+
+    beforeEach(() => {
+        storage = new Storage();
+        consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+        jest.clearAllMocks();
+    });
+
+    afterEach(() => {
+        consoleWarnSpy.mockRestore();
+    });
+
+    test('should return parsed data if profile data exists', () => {
+        const mockData = { someData: 'test' };
+        window.localStorage.getItem.mockReturnValueOnce(JSON.stringify(mockData));
+
+        const result = storage.getProfileData('test_profile_id');
+        expect(window.localStorage.getItem).toHaveBeenCalledWith('test_profile_id');
+        expect(result).toEqual(mockData);
+        expect(consoleWarnSpy).not.toHaveBeenCalled();
+    });
+
+    test('should return null if profile data does not exist', () => {
+        window.localStorage.getItem.mockReturnValueOnce(null);
+
+        const result = storage.getProfileData('test_profile_id');
+        expect(window.localStorage.getItem).toHaveBeenCalledWith('test_profile_id');
+        expect(result).toBeNull();
+        expect(consoleWarnSpy).not.toHaveBeenCalled();
+    });
+
+    test('should catch error, log warning, and return null if localStorage.getItem throws', () => {
+        const mockError = new Error('Storage error');
+        window.localStorage.getItem.mockImplementationOnce(() => {
+            throw mockError;
+        });
+
+        const result = storage.getProfileData('test_profile_id');
+        expect(window.localStorage.getItem).toHaveBeenCalledWith('test_profile_id');
+        expect(consoleWarnSpy).toHaveBeenCalledWith('Failed to parse profile data for test_profile_id:', mockError);
+        expect(result).toBeNull();
+    });
+
+    test('should catch error, log warning, and return null if JSON.parse throws due to malformed data', () => {
+        window.localStorage.getItem.mockReturnValueOnce('malformed json');
+
+        const result = storage.getProfileData('test_profile_id');
+        expect(window.localStorage.getItem).toHaveBeenCalledWith('test_profile_id');
+        expect(consoleWarnSpy).toHaveBeenCalledWith(
+            'Failed to parse profile data for test_profile_id:',
+            expect.any(Error)
+        );
+        expect(result).toBeNull();
+    });
+});
+
 describe('Storage.reset', () => {
     let storage;
     let consoleLogSpy;
@@ -162,11 +220,11 @@ describe('Storage.reset', () => {
         expect(consoleErrorSpy).not.toHaveBeenCalled();
     });
 
-    test('should remove the current profile from localStorage and log success', () => {
+    test('should remove the current profile from localStorage', () => {
         storage.currentProfileId = 'test_profile_id';
         storage.reset();
         expect(window.localStorage.removeItem).toHaveBeenCalledWith('test_profile_id');
-        expect(consoleLogSpy).toHaveBeenCalledWith("Save data cleared for current profile.");
+        expect(consoleLogSpy).not.toHaveBeenCalled();
         expect(consoleErrorSpy).not.toHaveBeenCalled();
     });
 
