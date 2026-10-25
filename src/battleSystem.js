@@ -273,6 +273,7 @@ class BattleSystem {
         for (const move of attacker.moves) {
             // Very simplified: skip if missing data
             if (!move || move.power === 0) continue;
+            if (move.name === "Self-Destruct") continue;
 
             const isPhysical = move.category === 'Physical';
             const atkStat = isPhysical ? attacker.currentStats.atk : attacker.currentStats.spa;
@@ -485,6 +486,31 @@ class BattleSystem {
                 if (defender.currentHp <= 0) {
                     defender.currentHp = 0;
                     fainted = true;
+
+                    const hasSelfDestruct = defender.moves && defender.moves.some(m => m && m.name === 'Self-Destruct');
+                    if (hasSelfDestruct) {
+                        const sdHit = mathEngine.calculateDamage(defender.level, 200, defender.currentStats.atk, attacker.currentStats.def, 1, defender.quality);
+                        attacker.currentHp -= sdHit.damage;
+                        if (typeof window.showDamage === 'function') {
+                            window.showDamage(targetSide === 'enemy' ? 'player' : 'enemy', sdHit.damage, sdHit.isCritical, 'Self-Destruct', 'Normal', 1);
+                        }
+
+                        if (mp.dataChannel) {
+                             mp.dataChannel.send(JSON.stringify({
+                                 type: 'combatEvent',
+                                 event: {
+                                     type: 'attack',
+                                     target: targetSide, // the one who was attacking is now getting hit
+                                     damage: sdHit.damage,
+                                     newHp: attacker.currentHp,
+                                     isCritical: sdHit.isCritical,
+                                     effectiveness: 1,
+                                     moveType: 'Normal',
+                                     fainted: attacker.currentHp <= 0
+                                 }
+                             }));
+                        }
+                    }
                 }
 
                 if (typeof window.showDamage === 'function') {
@@ -512,6 +538,11 @@ class BattleSystem {
 
                 if (fainted) {
                     this.handleMultiplayerDefeat(defender);
+                    if (attacker.currentHp <= 0) {
+                        setTimeout(() => {
+                            this.handleMultiplayerDefeat(attacker);
+                        }, 1000);
+                    }
                 } else {
                     const delay = Math.max(200, 1000 / this.state.settings.gameSpeed);
                     this.combatLoop = setTimeout(() => {
@@ -1216,8 +1247,21 @@ class BattleSystem {
             this.updateUI();
 
             if (defender.currentHp <= 0) {
+                const hasSelfDestruct = defender.moves && defender.moves.some(m => m && m.name === 'Self-Destruct');
+                if (hasSelfDestruct) {
+                    const sdHit = mathEngine.calculateDamage(defender.level, 200, defender.currentStats.atk, attacker.currentStats.def, 1, defender.quality);
+                    attacker.currentHp -= sdHit.damage;
+                    if (typeof window.showDamage === 'function') {
+                        window.showDamage(targetSide === 'enemy' ? 'player' : 'enemy', sdHit.damage, sdHit.isCritical, 'Self-Destruct', 'Normal', 1);
+                    }
+                    this.updateUI();
+                }
+
                 if (defender === this.activeEncounter) {
                     this.handleEnemyDefeat();
+                    if (attacker === leader && attacker.currentHp <= 0 && !this.isFainting) {
+                        this.handleFaint();
+                    }
                 } else {
                     if (!this.isFainting) {
                         this.handleFaint();
@@ -2279,6 +2323,15 @@ class BattleSystem {
                 const hit = mathEngine.calculateDamage(attacker.level, move.power, atkStat, defStat, eff, attacker.quality);
                 defender.currentHp -= hit.damage;
 
+                if (defender.currentHp <= 0) {
+                    defender.currentHp = 0;
+                    const hasSelfDestruct = defender.moves && defender.moves.some(m => m && m.name === 'Self-Destruct');
+                    if (hasSelfDestruct) {
+                        const sdHit = mathEngine.calculateDamage(defender.level, 200, defender.currentStats.atk, attacker.currentStats.def, 1, defender.quality);
+                        attacker.currentHp -= sdHit.damage;
+                    }
+                }
+
                 return false; // Not a potion, just an attack
             };
 
@@ -2291,7 +2344,7 @@ class BattleSystem {
                 // First turn
                 executeSimulatedTurn(firstActor, secondActor, isLeaderFaster);
 
-                if (secondActor.currentHp <= 0) break;
+                if (firstActor.currentHp <= 0 || secondActor.currentHp <= 0) break;
 
                 // Second turn (delay before second actor strikes)
                 let secondDelay = isLeaderFaster ? enemyDelay : leaderDelay;
@@ -2304,7 +2357,7 @@ class BattleSystem {
             combatTime += 500;
 
             // End of combat logic
-            if (leader.currentHp > 0) {
+            if (this.activeEncounter.currentHp <= 0) {
                 // Out of combat insta-heal if threshold is met, identical to handleEnemyDefeat
                 if (this.state.settings.autoPotion) {
                     let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 25;
@@ -2531,7 +2584,8 @@ class BattleSystem {
                 }
 
                 this.state.stats.battlesWon++;
-            } else {
+            }
+            if (leader.currentHp <= 0) {
                 leader.currentHp = 0;
                 const fainted = this.state.party.shift();
 
@@ -2560,6 +2614,11 @@ class BattleSystem {
                 }
 
                 this.state.party.push(fainted);
+
+                if (!this.state.party.some(p => p.currentHp > 0)) {
+                    results.fainted = true;
+                    break;
+                }
             }
 
             totalSimTime += searchTime + combatTime;
