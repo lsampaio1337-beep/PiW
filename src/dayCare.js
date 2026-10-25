@@ -49,10 +49,11 @@ class DayCare {
     grantPassiveXP(amount, grantXpCallback) {
         if (this.slot2.pokemon) {
             // Passively receives 50% of battle XP. Use battleSystem's grantXP for correct level up handling.
+            const xpGained = Number((amount * 0.50).toFixed(2));
             if (grantXpCallback) {
-                grantXpCallback(this.slot2.pokemon, amount * 0.50);
+                grantXpCallback(this.slot2.pokemon, xpGained);
             } else {
-                this.slot2.pokemon.xp += amount * 0.50;
+                this.slot2.pokemon.xp = Number((this.slot2.pokemon.xp + xpGained).toFixed(2));
             }
         }
     }
@@ -63,7 +64,8 @@ class DayCare {
 
         // Increase quality by a random number between 0 and 0.1 (Max 1.99)
         // 0, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1
-        const randIncrease = Math.floor(Math.random() * 11) / 100;
+        const randomVal = typeof crypto !== 'undefined' ? (crypto.getRandomValues(new Uint32Array(1))[0] / (0xFFFFFFFF + 1)) : Math.random();
+        const randIncrease = Math.floor(randomVal * 11) / 100;
         p.quality += randIncrease;
 
         // Fix floating point precision
@@ -98,7 +100,8 @@ class DayCare {
             }
 
             if (sub100Stats.length > 0) {
-                const randStat = sub100Stats[Math.floor(Math.random() * sub100Stats.length)];
+                const randomVal = typeof crypto !== 'undefined' ? (crypto.getRandomValues(new Uint32Array(1))[0] / (0xFFFFFFFF + 1)) : Math.random();
+                const randStat = sub100Stats[Math.floor(randomVal * sub100Stats.length)];
                 pkmn.ivs[randStat]++;
             }
         }

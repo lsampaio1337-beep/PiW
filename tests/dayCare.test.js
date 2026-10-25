@@ -16,11 +16,22 @@ describe('DayCare', () => {
 
         // Mock Math.random to make tests deterministic
         jest.spyOn(Math, 'random').mockReturnValue(0.5);
+
+        // Mock crypto API since we migrated to it
+        global.crypto = {
+            getRandomValues: jest.fn((arr) => {
+                // Return a deterministic value equivalent to Math.random() = 0.5
+                // 0.5 * (0xFFFFFFFF + 1) = 2147483648
+                arr[0] = 2147483648;
+                return arr;
+            })
+        };
     });
 
     afterEach(() => {
         jest.restoreAllMocks();
         delete global.window;
+        delete global.crypto;
     });
 
     describe('Initialization', () => {
@@ -160,7 +171,10 @@ describe('DayCare', () => {
 
         test('should cap quality at 1.99 and set qualityName to Perfect', () => {
             // Force random to max out increase (Math.random() -> 0.999 -> floor(10.9) = 10 -> 0.10)
-            jest.spyOn(Math, 'random').mockReturnValue(0.999);
+            global.crypto.getRandomValues = jest.fn((arr) => {
+                arr[0] = 4290666000; // ~0.999
+                return arr;
+            });
             dayCare.slot1.pokemon = { quality: 1.95 };
             dayCare.completeBreeding();
 
