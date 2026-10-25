@@ -1,6 +1,5 @@
 import { state } from '../state.js';
 import * as mathEngine from "../mathEngine.js";
-import { escapeHTML } from "../utils/stringUtils.js";
 
 // Ensure global functions that are referenced in HTML exist on window object
 // However, since `window.setLeader` and `window.showPokemonStats` are referenced,
