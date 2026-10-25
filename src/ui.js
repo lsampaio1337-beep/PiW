@@ -135,8 +135,8 @@ window.completeChallenge = function(targetAreaId) {
     if (targetAreaId === '150_challenge') {
         state.stats.completed150Challenge = true;
         if (!state.stats.newRoutes) state.stats.newRoutes = [];
-        if (!state.stats.newRoutes.includes("Mythical and Legendaries")) {
-            state.stats.newRoutes.push("Mythical and Legendaries");
+        if (!state.stats.newRoutes.includes("Temporal Sanctuary Spot")) {
+            state.stats.newRoutes.push("Temporal Sanctuary Spot");
         }
         state.stats.hasUnseenMap = true;
         updateUI();
@@ -335,8 +335,9 @@ window.cheatProgressChallenge = function(targetAreaId) {
         if (req.defeatMultipleSpecific) {
             if (!state.stats.challengeSpecificDefeats) state.stats.challengeSpecificDefeats = {};
             for (let ds of req.defeatMultipleSpecific) {
-                if (ds.name === '__proto__' || ds.name === 'constructor' || ds.name === 'prototype') continue;
-                state.stats.challengeSpecificDefeats[ds.name] = Math.max(state.stats.challengeSpecificDefeats[ds.name] || 0, ds.count);
+                let key = ds.name || ds.pokemonId;
+                if (key === '__proto__' || key === 'constructor' || key === 'prototype') continue;
+                state.stats.challengeSpecificDefeats[key] = Math.max(state.stats.challengeSpecificDefeats[key] || 0, ds.count);
             }
         }
         if (req.catchSpecies) {
@@ -430,8 +431,9 @@ window.cheatProgressChallenge = function(targetAreaId) {
         if (req.defeatMultipleSpecific) {
             if (!state.stats.challengeSpecificDefeats) state.stats.challengeSpecificDefeats = {};
             for (let ds of req.defeatMultipleSpecific) {
-                if (ds.name === '__proto__' || ds.name === 'constructor' || ds.name === 'prototype') continue;
-                state.stats.challengeSpecificDefeats[ds.name] = ds.count;
+                let key = ds.name || ds.pokemonId;
+                if (key === '__proto__' || key === 'constructor' || key === 'prototype') continue;
+                state.stats.challengeSpecificDefeats[key] = Math.max(state.stats.challengeSpecificDefeats[key] || 0, ds.count);
             }
         }
         if (req.defeatEliteFourAndChampion) {
@@ -460,6 +462,17 @@ window.cheatProgressChallenge = function(targetAreaId) {
             if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};
             state.stats.defeatedBosses["Red"] = true;
         }
+        if (req.completeChallenges) {
+            if (!state.stats.completedChallengeIds) state.stats.completedChallengeIds = [];
+            for (let c of req.completeChallenges) {
+                let match = window.getCurrentUnlocks().find(u => u.challengeName === c || u.areaId === c);
+                let idToPush = match ? match.areaId : c;
+                if (!state.stats.completedChallengeIds.includes(idToPush)) {
+                    state.stats.completedChallengeIds.push(idToPush);
+                }
+            }
+        }
+
     }
         if (window.updateUI) window.updateUI();
     const challengeWinCheat = document.getElementById('window-challenges');

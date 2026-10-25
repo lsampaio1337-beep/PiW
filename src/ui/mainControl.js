@@ -153,9 +153,12 @@ export function getChallengeData(unlock) {
 
     if (req.defeatMultipleSpecific) {
         for (let target of req.defeatMultipleSpecific) {
-            let defeated = state.stats.challengeSpecificDefeats ? (state.stats.challengeSpecificDefeats[target.name] || 0) : 0;
+            let key = target.name || target.pokemonId;
+            if (key === '__proto__' || key === 'constructor' || key === 'prototype') continue;
+            let defeated = state.stats.challengeSpecificDefeats ? (state.stats.challengeSpecificDefeats[key] || 0) : 0;
             if (defeated < target.count) isMet = false;
-            textParts.push(`Defeat ${target.count} ${target.name} ${countDisplay(defeated, target.count)}${getStatusHtml(defeated >= target.count)}`);
+            let displayName = target.name || target.pokemonId;
+            textParts.push(`Defeat ${target.count} ${displayName} ${countDisplay(defeated, target.count)}${getStatusHtml(defeated >= target.count)}`);
         }
     }
 

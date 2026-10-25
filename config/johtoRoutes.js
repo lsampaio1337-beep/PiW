@@ -1001,19 +1001,19 @@ export const johtoRoutes = [
         "pokemonId": 47,
         "minLevel": 77,
         "maxLevel": 82,
-        "chance": 0.30
+        "chance": 0.3
       },
       {
         "pokemonId": 12,
         "minLevel": 77,
         "maxLevel": 82,
-        "chance": 0.20
+        "chance": 0.2
       },
       {
         "pokemonId": 15,
         "minLevel": 77,
         "maxLevel": 82,
-        "chance": 0.20
+        "chance": 0.2
       },
       {
         "pokemonId": 164,
@@ -1025,7 +1025,7 @@ export const johtoRoutes = [
         "pokemonId": 103,
         "minLevel": 79,
         "maxLevel": 83,
-        "chance": 0.10
+        "chance": 0.1
       },
       {
         "pokemonId": 251,
@@ -1234,13 +1234,13 @@ export const johtoRoutes = [
         "pokemonId": 34,
         "minLevel": 86,
         "maxLevel": 90,
-        "chance": 0.10
+        "chance": 0.1
       },
       {
         "pokemonId": 31,
         "minLevel": 86,
         "maxLevel": 90,
-        "chance": 0.10
+        "chance": 0.1
       },
       {
         "pokemonId": 112,
@@ -1252,13 +1252,13 @@ export const johtoRoutes = [
         "pokemonId": 128,
         "minLevel": 87,
         "maxLevel": 91,
-        "chance": 0.20
+        "chance": 0.2
       },
       {
         "pokemonId": 212,
         "minLevel": 87,
         "maxLevel": 90,
-        "chance": 0.20
+        "chance": 0.2
       },
       {
         "pokemonId": 113,
@@ -1299,13 +1299,13 @@ export const johtoRoutes = [
         "pokemonId": 198,
         "minLevel": 39,
         "maxLevel": 44,
-        "chance": 0.10
+        "chance": 0.1
       },
       {
         "pokemonId": 113,
         "minLevel": 39,
         "maxLevel": 44,
-        "chance": 0.10
+        "chance": 0.1
       }
     ]
   },
@@ -1755,7 +1755,7 @@ export const johtoRoutes = [
     ]
   },
   {
-    "name": "Mythical and Legendaries Spot",
+    "name": "Temporal Sanctuary Spot",
     "spawns": [
       {
         "pokemonId": 243,
@@ -2032,11 +2032,11 @@ export const johtoUnlocks = [
     "requirements": {
       "catchSpecies": [
         {
-          "species": "Nidoran♀",
+          "species": "Nidoran\u2640",
           "count": 1
         },
         {
-          "species": "Nidoran♂",
+          "species": "Nidoran\u2642",
           "count": 1
         }
       ]
@@ -2406,7 +2406,7 @@ export const johtoUnlocks = [
     ]
   },
   {
-    "challengeName": "Johto Final Challenge",
+    "challengeName": "Challenge 35",
     "areaId": "Johto Pokemon League",
     "unlocks": [
       "Viridian Forest"
@@ -2422,7 +2422,7 @@ export const johtoUnlocks = [
     ]
   },
   {
-    "challengeName": "Challenge 35",
+    "challengeName": "Challenge 36",
     "areaId": "Viridian Forest",
     "unlocks": [
       "Pewter Gym",
@@ -2438,7 +2438,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 36",
+    "challengeName": "Challenge 37",
     "areaId": "Pewter Gym",
     "unlocks": [
       "Mount Moon"
@@ -2452,7 +2452,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 37",
+    "challengeName": "Challenge 38",
     "areaId": "Mount Moon",
     "unlocks": [
       "Cerulean Gym",
@@ -2468,7 +2468,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 38",
+    "challengeName": "Challenge 39",
     "areaId": "Cerulean Gym",
     "unlocks": [
       "Vermilion Gym"
@@ -2482,7 +2482,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 39",
+    "challengeName": "Challenge 40",
     "areaId": "Vermilion Gym",
     "unlocks": [
       "Route 8"
@@ -2496,7 +2496,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 40",
+    "challengeName": "Challenge 41",
     "areaId": "Route 8",
     "unlocks": [
       "Celadon Gym",
@@ -2511,7 +2511,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 41",
+    "challengeName": "Challenge 42",
     "areaId": "Celadon Gym",
     "unlocks": [
       "Saffron Gym"
@@ -2525,7 +2525,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 42",
+    "challengeName": "Challenge 43",
     "areaId": "Saffron Gym",
     "unlocks": [
       "Route 12"
@@ -2539,7 +2539,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 43",
+    "challengeName": "Challenge 44",
     "areaId": "Route 12",
     "unlocks": [
       "Fuschia Gym",
@@ -2555,7 +2555,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 44",
+    "challengeName": "Challenge 45",
     "areaId": "Fuschia Gym",
     "unlocks": [
       "Cycling Road",
@@ -2570,7 +2570,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 45",
+    "challengeName": "Challenge 46",
     "areaId": "Sea Routes",
     "unlocks": [
       "Cinnabar Gym",
@@ -2584,7 +2584,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 46",
+    "challengeName": "Challenge 47",
     "areaId": "Cinnabar Gym",
     "unlocks": [
       "Viridian Gym",
@@ -2600,7 +2600,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 47",
+    "challengeName": "Challenge 48",
     "areaId": "Viridian Gym",
     "unlocks": [
       "Red"
@@ -2620,7 +2620,7 @@ export const johtoUnlocks = [
     ]
   },
   {
-    "challengeName": "Final Challenge",
+    "challengeName": "Challenge 49",
     "areaId": "Red",
     "unlocks": [
       "Travel to a new Region"
@@ -2717,7 +2717,7 @@ export const johtoUnlocks = [
     "challengeName": "Johto Extra Challenge 5",
     "areaId": "Ilex Forest 2",
     "unlocks": [
-      "Extra Final Challenge"
+      "Keys to Temporal Sanctuary Challenge"
     ],
     "requirements": {
       "catchSpecies": [
@@ -2738,7 +2738,7 @@ export const johtoUnlocks = [
     "challengeName": "Extra Challenge (Roaming)",
     "areaId": "Extra Challenge (Roaming)",
     "unlocks": [
-      "Extra Final Challenge"
+      "Keys to Temporal Sanctuary Challenge"
     ],
     "requirements": {
       "defeatMultipleSpecific": [
@@ -2929,7 +2929,7 @@ export const johtoUnlocks = [
     "challengeName": "Kanto Extra Challenge 6",
     "areaId": "Legendaries Nest",
     "unlocks": [
-      "Extra Final Challenge"
+      "Keys to Temporal Sanctuary Challenge"
     ],
     "requirements": {
       "catchSpecies": [
@@ -2955,10 +2955,10 @@ export const johtoUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Final Challenge",
-    "areaId": "Extra Final Challenge",
+    "challengeName": "Keys to Temporal Sanctuary Challenge",
+    "areaId": "Keys to Temporal Sanctuary Challenge",
     "unlocks": [
-      "Mythical and Legendaries Spot"
+      "Temporal Sanctuary Spot"
     ],
     "requirements": {
       "completeChallenges": [
@@ -2967,5 +2967,32 @@ export const johtoUnlocks = [
         "Kanto Extra Challenge 6"
       ]
     }
+  },
+  {
+    "challengeName": "Temporal Sanctuary Challenge",
+    "areaId": "Temporal Sanctuary Spot",
+    "unlocks": [],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Raikou",
+          "count": 1
+        },
+        {
+          "species": "Entei",
+          "count": 1
+        },
+        {
+          "species": "Suicune",
+          "count": 1
+        }
+      ]
+    },
+    "gifts": [
+      {
+        "item": "Masterball",
+        "count": 1
+      }
+    ]
   }
 ];
