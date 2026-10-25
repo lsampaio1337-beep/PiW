@@ -62,7 +62,6 @@ export default class Storage {
                 window.localStorage.removeItem(pid);
             }
             window.localStorage.removeItem(this.masterKey);
-            console.log("All profiles cleared.");
         } catch(e) {
             console.error("Failed to clear all profiles:", e);
         }
