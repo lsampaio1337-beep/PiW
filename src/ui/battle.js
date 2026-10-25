@@ -892,7 +892,7 @@ export function showDamage(target, amount, isCrit, moveName = '', moveType = 'No
             const attacker = target === 'player' ? 'Enemy' : 'You';
             const typeColor = TYPE_COLORS[moveType] || '#ffffff';
 
-            // Mitigate XSS: Build elements safely
+            // Mitigate XSS: Build inner node safely
             entry.textContent = `${attacker} used `;
 
             const bNode = document.createElement('b');
