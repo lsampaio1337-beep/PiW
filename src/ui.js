@@ -474,7 +474,9 @@ window.cheatProgressChallenge = function(targetAreaId) {
         }
 
     }
-        if (window.updateUI) window.updateUI();
+
+    if (window.updateUI) window.updateUI();
+
     const challengeWinCheat = document.getElementById('window-challenges');
     if (challengeWinCheat && challengeWinCheat.style.display !== 'none') {
         window.showChallengesModal(); // refresh modal
