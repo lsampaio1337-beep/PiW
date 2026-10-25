@@ -135,8 +135,8 @@ window.completeChallenge = function(targetAreaId) {
     if (targetAreaId === '150_challenge') {
         state.stats.completed150Challenge = true;
         if (!state.stats.newRoutes) state.stats.newRoutes = [];
-        if (!state.stats.newRoutes.includes("Mythical and Legendaries")) {
-            state.stats.newRoutes.push("Mythical and Legendaries");
+        if (!state.stats.newRoutes.includes("Temporal Sanctuary Spot")) {
+            state.stats.newRoutes.push("Temporal Sanctuary Spot");
         }
         state.stats.hasUnseenMap = true;
         updateUI();

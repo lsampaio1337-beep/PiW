@@ -240,7 +240,7 @@ function getUnlockedAreas() {
     }
 
     if (targetStats.completed150Challenge) {
-        unlockedAreas.add("Mythical and Legendaries");
+        unlockedAreas.add("Temporal Sanctuary Spot");
     }
 
     if (targetStats.completedChallengeIds) {
