@@ -431,7 +431,7 @@ window.cheatProgressChallenge = function(targetAreaId) {
             if (!state.stats.challengeSpecificDefeats) state.stats.challengeSpecificDefeats = {};
             for (let ds of req.defeatMultipleSpecific) {
                 if (ds.name === '__proto__' || ds.name === 'constructor' || ds.name === 'prototype') continue;
-                state.stats.challengeSpecificDefeats[ds.name] = ds.count;
+                state.stats.challengeSpecificDefeats[ds.name] = Math.max(state.stats.challengeSpecificDefeats[ds.name] || 0, ds.count);
             }
         }
         if (req.defeatEliteFourAndChampion) {
