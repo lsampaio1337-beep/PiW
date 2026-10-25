@@ -66,10 +66,9 @@ class DayCare {
         // 0, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1
         const randomVal = typeof crypto !== 'undefined' ? (crypto.getRandomValues(new Uint32Array(1))[0] / (0xFFFFFFFF + 1)) : Math.random();
         const randIncrease = Math.floor(randomVal * 11) / 100;
-        p.quality += randIncrease;
 
         // Fix floating point precision
-        p.quality = Number(p.quality.toFixed(2));
+        p.quality = Number((p.quality + randIncrease).toFixed(2));
 
         p.quality = Math.min(1.99, p.quality);
 
