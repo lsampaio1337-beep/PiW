@@ -326,6 +326,40 @@ window.cheatProgressChallenge = function(targetAreaId) {
                 state.stats.challengeCaughtSpecific[key] = (state.stats.challengeCaughtSpecific[key] || 0) + r.count;
             });
         }
+        if (req.catchSpeciesUniqueCount) {
+            if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
+            state.stats.caughtSpeciesCount = state.stats.caughtSpeciesCount || 0;
+            for (let i = 0; i < state.config.pokemonData.length; i++) {
+                 if (state.stats.caughtSpeciesCount >= req.catchSpeciesUniqueCount) break;
+                 let p = state.config.pokemonData[i];
+                 if (!state.stats.caughtSpecies[p.name]) {
+                     state.stats.caughtSpeciesCount++;
+                     state.stats.caughtSpecies[p.name] = 1;
+                 }
+            }
+        }
+        if (req.completeChallenges) {
+            if (!state.stats.completedChallengeIds) state.stats.completedChallengeIds = [];
+            req.completeChallenges.forEach(c => {
+                let match = null;
+                if (typeof window !== 'undefined' && window.getCurrentUnlocks) {
+                    match = window.getCurrentUnlocks().find(u => u.challengeName === c || u.areaId === c);
+                }
+                if (!match && state.config) {
+                    let allUnlocks = [];
+                    if (state.config.unlocks) allUnlocks = allUnlocks.concat(state.config.unlocks);
+                    if (state.config.johtoUnlocks) allUnlocks = allUnlocks.concat(state.config.johtoUnlocks);
+                    if (state.config.hoennUnlocks) allUnlocks = allUnlocks.concat(state.config.hoennUnlocks);
+                    if (state.config.sinnohUnlocks) allUnlocks = allUnlocks.concat(state.config.sinnohUnlocks);
+                    if (state.config.unovaUnlocks) allUnlocks = allUnlocks.concat(state.config.unovaUnlocks);
+                    match = allUnlocks.find(u => u && (u.challengeName === c || u.areaId === c));
+                }
+                let checkId = match ? match.areaId : c;
+                if (!state.stats.completedChallengeIds.includes(checkId)) {
+                    state.stats.completedChallengeIds.push(checkId);
+                }
+            });
+        }
         if (req.catchEachFromSlotMachine) {
             if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
             if (req.catchEachFromSlotMachine.machines) {

@@ -389,7 +389,7 @@ const routes = [
     ]
   },
   {
-    "name": "Diglett's Cave",
+    "name": "Digglett Cave",
     "spawns": [
       {
         "pokemonId": 50,
@@ -1596,8 +1596,8 @@ export const unlocks = [
   { "challengeName": "Challenge 11", "areaId": "Route 5", "unlocks": ["Route 6"], "requirements": { "defeatCountRoute": { "route": "Route 5", "count": 100 } } },
   { "challengeName": "Challenge 12", "areaId": "Route 6", "unlocks": ["Vermilion Gym"], "requirements": { "catchSpecies": [{ "species": "Psyduck", "count": 1 }, { "species": "Goldeen", "count": 1 }] } },
   { "challengeName": "Challenge 13", "areaId": "Vermilion Gym", "unlocks": ["Route 11"], "requirements": { "earnBadge": { "name": "Thunder Badge", "leader": "Lt. Surge", "badgeCount": 3 } } },
-  { "challengeName": "Challenge 14", "areaId": "Route 11", "unlocks": ["Diglett's Cave"], "requirements": { "catchSpecies": [{ "species": "Drowzee", "count": 5 }, { "species": "Raticate", "count": 1 }] } },
-  { "challengeName": "Challenge 15", "areaId": "Diglett's Cave", "unlocks": ["Route 9"], "gift": { "item": "Ground Stone", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Dugtrio", "count": 2 }] } },
+  { "challengeName": "Challenge 14", "areaId": "Route 11", "unlocks": ["Digglett Cave"], "requirements": { "catchSpecies": [{ "species": "Drowzee", "count": 5 }, { "species": "Raticate", "count": 1 }] } },
+  { "challengeName": "Challenge 15", "areaId": "Digglett Cave", "unlocks": ["Route 9"], "gift": { "item": "Ground Stone", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Dugtrio", "count": 2 }] } },
   { "challengeName": "Challenge 16", "areaId": "Route 9", "unlocks": ["Route 10"], "requirements": { "catchSpecies": [{ "species": "Fearow", "count": 2 }] } },
   { "challengeName": "Challenge 17", "areaId": "Route 10", "unlocks": ["Rock Tunnel"], "requirements": { "defeatCountRoute": { "route": "Route 10", "count": 100 } } },
   { "challengeName": "Challenge 18", "areaId": "Rock Tunnel", "unlocks": ["Route 8"], "gift": { "item": "Rock Stone", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Onix", "count": 2 }, { "species": "Machop", "count": 2 }] } },

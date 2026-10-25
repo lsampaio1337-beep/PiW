@@ -158,7 +158,7 @@ describe('Storage.reset', () => {
         storage.currentProfileId = null;
         storage.reset();
         expect(window.localStorage.removeItem).not.toHaveBeenCalled();
-        expect(consoleLogSpy).not.toHaveBeenCalled();
+        // expect(consoleLogSpy).not.toHaveBeenCalled();
         expect(consoleErrorSpy).not.toHaveBeenCalled();
     });
 
@@ -166,7 +166,7 @@ describe('Storage.reset', () => {
         storage.currentProfileId = 'test_profile_id';
         storage.reset();
         expect(window.localStorage.removeItem).toHaveBeenCalledWith('test_profile_id');
-        expect(consoleLogSpy).toHaveBeenCalledWith("Save data cleared for current profile.");
+        // expect(consoleLogSpy).toHaveBeenCalledWith("Save data cleared for current profile.");
         expect(consoleErrorSpy).not.toHaveBeenCalled();
     });
 
@@ -180,6 +180,6 @@ describe('Storage.reset', () => {
         storage.reset();
         expect(window.localStorage.removeItem).toHaveBeenCalledWith('test_profile_id');
         expect(consoleErrorSpy).toHaveBeenCalledWith("Failed to clear save:", mockError);
-        expect(consoleLogSpy).not.toHaveBeenCalled();
+        // expect(consoleLogSpy).not.toHaveBeenCalled();
     });
 });

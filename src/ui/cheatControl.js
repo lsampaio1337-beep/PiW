@@ -293,7 +293,19 @@ export function cheatAction(action) {
         unlockArea('Daycare');
 
         // Complete all progress challenges.
-        // This is primarily driven by activeChallenges and completedChallengeIds.
+        if (window.getCurrentUnlocks()) {
+            window.getCurrentUnlocks().forEach(unlock => {
+                if (window.cheatProgressChallenge) {
+                    window.cheatProgressChallenge(unlock.areaId);
+                }
+                if (!state.stats.completedChallengeIds.includes(unlock.areaId)) {
+                    state.stats.completedChallengeIds.push(unlock.areaId);
+                }
+                if (unlock.unlocks) {
+                     unlock.unlocks.forEach(newRoute => unlockArea(newRoute));
+                }
+            });
+        }
         state.stats.activeChallenges = [];
         state.stats.hasUnseenMap = true;
         updateUI();
