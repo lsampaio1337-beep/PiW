@@ -218,11 +218,7 @@ export class WindowManager {
             });
 
 
-            targetElement.innerHTML = '';
-            // Move nodes from the parsed body document into the active DOM
-            while (body.firstChild) {
-                targetElement.appendChild(body.firstChild);
-            }
+            targetElement.replaceChildren(...body.childNodes);
     }
 
 
