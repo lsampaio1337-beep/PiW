@@ -19,7 +19,6 @@ export default class Storage {
             let profiles = this.getProfiles();
             profiles.push(newProfileId);
             window.localStorage.setItem(this.masterKey, JSON.stringify(profiles));
-            console.log("Migrated old save to new profile system.");
         }
     }
 
