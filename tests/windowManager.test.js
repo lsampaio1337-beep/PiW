@@ -57,4 +57,14 @@ describe('WindowManager', () => {
         closeBtn.click();
         expect(windowManager.closeDynamicWindow).toHaveBeenCalledWith('test-win-1');
     });
+
+    test('_parseAndSanitizeToElement properly evaluates this.value', () => {
+        const div = document.createElement('div');
+        window.buyItem = jest.fn();
+        windowManager._parseAndSanitizeToElement("<button onclick='window.buyItem(this.value)' value='123'></button>", div);
+
+        div.querySelector('button').click();
+
+        expect(window.buyItem).toHaveBeenCalledWith('123');
+    });
 });

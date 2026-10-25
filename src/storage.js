@@ -111,6 +111,7 @@ export default class Storage {
         try {
             // Keep the profile ID but clear the data inside it, so New Game starts fresh
             window.localStorage.removeItem(this.currentProfileId);
+            console.log("Save data cleared for current profile.");
         } catch(e) {
             console.error("Failed to clear save:", e);
         }
@@ -148,20 +149,17 @@ ${state.party.map((p, i) => `${i+1}. ${p.name} Lv.${p.level}`).join('\n')}
             const speed = parseFloat(cmd.substring(2));
             if (!isNaN(speed)) {
                 state.settings.gameSpeed = speed;
-                console.log(`Game speed set to ${speed}x`);
             }
         } else if (cmd.startsWith("M") && cmd.length > 1) {
             const money = parseInt(cmd.substring(1));
             if (!isNaN(money)) {
                 state.trainer.money += money;
-                console.log(`Added $${money}`);
             }
         } else if (cmd.startsWith("XP") && cmd.length > 2) {
             const xp = parseInt(cmd.substring(2));
             if (!isNaN(xp)) {
                 state.trainer.xp += xp;
                 if (state.party.length > 0) state.party[0].xp += xp;
-                console.log(`Added ${xp} XP to Trainer & Slot 1`);
             }
         }
     }

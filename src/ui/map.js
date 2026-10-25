@@ -746,7 +746,8 @@ export function navigateToLocation(locationName) {
             battleSystem.stop();
         }
 
-        let dynamicBgHtml = '';
+        vGym.replaceChildren();
+
         if (gymConfig && state.config.gymAssets && state.config.gymAssets[gymConfig.leader]) {
             const assetConfig = state.config.gymAssets[gymConfig.leader];
             const spritePath = `./Assets/Gym/GymLeaders/${assetConfig.sprite}`;
@@ -755,36 +756,67 @@ export function navigateToLocation(locationName) {
             // Remove the static bgImg so it doesn't override the dynamic one
             bgImg = "";
 
-            dynamicBgHtml = `
-                <div id="dynamic-gym-bg-ui" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; background-image: url('${bgPath}'); background-size: 100% 100%; overflow: hidden;">
-                    <img src="${spritePath}" style="
-                        position: absolute;
-                        left: ${assetConfig.position.rel_x * 100}%;
-                        top: ${assetConfig.position.rel_y * 100}%;
-                        width: ${(assetConfig.size.px_width / 1800) * 100}%;
-                        transform: rotate(${assetConfig.tilt.angle_deg}deg);
-                        transform-origin: ${assetConfig.tilt.origin};
-                        pointer-events: none;
-                    ">
-                </div>
-            `;
+            const dynamicGymBgUi = document.createElement('div');
+            dynamicGymBgUi.id = 'dynamic-gym-bg-ui';
+            dynamicGymBgUi.style.position = 'absolute';
+            dynamicGymBgUi.style.top = '0';
+            dynamicGymBgUi.style.left = '0';
+            dynamicGymBgUi.style.width = '100%';
+            dynamicGymBgUi.style.height = '100%';
+            dynamicGymBgUi.style.zIndex = '0';
+            dynamicGymBgUi.style.backgroundImage = `url('${bgPath}')`;
+            dynamicGymBgUi.style.backgroundSize = '100% 100%';
+            dynamicGymBgUi.style.overflow = 'hidden';
+
+            const gymLeaderImg = document.createElement('img');
+            gymLeaderImg.src = spritePath;
+            gymLeaderImg.style.position = 'absolute';
+            gymLeaderImg.style.left = `${assetConfig.position.rel_x * 100}%`;
+            gymLeaderImg.style.top = `${assetConfig.position.rel_y * 100}%`;
+            gymLeaderImg.style.width = `${(assetConfig.size.px_width / 1800) * 100}%`;
+            gymLeaderImg.style.transform = `rotate(${assetConfig.tilt.angle_deg}deg)`;
+            gymLeaderImg.style.transformOrigin = assetConfig.tilt.origin;
+            gymLeaderImg.style.pointerEvents = 'none';
+
+            dynamicGymBgUi.appendChild(gymLeaderImg);
+            vGym.appendChild(dynamicGymBgUi);
         }
 
-        vGym.innerHTML = `
-            ${dynamicBgHtml}
-            <div style="background-color: rgba(0,0,0,0.8); display: flex; flex-direction: column; align-items: center; padding: 20px; border-radius: 8px; position: absolute; left: 15%; top: 50%; transform: translateY(-50%); min-width: 300px; z-index: 1;">
-                <h2 id="gym-title-header" style="margin-top: 0; color: white;"></h2>
-                <div id="gym-content-area" style="position: relative; width: 100%; text-align: center; display: flex; flex-direction: column; gap: 10px; align-items: center; z-index: 2;">
-                </div>
-            </div>
-        `;
+        const uiContainer = document.createElement('div');
+        uiContainer.style.backgroundColor = 'rgba(0,0,0,0.8)';
+        uiContainer.style.display = 'flex';
+        uiContainer.style.flexDirection = 'column';
+        uiContainer.style.alignItems = 'center';
+        uiContainer.style.padding = '20px';
+        uiContainer.style.borderRadius = '8px';
+        uiContainer.style.position = 'absolute';
+        uiContainer.style.left = '15%';
+        uiContainer.style.top = '50%';
+        uiContainer.style.transform = 'translateY(-50%)';
+        uiContainer.style.minWidth = '300px';
+        uiContainer.style.zIndex = '1';
 
-        const headerEl = vGym.querySelector('#gym-title-header');
-        if (headerEl) {
-            headerEl.textContent = locationName;
-        }
+        const headerEl = document.createElement('h2');
+        headerEl.id = 'gym-title-header';
+        headerEl.style.marginTop = '0';
+        headerEl.style.color = 'white';
+        headerEl.textContent = locationName;
 
-        const contentArea = vGym.querySelector('#gym-content-area');
+        const contentArea = document.createElement('div');
+        contentArea.id = 'gym-content-area';
+        contentArea.style.position = 'relative';
+        contentArea.style.width = '100%';
+        contentArea.style.textAlign = 'center';
+        contentArea.style.display = 'flex';
+        contentArea.style.flexDirection = 'column';
+        contentArea.style.gap = '10px';
+        contentArea.style.alignItems = 'center';
+        contentArea.style.zIndex = '2';
+
+        uiContainer.appendChild(headerEl);
+        uiContainer.appendChild(contentArea);
+        vGym.appendChild(uiContainer);
+
         if (gymConfig && contentArea) {
             let buttonText = lookupName.includes("Pokemon League") ? "Challenge" : "Battle Gym";
             const btn = document.createElement('button');
