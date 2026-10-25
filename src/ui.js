@@ -335,8 +335,8 @@ window.cheatProgressChallenge = function(targetAreaId) {
         if (req.defeatMultipleSpecific) {
             if (!state.stats.challengeSpecificDefeats) state.stats.challengeSpecificDefeats = {};
             for (let ds of req.defeatMultipleSpecific) {
-                if (ds.name === '__proto__' || ds.name === 'constructor' || ds.name === 'prototype') continue;
                 let key = ds.name || ds.pokemonId;
+                if (key === '__proto__' || key === 'constructor' || key === 'prototype') continue;
                 state.stats.challengeSpecificDefeats[key] = Math.max(state.stats.challengeSpecificDefeats[key] || 0, ds.count);
             }
         }
@@ -431,8 +431,8 @@ window.cheatProgressChallenge = function(targetAreaId) {
         if (req.defeatMultipleSpecific) {
             if (!state.stats.challengeSpecificDefeats) state.stats.challengeSpecificDefeats = {};
             for (let ds of req.defeatMultipleSpecific) {
-                if (ds.name === '__proto__' || ds.name === 'constructor' || ds.name === 'prototype') continue;
                 let key = ds.name || ds.pokemonId;
+                if (key === '__proto__' || key === 'constructor' || key === 'prototype') continue;
                 state.stats.challengeSpecificDefeats[key] = Math.max(state.stats.challengeSpecificDefeats[key] || 0, ds.count);
             }
         }

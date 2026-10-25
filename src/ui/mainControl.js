@@ -154,6 +154,7 @@ export function getChallengeData(unlock) {
     if (req.defeatMultipleSpecific) {
         for (let target of req.defeatMultipleSpecific) {
             let key = target.name || target.pokemonId;
+            if (key === '__proto__' || key === 'constructor' || key === 'prototype') continue;
             let defeated = state.stats.challengeSpecificDefeats ? (state.stats.challengeSpecificDefeats[key] || 0) : 0;
             if (defeated < target.count) isMet = false;
             let displayName = target.name || target.pokemonId;
