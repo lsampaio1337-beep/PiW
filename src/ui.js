@@ -2026,7 +2026,7 @@ async function init() {
                         if (globals.battleSystem) globals.battleSystem.stop();
 
                         document.querySelectorAll('.nav-icon').forEach(icon => {
-                            if (icon.id !== 'btn-sleep') {
+                            if (icon.id !== 'btn-sleep' && icon.id !== 'btn-exit' && icon.id !== 'btn-map') {
                                 icon.style.pointerEvents = 'none';
                                 icon.style.filter = 'grayscale(100%)';
                             }
@@ -2241,7 +2241,7 @@ async function init() {
                 if (globals.battleSystem) globals.battleSystem.stop();
 
                 document.querySelectorAll('.nav-icon').forEach(icon => {
-                    if (icon.id !== 'btn-sleep') {
+                    if (icon.id !== 'btn-sleep' && icon.id !== 'btn-exit' && icon.id !== 'btn-map') {
                         icon.style.pointerEvents = 'none';
                         icon.style.filter = 'grayscale(100%)';
                     }
