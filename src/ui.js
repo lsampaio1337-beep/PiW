@@ -2113,7 +2113,9 @@ async function init() {
     bindBtn('btn-map', () => {
         if(!checkCombatLock()) {
             showMap();
-            window.windowManager.toggleWindow('main-view-window', true);
+            if (!state.isZzZMode) {
+                window.windowManager.toggleWindow('main-view-window', true);
+            }
         }
     });
     bindBtn('btn-backpack', () => {
