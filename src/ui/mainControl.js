@@ -101,6 +101,12 @@ export function getChallengeData(unlock) {
         }
     }
 
+    if (req.catchSpeciesUniqueCount) {
+        let uniqueCaught = state.stats.caughtSpeciesCount || 0;
+        if (uniqueCaught < req.catchSpeciesUniqueCount) isMet = false;
+        textParts.push(`Capture ${req.catchSpeciesUniqueCount} different Pokémons (${uniqueCaught}/${req.catchSpeciesUniqueCount})${getStatusHtml(uniqueCaught >= req.catchSpeciesUniqueCount)}`);
+    }
+
     if (req.catchByQuality) {
         let qualities = ["Weak", "Regular", "Uncommon", "Rare", "Epic", "Shiny", "Legendary", "Mythical"];
         let targetQualities = [req.catchByQuality.quality];

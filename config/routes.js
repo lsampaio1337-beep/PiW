@@ -1546,7 +1546,7 @@ const routes = [
     ]
   },
   {
-    "name": "Mythical and Legendaries",
+    "name": "Indigo Summit",
     "spawns": [
       {
         "pokemonId": 150,
@@ -1618,17 +1618,19 @@ export const unlocks = [
   { "challengeName": "Challenge 33", "areaId": "Viridian Gym", "unlocks": ["Route 22"], "requirements": { "earnBadge": { "name": "Earth Badge", "leader": "Giovanni", "badgeCount": 8 } } },
   { "challengeName": "Challenge 34", "areaId": "Route 22", "unlocks": ["Route 23"], "gift": { "item": "Big Potion", "count": 10 }, "requirements": { "defeatCountRoute": { "route": "Route 22", "count": 350 } } },
   { "challengeName": "Challenge 35", "areaId": "Route 23", "unlocks": ["Kanto Pokemon League"], "requirements": { "catchSpeciesAnyOfByQuality": [{ "species": ["Nidoking", "Nidoqueen"], "quality": "Rare", "count": 1 }] } },
-  { "challengeName": "Final Challenge", "areaId": "Kanto Pokemon League", "unlocks": ["New Region to Travel"], "requirements": { "defeatEliteFourAndChampion": true } },
-  { "challengeName": "Extra Challenge 1", "areaId": "Casino", "unlocks": ["Small Fishing Spot", "Casino - Mid Troupe"], "gift": { "item": "Ultraball", "count": 10 }, "requirements": { "catchSpecies": [{ "species": "Bulbasaur", "count": 1 }, { "species": "Charmander", "count": 1 }, { "species": "Squirtle", "count": 1 }] } },
-  { "challengeName": "Extra Challenge 2", "areaId": "Small Fishing Spot", "unlocks": ["Fighting Dojo", "Casino - Eeveelutions"], "gift": { "item": "Ultraball", "count": 10 }, "requirements": { "catchSpeciesByQuality": [{ "species": "Magikarp", "quality": "Epic", "count": 1 }], "catchEachFromSlotMachine": { "machines": [["Ivysaur", "Charmeleon", "Wartortle"]] } } },
-  { "challengeName": "Extra Challenge 3", "areaId": "Fighting Dojo", "unlocks": ["Big Fishing Spot", "Casino - Special Spot"], "gift": { "item": "Fighting Stone", "count": 3 }, "requirements": { "catchSpeciesByQuality": [{ "species": "Hitmonchan", "quality": "Rare", "count": 1 }, { "species": "Hitmonlee", "quality": "Rare", "count": 1 }, { "species": "Eevee", "quality": "Rare", "count": 1 }] } },
-  { "challengeName": "Extra Challenge 4", "areaId": "Big Fishing Spot", "unlocks": ["Fossil Revival Lab", "Casino - Late Troupe"], "gift": { "item": "Dragon Stone", "count": 6 }, "requirements": { "catchByQualityAndType": { "type": "Dragon", "quality": "Rare", "count": 2 }, "catchEachFromSlotMachine": { "machines": [["Lapras", "Porygon", "Lickitung"]] } } },
-  { "challengeName": "Extra Challenge 5", "areaId": "Fossil Revival Lab", "unlocks": ["Trade With Friends Hub", "Battle Stadium"], "gift": { "item": "Ultraball", "count": 20 }, "requirements": { "catchSpeciesByQuality": [{ "species": "Aerodactyl", "quality": "Rare", "count": 1 }], "catchEachFromSlotMachine": { "machines": [["Venusaur", "Charizard", "Blastoise"]] } } },
-  { "challengeName": "Extra Challenge 6", "areaId": "Trade With Friends Hub", "unlocks": ["Power Plant"], "gift": { "item": "Ultraball", "count": 20 }, "requirements": { "catchSpecies": [{ "species": "Gengar", "count": 1 }, { "species": "Golem", "count": 1 }, { "species": "Alakazam", "count": 1 }, { "species": "Machamp", "count": 1 }] } },
-  { "challengeName": "Extra Challenge 7", "areaId": "Power Plant", "unlocks": ["Seafoam Islands"], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "defeatSpecific": { "name": "Zapdos", "count": 5 } } },
-  { "challengeName": "Extra Challenge 8", "areaId": "Seafoam Islands", "unlocks": ["Victory Road"], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "defeatSpecific": { "name": "Articuno", "count": 5 } } },
-  { "challengeName": "Extra Challenge 9", "areaId": "Victory Road", "unlocks": ["Cerulean Cave"], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "defeatSpecific": { "name": "Moltres", "count": 5 } } },
-  { "challengeName": "Extra Challenge 10", "areaId": "Cerulean Cave", "unlocks": ["Kanto Pokemon League"], "gift": { "item": "Masterball", "count": 2 }, "requirements": { "defeatSpecific": { "name": "Mewtwo", "count": 5 } } }
+  { "challengeName": "Challenge 36", "areaId": "Kanto Pokemon League", "unlocks": ["New Region to Travel", "Key for Indigo Summit"], "requirements": { "defeatEliteFourAndChampion": true } },
+  { "challengeName": "Extra Challenge A 1", "areaId": "Casino", "unlocks": ["Small Fishing Spot", "Casino - Mid Troupe"], "gift": { "item": "Ultraball", "count": 10 }, "requirements": { "catchSpecies": [{ "species": "Bulbasaur", "count": 1 }, { "species": "Charmander", "count": 1 }, { "species": "Squirtle", "count": 1 }] } },
+  { "challengeName": "Extra Challenge A 2", "areaId": "Small Fishing Spot", "unlocks": ["Fighting Dojo", "Casino - Eeveelutions"], "gift": { "item": "Ultraball", "count": 10 }, "requirements": { "catchSpeciesByQuality": [{ "species": "Magikarp", "quality": "Epic", "count": 1 }], "catchEachFromSlotMachine": { "machines": [["Ivysaur", "Charmeleon", "Wartortle"]] } } },
+  { "challengeName": "Extra Challenge A 3", "areaId": "Fighting Dojo", "unlocks": ["Big Fishing Spot", "Casino - Special Spot"], "gift": { "item": "Fighting Stone", "count": 3 }, "requirements": { "catchSpeciesByQuality": [{ "species": "Hitmonchan", "quality": "Rare", "count": 1 }, { "species": "Hitmonlee", "quality": "Rare", "count": 1 }, { "species": "Eevee", "quality": "Rare", "count": 1 }] } },
+  { "challengeName": "Extra Challenge A 4", "areaId": "Big Fishing Spot", "unlocks": ["Fossil Revival Lab", "Casino - Late Troupe"], "gift": { "item": "Dragon Stone", "count": 6 }, "requirements": { "catchByQualityAndType": { "type": "Dragon", "quality": "Rare", "count": 2 }, "catchEachFromSlotMachine": { "machines": [["Lapras", "Porygon", "Lickitung"]] } } },
+  { "challengeName": "Extra Challenge A 5", "areaId": "Fossil Revival Lab", "unlocks": ["Trade With Friends Hub", "Battle Stadium"], "gift": { "item": "Ultraball", "count": 20 }, "requirements": { "catchSpeciesByQuality": [{ "species": "Aerodactyl", "quality": "Rare", "count": 1 }], "catchEachFromSlotMachine": { "machines": [["Venusaur", "Charizard", "Blastoise"]] } } },
+  { "challengeName": "Extra Challenge A 6", "areaId": "Trade With Friends Hub", "unlocks": ["Power Plant"], "gift": { "item": "Ultraball", "count": 20 }, "requirements": { "catchSpecies": [{ "species": "Gengar", "count": 1 }, { "species": "Golem", "count": 1 }, { "species": "Alakazam", "count": 1 }, { "species": "Machamp", "count": 1 }] } },
+  { "challengeName": "Extra Challenge A 7", "areaId": "Power Plant", "unlocks": ["Seafoam Islands"], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "defeatSpecific": { "name": "Zapdos", "count": 5 } } },
+  { "challengeName": "Extra Challenge A 8", "areaId": "Seafoam Islands", "unlocks": ["Victory Road"], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "defeatSpecific": { "name": "Articuno", "count": 5 } } },
+  { "challengeName": "Extra Challenge A 9", "areaId": "Victory Road", "unlocks": ["Cerulean Cave"], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "defeatSpecific": { "name": "Moltres", "count": 5 } } },
+  { "challengeName": "Extra Challenge A 10", "areaId": "Cerulean Cave", "unlocks": ["Kanto Pokemon League", "Key for Indigo Summit"], "gift": { "item": "Masterball", "count": 2 }, "requirements": { "defeatSpecific": { "name": "Mewtwo", "count": 5 } } },
+  { "challengeName": "Extra Challenge B", "areaId": "Extra Challenge B", "unlocks": ["Key for Indigo Summit"], "requirements": { "catchSpeciesUniqueCount": 150 } },
+  { "challengeName": "Key for Indigo Summit", "areaId": "Key for Indigo Summit", "unlocks": ["Indigo Summit"], "requirements": { "completeChallenges": ["Challenge 36", "Extra Challenge A 10", "Extra Challenge B"] } },
 ];
 
 export { routes };

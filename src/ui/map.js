@@ -239,9 +239,7 @@ function getUnlockedAreas() {
         unlockedAreas.add("Route 29");
     }
 
-    if (targetStats.completed150Challenge) {
-        unlockedAreas.add("Mythical and Legendaries");
-    }
+
 
     if (targetStats.completedChallengeIds) {
         targetStats.completedChallengeIds.forEach(id => {
