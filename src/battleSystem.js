@@ -272,7 +272,7 @@ class BattleSystem {
         if (!attacker.moves) return null;
         for (const move of attacker.moves) {
             // Very simplified: skip if missing data
-            if (!move || move.power === 0) continue;
+            if (!move || move.power === 0 || move.name === "Self-Destruct") continue;
 
             const isPhysical = move.category === 'Physical';
             const atkStat = isPhysical ? attacker.currentStats.atk : attacker.currentStats.spa;
@@ -1216,12 +1216,40 @@ class BattleSystem {
             this.updateUI();
 
             if (defender.currentHp <= 0) {
+                if (defender.moves && defender.moves.find(m => m.name === "Self-Destruct")) {
+                    const sdMove = this.state.config.moves["Self-Destruct"] || { power: 200, type: "Normal", category: "Physical" };
+                    const atkStat = defender.currentStats.atk;
+                    const defStat = attacker.currentStats.def;
+                    const eff = this.getTypeEffectiveness(sdMove.type, attacker.types);
+                    const sdHit = mathEngine.calculateDamage(defender.level, sdMove.power, atkStat, defStat, eff, defender.quality);
+
+                    attacker.currentHp -= sdHit.damage;
+
+                    if (typeof window.showDamage === 'function') {
+                        const attackerSide = attacker === leader ? 'player' : 'enemy';
+                        window.showDamage(attackerSide, sdHit.damage, sdHit.isCritical, "Self-Destruct", sdMove.type, eff);
+                    }
+                    this.updateUI();
+                }
+
                 if (defender === this.activeEncounter) {
                     this.handleEnemyDefeat();
                 } else {
                     if (!this.isFainting) {
                         this.handleFaint();
                     }
+                }
+
+                // If the defender was the enemy, but the attacker (player) also fainted from Self-Destruct
+                if (defender === this.activeEncounter && attacker === leader && attacker.currentHp <= 0) {
+                    if (!this.isFainting) {
+                        this.handleFaint();
+                    }
+                }
+
+                // If the defender was the player, but the attacker (enemy) also fainted from Self-Destruct
+                if (defender === leader && attacker === this.activeEncounter && attacker.currentHp <= 0) {
+                    this.handleEnemyDefeat();
                 }
             } else {
                 this.scheduleNextStrike(attacker, defender);
@@ -2300,13 +2328,26 @@ class BattleSystem {
                 executeSimulatedTurn(secondActor, firstActor, !isLeaderFaster);
             }
 
+            // Check for Self-Destruct upon defeat
+            const defeatedActor = leader.currentHp <= 0 ? leader : (this.activeEncounter.currentHp <= 0 ? this.activeEncounter : null);
+            const survivingActor = leader.currentHp > 0 ? leader : (this.activeEncounter.currentHp > 0 ? this.activeEncounter : null);
+
+            if (defeatedActor && survivingActor && defeatedActor.moves && defeatedActor.moves.find(m => m.name === "Self-Destruct")) {
+                const sdMove = this.state.config.moves["Self-Destruct"] || { power: 200, type: "Normal", category: "Physical" };
+                const atkStat = defeatedActor.currentStats.atk;
+                const defStat = survivingActor.currentStats.def;
+                const eff = this.getTypeEffectiveness(sdMove.type, survivingActor.types);
+                const sdHit = mathEngine.calculateDamage(defeatedActor.level, sdMove.power, atkStat, defStat, eff, defeatedActor.quality);
+                survivingActor.currentHp -= sdHit.damage;
+            }
+
             // Add UI defeat/faint fade-out delay mimicking natural play
             combatTime += 500;
 
             // End of combat logic
-            if (leader.currentHp > 0) {
+            if (this.activeEncounter.currentHp <= 0) { // Check if enemy is defeated (might be mutual due to self-destruct)
                 // Out of combat insta-heal if threshold is met, identical to handleEnemyDefeat
-                if (this.state.settings.autoPotion) {
+                if (leader.currentHp > 0 && this.state.settings.autoPotion) {
                     let threshold = this.state.settings.autoPotionThreshold !== undefined ? this.state.settings.autoPotionThreshold : 25;
                     while ((leader.currentHp / leader.maxHp) * 100 <= threshold) {
                         if (!this.tryUsePotion(leader)) break;
@@ -2531,7 +2572,9 @@ class BattleSystem {
                 }
 
                 this.state.stats.battlesWon++;
-            } else {
+            }
+
+            if (leader.currentHp <= 0) {
                 leader.currentHp = 0;
                 const fainted = this.state.party.shift();
 
