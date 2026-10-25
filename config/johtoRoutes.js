@@ -1724,32 +1724,32 @@ export const johtoRoutes = [
     "spawns": [
       {
         "pokemonId": 144,
-        "minLevel": 98,
-        "maxLevel": 98,
+        "minLevel": 100,
+        "maxLevel": 100,
         "chance": 0.2
       },
       {
         "pokemonId": 145,
-        "minLevel": 98,
-        "maxLevel": 98,
+        "minLevel": 100,
+        "maxLevel": 100,
         "chance": 0.2
       },
       {
         "pokemonId": 146,
-        "minLevel": 98,
-        "maxLevel": 98,
+        "minLevel": 100,
+        "maxLevel": 100,
         "chance": 0.2
       },
       {
         "pokemonId": 250,
-        "minLevel": 105,
-        "maxLevel": 105,
+        "minLevel": 110,
+        "maxLevel": 110,
         "chance": 0.2
       },
       {
         "pokemonId": 249,
-        "minLevel": 105,
-        "maxLevel": 105,
+        "minLevel": 110,
+        "maxLevel": 110,
         "chance": 0.2
       }
     ]
@@ -1759,38 +1759,38 @@ export const johtoRoutes = [
     "spawns": [
       {
         "pokemonId": 243,
-        "minLevel": 105,
-        "maxLevel": 105,
+        "minLevel": 110,
+        "maxLevel": 110,
         "chance": 0.2
       },
       {
         "pokemonId": 244,
-        "minLevel": 105,
-        "maxLevel": 105,
+        "minLevel": 110,
+        "maxLevel": 110,
         "chance": 0.2
       },
       {
         "pokemonId": 245,
-        "minLevel": 105,
-        "maxLevel": 105,
+        "minLevel": 110,
+        "maxLevel": 110,
         "chance": 0.2
       },
       {
         "pokemonId": 151,
-        "minLevel": 110,
-        "maxLevel": 110,
+        "minLevel": 120,
+        "maxLevel": 120,
         "chance": 0.13333333333333333
       },
       {
         "pokemonId": 150,
-        "minLevel": 110,
-        "maxLevel": 110,
+        "minLevel": 120,
+        "maxLevel": 120,
         "chance": 0.13333333333333333
       },
       {
         "pokemonId": 251,
-        "minLevel": 110,
-        "maxLevel": 110,
+        "minLevel": 120,
+        "maxLevel": 120,
         "chance": 0.13333333333333333
       }
     ]
