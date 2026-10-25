@@ -544,7 +544,7 @@ window.showChallengesModal = function() {
         let uniqueSpeciesCaught = (state.stats.caughtSpeciesCount || 0);
         let isMet = uniqueSpeciesCaught >= 150;
         let displayName = "The 150 Challenge";
-        let rewardsStr = "Mythical and Legendary Spot";
+        let rewardsStr = "Nebula Fissure";
         let cData = {
             isMet: isMet,
             textParts: [`Capture 150 different Pokémons (${uniqueSpeciesCaught}/150)${isMet ? ' <span style="color: #4CAF50;">[Complete]</span>' : ''}`]
@@ -642,7 +642,7 @@ window.showChallengesModal = function() {
                           <ul style="margin-top: 0; margin-bottom: 5px; padding-left: 20px; font-size: 14px;">
                               <li>Capture 150 different Pokémons (150/150) <span style="color: green;">[Complete]</span></li>
                           </ul>
-                          <div style="color: #4CAF50; font-size: 14px;"><b>Rewards:</b> Unlocks Mythical and Legendary Spot</div>
+                          <div style="color: #4CAF50; font-size: 14px;"><b>Rewards:</b> Unlocks Nebula Fissure</div>
                       </div>`;
         }
 
