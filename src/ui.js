@@ -3036,7 +3036,6 @@ window.promptWakeUpRegion = function(regionName) {
         if(window.windowManager) window.windowManager.closeDynamicWindow('window-zzz-wakeup');
 
         if (state.currentRegionName !== regionName) {
-            window.currentMapRegion = regionName;
             // Force a swap to the region being woken up. We use navigateToLocation with the region's current route.
             let targetRoute = state.regions[regionName]?.currentRoute || 'Professor Lab';
             window.navigateToLocation(targetRoute);

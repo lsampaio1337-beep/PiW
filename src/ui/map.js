@@ -271,7 +271,7 @@ function generateMarkersForRegion(region, unlockedAreas) {
 
     if (isSleeping) {
         return `
-            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); cursor: pointer; text-align: center; z-index: 1000;" onclick="window.promptWakeUpRegion('${region}')" title="Wake Up ${region}">
+            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); cursor: pointer; text-align: center; z-index: 1000;" onclick="window.currentMapRegion = '${region}'; window.navigateToLocation('ZZZ_WAKE_UP');" title="Wake Up ${region}">
                 <img src="./Assets/Extra/Jigglypuff Dust.png" style="width: 150px; height: auto; filter: drop-shadow(0 0 15px rgba(255, 192, 203, 0.8)); animation: pulse 2s infinite;">
                 <div style="color: white; font-weight: bold; margin-top: 10px; font-size: 18px; text-shadow: 0 2px 4px black;">ZzZ Mode</div>
                 <div style="color: #fbcfe8; font-size: 14px; text-shadow: 0 1px 2px black;">Click to Wake Up</div>
@@ -519,6 +519,12 @@ export function navigateToLocation(locationName) {
         }
         swapRegion(window.currentMapRegion);
         if (window.updateZzZModeUI) window.updateZzZModeUI();
+    }
+
+    if (locationName === 'ZZZ_WAKE_UP') {
+        if (window.closeModal) window.closeModal();
+        window.promptWakeUpRegion(state.currentRegionName);
+        return;
     }
 
     if (state.stats.newRoutes && state.stats.newRoutes.some(r => parseAreaNames(r).includes(locationName))) {
