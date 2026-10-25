@@ -137,6 +137,7 @@ export class WindowManager {
                                         if (s === 'null') return null;
                                         if (s === 'undefined') return undefined;
                                         if (!isNaN(s) && s !== '') return Number(s);
+                                        if (s === 'this.value') return this.value;
                                         return s;
                                     });
                                     window[funcName](...processedArgs);
@@ -180,6 +181,7 @@ export class WindowManager {
                                         if (s === 'null') return null;
                                         if (s === 'undefined') return undefined;
                                         if (!isNaN(s) && s !== '') return Number(s);
+                                        if (s === 'this.value') return this.value;
                                         return s;
                                     });
                                     window[objName][funcName](...processedArgs);
