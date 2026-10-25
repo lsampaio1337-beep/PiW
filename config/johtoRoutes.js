@@ -2958,10 +2958,10 @@ export const johtoUnlocks = [
     "challengeName": "Keys to Temporal Sanctuary Challenge",
     "areaId": "Keys to Temporal Sanctuary Challenge",
     "unlocks": [
-      "Temporal Sanctuary Challenge"
+      "Temporal Sanctuary Spot"
     ],
     "requirements": {
-      "completeAnyOfChallenges": [
+      "completeChallenges": [
         "Johto Extra Challenge 5",
         "Extra Challenge (Roaming)",
         "Kanto Extra Challenge 6"

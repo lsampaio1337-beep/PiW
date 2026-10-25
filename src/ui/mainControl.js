@@ -153,9 +153,11 @@ export function getChallengeData(unlock) {
 
     if (req.defeatMultipleSpecific) {
         for (let target of req.defeatMultipleSpecific) {
-            let defeated = state.stats.challengeSpecificDefeats ? (state.stats.challengeSpecificDefeats[target.name] || 0) : 0;
+            let key = target.name || target.pokemonId;
+            let defeated = state.stats.challengeSpecificDefeats ? (state.stats.challengeSpecificDefeats[key] || 0) : 0;
             if (defeated < target.count) isMet = false;
-            textParts.push(`Defeat ${target.count} ${target.name} ${countDisplay(defeated, target.count)}${getStatusHtml(defeated >= target.count)}`);
+            let displayName = target.name || target.pokemonId;
+            textParts.push(`Defeat ${target.count} ${displayName} ${countDisplay(defeated, target.count)}${getStatusHtml(defeated >= target.count)}`);
         }
     }
 
@@ -215,33 +217,6 @@ export function getChallengeData(unlock) {
             if (!completed) isMet = false;
             textParts.push(`Complete ${target}${getStatusHtml(completed)}`);
         }
-    }
-
-    if (req.completeAnyOfChallenges) {
-        let completedIds = state.stats.completedChallengeIds || [];
-        let anyCompleted = false;
-        for (let target of req.completeAnyOfChallenges) {
-            let match = null;
-            if (typeof window !== 'undefined' && window.getCurrentUnlocks) {
-                match = window.getCurrentUnlocks().find(u => u.challengeName === target || u.areaId === target);
-            }
-            if (!match && state.config) {
-                let allUnlocks = [];
-                if (state.config.unlocks) allUnlocks = allUnlocks.concat(state.config.unlocks);
-                if (state.config.johtoUnlocks) allUnlocks = allUnlocks.concat(state.config.johtoUnlocks);
-                if (state.config.hoennUnlocks) allUnlocks = allUnlocks.concat(state.config.hoennUnlocks);
-                if (state.config.sinnohUnlocks) allUnlocks = allUnlocks.concat(state.config.sinnohUnlocks);
-                if (state.config.unovaUnlocks) allUnlocks = allUnlocks.concat(state.config.unovaUnlocks);
-                match = allUnlocks.find(u => u && (u.challengeName === target || u.areaId === target));
-            }
-            let checkId = match ? match.areaId : target;
-            if (completedIds.includes(checkId)) {
-                anyCompleted = true;
-                break;
-            }
-        }
-        if (!anyCompleted) isMet = false;
-        textParts.push(`Complete any of: ${req.completeAnyOfChallenges.join(', ')}${getStatusHtml(anyCompleted)}`);
     }
 
     return { isMet, textParts };

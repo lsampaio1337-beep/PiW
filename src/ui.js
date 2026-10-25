@@ -336,7 +336,8 @@ window.cheatProgressChallenge = function(targetAreaId) {
             if (!state.stats.challengeSpecificDefeats) state.stats.challengeSpecificDefeats = {};
             for (let ds of req.defeatMultipleSpecific) {
                 if (ds.name === '__proto__' || ds.name === 'constructor' || ds.name === 'prototype') continue;
-                state.stats.challengeSpecificDefeats[ds.name] = Math.max(state.stats.challengeSpecificDefeats[ds.name] || 0, ds.count);
+                let key = ds.name || ds.pokemonId;
+                state.stats.challengeSpecificDefeats[key] = Math.max(state.stats.challengeSpecificDefeats[key] || 0, ds.count);
             }
         }
         if (req.catchSpecies) {
@@ -431,7 +432,8 @@ window.cheatProgressChallenge = function(targetAreaId) {
             if (!state.stats.challengeSpecificDefeats) state.stats.challengeSpecificDefeats = {};
             for (let ds of req.defeatMultipleSpecific) {
                 if (ds.name === '__proto__' || ds.name === 'constructor' || ds.name === 'prototype') continue;
-                state.stats.challengeSpecificDefeats[ds.name] = Math.max(state.stats.challengeSpecificDefeats[ds.name] || 0, ds.count);
+                let key = ds.name || ds.pokemonId;
+                state.stats.challengeSpecificDefeats[key] = Math.max(state.stats.challengeSpecificDefeats[key] || 0, ds.count);
             }
         }
         if (req.defeatEliteFourAndChampion) {
@@ -465,17 +467,6 @@ window.cheatProgressChallenge = function(targetAreaId) {
             for (let c of req.completeChallenges) {
                 let match = window.getCurrentUnlocks().find(u => u.challengeName === c || u.areaId === c);
                 let idToPush = match ? match.areaId : c;
-                if (!state.stats.completedChallengeIds.includes(idToPush)) {
-                    state.stats.completedChallengeIds.push(idToPush);
-                }
-            }
-        }
-        if (req.completeAnyOfChallenges) {
-            if (!state.stats.completedChallengeIds) state.stats.completedChallengeIds = [];
-            if (req.completeAnyOfChallenges.length > 0) {
-                let firstC = req.completeAnyOfChallenges[0];
-                let match = window.getCurrentUnlocks().find(u => u.challengeName === firstC || u.areaId === firstC);
-                let idToPush = match ? match.areaId : firstC;
                 if (!state.stats.completedChallengeIds.includes(idToPush)) {
                     state.stats.completedChallengeIds.push(idToPush);
                 }
