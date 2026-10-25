@@ -85,7 +85,7 @@ const mapCoordinates = {
     "y": 55.19
   },
   "diglett_s_cave": {
-    "name": "Digglett Cave",
+    "name": "Diglett's Cave",
     "x": 70.83,
     "y": 51.7
   },
