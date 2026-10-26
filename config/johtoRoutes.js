@@ -202,25 +202,37 @@ export const johtoRoutes = [
         "pokemonId": 74,
         "minLevel": 9,
         "maxLevel": 13,
-        "chance": 0.2
+        "chance": 0.17
       },
       {
         "pokemonId": 21,
         "minLevel": 9,
         "maxLevel": 13,
-        "chance": 0.3
+        "chance": 0.25
       },
       {
         "pokemonId": 179,
         "minLevel": 9,
         "maxLevel": 13,
-        "chance": 0.2
+        "chance": 0.16
       },
       {
         "pokemonId": 163,
         "minLevel": 9,
         "maxLevel": 13,
-        "chance": 0.3
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 188,
+        "minLevel": 9,
+        "maxLevel": 13,
+        "chance": 0.08
+      },
+      {
+        "pokemonId": 190,
+        "minLevel": 9,
+        "maxLevel": 13,
+        "chance": 0.09
       }
     ]
   },
@@ -324,31 +336,37 @@ export const johtoRoutes = [
         "pokemonId": 191,
         "minLevel": 22,
         "maxLevel": 27,
-        "chance": 0.3
+        "chance": 0.27
       },
       {
         "pokemonId": 10,
         "minLevel": 20,
         "maxLevel": 25,
-        "chance": 0.2
+        "chance": 0.18
       },
       {
         "pokemonId": 13,
         "minLevel": 20,
         "maxLevel": 25,
-        "chance": 0.2
+        "chance": 0.18
       },
       {
         "pokemonId": 123,
         "minLevel": 24,
         "maxLevel": 28,
-        "chance": 0.15
+        "chance": 0.14
       },
       {
         "pokemonId": 127,
         "minLevel": 24,
         "maxLevel": 28,
-        "chance": 0.15
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 48,
+        "minLevel": 20,
+        "maxLevel": 28,
+        "chance": 0.09
       }
     ]
   },
@@ -394,25 +412,31 @@ export const johtoRoutes = [
         "pokemonId": 17,
         "minLevel": 26,
         "maxLevel": 31,
-        "chance": 0.3
+        "chance": 0.28
       },
       {
         "pokemonId": 164,
         "minLevel": 26,
         "maxLevel": 31,
-        "chance": 0.3
+        "chance": 0.29
       },
       {
         "pokemonId": 166,
         "minLevel": 27,
         "maxLevel": 32,
-        "chance": 0.2
+        "chance": 0.19
       },
       {
         "pokemonId": 168,
         "minLevel": 27,
         "maxLevel": 32,
-        "chance": 0.2
+        "chance": 0.19
+      },
+      {
+        "pokemonId": 214,
+        "minLevel": 26,
+        "maxLevel": 32,
+        "chance": 0.05
       }
     ]
   },
@@ -745,25 +769,43 @@ export const johtoRoutes = [
         "pokemonId": 75,
         "minLevel": 58,
         "maxLevel": 64,
-        "chance": 0.25
+        "chance": 0.19
       },
       {
         "pokemonId": 207,
         "minLevel": 58,
         "maxLevel": 64,
-        "chance": 0.25
+        "chance": 0.19
       },
       {
         "pokemonId": 231,
         "minLevel": 57,
         "maxLevel": 63,
-        "chance": 0.2
+        "chance": 0.15
       },
       {
         "pokemonId": 204,
         "minLevel": 58,
         "maxLevel": 64,
-        "chance": 0.3
+        "chance": 0.23
+      },
+      {
+        "pokemonId": 70,
+        "minLevel": 57,
+        "maxLevel": 64,
+        "chance": 0.07
+      },
+      {
+        "pokemonId": 203,
+        "minLevel": 57,
+        "maxLevel": 64,
+        "chance": 0.08
+      },
+      {
+        "pokemonId": 114,
+        "minLevel": 57,
+        "maxLevel": 64,
+        "chance": 0.09
       }
     ]
   },
@@ -1065,25 +1107,25 @@ export const johtoRoutes = [
         "pokemonId": 43,
         "minLevel": 72,
         "maxLevel": 76,
-        "chance": 0.25
+        "chance": 0.23
       },
       {
         "pokemonId": 44,
         "minLevel": 72,
         "maxLevel": 76,
-        "chance": 0.25
+        "chance": 0.24
       },
       {
         "pokemonId": 12,
         "minLevel": 74,
         "maxLevel": 78,
-        "chance": 0.15
+        "chance": 0.14
       },
       {
         "pokemonId": 15,
         "minLevel": 74,
         "maxLevel": 78,
-        "chance": 0.15
+        "chance": 0.14
       },
       {
         "pokemonId": 45,
@@ -1096,6 +1138,12 @@ export const johtoRoutes = [
         "minLevel": 75,
         "maxLevel": 78,
         "chance": 0.1
+      },
+      {
+        "pokemonId": 25,
+        "minLevel": 72,
+        "maxLevel": 78,
+        "chance": 0.05
       }
     ]
   },
@@ -1106,31 +1154,37 @@ export const johtoRoutes = [
         "pokemonId": 74,
         "minLevel": 76,
         "maxLevel": 80,
-        "chance": 0.25
+        "chance": 0.22
       },
       {
         "pokemonId": 42,
         "minLevel": 76,
         "maxLevel": 81,
-        "chance": 0.25
+        "chance": 0.23
       },
       {
         "pokemonId": 75,
         "minLevel": 78,
         "maxLevel": 82,
-        "chance": 0.2
+        "chance": 0.18
       },
       {
         "pokemonId": 95,
         "minLevel": 77,
         "maxLevel": 81,
-        "chance": 0.15
+        "chance": 0.14
       },
       {
         "pokemonId": 169,
         "minLevel": 78,
         "maxLevel": 82,
-        "chance": 0.15
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 35,
+        "minLevel": 76,
+        "maxLevel": 82,
+        "chance": 0.09
       }
     ]
   },
@@ -1183,6 +1237,23 @@ export const johtoRoutes = [
         "minLevel": 83,
         "maxLevel": 87,
         "chance": 0.3
+      }
+    ]
+  },
+  {
+    "name": "Diglett Cave",
+    "spawns": [
+      {
+        "pokemonId": 50,
+        "minLevel": 82,
+        "maxLevel": 86,
+        "chance": 0.9
+      },
+      {
+        "pokemonId": 51,
+        "minLevel": 85,
+        "maxLevel": 89,
+        "chance": 0.1
       }
     ]
   },
@@ -1421,7 +1492,7 @@ export const johtoRoutes = [
     ]
   },
   {
-    "name": "Pok\u00e9mon Mansion",
+    "name": "Pokémon Mansion",
     "spawns": [
       {
         "pokemonId": 109,
@@ -2032,11 +2103,11 @@ export const johtoUnlocks = [
     "requirements": {
       "catchSpecies": [
         {
-          "species": "Nidoran\u2640",
+          "species": "Nidoran♀",
           "count": 1
         },
         {
-          "species": "Nidoran\u2642",
+          "species": "Nidoran♂",
           "count": 1
         }
       ]
@@ -2485,7 +2556,8 @@ export const johtoUnlocks = [
     "challengeName": "Challenge 40",
     "areaId": "Vermilion Gym",
     "unlocks": [
-      "Route 8"
+      "Route 8",
+      "Diglett Cave"
     ],
     "requirements": {
       "earnBadge": {
