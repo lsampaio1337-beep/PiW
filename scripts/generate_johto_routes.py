@@ -246,12 +246,12 @@ pokemon_data_raw = [
     ["Sidequest", "Legendaries Nest", "Moltres", 98, 0.2],
     ["Sidequest", "Legendaries Nest", "Ho-Oh", 105, 0.2],
     ["Sidequest", "Legendaries Nest", "Lugia", 105, 0.2],
-    ["Sidequest", "Mythical and Legendaries Spot", "Raikou", 105, 0.2],
-    ["Sidequest", "Mythical and Legendaries Spot", "Entei", 105, 0.2],
-    ["Sidequest", "Mythical and Legendaries Spot", "Suicune", 105, 0.2],
-    ["Sidequest", "Mythical and Legendaries Spot", "Mew", 110, 0.13333333333333333],
-    ["Sidequest", "Mythical and Legendaries Spot", "Mewtwo", 110, 0.13333333333333333],
-    ["Sidequest", "Mythical and Legendaries Spot", "Celebi", 110, 0.13333333333333333]
+    ["Sidequest", "Nebula Fissure", "Raikou", 105, 0.2],
+    ["Sidequest", "Nebula Fissure", "Entei", 105, 0.2],
+    ["Sidequest", "Nebula Fissure", "Suicune", 105, 0.2],
+    ["Sidequest", "Nebula Fissure", "Mew", 110, 0.13333333333333333],
+    ["Sidequest", "Nebula Fissure", "Mewtwo", 110, 0.13333333333333333],
+    ["Sidequest", "Nebula Fissure", "Celebi", 110, 0.13333333333333333]
 ]
 challenges_data_raw = [
     ["Challenge 1", "Route 29", "Defeat 25 Pokémon on Route 29", "Route 30"],
@@ -307,14 +307,14 @@ challenges_data_raw = [
     ["Johto Extra Challenge 2", "Team Rocket HQ", "Defeat 10 Voltorb", "Lake of Rage + 1 Masterball"],
     ["Johto Extra Challenge 3", "Lake of Rage", "Catch 1 Red Gyarados", "Mount Silver + 1 Masterball"],
     ["Johto Extra Challenge 4", "Mount Silver", "Catch 5 Larvitar", "Ilex Forest 2 + 1 Masterball + 2 Dark Stones"],
-    ["Johto Extra Challenge 5", "Ilex Forest 2", "Catch 1 Celebi", "Mythical and Legendaries Spot + 2 Masterball"],
-    ["Extra Challenge (Roaming)", "Roaming", "Defeat 1 Raikou, Defeat 1 Entei, Defeat 1 Suicune", "Mythical and Legendaries Spot + 1 Masterball"],
+    ["Johto Extra Challenge 5", "Ilex Forest 2", "Catch 1 Celebi", "Nebula Fissure + 2 Masterball"],
+    ["Extra Challenge (Roaming)", "Roaming", "Defeat 1 Raikou, Defeat 1 Entei, Defeat 1 Suicune", "Nebula Fissure + 1 Masterball"],
     ["Kanto Extra Challenge 1", "Casino Starter Trupe", "Capture all 6 starters", "Casino Babies + 1 Grass Stone + 1 Fire Stone + 1 Water Stone"],
     ["Kanto Extra Challenge 2", "Casino Babies", "Evolve Pikachu into Raichu", "Casino Special Spot + 1 Masterball"],
     ["Kanto Extra Challenge 3", "Casino Special Spot", "Evolve Porygon into Porygon2", "Casino Eeveelution + Dojo + 1 Masterball"],
     ["Kanto Extra Challenge 4", "Dojo", "Capture 1 Hitmonlee Capture 1 Hitmonchan Capture 1 Hitmontop", "Casino Late Trupe + 2 Fighting Stones"],
     ["Kanto Extra Challenge 5", "Casino Late Trupe", "Catch 1 Venusaur Catch 1 Charizard Catch 1 Blastoise", "Legendaries Nest + 2 Grass Stones + 2 Fire Stones + 2 Water Stones + 1 Masterball"],
-    ["Kanto Extra Challenge 6", "Legendaries Nest", "Get 1 Articuno Get 1 Zapdos Get 1 Moltres", "Mythical and Legendaries Spot + 2 Masterball"]
+    ["Kanto Extra Challenge 6", "Legendaries Nest", "Get 1 Articuno Get 1 Zapdos Get 1 Moltres", "Nebula Fissure + 2 Masterball"]
 ]
 
 # Load pokemon data

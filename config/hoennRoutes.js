@@ -1293,7 +1293,7 @@ export const hoennRoutes = [
     ]
   },
   {
-    "name": "Mythical and Legendaries Spot",
+    "name": "Nebula Fissure",
     "spawns": [
       {
         "pokemonId": 386,
@@ -1673,15 +1673,14 @@ export const hoennUnlocks = [
   { "challengeName": "Challenge 35", "areaId": "Underwater Fishing Spot", "unlocks": ["Sootopolis Gym"], "requirements": { "catchSpecies": [{ "species": "Relicanth", "count": 1 }, { "species": "Clamperl", "count": 2 }] } },
   { "challengeName": "Challenge 36", "areaId": "Sootopolis Gym", "unlocks": ["Shoal Cave"], "requirements": { "earnBadge": { "name": "Rain Badge", "leader": "Juan", "badgeCount": 8 } } },
   { "challengeName": "Challenge 37", "areaId": "Shoal Cave", "unlocks": ["Mirage Island"], "gift": { "item": "Ice Stone", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Spheal", "count": 2 }, { "species": "Snorunt", "count": 1 }] } },
-  { "challengeName": "Challenge 41", "areaId": "Mirage Island", "unlocks": ["Victory Road"], "requirements": { "catchSpecies": [{ "species": "Wynaut", "count": 1 }] } },
-  { "challengeName": "Challenge 43", "areaId": "Victory Road", "unlocks": ["Sky Pillar"], "requirements": { "defeatCountRoute": { "route": "Victory Road", "count": 200 } } },
-  { "challengeName": "Challenge 44", "areaId": "Sky Pillar", "unlocks": ["Mythical and Legendaries Spot", "Trick House", "Mauville Game Corner"], "requirements": { "catchSpecies": [{ "species": "Altaria", "count": 1 }, { "species": "Claydol", "count": 1 }] } },
-  { "challengeName": "Challenge 45", "areaId": "Mythical and Legendaries Spot", "unlocks": [], "requirements": { "defeatSpecific": { "name": "Deoxys", "count": 1 } } },
+    { "challengeName": "Challenge 41", "areaId": "Mirage Island", "unlocks": ["Sky Pillar"], "requirements": { "catchSpecies": [{ "species": "Wynaut", "count": 1 }] } },
+  { "challengeName": "Challenge 42", "areaId": "Sky Pillar", "unlocks": ["Victory Road"], "requirements": { "catchSpecies": [{ "species": "Altaria", "count": 1 }, { "species": "Claydol", "count": 1 }] } },
+  { "challengeName": "Challenge 43", "areaId": "Victory Road", "unlocks": ["Hoenn Pokemon League"], "requirements": { "defeatCountRoute": { "route": "Victory Road", "count": 200 } } },
   {
-    "challengeName": "Hoenn Final Challenge",
+    "challengeName": "Challenge 44",
     "areaId": "Hoenn Pokemon League",
     "unlocks": [
-      "New Region to Travel"
+      "Roaming Hoenn Skies", "Mauville Game Corner", "Trick House"
     ],
     "requirements": {
       "defeatHoennChampion": true
@@ -1693,17 +1692,22 @@ export const hoennUnlocks = [
       }
     ]
   },
-  { "challengeName": "Extra Challenge A 1", "areaId": "Trick House", "unlocks": ["Rustboro Fossil Lab"], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "defeatCountRoute": { "route": "Trick House", "count": 20 } } },
-  { "challengeName": "Extra Challenge A 2", "areaId": "Rustboro Fossil Lab", "unlocks": ["Abandoned Ship"], "gift": { "item": "Root Fossil", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Lileep", "count": 1 }, { "species": "Anorith", "count": 1 }] } },
-  { "challengeName": "Extra Challenge A 3", "areaId": "Abandoned Ship", "unlocks": ["Enemy Hideout"], "gift": { "item": "Deep Sea Scale", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Tentacruel", "count": 1 }] } },
-  { "challengeName": "Extra Challenge A 4", "areaId": "Enemy Hideout", "unlocks": ["Sealed Chamber"], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Weezing", "count": 1 }], "defeatCountRoute": { "route": "Enemy Hideout", "count": 25 } } },
-  { "challengeName": "Extra Challenge A 5", "areaId": "Sealed Chamber", "unlocks": ["Ancient Ruins"], "gift": { "item": "Masterball", "count": 2 }, "requirements": { "defeatSpecific": { "name": "Relicanth", "count": 1 } } },
-  { "challengeName": "Extra Challenge A 6", "areaId": "Ancient Ruins", "unlocks": ["Roaming Hoenn Skies"], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Regirock", "count": 1 }, { "species": "Regice", "count": 1 }, { "species": "Registeel", "count": 1 }] } },
-  { "challengeName": "Extra Challenge (Roaming)", "areaId": "Roaming Hoenn Skies", "unlocks": ["Mythical and Legendaries Spot"], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "defeatMultipleSpecific": [{ "name": "Latias", "count": 1 }, { "name": "Latios", "count": 1 }] } },
-  { "challengeName": "Extra Challenge B 1", "areaId": "Mauville Game Corner", "unlocks": ["Starter Sanctuary"], "gift": { "item": "Fire Stone", "count": 3 }, "requirements": { "catchSpeciesAnyOfByQuality": [{ "species": ["Slakoth", "Abra"], "quality": "Common", "count": 8 }] } },
-  { "challengeName": "Extra Challenge B 2", "areaId": "Starter Sanctuary", "unlocks": ["Daycare Special Spot"], "gift": { "item": "Leaf Stone", "count": 3 }, "requirements": { "catchSpecies": [{ "species": "Treecko", "count": 1 }, { "species": "Torchic", "count": 1 }, { "species": "Mudkip", "count": 1 }] } },
-  { "challengeName": "Extra Challenge B 3", "areaId": "Daycare Special Spot", "unlocks": ["Battle Frontier Facility"], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Wynaut", "count": 1 }, { "species": "Azurill", "count": 1 }] } },
-  { "challengeName": "Extra Challenge B 4", "areaId": "Battle Frontier Facility", "unlocks": ["Weather Climax Cave"], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "defeatCountRoute": { "route": "Battle Frontier Facility", "count": 50 } } },
-  { "challengeName": "Extra Challenge B 5", "areaId": "Weather Climax Cave", "unlocks": ["Mythical and Legendaries Spot"], "gift": { "item": "Masterball", "count": 2 }, "requirements": { "catchSpecies": [{ "species": "Kyogre", "count": 1 }, { "species": "Groudon", "count": 1 }, { "species": "Rayquaza", "count": 1 }] } }
+{ "challengeName": "Extra Challenge A 1", "areaId": "Mauville Game Corner", "unlocks": ["Starter Sanctuary"], "gift": { "item": "Fire Stone", "count": 3 }, "requirements": { "catchSpeciesAnyOfByQuality": [{ "species": ["Slakoth", "Abra"], "quality": "Common", "count": 8 }] } },
+  { "challengeName": "Extra Challenge A 2", "areaId": "Starter Sanctuary", "unlocks": ["Daycare Special Spot"], "gift": { "item": "Leaf Stone", "count": 3 }, "requirements": { "catchSpecies": [{ "species": "Treecko", "count": 1 }, { "species": "Torchic", "count": 1 }, { "species": "Mudkip", "count": 1 }] } },
+  { "challengeName": "Extra Challenge A 3", "areaId": "Daycare Special Spot", "unlocks": ["Battle Frontier Facility"], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Wynaut", "count": 1 }, { "species": "Azurill", "count": 1 }] } },
+  { "challengeName": "Extra Challenge A 4", "areaId": "Battle Frontier Facility", "unlocks": ["Weather Climax Cave"], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "defeatCountRoute": { "route": "Battle Frontier Facility", "count": 50 } } },
+  { "challengeName": "Extra Challenge A 5", "areaId": "Weather Climax Cave", "unlocks": ["Key to Nebula Fissure Challenge"], "gift": { "item": "Masterball", "count": 2 }, "requirements": { "catchSpecies": [{ "species": "Kyogre", "count": 1 }, { "species": "Groudon", "count": 1 }, { "species": "Rayquaza", "count": 1 }] } },
+
+  { "challengeName": "Extra Challenge B 1", "areaId": "Trick House", "unlocks": ["Rustboro Fossil Lab"], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "defeatCountRoute": { "route": "Trick House", "count": 20 } } },
+  { "challengeName": "Extra Challenge B 2", "areaId": "Rustboro Fossil Lab", "unlocks": ["Abandoned Ship"], "gift": { "item": "Root Fossil", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Lileep", "count": 1 }, { "species": "Anorith", "count": 1 }] } },
+  { "challengeName": "Extra Challenge B 3", "areaId": "Abandoned Ship", "unlocks": ["Enemy Hideout"], "gift": { "item": "Deep Sea Scale", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Tentacruel", "count": 1 }] } },
+  { "challengeName": "Extra Challenge B 4", "areaId": "Enemy Hideout", "unlocks": ["Sealed Chamber"], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Weezing", "count": 1 }], "defeatCountRoute": { "route": "Enemy Hideout", "count": 25 } } },
+  { "challengeName": "Extra Challenge B 5", "areaId": "Sealed Chamber", "unlocks": ["Ancient Ruins"], "gift": { "item": "Masterball", "count": 2 }, "requirements": { "defeatSpecific": { "name": "Relicanth", "count": 1 } } },
+  { "challengeName": "Extra Challenge B 6", "areaId": "Ancient Ruins", "unlocks": ["Key to Nebula Fissure Challenge"], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Regirock", "count": 1 }, { "species": "Regice", "count": 1 }, { "species": "Registeel", "count": 1 }] } },
+
+  { "challengeName": "Extra Challenge (Roaming)", "areaId": "Roaming Hoenn Skies", "unlocks": ["Key to Nebula Fissure Challenge"], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "defeatMultipleSpecific": [{ "name": "Latias", "count": 1 }, { "name": "Latios", "count": 1 }] } },
+
+  { "challengeName": "Key to Nebula Fissure Challenge", "areaId": "Key to Nebula Fissure Challenge", "unlocks": ["Nebula Fissure"], "requirements": { "completeChallenges": ["Extra Challenge A 5", "Extra Challenge B 6", "Extra Challenge (Roaming)"] } },
+  { "challengeName": "Nebula Fissure Challenge", "areaId": "Nebula Fissure", "unlocks": [], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "defeatSpecific": { "name": "Deoxys", "count": 1 } } }
 ]
 ;
