@@ -282,7 +282,7 @@ class BattleSystem {
             if (!move || move.power === 0) continue;
 
             // Exclude Explosion and Self-Destruct from active selection
-            if (move.name === "Explosion" || move.name === "Self-Destruct") continue;
+            if (move.name === "Explosion" || move.name === "Self-Destruct" || move.name === "Self Destruct") continue;
 
             const isPhysical = move.category === 'Physical';
             const atkStat = isPhysical ? attacker.currentStats.atk : attacker.currentStats.spa;
@@ -506,7 +506,7 @@ class BattleSystem {
                 let explosionMove = null;
 
                 if (fainted) {
-                    explosionMove = defender.moves ? defender.moves.find(m => m.name === 'Explosion' || m.name === 'Self-Destruct') : null;
+                    explosionMove = defender.moves ? defender.moves.find(m => m.name === 'Explosion' || m.name === 'Self-Destruct' || m.name === 'Self Destruct') : null;
                     if (defender.moves) {
                         const hasExplosion = defender.moves.find(m => m.name === 'Explosion');
                         if (hasExplosion) {
@@ -532,7 +532,7 @@ class BattleSystem {
                             window.playCombatAnimations(attackerSide, explosionMove.type, animDuration);
                         }
                         if (typeof window.showDamage === 'function') {
-                            window.showDamage(attackerSide, expHit.damage, expHit.isCritical, explosionMove.name, explosionMove.type, expEff);
+                            window.showDamage(attackerSide, expHit.damage, expHit.isCritical, expEff);
                         }
                     }
                 }
@@ -554,12 +554,18 @@ class BattleSystem {
                      }));
 
                      if (explosionMove && expHit) {
-                         const invertedAttackerSide = targetSide === 'enemy' ? 'enemy' : 'player'; // Double inverted
+                         const originalAttackerSide = targetSide === 'enemy' ? 'player' : 'enemy'; // Double inverted -> just inverted again? wait.
+                         // targetSide is defender's side. So attackerSide is the side taking explosion damage.
+                         // So we want to invert that attackerSide for the client.
+                         // attackerSide = targetSide === 'enemy' ? 'player' : 'enemy'.
+                         // Invert for client: if attackerSide is 'player', send 'enemy'. if 'enemy', send 'player'.
+                         // So it is exactly targetSide.
+                         const targetForClient = targetSide;
                          mp.dataChannel.send(JSON.stringify({
                              type: 'combatEvent',
                              event: {
                                  type: 'attack',
-                                 target: invertedAttackerSide,
+                                 target: targetForClient,
                                  damage: expHit.damage,
                                  newHp: attacker.currentHp,
                                  isCritical: expHit.isCritical,
@@ -574,16 +580,9 @@ class BattleSystem {
                 this.updateUI();
 
                 if (fainted) {
-                    if (defender === this.activeEncounter) {
-                        this.handleMultiplayerDefeat(defender);
-                        if (attackerFainted) {
-                            this.handleMultiplayerDefeat(attacker);
-                        }
-                    } else {
-                        this.handleMultiplayerDefeat(defender);
-                        if (attackerFainted) {
-                            this.handleMultiplayerDefeat(attacker);
-                        }
+                    this.handleMultiplayerDefeat(defender);
+                    if (attackerFainted) {
+                        this.handleMultiplayerDefeat(attacker);
                     }
                 } else {
                     const delay = Math.max(200, 1000 / this.state.settings.gameSpeed);
@@ -1289,7 +1288,7 @@ class BattleSystem {
             this.updateUI();
 
             if (defender.currentHp <= 0) {
-                let explosionMove = defender.moves ? defender.moves.find(m => m.name === 'Explosion' || m.name === 'Self-Destruct') : null;
+                let explosionMove = defender.moves ? defender.moves.find(m => m.name === 'Explosion' || m.name === 'Self-Destruct' || m.name === 'Self Destruct') : null;
                 if (defender.moves) {
                     const hasExplosion = defender.moves.find(m => m.name === 'Explosion');
                     if (hasExplosion) {
@@ -1311,7 +1310,7 @@ class BattleSystem {
                         window.playCombatAnimations(attackerSide, explosionMove.type, animDuration);
                     }
                     if (typeof window.showDamage === 'function') {
-                        window.showDamage(attackerSide, expHit.damage, expHit.isCritical, explosionMove.name, explosionMove.type, expEff);
+                        window.showDamage(attackerSide, expHit.damage, expHit.isCritical, expEff);
                     }
                     this.updateUI();
                 }
@@ -2387,7 +2386,7 @@ class BattleSystem {
                 defender.currentHp -= hit.damage;
 
                 if (defender.currentHp <= 0) {
-                    let explosionMove = defender.moves ? defender.moves.find(m => m.name === 'Explosion' || m.name === 'Self-Destruct') : null;
+                    let explosionMove = defender.moves ? defender.moves.find(m => m.name === 'Explosion' || m.name === 'Self-Destruct' || m.name === 'Self Destruct') : null;
                     if (defender.moves) {
                         const hasExplosion = defender.moves.find(m => m.name === 'Explosion');
                         if (hasExplosion) {
