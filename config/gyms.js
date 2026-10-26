@@ -5369,5 +5369,356 @@ const gyms = [
     ]
   }
 
+,
+  {
+    "id": "santalunecitygym",
+    "name": "Santalune City Gym",
+    "leader": "Viola",
+    "levelRequirement": 0,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          {
+            "id": 650,
+            "level": 10
+          },
+          {
+            "id": 653,
+            "level": 11
+          }
+        ]
+      },
+      {
+        "name": "Leader Viola",
+        "team": [
+          {
+            "id": 661,
+            "level": 12
+          },
+          {
+            "id": 664,
+            "level": 14
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cyllagecitygym",
+    "name": "Cyllage City Gym",
+    "leader": "Grant",
+    "levelRequirement": 0,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          {
+            "id": 667,
+            "level": 22
+          },
+          {
+            "id": 669,
+            "level": 23
+          }
+        ]
+      },
+      {
+        "name": "Leader Grant",
+        "team": [
+          {
+            "id": 674,
+            "level": 24
+          },
+          {
+            "id": 677,
+            "level": 25
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "shalourcitygym",
+    "name": "Shalour City Gym",
+    "leader": "Korrina",
+    "levelRequirement": 0,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          {
+            "id": 679,
+            "level": 32
+          },
+          {
+            "id": 682,
+            "level": 33
+          }
+        ]
+      },
+      {
+        "name": "Leader Korrina",
+        "team": [
+          {
+            "id": 684,
+            "level": 34
+          },
+          {
+            "id": 686,
+            "level": 35
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "coumarinecitygym",
+    "name": "Coumarine City Gym",
+    "leader": "Ramos",
+    "levelRequirement": 0,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          {
+            "id": 688,
+            "level": 38
+          },
+          {
+            "id": 690,
+            "level": 39
+          }
+        ]
+      },
+      {
+        "name": "Leader Ramos",
+        "team": [
+          {
+            "id": 694,
+            "level": 40
+          },
+          {
+            "id": 696,
+            "level": 41
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lumiosecitygym",
+    "name": "Lumiose City Gym",
+    "leader": "Clemont",
+    "levelRequirement": 0,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          {
+            "id": 698,
+            "level": 44
+          },
+          {
+            "id": 701,
+            "level": 45
+          }
+        ]
+      },
+      {
+        "name": "Leader Clemont",
+        "team": [
+          {
+            "id": 704,
+            "level": 46
+          },
+          {
+            "id": 707,
+            "level": 47
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "laverrecitygym",
+    "name": "Laverre City Gym",
+    "leader": "Valerie",
+    "levelRequirement": 0,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          {
+            "id": 712,
+            "level": 50
+          },
+          {
+            "id": 650,
+            "level": 51
+          }
+        ]
+      },
+      {
+        "name": "Leader Valerie",
+        "team": [
+          {
+            "id": 653,
+            "level": 52
+          },
+          {
+            "id": 656,
+            "level": 53
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "anistarcitygym",
+    "name": "Anistar City Gym",
+    "leader": "Olympia",
+    "levelRequirement": 0,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          {
+            "id": 661,
+            "level": 56
+          },
+          {
+            "id": 664,
+            "level": 57
+          }
+        ]
+      },
+      {
+        "name": "Leader Olympia",
+        "team": [
+          {
+            "id": 667,
+            "level": 58
+          },
+          {
+            "id": 669,
+            "level": 59
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "snowbellecitygym",
+    "name": "Snowbelle City Gym",
+    "leader": "Wulfric",
+    "levelRequirement": 0,
+    "trainers": [
+      {
+        "name": "Gym Trainer #1",
+        "team": [
+          {
+            "id": 674,
+            "level": 62
+          },
+          {
+            "id": 677,
+            "level": 63
+          }
+        ]
+      },
+      {
+        "name": "Leader Wulfric",
+        "team": [
+          {
+            "id": 679,
+            "level": 64
+          },
+          {
+            "id": 682,
+            "level": 65
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "kalospokemonleague",
+    "name": "Kalos Pokemon League",
+    "leader": "Kalos Champion",
+    "levelRequirement": 0,
+    "trainers": [
+      {
+        "name": "Elite Four Malva",
+        "team": [
+          {
+            "id": 684,
+            "level": 70
+          },
+          {
+            "id": 686,
+            "level": 71
+          }
+        ]
+      },
+      {
+        "name": "Elite Four Siebold",
+        "team": [
+          {
+            "id": 688,
+            "level": 70
+          },
+          {
+            "id": 690,
+            "level": 71
+          }
+        ]
+      },
+      {
+        "name": "Elite Four Wikstrom",
+        "team": [
+          {
+            "id": 694,
+            "level": 70
+          },
+          {
+            "id": 696,
+            "level": 71
+          }
+        ]
+      },
+      {
+        "name": "Elite Four Drasna",
+        "team": [
+          {
+            "id": 698,
+            "level": 70
+          },
+          {
+            "id": 701,
+            "level": 71
+          }
+        ]
+      },
+      {
+        "name": "Kalos Champion",
+        "team": [
+          {
+            "id": 704,
+            "level": 75
+          },
+          {
+            "id": 707,
+            "level": 76
+          },
+          {
+            "id": 712,
+            "level": 77
+          }
+        ]
+      }
+    ]
+  }
 ];
+
 export default gyms;

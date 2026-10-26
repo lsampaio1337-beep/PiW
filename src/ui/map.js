@@ -379,6 +379,29 @@ function generateMarkersForRegion(region, unlockedAreas) {
 
             html += generateMarkerHtml(locationId, locationName, coords, true, hasNewNotification, showCheckmark);
         }
+    } else if (region === 'Kalos') {
+        for (const [locationId, locationData] of Object.entries(state.config.kalosMapCoordinates || {})) {
+            const locationName = locationData.name;
+            const coords = locationData;
+
+            let hasNewNotification = false;
+            let showCheckmark = false;
+
+            if (state.stats.newRoutes && state.stats.newRoutes.some(r => parseAreaNames(r).includes(locationName))) {
+                hasNewNotification = true;
+            }
+
+            if (locationId === 'santalunecitygym' && state.trainer.badges >= 1) showCheckmark = true;
+            if (locationId === 'cyllagecitygym' && state.trainer.badges >= 2) showCheckmark = true;
+            if (locationId === 'shalourcitygym' && state.trainer.badges >= 3) showCheckmark = true;
+            if (locationId === 'coumarinecitygym' && state.trainer.badges >= 4) showCheckmark = true;
+            if (locationId === 'lumiosecitygym' && state.trainer.badges >= 5) showCheckmark = true;
+            if (locationId === 'laverrecitygym' && state.trainer.badges >= 6) showCheckmark = true;
+            if (locationId === 'anistarcitygym' && state.trainer.badges >= 7) showCheckmark = true;
+            if (locationId === 'snowbellecitygym' && state.trainer.badges >= 8) showCheckmark = true;
+
+            html += generateMarkerHtml(locationId, locationName, coords, true, hasNewNotification, showCheckmark);
+        }
     } else if (region === 'Unova') {
         for (const [locationId, locationData] of Object.entries(state.config.unovaMapCoordinates || {})) {
             const locationName = locationData.name;

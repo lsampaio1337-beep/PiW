@@ -1,3 +1,4 @@
+import { kalosRoutes, kalosUnlocks } from './kalosRoutes.js';
 const routes = [
   {
     "name": "Spot",
