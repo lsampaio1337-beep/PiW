@@ -477,7 +477,8 @@ window.cheatProgressChallenge = function(targetAreaId) {
             if (completeBtns.length > 0) {
                 // Find the specific complete button for this area
                 const safeAreaId = targetAreaId.replace(/'/g, "\\'");
-                const specificBtn = completeBtns.find(btn => btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(safeAreaId));
+                const safeAreaIdDecoded = targetAreaId.replace(/é/g, '&eacute;').replace(/'/g, "\\'");
+                const specificBtn = completeBtns.find(btn => btn.getAttribute('onclick') && (btn.getAttribute('onclick').includes(safeAreaId) || btn.getAttribute('onclick').includes(safeAreaIdDecoded) || btn.getAttribute('onclick').includes(targetAreaId)));
                 if (specificBtn) specificBtn.click();
                 else completeBtns[0].click();
             }
