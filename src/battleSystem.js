@@ -554,12 +554,6 @@ class BattleSystem {
                      }));
 
                      if (explosionMove && expHit) {
-                         const originalAttackerSide = targetSide === 'enemy' ? 'player' : 'enemy'; // Double inverted -> just inverted again? wait.
-                         // targetSide is defender's side. So attackerSide is the side taking explosion damage.
-                         // So we want to invert that attackerSide for the client.
-                         // attackerSide = targetSide === 'enemy' ? 'player' : 'enemy'.
-                         // Invert for client: if attackerSide is 'player', send 'enemy'. if 'enemy', send 'player'.
-                         // So it is exactly targetSide.
                          const targetForClient = targetSide;
                          mp.dataChannel.send(JSON.stringify({
                              type: 'combatEvent',
@@ -1288,6 +1282,7 @@ class BattleSystem {
             this.updateUI();
 
             if (defender.currentHp <= 0) {
+                defender.currentHp = 0;
                 let explosionMove = defender.moves ? defender.moves.find(m => m.name === 'Explosion' || m.name === 'Self-Destruct' || m.name === 'Self Destruct') : null;
                 if (defender.moves) {
                     const hasExplosion = defender.moves.find(m => m.name === 'Explosion');
@@ -1318,6 +1313,7 @@ class BattleSystem {
                 if (defender === this.activeEncounter) {
                     this.handleEnemyDefeat();
                     if (attacker.currentHp <= 0 && !this.isFainting) {
+                        attacker.currentHp = 0;
                         this.handleFaint();
                     }
                 } else {
@@ -1325,6 +1321,7 @@ class BattleSystem {
                         this.handleFaint();
                     }
                     if (attacker.currentHp <= 0) {
+                        attacker.currentHp = 0;
                         this.handleEnemyDefeat();
                     }
                 }
