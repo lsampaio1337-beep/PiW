@@ -874,10 +874,6 @@
       {
         "to": 20,
         "level": 20
-      },
-      {
-        "to": 20,
-        "level": 20
       }
     ],
     "learnset": [
@@ -1212,11 +1208,7 @@
     "evolutions": [
       {
         "to": 26,
-        "level": 101
-      },
-      {
-        "to": 26,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -1318,10 +1310,6 @@
       {
         "to": 28,
         "level": 22
-      },
-      {
-        "to": 28,
-        "level": 101
       }
     ],
     "learnset": [
@@ -1489,7 +1477,7 @@
     "evolutions": [
       {
         "to": 31,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -1646,7 +1634,7 @@
     "evolutions": [
       {
         "to": 34,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -1752,7 +1740,7 @@
     "evolutions": [
       {
         "to": 36,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -1881,11 +1869,7 @@
     "evolutions": [
       {
         "to": 38,
-        "level": 101
-      },
-      {
-        "to": 38,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -1959,7 +1943,7 @@
     "evolutions": [
       {
         "to": 40,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -2153,7 +2137,7 @@
     "evolutions": [
       {
         "to": 169,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -2261,11 +2245,11 @@
     "evolutions": [
       {
         "to": 45,
-        "level": 101
+        "level": 30
       },
       {
         "to": 182,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -2548,10 +2532,6 @@
       {
         "to": 51,
         "level": 26
-      },
-      {
-        "to": 51,
-        "level": 26
       }
     ],
     "learnset": [
@@ -2629,10 +2609,6 @@
       {
         "to": 53,
         "level": 28
-      },
-      {
-        "to": 53,
-        "level": 101
       },
       {
         "to": 863,
@@ -2891,7 +2867,7 @@
     "evolutions": [
       {
         "to": 979,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -2966,11 +2942,7 @@
     "evolutions": [
       {
         "to": 59,
-        "level": 101
-      },
-      {
-        "to": 59,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -3104,11 +3076,11 @@
     "evolutions": [
       {
         "to": 62,
-        "level": 101
+        "level": 40
       },
       {
         "to": 186,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -3219,7 +3191,7 @@
     "evolutions": [
       {
         "to": 65,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -3365,7 +3337,7 @@
     "evolutions": [
       {
         "to": 68,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -3551,7 +3523,7 @@
     "evolutions": [
       {
         "to": 71,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -3814,10 +3786,6 @@
       {
         "to": 75,
         "level": 25
-      },
-      {
-        "to": 75,
-        "level": 25
       }
     ],
     "learnset": [
@@ -3875,11 +3843,7 @@
     "evolutions": [
       {
         "to": 76,
-        "level": 101
-      },
-      {
-        "to": 76,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -3990,10 +3954,6 @@
       {
         "to": 78,
         "level": 40
-      },
-      {
-        "to": 78,
-        "level": 40
       }
     ],
     "learnset": [
@@ -4097,15 +4057,7 @@
       },
       {
         "to": 199,
-        "level": 101
-      },
-      {
-        "to": 80,
-        "level": 101
-      },
-      {
-        "to": 199,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -4246,7 +4198,7 @@
     "evolutions": [
       {
         "to": 462,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -4304,7 +4256,7 @@
     "evolutions": [
       {
         "to": 865,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -4613,10 +4565,6 @@
       {
         "to": 89,
         "level": 38
-      },
-      {
-        "to": 89,
-        "level": 38
       }
     ],
     "learnset": [
@@ -4717,7 +4665,7 @@
     "evolutions": [
       {
         "to": 91,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -4877,7 +4825,7 @@
     "evolutions": [
       {
         "to": 94,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -4994,7 +4942,7 @@
     "evolutions": [
       {
         "to": 208,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -5294,10 +5242,6 @@
       {
         "to": 101,
         "level": 30
-      },
-      {
-        "to": 101,
-        "level": 101
       }
     ],
     "learnset": [
@@ -5397,11 +5341,7 @@
     "evolutions": [
       {
         "to": 103,
-        "level": 101
-      },
-      {
-        "to": 103,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -5521,10 +5461,6 @@
     "spd": 50,
     "spe": 35,
     "evolutions": [
-      {
-        "to": 105,
-        "level": 28
-      },
       {
         "to": 105,
         "level": 28
@@ -5780,7 +5716,7 @@
     "evolutions": [
       {
         "to": 463,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -5826,10 +5762,6 @@
     "spd": 45,
     "spe": 35,
     "evolutions": [
-      {
-        "to": 110,
-        "level": 35
-      },
       {
         "to": 110,
         "level": 35
@@ -5991,7 +5923,7 @@
     "evolutions": [
       {
         "to": 464,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -6063,7 +5995,7 @@
     "evolutions": [
       {
         "to": 242,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -6119,7 +6051,7 @@
     "evolutions": [
       {
         "to": 465,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -6261,7 +6193,7 @@
     "evolutions": [
       {
         "to": 230,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -6414,7 +6346,7 @@
     "evolutions": [
       {
         "to": 121,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -6594,11 +6526,11 @@
     "evolutions": [
       {
         "to": 212,
-        "level": 101
+        "level": 40
       },
       {
         "to": 900,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -6704,7 +6636,7 @@
     "evolutions": [
       {
         "to": 466,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -6768,7 +6700,7 @@
     "evolutions": [
       {
         "to": 467,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -7099,35 +7031,35 @@
     "evolutions": [
       {
         "to": 134,
-        "level": 101
+        "level": 40
       },
       {
         "to": 135,
-        "level": 101
+        "level": 40
       },
       {
         "to": 136,
-        "level": 101
+        "level": 40
       },
       {
         "to": 196,
-        "level": 101
+        "level": 40
       },
       {
         "to": 197,
-        "level": 101
+        "level": 40
       },
       {
         "to": 470,
-        "level": 101
+        "level": 40
       },
       {
         "to": 471,
-        "level": 101
+        "level": 40
       },
       {
         "to": 700,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -7340,7 +7272,7 @@
     "evolutions": [
       {
         "to": 233,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -8401,10 +8333,6 @@
       {
         "to": 157,
         "level": 36
-      },
-      {
-        "to": 157,
-        "level": 36
       }
     ],
     "learnset": [
@@ -9348,7 +9276,7 @@
     "evolutions": [
       {
         "to": 25,
-        "level": 101
+        "level": 20
       }
     ],
     "learnset": [
@@ -9400,7 +9328,7 @@
     "evolutions": [
       {
         "to": 35,
-        "level": 101
+        "level": 20
       }
     ],
     "learnset": [
@@ -9461,7 +9389,7 @@
     "evolutions": [
       {
         "to": 39,
-        "level": 101
+        "level": 20
       }
     ],
     "learnset": [
@@ -9513,7 +9441,7 @@
     "evolutions": [
       {
         "to": 176,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -9556,7 +9484,7 @@
     "evolutions": [
       {
         "to": 468,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -10265,7 +10193,7 @@
     "evolutions": [
       {
         "to": 424,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -10316,7 +10244,7 @@
     "evolutions": [
       {
         "to": 192,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -10442,7 +10370,7 @@
     "evolutions": [
       {
         "to": 469,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -10693,7 +10621,7 @@
     "evolutions": [
       {
         "to": 430,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -10774,7 +10702,7 @@
     "evolutions": [
       {
         "to": 429,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -10874,7 +10802,7 @@
     "evolutions": [
       {
         "to": 981,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -11062,11 +10990,7 @@
     "evolutions": [
       {
         "to": 982,
-        "level": 101
-      },
-      {
-        "to": 982,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -11126,7 +11050,7 @@
     "evolutions": [
       {
         "to": 472,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -11389,7 +11313,7 @@
     "evolutions": [
       {
         "to": 904,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -11602,11 +11526,11 @@
     "evolutions": [
       {
         "to": 461,
-        "level": 101
+        "level": 40
       },
       {
         "to": 903,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -11716,7 +11640,7 @@
     "evolutions": [
       {
         "to": 901,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -11973,7 +11897,7 @@
     "evolutions": [
       {
         "to": 473,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -12640,7 +12564,7 @@
     "evolutions": [
       {
         "to": 474,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -12690,7 +12614,7 @@
     "evolutions": [
       {
         "to": 899,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -14359,10 +14283,6 @@
       {
         "to": 264,
         "level": 20
-      },
-      {
-        "to": 264,
-        "level": 20
       }
     ],
     "learnset": [
@@ -14729,7 +14649,7 @@
     "evolutions": [
       {
         "to": 272,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -14888,7 +14808,7 @@
     "evolutions": [
       {
         "to": 275,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -15274,7 +15194,7 @@
       },
       {
         "to": 475,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -15730,10 +15650,6 @@
     "spd": 30,
     "spe": 40,
     "evolutions": [
-      {
-        "to": 291,
-        "level": 20
-      },
       {
         "to": 291,
         "level": 20
@@ -16207,7 +16123,7 @@
     "evolutions": [
       {
         "to": 183,
-        "level": 101
+        "level": 20
       }
     ],
     "learnset": [
@@ -16247,7 +16163,7 @@
     "evolutions": [
       {
         "to": 476,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -16310,7 +16226,7 @@
     "evolutions": [
       {
         "to": 301,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -17141,7 +17057,7 @@
     "evolutions": [
       {
         "to": 407,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -19137,7 +19053,7 @@
     "evolutions": [
       {
         "to": 350,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -19476,7 +19392,7 @@
     "evolutions": [
       {
         "to": 477,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -19727,7 +19643,7 @@
       },
       {
         "to": 478,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -19973,11 +19889,11 @@
     "evolutions": [
       {
         "to": 367,
-        "level": 101
+        "level": 30
       },
       {
         "to": 368,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -22211,7 +22127,7 @@
     "evolutions": [
       {
         "to": 315,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -22476,19 +22392,11 @@
     "spe": 36,
     "evolutions": [
       {
+        "to": 413,
+        "level": 20
+      },
+      {
         "to": 414,
-        "level": 20
-      },
-      {
-        "to": 413,
-        "level": 20
-      },
-      {
-        "to": 413,
-        "level": 20
-      },
-      {
-        "to": 413,
         "level": 20
       }
     ],
@@ -23243,7 +23151,7 @@
     "evolutions": [
       {
         "to": 428,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -23514,7 +23422,7 @@
     "evolutions": [
       {
         "to": 358,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -23776,7 +23684,7 @@
     "evolutions": [
       {
         "to": 185,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -23831,11 +23739,7 @@
     "evolutions": [
       {
         "to": 122,
-        "level": 101
-      },
-      {
-        "to": 122,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -23885,7 +23789,7 @@
     "evolutions": [
       {
         "to": 113,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -24195,7 +24099,7 @@
     "evolutions": [
       {
         "to": 143,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -24249,7 +24153,7 @@
     "evolutions": [
       {
         "to": 448,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -24794,7 +24698,7 @@
     "evolutions": [
       {
         "to": 226,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -27157,10 +27061,6 @@
       {
         "to": 503,
         "level": 36
-      },
-      {
-        "to": 503,
-        "level": 36
       }
     ],
     "learnset": [
@@ -27618,7 +27518,7 @@
     "evolutions": [
       {
         "to": 512,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -27737,7 +27637,7 @@
     "evolutions": [
       {
         "to": 514,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -27856,7 +27756,7 @@
     "evolutions": [
       {
         "to": 516,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -27967,7 +27867,7 @@
     "evolutions": [
       {
         "to": 518,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -28335,7 +28235,7 @@
     "evolutions": [
       {
         "to": 526,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -28447,7 +28347,7 @@
     "evolutions": [
       {
         "to": 528,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -28794,7 +28694,7 @@
     "evolutions": [
       {
         "to": 534,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -29254,7 +29154,7 @@
     "evolutions": [
       {
         "to": 542,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -29511,7 +29411,7 @@
     "evolutions": [
       {
         "to": 547,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -29627,11 +29527,7 @@
     "evolutions": [
       {
         "to": 549,
-        "level": 101
-      },
-      {
-        "to": 549,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -29706,11 +29602,7 @@
     "evolutions": [
       {
         "to": 902,
-        "level": 101
-      },
-      {
-        "to": 902,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -29949,10 +29841,6 @@
       {
         "to": 555,
         "level": 35
-      },
-      {
-        "to": 555,
-        "level": 101
       }
     ],
     "learnset": [
@@ -30388,7 +30276,7 @@
       },
       {
         "to": 867,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -30853,10 +30741,6 @@
       {
         "to": 571,
         "level": 30
-      },
-      {
-        "to": 571,
-        "level": 30
       }
     ],
     "learnset": [
@@ -30911,7 +30795,7 @@
     "evolutions": [
       {
         "to": 573,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -31661,7 +31545,7 @@
     "evolutions": [
       {
         "to": 589,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -32469,7 +32353,7 @@
     "evolutions": [
       {
         "to": 604,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -32715,7 +32599,7 @@
     "evolutions": [
       {
         "to": 609,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -33188,7 +33072,7 @@
     "evolutions": [
       {
         "to": 617,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -33718,7 +33602,7 @@
     "evolutions": [
       {
         "to": 983,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -33832,10 +33716,6 @@
     "spd": 50,
     "spe": 60,
     "evolutions": [
-      {
-        "to": 628,
-        "level": 54
-      },
       {
         "to": 628,
         "level": 54
@@ -36217,7 +36097,7 @@
     "evolutions": [
       {
         "to": 671,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -36590,10 +36470,6 @@
       {
         "to": 678,
         "level": 25
-      },
-      {
-        "to": 678,
-        "level": 25
       }
     ],
     "learnset": [
@@ -36729,7 +36605,7 @@
     "evolutions": [
       {
         "to": 681,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -36819,7 +36695,7 @@
     "evolutions": [
       {
         "to": 683,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -36912,7 +36788,7 @@
     "evolutions": [
       {
         "to": 685,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -37468,7 +37344,7 @@
     "evolutions": [
       {
         "to": 695,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -38012,10 +37888,6 @@
       {
         "to": 705,
         "level": 40
-      },
-      {
-        "to": 705,
-        "level": 40
       }
     ],
     "learnset": [
@@ -38074,10 +37946,6 @@
     "spd": 113,
     "spe": 60,
     "evolutions": [
-      {
-        "to": 706,
-        "level": 50
-      },
       {
         "to": 706,
         "level": 50
@@ -38207,7 +38075,7 @@
     "evolutions": [
       {
         "to": 709,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -38282,7 +38150,7 @@
     "evolutions": [
       {
         "to": 711,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -38358,10 +38226,6 @@
     "spd": 35,
     "spe": 28,
     "evolutions": [
-      {
-        "to": 713,
-        "level": 37
-      },
       {
         "to": 713,
         "level": 37
@@ -38925,10 +38789,6 @@
       {
         "to": 724,
         "level": 34
-      },
-      {
-        "to": 724,
-        "level": 36
       }
     ],
     "learnset": [
@@ -39672,7 +39532,7 @@
     "evolutions": [
       {
         "to": 738,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -39778,7 +39638,7 @@
     "evolutions": [
       {
         "to": 740,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -40006,14 +39866,6 @@
     "spd": 40,
     "spe": 60,
     "evolutions": [
-      {
-        "to": 745,
-        "level": 25
-      },
-      {
-        "to": 745,
-        "level": 25
-      },
       {
         "to": 745,
         "level": 25
@@ -40983,7 +40835,7 @@
     "evolutions": [
       {
         "to": 763,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -41435,7 +41287,7 @@
     "evolutions": [
       {
         "to": 773,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -43159,7 +43011,7 @@
     "evolutions": [
       {
         "to": 804,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -43439,7 +43291,7 @@
     "evolutions": [
       {
         "to": 809,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -44985,15 +44837,15 @@
     "evolutions": [
       {
         "to": 841,
-        "level": 101
+        "level": 30
       },
       {
         "to": 842,
-        "level": 101
+        "level": 30
       },
       {
         "to": 1011,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -45369,10 +45221,6 @@
       {
         "to": 849,
         "level": 30
-      },
-      {
-        "to": 849,
-        "level": 30
       }
     ],
     "learnset": [
@@ -45561,7 +45409,7 @@
     "evolutions": [
       {
         "to": 853,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -45670,7 +45518,7 @@
     "evolutions": [
       {
         "to": 855,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -46350,7 +46198,7 @@
     "evolutions": [
       {
         "to": 869,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -46508,7 +46356,7 @@
     "evolutions": [
       {
         "to": 873,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -47118,7 +46966,7 @@
     "evolutions": [
       {
         "to": 1018,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -47513,11 +47361,7 @@
     "evolutions": [
       {
         "to": 892,
-        "level": 101
-      },
-      {
-        "to": 892,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -48906,10 +48750,6 @@
       {
         "to": 916,
         "level": 18
-      },
-      {
-        "to": 916,
-        "level": 18
       }
     ],
     "learnset": [
@@ -49323,7 +49163,7 @@
     "evolutions": [
       {
         "to": 923,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -49451,10 +49291,6 @@
     "spd": 45,
     "spe": 75,
     "evolutions": [
-      {
-        "to": 925,
-        "level": 25
-      },
       {
         "to": 925,
         "level": 25
@@ -50051,11 +49887,11 @@
     "evolutions": [
       {
         "to": 936,
-        "level": 101
+        "level": 40
       },
       {
         "to": 937,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -50198,7 +50034,7 @@
     "evolutions": [
       {
         "to": 939,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -50663,7 +50499,7 @@
     "evolutions": [
       {
         "to": 947,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -50976,7 +50812,7 @@
     "evolutions": [
       {
         "to": 952,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -51114,7 +50950,7 @@
     "evolutions": [
       {
         "to": 954,
-        "level": 101
+        "level": 30
       }
     ],
     "learnset": [
@@ -52338,7 +52174,7 @@
     "evolutions": [
       {
         "to": 975,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -53862,7 +53698,7 @@
     "evolutions": [
       {
         "to": 1000,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -54571,7 +54407,7 @@
     "evolutions": [
       {
         "to": 1019,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
@@ -54621,7 +54457,7 @@
     "evolutions": [
       {
         "to": 1013,
-        "level": 101
+        "level": 40
       }
     ],
     "learnset": [
