@@ -271,6 +271,20 @@ class BattleSystem {
         return eff;
     }
 
+    getExplosionMove(pokemon) {
+        if (!pokemon || !pokemon.moves) return null;
+        let bestExplosion = null;
+        for (const move of pokemon.moves) {
+            if (!move || !move.name) continue;
+            if (move.name === 'Self-Destruct' || move.name === 'Self Destruct' || move.name === 'Explosion') {
+                if (!bestExplosion || move.power > bestExplosion.power) {
+                    bestExplosion = move;
+                }
+            }
+        }
+        return bestExplosion;
+    }
+
     getBestMove(attacker, defender) {
         let bestMove = null;
         let maxExpectedDamage = -1;
@@ -280,6 +294,9 @@ class BattleSystem {
         for (const move of attacker.moves) {
             // Very simplified: skip if missing data
             if (!move || move.power === 0) continue;
+
+            // Do not use Self-Destruct or Explosion normally
+            if (move.name === 'Self-Destruct' || move.name === 'Self Destruct' || move.name === 'Explosion') continue;
 
             const isPhysical = move.category === 'Physical';
             const atkStat = isPhysical ? attacker.currentStats.atk : attacker.currentStats.spa;
@@ -492,6 +509,20 @@ class BattleSystem {
                 if (defender.currentHp <= 0) {
                     defender.currentHp = 0;
                     fainted = true;
+
+                    let explosionMove = this.getExplosionMove(defender);
+                    if (explosionMove) {
+                        const isPhys = explosionMove.category === 'Physical';
+                        const atkS = isPhys ? defender.currentStats.atk : defender.currentStats.spa;
+                        const defS = isPhys ? attacker.currentStats.def : attacker.currentStats.spd;
+                        const e = this.getTypeEffectiveness(explosionMove.type, attacker.types);
+                        const expHit = mathEngine.calculateDamage(defender.level, explosionMove.power, atkS, defS, e, defender.quality);
+                        attacker.currentHp -= expHit.damage;
+                        // Client is expected to update its own hp, but we update server state here
+                        if (typeof window.showDamage === 'function') {
+                            window.showDamage(targetSide === 'enemy' ? 'player' : 'enemy', expHit.damage, expHit.isCritical, explosionMove.name, explosionMove.type, e);
+                        }
+                    }
                 }
 
                 if (typeof window.showDamage === 'function') {
@@ -1224,13 +1255,62 @@ class BattleSystem {
             this.updateUI();
 
             if (defender.currentHp <= 0) {
-                if (defender === this.activeEncounter) {
-                    this.handleEnemyDefeat();
+                let explosionMove = this.getExplosionMove(defender);
+
+                if (explosionMove) {
+                    const isPhysical = explosionMove.category === 'Physical';
+                    const atkStat = isPhysical ? defender.currentStats.atk : defender.currentStats.spa;
+                    const defStat = isPhysical ? attacker.currentStats.def : attacker.currentStats.spd;
+                    const eff = this.getTypeEffectiveness(explosionMove.type, attacker.types);
+
+                    const explosionHit = mathEngine.calculateDamage(defender.level, explosionMove.power, atkStat, defStat, eff, defender.quality);
+
+                    attacker.currentHp -= explosionHit.damage;
+
+                    if (typeof window.showDamage === 'function') {
+                        const targetSideStr = attacker === this.state.party[0] ? 'player' : 'enemy';
+                        window.showDamage(targetSideStr, explosionHit.damage, explosionHit.isCritical, explosionMove.name, explosionMove.type, eff);
+                    }
+
+                    this.updateUI();
+
+                    if (attacker.currentHp <= 0) {
+                        // Both fainted
+                        // Wait slightly to show damage before tearing down
+                        setTimeout(() => {
+                            if (defender === this.activeEncounter) {
+                                this.handleEnemyDefeat(); // Get rewards
+                                setTimeout(() => {
+                                    if (!this.isFainting) this.handleFaint();
+                                }, 500);
+                            } else {
+                                if (!this.isFainting) this.handleFaint();
+                                setTimeout(() => {
+                                    this.handleEnemyDefeat();
+                                }, 500);
+                            }
+                        }, 500 / this.state.settings.gameSpeed);
+                    } else {
+                        setTimeout(() => {
+                            if (defender === this.activeEncounter) {
+                                this.handleEnemyDefeat();
+                            } else {
+                                if (!this.isFainting) {
+                                    this.handleFaint();
+                                }
+                            }
+                        }, 500 / this.state.settings.gameSpeed);
+                    }
                 } else {
-                    if (!this.isFainting) {
-                        this.handleFaint();
+                    if (defender === this.activeEncounter) {
+                        this.handleEnemyDefeat();
+                    } else {
+                        if (!this.isFainting) {
+                            this.handleFaint();
+                        }
                     }
                 }
+
             } else {
                 this.scheduleNextStrike(attacker, defender);
             }
@@ -2287,6 +2367,18 @@ class BattleSystem {
 
                 const hit = mathEngine.calculateDamage(attacker.level, move.power, atkStat, defStat, eff, attacker.quality);
                 defender.currentHp -= hit.damage;
+
+                if (defender.currentHp <= 0) {
+                    let explosionMove = this.getExplosionMove(defender);
+                    if (explosionMove) {
+                        const isPhys = explosionMove.category === 'Physical';
+                        const atkS = isPhys ? defender.currentStats.atk : defender.currentStats.spa;
+                        const defS = isPhys ? attacker.currentStats.def : attacker.currentStats.spd;
+                        const e = this.getTypeEffectiveness(explosionMove.type, attacker.types);
+                        const expHit = mathEngine.calculateDamage(defender.level, explosionMove.power, atkS, defS, e, defender.quality);
+                        attacker.currentHp -= expHit.damage;
+                    }
+                }
 
                 return false; // Not a potion, just an attack
             };
