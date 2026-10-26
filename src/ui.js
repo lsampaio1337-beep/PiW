@@ -89,7 +89,7 @@ state.storageRef = storage;
 
 // Attach exported methods to window so inline HTML onclicks work
 window.updateZzZModeUI = function() {
-    if (state.isZzZMode) {
+    if (state.stats.isZzZMode) {
         document.querySelectorAll('.nav-icon').forEach(icon => {
             if (icon.id !== 'btn-sleep' && icon.id !== 'btn-exit' && icon.id !== 'btn-map') {
                 icon.style.pointerEvents = 'none';
@@ -1348,6 +1348,9 @@ export function switchView(viewName) {
 
 export function updateUI() {
     window.currentMapRegion = window.currentMapRegion || state.currentRegionName || 'Kanto';
+    if (window.updateZzZModeUI) {
+        window.updateZzZModeUI();
+    }
     updateMainControl();
     updateTeamWindow();
     updateBattleArena();
@@ -1580,6 +1583,9 @@ function gameClockTick() {
     if (!state.globalStats.playtime) state.globalStats.playtime = 0;
     state.globalStats.playtime++;
 
+    if (typeof state.stats.playtime === 'undefined') state.stats.playtime = 0;
+    state.stats.playtime++;
+
     if (state.currentView === "BATTLE_ARENA") {
         state.stats.battleModeTimer = (state.stats.battleModeTimer || 0) + 1;
         updateMainControl();
@@ -1592,7 +1598,7 @@ function gameClockTick() {
     if (state.globalStats.playtime % 60 === 0 && state.globalStats.playtime > 0) {
         // Current active region
         if (state.stats && state.stats.hasPickedStarter) {
-            state.stats.jigglypuffGrains = (state.stats.jigglypuffGrains || 0) + 1;
+            if (state.stats.unlockedZzZMode && !state.stats.isZzZMode) state.stats.jigglypuffGrains = (state.stats.jigglypuffGrains || 0) + 1;
         }
 
         // Other unlocked regions
@@ -1603,7 +1609,7 @@ function gameClockTick() {
 
                 let regionData = state.regions[regionName];
                 if (regionData && regionData.stats && regionData.stats.hasPickedStarter) {
-                    regionData.stats.jigglypuffGrains = (regionData.stats.jigglypuffGrains || 0) + 1;
+                    if (regionData.stats.unlockedZzZMode && !regionData.stats.isZzZMode) regionData.stats.jigglypuffGrains = (regionData.stats.jigglypuffGrains || 0) + 1;
                 }
             }
         }
@@ -2009,12 +2015,30 @@ async function init() {
                     if (pData.stats) {
                         if (pData.stats.playtime !== undefined) state.globalStats.playtime = pData.stats.playtime;
                         if (pData.stats.hasSeenProfTutorial !== undefined) state.globalStats.hasSeenProfTutorial = pData.stats.hasSeenProfTutorial;
-                        if (pData.stats.hasSeenZzZTutorial !== undefined) state.globalStats.hasSeenZzZTutorial = pData.stats.hasSeenZzZTutorial;
                         if (pData.stats.hasSeenMultiplayerIcon !== undefined) state.globalStats.hasSeenMultiplayerIcon = pData.stats.hasSeenMultiplayerIcon;
                         if (pData.stats.hasSeenGiftIcon !== undefined) state.globalStats.hasSeenGiftIcon = pData.stats.hasSeenGiftIcon;
                         if (pData.stats.hasSeenJohtoMap !== undefined) state.globalStats.hasSeenJohtoMap = pData.stats.hasSeenJohtoMap;
                         if (pData.stats.hasSeenDaycare !== undefined) state.globalStats.hasSeenDaycare = pData.stats.hasSeenDaycare;
                         if (pData.stats.hasSeenBonusCandyModal !== undefined) state.globalStats.hasSeenBonusCandyModal = pData.stats.hasSeenBonusCandyModal;
+                    }
+
+                    // Migrate old global sleep mode to new per-region sleep mode if applicable
+                    if (pData) {
+                        const { isZzZMode, zzzTimestamp } = pData;
+                        const hasSeenZzZTutorial = pData.globalStats && pData.globalStats.hasSeenZzZTutorial;
+                        if (isZzZMode !== undefined || zzzTimestamp !== undefined || hasSeenZzZTutorial !== undefined) {
+                            for (let regionName in state.regions) {
+                                if (!state.regions[regionName].stats) state.regions[regionName].stats = {};
+                                if (typeof state.regions[regionName].stats.isZzZMode === 'undefined') state.regions[regionName].stats.isZzZMode = isZzZMode || false;
+                                if (typeof state.regions[regionName].stats.zzzTimestamp === 'undefined') state.regions[regionName].stats.zzzTimestamp = zzzTimestamp || null;
+                                if (typeof state.regions[regionName].stats.unlockedZzZMode === 'undefined') state.regions[regionName].stats.unlockedZzZMode = hasSeenZzZTutorial || false;
+                                if (typeof state.regions[regionName].stats.hasSeenZzZTutorial === 'undefined') state.regions[regionName].stats.hasSeenZzZTutorial = hasSeenZzZTutorial || false;
+                            }
+                            if (typeof state.stats.isZzZMode === 'undefined') state.stats.isZzZMode = isZzZMode || false;
+                            if (typeof state.stats.zzzTimestamp === 'undefined') state.stats.zzzTimestamp = zzzTimestamp || null;
+                            if (typeof state.stats.unlockedZzZMode === 'undefined') state.stats.unlockedZzZMode = hasSeenZzZTutorial || false;
+                            if (typeof state.stats.hasSeenZzZTutorial === 'undefined') state.stats.hasSeenZzZTutorial = hasSeenZzZTutorial || false;
+                        }
                     }
 
 
@@ -2066,7 +2090,7 @@ async function init() {
 
                     startGame();
 
-                    if (state.isZzZMode) {
+                    if (state.stats.isZzZMode) {
                         // For a clean load into sleep mode we don't start at lab. We just wait for wakeup.
                         if (globals.battleSystem) globals.battleSystem.stop();
 
@@ -2166,7 +2190,7 @@ async function init() {
     bindBtn('btn-map', () => {
         if(!checkCombatLock()) {
             showMap();
-            if (!state.isZzZMode) {
+            if (!state.stats.isZzZMode) {
                 window.windowManager.toggleWindow('main-view-window', true);
             }
         }
@@ -2219,7 +2243,7 @@ async function init() {
 
         window.showZzZConfirmationModal = function() {
             const grains = state.stats.jigglypuffGrains || 0;
-            const showTutorial = !state.globalStats.hasSeenZzZTutorial;
+            const showTutorial = !state.stats.hasSeenZzZTutorial;
             const htmlContent = `
                 <div class="content-panel" style="display: flex; flex-direction: column; gap: 15px; width: 100%; box-sizing: border-box; position: relative;">
                     ${showTutorial ? `
@@ -2264,7 +2288,8 @@ async function init() {
                 const dismissBtn = document.getElementById('btn-dismiss-zzz-inner');
                 if (dismissBtn) {
                     dismissBtn.onclick = () => {
-                        state.globalStats.hasSeenZzZTutorial = true;
+                        state.stats.hasSeenZzZTutorial = true;
+                        state.stats.unlockedZzZMode = true; // Unlock ZzZ mode upon finishing tutorial
                         storage.save(state);
                         const overlay = document.getElementById('zzz-tutorial-overlay-inner');
                         if (overlay) overlay.style.display = 'none';
@@ -2277,9 +2302,8 @@ async function init() {
             };
 
             document.getElementById('btn-zzz-yes').onclick = () => {
-                state.isZzZMode = true;
-                state.zzzTimestamp = Date.now();
-                state.settings.isSleepModeActive = true;
+                state.stats.isZzZMode = true;
+                state.stats.zzzTimestamp = Date.now();
                 state.stats.lastSaveTime = Date.now();
                 storage.save(state);
 
@@ -2301,7 +2325,7 @@ async function init() {
 
         bindBtn('btn-sleep', () => {
         if(!checkCombatLock()) {
-            if (state.isZzZMode) {
+            if (state.stats.isZzZMode) {
                 window.showWakeUpModal();
             } else {
                 state.stats.hasSeenZzZIcon = true;
@@ -2934,7 +2958,7 @@ export function renderProfessorLab() {
 
 window.simulateSleepFarm = function() {
     // Simulate sleep farm
-    let timeElapsedMs = Date.now() - (state.zzzTimestamp || Date.now());
+    let timeElapsedMs = Date.now() - (state.stats.zzzTimestamp || Date.now());
     timeElapsedMs = Math.max(0, timeElapsedMs); // Prevent negative time if system clock changes
 
     // Cap time elapsed by grains
@@ -2958,8 +2982,8 @@ window.simulateSleepFarm = function() {
     // Track Daily Challenges
     trackDailyChallenge('sleep_minutes', { amount: Math.floor(actualTimeConsumedMs / 60000) });
 
-    state.isZzZMode = false;
-    state.zzzTimestamp = null;
+    state.stats.isZzZMode = false;
+    state.stats.zzzTimestamp = null;
     storage.save(state);
 
     // Format Time based on actual simulated time returned by the engine

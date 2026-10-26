@@ -31,6 +31,11 @@ export const REGION_TEMPLATE = {
         completedChallenges: 0,
         activeChallenges: ["Route 1"],
         completedChallengeIds: [],
+        isZzZMode: false,
+        zzzTimestamp: null,
+        unlockedZzZMode: false,
+        hasSeenZzZTutorial: false,
+        playtime: 0,
         qTaskTier: 0,
         cTaskTier: 0,
         shinySeenTaskTier: 0,
@@ -88,10 +93,9 @@ export const REGION_TEMPLATE = {
 
 export const state = {
     ...JSON.parse(JSON.stringify(REGION_TEMPLATE)),
-    globalStats: {
+    globalStats: { // Keeping these here as they are truly global
         playtime: 0,
         hasSeenProfTutorial: false,
-        hasSeenZzZTutorial: false,
         hasSeenMultiplayerIcon: false,
         hasSeenGiftIcon: false,
         hasSeenJohtoMap: false,
@@ -183,6 +187,18 @@ export function swapRegion(newRegionName) {
     }
 
     state.currentRegionName = newRegionName;
+
+    if (state.stats.isZzZMode) {
+        if (globals.battleSystem) globals.battleSystem.stop();
+        if (window.windowManager) {
+            window.windowManager.toggleWindow('main-view-window', false);
+        }
+    } else {
+        if (window.windowManager) {
+            window.windowManager.toggleWindow('main-view-window', true);
+            if (globals.battleSystem && !globals.battleSystem.gymState?.isActive) globals.battleSystem.start();
+        }
+    }
 }
 
 window.getCurrentRoutes = function() {

@@ -363,7 +363,7 @@ export function updateMainControl() {
     const sleepNotification = document.getElementById('sleep-notification');
 
     if (sleepContainer && sleepNotification) {
-        if (state.globalStats.playtime && state.globalStats.playtime >= 3600) {
+        if (state.stats.playtime && state.stats.playtime >= 3600) {
             sleepContainer.style.display = 'inline-block';
             if (!state.stats.hasSeenZzZIcon) {
                 sleepNotification.style.display = 'block';
