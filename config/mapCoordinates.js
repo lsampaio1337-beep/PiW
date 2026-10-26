@@ -179,8 +179,8 @@ const mapCoordinates = {
     "x": 38.6,
     "y": 93.01
   },
-  "pok_mon_mansion": {
-    "name": "Pokémon Mansion",
+  "pokemon_mansion": {
+    "name": "Pokemon Mansion",
     "x": 22.08,
     "y": 90.92
   },

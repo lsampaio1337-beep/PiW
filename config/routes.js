@@ -1113,7 +1113,7 @@ const routes = [
     ]
   },
   {
-    "name": "Pokémon Mansion",
+    "name": "Pokemon Mansion",
     "spawns": [
       {
         "pokemonId": 109,
@@ -1612,13 +1612,13 @@ export const unlocks = [
   { "challengeName": "Challenge 27", "areaId": "Cycling Road (16-18)", "unlocks": ["Safari Zone"], "requirements": { "catchSpecies": [{ "species": "Dodrio", "count": 2 }] } },
   { "challengeName": "Challenge 28", "areaId": "Safari Zone", "unlocks": ["Saffron Gym"], "gift": { "item": "Ultraball", "count": 10 }, "requirements": { "defeatCountRoute": { "route": "Safari Zone", "count": 400 } } },
   { "challengeName": "Challenge 29", "areaId": "Saffron Gym", "unlocks": ["Sea Routes"], "requirements": { "earnBadge": { "name": "Marsh Badge", "leader": "Sabrina", "badgeCount": 6 } } },
-  { "challengeName": "Challenge 30", "areaId": "Sea Routes", "unlocks": ["Pokémon Mansion"], "requirements": { "defeatCountRoute": { "route": "Sea Routes", "count": 250 } } },
-  { "challengeName": "Challenge 31", "areaId": "Pokémon Mansion", "unlocks": ["Cinnabar Gym"], "gift": { "item": "Fire Stone", "count": 3 }, "requirements": { "catchSpeciesByQuality": [{ "species": "Magmar", "quality": "Rare", "count": 1 }] } },
+  { "challengeName": "Challenge 30", "areaId": "Sea Routes", "unlocks": ["Pokemon Mansion"], "requirements": { "defeatCountRoute": { "route": "Sea Routes", "count": 250 } } },
+  { "challengeName": "Challenge 31", "areaId": "Pokemon Mansion", "unlocks": ["Cinnabar Gym"], "gift": { "item": "Fire Stone", "count": 3 }, "requirements": { "catchSpeciesByQuality": [{ "species": "Magmar", "quality": "Rare", "count": 1 }] } },
   { "challengeName": "Challenge 32", "areaId": "Cinnabar Gym", "unlocks": ["Viridian Gym"], "requirements": { "earnBadge": { "name": "Volcano Badge", "leader": "Blaine", "badgeCount": 7 } } },
   { "challengeName": "Challenge 33", "areaId": "Viridian Gym", "unlocks": ["Route 22"], "requirements": { "earnBadge": { "name": "Earth Badge", "leader": "Giovanni", "badgeCount": 8 } } },
   { "challengeName": "Challenge 34", "areaId": "Route 22", "unlocks": ["Route 23"], "gift": { "item": "Big Potion", "count": 10 }, "requirements": { "defeatCountRoute": { "route": "Route 22", "count": 350 } } },
   { "challengeName": "Challenge 35", "areaId": "Route 23", "unlocks": ["Kanto Pokemon League"], "requirements": { "catchSpeciesAnyOfByQuality": [{ "species": ["Nidoking", "Nidoqueen"], "quality": "Rare", "count": 1 }] } },
-  { "challengeName": "Challenge 36", "areaId": "Kanto Pokemon League", "unlocks": ["New Region to Travel", "Extra Challenge B 1"], "requirements": { "defeatEliteFourAndChampion": true } },
+  { "challengeName": "Challenge 36", "areaId": "Kanto Pokemon League", "unlocks": ["New Region to Travel", "Extra Challenge B"], "requirements": { "defeatEliteFourAndChampion": true } },
   { "challengeName": "Extra Challenge A 1", "areaId": "Casino", "unlocks": ["Small Fishing Spot", "Casino - Mid Troupe"], "gift": { "item": "Ultraball", "count": 10 }, "requirements": { "catchSpecies": [{ "species": "Bulbasaur", "count": 1 }, { "species": "Charmander", "count": 1 }, { "species": "Squirtle", "count": 1 }] } },
   { "challengeName": "Extra Challenge A 2", "areaId": "Small Fishing Spot", "unlocks": ["Fighting Dojo", "Casino - Eeveelutions"], "gift": { "item": "Ultraball", "count": 10 }, "requirements": { "catchSpeciesByQuality": [{ "species": "Magikarp", "quality": "Epic", "count": 1 }], "catchEachFromSlotMachine": { "machines": [["Ivysaur", "Charmeleon", "Wartortle"]] } } },
   { "challengeName": "Extra Challenge A 3", "areaId": "Fighting Dojo", "unlocks": ["Big Fishing Spot", "Casino - Special Spot"], "gift": { "item": "Fighting Stone", "count": 3 }, "requirements": { "catchSpeciesByQuality": [{ "species": "Hitmonchan", "quality": "Rare", "count": 1 }, { "species": "Hitmonlee", "quality": "Rare", "count": 1 }, { "species": "Eevee", "quality": "Rare", "count": 1 }] } },
@@ -1629,8 +1629,8 @@ export const unlocks = [
   { "challengeName": "Extra Challenge A 8", "areaId": "Seafoam Islands", "unlocks": ["Victory Road"], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "defeatSpecific": { "name": "Articuno", "count": 5 } } },
   { "challengeName": "Extra Challenge A 9", "areaId": "Victory Road", "unlocks": ["Cerulean Cave"], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "defeatSpecific": { "name": "Moltres", "count": 5 } } },
   { "challengeName": "Extra Challenge A 10", "areaId": "Cerulean Cave", "unlocks": ["Kanto Pokemon League", "Key for Indigo Summit"], "gift": { "item": "Masterball", "count": 2 }, "requirements": { "defeatSpecific": { "name": "Mewtwo", "count": 5 } } },
-  { "challengeName": "Extra Challenge B 1", "areaId": "Extra Challenge B 1", "unlocks": ["Key for Indigo Summit"], "requirements": { "catchSpeciesUniqueCount": 150 } },
-  { "challengeName": "Key for Indigo Summit", "areaId": "Key for Indigo Summit", "unlocks": ["Indigo Summit"], "requirements": { "completeAnyOfChallenges": ["Extra Challenge A 10", "Extra Challenge B 1"] } }
+  { "challengeName": "Extra Challenge B", "areaId": "Extra Challenge B", "unlocks": ["Key for Indigo Summit"], "requirements": { "catchSpeciesUniqueCount": 150 } },
+  { "challengeName": "Key for Indigo Summit", "areaId": "Key for Indigo Summit", "unlocks": ["Indigo Summit"], "requirements": { "completeChallenges": ["Extra Challenge A 10", "Extra Challenge B"] } }
 ];
 
 export { routes };
