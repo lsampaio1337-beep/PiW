@@ -1009,7 +1009,8 @@ class BattleSystem {
 
             // Check if Roaming challenge is active for the 1% beast spawn
             if (this.state.stats.activeChallenges && this.state.stats.activeChallenges.includes("Extra Challenge (Roaming)")) {
-                if (Math.random() < 0.01) {
+                const randomVal = typeof crypto !== 'undefined' ? (crypto.getRandomValues(new Uint32Array(1))[0] / (0xFFFFFFFF + 1)) : Math.random();
+                if (randomVal < 0.01) {
                     isRoamingEncounter = true;
                 }
             }
