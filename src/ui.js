@@ -237,7 +237,8 @@ window.completeChallenge = function(targetAreaId) {
         if (unlock.requirements.defeatMultipleSpecific) {
              if (state.stats.challengeSpecificDefeats) {
                  for (let ds of unlock.requirements.defeatMultipleSpecific) {
-                     delete state.stats.challengeSpecificDefeats[ds.name];
+                     let key = ds.name || ds.pokemonId;
+                     if (key && key !== '__proto__' && key !== 'constructor' && key !== 'prototype') delete state.stats.challengeSpecificDefeats[key];
                  }
              }
         }
@@ -323,7 +324,7 @@ window.cheatProgressChallenge = function(targetAreaId) {
         setTimeout(() => {
             const modal = document.getElementById('window-challenges');
             if (modal) {
-                const completeBtns = Array.from(modal.querySelectorAll('button')).filter(btn => btn.innerText.includes('Complete'));
+                const completeBtns = Array.from(modal.querySelectorAll('button')).filter(btn => (btn.innerText && btn.innerText.includes('Complete')) || (btn.textContent && btn.textContent.includes('Complete')) || (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes('window.completeChallenge')));
                 if (completeBtns.length > 0) {
                     const specificBtn = completeBtns.find(btn => btn.getAttribute('onclick') && btn.getAttribute('onclick').includes('150_challenge'));
                     if (specificBtn) specificBtn.click();
@@ -435,23 +436,7 @@ window.cheatProgressChallenge = function(targetAreaId) {
                  // Do not auto-increment badges, the gift claim will do it
             }
         }
-        if (req.defeatCountRoute) {
-            state.stats.challengeRouteDefeats = req.defeatCountRoute.count;
-        }
-        if (req.defeatSpecific) {
-            if (req.defeatSpecific.name === '__proto__' || req.defeatSpecific.name === 'constructor' || req.defeatSpecific.name === 'prototype') return;
-            if (!state.stats.challengeSpecificDefeats) state.stats.challengeSpecificDefeats = {};
-            state.stats.challengeSpecificDefeats[req.defeatSpecific.name] = req.defeatSpecific.count;
-        }
 
-        if (req.defeatMultipleSpecific) {
-            if (!state.stats.challengeSpecificDefeats) state.stats.challengeSpecificDefeats = {};
-            for (let ds of req.defeatMultipleSpecific) {
-                let key = ds.name || ds.pokemonId;
-                if (key === '__proto__' || key === 'constructor' || key === 'prototype') continue;
-                state.stats.challengeSpecificDefeats[key] = Math.max(state.stats.challengeSpecificDefeats[key] || 0, ds.count);
-            }
-        }
         if (req.defeatEliteFourAndChampion) {
             if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};
             state.stats.defeatedBosses["Pokemon League Lorelei"] = true;
@@ -502,7 +487,7 @@ window.cheatProgressChallenge = function(targetAreaId) {
     setTimeout(() => {
         const modal = document.getElementById('window-challenges');
         if (modal) {
-            const completeBtns = Array.from(modal.querySelectorAll('button')).filter(btn => btn.innerText.includes('Complete'));
+            const completeBtns = Array.from(modal.querySelectorAll('button')).filter(btn => (btn.innerText && btn.innerText.includes('Complete')) || (btn.textContent && btn.textContent.includes('Complete')) || (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes('window.completeChallenge')));
             if (completeBtns.length > 0) {
                 // Find the specific complete button for this area
                 const safeAreaId = targetAreaId.replace(/'/g, "\\'");
