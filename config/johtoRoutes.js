@@ -2695,7 +2695,8 @@ export const johtoUnlocks = [
     "challengeName": "Challenge 49",
     "areaId": "Red",
     "unlocks": [
-      "Travel to a new Region"
+      "Travel to a new Region",
+      "Keys to Temporal Sanctuary Challenge"
     ],
     "requirements": {
       "defeatRed": true
@@ -3036,7 +3037,8 @@ export const johtoUnlocks = [
       "completeChallenges": [
         "Johto Extra Challenge 5",
         "Extra Challenge (Roaming)",
-        "Kanto Extra Challenge 6"
+        "Kanto Extra Challenge 6",
+        "Challenge 49"
       ]
     }
   },
