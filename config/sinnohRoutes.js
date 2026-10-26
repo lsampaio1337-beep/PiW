@@ -285,79 +285,85 @@ export const sinnohRoutes = [
         "pokemonId": 267,
         "minLevel": 17,
         "maxLevel": 19,
-        "chance": 0.1
+        "chance": 0.09
       },
       {
         "pokemonId": 425,
         "minLevel": 17,
         "maxLevel": 19,
-        "chance": 0.15
+        "chance": 0.135
       },
       {
         "pokemonId": 399,
         "minLevel": 17,
         "maxLevel": 19,
-        "chance": 0.15
+        "chance": 0.135
       },
       {
         "pokemonId": 406,
         "minLevel": 17,
         "maxLevel": 19,
-        "chance": 0.1
+        "chance": 0.09
       },
       {
         "pokemonId": 418,
         "minLevel": 17,
         "maxLevel": 19,
-        "chance": 0.1
+        "chance": 0.09
       },
       {
         "pokemonId": 268,
         "minLevel": 17,
         "maxLevel": 19,
-        "chance": 0.05
+        "chance": 0.045
       },
       {
         "pokemonId": 269,
         "minLevel": 17,
         "maxLevel": 19,
-        "chance": 0.05
+        "chance": 0.045
       },
       {
         "pokemonId": 163,
         "minLevel": 17,
         "maxLevel": 19,
-        "chance": 0.05
+        "chance": 0.045
       },
       {
         "pokemonId": 401,
         "minLevel": 17,
         "maxLevel": 19,
-        "chance": 0.05
+        "chance": 0.045
       },
       {
         "pokemonId": 417,
         "minLevel": 17,
         "maxLevel": 19,
-        "chance": 0.05
+        "chance": 0.045
       },
       {
         "pokemonId": 422,
         "minLevel": 17,
         "maxLevel": 19,
-        "chance": 0.05
+        "chance": 0.045
       },
       {
         "pokemonId": 266,
         "minLevel": 17,
         "maxLevel": 19,
-        "chance": 0.05
+        "chance": 0.045
       },
       {
         "pokemonId": 265,
         "minLevel": 17,
         "maxLevel": 19,
-        "chance": 0.05
+        "chance": 0.045
+      },
+      {
+        "pokemonId": 339,
+        "minLevel": 10,
+        "maxLevel": 25,
+        "chance": 0.1
       }
     ]
   },
@@ -368,66 +374,102 @@ export const sinnohRoutes = [
         "pokemonId": 267,
         "minLevel": 19,
         "maxLevel": 21,
-        "chance": 0.2
+        "chance": 0.11
       },
       {
         "pokemonId": 406,
         "minLevel": 19,
         "maxLevel": 21,
-        "chance": 0.15
+        "chance": 0.083
       },
       {
         "pokemonId": 427,
         "minLevel": 19,
         "maxLevel": 21,
-        "chance": 0.15
+        "chance": 0.083
       },
       {
         "pokemonId": 268,
         "minLevel": 19,
         "maxLevel": 21,
-        "chance": 0.1
+        "chance": 0.055
       },
       {
         "pokemonId": 269,
         "minLevel": 19,
         "maxLevel": 21,
-        "chance": 0.1
+        "chance": 0.055
       },
       {
         "pokemonId": 92,
         "minLevel": 19,
         "maxLevel": 21,
-        "chance": 0.05
+        "chance": 0.028
       },
       {
         "pokemonId": 163,
         "minLevel": 19,
         "maxLevel": 21,
-        "chance": 0.05
+        "chance": 0.028
       },
       {
         "pokemonId": 200,
         "minLevel": 19,
         "maxLevel": 21,
-        "chance": 0.05
+        "chance": 0.028
       },
       {
         "pokemonId": 198,
         "minLevel": 19,
         "maxLevel": 21,
-        "chance": 0.05
+        "chance": 0.028
       },
       {
         "pokemonId": 265,
         "minLevel": 19,
         "maxLevel": 21,
-        "chance": 0.05
+        "chance": 0.028
       },
       {
         "pokemonId": 176,
         "minLevel": 19,
         "maxLevel": 21,
+        "chance": 0.028
+      },
+      {
+        "pokemonId": 412,
+        "minLevel": 10,
+        "maxLevel": 15,
+        "chance": 0.1
+      },
+      {
+        "pokemonId": 415,
+        "minLevel": 10,
+        "maxLevel": 15,
+        "chance": 0.1
+      },
+      {
+        "pokemonId": 420,
+        "minLevel": 10,
+        "maxLevel": 15,
+        "chance": 0.1
+      },
+      {
+        "pokemonId": 214,
+        "minLevel": 10,
+        "maxLevel": 15,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 190,
+        "minLevel": 10,
+        "maxLevel": 15,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 446,
+        "minLevel": 10,
+        "maxLevel": 15,
         "chance": 0.05
       }
     ]
@@ -780,54 +822,60 @@ export const sinnohRoutes = [
         "pokemonId": 333,
         "minLevel": 39,
         "maxLevel": 41,
-        "chance": 0.3
+        "chance": 0.285
       },
       {
         "pokemonId": 203,
         "minLevel": 39,
         "maxLevel": 41,
-        "chance": 0.15
+        "chance": 0.142
       },
       {
         "pokemonId": 75,
         "minLevel": 39,
         "maxLevel": 41,
-        "chance": 0.15
+        "chance": 0.142
       },
       {
         "pokemonId": 228,
         "minLevel": 39,
         "maxLevel": 41,
-        "chance": 0.1
+        "chance": 0.095
       },
       {
         "pokemonId": 402,
         "minLevel": 39,
         "maxLevel": 41,
-        "chance": 0.1
+        "chance": 0.095
       },
       {
         "pokemonId": 77,
         "minLevel": 39,
         "maxLevel": 41,
-        "chance": 0.05
+        "chance": 0.048
       },
       {
         "pokemonId": 111,
         "minLevel": 39,
         "maxLevel": 41,
-        "chance": 0.05
+        "chance": 0.048
       },
       {
         "pokemonId": 434,
         "minLevel": 39,
         "maxLevel": 41,
-        "chance": 0.05
+        "chance": 0.048
       },
       {
         "pokemonId": 185,
         "minLevel": 39,
         "maxLevel": 41,
+        "chance": 0.048
+      },
+      {
+        "pokemonId": 414,
+        "minLevel": 22,
+        "maxLevel": 28,
         "chance": 0.05
       }
     ]
@@ -839,30 +887,36 @@ export const sinnohRoutes = [
         "pokemonId": 418,
         "minLevel": 41,
         "maxLevel": 43,
-        "chance": 0.35
+        "chance": 0.315
       },
       {
         "pokemonId": 441,
         "minLevel": 41,
         "maxLevel": 43,
-        "chance": 0.25
+        "chance": 0.225
       },
       {
         "pokemonId": 419,
         "minLevel": 41,
         "maxLevel": 43,
-        "chance": 0.2
+        "chance": 0.18
       },
       {
         "pokemonId": 422,
         "minLevel": 41,
         "maxLevel": 43,
-        "chance": 0.1
+        "chance": 0.09
       },
       {
         "pokemonId": 278,
         "minLevel": 41,
         "maxLevel": 43,
+        "chance": 0.09
+      },
+      {
+        "pokemonId": 223,
+        "minLevel": 20,
+        "maxLevel": 25,
         "chance": 0.1
       }
     ]
@@ -1061,36 +1115,54 @@ export const sinnohRoutes = [
         "pokemonId": 441,
         "minLevel": 51,
         "maxLevel": 53,
-        "chance": 0.3
+        "chance": 0.18
       },
       {
         "pokemonId": 419,
         "minLevel": 51,
         "maxLevel": 53,
-        "chance": 0.25
+        "chance": 0.15
       },
       {
         "pokemonId": 423,
         "minLevel": 51,
         "maxLevel": 53,
-        "chance": 0.15
+        "chance": 0.09
       },
       {
         "pokemonId": 431,
         "minLevel": 51,
         "maxLevel": 53,
-        "chance": 0.1
+        "chance": 0.06
       },
       {
         "pokemonId": 122,
         "minLevel": 51,
         "maxLevel": 53,
-        "chance": 0.1
+        "chance": 0.06
       },
       {
         "pokemonId": 422,
         "minLevel": 51,
         "maxLevel": 53,
+        "chance": 0.06
+      },
+      {
+        "pokemonId": 129,
+        "minLevel": 10,
+        "maxLevel": 25,
+        "chance": 0.15
+      },
+      {
+        "pokemonId": 118,
+        "minLevel": 10,
+        "maxLevel": 25,
+        "chance": 0.15
+      },
+      {
+        "pokemonId": 456,
+        "minLevel": 15,
+        "maxLevel": 25,
         "chance": 0.1
       }
     ]
@@ -1964,37 +2036,43 @@ export const sinnohRoutes = [
         "pokemonId": 400,
         "minLevel": 70,
         "maxLevel": 85,
-        "chance": 0.3
+        "chance": 0.285
       },
       {
         "pokemonId": 358,
         "minLevel": 70,
         "maxLevel": 85,
-        "chance": 0.25
+        "chance": 0.237
       },
       {
         "pokemonId": 433,
         "minLevel": 70,
         "maxLevel": 85,
-        "chance": 0.15
+        "chance": 0.142
       },
       {
         "pokemonId": 356,
         "minLevel": 70,
         "maxLevel": 85,
-        "chance": 0.1
+        "chance": 0.095
       },
       {
         "pokemonId": 75,
         "minLevel": 70,
         "maxLevel": 85,
-        "chance": 0.1
+        "chance": 0.095
       },
       {
         "pokemonId": 164,
         "minLevel": 70,
         "maxLevel": 85,
-        "chance": 0.1
+        "chance": 0.095
+      },
+      {
+        "pokemonId": 143,
+        "minLevel": 40,
+        "maxLevel": 50,
+        "chance": 0.05
       }
     ]
   },
@@ -2518,7 +2596,6 @@ export const sinnohRoutes = [
   }
 ];
 
-
 export const sinnohUnlocks = [
   {
     "challengeName": "Challenge 1",
@@ -2919,8 +2996,7 @@ export const sinnohUnlocks = [
     "challengeName": "Challenge 27",
     "areaId": "Canalave Gym",
     "unlocks": [
-      "Route 216",
-      "Iron Island"
+      "Route 216"
     ],
     "requirements": {
       "earnBadge": {
@@ -3034,7 +3110,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    "challengeName": "Sinnoh Final Challenge",
+    "challengeName": "Challenge 36",
     "areaId": "Sinnoh Pokemon League",
     "unlocks": [
       "Deep Lake Verity",
@@ -3042,20 +3118,19 @@ export const sinnohUnlocks = [
       "Sendoff Spring",
       "Route 225",
       "Route 224",
-      "New Region to Travel"
+      "New Region to Travel",
+      "(Extra Challenges B C D E F)"
     ],
     "requirements": {
       "defeatSinnohChampion": true
     },
-    "gifts": [
-      {
-        "item": "Masterball",
-        "count": 2
-      }
-    ]
+    "gift": {
+      "item": "Masterball",
+      "count": 2
+    }
   },
   {
-    "challengeName": "Extra Challenge A-1",
+    "challengeName": "Extra Challenge A 1",
     "areaId": "Old Chateau",
     "unlocks": [
       "Wayward Cave"
@@ -3074,7 +3149,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge A-2",
+    "challengeName": "Extra Challenge A 2",
     "areaId": "Wayward Cave",
     "unlocks": [
       "Fuego Ironworks"
@@ -3093,7 +3168,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge A-3",
+    "challengeName": "Extra Challenge A 3",
     "areaId": "Fuego Ironworks",
     "unlocks": [
       "Trophy Garden"
@@ -3112,7 +3187,23 @@ export const sinnohUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge B-1",
+    "challengeName": "Extra Challenge A 4",
+    "areaId": "Trophy Garden",
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Porygon2",
+          "count": 1
+        }
+      ]
+    },
+    "gift": {
+      "item": "Masterball",
+      "count": 1
+    }
+  },
+  {
+    "challengeName": "Extra Challenge B 1",
     "areaId": "Iron Island",
     "unlocks": [
       "Lake Acuity"
@@ -3131,7 +3222,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge B-2",
+    "challengeName": "Extra Challenge B 2",
     "areaId": "Lake Acuity",
     "unlocks": [
       "Snowpoint Temple"
@@ -3150,7 +3241,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge B-3",
+    "challengeName": "Extra Challenge B 3",
     "areaId": "Snowpoint Temple",
     "unlocks": [
       "Guardian's Cavern"
@@ -3169,7 +3260,31 @@ export const sinnohUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge C-1",
+    "challengeName": "Extra Challenge B 4",
+    "areaId": "Guardian's Cavern",
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Uxie",
+          "count": 1
+        },
+        {
+          "species": "Mesprit",
+          "count": 1
+        },
+        {
+          "species": "Azelf",
+          "count": 1
+        }
+      ]
+    },
+    "gift": {
+      "item": "Masterball",
+      "count": 2
+    }
+  },
+  {
+    "challengeName": "Extra Challenge C 1",
     "areaId": "Deep Lake Verity",
     "unlocks": [
       "Deep Lake Valor"
@@ -3184,7 +3299,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge C-2",
+    "challengeName": "Extra Challenge C 2",
     "areaId": "Deep Lake Valor",
     "unlocks": [
       "Pastoria Bog"
@@ -3203,7 +3318,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge C-3",
+    "challengeName": "Extra Challenge C 3",
     "areaId": "Pastoria Bog",
     "unlocks": [
       "Canalave Sea"
@@ -3222,7 +3337,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge C-4",
+    "challengeName": "Extra Challenge C 4",
     "areaId": "Canalave Sea",
     "unlocks": [
       "Flower Paradise"
@@ -3241,7 +3356,31 @@ export const sinnohUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge D-1",
+    "challengeName": "Extra Challenge C 5",
+    "areaId": "Flower Paradise",
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Manaphy",
+          "count": 1
+        },
+        {
+          "species": "Phione",
+          "count": 1
+        },
+        {
+          "species": "Shaymin",
+          "count": 1
+        }
+      ]
+    },
+    "gift": {
+      "item": "Masterball",
+      "count": 1
+    }
+  },
+  {
+    "challengeName": "Extra Challenge D 1",
     "areaId": "Sendoff Spring",
     "unlocks": [
       "Turnback Cave"
@@ -3256,7 +3395,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge D-2",
+    "challengeName": "Extra Challenge D 2",
     "areaId": "Turnback Cave",
     "unlocks": [
       "Lunar Isles"
@@ -3275,7 +3414,27 @@ export const sinnohUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge E-1",
+    "challengeName": "Extra Challenge D 3",
+    "areaId": "Lunar Isles",
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Cresselia",
+          "count": 1
+        },
+        {
+          "species": "Darkrai",
+          "count": 1
+        }
+      ]
+    },
+    "gift": {
+      "item": "Masterball",
+      "count": 1
+    }
+  },
+  {
+    "challengeName": "Extra Challenge E 1",
     "areaId": "Route 225",
     "unlocks": [
       "Route 227"
@@ -3290,7 +3449,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge E-2",
+    "challengeName": "Extra Challenge E 2",
     "areaId": "Route 227",
     "unlocks": [
       "Stark Mountain"
@@ -3309,7 +3468,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge E-3",
+    "challengeName": "Extra Challenge E 3",
     "areaId": "Stark Mountain",
     "unlocks": [
       "Continental Depths"
@@ -3328,7 +3487,27 @@ export const sinnohUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge F-1",
+    "challengeName": "Extra Challenge E 4",
+    "areaId": "Continental Depths",
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Heatran",
+          "count": 1
+        },
+        {
+          "species": "Regigigas",
+          "count": 1
+        }
+      ]
+    },
+    "gift": {
+      "item": "Masterball",
+      "count": 1
+    }
+  },
+  {
+    "challengeName": "Extra Challenge F 1",
     "areaId": "Route 224",
     "unlocks": [
       "Route 228"
@@ -3343,7 +3522,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge F-2",
+    "challengeName": "Extra Challenge F 2",
     "areaId": "Route 228",
     "unlocks": [
       "Spear Pillar"
@@ -3362,7 +3541,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge F-3",
+    "challengeName": "Extra Challenge F 3",
     "areaId": "Spear Pillar",
     "unlocks": [
       "Hall of Origin"
@@ -3378,6 +3557,34 @@ export const sinnohUnlocks = [
     "gift": {
       "item": "Masterball",
       "count": 1
+    }
+  },
+  {
+    "challengeName": "Extra Challenge F 4",
+    "areaId": "Hall of Origin",
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Arceus",
+          "count": 1
+        },
+        {
+          "species": "Dialga",
+          "count": 1
+        },
+        {
+          "species": "Palkia",
+          "count": 1
+        },
+        {
+          "species": "Giratina",
+          "count": 1
+        }
+      ]
+    },
+    "gift": {
+      "item": "Masterball",
+      "count": 3
     }
   }
 ];
