@@ -2996,8 +2996,7 @@ export const sinnohUnlocks = [
     "challengeName": "Challenge 27",
     "areaId": "Canalave Gym",
     "unlocks": [
-      "Route 216",
-      "Iron Island"
+      "Route 216"
     ],
     "requirements": {
       "earnBadge": {
@@ -3119,17 +3118,16 @@ export const sinnohUnlocks = [
       "Sendoff Spring",
       "Route 225",
       "Route 224",
-      "New Region to Travel"
+      "New Region to Travel",
+      "(Extra Challenges B C D E F)"
     ],
     "requirements": {
       "defeatSinnohChampion": true
     },
-    "gifts": [
-      {
-        "item": "Masterball",
-        "count": 2
-      }
-    ]
+    "gift": {
+      "item": "Masterball",
+      "count": 2
+    }
   },
   {
     "challengeName": "Extra Challenge A 1",
@@ -3189,6 +3187,22 @@ export const sinnohUnlocks = [
     }
   },
   {
+    "challengeName": "Extra Challenge A 4",
+    "areaId": "Trophy Garden",
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Porygon2",
+          "count": 1
+        }
+      ]
+    },
+    "gift": {
+      "item": "Masterball",
+      "count": 1
+    }
+  },
+  {
     "challengeName": "Extra Challenge B 1",
     "areaId": "Iron Island",
     "unlocks": [
@@ -3243,6 +3257,30 @@ export const sinnohUnlocks = [
     "gift": {
       "item": "Ice Stone",
       "count": 1
+    }
+  },
+  {
+    "challengeName": "Extra Challenge B 4",
+    "areaId": "Guardian's Cavern",
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Uxie",
+          "count": 1
+        },
+        {
+          "species": "Mesprit",
+          "count": 1
+        },
+        {
+          "species": "Azelf",
+          "count": 1
+        }
+      ]
+    },
+    "gift": {
+      "item": "Masterball",
+      "count": 2
     }
   },
   {
@@ -3318,6 +3356,30 @@ export const sinnohUnlocks = [
     }
   },
   {
+    "challengeName": "Extra Challenge C 5",
+    "areaId": "Flower Paradise",
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Manaphy",
+          "count": 1
+        },
+        {
+          "species": "Phione",
+          "count": 1
+        },
+        {
+          "species": "Shaymin",
+          "count": 1
+        }
+      ]
+    },
+    "gift": {
+      "item": "Masterball",
+      "count": 1
+    }
+  },
+  {
     "challengeName": "Extra Challenge D 1",
     "areaId": "Sendoff Spring",
     "unlocks": [
@@ -3349,6 +3411,26 @@ export const sinnohUnlocks = [
     "gift": {
       "item": "Ghost Stone",
       "count": 2
+    }
+  },
+  {
+    "challengeName": "Extra Challenge D 3",
+    "areaId": "Lunar Isles",
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Cresselia",
+          "count": 1
+        },
+        {
+          "species": "Darkrai",
+          "count": 1
+        }
+      ]
+    },
+    "gift": {
+      "item": "Masterball",
+      "count": 1
     }
   },
   {
@@ -3405,6 +3487,26 @@ export const sinnohUnlocks = [
     }
   },
   {
+    "challengeName": "Extra Challenge E 4",
+    "areaId": "Continental Depths",
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Heatran",
+          "count": 1
+        },
+        {
+          "species": "Regigigas",
+          "count": 1
+        }
+      ]
+    },
+    "gift": {
+      "item": "Masterball",
+      "count": 1
+    }
+  },
+  {
     "challengeName": "Extra Challenge F 1",
     "areaId": "Route 224",
     "unlocks": [
@@ -3455,6 +3557,34 @@ export const sinnohUnlocks = [
     "gift": {
       "item": "Masterball",
       "count": 1
+    }
+  },
+  {
+    "challengeName": "Extra Challenge F 4",
+    "areaId": "Hall of Origin",
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Arceus",
+          "count": 1
+        },
+        {
+          "species": "Dialga",
+          "count": 1
+        },
+        {
+          "species": "Palkia",
+          "count": 1
+        },
+        {
+          "species": "Giratina",
+          "count": 1
+        }
+      ]
+    },
+    "gift": {
+      "item": "Masterball",
+      "count": 3
     }
   }
 ];
