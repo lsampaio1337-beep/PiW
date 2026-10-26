@@ -282,7 +282,7 @@ class BattleSystem {
             if (!move || move.power === 0) continue;
 
             // Memory: Filter passive explosive moves out of standard active move selection
-            if (move.name === 'Explosion' || move.name === 'Self-Destruct' || move.name === 'Self Destruct') {
+            if (move.name === 'Explosion' || move.name === 'Self-Destruct' || move.name === 'Self Destruct' || move.name === 'Selfdestruct') {
                 continue;
             }
 
@@ -1231,10 +1231,26 @@ class BattleSystem {
             if (defender.currentHp <= 0) {
                 // Passive explosive damage logic
                 let explosiveMove = null;
-                if (defender.moves) {
+                if (defender.moves && defender.moves.length > 0) {
                     explosiveMove = defender.moves.find(m => m.name === 'Explosion');
                     if (!explosiveMove) {
-                        explosiveMove = defender.moves.find(m => m.name === 'Self-Destruct' || m.name === 'Self Destruct');
+                        explosiveMove = defender.moves.find(m => m.name === 'Self-Destruct' || m.name === 'Self Destruct' || m.name === 'Selfdestruct');
+                    }
+                } else {
+                    // If no moves populated, safely fetch from base learnset as fallback
+                    const dBase = this.getPokemonBase(defender.id);
+                    if (dBase && dBase.learnset) {
+                        const hasExplosion = dBase.learnset.some(ls => ls.move === 'Explosion' && defender.level >= ls.level);
+                        const hasSelfDestruct = dBase.learnset.some(ls => (ls.move === 'Self-Destruct' || ls.move === 'Self Destruct' || ls.move === 'Selfdestruct') && defender.level >= ls.level);
+
+                        if (hasExplosion && this.state.config.moves['Explosion']) {
+                            explosiveMove = { ...this.state.config.moves['Explosion'], name: 'Explosion' };
+                        } else if (hasSelfDestruct) {
+                            const sdName = dBase.learnset.find(ls => ls.move === 'Self-Destruct' || ls.move === 'Self Destruct' || ls.move === 'Selfdestruct').move;
+                            if (this.state.config.moves[sdName]) {
+                                explosiveMove = { ...this.state.config.moves[sdName], name: sdName };
+                            }
+                        }
                     }
                 }
 
@@ -1264,6 +1280,11 @@ class BattleSystem {
                 } else {
                     if (!this.isFainting) {
                         this.handleFaint();
+                    }
+
+                    // If wild pokemon died from leader's explosion
+                    if (attacker === this.activeEncounter && this.activeEncounter.currentHp <= 0) {
+                        this.handleEnemyDefeat();
                     }
                 }
             } else {
@@ -2325,10 +2346,25 @@ class BattleSystem {
 
                 if (defender.currentHp <= 0) {
                     let explosiveMove = null;
-                    if (defender.moves) {
+                    if (defender.moves && defender.moves.length > 0) {
                         explosiveMove = defender.moves.find(m => m.name === 'Explosion');
                         if (!explosiveMove) {
-                            explosiveMove = defender.moves.find(m => m.name === 'Self-Destruct' || m.name === 'Self Destruct');
+                            explosiveMove = defender.moves.find(m => m.name === 'Self-Destruct' || m.name === 'Self Destruct' || m.name === 'Selfdestruct');
+                        }
+                    } else {
+                        const dBase = this.getPokemonBase(defender.id);
+                        if (dBase && dBase.learnset) {
+                            const hasExplosion = dBase.learnset.some(ls => ls.move === 'Explosion' && defender.level >= ls.level);
+                            const hasSelfDestruct = dBase.learnset.some(ls => (ls.move === 'Self-Destruct' || ls.move === 'Self Destruct' || ls.move === 'Selfdestruct') && defender.level >= ls.level);
+
+                            if (hasExplosion && this.state.config.moves['Explosion']) {
+                                explosiveMove = { ...this.state.config.moves['Explosion'], name: 'Explosion' };
+                            } else if (hasSelfDestruct) {
+                                const sdName = dBase.learnset.find(ls => ls.move === 'Self-Destruct' || ls.move === 'Self Destruct' || ls.move === 'Selfdestruct').move;
+                                if (this.state.config.moves[sdName]) {
+                                    explosiveMove = { ...this.state.config.moves[sdName], name: sdName };
+                                }
+                            }
                         }
                     }
 
@@ -2341,6 +2377,8 @@ class BattleSystem {
 
                         attacker.currentHp -= explosiveHit.damage;
                     }
+
+                    // Note: Since we are in executeSimulatedTurn, caller checks attacker.currentHp (leader or encounter) and breaks out if <= 0
                 }
 
                 return false; // Not a potion, just an attack
