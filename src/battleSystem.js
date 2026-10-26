@@ -1900,6 +1900,8 @@ class BattleSystem {
                         this.state.stats.defeatedBosses["Sinnoh Champion"] = true;
                     } else if (gym.name === "Unova Pokemon League") {
                         this.state.stats.defeatedBosses["Unova Champion"] = true;
+                    } else if (gym.name === "Alola Pokemon League") {
+                        this.state.stats.defeatedBosses["Alola Champion"] = true;
                     }
                 }
                 if (gym.name === "Red") {

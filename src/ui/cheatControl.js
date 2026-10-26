@@ -304,6 +304,13 @@ export function cheatAction(action) {
             });
         }
 
+        // Unlock from alolaMapCoordinates
+        if (state.config.alolaMapCoordinates) {
+            Object.values(state.config.alolaMapCoordinates).forEach(coord => {
+                if (coord.name) unlockArea(coord.name);
+            });
+        }
+
         // Ensure Casino spots and machines are unlocked
         unlockArea('Casino');
 

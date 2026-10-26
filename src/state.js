@@ -143,10 +143,12 @@ export function checkFinalChallengeCompleted(regionName = 'Kanto') {
         routes = state.config.sinnohRoutes;
     } else if (regionName === 'Unova' && state.config && state.config.unovaRoutes) {
         routes = state.config.unovaRoutes;
+    } else if (regionName === 'Alola' && state.config && state.config.alolaRoutes) {
+        routes = state.config.alolaRoutes;
     }
 
-    let finalChallenge = routes.find(r => r.challengeName === "Challenge 36" || r.challengeName === "Final Challenge" || r.challengeName === "Johto Final Challenge" || r.challengeName === "Hoenn Final Challenge" || r.challengeName === "Sinnoh Final Challenge" || r.challengeName === "Unova Final Challenge");
-    let finalChallengeId = finalChallenge ? finalChallenge.areaId : (regionName === 'Kanto' ? 'Kanto Pokemon League' : (regionName === 'Johto' ? 'Mount Silver' : (regionName === 'Hoenn' ? 'Battle Frontier' : (regionName === 'Sinnoh' ? 'Spear Pillar' : (regionName === 'Unova' ? 'Giant Chasm' : null)))));
+    let finalChallenge = routes.find(r => r.challengeName === "Challenge 36" || r.challengeName === "Final Challenge" || r.challengeName === "Johto Final Challenge" || r.challengeName === "Hoenn Final Challenge" || r.challengeName === "Sinnoh Final Challenge" || r.challengeName === "Unova Final Challenge" || r.challengeName === "Alola Final Challenge");
+    let finalChallengeId = finalChallenge ? finalChallenge.areaId : (regionName === 'Kanto' ? 'Kanto Pokemon League' : (regionName === 'Johto' ? 'Mount Silver' : (regionName === 'Hoenn' ? 'Battle Frontier' : (regionName === 'Sinnoh' ? 'Spear Pillar' : (regionName === 'Unova' ? 'Giant Chasm' : (regionName === 'Alola' ? 'Champion Hau' : null))))));
 
     if (!finalChallengeId) return false;
 
@@ -174,6 +176,9 @@ export function swapRegion(newRegionName) {
         } else if (newRegionName === 'Hoenn') {
             state.regions[newRegionName].currentRoute = 'Route 101';
             state.regions[newRegionName].stats.activeChallenges = ['Route 101'];
+        } else if (newRegionName === 'Alola') {
+            state.regions[newRegionName].currentRoute = 'Route 1 East';
+            state.regions[newRegionName].stats.activeChallenges = ['Route 1 East'];
         }
     }
 
@@ -199,6 +204,9 @@ window.getCurrentRoutes = function() {
     if (state.currentRegionName === 'Unova' && state.config.unovaRoutes) {
         return state.config.unovaRoutes;
     }
+    if (state.currentRegionName === 'Alola' && state.config.alolaRoutes) {
+        return state.config.alolaRoutes;
+    }
     return state.config.routes || [];
 };
 
@@ -215,6 +223,9 @@ window.getCurrentUnlocks = function() {
     }
     if (state.currentRegionName === 'Unova' && state.config.unovaUnlocks) {
         return state.config.unovaUnlocks;
+    }
+    if (state.currentRegionName === 'Alola' && state.config.alolaUnlocks) {
+        return state.config.alolaUnlocks;
     }
     return state.config.unlocks || [];
 };

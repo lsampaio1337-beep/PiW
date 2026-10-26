@@ -402,6 +402,14 @@ function generateMarkersForRegion(region, unlockedAreas) {
 
             html += generateMarkerHtml(locationId, locationName, coords, true, hasNewNotification, showCheckmark);
         }
+    } else if (region === 'Alola') {
+        for (const [locationId, locationData] of Object.entries(state.config.alolaMapCoordinates || {})) {
+            const locationName = locationData.name;
+            const coords = locationData;
+            let hasNewNotification = false;
+            let showCheckmark = false;
+            html += generateMarkerHtml(locationId, locationName, coords, true, hasNewNotification, showCheckmark);
+        }
     } else {
         // Fallback for new regions
         let coords = { x: 50, y: 50 };

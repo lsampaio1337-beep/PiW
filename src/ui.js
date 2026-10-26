@@ -448,6 +448,10 @@ window.cheatProgressChallenge = function(targetAreaId) {
             if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};
             state.stats.defeatedBosses["Unova Champion"] = true;
         }
+        if (req.defeatAlolaChampion) {
+            if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};
+            state.stats.defeatedBosses["Alola Champion"] = true;
+        }
         if (req.defeatRed) {
             if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};
             state.stats.defeatedBosses["Red"] = true;
@@ -1301,7 +1305,7 @@ export function updateUI() {
 }
 
 async function loadConfigs() {
-    const [pokemonData, routes, gyms, balance, moves, types, mapCoordinates, gymAssets] = await Promise.all([
+    const [pokemonData, routes, gyms, balance, moves, types, mapCoordinates, gymAssets, alolaMapCoords, alolaRts, alolaUnl] = await Promise.all([
       fetch(new URL('../data/pokemon.json', import.meta.url)).then(res => res.json()),
       import('../config/routes.js').then(m => m.routes),
       import('../config/gyms.js').then(m => m.default),
@@ -1310,7 +1314,14 @@ async function loadConfigs() {
       import('../config/types.js').then(m => m.default),
       import('../config/mapCoordinates.js').then(m => m.default),
       import('../config/gymAssets.js').then(m => m.default),
+      import('../config/alolaMapCoordinates.js').then(m => m.default),
+      import('../config/alolaRoutes.js').then(m => m.alolaRoutes),
+      import('../config/alolaRoutes.js').then(m => m.alolaUnlocks)
     ]);
+
+    state.config.alolaMapCoordinates = alolaMapCoords;
+    state.config.alolaRoutes = alolaRts;
+    state.config.alolaUnlocks = alolaUnl;
 
     state.config.pokemonData = pokemonData;
     state.config.routes = routes;
