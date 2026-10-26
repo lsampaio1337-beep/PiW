@@ -323,7 +323,7 @@ window.cheatProgressChallenge = function(targetAreaId) {
                 if (!state.stats.caughtSpecies[r.species]) {
                     state.stats.caughtSpeciesCount = (state.stats.caughtSpeciesCount || 0) + 1;
                 }
-                state.stats.caughtSpecies[r.species] = (state.stats.caughtSpecies[r.species] || 0) + r.count;
+                state.stats.caughtSpecies[r.species] = Math.max(state.stats.caughtSpecies[r.species] || 0, r.count);
             });
         }
         if (req.catchSpeciesByQuality) {
