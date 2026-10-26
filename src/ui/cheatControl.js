@@ -252,6 +252,24 @@ export function cheatAction(action) {
                 if (!state.stats.completedChallengeIds.includes(unlock.areaId)) {
                     state.stats.completedChallengeIds.push(unlock.areaId);
                 }
+
+                // Fulfill catchSpeciesUniqueCount if present
+                if (unlock.requirements && unlock.requirements.catchSpeciesUniqueCount) {
+                    if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
+                    state.stats.caughtSpeciesCount = state.stats.caughtSpeciesCount || 0;
+                    let targetCount = unlock.requirements.catchSpeciesUniqueCount;
+                    if (state.stats.caughtSpeciesCount < targetCount) {
+                        for (let i = 0; i < state.config.pokemonData.length; i++) {
+                            if (state.stats.caughtSpeciesCount >= targetCount) break;
+                            let p = state.config.pokemonData[i];
+                            if (!state.stats.caughtSpecies[p.name]) {
+                                state.stats.caughtSpeciesCount++;
+                                state.stats.caughtSpecies[p.name] = 1;
+                            }
+                        }
+                    }
+                }
+
                 if (unlock.unlocks) {
                      unlock.unlocks.forEach(newRoute => unlockArea(newRoute));
                 }

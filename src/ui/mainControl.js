@@ -194,6 +194,43 @@ export function getChallengeData(unlock) {
         textParts.push(`Defeat Red${getStatusHtml(beatenRed)}`);
     }
 
+
+    if (req.catchSpeciesUniqueCount) {
+        let uniqueSpeciesCaught = state.stats.caughtSpeciesCount || 0;
+        let reqCount = req.catchSpeciesUniqueCount;
+        if (uniqueSpeciesCaught < reqCount) isMet = false;
+        textParts.push(`Catch ${reqCount} different Pokémon ${countDisplay(uniqueSpeciesCaught, reqCount)}${getStatusHtml(uniqueSpeciesCaught >= reqCount)}`);
+    }
+
+
+    if (req.completeAnyOfChallenges) {
+        let completedIds = state.stats.completedChallengeIds || [];
+        let anyMet = false;
+        for (let target of req.completeAnyOfChallenges) {
+            let match = null;
+            if (typeof window !== 'undefined' && window.getCurrentUnlocks) {
+                match = window.getCurrentUnlocks().find(u => u.challengeName === target || u.areaId === target);
+            }
+            if (!match && state.config) {
+                let allUnlocks = [];
+                if (state.config.unlocks) allUnlocks = allUnlocks.concat(state.config.unlocks);
+                if (state.config.johtoUnlocks) allUnlocks = allUnlocks.concat(state.config.johtoUnlocks);
+                if (state.config.hoennUnlocks) allUnlocks = allUnlocks.concat(state.config.hoennUnlocks);
+                if (state.config.sinnohUnlocks) allUnlocks = allUnlocks.concat(state.config.sinnohUnlocks);
+                if (state.config.unovaUnlocks) allUnlocks = allUnlocks.concat(state.config.unovaUnlocks);
+                match = allUnlocks.find(u => u && (u.challengeName === target || u.areaId === target));
+            }
+
+            let checkId = match ? match.areaId : target;
+            if (completedIds.includes(checkId)) {
+                anyMet = true;
+                break;
+            }
+        }
+        if (!anyMet) isMet = false;
+        textParts.push(`Complete any of: ${req.completeAnyOfChallenges.join(', ')}${getStatusHtml(anyMet)}`);
+    }
+
     if (req.completeChallenges) {
         let completedIds = state.stats.completedChallengeIds || [];
         for (let target of req.completeChallenges) {

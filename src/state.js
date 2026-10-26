@@ -145,7 +145,7 @@ export function checkFinalChallengeCompleted(regionName = 'Kanto') {
         routes = state.config.unovaRoutes;
     }
 
-    let finalChallenge = routes.find(r => r.challengeName === "Final Challenge");
+    let finalChallenge = routes.find(r => r.challengeName === "Challenge 36" || r.challengeName === "Final Challenge" || r.challengeName === "Johto Final Challenge" || r.challengeName === "Hoenn Final Challenge" || r.challengeName === "Sinnoh Final Challenge" || r.challengeName === "Unova Final Challenge");
     let finalChallengeId = finalChallenge ? finalChallenge.areaId : (regionName === 'Kanto' ? 'Kanto Pokemon League' : (regionName === 'Johto' ? 'Mount Silver' : (regionName === 'Hoenn' ? 'Battle Frontier' : (regionName === 'Sinnoh' ? 'Spear Pillar' : (regionName === 'Unova' ? 'Giant Chasm' : null)))));
 
     if (!finalChallengeId) return false;
