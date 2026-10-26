@@ -532,7 +532,7 @@ class BattleSystem {
                             window.playCombatAnimations(attackerSide, explosionMove.type, animDuration);
                         }
                         if (typeof window.showDamage === 'function') {
-                            window.showDamage(attackerSide, expHit.damage, expHit.isCritical, expEff);
+                            window.showDamage(attackerSide, expHit.damage, expHit.isCritical, explosionMove.name, explosionMove.type, expEff);
                         }
                     }
                 }
@@ -1310,7 +1310,7 @@ class BattleSystem {
                         window.playCombatAnimations(attackerSide, explosionMove.type, animDuration);
                     }
                     if (typeof window.showDamage === 'function') {
-                        window.showDamage(attackerSide, expHit.damage, expHit.isCritical, expEff);
+                        window.showDamage(attackerSide, expHit.damage, expHit.isCritical, explosionMove.name, explosionMove.type, expEff);
                     }
                     this.updateUI();
                 }
