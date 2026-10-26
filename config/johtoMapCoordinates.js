@@ -294,8 +294,8 @@ const johtoMapCoordinates = {
     "x": 75.04,
     "y": 83.1
   },
-  "pok_mon_mansion": {
-    "name": "Pokémon Mansion",
+  "pokemon_mansion": {
+    "name": "Pokemon Mansion",
     "x": 67.57,
     "y": 82.28
   },

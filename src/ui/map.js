@@ -239,7 +239,7 @@ function getUnlockedAreas() {
         unlockedAreas.add("Route 29");
     }
 
-    if (targetStats.completed150Challenge) {
+    if (targetStats.completed150Challenge || (targetStats.completedChallengeIds && targetStats.completedChallengeIds.includes("Extra Challenge B"))) {
         unlockedAreas.add("Temporal Sanctuary Spot");
     }
 

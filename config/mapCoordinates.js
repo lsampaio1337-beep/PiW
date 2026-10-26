@@ -84,8 +84,8 @@ const mapCoordinates = {
     "x": 80.32,
     "y": 55.19
   },
-  "diglett_s_cave": {
-    "name": "Diglett's Cave",
+  "digglett_cave": {
+    "name": "Digglett Cave",
     "x": 70.83,
     "y": 51.7
   },
@@ -114,8 +114,8 @@ const mapCoordinates = {
     "x": 77.98,
     "y": 35.14
   },
-  "pok_mon_tower": {
-    "name": "Pokémon Tower",
+  "pokemon_tower": {
+    "name": "Pokemon Tower",
     "x": 90.67,
     "y": 34.36
   },
@@ -179,8 +179,8 @@ const mapCoordinates = {
     "x": 38.6,
     "y": 93.01
   },
-  "pok_mon_mansion": {
-    "name": "Pokémon Mansion",
+  "pokemon_mansion": {
+    "name": "Pokemon Mansion",
     "x": 22.08,
     "y": 90.92
   },
@@ -254,8 +254,8 @@ const mapCoordinates = {
     "x": 61.58,
     "y": 25.05
   },
-  "mythical_and_legendaries": {
-    "name": "Mythical and Legendaries",
+  "indigo_summit": {
+    "name": "Indigo Summit",
     "x": 35.77,
     "y": 3.38
   }
