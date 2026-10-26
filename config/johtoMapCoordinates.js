@@ -343,6 +343,11 @@ const johtoMapCoordinates = {
     "name": "Battle Stadium",
     "x": 70.20,
     "y": 61.32
+  },
+  "diglett_cave": {
+    "name": "Diglett Cave",
+    "x": 86.87,
+    "y": 52.36
   }
 };
 export default johtoMapCoordinates;
