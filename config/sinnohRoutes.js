@@ -3055,7 +3055,7 @@ export const sinnohUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge A 1",
+    "challengeName": "Extra Challenge A-1",
     "areaId": "Old Chateau",
     "unlocks": [
       "Wayward Cave"
@@ -3074,7 +3074,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge A 2",
+    "challengeName": "Extra Challenge A-2",
     "areaId": "Wayward Cave",
     "unlocks": [
       "Fuego Ironworks"
@@ -3093,7 +3093,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge A 3",
+    "challengeName": "Extra Challenge A-3",
     "areaId": "Fuego Ironworks",
     "unlocks": [
       "Trophy Garden"
@@ -3112,7 +3112,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge B 1",
+    "challengeName": "Extra Challenge B-1",
     "areaId": "Iron Island",
     "unlocks": [
       "Lake Acuity"
@@ -3131,7 +3131,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge B 2",
+    "challengeName": "Extra Challenge B-2",
     "areaId": "Lake Acuity",
     "unlocks": [
       "Snowpoint Temple"
@@ -3150,7 +3150,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge B 3",
+    "challengeName": "Extra Challenge B-3",
     "areaId": "Snowpoint Temple",
     "unlocks": [
       "Guardian's Cavern"
@@ -3169,7 +3169,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge C 1",
+    "challengeName": "Extra Challenge C-1",
     "areaId": "Deep Lake Verity",
     "unlocks": [
       "Deep Lake Valor"
@@ -3184,7 +3184,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge C 2",
+    "challengeName": "Extra Challenge C-2",
     "areaId": "Deep Lake Valor",
     "unlocks": [
       "Pastoria Bog"
@@ -3203,7 +3203,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge C 3",
+    "challengeName": "Extra Challenge C-3",
     "areaId": "Pastoria Bog",
     "unlocks": [
       "Canalave Sea"
@@ -3222,7 +3222,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge C 4",
+    "challengeName": "Extra Challenge C-4",
     "areaId": "Canalave Sea",
     "unlocks": [
       "Flower Paradise"
@@ -3241,7 +3241,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge D 1",
+    "challengeName": "Extra Challenge D-1",
     "areaId": "Sendoff Spring",
     "unlocks": [
       "Turnback Cave"
@@ -3256,7 +3256,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge D 2",
+    "challengeName": "Extra Challenge D-2",
     "areaId": "Turnback Cave",
     "unlocks": [
       "Lunar Isles"
@@ -3275,7 +3275,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge E 1",
+    "challengeName": "Extra Challenge E-1",
     "areaId": "Route 225",
     "unlocks": [
       "Route 227"
@@ -3290,7 +3290,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge E 2",
+    "challengeName": "Extra Challenge E-2",
     "areaId": "Route 227",
     "unlocks": [
       "Stark Mountain"
@@ -3309,7 +3309,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge E 3",
+    "challengeName": "Extra Challenge E-3",
     "areaId": "Stark Mountain",
     "unlocks": [
       "Continental Depths"
@@ -3328,7 +3328,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge F 1",
+    "challengeName": "Extra Challenge F-1",
     "areaId": "Route 224",
     "unlocks": [
       "Route 228"
@@ -3343,7 +3343,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge F 2",
+    "challengeName": "Extra Challenge F-2",
     "areaId": "Route 228",
     "unlocks": [
       "Spear Pillar"
@@ -3362,7 +3362,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge F 3",
+    "challengeName": "Extra Challenge F-3",
     "areaId": "Spear Pillar",
     "unlocks": [
       "Hall of Origin"
