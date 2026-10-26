@@ -436,7 +436,6 @@ window.cheatProgressChallenge = function(targetAreaId) {
                  // Do not auto-increment badges, the gift claim will do it
             }
         }
-
         if (req.defeatEliteFourAndChampion) {
             if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};
             state.stats.defeatedBosses["Pokemon League Lorelei"] = true;
