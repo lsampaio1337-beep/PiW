@@ -281,6 +281,11 @@ class BattleSystem {
             // Very simplified: skip if missing data
             if (!move || move.power === 0) continue;
 
+            // Memory: Filter passive explosive moves out of standard active move selection
+            if (move.name === 'Explosion' || move.name === 'Self-Destruct' || move.name === 'Self Destruct') {
+                continue;
+            }
+
             const isPhysical = move.category === 'Physical';
             const atkStat = isPhysical ? attacker.currentStats.atk : attacker.currentStats.spa;
             const defStat = isPhysical ? defender.currentStats.def : defender.currentStats.spd;
@@ -1224,8 +1229,38 @@ class BattleSystem {
             this.updateUI();
 
             if (defender.currentHp <= 0) {
+                // Passive explosive damage logic
+                let explosiveMove = null;
+                if (defender.moves) {
+                    explosiveMove = defender.moves.find(m => m.name === 'Explosion');
+                    if (!explosiveMove) {
+                        explosiveMove = defender.moves.find(m => m.name === 'Self-Destruct' || m.name === 'Self Destruct');
+                    }
+                }
+
+                if (explosiveMove) {
+                    const isPhysical = explosiveMove.category === 'Physical';
+                    const atkStat = isPhysical ? defender.currentStats.atk : defender.currentStats.spa;
+                    const defStat = isPhysical ? attacker.currentStats.def : attacker.currentStats.spd;
+                    const eff = this.getTypeEffectiveness(explosiveMove.type, attacker.types);
+                    const explosiveHit = mathEngine.calculateDamage(defender.level, explosiveMove.power, atkStat, defStat, eff, defender.quality);
+
+                    attacker.currentHp -= explosiveHit.damage;
+
+                    const explodeTargetSide = attacker === leader ? 'player' : 'enemy';
+                    if (typeof window !== 'undefined' && typeof window.showDamage === 'function') {
+                        window.showDamage(explodeTargetSide, explosiveHit.damage, explosiveHit.isCritical, explosiveMove.name, explosiveMove.type, eff);
+                    }
+                    this.updateUI();
+                }
+
                 if (defender === this.activeEncounter) {
                     this.handleEnemyDefeat();
+
+                    // If leader died from explosion after winning
+                    if (attacker === leader && leader.currentHp <= 0 && !this.isFainting) {
+                        this.handleFaint();
+                    }
                 } else {
                     if (!this.isFainting) {
                         this.handleFaint();
@@ -2287,6 +2322,26 @@ class BattleSystem {
 
                 const hit = mathEngine.calculateDamage(attacker.level, move.power, atkStat, defStat, eff, attacker.quality);
                 defender.currentHp -= hit.damage;
+
+                if (defender.currentHp <= 0) {
+                    let explosiveMove = null;
+                    if (defender.moves) {
+                        explosiveMove = defender.moves.find(m => m.name === 'Explosion');
+                        if (!explosiveMove) {
+                            explosiveMove = defender.moves.find(m => m.name === 'Self-Destruct' || m.name === 'Self Destruct');
+                        }
+                    }
+
+                    if (explosiveMove) {
+                        const isPhys = explosiveMove.category === 'Physical';
+                        const aStat = isPhys ? defender.currentStats.atk : defender.currentStats.spa;
+                        const dStat = isPhys ? attacker.currentStats.def : attacker.currentStats.spd;
+                        const explosiveEff = this.getTypeEffectiveness(explosiveMove.type, attacker.types);
+                        const explosiveHit = mathEngine.calculateDamage(defender.level, explosiveMove.power, aStat, dStat, explosiveEff, defender.quality);
+
+                        attacker.currentHp -= explosiveHit.damage;
+                    }
+                }
 
                 return false; // Not a potion, just an attack
             };
