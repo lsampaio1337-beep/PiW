@@ -1680,7 +1680,7 @@ export const hoennUnlocks = [
     "challengeName": "Challenge 44",
     "areaId": "Hoenn Pokemon League",
     "unlocks": [
-      "Roaming Hoenn Skies", "Key to Nebula Fissure Challenge", "Mauville Game Corner", "Trick House"
+      "Roaming Hoenn Skies", "Mauville Game Corner", "Trick House"
     ],
     "requirements": {
       "defeatHoennChampion": true
@@ -1707,7 +1707,7 @@ export const hoennUnlocks = [
 
   { "challengeName": "Extra Challenge (Roaming)", "areaId": "Roaming Hoenn Skies", "unlocks": ["Key to Nebula Fissure Challenge"], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "defeatMultipleSpecific": [{ "name": "Latias", "count": 1 }, { "name": "Latios", "count": 1 }] } },
 
-  { "challengeName": "Key to Nebula Fissure Challenge", "areaId": "Key to Nebula Fissure Challenge", "unlocks": ["Nebula Fissure"], "requirements": { "completeChallenges": ["Challenge 44", "Extra Challenge A 5", "Extra Challenge B 6", "Extra Challenge (Roaming)"] } },
+  { "challengeName": "Key to Nebula Fissure Challenge", "areaId": "Key to Nebula Fissure Challenge", "unlocks": ["Nebula Fissure"], "requirements": { "completeChallenges": ["Extra Challenge A 5", "Extra Challenge B 6", "Extra Challenge (Roaming)"] } },
   { "challengeName": "Nebula Fissure Challenge", "areaId": "Nebula Fissure", "unlocks": [], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "defeatSpecific": { "name": "Deoxys", "count": 1 } } }
 ]
 ;
