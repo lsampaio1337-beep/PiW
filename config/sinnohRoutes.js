@@ -285,79 +285,85 @@ export const sinnohRoutes = [
         "pokemonId": 267,
         "minLevel": 17,
         "maxLevel": 19,
-        "chance": 0.1
+        "chance": 0.09
       },
       {
         "pokemonId": 425,
         "minLevel": 17,
         "maxLevel": 19,
-        "chance": 0.15
+        "chance": 0.135
       },
       {
         "pokemonId": 399,
         "minLevel": 17,
         "maxLevel": 19,
-        "chance": 0.15
+        "chance": 0.135
       },
       {
         "pokemonId": 406,
         "minLevel": 17,
         "maxLevel": 19,
-        "chance": 0.1
+        "chance": 0.09
       },
       {
         "pokemonId": 418,
         "minLevel": 17,
         "maxLevel": 19,
-        "chance": 0.1
+        "chance": 0.09
       },
       {
         "pokemonId": 268,
         "minLevel": 17,
         "maxLevel": 19,
-        "chance": 0.05
+        "chance": 0.045
       },
       {
         "pokemonId": 269,
         "minLevel": 17,
         "maxLevel": 19,
-        "chance": 0.05
+        "chance": 0.045
       },
       {
         "pokemonId": 163,
         "minLevel": 17,
         "maxLevel": 19,
-        "chance": 0.05
+        "chance": 0.045
       },
       {
         "pokemonId": 401,
         "minLevel": 17,
         "maxLevel": 19,
-        "chance": 0.05
+        "chance": 0.045
       },
       {
         "pokemonId": 417,
         "minLevel": 17,
         "maxLevel": 19,
-        "chance": 0.05
+        "chance": 0.045
       },
       {
         "pokemonId": 422,
         "minLevel": 17,
         "maxLevel": 19,
-        "chance": 0.05
+        "chance": 0.045
       },
       {
         "pokemonId": 266,
         "minLevel": 17,
         "maxLevel": 19,
-        "chance": 0.05
+        "chance": 0.045
       },
       {
         "pokemonId": 265,
         "minLevel": 17,
         "maxLevel": 19,
-        "chance": 0.05
+        "chance": 0.045
+      },
+      {
+        "pokemonId": 339,
+        "minLevel": 10,
+        "maxLevel": 25,
+        "chance": 0.1
       }
     ]
   },
