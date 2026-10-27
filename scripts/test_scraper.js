@@ -35,21 +35,39 @@ const statMap = {
   "Speed": "Speed"
 };
 
-const testTargets = [
-  { num: '0006', name: 'Charizard', extraName: 'Mega Charizard X', base: 'charizard' },
-  { num: '0026', name: 'Raichu', extraName: 'Alolan Raichu', base: 'raichu' },
-  { num: '0778', name: 'Mimikyu', extraName: 'Busted Form', base: 'mimikyu' }
-];
-
 async function run() {
   const browser = await chromium.launch();
   const page = await browser.newPage();
-  const outputData = {};
 
   if (!fs.existsSync('test_sprites')) fs.mkdirSync('test_sprites');
 
-  for (const target of testTargets) {
-    console.log(`Processing ${target.name} - ${target.extraName}...`);
+  console.log("Fetching list of all forms...");
+  await page.goto('https://pokemondb.net/pokedex/all');
+  const html = await page.content();
+  const $ = cheerio.load(html);
+
+  const targets = [];
+
+  $('#pokedex tbody tr').each((i, row) => {
+     const numStr = $(row).find('.infocard-cell-data').text().trim();
+     if(!numStr) return;
+
+     const name = $(row).find('.ent-name').text().trim();
+     const extraName = $(row).find('.text-muted').text().trim();
+     const base = $(row).find('.ent-name').attr('href').split('/').pop();
+
+     if (extraName && !extraName.includes('Male') && !extraName.includes('Female')) {
+        targets.push({ num: numStr, name, extraName, base });
+     }
+  });
+
+  console.log(`Found ${targets.length} target forms. Starting scraping...`);
+
+  const outputData = {};
+
+  targets.splice(3); for (let i = 0; i < targets.length; i++) {
+    const target = targets[i];
+    console.log(`[${i+1}/${targets.length}] Processing ${target.name} - ${target.extraName}...`);
     const idKey = `${target.num}_${target.name}_${target.extraName}`;
     outputData[idKey] = {
       id: target.num,
@@ -58,31 +76,30 @@ async function run() {
       types: [],
       baseStats: {},
       learnset: [],
-      evolvesFrom: target.name
+      evolvesFrom: target.name,
+      sprites: []
     };
 
     // --- DATA ---
     try {
       await page.goto(`https://pokemondb.net/pokedex/${target.base}`);
-      const html = await page.content();
-      const $ = cheerio.load(html);
+      const targetHtml = await page.content();
+      const $c = cheerio.load(targetHtml);
 
       let tabId = '';
-      $('.sv-tabs-tab-list').first().find('a').each((i, el) => {
-        if ($(el).text().trim() === target.extraName) {
-          tabId = $(el).attr('href');
-        }
+      $c('.sv-tabs-tab-list').first().find('a').each((j, el) => {
+        if ($c(el).text().trim() === target.extraName) tabId = $c(el).attr('href');
       });
-      if (!tabId) tabId = $('.sv-tabs-tab-list').first().find('a').first().attr('href');
+      if (!tabId) tabId = $c('.sv-tabs-tab-list').first().find('a').first().attr('href');
 
       if (tabId) {
-        const tabContent = $(tabId);
+        const tabContent = $c(tabId);
 
         const vitalsTable = tabContent.find('th:contains("HP")').closest('table');
         if (vitalsTable.length > 0) {
-          vitalsTable.find('tbody tr').each((i, row) => {
-            const rawStatName = $(row).find('th').text().trim();
-            const statValue = $(row).find('td').first().text().trim();
+          vitalsTable.find('tbody tr').each((j, row) => {
+            const rawStatName = $c(row).find('th').text().trim();
+            const statValue = $c(row).find('td').first().text().trim();
             if (rawStatName && statMap[rawStatName]) {
               outputData[idKey].baseStats[statMap[rawStatName]] = statValue;
             }
@@ -92,28 +109,29 @@ async function run() {
         }
 
         const typesTable = tabContent.find('th:contains("Type")').closest('table');
-        typesTable.find('th:contains("Type")').next('td').find('a').each((i, a) => {
-          outputData[idKey].types.push($(a).text().trim());
+        typesTable.find('th:contains("Type")').next('td').find('a').each((j, a) => {
+          outputData[idKey].types.push($c(a).text().trim());
         });
       }
 
       let moveTabId = '';
-      $('.sv-tabs-tab-list').last().find('a').each((i, el) => {
-        const text = $(el).text().trim();
-        if (text === target.extraName) moveTabId = $(el).attr('href');
-        if (target.extraName.includes('Alolan') && text.includes('Sun')) moveTabId = $(el).attr('href');
-        if (target.extraName.includes('Galarian') && text.includes('Sword')) moveTabId = $(el).attr('href');
-        if (target.extraName.includes('Hisuian') && text.includes('Legends')) moveTabId = $(el).attr('href');
+      $c('.sv-tabs-tab-list').last().find('a').each((j, el) => {
+        const text = $c(el).text().trim();
+        if (text === target.extraName) moveTabId = $c(el).attr('href');
+        if (target.extraName.includes('Alolan') && text.includes('Sun')) moveTabId = $c(el).attr('href');
+        if (target.extraName.includes('Galarian') && text.includes('Sword')) moveTabId = $c(el).attr('href');
+        if (target.extraName.includes('Hisuian') && text.includes('Legends')) moveTabId = $c(el).attr('href');
       });
 
-      if (!moveTabId) moveTabId = $('.sv-tabs-tab-list a[href^="#tab-moves"]').first().attr('href');
+      if (!moveTabId) moveTabId = $c('.sv-tabs-tab-list a[href^="#tab-moves"]').first().attr('href');
 
       if (moveTabId) {
-        const moveContent = $(moveTabId);
+        const moveContent = $c(moveTabId);
         const levelUpTable = moveContent.find('h3:contains("Moves learnt by level up")').nextAll('div.resp-scroll').first().find('table');
-        levelUpTable.find('tbody tr').each((i, row) => {
-          const level = $(row).find('td').eq(0).text().trim();
-          const moveName = $(row).find('td').eq(1).text().trim();
+
+        levelUpTable.find('tbody tr').each((j, row) => {
+          const level = $c(row).find('td').eq(0).text().trim();
+          const moveName = $c(row).find('td').eq(1).text().trim();
           if(level && moveName) outputData[idKey].learnset.push({ level, move: moveName });
         });
       }
@@ -121,91 +139,95 @@ async function run() {
       console.error(`Error scraping data for ${target.extraName}:`, e.message);
     }
 
-    await delay(500);
-
     // --- SPRITES ---
     try {
       await page.goto(`https://pokemondb.net/sprites/${target.base}`);
       const htmlSprites = await page.content();
       const $s = cheerio.load(htmlSprites);
 
-      $s('h2').each((i, h2) => {
+      const tables = [];
+      $s('h2').each((j, h2) => {
         const genText = $s(h2).text();
         if (genText.includes('Generation')) {
           let genNum = parseInt(genText.replace('Generation', '').trim(), 10);
-          if (![5, 6, 7, 8].includes(genNum)) return;
-
-          const table = $s(h2).nextAll('div.resp-scroll').first().find('table');
-
-          // Get headers to figure out which column represents which game
-          const gameColumns = [];
-          table.find('thead th').each((j, th) => {
-             const text = $s(th).text().trim().toLowerCase();
-             gameColumns.push({ index: j, text });
-          });
-
-          // Identify matching columns based on generation
-          const targetCols = [];
-          for (let k = 0; k < gameColumns.length; k++) {
-             const col = gameColumns[k];
-             if (genNum === 5 && col.text.includes('black 2') && col.text.includes('white 2')) targetCols.push(col.index);
-             else if (genNum === 6 && col.text.includes('omega ruby') && col.text.includes('alpha sapphire')) targetCols.push(col.index);
-             else if (genNum === 7 && col.text.includes('ultra sun') && col.text.includes('ultra moon')) targetCols.push(col.index);
-             else if (genNum === 8 && col.text.includes('home')) targetCols.push(col.index);
+          if ([5, 6, 7, 8].includes(genNum)) {
+             const table = $s(h2).nextAll('div.resp-scroll').first().find('table');
+             tables.push({ genNum, table });
           }
-
-          // Now scrape rows
-          table.find('tbody tr').each((rIdx, row) => {
-             // On PokemonDB sprite tables, the *rows* are typically 'Normal' or 'Shiny' (or 'Animated').
-             // The games are often the first column instead, Wait!
-             // Let's re-verify the layout. It's:
-             // <thead><tr><th></th><th>Normal</th><th>Shiny</th></tr></thead>
-             // <tbody><tr><td>X / Y</td><td><img></td><td><img></td></tr></tbody>
-             // Let's support both layouts by checking first column of body OR headers.
-
-             const firstCellText = $s(row).find('td:first-child').text().toLowerCase().replace(/\s+/g, ' ');
-             let isTargetRow = false;
-
-             if (genNum === 5 && firstCellText.includes('black 2 white 2')) isTargetRow = true;
-             else if (genNum === 6 && firstCellText.includes('omega ruby alpha sapphire')) isTargetRow = true;
-             else if (genNum === 7 && firstCellText.includes('ultra sun ultra moon')) isTargetRow = true;
-             else if (genNum === 8 && firstCellText.includes('home')) isTargetRow = true;
-
-             if (isTargetRow) {
-                // Look in all cells of this row
-                $s(row).find('td').slice(1).each((cIdx, cell) => {
-                   $s(cell).find('span.sprites-table-card').each(async (k, card) => {
-                      const img = $s(card).find('img');
-                      const src = img.attr('src') || img.attr('data-src');
-                      const form = $s(card).find('small').text().trim() || 'Normal';
-
-                      if (src && (form === target.extraName || form.includes(target.extraName.replace(target.name, '').trim()))) {
-                        const filename = `Gen${genNum}_${target.num}_${target.name}_${target.extraName}.png`;
-                        const filepath = path.join('test_sprites', filename);
-                        if (!fs.existsSync(filepath) && src.startsWith('http') && src.endsWith('.png')) {
-                          try {
-                            await downloadImage(src, filepath);
-                            console.log(`Downloaded ${filename}`);
-                          } catch (e) {
-                            console.error(`Failed to download ${src}`);
-                          }
-                        }
-                      }
-                   });
-                });
-             }
-          });
         }
       });
+
+      const downloadPromises = [];
+
+      for (const {genNum, table} of tables) {
+        const rows = table.find('tbody tr').toArray();
+        for (const row of rows) {
+          const firstCellHtml = $s(row).find('td:first-child').html() || '';
+          const cleanHtml = firstCellHtml.toLowerCase();
+          let isTargetRow = false;
+
+          if (genNum === 5 && cleanHtml.includes('black 2') && cleanHtml.includes('white 2')) isTargetRow = true;
+          else if (genNum === 6 && cleanHtml.includes('omega ruby') && cleanHtml.includes('alpha sapphire')) isTargetRow = true;
+          // Strictly matching Ultra Sun / Ultra Moon per user instructions.
+          else if (genNum === 7 && cleanHtml.includes('ultra sun') && cleanHtml.includes('ultra moon')) isTargetRow = true;
+          else if (genNum === 8 && cleanHtml.includes('home')) isTargetRow = true;
+
+          if (isTargetRow) {
+             const cards = $s(row).find('td').slice(1).find('span.sprites-table-card').toArray();
+             for (const card of cards) {
+                const img = $s(card).find('img');
+                const src = img.attr('src') || img.attr('data-src');
+                const form = $s(card).find('small').text().trim() || 'Normal';
+
+                const formNormalized = form.toLowerCase();
+                const targetExtraNormalized = target.extraName.toLowerCase();
+                const targetNameRegex = new RegExp(`\\b${target.name.toLowerCase()}\\b`, 'g');
+                const targetExtraNoBase = targetExtraNormalized.replace(targetNameRegex, '').replace(/\s+/g, ' ').trim();
+
+                let isMatch = false;
+                if (formNormalized === targetExtraNormalized) isMatch = true;
+                if (targetExtraNoBase && formNormalized.includes(targetExtraNoBase)) isMatch = true;
+                if (formNormalized.includes(targetExtraNormalized)) isMatch = true;
+
+                if (src && isMatch && src.startsWith('http')) {
+                  // The user specifically wanted only .png files and B2W2 are natively .gif.
+                  // Because we can't transcode without external libs, we will only download the ones that are actual PNGs.
+                  if (src.endsWith('.png')) {
+                     const safeExtraName = target.extraName.replace(/[/\\?%*:|"<>]/g, '');
+                     let suffix = src.includes('/shiny/') ? '_Shiny' : '';
+                     let filename = `Gen${genNum}_${target.num}_${target.name}_${safeExtraName}${suffix}.png`;
+                     const filepath = path.join('test_sprites', filename);
+
+                     // Add to JSON output map
+                     if (!outputData[idKey].sprites.includes(filename)) {
+                         outputData[idKey].sprites.push(filename);
+                     }
+
+                     if (!fs.existsSync(filepath)) {
+                       downloadPromises.push(
+                          downloadImage(src, filepath)
+                          .then(() => console.log(`Downloaded ${filename}`))
+                          .catch(e => console.error(`Failed to download ${src}: ${e.message}`))
+                       );
+                     }
+                  } else {
+                     console.log(`Skipped non-png sprite: ${src}`);
+                  }
+                }
+             }
+          }
+        }
+      }
+
+      await Promise.all(downloadPromises);
+
     } catch (e) {
       console.error(`Error scraping sprites for ${target.extraName}:`, e.message);
     }
-
-    await delay(500);
   }
 
   fs.writeFileSync('test_data.json', JSON.stringify(outputData, null, 2));
-  console.log('Saved test_data.json');
+  console.log('Saved test_data.json. Done!');
   await browser.close();
 }
 

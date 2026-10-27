@@ -76,7 +76,8 @@ async function run() {
       types: [],
       baseStats: {},
       learnset: [],
-      evolvesFrom: target.name
+      evolvesFrom: target.name,
+      sprites: []
     };
 
     // --- DATA ---
@@ -138,64 +139,91 @@ async function run() {
       console.error(`Error scraping data for ${target.extraName}:`, e.message);
     }
 
-    await delay(500);
-
     // --- SPRITES ---
     try {
       await page.goto(`https://pokemondb.net/sprites/${target.base}`);
       const htmlSprites = await page.content();
       const $s = cheerio.load(htmlSprites);
 
+      const tables = [];
       $s('h2').each((j, h2) => {
         const genText = $s(h2).text();
         if (genText.includes('Generation')) {
           let genNum = parseInt(genText.replace('Generation', '').trim(), 10);
-          if (![5, 6, 7, 8].includes(genNum)) return;
-
-          const table = $s(h2).nextAll('div.resp-scroll').first().find('table');
-
-          table.find('tbody tr').each((rIdx, row) => {
-             const firstCellText = $s(row).find('td:first-child').text().toLowerCase().replace(/\s+/g, ' ').trim();
-             let isTargetRow = false;
-
-             if (genNum === 5 && firstCellText.includes('black 2 white 2')) isTargetRow = true;
-             else if (genNum === 6 && firstCellText.includes('omega ruby alpha sapphire')) isTargetRow = true;
-             else if (genNum === 7 && firstCellText.includes('ultra sun ultra moon')) isTargetRow = true;
-             // Some Gen 7 might fall back to 'sun moon' if ultra sun doesn't explicitly exist
-             else if (genNum === 7 && firstCellText.includes('sun moon')) isTargetRow = true;
-             else if (genNum === 8 && firstCellText.includes('home')) isTargetRow = true;
-
-             if (isTargetRow) {
-                $s(row).find('td').slice(1).each((cIdx, cell) => {
-                   $s(cell).find('span.sprites-table-card').each(async (k, card) => {
-                      const img = $s(card).find('img');
-                      const src = img.attr('src') || img.attr('data-src');
-                      const form = $s(card).find('small').text().trim() || 'Normal';
-
-                      if (src && (form === target.extraName || form.includes(target.extraName.replace(target.name, '').trim()))) {
-                        const filename = `Gen${genNum}_${target.num}_${target.name}_${target.extraName}.png`;
-                        const filepath = path.join('sprites', filename);
-                        // We strictly want static .png images as requested, although gen 5 B2W2 are mostly animated gifs on DB,
-                        // The user said: "For png. Font: https://pokemondb.net/sprites" and "name the .png"
-                        if (!fs.existsSync(filepath) && src.startsWith('http')) {
-                          try {
-                            await downloadImage(src, filepath);
-                          } catch (e) {
-                            console.error(`Failed to download ${src}`);
-                          }
-                        }
-                      }
-                   });
-                });
-             }
-          });
+          if ([5, 6, 7, 8].includes(genNum)) {
+             const table = $s(h2).nextAll('div.resp-scroll').first().find('table');
+             tables.push({ genNum, table });
+          }
         }
       });
+
+      const downloadPromises = [];
+
+      for (const {genNum, table} of tables) {
+        const rows = table.find('tbody tr').toArray();
+        for (const row of rows) {
+          const firstCellHtml = $s(row).find('td:first-child').html() || '';
+          const cleanHtml = firstCellHtml.toLowerCase();
+          let isTargetRow = false;
+
+          if (genNum === 5 && cleanHtml.includes('black 2') && cleanHtml.includes('white 2')) isTargetRow = true;
+          else if (genNum === 6 && cleanHtml.includes('omega ruby') && cleanHtml.includes('alpha sapphire')) isTargetRow = true;
+          // Strictly matching Ultra Sun / Ultra Moon per user instructions.
+          else if (genNum === 7 && cleanHtml.includes('ultra sun') && cleanHtml.includes('ultra moon')) isTargetRow = true;
+          else if (genNum === 8 && cleanHtml.includes('home')) isTargetRow = true;
+
+          if (isTargetRow) {
+             const cards = $s(row).find('td').slice(1).find('span.sprites-table-card').toArray();
+             for (const card of cards) {
+                const img = $s(card).find('img');
+                const src = img.attr('src') || img.attr('data-src');
+                const form = $s(card).find('small').text().trim() || 'Normal';
+
+                const formNormalized = form.toLowerCase();
+                const targetExtraNormalized = target.extraName.toLowerCase();
+                const targetNameRegex = new RegExp(`\\b${target.name.toLowerCase()}\\b`, 'g');
+                const targetExtraNoBase = targetExtraNormalized.replace(targetNameRegex, '').replace(/\s+/g, ' ').trim();
+
+                let isMatch = false;
+                if (formNormalized === targetExtraNormalized) isMatch = true;
+                if (targetExtraNoBase && formNormalized.includes(targetExtraNoBase)) isMatch = true;
+                if (formNormalized.includes(targetExtraNormalized)) isMatch = true;
+
+                if (src && isMatch && src.startsWith('http')) {
+                  // The user specifically wanted only .png files and B2W2 are natively .gif.
+                  // Because we can't transcode without external libs, we will only download the ones that are actual PNGs.
+                  if (src.endsWith('.png')) {
+                     const safeExtraName = target.extraName.replace(/[/\\?%*:|"<>]/g, '');
+                     let suffix = src.includes('/shiny/') ? '_Shiny' : '';
+                     let filename = `Gen${genNum}_${target.num}_${target.name}_${safeExtraName}${suffix}.png`;
+                     const filepath = path.join('sprites', filename);
+
+                     // Add to JSON output map
+                     if (!outputData[idKey].sprites.includes(filename)) {
+                         outputData[idKey].sprites.push(filename);
+                     }
+
+                     if (!fs.existsSync(filepath)) {
+                       downloadPromises.push(
+                          downloadImage(src, filepath)
+                          .then(() => console.log(`Downloaded ${filename}`))
+                          .catch(e => console.error(`Failed to download ${src}: ${e.message}`))
+                       );
+                     }
+                  } else {
+                     console.log(`Skipped non-png sprite: ${src}`);
+                  }
+                }
+             }
+          }
+        }
+      }
+
+      await Promise.all(downloadPromises);
+
     } catch (e) {
       console.error(`Error scraping sprites for ${target.extraName}:`, e.message);
     }
-
-    await delay(500);
   }
 
   fs.writeFileSync('pokemon_data.json', JSON.stringify(outputData, null, 2));
