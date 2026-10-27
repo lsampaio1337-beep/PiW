@@ -178,6 +178,12 @@ export function getChallengeData(unlock) {
         if (!beaten) isMet = false;
         textParts.push(`Win Hoenn Pokémon League${getStatusHtml(beaten)}`);
     }
+    if (req.defeatPaldeaChampion) {
+        let beaten = state.stats.defeatedBosses && state.stats.defeatedBosses["Paldea Champion"];
+        if (!beaten) isMet = false;
+        textParts.push(`Win Paldea Pokémon League${getStatusHtml(beaten)}`);
+    }
+
     if (req.defeatSinnohChampion) {
         let beaten = state.stats.defeatedBosses && state.stats.defeatedBosses["Sinnoh Champion"];
         if (!beaten) isMet = false;

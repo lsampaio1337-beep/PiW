@@ -191,7 +191,8 @@
           "level": "32"
         }
       ]
-    }
+    },
+    "paldea_id": 1
   },
   {
     "key": "0003_Venusaur",
@@ -288,7 +289,8 @@
           "level": "32"
         }
       ]
-    }
+    },
+    "paldea_id": 2
   },
   {
     "key": "0003_Venusaur_Mega Venusaur",
@@ -328,7 +330,8 @@
           "level": "32"
         }
       ]
-    }
+    },
+    "paldea_id": 3
   },
   {
     "key": "0004_Charmander",
@@ -431,7 +434,8 @@
           "level": "36"
         }
       ]
-    }
+    },
+    "paldea_id": 4
   },
   {
     "key": "0005_Charmeleon",
@@ -534,7 +538,8 @@
           "level": "36"
         }
       ]
-    }
+    },
+    "paldea_id": 5
   },
   {
     "key": "0006_Charizard",
@@ -645,7 +650,8 @@
           "level": "36"
         }
       ]
-    }
+    },
+    "paldea_id": 6
   },
   {
     "key": "0006_Charizard_Mega Charizard X",
@@ -685,7 +691,8 @@
           "level": "36"
         }
       ]
-    }
+    },
+    "paldea_id": 7
   },
   {
     "key": "0006_Charizard_Mega Charizard Y",
@@ -725,7 +732,8 @@
           "level": "36"
         }
       ]
-    }
+    },
+    "paldea_id": 8
   },
   {
     "key": "0007_Squirtle",
@@ -814,7 +822,8 @@
           "level": "36"
         }
       ]
-    }
+    },
+    "paldea_id": 9
   },
   {
     "key": "0008_Wartortle",
@@ -903,7 +912,8 @@
           "level": "36"
         }
       ]
-    }
+    },
+    "paldea_id": 10
   },
   {
     "key": "0009_Blastoise",
@@ -992,7 +1002,8 @@
           "level": "36"
         }
       ]
-    }
+    },
+    "paldea_id": 11
   },
   {
     "key": "0009_Blastoise_Mega Blastoise",
@@ -1031,7 +1042,8 @@
           "level": "36"
         }
       ]
-    }
+    },
+    "paldea_id": 12
   },
   {
     "key": "0010_Caterpie",
@@ -1085,7 +1097,8 @@
           "level": "10"
         }
       ]
-    }
+    },
+    "paldea_id": 13
   },
   {
     "key": "0011_Metapod",
@@ -1132,7 +1145,8 @@
           "level": "10"
         }
       ]
-    }
+    },
+    "paldea_id": 14
   },
   {
     "key": "0012_Butterfree",
@@ -1222,7 +1236,8 @@
           "level": "10"
         }
       ]
-    }
+    },
+    "paldea_id": 15
   },
   {
     "key": "0013_Weedle",
@@ -1917,7 +1932,8 @@
           "level": "20"
         }
       ]
-    }
+    },
+    "paldea_id": 16
   },
   {
     "key": "0020_Raticate",
@@ -2028,7 +2044,8 @@
           "level": "20"
         }
       ]
-    }
+    },
+    "paldea_id": 17
   },
   {
     "key": "0020_Raticate_Alolan Raticate",
@@ -2062,7 +2079,8 @@
           "level": "20"
         }
       ]
-    }
+    },
+    "paldea_id": 18
   },
   {
     "key": "0021_Spearow",
@@ -2146,7 +2164,8 @@
           "level": "20"
         }
       ]
-    }
+    },
+    "paldea_id": 19
   },
   {
     "key": "0022_Fearow",
@@ -2819,7 +2838,8 @@
           "level": "22"
         }
       ]
-    }
+    },
+    "paldea_id": 20
   },
   {
     "key": "0028_Sandslash",
@@ -2852,7 +2872,8 @@
           "level": "22"
         }
       ]
-    }
+    },
+    "paldea_id": 21
   },
   {
     "key": "0028_Sandslash_Alolan Sandslash",
@@ -3560,7 +3581,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 22
   },
   {
     "key": "0036_Clefable",
@@ -3677,7 +3699,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 23
   },
   {
     "key": "0036_Clefable_Mega Clefable",
@@ -3717,7 +3740,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 24
   },
   {
     "key": "0037_Vulpix",
@@ -3750,7 +3774,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 25
   },
   {
     "key": "0037_Vulpix_Alolan Vulpix",
@@ -3783,7 +3808,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 26
   },
   {
     "key": "0038_Ninetales",
@@ -3816,7 +3842,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 27
   },
   {
     "key": "0038_Ninetales_Alolan Ninetales",
@@ -3850,7 +3877,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 28
   },
   {
     "key": "0039_Jigglypuff",
@@ -3968,7 +3996,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 29
   },
   {
     "key": "0040_Wigglytuff",
@@ -4086,7 +4115,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 30
   },
   {
     "key": "0041_Zubat",
@@ -4183,7 +4213,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 31
   },
   {
     "key": "0042_Golbat",
@@ -4280,7 +4311,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 32
   },
   {
     "key": "0043_Oddish",
@@ -4369,7 +4401,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 33
   },
   {
     "key": "0044_Gloom",
@@ -4458,7 +4491,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 34
   },
   {
     "key": "0045_Vileplume",
@@ -4547,7 +4581,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 35
   },
   {
     "key": "0046_Paras",
@@ -4617,7 +4652,8 @@
           "level": "24"
         }
       ]
-    }
+    },
+    "paldea_id": 36
   },
   {
     "key": "0047_Parasect",
@@ -5128,7 +5164,8 @@
           "level": "28"
         }
       ]
-    }
+    },
+    "paldea_id": 37
   },
   {
     "key": "0053_Persian",
@@ -5175,7 +5212,8 @@
           "level": "28"
         }
       ]
-    }
+    },
+    "paldea_id": 38
   },
   {
     "key": "0053_Persian_Alolan Persian",
@@ -5682,7 +5720,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 39
   },
   {
     "key": "0058_Growlithe_Hisuian Growlithe",
@@ -5716,7 +5755,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 40
   },
   {
     "key": "0059_Arcanine",
@@ -5757,7 +5797,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 41
   },
   {
     "key": "0059_Arcanine_Hisuian Arcanine",
@@ -5791,7 +5832,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 42
   },
   {
     "key": "0060_Poliwag",
@@ -6253,7 +6295,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 43
   },
   {
     "key": "0065_Alakazam_Mega Alakazam",
@@ -6292,7 +6335,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 44
   },
   {
     "key": "0066_Machop",
@@ -6395,7 +6439,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 45
   },
   {
     "key": "0067_Machoke",
@@ -6498,7 +6543,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 46
   },
   {
     "key": "0068_Machamp",
@@ -6608,7 +6654,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 47
   },
   {
     "key": "0069_Bellsprout",
@@ -6719,7 +6766,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 48
   },
   {
     "key": "0070_Weepinbell",
@@ -6830,7 +6878,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 49
   },
   {
     "key": "0071_Victreebel",
@@ -6988,7 +7037,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 50
   },
   {
     "key": "0072_Tentacool",
@@ -7100,7 +7150,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 51
   },
   {
     "key": "0073_Tentacruel",
@@ -7292,7 +7343,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 52
   },
   {
     "key": "0075_Graveler",
@@ -7332,7 +7384,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 53
   },
   {
     "key": "0075_Graveler_Alolan Graveler",
@@ -7956,7 +8009,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 54
   },
   {
     "key": "0081_Magnemite",
@@ -8767,7 +8821,8 @@
           "level": "38"
         }
       ]
-    }
+    },
+    "paldea_id": 55
   },
   {
     "key": "0089_Muk",
@@ -9105,7 +9160,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 56
   },
   {
     "key": "0093_Haunter",
@@ -9209,7 +9265,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 57
   },
   {
     "key": "0094_Gengar",
@@ -9313,7 +9370,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 58
   },
   {
     "key": "0094_Gengar_Mega Gengar",
@@ -9465,7 +9523,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 59
   },
   {
     "key": "0096_Drowzee",
@@ -9555,7 +9614,8 @@
           "level": "26"
         }
       ]
-    }
+    },
+    "paldea_id": 60
   },
   {
     "key": "0097_Hypno",
@@ -9645,7 +9705,8 @@
           "level": "26"
         }
       ]
-    }
+    },
+    "paldea_id": 61
   },
   {
     "key": "0098_Krabby",
@@ -9749,7 +9810,8 @@
           "level": "28"
         }
       ]
-    }
+    },
+    "paldea_id": 62
   },
   {
     "key": "0099_Kingler",
@@ -9860,7 +9922,8 @@
           "level": "28"
         }
       ]
-    }
+    },
+    "paldea_id": 63
   },
   {
     "key": "0100_Voltorb",
@@ -10603,7 +10666,8 @@
           "level": "20"
         }
       ]
-    }
+    },
+    "paldea_id": 64
   },
   {
     "key": "0107_Hitmonchan",
@@ -10740,7 +10804,8 @@
           "level": "20"
         }
       ]
-    }
+    },
+    "paldea_id": 65
   },
   {
     "key": "0108_Lickitung",
@@ -10816,7 +10881,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 66
   },
   {
     "key": "0109_Koffing",
@@ -12664,7 +12730,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 67
   },
   {
     "key": "0127_Pinsir_Mega Pinsir",
@@ -12777,7 +12844,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 68
   },
   {
     "key": "0128_Tauros_Combat Breed",
@@ -12997,7 +13065,8 @@
           "level": "20"
         }
       ]
-    }
+    },
+    "paldea_id": 69
   },
   {
     "key": "0130_Gyarados_Mega Gyarados",
@@ -13031,7 +13100,8 @@
           "level": "20"
         }
       ]
-    }
+    },
+    "paldea_id": 70
   },
   {
     "key": "0131_Lapras",
@@ -13113,7 +13183,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 71
   },
   {
     "key": "0132_Ditto",
@@ -13270,7 +13341,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 72
   },
   {
     "key": "0133_Eevee_Partner Eevee",
@@ -13345,7 +13417,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 73
   },
   {
     "key": "0134_Vaporeon",
@@ -13477,7 +13550,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 74
   },
   {
     "key": "0135_Jolteon",
@@ -13616,7 +13690,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 75
   },
   {
     "key": "0136_Flareon",
@@ -13755,7 +13830,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 76
   },
   {
     "key": "0137_Porygon",
@@ -13837,7 +13913,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 77
   },
   {
     "key": "0138_Omanyte",
@@ -13935,7 +14012,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 78
   },
   {
     "key": "0139_Omastar",
@@ -14138,7 +14216,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 79
   },
   {
     "key": "0141_Kabutops",
@@ -14257,7 +14336,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 80
   },
   {
     "key": "0142_Aerodactyl",
@@ -14385,7 +14465,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 81
   },
   {
     "key": "0143_Snorlax",
@@ -14524,7 +14605,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 82
   },
   {
     "key": "0144_Articuno",
@@ -14549,7 +14631,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 83
   },
   {
     "key": "0144_Articuno_Galarian Articuno",
@@ -14574,7 +14657,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 84
   },
   {
     "key": "0145_Zapdos",
@@ -14599,7 +14683,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 85
   },
   {
     "key": "0145_Zapdos_Galarian Zapdos",
@@ -14624,7 +14709,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 86
   },
   {
     "key": "0146_Moltres",
@@ -14649,7 +14735,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 87
   },
   {
     "key": "0146_Moltres_Galarian Moltres",
@@ -14880,7 +14967,8 @@
           "level": "55"
         }
       ]
-    }
+    },
+    "paldea_id": 88
   },
   {
     "key": "0149_Dragonite",
@@ -14991,7 +15079,8 @@
           "level": "55"
         }
       ]
-    }
+    },
+    "paldea_id": 89
   },
   {
     "key": "0149_Dragonite_Mega Dragonite",
@@ -15031,7 +15120,8 @@
           "level": "55"
         }
       ]
-    }
+    },
+    "paldea_id": 90
   },
   {
     "key": "0150_Mewtwo",
@@ -15112,7 +15202,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 91
   },
   {
     "key": "0150_Mewtwo_Mega Mewtwo X",
@@ -15392,7 +15483,8 @@
           "level": "32"
         }
       ]
-    }
+    },
+    "paldea_id": 92
   },
   {
     "key": "0154_Meganium",
@@ -15481,7 +15573,8 @@
           "level": "32"
         }
       ]
-    }
+    },
+    "paldea_id": 93
   },
   {
     "key": "0154_Meganium_Mega Meganium",
@@ -15652,7 +15745,8 @@
           "level": "36"
         }
       ]
-    }
+    },
+    "paldea_id": 94
   },
   {
     "key": "0156_Quilava",
@@ -15783,7 +15877,8 @@
           "level": "36"
         }
       ]
-    }
+    },
+    "paldea_id": 95
   },
   {
     "key": "0157_Typhlosion",
@@ -15921,7 +16016,8 @@
           "level": "36"
         }
       ]
-    }
+    },
+    "paldea_id": 96
   },
   {
     "key": "0157_Typhlosion_Hisuian Typhlosion",
@@ -15961,7 +16057,8 @@
           "level": "36"
         }
       ]
-    }
+    },
+    "paldea_id": 97
   },
   {
     "key": "0158_Totodile",
@@ -16700,7 +16797,8 @@
           "level": "20"
         }
       ]
-    }
+    },
+    "paldea_id": 98
   },
   {
     "key": "0165_Ledyba",
@@ -16994,7 +17092,8 @@
           "level": "22"
         }
       ]
-    }
+    },
+    "paldea_id": 99
   },
   {
     "key": "0168_Ariados",
@@ -17113,7 +17212,8 @@
           "level": "22"
         }
       ]
-    }
+    },
+    "paldea_id": 100
   },
   {
     "key": "0169_Crobat",
@@ -17308,7 +17408,8 @@
           "level": "27"
         }
       ]
-    }
+    },
+    "paldea_id": 101
   },
   {
     "key": "0171_Lanturn",
@@ -17399,7 +17500,8 @@
           "level": "27"
         }
       ]
-    }
+    },
+    "paldea_id": 102
   },
   {
     "key": "0172_Pichu",
@@ -17591,7 +17693,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 103
   },
   {
     "key": "0174_Igglybuff",
@@ -18232,7 +18335,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 104
   },
   {
     "key": "0181_Ampharos_Mega Ampharos",
@@ -18596,7 +18700,8 @@
           "level": "18"
         }
       ]
-    }
+    },
+    "paldea_id": 105
   },
   {
     "key": "0185_Sudowoodo",
@@ -18714,7 +18819,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 106
   },
   {
     "key": "0186_Politoed",
@@ -18774,7 +18880,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 107
   },
   {
     "key": "0187_Hoppip",
@@ -21378,7 +21485,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 108
   },
   {
     "key": "0212_Scizor_Mega Scizor",
@@ -21418,7 +21526,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 109
   },
   {
     "key": "0213_Shuckle",
@@ -21493,7 +21602,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 110
   },
   {
     "key": "0214_Heracross",
@@ -21589,7 +21699,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 111
   },
   {
     "key": "0214_Heracross_Mega Heracross",
@@ -21614,7 +21725,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 112
   },
   {
     "key": "0215_Sneasel",
@@ -21654,7 +21766,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 113
   },
   {
     "key": "0215_Sneasel_Hisuian Sneasel",
@@ -21694,7 +21807,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 114
   },
   {
     "key": "0216_Teddiursa",
@@ -21804,7 +21918,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 115
   },
   {
     "key": "0217_Ursaring",
@@ -21921,7 +22036,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 116
   },
   {
     "key": "0218_Slugma",
@@ -22032,7 +22148,8 @@
           "level": "38"
         }
       ]
-    }
+    },
+    "paldea_id": 117
   },
   {
     "key": "0219_Magcargo",
@@ -22144,7 +22261,8 @@
           "level": "38"
         }
       ]
-    }
+    },
+    "paldea_id": 118
   },
   {
     "key": "0220_Swinub",
@@ -22248,7 +22366,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 119
   },
   {
     "key": "0221_Piloswine",
@@ -22829,7 +22948,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 120
   },
   {
     "key": "0227_Skarmory",
@@ -22918,7 +23038,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 121
   },
   {
     "key": "0227_Skarmory_Mega Skarmory",
@@ -22943,7 +23064,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 122
   },
   {
     "key": "0228_Houndour",
@@ -23270,7 +23392,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 123
   },
   {
     "key": "0231_Phanpy",
@@ -23675,7 +23798,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 124
   },
   {
     "key": "0236_Tyrogue",
@@ -23735,7 +23859,8 @@
           "level": "20"
         }
       ]
-    }
+    },
+    "paldea_id": 125
   },
   {
     "key": "0237_Hitmontop",
@@ -24529,7 +24654,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 126
   },
   {
     "key": "0245_Suicune",
@@ -24631,7 +24757,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 127
   },
   {
     "key": "0246_Larvitar",
@@ -25100,7 +25227,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 128
   },
   {
     "key": "0250_Ho-oh",
@@ -25189,7 +25317,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 129
   },
   {
     "key": "0251_Celebi",
@@ -25250,7 +25379,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 130
   },
   {
     "key": "0252_Treecko",
@@ -25353,7 +25483,8 @@
           "level": "36"
         }
       ]
-    }
+    },
+    "paldea_id": 131
   },
   {
     "key": "0253_Grovyle",
@@ -25477,7 +25608,8 @@
           "level": "36"
         }
       ]
-    }
+    },
+    "paldea_id": 132
   },
   {
     "key": "0254_Sceptile",
@@ -25973,7 +26105,8 @@
           "level": "36"
         }
       ]
-    }
+    },
+    "paldea_id": 133
   },
   {
     "key": "0257_Blaziken_Mega Blaziken",
@@ -26013,7 +26146,8 @@
           "level": "36"
         }
       ]
-    }
+    },
+    "paldea_id": 134
   },
   {
     "key": "0258_Mudkip",
@@ -26137,7 +26271,8 @@
           "level": "36"
         }
       ]
-    }
+    },
+    "paldea_id": 135
   },
   {
     "key": "0259_Marshtomp",
@@ -26276,7 +26411,8 @@
           "level": "36"
         }
       ]
-    }
+    },
+    "paldea_id": 136
   },
   {
     "key": "0260_Swampert",
@@ -26422,7 +26558,8 @@
           "level": "36"
         }
       ]
-    }
+    },
+    "paldea_id": 137
   },
   {
     "key": "0260_Swampert_Mega Swampert",
@@ -26752,7 +26889,8 @@
           "level": "35"
         }
       ]
-    }
+    },
+    "paldea_id": 138
   },
   {
     "key": "0263_Zigzagoon_Galarian Zigzagoon",
@@ -26792,7 +26930,8 @@
           "level": "35"
         }
       ]
-    }
+    },
+    "paldea_id": 139
   },
   {
     "key": "0264_Linoone",
@@ -27925,7 +28064,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 140
   },
   {
     "key": "0276_Taillow",
@@ -28016,7 +28156,8 @@
           "level": "22"
         }
       ]
-    }
+    },
+    "paldea_id": 141
   },
   {
     "key": "0277_Swellow",
@@ -28672,7 +28813,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 142
   },
   {
     "key": "0283_Surskit",
@@ -28728,7 +28870,8 @@
           "level": "22"
         }
       ]
-    }
+    },
+    "paldea_id": 143
   },
   {
     "key": "0284_Masquerain",
@@ -29493,7 +29636,8 @@
           "level": "20"
         }
       ]
-    }
+    },
+    "paldea_id": 144
   },
   {
     "key": "0292_Shedinja",
@@ -29606,7 +29750,8 @@
           "level": "20"
         }
       ]
-    }
+    },
+    "paldea_id": 145
   },
   {
     "key": "0293_Whismur",
@@ -29688,7 +29833,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 146
   },
   {
     "key": "0294_Loudred",
@@ -29777,7 +29923,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 147
   },
   {
     "key": "0295_Exploud",
@@ -31723,7 +31870,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 148
   },
   {
     "key": "0313_Volbeat",
@@ -31804,7 +31952,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 149
   },
   {
     "key": "0314_Illumise",
@@ -31878,7 +32027,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 150
   },
   {
     "key": "0315_Roselia",
@@ -32176,7 +32326,8 @@
           "level": "26"
         }
       ]
-    }
+    },
+    "paldea_id": 151
   },
   {
     "key": "0318_Carvanha",
@@ -32267,7 +32418,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 152
   },
   {
     "key": "0319_Sharpedo",
@@ -32365,7 +32517,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 153
   },
   {
     "key": "0319_Sharpedo_Mega Sharpedo",
@@ -32399,7 +32552,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 154
   },
   {
     "key": "0320_Wailmer",
@@ -32510,7 +32664,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 155
   },
   {
     "key": "0321_Wailord",
@@ -33456,7 +33611,8 @@
           "level": "45"
         }
       ]
-    }
+    },
+    "paldea_id": 156
   },
   {
     "key": "0330_Flygon",
@@ -33574,7 +33730,8 @@
           "level": "45"
         }
       ]
-    }
+    },
+    "paldea_id": 157
   },
   {
     "key": "0331_Cacnea",
@@ -33664,7 +33821,8 @@
           "level": "32"
         }
       ]
-    }
+    },
+    "paldea_id": 158
   },
   {
     "key": "0332_Cacturne",
@@ -33755,7 +33913,8 @@
           "level": "32"
         }
       ]
-    }
+    },
+    "paldea_id": 159
   },
   {
     "key": "0333_Swablu",
@@ -33846,7 +34005,8 @@
           "level": "35"
         }
       ]
-    }
+    },
+    "paldea_id": 160
   },
   {
     "key": "0334_Altaria",
@@ -34059,7 +34219,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 161
   },
   {
     "key": "0336_Seviper",
@@ -34154,7 +34315,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 162
   },
   {
     "key": "0337_Lunatone",
@@ -34346,7 +34508,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 163
   },
   {
     "key": "0339_Barboach",
@@ -34444,7 +34607,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 164
   },
   {
     "key": "0340_Whiscash",
@@ -34765,7 +34929,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 165
   },
   {
     "key": "0343_Baltoy",
@@ -34870,7 +35035,8 @@
           "level": "36"
         }
       ]
-    }
+    },
+    "paldea_id": 166
   },
   {
     "key": "0344_Claydol",
@@ -35290,7 +35456,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 167
   },
   {
     "key": "0348_Armaldo",
@@ -35402,7 +35569,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 168
   },
   {
     "key": "0349_Feebas",
@@ -35443,7 +35611,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 169
   },
   {
     "key": "0350_Milotic",
@@ -35540,7 +35709,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 170
   },
   {
     "key": "0351_Castform",
@@ -35635,7 +35805,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 171
   },
   {
     "key": "0351_Castform_Sunny Form",
@@ -35683,7 +35854,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 172
   },
   {
     "key": "0351_Castform_Snowy Form",
@@ -35871,7 +36043,8 @@
           "level": "37"
         }
       ]
-    }
+    },
+    "paldea_id": 173
   },
   {
     "key": "0354_Banette",
@@ -35961,7 +36134,8 @@
           "level": "37"
         }
       ]
-    }
+    },
+    "paldea_id": 174
   },
   {
     "key": "0354_Banette_Mega Banette",
@@ -35994,7 +36168,8 @@
           "level": "37"
         }
       ]
-    }
+    },
+    "paldea_id": 175
   },
   {
     "key": "0355_Duskull",
@@ -36200,7 +36375,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 176
   },
   {
     "key": "0357_Tropius",
@@ -36289,7 +36465,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 177
   },
   {
     "key": "0358_Chimecho",
@@ -36372,7 +36549,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 178
   },
   {
     "key": "0358_Chimecho_Mega Chimecho",
@@ -36406,7 +36584,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 179
   },
   {
     "key": "0359_Absol",
@@ -36536,7 +36715,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 180
   },
   {
     "key": "0360_Wynaut",
@@ -36584,7 +36764,8 @@
           "level": "15"
         }
       ]
-    }
+    },
+    "paldea_id": 181
   },
   {
     "key": "0361_Snorunt",
@@ -36783,7 +36964,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 182
   },
   {
     "key": "0362_Glalie_Mega Glalie",
@@ -36822,7 +37004,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 183
   },
   {
     "key": "0363_Spheal",
@@ -37125,7 +37308,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 184
   },
   {
     "key": "0367_Huntail",
@@ -37242,7 +37426,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 185
   },
   {
     "key": "0368_Gorebyss",
@@ -37941,7 +38126,8 @@
           "level": "45"
         }
       ]
-    }
+    },
+    "paldea_id": 186
   },
   {
     "key": "0375_Metang",
@@ -38045,7 +38231,8 @@
           "level": "45"
         }
       ]
-    }
+    },
+    "paldea_id": 187
   },
   {
     "key": "0376_Metagross",
@@ -38428,7 +38615,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 188
   },
   {
     "key": "0379_Registeel",
@@ -38679,7 +38867,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 189
   },
   {
     "key": "0381_Latios",
@@ -38789,7 +38978,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 190
   },
   {
     "key": "0381_Latios_Mega Latios",
@@ -44139,7 +44329,8 @@
           "level": "33"
         }
       ]
-    }
+    },
+    "paldea_id": 191
   },
   {
     "key": "0438_Bonsly",
@@ -44229,7 +44420,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 192
   },
   {
     "key": "0439_Mime Jr.",
@@ -44319,7 +44511,8 @@
           "level": "42"
         }
       ]
-    }
+    },
+    "paldea_id": 193
   },
   {
     "key": "0440_Happiny",
@@ -44380,7 +44573,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 194
   },
   {
     "key": "0441_Chatot",
@@ -44448,7 +44642,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 195
   },
   {
     "key": "0442_Spiritomb",
@@ -44530,7 +44725,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 196
   },
   {
     "key": "0443_Gible",
@@ -45864,7 +46060,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 197
   },
   {
     "key": "0456_Finneon",
@@ -45947,7 +46144,8 @@
           "level": "31"
         }
       ]
-    }
+    },
+    "paldea_id": 198
   },
   {
     "key": "0457_Lumineon",
@@ -46198,7 +46396,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 199
   },
   {
     "key": "0460_Abomasnow",
@@ -46282,7 +46481,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 200
   },
   {
     "key": "0460_Abomasnow_Mega Abomasnow",
@@ -46316,7 +46516,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 201
   },
   {
     "key": "0461_Weavile",
@@ -47265,7 +47466,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 202
   },
   {
     "key": "0470_Leafeon",
@@ -47397,7 +47599,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 203
   },
   {
     "key": "0471_Glaceon",
@@ -47869,7 +48072,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 204
   },
   {
     "key": "0475_Gallade",
@@ -47965,7 +48169,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 205
   },
   {
     "key": "0475_Gallade_Mega Gallade",
@@ -48233,7 +48438,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 206
   },
   {
     "key": "0478_Froslass",
@@ -48570,7 +48776,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 207
   },
   {
     "key": "0480_Uxie",
@@ -48651,7 +48858,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 208
   },
   {
     "key": "0481_Mesprit",
@@ -48725,7 +48933,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 209
   },
   {
     "key": "0482_Azelf",
@@ -49207,7 +49416,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 210
   },
   {
     "key": "0485_Heatran_Mega Heatran",
@@ -49232,7 +49442,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 211
   },
   {
     "key": "0486_Regigigas",
@@ -49341,7 +49552,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 212
   },
   {
     "key": "0487_Giratina_Altered Forme",
@@ -49366,7 +49578,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 213
   },
   {
     "key": "0487_Giratina_Origin Forme",
@@ -49391,7 +49604,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 214
   },
   {
     "key": "0488_Cresselia",
@@ -50068,7 +50282,8 @@
           "level": "36"
         }
       ]
-    }
+    },
+    "paldea_id": 215
   },
   {
     "key": "0496_Servine",
@@ -50171,7 +50386,8 @@
           "level": "36"
         }
       ]
-    }
+    },
+    "paldea_id": 216
   },
   {
     "key": "0497_Serperior",
@@ -50377,7 +50593,8 @@
           "level": "36"
         }
       ]
-    }
+    },
+    "paldea_id": 217
   },
   {
     "key": "0499_Pignite",
@@ -50481,7 +50698,8 @@
           "level": "36"
         }
       ]
-    }
+    },
+    "paldea_id": 218
   },
   {
     "key": "0500_Emboar",
@@ -50927,7 +51145,8 @@
           "level": "36"
         }
       ]
-    }
+    },
+    "paldea_id": 219
   },
   {
     "key": "0503_Samurott_Hisuian Samurott",
@@ -50967,7 +51186,8 @@
           "level": "36"
         }
       ]
-    }
+    },
+    "paldea_id": 220
   },
   {
     "key": "0504_Patrat",
@@ -51029,7 +51249,8 @@
           "level": "20"
         }
       ]
-    }
+    },
+    "paldea_id": 221
   },
   {
     "key": "0505_Watchog",
@@ -51112,7 +51333,8 @@
           "level": "20"
         }
       ]
-    }
+    },
+    "paldea_id": 222
   },
   {
     "key": "0506_Lillipup",
@@ -51215,7 +51437,8 @@
           "level": "32"
         }
       ]
-    }
+    },
+    "paldea_id": 223
   },
   {
     "key": "0507_Herdier",
@@ -53492,7 +53715,8 @@
           "level": "31"
         }
       ]
-    }
+    },
+    "paldea_id": 224
   },
   {
     "key": "0530_Excadrill_Mega Excadrill",
@@ -53526,7 +53750,8 @@
           "level": "31"
         }
       ]
-    }
+    },
+    "paldea_id": 225
   },
   {
     "key": "0531_Audino",
@@ -53607,7 +53832,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 226
   },
   {
     "key": "0531_Audino_Mega Audino",
@@ -53632,7 +53858,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 227
   },
   {
     "key": "0532_Timburr",
@@ -53742,7 +53969,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 228
   },
   {
     "key": "0533_Gurdurr",
@@ -53852,7 +54080,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 229
   },
   {
     "key": "0534_Conkeldurr",
@@ -53962,7 +54191,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 230
   },
   {
     "key": "0535_Tympole",
@@ -54072,7 +54302,8 @@
           "level": "36"
         }
       ]
-    }
+    },
+    "paldea_id": 231
   },
   {
     "key": "0536_Palpitoad",
@@ -54183,7 +54414,8 @@
           "level": "36"
         }
       ]
-    }
+    },
+    "paldea_id": 232
   },
   {
     "key": "0537_Seismitoad",
@@ -54301,7 +54533,8 @@
           "level": "36"
         }
       ]
-    }
+    },
+    "paldea_id": 233
   },
   {
     "key": "0538_Throh",
@@ -54389,7 +54622,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 234
   },
   {
     "key": "0539_Sawk",
@@ -54477,7 +54711,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 235
   },
   {
     "key": "0540_Sewaddle",
@@ -54560,7 +54795,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 236
   },
   {
     "key": "0541_Swadloon",
@@ -55835,7 +56071,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 237
   },
   {
     "key": "0554_Darumaka",
@@ -55868,7 +56105,8 @@
           "level": "35"
         }
       ]
-    }
+    },
+    "paldea_id": 238
   },
   {
     "key": "0554_Darumaka_Galarian Darumaka",
@@ -55901,7 +56139,8 @@
           "level": "35"
         }
       ]
-    }
+    },
+    "paldea_id": 239
   },
   {
     "key": "0555_Darmanitan_Standard Mode",
@@ -55934,7 +56173,8 @@
           "level": "35"
         }
       ]
-    }
+    },
+    "paldea_id": 240
   },
   {
     "key": "0555_Darmanitan_Zen Mode",
@@ -56417,7 +56657,8 @@
           "level": "39"
         }
       ]
-    }
+    },
+    "paldea_id": 241
   },
   {
     "key": "0560_Scrafty",
@@ -56515,7 +56756,8 @@
           "level": "39"
         }
       ]
-    }
+    },
+    "paldea_id": 242
   },
   {
     "key": "0560_Scrafty_Mega Scrafty",
@@ -56549,7 +56791,8 @@
           "level": "39"
         }
       ]
-    }
+    },
+    "paldea_id": 243
   },
   {
     "key": "0561_Sigilyph",
@@ -56663,7 +56906,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 244
   },
   {
     "key": "0562_Yamask_Galarian Yamask",
@@ -56703,7 +56947,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 245
   },
   {
     "key": "0563_Cofagrigus",
@@ -56785,7 +57030,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 246
   },
   {
     "key": "0564_Tirtouga",
@@ -56890,7 +57136,8 @@
           "level": "37"
         }
       ]
-    }
+    },
+    "paldea_id": 247
   },
   {
     "key": "0565_Carracosta",
@@ -57448,7 +57695,8 @@
           "level": "36"
         }
       ]
-    }
+    },
+    "paldea_id": 248
   },
   {
     "key": "0570_Zorua",
@@ -57481,7 +57729,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 249
   },
   {
     "key": "0570_Zorua_Hisuian Zorua",
@@ -57515,7 +57764,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 250
   },
   {
     "key": "0571_Zoroark",
@@ -57548,7 +57798,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 251
   },
   {
     "key": "0571_Zoroark_Hisuian Zoroark",
@@ -59169,7 +59420,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 252
   },
   {
     "key": "0590_Foongus",
@@ -59246,7 +59498,8 @@
           "level": "39"
         }
       ]
-    }
+    },
+    "paldea_id": 253
   },
   {
     "key": "0591_Amoonguss",
@@ -59614,7 +59867,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 254
   },
   {
     "key": "0595_Joltik",
@@ -59712,7 +59966,8 @@
           "level": "36"
         }
       ]
-    }
+    },
+    "paldea_id": 255
   },
   {
     "key": "0596_Galvantula",
@@ -59810,7 +60065,8 @@
           "level": "36"
         }
       ]
-    }
+    },
+    "paldea_id": 256
   },
   {
     "key": "0597_Ferroseed",
@@ -60095,7 +60351,8 @@
           "level": "49"
         }
       ]
-    }
+    },
+    "paldea_id": 257
   },
   {
     "key": "0600_Klang",
@@ -60191,7 +60448,8 @@
           "level": "49"
         }
       ]
-    }
+    },
+    "paldea_id": 258
   },
   {
     "key": "0601_Klinklang",
@@ -60341,7 +60599,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 259
   },
   {
     "key": "0603_Eelektrik",
@@ -60444,7 +60703,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 260
   },
   {
     "key": "0604_Eelektross",
@@ -60561,7 +60821,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 261
   },
   {
     "key": "0604_Eelektross_Mega Eelektross",
@@ -60600,7 +60861,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 262
   },
   {
     "key": "0605_Elgyem",
@@ -60821,7 +61083,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 263
   },
   {
     "key": "0608_Lampent",
@@ -60904,7 +61167,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 264
   },
   {
     "key": "0609_Chandelure",
@@ -61151,7 +61415,8 @@
           "level": "48"
         }
       ]
-    }
+    },
+    "paldea_id": 265
   },
   {
     "key": "0611_Fraxure",
@@ -61275,7 +61540,8 @@
           "level": "48"
         }
       ]
-    }
+    },
+    "paldea_id": 266
   },
   {
     "key": "0612_Haxorus",
@@ -61621,7 +61887,8 @@
           "level": "37"
         }
       ]
-    }
+    },
+    "paldea_id": 267
   },
   {
     "key": "0615_Cryogonal",
@@ -61709,7 +61976,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 268
   },
   {
     "key": "0616_Shelmet",
@@ -61799,7 +62067,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 269
   },
   {
     "key": "0617_Accelgor",
@@ -61949,7 +62218,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 270
   },
   {
     "key": "0618_Stunfisk_Galarian Stunfisk",
@@ -61974,7 +62244,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 271
   },
   {
     "key": "0619_Mienfoo",
@@ -62277,7 +62548,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 272
   },
   {
     "key": "0622_Golett",
@@ -62375,7 +62647,8 @@
           "level": "43"
         }
       ]
-    }
+    },
+    "paldea_id": 273
   },
   {
     "key": "0623_Golurk",
@@ -62810,7 +63083,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 274
   },
   {
     "key": "0627_Rufflet",
@@ -63054,7 +63328,8 @@
           "level": "54"
         }
       ]
-    }
+    },
+    "paldea_id": 275
   },
   {
     "key": "0630_Mandibuzz",
@@ -66078,7 +66353,8 @@
           "level": "36"
         }
       ]
-    }
+    },
+    "paldea_id": 276
   },
   {
     "key": "0659_Bunnelby",
@@ -66175,7 +66451,8 @@
           "level": "20"
         }
       ]
-    }
+    },
+    "paldea_id": 277
   },
   {
     "key": "0660_Diggersby",
@@ -66273,7 +66550,8 @@
           "level": "20"
         }
       ]
-    }
+    },
+    "paldea_id": 278
   },
   {
     "key": "0661_Fletchling",
@@ -66363,7 +66641,8 @@
           "level": "35"
         }
       ]
-    }
+    },
+    "paldea_id": 279
   },
   {
     "key": "0662_Fletchinder",
@@ -66453,7 +66732,8 @@
           "level": "35"
         }
       ]
-    }
+    },
+    "paldea_id": 280
   },
   {
     "key": "0663_Talonflame",
@@ -67223,7 +67503,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 281
   },
   {
     "key": "0670_Floette_Mega Floette",
@@ -67262,7 +67543,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 282
   },
   {
     "key": "0671_Florges",
@@ -67580,7 +67862,8 @@
           "level": "32"
         }
       ]
-    }
+    },
+    "paldea_id": 283
   },
   {
     "key": "0674_Pancham",
@@ -67649,7 +67932,8 @@
           "level": "32"
         }
       ]
-    }
+    },
+    "paldea_id": 284
   },
   {
     "key": "0675_Pangoro",
@@ -67747,7 +68031,8 @@
           "level": "32"
         }
       ]
-    }
+    },
+    "paldea_id": 285
   },
   {
     "key": "0676_Furfrou",
@@ -67828,7 +68113,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 286
   },
   {
     "key": "0677_Espurr",
@@ -67904,7 +68190,8 @@
           "level": "25"
         }
       ]
-    }
+    },
+    "paldea_id": 287
   },
   {
     "key": "0678_Meowstic_Male",
@@ -67937,7 +68224,8 @@
           "level": "25"
         }
       ]
-    }
+    },
+    "paldea_id": 288
   },
   {
     "key": "0678_Meowstic_Female",
@@ -67970,7 +68258,8 @@
           "level": "25"
         }
       ]
-    }
+    },
+    "paldea_id": 289
   },
   {
     "key": "0678_Meowstic_Mega Meowstic",
@@ -68003,7 +68292,8 @@
           "level": "25"
         }
       ]
-    }
+    },
+    "paldea_id": 290
   },
   {
     "key": "0679_Honedge",
@@ -68183,7 +68473,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 291
   },
   {
     "key": "0681_Aegislash_Shield Forme",
@@ -68223,7 +68514,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 292
   },
   {
     "key": "0681_Aegislash_Blade Forme",
@@ -68263,7 +68555,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 293
   },
   {
     "key": "0682_Spritzee",
@@ -68346,7 +68639,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 294
   },
   {
     "key": "0683_Aromatisse",
@@ -68763,7 +69057,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 295
   },
   {
     "key": "0687_Malamar_Mega Malamar",
@@ -68797,7 +69092,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 296
   },
   {
     "key": "0688_Binacle",
@@ -68902,7 +69198,8 @@
           "level": "39"
         }
       ]
-    }
+    },
+    "paldea_id": 297
   },
   {
     "key": "0689_Barbaracle",
@@ -69021,7 +69318,8 @@
           "level": "39"
         }
       ]
-    }
+    },
+    "paldea_id": 298
   },
   {
     "key": "0689_Barbaracle_Mega Barbaracle",
@@ -69055,7 +69353,8 @@
           "level": "39"
         }
       ]
-    }
+    },
+    "paldea_id": 299
   },
   {
     "key": "0690_Skrelp",
@@ -69160,7 +69459,8 @@
           "level": "48"
         }
       ]
-    }
+    },
+    "paldea_id": 300
   },
   {
     "key": "0691_Dragalge",
@@ -69265,7 +69565,8 @@
           "level": "48"
         }
       ]
-    }
+    },
+    "paldea_id": 301
   },
   {
     "key": "0691_Dragalge_Mega Dragalge",
@@ -69299,7 +69600,8 @@
           "level": "48"
         }
       ]
-    }
+    },
+    "paldea_id": 302
   },
   {
     "key": "0692_Clauncher",
@@ -69514,7 +69816,8 @@
           "level": "37"
         }
       ]
-    }
+    },
+    "paldea_id": 303
   },
   {
     "key": "0694_Helioptile",
@@ -70241,7 +70544,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 304
   },
   {
     "key": "0701_Hawlucha",
@@ -70330,7 +70634,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 305
   },
   {
     "key": "0701_Hawlucha_Mega Hawlucha",
@@ -70355,7 +70660,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 306
   },
   {
     "key": "0702_Dedenne",
@@ -70444,7 +70750,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 307
   },
   {
     "key": "0703_Carbink",
@@ -70643,7 +70950,8 @@
           "level": "50"
         }
       ]
-    }
+    },
+    "paldea_id": 308
   },
   {
     "key": "0705_Sliggoo",
@@ -70840,7 +71148,8 @@
           "level": "50"
         }
       ]
-    }
+    },
+    "paldea_id": 309
   },
   {
     "key": "0706_Goodra_Hisuian Goodra",
@@ -70880,7 +71189,8 @@
           "level": "50"
         }
       ]
-    }
+    },
+    "paldea_id": 310
   },
   {
     "key": "0707_Klefki",
@@ -71156,7 +71466,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 311
   },
   {
     "key": "0710_Pumpkaboo_Large Size",
@@ -71190,7 +71501,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 312
   },
   {
     "key": "0710_Pumpkaboo_Super Size",
@@ -71224,7 +71536,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 313
   },
   {
     "key": "0711_Gourgeist_Average Size",
@@ -71258,7 +71571,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 314
   },
   {
     "key": "0711_Gourgeist_Small Size",
@@ -71969,7 +72283,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 315
   },
   {
     "key": "0718_Zygarde_Complete Forme",
@@ -71994,7 +72309,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 316
   },
   {
     "key": "0718_Zygarde_Mega Zygarde",
@@ -72019,7 +72335,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 317
   },
   {
     "key": "0719_Diancie",
@@ -72101,7 +72418,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 318
   },
   {
     "key": "0719_Diancie_Mega Diancie",
@@ -72126,7 +72444,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 319
   },
   {
     "key": "0720_Hoopa_Hoopa Confined",
@@ -72151,7 +72470,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 320
   },
   {
     "key": "0720_Hoopa_Hoopa Unbound",
@@ -72286,7 +72606,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 321
   },
   {
     "key": "0722_Rowlet",
@@ -72397,7 +72718,8 @@
           "level": "34"
         }
       ]
-    }
+    },
+    "paldea_id": 322
   },
   {
     "key": "0722_Rowlet_Alolan",
@@ -72508,7 +72830,8 @@
           "level": "34"
         }
       ]
-    }
+    },
+    "paldea_id": 323
   },
   {
     "key": "0723_Dartrix",
@@ -72619,7 +72942,8 @@
           "level": "34"
         }
       ]
-    }
+    },
+    "paldea_id": 324
   },
   {
     "key": "0723_Dartrix_Alolan",
@@ -72730,7 +73054,8 @@
           "level": "34"
         }
       ]
-    }
+    },
+    "paldea_id": 325
   },
   {
     "key": "0724_Decidueye",
@@ -72778,7 +73103,8 @@
           "level": "34"
         }
       ]
-    }
+    },
+    "paldea_id": 326
   },
   {
     "key": "0724_Decidueye_Alolan",
@@ -72826,7 +73152,8 @@
           "level": "34"
         }
       ]
-    }
+    },
+    "paldea_id": 327
   },
   {
     "key": "0724_Decidueye_Hisuian Decidueye",
@@ -72866,7 +73193,8 @@
           "level": "34"
         }
       ]
-    }
+    },
+    "paldea_id": 328
   },
   {
     "key": "0725_Litten",
@@ -72976,7 +73304,8 @@
           "level": "34"
         }
       ]
-    }
+    },
+    "paldea_id": 329
   },
   {
     "key": "0725_Litten_Alolan",
@@ -73086,7 +73415,8 @@
           "level": "34"
         }
       ]
-    }
+    },
+    "paldea_id": 330
   },
   {
     "key": "0726_Torracat",
@@ -73196,7 +73526,8 @@
           "level": "34"
         }
       ]
-    }
+    },
+    "paldea_id": 331
   },
   {
     "key": "0726_Torracat_Alolan",
@@ -73306,7 +73637,8 @@
           "level": "34"
         }
       ]
-    }
+    },
+    "paldea_id": 332
   },
   {
     "key": "0727_Incineroar",
@@ -73417,7 +73749,8 @@
           "level": "34"
         }
       ]
-    }
+    },
+    "paldea_id": 333
   },
   {
     "key": "0727_Incineroar_Alolan",
@@ -73528,7 +73861,8 @@
           "level": "34"
         }
       ]
-    }
+    },
+    "paldea_id": 334
   },
   {
     "key": "0728_Popplio",
@@ -73631,7 +73965,8 @@
           "level": "34"
         }
       ]
-    }
+    },
+    "paldea_id": 335
   },
   {
     "key": "0728_Popplio_Alolan",
@@ -73734,7 +74069,8 @@
           "level": "34"
         }
       ]
-    }
+    },
+    "paldea_id": 336
   },
   {
     "key": "0729_Brionne",
@@ -73837,7 +74173,8 @@
           "level": "34"
         }
       ]
-    }
+    },
+    "paldea_id": 337
   },
   {
     "key": "0729_Brionne_Alolan",
@@ -73940,7 +74277,8 @@
           "level": "34"
         }
       ]
-    }
+    },
+    "paldea_id": 338
   },
   {
     "key": "0730_Primarina",
@@ -74044,7 +74382,8 @@
           "level": "34"
         }
       ]
-    }
+    },
+    "paldea_id": 339
   },
   {
     "key": "0730_Primarina_Alolan",
@@ -74148,7 +74487,8 @@
           "level": "34"
         }
       ]
-    }
+    },
+    "paldea_id": 340
   },
   {
     "key": "0731_Pikipek",
@@ -74245,7 +74585,8 @@
           "level": "28"
         }
       ]
-    }
+    },
+    "paldea_id": 341
   },
   {
     "key": "0731_Pikipek_Alolan",
@@ -74342,7 +74683,8 @@
           "level": "28"
         }
       ]
-    }
+    },
+    "paldea_id": 342
   },
   {
     "key": "0732_Trumbeak",
@@ -74439,7 +74781,8 @@
           "level": "28"
         }
       ]
-    }
+    },
+    "paldea_id": 343
   },
   {
     "key": "0732_Trumbeak_Alolan",
@@ -74536,7 +74879,8 @@
           "level": "28"
         }
       ]
-    }
+    },
+    "paldea_id": 344
   },
   {
     "key": "0733_Toucannon",
@@ -74640,7 +74984,8 @@
           "level": "28"
         }
       ]
-    }
+    },
+    "paldea_id": 345
   },
   {
     "key": "0733_Toucannon_Alolan",
@@ -74744,7 +75089,8 @@
           "level": "28"
         }
       ]
-    }
+    },
+    "paldea_id": 346
   },
   {
     "key": "0734_Yungoos",
@@ -74834,7 +75180,8 @@
           "level": "20"
         }
       ]
-    }
+    },
+    "paldea_id": 347
   },
   {
     "key": "0734_Yungoos_Alolan",
@@ -74924,7 +75271,8 @@
           "level": "20"
         }
       ]
-    }
+    },
+    "paldea_id": 348
   },
   {
     "key": "0735_Gumshoos",
@@ -75014,7 +75362,8 @@
           "level": "20"
         }
       ]
-    }
+    },
+    "paldea_id": 349
   },
   {
     "key": "0735_Gumshoos_Alolan",
@@ -75104,7 +75453,8 @@
           "level": "20"
         }
       ]
-    }
+    },
+    "paldea_id": 350
   },
   {
     "key": "0736_Grubbin",
@@ -75200,7 +75550,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 351
   },
   {
     "key": "0736_Grubbin_Alolan",
@@ -75296,7 +75647,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 352
   },
   {
     "key": "0737_Charjabug",
@@ -75400,7 +75752,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 353
   },
   {
     "key": "0737_Charjabug_Alolan",
@@ -75504,7 +75857,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 354
   },
   {
     "key": "0738_Vikavolt",
@@ -75601,7 +75955,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 355
   },
   {
     "key": "0738_Vikavolt_Alolan",
@@ -75698,7 +76053,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 356
   },
   {
     "key": "0739_Crabrawler",
@@ -75781,7 +76137,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 357
   },
   {
     "key": "0739_Crabrawler_Alolan",
@@ -75864,7 +76221,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 358
   },
   {
     "key": "0740_Crabominable",
@@ -75955,7 +76313,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 359
   },
   {
     "key": "0740_Crabominable_Alolan",
@@ -76046,7 +76405,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 360
   },
   {
     "key": "0740_Crabominable_Mega Crabominable",
@@ -76080,7 +76440,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 361
   },
   {
     "key": "0741_Oricorio_Baile Style",
@@ -76105,7 +76466,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 362
   },
   {
     "key": "0741_Oricorio_Pom-Pom Style",
@@ -76130,7 +76492,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 363
   },
   {
     "key": "0741_Oricorio_Pa'u Style",
@@ -76155,7 +76518,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 364
   },
   {
     "key": "0741_Oricorio_Sensu Style",
@@ -76180,7 +76544,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 365
   },
   {
     "key": "0742_Cutiefly",
@@ -76264,7 +76629,8 @@
           "level": "25"
         }
       ]
-    }
+    },
+    "paldea_id": 366
   },
   {
     "key": "0742_Cutiefly_Alolan",
@@ -76348,7 +76714,8 @@
           "level": "25"
         }
       ]
-    }
+    },
+    "paldea_id": 367
   },
   {
     "key": "0743_Ribombee",
@@ -76432,7 +76799,8 @@
           "level": "25"
         }
       ]
-    }
+    },
+    "paldea_id": 368
   },
   {
     "key": "0743_Ribombee_Alolan",
@@ -76516,7 +76884,8 @@
           "level": "25"
         }
       ]
-    }
+    },
+    "paldea_id": 369
   },
   {
     "key": "0744_Rockruff",
@@ -76599,7 +76968,8 @@
           "level": "25"
         }
       ]
-    }
+    },
+    "paldea_id": 370
   },
   {
     "key": "0744_Rockruff_Alolan",
@@ -76682,7 +77052,8 @@
           "level": "25"
         }
       ]
-    }
+    },
+    "paldea_id": 371
   },
   {
     "key": "0744_Rockruff_Own Tempo Rockruff",
@@ -76715,7 +77086,8 @@
           "level": "25"
         }
       ]
-    }
+    },
+    "paldea_id": 372
   },
   {
     "key": "0745_Lycanroc_Midday Form",
@@ -76748,7 +77120,8 @@
           "level": "25"
         }
       ]
-    }
+    },
+    "paldea_id": 373
   },
   {
     "key": "0745_Lycanroc_Midnight Form",
@@ -76781,7 +77154,8 @@
           "level": "25"
         }
       ]
-    }
+    },
+    "paldea_id": 374
   },
   {
     "key": "0745_Lycanroc_Dusk Form",
@@ -76814,7 +77188,8 @@
           "level": "25"
         }
       ]
-    }
+    },
+    "paldea_id": 375
   },
   {
     "key": "0746_Wishiwashi_Solo Form",
@@ -76838,7 +77213,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 376
   },
   {
     "key": "0746_Wishiwashi_School Form",
@@ -76862,7 +77238,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 377
   },
   {
     "key": "0747_Mareanie",
@@ -76953,7 +77330,8 @@
           "level": "38"
         }
       ]
-    }
+    },
+    "paldea_id": 378
   },
   {
     "key": "0747_Mareanie_Alolan",
@@ -77044,7 +77422,8 @@
           "level": "38"
         }
       ]
-    }
+    },
+    "paldea_id": 379
   },
   {
     "key": "0748_Toxapex",
@@ -77135,7 +77514,8 @@
           "level": "38"
         }
       ]
-    }
+    },
+    "paldea_id": 380
   },
   {
     "key": "0748_Toxapex_Alolan",
@@ -77226,7 +77606,8 @@
           "level": "38"
         }
       ]
-    }
+    },
+    "paldea_id": 381
   },
   {
     "key": "0749_Mudbray",
@@ -77344,7 +77725,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 382
   },
   {
     "key": "0749_Mudbray_Alolan",
@@ -77462,7 +77844,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 383
   },
   {
     "key": "0750_Mudsdale",
@@ -77580,7 +77963,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 384
   },
   {
     "key": "0750_Mudsdale_Alolan",
@@ -77698,7 +78082,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 385
   },
   {
     "key": "0751_Dewpider",
@@ -77810,7 +78195,8 @@
           "level": "22"
         }
       ]
-    }
+    },
+    "paldea_id": 386
   },
   {
     "key": "0751_Dewpider_Alolan",
@@ -77922,7 +78308,8 @@
           "level": "22"
         }
       ]
-    }
+    },
+    "paldea_id": 387
   },
   {
     "key": "0752_Araquanid",
@@ -78034,7 +78421,8 @@
           "level": "22"
         }
       ]
-    }
+    },
+    "paldea_id": 388
   },
   {
     "key": "0752_Araquanid_Alolan",
@@ -78146,7 +78534,8 @@
           "level": "22"
         }
       ]
-    }
+    },
+    "paldea_id": 389
   },
   {
     "key": "0753_Fomantis",
@@ -78229,7 +78618,8 @@
           "level": "34"
         }
       ]
-    }
+    },
+    "paldea_id": 390
   },
   {
     "key": "0753_Fomantis_Alolan",
@@ -78312,7 +78702,8 @@
           "level": "34"
         }
       ]
-    }
+    },
+    "paldea_id": 391
   },
   {
     "key": "0754_Lurantis",
@@ -78409,7 +78800,8 @@
           "level": "34"
         }
       ]
-    }
+    },
+    "paldea_id": 392
   },
   {
     "key": "0754_Lurantis_Alolan",
@@ -78506,7 +78898,8 @@
           "level": "34"
         }
       ]
-    }
+    },
+    "paldea_id": 393
   },
   {
     "key": "0755_Morelull",
@@ -78590,7 +78983,8 @@
           "level": "24"
         }
       ]
-    }
+    },
+    "paldea_id": 394
   },
   {
     "key": "0755_Morelull_Alolan",
@@ -78674,7 +79068,8 @@
           "level": "24"
         }
       ]
-    }
+    },
+    "paldea_id": 395
   },
   {
     "key": "0756_Shiinotic",
@@ -78758,7 +79153,8 @@
           "level": "24"
         }
       ]
-    }
+    },
+    "paldea_id": 396
   },
   {
     "key": "0756_Shiinotic_Alolan",
@@ -78842,7 +79238,8 @@
           "level": "24"
         }
       ]
-    }
+    },
+    "paldea_id": 397
   },
   {
     "key": "0757_Salandit",
@@ -78940,7 +79337,8 @@
           "level": "33"
         }
       ]
-    }
+    },
+    "paldea_id": 398
   },
   {
     "key": "0757_Salandit_Alolan",
@@ -79038,7 +79436,8 @@
           "level": "33"
         }
       ]
-    }
+    },
+    "paldea_id": 399
   },
   {
     "key": "0758_Salazzle",
@@ -79150,7 +79549,8 @@
           "level": "33"
         }
       ]
-    }
+    },
+    "paldea_id": 400
   },
   {
     "key": "0758_Salazzle_Alolan",
@@ -79262,7 +79662,8 @@
           "level": "33"
         }
       ]
-    }
+    },
+    "paldea_id": 401
   },
   {
     "key": "0759_Stufful",
@@ -79367,7 +79768,8 @@
           "level": "27"
         }
       ]
-    }
+    },
+    "paldea_id": 402
   },
   {
     "key": "0759_Stufful_Alolan",
@@ -79472,7 +79874,8 @@
           "level": "27"
         }
       ]
-    }
+    },
+    "paldea_id": 403
   },
   {
     "key": "0760_Bewear",
@@ -79584,7 +79987,8 @@
           "level": "27"
         }
       ]
-    }
+    },
+    "paldea_id": 404
   },
   {
     "key": "0760_Bewear_Alolan",
@@ -79696,7 +80100,8 @@
           "level": "27"
         }
       ]
-    }
+    },
+    "paldea_id": 405
   },
   {
     "key": "0761_Bounsweet",
@@ -79764,7 +80169,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 406
   },
   {
     "key": "0761_Bounsweet_Alolan",
@@ -79832,7 +80238,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 407
   },
   {
     "key": "0762_Steenee",
@@ -79914,7 +80321,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 408
   },
   {
     "key": "0762_Steenee_Alolan",
@@ -79996,7 +80404,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 409
   },
   {
     "key": "0763_Tsareena",
@@ -80092,7 +80501,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 410
   },
   {
     "key": "0763_Tsareena_Alolan",
@@ -80188,7 +80598,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 411
   },
   {
     "key": "0764_Comfey",
@@ -80276,7 +80687,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 412
   },
   {
     "key": "0764_Comfey_Alolan",
@@ -80364,7 +80776,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 413
   },
   {
     "key": "0765_Oranguru",
@@ -80432,7 +80845,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 414
   },
   {
     "key": "0765_Oranguru_Alolan",
@@ -80500,7 +80914,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 415
   },
   {
     "key": "0766_Passimian",
@@ -80595,7 +81010,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 416
   },
   {
     "key": "0766_Passimian_Alolan",
@@ -80690,7 +81106,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 417
   },
   {
     "key": "0767_Wimpod",
@@ -80732,7 +81149,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 418
   },
   {
     "key": "0767_Wimpod_Alolan",
@@ -80774,7 +81192,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 419
   },
   {
     "key": "0768_Golisopod",
@@ -80886,7 +81305,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 420
   },
   {
     "key": "0768_Golisopod_Alolan",
@@ -80998,7 +81418,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 421
   },
   {
     "key": "0768_Golisopod_Mega Golisopod",
@@ -81032,7 +81453,8 @@
           "level": "30"
         }
       ]
-    }
+    },
+    "paldea_id": 422
   },
   {
     "key": "0769_Sandygast",
@@ -81123,7 +81545,8 @@
           "level": "42"
         }
       ]
-    }
+    },
+    "paldea_id": 423
   },
   {
     "key": "0769_Sandygast_Alolan",
@@ -81214,7 +81637,8 @@
           "level": "42"
         }
       ]
-    }
+    },
+    "paldea_id": 424
   },
   {
     "key": "0770_Palossand",
@@ -81305,7 +81729,8 @@
           "level": "42"
         }
       ]
-    }
+    },
+    "paldea_id": 425
   },
   {
     "key": "0770_Palossand_Alolan",
@@ -81396,7 +81821,8 @@
           "level": "42"
         }
       ]
-    }
+    },
+    "paldea_id": 426
   },
   {
     "key": "0771_Pyukumuku",
@@ -81428,7 +81854,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 427
   },
   {
     "key": "0771_Pyukumuku_Alolan",
@@ -81460,7 +81887,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 428
   },
   {
     "key": "0772_Type: Null",
@@ -81564,7 +81992,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 429
   },
   {
     "key": "0772_Type: Null_Alolan",
@@ -81668,7 +82097,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 430
   },
   {
     "key": "0773_Silvally",
@@ -81828,7 +82258,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 431
   },
   {
     "key": "0773_Silvally_Alolan",
@@ -81988,7 +82419,8 @@
           "level": "40"
         }
       ]
-    }
+    },
+    "paldea_id": 432
   },
   {
     "key": "0774_Minior_Meteor Form",
@@ -82013,7 +82445,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 433
   },
   {
     "key": "0774_Minior_Core Form",
@@ -82038,7 +82471,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 434
   },
   {
     "key": "0775_Komala",
@@ -82119,7 +82553,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 435
   },
   {
     "key": "0775_Komala_Alolan",
@@ -82200,7 +82635,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 436
   },
   {
     "key": "0776_Turtonator",
@@ -82303,7 +82739,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 437
   },
   {
     "key": "0776_Turtonator_Alolan",
@@ -82406,7 +82843,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 438
   },
   {
     "key": "0777_Togedemaru",
@@ -82495,7 +82933,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 439
   },
   {
     "key": "0777_Togedemaru_Alolan",
@@ -82584,7 +83023,8 @@
     "evolutions": {
       "family": [],
       "steps": []
-    }
+    },
+    "paldea_id": 440
   },
   {
     "key": "0778_Mimikyu",

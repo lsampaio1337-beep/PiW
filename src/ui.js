@@ -440,6 +440,11 @@ window.cheatProgressChallenge = function(targetAreaId) {
             if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};
             state.stats.defeatedBosses["Hoenn Champion"] = true;
         }
+        if (req.defeatPaldeaChampion) {
+            if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};
+            state.stats.defeatedBosses["Paldea Champion"] = true;
+        }
+
         if (req.defeatSinnohChampion) {
             if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};
             state.stats.defeatedBosses["Sinnoh Champion"] = true;

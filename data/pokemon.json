@@ -53,7 +53,8 @@
       }
     ],
     "kanto_id": 1,
-    "johto_id": 226
+    "johto_id": 226,
+    "paldea_id": 1
   },
   {
     "id": 2,
@@ -109,7 +110,8 @@
       }
     ],
     "kanto_id": 2,
-    "johto_id": 227
+    "johto_id": 227,
+    "paldea_id": 2
   },
   {
     "id": 3,
@@ -160,7 +162,8 @@
       }
     ],
     "kanto_id": 3,
-    "johto_id": 228
+    "johto_id": 228,
+    "paldea_id": 3
   },
   {
     "id": 4,
@@ -219,7 +222,8 @@
       }
     ],
     "kanto_id": 4,
-    "johto_id": 229
+    "johto_id": 229,
+    "paldea_id": 4
   },
   {
     "id": 5,
@@ -278,7 +282,8 @@
       }
     ],
     "kanto_id": 5,
-    "johto_id": 230
+    "johto_id": 230,
+    "paldea_id": 5
   },
   {
     "id": 6,
@@ -337,7 +342,8 @@
       }
     ],
     "kanto_id": 6,
-    "johto_id": 231
+    "johto_id": 231,
+    "paldea_id": 6
   },
   {
     "id": 7,
@@ -388,7 +394,8 @@
       }
     ],
     "kanto_id": 7,
-    "johto_id": 232
+    "johto_id": 232,
+    "paldea_id": 7
   },
   {
     "id": 8,
@@ -439,7 +446,8 @@
       }
     ],
     "kanto_id": 8,
-    "johto_id": 233
+    "johto_id": 233,
+    "paldea_id": 8
   },
   {
     "id": 9,
@@ -485,7 +493,8 @@
       }
     ],
     "kanto_id": 9,
-    "johto_id": 234
+    "johto_id": 234,
+    "paldea_id": 9
   },
   {
     "id": 10,
@@ -516,7 +525,8 @@
       }
     ],
     "kanto_id": 10,
-    "johto_id": 24
+    "johto_id": 24,
+    "paldea_id": 10
   },
   {
     "id": 11,
@@ -543,7 +553,8 @@
       }
     ],
     "kanto_id": 11,
-    "johto_id": 25
+    "johto_id": 25,
+    "paldea_id": 11
   },
   {
     "id": 12,
@@ -590,7 +601,8 @@
       }
     ],
     "kanto_id": 12,
-    "johto_id": 26
+    "johto_id": 26,
+    "paldea_id": 12
   },
   {
     "id": 13,
@@ -618,7 +630,8 @@
       }
     ],
     "kanto_id": 13,
-    "johto_id": 27
+    "johto_id": 27,
+    "paldea_id": 13
   },
   {
     "id": 14,
@@ -646,7 +659,8 @@
       }
     ],
     "kanto_id": 14,
-    "johto_id": 28
+    "johto_id": 28,
+    "paldea_id": 14
   },
   {
     "id": 15,
@@ -693,7 +707,8 @@
       }
     ],
     "kanto_id": 15,
-    "johto_id": 29
+    "johto_id": 29,
+    "paldea_id": 15
   },
   {
     "id": 16,
@@ -1244,7 +1259,8 @@
     "kanto_id": 25,
     "johto_id": 22,
     "hoenn_id": 156,
-    "sinnoh_id": 104
+    "sinnoh_id": 104,
+    "paldea_id": 16
   },
   {
     "id": 26,
@@ -1292,7 +1308,8 @@
     "kanto_id": 26,
     "johto_id": 23,
     "hoenn_id": 157,
-    "sinnoh_id": 105
+    "sinnoh_id": 105,
+    "paldea_id": 17
   },
   {
     "id": 27,
@@ -1353,7 +1370,8 @@
     "kanto_id": 27,
     "johto_id": 48,
     "hoenn_id": 112,
-    "unova_id": 113
+    "unova_id": 113,
+    "paldea_id": 18
   },
   {
     "id": 28,
@@ -1409,7 +1427,8 @@
     "kanto_id": 28,
     "johto_id": 49,
     "hoenn_id": 113,
-    "unova_id": 114
+    "unova_id": 114,
+    "paldea_id": 19
   },
   {
     "id": 29,
@@ -1995,7 +2014,8 @@
     "kanto_id": 39,
     "johto_id": 44,
     "hoenn_id": 138,
-    "unova_id": 282
+    "unova_id": 282,
+    "paldea_id": 20
   },
   {
     "id": 40,
@@ -2060,7 +2080,8 @@
     "kanto_id": 40,
     "johto_id": 45,
     "hoenn_id": 139,
-    "unova_id": 283
+    "unova_id": 283,
+    "paldea_id": 21
   },
   {
     "id": 41,
@@ -2463,7 +2484,8 @@
       }
     ],
     "kanto_id": 48,
-    "johto_id": 108
+    "johto_id": 108,
+    "paldea_id": 22
   },
   {
     "id": 49,
@@ -2514,7 +2536,8 @@
       }
     ],
     "kanto_id": 49,
-    "johto_id": 109
+    "johto_id": 109,
+    "paldea_id": 23
   },
   {
     "id": 50,
@@ -2569,7 +2592,8 @@
       }
     ],
     "kanto_id": 50,
-    "johto_id": 132
+    "johto_id": 132,
+    "paldea_id": 24
   },
   {
     "id": 51,
@@ -2591,7 +2615,8 @@
       }
     ],
     "kanto_id": 51,
-    "johto_id": 133
+    "johto_id": 133,
+    "paldea_id": 25
   },
   {
     "id": 52,
@@ -2646,7 +2671,8 @@
       }
     ],
     "kanto_id": 52,
-    "johto_id": 136
+    "johto_id": 136,
+    "paldea_id": 26
   },
   {
     "id": 53,
@@ -2668,7 +2694,8 @@
       }
     ],
     "kanto_id": 53,
-    "johto_id": 137
+    "johto_id": 137,
+    "paldea_id": 27
   },
   {
     "id": 54,
@@ -2722,7 +2749,8 @@
     "johto_id": 138,
     "hoenn_id": 158,
     "sinnoh_id": 43,
-    "unova_id": 28
+    "unova_id": 28,
+    "paldea_id": 28
   },
   {
     "id": 55,
@@ -2779,7 +2807,8 @@
     "johto_id": 139,
     "hoenn_id": 159,
     "sinnoh_id": 44,
-    "unova_id": 29
+    "unova_id": 29,
+    "paldea_id": 29
   },
   {
     "id": 56,
@@ -2850,7 +2879,8 @@
       }
     ],
     "kanto_id": 56,
-    "johto_id": 134
+    "johto_id": 134,
+    "paldea_id": 30
   },
   {
     "id": 57,
@@ -2925,7 +2955,8 @@
       }
     ],
     "kanto_id": 57,
-    "johto_id": 135
+    "johto_id": 135,
+    "paldea_id": 31
   },
   {
     "id": 58,
@@ -2981,7 +3012,8 @@
     ],
     "kanto_id": 58,
     "johto_id": 127,
-    "unova_id": 51
+    "unova_id": 51,
+    "paldea_id": 32
   },
   {
     "id": 59,
@@ -3004,7 +3036,8 @@
     ],
     "kanto_id": 59,
     "johto_id": 128,
-    "unova_id": 52
+    "unova_id": 52,
+    "paldea_id": 33
   },
   {
     "id": 60,
@@ -3059,7 +3092,8 @@
       }
     ],
     "kanto_id": 60,
-    "johto_id": 72
+    "johto_id": 72,
+    "paldea_id": 34
   },
   {
     "id": 61,
@@ -3118,7 +3152,8 @@
       }
     ],
     "kanto_id": 61,
-    "johto_id": 73
+    "johto_id": 73,
+    "paldea_id": 35
   },
   {
     "id": 62,
@@ -3145,7 +3180,8 @@
       }
     ],
     "kanto_id": 62,
-    "johto_id": 74
+    "johto_id": 74,
+    "paldea_id": 36
   },
   {
     "id": 63,
@@ -3702,7 +3738,8 @@
     "kanto_id": 72,
     "johto_id": 162,
     "hoenn_id": 66,
-    "sinnoh_id": 136
+    "sinnoh_id": 136,
+    "paldea_id": 37
   },
   {
     "id": 73,
@@ -3767,7 +3804,8 @@
     "kanto_id": 73,
     "johto_id": 163,
     "hoenn_id": 67,
-    "sinnoh_id": 137
+    "sinnoh_id": 137,
+    "paldea_id": 38
   },
   {
     "id": 74,
@@ -4099,7 +4137,8 @@
       }
     ],
     "kanto_id": 79,
-    "johto_id": 80
+    "johto_id": 80,
+    "paldea_id": 39
   },
   {
     "id": 80,
@@ -4122,7 +4161,8 @@
       }
     ],
     "kanto_id": 80,
-    "johto_id": 81
+    "johto_id": 81,
+    "paldea_id": 40
   },
   {
     "id": 81,
@@ -4180,7 +4220,8 @@
     "kanto_id": 81,
     "johto_id": 118,
     "hoenn_id": 82,
-    "unova_id": 48
+    "unova_id": 48,
+    "paldea_id": 41
   },
   {
     "id": 82,
@@ -4238,7 +4279,8 @@
     "kanto_id": 82,
     "johto_id": 119,
     "hoenn_id": 83,
-    "unova_id": 49
+    "unova_id": 49,
+    "paldea_id": 42
   },
   {
     "id": 83,
@@ -4600,7 +4642,8 @@
     "kanto_id": 88,
     "johto_id": 116,
     "hoenn_id": 106,
-    "unova_id": 64
+    "unova_id": 64,
+    "paldea_id": 43
   },
   {
     "id": 89,
@@ -4648,7 +4691,8 @@
     "kanto_id": 89,
     "johto_id": 117,
     "hoenn_id": 107,
-    "unova_id": 65
+    "unova_id": 65,
+    "paldea_id": 44
   },
   {
     "id": 90,
@@ -4703,7 +4747,8 @@
       }
     ],
     "kanto_id": 90,
-    "johto_id": 169
+    "johto_id": 169,
+    "paldea_id": 45
   },
   {
     "id": 91,
@@ -4758,7 +4803,8 @@
       }
     ],
     "kanto_id": 91,
-    "johto_id": 170
+    "johto_id": 170,
+    "paldea_id": 46
   },
   {
     "id": 92,
@@ -4807,7 +4853,8 @@
     ],
     "kanto_id": 92,
     "johto_id": 58,
-    "sinnoh_id": 69
+    "sinnoh_id": 69,
+    "paldea_id": 47
   },
   {
     "id": 93,
@@ -4868,7 +4915,8 @@
     ],
     "kanto_id": 93,
     "johto_id": 59,
-    "sinnoh_id": 70
+    "sinnoh_id": 70,
+    "paldea_id": 48
   },
   {
     "id": 94,
@@ -4924,7 +4972,8 @@
     ],
     "kanto_id": 94,
     "johto_id": 60,
-    "sinnoh_id": 71
+    "sinnoh_id": 71,
+    "paldea_id": 49
   },
   {
     "id": 95,
@@ -5049,7 +5098,8 @@
       }
     ],
     "kanto_id": 96,
-    "johto_id": 87
+    "johto_id": 87,
+    "paldea_id": 50
   },
   {
     "id": 97,
@@ -5099,7 +5149,8 @@
       }
     ],
     "kanto_id": 97,
-    "johto_id": 88
+    "johto_id": 88,
+    "paldea_id": 51
   },
   {
     "id": 98,
@@ -5276,7 +5327,8 @@
     ],
     "kanto_id": 100,
     "johto_id": 120,
-    "hoenn_id": 84
+    "hoenn_id": 84,
+    "paldea_id": 52
   },
   {
     "id": 101,
@@ -5323,7 +5375,8 @@
     ],
     "kanto_id": 101,
     "johto_id": 121,
-    "hoenn_id": 85
+    "hoenn_id": 85,
+    "paldea_id": 53
   },
   {
     "id": 102,
@@ -6034,7 +6087,8 @@
     ],
     "kanto_id": 113,
     "johto_id": 217,
-    "sinnoh_id": 97
+    "sinnoh_id": 97,
+    "paldea_id": 54
   },
   {
     "id": 114,
@@ -6568,7 +6622,8 @@
       }
     ],
     "kanto_id": 123,
-    "johto_id": 110
+    "johto_id": 110,
+    "paldea_id": 55
   },
   {
     "id": 124,
@@ -6849,7 +6904,8 @@
       }
     ],
     "kanto_id": 128,
-    "johto_id": 148
+    "johto_id": 148,
+    "paldea_id": 56
   },
   {
     "id": 129,
@@ -6878,7 +6934,8 @@
     "kanto_id": 129,
     "johto_id": 76,
     "hoenn_id": 52,
-    "sinnoh_id": 23
+    "sinnoh_id": 23,
+    "paldea_id": 57
   },
   {
     "id": 130,
@@ -6939,7 +6996,8 @@
     "kanto_id": 130,
     "johto_id": 77,
     "hoenn_id": 53,
-    "sinnoh_id": 24
+    "sinnoh_id": 24,
+    "paldea_id": 58
   },
   {
     "id": 131,
@@ -7014,7 +7072,8 @@
     ],
     "kanto_id": 132,
     "johto_id": 92,
-    "unova_id": 261
+    "unova_id": 261,
+    "paldea_id": 59
   },
   {
     "id": 133,
@@ -7094,7 +7153,8 @@
     ],
     "kanto_id": 133,
     "johto_id": 180,
-    "unova_id": 91
+    "unova_id": 91,
+    "paldea_id": 60
   },
   {
     "id": 134,
@@ -7145,7 +7205,8 @@
     ],
     "kanto_id": 134,
     "johto_id": 181,
-    "unova_id": 92
+    "unova_id": 92,
+    "paldea_id": 61
   },
   {
     "id": 135,
@@ -7200,7 +7261,8 @@
     ],
     "kanto_id": 135,
     "johto_id": 182,
-    "unova_id": 93
+    "unova_id": 93,
+    "paldea_id": 62
   },
   {
     "id": 136,
@@ -7255,7 +7317,8 @@
     ],
     "kanto_id": 136,
     "johto_id": 183,
-    "unova_id": 94
+    "unova_id": 94,
+    "paldea_id": 63
   },
   {
     "id": 137,
@@ -7894,7 +7957,8 @@
       }
     ],
     "kanto_id": 147,
-    "johto_id": 241
+    "johto_id": 241,
+    "paldea_id": 64
   },
   {
     "id": 148,
@@ -7953,7 +8017,8 @@
       }
     ],
     "kanto_id": 148,
-    "johto_id": 242
+    "johto_id": 242,
+    "paldea_id": 65
   },
   {
     "id": 149,
@@ -8012,7 +8077,8 @@
       }
     ],
     "kanto_id": 149,
-    "johto_id": 243
+    "johto_id": 243,
+    "paldea_id": 66
   },
   {
     "id": 150,
@@ -9311,7 +9377,8 @@
     ],
     "johto_id": 21,
     "hoenn_id": 155,
-    "sinnoh_id": 103
+    "sinnoh_id": 103,
+    "paldea_id": 67
   },
   {
     "id": 173,
@@ -9424,7 +9491,8 @@
     ],
     "johto_id": 43,
     "hoenn_id": 137,
-    "unova_id": 281
+    "unova_id": 281,
+    "paldea_id": 68
   },
   {
     "id": 175,
@@ -9647,7 +9715,8 @@
       }
     ],
     "johto_id": 53,
-    "unova_id": 25
+    "unova_id": 25,
+    "paldea_id": 69
   },
   {
     "id": 180,
@@ -9690,7 +9759,8 @@
       }
     ],
     "johto_id": 54,
-    "unova_id": 26
+    "unova_id": 26,
+    "paldea_id": 70
   },
   {
     "id": 181,
@@ -9736,7 +9806,8 @@
       }
     ],
     "johto_id": 55,
-    "unova_id": 27
+    "unova_id": 27,
+    "paldea_id": 71
   },
   {
     "id": 182,
@@ -9848,7 +9919,8 @@
     "johto_id": 130,
     "hoenn_id": 55,
     "sinnoh_id": 125,
-    "unova_id": 31
+    "unova_id": 31,
+    "paldea_id": 72
   },
   {
     "id": 184,
@@ -9913,7 +9985,8 @@
     "johto_id": 131,
     "hoenn_id": 56,
     "sinnoh_id": 126,
-    "unova_id": 32
+    "unova_id": 32,
+    "paldea_id": 73
   },
   {
     "id": 185,
@@ -9979,7 +10052,8 @@
       }
     ],
     "johto_id": 106,
-    "sinnoh_id": 93
+    "sinnoh_id": 93,
+    "paldea_id": 74
   },
   {
     "id": 186,
@@ -10004,7 +10078,8 @@
         "move": "Pound"
       }
     ],
-    "johto_id": 75
+    "johto_id": 75,
+    "paldea_id": 75
   },
   {
     "id": 187,
@@ -10063,7 +10138,8 @@
         "move": "Bounce"
       }
     ],
-    "johto_id": 67
+    "johto_id": 67,
+    "paldea_id": 76
   },
   {
     "id": 188,
@@ -10122,7 +10198,8 @@
         "move": "Bounce"
       }
     ],
-    "johto_id": 68
+    "johto_id": 68,
+    "paldea_id": 77
   },
   {
     "id": 189,
@@ -10176,7 +10253,8 @@
         "move": "Bounce"
       }
     ],
-    "johto_id": 69
+    "johto_id": 69,
+    "paldea_id": 78
   },
   {
     "id": 190,
@@ -10286,7 +10364,8 @@
       }
     ],
     "johto_id": 102,
-    "unova_id": 20
+    "unova_id": 20,
+    "paldea_id": 79
   },
   {
     "id": 192,
@@ -10352,7 +10431,8 @@
       }
     ],
     "johto_id": 103,
-    "unova_id": 21
+    "unova_id": 21,
+    "paldea_id": 80
   },
   {
     "id": 193,
@@ -10468,7 +10548,8 @@
       }
     ],
     "johto_id": 56,
-    "sinnoh_id": 117
+    "sinnoh_id": 117,
+    "paldea_id": 81
   },
   {
     "id": 195,
@@ -10511,7 +10592,8 @@
       }
     ],
     "johto_id": 57,
-    "sinnoh_id": 118
+    "sinnoh_id": 118,
+    "paldea_id": 82
   },
   {
     "id": 196,
@@ -10557,7 +10639,8 @@
       }
     ],
     "johto_id": 184,
-    "unova_id": 95
+    "unova_id": 95,
+    "paldea_id": 83
   },
   {
     "id": 197,
@@ -10603,7 +10686,8 @@
       }
     ],
     "johto_id": 185,
-    "unova_id": 96
+    "unova_id": 96,
+    "paldea_id": 84
   },
   {
     "id": 198,
@@ -10659,7 +10743,8 @@
       }
     ],
     "johto_id": 208,
-    "sinnoh_id": 74
+    "sinnoh_id": 74,
+    "paldea_id": 85
   },
   {
     "id": 199,
@@ -10685,7 +10770,8 @@
         "move": "Stomp"
       }
     ],
-    "johto_id": 82
+    "johto_id": 82,
+    "paldea_id": 86
   },
   {
     "id": 200,
@@ -10736,7 +10822,8 @@
       }
     ],
     "johto_id": 214,
-    "sinnoh_id": 72
+    "sinnoh_id": 72,
+    "paldea_id": 87
   },
   {
     "id": 201,
@@ -10849,7 +10936,8 @@
     ],
     "johto_id": 147,
     "hoenn_id": 164,
-    "sinnoh_id": 121
+    "sinnoh_id": 121,
+    "paldea_id": 88
   },
   {
     "id": 204,
@@ -10911,7 +10999,8 @@
         "move": "Double-Edge"
       }
     ],
-    "johto_id": 93
+    "johto_id": 93,
+    "paldea_id": 89
   },
   {
     "id": 205,
@@ -10973,7 +11062,8 @@
         "move": "Double-Edge"
       }
     ],
-    "johto_id": 94
+    "johto_id": 94,
+    "paldea_id": 90
   },
   {
     "id": 206,
@@ -11032,7 +11122,8 @@
       }
     ],
     "johto_id": 52,
-    "unova_id": 35
+    "unova_id": 35,
+    "paldea_id": 91
   },
   {
     "id": 207,
@@ -11342,7 +11433,8 @@
         "move": "Aqua Tail"
       }
     ],
-    "johto_id": 161
+    "johto_id": 161,
+    "paldea_id": 92
   },
   {
     "id": 212,
@@ -11400,7 +11492,8 @@
         "move": "Iron Head"
       }
     ],
-    "johto_id": 111
+    "johto_id": 111,
+    "paldea_id": 93
   },
   {
     "id": 213,
@@ -11508,7 +11601,8 @@
     "johto_id": 113,
     "hoenn_id": 168,
     "sinnoh_id": 62,
-    "unova_id": 145
+    "unova_id": 145,
+    "paldea_id": 94
   },
   {
     "id": 215,
@@ -11561,7 +11655,8 @@
     ],
     "johto_id": 213,
     "sinnoh_id": 144,
-    "unova_id": 252
+    "unova_id": 252,
+    "paldea_id": 95
   },
   {
     "id": 216,
@@ -11623,7 +11718,8 @@
         "move": "Thrash"
       }
     ],
-    "johto_id": 193
+    "johto_id": 193,
+    "paldea_id": 96
   },
   {
     "id": 217,
@@ -11689,7 +11785,8 @@
         "move": "Hammer Arm"
       }
     ],
-    "johto_id": 194
+    "johto_id": 194,
+    "paldea_id": 97
   },
   {
     "id": 218,
@@ -12158,7 +12255,8 @@
       }
     ],
     "johto_id": 190,
-    "unova_id": 254
+    "unova_id": 254,
+    "paldea_id": 98
   },
   {
     "id": 226,
@@ -12313,7 +12411,8 @@
         "move": "Crunch"
       }
     ],
-    "johto_id": 209
+    "johto_id": 209,
+    "paldea_id": 99
   },
   {
     "id": 229,
@@ -12371,7 +12470,8 @@
         "move": "Overheat"
       }
     ],
-    "johto_id": 210
+    "johto_id": 210,
+    "paldea_id": 100
   },
   {
     "id": 230,
@@ -12481,7 +12581,8 @@
       }
     ],
     "johto_id": 195,
-    "hoenn_id": 165
+    "hoenn_id": 165,
+    "paldea_id": 101
   },
   {
     "id": 232,
@@ -12547,7 +12648,8 @@
       }
     ],
     "johto_id": 196,
-    "hoenn_id": 166
+    "hoenn_id": 166,
+    "paldea_id": 102
   },
   {
     "id": 233,
@@ -12643,7 +12745,8 @@
         "move": "Double-Edge"
       }
     ],
-    "johto_id": 129
+    "johto_id": 129,
+    "paldea_id": 103
   },
   {
     "id": 235,
@@ -13035,7 +13138,8 @@
       }
     ],
     "johto_id": 218,
-    "sinnoh_id": 98
+    "sinnoh_id": 98,
+    "paldea_id": 104
   },
   {
     "id": 243,
@@ -13278,7 +13382,8 @@
       }
     ],
     "johto_id": 244,
-    "unova_id": 292
+    "unova_id": 292,
+    "paldea_id": 105
   },
   {
     "id": 247,
@@ -13342,7 +13447,8 @@
       }
     ],
     "johto_id": 245,
-    "unova_id": 293
+    "unova_id": 293,
+    "paldea_id": 106
   },
   {
     "id": 248,
@@ -13409,7 +13515,8 @@
       }
     ],
     "johto_id": 246,
-    "unova_id": 294
+    "unova_id": 294,
+    "paldea_id": 107
   },
   {
     "id": 249,
@@ -15061,7 +15168,8 @@
     ],
     "hoenn_id": 27,
     "sinnoh_id": 119,
-    "unova_id": 212
+    "unova_id": 212,
+    "paldea_id": 108
   },
   {
     "id": 279,
@@ -15117,7 +15225,8 @@
     ],
     "hoenn_id": 28,
     "sinnoh_id": 120,
-    "unova_id": 213
+    "unova_id": 213,
+    "paldea_id": 109
   },
   {
     "id": 280,
@@ -15172,7 +15281,8 @@
         "move": "Future Sight"
       }
     ],
-    "hoenn_id": 29
+    "hoenn_id": 29,
+    "paldea_id": 110
   },
   {
     "id": 281,
@@ -15231,7 +15341,8 @@
         "move": "Future Sight"
       }
     ],
-    "hoenn_id": 30
+    "hoenn_id": 30,
+    "paldea_id": 111
   },
   {
     "id": 282,
@@ -15285,7 +15396,8 @@
         "move": "Future Sight"
       }
     ],
-    "hoenn_id": 31
+    "hoenn_id": 31,
+    "paldea_id": 112
   },
   {
     "id": 283,
@@ -15320,7 +15432,8 @@
         "move": "Bubble Beam"
       }
     ],
-    "hoenn_id": 32
+    "hoenn_id": 32,
+    "paldea_id": 113
   },
   {
     "id": 284,
@@ -15366,7 +15479,8 @@
         "move": "Bug Buzz"
       }
     ],
-    "hoenn_id": 33
+    "hoenn_id": 33,
+    "paldea_id": 114
   },
   {
     "id": 285,
@@ -15412,7 +15526,8 @@
         "move": "Seed Bomb"
       }
     ],
-    "hoenn_id": 34
+    "hoenn_id": 34,
+    "paldea_id": 115
   },
   {
     "id": 286,
@@ -15474,7 +15589,8 @@
         "move": "Focus Punch"
       }
     ],
-    "hoenn_id": 35
+    "hoenn_id": 35,
+    "paldea_id": 116
   },
   {
     "id": 287,
@@ -15525,7 +15641,8 @@
       }
     ],
     "hoenn_id": 36,
-    "unova_id": 276
+    "unova_id": 276,
+    "paldea_id": 117
   },
   {
     "id": 288,
@@ -15580,7 +15697,8 @@
       }
     ],
     "hoenn_id": 37,
-    "unova_id": 277
+    "unova_id": 277,
+    "paldea_id": 118
   },
   {
     "id": 289,
@@ -15634,7 +15752,8 @@
       }
     ],
     "hoenn_id": 38,
-    "unova_id": 278
+    "unova_id": 278,
+    "paldea_id": 119
   },
   {
     "id": 290,
@@ -16040,7 +16159,8 @@
         "move": "Heavy Slam"
       }
     ],
-    "hoenn_id": 48
+    "hoenn_id": 48,
+    "paldea_id": 120
   },
   {
     "id": 297,
@@ -16105,7 +16225,8 @@
         "move": "Headlong Rush"
       }
     ],
-    "hoenn_id": 49
+    "hoenn_id": 49,
+    "paldea_id": 121
   },
   {
     "id": 298,
@@ -16146,7 +16267,8 @@
     ],
     "hoenn_id": 54,
     "sinnoh_id": 124,
-    "unova_id": 30
+    "unova_id": 30,
+    "paldea_id": 122
   },
   {
     "id": 299,
@@ -16384,7 +16506,8 @@
         "move": "Phantom Force"
       }
     ],
-    "hoenn_id": 68
+    "hoenn_id": 68,
+    "paldea_id": 123
   },
   {
     "id": 303,
@@ -16685,7 +16808,8 @@
       }
     ],
     "hoenn_id": 76,
-    "sinnoh_id": 86
+    "sinnoh_id": 86,
+    "paldea_id": 124
   },
   {
     "id": 308,
@@ -16732,7 +16856,8 @@
       }
     ],
     "hoenn_id": 77,
-    "sinnoh_id": 87
+    "sinnoh_id": 87,
+    "paldea_id": 125
   },
   {
     "id": 309,
@@ -17154,7 +17279,8 @@
         "move": "Explosion"
       }
     ],
-    "hoenn_id": 95
+    "hoenn_id": 95,
+    "paldea_id": 126
   },
   {
     "id": 317,
@@ -17211,7 +17337,8 @@
         "move": "Explosion"
       }
     ],
-    "hoenn_id": 96
+    "hoenn_id": 96,
+    "paldea_id": 127
   },
   {
     "id": 318,
@@ -17513,7 +17640,8 @@
       }
     ],
     "hoenn_id": 101,
-    "unova_id": 204
+    "unova_id": 204,
+    "paldea_id": 128
   },
   {
     "id": 323,
@@ -17572,7 +17700,8 @@
       }
     ],
     "hoenn_id": 102,
-    "unova_id": 205
+    "unova_id": 205,
+    "paldea_id": 129
   },
   {
     "id": 324,
@@ -17633,7 +17762,8 @@
         "move": "Eruption"
       }
     ],
-    "hoenn_id": 105
+    "hoenn_id": 105,
+    "paldea_id": 130
   },
   {
     "id": 325,
@@ -17684,7 +17814,8 @@
       }
     ],
     "hoenn_id": 110,
-    "unova_id": 206
+    "unova_id": 206,
+    "paldea_id": 131
   },
   {
     "id": 326,
@@ -17734,7 +17865,8 @@
       }
     ],
     "hoenn_id": 111,
-    "unova_id": 207
+    "unova_id": 207,
+    "paldea_id": 132
   },
   {
     "id": 327,
@@ -18035,7 +18167,8 @@
         "move": "Energy Ball"
       }
     ],
-    "hoenn_id": 119
+    "hoenn_id": 119,
+    "paldea_id": 133
   },
   {
     "id": 332,
@@ -18085,7 +18218,8 @@
         "move": "Energy Ball"
       }
     ],
-    "hoenn_id": 120
+    "hoenn_id": 120,
+    "paldea_id": 134
   },
   {
     "id": 333,
@@ -18141,7 +18275,8 @@
       }
     ],
     "hoenn_id": 121,
-    "unova_id": 246
+    "unova_id": 246,
+    "paldea_id": 135
   },
   {
     "id": 334,
@@ -18192,7 +18327,8 @@
       }
     ],
     "hoenn_id": 122,
-    "unova_id": 247
+    "unova_id": 247,
+    "paldea_id": 136
   },
   {
     "id": 335,
@@ -18246,7 +18382,8 @@
       }
     ],
     "hoenn_id": 123,
-    "unova_id": 186
+    "unova_id": 186,
+    "paldea_id": 137
   },
   {
     "id": 336,
@@ -18482,7 +18619,8 @@
       }
     ],
     "hoenn_id": 127,
-    "sinnoh_id": 80
+    "sinnoh_id": 80,
+    "paldea_id": 138
   },
   {
     "id": 340,
@@ -18545,7 +18683,8 @@
       }
     ],
     "hoenn_id": 128,
-    "sinnoh_id": 81
+    "sinnoh_id": 81,
+    "paldea_id": 139
   },
   {
     "id": 341,
@@ -19275,7 +19414,8 @@
       }
     ],
     "hoenn_id": 146,
-    "unova_id": 210
+    "unova_id": 210,
+    "paldea_id": 140
   },
   {
     "id": 354,
@@ -19325,7 +19465,8 @@
       }
     ],
     "hoenn_id": 147,
-    "unova_id": 211
+    "unova_id": 211,
+    "paldea_id": 141
   },
   {
     "id": 355,
@@ -19680,7 +19821,8 @@
         "move": "Blizzard"
       }
     ],
-    "hoenn_id": 171
+    "hoenn_id": 171,
+    "paldea_id": 142
   },
   {
     "id": 362,
@@ -19733,7 +19875,8 @@
         "move": "Explosion"
       }
     ],
-    "hoenn_id": 172
+    "hoenn_id": 172,
+    "paldea_id": 143
   },
   {
     "id": 363,
@@ -20123,7 +20266,8 @@
         "move": "Hydro Pump"
       }
     ],
-    "hoenn_id": 183
+    "hoenn_id": 183,
+    "paldea_id": 144
   },
   {
     "id": 371,
@@ -20185,7 +20329,8 @@
         "move": "Double-Edge"
       }
     ],
-    "hoenn_id": 187
+    "hoenn_id": 187,
+    "paldea_id": 145
   },
   {
     "id": 372,
@@ -20247,7 +20392,8 @@
         "move": "Double-Edge"
       }
     ],
-    "hoenn_id": 188
+    "hoenn_id": 188,
+    "paldea_id": 146
   },
   {
     "id": 373,
@@ -20309,7 +20455,8 @@
         "move": "Air Slash"
       }
     ],
-    "hoenn_id": 189
+    "hoenn_id": 189,
+    "paldea_id": 147
   },
   {
     "id": 374,
@@ -21676,7 +21823,8 @@
         "move": "Brave Bird"
       }
     ],
-    "sinnoh_id": 10
+    "sinnoh_id": 10,
+    "paldea_id": 148
   },
   {
     "id": 397,
@@ -21731,7 +21879,8 @@
         "move": "Brave Bird"
       }
     ],
-    "sinnoh_id": 11
+    "sinnoh_id": 11,
+    "paldea_id": 149
   },
   {
     "id": 398,
@@ -21785,7 +21934,8 @@
         "move": "Brave Bird"
       }
     ],
-    "sinnoh_id": 12
+    "sinnoh_id": 12,
+    "paldea_id": 150
   },
   {
     "id": 399,
@@ -21907,7 +22057,8 @@
         "move": "Bug Bite"
       }
     ],
-    "sinnoh_id": 15
+    "sinnoh_id": 15,
+    "paldea_id": 151
   },
   {
     "id": 402,
@@ -21952,7 +22103,8 @@
         "move": "Bug Buzz"
       }
     ],
-    "sinnoh_id": 16
+    "sinnoh_id": 16,
+    "paldea_id": 152
   },
   {
     "id": 403,
@@ -22006,7 +22158,8 @@
         "move": "Wild Charge"
       }
     ],
-    "sinnoh_id": 17
+    "sinnoh_id": 17,
+    "paldea_id": 153
   },
   {
     "id": 404,
@@ -22060,7 +22213,8 @@
         "move": "Wild Charge"
       }
     ],
-    "sinnoh_id": 18
+    "sinnoh_id": 18,
+    "paldea_id": 154
   },
   {
     "id": 405,
@@ -22109,7 +22263,8 @@
         "move": "Wild Charge"
       }
     ],
-    "sinnoh_id": 19
+    "sinnoh_id": 19,
+    "paldea_id": 155
   },
   {
     "id": 406,
@@ -22542,7 +22697,8 @@
       }
     ],
     "sinnoh_id": 53,
-    "unova_id": 142
+    "unova_id": 142,
+    "paldea_id": 156
   },
   {
     "id": 416,
@@ -22601,7 +22757,8 @@
       }
     ],
     "sinnoh_id": 54,
-    "unova_id": 143
+    "unova_id": 143,
+    "paldea_id": 157
   },
   {
     "id": 417,
@@ -22658,7 +22815,8 @@
         "move": "Thunder"
       }
     ],
-    "sinnoh_id": 55
+    "sinnoh_id": 55,
+    "paldea_id": 158
   },
   {
     "id": 418,
@@ -22729,7 +22887,8 @@
       }
     ],
     "sinnoh_id": 56,
-    "unova_id": 149
+    "unova_id": 149,
+    "paldea_id": 159
   },
   {
     "id": 419,
@@ -22799,7 +22958,8 @@
       }
     ],
     "sinnoh_id": 57,
-    "unova_id": 150
+    "unova_id": 150,
+    "paldea_id": 160
   },
   {
     "id": 420,
@@ -22936,7 +23096,8 @@
         "move": "Earth Power"
       }
     ],
-    "sinnoh_id": 60
+    "sinnoh_id": 60,
+    "paldea_id": 161
   },
   {
     "id": 423,
@@ -22982,7 +23143,8 @@
         "move": "Earth Power"
       }
     ],
-    "sinnoh_id": 61
+    "sinnoh_id": 61,
+    "paldea_id": 162
   },
   {
     "id": 424,
@@ -23083,7 +23245,8 @@
       }
     ],
     "sinnoh_id": 65,
-    "unova_id": 208
+    "unova_id": 208,
+    "paldea_id": 163
   },
   {
     "id": 426,
@@ -23134,7 +23297,8 @@
       }
     ],
     "sinnoh_id": 66,
-    "unova_id": 209
+    "unova_id": 209,
+    "paldea_id": 164
   },
   {
     "id": 427,
@@ -23280,7 +23444,8 @@
         "move": "Power Gem"
       }
     ],
-    "sinnoh_id": 73
+    "sinnoh_id": 73,
+    "paldea_id": 165
   },
   {
     "id": 430,
@@ -23326,7 +23491,8 @@
         "move": "Comeuppance"
       }
     ],
-    "sinnoh_id": 75
+    "sinnoh_id": 75,
+    "paldea_id": 166
   },
   {
     "id": 431,
@@ -23510,7 +23676,8 @@
         "move": "Explosion"
       }
     ],
-    "sinnoh_id": 84
+    "sinnoh_id": 84,
+    "paldea_id": 167
   },
   {
     "id": 435,
@@ -23564,7 +23731,8 @@
         "move": "Explosion"
       }
     ],
-    "sinnoh_id": 85
+    "sinnoh_id": 85,
+    "paldea_id": 168
   },
   {
     "id": 436,
@@ -23616,7 +23784,8 @@
       }
     ],
     "sinnoh_id": 88,
-    "unova_id": 250
+    "unova_id": 250,
+    "paldea_id": 169
   },
   {
     "id": 437,
@@ -23667,7 +23836,8 @@
       }
     ],
     "sinnoh_id": 89,
-    "unova_id": 251
+    "unova_id": 251,
+    "paldea_id": 170
   },
   {
     "id": 438,
@@ -23721,7 +23891,8 @@
         "move": "Double-Edge"
       }
     ],
-    "sinnoh_id": 92
+    "sinnoh_id": 92,
+    "paldea_id": 171
   },
   {
     "id": 439,
@@ -23806,7 +23977,8 @@
         "move": "Covet"
       }
     ],
-    "sinnoh_id": 96
+    "sinnoh_id": 96,
+    "paldea_id": 172
   },
   {
     "id": 441,
@@ -23961,7 +24133,8 @@
         "move": "Dragon Rush"
       }
     ],
-    "sinnoh_id": 109
+    "sinnoh_id": 109,
+    "paldea_id": 173
   },
   {
     "id": 444,
@@ -24024,7 +24197,8 @@
         "move": "Dragon Rush"
       }
     ],
-    "sinnoh_id": 110
+    "sinnoh_id": 110,
+    "paldea_id": 174
   },
   {
     "id": 445,
@@ -24082,7 +24256,8 @@
         "move": "Dragon Rush"
       }
     ],
-    "sinnoh_id": 111
+    "sinnoh_id": 111,
+    "paldea_id": 175
   },
   {
     "id": 446,
@@ -24179,7 +24354,8 @@
       }
     ],
     "sinnoh_id": 115,
-    "unova_id": 33
+    "unova_id": 33,
+    "paldea_id": 176
   },
   {
     "id": 448,
@@ -24234,7 +24410,8 @@
       }
     ],
     "sinnoh_id": 116,
-    "unova_id": 34
+    "unova_id": 34,
+    "paldea_id": 177
   },
   {
     "id": 449,
@@ -24288,7 +24465,8 @@
         "move": "Double-Edge"
       }
     ],
-    "sinnoh_id": 122
+    "sinnoh_id": 122,
+    "paldea_id": 178
   },
   {
     "id": 450,
@@ -24341,7 +24519,8 @@
         "move": "Double-Edge"
       }
     ],
-    "sinnoh_id": 123
+    "sinnoh_id": 123,
+    "paldea_id": 179
   },
   {
     "id": 451,
@@ -24492,7 +24671,8 @@
       }
     ],
     "sinnoh_id": 129,
-    "unova_id": 290
+    "unova_id": 290,
+    "paldea_id": 180
   },
   {
     "id": 454,
@@ -24547,7 +24727,8 @@
       }
     ],
     "sinnoh_id": 130,
-    "unova_id": 291
+    "unova_id": 291,
+    "paldea_id": 181
   },
   {
     "id": 455,
@@ -24635,7 +24816,8 @@
         "move": "Bounce"
       }
     ],
-    "sinnoh_id": 134
+    "sinnoh_id": 134,
+    "paldea_id": 182
   },
   {
     "id": 457,
@@ -24680,7 +24862,8 @@
         "move": "Bounce"
       }
     ],
-    "sinnoh_id": 135
+    "sinnoh_id": 135,
+    "paldea_id": 183
   },
   {
     "id": 458,
@@ -24896,7 +25079,8 @@
       }
     ],
     "sinnoh_id": 145,
-    "unova_id": 253
+    "unova_id": 253,
+    "paldea_id": 184
   },
   {
     "id": 462,
@@ -24954,7 +25138,8 @@
         "move": "Zap Cannon"
       }
     ],
-    "unova_id": 50
+    "unova_id": 50,
+    "paldea_id": 185
   },
   {
     "id": 463,
@@ -25379,7 +25564,8 @@
         "move": "Leaf Storm"
       }
     ],
-    "unova_id": 97
+    "unova_id": 97,
+    "paldea_id": 186
   },
   {
     "id": 471,
@@ -25432,7 +25618,8 @@
         "move": "Blizzard"
       }
     ],
-    "unova_id": 98
+    "unova_id": 98,
+    "paldea_id": 187
   },
   {
     "id": 472,
@@ -25653,7 +25840,8 @@
         "level": 58,
         "move": "Close Combat"
       }
-    ]
+    ],
+    "paldea_id": 188
   },
   {
     "id": 476,
@@ -25820,7 +26008,8 @@
         "level": 55,
         "move": "Phantom Force"
       }
-    ]
+    ],
+    "paldea_id": 189
   },
   {
     "id": 479,
@@ -25865,7 +26054,8 @@
         "level": 55,
         "move": "Uproar"
       }
-    ]
+    ],
+    "paldea_id": 190
   },
   {
     "id": 480,
@@ -29556,7 +29746,8 @@
         "move": "Leaf Storm"
       }
     ],
-    "unova_id": 84
+    "unova_id": 84,
+    "paldea_id": 191
   },
   {
     "id": 549,
@@ -29585,7 +29776,8 @@
         "move": "Mega Drain"
       }
     ],
-    "unova_id": 85
+    "unova_id": 85,
+    "paldea_id": 192
   },
   {
     "id": 550,
@@ -29647,7 +29839,8 @@
         "move": "Double-Edge"
       }
     ],
-    "unova_id": 104
+    "unova_id": 104,
+    "paldea_id": 193
   },
   {
     "id": 551,
@@ -29706,7 +29899,8 @@
         "move": "Double-Edge"
       }
     ],
-    "unova_id": 99
+    "unova_id": 99,
+    "paldea_id": 194
   },
   {
     "id": 552,
@@ -29765,7 +29959,8 @@
         "move": "Double-Edge"
       }
     ],
-    "unova_id": 100
+    "unova_id": 100,
+    "paldea_id": 195
   },
   {
     "id": 553,
@@ -29823,7 +30018,8 @@
         "move": "Outrage"
       }
     ],
-    "unova_id": 101
+    "unova_id": 101,
+    "paldea_id": 196
   },
   {
     "id": 554,
@@ -30753,7 +30949,8 @@
         "move": "Fury Swipes"
       }
     ],
-    "unova_id": 151
+    "unova_id": 151,
+    "paldea_id": 197
   },
   {
     "id": 571,
@@ -30778,7 +30975,8 @@
         "move": "Fury Swipes"
       }
     ],
-    "unova_id": 152
+    "unova_id": 152,
+    "paldea_id": 198
   },
   {
     "id": 572,
@@ -30899,7 +31097,8 @@
         "move": "Future Sight"
       }
     ],
-    "unova_id": 136
+    "unova_id": 136,
+    "paldea_id": 199
   },
   {
     "id": 575,
@@ -30941,7 +31140,8 @@
         "move": "Future Sight"
       }
     ],
-    "unova_id": 137
+    "unova_id": 137,
+    "paldea_id": 200
   },
   {
     "id": 576,
@@ -30982,7 +31182,8 @@
         "move": "Future Sight"
       }
     ],
-    "unova_id": 138
+    "unova_id": 138,
+    "paldea_id": 201
   },
   {
     "id": 577,
@@ -31424,7 +31625,8 @@
         "move": "Solar Beam"
       }
     ],
-    "unova_id": 159
+    "unova_id": 159,
+    "paldea_id": 202
   },
   {
     "id": 586,
@@ -31478,7 +31680,8 @@
         "move": "Solar Beam"
       }
     ],
-    "unova_id": 160
+    "unova_id": 160,
+    "paldea_id": 203
   },
   {
     "id": 587,
@@ -31715,7 +31918,8 @@
         "move": "Leaf Storm"
       }
     ],
-    "unova_id": 161
+    "unova_id": 161,
+    "paldea_id": 204
   },
   {
     "id": 591,
@@ -31757,7 +31961,8 @@
         "move": "Leaf Storm"
       }
     ],
-    "unova_id": 162
+    "unova_id": 162,
+    "paldea_id": 205
   },
   {
     "id": 592,
@@ -31927,7 +32132,8 @@
         "move": "Hydro Pump"
       }
     ],
-    "unova_id": 182
+    "unova_id": 182,
+    "paldea_id": 206
   },
   {
     "id": 595,
@@ -32336,7 +32542,8 @@
         "move": "Tackle"
       }
     ],
-    "unova_id": 177
+    "unova_id": 177,
+    "paldea_id": 207
   },
   {
     "id": 603,
@@ -32394,7 +32601,8 @@
         "move": "Super Fang"
       }
     ],
-    "unova_id": 178
+    "unova_id": 178,
+    "paldea_id": 208
   },
   {
     "id": 604,
@@ -32455,7 +32663,8 @@
         "move": "Super Fang"
       }
     ],
-    "unova_id": 179
+    "unova_id": 179,
+    "paldea_id": 209
   },
   {
     "id": 605,
@@ -32740,7 +32949,8 @@
         "move": "Giga Impact"
       }
     ],
-    "unova_id": 183
+    "unova_id": 183,
+    "paldea_id": 210
   },
   {
     "id": 611,
@@ -32810,7 +33020,8 @@
         "move": "Giga Impact"
       }
     ],
-    "unova_id": 184
+    "unova_id": 184,
+    "paldea_id": 211
   },
   {
     "id": 612,
@@ -32875,7 +33086,8 @@
         "move": "Giga Impact"
       }
     ],
-    "unova_id": 185
+    "unova_id": 185,
+    "paldea_id": 212
   },
   {
     "id": 613,
@@ -32937,7 +33149,8 @@
         "move": "Sheer Cold"
       }
     ],
-    "unova_id": 195
+    "unova_id": 195,
+    "paldea_id": 213
   },
   {
     "id": 614,
@@ -33002,7 +33215,8 @@
         "move": "Superpower"
       }
     ],
-    "unova_id": 196
+    "unova_id": 196,
+    "paldea_id": 214
   },
   {
     "id": 615,
@@ -33584,7 +33798,8 @@
         "move": "Guillotine"
       }
     ],
-    "unova_id": 223
+    "unova_id": 223,
+    "paldea_id": 215
   },
   {
     "id": 625,
@@ -33647,7 +33862,8 @@
         "move": "Guillotine"
       }
     ],
-    "unova_id": 224
+    "unova_id": 224,
+    "paldea_id": 216
   },
   {
     "id": 626,
@@ -33755,7 +33971,8 @@
         "move": "Brave Bird"
       }
     ],
-    "unova_id": 109
+    "unova_id": 109,
+    "paldea_id": 217
   },
   {
     "id": 628,
@@ -33777,7 +33994,8 @@
         "move": "Rock Smash"
       }
     ],
-    "unova_id": 110
+    "unova_id": 110,
+    "paldea_id": 218
   },
   {
     "id": 629,
@@ -34068,7 +34286,8 @@
         "move": "Outrage"
       }
     ],
-    "unova_id": 273
+    "unova_id": 273,
+    "paldea_id": 219
   },
   {
     "id": 634,
@@ -34143,7 +34362,8 @@
         "move": "Outrage"
       }
     ],
-    "unova_id": 274
+    "unova_id": 274,
+    "paldea_id": 220
   },
   {
     "id": 635,
@@ -34221,7 +34441,8 @@
         "move": "Hyper Beam"
       }
     ],
-    "unova_id": 275
+    "unova_id": 275,
+    "paldea_id": 221
   },
   {
     "id": 636,
@@ -34284,7 +34505,8 @@
         "move": "Flare Blitz"
       }
     ],
-    "unova_id": 171
+    "unova_id": 171,
+    "paldea_id": 222
   },
   {
     "id": 637,
@@ -34366,7 +34588,8 @@
         "move": "Fire Blast"
       }
     ],
-    "unova_id": 172
+    "unova_id": 172,
+    "paldea_id": 223
   },
   {
     "id": 638,
@@ -35710,7 +35933,8 @@
         "level": 45,
         "move": "Flare Blitz"
       }
-    ]
+    ],
+    "paldea_id": 224
   },
   {
     "id": 662,
@@ -35760,7 +35984,8 @@
         "level": 45,
         "move": "Flare Blitz"
       }
-    ]
+    ],
+    "paldea_id": 225
   },
   {
     "id": 663,
@@ -35809,7 +36034,8 @@
         "level": 45,
         "move": "Flare Blitz"
       }
-    ]
+    ],
+    "paldea_id": 226
   },
   {
     "id": 664,
@@ -35834,7 +36060,8 @@
         "level": 1,
         "move": "Tackle"
       }
-    ]
+    ],
+    "paldea_id": 227
   },
   {
     "id": 665,
@@ -35863,7 +36090,8 @@
         "level": 10,
         "move": "Infestation"
       }
-    ]
+    ],
+    "paldea_id": 228
   },
   {
     "id": 666,
@@ -35908,7 +36136,8 @@
         "level": 40,
         "move": "Hurricane"
       }
-    ]
+    ],
+    "paldea_id": 229
   },
   {
     "id": 667,
@@ -35970,7 +36199,8 @@
         "level": 42,
         "move": "Hyper Voice"
       }
-    ]
+    ],
+    "paldea_id": 230
   },
   {
     "id": 668,
@@ -36027,7 +36257,8 @@
         "level": 42,
         "move": "Hyper Voice"
       }
-    ]
+    ],
+    "paldea_id": 231
   },
   {
     "id": 669,
@@ -36080,7 +36311,8 @@
         "level": 54,
         "move": "Solar Beam"
       }
-    ]
+    ],
+    "paldea_id": 232
   },
   {
     "id": 670,
@@ -36137,7 +36369,8 @@
         "level": 58,
         "move": "Solar Beam"
       }
-    ]
+    ],
+    "paldea_id": 233
   },
   {
     "id": 671,
@@ -36189,7 +36422,8 @@
         "level": 54,
         "move": "Solar Beam"
       }
-    ]
+    ],
+    "paldea_id": 234
   },
   {
     "id": 672,
@@ -36250,7 +36484,8 @@
         "level": 50,
         "move": "Megahorn"
       }
-    ]
+    ],
+    "paldea_id": 235
   },
   {
     "id": 673,
@@ -36310,7 +36545,8 @@
         "level": 55,
         "move": "Earthquake"
       }
-    ]
+    ],
+    "paldea_id": 236
   },
   {
     "id": 674,
@@ -37148,7 +37384,8 @@
         "level": 52,
         "move": "Sludge Wave"
       }
-    ]
+    ],
+    "paldea_id": 237
   },
   {
     "id": 691,
@@ -37205,7 +37442,8 @@
         "level": 52,
         "move": "Sludge Wave"
       }
-    ]
+    ],
+    "paldea_id": 238
   },
   {
     "id": 692,
@@ -37266,7 +37504,8 @@
         "level": 52,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "paldea_id": 239
   },
   {
     "id": 693,
@@ -37326,7 +37565,8 @@
         "level": 55,
         "move": "Focus Blast"
       }
-    ]
+    ],
+    "paldea_id": 240
   },
   {
     "id": 694,
@@ -37711,7 +37951,8 @@
         "level": 50,
         "move": "Moonblast"
       }
-    ]
+    ],
+    "paldea_id": 241
   },
   {
     "id": 701,
@@ -37764,7 +38005,8 @@
         "level": 52,
         "move": "Brave Bird"
       }
-    ]
+    ],
+    "paldea_id": 242
   },
   {
     "id": 702,
@@ -37817,7 +38059,8 @@
         "level": 50,
         "move": "Thunder"
       }
-    ]
+    ],
+    "paldea_id": 243
   },
   {
     "id": 703,
@@ -37931,7 +38174,8 @@
         "level": 56,
         "move": "Surf"
       }
-    ]
+    ],
+    "paldea_id": 244
   },
   {
     "id": 705,
@@ -37992,7 +38236,8 @@
         "level": 56,
         "move": "Surf"
       }
-    ]
+    ],
+    "paldea_id": 245
   },
   {
     "id": 706,
@@ -38012,7 +38257,8 @@
         "level": 1,
         "move": "Counter"
       }
-    ]
+    ],
+    "paldea_id": 246
   },
   {
     "id": 707,
@@ -38057,7 +38303,8 @@
         "level": 44,
         "move": "Dazzling Gleam"
       }
-    ]
+    ],
+    "paldea_id": 247
   },
   {
     "id": 708,
@@ -38264,7 +38511,8 @@
         "level": 54,
         "move": "Blizzard"
       }
-    ]
+    ],
+    "paldea_id": 248
   },
   {
     "id": 713,
@@ -38284,7 +38532,8 @@
         "level": 1,
         "move": "Mirror Coat"
       }
-    ]
+    ],
+    "paldea_id": 249
   },
   {
     "id": 714,
@@ -38342,7 +38591,8 @@
         "level": 44,
         "move": "Hurricane"
       }
-    ]
+    ],
+    "paldea_id": 250
   },
   {
     "id": 715,
@@ -38399,7 +38649,8 @@
         "level": 52,
         "move": "Boomburst"
       }
-    ]
+    ],
+    "paldea_id": 251
   },
   {
     "id": 716,
@@ -39413,7 +39664,8 @@
         "level": 40,
         "move": "Thrash"
       }
-    ]
+    ],
+    "paldea_id": 252
   },
   {
     "id": 735,
@@ -39461,7 +39713,8 @@
         "level": 47,
         "move": "Thrash"
       }
-    ]
+    ],
+    "paldea_id": 253
   },
   {
     "id": 736,
@@ -39670,7 +39923,8 @@
         "level": 49,
         "move": "Close Combat"
       }
-    ]
+    ],
+    "paldea_id": 254
   },
   {
     "id": 740,
@@ -39719,7 +39973,8 @@
         "level": 49,
         "move": "Close Combat"
       }
-    ]
+    ],
+    "paldea_id": 255
   },
   {
     "id": 741,
@@ -39756,7 +40011,8 @@
         "level": 47,
         "move": "Hurricane"
       }
-    ]
+    ],
+    "paldea_id": 256
   },
   {
     "id": 742,
@@ -39900,7 +40156,8 @@
         "level": 48,
         "move": "Stone Edge"
       }
-    ]
+    ],
+    "paldea_id": 257
   },
   {
     "id": 745,
@@ -39948,7 +40205,8 @@
         "level": 60,
         "move": "Stone Edge"
       }
-    ]
+    ],
+    "paldea_id": 258
   },
   {
     "id": 746,
@@ -40034,7 +40292,8 @@
         "level": 45,
         "move": "Poison Jab"
       }
-    ]
+    ],
+    "paldea_id": 259
   },
   {
     "id": 748,
@@ -40083,7 +40342,8 @@
         "level": 49,
         "move": "Poison Jab"
       }
-    ]
+    ],
+    "paldea_id": 260
   },
   {
     "id": 749,
@@ -40152,7 +40412,8 @@
         "level": 44,
         "move": "Superpower"
       }
-    ]
+    ],
+    "paldea_id": 261
   },
   {
     "id": 750,
@@ -40216,7 +40477,8 @@
         "level": 52,
         "move": "Superpower"
       }
-    ]
+    ],
+    "paldea_id": 262
   },
   {
     "id": 751,
@@ -40392,7 +40654,8 @@
         "level": 50,
         "move": "Solar Beam"
       }
-    ]
+    ],
+    "paldea_id": 263
   },
   {
     "id": 754,
@@ -40444,7 +40707,8 @@
         "level": 63,
         "move": "Solar Blade"
       }
-    ]
+    ],
+    "paldea_id": 264
   },
   {
     "id": 755,
@@ -40597,7 +40861,8 @@
         "level": 55,
         "move": "Endeavor"
       }
-    ]
+    ],
+    "paldea_id": 265
   },
   {
     "id": 758,
@@ -40658,7 +40923,8 @@
         "level": 51,
         "move": "Flamethrower"
       }
-    ]
+    ],
+    "paldea_id": 266
   },
   {
     "id": 759,
@@ -40818,7 +41084,8 @@
         "level": 24,
         "move": "Flail"
       }
-    ]
+    ],
+    "paldea_id": 267
   },
   {
     "id": 762,
@@ -40863,7 +41130,8 @@
         "level": 46,
         "move": "Leaf Storm"
       }
-    ]
+    ],
+    "paldea_id": 268
   },
   {
     "id": 763,
@@ -40911,7 +41179,8 @@
         "level": 58,
         "move": "High Jump Kick"
       }
-    ]
+    ],
+    "paldea_id": 269
   },
   {
     "id": 764,
@@ -41004,7 +41273,8 @@
         "level": 60,
         "move": "Future Sight"
       }
-    ]
+    ],
+    "paldea_id": 270
   },
   {
     "id": 766,
@@ -41060,7 +41330,8 @@
         "level": 60,
         "move": "Giga Impact"
       }
-    ]
+    ],
+    "paldea_id": 271
   },
   {
     "id": 767,
@@ -41201,7 +41472,8 @@
         "level": 50,
         "move": "Earth Power"
       }
-    ]
+    ],
+    "paldea_id": 272
   },
   {
     "id": 770,
@@ -41250,7 +41522,8 @@
         "level": 50,
         "move": "Earth Power"
       }
-    ]
+    ],
+    "paldea_id": 273
   },
   {
     "id": 771,
@@ -41520,7 +41793,8 @@
         "level": 46,
         "move": "Thrash"
       }
-    ]
+    ],
+    "paldea_id": 274
   },
   {
     "id": 776,
@@ -41736,7 +42010,8 @@
         "level": 44,
         "move": "Wave Crash"
       }
-    ]
+    ],
+    "paldea_id": 275
   },
   {
     "id": 780,
@@ -43894,7 +44169,8 @@
         "level": 45,
         "move": "Belch"
       }
-    ]
+    ],
+    "paldea_id": 276
   },
   {
     "id": 820,
@@ -43942,7 +44218,8 @@
         "level": 55,
         "move": "Belch"
       }
-    ]
+    ],
+    "paldea_id": 277
   },
   {
     "id": 821,
@@ -43995,7 +44272,8 @@
         "level": 47,
         "move": "Brave Bird"
       }
-    ]
+    ],
+    "paldea_id": 278
   },
   {
     "id": 822,
@@ -44048,7 +44326,8 @@
         "level": 47,
         "move": "Brave Bird"
       }
-    ]
+    ],
+    "paldea_id": 279
   },
   {
     "id": 823,
@@ -44101,7 +44380,8 @@
         "level": 53,
         "move": "Heavy Slam"
       }
-    ]
+    ],
+    "paldea_id": 280
   },
   {
     "id": 824,
@@ -44509,7 +44789,8 @@
         "level": 49,
         "move": "Body Slam"
       }
-    ]
+    ],
+    "paldea_id": 281
   },
   {
     "id": 834,
@@ -44570,7 +44851,8 @@
         "level": 66,
         "move": "Head Smash"
       }
-    ]
+    ],
+    "paldea_id": 282
   },
   {
     "id": 835,
@@ -44712,7 +44994,8 @@
         "level": 40,
         "move": "Rock Blast"
       }
-    ]
+    ],
+    "paldea_id": 283
   },
   {
     "id": 838,
@@ -44766,7 +45049,8 @@
         "level": 55,
         "move": "Stone Edge"
       }
-    ]
+    ],
+    "paldea_id": 284
   },
   {
     "id": 839,
@@ -44819,7 +45103,8 @@
         "level": 63,
         "move": "Stone Edge"
       }
-    ]
+    ],
+    "paldea_id": 285
   },
   {
     "id": 840,
@@ -44853,7 +45138,8 @@
         "level": 1,
         "move": "Astonish"
       }
-    ]
+    ],
+    "paldea_id": 286
   },
   {
     "id": 841,
@@ -44906,7 +45192,8 @@
         "level": 44,
         "move": "Dragon Rush"
       }
-    ]
+    ],
+    "paldea_id": 287
   },
   {
     "id": 842,
@@ -44951,7 +45238,8 @@
         "level": 44,
         "move": "Energy Ball"
       }
-    ]
+    ],
+    "paldea_id": 288
   },
   {
     "id": 843,
@@ -45000,7 +45288,8 @@
         "level": 50,
         "move": "Sand Tomb"
       }
-    ]
+    ],
+    "paldea_id": 289
   },
   {
     "id": 844,
@@ -45044,7 +45333,8 @@
         "level": 51,
         "move": "Sand Tomb"
       }
-    ]
+    ],
+    "paldea_id": 290
   },
   {
     "id": 845,
@@ -45150,7 +45440,8 @@
         "level": 48,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "paldea_id": 291
   },
   {
     "id": 847,
@@ -45202,7 +45493,8 @@
         "level": 56,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "paldea_id": 292
   },
   {
     "id": 848,
@@ -45228,7 +45520,8 @@
         "level": 1,
         "move": "Nuzzle"
       }
-    ]
+    ],
+    "paldea_id": 293
   },
   {
     "id": 849,
@@ -45261,7 +45554,8 @@
         "level": 40,
         "move": "Poison Jab"
       }
-    ]
+    ],
+    "paldea_id": 294
   },
   {
     "id": 850,
@@ -45542,7 +45836,8 @@
         "level": 48,
         "move": "Shadow Ball"
       }
-    ]
+    ],
+    "paldea_id": 295
   },
   {
     "id": 855,
@@ -45578,7 +45873,8 @@
         "level": 48,
         "move": "Shadow Ball"
       }
-    ]
+    ],
+    "paldea_id": 296
   },
   {
     "id": 856,
@@ -45619,7 +45915,8 @@
         "level": 40,
         "move": "Psychic"
       }
-    ]
+    ],
+    "paldea_id": 297
   },
   {
     "id": 857,
@@ -45660,7 +45957,8 @@
         "level": 44,
         "move": "Psychic"
       }
-    ]
+    ],
+    "paldea_id": 298
   },
   {
     "id": 858,
@@ -45701,7 +45999,8 @@
         "level": 46,
         "move": "Psychic"
       }
-    ]
+    ],
+    "paldea_id": 299
   },
   {
     "id": 859,
@@ -45751,7 +46050,8 @@
         "level": 44,
         "move": "Foul Play"
       }
-    ]
+    ],
+    "paldea_id": 300
   },
   {
     "id": 860,
@@ -45801,7 +46101,8 @@
         "level": 52,
         "move": "Foul Play"
       }
-    ]
+    ],
+    "paldea_id": 301
   },
   {
     "id": 861,
@@ -45854,7 +46155,8 @@
         "level": 64,
         "move": "Hammer Arm"
       }
-    ]
+    ],
+    "paldea_id": 302
   },
   {
     "id": 862,
@@ -45959,7 +46261,8 @@
         "level": 48,
         "move": "Outrage"
       }
-    ]
+    ],
+    "paldea_id": 303
   },
   {
     "id": 864,
@@ -46286,7 +46589,8 @@
         "level": 52,
         "move": "Megahorn"
       }
-    ]
+    ],
+    "paldea_id": 304
   },
   {
     "id": 871,
@@ -46338,7 +46642,8 @@
         "level": 60,
         "move": "Discharge"
       }
-    ]
+    ],
+    "paldea_id": 305
   },
   {
     "id": 872,
@@ -46368,7 +46673,8 @@
         "level": 1,
         "move": "Struggle Bug"
       }
-    ]
+    ],
+    "paldea_id": 306
   },
   {
     "id": 873,
@@ -46409,7 +46715,8 @@
         "level": 40,
         "move": "Blizzard"
       }
-    ]
+    ],
+    "paldea_id": 307
   },
   {
     "id": 874,
@@ -46497,7 +46804,8 @@
         "level": 60,
         "move": "Blizzard"
       }
-    ]
+    ],
+    "paldea_id": 308
   },
   {
     "id": 876,
@@ -46632,7 +46940,8 @@
         "level": 55,
         "move": "Superpower"
       }
-    ]
+    ],
+    "paldea_id": 309
   },
   {
     "id": 879,
@@ -46692,7 +47001,8 @@
         "level": 65,
         "move": "Superpower"
       }
-    ]
+    ],
+    "paldea_id": 310
   },
   {
     "id": 880,
@@ -47002,7 +47312,8 @@
         "level": 66,
         "move": "Hyper Beam"
       }
-    ]
+    ],
+    "paldea_id": 311
   },
   {
     "id": 885,
@@ -47040,7 +47351,8 @@
         "level": 1,
         "move": "Quick Attack"
       }
-    ]
+    ],
+    "paldea_id": 312
   },
   {
     "id": 886,
@@ -47114,7 +47426,8 @@
         "level": 72,
         "move": "Last Resort"
       }
-    ]
+    ],
+    "paldea_id": 313
   },
   {
     "id": 887,
@@ -47187,7 +47500,8 @@
         "level": 78,
         "move": "Last Resort"
       }
-    ]
+    ],
+    "paldea_id": 314
   },
   {
     "id": 888,
@@ -47817,7 +48131,8 @@
         "level": 62,
         "move": "Megahorn"
       }
-    ]
+    ],
+    "paldea_id": 315
   },
   {
     "id": 900,
@@ -47870,7 +48185,8 @@
         "level": 50,
         "move": "Rock Blast"
       }
-    ]
+    ],
+    "paldea_id": 316
   },
   {
     "id": 901,
@@ -47931,7 +48247,8 @@
         "level": 64,
         "move": "Hammer Arm"
       }
-    ]
+    ],
+    "paldea_id": 317
   },
   {
     "id": 902,
@@ -47992,7 +48309,8 @@
         "level": 52,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "paldea_id": 318
   },
   {
     "id": 903,
@@ -48045,7 +48363,8 @@
         "level": 60,
         "move": "Close Combat"
       }
-    ]
+    ],
+    "paldea_id": 319
   },
   {
     "id": 904,
@@ -48110,7 +48429,8 @@
         "level": 53,
         "move": "Mortal Spin"
       }
-    ]
+    ],
+    "paldea_id": 320
   },
   {
     "id": 905,
@@ -48216,7 +48536,8 @@
         "level": 36,
         "move": "Play Rough"
       }
-    ]
+    ],
+    "paldea_id": 321
   },
   {
     "id": 907,
@@ -48281,7 +48602,8 @@
         "level": 46,
         "move": "Leaf Storm"
       }
-    ]
+    ],
+    "paldea_id": 322
   },
   {
     "id": 908,
@@ -48350,7 +48672,8 @@
         "level": 64,
         "move": "Leaf Storm"
       }
-    ]
+    ],
+    "paldea_id": 323
   },
   {
     "id": 909,
@@ -48407,7 +48730,8 @@
         "level": 36,
         "move": "Fire Blast"
       }
-    ]
+    ],
+    "paldea_id": 324
   },
   {
     "id": 910,
@@ -48468,7 +48792,8 @@
         "level": 47,
         "move": "Fire Blast"
       }
-    ]
+    ],
+    "paldea_id": 325
   },
   {
     "id": 911,
@@ -48537,7 +48862,8 @@
         "level": 64,
         "move": "Overheat"
       }
-    ]
+    ],
+    "paldea_id": 326
   },
   {
     "id": 912,
@@ -48594,7 +48920,8 @@
         "level": 35,
         "move": "Liquidation"
       }
-    ]
+    ],
+    "paldea_id": 327
   },
   {
     "id": 913,
@@ -48659,7 +48986,8 @@
         "level": 43,
         "move": "Liquidation"
       }
-    ]
+    ],
+    "paldea_id": 328
   },
   {
     "id": 914,
@@ -48732,7 +49060,8 @@
         "level": 64,
         "move": "Wave Crash"
       }
-    ]
+    ],
+    "paldea_id": 329
   },
   {
     "id": 915,
@@ -48793,7 +49122,8 @@
         "level": 35,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "paldea_id": 330
   },
   {
     "id": 916,
@@ -48841,7 +49171,8 @@
         "level": 48,
         "move": "Earth Power"
       }
-    ]
+    ],
+    "paldea_id": 331
   },
   {
     "id": 917,
@@ -48902,7 +49233,8 @@
         "level": 44,
         "move": "Skitter Smack"
       }
-    ]
+    ],
+    "paldea_id": 332
   },
   {
     "id": 918,
@@ -48958,7 +49290,8 @@
         "level": 49,
         "move": "Skitter Smack"
       }
-    ]
+    ],
+    "paldea_id": 333
   },
   {
     "id": 919,
@@ -49015,7 +49348,8 @@
         "level": 41,
         "move": "First Impression"
       }
-    ]
+    ],
+    "paldea_id": 334
   },
   {
     "id": 920,
@@ -49084,7 +49418,8 @@
         "level": 53,
         "move": "Axe Kick"
       }
-    ]
+    ],
+    "paldea_id": 335
   },
   {
     "id": 921,
@@ -49145,7 +49480,8 @@
         "level": 44,
         "move": "Wild Charge"
       }
-    ]
+    ],
+    "paldea_id": 336
   },
   {
     "id": 922,
@@ -49207,7 +49543,8 @@
         "level": 52,
         "move": "Wild Charge"
       }
-    ]
+    ],
+    "paldea_id": 337
   },
   {
     "id": 923,
@@ -49276,7 +49613,8 @@
         "level": 60,
         "move": "Double Shock"
       }
-    ]
+    ],
+    "paldea_id": 338
   },
   {
     "id": 924,
@@ -49333,7 +49671,8 @@
         "level": 46,
         "move": "Population Bomb"
       }
-    ]
+    ],
+    "paldea_id": 339
   },
   {
     "id": 925,
@@ -49373,7 +49712,8 @@
         "level": 33,
         "move": "Hyper Voice"
       }
-    ]
+    ],
+    "paldea_id": 340
   },
   {
     "id": 926,
@@ -49430,7 +49770,8 @@
         "level": 44,
         "move": "Crunch"
       }
-    ]
+    ],
+    "paldea_id": 341
   },
   {
     "id": 927,
@@ -49482,7 +49823,8 @@
         "level": 44,
         "move": "Crunch"
       }
-    ]
+    ],
+    "paldea_id": 342
   },
   {
     "id": 928,
@@ -49536,7 +49878,8 @@
         "level": 38,
         "move": "Terrain Pulse"
       }
-    ]
+    ],
+    "paldea_id": 343
   },
   {
     "id": 929,
@@ -49590,7 +49933,8 @@
         "level": 42,
         "move": "Terrain Pulse"
       }
-    ]
+    ],
+    "paldea_id": 344
   },
   {
     "id": 930,
@@ -49651,7 +49995,8 @@
         "level": 58,
         "move": "Petal Dance"
       }
-    ]
+    ],
+    "paldea_id": 345
   },
   {
     "id": 931,
@@ -49688,7 +50033,8 @@
         "level": 42,
         "move": "Brave Bird"
       }
-    ]
+    ],
+    "paldea_id": 346
   },
   {
     "id": 932,
@@ -49749,7 +50095,8 @@
         "level": 54,
         "move": "Stone Edge"
       }
-    ]
+    ],
+    "paldea_id": 347
   },
   {
     "id": 933,
@@ -49810,7 +50157,8 @@
         "level": 54,
         "move": "Stone Edge"
       }
-    ]
+    ],
+    "paldea_id": 348
   },
   {
     "id": 934,
@@ -49870,7 +50218,8 @@
         "level": 60,
         "move": "Explosion"
       }
-    ]
+    ],
+    "paldea_id": 349
   },
   {
     "id": 935,
@@ -49911,7 +50260,8 @@
         "level": 32,
         "move": "Lava Plume"
       }
-    ]
+    ],
+    "paldea_id": 350
   },
   {
     "id": 936,
@@ -49964,7 +50314,8 @@
         "level": 62,
         "move": "Aura Sphere"
       }
-    ]
+    ],
+    "paldea_id": 351
   },
   {
     "id": 937,
@@ -50017,7 +50368,8 @@
         "level": 62,
         "move": "Flare Blitz"
       }
-    ]
+    ],
+    "paldea_id": 352
   },
   {
     "id": 938,
@@ -50082,7 +50434,8 @@
         "level": 50,
         "move": "Zap Cannon"
       }
-    ]
+    ],
+    "paldea_id": 353
   },
   {
     "id": 939,
@@ -50142,7 +50495,8 @@
         "level": 50,
         "move": "Zap Cannon"
       }
-    ]
+    ],
+    "paldea_id": 354
   },
   {
     "id": 940,
@@ -50200,7 +50554,8 @@
         "level": 43,
         "move": "Discharge"
       }
-    ]
+    ],
+    "paldea_id": 355
   },
   {
     "id": 941,
@@ -50257,7 +50612,8 @@
         "level": 55,
         "move": "Hurricane"
       }
-    ]
+    ],
+    "paldea_id": 356
   },
   {
     "id": 942,
@@ -50314,7 +50670,8 @@
         "level": 49,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "paldea_id": 357
   },
   {
     "id": 943,
@@ -50370,7 +50727,8 @@
         "level": 56,
         "move": "Outrage"
       }
-    ]
+    ],
+    "paldea_id": 358
   },
   {
     "id": 944,
@@ -50428,7 +50786,8 @@
         "level": 54,
         "move": "Gunk Shot"
       }
-    ]
+    ],
+    "paldea_id": 359
   },
   {
     "id": 945,
@@ -50481,7 +50840,8 @@
         "level": 54,
         "move": "Gunk Shot"
       }
-    ]
+    ],
+    "paldea_id": 360
   },
   {
     "id": 946,
@@ -50547,7 +50907,8 @@
         "level": 55,
         "move": "Power Whip"
       }
-    ]
+    ],
+    "paldea_id": 361
   },
   {
     "id": 947,
@@ -50608,7 +50969,8 @@
         "level": 55,
         "move": "Power Whip"
       }
-    ]
+    ],
+    "paldea_id": 362
   },
   {
     "id": 948,
@@ -50674,7 +51036,8 @@
         "level": 52,
         "move": "Power Whip"
       }
-    ]
+    ],
+    "paldea_id": 363
   },
   {
     "id": 949,
@@ -50735,7 +51098,8 @@
         "level": 58,
         "move": "Power Whip"
       }
-    ]
+    ],
+    "paldea_id": 364
   },
   {
     "id": 950,
@@ -50795,7 +51159,8 @@
         "level": 56,
         "move": "Guillotine"
       }
-    ]
+    ],
+    "paldea_id": 365
   },
   {
     "id": 951,
@@ -50864,7 +51229,8 @@
         "level": 48,
         "move": "Solar Beam"
       }
-    ]
+    ],
+    "paldea_id": 366
   },
   {
     "id": 952,
@@ -50933,7 +51299,8 @@
         "level": 48,
         "move": "Solar Beam"
       }
-    ]
+    ],
+    "paldea_id": 367
   },
   {
     "id": 953,
@@ -50986,7 +51353,8 @@
         "level": 35,
         "move": "Lunge"
       }
-    ]
+    ],
+    "paldea_id": 368
   },
   {
     "id": 954,
@@ -51047,7 +51415,8 @@
         "level": 50,
         "move": "Psychic"
       }
-    ]
+    ],
+    "paldea_id": 369
   },
   {
     "id": 955,
@@ -51096,7 +51465,8 @@
         "level": 34,
         "move": "Uproar"
       }
-    ]
+    ],
+    "paldea_id": 370
   },
   {
     "id": 956,
@@ -51156,7 +51526,8 @@
         "level": 54,
         "move": "Last Resort"
       }
-    ]
+    ],
+    "paldea_id": 371
   },
   {
     "id": 957,
@@ -51218,7 +51589,8 @@
         "level": 40,
         "move": "Knock Off"
       }
-    ]
+    ],
+    "paldea_id": 372
   },
   {
     "id": 958,
@@ -51280,7 +51652,8 @@
         "level": 40,
         "move": "Knock Off"
       }
-    ]
+    ],
+    "paldea_id": 373
   },
   {
     "id": 959,
@@ -51341,7 +51714,8 @@
         "level": 44,
         "move": "Heavy Slam"
       }
-    ]
+    ],
+    "paldea_id": 374
   },
   {
     "id": 960,
@@ -51406,7 +51780,8 @@
         "level": 40,
         "move": "Liquidation"
       }
-    ]
+    ],
+    "paldea_id": 375
   },
   {
     "id": 961,
@@ -51470,7 +51845,8 @@
         "level": 54,
         "move": "Liquidation"
       }
-    ]
+    ],
+    "paldea_id": 376
   },
   {
     "id": 962,
@@ -51527,7 +51903,8 @@
         "level": 53,
         "move": "Knock Off"
       }
-    ]
+    ],
+    "paldea_id": 377
   },
   {
     "id": 963,
@@ -51580,7 +51957,8 @@
         "level": 50,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "paldea_id": 378
   },
   {
     "id": 964,
@@ -51620,7 +51998,8 @@
         "level": 50,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "paldea_id": 379
   },
   {
     "id": 965,
@@ -51686,7 +52065,8 @@
         "level": 50,
         "move": "Gunk Shot"
       }
-    ]
+    ],
+    "paldea_id": 380
   },
   {
     "id": 966,
@@ -51747,7 +52127,8 @@
         "level": 58,
         "move": "Gunk Shot"
       }
-    ]
+    ],
+    "paldea_id": 381
   },
   {
     "id": 967,
@@ -51812,7 +52193,8 @@
         "level": 57,
         "move": "Dragon Rush"
       }
-    ]
+    ],
+    "paldea_id": 382
   },
   {
     "id": 968,
@@ -51868,7 +52250,8 @@
         "level": 47,
         "move": "Earthquake"
       }
-    ]
+    ],
+    "paldea_id": 383
   },
   {
     "id": 969,
@@ -51926,7 +52309,8 @@
         "level": 55,
         "move": "Explosion"
       }
-    ]
+    ],
+    "paldea_id": 384
   },
   {
     "id": 970,
@@ -51979,7 +52363,8 @@
         "level": 55,
         "move": "Explosion"
       }
-    ]
+    ],
+    "paldea_id": 385
   },
   {
     "id": 971,
@@ -52044,7 +52429,8 @@
         "level": 52,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "paldea_id": 386
   },
   {
     "id": 972,
@@ -52104,7 +52490,8 @@
         "level": 52,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "paldea_id": 387
   },
   {
     "id": 973,
@@ -52157,7 +52544,8 @@
         "level": 54,
         "move": "Brave Bird"
       }
-    ]
+    ],
+    "paldea_id": 388
   },
   {
     "id": 974,
@@ -52226,7 +52614,8 @@
         "level": 53,
         "move": "Blizzard"
       }
-    ]
+    ],
+    "paldea_id": 389
   },
   {
     "id": 975,
@@ -52290,7 +52679,8 @@
         "level": 53,
         "move": "Blizzard"
       }
-    ]
+    ],
+    "paldea_id": 390
   },
   {
     "id": 976,
@@ -52351,7 +52741,8 @@
         "level": 55,
         "move": "Final Gambit"
       }
-    ]
+    ],
+    "paldea_id": 391
   },
   {
     "id": 977,
@@ -52411,7 +52802,8 @@
         "level": 67,
         "move": "Fissure"
       }
-    ]
+    ],
+    "paldea_id": 392
   },
   {
     "id": 978,
@@ -52444,7 +52836,8 @@
         "level": 52,
         "move": "Dragon Pulse"
       }
-    ]
+    ],
+    "paldea_id": 393
   },
   {
     "id": 979,
@@ -52513,7 +52906,8 @@
         "level": 54,
         "move": "Dynamic Punch"
       }
-    ]
+    ],
+    "paldea_id": 394
   },
   {
     "id": 980,
@@ -52562,7 +52956,8 @@
         "level": 48,
         "move": "Earthquake"
       }
-    ]
+    ],
+    "paldea_id": 395
   },
   {
     "id": 981,
@@ -52619,7 +53014,8 @@
         "level": 50,
         "move": "Psychic"
       }
-    ]
+    ],
+    "paldea_id": 396
   },
   {
     "id": 982,
@@ -52663,7 +53059,8 @@
         "level": 56,
         "move": "Hurricane"
       }
-    ]
+    ],
+    "paldea_id": 397
   },
   {
     "id": 983,
@@ -52720,7 +53117,8 @@
         "level": 71,
         "move": "Guillotine"
       }
-    ]
+    ],
+    "paldea_id": 398
   },
   {
     "id": 984,
@@ -52793,7 +53191,8 @@
         "level": 91,
         "move": "Headlong Rush"
       }
-    ]
+    ],
+    "paldea_id": 399
   },
   {
     "id": 985,
@@ -52846,7 +53245,8 @@
         "level": 91,
         "move": "Boomburst"
       }
-    ]
+    ],
+    "paldea_id": 400
   },
   {
     "id": 986,
@@ -52899,7 +53299,8 @@
         "level": 91,
         "move": "Solar Beam"
       }
-    ]
+    ],
+    "paldea_id": 401
   },
   {
     "id": 987,
@@ -52952,7 +53353,8 @@
         "level": 84,
         "move": "Moonblast"
       }
-    ]
+    ],
+    "paldea_id": 402
   },
   {
     "id": 988,
@@ -53017,7 +53419,8 @@
         "level": 91,
         "move": "Thrash"
       }
-    ]
+    ],
+    "paldea_id": 403
   },
   {
     "id": 989,
@@ -53074,7 +53477,8 @@
         "level": 84,
         "move": "Zap Cannon"
       }
-    ]
+    ],
+    "paldea_id": 404
   },
   {
     "id": 990,
@@ -53147,7 +53551,8 @@
         "level": 91,
         "move": "Steel Roller"
       }
-    ]
+    ],
+    "paldea_id": 405
   },
   {
     "id": 991,
@@ -53204,7 +53609,8 @@
         "level": 91,
         "move": "Blizzard"
       }
-    ]
+    ],
+    "paldea_id": 406
   },
   {
     "id": 992,
@@ -53265,7 +53671,8 @@
         "level": 91,
         "move": "Focus Punch"
       }
-    ]
+    ],
+    "paldea_id": 407
   },
   {
     "id": 993,
@@ -53334,7 +53741,8 @@
         "level": 91,
         "move": "Hyper Beam"
       }
-    ]
+    ],
+    "paldea_id": 408
   },
   {
     "id": 994,
@@ -53403,7 +53811,8 @@
         "level": 91,
         "move": "Overheat"
       }
-    ]
+    ],
+    "paldea_id": 409
   },
   {
     "id": 995,
@@ -53468,7 +53877,8 @@
         "level": 91,
         "move": "Giga Impact"
       }
-    ]
+    ],
+    "paldea_id": 410
   },
   {
     "id": 996,
@@ -53538,7 +53948,8 @@
         "level": 60,
         "move": "Dragon Rush"
       }
-    ]
+    ],
+    "paldea_id": 411
   },
   {
     "id": 997,
@@ -53608,7 +54019,8 @@
         "level": 60,
         "move": "Dragon Rush"
       }
-    ]
+    ],
+    "paldea_id": 412
   },
   {
     "id": 998,
@@ -53681,7 +54093,8 @@
         "level": 65,
         "move": "Ice Hammer"
       }
-    ]
+    ],
+    "paldea_id": 413
   },
   {
     "id": 999,
@@ -53710,7 +54123,8 @@
         "level": 1,
         "move": "Tackle"
       }
-    ]
+    ],
+    "paldea_id": 414
   },
   {
     "id": 1000,
@@ -53755,7 +54169,8 @@
         "level": 56,
         "move": "Make It Rain"
       }
-    ]
+    ],
+    "paldea_id": 415
   },
   {
     "id": 1001,
@@ -53812,7 +54227,8 @@
         "level": 75,
         "move": "Leaf Storm"
       }
-    ]
+    ],
+    "paldea_id": 416
   },
   {
     "id": 1002,
@@ -53877,7 +54293,8 @@
         "level": 75,
         "move": "Sheer Cold"
       }
-    ]
+    ],
+    "paldea_id": 417
   },
   {
     "id": 1003,
@@ -53942,7 +54359,8 @@
         "level": 75,
         "move": "Fissure"
       }
-    ]
+    ],
+    "paldea_id": 418
   },
   {
     "id": 1004,
@@ -54003,7 +54421,8 @@
         "level": 75,
         "move": "Overheat"
       }
-    ]
+    ],
+    "paldea_id": 419
   },
   {
     "id": 1005,
@@ -54068,7 +54487,8 @@
         "level": 91,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "paldea_id": 420
   },
   {
     "id": 1006,
@@ -54133,7 +54553,8 @@
         "level": 91,
         "move": "Spirit Break"
       }
-    ]
+    ],
+    "paldea_id": 421
   },
   {
     "id": 1007,
@@ -54202,7 +54623,8 @@
         "level": 98,
         "move": "Giga Impact"
       }
-    ]
+    ],
+    "paldea_id": 422
   },
   {
     "id": 1008,
@@ -54267,7 +54689,8 @@
         "level": 98,
         "move": "Hyper Beam"
       }
-    ]
+    ],
+    "paldea_id": 423
   },
   {
     "id": 1009,
@@ -54332,7 +54755,8 @@
         "level": 84,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "paldea_id": 424
   },
   {
     "id": 1010,
@@ -54389,7 +54813,8 @@
         "level": 91,
         "move": "Solar Blade"
       }
-    ]
+    ],
+    "paldea_id": 425
   },
   {
     "id": 1011,
@@ -54439,7 +54864,8 @@
         "level": 40,
         "move": "Energy Ball"
       }
-    ]
+    ],
+    "paldea_id": 426
   },
   {
     "id": 1012,
@@ -54493,7 +54919,8 @@
         "level": 60,
         "move": "Leaf Storm"
       }
-    ]
+    ],
+    "paldea_id": 427
   },
   {
     "id": 1013,
@@ -54538,7 +54965,8 @@
         "level": 60,
         "move": "Leaf Storm"
       }
-    ]
+    ],
+    "paldea_id": 428
   },
   {
     "id": 1014,
@@ -54595,7 +55023,8 @@
         "level": 72,
         "move": "Giga Impact"
       }
-    ]
+    ],
+    "paldea_id": 429
   },
   {
     "id": 1015,
@@ -54648,7 +55077,8 @@
         "level": 64,
         "move": "Future Sight"
       }
-    ]
+    ],
+    "paldea_id": 430
   },
   {
     "id": 1016,
@@ -54701,7 +55131,8 @@
         "level": 72,
         "move": "Moonblast"
       }
-    ]
+    ],
+    "paldea_id": 431
   },
   {
     "id": 1017,
@@ -54741,7 +55172,8 @@
         "level": 66,
         "move": "Wood Hammer"
       }
-    ]
+    ],
+    "paldea_id": 432
   },
   {
     "id": 1018,
@@ -54790,7 +55222,8 @@
         "level": 66,
         "move": "Hyper Beam"
       }
-    ]
+    ],
+    "paldea_id": 433
   },
   {
     "id": 1019,
@@ -54839,7 +55272,8 @@
         "level": 54,
         "move": "Power Whip"
       }
-    ]
+    ],
+    "paldea_id": 434
   },
   {
     "id": 1020,
@@ -54904,7 +55338,8 @@
         "level": 91,
         "move": "Raging Fury"
       }
-    ]
+    ],
+    "paldea_id": 435
   },
   {
     "id": 1021,
@@ -54973,7 +55408,8 @@
         "level": 91,
         "move": "Thunder"
       }
-    ]
+    ],
+    "paldea_id": 436
   },
   {
     "id": 1022,
@@ -55038,7 +55474,8 @@
         "level": 91,
         "move": "Giga Impact"
       }
-    ]
+    ],
+    "paldea_id": 437
   },
   {
     "id": 1023,
@@ -55107,7 +55544,8 @@
         "level": 91,
         "move": "Hyper Beam"
       }
-    ]
+    ],
+    "paldea_id": 438
   },
   {
     "id": 1024,
@@ -55147,7 +55585,8 @@
         "level": 70,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "paldea_id": 439
   },
   {
     "id": 1025,
@@ -55180,6 +55619,7 @@
         "level": 48,
         "move": "Malignant Chain"
       }
-    ]
+    ],
+    "paldea_id": 440
   }
 ]

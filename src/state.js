@@ -213,8 +213,23 @@ window.getCurrentUnlocks = function() {
     if (state.currentRegionName === 'Sinnoh' && state.config.sinnohUnlocks) {
         return state.config.sinnohUnlocks;
     }
-    if (state.currentRegionName === 'Unova' && state.config.unovaUnlocks) {
+if (state.currentRegionName === 'Unova' && state.config.unovaUnlocks) {
         return state.config.unovaUnlocks;
+    }
+    if (state.currentRegionName === 'Kalos' && state.config.kalosUnlocks) {
+        return state.config.kalosUnlocks;
+    }
+    if (state.currentRegionName === 'Alola' && state.config.alolaUnlocks) {
+        return state.config.alolaUnlocks;
+    }
+    if (state.currentRegionName === 'Galar' && state.config.galarUnlocks) {
+        return state.config.galarUnlocks;
+    }
+    if (state.currentRegionName === 'Hisui' && state.config.hisuiUnlocks) {
+        return state.config.hisuiUnlocks;
+    }
+    if (state.currentRegionName === 'Paldea' && state.config.paldeaUnlocks) {
+        return state.config.paldeaUnlocks;
     }
     return state.config.unlocks || [];
 };
