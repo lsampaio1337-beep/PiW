@@ -53,16 +53,16 @@ Write-Host "Starting Git operations..." -ForegroundColor Cyan
 
 # Check if the repo directory exists
 if (Test-Path $gitRepoDir) {
-    Set-Location $gitRepoDir
+    # It is important to set the path properly, but to ensure git commands run in the correct context, we can use the -C flag natively to target the directory directly instead of relying on Set-Location.
 
     Write-Host "Staging files..."
-    git add "Assets/Pokemon Sprites/Natural/Gen*" "data/pokemon_data_scraped.json"
+    git -C "$gitRepoDir" add "Assets/Pokemon Sprites/Natural/Gen*" "data/pokemon_data_scraped.json"
 
     Write-Host "Committing files..."
-    git commit -m "Add scraped special forms data and sprites"
+    git -C "$gitRepoDir" commit -m "Add scraped special forms data and sprites"
 
     Write-Host "Sending to GitHub (This may take a moment for 38MB)..."
-    git push
+    git -C "$gitRepoDir" push
 
     if ($LASTEXITCODE -eq 0) {
         Write-Host "Successfully completed!" -ForegroundColor Green
