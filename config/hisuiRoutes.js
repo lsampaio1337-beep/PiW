@@ -1,54 +1,42 @@
 export const hisuiRoutes = {
-  'JubilifeVillage': {
-    name: "Jubilife Village",
-    spawns: [
-    ]
-  },
-  'JubilifeVillageDaycare': {
-    name: "Jubilife Village Daycare",
-    spawns: [
-    ]
-  },
   'AspirationHill': {
     name: "Aspiration Hill",
     spawns: [
-      { pokemon: "Bidoof", minLevel: 5, maxLevel: 7, chance: 16.7 },
-      { pokemon: "Burmy Plant Cloak", minLevel: 5, maxLevel: 7, chance: 16.7 },
-      { pokemon: "Drifloon", minLevel: 5, maxLevel: 7, chance: 16.7 },
-      { pokemon: "Shinx", minLevel: 5, maxLevel: 7, chance: 16.7 },
-      { pokemon: "Starly", minLevel: 5, maxLevel: 7, chance: 16.7 },
-      { pokemon: "Wormadam Plant Cloak", minLevel: 5, maxLevel: 7, chance: 16.5 },
+      { pokemon: "Togepi", minLevel: 5, maxLevel: 7, chance: 25 },
+      { pokemon: "Togetic", minLevel: 5, maxLevel: 7, chance: 25 },
+      { pokemon: "Dusclops", minLevel: 5, maxLevel: 7, chance: 25 },
+      { pokemon: "Empoleon", minLevel: 5, maxLevel: 7, chance: 25 },
     ]
   },
   'HorseshoePlains': {
     name: "Horseshoe Plains",
     spawns: [
-      { pokemon: "Burmy Plant Cloak", minLevel: 7, maxLevel: 9, chance: 12.5 },
-      { pokemon: "Drifloon", minLevel: 7, maxLevel: 9, chance: 12.5 },
-      { pokemon: "Starly", minLevel: 7, maxLevel: 9, chance: 12.5 },
-      { pokemon: "Wormadam Plant Cloak", minLevel: 7, maxLevel: 9, chance: 12.5 },
-      { pokemon: "Eevee", minLevel: 7, maxLevel: 9, chance: 12.5 },
-      { pokemon: "Mime Jr.", minLevel: 7, maxLevel: 9, chance: 12.5 },
-      { pokemon: "Ponyta", minLevel: 7, maxLevel: 9, chance: 12.5 },
-      { pokemon: "Wurmple", minLevel: 7, maxLevel: 9, chance: 12.5 },
+      { pokemon: "Sealeo", minLevel: 6, maxLevel: 8, chance: 33 },
+      { pokemon: "Elekid", minLevel: 6, maxLevel: 8, chance: 33 },
+      { pokemon: "Hippopotas", minLevel: 6, maxLevel: 8, chance: 34 },
     ]
   },
   'DeertrackPath': {
     name: "Deertrack Path",
     spawns: [
-      { pokemon: "Burmy Plant Cloak", minLevel: 9, maxLevel: 11, chance: 33.3 },
-      { pokemon: "Kricketot", minLevel: 9, maxLevel: 11, chance: 33.3 },
-      { pokemon: "Zubat", minLevel: 9, maxLevel: 11, chance: 33.4 },
+      { pokemon: "Haunter", minLevel: 8, maxLevel: 10, chance: 16 },
+      { pokemon: "Cherrim", minLevel: 8, maxLevel: 10, chance: 16 },
+      { pokemon: "Probopass", minLevel: 8, maxLevel: 10, chance: 16 },
+      { pokemon: "Grotle", minLevel: 8, maxLevel: 10, chance: 16 },
+      { pokemon: "Rowlet", minLevel: 8, maxLevel: 10, chance: 16 },
+      { pokemon: "Dusknoir", minLevel: 8, maxLevel: 10, chance: 20 },
     ]
   },
   'DeertrackHeights': {
     name: "Deertrack Heights",
     spawns: [
-      { pokemon: "Burmy Plant Cloak", minLevel: 11, maxLevel: 13, chance: 20 },
-      { pokemon: "Chimchar", minLevel: 11, maxLevel: 13, chance: 20 },
-      { pokemon: "Geodude", minLevel: 11, maxLevel: 13, chance: 20 },
-      { pokemon: "Munchlax", minLevel: 11, maxLevel: 13, chance: 20 },
-      { pokemon: "Stantler", minLevel: 11, maxLevel: 13, chance: 20 },
+      { pokemon: "Magby", minLevel: 10, maxLevel: 12, chance: 14 },
+      { pokemon: "Hippowdon", minLevel: 10, maxLevel: 12, chance: 14 },
+      { pokemon: "Ninetales", minLevel: 10, maxLevel: 12, chance: 14 },
+      { pokemon: "Lickilicky", minLevel: 10, maxLevel: 12, chance: 14 },
+      { pokemon: "Spiritomb", minLevel: 10, maxLevel: 12, chance: 14 },
+      { pokemon: "Chingling", minLevel: 10, maxLevel: 12, chance: 14 },
+      { pokemon: "Weavile", minLevel: 10, maxLevel: 12, chance: 16 },
     ]
   },
   'GymKleavor': {
@@ -56,97 +44,105 @@ export const hisuiRoutes = {
     spawns: [
     ]
   },
+  'DroningMeadow': {
+    name: "Droning Meadow",
+    spawns: [
+      { pokemon: "Drapion", minLevel: 11, maxLevel: 13, chance: 16 },
+      { pokemon: "Blissey", minLevel: 11, maxLevel: 13, chance: 16 },
+      { pokemon: "Garchomp", minLevel: 11, maxLevel: 13, chance: 16 },
+      { pokemon: "Pichu", minLevel: 11, maxLevel: 13, chance: 16 },
+      { pokemon: "Rhyhorn", minLevel: 11, maxLevel: 13, chance: 16 },
+      { pokemon: "Stunky", minLevel: 11, maxLevel: 13, chance: 20 },
+    ]
+  },
+  'GruelingGrove': {
+    name: "Grueling Grove",
+    spawns: [
+      { pokemon: "Sylveon", minLevel: 11, maxLevel: 13, chance: 20 },
+      { pokemon: "Buizel", minLevel: 11, maxLevel: 13, chance: 20 },
+      { pokemon: "Quilava", minLevel: 11, maxLevel: 13, chance: 20 },
+      { pokemon: "Mantyke", minLevel: 11, maxLevel: 13, chance: 20 },
+      { pokemon: "Honchkrow", minLevel: 11, maxLevel: 13, chance: 20 },
+    ]
+  },
   'OreburrowTunnel': {
     name: "Oreburrow Tunnel",
     spawns: [
-      { pokemon: "Geodude", minLevel: 15, maxLevel: 17, chance: 16.7 },
-      { pokemon: "Happiny", minLevel: 15, maxLevel: 17, chance: 16.7 },
-      { pokemon: "Luxio", minLevel: 15, maxLevel: 17, chance: 16.7 },
-      { pokemon: "Machop", minLevel: 15, maxLevel: 17, chance: 16.7 },
-      { pokemon: "Shinx", minLevel: 15, maxLevel: 17, chance: 16.7 },
-      { pokemon: "Golbat", minLevel: 15, maxLevel: 17, chance: 16.5 },
+      { pokemon: "Ralts", minLevel: 11, maxLevel: 13, chance: 16 },
+      { pokemon: "Chatot", minLevel: 11, maxLevel: 13, chance: 16 },
+      { pokemon: "Skuntank", minLevel: 11, maxLevel: 13, chance: 16 },
+      { pokemon: "Golbat", minLevel: 11, maxLevel: 13, chance: 16 },
+      { pokemon: "Monferno", minLevel: 11, maxLevel: 13, chance: 16 },
+      { pokemon: "Graveler", minLevel: 11, maxLevel: 13, chance: 20 },
     ]
   },
   'NaturesPantry': {
     name: "Nature’s Pantry",
     spawns: [
-      { pokemon: "Burmy Plant Cloak", minLevel: 17, maxLevel: 19, chance: 11.1 },
-      { pokemon: "Kricketot", minLevel: 17, maxLevel: 19, chance: 11.1 },
-      { pokemon: "Pichu", minLevel: 17, maxLevel: 19, chance: 11.1 },
-      { pokemon: "Kricketune", minLevel: 17, maxLevel: 19, chance: 11.1 },
-      { pokemon: "Paras", minLevel: 17, maxLevel: 19, chance: 11.1 },
-      { pokemon: "Parasect", minLevel: 17, maxLevel: 19, chance: 11.1 },
-      { pokemon: "Pikachu", minLevel: 17, maxLevel: 19, chance: 11.1 },
-      { pokemon: "Staraptor", minLevel: 17, maxLevel: 19, chance: 11.1 },
-      { pokemon: "Staravia", minLevel: 17, maxLevel: 19, chance: 11.2 },
+      { pokemon: "Petilil", minLevel: 13, maxLevel: 15, chance: 14 },
+      { pokemon: "Finneon", minLevel: 13, maxLevel: 15, chance: 14 },
+      { pokemon: "Growlithe", minLevel: 13, maxLevel: 15, chance: 14 },
+      { pokemon: "Sneasler", minLevel: 13, maxLevel: 15, chance: 14 },
+      { pokemon: "Yanmega", minLevel: 13, maxLevel: 15, chance: 14 },
+      { pokemon: "Cyndaquil", minLevel: 13, maxLevel: 15, chance: 14 },
+      { pokemon: "Bonsly", minLevel: 13, maxLevel: 15, chance: 16 },
     ]
   },
   'TheHeartwoodNorth': {
     name: "The Heartwood North",
     spawns: [
-      { pokemon: "Beautifly", minLevel: 19, maxLevel: 21, chance: 16.7 },
-      { pokemon: "Dustox", minLevel: 19, maxLevel: 21, chance: 16.7 },
-      { pokemon: "Wurmple", minLevel: 19, maxLevel: 21, chance: 16.7 },
-      { pokemon: "Buneary", minLevel: 19, maxLevel: 21, chance: 16.7 },
-      { pokemon: "Cherubi", minLevel: 19, maxLevel: 21, chance: 16.7 },
-      { pokemon: "Lopunny", minLevel: 19, maxLevel: 21, chance: 16.5 },
+      { pokemon: "Snover", minLevel: 15, maxLevel: 17, chance: 14 },
+      { pokemon: "Luxio", minLevel: 15, maxLevel: 17, chance: 14 },
+      { pokemon: "Chimchar", minLevel: 15, maxLevel: 17, chance: 14 },
+      { pokemon: "Duskull", minLevel: 15, maxLevel: 17, chance: 14 },
+      { pokemon: "Ambipom", minLevel: 15, maxLevel: 17, chance: 14 },
+      { pokemon: "Vespiquen", minLevel: 15, maxLevel: 17, chance: 14 },
+      { pokemon: "Rotom", minLevel: 15, maxLevel: 17, chance: 16 },
     ]
   },
   'TheHeartwoodSouth': {
     name: "The Heartwood South",
     spawns: [
-      { pokemon: "Cascoon", minLevel: 21, maxLevel: 23, chance: 20 },
-      { pokemon: "Silcoon", minLevel: 21, maxLevel: 23, chance: 20 },
-      { pokemon: "Zubat", minLevel: 21, maxLevel: 23, chance: 20 },
-      { pokemon: "Cherrim", minLevel: 21, maxLevel: 23, chance: 20 },
-      { pokemon: "Combee", minLevel: 21, maxLevel: 23, chance: 20 },
+      { pokemon: "Snorlax", minLevel: 16, maxLevel: 18, chance: 20 },
+      { pokemon: "Gastly", minLevel: 16, maxLevel: 18, chance: 20 },
+      { pokemon: "Yanma", minLevel: 16, maxLevel: 18, chance: 20 },
+      { pokemon: "Heatran", minLevel: 16, maxLevel: 18, chance: 20 },
+      { pokemon: "Bronzong", minLevel: 16, maxLevel: 18, chance: 20 },
     ]
   },
   'GoldenLowlandsNorth': {
     name: "Golden Lowlands North",
     spawns: [
-      { pokemon: "Kricketot", minLevel: 23, maxLevel: 25, chance: 16.7 },
-      { pokemon: "Kricketune", minLevel: 23, maxLevel: 25, chance: 16.7 },
-      { pokemon: "Paras", minLevel: 23, maxLevel: 25, chance: 16.7 },
-      { pokemon: "Parasect", minLevel: 23, maxLevel: 25, chance: 16.7 },
-      { pokemon: "Gastly", minLevel: 23, maxLevel: 25, chance: 16.7 },
-      { pokemon: "Raichu", minLevel: 23, maxLevel: 25, chance: 16.5 },
+      { pokemon: "Staravia", minLevel: 18, maxLevel: 20, chance: 33 },
+      { pokemon: "Combee", minLevel: 18, maxLevel: 20, chance: 33 },
+      { pokemon: "Clefable", minLevel: 18, maxLevel: 20, chance: 34 },
     ]
   },
   'GoldenLowlandsSouth': {
     name: "Golden Lowlands South",
     spawns: [
-      { pokemon: "Pichu", minLevel: 25, maxLevel: 27, chance: 16.7 },
-      { pokemon: "Pikachu", minLevel: 25, maxLevel: 27, chance: 16.7 },
-      { pokemon: "Wormadam Plant Cloak", minLevel: 25, maxLevel: 27, chance: 16.7 },
-      { pokemon: "Budew", minLevel: 25, maxLevel: 27, chance: 16.7 },
-      { pokemon: "Burmy Sandy Cloak", minLevel: 25, maxLevel: 27, chance: 16.7 },
-      { pokemon: "Carnivine", minLevel: 25, maxLevel: 27, chance: 16.5 },
+      { pokemon: "Mantine", minLevel: 20, maxLevel: 22, chance: 33 },
+      { pokemon: "Chansey", minLevel: 20, maxLevel: 22, chance: 33 },
+      { pokemon: "Floatzel", minLevel: 20, maxLevel: 22, chance: 34 },
     ]
   },
   'GapejawBogNorth': {
     name: "Gapejaw Bog North",
     spawns: [
-      { pokemon: "Cherubi", minLevel: 27, maxLevel: 29, chance: 14.3 },
-      { pokemon: "Gastly", minLevel: 27, maxLevel: 29, chance: 14.3 },
-      { pokemon: "Graveler", minLevel: 27, maxLevel: 29, chance: 14.3 },
-      { pokemon: "Croagunk", minLevel: 27, maxLevel: 29, chance: 14.3 },
-      { pokemon: "Haunter", minLevel: 27, maxLevel: 29, chance: 14.3 },
-      { pokemon: "Ralts", minLevel: 27, maxLevel: 29, chance: 14.3 },
-      { pokemon: "Roselia", minLevel: 27, maxLevel: 29, chance: 14.2 },
+      { pokemon: "Nosepass", minLevel: 21, maxLevel: 23, chance: 16 },
+      { pokemon: "Happiny", minLevel: 21, maxLevel: 23, chance: 16 },
+      { pokemon: "Leafeon", minLevel: 21, maxLevel: 23, chance: 16 },
+      { pokemon: "Chimecho", minLevel: 21, maxLevel: 23, chance: 16 },
+      { pokemon: "Zoroark", minLevel: 21, maxLevel: 23, chance: 16 },
+      { pokemon: "Budew", minLevel: 21, maxLevel: 23, chance: 20 },
     ]
   },
   'GapejawBogSouth': {
     name: "Gapejaw Bog South",
     spawns: [
-      { pokemon: "Bibarel", minLevel: 29, maxLevel: 31, chance: 12.5 },
-      { pokemon: "Budew", minLevel: 29, maxLevel: 31, chance: 12.5 },
-      { pokemon: "Burmy Sandy Cloak", minLevel: 29, maxLevel: 31, chance: 12.5 },
-      { pokemon: "Carnivine", minLevel: 29, maxLevel: 31, chance: 12.5 },
-      { pokemon: "Cherrim", minLevel: 29, maxLevel: 31, chance: 12.5 },
-      { pokemon: "Tangela", minLevel: 29, maxLevel: 31, chance: 12.5 },
-      { pokemon: "Wormadam Sandy Cloak", minLevel: 29, maxLevel: 31, chance: 12.5 },
-      { pokemon: "Yanma", minLevel: 29, maxLevel: 31, chance: 12.5 },
+      { pokemon: "Toxicroak", minLevel: 23, maxLevel: 25, chance: 33 },
+      { pokemon: "Scyther", minLevel: 23, maxLevel: 25, chance: 33 },
+      { pokemon: "Overqwil", minLevel: 23, maxLevel: 25, chance: 34 },
     ]
   },
   'GymLilligant': {
@@ -154,94 +150,101 @@ export const hisuiRoutes = {
     spawns: [
     ]
   },
+  'ObsidianFalls': {
+    name: "Obsidian Falls",
+    spawns: [
+      { pokemon: "Bergmite", minLevel: 25, maxLevel: 27, chance: 16 },
+      { pokemon: "Abomasnow", minLevel: 25, maxLevel: 27, chance: 16 },
+      { pokemon: "Shinx", minLevel: 25, maxLevel: 27, chance: 16 },
+      { pokemon: "Bibarel", minLevel: 25, maxLevel: 27, chance: 16 },
+      { pokemon: "Abra", minLevel: 25, maxLevel: 27, chance: 16 },
+      { pokemon: "Gardevoir", minLevel: 25, maxLevel: 27, chance: 20 },
+    ]
+  },
   'UrsasRing': {
     name: "Ursa's Ring",
     spawns: [
-      { pokemon: "Bibarel", minLevel: 33, maxLevel: 35, chance: 14.3 },
-      { pokemon: "Bidoof", minLevel: 33, maxLevel: 35, chance: 14.3 },
-      { pokemon: "Burmy Plant Cloak", minLevel: 33, maxLevel: 35, chance: 14.3 },
-      { pokemon: "Wormadam Plant Cloak", minLevel: 33, maxLevel: 35, chance: 14.3 },
-      { pokemon: "Yanma", minLevel: 33, maxLevel: 35, chance: 14.3 },
-      { pokemon: "Teddiursa", minLevel: 33, maxLevel: 35, chance: 14.3 },
-      { pokemon: "Petilil", minLevel: 33, maxLevel: 35, chance: 14.2 },
+      { pokemon: "Rapidash", minLevel: 25, maxLevel: 27, chance: 14 },
+      { pokemon: "Manaphy", minLevel: 25, maxLevel: 27, chance: 14 },
+      { pokemon: "Lopunny", minLevel: 25, maxLevel: 27, chance: 14 },
+      { pokemon: "Whiscash", minLevel: 25, maxLevel: 27, chance: 14 },
+      { pokemon: "Goomy", minLevel: 25, maxLevel: 27, chance: 14 },
+      { pokemon: "Swinub", minLevel: 25, maxLevel: 27, chance: 14 },
+      { pokemon: "Mamoswine", minLevel: 25, maxLevel: 27, chance: 16 },
     ]
   },
   'SludgeMound': {
     name: "Sludge Mound",
     spawns: [
-      { pokemon: "Hippopotas", minLevel: 35, maxLevel: 37, chance: 50 },
-      { pokemon: "Golem", minLevel: 35, maxLevel: 37, chance: 50 },
+      { pokemon: "Zubat", minLevel: 27, maxLevel: 29, chance: 16 },
+      { pokemon: "Espeon", minLevel: 27, maxLevel: 29, chance: 16 },
+      { pokemon: "Staraptor", minLevel: 27, maxLevel: 29, chance: 16 },
+      { pokemon: "Stantler", minLevel: 27, maxLevel: 29, chance: 16 },
+      { pokemon: "Oshawott", minLevel: 27, maxLevel: 29, chance: 16 },
+      { pokemon: "Paras", minLevel: 27, maxLevel: 29, chance: 20 },
     ]
   },
   'ScarletBog': {
     name: "Scarlet Bog",
     spawns: [
-      { pokemon: "Croagunk", minLevel: 37, maxLevel: 39, chance: 20 },
-      { pokemon: "Gastly", minLevel: 37, maxLevel: 39, chance: 20 },
-      { pokemon: "Haunter", minLevel: 37, maxLevel: 39, chance: 20 },
-      { pokemon: "Skuntank", minLevel: 37, maxLevel: 39, chance: 20 },
-      { pokemon: "Stunky", minLevel: 37, maxLevel: 39, chance: 20 },
+      { pokemon: "Voltorb", minLevel: 28, maxLevel: 30, chance: 33 },
+      { pokemon: "Roselia", minLevel: 28, maxLevel: 30, chance: 33 },
+      { pokemon: "Avalugg", minLevel: 28, maxLevel: 30, chance: 34 },
     ]
   },
   'BolderollSlope': {
     name: "Bolderoll Slope",
     spawns: [
-      { pokemon: "Geodude", minLevel: 39, maxLevel: 41, chance: 14.3 },
-      { pokemon: "Golbat", minLevel: 39, maxLevel: 41, chance: 14.3 },
-      { pokemon: "Graveler", minLevel: 39, maxLevel: 41, chance: 14.3 },
-      { pokemon: "Zubat", minLevel: 39, maxLevel: 41, chance: 14.3 },
-      { pokemon: "Onix", minLevel: 39, maxLevel: 41, chance: 14.3 },
-      { pokemon: "Rhyhorn", minLevel: 39, maxLevel: 41, chance: 14.3 },
-      { pokemon: "Togetic", minLevel: 39, maxLevel: 41, chance: 14.2 },
+      { pokemon: "Cleffa", minLevel: 30, maxLevel: 32, chance: 33 },
+      { pokemon: "Geodude", minLevel: 30, maxLevel: 32, chance: 33 },
+      { pokemon: "Glalie", minLevel: 30, maxLevel: 32, chance: 34 },
     ]
   },
   'HolmofTrials': {
     name: "Holm of Trials",
     spawns: [
-      { pokemon: "Carnivine", minLevel: 41, maxLevel: 43, chance: 25 },
-      { pokemon: "Croagunk", minLevel: 41, maxLevel: 43, chance: 25 },
-      { pokemon: "Torterra", minLevel: 41, maxLevel: 43, chance: 25 },
-      { pokemon: "Toxicroak", minLevel: 41, maxLevel: 43, chance: 25 },
+      { pokemon: "Lucario", minLevel: 32, maxLevel: 34, chance: 25 },
+      { pokemon: "Roserade", minLevel: 32, maxLevel: 34, chance: 25 },
+      { pokemon: "Heracross", minLevel: 32, maxLevel: 34, chance: 25 },
+      { pokemon: "Croagunk", minLevel: 32, maxLevel: 34, chance: 25 },
     ]
   },
   'CrossingSlope': {
     name: "Crossing Slope",
     spawns: [
-      { pokemon: "Burmy Trash Cloak", minLevel: 43, maxLevel: 45, chance: 16.7 },
-      { pokemon: "Murkrow", minLevel: 43, maxLevel: 45, chance: 16.7 },
-      { pokemon: "Tangela", minLevel: 43, maxLevel: 45, chance: 16.7 },
-      { pokemon: "Wormadam Trash Cloak", minLevel: 43, maxLevel: 45, chance: 16.7 },
-      { pokemon: "Glameow", minLevel: 43, maxLevel: 45, chance: 16.7 },
-      { pokemon: "Purugly", minLevel: 43, maxLevel: 45, chance: 16.5 },
+      { pokemon: "Psyduck", minLevel: 33, maxLevel: 35, chance: 14 },
+      { pokemon: "Kirlia", minLevel: 33, maxLevel: 35, chance: 14 },
+      { pokemon: "Electabuzz", minLevel: 33, maxLevel: 35, chance: 14 },
+      { pokemon: "Phione", minLevel: 33, maxLevel: 35, chance: 14 },
+      { pokemon: "Umbreon", minLevel: 33, maxLevel: 35, chance: 14 },
+      { pokemon: "Eevee", minLevel: 33, maxLevel: 35, chance: 14 },
+      { pokemon: "Kricketot", minLevel: 33, maxLevel: 35, chance: 16 },
     ]
   },
   'BathersLagoon': {
     name: "Bathers' Lagoon",
     spawns: [
-      { pokemon: "Togepi", minLevel: 45, maxLevel: 47, chance: 33.3 },
-      { pokemon: "Burmy Trash Cloak", minLevel: 45, maxLevel: 47, chance: 33.3 },
-      { pokemon: "Wormadam Trash Cloak", minLevel: 45, maxLevel: 47, chance: 33.4 },
+      { pokemon: "Silcoon", minLevel: 35, maxLevel: 37, chance: 25 },
+      { pokemon: "Crobat", minLevel: 35, maxLevel: 37, chance: 25 },
+      { pokemon: "Teddiursa", minLevel: 35, maxLevel: 37, chance: 25 },
+      { pokemon: "Machoke", minLevel: 35, maxLevel: 37, chance: 25 },
     ]
   },
   'CastawayShore': {
     name: "Castaway Shore",
     spawns: [
-      { pokemon: "Machoke", minLevel: 47, maxLevel: 49, chance: 33.3 },
-      { pokemon: "Machop", minLevel: 47, maxLevel: 49, chance: 33.3 },
-      { pokemon: "Skorupi", minLevel: 47, maxLevel: 49, chance: 33.4 },
+      { pokemon: "Octillery", minLevel: 37, maxLevel: 39, chance: 33 },
+      { pokemon: "Mothim", minLevel: 37, maxLevel: 39, chance: 33 },
+      { pokemon: "Pikachu", minLevel: 37, maxLevel: 39, chance: 34 },
     ]
   },
   'DeadwoodHaunt': {
     name: "Deadwood Haunt",
     spawns: [
-      { pokemon: "Burmy Plant Cloak", minLevel: 49, maxLevel: 52, chance: 12.5 },
-      { pokemon: "Drifblim", minLevel: 49, maxLevel: 52, chance: 12.5 },
-      { pokemon: "Starly", minLevel: 49, maxLevel: 52, chance: 12.5 },
-      { pokemon: "Wormadam Plant Cloak", minLevel: 49, maxLevel: 52, chance: 12.5 },
-      { pokemon: "Chatot", minLevel: 49, maxLevel: 52, chance: 12.5 },
-      { pokemon: "Dusclops", minLevel: 49, maxLevel: 52, chance: 12.5 },
-      { pokemon: "Dusknoir", minLevel: 49, maxLevel: 52, chance: 12.5 },
-      { pokemon: "Duskull", minLevel: 49, maxLevel: 52, chance: 12.5 },
+      { pokemon: "Regigigas", minLevel: 39, maxLevel: 41, chance: 25 },
+      { pokemon: "Glaceon", minLevel: 39, maxLevel: 41, chance: 25 },
+      { pokemon: "Walrein", minLevel: 39, maxLevel: 41, chance: 25 },
+      { pokemon: "Dartrix", minLevel: 39, maxLevel: 41, chance: 25 },
     ]
   },
   'GymArcanine': {
@@ -252,117 +255,101 @@ export const hisuiRoutes = {
   'VeilstoneCape': {
     name: "Veilstone Cape",
     spawns: [
-      { pokemon: "Beautifly", minLevel: 54, maxLevel: 56, chance: 10 },
-      { pokemon: "Burmy Trash Cloak", minLevel: 54, maxLevel: 56, chance: 10 },
-      { pokemon: "Dustox", minLevel: 54, maxLevel: 56, chance: 10 },
-      { pokemon: "Glameow", minLevel: 54, maxLevel: 56, chance: 10 },
-      { pokemon: "Mothim", minLevel: 54, maxLevel: 56, chance: 10 },
-      { pokemon: "Murkrow", minLevel: 54, maxLevel: 56, chance: 10 },
-      { pokemon: "Purugly", minLevel: 54, maxLevel: 56, chance: 10 },
-      { pokemon: "Wormadam Trash Cloak", minLevel: 54, maxLevel: 56, chance: 10 },
-      { pokemon: "Growlithe", minLevel: 54, maxLevel: 56, chance: 10 },
-      { pokemon: "Vulpix", minLevel: 54, maxLevel: 56, chance: 10 },
+      { pokemon: "Parasect", minLevel: 40, maxLevel: 42, chance: 20 },
+      { pokemon: "Barboach", minLevel: 40, maxLevel: 42, chance: 20 },
+      { pokemon: "Lilligant", minLevel: 40, maxLevel: 42, chance: 20 },
+      { pokemon: "Kleavor", minLevel: 40, maxLevel: 42, chance: 20 },
+      { pokemon: "Murkrow", minLevel: 40, maxLevel: 42, chance: 20 },
     ]
   },
   'TranquilityCove': {
     name: "Tranquility Cove",
     spawns: [
-      { pokemon: "Burmy Plant Cloak", minLevel: 56, maxLevel: 58, chance: 33.3 },
-      { pokemon: "Wormadam Plant Cloak", minLevel: 56, maxLevel: 58, chance: 33.3 },
-      { pokemon: "Tangrowth", minLevel: 56, maxLevel: 58, chance: 33.4 },
+      { pokemon: "Remoraid", minLevel: 42, maxLevel: 44, chance: 20 },
+      { pokemon: "Sneasel", minLevel: 42, maxLevel: 44, chance: 20 },
+      { pokemon: "Ursaluna", minLevel: 42, maxLevel: 44, chance: 20 },
+      { pokemon: "Scizor", minLevel: 42, maxLevel: 44, chance: 20 },
+      { pokemon: "Decidueye", minLevel: 42, maxLevel: 44, chance: 20 },
     ]
   },
   'IslespyShore': {
     name: "Islespy Shore",
     spawns: [
-      { pokemon: "Murkrow", minLevel: 58, maxLevel: 60, chance: 50 },
-      { pokemon: "Hippowdon", minLevel: 58, maxLevel: 60, chance: 50 },
+      { pokemon: "Braviary", minLevel: 44, maxLevel: 46, chance: 16 },
+      { pokemon: "Dewott", minLevel: 44, maxLevel: 46, chance: 16 },
+      { pokemon: "Rhyperior", minLevel: 44, maxLevel: 46, chance: 16 },
+      { pokemon: "Ursaring", minLevel: 44, maxLevel: 46, chance: 16 },
+      { pokemon: "Flareon", minLevel: 44, maxLevel: 46, chance: 16 },
+      { pokemon: "Magmar", minLevel: 44, maxLevel: 46, chance: 20 },
     ]
   },
   'FirespitIsland': {
     name: "Firespit Island",
     spawns: [
-      { pokemon: "Graveler", minLevel: 60, maxLevel: 62, chance: 20 },
-      { pokemon: "Magby", minLevel: 60, maxLevel: 62, chance: 20 },
-      { pokemon: "Magmar", minLevel: 60, maxLevel: 62, chance: 20 },
-      { pokemon: "Ninetales", minLevel: 60, maxLevel: 62, chance: 20 },
-      { pokemon: "Heatran", minLevel: 60, maxLevel: 62, chance: 20 },
+      { pokemon: "Electrode", minLevel: 45, maxLevel: 47, chance: 20 },
+      { pokemon: "Lumineon", minLevel: 45, maxLevel: 47, chance: 20 },
+      { pokemon: "Gliscor", minLevel: 45, maxLevel: 47, chance: 20 },
+      { pokemon: "Kricketune", minLevel: 45, maxLevel: 47, chance: 20 },
+      { pokemon: "Gabite", minLevel: 45, maxLevel: 47, chance: 20 },
     ]
   },
   'SpringPath': {
     name: "Spring Path",
     spawns: [
-      { pokemon: "Graveler", minLevel: 62, maxLevel: 64, chance: 25 },
-      { pokemon: "Mothim", minLevel: 62, maxLevel: 64, chance: 25 },
-      { pokemon: "Toxicroak", minLevel: 62, maxLevel: 64, chance: 25 },
-      { pokemon: "Ursaring", minLevel: 62, maxLevel: 64, chance: 25 },
+      { pokemon: "Lickitung", minLevel: 47, maxLevel: 49, chance: 25 },
+      { pokemon: "Steelix", minLevel: 47, maxLevel: 49, chance: 25 },
+      { pokemon: "Electivire", minLevel: 47, maxLevel: 49, chance: 25 },
+      { pokemon: "Kadabra", minLevel: 47, maxLevel: 49, chance: 25 },
     ]
   },
   'CelesticaTrail': {
     name: "Celestica Trail",
     spawns: [
-      { pokemon: "Burmy Sandy Cloak", minLevel: 64, maxLevel: 66, chance: 11.1 },
-      { pokemon: "Hippopotas", minLevel: 64, maxLevel: 66, chance: 11.1 },
-      { pokemon: "Hippowdon", minLevel: 64, maxLevel: 66, chance: 11.1 },
-      { pokemon: "Magnezone", minLevel: 64, maxLevel: 66, chance: 11.1 },
-      { pokemon: "Wormadam Sandy Cloak", minLevel: 64, maxLevel: 66, chance: 11.1 },
-      { pokemon: "Chimecho", minLevel: 64, maxLevel: 66, chance: 11.1 },
-      { pokemon: "Rhydon", minLevel: 64, maxLevel: 66, chance: 11.1 },
-      { pokemon: "Sneasel", minLevel: 64, maxLevel: 66, chance: 11.1 },
-      { pokemon: "Steelix", minLevel: 64, maxLevel: 66, chance: 11.2 },
+      { pokemon: "Misdreavus", minLevel: 49, maxLevel: 51, chance: 20 },
+      { pokemon: "Tentacool", minLevel: 49, maxLevel: 51, chance: 20 },
+      { pokemon: "Clefairy", minLevel: 49, maxLevel: 51, chance: 20 },
+      { pokemon: "Vaporeon", minLevel: 49, maxLevel: 51, chance: 20 },
+      { pokemon: "Gligar", minLevel: 49, maxLevel: 51, chance: 20 },
     ]
   },
   'CelesticaRuins': {
     name: "Celestica Ruins",
     spawns: [
-      { pokemon: "Bonsly", minLevel: 66, maxLevel: 68, chance: 12.5 },
-      { pokemon: "Bronzong", minLevel: 66, maxLevel: 68, chance: 12.5 },
-      { pokemon: "Bronzor", minLevel: 66, maxLevel: 68, chance: 12.5 },
-      { pokemon: "Burmy Sandy Cloak", minLevel: 66, maxLevel: 68, chance: 12.5 },
-      { pokemon: "Gastly", minLevel: 66, maxLevel: 68, chance: 12.5 },
-      { pokemon: "Wormadam Sandy Cloak", minLevel: 66, maxLevel: 68, chance: 12.5 },
-      { pokemon: "Misdreavus", minLevel: 66, maxLevel: 68, chance: 12.5 },
-      { pokemon: "Nosepass", minLevel: 66, maxLevel: 68, chance: 12.5 },
+      { pokemon: "Rhydon", minLevel: 50, maxLevel: 52, chance: 25 },
+      { pokemon: "Infernape", minLevel: 50, maxLevel: 52, chance: 25 },
+      { pokemon: "Gible", minLevel: 50, maxLevel: 52, chance: 25 },
+      { pokemon: "Typhlosion", minLevel: 50, maxLevel: 52, chance: 25 },
     ]
   },
   'SacredPlaza': {
     name: "Sacred Plaza",
     spawns: [
-      { pokemon: "Burmy Plant Cloak", minLevel: 68, maxLevel: 70, chance: 11.1 },
-      { pokemon: "Haunter", minLevel: 68, maxLevel: 70, chance: 11.1 },
-      { pokemon: "Luxray", minLevel: 68, maxLevel: 70, chance: 11.1 },
-      { pokemon: "Misdreavus", minLevel: 68, maxLevel: 70, chance: 11.1 },
-      { pokemon: "Rotom", minLevel: 68, maxLevel: 70, chance: 11.1 },
-      { pokemon: "Wormadam Sandy Cloak", minLevel: 68, maxLevel: 70, chance: 11.1 },
-      { pokemon: "Chingling", minLevel: 68, maxLevel: 70, chance: 11.1 },
-      { pokemon: "Rhyperior", minLevel: 68, maxLevel: 70, chance: 11.1 },
-      { pokemon: "Voltorb", minLevel: 68, maxLevel: 70, chance: 11.2 },
+      { pokemon: "Unown", minLevel: 52, maxLevel: 54, chance: 20 },
+      { pokemon: "Gyarados", minLevel: 52, maxLevel: 54, chance: 20 },
+      { pokemon: "Goodra", minLevel: 52, maxLevel: 54, chance: 20 },
+      { pokemon: "Purugly", minLevel: 52, maxLevel: 54, chance: 20 },
+      { pokemon: "Luxray", minLevel: 52, maxLevel: 54, chance: 20 },
     ]
   },
   'StonetoothRows': {
     name: "Stonetooth Rows",
     spawns: [
-      { pokemon: "Bronzong", minLevel: 70, maxLevel: 72, chance: 12.5 },
-      { pokemon: "Bronzor", minLevel: 70, maxLevel: 72, chance: 12.5 },
-      { pokemon: "Burmy Sandy Cloak", minLevel: 70, maxLevel: 72, chance: 12.5 },
-      { pokemon: "Misdreavus", minLevel: 70, maxLevel: 72, chance: 12.5 },
-      { pokemon: "Wormadam Sandy Cloak", minLevel: 70, maxLevel: 72, chance: 12.5 },
-      { pokemon: "Mismagius", minLevel: 70, maxLevel: 72, chance: 12.5 },
-      { pokemon: "Rotom", minLevel: 70, maxLevel: 72, chance: 12.5 },
-      { pokemon: "Rapidash", minLevel: 70, maxLevel: 72, chance: 12.5 },
+      { pokemon: "Sudowoodo", minLevel: 54, maxLevel: 56, chance: 20 },
+      { pokemon: "Wurmple", minLevel: 54, maxLevel: 56, chance: 20 },
+      { pokemon: "Sliggoo", minLevel: 54, maxLevel: 56, chance: 20 },
+      { pokemon: "Drifblim", minLevel: 54, maxLevel: 56, chance: 20 },
+      { pokemon: "Prinplup", minLevel: 54, maxLevel: 56, chance: 20 },
     ]
   },
   'PrimevalGrotto': {
     name: "Primeval Grotto",
     spawns: [
-      { pokemon: "Cherrim", minLevel: 72, maxLevel: 74, chance: 12.5 },
-      { pokemon: "Cherubi", minLevel: 72, maxLevel: 74, chance: 12.5 },
-      { pokemon: "Nosepass", minLevel: 72, maxLevel: 74, chance: 12.5 },
-      { pokemon: "Scyther", minLevel: 72, maxLevel: 74, chance: 12.5 },
-      { pokemon: "Sneasel", minLevel: 72, maxLevel: 74, chance: 12.5 },
-      { pokemon: "Gligar", minLevel: 72, maxLevel: 74, chance: 12.5 },
-      { pokemon: "Gliscor", minLevel: 72, maxLevel: 74, chance: 12.5 },
-      { pokemon: "Probopass", minLevel: 72, maxLevel: 74, chance: 12.5 },
+      { pokemon: "Rufflet", minLevel: 56, maxLevel: 58, chance: 16 },
+      { pokemon: "Arcanine", minLevel: 56, maxLevel: 58, chance: 16 },
+      { pokemon: "Shellos", minLevel: 56, maxLevel: 58, chance: 16 },
+      { pokemon: "Magmortar", minLevel: 56, maxLevel: 58, chance: 16 },
+      { pokemon: "Samurott", minLevel: 56, maxLevel: 58, chance: 16 },
+      { pokemon: "Glameow", minLevel: 56, maxLevel: 58, chance: 20 },
     ]
   },
   'GymElectrode': {
@@ -373,110 +360,91 @@ export const hisuiRoutes = {
   'ClamberclawCliffs': {
     name: "Clamberclaw Cliffs",
     spawns: [
-      { pokemon: "Gible", minLevel: 76, maxLevel: 78, chance: 16.7 },
-      { pokemon: "Graveler", minLevel: 76, maxLevel: 78, chance: 16.7 },
-      { pokemon: "Magnezone", minLevel: 76, maxLevel: 78, chance: 16.7 },
-      { pokemon: "Bronzong", minLevel: 76, maxLevel: 78, chance: 16.7 },
-      { pokemon: "Bronzor", minLevel: 76, maxLevel: 78, chance: 16.7 },
-      { pokemon: "Gabite", minLevel: 76, maxLevel: 78, chance: 16.5 },
+      { pokemon: "Wyrdeer", minLevel: 57, maxLevel: 59, chance: 25 },
+      { pokemon: "Gengar", minLevel: 57, maxLevel: 59, chance: 25 },
+      { pokemon: "Pachirisu", minLevel: 57, maxLevel: 59, chance: 25 },
+      { pokemon: "Bronzor", minLevel: 57, maxLevel: 59, chance: 25 },
     ]
   },
   'CoronetHighlands': {
     name: "Coronet Highlands",
     spawns: [
-      { pokemon: "Goodra", minLevel: 78, maxLevel: 80, chance: 33.3 },
-      { pokemon: "Garchomp", minLevel: 78, maxLevel: 80, chance: 33.3 },
-      { pokemon: "Electivire", minLevel: 78, maxLevel: 80, chance: 33.4 },
+      { pokemon: "Wormadam", minLevel: 59, maxLevel: 61, chance: 33 },
+      { pokemon: "Gastrodon", minLevel: 59, maxLevel: 61, chance: 33 },
+      { pokemon: "Zorua", minLevel: 59, maxLevel: 61, chance: 34 },
     ]
   },
   'FabledSpring': {
     name: "Fabled Spring",
     spawns: [
-      { pokemon: "Budew", minLevel: 80, maxLevel: 82, chance: 12.5 },
-      { pokemon: "Cherrim", minLevel: 80, maxLevel: 82, chance: 12.5 },
-      { pokemon: "Cherubi", minLevel: 80, maxLevel: 82, chance: 12.5 },
-      { pokemon: "Roselia", minLevel: 80, maxLevel: 82, chance: 12.5 },
-      { pokemon: "Clefable", minLevel: 80, maxLevel: 82, chance: 12.5 },
-      { pokemon: "Clefairy", minLevel: 80, maxLevel: 82, chance: 12.5 },
-      { pokemon: "Cleffa", minLevel: 80, maxLevel: 82, chance: 12.5 },
-      { pokemon: "Magnezone", minLevel: 80, maxLevel: 82, chance: 12.5 },
+      { pokemon: "Turtwig", minLevel: 61, maxLevel: 63, chance: 25 },
+      { pokemon: "Tentacruel", minLevel: 61, maxLevel: 63, chance: 25 },
+      { pokemon: "Cascoon", minLevel: 61, maxLevel: 63, chance: 25 },
+      { pokemon: "Riolu", minLevel: 61, maxLevel: 63, chance: 25 },
     ]
   },
   'WhiteoutValley': {
     name: "Whiteout Valley",
     spawns: [
-      { pokemon: "Aipom", minLevel: 82, maxLevel: 84, chance: 50 },
-      { pokemon: "Snorunt", minLevel: 82, maxLevel: 84, chance: 50 },
+      { pokemon: "Qwilfish", minLevel: 62, maxLevel: 64, chance: 33 },
+      { pokemon: "Burmy", minLevel: 62, maxLevel: 64, chance: 33 },
+      { pokemon: "Beautifly", minLevel: 62, maxLevel: 64, chance: 34 },
     ]
   },
   'BonechillWastesNorth': {
     name: "Bonechill Wastes North",
     spawns: [
-      { pokemon: "Snorunt", minLevel: 84, maxLevel: 86, chance: 16.7 },
-      { pokemon: "Wormadam Plant Cloak", minLevel: 84, maxLevel: 86, chance: 16.7 },
-      { pokemon: "Froslass", minLevel: 84, maxLevel: 86, chance: 16.7 },
-      { pokemon: "Glalie", minLevel: 84, maxLevel: 86, chance: 16.7 },
-      { pokemon: "Piloswine", minLevel: 84, maxLevel: 86, chance: 16.7 },
-      { pokemon: "Buneary", minLevel: 84, maxLevel: 86, chance: 16.5 },
+      { pokemon: "Magikarp", minLevel: 64, maxLevel: 66, chance: 25 },
+      { pokemon: "Golduck", minLevel: 64, maxLevel: 66, chance: 25 },
+      { pokemon: "Alakazam", minLevel: 64, maxLevel: 66, chance: 25 },
+      { pokemon: "Tangrowth", minLevel: 64, maxLevel: 66, chance: 25 },
     ]
   },
   'BonechillWastesSouth': {
     name: "Bonechill Wastes South",
     spawns: [
-      { pokemon: "Burmy Trash Cloak", minLevel: 86, maxLevel: 88, chance: 20 },
-      { pokemon: "Lopunny", minLevel: 86, maxLevel: 88, chance: 20 },
-      { pokemon: "Swinub", minLevel: 86, maxLevel: 88, chance: 20 },
-      { pokemon: "Zoroark", minLevel: 86, maxLevel: 88, chance: 20 },
-      { pokemon: "Zorua", minLevel: 86, maxLevel: 88, chance: 20 },
+      { pokemon: "Aipom", minLevel: 66, maxLevel: 68, chance: 25 },
+      { pokemon: "Raichu", minLevel: 66, maxLevel: 68, chance: 25 },
+      { pokemon: "Snorunt", minLevel: 66, maxLevel: 68, chance: 25 },
+      { pokemon: "Munchlax", minLevel: 66, maxLevel: 68, chance: 25 },
     ]
   },
   'ArenasApproach': {
     name: "Arena's Approach",
     spawns: [
-      { pokemon: "Ambipom", minLevel: 88, maxLevel: 90, chance: 11.1 },
-      { pokemon: "Dusclops", minLevel: 88, maxLevel: 90, chance: 11.1 },
-      { pokemon: "Duskull", minLevel: 88, maxLevel: 90, chance: 11.1 },
-      { pokemon: "Electabuzz", minLevel: 88, maxLevel: 90, chance: 11.1 },
-      { pokemon: "Elekid", minLevel: 88, maxLevel: 90, chance: 11.1 },
-      { pokemon: "Machoke", minLevel: 88, maxLevel: 90, chance: 11.1 },
-      { pokemon: "Machop", minLevel: 88, maxLevel: 90, chance: 11.1 },
-      { pokemon: "Bergmite", minLevel: 88, maxLevel: 90, chance: 11.1 },
-      { pokemon: "Machamp", minLevel: 88, maxLevel: 90, chance: 11.2 },
+      { pokemon: "Piloswine", minLevel: 67, maxLevel: 69, chance: 14 },
+      { pokemon: "Basculegion", minLevel: 67, maxLevel: 69, chance: 14 },
+      { pokemon: "Togekiss", minLevel: 67, maxLevel: 69, chance: 14 },
+      { pokemon: "Gallade", minLevel: 67, maxLevel: 69, chance: 14 },
+      { pokemon: "Spheal", minLevel: 67, maxLevel: 69, chance: 14 },
+      { pokemon: "Machamp", minLevel: 67, maxLevel: 69, chance: 14 },
+      { pokemon: "Cherubi", minLevel: 67, maxLevel: 69, chance: 16 },
     ]
   },
   'GlacierTerrace': {
     name: "Glacier Terrace",
     spawns: [
-      { pokemon: "Aipom", minLevel: 90, maxLevel: 92, chance: 14.3 },
-      { pokemon: "Burmy Trash Cloak", minLevel: 90, maxLevel: 92, chance: 14.3 },
-      { pokemon: "Glameow", minLevel: 90, maxLevel: 92, chance: 14.3 },
-      { pokemon: "Purugly", minLevel: 90, maxLevel: 92, chance: 14.3 },
-      { pokemon: "Wormadam Trash Cloak", minLevel: 90, maxLevel: 92, chance: 14.3 },
-      { pokemon: "Abomasnow", minLevel: 90, maxLevel: 92, chance: 14.3 },
-      { pokemon: "Snover", minLevel: 90, maxLevel: 92, chance: 14.2 },
+      { pokemon: "Ponyta", minLevel: 69, maxLevel: 71, chance: 33 },
+      { pokemon: "Starly", minLevel: 69, maxLevel: 71, chance: 33 },
+      { pokemon: "Jolteon", minLevel: 69, maxLevel: 71, chance: 34 },
     ]
   },
   'HeartsCrag': {
     name: "Heart's Crag",
     spawns: [
-      { pokemon: "Aipom", minLevel: 92, maxLevel: 94, chance: 20 },
-      { pokemon: "Ambipom", minLevel: 92, maxLevel: 94, chance: 20 },
-      { pokemon: "Kirlia", minLevel: 92, maxLevel: 94, chance: 20 },
-      { pokemon: "Ralts", minLevel: 92, maxLevel: 94, chance: 20 },
-      { pokemon: "Gardevoir", minLevel: 92, maxLevel: 94, chance: 20 },
+      { pokemon: "Froslass", minLevel: 71, maxLevel: 73, chance: 25 },
+      { pokemon: "Bidoof", minLevel: 71, maxLevel: 73, chance: 25 },
+      { pokemon: "Carnivine", minLevel: 71, maxLevel: 73, chance: 25 },
+      { pokemon: "Buneary", minLevel: 71, maxLevel: 73, chance: 25 },
     ]
   },
   'SnowpointTemple': {
     name: "Snowpoint Temple",
     spawns: [
-      { pokemon: "Golbat", minLevel: 94, maxLevel: 96, chance: 12.5 },
-      { pokemon: "Graveler", minLevel: 94, maxLevel: 96, chance: 12.5 },
-      { pokemon: "Kirlia", minLevel: 94, maxLevel: 96, chance: 12.5 },
-      { pokemon: "Ralts", minLevel: 94, maxLevel: 96, chance: 12.5 },
-      { pokemon: "Braviary", minLevel: 94, maxLevel: 96, chance: 12.5 },
-      { pokemon: "Gallade", minLevel: 94, maxLevel: 96, chance: 12.5 },
-      { pokemon: "Rufflet", minLevel: 94, maxLevel: 96, chance: 12.5 },
-      { pokemon: "Regigigas", minLevel: 94, maxLevel: 96, chance: 12.5 },
+      { pokemon: "Onix", minLevel: 73, maxLevel: 75, chance: 25 },
+      { pokemon: "Drifloon", minLevel: 73, maxLevel: 75, chance: 25 },
+      { pokemon: "Mismagius", minLevel: 73, maxLevel: 75, chance: 25 },
+      { pokemon: "Piplup", minLevel: 73, maxLevel: 75, chance: 25 },
     ]
   },
   'GymAvalugg': {
@@ -484,29 +452,205 @@ export const hisuiRoutes = {
     spawns: [
     ]
   },
-  'EtertimeStorm': {
-    name: "Etertime Storm",
-    spawns: [
-      { pokemon: "Crobat", minLevel: 98, maxLevel: 101, chance: 14.3 },
-      { pokemon: "Machoke", minLevel: 98, maxLevel: 101, chance: 14.3 },
-      { pokemon: "Machop", minLevel: 98, maxLevel: 101, chance: 14.3 },
-      { pokemon: "Electabuzz", minLevel: 98, maxLevel: 101, chance: 14.3 },
-      { pokemon: "Elekid", minLevel: 98, maxLevel: 101, chance: 14.3 },
-      { pokemon: "Lucario", minLevel: 98, maxLevel: 101, chance: 14.3 },
-      { pokemon: "Riolu", minLevel: 98, maxLevel: 101, chance: 14.2 },
-    ]
-  },
-  'HisuiPokemonLeague': {
-    name: "Hisui Pokemon League",
+  'GymWardenIngo': {
+    name: "Gym - Warden Ingo",
     spawns: [
     ]
   },
-  'LakeofTrials': {
-    name: "Lake of Trials",
+  'ObsidianFieldlandsFishingSpot': {
+    name: "Obsidian Fieldlands Fishing Spot",
     spawns: [
-      { pokemon: "Uxie", minLevel: 100, maxLevel: 100, chance: 33.3 },
-      { pokemon: "Mesprit", minLevel: 100, maxLevel: 100, chance: 33.3 },
-      { pokemon: "Azelf", minLevel: 100, maxLevel: 100, chance: 33.4 },
+      { pokemon: "Golem", minLevel: 85, maxLevel: 87, chance: 16 },
+      { pokemon: "Dustox", minLevel: 85, maxLevel: 87, chance: 16 },
+      { pokemon: "Basculin", minLevel: 85, maxLevel: 87, chance: 16 },
+      { pokemon: "Tangela", minLevel: 85, maxLevel: 87, chance: 16 },
+      { pokemon: "Torterra", minLevel: 85, maxLevel: 87, chance: 16 },
+      { pokemon: "Skorupi", minLevel: 85, maxLevel: 87, chance: 20 },
+    ]
+  },
+  'CobaltCoastlandsFishingSpot': {
+    name: "Cobalt Coastlands Fishing Spot",
+    spawns: [
+      { pokemon: "Vulpix", minLevel: 85, maxLevel: 87, chance: 20 },
+      { pokemon: "Machop", minLevel: 85, maxLevel: 87, chance: 20 },
+      { pokemon: "Bibarel", minLevel: 85, maxLevel: 87, chance: 20 },
+      { pokemon: "Luxio", minLevel: 85, maxLevel: 87, chance: 20 },
+      { pokemon: "Typhlosion", minLevel: 85, maxLevel: 87, chance: 20 },
+    ]
+  },
+  'CrimsonMirelandsFishingSpot': {
+    name: "Crimson Mirelands Fishing Spot",
+    spawns: [
+      { pokemon: "Oshawott", minLevel: 85, maxLevel: 87, chance: 25 },
+      { pokemon: "Bibarel", minLevel: 85, maxLevel: 87, chance: 25 },
+      { pokemon: "Luxray", minLevel: 85, maxLevel: 87, chance: 25 },
+      { pokemon: "Wurmple", minLevel: 85, maxLevel: 87, chance: 25 },
+    ]
+  },
+  'GinkgoLanding': {
+    name: "Ginkgo Landing",
+    spawns: [
+      { pokemon: "Luxray", minLevel: 85, maxLevel: 87, chance: 25 },
+      { pokemon: "Luxio", minLevel: 85, maxLevel: 87, chance: 25 },
+      { pokemon: "Decidueye", minLevel: 85, maxLevel: 87, chance: 25 },
+      { pokemon: "Quilava", minLevel: 85, maxLevel: 87, chance: 25 },
+    ]
+  },
+  'ShroudedRuins': {
+    name: "Shrouded Ruins",
+    spawns: [
+      { pokemon: "Decidueye", minLevel: 85, maxLevel: 87, chance: 16 },
+      { pokemon: "Dartrix", minLevel: 85, maxLevel: 87, chance: 16 },
+      { pokemon: "Wurmple", minLevel: 85, maxLevel: 87, chance: 16 },
+      { pokemon: "Staravia", minLevel: 85, maxLevel: 87, chance: 16 },
+      { pokemon: "Luxio", minLevel: 85, maxLevel: 87, chance: 16 },
+      { pokemon: "Typhlosion", minLevel: 85, maxLevel: 87, chance: 20 },
+    ]
+  },
+  'SandgemFlatsSouth': {
+    name: "Sandgem Flats South",
+    spawns: [
+      { pokemon: "Dartrix", minLevel: 90, maxLevel: 92, chance: 33 },
+      { pokemon: "Starly", minLevel: 90, maxLevel: 92, chance: 33 },
+      { pokemon: "Samurott", minLevel: 90, maxLevel: 92, chance: 34 },
+    ]
+  },
+  'RamanasIslandSouth': {
+    name: "Ramanas Island South",
+    spawns: [
+      { pokemon: "Luxray", minLevel: 90, maxLevel: 92, chance: 25 },
+      { pokemon: "Wurmple", minLevel: 90, maxLevel: 92, chance: 25 },
+      { pokemon: "Bibarel", minLevel: 90, maxLevel: 92, chance: 25 },
+      { pokemon: "Oshawott", minLevel: 90, maxLevel: 92, chance: 25 },
+    ]
+  },
+  'SandgemFlatsNorth': {
+    name: "Sandgem Flats North",
+    spawns: [
+      { pokemon: "Staraptor", minLevel: 90, maxLevel: 92, chance: 25 },
+      { pokemon: "Rowlet", minLevel: 90, maxLevel: 92, chance: 25 },
+      { pokemon: "Luxray", minLevel: 90, maxLevel: 92, chance: 25 },
+      { pokemon: "Bidoof", minLevel: 90, maxLevel: 92, chance: 25 },
+    ]
+  },
+  'CoronetHighlandsFishingSpot': {
+    name: "Coronet Highlands Fishing Spot",
+    spawns: [
+      { pokemon: "Luxio", minLevel: 85, maxLevel: 87, chance: 14 },
+      { pokemon: "Quilava", minLevel: 85, maxLevel: 87, chance: 14 },
+      { pokemon: "Starly", minLevel: 85, maxLevel: 87, chance: 14 },
+      { pokemon: "Shinx", minLevel: 85, maxLevel: 87, chance: 14 },
+      { pokemon: "Bibarel", minLevel: 85, maxLevel: 87, chance: 14 },
+      { pokemon: "Silcoon", minLevel: 85, maxLevel: 87, chance: 14 },
+      { pokemon: "Samurott", minLevel: 85, maxLevel: 87, chance: 16 },
+    ]
+  },
+  'CloudpoolRidgeNorth': {
+    name: "Cloudpool Ridge North",
+    spawns: [
+      { pokemon: "Shinx", minLevel: 90, maxLevel: 92, chance: 25 },
+      { pokemon: "Quilava", minLevel: 90, maxLevel: 92, chance: 25 },
+      { pokemon: "Bidoof", minLevel: 90, maxLevel: 92, chance: 25 },
+      { pokemon: "Samurott", minLevel: 90, maxLevel: 92, chance: 25 },
+    ]
+  },
+  'CloudpoolRidgeSouth': {
+    name: "Cloudpool Ridge South",
+    spawns: [
+      { pokemon: "Typhlosion", minLevel: 90, maxLevel: 92, chance: 33 },
+      { pokemon: "Luxray", minLevel: 90, maxLevel: 92, chance: 33 },
+      { pokemon: "Starly", minLevel: 90, maxLevel: 92, chance: 34 },
+    ]
+  },
+  'SpaceTimeDistortion': {
+    name: "Space-Time Distortion",
+    spawns: [
+      { pokemon: "Porygon", minLevel: 100, maxLevel: 100, chance: 2 },
+      { pokemon: "Porygon2", minLevel: 100, maxLevel: 100, chance: 2 },
+      { pokemon: "Porygon-Z", minLevel: 100, maxLevel: 100, chance: 2 },
+      { pokemon: "Cranidos", minLevel: 100, maxLevel: 100, chance: 2 },
+      { pokemon: "Rampardos", minLevel: 100, maxLevel: 100, chance: 2 },
+      { pokemon: "Shieldon", minLevel: 100, maxLevel: 100, chance: 2 },
+      { pokemon: "Bastiodon", minLevel: 100, maxLevel: 100, chance: 2 },
+      { pokemon: "Magnemite", minLevel: 100, maxLevel: 100, chance: 2 },
+      { pokemon: "Magneton", minLevel: 100, maxLevel: 100, chance: 2 },
+      { pokemon: "Magnezone", minLevel: 100, maxLevel: 100, chance: 2 },
+      { pokemon: "Eevee", minLevel: 100, maxLevel: 100, chance: 2 },
+      { pokemon: "Vaporeon", minLevel: 100, maxLevel: 100, chance: 2 },
+      { pokemon: "Jolteon", minLevel: 100, maxLevel: 100, chance: 2 },
+      { pokemon: "Flareon", minLevel: 100, maxLevel: 100, chance: 2 },
+      { pokemon: "Espeon", minLevel: 100, maxLevel: 100, chance: 2 },
+      { pokemon: "Umbreon", minLevel: 100, maxLevel: 100, chance: 2 },
+      { pokemon: "Leafeon", minLevel: 100, maxLevel: 100, chance: 2 },
+      { pokemon: "Glaceon", minLevel: 100, maxLevel: 100, chance: 2 },
+      { pokemon: "Sylveon", minLevel: 100, maxLevel: 100, chance: 2 },
+      { pokemon: "Cyndaquil", minLevel: 100, maxLevel: 100, chance: 2 },
+      { pokemon: "Quilava", minLevel: 100, maxLevel: 100, chance: 2 },
+      { pokemon: "Typhlosion", minLevel: 100, maxLevel: 100, chance: 2 },
+      { pokemon: "Oshawott", minLevel: 100, maxLevel: 100, chance: 2 },
+      { pokemon: "Dewott", minLevel: 100, maxLevel: 100, chance: 2 },
+      { pokemon: "Samurott", minLevel: 100, maxLevel: 100, chance: 2 },
+      { pokemon: "Rowlet", minLevel: 100, maxLevel: 100, chance: 2 },
+      { pokemon: "Dartrix", minLevel: 100, maxLevel: 100, chance: 2 },
+      { pokemon: "Decidueye", minLevel: 100, maxLevel: 100, chance: 2 },
+      { pokemon: "Kleavor", minLevel: 100, maxLevel: 100, chance: 2 },
+      { pokemon: "Lilligant", minLevel: 100, maxLevel: 100, chance: 2 },
+      { pokemon: "Electrode", minLevel: 100, maxLevel: 100, chance: 2 },
+      { pokemon: "Avalugg", minLevel: 100, maxLevel: 100, chance: 2 },
+      { pokemon: "Arcanine", minLevel: 100, maxLevel: 100, chance: 2 },
+      { pokemon: "Sneasel", minLevel: 100, maxLevel: 100, chance: 2 },
+      { pokemon: "Weavile", minLevel: 100, maxLevel: 100, chance: 2 },
+      { pokemon: "Sneasler", minLevel: 100, maxLevel: 100, chance: 2 },
+      { pokemon: "Gengar", minLevel: 100, maxLevel: 100, chance: 2 },
+      { pokemon: "Alakazam", minLevel: 100, maxLevel: 100, chance: 2 },
+      { pokemon: "Scizor", minLevel: 100, maxLevel: 100, chance: 2 },
+      { pokemon: "Gastly", minLevel: 100, maxLevel: 100, chance: 2 },
+      { pokemon: "Haunter", minLevel: 100, maxLevel: 100, chance: 2 },
+      { pokemon: "Abra", minLevel: 100, maxLevel: 100, chance: 18 },
+    ]
+  },
+  'WaywardCave': {
+    name: "Wayward Cave",
+    spawns: [
+      { pokemon: "Starly", minLevel: 85, maxLevel: 87, chance: 16 },
+      { pokemon: "Oshawott", minLevel: 85, maxLevel: 87, chance: 16 },
+      { pokemon: "Decidueye", minLevel: 85, maxLevel: 87, chance: 16 },
+      { pokemon: "Beautifly", minLevel: 85, maxLevel: 87, chance: 16 },
+      { pokemon: "Wurmple", minLevel: 85, maxLevel: 87, chance: 16 },
+      { pokemon: "Luxio", minLevel: 85, maxLevel: 87, chance: 20 },
+    ]
+  },
+  'SeagrassHaven': {
+    name: "Seagrass Haven",
+    spawns: [
+      { pokemon: "Quilava", minLevel: 95, maxLevel: 97, chance: 20 },
+      { pokemon: "Cyndaquil", minLevel: 95, maxLevel: 97, chance: 20 },
+      { pokemon: "Dartrix", minLevel: 95, maxLevel: 97, chance: 20 },
+      { pokemon: "Bidoof", minLevel: 95, maxLevel: 97, chance: 20 },
+      { pokemon: "Staravia", minLevel: 95, maxLevel: 97, chance: 20 },
+    ]
+  },
+  'MoonviewArena': {
+    name: "Moonview Arena",
+    spawns: [
+      { pokemon: "Cresselia", minLevel: 100, maxLevel: 100, chance: 33 },
+      { pokemon: "Darkrai", minLevel: 100, maxLevel: 100, chance: 33 },
+      { pokemon: "Shaymin", minLevel: 100, maxLevel: 100, chance: 34 },
+    ]
+  },
+  'AlabasterIcelandsFishingSpot': {
+    name: "Alabaster Icelands Fishing Spot",
+    spawns: [
+      { pokemon: "Staraptor", minLevel: 85, maxLevel: 87, chance: 33 },
+      { pokemon: "Staravia", minLevel: 85, maxLevel: 87, chance: 33 },
+      { pokemon: "Bidoof", minLevel: 85, maxLevel: 87, chance: 34 },
+    ]
+  },
+  'WornBridge': {
+    name: "Worn Bridge",
+    spawns: [
+      { pokemon: "Dartrix", minLevel: 95, maxLevel: 97, chance: 50 },
+      { pokemon: "Oshawott", minLevel: 95, maxLevel: 97, chance: 50 },
     ]
   },
   'IncarnateFields': {
@@ -518,16 +662,49 @@ export const hisuiRoutes = {
       { pokemon: "Enamorus", minLevel: 110, maxLevel: 110, chance: 25 },
     ]
   },
-  'MoonviewArena': {
-    name: "Moonview Arena",
+  'LakeVerity': {
+    name: "Lake Verity",
     spawns: [
-      { pokemon: "Cresselia", minLevel: 100, maxLevel: 100, chance: 33.3 },
-      { pokemon: "Darkrai", minLevel: 100, maxLevel: 100, chance: 33.3 },
-      { pokemon: "Shaymin", minLevel: 100, maxLevel: 100, chance: 33.4 },
+      { pokemon: "Oshawott", minLevel: 82, maxLevel: 84, chance: 25 },
+      { pokemon: "Dewott", minLevel: 82, maxLevel: 84, chance: 25 },
+      { pokemon: "Decidueye", minLevel: 82, maxLevel: 84, chance: 25 },
+      { pokemon: "Bidoof", minLevel: 82, maxLevel: 84, chance: 25 },
     ]
   },
-  'CitadelofEtertime': {
-    name: "Citadel of Etertime",
+  'LakeValor': {
+    name: "Lake Valor",
+    spawns: [
+      { pokemon: "Luxio", minLevel: 82, maxLevel: 84, chance: 25 },
+      { pokemon: "Shinx", minLevel: 82, maxLevel: 84, chance: 25 },
+      { pokemon: "Oshawott", minLevel: 82, maxLevel: 84, chance: 25 },
+      { pokemon: "Dartrix", minLevel: 82, maxLevel: 84, chance: 25 },
+    ]
+  },
+  'LakeofTrials': {
+    name: "Lake of Trials",
+    spawns: [
+      { pokemon: "Uxie", minLevel: 100, maxLevel: 100, chance: 33 },
+      { pokemon: "Mesprit", minLevel: 100, maxLevel: 100, chance: 33 },
+      { pokemon: "Azelf", minLevel: 100, maxLevel: 100, chance: 34 },
+    ]
+  },
+  'EtertimeStorm': {
+    name: "Etertime Storm",
+    spawns: [
+      { pokemon: "Dartrix", minLevel: 82, maxLevel: 84, chance: 20 },
+      { pokemon: "Wurmple", minLevel: 82, maxLevel: 84, chance: 20 },
+      { pokemon: "Staravia", minLevel: 82, maxLevel: 84, chance: 20 },
+      { pokemon: "Cyndaquil", minLevel: 82, maxLevel: 84, chance: 20 },
+      { pokemon: "Bidoof", minLevel: 82, maxLevel: 84, chance: 20 },
+    ]
+  },
+  'GymofEtertime': {
+    name: "Gym of Etertime",
+    spawns: [
+    ]
+  },
+  'EtertimeCitadel': {
+    name: "Etertime Citadel",
     spawns: [
       { pokemon: "Arceus", minLevel: 120, maxLevel: 120, chance: 25 },
       { pokemon: "Dialga", minLevel: 120, maxLevel: 120, chance: 25 },
@@ -535,288 +712,9 @@ export const hisuiRoutes = {
       { pokemon: "Giratina", minLevel: 120, maxLevel: 120, chance: 25 },
     ]
   },
-  'SeagrassHaven': {
-    name: "Seagrass Haven",
-    spawns: [
-      { pokemon: "Phione", minLevel: 100, maxLevel: 100, chance: 25 },
-      { pokemon: "Manaphy", minLevel: 100, maxLevel: 100, chance: 25 },
-      { pokemon: "Gastrodon", minLevel: 100, maxLevel: 100, chance: 25 },
-      { pokemon: "Shellos", minLevel: 100, maxLevel: 100, chance: 25 },
-    ]
-  },
-  'WornBridge': {
-    name: "Worn Bridge",
-    spawns: [
-      { pokemon: "Geodude", minLevel: 100, maxLevel: 100, chance: 33.3 },
-      { pokemon: "Golem", minLevel: 100, maxLevel: 100, chance: 33.3 },
-      { pokemon: "Ursaluna", minLevel: 100, maxLevel: 100, chance: 33.4 },
-    ]
-  },
-  'DroningMeadow': {
-    name: "Droning Meadow",
-    spawns: [
-      { pokemon: "Bibarel", minLevel: 100, maxLevel: 100, chance: 12.5 },
-      { pokemon: "Burmy Plant Cloak", minLevel: 100, maxLevel: 100, chance: 12.5 },
-      { pokemon: "Wormadam Plant Cloak", minLevel: 100, maxLevel: 100, chance: 12.5 },
-      { pokemon: "Grotle", minLevel: 100, maxLevel: 100, chance: 12.5 },
-      { pokemon: "Pachirisu", minLevel: 100, maxLevel: 100, chance: 12.5 },
-      { pokemon: "Turtwig", minLevel: 100, maxLevel: 100, chance: 12.5 },
-      { pokemon: "Vespiquen", minLevel: 100, maxLevel: 100, chance: 12.5 },
-      { pokemon: "Yanmega", minLevel: 100, maxLevel: 100, chance: 12.5 },
-    ]
-  },
-  'GruelingGrove': {
-    name: "Grueling Grove",
-    spawns: [
-      { pokemon: "Beautifly", minLevel: 100, maxLevel: 100, chance: 12.5 },
-      { pokemon: "Burmy Plant Cloak", minLevel: 100, maxLevel: 100, chance: 12.5 },
-      { pokemon: "Combee", minLevel: 100, maxLevel: 100, chance: 12.5 },
-      { pokemon: "Dustox", minLevel: 100, maxLevel: 100, chance: 12.5 },
-      { pokemon: "Wormadam Plant Cloak", minLevel: 100, maxLevel: 100, chance: 12.5 },
-      { pokemon: "Heracross", minLevel: 100, maxLevel: 100, chance: 12.5 },
-      { pokemon: "Mothim", minLevel: 100, maxLevel: 100, chance: 12.5 },
-      { pokemon: "Tangrowth", minLevel: 100, maxLevel: 100, chance: 12.5 },
-    ]
-  },
-  'SandgemFlatsNorth': {
-    name: "Sandgem Flats North",
-    spawns: [
-      { pokemon: "Luxio", minLevel: 100, maxLevel: 100, chance: 14.3 },
-      { pokemon: "Staravia", minLevel: 100, maxLevel: 100, chance: 14.3 },
-      { pokemon: "Abra", minLevel: 100, maxLevel: 100, chance: 14.3 },
-      { pokemon: "Drifblim", minLevel: 100, maxLevel: 100, chance: 14.3 },
-      { pokemon: "Graveler", minLevel: 100, maxLevel: 100, chance: 14.3 },
-      { pokemon: "Luxray", minLevel: 100, maxLevel: 100, chance: 14.3 },
-      { pokemon: "Mamoswine", minLevel: 100, maxLevel: 100, chance: 14.2 },
-    ]
-  },
-  'SandgemFlatsSouth': {
-    name: "Sandgem Flats South",
-    spawns: [
-      { pokemon: "Mime Jr.", minLevel: 100, maxLevel: 100, chance: 16.7 },
-      { pokemon: "Wormadam Plant Cloak", minLevel: 100, maxLevel: 100, chance: 16.7 },
-      { pokemon: "Alakazam", minLevel: 100, maxLevel: 100, chance: 16.7 },
-      { pokemon: "Kadabra", minLevel: 100, maxLevel: 100, chance: 16.7 },
-      { pokemon: "Mr. Mime", minLevel: 100, maxLevel: 100, chance: 16.7 },
-      { pokemon: "Snorlax", minLevel: 100, maxLevel: 100, chance: 16.5 },
-    ]
-  },
-  'GinkgoLanding': {
-    name: "Ginkgo Landing",
-    spawns: [
-      { pokemon: "Burmy Trash Cloak", minLevel: 100, maxLevel: 100, chance: 12.5 },
-      { pokemon: "Drifblim", minLevel: 100, maxLevel: 100, chance: 12.5 },
-      { pokemon: "Geodude", minLevel: 100, maxLevel: 100, chance: 12.5 },
-      { pokemon: "Mothim", minLevel: 100, maxLevel: 100, chance: 12.5 },
-      { pokemon: "Starly", minLevel: 100, maxLevel: 100, chance: 12.5 },
-      { pokemon: "Wormadam Trash Cloak", minLevel: 100, maxLevel: 100, chance: 12.5 },
-      { pokemon: "Drapion", minLevel: 100, maxLevel: 100, chance: 12.5 },
-      { pokemon: "Wyrdeer", minLevel: 100, maxLevel: 100, chance: 12.5 },
-    ]
-  },
-  'RamanasIslandNorth': {
-    name: "Ramanas Island North",
-    spawns: [
-      { pokemon: "Chimchar", minLevel: 100, maxLevel: 100, chance: 20 },
-      { pokemon: "Drifblim", minLevel: 100, maxLevel: 100, chance: 20 },
-      { pokemon: "Staravia", minLevel: 100, maxLevel: 100, chance: 20 },
-      { pokemon: "Infernape", minLevel: 100, maxLevel: 100, chance: 20 },
-      { pokemon: "Monferno", minLevel: 100, maxLevel: 100, chance: 20 },
-    ]
-  },
-  'RamanasIslandSouth': {
-    name: "Ramanas Island South",
-    spawns: [
-      { pokemon: "Combee", minLevel: 100, maxLevel: 100, chance: 25 },
-      { pokemon: "Drifloon", minLevel: 100, maxLevel: 100, chance: 25 },
-      { pokemon: "Aipom", minLevel: 100, maxLevel: 100, chance: 25 },
-      { pokemon: "Sneasler", minLevel: 100, maxLevel: 100, chance: 25 },
-    ]
-  },
-  'ObsidianFalls': {
-    name: "Obsidian Falls",
-    spawns: [
-      { pokemon: "Blissey", minLevel: 100, maxLevel: 100, chance: 16.7 },
-      { pokemon: "Chansey", minLevel: 100, maxLevel: 100, chance: 16.7 },
-      { pokemon: "Happiny", minLevel: 100, maxLevel: 100, chance: 16.7 },
-      { pokemon: "Machoke", minLevel: 100, maxLevel: 100, chance: 16.7 },
-      { pokemon: "Machop", minLevel: 100, maxLevel: 100, chance: 16.7 },
-      { pokemon: "Togepi", minLevel: 100, maxLevel: 100, chance: 16.5 },
-    ]
-  },
-  'LakeVerity': {
-    name: "Lake Verity",
-    spawns: [
-      { pokemon: "Ursaring", minLevel: 100, maxLevel: 100, chance: 50 },
-      { pokemon: "Rapidash", minLevel: 100, maxLevel: 100, chance: 50 },
-    ]
-  },
-  'LakeValor': {
-    name: "Lake Valor",
-    spawns: [
-      { pokemon: "Starly", minLevel: 100, maxLevel: 100, chance: 50 },
-      { pokemon: "Starly", minLevel: 100, maxLevel: 100, chance: 50 },
-    ]
-  },
-  'WaywardCave': {
-    name: "Wayward Cave",
-    spawns: [
-      { pokemon: "Golbat", minLevel: 100, maxLevel: 100, chance: 33.3 },
-      { pokemon: "Crobat", minLevel: 100, maxLevel: 100, chance: 33.3 },
-      { pokemon: "Gible", minLevel: 100, maxLevel: 100, chance: 33.4 },
-    ]
-  },
-  'CloudpoolRidgeNorth': {
-    name: "Cloudpool Ridge North",
-    spawns: [
-      { pokemon: "Kricketot", minLevel: 100, maxLevel: 100, chance: 16.7 },
-      { pokemon: "Kricketune", minLevel: 100, maxLevel: 100, chance: 16.7 },
-      { pokemon: "Roselia", minLevel: 100, maxLevel: 100, chance: 16.7 },
-      { pokemon: "Bonsly", minLevel: 100, maxLevel: 100, chance: 16.7 },
-      { pokemon: "Honchkrow", minLevel: 100, maxLevel: 100, chance: 16.7 },
-      { pokemon: "Murkrow", minLevel: 100, maxLevel: 100, chance: 16.5 },
-    ]
-  },
-  'CloudpoolRidgeSouth': {
-    name: "Cloudpool Ridge South",
-    spawns: [
-      { pokemon: "Burmy Sandy Cloak", minLevel: 100, maxLevel: 100, chance: 20 },
-      { pokemon: "Carnivine", minLevel: 100, maxLevel: 100, chance: 20 },
-      { pokemon: "Combee", minLevel: 100, maxLevel: 100, chance: 20 },
-      { pokemon: "Roserade", minLevel: 100, maxLevel: 100, chance: 20 },
-      { pokemon: "Sudowoodo", minLevel: 100, maxLevel: 100, chance: 20 },
-    ]
-  },
-  'ShroudedRuins': {
-    name: "Shrouded Ruins",
-    spawns: [
-      { pokemon: "Burmy Sandy Cloak", minLevel: 100, maxLevel: 100, chance: 11.1 },
-      { pokemon: "Gastly", minLevel: 100, maxLevel: 100, chance: 11.1 },
-      { pokemon: "Haunter", minLevel: 100, maxLevel: 100, chance: 11.1 },
-      { pokemon: "Ralts", minLevel: 100, maxLevel: 100, chance: 11.1 },
-      { pokemon: "Rhyhorn", minLevel: 100, maxLevel: 100, chance: 11.1 },
-      { pokemon: "Kirlia", minLevel: 100, maxLevel: 100, chance: 11.1 },
-      { pokemon: "Lickilicky", minLevel: 100, maxLevel: 100, chance: 11.1 },
-      { pokemon: "Lickitung", minLevel: 100, maxLevel: 100, chance: 11.1 },
-      { pokemon: "Spiritomb", minLevel: 100, maxLevel: 100, chance: 11.2 },
-    ]
-  },
-  'SpaceTimeDistortion': {
-    name: "Space-Time Distortion",
-    spawns: [
-      { pokemon: "Alakazam", minLevel: 100, maxLevel: 100, chance: 2.4 },
-      { pokemon: "Cyndaquil", minLevel: 100, maxLevel: 100, chance: 2.4 },
-      { pokemon: "Eevee", minLevel: 100, maxLevel: 100, chance: 2.4 },
-      { pokemon: "Kadabra", minLevel: 100, maxLevel: 100, chance: 2.4 },
-      { pokemon: "Oshawott", minLevel: 100, maxLevel: 100, chance: 2.4 },
-      { pokemon: "Rhydon", minLevel: 100, maxLevel: 100, chance: 2.4 },
-      { pokemon: "Rhyperior", minLevel: 100, maxLevel: 100, chance: 2.4 },
-      { pokemon: "Rowlet", minLevel: 100, maxLevel: 100, chance: 2.4 },
-      { pokemon: "Sneasel", minLevel: 100, maxLevel: 100, chance: 2.4 },
-      { pokemon: "Bastiodon", minLevel: 100, maxLevel: 100, chance: 2.4 },
-      { pokemon: "Cranidos", minLevel: 100, maxLevel: 100, chance: 2.4 },
-      { pokemon: "Dartrix", minLevel: 100, maxLevel: 100, chance: 2.4 },
-      { pokemon: "Decidueye", minLevel: 100, maxLevel: 100, chance: 2.4 },
-      { pokemon: "Dewott", minLevel: 100, maxLevel: 100, chance: 2.4 },
-      { pokemon: "Espeon", minLevel: 100, maxLevel: 100, chance: 2.4 },
-      { pokemon: "Flareon", minLevel: 100, maxLevel: 100, chance: 2.4 },
-      { pokemon: "Gengar", minLevel: 100, maxLevel: 100, chance: 2.4 },
-      { pokemon: "Glaceon", minLevel: 100, maxLevel: 100, chance: 2.4 },
-      { pokemon: "Jolteon", minLevel: 100, maxLevel: 100, chance: 2.4 },
-      { pokemon: "Leafeon", minLevel: 100, maxLevel: 100, chance: 2.4 },
-      { pokemon: "Magmortar", minLevel: 100, maxLevel: 100, chance: 2.4 },
-      { pokemon: "Magnemite", minLevel: 100, maxLevel: 100, chance: 2.4 },
-      { pokemon: "Magneton", minLevel: 100, maxLevel: 100, chance: 2.4 },
-      { pokemon: "Porygon", minLevel: 100, maxLevel: 100, chance: 2.4 },
-      { pokemon: "Porygon-Z", minLevel: 100, maxLevel: 100, chance: 2.4 },
-      { pokemon: "Porygon2", minLevel: 100, maxLevel: 100, chance: 2.4 },
-      { pokemon: "Quilava", minLevel: 100, maxLevel: 100, chance: 2.4 },
-      { pokemon: "Rampardos", minLevel: 100, maxLevel: 100, chance: 2.4 },
-      { pokemon: "Samurott", minLevel: 100, maxLevel: 100, chance: 2.4 },
-      { pokemon: "Scizor", minLevel: 100, maxLevel: 100, chance: 2.4 },
-      { pokemon: "Shieldon", minLevel: 100, maxLevel: 100, chance: 2.4 },
-      { pokemon: "Sylveon", minLevel: 100, maxLevel: 100, chance: 2.4 },
-      { pokemon: "Typhlosion", minLevel: 100, maxLevel: 100, chance: 2.4 },
-      { pokemon: "Umbreon", minLevel: 100, maxLevel: 100, chance: 2.4 },
-      { pokemon: "Vaporeon", minLevel: 100, maxLevel: 100, chance: 2.4 },
-      { pokemon: "Weavile", minLevel: 100, maxLevel: 100, chance: 2.4 },
-      { pokemon: "Kleavor", minLevel: 100, maxLevel: 100, chance: 2.4 },
-      { pokemon: "Lilligant", minLevel: 100, maxLevel: 100, chance: 2.4 },
-      { pokemon: "Unown", minLevel: 100, maxLevel: 100, chance: 2.4 },
-      { pokemon: "Electrode", minLevel: 100, maxLevel: 100, chance: 2.4 },
-      { pokemon: "Avalugg", minLevel: 100, maxLevel: 100, chance: 2.4 },
-      { pokemon: "Arcanine", minLevel: 100, maxLevel: 100, chance: 1.6 },
-    ]
-  },
-  'ObsidianFieldlandsFishingSpot': {
-    name: "Obsidian Fieldlands Fishing Spot",
-    spawns: [
-      { pokemon: "Magikarp", minLevel: 100, maxLevel: 100, chance: 20 },
-      { pokemon: "Gyarados", minLevel: 100, maxLevel: 100, chance: 20 },
-      { pokemon: "Golduck", minLevel: 100, maxLevel: 100, chance: 20 },
-      { pokemon: "Psyduck", minLevel: 100, maxLevel: 100, chance: 20 },
-      { pokemon: "Buizel", minLevel: 100, maxLevel: 100, chance: 20 },
-    ]
-  },
-  'CrimsonMirelandsFishingSpot': {
-    name: "Crimson Mirelands Fishing Spot",
-    spawns: [
-      { pokemon: "Barboach", minLevel: 100, maxLevel: 100, chance: 16.7 },
-      { pokemon: "Whiscash", minLevel: 100, maxLevel: 100, chance: 16.7 },
-      { pokemon: "Togekiss", minLevel: 100, maxLevel: 100, chance: 16.7 },
-      { pokemon: "Goomy", minLevel: 100, maxLevel: 100, chance: 16.7 },
-      { pokemon: "Sliggoo", minLevel: 100, maxLevel: 100, chance: 16.7 },
-      { pokemon: "Hippopotas", minLevel: 100, maxLevel: 100, chance: 16.5 },
-    ]
-  },
-  'CobaltCoastlandsFishingSpot': {
-    name: "Cobalt Coastlands Fishing Spot",
-    spawns: [
-      { pokemon: "Basculin", minLevel: 100, maxLevel: 100, chance: 12.5 },
-      { pokemon: "Basculegion", minLevel: 100, maxLevel: 100, chance: 12.5 },
-      { pokemon: "Qwilfish", minLevel: 100, maxLevel: 100, chance: 12.5 },
-      { pokemon: "Overqwil", minLevel: 100, maxLevel: 100, chance: 12.5 },
-      { pokemon: "Tentacool", minLevel: 100, maxLevel: 100, chance: 12.5 },
-      { pokemon: "Tentacruel", minLevel: 100, maxLevel: 100, chance: 12.5 },
-      { pokemon: "Finneon", minLevel: 100, maxLevel: 100, chance: 12.5 },
-      { pokemon: "Lumineon", minLevel: 100, maxLevel: 100, chance: 12.5 },
-    ]
-  },
-  'CoronetHighlandsFishingSpot': {
-    name: "Coronet Highlands Fishing Spot",
-    spawns: [
-      { pokemon: "Remoraid", minLevel: 100, maxLevel: 100, chance: 16.7 },
-      { pokemon: "Octillery", minLevel: 100, maxLevel: 100, chance: 16.7 },
-      { pokemon: "Mantyke", minLevel: 100, maxLevel: 100, chance: 16.7 },
-      { pokemon: "Mantine", minLevel: 100, maxLevel: 100, chance: 16.7 },
-      { pokemon: "Gastrodon", minLevel: 100, maxLevel: 100, chance: 16.7 },
-      { pokemon: "Shellos", minLevel: 100, maxLevel: 100, chance: 16.5 },
-    ]
-  },
-  'AlabasterIcelandsFishingSpot': {
-    name: "Alabaster Icelands Fishing Spot",
-    spawns: [
-      { pokemon: "Spheal", minLevel: 100, maxLevel: 100, chance: 16.7 },
-      { pokemon: "Sealeo", minLevel: 100, maxLevel: 100, chance: 16.7 },
-      { pokemon: "Walrein", minLevel: 100, maxLevel: 100, chance: 16.7 },
-      { pokemon: "Piplup", minLevel: 100, maxLevel: 100, chance: 16.7 },
-      { pokemon: "Prinplup", minLevel: 100, maxLevel: 100, chance: 16.7 },
-      { pokemon: "Empoleon", minLevel: 100, maxLevel: 100, chance: 16.5 },
-    ]
-  },
 };
 
 export const hisuiUnlocks = [
-  {
-    name: "Challenge 1",
-    requirement: { type: "defeatCountRoute", count: 10, target: "JubilifeVillage" },
-    unlocks: ["JubilifeVillageDaycare"]
-  },
-  {
-    name: "Challenge 2",
-    requirement: { type: "visitRoute", count: 1, target: "JubilifeVillageDaycare" },
-    unlocks: ["AspirationHill"]
-  },
   {
     name: "Challenge 3",
     requirement: { type: "defeatCountRoute", count: 10, target: "AspirationHill" },
@@ -835,7 +733,7 @@ export const hisuiUnlocks = [
   {
     name: "Challenge 6",
     requirement: { type: "defeatCountRoute", count: 10, target: "DeertrackHeights" },
-    unlocks: ["GymKleavor"]
+    unlocks: ["GymKleavor","DroningMeadow","GruelingGrove"]
   },
   {
     name: "Challenge 7",
@@ -880,7 +778,7 @@ export const hisuiUnlocks = [
   {
     name: "Challenge 15",
     requirement: { type: "defeatCountRoute", count: 10, target: "GapejawBogSouth" },
-    unlocks: ["GymLilligant"]
+    unlocks: ["GymLilligant","ObsidianFalls"]
   },
   {
     name: "Challenge 16",
@@ -935,7 +833,7 @@ export const hisuiUnlocks = [
   {
     name: "Challenge 26",
     requirement: { type: "earnBadge", count: 1, target: "GymArcanine" },
-    unlocks: ["VeilstoneCape", "GymWardenIngo"]
+    unlocks: ["VeilstoneCape","GymWardenIngo"]
   },
   {
     name: "Challenge 27",
@@ -990,7 +888,7 @@ export const hisuiUnlocks = [
   {
     name: "Challenge 37",
     requirement: { type: "earnBadge", count: 1, target: "GymElectrode" },
-    unlocks: ["ClamberclawCliffs", "CoronetHighlandsFishingSpot"]
+    unlocks: ["ClamberclawCliffs","CoronetHighlandsFishingSpot"]
   },
   {
     name: "Challenge 38",
@@ -1043,28 +941,43 @@ export const hisuiUnlocks = [
     unlocks: ["GymAvalugg"]
   },
   {
-    name: "Challenge 48",
-    requirement: { type: "earnBadge", count: 1, target: "GymAvalugg" },
-    unlocks: ["WaywardCave", "AlabasterIcelandsFishingSpot", "LakeVerity", "EtertimeStorm"]
-  },
-  {
     name: "Extra Challenge A 1",
     requirement: { type: "earnBadge", count: 1, target: "GymWardenIngo" },
-    unlocks: ["CobaltCoastlandsFishingSpot"]
+    unlocks: ["ObsidianFieldlandsFishingSpot"]
   },
   {
     name: "Extra Challenge A 2",
-    requirement: { type: "defeatCountRoute", count: 10, target: "CobaltCoastlandsFishingSpot" },
-    unlocks: ["GinkgoLanding"]
+    requirement: { type: "defeatCountRoute", count: 10, target: "ObsidianFieldlandsFishingSpot" },
+    unlocks: ["CobaltCoastlandsFishingSpot"]
   },
   {
     name: "Extra Challenge A 3",
+    requirement: { type: "defeatCountRoute", count: 10, target: "CobaltCoastlandsFishingSpot" },
+    unlocks: ["CrimsonMirelandsFishingSpot"]
+  },
+  {
+    name: "Extra Challenge A 4",
+    requirement: { type: "defeatCountRoute", count: 10, target: "CrimsonMirelandsFishingSpot" },
+    unlocks: ["GinkgoLanding"]
+  },
+  {
+    name: "Extra Challenge A 5",
     requirement: { type: "defeatCountRoute", count: 10, target: "GinkgoLanding" },
     unlocks: ["ShroudedRuins"]
   },
   {
-    name: "Extra Challenge A 4",
+    name: "Extra Challenge A 6",
     requirement: { type: "defeatCountRoute", count: 10, target: "ShroudedRuins" },
+    unlocks: ["SandgemFlatsSouth"]
+  },
+  {
+    name: "Extra Challenge A 7",
+    requirement: { type: "defeatCountRoute", count: 10, target: "SandgemFlatsSouth" },
+    unlocks: ["RamanasIslandSouth"]
+  },
+  {
+    name: "Extra Challenge A 8",
+    requirement: { type: "defeatCountRoute", count: 10, target: "RamanasIslandSouth" },
     unlocks: ["SandgemFlatsNorth"]
   },
   {
@@ -1083,11 +996,6 @@ export const hisuiUnlocks = [
     unlocks: ["SpaceTimeDistortion"]
   },
   {
-    name: "Extra Challenge B 4",
-    requirement: { type: "catchSpecific", targets: ["Kleavor", "Arcanine", "Lilligant", "Electrode", "Avalugg"] },
-    reward: { type: "item", item: "Masterball", amount: 1 },
-  },
-  {
     name: "Extra Challenge C 1",
     requirement: { type: "defeatCountRoute", count: 10, target: "WaywardCave" },
     unlocks: ["SeagrassHaven"]
@@ -1096,11 +1004,6 @@ export const hisuiUnlocks = [
     name: "Extra Challenge C 2",
     requirement: { type: "defeatCountRoute", count: 10, target: "SeagrassHaven" },
     unlocks: ["MoonviewArena"]
-  },
-  {
-    name: "Extra Challenge C 3",
-    requirement: { type: "catchSpecific", targets: ["Darkrai", "Shaymin", "Cresselia"] },
-    reward: { type: "item", item: "Masterball", amount: 1 },
   },
   {
     name: "Extra Challenge D 1",
@@ -1113,11 +1016,6 @@ export const hisuiUnlocks = [
     unlocks: ["IncarnateFields"]
   },
   {
-    name: "Extra Challenge D 3",
-    requirement: { type: "catchSpecific", targets: ["Tornadus", "Thundurus", "Landorus", "Enamorus"] },
-    reward: { type: "item", item: "Masterball", amount: 2 },
-  },
-  {
     name: "Extra Challenge E 1",
     requirement: { type: "defeatCountRoute", count: 10, target: "LakeVerity" },
     unlocks: ["LakeValor"]
@@ -1128,28 +1026,49 @@ export const hisuiUnlocks = [
     unlocks: ["LakeofTrials"]
   },
   {
-    name: "Extra Challenge E 3",
-    requirement: { type: "catchSpecific", targets: ["Uxie", "Mesprit", "Azelf"] },
-    reward: { type: "item", item: "Masterball", amount: 2 },
-  },
-  {
     name: "Extra Challenge F 1",
     requirement: { type: "defeatCountRoute", count: 10, target: "EtertimeStorm" },
     unlocks: ["GymofEtertime"]
   },
   {
-    name: "Extra Challenge F 2",
-    requirement: { type: "defeatCountRoute", count: 2, target: "EtertimeStorm" },
+    name: "Challenge 48",
+    requirement: { type: "earnBadge", count: 1, target: "GymAvalugg" },
+    unlocks: ["EtertimeStorm","WaywardCave","AlabasterIcelandsFishingSpot","LakeVerity","EtertimeStorm"]
+  },
+  {
+    name: "Extra Challenge B 4",
+    requirement: { type: "catchSpecific", targets: ["Kleavor","Arcanine","Lilligant","Electrode","Avalugg"] },
     reward: { type: "item", item: "Masterball", amount: 1 },
   },
   {
+    name: "Extra Challenge C 3",
+    requirement: { type: "catchSpecific", targets: ["Darkrai","Shaymin","Cresselia"] },
+    reward: { type: "item", item: "Masterball", amount: 1 },
+  },
+  {
+    name: "Extra Challenge D 3",
+    requirement: { type: "catchSpecific", targets: ["Tornadus","Thundurus","Landorus","Enamorus"] },
+    reward: { type: "item", item: "Masterball", amount: 2 },
+  },
+  {
+    name: "Extra Challenge E 3",
+    requirement: { type: "catchSpecific", targets: ["Uxie","Mesprit","Azelf"] },
+    reward: { type: "item", item: "Masterball", amount: 2 },
+  },
+  {
+    name: "Extra Challenge F 2",
+    requirement: { type: "defeatSpecific", targets: ["Clan Leader Adam", "Clan Leader Irida"] },
+    reward: { type: "item", item: "Masterball", amount: 1 },
+    unlocks: []
+  },
+  {
     name: "Key to Etertime Citadel",
-    requirement: { type: "completeChallenges", target: ['ExtraChallengeC3', 'ExtraChallengeD3', 'ExtraChallengeE3', 'ExtraChallengeF2'] },
-    unlocks: ["CitadelofEtertime"]
+    requirement: { type: "completeChallenges", target: ["Extra Challenge C 3","Extra Challenge D 3","Extra Challenge E 3","Extra Challenge F 2"] },
+    unlocks: ["EtertimeCitadel"]
   },
   {
     name: "Etertime Citadel",
-    requirement: { type: "catchSpecific", targets: ["Arceus", "Dialga", "Palkia", "Giratina"] },
+    requirement: { type: "catchSpecific", targets: ["Arceus","Dialga","Palkia","Giratina"] },
     reward: { type: "item", item: "Masterball", amount: 3 },
   },
 ];
