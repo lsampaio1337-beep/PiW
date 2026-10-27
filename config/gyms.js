@@ -4118,7 +4118,7 @@ const gyms = [
   {
     "id": "alola_league",
     "name": "Alola Pokemon League",
-    "leader": "Champion",
+    "leader": "Alola Champion",
     "levelRequirement": 210,
     "trainers": [
       {
@@ -4162,7 +4162,7 @@ const gyms = [
         ]
       },
       {
-        "name": "Champion",
+        "name": "Alola Champion",
         "team": [
           { "id": 26, "level": 58 },
           { "id": 136, "level": 58 },
