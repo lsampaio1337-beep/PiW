@@ -147,6 +147,12 @@ export const alolaRoutes = [
         "minLevel": 7,
         "maxLevel": 12,
         "chance": 0.16670000000000001
+      },
+      {
+        "pokemonId": 739,
+        "minLevel": 7,
+        "maxLevel": 12,
+        "chance": 0.1
       }
     ],
     "challengeName": "Challenge 3",
@@ -245,6 +251,12 @@ export const alolaRoutes = [
         "minLevel": 14,
         "maxLevel": 19,
         "chance": 0.2
+      },
+      {
+        "pokemonId": 744,
+        "minLevel": 14,
+        "maxLevel": 19,
+        "chance": 0.1
       }
     ],
     "challengeName": "Challenge 6",
@@ -390,6 +402,12 @@ export const alolaRoutes = [
         "minLevel": 23,
         "maxLevel": 28,
         "chance": 0.3333
+      },
+      {
+        "pokemonId": 751,
+        "minLevel": 23,
+        "maxLevel": 28,
+        "chance": 0.1
       }
     ],
     "challengeName": "Challenge 11",
@@ -491,6 +509,12 @@ export const alolaRoutes = [
         "minLevel": 31,
         "maxLevel": 36,
         "chance": 0.2
+      },
+      {
+        "pokemonId": 746,
+        "minLevel": 31,
+        "maxLevel": 36,
+        "chance": 0.1
       }
     ],
     "challengeName": "Challenge 15",
@@ -627,6 +651,12 @@ export const alolaRoutes = [
         "minLevel": 34,
         "maxLevel": 39,
         "chance": 0.16670000000000001
+      },
+      {
+        "pokemonId": 755,
+        "minLevel": 34,
+        "maxLevel": 39,
+        "chance": 0.1
       }
     ],
     "challengeName": "Challenge 17",
@@ -1037,6 +1067,12 @@ export const alolaRoutes = [
         "minLevel": 63,
         "maxLevel": 68,
         "chance": 0.25
+      },
+      {
+        "pokemonId": 778,
+        "minLevel": 63,
+        "maxLevel": 68,
+        "chance": 0.1
       }
     ],
     "challengeName": "Challenge 28",
@@ -1275,6 +1311,12 @@ export const alolaRoutes = [
         "minLevel": 75,
         "maxLevel": 80,
         "chance": 0.3333
+      },
+      {
+        "pokemonId": 783,
+        "minLevel": 75,
+        "maxLevel": 80,
+        "chance": 0.1
       }
     ],
     "challengeName": "Challenge 35",
@@ -1634,6 +1676,12 @@ export const alolaRoutes = [
         "minLevel": 85,
         "maxLevel": 90,
         "chance": 0.3333
+      },
+      {
+        "pokemonId": 775,
+        "minLevel": 85,
+        "maxLevel": 90,
+        "chance": 0.1
       }
     ],
     "areaId": "Ula'ula Meadow",
@@ -2051,6 +2099,12 @@ export const alolaRoutes = [
         "minLevel": 85,
         "maxLevel": 90,
         "chance": 0.5
+      },
+      {
+        "pokemonId": 808,
+        "minLevel": 85,
+        "maxLevel": 90,
+        "chance": 0.1
       }
     ],
     "challengeName": "Extra Challenge E-2",
