@@ -53,16 +53,20 @@ Write-Host "Starting Git operations..." -ForegroundColor Cyan
 
 # Check if the repo directory exists
 if (Test-Path $gitRepoDir) {
-    # It is important to set the path properly, but to ensure git commands run in the correct context, we can use the -C flag natively to target the directory directly instead of relying on Set-Location.
+    # Set the location to the repo directory
+    Set-Location -Path $gitRepoDir
+
+    Write-Host "Current Directory: " (Get-Location).Path
 
     Write-Host "Staging files..."
-    git -C "$gitRepoDir" add "Assets/Pokemon Sprites/Natural/Gen*" "data/pokemon_data_scraped.json"
+    # Use Invoke-Expression to ensure git runs correctly within the new context in powershell
+    Invoke-Expression "git add `"Assets/Pokemon Sprites/Natural/Gen*`" `"data/pokemon_data_scraped.json`""
 
     Write-Host "Committing files..."
-    git -C "$gitRepoDir" commit -m "Add scraped special forms data and sprites"
+    Invoke-Expression "git commit -m `"Add scraped special forms data and sprites`""
 
     Write-Host "Sending to GitHub (This may take a moment for 38MB)..."
-    git -C "$gitRepoDir" push
+    Invoke-Expression "git push"
 
     if ($LASTEXITCODE -eq 0) {
         Write-Host "Successfully completed!" -ForegroundColor Green
