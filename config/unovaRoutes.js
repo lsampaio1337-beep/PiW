@@ -3953,5 +3953,32 @@ export const unovaUnlocks = [
         "Extra Challenge E 4"
       ]
     }
+    },
+  {
+    "challengeName": "Dragonspire Clouds",
+    "areaId": "Dragonspire Clouds",
+    "unlocks": [],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Zekrom",
+          "count": 1
+        },
+        {
+          "species": "Kyurem",
+          "count": 1
+        },
+        {
+          "species": "Reshiram",
+          "count": 1
+        }
+      ]
+    },
+    "gifts": [
+      {
+        "item": "Masterball",
+        "count": 3
+      }
+    ]
   }
 ];
