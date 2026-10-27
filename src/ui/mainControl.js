@@ -188,6 +188,11 @@ export function getChallengeData(unlock) {
         if (!beaten) isMet = false;
         textParts.push(`Win Unova Pokémon League${getStatusHtml(beaten)}`);
     }
+    if (req.defeatKalosChampion) {
+        let beaten = state.stats.defeatedBosses && state.stats.defeatedBosses["Kalos Champion"];
+        if (!beaten) isMet = false;
+        textParts.push(`Win Kalos Pokémon League${getStatusHtml(beaten)}`);
+    }
     if (req.defeatRed) {
         let beatenRed = state.stats.defeatedBosses && state.stats.defeatedBosses["Red"];
         if (!beatenRed) isMet = false;

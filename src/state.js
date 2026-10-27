@@ -216,5 +216,8 @@ window.getCurrentUnlocks = function() {
     if (state.currentRegionName === 'Unova' && state.config.unovaUnlocks) {
         return state.config.unovaUnlocks;
     }
+    if (state.currentRegionName === 'Kalos' && state.config.kalosUnlocks) {
+        return state.config.kalosUnlocks;
+    }
     return state.config.unlocks || [];
 };
