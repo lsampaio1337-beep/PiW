@@ -57,6 +57,9 @@ export function showPokedex() {
         else if (regionName === 'Hoenn') regionIdField = 'hoenn_id';
         else if (regionName === 'Sinnoh') regionIdField = 'sinnoh_id';
         else if (regionName === 'Unova') regionIdField = 'unova_id';
+            else if (regionName === 'Galar') regionIdField = 'galar_id';
+            else if (regionName === 'Galar') regionIdField = 'galar_id';
+        else if (regionName === 'Galar') regionIdField = 'galar_id';
 
         const regionalDex = state.config.pokemonData.filter(p => p[regionIdField] !== undefined);
         regionalDex.sort((a, b) => a[regionIdField] - b[regionIdField]);

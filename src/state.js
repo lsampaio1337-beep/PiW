@@ -143,10 +143,12 @@ export function checkFinalChallengeCompleted(regionName = 'Kanto') {
         routes = state.config.sinnohRoutes;
     } else if (regionName === 'Unova' && state.config && state.config.unovaRoutes) {
         routes = state.config.unovaRoutes;
+    } else if (regionName === 'Galar' && state.config && state.config.galarRoutes) {
+        routes = state.config.galarRoutes;
     }
 
-    let finalChallenge = routes.find(r => r.challengeName === "Challenge 36" || r.challengeName === "Final Challenge" || r.challengeName === "Johto Final Challenge" || r.challengeName === "Hoenn Final Challenge" || r.challengeName === "Sinnoh Final Challenge" || r.challengeName === "Unova Final Challenge");
-    let finalChallengeId = finalChallenge ? finalChallenge.areaId : (regionName === 'Kanto' ? 'Kanto Pokemon League' : (regionName === 'Johto' ? 'Mount Silver' : (regionName === 'Hoenn' ? 'Battle Frontier' : (regionName === 'Sinnoh' ? 'Spear Pillar' : (regionName === 'Unova' ? 'Giant Chasm' : null)))));
+    let finalChallenge = routes.find(r => r.challengeName === "Challenge 36" || r.challengeName === "Final Challenge" || r.challengeName === "Johto Final Challenge" || r.challengeName === "Hoenn Final Challenge" || r.challengeName === "Sinnoh Final Challenge" || r.challengeName === "Unova Final Challenge" || r.challengeName === "Challenge 42");
+    let finalChallengeId = finalChallenge ? finalChallenge.areaId : (regionName === 'Kanto' ? 'Kanto Pokemon League' : (regionName === 'Johto' ? 'Mount Silver' : (regionName === 'Hoenn' ? 'Battle Frontier' : (regionName === 'Sinnoh' ? 'Spear Pillar' : (regionName === 'Unova' ? 'Giant Chasm' : (regionName === 'Galar' ? 'Pokemon League' : null))))));
 
     if (!finalChallengeId) return false;
 
@@ -199,6 +201,9 @@ window.getCurrentRoutes = function() {
     if (state.currentRegionName === 'Unova' && state.config.unovaRoutes) {
         return state.config.unovaRoutes;
     }
+    if (state.currentRegionName === 'Galar' && state.config.galarRoutes) {
+        return state.config.galarRoutes;
+    }
     return state.config.routes || [];
 };
 
@@ -215,6 +220,9 @@ window.getCurrentUnlocks = function() {
     }
     if (state.currentRegionName === 'Unova' && state.config.unovaUnlocks) {
         return state.config.unovaUnlocks;
+    }
+    if (state.currentRegionName === 'Galar' && state.config.galarUnlocks) {
+        return state.config.galarUnlocks;
     }
     return state.config.unlocks || [];
 };

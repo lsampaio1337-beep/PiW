@@ -218,6 +218,8 @@ export function getChallengeData(unlock) {
                 if (state.config.hoennUnlocks) allUnlocks = allUnlocks.concat(state.config.hoennUnlocks);
                 if (state.config.sinnohUnlocks) allUnlocks = allUnlocks.concat(state.config.sinnohUnlocks);
                 if (state.config.unovaUnlocks) allUnlocks = allUnlocks.concat(state.config.unovaUnlocks);
+                if (state.config.galarUnlocks) allUnlocks = allUnlocks.concat(state.config.galarUnlocks);
+                if (state.config.galarUnlocks) allUnlocks = allUnlocks.concat(state.config.galarUnlocks);
                 match = allUnlocks.find(u => u && (u.challengeName === target || u.areaId === target));
             }
 

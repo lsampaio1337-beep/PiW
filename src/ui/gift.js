@@ -34,8 +34,22 @@ window.claimPendingGift = function(index) {
             }
         }
 
-        if (!state.backpack[gift.item]) state.backpack[gift.item] = 0;
-        state.backpack[gift.item] += qty;
+        if (isBall) {
+            if (!state.backpack.pokeballs) state.backpack.pokeballs = {};
+            if (!state.backpack.pokeballs[gift.item]) state.backpack.pokeballs[gift.item] = 0;
+            state.backpack.pokeballs[gift.item] += qty;
+        } else if (isPotion) {
+            if (!state.backpack.potions) state.backpack.potions = {};
+            if (!state.backpack.potions[gift.item]) state.backpack.potions[gift.item] = 0;
+            state.backpack.potions[gift.item] += qty;
+        } else if (gift.item.includes('Stone')) {
+            if (!state.backpack.stones) state.backpack.stones = {};
+            if (!state.backpack.stones[gift.item]) state.backpack.stones[gift.item] = 0;
+            state.backpack.stones[gift.item] += qty;
+        } else {
+            if (!state.backpack[gift.item]) state.backpack[gift.item] = 0;
+            state.backpack[gift.item] += qty;
+        }
     } else if (gift.type === 'badge') {
         state.trainer.badges++;
     }

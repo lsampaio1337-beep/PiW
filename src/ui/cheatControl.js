@@ -303,6 +303,11 @@ export function cheatAction(action) {
                 if (coord.name) unlockArea(coord.name);
             });
         }
+        if (state.config.galarMapCoordinates) {
+            Object.values(state.config.galarMapCoordinates).forEach(coord => {
+                if (coord.name) unlockArea(coord.name);
+            });
+        }
 
         // Ensure Casino spots and machines are unlocked
         unlockArea('Casino');
@@ -393,6 +398,7 @@ function generatePokedex(isShiny) {
     else if (regionName === 'Hoenn') regionIdField = 'hoenn_id';
     else if (regionName === 'Sinnoh') regionIdField = 'sinnoh_id';
     else if (regionName === 'Unova') regionIdField = 'unova_id';
+    else if (regionName === 'Galar') regionIdField = 'galar_id';
 
     const regionalDex = state.config.pokemonData.filter(p => p && p[regionIdField] !== undefined);
     regionalDex.sort((a, b) => a[regionIdField] - b[regionIdField]);

@@ -5367,7 +5367,23 @@ const gyms = [
         ]
       }
     ]
+  },
+  {
+    "id": "galar_pokemon_league",
+    "name": "Pokemon League",
+    "leader": "Galar Champion",
+    "trainers": [
+      {
+        "name": "Champion",
+        "team": [
+          {
+            "id": 815,
+            "level": 60
+          }
+        ]
+      }
+    ]
   }
-
 ];
+
 export default gyms;

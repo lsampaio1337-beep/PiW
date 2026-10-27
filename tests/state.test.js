@@ -189,7 +189,8 @@ describe('window.getCurrentRoutes', () => {
             johtoRoutes: ['JohtoRoute'],
             hoennRoutes: ['HoennRoute'],
             sinnohRoutes: ['SinnohRoute'],
-            unovaRoutes: ['UnovaRoute']
+            unovaRoutes: ['UnovaRoute'],
+            galarRoutes: ['GalarRoute']
         };
     });
 
@@ -226,6 +227,11 @@ describe('window.getCurrentRoutes', () => {
         expect(window.getCurrentRoutes()).toEqual(['UnovaRoute']);
     });
 
+    it('should return galarRoutes for Galar', () => {
+        state.currentRegionName = 'Galar';
+        expect(window.getCurrentRoutes()).toEqual(['GalarRoute']);
+    });
+
     it('should return fallback if region routes missing', () => {
         state.currentRegionName = 'Unova';
         state.config.unovaRoutes = undefined;
@@ -241,7 +247,8 @@ describe('window.getCurrentUnlocks', () => {
             johtoUnlocks: ['JohtoUnlock'],
             hoennUnlocks: ['HoennUnlock'],
             sinnohUnlocks: ['SinnohUnlock'],
-            unovaUnlocks: ['UnovaUnlock']
+            unovaUnlocks: ['UnovaUnlock'],
+            galarUnlocks: ['GalarUnlock']
         };
     });
 
@@ -276,6 +283,11 @@ describe('window.getCurrentUnlocks', () => {
     it('should return unovaUnlocks for Unova', () => {
         state.currentRegionName = 'Unova';
         expect(window.getCurrentUnlocks()).toEqual(['UnovaUnlock']);
+    });
+
+    it('should return galarUnlocks for Galar', () => {
+        state.currentRegionName = 'Galar';
+        expect(window.getCurrentUnlocks()).toEqual(['GalarUnlock']);
     });
 
     it('should return fallback if region unlocks missing', () => {
@@ -318,5 +330,14 @@ describe('checkFinalChallengeCompleted additional tests', () => {
         state.currentRegionName = "Unova";
         state.stats.completedChallengeIds = ['Unova Custom Final'];
         expect(checkFinalChallengeCompleted('Unova')).toBe(true);
+    });
+
+    it('should use galarRoutes when checking Galar final challenge', () => {
+        state.config.galarRoutes = [
+            { challengeName: 'Final Challenge', areaId: 'Galar Custom Final' }
+        ];
+        state.currentRegionName = "Galar";
+        state.stats.completedChallengeIds = ['Galar Custom Final'];
+        expect(checkFinalChallengeCompleted('Galar')).toBe(true);
     });
 });

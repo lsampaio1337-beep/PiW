@@ -379,6 +379,17 @@ function generateMarkersForRegion(region, unlockedAreas) {
 
             html += generateMarkerHtml(locationId, locationName, coords, true, hasNewNotification, showCheckmark);
         }
+    } else if (region === 'Galar') {
+        for (const [locationId, locationData] of Object.entries(state.config.galarMapCoordinates || {})) {
+            const locationName = locationData.name;
+            const coords = { x: locationData.x, y: locationData.y };
+            let isUnlocked = unlockedAreas.has(locationName);
+
+            let hasNewNotification = false;
+            let showCheckmark = false;
+
+            html += generateMarkerHtml(locationId, locationName, coords, isUnlocked, hasNewNotification, showCheckmark);
+        }
     } else if (region === 'Unova') {
         for (const [locationId, locationData] of Object.entries(state.config.unovaMapCoordinates || {})) {
             const locationName = locationData.name;
@@ -449,6 +460,7 @@ export function showMap() {
         { name: 'Hoenn', mapFile: '3 Hoenn Map.png', width: 1250, height: 884 },
         { name: 'Sinnoh', mapFile: '4 Sinnoh Map.png', width: 1024, height: 724 },
         { name: 'Unova', mapFile: '5 Unova Map.png', width: 1280, height: 837 },
+        { name: 'Galar', mapFile: '8 Galar Map.png', width: 1280, height: 837 },
         { name: 'Kalos', mapFile: '6 Kalos Map.png', width: 1032, height: 676 },
         { name: 'Alola', mapFile: '7 1 Alola Map.png', width: 1280, height: 905 },
         { name: 'Galar', mapFile: '8 Galar Map.png', width: 1554, height: 2198 },
