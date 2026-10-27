@@ -34,11 +34,13 @@ window.claimPendingGift = function(index) {
             }
         }
 
-        if (isBall) {
+        let isBallScope = gift.item.includes('ball') || gift.item.includes('Ball');
+        let isPotionScope = gift.item.includes('Potion');
+        if (isBallScope) {
             if (!state.backpack.pokeballs) state.backpack.pokeballs = {};
             if (!state.backpack.pokeballs[gift.item]) state.backpack.pokeballs[gift.item] = 0;
             state.backpack.pokeballs[gift.item] += qty;
-        } else if (isPotion) {
+        } else if (isPotionScope) {
             if (!state.backpack.potions) state.backpack.potions = {};
             if (!state.backpack.potions[gift.item]) state.backpack.potions[gift.item] = 0;
             state.backpack.potions[gift.item] += qty;

@@ -147,7 +147,7 @@ export function checkFinalChallengeCompleted(regionName = 'Kanto') {
         routes = state.config.galarRoutes;
     }
 
-    let finalChallenge = routes.find(r => r.challengeName === "Challenge 36" || r.challengeName === "Final Challenge" || r.challengeName === "Johto Final Challenge" || r.challengeName === "Hoenn Final Challenge" || r.challengeName === "Sinnoh Final Challenge" || r.challengeName === "Unova Final Challenge" || r.challengeName === "Challenge 42");
+    let finalChallenge = routes.find(r => r.challengeName === "Challenge 36" || r.challengeName === "Final Challenge" || r.challengeName === "Johto Final Challenge" || r.challengeName === "Hoenn Final Challenge" || r.challengeName === "Sinnoh Final Challenge" || r.challengeName === "Unova Final Challenge" || r.challengeName === "Challenge 50");
     let finalChallengeId = finalChallenge ? finalChallenge.areaId : (regionName === 'Kanto' ? 'Kanto Pokemon League' : (regionName === 'Johto' ? 'Mount Silver' : (regionName === 'Hoenn' ? 'Battle Frontier' : (regionName === 'Sinnoh' ? 'Spear Pillar' : (regionName === 'Unova' ? 'Giant Chasm' : (regionName === 'Galar' ? 'Pokemon League' : null))))));
 
     if (!finalChallengeId) return false;

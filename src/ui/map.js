@@ -463,7 +463,6 @@ export function showMap() {
         { name: 'Galar', mapFile: '8 Galar Map.png', width: 1280, height: 837 },
         { name: 'Kalos', mapFile: '6 Kalos Map.png', width: 1032, height: 676 },
         { name: 'Alola', mapFile: '7 1 Alola Map.png', width: 1280, height: 905 },
-        { name: 'Galar', mapFile: '8 Galar Map.png', width: 1554, height: 2198 },
         { name: 'Hisui', mapFile: '9 Hisui Map.png', width: 1280, height: 711 },
         { name: 'Paldea', mapFile: '10 Paldea Map.png', width: 1280, height: 905 }
     ];

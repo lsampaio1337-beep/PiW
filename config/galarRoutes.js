@@ -1168,37 +1168,43 @@ export const galarRoutes = [
         "pokemonId": 343,
         "minLevel": 47,
         "maxLevel": 51,
-        "chance": 0.2
+        "chance": 0.1905
       },
       {
         "pokemonId": 436,
         "minLevel": 47,
         "maxLevel": 51,
-        "chance": 0.2
+        "chance": 0.1905
       },
       {
         "pokemonId": 622,
         "minLevel": 47,
         "maxLevel": 51,
-        "chance": 0.2
+        "chance": 0.1905
       },
       {
         "pokemonId": 215,
         "minLevel": 47,
         "maxLevel": 51,
-        "chance": 0.15
+        "chance": 0.1429
       },
       {
         "pokemonId": 624,
         "minLevel": 47,
         "maxLevel": 51,
-        "chance": 0.15
+        "chance": 0.1429
       },
       {
         "pokemonId": 597,
         "minLevel": 47,
         "maxLevel": 51,
-        "chance": 0.1
+        "chance": 0.0952
+      },
+      {
+        "pokemonId": 865,
+        "minLevel": 47,
+        "maxLevel": 51,
+        "chance": 0.0476
       }
     ]
   },
@@ -1782,55 +1788,61 @@ export const galarRoutes = [
         "pokemonId": 554,
         "minLevel": 70,
         "maxLevel": 70,
-        "chance": 0.15
+        "chance": 0.1429
       },
       {
         "pokemonId": 459,
         "minLevel": 70,
         "maxLevel": 70,
-        "chance": 0.15
+        "chance": 0.1429
       },
       {
         "pokemonId": 614,
         "minLevel": 70,
         "maxLevel": 70,
-        "chance": 0.15
+        "chance": 0.1429
       },
       {
         "pokemonId": 613,
         "minLevel": 70,
         "maxLevel": 70,
-        "chance": 0.15
+        "chance": 0.1429
       },
       {
         "pokemonId": 874,
         "minLevel": 70,
         "maxLevel": 70,
-        "chance": 0.1
+        "chance": 0.0952
       },
       {
         "pokemonId": 583,
         "minLevel": 70,
         "maxLevel": 70,
-        "chance": 0.1
+        "chance": 0.0952
       },
       {
         "pokemonId": 872,
         "minLevel": 70,
         "maxLevel": 70,
-        "chance": 0.1
+        "chance": 0.0952
       },
       {
         "pokemonId": 460,
         "minLevel": 70,
         "maxLevel": 70,
-        "chance": 0.05
+        "chance": 0.0476
       },
       {
         "pokemonId": 122,
         "minLevel": 70,
         "maxLevel": 70,
-        "chance": 0.05
+        "chance": 0.0476
+      },
+      {
+        "pokemonId": 866,
+        "minLevel": 70,
+        "maxLevel": 70,
+        "chance": 0.0476
       }
     ]
   },
@@ -3005,6 +3017,38 @@ export const galarRoutes = [
         "chance": 0.33
       }
     ]
+  },
+  {
+    "name": "Motostoke City",
+    "spawns": []
+  },
+  {
+    "name": "Kabu's Trial",
+    "spawns": []
+  },
+  {
+    "name": "Route 9 Tunnel",
+    "spawns": []
+  },
+  {
+    "name": "Circhester City",
+    "spawns": []
+  },
+  {
+    "name": "Outer Spikemuth",
+    "spawns": []
+  },
+  {
+    "name": "Spikemuth City",
+    "spawns": []
+  },
+  {
+    "name": "Hammerlocke City",
+    "spawns": []
+  },
+  {
+    "name": "Wyndon",
+    "spawns": []
   }
 ];
 
@@ -3263,7 +3307,7 @@ export const galarUnlocks = [
     "challengeName": "Challenge 18",
     "areaId": "Motostoke Outskirts",
     "unlocks": [
-      "Motostoke Gym"
+      "Motostoke City"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3276,6 +3320,32 @@ export const galarUnlocks = [
   },
   {
     "challengeName": "Challenge 19",
+    "areaId": "Motostoke City",
+    "unlocks": [
+      "Kabu's Trial"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Motostoke City",
+        "count": 1
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 20",
+    "areaId": "Kabu's Trial",
+    "unlocks": [
+      "Motostoke Gym"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Kabu's Trial",
+        "count": 1
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 21",
     "areaId": "Motostoke Gym",
     "unlocks": [
       "Watchtower Ruins"
@@ -3288,7 +3358,7 @@ export const galarUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 20",
+    "challengeName": "Challenge 22",
     "areaId": "Watchtower Ruins",
     "unlocks": [
       "Axew's Eye"
@@ -3303,7 +3373,7 @@ export const galarUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 21",
+    "challengeName": "Challenge 23",
     "areaId": "Axew's Eye",
     "unlocks": [
       "Slumbering Weald"
@@ -3318,7 +3388,7 @@ export const galarUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 22",
+    "challengeName": "Challenge 24",
     "areaId": "Slumbering Weald",
     "unlocks": [
       "Route 6"
@@ -3333,7 +3403,7 @@ export const galarUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 23",
+    "challengeName": "Challenge 25",
     "areaId": "Route 6",
     "unlocks": [
       "Bridge Field Daycare"
@@ -3348,7 +3418,7 @@ export const galarUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 24",
+    "challengeName": "Challenge 26",
     "areaId": "Bridge Field Daycare",
     "unlocks": [
       "Bridge Field"
@@ -3361,7 +3431,7 @@ export const galarUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 25",
+    "challengeName": "Challenge 27",
     "areaId": "Bridge Field",
     "unlocks": [
       "Stow-on-Side Gym"
@@ -3376,7 +3446,7 @@ export const galarUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 26",
+    "challengeName": "Challenge 28",
     "areaId": "Stow-on-Side Gym",
     "unlocks": [
       "Stony Wilderness"
@@ -3389,7 +3459,7 @@ export const galarUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 27",
+    "challengeName": "Challenge 29",
     "areaId": "Stony Wilderness",
     "unlocks": [
       "Dusty Bowl"
@@ -3404,7 +3474,7 @@ export const galarUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 28",
+    "challengeName": "Challenge 30",
     "areaId": "Dusty Bowl",
     "unlocks": [
       "Giant's Cap"
@@ -3419,7 +3489,7 @@ export const galarUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 29",
+    "challengeName": "Challenge 31",
     "areaId": "Giant's Cap",
     "unlocks": [
       "Hammerlocke Hills"
@@ -3434,7 +3504,7 @@ export const galarUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 30",
+    "challengeName": "Challenge 32",
     "areaId": "Hammerlocke Hills",
     "unlocks": [
       "Motostoke Riverbank"
@@ -3449,7 +3519,7 @@ export const galarUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 31",
+    "challengeName": "Challenge 33",
     "areaId": "Motostoke Riverbank",
     "unlocks": [
       "Route 7"
@@ -3464,7 +3534,7 @@ export const galarUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 32",
+    "challengeName": "Challenge 34",
     "areaId": "Route 7",
     "unlocks": [
       "Route 8"
@@ -3479,7 +3549,7 @@ export const galarUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 33",
+    "challengeName": "Challenge 35",
     "areaId": "Route 8",
     "unlocks": [
       "Glimwood Tangle"
@@ -3494,7 +3564,7 @@ export const galarUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 34",
+    "challengeName": "Challenge 36",
     "areaId": "Glimwood Tangle",
     "unlocks": [
       "Ballonlea Gym"
@@ -3509,7 +3579,7 @@ export const galarUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 35",
+    "challengeName": "Challenge 37",
     "areaId": "Ballonlea Gym",
     "unlocks": [
       "Route 9"
@@ -3522,10 +3592,10 @@ export const galarUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 36",
+    "challengeName": "Challenge 38",
     "areaId": "Route 9",
     "unlocks": [
-      "Circhester Gym"
+      "Route 9 Tunnel"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3537,7 +3607,33 @@ export const galarUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 37",
+    "challengeName": "Challenge 39",
+    "areaId": "Route 9 Tunnel",
+    "unlocks": [
+      "Circhester City"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Route 9 Tunnel",
+        "count": 1
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 40",
+    "areaId": "Circhester City",
+    "unlocks": [
+      "Circhester Gym"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Circhester City",
+        "count": 1
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 41",
     "areaId": "Circhester Gym",
     "unlocks": [
       "Lake of Outrage",
@@ -3551,10 +3647,10 @@ export const galarUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 38",
+    "challengeName": "Challenge 42",
     "areaId": "Lake of Outrage",
     "unlocks": [
-      "Spikemuth Gym"
+      "Outer Spikemuth"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3566,7 +3662,33 @@ export const galarUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 39",
+    "challengeName": "Challenge 43",
+    "areaId": "Outer Spikemuth",
+    "unlocks": [
+      "Spikemuth City"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Outer Spikemuth",
+        "count": 1
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 44",
+    "areaId": "Spikemuth City",
+    "unlocks": [
+      "Spikemuth Gym"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Spikemuth City",
+        "count": 1
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 45",
     "areaId": "Spikemuth Gym",
     "unlocks": [
       "Route 10"
@@ -3579,10 +3701,10 @@ export const galarUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 40",
+    "challengeName": "Challenge 46",
     "areaId": "Route 10",
     "unlocks": [
-      "Hammerlocke Gym"
+      "Hammerlocke City"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3594,10 +3716,23 @@ export const galarUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 41",
+    "challengeName": "Challenge 47",
+    "areaId": "Hammerlocke City",
+    "unlocks": [
+      "Hammerlocke Gym"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Hammerlocke City",
+        "count": 1
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 48",
     "areaId": "Hammerlocke Gym",
     "unlocks": [
-      "Pokemon League"
+      "Wyndon"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -3607,7 +3742,20 @@ export const galarUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 42",
+    "challengeName": "Challenge 49",
+    "areaId": "Wyndon",
+    "unlocks": [
+      "Pokemon League"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Wyndon",
+        "count": 1
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 50",
     "areaId": "Pokemon League",
     "unlocks": [
       "Slumbering Weald 2",

@@ -358,6 +358,46 @@ const galarMapCoordinates = {
     "name": "Dyna Tree Hill",
     "x": 18,
     "y": 66
+  },
+  "motostoke_city": {
+    "name": "Motostoke City",
+    "x": 26,
+    "y": 66
+  },
+  "kabu_s_trial": {
+    "name": "Kabu's Trial",
+    "x": 34,
+    "y": 66
+  },
+  "route_9_tunnel": {
+    "name": "Route 9 Tunnel",
+    "x": 42,
+    "y": 66
+  },
+  "circhester_city": {
+    "name": "Circhester City",
+    "x": 50,
+    "y": 66
+  },
+  "outer_spikemuth": {
+    "name": "Outer Spikemuth",
+    "x": 58,
+    "y": 66
+  },
+  "spikemuth_city": {
+    "name": "Spikemuth City",
+    "x": 66,
+    "y": 66
+  },
+  "hammerlocke_city": {
+    "name": "Hammerlocke City",
+    "x": 74,
+    "y": 66
+  },
+  "wyndon": {
+    "name": "Wyndon",
+    "x": 82,
+    "y": 66
   }
 };
 
