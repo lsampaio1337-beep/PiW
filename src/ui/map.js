@@ -423,6 +423,14 @@ function generateMarkersForRegion(region, unlockedAreas) {
             if (locationId === 'opelucid_gym' && state.trainer.badges >= 7) showCheckmark = true;
             if (locationId === 'humilau_gym' && state.trainer.badges >= 8) showCheckmark = true;
 
+            if (locationId === 'expanded_castelia_park') {
+                hasNewNotification = true; // Force pulse animation
+            }
+
+            if (locationId === 'expanded_castelia_park') {
+                hasNewNotification = true; // Force pulse animation
+            }
+
             html += generateMarkerHtml(locationId, locationName, coords, true, hasNewNotification, showCheckmark);
         }
     } else {
