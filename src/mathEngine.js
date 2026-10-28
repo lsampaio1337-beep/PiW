@@ -151,6 +151,10 @@ function generateQuality(stats = {}, isDoubleShiny = false) {
     if (newQ > maxQ) newQ = maxQ;
     newQ = Math.floor(newQ * 100) / 100;
 
+    if (newQ > 1.80 && tierName !== "Shiny") {
+        tierName = "Legendary";
+    }
+
     return { name: tierName, q: newQ };
 }
 

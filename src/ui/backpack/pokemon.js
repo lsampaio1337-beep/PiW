@@ -280,22 +280,28 @@ window.applyPokemonFilters = function() {
 
     // Compute breedable map if needed
     let breedableMap = null;
+    let targetBreeder = null;
+
     if (filters.breedableOnly) {
-        breedableMap = new Map();
-        const allMons = [...state.storage, ...state.safe];
-        allMons.forEach(p => {
-            const isShiny = p.qualityName === 'Shiny';
-            const cap = isShiny ? 2.50 : 1.99;
-            if (p.quality < cap) {
-                // Group by ID and Shiny status, allowing Q differences up to 0.05
-                const key = p.id + '_' + isShiny;
-                if (breedableMap.has(key)) {
-                    breedableMap.get(key).push(p.quality);
-                } else {
-                    breedableMap.set(key, [p.quality]);
+        if (state && state.breeding && state.breeding.length > 0) {
+            targetBreeder = state.breeding[0];
+        } else {
+            breedableMap = new Map();
+            const allMons = [...state.storage, ...state.safe];
+            allMons.forEach(p => {
+                const isShiny = p.qualityName === 'Shiny';
+                const cap = isShiny ? 2.50 : 1.99;
+                if (p.quality < cap) {
+                    // Group by ID and Shiny status, allowing Q differences up to 0.05
+                    const key = p.id + '_' + isShiny;
+                    if (breedableMap.has(key)) {
+                        breedableMap.get(key).push(p.quality);
+                    } else {
+                        breedableMap.set(key, [p.quality]);
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     const filterFn = (p) => {
@@ -313,6 +319,13 @@ window.applyPokemonFilters = function() {
             const cap = isShiny ? 2.50 : 1.99;
             if (p.quality >= cap) return false;
 
+            if (targetBreeder) {
+                const targetIsShiny = targetBreeder.qualityName === 'Shiny';
+                if (p.id !== targetBreeder.id || isShiny !== targetIsShiny) return false;
+                if (Math.round(Math.abs(targetBreeder.quality - p.quality) * 100) > 5) return false;
+                return true;
+            }
+
             const key = p.id + '_' + isShiny;
             const groupQualities = breedableMap ? breedableMap.get(key) : null;
 
@@ -322,7 +335,7 @@ window.applyPokemonFilters = function() {
             let hasPartner = false;
             let matchCount = 0;
             for (let i = 0; i < groupQualities.length; i++) {
-                if (Math.abs(groupQualities[i] - p.quality) <= 0.05) {
+                if (Math.round(Math.abs(groupQualities[i] - p.quality) * 100) <= 5) {
                     matchCount++;
                     if (matchCount >= 2) {
                         hasPartner = true;
@@ -477,6 +490,12 @@ export function handleDrop(event, targetCol) {
         }
         if (state.dayCareRef) {
             state.dayCareRef.slot2.pokemon = p;
+
+            if (p.qualityName === 'Shiny') {
+                state.dayCareRef.slot2.requiredBattles = 200;
+            } else {
+                state.dayCareRef.slot2.requiredBattles = 100;
+            }
 
             const totalIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
             if (totalIV >= 600) {
