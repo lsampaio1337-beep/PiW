@@ -24662,5 +24662,5293 @@
       "Speed": "88"
     },
     "detailUrl": "https://pokemondb.net/pokedex/pecharunt"
+  },
+  {
+    "key": "0003_Venusaur_Mega Venusaur",
+    "num": "0003",
+    "name": "Venusaur",
+    "extraName": "Mega Venusaur",
+    "types": [
+      "Grass",
+      "Poison"
+    ],
+    "stats": {
+      "Total": "625",
+      "HP": "80",
+      "Attack": "100",
+      "Defense": "123",
+      "SpAtk": "122",
+      "SpDef": "120",
+      "Speed": "80"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/venusaur"
+  },
+  {
+    "key": "0006_Charizard_Mega Charizard X",
+    "num": "0006",
+    "name": "Charizard",
+    "extraName": "Mega Charizard X",
+    "types": [
+      "Fire",
+      "Dragon"
+    ],
+    "stats": {
+      "Total": "634",
+      "HP": "78",
+      "Attack": "130",
+      "Defense": "111",
+      "SpAtk": "130",
+      "SpDef": "85",
+      "Speed": "100"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/charizard"
+  },
+  {
+    "key": "0006_Charizard_Mega Charizard Y",
+    "num": "0006",
+    "name": "Charizard",
+    "extraName": "Mega Charizard Y",
+    "types": [
+      "Fire",
+      "Flying"
+    ],
+    "stats": {
+      "Total": "634",
+      "HP": "78",
+      "Attack": "104",
+      "Defense": "78",
+      "SpAtk": "159",
+      "SpDef": "115",
+      "Speed": "100"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/charizard"
+  },
+  {
+    "key": "0009_Blastoise_Mega Blastoise",
+    "num": "0009",
+    "name": "Blastoise",
+    "extraName": "Mega Blastoise",
+    "types": [
+      "Water"
+    ],
+    "stats": {
+      "Total": "630",
+      "HP": "79",
+      "Attack": "103",
+      "Defense": "120",
+      "SpAtk": "135",
+      "SpDef": "115",
+      "Speed": "78"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/blastoise"
+  },
+  {
+    "key": "0015_Beedrill_Mega Beedrill",
+    "num": "0015",
+    "name": "Beedrill",
+    "extraName": "Mega Beedrill",
+    "types": [
+      "Bug",
+      "Poison"
+    ],
+    "stats": {
+      "Total": "495",
+      "HP": "65",
+      "Attack": "150",
+      "Defense": "40",
+      "SpAtk": "15",
+      "SpDef": "80",
+      "Speed": "145"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/beedrill"
+  },
+  {
+    "key": "0018_Pidgeot_Mega Pidgeot",
+    "num": "0018",
+    "name": "Pidgeot",
+    "extraName": "Mega Pidgeot",
+    "types": [
+      "Normal",
+      "Flying"
+    ],
+    "stats": {
+      "Total": "579",
+      "HP": "83",
+      "Attack": "80",
+      "Defense": "80",
+      "SpAtk": "135",
+      "SpDef": "80",
+      "Speed": "121"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/pidgeot"
+  },
+  {
+    "key": "0019_Rattata_Alolan Rattata",
+    "num": "0019",
+    "name": "Rattata",
+    "extraName": "Alolan Rattata",
+    "types": [
+      "Dark",
+      "Normal"
+    ],
+    "stats": {
+      "Total": "253",
+      "HP": "30",
+      "Attack": "56",
+      "Defense": "35",
+      "SpAtk": "25",
+      "SpDef": "35",
+      "Speed": "72"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/rattata"
+  },
+  {
+    "key": "0020_Raticate_Alolan Raticate",
+    "num": "0020",
+    "name": "Raticate",
+    "extraName": "Alolan Raticate",
+    "types": [
+      "Dark",
+      "Normal"
+    ],
+    "stats": {
+      "Total": "413",
+      "HP": "75",
+      "Attack": "71",
+      "Defense": "70",
+      "SpAtk": "40",
+      "SpDef": "80",
+      "Speed": "77"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/raticate"
+  },
+  {
+    "key": "0025_Pikachu_Partner Pikachu",
+    "num": "0025",
+    "name": "Pikachu",
+    "extraName": "Partner Pikachu",
+    "types": [
+      "Electric"
+    ],
+    "stats": {
+      "Total": "430",
+      "HP": "45",
+      "Attack": "80",
+      "Defense": "50",
+      "SpAtk": "75",
+      "SpDef": "60",
+      "Speed": "120"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/pikachu"
+  },
+  {
+    "key": "0026_Raichu_Alolan Raichu",
+    "num": "0026",
+    "name": "Raichu",
+    "extraName": "Alolan Raichu",
+    "types": [
+      "Electric",
+      "Psychic"
+    ],
+    "stats": {
+      "Total": "485",
+      "HP": "60",
+      "Attack": "85",
+      "Defense": "50",
+      "SpAtk": "95",
+      "SpDef": "85",
+      "Speed": "110"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/raichu"
+  },
+  {
+    "key": "0026_Raichu_Mega Raichu X",
+    "num": "0026",
+    "name": "Raichu",
+    "extraName": "Mega Raichu X",
+    "types": [
+      "Electric"
+    ],
+    "stats": {
+      "Total": "585",
+      "HP": "60",
+      "Attack": "135",
+      "Defense": "95",
+      "SpAtk": "90",
+      "SpDef": "95",
+      "Speed": "110"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/raichu"
+  },
+  {
+    "key": "0026_Raichu_Mega Raichu Y",
+    "num": "0026",
+    "name": "Raichu",
+    "extraName": "Mega Raichu Y",
+    "types": [
+      "Electric"
+    ],
+    "stats": {
+      "Total": "585",
+      "HP": "60",
+      "Attack": "100",
+      "Defense": "55",
+      "SpAtk": "160",
+      "SpDef": "80",
+      "Speed": "130"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/raichu"
+  },
+  {
+    "key": "0027_Sandshrew_Alolan Sandshrew",
+    "num": "0027",
+    "name": "Sandshrew",
+    "extraName": "Alolan Sandshrew",
+    "types": [
+      "Ice",
+      "Steel"
+    ],
+    "stats": {
+      "Total": "300",
+      "HP": "50",
+      "Attack": "75",
+      "Defense": "90",
+      "SpAtk": "10",
+      "SpDef": "35",
+      "Speed": "40"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/sandshrew"
+  },
+  {
+    "key": "0028_Sandslash_Alolan Sandslash",
+    "num": "0028",
+    "name": "Sandslash",
+    "extraName": "Alolan Sandslash",
+    "types": [
+      "Ice",
+      "Steel"
+    ],
+    "stats": {
+      "Total": "450",
+      "HP": "75",
+      "Attack": "100",
+      "Defense": "120",
+      "SpAtk": "25",
+      "SpDef": "65",
+      "Speed": "65"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/sandslash"
+  },
+  {
+    "key": "0036_Clefable_Mega Clefable",
+    "num": "0036",
+    "name": "Clefable",
+    "extraName": "Mega Clefable",
+    "types": [
+      "Fairy",
+      "Flying"
+    ],
+    "stats": {
+      "Total": "583",
+      "HP": "95",
+      "Attack": "80",
+      "Defense": "93",
+      "SpAtk": "135",
+      "SpDef": "110",
+      "Speed": "70"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/clefable"
+  },
+  {
+    "key": "0037_Vulpix_Alolan Vulpix",
+    "num": "0037",
+    "name": "Vulpix",
+    "extraName": "Alolan Vulpix",
+    "types": [
+      "Ice"
+    ],
+    "stats": {
+      "Total": "299",
+      "HP": "38",
+      "Attack": "41",
+      "Defense": "40",
+      "SpAtk": "50",
+      "SpDef": "65",
+      "Speed": "65"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/vulpix"
+  },
+  {
+    "key": "0038_Ninetales_Alolan Ninetales",
+    "num": "0038",
+    "name": "Ninetales",
+    "extraName": "Alolan Ninetales",
+    "types": [
+      "Ice",
+      "Fairy"
+    ],
+    "stats": {
+      "Total": "505",
+      "HP": "73",
+      "Attack": "67",
+      "Defense": "75",
+      "SpAtk": "81",
+      "SpDef": "100",
+      "Speed": "109"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/ninetales"
+  },
+  {
+    "key": "0050_Diglett_Alolan Diglett",
+    "num": "0050",
+    "name": "Diglett",
+    "extraName": "Alolan Diglett",
+    "types": [
+      "Ground",
+      "Steel"
+    ],
+    "stats": {
+      "Total": "265",
+      "HP": "10",
+      "Attack": "55",
+      "Defense": "30",
+      "SpAtk": "35",
+      "SpDef": "45",
+      "Speed": "90"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/diglett"
+  },
+  {
+    "key": "0051_Dugtrio_Alolan Dugtrio",
+    "num": "0051",
+    "name": "Dugtrio",
+    "extraName": "Alolan Dugtrio",
+    "types": [
+      "Ground",
+      "Steel"
+    ],
+    "stats": {
+      "Total": "425",
+      "HP": "35",
+      "Attack": "100",
+      "Defense": "60",
+      "SpAtk": "50",
+      "SpDef": "70",
+      "Speed": "110"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/dugtrio"
+  },
+  {
+    "key": "0052_Meowth_Alolan Meowth",
+    "num": "0052",
+    "name": "Meowth",
+    "extraName": "Alolan Meowth",
+    "types": [
+      "Dark"
+    ],
+    "stats": {
+      "Total": "290",
+      "HP": "40",
+      "Attack": "35",
+      "Defense": "35",
+      "SpAtk": "50",
+      "SpDef": "40",
+      "Speed": "90"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/meowth"
+  },
+  {
+    "key": "0052_Meowth_Galarian Meowth",
+    "num": "0052",
+    "name": "Meowth",
+    "extraName": "Galarian Meowth",
+    "types": [
+      "Steel"
+    ],
+    "stats": {
+      "Total": "290",
+      "HP": "50",
+      "Attack": "65",
+      "Defense": "55",
+      "SpAtk": "40",
+      "SpDef": "40",
+      "Speed": "40"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/meowth"
+  },
+  {
+    "key": "0053_Persian_Alolan Persian",
+    "num": "0053",
+    "name": "Persian",
+    "extraName": "Alolan Persian",
+    "types": [
+      "Dark"
+    ],
+    "stats": {
+      "Total": "440",
+      "HP": "65",
+      "Attack": "60",
+      "Defense": "60",
+      "SpAtk": "75",
+      "SpDef": "65",
+      "Speed": "115"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/persian"
+  },
+  {
+    "key": "0058_Growlithe_Hisuian Growlithe",
+    "num": "0058",
+    "name": "Growlithe",
+    "extraName": "Hisuian Growlithe",
+    "types": [
+      "Fire",
+      "Rock"
+    ],
+    "stats": {
+      "Total": "350",
+      "HP": "60",
+      "Attack": "75",
+      "Defense": "45",
+      "SpAtk": "65",
+      "SpDef": "50",
+      "Speed": "55"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/growlithe"
+  },
+  {
+    "key": "0059_Arcanine_Hisuian Arcanine",
+    "num": "0059",
+    "name": "Arcanine",
+    "extraName": "Hisuian Arcanine",
+    "types": [
+      "Fire",
+      "Rock"
+    ],
+    "stats": {
+      "Total": "555",
+      "HP": "95",
+      "Attack": "115",
+      "Defense": "80",
+      "SpAtk": "95",
+      "SpDef": "80",
+      "Speed": "90"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/arcanine"
+  },
+  {
+    "key": "0065_Alakazam_Mega Alakazam",
+    "num": "0065",
+    "name": "Alakazam",
+    "extraName": "Mega Alakazam",
+    "types": [
+      "Psychic"
+    ],
+    "stats": {
+      "Total": "600",
+      "HP": "55",
+      "Attack": "50",
+      "Defense": "65",
+      "SpAtk": "175",
+      "SpDef": "105",
+      "Speed": "150"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/alakazam"
+  },
+  {
+    "key": "0071_Victreebel_Mega Victreebel",
+    "num": "0071",
+    "name": "Victreebel",
+    "extraName": "Mega Victreebel",
+    "types": [
+      "Grass",
+      "Poison"
+    ],
+    "stats": {
+      "Total": "590",
+      "HP": "80",
+      "Attack": "125",
+      "Defense": "85",
+      "SpAtk": "135",
+      "SpDef": "95",
+      "Speed": "70"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/victreebel"
+  },
+  {
+    "key": "0074_Geodude_Alolan Geodude",
+    "num": "0074",
+    "name": "Geodude",
+    "extraName": "Alolan Geodude",
+    "types": [
+      "Rock",
+      "Electric"
+    ],
+    "stats": {
+      "Total": "300",
+      "HP": "40",
+      "Attack": "80",
+      "Defense": "100",
+      "SpAtk": "30",
+      "SpDef": "30",
+      "Speed": "20"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/geodude"
+  },
+  {
+    "key": "0075_Graveler_Alolan Graveler",
+    "num": "0075",
+    "name": "Graveler",
+    "extraName": "Alolan Graveler",
+    "types": [
+      "Rock",
+      "Electric"
+    ],
+    "stats": {
+      "Total": "390",
+      "HP": "55",
+      "Attack": "95",
+      "Defense": "115",
+      "SpAtk": "45",
+      "SpDef": "45",
+      "Speed": "35"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/graveler"
+  },
+  {
+    "key": "0076_Golem_Alolan Golem",
+    "num": "0076",
+    "name": "Golem",
+    "extraName": "Alolan Golem",
+    "types": [
+      "Rock",
+      "Electric"
+    ],
+    "stats": {
+      "Total": "495",
+      "HP": "80",
+      "Attack": "120",
+      "Defense": "130",
+      "SpAtk": "55",
+      "SpDef": "65",
+      "Speed": "45"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/golem"
+  },
+  {
+    "key": "0077_Ponyta_Galarian Ponyta",
+    "num": "0077",
+    "name": "Ponyta",
+    "extraName": "Galarian Ponyta",
+    "types": [
+      "Psychic"
+    ],
+    "stats": {
+      "Total": "410",
+      "HP": "50",
+      "Attack": "85",
+      "Defense": "55",
+      "SpAtk": "65",
+      "SpDef": "65",
+      "Speed": "90"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/ponyta"
+  },
+  {
+    "key": "0078_Rapidash_Galarian Rapidash",
+    "num": "0078",
+    "name": "Rapidash",
+    "extraName": "Galarian Rapidash",
+    "types": [
+      "Psychic",
+      "Fairy"
+    ],
+    "stats": {
+      "Total": "500",
+      "HP": "65",
+      "Attack": "100",
+      "Defense": "70",
+      "SpAtk": "80",
+      "SpDef": "80",
+      "Speed": "105"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/rapidash"
+  },
+  {
+    "key": "0079_Slowpoke_Galarian Slowpoke",
+    "num": "0079",
+    "name": "Slowpoke",
+    "extraName": "Galarian Slowpoke",
+    "types": [
+      "Psychic"
+    ],
+    "stats": {
+      "Total": "315",
+      "HP": "90",
+      "Attack": "65",
+      "Defense": "65",
+      "SpAtk": "40",
+      "SpDef": "40",
+      "Speed": "15"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/slowpoke"
+  },
+  {
+    "key": "0080_Slowbro_Mega Slowbro",
+    "num": "0080",
+    "name": "Slowbro",
+    "extraName": "Mega Slowbro",
+    "types": [
+      "Water",
+      "Psychic"
+    ],
+    "stats": {
+      "Total": "590",
+      "HP": "95",
+      "Attack": "75",
+      "Defense": "180",
+      "SpAtk": "130",
+      "SpDef": "80",
+      "Speed": "30"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/slowbro"
+  },
+  {
+    "key": "0080_Slowbro_Galarian Slowbro",
+    "num": "0080",
+    "name": "Slowbro",
+    "extraName": "Galarian Slowbro",
+    "types": [
+      "Poison",
+      "Psychic"
+    ],
+    "stats": {
+      "Total": "490",
+      "HP": "95",
+      "Attack": "100",
+      "Defense": "95",
+      "SpAtk": "100",
+      "SpDef": "70",
+      "Speed": "30"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/slowbro"
+  },
+  {
+    "key": "0083_Farfetch'd_Galarian Farfetch'd",
+    "num": "0083",
+    "name": "Farfetch'd",
+    "extraName": "Galarian Farfetch'd",
+    "types": [
+      "Fighting"
+    ],
+    "stats": {
+      "Total": "377",
+      "HP": "52",
+      "Attack": "95",
+      "Defense": "55",
+      "SpAtk": "58",
+      "SpDef": "62",
+      "Speed": "55"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/farfetchd"
+  },
+  {
+    "key": "0088_Grimer_Alolan Grimer",
+    "num": "0088",
+    "name": "Grimer",
+    "extraName": "Alolan Grimer",
+    "types": [
+      "Poison",
+      "Dark"
+    ],
+    "stats": {
+      "Total": "325",
+      "HP": "80",
+      "Attack": "80",
+      "Defense": "50",
+      "SpAtk": "40",
+      "SpDef": "50",
+      "Speed": "25"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/grimer"
+  },
+  {
+    "key": "0089_Muk_Alolan Muk",
+    "num": "0089",
+    "name": "Muk",
+    "extraName": "Alolan Muk",
+    "types": [
+      "Poison",
+      "Dark"
+    ],
+    "stats": {
+      "Total": "500",
+      "HP": "105",
+      "Attack": "105",
+      "Defense": "75",
+      "SpAtk": "65",
+      "SpDef": "100",
+      "Speed": "50"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/muk"
+  },
+  {
+    "key": "0094_Gengar_Mega Gengar",
+    "num": "0094",
+    "name": "Gengar",
+    "extraName": "Mega Gengar",
+    "types": [
+      "Ghost",
+      "Poison"
+    ],
+    "stats": {
+      "Total": "600",
+      "HP": "60",
+      "Attack": "65",
+      "Defense": "80",
+      "SpAtk": "170",
+      "SpDef": "95",
+      "Speed": "130"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/gengar"
+  },
+  {
+    "key": "0100_Voltorb_Hisuian Voltorb",
+    "num": "0100",
+    "name": "Voltorb",
+    "extraName": "Hisuian Voltorb",
+    "types": [
+      "Electric",
+      "Grass"
+    ],
+    "stats": {
+      "Total": "330",
+      "HP": "40",
+      "Attack": "30",
+      "Defense": "50",
+      "SpAtk": "55",
+      "SpDef": "55",
+      "Speed": "100"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/voltorb"
+  },
+  {
+    "key": "0101_Electrode_Hisuian Electrode",
+    "num": "0101",
+    "name": "Electrode",
+    "extraName": "Hisuian Electrode",
+    "types": [
+      "Electric",
+      "Grass"
+    ],
+    "stats": {
+      "Total": "490",
+      "HP": "60",
+      "Attack": "50",
+      "Defense": "70",
+      "SpAtk": "80",
+      "SpDef": "80",
+      "Speed": "150"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/electrode"
+  },
+  {
+    "key": "0103_Exeggutor_Alolan Exeggutor",
+    "num": "0103",
+    "name": "Exeggutor",
+    "extraName": "Alolan Exeggutor",
+    "types": [
+      "Grass",
+      "Dragon"
+    ],
+    "stats": {
+      "Total": "530",
+      "HP": "95",
+      "Attack": "105",
+      "Defense": "85",
+      "SpAtk": "125",
+      "SpDef": "75",
+      "Speed": "45"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/exeggutor"
+  },
+  {
+    "key": "0105_Marowak_Alolan Marowak",
+    "num": "0105",
+    "name": "Marowak",
+    "extraName": "Alolan Marowak",
+    "types": [
+      "Fire",
+      "Ghost"
+    ],
+    "stats": {
+      "Total": "425",
+      "HP": "60",
+      "Attack": "80",
+      "Defense": "110",
+      "SpAtk": "50",
+      "SpDef": "80",
+      "Speed": "45"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/marowak"
+  },
+  {
+    "key": "0110_Weezing_Galarian Weezing",
+    "num": "0110",
+    "name": "Weezing",
+    "extraName": "Galarian Weezing",
+    "types": [
+      "Poison",
+      "Fairy"
+    ],
+    "stats": {
+      "Total": "490",
+      "HP": "65",
+      "Attack": "90",
+      "Defense": "120",
+      "SpAtk": "85",
+      "SpDef": "70",
+      "Speed": "60"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/weezing"
+  },
+  {
+    "key": "0115_Kangaskhan_Mega Kangaskhan",
+    "num": "0115",
+    "name": "Kangaskhan",
+    "extraName": "Mega Kangaskhan",
+    "types": [
+      "Normal"
+    ],
+    "stats": {
+      "Total": "590",
+      "HP": "105",
+      "Attack": "125",
+      "Defense": "100",
+      "SpAtk": "60",
+      "SpDef": "100",
+      "Speed": "100"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/kangaskhan"
+  },
+  {
+    "key": "0121_Starmie_Mega Starmie",
+    "num": "0121",
+    "name": "Starmie",
+    "extraName": "Mega Starmie",
+    "types": [
+      "Water",
+      "Psychic"
+    ],
+    "stats": {
+      "Total": "660",
+      "HP": "60",
+      "Attack": "140",
+      "Defense": "105",
+      "SpAtk": "130",
+      "SpDef": "105",
+      "Speed": "120"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/starmie"
+  },
+  {
+    "key": "0122_Mr. Mime_Galarian Mr. Mime",
+    "num": "0122",
+    "name": "Mr. Mime",
+    "extraName": "Galarian Mr. Mime",
+    "types": [
+      "Ice",
+      "Psychic"
+    ],
+    "stats": {
+      "Total": "460",
+      "HP": "50",
+      "Attack": "65",
+      "Defense": "65",
+      "SpAtk": "90",
+      "SpDef": "90",
+      "Speed": "100"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/mr-mime"
+  },
+  {
+    "key": "0127_Pinsir_Mega Pinsir",
+    "num": "0127",
+    "name": "Pinsir",
+    "extraName": "Mega Pinsir",
+    "types": [
+      "Bug",
+      "Flying"
+    ],
+    "stats": {
+      "Total": "600",
+      "HP": "65",
+      "Attack": "155",
+      "Defense": "120",
+      "SpAtk": "65",
+      "SpDef": "90",
+      "Speed": "105"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/pinsir"
+  },
+  {
+    "key": "0128_Tauros_Combat Breed",
+    "num": "0128",
+    "name": "Tauros",
+    "extraName": "Combat Breed",
+    "types": [
+      "Fighting"
+    ],
+    "stats": {
+      "Total": "490",
+      "HP": "75",
+      "Attack": "110",
+      "Defense": "105",
+      "SpAtk": "30",
+      "SpDef": "70",
+      "Speed": "100"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/tauros"
+  },
+  {
+    "key": "0128_Tauros_Blaze Breed",
+    "num": "0128",
+    "name": "Tauros",
+    "extraName": "Blaze Breed",
+    "types": [
+      "Fighting",
+      "Fire"
+    ],
+    "stats": {
+      "Total": "490",
+      "HP": "75",
+      "Attack": "110",
+      "Defense": "105",
+      "SpAtk": "30",
+      "SpDef": "70",
+      "Speed": "100"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/tauros"
+  },
+  {
+    "key": "0128_Tauros_Aqua Breed",
+    "num": "0128",
+    "name": "Tauros",
+    "extraName": "Aqua Breed",
+    "types": [
+      "Fighting",
+      "Water"
+    ],
+    "stats": {
+      "Total": "490",
+      "HP": "75",
+      "Attack": "110",
+      "Defense": "105",
+      "SpAtk": "30",
+      "SpDef": "70",
+      "Speed": "100"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/tauros"
+  },
+  {
+    "key": "0130_Gyarados_Mega Gyarados",
+    "num": "0130",
+    "name": "Gyarados",
+    "extraName": "Mega Gyarados",
+    "types": [
+      "Water",
+      "Dark"
+    ],
+    "stats": {
+      "Total": "640",
+      "HP": "95",
+      "Attack": "155",
+      "Defense": "109",
+      "SpAtk": "70",
+      "SpDef": "130",
+      "Speed": "81"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/gyarados"
+  },
+  {
+    "key": "0133_Eevee_Partner Eevee",
+    "num": "0133",
+    "name": "Eevee",
+    "extraName": "Partner Eevee",
+    "types": [
+      "Normal"
+    ],
+    "stats": {
+      "Total": "435",
+      "HP": "65",
+      "Attack": "75",
+      "Defense": "70",
+      "SpAtk": "65",
+      "SpDef": "85",
+      "Speed": "75"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/eevee"
+  },
+  {
+    "key": "0142_Aerodactyl_Mega Aerodactyl",
+    "num": "0142",
+    "name": "Aerodactyl",
+    "extraName": "Mega Aerodactyl",
+    "types": [
+      "Rock",
+      "Flying"
+    ],
+    "stats": {
+      "Total": "615",
+      "HP": "80",
+      "Attack": "135",
+      "Defense": "85",
+      "SpAtk": "70",
+      "SpDef": "95",
+      "Speed": "150"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/aerodactyl"
+  },
+  {
+    "key": "0144_Articuno_Galarian Articuno",
+    "num": "0144",
+    "name": "Articuno",
+    "extraName": "Galarian Articuno",
+    "types": [
+      "Psychic",
+      "Flying"
+    ],
+    "stats": {
+      "Total": "580",
+      "HP": "90",
+      "Attack": "85",
+      "Defense": "85",
+      "SpAtk": "125",
+      "SpDef": "100",
+      "Speed": "95"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/articuno"
+  },
+  {
+    "key": "0145_Zapdos_Galarian Zapdos",
+    "num": "0145",
+    "name": "Zapdos",
+    "extraName": "Galarian Zapdos",
+    "types": [
+      "Fighting",
+      "Flying"
+    ],
+    "stats": {
+      "Total": "580",
+      "HP": "90",
+      "Attack": "125",
+      "Defense": "90",
+      "SpAtk": "85",
+      "SpDef": "90",
+      "Speed": "100"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/zapdos"
+  },
+  {
+    "key": "0146_Moltres_Galarian Moltres",
+    "num": "0146",
+    "name": "Moltres",
+    "extraName": "Galarian Moltres",
+    "types": [
+      "Dark",
+      "Flying"
+    ],
+    "stats": {
+      "Total": "580",
+      "HP": "90",
+      "Attack": "85",
+      "Defense": "90",
+      "SpAtk": "100",
+      "SpDef": "125",
+      "Speed": "90"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/moltres"
+  },
+  {
+    "key": "0149_Dragonite_Mega Dragonite",
+    "num": "0149",
+    "name": "Dragonite",
+    "extraName": "Mega Dragonite",
+    "types": [
+      "Dragon",
+      "Flying"
+    ],
+    "stats": {
+      "Total": "700",
+      "HP": "91",
+      "Attack": "124",
+      "Defense": "115",
+      "SpAtk": "145",
+      "SpDef": "125",
+      "Speed": "100"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/dragonite"
+  },
+  {
+    "key": "0150_Mewtwo_Mega Mewtwo X",
+    "num": "0150",
+    "name": "Mewtwo",
+    "extraName": "Mega Mewtwo X",
+    "types": [
+      "Psychic",
+      "Fighting"
+    ],
+    "stats": {
+      "Total": "780",
+      "HP": "106",
+      "Attack": "190",
+      "Defense": "100",
+      "SpAtk": "154",
+      "SpDef": "100",
+      "Speed": "130"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/mewtwo"
+  },
+  {
+    "key": "0150_Mewtwo_Mega Mewtwo Y",
+    "num": "0150",
+    "name": "Mewtwo",
+    "extraName": "Mega Mewtwo Y",
+    "types": [
+      "Psychic"
+    ],
+    "stats": {
+      "Total": "780",
+      "HP": "106",
+      "Attack": "150",
+      "Defense": "70",
+      "SpAtk": "194",
+      "SpDef": "120",
+      "Speed": "140"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/mewtwo"
+  },
+  {
+    "key": "0154_Meganium_Mega Meganium",
+    "num": "0154",
+    "name": "Meganium",
+    "extraName": "Mega Meganium",
+    "types": [
+      "Grass",
+      "Fairy"
+    ],
+    "stats": {
+      "Total": "625",
+      "HP": "80",
+      "Attack": "92",
+      "Defense": "115",
+      "SpAtk": "143",
+      "SpDef": "115",
+      "Speed": "80"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/meganium"
+  },
+  {
+    "key": "0157_Typhlosion_Hisuian Typhlosion",
+    "num": "0157",
+    "name": "Typhlosion",
+    "extraName": "Hisuian Typhlosion",
+    "types": [
+      "Fire",
+      "Ghost"
+    ],
+    "stats": {
+      "Total": "534",
+      "HP": "73",
+      "Attack": "84",
+      "Defense": "78",
+      "SpAtk": "119",
+      "SpDef": "85",
+      "Speed": "95"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/typhlosion"
+  },
+  {
+    "key": "0160_Feraligatr_Mega Feraligatr",
+    "num": "0160",
+    "name": "Feraligatr",
+    "extraName": "Mega Feraligatr",
+    "types": [
+      "Water",
+      "Dragon"
+    ],
+    "stats": {
+      "Total": "630",
+      "HP": "85",
+      "Attack": "160",
+      "Defense": "125",
+      "SpAtk": "89",
+      "SpDef": "93",
+      "Speed": "78"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/feraligatr"
+  },
+  {
+    "key": "0181_Ampharos_Mega Ampharos",
+    "num": "0181",
+    "name": "Ampharos",
+    "extraName": "Mega Ampharos",
+    "types": [
+      "Electric",
+      "Dragon"
+    ],
+    "stats": {
+      "Total": "610",
+      "HP": "90",
+      "Attack": "95",
+      "Defense": "105",
+      "SpAtk": "165",
+      "SpDef": "110",
+      "Speed": "45"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/ampharos"
+  },
+  {
+    "key": "0194_Wooper_Paldean Wooper",
+    "num": "0194",
+    "name": "Wooper",
+    "extraName": "Paldean Wooper",
+    "types": [
+      "Poison",
+      "Ground"
+    ],
+    "stats": {
+      "Total": "210",
+      "HP": "55",
+      "Attack": "45",
+      "Defense": "45",
+      "SpAtk": "25",
+      "SpDef": "25",
+      "Speed": "15"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/wooper"
+  },
+  {
+    "key": "0199_Slowking_Galarian Slowking",
+    "num": "0199",
+    "name": "Slowking",
+    "extraName": "Galarian Slowking",
+    "types": [
+      "Poison",
+      "Psychic"
+    ],
+    "stats": {
+      "Total": "490",
+      "HP": "95",
+      "Attack": "65",
+      "Defense": "80",
+      "SpAtk": "110",
+      "SpDef": "110",
+      "Speed": "30"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/slowking"
+  },
+  {
+    "key": "0208_Steelix_Mega Steelix",
+    "num": "0208",
+    "name": "Steelix",
+    "extraName": "Mega Steelix",
+    "types": [
+      "Steel",
+      "Ground"
+    ],
+    "stats": {
+      "Total": "610",
+      "HP": "75",
+      "Attack": "125",
+      "Defense": "230",
+      "SpAtk": "55",
+      "SpDef": "95",
+      "Speed": "30"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/steelix"
+  },
+  {
+    "key": "0211_Qwilfish_Hisuian Qwilfish",
+    "num": "0211",
+    "name": "Qwilfish",
+    "extraName": "Hisuian Qwilfish",
+    "types": [
+      "Dark",
+      "Poison"
+    ],
+    "stats": {
+      "Total": "440",
+      "HP": "65",
+      "Attack": "95",
+      "Defense": "85",
+      "SpAtk": "55",
+      "SpDef": "55",
+      "Speed": "85"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/qwilfish"
+  },
+  {
+    "key": "0212_Scizor_Mega Scizor",
+    "num": "0212",
+    "name": "Scizor",
+    "extraName": "Mega Scizor",
+    "types": [
+      "Bug",
+      "Steel"
+    ],
+    "stats": {
+      "Total": "600",
+      "HP": "70",
+      "Attack": "150",
+      "Defense": "140",
+      "SpAtk": "65",
+      "SpDef": "100",
+      "Speed": "75"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/scizor"
+  },
+  {
+    "key": "0214_Heracross_Mega Heracross",
+    "num": "0214",
+    "name": "Heracross",
+    "extraName": "Mega Heracross",
+    "types": [
+      "Bug",
+      "Fighting"
+    ],
+    "stats": {
+      "Total": "600",
+      "HP": "80",
+      "Attack": "185",
+      "Defense": "115",
+      "SpAtk": "40",
+      "SpDef": "105",
+      "Speed": "75"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/heracross"
+  },
+  {
+    "key": "0215_Sneasel_Hisuian Sneasel",
+    "num": "0215",
+    "name": "Sneasel",
+    "extraName": "Hisuian Sneasel",
+    "types": [
+      "Fighting",
+      "Poison"
+    ],
+    "stats": {
+      "Total": "430",
+      "HP": "55",
+      "Attack": "95",
+      "Defense": "55",
+      "SpAtk": "35",
+      "SpDef": "75",
+      "Speed": "115"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/sneasel"
+  },
+  {
+    "key": "0222_Corsola_Galarian Corsola",
+    "num": "0222",
+    "name": "Corsola",
+    "extraName": "Galarian Corsola",
+    "types": [
+      "Ghost"
+    ],
+    "stats": {
+      "Total": "410",
+      "HP": "60",
+      "Attack": "55",
+      "Defense": "100",
+      "SpAtk": "65",
+      "SpDef": "100",
+      "Speed": "30"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/corsola"
+  },
+  {
+    "key": "0227_Skarmory_Mega Skarmory",
+    "num": "0227",
+    "name": "Skarmory",
+    "extraName": "Mega Skarmory",
+    "types": [
+      "Steel",
+      "Flying"
+    ],
+    "stats": {
+      "Total": "565",
+      "HP": "65",
+      "Attack": "140",
+      "Defense": "110",
+      "SpAtk": "40",
+      "SpDef": "100",
+      "Speed": "110"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/skarmory"
+  },
+  {
+    "key": "0229_Houndoom_Mega Houndoom",
+    "num": "0229",
+    "name": "Houndoom",
+    "extraName": "Mega Houndoom",
+    "types": [
+      "Dark",
+      "Fire"
+    ],
+    "stats": {
+      "Total": "600",
+      "HP": "75",
+      "Attack": "90",
+      "Defense": "90",
+      "SpAtk": "140",
+      "SpDef": "90",
+      "Speed": "115"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/houndoom"
+  },
+  {
+    "key": "0248_Tyranitar_Mega Tyranitar",
+    "num": "0248",
+    "name": "Tyranitar",
+    "extraName": "Mega Tyranitar",
+    "types": [
+      "Rock",
+      "Dark"
+    ],
+    "stats": {
+      "Total": "700",
+      "HP": "100",
+      "Attack": "164",
+      "Defense": "150",
+      "SpAtk": "95",
+      "SpDef": "120",
+      "Speed": "71"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/tyranitar"
+  },
+  {
+    "key": "0254_Sceptile_Mega Sceptile",
+    "num": "0254",
+    "name": "Sceptile",
+    "extraName": "Mega Sceptile",
+    "types": [
+      "Grass",
+      "Dragon"
+    ],
+    "stats": {
+      "Total": "630",
+      "HP": "70",
+      "Attack": "110",
+      "Defense": "75",
+      "SpAtk": "145",
+      "SpDef": "85",
+      "Speed": "145"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/sceptile"
+  },
+  {
+    "key": "0257_Blaziken_Mega Blaziken",
+    "num": "0257",
+    "name": "Blaziken",
+    "extraName": "Mega Blaziken",
+    "types": [
+      "Fire",
+      "Fighting"
+    ],
+    "stats": {
+      "Total": "630",
+      "HP": "80",
+      "Attack": "160",
+      "Defense": "80",
+      "SpAtk": "130",
+      "SpDef": "80",
+      "Speed": "100"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/blaziken"
+  },
+  {
+    "key": "0260_Swampert_Mega Swampert",
+    "num": "0260",
+    "name": "Swampert",
+    "extraName": "Mega Swampert",
+    "types": [
+      "Water",
+      "Ground"
+    ],
+    "stats": {
+      "Total": "635",
+      "HP": "100",
+      "Attack": "150",
+      "Defense": "110",
+      "SpAtk": "95",
+      "SpDef": "110",
+      "Speed": "70"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/swampert"
+  },
+  {
+    "key": "0263_Zigzagoon_Galarian Zigzagoon",
+    "num": "0263",
+    "name": "Zigzagoon",
+    "extraName": "Galarian Zigzagoon",
+    "types": [
+      "Dark",
+      "Normal"
+    ],
+    "stats": {
+      "Total": "240",
+      "HP": "38",
+      "Attack": "30",
+      "Defense": "41",
+      "SpAtk": "30",
+      "SpDef": "41",
+      "Speed": "60"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/zigzagoon"
+  },
+  {
+    "key": "0264_Linoone_Galarian Linoone",
+    "num": "0264",
+    "name": "Linoone",
+    "extraName": "Galarian Linoone",
+    "types": [
+      "Dark",
+      "Normal"
+    ],
+    "stats": {
+      "Total": "420",
+      "HP": "78",
+      "Attack": "70",
+      "Defense": "61",
+      "SpAtk": "50",
+      "SpDef": "61",
+      "Speed": "100"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/linoone"
+  },
+  {
+    "key": "0282_Gardevoir_Mega Gardevoir",
+    "num": "0282",
+    "name": "Gardevoir",
+    "extraName": "Mega Gardevoir",
+    "types": [
+      "Psychic",
+      "Fairy"
+    ],
+    "stats": {
+      "Total": "618",
+      "HP": "68",
+      "Attack": "85",
+      "Defense": "65",
+      "SpAtk": "165",
+      "SpDef": "135",
+      "Speed": "100"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/gardevoir"
+  },
+  {
+    "key": "0302_Sableye_Mega Sableye",
+    "num": "0302",
+    "name": "Sableye",
+    "extraName": "Mega Sableye",
+    "types": [
+      "Dark",
+      "Ghost"
+    ],
+    "stats": {
+      "Total": "480",
+      "HP": "50",
+      "Attack": "85",
+      "Defense": "125",
+      "SpAtk": "85",
+      "SpDef": "115",
+      "Speed": "20"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/sableye"
+  },
+  {
+    "key": "0303_Mawile_Mega Mawile",
+    "num": "0303",
+    "name": "Mawile",
+    "extraName": "Mega Mawile",
+    "types": [
+      "Steel",
+      "Fairy"
+    ],
+    "stats": {
+      "Total": "480",
+      "HP": "50",
+      "Attack": "105",
+      "Defense": "125",
+      "SpAtk": "55",
+      "SpDef": "95",
+      "Speed": "50"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/mawile"
+  },
+  {
+    "key": "0306_Aggron_Mega Aggron",
+    "num": "0306",
+    "name": "Aggron",
+    "extraName": "Mega Aggron",
+    "types": [
+      "Steel"
+    ],
+    "stats": {
+      "Total": "630",
+      "HP": "70",
+      "Attack": "140",
+      "Defense": "230",
+      "SpAtk": "60",
+      "SpDef": "80",
+      "Speed": "50"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/aggron"
+  },
+  {
+    "key": "0308_Medicham_Mega Medicham",
+    "num": "0308",
+    "name": "Medicham",
+    "extraName": "Mega Medicham",
+    "types": [
+      "Fighting",
+      "Psychic"
+    ],
+    "stats": {
+      "Total": "510",
+      "HP": "60",
+      "Attack": "100",
+      "Defense": "85",
+      "SpAtk": "80",
+      "SpDef": "85",
+      "Speed": "100"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/medicham"
+  },
+  {
+    "key": "0310_Manectric_Mega Manectric",
+    "num": "0310",
+    "name": "Manectric",
+    "extraName": "Mega Manectric",
+    "types": [
+      "Electric"
+    ],
+    "stats": {
+      "Total": "575",
+      "HP": "70",
+      "Attack": "75",
+      "Defense": "80",
+      "SpAtk": "135",
+      "SpDef": "80",
+      "Speed": "135"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/manectric"
+  },
+  {
+    "key": "0319_Sharpedo_Mega Sharpedo",
+    "num": "0319",
+    "name": "Sharpedo",
+    "extraName": "Mega Sharpedo",
+    "types": [
+      "Water",
+      "Dark"
+    ],
+    "stats": {
+      "Total": "560",
+      "HP": "70",
+      "Attack": "140",
+      "Defense": "70",
+      "SpAtk": "110",
+      "SpDef": "65",
+      "Speed": "105"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/sharpedo"
+  },
+  {
+    "key": "0323_Camerupt_Mega Camerupt",
+    "num": "0323",
+    "name": "Camerupt",
+    "extraName": "Mega Camerupt",
+    "types": [
+      "Fire",
+      "Ground"
+    ],
+    "stats": {
+      "Total": "560",
+      "HP": "70",
+      "Attack": "120",
+      "Defense": "100",
+      "SpAtk": "145",
+      "SpDef": "105",
+      "Speed": "20"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/camerupt"
+  },
+  {
+    "key": "0334_Altaria_Mega Altaria",
+    "num": "0334",
+    "name": "Altaria",
+    "extraName": "Mega Altaria",
+    "types": [
+      "Dragon",
+      "Fairy"
+    ],
+    "stats": {
+      "Total": "590",
+      "HP": "75",
+      "Attack": "110",
+      "Defense": "110",
+      "SpAtk": "110",
+      "SpDef": "105",
+      "Speed": "80"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/altaria"
+  },
+  {
+    "key": "0351_Castform_Sunny Form",
+    "num": "0351",
+    "name": "Castform",
+    "extraName": "Sunny Form",
+    "types": [
+      "Fire"
+    ],
+    "stats": {
+      "Total": "420",
+      "HP": "70",
+      "Attack": "70",
+      "Defense": "70",
+      "SpAtk": "70",
+      "SpDef": "70",
+      "Speed": "70"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/castform"
+  },
+  {
+    "key": "0351_Castform_Rainy Form",
+    "num": "0351",
+    "name": "Castform",
+    "extraName": "Rainy Form",
+    "types": [
+      "Water"
+    ],
+    "stats": {
+      "Total": "420",
+      "HP": "70",
+      "Attack": "70",
+      "Defense": "70",
+      "SpAtk": "70",
+      "SpDef": "70",
+      "Speed": "70"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/castform"
+  },
+  {
+    "key": "0351_Castform_Snowy Form",
+    "num": "0351",
+    "name": "Castform",
+    "extraName": "Snowy Form",
+    "types": [
+      "Ice"
+    ],
+    "stats": {
+      "Total": "420",
+      "HP": "70",
+      "Attack": "70",
+      "Defense": "70",
+      "SpAtk": "70",
+      "SpDef": "70",
+      "Speed": "70"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/castform"
+  },
+  {
+    "key": "0354_Banette_Mega Banette",
+    "num": "0354",
+    "name": "Banette",
+    "extraName": "Mega Banette",
+    "types": [
+      "Ghost"
+    ],
+    "stats": {
+      "Total": "555",
+      "HP": "64",
+      "Attack": "165",
+      "Defense": "75",
+      "SpAtk": "93",
+      "SpDef": "83",
+      "Speed": "75"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/banette"
+  },
+  {
+    "key": "0358_Chimecho_Mega Chimecho",
+    "num": "0358",
+    "name": "Chimecho",
+    "extraName": "Mega Chimecho",
+    "types": [
+      "Psychic",
+      "Steel"
+    ],
+    "stats": {
+      "Total": "555",
+      "HP": "75",
+      "Attack": "50",
+      "Defense": "110",
+      "SpAtk": "135",
+      "SpDef": "120",
+      "Speed": "65"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/chimecho"
+  },
+  {
+    "key": "0359_Absol_Mega Absol",
+    "num": "0359",
+    "name": "Absol",
+    "extraName": "Mega Absol",
+    "types": [
+      "Dark"
+    ],
+    "stats": {
+      "Total": "565",
+      "HP": "65",
+      "Attack": "150",
+      "Defense": "60",
+      "SpAtk": "115",
+      "SpDef": "60",
+      "Speed": "115"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/absol"
+  },
+  {
+    "key": "0359_Absol_Mega Absol Z",
+    "num": "0359",
+    "name": "Absol",
+    "extraName": "Mega Absol Z",
+    "types": [
+      "Dark",
+      "Ghost"
+    ],
+    "stats": {
+      "Total": "565",
+      "HP": "65",
+      "Attack": "154",
+      "Defense": "60",
+      "SpAtk": "75",
+      "SpDef": "60",
+      "Speed": "151"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/absol"
+  },
+  {
+    "key": "0362_Glalie_Mega Glalie",
+    "num": "0362",
+    "name": "Glalie",
+    "extraName": "Mega Glalie",
+    "types": [
+      "Ice"
+    ],
+    "stats": {
+      "Total": "580",
+      "HP": "80",
+      "Attack": "120",
+      "Defense": "80",
+      "SpAtk": "120",
+      "SpDef": "80",
+      "Speed": "100"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/glalie"
+  },
+  {
+    "key": "0373_Salamence_Mega Salamence",
+    "num": "0373",
+    "name": "Salamence",
+    "extraName": "Mega Salamence",
+    "types": [
+      "Dragon",
+      "Flying"
+    ],
+    "stats": {
+      "Total": "700",
+      "HP": "95",
+      "Attack": "145",
+      "Defense": "130",
+      "SpAtk": "120",
+      "SpDef": "90",
+      "Speed": "120"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/salamence"
+  },
+  {
+    "key": "0376_Metagross_Mega Metagross",
+    "num": "0376",
+    "name": "Metagross",
+    "extraName": "Mega Metagross",
+    "types": [
+      "Steel",
+      "Psychic"
+    ],
+    "stats": {
+      "Total": "700",
+      "HP": "80",
+      "Attack": "145",
+      "Defense": "150",
+      "SpAtk": "105",
+      "SpDef": "110",
+      "Speed": "110"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/metagross"
+  },
+  {
+    "key": "0380_Latias_Mega Latias",
+    "num": "0380",
+    "name": "Latias",
+    "extraName": "Mega Latias",
+    "types": [
+      "Dragon",
+      "Psychic"
+    ],
+    "stats": {
+      "Total": "700",
+      "HP": "80",
+      "Attack": "100",
+      "Defense": "120",
+      "SpAtk": "140",
+      "SpDef": "150",
+      "Speed": "110"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/latias"
+  },
+  {
+    "key": "0381_Latios_Mega Latios",
+    "num": "0381",
+    "name": "Latios",
+    "extraName": "Mega Latios",
+    "types": [
+      "Dragon",
+      "Psychic"
+    ],
+    "stats": {
+      "Total": "700",
+      "HP": "80",
+      "Attack": "130",
+      "Defense": "100",
+      "SpAtk": "160",
+      "SpDef": "120",
+      "Speed": "110"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/latios"
+  },
+  {
+    "key": "0382_Kyogre_Primal Kyogre",
+    "num": "0382",
+    "name": "Kyogre",
+    "extraName": "Primal Kyogre",
+    "types": [
+      "Water"
+    ],
+    "stats": {
+      "Total": "770",
+      "HP": "100",
+      "Attack": "150",
+      "Defense": "90",
+      "SpAtk": "180",
+      "SpDef": "160",
+      "Speed": "90"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/kyogre"
+  },
+  {
+    "key": "0383_Groudon_Primal Groudon",
+    "num": "0383",
+    "name": "Groudon",
+    "extraName": "Primal Groudon",
+    "types": [
+      "Ground",
+      "Fire"
+    ],
+    "stats": {
+      "Total": "770",
+      "HP": "100",
+      "Attack": "180",
+      "Defense": "160",
+      "SpAtk": "150",
+      "SpDef": "90",
+      "Speed": "90"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/groudon"
+  },
+  {
+    "key": "0384_Rayquaza_Mega Rayquaza",
+    "num": "0384",
+    "name": "Rayquaza",
+    "extraName": "Mega Rayquaza",
+    "types": [
+      "Dragon",
+      "Flying"
+    ],
+    "stats": {
+      "Total": "780",
+      "HP": "105",
+      "Attack": "180",
+      "Defense": "100",
+      "SpAtk": "180",
+      "SpDef": "100",
+      "Speed": "115"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/rayquaza"
+  },
+  {
+    "key": "0386_Deoxys_Normal Forme",
+    "num": "0386",
+    "name": "Deoxys",
+    "extraName": "Normal Forme",
+    "types": [
+      "Psychic"
+    ],
+    "stats": {
+      "Total": "600",
+      "HP": "50",
+      "Attack": "150",
+      "Defense": "50",
+      "SpAtk": "150",
+      "SpDef": "50",
+      "Speed": "150"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0386_Deoxys_Attack Forme",
+    "num": "0386",
+    "name": "Deoxys",
+    "extraName": "Attack Forme",
+    "types": [
+      "Psychic"
+    ],
+    "stats": {
+      "Total": "600",
+      "HP": "50",
+      "Attack": "180",
+      "Defense": "20",
+      "SpAtk": "180",
+      "SpDef": "20",
+      "Speed": "150"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0386_Deoxys_Defense Forme",
+    "num": "0386",
+    "name": "Deoxys",
+    "extraName": "Defense Forme",
+    "types": [
+      "Psychic"
+    ],
+    "stats": {
+      "Total": "600",
+      "HP": "50",
+      "Attack": "70",
+      "Defense": "160",
+      "SpAtk": "70",
+      "SpDef": "160",
+      "Speed": "90"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0386_Deoxys_Speed Forme",
+    "num": "0386",
+    "name": "Deoxys",
+    "extraName": "Speed Forme",
+    "types": [
+      "Psychic"
+    ],
+    "stats": {
+      "Total": "600",
+      "HP": "50",
+      "Attack": "95",
+      "Defense": "90",
+      "SpAtk": "95",
+      "SpDef": "90",
+      "Speed": "180"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0398_Staraptor_Mega Staraptor",
+    "num": "0398",
+    "name": "Staraptor",
+    "extraName": "Mega Staraptor",
+    "types": [
+      "Fighting",
+      "Flying"
+    ],
+    "stats": {
+      "Total": "585",
+      "HP": "85",
+      "Attack": "140",
+      "Defense": "100",
+      "SpAtk": "60",
+      "SpDef": "90",
+      "Speed": "110"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/staraptor"
+  },
+  {
+    "key": "0412_Burmy_Plant Cloak",
+    "num": "0412",
+    "name": "Burmy",
+    "extraName": "Plant Cloak",
+    "types": [
+      "Bug"
+    ],
+    "stats": {
+      "Total": "224",
+      "HP": "40",
+      "Attack": "29",
+      "Defense": "45",
+      "SpAtk": "29",
+      "SpDef": "45",
+      "Speed": "36"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0412_Burmy_Sandy Cloak",
+    "num": "0412",
+    "name": "Burmy",
+    "extraName": "Sandy Cloak",
+    "types": [
+      "Bug"
+    ],
+    "stats": {
+      "Total": "224",
+      "HP": "40",
+      "Attack": "29",
+      "Defense": "45",
+      "SpAtk": "29",
+      "SpDef": "45",
+      "Speed": "36"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0412_Burmy_Trash Cloak",
+    "num": "0412",
+    "name": "Burmy",
+    "extraName": "Trash Cloak",
+    "types": [
+      "Bug"
+    ],
+    "stats": {
+      "Total": "224",
+      "HP": "40",
+      "Attack": "29",
+      "Defense": "45",
+      "SpAtk": "29",
+      "SpDef": "45",
+      "Speed": "36"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0413_Wormadam_Plant Cloak",
+    "num": "0413",
+    "name": "Wormadam",
+    "extraName": "Plant Cloak",
+    "types": [
+      "Bug",
+      "Grass"
+    ],
+    "stats": {
+      "Total": "424",
+      "HP": "60",
+      "Attack": "59",
+      "Defense": "85",
+      "SpAtk": "79",
+      "SpDef": "105",
+      "Speed": "36"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0413_Wormadam_Sandy Cloak",
+    "num": "0413",
+    "name": "Wormadam",
+    "extraName": "Sandy Cloak",
+    "types": [
+      "Bug",
+      "Ground"
+    ],
+    "stats": {
+      "Total": "424",
+      "HP": "60",
+      "Attack": "79",
+      "Defense": "105",
+      "SpAtk": "59",
+      "SpDef": "85",
+      "Speed": "36"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0413_Wormadam_Trash Cloak",
+    "num": "0413",
+    "name": "Wormadam",
+    "extraName": "Trash Cloak",
+    "types": [
+      "Bug",
+      "Steel"
+    ],
+    "stats": {
+      "Total": "424",
+      "HP": "60",
+      "Attack": "69",
+      "Defense": "95",
+      "SpAtk": "69",
+      "SpDef": "95",
+      "Speed": "36"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0428_Lopunny_Mega Lopunny",
+    "num": "0428",
+    "name": "Lopunny",
+    "extraName": "Mega Lopunny",
+    "types": [
+      "Normal",
+      "Fighting"
+    ],
+    "stats": {
+      "Total": "580",
+      "HP": "65",
+      "Attack": "136",
+      "Defense": "94",
+      "SpAtk": "54",
+      "SpDef": "96",
+      "Speed": "135"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/lopunny"
+  },
+  {
+    "key": "0445_Garchomp_Mega Garchomp",
+    "num": "0445",
+    "name": "Garchomp",
+    "extraName": "Mega Garchomp",
+    "types": [
+      "Dragon",
+      "Ground"
+    ],
+    "stats": {
+      "Total": "700",
+      "HP": "108",
+      "Attack": "170",
+      "Defense": "115",
+      "SpAtk": "120",
+      "SpDef": "95",
+      "Speed": "92"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/garchomp"
+  },
+  {
+    "key": "0445_Garchomp_Mega Garchomp Z",
+    "num": "0445",
+    "name": "Garchomp",
+    "extraName": "Mega Garchomp Z",
+    "types": [
+      "Dragon"
+    ],
+    "stats": {
+      "Total": "700",
+      "HP": "108",
+      "Attack": "130",
+      "Defense": "85",
+      "SpAtk": "141",
+      "SpDef": "85",
+      "Speed": "151"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/garchomp"
+  },
+  {
+    "key": "0448_Lucario_Mega Lucario",
+    "num": "0448",
+    "name": "Lucario",
+    "extraName": "Mega Lucario",
+    "types": [
+      "Fighting",
+      "Steel"
+    ],
+    "stats": {
+      "Total": "625",
+      "HP": "70",
+      "Attack": "145",
+      "Defense": "88",
+      "SpAtk": "140",
+      "SpDef": "70",
+      "Speed": "112"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/lucario"
+  },
+  {
+    "key": "0448_Lucario_Mega Lucario Z",
+    "num": "0448",
+    "name": "Lucario",
+    "extraName": "Mega Lucario Z",
+    "types": [
+      "Fighting",
+      "Steel"
+    ],
+    "stats": {
+      "Total": "625",
+      "HP": "70",
+      "Attack": "100",
+      "Defense": "70",
+      "SpAtk": "164",
+      "SpDef": "70",
+      "Speed": "151"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/lucario"
+  },
+  {
+    "key": "0460_Abomasnow_Mega Abomasnow",
+    "num": "0460",
+    "name": "Abomasnow",
+    "extraName": "Mega Abomasnow",
+    "types": [
+      "Grass",
+      "Ice"
+    ],
+    "stats": {
+      "Total": "594",
+      "HP": "90",
+      "Attack": "132",
+      "Defense": "105",
+      "SpAtk": "132",
+      "SpDef": "105",
+      "Speed": "30"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/abomasnow"
+  },
+  {
+    "key": "0475_Gallade_Mega Gallade",
+    "num": "0475",
+    "name": "Gallade",
+    "extraName": "Mega Gallade",
+    "types": [
+      "Psychic",
+      "Fighting"
+    ],
+    "stats": {
+      "Total": "618",
+      "HP": "68",
+      "Attack": "165",
+      "Defense": "95",
+      "SpAtk": "65",
+      "SpDef": "115",
+      "Speed": "110"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/gallade"
+  },
+  {
+    "key": "0478_Froslass_Mega Froslass",
+    "num": "0478",
+    "name": "Froslass",
+    "extraName": "Mega Froslass",
+    "types": [
+      "Ice",
+      "Ghost"
+    ],
+    "stats": {
+      "Total": "580",
+      "HP": "70",
+      "Attack": "80",
+      "Defense": "70",
+      "SpAtk": "140",
+      "SpDef": "100",
+      "Speed": "120"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/froslass"
+  },
+  {
+    "key": "0479_Rotom_Heat Rotom",
+    "num": "0479",
+    "name": "Rotom",
+    "extraName": "Heat Rotom",
+    "types": [
+      "Electric",
+      "Fire"
+    ],
+    "stats": {
+      "Total": "520",
+      "HP": "50",
+      "Attack": "65",
+      "Defense": "107",
+      "SpAtk": "105",
+      "SpDef": "107",
+      "Speed": "86"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/rotom"
+  },
+  {
+    "key": "0479_Rotom_Wash Rotom",
+    "num": "0479",
+    "name": "Rotom",
+    "extraName": "Wash Rotom",
+    "types": [
+      "Electric",
+      "Water"
+    ],
+    "stats": {
+      "Total": "520",
+      "HP": "50",
+      "Attack": "65",
+      "Defense": "107",
+      "SpAtk": "105",
+      "SpDef": "107",
+      "Speed": "86"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/rotom"
+  },
+  {
+    "key": "0479_Rotom_Frost Rotom",
+    "num": "0479",
+    "name": "Rotom",
+    "extraName": "Frost Rotom",
+    "types": [
+      "Electric",
+      "Ice"
+    ],
+    "stats": {
+      "Total": "520",
+      "HP": "50",
+      "Attack": "65",
+      "Defense": "107",
+      "SpAtk": "105",
+      "SpDef": "107",
+      "Speed": "86"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/rotom"
+  },
+  {
+    "key": "0479_Rotom_Fan Rotom",
+    "num": "0479",
+    "name": "Rotom",
+    "extraName": "Fan Rotom",
+    "types": [
+      "Electric",
+      "Flying"
+    ],
+    "stats": {
+      "Total": "520",
+      "HP": "50",
+      "Attack": "65",
+      "Defense": "107",
+      "SpAtk": "105",
+      "SpDef": "107",
+      "Speed": "86"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/rotom"
+  },
+  {
+    "key": "0479_Rotom_Mow Rotom",
+    "num": "0479",
+    "name": "Rotom",
+    "extraName": "Mow Rotom",
+    "types": [
+      "Electric",
+      "Grass"
+    ],
+    "stats": {
+      "Total": "520",
+      "HP": "50",
+      "Attack": "65",
+      "Defense": "107",
+      "SpAtk": "105",
+      "SpDef": "107",
+      "Speed": "86"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/rotom"
+  },
+  {
+    "key": "0483_Dialga_Origin Forme",
+    "num": "0483",
+    "name": "Dialga",
+    "extraName": "Origin Forme",
+    "types": [
+      "Steel",
+      "Dragon"
+    ],
+    "stats": {
+      "Total": "680",
+      "HP": "100",
+      "Attack": "100",
+      "Defense": "120",
+      "SpAtk": "150",
+      "SpDef": "120",
+      "Speed": "90"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/dialga"
+  },
+  {
+    "key": "0484_Palkia_Origin Forme",
+    "num": "0484",
+    "name": "Palkia",
+    "extraName": "Origin Forme",
+    "types": [
+      "Water",
+      "Dragon"
+    ],
+    "stats": {
+      "Total": "680",
+      "HP": "90",
+      "Attack": "100",
+      "Defense": "100",
+      "SpAtk": "150",
+      "SpDef": "120",
+      "Speed": "120"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/palkia"
+  },
+  {
+    "key": "0485_Heatran_Mega Heatran",
+    "num": "0485",
+    "name": "Heatran",
+    "extraName": "Mega Heatran",
+    "types": [
+      "Fire",
+      "Steel"
+    ],
+    "stats": {
+      "Total": "700",
+      "HP": "91",
+      "Attack": "120",
+      "Defense": "106",
+      "SpAtk": "175",
+      "SpDef": "141",
+      "Speed": "67"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/heatran"
+  },
+  {
+    "key": "0487_Giratina_Altered Forme",
+    "num": "0487",
+    "name": "Giratina",
+    "extraName": "Altered Forme",
+    "types": [
+      "Ghost",
+      "Dragon"
+    ],
+    "stats": {
+      "Total": "680",
+      "HP": "150",
+      "Attack": "100",
+      "Defense": "120",
+      "SpAtk": "100",
+      "SpDef": "120",
+      "Speed": "90"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0487_Giratina_Origin Forme",
+    "num": "0487",
+    "name": "Giratina",
+    "extraName": "Origin Forme",
+    "types": [
+      "Ghost",
+      "Dragon"
+    ],
+    "stats": {
+      "Total": "680",
+      "HP": "150",
+      "Attack": "120",
+      "Defense": "100",
+      "SpAtk": "120",
+      "SpDef": "100",
+      "Speed": "90"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0491_Darkrai_Mega Darkrai",
+    "num": "0491",
+    "name": "Darkrai",
+    "extraName": "Mega Darkrai",
+    "types": [
+      "Dark"
+    ],
+    "stats": {
+      "Total": "700",
+      "HP": "70",
+      "Attack": "120",
+      "Defense": "130",
+      "SpAtk": "165",
+      "SpDef": "130",
+      "Speed": "85"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/darkrai"
+  },
+  {
+    "key": "0492_Shaymin_Land Forme",
+    "num": "0492",
+    "name": "Shaymin",
+    "extraName": "Land Forme",
+    "types": [
+      "Grass"
+    ],
+    "stats": {
+      "Total": "600",
+      "HP": "100",
+      "Attack": "100",
+      "Defense": "100",
+      "SpAtk": "100",
+      "SpDef": "100",
+      "Speed": "100"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0492_Shaymin_Sky Forme",
+    "num": "0492",
+    "name": "Shaymin",
+    "extraName": "Sky Forme",
+    "types": [
+      "Grass",
+      "Flying"
+    ],
+    "stats": {
+      "Total": "600",
+      "HP": "100",
+      "Attack": "103",
+      "Defense": "75",
+      "SpAtk": "120",
+      "SpDef": "75",
+      "Speed": "127"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0500_Emboar_Mega Emboar",
+    "num": "0500",
+    "name": "Emboar",
+    "extraName": "Mega Emboar",
+    "types": [
+      "Fire",
+      "Fighting"
+    ],
+    "stats": {
+      "Total": "628",
+      "HP": "110",
+      "Attack": "148",
+      "Defense": "75",
+      "SpAtk": "110",
+      "SpDef": "110",
+      "Speed": "75"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/emboar"
+  },
+  {
+    "key": "0503_Samurott_Hisuian Samurott",
+    "num": "0503",
+    "name": "Samurott",
+    "extraName": "Hisuian Samurott",
+    "types": [
+      "Water",
+      "Dark"
+    ],
+    "stats": {
+      "Total": "528",
+      "HP": "90",
+      "Attack": "108",
+      "Defense": "80",
+      "SpAtk": "100",
+      "SpDef": "65",
+      "Speed": "85"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/samurott"
+  },
+  {
+    "key": "0530_Excadrill_Mega Excadrill",
+    "num": "0530",
+    "name": "Excadrill",
+    "extraName": "Mega Excadrill",
+    "types": [
+      "Ground",
+      "Steel"
+    ],
+    "stats": {
+      "Total": "608",
+      "HP": "110",
+      "Attack": "165",
+      "Defense": "100",
+      "SpAtk": "65",
+      "SpDef": "65",
+      "Speed": "103"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/excadrill"
+  },
+  {
+    "key": "0531_Audino_Mega Audino",
+    "num": "0531",
+    "name": "Audino",
+    "extraName": "Mega Audino",
+    "types": [
+      "Normal",
+      "Fairy"
+    ],
+    "stats": {
+      "Total": "545",
+      "HP": "103",
+      "Attack": "60",
+      "Defense": "126",
+      "SpAtk": "80",
+      "SpDef": "126",
+      "Speed": "50"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/audino"
+  },
+  {
+    "key": "0545_Scolipede_Mega Scolipede",
+    "num": "0545",
+    "name": "Scolipede",
+    "extraName": "Mega Scolipede",
+    "types": [
+      "Bug",
+      "Poison"
+    ],
+    "stats": {
+      "Total": "585",
+      "HP": "60",
+      "Attack": "140",
+      "Defense": "149",
+      "SpAtk": "75",
+      "SpDef": "99",
+      "Speed": "62"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/scolipede"
+  },
+  {
+    "key": "0549_Lilligant_Hisuian Lilligant",
+    "num": "0549",
+    "name": "Lilligant",
+    "extraName": "Hisuian Lilligant",
+    "types": [
+      "Grass",
+      "Fighting"
+    ],
+    "stats": {
+      "Total": "480",
+      "HP": "70",
+      "Attack": "105",
+      "Defense": "75",
+      "SpAtk": "50",
+      "SpDef": "75",
+      "Speed": "105"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/lilligant"
+  },
+  {
+    "key": "0550_Basculin_Red-Striped Form",
+    "num": "0550",
+    "name": "Basculin",
+    "extraName": "Red-Striped Form",
+    "types": [
+      "Water"
+    ],
+    "stats": {
+      "Total": "460",
+      "HP": "70",
+      "Attack": "92",
+      "Defense": "65",
+      "SpAtk": "80",
+      "SpDef": "55",
+      "Speed": "98"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0550_Basculin_Blue-Striped Form",
+    "num": "0550",
+    "name": "Basculin",
+    "extraName": "Blue-Striped Form",
+    "types": [
+      "Water"
+    ],
+    "stats": {
+      "Total": "460",
+      "HP": "70",
+      "Attack": "92",
+      "Defense": "65",
+      "SpAtk": "80",
+      "SpDef": "55",
+      "Speed": "98"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0550_Basculin_White-Striped Form",
+    "num": "0550",
+    "name": "Basculin",
+    "extraName": "White-Striped Form",
+    "types": [
+      "Water"
+    ],
+    "stats": {
+      "Total": "460",
+      "HP": "70",
+      "Attack": "92",
+      "Defense": "65",
+      "SpAtk": "80",
+      "SpDef": "55",
+      "Speed": "98"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0554_Darumaka_Galarian Darumaka",
+    "num": "0554",
+    "name": "Darumaka",
+    "extraName": "Galarian Darumaka",
+    "types": [
+      "Ice"
+    ],
+    "stats": {
+      "Total": "315",
+      "HP": "70",
+      "Attack": "90",
+      "Defense": "45",
+      "SpAtk": "15",
+      "SpDef": "45",
+      "Speed": "50"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/darumaka"
+  },
+  {
+    "key": "0555_Darmanitan_Standard Mode",
+    "num": "0555",
+    "name": "Darmanitan",
+    "extraName": "Standard Mode",
+    "types": [
+      "Fire"
+    ],
+    "stats": {
+      "Total": "480",
+      "HP": "105",
+      "Attack": "140",
+      "Defense": "55",
+      "SpAtk": "30",
+      "SpDef": "55",
+      "Speed": "95"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0555_Darmanitan_Zen Mode",
+    "num": "0555",
+    "name": "Darmanitan",
+    "extraName": "Zen Mode",
+    "types": [
+      "Fire",
+      "Psychic"
+    ],
+    "stats": {
+      "Total": "540",
+      "HP": "105",
+      "Attack": "30",
+      "Defense": "105",
+      "SpAtk": "140",
+      "SpDef": "105",
+      "Speed": "55"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0555_Darmanitan_Galarian Standard Mode",
+    "num": "0555",
+    "name": "Darmanitan",
+    "extraName": "Galarian Standard Mode",
+    "types": [
+      "Ice"
+    ],
+    "stats": {
+      "Total": "480",
+      "HP": "105",
+      "Attack": "140",
+      "Defense": "55",
+      "SpAtk": "30",
+      "SpDef": "55",
+      "Speed": "95"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0555_Darmanitan_Galarian Zen Mode",
+    "num": "0555",
+    "name": "Darmanitan",
+    "extraName": "Galarian Zen Mode",
+    "types": [
+      "Ice",
+      "Fire"
+    ],
+    "stats": {
+      "Total": "540",
+      "HP": "105",
+      "Attack": "160",
+      "Defense": "55",
+      "SpAtk": "30",
+      "SpDef": "55",
+      "Speed": "135"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0560_Scrafty_Mega Scrafty",
+    "num": "0560",
+    "name": "Scrafty",
+    "extraName": "Mega Scrafty",
+    "types": [
+      "Dark",
+      "Fighting"
+    ],
+    "stats": {
+      "Total": "588",
+      "HP": "65",
+      "Attack": "130",
+      "Defense": "135",
+      "SpAtk": "55",
+      "SpDef": "135",
+      "Speed": "68"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/scrafty"
+  },
+  {
+    "key": "0562_Yamask_Galarian Yamask",
+    "num": "0562",
+    "name": "Yamask",
+    "extraName": "Galarian Yamask",
+    "types": [
+      "Ground",
+      "Ghost"
+    ],
+    "stats": {
+      "Total": "303",
+      "HP": "38",
+      "Attack": "55",
+      "Defense": "85",
+      "SpAtk": "30",
+      "SpDef": "65",
+      "Speed": "30"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/yamask"
+  },
+  {
+    "key": "0570_Zorua_Hisuian Zorua",
+    "num": "0570",
+    "name": "Zorua",
+    "extraName": "Hisuian Zorua",
+    "types": [
+      "Normal",
+      "Ghost"
+    ],
+    "stats": {
+      "Total": "330",
+      "HP": "35",
+      "Attack": "60",
+      "Defense": "40",
+      "SpAtk": "85",
+      "SpDef": "40",
+      "Speed": "70"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/zorua"
+  },
+  {
+    "key": "0571_Zoroark_Hisuian Zoroark",
+    "num": "0571",
+    "name": "Zoroark",
+    "extraName": "Hisuian Zoroark",
+    "types": [
+      "Normal",
+      "Ghost"
+    ],
+    "stats": {
+      "Total": "510",
+      "HP": "55",
+      "Attack": "100",
+      "Defense": "60",
+      "SpAtk": "125",
+      "SpDef": "60",
+      "Speed": "110"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/zoroark"
+  },
+  {
+    "key": "0604_Eelektross_Mega Eelektross",
+    "num": "0604",
+    "name": "Eelektross",
+    "extraName": "Mega Eelektross",
+    "types": [
+      "Electric"
+    ],
+    "stats": {
+      "Total": "615",
+      "HP": "85",
+      "Attack": "145",
+      "Defense": "80",
+      "SpAtk": "135",
+      "SpDef": "90",
+      "Speed": "80"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/eelektross"
+  },
+  {
+    "key": "0609_Chandelure_Mega Chandelure",
+    "num": "0609",
+    "name": "Chandelure",
+    "extraName": "Mega Chandelure",
+    "types": [
+      "Ghost",
+      "Fire"
+    ],
+    "stats": {
+      "Total": "620",
+      "HP": "60",
+      "Attack": "75",
+      "Defense": "110",
+      "SpAtk": "175",
+      "SpDef": "110",
+      "Speed": "90"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/chandelure"
+  },
+  {
+    "key": "0618_Stunfisk_Galarian Stunfisk",
+    "num": "0618",
+    "name": "Stunfisk",
+    "extraName": "Galarian Stunfisk",
+    "types": [
+      "Ground",
+      "Steel"
+    ],
+    "stats": {
+      "Total": "471",
+      "HP": "109",
+      "Attack": "81",
+      "Defense": "99",
+      "SpAtk": "66",
+      "SpDef": "84",
+      "Speed": "32"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/stunfisk"
+  },
+  {
+    "key": "0623_Golurk_Mega Golurk",
+    "num": "0623",
+    "name": "Golurk",
+    "extraName": "Mega Golurk",
+    "types": [
+      "Ground",
+      "Ghost"
+    ],
+    "stats": {
+      "Total": "583",
+      "HP": "89",
+      "Attack": "159",
+      "Defense": "105",
+      "SpAtk": "70",
+      "SpDef": "105",
+      "Speed": "55"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/golurk"
+  },
+  {
+    "key": "0628_Braviary_Hisuian Braviary",
+    "num": "0628",
+    "name": "Braviary",
+    "extraName": "Hisuian Braviary",
+    "types": [
+      "Psychic",
+      "Flying"
+    ],
+    "stats": {
+      "Total": "510",
+      "HP": "110",
+      "Attack": "83",
+      "Defense": "70",
+      "SpAtk": "112",
+      "SpDef": "70",
+      "Speed": "65"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/braviary"
+  },
+  {
+    "key": "0641_Tornadus_Incarnate Forme",
+    "num": "0641",
+    "name": "Tornadus",
+    "extraName": "Incarnate Forme",
+    "types": [
+      "Flying"
+    ],
+    "stats": {
+      "Total": "580",
+      "HP": "79",
+      "Attack": "115",
+      "Defense": "70",
+      "SpAtk": "125",
+      "SpDef": "80",
+      "Speed": "111"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0641_Tornadus_Therian Forme",
+    "num": "0641",
+    "name": "Tornadus",
+    "extraName": "Therian Forme",
+    "types": [
+      "Flying"
+    ],
+    "stats": {
+      "Total": "580",
+      "HP": "79",
+      "Attack": "100",
+      "Defense": "80",
+      "SpAtk": "110",
+      "SpDef": "90",
+      "Speed": "121"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0642_Thundurus_Incarnate Forme",
+    "num": "0642",
+    "name": "Thundurus",
+    "extraName": "Incarnate Forme",
+    "types": [
+      "Electric",
+      "Flying"
+    ],
+    "stats": {
+      "Total": "580",
+      "HP": "79",
+      "Attack": "115",
+      "Defense": "70",
+      "SpAtk": "125",
+      "SpDef": "80",
+      "Speed": "111"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0642_Thundurus_Therian Forme",
+    "num": "0642",
+    "name": "Thundurus",
+    "extraName": "Therian Forme",
+    "types": [
+      "Electric",
+      "Flying"
+    ],
+    "stats": {
+      "Total": "580",
+      "HP": "79",
+      "Attack": "105",
+      "Defense": "70",
+      "SpAtk": "145",
+      "SpDef": "80",
+      "Speed": "101"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0645_Landorus_Incarnate Forme",
+    "num": "0645",
+    "name": "Landorus",
+    "extraName": "Incarnate Forme",
+    "types": [
+      "Ground",
+      "Flying"
+    ],
+    "stats": {
+      "Total": "600",
+      "HP": "89",
+      "Attack": "125",
+      "Defense": "90",
+      "SpAtk": "115",
+      "SpDef": "80",
+      "Speed": "101"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0645_Landorus_Therian Forme",
+    "num": "0645",
+    "name": "Landorus",
+    "extraName": "Therian Forme",
+    "types": [
+      "Ground",
+      "Flying"
+    ],
+    "stats": {
+      "Total": "600",
+      "HP": "89",
+      "Attack": "145",
+      "Defense": "90",
+      "SpAtk": "105",
+      "SpDef": "80",
+      "Speed": "91"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0646_Kyurem_White Kyurem",
+    "num": "0646",
+    "name": "Kyurem",
+    "extraName": "White Kyurem",
+    "types": [
+      "Dragon",
+      "Ice"
+    ],
+    "stats": {
+      "Total": "700",
+      "HP": "125",
+      "Attack": "120",
+      "Defense": "90",
+      "SpAtk": "170",
+      "SpDef": "100",
+      "Speed": "95"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/kyurem"
+  },
+  {
+    "key": "0646_Kyurem_Black Kyurem",
+    "num": "0646",
+    "name": "Kyurem",
+    "extraName": "Black Kyurem",
+    "types": [
+      "Dragon",
+      "Ice"
+    ],
+    "stats": {
+      "Total": "700",
+      "HP": "125",
+      "Attack": "170",
+      "Defense": "100",
+      "SpAtk": "120",
+      "SpDef": "90",
+      "Speed": "95"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/kyurem"
+  },
+  {
+    "key": "0647_Keldeo_Ordinary Form",
+    "num": "0647",
+    "name": "Keldeo",
+    "extraName": "Ordinary Form",
+    "types": [
+      "Water",
+      "Fighting"
+    ],
+    "stats": {
+      "Total": "580",
+      "HP": "91",
+      "Attack": "72",
+      "Defense": "90",
+      "SpAtk": "129",
+      "SpDef": "90",
+      "Speed": "108"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0647_Keldeo_Resolute Form",
+    "num": "0647",
+    "name": "Keldeo",
+    "extraName": "Resolute Form",
+    "types": [
+      "Water",
+      "Fighting"
+    ],
+    "stats": {
+      "Total": "580",
+      "HP": "91",
+      "Attack": "72",
+      "Defense": "90",
+      "SpAtk": "129",
+      "SpDef": "90",
+      "Speed": "108"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0648_Meloetta_Aria Forme",
+    "num": "0648",
+    "name": "Meloetta",
+    "extraName": "Aria Forme",
+    "types": [
+      "Normal",
+      "Psychic"
+    ],
+    "stats": {
+      "Total": "600",
+      "HP": "100",
+      "Attack": "77",
+      "Defense": "77",
+      "SpAtk": "128",
+      "SpDef": "128",
+      "Speed": "90"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0648_Meloetta_Pirouette Forme",
+    "num": "0648",
+    "name": "Meloetta",
+    "extraName": "Pirouette Forme",
+    "types": [
+      "Normal",
+      "Fighting"
+    ],
+    "stats": {
+      "Total": "600",
+      "HP": "100",
+      "Attack": "128",
+      "Defense": "90",
+      "SpAtk": "77",
+      "SpDef": "77",
+      "Speed": "128"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0652_Chesnaught_Mega Chesnaught",
+    "num": "0652",
+    "name": "Chesnaught",
+    "extraName": "Mega Chesnaught",
+    "types": [
+      "Grass",
+      "Fighting"
+    ],
+    "stats": {
+      "Total": "630",
+      "HP": "88",
+      "Attack": "137",
+      "Defense": "172",
+      "SpAtk": "74",
+      "SpDef": "115",
+      "Speed": "44"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/chesnaught"
+  },
+  {
+    "key": "0655_Delphox_Mega Delphox",
+    "num": "0655",
+    "name": "Delphox",
+    "extraName": "Mega Delphox",
+    "types": [
+      "Fire",
+      "Psychic"
+    ],
+    "stats": {
+      "Total": "634",
+      "HP": "75",
+      "Attack": "69",
+      "Defense": "72",
+      "SpAtk": "159",
+      "SpDef": "125",
+      "Speed": "134"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/delphox"
+  },
+  {
+    "key": "0658_Greninja_Ash-Greninja",
+    "num": "0658",
+    "name": "Greninja",
+    "extraName": "Ash-Greninja",
+    "types": [
+      "Water",
+      "Dark"
+    ],
+    "stats": {
+      "Total": "640",
+      "HP": "72",
+      "Attack": "145",
+      "Defense": "67",
+      "SpAtk": "153",
+      "SpDef": "71",
+      "Speed": "132"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/greninja"
+  },
+  {
+    "key": "0658_Greninja_Mega Greninja",
+    "num": "0658",
+    "name": "Greninja",
+    "extraName": "Mega Greninja",
+    "types": [
+      "Water",
+      "Dark"
+    ],
+    "stats": {
+      "Total": "630",
+      "HP": "72",
+      "Attack": "125",
+      "Defense": "77",
+      "SpAtk": "133",
+      "SpDef": "81",
+      "Speed": "142"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/greninja"
+  },
+  {
+    "key": "0668_Pyroar_Mega Pyroar",
+    "num": "0668",
+    "name": "Pyroar",
+    "extraName": "Mega Pyroar",
+    "types": [
+      "Fire",
+      "Normal"
+    ],
+    "stats": {
+      "Total": "607",
+      "HP": "86",
+      "Attack": "88",
+      "Defense": "92",
+      "SpAtk": "129",
+      "SpDef": "86",
+      "Speed": "126"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/pyroar"
+  },
+  {
+    "key": "0670_Floette_Eternal Flower",
+    "num": "0670",
+    "name": "Floette",
+    "extraName": "Eternal Flower",
+    "types": [
+      "Fairy"
+    ],
+    "stats": {
+      "Total": "551",
+      "HP": "74",
+      "Attack": "65",
+      "Defense": "67",
+      "SpAtk": "125",
+      "SpDef": "128",
+      "Speed": "92"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/floette"
+  },
+  {
+    "key": "0670_Floette_Mega Floette",
+    "num": "0670",
+    "name": "Floette",
+    "extraName": "Mega Floette",
+    "types": [
+      "Fairy"
+    ],
+    "stats": {
+      "Total": "651",
+      "HP": "74",
+      "Attack": "85",
+      "Defense": "87",
+      "SpAtk": "155",
+      "SpDef": "148",
+      "Speed": "102"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/floette"
+  },
+  {
+    "key": "0678_Meowstic_Mega Meowstic",
+    "num": "0678",
+    "name": "Meowstic",
+    "extraName": "Mega Meowstic",
+    "types": [
+      "Psychic"
+    ],
+    "stats": {
+      "Total": "566",
+      "HP": "74",
+      "Attack": "48",
+      "Defense": "76",
+      "SpAtk": "143",
+      "SpDef": "101",
+      "Speed": "124"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0681_Aegislash_Shield Forme",
+    "num": "0681",
+    "name": "Aegislash",
+    "extraName": "Shield Forme",
+    "types": [
+      "Steel",
+      "Ghost"
+    ],
+    "stats": {
+      "Total": "500",
+      "HP": "60",
+      "Attack": "50",
+      "Defense": "140",
+      "SpAtk": "50",
+      "SpDef": "140",
+      "Speed": "60"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0681_Aegislash_Blade Forme",
+    "num": "0681",
+    "name": "Aegislash",
+    "extraName": "Blade Forme",
+    "types": [
+      "Steel",
+      "Ghost"
+    ],
+    "stats": {
+      "Total": "500",
+      "HP": "60",
+      "Attack": "140",
+      "Defense": "50",
+      "SpAtk": "140",
+      "SpDef": "50",
+      "Speed": "60"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0687_Malamar_Mega Malamar",
+    "num": "0687",
+    "name": "Malamar",
+    "extraName": "Mega Malamar",
+    "types": [
+      "Dark",
+      "Psychic"
+    ],
+    "stats": {
+      "Total": "582",
+      "HP": "86",
+      "Attack": "102",
+      "Defense": "88",
+      "SpAtk": "98",
+      "SpDef": "120",
+      "Speed": "88"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/malamar"
+  },
+  {
+    "key": "0689_Barbaracle_Mega Barbaracle",
+    "num": "0689",
+    "name": "Barbaracle",
+    "extraName": "Mega Barbaracle",
+    "types": [
+      "Rock",
+      "Fighting"
+    ],
+    "stats": {
+      "Total": "600",
+      "HP": "72",
+      "Attack": "140",
+      "Defense": "130",
+      "SpAtk": "64",
+      "SpDef": "106",
+      "Speed": "88"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/barbaracle"
+  },
+  {
+    "key": "0691_Dragalge_Mega Dragalge",
+    "num": "0691",
+    "name": "Dragalge",
+    "extraName": "Mega Dragalge",
+    "types": [
+      "Poison",
+      "Dragon"
+    ],
+    "stats": {
+      "Total": "594",
+      "HP": "65",
+      "Attack": "85",
+      "Defense": "105",
+      "SpAtk": "132",
+      "SpDef": "163",
+      "Speed": "44"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/dragalge"
+  },
+  {
+    "key": "0701_Hawlucha_Mega Hawlucha",
+    "num": "0701",
+    "name": "Hawlucha",
+    "extraName": "Mega Hawlucha",
+    "types": [
+      "Fighting",
+      "Flying"
+    ],
+    "stats": {
+      "Total": "600",
+      "HP": "78",
+      "Attack": "137",
+      "Defense": "100",
+      "SpAtk": "74",
+      "SpDef": "93",
+      "Speed": "118"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/hawlucha"
+  },
+  {
+    "key": "0705_Sliggoo_Hisuian Sliggoo",
+    "num": "0705",
+    "name": "Sliggoo",
+    "extraName": "Hisuian Sliggoo",
+    "types": [
+      "Steel",
+      "Dragon"
+    ],
+    "stats": {
+      "Total": "452",
+      "HP": "58",
+      "Attack": "75",
+      "Defense": "83",
+      "SpAtk": "83",
+      "SpDef": "113",
+      "Speed": "40"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/sliggoo"
+  },
+  {
+    "key": "0706_Goodra_Hisuian Goodra",
+    "num": "0706",
+    "name": "Goodra",
+    "extraName": "Hisuian Goodra",
+    "types": [
+      "Steel",
+      "Dragon"
+    ],
+    "stats": {
+      "Total": "600",
+      "HP": "80",
+      "Attack": "100",
+      "Defense": "100",
+      "SpAtk": "110",
+      "SpDef": "150",
+      "Speed": "60"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/goodra"
+  },
+  {
+    "key": "0710_Pumpkaboo_Average Size",
+    "num": "0710",
+    "name": "Pumpkaboo",
+    "extraName": "Average Size",
+    "types": [
+      "Ghost",
+      "Grass"
+    ],
+    "stats": {
+      "Total": "335",
+      "HP": "49",
+      "Attack": "66",
+      "Defense": "70",
+      "SpAtk": "44",
+      "SpDef": "55",
+      "Speed": "51"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0710_Pumpkaboo_Small Size",
+    "num": "0710",
+    "name": "Pumpkaboo",
+    "extraName": "Small Size",
+    "types": [
+      "Ghost",
+      "Grass"
+    ],
+    "stats": {
+      "Total": "335",
+      "HP": "44",
+      "Attack": "66",
+      "Defense": "70",
+      "SpAtk": "44",
+      "SpDef": "55",
+      "Speed": "56"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0710_Pumpkaboo_Large Size",
+    "num": "0710",
+    "name": "Pumpkaboo",
+    "extraName": "Large Size",
+    "types": [
+      "Ghost",
+      "Grass"
+    ],
+    "stats": {
+      "Total": "335",
+      "HP": "54",
+      "Attack": "66",
+      "Defense": "70",
+      "SpAtk": "44",
+      "SpDef": "55",
+      "Speed": "46"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0710_Pumpkaboo_Super Size",
+    "num": "0710",
+    "name": "Pumpkaboo",
+    "extraName": "Super Size",
+    "types": [
+      "Ghost",
+      "Grass"
+    ],
+    "stats": {
+      "Total": "335",
+      "HP": "59",
+      "Attack": "66",
+      "Defense": "70",
+      "SpAtk": "44",
+      "SpDef": "55",
+      "Speed": "41"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0711_Gourgeist_Average Size",
+    "num": "0711",
+    "name": "Gourgeist",
+    "extraName": "Average Size",
+    "types": [
+      "Ghost",
+      "Grass"
+    ],
+    "stats": {
+      "Total": "494",
+      "HP": "65",
+      "Attack": "90",
+      "Defense": "122",
+      "SpAtk": "58",
+      "SpDef": "75",
+      "Speed": "84"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0711_Gourgeist_Small Size",
+    "num": "0711",
+    "name": "Gourgeist",
+    "extraName": "Small Size",
+    "types": [
+      "Ghost",
+      "Grass"
+    ],
+    "stats": {
+      "Total": "494",
+      "HP": "55",
+      "Attack": "85",
+      "Defense": "122",
+      "SpAtk": "58",
+      "SpDef": "75",
+      "Speed": "99"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0711_Gourgeist_Large Size",
+    "num": "0711",
+    "name": "Gourgeist",
+    "extraName": "Large Size",
+    "types": [
+      "Ghost",
+      "Grass"
+    ],
+    "stats": {
+      "Total": "494",
+      "HP": "75",
+      "Attack": "95",
+      "Defense": "122",
+      "SpAtk": "58",
+      "SpDef": "75",
+      "Speed": "69"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0711_Gourgeist_Super Size",
+    "num": "0711",
+    "name": "Gourgeist",
+    "extraName": "Super Size",
+    "types": [
+      "Ghost",
+      "Grass"
+    ],
+    "stats": {
+      "Total": "494",
+      "HP": "85",
+      "Attack": "100",
+      "Defense": "122",
+      "SpAtk": "58",
+      "SpDef": "75",
+      "Speed": "54"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0713_Avalugg_Hisuian Avalugg",
+    "num": "0713",
+    "name": "Avalugg",
+    "extraName": "Hisuian Avalugg",
+    "types": [
+      "Ice",
+      "Rock"
+    ],
+    "stats": {
+      "Total": "514",
+      "HP": "95",
+      "Attack": "127",
+      "Defense": "184",
+      "SpAtk": "34",
+      "SpDef": "36",
+      "Speed": "38"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/avalugg"
+  },
+  {
+    "key": "0718_Zygarde_50% Forme",
+    "num": "0718",
+    "name": "Zygarde",
+    "extraName": "50% Forme",
+    "types": [
+      "Dragon",
+      "Ground"
+    ],
+    "stats": {
+      "Total": "600",
+      "HP": "108",
+      "Attack": "100",
+      "Defense": "121",
+      "SpAtk": "81",
+      "SpDef": "95",
+      "Speed": "95"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0718_Zygarde_10% Forme",
+    "num": "0718",
+    "name": "Zygarde",
+    "extraName": "10% Forme",
+    "types": [
+      "Dragon",
+      "Ground"
+    ],
+    "stats": {
+      "Total": "486",
+      "HP": "54",
+      "Attack": "100",
+      "Defense": "71",
+      "SpAtk": "61",
+      "SpDef": "85",
+      "Speed": "115"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0718_Zygarde_Complete Forme",
+    "num": "0718",
+    "name": "Zygarde",
+    "extraName": "Complete Forme",
+    "types": [
+      "Dragon",
+      "Ground"
+    ],
+    "stats": {
+      "Total": "708",
+      "HP": "216",
+      "Attack": "100",
+      "Defense": "121",
+      "SpAtk": "91",
+      "SpDef": "95",
+      "Speed": "85"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0718_Zygarde_Mega Zygarde",
+    "num": "0718",
+    "name": "Zygarde",
+    "extraName": "Mega Zygarde",
+    "types": [
+      "Dragon",
+      "Ground"
+    ],
+    "stats": {
+      "Total": "778",
+      "HP": "216",
+      "Attack": "70",
+      "Defense": "91",
+      "SpAtk": "216",
+      "SpDef": "85",
+      "Speed": "100"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0719_Diancie_Mega Diancie",
+    "num": "0719",
+    "name": "Diancie",
+    "extraName": "Mega Diancie",
+    "types": [
+      "Rock",
+      "Fairy"
+    ],
+    "stats": {
+      "Total": "700",
+      "HP": "50",
+      "Attack": "160",
+      "Defense": "110",
+      "SpAtk": "160",
+      "SpDef": "110",
+      "Speed": "110"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/diancie"
+  },
+  {
+    "key": "0720_Hoopa_Hoopa Confined",
+    "num": "0720",
+    "name": "Hoopa",
+    "extraName": "Hoopa Confined",
+    "types": [
+      "Psychic",
+      "Ghost"
+    ],
+    "stats": {
+      "Total": "600",
+      "HP": "80",
+      "Attack": "110",
+      "Defense": "60",
+      "SpAtk": "150",
+      "SpDef": "130",
+      "Speed": "70"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0720_Hoopa_Hoopa Unbound",
+    "num": "0720",
+    "name": "Hoopa",
+    "extraName": "Hoopa Unbound",
+    "types": [
+      "Psychic",
+      "Dark"
+    ],
+    "stats": {
+      "Total": "680",
+      "HP": "80",
+      "Attack": "160",
+      "Defense": "60",
+      "SpAtk": "170",
+      "SpDef": "130",
+      "Speed": "80"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0724_Decidueye_Hisuian Decidueye",
+    "num": "0724",
+    "name": "Decidueye",
+    "extraName": "Hisuian Decidueye",
+    "types": [
+      "Grass",
+      "Fighting"
+    ],
+    "stats": {
+      "Total": "530",
+      "HP": "88",
+      "Attack": "112",
+      "Defense": "80",
+      "SpAtk": "95",
+      "SpDef": "95",
+      "Speed": "60"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/decidueye"
+  },
+  {
+    "key": "0740_Crabominable_Mega Crabominable",
+    "num": "0740",
+    "name": "Crabominable",
+    "extraName": "Mega Crabominable",
+    "types": [
+      "Fighting",
+      "Ice"
+    ],
+    "stats": {
+      "Total": "578",
+      "HP": "97",
+      "Attack": "157",
+      "Defense": "122",
+      "SpAtk": "62",
+      "SpDef": "107",
+      "Speed": "33"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/crabominable"
+  },
+  {
+    "key": "0741_Oricorio_Baile Style",
+    "num": "0741",
+    "name": "Oricorio",
+    "extraName": "Baile Style",
+    "types": [
+      "Fire",
+      "Flying"
+    ],
+    "stats": {
+      "Total": "476",
+      "HP": "75",
+      "Attack": "70",
+      "Defense": "70",
+      "SpAtk": "98",
+      "SpDef": "70",
+      "Speed": "93"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0741_Oricorio_Pom-Pom Style",
+    "num": "0741",
+    "name": "Oricorio",
+    "extraName": "Pom-Pom Style",
+    "types": [
+      "Electric",
+      "Flying"
+    ],
+    "stats": {
+      "Total": "476",
+      "HP": "75",
+      "Attack": "70",
+      "Defense": "70",
+      "SpAtk": "98",
+      "SpDef": "70",
+      "Speed": "93"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0741_Oricorio_Pa'u Style",
+    "num": "0741",
+    "name": "Oricorio",
+    "extraName": "Pa'u Style",
+    "types": [
+      "Psychic",
+      "Flying"
+    ],
+    "stats": {
+      "Total": "476",
+      "HP": "75",
+      "Attack": "70",
+      "Defense": "70",
+      "SpAtk": "98",
+      "SpDef": "70",
+      "Speed": "93"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0741_Oricorio_Sensu Style",
+    "num": "0741",
+    "name": "Oricorio",
+    "extraName": "Sensu Style",
+    "types": [
+      "Ghost",
+      "Flying"
+    ],
+    "stats": {
+      "Total": "476",
+      "HP": "75",
+      "Attack": "70",
+      "Defense": "70",
+      "SpAtk": "98",
+      "SpDef": "70",
+      "Speed": "93"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0744_Rockruff_Own Tempo Rockruff",
+    "num": "0744",
+    "name": "Rockruff",
+    "extraName": "Own Tempo Rockruff",
+    "types": [
+      "Rock"
+    ],
+    "stats": {
+      "Total": "280",
+      "HP": "45",
+      "Attack": "65",
+      "Defense": "40",
+      "SpAtk": "30",
+      "SpDef": "40",
+      "Speed": "60"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/rockruff"
+  },
+  {
+    "key": "0745_Lycanroc_Midday Form",
+    "num": "0745",
+    "name": "Lycanroc",
+    "extraName": "Midday Form",
+    "types": [
+      "Rock"
+    ],
+    "stats": {
+      "Total": "487",
+      "HP": "75",
+      "Attack": "115",
+      "Defense": "65",
+      "SpAtk": "55",
+      "SpDef": "65",
+      "Speed": "112"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0745_Lycanroc_Midnight Form",
+    "num": "0745",
+    "name": "Lycanroc",
+    "extraName": "Midnight Form",
+    "types": [
+      "Rock"
+    ],
+    "stats": {
+      "Total": "487",
+      "HP": "85",
+      "Attack": "115",
+      "Defense": "75",
+      "SpAtk": "55",
+      "SpDef": "75",
+      "Speed": "82"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0745_Lycanroc_Dusk Form",
+    "num": "0745",
+    "name": "Lycanroc",
+    "extraName": "Dusk Form",
+    "types": [
+      "Rock"
+    ],
+    "stats": {
+      "Total": "487",
+      "HP": "75",
+      "Attack": "117",
+      "Defense": "65",
+      "SpAtk": "55",
+      "SpDef": "65",
+      "Speed": "110"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0746_Wishiwashi_Solo Form",
+    "num": "0746",
+    "name": "Wishiwashi",
+    "extraName": "Solo Form",
+    "types": [
+      "Water"
+    ],
+    "stats": {
+      "Total": "175",
+      "HP": "45",
+      "Attack": "20",
+      "Defense": "20",
+      "SpAtk": "25",
+      "SpDef": "25",
+      "Speed": "40"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0746_Wishiwashi_School Form",
+    "num": "0746",
+    "name": "Wishiwashi",
+    "extraName": "School Form",
+    "types": [
+      "Water"
+    ],
+    "stats": {
+      "Total": "620",
+      "HP": "45",
+      "Attack": "140",
+      "Defense": "130",
+      "SpAtk": "140",
+      "SpDef": "135",
+      "Speed": "30"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0768_Golisopod_Mega Golisopod",
+    "num": "0768",
+    "name": "Golisopod",
+    "extraName": "Mega Golisopod",
+    "types": [
+      "Bug",
+      "Steel"
+    ],
+    "stats": {
+      "Total": "630",
+      "HP": "75",
+      "Attack": "150",
+      "Defense": "175",
+      "SpAtk": "70",
+      "SpDef": "120",
+      "Speed": "40"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/golisopod"
+  },
+  {
+    "key": "0774_Minior_Meteor Form",
+    "num": "0774",
+    "name": "Minior",
+    "extraName": "Meteor Form",
+    "types": [
+      "Rock",
+      "Flying"
+    ],
+    "stats": {
+      "Total": "440",
+      "HP": "60",
+      "Attack": "60",
+      "Defense": "100",
+      "SpAtk": "60",
+      "SpDef": "100",
+      "Speed": "60"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0774_Minior_Core Form",
+    "num": "0774",
+    "name": "Minior",
+    "extraName": "Core Form",
+    "types": [
+      "Rock",
+      "Flying"
+    ],
+    "stats": {
+      "Total": "500",
+      "HP": "60",
+      "Attack": "100",
+      "Defense": "60",
+      "SpAtk": "100",
+      "SpDef": "60",
+      "Speed": "120"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0780_Drampa_Mega Drampa",
+    "num": "0780",
+    "name": "Drampa",
+    "extraName": "Mega Drampa",
+    "types": [
+      "Normal",
+      "Dragon"
+    ],
+    "stats": {
+      "Total": "585",
+      "HP": "78",
+      "Attack": "85",
+      "Defense": "110",
+      "SpAtk": "160",
+      "SpDef": "116",
+      "Speed": "36"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/drampa"
+  },
+  {
+    "key": "0800_Necrozma_Dusk Mane Necrozma",
+    "num": "0800",
+    "name": "Necrozma",
+    "extraName": "Dusk Mane Necrozma",
+    "types": [
+      "Psychic",
+      "Steel"
+    ],
+    "stats": {
+      "Total": "680",
+      "HP": "97",
+      "Attack": "157",
+      "Defense": "127",
+      "SpAtk": "113",
+      "SpDef": "109",
+      "Speed": "77"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/necrozma"
+  },
+  {
+    "key": "0800_Necrozma_Dawn Wings Necrozma",
+    "num": "0800",
+    "name": "Necrozma",
+    "extraName": "Dawn Wings Necrozma",
+    "types": [
+      "Psychic",
+      "Ghost"
+    ],
+    "stats": {
+      "Total": "680",
+      "HP": "97",
+      "Attack": "113",
+      "Defense": "109",
+      "SpAtk": "157",
+      "SpDef": "127",
+      "Speed": "77"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/necrozma"
+  },
+  {
+    "key": "0800_Necrozma_Ultra Necrozma",
+    "num": "0800",
+    "name": "Necrozma",
+    "extraName": "Ultra Necrozma",
+    "types": [
+      "Psychic",
+      "Dragon"
+    ],
+    "stats": {
+      "Total": "754",
+      "HP": "97",
+      "Attack": "167",
+      "Defense": "97",
+      "SpAtk": "167",
+      "SpDef": "97",
+      "Speed": "129"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/necrozma"
+  },
+  {
+    "key": "0801_Magearna_Mega Magearna",
+    "num": "0801",
+    "name": "Magearna",
+    "extraName": "Mega Magearna",
+    "types": [
+      "Steel",
+      "Fairy"
+    ],
+    "stats": {
+      "Total": "700",
+      "HP": "80",
+      "Attack": "125",
+      "Defense": "115",
+      "SpAtk": "170",
+      "SpDef": "115",
+      "Speed": "95"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/magearna"
+  },
+  {
+    "key": "0807_Zeraora_Mega Zeraora",
+    "num": "0807",
+    "name": "Zeraora",
+    "extraName": "Mega Zeraora",
+    "types": [
+      "Electric"
+    ],
+    "stats": {
+      "Total": "700",
+      "HP": "88",
+      "Attack": "157",
+      "Defense": "75",
+      "SpAtk": "147",
+      "SpDef": "80",
+      "Speed": "153"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/zeraora"
+  },
+  {
+    "key": "0849_Toxtricity_Amped Form",
+    "num": "0849",
+    "name": "Toxtricity",
+    "extraName": "Amped Form",
+    "types": [
+      "Electric",
+      "Poison"
+    ],
+    "stats": {
+      "Total": "502",
+      "HP": "75",
+      "Attack": "98",
+      "Defense": "70",
+      "SpAtk": "114",
+      "SpDef": "70",
+      "Speed": "75"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0849_Toxtricity_Low Key Form",
+    "num": "0849",
+    "name": "Toxtricity",
+    "extraName": "Low Key Form",
+    "types": [
+      "Electric",
+      "Poison"
+    ],
+    "stats": {
+      "Total": "502",
+      "HP": "75",
+      "Attack": "98",
+      "Defense": "70",
+      "SpAtk": "114",
+      "SpDef": "70",
+      "Speed": "75"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0870_Falinks_Mega Falinks",
+    "num": "0870",
+    "name": "Falinks",
+    "extraName": "Mega Falinks",
+    "types": [
+      "Fighting"
+    ],
+    "stats": {
+      "Total": "570",
+      "HP": "65",
+      "Attack": "135",
+      "Defense": "135",
+      "SpAtk": "70",
+      "SpDef": "65",
+      "Speed": "100"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/falinks"
+  },
+  {
+    "key": "0875_Eiscue_Ice Face",
+    "num": "0875",
+    "name": "Eiscue",
+    "extraName": "Ice Face",
+    "types": [
+      "Ice"
+    ],
+    "stats": {
+      "Total": "470",
+      "HP": "75",
+      "Attack": "80",
+      "Defense": "110",
+      "SpAtk": "65",
+      "SpDef": "90",
+      "Speed": "50"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0875_Eiscue_Noice Face",
+    "num": "0875",
+    "name": "Eiscue",
+    "extraName": "Noice Face",
+    "types": [
+      "Ice"
+    ],
+    "stats": {
+      "Total": "470",
+      "HP": "75",
+      "Attack": "80",
+      "Defense": "70",
+      "SpAtk": "65",
+      "SpDef": "50",
+      "Speed": "130"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0877_Morpeko_Full Belly Mode",
+    "num": "0877",
+    "name": "Morpeko",
+    "extraName": "Full Belly Mode",
+    "types": [
+      "Electric",
+      "Dark"
+    ],
+    "stats": {
+      "Total": "436",
+      "HP": "58",
+      "Attack": "95",
+      "Defense": "58",
+      "SpAtk": "70",
+      "SpDef": "58",
+      "Speed": "97"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0877_Morpeko_Hangry Mode",
+    "num": "0877",
+    "name": "Morpeko",
+    "extraName": "Hangry Mode",
+    "types": [
+      "Electric",
+      "Dark"
+    ],
+    "stats": {
+      "Total": "436",
+      "HP": "58",
+      "Attack": "95",
+      "Defense": "58",
+      "SpAtk": "70",
+      "SpDef": "58",
+      "Speed": "97"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0888_Zacian_Hero of Many Battles",
+    "num": "0888",
+    "name": "Zacian",
+    "extraName": "Hero of Many Battles",
+    "types": [
+      "Fairy"
+    ],
+    "stats": {
+      "Total": "660",
+      "HP": "92",
+      "Attack": "120",
+      "Defense": "115",
+      "SpAtk": "80",
+      "SpDef": "115",
+      "Speed": "138"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0888_Zacian_Crowned Sword",
+    "num": "0888",
+    "name": "Zacian",
+    "extraName": "Crowned Sword",
+    "types": [
+      "Fairy",
+      "Steel"
+    ],
+    "stats": {
+      "Total": "700",
+      "HP": "92",
+      "Attack": "150",
+      "Defense": "115",
+      "SpAtk": "80",
+      "SpDef": "115",
+      "Speed": "148"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0889_Zamazenta_Hero of Many Battles",
+    "num": "0889",
+    "name": "Zamazenta",
+    "extraName": "Hero of Many Battles",
+    "types": [
+      "Fighting"
+    ],
+    "stats": {
+      "Total": "660",
+      "HP": "92",
+      "Attack": "120",
+      "Defense": "115",
+      "SpAtk": "80",
+      "SpDef": "115",
+      "Speed": "138"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0889_Zamazenta_Crowned Shield",
+    "num": "0889",
+    "name": "Zamazenta",
+    "extraName": "Crowned Shield",
+    "types": [
+      "Fighting",
+      "Steel"
+    ],
+    "stats": {
+      "Total": "700",
+      "HP": "92",
+      "Attack": "120",
+      "Defense": "140",
+      "SpAtk": "80",
+      "SpDef": "140",
+      "Speed": "128"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0890_Eternatus_Eternamax",
+    "num": "0890",
+    "name": "Eternatus",
+    "extraName": "Eternamax",
+    "types": [
+      "Poison",
+      "Dragon"
+    ],
+    "stats": {
+      "Total": "1125",
+      "HP": "255",
+      "Attack": "115",
+      "Defense": "250",
+      "SpAtk": "125",
+      "SpDef": "250",
+      "Speed": "130"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/eternatus"
+  },
+  {
+    "key": "0892_Urshifu_Single Strike Style",
+    "num": "0892",
+    "name": "Urshifu",
+    "extraName": "Single Strike Style",
+    "types": [
+      "Fighting",
+      "Dark"
+    ],
+    "stats": {
+      "Total": "550",
+      "HP": "100",
+      "Attack": "130",
+      "Defense": "100",
+      "SpAtk": "63",
+      "SpDef": "60",
+      "Speed": "97"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0892_Urshifu_Rapid Strike Style",
+    "num": "0892",
+    "name": "Urshifu",
+    "extraName": "Rapid Strike Style",
+    "types": [
+      "Fighting",
+      "Water"
+    ],
+    "stats": {
+      "Total": "550",
+      "HP": "100",
+      "Attack": "130",
+      "Defense": "100",
+      "SpAtk": "63",
+      "SpDef": "60",
+      "Speed": "97"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0898_Calyrex_Ice Rider",
+    "num": "0898",
+    "name": "Calyrex",
+    "extraName": "Ice Rider",
+    "types": [
+      "Psychic",
+      "Ice"
+    ],
+    "stats": {
+      "Total": "680",
+      "HP": "100",
+      "Attack": "165",
+      "Defense": "150",
+      "SpAtk": "85",
+      "SpDef": "130",
+      "Speed": "50"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/calyrex"
+  },
+  {
+    "key": "0898_Calyrex_Shadow Rider",
+    "num": "0898",
+    "name": "Calyrex",
+    "extraName": "Shadow Rider",
+    "types": [
+      "Psychic",
+      "Ghost"
+    ],
+    "stats": {
+      "Total": "680",
+      "HP": "100",
+      "Attack": "85",
+      "Defense": "80",
+      "SpAtk": "165",
+      "SpDef": "100",
+      "Speed": "150"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/calyrex"
+  },
+  {
+    "key": "0901_Ursaluna_Bloodmoon",
+    "num": "0901",
+    "name": "Ursaluna",
+    "extraName": "Bloodmoon",
+    "types": [
+      "Ground",
+      "Normal"
+    ],
+    "stats": {
+      "Total": "555",
+      "HP": "113",
+      "Attack": "70",
+      "Defense": "120",
+      "SpAtk": "135",
+      "SpDef": "65",
+      "Speed": "52"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/ursaluna"
+  },
+  {
+    "key": "0905_Enamorus_Incarnate Forme",
+    "num": "0905",
+    "name": "Enamorus",
+    "extraName": "Incarnate Forme",
+    "types": [
+      "Fairy",
+      "Flying"
+    ],
+    "stats": {
+      "Total": "580",
+      "HP": "74",
+      "Attack": "115",
+      "Defense": "70",
+      "SpAtk": "135",
+      "SpDef": "80",
+      "Speed": "106"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0905_Enamorus_Therian Forme",
+    "num": "0905",
+    "name": "Enamorus",
+    "extraName": "Therian Forme",
+    "types": [
+      "Fairy",
+      "Flying"
+    ],
+    "stats": {
+      "Total": "580",
+      "HP": "74",
+      "Attack": "115",
+      "Defense": "110",
+      "SpAtk": "135",
+      "SpDef": "100",
+      "Speed": "46"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0925_Maushold_Family of Four",
+    "num": "0925",
+    "name": "Maushold",
+    "extraName": "Family of Four",
+    "types": [
+      "Normal"
+    ],
+    "stats": {
+      "Total": "470",
+      "HP": "74",
+      "Attack": "75",
+      "Defense": "70",
+      "SpAtk": "65",
+      "SpDef": "75",
+      "Speed": "111"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0925_Maushold_Family of Three",
+    "num": "0925",
+    "name": "Maushold",
+    "extraName": "Family of Three",
+    "types": [
+      "Normal"
+    ],
+    "stats": {
+      "Total": "470",
+      "HP": "74",
+      "Attack": "75",
+      "Defense": "70",
+      "SpAtk": "65",
+      "SpDef": "75",
+      "Speed": "111"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0931_Squawkabilly_Green Plumage",
+    "num": "0931",
+    "name": "Squawkabilly",
+    "extraName": "Green Plumage",
+    "types": [
+      "Normal",
+      "Flying"
+    ],
+    "stats": {
+      "Total": "417",
+      "HP": "82",
+      "Attack": "96",
+      "Defense": "51",
+      "SpAtk": "45",
+      "SpDef": "51",
+      "Speed": "92"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0931_Squawkabilly_Blue Plumage",
+    "num": "0931",
+    "name": "Squawkabilly",
+    "extraName": "Blue Plumage",
+    "types": [
+      "Normal",
+      "Flying"
+    ],
+    "stats": {
+      "Total": "417",
+      "HP": "82",
+      "Attack": "96",
+      "Defense": "51",
+      "SpAtk": "45",
+      "SpDef": "51",
+      "Speed": "92"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0931_Squawkabilly_Yellow Plumage",
+    "num": "0931",
+    "name": "Squawkabilly",
+    "extraName": "Yellow Plumage",
+    "types": [
+      "Normal",
+      "Flying"
+    ],
+    "stats": {
+      "Total": "417",
+      "HP": "82",
+      "Attack": "96",
+      "Defense": "51",
+      "SpAtk": "45",
+      "SpDef": "51",
+      "Speed": "92"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0931_Squawkabilly_White Plumage",
+    "num": "0931",
+    "name": "Squawkabilly",
+    "extraName": "White Plumage",
+    "types": [
+      "Normal",
+      "Flying"
+    ],
+    "stats": {
+      "Total": "417",
+      "HP": "82",
+      "Attack": "96",
+      "Defense": "51",
+      "SpAtk": "45",
+      "SpDef": "51",
+      "Speed": "92"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0952_Scovillain_Mega Scovillain",
+    "num": "0952",
+    "name": "Scovillain",
+    "extraName": "Mega Scovillain",
+    "types": [
+      "Grass",
+      "Fire"
+    ],
+    "stats": {
+      "Total": "586",
+      "HP": "65",
+      "Attack": "138",
+      "Defense": "85",
+      "SpAtk": "138",
+      "SpDef": "85",
+      "Speed": "75"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/scovillain"
+  },
+  {
+    "key": "0964_Palafin_Zero Form",
+    "num": "0964",
+    "name": "Palafin",
+    "extraName": "Zero Form",
+    "types": [
+      "Water"
+    ],
+    "stats": {
+      "Total": "457",
+      "HP": "100",
+      "Attack": "70",
+      "Defense": "72",
+      "SpAtk": "53",
+      "SpDef": "62",
+      "Speed": "100"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0964_Palafin_Hero Form",
+    "num": "0964",
+    "name": "Palafin",
+    "extraName": "Hero Form",
+    "types": [
+      "Water"
+    ],
+    "stats": {
+      "Total": "650",
+      "HP": "100",
+      "Attack": "160",
+      "Defense": "97",
+      "SpAtk": "106",
+      "SpDef": "87",
+      "Speed": "100"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0970_Glimmora_Mega Glimmora",
+    "num": "0970",
+    "name": "Glimmora",
+    "extraName": "Mega Glimmora",
+    "types": [
+      "Rock",
+      "Poison"
+    ],
+    "stats": {
+      "Total": "625",
+      "HP": "83",
+      "Attack": "90",
+      "Defense": "105",
+      "SpAtk": "150",
+      "SpDef": "96",
+      "Speed": "101"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/glimmora"
+  },
+  {
+    "key": "0978_Tatsugiri_Curly Form",
+    "num": "0978",
+    "name": "Tatsugiri",
+    "extraName": "Curly Form",
+    "types": [
+      "Dragon",
+      "Water"
+    ],
+    "stats": {
+      "Total": "475",
+      "HP": "68",
+      "Attack": "50",
+      "Defense": "60",
+      "SpAtk": "120",
+      "SpDef": "95",
+      "Speed": "82"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0978_Tatsugiri_Droopy Form",
+    "num": "0978",
+    "name": "Tatsugiri",
+    "extraName": "Droopy Form",
+    "types": [
+      "Dragon",
+      "Water"
+    ],
+    "stats": {
+      "Total": "475",
+      "HP": "68",
+      "Attack": "50",
+      "Defense": "60",
+      "SpAtk": "120",
+      "SpDef": "95",
+      "Speed": "82"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0978_Tatsugiri_Stretchy Form",
+    "num": "0978",
+    "name": "Tatsugiri",
+    "extraName": "Stretchy Form",
+    "types": [
+      "Dragon",
+      "Water"
+    ],
+    "stats": {
+      "Total": "475",
+      "HP": "68",
+      "Attack": "50",
+      "Defense": "60",
+      "SpAtk": "120",
+      "SpDef": "95",
+      "Speed": "82"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0978_Tatsugiri_Mega Tatsugiri",
+    "num": "0978",
+    "name": "Tatsugiri",
+    "extraName": "Mega Tatsugiri",
+    "types": [
+      "Dragon",
+      "Water"
+    ],
+    "stats": {
+      "Total": "575",
+      "HP": "68",
+      "Attack": "65",
+      "Defense": "90",
+      "SpAtk": "135",
+      "SpDef": "125",
+      "Speed": "92"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0982_Dudunsparce_Two-Segment Form",
+    "num": "0982",
+    "name": "Dudunsparce",
+    "extraName": "Two-Segment Form",
+    "types": [
+      "Normal"
+    ],
+    "stats": {
+      "Total": "520",
+      "HP": "125",
+      "Attack": "100",
+      "Defense": "80",
+      "SpAtk": "85",
+      "SpDef": "75",
+      "Speed": "55"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0982_Dudunsparce_Three-Segment Form",
+    "num": "0982",
+    "name": "Dudunsparce",
+    "extraName": "Three-Segment Form",
+    "types": [
+      "Normal"
+    ],
+    "stats": {
+      "Total": "520",
+      "HP": "125",
+      "Attack": "100",
+      "Defense": "80",
+      "SpAtk": "85",
+      "SpDef": "75",
+      "Speed": "55"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0998_Baxcalibur_Mega Baxcalibur",
+    "num": "0998",
+    "name": "Baxcalibur",
+    "extraName": "Mega Baxcalibur",
+    "types": [
+      "Dragon",
+      "Ice"
+    ],
+    "stats": {
+      "Total": "700",
+      "HP": "115",
+      "Attack": "175",
+      "Defense": "117",
+      "SpAtk": "105",
+      "SpDef": "101",
+      "Speed": "87"
+    },
+    "detailUrl": "https://pokemondb.net/pokedex/baxcalibur"
+  },
+  {
+    "key": "0999_Gimmighoul_Chest Form",
+    "num": "0999",
+    "name": "Gimmighoul",
+    "extraName": "Chest Form",
+    "types": [
+      "Ghost"
+    ],
+    "stats": {
+      "Total": "300",
+      "HP": "45",
+      "Attack": "30",
+      "Defense": "70",
+      "SpAtk": "75",
+      "SpDef": "70",
+      "Speed": "10"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "0999_Gimmighoul_Roaming Form",
+    "num": "0999",
+    "name": "Gimmighoul",
+    "extraName": "Roaming Form",
+    "types": [
+      "Ghost"
+    ],
+    "stats": {
+      "Total": "300",
+      "HP": "45",
+      "Attack": "30",
+      "Defense": "25",
+      "SpAtk": "75",
+      "SpDef": "45",
+      "Speed": "80"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "1017_Ogerpon_Teal Mask",
+    "num": "1017",
+    "name": "Ogerpon",
+    "extraName": "Teal Mask",
+    "types": [
+      "Grass"
+    ],
+    "stats": {
+      "Total": "550",
+      "HP": "80",
+      "Attack": "120",
+      "Defense": "84",
+      "SpAtk": "60",
+      "SpDef": "96",
+      "Speed": "110"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "1017_Ogerpon_Wellspring Mask",
+    "num": "1017",
+    "name": "Ogerpon",
+    "extraName": "Wellspring Mask",
+    "types": [
+      "Grass",
+      "Water"
+    ],
+    "stats": {
+      "Total": "550",
+      "HP": "80",
+      "Attack": "120",
+      "Defense": "84",
+      "SpAtk": "60",
+      "SpDef": "96",
+      "Speed": "110"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "1017_Ogerpon_Hearthflame Mask",
+    "num": "1017",
+    "name": "Ogerpon",
+    "extraName": "Hearthflame Mask",
+    "types": [
+      "Grass",
+      "Fire"
+    ],
+    "stats": {
+      "Total": "550",
+      "HP": "80",
+      "Attack": "120",
+      "Defense": "84",
+      "SpAtk": "60",
+      "SpDef": "96",
+      "Speed": "110"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "1017_Ogerpon_Cornerstone Mask",
+    "num": "1017",
+    "name": "Ogerpon",
+    "extraName": "Cornerstone Mask",
+    "types": [
+      "Grass",
+      "Rock"
+    ],
+    "stats": {
+      "Total": "550",
+      "HP": "80",
+      "Attack": "120",
+      "Defense": "84",
+      "SpAtk": "60",
+      "SpDef": "96",
+      "Speed": "110"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "1024_Terapagos_Normal Form",
+    "num": "1024",
+    "name": "Terapagos",
+    "extraName": "Normal Form",
+    "types": [
+      "Normal"
+    ],
+    "stats": {
+      "Total": "450",
+      "HP": "90",
+      "Attack": "65",
+      "Defense": "85",
+      "SpAtk": "65",
+      "SpDef": "85",
+      "Speed": "60"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "1024_Terapagos_Terastal Form",
+    "num": "1024",
+    "name": "Terapagos",
+    "extraName": "Terastal Form",
+    "types": [
+      "Normal"
+    ],
+    "stats": {
+      "Total": "600",
+      "HP": "95",
+      "Attack": "95",
+      "Defense": "110",
+      "SpAtk": "105",
+      "SpDef": "110",
+      "Speed": "85"
+    },
+    "detailUrl": ""
+  },
+  {
+    "key": "1024_Terapagos_Stellar Form",
+    "num": "1024",
+    "name": "Terapagos",
+    "extraName": "Stellar Form",
+    "types": [
+      "Normal"
+    ],
+    "stats": {
+      "Total": "700",
+      "HP": "160",
+      "Attack": "105",
+      "Defense": "110",
+      "SpAtk": "130",
+      "SpDef": "110",
+      "Speed": "85"
+    },
+    "detailUrl": ""
   }
 ]

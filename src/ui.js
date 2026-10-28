@@ -911,7 +911,7 @@ window.getProfTaskAvailableCount = function() {
     let finalTier = state.stats.finalTaskTier || 0;
     if (finalTier < profTasks.final.length) {
         let currentSpeciesCount = (state.stats.caughtSpeciesCount || 0);
-        let totalSpecies = state.config.pokemonData.length;
+        let totalSpecies = state.config.pokemonData.filter(p => Number.isInteger(p.id)).length;
         if (currentSpeciesCount >= totalSpecies) count++;
     }
 
@@ -1158,12 +1158,12 @@ window.showProfLabModal = function() {
     let finalTier = state.stats.finalTaskTier || 0;
     let finalCurrentVal = (state.stats.caughtSpeciesCount || 0);
     if (finalTier >= profTasks.final.length && profTasks.final.length > 0) {
-        finalCurrentVal = state.config.pokemonData.length;
+        finalCurrentVal = state.config.pokemonData.filter(p => Number.isInteger(p.id)).length;
     }
     // Update req dynamically if it differs (for example, if new Pokemon are added)
     if (profTasks.final.length > 0) {
-        profTasks.final[0].req = state.config.pokemonData.length;
-        profTasks.final[0].text = `Capture ${state.config.pokemonData.length} Pokemon species`;
+        profTasks.final[0].req = state.config.pokemonData.filter(p => Number.isInteger(p.id)).length;
+        profTasks.final[0].text = `Capture ${state.config.pokemonData.filter(p => Number.isInteger(p.id)).length} Pokemon species`;
     }
     html += renderCard("Final Assignment", 'final', finalCurrentVal, finalTier, profTasks.final, true);
 
@@ -2372,11 +2372,11 @@ async function init() {
                         <div style="display: flex; gap: 40px; justify-content: space-between;">
                             <div style="flex: 1;">
                                 <p><b>Total Pokémon Captured:</b> ${(state.stats.caught || 0).toLocaleString()}</p>
-                                <p><b>Species Caught:</b> ${uniqueSpeciesCaught} / ${state.config.pokemonData.length}</p>
+                                <p><b>Species Caught:</b> ${uniqueSpeciesCaught} / ${state.config.pokemonData.filter(p => Number.isInteger(p.id)).length}</p>
                             </div>
                             <div style="flex: 1;">
                                 <p><b>Shinies Caught:</b> ${(state.stats.shiniesCaught || 0).toLocaleString()}</p>
-                                <p><b>Shiny Species Caught:</b> ${uniqueShinySpeciesCaught} / ${state.config.pokemonData.length}</p>
+                                <p><b>Shiny Species Caught:</b> ${uniqueShinySpeciesCaught} / ${state.config.pokemonData.filter(p => Number.isInteger(p.id)).length}</p>
                             </div>
                         </div>
                         <hr style="margin: 10px 0;">

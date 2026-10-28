@@ -958,7 +958,7 @@ export function showMapTooltip(e, locationName) {
             route.spawns.forEach(s => {
                 let pName = "Unknown";
                 if (state.config.pokemonData) {
-                    const pd = state.config.pokemonData[s.pokemonId - 1]; // Use O(1) lookup
+                    const pd = state.config.pokemonData.find(pd => pd.id === s.pokemonId); // Use O(1) lookup
                     if (pd) {
                         pName = s.forceShiny && pd.name === "Gyarados" ? "Red Gyarados" : pd.name;
                     }
