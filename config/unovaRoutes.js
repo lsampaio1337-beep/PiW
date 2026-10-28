@@ -10,13 +10,13 @@ export const unovaRoutes = [
         "pokemonId": 504,
         "minLevel": 2,
         "maxLevel": 3,
-        "chance": 0.5
+        "chance": 0.5243
       },
       {
         "pokemonId": 509,
         "minLevel": 2,
         "maxLevel": 3,
-        "chance": 0.5
+        "chance": 0.4757
       }
     ]
   },
@@ -27,43 +27,43 @@ export const unovaRoutes = [
         "pokemonId": 531,
         "minLevel": 3,
         "maxLevel": 4,
-        "chance": 0.1426
+        "chance": 0.0944
       },
       {
         "pokemonId": 506,
         "minLevel": 3,
         "maxLevel": 4,
-        "chance": 0.1429
+        "chance": 0.1528
       },
       {
         "pokemonId": 54,
         "minLevel": 3,
         "maxLevel": 4,
-        "chance": 0.1429
+        "chance": 0.1313
       },
       {
         "pokemonId": 179,
         "minLevel": 3,
         "maxLevel": 4,
-        "chance": 0.1429
+        "chance": 0.1501
       },
       {
         "pokemonId": 504,
         "minLevel": 3,
         "maxLevel": 4,
-        "chance": 0.1429
+        "chance": 0.1648
       },
       {
         "pokemonId": 447,
         "minLevel": 3,
         "maxLevel": 4,
-        "chance": 0.1429
+        "chance": 0.1474
       },
       {
         "pokemonId": 519,
         "minLevel": 3,
         "maxLevel": 4,
-        "chance": 0.1429
+        "chance": 0.1592
       }
     ]
   },
@@ -74,49 +74,49 @@ export const unovaRoutes = [
         "pokemonId": 298,
         "minLevel": 4,
         "maxLevel": 5,
-        "chance": 0.125
+        "chance": 0.1895
       },
       {
         "pokemonId": 418,
         "minLevel": 4,
         "maxLevel": 5,
-        "chance": 0.125
+        "chance": 0.1091
       },
       {
         "pokemonId": 593,
         "minLevel": 4,
         "maxLevel": 5,
-        "chance": 0.125
+        "chance": 0.075
       },
       {
         "pokemonId": 129,
         "minLevel": 4,
         "maxLevel": 5,
-        "chance": 0.125
+        "chance": 0.1801
       },
       {
         "pokemonId": 86,
         "minLevel": 4,
         "maxLevel": 5,
-        "chance": 0.125
+        "chance": 0.1108
       },
       {
         "pokemonId": 592,
         "minLevel": 4,
         "maxLevel": 5,
-        "chance": 0.125
+        "chance": 0.1075
       },
       {
         "pokemonId": 120,
         "minLevel": 4,
         "maxLevel": 5,
-        "chance": 0.125
+        "chance": 0.1059
       },
       {
         "pokemonId": 116,
         "minLevel": 4,
         "maxLevel": 5,
-        "chance": 0.125
+        "chance": 0.1221
       }
     ]
   },
@@ -125,39 +125,39 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 543,
-        "minLevel": 6,
-        "maxLevel": 7,
-        "chance": 0.1665
+        "minLevel": 5,
+        "maxLevel": 6,
+        "chance": 0.161
       },
       {
         "pokemonId": 540,
-        "minLevel": 6,
-        "maxLevel": 7,
-        "chance": 0.1667
+        "minLevel": 5,
+        "maxLevel": 6,
+        "chance": 0.135
       },
       {
         "pokemonId": 519,
-        "minLevel": 6,
-        "maxLevel": 7,
-        "chance": 0.1667
+        "minLevel": 5,
+        "maxLevel": 6,
+        "chance": 0.1585
       },
       {
         "pokemonId": 504,
-        "minLevel": 6,
-        "maxLevel": 7,
-        "chance": 0.1667
+        "minLevel": 5,
+        "maxLevel": 6,
+        "chance": 0.1641
       },
       {
         "pokemonId": 509,
-        "minLevel": 6,
-        "maxLevel": 7,
-        "chance": 0.1667
+        "minLevel": 5,
+        "maxLevel": 6,
+        "chance": 0.1489
       },
       {
         "pokemonId": 191,
-        "minLevel": 6,
-        "maxLevel": 7,
-        "chance": 0.1667
+        "minLevel": 5,
+        "maxLevel": 6,
+        "chance": 0.2325
       }
     ]
   },
@@ -174,39 +174,39 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 81,
-        "minLevel": 9,
-        "maxLevel": 10,
-        "chance": 0.1665
+        "minLevel": 6,
+        "maxLevel": 7,
+        "chance": 0.168
       },
       {
         "pokemonId": 239,
-        "minLevel": 9,
-        "maxLevel": 10,
-        "chance": 0.1667
+        "minLevel": 6,
+        "maxLevel": 7,
+        "chance": 0.1517
       },
       {
         "pokemonId": 240,
-        "minLevel": 9,
-        "maxLevel": 10,
-        "chance": 0.1667
+        "minLevel": 6,
+        "maxLevel": 7,
+        "chance": 0.1496
       },
       {
         "pokemonId": 58,
-        "minLevel": 9,
-        "maxLevel": 10,
-        "chance": 0.1667
+        "minLevel": 6,
+        "maxLevel": 7,
+        "chance": 0.156
       },
       {
         "pokemonId": 109,
-        "minLevel": 9,
-        "maxLevel": 10,
-        "chance": 0.1667
+        "minLevel": 6,
+        "maxLevel": 7,
+        "chance": 0.1606
       },
       {
         "pokemonId": 504,
-        "minLevel": 9,
-        "maxLevel": 10,
-        "chance": 0.1667
+        "minLevel": 6,
+        "maxLevel": 7,
+        "chance": 0.2141
       }
     ]
   },
@@ -215,45 +215,45 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 183,
-        "minLevel": 10,
-        "maxLevel": 11,
-        "chance": 0.1426
+        "minLevel": 8,
+        "maxLevel": 9,
+        "chance": 0.1832
       },
       {
         "pokemonId": 223,
-        "minLevel": 10,
-        "maxLevel": 11,
-        "chance": 0.1429
+        "minLevel": 8,
+        "maxLevel": 9,
+        "chance": 0.1527
       },
       {
         "pokemonId": 458,
-        "minLevel": 10,
-        "maxLevel": 11,
-        "chance": 0.1429
+        "minLevel": 8,
+        "maxLevel": 9,
+        "chance": 0.1328
       },
       {
         "pokemonId": 550,
-        "minLevel": 10,
-        "maxLevel": 11,
-        "chance": 0.1429
+        "minLevel": 8,
+        "maxLevel": 9,
+        "chance": 0.0996
       },
       {
         "pokemonId": 366,
-        "minLevel": 10,
-        "maxLevel": 11,
-        "chance": 0.1429
+        "minLevel": 8,
+        "maxLevel": 9,
+        "chance": 0.1328
       },
       {
         "pokemonId": 98,
-        "minLevel": 10,
-        "maxLevel": 11,
-        "chance": 0.1429
+        "minLevel": 8,
+        "maxLevel": 9,
+        "chance": 0.141
       },
       {
         "pokemonId": 363,
-        "minLevel": 10,
-        "maxLevel": 11,
-        "chance": 0.1429
+        "minLevel": 8,
+        "maxLevel": 9,
+        "chance": 0.1579
       }
     ]
   },
@@ -266,39 +266,39 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 547,
-        "minLevel": 13,
-        "maxLevel": 14,
-        "chance": 0.1665
+        "minLevel": 9,
+        "maxLevel": 10,
+        "chance": 0.1094
       },
       {
         "pokemonId": 549,
-        "minLevel": 13,
-        "maxLevel": 14,
-        "chance": 0.1667
+        "minLevel": 9,
+        "maxLevel": 10,
+        "chance": 0.1094
       },
       {
         "pokemonId": 19,
-        "minLevel": 13,
-        "maxLevel": 14,
-        "chance": 0.1667
+        "minLevel": 9,
+        "maxLevel": 10,
+        "chance": 0.2075
       },
       {
         "pokemonId": 546,
-        "minLevel": 13,
-        "maxLevel": 14,
-        "chance": 0.1667
+        "minLevel": 9,
+        "maxLevel": 10,
+        "chance": 0.1875
       },
       {
         "pokemonId": 548,
-        "minLevel": 13,
-        "maxLevel": 14,
-        "chance": 0.1667
+        "minLevel": 9,
+        "maxLevel": 10,
+        "chance": 0.1875
       },
       {
         "pokemonId": 519,
-        "minLevel": 13,
-        "maxLevel": 14,
-        "chance": 0.1667
+        "minLevel": 9,
+        "maxLevel": 10,
+        "chance": 0.1987
       }
     ]
   },
@@ -309,19 +309,19 @@ export const unovaRoutes = [
         "pokemonId": 89,
         "minLevel": 14,
         "maxLevel": 15,
-        "chance": 0.3334
+        "chance": 0.08
       },
       {
         "pokemonId": 19,
         "minLevel": 14,
         "maxLevel": 15,
-        "chance": 0.3333
+        "chance": 0.46
       },
       {
         "pokemonId": 41,
         "minLevel": 14,
         "maxLevel": 15,
-        "chance": 0.3333
+        "chance": 0.46
       }
     ]
   },
@@ -332,67 +332,167 @@ export const unovaRoutes = [
         "pokemonId": 301,
         "minLevel": 15,
         "maxLevel": 16,
-        "chance": 0.091
+        "chance": 0.29
       },
       {
         "pokemonId": 300,
         "minLevel": 15,
         "maxLevel": 16,
-        "chance": 0.0909
+        "chance": 0.29
       },
       {
         "pokemonId": 427,
         "minLevel": 15,
         "maxLevel": 16,
-        "chance": 0.0909
+        "chance": 0.29
       },
       {
         "pokemonId": 133,
         "minLevel": 15,
         "maxLevel": 16,
-        "chance": 0.0909
+        "chance": 0.13
+      }
+    ]
+  },
+  {
+    "name": "Expanded Castelia Park",
+    "spawns": [
+      {
+        "pokemonId": 301,
+        "minLevel": 64,
+        "maxLevel": 65,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 300,
+        "minLevel": 64,
+        "maxLevel": 65,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 427,
+        "minLevel": 64,
+        "maxLevel": 65,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 133,
+        "minLevel": 64,
+        "maxLevel": 65,
+        "chance": 0.1
       },
       {
         "pokemonId": 134,
-        "minLevel": 15,
-        "maxLevel": 16,
-        "chance": 0.0909
+        "minLevel": 64,
+        "maxLevel": 65,
+        "chance": 0.06
       },
       {
         "pokemonId": 135,
-        "minLevel": 15,
-        "maxLevel": 16,
-        "chance": 0.0909
+        "minLevel": 64,
+        "maxLevel": 65,
+        "chance": 0.06
       },
       {
         "pokemonId": 136,
-        "minLevel": 15,
-        "maxLevel": 16,
-        "chance": 0.0909
+        "minLevel": 64,
+        "maxLevel": 65,
+        "chance": 0.06
       },
       {
         "pokemonId": 196,
-        "minLevel": 15,
-        "maxLevel": 16,
-        "chance": 0.0909
+        "minLevel": 64,
+        "maxLevel": 65,
+        "chance": 0.06
       },
       {
         "pokemonId": 197,
-        "minLevel": 15,
-        "maxLevel": 16,
-        "chance": 0.0909
+        "minLevel": 64,
+        "maxLevel": 65,
+        "chance": 0.06
       },
       {
         "pokemonId": 470,
-        "minLevel": 15,
-        "maxLevel": 16,
-        "chance": 0.0909
+        "minLevel": 64,
+        "maxLevel": 65,
+        "chance": 0.06
       },
       {
         "pokemonId": 471,
-        "minLevel": 15,
-        "maxLevel": 16,
-        "chance": 0.0909
+        "minLevel": 64,
+        "maxLevel": 65,
+        "chance": 0.06
+      }
+    ]
+  },
+  {
+    "name": "Expanded Castelia Park",
+    "spawns": [
+      {
+        "pokemonId": 301,
+        "minLevel": 64,
+        "maxLevel": 65,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 300,
+        "minLevel": 64,
+        "maxLevel": 65,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 427,
+        "minLevel": 64,
+        "maxLevel": 65,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 133,
+        "minLevel": 64,
+        "maxLevel": 65,
+        "chance": 0.1
+      },
+      {
+        "pokemonId": 134,
+        "minLevel": 64,
+        "maxLevel": 65,
+        "chance": 0.06
+      },
+      {
+        "pokemonId": 135,
+        "minLevel": 64,
+        "maxLevel": 65,
+        "chance": 0.06
+      },
+      {
+        "pokemonId": 136,
+        "minLevel": 64,
+        "maxLevel": 65,
+        "chance": 0.06
+      },
+      {
+        "pokemonId": 196,
+        "minLevel": 64,
+        "maxLevel": 65,
+        "chance": 0.06
+      },
+      {
+        "pokemonId": 197,
+        "minLevel": 64,
+        "maxLevel": 65,
+        "chance": 0.06
+      },
+      {
+        "pokemonId": 470,
+        "minLevel": 64,
+        "maxLevel": 65,
+        "chance": 0.06
+      },
+      {
+        "pokemonId": 471,
+        "minLevel": 64,
+        "maxLevel": 65,
+        "chance": 0.06
       }
     ]
   },
@@ -405,27 +505,27 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 529,
-        "minLevel": 17,
-        "maxLevel": 18,
-        "chance": 0.25
+        "minLevel": 10,
+        "maxLevel": 11,
+        "chance": 0.2279
       },
       {
         "pokemonId": 527,
-        "minLevel": 17,
-        "maxLevel": 18,
-        "chance": 0.25
+        "minLevel": 10,
+        "maxLevel": 11,
+        "chance": 0.2315
       },
       {
         "pokemonId": 19,
-        "minLevel": 17,
-        "maxLevel": 18,
-        "chance": 0.25
+        "minLevel": 10,
+        "maxLevel": 11,
+        "chance": 0.2955
       },
       {
         "pokemonId": 532,
-        "minLevel": 17,
-        "maxLevel": 18,
-        "chance": 0.25
+        "minLevel": 10,
+        "maxLevel": 11,
+        "chance": 0.2451
       }
     ]
   },
@@ -434,27 +534,27 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 554,
-        "minLevel": 18,
-        "maxLevel": 19,
-        "chance": 0.25
+        "minLevel": 12,
+        "maxLevel": 13,
+        "chance": 0.2537
       },
       {
         "pokemonId": 551,
-        "minLevel": 18,
-        "maxLevel": 19,
-        "chance": 0.25
+        "minLevel": 12,
+        "maxLevel": 13,
+        "chance": 0.2737
       },
       {
         "pokemonId": 568,
-        "minLevel": 18,
-        "maxLevel": 19,
-        "chance": 0.25
+        "minLevel": 12,
+        "maxLevel": 13,
+        "chance": 0.2429
       },
       {
         "pokemonId": 559,
-        "minLevel": 18,
-        "maxLevel": 19,
-        "chance": 0.25
+        "minLevel": 12,
+        "maxLevel": 13,
+        "chance": 0.2297
       }
     ]
   },
@@ -463,63 +563,63 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 27,
-        "minLevel": 20,
-        "maxLevel": 21,
-        "chance": 0.1
+        "minLevel": 13,
+        "maxLevel": 14,
+        "chance": 0.1222
       },
       {
         "pokemonId": 328,
-        "minLevel": 20,
-        "maxLevel": 21,
-        "chance": 0.1
+        "minLevel": 13,
+        "maxLevel": 14,
+        "chance": 0.1264
       },
       {
         "pokemonId": 554,
-        "minLevel": 20,
-        "maxLevel": 21,
-        "chance": 0.1
+        "minLevel": 13,
+        "maxLevel": 14,
+        "chance": 0.1164
       },
       {
         "pokemonId": 556,
-        "minLevel": 20,
-        "maxLevel": 21,
-        "chance": 0.1
+        "minLevel": 13,
+        "maxLevel": 14,
+        "chance": 0.0795
       },
       {
         "pokemonId": 557,
-        "minLevel": 20,
-        "maxLevel": 21,
-        "chance": 0.1
+        "minLevel": 13,
+        "maxLevel": 14,
+        "chance": 0.1128
       },
       {
         "pokemonId": 561,
-        "minLevel": 20,
-        "maxLevel": 21,
-        "chance": 0.1
+        "minLevel": 13,
+        "maxLevel": 14,
+        "chance": 0.0748
       },
       {
         "pokemonId": 559,
-        "minLevel": 20,
-        "maxLevel": 21,
-        "chance": 0.1
+        "minLevel": 13,
+        "maxLevel": 14,
+        "chance": 0.1054
       },
       {
         "pokemonId": 555,
-        "minLevel": 20,
-        "maxLevel": 21,
-        "chance": 0.1
+        "minLevel": 13,
+        "maxLevel": 14,
+        "chance": 0.0764
       },
       {
         "pokemonId": 552,
-        "minLevel": 20,
-        "maxLevel": 21,
-        "chance": 0.1
+        "minLevel": 13,
+        "maxLevel": 14,
+        "chance": 0.1045
       },
       {
         "pokemonId": 28,
-        "minLevel": 20,
-        "maxLevel": 21,
-        "chance": 0.1
+        "minLevel": 13,
+        "maxLevel": 14,
+        "chance": 0.0816
       }
     ]
   },
@@ -530,55 +630,49 @@ export const unovaRoutes = [
         "pokemonId": 562,
         "minLevel": 21,
         "maxLevel": 22,
-        "chance": 0.1112
+        "chance": 0.14
       },
       {
         "pokemonId": 551,
         "minLevel": 21,
         "maxLevel": 22,
-        "chance": 0.1111
+        "chance": 0.14
       },
       {
         "pokemonId": 568,
         "minLevel": 21,
         "maxLevel": 22,
-        "chance": 0.1111
+        "chance": 0.12
       },
       {
         "pokemonId": 566,
         "minLevel": 21,
         "maxLevel": 22,
-        "chance": 0.1111
+        "chance": 0.12
       },
       {
         "pokemonId": 343,
         "minLevel": 21,
         "maxLevel": 22,
-        "chance": 0.1111
+        "chance": 0.16
       },
       {
         "pokemonId": 636,
         "minLevel": 21,
         "maxLevel": 22,
-        "chance": 0.1111
+        "chance": 0.12
       },
       {
         "pokemonId": 563,
         "minLevel": 21,
         "maxLevel": 22,
-        "chance": 0.1111
+        "chance": 0.08
       },
       {
-        "pokemonId": 553,
+        "pokemonId": 552,
         "minLevel": 21,
         "maxLevel": 22,
-        "chance": 0.1111
-      },
-      {
-        "pokemonId": 637,
-        "minLevel": 21,
-        "maxLevel": 22,
-        "chance": 0.1111
+        "chance": 0.12
       }
     ]
   },
@@ -587,21 +681,21 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 417,
-        "minLevel": 22,
-        "maxLevel": 23,
-        "chance": 0.3334
+        "minLevel": 14,
+        "maxLevel": 15,
+        "chance": 0.3333
       },
       {
         "pokemonId": 311,
-        "minLevel": 22,
-        "maxLevel": 23,
+        "minLevel": 14,
+        "maxLevel": 15,
         "chance": 0.3333
       },
       {
         "pokemonId": 312,
-        "minLevel": 22,
-        "maxLevel": 23,
-        "chance": 0.3333
+        "minLevel": 14,
+        "maxLevel": 15,
+        "chance": 0.3334
       }
     ]
   },
@@ -614,39 +708,39 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 576,
-        "minLevel": 24,
-        "maxLevel": 25,
-        "chance": 0.1665
+        "minLevel": 15,
+        "maxLevel": 16,
+        "chance": 0.1276
       },
       {
         "pokemonId": 579,
-        "minLevel": 24,
-        "maxLevel": 25,
-        "chance": 0.1667
+        "minLevel": 15,
+        "maxLevel": 16,
+        "chance": 0.1276
       },
       {
         "pokemonId": 568,
-        "minLevel": 24,
-        "maxLevel": 25,
-        "chance": 0.1667
+        "minLevel": 15,
+        "maxLevel": 16,
+        "chance": 0.19
       },
       {
         "pokemonId": 590,
-        "minLevel": 24,
-        "maxLevel": 25,
-        "chance": 0.1667
+        "minLevel": 15,
+        "maxLevel": 16,
+        "chance": 0.2127
       },
       {
         "pokemonId": 587,
-        "minLevel": 24,
-        "maxLevel": 25,
-        "chance": 0.1667
+        "minLevel": 15,
+        "maxLevel": 16,
+        "chance": 0.1461
       },
       {
         "pokemonId": 595,
-        "minLevel": 24,
-        "maxLevel": 25,
-        "chance": 0.1667
+        "minLevel": 15,
+        "maxLevel": 16,
+        "chance": 0.196
       }
     ]
   },
@@ -655,63 +749,63 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 214,
-        "minLevel": 25,
-        "maxLevel": 26,
-        "chance": 0.1
+        "minLevel": 16,
+        "maxLevel": 17,
+        "chance": 0.074
       },
       {
         "pokemonId": 127,
-        "minLevel": 25,
-        "maxLevel": 26,
-        "chance": 0.1
+        "minLevel": 16,
+        "maxLevel": 17,
+        "chance": 0.074
       },
       {
         "pokemonId": 574,
-        "minLevel": 25,
-        "maxLevel": 26,
-        "chance": 0.1
+        "minLevel": 16,
+        "maxLevel": 17,
+        "chance": 0.1276
       },
       {
         "pokemonId": 572,
-        "minLevel": 25,
-        "maxLevel": 26,
-        "chance": 0.1
+        "minLevel": 16,
+        "maxLevel": 17,
+        "chance": 0.1234
       },
       {
         "pokemonId": 568,
-        "minLevel": 25,
-        "maxLevel": 26,
-        "chance": 0.1
+        "minLevel": 16,
+        "maxLevel": 17,
+        "chance": 0.1125
       },
       {
         "pokemonId": 577,
-        "minLevel": 25,
-        "maxLevel": 26,
-        "chance": 0.1
+        "minLevel": 16,
+        "maxLevel": 17,
+        "chance": 0.1276
       },
       {
         "pokemonId": 287,
-        "minLevel": 25,
-        "maxLevel": 26,
-        "chance": 0.1
+        "minLevel": 16,
+        "maxLevel": 17,
+        "chance": 0.1322
       },
       {
         "pokemonId": 542,
-        "minLevel": 25,
-        "maxLevel": 26,
-        "chance": 0.1
+        "minLevel": 16,
+        "maxLevel": 17,
+        "chance": 0.074
       },
       {
         "pokemonId": 573,
-        "minLevel": 25,
-        "maxLevel": 26,
-        "chance": 0.1
+        "minLevel": 16,
+        "maxLevel": 17,
+        "chance": 0.0788
       },
       {
         "pokemonId": 521,
-        "minLevel": 25,
-        "maxLevel": 26,
-        "chance": 0.1
+        "minLevel": 16,
+        "maxLevel": 17,
+        "chance": 0.0759
       }
     ]
   },
@@ -720,51 +814,51 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 223,
-        "minLevel": 27,
-        "maxLevel": 28,
-        "chance": 0.125
+        "minLevel": 18,
+        "maxLevel": 19,
+        "chance": 0.1376
       },
       {
         "pokemonId": 318,
-        "minLevel": 27,
-        "maxLevel": 28,
-        "chance": 0.125
+        "minLevel": 18,
+        "maxLevel": 19,
+        "chance": 0.1354
       },
       {
         "pokemonId": 170,
-        "minLevel": 27,
-        "maxLevel": 28,
-        "chance": 0.125
+        "minLevel": 18,
+        "maxLevel": 19,
+        "chance": 0.1251
       },
       {
         "pokemonId": 456,
-        "minLevel": 27,
-        "maxLevel": 28,
-        "chance": 0.125
+        "minLevel": 18,
+        "maxLevel": 19,
+        "chance": 0.1251
       },
       {
         "pokemonId": 118,
-        "minLevel": 27,
-        "maxLevel": 28,
-        "chance": 0.125
+        "minLevel": 18,
+        "maxLevel": 19,
+        "chance": 0.129
       },
       {
         "pokemonId": 370,
-        "minLevel": 27,
-        "maxLevel": 28,
-        "chance": 0.125
+        "minLevel": 18,
+        "maxLevel": 19,
+        "chance": 0.1251
       },
       {
         "pokemonId": 90,
-        "minLevel": 27,
-        "maxLevel": 28,
-        "chance": 0.125
+        "minLevel": 18,
+        "maxLevel": 19,
+        "chance": 0.1354
       },
       {
         "pokemonId": 581,
-        "minLevel": 27,
-        "maxLevel": 28,
-        "chance": 0.125
+        "minLevel": 18,
+        "maxLevel": 19,
+        "chance": 0.0873
       }
     ]
   },
@@ -777,63 +871,63 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 585,
-        "minLevel": 29,
-        "maxLevel": 30,
-        "chance": 0.1
+        "minLevel": 20,
+        "maxLevel": 21,
+        "chance": 0.1104
       },
       {
         "pokemonId": 588,
-        "minLevel": 29,
-        "maxLevel": 30,
-        "chance": 0.1
+        "minLevel": 20,
+        "maxLevel": 21,
+        "chance": 0.1174
       },
       {
         "pokemonId": 568,
-        "minLevel": 29,
-        "maxLevel": 30,
-        "chance": 0.1
+        "minLevel": 20,
+        "maxLevel": 21,
+        "chance": 0.1124
       },
       {
         "pokemonId": 590,
-        "minLevel": 29,
-        "maxLevel": 30,
-        "chance": 0.1
+        "minLevel": 20,
+        "maxLevel": 21,
+        "chance": 0.1258
       },
       {
         "pokemonId": 582,
-        "minLevel": 29,
-        "maxLevel": 30,
-        "chance": 0.1
+        "minLevel": 20,
+        "maxLevel": 21,
+        "chance": 0.1213
       },
       {
         "pokemonId": 351,
-        "minLevel": 29,
-        "maxLevel": 30,
-        "chance": 0.1
+        "minLevel": 20,
+        "maxLevel": 21,
+        "chance": 0.0881
       },
       {
         "pokemonId": 541,
-        "minLevel": 29,
-        "maxLevel": 30,
-        "chance": 0.1
+        "minLevel": 20,
+        "maxLevel": 21,
+        "chance": 0.0973
       },
       {
         "pokemonId": 586,
-        "minLevel": 29,
-        "maxLevel": 30,
-        "chance": 0.1
+        "minLevel": 20,
+        "maxLevel": 21,
+        "chance": 0.0779
       },
       {
         "pokemonId": 589,
-        "minLevel": 29,
-        "maxLevel": 30,
-        "chance": 0.1
+        "minLevel": 20,
+        "maxLevel": 21,
+        "chance": 0.0747
       },
       {
         "pokemonId": 617,
-        "minLevel": 29,
-        "maxLevel": 30,
-        "chance": 0.1
+        "minLevel": 20,
+        "maxLevel": 21,
+        "chance": 0.0747
       }
     ]
   },
@@ -842,51 +936,51 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 595,
-        "minLevel": 30,
-        "maxLevel": 31,
-        "chance": 0.125
+        "minLevel": 23,
+        "maxLevel": 24,
+        "chance": 0.1366
       },
       {
         "pokemonId": 599,
-        "minLevel": 30,
-        "maxLevel": 31,
-        "chance": 0.125
+        "minLevel": 23,
+        "maxLevel": 24,
+        "chance": 0.1452
       },
       {
         "pokemonId": 597,
-        "minLevel": 30,
-        "maxLevel": 31,
-        "chance": 0.125
+        "minLevel": 23,
+        "maxLevel": 24,
+        "chance": 0.1428
       },
       {
         "pokemonId": 602,
-        "minLevel": 30,
-        "maxLevel": 31,
-        "chance": 0.125
+        "minLevel": 23,
+        "maxLevel": 24,
+        "chance": 0.1584
       },
       {
         "pokemonId": 304,
-        "minLevel": 30,
-        "maxLevel": 31,
-        "chance": 0.125
+        "minLevel": 23,
+        "maxLevel": 24,
+        "chance": 0.132
       },
       {
         "pokemonId": 82,
-        "minLevel": 30,
-        "maxLevel": 31,
-        "chance": 0.125
+        "minLevel": 23,
+        "maxLevel": 24,
+        "chance": 0.0937
       },
       {
         "pokemonId": 600,
-        "minLevel": 30,
-        "maxLevel": 31,
-        "chance": 0.125
+        "minLevel": 23,
+        "maxLevel": 24,
+        "chance": 0.099
       },
       {
         "pokemonId": 596,
-        "minLevel": 30,
-        "maxLevel": 31,
-        "chance": 0.125
+        "minLevel": 23,
+        "maxLevel": 24,
+        "chance": 0.0923
       }
     ]
   },
@@ -899,57 +993,57 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 585,
-        "minLevel": 32,
-        "maxLevel": 33,
-        "chance": 0.1112
+        "minLevel": 26,
+        "maxLevel": 27,
+        "chance": 0.1288
       },
       {
         "pokemonId": 505,
-        "minLevel": 32,
-        "maxLevel": 33,
-        "chance": 0.1111
+        "minLevel": 26,
+        "maxLevel": 27,
+        "chance": 0.1027
       },
       {
         "pokemonId": 590,
-        "minLevel": 32,
-        "maxLevel": 33,
-        "chance": 0.1111
+        "minLevel": 26,
+        "maxLevel": 27,
+        "chance": 0.1467
       },
       {
         "pokemonId": 613,
-        "minLevel": 32,
-        "maxLevel": 33,
-        "chance": 0.1111
+        "minLevel": 26,
+        "maxLevel": 27,
+        "chance": 0.1415
       },
       {
         "pokemonId": 523,
-        "minLevel": 32,
-        "maxLevel": 33,
-        "chance": 0.1111
+        "minLevel": 26,
+        "maxLevel": 27,
+        "chance": 0.0868
       },
       {
         "pokemonId": 335,
-        "minLevel": 32,
-        "maxLevel": 33,
-        "chance": 0.1111
+        "minLevel": 26,
+        "maxLevel": 27,
+        "chance": 0.0942
       },
       {
         "pokemonId": 336,
-        "minLevel": 32,
-        "maxLevel": 33,
-        "chance": 0.1111
+        "minLevel": 26,
+        "maxLevel": 27,
+        "chance": 0.0942
       },
       {
         "pokemonId": 571,
-        "minLevel": 32,
-        "maxLevel": 33,
-        "chance": 0.1111
+        "minLevel": 26,
+        "maxLevel": 27,
+        "chance": 0.0846
       },
       {
         "pokemonId": 520,
-        "minLevel": 32,
-        "maxLevel": 33,
-        "chance": 0.1111
+        "minLevel": 26,
+        "maxLevel": 27,
+        "chance": 0.1205
       }
     ]
   },
@@ -958,39 +1052,39 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 607,
-        "minLevel": 34,
-        "maxLevel": 35,
-        "chance": 0.1665
+        "minLevel": 29,
+        "maxLevel": 30,
+        "chance": 0.2283
       },
       {
         "pokemonId": 605,
-        "minLevel": 34,
-        "maxLevel": 35,
-        "chance": 0.1667
+        "minLevel": 29,
+        "maxLevel": 30,
+        "chance": 0.1874
       },
       {
         "pokemonId": 42,
-        "minLevel": 34,
-        "maxLevel": 35,
-        "chance": 0.1667
+        "minLevel": 29,
+        "maxLevel": 30,
+        "chance": 0.138
       },
       {
         "pokemonId": 608,
-        "minLevel": 34,
-        "maxLevel": 35,
-        "chance": 0.1667
+        "minLevel": 29,
+        "maxLevel": 30,
+        "chance": 0.1697
       },
       {
         "pokemonId": 518,
-        "minLevel": 34,
-        "maxLevel": 35,
-        "chance": 0.1667
+        "minLevel": 29,
+        "maxLevel": 30,
+        "chance": 0.1289
       },
       {
         "pokemonId": 528,
-        "minLevel": 34,
-        "maxLevel": 35,
-        "chance": 0.1667
+        "minLevel": 29,
+        "maxLevel": 30,
+        "chance": 0.1477
       }
     ]
   },
@@ -1007,57 +1101,57 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 227,
-        "minLevel": 37,
-        "maxLevel": 38,
-        "chance": 0.1112
+        "minLevel": 32,
+        "maxLevel": 33,
+        "chance": 0.0997
       },
       {
         "pokemonId": 323,
-        "minLevel": 37,
-        "maxLevel": 38,
-        "chance": 0.1111
+        "minLevel": 32,
+        "maxLevel": 33,
+        "chance": 0.1008
       },
       {
         "pokemonId": 530,
-        "minLevel": 37,
-        "maxLevel": 38,
-        "chance": 0.1111
+        "minLevel": 32,
+        "maxLevel": 33,
+        "chance": 0.0913
       },
       {
         "pokemonId": 428,
-        "minLevel": 37,
-        "maxLevel": 38,
-        "chance": 0.1111
+        "minLevel": 32,
+        "maxLevel": 33,
+        "chance": 0.0966
       },
       {
         "pokemonId": 451,
-        "minLevel": 37,
-        "maxLevel": 38,
-        "chance": 0.1111
+        "minLevel": 32,
+        "maxLevel": 33,
+        "chance": 0.1405
       },
       {
         "pokemonId": 322,
-        "minLevel": 37,
-        "maxLevel": 38,
-        "chance": 0.1111
+        "minLevel": 32,
+        "maxLevel": 33,
+        "chance": 0.152
       },
       {
         "pokemonId": 126,
-        "minLevel": 37,
-        "maxLevel": 38,
-        "chance": 0.1111
+        "minLevel": 32,
+        "maxLevel": 33,
+        "chance": 0.0937
       },
       {
         "pokemonId": 329,
-        "minLevel": 37,
-        "maxLevel": 38,
-        "chance": 0.1111
+        "minLevel": 32,
+        "maxLevel": 33,
+        "chance": 0.1364
       },
       {
         "pokemonId": 330,
-        "minLevel": 37,
-        "maxLevel": 38,
-        "chance": 0.1111
+        "minLevel": 32,
+        "maxLevel": 33,
+        "chance": 0.089
       }
     ]
   },
@@ -1066,63 +1160,63 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 607,
-        "minLevel": 38,
-        "maxLevel": 39,
-        "chance": 0.1
+        "minLevel": 33,
+        "maxLevel": 34,
+        "chance": 0.1302
       },
       {
         "pokemonId": 20,
-        "minLevel": 38,
-        "maxLevel": 39,
-        "chance": 0.1
+        "minLevel": 33,
+        "maxLevel": 34,
+        "chance": 0.0867
       },
       {
         "pokemonId": 42,
-        "minLevel": 38,
-        "maxLevel": 39,
-        "chance": 0.1
+        "minLevel": 33,
+        "maxLevel": 34,
+        "chance": 0.0787
       },
       {
         "pokemonId": 354,
-        "minLevel": 38,
-        "maxLevel": 39,
-        "chance": 0.1
+        "minLevel": 33,
+        "maxLevel": 34,
+        "chance": 0.0787
       },
       {
         "pokemonId": 574,
-        "minLevel": 38,
-        "maxLevel": 39,
-        "chance": 0.1
+        "minLevel": 33,
+        "maxLevel": 34,
+        "chance": 0.1235
       },
       {
         "pokemonId": 577,
-        "minLevel": 38,
-        "maxLevel": 39,
-        "chance": 0.1
+        "minLevel": 33,
+        "maxLevel": 34,
+        "chance": 0.1235
       },
       {
         "pokemonId": 575,
-        "minLevel": 38,
-        "maxLevel": 39,
-        "chance": 0.1
+        "minLevel": 33,
+        "maxLevel": 34,
+        "chance": 0.0918
       },
       {
         "pokemonId": 578,
-        "minLevel": 38,
-        "maxLevel": 39,
-        "chance": 0.1
+        "minLevel": 33,
+        "maxLevel": 34,
+        "chance": 0.0968
       },
       {
         "pokemonId": 353,
-        "minLevel": 38,
-        "maxLevel": 39,
-        "chance": 0.1
+        "minLevel": 33,
+        "maxLevel": 34,
+        "chance": 0.1214
       },
       {
         "pokemonId": 609,
-        "minLevel": 38,
-        "maxLevel": 39,
-        "chance": 0.1
+        "minLevel": 33,
+        "maxLevel": 34,
+        "chance": 0.0687
       }
     ]
   },
@@ -1135,75 +1229,75 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 339,
-        "minLevel": 41,
-        "maxLevel": 42,
-        "chance": 0.0837
+        "minLevel": 36,
+        "maxLevel": 37,
+        "chance": 0.1058
       },
       {
         "pokemonId": 60,
-        "minLevel": 41,
-        "maxLevel": 42,
-        "chance": 0.0833
+        "minLevel": 36,
+        "maxLevel": 37,
+        "chance": 0.1015
       },
       {
         "pokemonId": 418,
-        "minLevel": 41,
-        "maxLevel": 42,
-        "chance": 0.0833
+        "minLevel": 36,
+        "maxLevel": 37,
+        "chance": 0.0923
       },
       {
         "pokemonId": 457,
-        "minLevel": 41,
-        "maxLevel": 42,
-        "chance": 0.0833
+        "minLevel": 36,
+        "maxLevel": 37,
+        "chance": 0.0662
       },
       {
         "pokemonId": 341,
-        "minLevel": 41,
-        "maxLevel": 42,
-        "chance": 0.0833
+        "minLevel": 36,
+        "maxLevel": 37,
+        "chance": 0.0989
       },
       {
         "pokemonId": 592,
-        "minLevel": 41,
-        "maxLevel": 42,
-        "chance": 0.0833
+        "minLevel": 36,
+        "maxLevel": 37,
+        "chance": 0.0909
       },
       {
         "pokemonId": 99,
-        "minLevel": 41,
-        "maxLevel": 42,
-        "chance": 0.0833
+        "minLevel": 36,
+        "maxLevel": 37,
+        "chance": 0.0641
       },
       {
         "pokemonId": 183,
-        "minLevel": 41,
-        "maxLevel": 42,
-        "chance": 0.0833
+        "minLevel": 36,
+        "maxLevel": 37,
+        "chance": 0.1218
       },
       {
         "pokemonId": 320,
-        "minLevel": 41,
-        "maxLevel": 42,
-        "chance": 0.0833
+        "minLevel": 36,
+        "maxLevel": 37,
+        "chance": 0.0761
       },
       {
         "pokemonId": 226,
-        "minLevel": 41,
-        "maxLevel": 42,
-        "chance": 0.0833
+        "minLevel": 36,
+        "maxLevel": 37,
+        "chance": 0.0628
       },
       {
         "pokemonId": 121,
-        "minLevel": 41,
-        "maxLevel": 42,
-        "chance": 0.0833
+        "minLevel": 36,
+        "maxLevel": 37,
+        "chance": 0.0586
       },
       {
         "pokemonId": 321,
-        "minLevel": 41,
-        "maxLevel": 42,
-        "chance": 0.0833
+        "minLevel": 36,
+        "maxLevel": 37,
+        "chance": 0.061
       }
     ]
   },
@@ -1212,51 +1306,51 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 114,
-        "minLevel": 42,
-        "maxLevel": 43,
-        "chance": 0.125
+        "minLevel": 38,
+        "maxLevel": 39,
+        "chance": 0.1299
       },
       {
         "pokemonId": 426,
-        "minLevel": 42,
-        "maxLevel": 43,
-        "chance": 0.125
+        "minLevel": 38,
+        "maxLevel": 39,
+        "chance": 0.1134
       },
       {
         "pokemonId": 279,
-        "minLevel": 42,
-        "maxLevel": 43,
-        "chance": 0.125
+        "minLevel": 38,
+        "maxLevel": 39,
+        "chance": 0.1284
       },
       {
         "pokemonId": 359,
-        "minLevel": 42,
-        "maxLevel": 43,
-        "chance": 0.125
+        "minLevel": 38,
+        "maxLevel": 39,
+        "chance": 0.1215
       },
       {
         "pokemonId": 419,
-        "minLevel": 42,
-        "maxLevel": 43,
-        "chance": 0.125
+        "minLevel": 38,
+        "maxLevel": 39,
+        "chance": 0.1141
       },
       {
         "pokemonId": 425,
-        "minLevel": 42,
-        "maxLevel": 43,
-        "chance": 0.125
+        "minLevel": 38,
+        "maxLevel": 39,
+        "chance": 0.1623
       },
       {
         "pokemonId": 581,
-        "minLevel": 42,
-        "maxLevel": 43,
-        "chance": 0.125
+        "minLevel": 38,
+        "maxLevel": 39,
+        "chance": 0.1194
       },
       {
         "pokemonId": 537,
-        "minLevel": 42,
-        "maxLevel": 43,
-        "chance": 0.125
+        "minLevel": 38,
+        "maxLevel": 39,
+        "chance": 0.111
       }
     ]
   },
@@ -1265,39 +1359,39 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 334,
-        "minLevel": 43,
-        "maxLevel": 44,
-        "chance": 0.1665
+        "minLevel": 42,
+        "maxLevel": 43,
+        "chance": 0.1413
       },
       {
         "pokemonId": 359,
-        "minLevel": 43,
-        "maxLevel": 44,
-        "chance": 0.1667
+        "minLevel": 42,
+        "maxLevel": 43,
+        "chance": 0.1488
       },
       {
         "pokemonId": 619,
-        "minLevel": 43,
-        "maxLevel": 44,
-        "chance": 0.1667
+        "minLevel": 42,
+        "maxLevel": 43,
+        "chance": 0.1978
       },
       {
         "pokemonId": 55,
-        "minLevel": 43,
-        "maxLevel": 44,
-        "chance": 0.1667
+        "minLevel": 42,
+        "maxLevel": 43,
+        "chance": 0.1384
       },
       {
         "pokemonId": 333,
-        "minLevel": 43,
-        "maxLevel": 44,
-        "chance": 0.1667
+        "minLevel": 42,
+        "maxLevel": 43,
+        "chance": 0.2233
       },
       {
         "pokemonId": 357,
-        "minLevel": 43,
-        "maxLevel": 44,
-        "chance": 0.1667
+        "minLevel": 42,
+        "maxLevel": 43,
+        "chance": 0.1504
       }
     ]
   },
@@ -1308,31 +1402,31 @@ export const unovaRoutes = [
         "pokemonId": 37,
         "minLevel": 44,
         "maxLevel": 45,
-        "chance": 0.2
+        "chance": 0.2611
       },
       {
         "pokemonId": 437,
         "minLevel": 44,
         "maxLevel": 45,
-        "chance": 0.2
+        "chance": 0.1561
       },
       {
         "pokemonId": 333,
         "minLevel": 44,
         "maxLevel": 45,
-        "chance": 0.2
+        "chance": 0.2518
       },
       {
         "pokemonId": 358,
         "minLevel": 44,
         "maxLevel": 45,
-        "chance": 0.2
+        "chance": 0.1716
       },
       {
         "pokemonId": 576,
         "minLevel": 44,
         "maxLevel": 45,
-        "chance": 0.2
+        "chance": 0.1594
       }
     ]
   },
@@ -1349,33 +1443,33 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 207,
-        "minLevel": 48,
-        "maxLevel": 49,
-        "chance": 0.2
+        "minLevel": 45,
+        "maxLevel": 46,
+        "chance": 0.1769
       },
       {
         "pokemonId": 335,
-        "minLevel": 48,
-        "maxLevel": 49,
-        "chance": 0.2
+        "minLevel": 45,
+        "maxLevel": 46,
+        "chance": 0.1661
       },
       {
         "pokemonId": 336,
-        "minLevel": 48,
-        "maxLevel": 49,
-        "chance": 0.2
+        "minLevel": 45,
+        "maxLevel": 46,
+        "chance": 0.1661
       },
       {
         "pokemonId": 588,
-        "minLevel": 48,
-        "maxLevel": 49,
-        "chance": 0.2
+        "minLevel": 45,
+        "maxLevel": 46,
+        "chance": 0.2415
       },
       {
         "pokemonId": 616,
-        "minLevel": 48,
-        "maxLevel": 49,
-        "chance": 0.2
+        "minLevel": 45,
+        "maxLevel": 46,
+        "chance": 0.2494
       }
     ]
   },
@@ -1386,37 +1480,37 @@ export const unovaRoutes = [
         "pokemonId": 400,
         "minLevel": 49,
         "maxLevel": 50,
-        "chance": 0.1665
+        "chance": 0.1707
       },
       {
         "pokemonId": 523,
         "minLevel": 49,
         "maxLevel": 50,
-        "chance": 0.1667
+        "chance": 0.1408
       },
       {
         "pokemonId": 279,
         "minLevel": 49,
         "maxLevel": 50,
-        "chance": 0.1667
+        "chance": 0.159
       },
       {
         "pokemonId": 206,
         "minLevel": 49,
         "maxLevel": 50,
-        "chance": 0.1667
+        "chance": 0.1686
       },
       {
         "pokemonId": 294,
         "minLevel": 49,
         "maxLevel": 50,
-        "chance": 0.1667
+        "chance": 0.1944
       },
       {
         "pokemonId": 184,
         "minLevel": 49,
         "maxLevel": 50,
-        "chance": 0.1667
+        "chance": 0.1665
       }
     ]
   },
@@ -1425,45 +1519,45 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 540,
-        "minLevel": 50,
-        "maxLevel": 51,
-        "chance": 0.1426
+        "minLevel": 53,
+        "maxLevel": 54,
+        "chance": 0.1691
       },
       {
         "pokemonId": 520,
-        "minLevel": 50,
-        "maxLevel": 51,
-        "chance": 0.1429
+        "minLevel": 53,
+        "maxLevel": 54,
+        "chance": 0.1464
       },
       {
         "pokemonId": 315,
-        "minLevel": 50,
-        "maxLevel": 51,
-        "chance": 0.1429
+        "minLevel": 53,
+        "maxLevel": 54,
+        "chance": 0.131
       },
       {
         "pokemonId": 415,
-        "minLevel": 50,
-        "maxLevel": 51,
-        "chance": 0.1429
+        "minLevel": 53,
+        "maxLevel": 54,
+        "chance": 0.2148
       },
       {
         "pokemonId": 127,
-        "minLevel": 50,
-        "maxLevel": 51,
-        "chance": 0.1429
+        "minLevel": 53,
+        "maxLevel": 54,
+        "chance": 0.1048
       },
       {
         "pokemonId": 192,
-        "minLevel": 50,
-        "maxLevel": 51,
-        "chance": 0.1429
+        "minLevel": 53,
+        "maxLevel": 54,
+        "chance": 0.1233
       },
       {
         "pokemonId": 416,
-        "minLevel": 50,
-        "maxLevel": 51,
-        "chance": 0.1429
+        "minLevel": 53,
+        "maxLevel": 54,
+        "chance": 0.1106
       }
     ]
   },
@@ -1472,39 +1566,39 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 569,
-        "minLevel": 51,
-        "maxLevel": 52,
-        "chance": 0.1665
+        "minLevel": 57,
+        "maxLevel": 58,
+        "chance": 0.1472
       },
       {
         "pokemonId": 510,
-        "minLevel": 51,
-        "maxLevel": 52,
-        "chance": 0.1667
+        "minLevel": 57,
+        "maxLevel": 58,
+        "chance": 0.1565
       },
       {
         "pokemonId": 89,
-        "minLevel": 51,
-        "maxLevel": 52,
-        "chance": 0.1667
+        "minLevel": 57,
+        "maxLevel": 58,
+        "chance": 0.1396
       },
       {
         "pokemonId": 572,
-        "minLevel": 51,
-        "maxLevel": 52,
-        "chance": 0.1667
+        "minLevel": 57,
+        "maxLevel": 58,
+        "chance": 0.2326
       },
       {
         "pokemonId": 578,
-        "minLevel": 51,
-        "maxLevel": 52,
-        "chance": 0.1667
+        "minLevel": 57,
+        "maxLevel": 58,
+        "chance": 0.1886
       },
       {
         "pokemonId": 526,
-        "minLevel": 51,
-        "maxLevel": 52,
-        "chance": 0.1667
+        "minLevel": 57,
+        "maxLevel": 58,
+        "chance": 0.1355
       }
     ]
   },
@@ -1517,63 +1611,63 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 349,
-        "minLevel": 53,
-        "maxLevel": 54,
-        "chance": 0.1
+        "minLevel": 59,
+        "maxLevel": 60,
+        "chance": 0.1919
       },
       {
         "pokemonId": 456,
-        "minLevel": 53,
-        "maxLevel": 54,
-        "chance": 0.1
+        "minLevel": 59,
+        "maxLevel": 60,
+        "chance": 0.1163
       },
       {
         "pokemonId": 211,
-        "minLevel": 53,
-        "maxLevel": 54,
-        "chance": 0.1
+        "minLevel": 59,
+        "maxLevel": 60,
+        "chance": 0.0872
       },
       {
         "pokemonId": 618,
-        "minLevel": 53,
-        "maxLevel": 54,
-        "chance": 0.1
+        "minLevel": 59,
+        "maxLevel": 60,
+        "chance": 0.0815
       },
       {
         "pokemonId": 536,
-        "minLevel": 53,
-        "maxLevel": 54,
-        "chance": 0.1
+        "minLevel": 59,
+        "maxLevel": 60,
+        "chance": 0.0999
       },
       {
         "pokemonId": 61,
-        "minLevel": 53,
-        "maxLevel": 54,
-        "chance": 0.1
+        "minLevel": 59,
+        "maxLevel": 60,
+        "chance": 0.0997
       },
       {
         "pokemonId": 186,
-        "minLevel": 53,
-        "maxLevel": 54,
-        "chance": 0.1
+        "minLevel": 59,
+        "maxLevel": 60,
+        "chance": 0.0767
       },
       {
         "pokemonId": 364,
-        "minLevel": 53,
-        "maxLevel": 54,
-        "chance": 0.1
+        "minLevel": 59,
+        "maxLevel": 60,
+        "chance": 0.0936
       },
       {
         "pokemonId": 365,
-        "minLevel": 53,
-        "maxLevel": 54,
-        "chance": 0.1
+        "minLevel": 59,
+        "maxLevel": 60,
+        "chance": 0.0724
       },
       {
         "pokemonId": 87,
-        "minLevel": 53,
-        "maxLevel": 54,
-        "chance": 0.1
+        "minLevel": 59,
+        "maxLevel": 60,
+        "chance": 0.0808
       }
     ]
   },
@@ -1586,45 +1680,45 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 458,
-        "minLevel": 56,
-        "maxLevel": 57,
-        "chance": 0.1426
+        "minLevel": 63,
+        "maxLevel": 64,
+        "chance": 0.1561
       },
       {
         "pokemonId": 370,
-        "minLevel": 56,
-        "maxLevel": 57,
-        "chance": 0.1429
+        "minLevel": 63,
+        "maxLevel": 64,
+        "chance": 0.1632
       },
       {
         "pokemonId": 222,
-        "minLevel": 56,
-        "maxLevel": 57,
-        "chance": 0.1429
+        "minLevel": 63,
+        "maxLevel": 64,
+        "chance": 0.1314
       },
       {
         "pokemonId": 278,
-        "minLevel": 56,
-        "maxLevel": 57,
-        "chance": 0.1429
+        "minLevel": 63,
+        "maxLevel": 64,
+        "chance": 0.1995
       },
       {
         "pokemonId": 279,
-        "minLevel": 56,
-        "maxLevel": 57,
-        "chance": 0.1429
+        "minLevel": 63,
+        "maxLevel": 64,
+        "chance": 0.1224
       },
       {
         "pokemonId": 224,
-        "minLevel": 56,
-        "maxLevel": 57,
-        "chance": 0.1429
+        "minLevel": 63,
+        "maxLevel": 64,
+        "chance": 0.1122
       },
       {
         "pokemonId": 342,
-        "minLevel": 56,
-        "maxLevel": 57,
-        "chance": 0.1429
+        "minLevel": 63,
+        "maxLevel": 64,
+        "chance": 0.1152
       }
     ]
   },
@@ -1633,39 +1727,39 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 525,
-        "minLevel": 57,
-        "maxLevel": 58,
-        "chance": 0.1665
+        "minLevel": 65,
+        "maxLevel": 66,
+        "chance": 0.1527
       },
       {
         "pokemonId": 349,
-        "minLevel": 57,
-        "maxLevel": 58,
-        "chance": 0.1667
+        "minLevel": 65,
+        "maxLevel": 66,
+        "chance": 0.2978
       },
       {
         "pokemonId": 594,
-        "minLevel": 57,
-        "maxLevel": 58,
-        "chance": 0.1667
+        "minLevel": 65,
+        "maxLevel": 66,
+        "chance": 0.1267
       },
       {
         "pokemonId": 527,
-        "minLevel": 57,
-        "maxLevel": 58,
-        "chance": 0.1667
+        "minLevel": 65,
+        "maxLevel": 66,
+        "chance": 0.1844
       },
       {
         "pokemonId": 213,
-        "minLevel": 57,
-        "maxLevel": 58,
-        "chance": 0.1667
+        "minLevel": 65,
+        "maxLevel": 66,
+        "chance": 0.118
       },
       {
         "pokemonId": 565,
-        "minLevel": 57,
-        "maxLevel": 58,
-        "chance": 0.1667
+        "minLevel": 65,
+        "maxLevel": 66,
+        "chance": 0.1204
       }
     ]
   },
@@ -1674,27 +1768,27 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 279,
-        "minLevel": 58,
-        "maxLevel": 59,
-        "chance": 0.25
+        "minLevel": 72,
+        "maxLevel": 73,
+        "chance": 0.2179
       },
       {
         "pokemonId": 55,
-        "minLevel": 58,
-        "maxLevel": 59,
-        "chance": 0.25
+        "minLevel": 72,
+        "maxLevel": 73,
+        "chance": 0.1918
       },
       {
         "pokemonId": 183,
-        "minLevel": 58,
-        "maxLevel": 59,
-        "chance": 0.25
+        "minLevel": 72,
+        "maxLevel": 73,
+        "chance": 0.3836
       },
       {
         "pokemonId": 591,
-        "minLevel": 58,
-        "maxLevel": 59,
-        "chance": 0.25
+        "minLevel": 72,
+        "maxLevel": 73,
+        "chance": 0.2067
       }
     ]
   },
@@ -1703,27 +1797,27 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 374,
-        "minLevel": 59,
-        "maxLevel": 60,
-        "chance": 0.25
+        "minLevel": 76,
+        "maxLevel": 77,
+        "chance": 0.3311
       },
       {
         "pokemonId": 624,
-        "minLevel": 59,
-        "maxLevel": 60,
-        "chance": 0.25
+        "minLevel": 76,
+        "maxLevel": 77,
+        "chance": 0.2922
       },
       {
         "pokemonId": 462,
-        "minLevel": 59,
-        "maxLevel": 60,
-        "chance": 0.25
+        "minLevel": 76,
+        "maxLevel": 77,
+        "chance": 0.1857
       },
       {
         "pokemonId": 601,
-        "minLevel": 59,
-        "maxLevel": 60,
-        "chance": 0.25
+        "minLevel": 76,
+        "maxLevel": 77,
+        "chance": 0.191
       }
     ]
   },
@@ -1732,21 +1826,21 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 88,
-        "minLevel": 60,
-        "maxLevel": 61,
-        "chance": 0.3334
+        "minLevel": 82,
+        "maxLevel": 83,
+        "chance": 0.3641
       },
       {
         "pokemonId": 436,
-        "minLevel": 60,
-        "maxLevel": 61,
-        "chance": 0.3333
+        "minLevel": 82,
+        "maxLevel": 83,
+        "chance": 0.3944
       },
       {
         "pokemonId": 110,
-        "minLevel": 60,
-        "maxLevel": 61,
-        "chance": 0.3333
+        "minLevel": 82,
+        "maxLevel": 83,
+        "chance": 0.2415
       }
     ]
   },
@@ -1755,69 +1849,69 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 225,
-        "minLevel": 62,
-        "maxLevel": 63,
-        "chance": 0.091
+        "minLevel": 84,
+        "maxLevel": 85,
+        "chance": 0.1073
       },
       {
         "pokemonId": 220,
-        "minLevel": 62,
-        "maxLevel": 63,
-        "chance": 0.0909
+        "minLevel": 84,
+        "maxLevel": 85,
+        "chance": 0.1416
       },
       {
         "pokemonId": 221,
-        "minLevel": 62,
-        "maxLevel": 63,
-        "chance": 0.0909
+        "minLevel": 84,
+        "maxLevel": 85,
+        "chance": 0.0787
       },
       {
         "pokemonId": 132,
-        "minLevel": 62,
-        "maxLevel": 63,
-        "chance": 0.0909
+        "minLevel": 84,
+        "maxLevel": 85,
+        "chance": 0.1229
       },
       {
         "pokemonId": 35,
-        "minLevel": 62,
-        "maxLevel": 63,
-        "chance": 0.0909
+        "minLevel": 84,
+        "maxLevel": 85,
+        "chance": 0.1096
       },
       {
         "pokemonId": 375,
-        "minLevel": 62,
-        "maxLevel": 63,
-        "chance": 0.0909
+        "minLevel": 84,
+        "maxLevel": 85,
+        "chance": 0.0843
       },
       {
         "pokemonId": 337,
-        "minLevel": 62,
-        "maxLevel": 63,
-        "chance": 0.0909
+        "minLevel": 84,
+        "maxLevel": 85,
+        "chance": 0.077
       },
       {
         "pokemonId": 338,
-        "minLevel": 62,
-        "maxLevel": 63,
-        "chance": 0.0909
+        "minLevel": 84,
+        "maxLevel": 85,
+        "chance": 0.077
       },
       {
         "pokemonId": 376,
-        "minLevel": 62,
-        "maxLevel": 63,
-        "chance": 0.0909
+        "minLevel": 84,
+        "maxLevel": 85,
+        "chance": 0.059
       },
       {
         "pokemonId": 36,
-        "minLevel": 62,
-        "maxLevel": 63,
-        "chance": 0.0909
+        "minLevel": 84,
+        "maxLevel": 85,
+        "chance": 0.0733
       },
       {
         "pokemonId": 461,
-        "minLevel": 62,
-        "maxLevel": 63,
-        "chance": 0.0909
+        "minLevel": 84,
+        "maxLevel": 85,
+        "chance": 0.0693
       }
     ]
   },
@@ -1826,57 +1920,57 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 215,
-        "minLevel": 63,
-        "maxLevel": 64,
-        "chance": 0.1112
+        "minLevel": 89,
+        "maxLevel": 90,
+        "chance": 0.1238
       },
       {
         "pokemonId": 591,
-        "minLevel": 63,
-        "maxLevel": 64,
-        "chance": 0.1111
+        "minLevel": 89,
+        "maxLevel": 90,
+        "chance": 0.1147
       },
       {
         "pokemonId": 626,
-        "minLevel": 63,
-        "maxLevel": 64,
-        "chance": 0.1111
+        "minLevel": 89,
+        "maxLevel": 90,
+        "chance": 0.1086
       },
       {
         "pokemonId": 407,
-        "minLevel": 63,
-        "maxLevel": 64,
-        "chance": 0.1111
+        "minLevel": 89,
+        "maxLevel": 90,
+        "chance": 0.1033
       },
       {
         "pokemonId": 533,
-        "minLevel": 63,
-        "maxLevel": 64,
-        "chance": 0.1111
+        "minLevel": 89,
+        "maxLevel": 90,
+        "chance": 0.1314
       },
       {
         "pokemonId": 497,
-        "minLevel": 63,
-        "maxLevel": 64,
-        "chance": 0.1111
+        "minLevel": 89,
+        "maxLevel": 90,
+        "chance": 0.1008
       },
       {
         "pokemonId": 620,
-        "minLevel": 63,
-        "maxLevel": 64,
-        "chance": 0.1111
+        "minLevel": 89,
+        "maxLevel": 90,
+        "chance": 0.1044
       },
       {
         "pokemonId": 625,
-        "minLevel": 63,
-        "maxLevel": 64,
-        "chance": 0.1111
+        "minLevel": 89,
+        "maxLevel": 90,
+        "chance": 0.1086
       },
       {
         "pokemonId": 472,
-        "minLevel": 63,
-        "maxLevel": 64,
-        "chance": 0.1111
+        "minLevel": 89,
+        "maxLevel": 90,
+        "chance": 0.1044
       }
     ]
   },
@@ -1885,45 +1979,45 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 632,
-        "minLevel": 64,
-        "maxLevel": 65,
-        "chance": 0.1426
+        "minLevel": 94,
+        "maxLevel": 95,
+        "chance": 0.1321
       },
       {
         "pokemonId": 631,
-        "minLevel": 64,
-        "maxLevel": 65,
-        "chance": 0.1429
+        "minLevel": 94,
+        "maxLevel": 95,
+        "chance": 0.1321
       },
       {
         "pokemonId": 633,
-        "minLevel": 64,
-        "maxLevel": 65,
-        "chance": 0.1429
+        "minLevel": 94,
+        "maxLevel": 95,
+        "chance": 0.2131
       },
       {
         "pokemonId": 621,
-        "minLevel": 64,
-        "maxLevel": 65,
-        "chance": 0.1429
+        "minLevel": 94,
+        "maxLevel": 95,
+        "chance": 0.1318
       },
       {
         "pokemonId": 634,
-        "minLevel": 64,
-        "maxLevel": 65,
-        "chance": 0.1429
+        "minLevel": 94,
+        "maxLevel": 95,
+        "chance": 0.1522
       },
       {
         "pokemonId": 635,
-        "minLevel": 64,
-        "maxLevel": 65,
-        "chance": 0.1429
+        "minLevel": 94,
+        "maxLevel": 95,
+        "chance": 0.1065
       },
       {
         "pokemonId": 623,
-        "minLevel": 64,
-        "maxLevel": 65,
-        "chance": 0.1429
+        "minLevel": 94,
+        "maxLevel": 95,
+        "chance": 0.1322
       }
     ]
   },
@@ -1936,33 +2030,33 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 536,
-        "minLevel": 25,
-        "maxLevel": 26,
-        "chance": 0.2
+        "minLevel": 98,
+        "maxLevel": 99,
+        "chance": 0.1972
       },
       {
         "pokemonId": 618,
-        "minLevel": 25,
-        "maxLevel": 26,
-        "chance": 0.2
+        "minLevel": 98,
+        "maxLevel": 99,
+        "chance": 0.1607
       },
       {
         "pokemonId": 90,
-        "minLevel": 25,
-        "maxLevel": 26,
-        "chance": 0.2
+        "minLevel": 98,
+        "maxLevel": 99,
+        "chance": 0.2482
       },
       {
         "pokemonId": 453,
-        "minLevel": 25,
-        "maxLevel": 26,
-        "chance": 0.2
+        "minLevel": 98,
+        "maxLevel": 99,
+        "chance": 0.2524
       },
       {
         "pokemonId": 169,
-        "minLevel": 25,
-        "maxLevel": 26,
-        "chance": 0.2
+        "minLevel": 98,
+        "maxLevel": 99,
+        "chance": 0.1415
       }
     ]
   },
@@ -1971,21 +2065,21 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 616,
-        "minLevel": 32,
-        "maxLevel": 33,
-        "chance": 0.3334
+        "minLevel": 102,
+        "maxLevel": 103,
+        "chance": 0.3813
       },
       {
         "pokemonId": 580,
-        "minLevel": 32,
-        "maxLevel": 33,
-        "chance": 0.3333
+        "minLevel": 102,
+        "maxLevel": 103,
+        "chance": 0.3813
       },
       {
         "pokemonId": 454,
-        "minLevel": 32,
-        "maxLevel": 33,
-        "chance": 0.3333
+        "minLevel": 102,
+        "maxLevel": 103,
+        "chance": 0.2374
       }
     ]
   },
@@ -1994,21 +2088,21 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 131,
-        "minLevel": 39,
-        "maxLevel": 40,
-        "chance": 0.3334
+        "minLevel": 103,
+        "maxLevel": 104,
+        "chance": 0.277
       },
       {
         "pokemonId": 564,
-        "minLevel": 39,
-        "maxLevel": 40,
-        "chance": 0.3333
+        "minLevel": 103,
+        "maxLevel": 104,
+        "chance": 0.4174
       },
       {
         "pokemonId": 606,
-        "minLevel": 39,
-        "maxLevel": 40,
-        "chance": 0.3333
+        "minLevel": 103,
+        "maxLevel": 104,
+        "chance": 0.3056
       }
     ]
   },
@@ -2017,45 +2111,45 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 622,
-        "minLevel": 46,
-        "maxLevel": 47,
-        "chance": 0.1426
+        "minLevel": 105,
+        "maxLevel": 106,
+        "chance": 0.1978
       },
       {
         "pokemonId": 621,
-        "minLevel": 46,
-        "maxLevel": 47,
-        "chance": 0.1429
+        "minLevel": 105,
+        "maxLevel": 106,
+        "chance": 0.1236
       },
       {
         "pokemonId": 619,
-        "minLevel": 46,
-        "maxLevel": 47,
-        "chance": 0.1429
+        "minLevel": 105,
+        "maxLevel": 106,
+        "chance": 0.1712
       },
       {
         "pokemonId": 42,
-        "minLevel": 46,
-        "maxLevel": 47,
-        "chance": 0.1429
+        "minLevel": 105,
+        "maxLevel": 106,
+        "chance": 0.1317
       },
       {
         "pokemonId": 611,
-        "minLevel": 46,
-        "maxLevel": 47,
-        "chance": 0.1429
+        "minLevel": 105,
+        "maxLevel": 106,
+        "chance": 0.1462
       },
       {
         "pokemonId": 612,
-        "minLevel": 46,
-        "maxLevel": 47,
-        "chance": 0.1429
+        "minLevel": 105,
+        "maxLevel": 106,
+        "chance": 0.111
       },
       {
         "pokemonId": 614,
-        "minLevel": 46,
-        "maxLevel": 47,
-        "chance": 0.1429
+        "minLevel": 105,
+        "maxLevel": 106,
+        "chance": 0.1185
       }
     ]
   },
@@ -2064,51 +2158,51 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 525,
-        "minLevel": 53,
-        "maxLevel": 54,
-        "chance": 0.125
+        "minLevel": 108,
+        "maxLevel": 109,
+        "chance": 0.1302
       },
       {
         "pokemonId": 533,
-        "minLevel": 53,
-        "maxLevel": 54,
-        "chance": 0.125
+        "minLevel": 108,
+        "maxLevel": 109,
+        "chance": 0.1254
       },
       {
         "pokemonId": 615,
-        "minLevel": 53,
-        "maxLevel": 54,
-        "chance": 0.125
+        "minLevel": 108,
+        "maxLevel": 109,
+        "chance": 0.0986
       },
       {
         "pokemonId": 527,
-        "minLevel": 53,
-        "maxLevel": 54,
-        "chance": 0.125
+        "minLevel": 108,
+        "maxLevel": 109,
+        "chance": 0.1572
       },
       {
         "pokemonId": 246,
-        "minLevel": 53,
-        "maxLevel": 54,
-        "chance": 0.125
+        "minLevel": 108,
+        "maxLevel": 109,
+        "chance": 0.1693
       },
       {
         "pokemonId": 473,
-        "minLevel": 53,
-        "maxLevel": 54,
-        "chance": 0.125
+        "minLevel": 108,
+        "maxLevel": 109,
+        "chance": 0.0958
       },
       {
         "pokemonId": 583,
-        "minLevel": 53,
-        "maxLevel": 54,
-        "chance": 0.125
+        "minLevel": 108,
+        "maxLevel": 109,
+        "chance": 0.1286
       },
       {
         "pokemonId": 584,
-        "minLevel": 53,
-        "maxLevel": 54,
-        "chance": 0.125
+        "minLevel": 108,
+        "maxLevel": 109,
+        "chance": 0.0949
       }
     ]
   },
@@ -2117,57 +2211,57 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 525,
-        "minLevel": 60,
-        "maxLevel": 60,
-        "chance": 0.1112
+        "minLevel": 110,
+        "maxLevel": 111,
+        "chance": 0.1217
       },
       {
         "pokemonId": 299,
-        "minLevel": 60,
-        "maxLevel": 60,
-        "chance": 0.1111
+        "minLevel": 110,
+        "maxLevel": 111,
+        "chance": 0.1266
       },
       {
         "pokemonId": 305,
-        "minLevel": 60,
-        "maxLevel": 60,
-        "chance": 0.1111
+        "minLevel": 110,
+        "maxLevel": 111,
+        "chance": 0.1104
       },
       {
         "pokemonId": 527,
-        "minLevel": 60,
-        "maxLevel": 60,
-        "chance": 0.1111
+        "minLevel": 110,
+        "maxLevel": 111,
+        "chance": 0.147
       },
       {
         "pokemonId": 632,
-        "minLevel": 60,
-        "maxLevel": 60,
-        "chance": 0.1111
+        "minLevel": 110,
+        "maxLevel": 111,
+        "chance": 0.0981
       },
       {
         "pokemonId": 95,
-        "minLevel": 60,
-        "maxLevel": 60,
-        "chance": 0.1111
+        "minLevel": 110,
+        "maxLevel": 111,
+        "chance": 0.1233
       },
       {
         "pokemonId": 208,
-        "minLevel": 60,
-        "maxLevel": 60,
-        "chance": 0.1111
+        "minLevel": 110,
+        "maxLevel": 111,
+        "chance": 0.0931
       },
       {
         "pokemonId": 306,
-        "minLevel": 60,
-        "maxLevel": 60,
-        "chance": 0.1111
+        "minLevel": 110,
+        "maxLevel": 111,
+        "chance": 0.0896
       },
       {
         "pokemonId": 476,
-        "minLevel": 60,
-        "maxLevel": 60,
-        "chance": 0.1111
+        "minLevel": 110,
+        "maxLevel": 111,
+        "chance": 0.0902
       }
     ]
   },
@@ -2176,39 +2270,39 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 207,
-        "minLevel": 35,
-        "maxLevel": 36,
-        "chance": 0.1665
+        "minLevel": 112,
+        "maxLevel": 113,
+        "chance": 0.1486
       },
       {
         "pokemonId": 247,
-        "minLevel": 35,
-        "maxLevel": 36,
-        "chance": 0.1667
+        "minLevel": 112,
+        "maxLevel": 113,
+        "chance": 0.1559
       },
       {
         "pokemonId": 559,
-        "minLevel": 35,
-        "maxLevel": 36,
-        "chance": 0.1667
+        "minLevel": 112,
+        "maxLevel": 113,
+        "chance": 0.1836
       },
       {
         "pokemonId": 590,
-        "minLevel": 35,
-        "maxLevel": 36,
-        "chance": 0.1667
+        "minLevel": 112,
+        "maxLevel": 113,
+        "chance": 0.2174
       },
       {
         "pokemonId": 109,
-        "minLevel": 35,
-        "maxLevel": 36,
-        "chance": 0.1667
+        "minLevel": 112,
+        "maxLevel": 113,
+        "chance": 0.188
       },
       {
         "pokemonId": 248,
-        "minLevel": 35,
-        "maxLevel": 36,
-        "chance": 0.1667
+        "minLevel": 112,
+        "maxLevel": 113,
+        "chance": 0.1065
       }
     ]
   },
@@ -2217,27 +2311,27 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 515,
-        "minLevel": 44,
-        "maxLevel": 45,
-        "chance": 0.25
+        "minLevel": 114,
+        "maxLevel": 115,
+        "chance": 0.2566
       },
       {
         "pokemonId": 513,
-        "minLevel": 44,
-        "maxLevel": 45,
-        "chance": 0.25
+        "minLevel": 114,
+        "maxLevel": 115,
+        "chance": 0.2566
       },
       {
         "pokemonId": 39,
-        "minLevel": 44,
-        "maxLevel": 45,
-        "chance": 0.25
+        "minLevel": 114,
+        "maxLevel": 115,
+        "chance": 0.3003
       },
       {
         "pokemonId": 40,
-        "minLevel": 44,
-        "maxLevel": 45,
-        "chance": 0.25
+        "minLevel": 114,
+        "maxLevel": 115,
+        "chance": 0.1865
       }
     ]
   },
@@ -2246,21 +2340,21 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 517,
-        "minLevel": 53,
-        "maxLevel": 54,
-        "chance": 0.3334
+        "minLevel": 115,
+        "maxLevel": 116,
+        "chance": 0.4109
       },
       {
         "pokemonId": 627,
-        "minLevel": 53,
-        "maxLevel": 54,
-        "chance": 0.3333
+        "minLevel": 115,
+        "maxLevel": 116,
+        "chance": 0.3428
       },
       {
         "pokemonId": 518,
-        "minLevel": 53,
-        "maxLevel": 54,
-        "chance": 0.3333
+        "minLevel": 115,
+        "maxLevel": 116,
+        "chance": 0.2463
       }
     ]
   },
@@ -2269,33 +2363,33 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 559,
-        "minLevel": 61,
-        "maxLevel": 62,
-        "chance": 0.2
+        "minLevel": 117,
+        "maxLevel": 118,
+        "chance": 0.2567
       },
       {
         "pokemonId": 558,
-        "minLevel": 61,
-        "maxLevel": 62,
-        "chance": 0.2
+        "minLevel": 117,
+        "maxLevel": 118,
+        "chance": 0.1842
       },
       {
         "pokemonId": 455,
-        "minLevel": 61,
-        "maxLevel": 62,
-        "chance": 0.2
+        "minLevel": 117,
+        "maxLevel": 118,
+        "chance": 0.1967
       },
       {
         "pokemonId": 426,
-        "minLevel": 61,
-        "maxLevel": 62,
-        "chance": 0.2
+        "minLevel": 117,
+        "maxLevel": 118,
+        "chance": 0.1794
       },
       {
         "pokemonId": 560,
-        "minLevel": 61,
-        "maxLevel": 62,
-        "chance": 0.2
+        "minLevel": 117,
+        "maxLevel": 118,
+        "chance": 0.183
       }
     ]
   },
@@ -2304,15 +2398,15 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 592,
-        "minLevel": 70,
-        "maxLevel": 70,
-        "chance": 0.5
+        "minLevel": 120,
+        "maxLevel": 121,
+        "chance": 0.5839
       },
       {
         "pokemonId": 594,
-        "minLevel": 70,
-        "maxLevel": 70,
-        "chance": 0.5
+        "minLevel": 120,
+        "maxLevel": 121,
+        "chance": 0.4161
       }
     ]
   },
@@ -2321,14 +2415,14 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 498,
-        "minLevel": 65,
-        "maxLevel": 66,
+        "minLevel": 120,
+        "maxLevel": 121,
         "chance": 0.5
       },
       {
         "pokemonId": 501,
-        "minLevel": 65,
-        "maxLevel": 66,
+        "minLevel": 120,
+        "maxLevel": 121,
         "chance": 0.5
       }
     ]
@@ -2338,27 +2432,27 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 173,
-        "minLevel": 76,
-        "maxLevel": 77,
-        "chance": 0.25
+        "minLevel": 120,
+        "maxLevel": 121,
+        "chance": 0.3265
       },
       {
         "pokemonId": 174,
-        "minLevel": 76,
-        "maxLevel": 77,
-        "chance": 0.25
+        "minLevel": 120,
+        "maxLevel": 121,
+        "chance": 0.3389
       },
       {
         "pokemonId": 181,
-        "minLevel": 76,
-        "maxLevel": 77,
-        "chance": 0.25
+        "minLevel": 120,
+        "maxLevel": 121,
+        "chance": 0.1396
       },
       {
         "pokemonId": 180,
-        "minLevel": 76,
-        "maxLevel": 77,
-        "chance": 0.25
+        "minLevel": 120,
+        "maxLevel": 121,
+        "chance": 0.195
       }
     ]
   },
@@ -2367,39 +2461,39 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 522,
-        "minLevel": 88,
-        "maxLevel": 89,
-        "chance": 0.1665
+        "minLevel": 120,
+        "maxLevel": 121,
+        "chance": 0.2302
       },
       {
         "pokemonId": 325,
-        "minLevel": 88,
-        "maxLevel": 89,
-        "chance": 0.1667
+        "minLevel": 120,
+        "maxLevel": 121,
+        "chance": 0.2058
       },
       {
         "pokemonId": 108,
-        "minLevel": 88,
-        "maxLevel": 89,
-        "chance": 0.1667
+        "minLevel": 120,
+        "maxLevel": 121,
+        "chance": 0.1764
       },
       {
         "pokemonId": 463,
-        "minLevel": 88,
-        "maxLevel": 89,
-        "chance": 0.1667
+        "minLevel": 120,
+        "maxLevel": 121,
+        "chance": 0.1319
       },
       {
         "pokemonId": 288,
-        "minLevel": 88,
-        "maxLevel": 89,
-        "chance": 0.1667
+        "minLevel": 120,
+        "maxLevel": 121,
+        "chance": 0.1543
       },
       {
         "pokemonId": 289,
-        "minLevel": 88,
-        "maxLevel": 89,
-        "chance": 0.1667
+        "minLevel": 120,
+        "maxLevel": 121,
+        "chance": 0.1014
       }
     ]
   },
@@ -2408,33 +2502,33 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 538,
-        "minLevel": 99,
-        "maxLevel": 100,
-        "chance": 0.2
+        "minLevel": 120,
+        "maxLevel": 121,
+        "chance": 0.2114
       },
       {
         "pokemonId": 539,
-        "minLevel": 99,
-        "maxLevel": 100,
-        "chance": 0.2
+        "minLevel": 120,
+        "maxLevel": 121,
+        "chance": 0.2114
       },
       {
         "pokemonId": 534,
-        "minLevel": 99,
-        "maxLevel": 100,
-        "chance": 0.2
+        "minLevel": 120,
+        "maxLevel": 121,
+        "chance": 0.1946
       },
       {
         "pokemonId": 125,
-        "minLevel": 99,
-        "maxLevel": 100,
-        "chance": 0.2
+        "minLevel": 120,
+        "maxLevel": 121,
+        "chance": 0.2006
       },
       {
         "pokemonId": 466,
-        "minLevel": 99,
-        "maxLevel": 100,
-        "chance": 0.2
+        "minLevel": 120,
+        "maxLevel": 121,
+        "chance": 0.182
       }
     ]
   },
@@ -2476,27 +2570,27 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 535,
-        "minLevel": 76,
-        "maxLevel": 77,
-        "chance": 0.25
+        "minLevel": 120,
+        "maxLevel": 121,
+        "chance": 0.2913
       },
       {
         "pokemonId": 406,
-        "minLevel": 76,
-        "maxLevel": 77,
-        "chance": 0.25
+        "minLevel": 120,
+        "maxLevel": 121,
+        "chance": 0.3059
       },
       {
         "pokemonId": 507,
-        "minLevel": 76,
-        "maxLevel": 77,
-        "chance": 0.25
+        "minLevel": 120,
+        "maxLevel": 121,
+        "chance": 0.2315
       },
       {
         "pokemonId": 508,
-        "minLevel": 76,
-        "maxLevel": 77,
-        "chance": 0.25
+        "minLevel": 120,
+        "maxLevel": 121,
+        "chance": 0.1713
       }
     ]
   },
@@ -2505,27 +2599,27 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 495,
-        "minLevel": 88,
-        "maxLevel": 89,
-        "chance": 0.25
+        "minLevel": 120,
+        "maxLevel": 121,
+        "chance": 0.3176
       },
       {
         "pokemonId": 511,
-        "minLevel": 88,
-        "maxLevel": 89,
-        "chance": 0.25
+        "minLevel": 120,
+        "maxLevel": 121,
+        "chance": 0.3096
       },
       {
         "pokemonId": 469,
-        "minLevel": 88,
-        "maxLevel": 89,
-        "chance": 0.25
+        "minLevel": 120,
+        "maxLevel": 121,
+        "chance": 0.19
       },
       {
         "pokemonId": 465,
-        "minLevel": 88,
-        "maxLevel": 89,
-        "chance": 0.25
+        "minLevel": 120,
+        "maxLevel": 121,
+        "chance": 0.1828
       }
     ]
   },
@@ -2534,39 +2628,39 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 524,
-        "minLevel": 99,
-        "maxLevel": 100,
-        "chance": 0.1665
+        "minLevel": 120,
+        "maxLevel": 121,
+        "chance": 0.2442
       },
       {
         "pokemonId": 610,
-        "minLevel": 99,
-        "maxLevel": 100,
-        "chance": 0.1667
+        "minLevel": 120,
+        "maxLevel": 121,
+        "chance": 0.2137
       },
       {
         "pokemonId": 448,
-        "minLevel": 99,
-        "maxLevel": 100,
-        "chance": 0.1667
+        "minLevel": 120,
+        "maxLevel": 121,
+        "chance": 0.1302
       },
       {
         "pokemonId": 512,
-        "minLevel": 99,
-        "maxLevel": 100,
-        "chance": 0.1667
+        "minLevel": 120,
+        "maxLevel": 121,
+        "chance": 0.1373
       },
       {
         "pokemonId": 514,
-        "minLevel": 99,
-        "maxLevel": 100,
-        "chance": 0.1667
+        "minLevel": 120,
+        "maxLevel": 121,
+        "chance": 0.1373
       },
       {
         "pokemonId": 516,
-        "minLevel": 99,
-        "maxLevel": 100,
-        "chance": 0.1667
+        "minLevel": 120,
+        "maxLevel": 121,
+        "chance": 0.1373
       }
     ]
   },
@@ -2577,7 +2671,7 @@ export const unovaRoutes = [
         "pokemonId": 494,
         "minLevel": 110,
         "maxLevel": 115,
-        "chance": 0.3334
+        "chance": 0.3333
       },
       {
         "pokemonId": 648,
@@ -2589,7 +2683,7 @@ export const unovaRoutes = [
         "pokemonId": 649,
         "minLevel": 110,
         "maxLevel": 110,
-        "chance": 0.3333
+        "chance": 0.3334
       }
     ]
   },
@@ -2598,39 +2692,39 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 626,
-        "minLevel": 65,
-        "maxLevel": 66,
-        "chance": 0.1665
+        "minLevel": 120,
+        "maxLevel": 121,
+        "chance": 0.1536
       },
       {
         "pokemonId": 628,
-        "minLevel": 65,
-        "maxLevel": 66,
-        "chance": 0.1667
+        "minLevel": 120,
+        "maxLevel": 121,
+        "chance": 0.1475
       },
       {
         "pokemonId": 630,
-        "minLevel": 65,
-        "maxLevel": 66,
-        "chance": 0.1667
+        "minLevel": 120,
+        "maxLevel": 121,
+        "chance": 0.1475
       },
       {
         "pokemonId": 591,
-        "minLevel": 65,
-        "maxLevel": 66,
-        "chance": 0.1667
+        "minLevel": 120,
+        "maxLevel": 121,
+        "chance": 0.1622
       },
       {
         "pokemonId": 603,
-        "minLevel": 65,
-        "maxLevel": 66,
-        "chance": 0.1667
+        "minLevel": 120,
+        "maxLevel": 121,
+        "chance": 0.1858
       },
       {
         "pokemonId": 629,
-        "minLevel": 65,
-        "maxLevel": 66,
-        "chance": 0.1667
+        "minLevel": 120,
+        "maxLevel": 121,
+        "chance": 0.2034
       }
     ]
   },
@@ -2639,61 +2733,27 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 193,
-        "minLevel": 76,
-        "maxLevel": 77,
-        "chance": 0.25
+        "minLevel": 120,
+        "maxLevel": 121,
+        "chance": 0.2735
       },
       {
         "pokemonId": 570,
-        "minLevel": 76,
-        "maxLevel": 77,
-        "chance": 0.25
+        "minLevel": 120,
+        "maxLevel": 121,
+        "chance": 0.3232
       },
       {
         "pokemonId": 59,
-        "minLevel": 76,
-        "maxLevel": 77,
-        "chance": 0.25
+        "minLevel": 120,
+        "maxLevel": 121,
+        "chance": 0.1922
       },
       {
         "pokemonId": 38,
-        "minLevel": 76,
-        "maxLevel": 77,
-        "chance": 0.25
-      }
-    ]
-  },
-  {
-    "name": "Route 24",
-    "spawns": [
-      {
-        "pokemonId": 615,
-        "minLevel": 88,
-        "maxLevel": 89,
-        "chance": 0.5
-      },
-      {
-        "pokemonId": 614,
-        "minLevel": 88,
-        "maxLevel": 89,
-        "chance": 0.5
-      }
-    ]
-  },
-  {
-    "name": "Route 25",
-    "spawns": [
-      {
-        "pokemonId": 618,
-        "minLevel": 99,
-        "maxLevel": 100,
-        "chance": 0.5
-      },
-      {
-        "pokemonId": 626,
-        "minLevel": 99,
-        "maxLevel": 100,
-        "chance": 0.5
+        "minLevel": 120,
+        "maxLevel": 121,
+        "chance": 0.2111
       }
     ]
   },
@@ -2704,19 +2764,19 @@ export const unovaRoutes = [
         "pokemonId": 645,
         "minLevel": 115,
         "maxLevel": 115,
-        "chance": 0.3334
+        "chance": 0.3258
       },
       {
         "pokemonId": 642,
         "minLevel": 110,
         "maxLevel": 110,
-        "chance": 0.3333
+        "chance": 0.3371
       },
       {
         "pokemonId": 641,
         "minLevel": 110,
         "maxLevel": 110,
-        "chance": 0.3333
+        "chance": 0.3371
       }
     ]
   },
@@ -2727,19 +2787,19 @@ export const unovaRoutes = [
         "pokemonId": 646,
         "minLevel": 120,
         "maxLevel": 121,
-        "chance": 0.3334
+        "chance": 0.34
       },
       {
         "pokemonId": 643,
         "minLevel": 120,
         "maxLevel": 121,
-        "chance": 0.3333
+        "chance": 0.33
       },
       {
         "pokemonId": 644,
         "minLevel": 120,
         "maxLevel": 121,
-        "chance": 0.3333
+        "chance": 0.33
       }
     ]
   }
@@ -3882,7 +3942,8 @@ export const unovaUnlocks = [
     "challengeName": "Extra Challenge E 1",
     "areaId": "Route 10",
     "unlocks": [
-      "Nature Sanctuary"
+      "Nature Sanctuary",
+      "Expanded Castelia Park"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3895,45 +3956,39 @@ export const unovaUnlocks = [
   },
   {
     "challengeName": "Extra Challenge E 2",
-    "areaId": "Nature Sanctuary",
-    "unlocks": [
-      "Route 24"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Ninetales",
-          "count": 10
-        }
-      ]
-    }
-  },
-  {
-    "challengeName": "Extra Challenge E 3",
-    "areaId": "Route 24",
-    "unlocks": [
-      "Route 25"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Beartic",
-          "count": 10
-        }
-      ]
-    }
-  },
-  {
-    "challengeName": "Extra Challenge E 4",
-    "areaId": "Route 25",
+    "areaId": "Expanded Castelia Park",
     "unlocks": [
       "Abundant Shrine Depths"
     ],
     "requirements": {
       "catchSpecies": [
         {
-          "species": "Bouffalant",
-          "count": 10
+          "species": "Vaporeon",
+          "count": 1
+        },
+        {
+          "species": "Jolteon",
+          "count": 1
+        },
+        {
+          "species": "Flareon",
+          "count": 1
+        },
+        {
+          "species": "Espeon",
+          "count": 1
+        },
+        {
+          "species": "Umbreon",
+          "count": 1
+        },
+        {
+          "species": "Leafeon",
+          "count": 1
+        },
+        {
+          "species": "Glaceon",
+          "count": 1
         }
       ]
     }
@@ -3950,10 +4005,10 @@ export const unovaUnlocks = [
         "Extra Challenge B 4",
         "Extra Challenge C 4",
         "Extra Challenge D 4",
-        "Extra Challenge E 4"
+        "Extra Challenge E 2"
       ]
     }
-    },
+  },
   {
     "challengeName": "Dragonspire Clouds",
     "areaId": "Dragonspire Clouds",
