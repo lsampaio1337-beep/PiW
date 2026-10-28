@@ -1211,40 +1211,40 @@ const routes = [
     "name": "Route 22",
     "spawns": [
       {
-        "pokemonId": 19,
-        "minLevel": 75,
-        "maxLevel": 82,
-        "chance": 0.25
+        "pokemonId": 113,
+        "minLevel": 81,
+        "maxLevel": 88,
+        "chance": 0.15
       },
       {
-        "pokemonId": 21,
-        "minLevel": 75,
-        "maxLevel": 82,
-        "chance": 0.25
+        "pokemonId": 28,
+        "minLevel": 79,
+        "maxLevel": 86,
+        "chance": 0.15
       },
       {
         "pokemonId": 33,
         "minLevel": 77,
         "maxLevel": 84,
-        "chance": 0.15
+        "chance": 0.20
       },
       {
         "pokemonId": 30,
         "minLevel": 77,
         "maxLevel": 84,
-        "chance": 0.15
+        "chance": 0.20
       },
       {
-        "pokemonId": 56,
-        "minLevel": 77,
-        "maxLevel": 84,
-        "chance": 0.1
+        "pokemonId": 80,
+        "minLevel": 79,
+        "maxLevel": 86,
+        "chance": 0.15
       },
       {
         "pokemonId": 57,
         "minLevel": 79,
         "maxLevel": 86,
-        "chance": 0.1
+        "chance": 0.15
       }
     ]
   },
@@ -1611,7 +1611,7 @@ export const unlocks = [
   { "challengeName": "Challenge 25", "areaId": "Route 14,15", "unlocks": ["Fuchsia Gym"], "gift": { "item": "Normal Stone", "count": 2 }, "requirements": { "catchSpecies": [{ "species": "Ditto", "count": 5 }] } },
   { "challengeName": "Challenge 26", "areaId": "Fuchsia Gym", "unlocks": ["Cycling Road (16-18)"], "requirements": { "earnBadge": { "name": "Soul Badge", "leader": "Koga", "badgeCount": 5 } } },
   { "challengeName": "Challenge 27", "areaId": "Cycling Road (16-18)", "unlocks": ["Safari Zone"], "requirements": { "catchSpecies": [{ "species": "Dodrio", "count": 2 }] } },
-  { "challengeName": "Challenge 28", "areaId": "Safari Zone", "unlocks": ["Saffron Gym"], "gift": { "item": "Ultraball", "count": 10 }, "requirements": { "defeatCountRoute": { "route": "Safari Zone", "count": 400 } } },
+  { "challengeName": "Challenge 28", "areaId": "Safari Zone", "unlocks": ["Saffron Gym"], "gift": { "item": "Ultraball", "count": 10 }, "requirements": { "defeatCountRoute": { "route": "Safari Zone", "count": 100 } } },
   { "challengeName": "Challenge 29", "areaId": "Saffron Gym", "unlocks": ["Sea Routes"], "requirements": { "earnBadge": { "name": "Marsh Badge", "leader": "Sabrina", "badgeCount": 6 } } },
   { "challengeName": "Challenge 30", "areaId": "Sea Routes", "unlocks": ["Pokemon Mansion"], "requirements": { "defeatCountRoute": { "route": "Sea Routes", "count": 250 } } },
   { "challengeName": "Challenge 31", "areaId": "Pokemon Mansion", "unlocks": ["Cinnabar Gym"], "gift": { "item": "Fire Stone", "count": 3 }, "requirements": { "catchSpeciesByQuality": [{ "species": "Magmar", "quality": "Rare", "count": 1 }] } },
