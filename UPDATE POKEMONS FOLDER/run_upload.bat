@@ -1,0 +1,3 @@
+@echo off
+echo Launching Git Upload PowerShell Script...
+PowerShell.exe -ExecutionPolicy Bypass -File "%~dp0upload_to_git.ps1"
