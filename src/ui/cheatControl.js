@@ -79,7 +79,7 @@ export function cheatAction(action) {
         }
 
         // Mewtwo Q=2 SumIv=600 Lvl=200 in party as leader
-        const mewtwoData = state.config.pokemonData[149]; // Mewtwo is ID 150, so index 149
+        const mewtwoData = state.config.pokemonData.find(pd => pd.id === 150); // Mewtwo is ID 150, so index 149
         if (mewtwoData) {
             const level = 200;
             const qVal = 2.0;
@@ -162,7 +162,7 @@ export function cheatAction(action) {
             p.xp = mathEngine.calculateTotalXP(p.level);
 
             // Recalculate stats based on new level
-            const data = state.config.pokemonData[p.id - 1];
+            const data = state.config.pokemonData.find(pd => pd.id === p.id);
             if (data) {
                 const oldMaxHp = p.maxHp;
                 const v = p.vitamins || {};
