@@ -53,8 +53,18 @@ export class WindowManager {
                             // To prevent bypasses via string assignment or eval, we do NOT execute the string.
                             // We dynamically map strict string templates back to function calls if they match.
 
+                            let codeToExecute = rawCode.trim();
+
+                            // Check for stopPropagation prefix
+                            const propagationPrefixMatch = /^event\.stopPropagation\(\)\s*;?\s*/.exec(codeToExecute);
+                            if (propagationPrefixMatch) {
+                                event.stopPropagation();
+                                codeToExecute = codeToExecute.substring(propagationPrefixMatch[0].length).trim();
+                                if (codeToExecute === '') return;
+                            }
+
                             // 1. Check for basic exact parameterless invocations (e.g. `window.showTrainerStats()`)
-                            const basicCallMatch = /^(?:if\s*\([^)]*\)\s*)?window\.([a-zA-Z0-9_]+)\s*\(\s*\)\s*;?$/.exec(rawCode.trim());
+                            const basicCallMatch = /^(?:if\s*\([^)]*\)\s*)?window\.([a-zA-Z0-9_]+)\s*\(\s*\)\s*;?$/.exec(codeToExecute);
                             if (basicCallMatch) {
                                 const funcName = basicCallMatch[1];
                                 if (typeof window[funcName] === 'function') {
@@ -97,10 +107,10 @@ export class WindowManager {
                             ];
 
                             // We explicitly match the arguments pattern carefully.
-                            const argCallMatch = /^(?:if\s*\([^)]*\)\s*)?window\.([a-zA-Z0-9_]+)\s*\(\s*(['"]?[a-zA-Z0-9_/\-$!*#@&\s.{}\[\]:()]+['"]?(?:\s*,\s*['"]?[a-zA-Z0-9_/\-$!*#@&\s.{}\[\]:()]+['"]?)*)\s*\)\s*;?$/.exec(rawCode.trim());
+                            const argCallMatch = /^(?:if\s*\([^)]*\)\s*)?window\.([a-zA-Z0-9_]+)\s*\(\s*(['"]?[a-zA-Z0-9_/\-$!*#@&\s.{}\[\]:()]+['"]?(?:\s*,\s*['"]?[a-zA-Z0-9_/\-$!*#@&\s.{}\[\]:()]+['"]?)*)\s*\)\s*;?$/.exec(codeToExecute);
 
                             // Nested properties matching (e.g. `window.windowManager.closeDynamicWindow`)
-                            const nestedCallMatch = /^(?:if\s*\([^)]*\)\s*)?window\.([a-zA-Z0-9_]+)\.([a-zA-Z0-9_]+)\s*\(\s*(['"]?[a-zA-Z0-9_/\-$!*#@&\s.{}\[\]:()]+['"]?(?:\s*,\s*['"]?[a-zA-Z0-9_/\-$!*#@&\s.{}\[\]:()]+['"]?)*)\s*\)\s*;?$/.exec(rawCode.trim());
+                            const nestedCallMatch = /^(?:if\s*\([^)]*\)\s*)?window\.([a-zA-Z0-9_]+)\.([a-zA-Z0-9_]+)\s*\(\s*(['"]?[a-zA-Z0-9_/\-$!*#@&\s.{}\[\]:()]+['"]?(?:\s*,\s*['"]?[a-zA-Z0-9_/\-$!*#@&\s.{}\[\]:()]+['"]?)*)\s*\)\s*;?$/.exec(codeToExecute);
 
                             if (argCallMatch) {
                                 const funcName = argCallMatch[1];
@@ -190,26 +200,19 @@ export class WindowManager {
                             }
 
                             // Explicit style setters that the app uses for some modals
-                            const styleSetMatch = /^(?:document\.getElementById\(['"]([a-zA-Z0-9_\-]+)['"]\)|this)\.style\.([a-zA-Z0-9_]+)\s*=\s*(['"][a-zA-Z0-9_\-\s.]+['"]|true|false|null|'none'|'block'|'inline'|'flex'|'transparent')\s*;?$/.exec(rawCode.trim());
+                            const styleSetMatch = /^(?:document\.getElementById\(['"]([a-zA-Z0-9_\-]+)['"]\)|this)\.style\.([a-zA-Z0-9_]+)\s*=\s*(['"][a-zA-Z0-9_\-\s.]+['"]|true|false|null|'none'|'block'|'inline'|'flex'|'transparent')\s*;?$/.exec(codeToExecute);
                             if (styleSetMatch) {
                                 const targetId = styleSetMatch[1];
                                 const styleProp = styleSetMatch[2];
                                 let styleVal = styleSetMatch[3].trim();
                                 if (styleVal.startsWith("'") || styleVal.startsWith('"')) styleVal = styleVal.slice(1, -1);
 
-                                if (rawCode.includes('this.style')) {
+                                if (codeToExecute.includes('this.style')) {
                                     this.style[styleProp] = styleVal;
                                 } else if (targetId) {
                                     const targetEl = document.getElementById(targetId);
                                     if (targetEl) targetEl.style[styleProp] = styleVal;
                                 }
-                                return;
-                            }
-
-                            // Event propagation controls
-                            const propagationMatch = /^event\.stopPropagation\(\)$/.exec(rawCode.trim());
-                            if (propagationMatch) {
-                                event.stopPropagation();
                                 return;
                             }
                         });
