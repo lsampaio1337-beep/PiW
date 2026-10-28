@@ -98,6 +98,7 @@ const helpContent = {
                     <li><strong>Uncommon</strong>: 1.1x Stats. Blue glow.</li>
                     <li><strong>Rare</strong>: 1.25x Stats. Dark Blue glow.</li>
                     <li><strong>Epic</strong>: 1.5x Stats. Purple glow. Extremely tough.</li>
+                    <li><strong>Legendary</strong>: Orange glow. Exclusively obtained via Daycare breeding (Q > 1.80).</li>
                     <li><strong>Shiny</strong>: 2.0x Stats. Rainbow animated glow. Incredibly rare.</li>
                 </ul>
             `,
