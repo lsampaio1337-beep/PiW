@@ -174,6 +174,9 @@ export function swapRegion(newRegionName) {
         } else if (newRegionName === 'Hoenn') {
             state.regions[newRegionName].currentRoute = 'Route 101';
             state.regions[newRegionName].stats.activeChallenges = ['Route 101'];
+        } else if (newRegionName === 'Hisui') {
+            state.regions[newRegionName].currentRoute = 'Aspiration Hill';
+            state.regions[newRegionName].stats.activeChallenges = ['Aspiration Hill'];
         }
     }
 
@@ -198,6 +201,9 @@ window.getCurrentRoutes = function() {
     }
     if (state.currentRegionName === 'Unova' && state.config.unovaRoutes) {
         return state.config.unovaRoutes;
+    }
+    if (state.currentRegionName === 'Hisui' && state.config.hisuiRoutes) {
+        return state.config.hisuiRoutes;
     }
     return state.config.routes || [];
 };
@@ -224,6 +230,9 @@ window.getCurrentUnlocks = function() {
     }
     if (state.currentRegionName === 'Galar' && state.config.galarUnlocks) {
         return state.config.galarUnlocks;
+    }
+    if (state.currentRegionName === 'Hisui' && state.config.hisuiUnlocks) {
+        return state.config.hisuiUnlocks;
     }
     return state.config.unlocks || [];
 };
