@@ -62,21 +62,33 @@ class DayCare {
         const p = this.slot1.pokemon;
         if (!p) return;
 
-        // Increase quality by a random number between 0 and 0.1 (Max 1.99)
-        // 0, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1
+        // Increase quality by a random number between 0 and 0.05
         const randomVal = typeof crypto !== 'undefined' ? (crypto.getRandomValues(new Uint32Array(1))[0] / (0xFFFFFFFF + 1)) : Math.random();
-        const randIncrease = Math.floor(randomVal * 11) / 100;
+        const randIncrease = Math.floor(randomVal * 6) / 100;
 
         // Fix floating point precision
         p.quality = Number((p.quality + randIncrease).toFixed(2));
 
-        p.quality = Math.min(1.99, p.quality);
+        const isShiny = p.qualityName === "Shiny";
+        const maxQ = isShiny ? 2.50 : 1.99;
 
-        // Map Quality Tier if Q >= 1.5, 1.25, etc.
-        if (p.quality >= 1.99) {
-            p.qualityName = "Perfect";
-        } else if (p.quality >= 1.70) { // Generic threshold updates could go here
-            p.qualityName = p.qualityName;
+        p.quality = Math.min(maxQ, p.quality);
+
+        // Map Quality Tier
+        if (p.quality >= 2.0) {
+            p.qualityName = "Shiny";
+        } else if (p.quality > 1.8) {
+            p.qualityName = "Legendary";
+        } else if (p.quality >= 1.6) {
+            p.qualityName = "Epic";
+        } else if (p.quality >= 1.4) {
+            p.qualityName = "Rare";
+        } else if (p.quality >= 1.2) {
+            p.qualityName = "Uncommon";
+        } else if (p.quality >= 1.0) {
+            p.qualityName = "Regular";
+        } else {
+            p.qualityName = "Weak";
         }
 
         // Let UI know it's finished
