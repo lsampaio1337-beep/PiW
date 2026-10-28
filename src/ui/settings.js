@@ -184,9 +184,12 @@ export function showAddPokemonModal() {
             <label style="display:inline-block; width:100px;">SumIV:</label>
             <input type="number" id="force-enc-sumiv" value="300" min="0" max="600" style="width: 80px;">
         </div>
-        <button onclick="window.forceNextEncounter()" style="padding: 5px 10px;">OK</button>
+        <div style="display: flex; gap: 10px; margin-top: 15px;">
+            <button onclick="window.forceNextEncounter()" style="padding: 5px 10px; flex: 1; background: #16a085; color: white; border: none; border-radius: 4px; cursor: pointer;">Fight Pokemon</button>
+            <button onclick="window.forceNextCapture()" style="padding: 5px 10px; flex: 1; background: #27ae60; color: white; border: none; border-radius: 4px; cursor: pointer;">Capture Pokemon</button>
+        </div>
     `;
-    showModal("Force Next Encounter", html, "window-force-encounter");
+    showModal("Fight / Capture Pokemon", html, "window-force-encounter");
 }
 
 export function forceNextEncounter() {
@@ -201,9 +204,132 @@ export function forceNextEncounter() {
         qValue,
         sumIV
     };
+}
 
-    // Close modal
-    document.getElementById('modal-overlay').style.display = 'none';
+export function forceNextCapture() {
+    const id = parseInt(document.getElementById('force-enc-id').value);
+    const level = parseInt(document.getElementById('force-enc-level').value);
+    const qValue = parseFloat(document.getElementById('force-enc-q').value);
+    const sumIV = parseInt(document.getElementById('force-enc-sumiv').value);
+
+    const pokemonBase = state.config.pokemonData[id - 1] || state.config.pokemonData[0];
+    const qName = qValue >= 2.0 ? "Shiny" : "Custom";
+    const q = { name: qName, q: qValue };
+
+    // Distribute SumIV randomly
+    let remainingIV = sumIV;
+    let ivs = { hp: 0, atk: 0, def: 0, spa: 0, spd: 0, spe: 0 };
+    const statKeys = ['hp', 'atk', 'def', 'spa', 'spd', 'spe'];
+
+    while (remainingIV > 0) {
+        const availableStats = statKeys.filter(s => ivs[s] < 100);
+        if (availableStats.length === 0) break; // All maxed out
+        const randomStat = availableStats[Math.floor(Math.random() * availableStats.length)];
+        ivs[randomStat]++;
+        remainingIV--;
+    }
+
+    const currentStats = {
+        hp: mathEngine.calculateHP(pokemonBase.hp, ivs.hp, level, q.q),
+        atk: mathEngine.calculateStat(pokemonBase.atk, ivs.atk, level, q.q),
+        def: mathEngine.calculateStat(pokemonBase.def, ivs.def, level, q.q),
+        spa: mathEngine.calculateStat(pokemonBase.spa, ivs.spa, level, q.q),
+        spd: mathEngine.calculateStat(pokemonBase.spd, ivs.spd, level, q.q),
+        spe: mathEngine.calculateStat(pokemonBase.spe, ivs.spe, level, q.q),
+    };
+
+    const bst = pokemonBase.hp + pokemonBase.atk + pokemonBase.def + pokemonBase.spa + pokemonBase.spd + pokemonBase.spe;
+    const totalIV = ivs.hp + ivs.atk + ivs.def + ivs.spa + ivs.spd + ivs.spe;
+
+    let learned = [];
+    if (pokemonBase.learnset) {
+        for (const ls of pokemonBase.learnset) {
+            if (level >= ls.level) {
+                if (state.config.moves[ls.move]) {
+                    const moveData = JSON.parse(JSON.stringify(state.config.moves[ls.move]));
+                    moveData.name = ls.move;
+                    learned.push(moveData);
+                }
+            }
+        }
+    }
+    const moves = learned.slice(-4);
+
+    let caughtPokemon = {
+        id: pokemonBase.id,
+        name: pokemonBase.name,
+        types: pokemonBase.types,
+        level: level,
+        qualityName: qName,
+        quality: q.q,
+        ivs: ivs,
+        currentStats: currentStats,
+        maxHp: currentStats.hp,
+        currentHp: currentStats.hp,
+        evxp: mathEngine.calculateEVXP(bst, level, q.q, totalIV),
+        evm: mathEngine.calculateEVM(bst, level, q.q, totalIV),
+        pp: mathEngine.calculatePP(bst, level, q.q, totalIV),
+        bst: bst,
+        moves: moves,
+        xp: mathEngine.calculateTotalXP(level),
+        uuid: crypto.randomUUID()
+    };
+
+    // Tracking
+    if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
+    if (!state.stats.caughtSpecies[pokemonBase.name]) {
+        state.stats.caughtSpeciesCount = (state.stats.caughtSpeciesCount || 0) + 1;
+    }
+    state.stats.caughtSpecies[pokemonBase.name] = (state.stats.caughtSpecies[pokemonBase.name] || 0) + 1;
+
+    if (!state.stats.seenSpecies) state.stats.seenSpecies = {};
+    state.stats.seenSpecies[pokemonBase.name] = true;
+
+    if (qName === "Shiny") {
+        state.stats.shiniesCaught = (state.stats.shiniesCaught || 0) + 1;
+        state.stats.shiniesSeen = (state.stats.shiniesSeen || 0) + 1;
+        if (!state.stats.caughtShiniesSpecies) state.stats.caughtShiniesSpecies = {};
+        if (!state.stats.seenShiniesSpecies) state.stats.seenShiniesSpecies = {};
+        state.stats.caughtShiniesSpecies[pokemonBase.name] = true;
+        state.stats.seenShiniesSpecies[pokemonBase.name] = true;
+    }
+
+    state.storage.push(caughtPokemon);
+    state.stats.caught++;
+
+    // Track Professor Tasks
+    let qN = qName || "Regular";
+    if (["Weak", "Regular", "Uncommon", "Rare", "Epic", "Shiny", "Legendary", "Boss"].includes(qN)) {
+        state.stats.weakPlusCaptures = (state.stats.weakPlusCaptures || 0) + 1;
+    }
+    if (["Regular", "Uncommon", "Rare", "Epic", "Shiny", "Legendary", "Boss"].includes(qN)) {
+        state.stats.regularPlusCaptures = (state.stats.regularPlusCaptures || 0) + 1;
+    }
+    if (["Uncommon", "Rare", "Epic", "Shiny", "Legendary", "Boss"].includes(qN)) {
+        state.stats.uncommonPlusCaptures = (state.stats.uncommonPlusCaptures || 0) + 1;
+    }
+    if (["Rare", "Epic", "Shiny", "Legendary", "Boss"].includes(qN)) {
+        state.stats.rarePlusCaptures = (state.stats.rarePlusCaptures || 0) + 1;
+    }
+    if (["Epic", "Shiny", "Legendary", "Boss"].includes(qN)) {
+        state.stats.epicPlusCaptures = (state.stats.epicPlusCaptures || 0) + 1;
+    }
+
+    if (level > (state.stats.highestLevelCaptured || 0)) state.stats.highestLevelCaptured = level;
+    if (qValue > (state.stats.highestQualityCaptured || 0)) state.stats.highestQualityCaptured = qValue;
+    if (totalIV > (state.stats.highestSumIVCaptured || 0)) state.stats.highestSumIVCaptured = totalIV;
+
+    if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') {
+        window.trackDailyChallenge('catch_sum_iv', { sumIv: totalIV });
+        window.trackDailyChallenge('catch_level', { level: level });
+        window.trackDailyChallenge('catch_different_species', { species: pokemonBase.name });
+        window.trackDailyChallenge('catch_rare', { quality: qName });
+        window.trackDailyChallenge('catch_weak', { quality: qName });
+        window.trackDailyChallenge('catch_species', { species: pokemonBase.name });
+        window.trackDailyChallenge('catch_type', { types: pokemonBase.types });
+    }
+
+    if (window.updateUI) window.updateUI();
 }
 
 export function exportLog() {

@@ -76,7 +76,7 @@ import { showPokemonStats, showPokemonStatsByUuid, evolvePokemon } from './ui/po
 import { showBonusCandyModal } from './ui/bonusCandy.js';
 window.showBonusCandyModal = showBonusCandyModal;
 window.showGiftModal = showGiftModal;
-import { showSettings, exportLog, showAddPokemonModal, forceNextEncounter, activateCheat, showTimeLapseModal, runTimeLapse } from './ui/settings.js';
+import { showSettings, exportLog, showAddPokemonModal, forceNextEncounter, forceNextCapture, activateCheat, showTimeLapseModal, runTimeLapse } from './ui/settings.js';
 import { setupMarket, buyItem, openPokeMarketBuy, renderPokeMarketTab, updateBuyItemPrice, buySetMax } from './ui/market.js';
 import { showBackpack, renderBackpackTab, setActiveItem, setAutoPotionThreshold } from './ui/backpack/index.js';
 import { dragStart, dragOver, handleDrop } from './ui/backpack/pokemon.js';
@@ -131,6 +131,7 @@ window.openPokeMarketBuy = openPokeMarketBuy;
 window.renderPokeMarketTab = renderPokeMarketTab;
 window.showAddPokemonModal = showAddPokemonModal;
 window.forceNextEncounter = forceNextEncounter;
+window.forceNextCapture = forceNextCapture;
 window.activateCheat = activateCheat;
 
 import { cheatAction } from "./ui/cheatControl.js";
