@@ -143,10 +143,18 @@ export function checkFinalChallengeCompleted(regionName = 'Kanto') {
         routes = state.config.sinnohRoutes;
     } else if (regionName === 'Unova' && state.config && state.config.unovaRoutes) {
         routes = state.config.unovaRoutes;
+    } else if (regionName === 'Kalos' && state.config && state.config.kalosRoutes) {
+        routes = state.config.kalosRoutes;
+    } else if (regionName === 'Alola' && state.config && state.config.alolaRoutes) {
+        routes = state.config.alolaRoutes;
+    } else if (regionName === 'Hisui' && state.config && state.config.hisuiRoutes) {
+        routes = state.config.hisuiRoutes;
+    } else if (regionName === 'Paldea' && state.config && state.config.paldeaRoutes) {
+        routes = state.config.paldeaRoutes;
     }
 
-    let finalChallenge = routes.find(r => r.challengeName === "Challenge 36" || r.challengeName === "Final Challenge" || r.challengeName === "Johto Final Challenge" || r.challengeName === "Hoenn Final Challenge" || r.challengeName === "Sinnoh Final Challenge" || r.challengeName === "Unova Final Challenge");
-    let finalChallengeId = finalChallenge ? finalChallenge.areaId : (regionName === 'Kanto' ? 'Kanto Pokemon League' : (regionName === 'Johto' ? 'Mount Silver' : (regionName === 'Hoenn' ? 'Battle Frontier' : (regionName === 'Sinnoh' ? 'Spear Pillar' : (regionName === 'Unova' ? 'Giant Chasm' : null)))));
+    let finalChallenge = routes.find(r => r.challengeName === "Challenge 36" || r.challengeName === "Final Challenge" || r.challengeName === "Johto Final Challenge" || r.challengeName === "Hoenn Final Challenge" || r.challengeName === "Sinnoh Final Challenge" || r.challengeName === "Unova Final Challenge" || r.challengeName === "Challenge 48");
+    let finalChallengeId = finalChallenge ? finalChallenge.areaId : (regionName === 'Kanto' ? 'Kanto Pokemon League' : (regionName === 'Johto' ? 'Mount Silver' : (regionName === 'Hoenn' ? 'Battle Frontier' : (regionName === 'Sinnoh' ? 'Spear Pillar' : (regionName === 'Unova' ? 'Giant Chasm' : (regionName === 'Hisui' ? 'Gym - Avalugg' : null))))));
 
     if (!finalChallengeId) return false;
 
@@ -174,6 +182,24 @@ export function swapRegion(newRegionName) {
         } else if (newRegionName === 'Hoenn') {
             state.regions[newRegionName].currentRoute = 'Route 101';
             state.regions[newRegionName].stats.activeChallenges = ['Route 101'];
+        } else if (newRegionName === 'Sinnoh') {
+            state.regions[newRegionName].currentRoute = 'Route 201';
+            state.regions[newRegionName].stats.activeChallenges = ['Route 201'];
+        } else if (newRegionName === 'Unova') {
+            state.regions[newRegionName].currentRoute = 'Aspertia City';
+            state.regions[newRegionName].stats.activeChallenges = ['Aspertia City'];
+        } else if (newRegionName === 'Kalos') {
+            state.regions[newRegionName].currentRoute = 'Aquacorde Town';
+            state.regions[newRegionName].stats.activeChallenges = ['Aquacorde Town'];
+        } else if (newRegionName === 'Alola') {
+            state.regions[newRegionName].currentRoute = 'Route 1 East';
+            state.regions[newRegionName].stats.activeChallenges = ['Route 1 East'];
+        } else if (newRegionName === 'Hisui') {
+            state.regions[newRegionName].currentRoute = 'Aspiration Hill';
+            state.regions[newRegionName].stats.activeChallenges = ['Aspiration Hill'];
+        } else if (newRegionName === 'Paldea') {
+            state.regions[newRegionName].currentRoute = 'Cabo Poco';
+            state.regions[newRegionName].stats.activeChallenges = ['Cabo Poco'];
         }
     }
 
@@ -199,6 +225,18 @@ window.getCurrentRoutes = function() {
     if (state.currentRegionName === 'Unova' && state.config.unovaRoutes) {
         return state.config.unovaRoutes;
     }
+    if (state.currentRegionName === 'Kalos' && state.config.kalosRoutes) {
+        return state.config.kalosRoutes;
+    }
+    if (state.currentRegionName === 'Alola' && state.config.alolaRoutes) {
+        return state.config.alolaRoutes;
+    }
+    if (state.currentRegionName === 'Hisui' && state.config.hisuiRoutes) {
+        return state.config.hisuiRoutes;
+    }
+    if (state.currentRegionName === 'Paldea' && state.config.paldeaRoutes) {
+        return state.config.paldeaRoutes;
+    }
     return state.config.routes || [];
 };
 
@@ -222,6 +260,11 @@ window.getCurrentUnlocks = function() {
     if (state.currentRegionName === 'Alola' && state.config.alolaUnlocks) {
         return state.config.alolaUnlocks;
     }
+    if (state.currentRegionName === 'Hisui' && state.config.hisuiUnlocks) {
+        return state.config.hisuiUnlocks;
+    }
+    if (state.currentRegionName === 'Paldea' && state.config.paldeaUnlocks) {
+        return state.config.paldeaUnlocks;
     if (state.currentRegionName === 'Galar' && state.config.galarUnlocks) {
         return state.config.galarUnlocks;
     }
