@@ -219,5 +219,11 @@ window.getCurrentUnlocks = function() {
     if (state.currentRegionName === 'Kalos' && state.config.kalosUnlocks) {
         return state.config.kalosUnlocks;
     }
+    if (state.currentRegionName === 'Alola' && state.config.alolaUnlocks) {
+        return state.config.alolaUnlocks;
+    }
+    if (state.currentRegionName === 'Galar' && state.config.galarUnlocks) {
+        return state.config.galarUnlocks;
+    }
     return state.config.unlocks || [];
 };
