@@ -36,3 +36,7 @@ You can also use the included `.bat` files if you are running this on Windows:
 - Run `run_scraper_test.bat` to run the test script.
 - Run `run_scraper_full.bat` to run the full script.
 - Or use `run_scraper.bat` (and optionally pass `--test` in the command prompt).
+
+### Creating a Standalone `.exe`
+If you don't want to rely on the `.bat` files auto-installing Python and dependencies every time, you can generate a standalone Windows executable.
+Simply run `build_exe_windows.bat`. This will use your local Python to bundle the scraper into standalone `.exe` files in a new `dist` folder. You can then move those `.exe` files anywhere and run them without any setup!
