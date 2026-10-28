@@ -454,9 +454,7 @@ export function handleDrop(event, targetCol) {
             state.dayCareRef.slot1.isBreeding = false;
             state.dayCareRef.slot1.isFinished = false;
         }
-        window.pokemonFilters.name = '';
-        window.pokemonFilters.minQ = '';
-        window.pokemonFilters.maxQ = '';
+        window.clearPokemonFilter();
     }
     else if (sCol === 'training') {
         state.training.splice(index, 1);
@@ -521,9 +519,7 @@ export function handleDrop(event, targetCol) {
                     state.dayCareRef.slot1.isFinished = false;
                 }
                 if (window.clearPokemonFilter) window.clearPokemonFilter();
-                window.pokemonFilters.name = p.name;
-                window.pokemonFilters.minQ = p.quality.toFixed(2);
-                window.pokemonFilters.maxQ = p.quality.toFixed(2);
+                window.pokemonFilters.breedableOnly = true;
             } else {
                 // Meets criteria -> Consume both, merge into highest IV
                 const sumIV1 = currentP.ivs.hp + currentP.ivs.atk + currentP.ivs.def + currentP.ivs.spa + currentP.ivs.spd + currentP.ivs.spe;
@@ -608,9 +604,7 @@ export function handleDrop(event, targetCol) {
                     state.dayCareRef.slot1.isFinished = false;
                 }
                 if (window.clearPokemonFilter) window.clearPokemonFilter();
-                window.pokemonFilters.name = p.name;
-                window.pokemonFilters.minQ = p.quality.toFixed(2);
-                window.pokemonFilters.maxQ = p.quality.toFixed(2);
+                window.pokemonFilters.breedableOnly = true;
             }
         }
     }
@@ -637,9 +631,8 @@ export function handleDrop(event, targetCol) {
                 state.dayCareRef.slot1.isBreeding = false; // reset state
                 state.dayCareRef.slot1.isFinished = false;
             }
-            window.pokemonFilters.name = displacedPokemon.name;
-            window.pokemonFilters.minQ = displacedPokemon.quality.toFixed(2);
-            window.pokemonFilters.maxQ = displacedPokemon.quality.toFixed(2);
+            window.clearPokemonFilter();
+            window.pokemonFilters.breedableOnly = true;
         }
     }
 
