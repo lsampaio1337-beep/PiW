@@ -29,7 +29,7 @@ async function generate() {
     let pokedexIndexes = {};
     let pkdxContent = fs.readFileSync('./config/pokedexIndexes.js', 'utf8');
     pkdxContent = pkdxContent.replace(/export const \w+ = /g, 'global.currentPkdx = ');
-    pkdxContent = pkdxContent.replace(/export {[^}]+};?/g, ''); // strip any named exports at the bottom
+    pkdxContent = pkdxContent.replace(/export {[^}]+};?/g, '');
     eval(pkdxContent);
     pokedexIndexes = global.currentPkdx;
 
@@ -46,8 +46,9 @@ async function generate() {
         let routesContent = fs.readFileSync(routesFile, 'utf8');
         routesContent = routesContent.replace(/export const \w+Routes = /g, 'global.currentRoutes = ');
         routesContent = routesContent.replace(/export const \w+Unlocks = /g, 'global.currentUnlocks = ');
+
         // specifically for Kanto
-        routesContent = routesContent.replace(/export const routes = /g, 'global.currentRoutes = ');
+        routesContent = routesContent.replace(/const routes = /g, 'global.currentRoutes = ');
         routesContent = routesContent.replace(/export const unlocks = /g, 'global.currentUnlocks = ');
 
         routesContent = routesContent.replace(/export {[^}]+};?/g, '');
@@ -76,13 +77,13 @@ async function generate() {
 
         const allSpawns = new Set();
 
-        let currentChallengeIndex = 0;
-
         routes.forEach((route, rIndex) => {
             const isLateGame = rIndex >= Math.floor(totalMainChallenges * 0.75);
             const isEarlyGame = rIndex <= Math.floor(totalMainChallenges * 0.5);
 
-            const mapOk = Object.values(mapCoordinates).some(area => area.name === route.areaId) ? 'Ok' : 'NONONO';
+            const areaIdOrName = route.areaId || route.name;
+
+            const mapOk = Object.values(mapCoordinates).some(area => (area.name === areaIdOrName || area.name === route.name)) ? 'Ok' : 'NONONO';
 
             // Find unlocks for this challenge
             let willUnlock = '';
@@ -92,8 +93,8 @@ async function generate() {
             let rewardGift = '';
 
             const routeUnlocks = unlocks.filter(u =>
-                (u.requireCompletedChallenges && u.requireCompletedChallenges.includes(route.areaId)) ||
-                (u.requireAnyCompletedChallenges && u.requireAnyCompletedChallenges.includes(route.areaId))
+                (u.requireCompletedChallenges && u.requireCompletedChallenges.includes(areaIdOrName)) ||
+                (u.requireAnyCompletedChallenges && u.requireAnyCompletedChallenges.includes(areaIdOrName))
             );
 
             if (routeUnlocks.length > 0) {
@@ -132,7 +133,7 @@ async function generate() {
 
             // Route with spawns
             route.spawns.forEach(spawn => {
-                const p = pokemonByName[spawn.pokemon];
+                const p = pokemonById[spawn.pokemonId];
                 if (p) allSpawns.add(p.id);
 
                 let bstOk = 'Ok';
@@ -146,7 +147,7 @@ async function generate() {
                 let typeOk = 'Yes';
                 if (p) {
                     const nameLower = (route.name || route.areaId).toLowerCase();
-                    const isWaterRoute = nameLower.includes('sea') || nameLower.includes('ocean') || nameLower.includes('lake') || nameLower.includes('water') || nameLower.includes('surf');
+                    const isWaterRoute = nameLower.includes('sea') || nameLower.includes('ocean') || nameLower.includes('lake') || nameLower.includes('water') || nameLower.includes('surf') || nameLower.includes('beach') || nameLower.includes('cave');
                     if (isWaterRoute && p.type && !p.type.includes('Water')) typeOk = 'NONONO';
                 }
 
@@ -154,9 +155,9 @@ async function generate() {
                     'Unlocked': '?',
                     'Route/Place': route.name || route.areaId,
                     'Secondary': '',
-                    'Pokemon Name': spawn.pokemon,
-                    'Level': `${spawn.levelMin}-${spawn.levelMax}`,
-                    '% Appearance': `${spawn.chance}%`,
+                    'Pokemon Name': p ? p.name : `Unknown (${spawn.pokemonId})`,
+                    'Level': `${spawn.minLevel}-${spawn.maxLevel}`,
+                    '% Appearance': `${Math.round(spawn.chance * 100)}%`,
                     '% Appearance Ok?': '', // left blank for human review as requested
                     'Pokemon/Type Ok?': typeOk, // naive Yes/NONONO based on type match, no DB check
                     'Pokemon/BST Ok?': bstOk,
