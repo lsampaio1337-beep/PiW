@@ -456,6 +456,10 @@ window.cheatProgressChallenge = function(targetAreaId) {
             if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};
             state.stats.defeatedBosses["Alola Champion"] = true;
         }
+        if (req.defeatGalarChampion) {
+            if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};
+            state.stats.defeatedBosses["Galar Champion"] = true;
+        }
         if (req.defeatRed) {
             if (!state.stats.defeatedBosses) state.stats.defeatedBosses = {};
             state.stats.defeatedBosses["Red"] = true;
