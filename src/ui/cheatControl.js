@@ -29,7 +29,7 @@ export function showCheatControlModal() {
                     <button onclick="window.cheatAction('XP')" style="padding: 10px; font-size: 14px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">XP</button>
                     <button onclick="window.cheatAction('Upgrades')" style="padding: 10px; font-size: 14px; background: #f1c40f; color: black; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Upgrades</button>
                     <button onclick="window.cheatAction('Map')" style="padding: 10px; font-size: 14px; background: #e67e22; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Complete Progress Challenge</button>
-                    <button onclick="window.showAddPokemonModal()" style="padding: 10px; font-size: 14px; background: #16a085; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Add Pokemon</button>
+                    <button onclick="window.showAddPokemonModal()" style="padding: 10px; font-size: 14px; background: #16a085; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Specific Pokemon</button>
                     <button onclick="window.cheatAction('Pokedex')" style="padding: 10px; font-size: 14px; background: #34495e; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Complete Pokedex</button>
                     <button onclick="window.cheatAction('PokedexShiny')" style="padding: 10px; font-size: 14px; background: linear-gradient(45deg, #f39c12, #e74c3c, #8e44ad); color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Shiny Pokedex</button>
                 </div>
@@ -79,7 +79,7 @@ export function cheatAction(action) {
         }
 
         // Mewtwo Q=2 SumIv=600 Lvl=200 in party as leader
-        const mewtwoData = state.config.pokemonData[149]; // Mewtwo is ID 150, so index 149
+        const mewtwoData = state.config.pokemonData.find(pd => pd.id === 150); // Mewtwo is ID 150, so index 149
         if (mewtwoData) {
             const level = 200;
             const qVal = 2.0;
@@ -162,7 +162,7 @@ export function cheatAction(action) {
             p.xp = mathEngine.calculateTotalXP(p.level);
 
             // Recalculate stats based on new level
-            const data = state.config.pokemonData[p.id - 1];
+            const data = state.config.pokemonData.find(pd => pd.id === p.id);
             if (data) {
                 const oldMaxHp = p.maxHp;
                 const v = p.vitamins || {};

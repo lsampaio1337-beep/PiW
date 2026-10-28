@@ -198,6 +198,11 @@ export function getChallengeData(unlock) {
         if (!beaten) isMet = false;
         textParts.push(`Win Alola Pokémon League${getStatusHtml(beaten)}`);
     }
+    if (req.defeatGalarChampion) {
+        let beaten = state.stats.defeatedBosses && state.stats.defeatedBosses["Galar Champion"];
+        if (!beaten) isMet = false;
+        textParts.push(`Win Galar Pokémon League${getStatusHtml(beaten)}`);
+    }
     if (req.defeatRed) {
         let beatenRed = state.stats.defeatedBosses && state.stats.defeatedBosses["Red"];
         if (!beatenRed) isMet = false;

@@ -265,6 +265,8 @@ window.getCurrentUnlocks = function() {
     }
     if (state.currentRegionName === 'Paldea' && state.config.paldeaUnlocks) {
         return state.config.paldeaUnlocks;
+    if (state.currentRegionName === 'Galar' && state.config.galarUnlocks) {
+        return state.config.galarUnlocks;
     }
     return state.config.unlocks || [];
 };

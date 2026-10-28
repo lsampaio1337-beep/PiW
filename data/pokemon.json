@@ -55181,5 +55181,11128 @@
         "move": "Malignant Chain"
       }
     ]
+  },
+  {
+    "id": 3.1,
+    "name": "Venusaur (Mega Venusaur)",
+    "types": [
+      "Grass",
+      "Poison"
+    ],
+    "hp": 80,
+    "atk": 100,
+    "def": 123,
+    "spa": 122,
+    "spd": 120,
+    "spe": 80,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Growl"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 3,
+        "move": "Vine Whip"
+      },
+      {
+        "level": 6,
+        "move": "Growth"
+      },
+      {
+        "level": 9,
+        "move": "Leech Seed"
+      },
+      {
+        "level": 12,
+        "move": "Razor Leaf"
+      },
+      {
+        "level": 15,
+        "move": "Poison Powder"
+      },
+      {
+        "level": 15,
+        "move": "Sleep Powder"
+      },
+      {
+        "level": 25,
+        "move": "Take Down"
+      },
+      {
+        "level": 30,
+        "move": "Magical Leaf"
+      },
+      {
+        "level": 35,
+        "move": "Synthesis"
+      },
+      {
+        "level": 40,
+        "move": "Amnesia"
+      },
+      {
+        "level": 42,
+        "move": "Sludge Wave"
+      },
+      {
+        "level": 45,
+        "move": "Double-Edge"
+      },
+      {
+        "level": 55,
+        "move": "Solar Beam"
+      }
+    ]
+  },
+  {
+    "id": 6.1,
+    "name": "Charizard (Mega Charizard X)",
+    "types": [
+      "Fire",
+      "Dragon"
+    ],
+    "hp": 78,
+    "atk": 130,
+    "def": 111,
+    "spa": 130,
+    "spd": 85,
+    "spe": 100,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Dragon Claw"
+      },
+      {
+        "level": 1,
+        "move": "Growl"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 4,
+        "move": "Ember"
+      },
+      {
+        "level": 8,
+        "move": "Smokescreen"
+      },
+      {
+        "level": 12,
+        "move": "Dragon Breath"
+      },
+      {
+        "level": 17,
+        "move": "Fire Fang"
+      },
+      {
+        "level": 20,
+        "move": "Fire Spin"
+      },
+      {
+        "level": 24,
+        "move": "Slash"
+      },
+      {
+        "level": 30,
+        "move": "Flamethrower"
+      },
+      {
+        "level": 42,
+        "move": "Dragon Rush"
+      },
+      {
+        "level": 54,
+        "move": "Flare Blitz"
+      }
+    ]
+  },
+  {
+    "id": 6.2,
+    "name": "Charizard (Mega Charizard Y)",
+    "types": [
+      "Fire",
+      "Flying"
+    ],
+    "hp": 78,
+    "atk": 104,
+    "def": 78,
+    "spa": 159,
+    "spd": 115,
+    "spe": 100,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Dragon Claw"
+      },
+      {
+        "level": 1,
+        "move": "Growl"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 4,
+        "move": "Ember"
+      },
+      {
+        "level": 8,
+        "move": "Smokescreen"
+      },
+      {
+        "level": 12,
+        "move": "Dragon Breath"
+      },
+      {
+        "level": 17,
+        "move": "Fire Fang"
+      },
+      {
+        "level": 20,
+        "move": "Fire Spin"
+      },
+      {
+        "level": 24,
+        "move": "Slash"
+      },
+      {
+        "level": 30,
+        "move": "Flamethrower"
+      },
+      {
+        "level": 42,
+        "move": "Dragon Rush"
+      },
+      {
+        "level": 54,
+        "move": "Flare Blitz"
+      }
+    ]
+  },
+  {
+    "id": 9.1,
+    "name": "Blastoise (Mega Blastoise)",
+    "types": [
+      "Water"
+    ],
+    "hp": 79,
+    "atk": 103,
+    "def": 120,
+    "spa": 135,
+    "spd": 115,
+    "spe": 78,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 1,
+        "move": "Tail Whip"
+      },
+      {
+        "level": 3,
+        "move": "Water Gun"
+      },
+      {
+        "level": 12,
+        "move": "Bite"
+      },
+      {
+        "level": 15,
+        "move": "Bubble Beam"
+      },
+      {
+        "level": 20,
+        "move": "Icy Wind"
+      },
+      {
+        "level": 30,
+        "move": "Aqua Ring"
+      },
+      {
+        "level": 35,
+        "move": "Aqua Jet"
+      },
+      {
+        "level": 40,
+        "move": "Iron Defense"
+      },
+      {
+        "level": 45,
+        "move": "Liquidation"
+      }
+    ]
+  },
+  {
+    "id": 15.1,
+    "name": "Beedrill (Mega Beedrill)",
+    "types": [
+      "Bug",
+      "Poison"
+    ],
+    "hp": 65,
+    "atk": 150,
+    "def": 40,
+    "spa": 15,
+    "spd": 80,
+    "spe": 145,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Poison Sting"
+      },
+      {
+        "level": 1,
+        "move": "String Shot"
+      },
+      {
+        "level": 7,
+        "move": "Harden"
+      },
+      {
+        "level": 15,
+        "move": "Focus Energy"
+      },
+      {
+        "level": 20,
+        "move": "Brutal Swing"
+      },
+      {
+        "level": 25,
+        "move": "X-Scissor"
+      },
+      {
+        "level": 27,
+        "move": "Bug Buzz"
+      },
+      {
+        "level": 29,
+        "move": "Toxic Spikes"
+      },
+      {
+        "level": 33,
+        "move": "Lunge"
+      },
+      {
+        "level": 35,
+        "move": "Poison Jab"
+      },
+      {
+        "level": 40,
+        "move": "Drill Run"
+      }
+    ]
+  },
+  {
+    "id": 18.1,
+    "name": "Pidgeot (Mega Pidgeot)",
+    "types": [
+      "Normal",
+      "Flying"
+    ],
+    "hp": 83,
+    "atk": 80,
+    "def": 80,
+    "spa": 135,
+    "spd": 80,
+    "spe": 121,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Growl"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 9,
+        "move": "Gust"
+      },
+      {
+        "level": 13,
+        "move": "Quick Attack"
+      },
+      {
+        "level": 17,
+        "move": "Twister"
+      },
+      {
+        "level": 21,
+        "move": "Wing Attack"
+      },
+      {
+        "level": 25,
+        "move": "Whirlwind"
+      },
+      {
+        "level": 29,
+        "move": "Agility"
+      },
+      {
+        "level": 33,
+        "move": "Air Slash"
+      },
+      {
+        "level": 40,
+        "move": "Feather Dance"
+      },
+      {
+        "level": 45,
+        "move": "Hurricane"
+      },
+      {
+        "level": 50,
+        "move": "Brave Bird"
+      }
+    ]
+  },
+  {
+    "id": 19.1,
+    "name": "Rattata (Alolan Rattata)",
+    "types": [
+      "Dark",
+      "Normal"
+    ],
+    "hp": 30,
+    "atk": 56,
+    "def": 35,
+    "spa": 25,
+    "spd": 35,
+    "spe": 72,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 20.1,
+    "name": "Raticate (Alolan Raticate)",
+    "types": [
+      "Dark",
+      "Normal"
+    ],
+    "hp": 75,
+    "atk": 71,
+    "def": 70,
+    "spa": 40,
+    "spd": 80,
+    "spe": 77,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 25.1,
+    "name": "Pikachu (Partner Pikachu)",
+    "types": [
+      "Electric"
+    ],
+    "hp": 45,
+    "atk": 80,
+    "def": 50,
+    "spa": 75,
+    "spd": 60,
+    "spe": 120,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Growl"
+      },
+      {
+        "level": 1,
+        "move": "Quick Attack"
+      },
+      {
+        "level": 1,
+        "move": "Tail Whip"
+      },
+      {
+        "level": 1,
+        "move": "Thunder Shock"
+      },
+      {
+        "level": 4,
+        "move": "Thunder Wave"
+      },
+      {
+        "level": 12,
+        "move": "Nuzzle"
+      },
+      {
+        "level": 16,
+        "move": "Spark"
+      },
+      {
+        "level": 20,
+        "move": "Charm"
+      },
+      {
+        "level": 25,
+        "move": "Thunderbolt"
+      },
+      {
+        "level": 30,
+        "move": "Charge"
+      },
+      {
+        "level": 35,
+        "move": "Light Screen"
+      },
+      {
+        "level": 40,
+        "move": "Thunder"
+      },
+      {
+        "level": 99,
+        "move": "Volt Tackle"
+      }
+    ]
+  },
+  {
+    "id": 26.1,
+    "name": "Raichu (Alolan Raichu)",
+    "types": [
+      "Electric",
+      "Psychic"
+    ],
+    "hp": 60,
+    "atk": 85,
+    "def": 50,
+    "spa": 95,
+    "spd": 85,
+    "spe": 110,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 26.2,
+    "name": "Raichu (Mega Raichu X)",
+    "types": [
+      "Electric"
+    ],
+    "hp": 60,
+    "atk": 135,
+    "def": 95,
+    "spa": 90,
+    "spd": 95,
+    "spe": 110,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Growl"
+      },
+      {
+        "level": 1,
+        "move": "Quick Attack"
+      },
+      {
+        "level": 1,
+        "move": "Tail Whip"
+      },
+      {
+        "level": 1,
+        "move": "Thunder Shock"
+      },
+      {
+        "level": 4,
+        "move": "Thunder Wave"
+      },
+      {
+        "level": 12,
+        "move": "Nuzzle"
+      },
+      {
+        "level": 16,
+        "move": "Spark"
+      },
+      {
+        "level": 20,
+        "move": "Charm"
+      },
+      {
+        "level": 25,
+        "move": "Thunderbolt"
+      },
+      {
+        "level": 30,
+        "move": "Charge"
+      },
+      {
+        "level": 35,
+        "move": "Light Screen"
+      },
+      {
+        "level": 40,
+        "move": "Thunder"
+      },
+      {
+        "level": 99,
+        "move": "Volt Tackle"
+      }
+    ]
+  },
+  {
+    "id": 26.3,
+    "name": "Raichu (Mega Raichu Y)",
+    "types": [
+      "Electric"
+    ],
+    "hp": 60,
+    "atk": 100,
+    "def": 55,
+    "spa": 160,
+    "spd": 80,
+    "spe": 130,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Growl"
+      },
+      {
+        "level": 1,
+        "move": "Quick Attack"
+      },
+      {
+        "level": 1,
+        "move": "Tail Whip"
+      },
+      {
+        "level": 1,
+        "move": "Thunder Shock"
+      },
+      {
+        "level": 4,
+        "move": "Thunder Wave"
+      },
+      {
+        "level": 12,
+        "move": "Nuzzle"
+      },
+      {
+        "level": 16,
+        "move": "Spark"
+      },
+      {
+        "level": 20,
+        "move": "Charm"
+      },
+      {
+        "level": 25,
+        "move": "Thunderbolt"
+      },
+      {
+        "level": 30,
+        "move": "Charge"
+      },
+      {
+        "level": 35,
+        "move": "Light Screen"
+      },
+      {
+        "level": 40,
+        "move": "Thunder"
+      },
+      {
+        "level": 99,
+        "move": "Volt Tackle"
+      }
+    ]
+  },
+  {
+    "id": 27.1,
+    "name": "Sandshrew (Alolan Sandshrew)",
+    "types": [
+      "Ice",
+      "Steel"
+    ],
+    "hp": 50,
+    "atk": 75,
+    "def": 90,
+    "spa": 10,
+    "spd": 35,
+    "spe": 40,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 28.1,
+    "name": "Sandslash (Alolan Sandslash)",
+    "types": [
+      "Ice",
+      "Steel"
+    ],
+    "hp": 75,
+    "atk": 100,
+    "def": 120,
+    "spa": 25,
+    "spd": 65,
+    "spe": 65,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 36.1,
+    "name": "Clefable (Mega Clefable)",
+    "types": [
+      "Fairy",
+      "Flying"
+    ],
+    "hp": 95,
+    "atk": 80,
+    "def": 93,
+    "spa": 135,
+    "spd": 110,
+    "spe": 70,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Splash"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 5,
+        "move": "Fairy Wind"
+      },
+      {
+        "level": 8,
+        "move": "Disarming Voice"
+      },
+      {
+        "level": 13,
+        "move": "Charm"
+      },
+      {
+        "level": 16,
+        "move": "Draining Kiss"
+      },
+      {
+        "level": 18,
+        "move": "Magical Leaf"
+      },
+      {
+        "level": 20,
+        "move": "Metronome"
+      },
+      {
+        "level": 22,
+        "move": "Bubble Beam"
+      },
+      {
+        "level": 24,
+        "move": "Moonlight"
+      },
+      {
+        "level": 28,
+        "move": "Amnesia"
+      },
+      {
+        "level": 32,
+        "move": "Dazzling Gleam"
+      },
+      {
+        "level": 42,
+        "move": "Mystical Fire"
+      },
+      {
+        "level": 48,
+        "move": "Moonblast"
+      },
+      {
+        "level": 52,
+        "move": "Air Slash"
+      },
+      {
+        "level": 55,
+        "move": "Double-Edge"
+      }
+    ]
+  },
+  {
+    "id": 37.1,
+    "name": "Vulpix (Alolan Vulpix)",
+    "types": [
+      "Ice"
+    ],
+    "hp": 38,
+    "atk": 41,
+    "def": 40,
+    "spa": 50,
+    "spd": 65,
+    "spe": 65,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 38.1,
+    "name": "Ninetales (Alolan Ninetales)",
+    "types": [
+      "Ice",
+      "Fairy"
+    ],
+    "hp": 73,
+    "atk": 67,
+    "def": 75,
+    "spa": 81,
+    "spd": 100,
+    "spe": 109,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 50.1,
+    "name": "Diglett (Alolan Diglett)",
+    "types": [
+      "Ground",
+      "Steel"
+    ],
+    "hp": 10,
+    "atk": 55,
+    "def": 30,
+    "spa": 35,
+    "spd": 45,
+    "spe": 90,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 51.1,
+    "name": "Dugtrio (Alolan Dugtrio)",
+    "types": [
+      "Ground",
+      "Steel"
+    ],
+    "hp": 35,
+    "atk": 100,
+    "def": 60,
+    "spa": 50,
+    "spd": 70,
+    "spe": 110,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 52.1,
+    "name": "Meowth (Alolan Meowth)",
+    "types": [
+      "Dark"
+    ],
+    "hp": 40,
+    "atk": 35,
+    "def": 35,
+    "spa": 50,
+    "spd": 40,
+    "spe": 90,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 52.2,
+    "name": "Meowth (Galarian Meowth)",
+    "types": [
+      "Steel"
+    ],
+    "hp": 50,
+    "atk": 65,
+    "def": 55,
+    "spa": 40,
+    "spd": 40,
+    "spe": 40,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 53.1,
+    "name": "Persian (Alolan Persian)",
+    "types": [
+      "Dark"
+    ],
+    "hp": 65,
+    "atk": 60,
+    "def": 60,
+    "spa": 75,
+    "spd": 65,
+    "spe": 115,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 58.1,
+    "name": "Growlithe (Hisuian Growlithe)",
+    "types": [
+      "Fire",
+      "Rock"
+    ],
+    "hp": 60,
+    "atk": 75,
+    "def": 45,
+    "spa": 65,
+    "spd": 50,
+    "spe": 55,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 59.1,
+    "name": "Arcanine (Hisuian Arcanine)",
+    "types": [
+      "Fire",
+      "Rock"
+    ],
+    "hp": 95,
+    "atk": 115,
+    "def": 80,
+    "spa": 95,
+    "spd": 80,
+    "spe": 90,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 65.1,
+    "name": "Alakazam (Mega Alakazam)",
+    "types": [
+      "Psychic"
+    ],
+    "hp": 55,
+    "atk": 50,
+    "def": 65,
+    "spa": 175,
+    "spd": 105,
+    "spe": 150,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Psybeam"
+      },
+      {
+        "level": 1,
+        "move": "Teleport"
+      },
+      {
+        "level": 10,
+        "move": "Reflect"
+      },
+      {
+        "level": 20,
+        "move": "Psycho Cut"
+      },
+      {
+        "level": 25,
+        "move": "Recover"
+      },
+      {
+        "level": 30,
+        "move": "Psyshock"
+      },
+      {
+        "level": 35,
+        "move": "Psychic"
+      },
+      {
+        "level": 40,
+        "move": "Safeguard"
+      },
+      {
+        "level": 45,
+        "move": "Future Sight"
+      },
+      {
+        "level": 50,
+        "move": "Calm Mind"
+      }
+    ]
+  },
+  {
+    "id": 71.1,
+    "name": "Victreebel (Mega Victreebel)",
+    "types": [
+      "Grass",
+      "Poison"
+    ],
+    "hp": 80,
+    "atk": 125,
+    "def": 85,
+    "spa": 135,
+    "spd": 95,
+    "spe": 70,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Growth"
+      },
+      {
+        "level": 1,
+        "move": "Lunge"
+      },
+      {
+        "level": 1,
+        "move": "Vine Whip"
+      },
+      {
+        "level": 8,
+        "move": "Infestation"
+      },
+      {
+        "level": 10,
+        "move": "Razor Leaf"
+      },
+      {
+        "level": 13,
+        "move": "Sleep Powder"
+      },
+      {
+        "level": 15,
+        "move": "Poison Powder"
+      },
+      {
+        "level": 17,
+        "move": "Stun Spore"
+      },
+      {
+        "level": 19,
+        "move": "Knock Off"
+      },
+      {
+        "level": 23,
+        "move": "Magical Leaf"
+      },
+      {
+        "level": 26,
+        "move": "Toxic Spikes"
+      },
+      {
+        "level": 30,
+        "move": "Poison Jab"
+      },
+      {
+        "level": 33,
+        "move": "Leech Life"
+      },
+      {
+        "level": 40,
+        "move": "Sludge Wave"
+      },
+      {
+        "level": 44,
+        "move": "Power Whip"
+      },
+      {
+        "level": 48,
+        "move": "Leaf Storm"
+      }
+    ]
+  },
+  {
+    "id": 74.1,
+    "name": "Geodude (Alolan Geodude)",
+    "types": [
+      "Rock",
+      "Electric"
+    ],
+    "hp": 40,
+    "atk": 80,
+    "def": 100,
+    "spa": 30,
+    "spd": 30,
+    "spe": 20,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 75.1,
+    "name": "Graveler (Alolan Graveler)",
+    "types": [
+      "Rock",
+      "Electric"
+    ],
+    "hp": 55,
+    "atk": 95,
+    "def": 115,
+    "spa": 45,
+    "spd": 45,
+    "spe": 35,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 76.1,
+    "name": "Golem (Alolan Golem)",
+    "types": [
+      "Rock",
+      "Electric"
+    ],
+    "hp": 80,
+    "atk": 120,
+    "def": 130,
+    "spa": 55,
+    "spd": 65,
+    "spe": 45,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 77.1,
+    "name": "Ponyta (Galarian Ponyta)",
+    "types": [
+      "Psychic"
+    ],
+    "hp": 50,
+    "atk": 85,
+    "def": 55,
+    "spa": 65,
+    "spd": 65,
+    "spe": 90,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 78.1,
+    "name": "Rapidash (Galarian Rapidash)",
+    "types": [
+      "Psychic",
+      "Fairy"
+    ],
+    "hp": 65,
+    "atk": 100,
+    "def": 70,
+    "spa": 80,
+    "spd": 80,
+    "spe": 105,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 79.1,
+    "name": "Slowpoke (Galarian Slowpoke)",
+    "types": [
+      "Psychic"
+    ],
+    "hp": 90,
+    "atk": 65,
+    "def": 65,
+    "spa": 40,
+    "spd": 40,
+    "spe": 15,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 80.1,
+    "name": "Slowbro (Mega Slowbro)",
+    "types": [
+      "Water",
+      "Psychic"
+    ],
+    "hp": 95,
+    "atk": 75,
+    "def": 180,
+    "spa": 130,
+    "spd": 80,
+    "spe": 30,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 80.2,
+    "name": "Slowbro (Galarian Slowbro)",
+    "types": [
+      "Poison",
+      "Psychic"
+    ],
+    "hp": 95,
+    "atk": 100,
+    "def": 95,
+    "spa": 100,
+    "spd": 70,
+    "spe": 30,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 83.1,
+    "name": "Farfetch'd (Galarian Farfetch'd)",
+    "types": [
+      "Fighting"
+    ],
+    "hp": 52,
+    "atk": 95,
+    "def": 55,
+    "spa": 58,
+    "spd": 62,
+    "spe": 55,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 88.1,
+    "name": "Grimer (Alolan Grimer)",
+    "types": [
+      "Poison",
+      "Dark"
+    ],
+    "hp": 80,
+    "atk": 80,
+    "def": 50,
+    "spa": 40,
+    "spd": 50,
+    "spe": 25,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 89.1,
+    "name": "Muk (Alolan Muk)",
+    "types": [
+      "Poison",
+      "Dark"
+    ],
+    "hp": 105,
+    "atk": 105,
+    "def": 75,
+    "spa": 65,
+    "spd": 100,
+    "spe": 50,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 94.1,
+    "name": "Gengar (Mega Gengar)",
+    "types": [
+      "Ghost",
+      "Poison"
+    ],
+    "hp": 60,
+    "atk": 65,
+    "def": 80,
+    "spa": 170,
+    "spd": 95,
+    "spe": 130,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Confuse Ray"
+      },
+      {
+        "level": 1,
+        "move": "Lick"
+      },
+      {
+        "level": 4,
+        "move": "Hypnosis"
+      },
+      {
+        "level": 8,
+        "move": "Confusion"
+      },
+      {
+        "level": 12,
+        "move": "Shadow Sneak"
+      },
+      {
+        "level": 16,
+        "move": "Shadow Claw"
+      },
+      {
+        "level": 20,
+        "move": "Curse"
+      },
+      {
+        "level": 24,
+        "move": "Haze"
+      },
+      {
+        "level": 28,
+        "move": "Icy Wind"
+      },
+      {
+        "level": 36,
+        "move": "Dark Pulse"
+      },
+      {
+        "level": 40,
+        "move": "Shadow Ball"
+      },
+      {
+        "level": 48,
+        "move": "Sludge Wave"
+      },
+      {
+        "level": 50,
+        "move": "Perish Song"
+      },
+      {
+        "level": 55,
+        "move": "Phantom Force"
+      }
+    ]
+  },
+  {
+    "id": 100.1,
+    "name": "Voltorb (Hisuian Voltorb)",
+    "types": [
+      "Electric",
+      "Grass"
+    ],
+    "hp": 40,
+    "atk": 30,
+    "def": 50,
+    "spa": 55,
+    "spd": 55,
+    "spe": 100,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 101.1,
+    "name": "Electrode (Hisuian Electrode)",
+    "types": [
+      "Electric",
+      "Grass"
+    ],
+    "hp": 60,
+    "atk": 50,
+    "def": 70,
+    "spa": 80,
+    "spd": 80,
+    "spe": 150,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 103.1,
+    "name": "Exeggutor (Alolan Exeggutor)",
+    "types": [
+      "Grass",
+      "Dragon"
+    ],
+    "hp": 95,
+    "atk": 105,
+    "def": 85,
+    "spa": 125,
+    "spd": 75,
+    "spe": 45,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 105.1,
+    "name": "Marowak (Alolan Marowak)",
+    "types": [
+      "Fire",
+      "Ghost"
+    ],
+    "hp": 60,
+    "atk": 80,
+    "def": 110,
+    "spa": 50,
+    "spd": 80,
+    "spe": 45,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 110.1,
+    "name": "Weezing (Galarian Weezing)",
+    "types": [
+      "Poison",
+      "Fairy"
+    ],
+    "hp": 65,
+    "atk": 90,
+    "def": 120,
+    "spa": 85,
+    "spd": 70,
+    "spe": 60,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 115.1,
+    "name": "Kangaskhan (Mega Kangaskhan)",
+    "types": [
+      "Normal"
+    ],
+    "hp": 105,
+    "atk": 125,
+    "def": 100,
+    "spa": 60,
+    "spd": 100,
+    "spe": 100,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 1,
+        "move": "Tail Whip"
+      },
+      {
+        "level": 4,
+        "move": "Growl"
+      },
+      {
+        "level": 12,
+        "move": "Bite"
+      },
+      {
+        "level": 20,
+        "move": "Focus Energy"
+      },
+      {
+        "level": 24,
+        "move": "Headbutt"
+      },
+      {
+        "level": 32,
+        "move": "Take Down"
+      },
+      {
+        "level": 36,
+        "move": "Crunch"
+      },
+      {
+        "level": 40,
+        "move": "Endure"
+      },
+      {
+        "level": 48,
+        "move": "Outrage"
+      },
+      {
+        "level": 54,
+        "move": "Dynamic Punch"
+      }
+    ]
+  },
+  {
+    "id": 121.1,
+    "name": "Starmie (Mega Starmie)",
+    "types": [
+      "Water",
+      "Psychic"
+    ],
+    "hp": 60,
+    "atk": 140,
+    "def": 105,
+    "spa": 130,
+    "spd": 105,
+    "spe": 120,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Harden"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 1,
+        "move": "Take Down"
+      },
+      {
+        "level": 4,
+        "move": "Water Gun"
+      },
+      {
+        "level": 8,
+        "move": "Confuse Ray"
+      },
+      {
+        "level": 12,
+        "move": "Aqua Jet"
+      },
+      {
+        "level": 16,
+        "move": "Swift"
+      },
+      {
+        "level": 20,
+        "move": "Bubble Beam"
+      },
+      {
+        "level": 24,
+        "move": "Psybeam"
+      },
+      {
+        "level": 32,
+        "move": "Light Screen"
+      },
+      {
+        "level": 36,
+        "move": "Power Gem"
+      },
+      {
+        "level": 40,
+        "move": "Psychic"
+      },
+      {
+        "level": 42,
+        "move": "Liquidation"
+      },
+      {
+        "level": 44,
+        "move": "Surf"
+      },
+      {
+        "level": 48,
+        "move": "Recover"
+      },
+      {
+        "level": 56,
+        "move": "Hydro Pump"
+      }
+    ]
+  },
+  {
+    "id": 122.1,
+    "name": "Mr. Mime (Galarian Mr. Mime)",
+    "types": [
+      "Ice",
+      "Psychic"
+    ],
+    "hp": 50,
+    "atk": 65,
+    "def": 65,
+    "spa": 90,
+    "spd": 90,
+    "spe": 100,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 127.1,
+    "name": "Pinsir (Mega Pinsir)",
+    "types": [
+      "Bug",
+      "Flying"
+    ],
+    "hp": 65,
+    "atk": 155,
+    "def": 120,
+    "spa": 65,
+    "spd": 90,
+    "spe": 105,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Harden"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 4,
+        "move": "Focus Energy"
+      },
+      {
+        "level": 8,
+        "move": "Rock Smash"
+      },
+      {
+        "level": 16,
+        "move": "Brutal Swing"
+      },
+      {
+        "level": 20,
+        "move": "Detect"
+      },
+      {
+        "level": 24,
+        "move": "Take Down"
+      },
+      {
+        "level": 32,
+        "move": "X-Scissor"
+      },
+      {
+        "level": 36,
+        "move": "Lunge"
+      },
+      {
+        "level": 40,
+        "move": "Swords Dance"
+      },
+      {
+        "level": 50,
+        "move": "Close Combat"
+      }
+    ]
+  },
+  {
+    "id": 128.1,
+    "name": "Tauros (Combat Breed)",
+    "types": [
+      "Fighting"
+    ],
+    "hp": 75,
+    "atk": 110,
+    "def": 105,
+    "spa": 30,
+    "spd": 70,
+    "spe": 100,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 128.2,
+    "name": "Tauros (Blaze Breed)",
+    "types": [
+      "Fighting",
+      "Fire"
+    ],
+    "hp": 75,
+    "atk": 110,
+    "def": 105,
+    "spa": 30,
+    "spd": 70,
+    "spe": 100,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 128.3,
+    "name": "Tauros (Aqua Breed)",
+    "types": [
+      "Fighting",
+      "Water"
+    ],
+    "hp": 75,
+    "atk": 110,
+    "def": 105,
+    "spa": 30,
+    "spd": 70,
+    "spe": 100,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 130.1,
+    "name": "Gyarados (Mega Gyarados)",
+    "types": [
+      "Water",
+      "Dark"
+    ],
+    "hp": 95,
+    "atk": 155,
+    "def": 109,
+    "spa": 70,
+    "spd": 130,
+    "spe": 81,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Leer"
+      },
+      {
+        "level": 1,
+        "move": "Splash"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 1,
+        "move": "Twister"
+      },
+      {
+        "level": 24,
+        "move": "Waterfall"
+      },
+      {
+        "level": 30,
+        "move": "Crunch"
+      },
+      {
+        "level": 33,
+        "move": "Iron Head"
+      },
+      {
+        "level": 40,
+        "move": "Bounce"
+      },
+      {
+        "level": 44,
+        "move": "Hurricane"
+      },
+      {
+        "level": 45,
+        "move": "Dragon Rush"
+      },
+      {
+        "level": 50,
+        "move": "Hydro Pump"
+      },
+      {
+        "level": 55,
+        "move": "Hyper Beam"
+      }
+    ]
+  },
+  {
+    "id": 133.1,
+    "name": "Eevee (Partner Eevee)",
+    "types": [
+      "Normal"
+    ],
+    "hp": 65,
+    "atk": 75,
+    "def": 70,
+    "spa": 65,
+    "spd": 85,
+    "spe": 75,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Growl"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 1,
+        "move": "Tail Whip"
+      },
+      {
+        "level": 10,
+        "move": "Quick Attack"
+      },
+      {
+        "level": 15,
+        "move": "Disarming Voice"
+      },
+      {
+        "level": 20,
+        "move": "Swift"
+      },
+      {
+        "level": 25,
+        "move": "Bite"
+      },
+      {
+        "level": 30,
+        "move": "Wish"
+      },
+      {
+        "level": 40,
+        "move": "Take Down"
+      },
+      {
+        "level": 45,
+        "move": "Charm"
+      },
+      {
+        "level": 50,
+        "move": "Double-Edge"
+      }
+    ]
+  },
+  {
+    "id": 142.1,
+    "name": "Aerodactyl (Mega Aerodactyl)",
+    "types": [
+      "Rock",
+      "Flying"
+    ],
+    "hp": 80,
+    "atk": 135,
+    "def": 85,
+    "spa": 70,
+    "spd": 95,
+    "spe": 150,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Bite"
+      },
+      {
+        "level": 1,
+        "move": "Steel Wing"
+      },
+      {
+        "level": 5,
+        "move": "Supersonic"
+      },
+      {
+        "level": 10,
+        "move": "Wing Attack"
+      },
+      {
+        "level": 15,
+        "move": "Rock Blast"
+      },
+      {
+        "level": 20,
+        "move": "Rock Slide"
+      },
+      {
+        "level": 25,
+        "move": "Roar"
+      },
+      {
+        "level": 30,
+        "move": "Crunch"
+      },
+      {
+        "level": 35,
+        "move": "Iron Head"
+      },
+      {
+        "level": 40,
+        "move": "Take Down"
+      },
+      {
+        "level": 45,
+        "move": "Stone Edge"
+      },
+      {
+        "level": 55,
+        "move": "Hyper Beam"
+      },
+      {
+        "level": 60,
+        "move": "Giga Impact"
+      }
+    ]
+  },
+  {
+    "id": 144.1,
+    "name": "Articuno (Galarian Articuno)",
+    "types": [
+      "Psychic",
+      "Flying"
+    ],
+    "hp": 90,
+    "atk": 85,
+    "def": 85,
+    "spa": 125,
+    "spd": 100,
+    "spe": 95,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 145.1,
+    "name": "Zapdos (Galarian Zapdos)",
+    "types": [
+      "Fighting",
+      "Flying"
+    ],
+    "hp": 90,
+    "atk": 125,
+    "def": 90,
+    "spa": 85,
+    "spd": 90,
+    "spe": 100,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 146.1,
+    "name": "Moltres (Galarian Moltres)",
+    "types": [
+      "Dark",
+      "Flying"
+    ],
+    "hp": 90,
+    "atk": 85,
+    "def": 90,
+    "spa": 100,
+    "spd": 125,
+    "spe": 90,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 149.1,
+    "name": "Dragonite (Mega Dragonite)",
+    "types": [
+      "Dragon",
+      "Flying"
+    ],
+    "hp": 91,
+    "atk": 124,
+    "def": 115,
+    "spa": 145,
+    "spd": 125,
+    "spe": 100,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Air Slash"
+      },
+      {
+        "level": 1,
+        "move": "Leer"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 5,
+        "move": "Twister"
+      },
+      {
+        "level": 10,
+        "move": "Thunder Wave"
+      },
+      {
+        "level": 15,
+        "move": "Take Down"
+      },
+      {
+        "level": 20,
+        "move": "Breaking Swipe"
+      },
+      {
+        "level": 25,
+        "move": "Brutal Swing"
+      },
+      {
+        "level": 30,
+        "move": "Dragon Rush"
+      },
+      {
+        "level": 40,
+        "move": "Safeguard"
+      },
+      {
+        "level": 50,
+        "move": "Extreme Speed"
+      },
+      {
+        "level": 55,
+        "move": "Outrage"
+      },
+      {
+        "level": 60,
+        "move": "Hyper Beam"
+      }
+    ]
+  },
+  {
+    "id": 150.1,
+    "name": "Mewtwo (Mega Mewtwo X)",
+    "types": [
+      "Psychic",
+      "Fighting"
+    ],
+    "hp": 106,
+    "atk": 190,
+    "def": 100,
+    "spa": 154,
+    "spd": 100,
+    "spe": 130,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Confusion"
+      },
+      {
+        "level": 1,
+        "move": "Swift"
+      },
+      {
+        "level": 12,
+        "move": "Psybeam"
+      },
+      {
+        "level": 16,
+        "move": "Psycho Cut"
+      },
+      {
+        "level": 24,
+        "move": "Safeguard"
+      },
+      {
+        "level": 32,
+        "move": "Amnesia"
+      },
+      {
+        "level": 40,
+        "move": "Aura Sphere"
+      },
+      {
+        "level": 48,
+        "move": "Psychic"
+      },
+      {
+        "level": 64,
+        "move": "Mist"
+      },
+      {
+        "level": 72,
+        "move": "Psystrike"
+      },
+      {
+        "level": 80,
+        "move": "Recover"
+      },
+      {
+        "level": 88,
+        "move": "Future Sight"
+      }
+    ]
+  },
+  {
+    "id": 150.2,
+    "name": "Mewtwo (Mega Mewtwo Y)",
+    "types": [
+      "Psychic"
+    ],
+    "hp": 106,
+    "atk": 150,
+    "def": 70,
+    "spa": 194,
+    "spd": 120,
+    "spe": 140,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Confusion"
+      },
+      {
+        "level": 1,
+        "move": "Swift"
+      },
+      {
+        "level": 12,
+        "move": "Psybeam"
+      },
+      {
+        "level": 16,
+        "move": "Psycho Cut"
+      },
+      {
+        "level": 24,
+        "move": "Safeguard"
+      },
+      {
+        "level": 32,
+        "move": "Amnesia"
+      },
+      {
+        "level": 40,
+        "move": "Aura Sphere"
+      },
+      {
+        "level": 48,
+        "move": "Psychic"
+      },
+      {
+        "level": 64,
+        "move": "Mist"
+      },
+      {
+        "level": 72,
+        "move": "Psystrike"
+      },
+      {
+        "level": 80,
+        "move": "Recover"
+      },
+      {
+        "level": 88,
+        "move": "Future Sight"
+      }
+    ]
+  },
+  {
+    "id": 154.1,
+    "name": "Meganium (Mega Meganium)",
+    "types": [
+      "Grass",
+      "Fairy"
+    ],
+    "hp": 80,
+    "atk": 92,
+    "def": 115,
+    "spa": 143,
+    "spd": 115,
+    "spe": 80,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 1,
+        "move": "Tail Whip"
+      },
+      {
+        "level": 6,
+        "move": "Leafage"
+      },
+      {
+        "level": 9,
+        "move": "Disarming Voice"
+      },
+      {
+        "level": 12,
+        "move": "Razor Leaf"
+      },
+      {
+        "level": 14,
+        "move": "Leech Seed"
+      },
+      {
+        "level": 22,
+        "move": "Body Slam"
+      },
+      {
+        "level": 27,
+        "move": "Reflect"
+      },
+      {
+        "level": 36,
+        "move": "Safeguard"
+      },
+      {
+        "level": 40,
+        "move": "Synthesis"
+      },
+      {
+        "level": 45,
+        "move": "Solar Beam"
+      },
+      {
+        "level": 50,
+        "move": "Light Screen"
+      },
+      {
+        "level": 56,
+        "move": "Leaf Storm"
+      }
+    ]
+  },
+  {
+    "id": 157.1,
+    "name": "Typhlosion (Hisuian Typhlosion)",
+    "types": [
+      "Fire",
+      "Ghost"
+    ],
+    "hp": 73,
+    "atk": 84,
+    "def": 78,
+    "spa": 119,
+    "spd": 85,
+    "spe": 95,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 160.1,
+    "name": "Feraligatr (Mega Feraligatr)",
+    "types": [
+      "Water",
+      "Dragon"
+    ],
+    "hp": 85,
+    "atk": 160,
+    "def": 125,
+    "spa": 89,
+    "spd": 93,
+    "spe": 78,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Leer"
+      },
+      {
+        "level": 1,
+        "move": "Slash"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 6,
+        "move": "Water Gun"
+      },
+      {
+        "level": 10,
+        "move": "Bite"
+      },
+      {
+        "level": 15,
+        "move": "Bubble Beam"
+      },
+      {
+        "level": 21,
+        "move": "Aqua Jet"
+      },
+      {
+        "level": 26,
+        "move": "Breaking Swipe"
+      },
+      {
+        "level": 35,
+        "move": "Screech"
+      },
+      {
+        "level": 40,
+        "move": "Liquidation"
+      },
+      {
+        "level": 50,
+        "move": "Hydro Pump"
+      },
+      {
+        "level": 56,
+        "move": "Outrage"
+      }
+    ]
+  },
+  {
+    "id": 181.1,
+    "name": "Ampharos (Mega Ampharos)",
+    "types": [
+      "Electric",
+      "Dragon"
+    ],
+    "hp": 90,
+    "atk": 95,
+    "def": 105,
+    "spa": 165,
+    "spd": 110,
+    "spe": 45,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Growl"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 4,
+        "move": "Thunder Shock"
+      },
+      {
+        "level": 8,
+        "move": "Thunder Wave"
+      },
+      {
+        "level": 15,
+        "move": "Charge"
+      },
+      {
+        "level": 17,
+        "move": "Confuse Ray"
+      },
+      {
+        "level": 28,
+        "move": "Cotton Guard"
+      },
+      {
+        "level": 32,
+        "move": "Power Gem"
+      },
+      {
+        "level": 36,
+        "move": "Thunderbolt"
+      },
+      {
+        "level": 40,
+        "move": "Light Screen"
+      },
+      {
+        "level": 42,
+        "move": "Breaking Swipe"
+      },
+      {
+        "level": 45,
+        "move": "Thunder"
+      },
+      {
+        "level": 50,
+        "move": "Zap Cannon"
+      }
+    ]
+  },
+  {
+    "id": 194.1,
+    "name": "Wooper (Paldean Wooper)",
+    "types": [
+      "Poison",
+      "Ground"
+    ],
+    "hp": 55,
+    "atk": 45,
+    "def": 45,
+    "spa": 25,
+    "spd": 25,
+    "spe": 15,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 199.1,
+    "name": "Slowking (Galarian Slowking)",
+    "types": [
+      "Poison",
+      "Psychic"
+    ],
+    "hp": 95,
+    "atk": 65,
+    "def": 80,
+    "spa": 110,
+    "spd": 110,
+    "spe": 30,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 208.1,
+    "name": "Steelix (Mega Steelix)",
+    "types": [
+      "Steel",
+      "Ground"
+    ],
+    "hp": 75,
+    "atk": 125,
+    "def": 230,
+    "spa": 55,
+    "spd": 95,
+    "spe": 30,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Crunch"
+      },
+      {
+        "level": 1,
+        "move": "Harden"
+      },
+      {
+        "level": 1,
+        "move": "Rock Throw"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 12,
+        "move": "Dragon Breath"
+      },
+      {
+        "level": 16,
+        "move": "Curse"
+      },
+      {
+        "level": 20,
+        "move": "Rock Slide"
+      },
+      {
+        "level": 22,
+        "move": "Breaking Swipe"
+      },
+      {
+        "level": 24,
+        "move": "Screech"
+      },
+      {
+        "level": 28,
+        "move": "Sand Tomb"
+      },
+      {
+        "level": 32,
+        "move": "Stealth Rock"
+      },
+      {
+        "level": 36,
+        "move": "Heavy Slam"
+      },
+      {
+        "level": 44,
+        "move": "Dig"
+      },
+      {
+        "level": 52,
+        "move": "Stone Edge"
+      },
+      {
+        "level": 56,
+        "move": "Double-Edge"
+      },
+      {
+        "level": 62,
+        "move": "Head Smash"
+      }
+    ]
+  },
+  {
+    "id": 211.1,
+    "name": "Qwilfish (Hisuian Qwilfish)",
+    "types": [
+      "Dark",
+      "Poison"
+    ],
+    "hp": 65,
+    "atk": 95,
+    "def": 85,
+    "spa": 55,
+    "spd": 55,
+    "spe": 85,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 212.1,
+    "name": "Scizor (Mega Scizor)",
+    "types": [
+      "Bug",
+      "Steel"
+    ],
+    "hp": 70,
+    "atk": 150,
+    "def": 140,
+    "spa": 65,
+    "spd": 100,
+    "spe": 75,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Leer"
+      },
+      {
+        "level": 1,
+        "move": "Quick Attack"
+      },
+      {
+        "level": 12,
+        "move": "Wing Attack"
+      },
+      {
+        "level": 16,
+        "move": "Double Team"
+      },
+      {
+        "level": 18,
+        "move": "Steel Wing"
+      },
+      {
+        "level": 20,
+        "move": "Brutal Swing"
+      },
+      {
+        "level": 24,
+        "move": "Slash"
+      },
+      {
+        "level": 28,
+        "move": "Focus Energy"
+      },
+      {
+        "level": 32,
+        "move": "X-Scissor"
+      },
+      {
+        "level": 34,
+        "move": "Bug Buzz"
+      },
+      {
+        "level": 36,
+        "move": "Air Slash"
+      },
+      {
+        "level": 40,
+        "move": "Iron Defense"
+      },
+      {
+        "level": 42,
+        "move": "Swords Dance"
+      },
+      {
+        "level": 46,
+        "move": "Lunge"
+      },
+      {
+        "level": 48,
+        "move": "Iron Head"
+      }
+    ]
+  },
+  {
+    "id": 214.1,
+    "name": "Heracross (Mega Heracross)",
+    "types": [
+      "Bug",
+      "Fighting"
+    ],
+    "hp": 80,
+    "atk": 185,
+    "def": 115,
+    "spa": 40,
+    "spd": 105,
+    "spe": 75,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Leer"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 5,
+        "move": "Endure"
+      },
+      {
+        "level": 10,
+        "move": "Pin Missile"
+      },
+      {
+        "level": 13,
+        "move": "Detect"
+      },
+      {
+        "level": 15,
+        "move": "Aerial Ace"
+      },
+      {
+        "level": 20,
+        "move": "Take Down"
+      },
+      {
+        "level": 24,
+        "move": "Brick Break"
+      },
+      {
+        "level": 28,
+        "move": "Rock Blast"
+      },
+      {
+        "level": 30,
+        "move": "Bug Buzz"
+      },
+      {
+        "level": 32,
+        "move": "Lunge"
+      },
+      {
+        "level": 38,
+        "move": "Swords Dance"
+      },
+      {
+        "level": 45,
+        "move": "Megahorn"
+      },
+      {
+        "level": 50,
+        "move": "Close Combat"
+      }
+    ]
+  },
+  {
+    "id": 215.1,
+    "name": "Sneasel (Hisuian Sneasel)",
+    "types": [
+      "Fighting",
+      "Poison"
+    ],
+    "hp": 55,
+    "atk": 95,
+    "def": 55,
+    "spa": 35,
+    "spd": 75,
+    "spe": 115,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 222.1,
+    "name": "Corsola (Galarian Corsola)",
+    "types": [
+      "Ghost"
+    ],
+    "hp": 60,
+    "atk": 55,
+    "def": 100,
+    "spa": 65,
+    "spd": 100,
+    "spe": 30,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 227.1,
+    "name": "Skarmory (Mega Skarmory)",
+    "types": [
+      "Steel",
+      "Flying"
+    ],
+    "hp": 65,
+    "atk": 140,
+    "def": 110,
+    "spa": 40,
+    "spd": 100,
+    "spe": 110,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Leer"
+      },
+      {
+        "level": 1,
+        "move": "Peck"
+      },
+      {
+        "level": 12,
+        "move": "Metal Claw"
+      },
+      {
+        "level": 16,
+        "move": "Sand Tomb"
+      },
+      {
+        "level": 20,
+        "move": "Wing Attack"
+      },
+      {
+        "level": 24,
+        "move": "Slash"
+      },
+      {
+        "level": 28,
+        "move": "Steel Wing"
+      },
+      {
+        "level": 34,
+        "move": "Night Slash"
+      },
+      {
+        "level": 38,
+        "move": "Drill Run"
+      },
+      {
+        "level": 42,
+        "move": "Metal Sound"
+      },
+      {
+        "level": 46,
+        "move": "Spikes"
+      },
+      {
+        "level": 50,
+        "move": "Iron Defense"
+      },
+      {
+        "level": 56,
+        "move": "Brave Bird"
+      }
+    ]
+  },
+  {
+    "id": 229.1,
+    "name": "Houndoom (Mega Houndoom)",
+    "types": [
+      "Dark",
+      "Fire"
+    ],
+    "hp": 75,
+    "atk": 90,
+    "def": 90,
+    "spa": 140,
+    "spd": 90,
+    "spe": 115,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Ember"
+      },
+      {
+        "level": 1,
+        "move": "Leer"
+      },
+      {
+        "level": 1,
+        "move": "Nasty Plot"
+      },
+      {
+        "level": 6,
+        "move": "Tackle"
+      },
+      {
+        "level": 13,
+        "move": "Roar"
+      },
+      {
+        "level": 16,
+        "move": "Bite"
+      },
+      {
+        "level": 21,
+        "move": "Snarl"
+      },
+      {
+        "level": 24,
+        "move": "Take Down"
+      },
+      {
+        "level": 28,
+        "move": "Fire Fang"
+      },
+      {
+        "level": 34,
+        "move": "Dark Pulse"
+      },
+      {
+        "level": 44,
+        "move": "Flamethrower"
+      },
+      {
+        "level": 49,
+        "move": "Crunch"
+      },
+      {
+        "level": 55,
+        "move": "Overheat"
+      }
+    ]
+  },
+  {
+    "id": 248.1,
+    "name": "Tyranitar (Mega Tyranitar)",
+    "types": [
+      "Rock",
+      "Dark"
+    ],
+    "hp": 100,
+    "atk": 164,
+    "def": 150,
+    "spa": 95,
+    "spd": 120,
+    "spe": 71,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Leer"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 3,
+        "move": "Rock Throw"
+      },
+      {
+        "level": 9,
+        "move": "Bite"
+      },
+      {
+        "level": 12,
+        "move": "Sand Tomb"
+      },
+      {
+        "level": 15,
+        "move": "Rock Slide"
+      },
+      {
+        "level": 21,
+        "move": "Screech"
+      },
+      {
+        "level": 27,
+        "move": "Crunch"
+      },
+      {
+        "level": 33,
+        "move": "Earthquake"
+      },
+      {
+        "level": 37,
+        "move": "Stone Edge"
+      },
+      {
+        "level": 40,
+        "move": "Rock Blast"
+      },
+      {
+        "level": 48,
+        "move": "Hyper Beam"
+      },
+      {
+        "level": 53,
+        "move": "Heavy Slam"
+      },
+      {
+        "level": 56,
+        "move": "Giga Impact"
+      }
+    ]
+  },
+  {
+    "id": 254.1,
+    "name": "Sceptile (Mega Sceptile)",
+    "types": [
+      "Grass",
+      "Dragon"
+    ],
+    "hp": 70,
+    "atk": 110,
+    "def": 75,
+    "spa": 145,
+    "spd": 85,
+    "spe": 145,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Leer"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 1,
+        "move": "X-Scissor"
+      },
+      {
+        "level": 3,
+        "move": "Leafage"
+      },
+      {
+        "level": 6,
+        "move": "Quick Attack"
+      },
+      {
+        "level": 9,
+        "move": "Absorb"
+      },
+      {
+        "level": 12,
+        "move": "Detect"
+      },
+      {
+        "level": 14,
+        "move": "Leech Seed"
+      },
+      {
+        "level": 21,
+        "move": "Giga Drain"
+      },
+      {
+        "level": 27,
+        "move": "Double Team"
+      },
+      {
+        "level": 30,
+        "move": "Dragon Breath"
+      },
+      {
+        "level": 33,
+        "move": "Energy Ball"
+      },
+      {
+        "level": 35,
+        "move": "Slash"
+      },
+      {
+        "level": 38,
+        "move": "Leaf Blade"
+      },
+      {
+        "level": 40,
+        "move": "Screech"
+      },
+      {
+        "level": 44,
+        "move": "Dragon Rush"
+      },
+      {
+        "level": 50,
+        "move": "Synthesis"
+      },
+      {
+        "level": 55,
+        "move": "Leaf Storm"
+      }
+    ]
+  },
+  {
+    "id": 257.1,
+    "name": "Blaziken (Mega Blaziken)",
+    "types": [
+      "Fire",
+      "Fighting"
+    ],
+    "hp": 80,
+    "atk": 160,
+    "def": 80,
+    "spa": 130,
+    "spd": 80,
+    "spe": 100,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Growl"
+      },
+      {
+        "level": 1,
+        "move": "Peck"
+      },
+      {
+        "level": 3,
+        "move": "Ember"
+      },
+      {
+        "level": 6,
+        "move": "Quick Attack"
+      },
+      {
+        "level": 9,
+        "move": "Flame Charge"
+      },
+      {
+        "level": 12,
+        "move": "Detect"
+      },
+      {
+        "level": 18,
+        "move": "Aerial Ace"
+      },
+      {
+        "level": 21,
+        "move": "Slash"
+      },
+      {
+        "level": 24,
+        "move": "Bounce"
+      },
+      {
+        "level": 27,
+        "move": "Focus Energy"
+      },
+      {
+        "level": 33,
+        "move": "Flamethrower"
+      },
+      {
+        "level": 40,
+        "move": "Bulk Up"
+      },
+      {
+        "level": 44,
+        "move": "Blaze Kick"
+      },
+      {
+        "level": 50,
+        "move": "Feather Dance"
+      },
+      {
+        "level": 55,
+        "move": "Flare Blitz"
+      },
+      {
+        "level": 58,
+        "move": "Brave Bird"
+      }
+    ]
+  },
+  {
+    "id": 260.1,
+    "name": "Swampert (Mega Swampert)",
+    "types": [
+      "Water",
+      "Ground"
+    ],
+    "hp": 100,
+    "atk": 150,
+    "def": 110,
+    "spa": 95,
+    "spd": 110,
+    "spe": 70,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Bite"
+      },
+      {
+        "level": 1,
+        "move": "Growl"
+      },
+      {
+        "level": 1,
+        "move": "Sand Tomb"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 3,
+        "move": "Water Gun"
+      },
+      {
+        "level": 6,
+        "move": "Rock Smash"
+      },
+      {
+        "level": 11,
+        "move": "Rock Throw"
+      },
+      {
+        "level": 14,
+        "move": "Protect"
+      },
+      {
+        "level": 18,
+        "move": "Supersonic"
+      },
+      {
+        "level": 22,
+        "move": "Bubble Beam"
+      },
+      {
+        "level": 26,
+        "move": "Rock Slide"
+      },
+      {
+        "level": 28,
+        "move": "Take Down"
+      },
+      {
+        "level": 30,
+        "move": "Amnesia"
+      },
+      {
+        "level": 33,
+        "move": "Aqua Ring"
+      },
+      {
+        "level": 36,
+        "move": "Surf"
+      },
+      {
+        "level": 38,
+        "move": "Screech"
+      },
+      {
+        "level": 40,
+        "move": "Sludge Bomb"
+      },
+      {
+        "level": 46,
+        "move": "Muddy Water"
+      },
+      {
+        "level": 50,
+        "move": "Earthquake"
+      },
+      {
+        "level": 55,
+        "move": "Hydro Pump"
+      },
+      {
+        "level": 60,
+        "move": "Sludge Wave"
+      }
+    ]
+  },
+  {
+    "id": 263.1,
+    "name": "Zigzagoon (Galarian Zigzagoon)",
+    "types": [
+      "Dark",
+      "Normal"
+    ],
+    "hp": 38,
+    "atk": 30,
+    "def": 41,
+    "spa": 30,
+    "spd": 41,
+    "spe": 60,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 264.1,
+    "name": "Linoone (Galarian Linoone)",
+    "types": [
+      "Dark",
+      "Normal"
+    ],
+    "hp": 78,
+    "atk": 70,
+    "def": 61,
+    "spa": 50,
+    "spd": 61,
+    "spe": 100,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 282.1,
+    "name": "Gardevoir (Mega Gardevoir)",
+    "types": [
+      "Psychic",
+      "Fairy"
+    ],
+    "hp": 68,
+    "atk": 85,
+    "def": 65,
+    "spa": 165,
+    "spd": 135,
+    "spe": 100,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Disarming Voice"
+      },
+      {
+        "level": 1,
+        "move": "Growl"
+      },
+      {
+        "level": 6,
+        "move": "Confusion"
+      },
+      {
+        "level": 9,
+        "move": "Hypnosis"
+      },
+      {
+        "level": 12,
+        "move": "Draining Kiss"
+      },
+      {
+        "level": 15,
+        "move": "Teleport"
+      },
+      {
+        "level": 18,
+        "move": "Psybeam"
+      },
+      {
+        "level": 20,
+        "move": "Magical Leaf"
+      },
+      {
+        "level": 24,
+        "move": "Confuse Ray"
+      },
+      {
+        "level": 28,
+        "move": "Charm"
+      },
+      {
+        "level": 30,
+        "move": "Double Team"
+      },
+      {
+        "level": 32,
+        "move": "Wish"
+      },
+      {
+        "level": 35,
+        "move": "Calm Mind"
+      },
+      {
+        "level": 38,
+        "move": "Psychic"
+      },
+      {
+        "level": 44,
+        "move": "Mystical Fire"
+      },
+      {
+        "level": 49,
+        "move": "Moonblast"
+      },
+      {
+        "level": 58,
+        "move": "Future Sight"
+      }
+    ]
+  },
+  {
+    "id": 302.1,
+    "name": "Sableye (Mega Sableye)",
+    "types": [
+      "Dark",
+      "Ghost"
+    ],
+    "hp": 50,
+    "atk": 85,
+    "def": 125,
+    "spa": 85,
+    "spd": 115,
+    "spe": 20,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Leer"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 9,
+        "move": "Shadow Sneak"
+      },
+      {
+        "level": 15,
+        "move": "Take Down"
+      },
+      {
+        "level": 18,
+        "move": "Detect"
+      },
+      {
+        "level": 20,
+        "move": "Shadow Claw"
+      },
+      {
+        "level": 22,
+        "move": "Confuse Ray"
+      },
+      {
+        "level": 25,
+        "move": "Knock Off"
+      },
+      {
+        "level": 28,
+        "move": "Psybeam"
+      },
+      {
+        "level": 33,
+        "move": "Night Slash"
+      },
+      {
+        "level": 39,
+        "move": "Power Gem"
+      },
+      {
+        "level": 42,
+        "move": "Zen Headbutt"
+      },
+      {
+        "level": 45,
+        "move": "Shadow Ball"
+      },
+      {
+        "level": 50,
+        "move": "Recover"
+      },
+      {
+        "level": 53,
+        "move": "Parting Shot"
+      },
+      {
+        "level": 56,
+        "move": "Phantom Force"
+      }
+    ]
+  },
+  {
+    "id": 303.1,
+    "name": "Mawile (Mega Mawile)",
+    "types": [
+      "Steel",
+      "Fairy"
+    ],
+    "hp": 50,
+    "atk": 105,
+    "def": 125,
+    "spa": 55,
+    "spd": 95,
+    "spe": 50,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Bite"
+      },
+      {
+        "level": 1,
+        "move": "Fairy Wind"
+      },
+      {
+        "level": 5,
+        "move": "Fake Tears"
+      },
+      {
+        "level": 16,
+        "move": "Knock Off"
+      },
+      {
+        "level": 20,
+        "move": "Charm"
+      },
+      {
+        "level": 22,
+        "move": "Draining Kiss"
+      },
+      {
+        "level": 24,
+        "move": "Iron Defense"
+      },
+      {
+        "level": 28,
+        "move": "Crunch"
+      },
+      {
+        "level": 36,
+        "move": "Iron Head"
+      },
+      {
+        "level": 40,
+        "move": "Taunt"
+      },
+      {
+        "level": 48,
+        "move": "Play Rough"
+      },
+      {
+        "level": 55,
+        "move": "Dynamic Punch"
+      }
+    ]
+  },
+  {
+    "id": 306.1,
+    "name": "Aggron (Mega Aggron)",
+    "types": [
+      "Steel"
+    ],
+    "hp": 70,
+    "atk": 140,
+    "def": 230,
+    "spa": 60,
+    "spd": 80,
+    "spe": 50,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Harden"
+      },
+      {
+        "level": 1,
+        "move": "Screech"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 4,
+        "move": "Metal Claw"
+      },
+      {
+        "level": 8,
+        "move": "Rock Tomb"
+      },
+      {
+        "level": 12,
+        "move": "Roar"
+      },
+      {
+        "level": 16,
+        "move": "Headbutt"
+      },
+      {
+        "level": 20,
+        "move": "Protect"
+      },
+      {
+        "level": 24,
+        "move": "Rock Slide"
+      },
+      {
+        "level": 28,
+        "move": "Iron Head"
+      },
+      {
+        "level": 33,
+        "move": "Metal Sound"
+      },
+      {
+        "level": 36,
+        "move": "Take Down"
+      },
+      {
+        "level": 44,
+        "move": "Iron Tail"
+      },
+      {
+        "level": 48,
+        "move": "Iron Defense"
+      },
+      {
+        "level": 52,
+        "move": "Heavy Slam"
+      },
+      {
+        "level": 56,
+        "move": "Double-Edge"
+      },
+      {
+        "level": 66,
+        "move": "Head Smash"
+      }
+    ]
+  },
+  {
+    "id": 308.1,
+    "name": "Medicham (Mega Medicham)",
+    "types": [
+      "Fighting",
+      "Psychic"
+    ],
+    "hp": 60,
+    "atk": 100,
+    "def": 85,
+    "spa": 80,
+    "spd": 85,
+    "spe": 100,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Confusion"
+      },
+      {
+        "level": 1,
+        "move": "Work Up"
+      },
+      {
+        "level": 9,
+        "move": "Detect"
+      },
+      {
+        "level": 12,
+        "move": "Endure"
+      },
+      {
+        "level": 14,
+        "move": "Rock Smash"
+      },
+      {
+        "level": 16,
+        "move": "Bullet Punch"
+      },
+      {
+        "level": 20,
+        "move": "Psybeam"
+      },
+      {
+        "level": 23,
+        "move": "Calm Mind"
+      },
+      {
+        "level": 25,
+        "move": "Zen Headbutt"
+      },
+      {
+        "level": 30,
+        "move": "Take Down"
+      },
+      {
+        "level": 34,
+        "move": "Agility"
+      },
+      {
+        "level": 41,
+        "move": "Recover"
+      },
+      {
+        "level": 52,
+        "move": "Dynamic Punch"
+      }
+    ]
+  },
+  {
+    "id": 310.1,
+    "name": "Manectric (Mega Manectric)",
+    "types": [
+      "Electric"
+    ],
+    "hp": 70,
+    "atk": 75,
+    "def": 80,
+    "spa": 135,
+    "spd": 80,
+    "spe": 135,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Fire Fang"
+      },
+      {
+        "level": 1,
+        "move": "Leer"
+      },
+      {
+        "level": 1,
+        "move": "Quick Attack"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 8,
+        "move": "Thunder Shock"
+      },
+      {
+        "level": 12,
+        "move": "Thunder Wave"
+      },
+      {
+        "level": 16,
+        "move": "Spark"
+      },
+      {
+        "level": 20,
+        "move": "Bite"
+      },
+      {
+        "level": 22,
+        "move": "Eerie Impulse"
+      },
+      {
+        "level": 24,
+        "move": "Thunder Fang"
+      },
+      {
+        "level": 28,
+        "move": "Roar"
+      },
+      {
+        "level": 30,
+        "move": "Snarl"
+      },
+      {
+        "level": 36,
+        "move": "Charge"
+      },
+      {
+        "level": 40,
+        "move": "Thunderbolt"
+      },
+      {
+        "level": 44,
+        "move": "Wild Charge"
+      },
+      {
+        "level": 50,
+        "move": "Thunder"
+      }
+    ]
+  },
+  {
+    "id": 319.1,
+    "name": "Sharpedo (Mega Sharpedo)",
+    "types": [
+      "Water",
+      "Dark"
+    ],
+    "hp": 70,
+    "atk": 140,
+    "def": 70,
+    "spa": 110,
+    "spd": 65,
+    "spe": 105,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Aqua Jet"
+      },
+      {
+        "level": 1,
+        "move": "Leer"
+      },
+      {
+        "level": 1,
+        "move": "Night Slash"
+      },
+      {
+        "level": 8,
+        "move": "Focus Energy"
+      },
+      {
+        "level": 16,
+        "move": "Bite"
+      },
+      {
+        "level": 20,
+        "move": "Flip Turn"
+      },
+      {
+        "level": 24,
+        "move": "Screech"
+      },
+      {
+        "level": 32,
+        "move": "Crunch"
+      },
+      {
+        "level": 36,
+        "move": "Agility"
+      },
+      {
+        "level": 40,
+        "move": "Take Down"
+      },
+      {
+        "level": 44,
+        "move": "Liquidation"
+      },
+      {
+        "level": 51,
+        "move": "Bounce"
+      },
+      {
+        "level": 54,
+        "move": "Double-Edge"
+      }
+    ]
+  },
+  {
+    "id": 323.1,
+    "name": "Camerupt (Mega Camerupt)",
+    "types": [
+      "Fire",
+      "Ground"
+    ],
+    "hp": 70,
+    "atk": 120,
+    "def": 100,
+    "spa": 145,
+    "spd": 105,
+    "spe": 20,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Growl"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 5,
+        "move": "Ember"
+      },
+      {
+        "level": 8,
+        "move": "Focus Energy"
+      },
+      {
+        "level": 12,
+        "move": "Bulldoze"
+      },
+      {
+        "level": 19,
+        "move": "Amnesia"
+      },
+      {
+        "level": 22,
+        "move": "Lava Plume"
+      },
+      {
+        "level": 26,
+        "move": "Earth Power"
+      },
+      {
+        "level": 29,
+        "move": "Curse"
+      },
+      {
+        "level": 31,
+        "move": "Take Down"
+      },
+      {
+        "level": 40,
+        "move": "Earthquake"
+      },
+      {
+        "level": 46,
+        "move": "Flamethrower"
+      },
+      {
+        "level": 51,
+        "move": "Double-Edge"
+      },
+      {
+        "level": 55,
+        "move": "Heat Crash"
+      }
+    ]
+  },
+  {
+    "id": 334.1,
+    "name": "Altaria (Mega Altaria)",
+    "types": [
+      "Dragon",
+      "Fairy"
+    ],
+    "hp": 75,
+    "atk": 110,
+    "def": 110,
+    "spa": 110,
+    "spd": 105,
+    "spe": 80,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Growl"
+      },
+      {
+        "level": 1,
+        "move": "Peck"
+      },
+      {
+        "level": 4,
+        "move": "Disarming Voice"
+      },
+      {
+        "level": 8,
+        "move": "Mist"
+      },
+      {
+        "level": 20,
+        "move": "Dragon Breath"
+      },
+      {
+        "level": 24,
+        "move": "Safeguard"
+      },
+      {
+        "level": 32,
+        "move": "Cotton Guard"
+      },
+      {
+        "level": 35,
+        "move": "Twister"
+      },
+      {
+        "level": 37,
+        "move": "Take Down"
+      },
+      {
+        "level": 40,
+        "move": "Moonblast"
+      },
+      {
+        "level": 44,
+        "move": "Feather Dance"
+      },
+      {
+        "level": 50,
+        "move": "Brave Bird"
+      },
+      {
+        "level": 55,
+        "move": "Dragon Rush"
+      },
+      {
+        "level": 60,
+        "move": "Perish Song"
+      }
+    ]
+  },
+  {
+    "id": 351.1,
+    "name": "Castform (Sunny Form)",
+    "types": [
+      "Fire"
+    ],
+    "hp": 70,
+    "atk": 70,
+    "def": 70,
+    "spa": 70,
+    "spd": 70,
+    "spe": 70,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 351.2,
+    "name": "Castform (Rainy Form)",
+    "types": [
+      "Water"
+    ],
+    "hp": 70,
+    "atk": 70,
+    "def": 70,
+    "spa": 70,
+    "spd": 70,
+    "spe": 70,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 351.3,
+    "name": "Castform (Snowy Form)",
+    "types": [
+      "Ice"
+    ],
+    "hp": 70,
+    "atk": 70,
+    "def": 70,
+    "spa": 70,
+    "spd": 70,
+    "spe": 70,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 354.1,
+    "name": "Banette (Mega Banette)",
+    "types": [
+      "Ghost"
+    ],
+    "hp": 64,
+    "atk": 165,
+    "def": 75,
+    "spa": 93,
+    "spd": 83,
+    "spe": 75,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Lick"
+      },
+      {
+        "level": 1,
+        "move": "Screech"
+      },
+      {
+        "level": 1,
+        "move": "Slash"
+      },
+      {
+        "level": 8,
+        "move": "Confuse Ray"
+      },
+      {
+        "level": 12,
+        "move": "Knock Off"
+      },
+      {
+        "level": 16,
+        "move": "Will-O-Wisp"
+      },
+      {
+        "level": 19,
+        "move": "Shadow Sneak"
+      },
+      {
+        "level": 23,
+        "move": "Shadow Claw"
+      },
+      {
+        "level": 26,
+        "move": "Curse"
+      },
+      {
+        "level": 30,
+        "move": "Shadow Ball"
+      },
+      {
+        "level": 34,
+        "move": "Swords Dance"
+      },
+      {
+        "level": 42,
+        "move": "Phantom Force"
+      },
+      {
+        "level": 48,
+        "move": "Gunk Shot"
+      }
+    ]
+  },
+  {
+    "id": 358.1,
+    "name": "Chimecho (Mega Chimecho)",
+    "types": [
+      "Psychic",
+      "Steel"
+    ],
+    "hp": 75,
+    "atk": 50,
+    "def": 110,
+    "spa": 135,
+    "spd": 120,
+    "spe": 65,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Growl"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 7,
+        "move": "Confusion"
+      },
+      {
+        "level": 10,
+        "move": "Disarming Voice"
+      },
+      {
+        "level": 12,
+        "move": "Supersonic"
+      },
+      {
+        "level": 15,
+        "move": "Take Down"
+      },
+      {
+        "level": 18,
+        "move": "Screech"
+      },
+      {
+        "level": 23,
+        "move": "Amnesia"
+      },
+      {
+        "level": 25,
+        "move": "Wish"
+      },
+      {
+        "level": 29,
+        "move": "Metal Sound"
+      },
+      {
+        "level": 34,
+        "move": "Psychic"
+      },
+      {
+        "level": 38,
+        "move": "Double-Edge"
+      },
+      {
+        "level": 48,
+        "move": "Boomburst"
+      }
+    ]
+  },
+  {
+    "id": 359.1,
+    "name": "Absol (Mega Absol)",
+    "types": [
+      "Dark"
+    ],
+    "hp": 65,
+    "atk": 150,
+    "def": 60,
+    "spa": 115,
+    "spd": 60,
+    "spe": 115,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Confuse Ray"
+      },
+      {
+        "level": 1,
+        "move": "Leer"
+      },
+      {
+        "level": 1,
+        "move": "Quick Attack"
+      },
+      {
+        "level": 1,
+        "move": "Shadow Sneak"
+      },
+      {
+        "level": 10,
+        "move": "Knock Off"
+      },
+      {
+        "level": 15,
+        "move": "Detect"
+      },
+      {
+        "level": 20,
+        "move": "Swords Dance"
+      },
+      {
+        "level": 23,
+        "move": "Slash"
+      },
+      {
+        "level": 27,
+        "move": "Night Slash"
+      },
+      {
+        "level": 32,
+        "move": "Double Team"
+      },
+      {
+        "level": 36,
+        "move": "Taunt"
+      },
+      {
+        "level": 40,
+        "move": "Shadow Claw"
+      },
+      {
+        "level": 43,
+        "move": "Focus Energy"
+      },
+      {
+        "level": 46,
+        "move": "Air Slash"
+      },
+      {
+        "level": 48,
+        "move": "Future Sight"
+      },
+      {
+        "level": 54,
+        "move": "Perish Song"
+      }
+    ]
+  },
+  {
+    "id": 359.2,
+    "name": "Absol (Mega Absol Z)",
+    "types": [
+      "Dark",
+      "Ghost"
+    ],
+    "hp": 65,
+    "atk": 154,
+    "def": 60,
+    "spa": 75,
+    "spd": 60,
+    "spe": 151,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Confuse Ray"
+      },
+      {
+        "level": 1,
+        "move": "Leer"
+      },
+      {
+        "level": 1,
+        "move": "Quick Attack"
+      },
+      {
+        "level": 1,
+        "move": "Shadow Sneak"
+      },
+      {
+        "level": 10,
+        "move": "Knock Off"
+      },
+      {
+        "level": 15,
+        "move": "Detect"
+      },
+      {
+        "level": 20,
+        "move": "Swords Dance"
+      },
+      {
+        "level": 23,
+        "move": "Slash"
+      },
+      {
+        "level": 27,
+        "move": "Night Slash"
+      },
+      {
+        "level": 32,
+        "move": "Double Team"
+      },
+      {
+        "level": 36,
+        "move": "Taunt"
+      },
+      {
+        "level": 40,
+        "move": "Shadow Claw"
+      },
+      {
+        "level": 43,
+        "move": "Focus Energy"
+      },
+      {
+        "level": 46,
+        "move": "Air Slash"
+      },
+      {
+        "level": 48,
+        "move": "Future Sight"
+      },
+      {
+        "level": 54,
+        "move": "Perish Song"
+      }
+    ]
+  },
+  {
+    "id": 362.1,
+    "name": "Glalie (Mega Glalie)",
+    "types": [
+      "Ice"
+    ],
+    "hp": 80,
+    "atk": 120,
+    "def": 80,
+    "spa": 120,
+    "spd": 80,
+    "spe": 100,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Bite"
+      },
+      {
+        "level": 1,
+        "move": "Headbutt"
+      },
+      {
+        "level": 1,
+        "move": "Leer"
+      },
+      {
+        "level": 10,
+        "move": "Ice Shard"
+      },
+      {
+        "level": 15,
+        "move": "Protect"
+      },
+      {
+        "level": 20,
+        "move": "Icy Wind"
+      },
+      {
+        "level": 25,
+        "move": "Fake Tears"
+      },
+      {
+        "level": 30,
+        "move": "Ice Fang"
+      },
+      {
+        "level": 35,
+        "move": "Double Team"
+      },
+      {
+        "level": 40,
+        "move": "Icicle Crash"
+      },
+      {
+        "level": 45,
+        "move": "Crunch"
+      },
+      {
+        "level": 50,
+        "move": "Blizzard"
+      },
+      {
+        "level": 55,
+        "move": "Explosion"
+      }
+    ]
+  },
+  {
+    "id": 373.1,
+    "name": "Salamence (Mega Salamence)",
+    "types": [
+      "Dragon",
+      "Flying"
+    ],
+    "hp": 95,
+    "atk": 145,
+    "def": 130,
+    "spa": 120,
+    "spd": 90,
+    "spe": 120,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Bite"
+      },
+      {
+        "level": 1,
+        "move": "Ember"
+      },
+      {
+        "level": 1,
+        "move": "Leer"
+      },
+      {
+        "level": 1,
+        "move": "Protect"
+      },
+      {
+        "level": 10,
+        "move": "Dragon Breath"
+      },
+      {
+        "level": 15,
+        "move": "Headbutt"
+      },
+      {
+        "level": 25,
+        "move": "Crunch"
+      },
+      {
+        "level": 30,
+        "move": "Dragon Claw"
+      },
+      {
+        "level": 35,
+        "move": "Zen Headbutt"
+      },
+      {
+        "level": 40,
+        "move": "Focus Energy"
+      },
+      {
+        "level": 45,
+        "move": "Flamethrower"
+      },
+      {
+        "level": 50,
+        "move": "Outrage"
+      },
+      {
+        "level": 55,
+        "move": "Double-Edge"
+      },
+      {
+        "level": 60,
+        "move": "Air Slash"
+      }
+    ]
+  },
+  {
+    "id": 376.1,
+    "name": "Metagross (Mega Metagross)",
+    "types": [
+      "Steel",
+      "Psychic"
+    ],
+    "hp": 80,
+    "atk": 145,
+    "def": 150,
+    "spa": 105,
+    "spd": 110,
+    "spe": 110,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Bullet Punch"
+      },
+      {
+        "level": 1,
+        "move": "Confusion"
+      },
+      {
+        "level": 1,
+        "move": "Metal Claw"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 6,
+        "move": "Zen Headbutt"
+      },
+      {
+        "level": 18,
+        "move": "Flash Cannon"
+      },
+      {
+        "level": 26,
+        "move": "Take Down"
+      },
+      {
+        "level": 34,
+        "move": "Psycho Cut"
+      },
+      {
+        "level": 42,
+        "move": "Psychic"
+      },
+      {
+        "level": 46,
+        "move": "Brutal Swing"
+      },
+      {
+        "level": 50,
+        "move": "Iron Head"
+      },
+      {
+        "level": 54,
+        "move": "Iron Defense"
+      },
+      {
+        "level": 58,
+        "move": "Hyper Beam"
+      }
+    ]
+  },
+  {
+    "id": 380.1,
+    "name": "Latias (Mega Latias)",
+    "types": [
+      "Dragon",
+      "Psychic"
+    ],
+    "hp": 80,
+    "atk": 100,
+    "def": 120,
+    "spa": 140,
+    "spd": 150,
+    "spe": 110,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Charm"
+      },
+      {
+        "level": 1,
+        "move": "Mist Ball"
+      },
+      {
+        "level": 5,
+        "move": "Draining Kiss"
+      },
+      {
+        "level": 10,
+        "move": "Recover"
+      },
+      {
+        "level": 15,
+        "move": "Confusion"
+      },
+      {
+        "level": 20,
+        "move": "Psybeam"
+      },
+      {
+        "level": 25,
+        "move": "Dragon Breath"
+      },
+      {
+        "level": 30,
+        "move": "Wish"
+      },
+      {
+        "level": 35,
+        "move": "Water Pulse"
+      },
+      {
+        "level": 40,
+        "move": "Zen Headbutt"
+      },
+      {
+        "level": 45,
+        "move": "Dragon Pulse"
+      },
+      {
+        "level": 50,
+        "move": "Aura Sphere"
+      },
+      {
+        "level": 55,
+        "move": "Mystical Fire"
+      },
+      {
+        "level": 60,
+        "move": "Air Slash"
+      },
+      {
+        "level": 65,
+        "move": "Psychic"
+      }
+    ]
+  },
+  {
+    "id": 381.1,
+    "name": "Latios (Mega Latios)",
+    "types": [
+      "Dragon",
+      "Psychic"
+    ],
+    "hp": 80,
+    "atk": 130,
+    "def": 100,
+    "spa": 160,
+    "spd": 120,
+    "spe": 110,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Luster Purge"
+      },
+      {
+        "level": 1,
+        "move": "Work Up"
+      },
+      {
+        "level": 5,
+        "move": "Twister"
+      },
+      {
+        "level": 10,
+        "move": "Recover"
+      },
+      {
+        "level": 15,
+        "move": "Confusion"
+      },
+      {
+        "level": 20,
+        "move": "Psybeam"
+      },
+      {
+        "level": 25,
+        "move": "Dragon Breath"
+      },
+      {
+        "level": 30,
+        "move": "Wish"
+      },
+      {
+        "level": 35,
+        "move": "Water Pulse"
+      },
+      {
+        "level": 40,
+        "move": "Zen Headbutt"
+      },
+      {
+        "level": 45,
+        "move": "Dragon Pulse"
+      },
+      {
+        "level": 50,
+        "move": "Aura Sphere"
+      },
+      {
+        "level": 55,
+        "move": "Mystical Fire"
+      },
+      {
+        "level": 60,
+        "move": "Psychic"
+      },
+      {
+        "level": 65,
+        "move": "Air Slash"
+      }
+    ]
+  },
+  {
+    "id": 382.1,
+    "name": "Kyogre (Primal Kyogre)",
+    "types": [
+      "Water"
+    ],
+    "hp": 100,
+    "atk": 150,
+    "def": 90,
+    "spa": 180,
+    "spd": 160,
+    "spe": 90,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Ancient Power"
+      },
+      {
+        "level": 1,
+        "move": "Body Slam"
+      },
+      {
+        "level": 1,
+        "move": "Water Pulse"
+      },
+      {
+        "level": 12,
+        "move": "Whirlpool"
+      },
+      {
+        "level": 15,
+        "move": "Take Down"
+      },
+      {
+        "level": 18,
+        "move": "Calm Mind"
+      },
+      {
+        "level": 34,
+        "move": "Heavy Slam"
+      },
+      {
+        "level": 36,
+        "move": "Ice Beam"
+      },
+      {
+        "level": 42,
+        "move": "Surf"
+      },
+      {
+        "level": 45,
+        "move": "Sheer Cold"
+      },
+      {
+        "level": 50,
+        "move": "Origin Pulse"
+      },
+      {
+        "level": 54,
+        "move": "Aqua Ring"
+      },
+      {
+        "level": 58,
+        "move": "Blizzard"
+      },
+      {
+        "level": 64,
+        "move": "Double-Edge"
+      },
+      {
+        "level": 72,
+        "move": "Hydro Pump"
+      }
+    ]
+  },
+  {
+    "id": 383.1,
+    "name": "Groudon (Primal Groudon)",
+    "types": [
+      "Ground",
+      "Fire"
+    ],
+    "hp": 100,
+    "atk": 180,
+    "def": 160,
+    "spa": 150,
+    "spd": 90,
+    "spe": 90,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Ancient Power"
+      },
+      {
+        "level": 1,
+        "move": "Lava Plume"
+      },
+      {
+        "level": 1,
+        "move": "Mud Shot"
+      },
+      {
+        "level": 1,
+        "move": "Sand Tomb"
+      },
+      {
+        "level": 9,
+        "move": "Earth Power"
+      },
+      {
+        "level": 18,
+        "move": "Bulk Up"
+      },
+      {
+        "level": 28,
+        "move": "Rock Blast"
+      },
+      {
+        "level": 30,
+        "move": "Fire Spin"
+      },
+      {
+        "level": 34,
+        "move": "Earthquake"
+      },
+      {
+        "level": 40,
+        "move": "Heavy Slam"
+      },
+      {
+        "level": 43,
+        "move": "Stone Edge"
+      },
+      {
+        "level": 45,
+        "move": "Fissure"
+      },
+      {
+        "level": 50,
+        "move": "Precipice Blades"
+      },
+      {
+        "level": 62,
+        "move": "Dynamic Punch"
+      },
+      {
+        "level": 68,
+        "move": "Fire Blast"
+      },
+      {
+        "level": 75,
+        "move": "Heat Crash"
+      },
+      {
+        "level": 81,
+        "move": "Solar Beam"
+      }
+    ]
+  },
+  {
+    "id": 384.1,
+    "name": "Rayquaza (Mega Rayquaza)",
+    "types": [
+      "Dragon",
+      "Flying"
+    ],
+    "hp": 105,
+    "atk": 180,
+    "def": 100,
+    "spa": 180,
+    "spd": 100,
+    "spe": 115,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Air Slash"
+      },
+      {
+        "level": 1,
+        "move": "Dragon Ascent"
+      },
+      {
+        "level": 1,
+        "move": "Twister"
+      },
+      {
+        "level": 9,
+        "move": "Crunch"
+      },
+      {
+        "level": 15,
+        "move": "Brutal Swing"
+      },
+      {
+        "level": 27,
+        "move": "Extreme Speed"
+      },
+      {
+        "level": 36,
+        "move": "Dragon Pulse"
+      },
+      {
+        "level": 45,
+        "move": "Hyper Voice"
+      },
+      {
+        "level": 58,
+        "move": "Dragon Rush"
+      },
+      {
+        "level": 63,
+        "move": "Fly"
+      },
+      {
+        "level": 72,
+        "move": "Hurricane"
+      },
+      {
+        "level": 81,
+        "move": "Outrage"
+      },
+      {
+        "level": 90,
+        "move": "Hyper Beam"
+      }
+    ]
+  },
+  {
+    "id": 386.1,
+    "name": "Deoxys (Normal Forme)",
+    "types": [
+      "Psychic"
+    ],
+    "hp": 50,
+    "atk": 150,
+    "def": 50,
+    "spa": 150,
+    "spd": 50,
+    "spe": 150,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 386.2,
+    "name": "Deoxys (Attack Forme)",
+    "types": [
+      "Psychic"
+    ],
+    "hp": 50,
+    "atk": 180,
+    "def": 20,
+    "spa": 180,
+    "spd": 20,
+    "spe": 150,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 386.3,
+    "name": "Deoxys (Defense Forme)",
+    "types": [
+      "Psychic"
+    ],
+    "hp": 50,
+    "atk": 70,
+    "def": 160,
+    "spa": 70,
+    "spd": 160,
+    "spe": 90,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 386.4,
+    "name": "Deoxys (Speed Forme)",
+    "types": [
+      "Psychic"
+    ],
+    "hp": 50,
+    "atk": 95,
+    "def": 90,
+    "spa": 95,
+    "spd": 90,
+    "spe": 180,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 398.1,
+    "name": "Staraptor (Mega Staraptor)",
+    "types": [
+      "Fighting",
+      "Flying"
+    ],
+    "hp": 85,
+    "atk": 140,
+    "def": 100,
+    "spa": 60,
+    "spd": 90,
+    "spe": 110,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Growl"
+      },
+      {
+        "level": 1,
+        "move": "Peck"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 8,
+        "move": "Quick Attack"
+      },
+      {
+        "level": 10,
+        "move": "Gust"
+      },
+      {
+        "level": 12,
+        "move": "Wing Attack"
+      },
+      {
+        "level": 16,
+        "move": "Double Team"
+      },
+      {
+        "level": 19,
+        "move": "Feather Dance"
+      },
+      {
+        "level": 23,
+        "move": "Whirlwind"
+      },
+      {
+        "level": 28,
+        "move": "Aerial Ace"
+      },
+      {
+        "level": 33,
+        "move": "Take Down"
+      },
+      {
+        "level": 41,
+        "move": "Agility"
+      },
+      {
+        "level": 44,
+        "move": "Air Slash"
+      },
+      {
+        "level": 49,
+        "move": "Brave Bird"
+      }
+    ]
+  },
+  {
+    "id": 412.1,
+    "name": "Burmy (Plant Cloak)",
+    "types": [
+      "Bug"
+    ],
+    "hp": 40,
+    "atk": 29,
+    "def": 45,
+    "spa": 29,
+    "spd": 45,
+    "spe": 36,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 412.2,
+    "name": "Burmy (Sandy Cloak)",
+    "types": [
+      "Bug"
+    ],
+    "hp": 40,
+    "atk": 29,
+    "def": 45,
+    "spa": 29,
+    "spd": 45,
+    "spe": 36,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 412.3,
+    "name": "Burmy (Trash Cloak)",
+    "types": [
+      "Bug"
+    ],
+    "hp": 40,
+    "atk": 29,
+    "def": 45,
+    "spa": 29,
+    "spd": 45,
+    "spe": 36,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 413.1,
+    "name": "Wormadam (Plant Cloak)",
+    "types": [
+      "Bug",
+      "Grass"
+    ],
+    "hp": 60,
+    "atk": 59,
+    "def": 85,
+    "spa": 79,
+    "spd": 105,
+    "spe": 36,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 413.2,
+    "name": "Wormadam (Sandy Cloak)",
+    "types": [
+      "Bug",
+      "Ground"
+    ],
+    "hp": 60,
+    "atk": 79,
+    "def": 105,
+    "spa": 59,
+    "spd": 85,
+    "spe": 36,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 413.3,
+    "name": "Wormadam (Trash Cloak)",
+    "types": [
+      "Bug",
+      "Steel"
+    ],
+    "hp": 60,
+    "atk": 69,
+    "def": 95,
+    "spa": 69,
+    "spd": 95,
+    "spe": 36,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 428.1,
+    "name": "Lopunny (Mega Lopunny)",
+    "types": [
+      "Normal",
+      "Fighting"
+    ],
+    "hp": 65,
+    "atk": 136,
+    "def": 94,
+    "spa": 54,
+    "spd": 96,
+    "spe": 135,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Splash"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 6,
+        "move": "Power-Up Punch"
+      },
+      {
+        "level": 9,
+        "move": "Mach Punch"
+      },
+      {
+        "level": 12,
+        "move": "Double Team"
+      },
+      {
+        "level": 14,
+        "move": "Draining Kiss"
+      },
+      {
+        "level": 16,
+        "move": "Quick Attack"
+      },
+      {
+        "level": 20,
+        "move": "Agility"
+      },
+      {
+        "level": 24,
+        "move": "Charm"
+      },
+      {
+        "level": 28,
+        "move": "Brutal Swing"
+      },
+      {
+        "level": 32,
+        "move": "Headbutt"
+      },
+      {
+        "level": 36,
+        "move": "Iron Tail"
+      },
+      {
+        "level": 42,
+        "move": "Cotton Guard"
+      },
+      {
+        "level": 48,
+        "move": "Bounce"
+      },
+      {
+        "level": 52,
+        "move": "Dynamic Punch"
+      }
+    ]
+  },
+  {
+    "id": 445.1,
+    "name": "Garchomp (Mega Garchomp)",
+    "types": [
+      "Dragon",
+      "Ground"
+    ],
+    "hp": 108,
+    "atk": 170,
+    "def": 115,
+    "spa": 120,
+    "spd": 95,
+    "spe": 92,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Sand Tomb"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 12,
+        "move": "Dragon Breath"
+      },
+      {
+        "level": 18,
+        "move": "Bulldoze"
+      },
+      {
+        "level": 25,
+        "move": "Bite"
+      },
+      {
+        "level": 30,
+        "move": "Slash"
+      },
+      {
+        "level": 36,
+        "move": "Dragon Claw"
+      },
+      {
+        "level": 42,
+        "move": "Dig"
+      },
+      {
+        "level": 54,
+        "move": "Take Down"
+      },
+      {
+        "level": 60,
+        "move": "Dragon Rush"
+      }
+    ]
+  },
+  {
+    "id": 445.2,
+    "name": "Garchomp (Mega Garchomp Z)",
+    "types": [
+      "Dragon"
+    ],
+    "hp": 108,
+    "atk": 130,
+    "def": 85,
+    "spa": 141,
+    "spd": 85,
+    "spe": 151,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Sand Tomb"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 12,
+        "move": "Dragon Breath"
+      },
+      {
+        "level": 18,
+        "move": "Bulldoze"
+      },
+      {
+        "level": 25,
+        "move": "Bite"
+      },
+      {
+        "level": 30,
+        "move": "Slash"
+      },
+      {
+        "level": 36,
+        "move": "Dragon Claw"
+      },
+      {
+        "level": 42,
+        "move": "Dig"
+      },
+      {
+        "level": 54,
+        "move": "Take Down"
+      },
+      {
+        "level": 60,
+        "move": "Dragon Rush"
+      }
+    ]
+  },
+  {
+    "id": 448.1,
+    "name": "Lucario (Mega Lucario)",
+    "types": [
+      "Fighting",
+      "Steel"
+    ],
+    "hp": 70,
+    "atk": 145,
+    "def": 88,
+    "spa": 140,
+    "spd": 70,
+    "spe": 112,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Bullet Punch"
+      },
+      {
+        "level": 1,
+        "move": "Endure"
+      },
+      {
+        "level": 1,
+        "move": "Protect"
+      },
+      {
+        "level": 1,
+        "move": "Quick Attack"
+      },
+      {
+        "level": 8,
+        "move": "Metal Claw"
+      },
+      {
+        "level": 16,
+        "move": "Work Up"
+      },
+      {
+        "level": 20,
+        "move": "Rock Smash"
+      },
+      {
+        "level": 24,
+        "move": "Screech"
+      },
+      {
+        "level": 25,
+        "move": "Aura Sphere"
+      },
+      {
+        "level": 28,
+        "move": "Bulldoze"
+      },
+      {
+        "level": 32,
+        "move": "Metal Sound"
+      },
+      {
+        "level": 35,
+        "move": "Swords Dance"
+      },
+      {
+        "level": 38,
+        "move": "Dragon Pulse"
+      },
+      {
+        "level": 45,
+        "move": "Extreme Speed"
+      },
+      {
+        "level": 54,
+        "move": "Close Combat"
+      }
+    ]
+  },
+  {
+    "id": 448.2,
+    "name": "Lucario (Mega Lucario Z)",
+    "types": [
+      "Fighting",
+      "Steel"
+    ],
+    "hp": 70,
+    "atk": 100,
+    "def": 70,
+    "spa": 164,
+    "spd": 70,
+    "spe": 151,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Bullet Punch"
+      },
+      {
+        "level": 1,
+        "move": "Endure"
+      },
+      {
+        "level": 1,
+        "move": "Protect"
+      },
+      {
+        "level": 1,
+        "move": "Quick Attack"
+      },
+      {
+        "level": 8,
+        "move": "Metal Claw"
+      },
+      {
+        "level": 16,
+        "move": "Work Up"
+      },
+      {
+        "level": 20,
+        "move": "Rock Smash"
+      },
+      {
+        "level": 24,
+        "move": "Screech"
+      },
+      {
+        "level": 25,
+        "move": "Aura Sphere"
+      },
+      {
+        "level": 28,
+        "move": "Bulldoze"
+      },
+      {
+        "level": 32,
+        "move": "Metal Sound"
+      },
+      {
+        "level": 35,
+        "move": "Swords Dance"
+      },
+      {
+        "level": 38,
+        "move": "Dragon Pulse"
+      },
+      {
+        "level": 45,
+        "move": "Extreme Speed"
+      },
+      {
+        "level": 54,
+        "move": "Close Combat"
+      }
+    ]
+  },
+  {
+    "id": 460.1,
+    "name": "Abomasnow (Mega Abomasnow)",
+    "types": [
+      "Grass",
+      "Ice"
+    ],
+    "hp": 90,
+    "atk": 132,
+    "def": 105,
+    "spa": 132,
+    "spd": 105,
+    "spe": 30,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Leafage"
+      },
+      {
+        "level": 1,
+        "move": "Leer"
+      },
+      {
+        "level": 10,
+        "move": "Mist"
+      },
+      {
+        "level": 15,
+        "move": "Ice Shard"
+      },
+      {
+        "level": 20,
+        "move": "Razor Leaf"
+      },
+      {
+        "level": 25,
+        "move": "Icy Wind"
+      },
+      {
+        "level": 30,
+        "move": "Growth"
+      },
+      {
+        "level": 35,
+        "move": "Leech Seed"
+      },
+      {
+        "level": 41,
+        "move": "Wood Hammer"
+      },
+      {
+        "level": 45,
+        "move": "Blizzard"
+      },
+      {
+        "level": 53,
+        "move": "Leaf Storm"
+      }
+    ]
+  },
+  {
+    "id": 475.1,
+    "name": "Gallade (Mega Gallade)",
+    "types": [
+      "Psychic",
+      "Fighting"
+    ],
+    "hp": 68,
+    "atk": 165,
+    "def": 95,
+    "spa": 65,
+    "spd": 115,
+    "spe": 110,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Disarming Voice"
+      },
+      {
+        "level": 1,
+        "move": "Growl"
+      },
+      {
+        "level": 1,
+        "move": "Hypnosis"
+      },
+      {
+        "level": 1,
+        "move": "Psybeam"
+      },
+      {
+        "level": 6,
+        "move": "Confusion"
+      },
+      {
+        "level": 15,
+        "move": "Teleport"
+      },
+      {
+        "level": 18,
+        "move": "Aerial Ace"
+      },
+      {
+        "level": 28,
+        "move": "Protect"
+      },
+      {
+        "level": 30,
+        "move": "Double Team"
+      },
+      {
+        "level": 35,
+        "move": "Swords Dance"
+      },
+      {
+        "level": 42,
+        "move": "Psycho Cut"
+      },
+      {
+        "level": 50,
+        "move": "Leaf Blade"
+      },
+      {
+        "level": 58,
+        "move": "Close Combat"
+      }
+    ]
+  },
+  {
+    "id": 478.1,
+    "name": "Froslass (Mega Froslass)",
+    "types": [
+      "Ice",
+      "Ghost"
+    ],
+    "hp": 70,
+    "atk": 80,
+    "def": 70,
+    "spa": 140,
+    "spd": 100,
+    "spe": 120,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Bite"
+      },
+      {
+        "level": 1,
+        "move": "Double Team"
+      },
+      {
+        "level": 1,
+        "move": "Headbutt"
+      },
+      {
+        "level": 1,
+        "move": "Leer"
+      },
+      {
+        "level": 10,
+        "move": "Ice Shard"
+      },
+      {
+        "level": 15,
+        "move": "Confuse Ray"
+      },
+      {
+        "level": 20,
+        "move": "Icy Wind"
+      },
+      {
+        "level": 25,
+        "move": "Fake Tears"
+      },
+      {
+        "level": 30,
+        "move": "Haze"
+      },
+      {
+        "level": 35,
+        "move": "Ice Beam"
+      },
+      {
+        "level": 40,
+        "move": "Shadow Ball"
+      },
+      {
+        "level": 45,
+        "move": "Will-O-Wisp"
+      },
+      {
+        "level": 50,
+        "move": "Blizzard"
+      },
+      {
+        "level": 55,
+        "move": "Phantom Force"
+      },
+      {
+        "level": 60,
+        "move": "Curse"
+      }
+    ]
+  },
+  {
+    "id": 479.1,
+    "name": "Rotom (Heat Rotom)",
+    "types": [
+      "Electric",
+      "Fire"
+    ],
+    "hp": 50,
+    "atk": 65,
+    "def": 107,
+    "spa": 105,
+    "spd": 107,
+    "spe": 86,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 479.2,
+    "name": "Rotom (Wash Rotom)",
+    "types": [
+      "Electric",
+      "Water"
+    ],
+    "hp": 50,
+    "atk": 65,
+    "def": 107,
+    "spa": 105,
+    "spd": 107,
+    "spe": 86,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 479.3,
+    "name": "Rotom (Frost Rotom)",
+    "types": [
+      "Electric",
+      "Ice"
+    ],
+    "hp": 50,
+    "atk": 65,
+    "def": 107,
+    "spa": 105,
+    "spd": 107,
+    "spe": 86,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 479.4,
+    "name": "Rotom (Fan Rotom)",
+    "types": [
+      "Electric",
+      "Flying"
+    ],
+    "hp": 50,
+    "atk": 65,
+    "def": 107,
+    "spa": 105,
+    "spd": 107,
+    "spe": 86,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 479.5,
+    "name": "Rotom (Mow Rotom)",
+    "types": [
+      "Electric",
+      "Grass"
+    ],
+    "hp": 50,
+    "atk": 65,
+    "def": 107,
+    "spa": 105,
+    "spd": 107,
+    "spe": 86,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 483.1,
+    "name": "Dialga (Origin Forme)",
+    "types": [
+      "Steel",
+      "Dragon"
+    ],
+    "hp": 100,
+    "atk": 100,
+    "def": 120,
+    "spa": 150,
+    "spd": 120,
+    "spe": 90,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 484.1,
+    "name": "Palkia (Origin Forme)",
+    "types": [
+      "Water",
+      "Dragon"
+    ],
+    "hp": 90,
+    "atk": 100,
+    "def": 100,
+    "spa": 150,
+    "spd": 120,
+    "spe": 120,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 485.1,
+    "name": "Heatran (Mega Heatran)",
+    "types": [
+      "Fire",
+      "Steel"
+    ],
+    "hp": 91,
+    "atk": 120,
+    "def": 106,
+    "spa": 175,
+    "spd": 141,
+    "spe": 67,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Fire Spin"
+      },
+      {
+        "level": 1,
+        "move": "Heat Crash"
+      },
+      {
+        "level": 1,
+        "move": "Leer"
+      },
+      {
+        "level": 6,
+        "move": "Metal Claw"
+      },
+      {
+        "level": 12,
+        "move": "Rock Blast"
+      },
+      {
+        "level": 18,
+        "move": "Fire Fang"
+      },
+      {
+        "level": 24,
+        "move": "Take Down"
+      },
+      {
+        "level": 30,
+        "move": "Iron Head"
+      },
+      {
+        "level": 36,
+        "move": "Crunch"
+      },
+      {
+        "level": 42,
+        "move": "Lava Plume"
+      },
+      {
+        "level": 48,
+        "move": "Metal Sound"
+      },
+      {
+        "level": 50,
+        "move": "Heavy Slam"
+      },
+      {
+        "level": 54,
+        "move": "Earth Power"
+      },
+      {
+        "level": 59,
+        "move": "Lunge"
+      },
+      {
+        "level": 64,
+        "move": "Heat Wave"
+      },
+      {
+        "level": 66,
+        "move": "Stone Edge"
+      },
+      {
+        "level": 72,
+        "move": "Magma Storm"
+      }
+    ]
+  },
+  {
+    "id": 487.1,
+    "name": "Giratina (Altered Forme)",
+    "types": [
+      "Ghost",
+      "Dragon"
+    ],
+    "hp": 150,
+    "atk": 100,
+    "def": 120,
+    "spa": 100,
+    "spd": 120,
+    "spe": 90,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 487.2,
+    "name": "Giratina (Origin Forme)",
+    "types": [
+      "Ghost",
+      "Dragon"
+    ],
+    "hp": 150,
+    "atk": 120,
+    "def": 100,
+    "spa": 120,
+    "spd": 100,
+    "spe": 90,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 491.1,
+    "name": "Darkrai (Mega Darkrai)",
+    "types": [
+      "Dark"
+    ],
+    "hp": 70,
+    "atk": 120,
+    "def": 130,
+    "spa": 165,
+    "spd": 130,
+    "spe": 85,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Confuse Ray"
+      },
+      {
+        "level": 1,
+        "move": "Confusion"
+      },
+      {
+        "level": 1,
+        "move": "Shadow Sneak"
+      },
+      {
+        "level": 10,
+        "move": "Brutal Swing"
+      },
+      {
+        "level": 11,
+        "move": "Quick Attack"
+      },
+      {
+        "level": 16,
+        "move": "Snarl"
+      },
+      {
+        "level": 20,
+        "move": "Hypnosis"
+      },
+      {
+        "level": 32,
+        "move": "Psybeam"
+      },
+      {
+        "level": 47,
+        "move": "Double Team"
+      },
+      {
+        "level": 50,
+        "move": "Future Sight"
+      },
+      {
+        "level": 57,
+        "move": "Haze"
+      },
+      {
+        "level": 66,
+        "move": "Dark Void"
+      },
+      {
+        "level": 70,
+        "move": "Phantom Force"
+      },
+      {
+        "level": 75,
+        "move": "Nasty Plot"
+      },
+      {
+        "level": 84,
+        "move": "Dream Eater"
+      },
+      {
+        "level": 93,
+        "move": "Dark Pulse"
+      }
+    ]
+  },
+  {
+    "id": 492.1,
+    "name": "Shaymin (Land Forme)",
+    "types": [
+      "Grass"
+    ],
+    "hp": 100,
+    "atk": 100,
+    "def": 100,
+    "spa": 100,
+    "spd": 100,
+    "spe": 100,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 492.2,
+    "name": "Shaymin (Sky Forme)",
+    "types": [
+      "Grass",
+      "Flying"
+    ],
+    "hp": 100,
+    "atk": 103,
+    "def": 75,
+    "spa": 120,
+    "spd": 75,
+    "spe": 127,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 500.1,
+    "name": "Emboar (Mega Emboar)",
+    "types": [
+      "Fire",
+      "Fighting"
+    ],
+    "hp": 110,
+    "atk": 148,
+    "def": 75,
+    "spa": 110,
+    "spd": 110,
+    "spe": 75,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 1,
+        "move": "Tail Whip"
+      },
+      {
+        "level": 6,
+        "move": "Ember"
+      },
+      {
+        "level": 10,
+        "move": "Rollout"
+      },
+      {
+        "level": 13,
+        "move": "Smokescreen"
+      },
+      {
+        "level": 15,
+        "move": "Flame Wheel"
+      },
+      {
+        "level": 20,
+        "move": "Fire Spin"
+      },
+      {
+        "level": 24,
+        "move": "Focus Energy"
+      },
+      {
+        "level": 29,
+        "move": "Flamethrower"
+      },
+      {
+        "level": 32,
+        "move": "Take Down"
+      },
+      {
+        "level": 36,
+        "move": "Bulk Up"
+      },
+      {
+        "level": 45,
+        "move": "Close Combat"
+      },
+      {
+        "level": 50,
+        "move": "Flare Blitz"
+      },
+      {
+        "level": 56,
+        "move": "Head Smash"
+      }
+    ]
+  },
+  {
+    "id": 503.1,
+    "name": "Samurott (Hisuian Samurott)",
+    "types": [
+      "Water",
+      "Dark"
+    ],
+    "hp": 90,
+    "atk": 108,
+    "def": 80,
+    "spa": 100,
+    "spd": 65,
+    "spe": 85,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 530.1,
+    "name": "Excadrill (Mega Excadrill)",
+    "types": [
+      "Ground",
+      "Steel"
+    ],
+    "hp": 110,
+    "atk": 165,
+    "def": 100,
+    "spa": 65,
+    "spd": 65,
+    "spe": 103,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Leer"
+      },
+      {
+        "level": 1,
+        "move": "Mud Shot"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 7,
+        "move": "Metal Claw"
+      },
+      {
+        "level": 13,
+        "move": "Sand Tomb"
+      },
+      {
+        "level": 16,
+        "move": "Rock Blast"
+      },
+      {
+        "level": 18,
+        "move": "Bulldoze"
+      },
+      {
+        "level": 24,
+        "move": "Slash"
+      },
+      {
+        "level": 26,
+        "move": "X-Scissor"
+      },
+      {
+        "level": 28,
+        "move": "Dig"
+      },
+      {
+        "level": 32,
+        "move": "Rock Slide"
+      },
+      {
+        "level": 36,
+        "move": "Swords Dance"
+      },
+      {
+        "level": 40,
+        "move": "Drill Run"
+      },
+      {
+        "level": 46,
+        "move": "Earthquake"
+      },
+      {
+        "level": 50,
+        "move": "Megahorn"
+      }
+    ]
+  },
+  {
+    "id": 531.1,
+    "name": "Audino (Mega Audino)",
+    "types": [
+      "Normal",
+      "Fairy"
+    ],
+    "hp": 103,
+    "atk": 60,
+    "def": 126,
+    "spa": 80,
+    "spd": 126,
+    "spe": 50,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Growl"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 4,
+        "move": "Disarming Voice"
+      },
+      {
+        "level": 8,
+        "move": "Icy Wind"
+      },
+      {
+        "level": 16,
+        "move": "Draining Kiss"
+      },
+      {
+        "level": 20,
+        "move": "Zen Headbutt"
+      },
+      {
+        "level": 24,
+        "move": "Amnesia"
+      },
+      {
+        "level": 32,
+        "move": "Take Down"
+      },
+      {
+        "level": 36,
+        "move": "Wish"
+      },
+      {
+        "level": 40,
+        "move": "Hyper Voice"
+      },
+      {
+        "level": 48,
+        "move": "Double-Edge"
+      }
+    ]
+  },
+  {
+    "id": 545.1,
+    "name": "Scolipede (Mega Scolipede)",
+    "types": [
+      "Bug",
+      "Poison"
+    ],
+    "hp": 60,
+    "atk": 140,
+    "def": 149,
+    "spa": 75,
+    "spd": 99,
+    "spe": 62,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Iron Defense"
+      },
+      {
+        "level": 1,
+        "move": "Leer"
+      },
+      {
+        "level": 1,
+        "move": "Poison Sting"
+      },
+      {
+        "level": 4,
+        "move": "Rollout"
+      },
+      {
+        "level": 8,
+        "move": "Protect"
+      },
+      {
+        "level": 12,
+        "move": "Infestation"
+      },
+      {
+        "level": 16,
+        "move": "Screech"
+      },
+      {
+        "level": 20,
+        "move": "Pin Missile"
+      },
+      {
+        "level": 24,
+        "move": "Take Down"
+      },
+      {
+        "level": 28,
+        "move": "Poison Jab"
+      },
+      {
+        "level": 36,
+        "move": "Toxic"
+      },
+      {
+        "level": 40,
+        "move": "Iron Tail"
+      },
+      {
+        "level": 44,
+        "move": "X-Scissor"
+      },
+      {
+        "level": 48,
+        "move": "Agility"
+      },
+      {
+        "level": 52,
+        "move": "Double-Edge"
+      },
+      {
+        "level": 56,
+        "move": "Megahorn"
+      }
+    ]
+  },
+  {
+    "id": 549.1,
+    "name": "Lilligant (Hisuian Lilligant)",
+    "types": [
+      "Grass",
+      "Fighting"
+    ],
+    "hp": 70,
+    "atk": 105,
+    "def": 75,
+    "spa": 50,
+    "spd": 75,
+    "spe": 105,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 550.1,
+    "name": "Basculin (Red-Striped Form)",
+    "types": [
+      "Water"
+    ],
+    "hp": 70,
+    "atk": 92,
+    "def": 65,
+    "spa": 80,
+    "spd": 55,
+    "spe": 98,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 550.2,
+    "name": "Basculin (Blue-Striped Form)",
+    "types": [
+      "Water"
+    ],
+    "hp": 70,
+    "atk": 92,
+    "def": 65,
+    "spa": 80,
+    "spd": 55,
+    "spe": 98,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 550.3,
+    "name": "Basculin (White-Striped Form)",
+    "types": [
+      "Water"
+    ],
+    "hp": 70,
+    "atk": 92,
+    "def": 65,
+    "spa": 80,
+    "spd": 55,
+    "spe": 98,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 554.1,
+    "name": "Darumaka (Galarian Darumaka)",
+    "types": [
+      "Ice"
+    ],
+    "hp": 70,
+    "atk": 90,
+    "def": 45,
+    "spa": 15,
+    "spd": 45,
+    "spe": 50,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 555.1,
+    "name": "Darmanitan (Standard Mode)",
+    "types": [
+      "Fire"
+    ],
+    "hp": 105,
+    "atk": 140,
+    "def": 55,
+    "spa": 30,
+    "spd": 55,
+    "spe": 95,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 555.2,
+    "name": "Darmanitan (Zen Mode)",
+    "types": [
+      "Fire",
+      "Psychic"
+    ],
+    "hp": 105,
+    "atk": 30,
+    "def": 105,
+    "spa": 140,
+    "spd": 105,
+    "spe": 55,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 555.3,
+    "name": "Darmanitan (Galarian Standard Mode)",
+    "types": [
+      "Ice"
+    ],
+    "hp": 105,
+    "atk": 140,
+    "def": 55,
+    "spa": 30,
+    "spd": 55,
+    "spe": 95,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 555.4,
+    "name": "Darmanitan (Galarian Zen Mode)",
+    "types": [
+      "Ice",
+      "Fire"
+    ],
+    "hp": 105,
+    "atk": 160,
+    "def": 55,
+    "spa": 30,
+    "spd": 55,
+    "spe": 135,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 560.1,
+    "name": "Scrafty (Mega Scrafty)",
+    "types": [
+      "Dark",
+      "Fighting"
+    ],
+    "hp": 65,
+    "atk": 130,
+    "def": 135,
+    "spa": 55,
+    "spd": 135,
+    "spe": 68,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Leer"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 8,
+        "move": "Headbutt"
+      },
+      {
+        "level": 12,
+        "move": "Power-Up Punch"
+      },
+      {
+        "level": 16,
+        "move": "Rock Tomb"
+      },
+      {
+        "level": 20,
+        "move": "Protect"
+      },
+      {
+        "level": 26,
+        "move": "Parting Shot"
+      },
+      {
+        "level": 32,
+        "move": "Brick Break"
+      },
+      {
+        "level": 35,
+        "move": "Detect"
+      },
+      {
+        "level": 40,
+        "move": "Crunch"
+      },
+      {
+        "level": 44,
+        "move": "Iron Tail"
+      },
+      {
+        "level": 48,
+        "move": "Dynamic Punch"
+      },
+      {
+        "level": 52,
+        "move": "Head Smash"
+      }
+    ]
+  },
+  {
+    "id": 562.1,
+    "name": "Yamask (Galarian Yamask)",
+    "types": [
+      "Ground",
+      "Ghost"
+    ],
+    "hp": 38,
+    "atk": 55,
+    "def": 85,
+    "spa": 30,
+    "spd": 65,
+    "spe": 30,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 570.1,
+    "name": "Zorua (Hisuian Zorua)",
+    "types": [
+      "Normal",
+      "Ghost"
+    ],
+    "hp": 35,
+    "atk": 60,
+    "def": 40,
+    "spa": 85,
+    "spd": 40,
+    "spe": 70,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 571.1,
+    "name": "Zoroark (Hisuian Zoroark)",
+    "types": [
+      "Normal",
+      "Ghost"
+    ],
+    "hp": 55,
+    "atk": 100,
+    "def": 60,
+    "spa": 125,
+    "spd": 60,
+    "spe": 110,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 604.1,
+    "name": "Eelektross (Mega Eelektross)",
+    "types": [
+      "Electric"
+    ],
+    "hp": 85,
+    "atk": 145,
+    "def": 80,
+    "spa": 135,
+    "spd": 90,
+    "spe": 80,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Crunch"
+      },
+      {
+        "level": 1,
+        "move": "Headbutt"
+      },
+      {
+        "level": 1,
+        "move": "Spark"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 18,
+        "move": "Take Down"
+      },
+      {
+        "level": 21,
+        "move": "Confuse Ray"
+      },
+      {
+        "level": 29,
+        "move": "Discharge"
+      },
+      {
+        "level": 33,
+        "move": "Eerie Impulse"
+      },
+      {
+        "level": 36,
+        "move": "Liquidation"
+      },
+      {
+        "level": 39,
+        "move": "Charge"
+      },
+      {
+        "level": 44,
+        "move": "Thunderbolt"
+      },
+      {
+        "level": 46,
+        "move": "Wild Charge"
+      },
+      {
+        "level": 48,
+        "move": "Zap Cannon"
+      },
+      {
+        "level": 50,
+        "move": "Super Fang"
+      }
+    ]
+  },
+  {
+    "id": 609.1,
+    "name": "Chandelure (Mega Chandelure)",
+    "types": [
+      "Ghost",
+      "Fire"
+    ],
+    "hp": 60,
+    "atk": 75,
+    "def": 110,
+    "spa": 175,
+    "spd": 110,
+    "spe": 90,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Ember"
+      },
+      {
+        "level": 1,
+        "move": "Smokescreen"
+      },
+      {
+        "level": 10,
+        "move": "Haze"
+      },
+      {
+        "level": 12,
+        "move": "Confuse Ray"
+      },
+      {
+        "level": 16,
+        "move": "Acid Armor"
+      },
+      {
+        "level": 20,
+        "move": "Will-O-Wisp"
+      },
+      {
+        "level": 24,
+        "move": "Fire Spin"
+      },
+      {
+        "level": 28,
+        "move": "Flamethrower"
+      },
+      {
+        "level": 32,
+        "move": "Shadow Ball"
+      },
+      {
+        "level": 38,
+        "move": "Flame Wheel"
+      },
+      {
+        "level": 44,
+        "move": "Curse"
+      },
+      {
+        "level": 48,
+        "move": "Heal Block"
+      },
+      {
+        "level": 52,
+        "move": "Overheat"
+      }
+    ]
+  },
+  {
+    "id": 618.1,
+    "name": "Stunfisk (Galarian Stunfisk)",
+    "types": [
+      "Ground",
+      "Steel"
+    ],
+    "hp": 109,
+    "atk": 81,
+    "def": 99,
+    "spa": 66,
+    "spd": 84,
+    "spe": 32,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 623.1,
+    "name": "Golurk (Mega Golurk)",
+    "types": [
+      "Ground",
+      "Ghost"
+    ],
+    "hp": 89,
+    "atk": 159,
+    "def": 105,
+    "spa": 70,
+    "spd": 105,
+    "spe": 55,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Harden"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 12,
+        "move": "Shadow Punch"
+      },
+      {
+        "level": 16,
+        "move": "Curse"
+      },
+      {
+        "level": 18,
+        "move": "Rollout"
+      },
+      {
+        "level": 22,
+        "move": "Bulldoze"
+      },
+      {
+        "level": 28,
+        "move": "Iron Defense"
+      },
+      {
+        "level": 36,
+        "move": "Shadow Ball"
+      },
+      {
+        "level": 42,
+        "move": "Heavy Slam"
+      },
+      {
+        "level": 48,
+        "move": "Phantom Force"
+      },
+      {
+        "level": 55,
+        "move": "Earthquake"
+      },
+      {
+        "level": 65,
+        "move": "Dynamic Punch"
+      }
+    ]
+  },
+  {
+    "id": 628.1,
+    "name": "Braviary (Hisuian Braviary)",
+    "types": [
+      "Psychic",
+      "Flying"
+    ],
+    "hp": 110,
+    "atk": 83,
+    "def": 70,
+    "spa": 112,
+    "spd": 70,
+    "spe": 65,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 641.1,
+    "name": "Tornadus (Incarnate Forme)",
+    "types": [
+      "Flying"
+    ],
+    "hp": 79,
+    "atk": 115,
+    "def": 70,
+    "spa": 125,
+    "spd": 80,
+    "spe": 111,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 641.2,
+    "name": "Tornadus (Therian Forme)",
+    "types": [
+      "Flying"
+    ],
+    "hp": 79,
+    "atk": 100,
+    "def": 80,
+    "spa": 110,
+    "spd": 90,
+    "spe": 121,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 642.1,
+    "name": "Thundurus (Incarnate Forme)",
+    "types": [
+      "Electric",
+      "Flying"
+    ],
+    "hp": 79,
+    "atk": 115,
+    "def": 70,
+    "spa": 125,
+    "spd": 80,
+    "spe": 111,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 642.2,
+    "name": "Thundurus (Therian Forme)",
+    "types": [
+      "Electric",
+      "Flying"
+    ],
+    "hp": 79,
+    "atk": 105,
+    "def": 70,
+    "spa": 145,
+    "spd": 80,
+    "spe": 101,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 645.1,
+    "name": "Landorus (Incarnate Forme)",
+    "types": [
+      "Ground",
+      "Flying"
+    ],
+    "hp": 89,
+    "atk": 125,
+    "def": 90,
+    "spa": 115,
+    "spd": 80,
+    "spe": 101,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 645.2,
+    "name": "Landorus (Therian Forme)",
+    "types": [
+      "Ground",
+      "Flying"
+    ],
+    "hp": 89,
+    "atk": 145,
+    "def": 90,
+    "spa": 105,
+    "spd": 80,
+    "spe": 91,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 646.1,
+    "name": "Kyurem (White Kyurem)",
+    "types": [
+      "Dragon",
+      "Ice"
+    ],
+    "hp": 125,
+    "atk": 120,
+    "def": 90,
+    "spa": 170,
+    "spd": 100,
+    "spe": 95,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 646.2,
+    "name": "Kyurem (Black Kyurem)",
+    "types": [
+      "Dragon",
+      "Ice"
+    ],
+    "hp": 125,
+    "atk": 170,
+    "def": 100,
+    "spa": 120,
+    "spd": 90,
+    "spe": 95,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 647.1,
+    "name": "Keldeo (Ordinary Form)",
+    "types": [
+      "Water",
+      "Fighting"
+    ],
+    "hp": 91,
+    "atk": 72,
+    "def": 90,
+    "spa": 129,
+    "spd": 90,
+    "spe": 108,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Aqua Jet"
+      },
+      {
+        "level": 1,
+        "move": "Leer"
+      },
+      {
+        "level": 1,
+        "move": "Secret Sword"
+      },
+      {
+        "level": 1,
+        "move": "Work Up"
+      },
+      {
+        "level": 7,
+        "move": "Bubble Beam"
+      },
+      {
+        "level": 14,
+        "move": "Body Slam"
+      },
+      {
+        "level": 20,
+        "move": "Take Down"
+      },
+      {
+        "level": 26,
+        "move": "Bounce"
+      },
+      {
+        "level": 30,
+        "move": "Aura Sphere"
+      },
+      {
+        "level": 34,
+        "move": "Earth Power"
+      },
+      {
+        "level": 38,
+        "move": "Air Slash"
+      },
+      {
+        "level": 42,
+        "move": "Megahorn"
+      },
+      {
+        "level": 49,
+        "move": "Sacred Sword"
+      },
+      {
+        "level": 56,
+        "move": "Swords Dance"
+      },
+      {
+        "level": 63,
+        "move": "Hydro Pump"
+      },
+      {
+        "level": 70,
+        "move": "Close Combat"
+      }
+    ]
+  },
+  {
+    "id": 647.2,
+    "name": "Keldeo (Resolute Form)",
+    "types": [
+      "Water",
+      "Fighting"
+    ],
+    "hp": 91,
+    "atk": 72,
+    "def": 90,
+    "spa": 129,
+    "spd": 90,
+    "spe": 108,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Aqua Jet"
+      },
+      {
+        "level": 1,
+        "move": "Leer"
+      },
+      {
+        "level": 1,
+        "move": "Secret Sword"
+      },
+      {
+        "level": 1,
+        "move": "Work Up"
+      },
+      {
+        "level": 7,
+        "move": "Bubble Beam"
+      },
+      {
+        "level": 14,
+        "move": "Body Slam"
+      },
+      {
+        "level": 20,
+        "move": "Take Down"
+      },
+      {
+        "level": 26,
+        "move": "Bounce"
+      },
+      {
+        "level": 30,
+        "move": "Aura Sphere"
+      },
+      {
+        "level": 34,
+        "move": "Earth Power"
+      },
+      {
+        "level": 38,
+        "move": "Air Slash"
+      },
+      {
+        "level": 42,
+        "move": "Megahorn"
+      },
+      {
+        "level": 49,
+        "move": "Sacred Sword"
+      },
+      {
+        "level": 56,
+        "move": "Swords Dance"
+      },
+      {
+        "level": 63,
+        "move": "Hydro Pump"
+      },
+      {
+        "level": 70,
+        "move": "Close Combat"
+      }
+    ]
+  },
+  {
+    "id": 648.1,
+    "name": "Meloetta (Aria Forme)",
+    "types": [
+      "Normal",
+      "Psychic"
+    ],
+    "hp": 100,
+    "atk": 77,
+    "def": 77,
+    "spa": 128,
+    "spd": 128,
+    "spe": 90,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Confusion"
+      },
+      {
+        "level": 1,
+        "move": "Quick Attack"
+      },
+      {
+        "level": 1,
+        "move": "Sing"
+      },
+      {
+        "level": 11,
+        "move": "Disarming Voice"
+      },
+      {
+        "level": 14,
+        "move": "Fake Tears"
+      },
+      {
+        "level": 22,
+        "move": "Swords Dance"
+      },
+      {
+        "level": 31,
+        "move": "Psybeam"
+      },
+      {
+        "level": 43,
+        "move": "U-turn"
+      },
+      {
+        "level": 50,
+        "move": "Relic Song"
+      },
+      {
+        "level": 57,
+        "move": "Psychic"
+      },
+      {
+        "level": 64,
+        "move": "Hyper Voice"
+      },
+      {
+        "level": 78,
+        "move": "Close Combat"
+      },
+      {
+        "level": 85,
+        "move": "Perish Song"
+      }
+    ]
+  },
+  {
+    "id": 648.2,
+    "name": "Meloetta (Pirouette Forme)",
+    "types": [
+      "Normal",
+      "Fighting"
+    ],
+    "hp": 100,
+    "atk": 128,
+    "def": 90,
+    "spa": 77,
+    "spd": 77,
+    "spe": 128,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Confusion"
+      },
+      {
+        "level": 1,
+        "move": "Quick Attack"
+      },
+      {
+        "level": 1,
+        "move": "Sing"
+      },
+      {
+        "level": 11,
+        "move": "Disarming Voice"
+      },
+      {
+        "level": 14,
+        "move": "Fake Tears"
+      },
+      {
+        "level": 22,
+        "move": "Swords Dance"
+      },
+      {
+        "level": 31,
+        "move": "Psybeam"
+      },
+      {
+        "level": 43,
+        "move": "U-turn"
+      },
+      {
+        "level": 50,
+        "move": "Relic Song"
+      },
+      {
+        "level": 57,
+        "move": "Psychic"
+      },
+      {
+        "level": 64,
+        "move": "Hyper Voice"
+      },
+      {
+        "level": 78,
+        "move": "Close Combat"
+      },
+      {
+        "level": 85,
+        "move": "Perish Song"
+      }
+    ]
+  },
+  {
+    "id": 652.1,
+    "name": "Chesnaught (Mega Chesnaught)",
+    "types": [
+      "Grass",
+      "Fighting"
+    ],
+    "hp": 88,
+    "atk": 137,
+    "def": 172,
+    "spa": 74,
+    "spd": 115,
+    "spe": 44,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Growl"
+      },
+      {
+        "level": 1,
+        "move": "Vine Whip"
+      },
+      {
+        "level": 5,
+        "move": "Growth"
+      },
+      {
+        "level": 8,
+        "move": "Rollout"
+      },
+      {
+        "level": 11,
+        "move": "Bite"
+      },
+      {
+        "level": 15,
+        "move": "Leech Seed"
+      },
+      {
+        "level": 18,
+        "move": "Pin Missile"
+      },
+      {
+        "level": 27,
+        "move": "Take Down"
+      },
+      {
+        "level": 35,
+        "move": "Brick Break"
+      },
+      {
+        "level": 38,
+        "move": "Bulk Up"
+      },
+      {
+        "level": 42,
+        "move": "Body Slam"
+      },
+      {
+        "level": 45,
+        "move": "Close Combat"
+      },
+      {
+        "level": 48,
+        "move": "Wood Hammer"
+      },
+      {
+        "level": 55,
+        "move": "Giga Impact"
+      }
+    ]
+  },
+  {
+    "id": 655.1,
+    "name": "Delphox (Mega Delphox)",
+    "types": [
+      "Fire",
+      "Psychic"
+    ],
+    "hp": 75,
+    "atk": 69,
+    "def": 72,
+    "spa": 159,
+    "spd": 125,
+    "spe": 134,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 1,
+        "move": "Tail Whip"
+      },
+      {
+        "level": 5,
+        "move": "Ember"
+      },
+      {
+        "level": 14,
+        "move": "Charm"
+      },
+      {
+        "level": 17,
+        "move": "Psybeam"
+      },
+      {
+        "level": 20,
+        "move": "Fire Spin"
+      },
+      {
+        "level": 25,
+        "move": "Light Screen"
+      },
+      {
+        "level": 31,
+        "move": "Psyshock"
+      },
+      {
+        "level": 35,
+        "move": "Flamethrower"
+      },
+      {
+        "level": 38,
+        "move": "Will-O-Wisp"
+      },
+      {
+        "level": 41,
+        "move": "Psychic"
+      },
+      {
+        "level": 46,
+        "move": "Agility"
+      },
+      {
+        "level": 54,
+        "move": "Fire Blast"
+      }
+    ]
+  },
+  {
+    "id": 658.1,
+    "name": "Greninja (Ash-Greninja)",
+    "types": [
+      "Water",
+      "Dark"
+    ],
+    "hp": 72,
+    "atk": 145,
+    "def": 67,
+    "spa": 153,
+    "spd": 71,
+    "spe": 132,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Growl"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 5,
+        "move": "Water Gun"
+      },
+      {
+        "level": 8,
+        "move": "Quick Attack"
+      },
+      {
+        "level": 10,
+        "move": "Lick"
+      },
+      {
+        "level": 14,
+        "move": "Bubble Beam"
+      },
+      {
+        "level": 18,
+        "move": "Smokescreen"
+      },
+      {
+        "level": 23,
+        "move": "Aerial Ace"
+      },
+      {
+        "level": 28,
+        "move": "Shadow Sneak"
+      },
+      {
+        "level": 35,
+        "move": "Substitute"
+      },
+      {
+        "level": 38,
+        "move": "Night Slash"
+      },
+      {
+        "level": 43,
+        "move": "Bounce"
+      },
+      {
+        "level": 51,
+        "move": "Double Team"
+      },
+      {
+        "level": 57,
+        "move": "Hydro Pump"
+      }
+    ]
+  },
+  {
+    "id": 658.2,
+    "name": "Greninja (Mega Greninja)",
+    "types": [
+      "Water",
+      "Dark"
+    ],
+    "hp": 72,
+    "atk": 125,
+    "def": 77,
+    "spa": 133,
+    "spd": 81,
+    "spe": 142,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Growl"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 5,
+        "move": "Water Gun"
+      },
+      {
+        "level": 8,
+        "move": "Quick Attack"
+      },
+      {
+        "level": 10,
+        "move": "Lick"
+      },
+      {
+        "level": 14,
+        "move": "Bubble Beam"
+      },
+      {
+        "level": 18,
+        "move": "Smokescreen"
+      },
+      {
+        "level": 23,
+        "move": "Aerial Ace"
+      },
+      {
+        "level": 28,
+        "move": "Shadow Sneak"
+      },
+      {
+        "level": 35,
+        "move": "Substitute"
+      },
+      {
+        "level": 38,
+        "move": "Night Slash"
+      },
+      {
+        "level": 43,
+        "move": "Bounce"
+      },
+      {
+        "level": 51,
+        "move": "Double Team"
+      },
+      {
+        "level": 57,
+        "move": "Hydro Pump"
+      }
+    ]
+  },
+  {
+    "id": 668.1,
+    "name": "Pyroar (Mega Pyroar)",
+    "types": [
+      "Fire",
+      "Normal"
+    ],
+    "hp": 86,
+    "atk": 88,
+    "def": 92,
+    "spa": 129,
+    "spd": 86,
+    "spe": 126,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Ember"
+      },
+      {
+        "level": 1,
+        "move": "Leer"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 6,
+        "move": "Roar"
+      },
+      {
+        "level": 8,
+        "move": "Work Up"
+      },
+      {
+        "level": 11,
+        "move": "Headbutt"
+      },
+      {
+        "level": 16,
+        "move": "Snarl"
+      },
+      {
+        "level": 20,
+        "move": "Take Down"
+      },
+      {
+        "level": 23,
+        "move": "Fire Fang"
+      },
+      {
+        "level": 28,
+        "move": "Earth Power"
+      },
+      {
+        "level": 32,
+        "move": "Flamethrower"
+      },
+      {
+        "level": 36,
+        "move": "Crunch"
+      },
+      {
+        "level": 42,
+        "move": "Hyper Voice"
+      }
+    ]
+  },
+  {
+    "id": 670.1,
+    "name": "Floette (Eternal Flower)",
+    "types": [
+      "Fairy"
+    ],
+    "hp": 74,
+    "atk": 65,
+    "def": 67,
+    "spa": 125,
+    "spd": 128,
+    "spe": 92,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 670.2,
+    "name": "Floette (Mega Floette)",
+    "types": [
+      "Fairy"
+    ],
+    "hp": 74,
+    "atk": 85,
+    "def": 87,
+    "spa": 155,
+    "spd": 148,
+    "spe": 102,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 678.1,
+    "name": "Meowstic (Mega Meowstic)",
+    "types": [
+      "Psychic"
+    ],
+    "hp": 74,
+    "atk": 48,
+    "def": 76,
+    "spa": 143,
+    "spd": 101,
+    "spe": 124,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 681.1,
+    "name": "Aegislash (Shield Forme)",
+    "types": [
+      "Steel",
+      "Ghost"
+    ],
+    "hp": 60,
+    "atk": 50,
+    "def": 140,
+    "spa": 50,
+    "spd": 140,
+    "spe": 60,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Screech"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 4,
+        "move": "Shadow Sneak"
+      },
+      {
+        "level": 12,
+        "move": "Aerial Ace"
+      },
+      {
+        "level": 16,
+        "move": "Metal Sound"
+      },
+      {
+        "level": 20,
+        "move": "Slash"
+      },
+      {
+        "level": 22,
+        "move": "Psycho Cut"
+      },
+      {
+        "level": 24,
+        "move": "Shadow Claw"
+      },
+      {
+        "level": 32,
+        "move": "Iron Defense"
+      },
+      {
+        "level": 38,
+        "move": "Iron Head"
+      },
+      {
+        "level": 44,
+        "move": "Swords Dance"
+      },
+      {
+        "level": 50,
+        "move": "Head Smash"
+      }
+    ]
+  },
+  {
+    "id": 681.2,
+    "name": "Aegislash (Blade Forme)",
+    "types": [
+      "Steel",
+      "Ghost"
+    ],
+    "hp": 60,
+    "atk": 140,
+    "def": 50,
+    "spa": 140,
+    "spd": 50,
+    "spe": 60,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Screech"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 4,
+        "move": "Shadow Sneak"
+      },
+      {
+        "level": 12,
+        "move": "Aerial Ace"
+      },
+      {
+        "level": 16,
+        "move": "Metal Sound"
+      },
+      {
+        "level": 20,
+        "move": "Slash"
+      },
+      {
+        "level": 22,
+        "move": "Psycho Cut"
+      },
+      {
+        "level": 24,
+        "move": "Shadow Claw"
+      },
+      {
+        "level": 32,
+        "move": "Iron Defense"
+      },
+      {
+        "level": 38,
+        "move": "Iron Head"
+      },
+      {
+        "level": 44,
+        "move": "Swords Dance"
+      },
+      {
+        "level": 50,
+        "move": "Head Smash"
+      }
+    ]
+  },
+  {
+    "id": 687.1,
+    "name": "Malamar (Mega Malamar)",
+    "types": [
+      "Dark",
+      "Psychic"
+    ],
+    "hp": 86,
+    "atk": 102,
+    "def": 88,
+    "spa": 98,
+    "spd": 120,
+    "spe": 88,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Peck"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 3,
+        "move": "Hypnosis"
+      },
+      {
+        "level": 6,
+        "move": "Fake Tears"
+      },
+      {
+        "level": 14,
+        "move": "Knock Off"
+      },
+      {
+        "level": 15,
+        "move": "Psybeam"
+      },
+      {
+        "level": 21,
+        "move": "Slash"
+      },
+      {
+        "level": 24,
+        "move": "Night Slash"
+      },
+      {
+        "level": 33,
+        "move": "Psycho Cut"
+      },
+      {
+        "level": 37,
+        "move": "Psyshock"
+      },
+      {
+        "level": 42,
+        "move": "Topsy-Turvy"
+      },
+      {
+        "level": 54,
+        "move": "Close Combat"
+      }
+    ]
+  },
+  {
+    "id": 689.1,
+    "name": "Barbaracle (Mega Barbaracle)",
+    "types": [
+      "Rock",
+      "Fighting"
+    ],
+    "hp": 72,
+    "atk": 140,
+    "def": 130,
+    "spa": 64,
+    "spd": 106,
+    "spe": 88,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Screech"
+      },
+      {
+        "level": 1,
+        "move": "Water Gun"
+      },
+      {
+        "level": 9,
+        "move": "Infestation"
+      },
+      {
+        "level": 12,
+        "move": "Rock Throw"
+      },
+      {
+        "level": 14,
+        "move": "Bubble Beam"
+      },
+      {
+        "level": 16,
+        "move": "Rock Blast"
+      },
+      {
+        "level": 18,
+        "move": "Bulldoze"
+      },
+      {
+        "level": 23,
+        "move": "Slash"
+      },
+      {
+        "level": 35,
+        "move": "Iron Defense"
+      },
+      {
+        "level": 40,
+        "move": "Night Slash"
+      },
+      {
+        "level": 43,
+        "move": "Brick Break"
+      },
+      {
+        "level": 45,
+        "move": "Liquidation"
+      },
+      {
+        "level": 50,
+        "move": "Stone Edge"
+      },
+      {
+        "level": 54,
+        "move": "Close Combat"
+      }
+    ]
+  },
+  {
+    "id": 691.1,
+    "name": "Dragalge (Mega Dragalge)",
+    "types": [
+      "Poison",
+      "Dragon"
+    ],
+    "hp": 65,
+    "atk": 85,
+    "def": 105,
+    "spa": 132,
+    "spd": 163,
+    "spe": 44,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Smokescreen"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 1,
+        "move": "Water Gun"
+      },
+      {
+        "level": 5,
+        "move": "Tail Whip"
+      },
+      {
+        "level": 10,
+        "move": "Mud Shot"
+      },
+      {
+        "level": 15,
+        "move": "Bubble Beam"
+      },
+      {
+        "level": 22,
+        "move": "Double Team"
+      },
+      {
+        "level": 25,
+        "move": "Toxic"
+      },
+      {
+        "level": 30,
+        "move": "Water Pulse"
+      },
+      {
+        "level": 32,
+        "move": "Poison Jab"
+      },
+      {
+        "level": 36,
+        "move": "Dragon Pulse"
+      },
+      {
+        "level": 40,
+        "move": "Sludge Bomb"
+      },
+      {
+        "level": 46,
+        "move": "Hydro Pump"
+      },
+      {
+        "level": 52,
+        "move": "Sludge Wave"
+      }
+    ]
+  },
+  {
+    "id": 701.1,
+    "name": "Hawlucha (Mega Hawlucha)",
+    "types": [
+      "Fighting",
+      "Flying"
+    ],
+    "hp": 78,
+    "atk": 137,
+    "def": 100,
+    "spa": 74,
+    "spd": 93,
+    "spe": 118,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 4,
+        "move": "Wing Attack"
+      },
+      {
+        "level": 8,
+        "move": "Detect"
+      },
+      {
+        "level": 12,
+        "move": "Aerial Ace"
+      },
+      {
+        "level": 20,
+        "move": "Feather Dance"
+      },
+      {
+        "level": 24,
+        "move": "Brick Break"
+      },
+      {
+        "level": 26,
+        "move": "Lunge"
+      },
+      {
+        "level": 28,
+        "move": "Bounce"
+      },
+      {
+        "level": 32,
+        "move": "Taunt"
+      },
+      {
+        "level": 36,
+        "move": "Flying Press"
+      },
+      {
+        "level": 40,
+        "move": "Swords Dance"
+      },
+      {
+        "level": 44,
+        "move": "Air Slash"
+      },
+      {
+        "level": 52,
+        "move": "Brave Bird"
+      }
+    ]
+  },
+  {
+    "id": 705.1,
+    "name": "Sliggoo (Hisuian Sliggoo)",
+    "types": [
+      "Steel",
+      "Dragon"
+    ],
+    "hp": 58,
+    "atk": 75,
+    "def": 83,
+    "spa": 83,
+    "spd": 113,
+    "spe": 40,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 706.1,
+    "name": "Goodra (Hisuian Goodra)",
+    "types": [
+      "Steel",
+      "Dragon"
+    ],
+    "hp": 80,
+    "atk": 100,
+    "def": 100,
+    "spa": 110,
+    "spd": 150,
+    "spe": 60,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 710.1,
+    "name": "Pumpkaboo (Average Size)",
+    "types": [
+      "Ghost",
+      "Grass"
+    ],
+    "hp": 49,
+    "atk": 66,
+    "def": 70,
+    "spa": 44,
+    "spd": 55,
+    "spe": 51,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 1,
+        "move": "Trick-or-Treat"
+      },
+      {
+        "level": 4,
+        "move": "Shadow Sneak"
+      },
+      {
+        "level": 8,
+        "move": "Confuse Ray"
+      },
+      {
+        "level": 12,
+        "move": "Razor Leaf"
+      },
+      {
+        "level": 16,
+        "move": "Leech Seed"
+      },
+      {
+        "level": 20,
+        "move": "Bullet Seed"
+      },
+      {
+        "level": 24,
+        "move": "Brutal Swing"
+      },
+      {
+        "level": 27,
+        "move": "Hypnosis"
+      },
+      {
+        "level": 36,
+        "move": "Shadow Ball"
+      },
+      {
+        "level": 40,
+        "move": "Mystical Fire"
+      },
+      {
+        "level": 46,
+        "move": "Power Whip"
+      }
+    ]
+  },
+  {
+    "id": 710.2,
+    "name": "Pumpkaboo (Small Size)",
+    "types": [
+      "Ghost",
+      "Grass"
+    ],
+    "hp": 44,
+    "atk": 66,
+    "def": 70,
+    "spa": 44,
+    "spd": 55,
+    "spe": 56,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 1,
+        "move": "Trick-or-Treat"
+      },
+      {
+        "level": 4,
+        "move": "Shadow Sneak"
+      },
+      {
+        "level": 8,
+        "move": "Confuse Ray"
+      },
+      {
+        "level": 12,
+        "move": "Razor Leaf"
+      },
+      {
+        "level": 16,
+        "move": "Leech Seed"
+      },
+      {
+        "level": 20,
+        "move": "Bullet Seed"
+      },
+      {
+        "level": 24,
+        "move": "Brutal Swing"
+      },
+      {
+        "level": 27,
+        "move": "Hypnosis"
+      },
+      {
+        "level": 36,
+        "move": "Shadow Ball"
+      },
+      {
+        "level": 40,
+        "move": "Mystical Fire"
+      },
+      {
+        "level": 46,
+        "move": "Power Whip"
+      }
+    ]
+  },
+  {
+    "id": 710.3,
+    "name": "Pumpkaboo (Large Size)",
+    "types": [
+      "Ghost",
+      "Grass"
+    ],
+    "hp": 54,
+    "atk": 66,
+    "def": 70,
+    "spa": 44,
+    "spd": 55,
+    "spe": 46,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 1,
+        "move": "Trick-or-Treat"
+      },
+      {
+        "level": 4,
+        "move": "Shadow Sneak"
+      },
+      {
+        "level": 8,
+        "move": "Confuse Ray"
+      },
+      {
+        "level": 12,
+        "move": "Razor Leaf"
+      },
+      {
+        "level": 16,
+        "move": "Leech Seed"
+      },
+      {
+        "level": 20,
+        "move": "Bullet Seed"
+      },
+      {
+        "level": 24,
+        "move": "Brutal Swing"
+      },
+      {
+        "level": 27,
+        "move": "Hypnosis"
+      },
+      {
+        "level": 36,
+        "move": "Shadow Ball"
+      },
+      {
+        "level": 40,
+        "move": "Mystical Fire"
+      },
+      {
+        "level": 46,
+        "move": "Power Whip"
+      }
+    ]
+  },
+  {
+    "id": 710.4,
+    "name": "Pumpkaboo (Super Size)",
+    "types": [
+      "Ghost",
+      "Grass"
+    ],
+    "hp": 59,
+    "atk": 66,
+    "def": 70,
+    "spa": 44,
+    "spd": 55,
+    "spe": 41,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 1,
+        "move": "Trick-or-Treat"
+      },
+      {
+        "level": 4,
+        "move": "Shadow Sneak"
+      },
+      {
+        "level": 8,
+        "move": "Confuse Ray"
+      },
+      {
+        "level": 12,
+        "move": "Razor Leaf"
+      },
+      {
+        "level": 16,
+        "move": "Leech Seed"
+      },
+      {
+        "level": 20,
+        "move": "Bullet Seed"
+      },
+      {
+        "level": 24,
+        "move": "Brutal Swing"
+      },
+      {
+        "level": 27,
+        "move": "Hypnosis"
+      },
+      {
+        "level": 36,
+        "move": "Shadow Ball"
+      },
+      {
+        "level": 40,
+        "move": "Mystical Fire"
+      },
+      {
+        "level": 46,
+        "move": "Power Whip"
+      }
+    ]
+  },
+  {
+    "id": 711.1,
+    "name": "Gourgeist (Average Size)",
+    "types": [
+      "Ghost",
+      "Grass"
+    ],
+    "hp": 65,
+    "atk": 90,
+    "def": 122,
+    "spa": 58,
+    "spd": 75,
+    "spe": 84,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Moonblast"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 1,
+        "move": "Trick-or-Treat"
+      },
+      {
+        "level": 4,
+        "move": "Shadow Sneak"
+      },
+      {
+        "level": 8,
+        "move": "Confuse Ray"
+      },
+      {
+        "level": 12,
+        "move": "Razor Leaf"
+      },
+      {
+        "level": 16,
+        "move": "Leech Seed"
+      },
+      {
+        "level": 20,
+        "move": "Bullet Seed"
+      },
+      {
+        "level": 24,
+        "move": "Brutal Swing"
+      },
+      {
+        "level": 27,
+        "move": "Hypnosis"
+      },
+      {
+        "level": 36,
+        "move": "Shadow Ball"
+      },
+      {
+        "level": 40,
+        "move": "Mystical Fire"
+      },
+      {
+        "level": 44,
+        "move": "Phantom Force"
+      },
+      {
+        "level": 46,
+        "move": "Power Whip"
+      },
+      {
+        "level": 52,
+        "move": "Explosion"
+      }
+    ]
+  },
+  {
+    "id": 711.2,
+    "name": "Gourgeist (Small Size)",
+    "types": [
+      "Ghost",
+      "Grass"
+    ],
+    "hp": 55,
+    "atk": 85,
+    "def": 122,
+    "spa": 58,
+    "spd": 75,
+    "spe": 99,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Moonblast"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 1,
+        "move": "Trick-or-Treat"
+      },
+      {
+        "level": 4,
+        "move": "Shadow Sneak"
+      },
+      {
+        "level": 8,
+        "move": "Confuse Ray"
+      },
+      {
+        "level": 12,
+        "move": "Razor Leaf"
+      },
+      {
+        "level": 16,
+        "move": "Leech Seed"
+      },
+      {
+        "level": 20,
+        "move": "Bullet Seed"
+      },
+      {
+        "level": 24,
+        "move": "Brutal Swing"
+      },
+      {
+        "level": 27,
+        "move": "Hypnosis"
+      },
+      {
+        "level": 36,
+        "move": "Shadow Ball"
+      },
+      {
+        "level": 40,
+        "move": "Mystical Fire"
+      },
+      {
+        "level": 44,
+        "move": "Phantom Force"
+      },
+      {
+        "level": 46,
+        "move": "Power Whip"
+      },
+      {
+        "level": 52,
+        "move": "Explosion"
+      }
+    ]
+  },
+  {
+    "id": 711.3,
+    "name": "Gourgeist (Large Size)",
+    "types": [
+      "Ghost",
+      "Grass"
+    ],
+    "hp": 75,
+    "atk": 95,
+    "def": 122,
+    "spa": 58,
+    "spd": 75,
+    "spe": 69,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Moonblast"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 1,
+        "move": "Trick-or-Treat"
+      },
+      {
+        "level": 4,
+        "move": "Shadow Sneak"
+      },
+      {
+        "level": 8,
+        "move": "Confuse Ray"
+      },
+      {
+        "level": 12,
+        "move": "Razor Leaf"
+      },
+      {
+        "level": 16,
+        "move": "Leech Seed"
+      },
+      {
+        "level": 20,
+        "move": "Bullet Seed"
+      },
+      {
+        "level": 24,
+        "move": "Brutal Swing"
+      },
+      {
+        "level": 27,
+        "move": "Hypnosis"
+      },
+      {
+        "level": 36,
+        "move": "Shadow Ball"
+      },
+      {
+        "level": 40,
+        "move": "Mystical Fire"
+      },
+      {
+        "level": 44,
+        "move": "Phantom Force"
+      },
+      {
+        "level": 46,
+        "move": "Power Whip"
+      },
+      {
+        "level": 52,
+        "move": "Explosion"
+      }
+    ]
+  },
+  {
+    "id": 711.4,
+    "name": "Gourgeist (Super Size)",
+    "types": [
+      "Ghost",
+      "Grass"
+    ],
+    "hp": 85,
+    "atk": 100,
+    "def": 122,
+    "spa": 58,
+    "spd": 75,
+    "spe": 54,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Moonblast"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 1,
+        "move": "Trick-or-Treat"
+      },
+      {
+        "level": 4,
+        "move": "Shadow Sneak"
+      },
+      {
+        "level": 8,
+        "move": "Confuse Ray"
+      },
+      {
+        "level": 12,
+        "move": "Razor Leaf"
+      },
+      {
+        "level": 16,
+        "move": "Leech Seed"
+      },
+      {
+        "level": 20,
+        "move": "Bullet Seed"
+      },
+      {
+        "level": 24,
+        "move": "Brutal Swing"
+      },
+      {
+        "level": 27,
+        "move": "Hypnosis"
+      },
+      {
+        "level": 36,
+        "move": "Shadow Ball"
+      },
+      {
+        "level": 40,
+        "move": "Mystical Fire"
+      },
+      {
+        "level": 44,
+        "move": "Phantom Force"
+      },
+      {
+        "level": 46,
+        "move": "Power Whip"
+      },
+      {
+        "level": 52,
+        "move": "Explosion"
+      }
+    ]
+  },
+  {
+    "id": 713.1,
+    "name": "Avalugg (Hisuian Avalugg)",
+    "types": [
+      "Ice",
+      "Rock"
+    ],
+    "hp": 95,
+    "atk": 127,
+    "def": 184,
+    "spa": 34,
+    "spd": 36,
+    "spe": 38,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 718.1,
+    "name": "Zygarde (50% Forme)",
+    "types": [
+      "Dragon",
+      "Ground"
+    ],
+    "hp": 108,
+    "atk": 100,
+    "def": 121,
+    "spa": 81,
+    "spd": 95,
+    "spe": 95,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Bite"
+      },
+      {
+        "level": 1,
+        "move": "Bulldoze"
+      },
+      {
+        "level": 1,
+        "move": "Core Enforcer"
+      },
+      {
+        "level": 1,
+        "move": "Dragon Breath"
+      },
+      {
+        "level": 1,
+        "move": "Land's Wrath"
+      },
+      {
+        "level": 1,
+        "move": "Thousand Arrows"
+      },
+      {
+        "level": 1,
+        "move": "Thousand Waves"
+      },
+      {
+        "level": 8,
+        "move": "Haze"
+      },
+      {
+        "level": 16,
+        "move": "Dig"
+      },
+      {
+        "level": 24,
+        "move": "Safeguard"
+      },
+      {
+        "level": 32,
+        "move": "Crunch"
+      },
+      {
+        "level": 40,
+        "move": "Dragon Pulse"
+      },
+      {
+        "level": 44,
+        "move": "Breaking Swipe"
+      },
+      {
+        "level": 56,
+        "move": "Glare"
+      },
+      {
+        "level": 60,
+        "move": "Sludge Wave"
+      },
+      {
+        "level": 70,
+        "move": "Extreme Speed"
+      },
+      {
+        "level": 80,
+        "move": "Earthquake"
+      },
+      {
+        "level": 88,
+        "move": "Outrage"
+      }
+    ]
+  },
+  {
+    "id": 718.2,
+    "name": "Zygarde (10% Forme)",
+    "types": [
+      "Dragon",
+      "Ground"
+    ],
+    "hp": 54,
+    "atk": 100,
+    "def": 71,
+    "spa": 61,
+    "spd": 85,
+    "spe": 115,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Bite"
+      },
+      {
+        "level": 1,
+        "move": "Bulldoze"
+      },
+      {
+        "level": 1,
+        "move": "Core Enforcer"
+      },
+      {
+        "level": 1,
+        "move": "Dragon Breath"
+      },
+      {
+        "level": 1,
+        "move": "Land's Wrath"
+      },
+      {
+        "level": 1,
+        "move": "Thousand Arrows"
+      },
+      {
+        "level": 1,
+        "move": "Thousand Waves"
+      },
+      {
+        "level": 8,
+        "move": "Haze"
+      },
+      {
+        "level": 16,
+        "move": "Dig"
+      },
+      {
+        "level": 24,
+        "move": "Safeguard"
+      },
+      {
+        "level": 32,
+        "move": "Crunch"
+      },
+      {
+        "level": 40,
+        "move": "Dragon Pulse"
+      },
+      {
+        "level": 44,
+        "move": "Breaking Swipe"
+      },
+      {
+        "level": 56,
+        "move": "Glare"
+      },
+      {
+        "level": 60,
+        "move": "Sludge Wave"
+      },
+      {
+        "level": 70,
+        "move": "Extreme Speed"
+      },
+      {
+        "level": 80,
+        "move": "Earthquake"
+      },
+      {
+        "level": 88,
+        "move": "Outrage"
+      }
+    ]
+  },
+  {
+    "id": 718.3,
+    "name": "Zygarde (Complete Forme)",
+    "types": [
+      "Dragon",
+      "Ground"
+    ],
+    "hp": 216,
+    "atk": 100,
+    "def": 121,
+    "spa": 91,
+    "spd": 95,
+    "spe": 85,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Bite"
+      },
+      {
+        "level": 1,
+        "move": "Bulldoze"
+      },
+      {
+        "level": 1,
+        "move": "Core Enforcer"
+      },
+      {
+        "level": 1,
+        "move": "Dragon Breath"
+      },
+      {
+        "level": 1,
+        "move": "Land's Wrath"
+      },
+      {
+        "level": 1,
+        "move": "Thousand Arrows"
+      },
+      {
+        "level": 1,
+        "move": "Thousand Waves"
+      },
+      {
+        "level": 8,
+        "move": "Haze"
+      },
+      {
+        "level": 16,
+        "move": "Dig"
+      },
+      {
+        "level": 24,
+        "move": "Safeguard"
+      },
+      {
+        "level": 32,
+        "move": "Crunch"
+      },
+      {
+        "level": 40,
+        "move": "Dragon Pulse"
+      },
+      {
+        "level": 44,
+        "move": "Breaking Swipe"
+      },
+      {
+        "level": 56,
+        "move": "Glare"
+      },
+      {
+        "level": 60,
+        "move": "Sludge Wave"
+      },
+      {
+        "level": 70,
+        "move": "Extreme Speed"
+      },
+      {
+        "level": 80,
+        "move": "Earthquake"
+      },
+      {
+        "level": 88,
+        "move": "Outrage"
+      }
+    ]
+  },
+  {
+    "id": 718.4,
+    "name": "Zygarde (Mega Zygarde)",
+    "types": [
+      "Dragon",
+      "Ground"
+    ],
+    "hp": 216,
+    "atk": 70,
+    "def": 91,
+    "spa": 216,
+    "spd": 85,
+    "spe": 100,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Bite"
+      },
+      {
+        "level": 1,
+        "move": "Bulldoze"
+      },
+      {
+        "level": 1,
+        "move": "Core Enforcer"
+      },
+      {
+        "level": 1,
+        "move": "Dragon Breath"
+      },
+      {
+        "level": 1,
+        "move": "Land's Wrath"
+      },
+      {
+        "level": 1,
+        "move": "Thousand Arrows"
+      },
+      {
+        "level": 1,
+        "move": "Thousand Waves"
+      },
+      {
+        "level": 8,
+        "move": "Haze"
+      },
+      {
+        "level": 16,
+        "move": "Dig"
+      },
+      {
+        "level": 24,
+        "move": "Safeguard"
+      },
+      {
+        "level": 32,
+        "move": "Crunch"
+      },
+      {
+        "level": 40,
+        "move": "Dragon Pulse"
+      },
+      {
+        "level": 44,
+        "move": "Breaking Swipe"
+      },
+      {
+        "level": 56,
+        "move": "Glare"
+      },
+      {
+        "level": 60,
+        "move": "Sludge Wave"
+      },
+      {
+        "level": 70,
+        "move": "Extreme Speed"
+      },
+      {
+        "level": 80,
+        "move": "Earthquake"
+      },
+      {
+        "level": 88,
+        "move": "Outrage"
+      }
+    ]
+  },
+  {
+    "id": 719.1,
+    "name": "Diancie (Mega Diancie)",
+    "types": [
+      "Rock",
+      "Fairy"
+    ],
+    "hp": 50,
+    "atk": 160,
+    "def": 110,
+    "spa": 160,
+    "spd": 110,
+    "spe": 110,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Diamond Storm"
+      },
+      {
+        "level": 1,
+        "move": "Harden"
+      },
+      {
+        "level": 1,
+        "move": "Rock Throw"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 7,
+        "move": "Amnesia"
+      },
+      {
+        "level": 14,
+        "move": "Fake Tears"
+      },
+      {
+        "level": 21,
+        "move": "Draining Kiss"
+      },
+      {
+        "level": 33,
+        "move": "Rock Slide"
+      },
+      {
+        "level": 42,
+        "move": "Light Screen"
+      },
+      {
+        "level": 44,
+        "move": "Power Gem"
+      },
+      {
+        "level": 46,
+        "move": "Stealth Rock"
+      },
+      {
+        "level": 50,
+        "move": "Stone Edge"
+      },
+      {
+        "level": 54,
+        "move": "Moonblast"
+      }
+    ]
+  },
+  {
+    "id": 720.1,
+    "name": "Hoopa (Hoopa Confined)",
+    "types": [
+      "Psychic",
+      "Ghost"
+    ],
+    "hp": 80,
+    "atk": 110,
+    "def": 60,
+    "spa": 150,
+    "spd": 130,
+    "spe": 70,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 720.2,
+    "name": "Hoopa (Hoopa Unbound)",
+    "types": [
+      "Psychic",
+      "Dark"
+    ],
+    "hp": 80,
+    "atk": 160,
+    "def": 60,
+    "spa": 170,
+    "spd": 130,
+    "spe": 80,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 724.1,
+    "name": "Decidueye (Hisuian Decidueye)",
+    "types": [
+      "Grass",
+      "Fighting"
+    ],
+    "hp": 88,
+    "atk": 112,
+    "def": 80,
+    "spa": 95,
+    "spd": 95,
+    "spe": 60,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 740.1,
+    "name": "Crabominable (Mega Crabominable)",
+    "types": [
+      "Fighting",
+      "Ice"
+    ],
+    "hp": 97,
+    "atk": 157,
+    "def": 122,
+    "spa": 62,
+    "spd": 107,
+    "spe": 33,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Harden"
+      },
+      {
+        "level": 1,
+        "move": "Rock Smash"
+      },
+      {
+        "level": 9,
+        "move": "Leer"
+      },
+      {
+        "level": 13,
+        "move": "Bubble Beam"
+      },
+      {
+        "level": 17,
+        "move": "Protect"
+      },
+      {
+        "level": 20,
+        "move": "Take Down"
+      },
+      {
+        "level": 22,
+        "move": "Brick Break"
+      },
+      {
+        "level": 25,
+        "move": "Bulk Up"
+      },
+      {
+        "level": 30,
+        "move": "Mach Punch"
+      },
+      {
+        "level": 34,
+        "move": "Ice Hammer"
+      },
+      {
+        "level": 42,
+        "move": "Iron Defense"
+      },
+      {
+        "level": 45,
+        "move": "Dynamic Punch"
+      },
+      {
+        "level": 49,
+        "move": "Close Combat"
+      }
+    ]
+  },
+  {
+    "id": 741.1,
+    "name": "Oricorio (Baile Style)",
+    "types": [
+      "Fire",
+      "Flying"
+    ],
+    "hp": 75,
+    "atk": 70,
+    "def": 70,
+    "spa": 98,
+    "spd": 70,
+    "spe": 93,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 741.2,
+    "name": "Oricorio (Pom-Pom Style)",
+    "types": [
+      "Electric",
+      "Flying"
+    ],
+    "hp": 75,
+    "atk": 70,
+    "def": 70,
+    "spa": 98,
+    "spd": 70,
+    "spe": 93,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 741.3,
+    "name": "Oricorio (Pa'u Style)",
+    "types": [
+      "Psychic",
+      "Flying"
+    ],
+    "hp": 75,
+    "atk": 70,
+    "def": 70,
+    "spa": 98,
+    "spd": 70,
+    "spe": 93,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 741.4,
+    "name": "Oricorio (Sensu Style)",
+    "types": [
+      "Ghost",
+      "Flying"
+    ],
+    "hp": 75,
+    "atk": 70,
+    "def": 70,
+    "spa": 98,
+    "spd": 70,
+    "spe": 93,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 744.1,
+    "name": "Rockruff (Own Tempo Rockruff)",
+    "types": [
+      "Rock"
+    ],
+    "hp": 45,
+    "atk": 65,
+    "def": 40,
+    "spa": 30,
+    "spd": 40,
+    "spe": 60,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 745.1,
+    "name": "Lycanroc (Midday Form)",
+    "types": [
+      "Rock"
+    ],
+    "hp": 75,
+    "atk": 115,
+    "def": 65,
+    "spa": 55,
+    "spd": 65,
+    "spe": 112,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 745.2,
+    "name": "Lycanroc (Midnight Form)",
+    "types": [
+      "Rock"
+    ],
+    "hp": 85,
+    "atk": 115,
+    "def": 75,
+    "spa": 55,
+    "spd": 75,
+    "spe": 82,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 745.3,
+    "name": "Lycanroc (Dusk Form)",
+    "types": [
+      "Rock"
+    ],
+    "hp": 75,
+    "atk": 117,
+    "def": 65,
+    "spa": 55,
+    "spd": 65,
+    "spe": 110,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 746.1,
+    "name": "Wishiwashi (Solo Form)",
+    "types": [
+      "Water"
+    ],
+    "hp": 45,
+    "atk": 20,
+    "def": 20,
+    "spa": 25,
+    "spd": 25,
+    "spe": 40,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 746.2,
+    "name": "Wishiwashi (School Form)",
+    "types": [
+      "Water"
+    ],
+    "hp": 45,
+    "atk": 140,
+    "def": 130,
+    "spa": 140,
+    "spd": 135,
+    "spe": 30,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 768.1,
+    "name": "Golisopod (Mega Golisopod)",
+    "types": [
+      "Bug",
+      "Steel"
+    ],
+    "hp": 75,
+    "atk": 150,
+    "def": 175,
+    "spa": 70,
+    "spd": 120,
+    "spe": 40,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Harden"
+      },
+      {
+        "level": 1,
+        "move": "Rollout"
+      },
+      {
+        "level": 4,
+        "move": "Rock Smash"
+      },
+      {
+        "level": 12,
+        "move": "Mud Shot"
+      },
+      {
+        "level": 16,
+        "move": "Aqua Jet"
+      },
+      {
+        "level": 20,
+        "move": "Iron Defense"
+      },
+      {
+        "level": 22,
+        "move": "Metal Claw"
+      },
+      {
+        "level": 26,
+        "move": "Screech"
+      },
+      {
+        "level": 28,
+        "move": "Slash"
+      },
+      {
+        "level": 30,
+        "move": "Drill Run"
+      },
+      {
+        "level": 32,
+        "move": "Leech Life"
+      },
+      {
+        "level": 36,
+        "move": "Iron Head"
+      },
+      {
+        "level": 42,
+        "move": "Pin Missile"
+      },
+      {
+        "level": 48,
+        "move": "Swords Dance"
+      },
+      {
+        "level": 53,
+        "move": "Liquidation"
+      }
+    ]
+  },
+  {
+    "id": 774.1,
+    "name": "Minior (Meteor Form)",
+    "types": [
+      "Rock",
+      "Flying"
+    ],
+    "hp": 60,
+    "atk": 60,
+    "def": 100,
+    "spa": 60,
+    "spd": 100,
+    "spe": 60,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 774.2,
+    "name": "Minior (Core Form)",
+    "types": [
+      "Rock",
+      "Flying"
+    ],
+    "hp": 60,
+    "atk": 100,
+    "def": 60,
+    "spa": 100,
+    "spd": 60,
+    "spe": 120,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 780.1,
+    "name": "Drampa (Mega Drampa)",
+    "types": [
+      "Normal",
+      "Dragon"
+    ],
+    "hp": 78,
+    "atk": 85,
+    "def": 110,
+    "spa": 160,
+    "spd": 116,
+    "spe": 36,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Leer"
+      },
+      {
+        "level": 1,
+        "move": "Twister"
+      },
+      {
+        "level": 5,
+        "move": "Protect"
+      },
+      {
+        "level": 10,
+        "move": "Glare"
+      },
+      {
+        "level": 15,
+        "move": "Safeguard"
+      },
+      {
+        "level": 20,
+        "move": "Dragon Breath"
+      },
+      {
+        "level": 25,
+        "move": "Icy Wind"
+      },
+      {
+        "level": 28,
+        "move": "Body Slam"
+      },
+      {
+        "level": 32,
+        "move": "Amnesia"
+      },
+      {
+        "level": 35,
+        "move": "Dragon Pulse"
+      },
+      {
+        "level": 40,
+        "move": "Light Screen"
+      },
+      {
+        "level": 44,
+        "move": "Fly"
+      },
+      {
+        "level": 50,
+        "move": "Hyper Voice"
+      },
+      {
+        "level": 54,
+        "move": "Outrage"
+      },
+      {
+        "level": 56,
+        "move": "Dragon Rush"
+      }
+    ]
+  },
+  {
+    "id": 800.1,
+    "name": "Necrozma (Dusk Mane Necrozma)",
+    "types": [
+      "Psychic",
+      "Steel"
+    ],
+    "hp": 97,
+    "atk": 157,
+    "def": 127,
+    "spa": 113,
+    "spd": 109,
+    "spe": 77,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 800.2,
+    "name": "Necrozma (Dawn Wings Necrozma)",
+    "types": [
+      "Psychic",
+      "Ghost"
+    ],
+    "hp": 97,
+    "atk": 113,
+    "def": 109,
+    "spa": 157,
+    "spd": 127,
+    "spe": 77,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 800.3,
+    "name": "Necrozma (Ultra Necrozma)",
+    "types": [
+      "Psychic",
+      "Dragon"
+    ],
+    "hp": 97,
+    "atk": 167,
+    "def": 97,
+    "spa": 167,
+    "spd": 97,
+    "spe": 129,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 801.1,
+    "name": "Magearna (Mega Magearna)",
+    "types": [
+      "Steel",
+      "Fairy"
+    ],
+    "hp": 80,
+    "atk": 125,
+    "def": 115,
+    "spa": 170,
+    "spd": 115,
+    "spe": 95,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Disarming Voice"
+      },
+      {
+        "level": 1,
+        "move": "Metal Sound"
+      },
+      {
+        "level": 12,
+        "move": "Rollout"
+      },
+      {
+        "level": 14,
+        "move": "Draining Kiss"
+      },
+      {
+        "level": 18,
+        "move": "Iron Defense"
+      },
+      {
+        "level": 24,
+        "move": "Charge Beam"
+      },
+      {
+        "level": 28,
+        "move": "Eerie Impulse"
+      },
+      {
+        "level": 30,
+        "move": "Psybeam"
+      },
+      {
+        "level": 36,
+        "move": "Tri Attack"
+      },
+      {
+        "level": 42,
+        "move": "Magnet Bomb"
+      },
+      {
+        "level": 50,
+        "move": "Psyshock"
+      },
+      {
+        "level": 60,
+        "move": "Iron Head"
+      },
+      {
+        "level": 66,
+        "move": "Aura Sphere"
+      },
+      {
+        "level": 72,
+        "move": "Flash Cannon"
+      },
+      {
+        "level": 80,
+        "move": "Fleur Cannon"
+      },
+      {
+        "level": 84,
+        "move": "Zap Cannon"
+      }
+    ]
+  },
+  {
+    "id": 807.1,
+    "name": "Zeraora (Mega Zeraora)",
+    "types": [
+      "Electric"
+    ],
+    "hp": 88,
+    "atk": 157,
+    "def": 75,
+    "spa": 147,
+    "spd": 80,
+    "spe": 153,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Fake Out"
+      },
+      {
+        "level": 1,
+        "move": "Quick Attack"
+      },
+      {
+        "level": 1,
+        "move": "Spark"
+      },
+      {
+        "level": 10,
+        "move": "Snarl"
+      },
+      {
+        "level": 15,
+        "move": "Power-Up Punch"
+      },
+      {
+        "level": 18,
+        "move": "Brutal Swing"
+      },
+      {
+        "level": 24,
+        "move": "Slash"
+      },
+      {
+        "level": 32,
+        "move": "Volt Switch"
+      },
+      {
+        "level": 40,
+        "move": "Charge"
+      },
+      {
+        "level": 48,
+        "move": "Thunder Punch"
+      },
+      {
+        "level": 56,
+        "move": "Dynamic Punch"
+      },
+      {
+        "level": 64,
+        "move": "Discharge"
+      },
+      {
+        "level": 72,
+        "move": "Wild Charge"
+      },
+      {
+        "level": 80,
+        "move": "Agility"
+      },
+      {
+        "level": 84,
+        "move": "Plasma Fists"
+      },
+      {
+        "level": 96,
+        "move": "Close Combat"
+      }
+    ]
+  },
+  {
+    "id": 849.1,
+    "name": "Toxtricity (Amped Form)",
+    "types": [
+      "Electric",
+      "Poison"
+    ],
+    "hp": 75,
+    "atk": 98,
+    "def": 70,
+    "spa": 114,
+    "spd": 70,
+    "spe": 75,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 849.2,
+    "name": "Toxtricity (Low Key Form)",
+    "types": [
+      "Electric",
+      "Poison"
+    ],
+    "hp": 75,
+    "atk": 98,
+    "def": 70,
+    "spa": 114,
+    "spd": 70,
+    "spe": 75,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 870.1,
+    "name": "Falinks (Mega Falinks)",
+    "types": [
+      "Fighting"
+    ],
+    "hp": 65,
+    "atk": 135,
+    "def": 135,
+    "spa": 70,
+    "spd": 65,
+    "spe": 100,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Protect"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 5,
+        "move": "Rock Smash"
+      },
+      {
+        "level": 10,
+        "move": "Focus Energy"
+      },
+      {
+        "level": 15,
+        "move": "Headbutt"
+      },
+      {
+        "level": 20,
+        "move": "Bulk Up"
+      },
+      {
+        "level": 25,
+        "move": "Endure"
+      },
+      {
+        "level": 32,
+        "move": "Iron Head"
+      },
+      {
+        "level": 36,
+        "move": "Brick Break"
+      },
+      {
+        "level": 40,
+        "move": "No Retreat"
+      },
+      {
+        "level": 43,
+        "move": "Iron Defense"
+      },
+      {
+        "level": 48,
+        "move": "Close Combat"
+      },
+      {
+        "level": 52,
+        "move": "Megahorn"
+      }
+    ]
+  },
+  {
+    "id": 875.1,
+    "name": "Eiscue (Ice Face)",
+    "types": [
+      "Ice"
+    ],
+    "hp": 75,
+    "atk": 80,
+    "def": 110,
+    "spa": 65,
+    "spd": 90,
+    "spe": 50,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 875.2,
+    "name": "Eiscue (Noice Face)",
+    "types": [
+      "Ice"
+    ],
+    "hp": 75,
+    "atk": 80,
+    "def": 70,
+    "spa": 65,
+    "spd": 50,
+    "spe": 130,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 877.1,
+    "name": "Morpeko (Full Belly Mode)",
+    "types": [
+      "Electric",
+      "Dark"
+    ],
+    "hp": 58,
+    "atk": 95,
+    "def": 58,
+    "spa": 70,
+    "spd": 58,
+    "spe": 97,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Tail Whip"
+      },
+      {
+        "level": 1,
+        "move": "Thunder Shock"
+      },
+      {
+        "level": 5,
+        "move": "Leer"
+      },
+      {
+        "level": 7,
+        "move": "Swagger"
+      },
+      {
+        "level": 12,
+        "move": "Quick Attack"
+      },
+      {
+        "level": 18,
+        "move": "Bite"
+      },
+      {
+        "level": 25,
+        "move": "Charge"
+      },
+      {
+        "level": 30,
+        "move": "Spark"
+      },
+      {
+        "level": 33,
+        "move": "Parting Shot"
+      },
+      {
+        "level": 38,
+        "move": "Super Fang"
+      },
+      {
+        "level": 40,
+        "move": "Torment"
+      },
+      {
+        "level": 44,
+        "move": "Agility"
+      },
+      {
+        "level": 48,
+        "move": "Bullet Seed"
+      },
+      {
+        "level": 52,
+        "move": "Crunch"
+      },
+      {
+        "level": 57,
+        "move": "Aura Wheel"
+      }
+    ]
+  },
+  {
+    "id": 877.2,
+    "name": "Morpeko (Hangry Mode)",
+    "types": [
+      "Electric",
+      "Dark"
+    ],
+    "hp": 58,
+    "atk": 95,
+    "def": 58,
+    "spa": 70,
+    "spd": 58,
+    "spe": 97,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Tail Whip"
+      },
+      {
+        "level": 1,
+        "move": "Thunder Shock"
+      },
+      {
+        "level": 5,
+        "move": "Leer"
+      },
+      {
+        "level": 7,
+        "move": "Swagger"
+      },
+      {
+        "level": 12,
+        "move": "Quick Attack"
+      },
+      {
+        "level": 18,
+        "move": "Bite"
+      },
+      {
+        "level": 25,
+        "move": "Charge"
+      },
+      {
+        "level": 30,
+        "move": "Spark"
+      },
+      {
+        "level": 33,
+        "move": "Parting Shot"
+      },
+      {
+        "level": 38,
+        "move": "Super Fang"
+      },
+      {
+        "level": 40,
+        "move": "Torment"
+      },
+      {
+        "level": 44,
+        "move": "Agility"
+      },
+      {
+        "level": 48,
+        "move": "Bullet Seed"
+      },
+      {
+        "level": 52,
+        "move": "Crunch"
+      },
+      {
+        "level": 57,
+        "move": "Aura Wheel"
+      }
+    ]
+  },
+  {
+    "id": 888.1,
+    "name": "Zacian (Hero of Many Battles)",
+    "types": [
+      "Fairy"
+    ],
+    "hp": 92,
+    "atk": 120,
+    "def": 115,
+    "spa": 80,
+    "spd": 115,
+    "spe": 138,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 888.2,
+    "name": "Zacian (Crowned Sword)",
+    "types": [
+      "Fairy",
+      "Steel"
+    ],
+    "hp": 92,
+    "atk": 150,
+    "def": 115,
+    "spa": 80,
+    "spd": 115,
+    "spe": 148,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 889.1,
+    "name": "Zamazenta (Hero of Many Battles)",
+    "types": [
+      "Fighting"
+    ],
+    "hp": 92,
+    "atk": 120,
+    "def": 115,
+    "spa": 80,
+    "spd": 115,
+    "spe": 138,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 889.2,
+    "name": "Zamazenta (Crowned Shield)",
+    "types": [
+      "Fighting",
+      "Steel"
+    ],
+    "hp": 92,
+    "atk": 120,
+    "def": 140,
+    "spa": 80,
+    "spd": 140,
+    "spe": 128,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 890.1,
+    "name": "Eternatus (Eternamax)",
+    "types": [
+      "Poison",
+      "Dragon"
+    ],
+    "hp": 255,
+    "atk": 115,
+    "def": 250,
+    "spa": 125,
+    "spd": 250,
+    "spe": 130,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 892.1,
+    "name": "Urshifu (Single Strike Style)",
+    "types": [
+      "Fighting",
+      "Dark"
+    ],
+    "hp": 100,
+    "atk": 130,
+    "def": 100,
+    "spa": 63,
+    "spd": 60,
+    "spe": 97,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 892.2,
+    "name": "Urshifu (Rapid Strike Style)",
+    "types": [
+      "Fighting",
+      "Water"
+    ],
+    "hp": 100,
+    "atk": 130,
+    "def": 100,
+    "spa": 63,
+    "spd": 60,
+    "spe": 97,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 898.1,
+    "name": "Calyrex (Ice Rider)",
+    "types": [
+      "Psychic",
+      "Ice"
+    ],
+    "hp": 100,
+    "atk": 165,
+    "def": 150,
+    "spa": 85,
+    "spd": 130,
+    "spe": 50,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 898.2,
+    "name": "Calyrex (Shadow Rider)",
+    "types": [
+      "Psychic",
+      "Ghost"
+    ],
+    "hp": 100,
+    "atk": 85,
+    "def": 80,
+    "spa": 165,
+    "spd": 100,
+    "spe": 150,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 901.1,
+    "name": "Ursaluna (Bloodmoon)",
+    "types": [
+      "Ground",
+      "Normal"
+    ],
+    "hp": 113,
+    "atk": 70,
+    "def": 120,
+    "spa": 135,
+    "spd": 65,
+    "spe": 52,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 905.1,
+    "name": "Enamorus (Incarnate Forme)",
+    "types": [
+      "Fairy",
+      "Flying"
+    ],
+    "hp": 74,
+    "atk": 115,
+    "def": 70,
+    "spa": 135,
+    "spd": 80,
+    "spe": 106,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 905.2,
+    "name": "Enamorus (Therian Forme)",
+    "types": [
+      "Fairy",
+      "Flying"
+    ],
+    "hp": 74,
+    "atk": 115,
+    "def": 110,
+    "spa": 135,
+    "spd": 100,
+    "spe": 46,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 925.1,
+    "name": "Maushold (Family of Four)",
+    "types": [
+      "Normal"
+    ],
+    "hp": 74,
+    "atk": 75,
+    "def": 70,
+    "spa": 65,
+    "spd": 75,
+    "spe": 111,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 925.2,
+    "name": "Maushold (Family of Three)",
+    "types": [
+      "Normal"
+    ],
+    "hp": 74,
+    "atk": 75,
+    "def": 70,
+    "spa": 65,
+    "spd": 75,
+    "spe": 111,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 931.1,
+    "name": "Squawkabilly (Green Plumage)",
+    "types": [
+      "Normal",
+      "Flying"
+    ],
+    "hp": 82,
+    "atk": 96,
+    "def": 51,
+    "spa": 45,
+    "spd": 51,
+    "spe": 92,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Growl"
+      },
+      {
+        "level": 1,
+        "move": "Peck"
+      },
+      {
+        "level": 6,
+        "move": "Quick Attack"
+      },
+      {
+        "level": 10,
+        "move": "Torment"
+      },
+      {
+        "level": 13,
+        "move": "Aerial Ace"
+      },
+      {
+        "level": 20,
+        "move": "Taunt"
+      },
+      {
+        "level": 24,
+        "move": "Feather Dance"
+      },
+      {
+        "level": 27,
+        "move": "Mimic"
+      },
+      {
+        "level": 30,
+        "move": "Fly"
+      },
+      {
+        "level": 34,
+        "move": "Facade"
+      },
+      {
+        "level": 38,
+        "move": "Swagger"
+      },
+      {
+        "level": 40,
+        "move": "Lunge"
+      },
+      {
+        "level": 42,
+        "move": "Brave Bird"
+      },
+      {
+        "level": 46,
+        "move": "Air Slash"
+      },
+      {
+        "level": 52,
+        "move": "Parting Shot"
+      }
+    ]
+  },
+  {
+    "id": 931.2,
+    "name": "Squawkabilly (Blue Plumage)",
+    "types": [
+      "Normal",
+      "Flying"
+    ],
+    "hp": 82,
+    "atk": 96,
+    "def": 51,
+    "spa": 45,
+    "spd": 51,
+    "spe": 92,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Growl"
+      },
+      {
+        "level": 1,
+        "move": "Peck"
+      },
+      {
+        "level": 6,
+        "move": "Quick Attack"
+      },
+      {
+        "level": 10,
+        "move": "Torment"
+      },
+      {
+        "level": 13,
+        "move": "Aerial Ace"
+      },
+      {
+        "level": 20,
+        "move": "Taunt"
+      },
+      {
+        "level": 24,
+        "move": "Feather Dance"
+      },
+      {
+        "level": 27,
+        "move": "Mimic"
+      },
+      {
+        "level": 30,
+        "move": "Fly"
+      },
+      {
+        "level": 34,
+        "move": "Facade"
+      },
+      {
+        "level": 38,
+        "move": "Swagger"
+      },
+      {
+        "level": 40,
+        "move": "Lunge"
+      },
+      {
+        "level": 42,
+        "move": "Brave Bird"
+      },
+      {
+        "level": 46,
+        "move": "Air Slash"
+      },
+      {
+        "level": 52,
+        "move": "Parting Shot"
+      }
+    ]
+  },
+  {
+    "id": 931.3,
+    "name": "Squawkabilly (Yellow Plumage)",
+    "types": [
+      "Normal",
+      "Flying"
+    ],
+    "hp": 82,
+    "atk": 96,
+    "def": 51,
+    "spa": 45,
+    "spd": 51,
+    "spe": 92,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Growl"
+      },
+      {
+        "level": 1,
+        "move": "Peck"
+      },
+      {
+        "level": 6,
+        "move": "Quick Attack"
+      },
+      {
+        "level": 10,
+        "move": "Torment"
+      },
+      {
+        "level": 13,
+        "move": "Aerial Ace"
+      },
+      {
+        "level": 20,
+        "move": "Taunt"
+      },
+      {
+        "level": 24,
+        "move": "Feather Dance"
+      },
+      {
+        "level": 27,
+        "move": "Mimic"
+      },
+      {
+        "level": 30,
+        "move": "Fly"
+      },
+      {
+        "level": 34,
+        "move": "Facade"
+      },
+      {
+        "level": 38,
+        "move": "Swagger"
+      },
+      {
+        "level": 40,
+        "move": "Lunge"
+      },
+      {
+        "level": 42,
+        "move": "Brave Bird"
+      },
+      {
+        "level": 46,
+        "move": "Air Slash"
+      },
+      {
+        "level": 52,
+        "move": "Parting Shot"
+      }
+    ]
+  },
+  {
+    "id": 931.4,
+    "name": "Squawkabilly (White Plumage)",
+    "types": [
+      "Normal",
+      "Flying"
+    ],
+    "hp": 82,
+    "atk": 96,
+    "def": 51,
+    "spa": 45,
+    "spd": 51,
+    "spe": 92,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Growl"
+      },
+      {
+        "level": 1,
+        "move": "Peck"
+      },
+      {
+        "level": 6,
+        "move": "Quick Attack"
+      },
+      {
+        "level": 10,
+        "move": "Torment"
+      },
+      {
+        "level": 13,
+        "move": "Aerial Ace"
+      },
+      {
+        "level": 20,
+        "move": "Taunt"
+      },
+      {
+        "level": 24,
+        "move": "Feather Dance"
+      },
+      {
+        "level": 27,
+        "move": "Mimic"
+      },
+      {
+        "level": 30,
+        "move": "Fly"
+      },
+      {
+        "level": 34,
+        "move": "Facade"
+      },
+      {
+        "level": 38,
+        "move": "Swagger"
+      },
+      {
+        "level": 40,
+        "move": "Lunge"
+      },
+      {
+        "level": 42,
+        "move": "Brave Bird"
+      },
+      {
+        "level": 46,
+        "move": "Air Slash"
+      },
+      {
+        "level": 52,
+        "move": "Parting Shot"
+      }
+    ]
+  },
+  {
+    "id": 952.1,
+    "name": "Scovillain (Mega Scovillain)",
+    "types": [
+      "Grass",
+      "Fire"
+    ],
+    "hp": 65,
+    "atk": 138,
+    "def": 85,
+    "spa": 138,
+    "spd": 85,
+    "spe": 75,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Leafage"
+      },
+      {
+        "level": 1,
+        "move": "Leer"
+      },
+      {
+        "level": 4,
+        "move": "Bite"
+      },
+      {
+        "level": 8,
+        "move": "Rollout"
+      },
+      {
+        "level": 10,
+        "move": "Growth"
+      },
+      {
+        "level": 13,
+        "move": "Razor Leaf"
+      },
+      {
+        "level": 16,
+        "move": "Leech Seed"
+      },
+      {
+        "level": 21,
+        "move": "Bullet Seed"
+      },
+      {
+        "level": 24,
+        "move": "Headbutt"
+      },
+      {
+        "level": 28,
+        "move": "Zen Headbutt"
+      },
+      {
+        "level": 32,
+        "move": "Magical Leaf"
+      },
+      {
+        "level": 35,
+        "move": "Super Fang"
+      },
+      {
+        "level": 38,
+        "move": "Crunch"
+      },
+      {
+        "level": 44,
+        "move": "Seed Bomb"
+      },
+      {
+        "level": 48,
+        "move": "Overheat"
+      },
+      {
+        "level": 48,
+        "move": "Solar Beam"
+      }
+    ]
+  },
+  {
+    "id": 964.1,
+    "name": "Palafin (Zero Form)",
+    "types": [
+      "Water"
+    ],
+    "hp": 100,
+    "atk": 70,
+    "def": 72,
+    "spa": 53,
+    "spd": 62,
+    "spe": 100,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 964.2,
+    "name": "Palafin (Hero Form)",
+    "types": [
+      "Water"
+    ],
+    "hp": 100,
+    "atk": 160,
+    "def": 97,
+    "spa": 106,
+    "spd": 87,
+    "spe": 100,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 970.1,
+    "name": "Glimmora (Mega Glimmora)",
+    "types": [
+      "Rock",
+      "Poison"
+    ],
+    "hp": 83,
+    "atk": 90,
+    "def": 105,
+    "spa": 150,
+    "spd": 96,
+    "spe": 101,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Harden"
+      },
+      {
+        "level": 1,
+        "move": "Rock Throw"
+      },
+      {
+        "level": 1,
+        "move": "Spiky Shield"
+      },
+      {
+        "level": 7,
+        "move": "Acid Spray"
+      },
+      {
+        "level": 11,
+        "move": "Ancient Power"
+      },
+      {
+        "level": 14,
+        "move": "Confuse Ray"
+      },
+      {
+        "level": 18,
+        "move": "Stealth Rock"
+      },
+      {
+        "level": 25,
+        "move": "Rock Blast"
+      },
+      {
+        "level": 29,
+        "move": "Self-Destruct"
+      },
+      {
+        "level": 33,
+        "move": "Rock Slide"
+      },
+      {
+        "level": 37,
+        "move": "Power Gem"
+      },
+      {
+        "level": 41,
+        "move": "Acid Armor"
+      },
+      {
+        "level": 46,
+        "move": "Sludge Wave"
+      },
+      {
+        "level": 55,
+        "move": "Explosion"
+      }
+    ]
+  },
+  {
+    "id": 978.1,
+    "name": "Tatsugiri (Curly Form)",
+    "types": [
+      "Dragon",
+      "Water"
+    ],
+    "hp": 68,
+    "atk": 50,
+    "def": 60,
+    "spa": 120,
+    "spd": 95,
+    "spe": 82,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Splash"
+      },
+      {
+        "level": 1,
+        "move": "Water Gun"
+      },
+      {
+        "level": 6,
+        "move": "Harden"
+      },
+      {
+        "level": 12,
+        "move": "Razor Wind"
+      },
+      {
+        "level": 17,
+        "move": "Water Pulse"
+      },
+      {
+        "level": 21,
+        "move": "Whirlpool"
+      },
+      {
+        "level": 25,
+        "move": "Mud Shot"
+      },
+      {
+        "level": 28,
+        "move": "Taunt"
+      },
+      {
+        "level": 34,
+        "move": "Mimic"
+      },
+      {
+        "level": 39,
+        "move": "Muddy Water"
+      },
+      {
+        "level": 43,
+        "move": "Nasty Plot"
+      },
+      {
+        "level": 47,
+        "move": "Dragon Rush"
+      },
+      {
+        "level": 52,
+        "move": "Dragon Pulse"
+      }
+    ]
+  },
+  {
+    "id": 978.2,
+    "name": "Tatsugiri (Droopy Form)",
+    "types": [
+      "Dragon",
+      "Water"
+    ],
+    "hp": 68,
+    "atk": 50,
+    "def": 60,
+    "spa": 120,
+    "spd": 95,
+    "spe": 82,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Splash"
+      },
+      {
+        "level": 1,
+        "move": "Water Gun"
+      },
+      {
+        "level": 6,
+        "move": "Harden"
+      },
+      {
+        "level": 12,
+        "move": "Razor Wind"
+      },
+      {
+        "level": 17,
+        "move": "Water Pulse"
+      },
+      {
+        "level": 21,
+        "move": "Whirlpool"
+      },
+      {
+        "level": 25,
+        "move": "Mud Shot"
+      },
+      {
+        "level": 28,
+        "move": "Taunt"
+      },
+      {
+        "level": 34,
+        "move": "Mimic"
+      },
+      {
+        "level": 39,
+        "move": "Muddy Water"
+      },
+      {
+        "level": 43,
+        "move": "Nasty Plot"
+      },
+      {
+        "level": 47,
+        "move": "Dragon Rush"
+      },
+      {
+        "level": 52,
+        "move": "Dragon Pulse"
+      }
+    ]
+  },
+  {
+    "id": 978.3,
+    "name": "Tatsugiri (Stretchy Form)",
+    "types": [
+      "Dragon",
+      "Water"
+    ],
+    "hp": 68,
+    "atk": 50,
+    "def": 60,
+    "spa": 120,
+    "spd": 95,
+    "spe": 82,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Splash"
+      },
+      {
+        "level": 1,
+        "move": "Water Gun"
+      },
+      {
+        "level": 6,
+        "move": "Harden"
+      },
+      {
+        "level": 12,
+        "move": "Razor Wind"
+      },
+      {
+        "level": 17,
+        "move": "Water Pulse"
+      },
+      {
+        "level": 21,
+        "move": "Whirlpool"
+      },
+      {
+        "level": 25,
+        "move": "Mud Shot"
+      },
+      {
+        "level": 28,
+        "move": "Taunt"
+      },
+      {
+        "level": 34,
+        "move": "Mimic"
+      },
+      {
+        "level": 39,
+        "move": "Muddy Water"
+      },
+      {
+        "level": 43,
+        "move": "Nasty Plot"
+      },
+      {
+        "level": 47,
+        "move": "Dragon Rush"
+      },
+      {
+        "level": 52,
+        "move": "Dragon Pulse"
+      }
+    ]
+  },
+  {
+    "id": 978.4,
+    "name": "Tatsugiri (Mega Tatsugiri)",
+    "types": [
+      "Dragon",
+      "Water"
+    ],
+    "hp": 68,
+    "atk": 65,
+    "def": 90,
+    "spa": 135,
+    "spd": 125,
+    "spe": 92,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Splash"
+      },
+      {
+        "level": 1,
+        "move": "Water Gun"
+      },
+      {
+        "level": 6,
+        "move": "Harden"
+      },
+      {
+        "level": 12,
+        "move": "Razor Wind"
+      },
+      {
+        "level": 17,
+        "move": "Water Pulse"
+      },
+      {
+        "level": 21,
+        "move": "Whirlpool"
+      },
+      {
+        "level": 25,
+        "move": "Mud Shot"
+      },
+      {
+        "level": 28,
+        "move": "Taunt"
+      },
+      {
+        "level": 34,
+        "move": "Mimic"
+      },
+      {
+        "level": 39,
+        "move": "Muddy Water"
+      },
+      {
+        "level": 43,
+        "move": "Nasty Plot"
+      },
+      {
+        "level": 47,
+        "move": "Dragon Rush"
+      },
+      {
+        "level": 52,
+        "move": "Dragon Pulse"
+      }
+    ]
+  },
+  {
+    "id": 982.1,
+    "name": "Dudunsparce (Two-Segment Form)",
+    "types": [
+      "Normal"
+    ],
+    "hp": 125,
+    "atk": 100,
+    "def": 80,
+    "spa": 85,
+    "spd": 75,
+    "spe": 55,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 982.2,
+    "name": "Dudunsparce (Three-Segment Form)",
+    "types": [
+      "Normal"
+    ],
+    "hp": 125,
+    "atk": 100,
+    "def": 80,
+    "spa": 85,
+    "spd": 75,
+    "spe": 55,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 998.1,
+    "name": "Baxcalibur (Mega Baxcalibur)",
+    "types": [
+      "Dragon",
+      "Ice"
+    ],
+    "hp": 115,
+    "atk": 175,
+    "def": 117,
+    "spa": 105,
+    "spd": 101,
+    "spe": 87,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Breaking Swipe"
+      },
+      {
+        "level": 1,
+        "move": "Leer"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      },
+      {
+        "level": 6,
+        "move": "Icy Wind"
+      },
+      {
+        "level": 12,
+        "move": "Dragon Breath"
+      },
+      {
+        "level": 18,
+        "move": "Focus Energy"
+      },
+      {
+        "level": 24,
+        "move": "Bite"
+      },
+      {
+        "level": 29,
+        "move": "Ice Fang"
+      },
+      {
+        "level": 32,
+        "move": "Dragon Claw"
+      },
+      {
+        "level": 36,
+        "move": "Take Down"
+      },
+      {
+        "level": 40,
+        "move": "Ice Beam"
+      },
+      {
+        "level": 44,
+        "move": "Crunch"
+      },
+      {
+        "level": 50,
+        "move": "Freeze-Dry"
+      },
+      {
+        "level": 54,
+        "move": "Icicle Crash"
+      },
+      {
+        "level": 60,
+        "move": "Dragon Rush"
+      },
+      {
+        "level": 65,
+        "move": "Ice Hammer"
+      }
+    ]
+  },
+  {
+    "id": 999.1,
+    "name": "Gimmighoul (Chest Form)",
+    "types": [
+      "Ghost"
+    ],
+    "hp": 45,
+    "atk": 30,
+    "def": 70,
+    "spa": 75,
+    "spd": 70,
+    "spe": 10,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Confuse Ray"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      }
+    ]
+  },
+  {
+    "id": 999.2,
+    "name": "Gimmighoul (Roaming Form)",
+    "types": [
+      "Ghost"
+    ],
+    "hp": 45,
+    "atk": 30,
+    "def": 25,
+    "spa": 75,
+    "spd": 45,
+    "spe": 80,
+    "evolutions": [],
+    "learnset": [
+      {
+        "level": 1,
+        "move": "Confuse Ray"
+      },
+      {
+        "level": 1,
+        "move": "Tackle"
+      }
+    ]
+  },
+  {
+    "id": 1017.1,
+    "name": "Ogerpon (Teal Mask)",
+    "types": [
+      "Grass"
+    ],
+    "hp": 80,
+    "atk": 120,
+    "def": 84,
+    "spa": 60,
+    "spd": 96,
+    "spe": 110,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 1017.2,
+    "name": "Ogerpon (Wellspring Mask)",
+    "types": [
+      "Grass",
+      "Water"
+    ],
+    "hp": 80,
+    "atk": 120,
+    "def": 84,
+    "spa": 60,
+    "spd": 96,
+    "spe": 110,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 1017.3,
+    "name": "Ogerpon (Hearthflame Mask)",
+    "types": [
+      "Grass",
+      "Fire"
+    ],
+    "hp": 80,
+    "atk": 120,
+    "def": 84,
+    "spa": 60,
+    "spd": 96,
+    "spe": 110,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 1017.4,
+    "name": "Ogerpon (Cornerstone Mask)",
+    "types": [
+      "Grass",
+      "Rock"
+    ],
+    "hp": 80,
+    "atk": 120,
+    "def": 84,
+    "spa": 60,
+    "spd": 96,
+    "spe": 110,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 1024.1,
+    "name": "Terapagos (Normal Form)",
+    "types": [
+      "Normal"
+    ],
+    "hp": 90,
+    "atk": 65,
+    "def": 85,
+    "spa": 65,
+    "spd": 85,
+    "spe": 60,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 1024.2,
+    "name": "Terapagos (Terastal Form)",
+    "types": [
+      "Normal"
+    ],
+    "hp": 95,
+    "atk": 95,
+    "def": 110,
+    "spa": 105,
+    "spd": 110,
+    "spe": 85,
+    "evolutions": [],
+    "learnset": []
+  },
+  {
+    "id": 1024.3,
+    "name": "Terapagos (Stellar Form)",
+    "types": [
+      "Normal"
+    ],
+    "hp": 160,
+    "atk": 105,
+    "def": 110,
+    "spa": 130,
+    "spd": 110,
+    "spe": 85,
+    "evolutions": [],
+    "learnset": []
   }
 ]

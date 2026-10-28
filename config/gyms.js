@@ -5718,6 +5718,22 @@ const gyms = [
         ]
       }
     ]
+  },
+  {
+    "id": "galarchampion",
+    "name": "Pokemon League",
+    "leader": "Leon",
+    "levelRequirement": 0,
+    "trainers": [
+      {
+        "name": "Galar Champion",
+        "team": [
+          { "id": 812, "level": 70 },
+          { "id": 815, "level": 70 },
+          { "id": 818, "level": 70 }
+        ]
+      }
+    ]
   }
 ];
 
