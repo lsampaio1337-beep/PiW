@@ -1,4 +1,5 @@
 import { kalosRoutes, kalosUnlocks } from './kalosRoutes.js';
+import { hisuiRoutes, hisuiUnlocks } from './hisuiRoutes.js';
 const routes = [
   {
     "name": "Spot",
@@ -1584,6 +1585,8 @@ const routes = [
 ];
 
 export const unlocks = [
+  ...kalosUnlocks,
+  ...hisuiUnlocks,
   { "challengeName": "Challenge 1", "areaId": "Route 1", "unlocks": ["Route 2"], "requirements": { "defeatCountRoute": { "route": "Route 1", "count": 25 } } },
   { "challengeName": "Challenge 2", "areaId": "Route 2", "unlocks": ["Viridian Forest"], "requirements": { "catchSpecies": [{ "species": "Nidoran♀", "count": 1 }, { "species": "Nidoran♂", "count": 1 }] } },
   { "challengeName": "Challenge 3", "areaId": "Viridian Forest", "unlocks": ["Pewter Gym"], "requirements": { "catchByQualityAndType": { "type": "Bug", "quality": "Rare", "count": 1 } } },

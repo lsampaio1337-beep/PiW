@@ -5721,4 +5721,145 @@ const gyms = [
   }
 ];
 
+
+
+gyms.push({
+  "id": "hisui_gym_kleavor",
+  "name": "Kleavor Badge",
+    "badgeCount": 65,
+  "leader": "Kleavor",
+  "levelRequirement": 1,
+  "trainers": [
+    {
+      "name": "Leader Kleavor",
+      "team": [
+        {
+          "id": 900,
+          "level": 15
+        }
+      ]
+    }
+  ]
+});
+gyms.push({
+  "id": "hisui_gym_lilligant",
+  "name": "Lilligant Badge",
+    "badgeCount": 66,
+  "leader": "Lilligant",
+  "levelRequirement": 1,
+  "trainers": [
+    {
+      "name": "Leader Lilligant",
+      "team": [
+        {
+          "id": 549,
+          "level": 30
+        }
+      ]
+    }
+  ]
+});
+gyms.push({
+  "id": "hisui_gym_arcanine",
+  "name": "Arcanine Badge",
+    "badgeCount": 67,
+  "leader": "Arcanine",
+  "levelRequirement": 1,
+  "trainers": [
+    {
+      "name": "Leader Arcanine",
+      "team": [
+        {
+          "id": 59,
+          "level": 40
+        }
+      ]
+    }
+  ]
+});
+gyms.push({
+  "id": "hisui_gym_warden_ingo",
+  "name": "Warden Ingo Badge",
+    "badgeCount": 68,
+  "leader": "Warden Ingo",
+  "levelRequirement": 1,
+  "trainers": [
+    {
+      "name": "Leader Warden Ingo",
+      "team": [
+        {
+          "id": 66,
+          "level": 45
+        },
+        {
+          "id": 476,
+          "level": 45
+        }
+      ]
+    }
+  ]
+});
+gyms.push({
+  "id": "hisui_gym_electrode",
+  "name": "Electrode Badge",
+    "badgeCount": 69,
+  "leader": "Electrode",
+  "levelRequirement": 1,
+  "trainers": [
+    {
+      "name": "Leader Electrode",
+      "team": [
+        {
+          "id": 101,
+          "level": 50
+        }
+      ]
+    }
+  ]
+});
+gyms.push({
+  "id": "hisui_gym_avalugg",
+  "name": "Avalugg Badge",
+    "badgeCount": 70,
+  "leader": "Avalugg",
+  "levelRequirement": 1,
+  "trainers": [
+    {
+      "name": "Leader Avalugg",
+      "team": [
+        {
+          "id": 713,
+          "level": 70
+        }
+      ]
+    }
+  ]
+});
+gyms.push({
+  "id": "hisui_gym_etertime",
+  "name": "Etertime Badge",
+    "badgeCount": 71,
+  "leader": "Etertime",
+  "levelRequirement": 1,
+  "trainers": [
+    {
+      "name": "Leader Etertime",
+      "team": [
+        {
+          "id": 483,
+          "level": 120
+        },
+        {
+          "id": 484,
+          "level": 120
+        },
+        {
+          "id": 487,
+          "level": 120
+        }
+      ]
+    }
+  ]
+});
+
 export default gyms;
