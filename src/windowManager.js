@@ -74,7 +74,7 @@ export class WindowManager {
                                 'clearPokemonFilter', 'clickEmptyBreedSlot', 'close', 'closeBackpackModal', 'closeBackpackPocket',
                                 'closeModal', 'completeChallenge', 'concludeProfTutorial', 'confirmTokenItemSelect',
                                 'dismissBonusCandyMessage', 'dismissDaycareMessage', 'dragOver', 'dragStart', 'enterSafariZone',
-                                'evolvePokemon', 'exportLog', 'forceNextEncounter', 'giveFreeTokens', 'handleDrop',
+                                'evolvePokemon', 'exportLog', 'forceNextEncounter', 'forceNextCapture', 'giveFreeTokens', 'handleDrop',
                                 'handleGameSpeedSlider', 'hideMapTooltip', 'initMultiplayerView',
                                 'marketDeselectAllPokemonForSale', 'marketSelectAllPokemonForSale', 'marketSellSelectedPokemon',
                                 'navigateToLocation', 'openDittoTransformModal', 'openPokeMarketBuy', 'openPokeMarketSell',
