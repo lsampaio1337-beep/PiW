@@ -5735,6 +5735,26 @@ const gyms = [
       }
     ]
   }
+,
+  {
+    "id": "hisuichampion",
+    "name": "Gym of Etertime",
+    "leader": "Volo",
+    "levelRequirement": 0,
+    "trainers": [
+      {
+        "name": "Hisui Champion",
+        "team": [
+          { "id": 468, "level": 80 },
+          { "id": 442, "level": 80 },
+          { "id": 448, "level": 80 },
+          { "id": 407, "level": 80 },
+          { "id": 68, "level": 80 },
+          { "id": 487, "level": 85 }
+        ]
+      }
+    ]
+  }
 ];
 
 export default gyms;
