@@ -240,6 +240,12 @@ input[type="number"] {
 }
 
 /* QTier Glow Effects */
+.glow-legendary {
+    filter: drop-shadow(0 -1px 2px #FFA500)
+            drop-shadow(1px 0 2px #FFA500)
+            drop-shadow(0 1px 2px #FFA500)
+            drop-shadow(-1px 0 2px #FFA500);
+}
 .glow-shiny {
     filter: drop-shadow(0 -1px 2px #ff0000)
             drop-shadow(1px 0 2px #ffff00)

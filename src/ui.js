@@ -1291,7 +1291,7 @@ export function switchView(viewName) {
             p2.textContent = 'You can adjust pokemon on daycare here or directly in your backpack.';
 
             const p3 = document.createElement('p');
-            p3.textContent = `In order to Breed, you need 2 Pokémons with the same Quality Value. They will generate an egg that will hatch after ${breedBattles} fights. You can drag 2 Pokémons to the Breed Spot or you can click on Breed Spot to automatically filter Pokémons that can be inserted there. The egg will hatch and the Pokémon will have an increased Quality Value of a random number between 0 and 0.1 to a maximum of 1.99, keeping the highest SumIV of both parents. Remember that the process can’t be interrupted.`;
+            p3.textContent = `In order to Breed, you need 2 Pokémons with a Quality Value difference of at most 0.05. They will generate an egg that will hatch after ${breedBattles} fights. You can drag 2 Pokémons to the Breed Spot or you can click on Breed Spot to automatically filter Pokémons that can be inserted there. The egg will hatch and the Pokémon will have an increased Quality Value of a random number between 0 and 0.05 to a maximum of 1.99 (or 2.50 for Shinies), keeping the highest SumIV of both parents. Remember that the process can’t be interrupted.`;
 
             const p4 = document.createElement('p');
             p4.textContent = `To Train, you just need to insert the desired Pokémon in the Train Spot. It will train its SumIV and it will gain +1 point in it every ${trainBattles} fights.`;
@@ -1306,7 +1306,7 @@ export function switchView(viewName) {
         if (trainBtn) trainBtn.title = `Insert any Pokémon and gain +1 SumIV after ${trainBattles} fights.`;
 
         const breedBtn = document.getElementById('btn-daycare-breed');
-        if (breedBtn) breedBtn.title = `Insert 2 Pokémons with same Quality Value to increase it to a random number between 0 and 0.1 to a maximum of 1.99 after ${breedBattles} fights.`;
+        if (breedBtn) breedBtn.title = `Insert 2 Pokémons with a Quality Value difference of at most 0.05 to increase it to a random number between 0 and 0.05 to a maximum of 1.99 (2.50 for Shinies) after ${breedBattles} fights.`;
     }
 }
 

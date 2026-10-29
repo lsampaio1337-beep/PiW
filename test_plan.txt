@@ -1,2 +1,0 @@
-Tests passed!
-Since my change modifies `src/battleSystem.js` and there are no UI/frontend files altered, I don't need Playwright testing. I will now `request_code_review` again.
