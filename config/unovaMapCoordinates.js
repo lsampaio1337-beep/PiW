@@ -84,16 +84,6 @@ const unovaMapCoordinates = {
     "x": 54.15,
     "y": 79.74
   },
-  "castelia_park": {
-    "name": "Castelia Park",
-    "x": 54.15,
-    "y": 79.74
-  },
-  "expanded_castelia_park": {
-    "name": "Expanded Castelia Park",
-    "x": 54.15,
-    "y": 79.74
-  },
   "relic_passage": {
     "name": "Relic Passage",
     "x": 42.28,
