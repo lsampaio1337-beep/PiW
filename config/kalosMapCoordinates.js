@@ -428,5 +428,17 @@ export const kalosMapCoordinates = {
     "name": "Garden Chambers (Secret Forest North)",
     "x": 50,
     "y": 100
+  },
+  "Keys to Eternal Fight": {
+    "name": "Keys to Eternal Fight",
+    "x": 48,
+    "y": 48,
+    "type": "poi"
+  },
+  "The Eternal Fight": {
+    "name": "The Eternal Fight",
+    "x": 48,
+    "y": 48,
+    "type": "poi"
   }
 };
