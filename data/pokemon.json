@@ -53,7 +53,10 @@
       }
     ],
     "kanto_id": 1,
-    "johto_id": 226
+    "johto_id": 1,
+    "kalos_id": 80,
+    "galar_id": 431,
+    "paldea_id": 585
   },
   {
     "id": 2,
@@ -109,7 +112,10 @@
       }
     ],
     "kanto_id": 2,
-    "johto_id": 227
+    "johto_id": 2,
+    "kalos_id": 81,
+    "galar_id": 432,
+    "paldea_id": 586
   },
   {
     "id": 3,
@@ -160,7 +166,10 @@
       }
     ],
     "kanto_id": 3,
-    "johto_id": 228
+    "johto_id": 3,
+    "kalos_id": 82,
+    "galar_id": 433,
+    "paldea_id": 587
   },
   {
     "id": 4,
@@ -219,7 +228,10 @@
       }
     ],
     "kanto_id": 4,
-    "johto_id": 229
+    "johto_id": 4,
+    "kalos_id": 83,
+    "galar_id": 378,
+    "paldea_id": 588
   },
   {
     "id": 5,
@@ -278,7 +290,10 @@
       }
     ],
     "kanto_id": 5,
-    "johto_id": 230
+    "johto_id": 5,
+    "kalos_id": 84,
+    "galar_id": 379,
+    "paldea_id": 589
   },
   {
     "id": 6,
@@ -337,7 +352,10 @@
       }
     ],
     "kanto_id": 6,
-    "johto_id": 231
+    "johto_id": 6,
+    "kalos_id": 85,
+    "galar_id": 380,
+    "paldea_id": 590
   },
   {
     "id": 7,
@@ -388,7 +406,10 @@
       }
     ],
     "kanto_id": 7,
-    "johto_id": 232
+    "johto_id": 7,
+    "kalos_id": 86,
+    "galar_id": 434,
+    "paldea_id": 591
   },
   {
     "id": 8,
@@ -439,7 +460,10 @@
       }
     ],
     "kanto_id": 8,
-    "johto_id": 233
+    "johto_id": 8,
+    "kalos_id": 87,
+    "galar_id": 435,
+    "paldea_id": 592
   },
   {
     "id": 9,
@@ -485,7 +509,10 @@
       }
     ],
     "kanto_id": 9,
-    "johto_id": 234
+    "johto_id": 9,
+    "kalos_id": 88,
+    "galar_id": 436,
+    "paldea_id": 593
   },
   {
     "id": 10,
@@ -516,7 +543,10 @@
       }
     ],
     "kanto_id": 10,
-    "johto_id": 24
+    "johto_id": 10,
+    "kalos_id": 23,
+    "alola_id": 17,
+    "galar_id": 13
   },
   {
     "id": 11,
@@ -543,7 +573,10 @@
       }
     ],
     "kanto_id": 11,
-    "johto_id": 25
+    "johto_id": 11,
+    "kalos_id": 24,
+    "alola_id": 18,
+    "galar_id": 14
   },
   {
     "id": 12,
@@ -590,7 +623,10 @@
       }
     ],
     "kanto_id": 12,
-    "johto_id": 26
+    "johto_id": 12,
+    "kalos_id": 25,
+    "alola_id": 19,
+    "galar_id": 15
   },
   {
     "id": 13,
@@ -618,7 +654,8 @@
       }
     ],
     "kanto_id": 13,
-    "johto_id": 27
+    "johto_id": 13,
+    "kalos_id": 26
   },
   {
     "id": 14,
@@ -646,7 +683,8 @@
       }
     ],
     "kanto_id": 14,
-    "johto_id": 28
+    "johto_id": 14,
+    "kalos_id": 27
   },
   {
     "id": 15,
@@ -693,7 +731,8 @@
       }
     ],
     "kanto_id": 15,
-    "johto_id": 29
+    "johto_id": 15,
+    "kalos_id": 28
   },
   {
     "id": 16,
@@ -749,7 +788,8 @@
       }
     ],
     "kanto_id": 16,
-    "johto_id": 10
+    "johto_id": 16,
+    "kalos_id": 17
   },
   {
     "id": 17,
@@ -805,7 +845,8 @@
       }
     ],
     "kanto_id": 17,
-    "johto_id": 11
+    "johto_id": 17,
+    "kalos_id": 18
   },
   {
     "id": 18,
@@ -856,7 +897,8 @@
       }
     ],
     "kanto_id": 18,
-    "johto_id": 12
+    "johto_id": 18,
+    "kalos_id": 19
   },
   {
     "id": 19,
@@ -919,8 +961,9 @@
       }
     ],
     "kanto_id": 19,
-    "johto_id": 17,
-    "unova_id": 59
+    "johto_id": 19,
+    "unova_id": 183,
+    "alola_id": 15
   },
   {
     "id": 20,
@@ -982,8 +1025,9 @@
       }
     ],
     "kanto_id": 20,
-    "johto_id": 18,
-    "unova_id": 60
+    "johto_id": 20,
+    "unova_id": 184,
+    "alola_id": 16
   },
   {
     "id": 21,
@@ -1035,7 +1079,9 @@
       }
     ],
     "kanto_id": 21,
-    "johto_id": 13
+    "johto_id": 21,
+    "kalos_id": 415,
+    "alola_id": 73
   },
   {
     "id": 22,
@@ -1094,7 +1140,9 @@
       }
     ],
     "kanto_id": 22,
-    "johto_id": 14
+    "johto_id": 22,
+    "kalos_id": 416,
+    "alola_id": 74
   },
   {
     "id": 23,
@@ -1145,7 +1193,10 @@
       }
     ],
     "kanto_id": 23,
-    "johto_id": 50
+    "johto_id": 23,
+    "kalos_id": 343,
+    "alola_id": 312,
+    "paldea_id": 417
   },
   {
     "id": 24,
@@ -1191,7 +1242,10 @@
       }
     ],
     "kanto_id": 24,
-    "johto_id": 51
+    "johto_id": 24,
+    "kalos_id": 344,
+    "alola_id": 313,
+    "paldea_id": 418
   },
   {
     "id": 25,
@@ -1242,9 +1296,14 @@
       }
     ],
     "kanto_id": 25,
-    "johto_id": 22,
+    "johto_id": 25,
     "hoenn_id": 156,
-    "sinnoh_id": 104
+    "sinnoh_id": 104,
+    "kalos_id": 36,
+    "alola_id": 25,
+    "galar_id": 194,
+    "hisui_id": 56,
+    "paldea_id": 74
   },
   {
     "id": 26,
@@ -1290,9 +1349,14 @@
       }
     ],
     "kanto_id": 26,
-    "johto_id": 23,
+    "johto_id": 26,
     "hoenn_id": 157,
-    "sinnoh_id": 105
+    "sinnoh_id": 105,
+    "kalos_id": 37,
+    "alola_id": 26,
+    "galar_id": 195,
+    "hisui_id": 57,
+    "paldea_id": 75
   },
   {
     "id": 27,
@@ -1351,9 +1415,13 @@
       }
     ],
     "kanto_id": 27,
-    "johto_id": 48,
+    "johto_id": 27,
     "hoenn_id": 112,
-    "unova_id": 113
+    "unova_id": 207,
+    "kalos_id": 403,
+    "alola_id": 251,
+    "galar_id": 486,
+    "paldea_id": 462
   },
   {
     "id": 28,
@@ -1407,9 +1475,13 @@
       }
     ],
     "kanto_id": 28,
-    "johto_id": 49,
+    "johto_id": 28,
     "hoenn_id": 113,
-    "unova_id": 114
+    "unova_id": 208,
+    "kalos_id": 404,
+    "alola_id": 252,
+    "galar_id": 487,
+    "paldea_id": 463
   },
   {
     "id": 29,
@@ -1460,7 +1532,9 @@
       }
     ],
     "kanto_id": 29,
-    "johto_id": 95
+    "johto_id": 29,
+    "kalos_id": 257,
+    "galar_id": 524
   },
   {
     "id": 30,
@@ -1511,7 +1585,9 @@
       }
     ],
     "kanto_id": 30,
-    "johto_id": 96
+    "johto_id": 30,
+    "kalos_id": 258,
+    "galar_id": 525
   },
   {
     "id": 31,
@@ -1566,7 +1642,9 @@
       }
     ],
     "kanto_id": 31,
-    "johto_id": 97
+    "johto_id": 31,
+    "kalos_id": 259,
+    "galar_id": 526
   },
   {
     "id": 32,
@@ -1617,7 +1695,9 @@
       }
     ],
     "kanto_id": 32,
-    "johto_id": 98
+    "johto_id": 32,
+    "kalos_id": 260,
+    "galar_id": 527
   },
   {
     "id": 33,
@@ -1668,7 +1748,9 @@
       }
     ],
     "kanto_id": 33,
-    "johto_id": 99
+    "johto_id": 33,
+    "kalos_id": 261,
+    "galar_id": 528
   },
   {
     "id": 34,
@@ -1723,7 +1805,9 @@
       }
     ],
     "kanto_id": 34,
-    "johto_id": 100
+    "johto_id": 34,
+    "kalos_id": 262,
+    "galar_id": 529
   },
   {
     "id": 35,
@@ -1786,9 +1870,13 @@
       }
     ],
     "kanto_id": 35,
-    "johto_id": 41,
+    "johto_id": 35,
     "sinnoh_id": 100,
-    "unova_id": 89
+    "unova_id": 197,
+    "alola_id": 211,
+    "galar_id": 255,
+    "hisui_id": 200,
+    "paldea_id": 486
   },
   {
     "id": 36,
@@ -1850,9 +1938,13 @@
       }
     ],
     "kanto_id": 36,
-    "johto_id": 42,
+    "johto_id": 36,
     "sinnoh_id": 101,
-    "unova_id": 90
+    "unova_id": 198,
+    "alola_id": 212,
+    "galar_id": 256,
+    "hisui_id": 201,
+    "paldea_id": 487
   },
   {
     "id": 37,
@@ -1895,9 +1987,13 @@
       }
     ],
     "kanto_id": 37,
-    "johto_id": 125,
+    "johto_id": 37,
     "hoenn_id": 153,
-    "unova_id": 248
+    "unova_id": 267,
+    "alola_id": 253,
+    "galar_id": 68,
+    "hisui_id": 168,
+    "paldea_id": 425
   },
   {
     "id": 38,
@@ -1923,9 +2019,13 @@
       }
     ],
     "kanto_id": 38,
-    "johto_id": 126,
+    "johto_id": 38,
     "hoenn_id": 154,
-    "unova_id": 249
+    "unova_id": 268,
+    "alola_id": 254,
+    "galar_id": 69,
+    "hisui_id": 169,
+    "paldea_id": 426
   },
   {
     "id": 39,
@@ -1993,9 +2093,13 @@
       }
     ],
     "kanto_id": 39,
-    "johto_id": 44,
+    "johto_id": 39,
     "hoenn_id": 138,
-    "unova_id": 282
+    "unova_id": 289,
+    "kalos_id": 426,
+    "alola_id": 135,
+    "galar_id": 410,
+    "paldea_id": 60
   },
   {
     "id": 40,
@@ -2058,9 +2162,13 @@
       }
     ],
     "kanto_id": 40,
-    "johto_id": 45,
+    "johto_id": 40,
     "hoenn_id": 139,
-    "unova_id": 283
+    "unova_id": 290,
+    "kalos_id": 427,
+    "alola_id": 136,
+    "galar_id": 411,
+    "paldea_id": 61
   },
   {
     "id": 41,
@@ -2116,10 +2224,14 @@
       }
     ],
     "kanto_id": 41,
-    "johto_id": 37,
+    "johto_id": 41,
     "hoenn_id": 63,
     "sinnoh_id": 28,
-    "unova_id": 61
+    "unova_id": 185,
+    "kalos_id": 145,
+    "alola_id": 68,
+    "galar_id": 550,
+    "hisui_id": 34
   },
   {
     "id": 42,
@@ -2175,10 +2287,14 @@
       }
     ],
     "kanto_id": 42,
-    "johto_id": 38,
+    "johto_id": 42,
     "hoenn_id": 64,
     "sinnoh_id": 29,
-    "unova_id": 62
+    "unova_id": 186,
+    "kalos_id": 146,
+    "alola_id": 69,
+    "galar_id": 551,
+    "hisui_id": 35
   },
   {
     "id": 43,
@@ -2226,8 +2342,11 @@
       }
     ],
     "kanto_id": 43,
-    "johto_id": 83,
-    "hoenn_id": 88
+    "johto_id": 43,
+    "hoenn_id": 88,
+    "kalos_id": 105,
+    "galar_id": 55,
+    "paldea_id": 533
   },
   {
     "id": 44,
@@ -2279,8 +2398,11 @@
       }
     ],
     "kanto_id": 44,
-    "johto_id": 84,
-    "hoenn_id": 89
+    "johto_id": 44,
+    "hoenn_id": 89,
+    "kalos_id": 106,
+    "galar_id": 56,
+    "paldea_id": 534
   },
   {
     "id": 45,
@@ -2323,8 +2445,11 @@
       }
     ],
     "kanto_id": 45,
-    "johto_id": 85,
-    "hoenn_id": 90
+    "johto_id": 45,
+    "hoenn_id": 90,
+    "kalos_id": 107,
+    "galar_id": 57,
+    "paldea_id": 535
   },
   {
     "id": 46,
@@ -2368,7 +2493,9 @@
       }
     ],
     "kanto_id": 46,
-    "johto_id": 70
+    "johto_id": 46,
+    "alola_id": 147,
+    "hisui_id": 53
   },
   {
     "id": 47,
@@ -2407,7 +2534,9 @@
       }
     ],
     "kanto_id": 47,
-    "johto_id": 71
+    "johto_id": 47,
+    "alola_id": 148,
+    "hisui_id": 54
   },
   {
     "id": 48,
@@ -2463,7 +2592,8 @@
       }
     ],
     "kanto_id": 48,
-    "johto_id": 108
+    "johto_id": 48,
+    "paldea_id": 256
   },
   {
     "id": 49,
@@ -2514,7 +2644,8 @@
       }
     ],
     "kanto_id": 49,
-    "johto_id": 109
+    "johto_id": 49,
+    "paldea_id": 257
   },
   {
     "id": 50,
@@ -2569,7 +2700,11 @@
       }
     ],
     "kanto_id": 50,
-    "johto_id": 132
+    "johto_id": 50,
+    "kalos_id": 307,
+    "alola_id": 71,
+    "galar_id": 164,
+    "paldea_id": 148
   },
   {
     "id": 51,
@@ -2591,7 +2726,11 @@
       }
     ],
     "kanto_id": 51,
-    "johto_id": 133
+    "johto_id": 51,
+    "kalos_id": 308,
+    "alola_id": 72,
+    "galar_id": 165,
+    "paldea_id": 149
   },
   {
     "id": 52,
@@ -2646,7 +2785,10 @@
       }
     ],
     "kanto_id": 52,
-    "johto_id": 136
+    "johto_id": 52,
+    "alola_id": 45,
+    "galar_id": 182,
+    "paldea_id": 141
   },
   {
     "id": 53,
@@ -2668,7 +2810,10 @@
       }
     ],
     "kanto_id": 53,
-    "johto_id": 137
+    "johto_id": 53,
+    "alola_id": 46,
+    "galar_id": 184,
+    "paldea_id": 142
   },
   {
     "id": 54,
@@ -2719,10 +2864,15 @@
       }
     ],
     "kanto_id": 54,
-    "johto_id": 138,
+    "johto_id": 54,
     "hoenn_id": 158,
     "sinnoh_id": 43,
-    "unova_id": 28
+    "unova_id": 162,
+    "kalos_id": 59,
+    "alola_id": 89,
+    "galar_id": 476,
+    "hisui_id": 68,
+    "paldea_id": 55
   },
   {
     "id": 55,
@@ -2776,10 +2926,15 @@
       }
     ],
     "kanto_id": 55,
-    "johto_id": 139,
+    "johto_id": 55,
     "hoenn_id": 159,
     "sinnoh_id": 44,
-    "unova_id": 29
+    "unova_id": 163,
+    "kalos_id": 60,
+    "alola_id": 90,
+    "galar_id": 477,
+    "hisui_id": 69,
+    "paldea_id": 56
   },
   {
     "id": 56,
@@ -2850,7 +3005,9 @@
       }
     ],
     "kanto_id": 56,
-    "johto_id": 134
+    "johto_id": 56,
+    "alola_id": 79,
+    "paldea_id": 158
   },
   {
     "id": 57,
@@ -2925,7 +3082,9 @@
       }
     ],
     "kanto_id": 57,
-    "johto_id": 135
+    "johto_id": 57,
+    "alola_id": 80,
+    "paldea_id": 159
   },
   {
     "id": 58,
@@ -2980,8 +3139,12 @@
       }
     ],
     "kanto_id": 58,
-    "johto_id": 127,
-    "unova_id": 51
+    "johto_id": 58,
+    "unova_id": 175,
+    "alola_id": 52,
+    "galar_id": 70,
+    "hisui_id": 150,
+    "paldea_id": 213
   },
   {
     "id": 59,
@@ -3003,8 +3166,12 @@
       }
     ],
     "kanto_id": 59,
-    "johto_id": 128,
-    "unova_id": 52
+    "johto_id": 59,
+    "unova_id": 176,
+    "alola_id": 53,
+    "galar_id": 71,
+    "hisui_id": 151,
+    "paldea_id": 214
   },
   {
     "id": 60,
@@ -3059,7 +3226,11 @@
       }
     ],
     "kanto_id": 60,
-    "johto_id": 72
+    "johto_id": 60,
+    "kalos_id": 339,
+    "alola_id": 149,
+    "galar_id": 472,
+    "paldea_id": 427
   },
   {
     "id": 61,
@@ -3118,7 +3289,11 @@
       }
     ],
     "kanto_id": 61,
-    "johto_id": 73
+    "johto_id": 61,
+    "kalos_id": 340,
+    "alola_id": 150,
+    "galar_id": 473,
+    "paldea_id": 428
   },
   {
     "id": 62,
@@ -3145,7 +3320,11 @@
       }
     ],
     "kanto_id": 62,
-    "johto_id": 74
+    "johto_id": 62,
+    "kalos_id": 341,
+    "alola_id": 151,
+    "galar_id": 474,
+    "paldea_id": 429
   },
   {
     "id": 63,
@@ -3172,9 +3351,13 @@
       }
     ],
     "kanto_id": 63,
-    "johto_id": 89,
+    "johto_id": 63,
     "hoenn_id": 39,
-    "sinnoh_id": 20
+    "sinnoh_id": 20,
+    "kalos_id": 102,
+    "alola_id": 42,
+    "galar_id": 421,
+    "hisui_id": 58
   },
   {
     "id": 64,
@@ -3217,9 +3400,13 @@
       }
     ],
     "kanto_id": 64,
-    "johto_id": 90,
+    "johto_id": 64,
     "hoenn_id": 40,
-    "sinnoh_id": 21
+    "sinnoh_id": 21,
+    "kalos_id": 103,
+    "alola_id": 43,
+    "galar_id": 422,
+    "hisui_id": 59
   },
   {
     "id": 65,
@@ -3257,9 +3444,13 @@
       }
     ],
     "kanto_id": 65,
-    "johto_id": 91,
+    "johto_id": 65,
     "hoenn_id": 41,
-    "sinnoh_id": 22
+    "sinnoh_id": 22,
+    "kalos_id": 104,
+    "alola_id": 44,
+    "galar_id": 423,
+    "hisui_id": 60
   },
   {
     "id": 66,
@@ -3318,9 +3509,13 @@
       }
     ],
     "kanto_id": 66,
-    "johto_id": 140,
+    "johto_id": 66,
     "hoenn_id": 73,
-    "sinnoh_id": 40
+    "sinnoh_id": 40,
+    "kalos_id": 210,
+    "alola_id": 95,
+    "galar_id": 138,
+    "hisui_id": 154
   },
   {
     "id": 67,
@@ -3379,9 +3574,13 @@
       }
     ],
     "kanto_id": 67,
-    "johto_id": 141,
+    "johto_id": 67,
     "hoenn_id": 74,
-    "sinnoh_id": 41
+    "sinnoh_id": 41,
+    "kalos_id": 211,
+    "alola_id": 96,
+    "galar_id": 139,
+    "hisui_id": 155
   },
   {
     "id": 68,
@@ -3439,9 +3638,13 @@
       }
     ],
     "kanto_id": 68,
-    "johto_id": 142,
+    "johto_id": 68,
     "hoenn_id": 75,
-    "sinnoh_id": 42
+    "sinnoh_id": 42,
+    "kalos_id": 212,
+    "alola_id": 97,
+    "galar_id": 140,
+    "hisui_id": 156
   },
   {
     "id": 69,
@@ -3505,7 +3708,9 @@
       }
     ],
     "kanto_id": 69,
-    "johto_id": 64
+    "johto_id": 69,
+    "kalos_id": 332,
+    "paldea_id": 419
   },
   {
     "id": 70,
@@ -3569,7 +3774,9 @@
       }
     ],
     "kanto_id": 70,
-    "johto_id": 65
+    "johto_id": 70,
+    "kalos_id": 333,
+    "paldea_id": 420
   },
   {
     "id": 71,
@@ -3632,7 +3839,9 @@
       }
     ],
     "kanto_id": 71,
-    "johto_id": 66
+    "johto_id": 71,
+    "kalos_id": 334,
+    "paldea_id": 421
   },
   {
     "id": 72,
@@ -3700,9 +3909,14 @@
       }
     ],
     "kanto_id": 72,
-    "johto_id": 162,
+    "johto_id": 72,
     "hoenn_id": 66,
-    "sinnoh_id": 136
+    "sinnoh_id": 136,
+    "kalos_id": 178,
+    "alola_id": 106,
+    "galar_id": 424,
+    "hisui_id": 170,
+    "paldea_id": 525
   },
   {
     "id": 73,
@@ -3765,9 +3979,14 @@
       }
     ],
     "kanto_id": 73,
-    "johto_id": 163,
+    "johto_id": 73,
     "hoenn_id": 67,
-    "sinnoh_id": 137
+    "sinnoh_id": 137,
+    "kalos_id": 179,
+    "alola_id": 107,
+    "galar_id": 425,
+    "hisui_id": 171,
+    "paldea_id": 526
   },
   {
     "id": 74,
@@ -3823,9 +4042,13 @@
       }
     ],
     "kanto_id": 74,
-    "johto_id": 34,
+    "johto_id": 74,
     "hoenn_id": 57,
-    "sinnoh_id": 31
+    "sinnoh_id": 31,
+    "kalos_id": 315,
+    "alola_id": 229,
+    "hisui_id": 46,
+    "paldea_id": 445
   },
   {
     "id": 75,
@@ -3881,9 +4104,13 @@
       }
     ],
     "kanto_id": 75,
-    "johto_id": 35,
+    "johto_id": 75,
     "hoenn_id": 58,
-    "sinnoh_id": 32
+    "sinnoh_id": 32,
+    "kalos_id": 316,
+    "alola_id": 230,
+    "hisui_id": 47,
+    "paldea_id": 446
   },
   {
     "id": 76,
@@ -3934,9 +4161,13 @@
       }
     ],
     "kanto_id": 76,
-    "johto_id": 36,
+    "johto_id": 76,
     "hoenn_id": 59,
-    "sinnoh_id": 33
+    "sinnoh_id": 33,
+    "kalos_id": 317,
+    "alola_id": 231,
+    "hisui_id": 48,
+    "paldea_id": 447
   },
   {
     "id": 77,
@@ -3987,8 +4218,10 @@
       }
     ],
     "kanto_id": 77,
-    "johto_id": 201,
-    "sinnoh_id": 90
+    "johto_id": 77,
+    "sinnoh_id": 90,
+    "galar_id": 333,
+    "hisui_id": 23
   },
   {
     "id": 78,
@@ -4034,8 +4267,10 @@
       }
     ],
     "kanto_id": 78,
-    "johto_id": 202,
-    "sinnoh_id": 91
+    "johto_id": 78,
+    "sinnoh_id": 91,
+    "galar_id": 334,
+    "hisui_id": 24
   },
   {
     "id": 79,
@@ -4099,7 +4334,11 @@
       }
     ],
     "kanto_id": 79,
-    "johto_id": 80
+    "johto_id": 79,
+    "kalos_id": 286,
+    "alola_id": 37,
+    "galar_id": 401,
+    "paldea_id": 324
   },
   {
     "id": 80,
@@ -4122,7 +4361,11 @@
       }
     ],
     "kanto_id": 80,
-    "johto_id": 81
+    "johto_id": 80,
+    "kalos_id": 287,
+    "alola_id": 38,
+    "galar_id": 402,
+    "paldea_id": 325
   },
   {
     "id": 81,
@@ -4178,9 +4421,15 @@
       }
     ],
     "kanto_id": 81,
-    "johto_id": 118,
+    "johto_id": 81,
     "hoenn_id": 82,
-    "unova_id": 48
+    "sinnoh_id": 178,
+    "unova_id": 172,
+    "kalos_id": 375,
+    "alola_id": 47,
+    "galar_id": 453,
+    "hisui_id": 177,
+    "paldea_id": 209
   },
   {
     "id": 82,
@@ -4236,9 +4485,15 @@
       }
     ],
     "kanto_id": 82,
-    "johto_id": 119,
+    "johto_id": 82,
     "hoenn_id": 83,
-    "unova_id": 49
+    "sinnoh_id": 179,
+    "unova_id": 173,
+    "kalos_id": 376,
+    "alola_id": 48,
+    "galar_id": 454,
+    "hisui_id": 178,
+    "paldea_id": 210
   },
   {
     "id": 83,
@@ -4306,7 +4561,9 @@
       }
     ],
     "kanto_id": 83,
-    "johto_id": 158
+    "johto_id": 83,
+    "kalos_id": 61,
+    "galar_id": 218
   },
   {
     "id": 84,
@@ -4366,8 +4623,10 @@
       }
     ],
     "kanto_id": 84,
-    "johto_id": 199,
-    "hoenn_id": 92
+    "johto_id": 84,
+    "hoenn_id": 92,
+    "kalos_id": 94,
+    "paldea_id": 500
   },
   {
     "id": 85,
@@ -4422,8 +4681,10 @@
       }
     ],
     "kanto_id": 85,
-    "johto_id": 200,
-    "hoenn_id": 93
+    "johto_id": 85,
+    "hoenn_id": 93,
+    "kalos_id": 95,
+    "paldea_id": 501
   },
   {
     "id": 86,
@@ -4486,8 +4747,10 @@
       }
     ],
     "kanto_id": 86,
-    "johto_id": 176,
-    "unova_id": 265
+    "johto_id": 86,
+    "unova_id": 281,
+    "alola_id": 323,
+    "paldea_id": 573
   },
   {
     "id": 87,
@@ -4546,8 +4809,10 @@
       }
     ],
     "kanto_id": 87,
-    "johto_id": 177,
-    "unova_id": 266
+    "johto_id": 87,
+    "unova_id": 282,
+    "alola_id": 324,
+    "paldea_id": 574
   },
   {
     "id": 88,
@@ -4598,9 +4863,11 @@
       }
     ],
     "kanto_id": 88,
-    "johto_id": 116,
+    "johto_id": 88,
     "hoenn_id": 106,
-    "unova_id": 64
+    "unova_id": 188,
+    "alola_id": 50,
+    "paldea_id": 194
   },
   {
     "id": 89,
@@ -4646,9 +4913,11 @@
       }
     ],
     "kanto_id": 89,
-    "johto_id": 117,
+    "johto_id": 89,
     "hoenn_id": 107,
-    "unova_id": 65
+    "unova_id": 189,
+    "alola_id": 51,
+    "paldea_id": 195
   },
   {
     "id": 90,
@@ -4703,7 +4972,11 @@
       }
     ],
     "kanto_id": 90,
-    "johto_id": 169
+    "johto_id": 90,
+    "kalos_id": 189,
+    "alola_id": 115,
+    "galar_id": 150,
+    "paldea_id": 329
   },
   {
     "id": 91,
@@ -4758,7 +5031,11 @@
       }
     ],
     "kanto_id": 91,
-    "johto_id": 170
+    "johto_id": 91,
+    "kalos_id": 190,
+    "alola_id": 116,
+    "galar_id": 151,
+    "paldea_id": 330
   },
   {
     "id": 92,
@@ -4806,8 +5083,13 @@
       }
     ],
     "kanto_id": 92,
-    "johto_id": 58,
-    "sinnoh_id": 69
+    "johto_id": 92,
+    "sinnoh_id": 69,
+    "kalos_id": 336,
+    "alola_id": 61,
+    "galar_id": 141,
+    "hisui_id": 136,
+    "paldea_id": 68
   },
   {
     "id": 93,
@@ -4867,8 +5149,13 @@
       }
     ],
     "kanto_id": 93,
-    "johto_id": 59,
-    "sinnoh_id": 70
+    "johto_id": 93,
+    "sinnoh_id": 70,
+    "kalos_id": 337,
+    "alola_id": 62,
+    "galar_id": 142,
+    "hisui_id": 137,
+    "paldea_id": 69
   },
   {
     "id": 94,
@@ -4923,8 +5210,13 @@
       }
     ],
     "kanto_id": 94,
-    "johto_id": 60,
-    "sinnoh_id": 71
+    "johto_id": 94,
+    "sinnoh_id": 71,
+    "kalos_id": 338,
+    "alola_id": 63,
+    "galar_id": 143,
+    "hisui_id": 138,
+    "paldea_id": 70
   },
   {
     "id": 95,
@@ -4992,9 +5284,12 @@
       }
     ],
     "kanto_id": 95,
-    "johto_id": 62,
+    "johto_id": 95,
     "sinnoh_id": 34,
-    "unova_id": 71
+    "unova_id": 190,
+    "kalos_id": 206,
+    "galar_id": 178,
+    "hisui_id": 118
   },
   {
     "id": 96,
@@ -5049,7 +5344,9 @@
       }
     ],
     "kanto_id": 96,
-    "johto_id": 87
+    "johto_id": 96,
+    "alola_id": 54,
+    "paldea_id": 66
   },
   {
     "id": 97,
@@ -5099,7 +5396,9 @@
       }
     ],
     "kanto_id": 97,
-    "johto_id": 88
+    "johto_id": 97,
+    "alola_id": 55,
+    "paldea_id": 67
   },
   {
     "id": 98,
@@ -5162,7 +5461,8 @@
       }
     ],
     "kanto_id": 98,
-    "johto_id": 164
+    "johto_id": 98,
+    "galar_id": 98
   },
   {
     "id": 99,
@@ -5224,7 +5524,8 @@
       }
     ],
     "kanto_id": 99,
-    "johto_id": 165
+    "johto_id": 99,
+    "galar_id": 99
   },
   {
     "id": 100,
@@ -5275,8 +5576,11 @@
       }
     ],
     "kanto_id": 100,
-    "johto_id": 120,
-    "hoenn_id": 84
+    "johto_id": 100,
+    "hoenn_id": 84,
+    "kalos_id": 378,
+    "hisui_id": 192,
+    "paldea_id": 207
   },
   {
     "id": 101,
@@ -5322,8 +5626,11 @@
       }
     ],
     "kanto_id": 101,
-    "johto_id": 121,
-    "hoenn_id": 85
+    "johto_id": 101,
+    "hoenn_id": 85,
+    "kalos_id": 379,
+    "hisui_id": 193,
+    "paldea_id": 208
   },
   {
     "id": 102,
@@ -5379,7 +5686,11 @@
       }
     ],
     "kanto_id": 102,
-    "johto_id": 104
+    "johto_id": 102,
+    "kalos_id": 289,
+    "alola_id": 269,
+    "galar_id": 505,
+    "paldea_id": 502
   },
   {
     "id": 103,
@@ -5446,7 +5757,11 @@
       }
     ],
     "kanto_id": 103,
-    "johto_id": 105
+    "johto_id": 103,
+    "kalos_id": 290,
+    "alola_id": 270,
+    "galar_id": 506,
+    "paldea_id": 503
   },
   {
     "id": 104,
@@ -5497,7 +5812,10 @@
       }
     ],
     "kanto_id": 104,
-    "johto_id": 203
+    "johto_id": 104,
+    "kalos_id": 213,
+    "alola_id": 163,
+    "galar_id": 488
   },
   {
     "id": 105,
@@ -5559,7 +5877,10 @@
       }
     ],
     "kanto_id": 105,
-    "johto_id": 204
+    "johto_id": 105,
+    "kalos_id": 214,
+    "alola_id": 164,
+    "galar_id": 489
   },
   {
     "id": 106,
@@ -5629,7 +5950,9 @@
       }
     ],
     "kanto_id": 106,
-    "johto_id": 144
+    "johto_id": 106,
+    "galar_id": 108,
+    "paldea_id": 544
   },
   {
     "id": 107,
@@ -5699,7 +6022,9 @@
       }
     ],
     "kanto_id": 107,
-    "johto_id": 145
+    "johto_id": 107,
+    "galar_id": 109,
+    "paldea_id": 545
   },
   {
     "id": 108,
@@ -5746,8 +6071,13 @@
       }
     ],
     "kanto_id": 108,
-    "johto_id": 178,
-    "unova_id": 284
+    "johto_id": 108,
+    "sinnoh_id": 161,
+    "unova_id": 291,
+    "kalos_id": 440,
+    "alola_id": 399,
+    "galar_id": 428,
+    "hisui_id": 125
   },
   {
     "id": 109,
@@ -5806,9 +6136,11 @@
       }
     ],
     "kanto_id": 109,
-    "johto_id": 114,
+    "johto_id": 109,
     "hoenn_id": 108,
-    "unova_id": 46
+    "unova_id": 170,
+    "galar_id": 250,
+    "paldea_id": 471
   },
   {
     "id": 110,
@@ -5830,9 +6162,11 @@
       }
     ],
     "kanto_id": 110,
-    "johto_id": 115,
+    "johto_id": 110,
     "hoenn_id": 109,
-    "unova_id": 47
+    "unova_id": 171,
+    "galar_id": 251,
+    "paldea_id": 472
   },
   {
     "id": 111,
@@ -5904,8 +6238,13 @@
       }
     ],
     "kanto_id": 111,
-    "johto_id": 206,
-    "hoenn_id": 169
+    "johto_id": 111,
+    "hoenn_id": 169,
+    "sinnoh_id": 186,
+    "kalos_id": 203,
+    "galar_id": 264,
+    "hisui_id": 120,
+    "paldea_id": 504
   },
   {
     "id": 112,
@@ -5977,8 +6316,13 @@
       }
     ],
     "kanto_id": 112,
-    "johto_id": 207,
-    "hoenn_id": 170
+    "johto_id": 112,
+    "hoenn_id": 170,
+    "sinnoh_id": 187,
+    "kalos_id": 204,
+    "galar_id": 265,
+    "hisui_id": 121,
+    "paldea_id": 505
   },
   {
     "id": 113,
@@ -6033,8 +6377,12 @@
       }
     ],
     "kanto_id": 113,
-    "johto_id": 217,
-    "sinnoh_id": 97
+    "johto_id": 113,
+    "sinnoh_id": 97,
+    "alola_id": 33,
+    "galar_id": 407,
+    "hisui_id": 87,
+    "paldea_id": 44
   },
   {
     "id": 114,
@@ -6077,8 +6425,11 @@
       }
     ],
     "kanto_id": 114,
-    "johto_id": 179,
-    "unova_id": 217
+    "johto_id": 114,
+    "sinnoh_id": 181,
+    "unova_id": 247,
+    "galar_id": 443,
+    "hisui_id": 95
   },
   {
     "id": 115,
@@ -6124,7 +6475,10 @@
       }
     ],
     "kanto_id": 115,
-    "johto_id": 205
+    "johto_id": 115,
+    "kalos_id": 215,
+    "alola_id": 165,
+    "galar_id": 490
   },
   {
     "id": 116,
@@ -6175,8 +6529,11 @@
       }
     ],
     "kanto_id": 116,
-    "johto_id": 186,
-    "hoenn_id": 184
+    "johto_id": 116,
+    "hoenn_id": 184,
+    "kalos_id": 192,
+    "galar_id": 500,
+    "paldea_id": 527
   },
   {
     "id": 117,
@@ -6227,8 +6584,11 @@
       }
     ],
     "kanto_id": 117,
-    "johto_id": 187,
-    "hoenn_id": 185
+    "johto_id": 117,
+    "hoenn_id": 185,
+    "kalos_id": 193,
+    "galar_id": 501,
+    "paldea_id": 528
   },
   {
     "id": 118,
@@ -6279,9 +6639,12 @@
       }
     ],
     "kanto_id": 118,
-    "johto_id": 78,
+    "johto_id": 118,
     "hoenn_id": 50,
-    "sinnoh_id": 78
+    "sinnoh_id": 78,
+    "kalos_id": 53,
+    "alola_id": 153,
+    "galar_id": 146
   },
   {
     "id": 119,
@@ -6327,9 +6690,12 @@
       }
     ],
     "kanto_id": 119,
-    "johto_id": 79,
+    "johto_id": 119,
     "hoenn_id": 51,
-    "sinnoh_id": 79
+    "sinnoh_id": 79,
+    "kalos_id": 54,
+    "alola_id": 154,
+    "galar_id": 147
   },
   {
     "id": 120,
@@ -6392,9 +6758,12 @@
       }
     ],
     "kanto_id": 120,
-    "johto_id": 167,
+    "johto_id": 120,
     "hoenn_id": 143,
-    "unova_id": 238
+    "unova_id": 257,
+    "kalos_id": 187,
+    "alola_id": 184,
+    "galar_id": 447
   },
   {
     "id": 121,
@@ -6461,9 +6830,12 @@
       }
     ],
     "kanto_id": 121,
-    "johto_id": 168,
+    "johto_id": 121,
     "hoenn_id": 144,
-    "unova_id": 239
+    "unova_id": 258,
+    "kalos_id": 188,
+    "alola_id": 185,
+    "galar_id": 448
   },
   {
     "id": 122,
@@ -6507,8 +6879,12 @@
       }
     ],
     "kanto_id": 122,
-    "johto_id": 156,
-    "sinnoh_id": 95
+    "johto_id": 122,
+    "sinnoh_id": 95,
+    "kalos_id": 267,
+    "alola_id": 311,
+    "galar_id": 365,
+    "hisui_id": 77
   },
   {
     "id": 123,
@@ -6568,7 +6944,13 @@
       }
     ],
     "kanto_id": 123,
-    "johto_id": 110
+    "johto_id": 123,
+    "sinnoh_id": 195,
+    "kalos_id": 442,
+    "alola_id": 275,
+    "galar_id": 463,
+    "hisui_id": 72,
+    "paldea_id": 260
   },
   {
     "id": 124,
@@ -6619,7 +7001,10 @@
       }
     ],
     "kanto_id": 124,
-    "johto_id": 153
+    "johto_id": 124,
+    "kalos_id": 390,
+    "alola_id": 322,
+    "galar_id": 512
   },
   {
     "id": 125,
@@ -6682,8 +7067,13 @@
       }
     ],
     "kanto_id": 125,
-    "johto_id": 155,
-    "unova_id": 57
+    "johto_id": 125,
+    "sinnoh_id": 198,
+    "unova_id": 181,
+    "alola_id": 227,
+    "galar_id": 514,
+    "hisui_id": 183,
+    "paldea_id": 508
   },
   {
     "id": 126,
@@ -6746,8 +7136,13 @@
       }
     ],
     "kanto_id": 126,
-    "johto_id": 151,
-    "unova_id": 54
+    "johto_id": 126,
+    "sinnoh_id": 201,
+    "unova_id": 178,
+    "alola_id": 167,
+    "galar_id": 517,
+    "hisui_id": 175,
+    "paldea_id": 511
   },
   {
     "id": 127,
@@ -6793,9 +7188,12 @@
       }
     ],
     "kanto_id": 127,
-    "johto_id": 112,
+    "johto_id": 127,
     "hoenn_id": 167,
-    "unova_id": 146
+    "unova_id": 218,
+    "kalos_id": 283,
+    "alola_id": 175,
+    "galar_id": 465
   },
   {
     "id": 128,
@@ -6849,7 +7247,11 @@
       }
     ],
     "kanto_id": 128,
-    "johto_id": 148
+    "johto_id": 128,
+    "kalos_id": 278,
+    "alola_id": 137,
+    "galar_id": 461,
+    "paldea_id": 223
   },
   {
     "id": 129,
@@ -6876,9 +7278,14 @@
       }
     ],
     "kanto_id": 129,
-    "johto_id": 76,
+    "johto_id": 129,
     "hoenn_id": 52,
-    "sinnoh_id": 23
+    "sinnoh_id": 23,
+    "kalos_id": 49,
+    "alola_id": 91,
+    "galar_id": 144,
+    "hisui_id": 80,
+    "paldea_id": 134
   },
   {
     "id": 130,
@@ -6937,9 +7344,14 @@
       }
     ],
     "kanto_id": 130,
-    "johto_id": 77,
+    "johto_id": 130,
     "hoenn_id": 53,
-    "sinnoh_id": 24
+    "sinnoh_id": 24,
+    "kalos_id": 50,
+    "alola_id": 92,
+    "galar_id": 145,
+    "hisui_id": 81,
+    "paldea_id": 135
   },
   {
     "id": 131,
@@ -6990,8 +7402,12 @@
       }
     ],
     "kanto_id": 131,
-    "johto_id": 219,
-    "unova_id": 242
+    "johto_id": 131,
+    "unova_id": 261,
+    "kalos_id": 303,
+    "alola_id": 268,
+    "galar_id": 361,
+    "paldea_id": 575
   },
   {
     "id": 132,
@@ -7013,8 +7429,12 @@
       }
     ],
     "kanto_id": 132,
-    "johto_id": 92,
-    "unova_id": 261
+    "johto_id": 132,
+    "unova_id": 277,
+    "kalos_id": 444,
+    "alola_id": 209,
+    "galar_id": 373,
+    "paldea_id": 212
   },
   {
     "id": 133,
@@ -7093,8 +7513,14 @@
       }
     ],
     "kanto_id": 133,
-    "johto_id": 180,
-    "unova_id": 91
+    "johto_id": 133,
+    "sinnoh_id": 163,
+    "unova_id": 199,
+    "kalos_id": 230,
+    "alola_id": 123,
+    "galar_id": 196,
+    "hisui_id": 25,
+    "paldea_id": 179
   },
   {
     "id": 134,
@@ -7144,8 +7570,14 @@
       }
     ],
     "kanto_id": 134,
-    "johto_id": 181,
-    "unova_id": 92
+    "johto_id": 134,
+    "sinnoh_id": 164,
+    "unova_id": 200,
+    "kalos_id": 231,
+    "alola_id": 124,
+    "galar_id": 197,
+    "hisui_id": 26,
+    "paldea_id": 180
   },
   {
     "id": 135,
@@ -7199,8 +7631,14 @@
       }
     ],
     "kanto_id": 135,
-    "johto_id": 182,
-    "unova_id": 93
+    "johto_id": 135,
+    "sinnoh_id": 165,
+    "unova_id": 201,
+    "kalos_id": 232,
+    "alola_id": 125,
+    "galar_id": 198,
+    "hisui_id": 27,
+    "paldea_id": 181
   },
   {
     "id": 136,
@@ -7254,8 +7692,14 @@
       }
     ],
     "kanto_id": 136,
-    "johto_id": 183,
-    "unova_id": 94
+    "johto_id": 136,
+    "sinnoh_id": 166,
+    "unova_id": 202,
+    "kalos_id": 233,
+    "alola_id": 126,
+    "galar_id": 199,
+    "hisui_id": 28,
+    "paldea_id": 182
   },
   {
     "id": 137,
@@ -7302,7 +7746,12 @@
       }
     ],
     "kanto_id": 137,
-    "johto_id": 215
+    "johto_id": 137,
+    "sinnoh_id": 192,
+    "alola_id": 217,
+    "galar_id": 507,
+    "hisui_id": 133,
+    "paldea_id": 565
   },
   {
     "id": 138,
@@ -7362,7 +7811,9 @@
       }
     ],
     "kanto_id": 138,
-    "johto_id": 220
+    "johto_id": 138,
+    "alola_id": 342,
+    "galar_id": 541
   },
   {
     "id": 139,
@@ -7421,7 +7872,9 @@
       }
     ],
     "kanto_id": 139,
-    "johto_id": 221
+    "johto_id": 139,
+    "alola_id": 343,
+    "galar_id": 542
   },
   {
     "id": 140,
@@ -7481,7 +7934,9 @@
       }
     ],
     "kanto_id": 140,
-    "johto_id": 222
+    "johto_id": 140,
+    "alola_id": 344,
+    "galar_id": 543
   },
   {
     "id": 141,
@@ -7548,7 +8003,9 @@
       }
     ],
     "kanto_id": 141,
-    "johto_id": 223
+    "johto_id": 141,
+    "alola_id": 345,
+    "galar_id": 544
   },
   {
     "id": 142,
@@ -7611,7 +8068,10 @@
       }
     ],
     "kanto_id": 142,
-    "johto_id": 224
+    "johto_id": 142,
+    "kalos_id": 221,
+    "alola_id": 284,
+    "galar_id": 545
   },
   {
     "id": 143,
@@ -7689,8 +8149,13 @@
       }
     ],
     "kanto_id": 143,
-    "johto_id": 225,
-    "sinnoh_id": 113
+    "johto_id": 143,
+    "sinnoh_id": 113,
+    "kalos_id": 139,
+    "alola_id": 36,
+    "galar_id": 261,
+    "hisui_id": 52,
+    "paldea_id": 453
   },
   {
     "id": 144,
@@ -7741,7 +8206,9 @@
       }
     ],
     "kanto_id": 144,
-    "johto_id": 235
+    "johto_id": 144,
+    "kalos_id": 304,
+    "galar_id": 576
   },
   {
     "id": 145,
@@ -7788,7 +8255,9 @@
       }
     ],
     "kanto_id": 145,
-    "johto_id": 236
+    "johto_id": 145,
+    "kalos_id": 305,
+    "galar_id": 577
   },
   {
     "id": 146,
@@ -7835,7 +8304,9 @@
       }
     ],
     "kanto_id": 146,
-    "johto_id": 237
+    "johto_id": 146,
+    "kalos_id": 306,
+    "galar_id": 578
   },
   {
     "id": 147,
@@ -7894,7 +8365,11 @@
       }
     ],
     "kanto_id": 147,
-    "johto_id": 241
+    "johto_id": 147,
+    "kalos_id": 451,
+    "alola_id": 281,
+    "galar_id": 568,
+    "paldea_id": 347
   },
   {
     "id": 148,
@@ -7953,7 +8428,11 @@
       }
     ],
     "kanto_id": 148,
-    "johto_id": 242
+    "johto_id": 148,
+    "kalos_id": 452,
+    "alola_id": 282,
+    "galar_id": 569,
+    "paldea_id": 348
   },
   {
     "id": 149,
@@ -8012,7 +8491,11 @@
       }
     ],
     "kanto_id": 149,
-    "johto_id": 243
+    "johto_id": 149,
+    "kalos_id": 453,
+    "alola_id": 283,
+    "galar_id": 570,
+    "paldea_id": 349
   },
   {
     "id": 150,
@@ -8062,7 +8545,8 @@
       }
     ],
     "kanto_id": 150,
-    "johto_id": 249
+    "johto_id": 150,
+    "kalos_id": 457
   },
   {
     "id": 151,
@@ -8096,7 +8580,7 @@
       }
     ],
     "kanto_id": 151,
-    "johto_id": 250
+    "johto_id": 151
   },
   {
     "id": 152,
@@ -8146,7 +8630,8 @@
         "move": "Leaf Storm"
       }
     ],
-    "johto_id": 1
+    "johto_id": 152,
+    "paldea_id": 594
   },
   {
     "id": 153,
@@ -8196,7 +8681,8 @@
         "move": "Leaf Storm"
       }
     ],
-    "johto_id": 2
+    "johto_id": 153,
+    "paldea_id": 595
   },
   {
     "id": 154,
@@ -8241,7 +8727,8 @@
         "move": "Leaf Storm"
       }
     ],
-    "johto_id": 3
+    "johto_id": 154,
+    "paldea_id": 596
   },
   {
     "id": 155,
@@ -8315,7 +8802,9 @@
         "move": "Eruption"
       }
     ],
-    "johto_id": 4
+    "johto_id": 155,
+    "hisui_id": 4,
+    "paldea_id": 597
   },
   {
     "id": 156,
@@ -8389,7 +8878,9 @@
         "move": "Eruption"
       }
     ],
-    "johto_id": 5
+    "johto_id": 156,
+    "hisui_id": 5,
+    "paldea_id": 598
   },
   {
     "id": 157,
@@ -8462,7 +8953,9 @@
         "move": "Overheat"
       }
     ],
-    "johto_id": 6
+    "johto_id": 157,
+    "hisui_id": 6,
+    "paldea_id": 599
   },
   {
     "id": 158,
@@ -8520,7 +9013,8 @@
         "move": "Outrage"
       }
     ],
-    "johto_id": 7
+    "johto_id": 158,
+    "paldea_id": 600
   },
   {
     "id": 159,
@@ -8578,7 +9072,8 @@
         "move": "Outrage"
       }
     ],
-    "johto_id": 8
+    "johto_id": 159,
+    "paldea_id": 601
   },
   {
     "id": 160,
@@ -8635,7 +9130,8 @@
         "move": "Outrage"
       }
     ],
-    "johto_id": 9
+    "johto_id": 160,
+    "paldea_id": 602
   },
   {
     "id": 161,
@@ -8685,7 +9181,9 @@
         "move": "Hyper Voice"
       }
     ],
-    "johto_id": 19
+    "johto_id": 161,
+    "kalos_id": 109,
+    "paldea_id": 422
   },
   {
     "id": 162,
@@ -8730,7 +9228,9 @@
         "move": "Hyper Voice"
       }
     ],
-    "johto_id": 20
+    "johto_id": 162,
+    "kalos_id": 110,
+    "paldea_id": 423
   },
   {
     "id": 163,
@@ -8793,8 +9293,12 @@
         "move": "Dream Eater"
       }
     ],
-    "johto_id": 15,
-    "sinnoh_id": 106
+    "johto_id": 163,
+    "sinnoh_id": 106,
+    "kalos_id": 423,
+    "alola_id": 339,
+    "galar_id": 19,
+    "paldea_id": 431
   },
   {
     "id": 164,
@@ -8856,8 +9360,12 @@
         "move": "Dream Eater"
       }
     ],
-    "johto_id": 16,
-    "sinnoh_id": 107
+    "johto_id": 164,
+    "sinnoh_id": 107,
+    "kalos_id": 424,
+    "alola_id": 340,
+    "galar_id": 20,
+    "paldea_id": 432
   },
   {
     "id": 165,
@@ -8908,7 +9416,9 @@
         "move": "Double-Edge"
       }
     ],
-    "johto_id": 30
+    "johto_id": 165,
+    "kalos_id": 74,
+    "alola_id": 20
   },
   {
     "id": 166,
@@ -8958,7 +9468,9 @@
         "move": "Double-Edge"
       }
     ],
-    "johto_id": 31
+    "johto_id": 166,
+    "kalos_id": 75,
+    "alola_id": 21
   },
   {
     "id": 167,
@@ -9029,7 +9541,10 @@
         "move": "Megahorn"
       }
     ],
-    "johto_id": 32
+    "johto_id": 167,
+    "kalos_id": 413,
+    "alola_id": 22,
+    "paldea_id": 401
   },
   {
     "id": 168,
@@ -9095,7 +9610,10 @@
         "move": "Megahorn"
       }
     ],
-    "johto_id": 33
+    "johto_id": 168,
+    "kalos_id": 414,
+    "alola_id": 23,
+    "paldea_id": 402
   },
   {
     "id": 169,
@@ -9149,10 +9667,14 @@
         "move": "Brave Bird"
       }
     ],
-    "johto_id": 39,
+    "johto_id": 169,
     "hoenn_id": 65,
     "sinnoh_id": 30,
-    "unova_id": 63
+    "unova_id": 187,
+    "kalos_id": 147,
+    "alola_id": 70,
+    "galar_id": 552,
+    "hisui_id": 36
   },
   {
     "id": 170,
@@ -9207,8 +9729,12 @@
         "move": "Hydro Pump"
       }
     ],
-    "johto_id": 174,
-    "hoenn_id": 181
+    "johto_id": 170,
+    "hoenn_id": 181,
+    "kalos_id": 300,
+    "alola_id": 201,
+    "galar_id": 220,
+    "paldea_id": 537
   },
   {
     "id": 171,
@@ -9258,8 +9784,12 @@
         "move": "Hydro Pump"
       }
     ],
-    "johto_id": 175,
-    "hoenn_id": 182
+    "johto_id": 171,
+    "hoenn_id": 182,
+    "kalos_id": 301,
+    "alola_id": 202,
+    "galar_id": 221,
+    "paldea_id": 538
   },
   {
     "id": 172,
@@ -9309,9 +9839,14 @@
         "move": "Volt Tackle"
       }
     ],
-    "johto_id": 21,
+    "johto_id": 172,
     "hoenn_id": 155,
-    "sinnoh_id": 103
+    "sinnoh_id": 103,
+    "kalos_id": 35,
+    "alola_id": 24,
+    "galar_id": 193,
+    "hisui_id": 55,
+    "paldea_id": 73
   },
   {
     "id": 173,
@@ -9369,9 +9904,13 @@
         "move": "Double-Edge"
       }
     ],
-    "johto_id": 40,
+    "johto_id": 173,
     "sinnoh_id": 99,
-    "unova_id": 88
+    "unova_id": 196,
+    "alola_id": 210,
+    "galar_id": 254,
+    "hisui_id": 199,
+    "paldea_id": 485
   },
   {
     "id": 174,
@@ -9422,9 +9961,13 @@
         "move": "Take Down"
       }
     ],
-    "johto_id": 43,
+    "johto_id": 174,
     "hoenn_id": 137,
-    "unova_id": 281
+    "unova_id": 288,
+    "kalos_id": 425,
+    "alola_id": 134,
+    "galar_id": 409,
+    "paldea_id": 59
   },
   {
     "id": 175,
@@ -9466,7 +10009,10 @@
         "move": "Moonblast"
       }
     ],
-    "johto_id": 46
+    "johto_id": 175,
+    "sinnoh_id": 173,
+    "galar_id": 257,
+    "hisui_id": 127
   },
   {
     "id": 176,
@@ -9517,7 +10063,10 @@
         "move": "Moonblast"
       }
     ],
-    "johto_id": 47
+    "johto_id": 176,
+    "sinnoh_id": 174,
+    "galar_id": 258,
+    "hisui_id": 128
   },
   {
     "id": 177,
@@ -9560,8 +10109,10 @@
         "move": "Future Sight"
       }
     ],
-    "johto_id": 159,
-    "hoenn_id": 162
+    "johto_id": 177,
+    "hoenn_id": 162,
+    "alola_id": 357,
+    "galar_id": 92
   },
   {
     "id": 178,
@@ -9603,8 +10154,10 @@
         "move": "Future Sight"
       }
     ],
-    "johto_id": 160,
-    "hoenn_id": 163
+    "johto_id": 178,
+    "hoenn_id": 163,
+    "alola_id": 358,
+    "galar_id": 93
   },
   {
     "id": 179,
@@ -9646,8 +10199,11 @@
         "move": "Thunder"
       }
     ],
-    "johto_id": 53,
-    "unova_id": 25
+    "johto_id": 179,
+    "unova_id": 159,
+    "kalos_id": 280,
+    "alola_id": 333,
+    "paldea_id": 101
   },
   {
     "id": 180,
@@ -9689,8 +10245,11 @@
         "move": "Thunder"
       }
     ],
-    "johto_id": 54,
-    "unova_id": 26
+    "johto_id": 180,
+    "unova_id": 160,
+    "kalos_id": 281,
+    "alola_id": 334,
+    "paldea_id": 102
   },
   {
     "id": 181,
@@ -9735,8 +10294,11 @@
         "move": "Zap Cannon"
       }
     ],
-    "johto_id": 55,
-    "unova_id": 27
+    "johto_id": 181,
+    "unova_id": 161,
+    "kalos_id": 282,
+    "alola_id": 335,
+    "paldea_id": 103
   },
   {
     "id": 182,
@@ -9777,8 +10339,11 @@
         "move": "Petal Dance"
       }
     ],
-    "johto_id": 86,
-    "hoenn_id": 91
+    "johto_id": 182,
+    "hoenn_id": 91,
+    "kalos_id": 108,
+    "galar_id": 58,
+    "paldea_id": 536
   },
   {
     "id": 183,
@@ -9845,10 +10410,13 @@
         "move": "Superpower"
       }
     ],
-    "johto_id": 130,
+    "johto_id": 183,
     "hoenn_id": 55,
     "sinnoh_id": 125,
-    "unova_id": 31
+    "unova_id": 165,
+    "kalos_id": 42,
+    "galar_id": 470,
+    "paldea_id": 47
   },
   {
     "id": 184,
@@ -9910,10 +10478,13 @@
         "move": "Superpower"
       }
     ],
-    "johto_id": 131,
+    "johto_id": 184,
     "hoenn_id": 56,
     "sinnoh_id": 126,
-    "unova_id": 32
+    "unova_id": 166,
+    "kalos_id": 43,
+    "galar_id": 471,
+    "paldea_id": 48
   },
   {
     "id": 185,
@@ -9978,8 +10549,13 @@
         "move": "Head Smash"
       }
     ],
-    "johto_id": 106,
-    "sinnoh_id": 93
+    "johto_id": 185,
+    "sinnoh_id": 93,
+    "kalos_id": 436,
+    "alola_id": 31,
+    "galar_id": 253,
+    "hisui_id": 124,
+    "paldea_id": 88
   },
   {
     "id": 186,
@@ -10004,7 +10580,11 @@
         "move": "Pound"
       }
     ],
-    "johto_id": 75
+    "johto_id": 186,
+    "kalos_id": 342,
+    "alola_id": 152,
+    "galar_id": 475,
+    "paldea_id": 430
   },
   {
     "id": 187,
@@ -10063,7 +10643,9 @@
         "move": "Bounce"
       }
     ],
-    "johto_id": 67
+    "johto_id": 187,
+    "kalos_id": 135,
+    "paldea_id": 16
   },
   {
     "id": 188,
@@ -10122,7 +10704,9 @@
         "move": "Bounce"
       }
     ],
-    "johto_id": 68
+    "johto_id": 188,
+    "kalos_id": 136,
+    "paldea_id": 17
   },
   {
     "id": 189,
@@ -10176,7 +10760,9 @@
         "move": "Bounce"
       }
     ],
-    "johto_id": 69
+    "johto_id": 189,
+    "kalos_id": 137,
+    "paldea_id": 18
   },
   {
     "id": 190,
@@ -10226,8 +10812,11 @@
         "move": "Last Resort"
       }
     ],
-    "johto_id": 122,
-    "sinnoh_id": 63
+    "johto_id": 190,
+    "sinnoh_id": 63,
+    "alola_id": 394,
+    "hisui_id": 78,
+    "paldea_id": 433
   },
   {
     "id": 191,
@@ -10285,8 +10874,9 @@
         "move": "Seed Bomb"
       }
     ],
-    "johto_id": 102,
-    "unova_id": 20
+    "johto_id": 191,
+    "unova_id": 157,
+    "paldea_id": 31
   },
   {
     "id": 192,
@@ -10351,8 +10941,9 @@
         "move": "Petal Blizzard"
       }
     ],
-    "johto_id": 103,
-    "unova_id": 21
+    "johto_id": 192,
+    "unova_id": 158,
+    "paldea_id": 32
   },
   {
     "id": 193,
@@ -10415,8 +11006,12 @@
         "move": "Bug Buzz"
       }
     ],
-    "johto_id": 101,
-    "unova_id": 286
+    "johto_id": 193,
+    "sinnoh_id": 183,
+    "unova_id": 293,
+    "kalos_id": 240,
+    "hisui_id": 105,
+    "paldea_id": 403
   },
   {
     "id": 194,
@@ -10467,8 +11062,11 @@
         "move": "Earthquake"
       }
     ],
-    "johto_id": 56,
-    "sinnoh_id": 117
+    "johto_id": 194,
+    "sinnoh_id": 117,
+    "kalos_id": 323,
+    "galar_id": 100,
+    "paldea_id": 53
   },
   {
     "id": 195,
@@ -10510,8 +11108,11 @@
         "move": "Earthquake"
       }
     ],
-    "johto_id": 57,
-    "sinnoh_id": 118
+    "johto_id": 195,
+    "sinnoh_id": 118,
+    "kalos_id": 324,
+    "galar_id": 101,
+    "paldea_id": 405
   },
   {
     "id": 196,
@@ -10556,8 +11157,14 @@
         "move": "Future Sight"
       }
     ],
-    "johto_id": 184,
-    "unova_id": 95
+    "johto_id": 196,
+    "sinnoh_id": 167,
+    "unova_id": 203,
+    "kalos_id": 234,
+    "alola_id": 127,
+    "galar_id": 200,
+    "hisui_id": 29,
+    "paldea_id": 183
   },
   {
     "id": 197,
@@ -10602,8 +11209,14 @@
         "move": "Crunch"
       }
     ],
-    "johto_id": 185,
-    "unova_id": 96
+    "johto_id": 197,
+    "sinnoh_id": 168,
+    "unova_id": 204,
+    "kalos_id": 235,
+    "alola_id": 128,
+    "galar_id": 201,
+    "hisui_id": 30,
+    "paldea_id": 184
   },
   {
     "id": 198,
@@ -10658,8 +11271,12 @@
         "move": "Sucker Punch"
       }
     ],
-    "johto_id": 208,
-    "sinnoh_id": 74
+    "johto_id": 198,
+    "sinnoh_id": 74,
+    "kalos_id": 357,
+    "alola_id": 277,
+    "hisui_id": 140,
+    "paldea_id": 232
   },
   {
     "id": 199,
@@ -10685,7 +11302,11 @@
         "move": "Stomp"
       }
     ],
-    "johto_id": 82
+    "johto_id": 199,
+    "kalos_id": 288,
+    "alola_id": 39,
+    "galar_id": 403,
+    "paldea_id": 326
   },
   {
     "id": 200,
@@ -10735,8 +11356,11 @@
         "move": "Power Gem"
       }
     ],
-    "johto_id": 214,
-    "sinnoh_id": 72
+    "johto_id": 200,
+    "sinnoh_id": 72,
+    "alola_id": 66,
+    "hisui_id": 197,
+    "paldea_id": 114
   },
   {
     "id": 201,
@@ -10757,8 +11381,9 @@
         "move": "Hidden Power"
       }
     ],
-    "johto_id": 61,
-    "sinnoh_id": 114
+    "johto_id": 201,
+    "sinnoh_id": 114,
+    "hisui_id": 142
   },
   {
     "id": 202,
@@ -10783,8 +11408,10 @@
         "move": "Mirror Coat"
       }
     ],
-    "johto_id": 107,
-    "hoenn_id": 161
+    "johto_id": 202,
+    "hoenn_id": 161,
+    "kalos_id": 272,
+    "galar_id": 217
   },
   {
     "id": 203,
@@ -10847,9 +11474,10 @@
         "move": "Psychic"
       }
     ],
-    "johto_id": 147,
+    "johto_id": 203,
     "hoenn_id": 164,
-    "sinnoh_id": 121
+    "sinnoh_id": 121,
+    "paldea_id": 192
   },
   {
     "id": 204,
@@ -10911,7 +11539,9 @@
         "move": "Double-Edge"
       }
     ],
-    "johto_id": 93
+    "johto_id": 204,
+    "alola_id": 363,
+    "paldea_id": 258
   },
   {
     "id": 205,
@@ -10973,7 +11603,9 @@
         "move": "Double-Edge"
       }
     ],
-    "johto_id": 94
+    "johto_id": 205,
+    "alola_id": 364,
+    "paldea_id": 259
   },
   {
     "id": 206,
@@ -11031,8 +11663,12 @@
         "move": "Endeavor"
       }
     ],
-    "johto_id": 52,
-    "unova_id": 35
+    "johto_id": 206,
+    "unova_id": 169,
+    "kalos_id": 40,
+    "alola_id": 314,
+    "galar_id": 426,
+    "paldea_id": 188
   },
   {
     "id": 207,
@@ -11095,8 +11731,12 @@
         "move": "Crabhammer"
       }
     ],
-    "johto_id": 189,
-    "unova_id": 221
+    "johto_id": 207,
+    "sinnoh_id": 153,
+    "unova_id": 249,
+    "kalos_id": 421,
+    "hisui_id": 185,
+    "paldea_id": 464
   },
   {
     "id": 208,
@@ -11162,9 +11802,12 @@
         "move": "Head Smash"
       }
     ],
-    "johto_id": 63,
+    "johto_id": 208,
     "sinnoh_id": 35,
-    "unova_id": 72
+    "unova_id": 191,
+    "kalos_id": 207,
+    "galar_id": 179,
+    "hisui_id": 119
   },
   {
     "id": 209,
@@ -11230,7 +11873,10 @@
         "move": "Crunch"
       }
     ],
-    "johto_id": 123
+    "johto_id": 209,
+    "kalos_id": 224,
+    "alola_id": 258,
+    "paldea_id": 580
   },
   {
     "id": 210,
@@ -11295,7 +11941,10 @@
         "move": "Crunch"
       }
     ],
-    "johto_id": 124
+    "johto_id": 210,
+    "kalos_id": 225,
+    "alola_id": 259,
+    "paldea_id": 581
   },
   {
     "id": 211,
@@ -11342,7 +11991,11 @@
         "move": "Aqua Tail"
       }
     ],
-    "johto_id": 161
+    "johto_id": 211,
+    "kalos_id": 191,
+    "galar_id": 304,
+    "hisui_id": 84,
+    "paldea_id": 331
   },
   {
     "id": 212,
@@ -11400,7 +12053,13 @@
         "move": "Iron Head"
       }
     ],
-    "johto_id": 111
+    "johto_id": 212,
+    "sinnoh_id": 196,
+    "kalos_id": 443,
+    "alola_id": 276,
+    "galar_id": 464,
+    "hisui_id": 74,
+    "paldea_id": 261
   },
   {
     "id": 213,
@@ -11446,8 +12105,10 @@
         "move": "Stone Edge"
       }
     ],
-    "johto_id": 166,
-    "unova_id": 232
+    "johto_id": 213,
+    "unova_id": 251,
+    "kalos_id": 320,
+    "galar_id": 227
   },
   {
     "id": 214,
@@ -11505,10 +12166,15 @@
         "move": "Close Combat"
       }
     ],
-    "johto_id": 113,
+    "johto_id": 214,
     "hoenn_id": 168,
     "sinnoh_id": 62,
-    "unova_id": 145
+    "unova_id": 217,
+    "kalos_id": 284,
+    "alola_id": 393,
+    "galar_id": 466,
+    "hisui_id": 75,
+    "paldea_id": 262
   },
   {
     "id": 215,
@@ -11559,9 +12225,14 @@
         "move": "Slash"
       }
     ],
-    "johto_id": 213,
+    "johto_id": 215,
     "sinnoh_id": 144,
-    "unova_id": 252
+    "unova_id": 271,
+    "kalos_id": 397,
+    "alola_id": 249,
+    "galar_id": 292,
+    "hisui_id": 202,
+    "paldea_id": 230
   },
   {
     "id": 216,
@@ -11623,7 +12294,10 @@
         "move": "Thrash"
       }
     ],
-    "johto_id": 193
+    "johto_id": 216,
+    "kalos_id": 438,
+    "hisui_id": 112,
+    "paldea_id": 215
   },
   {
     "id": 217,
@@ -11689,7 +12363,10 @@
         "move": "Hammer Arm"
       }
     ],
-    "johto_id": 194
+    "johto_id": 217,
+    "kalos_id": 439,
+    "hisui_id": 113,
+    "paldea_id": 216
   },
   {
     "id": 218,
@@ -11755,8 +12432,10 @@
         "move": "Earth Power"
       }
     ],
-    "johto_id": 211,
-    "hoenn_id": 103
+    "johto_id": 218,
+    "hoenn_id": 103,
+    "kalos_id": 318,
+    "paldea_id": 480
   },
   {
     "id": 219,
@@ -11818,8 +12497,10 @@
         "move": "Flamethrower"
       }
     ],
-    "johto_id": 212,
-    "hoenn_id": 104
+    "johto_id": 219,
+    "hoenn_id": 104,
+    "kalos_id": 319,
+    "paldea_id": 481
   },
   {
     "id": 220,
@@ -11878,8 +12559,13 @@
         "move": "Blizzard"
       }
     ],
-    "johto_id": 191,
-    "unova_id": 258
+    "johto_id": 220,
+    "sinnoh_id": 203,
+    "unova_id": 274,
+    "kalos_id": 382,
+    "galar_id": 75,
+    "hisui_id": 212,
+    "paldea_id": 435
   },
   {
     "id": 221,
@@ -11946,8 +12632,13 @@
         "move": "Thrash"
       }
     ],
-    "johto_id": 192,
-    "unova_id": 259
+    "johto_id": 221,
+    "sinnoh_id": 204,
+    "unova_id": 275,
+    "kalos_id": 383,
+    "galar_id": 76,
+    "hisui_id": 213,
+    "paldea_id": 436
   },
   {
     "id": 222,
@@ -12002,9 +12693,12 @@
         "move": "Mirror Coat"
       }
     ],
-    "johto_id": 171,
+    "johto_id": 222,
     "hoenn_id": 180,
-    "unova_id": 237
+    "unova_id": 256,
+    "kalos_id": 299,
+    "alola_id": 112,
+    "galar_id": 236
   },
   {
     "id": 223,
@@ -12054,9 +12748,13 @@
         "move": "Hyper Beam"
       }
     ],
-    "johto_id": 172,
+    "johto_id": 223,
     "sinnoh_id": 132,
-    "unova_id": 235
+    "unova_id": 254,
+    "kalos_id": 297,
+    "alola_id": 329,
+    "galar_id": 148,
+    "hisui_id": 146
   },
   {
     "id": 224,
@@ -12105,9 +12803,13 @@
         "move": "Hyper Beam"
       }
     ],
-    "johto_id": 173,
+    "johto_id": 224,
     "sinnoh_id": 133,
-    "unova_id": 236
+    "unova_id": 255,
+    "kalos_id": 298,
+    "alola_id": 330,
+    "galar_id": 149,
+    "hisui_id": 147
   },
   {
     "id": 225,
@@ -12157,8 +12859,12 @@
         "move": "Blizzard"
       }
     ],
-    "johto_id": 190,
-    "unova_id": 254
+    "johto_id": 225,
+    "unova_id": 273,
+    "kalos_id": 396,
+    "alola_id": 81,
+    "galar_id": 78,
+    "paldea_id": 354
   },
   {
     "id": 226,
@@ -12204,9 +12910,13 @@
         "move": "Double-Edge"
       }
     ],
-    "johto_id": 197,
+    "johto_id": 226,
     "sinnoh_id": 141,
-    "unova_id": 234
+    "unova_id": 253,
+    "kalos_id": 293,
+    "alola_id": 332,
+    "galar_id": 355,
+    "hisui_id": 165
   },
   {
     "id": 227,
@@ -12260,9 +12970,13 @@
         "move": "Brave Bird"
       }
     ],
-    "johto_id": 198,
+    "johto_id": 227,
     "hoenn_id": 115,
-    "unova_id": 203
+    "unova_id": 233,
+    "kalos_id": 418,
+    "alola_id": 208,
+    "galar_id": 481,
+    "paldea_id": 558
   },
   {
     "id": 228,
@@ -12313,7 +13027,11 @@
         "move": "Crunch"
       }
     ],
-    "johto_id": 209
+    "johto_id": 228,
+    "sinnoh_id": 176,
+    "kalos_id": 228,
+    "alola_id": 367,
+    "paldea_id": 25
   },
   {
     "id": 229,
@@ -12371,7 +13089,11 @@
         "move": "Overheat"
       }
     ],
-    "johto_id": 210
+    "johto_id": 229,
+    "sinnoh_id": 177,
+    "kalos_id": 229,
+    "alola_id": 368,
+    "paldea_id": 26
   },
   {
     "id": 230,
@@ -12425,8 +13147,11 @@
         "move": "Wave Crash"
       }
     ],
-    "johto_id": 188,
-    "hoenn_id": 186
+    "johto_id": 230,
+    "hoenn_id": 186,
+    "kalos_id": 194,
+    "galar_id": 502,
+    "paldea_id": 529
   },
   {
     "id": 231,
@@ -12480,8 +13205,9 @@
         "move": "Double-Edge"
       }
     ],
-    "johto_id": 195,
-    "hoenn_id": 165
+    "johto_id": 231,
+    "hoenn_id": 165,
+    "paldea_id": 122
   },
   {
     "id": 232,
@@ -12546,8 +13272,9 @@
         "move": "Giga Impact"
       }
     ],
-    "johto_id": 196,
-    "hoenn_id": 166
+    "johto_id": 232,
+    "hoenn_id": 166,
+    "paldea_id": 123
   },
   {
     "id": 233,
@@ -12597,7 +13324,12 @@
         "move": "Hyper Beam"
       }
     ],
-    "johto_id": 216
+    "johto_id": 233,
+    "sinnoh_id": 193,
+    "alola_id": 218,
+    "galar_id": 508,
+    "hisui_id": 134,
+    "paldea_id": 566
   },
   {
     "id": 234,
@@ -12643,7 +13375,9 @@
         "move": "Double-Edge"
       }
     ],
-    "johto_id": 129
+    "johto_id": 234,
+    "hisui_id": 49,
+    "paldea_id": 204
   },
   {
     "id": 235,
@@ -12664,7 +13398,10 @@
         "move": "Tackle"
       }
     ],
-    "johto_id": 157
+    "johto_id": 235,
+    "kalos_id": 124,
+    "alola_id": 58,
+    "paldea_id": 516
   },
   {
     "id": 236,
@@ -12702,7 +13439,9 @@
         "move": "Tackle"
       }
     ],
-    "johto_id": 143
+    "johto_id": 236,
+    "galar_id": 107,
+    "paldea_id": 543
   },
   {
     "id": 237,
@@ -12763,7 +13502,9 @@
         "move": "Endeavor"
       }
     ],
-    "johto_id": 146
+    "johto_id": 237,
+    "galar_id": 110,
+    "paldea_id": 546
   },
   {
     "id": 238,
@@ -12818,7 +13559,10 @@
         "move": "Blizzard"
       }
     ],
-    "johto_id": 152
+    "johto_id": 238,
+    "kalos_id": 389,
+    "alola_id": 321,
+    "galar_id": 511
   },
   {
     "id": 239,
@@ -12876,8 +13620,13 @@
         "move": "Thunder"
       }
     ],
-    "johto_id": 154,
-    "unova_id": 56
+    "johto_id": 239,
+    "sinnoh_id": 197,
+    "unova_id": 180,
+    "alola_id": 226,
+    "galar_id": 513,
+    "hisui_id": 182,
+    "paldea_id": 507
   },
   {
     "id": 240,
@@ -12935,8 +13684,13 @@
         "move": "Fire Blast"
       }
     ],
-    "johto_id": 150,
-    "unova_id": 53
+    "johto_id": 240,
+    "sinnoh_id": 200,
+    "unova_id": 177,
+    "alola_id": 166,
+    "galar_id": 516,
+    "hisui_id": 174,
+    "paldea_id": 510
   },
   {
     "id": 241,
@@ -12985,7 +13739,10 @@
         "move": "High Horsepower"
       }
     ],
-    "johto_id": 149
+    "johto_id": 241,
+    "kalos_id": 279,
+    "alola_id": 138,
+    "galar_id": 462
   },
   {
     "id": 242,
@@ -13034,8 +13791,12 @@
         "move": "Last Resort"
       }
     ],
-    "johto_id": 218,
-    "sinnoh_id": 98
+    "johto_id": 242,
+    "sinnoh_id": 98,
+    "alola_id": 34,
+    "galar_id": 408,
+    "hisui_id": 88,
+    "paldea_id": 45
   },
   {
     "id": 243,
@@ -13096,7 +13857,7 @@
         "move": "Zap Cannon"
       }
     ],
-    "johto_id": 238
+    "johto_id": 243
   },
   {
     "id": 244,
@@ -13153,7 +13914,7 @@
         "move": "Eruption"
       }
     ],
-    "johto_id": 239
+    "johto_id": 244
   },
   {
     "id": 245,
@@ -13214,7 +13975,7 @@
         "move": "Blizzard"
       }
     ],
-    "johto_id": 240
+    "johto_id": 245
   },
   {
     "id": 246,
@@ -13277,8 +14038,12 @@
         "move": "Hyper Beam"
       }
     ],
-    "johto_id": 244,
-    "unova_id": 292
+    "johto_id": 246,
+    "unova_id": 299,
+    "kalos_id": 408,
+    "alola_id": 354,
+    "galar_id": 383,
+    "paldea_id": 316
   },
   {
     "id": 247,
@@ -13341,8 +14106,12 @@
         "move": "Hyper Beam"
       }
     ],
-    "johto_id": 245,
-    "unova_id": 293
+    "johto_id": 247,
+    "unova_id": 300,
+    "kalos_id": 409,
+    "alola_id": 355,
+    "galar_id": 384,
+    "paldea_id": 317
   },
   {
     "id": 248,
@@ -13408,8 +14177,12 @@
         "move": "Giga Impact"
       }
     ],
-    "johto_id": 246,
-    "unova_id": 294
+    "johto_id": 248,
+    "unova_id": 301,
+    "kalos_id": 410,
+    "alola_id": 356,
+    "galar_id": 385,
+    "paldea_id": 318
   },
   {
     "id": 249,
@@ -13459,7 +14232,7 @@
         "move": "Sky Attack"
       }
     ],
-    "johto_id": 247
+    "johto_id": 249
   },
   {
     "id": 250,
@@ -13513,7 +14286,7 @@
         "move": "Overheat"
       }
     ],
-    "johto_id": 248
+    "johto_id": 250
   },
   {
     "id": 251,
@@ -13609,7 +14382,8 @@
         "move": "Leaf Storm"
       }
     ],
-    "hoenn_id": 1
+    "hoenn_id": 1,
+    "paldea_id": 603
   },
   {
     "id": 253,
@@ -13679,7 +14453,8 @@
         "move": "Leaf Storm"
       }
     ],
-    "hoenn_id": 2
+    "hoenn_id": 2,
+    "paldea_id": 604
   },
   {
     "id": 254,
@@ -13744,7 +14519,8 @@
         "move": "Leaf Storm"
       }
     ],
-    "hoenn_id": 3
+    "hoenn_id": 3,
+    "paldea_id": 605
   },
   {
     "id": 255,
@@ -13802,7 +14578,8 @@
         "move": "Flare Blitz"
       }
     ],
-    "hoenn_id": 4
+    "hoenn_id": 4,
+    "paldea_id": 606
   },
   {
     "id": 256,
@@ -13865,7 +14642,8 @@
         "move": "Flare Blitz"
       }
     ],
-    "hoenn_id": 5
+    "hoenn_id": 5,
+    "paldea_id": 607
   },
   {
     "id": 257,
@@ -13927,7 +14705,8 @@
         "move": "Brave Bird"
       }
     ],
-    "hoenn_id": 6
+    "hoenn_id": 6,
+    "paldea_id": 608
   },
   {
     "id": 258,
@@ -13997,7 +14776,8 @@
         "move": "Hydro Pump"
       }
     ],
-    "hoenn_id": 7
+    "hoenn_id": 7,
+    "paldea_id": 609
   },
   {
     "id": 259,
@@ -14076,7 +14856,8 @@
         "move": "Hydro Pump"
       }
     ],
-    "hoenn_id": 8
+    "hoenn_id": 8,
+    "paldea_id": 610
   },
   {
     "id": 260,
@@ -14154,7 +14935,8 @@
         "move": "Sludge Wave"
       }
     ],
-    "hoenn_id": 9
+    "hoenn_id": 9,
+    "paldea_id": 611
   },
   {
     "id": 261,
@@ -14204,7 +14986,9 @@
         "move": "Play Rough"
       }
     ],
-    "hoenn_id": 10
+    "hoenn_id": 10,
+    "kalos_id": 350,
+    "paldea_id": 406
   },
   {
     "id": 262,
@@ -14265,7 +15049,9 @@
         "move": "Play Rough"
       }
     ],
-    "hoenn_id": 11
+    "hoenn_id": 11,
+    "kalos_id": 351,
+    "paldea_id": 407
   },
   {
     "id": 263,
@@ -14319,7 +15105,9 @@
         "move": "Double-Edge"
       }
     ],
-    "hoenn_id": 12
+    "hoenn_id": 12,
+    "kalos_id": 12,
+    "galar_id": 31
   },
   {
     "id": 264,
@@ -14381,7 +15169,9 @@
         "move": "Double-Edge"
       }
     ],
-    "hoenn_id": 13
+    "hoenn_id": 13,
+    "kalos_id": 13,
+    "galar_id": 32
   },
   {
     "id": 265,
@@ -14416,7 +15206,8 @@
       }
     ],
     "hoenn_id": 14,
-    "sinnoh_id": 48
+    "sinnoh_id": 48,
+    "hisui_id": 18
   },
   {
     "id": 266,
@@ -14447,7 +15238,8 @@
       }
     ],
     "hoenn_id": 15,
-    "sinnoh_id": 49
+    "sinnoh_id": 49,
+    "hisui_id": 19
   },
   {
     "id": 267,
@@ -14494,7 +15286,8 @@
       }
     ],
     "hoenn_id": 16,
-    "sinnoh_id": 50
+    "sinnoh_id": 50,
+    "hisui_id": 20
   },
   {
     "id": 268,
@@ -14525,7 +15318,8 @@
       }
     ],
     "hoenn_id": 17,
-    "sinnoh_id": 51
+    "sinnoh_id": 51,
+    "hisui_id": 21
   },
   {
     "id": 269,
@@ -14572,7 +15366,8 @@
       }
     ],
     "hoenn_id": 18,
-    "sinnoh_id": 52
+    "sinnoh_id": 52,
+    "hisui_id": 22
   },
   {
     "id": 270,
@@ -14631,7 +15426,10 @@
         "move": "Energy Ball"
       }
     ],
-    "hoenn_id": 19
+    "hoenn_id": 19,
+    "kalos_id": 361,
+    "galar_id": 36,
+    "paldea_id": 454
   },
   {
     "id": 271,
@@ -14706,7 +15504,10 @@
         "move": "Hydro Pump"
       }
     ],
-    "hoenn_id": 20
+    "hoenn_id": 20,
+    "kalos_id": 362,
+    "galar_id": 37,
+    "paldea_id": 455
   },
   {
     "id": 272,
@@ -14732,7 +15533,10 @@
         "move": "Fake Out"
       }
     ],
-    "hoenn_id": 21
+    "hoenn_id": 21,
+    "kalos_id": 363,
+    "galar_id": 38,
+    "paldea_id": 456
   },
   {
     "id": 273,
@@ -14790,7 +15594,9 @@
         "move": "Explosion"
       }
     ],
-    "hoenn_id": 22
+    "hoenn_id": 22,
+    "galar_id": 39,
+    "paldea_id": 438
   },
   {
     "id": 274,
@@ -14861,7 +15667,9 @@
         "move": "Leaf Blade"
       }
     ],
-    "hoenn_id": 23
+    "hoenn_id": 23,
+    "galar_id": 40,
+    "paldea_id": 439
   },
   {
     "id": 275,
@@ -14891,7 +15699,9 @@
         "move": "Payback"
       }
     ],
-    "hoenn_id": 24
+    "hoenn_id": 24,
+    "galar_id": 41,
+    "paldea_id": 440
   },
   {
     "id": 276,
@@ -14946,7 +15756,8 @@
         "move": "Reversal"
       }
     ],
-    "hoenn_id": 25
+    "hoenn_id": 25,
+    "kalos_id": 172
   },
   {
     "id": 277,
@@ -15012,7 +15823,8 @@
         "move": "Reversal"
       }
     ],
-    "hoenn_id": 26
+    "hoenn_id": 26,
+    "kalos_id": 173
   },
   {
     "id": 278,
@@ -15061,7 +15873,11 @@
     ],
     "hoenn_id": 27,
     "sinnoh_id": 119,
-    "unova_id": 212
+    "unova_id": 242,
+    "kalos_id": 170,
+    "alola_id": 40,
+    "galar_id": 62,
+    "paldea_id": 132
   },
   {
     "id": 279,
@@ -15117,7 +15933,11 @@
     ],
     "hoenn_id": 28,
     "sinnoh_id": 120,
-    "unova_id": 213
+    "unova_id": 243,
+    "kalos_id": 171,
+    "alola_id": 41,
+    "galar_id": 63,
+    "paldea_id": 133
   },
   {
     "id": 280,
@@ -15172,7 +15992,12 @@
         "move": "Future Sight"
       }
     ],
-    "hoenn_id": 29
+    "hoenn_id": 29,
+    "sinnoh_id": 157,
+    "kalos_id": 64,
+    "galar_id": 120,
+    "hisui_id": 101,
+    "paldea_id": 62
   },
   {
     "id": 281,
@@ -15231,7 +16056,12 @@
         "move": "Future Sight"
       }
     ],
-    "hoenn_id": 30
+    "hoenn_id": 30,
+    "sinnoh_id": 158,
+    "kalos_id": 65,
+    "galar_id": 121,
+    "hisui_id": 102,
+    "paldea_id": 63
   },
   {
     "id": 282,
@@ -15285,7 +16115,12 @@
         "move": "Future Sight"
       }
     ],
-    "hoenn_id": 31
+    "hoenn_id": 31,
+    "sinnoh_id": 159,
+    "kalos_id": 66,
+    "galar_id": 122,
+    "hisui_id": 103,
+    "paldea_id": 64
   },
   {
     "id": 283,
@@ -15320,7 +16155,10 @@
         "move": "Bubble Beam"
       }
     ],
-    "hoenn_id": 32
+    "hoenn_id": 32,
+    "kalos_id": 47,
+    "alola_id": 139,
+    "paldea_id": 49
   },
   {
     "id": 284,
@@ -15366,7 +16204,10 @@
         "move": "Bug Buzz"
       }
     ],
-    "hoenn_id": 33
+    "hoenn_id": 33,
+    "kalos_id": 48,
+    "alola_id": 140,
+    "paldea_id": 50
   },
   {
     "id": 285,
@@ -15412,7 +16253,8 @@
         "move": "Seed Bomb"
       }
     ],
-    "hoenn_id": 34
+    "hoenn_id": 34,
+    "paldea_id": 106
   },
   {
     "id": 286,
@@ -15474,7 +16316,8 @@
         "move": "Focus Punch"
       }
     ],
-    "hoenn_id": 35
+    "hoenn_id": 35,
+    "paldea_id": 107
   },
   {
     "id": 287,
@@ -15525,7 +16368,8 @@
       }
     ],
     "hoenn_id": 36,
-    "unova_id": 276
+    "unova_id": 283,
+    "paldea_id": 78
   },
   {
     "id": 288,
@@ -15580,7 +16424,8 @@
       }
     ],
     "hoenn_id": 37,
-    "unova_id": 277
+    "unova_id": 284,
+    "paldea_id": 79
   },
   {
     "id": 289,
@@ -15634,7 +16479,8 @@
       }
     ],
     "hoenn_id": 38,
-    "unova_id": 278
+    "unova_id": 285,
+    "paldea_id": 80
   },
   {
     "id": 290,
@@ -15685,7 +16531,9 @@
         "move": "Dig"
       }
     ],
-    "hoenn_id": 42
+    "hoenn_id": 42,
+    "kalos_id": 111,
+    "galar_id": 104
   },
   {
     "id": 291,
@@ -15751,7 +16599,9 @@
         "move": "X-Scissor"
       }
     ],
-    "hoenn_id": 43
+    "hoenn_id": 43,
+    "kalos_id": 112,
+    "galar_id": 105
   },
   {
     "id": 292,
@@ -15813,7 +16663,9 @@
         "move": "Phantom Force"
       }
     ],
-    "hoenn_id": 44
+    "hoenn_id": 44,
+    "kalos_id": 113,
+    "galar_id": 106
   },
   {
     "id": 293,
@@ -15859,7 +16711,9 @@
         "move": "Hyper Voice"
       }
     ],
-    "hoenn_id": 45
+    "hoenn_id": 45,
+    "kalos_id": 140,
+    "galar_id": 478
   },
   {
     "id": 294,
@@ -15909,7 +16763,9 @@
         "move": "Hyper Voice"
       }
     ],
-    "hoenn_id": 46
+    "hoenn_id": 46,
+    "kalos_id": 141,
+    "galar_id": 479
   },
   {
     "id": 295,
@@ -15978,7 +16834,9 @@
         "move": "Hyper Beam"
       }
     ],
-    "hoenn_id": 47
+    "hoenn_id": 47,
+    "kalos_id": 142,
+    "galar_id": 480
   },
   {
     "id": 296,
@@ -16040,7 +16898,10 @@
         "move": "Heavy Slam"
       }
     ],
-    "hoenn_id": 48
+    "hoenn_id": 48,
+    "kalos_id": 248,
+    "alola_id": 56,
+    "paldea_id": 116
   },
   {
     "id": 297,
@@ -16105,7 +16966,10 @@
         "move": "Headlong Rush"
       }
     ],
-    "hoenn_id": 49
+    "hoenn_id": 49,
+    "kalos_id": 249,
+    "alola_id": 57,
+    "paldea_id": 117
   },
   {
     "id": 298,
@@ -16146,7 +17010,10 @@
     ],
     "hoenn_id": 54,
     "sinnoh_id": 124,
-    "unova_id": 30
+    "unova_id": 164,
+    "kalos_id": 41,
+    "galar_id": 469,
+    "paldea_id": 46
   },
   {
     "id": 299,
@@ -16209,7 +17076,12 @@
       }
     ],
     "hoenn_id": 60,
-    "unova_id": 164
+    "sinnoh_id": 155,
+    "unova_id": 222,
+    "kalos_id": 246,
+    "alola_id": 198,
+    "hisui_id": 190,
+    "paldea_id": 457
   },
   {
     "id": 300,
@@ -16268,7 +17140,8 @@
       }
     ],
     "hoenn_id": 61,
-    "unova_id": 78
+    "unova_id": 192,
+    "kalos_id": 78
   },
   {
     "id": 301,
@@ -16322,7 +17195,8 @@
       }
     ],
     "hoenn_id": 62,
-    "unova_id": 79
+    "unova_id": 193,
+    "kalos_id": 79
   },
   {
     "id": 302,
@@ -16384,7 +17258,11 @@
         "move": "Phantom Force"
       }
     ],
-    "hoenn_id": 68
+    "hoenn_id": 68,
+    "kalos_id": 276,
+    "alola_id": 102,
+    "galar_id": 294,
+    "paldea_id": 297
   },
   {
     "id": 303,
@@ -16434,7 +17312,10 @@
         "move": "Dynamic Punch"
       }
     ],
-    "hoenn_id": 69
+    "hoenn_id": 69,
+    "kalos_id": 216,
+    "alola_id": 325,
+    "galar_id": 295
   },
   {
     "id": 304,
@@ -16502,7 +17383,9 @@
       }
     ],
     "hoenn_id": 70,
-    "unova_id": 166
+    "unova_id": 224,
+    "kalos_id": 405,
+    "galar_id": 565
   },
   {
     "id": 305,
@@ -16570,7 +17453,9 @@
       }
     ],
     "hoenn_id": 71,
-    "unova_id": 167
+    "unova_id": 225,
+    "kalos_id": 406,
+    "galar_id": 566
   },
   {
     "id": 306,
@@ -16633,7 +17518,9 @@
       }
     ],
     "hoenn_id": 72,
-    "unova_id": 168
+    "unova_id": 226,
+    "kalos_id": 407,
+    "galar_id": 567
   },
   {
     "id": 307,
@@ -16685,7 +17572,9 @@
       }
     ],
     "hoenn_id": 76,
-    "sinnoh_id": 86
+    "sinnoh_id": 86,
+    "kalos_id": 143,
+    "paldea_id": 161
   },
   {
     "id": 308,
@@ -16732,7 +17621,9 @@
       }
     ],
     "hoenn_id": 77,
-    "sinnoh_id": 87
+    "sinnoh_id": 87,
+    "kalos_id": 144,
+    "paldea_id": 162
   },
   {
     "id": 309,
@@ -16794,7 +17685,10 @@
         "move": "Thunder"
       }
     ],
-    "hoenn_id": 78
+    "hoenn_id": 78,
+    "kalos_id": 226,
+    "alola_id": 370,
+    "galar_id": 66
   },
   {
     "id": 310,
@@ -16855,7 +17749,10 @@
         "move": "Thunder"
       }
     ],
-    "hoenn_id": 79
+    "hoenn_id": 79,
+    "kalos_id": 227,
+    "alola_id": 371,
+    "galar_id": 67
   },
   {
     "id": 311,
@@ -16900,7 +17797,9 @@
         "move": "Thunder"
       }
     ],
-    "hoenn_id": 80
+    "hoenn_id": 80,
+    "kalos_id": 96,
+    "paldea_id": 559
   },
   {
     "id": 312,
@@ -16945,7 +17844,9 @@
         "move": "Thunder"
       }
     ],
-    "hoenn_id": 81
+    "hoenn_id": 81,
+    "kalos_id": 97,
+    "paldea_id": 560
   },
   {
     "id": 313,
@@ -16994,7 +17895,9 @@
         "move": "Infestation"
       }
     ],
-    "hoenn_id": 86
+    "hoenn_id": 86,
+    "kalos_id": 133,
+    "paldea_id": 408
   },
   {
     "id": 314,
@@ -17039,7 +17942,9 @@
         "move": "Infestation"
       }
     ],
-    "hoenn_id": 87
+    "hoenn_id": 87,
+    "kalos_id": 134,
+    "paldea_id": 409
   },
   {
     "id": 315,
@@ -17092,7 +17997,10 @@
     ],
     "hoenn_id": 94,
     "sinnoh_id": 26,
-    "unova_id": 134
+    "unova_id": 213,
+    "kalos_id": 72,
+    "galar_id": 60,
+    "hisui_id": 90
   },
   {
     "id": 316,
@@ -17154,7 +18062,9 @@
         "move": "Explosion"
       }
     ],
-    "hoenn_id": 95
+    "hoenn_id": 95,
+    "kalos_id": 98,
+    "paldea_id": 139
   },
   {
     "id": 317,
@@ -17211,7 +18121,9 @@
         "move": "Explosion"
       }
     ],
-    "hoenn_id": 96
+    "hoenn_id": 96,
+    "kalos_id": 99,
+    "paldea_id": 140
   },
   {
     "id": 318,
@@ -17266,7 +18178,10 @@
         "move": "Double-Edge"
       }
     ],
-    "hoenn_id": 97
+    "hoenn_id": 97,
+    "kalos_id": 55,
+    "alola_id": 264,
+    "galar_id": 456
   },
   {
     "id": 319,
@@ -17320,7 +18235,10 @@
         "move": "Double-Edge"
       }
     ],
-    "hoenn_id": 98
+    "hoenn_id": 98,
+    "kalos_id": 56,
+    "alola_id": 265,
+    "galar_id": 457
   },
   {
     "id": 320,
@@ -17387,7 +18305,10 @@
       }
     ],
     "hoenn_id": 99,
-    "unova_id": 240
+    "unova_id": 259,
+    "kalos_id": 180,
+    "alola_id": 266,
+    "galar_id": 356
   },
   {
     "id": 321,
@@ -17449,7 +18370,10 @@
       }
     ],
     "hoenn_id": 100,
-    "unova_id": 241
+    "unova_id": 260,
+    "kalos_id": 181,
+    "alola_id": 267,
+    "galar_id": 357
   },
   {
     "id": 322,
@@ -17513,7 +18437,8 @@
       }
     ],
     "hoenn_id": 101,
-    "unova_id": 204
+    "unova_id": 234,
+    "paldea_id": 151
   },
   {
     "id": 323,
@@ -17572,7 +18497,8 @@
       }
     ],
     "hoenn_id": 102,
-    "unova_id": 205
+    "unova_id": 235,
+    "paldea_id": 152
   },
   {
     "id": 324,
@@ -17633,7 +18559,11 @@
         "move": "Eruption"
       }
     ],
-    "hoenn_id": 105
+    "hoenn_id": 105,
+    "kalos_id": 402,
+    "alola_id": 223,
+    "galar_id": 300,
+    "paldea_id": 150
   },
   {
     "id": 325,
@@ -17684,7 +18614,9 @@
       }
     ],
     "hoenn_id": 110,
-    "unova_id": 206
+    "unova_id": 236,
+    "kalos_id": 160,
+    "paldea_id": 111
   },
   {
     "id": 326,
@@ -17734,7 +18666,9 @@
       }
     ],
     "hoenn_id": 111,
-    "unova_id": 207
+    "unova_id": 237,
+    "kalos_id": 161,
+    "paldea_id": 112
   },
   {
     "id": 327,
@@ -17783,7 +18717,9 @@
         "move": "Thrash"
       }
     ],
-    "hoenn_id": 114
+    "hoenn_id": 114,
+    "kalos_id": 437,
+    "alola_id": 105
   },
   {
     "id": 328,
@@ -17850,7 +18786,11 @@
       }
     ],
     "hoenn_id": 116,
-    "unova_id": 121
+    "unova_id": 209,
+    "kalos_id": 309,
+    "alola_id": 235,
+    "galar_id": 321,
+    "paldea_id": 519
   },
   {
     "id": 329,
@@ -17918,7 +18858,11 @@
       }
     ],
     "hoenn_id": 117,
-    "unova_id": 122
+    "unova_id": 210,
+    "kalos_id": 310,
+    "alola_id": 236,
+    "galar_id": 322,
+    "paldea_id": 520
   },
   {
     "id": 330,
@@ -17981,7 +18925,11 @@
       }
     ],
     "hoenn_id": 118,
-    "unova_id": 123
+    "unova_id": 211,
+    "kalos_id": 311,
+    "alola_id": 237,
+    "galar_id": 323,
+    "paldea_id": 521
   },
   {
     "id": 331,
@@ -18035,7 +18983,8 @@
         "move": "Energy Ball"
       }
     ],
-    "hoenn_id": 119
+    "hoenn_id": 119,
+    "paldea_id": 252
   },
   {
     "id": 332,
@@ -18085,7 +19034,8 @@
         "move": "Energy Ball"
       }
     ],
-    "hoenn_id": 120
+    "hoenn_id": 120,
+    "paldea_id": 253
   },
   {
     "id": 333,
@@ -18141,7 +19091,11 @@
       }
     ],
     "hoenn_id": 121,
-    "unova_id": 246
+    "sinnoh_id": 171,
+    "unova_id": 265,
+    "kalos_id": 445,
+    "galar_id": 521,
+    "paldea_id": 219
   },
   {
     "id": 334,
@@ -18192,7 +19146,11 @@
       }
     ],
     "hoenn_id": 122,
-    "unova_id": 247
+    "sinnoh_id": 172,
+    "unova_id": 266,
+    "kalos_id": 446,
+    "galar_id": 522,
+    "paldea_id": 220
   },
   {
     "id": 335,
@@ -18246,7 +19204,9 @@
       }
     ],
     "hoenn_id": 123,
-    "unova_id": 186
+    "unova_id": 229,
+    "kalos_id": 158,
+    "paldea_id": 217
   },
   {
     "id": 336,
@@ -18304,7 +19264,9 @@
       }
     ],
     "hoenn_id": 124,
-    "unova_id": 187
+    "unova_id": 230,
+    "kalos_id": 159,
+    "paldea_id": 218
   },
   {
     "id": 337,
@@ -18363,7 +19325,9 @@
       }
     ],
     "hoenn_id": 125,
-    "unova_id": 214
+    "unova_id": 244,
+    "kalos_id": 165,
+    "galar_id": 362
   },
   {
     "id": 338,
@@ -18422,7 +19386,9 @@
       }
     ],
     "hoenn_id": 126,
-    "unova_id": 215
+    "unova_id": 245,
+    "kalos_id": 166,
+    "galar_id": 363
   },
   {
     "id": 339,
@@ -18482,7 +19448,12 @@
       }
     ],
     "hoenn_id": 127,
-    "sinnoh_id": 80
+    "sinnoh_id": 80,
+    "kalos_id": 346,
+    "alola_id": 93,
+    "galar_id": 228,
+    "hisui_id": 97,
+    "paldea_id": 168
   },
   {
     "id": 340,
@@ -18545,7 +19516,12 @@
       }
     ],
     "hoenn_id": 128,
-    "sinnoh_id": 81
+    "sinnoh_id": 81,
+    "kalos_id": 347,
+    "alola_id": 94,
+    "galar_id": 229,
+    "hisui_id": 98,
+    "paldea_id": 169
   },
   {
     "id": 341,
@@ -18608,7 +19584,11 @@
       }
     ],
     "hoenn_id": 129,
-    "unova_id": 279
+    "unova_id": 286,
+    "kalos_id": 51,
+    "alola_id": 389,
+    "galar_id": 102,
+    "paldea_id": 410
   },
   {
     "id": 342,
@@ -18667,7 +19647,11 @@
       }
     ],
     "hoenn_id": 130,
-    "unova_id": 280
+    "unova_id": 287,
+    "kalos_id": 52,
+    "alola_id": 390,
+    "galar_id": 103,
+    "paldea_id": 411
   },
   {
     "id": 343,
@@ -18731,7 +19715,9 @@
       }
     ],
     "hoenn_id": 131,
-    "unova_id": 169
+    "unova_id": 227,
+    "alola_id": 372,
+    "galar_id": 82
   },
   {
     "id": 344,
@@ -18794,7 +19780,9 @@
       }
     ],
     "hoenn_id": 132,
-    "unova_id": 170
+    "unova_id": 228,
+    "alola_id": 373,
+    "galar_id": 83
   },
   {
     "id": 345,
@@ -18853,7 +19841,9 @@
         "move": "Energy Ball"
       }
     ],
-    "hoenn_id": 133
+    "hoenn_id": 133,
+    "alola_id": 346,
+    "galar_id": 560
   },
   {
     "id": 346,
@@ -18907,7 +19897,9 @@
         "move": "Energy Ball"
       }
     ],
-    "hoenn_id": 134
+    "hoenn_id": 134,
+    "alola_id": 347,
+    "galar_id": 561
   },
   {
     "id": 347,
@@ -18974,7 +19966,9 @@
         "move": "X-Scissor"
       }
     ],
-    "hoenn_id": 135
+    "hoenn_id": 135,
+    "alola_id": 348,
+    "galar_id": 562
   },
   {
     "id": 348,
@@ -19036,7 +20030,9 @@
         "move": "X-Scissor"
       }
     ],
-    "hoenn_id": 136
+    "hoenn_id": 136,
+    "alola_id": 349,
+    "galar_id": 563
   },
   {
     "id": 349,
@@ -19063,7 +20059,10 @@
       }
     ],
     "hoenn_id": 140,
-    "sinnoh_id": 138
+    "sinnoh_id": 138,
+    "alola_id": 155,
+    "galar_id": 152,
+    "paldea_id": 488
   },
   {
     "id": 350,
@@ -19117,7 +20116,10 @@
       }
     ],
     "hoenn_id": 141,
-    "sinnoh_id": 139
+    "sinnoh_id": 139,
+    "alola_id": 156,
+    "galar_id": 153,
+    "paldea_id": 489
   },
   {
     "id": 351,
@@ -19175,7 +20177,8 @@
       }
     ],
     "hoenn_id": 142,
-    "unova_id": 163
+    "unova_id": 221,
+    "alola_id": 181
   },
   {
     "id": 352,
@@ -19224,7 +20227,9 @@
         "move": "Power Whip"
       }
     ],
-    "hoenn_id": 145
+    "hoenn_id": 145,
+    "kalos_id": 116,
+    "alola_id": 341
   },
   {
     "id": 353,
@@ -19275,7 +20280,10 @@
       }
     ],
     "hoenn_id": 146,
-    "unova_id": 210
+    "unova_id": 240,
+    "kalos_id": 428,
+    "alola_id": 376,
+    "paldea_id": 298
   },
   {
     "id": 354,
@@ -19325,7 +20333,10 @@
       }
     ],
     "hoenn_id": 147,
-    "unova_id": 211
+    "unova_id": 241,
+    "kalos_id": 429,
+    "alola_id": 377,
+    "paldea_id": 299
   },
   {
     "id": 355,
@@ -19375,7 +20386,11 @@
         "move": "Future Sight"
       }
     ],
-    "hoenn_id": 148
+    "hoenn_id": 148,
+    "sinnoh_id": 189,
+    "galar_id": 135,
+    "hisui_id": 158,
+    "paldea_id": 475
   },
   {
     "id": 356,
@@ -19441,7 +20456,11 @@
         "move": "Future Sight"
       }
     ],
-    "hoenn_id": 149
+    "hoenn_id": 149,
+    "sinnoh_id": 190,
+    "galar_id": 136,
+    "hisui_id": 159,
+    "paldea_id": 476
   },
   {
     "id": 357,
@@ -19496,7 +20515,10 @@
       }
     ],
     "hoenn_id": 150,
-    "unova_id": 288
+    "sinnoh_id": 185,
+    "unova_id": 295,
+    "alola_id": 388,
+    "paldea_id": 246
   },
   {
     "id": 358,
@@ -19542,7 +20564,10 @@
       }
     ],
     "hoenn_id": 151,
-    "sinnoh_id": 83
+    "sinnoh_id": 83,
+    "kalos_id": 265,
+    "hisui_id": 196,
+    "paldea_id": 479
   },
   {
     "id": 359,
@@ -19592,7 +20617,11 @@
       }
     ],
     "hoenn_id": 152,
-    "unova_id": 216
+    "sinnoh_id": 209,
+    "unova_id": 246,
+    "kalos_id": 162,
+    "alola_id": 245,
+    "galar_id": 534
   },
   {
     "id": 360,
@@ -19622,7 +20651,9 @@
         "move": "Mirror Coat"
       }
     ],
-    "hoenn_id": 160
+    "hoenn_id": 160,
+    "kalos_id": 271,
+    "galar_id": 216
   },
   {
     "id": 361,
@@ -19680,7 +20711,12 @@
         "move": "Blizzard"
       }
     ],
-    "hoenn_id": 171
+    "hoenn_id": 171,
+    "sinnoh_id": 206,
+    "alola_id": 246,
+    "galar_id": 79,
+    "hisui_id": 205,
+    "paldea_id": 357
   },
   {
     "id": 362,
@@ -19733,7 +20769,12 @@
         "move": "Explosion"
       }
     ],
-    "hoenn_id": 172
+    "hoenn_id": 172,
+    "sinnoh_id": 207,
+    "alola_id": 247,
+    "galar_id": 80,
+    "hisui_id": 206,
+    "paldea_id": 358
   },
   {
     "id": 363,
@@ -19781,7 +20822,9 @@
       }
     ],
     "hoenn_id": 173,
-    "unova_id": 243
+    "unova_id": 262,
+    "galar_id": 557,
+    "hisui_id": 143
   },
   {
     "id": 364,
@@ -19829,7 +20872,9 @@
       }
     ],
     "hoenn_id": 174,
-    "unova_id": 244
+    "unova_id": 263,
+    "galar_id": 558,
+    "hisui_id": 144
   },
   {
     "id": 365,
@@ -19872,7 +20917,9 @@
       }
     ],
     "hoenn_id": 175,
-    "unova_id": 245
+    "unova_id": 264,
+    "galar_id": 559,
+    "hisui_id": 145
   },
   {
     "id": 366,
@@ -19906,7 +20953,9 @@
         "move": "Whirlpool"
       }
     ],
-    "hoenn_id": 176
+    "hoenn_id": 176,
+    "kalos_id": 294,
+    "alola_id": 326
   },
   {
     "id": 367,
@@ -19967,7 +21016,9 @@
         "move": "Hydro Pump"
       }
     ],
-    "hoenn_id": 177
+    "hoenn_id": 177,
+    "kalos_id": 295,
+    "alola_id": 327
   },
   {
     "id": 368,
@@ -20020,7 +21071,9 @@
         "move": "Hydro Pump"
       }
     ],
-    "hoenn_id": 178
+    "hoenn_id": 178,
+    "kalos_id": 296,
+    "alola_id": 328
   },
   {
     "id": 369,
@@ -20078,7 +21131,10 @@
         "move": "Head Smash"
       }
     ],
-    "hoenn_id": 179
+    "hoenn_id": 179,
+    "kalos_id": 195,
+    "alola_id": 262,
+    "galar_id": 564
   },
   {
     "id": 370,
@@ -20123,7 +21179,10 @@
         "move": "Hydro Pump"
       }
     ],
-    "hoenn_id": 183
+    "hoenn_id": 183,
+    "kalos_id": 182,
+    "alola_id": 111,
+    "paldea_id": 332
   },
   {
     "id": 371,
@@ -20185,7 +21244,11 @@
         "move": "Double-Edge"
       }
     ],
-    "hoenn_id": 187
+    "hoenn_id": 187,
+    "kalos_id": 167,
+    "alola_id": 117,
+    "galar_id": 535,
+    "paldea_id": 276
   },
   {
     "id": 372,
@@ -20247,7 +21310,11 @@
         "move": "Double-Edge"
       }
     ],
-    "hoenn_id": 188
+    "hoenn_id": 188,
+    "kalos_id": 168,
+    "alola_id": 118,
+    "galar_id": 536,
+    "paldea_id": 277
   },
   {
     "id": 373,
@@ -20309,7 +21376,11 @@
         "move": "Air Slash"
       }
     ],
-    "hoenn_id": 189
+    "hoenn_id": 189,
+    "kalos_id": 169,
+    "alola_id": 119,
+    "galar_id": 537,
+    "paldea_id": 278
   },
   {
     "id": 374,
@@ -20337,7 +21408,10 @@
       }
     ],
     "hoenn_id": 190,
-    "unova_id": 262
+    "unova_id": 278,
+    "alola_id": 214,
+    "galar_id": 547,
+    "paldea_id": 570
   },
   {
     "id": 375,
@@ -20397,7 +21471,10 @@
       }
     ],
     "hoenn_id": 191,
-    "unova_id": 263
+    "unova_id": 279,
+    "alola_id": 215,
+    "galar_id": 548,
+    "paldea_id": 571
   },
   {
     "id": 376,
@@ -20464,7 +21541,10 @@
       }
     ],
     "hoenn_id": 192,
-    "unova_id": 264
+    "unova_id": 280,
+    "alola_id": 216,
+    "galar_id": 549,
+    "paldea_id": 572
   },
   {
     "id": 377,
@@ -20529,7 +21609,8 @@
         "move": "Explosion"
       }
     ],
-    "hoenn_id": 193
+    "hoenn_id": 193,
+    "galar_id": 571
   },
   {
     "id": 378,
@@ -20594,7 +21675,8 @@
         "move": "Explosion"
       }
     ],
-    "hoenn_id": 194
+    "hoenn_id": 194,
+    "galar_id": 572
   },
   {
     "id": 379,
@@ -20663,7 +21745,8 @@
         "move": "Explosion"
       }
     ],
-    "hoenn_id": 195
+    "hoenn_id": 195,
+    "galar_id": 573
   },
   {
     "id": 380,
@@ -21160,7 +22243,9 @@
         "move": "Leaf Storm"
       }
     ],
-    "sinnoh_id": 1
+    "sinnoh_id": 1,
+    "hisui_id": 130,
+    "paldea_id": 612
   },
   {
     "id": 388,
@@ -21214,7 +22299,9 @@
         "move": "Leaf Storm"
       }
     ],
-    "sinnoh_id": 2
+    "sinnoh_id": 2,
+    "hisui_id": 131,
+    "paldea_id": 613
   },
   {
     "id": 389,
@@ -21272,7 +22359,9 @@
         "move": "Headlong Rush"
       }
     ],
-    "sinnoh_id": 3
+    "sinnoh_id": 3,
+    "hisui_id": 132,
+    "paldea_id": 614
   },
   {
     "id": 390,
@@ -21326,7 +22415,9 @@
         "move": "Flamethrower"
       }
     ],
-    "sinnoh_id": 4
+    "sinnoh_id": 4,
+    "hisui_id": 61,
+    "paldea_id": 615
   },
   {
     "id": 391,
@@ -21385,7 +22476,9 @@
         "move": "Flare Blitz"
       }
     ],
-    "sinnoh_id": 5
+    "sinnoh_id": 5,
+    "hisui_id": 62,
+    "paldea_id": 616
   },
   {
     "id": 392,
@@ -21443,7 +22536,9 @@
         "move": "Raging Fury"
       }
     ],
-    "sinnoh_id": 6
+    "sinnoh_id": 6,
+    "hisui_id": 63,
+    "paldea_id": 617
   },
   {
     "id": 393,
@@ -21501,7 +22596,9 @@
         "move": "Hydro Pump"
       }
     ],
-    "sinnoh_id": 7
+    "sinnoh_id": 7,
+    "hisui_id": 161,
+    "paldea_id": 618
   },
   {
     "id": 394,
@@ -21559,7 +22656,9 @@
         "move": "Hydro Pump"
       }
     ],
-    "sinnoh_id": 8
+    "sinnoh_id": 8,
+    "hisui_id": 162,
+    "paldea_id": 619
   },
   {
     "id": 395,
@@ -21621,7 +22720,9 @@
         "move": "Wave Crash"
       }
     ],
-    "sinnoh_id": 9
+    "sinnoh_id": 9,
+    "hisui_id": 163,
+    "paldea_id": 620
   },
   {
     "id": 396,
@@ -21676,7 +22777,10 @@
         "move": "Brave Bird"
       }
     ],
-    "sinnoh_id": 10
+    "sinnoh_id": 10,
+    "kalos_id": 252,
+    "hisui_id": 12,
+    "paldea_id": 97
   },
   {
     "id": 397,
@@ -21731,7 +22835,10 @@
         "move": "Brave Bird"
       }
     ],
-    "sinnoh_id": 11
+    "sinnoh_id": 11,
+    "kalos_id": 253,
+    "hisui_id": 13,
+    "paldea_id": 98
   },
   {
     "id": 398,
@@ -21785,7 +22892,10 @@
         "move": "Brave Bird"
       }
     ],
-    "sinnoh_id": 12
+    "sinnoh_id": 12,
+    "kalos_id": 254,
+    "hisui_id": 14,
+    "paldea_id": 99
   },
   {
     "id": 399,
@@ -21827,7 +22937,9 @@
         "move": "Double-Edge"
       }
     ],
-    "sinnoh_id": 13
+    "sinnoh_id": 13,
+    "kalos_id": 38,
+    "hisui_id": 10
   },
   {
     "id": 400,
@@ -21873,7 +22985,9 @@
         "move": "Double-Edge"
       }
     ],
-    "sinnoh_id": 14
+    "sinnoh_id": 14,
+    "kalos_id": 39,
+    "hisui_id": 11
   },
   {
     "id": 401,
@@ -21907,7 +23021,9 @@
         "move": "Bug Bite"
       }
     ],
-    "sinnoh_id": 15
+    "sinnoh_id": 15,
+    "hisui_id": 39,
+    "paldea_id": 33
   },
   {
     "id": 402,
@@ -21952,7 +23068,9 @@
         "move": "Bug Buzz"
       }
     ],
-    "sinnoh_id": 16
+    "sinnoh_id": 16,
+    "hisui_id": 40,
+    "paldea_id": 34
   },
   {
     "id": 403,
@@ -22006,7 +23124,10 @@
         "move": "Wild Charge"
       }
     ],
-    "sinnoh_id": 17
+    "sinnoh_id": 17,
+    "galar_id": 417,
+    "hisui_id": 15,
+    "paldea_id": 94
   },
   {
     "id": 404,
@@ -22060,7 +23181,10 @@
         "move": "Wild Charge"
       }
     ],
-    "sinnoh_id": 18
+    "sinnoh_id": 18,
+    "galar_id": 418,
+    "hisui_id": 16,
+    "paldea_id": 95
   },
   {
     "id": 405,
@@ -22109,7 +23233,10 @@
         "move": "Wild Charge"
       }
     ],
-    "sinnoh_id": 19
+    "sinnoh_id": 19,
+    "galar_id": 419,
+    "hisui_id": 17,
+    "paldea_id": 96
   },
   {
     "id": 406,
@@ -22136,8 +23263,12 @@
         "move": "Absorb"
       }
     ],
+    "hoenn_id": 206,
     "sinnoh_id": 25,
-    "unova_id": 133
+    "unova_id": 212,
+    "kalos_id": 71,
+    "galar_id": 59,
+    "hisui_id": 89
   },
   {
     "id": 407,
@@ -22183,8 +23314,12 @@
         "move": "Leaf Storm"
       }
     ],
+    "hoenn_id": 207,
     "sinnoh_id": 27,
-    "unova_id": 135
+    "unova_id": 214,
+    "kalos_id": 73,
+    "galar_id": 61,
+    "hisui_id": 91
   },
   {
     "id": 408,
@@ -22238,7 +23373,10 @@
         "move": "Head Smash"
       }
     ],
-    "sinnoh_id": 36
+    "sinnoh_id": 36,
+    "alola_id": 188,
+    "hisui_id": 208,
+    "paldea_id": 552
   },
   {
     "id": 409,
@@ -22287,7 +23425,10 @@
         "move": "Head Smash"
       }
     ],
-    "sinnoh_id": 37
+    "sinnoh_id": 37,
+    "alola_id": 189,
+    "hisui_id": 209,
+    "paldea_id": 553
   },
   {
     "id": 410,
@@ -22334,7 +23475,10 @@
         "move": "Heavy Slam"
       }
     ],
-    "sinnoh_id": 38
+    "sinnoh_id": 38,
+    "alola_id": 190,
+    "hisui_id": 210,
+    "paldea_id": 554
   },
   {
     "id": 411,
@@ -22376,7 +23520,10 @@
         "move": "Heavy Slam"
       }
     ],
-    "sinnoh_id": 39
+    "sinnoh_id": 39,
+    "alola_id": 191,
+    "hisui_id": 211,
+    "paldea_id": 555
   },
   {
     "id": 412,
@@ -22410,7 +23557,9 @@
         "move": "Bug Bite"
       }
     ],
-    "sinnoh_id": 45
+    "sinnoh_id": 45,
+    "kalos_id": 44,
+    "hisui_id": 43
   },
   {
     "id": 413,
@@ -22460,7 +23609,9 @@
         "move": "Bug Buzz"
       }
     ],
-    "sinnoh_id": 46
+    "sinnoh_id": 46,
+    "kalos_id": 45,
+    "hisui_id": 44
   },
   {
     "id": 414,
@@ -22506,7 +23657,9 @@
         "move": "Bug Buzz"
       }
     ],
-    "sinnoh_id": 47
+    "sinnoh_id": 47,
+    "kalos_id": 46,
+    "hisui_id": 45
   },
   {
     "id": 415,
@@ -22542,7 +23695,11 @@
       }
     ],
     "sinnoh_id": 53,
-    "unova_id": 142
+    "unova_id": 215,
+    "kalos_id": 76,
+    "galar_id": 116,
+    "hisui_id": 70,
+    "paldea_id": 38
   },
   {
     "id": 416,
@@ -22601,7 +23758,11 @@
       }
     ],
     "sinnoh_id": 54,
-    "unova_id": 143
+    "unova_id": 216,
+    "kalos_id": 77,
+    "galar_id": 117,
+    "hisui_id": 71,
+    "paldea_id": 39
   },
   {
     "id": 417,
@@ -22658,7 +23819,10 @@
         "move": "Thunder"
       }
     ],
-    "sinnoh_id": 55
+    "sinnoh_id": 55,
+    "kalos_id": 285,
+    "hisui_id": 109,
+    "paldea_id": 201
   },
   {
     "id": 418,
@@ -22729,7 +23893,10 @@
       }
     ],
     "sinnoh_id": 56,
-    "unova_id": 149
+    "unova_id": 219,
+    "kalos_id": 364,
+    "hisui_id": 41,
+    "paldea_id": 51
   },
   {
     "id": 419,
@@ -22799,7 +23966,10 @@
       }
     ],
     "sinnoh_id": 57,
-    "unova_id": 150
+    "unova_id": 220,
+    "kalos_id": 365,
+    "hisui_id": 42,
+    "paldea_id": 52
   },
   {
     "id": 420,
@@ -22845,7 +24015,9 @@
         "move": "Petal Dance"
       }
     ],
-    "sinnoh_id": 58
+    "sinnoh_id": 58,
+    "galar_id": 128,
+    "hisui_id": 66
   },
   {
     "id": 421,
@@ -22886,7 +24058,9 @@
         "move": "Petal Dance"
       }
     ],
-    "sinnoh_id": 59
+    "sinnoh_id": 59,
+    "galar_id": 129,
+    "hisui_id": 67
   },
   {
     "id": 422,
@@ -22936,7 +24110,11 @@
         "move": "Earth Power"
       }
     ],
-    "sinnoh_id": 60
+    "sinnoh_id": 60,
+    "alola_id": 260,
+    "galar_id": 230,
+    "hisui_id": 82,
+    "paldea_id": 327
   },
   {
     "id": 423,
@@ -22982,7 +24160,11 @@
         "move": "Earth Power"
       }
     ],
-    "sinnoh_id": 61
+    "sinnoh_id": 61,
+    "alola_id": 261,
+    "galar_id": 231,
+    "hisui_id": 83,
+    "paldea_id": 328
   },
   {
     "id": 424,
@@ -23027,7 +24209,10 @@
         "move": "Last Resort"
       }
     ],
-    "sinnoh_id": 64
+    "sinnoh_id": 64,
+    "alola_id": 395,
+    "hisui_id": 79,
+    "paldea_id": 434
   },
   {
     "id": 425,
@@ -23083,7 +24268,12 @@
       }
     ],
     "sinnoh_id": 65,
-    "unova_id": 208
+    "unova_id": 238,
+    "kalos_id": 154,
+    "alola_id": 64,
+    "galar_id": 124,
+    "hisui_id": 37,
+    "paldea_id": 143
   },
   {
     "id": 426,
@@ -23134,7 +24324,12 @@
       }
     ],
     "sinnoh_id": 66,
-    "unova_id": 209
+    "unova_id": 239,
+    "kalos_id": 155,
+    "alola_id": 65,
+    "galar_id": 125,
+    "hisui_id": 38,
+    "paldea_id": 144
   },
   {
     "id": 427,
@@ -23185,7 +24380,10 @@
       }
     ],
     "sinnoh_id": 67,
-    "unova_id": 80
+    "unova_id": 194,
+    "alola_id": 303,
+    "galar_id": 404,
+    "hisui_id": 64
   },
   {
     "id": 428,
@@ -23243,7 +24441,10 @@
       }
     ],
     "sinnoh_id": 68,
-    "unova_id": 81
+    "unova_id": 195,
+    "alola_id": 304,
+    "galar_id": 405,
+    "hisui_id": 65
   },
   {
     "id": 429,
@@ -23280,7 +24481,10 @@
         "move": "Power Gem"
       }
     ],
-    "sinnoh_id": 73
+    "sinnoh_id": 73,
+    "alola_id": 67,
+    "hisui_id": 198,
+    "paldea_id": 115
   },
   {
     "id": 430,
@@ -23326,7 +24530,11 @@
         "move": "Comeuppance"
       }
     ],
-    "sinnoh_id": 75
+    "sinnoh_id": 75,
+    "kalos_id": 358,
+    "alola_id": 278,
+    "hisui_id": 141,
+    "paldea_id": 233
   },
   {
     "id": 431,
@@ -23368,7 +24576,8 @@
         "move": "Double-Edge"
       }
     ],
-    "sinnoh_id": 76
+    "sinnoh_id": 76,
+    "hisui_id": 152
   },
   {
     "id": 432,
@@ -23405,7 +24614,8 @@
         "move": "Double-Edge"
       }
     ],
-    "sinnoh_id": 77
+    "sinnoh_id": 77,
+    "hisui_id": 153
   },
   {
     "id": 433,
@@ -23447,7 +24657,11 @@
         "move": "Psychic"
       }
     ],
-    "sinnoh_id": 82
+    "hoenn_id": 209,
+    "sinnoh_id": 82,
+    "kalos_id": 264,
+    "hisui_id": 195,
+    "paldea_id": 478
   },
   {
     "id": 434,
@@ -23510,7 +24724,11 @@
         "move": "Explosion"
       }
     ],
-    "sinnoh_id": 84
+    "sinnoh_id": 84,
+    "kalos_id": 255,
+    "galar_id": 130,
+    "hisui_id": 110,
+    "paldea_id": 226
   },
   {
     "id": 435,
@@ -23564,7 +24782,11 @@
         "move": "Explosion"
       }
     ],
-    "sinnoh_id": 85
+    "sinnoh_id": 85,
+    "kalos_id": 256,
+    "galar_id": 131,
+    "hisui_id": 111,
+    "paldea_id": 227
   },
   {
     "id": 436,
@@ -23616,7 +24838,10 @@
       }
     ],
     "sinnoh_id": 88,
-    "unova_id": 250
+    "unova_id": 269,
+    "galar_id": 118,
+    "hisui_id": 180,
+    "paldea_id": 153
   },
   {
     "id": 437,
@@ -23667,7 +24892,10 @@
       }
     ],
     "sinnoh_id": 89,
-    "unova_id": 251
+    "unova_id": 270,
+    "galar_id": 119,
+    "hisui_id": 181,
+    "paldea_id": 154
   },
   {
     "id": 438,
@@ -23721,7 +24949,12 @@
         "move": "Double-Edge"
       }
     ],
-    "sinnoh_id": 92
+    "sinnoh_id": 92,
+    "kalos_id": 435,
+    "alola_id": 30,
+    "galar_id": 252,
+    "hisui_id": 123,
+    "paldea_id": 87
   },
   {
     "id": 439,
@@ -23772,7 +25005,11 @@
         "move": "Psychic"
       }
     ],
-    "sinnoh_id": 94
+    "sinnoh_id": 94,
+    "kalos_id": 266,
+    "alola_id": 310,
+    "galar_id": 364,
+    "hisui_id": 76
   },
   {
     "id": 440,
@@ -23806,7 +25043,11 @@
         "move": "Covet"
       }
     ],
-    "sinnoh_id": 96
+    "sinnoh_id": 96,
+    "alola_id": 32,
+    "galar_id": 406,
+    "hisui_id": 86,
+    "paldea_id": 43
   },
   {
     "id": 441,
@@ -23848,7 +25089,9 @@
         "move": "Hurricane"
       }
     ],
-    "sinnoh_id": 102
+    "sinnoh_id": 102,
+    "kalos_id": 291,
+    "hisui_id": 157
   },
   {
     "id": 442,
@@ -23898,7 +25141,10 @@
         "move": "Dream Eater"
       }
     ],
-    "sinnoh_id": 108
+    "sinnoh_id": 108,
+    "galar_id": 523,
+    "hisui_id": 139,
+    "paldea_id": 302
   },
   {
     "id": 443,
@@ -23961,7 +25207,12 @@
         "move": "Dragon Rush"
       }
     ],
-    "sinnoh_id": 109
+    "sinnoh_id": 109,
+    "kalos_id": 312,
+    "alola_id": 238,
+    "galar_id": 538,
+    "hisui_id": 187,
+    "paldea_id": 126
   },
   {
     "id": 444,
@@ -24024,7 +25275,12 @@
         "move": "Dragon Rush"
       }
     ],
-    "sinnoh_id": 110
+    "sinnoh_id": 110,
+    "kalos_id": 313,
+    "alola_id": 239,
+    "galar_id": 539,
+    "hisui_id": 188,
+    "paldea_id": 127
   },
   {
     "id": 445,
@@ -24082,7 +25338,12 @@
         "move": "Dragon Rush"
       }
     ],
-    "sinnoh_id": 111
+    "sinnoh_id": 111,
+    "kalos_id": 314,
+    "alola_id": 240,
+    "galar_id": 540,
+    "hisui_id": 189,
+    "paldea_id": 128
   },
   {
     "id": 446,
@@ -24136,7 +25397,12 @@
         "move": "Last Resort"
       }
     ],
-    "sinnoh_id": 112
+    "sinnoh_id": 112,
+    "kalos_id": 138,
+    "alola_id": 35,
+    "galar_id": 260,
+    "hisui_id": 51,
+    "paldea_id": 452
   },
   {
     "id": 447,
@@ -24179,7 +25445,12 @@
       }
     ],
     "sinnoh_id": 115,
-    "unova_id": 33
+    "unova_id": 167,
+    "kalos_id": 62,
+    "alola_id": 279,
+    "galar_id": 298,
+    "hisui_id": 223,
+    "paldea_id": 163
   },
   {
     "id": 448,
@@ -24234,7 +25505,12 @@
       }
     ],
     "sinnoh_id": 116,
-    "unova_id": 34
+    "unova_id": 168,
+    "kalos_id": 63,
+    "alola_id": 280,
+    "galar_id": 299,
+    "hisui_id": 224,
+    "paldea_id": 164
   },
   {
     "id": 449,
@@ -24288,7 +25564,11 @@
         "move": "Double-Edge"
       }
     ],
-    "sinnoh_id": 122
+    "sinnoh_id": 122,
+    "kalos_id": 201,
+    "galar_id": 314,
+    "hisui_id": 107,
+    "paldea_id": 265
   },
   {
     "id": 450,
@@ -24341,7 +25621,11 @@
         "move": "Double-Edge"
       }
     ],
-    "sinnoh_id": 123
+    "sinnoh_id": 123,
+    "kalos_id": 202,
+    "galar_id": 315,
+    "hisui_id": 108,
+    "paldea_id": 266
   },
   {
     "id": 451,
@@ -24389,7 +25673,10 @@
       }
     ],
     "sinnoh_id": 127,
-    "unova_id": 201
+    "unova_id": 231,
+    "kalos_id": 321,
+    "galar_id": 285,
+    "hisui_id": 148
   },
   {
     "id": 452,
@@ -24432,7 +25719,10 @@
       }
     ],
     "sinnoh_id": 128,
-    "unova_id": 202
+    "unova_id": 232,
+    "kalos_id": 322,
+    "galar_id": 286,
+    "hisui_id": 149
   },
   {
     "id": 453,
@@ -24492,7 +25782,11 @@
       }
     ],
     "sinnoh_id": 129,
-    "unova_id": 290
+    "unova_id": 297,
+    "kalos_id": 125,
+    "galar_id": 222,
+    "hisui_id": 99,
+    "paldea_id": 175
   },
   {
     "id": 454,
@@ -24547,7 +25841,11 @@
       }
     ],
     "sinnoh_id": 130,
-    "unova_id": 291
+    "unova_id": 298,
+    "kalos_id": 126,
+    "galar_id": 223,
+    "hisui_id": 100,
+    "paldea_id": 176
   },
   {
     "id": 455,
@@ -24585,7 +25883,9 @@
       }
     ],
     "sinnoh_id": 131,
-    "unova_id": 289
+    "unova_id": 296,
+    "kalos_id": 335,
+    "hisui_id": 92
   },
   {
     "id": 456,
@@ -24635,7 +25935,10 @@
         "move": "Bounce"
       }
     ],
-    "sinnoh_id": 134
+    "sinnoh_id": 134,
+    "alola_id": 108,
+    "hisui_id": 172,
+    "paldea_id": 333
   },
   {
     "id": 457,
@@ -24680,7 +25983,10 @@
         "move": "Bounce"
       }
     ],
-    "sinnoh_id": 135
+    "sinnoh_id": 135,
+    "alola_id": 109,
+    "hisui_id": 173,
+    "paldea_id": 334
   },
   {
     "id": 458,
@@ -24732,7 +26038,11 @@
       }
     ],
     "sinnoh_id": 140,
-    "unova_id": 233
+    "unova_id": 252,
+    "kalos_id": 292,
+    "alola_id": 331,
+    "galar_id": 354,
+    "hisui_id": 164
   },
   {
     "id": 459,
@@ -24783,7 +26093,11 @@
         "move": "Leaf Storm"
       }
     ],
-    "sinnoh_id": 142
+    "sinnoh_id": 142,
+    "kalos_id": 394,
+    "galar_id": 96,
+    "hisui_id": 217,
+    "paldea_id": 352
   },
   {
     "id": 460,
@@ -24829,7 +26143,11 @@
         "move": "Leaf Storm"
       }
     ],
-    "sinnoh_id": 143
+    "sinnoh_id": 143,
+    "kalos_id": 395,
+    "galar_id": 97,
+    "hisui_id": 218,
+    "paldea_id": 353
   },
   {
     "id": 461,
@@ -24896,7 +26214,12 @@
       }
     ],
     "sinnoh_id": 145,
-    "unova_id": 253
+    "unova_id": 272,
+    "kalos_id": 398,
+    "alola_id": 250,
+    "galar_id": 293,
+    "hisui_id": 204,
+    "paldea_id": 231
   },
   {
     "id": 462,
@@ -24954,7 +26277,14 @@
         "move": "Zap Cannon"
       }
     ],
-    "unova_id": 50
+    "hoenn_id": 205,
+    "sinnoh_id": 180,
+    "unova_id": 174,
+    "kalos_id": 377,
+    "alola_id": 49,
+    "galar_id": 455,
+    "hisui_id": 179,
+    "paldea_id": 211
   },
   {
     "id": 463,
@@ -24995,7 +26325,12 @@
         "move": "Giga Impact"
       }
     ],
-    "unova_id": 285
+    "sinnoh_id": 162,
+    "unova_id": 292,
+    "kalos_id": 441,
+    "alola_id": 400,
+    "galar_id": 429,
+    "hisui_id": 126
   },
   {
     "id": 464,
@@ -25068,7 +26403,13 @@
         "level": 75,
         "move": "Rock Wrecker"
       }
-    ]
+    ],
+    "hoenn_id": 210,
+    "sinnoh_id": 188,
+    "kalos_id": 205,
+    "galar_id": 266,
+    "hisui_id": 122,
+    "paldea_id": 506
   },
   {
     "id": 465,
@@ -25109,7 +26450,10 @@
         "move": "Sludge Bomb"
       }
     ],
-    "unova_id": 218
+    "sinnoh_id": 182,
+    "unova_id": 248,
+    "galar_id": 444,
+    "hisui_id": 96
   },
   {
     "id": 466,
@@ -25166,7 +26510,12 @@
         "move": "Giga Impact"
       }
     ],
-    "unova_id": 58
+    "sinnoh_id": 199,
+    "unova_id": 182,
+    "alola_id": 228,
+    "galar_id": 515,
+    "hisui_id": 184,
+    "paldea_id": 509
   },
   {
     "id": 467,
@@ -25223,7 +26572,12 @@
         "move": "Hyper Beam"
       }
     ],
-    "unova_id": 55
+    "sinnoh_id": 202,
+    "unova_id": 179,
+    "alola_id": 168,
+    "galar_id": 518,
+    "hisui_id": 176,
+    "paldea_id": 512
   },
   {
     "id": 468,
@@ -25268,7 +26622,10 @@
         "level": 43,
         "move": "Moonblast"
       }
-    ]
+    ],
+    "sinnoh_id": 175,
+    "galar_id": 259,
+    "hisui_id": 129
   },
   {
     "id": 469,
@@ -25330,7 +26687,11 @@
         "move": "U-turn"
       }
     ],
-    "unova_id": 287
+    "sinnoh_id": 184,
+    "unova_id": 294,
+    "kalos_id": 241,
+    "hisui_id": 106,
+    "paldea_id": 404
   },
   {
     "id": 470,
@@ -25379,7 +26740,13 @@
         "move": "Leaf Storm"
       }
     ],
-    "unova_id": 97
+    "sinnoh_id": 169,
+    "unova_id": 205,
+    "kalos_id": 236,
+    "alola_id": 129,
+    "galar_id": 202,
+    "hisui_id": 31,
+    "paldea_id": 185
   },
   {
     "id": 471,
@@ -25432,7 +26799,13 @@
         "move": "Blizzard"
       }
     ],
-    "unova_id": 98
+    "sinnoh_id": 170,
+    "unova_id": 206,
+    "kalos_id": 237,
+    "alola_id": 130,
+    "galar_id": 203,
+    "hisui_id": 32,
+    "paldea_id": 186
   },
   {
     "id": 472,
@@ -25498,7 +26871,11 @@
         "move": "Crabhammer"
       }
     ],
-    "unova_id": 222
+    "sinnoh_id": 154,
+    "unova_id": 250,
+    "kalos_id": 422,
+    "hisui_id": 186,
+    "paldea_id": 465
   },
   {
     "id": 473,
@@ -25564,7 +26941,12 @@
         "move": "Thrash"
       }
     ],
-    "unova_id": 260
+    "sinnoh_id": 205,
+    "unova_id": 276,
+    "kalos_id": 384,
+    "galar_id": 77,
+    "hisui_id": 214,
+    "paldea_id": 437
   },
   {
     "id": 474,
@@ -25608,7 +26990,12 @@
         "level": 60,
         "move": "Hyper Beam"
       }
-    ]
+    ],
+    "sinnoh_id": 194,
+    "alola_id": 219,
+    "galar_id": 509,
+    "hisui_id": 135,
+    "paldea_id": 567
   },
   {
     "id": 475,
@@ -25653,7 +27040,13 @@
         "level": 58,
         "move": "Close Combat"
       }
-    ]
+    ],
+    "hoenn_id": 203,
+    "sinnoh_id": 160,
+    "kalos_id": 67,
+    "galar_id": 123,
+    "hisui_id": 104,
+    "paldea_id": 65
   },
   {
     "id": 476,
@@ -25707,7 +27100,13 @@
         "move": "Zap Cannon"
       }
     ],
-    "unova_id": 165
+    "hoenn_id": 204,
+    "sinnoh_id": 156,
+    "unova_id": 223,
+    "kalos_id": 247,
+    "alola_id": 199,
+    "hisui_id": 191,
+    "paldea_id": 458
   },
   {
     "id": 477,
@@ -25771,7 +27170,12 @@
         "level": 48,
         "move": "Future Sight"
       }
-    ]
+    ],
+    "hoenn_id": 208,
+    "sinnoh_id": 191,
+    "galar_id": 137,
+    "hisui_id": 160,
+    "paldea_id": 477
   },
   {
     "id": 478,
@@ -25820,7 +27224,13 @@
         "level": 55,
         "move": "Phantom Force"
       }
-    ]
+    ],
+    "hoenn_id": 211,
+    "sinnoh_id": 208,
+    "alola_id": 248,
+    "galar_id": 81,
+    "hisui_id": 207,
+    "paldea_id": 359
   },
   {
     "id": 479,
@@ -25865,7 +27275,12 @@
         "level": 55,
         "move": "Uproar"
       }
-    ]
+    ],
+    "sinnoh_id": 152,
+    "kalos_id": 374,
+    "galar_id": 372,
+    "hisui_id": 194,
+    "paldea_id": 310
   },
   {
     "id": 480,
@@ -25914,7 +27329,8 @@
         "move": "Mystical Power"
       }
     ],
-    "sinnoh_id": 146
+    "sinnoh_id": 146,
+    "hisui_id": 225
   },
   {
     "id": 481,
@@ -25959,7 +27375,8 @@
         "move": "Mystical Power"
       }
     ],
-    "sinnoh_id": 147
+    "sinnoh_id": 147,
+    "hisui_id": 226
   },
   {
     "id": 482,
@@ -26016,7 +27433,8 @@
         "move": "Mystical Power"
       }
     ],
-    "sinnoh_id": 148
+    "sinnoh_id": 148,
+    "hisui_id": 227
   },
   {
     "id": 483,
@@ -26082,7 +27500,8 @@
         "move": "Roar of Time"
       }
     ],
-    "sinnoh_id": 149
+    "sinnoh_id": 149,
+    "hisui_id": 235
   },
   {
     "id": 484,
@@ -26140,7 +27559,8 @@
         "move": "Hydro Pump"
       }
     ],
-    "sinnoh_id": 150
+    "sinnoh_id": 150,
+    "hisui_id": 236
   },
   {
     "id": 485,
@@ -26217,7 +27637,8 @@
         "level": 72,
         "move": "Magma Storm"
       }
-    ]
+    ],
+    "hisui_id": 228
   },
   {
     "id": 486,
@@ -26281,7 +27702,8 @@
         "level": 78,
         "move": "Crush Grip"
       }
-    ]
+    ],
+    "hisui_id": 229
   },
   {
     "id": 487,
@@ -26318,7 +27740,9 @@
         "level": 70,
         "move": "Earth Power"
       }
-    ]
+    ],
+    "sinnoh_id": 210,
+    "hisui_id": 237
   },
   {
     "id": 488,
@@ -26366,7 +27790,8 @@
         "level": 66,
         "move": "Future Sight"
       }
-    ]
+    ],
+    "hisui_id": 230
   },
   {
     "id": 489,
@@ -26402,7 +27827,8 @@
         "level": 61,
         "move": "Dive"
       }
-    ]
+    ],
+    "hisui_id": 239
   },
   {
     "id": 490,
@@ -26439,7 +27865,8 @@
         "move": "Dive"
       }
     ],
-    "sinnoh_id": 151
+    "sinnoh_id": 151,
+    "hisui_id": 240
   },
   {
     "id": 491,
@@ -26495,7 +27922,8 @@
         "level": 93,
         "move": "Dark Pulse"
       }
-    ]
+    ],
+    "hisui_id": 242
   },
   {
     "id": 492,
@@ -26515,7 +27943,8 @@
         "level": 46,
         "move": "Play Rough"
       }
-    ]
+    ],
+    "hisui_id": 241
   },
   {
     "id": 493,
@@ -26559,7 +27988,8 @@
         "level": 100,
         "move": "Judgment"
       }
-    ]
+    ],
+    "hisui_id": 238
   },
   {
     "id": 494,
@@ -26637,7 +28067,7 @@
         "move": "Final Gambit"
       }
     ],
-    "unova_id": 0
+    "unova_id": 1
   },
   {
     "id": 495,
@@ -26695,7 +28125,8 @@
         "move": "Leaf Storm"
       }
     ],
-    "unova_id": 1
+    "unova_id": 2,
+    "paldea_id": 621
   },
   {
     "id": 496,
@@ -26753,7 +28184,8 @@
         "move": "Leaf Storm"
       }
     ],
-    "unova_id": 2
+    "unova_id": 3,
+    "paldea_id": 622
   },
   {
     "id": 497,
@@ -26806,7 +28238,8 @@
         "move": "Leaf Storm"
       }
     ],
-    "unova_id": 3
+    "unova_id": 4,
+    "paldea_id": 623
   },
   {
     "id": 498,
@@ -26864,7 +28297,8 @@
         "move": "Head Smash"
       }
     ],
-    "unova_id": 4
+    "unova_id": 5,
+    "paldea_id": 624
   },
   {
     "id": 499,
@@ -26923,7 +28357,8 @@
         "move": "Head Smash"
       }
     ],
-    "unova_id": 5
+    "unova_id": 6,
+    "paldea_id": 625
   },
   {
     "id": 500,
@@ -26981,7 +28416,8 @@
         "move": "Head Smash"
       }
     ],
-    "unova_id": 6
+    "unova_id": 7,
+    "paldea_id": 626
   },
   {
     "id": 501,
@@ -27043,7 +28479,9 @@
         "move": "Hydro Pump"
       }
     ],
-    "unova_id": 7
+    "unova_id": 8,
+    "hisui_id": 7,
+    "paldea_id": 627
   },
   {
     "id": 502,
@@ -27105,7 +28543,9 @@
         "move": "Hydro Pump"
       }
     ],
-    "unova_id": 8
+    "unova_id": 9,
+    "hisui_id": 8,
+    "paldea_id": 628
   },
   {
     "id": 503,
@@ -27142,7 +28582,9 @@
         "move": "Sacred Sword"
       }
     ],
-    "unova_id": 9
+    "unova_id": 10,
+    "hisui_id": 9,
+    "paldea_id": 629
   },
   {
     "id": 504,
@@ -27180,7 +28622,8 @@
         "move": "Super Fang"
       }
     ],
-    "unova_id": 10
+    "unova_id": 11,
+    "kalos_id": 352
   },
   {
     "id": 505,
@@ -27225,7 +28668,8 @@
         "move": "Double-Edge"
       }
     ],
-    "unova_id": 11
+    "unova_id": 12,
+    "kalos_id": 353
   },
   {
     "id": 506,
@@ -27283,7 +28727,9 @@
         "move": "Giga Impact"
       }
     ],
-    "unova_id": 22
+    "unova_id": 13,
+    "alola_id": 120,
+    "galar_id": 458
   },
   {
     "id": 507,
@@ -27341,7 +28787,9 @@
         "move": "Giga Impact"
       }
     ],
-    "unova_id": 23
+    "unova_id": 14,
+    "alola_id": 121,
+    "galar_id": 459
   },
   {
     "id": 508,
@@ -27406,7 +28854,9 @@
         "move": "Giga Impact"
       }
     ],
-    "unova_id": 24
+    "unova_id": 15,
+    "alola_id": 122,
+    "galar_id": 460
   },
   {
     "id": 509,
@@ -27456,7 +28906,9 @@
         "move": "Play Rough"
       }
     ],
-    "unova_id": 12
+    "unova_id": 16,
+    "kalos_id": 348,
+    "galar_id": 44
   },
   {
     "id": 510,
@@ -27501,7 +28953,9 @@
         "move": "Play Rough"
       }
     ],
-    "unova_id": 13
+    "unova_id": 17,
+    "kalos_id": 349,
+    "galar_id": 45
   },
   {
     "id": 511,
@@ -27563,7 +29017,8 @@
         "move": "Focus Blast"
       }
     ],
-    "unova_id": 37
+    "unova_id": 18,
+    "kalos_id": 29
   },
   {
     "id": 512,
@@ -27620,7 +29075,8 @@
         "move": "Focus Blast"
       }
     ],
-    "unova_id": 38
+    "unova_id": 19,
+    "kalos_id": 30
   },
   {
     "id": 513,
@@ -27682,7 +29138,8 @@
         "move": "Focus Blast"
       }
     ],
-    "unova_id": 39
+    "unova_id": 20,
+    "kalos_id": 31
   },
   {
     "id": 514,
@@ -27739,7 +29196,8 @@
         "move": "Focus Blast"
       }
     ],
-    "unova_id": 40
+    "unova_id": 21,
+    "kalos_id": 32
   },
   {
     "id": 515,
@@ -27797,7 +29255,8 @@
         "move": "Focus Blast"
       }
     ],
-    "unova_id": 41
+    "unova_id": 22,
+    "kalos_id": 33
   },
   {
     "id": 516,
@@ -27850,7 +29309,8 @@
         "move": "Focus Blast"
       }
     ],
-    "unova_id": 42
+    "unova_id": 23,
+    "kalos_id": 34
   },
   {
     "id": 517,
@@ -27896,7 +29356,8 @@
         "move": "Future Sight"
       }
     ],
-    "unova_id": 86
+    "unova_id": 24,
+    "galar_id": 90
   },
   {
     "id": 518,
@@ -27937,7 +29398,8 @@
         "move": "Future Sight"
       }
     ],
-    "unova_id": 87
+    "unova_id": 25,
+    "galar_id": 91
   },
   {
     "id": 519,
@@ -27980,7 +29442,8 @@
         "move": "Sky Attack"
       }
     ],
-    "unova_id": 14
+    "unova_id": 26,
+    "galar_id": 26
   },
   {
     "id": 520,
@@ -28023,7 +29486,8 @@
         "move": "Sky Attack"
       }
     ],
-    "unova_id": 15
+    "unova_id": 27,
+    "galar_id": 27
   },
   {
     "id": 521,
@@ -28061,7 +29525,8 @@
         "move": "Sky Attack"
       }
     ],
-    "unova_id": 16
+    "unova_id": 28,
+    "galar_id": 28
   },
   {
     "id": 522,
@@ -28115,7 +29580,8 @@
         "move": "Thrash"
       }
     ],
-    "unova_id": 147
+    "unova_id": 29,
+    "paldea_id": 514
   },
   {
     "id": 523,
@@ -28164,7 +29630,8 @@
         "move": "Thrash"
       }
     ],
-    "unova_id": 148
+    "unova_id": 30,
+    "paldea_id": 515
   },
   {
     "id": 524,
@@ -28218,7 +29685,10 @@
         "move": "Explosion"
       }
     ],
-    "unova_id": 68
+    "unova_id": 31,
+    "kalos_id": 273,
+    "alola_id": 98,
+    "galar_id": 168
   },
   {
     "id": 525,
@@ -28276,7 +29746,10 @@
         "move": "Explosion"
       }
     ],
-    "unova_id": 69
+    "unova_id": 32,
+    "kalos_id": 274,
+    "alola_id": 99,
+    "galar_id": 169
   },
   {
     "id": 526,
@@ -28329,7 +29802,10 @@
         "move": "Explosion"
       }
     ],
-    "unova_id": 70
+    "unova_id": 33,
+    "kalos_id": 275,
+    "alola_id": 100,
+    "galar_id": 170
   },
   {
     "id": 527,
@@ -28384,7 +29860,9 @@
         "move": "Future Sight"
       }
     ],
-    "unova_id": 66
+    "unova_id": 34,
+    "kalos_id": 208,
+    "galar_id": 174
   },
   {
     "id": 528,
@@ -28434,7 +29912,9 @@
         "move": "Future Sight"
       }
     ],
-    "unova_id": 67
+    "unova_id": 35,
+    "kalos_id": 209,
+    "galar_id": 175
   },
   {
     "id": 529,
@@ -28496,7 +29976,9 @@
         "move": "Earthquake"
       }
     ],
-    "unova_id": 76
+    "unova_id": 36,
+    "galar_id": 166,
+    "paldea_id": 547
   },
   {
     "id": 530,
@@ -28566,7 +30048,9 @@
         "move": "Megahorn"
       }
     ],
-    "unova_id": 77
+    "unova_id": 37,
+    "galar_id": 167,
+    "paldea_id": 548
   },
   {
     "id": 531,
@@ -28615,7 +30099,9 @@
         "move": "Double-Edge"
       }
     ],
-    "unova_id": 36
+    "unova_id": 38,
+    "kalos_id": 123,
+    "galar_id": 519
   },
   {
     "id": 532,
@@ -28677,7 +30163,10 @@
         "move": "Focus Punch"
       }
     ],
-    "unova_id": 73
+    "unova_id": 39,
+    "kalos_id": 399,
+    "galar_id": 171,
+    "paldea_id": 448
   },
   {
     "id": 533,
@@ -28739,7 +30228,10 @@
         "move": "Focus Punch"
       }
     ],
-    "unova_id": 74
+    "unova_id": 40,
+    "kalos_id": 400,
+    "galar_id": 172,
+    "paldea_id": 449
   },
   {
     "id": 534,
@@ -28796,7 +30288,10 @@
         "move": "Focus Punch"
       }
     ],
-    "unova_id": 75
+    "unova_id": 41,
+    "kalos_id": 401,
+    "galar_id": 173,
+    "paldea_id": 450
   },
   {
     "id": 535,
@@ -28858,7 +30353,8 @@
         "move": "Hydro Pump"
       }
     ],
-    "unova_id": 228
+    "unova_id": 42,
+    "galar_id": 132
   },
   {
     "id": 536,
@@ -28921,7 +30417,8 @@
         "move": "Hydro Pump"
       }
     ],
-    "unova_id": 229
+    "unova_id": 43,
+    "galar_id": 133
   },
   {
     "id": 537,
@@ -28983,7 +30480,8 @@
         "move": "Hydro Pump"
       }
     ],
-    "unova_id": 230
+    "unova_id": 44,
+    "galar_id": 134
   },
   {
     "id": 538,
@@ -29036,7 +30534,9 @@
         "move": "Dynamic Punch"
       }
     ],
-    "unova_id": 267
+    "unova_id": 45,
+    "kalos_id": 250,
+    "galar_id": 248
   },
   {
     "id": 539,
@@ -29089,7 +30589,9 @@
         "move": "Dynamic Punch"
       }
     ],
-    "unova_id": 268
+    "unova_id": 46,
+    "kalos_id": 251,
+    "galar_id": 249
   },
   {
     "id": 540,
@@ -29136,7 +30638,8 @@
         "move": "Flail"
       }
     ],
-    "unova_id": 17
+    "unova_id": 47,
+    "paldea_id": 412
   },
   {
     "id": 541,
@@ -29183,7 +30686,8 @@
         "move": "Flail"
       }
     ],
-    "unova_id": 18
+    "unova_id": 48,
+    "paldea_id": 413
   },
   {
     "id": 542,
@@ -29233,7 +30737,8 @@
         "move": "Leaf Storm"
       }
     ],
-    "unova_id": 19
+    "unova_id": 49,
+    "paldea_id": 414
   },
   {
     "id": 543,
@@ -29284,7 +30789,9 @@
         "move": "Double-Edge"
       }
     ],
-    "unova_id": 43
+    "unova_id": 50,
+    "kalos_id": 120,
+    "galar_id": 437
   },
   {
     "id": 544,
@@ -29335,7 +30842,9 @@
         "move": "Double-Edge"
       }
     ],
-    "unova_id": 44
+    "unova_id": 51,
+    "kalos_id": 121,
+    "galar_id": 438
   },
   {
     "id": 545,
@@ -29393,7 +30902,9 @@
         "move": "Megahorn"
       }
     ],
-    "unova_id": 45
+    "unova_id": 52,
+    "kalos_id": 122,
+    "galar_id": 439
   },
   {
     "id": 546,
@@ -29448,7 +30959,10 @@
         "move": "Solar Beam"
       }
     ],
-    "unova_id": 82
+    "unova_id": 53,
+    "alola_id": 87,
+    "galar_id": 262,
+    "paldea_id": 530
   },
   {
     "id": 547,
@@ -29510,7 +31024,10 @@
         "move": "Solar Beam"
       }
     ],
-    "unova_id": 83
+    "unova_id": 54,
+    "alola_id": 88,
+    "galar_id": 263,
+    "paldea_id": 531
   },
   {
     "id": 548,
@@ -29556,7 +31073,11 @@
         "move": "Leaf Storm"
       }
     ],
-    "unova_id": 84
+    "unova_id": 55,
+    "alola_id": 85,
+    "galar_id": 503,
+    "hisui_id": 93,
+    "paldea_id": 104
   },
   {
     "id": 549,
@@ -29585,7 +31106,11 @@
         "move": "Mega Drain"
       }
     ],
-    "unova_id": 85
+    "unova_id": 56,
+    "alola_id": 86,
+    "galar_id": 504,
+    "hisui_id": 94,
+    "paldea_id": 105
   },
   {
     "id": 550,
@@ -29647,7 +31172,12 @@
         "move": "Double-Edge"
       }
     ],
-    "unova_id": 104
+    "unova_id": 57,
+    "kalos_id": 366,
+    "alola_id": 336,
+    "galar_id": 154,
+    "hisui_id": 166,
+    "paldea_id": 138
   },
   {
     "id": 551,
@@ -29706,7 +31236,11 @@
         "move": "Double-Edge"
       }
     ],
-    "unova_id": 99
+    "unova_id": 58,
+    "kalos_id": 196,
+    "alola_id": 232,
+    "galar_id": 491,
+    "paldea_id": 267
   },
   {
     "id": 552,
@@ -29765,7 +31299,11 @@
         "move": "Double-Edge"
       }
     ],
-    "unova_id": 100
+    "unova_id": 59,
+    "kalos_id": 197,
+    "alola_id": 233,
+    "galar_id": 492,
+    "paldea_id": 268
   },
   {
     "id": 553,
@@ -29823,7 +31361,11 @@
         "move": "Outrage"
       }
     ],
-    "unova_id": 101
+    "unova_id": 60,
+    "kalos_id": 198,
+    "alola_id": 234,
+    "galar_id": 493,
+    "paldea_id": 269
   },
   {
     "id": 554,
@@ -29877,7 +31419,8 @@
         "move": "Superpower"
       }
     ],
-    "unova_id": 102
+    "unova_id": 61,
+    "galar_id": 367
   },
   {
     "id": 555,
@@ -29930,7 +31473,8 @@
         "move": "Superpower"
       }
     ],
-    "unova_id": 103
+    "unova_id": 62,
+    "galar_id": 368
   },
   {
     "id": 556,
@@ -29983,7 +31527,8 @@
         "move": "Petal Dance"
       }
     ],
-    "unova_id": 119
+    "unova_id": 63,
+    "galar_id": 296
   },
   {
     "id": 557,
@@ -30042,7 +31587,9 @@
         "move": "Rock Wrecker"
       }
     ],
-    "unova_id": 115
+    "unova_id": 64,
+    "kalos_id": 176,
+    "galar_id": 86
   },
   {
     "id": 558,
@@ -30096,7 +31643,9 @@
         "move": "Rock Wrecker"
       }
     ],
-    "unova_id": 116
+    "unova_id": 65,
+    "kalos_id": 177,
+    "galar_id": 87
   },
   {
     "id": 559,
@@ -30155,7 +31704,11 @@
         "move": "Head Smash"
       }
     ],
-    "unova_id": 117
+    "unova_id": 66,
+    "kalos_id": 100,
+    "alola_id": 380,
+    "galar_id": 224,
+    "paldea_id": 561
   },
   {
     "id": 560,
@@ -30209,7 +31762,11 @@
         "move": "Head Smash"
       }
     ],
-    "unova_id": 118
+    "unova_id": 67,
+    "kalos_id": 101,
+    "alola_id": 381,
+    "galar_id": 225,
+    "paldea_id": 562
   },
   {
     "id": 561,
@@ -30255,7 +31812,9 @@
         "move": "Sky Attack"
       }
     ],
-    "unova_id": 120
+    "unova_id": 68,
+    "kalos_id": 243,
+    "galar_id": 297
   },
   {
     "id": 562,
@@ -30301,7 +31860,8 @@
         "move": "Dark Pulse"
       }
     ],
-    "unova_id": 124
+    "unova_id": 69,
+    "galar_id": 327
   },
   {
     "id": 563,
@@ -30342,7 +31902,8 @@
         "move": "Phantom Force"
       }
     ],
-    "unova_id": 125
+    "unova_id": 70,
+    "galar_id": 329
   },
   {
     "id": 564,
@@ -30405,7 +31966,9 @@
         "move": "Hydro Pump"
       }
     ],
-    "unova_id": 126
+    "unova_id": 71,
+    "alola_id": 194,
+    "galar_id": 553
   },
   {
     "id": 565,
@@ -30463,7 +32026,9 @@
         "move": "Hydro Pump"
       }
     ],
-    "unova_id": 127
+    "unova_id": 72,
+    "alola_id": 195,
+    "galar_id": 554
   },
   {
     "id": 566,
@@ -30534,7 +32099,9 @@
         "move": "Endeavor"
       }
     ],
-    "unova_id": 128
+    "unova_id": 73,
+    "alola_id": 192,
+    "galar_id": 555
   },
   {
     "id": 567,
@@ -30600,7 +32167,9 @@
         "move": "Endeavor"
       }
     ],
-    "unova_id": 129
+    "unova_id": 74,
+    "alola_id": 193,
+    "galar_id": 556
   },
   {
     "id": 568,
@@ -30662,7 +32231,10 @@
         "move": "Explosion"
       }
     ],
-    "unova_id": 105
+    "unova_id": 75,
+    "kalos_id": 380,
+    "alola_id": 206,
+    "galar_id": 157
   },
   {
     "id": 569,
@@ -30723,7 +32295,10 @@
         "move": "Explosion"
       }
     ],
-    "unova_id": 106
+    "unova_id": 76,
+    "kalos_id": 381,
+    "alola_id": 207,
+    "galar_id": 158
   },
   {
     "id": 570,
@@ -30753,7 +32328,12 @@
         "move": "Fury Swipes"
       }
     ],
-    "unova_id": 151
+    "unova_id": 77,
+    "kalos_id": 430,
+    "alola_id": 307,
+    "galar_id": 445,
+    "hisui_id": 219,
+    "paldea_id": 228
   },
   {
     "id": 571,
@@ -30778,7 +32358,12 @@
         "move": "Fury Swipes"
       }
     ],
-    "unova_id": 152
+    "unova_id": 78,
+    "kalos_id": 431,
+    "alola_id": 308,
+    "galar_id": 446,
+    "hisui_id": 220,
+    "paldea_id": 229
   },
   {
     "id": 572,
@@ -30828,7 +32413,10 @@
         "move": "Last Resort"
       }
     ],
-    "unova_id": 107
+    "unova_id": 79,
+    "alola_id": 361,
+    "galar_id": 50,
+    "paldea_id": 556
   },
   {
     "id": 573,
@@ -30853,7 +32441,10 @@
         "move": "Pound"
       }
     ],
-    "unova_id": 108
+    "unova_id": 80,
+    "alola_id": 362,
+    "galar_id": 51,
+    "paldea_id": 557
   },
   {
     "id": 574,
@@ -30899,7 +32490,10 @@
         "move": "Future Sight"
       }
     ],
-    "unova_id": 136
+    "unova_id": 81,
+    "kalos_id": 432,
+    "galar_id": 267,
+    "paldea_id": 234
   },
   {
     "id": 575,
@@ -30941,7 +32535,10 @@
         "move": "Future Sight"
       }
     ],
-    "unova_id": 137
+    "unova_id": 82,
+    "kalos_id": 433,
+    "galar_id": 268,
+    "paldea_id": 235
   },
   {
     "id": 576,
@@ -30982,7 +32579,10 @@
         "move": "Future Sight"
       }
     ],
-    "unova_id": 138
+    "unova_id": 83,
+    "kalos_id": 434,
+    "galar_id": 269,
+    "paldea_id": 236
   },
   {
     "id": 577,
@@ -31028,7 +32628,10 @@
         "move": "Future Sight"
       }
     ],
-    "unova_id": 139
+    "unova_id": 84,
+    "kalos_id": 268,
+    "galar_id": 270,
+    "paldea_id": 577
   },
   {
     "id": 578,
@@ -31074,7 +32677,10 @@
         "move": "Future Sight"
       }
     ],
-    "unova_id": 140
+    "unova_id": 85,
+    "kalos_id": 269,
+    "galar_id": 271,
+    "paldea_id": 578
   },
   {
     "id": 579,
@@ -31115,7 +32721,10 @@
         "move": "Future Sight"
       }
     ],
-    "unova_id": 141
+    "unova_id": 86,
+    "kalos_id": 270,
+    "galar_id": 272,
+    "paldea_id": 579
   },
   {
     "id": 580,
@@ -31170,7 +32779,9 @@
         "move": "Hurricane"
       }
     ],
-    "unova_id": 153
+    "unova_id": 87,
+    "kalos_id": 127,
+    "paldea_id": 491
   },
   {
     "id": 581,
@@ -31220,7 +32831,9 @@
         "move": "Hurricane"
       }
     ],
-    "unova_id": 154
+    "unova_id": 88,
+    "kalos_id": 128,
+    "paldea_id": 492
   },
   {
     "id": 582,
@@ -31270,7 +32883,10 @@
         "move": "Blizzard"
       }
     ],
-    "unova_id": 255
+    "unova_id": 89,
+    "kalos_id": 391,
+    "alola_id": 255,
+    "galar_id": 72
   },
   {
     "id": 583,
@@ -31320,7 +32936,10 @@
         "move": "Blizzard"
       }
     ],
-    "unova_id": 256
+    "unova_id": 90,
+    "kalos_id": 392,
+    "alola_id": 256,
+    "galar_id": 73
   },
   {
     "id": 584,
@@ -31369,7 +32988,10 @@
         "move": "Blizzard"
       }
     ],
-    "unova_id": 257
+    "unova_id": 91,
+    "kalos_id": 393,
+    "alola_id": 257,
+    "galar_id": 74
   },
   {
     "id": 585,
@@ -31424,7 +33046,8 @@
         "move": "Solar Beam"
       }
     ],
-    "unova_id": 159
+    "unova_id": 92,
+    "paldea_id": 190
   },
   {
     "id": 586,
@@ -31478,7 +33101,8 @@
         "move": "Solar Beam"
       }
     ],
-    "unova_id": 160
+    "unova_id": 93,
+    "paldea_id": 191
   },
   {
     "id": 587,
@@ -31528,7 +33152,10 @@
         "move": "Discharge"
       }
     ],
-    "unova_id": 144
+    "unova_id": 94,
+    "kalos_id": 239,
+    "alola_id": 274,
+    "galar_id": 451
   },
   {
     "id": 588,
@@ -31590,7 +33217,9 @@
         "move": "Double-Edge"
       }
     ],
-    "unova_id": 155
+    "unova_id": 95,
+    "kalos_id": 328,
+    "galar_id": 273
   },
   {
     "id": 589,
@@ -31668,7 +33297,9 @@
         "move": "Metal Burst"
       }
     ],
-    "unova_id": 156
+    "unova_id": 96,
+    "kalos_id": 329,
+    "galar_id": 274
   },
   {
     "id": 590,
@@ -31715,7 +33346,10 @@
         "move": "Leaf Storm"
       }
     ],
-    "unova_id": 161
+    "unova_id": 97,
+    "kalos_id": 359,
+    "galar_id": 440,
+    "paldea_id": 205
   },
   {
     "id": 591,
@@ -31757,7 +33391,10 @@
         "move": "Leaf Storm"
       }
     ],
-    "unova_id": 162
+    "unova_id": 98,
+    "kalos_id": 360,
+    "galar_id": 441,
+    "paldea_id": 206
   },
   {
     "id": 592,
@@ -31824,7 +33461,9 @@
         "move": "Water Spout"
       }
     ],
-    "unova_id": 180
+    "unova_id": 99,
+    "alola_id": 378,
+    "galar_id": 305
   },
   {
     "id": 593,
@@ -31886,7 +33525,9 @@
         "move": "Water Spout"
       }
     ],
-    "unova_id": 181
+    "unova_id": 100,
+    "alola_id": 379,
+    "galar_id": 306
   },
   {
     "id": 594,
@@ -31927,7 +33568,10 @@
         "move": "Hydro Pump"
       }
     ],
-    "unova_id": 182
+    "unova_id": 101,
+    "kalos_id": 302,
+    "alola_id": 157,
+    "paldea_id": 336
   },
   {
     "id": 595,
@@ -31986,7 +33630,9 @@
         "move": "Bug Buzz"
       }
     ],
-    "unova_id": 173
+    "unova_id": 102,
+    "galar_id": 64,
+    "paldea_id": 568
   },
   {
     "id": 596,
@@ -32040,7 +33686,9 @@
         "move": "Bug Buzz"
       }
     ],
-    "unova_id": 174
+    "unova_id": 103,
+    "galar_id": 65,
+    "paldea_id": 569
   },
   {
     "id": 597,
@@ -32095,7 +33743,9 @@
         "move": "Explosion"
       }
     ],
-    "unova_id": 175
+    "unova_id": 104,
+    "kalos_id": 222,
+    "galar_id": 189
   },
   {
     "id": 598,
@@ -32149,7 +33799,9 @@
         "move": "Explosion"
       }
     ],
-    "unova_id": 176
+    "unova_id": 105,
+    "kalos_id": 223,
+    "galar_id": 190
   },
   {
     "id": 599,
@@ -32203,7 +33855,8 @@
         "move": "Hyper Beam"
       }
     ],
-    "unova_id": 130
+    "unova_id": 106,
+    "galar_id": 113
   },
   {
     "id": 600,
@@ -32257,7 +33910,8 @@
         "move": "Hyper Beam"
       }
     ],
-    "unova_id": 131
+    "unova_id": 107,
+    "galar_id": 114
   },
   {
     "id": 601,
@@ -32306,7 +33960,8 @@
         "move": "Hyper Beam"
       }
     ],
-    "unova_id": 132
+    "unova_id": 108,
+    "galar_id": 115
   },
   {
     "id": 602,
@@ -32336,7 +33991,8 @@
         "move": "Tackle"
       }
     ],
-    "unova_id": 177
+    "unova_id": 109,
+    "paldea_id": 341
   },
   {
     "id": 603,
@@ -32394,7 +34050,8 @@
         "move": "Super Fang"
       }
     ],
-    "unova_id": 178
+    "unova_id": 110,
+    "paldea_id": 342
   },
   {
     "id": 604,
@@ -32455,7 +34112,8 @@
         "move": "Super Fang"
       }
     ],
-    "unova_id": 179
+    "unova_id": 111,
+    "paldea_id": 343
   },
   {
     "id": 605,
@@ -32497,7 +34155,9 @@
         "move": "Psychic"
       }
     ],
-    "unova_id": 188
+    "unova_id": 112,
+    "alola_id": 365,
+    "galar_id": 277
   },
   {
     "id": 606,
@@ -32534,7 +34194,9 @@
         "move": "Psychic"
       }
     ],
-    "unova_id": 189
+    "unova_id": 113,
+    "alola_id": 366,
+    "galar_id": 278
   },
   {
     "id": 607,
@@ -32581,7 +34243,10 @@
         "move": "Overheat"
       }
     ],
-    "unova_id": 190
+    "unova_id": 114,
+    "kalos_id": 371,
+    "galar_id": 287,
+    "paldea_id": 482
   },
   {
     "id": 608,
@@ -32628,7 +34293,10 @@
         "move": "Overheat"
       }
     ],
-    "unova_id": 191
+    "unova_id": 115,
+    "kalos_id": 372,
+    "galar_id": 288,
+    "paldea_id": 483
   },
   {
     "id": 609,
@@ -32670,7 +34338,10 @@
         "move": "Overheat"
       }
     ],
-    "unova_id": 192
+    "unova_id": 116,
+    "kalos_id": 373,
+    "galar_id": 289,
+    "paldea_id": 484
   },
   {
     "id": 610,
@@ -32740,7 +34411,10 @@
         "move": "Giga Impact"
       }
     ],
-    "unova_id": 183
+    "unova_id": 117,
+    "kalos_id": 148,
+    "galar_id": 324,
+    "paldea_id": 155
   },
   {
     "id": 611,
@@ -32810,7 +34484,10 @@
         "move": "Giga Impact"
       }
     ],
-    "unova_id": 184
+    "unova_id": 118,
+    "kalos_id": 149,
+    "galar_id": 325,
+    "paldea_id": 156
   },
   {
     "id": 612,
@@ -32875,7 +34552,10 @@
         "move": "Giga Impact"
       }
     ],
-    "unova_id": 185
+    "unova_id": 119,
+    "kalos_id": 150,
+    "galar_id": 326,
+    "paldea_id": 157
   },
   {
     "id": 613,
@@ -32937,7 +34617,10 @@
         "move": "Sheer Cold"
       }
     ],
-    "unova_id": 195
+    "unova_id": 120,
+    "kalos_id": 387,
+    "galar_id": 279,
+    "paldea_id": 355
   },
   {
     "id": 614,
@@ -33002,7 +34685,10 @@
         "move": "Superpower"
       }
     ],
-    "unova_id": 196
+    "unova_id": 121,
+    "kalos_id": 388,
+    "galar_id": 280,
+    "paldea_id": 356
   },
   {
     "id": 615,
@@ -33055,7 +34741,10 @@
         "move": "Sheer Cold"
       }
     ],
-    "unova_id": 197
+    "unova_id": 122,
+    "kalos_id": 417,
+    "galar_id": 520,
+    "paldea_id": 360
   },
   {
     "id": 616,
@@ -33109,7 +34798,9 @@
         "move": "Final Gambit"
       }
     ],
-    "unova_id": 157
+    "unova_id": 123,
+    "kalos_id": 330,
+    "galar_id": 275
   },
   {
     "id": 617,
@@ -33178,7 +34869,9 @@
         "move": "Final Gambit"
       }
     ],
-    "unova_id": 158
+    "unova_id": 124,
+    "kalos_id": 331,
+    "galar_id": 276
   },
   {
     "id": 618,
@@ -33236,7 +34929,9 @@
         "move": "Fissure"
       }
     ],
-    "unova_id": 231
+    "unova_id": 125,
+    "kalos_id": 345,
+    "galar_id": 226
   },
   {
     "id": 619,
@@ -33298,7 +34993,11 @@
         "move": "High Jump Kick"
       }
     ],
-    "unova_id": 219
+    "unova_id": 126,
+    "kalos_id": 156,
+    "alola_id": 391,
+    "galar_id": 484,
+    "paldea_id": 473
   },
   {
     "id": 620,
@@ -33355,7 +35054,11 @@
         "move": "High Jump Kick"
       }
     ],
-    "unova_id": 220
+    "unova_id": 127,
+    "kalos_id": 157,
+    "alola_id": 392,
+    "galar_id": 485,
+    "paldea_id": 474
   },
   {
     "id": 621,
@@ -33412,7 +35115,10 @@
         "move": "Superpower"
       }
     ],
-    "unova_id": 270
+    "unova_id": 128,
+    "kalos_id": 447,
+    "alola_id": 398,
+    "galar_id": 430
   },
   {
     "id": 622,
@@ -33471,7 +35177,11 @@
         "move": "Dynamic Punch"
       }
     ],
-    "unova_id": 271
+    "unova_id": 129,
+    "kalos_id": 244,
+    "alola_id": 374,
+    "galar_id": 88,
+    "paldea_id": 563
   },
   {
     "id": 623,
@@ -33525,7 +35235,11 @@
         "move": "Dynamic Punch"
       }
     ],
-    "unova_id": 272
+    "unova_id": 130,
+    "kalos_id": 245,
+    "alola_id": 375,
+    "galar_id": 89,
+    "paldea_id": 564
   },
   {
     "id": 624,
@@ -33584,7 +35298,11 @@
         "move": "Guillotine"
       }
     ],
-    "unova_id": 223
+    "unova_id": 131,
+    "kalos_id": 354,
+    "alola_id": 382,
+    "galar_id": 246,
+    "paldea_id": 367
   },
   {
     "id": 625,
@@ -33647,7 +35365,11 @@
         "move": "Guillotine"
       }
     ],
-    "unova_id": 224
+    "unova_id": 132,
+    "kalos_id": 355,
+    "alola_id": 383,
+    "galar_id": 247,
+    "paldea_id": 368
   },
   {
     "id": 626,
@@ -33700,7 +35422,8 @@
         "move": "Giga Impact"
       }
     ],
-    "unova_id": 269
+    "unova_id": 133,
+    "galar_id": 427
   },
   {
     "id": 627,
@@ -33755,7 +35478,11 @@
         "move": "Brave Bird"
       }
     ],
-    "unova_id": 109
+    "unova_id": 134,
+    "alola_id": 75,
+    "galar_id": 281,
+    "hisui_id": 221,
+    "paldea_id": 365
   },
   {
     "id": 628,
@@ -33777,7 +35504,11 @@
         "move": "Rock Smash"
       }
     ],
-    "unova_id": 110
+    "unova_id": 135,
+    "alola_id": 76,
+    "galar_id": 282,
+    "hisui_id": 222,
+    "paldea_id": 366
   },
   {
     "id": 629,
@@ -33824,7 +35555,10 @@
         "move": "Brave Bird"
       }
     ],
-    "unova_id": 111
+    "unova_id": 136,
+    "alola_id": 77,
+    "galar_id": 283,
+    "paldea_id": 466
   },
   {
     "id": 630,
@@ -33870,7 +35604,10 @@
         "move": "Brave Bird"
       }
     ],
-    "unova_id": 112
+    "unova_id": 137,
+    "alola_id": 78,
+    "galar_id": 284,
+    "paldea_id": 467
   },
   {
     "id": 631,
@@ -33935,7 +35672,9 @@
         "move": "Flare Blitz"
       }
     ],
-    "unova_id": 193
+    "unova_id": 138,
+    "kalos_id": 411,
+    "galar_id": 317
   },
   {
     "id": 632,
@@ -33997,7 +35736,9 @@
         "move": "Guillotine"
       }
     ],
-    "unova_id": 194
+    "unova_id": 139,
+    "kalos_id": 412,
+    "galar_id": 316
   },
   {
     "id": 633,
@@ -34068,7 +35809,10 @@
         "move": "Outrage"
       }
     ],
-    "unova_id": 273
+    "unova_id": 140,
+    "kalos_id": 448,
+    "galar_id": 386,
+    "paldea_id": 370
   },
   {
     "id": 634,
@@ -34143,7 +35887,10 @@
         "move": "Outrage"
       }
     ],
-    "unova_id": 274
+    "unova_id": 141,
+    "kalos_id": 449,
+    "galar_id": 387,
+    "paldea_id": 371
   },
   {
     "id": 635,
@@ -34221,7 +35968,10 @@
         "move": "Hyper Beam"
       }
     ],
-    "unova_id": 275
+    "unova_id": 142,
+    "kalos_id": 450,
+    "galar_id": 388,
+    "paldea_id": 372
   },
   {
     "id": 636,
@@ -34284,7 +36034,10 @@
         "move": "Flare Blitz"
       }
     ],
-    "unova_id": 171
+    "unova_id": 143,
+    "alola_id": 337,
+    "galar_id": 494,
+    "paldea_id": 274
   },
   {
     "id": 637,
@@ -34366,7 +36119,10 @@
         "move": "Fire Blast"
       }
     ],
-    "unova_id": 172
+    "unova_id": 144,
+    "alola_id": 338,
+    "galar_id": 495,
+    "paldea_id": 275
   },
   {
     "id": 638,
@@ -34432,7 +36188,8 @@
         "move": "Close Combat"
       }
     ],
-    "unova_id": 225
+    "unova_id": 145,
+    "galar_id": 579
   },
   {
     "id": 639,
@@ -34502,7 +36259,8 @@
         "move": "Head Smash"
       }
     ],
-    "unova_id": 226
+    "unova_id": 146,
+    "galar_id": 580
   },
   {
     "id": 640,
@@ -34568,7 +36326,8 @@
         "move": "Close Combat"
       }
     ],
-    "unova_id": 227
+    "unova_id": 147,
+    "galar_id": 581
   },
   {
     "id": 641,
@@ -34621,7 +36380,8 @@
         "move": "Thrash"
       }
     ],
-    "unova_id": 198
+    "unova_id": 148,
+    "hisui_id": 231
   },
   {
     "id": 642,
@@ -34667,7 +36427,8 @@
         "move": "Thrash"
       }
     ],
-    "unova_id": 199
+    "unova_id": 149,
+    "hisui_id": 232
   },
   {
     "id": 643,
@@ -34737,7 +36498,7 @@
         "move": "Blue Flare"
       }
     ],
-    "unova_id": 295
+    "unova_id": 150
   },
   {
     "id": 644,
@@ -34807,7 +36568,7 @@
         "move": "Bolt Strike"
       }
     ],
-    "unova_id": 296
+    "unova_id": 151
   },
   {
     "id": 645,
@@ -34857,7 +36618,8 @@
         "move": "Fissure"
       }
     ],
-    "unova_id": 200
+    "unova_id": 152,
+    "hisui_id": 233
   },
   {
     "id": 646,
@@ -34907,7 +36669,7 @@
         "move": "Sheer Cold"
       }
     ],
-    "unova_id": 297
+    "unova_id": 153
   },
   {
     "id": 647,
@@ -34953,7 +36715,7 @@
         "move": "Close Combat"
       }
     ],
-    "unova_id": 298
+    "unova_id": 154
   },
   {
     "id": 648,
@@ -34995,7 +36757,7 @@
         "move": "Close Combat"
       }
     ],
-    "unova_id": 299
+    "unova_id": 155
   },
   {
     "id": 649,
@@ -35061,7 +36823,7 @@
         "move": "Self-Destruct"
       }
     ],
-    "unova_id": 300
+    "unova_id": 156
   },
   {
     "id": 650,
@@ -35114,7 +36876,9 @@
         "level": 48,
         "move": "Wood Hammer"
       }
-    ]
+    ],
+    "kalos_id": 1,
+    "paldea_id": 630
   },
   {
     "id": 651,
@@ -35167,7 +36931,9 @@
         "level": 48,
         "move": "Wood Hammer"
       }
-    ]
+    ],
+    "kalos_id": 2,
+    "paldea_id": 631
   },
   {
     "id": 652,
@@ -35224,7 +36990,9 @@
         "level": 55,
         "move": "Giga Impact"
       }
-    ]
+    ],
+    "kalos_id": 3,
+    "paldea_id": 632
   },
   {
     "id": 653,
@@ -35277,7 +37045,9 @@
         "level": 54,
         "move": "Fire Blast"
       }
-    ]
+    ],
+    "kalos_id": 4,
+    "paldea_id": 633
   },
   {
     "id": 654,
@@ -35330,7 +37100,9 @@
         "level": 54,
         "move": "Fire Blast"
       }
-    ]
+    ],
+    "kalos_id": 5,
+    "paldea_id": 634
   },
   {
     "id": 655,
@@ -35379,7 +37151,9 @@
         "level": 54,
         "move": "Fire Blast"
       }
-    ]
+    ],
+    "kalos_id": 6,
+    "paldea_id": 635
   },
   {
     "id": 656,
@@ -35432,7 +37206,9 @@
         "level": 57,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "kalos_id": 7,
+    "paldea_id": 636
   },
   {
     "id": 657,
@@ -35493,7 +37269,9 @@
         "level": 57,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "kalos_id": 8,
+    "paldea_id": 637
   },
   {
     "id": 658,
@@ -35550,7 +37328,9 @@
         "level": 57,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "kalos_id": 9,
+    "paldea_id": 638
   },
   {
     "id": 659,
@@ -35607,7 +37387,9 @@
         "level": 44,
         "move": "Earthquake"
       }
-    ]
+    ],
+    "kalos_id": 10,
+    "galar_id": 48
   },
   {
     "id": 660,
@@ -35660,7 +37442,9 @@
         "level": 44,
         "move": "Earthquake"
       }
-    ]
+    ],
+    "kalos_id": 11,
+    "galar_id": 49
   },
   {
     "id": 661,
@@ -35710,7 +37494,11 @@
         "level": 45,
         "move": "Flare Blitz"
       }
-    ]
+    ],
+    "kalos_id": 14,
+    "alola_id": 158,
+    "galar_id": 414,
+    "paldea_id": 19
   },
   {
     "id": 662,
@@ -35760,7 +37548,11 @@
         "level": 45,
         "move": "Flare Blitz"
       }
-    ]
+    ],
+    "kalos_id": 15,
+    "alola_id": 159,
+    "galar_id": 415,
+    "paldea_id": 20
   },
   {
     "id": 663,
@@ -35809,7 +37601,11 @@
         "level": 45,
         "move": "Flare Blitz"
       }
-    ]
+    ],
+    "kalos_id": 16,
+    "alola_id": 160,
+    "galar_id": 416,
+    "paldea_id": 21
   },
   {
     "id": 664,
@@ -35834,7 +37630,9 @@
         "level": 1,
         "move": "Tackle"
       }
-    ]
+    ],
+    "kalos_id": 20,
+    "paldea_id": 35
   },
   {
     "id": 665,
@@ -35863,7 +37661,9 @@
         "level": 10,
         "move": "Infestation"
       }
-    ]
+    ],
+    "kalos_id": 21,
+    "paldea_id": 36
   },
   {
     "id": 666,
@@ -35908,7 +37708,9 @@
         "level": 40,
         "move": "Hurricane"
       }
-    ]
+    ],
+    "kalos_id": 22,
+    "paldea_id": 37
   },
   {
     "id": 667,
@@ -35970,7 +37772,10 @@
         "level": 42,
         "move": "Hyper Voice"
       }
-    ]
+    ],
+    "kalos_id": 57,
+    "alola_id": 396,
+    "paldea_id": 224
   },
   {
     "id": 668,
@@ -36027,7 +37832,10 @@
         "level": 42,
         "move": "Hyper Voice"
       }
-    ]
+    ],
+    "kalos_id": 58,
+    "alola_id": 397,
+    "paldea_id": 225
   },
   {
     "id": 669,
@@ -36080,7 +37888,10 @@
         "level": 54,
         "move": "Solar Beam"
       }
-    ]
+    ],
+    "kalos_id": 68,
+    "alola_id": 318,
+    "paldea_id": 145
   },
   {
     "id": 670,
@@ -36137,7 +37948,10 @@
         "level": 58,
         "move": "Solar Beam"
       }
-    ]
+    ],
+    "kalos_id": 69,
+    "alola_id": 319,
+    "paldea_id": 146
   },
   {
     "id": 671,
@@ -36189,7 +38003,10 @@
         "level": 54,
         "move": "Solar Beam"
       }
-    ]
+    ],
+    "kalos_id": 70,
+    "alola_id": 320,
+    "paldea_id": 147
   },
   {
     "id": 672,
@@ -36250,7 +38067,9 @@
         "level": 50,
         "move": "Megahorn"
       }
-    ]
+    ],
+    "kalos_id": 89,
+    "paldea_id": 221
   },
   {
     "id": 673,
@@ -36310,7 +38129,9 @@
         "level": 55,
         "move": "Earthquake"
       }
-    ]
+    ],
+    "kalos_id": 90,
+    "paldea_id": 222
   },
   {
     "id": 674,
@@ -36351,7 +38172,10 @@
         "level": 44,
         "move": "Body Slam"
       }
-    ]
+    ],
+    "kalos_id": 91,
+    "alola_id": 220,
+    "galar_id": 111
   },
   {
     "id": 675,
@@ -36404,7 +38228,10 @@
         "level": 58,
         "move": "Close Combat"
       }
-    ]
+    ],
+    "kalos_id": 92,
+    "alola_id": 221,
+    "galar_id": 112
   },
   {
     "id": 676,
@@ -36452,7 +38279,9 @@
         "level": 43,
         "move": "Hyper Voice"
       }
-    ]
+    ],
+    "kalos_id": 93,
+    "alola_id": 309
   },
   {
     "id": 677,
@@ -36497,7 +38326,10 @@
         "level": 36,
         "move": "Psyshock"
       }
-    ]
+    ],
+    "kalos_id": 114,
+    "galar_id": 208,
+    "paldea_id": 549
   },
   {
     "id": 678,
@@ -36537,7 +38369,10 @@
         "level": 54,
         "move": "Psychic"
       }
-    ]
+    ],
+    "kalos_id": 115,
+    "galar_id": 209,
+    "paldea_id": 550
   },
   {
     "id": 679,
@@ -36587,7 +38422,9 @@
         "level": 38,
         "move": "Iron Head"
       }
-    ]
+    ],
+    "kalos_id": 117,
+    "galar_id": 330
   },
   {
     "id": 680,
@@ -36637,7 +38474,9 @@
         "level": 38,
         "move": "Iron Head"
       }
-    ]
+    ],
+    "kalos_id": 118,
+    "galar_id": 331
   },
   {
     "id": 681,
@@ -36678,7 +38517,9 @@
         "level": 1,
         "move": "Tackle"
       }
-    ]
+    ],
+    "kalos_id": 119,
+    "galar_id": 332
   },
   {
     "id": 682,
@@ -36727,7 +38568,9 @@
         "level": 40,
         "move": "Psychic"
       }
-    ]
+    ],
+    "kalos_id": 129,
+    "galar_id": 212
   },
   {
     "id": 683,
@@ -36771,7 +38614,9 @@
         "level": 40,
         "move": "Psychic"
       }
-    ]
+    ],
+    "kalos_id": 130,
+    "galar_id": 213
   },
   {
     "id": 684,
@@ -36812,7 +38657,9 @@
         "level": 36,
         "move": "Play Rough"
       }
-    ]
+    ],
+    "kalos_id": 131,
+    "galar_id": 210
   },
   {
     "id": 685,
@@ -36848,7 +38695,9 @@
         "level": 36,
         "move": "Play Rough"
       }
-    ]
+    ],
+    "kalos_id": 132,
+    "galar_id": 211
   },
   {
     "id": 686,
@@ -36906,7 +38755,11 @@
         "level": 54,
         "move": "Close Combat"
       }
-    ]
+    ],
+    "kalos_id": 163,
+    "alola_id": 305,
+    "galar_id": 290,
+    "paldea_id": 539
   },
   {
     "id": 687,
@@ -36959,7 +38812,11 @@
         "level": 54,
         "move": "Close Combat"
       }
-    ]
+    ],
+    "kalos_id": 164,
+    "alola_id": 306,
+    "galar_id": 291,
+    "paldea_id": 540
   },
   {
     "id": 688,
@@ -37021,7 +38878,9 @@
         "level": 50,
         "move": "Stone Edge"
       }
-    ]
+    ],
+    "kalos_id": 174,
+    "galar_id": 234
   },
   {
     "id": 689,
@@ -37086,7 +38945,9 @@
         "level": 54,
         "move": "Close Combat"
       }
-    ]
+    ],
+    "kalos_id": 175,
+    "galar_id": 235
   },
   {
     "id": 690,
@@ -37148,7 +39009,11 @@
         "level": 52,
         "move": "Sludge Wave"
       }
-    ]
+    ],
+    "kalos_id": 183,
+    "alola_id": 384,
+    "galar_id": 496,
+    "paldea_id": 337
   },
   {
     "id": 691,
@@ -37205,7 +39070,11 @@
         "level": 52,
         "move": "Sludge Wave"
       }
-    ]
+    ],
+    "kalos_id": 184,
+    "alola_id": 385,
+    "galar_id": 497,
+    "paldea_id": 338
   },
   {
     "id": 692,
@@ -37266,7 +39135,11 @@
         "level": 52,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "kalos_id": 185,
+    "alola_id": 386,
+    "galar_id": 498,
+    "paldea_id": 339
   },
   {
     "id": 693,
@@ -37326,7 +39199,11 @@
         "level": 55,
         "move": "Focus Blast"
       }
-    ]
+    ],
+    "kalos_id": 186,
+    "alola_id": 387,
+    "galar_id": 499,
+    "paldea_id": 340
   },
   {
     "id": 694,
@@ -37384,7 +39261,9 @@
         "level": 50,
         "move": "Thunder"
       }
-    ]
+    ],
+    "kalos_id": 199,
+    "galar_id": 318
   },
   {
     "id": 695,
@@ -37437,7 +39316,9 @@
         "level": 50,
         "move": "Thunder"
       }
-    ]
+    ],
+    "kalos_id": 200,
+    "galar_id": 319
   },
   {
     "id": 696,
@@ -37491,7 +39372,10 @@
         "level": 44,
         "move": "Earthquake"
       }
-    ]
+    ],
+    "kalos_id": 217,
+    "alola_id": 350,
+    "galar_id": 530
   },
   {
     "id": 697,
@@ -37552,7 +39436,10 @@
         "level": 58,
         "move": "Head Smash"
       }
-    ]
+    ],
+    "kalos_id": 218,
+    "alola_id": 351,
+    "galar_id": 531
   },
   {
     "id": 698,
@@ -37610,7 +39497,10 @@
         "level": 56,
         "move": "Hyper Beam"
       }
-    ]
+    ],
+    "kalos_id": 219,
+    "alola_id": 352,
+    "galar_id": 532
   },
   {
     "id": 699,
@@ -37663,7 +39553,10 @@
         "level": 56,
         "move": "Hyper Beam"
       }
-    ]
+    ],
+    "kalos_id": 220,
+    "alola_id": 353,
+    "galar_id": 533
   },
   {
     "id": 700,
@@ -37711,7 +39604,12 @@
         "level": 50,
         "move": "Moonblast"
       }
-    ]
+    ],
+    "kalos_id": 238,
+    "alola_id": 131,
+    "galar_id": 204,
+    "hisui_id": 33,
+    "paldea_id": 187
   },
   {
     "id": 701,
@@ -37764,7 +39662,11 @@
         "level": 52,
         "move": "Brave Bird"
       }
-    ]
+    ],
+    "kalos_id": 242,
+    "alola_id": 317,
+    "galar_id": 320,
+    "paldea_id": 301
   },
   {
     "id": 702,
@@ -37817,7 +39719,11 @@
         "level": 50,
         "move": "Thunder"
       }
-    ]
+    ],
+    "kalos_id": 263,
+    "alola_id": 369,
+    "galar_id": 452,
+    "paldea_id": 200
   },
   {
     "id": 703,
@@ -37870,7 +39776,11 @@
         "level": 52,
         "move": "Stone Edge"
       }
-    ]
+    ],
+    "kalos_id": 277,
+    "alola_id": 101,
+    "galar_id": 546,
+    "paldea_id": 490
   },
   {
     "id": 704,
@@ -37931,7 +39841,12 @@
         "level": 56,
         "move": "Surf"
       }
-    ]
+    ],
+    "kalos_id": 325,
+    "alola_id": 178,
+    "galar_id": 389,
+    "hisui_id": 115,
+    "paldea_id": 172
   },
   {
     "id": 705,
@@ -37992,7 +39907,12 @@
         "level": 56,
         "move": "Surf"
       }
-    ]
+    ],
+    "kalos_id": 326,
+    "alola_id": 179,
+    "galar_id": 390,
+    "hisui_id": 116,
+    "paldea_id": 173
   },
   {
     "id": 706,
@@ -38012,7 +39932,12 @@
         "level": 1,
         "move": "Counter"
       }
-    ]
+    ],
+    "kalos_id": 327,
+    "alola_id": 180,
+    "galar_id": 391,
+    "hisui_id": 117,
+    "paldea_id": 174
   },
   {
     "id": 707,
@@ -38057,7 +39982,11 @@
         "level": 44,
         "move": "Dazzling Gleam"
       }
-    ]
+    ],
+    "kalos_id": 356,
+    "alola_id": 241,
+    "galar_id": 420,
+    "paldea_id": 240
   },
   {
     "id": 708,
@@ -38095,7 +40024,11 @@
         "level": 44,
         "move": "Wood Hammer"
       }
-    ]
+    ],
+    "kalos_id": 367,
+    "alola_id": 196,
+    "galar_id": 338,
+    "paldea_id": 441
   },
   {
     "id": 709,
@@ -38132,7 +40065,11 @@
         "level": 44,
         "move": "Wood Hammer"
       }
-    ]
+    ],
+    "kalos_id": 368,
+    "alola_id": 197,
+    "galar_id": 339,
+    "paldea_id": 442
   },
   {
     "id": 710,
@@ -38170,7 +40107,9 @@
         "level": 36,
         "move": "Shadow Ball"
       }
-    ]
+    ],
+    "kalos_id": 369,
+    "galar_id": 191
   },
   {
     "id": 711,
@@ -38211,7 +40150,9 @@
         "level": 36,
         "move": "Shadow Ball"
       }
-    ]
+    ],
+    "kalos_id": 370,
+    "galar_id": 192
   },
   {
     "id": 712,
@@ -38264,7 +40205,11 @@
         "level": 54,
         "move": "Blizzard"
       }
-    ]
+    ],
+    "kalos_id": 385,
+    "galar_id": 358,
+    "hisui_id": 215,
+    "paldea_id": 363
   },
   {
     "id": 713,
@@ -38284,7 +40229,11 @@
         "level": 1,
         "move": "Mirror Coat"
       }
-    ]
+    ],
+    "kalos_id": 386,
+    "galar_id": 359,
+    "hisui_id": 216,
+    "paldea_id": 364
   },
   {
     "id": 714,
@@ -38342,7 +40291,11 @@
         "level": 44,
         "move": "Hurricane"
       }
-    ]
+    ],
+    "kalos_id": 419,
+    "alola_id": 315,
+    "galar_id": 176,
+    "paldea_id": 303
   },
   {
     "id": 715,
@@ -38399,7 +40352,11 @@
         "level": 52,
         "move": "Boomburst"
       }
-    ]
+    ],
+    "kalos_id": 420,
+    "alola_id": 316,
+    "galar_id": 177,
+    "paldea_id": 304
   },
   {
     "id": 716,
@@ -38451,7 +40408,8 @@
         "level": 85,
         "move": "Giga Impact"
       }
-    ]
+    ],
+    "kalos_id": 454
   },
   {
     "id": 717,
@@ -38512,7 +40470,8 @@
         "level": 85,
         "move": "Hyper Beam"
       }
-    ]
+    ],
+    "kalos_id": 455
   },
   {
     "id": 718,
@@ -38553,7 +40512,9 @@
         "level": 88,
         "move": "Outrage"
       }
-    ]
+    ],
+    "kalos_id": 456,
+    "alola_id": 205
   },
   {
     "id": 719,
@@ -38602,7 +40563,8 @@
         "level": 54,
         "move": "Moonblast"
       }
-    ]
+    ],
+    "kalos_id": 151
   },
   {
     "id": 720,
@@ -38643,7 +40605,8 @@
         "level": 75,
         "move": "Psychic"
       }
-    ]
+    ],
+    "kalos_id": 152
   },
   {
     "id": 721,
@@ -38708,7 +40671,8 @@
         "level": 60,
         "move": "Explosion"
       }
-    ]
+    ],
+    "kalos_id": 153
   },
   {
     "id": 722,
@@ -38770,7 +40734,10 @@
         "level": 36,
         "move": "Brave Bird"
       }
-    ]
+    ],
+    "alola_id": 1,
+    "hisui_id": 1,
+    "paldea_id": 639
   },
   {
     "id": 723,
@@ -38832,7 +40799,10 @@
         "level": 50,
         "move": "Brave Bird"
       }
-    ]
+    ],
+    "alola_id": 2,
+    "hisui_id": 2,
+    "paldea_id": 640
   },
   {
     "id": 724,
@@ -38853,7 +40823,10 @@
         "level": 65,
         "move": "Knock Off"
       }
-    ]
+    ],
+    "alola_id": 3,
+    "hisui_id": 3,
+    "paldea_id": 641
   },
   {
     "id": 725,
@@ -38914,7 +40887,9 @@
         "level": 36,
         "move": "Flare Blitz"
       }
-    ]
+    ],
+    "alola_id": 4,
+    "paldea_id": 642
   },
   {
     "id": 726,
@@ -38975,7 +40950,9 @@
         "level": 50,
         "move": "Flare Blitz"
       }
-    ]
+    ],
+    "alola_id": 5,
+    "paldea_id": 643
   },
   {
     "id": 727,
@@ -39032,7 +41009,9 @@
         "level": 58,
         "move": "Flare Blitz"
       }
-    ]
+    ],
+    "alola_id": 6,
+    "paldea_id": 644
   },
   {
     "id": 728,
@@ -39089,7 +41068,9 @@
         "level": 36,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "alola_id": 7,
+    "paldea_id": 645
   },
   {
     "id": 729,
@@ -39146,7 +41127,9 @@
         "level": 50,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "alola_id": 8,
+    "paldea_id": 646
   },
   {
     "id": 730,
@@ -39199,7 +41182,9 @@
         "level": 58,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "alola_id": 9,
+    "paldea_id": 647
   },
   {
     "id": 731,
@@ -39253,7 +41238,9 @@
         "level": 37,
         "move": "Hyper Voice"
       }
-    ]
+    ],
+    "alola_id": 10,
+    "paldea_id": 522
   },
   {
     "id": 732,
@@ -39307,7 +41294,9 @@
         "level": 45,
         "move": "Hyper Voice"
       }
-    ]
+    ],
+    "alola_id": 11,
+    "paldea_id": 523
   },
   {
     "id": 733,
@@ -39360,7 +41349,9 @@
         "level": 50,
         "move": "Hyper Voice"
       }
-    ]
+    ],
+    "alola_id": 12,
+    "paldea_id": 524
   },
   {
     "id": 734,
@@ -39413,7 +41404,9 @@
         "level": 40,
         "move": "Thrash"
       }
-    ]
+    ],
+    "alola_id": 13,
+    "paldea_id": 27
   },
   {
     "id": 735,
@@ -39461,7 +41454,9 @@
         "level": 47,
         "move": "Thrash"
       }
-    ]
+    ],
+    "alola_id": 14,
+    "paldea_id": 28
   },
   {
     "id": 736,
@@ -39514,7 +41509,10 @@
         "level": 40,
         "move": "Dig"
       }
-    ]
+    ],
+    "alola_id": 27,
+    "galar_id": 16,
+    "paldea_id": 459
   },
   {
     "id": 737,
@@ -39572,7 +41570,10 @@
         "level": 64,
         "move": "Discharge"
       }
-    ]
+    ],
+    "alola_id": 28,
+    "galar_id": 17,
+    "paldea_id": 460
   },
   {
     "id": 738,
@@ -39621,7 +41622,10 @@
         "level": 64,
         "move": "Zap Cannon"
       }
-    ]
+    ],
+    "alola_id": 29,
+    "galar_id": 18,
+    "paldea_id": 461
   },
   {
     "id": 739,
@@ -39670,7 +41674,9 @@
         "level": 49,
         "move": "Close Combat"
       }
-    ]
+    ],
+    "alola_id": 59,
+    "paldea_id": 118
   },
   {
     "id": 740,
@@ -39719,7 +41725,9 @@
         "level": 49,
         "move": "Close Combat"
       }
-    ]
+    ],
+    "alola_id": 60,
+    "paldea_id": 119
   },
   {
     "id": 741,
@@ -39756,7 +41764,9 @@
         "level": 47,
         "move": "Hurricane"
       }
-    ]
+    ],
+    "alola_id": 82,
+    "paldea_id": 100
   },
   {
     "id": 742,
@@ -39806,7 +41816,10 @@
         "level": 48,
         "move": "Bug Buzz"
       }
-    ]
+    ],
+    "alola_id": 83,
+    "galar_id": 187,
+    "paldea_id": 415
   },
   {
     "id": 743,
@@ -39851,7 +41864,10 @@
         "level": 56,
         "move": "Bug Buzz"
       }
-    ]
+    ],
+    "alola_id": 84,
+    "galar_id": 188,
+    "paldea_id": 416
   },
   {
     "id": 744,
@@ -39900,7 +41916,10 @@
         "level": 48,
         "move": "Stone Edge"
       }
-    ]
+    ],
+    "alola_id": 103,
+    "galar_id": 482,
+    "paldea_id": 89
   },
   {
     "id": 745,
@@ -39948,7 +41967,10 @@
         "level": 60,
         "move": "Stone Edge"
       }
-    ]
+    ],
+    "alola_id": 104,
+    "galar_id": 483,
+    "paldea_id": 90
   },
   {
     "id": 746,
@@ -39980,7 +42002,9 @@
         "level": 48,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "alola_id": 110,
+    "galar_id": 155
   },
   {
     "id": 747,
@@ -40034,7 +42058,10 @@
         "level": 45,
         "move": "Poison Jab"
       }
-    ]
+    ],
+    "alola_id": 113,
+    "galar_id": 307,
+    "paldea_id": 344
   },
   {
     "id": 748,
@@ -40083,7 +42110,10 @@
         "level": 49,
         "move": "Poison Jab"
       }
-    ]
+    ],
+    "alola_id": 114,
+    "galar_id": 308,
+    "paldea_id": 345
   },
   {
     "id": 749,
@@ -40152,7 +42182,10 @@
         "level": 44,
         "move": "Superpower"
       }
-    ]
+    ],
+    "alola_id": 132,
+    "galar_id": 84,
+    "paldea_id": 272
   },
   {
     "id": 750,
@@ -40216,7 +42249,10 @@
         "level": 52,
         "move": "Superpower"
       }
-    ]
+    ],
+    "alola_id": 133,
+    "galar_id": 85,
+    "paldea_id": 273
   },
   {
     "id": 751,
@@ -40282,7 +42318,10 @@
         "level": 48,
         "move": "Mirror Coat"
       }
-    ]
+    ],
+    "alola_id": 141,
+    "galar_id": 214,
+    "paldea_id": 541
   },
   {
     "id": 752,
@@ -40343,7 +42382,10 @@
         "level": 62,
         "move": "Mirror Coat"
       }
-    ]
+    ],
+    "alola_id": 142,
+    "galar_id": 215,
+    "paldea_id": 542
   },
   {
     "id": 753,
@@ -40392,7 +42434,10 @@
         "level": 50,
         "move": "Solar Beam"
       }
-    ]
+    ],
+    "alola_id": 143,
+    "galar_id": 412,
+    "paldea_id": 247
   },
   {
     "id": 754,
@@ -40444,7 +42489,10 @@
         "level": 63,
         "move": "Solar Blade"
       }
-    ]
+    ],
+    "alola_id": 144,
+    "galar_id": 413,
+    "paldea_id": 248
   },
   {
     "id": 755,
@@ -40494,7 +42542,9 @@
         "level": 44,
         "move": "Dream Eater"
       }
-    ]
+    ],
+    "alola_id": 145,
+    "galar_id": 340
   },
   {
     "id": 756,
@@ -40539,7 +42589,9 @@
         "level": 56,
         "move": "Dream Eater"
       }
-    ]
+    ],
+    "alola_id": 146,
+    "galar_id": 341
   },
   {
     "id": 757,
@@ -40597,7 +42649,10 @@
         "level": 55,
         "move": "Endeavor"
       }
-    ]
+    ],
+    "alola_id": 161,
+    "galar_id": 244,
+    "paldea_id": 120
   },
   {
     "id": 758,
@@ -40658,7 +42713,10 @@
         "level": 51,
         "move": "Flamethrower"
       }
-    ]
+    ],
+    "alola_id": 162,
+    "galar_id": 245,
+    "paldea_id": 121
   },
   {
     "id": 759,
@@ -40720,7 +42778,9 @@
         "level": 48,
         "move": "Superpower"
       }
-    ]
+    ],
+    "alola_id": 169,
+    "galar_id": 94
   },
   {
     "id": 760,
@@ -40781,7 +42841,9 @@
         "level": 60,
         "move": "Superpower"
       }
-    ]
+    ],
+    "alola_id": 170,
+    "galar_id": 95
   },
   {
     "id": 761,
@@ -40818,7 +42880,10 @@
         "level": 24,
         "move": "Flail"
       }
-    ]
+    ],
+    "alola_id": 171,
+    "galar_id": 52,
+    "paldea_id": 81
   },
   {
     "id": 762,
@@ -40863,7 +42928,10 @@
         "level": 46,
         "move": "Leaf Storm"
       }
-    ]
+    ],
+    "alola_id": 172,
+    "galar_id": 53,
+    "paldea_id": 82
   },
   {
     "id": 763,
@@ -40911,7 +42979,10 @@
         "level": 58,
         "move": "High Jump Kick"
       }
-    ]
+    ],
+    "alola_id": 173,
+    "galar_id": 54,
+    "paldea_id": 83
   },
   {
     "id": 764,
@@ -40963,7 +43034,10 @@
         "level": 45,
         "move": "Petal Dance"
       }
-    ]
+    ],
+    "alola_id": 174,
+    "galar_id": 442,
+    "paldea_id": 532
   },
   {
     "id": 765,
@@ -41004,7 +43078,10 @@
         "level": 60,
         "move": "Future Sight"
       }
-    ]
+    ],
+    "alola_id": 176,
+    "galar_id": 342,
+    "paldea_id": 313
   },
   {
     "id": 766,
@@ -41060,7 +43137,10 @@
         "level": 60,
         "move": "Giga Impact"
       }
-    ]
+    ],
+    "alola_id": 177,
+    "galar_id": 343,
+    "paldea_id": 314
   },
   {
     "id": 767,
@@ -41086,7 +43166,9 @@
         "level": 1,
         "move": "Rollout"
       }
-    ]
+    ],
+    "alola_id": 182,
+    "galar_id": 232
   },
   {
     "id": 768,
@@ -41147,7 +43229,9 @@
         "level": 53,
         "move": "Liquidation"
       }
-    ]
+    ],
+    "alola_id": 183,
+    "galar_id": 233
   },
   {
     "id": 769,
@@ -41201,7 +43285,10 @@
         "level": 50,
         "move": "Earth Power"
       }
-    ]
+    ],
+    "alola_id": 186,
+    "galar_id": 467,
+    "paldea_id": 322
   },
   {
     "id": 770,
@@ -41250,7 +43337,10 @@
         "level": 50,
         "move": "Earth Power"
       }
-    ]
+    ],
+    "alola_id": 187,
+    "galar_id": 468,
+    "paldea_id": 323
   },
   {
     "id": 771,
@@ -41270,7 +43360,9 @@
         "level": 20,
         "move": "Counter"
       }
-    ]
+    ],
+    "alola_id": 200,
+    "galar_id": 156
   },
   {
     "id": 772,
@@ -41331,7 +43423,9 @@
         "level": 55,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "alola_id": 203,
+    "galar_id": 381
   },
   {
     "id": 773,
@@ -41419,7 +43513,9 @@
         "level": 55,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "alola_id": 204,
+    "galar_id": 382
   },
   {
     "id": 774,
@@ -41472,7 +43568,9 @@
         "level": 50,
         "move": "Explosion"
       }
-    ]
+    ],
+    "alola_id": 213,
+    "paldea_id": 551
   },
   {
     "id": 775,
@@ -41520,7 +43618,9 @@
         "level": 46,
         "move": "Thrash"
       }
-    ]
+    ],
+    "alola_id": 222,
+    "paldea_id": 315
   },
   {
     "id": 776,
@@ -41581,7 +43681,9 @@
         "level": 52,
         "move": "Explosion"
       }
-    ]
+    ],
+    "alola_id": 224,
+    "galar_id": 347
   },
   {
     "id": 777,
@@ -41634,7 +43736,9 @@
         "level": 55,
         "move": "Wild Charge"
       }
-    ]
+    ],
+    "alola_id": 225,
+    "galar_id": 348
   },
   {
     "id": 778,
@@ -41679,7 +43783,10 @@
         "level": 60,
         "move": "Phantom Force"
       }
-    ]
+    ],
+    "alola_id": 242,
+    "galar_id": 301,
+    "paldea_id": 239
   },
   {
     "id": 779,
@@ -41736,7 +43843,9 @@
         "level": 44,
         "move": "Wave Crash"
       }
-    ]
+    ],
+    "alola_id": 243,
+    "paldea_id": 335
   },
   {
     "id": 780,
@@ -41789,7 +43898,9 @@
         "level": 56,
         "move": "Dragon Rush"
       }
-    ]
+    ],
+    "alola_id": 244,
+    "galar_id": 346
   },
   {
     "id": 781,
@@ -41866,7 +43977,9 @@
         "level": 64,
         "move": "Power Whip"
       }
-    ]
+    ],
+    "alola_id": 263,
+    "galar_id": 360
   },
   {
     "id": 782,
@@ -41907,7 +44020,10 @@
         "level": 44,
         "move": "Outrage"
       }
-    ]
+    ],
+    "alola_id": 271,
+    "galar_id": 392,
+    "paldea_id": 468
   },
   {
     "id": 783,
@@ -41953,7 +44069,10 @@
         "level": 56,
         "move": "Close Combat"
       }
-    ]
+    ],
+    "alola_id": 272,
+    "galar_id": 393,
+    "paldea_id": 469
   },
   {
     "id": 784,
@@ -41998,7 +44117,10 @@
         "level": 76,
         "move": "Boomburst"
       }
-    ]
+    ],
+    "alola_id": 273,
+    "galar_id": 394,
+    "paldea_id": 470
   },
   {
     "id": 785,
@@ -42055,7 +44177,8 @@
         "level": 65,
         "move": "Brave Bird"
       }
-    ]
+    ],
+    "alola_id": 285
   },
   {
     "id": 786,
@@ -42104,7 +44227,8 @@
         "level": 60,
         "move": "Moonblast"
       }
-    ]
+    ],
+    "alola_id": 286
   },
   {
     "id": 787,
@@ -42161,7 +44285,8 @@
         "level": 70,
         "move": "Skull Bash"
       }
-    ]
+    ],
+    "alola_id": 287
   },
   {
     "id": 788,
@@ -42214,7 +44339,8 @@
         "level": 65,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "alola_id": 288
   },
   {
     "id": 789,
@@ -42239,7 +44365,8 @@
         "level": 1,
         "move": "Tackle"
       }
-    ]
+    ],
+    "alola_id": 289
   },
   {
     "id": 790,
@@ -42268,7 +44395,8 @@
         "level": 1,
         "move": "Tackle"
       }
-    ]
+    ],
+    "alola_id": 290
   },
   {
     "id": 791,
@@ -42325,7 +44453,8 @@
         "level": 84,
         "move": "Giga Impact"
       }
-    ]
+    ],
+    "alola_id": 291
   },
   {
     "id": 792,
@@ -42378,7 +44507,8 @@
         "level": 70,
         "move": "Dream Eater"
       }
-    ]
+    ],
+    "alola_id": 292
   },
   {
     "id": 793,
@@ -42435,7 +44565,8 @@
         "level": 70,
         "move": "Head Smash"
       }
-    ]
+    ],
+    "alola_id": 293
   },
   {
     "id": 794,
@@ -42496,7 +44627,8 @@
         "level": 70,
         "move": "Focus Punch"
       }
-    ]
+    ],
+    "alola_id": 294
   },
   {
     "id": 795,
@@ -42557,7 +44689,8 @@
         "level": 70,
         "move": "High Jump Kick"
       }
-    ]
+    ],
+    "alola_id": 295
   },
   {
     "id": 796,
@@ -42609,7 +44742,8 @@
         "level": 70,
         "move": "Zap Cannon"
       }
-    ]
+    ],
+    "alola_id": 296
   },
   {
     "id": 797,
@@ -42662,7 +44796,8 @@
         "level": 70,
         "move": "Skull Bash"
       }
-    ]
+    ],
+    "alola_id": 297
   },
   {
     "id": 798,
@@ -42723,7 +44858,8 @@
         "level": 70,
         "move": "Guillotine"
       }
-    ]
+    ],
+    "alola_id": 298
   },
   {
     "id": 799,
@@ -42792,7 +44928,8 @@
         "level": 70,
         "move": "Giga Impact"
       }
-    ]
+    ],
+    "alola_id": 299
   },
   {
     "id": 800,
@@ -42852,7 +44989,8 @@
         "level": 88,
         "move": "Prismatic Laser"
       }
-    ]
+    ],
+    "alola_id": 300
   },
   {
     "id": 801,
@@ -42921,7 +45059,8 @@
         "level": 84,
         "move": "Zap Cannon"
       }
-    ]
+    ],
+    "alola_id": 301
   },
   {
     "id": 802,
@@ -42994,7 +45133,8 @@
         "level": 80,
         "move": "Close Combat"
       }
-    ]
+    ],
+    "alola_id": 302
   },
   {
     "id": 803,
@@ -43043,7 +45183,8 @@
         "level": 49,
         "move": "Poison Jab"
       }
-    ]
+    ],
+    "alola_id": 359
   },
   {
     "id": 804,
@@ -43100,7 +45241,8 @@
         "level": 70,
         "move": "Dragon Rush"
       }
-    ]
+    ],
+    "alola_id": 360
   },
   {
     "id": 805,
@@ -43149,7 +45291,8 @@
         "level": 70,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "alola_id": 401
   },
   {
     "id": 806,
@@ -43202,7 +45345,8 @@
         "level": 70,
         "move": "Mind Blown"
       }
-    ]
+    ],
+    "alola_id": 402
   },
   {
     "id": 807,
@@ -43274,7 +45418,8 @@
         "level": 96,
         "move": "Close Combat"
       }
-    ]
+    ],
+    "alola_id": 403
   },
   {
     "id": 808,
@@ -43412,7 +45557,9 @@
         "level": 36,
         "move": "Endeavor"
       }
-    ]
+    ],
+    "galar_id": 1,
+    "paldea_id": 648
   },
   {
     "id": 811,
@@ -43465,7 +45612,9 @@
         "level": 48,
         "move": "Endeavor"
       }
-    ]
+    ],
+    "galar_id": 2,
+    "paldea_id": 649
   },
   {
     "id": 812,
@@ -43521,7 +45670,9 @@
         "level": 62,
         "move": "Boomburst"
       }
-    ]
+    ],
+    "galar_id": 3,
+    "paldea_id": 650
   },
   {
     "id": 813,
@@ -43578,7 +45729,9 @@
         "level": 36,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "galar_id": 4,
+    "paldea_id": 651
   },
   {
     "id": 814,
@@ -43635,7 +45788,9 @@
         "level": 48,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "galar_id": 5,
+    "paldea_id": 652
   },
   {
     "id": 815,
@@ -43691,7 +45846,9 @@
         "level": 54,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "galar_id": 6,
+    "paldea_id": 653
   },
   {
     "id": 816,
@@ -43740,7 +45897,9 @@
         "level": 28,
         "move": "Liquidation"
       }
-    ]
+    ],
+    "galar_id": 7,
+    "paldea_id": 654
   },
   {
     "id": 817,
@@ -43789,7 +45948,9 @@
         "level": 36,
         "move": "Liquidation"
       }
-    ]
+    ],
+    "galar_id": 8,
+    "paldea_id": 655
   },
   {
     "id": 818,
@@ -43841,7 +46002,9 @@
         "level": 62,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "galar_id": 9,
+    "paldea_id": 656
   },
   {
     "id": 819,
@@ -43894,7 +46057,9 @@
         "level": 45,
         "move": "Belch"
       }
-    ]
+    ],
+    "galar_id": 24,
+    "paldea_id": 29
   },
   {
     "id": 820,
@@ -43942,7 +46107,9 @@
         "level": 55,
         "move": "Belch"
       }
-    ]
+    ],
+    "galar_id": 25,
+    "paldea_id": 30
   },
   {
     "id": 821,
@@ -43995,7 +46162,9 @@
         "level": 47,
         "move": "Brave Bird"
       }
-    ]
+    ],
+    "galar_id": 21,
+    "paldea_id": 40
   },
   {
     "id": 822,
@@ -44048,7 +46217,9 @@
         "level": 47,
         "move": "Brave Bird"
       }
-    ]
+    ],
+    "galar_id": 22,
+    "paldea_id": 41
   },
   {
     "id": 823,
@@ -44101,7 +46272,9 @@
         "level": 53,
         "move": "Heavy Slam"
       }
-    ]
+    ],
+    "galar_id": 23,
+    "paldea_id": 42
   },
   {
     "id": 824,
@@ -44126,7 +46299,8 @@
         "level": 1,
         "move": "Struggle Bug"
       }
-    ]
+    ],
+    "galar_id": 10
   },
   {
     "id": 825,
@@ -44156,7 +46330,8 @@
         "level": 1,
         "move": "Struggle Bug"
       }
-    ]
+    ],
+    "galar_id": 11
   },
   {
     "id": 826,
@@ -44197,7 +46372,8 @@
         "level": 36,
         "move": "Psychic"
       }
-    ]
+    ],
+    "galar_id": 12
   },
   {
     "id": 827,
@@ -44238,7 +46414,8 @@
         "level": 38,
         "move": "Dark Pulse"
       }
-    ]
+    ],
+    "galar_id": 29
   },
   {
     "id": 828,
@@ -44274,7 +46451,8 @@
         "level": 38,
         "move": "Dark Pulse"
       }
-    ]
+    ],
+    "galar_id": 30
   },
   {
     "id": 829,
@@ -44323,7 +46501,8 @@
         "level": 36,
         "move": "Leaf Storm"
       }
-    ]
+    ],
+    "galar_id": 126
   },
   {
     "id": 830,
@@ -44367,7 +46546,8 @@
         "level": 46,
         "move": "Leaf Storm"
       }
-    ]
+    ],
+    "galar_id": 127
   },
   {
     "id": 831,
@@ -44412,7 +46592,8 @@
         "level": 40,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "galar_id": 34
   },
   {
     "id": 832,
@@ -44456,7 +46637,8 @@
         "level": 56,
         "move": "Last Resort"
       }
-    ]
+    ],
+    "galar_id": 35
   },
   {
     "id": 833,
@@ -44509,7 +46691,9 @@
         "level": 49,
         "move": "Body Slam"
       }
-    ]
+    ],
+    "galar_id": 42,
+    "paldea_id": 57
   },
   {
     "id": 834,
@@ -44570,7 +46754,9 @@
         "level": 66,
         "move": "Head Smash"
       }
-    ]
+    ],
+    "galar_id": 43,
+    "paldea_id": 58
   },
   {
     "id": 835,
@@ -44619,7 +46805,8 @@
         "level": 45,
         "move": "Play Rough"
       }
-    ]
+    ],
+    "galar_id": 46
   },
   {
     "id": 836,
@@ -44663,7 +46850,8 @@
         "level": 55,
         "move": "Play Rough"
       }
-    ]
+    ],
+    "galar_id": 47
   },
   {
     "id": 837,
@@ -44712,7 +46900,9 @@
         "level": 40,
         "move": "Rock Blast"
       }
-    ]
+    ],
+    "galar_id": 161,
+    "paldea_id": 91
   },
   {
     "id": 838,
@@ -44766,7 +46956,9 @@
         "level": 55,
         "move": "Stone Edge"
       }
-    ]
+    ],
+    "galar_id": 162,
+    "paldea_id": 92
   },
   {
     "id": 839,
@@ -44819,7 +47011,9 @@
         "level": 63,
         "move": "Stone Edge"
       }
-    ]
+    ],
+    "galar_id": 163,
+    "paldea_id": 93
   },
   {
     "id": 840,
@@ -44853,7 +47047,9 @@
         "level": 1,
         "move": "Astonish"
       }
-    ]
+    ],
+    "galar_id": 205,
+    "paldea_id": 108
   },
   {
     "id": 841,
@@ -44906,7 +47102,9 @@
         "level": 44,
         "move": "Dragon Rush"
       }
-    ]
+    ],
+    "galar_id": 206,
+    "paldea_id": 109
   },
   {
     "id": 842,
@@ -44951,7 +47149,9 @@
         "level": 44,
         "move": "Energy Ball"
       }
-    ]
+    ],
+    "galar_id": 207,
+    "paldea_id": 110
   },
   {
     "id": 843,
@@ -45000,7 +47200,9 @@
         "level": 50,
         "move": "Sand Tomb"
       }
-    ]
+    ],
+    "galar_id": 312,
+    "paldea_id": 270
   },
   {
     "id": 844,
@@ -45044,7 +47246,9 @@
         "level": 51,
         "move": "Sand Tomb"
       }
-    ]
+    ],
+    "galar_id": 313,
+    "paldea_id": 271
   },
   {
     "id": 845,
@@ -45097,7 +47301,9 @@
         "level": 56,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "galar_id": 309,
+    "paldea_id": 493
   },
   {
     "id": 846,
@@ -45150,7 +47356,9 @@
         "level": 48,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "galar_id": 180,
+    "paldea_id": 136
   },
   {
     "id": 847,
@@ -45202,7 +47410,9 @@
         "level": 56,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "galar_id": 181,
+    "paldea_id": 137
   },
   {
     "id": 848,
@@ -45228,7 +47438,9 @@
         "level": 1,
         "move": "Nuzzle"
       }
-    ]
+    ],
+    "galar_id": 310,
+    "paldea_id": 198
   },
   {
     "id": 849,
@@ -45261,7 +47473,9 @@
         "level": 40,
         "move": "Poison Jab"
       }
-    ]
+    ],
+    "galar_id": 311,
+    "paldea_id": 199
   },
   {
     "id": 850,
@@ -45327,7 +47541,8 @@
         "level": 55,
         "move": "Burn Up"
       }
-    ]
+    ],
+    "galar_id": 159
   },
   {
     "id": 851,
@@ -45392,7 +47607,8 @@
         "level": 67,
         "move": "Burn Up"
       }
-    ]
+    ],
+    "galar_id": 160
   },
   {
     "id": 852,
@@ -45449,7 +47665,8 @@
         "level": 46,
         "move": "Close Combat"
       }
-    ]
+    ],
+    "galar_id": 351
   },
   {
     "id": 853,
@@ -45501,7 +47718,8 @@
         "level": 46,
         "move": "Close Combat"
       }
-    ]
+    ],
+    "galar_id": 352
   },
   {
     "id": 854,
@@ -45542,7 +47760,9 @@
         "level": 48,
         "move": "Shadow Ball"
       }
-    ]
+    ],
+    "galar_id": 335,
+    "paldea_id": 237
   },
   {
     "id": 855,
@@ -45578,7 +47798,9 @@
         "level": 48,
         "move": "Shadow Ball"
       }
-    ]
+    ],
+    "galar_id": 336,
+    "paldea_id": 238
   },
   {
     "id": 856,
@@ -45619,7 +47841,9 @@
         "level": 40,
         "move": "Psychic"
       }
-    ]
+    ],
+    "galar_id": 241,
+    "paldea_id": 282
   },
   {
     "id": 857,
@@ -45660,7 +47884,9 @@
         "level": 44,
         "move": "Psychic"
       }
-    ]
+    ],
+    "galar_id": 242,
+    "paldea_id": 283
   },
   {
     "id": 858,
@@ -45701,7 +47927,9 @@
         "level": 46,
         "move": "Psychic"
       }
-    ]
+    ],
+    "galar_id": 243,
+    "paldea_id": 284
   },
   {
     "id": 859,
@@ -45751,7 +47979,9 @@
         "level": 44,
         "move": "Foul Play"
       }
-    ]
+    ],
+    "galar_id": 238,
+    "paldea_id": 285
   },
   {
     "id": 860,
@@ -45801,7 +48031,9 @@
         "level": 52,
         "move": "Foul Play"
       }
-    ]
+    ],
+    "galar_id": 239,
+    "paldea_id": 286
   },
   {
     "id": 861,
@@ -45854,7 +48086,9 @@
         "level": 64,
         "move": "Hammer Arm"
       }
-    ]
+    ],
+    "galar_id": 240,
+    "paldea_id": 287
   },
   {
     "id": 862,
@@ -45919,7 +48153,8 @@
         "level": 56,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "galar_id": 33
   },
   {
     "id": 863,
@@ -45959,7 +48194,8 @@
         "level": 48,
         "move": "Outrage"
       }
-    ]
+    ],
+    "galar_id": 183
   },
   {
     "id": 864,
@@ -46003,7 +48239,8 @@
         "level": 55,
         "move": "Mirror Coat"
       }
-    ]
+    ],
+    "galar_id": 237
   },
   {
     "id": 865,
@@ -46071,7 +48308,8 @@
         "level": 60,
         "move": "Meteor Assault"
       }
-    ]
+    ],
+    "galar_id": 219
   },
   {
     "id": 866,
@@ -46124,7 +48362,8 @@
         "level": 48,
         "move": "Psychic"
       }
-    ]
+    ],
+    "galar_id": 366
   },
   {
     "id": 867,
@@ -46181,7 +48420,8 @@
         "level": 46,
         "move": "Phantom Force"
       }
-    ]
+    ],
+    "galar_id": 328
   },
   {
     "id": 868,
@@ -46214,7 +48454,9 @@
         "level": 35,
         "move": "Dazzling Gleam"
       }
-    ]
+    ],
+    "galar_id": 185,
+    "paldea_id": 517
   },
   {
     "id": 869,
@@ -46242,7 +48484,9 @@
         "level": 35,
         "move": "Dazzling Gleam"
       }
-    ]
+    ],
+    "galar_id": 186,
+    "paldea_id": 518
   },
   {
     "id": 870,
@@ -46286,7 +48530,9 @@
         "level": 52,
         "move": "Megahorn"
       }
-    ]
+    ],
+    "galar_id": 345,
+    "paldea_id": 300
   },
   {
     "id": 871,
@@ -46338,7 +48584,9 @@
         "level": 60,
         "move": "Discharge"
       }
-    ]
+    ],
+    "galar_id": 353,
+    "paldea_id": 321
   },
   {
     "id": 872,
@@ -46368,7 +48616,9 @@
         "level": 1,
         "move": "Struggle Bug"
       }
-    ]
+    ],
+    "galar_id": 349,
+    "paldea_id": 350
   },
   {
     "id": 873,
@@ -46409,7 +48659,9 @@
         "level": 40,
         "move": "Blizzard"
       }
-    ]
+    ],
+    "galar_id": 350,
+    "paldea_id": 351
   },
   {
     "id": 874,
@@ -46457,7 +48709,9 @@
         "level": 66,
         "move": "Mega Kick"
       }
-    ]
+    ],
+    "galar_id": 369,
+    "paldea_id": 319
   },
   {
     "id": 875,
@@ -46497,7 +48751,9 @@
         "level": 60,
         "move": "Blizzard"
       }
-    ]
+    ],
+    "galar_id": 370,
+    "paldea_id": 320
   },
   {
     "id": 876,
@@ -46526,7 +48782,9 @@
         "level": 35,
         "move": "Psychic"
       }
-    ]
+    ],
+    "galar_id": 337,
+    "paldea_id": 241
   },
   {
     "id": 877,
@@ -46567,7 +48825,9 @@
         "level": 60,
         "move": "Thrash"
       }
-    ]
+    ],
+    "galar_id": 344,
+    "paldea_id": 451
   },
   {
     "id": 878,
@@ -46632,7 +48892,9 @@
         "level": 55,
         "move": "Superpower"
       }
-    ]
+    ],
+    "galar_id": 302,
+    "paldea_id": 124
   },
   {
     "id": 879,
@@ -46692,7 +48954,9 @@
         "level": 65,
         "move": "Superpower"
       }
-    ]
+    ],
+    "galar_id": 303,
+    "paldea_id": 125
   },
   {
     "id": 880,
@@ -46757,7 +49021,8 @@
         "level": 77,
         "move": "Dragon Rush"
       }
-    ]
+    ],
+    "galar_id": 374
   },
   {
     "id": 881,
@@ -46822,7 +49087,8 @@
         "level": 77,
         "move": "Blizzard"
       }
-    ]
+    ],
+    "galar_id": 375
   },
   {
     "id": 882,
@@ -46887,7 +49153,8 @@
         "level": 77,
         "move": "Dragon Rush"
       }
-    ]
+    ],
+    "galar_id": 376
   },
   {
     "id": 883,
@@ -46948,7 +49215,8 @@
         "level": 77,
         "move": "Blizzard"
       }
-    ]
+    ],
+    "galar_id": 377
   },
   {
     "id": 884,
@@ -47002,7 +49270,9 @@
         "level": 66,
         "move": "Hyper Beam"
       }
-    ]
+    ],
+    "galar_id": 371,
+    "paldea_id": 582
   },
   {
     "id": 885,
@@ -47040,7 +49310,9 @@
         "level": 1,
         "move": "Quick Attack"
       }
-    ]
+    ],
+    "galar_id": 395,
+    "paldea_id": 305
   },
   {
     "id": 886,
@@ -47114,7 +49386,9 @@
         "level": 72,
         "move": "Last Resort"
       }
-    ]
+    ],
+    "galar_id": 396,
+    "paldea_id": 306
   },
   {
     "id": 887,
@@ -47187,7 +49461,9 @@
         "level": 78,
         "move": "Last Resort"
       }
-    ]
+    ],
+    "galar_id": 397,
+    "paldea_id": 307
   },
   {
     "id": 888,
@@ -47239,7 +49515,8 @@
         "level": 88,
         "move": "Giga Impact"
       }
-    ]
+    ],
+    "galar_id": 398
   },
   {
     "id": 889,
@@ -47291,7 +49568,8 @@
         "level": 88,
         "move": "Giga Impact"
       }
-    ]
+    ],
+    "galar_id": 399
   },
   {
     "id": 890,
@@ -47344,7 +49622,8 @@
         "level": 88,
         "move": "Outrage"
       }
-    ]
+    ],
+    "galar_id": 400
   },
   {
     "id": 891,
@@ -47401,7 +49680,8 @@
         "level": 52,
         "move": "Focus Punch"
       }
-    ]
+    ],
+    "galar_id": 449
   },
   {
     "id": 892,
@@ -47442,7 +49722,8 @@
         "level": 48,
         "move": "Close Combat"
       }
-    ]
+    ],
+    "galar_id": 450
   },
   {
     "id": 893,
@@ -47503,7 +49784,8 @@
         "level": 84,
         "move": "Power Whip"
       }
-    ]
+    ],
+    "galar_id": 510
   },
   {
     "id": 894,
@@ -47567,7 +49849,8 @@
         "level": 78,
         "move": "Explosion"
       }
-    ]
+    ],
+    "galar_id": 574
   },
   {
     "id": 895,
@@ -47631,7 +49914,8 @@
         "level": 78,
         "move": "Explosion"
       }
-    ]
+    ],
+    "galar_id": 575
   },
   {
     "id": 896,
@@ -47679,7 +49963,8 @@
         "level": 66,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "galar_id": 582
   },
   {
     "id": 897,
@@ -47727,7 +50012,8 @@
         "level": 66,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "galar_id": 583
   },
   {
     "id": 898,
@@ -47772,7 +50058,8 @@
         "level": 88,
         "move": "Future Sight"
       }
-    ]
+    ],
+    "galar_id": 584
   },
   {
     "id": 899,
@@ -47817,7 +50104,8 @@
         "level": 62,
         "move": "Megahorn"
       }
-    ]
+    ],
+    "hisui_id": 50
   },
   {
     "id": 900,
@@ -47870,7 +50158,9 @@
         "level": 50,
         "move": "Rock Blast"
       }
-    ]
+    ],
+    "hisui_id": 73,
+    "paldea_id": 513
   },
   {
     "id": 901,
@@ -47931,7 +50221,9 @@
         "level": 64,
         "move": "Hammer Arm"
       }
-    ]
+    ],
+    "hisui_id": 114,
+    "paldea_id": 495
   },
   {
     "id": 902,
@@ -47992,7 +50284,9 @@
         "level": 52,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "hisui_id": 167,
+    "paldea_id": 494
   },
   {
     "id": 903,
@@ -48045,7 +50339,8 @@
         "level": 60,
         "move": "Close Combat"
       }
-    ]
+    ],
+    "hisui_id": 203
   },
   {
     "id": 904,
@@ -48110,7 +50405,9 @@
         "level": 53,
         "move": "Mortal Spin"
       }
-    ]
+    ],
+    "hisui_id": 85,
+    "paldea_id": 576
   },
   {
     "id": 905,
@@ -48155,7 +50452,8 @@
         "level": 70,
         "move": "Outrage"
       }
-    ]
+    ],
+    "hisui_id": 234
   },
   {
     "id": 906,
@@ -48216,7 +50514,8 @@
         "level": 36,
         "move": "Play Rough"
       }
-    ]
+    ],
+    "paldea_id": 1
   },
   {
     "id": 907,
@@ -48281,7 +50580,8 @@
         "level": 46,
         "move": "Leaf Storm"
       }
-    ]
+    ],
+    "paldea_id": 2
   },
   {
     "id": 908,
@@ -48350,7 +50650,8 @@
         "level": 64,
         "move": "Leaf Storm"
       }
-    ]
+    ],
+    "paldea_id": 3
   },
   {
     "id": 909,
@@ -48407,7 +50708,8 @@
         "level": 36,
         "move": "Fire Blast"
       }
-    ]
+    ],
+    "paldea_id": 4
   },
   {
     "id": 910,
@@ -48468,7 +50770,8 @@
         "level": 47,
         "move": "Fire Blast"
       }
-    ]
+    ],
+    "paldea_id": 5
   },
   {
     "id": 911,
@@ -48537,7 +50840,8 @@
         "level": 64,
         "move": "Overheat"
       }
-    ]
+    ],
+    "paldea_id": 6
   },
   {
     "id": 912,
@@ -48594,7 +50898,8 @@
         "level": 35,
         "move": "Liquidation"
       }
-    ]
+    ],
+    "paldea_id": 7
   },
   {
     "id": 913,
@@ -48659,7 +50964,8 @@
         "level": 43,
         "move": "Liquidation"
       }
-    ]
+    ],
+    "paldea_id": 8
   },
   {
     "id": 914,
@@ -48732,7 +51038,8 @@
         "level": 64,
         "move": "Wave Crash"
       }
-    ]
+    ],
+    "paldea_id": 9
   },
   {
     "id": 915,
@@ -48793,7 +51100,8 @@
         "level": 35,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "paldea_id": 10
   },
   {
     "id": 916,
@@ -48841,7 +51149,8 @@
         "level": 48,
         "move": "Earth Power"
       }
-    ]
+    ],
+    "paldea_id": 11
   },
   {
     "id": 917,
@@ -48902,7 +51211,8 @@
         "level": 44,
         "move": "Skitter Smack"
       }
-    ]
+    ],
+    "paldea_id": 12
   },
   {
     "id": 918,
@@ -48958,7 +51268,8 @@
         "level": 49,
         "move": "Skitter Smack"
       }
-    ]
+    ],
+    "paldea_id": 13
   },
   {
     "id": 919,
@@ -49015,7 +51326,8 @@
         "level": 41,
         "move": "First Impression"
       }
-    ]
+    ],
+    "paldea_id": 14
   },
   {
     "id": 920,
@@ -49084,7 +51396,8 @@
         "level": 53,
         "move": "Axe Kick"
       }
-    ]
+    ],
+    "paldea_id": 15
   },
   {
     "id": 921,
@@ -49145,7 +51458,8 @@
         "level": 44,
         "move": "Wild Charge"
       }
-    ]
+    ],
+    "paldea_id": 22
   },
   {
     "id": 922,
@@ -49207,7 +51521,8 @@
         "level": 52,
         "move": "Wild Charge"
       }
-    ]
+    ],
+    "paldea_id": 23
   },
   {
     "id": 923,
@@ -49276,7 +51591,8 @@
         "level": 60,
         "move": "Double Shock"
       }
-    ]
+    ],
+    "paldea_id": 24
   },
   {
     "id": 924,
@@ -49333,7 +51649,8 @@
         "level": 46,
         "move": "Population Bomb"
       }
-    ]
+    ],
+    "paldea_id": 71
   },
   {
     "id": 925,
@@ -49373,7 +51690,8 @@
         "level": 33,
         "move": "Hyper Voice"
       }
-    ]
+    ],
+    "paldea_id": 72
   },
   {
     "id": 926,
@@ -49430,7 +51748,8 @@
         "level": 44,
         "move": "Crunch"
       }
-    ]
+    ],
+    "paldea_id": 76
   },
   {
     "id": 927,
@@ -49482,7 +51801,8 @@
         "level": 44,
         "move": "Crunch"
       }
-    ]
+    ],
+    "paldea_id": 77
   },
   {
     "id": 928,
@@ -49536,7 +51856,8 @@
         "level": 38,
         "move": "Terrain Pulse"
       }
-    ]
+    ],
+    "paldea_id": 84
   },
   {
     "id": 929,
@@ -49590,7 +51911,8 @@
         "level": 42,
         "move": "Terrain Pulse"
       }
-    ]
+    ],
+    "paldea_id": 85
   },
   {
     "id": 930,
@@ -49651,7 +51973,8 @@
         "level": 58,
         "move": "Petal Dance"
       }
-    ]
+    ],
+    "paldea_id": 86
   },
   {
     "id": 931,
@@ -49688,7 +52011,8 @@
         "level": 42,
         "move": "Brave Bird"
       }
-    ]
+    ],
+    "paldea_id": 113
   },
   {
     "id": 932,
@@ -49749,7 +52073,8 @@
         "level": 54,
         "move": "Stone Edge"
       }
-    ]
+    ],
+    "paldea_id": 129
   },
   {
     "id": 933,
@@ -49810,7 +52135,8 @@
         "level": 54,
         "move": "Stone Edge"
       }
-    ]
+    ],
+    "paldea_id": 130
   },
   {
     "id": 934,
@@ -49870,7 +52196,8 @@
         "level": 60,
         "move": "Explosion"
       }
-    ]
+    ],
+    "paldea_id": 131
   },
   {
     "id": 935,
@@ -49911,7 +52238,8 @@
         "level": 32,
         "move": "Lava Plume"
       }
-    ]
+    ],
+    "paldea_id": 165
   },
   {
     "id": 936,
@@ -49964,7 +52292,8 @@
         "level": 62,
         "move": "Aura Sphere"
       }
-    ]
+    ],
+    "paldea_id": 166
   },
   {
     "id": 937,
@@ -50017,7 +52346,8 @@
         "level": 62,
         "move": "Flare Blitz"
       }
-    ]
+    ],
+    "paldea_id": 167
   },
   {
     "id": 938,
@@ -50082,7 +52412,8 @@
         "level": 50,
         "move": "Zap Cannon"
       }
-    ]
+    ],
+    "paldea_id": 170
   },
   {
     "id": 939,
@@ -50142,7 +52473,8 @@
         "level": 50,
         "move": "Zap Cannon"
       }
-    ]
+    ],
+    "paldea_id": 171
   },
   {
     "id": 940,
@@ -50200,7 +52532,8 @@
         "level": 43,
         "move": "Discharge"
       }
-    ]
+    ],
+    "paldea_id": 177
   },
   {
     "id": 941,
@@ -50257,7 +52590,8 @@
         "level": 55,
         "move": "Hurricane"
       }
-    ]
+    ],
+    "paldea_id": 178
   },
   {
     "id": 942,
@@ -50314,7 +52648,8 @@
         "level": 49,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "paldea_id": 196
   },
   {
     "id": 943,
@@ -50370,7 +52705,8 @@
         "level": 56,
         "move": "Outrage"
       }
-    ]
+    ],
+    "paldea_id": 197
   },
   {
     "id": 944,
@@ -50428,7 +52764,8 @@
         "level": 54,
         "move": "Gunk Shot"
       }
-    ]
+    ],
+    "paldea_id": 202
   },
   {
     "id": 945,
@@ -50481,7 +52818,8 @@
         "level": 54,
         "move": "Gunk Shot"
       }
-    ]
+    ],
+    "paldea_id": 203
   },
   {
     "id": 946,
@@ -50547,7 +52885,8 @@
         "level": 55,
         "move": "Power Whip"
       }
-    ]
+    ],
+    "paldea_id": 242
   },
   {
     "id": 947,
@@ -50608,7 +52947,8 @@
         "level": 55,
         "move": "Power Whip"
       }
-    ]
+    ],
+    "paldea_id": 243
   },
   {
     "id": 948,
@@ -50674,7 +53014,8 @@
         "level": 52,
         "move": "Power Whip"
       }
-    ]
+    ],
+    "paldea_id": 244
   },
   {
     "id": 949,
@@ -50735,7 +53076,8 @@
         "level": 58,
         "move": "Power Whip"
       }
-    ]
+    ],
+    "paldea_id": 245
   },
   {
     "id": 950,
@@ -50795,7 +53137,8 @@
         "level": 56,
         "move": "Guillotine"
       }
-    ]
+    ],
+    "paldea_id": 249
   },
   {
     "id": 951,
@@ -50864,7 +53207,8 @@
         "level": 48,
         "move": "Solar Beam"
       }
-    ]
+    ],
+    "paldea_id": 250
   },
   {
     "id": 952,
@@ -50933,7 +53277,8 @@
         "level": 48,
         "move": "Solar Beam"
       }
-    ]
+    ],
+    "paldea_id": 251
   },
   {
     "id": 953,
@@ -50986,7 +53331,8 @@
         "level": 35,
         "move": "Lunge"
       }
-    ]
+    ],
+    "paldea_id": 254
   },
   {
     "id": 954,
@@ -51047,7 +53393,8 @@
         "level": 50,
         "move": "Psychic"
       }
-    ]
+    ],
+    "paldea_id": 255
   },
   {
     "id": 955,
@@ -51096,7 +53443,8 @@
         "level": 34,
         "move": "Uproar"
       }
-    ]
+    ],
+    "paldea_id": 263
   },
   {
     "id": 956,
@@ -51156,7 +53504,8 @@
         "level": 54,
         "move": "Last Resort"
       }
-    ]
+    ],
+    "paldea_id": 264
   },
   {
     "id": 957,
@@ -51218,7 +53567,8 @@
         "level": 40,
         "move": "Knock Off"
       }
-    ]
+    ],
+    "paldea_id": 279
   },
   {
     "id": 958,
@@ -51280,7 +53630,8 @@
         "level": 40,
         "move": "Knock Off"
       }
-    ]
+    ],
+    "paldea_id": 280
   },
   {
     "id": 959,
@@ -51341,7 +53692,8 @@
         "level": 44,
         "move": "Heavy Slam"
       }
-    ]
+    ],
+    "paldea_id": 281
   },
   {
     "id": 960,
@@ -51406,7 +53758,8 @@
         "level": 40,
         "move": "Liquidation"
       }
-    ]
+    ],
+    "paldea_id": 288
   },
   {
     "id": 961,
@@ -51470,7 +53823,8 @@
         "level": 54,
         "move": "Liquidation"
       }
-    ]
+    ],
+    "paldea_id": 289
   },
   {
     "id": 962,
@@ -51527,7 +53881,8 @@
         "level": 53,
         "move": "Knock Off"
       }
-    ]
+    ],
+    "paldea_id": 290
   },
   {
     "id": 963,
@@ -51580,7 +53935,8 @@
         "level": 50,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "paldea_id": 291
   },
   {
     "id": 964,
@@ -51620,7 +53976,8 @@
         "level": 50,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "paldea_id": 292
   },
   {
     "id": 965,
@@ -51686,7 +54043,8 @@
         "level": 50,
         "move": "Gunk Shot"
       }
-    ]
+    ],
+    "paldea_id": 293
   },
   {
     "id": 966,
@@ -51747,7 +54105,8 @@
         "level": 58,
         "move": "Gunk Shot"
       }
-    ]
+    ],
+    "paldea_id": 294
   },
   {
     "id": 967,
@@ -51812,7 +54171,8 @@
         "level": 57,
         "move": "Dragon Rush"
       }
-    ]
+    ],
+    "paldea_id": 295
   },
   {
     "id": 968,
@@ -51868,7 +54228,8 @@
         "level": 47,
         "move": "Earthquake"
       }
-    ]
+    ],
+    "paldea_id": 296
   },
   {
     "id": 969,
@@ -51926,7 +54287,8 @@
         "level": 55,
         "move": "Explosion"
       }
-    ]
+    ],
+    "paldea_id": 308
   },
   {
     "id": 970,
@@ -51979,7 +54341,8 @@
         "level": 55,
         "move": "Explosion"
       }
-    ]
+    ],
+    "paldea_id": 309
   },
   {
     "id": 971,
@@ -52044,7 +54407,8 @@
         "level": 52,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "paldea_id": 311
   },
   {
     "id": 972,
@@ -52104,7 +54468,8 @@
         "level": 52,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "paldea_id": 312
   },
   {
     "id": 973,
@@ -52157,7 +54522,8 @@
         "level": 54,
         "move": "Brave Bird"
       }
-    ]
+    ],
+    "paldea_id": 346
   },
   {
     "id": 974,
@@ -52226,7 +54592,8 @@
         "level": 53,
         "move": "Blizzard"
       }
-    ]
+    ],
+    "paldea_id": 361
   },
   {
     "id": 975,
@@ -52290,7 +54657,8 @@
         "level": 53,
         "move": "Blizzard"
       }
-    ]
+    ],
+    "paldea_id": 362
   },
   {
     "id": 976,
@@ -52351,7 +54719,8 @@
         "level": 55,
         "move": "Final Gambit"
       }
-    ]
+    ],
+    "paldea_id": 373
   },
   {
     "id": 977,
@@ -52411,7 +54780,8 @@
         "level": 67,
         "move": "Fissure"
       }
-    ]
+    ],
+    "paldea_id": 374
   },
   {
     "id": 978,
@@ -52444,7 +54814,8 @@
         "level": 52,
         "move": "Dragon Pulse"
       }
-    ]
+    ],
+    "paldea_id": 375
   },
   {
     "id": 979,
@@ -52513,7 +54884,8 @@
         "level": 54,
         "move": "Dynamic Punch"
       }
-    ]
+    ],
+    "paldea_id": 160
   },
   {
     "id": 980,
@@ -52562,7 +54934,8 @@
         "level": 48,
         "move": "Earthquake"
       }
-    ]
+    ],
+    "paldea_id": 54
   },
   {
     "id": 981,
@@ -52619,7 +54992,8 @@
         "level": 50,
         "move": "Psychic"
       }
-    ]
+    ],
+    "paldea_id": 193
   },
   {
     "id": 982,
@@ -52663,7 +55037,8 @@
         "level": 56,
         "move": "Hurricane"
       }
-    ]
+    ],
+    "paldea_id": 189
   },
   {
     "id": 983,
@@ -52720,7 +55095,8 @@
         "level": 71,
         "move": "Guillotine"
       }
-    ]
+    ],
+    "paldea_id": 369
   },
   {
     "id": 984,
@@ -52793,7 +55169,8 @@
         "level": 91,
         "move": "Headlong Rush"
       }
-    ]
+    ],
+    "paldea_id": 376
   },
   {
     "id": 985,
@@ -52846,7 +55223,8 @@
         "level": 91,
         "move": "Boomburst"
       }
-    ]
+    ],
+    "paldea_id": 377
   },
   {
     "id": 986,
@@ -52899,7 +55277,8 @@
         "level": 91,
         "move": "Solar Beam"
       }
-    ]
+    ],
+    "paldea_id": 378
   },
   {
     "id": 987,
@@ -52952,7 +55331,8 @@
         "level": 84,
         "move": "Moonblast"
       }
-    ]
+    ],
+    "paldea_id": 379
   },
   {
     "id": 988,
@@ -53017,7 +55397,8 @@
         "level": 91,
         "move": "Thrash"
       }
-    ]
+    ],
+    "paldea_id": 380
   },
   {
     "id": 989,
@@ -53074,7 +55455,8 @@
         "level": 84,
         "move": "Zap Cannon"
       }
-    ]
+    ],
+    "paldea_id": 381
   },
   {
     "id": 990,
@@ -53147,7 +55529,8 @@
         "level": 91,
         "move": "Steel Roller"
       }
-    ]
+    ],
+    "paldea_id": 382
   },
   {
     "id": 991,
@@ -53204,7 +55587,8 @@
         "level": 91,
         "move": "Blizzard"
       }
-    ]
+    ],
+    "paldea_id": 383
   },
   {
     "id": 992,
@@ -53265,7 +55649,8 @@
         "level": 91,
         "move": "Focus Punch"
       }
-    ]
+    ],
+    "paldea_id": 384
   },
   {
     "id": 993,
@@ -53334,7 +55719,8 @@
         "level": 91,
         "move": "Hyper Beam"
       }
-    ]
+    ],
+    "paldea_id": 385
   },
   {
     "id": 994,
@@ -53403,7 +55789,8 @@
         "level": 91,
         "move": "Overheat"
       }
-    ]
+    ],
+    "paldea_id": 386
   },
   {
     "id": 995,
@@ -53468,7 +55855,8 @@
         "level": 91,
         "move": "Giga Impact"
       }
-    ]
+    ],
+    "paldea_id": 387
   },
   {
     "id": 996,
@@ -53538,7 +55926,8 @@
         "level": 60,
         "move": "Dragon Rush"
       }
-    ]
+    ],
+    "paldea_id": 388
   },
   {
     "id": 997,
@@ -53608,7 +55997,8 @@
         "level": 60,
         "move": "Dragon Rush"
       }
-    ]
+    ],
+    "paldea_id": 389
   },
   {
     "id": 998,
@@ -53681,7 +56071,8 @@
         "level": 65,
         "move": "Ice Hammer"
       }
-    ]
+    ],
+    "paldea_id": 390
   },
   {
     "id": 999,
@@ -53710,7 +56101,8 @@
         "level": 1,
         "move": "Tackle"
       }
-    ]
+    ],
+    "paldea_id": 391
   },
   {
     "id": 1000,
@@ -53755,7 +56147,8 @@
         "level": 56,
         "move": "Make It Rain"
       }
-    ]
+    ],
+    "paldea_id": 392
   },
   {
     "id": 1001,
@@ -53812,7 +56205,8 @@
         "level": 75,
         "move": "Leaf Storm"
       }
-    ]
+    ],
+    "paldea_id": 393
   },
   {
     "id": 1002,
@@ -53877,7 +56271,8 @@
         "level": 75,
         "move": "Sheer Cold"
       }
-    ]
+    ],
+    "paldea_id": 394
   },
   {
     "id": 1003,
@@ -53942,7 +56337,8 @@
         "level": 75,
         "move": "Fissure"
       }
-    ]
+    ],
+    "paldea_id": 395
   },
   {
     "id": 1004,
@@ -54003,7 +56399,8 @@
         "level": 75,
         "move": "Overheat"
       }
-    ]
+    ],
+    "paldea_id": 396
   },
   {
     "id": 1005,
@@ -54068,7 +56465,8 @@
         "level": 91,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "paldea_id": 397
   },
   {
     "id": 1006,
@@ -54133,7 +56531,8 @@
         "level": 91,
         "move": "Spirit Break"
       }
-    ]
+    ],
+    "paldea_id": 398
   },
   {
     "id": 1007,
@@ -54202,7 +56601,8 @@
         "level": 98,
         "move": "Giga Impact"
       }
-    ]
+    ],
+    "paldea_id": 399
   },
   {
     "id": 1008,
@@ -54267,7 +56667,8 @@
         "level": 98,
         "move": "Hyper Beam"
       }
-    ]
+    ],
+    "paldea_id": 400
   },
   {
     "id": 1009,
@@ -54332,7 +56733,8 @@
         "level": 84,
         "move": "Hydro Pump"
       }
-    ]
+    ],
+    "paldea_id": 662
   },
   {
     "id": 1010,
@@ -54389,7 +56791,8 @@
         "level": 91,
         "move": "Solar Blade"
       }
-    ]
+    ],
+    "paldea_id": 663
   },
   {
     "id": 1011,
@@ -54439,7 +56842,8 @@
         "level": 40,
         "move": "Energy Ball"
       }
-    ]
+    ],
+    "paldea_id": 424
   },
   {
     "id": 1012,
@@ -54493,7 +56897,8 @@
         "level": 60,
         "move": "Leaf Storm"
       }
-    ]
+    ],
+    "paldea_id": 443
   },
   {
     "id": 1013,
@@ -54538,7 +56943,8 @@
         "level": 60,
         "move": "Leaf Storm"
       }
-    ]
+    ],
+    "paldea_id": 444
   },
   {
     "id": 1014,
@@ -54595,7 +57001,8 @@
         "level": 72,
         "move": "Giga Impact"
       }
-    ]
+    ],
+    "paldea_id": 496
   },
   {
     "id": 1015,
@@ -54648,7 +57055,8 @@
         "level": 64,
         "move": "Future Sight"
       }
-    ]
+    ],
+    "paldea_id": 497
   },
   {
     "id": 1016,
@@ -54701,7 +57109,8 @@
         "level": 72,
         "move": "Moonblast"
       }
-    ]
+    ],
+    "paldea_id": 498
   },
   {
     "id": 1017,
@@ -54741,7 +57150,8 @@
         "level": 66,
         "move": "Wood Hammer"
       }
-    ]
+    ],
+    "paldea_id": 499
   },
   {
     "id": 1018,
@@ -54790,7 +57200,8 @@
         "level": 66,
         "move": "Hyper Beam"
       }
-    ]
+    ],
+    "paldea_id": 583
   },
   {
     "id": 1019,
@@ -54839,7 +57250,8 @@
         "level": 54,
         "move": "Power Whip"
       }
-    ]
+    ],
+    "paldea_id": 584
   },
   {
     "id": 1020,
@@ -54904,7 +57316,8 @@
         "level": 91,
         "move": "Raging Fury"
       }
-    ]
+    ],
+    "paldea_id": 657
   },
   {
     "id": 1021,
@@ -54973,7 +57386,8 @@
         "level": 91,
         "move": "Thunder"
       }
-    ]
+    ],
+    "paldea_id": 658
   },
   {
     "id": 1022,
@@ -55038,7 +57452,8 @@
         "level": 91,
         "move": "Giga Impact"
       }
-    ]
+    ],
+    "paldea_id": 660
   },
   {
     "id": 1023,
@@ -55107,7 +57522,8 @@
         "level": 91,
         "move": "Hyper Beam"
       }
-    ]
+    ],
+    "paldea_id": 659
   },
   {
     "id": 1024,
@@ -55147,7 +57563,8 @@
         "level": 70,
         "move": "Double-Edge"
       }
-    ]
+    ],
+    "paldea_id": 661
   },
   {
     "id": 1025,
@@ -55180,7 +57597,8 @@
         "level": 48,
         "move": "Malignant Chain"
       }
-    ]
+    ],
+    "paldea_id": 664
   },
   {
     "id": 3.1,

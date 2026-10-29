@@ -334,39 +334,39 @@ export const johtoRoutes = [
     "spawns": [
       {
         "pokemonId": 191,
-        "minLevel": 22,
-        "maxLevel": 27,
-        "chance": 0.27
+        "minLevel": 20,
+        "maxLevel": 25,
+        "chance": 0.23
       },
       {
         "pokemonId": 10,
         "minLevel": 20,
         "maxLevel": 25,
-        "chance": 0.18
+        "chance": 0.23
       },
       {
         "pokemonId": 13,
         "minLevel": 20,
         "maxLevel": 25,
-        "chance": 0.18
+        "chance": 0.23
       },
       {
         "pokemonId": 123,
         "minLevel": 24,
         "maxLevel": 28,
-        "chance": 0.14
+        "chance": 0.09
       },
       {
         "pokemonId": 127,
         "minLevel": 24,
         "maxLevel": 28,
-        "chance": 0.14
+        "chance": 0.09
       },
       {
         "pokemonId": 48,
-        "minLevel": 20,
-        "maxLevel": 28,
-        "chance": 0.09
+        "minLevel": 22,
+        "maxLevel": 27,
+        "chance": 0.13
       }
     ]
   },

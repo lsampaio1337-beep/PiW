@@ -193,21 +193,36 @@ const run = async () => {
         let nStr = '';
         let sStr = '';
 
+        let genNormalUrls = {};
+        let genShinyUrls = {};
+        let isAnyMissing = false;
+
         for (const gen of [5, 6, 7, 8]) {
             const genData = sprites[`Gen${gen}`];
+            if (!genData.normal || !genData.shiny) isAnyMissing = true;
+            genNormalUrls[`Gen${gen}`] = genData.normal;
+            genShinyUrls[`Gen${gen}`] = genData.shiny;
+        }
+
+        for (const gen of [5, 6, 7, 8]) {
             let normalOk = 0;
             let shinyOk = 0;
 
-            if (genData.normal) {
-                const filename = `Gen${gen}_${poke.id}_${poke.name}.png`;
-                const success = await downloadFile(genData.normal, path.join(SPRITES_DIR, filename));
-                if (success) normalOk = 1;
-            }
-
-            if (genData.shiny) {
-                const filename = `Gen${gen}_${poke.id}_${poke.name}_shiny.png`;
-                const success = await downloadFile(genData.shiny, path.join(SPRITES_DIR, filename));
-                if (success) shinyOk = 1;
+            if (!isAnyMissing) {
+                // Download shiny first
+                if (genShinyUrls[`Gen${gen}`]) {
+                    const shinyFilename = `Gen${gen}_${poke.id}_${poke.name}_shiny.png`;
+                    const shinySuccess = await downloadFile(genShinyUrls[`Gen${gen}`], path.join(SPRITES_DIR, shinyFilename));
+                    if (shinySuccess) {
+                        shinyOk = 1;
+                        // Only download normal if shiny succeeded (and we know there's no missing variant overall due to isAnyMissing check)
+                        if (genNormalUrls[`Gen${gen}`]) {
+                            const normalFilename = `Gen${gen}_${poke.id}_${poke.name}.png`;
+                            const normalSuccess = await downloadFile(genNormalUrls[`Gen${gen}`], path.join(SPRITES_DIR, normalFilename));
+                            if (normalSuccess) normalOk = 1;
+                        }
+                    }
+                }
             }
 
             nStr += normalOk;
