@@ -315,44 +315,7 @@ export const kalosRoutes = [
   },
   {
     "name": "Santalune City Gym",
-    "spawns": [
-      {
-        "pokemonId": 504,
-        "minLevel": 5,
-        "maxLevel": 7,
-        "chance": 0.3
-      },
-      {
-        "pokemonId": 300,
-        "minLevel": 5,
-        "maxLevel": 7,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 543,
-        "minLevel": 5,
-        "maxLevel": 7,
-        "chance": 0.15
-      },
-      {
-        "pokemonId": 360,
-        "minLevel": 5,
-        "maxLevel": 7,
-        "chance": 0.15
-      },
-      {
-        "pokemonId": 163,
-        "minLevel": 5,
-        "maxLevel": 7,
-        "chance": 0.1
-      },
-      {
-        "pokemonId": 21,
-        "minLevel": 5,
-        "maxLevel": 7,
-        "chance": 0.05
-      }
-    ],
+    "spawns": [],
     "challengeName": "Challenge 6",
     "areaId": "Santalune City Gym",
     "unlocks": [
@@ -1292,44 +1255,7 @@ export const kalosRoutes = [
   },
   {
     "name": "Cyllage City Gym",
-    "spawns": [
-      {
-        "pokemonId": 100,
-        "minLevel": 22,
-        "maxLevel": 24,
-        "chance": 0.3
-      },
-      {
-        "pokemonId": 451,
-        "minLevel": 22,
-        "maxLevel": 24,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 325,
-        "minLevel": 22,
-        "maxLevel": 24,
-        "chance": 0.15
-      },
-      {
-        "pokemonId": 225,
-        "minLevel": 22,
-        "maxLevel": 24,
-        "chance": 0.15
-      },
-      {
-        "pokemonId": 216,
-        "minLevel": 22,
-        "maxLevel": 24,
-        "chance": 0.1
-      },
-      {
-        "pokemonId": 449,
-        "minLevel": 22,
-        "maxLevel": 24,
-        "chance": 0.05
-      }
-    ],
+    "spawns": [],
     "challengeName": "Challenge 22",
     "areaId": "Cyllage City Gym",
     "unlocks": [
@@ -1590,44 +1516,7 @@ export const kalosRoutes = [
   },
   {
     "name": "Shalour City Gym",
-    "spawns": [
-      {
-        "pokemonId": 578,
-        "minLevel": 27,
-        "maxLevel": 29,
-        "chance": 0.3
-      },
-      {
-        "pokemonId": 608,
-        "minLevel": 27,
-        "maxLevel": 29,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 670,
-        "minLevel": 27,
-        "maxLevel": 29,
-        "chance": 0.15
-      },
-      {
-        "pokemonId": 299,
-        "minLevel": 27,
-        "maxLevel": 29,
-        "chance": 0.15
-      },
-      {
-        "pokemonId": 302,
-        "minLevel": 27,
-        "maxLevel": 29,
-        "chance": 0.1
-      },
-      {
-        "pokemonId": 303,
-        "minLevel": 27,
-        "maxLevel": 29,
-        "chance": 0.05
-      }
-    ],
+    "spawns": [],
     "challengeName": "Challenge 27",
     "areaId": "Shalour City Gym",
     "unlocks": [
@@ -1811,38 +1700,7 @@ export const kalosRoutes = [
   },
   {
     "name": "Coumarine City Gym",
-    "spawns": [
-      {
-        "pokemonId": 185,
-        "minLevel": 31,
-        "maxLevel": 34,
-        "chance": 0.3
-      },
-      {
-        "pokemonId": 308,
-        "minLevel": 31,
-        "maxLevel": 34,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 400,
-        "minLevel": 31,
-        "maxLevel": 34,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 444,
-        "minLevel": 31,
-        "maxLevel": 34,
-        "chance": 0.15
-      },
-      {
-        "pokemonId": 162,
-        "minLevel": 31,
-        "maxLevel": 34,
-        "chance": 0.1
-      }
-    ],
+    "spawns": [],
     "challengeName": "Challenge 31",
     "areaId": "Coumarine City Gym",
     "unlocks": [
@@ -2015,38 +1873,7 @@ export const kalosRoutes = [
   },
   {
     "name": "Lumiose City Gym",
-    "spawns": [
-      {
-        "pokemonId": 195,
-        "minLevel": 36,
-        "maxLevel": 39,
-        "chance": 0.3
-      },
-      {
-        "pokemonId": 207,
-        "minLevel": 36,
-        "maxLevel": 39,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 314,
-        "minLevel": 36,
-        "maxLevel": 39,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 702,
-        "minLevel": 36,
-        "maxLevel": 39,
-        "chance": 0.15
-      },
-      {
-        "pokemonId": 40,
-        "minLevel": 36,
-        "maxLevel": 39,
-        "chance": 0.1
-      }
-    ],
+    "spawns": [],
     "challengeName": "Challenge 35",
     "areaId": "Lumiose City Gym",
     "unlocks": [
@@ -2172,38 +1999,7 @@ export const kalosRoutes = [
   },
   {
     "name": "Laverre City Gym",
-    "spawns": [
-      {
-        "pokemonId": 119,
-        "minLevel": 39,
-        "maxLevel": 42,
-        "chance": 0.3
-      },
-      {
-        "pokemonId": 705,
-        "minLevel": 39,
-        "maxLevel": 42,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 164,
-        "minLevel": 39,
-        "maxLevel": 42,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 455,
-        "minLevel": 39,
-        "maxLevel": 42,
-        "chance": 0.15
-      },
-      {
-        "pokemonId": 284,
-        "minLevel": 39,
-        "maxLevel": 42,
-        "chance": 0.1
-      }
-    ],
+    "spawns": [],
     "challengeName": "Challenge 38",
     "areaId": "Laverre City Gym",
     "unlocks": [
@@ -2549,38 +2345,7 @@ export const kalosRoutes = [
   },
   {
     "name": "Anistar City Gym",
-    "spawns": [
-      {
-        "pokemonId": 569,
-        "minLevel": 46,
-        "maxLevel": 50,
-        "chance": 0.3
-      },
-      {
-        "pokemonId": 416,
-        "minLevel": 46,
-        "maxLevel": 50,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 310,
-        "minLevel": 46,
-        "maxLevel": 50,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 435,
-        "minLevel": 46,
-        "maxLevel": 50,
-        "chance": 0.15
-      },
-      {
-        "pokemonId": 18,
-        "minLevel": 46,
-        "maxLevel": 50,
-        "chance": 0.1
-      }
-    ],
+    "spawns": [],
     "challengeName": "Challenge 45",
     "areaId": "Anistar City Gym",
     "unlocks": [
@@ -2972,38 +2737,7 @@ export const kalosRoutes = [
   },
   {
     "name": "Snowbelle City Gym",
-    "spawns": [
-      {
-        "pokemonId": 419,
-        "minLevel": 55,
-        "maxLevel": 59,
-        "chance": 0.3
-      },
-      {
-        "pokemonId": 512,
-        "minLevel": 55,
-        "maxLevel": 59,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 426,
-        "minLevel": 55,
-        "maxLevel": 59,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 516,
-        "minLevel": 55,
-        "maxLevel": 59,
-        "chance": 0.15
-      },
-      {
-        "pokemonId": 663,
-        "minLevel": 55,
-        "maxLevel": 59,
-        "chance": 0.1
-      }
-    ],
+    "spawns": [],
     "challengeName": "Challenge 53",
     "areaId": "Snowbelle City Gym",
     "unlocks": [
@@ -3284,180 +3018,6 @@ export const kalosRoutes = [
     }
   },
   {
-    "name": "Kalos Pokemon League",
-    "spawns": [
-      {
-        "pokemonId": 620,
-        "minLevel": 61,
-        "maxLevel": 66,
-        "chance": 0.3
-      },
-      {
-        "pokemonId": 713,
-        "minLevel": 61,
-        "maxLevel": 66,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 73,
-        "minLevel": 61,
-        "maxLevel": 66,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 469,
-        "minLevel": 61,
-        "maxLevel": 66,
-        "chance": 0.15
-      },
-      {
-        "pokemonId": 142,
-        "minLevel": 61,
-        "maxLevel": 66,
-        "chance": 0.1
-      }
-    ],
-    "challengeName": "Challenge 59",
-    "areaId": "Kalos Pokemon League",
-    "unlocks": [
-      "Mystic Tower Entrance"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Mienshao",
-          "count": 1
-        },
-        {
-          "species": "Avalugg",
-          "count": 1
-        },
-        {
-          "species": "Tentacruel",
-          "count": 1
-        },
-        {
-          "species": "Yanmega",
-          "count": 1
-        },
-        {
-          "species": "Aerodactyl",
-          "count": 1
-        }
-      ]
-    }
-  },
-  {
-    "name": "Mystic Tower Entrance",
-    "spawns": [
-      {
-        "pokemonId": 130,
-        "minLevel": 62,
-        "maxLevel": 67,
-        "chance": 0.3
-      },
-      {
-        "pokemonId": 671,
-        "minLevel": 62,
-        "maxLevel": 67,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 144,
-        "minLevel": 62,
-        "maxLevel": 67,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 145,
-        "minLevel": 62,
-        "maxLevel": 67,
-        "chance": 0.15
-      },
-      {
-        "pokemonId": 146,
-        "minLevel": 62,
-        "maxLevel": 67,
-        "chance": 0.1
-      }
-    ],
-    "challengeName": "Challenge 60",
-    "areaId": "Mystic Tower Entrance",
-    "unlocks": [
-      "Crystal Cave Tunnels"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Mystic Tower Entrance",
-        "count": 300
-      }
-    }
-  },
-  {
-    "name": "Crystal Cave Tunnels",
-    "spawns": [
-      {
-        "pokemonId": 721,
-        "minLevel": 63,
-        "maxLevel": 68,
-        "chance": 0.3
-      },
-      {
-        "pokemonId": 248,
-        "minLevel": 63,
-        "maxLevel": 68,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 635,
-        "minLevel": 63,
-        "maxLevel": 68,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 445,
-        "minLevel": 63,
-        "maxLevel": 68,
-        "chance": 0.15
-      },
-      {
-        "pokemonId": 718,
-        "minLevel": 63,
-        "maxLevel": 68,
-        "chance": 0.1
-      }
-    ],
-    "challengeName": "Challenge 61",
-    "areaId": "Crystal Cave Tunnels",
-    "unlocks": [
-      "Secret Forest North"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Volcanion",
-          "count": 1
-        },
-        {
-          "species": "Tyranitar",
-          "count": 1
-        },
-        {
-          "species": "Hydreigon",
-          "count": 1
-        },
-        {
-          "species": "Garchomp",
-          "count": 1
-        },
-        {
-          "species": "Zygarde",
-          "count": 1
-        }
-      ]
-    }
-  },
-  {
     "name": "Cyllage City (Fishing)",
     "spawns": [
       {
@@ -3664,40 +3224,58 @@ export const kalosRoutes = [
     "name": "Starter Depot",
     "spawns": [
       {
+        "pokemonId": 656,
+        "minLevel": 40,
+        "maxLevel": 45,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 653,
+        "minLevel": 40,
+        "maxLevel": 45,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 650,
+        "minLevel": 40,
+        "maxLevel": 45,
+        "chance": 0.1111
+      },
+      {
         "pokemonId": 722,
         "minLevel": 40,
         "maxLevel": 45,
-        "chance": 0.1666
+        "chance": 0.1111
       },
       {
         "pokemonId": 725,
         "minLevel": 40,
         "maxLevel": 45,
-        "chance": 0.1666
+        "chance": 0.1111
       },
       {
         "pokemonId": 728,
         "minLevel": 40,
         "maxLevel": 45,
-        "chance": 0.1666
+        "chance": 0.1111
       },
       {
         "pokemonId": 1,
         "minLevel": 40,
         "maxLevel": 45,
-        "chance": 0.1666
+        "chance": 0.1111
       },
       {
         "pokemonId": 4,
         "minLevel": 40,
         "maxLevel": 45,
-        "chance": 0.1666
+        "chance": 0.1111
       },
       {
         "pokemonId": 7,
         "minLevel": 40,
         "maxLevel": 45,
-        "chance": 0.1666
+        "chance": 0.1111
       }
     ],
     "challengeName": "Extra Challenge B 1",
@@ -4105,6 +3683,10 @@ export const kalosRoutes = [
         "route": "Sea Spirit Den Tunnels",
         "count": 150
       }
+    },
+    "gift": {
+      "item": "Masterball",
+      "count": 1
     }
   },
   {
@@ -4153,7 +3735,7 @@ export const kalosRoutes = [
     }
   },
   {
-    "name": "Path to Secret Ruins",
+    "name": "Path to Secret Chambers",
     "spawns": [
       {
         "pokemonId": 635,
@@ -4187,13 +3769,13 @@ export const kalosRoutes = [
       }
     ],
     "challengeName": "Extra Challenge D 1",
-    "areaId": "Path to Secret Ruins",
+    "areaId": "Path to Secret Chambers",
     "unlocks": [
       "Underground Chambers (Crystal Cave Tunnels)"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Path to Secret Ruins",
+        "route": "Path to Secret Chambers",
         "count": 150
       }
     }
@@ -4242,6 +3824,10 @@ export const kalosRoutes = [
         "route": "Chambers of Emptiness",
         "count": 150
       }
+    },
+    "gift": {
+      "item": "Masterball",
+      "count": 2
     }
   },
   {
@@ -4303,52 +3889,6 @@ export const kalosRoutes = [
     "name": "Path to Team Flare Secret HQ",
     "spawns": [
       {
-        "pokemonId": 659,
-        "minLevel": 70,
-        "maxLevel": 77,
-        "chance": 0.3
-      },
-      {
-        "pokemonId": 538,
-        "minLevel": 70,
-        "maxLevel": 77,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 578,
-        "minLevel": 70,
-        "maxLevel": 77,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 26,
-        "minLevel": 70,
-        "maxLevel": 77,
-        "chance": 0.15
-      },
-      {
-        "pokemonId": 676,
-        "minLevel": 70,
-        "maxLevel": 77,
-        "chance": 0.1
-      }
-    ],
-    "challengeName": "Extra Challenge E 1",
-    "areaId": "Path to Team Flare Secret HQ",
-    "unlocks": [
-      "2nd spot for Extra Challenge E"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Path to Team Flare Secret HQ",
-        "count": 150
-      }
-    }
-  },
-  {
-    "name": "2nd spot for Extra Challenge E",
-    "spawns": [
-      {
         "pokemonId": 124,
         "minLevel": 77,
         "maxLevel": 84,
@@ -4379,14 +3919,14 @@ export const kalosRoutes = [
         "chance": 0.1
       }
     ],
-    "challengeName": "Extra Challenge E 2",
-    "areaId": "2nd spot for Extra Challenge E",
+    "challengeName": "Extra Challenge E 1",
+    "areaId": "Path to Team Flare Secret HQ",
     "unlocks": [
       "Team Flare Secret HQ Gate"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "2nd spot for Extra Challenge E",
+        "route": "Path to Team Flare Secret HQ",
         "count": 150
       }
     }
@@ -4425,7 +3965,7 @@ export const kalosRoutes = [
         "chance": 0.1
       }
     ],
-    "challengeName": "Extra Challenge E 3",
+    "challengeName": "Extra Challenge E 2",
     "areaId": "Team Flare Secret HQ Gate",
     "unlocks": [
       "Team Flare Secret HQ Entrance"
@@ -4471,7 +4011,7 @@ export const kalosRoutes = [
         "chance": 0.1
       }
     ],
-    "challengeName": "Extra Challenge E 4",
+    "challengeName": "Extra Challenge E 3",
     "areaId": "Team Flare Secret HQ Entrance",
     "unlocks": [
       "Team Flare Secret HQ Hall"
@@ -4487,42 +4027,52 @@ export const kalosRoutes = [
     "name": "Team Flare Secret HQ Hall",
     "spawns": [
       {
-        "pokemonId": 717,
-        "minLevel": 120,
-        "maxLevel": 120,
-        "chance": 0.33
+        "pokemonId": 373,
+        "minLevel": 95,
+        "maxLevel": 105,
+        "chance": 0.25
       },
       {
-        "pokemonId": 718,
-        "minLevel": 115,
-        "maxLevel": 119,
-        "chance": 0.33
+        "pokemonId": 248,
+        "minLevel": 95,
+        "maxLevel": 105,
+        "chance": 0.25
       },
       {
-        "pokemonId": 716,
-        "minLevel": 115,
-        "maxLevel": 119,
-        "chance": 0.33
+        "pokemonId": 635,
+        "minLevel": 95,
+        "maxLevel": 105,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 445,
+        "minLevel": 95,
+        "maxLevel": 105,
+        "chance": 0.25
       }
     ],
-    "challengeName": "Extra Challenge E 5",
+    "challengeName": "Extra Challenge E 4",
     "areaId": "Team Flare Secret HQ Hall",
     "gift": {
       "item": "Masterball",
-      "count": 2
+      "count": 1
     },
     "requirements": {
       "catchSpecies": [
         {
-          "species": "Yveltal",
+          "species": "Salamence",
           "count": 1
         },
         {
-          "species": "Zygarde",
+          "species": "Tyranitar",
           "count": 1
         },
         {
-          "species": "Xerneas",
+          "species": "Hydreigon",
+          "count": 1
+        },
+        {
+          "species": "Garchomp",
           "count": 1
         }
       ]
@@ -4656,15 +4206,76 @@ export const kalosRoutes = [
     }
   },
   {
-    "challengeName": "Final Challenge",
+    "challengeName": "Challenge 59",
     "areaId": "Kalos Pokemon League",
     "unlocks": [
       "Path to Sea Spirit Den",
       "Path to Team Flare Secret HQ",
-      "Path to Secret Ruins"
+      "Path to Secret Chambers"
     ],
     "requirements": {
       "defeatKalosChampion": true
+    }
+  },
+  {
+    "name": "Keys to Eternal Fight",
+    "spawns": [],
+    "challengeName": "Keys to Eternal Fight Challenge",
+    "areaId": "Keys to Eternal Fight",
+    "unlocks": [
+      "The Eternal Fight"
+    ],
+    "requirements": {
+      "completeChallenges": [
+        "Extra Challenge C 4",
+        "Extra Challenge D 4",
+        "Extra Challenge E 4"
+      ]
+    }
+  },
+  {
+    "name": "The Eternal Fight",
+    "spawns": [
+      {
+        "pokemonId": 717,
+        "minLevel": 120,
+        "maxLevel": 120,
+        "chance": 0.33
+      },
+      {
+        "pokemonId": 718,
+        "minLevel": 115,
+        "maxLevel": 119,
+        "chance": 0.33
+      },
+      {
+        "pokemonId": 716,
+        "minLevel": 115,
+        "maxLevel": 119,
+        "chance": 0.33
+      }
+    ],
+    "challengeName": "Eternal Fight Challenge",
+    "areaId": "The Eternal Fight",
+    "gift": {
+      "item": "Masterball",
+      "count": 2
+    },
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Yveltal",
+          "count": 1
+        },
+        {
+          "species": "Zygarde",
+          "count": 1
+        },
+        {
+          "species": "Xerneas",
+          "count": 1
+        }
+      ]
     }
   }
 ];
