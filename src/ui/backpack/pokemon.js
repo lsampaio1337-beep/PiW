@@ -36,6 +36,7 @@ function renderSlotUI(p, listName, origIndex, isDraggable) {
 
     let glowClass = "glow-weak";
     if (p.qualityName === "Shiny") glowClass = "glow-shiny";
+    else if (p.qualityName === "Legendary") glowClass = "glow-legendary";
     else if (p.qualityName === "Epic") glowClass = "glow-epic";
     else if (p.qualityName === "Rare") glowClass = "glow-rare";
     else if (p.qualityName === "Uncommon") glowClass = "glow-uncommon";
@@ -281,17 +282,19 @@ window.applyPokemonFilters = function() {
     let breedableMap = null;
     if (filters.breedableOnly) {
         breedableMap = new Map();
-        const allMons = [...state.storage, ...state.safe]; // Only check storage/safe? Wait, all pokemon? Let's check all arrays just in case, or just storage/safe since they are the only ones filtered visually here.
+        const allMons = [...state.storage, ...state.safe];
+        // We need to mark a pokemon as breedable if it finds ANY partner with matching ID, same shiny status, and Q diff <= 0.05
         allMons.forEach(p => {
-            if (p.quality < 1.99) {
-                const key = p.id + '_' + p.quality.toFixed(2); // ID and exact quality must match? The user said "samem Q and it is same species".
-                // In game mechanics, same species, but wait, do they need same exact Q or just Q < 1.99?
-                // The rules of breeding: quality < 1.99. Then, if they have exactly same ID and Math.abs(currentP.quality - p.quality) <= 0.001 they merge.
-                // So yes, same ID and same Q.
-                if (breedableMap.has(key)) {
-                    breedableMap.set(key, breedableMap.get(key) + 1);
-                } else {
-                    breedableMap.set(key, 1);
+            if ((p.qualityName !== 'Shiny' && p.quality < 1.99) || (p.qualityName === 'Shiny' && p.quality < 2.50)) {
+                let hasPartner = allMons.some(partner =>
+                    partner.uuid !== p.uuid &&
+                    partner.id === p.id &&
+                    ((partner.qualityName === 'Shiny' && p.qualityName === 'Shiny') || (partner.qualityName !== 'Shiny' && p.qualityName !== 'Shiny')) &&
+                    Math.abs(partner.quality - p.quality) <= 0.05 &&
+                    ((partner.qualityName !== 'Shiny' && partner.quality < 1.99) || (partner.qualityName === 'Shiny' && partner.quality < 2.50))
+                );
+                if (hasPartner) {
+                    breedableMap.set(p.uuid, true);
                 }
             }
         });
@@ -308,9 +311,8 @@ window.applyPokemonFilters = function() {
         if (filters.maxIV !== '' && sumIV > parseInt(filters.maxIV)) return false;
 
         if (filters.breedableOnly) {
-            if (p.quality >= 1.99) return false;
-            const key = p.id + '_' + p.quality.toFixed(2);
-            if (!breedableMap || breedableMap.get(key) < 2) return false;
+            if ((p.qualityName !== 'Shiny' && p.quality >= 1.99) || (p.qualityName === 'Shiny' && p.quality >= 2.50)) return false;
+            if (!breedableMap || !breedableMap.has(p.uuid)) return false;
         }
 
         return true;
@@ -326,9 +328,7 @@ window.applyPokemonFilters = function() {
         if (p) {
             let show = filterFn(p);
             if (show && filters.breedableOnly) {
-                const key = p.id + '_' + p.quality.toFixed(2);
-                if (displayedBreedableKeys.has(key)) show = false;
-                else displayedBreedableKeys.add(key);
+                // If it is breedable, we display it. The old logic restricted it to only one per Q value to reduce clutter, but since Q can be a range, we show all valid partners.
             }
             slot.style.display = show ? 'flex' : 'none';
         }
@@ -342,9 +342,7 @@ window.applyPokemonFilters = function() {
         if (p) {
             let show = filterFn(p);
             if (show && filters.breedableOnly) {
-                const key = p.id + '_' + p.quality.toFixed(2);
-                if (displayedBreedableKeys.has(key)) show = false;
-                else displayedBreedableKeys.add(key);
+                // If it is breedable, we display it. The old logic restricted it to only one per Q value to reduce clutter, but since Q can be a range, we show all valid partners.
             }
             slot.style.display = show ? 'flex' : 'none';
         }
@@ -396,8 +394,8 @@ export function handleDrop(event, targetCol) {
         return;
     }
 
-    if (tCol === 'breeding' && p.quality >= 1.99) {
-        alert("Cannot breed a Pokémon with Q >= 1.99!");
+    if (tCol === 'breeding' && ((p.qualityName !== 'Shiny' && p.quality >= 1.99) || (p.qualityName === 'Shiny' && p.quality >= 2.50))) {
+        alert("Cannot breed a Pokémon with max Q!");
         return;
     }
 
@@ -457,6 +455,7 @@ export function handleDrop(event, targetCol) {
         }
         if (state.dayCareRef) {
             state.dayCareRef.slot2.pokemon = p;
+            state.dayCareRef.slot2.requiredBattles = p.qualityName === 'Shiny' ? 200 : 100;
 
             const totalIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
             if (totalIV >= 600) {
@@ -470,7 +469,7 @@ export function handleDrop(event, targetCol) {
         if (state.breeding.length > 0) {
             const currentP = state.breeding[0];
             // Check breeding criteria
-            if (currentP.id !== p.id || Math.abs(currentP.quality - p.quality) > 0.001) {
+            if (currentP.id !== p.id || Math.abs(currentP.quality - p.quality) > 0.05 || (currentP.qualityName === 'Shiny' && p.qualityName !== 'Shiny') || (currentP.qualityName !== 'Shiny' && p.qualityName === 'Shiny')) {
                 // Fails criteria -> simple swap
                 displacedPokemon = currentP;
                 state.breeding[0] = p;
@@ -489,11 +488,13 @@ export function handleDrop(event, targetCol) {
                 const sumIV1 = currentP.ivs.hp + currentP.ivs.atk + currentP.ivs.def + currentP.ivs.spa + currentP.ivs.spd + currentP.ivs.spe;
                 const sumIV2 = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
                 const keptParent = (sumIV2 > sumIV1) ? p : currentP;
+                keptParent.quality = Math.max(currentP.quality, p.quality);
 
                 state.breeding[0] = keptParent;
                 if (state.dayCareRef) {
                     state.dayCareRef.slot1.pokemon = keptParent;
                     state.dayCareRef.slot1.battles = 0;
+                    state.dayCareRef.slot1.requiredBattles = keptParent.qualityName === 'Shiny' ? 200 : 100;
                     state.dayCareRef.slot1.isBreeding = true;
                     state.dayCareRef.slot1.isFinished = false;
                 }
@@ -510,7 +511,7 @@ export function handleDrop(event, targetCol) {
                 for (let i = 0; i < arr.length; i++) {
                     const candidate = arr[i];
                     // Must have same ID, identical Q (Math.abs < 0.001), Q < 1.99, and not be the dragged pokemon itself
-                    if (candidate.uuid !== p.uuid && candidate.id === p.id && Math.abs(candidate.quality - p.quality) <= 0.001 && candidate.quality < 1.99) {
+                    if (candidate.uuid !== p.uuid && candidate.id === p.id && Math.abs(candidate.quality - p.quality) <= 0.05 && ((candidate.qualityName !== 'Shiny' && candidate.quality < 1.99 && p.qualityName !== 'Shiny') || (candidate.qualityName === 'Shiny' && candidate.quality < 2.50 && p.qualityName === 'Shiny'))) {
                         partner = candidate;
                         partnerIndex = i;
                         partnerCol = colName;
@@ -535,11 +536,13 @@ export function handleDrop(event, targetCol) {
                 const sumIV1 = partner.ivs.hp + partner.ivs.atk + partner.ivs.def + partner.ivs.spa + partner.ivs.spd + partner.ivs.spe;
                 const sumIV2 = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
                 const keptParent = (sumIV2 > sumIV1) ? p : partner;
+                keptParent.quality = Math.max(partner.quality, p.quality);
 
                 state.breeding.push(keptParent);
                 if (state.dayCareRef) {
                     state.dayCareRef.slot1.pokemon = keptParent;
                     state.dayCareRef.slot1.battles = 0;
+                    state.dayCareRef.slot1.requiredBattles = keptParent.qualityName === 'Shiny' ? 200 : 100;
                     state.dayCareRef.slot1.isBreeding = true;
                     state.dayCareRef.slot1.isFinished = false;
                 }
@@ -572,6 +575,7 @@ export function handleDrop(event, targetCol) {
             state.training.push(displacedPokemon);
             if (state.dayCareRef) {
                 state.dayCareRef.slot2.pokemon = displacedPokemon;
+                state.dayCareRef.slot2.requiredBattles = displacedPokemon.qualityName === 'Shiny' ? 200 : 100;
                 state.dayCareRef.slot2.battles = 0;
             }
         } else if (sCol === 'breeding') {
