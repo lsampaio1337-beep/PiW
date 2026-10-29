@@ -1,7 +1,6 @@
 const https = require('https');
 const fs = require('fs');
 const path = require('path');
-const { execSync } = require('child_process');
 
 const SPRITES_DIR = path.join(__dirname, 'sprites');
 if (!fs.existsSync(SPRITES_DIR)) {
@@ -193,34 +192,23 @@ const run = async () => {
         let nStr = '';
         let sStr = '';
 
-        let genNormalUrls = {};
-        let genShinyUrls = {};
-        let isAnyMissing = false;
-
         for (const gen of [5, 6, 7, 8]) {
             const genData = sprites[`Gen${gen}`];
-            if (!genData.normal || !genData.shiny) isAnyMissing = true;
-            genNormalUrls[`Gen${gen}`] = genData.normal;
-            genShinyUrls[`Gen${gen}`] = genData.shiny;
-        }
-
-        for (const gen of [5, 6, 7, 8]) {
             let normalOk = 0;
             let shinyOk = 0;
 
-            if (!isAnyMissing) {
-                // Download shiny first
-                if (genShinyUrls[`Gen${gen}`]) {
-                    const shinyFilename = `Gen${gen}_${poke.id}_${poke.name}_shiny.png`;
-                    const shinySuccess = await downloadFile(genShinyUrls[`Gen${gen}`], path.join(SPRITES_DIR, shinyFilename));
-                    if (shinySuccess) {
-                        shinyOk = 1;
-                        // Only download normal if shiny succeeded (and we know there's no missing variant overall due to isAnyMissing check)
-                        if (genNormalUrls[`Gen${gen}`]) {
-                            const normalFilename = `Gen${gen}_${poke.id}_${poke.name}.png`;
-                            const normalSuccess = await downloadFile(genNormalUrls[`Gen${gen}`], path.join(SPRITES_DIR, normalFilename));
-                            if (normalSuccess) normalOk = 1;
-                        }
+            // User requested to download shiny first, and if shiny is missing/fails, skip downloading normal.
+            if (genData.shiny) {
+                const shinyFilename = `Gen${gen}_${poke.id}_${poke.name}_shiny.png`;
+                const shinySuccess = await downloadFile(genData.shiny, path.join(SPRITES_DIR, shinyFilename));
+                if (shinySuccess) {
+                    shinyOk = 1;
+
+                    // Only attempt normal if shiny succeeded
+                    if (genData.normal) {
+                        const normalFilename = `Gen${gen}_${poke.id}_${poke.name}.png`;
+                        const normalSuccess = await downloadFile(genData.normal, path.join(SPRITES_DIR, normalFilename));
+                        if (normalSuccess) normalOk = 1;
                     }
                 }
             }
