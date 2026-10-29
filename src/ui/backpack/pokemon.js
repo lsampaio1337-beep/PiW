@@ -481,8 +481,8 @@ export function handleDrop(event, targetCol) {
                 }
                 if (window.clearPokemonFilter) window.clearPokemonFilter();
                 window.pokemonFilters.name = p.name;
-                window.pokemonFilters.minQ = p.quality.toFixed(2);
-                window.pokemonFilters.maxQ = p.quality.toFixed(2);
+                window.pokemonFilters.minQ = (p.quality - 0.05).toFixed(2);
+                window.pokemonFilters.maxQ = (p.quality + 0.05).toFixed(2);
             } else {
                 // Meets criteria -> Consume both, merge into highest IV
                 const sumIV1 = currentP.ivs.hp + currentP.ivs.atk + currentP.ivs.def + currentP.ivs.spa + currentP.ivs.spd + currentP.ivs.spe;
@@ -511,7 +511,7 @@ export function handleDrop(event, targetCol) {
                 for (let i = 0; i < arr.length; i++) {
                     const candidate = arr[i];
                     // Must have same ID, identical Q (Math.abs < 0.001), Q < 1.99, and not be the dragged pokemon itself
-                    if (candidate.uuid !== p.uuid && candidate.id === p.id && Math.abs(candidate.quality - p.quality) <= 0.05 && ((candidate.qualityName !== 'Shiny' && candidate.quality < 1.99 && p.qualityName !== 'Shiny') || (candidate.qualityName === 'Shiny' && candidate.quality < 2.50 && p.qualityName === 'Shiny'))) {
+                    if (candidate.uuid !== p.uuid && candidate.id === p.id && ((candidate.qualityName === 'Shiny' && p.qualityName === 'Shiny') || (candidate.qualityName !== 'Shiny' && p.qualityName !== 'Shiny')) && Math.abs(candidate.quality - p.quality) <= 0.05 && ((candidate.qualityName !== 'Shiny' && candidate.quality < 1.99 && p.qualityName !== 'Shiny') || (candidate.qualityName === 'Shiny' && candidate.quality < 2.50 && p.qualityName === 'Shiny'))) {
                         partner = candidate;
                         partnerIndex = i;
                         partnerCol = colName;
@@ -557,8 +557,8 @@ export function handleDrop(event, targetCol) {
                 }
                 if (window.clearPokemonFilter) window.clearPokemonFilter();
                 window.pokemonFilters.name = p.name;
-                window.pokemonFilters.minQ = p.quality.toFixed(2);
-                window.pokemonFilters.maxQ = p.quality.toFixed(2);
+                window.pokemonFilters.minQ = (p.quality - 0.05).toFixed(2);
+                window.pokemonFilters.maxQ = (p.quality + 0.05).toFixed(2);
             }
         }
     }
@@ -587,8 +587,8 @@ export function handleDrop(event, targetCol) {
                 state.dayCareRef.slot1.isFinished = false;
             }
             window.pokemonFilters.name = displacedPokemon.name;
-            window.pokemonFilters.minQ = displacedPokemon.quality.toFixed(2);
-            window.pokemonFilters.maxQ = displacedPokemon.quality.toFixed(2);
+            window.pokemonFilters.minQ = (displacedPokemon.quality - 0.05).toFixed(2);
+            window.pokemonFilters.maxQ = (displacedPokemon.quality + 0.05).toFixed(2);
         }
     }
 
