@@ -240,6 +240,7 @@ export function renderPokeMarketTab(category) {
         let smartwatchTier = state.stats.upgrades.smartwatchTier || 0;
         let speedTier = state.stats.upgrades.speedTier || 0;
         let lootTier = state.stats.upgrades.lootTier || 0;
+        let daycareTier = state.stats.upgrades.daycareTier || 0;
 
         let ballUpgrade = state.config.balance.expansions.ballPocket[ballTier];
         let potionUpgrade = state.config.balance.expansions.potionSatchel[potionTier];
@@ -248,6 +249,7 @@ export function renderPokeMarketTab(category) {
         let smartwatchUpgrade = state.config.balance.expansions.smartwatch[smartwatchTier];
         let speedUpgrade = state.config.balance.expansions.speed[speedTier];
         let lootUpgrade = state.config.balance.expansions.loot[lootTier];
+        let daycareUpgrade = state.config.balance.expansions.daycare[daycareTier];
 
         let unlocked = state.stats.upgradesUnlocked || {};
 
@@ -258,6 +260,7 @@ export function renderPokeMarketTab(category) {
         if (smartwatchUpgrade && unlocked['smartwatch']) items.push({ ...smartwatchUpgrade, type: 'smartwatch', img: './Assets/Items/Upgrades/' + smartwatchUpgrade.name + '.png', attrLabel: smartwatchUpgrade.description });
         if (speedUpgrade && unlocked['speed']) items.push({ ...speedUpgrade, type: 'speed', img: './Assets/Items/Upgrades/' + speedUpgrade.name + '.png', attrLabel: speedUpgrade.description });
         if (lootUpgrade && unlocked['loot']) items.push({ ...lootUpgrade, type: 'loot', img: './Assets/Items/Upgrades/' + lootUpgrade.name + '.png', attrLabel: lootUpgrade.description });
+        if (daycareUpgrade && unlocked['daycare']) items.push({ ...daycareUpgrade, type: 'daycare', img: './Assets/Items/Upgrades/' + daycareUpgrade.name + '.png', attrLabel: daycareUpgrade.description });
 
         items = items.map(u => ({
             name: u.name,
