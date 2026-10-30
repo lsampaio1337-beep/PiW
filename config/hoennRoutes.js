@@ -790,37 +790,43 @@ export const hoennRoutes = [
         "pokemonId": 264,
         "minLevel": 41,
         "maxLevel": 45,
-        "chance": 0.3
+        "chance": 0.22
       },
       {
         "pokemonId": 43,
         "minLevel": 41,
         "maxLevel": 45,
-        "chance": 0.3
+        "chance": 0.22
       },
       {
         "pokemonId": 357,
         "minLevel": 41,
         "maxLevel": 45,
-        "chance": 0.15
+        "chance": 0.17
       },
       {
         "pokemonId": 278,
         "minLevel": 41,
         "maxLevel": 45,
-        "chance": 0.1
+        "chance": 0.12
       },
       {
         "pokemonId": 352,
         "minLevel": 41,
         "maxLevel": 45,
-        "chance": 0.1
+        "chance": 0.12
       },
       {
         "pokemonId": 279,
         "minLevel": 41,
         "maxLevel": 45,
         "chance": 0.05
+      },
+      {
+        "pokemonId": 277,
+        "minLevel": 41,
+        "maxLevel": 45,
+        "chance": 0.1
       }
     ]
   },
@@ -1137,31 +1143,43 @@ export const hoennRoutes = [
         "pokemonId": 262,
         "minLevel": 49,
         "maxLevel": 53,
-        "chance": 0.3
+        "chance": 0.2
       },
       {
         "pokemonId": 353,
         "minLevel": 49,
         "maxLevel": 53,
-        "chance": 0.25
+        "chance": 0.2
       },
       {
         "pokemonId": 355,
         "minLevel": 49,
         "maxLevel": 53,
-        "chance": 0.2
+        "chance": 0.15
       },
       {
         "pokemonId": 44,
         "minLevel": 49,
         "maxLevel": 53,
-        "chance": 0.15
+        "chance": 0.1
       },
       {
         "pokemonId": 352,
         "minLevel": 49,
         "maxLevel": 53,
         "chance": 0.1
+      },
+      {
+        "pokemonId": 332,
+        "minLevel": 49,
+        "maxLevel": 53,
+        "chance": 0.1
+      },
+      {
+        "pokemonId": 477,
+        "minLevel": 49,
+        "maxLevel": 53,
+        "chance": 0.15
       }
     ]
   },
@@ -1504,7 +1522,7 @@ export const hoennRoutes = [
         "pokemonId": 262,
         "minLevel": 88,
         "maxLevel": 93,
-        "chance": 0.3
+        "chance": 0.25
       },
       {
         "pokemonId": 42,
@@ -1516,10 +1534,16 @@ export const hoennRoutes = [
         "pokemonId": 109,
         "minLevel": 88,
         "maxLevel": 93,
-        "chance": 0.2
+        "chance": 0.05
       },
       {
         "pokemonId": 110,
+        "minLevel": 88,
+        "maxLevel": 93,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 306,
         "minLevel": 88,
         "maxLevel": 93,
         "chance": 0.2
