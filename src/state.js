@@ -68,7 +68,8 @@ export const REGION_TEMPLATE = {
             glassTier: 0,
             smartwatchTier: 0,
             speedTier: 0,
-            lootTier: 0
+            lootTier: 0,
+            daycareTier: 0
         },
         upgradesUnlocked: {
             balls: false,
@@ -77,7 +78,8 @@ export const REGION_TEMPLATE = {
             glass: true,
             smartwatch: false,
             speed: false,
-            loot: false
+            loot: false,
+            daycare: false
         }
     },
     currentRoute: "Route 1",
