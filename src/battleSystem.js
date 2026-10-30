@@ -929,9 +929,10 @@ class BattleSystem {
         let ivValue = Math.ceil(sumIV / 6);
 
         let qualityName = "Gym"; // You can keep a standard name or map it if desired
-        if (qValue >= 1.6) qualityName = "Legendary";
-        else if (qValue >= 1.4) qualityName = "Epic";
-        else if (qValue >= 1.3) qualityName = "Rare";
+        if (qValue >= 2.0) qualityName = "Shiny";
+        else if (qValue >= 1.81) qualityName = "Legendary";
+        else if (qValue >= 1.6) qualityName = "Epic";
+        else if (qValue >= 1.4) qualityName = "Rare";
         else if (qValue >= 1.2) qualityName = "Uncommon";
 
         const q = { name: qualityName, q: qValue };
