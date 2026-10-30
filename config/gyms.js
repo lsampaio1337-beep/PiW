@@ -5234,7 +5234,7 @@ const gyms = [
   {
     "id": "paldea_pokemon_league",
     "name": "Paldea Pokemon League",
-    "leader": "Champion",
+    "leader": "Paldea Champion",
     "levelRequirement": 310,
     "trainers": [
       {
