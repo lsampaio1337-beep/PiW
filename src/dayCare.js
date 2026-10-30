@@ -73,10 +73,18 @@ class DayCare {
         p.quality = Math.min(1.99, p.quality);
 
         // Map Quality Tier if Q >= 1.5, 1.25, etc.
-        if (p.quality >= 1.99) {
-            p.qualityName = "Perfect";
-        } else if (p.quality >= 1.70) { // Generic threshold updates could go here
-            p.qualityName = p.qualityName;
+        if (p.quality >= 1.81) {
+            p.qualityName = "Legendary";
+        } else if (p.quality >= 1.60) {
+            p.qualityName = "Epic";
+        } else if (p.quality >= 1.40) {
+            p.qualityName = "Rare";
+        } else if (p.quality >= 1.20) {
+            p.qualityName = "Uncommon";
+        } else if (p.quality >= 1.00) {
+            p.qualityName = "Regular";
+        } else {
+            p.qualityName = "Weak";
         }
 
         // Let UI know it's finished

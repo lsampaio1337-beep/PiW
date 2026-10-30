@@ -213,7 +213,16 @@ export function forceNextCapture() {
     const sumIV = parseInt(document.getElementById('force-enc-sumiv').value);
 
     const pokemonBase = state.config.pokemonData[id - 1] || state.config.pokemonData[0];
-    const qName = qValue >= 2.0 ? "Shiny" : "Custom";
+
+    let qName = "Custom";
+    if (qValue >= 2.0) qName = "Shiny";
+    else if (qValue >= 1.81) qName = "Legendary";
+    else if (qValue >= 1.6) qName = "Epic";
+    else if (qValue >= 1.4) qName = "Rare";
+    else if (qValue >= 1.2) qName = "Uncommon";
+    else if (qValue >= 1.0) qName = "Regular";
+    else qName = "Weak";
+
     const q = { name: qName, q: qValue };
 
     // Distribute SumIV randomly

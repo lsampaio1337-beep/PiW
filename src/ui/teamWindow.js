@@ -63,6 +63,7 @@ export function updateTeamWindow() {
 
         let glowClass = "glow-weak";
         if (p.qualityName === "Shiny") glowClass = "glow-shiny";
+        else if (p.qualityName === "Legendary") glowClass = "glow-legendary";
         else if (p.qualityName === "Epic") glowClass = "glow-epic";
         else if (p.qualityName === "Rare") glowClass = "glow-rare";
         else if (p.qualityName === "Uncommon") glowClass = "glow-uncommon";
@@ -181,6 +182,7 @@ function renderDayCareSlot(container, p, battles, maxBattles, type) {
 
     let glowClass = "glow-weak";
     if (p.qualityName === "Shiny") glowClass = "glow-shiny";
+    else if (p.qualityName === "Legendary") glowClass = "glow-legendary";
     else if (p.qualityName === "Epic") glowClass = "glow-epic";
     else if (p.qualityName === "Rare") glowClass = "glow-rare";
     else if (p.qualityName === "Uncommon") glowClass = "glow-uncommon";

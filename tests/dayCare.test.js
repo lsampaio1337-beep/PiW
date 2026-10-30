@@ -169,7 +169,7 @@ describe('DayCare', () => {
             expect(global.window.trackDailyChallenge).toHaveBeenCalledWith('hatch_eggs');
         });
 
-        test('should cap quality at 1.99 and set qualityName to Perfect', () => {
+        test('should cap quality at 1.99 and set qualityName to Legendary', () => {
             // Force random to max out increase (Math.random() -> 0.999 -> floor(10.9) = 10 -> 0.10)
             global.crypto.getRandomValues = jest.fn((arr) => {
                 arr[0] = 4290666000; // ~0.999
@@ -179,7 +179,7 @@ describe('DayCare', () => {
             dayCare.completeBreeding();
 
             expect(dayCare.slot1.pokemon.quality).toBe(1.99);
-            expect(dayCare.slot1.pokemon.qualityName).toBe("Perfect");
+            expect(dayCare.slot1.pokemon.qualityName).toBe("Legendary");
         });
     });
 
