@@ -1,0 +1,695 @@
+Order	Route / Place	Secondary	Pokemon Name	Level	% Appearance
+1	Poco Path	Main	None	1-2	0%
+2	Los Platos	Main	None	2-4	0%
+3	South Province (Area One)	Beach	Wattrel	4-6	13%
+3	South Province (Area One)	Beach	Wiglett	4-6	13%
+3	South Province (Area One)	Beach	Shellder	4-6	13%
+3	South Province (Area One)	Beach	Wingull	4-6	13%
+3	South Province (Area One)	Beach	Crabrawler	4-6	12%
+3	South Province (Area One)	Beach	Pelipper	4-6	12%
+3	South Province (Area One)	Beach	Buizel	4-6	12%
+3	South Province (Area One)	Beach	Floragato	4-6	12%
+4	South Province (Area One)	Cave	Houndour	6-7	15%
+4	South Province (Area One)	Cave	Yungoos	6-7	15%
+4	South Province (Area One)	Cave	Salandit	6-7	14%
+4	South Province (Area One)	Cave	Deino	6-7	14%
+4	South Province (Area One)	Cave	Diglett	6-7	14%
+4	South Province (Area One)	Cave	Makuhita	6-7	14%
+4	South Province (Area One)	Cave	Gumshoos	6-7	14%
+5	South Province (Area One)	Flower Patch	Flabébé	7-9	15%
+5	South Province (Area One)	Flower Patch	Floette	7-9	15%
+5	South Province (Area One)	Flower Patch	Sunkern	7-9	14%
+5	South Province (Area One)	Flower Patch	Combee	7-9	14%
+5	South Province (Area One)	Flower Patch	Spewpa	7-9	14%
+5	South Province (Area One)	Flower Patch	Smoliv	7-9	14%
+5	South Province (Area One)	Flower Patch	Dolliv	7-9	14%
+6	South Province (Area One)	Forest	Lechonk	9-11	15%
+6	South Province (Area One)	Forest	Tarountula	9-11	15%
+6	South Province (Area One)	Forest	Pineco	9-11	14%
+6	South Province (Area One)	Forest	Foongus	9-11	14%
+6	South Province (Area One)	Forest	Bounsweet	9-11	14%
+6	South Province (Area One)	Forest	Skwovet	9-11	14%
+6	South Province (Area One)	Forest	Shroodle	9-11	14%
+7	South Province (Area One)	Grass	Lechonk	11-12	15%
+7	South Province (Area One)	Grass	Tarountula	11-12	15%
+7	South Province (Area One)	Grass	Hoppip	11-12	14%
+7	South Province (Area One)	Grass	Fletchling	11-12	14%
+7	South Province (Area One)	Grass	Scatterbug	11-12	14%
+7	South Province (Area One)	Grass	Deerling	11-12	14%
+7	South Province (Area One)	Grass	Pawmo	11-12	14%
+8	South Province (Area One)	Lake	Basculin	12-14	13%
+8	South Province (Area One)	Lake	Misdreavus	12-14	13%
+8	South Province (Area One)	Lake	Surskit	12-14	13%
+8	South Province (Area One)	Lake	Barboach	12-14	13%
+8	South Province (Area One)	Lake	Goomy	12-14	12%
+8	South Province (Area One)	Lake	Psyduck	12-14	12%
+8	South Province (Area One)	Lake	Clodsire	12-14	12%
+8	South Province (Area One)	Lake	Delibird	12-14	12%
+9	South Province (Area One)	Near Town	Murkrow	14-16	12%
+9	South Province (Area One)	Near Town	Fidough	14-16	11%
+9	South Province (Area One)	Near Town	Drifloon	14-16	11%
+9	South Province (Area One)	Near Town	Dachsbun	14-16	11%
+9	South Province (Area One)	Near Town	Squawkabilly	14-16	11%
+9	South Province (Area One)	Near Town	Drifblim	14-16	11%
+9	South Province (Area One)	Near Town	Tandemaus	14-16	11%
+9	South Province (Area One)	Near Town	Dondozo	14-16	11%
+9	South Province (Area One)	Near Town	Impidimp	14-16	11%
+10	South Province (Area One)	Ocean	Wingull	16-17	15%
+10	South Province (Area One)	Ocean	Wattrel	16-17	15%
+10	South Province (Area One)	Ocean	Shellder	16-17	14%
+10	South Province (Area One)	Ocean	Magikarp	16-17	14%
+10	South Province (Area One)	Ocean	Skrelp	16-17	14%
+10	South Province (Area One)	Ocean	Clauncher	16-17	14%
+10	South Province (Area One)	Ocean	Arrokuda	16-17	14%
+11	South Province (Area One)	River	Basculin	17-19	15%
+11	South Province (Area One)	River	Surskit	17-19	15%
+11	South Province (Area One)	River	Arrokuda	17-19	14%
+11	South Province (Area One)	River	Psyduck	17-19	14%
+11	South Province (Area One)	River	Buizel	17-19	14%
+11	South Province (Area One)	River	Tadbulb	17-19	14%
+11	South Province (Area One)	River	Chewtle	17-19	14%
+12	South Province (Area One)	Ruins	Bronzor	19-21	13%
+12	South Province (Area One)	Ruins	Drowzee	19-21	13%
+12	South Province (Area One)	Ruins	Tinkatink	19-21	13%
+12	South Province (Area One)	Ruins	Gastly	19-21	13%
+12	South Province (Area One)	Ruins	Hypno	19-21	12%
+12	South Province (Area One)	Ruins	Tinkatuff	19-21	12%
+12	South Province (Area One)	Ruins	Greavard	19-21	12%
+12	South Province (Area One)	Ruins	Iron Hands	19-21	12%
+13	Mesagoza	Main	None	21-22	0%
+14	Jubilife Village	Main	None	22-24	0%
+15	South Province (Area Two)	Flower Patch	Flabébé	24-26	12%
+15	South Province (Area Two)	Flower Patch	Floette	24-26	11%
+15	South Province (Area Two)	Flower Patch	Sunkern	24-26	11%
+15	South Province (Area Two)	Flower Patch	Combee	24-26	11%
+15	South Province (Area Two)	Flower Patch	Smoliv	24-26	11%
+15	South Province (Area Two)	Flower Patch	Dolliv	24-26	11%
+15	South Province (Area Two)	Flower Patch	Petilil	24-26	11%
+15	South Province (Area Two)	Flower Patch	Bulbasaur	24-26	11%
+15	South Province (Area Two)	Flower Patch	Frigibax	24-26	11%
+16	South Province (Area Two)	Forest	Pineco	26-27	13%
+16	South Province (Area Two)	Forest	Foongus	26-27	13%
+16	South Province (Area Two)	Forest	Bounsweet	26-27	13%
+16	South Province (Area Two)	Forest	Skwovet	26-27	13%
+16	South Province (Area Two)	Forest	Shroodle	26-27	12%
+16	South Province (Area Two)	Forest	Murkrow	26-27	12%
+16	South Province (Area Two)	Forest	Pikachu	26-27	12%
+16	South Province (Area Two)	Forest	Metapod	26-27	12%
+17	South Province (Area Two)	Grass	Hoppip	27-29	15%
+17	South Province (Area Two)	Grass	Fletchling	27-29	15%
+17	South Province (Area Two)	Grass	Murkrow	27-29	14%
+17	South Province (Area Two)	Grass	Mareep	27-29	14%
+17	South Province (Area Two)	Grass	Maschiff	27-29	14%
+17	South Province (Area Two)	Grass	Starly	27-29	14%
+17	South Province (Area Two)	Grass	Staravia	27-29	14%
+18	South Province (Area Two)	Mountain	Gastly	29-31	13%
+18	South Province (Area Two)	Mountain	Drifloon	29-31	13%
+18	South Province (Area Two)	Mountain	Flittle	29-31	13%
+18	South Province (Area Two)	Mountain	Swablu	29-31	13%
+18	South Province (Area Two)	Mountain	Mudbray	29-31	12%
+18	South Province (Area Two)	Mountain	Rockruff	29-31	12%
+18	South Province (Area Two)	Mountain	Skiddo	29-31	12%
+18	South Province (Area Two)	Mountain	Roaring Moon	29-31	12%
+19	South Province (Area Two)	Near Town	Fidough	31-32	15%
+19	South Province (Area Two)	Near Town	Drifloon	31-32	15%
+19	South Province (Area Two)	Near Town	Squawkabilly	31-32	14%
+19	South Province (Area Two)	Near Town	Tandemaus	31-32	14%
+19	South Province (Area Two)	Near Town	Jigglypuff	31-32	14%
+19	South Province (Area Two)	Near Town	Eevee	31-32	14%
+19	South Province (Area Two)	Near Town	Klefki	31-32	14%
+20	South Province (Area Two)	Olive Grove	Smoliv	32-34	13%
+20	South Province (Area Two)	Olive Grove	Diglett	32-34	13%
+20	South Province (Area Two)	Olive Grove	Combee	32-34	13%
+20	South Province (Area Two)	Olive Grove	Skwovet	32-34	13%
+20	South Province (Area Two)	Olive Grove	Mareep	32-34	12%
+20	South Province (Area Two)	Olive Grove	Starly	32-34	12%
+20	South Province (Area Two)	Olive Grove	Kricketot	32-34	12%
+20	South Province (Area Two)	Olive Grove	Riolu	32-34	12%
+21	South Province (Area Two)	Rocky	Skiddo	34-36	15%
+21	South Province (Area Two)	Rocky	Makuhita	34-36	15%
+21	South Province (Area Two)	Rocky	Yungoos	34-36	14%
+21	South Province (Area Two)	Rocky	Gumshoos	34-36	14%
+21	South Province (Area Two)	Rocky	Nacli	34-36	14%
+21	South Province (Area Two)	Rocky	Naclstack	34-36	14%
+21	South Province (Area Two)	Rocky	Cufant	34-36	14%
+22	Cortondo Gym	Main	None	36-37	0%
+23	South Province (Area Three)	Grass	Pawmo	37-39	10%
+23	South Province (Area Three)	Grass	Pawmi	37-39	10%
+23	South Province (Area Three)	Grass	Hoppip	37-39	10%
+23	South Province (Area Three)	Grass	Nymble	37-39	10%
+23	South Province (Area Three)	Grass	Rookidee	37-39	10%
+23	South Province (Area Three)	Grass	Gulpin	37-39	10%
+23	South Province (Area Three)	Grass	Slakoth	37-39	10%
+23	South Province (Area Three)	Grass	Shuppet	37-39	10%
+23	South Province (Area Three)	Grass	Meowscarada	37-39	10%
+23	South Province (Area Three)	Grass	Frosmoth	37-39	10%
+24	South Province (Area Three)	Rocky	Nacli	39-41	15%
+24	South Province (Area Three)	Rocky	Rookidee	39-41	15%
+24	South Province (Area Three)	Rocky	Naclstack	39-41	14%
+24	South Province (Area Three)	Rocky	Cufant	39-41	14%
+24	South Province (Area Three)	Rocky	Shinx	39-41	14%
+24	South Province (Area Three)	Rocky	Growlithe	39-41	14%
+24	South Province (Area Three)	Rocky	Spoink	39-41	14%
+25	South Province (Area Five)	Beach	Shellos	41-42	25%
+25	South Province (Area Five)	Beach	Gastrodon	41-42	25%
+25	South Province (Area Five)	Beach	Palossand	41-42	25%
+25	South Province (Area Five)	Beach	Pincurchin	41-42	25%
+26	South Province (Area Five)	Grass	Mankey	42-44	15%
+26	South Province (Area Five)	Grass	Shroomish	42-44	15%
+26	South Province (Area Five)	Grass	Stunky	42-44	14%
+26	South Province (Area Five)	Grass	Fletchinder	42-44	14%
+26	South Province (Area Five)	Grass	Vigoroth	42-44	14%
+26	South Province (Area Five)	Grass	Stantler	42-44	14%
+26	South Province (Area Five)	Grass	Luxio	42-44	14%
+27	South Province (Area Five)	Lake	Surskit	44-46	10%
+27	South Province (Area Five)	Lake	Stunky	44-46	10%
+27	South Province (Area Five)	Lake	Croagunk	44-46	10%
+27	South Province (Area Five)	Lake	Hatenna	44-46	10%
+27	South Province (Area Five)	Lake	Hattrem	44-46	10%
+27	South Province (Area Five)	Lake	Dreepy	44-46	10%
+27	South Province (Area Five)	Lake	Wooper	44-46	10%
+27	South Province (Area Five)	Lake	Poliwhirl	44-46	10%
+27	South Province (Area Five)	Lake	Tyranitar	44-46	10%
+27	South Province (Area Five)	Lake	Torkoal	44-46	10%
+28	South Province (Area Five)	Mountain	Drifblim	46-47	12%
+28	South Province (Area Five)	Mountain	Axew	46-47	11%
+28	South Province (Area Five)	Mountain	Larvitar	46-47	11%
+28	South Province (Area Five)	Mountain	Bagon	46-47	11%
+28	South Province (Area Five)	Mountain	Espathra	46-47	11%
+28	South Province (Area Five)	Mountain	Altaria	46-47	11%
+28	South Province (Area Five)	Mountain	Houndstone	46-47	11%
+28	South Province (Area Five)	Mountain	Sandy Shocks	46-47	11%
+28	South Province (Area Five)	Mountain	Ting Lu	46-47	11%
+29	South Province (Area Five)	River	Pawniard	47-49	13%
+29	South Province (Area Five)	River	Croagunk	47-49	13%
+29	South Province (Area Five)	River	Axew	47-49	13%
+29	South Province (Area Five)	River	Golduck	47-49	13%
+29	South Province (Area Five)	River	Toxicroak	47-49	12%
+29	South Province (Area Five)	River	Barraskewda	47-49	12%
+29	South Province (Area Five)	River	Masquerain	47-49	12%
+29	South Province (Area Five)	River	Tentacool	47-49	12%
+30	Artazon Gym	Main	None	49-51	0%
+31	East Province (Area One)	Beach	Wiglett	51-53	13%
+31	East Province (Area One)	Beach	Crabrawler	51-53	13%
+31	East Province (Area One)	Beach	Mareanie	51-53	13%
+31	East Province (Area One)	Beach	Shellos	51-53	13%
+31	East Province (Area One)	Beach	Sandygast	51-53	12%
+31	East Province (Area One)	Beach	Slowpoke	51-53	12%
+31	East Province (Area One)	Beach	Wugtrio	51-53	12%
+31	East Province (Area One)	Beach	Arctibax	51-53	12%
+32	East Province (Area One)	Forest	Teddiursa	53-54	15%
+32	East Province (Area One)	Forest	Venonat	53-54	15%
+32	East Province (Area One)	Forest	Oinkologne	53-54	14%
+32	East Province (Area One)	Forest	Amoonguss	53-54	14%
+32	East Province (Area One)	Forest	Greedent	53-54	14%
+32	East Province (Area One)	Forest	Spidops	53-54	14%
+32	East Province (Area One)	Forest	Steenee	53-54	14%
+33	East Province (Area One)	Grass	Deerling	54-56	15%
+33	East Province (Area One)	Grass	Oinkologne	54-56	15%
+33	East Province (Area One)	Grass	Gulpin	54-56	14%
+33	East Province (Area One)	Grass	Litleo	54-56	14%
+33	East Province (Area One)	Grass	Sawsbuck	54-56	14%
+33	East Province (Area One)	Grass	Skiploom	54-56	14%
+33	East Province (Area One)	Grass	Corvisquire	54-56	14%
+34	East Province (Area One)	Mountain	Flittle	56-58	13%
+34	East Province (Area One)	Mountain	Swablu	56-58	13%
+34	East Province (Area One)	Mountain	Mudbray	56-58	13%
+34	East Province (Area One)	Mountain	Rockruff	56-58	13%
+34	East Province (Area One)	Mountain	Litleo	56-58	12%
+34	East Province (Area One)	Mountain	Rufflet	56-58	12%
+34	East Province (Area One)	Mountain	Lokix	56-58	12%
+34	East Province (Area One)	Mountain	Ogerpon	56-58	12%
+35	East Province (Area One)	Near Town	Shuppet	58-59	25%
+35	East Province (Area One)	Near Town	Corvisquire	58-59	25%
+35	East Province (Area One)	Near Town	Klefki	58-59	25%
+35	East Province (Area One)	Near Town	Oricorio	58-59	25%
+36	East Province (Area One)	Ocean	Skrelp	59-61	15%
+36	East Province (Area One)	Ocean	Clauncher	59-61	15%
+36	East Province (Area One)	Ocean	Mareanie	59-61	14%
+36	East Province (Area One)	Ocean	Qwilfish	59-61	14%
+36	East Province (Area One)	Ocean	Finizen	59-61	14%
+36	East Province (Area One)	Ocean	Floatzel	59-61	14%
+36	East Province (Area One)	Ocean	Kilowattrel	59-61	14%
+37	East Province (Area One)	Rocky	Litleo	61-63	15%
+37	East Province (Area One)	Rocky	Lokix	61-63	15%
+37	East Province (Area One)	Rocky	Corvisquire	61-63	14%
+37	East Province (Area One)	Rocky	Gogoat	61-63	14%
+37	East Province (Area One)	Rocky	Copperajah	61-63	14%
+37	East Province (Area One)	Rocky	Hariyama	61-63	14%
+37	East Province (Area One)	Rocky	Pyroar	61-63	14%
+38	East Province (Area Two)	Forest	Venonat	63-64	13%
+38	East Province (Area Two)	Forest	Oinkologne	63-64	13%
+38	East Province (Area Two)	Forest	Amoonguss	63-64	13%
+38	East Province (Area Two)	Forest	Greedent	63-64	13%
+38	East Province (Area Two)	Forest	Spidops	63-64	12%
+38	East Province (Area Two)	Forest	Dunsparce	63-64	12%
+38	East Province (Area Two)	Forest	Venomoth	63-64	12%
+38	East Province (Area Two)	Forest	Butterfree	63-64	12%
+39	East Province (Area Two)	Grass	Marill	64-66	15%
+39	East Province (Area Two)	Grass	Skiploom	64-66	15%
+39	East Province (Area Two)	Grass	Dunsparce	64-66	14%
+39	East Province (Area Two)	Grass	Chansey	64-66	14%
+39	East Province (Area Two)	Grass	Toedscool	64-66	14%
+39	East Province (Area Two)	Grass	Magnemite	64-66	14%
+39	East Province (Area Two)	Grass	Beedrill	64-66	14%
+40	East Province (Area Two)	Near Town	Shuppet	66-68	17%
+40	East Province (Area Two)	Near Town	Magnemite	66-68	17%
+40	East Province (Area Two)	Near Town	Klefki	66-68	17%
+40	East Province (Area Two)	Near Town	Grimer	66-68	17%
+40	East Province (Area Two)	Near Town	Kirlia	66-68	16%
+40	East Province (Area Two)	Near Town	Rotom	66-68	16%
+41	East Province (Area Two)	River	Tadbulb	68-69	17%
+41	East Province (Area Two)	River	Slowpoke	68-69	17%
+41	East Province (Area Two)	River	Chewtle	68-69	17%
+41	East Province (Area Two)	River	Dreepy	68-69	17%
+41	East Province (Area Two)	River	Drakloak	68-69	16%
+41	East Province (Area Two)	River	Wartortle	68-69	16%
+42	East Province (Area Two)	Rocky	Lokix	69-71	17%
+42	East Province (Area Two)	Rocky	Gogoat	69-71	17%
+42	East Province (Area Two)	Rocky	Copperajah	69-71	17%
+42	East Province (Area Two)	Rocky	Hariyama	69-71	17%
+42	East Province (Area Two)	Rocky	Honchkrow	69-71	16%
+42	East Province (Area Two)	Rocky	Hawlucha	69-71	16%
+43	Levincia Gym	Main	None	71-73	0%
+44	Cascarrafa Gym	Main	None	73-74	0%
+45	West Province (Area Two)	Beach	Shellos	74-76	12%
+45	West Province (Area Two)	Beach	Sandygast	74-76	11%
+45	West Province (Area Two)	Beach	Kilowattrel	74-76	11%
+45	West Province (Area Two)	Beach	Pelipper	74-76	11%
+45	West Province (Area Two)	Beach	Wugtrio	74-76	11%
+45	West Province (Area Two)	Beach	Gastrodon	74-76	11%
+45	West Province (Area Two)	Beach	Palossand	74-76	11%
+45	West Province (Area Two)	Beach	Fuecoco	74-76	11%
+45	West Province (Area Two)	Beach	Flamigo	74-76	11%
+46	West Province (Area Two)	Grass	Staravia	76-78	13%
+46	West Province (Area Two)	Grass	Sawsbuck	76-78	13%
+46	West Province (Area Two)	Grass	Meowth	76-78	13%
+46	West Province (Area Two)	Grass	Stunky	76-78	13%
+46	West Province (Area Two)	Grass	Flaaffy	76-78	12%
+46	West Province (Area Two)	Grass	Tauros	76-78	12%
+46	West Province (Area Two)	Grass	Girafarig	76-78	12%
+46	West Province (Area Two)	Grass	Cyclizar	76-78	12%
+47	West Province (Area Two)	Near Town	Grimer	78-79	17%
+47	West Province (Area Two)	Near Town	Meowth	78-79	17%
+47	West Province (Area Two)	Near Town	Kirlia	78-79	17%
+47	West Province (Area Two)	Near Town	Varoom	78-79	17%
+47	West Province (Area Two)	Near Town	Ditto	78-79	16%
+47	West Province (Area Two)	Near Town	Igglybuff	78-79	16%
+48	West Province (Area Two)	River	Floatzel	79-81	15%
+48	West Province (Area Two)	River	Azumarill	79-81	15%
+48	West Province (Area Two)	River	Croagunk	79-81	14%
+48	West Province (Area Two)	River	Golduck	79-81	14%
+48	West Province (Area Two)	River	Toxicroak	79-81	14%
+48	West Province (Area Two)	River	Barraskewda	79-81	14%
+48	West Province (Area Two)	River	Drednaw	79-81	14%
+49	West Province (Area Three)	Forest	Sawsbuck	81-83	15%
+49	West Province (Area Three)	Forest	Pikachu	81-83	15%
+49	West Province (Area Three)	Forest	Shroomish	81-83	14%
+49	West Province (Area Three)	Forest	Breloom	81-83	14%
+49	West Province (Area Three)	Forest	Primeape	81-83	14%
+49	West Province (Area Three)	Forest	Sudowoodo	81-83	14%
+49	West Province (Area Three)	Forest	Pachirisu	81-83	14%
+50	West Province (Area Three)	Grass	Shroomish	83-84	15%
+50	West Province (Area Three)	Grass	Fletchinder	83-84	15%
+50	West Province (Area Three)	Grass	Ditto	83-84	14%
+50	West Province (Area Three)	Grass	Jumpluff	83-84	14%
+50	West Province (Area Three)	Grass	Persian	83-84	14%
+50	West Province (Area Three)	Grass	Vigoroth	83-84	14%
+50	West Province (Area Three)	Grass	Zorua	83-84	14%
+51	West Province (Area Three)	Lake	Misdreavus	84-86	12%
+51	West Province (Area Three)	Lake	Barboach	84-86	11%
+51	West Province (Area Three)	Lake	Goomy	84-86	11%
+51	West Province (Area Three)	Lake	Hatenna	84-86	11%
+51	West Province (Area Three)	Lake	Clodsire	84-86	11%
+51	West Province (Area Three)	Lake	Azumarill	84-86	11%
+51	West Province (Area Three)	Lake	Hattrem	84-86	11%
+51	West Province (Area Three)	Lake	Poliwag	84-86	11%
+51	West Province (Area Three)	Lake	Dedenne	84-86	11%
+52	Medali Gym	Main	None	86-88	0%
+53	Montenevera Gym	Main	None	88-89	0%
+54	Alfornada Gym	Main	None	89-91	0%
+55	Glaseado Gym	Main	None	91-93	0%
+56	Casseroya Lake	Forest	Fomantis	93-94	17%
+56	Casseroya Lake	Forest	Venomoth	93-94	17%
+56	Casseroya Lake	Forest	Sudowoodo	93-94	17%
+56	Casseroya Lake	Forest	Applin	93-94	17%
+56	Casseroya Lake	Forest	Bonsly	93-94	16%
+56	Casseroya Lake	Forest	Charcadet	93-94	16%
+57	Casseroya Lake	Lake	Clodsire	94-96	13%
+57	Casseroya Lake	Lake	Azumarill	94-96	13%
+57	Casseroya Lake	Lake	Bergmite	94-96	13%
+57	Casseroya Lake	Lake	Dratini	94-96	13%
+57	Casseroya Lake	Lake	Scyther	94-96	12%
+57	Casseroya Lake	Lake	Sliggoo	94-96	12%
+57	Casseroya Lake	Lake	Tatsugiri	94-96	12%
+57	Casseroya Lake	Lake	Wo Chien	94-96	12%
+58	Casseroya Lake	Snow	Houndstone	96-98	15%
+58	Casseroya Lake	Snow	Glalie	96-98	15%
+58	Casseroya Lake	Snow	Bronzong	96-98	14%
+58	Casseroya Lake	Snow	Cubchoo	96-98	14%
+58	Casseroya Lake	Snow	Beartic	96-98	14%
+58	Casseroya Lake	Snow	Cetoddle	96-98	14%
+58	Casseroya Lake	Snow	Froslass	96-98	14%
+59	Paldea Pokemon League	Main	None	98-100	0%
+60	South Province (Area Four)	Grass	Deerling	15-25	13%
+60	South Province (Area Four)	Grass	Maschiff	15-25	13%
+60	South Province (Area Four)	Grass	Starly	15-25	13%
+60	South Province (Area Four)	Grass	Staravia	15-25	13%
+60	South Province (Area Four)	Grass	Toxel	15-25	12%
+60	South Province (Area Four)	Grass	Fletchinder	15-25	12%
+60	South Province (Area Four)	Grass	Pawmi	15-25	12%
+60	South Province (Area Four)	Grass	Glimmora	15-25	12%
+61	South Province (Area Four)	Lake	Basculin	15-25	13%
+61	South Province (Area Four)	Lake	Misdreavus	15-25	13%
+61	South Province (Area Four)	Lake	Barboach	15-25	13%
+61	South Province (Area Four)	Lake	Goomy	15-25	13%
+61	South Province (Area Four)	Lake	Psyduck	15-25	12%
+61	South Province (Area Four)	Lake	Phanpy	15-25	12%
+61	South Province (Area Four)	Lake	Hatenna	15-25	12%
+61	South Province (Area Four)	Lake	Orthworm	15-25	12%
+62	South Province (Area Four)	Mountain	Flittle	15-25	13%
+62	South Province (Area Four)	Mountain	Swablu	15-25	13%
+62	South Province (Area Four)	Mountain	Mudbray	15-25	13%
+62	South Province (Area Four)	Mountain	Rockruff	15-25	13%
+62	South Province (Area Four)	Mountain	Toxel	15-25	12%
+62	South Province (Area Four)	Mountain	Skiddo	15-25	12%
+62	South Province (Area Four)	Mountain	Meditite	15-25	12%
+62	South Province (Area Four)	Mountain	Sandshrew	15-25	12%
+63	South Province (Area Four)	Ocean	Wattrel	15-25	13%
+63	South Province (Area Four)	Ocean	Shellder	15-25	13%
+63	South Province (Area Four)	Ocean	Magikarp	15-25	13%
+63	South Province (Area Four)	Ocean	Skrelp	15-25	13%
+63	South Province (Area Four)	Ocean	Clauncher	15-25	12%
+63	South Province (Area Four)	Ocean	Arrokuda	15-25	12%
+63	South Province (Area Four)	Ocean	Tynamo	15-25	12%
+63	South Province (Area Four)	Ocean	Squirtle	15-25	12%
+64	South Province (Area Four)	River	Tadbulb	15-25	12%
+64	South Province (Area Four)	River	Tynamo	15-25	11%
+64	South Province (Area Four)	River	Magikarp	15-25	11%
+64	South Province (Area Four)	River	Buizel	15-25	11%
+64	South Province (Area Four)	River	Chewtle	15-25	11%
+64	South Province (Area Four)	River	Marill	15-25	11%
+64	South Province (Area Four)	River	Dreepy	15-25	11%
+64	South Province (Area Four)	River	Zangoose	15-25	11%
+64	South Province (Area Four)	River	Haxorus	15-25	11%
+65	East Province (Area Three)	Mine	Bramblin	25-35	15%
+65	East Province (Area Three)	Mine	Dugtrio	25-35	15%
+65	East Province (Area Three)	Mine	Varoom	25-35	14%
+65	East Province (Area Three)	Mine	Growlithe	25-35	14%
+65	East Province (Area Three)	Mine	Rolycoly	25-35	14%
+65	East Province (Area Three)	Mine	Voltorb	25-35	14%
+65	East Province (Area Three)	Mine	Carkol	25-35	14%
+66	East Province (Area Three)	Near Town	Voltorb	25-35	17%
+66	East Province (Area Three)	Near Town	Dachsbun	25-35	17%
+66	East Province (Area Three)	Near Town	Varoom	25-35	17%
+66	East Province (Area Three)	Near Town	Sinistea	25-35	17%
+66	East Province (Area Three)	Near Town	Gothita	25-35	16%
+66	East Province (Area Three)	Near Town	Electrode	25-35	16%
+67	East Province (Area Three)	Ocean	Qwilfish	25-35	15%
+67	East Province (Area Three)	Ocean	Finizen	25-35	15%
+67	East Province (Area Three)	Ocean	Floatzel	25-35	14%
+67	East Province (Area Three)	Ocean	Kilowattrel	25-35	14%
+67	East Province (Area Three)	Ocean	Luvdisc	25-35	14%
+67	East Province (Area Three)	Ocean	Dragalge	25-35	14%
+67	East Province (Area Three)	Ocean	Clawitzer	25-35	14%
+68	East Province (Area Three)	Rocky	Growlithe	25-35	13%
+68	East Province (Area Three)	Rocky	Gogoat	25-35	13%
+68	East Province (Area Three)	Rocky	Copperajah	25-35	13%
+68	East Province (Area Three)	Rocky	Hariyama	25-35	13%
+68	East Province (Area Three)	Rocky	Honchkrow	25-35	12%
+68	East Province (Area Three)	Rocky	Pawniard	25-35	12%
+68	East Province (Area Three)	Rocky	Revavroom	25-35	12%
+68	East Province (Area Three)	Rocky	Hydreigon	25-35	12%
+69	East Paldean Sea	Beach	Wartortle	25-35	25%
+69	East Paldean Sea	Beach	Poliwhirl	25-35	25%
+69	East Paldean Sea	Beach	Blastoise	25-35	25%
+69	East Paldean Sea	Beach	Toxapex	25-35	25%
+70	West Province (Area One)	Grass	Nymble	35-45	15%
+70	West Province (Area One)	Grass	Pawmi	35-45	15%
+70	West Province (Area One)	Grass	Pawmo	35-45	14%
+70	West Province (Area One)	Grass	Mankey	35-45	14%
+70	West Province (Area One)	Grass	Happiny	35-45	14%
+70	West Province (Area One)	Grass	Toedscool	35-45	14%
+70	West Province (Area One)	Grass	Scream Tail	35-45	14%
+71	West Province (Area One)	Mountain	Nymble	35-45	15%
+71	West Province (Area One)	Mountain	Rufflet	35-45	15%
+71	West Province (Area One)	Mountain	Mankey	35-45	14%
+71	West Province (Area One)	Mountain	Phanpy	35-45	14%
+71	West Province (Area One)	Mountain	Greavard	35-45	14%
+71	West Province (Area One)	Mountain	Numel	35-45	14%
+71	West Province (Area One)	Mountain	Capsakid	35-45	14%
+72	West Province (Area One)	Ocean	Wingull	35-45	13%
+72	West Province (Area One)	Ocean	Tynamo	35-45	13%
+72	West Province (Area One)	Ocean	Qwilfish	35-45	13%
+72	West Province (Area One)	Ocean	Finizen	35-45	13%
+72	West Province (Area One)	Ocean	Pelipper	35-45	12%
+72	West Province (Area One)	Ocean	Luvdisc	35-45	12%
+72	West Province (Area One)	Ocean	Eelektrik	35-45	12%
+72	West Province (Area One)	Ocean	Iron Thorns	35-45	12%
+73	West Paldean Sea	Ocean	Eelektrik	35-45	15%
+73	West Paldean Sea	Ocean	Dragalge	35-45	15%
+73	West Paldean Sea	Ocean	Clawitzer	35-45	14%
+73	West Paldean Sea	Ocean	Bombirdier	35-45	14%
+73	West Paldean Sea	Ocean	Finneon	35-45	14%
+73	West Paldean Sea	Ocean	Lumineon	35-45	14%
+73	West Paldean Sea	Ocean	Bruxish	35-45	14%
+74	West Paldean Sea	Ocean Abyss	Eelektrik	35-45	50%
+74	West Paldean Sea	Ocean Abyss	Alomomola	35-45	50%
+75	Asado Desert	Desert	Rufflet	45-55	15%
+75	Asado Desert	Desert	Capsakid	45-55	15%
+75	Asado Desert	Desert	Rellor	45-55	14%
+75	Asado Desert	Desert	Cacnea	45-55	14%
+75	Asado Desert	Desert	Sandile	45-55	14%
+75	Asado Desert	Desert	Hippopotas	45-55	14%
+75	Asado Desert	Desert	Bramblin	45-55	14%
+76	Asado Desert	Grass	Phanpy	45-55	15%
+76	Asado Desert	Grass	Toedscool	45-55	15%
+76	Asado Desert	Grass	Donphan	45-55	14%
+76	Asado Desert	Grass	Dunsparce	45-55	14%
+76	Asado Desert	Grass	Chansey	45-55	14%
+76	Asado Desert	Grass	Jumpluff	45-55	14%
+76	Asado Desert	Grass	Espeon	45-55	14%
+77	Asado Desert	Ruins	Bronzor	45-55	13%
+77	Asado Desert	Ruins	Drowzee	45-55	13%
+77	Asado Desert	Ruins	Tinkatink	45-55	13%
+77	Asado Desert	Ruins	Hypno	45-55	13%
+77	Asado Desert	Ruins	Tinkatuff	45-55	12%
+77	Asado Desert	Ruins	Greavard	45-55	12%
+77	Asado Desert	Ruins	Falinks	45-55	12%
+77	Asado Desert	Ruins	Sandslash	45-55	12%
+78	Asado Desert	Ruins Deep	Sandslash	45-55	50%
+78	Asado Desert	Ruins Deep	Skeledirge	45-55	50%
+79	West Province (Area Two)	Desert	Rellor	45-55	25%
+79	West Province (Area Two)	Desert	Silicobra	45-55	25%
+79	West Province (Area Two)	Desert	Larvesta	45-55	25%
+79	West Province (Area Two)	Desert	Rabsca	45-55	25%
+80	North Province (Area One)	Bamboo Forest	Kricketot	55-65	25%
+80	North Province (Area One)	Bamboo Forest	Bulbasaur	55-65	25%
+80	North Province (Area One)	Bamboo Forest	Teddiursa	55-65	25%
+80	North Province (Area One)	Bamboo Forest	Kricketune	55-65	25%
+81	North Province (Area One)	Beach	Squirtle	55-65	25%
+81	North Province (Area One)	Beach	Gastrodon	55-65	25%
+81	North Province (Area One)	Beach	Pincurchin	55-65	25%
+81	North Province (Area One)	Beach	Eiscue	55-65	25%
+82	North Province (Area One)	Cave	Noibat	55-65	15%
+82	North Province (Area One)	Cave	Larvitar	55-65	15%
+82	North Province (Area One)	Cave	Bagon	55-65	14%
+82	North Province (Area One)	Cave	Gible	55-65	14%
+82	North Province (Area One)	Cave	Snorunt	55-65	14%
+82	North Province (Area One)	Cave	Sableye	55-65	14%
+82	North Province (Area One)	Cave	Gabite	55-65	14%
+83	North Province (Area One)	Forest	Primeape	55-65	15%
+83	North Province (Area One)	Forest	Teddiursa	55-65	15%
+83	North Province (Area One)	Forest	Ursaring	55-65	14%
+83	North Province (Area One)	Forest	Komala	55-65	14%
+83	North Province (Area One)	Forest	Raichu	55-65	14%
+83	North Province (Area One)	Forest	Jolteon	55-65	14%
+83	North Province (Area One)	Forest	Leafeon	55-65	14%
+84	North Province (Area One)	Mountain	Cetoddle	55-65	15%
+84	North Province (Area One)	Mountain	Axew	55-65	15%
+84	North Province (Area One)	Mountain	Espathra	55-65	14%
+84	North Province (Area One)	Mountain	Lycanroc	55-65	14%
+84	North Province (Area One)	Mountain	Spoink	55-65	14%
+84	North Province (Area One)	Mountain	Sneasel	55-65	14%
+84	North Province (Area One)	Mountain	Haunter	55-65	14%
+85	North Province (Area Two)	Bamboo Forest	Scyther	65-75	15%
+85	North Province (Area Two)	Bamboo Forest	Kricketune	65-75	15%
+85	North Province (Area Two)	Bamboo Forest	Ursaring	65-75	14%
+85	North Province (Area Two)	Bamboo Forest	Falinks	65-75	14%
+85	North Province (Area Two)	Bamboo Forest	Bisharp	65-75	14%
+85	North Province (Area Two)	Bamboo Forest	Oranguru	65-75	14%
+85	North Province (Area Two)	Bamboo Forest	Passimian	65-75	14%
+86	North Province (Area Two)	Forest	Ursaring	65-75	13%
+86	North Province (Area Two)	Forest	Komala	65-75	13%
+86	North Province (Area Two)	Forest	Oranguru	65-75	13%
+86	North Province (Area Two)	Forest	Passimian	65-75	13%
+86	North Province (Area Two)	Forest	Raichu	65-75	12%
+86	North Province (Area Two)	Forest	Jolteon	65-75	12%
+86	North Province (Area Two)	Forest	Heracross	65-75	12%
+86	North Province (Area Two)	Forest	Charizard	65-75	12%
+87	North Province (Area Two)	Lake	Scyther	65-75	13%
+87	North Province (Area Two)	Lake	Hattrem	65-75	13%
+87	North Province (Area Two)	Lake	Dratini	65-75	13%
+87	North Province (Area Two)	Lake	Altaria	65-75	13%
+87	North Province (Area Two)	Lake	Drakloak	65-75	12%
+87	North Province (Area Two)	Lake	Drednaw	65-75	12%
+87	North Province (Area Two)	Lake	Whiscash	65-75	12%
+87	North Province (Area Two)	Lake	Slowbro	65-75	12%
+88	North Province (Area Two)	Rocky	Numel	65-75	20%
+88	North Province (Area Two)	Rocky	Grumpig	65-75	20%
+88	North Province (Area Two)	Rocky	Bisharp	65-75	20%
+88	North Province (Area Two)	Rocky	Houndoom	65-75	20%
+88	North Province (Area Two)	Rocky	Camerupt	65-75	20%
+89	North Province (Area Three)	Flower Patch	Petilil	75-85	15%
+89	North Province (Area Three)	Flower Patch	Sunflora	75-85	15%
+89	North Province (Area Three)	Flower Patch	Vivillon	75-85	14%
+89	North Province (Area Three)	Flower Patch	Dedenne	75-85	14%
+89	North Province (Area Three)	Flower Patch	Lurantis	75-85	14%
+89	North Province (Area Three)	Flower Patch	Vespiquen	75-85	14%
+89	North Province (Area Three)	Flower Patch	Lilligant	75-85	14%
+90	Tagtree Thicket	Flower Patch	Chansey	75-85	20%
+90	Tagtree Thicket	Flower Patch	Fomantis	75-85	20%
+90	Tagtree Thicket	Flower Patch	Sunflora	75-85	20%
+90	Tagtree Thicket	Flower Patch	Vivillon	75-85	20%
+90	Tagtree Thicket	Flower Patch	Snom	75-85	20%
+91	Tagtree Thicket	Forest	Venonat	75-85	15%
+91	Tagtree Thicket	Forest	Amoonguss	75-85	15%
+91	Tagtree Thicket	Forest	Greedent	75-85	14%
+91	Tagtree Thicket	Forest	Spidops	75-85	14%
+91	Tagtree Thicket	Forest	Venomoth	75-85	14%
+91	Tagtree Thicket	Forest	Grafaiai	75-85	14%
+91	Tagtree Thicket	Forest	Morgrem	75-85	14%
+92	Kitakami Road	Main	None	100-100	0%
+93	Mossfell Confluence	Main	None	100-100	0%
+94	Infernal Pass	Main	None	100-100	0%
+95	Loyal Plaza	Main	Okidogi	100-100	25%
+95	Loyal Plaza	Main	Munkidori	100-100	25%
+95	Loyal Plaza	Main	Fezandipiti	100-100	25%
+95	Loyal Plaza	Main	Pecharunt	100-100	25%
+96	Shrine of Wood	Main	None	100-100	0%
+97	Shrine of Snow	Main	None	100-100	0%
+98	Shrine of Earth	Main	None	100-100	0%
+99	Ruins	Main	Wo-Chien	100-100	25%
+99	Ruins	Main	Chien-Pao	100-100	25%
+99	Ruins	Main	Ting-Lu	100-100	25%
+99	Ruins	Main	Chi-Yu	100-100	25%
+100	Path of Legends	Start	None	120-120	0%
+101	Path of Legends	Middle	None	120-120	0%
+102	Titan's Gathering	Main	None	120-120	0%
+103	Starfall Street	Gate	None	100-100	0%
+104	Starfall Street	Camp	None	100-100	0%
+105	Team Star Crew	Main	None	100-100	0%
+106	The Great Crater of Paldea	Upper	None	120-120	0%
+107	The Great Crater of Paldea	Lower	None	120-120	0%
+108	Zero Gate	Main	Koraidon	120-120	34%
+108	Zero Gate	Main	Miraidon	120-120	33%
+108	Zero Gate	Main	Terapagos	120-120	33%
+
+Challenge Name	Requisite	Rewards
+Challenge 1	Defeat 150 Pokemon in Poco Path - Main	Unlocks Los Platos
+Challenge 2	Defeat 150 Pokemon in Los Platos - Main	Unlocks South Province (Area One) - Beach
+Challenge 3	Defeat 150 Pokemon in South Province (Area One) - Beach	Unlocks South Province (Area One) - Cave
+Challenge 4	Defeat 150 Pokemon in South Province (Area One) - Cave	Unlocks South Province (Area One) - Flower Patch
+Challenge 5	Defeat 150 Pokemon in South Province (Area One) - Flower Patch	Unlocks South Province (Area One) - Forest
+Challenge 6	Defeat 150 Pokemon in South Province (Area One) - Forest	Unlocks South Province (Area One) - Grass
+Challenge 7	Defeat 150 Pokemon in South Province (Area One) - Grass	Unlocks South Province (Area One) - Lake
+Challenge 8	Defeat 150 Pokemon in South Province (Area One) - Lake	Unlocks South Province (Area One) - Near Town
+Challenge 9	Defeat 150 Pokemon in South Province (Area One) - Near Town	Unlocks South Province (Area One) - Ocean
+Challenge 10	Defeat 150 Pokemon in South Province (Area One) - Ocean	Unlocks South Province (Area One) - River
+Challenge 11	Defeat 150 Pokemon in South Province (Area One) - River	Unlocks South Province (Area One) - Ruins
+Challenge 12	Defeat 150 Pokemon in South Province (Area One) - Ruins	Unlocks Mesagoza
+Challenge 13	Defeat 150 Pokemon in Mesagoza - Main	Unlocks Jubilife Village
+Challenge 14	Defeat 150 Pokemon in Jubilife Village - Main	Unlocks South Province (Area Two) - Flower Patch
+Challenge 15	Defeat 150 Pokemon in South Province (Area Two) - Flower Patch	Unlocks South Province (Area Two) - Forest
+Challenge 16	Defeat 150 Pokemon in South Province (Area Two) - Forest	Unlocks South Province (Area Two) - Grass
+Challenge 17	Defeat 150 Pokemon in South Province (Area Two) - Grass	Unlocks South Province (Area Two) - Mountain
+Challenge 18	Defeat 150 Pokemon in South Province (Area Two) - Mountain	Unlocks South Province (Area Two) - Near Town
+Challenge 19	Defeat 150 Pokemon in South Province (Area Two) - Near Town	Unlocks South Province (Area Two) - Olive Grove
+Challenge 20	Defeat 150 Pokemon in South Province (Area Two) - Olive Grove	Unlocks South Province (Area Two) - Rocky
+Challenge 21	Defeat 150 Pokemon in South Province (Area Two) - Rocky	Unlocks Cortondo Gym
+Challenge 22	Defeat Cortondo Gym	Unlocks South Province (Area Three) - Grass
+Challenge 23	Defeat 150 Pokemon in South Province (Area Three) - Grass	Unlocks South Province (Area Three) - Rocky
+Challenge 24	Defeat 150 Pokemon in South Province (Area Three) - Rocky	Unlocks South Province (Area Five) - Beach
+Challenge 25	Defeat 150 Pokemon in South Province (Area Five) - Beach	Unlocks South Province (Area Five) - Grass
+Challenge 26	Defeat 150 Pokemon in South Province (Area Five) - Grass	Unlocks South Province (Area Five) - Lake
+Challenge 27	Defeat 150 Pokemon in South Province (Area Five) - Lake	Unlocks South Province (Area Five) - Mountain
+Challenge 28	Defeat 150 Pokemon in South Province (Area Five) - Mountain	Unlocks South Province (Area Five) - River
+Challenge 29	Defeat 150 Pokemon in South Province (Area Five) - River	Unlocks Artazon Gym
+Challenge 30	Defeat Artazon Gym	Unlocks East Province (Area One) - Beach
+Challenge 31	Defeat 150 Pokemon in East Province (Area One) - Beach	Unlocks East Province (Area One) - Forest
+Challenge 32	Defeat 150 Pokemon in East Province (Area One) - Forest	Unlocks East Province (Area One) - Grass
+Challenge 33	Defeat 150 Pokemon in East Province (Area One) - Grass	Unlocks East Province (Area One) - Mountain
+Challenge 34	Defeat 150 Pokemon in East Province (Area One) - Mountain	Unlocks East Province (Area One) - Near Town
+Challenge 35	Defeat 150 Pokemon in East Province (Area One) - Near Town	Unlocks East Province (Area One) - Ocean
+Challenge 36	Defeat 150 Pokemon in East Province (Area One) - Ocean	Unlocks East Province (Area One) - Rocky
+Challenge 37	Defeat 150 Pokemon in East Province (Area One) - Rocky	Unlocks East Province (Area Two) - Forest
+Challenge 38	Defeat 150 Pokemon in East Province (Area Two) - Forest	Unlocks East Province (Area Two) - Grass
+Challenge 39	Defeat 150 Pokemon in East Province (Area Two) - Grass	Unlocks East Province (Area Two) - Near Town
+Challenge 40	Defeat 150 Pokemon in East Province (Area Two) - Near Town	Unlocks East Province (Area Two) - River
+Challenge 41	Defeat 150 Pokemon in East Province (Area Two) - River	Unlocks East Province (Area Two) - Rocky
+Challenge 42	Defeat 150 Pokemon in East Province (Area Two) - Rocky	Unlocks Levincia Gym
+Challenge 43	Defeat Levincia Gym	Unlocks Cascarrafa Gym
+Challenge 44	Defeat Cascarrafa Gym	Unlocks West Province (Area Two) - Beach
+Challenge 45	Defeat 150 Pokemon in West Province (Area Two) - Beach	Unlocks West Province (Area Two) - Grass
+Challenge 46	Defeat 150 Pokemon in West Province (Area Two) - Grass	Unlocks West Province (Area Two) - Near Town
+Challenge 47	Defeat 150 Pokemon in West Province (Area Two) - Near Town	Unlocks West Province (Area Two) - River
+Challenge 48	Defeat 150 Pokemon in West Province (Area Two) - River	Unlocks West Province (Area Three) - Forest
+Challenge 49	Defeat 150 Pokemon in West Province (Area Three) - Forest	Unlocks West Province (Area Three) - Grass
+Challenge 50	Defeat 150 Pokemon in West Province (Area Three) - Grass	Unlocks West Province (Area Three) - Lake
+Challenge 51	Defeat 150 Pokemon in West Province (Area Three) - Lake	Unlocks Medali Gym
+Challenge 52	Defeat Medali Gym	Unlocks Montenevera Gym
+Challenge 53	Defeat Montenevera Gym	Unlocks Alfornada Gym
+Challenge 54	Defeat Alfornada Gym	Unlocks Glaseado Gym
+Challenge 55	Defeat Glaseado Gym	Unlocks Casseroya Lake - Forest
+Challenge 56	Defeat 150 Pokemon in Casseroya Lake - Forest	Unlocks Casseroya Lake - Lake
+Challenge 57	Defeat 150 Pokemon in Casseroya Lake - Lake	Unlocks Casseroya Lake - Snow
+Challenge 58	Defeat 150 Pokemon in Casseroya Lake - Snow	Unlocks Paldea Pokemon League
+Extra Challenge A 1	Defeat Cortondo Gym	Unlocks South Province (Area Four) - Lake
+Extra Challenge A 2	Defeat 150 Pokemon in South Province (Area Four) - Grass	Unlocks South Province (Area Four) - Mountain
+Extra Challenge A 3	Defeat 150 Pokemon in South Province (Area Four) - Lake	Unlocks South Province (Area Four) - Ocean
+Extra Challenge A 4	Defeat 150 Pokemon in South Province (Area Four) - Mountain	Unlocks South Province (Area Four) - River
+Extra Challenge A 5	Defeat 150 Pokemon in South Province (Area Four) - Ocean	Unlocks Item / Badge / Money
+Extra Challenge B 1	Defeat Artazon Gym	Unlocks East Province (Area Three) - Near Town
+Extra Challenge B 2	Defeat 150 Pokemon in East Province (Area Three) - Mine	Unlocks East Province (Area Three) - Ocean
+Extra Challenge B 3	Defeat 150 Pokemon in East Province (Area Three) - Near Town	Unlocks East Province (Area Three) - Rocky
+Extra Challenge B 4	Defeat 150 Pokemon in East Province (Area Three) - Ocean	Unlocks East Paldean Sea - Beach
+Extra Challenge B 5	Defeat 150 Pokemon in East Province (Area Three) - Rocky	Unlocks Item / Badge / Money
+Extra Challenge C 1	Defeat Levincia Gym	Unlocks West Province (Area One) - Mountain
+Extra Challenge C 2	Defeat 150 Pokemon in West Province (Area One) - Grass	Unlocks West Province (Area One) - Ocean
+Extra Challenge C 3	Defeat 150 Pokemon in West Province (Area One) - Mountain	Unlocks West Paldean Sea - Ocean
+Extra Challenge C 4	Defeat 150 Pokemon in West Province (Area One) - Ocean	Unlocks West Paldean Sea - Ocean Abyss
+Extra Challenge C 5	Defeat 150 Pokemon in West Paldean Sea - Ocean	Unlocks Item / Badge / Money
+Extra Challenge D 1	Defeat Cascarrafa Gym	Unlocks Asado Desert - Grass
+Extra Challenge D 2	Defeat 150 Pokemon in Asado Desert - Desert	Unlocks Asado Desert - Ruins
+Extra Challenge D 3	Defeat 150 Pokemon in Asado Desert - Grass	Unlocks Asado Desert - Ruins Deep
+Extra Challenge D 4	Defeat 150 Pokemon in Asado Desert - Ruins	Unlocks West Province (Area Two) - Desert
+Extra Challenge D 5	Defeat 150 Pokemon in Asado Desert - Ruins Deep	Unlocks Item / Badge / Money
+Extra Challenge E 1	Defeat Medali Gym	Unlocks North Province (Area One) - Beach
+Extra Challenge E 2	Defeat 150 Pokemon in North Province (Area One) - Bamboo Forest	Unlocks North Province (Area One) - Cave
+Extra Challenge E 3	Defeat 150 Pokemon in North Province (Area One) - Beach	Unlocks North Province (Area One) - Forest
+Extra Challenge E 4	Defeat 150 Pokemon in North Province (Area One) - Cave	Unlocks North Province (Area One) - Mountain
+Extra Challenge E 5	Defeat 150 Pokemon in North Province (Area One) - Forest	Unlocks Item / Badge / Money
+Extra Challenge F 1	Defeat Montenevera Gym	Unlocks North Province (Area Two) - Forest
+Extra Challenge F 2	Defeat 150 Pokemon in North Province (Area Two) - Bamboo Forest	Unlocks North Province (Area Two) - Lake
+Extra Challenge F 3	Defeat 150 Pokemon in North Province (Area Two) - Forest	Unlocks North Province (Area Two) - Rocky
+Extra Challenge F 4	Defeat 150 Pokemon in North Province (Area Two) - Lake	Unlocks Item / Badge / Money
+Extra Challenge G 1	Defeat Alfornada Gym	Unlocks Tagtree Thicket - Flower Patch
+Extra Challenge G 2	Defeat 150 Pokemon in North Province (Area Three) - Flower Patch	Unlocks Tagtree Thicket - Forest
+Extra Challenge G 3	Defeat 150 Pokemon in Tagtree Thicket - Flower Patch	Unlocks Item / Badge / Money
+Extra Challenge H 1	Defeat Paldea Pokemon League	Unlocks Mossfell Confluence
+Extra Challenge H 2	Defeat Kitakami Road	Unlocks Infernal Pass
+Extra Challenge H 3	Defeat Mossfell Confluence	Unlocks Loyal Plaza
+Extra Challenge H 4	Defeat Infernal Pass	Unlocks Component for Final Challenge
+Extra Challenge I 1	Defeat Paldea Pokemon League	Unlocks Shrine of Snow
+Extra Challenge I 2	Defeat Shrine of Wood	Unlocks Shrine of Earth
+Extra Challenge I 3	Defeat Shrine of Snow	Unlocks Ruins
+Extra Challenge I 4	Defeat Shrine of Earth	Unlocks Component for Final Challenge
+Extra Challenge J 1	Defeat Paldea Pokemon League	Unlocks Path of Legends
+Extra Challenge J 2	Defeat Path of Legends	Unlocks Titan's Gathering
+Extra Challenge J 3	Defeat Path of Legends	Unlocks Component for Final Challenge
+Extra Challenge K 1	Defeat Paldea Pokemon League	Unlocks Starfall Street
+Extra Challenge K 2	Defeat Starfall Street	Unlocks Team Star Crew
+Extra Challenge K 3	Defeat Starfall Street	Unlocks Component for Final Challenge
+Final Extra Challenge 1	Complete Extra Challenge H 4, I 4, J 3, and K 3	Unlocks The Great Crater of Paldea
+Final Extra Challenge 2	Defeat The Great Crater of Paldea	Unlocks Zero Gate
+Final Extra Challenge 3	Defeat The Great Crater of Paldea	Game Completed
