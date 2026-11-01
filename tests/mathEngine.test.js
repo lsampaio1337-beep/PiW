@@ -284,3 +284,120 @@ describe('calculateStat', () => {
         expect(calculateStat(baseStat, ivStat, level, quality, vitamins)).toBe(5);
     });
 });
+
+describe('generateQuality', () => {
+    const { generateQuality } = require('../src/mathEngine.js');
+
+    beforeEach(() => {
+        jest.spyOn(Math, 'random');
+    });
+
+    afterEach(() => {
+        jest.restoreAllMocks();
+    });
+
+    test('should generate Weak tier correctly', () => {
+        // Roll: 1474 is within Weak (<= 1474)
+        // OriginalQ random: 0
+        Math.random
+            .mockReturnValueOnce((1474 - 1) / 12000) // roll = 1474
+            .mockReturnValueOnce(0); // originalQ = baseQ (0.80)
+
+        const result = generateQuality({}, false);
+        expect(result).toEqual({ name: 'Weak', q: 0.8 });
+    });
+
+    test('should generate Regular tier correctly', () => {
+        // Roll: 6586 is within Regular (<= 6586)
+        // OriginalQ random: 0.5 -> baseQ + 0.5 * (1.19 - 1.00) = 1.095
+        Math.random
+            .mockReturnValueOnce((6586 - 1) / 12000) // roll = 6586
+            .mockReturnValueOnce(0.5);
+
+        const result = generateQuality({}, false);
+        expect(result.name).toBe('Regular');
+        expect(result.q).toBeCloseTo(1.09, 2);
+    });
+
+    test('should generate Uncommon tier correctly', () => {
+        // Roll: 9593 is within Uncommon (<= 9593)
+        // OriginalQ random: 1.0 -> maxQ (1.39)
+        Math.random
+            .mockReturnValueOnce((9593 - 1) / 12000) // roll = 9593
+            .mockReturnValueOnce(1.0);
+
+        const result = generateQuality({}, false);
+        expect(result).toEqual({ name: 'Uncommon', q: 1.39 });
+    });
+
+    test('should generate Rare tier correctly', () => {
+        // Roll: 11097 is within Rare (<= 11097)
+        // OriginalQ random: 0.0 -> baseQ (1.40)
+        Math.random
+            .mockReturnValueOnce((11097 - 1) / 12000) // roll = 11097
+            .mockReturnValueOnce(0.0);
+
+        const result = generateQuality({}, false);
+        expect(result).toEqual({ name: 'Rare', q: 1.4 });
+    });
+
+    test('should generate Epic tier correctly', () => {
+        // Roll: 11999 is within Epic (<= 11999)
+        // OriginalQ random: 1.0 -> maxQ (1.80)
+        Math.random
+            .mockReturnValueOnce((11999 - 1) / 12000) // roll = 11999
+            .mockReturnValueOnce(1.0);
+
+        const result = generateQuality({}, false);
+        expect(result).toEqual({ name: 'Epic', q: 1.8 });
+    });
+
+    test('should generate Shiny tier correctly', () => {
+        // Roll: 12001 is Shiny (> 11999)
+        // OriginalQ random: 0.5 -> 2.00 + 0.5 * 0.51 = 2.255 -> 2.25
+        Math.random
+            .mockReturnValueOnce((12001 - 1) / 12001) // roll = 12001 (requires shiny roll > 0)
+            .mockReturnValueOnce(0.5);
+
+        const result = generateQuality({ rainbowCandies: 1 }, false);
+        expect(result.name).toBe('Shiny');
+        expect(result.q).toBe(2.25);
+    });
+
+    test('should apply qTaskTier bonuses correctly', () => {
+        // qTaskTier = 5 -> bonusValue = 1.00
+        // weakMaxRoll becomes 120
+        // Base roll in Regular: 121
+        // OriginalQ random: 0.5 -> 1.00 + 0.5 * 0.19 = 1.095
+        // NewQ = (1 + 1.00) * (1.095 - 1.00) + 1.00 = 2 * 0.095 + 1.00 = 1.19
+        Math.random
+            .mockReturnValueOnce((121 - 1) / 12000)
+            .mockReturnValueOnce(0.5);
+
+        const result = generateQuality({ qTaskTier: 5 }, false);
+        expect(result.name).toBe('Regular');
+        expect(result.q).toBe(1.19);
+    });
+
+    test('should apply shiny boosters and increase total pool', () => {
+        // Base shiny rolls: 1
+        // rainbowCandies = 2 -> +2
+        // shinySeenTaskTier = 2 -> +2
+        // isDoubleShiny = true -> (1 + 2 + 2) * 2 = 10
+        // finalTaskTier = 1 -> 10 * 12 = 120 total shiny rolls
+        // maxTableRoll = 11999 + 120 = 12119
+        // Roll: 12119 (guaranteed shiny for testing boundary)
+        Math.random
+            .mockReturnValueOnce(0.9999999) // almost 1.0 to get maxTableRoll (12119)
+            .mockReturnValueOnce(0.0); // shiny q = 2.00
+
+        const result = generateQuality({
+            rainbowCandies: 2,
+            shinySeenTaskTier: 2,
+            finalTaskTier: 1
+        }, true);
+
+        expect(result.name).toBe('Shiny');
+        expect(result.q).toBe(2.00);
+    });
+});
