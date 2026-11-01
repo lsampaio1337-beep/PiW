@@ -1785,12 +1785,10 @@ export const hoennUnlocks = [
       "Route 103"
     ],
     "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Poochyena",
-          "count": 2
-        }
-      ]
+      "defeatCountRoute": {
+        "route": "Route 101",
+        "count": 25
+      }
     }
   },
   {
@@ -1802,7 +1800,7 @@ export const hoennUnlocks = [
     "requirements": {
       "catchSpecies": [
         {
-          "species": "Wingull",
+          "species": "Pelipper",
           "count": 1
         }
       ]
@@ -1815,16 +1813,10 @@ export const hoennUnlocks = [
       "Route 104"
     ],
     "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Lotad",
-          "count": 1
-        },
-        {
-          "species": "Seedot",
-          "count": 1
-        }
-      ]
+      "defeatSpecific": {
+        "name": "Surskit",
+        "count": 3
+      }
     }
   },
   {
@@ -1837,7 +1829,7 @@ export const hoennUnlocks = [
       "catchSpecies": [
         {
           "species": "Taillow",
-          "count": 2
+          "count": 1
         }
       ]
     }
@@ -1853,14 +1845,14 @@ export const hoennUnlocks = [
       "count": 1
     },
     "requirements": {
-      "catchSpecies": [
+      "defeatMultipleSpecific": [
         {
-          "species": "Shroomish",
-          "count": 1
+          "name": "Silcoon",
+          "count": 5
         },
         {
-          "species": "Slakoth",
-          "count": 1
+          "name": "Cascoon",
+          "count": 5
         }
       ]
     }
@@ -1874,7 +1866,7 @@ export const hoennUnlocks = [
     "requirements": {
       "catchSpecies": [
         {
-          "species": "Whismur",
+          "species": "Skitty",
           "count": 2
         }
       ]
@@ -1905,13 +1897,12 @@ export const hoennUnlocks = [
       "count": 1
     },
     "requirements": {
-      "catchSpecies": [
+      "catchSpeciesAnyOf": [
         {
-          "species": "Makuhita",
-          "count": 1
-        },
-        {
-          "species": "Aron",
+          "species": [
+            "Nosepass",
+            "Kadabra"
+          ],
           "count": 1
         }
       ]
@@ -1983,15 +1974,15 @@ export const hoennUnlocks = [
     "requirements": {
       "catchSpecies": [
         {
-          "species": "Electrike",
-          "count": 2
-        },
-        {
           "species": "Plusle",
           "count": 1
         },
         {
           "species": "Minun",
+          "count": 1
+        },
+        {
+          "species": "Gulpin",
           "count": 1
         }
       ]
@@ -2006,11 +1997,7 @@ export const hoennUnlocks = [
     "requirements": {
       "catchSpecies": [
         {
-          "species": "Illumise",
-          "count": 1
-        },
-        {
-          "species": "Volbeat",
+          "species": "Kirlia",
           "count": 1
         }
       ]
@@ -2023,16 +2010,10 @@ export const hoennUnlocks = [
       "Lavaridge Gym"
     ],
     "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Trapinch",
-          "count": 1
-        },
-        {
-          "species": "Cacnea",
-          "count": 1
-        }
-      ]
+      "defeatSpecific": {
+        "name": "Flygon",
+        "count": 5
+      }
     }
   },
   {
@@ -2063,11 +2044,7 @@ export const hoennUnlocks = [
       "catchSpecies": [
         {
           "species": "Numel",
-          "count": 2
-        },
-        {
-          "species": "Torkoal",
-          "count": 1
+          "count": 5
         }
       ]
     }
@@ -2094,8 +2071,8 @@ export const hoennUnlocks = [
     "requirements": {
       "catchSpecies": [
         {
-          "species": "Spinda",
-          "count": 5
+          "species": "Skarmory",
+          "count": 1
         }
       ]
     }
@@ -2107,16 +2084,10 @@ export const hoennUnlocks = [
       "Meteor Falls"
     ],
     "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Zangoose",
-          "count": 1
-        },
-        {
-          "species": "Seviper",
-          "count": 1
-        }
-      ]
+      "defeatCountRoute": {
+        "route": "Route 114",
+        "count": 100
+      }
     }
   },
   {
@@ -2132,16 +2103,8 @@ export const hoennUnlocks = [
     "requirements": {
       "catchSpecies": [
         {
-          "species": "Bagon",
-          "count": 1
-        },
-        {
-          "species": "Solrock",
-          "count": 1
-        },
-        {
-          "species": "Lunatone",
-          "count": 1
+          "species": "Golbat",
+          "count": 2
         }
       ]
     }
@@ -2153,12 +2116,10 @@ export const hoennUnlocks = [
       "Petalburg Gym"
     ],
     "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Swablu",
-          "count": 2
-        }
-      ]
+      "defeatSpecific": {
+        "name": "Jigglypuff",
+        "count": 10
+      }
     }
   },
   {
@@ -2220,12 +2181,10 @@ export const hoennUnlocks = [
       "Route 120"
     ],
     "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Tropius",
-          "count": 2
-        }
-      ]
+      "defeatSpecific": {
+        "name": "Swellow",
+        "count": 10
+      }
     }
   },
   {
@@ -2252,16 +2211,10 @@ export const hoennUnlocks = [
       "Safari Zone North"
     ],
     "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Shuppet",
-          "count": 2
-        },
-        {
-          "species": "Duskull",
-          "count": 2
-        }
-      ]
+      "defeatCountRoute": {
+        "route": "Route 121",
+        "count": 150
+      }
     }
   },
   {
@@ -2271,10 +2224,20 @@ export const hoennUnlocks = [
       "Mount Pyre"
     ],
     "requirements": {
-      "defeatCountRoute": {
-        "route": "Safari Zone East",
-        "count": 150
-      }
+      "catchSpecies": [
+        {
+          "species": "Pikachu",
+          "count": 1
+        },
+        {
+          "species": "Heracross",
+          "count": 1
+        },
+        {
+          "species": "Stantler",
+          "count": 1
+        }
+      ]
     }
   },
   {
@@ -2354,8 +2317,8 @@ export const hoennUnlocks = [
           "count": 1
         },
         {
-          "species": "Wailmer",
-          "count": 2
+          "species": "Tentacruel",
+          "count": 1
         }
       ]
     }
@@ -2367,16 +2330,10 @@ export const hoennUnlocks = [
       "Sootopolis Gym"
     ],
     "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Relicanth",
-          "count": 1
-        },
-        {
-          "species": "Clamperl",
-          "count": 2
-        }
-      ]
+      "defeatCountRoute": {
+        "route": "Underwater Fishing Spot",
+        "count": 150
+      }
     }
   },
   {
@@ -2404,14 +2361,14 @@ export const hoennUnlocks = [
       "count": 1
     },
     "requirements": {
-      "catchSpecies": [
+      "defeatMultipleSpecific": [
         {
-          "species": "Spheal",
-          "count": 2
+          "name": "Sealeo",
+          "count": 5
         },
         {
-          "species": "Snorunt",
-          "count": 1
+          "name": "Snorunt",
+          "count": 5
         }
       ]
     }
@@ -2492,14 +2449,10 @@ export const hoennUnlocks = [
       "count": 10
     },
     "requirements": {
-      "catchSpeciesAnyOfByQuality": [
+      "catchSpecies": [
         {
-          "species": [
-            "Slakoth",
-            "Abra"
-          ],
-          "quality": "Common",
-          "count": 8
+          "species": "Porygon",
+          "count": 3
         }
       ]
     }
@@ -2573,6 +2526,14 @@ export const hoennUnlocks = [
         {
           "species": "Azurill",
           "count": 1
+        },
+        {
+          "species": "Igglybuff",
+          "count": 1
+        },
+        {
+          "species": "Pichu",
+          "count": 1
         }
       ]
     }
@@ -2590,7 +2551,7 @@ export const hoennUnlocks = [
     "requirements": {
       "defeatCountRoute": {
         "route": "Battle Frontier Facility",
-        "count": 50
+        "count": 100
       }
     }
   },
@@ -2632,10 +2593,16 @@ export const hoennUnlocks = [
       "count": 1
     },
     "requirements": {
-      "defeatCountRoute": {
-        "route": "Trick House",
-        "count": 20
-      }
+      "catchSpecies": [
+        {
+          "species": "Voltorb",
+          "count": 2
+        },
+        {
+          "species": "Electrode",
+          "count": 1
+        }
+      ]
     }
   },
   {
@@ -2674,7 +2641,7 @@ export const hoennUnlocks = [
     "requirements": {
       "catchSpecies": [
         {
-          "species": "Tentacruel",
+          "species": "Gorebyss",
           "count": 1
         }
       ]
@@ -2691,15 +2658,9 @@ export const hoennUnlocks = [
       "count": 1
     },
     "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Weezing",
-          "count": 1
-        }
-      ],
       "defeatCountRoute": {
         "route": "Enemy Hideout",
-        "count": 25
+        "count": 100
       }
     }
   },
@@ -2714,10 +2675,16 @@ export const hoennUnlocks = [
       "count": 2
     },
     "requirements": {
-      "defeatSpecific": {
-        "name": "Relicanth",
-        "count": 1
-      }
+      "catchSpecies": [
+        {
+          "species": "Kingdra",
+          "count": 1
+        },
+        {
+          "species": "Wailord",
+          "count": 1
+        }
+      ]
     }
   },
   {
