@@ -62,6 +62,13 @@ const balance = {
         { "tier": 2, "name": "Loot2", "displayName": "Ball Loot", "increment": 0, "cost": 50, "description": "Can loot Balls" },
         { "tier": 3, "name": "Loot3", "displayName": "Evolution Loot", "increment": 0, "cost": 500, "description": "Can loot Stones" },
         { "tier": 4, "name": "Loot4", "displayName": "Vitamin Loot", "increment": 0, "cost": 2500, "description": "Can loot Vitamins" }
+      ],
+      "daycare": [
+        { "tier": 1, "name": "Daycare1", "displayName": "QBost", "increment": 0, "cost": 2, "description": "description" },
+        { "tier": 2, "name": "Daycare2", "displayName": "train %xp", "increment": 0, "cost": 2, "description": "description" },
+        { "tier": 3, "name": "Daycare3", "displayName": "1.81 1.99", "increment": 0, "cost": 2, "description": "description" },
+        { "tier": 4, "name": "Daycare4", "displayName": "20% extra IV", "increment": 0, "cost": 2, "description": "description" },
+        { "tier": 5, "name": "Daycare5", "displayName": "shiny breed", "increment": 0, "cost": 2, "description": "description" }
       ]
     },
     "items": {

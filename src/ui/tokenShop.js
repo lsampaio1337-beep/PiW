@@ -106,6 +106,16 @@ function getTokenShopItemsHtml() {
             isUnlock: true,
             unlockKey: 'smartwatch',
             action: 'window.buyTokenUnlock("smartwatch")'
+        },
+        {
+            id: 'unlock_daycare',
+            name: 'Unlock Daycare Upgrade',
+            img: 'Assets/Items/Upgrades/Daycare1.png',
+            desc: 'Allow you to buy upgrades for the Daycare.',
+            price: 1,
+            isUnlock: true,
+            unlockKey: 'daycare',
+            action: 'window.buyTokenUnlock("daycare")'
         }
     ];
 

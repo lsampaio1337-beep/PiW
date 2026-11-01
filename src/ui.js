@@ -2542,7 +2542,8 @@ async function init() {
                     { key: 'glassTier', configKey: 'glass' },
                     { key: 'smartwatchTier', configKey: 'smartwatch' },
                     { key: 'speedTier', configKey: 'speed' },
-                    { key: 'lootTier', configKey: 'loot' }
+                    { key: 'lootTier', configKey: 'loot' },
+                    { key: 'daycareTier', configKey: 'daycare' }
                 ];
 
                 upgradeTypes.forEach(type => {
