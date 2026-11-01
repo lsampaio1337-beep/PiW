@@ -984,10 +984,8 @@ export function showDamage(target, amount, isCrit, moveName = '', moveType = 'No
     }, 3000);
 }
 
-export function playCombatAnimations(targetSide, moveType, duration) {
-    const battleSystem = globals.battleSystem;
-    const isGym = battleSystem && battleSystem.gymState && battleSystem.gymState.isActive;
 
+function getCombatActors(targetSide, isGym) {
     let attackerId = targetSide === 'player' ? (isGym ? 'gym-enemy-sprite' : 'enemy-side') : (isGym ? 'gym-player-sprite' : 'player-side');
     if (!document.getElementById(attackerId)) attackerId = targetSide === 'player' ? 'enemy-side' : 'player-side';
     let defenderId = targetSide === 'player' ? (isGym ? 'gym-player-sprite' : 'player-side') : (isGym ? 'gym-enemy-sprite' : 'enemy-side');
@@ -996,27 +994,10 @@ export function playCombatAnimations(targetSide, moveType, duration) {
     const atkImg = document.getElementById(attackerId);
     const defImg = document.getElementById(defenderId);
 
-    if (!atkImg || !defImg) return;
+    return { attackerId, defenderId, atkImg, defImg };
+}
 
-    const color = TYPE_COLORS[moveType] || '#ffffff';
-
-    // We want to combine transforms without them overwriting each other.
-    // Initialize base transform (e.g. scaleX(-1) for player) if not set
-    if (!atkImg.dataset.baseTransform) {
-        atkImg.dataset.baseTransform = atkImg.style.transform || (attackerId.includes('player') ? 'scaleX(-1)' : '');
-    }
-    if (!defImg.dataset.baseTransform) {
-        defImg.dataset.baseTransform = defImg.style.transform || (defenderId.includes('player') ? 'scaleX(-1)' : '');
-    }
-
-    // Function to apply combined transforms safely
-    const updateTransform = (img) => {
-        const base = img.dataset.baseTransform || '';
-        const atk = img.dataset.atkTransform || '';
-        const def = img.dataset.defTransform || '';
-        img.style.transform = `${base} ${atk} ${def}`.trim();
-    };
-
+function getAttackerTypes(attackerId, isGym, battleSystem, state) {
     let atkTypes = [];
     if (attackerId.includes('player')) {
         atkTypes = state.party[0]?.types || [];
@@ -1034,8 +1015,19 @@ export function playCombatAnimations(targetSide, moveType, duration) {
              atkTypes = battleSystem.activeEncounter.types || [];
         }
     }
+    return atkTypes;
+}
 
-    const isPlayerAtk = attackerId.includes('player');
+function initBaseTransforms(atkImg, defImg, attackerId, defenderId) {
+    if (!atkImg.dataset.baseTransform) {
+        atkImg.dataset.baseTransform = atkImg.style.transform || (attackerId.includes('player') ? 'scaleX(-1)' : '');
+    }
+    if (!defImg.dataset.baseTransform) {
+        defImg.dataset.baseTransform = defImg.style.transform || (defenderId.includes('player') ? 'scaleX(-1)' : '');
+    }
+}
+
+function animateAttacker(atkImg, atkTypes, isPlayerAtk, duration) {
     const xDir = isPlayerAtk ? 15 : -15;
     const bt = atkImg.dataset.baseTransform || '';
 
@@ -1057,9 +1049,9 @@ export function playCombatAnimations(targetSide, moveType, duration) {
         duration: duration * 0.4,
         easing: 'ease-in-out'
     });
+}
 
-    // Determine the exact clean sprites for precise projectile start and end coordinates
-    // We look for the pokemon image inside the wrapper, specifically skipping the FrameBorder img
+function calculateProjectileMetrics(atkImg, defImg) {
     const atkImgEl = atkImg ? atkImg.querySelector('img:not([src*="FrameBorder"])') : null;
     const defImgEl = defImg ? defImg.querySelector('img:not([src*="FrameBorder"])') : null;
 
@@ -1079,7 +1071,6 @@ export function playCombatAnimations(targetSide, moveType, duration) {
         scaleY = containerRect.height / container.offsetHeight;
     }
 
-    // Instead of vh, use the scale of the images to determine projectile size roughly
     const projHeight = (atkRect.height / scaleY) * 0.07;
     const projWidth = projHeight * 2;
 
@@ -1092,6 +1083,12 @@ export function playCombatAnimations(targetSide, moveType, duration) {
     const defCenterY = defRect.top + defRect.height / 2;
     const endX = container === document.body ? defCenterX : (defCenterX - containerRect.left) / scaleX;
     const endY = container === document.body ? defCenterY : (defCenterY - containerRect.top) / scaleY;
+
+    return { container, projHeight, projWidth, startX, startY, endX, endY, defRect, scaleY };
+}
+
+function createAndAnimateProjectile(color, duration, metrics, defImg) {
+    const { container, projHeight, projWidth, startX, startY, endX, endY, defRect, scaleY } = metrics;
 
     // Create projectile
     const proj = document.createElement('div');
@@ -1118,6 +1115,13 @@ export function playCombatAnimations(targetSide, moveType, duration) {
 
     proj.style.left = endX + 'px';
     proj.style.top = endY + 'px';
+
+    const updateTransform = (img) => {
+        const base = img.dataset.baseTransform || '';
+        const atk = img.dataset.atkTransform || '';
+        const def = img.dataset.defTransform || '';
+        img.style.transform = `${base} ${atk} ${def}`.trim();
+    };
 
     setTimeout(() => {
         if (proj.parentElement) proj.parentElement.removeChild(proj);
@@ -1180,6 +1184,27 @@ export function playCombatAnimations(targetSide, moveType, duration) {
         }, Math.min(500, duration * 0.3));
 
     }, duration);
+}
+
+export function playCombatAnimations(targetSide, moveType, duration) {
+    const battleSystem = globals.battleSystem;
+    const isGym = battleSystem && battleSystem.gymState && battleSystem.gymState.isActive;
+
+    const { attackerId, defenderId, atkImg, defImg } = getCombatActors(targetSide, isGym);
+    if (!atkImg || !defImg) return;
+
+    const color = TYPE_COLORS[moveType] || '#ffffff';
+
+    // We want to combine transforms without them overwriting each other.
+    initBaseTransforms(atkImg, defImg, attackerId, defenderId);
+
+    const atkTypes = getAttackerTypes(attackerId, isGym, battleSystem, state);
+    const isPlayerAtk = attackerId.includes('player');
+
+    animateAttacker(atkImg, atkTypes, isPlayerAtk, duration);
+
+    const metrics = calculateProjectileMetrics(atkImg, defImg);
+    createAndAnimateProjectile(color, duration, metrics, defImg);
 }
 
 let levelUpQueue = [];
