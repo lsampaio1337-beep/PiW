@@ -1,4 +1,4 @@
-import { calculateDamage, calculateReqXP, calculateStat } from '../src/mathEngine.js';
+import { calculateDamage, calculateReqXP, calculateStat, calculateTotalXP } from '../src/mathEngine.js';
 
 describe('calculateReqXP', () => {
     test('should calculate required XP correctly for level 1', () => {
@@ -19,6 +19,33 @@ describe('calculateReqXP', () => {
 
     test('should calculate required XP correctly for level 100', () => {
         expect(calculateReqXP(100)).toBe(409038);
+    });
+});
+
+describe('calculateTotalXP', () => {
+    test('should return 0 for level 1', () => {
+        expect(calculateTotalXP(1)).toBe(0);
+    });
+
+    test('should return 0 for level 0', () => {
+        expect(calculateTotalXP(0)).toBe(0);
+    });
+
+    test('should return 0 for negative levels', () => {
+        expect(calculateTotalXP(-5)).toBe(0);
+    });
+
+    test('should return correct total XP for level 2', () => {
+        expect(calculateTotalXP(2)).toBe(52);
+    });
+
+    test('should return correct total XP for level 3', () => {
+        expect(calculateTotalXP(3)).toBe(142);
+    });
+
+    test('should return correct total XP for level 100', () => {
+        // sum of required XP for levels 1 to 99
+        expect(calculateTotalXP(100)).toBe(11187635);
     });
 });
 
