@@ -67,25 +67,12 @@ class DayCare {
         const randomVal = typeof crypto !== 'undefined' ? (crypto.getRandomValues(new Uint32Array(1))[0] / (0xFFFFFFFF + 1)) : Math.random();
         const randIncrease = Math.floor(randomVal * 11) / 100;
 
-        // Fix floating point precision
-        p.quality = Number((p.quality + randIncrease).toFixed(2));
-
+        p.quality = p.quality + randIncrease;
         p.quality = Math.min(1.99, p.quality);
 
-        // Map Quality Tier if Q >= 1.5, 1.25, etc.
-        if (p.quality >= 1.81) {
-            p.qualityName = "Legendary";
-        } else if (p.quality >= 1.60) {
-            p.qualityName = "Epic";
-        } else if (p.quality >= 1.40) {
-            p.qualityName = "Rare";
-        } else if (p.quality >= 1.20) {
-            p.qualityName = "Uncommon";
-        } else if (p.quality >= 1.00) {
-            p.qualityName = "Regular";
-        } else {
-            p.qualityName = "Weak";
-        }
+        // Fix floating point precision
+        p.quality = Number(p.quality.toFixed(2));
+        p.qualityName = this.getQualityName(p.quality);
 
         // Let UI know it's finished
         this.slot1.isFinished = true;
@@ -127,6 +114,15 @@ class DayCare {
         } else {
             this.slot2.battles = 0;
         }
+    }
+
+    getQualityName(quality) {
+        if (quality >= 1.81) return "Legendary";
+        if (quality >= 1.60) return "Epic";
+        if (quality >= 1.40) return "Rare";
+        if (quality >= 1.20) return "Uncommon";
+        if (quality >= 1.00) return "Regular";
+        return "Weak";
     }
 }
 
