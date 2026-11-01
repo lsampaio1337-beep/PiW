@@ -20,7 +20,7 @@
 * **Window Manager:** The custom `WindowManager` (`src/windowManager.js`) executes inline HTML event handlers by parsing them with strict regular expressions. Handlers with strings containing special characters not in the regex allowed character class will silently fail.
 * **Combat Systems:** Avoid deep cloning (`JSON.parse(JSON.stringify())` or `structuredClone()`) for complex objects like `Encounter`. Use destructuring and spread syntax for specific nested properties (`types`, `ivs`, `evs`, `currentStats`, `moves`) to maximize speed. The `moves` configuration objects only contain primitive types, so shallow copy is safe.
 * **Map Optimization:** When optimizing array `.find()` lookups with `Map` creations, apply them only for repeated lookups inside loops. A `Map` for a single isolated lookup is a de-optimization.
-* **Electron Window:** To fix transparency issues in Electron without disabling hardware acceleration entirely, conditionally apply `app.disableHardwareAcceleration()` and `app.commandLine.appendSwitch('enable-transparent-visuals')` in `main.js` only for Linux.
+* **Electron Window:** To fix transparency issues in Electron without disabling hardware acceleration entirely, append the `enable-transparent-visuals` command-line switch and delay the initial `createWindow` call using `setTimeout` (e.g., 400ms) in `main.js` only for Linux.
 * **Standalone Scripts:** Standalone Node.js scripts must use the `.mjs` extension to support ES module imports.
 
 ## Game Logic & Configuration Data
