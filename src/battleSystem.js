@@ -46,6 +46,7 @@ class BattleSystem {
         this.gymState = {
             isActive: false,
             gym: null,
+            gymIndex: 0,
             currentTrainerIndex: 0
         };
     }
@@ -628,8 +629,12 @@ class BattleSystem {
         const gym = this.getGym(gymName);
         if (!gym) return;
 
+        let gymIndex = this.state.config.gyms.findIndex(g => g.name === gymName);
+        if (gymIndex === -1) gymIndex = 0; // Fallback
+
         this.stop();
         this.gymState = {
+            gymIndex: gymIndex,
             isActive: true,
             gym: gym,
             currentTrainerIndex: 0,
@@ -711,7 +716,7 @@ class BattleSystem {
                 vGym.style.position = 'relative'; // Ensure relative positioning
                 vGym.insertBefore(dynamicBg, vGym.firstChild);
             } else {
-                const gymIndex = this.state.config.gyms.findIndex(g => g.name === gym.name);
+                const gymIndex = this.gymState.gymIndex;
                 const gymBGs = [
                     'BG-Gym-1-Pewter-Rock.png',
                     'BG-Gym-2-Cerulean-Water.png',
@@ -797,6 +802,7 @@ class BattleSystem {
     stopGymBattle() {
         this.gymState.isActive = false;
         this.gymState.gym = null;
+        this.gymState.gymIndex = 0;
         this.stop();
 
         // Return to normal map or idle
@@ -908,8 +914,7 @@ class BattleSystem {
         // Gym leaders and trainers have fixed quality (e.g. Regular or Uncommon)
         const isLeader = this.gymState.currentTrainerIndex === gym.trainers.length - 1;
 
-        let gymIndex = this.state.config.gyms.findIndex(g => g.name === gym.name);
-        if (gymIndex === -1) gymIndex = 0; // Fallback
+        let gymIndex = this.gymState.gymIndex;
 
         // Map Gym Index to QValue and SumIV
         // Gym 1 (Index 0): Q=1.2, SumIV=270 => IV=45
@@ -1910,7 +1915,7 @@ class BattleSystem {
                     window.trackDailyChallenge('defeat_gym_leader');
                 }
 
-                const gymIndex = this.state.config.gyms.findIndex(g => g.name === gym.name);
+                const gymIndex = this.gymState.gymIndex;
                 if (gymIndex !== -1 && this.state.trainer.badges === (this.state.currentRegionName === 'Johto' ? (gymIndex > 8 ? gymIndex - 9 : gymIndex + 8) : gymIndex)) {
                     if (!this.state.stats.pendingGifts) this.state.stats.pendingGifts = [];
                     this.state.stats.pendingGifts.push({ type: 'badge', gymName: gym.name, gymIndex: gymIndex });
@@ -2108,6 +2113,7 @@ class BattleSystem {
             if (this.gymState) {
                 this.gymState.isActive = false;
                 this.gymState.gym = null;
+                this.gymState.gymIndex = 0;
                 this.gymState.inCombat = false;
             }
             if (typeof window.switchView === 'function') {
@@ -2130,8 +2136,9 @@ class BattleSystem {
         if (this.gymState && this.gymState.isActive) {
             // Reset gym state entirely if wiped out
             this.gymState.isActive = false;
-            this.gymState.gym = null;
-            this.gymState.inCombat = false;
+                this.gymState.gym = null;
+                this.gymState.gymIndex = 0;
+                this.gymState.inCombat = false;
             if (typeof window.switchView === 'function') {
                 window.switchView("GYM");
             }
