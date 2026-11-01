@@ -600,10 +600,7 @@ export function openPokeMarketSell() {
     }, 10);
 }
 
-export function renderPokeMarketSellTab(category) {
-    const content = document.getElementById('market-sell-content');
-    if (!content) return;
-
+function setupMarketSellTabUI(category) {
     if (category !== 'pokemon') {
         const filters = document.getElementById('market-pokemon-filters');
         if (filters) {
@@ -634,98 +631,22 @@ export function renderPokeMarketSellTab(category) {
         }
     });
 
-    let items = [];
-    let cols = 6;
-
     const pokemonControls = document.getElementById('market-pokemon-sell-controls');
     if (pokemonControls) {
         pokemonControls.style.display = category === 'pokemon' ? 'flex' : 'none';
     }
+}
 
-    if (category === 'pokemon') {
-        let html = `<div style="--m-width: min(76vw, 750px); display: flex; flex-wrap: wrap; gap: calc(var(--m-width) * 0.018); justify-content: center; width: 100%;">`;
-
-        const filterName = (document.getElementById('market-filter-name')?.value || '').toLowerCase();
-        const filterLevelMin = parseFloat(document.getElementById('market-filter-level-min')?.value);
-        const filterLevelMax = parseFloat(document.getElementById('market-filter-level-max')?.value);
-        const filterQMin = parseFloat(document.getElementById('market-filter-q-min')?.value);
-        const filterQMax = parseFloat(document.getElementById('market-filter-q-max')?.value);
-        const filterSumIVMin = parseFloat(document.getElementById('market-filter-sumiv-min')?.value);
-        const filterSumIVMax = parseFloat(document.getElementById('market-filter-sumiv-max')?.value);
-
-        state.storage.forEach(p => {
-        if (!p.uuid) p.uuid = crypto.randomUUID();
-            let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
-
-            if (p.bst === undefined) {
-                if (typeof p.id === 'number') {
-                    const map = getPokemonDataMap();
-                    if (map) {
-                        const pd = map.get(p.id);
-                        if (pd) p.bst = pd.hp + pd.atk + pd.def + pd.spa + pd.spd + pd.spe;
-                    }
-                }
-            }
-            let pEv = calculatePP(p.bst || 300, p.level, p.quality, sumIV); // Fallback to 300 if bst still missing
-
-            let pName = p.name || p.id;
-            if (typeof p.id === 'number') {
-                const map = getPokemonDataMap();
-                if (map) {
-                    const pd = map.get(p.id);
-                    if (pd) pName = p.name || pd.name;
-                }
-            }
-            if (filterName && !(pName && pName.toString().toLowerCase().includes(filterName)) && !(p.id && p.id.toString().toLowerCase().includes(filterName))) return;
-            if (!isNaN(filterLevelMin) && p.level < filterLevelMin) return;
-            if (!isNaN(filterLevelMax) && p.level > filterLevelMax) return;
-            if (!isNaN(filterQMin) && p.quality < filterQMin) return;
-            if (!isNaN(filterQMax) && p.quality > filterQMax) return;
-            if (!isNaN(filterSumIVMin) && sumIV < filterSumIVMin) return;
-            if (!isNaN(filterSumIVMax) && sumIV > filterSumIVMax) return;
-
-            let imgSrc = window.getSpriteUrl(p.id, p.qualityName === 'Shiny');
-
-            let glowClass = "glow-weak";
-            if (p.qualityName === "Shiny") glowClass = "glow-shiny";
-            else if (p.qualityName === "Legendary") glowClass = "glow-legendary";
-            else if (p.qualityName === "Epic") glowClass = "glow-epic";
-            else if (p.qualityName === "Rare") glowClass = "glow-rare";
-            else if (p.qualityName === "Uncommon") glowClass = "glow-uncommon";
-            else if (p.qualityName === "Regular") glowClass = "glow-regular";
-
-            let isSelected = window.marketSelectedPokemonForSale && window.marketSelectedPokemonForSale.has(p.uuid);
-            let selectionStyle = isSelected ? 'outline: 3px solid #ff0000; outline-offset: -3px; background: rgba(255,0,0,0.2);' : 'background: #2c3e50; border: 2px solid #777;';
-
-            html += `
-                <div onclick="if(window.toggleMarketPokemonSaleSelection) window.toggleMarketPokemonSaleSelection('${p.uuid}')"
-                    style="width: calc(16.666% - calc(var(--m-width) * 0.018 * 5 / 6)); box-sizing: border-box; ${selectionStyle} border-radius: 10px; padding: calc(var(--m-width) * 0.012); text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; position: relative;">
-                    <div style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; margin-bottom: calc(var(--m-width) * 0.006); line-height: 1.1; color: white;">${pName}</div>
-                    <div style="flex: 1; width: 100%; display: flex; align-items: center; justify-content: center; position: relative; height: calc(var(--m-width) * 0.072); margin-bottom: calc(var(--m-width) * 0.006);">
-                        <img src="${imgSrc}" class="${glowClass}" style="max-height: 100%; max-width: 100%; object-fit: contain; z-index: 1;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
-                    </div>
-                    <div style="font-size: calc(var(--m-width) * 0.014); color: #bdc3c7; line-height: 1.1;">Lv. ${p.level}</div>
-                    <div style="font-size: calc(var(--m-width) * 0.014); color: #f1c40f; line-height: 1.1;">Q: ${p.quality.toFixed(2)}</div>
-                    <div style="font-size: calc(var(--m-width) * 0.014); color: #3498db; line-height: 1.1;">∑IV: ${sumIV}</div>
-                    <div style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; color: #2ecc71; margin-top: calc(var(--m-width) * 0.012); line-height: 1.1;">$${formatMarketNumber(pEv)}</div>
-                </div>
-            `;
-        });
-
-        html += `</div>`;
-        safeSetHTML(content, html);
-        return;
-    }
-
+function getMarketSellItems(category) {
     if (category === 'pokeballs') {
-        items = state.config.balance.items.pokeballs.map(b => ({
+        return state.config.balance.items.pokeballs.map(b => ({
             name: b.name,
             buyPrice: b.price,
             img: `./Assets/Items/Balls/${b.name}.png`,
             attrLabel: b.name === 'Masterball' ? `Efficiency: 100%` : `Efficiency: ${b.multiplier}x`
         }));
     } else if (category === 'potions') {
-        items = state.config.balance.items.potions
+        return state.config.balance.items.potions
             .filter(p => p.name !== 'Max Potion')
             .map(p => {
                 let invName = p.name;
@@ -741,7 +662,7 @@ export function renderPokeMarketSellTab(category) {
     } else if (category === 'stones') {
         let stoneKeysSell = Object.keys(state.backpack.stones).filter(k => !VITAMINS.includes(k));
         stoneKeysSell.sort((a, b) => a.localeCompare(b));
-        items = stoneKeysSell.map(stoneName => {
+        return stoneKeysSell.map(stoneName => {
             return {
                 name: stoneName,
                 sellPrice: 50,
@@ -761,7 +682,7 @@ export function renderPokeMarketSellTab(category) {
             }
         };
 
-        items = VITAMINS.map(vitaminName => {
+        return VITAMINS.map(vitaminName => {
             return {
                 name: vitaminName,
                 sellPrice: getVitaminSellPrice(vitaminName),
@@ -769,7 +690,10 @@ export function renderPokeMarketSellTab(category) {
             };
         });
     }
+    return [];
+}
 
+function renderMarketSellItemsList(content, category, items) {
     let html = `<div style="--m-width: min(76vw, 750px); display: flex; flex-wrap: wrap; gap: calc(var(--m-width) * 0.018); justify-content: center; width: 100%;">`;
     items.forEach(item => {
         let escapedDisplayName = escapeHTML(item.displayName || item.name);
@@ -811,6 +735,95 @@ export function renderPokeMarketSellTab(category) {
     html += `</div>`;
 
     safeSetHTML(content, html);
+}
+
+function renderMarketSellPokemonList(content) {
+    let html = `<div style="--m-width: min(76vw, 750px); display: flex; flex-wrap: wrap; gap: calc(var(--m-width) * 0.018); justify-content: center; width: 100%;">`;
+
+    const filterName = (document.getElementById('market-filter-name')?.value || '').toLowerCase();
+    const filterLevelMin = parseFloat(document.getElementById('market-filter-level-min')?.value);
+    const filterLevelMax = parseFloat(document.getElementById('market-filter-level-max')?.value);
+    const filterQMin = parseFloat(document.getElementById('market-filter-q-min')?.value);
+    const filterQMax = parseFloat(document.getElementById('market-filter-q-max')?.value);
+    const filterSumIVMin = parseFloat(document.getElementById('market-filter-sumiv-min')?.value);
+    const filterSumIVMax = parseFloat(document.getElementById('market-filter-sumiv-max')?.value);
+
+    state.storage.forEach(p => {
+    if (!p.uuid) p.uuid = crypto.randomUUID();
+        let sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
+
+        if (p.bst === undefined) {
+            if (typeof p.id === 'number') {
+                const map = getPokemonDataMap();
+                if (map) {
+                    const pd = map.get(p.id);
+                    if (pd) p.bst = pd.hp + pd.atk + pd.def + pd.spa + pd.spd + pd.spe;
+                }
+            }
+        }
+        let pEv = calculatePP(p.bst || 300, p.level, p.quality, sumIV); // Fallback to 300 if bst still missing
+
+        let pName = p.name || p.id;
+        if (typeof p.id === 'number') {
+            const map = getPokemonDataMap();
+            if (map) {
+                const pd = map.get(p.id);
+                if (pd) pName = p.name || pd.name;
+            }
+        }
+        if (filterName && !(pName && pName.toString().toLowerCase().includes(filterName)) && !(p.id && p.id.toString().toLowerCase().includes(filterName))) return;
+        if (!isNaN(filterLevelMin) && p.level < filterLevelMin) return;
+        if (!isNaN(filterLevelMax) && p.level > filterLevelMax) return;
+        if (!isNaN(filterQMin) && p.quality < filterQMin) return;
+        if (!isNaN(filterQMax) && p.quality > filterQMax) return;
+        if (!isNaN(filterSumIVMin) && sumIV < filterSumIVMin) return;
+        if (!isNaN(filterSumIVMax) && sumIV > filterSumIVMax) return;
+
+        let imgSrc = window.getSpriteUrl(p.id, p.qualityName === 'Shiny');
+
+        let glowClass = "glow-weak";
+        if (p.qualityName === "Shiny") glowClass = "glow-shiny";
+        else if (p.qualityName === "Legendary") glowClass = "glow-legendary";
+        else if (p.qualityName === "Epic") glowClass = "glow-epic";
+        else if (p.qualityName === "Rare") glowClass = "glow-rare";
+        else if (p.qualityName === "Uncommon") glowClass = "glow-uncommon";
+        else if (p.qualityName === "Regular") glowClass = "glow-regular";
+
+        let isSelected = window.marketSelectedPokemonForSale && window.marketSelectedPokemonForSale.has(p.uuid);
+        let selectionStyle = isSelected ? 'outline: 3px solid #ff0000; outline-offset: -3px; background: rgba(255,0,0,0.2);' : 'background: #2c3e50; border: 2px solid #777;';
+
+        html += `
+            <div onclick="if(window.toggleMarketPokemonSaleSelection) window.toggleMarketPokemonSaleSelection('${p.uuid}')"
+                style="width: calc(16.666% - calc(var(--m-width) * 0.018 * 5 / 6)); box-sizing: border-box; ${selectionStyle} border-radius: 10px; padding: calc(var(--m-width) * 0.012); text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; position: relative;">
+                <div style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; margin-bottom: calc(var(--m-width) * 0.006); line-height: 1.1; color: white;">${pName}</div>
+                <div style="flex: 1; width: 100%; display: flex; align-items: center; justify-content: center; position: relative; height: calc(var(--m-width) * 0.072); margin-bottom: calc(var(--m-width) * 0.006);">
+                    <img src="${imgSrc}" class="${glowClass}" style="max-height: 100%; max-width: 100%; object-fit: contain; z-index: 1;" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='">
+                </div>
+                <div style="font-size: calc(var(--m-width) * 0.014); color: #bdc3c7; line-height: 1.1;">Lv. ${p.level}</div>
+                <div style="font-size: calc(var(--m-width) * 0.014); color: #f1c40f; line-height: 1.1;">Q: ${p.quality.toFixed(2)}</div>
+                <div style="font-size: calc(var(--m-width) * 0.014); color: #3498db; line-height: 1.1;">∑IV: ${sumIV}</div>
+                <div style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; color: #2ecc71; margin-top: calc(var(--m-width) * 0.012); line-height: 1.1;">$${formatMarketNumber(pEv)}</div>
+            </div>
+        `;
+    });
+
+    html += `</div>`;
+    safeSetHTML(content, html);
+}
+
+export function renderPokeMarketSellTab(category) {
+    const content = document.getElementById('market-sell-content');
+    if (!content) return;
+
+    setupMarketSellTabUI(category);
+
+    if (category === 'pokemon') {
+        renderMarketSellPokemonList(content);
+        return;
+    }
+
+    const items = getMarketSellItems(category);
+    renderMarketSellItemsList(content, category, items);
 }
 
 export function updateSellItemPrice(itemId, category) {
