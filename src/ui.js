@@ -1394,11 +1394,8 @@ function returnToLab() {
 window.returnToLab = returnToLab;
 
 window.selectStarter = selectStarter;
-function selectStarter(id) {
-    if (!storage.currentProfileId) {
-        storage.createNewProfile();
-    }
-    const pData = state.config.pokemonData.find(p => p.id === id);
+
+function _createStarterPokemon(pData) {
     const q = 1.40; // Fixed Rare
     const qName = "Rare";
     const ivs = {hp: 50, atk: 50, def: 50, spa: 50, spd: 50, spe: 50};
@@ -1415,41 +1412,7 @@ function selectStarter(id) {
 
     const bst = pData.hp + pData.atk + pData.def + pData.spa + pData.spd + pData.spe;
 
-    const starter = {
-        id: pData.id,
-        name: pData.name,
-        types: pData.types,
-        level: level,
-        xp: 0,
-        qualityName: qName,
-        quality: q,
-        ivs: ivs,
-        currentStats: stats,
-        maxHp: stats.hp,
-        currentHp: stats.hp,
-        bst: bst,
-        evxp: mathEngine.calculateEVXP(bst, level, q, ivs.hp + ivs.atk + ivs.def + ivs.spa + ivs.spd + ivs.spe),
-        evm: mathEngine.calculateEVM(bst, level, q, ivs.hp + ivs.atk + ivs.def + ivs.spa + ivs.spd + ivs.spe),
-        pp: mathEngine.calculatePP(bst, level, q, ivs.hp + ivs.atk + ivs.def + ivs.spa + ivs.spd + ivs.spe),
-        moves: [{name: "Tackle", power: 40, type: "Normal", category: "Physical"}] // Basic start
-    };
-
-    state.party.push(starter);
-    state.stats.hasPickedStarter = true;
-    returnToLab();
-
-    // Refresh window after adding chosen pokemon
-    const partyWindow = document.getElementById('party-window');
-    if (partyWindow && window.windowManager) {
-        if (partyWindow.style.display === 'none' || !partyWindow.style.display) {
-            window.windowManager.toggleWindow('party-window', true);
-        }
-        if (typeof partyWindow.adjustHeightForNewContent === 'function') partyWindow.adjustHeightForNewContent();
-    }
-    updateTeamWindow();
-
-    // Add identical pokemon to Team
-    const starterCopy = {
+    return {
         id: pData.id,
         name: pData.name,
         types: pData.types,
@@ -1467,23 +1430,18 @@ function selectStarter(id) {
         pp: mathEngine.calculatePP(bst, level, q, ivs.hp + ivs.atk + ivs.def + ivs.spa + ivs.spd + ivs.spe),
         moves: [{name: "Tackle", power: 40, type: "Normal", category: "Physical"}] // Basic start
     };
-    state.party.push(starterCopy);
+}
 
-    // Refresh window after adding duplicate
+function _refreshPartyWindowHeight(partyWindow) {
     if (partyWindow && window.windowManager) {
-        if (typeof partyWindow.adjustHeightForNewContent === 'function') partyWindow.adjustHeightForNewContent();
+        if (typeof partyWindow.adjustHeightForNewContent === 'function') {
+            partyWindow.adjustHeightForNewContent();
+        }
     }
     updateTeamWindow();
+}
 
-    // Remove similar pokemon from Team
-    state.party.pop();
-
-    // Refresh window after removing duplicate
-    if (partyWindow && window.windowManager) {
-        if (typeof partyWindow.adjustHeightForNewContent === 'function') partyWindow.adjustHeightForNewContent();
-    }
-    updateTeamWindow();
-
+function _initializeInitialRoutes(id) {
     // Setup initial routes correctly so player is not softlocked
     if (!state.stats.newRoutes) state.stats.newRoutes = [];
     if (!state.stats.newRoutes.includes("PokeCenter & PokeMarket")) {
@@ -1503,6 +1461,43 @@ function selectStarter(id) {
     state.stats.caught = (state.stats.caught || 0) + 1;
     state.stats.dex = state.stats.dex || {};
     state.stats.dex[id] = true;
+}
+
+function selectStarter(id) {
+    if (!storage.currentProfileId) {
+        storage.createNewProfile();
+    }
+    const pData = state.config.pokemonData.find(p => p.id === id);
+
+    const starter = _createStarterPokemon(pData);
+
+    state.party.push(starter);
+    state.stats.hasPickedStarter = true;
+    returnToLab();
+
+    // Refresh window after adding chosen pokemon
+    const partyWindow = document.getElementById('party-window');
+    if (partyWindow && window.windowManager) {
+        if (partyWindow.style.display === 'none' || !partyWindow.style.display) {
+            window.windowManager.toggleWindow('party-window', true);
+        }
+    }
+    _refreshPartyWindowHeight(partyWindow);
+
+    // Add identical pokemon to Team
+    const starterCopy = _createStarterPokemon(pData);
+    state.party.push(starterCopy);
+
+    // Refresh window after adding duplicate
+    _refreshPartyWindowHeight(partyWindow);
+
+    // Remove similar pokemon from Team
+    state.party.pop();
+
+    // Refresh window after removing duplicate
+    _refreshPartyWindowHeight(partyWindow);
+
+    _initializeInitialRoutes(id);
 
     storage.save(state);
 
