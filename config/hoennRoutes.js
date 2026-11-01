@@ -275,7 +275,7 @@ export const hoennRoutes = [
     ]
   },
   {
-    "name": "Tiny Fishing Spot",
+    "name": "Route 106 Fishing Spot",
     "spawns": [
       {
         "pokemonId": 129,
@@ -737,7 +737,7 @@ export const hoennRoutes = [
     ]
   },
   {
-    "name": "Small Fishing Spot",
+    "name": "Route 109 Fishing Spot",
     "spawns": [
       {
         "pokemonId": 318,
@@ -1184,7 +1184,7 @@ export const hoennRoutes = [
     ]
   },
   {
-    "name": "Big Fishing Spot",
+    "name": "Route 124",
     "spawns": [
       {
         "pokemonId": 320,
@@ -1237,7 +1237,7 @@ export const hoennRoutes = [
     ]
   },
   {
-    "name": "Underwater Fishing Spot",
+    "name": "Route 126 Underwater",
     "spawns": [
       {
         "pokemonId": 366,
@@ -1297,17 +1297,6 @@ export const hoennRoutes = [
         "minLevel": 59,
         "maxLevel": 63,
         "chance": 0.1
-      }
-    ]
-  },
-  {
-    "name": "Mirage Island",
-    "spawns": [
-      {
-        "pokemonId": 360,
-        "minLevel": 61,
-        "maxLevel": 65,
-        "chance": 1
       }
     ]
   },
@@ -1774,27 +1763,87 @@ export const hoennRoutes = [
         "chance": 0.3334
       }
     ]
+  },
+  {
+    "name": "Route 105",
+    "spawns": [
+      {
+        "pokemonId": 72,
+        "minLevel": 10,
+        "maxLevel": 14,
+        "chance": 0.6
+      },
+      {
+        "pokemonId": 278,
+        "minLevel": 10,
+        "maxLevel": 14,
+        "chance": 0.4
+      }
+    ]
+  },
+  {
+    "name": "Route 108",
+    "spawns": [
+      {
+        "pokemonId": 72,
+        "minLevel": 12,
+        "maxLevel": 16,
+        "chance": 0.6
+      },
+      {
+        "pokemonId": 278,
+        "minLevel": 12,
+        "maxLevel": 16,
+        "chance": 0.4
+      }
+    ]
+  },
+  {
+    "name": "Weather Institute",
+    "spawns": [
+      {
+        "pokemonId": 351,
+        "minLevel": 25,
+        "maxLevel": 30,
+        "chance": 1
+      }
+    ]
+  },
+  {
+    "name": "Route 125",
+    "spawns": [
+      {
+        "pokemonId": 72,
+        "minLevel": 35,
+        "maxLevel": 40,
+        "chance": 0.6
+      },
+      {
+        "pokemonId": 278,
+        "minLevel": 35,
+        "maxLevel": 40,
+        "chance": 0.4
+      }
+    ]
   }
 ];
 
 export const hoennUnlocks = [
   {
-    "challengeName": "Challenge 1",
+    "challengeName": "Challenge 01",
     "areaId": "Route 101",
     "unlocks": [
       "Route 103"
     ],
     "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Poochyena",
-          "count": 2
-        }
-      ]
+      "defeatCountRoute": {
+        "route": "Route 101",
+        "count": 25
+      }
     }
   },
   {
-    "challengeName": "Challenge 2",
+    "challengeName": "Challenge 02",
     "areaId": "Route 103",
     "unlocks": [
       "Route 102"
@@ -1802,33 +1851,27 @@ export const hoennUnlocks = [
     "requirements": {
       "catchSpecies": [
         {
-          "species": "Wingull",
+          "species": "Pelipper",
           "count": 1
         }
       ]
     }
   },
   {
-    "challengeName": "Challenge 3",
+    "challengeName": "Challenge 03",
     "areaId": "Route 102",
     "unlocks": [
       "Route 104"
     ],
     "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Lotad",
-          "count": 1
-        },
-        {
-          "species": "Seedot",
-          "count": 1
-        }
-      ]
+      "defeatSpecific": {
+        "name": "Surskit",
+        "count": 3
+      }
     }
   },
   {
-    "challengeName": "Challenge 4",
+    "challengeName": "Challenge 04",
     "areaId": "Route 104",
     "unlocks": [
       "Petalburg Woods"
@@ -1837,13 +1880,13 @@ export const hoennUnlocks = [
       "catchSpecies": [
         {
           "species": "Taillow",
-          "count": 2
+          "count": 1
         }
       ]
     }
   },
   {
-    "challengeName": "Challenge 5",
+    "challengeName": "Challenge 05",
     "areaId": "Petalburg Woods",
     "unlocks": [
       "Route 116"
@@ -1853,20 +1896,20 @@ export const hoennUnlocks = [
       "count": 1
     },
     "requirements": {
-      "catchSpecies": [
+      "defeatMultipleSpecific": [
         {
-          "species": "Shroomish",
+          "name": "Silcoon",
           "count": 1
         },
         {
-          "species": "Slakoth",
+          "name": "Cascoon",
           "count": 1
         }
       ]
     }
   },
   {
-    "challengeName": "Challenge 6",
+    "challengeName": "Challenge 06",
     "areaId": "Route 116",
     "unlocks": [
       "Rustboro Gym"
@@ -1874,17 +1917,17 @@ export const hoennUnlocks = [
     "requirements": {
       "catchSpecies": [
         {
-          "species": "Whismur",
+          "species": "Skitty",
           "count": 2
         }
       ]
     }
   },
   {
-    "challengeName": "Challenge 7",
+    "challengeName": "Challenge 07",
     "areaId": "Rustboro Gym",
     "unlocks": [
-      "Granite Cave"
+      "Route 105"
     ],
     "requirements": {
       "earnBadge": {
@@ -1895,33 +1938,23 @@ export const hoennUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 8",
-    "areaId": "Granite Cave",
+    "challengeName": "Challenge 08",
+    "areaId": "Route 105",
     "unlocks": [
-      "Tiny Fishing Spot"
+      "Route 106 Fishing Spot"
     ],
-    "gift": {
-      "item": "Rock Stone",
-      "count": 1
-    },
     "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Makuhita",
-          "count": 1
-        },
-        {
-          "species": "Aron",
-          "count": 1
-        }
-      ]
+      "defeatCountRoute": {
+        "route": "Route 105",
+        "count": 10
+      }
     }
   },
   {
-    "challengeName": "Challenge 9",
-    "areaId": "Tiny Fishing Spot",
+    "challengeName": "Challenge 09",
+    "areaId": "Route 106 Fishing Spot",
     "unlocks": [
-      "Dewford Gym"
+      "Granite Cave"
     ],
     "requirements": {
       "catchSpeciesByQuality": [
@@ -1935,6 +1968,31 @@ export const hoennUnlocks = [
   },
   {
     "challengeName": "Challenge 10",
+    "areaId": "Granite Cave",
+    "unlocks": [
+      "Dewford Gym"
+    ],
+    "gift": {
+      "item": "Rock Stone",
+      "count": 1
+    },
+    "requirements": {
+      "catchSpeciesAnyOf": [
+        [
+          {
+            "species": "Nosepass",
+            "count": 1
+          },
+          {
+            "species": "Kadabra",
+            "count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 11",
     "areaId": "Dewford Gym",
     "unlocks": [
       "Route 107"
@@ -1948,10 +2006,10 @@ export const hoennUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 11",
+    "challengeName": "Challenge 12",
     "areaId": "Route 107",
     "unlocks": [
-      "Mauville Gym"
+      "Route 108"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -1961,244 +2019,23 @@ export const hoennUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 12",
-    "areaId": "Mauville Gym",
-    "unlocks": [
-      "Route 110"
-    ],
-    "requirements": {
-      "earnBadge": {
-        "name": "Dynamo Badge",
-        "leader": "Wattson",
-        "badgeCount": 3
-      }
-    }
-  },
-  {
     "challengeName": "Challenge 13",
-    "areaId": "Route 110",
+    "areaId": "Route 108",
     "unlocks": [
-      "Route 117"
+      "Route 109 Fishing Spot"
     ],
     "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Electrike",
-          "count": 2
-        },
-        {
-          "species": "Plusle",
-          "count": 1
-        },
-        {
-          "species": "Minun",
-          "count": 1
-        }
-      ]
+      "defeatCountRoute": {
+        "route": "Route 108",
+        "count": 10
+      }
     }
   },
   {
     "challengeName": "Challenge 14",
-    "areaId": "Route 117",
+    "areaId": "Route 109 Fishing Spot",
     "unlocks": [
-      "Route 111"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Illumise",
-          "count": 1
-        },
-        {
-          "species": "Volbeat",
-          "count": 1
-        }
-      ]
-    }
-  },
-  {
-    "challengeName": "Challenge 15",
-    "areaId": "Route 111",
-    "unlocks": [
-      "Lavaridge Gym"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Trapinch",
-          "count": 1
-        },
-        {
-          "species": "Cacnea",
-          "count": 1
-        }
-      ]
-    }
-  },
-  {
-    "challengeName": "Challenge 16",
-    "areaId": "Lavaridge Gym",
-    "unlocks": [
-      "Fiery Path"
-    ],
-    "requirements": {
-      "earnBadge": {
-        "name": "Heat Badge",
-        "leader": "Flannery",
-        "badgeCount": 4
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 17",
-    "areaId": "Fiery Path",
-    "unlocks": [
-      "Jagged Pass"
-    ],
-    "gift": {
-      "item": "Fire Stone",
-      "count": 1
-    },
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Numel",
-          "count": 2
-        },
-        {
-          "species": "Torkoal",
-          "count": 1
-        }
-      ]
-    }
-  },
-  {
-    "challengeName": "Challenge 18",
-    "areaId": "Jagged Pass",
-    "unlocks": [
-      "Route 113"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Jagged Pass",
-        "count": 100
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 19",
-    "areaId": "Route 113",
-    "unlocks": [
-      "Route 114"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Spinda",
-          "count": 5
-        }
-      ]
-    }
-  },
-  {
-    "challengeName": "Challenge 20",
-    "areaId": "Route 114",
-    "unlocks": [
-      "Meteor Falls"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Zangoose",
-          "count": 1
-        },
-        {
-          "species": "Seviper",
-          "count": 1
-        }
-      ]
-    }
-  },
-  {
-    "challengeName": "Challenge 21",
-    "areaId": "Meteor Falls",
-    "unlocks": [
-      "Route 115"
-    ],
-    "gift": {
-      "item": "Dragon Stone",
-      "count": 1
-    },
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Bagon",
-          "count": 1
-        },
-        {
-          "species": "Solrock",
-          "count": 1
-        },
-        {
-          "species": "Lunatone",
-          "count": 1
-        }
-      ]
-    }
-  },
-  {
-    "challengeName": "Challenge 22",
-    "areaId": "Route 115",
-    "unlocks": [
-      "Petalburg Gym"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Swablu",
-          "count": 2
-        }
-      ]
-    }
-  },
-  {
-    "challengeName": "Challenge 23",
-    "areaId": "Petalburg Gym",
-    "unlocks": [
-      "Route 118"
-    ],
-    "requirements": {
-      "earnBadge": {
-        "name": "Balance Badge",
-        "leader": "Norman",
-        "badgeCount": 5
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 24",
-    "areaId": "Route 118",
-    "unlocks": [
-      "Small Fishing Spot"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Manectric",
-          "count": 1
-        },
-        {
-          "species": "Kecleon",
-          "count": 1
-        }
-      ]
-    }
-  },
-  {
-    "challengeName": "Challenge 25",
-    "areaId": "Small Fishing Spot",
-    "unlocks": [
-      "Route 119"
+      "Mauville Gym"
     ],
     "requirements": {
       "catchSpecies": [
@@ -2214,22 +2051,251 @@ export const hoennUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 26",
-    "areaId": "Route 119",
+    "challengeName": "Challenge 15",
+    "areaId": "Mauville Gym",
     "unlocks": [
-      "Route 120"
+      "Route 110"
+    ],
+    "requirements": {
+      "earnBadge": {
+        "name": "Dynamo Badge",
+        "leader": "Wattson",
+        "badgeCount": 3
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 16",
+    "areaId": "Route 110",
+    "unlocks": [
+      "Route 117"
     ],
     "requirements": {
       "catchSpecies": [
         {
-          "species": "Tropius",
+          "species": "Plusle",
+          "count": 1
+        },
+        {
+          "species": "Minun",
+          "count": 1
+        },
+        {
+          "species": "Gulpin",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 17",
+    "areaId": "Route 117",
+    "unlocks": [
+      "Route 111"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Kirlia",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 18",
+    "areaId": "Route 111",
+    "unlocks": [
+      "Lavaridge Gym"
+    ],
+    "requirements": {
+      "defeatSpecific": {
+        "name": "Flygon",
+        "count": 5
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 19",
+    "areaId": "Lavaridge Gym",
+    "unlocks": [
+      "Fiery Path"
+    ],
+    "requirements": {
+      "earnBadge": {
+        "name": "Heat Badge",
+        "leader": "Flannery",
+        "badgeCount": 4
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 20",
+    "areaId": "Fiery Path",
+    "unlocks": [
+      "Jagged Pass"
+    ],
+    "gift": {
+      "item": "Fire Stone",
+      "count": 1
+    },
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Numel",
+          "count": 5
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 21",
+    "areaId": "Jagged Pass",
+    "unlocks": [
+      "Route 113"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Jagged Pass",
+        "count": 100
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 22",
+    "areaId": "Route 113",
+    "unlocks": [
+      "Route 114"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Skarmory",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 23",
+    "areaId": "Route 114",
+    "unlocks": [
+      "Meteor Falls"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Route 114",
+        "count": 100
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 24",
+    "areaId": "Meteor Falls",
+    "unlocks": [
+      "Route 115"
+    ],
+    "gift": {
+      "item": "Dragon Stone",
+      "count": 1
+    },
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Golbat",
           "count": 2
         }
       ]
     }
   },
   {
+    "challengeName": "Challenge 25",
+    "areaId": "Route 115",
+    "unlocks": [
+      "Petalburg Gym"
+    ],
+    "requirements": {
+      "defeatSpecific": {
+        "name": "Jigglypuff",
+        "count": 10
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 26",
+    "areaId": "Petalburg Gym",
+    "unlocks": [
+      "Route 118"
+    ],
+    "requirements": {
+      "earnBadge": {
+        "name": "Balance Badge",
+        "leader": "Norman",
+        "badgeCount": 5
+      }
+    }
+  },
+  {
     "challengeName": "Challenge 27",
+    "areaId": "Route 118",
+    "unlocks": [
+      "Route 119"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Manectric",
+          "count": 1
+        },
+        {
+          "species": "Kecleon",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 28",
+    "areaId": "Route 119",
+    "unlocks": [
+      "Weather Institute"
+    ],
+    "requirements": {
+      "defeatSpecific": {
+        "name": "Swellow",
+        "count": 10
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 29",
+    "areaId": "Weather Institute",
+    "unlocks": [
+      "Fortree Gym"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Weather Institute",
+        "count": 10
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 30",
+    "areaId": "Fortree Gym",
+    "unlocks": [
+      "Route 120"
+    ],
+    "requirements": {
+      "earnBadge": {
+        "name": "Feather Badge",
+        "leader": "Winona",
+        "badgeCount": 6
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 31",
     "areaId": "Route 120",
     "unlocks": [
       "Route 121"
@@ -2244,7 +2310,7 @@ export const hoennUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 28",
+    "challengeName": "Challenge 32",
     "areaId": "Route 121",
     "unlocks": [
       "Safari Zone East",
@@ -2252,33 +2318,37 @@ export const hoennUnlocks = [
       "Safari Zone North"
     ],
     "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Shuppet",
-          "count": 2
-        },
-        {
-          "species": "Duskull",
-          "count": 2
-        }
-      ]
-    }
-  },
-  {
-    "challengeName": "Challenge 29",
-    "areaId": "Safari Zone East",
-    "unlocks": [
-      "Mount Pyre"
-    ],
-    "requirements": {
       "defeatCountRoute": {
-        "route": "Safari Zone East",
+        "route": "Route 121",
         "count": 150
       }
     }
   },
   {
-    "challengeName": "Challenge 30",
+    "challengeName": "Challenge 33",
+    "areaId": "Safari Zone East",
+    "unlocks": [
+      "Mount Pyre"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Pikachu",
+          "count": 1
+        },
+        {
+          "species": "Heracross",
+          "count": 1
+        },
+        {
+          "species": "Stantler",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 34",
     "areaId": "Mount Pyre",
     "unlocks": [
       "Route 123"
@@ -2297,10 +2367,10 @@ export const hoennUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 31",
+    "challengeName": "Challenge 35",
     "areaId": "Route 123",
     "unlocks": [
-      "Fortree Gym"
+      "Mossdeep Gym"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -2310,24 +2380,10 @@ export const hoennUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 32",
-    "areaId": "Fortree Gym",
-    "unlocks": [
-      "Mossdeep Gym"
-    ],
-    "requirements": {
-      "earnBadge": {
-        "name": "Feather Badge",
-        "leader": "Winona",
-        "badgeCount": 6
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 33",
+    "challengeName": "Challenge 36",
     "areaId": "Mossdeep Gym",
     "unlocks": [
-      "Big Fishing Spot"
+      "Route 124"
     ],
     "requirements": {
       "earnBadge": {
@@ -2338,10 +2394,10 @@ export const hoennUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 34",
-    "areaId": "Big Fishing Spot",
+    "challengeName": "Challenge 37",
+    "areaId": "Route 124",
     "unlocks": [
-      "Underwater Fishing Spot"
+      "Route 125"
     ],
     "gift": {
       "item": "Water Stone",
@@ -2354,33 +2410,40 @@ export const hoennUnlocks = [
           "count": 1
         },
         {
-          "species": "Wailmer",
-          "count": 2
+          "species": "Tentacruel",
+          "count": 1
         }
       ]
     }
   },
   {
-    "challengeName": "Challenge 35",
-    "areaId": "Underwater Fishing Spot",
+    "challengeName": "Challenge 38",
+    "areaId": "Route 125",
+    "unlocks": [
+      "Route 126 Underwater"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Route 125",
+        "count": 10
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 39",
+    "areaId": "Route 126 Underwater",
     "unlocks": [
       "Sootopolis Gym"
     ],
     "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Relicanth",
-          "count": 1
-        },
-        {
-          "species": "Clamperl",
-          "count": 2
-        }
-      ]
+      "defeatCountRoute": {
+        "route": "Route 126 Underwater",
+        "count": 150
+      }
     }
   },
   {
-    "challengeName": "Challenge 36",
+    "challengeName": "Challenge 40",
     "areaId": "Sootopolis Gym",
     "unlocks": [
       "Shoal Cave"
@@ -2394,39 +2457,24 @@ export const hoennUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 37",
+    "challengeName": "Challenge 41",
     "areaId": "Shoal Cave",
     "unlocks": [
-      "Mirage Island"
+      "Sky Pillar"
     ],
     "gift": {
       "item": "Ice Stone",
       "count": 1
     },
     "requirements": {
-      "catchSpecies": [
+      "defeatMultipleSpecific": [
         {
-          "species": "Spheal",
-          "count": 2
+          "name": "Sealeo",
+          "count": 5
         },
         {
-          "species": "Snorunt",
-          "count": 1
-        }
-      ]
-    }
-  },
-  {
-    "challengeName": "Challenge 41",
-    "areaId": "Mirage Island",
-    "unlocks": [
-      "Sky Pillar"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Wynaut",
-          "count": 1
+          "name": "Snorunt",
+          "count": 5
         }
       ]
     }
@@ -2471,15 +2519,15 @@ export const hoennUnlocks = [
       "Mauville Game Corner",
       "Trick House"
     ],
-    "requirements": {
-      "defeatHoennChampion": true
-    },
     "gifts": [
       {
         "item": "Masterball",
         "count": 2
       }
-    ]
+    ],
+    "requirements": {
+      "defeatHoennChampion": true
+    }
   },
   {
     "challengeName": "Extra Challenge A 1",
@@ -2492,14 +2540,10 @@ export const hoennUnlocks = [
       "count": 10
     },
     "requirements": {
-      "catchSpeciesAnyOfByQuality": [
+      "catchSpecies": [
         {
-          "species": [
-            "Slakoth",
-            "Abra"
-          ],
-          "quality": "Common",
-          "count": 8
+          "species": "Porygon",
+          "count": 3
         }
       ]
     }
@@ -2573,6 +2617,14 @@ export const hoennUnlocks = [
         {
           "species": "Azurill",
           "count": 1
+        },
+        {
+          "species": "Igglybuff",
+          "count": 1
+        },
+        {
+          "species": "Pichu",
+          "count": 1
         }
       ]
     }
@@ -2590,7 +2642,7 @@ export const hoennUnlocks = [
     "requirements": {
       "defeatCountRoute": {
         "route": "Battle Frontier Facility",
-        "count": 50
+        "count": 100
       }
     }
   },
@@ -2632,10 +2684,16 @@ export const hoennUnlocks = [
       "count": 1
     },
     "requirements": {
-      "defeatCountRoute": {
-        "route": "Trick House",
-        "count": 20
-      }
+      "catchSpecies": [
+        {
+          "species": "Voltorb",
+          "count": 2
+        },
+        {
+          "species": "Electrode",
+          "count": 1
+        }
+      ]
     }
   },
   {
@@ -2674,7 +2732,7 @@ export const hoennUnlocks = [
     "requirements": {
       "catchSpecies": [
         {
-          "species": "Tentacruel",
+          "species": "Gorebyss",
           "count": 1
         }
       ]
@@ -2691,15 +2749,9 @@ export const hoennUnlocks = [
       "count": 1
     },
     "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Weezing",
-          "count": 1
-        }
-      ],
       "defeatCountRoute": {
         "route": "Enemy Hideout",
-        "count": 25
+        "count": 100
       }
     }
   },
@@ -2714,10 +2766,16 @@ export const hoennUnlocks = [
       "count": 2
     },
     "requirements": {
-      "defeatSpecific": {
-        "name": "Relicanth",
-        "count": 1
-      }
+      "catchSpecies": [
+        {
+          "species": "Kingdra",
+          "count": 1
+        },
+        {
+          "species": "Wailord",
+          "count": 1
+        }
+      ]
     }
   },
   {
