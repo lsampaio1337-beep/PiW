@@ -27,8 +27,8 @@ function getPokemonDataMap() {
 import { updateUI, showModal } from '../ui.js';
 
 function escapeHTML(str) {
-    if (typeof str !== 'string') return str;
-    return str.replace(/[&<>'"]/g,
+    if (str == null) return '';
+    return String(str).replace(/[&<>'"]/g,
         tag => ({
             '&': '&amp;',
             '<': '&lt;',

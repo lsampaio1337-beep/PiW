@@ -9,8 +9,8 @@ import * as mathEngine from "../mathEngine.js";
 let lastTeamCount = -1;
 
 function escapeHTML(str) {
-    if (typeof str !== 'string') return str;
-    return str.replace(/[&<>'"]/g, tag => ({
+    if (str == null) return '';
+    return String(str).replace(/[&<>'"]/g, tag => ({
         '&': '&amp;',
         '<': '&lt;',
         '>': '&gt;',
