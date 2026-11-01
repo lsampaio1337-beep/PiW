@@ -884,53 +884,41 @@ function scheduleDefeatCallbacks(ball, ballResult, shakeInterval, captureCallbac
 
 
 
-export function showDamage(target, amount, isCrit, moveName = '', moveType = 'Normal', effectiveness = 1) {
-    const glassTier = state.stats?.upgrades?.glassTier || 0;
-    if (glassTier < 2) return;
-    const battleSystem = globals.battleSystem;
-    let containerId = target === 'player' ? 'player-side' : 'enemy-side';
+function logGymCombat(target, moveName, moveType, amount) {
+    const log = document.getElementById('gym-combat-log');
+    if (!log) return;
 
-    // Check if in gym battle
-    if (battleSystem && battleSystem.gymState && battleSystem.gymState.isActive) {
-        containerId = target === 'player' ? 'gym-player-sprite' : 'gym-enemy-sprite';
+    const entry = document.createElement('div');
+    entry.style.marginBottom = '2px';
+    const attacker = target === 'player' ? 'Enemy' : 'You';
+    const typeColor = TYPE_COLORS[moveType] || '#ffffff';
 
-        // Log to gym combat log
-        const log = document.getElementById('gym-combat-log');
-        if (log) {
-            const entry = document.createElement('div');
-            entry.style.marginBottom = '2px';
-            const attacker = target === 'player' ? 'Enemy' : 'You';
-            const typeColor = TYPE_COLORS[moveType] || '#ffffff';
+    // Mitigate XSS: Build inner node safely
+    entry.textContent = `${attacker} used `;
 
-            // Mitigate XSS: Build inner node safely
-            entry.textContent = `${attacker} used `;
+    const bNode = document.createElement('b');
+    bNode.style.color = typeColor;
+    bNode.textContent = moveName;
+    entry.appendChild(bNode);
 
-            const bNode = document.createElement('b');
-            bNode.style.color = typeColor;
-            bNode.textContent = moveName;
-            entry.appendChild(bNode);
+    entry.appendChild(document.createTextNode(' for '));
 
-            entry.appendChild(document.createTextNode(' for '));
+    const spanNode = document.createElement('span');
+    spanNode.style.color = typeColor;
+    spanNode.textContent = amount;
+    entry.appendChild(spanNode);
 
-            const spanNode = document.createElement('span');
-            spanNode.style.color = typeColor;
-            spanNode.textContent = amount;
-            entry.appendChild(spanNode);
+    entry.appendChild(document.createTextNode(' dmg!'));
 
-            entry.appendChild(document.createTextNode(' dmg!'));
+    log.appendChild(entry);
 
-            log.appendChild(entry);
-
-            // Keep only last 4 entries
-            while(log.children.length > 4) {
-                log.removeChild(log.firstChild);
-            }
-        }
+    // Keep only last 4 entries
+    while (log.children.length > 4) {
+        log.removeChild(log.firstChild);
     }
+}
 
-    let img = document.getElementById(containerId);
-    if (!img) return;
-
+function createDamageNode(amount, isCrit, moveName, moveType, effectiveness) {
     let dmgNode = document.createElement('div');
 
     const typeColor = TYPE_COLORS[moveType] || '#ffffff';
@@ -977,6 +965,28 @@ export function showDamage(target, amount, isCrit, moveName = '', moveType = 'No
     dmgNode.style.left = '50%'; // Center horizontally
     dmgNode.style.top = '20%'; // Top of the image (relative to sprite container)
     dmgNode.style.transform = 'translate(-50%, -50%)'; // Ensure exact centering
+
+    return dmgNode;
+}
+
+export function showDamage(target, amount, isCrit, moveName = '', moveType = 'Normal', effectiveness = 1) {
+    const glassTier = state.stats?.upgrades?.glassTier || 0;
+    if (glassTier < 2) return;
+    const battleSystem = globals.battleSystem;
+    let containerId = target === 'player' ? 'player-side' : 'enemy-side';
+
+    // Check if in gym battle
+    if (battleSystem && battleSystem.gymState && battleSystem.gymState.isActive) {
+        containerId = target === 'player' ? 'gym-player-sprite' : 'gym-enemy-sprite';
+
+        // Log to gym combat log
+        logGymCombat(target, moveName, moveType, amount);
+    }
+
+    let img = document.getElementById(containerId);
+    if (!img) return;
+
+    let dmgNode = createDamageNode(amount, isCrit, moveName, moveType, effectiveness);
 
     img.appendChild(dmgNode);
 
