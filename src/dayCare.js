@@ -20,29 +20,35 @@ class DayCare {
     }
 
     tickBattle() {
-        // Breeding logic
-        if (this.slot1.pokemon && this.slot1.isBreeding && !this.slot1.isFinished) {
-            this.slot1.battles++;
-            if (this.slot1.battles >= this.slot1.requiredBattles) {
-                this.completeBreeding();
-            }
+        this._tickBreeding();
+        this._tickTraining();
+    }
+
+    _tickBreeding() {
+        if (!this.slot1.pokemon || !this.slot1.isBreeding || this.slot1.isFinished) return;
+
+        this.slot1.battles++;
+        if (this.slot1.battles >= this.slot1.requiredBattles) {
+            this.completeBreeding();
+        }
+    }
+
+    _tickTraining() {
+        if (!this.slot2.pokemon) return;
+
+        const pkmn = this.slot2.pokemon;
+        const totalIV = pkmn.ivs.hp + pkmn.ivs.atk + pkmn.ivs.def + pkmn.ivs.spa + pkmn.ivs.spd + pkmn.ivs.spe;
+
+        // If we reach cap organically, keep it frozen
+        if (totalIV >= 600) {
+            this.slot2.battles = this.slot2.requiredBattles;
+            return;
         }
 
-        // Training logic
-        if (this.slot2.pokemon) {
-            const pkmn = this.slot2.pokemon;
-            const totalIV = pkmn.ivs.hp + pkmn.ivs.atk + pkmn.ivs.def + pkmn.ivs.spa + pkmn.ivs.spd + pkmn.ivs.spe;
-
-            // Only increment battles if we haven't hit the cap
-            if (totalIV < 600) {
-                this.slot2.battles++;
-                if (this.slot2.battles >= this.slot2.requiredBattles) {
-                    this.completeTrainingCycle();
-                }
-            } else {
-                // If we reach cap organically, keep it frozen
-                this.slot2.battles = this.slot2.requiredBattles;
-            }
+        // Only increment battles if we haven't hit the cap
+        this.slot2.battles++;
+        if (this.slot2.battles >= this.slot2.requiredBattles) {
+            this.completeTrainingCycle();
         }
     }
 
