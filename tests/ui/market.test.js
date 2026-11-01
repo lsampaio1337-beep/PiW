@@ -22,7 +22,7 @@ jest.mock('../../src/state.js', () => ({
     }
 }));
 
-import { parseMarketQuantity } from '../../src/ui/market.js';
+import { parseMarketQuantity, formatMarketNumber } from '../../src/ui/market.js';
 
 describe('parseMarketQuantity', () => {
     test('handles empty or null values', () => {
@@ -83,5 +83,27 @@ describe('parseMarketQuantity', () => {
     test('handles floats by flooring the final result', () => {
         expect(parseMarketQuantity('2.5')).toBe(2);
         expect(parseMarketQuantity('1.234K')).toBe(1234);
+    });
+});
+
+describe('formatMarketNumber', () => {
+    test('handles zero', () => {
+        expect(formatMarketNumber(0)).toBe('0');
+    });
+
+    test('handles small numbers', () => {
+        expect(formatMarketNumber(42)).toBe('42');
+        expect(formatMarketNumber(999)).toBe('999');
+    });
+
+    test('handles large numbers with commas', () => {
+        expect(formatMarketNumber(1000)).toBe('1,000');
+        expect(formatMarketNumber(1000000)).toBe('1,000,000');
+        expect(formatMarketNumber(1234567890)).toBe('1,234,567,890');
+    });
+
+    test('handles negative numbers', () => {
+        expect(formatMarketNumber(-1000)).toBe('-1,000');
+        expect(formatMarketNumber(-50)).toBe('-50');
     });
 });
