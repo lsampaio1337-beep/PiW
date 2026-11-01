@@ -217,43 +217,11 @@ function setupDataChannel(channel) {
         }
 
         if (data.type === 'party') {
-            if (!Array.isArray(data.party)) {
-                console.warn("Multiplayer party message missing valid party array");
-                return;
-            }
-            if (data.region !== state.currentRegionName) {
-                alert("Cannot connect! You must be in the same region as your opponent.");
-                if (peerConnection) {
-                    peerConnection.close();
-                }
-                initMultiplayer();
-
-                const connBtn = document.getElementById('btn-mp-connection-status');
-                if (connBtn) {
-                    connBtn.style.background = '#e74c3c';
-                    connBtn.innerText = 'Not Connected';
-                    connBtn.disabled = true;
-                    connBtn.style.cursor = 'default';
-                    connBtn.onmouseenter = null;
-                    connBtn.onmouseleave = null;
-                }
-                updateBattleButtonUI();
-                return;
-            }
-            opponentParty = data.party;
-            checkReadyState();
+            handlePartyMessage(data);
         } else if (data.type === 'ready') {
-            isMultiplayerReady.remote = Boolean(data.state);
-            updateBattleButtonUI();
-            checkReadyState();
+            handleReadyMessage(data);
         } else if (data.type === 'combatEvent') {
-            if (!data.event || typeof data.event !== 'object') {
-                console.warn("Multiplayer combatEvent message missing valid event object");
-                return;
-            }
-            if (globals.battleSystem) {
-                 globals.battleSystem.handleMultiplayerEvent(data.event);
-            }
+            handleCombatEventMessage(data);
         }
     };
 
@@ -264,6 +232,50 @@ function setupDataChannel(channel) {
         }
         initMultiplayer();
     };
+}
+
+function handlePartyMessage(data) {
+    if (!Array.isArray(data.party)) {
+        console.warn("Multiplayer party message missing valid party array");
+        return;
+    }
+    if (data.region !== state.currentRegionName) {
+        alert("Cannot connect! You must be in the same region as your opponent.");
+        if (peerConnection) {
+            peerConnection.close();
+        }
+        initMultiplayer();
+
+        const connBtn = document.getElementById('btn-mp-connection-status');
+        if (connBtn) {
+            connBtn.style.background = '#e74c3c';
+            connBtn.innerText = 'Not Connected';
+            connBtn.disabled = true;
+            connBtn.style.cursor = 'default';
+            connBtn.onmouseenter = null;
+            connBtn.onmouseleave = null;
+        }
+        updateBattleButtonUI();
+        return;
+    }
+    opponentParty = data.party;
+    checkReadyState();
+}
+
+function handleReadyMessage(data) {
+    isMultiplayerReady.remote = Boolean(data.state);
+    updateBattleButtonUI();
+    checkReadyState();
+}
+
+function handleCombatEventMessage(data) {
+    if (!data.event || typeof data.event !== 'object') {
+        console.warn("Multiplayer combatEvent message missing valid event object");
+        return;
+    }
+    if (globals.battleSystem) {
+         globals.battleSystem.handleMultiplayerEvent(data.event);
+    }
 }
 
 export function toggleLocalReady() {
