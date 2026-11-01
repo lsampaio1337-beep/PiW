@@ -19,6 +19,26 @@ const hoennMapCoordinates = {
     "x": 7.92,
     "y": 65.08
   },
+  "105": {
+    "name": "Route 105",
+    "x": 4.88,
+    "y": 70.0
+  },
+  "108": {
+    "name": "Route 108",
+    "x": 22.0,
+    "y": 92.0
+  },
+  "weather_institute": {
+    "name": "Weather Institute",
+    "x": 46.72,
+    "y": 15.0
+  },
+  "125": {
+    "name": "Route 125",
+    "x": 84.0,
+    "y": 20.0
+  },
   "107": {
     "name": "Route 107",
     "x": 22,
@@ -119,8 +139,8 @@ const hoennMapCoordinates = {
     "x": 8.56,
     "y": 57.16
   },
-  "tiny_fishing_spot": {
-    "name": "Tiny Fishing Spot",
+  "route_106_fishing_spot": {
+    "name": "Route 106 Fishing Spot",
     "x": 4.88,
     "y": 76.51
   },
@@ -149,8 +169,8 @@ const hoennMapCoordinates = {
     "x": 10.24,
     "y": 19.61
   },
-  "small_fishing_spot": {
-    "name": "Small Fishing Spot",
+  "route_109_fishing_spot": {
+    "name": "Route 109 Fishing Spot",
     "x": 38.96,
     "y": 26.4
   },
@@ -214,20 +234,15 @@ const hoennMapCoordinates = {
     "x": 68.08,
     "y": 53.66
   },
-  "underwater_fishing_spot": {
-    "name": "Underwater Fishing Spot",
+  "route_126_underwater": {
+    "name": "Route 126 Underwater",
     "x": 78.64,
     "y": 65.08
   },
-  "big_fishing_spot": {
-    "name": "Big Fishing Spot",
+  "route_124": {
+    "name": "Route 124",
     "x": 49.28,
     "y": 64.4
-  },
-  "mirage_island": {
-    "name": "Mirage Island",
-    "x": 85.2,
-    "y": 53.88
   },
   "advanced_starter_sanctuary": {
     "name": "Advanced Starter Sanctuary",
