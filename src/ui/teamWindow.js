@@ -6,18 +6,9 @@ import * as mathEngine from "../mathEngine.js";
 // they need to be defined elsewhere and attached to window, or attached here.
 // Let's attach them in the main ui.js or where appropriate.
 
-let lastTeamCount = -1;
+import { escapeHTML } from '../utils/stringUtils.js';
 
-function escapeHTML(str) {
-    if (typeof str !== 'string') return str;
-    return str.replace(/[&<>'"]/g, tag => ({
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        "'": '&#39;',
-        '"': '&quot;'
-    }[tag]));
-}
+let lastTeamCount = -1;
 
 export function updateTeamWindow() {
     const partyDiv = document.getElementById('party-list');
