@@ -71,12 +71,14 @@ class DayCare {
         // Increase quality by a random number between 0 and 0.1 (Max 1.99)
         // 0, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1
         const randomVal = typeof crypto !== 'undefined' ? (crypto.getRandomValues(new Uint32Array(1))[0] / (0xFFFFFFFF + 1)) : Math.random();
-        const randIncrease = Math.floor(randomVal * 11) / 100;
+        // 0 to 0.05
+        const randIncrease = Math.floor(randomVal * 6) / 100;
 
         // Fix floating point precision
         p.quality = Number((p.quality + randIncrease).toFixed(2));
 
-        p.quality = Math.min(1.99, p.quality);
+        let maxQ = p.qualityName === 'Shiny' ? 2.50 : 1.99;
+        p.quality = Math.min(maxQ, p.quality);
 
         // Map Quality Tier if Q >= 1.5, 1.25, etc.
         if (p.quality >= 1.81) {

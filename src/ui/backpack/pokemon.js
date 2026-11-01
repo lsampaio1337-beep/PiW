@@ -153,7 +153,7 @@ export function renderPokemonTab(area) {
             if (!state.globalStats.hasSeenDaycare) continue; // Hide if Daycare hasn't been opened
             if (state.breeding.length > 0) {
                 p = state.breeding[0];
-                tag = 'To Breed';
+                tag = 'Breeding Spot';
                 listName = 'breeding';
                 origIndex = 0;
             }
@@ -161,7 +161,7 @@ export function renderPokemonTab(area) {
             if (!state.globalStats.hasSeenDaycare) continue; // Hide if Daycare hasn't been opened
             if (state.training.length > 0) {
                 p = state.training[0];
-                tag = 'To Train';
+                tag = 'Training Spot';
                 listName = 'training';
                 origIndex = 0;
             }
@@ -300,6 +300,14 @@ window.applyPokemonFilters = function() {
     }
 
     const filterFn = (p) => {
+        if (window.breedTarget && p.uuid !== window.breedTarget.uuid) {
+            let bt = window.breedTarget;
+            // same species, shiny match, Qdiff <= 0.05
+            if (p.id !== bt.id) return false;
+            if (p.qualityName !== bt.qualityName) return false;
+            if (Math.abs(p.quality - bt.quality) > 0.051) return false;
+        }
+
         if (filters.name && !p.name.toLowerCase().includes(filters.name.toLowerCase())) return false;
         if (filters.minLvl !== '' && p.level < parseInt(filters.minLvl)) return false;
         if (filters.maxLvl !== '' && p.level > parseInt(filters.maxLvl)) return false;
@@ -309,7 +317,7 @@ window.applyPokemonFilters = function() {
         if (filters.minIV !== '' && sumIV < parseInt(filters.minIV)) return false;
         if (filters.maxIV !== '' && sumIV > parseInt(filters.maxIV)) return false;
 
-        if (filters.breedableOnly) {
+        if (filters.breedableOnly && !window.breedTarget) {
             if (p.quality >= 1.99) return false;
             const key = p.id + '_' + p.quality.toFixed(2);
             if (!breedableMap || breedableMap.get(key) < 2) return false;
@@ -398,8 +406,8 @@ export function handleDrop(event, targetCol) {
         return;
     }
 
-    if (tCol === 'breeding' && p.quality >= 1.99) {
-        alert("Cannot breed a Pokémon with Q >= 1.99!");
+    if (tCol === 'breeding' && p.quality >= (p.qualityName === 'Shiny' ? 2.50 : 1.99)) {
+        alert("Cannot breed a Pokémon with max Q!");
         return;
     }
 
@@ -423,6 +431,8 @@ export function handleDrop(event, targetCol) {
             state.dayCareRef.slot1.isBreeding = false;
             state.dayCareRef.slot1.isFinished = false;
         }
+        window.breedTarget = null;
+        if (window.pokemonFilters) window.pokemonFilters.breedableOnly = false;
         window.pokemonFilters.name = '';
         window.pokemonFilters.minQ = '';
         window.pokemonFilters.maxQ = '';
@@ -461,6 +471,11 @@ export function handleDrop(event, targetCol) {
             state.dayCareRef.slot2.pokemon = p;
 
             const totalIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
+            const isShiny = p.qualityName === 'Shiny';
+
+            // Set encounters required to SumIV (double for shiny)
+            state.dayCareRef.slot2.requiredBattles = isShiny ? (totalIV * 2) : totalIV;
+
             if (totalIV >= 600) {
                 state.dayCareRef.slot2.battles = state.dayCareRef.slot2.requiredBattles;
             } else {
