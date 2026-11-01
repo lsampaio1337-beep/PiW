@@ -19,108 +19,135 @@ export function renderTokenShopHtml() {
     return html;
 }
 
-function getTokenShopItemsHtml() {
-    const items = [
-        {
-            id: 'vitamin',
-            name: 'Vitamin',
-            img: 'Assets/Extra/Vitamin.png',
-            desc: 'A vitamin that improves any stat in a Pokemon in 1%.',
-            isSelectable: true,
-            selectPrice: 2,
-            randomPrice: 1
-        },
-        {
-            id: 'stone',
-            name: 'Evolution Stone',
-            img: 'Assets/Items/Stones/Normal Stone.png',
-            desc: 'A Stone needed for evolving pokemon.',
-            isSelectable: true,
-            selectPrice: 2,
-            randomPrice: 1
-        },
-        {
-            id: 'masterball',
-            name: 'Masterball',
-            img: 'Assets/Items/Balls/Masterball.png',
-            desc: 'A ball that guarantee capture.',
-            price: 10,
-            action: 'window.buyTokenItem("masterball")'
-        },
-        {
-            id: 'unlock_ball',
-            name: 'Unlock Ball Upgrade',
-            img: 'Assets/Items/Upgrades/Ball1.png',
-            desc: 'Allow you to carry more balls.',
-            price: 1,
-            isUnlock: true,
-            unlockKey: 'balls',
-            action: 'window.buyTokenUnlock("balls")'
-        },
-        {
-            id: 'unlock_potion',
-            name: 'Unlock Potion Upgrade',
-            img: 'Assets/Items/Upgrades/Potion1.png',
-            desc: 'Allow you to carry more potions.',
-            price: 1,
-            isUnlock: true,
-            unlockKey: 'potions',
-            action: 'window.buyTokenUnlock("potions")'
-        },
-        {
-            id: 'unlock_storage',
-            name: 'Unlock Storage Upgrade',
-            img: 'Assets/Items/Upgrades/Storage1.png',
-            desc: 'Allow you to keep more pokemons on backpack.',
-            price: 1,
-            isUnlock: true,
-            unlockKey: 'box',
-            action: 'window.buyTokenUnlock("box")'
-        },
-        {
-            id: 'unlock_speed',
-            name: 'Unlock Speed Upgrade',
-            img: 'Assets/Items/Upgrades/Speed1.png',
-            desc: 'Allow you to buy upgrades that decreases encounter speed.',
-            price: 1,
-            isUnlock: true,
-            unlockKey: 'speed',
-            action: 'window.buyTokenUnlock("speed")'
-        },
-        {
-            id: 'unlock_loot',
-            name: 'Unlock Loot Upgrade',
-            img: 'Assets/Items/Upgrades/Loot1.png',
-            desc: 'Allow you to buy upgrades that collect loot from pokemons.',
-            price: 1,
-            isUnlock: true,
-            unlockKey: 'loot',
-            action: 'window.buyTokenUnlock("loot")'
-        },
-        {
-            id: 'unlock_smartwatch',
-            name: 'Unlock Smartwatch Upgrade',
-            img: 'Assets/Items/Upgrades/Smartwatch1.png',
-            desc: 'Allow you to buy upgrades that helps capture and heal while in battle.',
-            price: 1,
-            isUnlock: true,
-            unlockKey: 'smartwatch',
-            action: 'window.buyTokenUnlock("smartwatch")'
-        },
-        {
-            id: 'unlock_daycare',
-            name: 'Unlock Daycare Upgrade',
-            img: 'Assets/Items/Upgrades/Daycare1.png',
-            desc: 'Allow you to buy upgrades for the Daycare.',
-            price: 1,
-            isUnlock: true,
-            unlockKey: 'daycare',
-            action: 'window.buyTokenUnlock("daycare")'
-        }
-    ];
+const TOKEN_SHOP_ITEMS = [
+    {
+        id: 'vitamin',
+        name: 'Vitamin',
+        img: 'Assets/Extra/Vitamin.png',
+        desc: 'A vitamin that improves any stat in a Pokemon in 1%.',
+        isSelectable: true,
+        selectPrice: 2,
+        randomPrice: 1
+    },
+    {
+        id: 'stone',
+        name: 'Evolution Stone',
+        img: 'Assets/Items/Stones/Normal Stone.png',
+        desc: 'A Stone needed for evolving pokemon.',
+        isSelectable: true,
+        selectPrice: 2,
+        randomPrice: 1
+    },
+    {
+        id: 'masterball',
+        name: 'Masterball',
+        img: 'Assets/Items/Balls/Masterball.png',
+        desc: 'A ball that guarantee capture.',
+        price: 10,
+        action: 'window.buyTokenItem("masterball")'
+    },
+    {
+        id: 'unlock_ball',
+        name: 'Unlock Ball Upgrade',
+        img: 'Assets/Items/Upgrades/Ball1.png',
+        desc: 'Allow you to carry more balls.',
+        price: 1,
+        isUnlock: true,
+        unlockKey: 'balls',
+        action: 'window.buyTokenUnlock("balls")'
+    },
+    {
+        id: 'unlock_potion',
+        name: 'Unlock Potion Upgrade',
+        img: 'Assets/Items/Upgrades/Potion1.png',
+        desc: 'Allow you to carry more potions.',
+        price: 1,
+        isUnlock: true,
+        unlockKey: 'potions',
+        action: 'window.buyTokenUnlock("potions")'
+    },
+    {
+        id: 'unlock_storage',
+        name: 'Unlock Storage Upgrade',
+        img: 'Assets/Items/Upgrades/Storage1.png',
+        desc: 'Allow you to keep more pokemons on backpack.',
+        price: 1,
+        isUnlock: true,
+        unlockKey: 'box',
+        action: 'window.buyTokenUnlock("box")'
+    },
+    {
+        id: 'unlock_speed',
+        name: 'Unlock Speed Upgrade',
+        img: 'Assets/Items/Upgrades/Speed1.png',
+        desc: 'Allow you to buy upgrades that decreases encounter speed.',
+        price: 1,
+        isUnlock: true,
+        unlockKey: 'speed',
+        action: 'window.buyTokenUnlock("speed")'
+    },
+    {
+        id: 'unlock_loot',
+        name: 'Unlock Loot Upgrade',
+        img: 'Assets/Items/Upgrades/Loot1.png',
+        desc: 'Allow you to buy upgrades that collect loot from pokemons.',
+        price: 1,
+        isUnlock: true,
+        unlockKey: 'loot',
+        action: 'window.buyTokenUnlock("loot")'
+    },
+    {
+        id: 'unlock_smartwatch',
+        name: 'Unlock Smartwatch Upgrade',
+        img: 'Assets/Items/Upgrades/Smartwatch1.png',
+        desc: 'Allow you to buy upgrades that helps capture and heal while in battle.',
+        price: 1,
+        isUnlock: true,
+        unlockKey: 'smartwatch',
+        action: 'window.buyTokenUnlock("smartwatch")'
+    },
+    {
+        id: 'unlock_daycare',
+        name: 'Unlock Daycare Upgrade',
+        img: 'Assets/Items/Upgrades/Daycare1.png',
+        desc: 'Allow you to buy upgrades for the Daycare.',
+        price: 1,
+        isUnlock: true,
+        unlockKey: 'daycare',
+        action: 'window.buyTokenUnlock("daycare")'
+    }
+];
 
+function renderTokenShopItem(item) {
+    let html = `
+        <div style="background: #2c3e50; border: 2px solid #3498db; border-radius: 8px; padding: 8px; display: flex; flex-direction: column; align-items: center; text-align: center; justify-content: space-between; box-sizing: border-box; width: 100%;">
+            <div style="font-weight: bold; font-size: 12px; margin-bottom: 5px; height: 30px; display: flex; align-items: center;">${item.name}</div>
+            <img src="${item.img}" style="width: 40px; height: 40px; object-fit: contain; margin-bottom: 5px;">
+            <div style="font-size: 10px; color: #bdc3c7; margin-bottom: 10px; flex-grow: 1;">${item.desc}</div>
+    `;
+
+    if (item.isSelectable) {
+        html += `
+            <div style="display: flex; gap: 5px; width: 100%;">
+                <button onclick="window.buyTokenItemRandom('${item.id}')" style="flex: 1; padding: 5px; background: #2ecc71; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 12px;">Random<br><img src="Assets/Extra/Token.png" style="width:12px;vertical-align:middle;"> ${item.randomPrice}</button>
+                <button onclick="window.showTokenItemSelect('${item.id}')" style="flex: 1; padding: 5px; background: #2ecc71; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 12px;">Choose<br><img src="Assets/Extra/Token.png" style="width:12px;vertical-align:middle;"> ${item.selectPrice}</button>
+            </div>
+        `;
+    } else {
+        html += `
+            <button onclick='${item.action}' style="width: 100%; padding: 8px; background: #2ecc71; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 12px;">
+                Buy for <img src="Assets/Extra/Token.png" style="width:14px;vertical-align:middle;"> ${item.price}
+            </button>
+        `;
+    }
+
+    html += `</div>`;
+    return html;
+}
+
+function getTokenShopItemsHtml() {
     let html = '';
-    items.forEach(item => {
+    TOKEN_SHOP_ITEMS.forEach(item => {
         if (item.isUnlock) {
             if (!state.stats.upgradesUnlocked) {
                 state.stats.upgradesUnlocked = {};
@@ -129,30 +156,7 @@ function getTokenShopItemsHtml() {
                 return; // Skip if already unlocked
             }
         }
-
-        html += `
-            <div style="background: #2c3e50; border: 2px solid #3498db; border-radius: 8px; padding: 8px; display: flex; flex-direction: column; align-items: center; text-align: center; justify-content: space-between; box-sizing: border-box; width: 100%;">
-                <div style="font-weight: bold; font-size: 12px; margin-bottom: 5px; height: 30px; display: flex; align-items: center;">${item.name}</div>
-                <img src="${item.img}" style="width: 40px; height: 40px; object-fit: contain; margin-bottom: 5px;">
-                <div style="font-size: 10px; color: #bdc3c7; margin-bottom: 10px; flex-grow: 1;">${item.desc}</div>
-        `;
-
-        if (item.isSelectable) {
-            html += `
-                <div style="display: flex; gap: 5px; width: 100%;">
-                    <button onclick="window.buyTokenItemRandom('${item.id}')" style="flex: 1; padding: 5px; background: #2ecc71; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 12px;">Random<br><img src="Assets/Extra/Token.png" style="width:12px;vertical-align:middle;"> ${item.randomPrice}</button>
-                    <button onclick="window.showTokenItemSelect('${item.id}')" style="flex: 1; padding: 5px; background: #2ecc71; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 12px;">Choose<br><img src="Assets/Extra/Token.png" style="width:12px;vertical-align:middle;"> ${item.selectPrice}</button>
-                </div>
-            `;
-        } else {
-            html += `
-                <button onclick='${item.action}' style="width: 100%; padding: 8px; background: #2ecc71; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 12px;">
-                    Buy for <img src="Assets/Extra/Token.png" style="width:14px;vertical-align:middle;"> ${item.price}
-                </button>
-            `;
-        }
-
-        html += `</div>`;
+        html += renderTokenShopItem(item);
     });
 
     return html;
