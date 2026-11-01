@@ -63,6 +63,77 @@ window.claimPendingGift = function(index) {
     }
 };
 
+
+function generateBadgeGiftHTML(gift, isPending, index) {
+    let badgeRegion = state.currentRegionName || 'Kanto';
+    let badgeNum = gift.gymIndex + 1;
+    if (state.currentRegionName === 'Johto') {
+        if (gift.gymIndex > 8) {
+            badgeRegion = 'Johto';
+            badgeNum = gift.gymIndex - 8;
+        } else {
+            badgeRegion = 'Kanto';
+            badgeNum = gift.gymIndex + 1;
+        }
+    }
+
+    let title = gift.gymName ? gift.gymName + ' Badge' : 'Badge';
+    if (isPending) title = gift.gymName + ' Badge'; // Existing code uses this directly for pending
+
+    let wrapperStyle = isPending
+        ? `cursor: pointer; padding: 10px; border: 1px solid #ccc; border-radius: 5px; background: rgba(0,0,0,0.5); transition: background 0.2s;`
+        : `padding: 10px; border: 1px solid #444; border-radius: 5px; background: rgba(0,0,0,0.2);`;
+
+    let imgStyle = isPending
+        ? `width: 50px; height: 50px;`
+        : `width: 50px; height: 50px; filter: drop-shadow(0 0 5px gold);`;
+
+    let clickHandlers = isPending
+        ? `onclick="window.claimPendingGift(${index})" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(0,0,0,0.5)'"`
+        : "";
+
+    return `
+        <div ${clickHandlers} style="${wrapperStyle}">
+            <img src="./Assets/Gym/Badges/${window.getBadgeFileName(badgeRegion, badgeNum)}" style="${imgStyle}" title="${title}">
+        </div>
+    `;
+}
+
+
+function generateItemGiftHTML(gift, isPending, index) {
+    let imgPath = gift.item.includes('Potion') ? `Assets/Items/Potions/${gift.item}.png` :
+                  gift.item.includes('Stone') ? `Assets/Items/Stones/${gift.item}.png` :
+                  VITAMINS.includes(gift.item) ? `Assets/Items/Vitamins/${gift.item}.png` :
+                  `Assets/Items/Balls/${gift.item}.png`;
+
+    let wrapperStyle = isPending
+        ? `cursor: pointer; padding: 10px; border: 1px solid #ccc; border-radius: 5px; background: rgba(0,0,0,0.5); transition: background 0.2s;`
+        : `padding: 10px; border: 1px solid #444; border-radius: 5px; background: rgba(0,0,0,0.2);`;
+
+    let clickHandlers = isPending
+        ? `onclick="window.claimPendingGift(${index})" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(0,0,0,0.5)'"`
+        : "";
+
+    return `
+        <div ${clickHandlers} style="${wrapperStyle}">
+            <div style="position: relative; display: inline-block;">
+                <img src="${imgPath}" style="width: 50px; height: 50px;" title="${gift.item}">
+                ${gift.count > 1 ? `<span style="position: absolute; bottom: -5px; right: -5px; background: rgba(0,0,0,0.8); color: white; padding: 2px 5px; border-radius: 10px; font-size: 12px; font-weight: bold;">x${gift.count}</span>` : ''}
+            </div>
+        </div>
+    `;
+}
+
+
+function generateGiftHTML(gift, isPending, index = -1) {
+    if (gift.type === 'badge') {
+        return generateBadgeGiftHTML(gift, isPending, index);
+    } else if (gift.type === 'item') {
+        return generateItemGiftHTML(gift, isPending, index);
+    }
+    return '';
+}
+
 export function showGiftModal() {
     let html = `<div style="text-align: center; padding: 2%; box-sizing: border-box;">`;
 
@@ -73,37 +144,7 @@ export function showGiftModal() {
         html += `<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 20px;">`;
 
         pending.forEach((gift, index) => {
-            if (gift.type === 'badge') {
-                let badgeRegion = state.currentRegionName || 'Kanto';
-                let badgeNum = gift.gymIndex + 1;
-                if (state.currentRegionName === 'Johto') {
-                    if (gift.gymIndex > 8) {
-                        badgeRegion = 'Johto';
-                        badgeNum = gift.gymIndex - 8;
-                    } else {
-                        badgeRegion = 'Kanto';
-                        badgeNum = gift.gymIndex + 1;
-                    }
-                }
-                html += `
-                    <div onclick="window.claimPendingGift(${index})" style="cursor: pointer; padding: 10px; border: 1px solid #ccc; border-radius: 5px; background: rgba(0,0,0,0.5); transition: background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(0,0,0,0.5)'">
-                        <img src="./Assets/Gym/Badges/${window.getBadgeFileName(badgeRegion, badgeNum)}" style="width: 50px; height: 50px;" title="${gift.gymName} Badge">
-                    </div>
-                `;
-            } else if (gift.type === 'item') {
-                let imgPath = gift.item.includes('Potion') ? `Assets/Items/Potions/${gift.item}.png` :
-                              gift.item.includes('Stone') ? `Assets/Items/Stones/${gift.item}.png` :
-                              VITAMINS.includes(gift.item) ? `Assets/Items/Vitamins/${gift.item}.png` :
-                              `Assets/Items/Balls/${gift.item}.png`;
-                html += `
-                    <div onclick="window.claimPendingGift(${index})" style="cursor: pointer; padding: 10px; border: 1px solid #ccc; border-radius: 5px; background: rgba(0,0,0,0.5); transition: background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(0,0,0,0.5)'">
-                        <div style="position: relative; display: inline-block;">
-                            <img src="${imgPath}" style="width: 50px; height: 50px;" title="${gift.item}">
-                            ${gift.count > 1 ? `<span style="position: absolute; bottom: -5px; right: -5px; background: rgba(0,0,0,0.8); color: white; padding: 2px 5px; border-radius: 10px; font-size: 12px; font-weight: bold;">x${gift.count}</span>` : ''}
-                        </div>
-                    </div>
-                `;
-            }
+            html += generateGiftHTML(gift, true, index);
         });
 
         html += `</div>`;
@@ -131,37 +172,7 @@ export function showGiftModal() {
         html += `<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">`;
 
         claimed.forEach((gift) => {
-            if (gift.type === 'badge') {
-                let badgeRegion = state.currentRegionName || 'Kanto';
-                let badgeNum = gift.gymIndex + 1;
-                if (state.currentRegionName === 'Johto') {
-                    if (gift.gymIndex > 8) {
-                        badgeRegion = 'Johto';
-                        badgeNum = gift.gymIndex - 8;
-                    } else {
-                        badgeRegion = 'Kanto';
-                        badgeNum = gift.gymIndex + 1;
-                    }
-                }
-                html += `
-                    <div style="padding: 10px; border: 1px solid #444; border-radius: 5px; background: rgba(0,0,0,0.2);">
-                        <img src="./Assets/Gym/Badges/${window.getBadgeFileName(badgeRegion, badgeNum)}" style="width: 50px; height: 50px; filter: drop-shadow(0 0 5px gold);" title="${gift.gymName ? gift.gymName + ' Badge' : 'Badge'}">
-                    </div>
-                `;
-            } else if (gift.type === 'item') {
-                let imgPath = gift.item.includes('Potion') ? `Assets/Items/Potions/${gift.item}.png` :
-                              gift.item.includes('Stone') ? `Assets/Items/Stones/${gift.item}.png` :
-                              VITAMINS.includes(gift.item) ? `Assets/Items/Vitamins/${gift.item}.png` :
-                              `Assets/Items/Balls/${gift.item}.png`;
-                html += `
-                    <div style="padding: 10px; border: 1px solid #444; border-radius: 5px; background: rgba(0,0,0,0.2);">
-                        <div style="position: relative; display: inline-block;">
-                            <img src="${imgPath}" style="width: 50px; height: 50px;" title="${gift.item}">
-                            ${gift.count > 1 ? `<span style="position: absolute; bottom: -5px; right: -5px; background: rgba(0,0,0,0.8); color: white; padding: 2px 5px; border-radius: 10px; font-size: 12px; font-weight: bold;">x${gift.count}</span>` : ''}
-                        </div>
-                    </div>
-                `;
-            }
+            html += generateGiftHTML(gift, false);
         });
 
         html += `</div>`;
