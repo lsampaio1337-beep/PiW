@@ -67,4 +67,25 @@ describe('WindowManager', () => {
 
         expect(window.buyItem).toHaveBeenCalledWith('123');
     });
+
+    test('_parseAndSanitizeToElement is resilient to DOM clobbering', () => {
+        const div = document.createElement('div');
+
+        // The payload uses a form with inputs named after Element prototype methods and properties.
+        // If the sanitizer is vulnerable to DOM clobbering, it will fail to remove the 'onerror'
+        // handler from the image.
+        const payload = `
+            <form id="clobber">
+                <img name="attributes" src="x" onerror="window.hacked()">
+                <input name="hasAttribute" value="1">
+                <input name="getAttribute" value="1">
+                <input name="removeAttribute" value="1">
+                <input name="addEventListener" value="1">
+            </form>
+        `;
+
+        windowManager._parseAndSanitizeToElement(payload, div);
+        const img = div.querySelector('img');
+        expect(img.getAttribute("onerror")).toBeNull();
+    });
 });

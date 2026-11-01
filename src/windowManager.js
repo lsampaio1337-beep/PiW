@@ -31,24 +31,42 @@ export class WindowManager {
             // We must allow inline handlers (onclick, onmouseover) because the app is deeply coupled to them,
             // but we must not blindly use eval/innerHTML. We extract them and parse them to secure event listeners.
             const allElements = body.querySelectorAll('*');
+
+            // Cache original DOM methods to prevent DOM clobbering bypasses.
+            // If an attacker injects <form><input name="hasAttribute"></form>, it clobbers el.hasAttribute
+            // causing standard property access to fail or return an element instead of the function.
+            const _hasAttribute = Element.prototype.hasAttribute;
+            const _getAttribute = Element.prototype.getAttribute;
+            const _removeAttribute = Element.prototype.removeAttribute;
+            const _attributesDescriptor = Object.getOwnPropertyDescriptor(Element.prototype, 'attributes');
+            const _addEventListener = EventTarget.prototype.addEventListener;
+
             allElements.forEach(el => {
                 // Strip javascript: protocols from known URI attributes
                 ['href', 'src', 'formaction', 'action'].forEach(attrName => {
-                    if (el.hasAttribute(attrName)) {
-                        const val = el.getAttribute(attrName).toLowerCase().replace(/[\s\x00-\x1f\x7f-\x9f]/g, '');
+                    if (_hasAttribute.call(el, attrName)) {
+                        const val = _getAttribute.call(el, attrName).toLowerCase().replace(/[\s\x00-\x1f\x7f-\x9f]/g, '');
                         if (val.startsWith('javascript:') || val.startsWith('vbscript:') || val.startsWith('data:text/html')) {
-                            el.removeAttribute(attrName);
+                            _removeAttribute.call(el, attrName);
                         }
                     }
                 });
 
-                Array.from(el.attributes).forEach(attr => {
+                // Get real attributes bypassing clobbered 'attributes' property
+                const realAttributes = _attributesDescriptor && _attributesDescriptor.get
+                                        ? _attributesDescriptor.get.call(el)
+                                        : el.attributes;
+
+                // Create array to iterate over safely, mitigating mutation during iteration
+                const attrs = Array.from(realAttributes || []);
+
+                attrs.forEach(attr => {
                     if (attr.name.toLowerCase().startsWith('on')) {
                         const eventType = attr.name.toLowerCase().substring(2);
                         const rawCode = attr.value;
-                        el.removeAttribute(attr.name); // Remove the inline string to prevent arbitrary string execution
+                        _removeAttribute.call(el, attr.name); // Remove the inline string to prevent arbitrary string execution
 
-                        el.addEventListener(eventType, function(event) {
+                        _addEventListener.call(el, eventType, function(event) {
                             // Extract known window/DOM elements being invoked.
                             // To prevent bypasses via string assignment or eval, we do NOT execute the string.
                             // We dynamically map strict string templates back to function calls if they match.
