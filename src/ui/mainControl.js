@@ -280,29 +280,25 @@ export function getChallengeData(unlock) {
     return { isMet, textParts };
 }
 
-export function updateMainControl() {
-    const battleSystem = globals.battleSystem;
-    const inGym = battleSystem && battleSystem.gymState && battleSystem.gymState.isActive;
-    const noPokemon = state.party.length === 0 && state.storage.length === 0;
-
-    let isFinalChallengeCompleted = checkFinalChallengeCompleted();
-
+function updateMainControlTitle() {
     const mainControlTitle = document.getElementById('main-control-title');
     if (mainControlTitle) {
         const regionName = state.currentRegionName || "Kanto";
         mainControlTitle.innerText = `Main Control (${regionName})`;
     }
+}
 
-    // Legacy saves might not have hasPickedStarter but will have party/storage
+function updateMenuLocks(inGym, noPokemon) {
     const isStarterPending = !state.stats.hasPickedStarter && noPokemon;
-
     const lockMenus = inGym || noPokemon || isStarterPending;
     const navButtons = document.getElementById('main-control');
     if (navButtons) {
         navButtons.style.pointerEvents = lockMenus ? 'none' : 'auto';
         navButtons.style.opacity = lockMenus ? '0.5' : '1.0';
     }
+}
 
+function updateTimers() {
     const timerRoute = document.getElementById('main-view-timer-route');
     const timerTotal = document.getElementById('main-view-timer-total');
     if (timerRoute && timerTotal) {
@@ -322,10 +318,14 @@ export function updateMainControl() {
         timerRoute.innerText = `${formatTime(routeSec)} (route)`;
         timerTotal.innerText = `(total) ${formatTime(totalSec)}`;
     }
+}
 
+function updateChallengeText() {
     const elChallengeText = document.getElementById('current-challenge-text');
     if (elChallengeText) elChallengeText.innerHTML = getChallengeText();
+}
 
+function updateBonusCandyNotification() {
     const bonusCandyContainer = document.getElementById('bonus-candy-container');
     const exclamation = document.getElementById('bonus-candy-exclamation');
     if (exclamation && bonusCandyContainer) {
@@ -344,7 +344,9 @@ export function updateMainControl() {
             bonusCandyContainer.style.display = 'none';
         }
     }
+}
 
+function updateGiftNotification() {
     const giftContainer = document.getElementById('gift-container');
     const giftNotification = document.getElementById('gift-notification');
     if (giftContainer && giftNotification) {
@@ -363,7 +365,9 @@ export function updateMainControl() {
             giftContainer.style.display = 'none';
         }
     }
+}
 
+function updateCalendarNotification() {
     const calendarNotification = document.getElementById('calendar-notification');
     if (calendarNotification) {
         if (checkDailyRewardAvailable() || checkAnyDailyChallengeCompleted()) {
@@ -372,8 +376,9 @@ export function updateMainControl() {
             calendarNotification.style.display = 'none';
         }
     }
+}
 
-    // Professor Task Notification Tracking
+function updateProfTaskNotification() {
     if (window.getProfTaskAvailableCount) {
         let currentProfTasksCount = window.getProfTaskAvailableCount();
         if (currentProfTasksCount > (state.stats.profTasksAvailableCount || 0)) {
@@ -387,17 +392,20 @@ export function updateMainControl() {
         }
         state.stats.profTasksAvailableCount = currentProfTasksCount;
     }
+}
 
+function updateMapNotification(isFinalChallengeCompleted) {
     const mapNotification = document.getElementById('map-notification');
     if (mapNotification) {
-        let isFinalChallengeCompleted = checkFinalChallengeCompleted();
         if (state.stats.hasUnseenMap || state.stats.showMapProfNotification || (isFinalChallengeCompleted && !state.globalStats.hasSeenJohtoMap)) {
             mapNotification.style.display = 'block';
         } else {
             mapNotification.style.display = 'none';
         }
     }
+}
 
+function updateChallengesNotification() {
     const challengesNotification = document.getElementById('challenges-notification');
     if (challengesNotification) {
         let anyMet = false;
@@ -415,7 +423,9 @@ export function updateMainControl() {
         }
         challengesNotification.style.display = anyMet ? 'block' : 'none';
     }
+}
 
+function updateSleepNotification() {
     const sleepContainer = document.getElementById('sleep-container');
     const sleepNotification = document.getElementById('sleep-notification');
 
@@ -432,6 +442,27 @@ export function updateMainControl() {
             sleepNotification.style.display = 'none';
         }
     }
+}
+
+export function updateMainControl() {
+    const battleSystem = globals.battleSystem;
+    const inGym = battleSystem && battleSystem.gymState && battleSystem.gymState.isActive;
+    const noPokemon = state.party.length === 0 && state.storage.length === 0;
+
+    let isFinalChallengeCompleted = checkFinalChallengeCompleted();
+
+    updateMainControlTitle();
+    updateMenuLocks(inGym, noPokemon);
+    updateTimers();
+    updateChallengeText();
+    updateBonusCandyNotification();
+    updateGiftNotification();
+    updateCalendarNotification();
+    updateProfTaskNotification();
+    updateMapNotification(isFinalChallengeCompleted);
+    updateChallengesNotification();
+    updateSleepNotification();
+
     // Auto-adjust width of the Main Control window if new icons appeared
     if (window.windowManager) {
         window.windowManager.autoAdjustWidth('main-control-window');
