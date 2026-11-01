@@ -2738,15 +2738,7 @@ window.startGame = startGame;
 
 
 
-function escapeHTML(str) {
-    if (!str) return '';
-    return String(str)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
-}
+import { escapeHTML } from './utils/stringUtils.js';
 
 function renderProfessorSprite(currentRegion) {
     const labConfigs = {

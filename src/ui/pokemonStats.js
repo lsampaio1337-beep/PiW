@@ -1,6 +1,7 @@
 import { getSpeciesDataHtml, buildEvolutionLineHtml, formatType } from "./pokedex.js";
 import { state } from '../state.js';
 import { updateUI, showModal } from '../ui.js';
+import { escapeHTML } from '../utils/stringUtils.js';
 
 
 function getEvolveRequirements(p, evo, state) {
@@ -184,7 +185,7 @@ export function showPokemonStats(idx, location) {
         </div>
     `;
 
-    showModal(`${p.name} (Lv. ${p.level})`, html, "window-pokemon-stats");
+    showModal(`${escapeHTML(p.name)} (Lv. ${p.level})`, html, "window-pokemon-stats");
 }
 
 
@@ -299,7 +300,7 @@ window.showVitaminsModal = function(location, idx) {
         </div>
     `;
 
-    showModal(`Vitamins for ${p.name}`, html, "window-vitamins", "500px");
+    showModal(`Vitamins for ${escapeHTML(p.name)}`, html, "window-vitamins", "500px");
 };
 
 import * as mathEngine from '../mathEngine.js';

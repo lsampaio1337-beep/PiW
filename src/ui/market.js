@@ -25,19 +25,7 @@ function getPokemonDataMap() {
 }
 
 import { updateUI, showModal } from '../ui.js';
-
-function escapeHTML(str) {
-    if (typeof str !== 'string') return str;
-    return str.replace(/[&<>'"]/g,
-        tag => ({
-            '&': '&amp;',
-            '<': '&lt;',
-            '>': '&gt;',
-            "'": '&#39;',
-            '"': '&quot;'
-        }[tag] || tag)
-    );
-}
+import { escapeHTML } from '../utils/stringUtils.js';
 
 function escapeJS(str) {
     if (typeof str !== 'string') return str;
