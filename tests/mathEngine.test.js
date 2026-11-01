@@ -1,4 +1,132 @@
-import { calculateDamage, calculateReqXP, calculateStat } from '../src/mathEngine.js';
+import { calculateDamage, calculateReqXP, calculateStat, generateIVs } from '../src/mathEngine.js';
+
+describe('generateIVs', () => {
+    let originalRandom;
+
+    beforeEach(() => {
+        originalRandom = Math.random;
+        jest.spyOn(Math, 'random');
+    });
+
+    afterEach(() => {
+        jest.restoreAllMocks();
+    });
+
+    const getSum = (statsObj) => {
+        return statsObj.hp + statsObj.atk + statsObj.def + statsObj.spa + statsObj.spd + statsObj.spe;
+    };
+
+    const expectValidStats = (statsObj, expectedSum) => {
+        expect(getSum(statsObj)).toBe(expectedSum);
+        for (const stat of ['hp', 'atk', 'def', 'spa', 'spd', 'spe']) {
+            expect(statsObj[stat]).toBeGreaterThanOrEqual(1);
+            expect(statsObj[stat]).toBeLessThanOrEqual(100);
+        }
+    };
+
+    test('should generate base IVs without boosts correctly', () => {
+        let isFirstCall = true;
+        Math.random.mockImplementation(() => {
+            if (isFirstCall) {
+                isFirstCall = false;
+                return 0.5; // base sumIV = floor(0.5 * 595) + 6 = 297 + 6 = 303
+            }
+            return originalRandom();
+        });
+
+        const result = generateIVs();
+        expectValidStats(result, 303);
+    });
+
+    test('should apply Mastery IV Booster correctly (Tier 1)', () => {
+        let isFirstCall = true;
+        Math.random.mockImplementation(() => {
+            if (isFirstCall) {
+                isFirstCall = false;
+                return 0.5; // base 303
+            }
+            return originalRandom();
+        });
+
+        // Tier 1 gives 0.05 boost. 303 * 1.05 = 318.15 -> 318
+        const result = generateIVs({ ivTaskTier: 1 });
+        expectValidStats(result, 318);
+    });
+
+    test('should apply Mastery IV Booster correctly (Tier 5)', () => {
+        let isFirstCall = true;
+        Math.random.mockImplementation(() => {
+            if (isFirstCall) {
+                isFirstCall = false;
+                return 0.5; // base 303
+            }
+            return originalRandom();
+        });
+
+        // Tier 5 gives 0.25 boost. 303 * 1.25 = 378.75 -> 378
+        const result = generateIVs({ ivTaskTier: 5 });
+        expectValidStats(result, 378);
+    });
+
+    test('should apply Shiny IV Booster correctly', () => {
+        let isFirstCall = true;
+        Math.random.mockImplementation(() => {
+            if (isFirstCall) {
+                isFirstCall = false;
+                return 0.5; // base 303
+            }
+            return originalRandom();
+        });
+
+        // Shiny + Tier 1 gives 0.25 boost. 303 * 1.25 = 378.75 -> 378
+        const result = generateIVs({ shinyCaughtTaskTier: 1 }, true);
+        expectValidStats(result, 378);
+    });
+
+    test('should stack Mastery and Shiny IV Boosters multiplicatively', () => {
+        let isFirstCall = true;
+        Math.random.mockImplementation(() => {
+            if (isFirstCall) {
+                isFirstCall = false;
+                return 0.5; // base 303
+            }
+            return originalRandom();
+        });
+
+        // Tier 5 (0.25) and Shiny (0.25) -> 303 * 1.25 * 1.25 = 473.4375 -> 473
+        const result = generateIVs({ ivTaskTier: 5, shinyCaughtTaskTier: 1 }, true);
+        expectValidStats(result, 473);
+    });
+
+    test('should strictly cap the total IVs at 600', () => {
+        let isFirstCall = true;
+        Math.random.mockImplementation(() => {
+            if (isFirstCall) {
+                isFirstCall = false;
+                return 0.99; // base sumIV = floor(0.99 * 595) + 6 = 589 + 6 = 595
+            }
+            return originalRandom();
+        });
+
+        // 595 * 1.25 * 1.25 = 929.6875 -> capped at 600
+        const result = generateIVs({ ivTaskTier: 5, shinyCaughtTaskTier: 1 }, true);
+        expectValidStats(result, 600);
+    });
+
+    test('should randomly distribute IVs correctly across multiple generations without exceeding bounds', () => {
+        // We will run this several times without mocking the first call,
+        // letting it be fully random to ensure distribution logic has no edge cases.
+        Math.random.mockImplementation(() => originalRandom());
+
+        for (let i = 0; i < 50; i++) {
+            const result = generateIVs({ ivTaskTier: Math.floor(Math.random() * 6) });
+            const sum = getSum(result);
+            expectValidStats(result, sum);
+            expect(sum).toBeLessThanOrEqual(600);
+            expect(sum).toBeGreaterThanOrEqual(6);
+        }
+    });
+});
 
 describe('calculateReqXP', () => {
     test('should calculate required XP correctly for level 1', () => {
