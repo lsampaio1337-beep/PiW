@@ -84,6 +84,10 @@ export function showBackpack() {
         `;
         window.showModal(titleHtml, html, 'window-backpack', '800px', 'auto');
         const win = document.getElementById('window-backpack');
+        const contentContainer = win?.querySelector('.window-content-container');
+        if (contentContainer) {
+            contentContainer.style.minWidth = '800px';
+        }
         if (win) {
             // Apply maximum height logic for Backpack based on aspect ratio constraint (800 / 1279 * 1350 = ~844px)
             // We set it slightly larger so it triggers native app bounding constraints if it overflows screen
