@@ -1,16 +1,7 @@
 import { VITAMINS, WHITE_CANDY_DEFEAT_REQUIREMENT } from "./constants.js";
 // src/battleSystem.js
 import * as mathEngine from './mathEngine.js';
-
-function escapeHTML(str) {
-    if (!str) return '';
-    return String(str)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
-}
+import { escapeHTML } from './utils/stringUtils.js';
 
 class BattleSystem {
 
@@ -46,22 +37,35 @@ class BattleSystem {
         this.gymState = {
             isActive: false,
             gym: null,
+            gymIndex: 0,
             currentTrainerIndex: 0
         };
     }
 
+    _initPokemonBaseMap() {
+        this.pokemonBaseMap = new Map();
+        const pokemonData = this.state.config?.pokemonData;
+        if (!pokemonData) return;
+
+        for (const p of pokemonData) {
+            this.pokemonBaseMap.set(p.id, p);
+        }
+    }
+
     getPokemonBase(id) {
         if (!this.pokemonBaseMap) {
-            this.pokemonBaseMap = new Map();
-            if (this.state.config && this.state.config.pokemonData) {
-                for (const p of this.state.config.pokemonData) {
-                    this.pokemonBaseMap.set(p.id, p);
-                }
-            }
+            this._initPokemonBaseMap();
         }
         return this.pokemonBaseMap.get(id);
     }
 
+    _initRouteMap(routes, currentRegion) {
+        this._routeMap = new Map();
+        this._routeMapRegion = currentRegion;
+        for (let i = 0; i < routes.length; i++) {
+            this._routeMap.set(routes[i].name, routes[i]);
+        }
+    }
 
     getRoute(routeName) {
         const currentRegion = this.state.currentRegionName;
@@ -72,13 +76,10 @@ class BattleSystem {
 
         const routes = window.getCurrentRoutes();
         let foundRoute = undefined;
+
         if (routes) {
             if (this._routeMapRegion !== currentRegion || !this._routeMap) {
-                this._routeMap = new Map();
-                for (let i = 0; i < routes.length; i++) {
-                    this._routeMap.set(routes[i].name, routes[i]);
-                }
-                this._routeMapRegion = currentRegion;
+                this._initRouteMap(routes, currentRegion);
             }
             foundRoute = this._routeMap.get(routeName);
         }
@@ -90,26 +91,36 @@ class BattleSystem {
         return foundRoute;
     }
 
+    _initGymMapCache() {
+        this._gymMapCache = new Map();
+        const gyms = this.state.config?.gyms;
+        if (!gyms) return;
+
+        for (const g of gyms) {
+            this._gymMapCache.set(g.name, g);
+        }
+    }
+
     getGym(gymName) {
         if (!this._gymMapCache) {
-            this._gymMapCache = new Map();
-            if (this.state.config && this.state.config.gyms) {
-                for (const g of this.state.config.gyms) {
-                    this._gymMapCache.set(g.name, g);
-                }
-            }
+            this._initGymMapCache();
         }
         return this._gymMapCache.get(gymName);
     }
 
+    _initPokeballMapCache() {
+        this._pokeballMapCache = new Map();
+        const pokeballs = this.state.config?.balance?.items?.pokeballs;
+        if (!pokeballs) return;
+
+        for (const b of pokeballs) {
+            this._pokeballMapCache.set(b.name, b);
+        }
+    }
+
     getPokeballConfig(ballName) {
         if (!this._pokeballMapCache) {
-            this._pokeballMapCache = new Map();
-            if (this.state.config && this.state.config.balance && this.state.config.balance.items && this.state.config.balance.items.pokeballs) {
-                for (const b of this.state.config.balance.items.pokeballs) {
-                    this._pokeballMapCache.set(b.name, b);
-                }
-            }
+            this._initPokeballMapCache();
         }
         return this._pokeballMapCache.get(ballName);
     }
@@ -628,8 +639,12 @@ class BattleSystem {
         const gym = this.getGym(gymName);
         if (!gym) return;
 
+        let gymIndex = this.state.config.gyms.findIndex(g => g.name === gymName);
+        if (gymIndex === -1) gymIndex = 0; // Fallback
+
         this.stop();
         this.gymState = {
+            gymIndex: gymIndex,
             isActive: true,
             gym: gym,
             currentTrainerIndex: 0,
@@ -711,7 +726,7 @@ class BattleSystem {
                 vGym.style.position = 'relative'; // Ensure relative positioning
                 vGym.insertBefore(dynamicBg, vGym.firstChild);
             } else {
-                const gymIndex = this.state.config.gyms.findIndex(g => g.name === gym.name);
+                const gymIndex = this.gymState.gymIndex;
                 const gymBGs = [
                     'BG-Gym-1-Pewter-Rock.png',
                     'BG-Gym-2-Cerulean-Water.png',
@@ -797,6 +812,7 @@ class BattleSystem {
     stopGymBattle() {
         this.gymState.isActive = false;
         this.gymState.gym = null;
+        this.gymState.gymIndex = 0;
         this.stop();
 
         // Return to normal map or idle
@@ -908,8 +924,7 @@ class BattleSystem {
         // Gym leaders and trainers have fixed quality (e.g. Regular or Uncommon)
         const isLeader = this.gymState.currentTrainerIndex === gym.trainers.length - 1;
 
-        let gymIndex = this.state.config.gyms.findIndex(g => g.name === gym.name);
-        if (gymIndex === -1) gymIndex = 0; // Fallback
+        let gymIndex = this.gymState.gymIndex;
 
         // Map Gym Index to QValue and SumIV
         // Gym 1 (Index 0): Q=1.2, SumIV=270 => IV=45
@@ -929,9 +944,10 @@ class BattleSystem {
         let ivValue = Math.ceil(sumIV / 6);
 
         let qualityName = "Gym"; // You can keep a standard name or map it if desired
-        if (qValue >= 1.6) qualityName = "Legendary";
-        else if (qValue >= 1.4) qualityName = "Epic";
-        else if (qValue >= 1.3) qualityName = "Rare";
+        if (qValue >= 2.0) qualityName = "Shiny";
+        else if (qValue >= 1.81) qualityName = "Legendary";
+        else if (qValue >= 1.6) qualityName = "Epic";
+        else if (qValue >= 1.4) qualityName = "Rare";
         else if (qValue >= 1.2) qualityName = "Uncommon";
 
         const q = { name: qualityName, q: qValue };
@@ -1909,7 +1925,7 @@ class BattleSystem {
                     window.trackDailyChallenge('defeat_gym_leader');
                 }
 
-                const gymIndex = this.state.config.gyms.findIndex(g => g.name === gym.name);
+                const gymIndex = this.gymState.gymIndex;
                 if (gymIndex !== -1 && this.state.trainer.badges === (this.state.currentRegionName === 'Johto' ? (gymIndex > 8 ? gymIndex - 9 : gymIndex + 8) : gymIndex)) {
                     if (!this.state.stats.pendingGifts) this.state.stats.pendingGifts = [];
                     this.state.stats.pendingGifts.push({ type: 'badge', gymName: gym.name, gymIndex: gymIndex });
@@ -2107,6 +2123,7 @@ class BattleSystem {
             if (this.gymState) {
                 this.gymState.isActive = false;
                 this.gymState.gym = null;
+                this.gymState.gymIndex = 0;
                 this.gymState.inCombat = false;
             }
             if (typeof window.switchView === 'function') {
@@ -2129,8 +2146,9 @@ class BattleSystem {
         if (this.gymState && this.gymState.isActive) {
             // Reset gym state entirely if wiped out
             this.gymState.isActive = false;
-            this.gymState.gym = null;
-            this.gymState.inCombat = false;
+                this.gymState.gym = null;
+                this.gymState.gymIndex = 0;
+                this.gymState.inCombat = false;
             if (typeof window.switchView === 'function') {
                 window.switchView("GYM");
             }

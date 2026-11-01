@@ -98,7 +98,8 @@ const helpContent = {
                     <li><strong>Uncommon</strong>: 1.1x Stats. Blue glow.</li>
                     <li><strong>Rare</strong>: 1.25x Stats. Dark Blue glow.</li>
                     <li><strong>Epic</strong>: 1.5x Stats. Purple glow. Extremely tough.</li>
-                    <li><strong>Shiny</strong>: 2.0x Stats. Rainbow animated glow. Incredibly rare.</li>
+                    <li><strong>Legendary</strong>: 1.81x Stats. Orange glow.</li>
+                    <li><strong>Shiny</strong>: 2.00 to 2.50x Stats. Rainbow animated glow. Incredibly rare.</li>
                 </ul>
             `,
             "IVs (Individual Values)": `

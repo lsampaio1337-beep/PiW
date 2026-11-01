@@ -979,8 +979,7 @@ window.cheatCompleteProfTask = function(type) {
         const caught = state.stats.caughtSpecies;
         const names = state.config.allPokemonNames || state.config.pokemonData.map(p => p.name);
 
-        let caughtCount = 0;
-        for (let _ in caught) caughtCount++;
+        const caughtCount = Object.keys(caught).length;
 
         if (caughtCount < names.length) {
             for (let i = 0, len = names.length; i < len; i++) {
@@ -1395,11 +1394,8 @@ function returnToLab() {
 window.returnToLab = returnToLab;
 
 window.selectStarter = selectStarter;
-function selectStarter(id) {
-    if (!storage.currentProfileId) {
-        storage.createNewProfile();
-    }
-    const pData = state.config.pokemonData.find(p => p.id === id);
+
+function _createStarterPokemon(pData) {
     const q = 1.40; // Fixed Rare
     const qName = "Rare";
     const ivs = {hp: 50, atk: 50, def: 50, spa: 50, spd: 50, spe: 50};
@@ -1416,41 +1412,7 @@ function selectStarter(id) {
 
     const bst = pData.hp + pData.atk + pData.def + pData.spa + pData.spd + pData.spe;
 
-    const starter = {
-        id: pData.id,
-        name: pData.name,
-        types: pData.types,
-        level: level,
-        xp: 0,
-        qualityName: qName,
-        quality: q,
-        ivs: ivs,
-        currentStats: stats,
-        maxHp: stats.hp,
-        currentHp: stats.hp,
-        bst: bst,
-        evxp: mathEngine.calculateEVXP(bst, level, q, ivs.hp + ivs.atk + ivs.def + ivs.spa + ivs.spd + ivs.spe),
-        evm: mathEngine.calculateEVM(bst, level, q, ivs.hp + ivs.atk + ivs.def + ivs.spa + ivs.spd + ivs.spe),
-        pp: mathEngine.calculatePP(bst, level, q, ivs.hp + ivs.atk + ivs.def + ivs.spa + ivs.spd + ivs.spe),
-        moves: [{name: "Tackle", power: 40, type: "Normal", category: "Physical"}] // Basic start
-    };
-
-    state.party.push(starter);
-    state.stats.hasPickedStarter = true;
-    returnToLab();
-
-    // Refresh window after adding chosen pokemon
-    const partyWindow = document.getElementById('party-window');
-    if (partyWindow && window.windowManager) {
-        if (partyWindow.style.display === 'none' || !partyWindow.style.display) {
-            window.windowManager.toggleWindow('party-window', true);
-        }
-        if (typeof partyWindow.adjustHeightForNewContent === 'function') partyWindow.adjustHeightForNewContent();
-    }
-    updateTeamWindow();
-
-    // Add identical pokemon to Team
-    const starterCopy = {
+    return {
         id: pData.id,
         name: pData.name,
         types: pData.types,
@@ -1468,23 +1430,18 @@ function selectStarter(id) {
         pp: mathEngine.calculatePP(bst, level, q, ivs.hp + ivs.atk + ivs.def + ivs.spa + ivs.spd + ivs.spe),
         moves: [{name: "Tackle", power: 40, type: "Normal", category: "Physical"}] // Basic start
     };
-    state.party.push(starterCopy);
+}
 
-    // Refresh window after adding duplicate
+function _refreshPartyWindowHeight(partyWindow) {
     if (partyWindow && window.windowManager) {
-        if (typeof partyWindow.adjustHeightForNewContent === 'function') partyWindow.adjustHeightForNewContent();
+        if (typeof partyWindow.adjustHeightForNewContent === 'function') {
+            partyWindow.adjustHeightForNewContent();
+        }
     }
     updateTeamWindow();
+}
 
-    // Remove similar pokemon from Team
-    state.party.pop();
-
-    // Refresh window after removing duplicate
-    if (partyWindow && window.windowManager) {
-        if (typeof partyWindow.adjustHeightForNewContent === 'function') partyWindow.adjustHeightForNewContent();
-    }
-    updateTeamWindow();
-
+function _initializeInitialRoutes(id) {
     // Setup initial routes correctly so player is not softlocked
     if (!state.stats.newRoutes) state.stats.newRoutes = [];
     if (!state.stats.newRoutes.includes("PokeCenter & PokeMarket")) {
@@ -1504,6 +1461,43 @@ function selectStarter(id) {
     state.stats.caught = (state.stats.caught || 0) + 1;
     state.stats.dex = state.stats.dex || {};
     state.stats.dex[id] = true;
+}
+
+function selectStarter(id) {
+    if (!storage.currentProfileId) {
+        storage.createNewProfile();
+    }
+    const pData = state.config.pokemonData.find(p => p.id === id);
+
+    const starter = _createStarterPokemon(pData);
+
+    state.party.push(starter);
+    state.stats.hasPickedStarter = true;
+    returnToLab();
+
+    // Refresh window after adding chosen pokemon
+    const partyWindow = document.getElementById('party-window');
+    if (partyWindow && window.windowManager) {
+        if (partyWindow.style.display === 'none' || !partyWindow.style.display) {
+            window.windowManager.toggleWindow('party-window', true);
+        }
+    }
+    _refreshPartyWindowHeight(partyWindow);
+
+    // Add identical pokemon to Team
+    const starterCopy = _createStarterPokemon(pData);
+    state.party.push(starterCopy);
+
+    // Refresh window after adding duplicate
+    _refreshPartyWindowHeight(partyWindow);
+
+    // Remove similar pokemon from Team
+    state.party.pop();
+
+    // Refresh window after removing duplicate
+    _refreshPartyWindowHeight(partyWindow);
+
+    _initializeInitialRoutes(id);
 
     storage.save(state);
 
@@ -1601,6 +1595,11 @@ function startGame() {
     // Start playtime tracker
     window.restartGameClock();
 
+    setupAutosave();
+    setupDragAndDropScrolling();
+}
+
+function setupAutosave() {
     // Autosave loop
     setInterval(() => {
         storage.save(state);
@@ -1610,7 +1609,9 @@ function startGame() {
     window.addEventListener('beforeunload', () => {
         storage.save(state);
     });
+}
 
+function setupDragAndDropScrolling() {
     // Handle scrolling during drag-and-drop (Wheel + Auto-scroll at edges)
     window.isDraggingPokemon = false;
     let dragScrollTarget = null;
@@ -1694,9 +1695,6 @@ function startGame() {
 
         autoScrollInterval = requestAnimationFrame(autoScrollLoop);
     }
-
-
-
 }
 
 async function init() {
@@ -2542,7 +2540,8 @@ async function init() {
                     { key: 'glassTier', configKey: 'glass' },
                     { key: 'smartwatchTier', configKey: 'smartwatch' },
                     { key: 'speedTier', configKey: 'speed' },
-                    { key: 'lootTier', configKey: 'loot' }
+                    { key: 'lootTier', configKey: 'loot' },
+                    { key: 'daycareTier', configKey: 'daycare' }
                 ];
 
                 upgradeTypes.forEach(type => {
@@ -2739,27 +2738,9 @@ window.startGame = startGame;
 
 
 
-function escapeHTML(str) {
-    if (!str) return '';
-    return String(str)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
-}
+import { escapeHTML } from './utils/stringUtils.js';
 
-export function renderProfessorLab() {
-    const labContent = document.getElementById("generic-lab-content");
-    const labView = document.getElementById("view-professor-lab");
-    if (!labContent || !labView) return;
-
-    if (state.stats.showProfMarkerPulse) {
-        state.stats.showProfMarkerPulse = false;
-    }
-
-    let currentRegion = window.currentMapRegion || 'Kanto';
-
+function renderProfessorSprite(currentRegion) {
     const labConfigs = {
         'Kanto': { sprite: "1_Kanto_Professor_Oak.png", position: { rel_x: 0.5861, rel_y: 0.016, px_width: 595, px_height: 1326 } },
         'Johto': { sprite: "2_Johto_Professor_Elm.png", position: { rel_x: 0.5628, rel_y: 0.037, px_width: 624, px_height: 1256 } },
@@ -2784,113 +2765,133 @@ export function renderProfessorLab() {
         profImg.style.width = `${(config.position.px_width / 1800) * 100}%`;
         profImg.style.height = `${(config.position.px_height / 1000) * 100}%`;
     }
+}
+
+function renderStarterSelection(currentRegion, labContent) {
+    const regionStarters = {
+        'Kanto': [1, 4, 7],
+        'Johto': [152, 155, 158],
+        'Hoenn': [252, 255, 258],
+        'Sinnoh': [387, 390, 393],
+        'Unova': [495, 498, 501]
+    };
+    const starterIds = regionStarters[currentRegion] || regionStarters['Kanto'];
+
+    let containerDiv = document.createElement('div');
+    containerDiv.style.backgroundColor = 'rgba(0,0,0,0.8)';
+    containerDiv.style.position = 'absolute';
+    containerDiv.style.left = '15%';
+    containerDiv.style.top = '50%';
+    containerDiv.style.transform = 'translateY(-50%)';
+    containerDiv.style.padding = '30px';
+    containerDiv.style.borderRadius = '8px';
+
+    let h2 = document.createElement('h2');
+    h2.textContent = 'Choose your Starter Pokémon';
+    containerDiv.appendChild(h2);
+
+    let starterChoices = document.createElement('div');
+    starterChoices.className = 'starter-choices';
+
+    starterIds.forEach(id => {
+        const p = state.config.pokemonData.find(p => p.id === id);
+        const name = p ? p.name : 'Unknown';
+        const paddedId = id.toString().padStart(4, '0');
+        const spriteSrc = `Assets/Pokemon Sprites/Natural/Gen5/${paddedId}_${name}.png`;
+
+        const btn = document.createElement('button');
+        btn.onclick = () => window.selectStarter(id);
+
+        const img = document.createElement('img');
+        img.src = spriteSrc;
+        img.style.width = '80px';
+        img.style.height = '80px';
+
+        const br = document.createElement('br');
+
+        const textNode = document.createTextNode(name);
+
+        btn.appendChild(img);
+        btn.appendChild(br);
+        btn.appendChild(textNode);
+        starterChoices.appendChild(btn);
+    });
+
+    containerDiv.appendChild(starterChoices);
+    labContent.replaceChildren(containerDiv);
+}
+
+function renderAssignmentsAndBoosters(labContent) {
+    let containerDiv = document.createElement('div');
+    containerDiv.style.backgroundColor = 'rgba(0,0,0,0.85)';
+    containerDiv.style.position = 'absolute';
+    containerDiv.style.left = '15%';
+    containerDiv.style.top = '50%';
+    containerDiv.style.transform = 'translateY(-50%)';
+    containerDiv.style.padding = '20px';
+    containerDiv.style.borderRadius = '8px';
+    containerDiv.style.width = '250px';
+    containerDiv.style.color = 'white';
+    containerDiv.style.textAlign = 'center';
+
+    let h2 = document.createElement('h2');
+    h2.style.marginTop = '0';
+    h2.textContent = 'Professor Lab';
+    containerDiv.appendChild(h2);
+
+    let flexDiv = document.createElement('div');
+    flexDiv.style.display = 'flex';
+    flexDiv.style.flexDirection = 'column';
+    flexDiv.style.gap = '10px';
+
+    let innerDiv = document.createElement('div');
+    innerDiv.style.position = 'relative';
+    innerDiv.style.display = 'inline-block';
+    innerDiv.style.width = '100%';
+
+    let btn = document.createElement('button');
+    btn.onclick = () => window.showProfLabModal();
+    btn.className = 'action-btn action-btn-primary';
+    btn.style.width = '100%';
+    btn.textContent = 'Assignments and Boosters';
+    innerDiv.appendChild(btn);
+
+    if (state.stats.showProfLobbyNotification) {
+        let img = document.createElement('img');
+        img.src = 'Assets/Extra/Icons/ExclamationMark.png';
+        img.style.position = 'absolute';
+        img.style.top = '-5px';
+        img.style.right = '-5px';
+        img.style.width = '20px';
+        img.style.height = 'auto';
+        img.style.pointerEvents = 'none';
+        img.style.zIndex = '10';
+        innerDiv.appendChild(img);
+    }
+
+    flexDiv.appendChild(innerDiv);
+    containerDiv.appendChild(flexDiv);
+
+    labContent.replaceChildren(containerDiv);
+}
+
+export function renderProfessorLab() {
+    const labContent = document.getElementById("generic-lab-content");
+    const labView = document.getElementById("view-professor-lab");
+    if (!labContent || !labView) return;
+
+    if (state.stats.showProfMarkerPulse) {
+        state.stats.showProfMarkerPulse = false;
+    }
+
+    let currentRegion = window.currentMapRegion || 'Kanto';
+
+    renderProfessorSprite(currentRegion);
 
     if (!state.stats.hasPickedStarter) {
-        // Show starter selection
-        const regionStarters = {
-            'Kanto': [1, 4, 7],
-            'Johto': [152, 155, 158],
-            'Hoenn': [252, 255, 258],
-            'Sinnoh': [387, 390, 393],
-            'Unova': [495, 498, 501]
-        };
-        const starterIds = regionStarters[currentRegion] || regionStarters['Kanto'];
-
-        let containerDiv = document.createElement('div');
-        containerDiv.style.backgroundColor = 'rgba(0,0,0,0.8)';
-        containerDiv.style.position = 'absolute';
-        containerDiv.style.left = '15%';
-        containerDiv.style.top = '50%';
-        containerDiv.style.transform = 'translateY(-50%)';
-        containerDiv.style.padding = '30px';
-        containerDiv.style.borderRadius = '8px';
-
-        let h2 = document.createElement('h2');
-        h2.textContent = 'Choose your Starter Pokémon';
-        containerDiv.appendChild(h2);
-
-        let starterChoices = document.createElement('div');
-        starterChoices.className = 'starter-choices';
-
-        starterIds.forEach(id => {
-            const p = state.config.pokemonData.find(p => p.id === id);
-            const name = p ? p.name : 'Unknown';
-            const paddedId = id.toString().padStart(4, '0');
-            const spriteSrc = `Assets/Pokemon Sprites/Natural/Gen5/${paddedId}_${name}.png`;
-
-            const btn = document.createElement('button');
-            btn.onclick = () => window.selectStarter(id);
-
-            const img = document.createElement('img');
-            img.src = spriteSrc;
-            img.style.width = '80px';
-            img.style.height = '80px';
-
-            const br = document.createElement('br');
-
-            const textNode = document.createTextNode(name);
-
-            btn.appendChild(img);
-            btn.appendChild(br);
-            btn.appendChild(textNode);
-            starterChoices.appendChild(btn);
-        });
-
-        containerDiv.appendChild(starterChoices);
-        labContent.replaceChildren(containerDiv);
+        renderStarterSelection(currentRegion, labContent);
     } else {
-        // Show assignments (identical to Kanto layout)
-        let containerDiv = document.createElement('div');
-        containerDiv.style.backgroundColor = 'rgba(0,0,0,0.85)';
-        containerDiv.style.position = 'absolute';
-        containerDiv.style.left = '15%';
-        containerDiv.style.top = '50%';
-        containerDiv.style.transform = 'translateY(-50%)';
-        containerDiv.style.padding = '20px';
-        containerDiv.style.borderRadius = '8px';
-        containerDiv.style.width = '250px';
-        containerDiv.style.color = 'white';
-        containerDiv.style.textAlign = 'center';
-
-        let h2 = document.createElement('h2');
-        h2.style.marginTop = '0';
-        h2.textContent = 'Professor Lab';
-        containerDiv.appendChild(h2);
-
-        let flexDiv = document.createElement('div');
-        flexDiv.style.display = 'flex';
-        flexDiv.style.flexDirection = 'column';
-        flexDiv.style.gap = '10px';
-
-        let innerDiv = document.createElement('div');
-        innerDiv.style.position = 'relative';
-        innerDiv.style.display = 'inline-block';
-        innerDiv.style.width = '100%';
-
-        let btn = document.createElement('button');
-        btn.onclick = () => window.showProfLabModal();
-        btn.className = 'action-btn action-btn-primary';
-        btn.style.width = '100%';
-        btn.textContent = 'Assignments and Boosters';
-        innerDiv.appendChild(btn);
-
-        if (state.stats.showProfLobbyNotification) {
-            let img = document.createElement('img');
-            img.src = 'Assets/Extra/Icons/ExclamationMark.png';
-            img.style.position = 'absolute';
-            img.style.top = '-5px';
-            img.style.right = '-5px';
-            img.style.width = '20px';
-            img.style.height = 'auto';
-            img.style.pointerEvents = 'none';
-            img.style.zIndex = '10';
-            innerDiv.appendChild(img);
-        }
-
-        flexDiv.appendChild(innerDiv);
-        containerDiv.appendChild(flexDiv);
-
-        labContent.replaceChildren(containerDiv);
+        renderAssignmentsAndBoosters(labContent);
     }
 }
 

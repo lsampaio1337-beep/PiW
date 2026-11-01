@@ -1,23 +1,143 @@
 const sinnohMapCoordinates = {
-  "professor_lab": {
-    "name": "Professor Lab",
-    "x": 18.46,
-    "y": 89.43
-  },
   "201": {
     "name": "Route 201",
     "x": 20.02,
     "y": 82.11
   },
+  "202": {
+    "name": "Route 202",
+    "x": 25.89,
+    "y": 77.98
+  },
+  "203": {
+    "name": "Route 203",
+    "x": 29.85,
+    "y": 69.22
+  },
+  "204": {
+    "name": "Route 204",
+    "x": 26.29,
+    "y": 65.82
+  },
+  "205": {
+    "name": "Route 205",
+    "x": 30.9,
+    "y": 51.69
+  },
+  "207": {
+    "name": "Route 207",
+    "x": 37.22,
+    "y": 64.32
+  },
+  "208": {
+    "name": "Route 208",
+    "x": 49.22,
+    "y": 65.54
+  },
+  "209": {
+    "name": "Route 209",
+    "x": 61.62,
+    "y": 65.81
+  },
+  "210": {
+    "name": "Route 210",
+    "x": 61.27,
+    "y": 46.18
+  },
+  "211": {
+    "name": "Route 211",
+    "x": 43.65,
+    "y": 41.37
+  },
+  "212": {
+    "name": "Route 212",
+    "x": 58.35,
+    "y": 81.45
+  },
+  "213": {
+    "name": "Route 213",
+    "x": 71.78,
+    "y": 76.45
+  },
+  "214": {
+    "name": "Route 214",
+    "x": 76.27,
+    "y": 61.95
+  },
+  "215": {
+    "name": "Route 215",
+    "x": 67.09,
+    "y": 49.79
+  },
+  "216": {
+    "name": "Route 216",
+    "x": 41.99,
+    "y": 29.73
+  },
+  "217": {
+    "name": "Route 217",
+    "x": 39.74,
+    "y": 23.81
+  },
+  "218": {
+    "name": "Route 218",
+    "x": 18.65,
+    "y": 69.68
+  },
+  "221": {
+    "name": "Route 221",
+    "x": 34.18,
+    "y": 91.23
+  },
+  "222": {
+    "name": "Route 222",
+    "x": 83.89,
+    "y": 72.31
+  },
+  "223": {
+    "name": "Route 223",
+    "x": 86.68,
+    "y": 59.37
+  },
+  "224": {
+    "name": "Route 224",
+    "x": 91.02,
+    "y": 39.3
+  },
+  "225": {
+    "name": "Route 225",
+    "x": 64.94,
+    "y": 28.52
+  },
+  "227": {
+    "name": "Route 227",
+    "x": 75.1,
+    "y": 22.58
+  },
+  "228": {
+    "name": "Route 228",
+    "x": 78.91,
+    "y": 28.52
+  },
+  "229": {
+    "name": "Route 229",
+    "x": 79.78,
+    "y": 34.6
+  },
+  "professor_lab": {
+    "name": "Professor Lab",
+    "x": 18.46,
+    "y": 89.43
+  },
   "pokecenter_pokemarket": {
     "name": "PokeCenter & PokeMarket",
-    "x": 26.07,
-    "y": 74.38
+    "x": 26.59,
+    "y": 72.67
   },
   "oreburgh_gym": {
     "name": "Oreburgh Gym",
-    "x": 38.09,
-    "y": 72.45
+    "x": 38.39,
+    "y": 72.86
   },
   "eterna_gym": {
     "name": "Eterna Gym",
@@ -36,8 +156,8 @@ const sinnohMapCoordinates = {
   },
   "pastoria_gym": {
     "name": "Pastoria Gym",
-    "x": 64.06,
-    "y": 80.87
+    "x": 64.12,
+    "y": 77.81
   },
   "canalave_gym": {
     "name": "Canalave Gym",
@@ -54,21 +174,6 @@ const sinnohMapCoordinates = {
     "x": 90.82,
     "y": 73.83
   },
-  "204": {
-    "name": "Route 204",
-    "x": 26.37,
-    "y": 65.68
-  },
-  "205": {
-    "name": "Route 205",
-    "x": 30.96,
-    "y": 51.59
-  },
-  "207": {
-    "name": "Route 207",
-    "x": 39.65,
-    "y": 63.33
-  },
   "ravaged_path": {
     "name": "Ravaged Path",
     "x": 26.56,
@@ -76,63 +181,23 @@ const sinnohMapCoordinates = {
   },
   "eterna_forest": {
     "name": "Eterna Forest",
-    "x": 31.15,
-    "y": 42.61
-  },
-  "211": {
-    "name": "Route 211",
-    "x": 43.65,
-    "y": 41.37
+    "x": 30.28,
+    "y": 43.75
   },
   "mount_coronet": {
     "name": "Mount Coronet",
     "x": 44.73,
     "y": 57.8
   },
-  "208": {
-    "name": "Route 208",
-    "x": 49.22,
-    "y": 65.54
-  },
-  "209": {
-    "name": "Route 209",
-    "x": 61.62,
-    "y": 65.81
-  },
-  "214": {
-    "name": "Route 214",
-    "x": 76.27,
-    "y": 61.95
-  },
-  "213": {
-    "name": "Route 213",
-    "x": 71.78,
-    "y": 76.45
-  },
   "great_marsh": {
     "name": "Great Marsh",
     "x": 64.16,
     "y": 73.13
   },
-  "212": {
-    "name": "Route 212",
-    "x": 55.76,
-    "y": 81.42
-  },
   "fuego_ironworks": {
     "name": "Fuego Ironworks",
     "x": 25.78,
     "y": 47.86
-  },
-  "218": {
-    "name": "Route 218",
-    "x": 18.65,
-    "y": 69.68
-  },
-  "215": {
-    "name": "Route 215",
-    "x": 67.09,
-    "y": 49.79
   },
   "lake_acuity": {
     "name": "Lake Acuity",
@@ -154,11 +219,6 @@ const sinnohMapCoordinates = {
     "x": 82.62,
     "y": 63.74
   },
-  "222": {
-    "name": "Route 222",
-    "x": 83.89,
-    "y": 72.31
-  },
   "victory_road": {
     "name": "Victory Road",
     "x": 85.74,
@@ -169,40 +229,10 @@ const sinnohMapCoordinates = {
     "x": 86.66,
     "y": 42.18
   },
-  "224": {
-    "name": "Route 224",
-    "x": 91.02,
-    "y": 39.3
-  },
-  "221": {
-    "name": "Route 221",
-    "x": 34.18,
-    "y": 91.23
-  },
-  "225": {
-    "name": "Route 225",
-    "x": 64.94,
-    "y": 28.52
-  },
-  "227": {
-    "name": "Route 227",
-    "x": 75.1,
-    "y": 22.58
-  },
   "stark_mountain": {
     "name": "Stark Mountain",
     "x": 74.61,
     "y": 14.43
-  },
-  "228": {
-    "name": "Route 228",
-    "x": 78.91,
-    "y": 28.52
-  },
-  "229": {
-    "name": "Route 229",
-    "x": 79.78,
-    "y": 34.6
   },
   "diving_spot": {
     "name": "Diving Spot",
@@ -214,15 +244,80 @@ const sinnohMapCoordinates = {
     "x": 26.37,
     "y": 92.2
   },
-  "surfing_spot": {
-    "name": "Surfing Spot",
-    "x": 87.99,
-    "y": 58.08
-  },
   "big_fishing_spot": {
     "name": "Big Fishing Spot",
     "x": 57.62,
     "y": 41.78
+  },
+  "oreburgh_gate": {
+    "name": "Oreburgh Gate",
+    "x": 33.11,
+    "y": 70.33
+  },
+  "valley_windworks": {
+    "name": "Valley Windworks",
+    "x": 33.61,
+    "y": 58.03
+  },
+  "daycare": {
+    "name": "Daycare",
+    "x": 59.38,
+    "y": 57.02
+  },
+  "canalave_sea": {
+    "name": "Canalave Sea",
+    "x": 16.91,
+    "y": 56.04
+  },
+  "wayward_cave": {
+    "name": "Wayward Cave",
+    "x": 40.09,
+    "y": 50.75
+  },
+  "trophy_garden": {
+    "name": "Trophy Garden",
+    "x": 54.06,
+    "y": 82.12
+  },
+  "iron_island": {
+    "name": "Iron Island",
+    "x": 21.1,
+    "y": 42.04
+  },
+  "deep_lake_verity": {
+    "name": "Deep Lake Verity",
+    "x": 14.44,
+    "y": 78.85
+  },
+  "pastoria_bog": {
+    "name": "Pastoria Bog",
+    "x": 63.65,
+    "y": 84.08
+  },
+  "flower_paradise": {
+    "name": "Flower Paradise",
+    "x": 68.14,
+    "y": 2.64
+  },
+  "lunar_isles": {
+    "name": "Lunar Isles",
+    "x": 29.16,
+    "y": 28.16
+  },
+  "spear_pillar": {
+    "name": "Spear Pillar",
+    "x": 39.93,
+    "y": 66
+  },
+  "hall_of_origin": {
+    "name": "Hall of Origin",
+    "x": 45.18,
+    "y": 46.8
+  },
+  "continental_depths": {
+    "name": "Continental Depths",
+    "x": 45.14,
+    "y": 77.12
   }
 };
 export default sinnohMapCoordinates;

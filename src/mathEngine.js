@@ -141,7 +141,10 @@ function generateQuality(stats = {}, isDoubleShiny = false) {
     else if (roll <= uncommonMaxRoll) { tierName = "Uncommon"; baseQ = 1.20; maxQ = 1.39; }
     else if (roll <= rareMaxRoll) { tierName = "Rare"; baseQ = 1.40; maxQ = 1.59; }
     else if (roll <= 11999) { tierName = "Epic"; baseQ = 1.60; maxQ = 1.80; }
-    else { return { name: "Shiny", q: 2.00 }; }
+    else {
+        // Shinies range from 2.00 to 2.50
+        return { name: "Shiny", q: Math.floor((2.00 + Math.random() * 0.51) * 100) / 100 };
+    }
 
     let originalQ = baseQ + Math.random() * (maxQ - baseQ);
 

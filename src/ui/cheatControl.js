@@ -204,6 +204,7 @@ export function cheatAction(action) {
         const maxSmartwatchTier = (balance.smartwatch || []).length;
         const maxSpeedTier = (balance.speed || []).length;
         const maxLootTier = (balance.loot || []).length;
+        const maxDaycareTier = (balance.daycare || []).length;
 
         state.stats.upgrades.ballsTier = maxBallsTier;
         state.stats.upgrades.potionsTier = maxPotionsTier;
@@ -212,6 +213,7 @@ export function cheatAction(action) {
         state.stats.upgrades.smartwatchTier = maxSmartwatchTier;
         state.stats.upgrades.speedTier = maxSpeedTier;
         state.stats.upgrades.lootTier = maxLootTier;
+        state.stats.upgrades.daycareTier = maxDaycareTier;
 
         updateUI();
     } else if (action === 'Map') {

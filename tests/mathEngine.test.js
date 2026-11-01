@@ -1,4 +1,4 @@
-import { calculateDamage, calculateReqXP, calculateStat } from '../src/mathEngine.js';
+import { calculateDamage, calculateReqXP, calculateStat, calculateCatchChance } from '../src/mathEngine.js';
 
 describe('calculateReqXP', () => {
     test('should calculate required XP correctly for level 1', () => {
@@ -282,5 +282,98 @@ describe('calculateStat', () => {
         const vitamins = 0;
 
         expect(calculateStat(baseStat, ivStat, level, quality, vitamins)).toBe(5);
+    });
+});
+
+describe('calculateCatchChance', () => {
+    test('should return 100 immediately if ballMultiplier >= 10 (Masterball)', () => {
+        expect(calculateCatchChance(100, 1, 1, 100, 10)).toBe(100);
+        expect(calculateCatchChance(500, 50, 1.5, 300, 10, { cTaskTier: 5, blackYellowCandies: 10 }, true)).toBe(100);
+    });
+
+    test('should calculate standard chance correctly with no bonuses', () => {
+        const bst = 300;
+        const level = 10;
+        const quality = 1.0;
+        const totalIV = 300;
+        const ballMultiplier = 1;
+        // baseChance = 74.0 - (300 / 14.6) - (10 / 4.0) - 8.0 * ((1.0 - 0.8) / 1.0) - 5.0 * (300 / 600)
+        // = 74.0 - 20.5479 - 2.5 - 1.6 - 2.5 = 46.852
+        // chance = 46.852 * 1 * 1 * 1 = 46.852
+
+        const result = calculateCatchChance(bst, level, quality, totalIV, ballMultiplier);
+        expect(result).toBeCloseTo(46.852, 2);
+    });
+
+    test('should apply cTaskTier bonuses correctly', () => {
+        const bst = 300;
+        const level = 10;
+        const quality = 1.0;
+        const totalIV = 300;
+        const ballMultiplier = 1;
+        const baseChance = 46.852;
+
+        expect(calculateCatchChance(bst, level, quality, totalIV, ballMultiplier, { cTaskTier: 1 })).toBeCloseTo(baseChance * 1.05, 2);
+        expect(calculateCatchChance(bst, level, quality, totalIV, ballMultiplier, { cTaskTier: 2 })).toBeCloseTo(baseChance * 1.10, 2);
+        expect(calculateCatchChance(bst, level, quality, totalIV, ballMultiplier, { cTaskTier: 3 })).toBeCloseTo(baseChance * 1.15, 2);
+        expect(calculateCatchChance(bst, level, quality, totalIV, ballMultiplier, { cTaskTier: 4 })).toBeCloseTo(baseChance * 1.20, 2);
+        expect(calculateCatchChance(bst, level, quality, totalIV, ballMultiplier, { cTaskTier: 5 })).toBeCloseTo(baseChance * 1.25, 2);
+    });
+
+    test('should apply shiny multiplier if isShiny is true and shinySeenTaskTier >= 3', () => {
+        const bst = 300;
+        const level = 10;
+        const quality = 1.0;
+        const totalIV = 300;
+        const ballMultiplier = 1;
+        const baseChance = 46.852;
+
+        // No multiplier if tier < 3
+        expect(calculateCatchChance(bst, level, quality, totalIV, ballMultiplier, { shinySeenTaskTier: 2 }, true)).toBeCloseTo(baseChance, 2);
+        // Multiplier if tier >= 3
+        expect(calculateCatchChance(bst, level, quality, totalIV, ballMultiplier, { shinySeenTaskTier: 3 }, true)).toBeCloseTo(baseChance * 2, 2);
+    });
+
+    test('should enforce minimum baseChance of 1', () => {
+        const bst = 720; // High BST
+        const level = 100; // High Level
+        const quality = 2.5; // High Quality
+        const totalIV = 600; // High IV
+        const ballMultiplier = 1;
+
+        // baseChance without minimum: 74.0 - 49.3 - 25 - 13.6 - 5 = -18.9
+        // minimum baseChance is forced to 1
+
+        const result = calculateCatchChance(bst, level, quality, totalIV, ballMultiplier);
+        expect(result).toBe(1.0);
+    });
+
+    test('should clamp final chance between 1.0 and 100.0', () => {
+        // High modifiers exceeding 100% chance
+        const bst = 100;
+        const level = 1;
+        const quality = 0.8;
+        const totalIV = 100;
+        const ballMultiplier = 2; // Ultra ball
+
+        // baseChance is around 66.
+        // chance = 66 * 2 (multiplier) = 132
+
+        expect(calculateCatchChance(bst, level, quality, totalIV, ballMultiplier)).toBe(100.0);
+    });
+
+    test('should apply blackYellowCandies multiplier correctly', () => {
+        const bst = 300;
+        const level = 10;
+        const quality = 1.0;
+        const totalIV = 300;
+        const ballMultiplier = 1;
+        const baseChance = 46.852; // roughly
+
+        // 1 candy = 1.20x multiplier
+        expect(calculateCatchChance(bst, level, quality, totalIV, ballMultiplier, { blackYellowCandies: 1 })).toBeCloseTo(baseChance * 1.20, 2);
+
+        // 5 candies = 2.0x multiplier
+        expect(calculateCatchChance(bst, level, quality, totalIV, ballMultiplier, { blackYellowCandies: 5 })).toBeCloseTo(baseChance * 2.0, 2);
     });
 });

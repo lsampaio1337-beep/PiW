@@ -11,20 +11,8 @@ function getCandyCost(color, currentOwned) {
     return 1;
 }
 
-export function showBonusCandyModal() {
-    const defeats = state.stats.bonusCandyDefeats || 0;
-    const isClaimable = false; // Auto claims now
-    const progressTextLeft = `${defeats}/${WHITE_CANDY_DEFEAT_REQUIREMENT}`;
-    const progressPct = (defeats / WHITE_CANDY_DEFEAT_REQUIREMENT) * 100;
-
-    // Ensure candyPurchaseHistory exists
-    if (!state.stats.candyPurchaseHistory) {
-        state.stats.candyPurchaseHistory = [];
-    }
-
-    // Build the candy bank HTML
+function generateCandyBankHTML(history, unspentWhite) {
     let candyBankHTML = '';
-    const history = state.stats.candyPurchaseHistory;
     for (let i = 0; i < history.length; i++) {
         let candyImg = 'WhiteCandy.png';
         if (history[i] === 'Green Candy') candyImg = 'LootCandy.png';
@@ -33,67 +21,40 @@ export function showBonusCandyModal() {
         else if (history[i] === 'Rainbow Candy') candyImg = 'ShinyCandy.png';
         candyBankHTML += `<img src="Assets/Extra/Candies/${candyImg}" style="width: 30px; height: 30px; margin: 2px;" title="${history[i]}" onerror="this.style.display='none'">`;
     }
-    // Append unspent white candies
-    const unspentWhite = state.stats.whiteCandies || 0;
     for (let i = 0; i < unspentWhite; i++) {
         candyBankHTML += `<img src="Assets/Extra/Candies/WhiteCandy.png" style="width: 30px; height: 30px; margin: 2px;" title="White Candy" onerror="this.style.display='none'">`;
     }
+    return candyBankHTML;
+}
 
-    const html = `
-        <div style="text-align: center; font-family: sans-serif; box-sizing: border-box;">
-            <div style="margin-bottom: 10px;">
-                <h2 style="margin: 0; display: inline-block; vertical-align: middle;">White Candies: ${state.stats.whiteCandies || 0}</h2>
-                <img src="Assets/Extra/Candies/WhiteCandy.png" style="width: 30px; height: 30px; vertical-align: middle; margin-left: 10px;" onerror="this.style.display='none'">
-            </div>
-
-            <div style="margin-bottom: 20px;">
-                <div
-                    style="
-                        position: relative;
-                        width: 100%;
-                        height: 30px;
-                        background-color: #333;
-                        border-radius: 15px;
-                        border: 2px solid #555;
-                        overflow: hidden;
-                        cursor: default;
-                    ">
-                    <div style="
-                        position: absolute;
-                        top: 0; left: 0; height: 100%;
-                        width: ${progressPct}%;
-                        background-color: #3498db;
-                        transition: width 0.3s ease;
-                    "></div>
-                    <div style="
-                        position: absolute;
-                        top: 0; left: 0; right: 0; height: 100%;
-                        display: flex; align-items: center; justify-content: center;
-                        color: white; font-weight: bold; text-shadow: 1px 1px 2px black;
-                        pointer-events: none;
-                    ">
-                        <div style="width: 100%; text-align: center;">${progressTextLeft}</div>
-                    </div>
-                </div>
-            </div>
-
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
-                ${renderCandyOption('Green Candy', '+0.25% in Loot Probability and<br>Bonus of 1% in Money from Battles', getCandyCost('Green Candy', state.stats.greenCandies), state.stats.greenCandies, `Loot: +${0.25 * (state.stats.greenCandies || 0)}% | Money: +${1 * (state.stats.greenCandies || 0)}%`, 'LootCandy.png')}
-                ${renderCandyOption('Purple Candy', 'XP Bonus of 2%', getCandyCost('Purple Candy', state.stats.purpleCandies), state.stats.purpleCandies, `+${2 * (state.stats.purpleCandies || 0)}%`, 'XPCandy.png')}
-                ${renderCandyOption('Black Yellow Candy', 'Catch Bonus of 20%', getCandyCost('Black Yellow Candy', state.stats.blackYellowCandies), state.stats.blackYellowCandies, `Catch: +${20 * (state.stats.blackYellowCandies || 0)}%`, 'CatchCandy.png')}
-                ${renderCandyOption('Rainbow Candy', 'Shiny +1roll', getCandyCost('Rainbow Candy', state.stats.rainbowCandies), state.stats.rainbowCandies, '+' + (state.stats.rainbowCandies || 0) + ' rolls', 'ShinyCandy.png')}
-            </div>
-
-            <div style="background-color: #222; border: 1px solid #444; border-radius: 8px; padding: 10px; text-align: left; min-height: 50px;">
-                <h4 style="margin-top: 0; margin-bottom: 10px; text-align: center;">Candy Bank</h4>
-                <div style="display: flex; flex-wrap: wrap; justify-content: center;">
-                    ${candyBankHTML}
+function generateProgressBarHTML(progressPct, progressTextLeft) {
+    return `
+        <div style="margin-bottom: 20px;">
+            <div style="position: relative; width: 100%; height: 30px; background-color: #333; border-radius: 15px; border: 2px solid #555; overflow: hidden; cursor: default;">
+                <div style="position: absolute; top: 0; left: 0; height: 100%; width: ${progressPct}%; background-color: #3498db; transition: width 0.3s ease;"></div>
+                <div style="position: absolute; top: 0; left: 0; right: 0; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; text-shadow: 1px 1px 2px black; pointer-events: none;">
+                    <div style="width: 100%; text-align: center;">${progressTextLeft}</div>
                 </div>
             </div>
         </div>
+    `;
+}
 
+function generateCandyOptionsHTML() {
+    return `
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+            ${renderCandyOption('Green Candy', '+0.25% in Loot Probability and<br>Bonus of 1% in Money from Battles', getCandyCost('Green Candy', state.stats.greenCandies), state.stats.greenCandies, `Loot: +${0.25 * (state.stats.greenCandies || 0)}% | Money: +${1 * (state.stats.greenCandies || 0)}%`, 'LootCandy.png')}
+            ${renderCandyOption('Purple Candy', 'XP Bonus of 2%', getCandyCost('Purple Candy', state.stats.purpleCandies), state.stats.purpleCandies, `+${2 * (state.stats.purpleCandies || 0)}%`, 'XPCandy.png')}
+            ${renderCandyOption('Black Yellow Candy', 'Catch Bonus of 20%', getCandyCost('Black Yellow Candy', state.stats.blackYellowCandies), state.stats.blackYellowCandies, `Catch: +${20 * (state.stats.blackYellowCandies || 0)}%`, 'CatchCandy.png')}
+            ${renderCandyOption('Rainbow Candy', 'Shiny +1roll', getCandyCost('Rainbow Candy', state.stats.rainbowCandies), state.stats.rainbowCandies, '+' + (state.stats.rainbowCandies || 0) + ' rolls', 'ShinyCandy.png')}
+        </div>
+    `;
+}
+
+function generateFirstTimeOverlayHTML(hasSeenModal) {
+    return `
         <!-- Bonus Candy First-Time Overlay (Inner Modal) -->
-        <div id="bonus-candy-first-time-overlay" style="display: ${!state.globalStats.hasSeenBonusCandyModal ? 'flex' : 'none'}; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10000; background: rgba(0, 0, 0, 0.7); flex-direction: column; align-items: center; justify-content: center; border-radius: 8px;">
+        <div id="bonus-candy-first-time-overlay" style="display: ${!hasSeenModal ? 'flex' : 'none'}; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10000; background: rgba(0, 0, 0, 0.7); flex-direction: column; align-items: center; justify-content: center; border-radius: 8px;">
             <div style="background: #34495e; padding: 20px; border-radius: 10px; border: 2px solid #00ffff; text-align: center; color: white; max-width: 80%;">
                 <div id="bonus-candy-intro-text" style="margin-top: 0; font-size: 16px;">
                     <p>Here you can find delicious candies!</p>
@@ -105,10 +66,42 @@ export function showBonusCandyModal() {
             </div>
         </div>
     `;
+}
+
+export function showBonusCandyModal() {
+    const defeats = state.stats.bonusCandyDefeats || 0;
+    const progressTextLeft = `${defeats}/${WHITE_CANDY_DEFEAT_REQUIREMENT}`;
+    const progressPct = (defeats / WHITE_CANDY_DEFEAT_REQUIREMENT) * 100;
+
+    if (!state.stats.candyPurchaseHistory) {
+        state.stats.candyPurchaseHistory = [];
+    }
+
+    const unspentWhite = state.stats.whiteCandies || 0;
+    const candyBankHTML = generateCandyBankHTML(state.stats.candyPurchaseHistory, unspentWhite);
+
+    const html = `
+        <div style="text-align: center; font-family: sans-serif; box-sizing: border-box;">
+            <div style="margin-bottom: 10px;">
+                <h2 style="margin: 0; display: inline-block; vertical-align: middle;">White Candies: ${unspentWhite}</h2>
+                <img src="Assets/Extra/Candies/WhiteCandy.png" style="width: 30px; height: 30px; vertical-align: middle; margin-left: 10px;" onerror="this.style.display='none'">
+            </div>
+
+            ${generateProgressBarHTML(progressPct, progressTextLeft)}
+            ${generateCandyOptionsHTML()}
+
+            <div style="background-color: #222; border: 1px solid #444; border-radius: 8px; padding: 10px; text-align: left; min-height: 50px;">
+                <h4 style="margin-top: 0; margin-bottom: 10px; text-align: center;">Candy Bank</h4>
+                <div style="display: flex; flex-wrap: wrap; justify-content: center;">
+                    ${candyBankHTML}
+                </div>
+            </div>
+        </div>
+        ${generateFirstTimeOverlayHTML(state.globalStats.hasSeenBonusCandyModal)}
+    `;
 
     showModal("Bonus Candy", html, "window-bonus-candy", "800px", "auto");
 
-    // Ensure the inner content container has relative positioning so the absolute overlay maps correctly to it
     const modalContent = document.querySelector('#window-bonus-candy .window-content-container');
     if (modalContent) {
         modalContent.style.position = 'relative';
@@ -189,7 +182,7 @@ window.buyBonusCandy = function(color) {
 
         updateUI();
         showBonusCandyModal(); // Refresh modal
-            } else {
+    } else {
         alert("Not enough White Candies!");
     }
 };

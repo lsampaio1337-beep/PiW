@@ -202,60 +202,7 @@ function setupDataChannel(channel) {
         handleOpen();
     }
 
-    channel.onmessage = (event) => {
-        let data;
-        try {
-            data = JSON.parse(event.data);
-        } catch (e) {
-            console.warn("Received malformed multiplayer message", e);
-            return;
-        }
-
-        if (!data || typeof data !== 'object') {
-            console.warn("Multiplayer message is not an object");
-            return;
-        }
-
-        if (data.type === 'party') {
-            if (!Array.isArray(data.party)) {
-                console.warn("Multiplayer party message missing valid party array");
-                return;
-            }
-            if (data.region !== state.currentRegionName) {
-                alert("Cannot connect! You must be in the same region as your opponent.");
-                if (peerConnection) {
-                    peerConnection.close();
-                }
-                initMultiplayer();
-
-                const connBtn = document.getElementById('btn-mp-connection-status');
-                if (connBtn) {
-                    connBtn.style.background = '#e74c3c';
-                    connBtn.innerText = 'Not Connected';
-                    connBtn.disabled = true;
-                    connBtn.style.cursor = 'default';
-                    connBtn.onmouseenter = null;
-                    connBtn.onmouseleave = null;
-                }
-                updateBattleButtonUI();
-                return;
-            }
-            opponentParty = data.party;
-            checkReadyState();
-        } else if (data.type === 'ready') {
-            isMultiplayerReady.remote = Boolean(data.state);
-            updateBattleButtonUI();
-            checkReadyState();
-        } else if (data.type === 'combatEvent') {
-            if (!data.event || typeof data.event !== 'object') {
-                console.warn("Multiplayer combatEvent message missing valid event object");
-                return;
-            }
-            if (globals.battleSystem) {
-                 globals.battleSystem.handleMultiplayerEvent(data.event);
-            }
-        }
-    };
+    channel.onmessage = handleMessage;
 
     channel.onclose = () => {
         alert("Connection closed.");
@@ -264,6 +211,73 @@ function setupDataChannel(channel) {
         }
         initMultiplayer();
     };
+}
+
+function handleMessage(event) {
+    let data;
+    try {
+        data = JSON.parse(event.data);
+    } catch (e) {
+        console.warn("Received malformed multiplayer message", e);
+        return;
+    }
+
+    if (!data || typeof data !== 'object') {
+        console.warn("Multiplayer message is not an object");
+        return;
+    }
+
+    if (data.type === 'party') {
+        handlePartyMessage(data);
+    } else if (data.type === 'ready') {
+        handleReadyMessage(data);
+    } else if (data.type === 'combatEvent') {
+        handleCombatEventMessage(data);
+    }
+}
+
+function handlePartyMessage(data) {
+    if (!Array.isArray(data.party)) {
+        console.warn("Multiplayer party message missing valid party array");
+        return;
+    }
+    if (data.region !== state.currentRegionName) {
+        alert("Cannot connect! You must be in the same region as your opponent.");
+        if (peerConnection) {
+            peerConnection.close();
+        }
+        initMultiplayer();
+
+        const connBtn = document.getElementById('btn-mp-connection-status');
+        if (connBtn) {
+            connBtn.style.background = '#e74c3c';
+            connBtn.innerText = 'Not Connected';
+            connBtn.disabled = true;
+            connBtn.style.cursor = 'default';
+            connBtn.onmouseenter = null;
+            connBtn.onmouseleave = null;
+        }
+        updateBattleButtonUI();
+        return;
+    }
+    opponentParty = data.party;
+    checkReadyState();
+}
+
+function handleReadyMessage(data) {
+    isMultiplayerReady.remote = Boolean(data.state);
+    updateBattleButtonUI();
+    checkReadyState();
+}
+
+function handleCombatEventMessage(data) {
+    if (!data.event || typeof data.event !== 'object') {
+        console.warn("Multiplayer combatEvent message missing valid event object");
+        return;
+    }
+    if (globals.battleSystem) {
+         globals.battleSystem.handleMultiplayerEvent(data.event);
+    }
 }
 
 export function toggleLocalReady() {

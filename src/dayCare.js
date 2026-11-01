@@ -20,29 +20,35 @@ class DayCare {
     }
 
     tickBattle() {
-        // Breeding logic
-        if (this.slot1.pokemon && this.slot1.isBreeding && !this.slot1.isFinished) {
-            this.slot1.battles++;
-            if (this.slot1.battles >= this.slot1.requiredBattles) {
-                this.completeBreeding();
-            }
+        this._tickBreeding();
+        this._tickTraining();
+    }
+
+    _tickBreeding() {
+        if (!this.slot1.pokemon || !this.slot1.isBreeding || this.slot1.isFinished) return;
+
+        this.slot1.battles++;
+        if (this.slot1.battles >= this.slot1.requiredBattles) {
+            this.completeBreeding();
+        }
+    }
+
+    _tickTraining() {
+        if (!this.slot2.pokemon) return;
+
+        const pkmn = this.slot2.pokemon;
+        const totalIV = pkmn.ivs.hp + pkmn.ivs.atk + pkmn.ivs.def + pkmn.ivs.spa + pkmn.ivs.spd + pkmn.ivs.spe;
+
+        // If we reach cap organically, keep it frozen
+        if (totalIV >= 600) {
+            this.slot2.battles = this.slot2.requiredBattles;
+            return;
         }
 
-        // Training logic
-        if (this.slot2.pokemon) {
-            const pkmn = this.slot2.pokemon;
-            const totalIV = pkmn.ivs.hp + pkmn.ivs.atk + pkmn.ivs.def + pkmn.ivs.spa + pkmn.ivs.spd + pkmn.ivs.spe;
-
-            // Only increment battles if we haven't hit the cap
-            if (totalIV < 600) {
-                this.slot2.battles++;
-                if (this.slot2.battles >= this.slot2.requiredBattles) {
-                    this.completeTrainingCycle();
-                }
-            } else {
-                // If we reach cap organically, keep it frozen
-                this.slot2.battles = this.slot2.requiredBattles;
-            }
+        // Only increment battles if we haven't hit the cap
+        this.slot2.battles++;
+        if (this.slot2.battles >= this.slot2.requiredBattles) {
+            this.completeTrainingCycle();
         }
     }
 
@@ -65,18 +71,28 @@ class DayCare {
         // Increase quality by a random number between 0 and 0.1 (Max 1.99)
         // 0, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1
         const randomVal = typeof crypto !== 'undefined' ? (crypto.getRandomValues(new Uint32Array(1))[0] / (0xFFFFFFFF + 1)) : Math.random();
-        const randIncrease = Math.floor(randomVal * 11) / 100;
+        // 0 to 0.05
+        const randIncrease = Math.floor(randomVal * 6) / 100;
 
         // Fix floating point precision
         p.quality = Number((p.quality + randIncrease).toFixed(2));
 
-        p.quality = Math.min(1.99, p.quality);
+        let maxQ = p.qualityName === 'Shiny' ? 2.50 : 1.99;
+        p.quality = Math.min(maxQ, p.quality);
 
         // Map Quality Tier if Q >= 1.5, 1.25, etc.
-        if (p.quality >= 1.99) {
-            p.qualityName = "Perfect";
-        } else if (p.quality >= 1.70) { // Generic threshold updates could go here
-            p.qualityName = p.qualityName;
+        if (p.quality >= 1.81) {
+            p.qualityName = "Legendary";
+        } else if (p.quality >= 1.60) {
+            p.qualityName = "Epic";
+        } else if (p.quality >= 1.40) {
+            p.qualityName = "Rare";
+        } else if (p.quality >= 1.20) {
+            p.qualityName = "Uncommon";
+        } else if (p.quality >= 1.00) {
+            p.qualityName = "Regular";
+        } else {
+            p.qualityName = "Weak";
         }
 
         // Let UI know it's finished

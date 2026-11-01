@@ -1,6 +1,7 @@
 import { state } from '../../state.js';
 import { updateUI } from '../../ui.js';
 import { renderBackpackTab } from './index.js';
+import { escapeHTML } from '../../utils/stringUtils.js';
 
 window.sellModeActive = false;
 window.selectedForSale = new Set();
@@ -36,6 +37,7 @@ function renderSlotUI(p, listName, origIndex, isDraggable) {
 
     let glowClass = "glow-weak";
     if (p.qualityName === "Shiny") glowClass = "glow-shiny";
+    else if (p.qualityName === "Legendary") glowClass = "glow-legendary";
     else if (p.qualityName === "Epic") glowClass = "glow-epic";
     else if (p.qualityName === "Rare") glowClass = "glow-rare";
     else if (p.qualityName === "Uncommon") glowClass = "glow-uncommon";
@@ -52,9 +54,9 @@ function renderSlotUI(p, listName, origIndex, isDraggable) {
 
     return `
         <div class="${slotClass}" ${dataAttr} style="background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; aspect-ratio: 1 / 1.5; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 4%; box-sizing: border-box; position: relative; container-type: inline-size; overflow: hidden; ${cursorStyle}; width: 100%; ${selectionStyle}" title="Q=${p.quality.toFixed(2)} & ∑IV=${sumIV}" ${dragAttr} ${clickHandler}>
-            <div onclick="event.stopPropagation(); window.showPokemonStatsByUuid('${p.uuid}')" style="position: absolute; top: 2cqw; right: 2cqw; cursor: pointer; background: #34495e; color: white; border-radius: 50%; width: 20cqw; height: 20cqw; text-align: center; display: flex; align-items: center; justify-content: center; font-size: 14cqw; font-weight: bold; z-index: 3;" title="View Info">i</div>
+            <div onclick="event.stopPropagation(); window.showPokemonStatsByUuid('${escapeHTML(p.uuid)}')" style="position: absolute; top: 2cqw; right: 2cqw; cursor: pointer; background: #34495e; color: white; border-radius: 50%; width: 20cqw; height: 20cqw; text-align: center; display: flex; align-items: center; justify-content: center; font-size: 14cqw; font-weight: bold; z-index: 3;" title="View Info">i</div>
 
-            <div style="font-size: 16cqw; font-weight: bold; margin-top: 10cqw; margin-bottom: 1cqw; display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.1; z-index: 1; color: white;">${p.name}</div>
+            <div style="font-size: 16cqw; font-weight: bold; margin-top: 10cqw; margin-bottom: 1cqw; display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.1; z-index: 1; color: white;">${escapeHTML(p.name)}</div>
 
             <div style="flex: 1; min-height: 0; width: 100%; display: flex; align-items: center; justify-content: center; position: relative; margin-bottom: 1cqw;">
                 ${imageHtml}
@@ -151,7 +153,7 @@ export function renderPokemonTab(area) {
             if (!state.globalStats.hasSeenDaycare) continue; // Hide if Daycare hasn't been opened
             if (state.breeding.length > 0) {
                 p = state.breeding[0];
-                tag = 'To Breed';
+                tag = 'Breeding Spot';
                 listName = 'breeding';
                 origIndex = 0;
             }
@@ -159,7 +161,7 @@ export function renderPokemonTab(area) {
             if (!state.globalStats.hasSeenDaycare) continue; // Hide if Daycare hasn't been opened
             if (state.training.length > 0) {
                 p = state.training[0];
-                tag = 'To Train';
+                tag = 'Training Spot';
                 listName = 'training';
                 origIndex = 0;
             }
@@ -298,6 +300,14 @@ window.applyPokemonFilters = function() {
     }
 
     const filterFn = (p) => {
+        if (window.breedTarget && p.uuid !== window.breedTarget.uuid) {
+            let bt = window.breedTarget;
+            // same species, shiny match, Qdiff <= 0.05
+            if (p.id !== bt.id) return false;
+            if (p.qualityName !== bt.qualityName) return false;
+            if (Math.abs(p.quality - bt.quality) > 0.051) return false;
+        }
+
         if (filters.name && !p.name.toLowerCase().includes(filters.name.toLowerCase())) return false;
         if (filters.minLvl !== '' && p.level < parseInt(filters.minLvl)) return false;
         if (filters.maxLvl !== '' && p.level > parseInt(filters.maxLvl)) return false;
@@ -307,7 +317,7 @@ window.applyPokemonFilters = function() {
         if (filters.minIV !== '' && sumIV < parseInt(filters.minIV)) return false;
         if (filters.maxIV !== '' && sumIV > parseInt(filters.maxIV)) return false;
 
-        if (filters.breedableOnly) {
+        if (filters.breedableOnly && !window.breedTarget) {
             if (p.quality >= 1.99) return false;
             const key = p.id + '_' + p.quality.toFixed(2);
             if (!breedableMap || breedableMap.get(key) < 2) return false;
@@ -396,8 +406,8 @@ export function handleDrop(event, targetCol) {
         return;
     }
 
-    if (tCol === 'breeding' && p.quality >= 1.99) {
-        alert("Cannot breed a Pokémon with Q >= 1.99!");
+    if (tCol === 'breeding' && p.quality >= (p.qualityName === 'Shiny' ? 2.50 : 1.99)) {
+        alert("Cannot breed a Pokémon with max Q!");
         return;
     }
 
@@ -421,6 +431,8 @@ export function handleDrop(event, targetCol) {
             state.dayCareRef.slot1.isBreeding = false;
             state.dayCareRef.slot1.isFinished = false;
         }
+        window.breedTarget = null;
+        if (window.pokemonFilters) window.pokemonFilters.breedableOnly = false;
         window.pokemonFilters.name = '';
         window.pokemonFilters.minQ = '';
         window.pokemonFilters.maxQ = '';
@@ -459,6 +471,11 @@ export function handleDrop(event, targetCol) {
             state.dayCareRef.slot2.pokemon = p;
 
             const totalIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
+            const isShiny = p.qualityName === 'Shiny';
+
+            // Set encounters required to SumIV (double for shiny)
+            state.dayCareRef.slot2.requiredBattles = isShiny ? (totalIV * 2) : totalIV;
+
             if (totalIV >= 600) {
                 state.dayCareRef.slot2.battles = state.dayCareRef.slot2.requiredBattles;
             } else {

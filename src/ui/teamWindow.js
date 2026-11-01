@@ -6,18 +6,9 @@ import * as mathEngine from "../mathEngine.js";
 // they need to be defined elsewhere and attached to window, or attached here.
 // Let's attach them in the main ui.js or where appropriate.
 
-let lastTeamCount = -1;
+import { escapeHTML } from '../utils/stringUtils.js';
 
-function escapeHTML(str) {
-    if (typeof str !== 'string') return str;
-    return str.replace(/[&<>'"]/g, tag => ({
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        "'": '&#39;',
-        '"': '&quot;'
-    }[tag]));
-}
+let lastTeamCount = -1;
 
 export function updateTeamWindow() {
     const partyDiv = document.getElementById('party-list');
@@ -63,6 +54,7 @@ export function updateTeamWindow() {
 
         let glowClass = "glow-weak";
         if (p.qualityName === "Shiny") glowClass = "glow-shiny";
+        else if (p.qualityName === "Legendary") glowClass = "glow-legendary";
         else if (p.qualityName === "Epic") glowClass = "glow-epic";
         else if (p.qualityName === "Rare") glowClass = "glow-rare";
         else if (p.qualityName === "Uncommon") glowClass = "glow-uncommon";
@@ -181,6 +173,7 @@ function renderDayCareSlot(container, p, battles, maxBattles, type) {
 
     let glowClass = "glow-weak";
     if (p.qualityName === "Shiny") glowClass = "glow-shiny";
+    else if (p.qualityName === "Legendary") glowClass = "glow-legendary";
     else if (p.qualityName === "Epic") glowClass = "glow-epic";
     else if (p.qualityName === "Rare") glowClass = "glow-rare";
     else if (p.qualityName === "Uncommon") glowClass = "glow-uncommon";
@@ -193,19 +186,15 @@ function renderDayCareSlot(container, p, battles, maxBattles, type) {
 
     if (type === 'breed') {
         centerLabel = 'Q';
-        if (state.dayCareRef && state.dayCareRef.slot1 && state.dayCareRef.slot1.isFinished) {
-            const baseQ = (p.quality - 0.01).toFixed(2);
-            rightText = `${baseQ}+0.01`;
-        } else {
-            const baseQ = p.quality.toFixed(2);
-            rightText = `${baseQ}+0.00`;
-        }
+        const baseQ = p.quality.toFixed(2);
+        // While breeding is in progress, indicate potential gain
+        rightText = `${baseQ}+(0-0.05)`;
     } else if (type === 'train') {
         centerLabel = 'SumIV';
         const totalIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
         const cycles = p.trainingCyclesCompleted || 0;
         const initialIV = totalIV - cycles;
-        rightText = `${initialIV}+${cycles}`;
+        rightText = `${initialIV}+1`; // Each cycle gives +1 IV
     }
 
     window.windowManager._parseAndSanitizeToElement(`

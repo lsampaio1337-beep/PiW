@@ -246,6 +246,12 @@ input[type="number"] {
             drop-shadow(0 1px 2px #00ff00)
             drop-shadow(-1px 0 2px #0000ff);
 }
+.glow-legendary {
+    filter: drop-shadow(0 -1px 2px #FFA500)
+            drop-shadow(1px 0 2px #FFA500)
+            drop-shadow(0 1px 2px #FFA500)
+            drop-shadow(-1px 0 2px #FFA500);
+}
 .glow-epic {
     filter: drop-shadow(0 -1px 2px #7A00FF)
             drop-shadow(1px 0 2px #7A00FF)

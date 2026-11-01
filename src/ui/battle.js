@@ -258,95 +258,88 @@ const CAVE_ROUTES = ["Mount Moon","Cerulean Cave","Pokémon Tower","Rock Tunnel"
 const SCROLLING_ROUTES = ["Viridian Forest"].concat(PLAINS_ROUTES, WATER_ROUTES, CAVE_ROUTES);
 
 
-function updateBattleBackground(combatArena, state, battleSystem, inGymCombat, inMultiplayer) {
-
-    // Ensure we clean up dynamic gym background anytime we update backgrounds, except when handling gym combat explicitly
-    if (!inGymCombat) {
+function updateGymBackground(combatArena, state, battleSystem) {
+    const gym = battleSystem.gymState.gym;
+    if (gym.name === "Kanto Pokemon League") {
+        const trainerIndex = battleSystem.gymState.currentTrainerIndex;
+        const trainerBGs = [
+            'BG-Elite4-1Lorelei.png',
+            'BG-Elite4-2Bruno.png',
+            'BG-Elite4-3Agatha.png',
+            'BG-Elite4-4Lance.png',
+            'BG-Elite4-5Champion.png'
+        ];
+        const bgImage = trainerBGs[trainerIndex] || 'BattleMode/Test.png';
+        combatArena.style.backgroundImage = `url('./Assets/BG/${bgImage}')`;
+    } else {
+        // Remove previous dynamic gym bg if it exists
         const existingDynamic = document.getElementById('dynamic-gym-bg-arena');
-        if (existingDynamic) existingDynamic.remove();
-    }
-
-    if (inMultiplayer) {
-        combatArena.style.backgroundImage = `url('./Assets/BG/Casino.png')`;
-    } else if (inGymCombat) {
-        const gym = battleSystem.gymState.gym;
-        if (gym.name === "Kanto Pokemon League") {
-            const trainerIndex = battleSystem.gymState.currentTrainerIndex;
-            const trainerBGs = [
-                'BG-Elite4-1Lorelei.png',
-                'BG-Elite4-2Bruno.png',
-                'BG-Elite4-3Agatha.png',
-                'BG-Elite4-4Lance.png',
-                'BG-Elite4-5Champion.png'
-            ];
-            const bgImage = trainerBGs[trainerIndex] || 'BattleMode/Test.png';
-            combatArena.style.backgroundImage = `url('./Assets/BG/${bgImage}')`;
-        } else {
-            // Remove previous dynamic gym bg if it exists
-            const existingDynamic = document.getElementById('dynamic-gym-bg-arena');
-            if (existingDynamic) {
-                existingDynamic.remove();
-            }
-
-            if (state.config.gymAssets && state.config.gymAssets[gym.leader]) {
-                const assetConfig = state.config.gymAssets[gym.leader];
-                const spritePath = `./Assets/Gym/GymLeaders/${assetConfig.sprite}`;
-                const bgPath = `./Assets/Gym/BG/${assetConfig.background}`;
-
-                const dynamicBg = document.createElement('div');
-                dynamicBg.id = 'dynamic-gym-bg-arena';
-                dynamicBg.style.position = 'absolute';
-                dynamicBg.style.top = '0';
-                dynamicBg.style.left = '0';
-                dynamicBg.style.width = '100%';
-                dynamicBg.style.height = '100%';
-                dynamicBg.style.zIndex = '0'; // Behind combat elements but above raw background
-                dynamicBg.style.backgroundImage = `url('${bgPath}')`;
-                dynamicBg.style.backgroundSize = '100% 100%';
-                dynamicBg.style.overflow = 'hidden';
-
-                const imgNode = document.createElement('img');
-                imgNode.src = spritePath;
-                imgNode.style.position = 'absolute';
-                imgNode.style.left = `${assetConfig.position.rel_x * 100}%`;
-                imgNode.style.top = `${assetConfig.position.rel_y * 100}%`;
-                imgNode.style.width = `${(assetConfig.size.px_width / 1800) * 100}%`;
-                imgNode.style.transform = `rotate(${assetConfig.tilt.angle_deg}deg)`;
-                imgNode.style.transformOrigin = assetConfig.tilt.origin;
-                imgNode.style.pointerEvents = 'none';
-
-                // Clear any existing children just in case, though it should be empty
-                dynamicBg.replaceChildren(imgNode);
-
-                combatArena.style.backgroundImage = 'none';
-                combatArena.style.position = 'relative'; // Ensure relative positioning
-                combatArena.insertBefore(dynamicBg, combatArena.firstChild);
-            } else {
-                const gymIndex = state.config.gyms.findIndex(g => g.name === gym.name);
-                const gymBGs = [
-                    'BG-Gym-1-Pewter-Rock.png',
-                    'BG-Gym-2-Cerulean-Water.png',
-                    'BG-Gym-3-Vermilion-Electric.png',
-                    'BG-Gym-4-Celadon-Grass.png',
-                    'BG-Gym-5-Fuchsia-Poison.png',
-                    'BG-Gym-6-Saffron-Psychic.png',
-                    'BG-Gym-7-Cinnabar-Fire.png',
-                    'BG-Gym-8-Viridian-Ground.png',
-                    'IndigoPlateau.png',
-                    '../Gym/BG/BG_Gym_Flying.png',
-                    '../Gym/BG/BG_Gym_Bug.png',
-                    '../Gym/BG/BG_Gym_Normal.png',
-                    '../Gym/BG/BG_Gym_Ghost.png',
-                    '../Gym/BG/BG_Gym_Fighting.png',
-                    '../Gym/BG/BG_Gym_Steel.png',
-                    '../Gym/BG/BG_Gym_Ice.png',
-                    '../Gym/BG/BG_Gym_Dragon.png'
-                ];
-                const bgImage = gymBGs[gymIndex] || 'BattleMode/Test.png';
-                combatArena.style.backgroundImage = `url('./Assets/BG/${bgImage}')`;
-            }
+        if (existingDynamic) {
+            existingDynamic.remove();
         }
-    } else if (["Safari Zone", "Kanto Safari Zone"].includes(state.currentRoute)) {
+
+        if (state.config.gymAssets && state.config.gymAssets[gym.leader]) {
+            const assetConfig = state.config.gymAssets[gym.leader];
+            const spritePath = `./Assets/Gym/GymLeaders/${assetConfig.sprite}`;
+            const bgPath = `./Assets/Gym/BG/${assetConfig.background}`;
+
+            const dynamicBg = document.createElement('div');
+            dynamicBg.id = 'dynamic-gym-bg-arena';
+            dynamicBg.style.position = 'absolute';
+            dynamicBg.style.top = '0';
+            dynamicBg.style.left = '0';
+            dynamicBg.style.width = '100%';
+            dynamicBg.style.height = '100%';
+            dynamicBg.style.zIndex = '0'; // Behind combat elements but above raw background
+            dynamicBg.style.backgroundImage = `url('${bgPath}')`;
+            dynamicBg.style.backgroundSize = '100% 100%';
+            dynamicBg.style.overflow = 'hidden';
+
+            const imgNode = document.createElement('img');
+            imgNode.src = spritePath;
+            imgNode.style.position = 'absolute';
+            imgNode.style.left = `${assetConfig.position.rel_x * 100}%`;
+            imgNode.style.top = `${assetConfig.position.rel_y * 100}%`;
+            imgNode.style.width = `${(assetConfig.size.px_width / 1800) * 100}%`;
+            imgNode.style.transform = `rotate(${assetConfig.tilt.angle_deg}deg)`;
+            imgNode.style.transformOrigin = assetConfig.tilt.origin;
+            imgNode.style.pointerEvents = 'none';
+
+            // Clear any existing children just in case, though it should be empty
+            dynamicBg.replaceChildren(imgNode);
+
+            combatArena.style.backgroundImage = 'none';
+            combatArena.style.position = 'relative'; // Ensure relative positioning
+            combatArena.insertBefore(dynamicBg, combatArena.firstChild);
+        } else {
+            const gymIndex = state.config.gyms.findIndex(g => g.name === gym.name);
+            const gymBGs = [
+                'BG-Gym-1-Pewter-Rock.png',
+                'BG-Gym-2-Cerulean-Water.png',
+                'BG-Gym-3-Vermilion-Electric.png',
+                'BG-Gym-4-Celadon-Grass.png',
+                'BG-Gym-5-Fuchsia-Poison.png',
+                'BG-Gym-6-Saffron-Psychic.png',
+                'BG-Gym-7-Cinnabar-Fire.png',
+                'BG-Gym-8-Viridian-Ground.png',
+                'IndigoPlateau.png',
+                '../Gym/BG/BG_Gym_Flying.png',
+                '../Gym/BG/BG_Gym_Bug.png',
+                '../Gym/BG/BG_Gym_Normal.png',
+                '../Gym/BG/BG_Gym_Ghost.png',
+                '../Gym/BG/BG_Gym_Fighting.png',
+                '../Gym/BG/BG_Gym_Steel.png',
+                '../Gym/BG/BG_Gym_Ice.png',
+                '../Gym/BG/BG_Gym_Dragon.png'
+            ];
+            const bgImage = gymBGs[gymIndex] || 'BattleMode/Test.png';
+            combatArena.style.backgroundImage = `url('./Assets/BG/${bgImage}')`;
+        }
+    }
+}
+
+function updateRouteBackground(combatArena, state) {
+    if (["Safari Zone", "Kanto Safari Zone"].includes(state.currentRoute)) {
         combatArena.style.backgroundImage = `url('./Assets/BG/SafariZone.png')`;
     } else if (state.currentRoute && state.currentRoute.startsWith('Casino')) {
          combatArena.style.backgroundImage = `url('./Assets/BG/Casino.png')`;
@@ -360,6 +353,23 @@ function updateBattleBackground(combatArena, state, battleSystem, inGymCombat, i
         combatArena.style.backgroundImage = `url('./Assets/BG/BattleMode/Cave.png')`;
     } else {
         combatArena.style.backgroundImage = `url('./Assets/BG/BattleMode/Test.png')`;
+    }
+}
+
+function updateBattleBackground(combatArena, state, battleSystem, inGymCombat, inMultiplayer) {
+
+    // Ensure we clean up dynamic gym background anytime we update backgrounds, except when handling gym combat explicitly
+    if (!inGymCombat) {
+        const existingDynamic = document.getElementById('dynamic-gym-bg-arena');
+        if (existingDynamic) existingDynamic.remove();
+    }
+
+    if (inMultiplayer) {
+        combatArena.style.backgroundImage = `url('./Assets/BG/Casino.png')`;
+    } else if (inGymCombat) {
+        updateGymBackground(combatArena, state, battleSystem);
+    } else {
+        updateRouteBackground(combatArena, state);
     }
 }
 
@@ -874,53 +884,41 @@ function scheduleDefeatCallbacks(ball, ballResult, shakeInterval, captureCallbac
 
 
 
-export function showDamage(target, amount, isCrit, moveName = '', moveType = 'Normal', effectiveness = 1) {
-    const glassTier = state.stats?.upgrades?.glassTier || 0;
-    if (glassTier < 2) return;
-    const battleSystem = globals.battleSystem;
-    let containerId = target === 'player' ? 'player-side' : 'enemy-side';
+function logGymCombat(target, moveName, moveType, amount) {
+    const log = document.getElementById('gym-combat-log');
+    if (!log) return;
 
-    // Check if in gym battle
-    if (battleSystem && battleSystem.gymState && battleSystem.gymState.isActive) {
-        containerId = target === 'player' ? 'gym-player-sprite' : 'gym-enemy-sprite';
+    const entry = document.createElement('div');
+    entry.style.marginBottom = '2px';
+    const attacker = target === 'player' ? 'Enemy' : 'You';
+    const typeColor = TYPE_COLORS[moveType] || '#ffffff';
 
-        // Log to gym combat log
-        const log = document.getElementById('gym-combat-log');
-        if (log) {
-            const entry = document.createElement('div');
-            entry.style.marginBottom = '2px';
-            const attacker = target === 'player' ? 'Enemy' : 'You';
-            const typeColor = TYPE_COLORS[moveType] || '#ffffff';
+    // Mitigate XSS: Build inner node safely
+    entry.textContent = `${attacker} used `;
 
-            // Mitigate XSS: Build inner node safely
-            entry.textContent = `${attacker} used `;
+    const bNode = document.createElement('b');
+    bNode.style.color = typeColor;
+    bNode.textContent = moveName;
+    entry.appendChild(bNode);
 
-            const bNode = document.createElement('b');
-            bNode.style.color = typeColor;
-            bNode.textContent = moveName;
-            entry.appendChild(bNode);
+    entry.appendChild(document.createTextNode(' for '));
 
-            entry.appendChild(document.createTextNode(' for '));
+    const spanNode = document.createElement('span');
+    spanNode.style.color = typeColor;
+    spanNode.textContent = amount;
+    entry.appendChild(spanNode);
 
-            const spanNode = document.createElement('span');
-            spanNode.style.color = typeColor;
-            spanNode.textContent = amount;
-            entry.appendChild(spanNode);
+    entry.appendChild(document.createTextNode(' dmg!'));
 
-            entry.appendChild(document.createTextNode(' dmg!'));
+    log.appendChild(entry);
 
-            log.appendChild(entry);
-
-            // Keep only last 4 entries
-            while(log.children.length > 4) {
-                log.removeChild(log.firstChild);
-            }
-        }
+    // Keep only last 4 entries
+    while (log.children.length > 4) {
+        log.removeChild(log.firstChild);
     }
+}
 
-    let img = document.getElementById(containerId);
-    if (!img) return;
-
+function createDamageNode(amount, isCrit, moveName, moveType, effectiveness) {
     let dmgNode = document.createElement('div');
 
     const typeColor = TYPE_COLORS[moveType] || '#ffffff';
@@ -968,6 +966,28 @@ export function showDamage(target, amount, isCrit, moveName = '', moveType = 'No
     dmgNode.style.top = '20%'; // Top of the image (relative to sprite container)
     dmgNode.style.transform = 'translate(-50%, -50%)'; // Ensure exact centering
 
+    return dmgNode;
+}
+
+export function showDamage(target, amount, isCrit, moveName = '', moveType = 'Normal', effectiveness = 1) {
+    const glassTier = state.stats?.upgrades?.glassTier || 0;
+    if (glassTier < 2) return;
+    const battleSystem = globals.battleSystem;
+    let containerId = target === 'player' ? 'player-side' : 'enemy-side';
+
+    // Check if in gym battle
+    if (battleSystem && battleSystem.gymState && battleSystem.gymState.isActive) {
+        containerId = target === 'player' ? 'gym-player-sprite' : 'gym-enemy-sprite';
+
+        // Log to gym combat log
+        logGymCombat(target, moveName, moveType, amount);
+    }
+
+    let img = document.getElementById(containerId);
+    if (!img) return;
+
+    let dmgNode = createDamageNode(amount, isCrit, moveName, moveType, effectiveness);
+
     img.appendChild(dmgNode);
 
     // Animate up and fade out
@@ -984,10 +1004,8 @@ export function showDamage(target, amount, isCrit, moveName = '', moveType = 'No
     }, 3000);
 }
 
-export function playCombatAnimations(targetSide, moveType, duration) {
-    const battleSystem = globals.battleSystem;
-    const isGym = battleSystem && battleSystem.gymState && battleSystem.gymState.isActive;
 
+function getCombatActors(targetSide, isGym) {
     let attackerId = targetSide === 'player' ? (isGym ? 'gym-enemy-sprite' : 'enemy-side') : (isGym ? 'gym-player-sprite' : 'player-side');
     if (!document.getElementById(attackerId)) attackerId = targetSide === 'player' ? 'enemy-side' : 'player-side';
     let defenderId = targetSide === 'player' ? (isGym ? 'gym-player-sprite' : 'player-side') : (isGym ? 'gym-enemy-sprite' : 'enemy-side');
@@ -996,27 +1014,10 @@ export function playCombatAnimations(targetSide, moveType, duration) {
     const atkImg = document.getElementById(attackerId);
     const defImg = document.getElementById(defenderId);
 
-    if (!atkImg || !defImg) return;
+    return { attackerId, defenderId, atkImg, defImg };
+}
 
-    const color = TYPE_COLORS[moveType] || '#ffffff';
-
-    // We want to combine transforms without them overwriting each other.
-    // Initialize base transform (e.g. scaleX(-1) for player) if not set
-    if (!atkImg.dataset.baseTransform) {
-        atkImg.dataset.baseTransform = atkImg.style.transform || (attackerId.includes('player') ? 'scaleX(-1)' : '');
-    }
-    if (!defImg.dataset.baseTransform) {
-        defImg.dataset.baseTransform = defImg.style.transform || (defenderId.includes('player') ? 'scaleX(-1)' : '');
-    }
-
-    // Function to apply combined transforms safely
-    const updateTransform = (img) => {
-        const base = img.dataset.baseTransform || '';
-        const atk = img.dataset.atkTransform || '';
-        const def = img.dataset.defTransform || '';
-        img.style.transform = `${base} ${atk} ${def}`.trim();
-    };
-
+function getAttackerTypes(attackerId, isGym, battleSystem, state) {
     let atkTypes = [];
     if (attackerId.includes('player')) {
         atkTypes = state.party[0]?.types || [];
@@ -1034,8 +1035,19 @@ export function playCombatAnimations(targetSide, moveType, duration) {
              atkTypes = battleSystem.activeEncounter.types || [];
         }
     }
+    return atkTypes;
+}
 
-    const isPlayerAtk = attackerId.includes('player');
+function initBaseTransforms(atkImg, defImg, attackerId, defenderId) {
+    if (!atkImg.dataset.baseTransform) {
+        atkImg.dataset.baseTransform = atkImg.style.transform || (attackerId.includes('player') ? 'scaleX(-1)' : '');
+    }
+    if (!defImg.dataset.baseTransform) {
+        defImg.dataset.baseTransform = defImg.style.transform || (defenderId.includes('player') ? 'scaleX(-1)' : '');
+    }
+}
+
+function animateAttacker(atkImg, atkTypes, isPlayerAtk, duration) {
     const xDir = isPlayerAtk ? 15 : -15;
     const bt = atkImg.dataset.baseTransform || '';
 
@@ -1057,9 +1069,9 @@ export function playCombatAnimations(targetSide, moveType, duration) {
         duration: duration * 0.4,
         easing: 'ease-in-out'
     });
+}
 
-    // Determine the exact clean sprites for precise projectile start and end coordinates
-    // We look for the pokemon image inside the wrapper, specifically skipping the FrameBorder img
+function calculateProjectileMetrics(atkImg, defImg) {
     const atkImgEl = atkImg ? atkImg.querySelector('img:not([src*="FrameBorder"])') : null;
     const defImgEl = defImg ? defImg.querySelector('img:not([src*="FrameBorder"])') : null;
 
@@ -1079,7 +1091,6 @@ export function playCombatAnimations(targetSide, moveType, duration) {
         scaleY = containerRect.height / container.offsetHeight;
     }
 
-    // Instead of vh, use the scale of the images to determine projectile size roughly
     const projHeight = (atkRect.height / scaleY) * 0.07;
     const projWidth = projHeight * 2;
 
@@ -1092,6 +1103,12 @@ export function playCombatAnimations(targetSide, moveType, duration) {
     const defCenterY = defRect.top + defRect.height / 2;
     const endX = container === document.body ? defCenterX : (defCenterX - containerRect.left) / scaleX;
     const endY = container === document.body ? defCenterY : (defCenterY - containerRect.top) / scaleY;
+
+    return { container, projHeight, projWidth, startX, startY, endX, endY, defRect, scaleY };
+}
+
+function createAndAnimateProjectile(color, duration, metrics, defImg) {
+    const { container, projHeight, projWidth, startX, startY, endX, endY, defRect, scaleY } = metrics;
 
     // Create projectile
     const proj = document.createElement('div');
@@ -1118,6 +1135,13 @@ export function playCombatAnimations(targetSide, moveType, duration) {
 
     proj.style.left = endX + 'px';
     proj.style.top = endY + 'px';
+
+    const updateTransform = (img) => {
+        const base = img.dataset.baseTransform || '';
+        const atk = img.dataset.atkTransform || '';
+        const def = img.dataset.defTransform || '';
+        img.style.transform = `${base} ${atk} ${def}`.trim();
+    };
 
     setTimeout(() => {
         if (proj.parentElement) proj.parentElement.removeChild(proj);
@@ -1180,6 +1204,27 @@ export function playCombatAnimations(targetSide, moveType, duration) {
         }, Math.min(500, duration * 0.3));
 
     }, duration);
+}
+
+export function playCombatAnimations(targetSide, moveType, duration) {
+    const battleSystem = globals.battleSystem;
+    const isGym = battleSystem && battleSystem.gymState && battleSystem.gymState.isActive;
+
+    const { attackerId, defenderId, atkImg, defImg } = getCombatActors(targetSide, isGym);
+    if (!atkImg || !defImg) return;
+
+    const color = TYPE_COLORS[moveType] || '#ffffff';
+
+    // We want to combine transforms without them overwriting each other.
+    initBaseTransforms(atkImg, defImg, attackerId, defenderId);
+
+    const atkTypes = getAttackerTypes(attackerId, isGym, battleSystem, state);
+    const isPlayerAtk = attackerId.includes('player');
+
+    animateAttacker(atkImg, atkTypes, isPlayerAtk, duration);
+
+    const metrics = calculateProjectileMetrics(atkImg, defImg);
+    createAndAnimateProjectile(color, duration, metrics, defImg);
 }
 
 let levelUpQueue = [];

@@ -1,9 +1,6 @@
-
 import { promptExitGame } from '../ui.js';
 
-export function setupGlobalEventListeners() {
-    // Top Bar & Save Manager Exits
-
+function setupSystemEventListeners() {
     const minimizeAllBtn = document.getElementById('btn-minimize-all-game');
     if (minimizeAllBtn) {
         minimizeAllBtn.addEventListener('click', () => {
@@ -20,15 +17,15 @@ export function setupGlobalEventListeners() {
         });
     });
 
-    // New Game Profile
     const newProfileBtn = document.getElementById('btn-new-profile');
     if (newProfileBtn) {
         newProfileBtn.addEventListener('click', () => {
             if (window.startNewGame) window.startNewGame();
         });
     }
+}
 
-    // Window Toggles
+function setupWindowToggles() {
     const closePartyBtn = document.getElementById('btn-close-party-window');
     if (closePartyBtn) {
         closePartyBtn.addEventListener('click', () => {
@@ -53,15 +50,26 @@ export function setupGlobalEventListeners() {
         });
     }
 
-    // Safari Zone
+    const modalOverlay = document.getElementById('modal-overlay');
+    if (modalOverlay) {
+        modalOverlay.addEventListener('click', (event) => {
+            if (event.target === modalOverlay && window.closeModal) {
+                window.closeModal();
+            }
+        });
+    }
+}
+
+function setupSafariZoneListeners() {
     const safariBtn = document.getElementById('btn-enter-safari');
     if (safariBtn) {
         safariBtn.addEventListener('click', () => {
             if (window.enterSafariZone) window.enterSafariZone();
         });
     }
+}
 
-    // Professor Tutorial
+function setupTutorialListeners() {
     const profTutorialSkipBtn = document.getElementById('btn-prof-tutorial-skip');
     if (profTutorialSkipBtn) {
         profTutorialSkipBtn.addEventListener('click', () => {
@@ -80,8 +88,9 @@ export function setupGlobalEventListeners() {
             if (window.concludeProfTutorial) window.concludeProfTutorial();
         });
     }
+}
 
-    // Daycare
+function setupDaycareListeners() {
     const dismissDaycareBtn = document.getElementById('btn-dismiss-daycare');
     if (dismissDaycareBtn) {
         dismissDaycareBtn.addEventListener('click', () => {
@@ -102,14 +111,12 @@ export function setupGlobalEventListeners() {
             if (window.showBackpackAndFocus) window.showBackpackAndFocus('pokemon');
         });
     }
+}
 
-    // Modal overlay
-    const modalOverlay = document.getElementById('modal-overlay');
-    if (modalOverlay) {
-        modalOverlay.addEventListener('click', (event) => {
-            if (event.target === modalOverlay && window.closeModal) {
-                window.closeModal();
-            }
-        });
-    }
+export function setupGlobalEventListeners() {
+    setupSystemEventListeners();
+    setupWindowToggles();
+    setupSafariZoneListeners();
+    setupTutorialListeners();
+    setupDaycareListeners();
 }

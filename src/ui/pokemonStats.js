@@ -1,6 +1,7 @@
 import { getSpeciesDataHtml, buildEvolutionLineHtml, formatType } from "./pokedex.js";
 import { state } from '../state.js';
 import { updateUI, showModal } from '../ui.js';
+import { escapeHTML } from '../utils/stringUtils.js';
 
 
 function getEvolveRequirements(p, evo, state) {
@@ -59,34 +60,20 @@ export function showPokemonStatsByUuid(uuid) {
     showPokemonStats(idx, location);
 }
 
-export function showPokemonStats(idx, location) {
-    let p = null;
-    if (location === 'party') p = state.party[idx];
-    else if (location === 'breeding') p = state.breeding[idx];
-    else if (location === 'training') p = state.training[idx];
-    else if (location === 'storage') p = state.storage[idx];
-    else if (location === 'safe') p = state.safe[idx];
 
-    if (!p) return;
+function getPokemonList(location) {
+    if (location === 'party') return state.party;
+    if (location === 'breeding') return state.breeding;
+    if (location === 'training') return state.training;
+    if (location === 'storage') return state.storage;
+    if (location === 'safe') return state.safe;
+    return null;
+}
 
-    const sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
-    const pData = state.config.pokemonData.find(pd => pd.id === p.id);
-    if (!pData) return;
-
-    // --- Individual Data ---
-
-    // Progress bar helper for IVs (1 to 100)
-    const ivBar = (val) => `
-        <div style="background: #333; width: 100%; height: 16px; border-radius: 8px; overflow: hidden; position: relative;">
-            <div style="background: #3498db; width: ${val}%; height: 100%;"></div>
-            <div style="position: absolute; top: 0; left: 0; width: 100%; text-align: center; font-size: 12px; line-height: 16px; font-weight: bold; color: white; text-shadow: 1px 1px 1px black;">${val}</div>
-        </div>
-    `;
-
-    // Actions Check
+function getActionsHtml(p, pData, location, idx) {
     let evolveHtml = "";
     if (pData.evolutions && pData.evolutions.length > 0) {
-        let evolutionsList = pData.evolutions.map(evo => {
+        evolveHtml = pData.evolutions.map(evo => {
             const req = getEvolveRequirements(p, evo, state);
 
             let btnText = "Evolve";
@@ -106,15 +93,23 @@ export function showPokemonStats(idx, location) {
                 </div>
             `;
         }).join('');
-        evolveHtml = evolutionsList;
     }
 
-    let actionsHtml = `<div style="margin-top: 15px; border-top: 1px solid #555; padding-top: 10px; display: flex; justify-content: center; gap: 10px;">
+    return `<div style="margin-top: 15px; border-top: 1px solid #555; padding-top: 10px; display: flex; justify-content: center; gap: 10px;">
         ${evolveHtml}
         <div>
             <button onclick="window.showVitaminsModal('${location}', ${idx})" style="background: #e67e22; cursor: pointer; vertical-align: middle; width: max-content; min-width: 100px; height: 40px; font-size: 14px; font-weight: bold; line-height: 1.2; padding: 5px 10px; text-align: center; display: inline-flex; align-items: center; justify-content: center; flex-direction: column; border: none; border-radius: 5px; color: white;">Vitamins</button>
         </div>
     </div>`;
+}
+
+function getIndividualHtml(p, sumIV, actionsHtml) {
+    const ivBar = (val) => `
+        <div style="background: #333; width: 100%; height: 16px; border-radius: 8px; overflow: hidden; position: relative;">
+            <div style="background: #3498db; width: ${val}%; height: 100%;"></div>
+            <div style="position: absolute; top: 0; left: 0; width: 100%; text-align: center; font-size: 12px; line-height: 16px; font-weight: bold; color: white; text-shadow: 1px 1px 1px black;">${val}</div>
+        </div>
+    `;
 
     const v = p.vitamins || {};
     const getVitHtml = (count, imgName) => {
@@ -122,7 +117,7 @@ export function showPokemonStats(idx, location) {
         return ` <span style="font-size: 12px; margin-left: 2px;">${count}x<img src="Assets/Items/Vitamins/${imgName}.png" style="width: 12px; height: 12px; vertical-align: middle;"></span>`;
     };
 
-    let individualHtml = `
+    return `
         <div style="display: flex; justify-content: space-around; flex-wrap: wrap; align-items: stretch; gap: 10px;">
             <div style="background: rgba(0,0,0,0.5); padding: 15px; border-radius: 8px; text-align: left; min-width: 150px; flex: 1; display: flex; flex-direction: column;">
                 <h3 style="margin: 0 0 15px 0; text-align: center; border-bottom: 1px solid #555; padding-bottom: 5px;">Actual Stats</h3>
@@ -157,20 +152,31 @@ export function showPokemonStats(idx, location) {
         </div>
         ${actionsHtml}
     `;
+}
 
-    // --- Collective Data (Pokedex info) ---
-
-
-
+function getCollectiveHtml(pData, state) {
     const fullEvoTreeHtml = buildEvolutionLineHtml(pData, state);
-
-    let collectiveHtml = `
+    return `
         <div style="margin-top: 20px; border-top: 2px solid #fff; padding-top: 15px;">
             <h3 style="margin-top: 0;">Species Data</h3>
             ${getSpeciesDataHtml(pData, state)}
             ${fullEvoTreeHtml}
         </div>
     `;
+}
+
+export function showPokemonStats(idx, location) {
+    const list = getPokemonList(location);
+    if (!list || !list[idx]) return;
+    const p = list[idx];
+
+    const sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
+    const pData = state.config.pokemonData.find(pd => pd.id === p.id);
+    if (!pData) return;
+
+    const actionsHtml = getActionsHtml(p, pData, location, idx);
+    const individualHtml = getIndividualHtml(p, sumIV, actionsHtml);
+    const collectiveHtml = getCollectiveHtml(pData, state);
 
     let html = `
         <div class="content-panel" style="max-height: 80vh; overflow-y: auto; overflow-x: hidden;">
@@ -179,17 +185,12 @@ export function showPokemonStats(idx, location) {
         </div>
     `;
 
-    showModal(`${p.name} (Lv. ${p.level})`, html, "window-pokemon-stats");
+    showModal(`${escapeHTML(p.name)} (Lv. ${p.level})`, html, "window-pokemon-stats");
 }
 
-export function evolvePokemon(location, idx, toId) {
-    let list = null;
-    if (location === 'party') list = state.party;
-    else if (location === 'breeding') list = state.breeding;
-    else if (location === 'training') list = state.training;
-    else if (location === 'storage') list = state.storage;
-    else if (location === 'safe') list = state.safe;
 
+export function evolvePokemon(location, idx, toId) {
+    const list = getPokemonList(location);
     if (!list || !list[idx]) return;
 
     let p = list[idx];
@@ -251,13 +252,7 @@ export function evolvePokemon(location, idx, toId) {
 }
 
 window.showVitaminsModal = function(location, idx) {
-    let list = null;
-    if (location === 'party') list = state.party;
-    else if (location === 'breeding') list = state.breeding;
-    else if (location === 'training') list = state.training;
-    else if (location === 'storage') list = state.storage;
-    else if (location === 'safe') list = state.safe;
-
+    const list = getPokemonList(location);
     if (!list || !list[idx]) return;
     const p = list[idx];
 
@@ -305,19 +300,13 @@ window.showVitaminsModal = function(location, idx) {
         </div>
     `;
 
-    showModal(`Vitamins for ${p.name}`, html, "window-vitamins", "500px");
+    showModal(`Vitamins for ${escapeHTML(p.name)}`, html, "window-vitamins", "500px");
 };
 
 import * as mathEngine from '../mathEngine.js';
 
 window.useVitamin = function(location, idx, vitaminName, statKey) {
-    let list = null;
-    if (location === 'party') list = state.party;
-    else if (location === 'breeding') list = state.breeding;
-    else if (location === 'training') list = state.training;
-    else if (location === 'storage') list = state.storage;
-    else if (location === 'safe') list = state.safe;
-
+    const list = getPokemonList(location);
     if (!list || !list[idx]) return;
     const p = list[idx];
 
