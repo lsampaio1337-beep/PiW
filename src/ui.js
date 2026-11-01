@@ -1601,6 +1601,11 @@ function startGame() {
     // Start playtime tracker
     window.restartGameClock();
 
+    setupAutosave();
+    setupDragAndDropScrolling();
+}
+
+function setupAutosave() {
     // Autosave loop
     setInterval(() => {
         storage.save(state);
@@ -1610,7 +1615,9 @@ function startGame() {
     window.addEventListener('beforeunload', () => {
         storage.save(state);
     });
+}
 
+function setupDragAndDropScrolling() {
     // Handle scrolling during drag-and-drop (Wheel + Auto-scroll at edges)
     window.isDraggingPokemon = false;
     let dragScrollTarget = null;
@@ -1694,9 +1701,6 @@ function startGame() {
 
         autoScrollInterval = requestAnimationFrame(autoScrollLoop);
     }
-
-
-
 }
 
 async function init() {
