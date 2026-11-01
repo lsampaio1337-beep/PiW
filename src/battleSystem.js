@@ -50,18 +50,30 @@ class BattleSystem {
         };
     }
 
+    _initPokemonBaseMap() {
+        this.pokemonBaseMap = new Map();
+        const pokemonData = this.state.config?.pokemonData;
+        if (!pokemonData) return;
+
+        for (const p of pokemonData) {
+            this.pokemonBaseMap.set(p.id, p);
+        }
+    }
+
     getPokemonBase(id) {
         if (!this.pokemonBaseMap) {
-            this.pokemonBaseMap = new Map();
-            if (this.state.config && this.state.config.pokemonData) {
-                for (const p of this.state.config.pokemonData) {
-                    this.pokemonBaseMap.set(p.id, p);
-                }
-            }
+            this._initPokemonBaseMap();
         }
         return this.pokemonBaseMap.get(id);
     }
 
+    _initRouteMap(routes, currentRegion) {
+        this._routeMap = new Map();
+        this._routeMapRegion = currentRegion;
+        for (let i = 0; i < routes.length; i++) {
+            this._routeMap.set(routes[i].name, routes[i]);
+        }
+    }
 
     getRoute(routeName) {
         const currentRegion = this.state.currentRegionName;
@@ -72,13 +84,10 @@ class BattleSystem {
 
         const routes = window.getCurrentRoutes();
         let foundRoute = undefined;
+
         if (routes) {
             if (this._routeMapRegion !== currentRegion || !this._routeMap) {
-                this._routeMap = new Map();
-                for (let i = 0; i < routes.length; i++) {
-                    this._routeMap.set(routes[i].name, routes[i]);
-                }
-                this._routeMapRegion = currentRegion;
+                this._initRouteMap(routes, currentRegion);
             }
             foundRoute = this._routeMap.get(routeName);
         }
@@ -90,26 +99,36 @@ class BattleSystem {
         return foundRoute;
     }
 
+    _initGymMapCache() {
+        this._gymMapCache = new Map();
+        const gyms = this.state.config?.gyms;
+        if (!gyms) return;
+
+        for (const g of gyms) {
+            this._gymMapCache.set(g.name, g);
+        }
+    }
+
     getGym(gymName) {
         if (!this._gymMapCache) {
-            this._gymMapCache = new Map();
-            if (this.state.config && this.state.config.gyms) {
-                for (const g of this.state.config.gyms) {
-                    this._gymMapCache.set(g.name, g);
-                }
-            }
+            this._initGymMapCache();
         }
         return this._gymMapCache.get(gymName);
     }
 
+    _initPokeballMapCache() {
+        this._pokeballMapCache = new Map();
+        const pokeballs = this.state.config?.balance?.items?.pokeballs;
+        if (!pokeballs) return;
+
+        for (const b of pokeballs) {
+            this._pokeballMapCache.set(b.name, b);
+        }
+    }
+
     getPokeballConfig(ballName) {
         if (!this._pokeballMapCache) {
-            this._pokeballMapCache = new Map();
-            if (this.state.config && this.state.config.balance && this.state.config.balance.items && this.state.config.balance.items.pokeballs) {
-                for (const b of this.state.config.balance.items.pokeballs) {
-                    this._pokeballMapCache.set(b.name, b);
-                }
-            }
+            this._initPokeballMapCache();
         }
         return this._pokeballMapCache.get(ballName);
     }
