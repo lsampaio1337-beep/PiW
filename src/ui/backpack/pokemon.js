@@ -170,7 +170,7 @@ export function renderPokemonTab(area) {
         if (p) {
             content += `<div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, '${listName}')" style="box-sizing: border-box; min-width: 0;">` + renderSlotUI(p, listName, origIndex, true) + `</div>`;
         } else {
-            let label = i < 6 ? `Party #${i+1}` : (i === 6 ? 'To Breed' : 'To Train');
+            let label = i < 6 ? `Party #${i+1}` : (i === 6 ? 'Breeding Spot' : 'Training Spot');
             let dropTarget = i < 6 ? 'party' : (i === 6 ? 'breeding' : 'training');
             let activeBreedStyle = '';
             if (i === 6 && window.pokemonFilters.breedableOnly) {
@@ -461,6 +461,9 @@ export function handleDrop(event, targetCol) {
             state.dayCareRef.slot2.pokemon = p;
 
             const totalIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
+            state.dayCareRef.slot2.requiredBattles = (p.quality >= 2.0) ? totalIV * 2 : totalIV;
+            if (state.dayCareRef.slot2.requiredBattles === 0) state.dayCareRef.slot2.requiredBattles = 1;
+
             if (totalIV >= 600) {
                 state.dayCareRef.slot2.battles = state.dayCareRef.slot2.requiredBattles;
             } else {
@@ -472,7 +475,7 @@ export function handleDrop(event, targetCol) {
         if (state.breeding.length > 0) {
             const currentP = state.breeding[0];
             // Check breeding criteria
-            if (currentP.id !== p.id || Math.abs(currentP.quality - p.quality) > 0.001) {
+            if (currentP.id !== p.id || Math.round(Math.abs(currentP.quality - p.quality) * 100) > 5) {
                 // Fails criteria -> simple swap
                 displacedPokemon = currentP;
                 state.breeding[0] = p;
@@ -484,13 +487,21 @@ export function handleDrop(event, targetCol) {
                 }
                 if (window.clearPokemonFilter) window.clearPokemonFilter();
                 window.pokemonFilters.name = p.name;
-                window.pokemonFilters.minQ = p.quality.toFixed(2);
-                window.pokemonFilters.maxQ = p.quality.toFixed(2);
+                window.pokemonFilters.minQ = Math.max(0.8, p.quality - 0.05).toFixed(2);
+                window.pokemonFilters.maxQ = (p.quality + 0.05).toFixed(2);
             } else {
                 // Meets criteria -> Consume both, merge into highest IV
-                const sumIV1 = currentP.ivs.hp + currentP.ivs.atk + currentP.ivs.def + currentP.ivs.spa + currentP.ivs.spd + currentP.ivs.spe;
-                const sumIV2 = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
-                const keptParent = (sumIV2 > sumIV1) ? p : currentP;
+                const keptParent = JSON.parse(JSON.stringify((p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe > currentP.ivs.hp + currentP.ivs.atk + currentP.ivs.def + currentP.ivs.spa + currentP.ivs.spd + currentP.ivs.spe) ? p : currentP));
+
+                keptParent.ivs.hp = Math.max(p.ivs.hp, currentP.ivs.hp);
+                keptParent.ivs.atk = Math.max(p.ivs.atk, currentP.ivs.atk);
+                keptParent.ivs.def = Math.max(p.ivs.def, currentP.ivs.def);
+                keptParent.ivs.spa = Math.max(p.ivs.spa, currentP.ivs.spa);
+                keptParent.ivs.spd = Math.max(p.ivs.spd, currentP.ivs.spd);
+                keptParent.ivs.spe = Math.max(p.ivs.spe, currentP.ivs.spe);
+
+                keptParent.level = Math.floor(Math.max(p.level, currentP.level) * 0.9);
+                if (keptParent.level < 1) keptParent.level = 1;
 
                 state.breeding[0] = keptParent;
                 if (state.dayCareRef) {
@@ -511,8 +522,8 @@ export function handleDrop(event, targetCol) {
             const findPartner = (arr, colName) => {
                 for (let i = 0; i < arr.length; i++) {
                     const candidate = arr[i];
-                    // Must have same ID, identical Q (Math.abs < 0.001), Q < 1.99, and not be the dragged pokemon itself
-                    if (candidate.uuid !== p.uuid && candidate.id === p.id && Math.abs(candidate.quality - p.quality) <= 0.001 && candidate.quality < 1.99) {
+                    // Must have same ID, Q difference <= 0.05, and not be the dragged pokemon itself
+                    if (candidate.uuid !== p.uuid && candidate.id === p.id && Math.round(Math.abs(candidate.quality - p.quality) * 100) <= 5) {
                         partner = candidate;
                         partnerIndex = i;
                         partnerCol = colName;
@@ -534,14 +545,23 @@ export function handleDrop(event, targetCol) {
                 else if (partnerCol === 'safe') state.safe.splice(partnerIndex, 1);
                 else if (partnerCol === 'party') state.party.splice(partnerIndex, 1);
 
-                const sumIV1 = partner.ivs.hp + partner.ivs.atk + partner.ivs.def + partner.ivs.spa + partner.ivs.spd + partner.ivs.spe;
-                const sumIV2 = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
-                const keptParent = (sumIV2 > sumIV1) ? p : partner;
+                const keptParent = JSON.parse(JSON.stringify((p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe > partner.ivs.hp + partner.ivs.atk + partner.ivs.def + partner.ivs.spa + partner.ivs.spd + partner.ivs.spe) ? p : partner));
+
+                keptParent.ivs.hp = Math.max(p.ivs.hp, partner.ivs.hp);
+                keptParent.ivs.atk = Math.max(p.ivs.atk, partner.ivs.atk);
+                keptParent.ivs.def = Math.max(p.ivs.def, partner.ivs.def);
+                keptParent.ivs.spa = Math.max(p.ivs.spa, partner.ivs.spa);
+                keptParent.ivs.spd = Math.max(p.ivs.spd, partner.ivs.spd);
+                keptParent.ivs.spe = Math.max(p.ivs.spe, partner.ivs.spe);
+
+                keptParent.level = Math.floor(Math.max(p.level, partner.level) * 0.9);
+                if (keptParent.level < 1) keptParent.level = 1;
 
                 state.breeding.push(keptParent);
                 if (state.dayCareRef) {
                     state.dayCareRef.slot1.pokemon = keptParent;
                     state.dayCareRef.slot1.battles = 0;
+                    state.dayCareRef.slot1.requiredBattles = keptParent.quality >= 2.0 ? 400 : 200;
                     state.dayCareRef.slot1.isBreeding = true;
                     state.dayCareRef.slot1.isFinished = false;
                 }
@@ -556,8 +576,12 @@ export function handleDrop(event, targetCol) {
                 }
                 if (window.clearPokemonFilter) window.clearPokemonFilter();
                 window.pokemonFilters.name = p.name;
-                window.pokemonFilters.minQ = p.quality.toFixed(2);
-                window.pokemonFilters.maxQ = p.quality.toFixed(2);
+
+                // Allow a range of +- 0.05 around the quality
+                let minQ = Math.max(0.8, p.quality - 0.05).toFixed(2);
+                let maxQ = (p.quality + 0.05).toFixed(2);
+                window.pokemonFilters.minQ = minQ;
+                window.pokemonFilters.maxQ = maxQ;
             }
         }
     }
@@ -585,8 +609,8 @@ export function handleDrop(event, targetCol) {
                 state.dayCareRef.slot1.isFinished = false;
             }
             window.pokemonFilters.name = displacedPokemon.name;
-            window.pokemonFilters.minQ = displacedPokemon.quality.toFixed(2);
-            window.pokemonFilters.maxQ = displacedPokemon.quality.toFixed(2);
+            window.pokemonFilters.minQ = Math.max(0.8, displacedPokemon.quality - 0.05).toFixed(2);
+            window.pokemonFilters.maxQ = (displacedPokemon.quality + 0.05).toFixed(2);
         }
     }
 
