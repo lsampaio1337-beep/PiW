@@ -2,6 +2,18 @@ import { getSpeciesDataHtml, buildEvolutionLineHtml, formatType } from "./pokede
 import { state } from '../state.js';
 import { updateUI, showModal } from '../ui.js';
 
+let _cachedPokemonDataMap = null;
+function getPokemonDataMap() {
+    if (!_cachedPokemonDataMap && state.config && state.config.pokemonData) {
+        _cachedPokemonDataMap = new Map();
+        for (let i = 0; i < state.config.pokemonData.length; i++) {
+            _cachedPokemonDataMap.set(state.config.pokemonData[i].id, state.config.pokemonData[i]);
+        }
+    }
+    return _cachedPokemonDataMap;
+}
+
+
 
 function getEvolveRequirements(p, evo, state) {
     const requiredLevel = evo.level;
@@ -70,7 +82,7 @@ export function showPokemonStats(idx, location) {
     if (!p) return;
 
     const sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
-    const pData = state.config.pokemonData.find(pd => pd.id === p.id);
+    const pData = getPokemonDataMap()?.get(p.id);
     if (!pData) return;
 
     // --- Individual Data ---
@@ -193,11 +205,11 @@ export function evolvePokemon(location, idx, toId) {
     if (!list || !list[idx]) return;
 
     let p = list[idx];
-    const newBase = state.config.pokemonData.find(pd => pd.id === toId);
+    const newBase = getPokemonDataMap()?.get(toId);
     if (!newBase) return;
 
     // Re-verify requirements and consume stones
-    const oldPData = state.config.pokemonData.find(pd => pd.id === p.id);
+    const oldPData = getPokemonDataMap()?.get(p.id);
     const evoObj = oldPData ? oldPData.evolutions.find(e => e.to === toId) : null;
     if (evoObj) {
         const req = getEvolveRequirements(p, evoObj, state);
@@ -330,7 +342,7 @@ window.useVitamin = function(location, idx, vitaminName, statKey) {
     p.vitamins[statKey] = (p.vitamins[statKey] || 0) + 1;
 
     // Recalculate stats
-    const pBase = state.config.pokemonData.find(pd => pd.id === p.id);
+    const pBase = getPokemonDataMap()?.get(p.id);
     if (pBase) {
         if (statKey === 'hp') {
             const oldMax = p.maxHp;
