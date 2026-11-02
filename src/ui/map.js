@@ -746,7 +746,7 @@ export function navigateToLocation(locationName) {
         // Append to the viewCasino container
         viewCasino.insertAdjacentHTML('beforeend', html);
     } else if (locationName === "Daycare") {
-        if (!state.globalStats.hasSeenDaycare) {
+        if (!state.stats.hasSeenDaycare) {
             document.getElementById('daycare-first-time-overlay').style.display = 'flex';
         } else {
             document.getElementById('daycare-first-time-overlay').style.display = 'none';

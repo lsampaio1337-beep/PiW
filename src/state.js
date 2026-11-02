@@ -61,6 +61,7 @@ export const REGION_TEMPLATE = {
         caughtSpeciesCount: 0,
         seenShiniesSpecies: {},
         caughtShiniesSpecies: {},
+        hasSeenDaycare: false,
         upgrades: {
             ballsTier: 0,
             potionsTier: 0,
@@ -97,7 +98,6 @@ export const state = {
         hasSeenMultiplayerIcon: false,
         hasSeenGiftIcon: false,
         hasSeenJohtoMap: false,
-        hasSeenDaycare: false,
         hasSeenBonusCandyModal: false
     },
     settings: {
