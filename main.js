@@ -9,9 +9,18 @@ if (process.platform === 'linux') {
     app.disableHardwareAcceleration();
 }
 
+if (process.platform === 'win32') {
+    app.disableHardwareAcceleration();
+}
+
 function createWindow() {
     // Get primary display dimensions
-    const { x, y, width, height } = screen.getPrimaryDisplay().workArea;
+    let { x, y, width, height } = screen.getPrimaryDisplay().workArea;
+
+    if (process.platform === 'win32') {
+        width -= 1;
+        height -= 1;
+    }
 
     const win = new BrowserWindow({
         width: width,
