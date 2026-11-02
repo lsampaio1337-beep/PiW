@@ -100,7 +100,7 @@ export const alolaRoutes = [
     "challengeName": "Challenge 2",
     "areaId": "Route 1 Hau'oli Outskirts",
     "unlocks": [
-      "Route 2 North"
+      "Hau'oli Cemetery"
     ],
     "requirements": {
       "catchByType": {
@@ -110,55 +110,95 @@ export const alolaRoutes = [
     }
   },
   {
+    "name": "Hau'oli Cemetery",
+    "spawns": [
+      {
+        "pokemonId": 92,
+        "minLevel": 7,
+        "maxLevel": 12,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 425,
+        "minLevel": 7,
+        "maxLevel": 12,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 198,
+        "minLevel": 7,
+        "maxLevel": 12,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 200,
+        "minLevel": 7,
+        "maxLevel": 12,
+        "chance": 0.25
+      }
+    ],
+    "challengeName": "Challenge 3",
+    "areaId": "Hau'oli Cemetery",
+    "unlocks": [
+      "Route 2 North"
+    ],
+    "requirements": {
+      "catchByQuality": {
+        "quality": "Rare+",
+        "count": 2
+      }
+    }
+  },
+  {
     "name": "Route 2 North",
     "spawns": [
       {
         "pokemonId": 96,
-        "minLevel": 7,
-        "maxLevel": 12,
+        "minLevel": 10,
+        "maxLevel": 15,
         "chance": 0.16670000000000001
       },
       {
         "pokemonId": 296,
-        "minLevel": 7,
-        "maxLevel": 12,
+        "minLevel": 10,
+        "maxLevel": 15,
         "chance": 0.16670000000000001
       },
       {
         "pokemonId": 21,
-        "minLevel": 7,
-        "maxLevel": 12,
+        "minLevel": 10,
+        "maxLevel": 15,
         "chance": 0.16670000000000001
       },
       {
         "pokemonId": 23,
-        "minLevel": 7,
-        "maxLevel": 12,
+        "minLevel": 10,
+        "maxLevel": 15,
         "chance": 0.16670000000000001
       },
       {
         "pokemonId": 58,
-        "minLevel": 7,
-        "maxLevel": 12,
+        "minLevel": 10,
+        "maxLevel": 15,
         "chance": 0.16670000000000001
       },
       {
         "pokemonId": 235,
-        "minLevel": 7,
-        "maxLevel": 12,
+        "minLevel": 10,
+        "maxLevel": 15,
         "chance": 0.16670000000000001
       },
       {
         "pokemonId": 739,
-        "minLevel": 7,
-        "maxLevel": 12,
+        "minLevel": 10,
+        "maxLevel": 15,
         "chance": 0.1
       }
     ],
-    "challengeName": "Challenge 3",
+    "challengeName": "Challenge 4",
     "areaId": "Route 2 North",
     "unlocks": [
-      "Captain Ilima"
+      "Captain Ilima Boss Battle"
     ],
     "requirements": {
       "catchByQuality": {
@@ -170,105 +210,13 @@ export const alolaRoutes = [
   {
     "name": "Captain Ilima Boss Battle",
     "spawns": [],
-    "challengeName": "Challenge 4",
-    "areaId": "Captain Ilima Boss Battle",
-    "unlocks": [
-      "Hau'oli Cemetery"
-    ],
-    "requirements": {
-      "defeatBoss": "Captain Ilima"
-    }
-  },
-  {
-    "name": "Hau'oli Cemetery",
-    "spawns": [
-      {
-        "pokemonId": 92,
-        "minLevel": 10,
-        "maxLevel": 15,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 425,
-        "minLevel": 10,
-        "maxLevel": 15,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 198,
-        "minLevel": 10,
-        "maxLevel": 15,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 200,
-        "minLevel": 10,
-        "maxLevel": 15,
-        "chance": 0.25
-      }
-    ],
     "challengeName": "Challenge 5",
-    "areaId": "Hau'oli Cemetery",
-    "unlocks": [
-      "Ten Carat Hill Farthest Hollow"
-    ],
-    "requirements": {
-      "catchByQuality": {
-        "quality": "Rare+",
-        "count": 2
-      }
-    }
-  },
-  {
-    "name": "Ten Carat Hill Farthest Hollow",
-    "spawns": [
-      {
-        "pokemonId": 524,
-        "minLevel": 14,
-        "maxLevel": 19,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 703,
-        "minLevel": 14,
-        "maxLevel": 19,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 327,
-        "minLevel": 14,
-        "maxLevel": 19,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 303,
-        "minLevel": 14,
-        "maxLevel": 19,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 745,
-        "minLevel": 14,
-        "maxLevel": 19,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 744,
-        "minLevel": 14,
-        "maxLevel": 19,
-        "chance": 0.1
-      }
-    ],
-    "challengeName": "Challenge 6",
-    "areaId": "Ten Carat Hill Farthest Hollow",
+    "areaId": "Captain Ilima Boss Battle",
     "unlocks": [
       "Seaward Cave"
     ],
     "requirements": {
-      "catchByQuality": {
-        "quality": "Epic+",
-        "count": 1
-      }
+      "defeatBoss": "Captain Ilima"
     }
   },
   {
@@ -276,26 +224,29 @@ export const alolaRoutes = [
     "spawns": [
       {
         "pokemonId": 339,
-        "minLevel": 16,
-        "maxLevel": 21,
+        "minLevel": 14,
+        "maxLevel": 19,
         "chance": 0.3333
       },
       {
         "pokemonId": 238,
-        "minLevel": 16,
-        "maxLevel": 21,
+        "minLevel": 14,
+        "maxLevel": 19,
         "chance": 0.3333
       },
       {
         "pokemonId": 86,
-        "minLevel": 16,
-        "maxLevel": 21,
+        "minLevel": 14,
+        "maxLevel": 19,
         "chance": 0.3333
       }
     ],
     "areaId": "Seaward Cave",
-    "unlocks": [],
-    "requirements": {}
+    "unlocks": [
+      "Kahuna Hala Boss Battle"
+    ],
+    "requirements": {},
+    "challengeName": "Challenge 6"
   },
   {
     "name": "Kahuna Hala Boss Battle",
@@ -303,7 +254,7 @@ export const alolaRoutes = [
     "challengeName": "Challenge 7",
     "areaId": "Kahuna Hala Boss Battle",
     "unlocks": [
-      "Kahuna Hala"
+      "Ten Carat Hill Farthest Hollow"
     ],
     "requirements": {
       "defeatMultipleSpecific": [
@@ -328,6 +279,58 @@ export const alolaRoutes = [
           "count": 1
         }
       ]
+    }
+  },
+  {
+    "name": "Ten Carat Hill Farthest Hollow",
+    "spawns": [
+      {
+        "pokemonId": 524,
+        "minLevel": 16,
+        "maxLevel": 21,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 703,
+        "minLevel": 16,
+        "maxLevel": 21,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 327,
+        "minLevel": 16,
+        "maxLevel": 21,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 303,
+        "minLevel": 16,
+        "maxLevel": 21,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 745,
+        "minLevel": 16,
+        "maxLevel": 21,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 744,
+        "minLevel": 16,
+        "maxLevel": 21,
+        "chance": 0.1
+      }
+    ],
+    "challengeName": "Challenge 8",
+    "areaId": "Ten Carat Hill Farthest Hollow",
+    "unlocks": [
+      "Paniola Ranch"
+    ],
+    "requirements": {
+      "catchByQuality": {
+        "quality": "Epic+",
+        "count": 1
+      }
     }
   },
   {
@@ -413,7 +416,7 @@ export const alolaRoutes = [
     "challengeName": "Challenge 11",
     "areaId": "Route 5",
     "unlocks": [
-      "Captain Lana"
+      "Captain Lana Boss Battle"
     ],
     "requirements": {
       "catchSpeciesUniqueCount": 2
@@ -456,7 +459,7 @@ export const alolaRoutes = [
     "challengeName": "Challenge 13",
     "areaId": "Wela Volcano Park",
     "unlocks": [
-      "Captain Kiawe"
+      "Captain Kiawe Boss Battle"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -566,7 +569,8 @@ export const alolaRoutes = [
     "challengeName": "Challenge 16",
     "areaId": "Route 8 Fossil Restoration Center Part 1",
     "unlocks": [
-      "Lush Jungle North"
+      "Lush Jungle North",
+      "Route 8 Fossil Restoration Center Part 2"
     ],
     "requirements": {
       "catchByQuality": {
@@ -574,44 +578,6 @@ export const alolaRoutes = [
         "count": 5
       }
     }
-  },
-  {
-    "name": "Route 8 Fossil Restoration Center Part 2",
-    "spawns": [
-      {
-        "pokemonId": 410,
-        "minLevel": 32,
-        "maxLevel": 37,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 566,
-        "minLevel": 32,
-        "maxLevel": 37,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 564,
-        "minLevel": 32,
-        "maxLevel": 37,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 696,
-        "minLevel": 32,
-        "maxLevel": 37,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 698,
-        "minLevel": 32,
-        "maxLevel": 37,
-        "chance": 0.2
-      }
-    ],
-    "areaId": "Route 8 Fossil Restoration Center Part 2",
-    "unlocks": [],
-    "requirements": {}
   },
   {
     "name": "Lush Jungle North",
@@ -708,7 +674,7 @@ export const alolaRoutes = [
     "challengeName": "Challenge 18",
     "areaId": "Lush Jungle East Cave",
     "unlocks": [
-      "Captain Mallow"
+      "Captain Mallow Boss Battle"
     ],
     "requirements": {
       "defeatMultipleSpecific": [
@@ -739,8 +705,11 @@ export const alolaRoutes = [
     "name": "Captain Mallow Boss Battle",
     "spawns": [],
     "areaId": "Captain Mallow Boss Battle",
-    "unlocks": [],
-    "requirements": {}
+    "unlocks": [
+      "Diglett's Tunnel"
+    ],
+    "requirements": {},
+    "challengeName": "Challenge 19"
   },
   {
     "name": "Diglett's Tunnel",
@@ -837,7 +806,7 @@ export const alolaRoutes = [
     "challengeName": "Challenge 21",
     "areaId": "Akala Outskirts",
     "unlocks": [
-      "Kahuna Olivia"
+      "Kahuna Olivia Boss Battle"
     ],
     "requirements": {
       "catchSpeciesUniqueCount": 2
@@ -847,8 +816,11 @@ export const alolaRoutes = [
     "name": "Kahuna Olivia Boss Battle",
     "spawns": [],
     "areaId": "Kahuna Olivia Boss Battle",
-    "unlocks": [],
-    "requirements": {}
+    "unlocks": [
+      "Malie City"
+    ],
+    "requirements": {},
+    "challengeName": "Challenge 22"
   },
   {
     "name": "Malie City",
@@ -927,7 +899,7 @@ export const alolaRoutes = [
     "challengeName": "Challenge 24",
     "areaId": "Mount Hokulani East",
     "unlocks": [
-      "Captain Sophocles"
+      "Captain Sophocles Boss Battle"
     ],
     "requirements": {
       "catchByType": {
@@ -940,96 +912,53 @@ export const alolaRoutes = [
     "name": "Captain Sophocles Boss Battle",
     "spawns": [],
     "areaId": "Captain Sophocles Boss Battle",
-    "unlocks": [],
-    "requirements": {}
-  },
-  {
-    "name": "Haina Desert",
-    "spawns": [
-      {
-        "pokemonId": 51,
-        "minLevel": 58,
-        "maxLevel": 63,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 551,
-        "minLevel": 58,
-        "maxLevel": 63,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 552,
-        "minLevel": 58,
-        "maxLevel": 63,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 120,
-        "minLevel": 58,
-        "maxLevel": 63,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 769,
-        "minLevel": 58,
-        "maxLevel": 63,
-        "chance": 0.2
-      }
-    ],
-    "challengeName": "Challenge 26",
-    "areaId": "Haina Desert",
     "unlocks": [
       "Tapu Village"
     ],
-    "requirements": {
-      "catchByQuality": {
-        "quality": "Uncommon+",
-        "count": 5
-      }
-    }
+    "requirements": {},
+    "challengeName": "Challenge 25"
   },
   {
     "name": "Tapu Village",
     "spawns": [
       {
         "pokemonId": 75,
-        "minLevel": 60,
-        "maxLevel": 65,
+        "minLevel": 58,
+        "maxLevel": 63,
         "chance": 0.16670000000000001
       },
       {
         "pokemonId": 779,
-        "minLevel": 60,
-        "maxLevel": 65,
+        "minLevel": 58,
+        "maxLevel": 63,
         "chance": 0.16670000000000001
       },
       {
         "pokemonId": 359,
-        "minLevel": 60,
-        "maxLevel": 65,
+        "minLevel": 58,
+        "maxLevel": 63,
         "chance": 0.16670000000000001
       },
       {
         "pokemonId": 361,
-        "minLevel": 60,
-        "maxLevel": 65,
+        "minLevel": 58,
+        "maxLevel": 63,
         "chance": 0.16670000000000001
       },
       {
         "pokemonId": 27,
-        "minLevel": 60,
-        "maxLevel": 65,
+        "minLevel": 58,
+        "maxLevel": 63,
         "chance": 0.16670000000000001
       },
       {
         "pokemonId": 37,
-        "minLevel": 60,
-        "maxLevel": 65,
+        "minLevel": 58,
+        "maxLevel": 63,
         "chance": 0.16670000000000001
       }
     ],
-    "challengeName": "Challenge 27",
+    "challengeName": "Challenge 26",
     "areaId": "Tapu Village",
     "unlocks": [
       "Thrifty Megamart"
@@ -1046,39 +975,39 @@ export const alolaRoutes = [
     "spawns": [
       {
         "pokemonId": 93,
-        "minLevel": 63,
-        "maxLevel": 68,
+        "minLevel": 60,
+        "maxLevel": 65,
         "chance": 0.25
       },
       {
         "pokemonId": 707,
-        "minLevel": 63,
-        "maxLevel": 68,
+        "minLevel": 60,
+        "maxLevel": 65,
         "chance": 0.25
       },
       {
         "pokemonId": 353,
-        "minLevel": 63,
-        "maxLevel": 68,
+        "minLevel": 60,
+        "maxLevel": 65,
         "chance": 0.25
       },
       {
         "pokemonId": 525,
-        "minLevel": 63,
-        "maxLevel": 68,
+        "minLevel": 60,
+        "maxLevel": 65,
         "chance": 0.25
       },
       {
         "pokemonId": 778,
-        "minLevel": 63,
-        "maxLevel": 68,
+        "minLevel": 60,
+        "maxLevel": 65,
         "chance": 0.1
       }
     ],
-    "challengeName": "Challenge 28",
+    "challengeName": "Challenge 27",
     "areaId": "Thrifty Megamart",
     "unlocks": [
-      "Captain Acerola"
+      "Captain Acerola Boss Battle"
     ],
     "requirements": {
       "catchByQuality": {
@@ -1090,21 +1019,70 @@ export const alolaRoutes = [
   {
     "name": "Captain Acerola Boss Battle",
     "spawns": [],
-    "challengeName": "Challenge 30",
+    "challengeName": "Challenge 28",
     "areaId": "Captain Acerola Boss Battle",
     "unlocks": [
-      "Seafolk Village"
+      "Haina Desert"
     ],
     "requirements": {
       "defeatBoss": "Kahuna Nanu"
     }
   },
   {
+    "name": "Haina Desert",
+    "spawns": [
+      {
+        "pokemonId": 51,
+        "minLevel": 63,
+        "maxLevel": 68,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 551,
+        "minLevel": 63,
+        "maxLevel": 68,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 552,
+        "minLevel": 63,
+        "maxLevel": 68,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 120,
+        "minLevel": 63,
+        "maxLevel": 68,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 769,
+        "minLevel": 63,
+        "maxLevel": 68,
+        "chance": 0.2
+      }
+    ],
+    "challengeName": "Challenge 29",
+    "areaId": "Haina Desert",
+    "unlocks": [
+      "Kahuna Nanu Boss Battle"
+    ],
+    "requirements": {
+      "catchByQuality": {
+        "quality": "Uncommon+",
+        "count": 5
+      }
+    }
+  },
+  {
     "name": "Kahuna Nanu Boss Battle",
     "spawns": [],
     "areaId": "Kahuna Nanu Boss Battle",
-    "unlocks": [],
-    "requirements": {}
+    "unlocks": [
+      "Seafolk Village"
+    ],
+    "requirements": {},
+    "challengeName": "Challenge 30"
   },
   {
     "name": "Seafolk Village",
@@ -1129,8 +1107,11 @@ export const alolaRoutes = [
       }
     ],
     "areaId": "Seafolk Village",
-    "unlocks": [],
-    "requirements": {}
+    "unlocks": [
+      "Poni Wilds"
+    ],
+    "requirements": {},
+    "challengeName": "Challenge 31"
   },
   {
     "name": "Poni Wilds",
@@ -1166,10 +1147,10 @@ export const alolaRoutes = [
         "chance": 0.2
       }
     ],
-    "challengeName": "Challenge 31",
+    "challengeName": "Challenge 32",
     "areaId": "Poni Wilds",
     "unlocks": [
-      "Poni Wilds"
+      "Poni Breaker Coast"
     ],
     "requirements": {
       "defeatMultipleSpecific": [
@@ -1282,7 +1263,7 @@ export const alolaRoutes = [
     "challengeName": "Challenge 34",
     "areaId": "Exeggutor Island",
     "unlocks": [
-      "Vast Poni Canyon Outside"
+      "Kahuna Hapu Boss Battle"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -1290,6 +1271,16 @@ export const alolaRoutes = [
         "count": 15
       }
     }
+  },
+  {
+    "name": "Kahuna Hapu Boss Battle",
+    "spawns": [],
+    "areaId": "Kahuna Hapu Boss Battle",
+    "unlocks": [
+      "Vast Poni Canyon Outside"
+    ],
+    "requirements": {},
+    "challengeName": "Challenge 35"
   },
   {
     "name": "Vast Poni Canyon Outside",
@@ -1319,10 +1310,10 @@ export const alolaRoutes = [
         "chance": 0.1
       }
     ],
-    "challengeName": "Challenge 35",
+    "challengeName": "Challenge 36",
     "areaId": "Vast Poni Canyon Outside",
     "unlocks": [
-      "Captain Kommo-o"
+      "Captain Mina Boss Battle"
     ],
     "requirements": {
       "catchByType": {
@@ -1332,35 +1323,28 @@ export const alolaRoutes = [
     }
   },
   {
-    "name": "Captain Kommo-o Boss Battle",
-    "spawns": [],
-    "challengeName": "Challenge 37",
-    "areaId": "Captain Kommo-o Boss Battle",
-    "unlocks": [
-      "Kahuna Hapu"
-    ],
-    "requirements": {
-      "defeatBoss": "Captain Mina"
-    }
-  },
-  {
     "name": "Captain Mina Boss Battle",
     "spawns": [],
-    "challengeName": "Challenge 38",
+    "challengeName": "Challenge 37",
     "areaId": "Captain Mina Boss Battle",
     "unlocks": [
-      "Mount Lanakila"
+      "Captain Kommo-o Boss Battle"
     ],
     "requirements": {
       "defeatBoss": "Kahuna Hapu"
     }
   },
   {
-    "name": "Kahuna Hapu Boss Battle",
+    "name": "Captain Kommo-o Boss Battle",
     "spawns": [],
-    "areaId": "Kahuna Hapu Boss Battle",
-    "unlocks": [],
-    "requirements": {}
+    "challengeName": "Challenge 38",
+    "areaId": "Captain Kommo-o Boss Battle",
+    "unlocks": [
+      "Mount Lanakila"
+    ],
+    "requirements": {
+      "defeatBoss": "Captain Mina"
+    }
   },
   {
     "name": "Mount Lanakila",
@@ -1393,7 +1377,7 @@ export const alolaRoutes = [
     "challengeName": "Challenge 39",
     "areaId": "Mount Lanakila",
     "unlocks": [
-      "Alola Pokemon League"
+      "Alola Pokemon League Boss Battle"
     ],
     "requirements": {
       "catchByQuality": {
@@ -1405,10 +1389,10 @@ export const alolaRoutes = [
   {
     "name": "Alola Pokemon League Boss Battle",
     "spawns": [],
-    "challengeName": "Extra Challenge A-1",
+    "challengeName": "Challenge 40",
     "areaId": "Alola Pokemon League Boss Battle",
     "unlocks": [
-      "Route 6"
+      "Champion Hau Boss Battle"
     ],
     "requirements": {
       "defeatBoss": "Captain Lana"
@@ -1418,13 +1402,16 @@ export const alolaRoutes = [
     "name": "Champion Hau Boss Battle",
     "spawns": [],
     "areaId": "Champion Hau Boss Battle",
-    "unlocks": [],
-    "requirements": {}
+    "unlocks": [
+      "Route 6"
+    ],
+    "requirements": {},
+    "challengeName": "Challenge 41"
   },
   {
     "name": "Route 6",
     "spawns": [],
-    "challengeName": "Extra Challenge A-2",
+    "challengeName": "Extra Challenge A-1",
     "areaId": "Route 6",
     "unlocks": [
       "Royal Avenue"
@@ -1560,7 +1547,7 @@ export const alolaRoutes = [
         "chance": 0.3333
       }
     ],
-    "challengeName": "Extra Challenge A-3",
+    "challengeName": "Extra Challenge A-2",
     "areaId": "Royal Avenue",
     "unlocks": [
       "Pikachu Valley"
@@ -1600,7 +1587,7 @@ export const alolaRoutes = [
         "chance": 0.25
       }
     ],
-    "challengeName": "Extra Challenge A-4",
+    "challengeName": "Extra Challenge A-3",
     "areaId": "Pikachu Valley",
     "unlocks": [
       "Starter Depot"
@@ -2234,6 +2221,50 @@ export const alolaRoutes = [
         }
       ]
     }
+  },
+  {
+    "name": "Route 8 Fossil Restoration Center Part 2",
+    "spawns": [
+      {
+        "pokemonId": 410,
+        "minLevel": 32,
+        "maxLevel": 37,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 566,
+        "minLevel": 32,
+        "maxLevel": 37,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 564,
+        "minLevel": 32,
+        "maxLevel": 37,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 696,
+        "minLevel": 32,
+        "maxLevel": 37,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 698,
+        "minLevel": 32,
+        "maxLevel": 37,
+        "chance": 0.2
+      }
+    ],
+    "areaId": "Route 8 Fossil Restoration Center Part 2",
+    "unlocks": [],
+    "requirements": {
+      "catchByQuality": {
+        "quality": "Uncommon+",
+        "count": 5
+      }
+    },
+    "challengeName": "Extra Challenge F-1"
   }
 ];
 
@@ -2255,7 +2286,7 @@ export const alolaUnlocks = [
     "challengeName": "Challenge 2",
     "areaId": "Route 1 Hau'oli Outskirts",
     "unlocks": [
-      "Route 2 North"
+      "Hau'oli Cemetery"
     ],
     "requirements": {
       "catchByType": {
@@ -2266,32 +2297,9 @@ export const alolaUnlocks = [
   },
   {
     "challengeName": "Challenge 3",
-    "areaId": "Route 2 North",
-    "unlocks": [
-      "Captain Ilima"
-    ],
-    "requirements": {
-      "catchByQuality": {
-        "quality": "Uncommon+",
-        "count": 5
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 4",
-    "areaId": "Captain Ilima Boss Battle",
-    "unlocks": [
-      "Hau'oli Cemetery"
-    ],
-    "requirements": {
-      "defeatBoss": "Captain Ilima"
-    }
-  },
-  {
-    "challengeName": "Challenge 5",
     "areaId": "Hau'oli Cemetery",
     "unlocks": [
-      "Ten Carat Hill Farthest Hollow"
+      "Route 2 North"
     ],
     "requirements": {
       "catchByQuality": {
@@ -2301,23 +2309,41 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 6",
-    "areaId": "Ten Carat Hill Farthest Hollow",
+    "challengeName": "Challenge 4",
+    "areaId": "Route 2 North",
+    "unlocks": [
+      "Captain Ilima Boss Battle"
+    ],
+    "requirements": {
+      "catchByQuality": {
+        "quality": "Uncommon+",
+        "count": 5
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 5",
+    "areaId": "Captain Ilima Boss Battle",
     "unlocks": [
       "Seaward Cave"
     ],
     "requirements": {
-      "catchByQuality": {
-        "quality": "Epic+",
-        "count": 1
-      }
+      "defeatBoss": "Captain Ilima"
     }
+  },
+  {
+    "challengeName": "Challenge 6",
+    "areaId": "Seaward Cave",
+    "unlocks": [
+      "Kahuna Hala Boss Battle"
+    ],
+    "requirements": {}
   },
   {
     "challengeName": "Challenge 7",
     "areaId": "Kahuna Hala Boss Battle",
     "unlocks": [
-      "Kahuna Hala"
+      "Ten Carat Hill Farthest Hollow"
     ],
     "requirements": {
       "defeatMultipleSpecific": [
@@ -2346,14 +2372,14 @@ export const alolaUnlocks = [
   },
   {
     "challengeName": "Challenge 8",
-    "areaId": "Kahuna Hala Boss Battle",
+    "areaId": "Ten Carat Hill Farthest Hollow",
     "unlocks": [
       "Paniola Ranch"
     ],
     "requirements": {
-      "defeatCountRoute": {
-        "route": "Kahuna Hala",
-        "count": 10
+      "catchByQuality": {
+        "quality": "Epic+",
+        "count": 1
       }
     }
   },
@@ -2384,7 +2410,7 @@ export const alolaUnlocks = [
     "challengeName": "Challenge 11",
     "areaId": "Route 5",
     "unlocks": [
-      "Captain Lana"
+      "Captain Lana Boss Battle"
     ],
     "requirements": {
       "catchSpeciesUniqueCount": 2
@@ -2404,7 +2430,7 @@ export const alolaUnlocks = [
     "challengeName": "Challenge 13",
     "areaId": "Wela Volcano Park",
     "unlocks": [
-      "Captain Kiawe"
+      "Captain Kiawe Boss Battle"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -2440,7 +2466,8 @@ export const alolaUnlocks = [
     "challengeName": "Challenge 16",
     "areaId": "Route 8 Fossil Restoration Center Part 1",
     "unlocks": [
-      "Lush Jungle North"
+      "Lush Jungle North",
+      "Route 8 Fossil Restoration Center Part 2"
     ],
     "requirements": {
       "catchByQuality": {
@@ -2466,7 +2493,7 @@ export const alolaUnlocks = [
     "challengeName": "Challenge 18",
     "areaId": "Lush Jungle East Cave",
     "unlocks": [
-      "Captain Mallow"
+      "Captain Mallow Boss Battle"
     ],
     "requirements": {
       "defeatMultipleSpecific": [
@@ -2495,13 +2522,11 @@ export const alolaUnlocks = [
   },
   {
     "challengeName": "Challenge 19",
-    "areaId": "Lush Jungle East Cave",
+    "areaId": "Captain Mallow Boss Battle",
     "unlocks": [
       "Diglett's Tunnel"
     ],
-    "requirements": {
-      "defeatBoss": "Captain Mallow"
-    }
+    "requirements": {}
   },
   {
     "challengeName": "Challenge 20",
@@ -2520,7 +2545,7 @@ export const alolaUnlocks = [
     "challengeName": "Challenge 21",
     "areaId": "Akala Outskirts",
     "unlocks": [
-      "Kahuna Olivia"
+      "Kahuna Olivia Boss Battle"
     ],
     "requirements": {
       "catchSpeciesUniqueCount": 2
@@ -2528,16 +2553,11 @@ export const alolaUnlocks = [
   },
   {
     "challengeName": "Challenge 22",
-    "areaId": "Akala Outskirts",
+    "areaId": "Kahuna Olivia Boss Battle",
     "unlocks": [
       "Malie City"
     ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Kahuna Olivia",
-        "count": 10
-      }
-    }
+    "requirements": {}
   },
   {
     "challengeName": "Challenge 23",
@@ -2556,7 +2576,7 @@ export const alolaUnlocks = [
     "challengeName": "Challenge 24",
     "areaId": "Mount Hokulani East",
     "unlocks": [
-      "Captain Sophocles"
+      "Captain Sophocles Boss Battle"
     ],
     "requirements": {
       "catchByType": {
@@ -2567,32 +2587,14 @@ export const alolaUnlocks = [
   },
   {
     "challengeName": "Challenge 25",
-    "areaId": "Mount Hokulani East",
-    "unlocks": [
-      "Haina Desert"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Captain Sophocles",
-        "count": 10
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 26",
-    "areaId": "Haina Desert",
+    "areaId": "Captain Sophocles Boss Battle",
     "unlocks": [
       "Tapu Village"
     ],
-    "requirements": {
-      "catchByQuality": {
-        "quality": "Uncommon+",
-        "count": 5
-      }
-    }
+    "requirements": {}
   },
   {
-    "challengeName": "Challenge 27",
+    "challengeName": "Challenge 26",
     "areaId": "Tapu Village",
     "unlocks": [
       "Thrifty Megamart"
@@ -2605,10 +2607,10 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 28",
+    "challengeName": "Challenge 27",
     "areaId": "Thrifty Megamart",
     "unlocks": [
-      "Captain Acerola"
+      "Captain Acerola Boss Battle"
     ],
     "requirements": {
       "catchByQuality": {
@@ -2618,33 +2620,49 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 29",
-    "areaId": "Thrifty Megamart",
-    "unlocks": [
-      "Kahuna Nanu"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Captain Acerola",
-        "count": 10
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 30",
+    "challengeName": "Challenge 28",
     "areaId": "Captain Acerola Boss Battle",
     "unlocks": [
-      "Seafolk Village"
+      "Haina Desert"
     ],
     "requirements": {
       "defeatBoss": "Kahuna Nanu"
     }
   },
   {
+    "challengeName": "Challenge 29",
+    "areaId": "Haina Desert",
+    "unlocks": [
+      "Kahuna Nanu Boss Battle"
+    ],
+    "requirements": {
+      "catchByQuality": {
+        "quality": "Uncommon+",
+        "count": 5
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 30",
+    "areaId": "Kahuna Nanu Boss Battle",
+    "unlocks": [
+      "Seafolk Village"
+    ],
+    "requirements": {}
+  },
+  {
     "challengeName": "Challenge 31",
-    "areaId": "Poni Wilds",
+    "areaId": "Seafolk Village",
     "unlocks": [
       "Poni Wilds"
+    ],
+    "requirements": {}
+  },
+  {
+    "challengeName": "Challenge 32",
+    "areaId": "Poni Wilds",
+    "unlocks": [
+      "Poni Breaker Coast"
     ],
     "requirements": {
       "defeatMultipleSpecific": [
@@ -2672,19 +2690,6 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 32",
-    "areaId": "Poni Wilds",
-    "unlocks": [
-      "Poni Breaker Coast"
-    ],
-    "requirements": {
-      "catchCountRoute": {
-        "route": "Poni Wilds",
-        "count": 10
-      }
-    }
-  },
-  {
     "challengeName": "Challenge 33",
     "areaId": "Poni Breaker Coast",
     "unlocks": [
@@ -2698,7 +2703,7 @@ export const alolaUnlocks = [
     "challengeName": "Challenge 34",
     "areaId": "Exeggutor Island",
     "unlocks": [
-      "Vast Poni Canyon Outside"
+      "Kahuna Hapu Boss Battle"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -2709,9 +2714,17 @@ export const alolaUnlocks = [
   },
   {
     "challengeName": "Challenge 35",
+    "areaId": "Kahuna Hapu Boss Battle",
+    "unlocks": [
+      "Vast Poni Canyon Outside"
+    ],
+    "requirements": {}
+  },
+  {
+    "challengeName": "Challenge 36",
     "areaId": "Vast Poni Canyon Outside",
     "unlocks": [
-      "Captain Kommo-o"
+      "Captain Mina Boss Battle"
     ],
     "requirements": {
       "catchByType": {
@@ -2721,40 +2734,30 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 36",
-    "areaId": "Vast Poni Canyon Outside",
-    "unlocks": [
-      "Captain Mina"
-    ],
-    "requirements": {
-      "defeatBoss": "Captain Kommo-o"
-    }
-  },
-  {
     "challengeName": "Challenge 37",
-    "areaId": "Captain Kommo-o Boss Battle",
-    "unlocks": [
-      "Kahuna Hapu"
-    ],
-    "requirements": {
-      "defeatBoss": "Captain Mina"
-    }
-  },
-  {
-    "challengeName": "Challenge 38",
     "areaId": "Captain Mina Boss Battle",
     "unlocks": [
-      "Mount Lanakila"
+      "Captain Kommo-o Boss Battle"
     ],
     "requirements": {
       "defeatBoss": "Kahuna Hapu"
     }
   },
   {
+    "challengeName": "Challenge 38",
+    "areaId": "Captain Kommo-o Boss Battle",
+    "unlocks": [
+      "Mount Lanakila"
+    ],
+    "requirements": {
+      "defeatBoss": "Captain Mina"
+    }
+  },
+  {
     "challengeName": "Challenge 39",
     "areaId": "Mount Lanakila",
     "unlocks": [
-      "Alola Pokemon League"
+      "Alola Pokemon League Boss Battle"
     ],
     "requirements": {
       "catchByQuality": {
@@ -2765,26 +2768,24 @@ export const alolaUnlocks = [
   },
   {
     "challengeName": "Challenge 40",
-    "areaId": "Mount Lanakila",
-    "unlocks": [
-      "Champion Hau"
-    ],
-    "requirements": {
-      "defeatAlolaChampion": true
-    }
-  },
-  {
-    "challengeName": "Extra Challenge A-1",
     "areaId": "Alola Pokemon League Boss Battle",
     "unlocks": [
-      "Route 6"
+      "Champion Hau Boss Battle"
     ],
     "requirements": {
       "defeatBoss": "Captain Lana"
     }
   },
   {
-    "challengeName": "Extra Challenge A-2",
+    "challengeName": "Challenge 41",
+    "areaId": "Champion Hau Boss Battle",
+    "unlocks": [
+      "Route 6"
+    ],
+    "requirements": {}
+  },
+  {
+    "challengeName": "Extra Challenge A-1",
     "areaId": "Route 6",
     "unlocks": [
       "Royal Avenue"
@@ -2797,7 +2798,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge A-3",
+    "challengeName": "Extra Challenge A-2",
     "areaId": "Royal Avenue",
     "unlocks": [
       "Pikachu Valley"
@@ -2810,7 +2811,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge A-4",
+    "challengeName": "Extra Challenge A-3",
     "areaId": "Pikachu Valley",
     "unlocks": [
       "Starter Depot"
@@ -3153,6 +3154,17 @@ export const alolaUnlocks = [
     "gift": {
       "item": "Masterball",
       "count": 2
+    }
+  },
+  {
+    "challengeName": "Extra Challenge F-1",
+    "areaId": "Route 8 Fossil Restoration Center Part 2",
+    "unlocks": [],
+    "requirements": {
+      "catchByQuality": {
+        "quality": "Uncommon+",
+        "count": 5
+      }
     }
   }
 ];
