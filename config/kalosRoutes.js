@@ -38,36 +38,7 @@ export const kalosRoutes = [
         "maxLevel": 3,
         "chance": 0.05
       }
-    ],
-    "challengeName": "Challenge 1",
-    "areaId": "Aquacorde Town",
-    "unlocks": [
-      "Route 2"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Azurill",
-          "count": 1
-        },
-        {
-          "species": "Caterpie",
-          "count": 1
-        },
-        {
-          "species": "Weedle",
-          "count": 1
-        },
-        {
-          "species": "Ralts",
-          "count": 1
-        },
-        {
-          "species": "Scatterbug",
-          "count": 1
-        }
-      ]
-    }
+    ]
   },
   {
     "name": "Route 2",
@@ -108,18 +79,7 @@ export const kalosRoutes = [
         "maxLevel": 3,
         "chance": 0.05
       }
-    ],
-    "challengeName": "Challenge 2",
-    "areaId": "Route 2",
-    "unlocks": [
-      "Santalune Forest"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Route 2",
-        "count": 25
-      }
-    }
+    ]
   },
   {
     "name": "Santalune Forest",
@@ -160,36 +120,7 @@ export const kalosRoutes = [
         "maxLevel": 4,
         "chance": 0.05
       }
-    ],
-    "challengeName": "Challenge 3",
-    "areaId": "Santalune Forest",
-    "unlocks": [
-      "Route 3"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Sentret",
-          "count": 1
-        },
-        {
-          "species": "Poochyena",
-          "count": 1
-        },
-        {
-          "species": "Lotad",
-          "count": 1
-        },
-        {
-          "species": "Burmy",
-          "count": 1
-        },
-        {
-          "species": "Bunnelby",
-          "count": 1
-        }
-      ]
-    }
+    ]
   },
   {
     "name": "Route 3",
@@ -230,18 +161,7 @@ export const kalosRoutes = [
         "maxLevel": 5,
         "chance": 0.05
       }
-    ],
-    "challengeName": "Challenge 4",
-    "areaId": "Route 3",
-    "unlocks": [
-      "Santalune City"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Route 3",
-        "count": 25
-      }
-    }
+    ]
   },
   {
     "name": "Santalune City",
@@ -282,52 +202,11 @@ export const kalosRoutes = [
         "maxLevel": 6,
         "chance": 0.05
       }
-    ],
-    "challengeName": "Challenge 5",
-    "areaId": "Santalune City",
-    "unlocks": [
-      "Santalune City Gym"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Swinub",
-          "count": 1
-        },
-        {
-          "species": "Smeargle",
-          "count": 1
-        },
-        {
-          "species": "Slugma",
-          "count": 1
-        },
-        {
-          "species": "Hoppip",
-          "count": 1
-        },
-        {
-          "species": "Spinarak",
-          "count": 1
-        }
-      ]
-    }
+    ]
   },
   {
     "name": "Santalune City Gym",
-    "spawns": [],
-    "challengeName": "Challenge 6",
-    "areaId": "Santalune City Gym",
-    "unlocks": [
-      "Route 22"
-    ],
-    "requirements": {
-      "earnBadge": {
-        "name": "Bug Badge",
-        "leader": "Viola",
-        "badgeCount": 1
-      }
-    }
+    "spawns": []
   },
   {
     "name": "Route 22",
@@ -368,36 +247,7 @@ export const kalosRoutes = [
         "maxLevel": 8,
         "chance": 0.05
       }
-    ],
-    "challengeName": "Challenge 7",
-    "areaId": "Route 22",
-    "unlocks": [
-      "Route 4"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Diglett",
-          "count": 1
-        },
-        {
-          "species": "Ledyba",
-          "count": 1
-        },
-        {
-          "species": "Nincada",
-          "count": 1
-        },
-        {
-          "species": "Surskit",
-          "count": 1
-        },
-        {
-          "species": "Taillow",
-          "count": 1
-        }
-      ]
-    }
+    ]
   },
   {
     "name": "Route 4",
@@ -438,18 +288,7 @@ export const kalosRoutes = [
         "maxLevel": 9,
         "chance": 0.05
       }
-    ],
-    "challengeName": "Challenge 8",
-    "areaId": "Route 4",
-    "unlocks": [
-      "Lumiose City (South)"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Route 4",
-        "count": 25
-      }
-    }
+    ]
   },
   {
     "name": "Lumiose City (South)",
@@ -490,36 +329,7 @@ export const kalosRoutes = [
         "maxLevel": 10,
         "chance": 0.05
       }
-    ],
-    "challengeName": "Challenge 9",
-    "areaId": "Lumiose City (South)",
-    "unlocks": [
-      "Route 5"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Roggenrola",
-          "count": 1
-        },
-        {
-          "species": "Purrloin",
-          "count": 1
-        },
-        {
-          "species": "Chingling",
-          "count": 1
-        },
-        {
-          "species": "Riolu",
-          "count": 1
-        },
-        {
-          "species": "Barboach",
-          "count": 1
-        }
-      ]
-    }
+    ]
   },
   {
     "name": "Route 5",
@@ -560,18 +370,7 @@ export const kalosRoutes = [
         "maxLevel": 11,
         "chance": 0.05
       }
-    ],
-    "challengeName": "Challenge 10",
-    "areaId": "Route 5",
-    "unlocks": [
-      "Camphrier Town"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Route 5",
-        "count": 25
-      }
-    }
+    ]
   },
   {
     "name": "Camphrier Town",
@@ -612,36 +411,7 @@ export const kalosRoutes = [
         "maxLevel": 12,
         "chance": 0.05
       }
-    ],
-    "challengeName": "Challenge 11",
-    "areaId": "Camphrier Town",
-    "unlocks": [
-      "Parfum Palace"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Gothita",
-          "count": 1
-        },
-        {
-          "species": "Sandile",
-          "count": 1
-        },
-        {
-          "species": "Foongus",
-          "count": 1
-        },
-        {
-          "species": "Electrike",
-          "count": 1
-        },
-        {
-          "species": "Horsea",
-          "count": 1
-        }
-      ]
-    }
+    ]
   },
   {
     "name": "Parfum Palace",
@@ -682,18 +452,7 @@ export const kalosRoutes = [
         "maxLevel": 13,
         "chance": 0.05
       }
-    ],
-    "challengeName": "Challenge 12",
-    "areaId": "Parfum Palace",
-    "unlocks": [
-      "Route 6"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Parfum Palace",
-        "count": 50
-      }
-    }
+    ]
   },
   {
     "name": "Route 6",
@@ -734,36 +493,7 @@ export const kalosRoutes = [
         "maxLevel": 14,
         "chance": 0.05
       }
-    ],
-    "challengeName": "Challenge 13",
-    "areaId": "Route 6",
-    "unlocks": [
-      "Route 7"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Poliwag",
-          "count": 1
-        },
-        {
-          "species": "Nidoran♂",
-          "count": 1
-        },
-        {
-          "species": "Farfetch'd",
-          "count": 1
-        },
-        {
-          "species": "Bellsprout",
-          "count": 1
-        },
-        {
-          "species": "Flabébé",
-          "count": 1
-        }
-      ]
-    }
+    ]
   },
   {
     "name": "Route 7",
@@ -804,18 +534,7 @@ export const kalosRoutes = [
         "maxLevel": 15,
         "chance": 0.05
       }
-    ],
-    "challengeName": "Challenge 14",
-    "areaId": "Route 7",
-    "unlocks": [
-      "Connecting Cave"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Route 7",
-        "count": 50
-      }
-    }
+    ]
   },
   {
     "name": "Connecting Cave",
@@ -856,36 +575,7 @@ export const kalosRoutes = [
         "maxLevel": 16,
         "chance": 0.05
       }
-    ],
-    "challengeName": "Challenge 15",
-    "areaId": "Connecting Cave",
-    "unlocks": [
-      "Ambrette Town"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Bagon",
-          "count": 1
-        },
-        {
-          "species": "Gulpin",
-          "count": 1
-        },
-        {
-          "species": "Golett",
-          "count": 1
-        },
-        {
-          "species": "Bergmite",
-          "count": 1
-        },
-        {
-          "species": "Smoochum",
-          "count": 1
-        }
-      ]
-    }
+    ]
   },
   {
     "name": "Ambrette Town",
@@ -926,18 +616,7 @@ export const kalosRoutes = [
         "maxLevel": 17,
         "chance": 0.05
       }
-    ],
-    "challengeName": "Challenge 16",
-    "areaId": "Ambrette Town",
-    "unlocks": [
-      "Ambrette Town (Fishing)"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Ambrette Town",
-        "count": 50
-      }
-    }
+    ]
   },
   {
     "name": "Ambrette Town (Fishing)",
@@ -978,36 +657,7 @@ export const kalosRoutes = [
         "maxLevel": 19,
         "chance": 0.05
       }
-    ],
-    "challengeName": "Challenge 17",
-    "areaId": "Ambrette Town (Fishing)",
-    "unlocks": [
-      "Route 8"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Shellder",
-          "count": 1
-        },
-        {
-          "species": "Carvanha",
-          "count": 1
-        },
-        {
-          "species": "Binacle",
-          "count": 1
-        },
-        {
-          "species": "Corphish",
-          "count": 1
-        },
-        {
-          "species": "Phantump",
-          "count": 1
-        }
-      ]
-    }
+    ]
   },
   {
     "name": "Route 8",
@@ -1048,18 +698,7 @@ export const kalosRoutes = [
         "maxLevel": 20,
         "chance": 0.05
       }
-    ],
-    "challengeName": "Challenge 18",
-    "areaId": "Route 8",
-    "unlocks": [
-      "Route 9"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Route 8",
-        "count": 50
-      }
-    }
+    ]
   },
   {
     "name": "Route 9",
@@ -1100,36 +739,7 @@ export const kalosRoutes = [
         "maxLevel": 21,
         "chance": 0.05
       }
-    ],
-    "challengeName": "Challenge 19",
-    "areaId": "Route 9",
-    "unlocks": [
-      "Glittering Cave"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Pansage",
-          "count": 1
-        },
-        {
-          "species": "Panpour",
-          "count": 1
-        },
-        {
-          "species": "Cubone",
-          "count": 1
-        },
-        {
-          "species": "Goldeen",
-          "count": 1
-        },
-        {
-          "species": "Psyduck",
-          "count": 1
-        }
-      ]
-    }
+    ]
   },
   {
     "name": "Glittering Cave",
@@ -1170,18 +780,7 @@ export const kalosRoutes = [
         "maxLevel": 22,
         "chance": 0.05
       }
-    ],
-    "challengeName": "Challenge 20",
-    "areaId": "Glittering Cave",
-    "unlocks": [
-      "Cyllage City"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Glittering Cave",
-        "count": 50
-      }
-    }
+    ]
   },
   {
     "name": "Cyllage City",
@@ -1222,53 +821,11 @@ export const kalosRoutes = [
         "maxLevel": 23,
         "chance": 0.05
       }
-    ],
-    "challengeName": "Challenge 21",
-    "areaId": "Cyllage City",
-    "unlocks": [
-      "Cyllage City Gym"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Exeggcute",
-          "count": 1
-        },
-        {
-          "species": "Dwebble",
-          "count": 1
-        },
-        {
-          "species": "Trubbish",
-          "count": 1
-        },
-        {
-          "species": "Stunky",
-          "count": 1
-        },
-        {
-          "species": "Chinchou",
-          "count": 1
-        }
-      ]
-    }
+    ]
   },
   {
     "name": "Cyllage City Gym",
-    "spawns": [],
-    "challengeName": "Challenge 22",
-    "areaId": "Cyllage City Gym",
-    "unlocks": [
-      "Route 10",
-      "Cyllage City (Fishing)"
-    ],
-    "requirements": {
-      "earnBadge": {
-        "name": "Cliff Badge",
-        "leader": "Grant",
-        "badgeCount": 2
-      }
-    }
+    "spawns": []
   },
   {
     "name": "Route 10",
@@ -1309,36 +866,7 @@ export const kalosRoutes = [
         "maxLevel": 25,
         "chance": 0.05
       }
-    ],
-    "challengeName": "Challenge 23",
-    "areaId": "Route 10",
-    "unlocks": [
-      "Geosenge Town"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Pumpkaboo",
-          "count": 1
-        },
-        {
-          "species": "Tentacool",
-          "count": 1
-        },
-        {
-          "species": "Staravia",
-          "count": 1
-        },
-        {
-          "species": "Vibrava",
-          "count": 1
-        },
-        {
-          "species": "Lombre",
-          "count": 1
-        }
-      ]
-    }
+    ]
   },
   {
     "name": "Geosenge Town",
@@ -1379,18 +907,7 @@ export const kalosRoutes = [
         "maxLevel": 26,
         "chance": 0.05
       }
-    ],
-    "challengeName": "Challenge 24",
-    "areaId": "Geosenge Town",
-    "unlocks": [
-      "Route 11"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Geosenge Town",
-        "count": 100
-      }
-    }
+    ]
   },
   {
     "name": "Route 11",
@@ -1431,36 +948,7 @@ export const kalosRoutes = [
         "maxLevel": 27,
         "chance": 0.05
       }
-    ],
-    "challengeName": "Challenge 25",
-    "areaId": "Route 11",
-    "unlocks": [
-      "Shalour City"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Clamperl",
-          "count": 1
-        },
-        {
-          "species": "Scraggy",
-          "count": 1
-        },
-        {
-          "species": "Drifloon",
-          "count": 1
-        },
-        {
-          "species": "Pancham",
-          "count": 1
-        },
-        {
-          "species": "Pidgeotto",
-          "count": 1
-        }
-      ]
-    }
+    ]
   },
   {
     "name": "Shalour City",
@@ -1501,34 +989,11 @@ export const kalosRoutes = [
         "maxLevel": 28,
         "chance": 0.05
       }
-    ],
-    "challengeName": "Challenge 26",
-    "areaId": "Shalour City",
-    "unlocks": [
-      "Shalour City Gym"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Shalour City",
-        "count": 100
-      }
-    }
+    ]
   },
   {
     "name": "Shalour City Gym",
-    "spawns": [],
-    "challengeName": "Challenge 27",
-    "areaId": "Shalour City Gym",
-    "unlocks": [
-      "Route 12"
-    ],
-    "requirements": {
-      "earnBadge": {
-        "name": "Rumble Badge",
-        "leader": "Korrina",
-        "badgeCount": 3
-      }
-    }
+    "spawns": []
   },
   {
     "name": "Route 12",
@@ -1569,18 +1034,7 @@ export const kalosRoutes = [
         "maxLevel": 30,
         "chance": 0.05
       }
-    ],
-    "challengeName": "Challenge 28",
-    "areaId": "Route 12",
-    "unlocks": [
-      "Azure Bay"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Route 12",
-        "count": 100
-      }
-    }
+    ]
   },
   {
     "name": "Azure Bay",
@@ -1621,36 +1075,7 @@ export const kalosRoutes = [
         "maxLevel": 32,
         "chance": 0.05
       }
-    ],
-    "challengeName": "Challenge 29",
-    "areaId": "Azure Bay",
-    "unlocks": [
-      "Azure Bay (Fishing)"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Butterfree",
-          "count": 1
-        },
-        {
-          "species": "Vanillish",
-          "count": 1
-        },
-        {
-          "species": "Kadabra",
-          "count": 1
-        },
-        {
-          "species": "Wailmer",
-          "count": 1
-        },
-        {
-          "species": "Ariados",
-          "count": 1
-        }
-      ]
-    }
+    ]
   },
   {
     "name": "Azure Bay (Fishing)",
@@ -1685,35 +1110,11 @@ export const kalosRoutes = [
         "maxLevel": 33,
         "chance": 0.1
       }
-    ],
-    "challengeName": "Challenge 30",
-    "areaId": "Azure Bay (Fishing)",
-    "unlocks": [
-      "Coumarine City Gym"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Azure Bay (Fishing)",
-        "count": 100
-      }
-    }
+    ]
   },
   {
     "name": "Coumarine City Gym",
-    "spawns": [],
-    "challengeName": "Challenge 31",
-    "areaId": "Coumarine City Gym",
-    "unlocks": [
-      "Coumarine City (Fishing)",
-      "Starter Depot"
-    ],
-    "requirements": {
-      "earnBadge": {
-        "name": "Plant Badge",
-        "leader": "Ramos",
-        "badgeCount": 4
-      }
-    }
+    "spawns": []
   },
   {
     "name": "Coumarine City (Fishing)",
@@ -1748,18 +1149,7 @@ export const kalosRoutes = [
         "maxLevel": 35,
         "chance": 0.1
       }
-    ],
-    "challengeName": "Challenge 32",
-    "areaId": "Coumarine City (Fishing)",
-    "unlocks": [
-      "Route 13"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Coumarine City (Fishing)",
-        "count": 200
-      }
-    }
+    ]
   },
   {
     "name": "Route 13",
@@ -1794,36 +1184,7 @@ export const kalosRoutes = [
         "maxLevel": 36,
         "chance": 0.1
       }
-    ],
-    "challengeName": "Challenge 33",
-    "areaId": "Route 13",
-    "unlocks": [
-      "Lumiose City (North)"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Wormadam",
-          "count": 1
-        },
-        {
-          "species": "Mothim",
-          "count": 1
-        },
-        {
-          "species": "Dugtrio",
-          "count": 1
-        },
-        {
-          "species": "Marowak",
-          "count": 1
-        },
-        {
-          "species": "Swoobat",
-          "count": 1
-        }
-      ]
-    }
+    ]
   },
   {
     "name": "Lumiose City (North)",
@@ -1858,34 +1219,11 @@ export const kalosRoutes = [
         "maxLevel": 37,
         "chance": 0.1
       }
-    ],
-    "challengeName": "Challenge 34",
-    "areaId": "Lumiose City (North)",
-    "unlocks": [
-      "Lumiose City Gym"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Lumiose City (North)",
-        "count": 200
-      }
-    }
+    ]
   },
   {
     "name": "Lumiose City Gym",
-    "spawns": [],
-    "challengeName": "Challenge 35",
-    "areaId": "Lumiose City Gym",
-    "unlocks": [
-      "Route 14"
-    ],
-    "requirements": {
-      "earnBadge": {
-        "name": "Voltage Badge",
-        "leader": "Clemont",
-        "badgeCount": 5
-      }
-    }
+    "spawns": []
   },
   {
     "name": "Route 14",
@@ -1920,18 +1258,7 @@ export const kalosRoutes = [
         "maxLevel": 40,
         "chance": 0.1
       }
-    ],
-    "challengeName": "Challenge 36",
-    "areaId": "Route 14",
-    "unlocks": [
-      "Laverre City"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Route 14",
-        "count": 200
-      }
-    }
+    ]
   },
   {
     "name": "Laverre City",
@@ -1966,52 +1293,11 @@ export const kalosRoutes = [
         "maxLevel": 41,
         "chance": 0.1
       }
-    ],
-    "challengeName": "Challenge 37",
-    "areaId": "Laverre City",
-    "unlocks": [
-      "Laverre City Gym"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Liepard",
-          "count": 1
-        },
-        {
-          "species": "Doublade",
-          "count": 1
-        },
-        {
-          "species": "Sandslash",
-          "count": 1
-        },
-        {
-          "species": "Granbull",
-          "count": 1
-        },
-        {
-          "species": "Piloswine",
-          "count": 1
-        }
-      ]
-    }
+    ]
   },
   {
     "name": "Laverre City Gym",
-    "spawns": [],
-    "challengeName": "Challenge 38",
-    "areaId": "Laverre City Gym",
-    "unlocks": [
-      "Route 15"
-    ],
-    "requirements": {
-      "earnBadge": {
-        "name": "Fairy Badge",
-        "leader": "Valerie",
-        "badgeCount": 6
-      }
-    }
+    "spawns": []
   },
   {
     "name": "Route 15",
@@ -2046,36 +1332,7 @@ export const kalosRoutes = [
         "maxLevel": 43,
         "chance": 0.1
       }
-    ],
-    "challengeName": "Challenge 39",
-    "areaId": "Route 15",
-    "unlocks": [
-      "Lost Hotel"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Jynx",
-          "count": 1
-        },
-        {
-          "species": "Chimecho",
-          "count": 1
-        },
-        {
-          "species": "Swellow",
-          "count": 1
-        },
-        {
-          "species": "Golbat",
-          "count": 1
-        },
-        {
-          "species": "Banette",
-          "count": 1
-        }
-      ]
-    }
+    ]
   },
   {
     "name": "Lost Hotel",
@@ -2110,18 +1367,7 @@ export const kalosRoutes = [
         "maxLevel": 44,
         "chance": 0.1
       }
-    ],
-    "challengeName": "Challenge 40",
-    "areaId": "Lost Hotel",
-    "unlocks": [
-      "Dendemille Town"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Lost Hotel",
-        "count": 200
-      }
-    }
+    ]
   },
   {
     "name": "Dendemille Town",
@@ -2156,36 +1402,7 @@ export const kalosRoutes = [
         "maxLevel": 45,
         "chance": 0.1
       }
-    ],
-    "challengeName": "Challenge 41",
-    "areaId": "Dendemille Town",
-    "unlocks": [
-      "Route 16"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Lunatone",
-          "count": 1
-        },
-        {
-          "species": "Lanturn",
-          "count": 1
-        },
-        {
-          "species": "Jumpluff",
-          "count": 1
-        },
-        {
-          "species": "Solrock",
-          "count": 1
-        },
-        {
-          "species": "Aromatisse",
-          "count": 1
-        }
-      ]
-    }
+    ]
   },
   {
     "name": "Route 16",
@@ -2220,18 +1437,7 @@ export const kalosRoutes = [
         "maxLevel": 47,
         "chance": 0.1
       }
-    ],
-    "challengeName": "Challenge 42",
-    "areaId": "Route 16",
-    "unlocks": [
-      "Frost Cavern"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Route 16",
-        "count": 300
-      }
-    }
+    ]
   },
   {
     "name": "Frost Cavern",
@@ -2266,36 +1472,7 @@ export const kalosRoutes = [
         "maxLevel": 48,
         "chance": 0.1
       }
-    ],
-    "challengeName": "Challenge 43",
-    "areaId": "Frost Cavern",
-    "unlocks": [
-      "Anistar City"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Swalot",
-          "count": 1
-        },
-        {
-          "species": "Crawdaunt",
-          "count": 1
-        },
-        {
-          "species": "Whiscash",
-          "count": 1
-        },
-        {
-          "species": "Grumpig",
-          "count": 1
-        },
-        {
-          "species": "Klefki",
-          "count": 1
-        }
-      ]
-    }
+    ]
   },
   {
     "name": "Anistar City",
@@ -2330,34 +1507,11 @@ export const kalosRoutes = [
         "maxLevel": 49,
         "chance": 0.1
       }
-    ],
-    "challengeName": "Challenge 44",
-    "areaId": "Anistar City",
-    "unlocks": [
-      "Anistar City Gym"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Anistar City",
-        "count": 300
-      }
-    }
+    ]
   },
   {
     "name": "Anistar City Gym",
-    "spawns": [],
-    "challengeName": "Challenge 45",
-    "areaId": "Anistar City Gym",
-    "unlocks": [
-      "Route 17"
-    ],
-    "requirements": {
-      "earnBadge": {
-        "name": "Psychic Badge",
-        "leader": "Olympia",
-        "badgeCount": 7
-      }
-    }
+    "spawns": []
   },
   {
     "name": "Route 17",
@@ -2392,18 +1546,7 @@ export const kalosRoutes = [
         "maxLevel": 51,
         "chance": 0.1
       }
-    ],
-    "challengeName": "Challenge 46",
-    "areaId": "Route 17",
-    "unlocks": [
-      "Couriway Town"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Route 17",
-        "count": 300
-      }
-    }
+    ]
   },
   {
     "name": "Couriway Town",
@@ -2438,36 +1581,7 @@ export const kalosRoutes = [
         "maxLevel": 52,
         "chance": 0.1
       }
-    ],
-    "challengeName": "Challenge 47",
-    "areaId": "Couriway Town",
-    "unlocks": [
-      "Route 18"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Heatmor",
-          "count": 1
-        },
-        {
-          "species": "Scolipede",
-          "count": 1
-        },
-        {
-          "species": "Huntail",
-          "count": 1
-        },
-        {
-          "species": "Mantine",
-          "count": 1
-        },
-        {
-          "species": "Raichu",
-          "count": 1
-        }
-      ]
-    }
+    ]
   },
   {
     "name": "Route 18",
@@ -2502,18 +1616,7 @@ export const kalosRoutes = [
         "maxLevel": 53,
         "chance": 0.1
       }
-    ],
-    "challengeName": "Challenge 48",
-    "areaId": "Route 18",
-    "unlocks": [
-      "Terminus Cave (Surface)"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Route 18",
-        "count": 300
-      }
-    }
+    ]
   },
   {
     "name": "Terminus Cave (Surface)",
@@ -2548,36 +1651,7 @@ export const kalosRoutes = [
         "maxLevel": 55,
         "chance": 0.1
       }
-    ],
-    "challengeName": "Challenge 49",
-    "areaId": "Terminus Cave (Surface)",
-    "unlocks": [
-      "Route 19"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Druddigon",
-          "count": 1
-        },
-        {
-          "species": "Scrafty",
-          "count": 1
-        },
-        {
-          "species": "Ferrothorn",
-          "count": 1
-        },
-        {
-          "species": "Miltank",
-          "count": 1
-        },
-        {
-          "species": "Bellossom",
-          "count": 1
-        }
-      ]
-    }
+    ]
   },
   {
     "name": "Route 19",
@@ -2612,18 +1686,7 @@ export const kalosRoutes = [
         "maxLevel": 56,
         "chance": 0.1
       }
-    ],
-    "challengeName": "Challenge 50",
-    "areaId": "Route 19",
-    "unlocks": [
-      "Route 19 (Fishing)"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Route 19",
-        "count": 300
-      }
-    }
+    ]
   },
   {
     "name": "Route 19 (Fishing)",
@@ -2658,36 +1721,7 @@ export const kalosRoutes = [
         "maxLevel": 57,
         "chance": 0.1
       }
-    ],
-    "challengeName": "Challenge 51",
-    "areaId": "Route 19 (Fishing)",
-    "unlocks": [
-      "Snowbelle City"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Sigilyph",
-          "count": 1
-        },
-        {
-          "species": "Exploud",
-          "count": 1
-        },
-        {
-          "species": "Tauros",
-          "count": 1
-        },
-        {
-          "species": "Toxicroak",
-          "count": 1
-        },
-        {
-          "species": "Altaria",
-          "count": 1
-        }
-      ]
-    }
+    ]
   },
   {
     "name": "Snowbelle City",
@@ -2722,34 +1756,11 @@ export const kalosRoutes = [
         "maxLevel": 58,
         "chance": 0.1
       }
-    ],
-    "challengeName": "Challenge 52",
-    "areaId": "Snowbelle City",
-    "unlocks": [
-      "Snowbelle City Gym"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Snowbelle City",
-        "count": 300
-      }
-    }
+    ]
   },
   {
     "name": "Snowbelle City Gym",
-    "spawns": [],
-    "challengeName": "Challenge 53",
-    "areaId": "Snowbelle City Gym",
-    "unlocks": [
-      "Route 20"
-    ],
-    "requirements": {
-      "earnBadge": {
-        "name": "Iceberg Badge",
-        "leader": "Wulfric",
-        "badgeCount": 8
-      }
-    }
+    "spawns": []
   },
   {
     "name": "Route 20",
@@ -2784,18 +1795,7 @@ export const kalosRoutes = [
         "maxLevel": 60,
         "chance": 0.1
       }
-    ],
-    "challengeName": "Challenge 54",
-    "areaId": "Route 20",
-    "unlocks": [
-      "Pokémon Village"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Route 20",
-        "count": 300
-      }
-    }
+    ]
   },
   {
     "name": "Pokémon Village",
@@ -2830,36 +1830,7 @@ export const kalosRoutes = [
         "maxLevel": 61,
         "chance": 0.1
       }
-    ],
-    "challengeName": "Challenge 55",
-    "areaId": "Pokémon Village",
-    "unlocks": [
-      "Pokémon Village (Fishing)"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Scizor",
-          "count": 1
-        },
-        {
-          "species": "Gengar",
-          "count": 1
-        },
-        {
-          "species": "Alakazam",
-          "count": 1
-        },
-        {
-          "species": "Wailord",
-          "count": 1
-        },
-        {
-          "species": "Ursaring",
-          "count": 1
-        }
-      ]
-    }
+    ]
   },
   {
     "name": "Pokémon Village (Fishing)",
@@ -2894,18 +1865,7 @@ export const kalosRoutes = [
         "maxLevel": 63,
         "chance": 0.1
       }
-    ],
-    "challengeName": "Challenge 56",
-    "areaId": "Pokémon Village (Fishing)",
-    "unlocks": [
-      "Route 21"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Pokémon Village (Fishing)",
-        "count": 300
-      }
-    }
+    ]
   },
   {
     "name": "Route 21",
@@ -2940,36 +1900,7 @@ export const kalosRoutes = [
         "maxLevel": 64,
         "chance": 0.1
       }
-    ],
-    "challengeName": "Challenge 57",
-    "areaId": "Route 21",
-    "unlocks": [
-      "Victory Road"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Honchkrow",
-          "count": 1
-        },
-        {
-          "species": "Nidoking",
-          "count": 1
-        },
-        {
-          "species": "Shuckle",
-          "count": 1
-        },
-        {
-          "species": "Conkeldurr",
-          "count": 1
-        },
-        {
-          "species": "Pyroar",
-          "count": 1
-        }
-      ]
-    }
+    ]
   },
   {
     "name": "Victory Road",
@@ -3004,18 +1935,7 @@ export const kalosRoutes = [
         "maxLevel": 65,
         "chance": 0.1
       }
-    ],
-    "challengeName": "Challenge 58",
-    "areaId": "Victory Road",
-    "unlocks": [
-      "Kalos Pokemon League"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Victory Road",
-        "count": 300
-      }
-    }
+    ]
   },
   {
     "name": "Cyllage City (Fishing)",
@@ -3056,18 +1976,7 @@ export const kalosRoutes = [
         "maxLevel": 30,
         "chance": 0.05
       }
-    ],
-    "challengeName": "Extra Challenge A 1",
-    "areaId": "Cyllage City (Fishing)",
-    "unlocks": [
-      "Reflection Cave"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Cyllage City (Fishing)",
-        "count": 150
-      }
-    }
+    ]
   },
   {
     "name": "Reflection Cave",
@@ -3108,18 +2017,7 @@ export const kalosRoutes = [
         "maxLevel": 35,
         "chance": 0.05
       }
-    ],
-    "challengeName": "Extra Challenge A 2",
-    "areaId": "Reflection Cave",
-    "unlocks": [
-      "Tower of Mastery"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Reflection Cave",
-        "count": 150
-      }
-    }
+    ]
   },
   {
     "name": "Tower of Mastery",
@@ -3160,18 +2058,7 @@ export const kalosRoutes = [
         "maxLevel": 40,
         "chance": 0.05
       }
-    ],
-    "challengeName": "Extra Challenge A 3",
-    "areaId": "Tower of Mastery",
-    "unlocks": [
-      "Coumarine City"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Tower of Mastery",
-        "count": 150
-      }
-    }
+    ]
   },
   {
     "name": "Coumarine City",
@@ -3206,19 +2093,7 @@ export const kalosRoutes = [
         "maxLevel": 45,
         "chance": 0.1
       }
-    ],
-    "challengeName": "Extra Challenge A 4",
-    "areaId": "Coumarine City",
-    "gift": {
-      "item": "Masterball",
-      "count": 1
-    },
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Coumarine City",
-        "count": 150
-      }
-    }
+    ]
   },
   {
     "name": "Starter Depot",
@@ -3277,28 +2152,7 @@ export const kalosRoutes = [
         "maxLevel": 45,
         "chance": 0.1111
       }
-    ],
-    "challengeName": "Extra Challenge B 1",
-    "areaId": "Starter Depot",
-    "unlocks": [
-      "Starter Evolved Depot"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Rowlet",
-          "count": 1
-        },
-        {
-          "species": "Litten",
-          "count": 1
-        },
-        {
-          "species": "Popplio",
-          "count": 1
-        }
-      ]
-    }
+    ]
   },
   {
     "name": "Starter Evolved Depot",
@@ -3339,28 +2193,7 @@ export const kalosRoutes = [
         "maxLevel": 51,
         "chance": 0.1666
       }
-    ],
-    "challengeName": "Extra Challenge B 2",
-    "areaId": "Starter Evolved Depot",
-    "unlocks": [
-      "Kiloude City"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Dartrix",
-          "count": 1
-        },
-        {
-          "species": "Torracat",
-          "count": 1
-        },
-        {
-          "species": "Brionne",
-          "count": 1
-        }
-      ]
-    }
+    ]
   },
   {
     "name": "Kiloude City",
@@ -3395,18 +2228,7 @@ export const kalosRoutes = [
         "maxLevel": 57,
         "chance": 0.1
       }
-    ],
-    "challengeName": "Extra Challenge B 3",
-    "areaId": "Kiloude City",
-    "unlocks": [
-      "Friend Safari"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Kiloude City",
-        "count": 150
-      }
-    }
+    ]
   },
   {
     "name": "Friend Safari",
@@ -3441,18 +2263,7 @@ export const kalosRoutes = [
         "maxLevel": 62,
         "chance": 0.1
       }
-    ],
-    "challengeName": "Extra Challenge B 4",
-    "areaId": "Friend Safari",
-    "unlocks": [
-      "Battle Maison"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Friend Safari",
-        "count": 150
-      }
-    }
+    ]
   },
   {
     "name": "Battle Maison",
@@ -3487,19 +2298,7 @@ export const kalosRoutes = [
         "maxLevel": 70,
         "chance": 0.1
       }
-    ],
-    "challengeName": "Extra Challenge B 5",
-    "areaId": "Battle Maison",
-    "gift": {
-      "item": "Masterball",
-      "count": 1
-    },
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Battle Maison",
-        "count": 150
-      }
-    }
+    ]
   },
   {
     "name": "Path to Sea Spirit Den",
@@ -3534,18 +2333,7 @@ export const kalosRoutes = [
         "maxLevel": 77,
         "chance": 0.1
       }
-    ],
-    "challengeName": "Extra Challenge C 1",
-    "areaId": "Path to Sea Spirit Den",
-    "unlocks": [
-      "Sea Spirit Den Outer Depths"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Path to Sea Spirit Den",
-        "count": 150
-      }
-    }
+    ]
   },
   {
     "name": "Sea Spirit Den Outer Depths",
@@ -3580,18 +2368,7 @@ export const kalosRoutes = [
         "maxLevel": 84,
         "chance": 0.1
       }
-    ],
-    "challengeName": "Extra Challenge C 2",
-    "areaId": "Sea Spirit Den Outer Depths",
-    "unlocks": [
-      "Sea Spirit Den Entrance"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Sea Spirit Den Outer Depths",
-        "count": 150
-      }
-    }
+    ]
   },
   {
     "name": "Sea Spirit Den Entrance",
@@ -3626,18 +2403,7 @@ export const kalosRoutes = [
         "maxLevel": 91,
         "chance": 0.1
       }
-    ],
-    "challengeName": "Extra Challenge C 3",
-    "areaId": "Sea Spirit Den Entrance",
-    "unlocks": [
-      "Sea Spirit Den Tunnels"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Sea Spirit Den Entrance",
-        "count": 150
-      }
-    }
+    ]
   },
   {
     "name": "Sea Spirit Den Tunnels",
@@ -3672,22 +2438,7 @@ export const kalosRoutes = [
         "maxLevel": 98,
         "chance": 0.1
       }
-    ],
-    "challengeName": "Extra Challenge C 4",
-    "areaId": "Sea Spirit Den Tunnels",
-    "unlocks": [
-      "Sea Spirit Den Hall"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Sea Spirit Den Tunnels",
-        "count": 150
-      }
-    },
-    "gift": {
-      "item": "Masterball",
-      "count": 1
-    }
+    ]
   },
   {
     "name": "Sea Spirit Den Hall",
@@ -3710,29 +2461,7 @@ export const kalosRoutes = [
         "maxLevel": 105,
         "chance": 0.33
       }
-    ],
-    "challengeName": "Extra Challenge C 5",
-    "areaId": "Sea Spirit Den Hall",
-    "gift": {
-      "item": "Masterball",
-      "count": 2
-    },
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Articuno",
-          "count": 1
-        },
-        {
-          "species": "Zapdos",
-          "count": 1
-        },
-        {
-          "species": "Moltres",
-          "count": 1
-        }
-      ]
-    }
+    ]
   },
   {
     "name": "Path to Secret Chambers",
@@ -3767,18 +2496,7 @@ export const kalosRoutes = [
         "maxLevel": 77,
         "chance": 0.1
       }
-    ],
-    "challengeName": "Extra Challenge D 1",
-    "areaId": "Path to Secret Chambers",
-    "unlocks": [
-      "Underground Chambers (Crystal Cave Tunnels)"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Path to Secret Chambers",
-        "count": 150
-      }
-    }
+    ]
   },
   {
     "name": "Chambers of Emptiness",
@@ -3813,22 +2531,7 @@ export const kalosRoutes = [
         "maxLevel": 98,
         "chance": 0.1
       }
-    ],
-    "challengeName": "Extra Challenge D 4",
-    "areaId": "Chambers of Emptiness",
-    "unlocks": [
-      "Ultimate Chamber"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Chambers of Emptiness",
-        "count": 150
-      }
-    },
-    "gift": {
-      "item": "Masterball",
-      "count": 2
-    }
+    ]
   },
   {
     "name": "Ultimate Chamber",
@@ -3857,33 +2560,7 @@ export const kalosRoutes = [
         "maxLevel": 115,
         "chance": 0.25
       }
-    ],
-    "challengeName": "Extra Challenge D 5",
-    "areaId": "Ultimate Chamber",
-    "gift": {
-      "item": "Masterball",
-      "count": 2
-    },
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Volcanion",
-          "count": 1
-        },
-        {
-          "species": "Diancie",
-          "count": 1
-        },
-        {
-          "species": "Hoopa",
-          "count": 1
-        },
-        {
-          "species": "Mewtwo",
-          "count": 1
-        }
-      ]
-    }
+    ]
   },
   {
     "name": "Path to Team Flare Secret HQ",
@@ -3918,18 +2595,7 @@ export const kalosRoutes = [
         "maxLevel": 84,
         "chance": 0.1
       }
-    ],
-    "challengeName": "Extra Challenge E 1",
-    "areaId": "Path to Team Flare Secret HQ",
-    "unlocks": [
-      "Team Flare Secret HQ Gate"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Path to Team Flare Secret HQ",
-        "count": 150
-      }
-    }
+    ]
   },
   {
     "name": "Team Flare Secret HQ Gate",
@@ -3964,18 +2630,7 @@ export const kalosRoutes = [
         "maxLevel": 91,
         "chance": 0.1
       }
-    ],
-    "challengeName": "Extra Challenge E 2",
-    "areaId": "Team Flare Secret HQ Gate",
-    "unlocks": [
-      "Team Flare Secret HQ Entrance"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Team Flare Secret HQ Gate",
-        "count": 150
-      }
-    }
+    ]
   },
   {
     "name": "Team Flare Secret HQ Entrance",
@@ -4010,18 +2665,7 @@ export const kalosRoutes = [
         "maxLevel": 98,
         "chance": 0.1
       }
-    ],
-    "challengeName": "Extra Challenge E 3",
-    "areaId": "Team Flare Secret HQ Entrance",
-    "unlocks": [
-      "Team Flare Secret HQ Hall"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Team Flare Secret HQ Entrance",
-        "count": 150
-      }
-    }
+    ]
   },
   {
     "name": "Team Flare Secret HQ Hall",
@@ -4050,33 +2694,7 @@ export const kalosRoutes = [
         "maxLevel": 105,
         "chance": 0.25
       }
-    ],
-    "challengeName": "Extra Challenge E 4",
-    "areaId": "Team Flare Secret HQ Hall",
-    "gift": {
-      "item": "Masterball",
-      "count": 1
-    },
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Salamence",
-          "count": 1
-        },
-        {
-          "species": "Tyranitar",
-          "count": 1
-        },
-        {
-          "species": "Hydreigon",
-          "count": 1
-        },
-        {
-          "species": "Garchomp",
-          "count": 1
-        }
-      ]
-    }
+    ]
   },
   {
     "name": "Secret Forest North",
@@ -4146,18 +2764,7 @@ export const kalosRoutes = [
         "maxLevel": 84,
         "chance": 0.1
       }
-    ],
-    "challengeName": "Extra Challenge D 2",
-    "areaId": "Underground Chambers (Crystal Cave Tunnels)",
-    "unlocks": [
-      "Garden Chambers (Secret Forest North)"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Underground Chambers (Crystal Cave Tunnels)",
-        "count": 150
-      }
-    }
+    ]
   },
   {
     "name": "Garden Chambers (Secret Forest North)",
@@ -4192,7 +2799,1596 @@ export const kalosRoutes = [
         "maxLevel": 91,
         "chance": 0.1
       }
+    ]
+  },
+  {
+    "name": "Kalos Pokemon League",
+    "spawns": []
+  },
+  {
+    "name": "Keys to Eternal Fight",
+    "spawns": []
+  },
+  {
+    "name": "The Eternal Fight",
+    "spawns": [
+      {
+        "pokemonId": 717,
+        "minLevel": 120,
+        "maxLevel": 120,
+        "chance": 0.33
+      },
+      {
+        "pokemonId": 718,
+        "minLevel": 115,
+        "maxLevel": 119,
+        "chance": 0.33
+      },
+      {
+        "pokemonId": 716,
+        "minLevel": 115,
+        "maxLevel": 119,
+        "chance": 0.33
+      }
+    ]
+  }
+];
+
+export const kalosUnlocks = [
+  {
+    "challengeName": "Challenge 1",
+    "areaId": "Aquacorde Town",
+    "unlocks": [
+      "Route 2"
     ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Azurill",
+          "count": 1
+        },
+        {
+          "species": "Caterpie",
+          "count": 1
+        },
+        {
+          "species": "Weedle",
+          "count": 1
+        },
+        {
+          "species": "Ralts",
+          "count": 1
+        },
+        {
+          "species": "Scatterbug",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 2",
+    "areaId": "Route 2",
+    "unlocks": [
+      "Santalune Forest"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Route 2",
+        "count": 25
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 3",
+    "areaId": "Santalune Forest",
+    "unlocks": [
+      "Route 3"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Sentret",
+          "count": 1
+        },
+        {
+          "species": "Poochyena",
+          "count": 1
+        },
+        {
+          "species": "Lotad",
+          "count": 1
+        },
+        {
+          "species": "Burmy",
+          "count": 1
+        },
+        {
+          "species": "Bunnelby",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 4",
+    "areaId": "Route 3",
+    "unlocks": [
+      "Santalune City"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Route 3",
+        "count": 25
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 5",
+    "areaId": "Santalune City",
+    "unlocks": [
+      "Santalune City Gym"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Swinub",
+          "count": 1
+        },
+        {
+          "species": "Smeargle",
+          "count": 1
+        },
+        {
+          "species": "Slugma",
+          "count": 1
+        },
+        {
+          "species": "Hoppip",
+          "count": 1
+        },
+        {
+          "species": "Spinarak",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 6",
+    "areaId": "Santalune City Gym",
+    "unlocks": [
+      "Route 22"
+    ],
+    "requirements": {
+      "earnBadge": {
+        "name": "Bug Badge",
+        "leader": "Viola",
+        "badgeCount": 1
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 7",
+    "areaId": "Route 22",
+    "unlocks": [
+      "Route 4"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Diglett",
+          "count": 1
+        },
+        {
+          "species": "Ledyba",
+          "count": 1
+        },
+        {
+          "species": "Nincada",
+          "count": 1
+        },
+        {
+          "species": "Surskit",
+          "count": 1
+        },
+        {
+          "species": "Taillow",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 8",
+    "areaId": "Route 4",
+    "unlocks": [
+      "Lumiose City (South)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Route 4",
+        "count": 25
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 9",
+    "areaId": "Lumiose City (South)",
+    "unlocks": [
+      "Route 5"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Roggenrola",
+          "count": 1
+        },
+        {
+          "species": "Purrloin",
+          "count": 1
+        },
+        {
+          "species": "Chingling",
+          "count": 1
+        },
+        {
+          "species": "Riolu",
+          "count": 1
+        },
+        {
+          "species": "Barboach",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 10",
+    "areaId": "Route 5",
+    "unlocks": [
+      "Camphrier Town"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Route 5",
+        "count": 25
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 11",
+    "areaId": "Camphrier Town",
+    "unlocks": [
+      "Parfum Palace"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Gothita",
+          "count": 1
+        },
+        {
+          "species": "Sandile",
+          "count": 1
+        },
+        {
+          "species": "Foongus",
+          "count": 1
+        },
+        {
+          "species": "Electrike",
+          "count": 1
+        },
+        {
+          "species": "Horsea",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 12",
+    "areaId": "Parfum Palace",
+    "unlocks": [
+      "Route 6"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Parfum Palace",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 13",
+    "areaId": "Route 6",
+    "unlocks": [
+      "Route 7"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Poliwag",
+          "count": 1
+        },
+        {
+          "species": "Nidoran♂",
+          "count": 1
+        },
+        {
+          "species": "Farfetch'd",
+          "count": 1
+        },
+        {
+          "species": "Bellsprout",
+          "count": 1
+        },
+        {
+          "species": "Flabébé",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 14",
+    "areaId": "Route 7",
+    "unlocks": [
+      "Connecting Cave"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Route 7",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 15",
+    "areaId": "Connecting Cave",
+    "unlocks": [
+      "Ambrette Town"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Bagon",
+          "count": 1
+        },
+        {
+          "species": "Gulpin",
+          "count": 1
+        },
+        {
+          "species": "Golett",
+          "count": 1
+        },
+        {
+          "species": "Bergmite",
+          "count": 1
+        },
+        {
+          "species": "Smoochum",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 16",
+    "areaId": "Ambrette Town",
+    "unlocks": [
+      "Ambrette Town (Fishing)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Ambrette Town",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 17",
+    "areaId": "Ambrette Town (Fishing)",
+    "unlocks": [
+      "Route 8"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Shellder",
+          "count": 1
+        },
+        {
+          "species": "Carvanha",
+          "count": 1
+        },
+        {
+          "species": "Binacle",
+          "count": 1
+        },
+        {
+          "species": "Corphish",
+          "count": 1
+        },
+        {
+          "species": "Phantump",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 18",
+    "areaId": "Route 8",
+    "unlocks": [
+      "Route 9"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Route 8",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 19",
+    "areaId": "Route 9",
+    "unlocks": [
+      "Glittering Cave"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Pansage",
+          "count": 1
+        },
+        {
+          "species": "Panpour",
+          "count": 1
+        },
+        {
+          "species": "Cubone",
+          "count": 1
+        },
+        {
+          "species": "Goldeen",
+          "count": 1
+        },
+        {
+          "species": "Psyduck",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 20",
+    "areaId": "Glittering Cave",
+    "unlocks": [
+      "Cyllage City"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Glittering Cave",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 21",
+    "areaId": "Cyllage City",
+    "unlocks": [
+      "Cyllage City Gym"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Exeggcute",
+          "count": 1
+        },
+        {
+          "species": "Dwebble",
+          "count": 1
+        },
+        {
+          "species": "Trubbish",
+          "count": 1
+        },
+        {
+          "species": "Stunky",
+          "count": 1
+        },
+        {
+          "species": "Chinchou",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 22",
+    "areaId": "Cyllage City Gym",
+    "unlocks": [
+      "Route 10",
+      "Cyllage City (Fishing)"
+    ],
+    "requirements": {
+      "earnBadge": {
+        "name": "Cliff Badge",
+        "leader": "Grant",
+        "badgeCount": 2
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 23",
+    "areaId": "Route 10",
+    "unlocks": [
+      "Geosenge Town"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Pumpkaboo",
+          "count": 1
+        },
+        {
+          "species": "Tentacool",
+          "count": 1
+        },
+        {
+          "species": "Staravia",
+          "count": 1
+        },
+        {
+          "species": "Vibrava",
+          "count": 1
+        },
+        {
+          "species": "Lombre",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 24",
+    "areaId": "Geosenge Town",
+    "unlocks": [
+      "Route 11"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Geosenge Town",
+        "count": 100
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 25",
+    "areaId": "Route 11",
+    "unlocks": [
+      "Shalour City"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Clamperl",
+          "count": 1
+        },
+        {
+          "species": "Scraggy",
+          "count": 1
+        },
+        {
+          "species": "Drifloon",
+          "count": 1
+        },
+        {
+          "species": "Pancham",
+          "count": 1
+        },
+        {
+          "species": "Pidgeotto",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 26",
+    "areaId": "Shalour City",
+    "unlocks": [
+      "Shalour City Gym"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Shalour City",
+        "count": 100
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 27",
+    "areaId": "Shalour City Gym",
+    "unlocks": [
+      "Route 12"
+    ],
+    "requirements": {
+      "earnBadge": {
+        "name": "Rumble Badge",
+        "leader": "Korrina",
+        "badgeCount": 3
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 28",
+    "areaId": "Route 12",
+    "unlocks": [
+      "Azure Bay"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Route 12",
+        "count": 100
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 29",
+    "areaId": "Azure Bay",
+    "unlocks": [
+      "Azure Bay (Fishing)"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Butterfree",
+          "count": 1
+        },
+        {
+          "species": "Vanillish",
+          "count": 1
+        },
+        {
+          "species": "Kadabra",
+          "count": 1
+        },
+        {
+          "species": "Wailmer",
+          "count": 1
+        },
+        {
+          "species": "Ariados",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 30",
+    "areaId": "Azure Bay (Fishing)",
+    "unlocks": [
+      "Coumarine City Gym"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Azure Bay (Fishing)",
+        "count": 100
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 31",
+    "areaId": "Coumarine City Gym",
+    "unlocks": [
+      "Coumarine City (Fishing)",
+      "Starter Depot"
+    ],
+    "requirements": {
+      "earnBadge": {
+        "name": "Plant Badge",
+        "leader": "Ramos",
+        "badgeCount": 4
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 32",
+    "areaId": "Coumarine City (Fishing)",
+    "unlocks": [
+      "Route 13"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Coumarine City (Fishing)",
+        "count": 200
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 33",
+    "areaId": "Route 13",
+    "unlocks": [
+      "Lumiose City (North)"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Wormadam",
+          "count": 1
+        },
+        {
+          "species": "Mothim",
+          "count": 1
+        },
+        {
+          "species": "Dugtrio",
+          "count": 1
+        },
+        {
+          "species": "Marowak",
+          "count": 1
+        },
+        {
+          "species": "Swoobat",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 34",
+    "areaId": "Lumiose City (North)",
+    "unlocks": [
+      "Lumiose City Gym"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Lumiose City (North)",
+        "count": 200
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 35",
+    "areaId": "Lumiose City Gym",
+    "unlocks": [
+      "Route 14"
+    ],
+    "requirements": {
+      "earnBadge": {
+        "name": "Voltage Badge",
+        "leader": "Clemont",
+        "badgeCount": 5
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 36",
+    "areaId": "Route 14",
+    "unlocks": [
+      "Laverre City"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Route 14",
+        "count": 200
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 37",
+    "areaId": "Laverre City",
+    "unlocks": [
+      "Laverre City Gym"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Liepard",
+          "count": 1
+        },
+        {
+          "species": "Doublade",
+          "count": 1
+        },
+        {
+          "species": "Sandslash",
+          "count": 1
+        },
+        {
+          "species": "Granbull",
+          "count": 1
+        },
+        {
+          "species": "Piloswine",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 38",
+    "areaId": "Laverre City Gym",
+    "unlocks": [
+      "Route 15"
+    ],
+    "requirements": {
+      "earnBadge": {
+        "name": "Fairy Badge",
+        "leader": "Valerie",
+        "badgeCount": 6
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 39",
+    "areaId": "Route 15",
+    "unlocks": [
+      "Lost Hotel"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Jynx",
+          "count": 1
+        },
+        {
+          "species": "Chimecho",
+          "count": 1
+        },
+        {
+          "species": "Swellow",
+          "count": 1
+        },
+        {
+          "species": "Golbat",
+          "count": 1
+        },
+        {
+          "species": "Banette",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 40",
+    "areaId": "Lost Hotel",
+    "unlocks": [
+      "Dendemille Town"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Lost Hotel",
+        "count": 200
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 41",
+    "areaId": "Dendemille Town",
+    "unlocks": [
+      "Route 16"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Lunatone",
+          "count": 1
+        },
+        {
+          "species": "Lanturn",
+          "count": 1
+        },
+        {
+          "species": "Jumpluff",
+          "count": 1
+        },
+        {
+          "species": "Solrock",
+          "count": 1
+        },
+        {
+          "species": "Aromatisse",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 42",
+    "areaId": "Route 16",
+    "unlocks": [
+      "Frost Cavern"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Route 16",
+        "count": 300
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 43",
+    "areaId": "Frost Cavern",
+    "unlocks": [
+      "Anistar City"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Swalot",
+          "count": 1
+        },
+        {
+          "species": "Crawdaunt",
+          "count": 1
+        },
+        {
+          "species": "Whiscash",
+          "count": 1
+        },
+        {
+          "species": "Grumpig",
+          "count": 1
+        },
+        {
+          "species": "Klefki",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 44",
+    "areaId": "Anistar City",
+    "unlocks": [
+      "Anistar City Gym"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Anistar City",
+        "count": 300
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 45",
+    "areaId": "Anistar City Gym",
+    "unlocks": [
+      "Route 17"
+    ],
+    "requirements": {
+      "earnBadge": {
+        "name": "Psychic Badge",
+        "leader": "Olympia",
+        "badgeCount": 7
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 46",
+    "areaId": "Route 17",
+    "unlocks": [
+      "Couriway Town"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Route 17",
+        "count": 300
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 47",
+    "areaId": "Couriway Town",
+    "unlocks": [
+      "Route 18"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Heatmor",
+          "count": 1
+        },
+        {
+          "species": "Scolipede",
+          "count": 1
+        },
+        {
+          "species": "Huntail",
+          "count": 1
+        },
+        {
+          "species": "Mantine",
+          "count": 1
+        },
+        {
+          "species": "Raichu",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 48",
+    "areaId": "Route 18",
+    "unlocks": [
+      "Terminus Cave (Surface)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Route 18",
+        "count": 300
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 49",
+    "areaId": "Terminus Cave (Surface)",
+    "unlocks": [
+      "Route 19"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Druddigon",
+          "count": 1
+        },
+        {
+          "species": "Scrafty",
+          "count": 1
+        },
+        {
+          "species": "Ferrothorn",
+          "count": 1
+        },
+        {
+          "species": "Miltank",
+          "count": 1
+        },
+        {
+          "species": "Bellossom",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 50",
+    "areaId": "Route 19",
+    "unlocks": [
+      "Route 19 (Fishing)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Route 19",
+        "count": 300
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 51",
+    "areaId": "Route 19 (Fishing)",
+    "unlocks": [
+      "Snowbelle City"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Sigilyph",
+          "count": 1
+        },
+        {
+          "species": "Exploud",
+          "count": 1
+        },
+        {
+          "species": "Tauros",
+          "count": 1
+        },
+        {
+          "species": "Toxicroak",
+          "count": 1
+        },
+        {
+          "species": "Altaria",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 52",
+    "areaId": "Snowbelle City",
+    "unlocks": [
+      "Snowbelle City Gym"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Snowbelle City",
+        "count": 300
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 53",
+    "areaId": "Snowbelle City Gym",
+    "unlocks": [
+      "Route 20"
+    ],
+    "requirements": {
+      "earnBadge": {
+        "name": "Iceberg Badge",
+        "leader": "Wulfric",
+        "badgeCount": 8
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 54",
+    "areaId": "Route 20",
+    "unlocks": [
+      "Pokémon Village"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Route 20",
+        "count": 300
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 55",
+    "areaId": "Pokémon Village",
+    "unlocks": [
+      "Pokémon Village (Fishing)"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Scizor",
+          "count": 1
+        },
+        {
+          "species": "Gengar",
+          "count": 1
+        },
+        {
+          "species": "Alakazam",
+          "count": 1
+        },
+        {
+          "species": "Wailord",
+          "count": 1
+        },
+        {
+          "species": "Ursaring",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 56",
+    "areaId": "Pokémon Village (Fishing)",
+    "unlocks": [
+      "Route 21"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Pokémon Village (Fishing)",
+        "count": 300
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 57",
+    "areaId": "Route 21",
+    "unlocks": [
+      "Victory Road"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Honchkrow",
+          "count": 1
+        },
+        {
+          "species": "Nidoking",
+          "count": 1
+        },
+        {
+          "species": "Shuckle",
+          "count": 1
+        },
+        {
+          "species": "Conkeldurr",
+          "count": 1
+        },
+        {
+          "species": "Pyroar",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 58",
+    "areaId": "Victory Road",
+    "unlocks": [
+      "Kalos Pokemon League"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Victory Road",
+        "count": 300
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge A 1",
+    "areaId": "Cyllage City (Fishing)",
+    "unlocks": [
+      "Reflection Cave"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Cyllage City (Fishing)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge A 2",
+    "areaId": "Reflection Cave",
+    "unlocks": [
+      "Tower of Mastery"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Reflection Cave",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge A 3",
+    "areaId": "Tower of Mastery",
+    "unlocks": [
+      "Coumarine City"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Tower of Mastery",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge A 4",
+    "areaId": "Coumarine City",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Coumarine City",
+        "count": 150
+      }
+    },
+    "gift": {
+      "item": "Masterball",
+      "count": 1
+    }
+  },
+  {
+    "challengeName": "Extra Challenge B 1",
+    "areaId": "Starter Depot",
+    "unlocks": [
+      "Starter Evolved Depot"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Rowlet",
+          "count": 1
+        },
+        {
+          "species": "Litten",
+          "count": 1
+        },
+        {
+          "species": "Popplio",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Extra Challenge B 2",
+    "areaId": "Starter Evolved Depot",
+    "unlocks": [
+      "Kiloude City"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Dartrix",
+          "count": 1
+        },
+        {
+          "species": "Torracat",
+          "count": 1
+        },
+        {
+          "species": "Brionne",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Extra Challenge B 3",
+    "areaId": "Kiloude City",
+    "unlocks": [
+      "Friend Safari"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Kiloude City",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge B 4",
+    "areaId": "Friend Safari",
+    "unlocks": [
+      "Battle Maison"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Friend Safari",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge B 5",
+    "areaId": "Battle Maison",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Battle Maison",
+        "count": 150
+      }
+    },
+    "gift": {
+      "item": "Masterball",
+      "count": 1
+    }
+  },
+  {
+    "challengeName": "Extra Challenge C 1",
+    "areaId": "Path to Sea Spirit Den",
+    "unlocks": [
+      "Sea Spirit Den Outer Depths"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Path to Sea Spirit Den",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge C 2",
+    "areaId": "Sea Spirit Den Outer Depths",
+    "unlocks": [
+      "Sea Spirit Den Entrance"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Sea Spirit Den Outer Depths",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge C 3",
+    "areaId": "Sea Spirit Den Entrance",
+    "unlocks": [
+      "Sea Spirit Den Tunnels"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Sea Spirit Den Entrance",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge C 4",
+    "areaId": "Sea Spirit Den Tunnels",
+    "unlocks": [
+      "Sea Spirit Den Hall"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Sea Spirit Den Tunnels",
+        "count": 150
+      }
+    },
+    "gift": {
+      "item": "Masterball",
+      "count": 1
+    }
+  },
+  {
+    "challengeName": "Extra Challenge C 5",
+    "areaId": "Sea Spirit Den Hall",
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Articuno",
+          "count": 1
+        },
+        {
+          "species": "Zapdos",
+          "count": 1
+        },
+        {
+          "species": "Moltres",
+          "count": 1
+        }
+      ]
+    },
+    "gift": {
+      "item": "Masterball",
+      "count": 2
+    }
+  },
+  {
+    "challengeName": "Extra Challenge D 1",
+    "areaId": "Path to Secret Chambers",
+    "unlocks": [
+      "Underground Chambers (Crystal Cave Tunnels)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Path to Secret Chambers",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge D 4",
+    "areaId": "Chambers of Emptiness",
+    "unlocks": [
+      "Ultimate Chamber"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Chambers of Emptiness",
+        "count": 150
+      }
+    },
+    "gift": {
+      "item": "Masterball",
+      "count": 2
+    }
+  },
+  {
+    "challengeName": "Extra Challenge D 5",
+    "areaId": "Ultimate Chamber",
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Volcanion",
+          "count": 1
+        },
+        {
+          "species": "Diancie",
+          "count": 1
+        },
+        {
+          "species": "Hoopa",
+          "count": 1
+        },
+        {
+          "species": "Mewtwo",
+          "count": 1
+        }
+      ]
+    },
+    "gift": {
+      "item": "Masterball",
+      "count": 2
+    }
+  },
+  {
+    "challengeName": "Extra Challenge E 1",
+    "areaId": "Path to Team Flare Secret HQ",
+    "unlocks": [
+      "Team Flare Secret HQ Gate"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Path to Team Flare Secret HQ",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge E 2",
+    "areaId": "Team Flare Secret HQ Gate",
+    "unlocks": [
+      "Team Flare Secret HQ Entrance"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Team Flare Secret HQ Gate",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge E 3",
+    "areaId": "Team Flare Secret HQ Entrance",
+    "unlocks": [
+      "Team Flare Secret HQ Hall"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Team Flare Secret HQ Entrance",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge E 4",
+    "areaId": "Team Flare Secret HQ Hall",
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Salamence",
+          "count": 1
+        },
+        {
+          "species": "Tyranitar",
+          "count": 1
+        },
+        {
+          "species": "Hydreigon",
+          "count": 1
+        },
+        {
+          "species": "Garchomp",
+          "count": 1
+        }
+      ]
+    },
+    "gift": {
+      "item": "Masterball",
+      "count": 1
+    }
+  },
+  {
+    "challengeName": "Extra Challenge D 2",
+    "areaId": "Underground Chambers (Crystal Cave Tunnels)",
+    "unlocks": [
+      "Garden Chambers (Secret Forest North)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Underground Chambers (Crystal Cave Tunnels)",
+        "count": 150
+      }
+    }
+  },
+  {
     "challengeName": "Extra Challenge D 3",
     "areaId": "Garden Chambers (Secret Forest North)",
     "unlocks": [
@@ -4218,8 +4414,6 @@ export const kalosRoutes = [
     }
   },
   {
-    "name": "Keys to Eternal Fight",
-    "spawns": [],
     "challengeName": "Keys to Eternal Fight Challenge",
     "areaId": "Keys to Eternal Fight",
     "unlocks": [
@@ -4234,33 +4428,8 @@ export const kalosRoutes = [
     }
   },
   {
-    "name": "The Eternal Fight",
-    "spawns": [
-      {
-        "pokemonId": 717,
-        "minLevel": 120,
-        "maxLevel": 120,
-        "chance": 0.33
-      },
-      {
-        "pokemonId": 718,
-        "minLevel": 115,
-        "maxLevel": 119,
-        "chance": 0.33
-      },
-      {
-        "pokemonId": 716,
-        "minLevel": 115,
-        "maxLevel": 119,
-        "chance": 0.33
-      }
-    ],
     "challengeName": "Eternal Fight Challenge",
     "areaId": "The Eternal Fight",
-    "gift": {
-      "item": "Masterball",
-      "count": 2
-    },
     "requirements": {
       "catchSpecies": [
         {
@@ -4276,7 +4445,10 @@ export const kalosRoutes = [
           "count": 1
         }
       ]
+    },
+    "gift": {
+      "item": "Masterball",
+      "count": 2
     }
   }
 ];
-export const kalosUnlocks = [];
