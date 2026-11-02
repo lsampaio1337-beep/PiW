@@ -173,15 +173,9 @@ export function openPokeMarketBuy() {
 export function parseMarketQuantity(valStr) {
     if (!valStr) return 1;
     let val = valStr.toUpperCase().trim().replace(/,/g, '');
-    let multiplier = 1;
-    if (val.endsWith('K')) { multiplier = 1000; val = val.slice(0, -1); }
-    else if (val.endsWith('M')) { multiplier = 1000000; val = val.slice(0, -1); }
-    else if (val.endsWith('B')) { multiplier = 1000000000; val = val.slice(0, -1); }
-    else if (val.endsWith('T')) { multiplier = 1000000000000; val = val.slice(0, -1); }
-
     let parsed = parseFloat(val);
     if (isNaN(parsed) || parsed <= 0) return 1;
-    return Math.floor(parsed * multiplier);
+    return Math.floor(parsed);
 }
 
 export function formatMarketNumber(num) {
@@ -408,7 +402,7 @@ export function updateBuyItemPrice(itemId, category, basePrice) {
 
         if (qty > spaceLeft) {
             qty = spaceLeft;
-            input.value = spaceLeft > 0 ? formatMarketNumberDown(spaceLeft).replace('~', '') : "0";
+            input.value = spaceLeft > 0 ? formatMarketNumberDown(spaceLeft) : "0";
         }
     }
 
@@ -433,7 +427,7 @@ export function buySetMax(itemId, category, basePrice) {
         const capacity = getCapacity(state, type);
         const spaceLeft = Math.max(0, capacity - currentCount);
 
-        input.value = formatMarketNumberDown(spaceLeft).replace('~', '');
+        input.value = formatMarketNumberDown(spaceLeft);
     } else {
         input.value = (1000000).toLocaleString();
     }
@@ -842,7 +836,7 @@ export function updateSellItemPrice(itemId, category) {
     if (qty > stock) {
         qty = stock;
         if (stock > 0) {
-            input.value = formatMarketNumberDown(stock).replace('~', '');
+            input.value = formatMarketNumberDown(stock);
         } else {
             input.value = "0";
         }
@@ -869,7 +863,7 @@ export function sellSetMax(itemId, category) {
     if (stock > 1000000) {
         input.value = (1000000).toLocaleString();
     } else {
-        input.value = formatMarketNumberDown(stock).replace('~', '');
+        input.value = formatMarketNumberDown(stock);
     }
 
     updateSellItemPrice(itemId, category);
