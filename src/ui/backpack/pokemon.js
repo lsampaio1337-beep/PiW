@@ -502,6 +502,23 @@ export function handleDrop(event, targetCol) {
                 newPokemon.lastQBonus = 0;
                 newPokemon.trainingCyclesCompleted = 0;
 
+                // Check for pre-evolution based on current region
+                if (state.config.evolutionParents && state.config.evolutionParents[newPokemon.id] !== undefined) {
+                    const parentId = state.config.evolutionParents[newPokemon.id];
+                    const parentBaseData = state.config.pokemonData.find(pd => pd.id === parentId);
+
+                    if (parentBaseData) {
+                        const regionName = state.currentRegionName || 'Kanto';
+                        let regionIdField = regionName.toLowerCase() + '_id';
+
+                        if (parentBaseData[regionIdField] !== undefined) {
+                            newPokemon.id = parentBaseData.id;
+                            newPokemon.name = parentBaseData.name;
+                            newPokemon.types = parentBaseData.types;
+                        }
+                    }
+                }
+
                 // Keep the max Q Value
                 newPokemon.quality = Math.max(p.quality, currentP.quality);
 
