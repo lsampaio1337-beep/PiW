@@ -514,75 +514,22 @@ export function handleDrop(event, targetCol) {
                 if (window.clearPokemonFilter) window.clearPokemonFilter();
             }
         } else {
-            // Try to auto-start breeding if a pair exists in storage/safe/party
-            let partner = null;
-            let partnerIndex = -1;
-            let partnerCol = null;
-
-            const findPartner = (arr, colName) => {
-                for (let i = 0; i < arr.length; i++) {
-                    const candidate = arr[i];
-                    // Must have same ID, Q difference <= 0.05, and not be the dragged pokemon itself
-                    if (candidate.uuid !== p.uuid && candidate.id === p.id && Math.round(Math.abs(candidate.quality - p.quality) * 100) <= 5) {
-                        partner = candidate;
-                        partnerIndex = i;
-                        partnerCol = colName;
-                        return true;
-                    }
-                }
-                return false;
-            };
-
-            if (!findPartner(state.storage, 'storage')) {
-                if (!findPartner(state.safe, 'safe')) {
-                    findPartner(state.party, 'party');
-                }
+            // Do not auto-start breeding. Just insert the first pokemon.
+            state.breeding.push(p);
+            if (state.dayCareRef) {
+                state.dayCareRef.slot1.pokemon = p;
+                state.dayCareRef.slot1.battles = 0;
+                state.dayCareRef.slot1.isBreeding = false;
+                state.dayCareRef.slot1.isFinished = false;
             }
+            if (window.clearPokemonFilter) window.clearPokemonFilter();
+            window.pokemonFilters.name = p.name;
 
-            if (partner) {
-                // Remove partner from its source collection
-                if (partnerCol === 'storage') state.storage.splice(partnerIndex, 1);
-                else if (partnerCol === 'safe') state.safe.splice(partnerIndex, 1);
-                else if (partnerCol === 'party') state.party.splice(partnerIndex, 1);
-
-                const keptParent = JSON.parse(JSON.stringify((p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe > partner.ivs.hp + partner.ivs.atk + partner.ivs.def + partner.ivs.spa + partner.ivs.spd + partner.ivs.spe) ? p : partner));
-
-                keptParent.ivs.hp = Math.max(p.ivs.hp, partner.ivs.hp);
-                keptParent.ivs.atk = Math.max(p.ivs.atk, partner.ivs.atk);
-                keptParent.ivs.def = Math.max(p.ivs.def, partner.ivs.def);
-                keptParent.ivs.spa = Math.max(p.ivs.spa, partner.ivs.spa);
-                keptParent.ivs.spd = Math.max(p.ivs.spd, partner.ivs.spd);
-                keptParent.ivs.spe = Math.max(p.ivs.spe, partner.ivs.spe);
-
-                keptParent.level = Math.floor(Math.max(p.level, partner.level) * 0.9);
-                if (keptParent.level < 1) keptParent.level = 1;
-
-                state.breeding.push(keptParent);
-                if (state.dayCareRef) {
-                    state.dayCareRef.slot1.pokemon = keptParent;
-                    state.dayCareRef.slot1.battles = 0;
-                    state.dayCareRef.slot1.requiredBattles = keptParent.quality >= 2.0 ? 400 : 200;
-                    state.dayCareRef.slot1.isBreeding = true;
-                    state.dayCareRef.slot1.isFinished = false;
-                }
-                if (window.clearPokemonFilter) window.clearPokemonFilter();
-            } else {
-                state.breeding.push(p);
-                if (state.dayCareRef) {
-                    state.dayCareRef.slot1.pokemon = p;
-                    state.dayCareRef.slot1.battles = 0;
-                    state.dayCareRef.slot1.isBreeding = false;
-                    state.dayCareRef.slot1.isFinished = false;
-                }
-                if (window.clearPokemonFilter) window.clearPokemonFilter();
-                window.pokemonFilters.name = p.name;
-
-                // Allow a range of +- 0.05 around the quality
-                let minQ = Math.max(0.8, p.quality - 0.05).toFixed(2);
-                let maxQ = (p.quality + 0.05).toFixed(2);
-                window.pokemonFilters.minQ = minQ;
-                window.pokemonFilters.maxQ = maxQ;
-            }
+            // Allow a range of +- 0.05 around the quality
+            let minQ = Math.max(0.8, p.quality - 0.05).toFixed(2);
+            let maxQ = (p.quality + 0.05).toFixed(2);
+            window.pokemonFilters.minQ = minQ;
+            window.pokemonFilters.maxQ = maxQ;
         }
     }
 
