@@ -400,5 +400,4 @@ const unovaMapCoordinates = {
     "y": 47.99
   }
 };
-
 export default unovaMapCoordinates;
