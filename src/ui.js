@@ -1327,10 +1327,10 @@ export function switchView(viewName) {
             p2.textContent = 'You can adjust Pokemon on daycare here or directly in your backpack.';
 
             const p3 = document.createElement('p');
-            p3.innerHTML = `Breeding requires <b>two Pokémon of the same species</b> with a <b>QValue difference of 0.05 or less</b>. You can drag them manually to the Breeding Spot or <b>click the spot to auto-filter</b> eligible candidates. Once started, the process <b>cannot be interrupted</b> and takes <b>100 fights</b> to complete (<b>200 for Shinnies</b>). The resulting egg hatches into the same species (provided it has no pre-evolution) at <b>90% of the highest parent's level</b>. The newborn inherits the higher parent's <b>SumIVs</b> and gains a <b>random QValue increase up to 0.03</b>, capped at a maximum of <b>1.80</b>.`;
+            p3.innerHTML = `<b>Breeding</b> requires <b>two Pokémon of the same species</b> with a <b>QValue difference of 0.05 or less</b>. You can drag them manually to the Breeding Spot or <b>click the spot to auto-filter</b> eligible candidates. Once started, the process <b>cannot be interrupted</b> and takes <b>100 fights</b> to complete (<b>200 for Shinnies</b>). The resulting egg hatches into the same species (provided it has no pre-evolution) at <b>90% of the highest parent's level</b>. The newborn inherits the higher parent's SumIVs and gains a <b>random QValue increase up to 0.03</b>, capped at a maximum of <b>1.80</b>.`;
 
             const p4 = document.createElement('p');
-            p4.innerHTML = `For Training, simply place any Pokémon in the Training Spot to <b>continuously improve its SumIV</b>, granting <b>+1 point to a random IV</b> every specified number of fights. This interval is equal to the Pokémon's <b>current SumIV (double for Shinnies)</b>.`;
+            p4.innerHTML = `For <b>Training</b>, simply place any Pokémon in the Training Spot to <b>continuously improve its SumIV</b>, granting <b>+1 point to a random IV</b> every specified number of fights. This interval is equal to the Pokémon's <b>current SumIV (double for Shinnies)</b>.`;
 
             introText.appendChild(p1);
             introText.appendChild(p2);
