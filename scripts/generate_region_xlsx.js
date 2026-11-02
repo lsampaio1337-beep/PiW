@@ -1,0 +1,417 @@
+const fs = require('fs');
+const path = require('path');
+const vm = require('vm');
+const xlsx = require('xlsx');
+
+function loadDataFile(filename, varNames = null) {
+    let code = fs.readFileSync(filename, 'utf8');
+    // Strip ES6 imports
+    code = code.replace(/^import\s+.*?;?\s*$/gm, '');
+    code = code.replace(/export\s+const\s+/g, 'var ')
+               .replace(/export\s+default\s+/g, 'var defaultExport = ')
+               .replace(/export\s+\{.*\}\s*;/g, '');
+
+    const context = {};
+    vm.createContext(context);
+    vm.runInContext(code, context);
+
+    if (varNames) {
+        const result = {};
+        for (const name of varNames) {
+            result[name] = context[name];
+        }
+        return result;
+    }
+    return context;
+}
+
+const pokemonData = require('../data/pokemon.json');
+const { pokedexIndexes } = loadDataFile('config/pokedexIndexes.js', ['pokedexIndexes']);
+const { types } = loadDataFile('config/types.js', ['types']);
+
+const REGIONS = [
+    { num: 1, name: 'Kanto', prefix: '', routesVar: 'routes', unlocksVar: null, mapVar: 'mapCoordinates' },
+    { num: 2, name: 'Johto', prefix: 'johto', routesVar: 'johtoRoutes', unlocksVar: 'johtoUnlocks', mapVar: 'johtoMapCoordinates' },
+    { num: 3, name: 'Hoenn', prefix: 'hoenn', routesVar: 'hoennRoutes', unlocksVar: 'hoennUnlocks', mapVar: 'hoennMapCoordinates' },
+    { num: 4, name: 'Sinnoh', prefix: 'sinnoh', routesVar: 'sinnohRoutes', unlocksVar: 'sinnohUnlocks', mapVar: 'sinnohMapCoordinates' },
+    { num: 5, name: 'Unova', prefix: 'unova', routesVar: 'unovaRoutes', unlocksVar: 'unovaUnlocks', mapVar: 'unovaMapCoordinates' },
+    { num: 6, name: 'Kalos', prefix: 'kalos', routesVar: 'kalosRoutes', unlocksVar: 'kalosUnlocks', mapVar: 'kalosMapCoordinates' },
+    { num: 7, name: 'Alola', prefix: 'alola', routesVar: 'alolaRoutes', unlocksVar: 'alolaUnlocks', mapVar: 'alolaMapCoordinates' },
+    { num: 8, name: 'Galar', prefix: 'galar', routesVar: 'galarRoutes', unlocksVar: 'galarUnlocks', mapVar: 'galarMapCoordinates' },
+    { num: 9, name: 'Hisui', prefix: 'hisui', routesVar: 'hisuiRoutes', unlocksVar: 'hisuiUnlocks', mapVar: 'hisuiMapCoordinates' },
+    { num: 10, name: 'Paldea', prefix: 'paldea', routesVar: 'paldeaRoutes', unlocksVar: 'paldeaUnlocks', mapVar: 'paldeaMapCoordinates' }
+];
+
+function getBST(pk) {
+    if (!pk) return 0;
+    return pk.hp + pk.atk + pk.def + pk.spa + pk.spd + pk.spe;
+}
+
+const evosForward = {};
+const evosBackward = {};
+
+for (const id in pokemonData) {
+    const pk = pokemonData[id];
+    if (pk.evolutions) {
+        pk.evolutions.forEach(evo => {
+            if (!evosForward[id]) evosForward[id] = [];
+            evosForward[id].push(evo.to);
+            evosBackward[evo.to] = id;
+        });
+    }
+}
+
+function reqString(req) {
+    if (!req) return '';
+    return JSON.stringify(req);
+}
+
+function processRegion(region) {
+    console.log(`Processing ${region.name}...`);
+
+    let routesFile = 'config/routes.js';
+    let mapFile = 'config/mapCoordinates.js';
+    if (region.prefix !== '') {
+        routesFile = `config/${region.prefix}Routes.js`;
+        mapFile = `config/${region.prefix}MapCoordinates.js`;
+    }
+
+    let routes = [];
+    let unlocks = [];
+
+    if (fs.existsSync(routesFile)) {
+        const varsToLoad = [];
+        if (region.routesVar) varsToLoad.push(region.routesVar);
+        if (region.unlocksVar) varsToLoad.push(region.unlocksVar);
+        const loaded = loadDataFile(routesFile, varsToLoad);
+        if (loaded[region.routesVar]) routes = loaded[region.routesVar];
+        if (region.unlocksVar && loaded[region.unlocksVar]) unlocks = loaded[region.unlocksVar];
+        if (region.num === 1) unlocks = routes;
+    } else {
+        console.error(`Routes file not found: ${routesFile}`);
+        return;
+    }
+
+    if (!Array.isArray(routes)) {
+        routes = Object.values(routes);
+    }
+    if (!Array.isArray(unlocks)) {
+        unlocks = Object.values(unlocks);
+    }
+
+    let mapCoords = {};
+    if (fs.existsSync(mapFile)) {
+        const loadedMap = loadDataFile(mapFile);
+        mapCoords = loadedMap[region.mapVar] || loadedMap.mapCoordinates || loadedMap.defaultExport || {};
+    }
+
+    const nativeIds = pokedexIndexes.regional[region.prefix === '' ? 'kanto' : region.prefix] || [];
+
+    const mainChallenges = [];
+    const extraChallenges = {};
+
+    for (const u of unlocks) {
+        if (!u.challengeName) continue;
+        if (u.challengeName.startsWith('Challenge ') || (!u.challengeName.startsWith('Extra') && !u.challengeName.startsWith('Key') && !u.challengeName.includes('League'))) {
+             mainChallenges.push(u);
+        } else if (u.challengeName.startsWith('Extra Challenge ')) {
+            const parts = u.challengeName.split(' ');
+            if (parts.length >= 4) {
+                const letter = parts[2];
+                if (!extraChallenges[letter]) extraChallenges[letter] = [];
+                extraChallenges[letter].push(u);
+            } else {
+                extraChallenges['X'] = extraChallenges['X'] || [];
+                extraChallenges['X'].push(u);
+            }
+        }
+    }
+
+    for (const key in extraChallenges) {
+        extraChallenges[key].sort((a,b) => {
+            const numA = parseInt(a.challengeName.split(' ').pop()) || 0;
+            const numB = parseInt(b.challengeName.split(' ').pop()) || 0;
+            return numA - numB;
+        });
+    }
+
+    const routesData = [];
+    const challengesData = [];
+    const routeSpawnedPokemon = new Set();
+    const seenPokemon = new Set();
+
+
+    const processUnlocks = (challengeList, isMain, startChallengeIndex, initialSeenSet) => {
+        let currentSeen = new Set(initialSeenSet);
+        for (let i = 0; i < challengeList.length; i++) {
+            const c = challengeList[i];
+            const areaName = c.areaId || c.name;
+            const isLeagueOrKey = c.challengeName && (c.challengeName.includes('League') || c.challengeName.includes('Key'));
+
+            const r = routes.find(ro => ro.name === areaName) || {};
+            const spawns = r.spawns || [];
+
+            const req = c.requirements || {};
+            let unlockStr = (c.unlocks || []).join(', ');
+            let giftStr = c.gift ? `${c.gift.item} x${c.gift.count}` : '';
+
+            let avgBST = 0;
+            if (spawns.length > 0) {
+                let sumBST = 0;
+                let uniqueIds = new Set();
+                spawns.forEach(s => {
+                    uniqueIds.add(s.pokemonId);
+                });
+                uniqueIds.forEach(id => {
+                    sumBST += getBST(pokemonData[id]);
+                });
+                avgBST = uniqueIds.size > 0 ? sumBST / uniqueIds.size : 0;
+            }
+
+            let baseMin = 1;
+            if (isMain) {
+                if (mainChallenges.length > 1) {
+                    baseMin = Math.round(1 + ((79) * (i / (mainChallenges.length - 1))));
+                }
+            } else {
+                 const totalExtra = challengeList.length;
+                 let startLvl = 80;
+                 if (totalExtra > 0) {
+                     baseMin = Math.round(startLvl + ((20) * (i / totalExtra)));
+                 }
+            }
+
+            let diff = 0;
+            let baseMax = baseMin;
+            if (baseMin < 12) diff = 2;
+            else if (baseMin < 30) diff = 3;
+            else {
+                let tempDiff = baseMin * 0.1;
+                let avg = (baseMin + baseMin + tempDiff) / 2;
+                diff = Math.floor(avg * 0.1);
+                if (diff > 8) diff = 8;
+            }
+            baseMax = baseMin + diff;
+
+            let quarter = 1;
+            if (isMain && mainChallenges.length > 0) {
+                quarter = Math.ceil(((i + 1) / mainChallenges.length) * 4);
+                if (quarter > 4) quarter = 4;
+            } else {
+                quarter = 4;
+            }
+
+            if (spawns.length === 0) {
+                routesData.push({
+                    "Unlocked at": i === 0 && isMain ? "" : (i > 0 ? challengeList[i-1].challengeName : ""),
+                    "Challenge": c.challengeName,
+                    "Route": areaName,
+                    "Route (Secondary)": "",
+                    "Pokemon Name": "",
+                    "First?": "",
+                    "Level": "",
+                    "Sugested Level": "",
+                    "Peer to Peer": "",
+                    "% Appearance": "",
+                    "% Appearance Ok?": "",
+                    "Pokemon/Type Ok?": "",
+                    "BST": "",
+                    "Pokemon/BST Ok?": "",
+                    "Map Ok?": mapCoords[areaName] ? "Yes" : "No",
+                    "Will Unlock": unlockStr,
+                    "Requisite": reqString(req),
+                    "Reward": giftStr
+                });
+            } else {
+                spawns.forEach(s => {
+                    const pk = pokemonData[s.pokemonId];
+                    if (!pk) return;
+
+                    const pkName = pk.name;
+                    routeSpawnedPokemon.add(s.pokemonId);
+
+                    let first = "";
+                    if (currentSeen.has(s.pokemonId)) {
+                        first = "NONONO";
+                    } else {
+                        currentSeen.add(s.pokemonId);
+                        seenPokemon.add(s.pokemonId);
+                    }
+
+                    let bst = getBST(pk);
+                    let diffBST = bst - avgBST;
+
+                    let p2p = 0;
+                    if (diffBST > 150) p2p = 4;
+                    else if (diffBST >= 100) p2p = 2;
+                    else if (diffBST >= 50) p2p = 1;
+                    else if (diffBST > -50) p2p = 0;
+                    else if (diffBST >= -100) p2p = -1;
+                    else if (diffBST > -150) p2p = -2;
+                    else p2p = -4;
+
+                    let sugMin = baseMin + p2p;
+                    let sugMax = baseMax + p2p;
+                    if (sugMin < 1) sugMin = 1;
+                    if (sugMax < 1) sugMax = 1;
+
+                    let bstOk = "";
+                    if (isMain) {
+                        if (quarter === 1 && bst > 400) bstOk = "NONONO";
+                        if (quarter === 2 && bst > 500) bstOk = "NONONO";
+                        if (quarter === 3 && bst < 250) bstOk = "NONONO";
+                        if (quarter === 4 && bst < 350) bstOk = "NONONO";
+                    }
+
+                    let chancePct = Math.round((s.chance || 0) * 100);
+                    let appOk = "";
+
+                    let typeOk = "Yes";
+                    const routeNameLower = areaName.toLowerCase();
+                    if ((routeNameLower.includes("sea") || routeNameLower.includes("water") || routeNameLower.includes("lake") || routeNameLower.includes("ocean")) && pk.types.includes("Fire")) {
+                        typeOk = "NONONO";
+                    }
+                    if (routeNameLower.includes("volcano") && pk.types.includes("Water")) {
+                        typeOk = "NONONO";
+                    }
+
+                    routesData.push({
+                        "Unlocked at": i === 0 && isMain ? "" : (i > 0 ? challengeList[i-1].challengeName : ""),
+                        "Challenge": c.challengeName,
+                        "Route": areaName,
+                        "Route (Secondary)": "",
+                        "Pokemon Name": pkName,
+                        "First?": first,
+                        "Level": `${s.minLevel || 1}-${s.maxLevel || 80}`,
+                        "Sugested Level": `${sugMin}-${sugMax}`,
+                        "Peer to Peer": p2p,
+                        "% Appearance": chancePct,
+                        "% Appearance Ok?": appOk,
+                        "Pokemon/Type Ok?": typeOk,
+                        "BST": bst,
+                        "Pokemon/BST Ok?": bstOk,
+                        "Map Ok?": mapCoords[areaName] ? "Yes" : "No",
+                        "Will Unlock": unlockStr,
+                        "Requisite": reqString(req),
+                        "Reward": giftStr
+                    });
+                });
+            }
+
+            let sugReq = "";
+            let newPkCount = 0;
+            let lowAppPk = null;
+            let highAppLowBstPk = null;
+
+            if (spawns.length > 0) {
+                spawns.forEach(s => {
+                    let cPct = Math.round((s.chance || 0)*100);
+                    let b = getBST(pokemonData[s.pokemonId]);
+                    if (routesData.find(rd => rd["Route"] === areaName && rd["Pokemon Name"] === pokemonData[s.pokemonId].name && rd["First?"] === "")) {
+                        newPkCount++;
+                        if (cPct > 20 && b < 350) highAppLowBstPk = pokemonData[s.pokemonId];
+                    }
+                    if (cPct < 10) lowAppPk = pokemonData[s.pokemonId];
+                });
+            }
+
+            if (areaName.toLowerCase().includes("gym") || isLeagueOrKey) {
+                sugReq = "Defeat Leader/Champion";
+            } else if (newPkCount > 0) {
+                sugReq = `Catch ${Math.min(newPkCount, 3)} new pokemon`;
+            } else if (highAppLowBstPk) {
+                sugReq = `Catch Rare+ ${highAppLowBstPk.name}`;
+            } else if (lowAppPk) {
+                let n = 150;
+                sugReq = `Defeat ${n} ${lowAppPk.name}`;
+            } else {
+                let n = isMain ? (quarter <= 2 ? 50 : (quarter === 3 ? 150 : 250)) : 300;
+                sugReq = `Defeat ${n} pokemon in route`;
+            }
+
+            challengesData.push({
+                "Challenge Name": c.challengeName,
+                "Requisite": reqString(req),
+                "Sugestion for Req": sugReq,
+                "Reward Map": unlockStr,
+                "Reward Challenge": "",
+                "Reward Gift": giftStr
+            });
+        }
+
+        if (isMain) {
+            return currentSeen;
+        }
+    };
+
+    const mainSeenSet = processUnlocks(mainChallenges, true, 0, new Set());
+    Object.keys(extraChallenges).sort().forEach(k => {
+        // Extra challenges inherit the seen set exactly as it was at the end of the main challenges
+        processUnlocks(extraChallenges[k], false, mainChallenges.length, mainSeenSet);
+    });
+
+const missingData = [];
+    nativeIds.forEach(id => {
+        if (!routeSpawnedPokemon.has(id)) {
+            const pk = pokemonData[id];
+            if (!pk) return;
+
+            let obtainStr = "No";
+
+            const prevId = evosBackward[id];
+            if (prevId && routeSpawnedPokemon.has(parseInt(prevId))) {
+                obtainStr = "Evolve";
+            } else if (prevId) {
+                const prevPrevId = evosBackward[prevId];
+                if (prevPrevId && routeSpawnedPokemon.has(parseInt(prevPrevId))) {
+                    obtainStr = "2xEvolution";
+                }
+            }
+
+            if (obtainStr === "No") {
+                const evos = evosForward[id];
+                if (evos) {
+                    for (const nextId of evos) {
+                        if (routeSpawnedPokemon.has(parseInt(nextId))) {
+                            obtainStr = "Breed";
+                            break;
+                        }
+                        const nextNextEvos = evosForward[nextId];
+                        if (nextNextEvos) {
+                            for (const nn of nextNextEvos) {
+                                if (routeSpawnedPokemon.has(parseInt(nn))) {
+                                    obtainStr = "2xBreed";
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            missingData.push({
+                "Pokemon Name": pk.name,
+                "Can Obtain?": obtainStr
+            });
+        }
+    });
+
+    const routeSecondaryEmpty = routesData.every(r => !r["Route (Secondary)"]);
+    if (routeSecondaryEmpty) {
+        routesData.forEach(r => delete r["Route (Secondary)"]);
+    }
+
+    const wb = xlsx.utils.book_new();
+    const wsRoutes = xlsx.utils.json_to_sheet(routesData);
+    xlsx.utils.book_append_sheet(wb, wsRoutes, "Routes");
+    const wsChallenges = xlsx.utils.json_to_sheet(challengesData);
+    xlsx.utils.book_append_sheet(wb, wsChallenges, "Challenges");
+    const wsMissing = xlsx.utils.json_to_sheet(missingData);
+    xlsx.utils.book_append_sheet(wb, wsMissing, "Missing PK");
+
+    const outFile = `${region.num}_${region.name}_Data.xlsx`;
+    xlsx.writeFile(wb, outFile);
+    console.log(`Generated ${outFile}`);
+}
+
+REGIONS.forEach(processRegion);
