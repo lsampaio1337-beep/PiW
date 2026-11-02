@@ -1,0 +1,403 @@
+0	Aquacorde Outskirts	Azurill
+0	Aquacorde Outskirts	Caterpie
+0	Aquacorde Outskirts	Weedle
+0	Aquacorde Outskirts	Ralts
+0	Aquacorde Outskirts	Scatterbug
+0	Aquacorde Outskirts	Magikarp
+1	Route 2	Kakuna
+1	Route 2	Metapod
+1	Route 2	Pichu
+1	Route 2	Igglybuff
+1	Route 2	Wooper
+1	Route 2	Spewpa
+2	Santalune Forest	Sentret
+2	Santalune Forest	Poochyena
+2	Santalune Forest	Lotad
+2	Santalune Forest	Burmy
+2	Santalune Forest	Bunnelby
+2	Santalune Forest	Zigzagoon
+3	Route 3	Whismur
+3	Route 3	Combee
+3	Route 3	Starly
+3	Route 3	Zubat
+3	Route 3	Noibat
+3	Route 3	Bidoof
+4	Santalune Outskirts	Swinub
+4	Santalune Outskirts	Smeargle
+4	Santalune Outskirts	Slugma
+4	Santalune Outskirts	Hoppip
+4	Santalune Outskirts	Spinarak
+4	Santalune Outskirts	Pidgey
+5	Santalune City Gym
+6	Route 4	Litwick
+6	Route 4	Kirlia
+6	Route 4	Fletchling
+6	Route 4	Meditite
+6	Route 4	Budew
+6	Route 4	Mareep
+7	Lumiose South Boulevard	Roggenrola
+7	Lumiose South Boulevard	Purrloin
+7	Lumiose South Boulevard	Chingling
+7	Lumiose South Boulevard	Riolu
+7	Lumiose South Boulevard	Barboach
+7	Lumiose South Boulevard	Ekans
+8	Route 5	Inkay
+8	Route 5	Ditto
+8	Route 5	Helioptile
+8	Route 5	Solosis
+8	Route 5	Trapinch
+8	Route 5	Bonsly
+9	Camphrier Berry Fields	Gothita
+9	Camphrier Berry Fields	Sandile
+9	Camphrier Berry Fields	Foongus
+9	Camphrier Berry Fields	Electrike
+9	Camphrier Berry Fields	Horsea
+9	Camphrier Berry Fields	Shuppet
+10	Route 6	Poliwag
+10	Route 6	Nidoran♂
+10	Route 6	Farfetch'd
+10	Route 6	Bellsprout
+10	Route 6	Flabébé
+10	Route 6	Goomy
+11	Route 7	Dratini
+11	Route 7	Remoraid
+11	Route 7	Mime Jr.
+11	Route 7	Croagunk
+11	Route 7	Deino
+11	Route 7	Geodude
+12	Connecting Cave	Bagon
+12	Connecting Cave	Gulpin
+12	Connecting Cave	Golett
+12	Connecting Cave	Bergmite
+12	Connecting Cave	Smoochum
+12	Connecting Cave	Cubchoo
+13	Route 8	Doduo
+13	Route 8	Gastly
+13	Route 8	Swablu
+13	Route 8	Slowpoke
+13	Route 8	Karrablast
+13	Route 8	Pansear
+14	Ambrette Cliffs	Shelmet
+14	Ambrette Cliffs	Ferroseed
+14	Ambrette Cliffs	Vanillite
+14	Ambrette Cliffs	Timburr
+14	Ambrette Cliffs	Ducklett
+14	Ambrette Cliffs	Machop
+15	Route 9	Pansage
+15	Route 9	Panpour
+15	Route 9	Cubone
+15	Route 9	Goldeen
+15	Route 9	Psyduck
+15	Route 9	Skrelp
+16	Glittering Cave	Axew
+16	Glittering Cave	Oddish
+16	Glittering Cave	Woobat
+16	Glittering Cave	Eevee
+16	Glittering Cave	Honedge
+16	Glittering Cave	Magnemite
+17	Cyllage Seaside Slope	Exeggcute
+17	Cyllage Seaside Slope	Dwebble
+17	Cyllage Seaside Slope	Trubbish
+17	Cyllage Seaside Slope	Stunky
+17	Cyllage Seaside Slope	Chinchou
+17	Cyllage Seaside Slope	Houndour
+18	Cyllage City Gym
+19	Route 10	Pumpkaboo
+19	Route 10	Tentacool
+19	Route 10	Staravia
+19	Route 10	Vibrava
+19	Route 10	Lombre
+19	Route 10	Pawniard
+20	Geosenge Megalith Ruins	Skiploom
+20	Geosenge Megalith Ruins	Staryu
+20	Geosenge Megalith Ruins	Spritzee
+20	Geosenge Megalith Ruins	Swirlix
+20	Geosenge Megalith Ruins	Mantyke
+20	Geosenge Megalith Ruins	Rhyhorn
+21	Route 11	Clamperl
+21	Route 11	Scraggy
+21	Route 11	Drifloon
+21	Route 11	Pancham
+21	Route 11	Pidgeotto
+21	Route 11	Mienfoo
+22	Reflection Cave	Skiddo
+22	Reflection Cave	Krokorok
+22	Reflection Cave	Espurr
+22	Reflection Cave	Whirlipede
+22	Reflection Cave	Loudred
+22	Reflection Cave	Spinda
+23	Shalour Beachfront	Tyrunt
+23	Shalour Beachfront	Amaura
+23	Shalour Beachfront	Nidorino
+23	Shalour Beachfront	Nidorina
+23	Shalour Beachfront	Flaaffy
+23	Shalour Beachfront	Litleo
+24	Shalour City Gym
+25	Route 12	Graveler
+25	Route 12	Gothorita
+25	Route 12	Munchlax
+25	Route 12	Ledian
+25	Route 12	Beedrill
+25	Route 12	Gloom
+26	Azure Deep	Butterfree
+26	Azure Deep	Vanillish
+26	Azure Deep	Kadabra
+26	Azure Deep	Wailmer
+26	Azure Deep	Ariados
+26	Azure Deep	Pachirisu
+27	Azure Bay Isles	Plusle
+27	Azure Bay Isles	Machoke
+27	Azure Bay Isles	Gurdurr
+27	Azure Bay Isles	Minun
+27	Azure Bay Isles	Murkrow
+28	Coumarine Seaside Hill	Wobbuffet
+28	Coumarine Seaside Hill	Haunter
+28	Coumarine Seaside Hill	Fraxure
+28	Coumarine Seaside Hill	Pupitar
+28	Coumarine Seaside Hill	Corsola
+29	Coumarine Docks	Dunsparce
+29	Coumarine Docks	Linoone
+29	Coumarine Docks	Shelgon
+29	Coumarine Docks	Dragonair
+29	Coumarine Docks	Azumarill
+30	Coumarine City Gym
+31	Route 13	Wormadam
+31	Route 13	Mothim
+31	Route 13	Dugtrio
+31	Route 13	Marowak
+31	Route 13	Swoobat
+32	Lumiose North Boulevard	Emolga
+32	Lumiose North Boulevard	Lairon
+32	Lumiose North Boulevard	Volbeat
+32	Lumiose North Boulevard	Magcargo
+32	Lumiose North Boulevard	Sneasel
+33	Lumiose City Gym
+34	Route 14	Seadra
+34	Route 14	Rotom
+34	Route 14	Kecleon
+34	Route 14	Qwilfish
+34	Route 14	Audino
+35	Laverre Mushroom Woods	Liepard
+35	Laverre Mushroom Woods	Doublade
+35	Laverre Mushroom Woods	Sandslash
+35	Laverre Mushroom Woods	Granbull
+35	Laverre Mushroom Woods	Piloswine
+36	Laverre City Gym
+37	Route 15	Jynx
+37	Route 15	Chimecho
+37	Route 15	Swellow
+37	Route 15	Golbat
+37	Route 15	Banette
+38	Dendemille Windmill Farm	Lunatone
+38	Dendemille Windmill Farm	Lanturn
+38	Dendemille Windmill Farm	Jumpluff
+38	Dendemille Windmill Farm	Solrock
+38	Dendemille Windmill Farm	Aromatisse
+39	Frost Cavern	Swalot
+39	Frost Cavern	Crawdaunt
+39	Frost Cavern	Whiscash
+39	Frost Cavern	Grumpig
+39	Frost Cavern	Klefki
+40	Anistar Sundial Terrace	Torkoal
+40	Anistar Sundial Terrace	Stunfisk
+40	Anistar Sundial Terrace	Furfrou
+40	Anistar Sundial Terrace	Swanna
+40	Anistar Sundial Terrace	Hariyama
+41	Anistar City Gym
+42	Route 17	Slurpuff
+42	Route 17	Octillery
+42	Route 17	Malamar
+42	Route 17	Golurk
+42	Route 17	Durant
+43	Couriway Cascades	Heatmor
+43	Couriway Cascades	Scolipede
+43	Couriway Cascades	Huntail
+43	Couriway Cascades	Mantine
+43	Couriway Cascades	Raichu
+44	Route 18	Crustle
+44	Route 18	Gorebyss
+44	Route 18	Rhydon
+44	Route 18	Staraptor
+44	Route 18	Relicanth
+45	Route 19 Marshlands	Slowbro
+45	Route 19 Marshlands	Vileplume
+45	Route 19 Marshlands	Bisharp
+45	Route 19 Marshlands	Kangaskhan
+45	Route 19 Marshlands	Electrode
+46	Vallée Grande Marshlands	Sigilyph
+46	Vallée Grande Marshlands	Exploud
+46	Vallée Grande Marshlands	Tauros
+46	Vallée Grande Marshlands	Toxicroak
+46	Vallée Grande Marshlands	Altaria
+47	Snowbelle Frostwoods	Gothitelle
+47	Snowbelle Frostwoods	Reuniclus
+47	Snowbelle Frostwoods	Dragalge
+47	Snowbelle Frostwoods	Gourgeist
+47	Snowbelle Frostwoods	Escavalier
+48	Route 20	Clawitzer
+48	Route 20	Hawlucha
+48	Route 20	Carbink
+48	Route 20	Pinsir
+48	Route 20	Barbaracle
+49	Hidden Village Glade	Scyther
+49	Hidden Village Glade	Heracross
+49	Hidden Village Glade	Aegislash
+49	Hidden Village Glade	Nidoqueen
+49	Hidden Village Glade	Machamp
+50	Snowbelle City Gym
+51	Route 21	Honchkrow
+51	Route 21	Nidoking
+51	Route 21	Shuckle
+51	Route 21	Conkeldurr
+51	Route 21	Pyroar
+52	Victory Road	Poliwrath
+52	Victory Road	Steelix
+52	Victory Road	Zoroark
+52	Victory Road	Gliscor
+52	Victory Road	Weavile
+Extra Challenge A 1	Route 22	Diglett
+Extra Challenge A 1	Route 22	Ledyba
+Extra Challenge A 1	Route 22	Nincada
+Extra Challenge A 1	Route 22	Surskit
+Extra Challenge A 1	Route 22	Taillow
+Extra Challenge A 1	Route 22	Wingull
+Extra Challenge A 2	Parfum Palace Gardens	Gible
+Extra Challenge A 2	Parfum Palace Gardens	Mr. Mime
+Extra Challenge A 2	Parfum Palace Gardens	Snubbull
+Extra Challenge A 2	Parfum Palace Gardens	Sandshrew
+Extra Challenge A 2	Parfum Palace Gardens	Nidoran♀
+Extra Challenge A 2	Parfum Palace Gardens	Larvitar
+Extra Challenge A 3	Ambrette Reef	Shellder
+Extra Challenge A 3	Ambrette Reef	Carvanha
+Extra Challenge A 3	Ambrette Reef	Binacle
+Extra Challenge A 3	Ambrette Reef	Corphish
+Extra Challenge A 3	Ambrette Reef	Phantump
+Extra Challenge A 3	Ambrette Reef	Abra
+Extra Challenge A 4	Cyllage Tidepools	Clauncher
+Extra Challenge A 4	Cyllage Tidepools	Buizel
+Extra Challenge A 4	Cyllage Tidepools	Aron
+Extra Challenge A 4	Cyllage Tidepools	Luvdisc
+Extra Challenge A 4	Cyllage Tidepools	Zorua
+Extra Challenge A 4	Cyllage Tidepools	Snover
+Extra Challenge A 5	Tower of Mastery	Fletchinder
+Extra Challenge A 5	Tower of Mastery	Poliwhirl
+Extra Challenge A 5	Tower of Mastery	Onix
+Extra Challenge A 5	Tower of Mastery	Lickitung
+Extra Challenge A 5	Tower of Mastery	Boldore
+Extra Challenge A 5	Tower of Mastery	Yanma
+Extra Challenge A 6	Lost Hotel	Ninjask
+Extra Challenge A 6	Lost Hotel	Zangoose
+Extra Challenge A 6	Lost Hotel	Seviper
+Extra Challenge A 6	Lost Hotel	Sharpedo
+Extra Challenge A 6	Lost Hotel	Basculin
+Extra Challenge A 7	Route 16	Throh
+Extra Challenge A 7	Route 16	Magneton
+Extra Challenge A 7	Route 16	Skarmory
+Extra Challenge A 7	Route 16	Sawk
+Extra Challenge A 7	Route 16	Absol
+Extra Challenge B 1	Path to Team Flare Secret HQ	Jynx
+Extra Challenge B 1	Path to Team Flare Secret HQ	Yveltal
+Extra Challenge B 1	Path to Team Flare Secret HQ	Exeggcute
+Extra Challenge B 1	Path to Team Flare Secret HQ	Tentacruel
+Extra Challenge B 1	Path to Team Flare Secret HQ	Roserade
+Extra Challenge B 2	Team Flare Secret HQ Gate	Barboach
+Extra Challenge B 2	Team Flare Secret HQ Gate	Gulpin
+Extra Challenge B 2	Team Flare Secret HQ Gate	Pinsir
+Extra Challenge B 2	Team Flare Secret HQ Gate	Dragalge
+Extra Challenge B 2	Team Flare Secret HQ Gate	Quagsire
+Extra Challenge B 3	Team Flare Secret HQ Entrance	Crobat
+Extra Challenge B 3	Team Flare Secret HQ Entrance	Rhyperior
+Extra Challenge B 3	Team Flare Secret HQ Entrance	Lapras
+Extra Challenge B 3	Team Flare Secret HQ Entrance	Noivern
+Extra Challenge B 3	Team Flare Secret HQ Entrance	Haxorus
+Extra Challenge B 4	Team Flare Secret HQ Hall	Salamence
+Extra Challenge B 4	Team Flare Secret HQ Hall	Tyranitar
+Extra Challenge B 4	Team Flare Secret HQ Hall	Hydreigon
+Extra Challenge B 4	Team Flare Secret HQ Hall	Garchomp
+Extra Challenge B 5	Terminus Cave (Surface)	Druddigon
+Extra Challenge B 5	Terminus Cave (Surface)	Scrafty
+Extra Challenge B 5	Terminus Cave (Surface)	Ferrothorn
+Extra Challenge B 5	Terminus Cave (Surface)	Miltank
+Extra Challenge B 5	Terminus Cave (Surface)	Bellossom
+Extra Challenge B 6	Pokémon Village	Scizor
+Extra Challenge B 6	Pokémon Village	Gengar
+Extra Challenge B 6	Pokémon Village	Alakazam
+Extra Challenge B 6	Pokémon Village	Wailord
+Extra Challenge B 6	Pokémon Village	Ursaring
+Extra Challenge C 1	Starter Depot	Froakie
+Extra Challenge C 1	Starter Depot	Fennekin
+Extra Challenge C 1	Starter Depot	Chespin
+Extra Challenge C 1	Starter Depot	Rowlet
+Extra Challenge C 1	Starter Depot	Litten
+Extra Challenge C 1	Starter Depot	Popplio
+Extra Challenge C 1	Starter Depot	Bulbasaur
+Extra Challenge C 1	Starter Depot	Charmander
+Extra Challenge C 1	Starter Depot	Squirtle
+Extra Challenge C 2	Starter Evolved Depot	Dartrix
+Extra Challenge C 2	Starter Evolved Depot	Torracat
+Extra Challenge C 2	Starter Evolved Depot	Brionne
+Extra Challenge C 2	Starter Evolved Depot	Ivysaur
+Extra Challenge C 2	Starter Evolved Depot	Charmeleon
+Extra Challenge C 2	Starter Evolved Depot	Blastoise
+Extra Challenge C 3	Kiloude Southern Hills	Roserade
+Extra Challenge C 3	Kiloude Southern Hills	Gigalith
+Extra Challenge C 3	Kiloude Southern Hills	Lickilicky
+Extra Challenge C 3	Kiloude Southern Hills	Cryogonal
+Extra Challenge C 3	Kiloude Southern Hills	Gardevoir
+Extra Challenge C 4	Friend Safari	Krookodile
+Extra Challenge C 4	Friend Safari	Chandelure
+Extra Challenge C 4	Friend Safari	Flygon
+Extra Challenge C 4	Friend Safari	Tyrantrum
+Extra Challenge C 4	Friend Safari	Aurorus
+Extra Challenge C 5	Battle Maison	Vaporeon
+Extra Challenge C 5	Battle Maison	Sylveon
+Extra Challenge C 5	Battle Maison	Probopass
+Extra Challenge C 5	Battle Maison	Lucario
+Extra Challenge C 5	Battle Maison	Flareon
+Extra Challenge C 6	Secret Forest North	Goomy
+Extra Challenge C 6	Secret Forest North	Carnivine
+Extra Challenge C 6	Secret Forest North	Swellow
+Extra Challenge C 6	Secret Forest North	Magnemite
+Extra Challenge C 6	Secret Forest North	Gastly
+Extra Challenge D 1	Path to Sea Spirit Den	Vanilluxe
+Extra Challenge D 1	Path to Sea Spirit Den	Chandelure
+Extra Challenge D 1	Path to Sea Spirit Den	Cubone
+Extra Challenge D 1	Path to Sea Spirit Den	Pawniard
+Extra Challenge D 1	Path to Sea Spirit Den	Aerodactyl
+Extra Challenge D 2	Sea Spirit Den Outer Depths	Glaceon
+Extra Challenge D 2	Sea Spirit Den Outer Depths	Haxorus
+Extra Challenge D 2	Sea Spirit Den Outer Depths	Huntail
+Extra Challenge D 2	Sea Spirit Den Outer Depths	Blastoise
+Extra Challenge D 2	Sea Spirit Den Outer Depths	Avalugg
+Extra Challenge D 3	Sea Spirit Den Entrance	Hippowdon
+Extra Challenge D 3	Sea Spirit Den Entrance	Glaceon
+Extra Challenge D 3	Sea Spirit Den Entrance	Venusaur
+Extra Challenge D 3	Sea Spirit Den Entrance	Umbreon
+Extra Challenge D 3	Sea Spirit Den Entrance	Jolteon
+Extra Challenge D 4	Sea Spirit Den Tunnels	Leafeon
+Extra Challenge D 4	Sea Spirit Den Tunnels	Cloyster
+Extra Challenge D 4	Sea Spirit Den Tunnels	Blastoise
+Extra Challenge D 4	Sea Spirit Den Tunnels	Chesnaught
+Extra Challenge D 4	Sea Spirit Den Tunnels	Mamoswine
+Extra Challenge D 5	Sea Spirit Den Hall	Articuno
+Extra Challenge D 5	Sea Spirit Den Hall	Zapdos
+Extra Challenge D 5	Sea Spirit Den Hall	Moltres
+Extra Challenge E 1	Path to Secret Chambers	Hydreigon
+Extra Challenge E 1	Path to Secret Chambers	Sandslash
+Extra Challenge E 1	Path to Secret Chambers	Cubchoo
+Extra Challenge E 1	Path to Secret Chambers	Zigzagoon
+Extra Challenge E 1	Path to Secret Chambers	Bellossom
+Extra Challenge E 2	Chambers of Emptiness	Greninja
+Extra Challenge E 2	Chambers of Emptiness	Aggron
+Extra Challenge E 2	Chambers of Emptiness	Gogoat
+Extra Challenge E 2	Chambers of Emptiness	Delphox
+Extra Challenge E 2	Chambers of Emptiness	Vanilluxe
+Extra Challenge E 3	Underground Chambers	Bergmite
+Extra Challenge E 3	Underground Chambers	Carbink
+Extra Challenge E 3	Underground Chambers	Skitty
+Extra Challenge E 3	Underground Chambers	Golbat
+Extra Challenge E 3	Underground Chambers	Phantump
+Extra Challenge E 4	Ultimate Chamber	Volcanion
+Extra Challenge E 4	Ultimate Chamber	Diancie
+Extra Challenge E 4	Ultimate Chamber	Hoopa
+Extra Challenge E 4	Ultimate Chamber	Mewtwo
