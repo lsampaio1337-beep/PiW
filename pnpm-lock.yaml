@@ -26,9 +26,6 @@ importers:
       p-limit:
         specifier: ^7.3.3
         version: 7.3.3
-      xlsx:
-        specifier: ^0.18.5
-        version: 0.18.5
     devDependencies:
       '@babel/core':
         specifier: ^8.0.7
@@ -81,6 +78,9 @@ importers:
       playwright:
         specifier: ^1.63.0
         version: 1.63.0
+      xlsx:
+        specifier: ^0.18.5
+        version: 0.18.5
 
 packages:
 
