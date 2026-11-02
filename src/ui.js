@@ -1324,13 +1324,13 @@ export function switchView(viewName) {
             p1.textContent = 'Now you are able to use Daycare!';
 
             const p2 = document.createElement('p');
-            p2.textContent = 'You can adjust pokemon on daycare here or directly in your backpack.';
+            p2.textContent = 'You can adjust Pokemon on daycare here or directly in your backpack.';
 
             const p3 = document.createElement('p');
-            p3.textContent = `In order to Breed, you need 2 Pokémons with the same species and Quality Value difference up to 0.05. They will generate an egg that will hatch after 200 fights (400 for Shinies). You can drag 2 Pokémons to the Breeding Spot or you can click on Breeding Spot to automatically filter Pokémons that can be inserted there. The egg will hatch and the Pokémon will have an increased Quality Value of a random number up to 0.05 (maximum of 1.99), keeping the highest individual IVs of both parents. Its level will be 90% of the highest parent's level. Remember that the process can’t be interrupted.`;
+            p3.innerHTML = `<b>Breeding</b> requires <b>two Pokémon of the same species</b> with a <b>QValue difference of 0.05 or less</b>. You can drag them manually to the Breeding Spot or <b>click the spot to auto-filter</b> eligible candidates. Once started, the process <b>cannot be interrupted</b> and takes <b>100 fights</b> to complete (<b>200 for Shinnies</b>). The resulting egg hatches into the same species (provided it has no pre-evolution) at <b>90% of the highest parent's level</b>. The newborn inherits the higher parent's SumIVs and gains a <b>random QValue increase up to 0.03</b>, capped at a maximum of <b>1.80</b>.`;
 
             const p4 = document.createElement('p');
-            p4.textContent = `To Train, you just need to insert the desired Pokémon in the Training Spot. It will train its SumIV and it will gain +1 point in a random IV every X fights, where X is equal to its current SumIV (multiplied by 2 for Shinies).`;
+            p4.innerHTML = `For <b>Training</b>, simply place any Pokémon in the Training Spot to <b>continuously improve its SumIV</b>, granting <b>+1 point to a random IV</b> every specified number of fights. This interval is equal to the Pokémon's <b>current SumIV (double for Shinnies)</b>.`;
 
             introText.appendChild(p1);
             introText.appendChild(p2);
