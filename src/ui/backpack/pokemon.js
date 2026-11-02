@@ -530,9 +530,11 @@ export function handleDrop(event, targetCol) {
                 else if (newPokemon.quality >= 1.00) newPokemon.qualityName = "Regular";
                 else newPokemon.qualityName = "Weak";
 
-                // Shinies keep shiny Q name if applicable
+                // Shinies keep shiny Q name if applicable, but only if Shiny Breeder upgrade is bought
                 if (p.qualityName === "Shiny" || currentP.qualityName === "Shiny") {
-                    newPokemon.qualityName = "Shiny";
+                    if (state.stats.upgrades && state.stats.upgrades.daycareTier >= 5) {
+                        newPokemon.qualityName = "Shiny";
+                    }
                 }
 
                 // Penalty of 10% on the highest level rounded up
