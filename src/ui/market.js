@@ -281,7 +281,7 @@ export function renderPokeMarketTab(category) {
             });
     } else if (category === 'stones') {
         const badges = state.trainer.badges || 0;
-        const stonePrice = badges >= 8 ? 10000 : Math.max(500, 1000 * badges);
+        const stonePrice = Math.max(1000, 1000 * badges);
         let stoneKeys = Object.keys(state.backpack.stones).filter(k => !VITAMINS.includes(k));
         stoneKeys.sort((a, b) => a.localeCompare(b));
         items = stoneKeys.map(stoneName => {
@@ -294,11 +294,21 @@ export function renderPokeMarketTab(category) {
         });
     } else if (category === 'vitamins') {
         const badges = state.trainer.badges || 0;
-        const vitaminPrice = badges >= 8 ? 10000 : Math.max(2000, 1000 * badges);
+        const getVitaminPrice = (vitaminName, badges) => {
+            switch(vitaminName) {
+                case 'HP Up': return Math.max(1000, 1000 * badges);
+                case 'Carbo Speed': return Math.max(500, 500 * badges);
+                case 'Protein Atk': return Math.max(750, Math.ceil(750 * badges));
+                case 'Calcium SpAtk': return Math.max(750, Math.ceil(750 * badges));
+                case 'Iron Def': return Math.max(782, Math.round(625 * badges));
+                case 'Zinc SpDef': return Math.max(625, Math.round(625 * badges));
+                default: return Math.max(2000, 1000 * badges);
+            }
+        };
         items = VITAMINS.map(vitaminName => {
             return {
                 name: vitaminName,
-                price: vitaminPrice,
+                price: getVitaminPrice(vitaminName, badges),
                 img: `./Assets/Items/Vitamins/${vitaminName}.png`,
                 attrLabel: `Stat Item`
             };
