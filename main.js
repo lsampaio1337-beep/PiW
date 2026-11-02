@@ -2,20 +2,21 @@ const { app, BrowserWindow, ipcMain, screen } = require('electron');
 const path = require('path');
 const fs = require('fs');
 
-// Fix transparency issues conditionally rather than disabling hardware acceleration entirely
-if (process.platform === 'linux') {
-    app.commandLine.appendSwitch('enable-transparent-visuals');
-    // Hardware acceleration must be disabled on Linux for transparency to work properly
-    app.disableHardwareAcceleration();
-}
+// Fix transparency issues by applying robust rendering fixes
+app.commandLine.appendSwitch('enable-transparent-visuals');
+app.disableHardwareAcceleration();
 
 function createWindow() {
     // Get primary display dimensions
     const { x, y, width, height } = screen.getPrimaryDisplay().workArea;
 
+    // Prevent native window occlusion tracking on Windows by subtracting 1 pixel
+    const safeWidth = width - 1;
+    const safeHeight = height - 1;
+
     const win = new BrowserWindow({
-        width: width,
-        height: height,
+        width: safeWidth,
+        height: safeHeight,
         x: x,
         y: y,
         transparent: true,
@@ -36,7 +37,7 @@ function createWindow() {
         }
     });
 
-    win.setBounds({ x, y, width, height });
+    win.setBounds({ x, y, width: safeWidth, height: safeHeight });
 
     win.loadFile('index.html');
 
@@ -67,7 +68,10 @@ function createWindow() {
 }
 
 app.whenReady().then(() => {
-    createWindow();
+    // Delay creation to ensure transparent visuals initialize properly
+    setTimeout(() => {
+        createWindow();
+    }, 400);
 
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) {
