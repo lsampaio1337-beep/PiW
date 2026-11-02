@@ -2654,7 +2654,7 @@ export const johtoUnlocks = [
   },
   {
     "challengeName": "Extra Challenge (Roaming)",
-    "areaId": "Roaming",
+    "areaId": "Extra Challenge (Roaming)",
     "unlocks": [
       "Nebula Fissure"
     ],
