@@ -22,7 +22,7 @@ window.concludeProfTutorial = concludeProfTutorial;
 export { showProfTutorialIfNeeded };
 
 window.dismissDaycareMessage = function() {
-    state.globalStats.hasSeenDaycare = true;
+    state.stats.hasSeenDaycare = true;
     document.getElementById('daycare-first-time-overlay').style.display = 'none';
 
     // Enable buttons now that message is dismissed
@@ -1341,7 +1341,7 @@ export function switchView(viewName) {
         const trainBtn = document.getElementById('btn-daycare-train');
         if (trainBtn) {
             trainBtn.title = `Insert any Pokémon and gain +1 IV based on its current SumIV.`;
-            if (!state.globalStats.hasSeenDaycare) {
+            if (!state.stats.hasSeenDaycare) {
                 trainBtn.style.pointerEvents = 'none';
                 trainBtn.style.opacity = '0.5';
             } else {
@@ -1353,7 +1353,7 @@ export function switchView(viewName) {
         const breedBtn = document.getElementById('btn-daycare-breed');
         if (breedBtn) {
             breedBtn.title = `Insert 2 Pokémons with close Quality Value to increase it up to +0.05 (max 1.99). Requires 200 fights (400 for Shinies).`;
-            if (!state.globalStats.hasSeenDaycare) {
+            if (!state.stats.hasSeenDaycare) {
                 breedBtn.style.pointerEvents = 'none';
                 breedBtn.style.opacity = '0.5';
             } else {
@@ -2030,7 +2030,7 @@ async function init() {
                         if (pData.stats.hasSeenMultiplayerIcon !== undefined) state.globalStats.hasSeenMultiplayerIcon = pData.stats.hasSeenMultiplayerIcon;
                         if (pData.stats.hasSeenGiftIcon !== undefined) state.globalStats.hasSeenGiftIcon = pData.stats.hasSeenGiftIcon;
                         if (pData.stats.hasSeenJohtoMap !== undefined) state.globalStats.hasSeenJohtoMap = pData.stats.hasSeenJohtoMap;
-                        if (pData.stats.hasSeenDaycare !== undefined) state.globalStats.hasSeenDaycare = pData.stats.hasSeenDaycare;
+                        if (pData.stats.hasSeenDaycare !== undefined) state.stats.hasSeenDaycare = pData.stats.hasSeenDaycare;
                         if (pData.stats.hasSeenBonusCandyModal !== undefined) state.globalStats.hasSeenBonusCandyModal = pData.stats.hasSeenBonusCandyModal;
                     }
 
