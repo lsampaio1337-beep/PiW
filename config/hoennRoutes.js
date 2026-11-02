@@ -1794,7 +1794,7 @@ export const hoennRoutes = [
     ]
   },
   {
-    "name": "Route 108",
+    "name": "Slateport Docks",
     "spawns": [
       {
         "pokemonId": 72,
@@ -1810,23 +1810,6 @@ export const hoennRoutes = [
       }
     ]
   },
-  {
-    "name": "Route 125",
-    "spawns": [
-      {
-        "pokemonId": 72,
-        "minLevel": 35,
-        "maxLevel": 40,
-        "chance": 0.6
-      },
-      {
-        "pokemonId": 278,
-        "minLevel": 35,
-        "maxLevel": 40,
-        "chance": 0.4
-      }
-    ]
-  }
 ];
 
 export const hoennUnlocks = [
@@ -2010,7 +1993,7 @@ export const hoennUnlocks = [
     "challengeName": "Challenge 12",
     "areaId": "Route 107",
     "unlocks": [
-      "Route 108"
+      "Slateport Docks"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -2021,13 +2004,13 @@ export const hoennUnlocks = [
   },
   {
     "challengeName": "Challenge 13",
-    "areaId": "Route 108",
+    "areaId": "Slateport Docks",
     "unlocks": [
       "Route 109 Fishing Spot"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Route 108",
+        "route": "Slateport Docks",
         "count": 20
       }
     }
@@ -2036,7 +2019,7 @@ export const hoennUnlocks = [
     "challengeName": "Challenge 14",
     "areaId": "Route 109 Fishing Spot",
     "unlocks": [
-      "Mauville Gym"
+      "Route 110"
     ],
     "requirements": {
       "catchSpecies": [
@@ -2053,23 +2036,9 @@ export const hoennUnlocks = [
   },
   {
     "challengeName": "Challenge 15",
-    "areaId": "Mauville Gym",
-    "unlocks": [
-      "Route 110"
-    ],
-    "requirements": {
-      "earnBadge": {
-        "name": "Dynamo Badge",
-        "leader": "Wattson",
-        "badgeCount": 3
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 16",
     "areaId": "Route 110",
     "unlocks": [
-      "Route 117"
+      "Mauville Gym"
     ],
     "requirements": {
       "catchSpecies": [
@@ -2086,6 +2055,20 @@ export const hoennUnlocks = [
           "count": 1
         }
       ]
+    }
+  },
+  {
+    "challengeName": "Challenge 16",
+    "areaId": "Mauville Gym",
+    "unlocks": [
+      "Route 117"
+    ],
+    "requirements": {
+      "earnBadge": {
+        "name": "Dynamo Badge",
+        "leader": "Wattson",
+        "badgeCount": 3
+      }
     }
   },
   {
@@ -2385,7 +2368,7 @@ export const hoennUnlocks = [
     "challengeName": "Challenge 36",
     "areaId": "Route 124",
     "unlocks": [
-      "Route 125"
+      "Route 126 Underwater"
     ],
     "gift": {
       "item": "Water Stone",
@@ -2406,19 +2389,6 @@ export const hoennUnlocks = [
   },
   {
     "challengeName": "Challenge 37",
-    "areaId": "Route 125",
-    "unlocks": [
-      "Route 126 Underwater"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Route 125",
-        "count": 10
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 38",
     "areaId": "Route 126 Underwater",
     "unlocks": [
       "Sootopolis Gym"
@@ -2431,7 +2401,7 @@ export const hoennUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 39",
+    "challengeName": "Challenge 38",
     "areaId": "Sootopolis Gym",
     "unlocks": [
       "Shoal Cave"
@@ -2445,7 +2415,7 @@ export const hoennUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 40",
+    "challengeName": "Challenge 39",
     "areaId": "Shoal Cave",
     "unlocks": [
       "Sky Pillar"
@@ -2468,7 +2438,7 @@ export const hoennUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 41",
+    "challengeName": "Challenge 40",
     "areaId": "Sky Pillar",
     "unlocks": [
       "Victory Road"
@@ -2487,7 +2457,7 @@ export const hoennUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 42",
+    "challengeName": "Challenge 41",
     "areaId": "Victory Road",
     "unlocks": [
       "Hoenn Pokemon League"
@@ -2500,7 +2470,7 @@ export const hoennUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 43",
+    "challengeName": "Challenge 42",
     "areaId": "Hoenn Pokemon League",
     "unlocks": [
       "Roaming Hoenn Skies",
