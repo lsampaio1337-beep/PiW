@@ -12,19 +12,23 @@ if (process.platform === 'linux') {
 function createWindow() {
     // Get primary display dimensions
     const { x, y, width, height } = screen.getPrimaryDisplay().workArea;
-    // Subtract 1 from the height to prevent background windows (like Chrome/YouTube) from being fully occluded and freezing.
+    // Subtract 1 from dimensions to prevent background windows (like Chrome) from being fully occluded.
+    const adjustedWidth = width - 1;
     const adjustedHeight = height - 1;
 
+
     const win = new BrowserWindow({
-        width: width,
+        width: adjustedWidth,
         height: adjustedHeight,
         x: x,
         y: y,
         transparent: true,
+        opacity: 0.99, // Force Windows DWM to compose rather than occlude
         backgroundColor: '#00000000',
         frame: false,
         hasShadow: true,
         alwaysOnTop: false, // Don't keep it above other windows
+        type: 'toolbar', // Help avoid Windows DWM occlusion
         skipTaskbar: false,
         show: false,
         webPreferences: {
@@ -38,7 +42,7 @@ function createWindow() {
         }
     });
 
-    win.setBounds({ x, y, width, height: adjustedHeight });
+    win.setBounds({ x, y, width: adjustedWidth, height: adjustedHeight });
 
     win.loadFile('index.html');
 
