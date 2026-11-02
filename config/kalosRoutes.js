@@ -1,6 +1,6 @@
 export const kalosRoutes = [
   {
-    "name": "Aquacorde Town",
+    "name": "Aquacorde Outskirts",
     "spawns": [
       {
         "pokemonId": 298,
@@ -45,38 +45,38 @@ export const kalosRoutes = [
     "spawns": [
       {
         "pokemonId": 14,
-        "minLevel": 1,
-        "maxLevel": 3,
+        "minLevel": 2,
+        "maxLevel": 4,
         "chance": 0.3
       },
       {
         "pokemonId": 11,
-        "minLevel": 1,
-        "maxLevel": 3,
+        "minLevel": 2,
+        "maxLevel": 4,
         "chance": 0.25
       },
       {
         "pokemonId": 172,
-        "minLevel": 1,
-        "maxLevel": 3,
+        "minLevel": 2,
+        "maxLevel": 4,
         "chance": 0.15
       },
       {
         "pokemonId": 174,
-        "minLevel": 1,
-        "maxLevel": 3,
+        "minLevel": 2,
+        "maxLevel": 4,
         "chance": 0.15
       },
       {
         "pokemonId": 194,
-        "minLevel": 1,
-        "maxLevel": 3,
+        "minLevel": 2,
+        "maxLevel": 4,
         "chance": 0.1
       },
       {
         "pokemonId": 665,
-        "minLevel": 1,
-        "maxLevel": 3,
+        "minLevel": 2,
+        "maxLevel": 4,
         "chance": 0.05
       }
     ]
@@ -86,38 +86,38 @@ export const kalosRoutes = [
     "spawns": [
       {
         "pokemonId": 161,
-        "minLevel": 2,
-        "maxLevel": 4,
+        "minLevel": 4,
+        "maxLevel": 6,
         "chance": 0.3
       },
       {
         "pokemonId": 261,
-        "minLevel": 2,
-        "maxLevel": 4,
+        "minLevel": 4,
+        "maxLevel": 6,
         "chance": 0.25
       },
       {
         "pokemonId": 270,
-        "minLevel": 2,
-        "maxLevel": 4,
+        "minLevel": 4,
+        "maxLevel": 6,
         "chance": 0.15
       },
       {
         "pokemonId": 412,
-        "minLevel": 2,
-        "maxLevel": 4,
+        "minLevel": 4,
+        "maxLevel": 6,
         "chance": 0.15
       },
       {
         "pokemonId": 659,
-        "minLevel": 2,
-        "maxLevel": 4,
+        "minLevel": 4,
+        "maxLevel": 6,
         "chance": 0.1
       },
       {
         "pokemonId": 263,
-        "minLevel": 2,
-        "maxLevel": 4,
+        "minLevel": 4,
+        "maxLevel": 6,
         "chance": 0.05
       }
     ]
@@ -127,79 +127,79 @@ export const kalosRoutes = [
     "spawns": [
       {
         "pokemonId": 293,
-        "minLevel": 3,
-        "maxLevel": 5,
+        "minLevel": 5,
+        "maxLevel": 7,
         "chance": 0.3
       },
       {
         "pokemonId": 415,
-        "minLevel": 3,
-        "maxLevel": 5,
+        "minLevel": 5,
+        "maxLevel": 7,
         "chance": 0.25
       },
       {
         "pokemonId": 396,
-        "minLevel": 3,
-        "maxLevel": 5,
+        "minLevel": 5,
+        "maxLevel": 7,
         "chance": 0.15
       },
       {
         "pokemonId": 41,
-        "minLevel": 3,
-        "maxLevel": 5,
+        "minLevel": 5,
+        "maxLevel": 7,
         "chance": 0.15
       },
       {
         "pokemonId": 714,
-        "minLevel": 3,
-        "maxLevel": 5,
+        "minLevel": 5,
+        "maxLevel": 7,
         "chance": 0.1
       },
       {
         "pokemonId": 399,
-        "minLevel": 3,
-        "maxLevel": 5,
+        "minLevel": 5,
+        "maxLevel": 7,
         "chance": 0.05
       }
     ]
   },
   {
-    "name": "Santalune City",
+    "name": "Santalune Outskirts",
     "spawns": [
       {
         "pokemonId": 220,
-        "minLevel": 4,
-        "maxLevel": 6,
+        "minLevel": 7,
+        "maxLevel": 9,
         "chance": 0.3
       },
       {
         "pokemonId": 235,
-        "minLevel": 4,
-        "maxLevel": 6,
+        "minLevel": 7,
+        "maxLevel": 9,
         "chance": 0.25
       },
       {
         "pokemonId": 218,
-        "minLevel": 4,
-        "maxLevel": 6,
+        "minLevel": 7,
+        "maxLevel": 9,
         "chance": 0.15
       },
       {
         "pokemonId": 187,
-        "minLevel": 4,
-        "maxLevel": 6,
+        "minLevel": 7,
+        "maxLevel": 9,
         "chance": 0.15
       },
       {
         "pokemonId": 167,
-        "minLevel": 4,
-        "maxLevel": 6,
+        "minLevel": 7,
+        "maxLevel": 9,
         "chance": 0.1
       },
       {
         "pokemonId": 16,
-        "minLevel": 4,
-        "maxLevel": 6,
+        "minLevel": 7,
+        "maxLevel": 9,
         "chance": 0.05
       }
     ]
@@ -209,124 +209,83 @@ export const kalosRoutes = [
     "spawns": []
   },
   {
-    "name": "Route 22",
-    "spawns": [
-      {
-        "pokemonId": 50,
-        "minLevel": 6,
-        "maxLevel": 8,
-        "chance": 0.3
-      },
-      {
-        "pokemonId": 165,
-        "minLevel": 6,
-        "maxLevel": 8,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 290,
-        "minLevel": 6,
-        "maxLevel": 8,
-        "chance": 0.15
-      },
-      {
-        "pokemonId": 283,
-        "minLevel": 6,
-        "maxLevel": 8,
-        "chance": 0.15
-      },
-      {
-        "pokemonId": 276,
-        "minLevel": 6,
-        "maxLevel": 8,
-        "chance": 0.1
-      },
-      {
-        "pokemonId": 278,
-        "minLevel": 6,
-        "maxLevel": 8,
-        "chance": 0.05
-      }
-    ]
-  },
-  {
     "name": "Route 4",
     "spawns": [
       {
         "pokemonId": 607,
-        "minLevel": 7,
-        "maxLevel": 9,
+        "minLevel": 10,
+        "maxLevel": 12,
         "chance": 0.3
       },
       {
         "pokemonId": 281,
-        "minLevel": 7,
-        "maxLevel": 9,
+        "minLevel": 10,
+        "maxLevel": 12,
         "chance": 0.25
       },
       {
         "pokemonId": 661,
-        "minLevel": 7,
-        "maxLevel": 9,
+        "minLevel": 10,
+        "maxLevel": 12,
         "chance": 0.15
       },
       {
         "pokemonId": 307,
-        "minLevel": 7,
-        "maxLevel": 9,
+        "minLevel": 10,
+        "maxLevel": 12,
         "chance": 0.15
       },
       {
         "pokemonId": 406,
-        "minLevel": 7,
-        "maxLevel": 9,
+        "minLevel": 10,
+        "maxLevel": 12,
         "chance": 0.1
       },
       {
         "pokemonId": 179,
-        "minLevel": 7,
-        "maxLevel": 9,
+        "minLevel": 10,
+        "maxLevel": 12,
         "chance": 0.05
       }
     ]
   },
   {
-    "name": "Lumiose City (South)",
+    "name": "Lumiose South Boulevard",
     "spawns": [
       {
         "pokemonId": 524,
-        "minLevel": 8,
-        "maxLevel": 10,
+        "minLevel": 11,
+        "maxLevel": 13,
         "chance": 0.3
       },
       {
         "pokemonId": 509,
-        "minLevel": 8,
-        "maxLevel": 10,
+        "minLevel": 11,
+        "maxLevel": 13,
         "chance": 0.25
       },
       {
         "pokemonId": 433,
-        "minLevel": 8,
-        "maxLevel": 10,
+        "minLevel": 11,
+        "maxLevel": 13,
         "chance": 0.15
       },
       {
         "pokemonId": 447,
-        "minLevel": 8,
-        "maxLevel": 10,
+        "minLevel": 11,
+        "maxLevel": 13,
         "chance": 0.15
       },
       {
         "pokemonId": 339,
-        "minLevel": 8,
-        "maxLevel": 10,
+        "minLevel": 11,
+        "maxLevel": 13,
         "chance": 0.1
       },
       {
         "pokemonId": 23,
-        "minLevel": 8,
-        "maxLevel": 10,
+        "minLevel": 11,
+        "maxLevel": 13,
         "chance": 0.05
       }
     ]
@@ -336,120 +295,79 @@ export const kalosRoutes = [
     "spawns": [
       {
         "pokemonId": 686,
-        "minLevel": 9,
-        "maxLevel": 11,
+        "minLevel": 13,
+        "maxLevel": 16,
         "chance": 0.3
       },
       {
         "pokemonId": 132,
-        "minLevel": 9,
-        "maxLevel": 11,
+        "minLevel": 13,
+        "maxLevel": 16,
         "chance": 0.25
       },
       {
         "pokemonId": 694,
-        "minLevel": 9,
-        "maxLevel": 11,
+        "minLevel": 13,
+        "maxLevel": 16,
         "chance": 0.15
       },
       {
         "pokemonId": 577,
-        "minLevel": 9,
-        "maxLevel": 11,
+        "minLevel": 13,
+        "maxLevel": 16,
         "chance": 0.15
       },
       {
         "pokemonId": 328,
-        "minLevel": 9,
-        "maxLevel": 11,
+        "minLevel": 13,
+        "maxLevel": 16,
         "chance": 0.1
       },
       {
         "pokemonId": 438,
-        "minLevel": 9,
-        "maxLevel": 11,
+        "minLevel": 13,
+        "maxLevel": 16,
         "chance": 0.05
       }
     ]
   },
   {
-    "name": "Camphrier Town",
+    "name": "Camphrier Berry Fields",
     "spawns": [
       {
         "pokemonId": 574,
-        "minLevel": 10,
-        "maxLevel": 12,
+        "minLevel": 14,
+        "maxLevel": 17,
         "chance": 0.3
       },
       {
         "pokemonId": 551,
-        "minLevel": 10,
-        "maxLevel": 12,
+        "minLevel": 14,
+        "maxLevel": 17,
         "chance": 0.25
       },
       {
         "pokemonId": 590,
-        "minLevel": 10,
-        "maxLevel": 12,
+        "minLevel": 14,
+        "maxLevel": 17,
         "chance": 0.15
       },
       {
         "pokemonId": 309,
-        "minLevel": 10,
-        "maxLevel": 12,
+        "minLevel": 14,
+        "maxLevel": 17,
         "chance": 0.15
       },
       {
         "pokemonId": 116,
-        "minLevel": 10,
-        "maxLevel": 12,
+        "minLevel": 14,
+        "maxLevel": 17,
         "chance": 0.1
       },
       {
         "pokemonId": 353,
-        "minLevel": 10,
-        "maxLevel": 12,
-        "chance": 0.05
-      }
-    ]
-  },
-  {
-    "name": "Parfum Palace",
-    "spawns": [
-      {
-        "pokemonId": 443,
-        "minLevel": 11,
-        "maxLevel": 13,
-        "chance": 0.3
-      },
-      {
-        "pokemonId": 122,
-        "minLevel": 11,
-        "maxLevel": 13,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 209,
-        "minLevel": 11,
-        "maxLevel": 13,
-        "chance": 0.15
-      },
-      {
-        "pokemonId": 27,
-        "minLevel": 11,
-        "maxLevel": 13,
-        "chance": 0.15
-      },
-      {
-        "pokemonId": 29,
-        "minLevel": 11,
-        "maxLevel": 13,
-        "chance": 0.1
-      },
-      {
-        "pokemonId": 246,
-        "minLevel": 11,
-        "maxLevel": 13,
+        "minLevel": 14,
+        "maxLevel": 17,
         "chance": 0.05
       }
     ]
@@ -459,38 +377,38 @@ export const kalosRoutes = [
     "spawns": [
       {
         "pokemonId": 60,
-        "minLevel": 12,
-        "maxLevel": 14,
+        "minLevel": 16,
+        "maxLevel": 19,
         "chance": 0.3
       },
       {
         "pokemonId": 32,
-        "minLevel": 12,
-        "maxLevel": 14,
+        "minLevel": 16,
+        "maxLevel": 19,
         "chance": 0.25
       },
       {
         "pokemonId": 83,
-        "minLevel": 12,
-        "maxLevel": 14,
+        "minLevel": 16,
+        "maxLevel": 19,
         "chance": 0.15
       },
       {
         "pokemonId": 69,
-        "minLevel": 12,
-        "maxLevel": 14,
+        "minLevel": 16,
+        "maxLevel": 19,
         "chance": 0.15
       },
       {
         "pokemonId": 669,
-        "minLevel": 12,
-        "maxLevel": 14,
+        "minLevel": 16,
+        "maxLevel": 19,
         "chance": 0.1
       },
       {
         "pokemonId": 704,
-        "minLevel": 12,
-        "maxLevel": 14,
+        "minLevel": 16,
+        "maxLevel": 19,
         "chance": 0.05
       }
     ]
@@ -500,38 +418,38 @@ export const kalosRoutes = [
     "spawns": [
       {
         "pokemonId": 147,
-        "minLevel": 13,
-        "maxLevel": 15,
+        "minLevel": 17,
+        "maxLevel": 20,
         "chance": 0.3
       },
       {
         "pokemonId": 223,
-        "minLevel": 13,
-        "maxLevel": 15,
+        "minLevel": 17,
+        "maxLevel": 20,
         "chance": 0.25
       },
       {
         "pokemonId": 439,
-        "minLevel": 13,
-        "maxLevel": 15,
+        "minLevel": 17,
+        "maxLevel": 20,
         "chance": 0.15
       },
       {
         "pokemonId": 453,
-        "minLevel": 13,
-        "maxLevel": 15,
+        "minLevel": 17,
+        "maxLevel": 20,
         "chance": 0.15
       },
       {
         "pokemonId": 633,
-        "minLevel": 13,
-        "maxLevel": 15,
+        "minLevel": 17,
+        "maxLevel": 20,
         "chance": 0.1
       },
       {
         "pokemonId": 74,
-        "minLevel": 13,
-        "maxLevel": 15,
+        "minLevel": 17,
+        "maxLevel": 20,
         "chance": 0.05
       }
     ]
@@ -541,120 +459,38 @@ export const kalosRoutes = [
     "spawns": [
       {
         "pokemonId": 371,
-        "minLevel": 14,
-        "maxLevel": 16,
+        "minLevel": 19,
+        "maxLevel": 22,
         "chance": 0.3
       },
       {
         "pokemonId": 316,
-        "minLevel": 14,
-        "maxLevel": 16,
+        "minLevel": 19,
+        "maxLevel": 22,
         "chance": 0.25
       },
       {
         "pokemonId": 622,
-        "minLevel": 14,
-        "maxLevel": 16,
+        "minLevel": 19,
+        "maxLevel": 22,
         "chance": 0.15
       },
       {
         "pokemonId": 712,
-        "minLevel": 14,
-        "maxLevel": 16,
+        "minLevel": 19,
+        "maxLevel": 22,
         "chance": 0.15
       },
       {
         "pokemonId": 238,
-        "minLevel": 14,
-        "maxLevel": 16,
+        "minLevel": 19,
+        "maxLevel": 22,
         "chance": 0.1
       },
       {
         "pokemonId": 613,
-        "minLevel": 14,
-        "maxLevel": 16,
-        "chance": 0.05
-      }
-    ]
-  },
-  {
-    "name": "Ambrette Town",
-    "spawns": [
-      {
-        "pokemonId": 616,
-        "minLevel": 15,
-        "maxLevel": 17,
-        "chance": 0.3
-      },
-      {
-        "pokemonId": 597,
-        "minLevel": 15,
-        "maxLevel": 17,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 582,
-        "minLevel": 15,
-        "maxLevel": 17,
-        "chance": 0.15
-      },
-      {
-        "pokemonId": 532,
-        "minLevel": 15,
-        "maxLevel": 17,
-        "chance": 0.15
-      },
-      {
-        "pokemonId": 580,
-        "minLevel": 15,
-        "maxLevel": 17,
-        "chance": 0.1
-      },
-      {
-        "pokemonId": 66,
-        "minLevel": 15,
-        "maxLevel": 17,
-        "chance": 0.05
-      }
-    ]
-  },
-  {
-    "name": "Ambrette Town (Fishing)",
-    "spawns": [
-      {
-        "pokemonId": 90,
-        "minLevel": 17,
-        "maxLevel": 19,
-        "chance": 0.3
-      },
-      {
-        "pokemonId": 318,
-        "minLevel": 17,
-        "maxLevel": 19,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 688,
-        "minLevel": 17,
-        "maxLevel": 19,
-        "chance": 0.15
-      },
-      {
-        "pokemonId": 341,
-        "minLevel": 17,
-        "maxLevel": 19,
-        "chance": 0.15
-      },
-      {
-        "pokemonId": 708,
-        "minLevel": 17,
-        "maxLevel": 19,
-        "chance": 0.1
-      },
-      {
-        "pokemonId": 63,
-        "minLevel": 17,
-        "maxLevel": 19,
+        "minLevel": 19,
+        "maxLevel": 22,
         "chance": 0.05
       }
     ]
@@ -664,38 +500,79 @@ export const kalosRoutes = [
     "spawns": [
       {
         "pokemonId": 84,
-        "minLevel": 18,
-        "maxLevel": 20,
+        "minLevel": 20,
+        "maxLevel": 23,
         "chance": 0.3
       },
       {
         "pokemonId": 92,
-        "minLevel": 18,
-        "maxLevel": 20,
+        "minLevel": 20,
+        "maxLevel": 23,
         "chance": 0.25
       },
       {
         "pokemonId": 333,
-        "minLevel": 18,
-        "maxLevel": 20,
+        "minLevel": 20,
+        "maxLevel": 23,
         "chance": 0.15
       },
       {
         "pokemonId": 79,
-        "minLevel": 18,
-        "maxLevel": 20,
+        "minLevel": 20,
+        "maxLevel": 23,
         "chance": 0.15
       },
       {
         "pokemonId": 588,
-        "minLevel": 18,
-        "maxLevel": 20,
+        "minLevel": 20,
+        "maxLevel": 23,
         "chance": 0.1
       },
       {
         "pokemonId": 513,
-        "minLevel": 18,
-        "maxLevel": 20,
+        "minLevel": 20,
+        "maxLevel": 23,
+        "chance": 0.05
+      }
+    ]
+  },
+  {
+    "name": "Ambrette Cliffs",
+    "spawns": [
+      {
+        "pokemonId": 616,
+        "minLevel": 22,
+        "maxLevel": 25,
+        "chance": 0.3
+      },
+      {
+        "pokemonId": 597,
+        "minLevel": 22,
+        "maxLevel": 25,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 582,
+        "minLevel": 22,
+        "maxLevel": 25,
+        "chance": 0.15
+      },
+      {
+        "pokemonId": 532,
+        "minLevel": 22,
+        "maxLevel": 25,
+        "chance": 0.15
+      },
+      {
+        "pokemonId": 580,
+        "minLevel": 22,
+        "maxLevel": 25,
+        "chance": 0.1
+      },
+      {
+        "pokemonId": 66,
+        "minLevel": 22,
+        "maxLevel": 25,
         "chance": 0.05
       }
     ]
@@ -705,38 +582,38 @@ export const kalosRoutes = [
     "spawns": [
       {
         "pokemonId": 511,
-        "minLevel": 19,
-        "maxLevel": 21,
+        "minLevel": 23,
+        "maxLevel": 26,
         "chance": 0.3
       },
       {
         "pokemonId": 515,
-        "minLevel": 19,
-        "maxLevel": 21,
+        "minLevel": 23,
+        "maxLevel": 26,
         "chance": 0.25
       },
       {
         "pokemonId": 104,
-        "minLevel": 19,
-        "maxLevel": 21,
+        "minLevel": 23,
+        "maxLevel": 26,
         "chance": 0.15
       },
       {
         "pokemonId": 118,
-        "minLevel": 19,
-        "maxLevel": 21,
+        "minLevel": 23,
+        "maxLevel": 26,
         "chance": 0.15
       },
       {
         "pokemonId": 54,
-        "minLevel": 19,
-        "maxLevel": 21,
+        "minLevel": 23,
+        "maxLevel": 26,
         "chance": 0.1
       },
       {
         "pokemonId": 690,
-        "minLevel": 19,
-        "maxLevel": 21,
+        "minLevel": 23,
+        "maxLevel": 26,
         "chance": 0.05
       }
     ]
@@ -746,79 +623,79 @@ export const kalosRoutes = [
     "spawns": [
       {
         "pokemonId": 610,
-        "minLevel": 20,
-        "maxLevel": 22,
+        "minLevel": 25,
+        "maxLevel": 28,
         "chance": 0.3
       },
       {
         "pokemonId": 43,
-        "minLevel": 20,
-        "maxLevel": 22,
+        "minLevel": 25,
+        "maxLevel": 28,
         "chance": 0.25
       },
       {
         "pokemonId": 527,
-        "minLevel": 20,
-        "maxLevel": 22,
+        "minLevel": 25,
+        "maxLevel": 28,
         "chance": 0.15
       },
       {
         "pokemonId": 133,
-        "minLevel": 20,
-        "maxLevel": 22,
+        "minLevel": 25,
+        "maxLevel": 28,
         "chance": 0.15
       },
       {
         "pokemonId": 679,
-        "minLevel": 20,
-        "maxLevel": 22,
+        "minLevel": 25,
+        "maxLevel": 28,
         "chance": 0.1
       },
       {
         "pokemonId": 81,
-        "minLevel": 20,
-        "maxLevel": 22,
+        "minLevel": 25,
+        "maxLevel": 28,
         "chance": 0.05
       }
     ]
   },
   {
-    "name": "Cyllage City",
+    "name": "Cyllage Seaside Slope",
     "spawns": [
       {
         "pokemonId": 102,
-        "minLevel": 21,
-        "maxLevel": 23,
+        "minLevel": 26,
+        "maxLevel": 29,
         "chance": 0.3
       },
       {
         "pokemonId": 557,
-        "minLevel": 21,
-        "maxLevel": 23,
+        "minLevel": 26,
+        "maxLevel": 29,
         "chance": 0.25
       },
       {
         "pokemonId": 568,
-        "minLevel": 21,
-        "maxLevel": 23,
+        "minLevel": 26,
+        "maxLevel": 29,
         "chance": 0.15
       },
       {
         "pokemonId": 434,
-        "minLevel": 21,
-        "maxLevel": 23,
+        "minLevel": 26,
+        "maxLevel": 29,
         "chance": 0.15
       },
       {
         "pokemonId": 170,
-        "minLevel": 21,
-        "maxLevel": 23,
+        "minLevel": 26,
+        "maxLevel": 29,
         "chance": 0.1
       },
       {
         "pokemonId": 228,
-        "minLevel": 21,
-        "maxLevel": 23,
+        "minLevel": 26,
+        "maxLevel": 29,
         "chance": 0.05
       }
     ]
@@ -832,79 +709,79 @@ export const kalosRoutes = [
     "spawns": [
       {
         "pokemonId": 710,
-        "minLevel": 23,
-        "maxLevel": 25,
+        "minLevel": 29,
+        "maxLevel": 32,
         "chance": 0.3
       },
       {
         "pokemonId": 72,
-        "minLevel": 23,
-        "maxLevel": 25,
+        "minLevel": 29,
+        "maxLevel": 32,
         "chance": 0.25
       },
       {
         "pokemonId": 397,
-        "minLevel": 23,
-        "maxLevel": 25,
+        "minLevel": 29,
+        "maxLevel": 32,
         "chance": 0.15
       },
       {
         "pokemonId": 329,
-        "minLevel": 23,
-        "maxLevel": 25,
+        "minLevel": 29,
+        "maxLevel": 32,
         "chance": 0.15
       },
       {
         "pokemonId": 271,
-        "minLevel": 23,
-        "maxLevel": 25,
+        "minLevel": 29,
+        "maxLevel": 32,
         "chance": 0.1
       },
       {
         "pokemonId": 624,
-        "minLevel": 23,
-        "maxLevel": 25,
+        "minLevel": 29,
+        "maxLevel": 32,
         "chance": 0.05
       }
     ]
   },
   {
-    "name": "Geosenge Town",
+    "name": "Geosenge Megalith Ruins",
     "spawns": [
       {
         "pokemonId": 188,
-        "minLevel": 24,
-        "maxLevel": 26,
+        "minLevel": 31,
+        "maxLevel": 34,
         "chance": 0.3
       },
       {
         "pokemonId": 120,
-        "minLevel": 24,
-        "maxLevel": 26,
+        "minLevel": 31,
+        "maxLevel": 34,
         "chance": 0.25
       },
       {
         "pokemonId": 682,
-        "minLevel": 24,
-        "maxLevel": 26,
+        "minLevel": 31,
+        "maxLevel": 34,
         "chance": 0.15
       },
       {
         "pokemonId": 684,
-        "minLevel": 24,
-        "maxLevel": 26,
+        "minLevel": 31,
+        "maxLevel": 34,
         "chance": 0.15
       },
       {
         "pokemonId": 458,
-        "minLevel": 24,
-        "maxLevel": 26,
+        "minLevel": 31,
+        "maxLevel": 34,
         "chance": 0.1
       },
       {
         "pokemonId": 111,
-        "minLevel": 24,
-        "maxLevel": 26,
+        "minLevel": 31,
+        "maxLevel": 34,
         "chance": 0.05
       }
     ]
@@ -914,79 +791,120 @@ export const kalosRoutes = [
     "spawns": [
       {
         "pokemonId": 366,
-        "minLevel": 25,
-        "maxLevel": 27,
+        "minLevel": 32,
+        "maxLevel": 35,
         "chance": 0.3
       },
       {
         "pokemonId": 559,
-        "minLevel": 25,
-        "maxLevel": 27,
+        "minLevel": 32,
+        "maxLevel": 35,
         "chance": 0.25
       },
       {
         "pokemonId": 425,
-        "minLevel": 25,
-        "maxLevel": 27,
+        "minLevel": 32,
+        "maxLevel": 35,
         "chance": 0.15
       },
       {
         "pokemonId": 674,
-        "minLevel": 25,
-        "maxLevel": 27,
+        "minLevel": 32,
+        "maxLevel": 35,
         "chance": 0.15
       },
       {
         "pokemonId": 17,
-        "minLevel": 25,
-        "maxLevel": 27,
+        "minLevel": 32,
+        "maxLevel": 35,
         "chance": 0.1
       },
       {
         "pokemonId": 619,
-        "minLevel": 25,
-        "maxLevel": 27,
+        "minLevel": 32,
+        "maxLevel": 35,
         "chance": 0.05
       }
     ]
   },
   {
-    "name": "Shalour City",
+    "name": "Reflection Cave",
+    "spawns": [
+      {
+        "pokemonId": 672,
+        "minLevel": 34,
+        "maxLevel": 37,
+        "chance": 0.3
+      },
+      {
+        "pokemonId": 552,
+        "minLevel": 34,
+        "maxLevel": 37,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 677,
+        "minLevel": 34,
+        "maxLevel": 37,
+        "chance": 0.15
+      },
+      {
+        "pokemonId": 544,
+        "minLevel": 34,
+        "maxLevel": 37,
+        "chance": 0.15
+      },
+      {
+        "pokemonId": 294,
+        "minLevel": 34,
+        "maxLevel": 37,
+        "chance": 0.1
+      },
+      {
+        "pokemonId": 327,
+        "minLevel": 34,
+        "maxLevel": 37,
+        "chance": 0.05
+      }
+    ]
+  },
+  {
+    "name": "Shalour Beachfront",
     "spawns": [
       {
         "pokemonId": 696,
-        "minLevel": 26,
-        "maxLevel": 28,
+        "minLevel": 35,
+        "maxLevel": 38,
         "chance": 0.3
       },
       {
         "pokemonId": 698,
-        "minLevel": 26,
-        "maxLevel": 28,
+        "minLevel": 35,
+        "maxLevel": 38,
         "chance": 0.25
       },
       {
         "pokemonId": 33,
-        "minLevel": 26,
-        "maxLevel": 28,
+        "minLevel": 35,
+        "maxLevel": 38,
         "chance": 0.15
       },
       {
         "pokemonId": 30,
-        "minLevel": 26,
-        "maxLevel": 28,
+        "minLevel": 35,
+        "maxLevel": 38,
         "chance": 0.15
       },
       {
         "pokemonId": 180,
-        "minLevel": 26,
-        "maxLevel": 28,
+        "minLevel": 35,
+        "maxLevel": 38,
         "chance": 0.1
       },
       {
         "pokemonId": 667,
-        "minLevel": 26,
-        "maxLevel": 28,
+        "minLevel": 35,
+        "maxLevel": 38,
         "chance": 0.05
       }
     ]
@@ -1000,114 +918,184 @@ export const kalosRoutes = [
     "spawns": [
       {
         "pokemonId": 75,
-        "minLevel": 28,
-        "maxLevel": 30,
+        "minLevel": 38,
+        "maxLevel": 41,
         "chance": 0.3
       },
       {
         "pokemonId": 575,
-        "minLevel": 28,
-        "maxLevel": 30,
+        "minLevel": 38,
+        "maxLevel": 41,
         "chance": 0.25
       },
       {
         "pokemonId": 446,
-        "minLevel": 28,
-        "maxLevel": 30,
+        "minLevel": 38,
+        "maxLevel": 41,
         "chance": 0.15
       },
       {
         "pokemonId": 166,
-        "minLevel": 28,
-        "maxLevel": 30,
+        "minLevel": 38,
+        "maxLevel": 41,
         "chance": 0.15
       },
       {
         "pokemonId": 15,
-        "minLevel": 28,
-        "maxLevel": 30,
+        "minLevel": 38,
+        "maxLevel": 41,
         "chance": 0.1
       },
       {
         "pokemonId": 44,
-        "minLevel": 28,
-        "maxLevel": 30,
+        "minLevel": 38,
+        "maxLevel": 41,
         "chance": 0.05
       }
     ]
   },
   {
-    "name": "Azure Bay",
+    "name": "Azure Deep",
     "spawns": [
       {
         "pokemonId": 12,
-        "minLevel": 29,
-        "maxLevel": 32,
+        "minLevel": 40,
+        "maxLevel": 44,
         "chance": 0.3
       },
       {
         "pokemonId": 583,
-        "minLevel": 29,
-        "maxLevel": 32,
+        "minLevel": 40,
+        "maxLevel": 44,
         "chance": 0.25
       },
       {
         "pokemonId": 64,
-        "minLevel": 29,
-        "maxLevel": 32,
+        "minLevel": 40,
+        "maxLevel": 44,
         "chance": 0.15
       },
       {
         "pokemonId": 320,
-        "minLevel": 29,
-        "maxLevel": 32,
+        "minLevel": 40,
+        "maxLevel": 44,
         "chance": 0.15
       },
       {
         "pokemonId": 168,
-        "minLevel": 29,
-        "maxLevel": 32,
+        "minLevel": 40,
+        "maxLevel": 44,
         "chance": 0.1
       },
       {
         "pokemonId": 417,
-        "minLevel": 29,
-        "maxLevel": 32,
+        "minLevel": 40,
+        "maxLevel": 44,
         "chance": 0.05
       }
     ]
   },
   {
-    "name": "Azure Bay (Fishing)",
+    "name": "Azure Bay Isles",
     "spawns": [
       {
         "pokemonId": 311,
-        "minLevel": 30,
-        "maxLevel": 33,
+        "minLevel": 42,
+        "maxLevel": 46,
         "chance": 0.3
       },
       {
         "pokemonId": 67,
-        "minLevel": 30,
-        "maxLevel": 33,
+        "minLevel": 42,
+        "maxLevel": 46,
         "chance": 0.25
       },
       {
         "pokemonId": 533,
-        "minLevel": 30,
-        "maxLevel": 33,
+        "minLevel": 42,
+        "maxLevel": 46,
         "chance": 0.2
       },
       {
         "pokemonId": 312,
-        "minLevel": 30,
-        "maxLevel": 33,
+        "minLevel": 42,
+        "maxLevel": 46,
         "chance": 0.15
       },
       {
         "pokemonId": 198,
-        "minLevel": 30,
-        "maxLevel": 33,
+        "minLevel": 42,
+        "maxLevel": 46,
+        "chance": 0.1
+      }
+    ]
+  },
+  {
+    "name": "Coumarine Seaside Hill",
+    "spawns": [
+      {
+        "pokemonId": 202,
+        "minLevel": 43,
+        "maxLevel": 47,
+        "chance": 0.3
+      },
+      {
+        "pokemonId": 93,
+        "minLevel": 43,
+        "maxLevel": 47,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 611,
+        "minLevel": 43,
+        "maxLevel": 47,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 247,
+        "minLevel": 43,
+        "maxLevel": 47,
+        "chance": 0.15
+      },
+      {
+        "pokemonId": 222,
+        "minLevel": 43,
+        "maxLevel": 47,
+        "chance": 0.1
+      }
+    ]
+  },
+  {
+    "name": "Coumarine Docks",
+    "spawns": [
+      {
+        "pokemonId": 206,
+        "minLevel": 45,
+        "maxLevel": 49,
+        "chance": 0.3
+      },
+      {
+        "pokemonId": 264,
+        "minLevel": 45,
+        "maxLevel": 49,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 372,
+        "minLevel": 45,
+        "maxLevel": 49,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 148,
+        "minLevel": 45,
+        "maxLevel": 49,
+        "chance": 0.15
+      },
+      {
+        "pokemonId": 184,
+        "minLevel": 45,
+        "maxLevel": 49,
         "chance": 0.1
       }
     ]
@@ -1117,106 +1105,71 @@ export const kalosRoutes = [
     "spawns": []
   },
   {
-    "name": "Coumarine City (Fishing)",
-    "spawns": [
-      {
-        "pokemonId": 206,
-        "minLevel": 33,
-        "maxLevel": 35,
-        "chance": 0.3
-      },
-      {
-        "pokemonId": 264,
-        "minLevel": 33,
-        "maxLevel": 35,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 372,
-        "minLevel": 33,
-        "maxLevel": 35,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 148,
-        "minLevel": 33,
-        "maxLevel": 35,
-        "chance": 0.15
-      },
-      {
-        "pokemonId": 184,
-        "minLevel": 33,
-        "maxLevel": 35,
-        "chance": 0.1
-      }
-    ]
-  },
-  {
     "name": "Route 13",
     "spawns": [
       {
         "pokemonId": 413,
-        "minLevel": 34,
-        "maxLevel": 36,
+        "minLevel": 48,
+        "maxLevel": 52,
         "chance": 0.3
       },
       {
         "pokemonId": 414,
-        "minLevel": 34,
-        "maxLevel": 36,
+        "minLevel": 48,
+        "maxLevel": 52,
         "chance": 0.25
       },
       {
         "pokemonId": 51,
-        "minLevel": 34,
-        "maxLevel": 36,
+        "minLevel": 48,
+        "maxLevel": 52,
         "chance": 0.2
       },
       {
         "pokemonId": 105,
-        "minLevel": 34,
-        "maxLevel": 36,
+        "minLevel": 48,
+        "maxLevel": 52,
         "chance": 0.15
       },
       {
         "pokemonId": 528,
-        "minLevel": 34,
-        "maxLevel": 36,
+        "minLevel": 48,
+        "maxLevel": 52,
         "chance": 0.1
       }
     ]
   },
   {
-    "name": "Lumiose City (North)",
+    "name": "Lumiose North Boulevard",
     "spawns": [
       {
         "pokemonId": 587,
-        "minLevel": 35,
-        "maxLevel": 37,
+        "minLevel": 49,
+        "maxLevel": 53,
         "chance": 0.3
       },
       {
         "pokemonId": 305,
-        "minLevel": 35,
-        "maxLevel": 37,
+        "minLevel": 49,
+        "maxLevel": 53,
         "chance": 0.25
       },
       {
         "pokemonId": 313,
-        "minLevel": 35,
-        "maxLevel": 37,
+        "minLevel": 49,
+        "maxLevel": 53,
         "chance": 0.2
       },
       {
         "pokemonId": 219,
-        "minLevel": 35,
-        "maxLevel": 37,
+        "minLevel": 49,
+        "maxLevel": 53,
         "chance": 0.15
       },
       {
         "pokemonId": 215,
-        "minLevel": 35,
-        "maxLevel": 37,
+        "minLevel": 49,
+        "maxLevel": 53,
         "chance": 0.1
       }
     ]
@@ -1230,67 +1183,67 @@ export const kalosRoutes = [
     "spawns": [
       {
         "pokemonId": 117,
-        "minLevel": 37,
-        "maxLevel": 40,
+        "minLevel": 52,
+        "maxLevel": 57,
         "chance": 0.3
       },
       {
         "pokemonId": 479,
-        "minLevel": 37,
-        "maxLevel": 40,
+        "minLevel": 52,
+        "maxLevel": 57,
         "chance": 0.25
       },
       {
         "pokemonId": 352,
-        "minLevel": 37,
-        "maxLevel": 40,
+        "minLevel": 52,
+        "maxLevel": 57,
         "chance": 0.2
       },
       {
         "pokemonId": 211,
-        "minLevel": 37,
-        "maxLevel": 40,
+        "minLevel": 52,
+        "maxLevel": 57,
         "chance": 0.15
       },
       {
         "pokemonId": 531,
-        "minLevel": 37,
-        "maxLevel": 40,
+        "minLevel": 52,
+        "maxLevel": 57,
         "chance": 0.1
       }
     ]
   },
   {
-    "name": "Laverre City",
+    "name": "Laverre Mushroom Woods",
     "spawns": [
       {
         "pokemonId": 510,
-        "minLevel": 38,
-        "maxLevel": 41,
+        "minLevel": 54,
+        "maxLevel": 59,
         "chance": 0.3
       },
       {
         "pokemonId": 680,
-        "minLevel": 38,
-        "maxLevel": 41,
+        "minLevel": 54,
+        "maxLevel": 59,
         "chance": 0.25
       },
       {
         "pokemonId": 28,
-        "minLevel": 38,
-        "maxLevel": 41,
+        "minLevel": 54,
+        "maxLevel": 59,
         "chance": 0.2
       },
       {
         "pokemonId": 210,
-        "minLevel": 38,
-        "maxLevel": 41,
+        "minLevel": 54,
+        "maxLevel": 59,
         "chance": 0.15
       },
       {
         "pokemonId": 221,
-        "minLevel": 38,
-        "maxLevel": 41,
+        "minLevel": 54,
+        "maxLevel": 59,
         "chance": 0.1
       }
     ]
@@ -1304,137 +1257,67 @@ export const kalosRoutes = [
     "spawns": [
       {
         "pokemonId": 124,
-        "minLevel": 40,
-        "maxLevel": 43,
+        "minLevel": 57,
+        "maxLevel": 62,
         "chance": 0.3
       },
       {
         "pokemonId": 358,
-        "minLevel": 40,
-        "maxLevel": 43,
+        "minLevel": 57,
+        "maxLevel": 62,
         "chance": 0.25
       },
       {
         "pokemonId": 277,
-        "minLevel": 40,
-        "maxLevel": 43,
+        "minLevel": 57,
+        "maxLevel": 62,
         "chance": 0.2
       },
       {
         "pokemonId": 42,
-        "minLevel": 40,
-        "maxLevel": 43,
+        "minLevel": 57,
+        "maxLevel": 62,
         "chance": 0.15
       },
       {
         "pokemonId": 354,
-        "minLevel": 40,
-        "maxLevel": 43,
+        "minLevel": 57,
+        "maxLevel": 62,
         "chance": 0.1
       }
     ]
   },
   {
-    "name": "Lost Hotel",
-    "spawns": [
-      {
-        "pokemonId": 291,
-        "minLevel": 41,
-        "maxLevel": 44,
-        "chance": 0.3
-      },
-      {
-        "pokemonId": 335,
-        "minLevel": 41,
-        "maxLevel": 44,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 336,
-        "minLevel": 41,
-        "maxLevel": 44,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 319,
-        "minLevel": 41,
-        "maxLevel": 44,
-        "chance": 0.15
-      },
-      {
-        "pokemonId": 550,
-        "minLevel": 41,
-        "maxLevel": 44,
-        "chance": 0.1
-      }
-    ]
-  },
-  {
-    "name": "Dendemille Town",
+    "name": "Dendemille Windmill Farm",
     "spawns": [
       {
         "pokemonId": 337,
-        "minLevel": 42,
-        "maxLevel": 45,
+        "minLevel": 58,
+        "maxLevel": 63,
         "chance": 0.3
       },
       {
         "pokemonId": 171,
-        "minLevel": 42,
-        "maxLevel": 45,
+        "minLevel": 58,
+        "maxLevel": 63,
         "chance": 0.25
       },
       {
         "pokemonId": 189,
-        "minLevel": 42,
-        "maxLevel": 45,
+        "minLevel": 58,
+        "maxLevel": 63,
         "chance": 0.2
       },
       {
         "pokemonId": 338,
-        "minLevel": 42,
-        "maxLevel": 45,
+        "minLevel": 58,
+        "maxLevel": 63,
         "chance": 0.15
       },
       {
         "pokemonId": 683,
-        "minLevel": 42,
-        "maxLevel": 45,
-        "chance": 0.1
-      }
-    ]
-  },
-  {
-    "name": "Route 16",
-    "spawns": [
-      {
-        "pokemonId": 538,
-        "minLevel": 43,
-        "maxLevel": 47,
-        "chance": 0.3
-      },
-      {
-        "pokemonId": 82,
-        "minLevel": 43,
-        "maxLevel": 47,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 227,
-        "minLevel": 43,
-        "maxLevel": 47,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 539,
-        "minLevel": 43,
-        "maxLevel": 47,
-        "chance": 0.15
-      },
-      {
-        "pokemonId": 359,
-        "minLevel": 43,
-        "maxLevel": 47,
+        "minLevel": 58,
+        "maxLevel": 63,
         "chance": 0.1
       }
     ]
@@ -1444,67 +1327,67 @@ export const kalosRoutes = [
     "spawns": [
       {
         "pokemonId": 317,
-        "minLevel": 44,
-        "maxLevel": 48,
+        "minLevel": 60,
+        "maxLevel": 66,
         "chance": 0.3
       },
       {
         "pokemonId": 342,
-        "minLevel": 44,
-        "maxLevel": 48,
+        "minLevel": 60,
+        "maxLevel": 66,
         "chance": 0.25
       },
       {
         "pokemonId": 340,
-        "minLevel": 44,
-        "maxLevel": 48,
+        "minLevel": 60,
+        "maxLevel": 66,
         "chance": 0.2
       },
       {
         "pokemonId": 326,
-        "minLevel": 44,
-        "maxLevel": 48,
+        "minLevel": 60,
+        "maxLevel": 66,
         "chance": 0.15
       },
       {
         "pokemonId": 707,
-        "minLevel": 44,
-        "maxLevel": 48,
+        "minLevel": 60,
+        "maxLevel": 66,
         "chance": 0.1
       }
     ]
   },
   {
-    "name": "Anistar City",
+    "name": "Anistar Sundial Terrace",
     "spawns": [
       {
         "pokemonId": 324,
-        "minLevel": 45,
-        "maxLevel": 49,
+        "minLevel": 61,
+        "maxLevel": 67,
         "chance": 0.3
       },
       {
         "pokemonId": 618,
-        "minLevel": 45,
-        "maxLevel": 49,
+        "minLevel": 61,
+        "maxLevel": 67,
         "chance": 0.25
       },
       {
         "pokemonId": 676,
-        "minLevel": 45,
-        "maxLevel": 49,
+        "minLevel": 61,
+        "maxLevel": 67,
         "chance": 0.2
       },
       {
         "pokemonId": 581,
-        "minLevel": 45,
-        "maxLevel": 49,
+        "minLevel": 61,
+        "maxLevel": 67,
         "chance": 0.15
       },
       {
         "pokemonId": 297,
-        "minLevel": 45,
-        "maxLevel": 49,
+        "minLevel": 61,
+        "maxLevel": 67,
         "chance": 0.1
       }
     ]
@@ -1518,67 +1401,67 @@ export const kalosRoutes = [
     "spawns": [
       {
         "pokemonId": 685,
-        "minLevel": 47,
-        "maxLevel": 51,
+        "minLevel": 64,
+        "maxLevel": 70,
         "chance": 0.3
       },
       {
         "pokemonId": 224,
-        "minLevel": 47,
-        "maxLevel": 51,
+        "minLevel": 64,
+        "maxLevel": 70,
         "chance": 0.25
       },
       {
         "pokemonId": 687,
-        "minLevel": 47,
-        "maxLevel": 51,
+        "minLevel": 64,
+        "maxLevel": 70,
         "chance": 0.2
       },
       {
         "pokemonId": 623,
-        "minLevel": 47,
-        "maxLevel": 51,
+        "minLevel": 64,
+        "maxLevel": 70,
         "chance": 0.15
       },
       {
         "pokemonId": 632,
-        "minLevel": 47,
-        "maxLevel": 51,
+        "minLevel": 64,
+        "maxLevel": 70,
         "chance": 0.1
       }
     ]
   },
   {
-    "name": "Couriway Town",
+    "name": "Couriway Cascades",
     "spawns": [
       {
         "pokemonId": 631,
-        "minLevel": 49,
-        "maxLevel": 52,
+        "minLevel": 66,
+        "maxLevel": 72,
         "chance": 0.3
       },
       {
         "pokemonId": 545,
-        "minLevel": 49,
-        "maxLevel": 52,
+        "minLevel": 66,
+        "maxLevel": 72,
         "chance": 0.25
       },
       {
         "pokemonId": 367,
-        "minLevel": 49,
-        "maxLevel": 52,
+        "minLevel": 66,
+        "maxLevel": 72,
         "chance": 0.2
       },
       {
         "pokemonId": 226,
-        "minLevel": 49,
-        "maxLevel": 52,
+        "minLevel": 66,
+        "maxLevel": 72,
         "chance": 0.15
       },
       {
         "pokemonId": 26,
-        "minLevel": 49,
-        "maxLevel": 52,
+        "minLevel": 66,
+        "maxLevel": 72,
         "chance": 0.1
       }
     ]
@@ -1588,172 +1471,207 @@ export const kalosRoutes = [
     "spawns": [
       {
         "pokemonId": 558,
-        "minLevel": 50,
-        "maxLevel": 53,
+        "minLevel": 67,
+        "maxLevel": 73,
         "chance": 0.3
       },
       {
         "pokemonId": 368,
-        "minLevel": 50,
-        "maxLevel": 53,
+        "minLevel": 67,
+        "maxLevel": 73,
         "chance": 0.25
       },
       {
         "pokemonId": 112,
-        "minLevel": 50,
-        "maxLevel": 53,
+        "minLevel": 67,
+        "maxLevel": 73,
         "chance": 0.2
       },
       {
         "pokemonId": 398,
-        "minLevel": 50,
-        "maxLevel": 53,
+        "minLevel": 67,
+        "maxLevel": 73,
         "chance": 0.15
       },
       {
         "pokemonId": 369,
-        "minLevel": 50,
-        "maxLevel": 53,
+        "minLevel": 67,
+        "maxLevel": 73,
         "chance": 0.1
       }
     ]
   },
   {
-    "name": "Terminus Cave (Surface)",
-    "spawns": [
-      {
-        "pokemonId": 621,
-        "minLevel": 51,
-        "maxLevel": 55,
-        "chance": 0.3
-      },
-      {
-        "pokemonId": 560,
-        "minLevel": 51,
-        "maxLevel": 55,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 598,
-        "minLevel": 51,
-        "maxLevel": 55,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 241,
-        "minLevel": 51,
-        "maxLevel": 55,
-        "chance": 0.15
-      },
-      {
-        "pokemonId": 182,
-        "minLevel": 51,
-        "maxLevel": 55,
-        "chance": 0.1
-      }
-    ]
-  },
-  {
-    "name": "Route 19",
+    "name": "Route 19 Marshlands",
     "spawns": [
       {
         "pokemonId": 80,
-        "minLevel": 52,
-        "maxLevel": 56,
+        "minLevel": 69,
+        "maxLevel": 75,
         "chance": 0.3
       },
       {
         "pokemonId": 45,
-        "minLevel": 52,
-        "maxLevel": 56,
+        "minLevel": 69,
+        "maxLevel": 75,
         "chance": 0.25
       },
       {
         "pokemonId": 625,
-        "minLevel": 52,
-        "maxLevel": 56,
+        "minLevel": 69,
+        "maxLevel": 75,
         "chance": 0.2
       },
       {
         "pokemonId": 115,
-        "minLevel": 52,
-        "maxLevel": 56,
+        "minLevel": 69,
+        "maxLevel": 75,
         "chance": 0.15
       },
       {
         "pokemonId": 101,
-        "minLevel": 52,
-        "maxLevel": 56,
+        "minLevel": 69,
+        "maxLevel": 75,
         "chance": 0.1
       }
     ]
   },
   {
-    "name": "Route 19 (Fishing)",
+    "name": "Vallée Grande Marshlands",
     "spawns": [
       {
         "pokemonId": 561,
-        "minLevel": 53,
-        "maxLevel": 57,
+        "minLevel": 70,
+        "maxLevel": 77,
         "chance": 0.3
       },
       {
         "pokemonId": 295,
-        "minLevel": 53,
-        "maxLevel": 57,
+        "minLevel": 70,
+        "maxLevel": 77,
         "chance": 0.25
       },
       {
         "pokemonId": 128,
-        "minLevel": 53,
-        "maxLevel": 57,
+        "minLevel": 70,
+        "maxLevel": 77,
         "chance": 0.2
       },
       {
         "pokemonId": 454,
-        "minLevel": 53,
-        "maxLevel": 57,
+        "minLevel": 70,
+        "maxLevel": 77,
         "chance": 0.15
       },
       {
         "pokemonId": 334,
-        "minLevel": 53,
-        "maxLevel": 57,
+        "minLevel": 70,
+        "maxLevel": 77,
         "chance": 0.1
       }
     ]
   },
   {
-    "name": "Snowbelle City",
+    "name": "Snowbelle Frostwoods",
     "spawns": [
       {
         "pokemonId": 576,
-        "minLevel": 54,
-        "maxLevel": 58,
+        "minLevel": 72,
+        "maxLevel": 79,
         "chance": 0.3
       },
       {
         "pokemonId": 579,
-        "minLevel": 54,
-        "maxLevel": 58,
+        "minLevel": 72,
+        "maxLevel": 79,
         "chance": 0.25
       },
       {
         "pokemonId": 691,
-        "minLevel": 54,
-        "maxLevel": 58,
+        "minLevel": 72,
+        "maxLevel": 79,
         "chance": 0.2
       },
       {
         "pokemonId": 711,
-        "minLevel": 54,
-        "maxLevel": 58,
+        "minLevel": 72,
+        "maxLevel": 79,
         "chance": 0.15
       },
       {
         "pokemonId": 589,
-        "minLevel": 54,
-        "maxLevel": 58,
+        "minLevel": 72,
+        "maxLevel": 79,
+        "chance": 0.1
+      }
+    ]
+  },
+  {
+    "name": "Route 20",
+    "spawns": [
+      {
+        "pokemonId": 693,
+        "minLevel": 73,
+        "maxLevel": 80,
+        "chance": 0.3
+      },
+      {
+        "pokemonId": 701,
+        "minLevel": 73,
+        "maxLevel": 80,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 703,
+        "minLevel": 73,
+        "maxLevel": 80,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 127,
+        "minLevel": 73,
+        "maxLevel": 80,
+        "chance": 0.15
+      },
+      {
+        "pokemonId": 689,
+        "minLevel": 73,
+        "maxLevel": 80,
+        "chance": 0.1
+      }
+    ]
+  },
+  {
+    "name": "Hidden Village Glade",
+    "spawns": [
+      {
+        "pokemonId": 123,
+        "minLevel": 75,
+        "maxLevel": 82,
+        "chance": 0.3
+      },
+      {
+        "pokemonId": 214,
+        "minLevel": 75,
+        "maxLevel": 82,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 681,
+        "minLevel": 75,
+        "maxLevel": 82,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 31,
+        "minLevel": 75,
+        "maxLevel": 82,
+        "chance": 0.15
+      },
+      {
+        "pokemonId": 68,
+        "minLevel": 75,
+        "maxLevel": 82,
         "chance": 0.1
       }
     ]
@@ -1763,141 +1681,36 @@ export const kalosRoutes = [
     "spawns": []
   },
   {
-    "name": "Route 20",
-    "spawns": [
-      {
-        "pokemonId": 693,
-        "minLevel": 56,
-        "maxLevel": 60,
-        "chance": 0.3
-      },
-      {
-        "pokemonId": 701,
-        "minLevel": 56,
-        "maxLevel": 60,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 703,
-        "minLevel": 56,
-        "maxLevel": 60,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 127,
-        "minLevel": 56,
-        "maxLevel": 60,
-        "chance": 0.15
-      },
-      {
-        "pokemonId": 689,
-        "minLevel": 56,
-        "maxLevel": 60,
-        "chance": 0.1
-      }
-    ]
-  },
-  {
-    "name": "Pokémon Village",
-    "spawns": [
-      {
-        "pokemonId": 212,
-        "minLevel": 57,
-        "maxLevel": 61,
-        "chance": 0.3
-      },
-      {
-        "pokemonId": 94,
-        "minLevel": 57,
-        "maxLevel": 61,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 65,
-        "minLevel": 57,
-        "maxLevel": 61,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 321,
-        "minLevel": 57,
-        "maxLevel": 61,
-        "chance": 0.15
-      },
-      {
-        "pokemonId": 217,
-        "minLevel": 57,
-        "maxLevel": 61,
-        "chance": 0.1
-      }
-    ]
-  },
-  {
-    "name": "Pokémon Village (Fishing)",
-    "spawns": [
-      {
-        "pokemonId": 123,
-        "minLevel": 58,
-        "maxLevel": 63,
-        "chance": 0.3
-      },
-      {
-        "pokemonId": 214,
-        "minLevel": 58,
-        "maxLevel": 63,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 681,
-        "minLevel": 58,
-        "maxLevel": 63,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 31,
-        "minLevel": 58,
-        "maxLevel": 63,
-        "chance": 0.15
-      },
-      {
-        "pokemonId": 68,
-        "minLevel": 58,
-        "maxLevel": 63,
-        "chance": 0.1
-      }
-    ]
-  },
-  {
     "name": "Route 21",
     "spawns": [
       {
         "pokemonId": 430,
-        "minLevel": 59,
-        "maxLevel": 64,
+        "minLevel": 78,
+        "maxLevel": 85,
         "chance": 0.3
       },
       {
         "pokemonId": 34,
-        "minLevel": 59,
-        "maxLevel": 64,
+        "minLevel": 78,
+        "maxLevel": 85,
         "chance": 0.25
       },
       {
         "pokemonId": 213,
-        "minLevel": 59,
-        "maxLevel": 64,
+        "minLevel": 78,
+        "maxLevel": 85,
         "chance": 0.2
       },
       {
         "pokemonId": 534,
-        "minLevel": 59,
-        "maxLevel": 64,
+        "minLevel": 78,
+        "maxLevel": 85,
         "chance": 0.15
       },
       {
         "pokemonId": 668,
-        "minLevel": 59,
-        "maxLevel": 64,
+        "minLevel": 78,
+        "maxLevel": 85,
         "chance": 0.1
       }
     ]
@@ -1907,114 +1720,196 @@ export const kalosRoutes = [
     "spawns": [
       {
         "pokemonId": 62,
-        "minLevel": 60,
-        "maxLevel": 65,
+        "minLevel": 80,
+        "maxLevel": 88,
         "chance": 0.3
       },
       {
         "pokemonId": 208,
-        "minLevel": 60,
-        "maxLevel": 65,
+        "minLevel": 80,
+        "maxLevel": 88,
         "chance": 0.25
       },
       {
         "pokemonId": 571,
-        "minLevel": 60,
-        "maxLevel": 65,
+        "minLevel": 80,
+        "maxLevel": 88,
         "chance": 0.2
       },
       {
         "pokemonId": 472,
-        "minLevel": 60,
-        "maxLevel": 65,
+        "minLevel": 80,
+        "maxLevel": 88,
         "chance": 0.15
       },
       {
         "pokemonId": 461,
-        "minLevel": 60,
-        "maxLevel": 65,
+        "minLevel": 80,
+        "maxLevel": 88,
         "chance": 0.1
       }
     ]
   },
   {
-    "name": "Cyllage City (Fishing)",
+    "name": "Route 22",
     "spawns": [
       {
-        "pokemonId": 692,
-        "minLevel": 25,
-        "maxLevel": 30,
+        "pokemonId": 50,
+        "minLevel": 21,
+        "maxLevel": 24,
         "chance": 0.3
       },
       {
-        "pokemonId": 418,
-        "minLevel": 25,
-        "maxLevel": 30,
+        "pokemonId": 165,
+        "minLevel": 21,
+        "maxLevel": 24,
         "chance": 0.25
       },
       {
-        "pokemonId": 304,
-        "minLevel": 25,
-        "maxLevel": 30,
+        "pokemonId": 290,
+        "minLevel": 21,
+        "maxLevel": 24,
         "chance": 0.15
       },
       {
-        "pokemonId": 370,
-        "minLevel": 25,
-        "maxLevel": 30,
+        "pokemonId": 283,
+        "minLevel": 21,
+        "maxLevel": 24,
         "chance": 0.15
       },
       {
-        "pokemonId": 570,
-        "minLevel": 25,
-        "maxLevel": 30,
+        "pokemonId": 276,
+        "minLevel": 21,
+        "maxLevel": 24,
         "chance": 0.1
       },
       {
-        "pokemonId": 459,
-        "minLevel": 25,
-        "maxLevel": 30,
+        "pokemonId": 278,
+        "minLevel": 21,
+        "maxLevel": 24,
         "chance": 0.05
       }
     ]
   },
   {
-    "name": "Reflection Cave",
+    "name": "Parfum Palace Gardens",
     "spawns": [
       {
-        "pokemonId": 672,
-        "minLevel": 30,
-        "maxLevel": 35,
+        "pokemonId": 443,
+        "minLevel": 34,
+        "maxLevel": 37,
         "chance": 0.3
       },
       {
-        "pokemonId": 552,
-        "minLevel": 30,
-        "maxLevel": 35,
+        "pokemonId": 122,
+        "minLevel": 34,
+        "maxLevel": 37,
         "chance": 0.25
       },
       {
-        "pokemonId": 677,
-        "minLevel": 30,
-        "maxLevel": 35,
+        "pokemonId": 209,
+        "minLevel": 34,
+        "maxLevel": 37,
         "chance": 0.15
       },
       {
-        "pokemonId": 544,
-        "minLevel": 30,
-        "maxLevel": 35,
+        "pokemonId": 27,
+        "minLevel": 34,
+        "maxLevel": 37,
         "chance": 0.15
       },
       {
-        "pokemonId": 294,
-        "minLevel": 30,
-        "maxLevel": 35,
+        "pokemonId": 29,
+        "minLevel": 34,
+        "maxLevel": 37,
         "chance": 0.1
       },
       {
-        "pokemonId": 327,
-        "minLevel": 30,
-        "maxLevel": 35,
+        "pokemonId": 246,
+        "minLevel": 34,
+        "maxLevel": 37,
+        "chance": 0.05
+      }
+    ]
+  },
+  {
+    "name": "Ambrette Reef",
+    "spawns": [
+      {
+        "pokemonId": 90,
+        "minLevel": 47,
+        "maxLevel": 51,
+        "chance": 0.3
+      },
+      {
+        "pokemonId": 318,
+        "minLevel": 47,
+        "maxLevel": 51,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 688,
+        "minLevel": 47,
+        "maxLevel": 51,
+        "chance": 0.15
+      },
+      {
+        "pokemonId": 341,
+        "minLevel": 47,
+        "maxLevel": 51,
+        "chance": 0.15
+      },
+      {
+        "pokemonId": 708,
+        "minLevel": 47,
+        "maxLevel": 51,
+        "chance": 0.1
+      },
+      {
+        "pokemonId": 63,
+        "minLevel": 47,
+        "maxLevel": 51,
+        "chance": 0.05
+      }
+    ]
+  },
+  {
+    "name": "Cyllage Tidepools",
+    "spawns": [
+      {
+        "pokemonId": 692,
+        "minLevel": 60,
+        "maxLevel": 66,
+        "chance": 0.3
+      },
+      {
+        "pokemonId": 418,
+        "minLevel": 60,
+        "maxLevel": 66,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 304,
+        "minLevel": 60,
+        "maxLevel": 66,
+        "chance": 0.15
+      },
+      {
+        "pokemonId": 370,
+        "minLevel": 60,
+        "maxLevel": 66,
+        "chance": 0.15
+      },
+      {
+        "pokemonId": 570,
+        "minLevel": 60,
+        "maxLevel": 66,
+        "chance": 0.1
+      },
+      {
+        "pokemonId": 459,
+        "minLevel": 60,
+        "maxLevel": 66,
         "chance": 0.05
       }
     ]
@@ -2024,73 +1919,312 @@ export const kalosRoutes = [
     "spawns": [
       {
         "pokemonId": 662,
-        "minLevel": 35,
-        "maxLevel": 40,
+        "minLevel": 73,
+        "maxLevel": 80,
         "chance": 0.3
       },
       {
         "pokemonId": 61,
-        "minLevel": 35,
-        "maxLevel": 40,
+        "minLevel": 73,
+        "maxLevel": 80,
         "chance": 0.25
       },
       {
         "pokemonId": 95,
-        "minLevel": 35,
-        "maxLevel": 40,
+        "minLevel": 73,
+        "maxLevel": 80,
         "chance": 0.15
       },
       {
         "pokemonId": 108,
-        "minLevel": 35,
-        "maxLevel": 40,
+        "minLevel": 73,
+        "maxLevel": 80,
         "chance": 0.15
       },
       {
         "pokemonId": 525,
-        "minLevel": 35,
-        "maxLevel": 40,
+        "minLevel": 73,
+        "maxLevel": 80,
         "chance": 0.1
       },
       {
         "pokemonId": 193,
-        "minLevel": 35,
-        "maxLevel": 40,
+        "minLevel": 73,
+        "maxLevel": 80,
         "chance": 0.05
       }
     ]
   },
   {
-    "name": "Coumarine City",
+    "name": "Lost Hotel",
     "spawns": [
       {
-        "pokemonId": 202,
-        "minLevel": 40,
-        "maxLevel": 45,
+        "pokemonId": 291,
+        "minLevel": 86,
+        "maxLevel": 94,
         "chance": 0.3
       },
       {
-        "pokemonId": 93,
-        "minLevel": 40,
-        "maxLevel": 45,
+        "pokemonId": 335,
+        "minLevel": 86,
+        "maxLevel": 94,
         "chance": 0.25
       },
       {
-        "pokemonId": 611,
-        "minLevel": 40,
-        "maxLevel": 45,
+        "pokemonId": 336,
+        "minLevel": 86,
+        "maxLevel": 94,
         "chance": 0.2
       },
       {
-        "pokemonId": 247,
-        "minLevel": 40,
-        "maxLevel": 45,
+        "pokemonId": 319,
+        "minLevel": 86,
+        "maxLevel": 94,
         "chance": 0.15
       },
       {
-        "pokemonId": 222,
-        "minLevel": 40,
-        "maxLevel": 45,
+        "pokemonId": 550,
+        "minLevel": 86,
+        "maxLevel": 94,
+        "chance": 0.1
+      }
+    ]
+  },
+  {
+    "name": "Route 16",
+    "spawns": [
+      {
+        "pokemonId": 538,
+        "minLevel": 100,
+        "maxLevel": 105,
+        "chance": 0.3
+      },
+      {
+        "pokemonId": 82,
+        "minLevel": 100,
+        "maxLevel": 105,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 227,
+        "minLevel": 100,
+        "maxLevel": 105,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 539,
+        "minLevel": 100,
+        "maxLevel": 105,
+        "chance": 0.15
+      },
+      {
+        "pokemonId": 359,
+        "minLevel": 100,
+        "maxLevel": 105,
+        "chance": 0.1
+      }
+    ]
+  },
+  {
+    "name": "Path to Team Flare Secret HQ",
+    "spawns": [
+      {
+        "pokemonId": 124,
+        "minLevel": 69,
+        "maxLevel": 75,
+        "chance": 0.3
+      },
+      {
+        "pokemonId": 717,
+        "minLevel": 69,
+        "maxLevel": 75,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 102,
+        "minLevel": 69,
+        "maxLevel": 75,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 73,
+        "minLevel": 69,
+        "maxLevel": 75,
+        "chance": 0.15
+      },
+      {
+        "pokemonId": 407,
+        "minLevel": 69,
+        "maxLevel": 75,
+        "chance": 0.1
+      }
+    ]
+  },
+  {
+    "name": "Team Flare Secret HQ Gate",
+    "spawns": [
+      {
+        "pokemonId": 339,
+        "minLevel": 75,
+        "maxLevel": 82,
+        "chance": 0.3
+      },
+      {
+        "pokemonId": 316,
+        "minLevel": 75,
+        "maxLevel": 82,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 127,
+        "minLevel": 75,
+        "maxLevel": 82,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 691,
+        "minLevel": 75,
+        "maxLevel": 82,
+        "chance": 0.15
+      },
+      {
+        "pokemonId": 195,
+        "minLevel": 75,
+        "maxLevel": 82,
+        "chance": 0.1
+      }
+    ]
+  },
+  {
+    "name": "Team Flare Secret HQ Entrance",
+    "spawns": [
+      {
+        "pokemonId": 169,
+        "minLevel": 81,
+        "maxLevel": 89,
+        "chance": 0.3
+      },
+      {
+        "pokemonId": 464,
+        "minLevel": 81,
+        "maxLevel": 89,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 131,
+        "minLevel": 81,
+        "maxLevel": 89,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 715,
+        "minLevel": 81,
+        "maxLevel": 89,
+        "chance": 0.15
+      },
+      {
+        "pokemonId": 612,
+        "minLevel": 81,
+        "maxLevel": 89,
+        "chance": 0.1
+      }
+    ]
+  },
+  {
+    "name": "Team Flare Secret HQ Hall",
+    "spawns": [
+      {
+        "pokemonId": 373,
+        "minLevel": 87,
+        "maxLevel": 95,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 248,
+        "minLevel": 87,
+        "maxLevel": 95,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 635,
+        "minLevel": 87,
+        "maxLevel": 95,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 445,
+        "minLevel": 87,
+        "maxLevel": 95,
+        "chance": 0.25
+      }
+    ]
+  },
+  {
+    "name": "Terminus Cave (Surface)",
+    "spawns": [
+      {
+        "pokemonId": 621,
+        "minLevel": 93,
+        "maxLevel": 101,
+        "chance": 0.3
+      },
+      {
+        "pokemonId": 560,
+        "minLevel": 93,
+        "maxLevel": 101,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 598,
+        "minLevel": 93,
+        "maxLevel": 101,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 241,
+        "minLevel": 93,
+        "maxLevel": 101,
+        "chance": 0.15
+      },
+      {
+        "pokemonId": 182,
+        "minLevel": 93,
+        "maxLevel": 101,
+        "chance": 0.1
+      }
+    ]
+  },
+  {
+    "name": "Pokémon Village",
+    "spawns": [
+      {
+        "pokemonId": 212,
+        "minLevel": 100,
+        "maxLevel": 105,
+        "chance": 0.3
+      },
+      {
+        "pokemonId": 94,
+        "minLevel": 100,
+        "maxLevel": 105,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 65,
+        "minLevel": 100,
+        "maxLevel": 105,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 321,
+        "minLevel": 100,
+        "maxLevel": 105,
+        "chance": 0.15
+      },
+      {
+        "pokemonId": 217,
+        "minLevel": 100,
+        "maxLevel": 105,
         "chance": 0.1
       }
     ]
@@ -2100,56 +2234,56 @@ export const kalosRoutes = [
     "spawns": [
       {
         "pokemonId": 656,
-        "minLevel": 40,
-        "maxLevel": 45,
+        "minLevel": 83,
+        "maxLevel": 91,
         "chance": 0.1111
       },
       {
         "pokemonId": 653,
-        "minLevel": 40,
-        "maxLevel": 45,
+        "minLevel": 83,
+        "maxLevel": 91,
         "chance": 0.1111
       },
       {
         "pokemonId": 650,
-        "minLevel": 40,
-        "maxLevel": 45,
+        "minLevel": 83,
+        "maxLevel": 91,
         "chance": 0.1111
       },
       {
         "pokemonId": 722,
-        "minLevel": 40,
-        "maxLevel": 45,
+        "minLevel": 83,
+        "maxLevel": 91,
         "chance": 0.1111
       },
       {
         "pokemonId": 725,
-        "minLevel": 40,
-        "maxLevel": 45,
+        "minLevel": 83,
+        "maxLevel": 91,
         "chance": 0.1111
       },
       {
         "pokemonId": 728,
-        "minLevel": 40,
-        "maxLevel": 45,
+        "minLevel": 83,
+        "maxLevel": 91,
         "chance": 0.1111
       },
       {
         "pokemonId": 1,
-        "minLevel": 40,
-        "maxLevel": 45,
+        "minLevel": 83,
+        "maxLevel": 91,
         "chance": 0.1111
       },
       {
         "pokemonId": 4,
-        "minLevel": 40,
-        "maxLevel": 45,
+        "minLevel": 83,
+        "maxLevel": 91,
         "chance": 0.1111
       },
       {
         "pokemonId": 7,
-        "minLevel": 40,
-        "maxLevel": 45,
+        "minLevel": 83,
+        "maxLevel": 91,
         "chance": 0.1111
       }
     ]
@@ -2159,73 +2293,73 @@ export const kalosRoutes = [
     "spawns": [
       {
         "pokemonId": 723,
-        "minLevel": 45,
-        "maxLevel": 51,
-        "chance": 0.1666
+        "minLevel": 86,
+        "maxLevel": 94,
+        "chance": 0.3
       },
       {
         "pokemonId": 726,
-        "minLevel": 45,
-        "maxLevel": 51,
-        "chance": 0.1666
+        "minLevel": 86,
+        "maxLevel": 94,
+        "chance": 0.25
       },
       {
         "pokemonId": 729,
-        "minLevel": 45,
-        "maxLevel": 51,
-        "chance": 0.1666
+        "minLevel": 86,
+        "maxLevel": 94,
+        "chance": 0.15
       },
       {
         "pokemonId": 2,
-        "minLevel": 45,
-        "maxLevel": 51,
-        "chance": 0.1666
+        "minLevel": 86,
+        "maxLevel": 94,
+        "chance": 0.15
       },
       {
         "pokemonId": 5,
-        "minLevel": 45,
-        "maxLevel": 51,
-        "chance": 0.1666
+        "minLevel": 86,
+        "maxLevel": 94,
+        "chance": 0.1
       },
       {
         "pokemonId": 9,
-        "minLevel": 45,
-        "maxLevel": 51,
-        "chance": 0.1666
+        "minLevel": 86,
+        "maxLevel": 94,
+        "chance": 0.05
       }
     ]
   },
   {
-    "name": "Kiloude City",
+    "name": "Kiloude Southern Hills",
     "spawns": [
       {
         "pokemonId": 407,
-        "minLevel": 50,
-        "maxLevel": 57,
+        "minLevel": 90,
+        "maxLevel": 98,
         "chance": 0.3
       },
       {
         "pokemonId": 526,
-        "minLevel": 50,
-        "maxLevel": 57,
+        "minLevel": 90,
+        "maxLevel": 98,
         "chance": 0.25
       },
       {
         "pokemonId": 463,
-        "minLevel": 50,
-        "maxLevel": 57,
+        "minLevel": 90,
+        "maxLevel": 98,
         "chance": 0.2
       },
       {
         "pokemonId": 615,
-        "minLevel": 50,
-        "maxLevel": 57,
+        "minLevel": 90,
+        "maxLevel": 98,
         "chance": 0.15
       },
       {
         "pokemonId": 282,
-        "minLevel": 50,
-        "maxLevel": 57,
+        "minLevel": 90,
+        "maxLevel": 98,
         "chance": 0.1
       }
     ]
@@ -2235,32 +2369,32 @@ export const kalosRoutes = [
     "spawns": [
       {
         "pokemonId": 553,
-        "minLevel": 55,
-        "maxLevel": 62,
+        "minLevel": 93,
+        "maxLevel": 101,
         "chance": 0.3
       },
       {
         "pokemonId": 609,
-        "minLevel": 55,
-        "maxLevel": 62,
+        "minLevel": 93,
+        "maxLevel": 101,
         "chance": 0.25
       },
       {
         "pokemonId": 330,
-        "minLevel": 55,
-        "maxLevel": 62,
+        "minLevel": 93,
+        "maxLevel": 101,
         "chance": 0.2
       },
       {
         "pokemonId": 697,
-        "minLevel": 55,
-        "maxLevel": 62,
+        "minLevel": 93,
+        "maxLevel": 101,
         "chance": 0.15
       },
       {
         "pokemonId": 699,
-        "minLevel": 55,
-        "maxLevel": 62,
+        "minLevel": 93,
+        "maxLevel": 101,
         "chance": 0.1
       }
     ]
@@ -2270,32 +2404,67 @@ export const kalosRoutes = [
     "spawns": [
       {
         "pokemonId": 134,
-        "minLevel": 63,
-        "maxLevel": 70,
+        "minLevel": 96,
+        "maxLevel": 104,
         "chance": 0.3
       },
       {
         "pokemonId": 700,
-        "minLevel": 63,
-        "maxLevel": 70,
+        "minLevel": 96,
+        "maxLevel": 104,
         "chance": 0.25
       },
       {
         "pokemonId": 476,
-        "minLevel": 63,
-        "maxLevel": 70,
+        "minLevel": 96,
+        "maxLevel": 104,
         "chance": 0.2
       },
       {
         "pokemonId": 448,
-        "minLevel": 63,
-        "maxLevel": 70,
+        "minLevel": 96,
+        "maxLevel": 104,
         "chance": 0.15
       },
       {
         "pokemonId": 136,
-        "minLevel": 63,
-        "maxLevel": 70,
+        "minLevel": 96,
+        "maxLevel": 104,
+        "chance": 0.1
+      }
+    ]
+  },
+  {
+    "name": "Secret Forest North",
+    "spawns": [
+      {
+        "pokemonId": 704,
+        "minLevel": 100,
+        "maxLevel": 105,
+        "chance": 0.3
+      },
+      {
+        "pokemonId": 455,
+        "minLevel": 100,
+        "maxLevel": 105,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 277,
+        "minLevel": 100,
+        "maxLevel": 105,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 81,
+        "minLevel": 100,
+        "maxLevel": 105,
+        "chance": 0.15
+      },
+      {
+        "pokemonId": 92,
+        "minLevel": 100,
+        "maxLevel": 105,
         "chance": 0.1
       }
     ]
@@ -2305,32 +2474,32 @@ export const kalosRoutes = [
     "spawns": [
       {
         "pokemonId": 584,
-        "minLevel": 70,
-        "maxLevel": 77,
+        "minLevel": 84,
+        "maxLevel": 92,
         "chance": 0.3
       },
       {
         "pokemonId": 609,
-        "minLevel": 70,
-        "maxLevel": 77,
+        "minLevel": 84,
+        "maxLevel": 92,
         "chance": 0.25
       },
       {
         "pokemonId": 104,
-        "minLevel": 70,
-        "maxLevel": 77,
+        "minLevel": 84,
+        "maxLevel": 92,
         "chance": 0.2
       },
       {
         "pokemonId": 624,
-        "minLevel": 70,
-        "maxLevel": 77,
+        "minLevel": 84,
+        "maxLevel": 92,
         "chance": 0.15
       },
       {
         "pokemonId": 142,
-        "minLevel": 70,
-        "maxLevel": 77,
+        "minLevel": 84,
+        "maxLevel": 92,
         "chance": 0.1
       }
     ]
@@ -2340,32 +2509,32 @@ export const kalosRoutes = [
     "spawns": [
       {
         "pokemonId": 471,
-        "minLevel": 77,
-        "maxLevel": 84,
+        "minLevel": 88,
+        "maxLevel": 96,
         "chance": 0.3
       },
       {
         "pokemonId": 612,
-        "minLevel": 77,
-        "maxLevel": 84,
+        "minLevel": 88,
+        "maxLevel": 96,
         "chance": 0.25
       },
       {
         "pokemonId": 367,
-        "minLevel": 77,
-        "maxLevel": 84,
+        "minLevel": 88,
+        "maxLevel": 96,
         "chance": 0.2
       },
       {
         "pokemonId": 9,
-        "minLevel": 77,
-        "maxLevel": 84,
+        "minLevel": 88,
+        "maxLevel": 96,
         "chance": 0.15
       },
       {
         "pokemonId": 713,
-        "minLevel": 77,
-        "maxLevel": 84,
+        "minLevel": 88,
+        "maxLevel": 96,
         "chance": 0.1
       }
     ]
@@ -2375,32 +2544,32 @@ export const kalosRoutes = [
     "spawns": [
       {
         "pokemonId": 450,
-        "minLevel": 84,
-        "maxLevel": 91,
+        "minLevel": 92,
+        "maxLevel": 100,
         "chance": 0.3
       },
       {
         "pokemonId": 471,
-        "minLevel": 84,
-        "maxLevel": 91,
+        "minLevel": 92,
+        "maxLevel": 100,
         "chance": 0.25
       },
       {
         "pokemonId": 3,
-        "minLevel": 84,
-        "maxLevel": 91,
+        "minLevel": 92,
+        "maxLevel": 100,
         "chance": 0.2
       },
       {
         "pokemonId": 197,
-        "minLevel": 84,
-        "maxLevel": 91,
+        "minLevel": 92,
+        "maxLevel": 100,
         "chance": 0.15
       },
       {
         "pokemonId": 135,
-        "minLevel": 84,
-        "maxLevel": 91,
+        "minLevel": 92,
+        "maxLevel": 100,
         "chance": 0.1
       }
     ]
@@ -2410,32 +2579,32 @@ export const kalosRoutes = [
     "spawns": [
       {
         "pokemonId": 470,
-        "minLevel": 91,
-        "maxLevel": 98,
+        "minLevel": 96,
+        "maxLevel": 104,
         "chance": 0.3
       },
       {
         "pokemonId": 91,
-        "minLevel": 91,
-        "maxLevel": 98,
+        "minLevel": 96,
+        "maxLevel": 104,
         "chance": 0.25
       },
       {
         "pokemonId": 9,
-        "minLevel": 91,
-        "maxLevel": 98,
+        "minLevel": 96,
+        "maxLevel": 104,
         "chance": 0.2
       },
       {
         "pokemonId": 652,
-        "minLevel": 91,
-        "maxLevel": 98,
+        "minLevel": 96,
+        "maxLevel": 104,
         "chance": 0.15
       },
       {
         "pokemonId": 473,
-        "minLevel": 91,
-        "maxLevel": 98,
+        "minLevel": 96,
+        "maxLevel": 104,
         "chance": 0.1
       }
     ]
@@ -2468,32 +2637,32 @@ export const kalosRoutes = [
     "spawns": [
       {
         "pokemonId": 635,
-        "minLevel": 70,
-        "maxLevel": 77,
+        "minLevel": 85,
+        "maxLevel": 93,
         "chance": 0.3
       },
       {
         "pokemonId": 28,
-        "minLevel": 70,
-        "maxLevel": 77,
+        "minLevel": 85,
+        "maxLevel": 93,
         "chance": 0.25
       },
       {
         "pokemonId": 613,
-        "minLevel": 70,
-        "maxLevel": 77,
+        "minLevel": 85,
+        "maxLevel": 93,
         "chance": 0.2
       },
       {
         "pokemonId": 263,
-        "minLevel": 70,
-        "maxLevel": 77,
+        "minLevel": 85,
+        "maxLevel": 93,
         "chance": 0.15
       },
       {
         "pokemonId": 182,
-        "minLevel": 70,
-        "maxLevel": 77,
+        "minLevel": 85,
+        "maxLevel": 93,
         "chance": 0.1
       }
     ]
@@ -2503,32 +2672,67 @@ export const kalosRoutes = [
     "spawns": [
       {
         "pokemonId": 658,
-        "minLevel": 91,
+        "minLevel": 90,
         "maxLevel": 98,
         "chance": 0.3
       },
       {
         "pokemonId": 306,
-        "minLevel": 91,
+        "minLevel": 90,
         "maxLevel": 98,
         "chance": 0.25
       },
       {
         "pokemonId": 673,
-        "minLevel": 91,
+        "minLevel": 90,
         "maxLevel": 98,
         "chance": 0.2
       },
       {
         "pokemonId": 655,
-        "minLevel": 91,
+        "minLevel": 90,
         "maxLevel": 98,
         "chance": 0.15
       },
       {
         "pokemonId": 584,
-        "minLevel": 91,
+        "minLevel": 90,
         "maxLevel": 98,
+        "chance": 0.1
+      }
+    ]
+  },
+  {
+    "name": "Underground Chambers",
+    "spawns": [
+      {
+        "pokemonId": 712,
+        "minLevel": 95,
+        "maxLevel": 103,
+        "chance": 0.3
+      },
+      {
+        "pokemonId": 703,
+        "minLevel": 95,
+        "maxLevel": 103,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 300,
+        "minLevel": 95,
+        "maxLevel": 103,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 42,
+        "minLevel": 95,
+        "maxLevel": 103,
+        "chance": 0.15
+      },
+      {
+        "pokemonId": 708,
+        "minLevel": 95,
+        "maxLevel": 103,
         "chance": 0.1
       }
     ]
@@ -2538,266 +2742,27 @@ export const kalosRoutes = [
     "spawns": [
       {
         "pokemonId": 721,
-        "minLevel": 110,
-        "maxLevel": 114,
+        "minLevel": 100,
+        "maxLevel": 105,
         "chance": 0.25
       },
       {
         "pokemonId": 719,
-        "minLevel": 110,
-        "maxLevel": 114,
+        "minLevel": 100,
+        "maxLevel": 105,
         "chance": 0.25
       },
       {
         "pokemonId": 720,
-        "minLevel": 110,
-        "maxLevel": 114,
+        "minLevel": 100,
+        "maxLevel": 105,
         "chance": 0.25
       },
       {
         "pokemonId": 150,
-        "minLevel": 115,
-        "maxLevel": 115,
-        "chance": 0.25
-      }
-    ]
-  },
-  {
-    "name": "Path to Team Flare Secret HQ",
-    "spawns": [
-      {
-        "pokemonId": 124,
-        "minLevel": 77,
-        "maxLevel": 84,
-        "chance": 0.3
-      },
-      {
-        "pokemonId": 717,
-        "minLevel": 77,
-        "maxLevel": 84,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 102,
-        "minLevel": 77,
-        "maxLevel": 84,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 73,
-        "minLevel": 77,
-        "maxLevel": 84,
-        "chance": 0.15
-      },
-      {
-        "pokemonId": 407,
-        "minLevel": 77,
-        "maxLevel": 84,
-        "chance": 0.1
-      }
-    ]
-  },
-  {
-    "name": "Team Flare Secret HQ Gate",
-    "spawns": [
-      {
-        "pokemonId": 339,
-        "minLevel": 84,
-        "maxLevel": 91,
-        "chance": 0.3
-      },
-      {
-        "pokemonId": 316,
-        "minLevel": 84,
-        "maxLevel": 91,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 127,
-        "minLevel": 84,
-        "maxLevel": 91,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 691,
-        "minLevel": 84,
-        "maxLevel": 91,
-        "chance": 0.15
-      },
-      {
-        "pokemonId": 195,
-        "minLevel": 84,
-        "maxLevel": 91,
-        "chance": 0.1
-      }
-    ]
-  },
-  {
-    "name": "Team Flare Secret HQ Entrance",
-    "spawns": [
-      {
-        "pokemonId": 169,
-        "minLevel": 91,
-        "maxLevel": 98,
-        "chance": 0.3
-      },
-      {
-        "pokemonId": 464,
-        "minLevel": 91,
-        "maxLevel": 98,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 131,
-        "minLevel": 91,
-        "maxLevel": 98,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 715,
-        "minLevel": 91,
-        "maxLevel": 98,
-        "chance": 0.15
-      },
-      {
-        "pokemonId": 612,
-        "minLevel": 91,
-        "maxLevel": 98,
-        "chance": 0.1
-      }
-    ]
-  },
-  {
-    "name": "Team Flare Secret HQ Hall",
-    "spawns": [
-      {
-        "pokemonId": 373,
-        "minLevel": 95,
+        "minLevel": 100,
         "maxLevel": 105,
         "chance": 0.25
-      },
-      {
-        "pokemonId": 248,
-        "minLevel": 95,
-        "maxLevel": 105,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 635,
-        "minLevel": 95,
-        "maxLevel": 105,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 445,
-        "minLevel": 95,
-        "maxLevel": 105,
-        "chance": 0.25
-      }
-    ]
-  },
-  {
-    "name": "Secret Forest North",
-    "spawns": [
-      {
-        "pokemonId": 719,
-        "minLevel": 65,
-        "maxLevel": 70,
-        "chance": 0.3
-      },
-      {
-        "pokemonId": 373,
-        "minLevel": 65,
-        "maxLevel": 70,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 717,
-        "minLevel": 65,
-        "maxLevel": 70,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 150,
-        "minLevel": 65,
-        "maxLevel": 70,
-        "chance": 0.15
-      },
-      {
-        "pokemonId": 716,
-        "minLevel": 65,
-        "maxLevel": 70,
-        "chance": 0.1
-      }
-    ]
-  },
-  {
-    "name": "Underground Chambers (Crystal Cave Tunnels)",
-    "spawns": [
-      {
-        "pokemonId": 712,
-        "minLevel": 77,
-        "maxLevel": 84,
-        "chance": 0.3
-      },
-      {
-        "pokemonId": 703,
-        "minLevel": 77,
-        "maxLevel": 84,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 300,
-        "minLevel": 77,
-        "maxLevel": 84,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 42,
-        "minLevel": 77,
-        "maxLevel": 84,
-        "chance": 0.15
-      },
-      {
-        "pokemonId": 708,
-        "minLevel": 77,
-        "maxLevel": 84,
-        "chance": 0.1
-      }
-    ]
-  },
-  {
-    "name": "Garden Chambers (Secret Forest North)",
-    "spawns": [
-      {
-        "pokemonId": 704,
-        "minLevel": 84,
-        "maxLevel": 91,
-        "chance": 0.3
-      },
-      {
-        "pokemonId": 455,
-        "minLevel": 84,
-        "maxLevel": 91,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 277,
-        "minLevel": 84,
-        "maxLevel": 91,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 81,
-        "minLevel": 84,
-        "maxLevel": 91,
-        "chance": 0.15
-      },
-      {
-        "pokemonId": 92,
-        "minLevel": 84,
-        "maxLevel": 91,
-        "chance": 0.1
       }
     ]
   },
@@ -2836,38 +2801,20 @@ export const kalosRoutes = [
 
 export const kalosUnlocks = [
   {
-    "challengeName": "Challenge 1",
-    "areaId": "Aquacorde Town",
+    "challengeName": "Challenge 00",
+    "areaId": "Aquacorde Outskirts",
     "unlocks": [
       "Route 2"
     ],
     "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Azurill",
-          "count": 1
-        },
-        {
-          "species": "Caterpie",
-          "count": 1
-        },
-        {
-          "species": "Weedle",
-          "count": 1
-        },
-        {
-          "species": "Ralts",
-          "count": 1
-        },
-        {
-          "species": "Scatterbug",
-          "count": 1
-        }
-      ]
+      "defeatCountRoute": {
+        "route": "Aquacorde Outskirts",
+        "count": 25
+      }
     }
   },
   {
-    "challengeName": "Challenge 2",
+    "challengeName": "Challenge 01",
     "areaId": "Route 2",
     "unlocks": [
       "Santalune Forest"
@@ -2880,84 +2827,49 @@ export const kalosUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 3",
+    "challengeName": "Challenge 02",
     "areaId": "Santalune Forest",
     "unlocks": [
       "Route 3"
     ],
     "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Sentret",
-          "count": 1
-        },
-        {
-          "species": "Poochyena",
-          "count": 1
-        },
-        {
-          "species": "Lotad",
-          "count": 1
-        },
-        {
-          "species": "Burmy",
-          "count": 1
-        },
-        {
-          "species": "Bunnelby",
-          "count": 1
-        }
-      ]
-    }
-  },
-  {
-    "challengeName": "Challenge 4",
-    "areaId": "Route 3",
-    "unlocks": [
-      "Santalune City"
-    ],
-    "requirements": {
       "defeatCountRoute": {
-        "route": "Route 3",
+        "route": "Santalune Forest",
         "count": 25
       }
     }
   },
   {
-    "challengeName": "Challenge 5",
-    "areaId": "Santalune City",
+    "challengeName": "Challenge 03",
+    "areaId": "Route 3",
+    "unlocks": [
+      "Santalune Outskirts"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Route 3",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 04",
+    "areaId": "Santalune Outskirts",
     "unlocks": [
       "Santalune City Gym"
     ],
     "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Swinub",
-          "count": 1
-        },
-        {
-          "species": "Smeargle",
-          "count": 1
-        },
-        {
-          "species": "Slugma",
-          "count": 1
-        },
-        {
-          "species": "Hoppip",
-          "count": 1
-        },
-        {
-          "species": "Spinarak",
-          "count": 1
-        }
-      ]
+      "defeatCountRoute": {
+        "route": "Santalune Outskirts",
+        "count": 50
+      }
     }
   },
   {
-    "challengeName": "Challenge 6",
+    "challengeName": "Challenge 05",
     "areaId": "Santalune City Gym",
     "unlocks": [
+      "Route 4",
       "Route 22"
     ],
     "requirements": {
@@ -2969,170 +2881,72 @@ export const kalosUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 7",
-    "areaId": "Route 22",
-    "unlocks": [
-      "Route 4"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Diglett",
-          "count": 1
-        },
-        {
-          "species": "Ledyba",
-          "count": 1
-        },
-        {
-          "species": "Nincada",
-          "count": 1
-        },
-        {
-          "species": "Surskit",
-          "count": 1
-        },
-        {
-          "species": "Taillow",
-          "count": 1
-        }
-      ]
-    }
-  },
-  {
-    "challengeName": "Challenge 8",
+    "challengeName": "Challenge 06",
     "areaId": "Route 4",
     "unlocks": [
-      "Lumiose City (South)"
+      "Lumiose South Boulevard"
     ],
     "requirements": {
       "defeatCountRoute": {
         "route": "Route 4",
-        "count": 25
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 9",
-    "areaId": "Lumiose City (South)",
-    "unlocks": [
-      "Route 5"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Roggenrola",
-          "count": 1
-        },
-        {
-          "species": "Purrloin",
-          "count": 1
-        },
-        {
-          "species": "Chingling",
-          "count": 1
-        },
-        {
-          "species": "Riolu",
-          "count": 1
-        },
-        {
-          "species": "Barboach",
-          "count": 1
-        }
-      ]
-    }
-  },
-  {
-    "challengeName": "Challenge 10",
-    "areaId": "Route 5",
-    "unlocks": [
-      "Camphrier Town"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Route 5",
-        "count": 25
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 11",
-    "areaId": "Camphrier Town",
-    "unlocks": [
-      "Parfum Palace"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Gothita",
-          "count": 1
-        },
-        {
-          "species": "Sandile",
-          "count": 1
-        },
-        {
-          "species": "Foongus",
-          "count": 1
-        },
-        {
-          "species": "Electrike",
-          "count": 1
-        },
-        {
-          "species": "Horsea",
-          "count": 1
-        }
-      ]
-    }
-  },
-  {
-    "challengeName": "Challenge 12",
-    "areaId": "Parfum Palace",
-    "unlocks": [
-      "Route 6"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Parfum Palace",
         "count": 50
       }
     }
   },
   {
-    "challengeName": "Challenge 13",
+    "challengeName": "Challenge 07",
+    "areaId": "Lumiose South Boulevard",
+    "unlocks": [
+      "Route 5"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Lumiose South Boulevard",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 08",
+    "areaId": "Route 5",
+    "unlocks": [
+      "Camphrier Berry Fields"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Route 5",
+        "count": 75
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 09",
+    "areaId": "Camphrier Berry Fields",
+    "unlocks": [
+      "Route 6"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Camphrier Berry Fields",
+        "count": 75
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 10",
     "areaId": "Route 6",
     "unlocks": [
       "Route 7"
     ],
     "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Poliwag",
-          "count": 1
-        },
-        {
-          "species": "Nidoran♂",
-          "count": 1
-        },
-        {
-          "species": "Farfetch'd",
-          "count": 1
-        },
-        {
-          "species": "Bellsprout",
-          "count": 1
-        },
-        {
-          "species": "Flabébé",
-          "count": 1
-        }
-      ]
+      "defeatCountRoute": {
+        "route": "Route 6",
+        "count": 75
+      }
     }
   },
   {
-    "challengeName": "Challenge 14",
+    "challengeName": "Challenge 11",
     "areaId": "Route 7",
     "unlocks": [
       "Connecting Cave"
@@ -3140,179 +2954,93 @@ export const kalosUnlocks = [
     "requirements": {
       "defeatCountRoute": {
         "route": "Route 7",
-        "count": 50
+        "count": 75
       }
     }
   },
   {
-    "challengeName": "Challenge 15",
+    "challengeName": "Challenge 12",
     "areaId": "Connecting Cave",
-    "unlocks": [
-      "Ambrette Town"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Bagon",
-          "count": 1
-        },
-        {
-          "species": "Gulpin",
-          "count": 1
-        },
-        {
-          "species": "Golett",
-          "count": 1
-        },
-        {
-          "species": "Bergmite",
-          "count": 1
-        },
-        {
-          "species": "Smoochum",
-          "count": 1
-        }
-      ]
-    }
-  },
-  {
-    "challengeName": "Challenge 16",
-    "areaId": "Ambrette Town",
-    "unlocks": [
-      "Ambrette Town (Fishing)"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Ambrette Town",
-        "count": 50
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 17",
-    "areaId": "Ambrette Town (Fishing)",
     "unlocks": [
       "Route 8"
     ],
     "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Shellder",
-          "count": 1
-        },
-        {
-          "species": "Carvanha",
-          "count": 1
-        },
-        {
-          "species": "Binacle",
-          "count": 1
-        },
-        {
-          "species": "Corphish",
-          "count": 1
-        },
-        {
-          "species": "Phantump",
-          "count": 1
-        }
-      ]
+      "defeatCountRoute": {
+        "route": "Connecting Cave",
+        "count": 100
+      }
     }
   },
   {
-    "challengeName": "Challenge 18",
+    "challengeName": "Challenge 13",
     "areaId": "Route 8",
+    "unlocks": [
+      "Ambrette Cliffs"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Route 8",
+        "count": 100
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 14",
+    "areaId": "Ambrette Cliffs",
     "unlocks": [
       "Route 9"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Route 8",
-        "count": 50
+        "route": "Ambrette Cliffs",
+        "count": 100
       }
     }
   },
   {
-    "challengeName": "Challenge 19",
+    "challengeName": "Challenge 15",
     "areaId": "Route 9",
     "unlocks": [
       "Glittering Cave"
     ],
     "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Pansage",
-          "count": 1
-        },
-        {
-          "species": "Panpour",
-          "count": 1
-        },
-        {
-          "species": "Cubone",
-          "count": 1
-        },
-        {
-          "species": "Goldeen",
-          "count": 1
-        },
-        {
-          "species": "Psyduck",
-          "count": 1
-        }
-      ]
-    }
-  },
-  {
-    "challengeName": "Challenge 20",
-    "areaId": "Glittering Cave",
-    "unlocks": [
-      "Cyllage City"
-    ],
-    "requirements": {
       "defeatCountRoute": {
-        "route": "Glittering Cave",
-        "count": 50
+        "route": "Route 9",
+        "count": 100
       }
     }
   },
   {
-    "challengeName": "Challenge 21",
-    "areaId": "Cyllage City",
+    "challengeName": "Challenge 16",
+    "areaId": "Glittering Cave",
+    "unlocks": [
+      "Cyllage Seaside Slope"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Glittering Cave",
+        "count": 100
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 17",
+    "areaId": "Cyllage Seaside Slope",
     "unlocks": [
       "Cyllage City Gym"
     ],
     "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Exeggcute",
-          "count": 1
-        },
-        {
-          "species": "Dwebble",
-          "count": 1
-        },
-        {
-          "species": "Trubbish",
-          "count": 1
-        },
-        {
-          "species": "Stunky",
-          "count": 1
-        },
-        {
-          "species": "Chinchou",
-          "count": 1
-        }
-      ]
+      "defeatCountRoute": {
+        "route": "Cyllage Seaside Slope",
+        "count": 125
+      }
     }
   },
   {
-    "challengeName": "Challenge 22",
+    "challengeName": "Challenge 18",
     "areaId": "Cyllage City Gym",
     "unlocks": [
-      "Route 10",
-      "Cyllage City (Fishing)"
+      "Route 10"
     ],
     "requirements": {
       "earnBadge": {
@@ -3323,95 +3051,72 @@ export const kalosUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 23",
+    "challengeName": "Challenge 19",
     "areaId": "Route 10",
     "unlocks": [
-      "Geosenge Town"
+      "Geosenge Megalith Ruins"
     ],
     "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Pumpkaboo",
-          "count": 1
-        },
-        {
-          "species": "Tentacool",
-          "count": 1
-        },
-        {
-          "species": "Staravia",
-          "count": 1
-        },
-        {
-          "species": "Vibrava",
-          "count": 1
-        },
-        {
-          "species": "Lombre",
-          "count": 1
-        }
-      ]
+      "defeatCountRoute": {
+        "route": "Route 10",
+        "count": 125
+      }
     }
   },
   {
-    "challengeName": "Challenge 24",
-    "areaId": "Geosenge Town",
+    "challengeName": "Challenge 20",
+    "areaId": "Geosenge Megalith Ruins",
     "unlocks": [
       "Route 11"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Geosenge Town",
-        "count": 100
+        "route": "Geosenge Megalith Ruins",
+        "count": 125
       }
     }
   },
   {
-    "challengeName": "Challenge 25",
+    "challengeName": "Challenge 21",
     "areaId": "Route 11",
     "unlocks": [
-      "Shalour City"
+      "Reflection Cave"
     ],
     "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Clamperl",
-          "count": 1
-        },
-        {
-          "species": "Scraggy",
-          "count": 1
-        },
-        {
-          "species": "Drifloon",
-          "count": 1
-        },
-        {
-          "species": "Pancham",
-          "count": 1
-        },
-        {
-          "species": "Pidgeotto",
-          "count": 1
-        }
-      ]
+      "defeatCountRoute": {
+        "route": "Route 11",
+        "count": 125
+      }
     }
   },
   {
-    "challengeName": "Challenge 26",
-    "areaId": "Shalour City",
+    "challengeName": "Challenge 22",
+    "areaId": "Reflection Cave",
+    "unlocks": [
+      "Shalour Beachfront"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Reflection Cave",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 23",
+    "areaId": "Shalour Beachfront",
     "unlocks": [
       "Shalour City Gym"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Shalour City",
-        "count": 100
+        "route": "Shalour Beachfront",
+        "count": 150
       }
     }
   },
   {
-    "challengeName": "Challenge 27",
+    "challengeName": "Challenge 24",
     "areaId": "Shalour City Gym",
     "unlocks": [
       "Route 12"
@@ -3425,68 +3130,75 @@ export const kalosUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 28",
+    "challengeName": "Challenge 25",
     "areaId": "Route 12",
     "unlocks": [
-      "Azure Bay"
+      "Azure Deep"
     ],
     "requirements": {
       "defeatCountRoute": {
         "route": "Route 12",
-        "count": 100
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 26",
+    "areaId": "Azure Deep",
+    "unlocks": [
+      "Azure Bay Isles"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Azure Deep",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 27",
+    "areaId": "Azure Bay Isles",
+    "unlocks": [
+      "Coumarine Seaside Hill"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Azure Bay Isles",
+        "count": 175
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 28",
+    "areaId": "Coumarine Seaside Hill",
+    "unlocks": [
+      "Coumarine Docks"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Coumarine Seaside Hill",
+        "count": 175
       }
     }
   },
   {
     "challengeName": "Challenge 29",
-    "areaId": "Azure Bay",
-    "unlocks": [
-      "Azure Bay (Fishing)"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Butterfree",
-          "count": 1
-        },
-        {
-          "species": "Vanillish",
-          "count": 1
-        },
-        {
-          "species": "Kadabra",
-          "count": 1
-        },
-        {
-          "species": "Wailmer",
-          "count": 1
-        },
-        {
-          "species": "Ariados",
-          "count": 1
-        }
-      ]
-    }
-  },
-  {
-    "challengeName": "Challenge 30",
-    "areaId": "Azure Bay (Fishing)",
+    "areaId": "Coumarine Docks",
     "unlocks": [
       "Coumarine City Gym"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Azure Bay (Fishing)",
-        "count": 100
+        "route": "Coumarine Docks",
+        "count": 175
       }
     }
   },
   {
-    "challengeName": "Challenge 31",
+    "challengeName": "Challenge 30",
     "areaId": "Coumarine City Gym",
     "unlocks": [
-      "Coumarine City (Fishing)",
-      "Starter Depot"
+      "Route 13"
     ],
     "requirements": {
       "earnBadge": {
@@ -3497,64 +3209,33 @@ export const kalosUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 32",
-    "areaId": "Coumarine City (Fishing)",
+    "challengeName": "Challenge 31",
+    "areaId": "Route 13",
     "unlocks": [
-      "Route 13"
+      "Lumiose North Boulevard"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Coumarine City (Fishing)",
+        "route": "Route 13",
+        "count": 200
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 32",
+    "areaId": "Lumiose North Boulevard",
+    "unlocks": [
+      "Lumiose City Gym"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Lumiose North Boulevard",
         "count": 200
       }
     }
   },
   {
     "challengeName": "Challenge 33",
-    "areaId": "Route 13",
-    "unlocks": [
-      "Lumiose City (North)"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Wormadam",
-          "count": 1
-        },
-        {
-          "species": "Mothim",
-          "count": 1
-        },
-        {
-          "species": "Dugtrio",
-          "count": 1
-        },
-        {
-          "species": "Marowak",
-          "count": 1
-        },
-        {
-          "species": "Swoobat",
-          "count": 1
-        }
-      ]
-    }
-  },
-  {
-    "challengeName": "Challenge 34",
-    "areaId": "Lumiose City (North)",
-    "unlocks": [
-      "Lumiose City Gym"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Lumiose City (North)",
-        "count": 200
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 35",
     "areaId": "Lumiose City Gym",
     "unlocks": [
       "Route 14"
@@ -3568,10 +3249,10 @@ export const kalosUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 36",
+    "challengeName": "Challenge 34",
     "areaId": "Route 14",
     "unlocks": [
-      "Laverre City"
+      "Laverre Mushroom Woods"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -3581,38 +3262,20 @@ export const kalosUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 37",
-    "areaId": "Laverre City",
+    "challengeName": "Challenge 35",
+    "areaId": "Laverre Mushroom Woods",
     "unlocks": [
       "Laverre City Gym"
     ],
     "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Liepard",
-          "count": 1
-        },
-        {
-          "species": "Doublade",
-          "count": 1
-        },
-        {
-          "species": "Sandslash",
-          "count": 1
-        },
-        {
-          "species": "Granbull",
-          "count": 1
-        },
-        {
-          "species": "Piloswine",
-          "count": 1
-        }
-      ]
+      "defeatCountRoute": {
+        "route": "Laverre Mushroom Woods",
+        "count": 200
+      }
     }
   },
   {
-    "challengeName": "Challenge 38",
+    "challengeName": "Challenge 36",
     "areaId": "Laverre City Gym",
     "unlocks": [
       "Route 15"
@@ -3626,142 +3289,63 @@ export const kalosUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 39",
+    "challengeName": "Challenge 37",
     "areaId": "Route 15",
     "unlocks": [
-      "Lost Hotel"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Jynx",
-          "count": 1
-        },
-        {
-          "species": "Chimecho",
-          "count": 1
-        },
-        {
-          "species": "Swellow",
-          "count": 1
-        },
-        {
-          "species": "Golbat",
-          "count": 1
-        },
-        {
-          "species": "Banette",
-          "count": 1
-        }
-      ]
-    }
-  },
-  {
-    "challengeName": "Challenge 40",
-    "areaId": "Lost Hotel",
-    "unlocks": [
-      "Dendemille Town"
+      "Dendemille Windmill Farm"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Lost Hotel",
-        "count": 200
+        "route": "Route 15",
+        "count": 225
       }
     }
   },
   {
-    "challengeName": "Challenge 41",
-    "areaId": "Dendemille Town",
-    "unlocks": [
-      "Route 16"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Lunatone",
-          "count": 1
-        },
-        {
-          "species": "Lanturn",
-          "count": 1
-        },
-        {
-          "species": "Jumpluff",
-          "count": 1
-        },
-        {
-          "species": "Solrock",
-          "count": 1
-        },
-        {
-          "species": "Aromatisse",
-          "count": 1
-        }
-      ]
-    }
-  },
-  {
-    "challengeName": "Challenge 42",
-    "areaId": "Route 16",
+    "challengeName": "Challenge 38",
+    "areaId": "Dendemille Windmill Farm",
     "unlocks": [
       "Frost Cavern"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Route 16",
-        "count": 300
+        "route": "Dendemille Windmill Farm",
+        "count": 225
       }
     }
   },
   {
-    "challengeName": "Challenge 43",
+    "challengeName": "Challenge 39",
     "areaId": "Frost Cavern",
     "unlocks": [
-      "Anistar City"
+      "Anistar Sundial Terrace"
     ],
     "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Swalot",
-          "count": 1
-        },
-        {
-          "species": "Crawdaunt",
-          "count": 1
-        },
-        {
-          "species": "Whiscash",
-          "count": 1
-        },
-        {
-          "species": "Grumpig",
-          "count": 1
-        },
-        {
-          "species": "Klefki",
-          "count": 1
-        }
-      ]
+      "defeatCountRoute": {
+        "route": "Frost Cavern",
+        "count": 225
+      }
     }
   },
   {
-    "challengeName": "Challenge 44",
-    "areaId": "Anistar City",
+    "challengeName": "Challenge 40",
+    "areaId": "Anistar Sundial Terrace",
     "unlocks": [
       "Anistar City Gym"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Anistar City",
-        "count": 300
+        "route": "Anistar Sundial Terrace",
+        "count": 225
       }
     }
   },
   {
-    "challengeName": "Challenge 45",
+    "challengeName": "Challenge 41",
     "areaId": "Anistar City Gym",
     "unlocks": [
-      "Route 17"
+      "Route 17",
+      "Path to Team Flare Secret HQ"
     ],
     "requirements": {
       "earnBadge": {
@@ -3772,155 +3356,114 @@ export const kalosUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 46",
+    "challengeName": "Challenge 42",
     "areaId": "Route 17",
     "unlocks": [
-      "Couriway Town"
+      "Couriway Cascades"
     ],
     "requirements": {
       "defeatCountRoute": {
         "route": "Route 17",
-        "count": 300
+        "count": 250
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 43",
+    "areaId": "Couriway Cascades",
+    "unlocks": [
+      "Route 18"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Couriway Cascades",
+        "count": 250
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 44",
+    "areaId": "Route 18",
+    "unlocks": [
+      "Route 19 Marshlands"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Route 18",
+        "count": 250
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 45",
+    "areaId": "Route 19 Marshlands",
+    "unlocks": [
+      "Vallée Grande Marshlands"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Route 19 Marshlands",
+        "count": 250
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 46",
+    "areaId": "Vallée Grande Marshlands",
+    "unlocks": [
+      "Snowbelle Frostwoods"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Vallée Grande Marshlands",
+        "count": 275
       }
     }
   },
   {
     "challengeName": "Challenge 47",
-    "areaId": "Couriway Town",
+    "areaId": "Snowbelle Frostwoods",
     "unlocks": [
-      "Route 18"
+      "Route 20"
     ],
     "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Heatmor",
-          "count": 1
-        },
-        {
-          "species": "Scolipede",
-          "count": 1
-        },
-        {
-          "species": "Huntail",
-          "count": 1
-        },
-        {
-          "species": "Mantine",
-          "count": 1
-        },
-        {
-          "species": "Raichu",
-          "count": 1
-        }
-      ]
+      "defeatCountRoute": {
+        "route": "Snowbelle Frostwoods",
+        "count": 275
+      }
     }
   },
   {
     "challengeName": "Challenge 48",
-    "areaId": "Route 18",
+    "areaId": "Route 20",
     "unlocks": [
-      "Terminus Cave (Surface)"
+      "Hidden Village Glade"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Route 18",
-        "count": 300
+        "route": "Route 20",
+        "count": 275
       }
     }
   },
   {
     "challengeName": "Challenge 49",
-    "areaId": "Terminus Cave (Surface)",
-    "unlocks": [
-      "Route 19"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Druddigon",
-          "count": 1
-        },
-        {
-          "species": "Scrafty",
-          "count": 1
-        },
-        {
-          "species": "Ferrothorn",
-          "count": 1
-        },
-        {
-          "species": "Miltank",
-          "count": 1
-        },
-        {
-          "species": "Bellossom",
-          "count": 1
-        }
-      ]
-    }
-  },
-  {
-    "challengeName": "Challenge 50",
-    "areaId": "Route 19",
-    "unlocks": [
-      "Route 19 (Fishing)"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Route 19",
-        "count": 300
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 51",
-    "areaId": "Route 19 (Fishing)",
-    "unlocks": [
-      "Snowbelle City"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Sigilyph",
-          "count": 1
-        },
-        {
-          "species": "Exploud",
-          "count": 1
-        },
-        {
-          "species": "Tauros",
-          "count": 1
-        },
-        {
-          "species": "Toxicroak",
-          "count": 1
-        },
-        {
-          "species": "Altaria",
-          "count": 1
-        }
-      ]
-    }
-  },
-  {
-    "challengeName": "Challenge 52",
-    "areaId": "Snowbelle City",
+    "areaId": "Hidden Village Glade",
     "unlocks": [
       "Snowbelle City Gym"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Snowbelle City",
-        "count": 300
+        "route": "Hidden Village Glade",
+        "count": 275
       }
     }
   },
   {
-    "challengeName": "Challenge 53",
+    "challengeName": "Challenge 50",
     "areaId": "Snowbelle City Gym",
     "unlocks": [
-      "Route 20"
+      "Route 21"
     ],
     "requirements": {
       "earnBadge": {
@@ -3931,95 +3474,20 @@ export const kalosUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 54",
-    "areaId": "Route 20",
-    "unlocks": [
-      "Pokémon Village"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Route 20",
-        "count": 300
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 55",
-    "areaId": "Pokémon Village",
-    "unlocks": [
-      "Pokémon Village (Fishing)"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Scizor",
-          "count": 1
-        },
-        {
-          "species": "Gengar",
-          "count": 1
-        },
-        {
-          "species": "Alakazam",
-          "count": 1
-        },
-        {
-          "species": "Wailord",
-          "count": 1
-        },
-        {
-          "species": "Ursaring",
-          "count": 1
-        }
-      ]
-    }
-  },
-  {
-    "challengeName": "Challenge 56",
-    "areaId": "Pokémon Village (Fishing)",
-    "unlocks": [
-      "Route 21"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Pokémon Village (Fishing)",
-        "count": 300
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 57",
+    "challengeName": "Challenge 51",
     "areaId": "Route 21",
     "unlocks": [
       "Victory Road"
     ],
     "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Honchkrow",
-          "count": 1
-        },
-        {
-          "species": "Nidoking",
-          "count": 1
-        },
-        {
-          "species": "Shuckle",
-          "count": 1
-        },
-        {
-          "species": "Conkeldurr",
-          "count": 1
-        },
-        {
-          "species": "Pyroar",
-          "count": 1
-        }
-      ]
+      "defeatCountRoute": {
+        "route": "Route 21",
+        "count": 300
+      }
     }
   },
   {
-    "challengeName": "Challenge 58",
+    "challengeName": "Challenge 52",
     "areaId": "Victory Road",
     "unlocks": [
       "Kalos Pokemon League"
@@ -4032,50 +3500,101 @@ export const kalosUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge A 1",
-    "areaId": "Cyllage City (Fishing)",
+    "challengeName": "Challenge 53",
+    "areaId": "Kalos Pokemon League",
     "unlocks": [
-      "Reflection Cave"
+      "Starter Depot",
+      "Path to Sea Spirit Den",
+      "Path to Secret Chambers"
     ],
     "requirements": {
+      "defeatKalosChampion": true
+    }
+  },
+  {
+    "challengeName": "Extra Challenge A 1",
+    "areaId": "Route 22",
+    "requirements": {
       "defeatCountRoute": {
-        "route": "Cyllage City (Fishing)",
+        "route": "Route 22",
         "count": 150
       }
-    }
+    },
+    "unlocks": [
+      "Parfum Palace Gardens"
+    ]
   },
   {
     "challengeName": "Extra Challenge A 2",
-    "areaId": "Reflection Cave",
-    "unlocks": [
-      "Tower of Mastery"
-    ],
+    "areaId": "Parfum Palace Gardens",
     "requirements": {
       "defeatCountRoute": {
-        "route": "Reflection Cave",
+        "route": "Parfum Palace Gardens",
         "count": 150
       }
-    }
+    },
+    "unlocks": [
+      "Ambrette Reef"
+    ]
   },
   {
     "challengeName": "Extra Challenge A 3",
-    "areaId": "Tower of Mastery",
+    "areaId": "Ambrette Reef",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Ambrette Reef",
+        "count": 150
+      }
+    },
     "unlocks": [
-      "Coumarine City"
-    ],
+      "Cyllage Tidepools"
+    ]
+  },
+  {
+    "challengeName": "Extra Challenge A 4",
+    "areaId": "Cyllage Tidepools",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Cyllage Tidepools",
+        "count": 150
+      }
+    },
+    "unlocks": [
+      "Tower of Mastery"
+    ]
+  },
+  {
+    "challengeName": "Extra Challenge A 5",
+    "areaId": "Tower of Mastery",
     "requirements": {
       "defeatCountRoute": {
         "route": "Tower of Mastery",
         "count": 150
       }
-    }
+    },
+    "unlocks": [
+      "Lost Hotel"
+    ]
   },
   {
-    "challengeName": "Extra Challenge A 4",
-    "areaId": "Coumarine City",
+    "challengeName": "Extra Challenge A 6",
+    "areaId": "Lost Hotel",
     "requirements": {
       "defeatCountRoute": {
-        "route": "Coumarine City",
+        "route": "Lost Hotel",
+        "count": 150
+      }
+    },
+    "unlocks": [
+      "Route 16"
+    ]
+  },
+  {
+    "challengeName": "Extra Challenge A 7",
+    "areaId": "Route 16",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Route 16",
         "count": 150
       }
     },
@@ -4086,82 +3605,75 @@ export const kalosUnlocks = [
   },
   {
     "challengeName": "Extra Challenge B 1",
-    "areaId": "Starter Depot",
-    "unlocks": [
-      "Starter Evolved Depot"
-    ],
+    "areaId": "Path to Team Flare Secret HQ",
     "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Rowlet",
-          "count": 1
-        },
-        {
-          "species": "Litten",
-          "count": 1
-        },
-        {
-          "species": "Popplio",
-          "count": 1
-        }
-      ]
-    }
+      "defeatCountRoute": {
+        "route": "Path to Team Flare Secret HQ",
+        "count": 150
+      }
+    },
+    "unlocks": [
+      "Team Flare Secret HQ Gate"
+    ]
   },
   {
     "challengeName": "Extra Challenge B 2",
-    "areaId": "Starter Evolved Depot",
-    "unlocks": [
-      "Kiloude City"
-    ],
+    "areaId": "Team Flare Secret HQ Gate",
     "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Dartrix",
-          "count": 1
-        },
-        {
-          "species": "Torracat",
-          "count": 1
-        },
-        {
-          "species": "Brionne",
-          "count": 1
-        }
-      ]
-    }
+      "defeatCountRoute": {
+        "route": "Team Flare Secret HQ Gate",
+        "count": 150
+      }
+    },
+    "unlocks": [
+      "Team Flare Secret HQ Entrance"
+    ]
   },
   {
     "challengeName": "Extra Challenge B 3",
-    "areaId": "Kiloude City",
-    "unlocks": [
-      "Friend Safari"
-    ],
+    "areaId": "Team Flare Secret HQ Entrance",
     "requirements": {
       "defeatCountRoute": {
-        "route": "Kiloude City",
+        "route": "Team Flare Secret HQ Entrance",
         "count": 150
       }
-    }
+    },
+    "unlocks": [
+      "Team Flare Secret HQ Hall"
+    ]
   },
   {
     "challengeName": "Extra Challenge B 4",
-    "areaId": "Friend Safari",
-    "unlocks": [
-      "Battle Maison"
-    ],
+    "areaId": "Team Flare Secret HQ Hall",
     "requirements": {
       "defeatCountRoute": {
-        "route": "Friend Safari",
+        "route": "Team Flare Secret HQ Hall",
         "count": 150
       }
-    }
+    },
+    "unlocks": [
+      "Terminus Cave (Surface)"
+    ]
   },
   {
     "challengeName": "Extra Challenge B 5",
-    "areaId": "Battle Maison",
+    "areaId": "Terminus Cave (Surface)",
     "requirements": {
       "defeatCountRoute": {
-        "route": "Battle Maison",
+        "route": "Terminus Cave (Surface)",
+        "count": 150
+      }
+    },
+    "unlocks": [
+      "Pokémon Village"
+    ]
+  },
+  {
+    "challengeName": "Extra Challenge B 6",
+    "areaId": "Pokémon Village",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Pokémon Village",
         "count": 150
       }
     },
@@ -4172,245 +3684,200 @@ export const kalosUnlocks = [
   },
   {
     "challengeName": "Extra Challenge C 1",
-    "areaId": "Path to Sea Spirit Den",
+    "areaId": "Starter Depot",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Starter Depot",
+        "count": 150
+      }
+    },
     "unlocks": [
-      "Sea Spirit Den Outer Depths"
-    ],
+      "Starter Evolved Depot"
+    ]
+  },
+  {
+    "challengeName": "Extra Challenge C 2",
+    "areaId": "Starter Evolved Depot",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Starter Evolved Depot",
+        "count": 150
+      }
+    },
+    "unlocks": [
+      "Kiloude Southern Hills"
+    ]
+  },
+  {
+    "challengeName": "Extra Challenge C 3",
+    "areaId": "Kiloude Southern Hills",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Kiloude Southern Hills",
+        "count": 150
+      }
+    },
+    "unlocks": [
+      "Friend Safari"
+    ]
+  },
+  {
+    "challengeName": "Extra Challenge C 4",
+    "areaId": "Friend Safari",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Friend Safari",
+        "count": 150
+      }
+    },
+    "unlocks": [
+      "Battle Maison"
+    ]
+  },
+  {
+    "challengeName": "Extra Challenge C 5",
+    "areaId": "Battle Maison",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Battle Maison",
+        "count": 150
+      }
+    },
+    "unlocks": [
+      "Secret Forest North"
+    ]
+  },
+  {
+    "challengeName": "Extra Challenge C 6",
+    "areaId": "Secret Forest North",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Secret Forest North",
+        "count": 150
+      }
+    },
+    "gift": {
+      "item": "Masterball",
+      "count": 1
+    }
+  },
+  {
+    "challengeName": "Extra Challenge D 1",
+    "areaId": "Path to Sea Spirit Den",
     "requirements": {
       "defeatCountRoute": {
         "route": "Path to Sea Spirit Den",
         "count": 150
       }
-    }
+    },
+    "unlocks": [
+      "Sea Spirit Den Outer Depths"
+    ]
   },
   {
-    "challengeName": "Extra Challenge C 2",
+    "challengeName": "Extra Challenge D 2",
     "areaId": "Sea Spirit Den Outer Depths",
-    "unlocks": [
-      "Sea Spirit Den Entrance"
-    ],
     "requirements": {
       "defeatCountRoute": {
         "route": "Sea Spirit Den Outer Depths",
         "count": 150
       }
-    }
+    },
+    "unlocks": [
+      "Sea Spirit Den Entrance"
+    ]
   },
   {
-    "challengeName": "Extra Challenge C 3",
+    "challengeName": "Extra Challenge D 3",
     "areaId": "Sea Spirit Den Entrance",
-    "unlocks": [
-      "Sea Spirit Den Tunnels"
-    ],
     "requirements": {
       "defeatCountRoute": {
         "route": "Sea Spirit Den Entrance",
         "count": 150
       }
-    }
+    },
+    "unlocks": [
+      "Sea Spirit Den Tunnels"
+    ]
   },
   {
-    "challengeName": "Extra Challenge C 4",
+    "challengeName": "Extra Challenge D 4",
     "areaId": "Sea Spirit Den Tunnels",
-    "unlocks": [
-      "Sea Spirit Den Hall"
-    ],
     "requirements": {
       "defeatCountRoute": {
         "route": "Sea Spirit Den Tunnels",
         "count": 150
       }
     },
+    "unlocks": [
+      "Sea Spirit Den Hall"
+    ]
+  },
+  {
+    "challengeName": "Extra Challenge D 5",
+    "areaId": "Sea Spirit Den Hall",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Sea Spirit Den Hall",
+        "count": 150
+      }
+    },
     "gift": {
       "item": "Masterball",
       "count": 1
     }
   },
   {
-    "challengeName": "Extra Challenge C 5",
-    "areaId": "Sea Spirit Den Hall",
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Articuno",
-          "count": 1
-        },
-        {
-          "species": "Zapdos",
-          "count": 1
-        },
-        {
-          "species": "Moltres",
-          "count": 1
-        }
-      ]
-    },
-    "gift": {
-      "item": "Masterball",
-      "count": 2
-    }
-  },
-  {
-    "challengeName": "Extra Challenge D 1",
+    "challengeName": "Extra Challenge E 1",
     "areaId": "Path to Secret Chambers",
-    "unlocks": [
-      "Underground Chambers (Crystal Cave Tunnels)"
-    ],
     "requirements": {
       "defeatCountRoute": {
         "route": "Path to Secret Chambers",
         "count": 150
       }
-    }
+    },
+    "unlocks": [
+      "Chambers of Emptiness"
+    ]
   },
   {
-    "challengeName": "Extra Challenge D 4",
+    "challengeName": "Extra Challenge E 2",
     "areaId": "Chambers of Emptiness",
-    "unlocks": [
-      "Ultimate Chamber"
-    ],
     "requirements": {
       "defeatCountRoute": {
         "route": "Chambers of Emptiness",
         "count": 150
       }
     },
-    "gift": {
-      "item": "Masterball",
-      "count": 2
-    }
-  },
-  {
-    "challengeName": "Extra Challenge D 5",
-    "areaId": "Ultimate Chamber",
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Volcanion",
-          "count": 1
-        },
-        {
-          "species": "Diancie",
-          "count": 1
-        },
-        {
-          "species": "Hoopa",
-          "count": 1
-        },
-        {
-          "species": "Mewtwo",
-          "count": 1
-        }
-      ]
-    },
-    "gift": {
-      "item": "Masterball",
-      "count": 2
-    }
-  },
-  {
-    "challengeName": "Extra Challenge E 1",
-    "areaId": "Path to Team Flare Secret HQ",
     "unlocks": [
-      "Team Flare Secret HQ Gate"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Path to Team Flare Secret HQ",
-        "count": 150
-      }
-    }
-  },
-  {
-    "challengeName": "Extra Challenge E 2",
-    "areaId": "Team Flare Secret HQ Gate",
-    "unlocks": [
-      "Team Flare Secret HQ Entrance"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Team Flare Secret HQ Gate",
-        "count": 150
-      }
-    }
+      "Underground Chambers"
+    ]
   },
   {
     "challengeName": "Extra Challenge E 3",
-    "areaId": "Team Flare Secret HQ Entrance",
-    "unlocks": [
-      "Team Flare Secret HQ Hall"
-    ],
+    "areaId": "Underground Chambers",
     "requirements": {
       "defeatCountRoute": {
-        "route": "Team Flare Secret HQ Entrance",
+        "route": "Underground Chambers",
         "count": 150
       }
-    }
+    },
+    "unlocks": [
+      "Ultimate Chamber"
+    ]
   },
   {
     "challengeName": "Extra Challenge E 4",
-    "areaId": "Team Flare Secret HQ Hall",
+    "areaId": "Ultimate Chamber",
     "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Salamence",
-          "count": 1
-        },
-        {
-          "species": "Tyranitar",
-          "count": 1
-        },
-        {
-          "species": "Hydreigon",
-          "count": 1
-        },
-        {
-          "species": "Garchomp",
-          "count": 1
-        }
-      ]
+      "defeatCountRoute": {
+        "route": "Ultimate Chamber",
+        "count": 150
+      }
     },
     "gift": {
       "item": "Masterball",
       "count": 1
-    }
-  },
-  {
-    "challengeName": "Extra Challenge D 2",
-    "areaId": "Underground Chambers (Crystal Cave Tunnels)",
-    "unlocks": [
-      "Garden Chambers (Secret Forest North)"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Underground Chambers (Crystal Cave Tunnels)",
-        "count": 150
-      }
-    }
-  },
-  {
-    "challengeName": "Extra Challenge D 3",
-    "areaId": "Garden Chambers (Secret Forest North)",
-    "unlocks": [
-      "Chambers of Emptiness"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Garden Chambers (Secret Forest North)",
-        "count": 150
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 59",
-    "areaId": "Kalos Pokemon League",
-    "unlocks": [
-      "Path to Sea Spirit Den",
-      "Path to Team Flare Secret HQ",
-      "Path to Secret Chambers"
-    ],
-    "requirements": {
-      "defeatKalosChampion": true
     }
   },
   {
@@ -4421,8 +3888,8 @@ export const kalosUnlocks = [
     ],
     "requirements": {
       "completeChallenges": [
-        "Extra Challenge C 4",
-        "Extra Challenge D 4",
+        "Extra Challenge C 6",
+        "Extra Challenge D 5",
         "Extra Challenge E 4"
       ]
     }
