@@ -81,15 +81,21 @@ function evaluateRequirements(req, unlock) {
     if (req.catchSpeciesAnyOf) {
          for (let specGroup of req.catchSpeciesAnyOf) {
              let caughtCount = 0;
-             for (let s of specGroup.species) {
+             let speciesList = Array.isArray(specGroup) ? specGroup : specGroup.species;
+             let requiredCount = specGroup.count || (Array.isArray(specGroup) && specGroup[0] && specGroup[0].count) || 1;
+
+             let flatSpeciesList = [];
+             for (let sObj of speciesList) {
+                 let s = sObj.species ? sObj.species : sObj;
+                 flatSpeciesList.push(s);
                  caughtCount += state.stats.caughtSpecies ? (state.stats.caughtSpecies[s] || 0) : 0;
              }
              progress.push({
                  type: 'catchSpeciesAnyOf',
-                 speciesList: specGroup.species,
+                 speciesList: flatSpeciesList,
                  current: caughtCount,
-                 required: specGroup.count,
-                 isMet: caughtCount >= specGroup.count
+                 required: requiredCount,
+                 isMet: caughtCount >= requiredCount
              });
          }
     }
@@ -323,7 +329,7 @@ function formatRequirements(progressList) {
         } else if (p.type === 'catchSpeciesByQuality') {
             textParts.push(`Catch ${p.required} ${p.quality} ${formatSpecies(p.species)} ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`);
         } else if (p.type === 'catchSpeciesAnyOf') {
-            let speciesList = p.speciesList.map(formatSpecies).join(' or ');
+            let speciesList = p.speciesList.map(s => formatSpecies(s)).join(' or ');
             textParts.push(`Catch ${p.required} ${speciesList} ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`);
         } else if (p.type === 'catchSpeciesAnyOfByQuality') {
             let speciesList = p.speciesList.map(formatSpecies).join(' or ');

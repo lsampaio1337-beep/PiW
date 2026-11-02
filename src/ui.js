@@ -271,6 +271,13 @@ window.completeChallenge = function(targetAreaId) {
                  if (state.stats.challengeCaughtSpecific) delete state.stats.challengeCaughtSpecific[s.species + "_" + s.quality];
              }
         }
+        if (unlock.requirements.catchSpeciesAnyOfByQuality) {
+             for (let group of unlock.requirements.catchSpeciesAnyOfByQuality) {
+                 for (let s of group.species) {
+                     if (state.stats.challengeCaughtSpecific) delete state.stats.challengeCaughtSpecific[s + "_" + group.quality];
+                 }
+             }
+        }
         if (unlock.requirements.catchByQualityAndType) {
              if (state.stats.challengeCaughtSpecific) delete state.stats.challengeCaughtSpecific[unlock.requirements.catchByQualityAndType.type + "_" + unlock.requirements.catchByQualityAndType.quality];
         }
@@ -360,6 +367,23 @@ window.cheatProgressChallenge = function(targetAreaId) {
                 let key = r.species + "_" + r.quality;
                 if (key === '__proto__' || key === 'constructor' || key === 'prototype') return;
                 state.stats.challengeCaughtSpecific[key] = (state.stats.challengeCaughtSpecific[key] || 0) + r.count;
+            });
+        }
+        if (req.catchSpeciesAnyOf) {
+            if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
+            req.catchSpeciesAnyOf.forEach(r => {
+                let speciesList = Array.isArray(r) ? r : r.species;
+                let firstSpecies = speciesList[0];
+                if (firstSpecies && typeof firstSpecies === 'object' && firstSpecies.species) {
+                    firstSpecies = firstSpecies.species;
+                }
+                let count = r.count || (Array.isArray(r) && r[0] && r[0].count) || 1;
+
+                if (firstSpecies === '__proto__' || firstSpecies === 'constructor' || firstSpecies === 'prototype') return;
+                if (!state.stats.caughtSpecies[firstSpecies]) {
+                    state.stats.caughtSpeciesCount = (state.stats.caughtSpeciesCount || 0) + 1;
+                }
+                state.stats.caughtSpecies[firstSpecies] = (state.stats.caughtSpecies[firstSpecies] || 0) + count;
             });
         }
         if (req.catchSpeciesAnyOfByQuality) {
