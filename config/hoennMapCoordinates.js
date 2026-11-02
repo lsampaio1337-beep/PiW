@@ -199,11 +199,6 @@ const hoennMapCoordinates = {
     "x": 93.52,
     "y": 34.99
   },
-  "ever_grande_city": {
-    "name": "Hoenn Pokemon League",
-    "x": 86.66,
-    "y": 48.18
-  },
   "victory_road": {
     "name": "Victory Road",
     "x": 94.16,
@@ -221,8 +216,8 @@ const hoennMapCoordinates = {
   },
   "sky_pillar": {
     "name": "Sky Pillar",
-    "x": 68.59,
-    "y": 52.76
+    "x": 69.56,
+    "y": 59.23
   },
   "route_126_underwater": {
     "name": "Route 126 Underwater",
@@ -253,11 +248,6 @@ const hoennMapCoordinates = {
     "name": "Daycare Special Spot",
     "x": 26.25,
     "y": 34.07
-  },
-  "low_sky_pillar": {
-    "name": "Low Sky Pillar",
-    "x": 68.25,
-    "y": 61.65
   },
   "battle_frontier_facility": {
     "name": "Battle Frontier Facility",
@@ -298,6 +288,22 @@ const hoennMapCoordinates = {
     "name": "Battle Stadium",
     "x": 87.98,
     "y": 25.16
+  }
+,
+  "advanced_starter_sanctuary_2": {
+    "name": "Advanced Starter Sanctuary",
+    "x": 25.6,
+    "y": 72.01
+  },
+  "starter_sanctuary": {
+    "name": "Starter Sanctuary",
+    "x": 12.84,
+    "y": 72.43
+  },
+  "slateport_docks": {
+    "name": "Slateport Docks",
+    "x": 33.4,
+    "y": 63.99
   }
 };
 
