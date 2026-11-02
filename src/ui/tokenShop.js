@@ -119,11 +119,21 @@ const TOKEN_SHOP_ITEMS = [
 ];
 
 function renderTokenShopItem(item) {
+    let isLocked = false;
+    let lockedText = "";
+    if (item.unlockKey === 'daycare' && (!state.globalStats || !state.globalStats.hasSeenDaycare)) {
+        isLocked = true;
+        lockedText = "<div style='color: #e74c3c; font-size: 10px; font-weight: bold; margin-bottom: 5px;'>Requires unlocking Daycare on map</div>";
+    }
+
+    let bgStyle = isLocked ? "background: #7f8c8d; opacity: 0.8; filter: grayscale(100%);" : "background: #2c3e50;";
+
     let html = `
-        <div style="background: #2c3e50; border: 2px solid #3498db; border-radius: 8px; padding: 8px; display: flex; flex-direction: column; align-items: center; text-align: center; justify-content: space-between; box-sizing: border-box; width: 100%;">
-            <div style="font-weight: bold; font-size: 12px; margin-bottom: 5px; height: 30px; display: flex; align-items: center;">${item.name}</div>
+        <div style="${bgStyle} border: 2px solid #3498db; border-radius: 8px; padding: 8px; display: flex; flex-direction: column; align-items: center; text-align: center; justify-content: space-between; box-sizing: border-box; width: 100%;">
+            <div style="font-weight: bold; font-size: 12px; margin-bottom: 5px; height: 30px; display: flex; align-items: center; color: ${isLocked ? '#bdc3c7' : 'white'};">${item.name}</div>
             <img src="${item.img}" style="width: 40px; height: 40px; object-fit: contain; margin-bottom: 5px;">
-            <div style="font-size: 10px; color: #bdc3c7; margin-bottom: 10px; flex-grow: 1;">${item.desc}</div>
+            ${lockedText}
+            <div style="font-size: 10px; color: ${isLocked ? '#ecf0f1' : '#bdc3c7'}; margin-bottom: 10px; flex-grow: 1;">${item.desc}</div>
     `;
 
     if (item.isSelectable) {
@@ -135,7 +145,7 @@ function renderTokenShopItem(item) {
         `;
     } else {
         html += `
-            <button onclick='${item.action}' style="width: 100%; padding: 8px; background: #2ecc71; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 12px;">
+            <button ${isLocked ? 'disabled' : `onclick='${item.action}'`} style="width: 100%; padding: 8px; background: ${isLocked ? '#95a5a6' : '#2ecc71'}; color: white; border: none; border-radius: 5px; cursor: ${isLocked ? 'not-allowed' : 'pointer'}; font-weight: bold; font-size: 12px;">
                 Buy for <img src="Assets/Extra/Token.png" style="width:14px;vertical-align:middle;"> ${item.price}
             </button>
         `;

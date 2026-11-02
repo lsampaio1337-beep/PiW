@@ -85,7 +85,13 @@ class DayCare {
         const hasAdvancedBreeder = this.state.stats && this.state.stats.upgrades && this.state.stats.upgrades.daycareTier >= 3;
         const maxQuality = hasAdvancedBreeder ? 1.99 : 1.80;
 
-        p.quality = Math.min(maxQuality, p.quality);
+        // Prevent quality from exceeding cap via breeding, but do not downgrade existing high quality
+        if (oldQuality < maxQuality) {
+            p.quality = Math.min(maxQuality, p.quality);
+        } else {
+            p.quality = oldQuality; // If they are already above the cap, they gain 0 bonus
+        }
+
         p.lastQBonus = Number((p.quality - oldQuality).toFixed(2));
 
         // Map Quality Tier if Q >= 1.5, 1.25, etc.
