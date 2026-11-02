@@ -332,6 +332,8 @@ function generateMarkersForRegion(region, unlockedAreas) {
         for (const [locationId, locationData] of Object.entries(state.config.sinnohMapCoordinates || {})) {
             const locationName = locationData.name;
             const coords = locationData;
+            let isUnlocked = unlockedAreas.has(locationName);
+            if (!isUnlocked) continue;
 
             let hasNewNotification = false;
             let showCheckmark = false;
@@ -419,6 +421,8 @@ function generateMarkersForRegion(region, unlockedAreas) {
         for (const [locationId, locationData] of Object.entries(state.config.unovaMapCoordinates || {})) {
             const locationName = locationData.name;
             const coords = locationData;
+            let isUnlocked = unlockedAreas.has(locationName);
+            if (!isUnlocked) continue;
 
             let hasNewNotification = false;
             let showCheckmark = false;
