@@ -1055,7 +1055,8 @@ class BattleSystem {
             let selectedSpawn;
 
             // Check if Roaming challenge is active for the 1% beast spawn
-            if (this.state.stats.activeChallenges && this.state.stats.activeChallenges.includes("Extra Challenge (Roaming)")) {
+            // Must not be in an active gym/league battle
+            if (!this.gymState?.isActive && this.state.stats.activeChallenges && this.state.stats.activeChallenges.includes("Extra Challenge (Roaming)")) {
                 const randomVal = typeof crypto !== 'undefined' ? (crypto.getRandomValues(new Uint32Array(1))[0] / (0xFFFFFFFF + 1)) : Math.random();
                 if (randomVal < 0.01) {
                     isRoamingEncounter = true;
@@ -1063,17 +1064,28 @@ class BattleSystem {
             }
 
             if (isRoamingEncounter) {
-                // Randomly select Raikou (243), Entei (244), or Suicune (245)
-                const beasts = [243, 244, 245];
-                const selectedBeastId = beasts[Math.floor(Math.random() * beasts.length)];
-                actualPokemonBase = this.getPokemonBase(selectedBeastId);
-                pokemonBase = actualPokemonBase;
+                if (this.state.currentRegionName === 'Hoenn') {
+                    // Randomly select Latias (380) or Latios (381) for Hoenn
+                    const beasts = [380, 381];
+                    const selectedBeastId = beasts[Math.floor(Math.random() * beasts.length)];
+                    actualPokemonBase = this.getPokemonBase(selectedBeastId);
+                    pokemonBase = actualPokemonBase;
 
-                // Level = Player Pokemon + 10 (min 30, max 70)
-                const playerLevel = this.state.party[0] ? this.state.party[0].level : 1;
-                level = playerLevel + 10;
-                if (level < 30) level = 30;
-                if (level > 70) level = 70;
+                    // Flat level 110 for Hoenn roaming encounters
+                    level = 110;
+                } else {
+                    // Default/Johto: Randomly select Raikou (243), Entei (244), or Suicune (245)
+                    const beasts = [243, 244, 245];
+                    const selectedBeastId = beasts[Math.floor(Math.random() * beasts.length)];
+                    actualPokemonBase = this.getPokemonBase(selectedBeastId);
+                    pokemonBase = actualPokemonBase;
+
+                    // Level = Player Pokemon + 10 (min 30, max 70)
+                    const playerLevel = this.state.party[0] ? this.state.party[0].level : 1;
+                    level = playerLevel + 10;
+                    if (level < 30) level = 30;
+                    if (level > 70) level = 70;
+                }
             } else {
                 selectedSpawn = this.getSpawnForRoute(route);
 
