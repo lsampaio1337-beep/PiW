@@ -1650,25 +1650,37 @@ export const hoennRoutes = [
         "pokemonId": 360,
         "minLevel": 88,
         "maxLevel": 93,
-        "chance": 0.35
+        "chance": 0.1667
       },
       {
         "pokemonId": 298,
         "minLevel": 88,
         "maxLevel": 93,
-        "chance": 0.35
+        "chance": 0.1667
       },
       {
         "pokemonId": 172,
         "minLevel": 88,
         "maxLevel": 93,
-        "chance": 0.15
+        "chance": 0.1667
       },
       {
         "pokemonId": 174,
         "minLevel": 88,
         "maxLevel": 93,
-        "chance": 0.15
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 406,
+        "minLevel": 88,
+        "maxLevel": 93,
+        "chance": 0.1666
+      },
+      {
+        "pokemonId": 433,
+        "minLevel": 88,
+        "maxLevel": 93,
+        "chance": 0.1666
       }
     ]
   },
@@ -2624,6 +2636,14 @@ export const hoennUnlocks = [
         },
         {
           "species": "Pichu",
+          "count": 1
+        },
+        {
+          "species": "Budew",
+          "count": 1
+        },
+        {
+          "species": "Chingling",
           "count": 1
         }
       ]
