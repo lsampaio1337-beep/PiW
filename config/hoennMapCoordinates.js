@@ -21,18 +21,8 @@ const hoennMapCoordinates = {
   },
   "105": {
     "name": "Route 105",
-    "x": 4.88,
-    "y": 70.0
-  },
-  "108": {
-    "name": "Route 108",
-    "x": 22.0,
-    "y": 92.0
-  },
-  "125": {
-    "name": "Route 125",
-    "x": 84.0,
-    "y": 20.0
+    "x": 5.83,
+    "y": 74.75
   },
   "107": {
     "name": "Route 107",
@@ -41,8 +31,8 @@ const hoennMapCoordinates = {
   },
   "110": {
     "name": "Route 110",
-    "x": 31.52,
-    "y": 47.66
+    "x": 31.84,
+    "y": 47.33
   },
   "111": {
     "name": "Route 111",
@@ -71,8 +61,8 @@ const hoennMapCoordinates = {
   },
   "117": {
     "name": "Route 117",
-    "x": 25.44,
-    "y": 37.93
+    "x": 22.76,
+    "y": 37.91
   },
   "118": {
     "name": "Route 118",
@@ -81,8 +71,8 @@ const hoennMapCoordinates = {
   },
   "119": {
     "name": "Route 119",
-    "x": 41.68,
-    "y": 17.69
+    "x": 40.37,
+    "y": 22.61
   },
   "120": {
     "name": "Route 120",
@@ -98,6 +88,11 @@ const hoennMapCoordinates = {
     "name": "Route 123",
     "x": 51.92,
     "y": 38.05
+  },
+  "124": {
+    "name": "Route 124",
+    "x": 49.28,
+    "y": 64.4
   },
   "professor_lab": {
     "name": "Professor Lab",
@@ -116,8 +111,8 @@ const hoennMapCoordinates = {
   },
   "rustboro_gym": {
     "name": "Rustboro Gym",
-    "x": 8.56,
-    "y": 44.5
+    "x": 8.77,
+    "y": 43.35
   },
   "dewford_gym": {
     "name": "Dewford Gym",
@@ -136,13 +131,13 @@ const hoennMapCoordinates = {
   },
   "route_106_fishing_spot": {
     "name": "Route 106 Fishing Spot",
-    "x": 4.88,
-    "y": 76.51
+    "x": 9.33,
+    "y": 84.32
   },
   "mauville_gym": {
     "name": "Mauville Gym",
-    "x": 31.44,
-    "y": 39.4
+    "x": 32.71,
+    "y": 36.51
   },
   "lavaridge_gym": {
     "name": "Lavaridge Gym",
@@ -166,8 +161,8 @@ const hoennMapCoordinates = {
   },
   "route_109_fishing_spot": {
     "name": "Route 109 Fishing Spot",
-    "x": 38.96,
-    "y": 26.4
+    "x": 30.34,
+    "y": 77.72
   },
   "fortree_gym": {
     "name": "Fortree Gym",
@@ -176,18 +171,18 @@ const hoennMapCoordinates = {
   },
   "safari_zone_west": {
     "name": "Safari Zone West",
-    "x": 60.08,
-    "y": 15.53
+    "x": 59.82,
+    "y": 18.03
   },
   "safari_zone_north": {
     "name": "Safari Zone North",
-    "x": 63.28,
-    "y": 11.58
+    "x": 63.01,
+    "y": 14.71
   },
   "safari_zone_east": {
     "name": "Safari Zone East",
-    "x": 65.52,
-    "y": 15.53
+    "x": 66.49,
+    "y": 17.94
   },
   "mount_pyre": {
     "name": "Mount Pyre",
@@ -226,23 +221,83 @@ const hoennMapCoordinates = {
   },
   "sky_pillar": {
     "name": "Sky Pillar",
-    "x": 68.08,
-    "y": 53.66
+    "x": 68.59,
+    "y": 52.76
   },
   "route_126_underwater": {
     "name": "Route 126 Underwater",
     "x": 78.64,
     "y": 65.08
   },
-  "route_124": {
-    "name": "Route 124",
-    "x": 49.28,
-    "y": 64.4
-  },
   "advanced_starter_sanctuary": {
     "name": "Advanced Starter Sanctuary",
     "x": 48,
     "y": 48
+  },
+  "trick_house": {
+    "name": "Trick House",
+    "x": 29.25,
+    "y": 53
+  },
+  "mauville_game_corner": {
+    "name": "Mauville Game Corner",
+    "x": 29.56,
+    "y": 40.11
+  },
+  "daycare": {
+    "name": "Daycare",
+    "x": 28.67,
+    "y": 36.07
+  },
+  "daycare_special_spot": {
+    "name": "Daycare Special Spot",
+    "x": 26.25,
+    "y": 34.07
+  },
+  "low_sky_pillar": {
+    "name": "Low Sky Pillar",
+    "x": 68.25,
+    "y": 61.65
+  },
+  "battle_frontier_facility": {
+    "name": "Battle Frontier Facility",
+    "x": 63.3,
+    "y": 59.79
+  },
+  "rustboro_fossil_lab": {
+    "name": "Rustboro Fossil Lab",
+    "x": 6.76,
+    "y": 49.44
+  },
+  "abandoned_ship": {
+    "name": "Abandoned Ship",
+    "x": 23.54,
+    "y": 82.87
+  },
+  "enemy_hideout": {
+    "name": "Enemy Hideout",
+    "x": 68.04,
+    "y": 69.85
+  },
+  "sealed_chamber": {
+    "name": "Sealed Chamber",
+    "x": 63.47,
+    "y": 71.69
+  },
+  "ancient_ruins": {
+    "name": "Ancient Ruins",
+    "x": 71.54,
+    "y": 76.8
+  },
+  "nebula_fissure": {
+    "name": "Nebula Fissure",
+    "x": 63.06,
+    "y": 3.17
+  },
+  "battle_stadium": {
+    "name": "Battle Stadium",
+    "x": 87.98,
+    "y": 25.16
   }
 };
 
