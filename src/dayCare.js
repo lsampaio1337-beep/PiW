@@ -68,10 +68,10 @@ class DayCare {
         const p = this.slot1.pokemon;
         if (!p) return;
 
-        // Increase quality by a random number between 0 and 0.05
-        // 0, 0.01, 0.02, 0.03, 0.04, 0.05
+        // Increase quality by a random number between 0 and 0.03
+        // 0, 0.01, 0.02, 0.03
         const randomVal = typeof crypto !== 'undefined' ? (crypto.getRandomValues(new Uint32Array(1))[0] / (0xFFFFFFFF + 1)) : Math.random();
-        const randIncrease = Math.floor(randomVal * 6) / 100;
+        const randIncrease = Math.floor(randomVal * 4) / 100;
 
         // Store original quality to calculate exact bonus later
         const oldQuality = p.quality;
@@ -79,7 +79,7 @@ class DayCare {
         // Fix floating point precision
         p.quality = Number((p.quality + randIncrease).toFixed(2));
 
-        p.quality = Math.min(1.99, p.quality);
+        p.quality = Math.min(1.80, p.quality);
         p.lastQBonus = Number((p.quality - oldQuality).toFixed(2));
 
         // Map Quality Tier if Q >= 1.5, 1.25, etc.
