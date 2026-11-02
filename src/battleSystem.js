@@ -1056,7 +1056,7 @@ class BattleSystem {
 
             // Check if Roaming challenge is active for the 1% beast spawn
             // Must not be in an active gym/league battle
-            if (!this.gymState?.isActive && this.state.stats.activeChallenges && this.state.stats.activeChallenges.includes("Extra Challenge (Roaming)")) {
+            if (!this.gymState?.isActive && this.state.stats.activeChallenges && (this.state.stats.activeChallenges.includes("Extra Challenge (Roaming)") || this.state.stats.activeChallenges.includes("Roaming Hoenn Skies"))) {
                 const randomVal = typeof crypto !== 'undefined' ? (crypto.getRandomValues(new Uint32Array(1))[0] / (0xFFFFFFFF + 1)) : Math.random();
                 if (randomVal < 0.01) {
                     isRoamingEncounter = true;
