@@ -170,7 +170,6 @@ export function renderPokemonTab(area) {
         if (p) {
             content += `<div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, '${listName}')" style="box-sizing: border-box; min-width: 0;">` + renderSlotUI(p, listName, origIndex, true) + `</div>`;
         } else {
-            let label = i < 6 ? `Party #${i+1}` : (i === 6 ? 'Breeding<br>Spot' : 'Training<br>Spot');
             let label = i < 6 ? `Party<br>#${i+1}` : (i === 6 ? 'Breeding Spot' : 'Training Spot');
             let dropTarget = i < 6 ? 'party' : (i === 6 ? 'breeding' : 'training');
             let activeBreedStyle = '';
