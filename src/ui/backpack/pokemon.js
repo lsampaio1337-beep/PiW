@@ -170,6 +170,7 @@ export function renderPokemonTab(area) {
         if (p) {
             content += `<div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, '${listName}')" style="box-sizing: border-box; min-width: 0;">` + renderSlotUI(p, listName, origIndex, true) + `</div>`;
         } else {
+            let label = i < 6 ? `Party #${i+1}` : (i === 6 ? 'Breeding<br>Spot' : 'Training<br>Spot');
             let label = i < 6 ? `Party<br>#${i+1}` : (i === 6 ? 'Breeding Spot' : 'Training Spot');
             let dropTarget = i < 6 ? 'party' : (i === 6 ? 'breeding' : 'training');
             let activeBreedStyle = '';
@@ -491,16 +492,28 @@ export function handleDrop(event, targetCol) {
                 window.pokemonFilters.maxQ = (p.quality + 0.05).toFixed(2);
             } else {
                 // Meets criteria -> Consume both, merge into highest IV
-                const keptParent = JSON.parse(JSON.stringify((p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe > currentP.ivs.hp + currentP.ivs.atk + currentP.ivs.def + currentP.ivs.spa + currentP.ivs.spd + currentP.ivs.spe) ? p : currentP));
+                const sumIV_p = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
+                const sumIV_currentP = currentP.ivs.hp + currentP.ivs.atk + currentP.ivs.def + currentP.ivs.spa + currentP.ivs.spd + currentP.ivs.spe;
+                const keptParent = JSON.parse(JSON.stringify((sumIV_p > sumIV_currentP) ? p : currentP));
 
-                keptParent.ivs.hp = Math.max(p.ivs.hp, currentP.ivs.hp);
-                keptParent.ivs.atk = Math.max(p.ivs.atk, currentP.ivs.atk);
-                keptParent.ivs.def = Math.max(p.ivs.def, currentP.ivs.def);
-                keptParent.ivs.spa = Math.max(p.ivs.spa, currentP.ivs.spa);
-                keptParent.ivs.spd = Math.max(p.ivs.spd, currentP.ivs.spd);
-                keptParent.ivs.spe = Math.max(p.ivs.spe, currentP.ivs.spe);
+                // Inherit exact IVs from highest sumIV parent (already cloned above)
 
-                keptParent.level = Math.floor(Math.max(p.level, currentP.level) * 0.9);
+                // Keep the max Q Value
+                if (p.quality > currentP.quality) {
+                    keptParent.quality = p.quality;
+                    keptParent.qualityName = p.qualityName;
+                } else if (currentP.quality > p.quality) {
+                    keptParent.quality = currentP.quality;
+                    keptParent.qualityName = currentP.qualityName;
+                }
+
+                // Clear any lastQBonus
+                keptParent.lastQBonus = 0;
+
+                // Penalty of 10% on the highest level rounded up
+                const highestLevel = Math.max(p.level, currentP.level);
+                const levelPenalty = Math.ceil(highestLevel * 0.1);
+                keptParent.level = highestLevel - levelPenalty;
                 if (keptParent.level < 1) keptParent.level = 1;
 
                 state.breeding[0] = keptParent;
