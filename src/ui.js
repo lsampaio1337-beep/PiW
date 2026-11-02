@@ -1409,11 +1409,10 @@ async function loadConfigs() {
 function returnToLab() {
     window.currentMapRegion = state.currentRegionName || 'Kanto';
 
-    let labRoute = "Professor Lab";
+    let labRoute = window.currentMapRegion + " Professor Lab";
     let labView = "PROFESSOR_LAB";
 
     if (state.currentRegionName === "Johto") {
-        labRoute = "Johto Professor Lab";
         labView = "JOHTO_PROFESSOR_LAB";
     } else if (state.currentRegionName === "Hoenn") {
         labView = "HOENN_PROFESSOR_LAB";
@@ -1477,6 +1476,18 @@ function _initializeInitialRoutes(id) {
     if (!state.stats.newRoutes) state.stats.newRoutes = [];
     if (!state.stats.newRoutes.includes("PokeCenter & PokeMarket")) {
         state.stats.newRoutes.push("PokeCenter & PokeMarket");
+    }
+
+    // Add specific first routes for regions if applicable
+    let currentRegion = state.currentRegionName || 'Kanto';
+    if (currentRegion === 'Johto' && !state.stats.newRoutes.includes("Route 29")) {
+        state.stats.newRoutes.push("Route 29");
+    } else if (currentRegion === 'Hoenn' && !state.stats.newRoutes.includes("Route 101")) {
+        state.stats.newRoutes.push("Route 101");
+    } else if (currentRegion === 'Sinnoh' && !state.stats.newRoutes.includes("Route 201")) {
+        state.stats.newRoutes.push("Route 201");
+    } else if (currentRegion === 'Unova' && !state.stats.newRoutes.includes("Aspertia City")) {
+        state.stats.newRoutes.push("Aspertia City");
     }
     if (state.stats.activeChallenges) {
         for (let challenge of state.stats.activeChallenges) {
@@ -3107,12 +3118,12 @@ window.promptWakeUpRegion = function(regionName) {
             window.currentMapRegion = regionName;
             if (typeof globals.swapRegion === 'function') globals.swapRegion(regionName);
             // Force a swap to the region being woken up. We use navigateToLocation with the region's current route.
-            let targetRoute = state.regions[regionName]?.currentRoute || 'Professor Lab';
+            let targetRoute = state.regions[regionName]?.currentRoute || (regionName + ' Professor Lab');
             window.navigateToLocation(targetRoute);
         }
 
         // Restart the game components naturally when waking up
-        if (state.currentRoute === 'Professor Lab' || state.currentRoute === 'PokeCenter & PokeMarket') {
+        if (state.currentRoute.endsWith('Professor Lab') || state.currentRoute === 'PokeCenter & PokeMarket') {
              // In these areas it's safe to just let it sit
              if (window.windowManager) window.windowManager.toggleWindow('main-view-window', true);
         } else {

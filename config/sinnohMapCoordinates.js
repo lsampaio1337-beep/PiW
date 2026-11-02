@@ -125,7 +125,7 @@ const sinnohMapCoordinates = {
     "y": 34.6
   },
   "professor_lab": {
-    "name": "Professor Lab",
+    "name": "Sinnoh Professor Lab",
     "x": 18.46,
     "y": 89.43
   },

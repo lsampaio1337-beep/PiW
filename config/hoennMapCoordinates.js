@@ -100,7 +100,7 @@ const hoennMapCoordinates = {
     "y": 38.05
   },
   "professor_lab": {
-    "name": "Professor Lab",
+    "name": "Hoenn Professor Lab",
     "x": 19.84,
     "y": 73.23
   },
