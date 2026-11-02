@@ -1799,17 +1799,6 @@ export const hoennRoutes = [
     ]
   },
   {
-    "name": "Weather Institute",
-    "spawns": [
-      {
-        "pokemonId": 351,
-        "minLevel": 25,
-        "maxLevel": 30,
-        "chance": 1
-      }
-    ]
-  },
-  {
     "name": "Route 125",
     "spawns": [
       {
@@ -2258,7 +2247,7 @@ export const hoennUnlocks = [
     "challengeName": "Challenge 28",
     "areaId": "Route 119",
     "unlocks": [
-      "Weather Institute"
+      "Fortree Gym"
     ],
     "requirements": {
       "defeatSpecific": {
@@ -2269,19 +2258,6 @@ export const hoennUnlocks = [
   },
   {
     "challengeName": "Challenge 29",
-    "areaId": "Weather Institute",
-    "unlocks": [
-      "Fortree Gym"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Weather Institute",
-        "count": 10
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 30",
     "areaId": "Fortree Gym",
     "unlocks": [
       "Route 120"
@@ -2295,7 +2271,7 @@ export const hoennUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 31",
+    "challengeName": "Challenge 30",
     "areaId": "Route 120",
     "unlocks": [
       "Route 121"
@@ -2310,7 +2286,7 @@ export const hoennUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 32",
+    "challengeName": "Challenge 31",
     "areaId": "Route 121",
     "unlocks": [
       "Safari Zone East",
@@ -2325,7 +2301,7 @@ export const hoennUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 33",
+    "challengeName": "Challenge 32",
     "areaId": "Safari Zone East",
     "unlocks": [
       "Mount Pyre"
@@ -2348,7 +2324,7 @@ export const hoennUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 34",
+    "challengeName": "Challenge 33",
     "areaId": "Mount Pyre",
     "unlocks": [
       "Route 123"
@@ -2367,7 +2343,7 @@ export const hoennUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 35",
+    "challengeName": "Challenge 34",
     "areaId": "Route 123",
     "unlocks": [
       "Mossdeep Gym"
@@ -2380,7 +2356,7 @@ export const hoennUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 36",
+    "challengeName": "Challenge 35",
     "areaId": "Mossdeep Gym",
     "unlocks": [
       "Route 124"
@@ -2394,7 +2370,7 @@ export const hoennUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 37",
+    "challengeName": "Challenge 36",
     "areaId": "Route 124",
     "unlocks": [
       "Route 125"
@@ -2417,7 +2393,7 @@ export const hoennUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 38",
+    "challengeName": "Challenge 37",
     "areaId": "Route 125",
     "unlocks": [
       "Route 126 Underwater"
@@ -2430,7 +2406,7 @@ export const hoennUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 39",
+    "challengeName": "Challenge 38",
     "areaId": "Route 126 Underwater",
     "unlocks": [
       "Sootopolis Gym"
@@ -2443,7 +2419,7 @@ export const hoennUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 40",
+    "challengeName": "Challenge 39",
     "areaId": "Sootopolis Gym",
     "unlocks": [
       "Shoal Cave"
@@ -2457,7 +2433,7 @@ export const hoennUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 41",
+    "challengeName": "Challenge 40",
     "areaId": "Shoal Cave",
     "unlocks": [
       "Sky Pillar"
@@ -2480,7 +2456,7 @@ export const hoennUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 42",
+    "challengeName": "Challenge 41",
     "areaId": "Sky Pillar",
     "unlocks": [
       "Victory Road"
@@ -2499,7 +2475,7 @@ export const hoennUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 43",
+    "challengeName": "Challenge 42",
     "areaId": "Victory Road",
     "unlocks": [
       "Hoenn Pokemon League"
@@ -2512,7 +2488,7 @@ export const hoennUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 44",
+    "challengeName": "Challenge 43",
     "areaId": "Hoenn Pokemon League",
     "unlocks": [
       "Roaming Hoenn Skies",
