@@ -12,10 +12,12 @@ if (process.platform === 'linux') {
 function createWindow() {
     // Get primary display dimensions
     const { x, y, width, height } = screen.getPrimaryDisplay().workArea;
+    // Subtract 1 from the height to prevent background windows (like Chrome/YouTube) from being fully occluded and freezing.
+    const adjustedHeight = height - 1;
 
     const win = new BrowserWindow({
         width: width,
-        height: height,
+        height: adjustedHeight,
         x: x,
         y: y,
         transparent: true,
@@ -36,7 +38,7 @@ function createWindow() {
         }
     });
 
-    win.setBounds({ x, y, width, height });
+    win.setBounds({ x, y, width, height: adjustedHeight });
 
     win.loadFile('index.html');
 
