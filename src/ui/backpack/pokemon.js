@@ -5,7 +5,7 @@ import { escapeHTML } from '../../utils/stringUtils.js';
 
 window.sellModeActive = false;
 window.selectedForSale = new Set();
-import { calculatePP } from '../../mathEngine.js';
+import { calculatePP, calculateEVXP, calculateEVM, calculateTotalXP } from '../../mathEngine.js';
 
 // Helper to render a consistent Pokemon slot UI
 function renderSlotUI(p, listName, origIndex, isDraggable) {
@@ -170,7 +170,7 @@ export function renderPokemonTab(area) {
         if (p) {
             content += `<div ondragover="window.dragOver(event)" ondrop="window.handleDrop(event, '${listName}')" style="box-sizing: border-box; min-width: 0;">` + renderSlotUI(p, listName, origIndex, true) + `</div>`;
         } else {
-            let label = i < 6 ? `Party<br>#${i+1}` : (i === 6 ? 'Breeding Spot' : 'Training Spot');
+            let label = i < 6 ? `Party<br>#${i+1}` : (i === 6 ? 'Breeding<br>Spot' : 'Training<br>Spot');
             let dropTarget = i < 6 ? 'party' : (i === 6 ? 'breeding' : 'training');
             let activeBreedStyle = '';
             if (i === 6 && window.pokemonFilters.breedableOnly) {
@@ -493,31 +493,86 @@ export function handleDrop(event, targetCol) {
                 // Meets criteria -> Consume both, merge into highest IV
                 const sumIV_p = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
                 const sumIV_currentP = currentP.ivs.hp + currentP.ivs.atk + currentP.ivs.def + currentP.ivs.spa + currentP.ivs.spd + currentP.ivs.spe;
-                const keptParent = JSON.parse(JSON.stringify((sumIV_p > sumIV_currentP) ? p : currentP));
+                const parentWithBestIVs = (sumIV_p > sumIV_currentP) ? p : currentP;
 
-                // Inherit exact IVs from highest sumIV parent (already cloned above)
+                // Reconstruct official baby by deep cloning to preserve core properties, then overwriting stats
+                const newPokemon = JSON.parse(JSON.stringify(parentWithBestIVs));
+                newPokemon.uuid = crypto.randomUUID();
+                newPokemon.vitamins = { hp: 0, atk: 0, def: 0, spa: 0, spd: 0, spe: 0 };
+                newPokemon.lastQBonus = 0;
+                newPokemon.trainingCyclesCompleted = 0;
 
                 // Keep the max Q Value
-                if (p.quality > currentP.quality) {
-                    keptParent.quality = p.quality;
-                    keptParent.qualityName = p.qualityName;
-                } else if (currentP.quality > p.quality) {
-                    keptParent.quality = currentP.quality;
-                    keptParent.qualityName = currentP.qualityName;
-                }
+                newPokemon.quality = Math.max(p.quality, currentP.quality);
 
-                // Clear any lastQBonus
-                keptParent.lastQBonus = 0;
+                // Map Quality Tier if Q >= 1.5, 1.25, etc.
+                if (newPokemon.quality >= 1.81) newPokemon.qualityName = "Legendary";
+                else if (newPokemon.quality >= 1.60) newPokemon.qualityName = "Epic";
+                else if (newPokemon.quality >= 1.40) newPokemon.qualityName = "Rare";
+                else if (newPokemon.quality >= 1.20) newPokemon.qualityName = "Uncommon";
+                else if (newPokemon.quality >= 1.00) newPokemon.qualityName = "Regular";
+                else newPokemon.qualityName = "Weak";
+
+                // Shinies keep shiny Q name if applicable
+                if (p.qualityName === "Shiny" || currentP.qualityName === "Shiny") {
+                    newPokemon.qualityName = "Shiny";
+                }
 
                 // Penalty of 10% on the highest level rounded up
                 const highestLevel = Math.max(p.level, currentP.level);
                 const levelPenalty = Math.ceil(highestLevel * 0.1);
-                keptParent.level = highestLevel - levelPenalty;
-                if (keptParent.level < 1) keptParent.level = 1;
+                newPokemon.level = highestLevel - levelPenalty;
+                if (newPokemon.level < 1) newPokemon.level = 1;
 
-                state.breeding[0] = keptParent;
+                // Fetch pokemon base to reconstruct stats
+                const pBase = state.config.pokemonData.find(pd => pd.id === newPokemon.id);
+                if (pBase) {
+                    newPokemon.bst = pBase.hp + pBase.atk + pBase.def + pBase.spa + pBase.spd + pBase.spe;
+
+                    // Stats
+                    newPokemon.maxHp = Math.floor((((2 * pBase.hp + newPokemon.ivs.hp) * newPokemon.level / 100) + newPokemon.level + 10) * newPokemon.quality);
+                    newPokemon.currentStats = {
+                        hp: newPokemon.maxHp,
+                        atk: Math.floor((((2 * pBase.atk + newPokemon.ivs.atk) * newPokemon.level / 100) + 5) * newPokemon.quality),
+                        def: Math.floor((((2 * pBase.def + newPokemon.ivs.def) * newPokemon.level / 100) + 5) * newPokemon.quality),
+                        spa: Math.floor((((2 * pBase.spa + newPokemon.ivs.spa) * newPokemon.level / 100) + 5) * newPokemon.quality),
+                        spd: Math.floor((((2 * pBase.spd + newPokemon.ivs.spd) * newPokemon.level / 100) + 5) * newPokemon.quality),
+                        spe: Math.floor((((2 * pBase.spe + newPokemon.ivs.spe) * newPokemon.level / 100) + 5) * newPokemon.quality)
+                    };
+                    newPokemon.currentHp = newPokemon.maxHp;
+
+                    // Moves
+                    let getLearnsetMoves = function(pokemonBase, level) {
+                        if (!pokemonBase.learnset) return [];
+                        let learned = [];
+                        let learnedSet = new Set();
+                        for (const ls of pokemonBase.learnset) {
+                            if (level >= ls.level) {
+                                const moveName = ls.move;
+                                if (state.config.moves[moveName] && !learnedSet.has(moveName)) {
+                                    learnedSet.add(moveName);
+                                    const moveData = { ...state.config.moves[moveName] };
+                                    moveData.name = moveName;
+                                    learned.push(moveData);
+                                }
+                            }
+                        }
+                        return learned.slice(-4);
+                    };
+                    newPokemon.moves = getLearnsetMoves(pBase, newPokemon.level);
+                }
+
+                // Calculate EVXP, EVM, PP, and XP
+                const newTotalIV = newPokemon.ivs.hp + newPokemon.ivs.atk + newPokemon.ivs.def + newPokemon.ivs.spa + newPokemon.ivs.spd + newPokemon.ivs.spe;
+
+                newPokemon.evxp = calculateEVXP(newPokemon.bst, newPokemon.level, newPokemon.quality, newTotalIV);
+                newPokemon.evm = calculateEVM(newPokemon.bst, newPokemon.level, newPokemon.quality, newTotalIV);
+                newPokemon.pp = calculatePP(newPokemon.bst, newPokemon.level, newPokemon.quality, newTotalIV);
+                newPokemon.xp = calculateTotalXP(newPokemon.level);
+
+                state.breeding[0] = newPokemon;
                 if (state.dayCareRef) {
-                    state.dayCareRef.slot1.pokemon = keptParent;
+                    state.dayCareRef.slot1.pokemon = newPokemon;
                     state.dayCareRef.slot1.battles = 0;
                     state.dayCareRef.slot1.isBreeding = true;
                     state.dayCareRef.slot1.isFinished = false;

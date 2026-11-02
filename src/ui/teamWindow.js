@@ -187,7 +187,7 @@ function renderDayCareSlot(container, p, battles, maxBattles, type) {
     if (type === 'breed') {
         centerLabel = 'Q';
         if (state.dayCareRef && state.dayCareRef.slot1 && state.dayCareRef.slot1.isFinished) {
-            const lastQBonus = p.lastQBonus !== undefined ? p.lastQBonus : 0.01;
+            const lastQBonus = p.lastQBonus !== undefined ? p.lastQBonus : 0.00;
             const baseQ = (p.quality - lastQBonus).toFixed(2);
             rightText = `${baseQ}+${lastQBonus.toFixed(2)}`;
         } else {
