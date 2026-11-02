@@ -159,11 +159,11 @@ describe('DayCare', () => {
         });
 
         test('should increase quality by a random amount and fix precision', () => {
-            // Math.random is mocked to 0.5, so 0.5 * 11 = 5.5, floor = 5, randIncrease = 0.05
+            // Math.random is mocked to 0.5, so 0.5 * 6 = 3.0, floor = 3, randIncrease = 0.03
             dayCare.slot1.pokemon = { quality: 1.0 };
             dayCare.completeBreeding();
 
-            expect(dayCare.slot1.pokemon.quality).toBe(1.05);
+            expect(dayCare.slot1.pokemon.quality).toBe(1.03);
             expect(dayCare.slot1.isFinished).toBe(true);
             expect(dayCare.slot1.isBreeding).toBe(false);
             expect(global.window.trackDailyChallenge).toHaveBeenCalledWith('hatch_eggs');
@@ -212,11 +212,13 @@ describe('DayCare', () => {
         test('should freeze battles at requiredBattles if total IVs hit 600 after training', () => {
             dayCare.slot2.pokemon = createMockPokemon({ hp: 100, atk: 100, def: 100, spa: 100, spd: 100, spe: 99 });
             dayCare.slot2.battles = 100;
+            // When total IVs hit 600, it sets requiredBattles to 600
+            dayCare.slot2.requiredBattles = 100;
 
             dayCare.completeTrainingCycle();
 
-            // Reached 600 (all stats 100)
-            expect(dayCare.slot2.battles).toBe(100);
+            // Reached 600 (all stats 100). requiredBattles gets set to 600.
+            expect(dayCare.slot2.battles).toBe(600);
         });
     });
 });

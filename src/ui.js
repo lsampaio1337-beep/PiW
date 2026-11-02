@@ -24,6 +24,19 @@ export { showProfTutorialIfNeeded };
 window.dismissDaycareMessage = function() {
     state.globalStats.hasSeenDaycare = true;
     document.getElementById('daycare-first-time-overlay').style.display = 'none';
+
+    // Enable buttons now that message is dismissed
+    const trainBtn = document.getElementById('btn-daycare-train');
+    if (trainBtn) {
+        trainBtn.style.pointerEvents = 'auto';
+        trainBtn.style.opacity = '1';
+    }
+    const breedBtn = document.getElementById('btn-daycare-breed');
+    if (breedBtn) {
+        breedBtn.style.pointerEvents = 'auto';
+        breedBtn.style.opacity = '1';
+    }
+
     if (window.storageRef) {
         window.storageRef.save(state);
     }
@@ -1276,7 +1289,7 @@ export function switchView(viewName) {
         document.getElementById('view-daycare').style.display = 'block';
 
         // Populate dynamic texts based on required battles
-        const breedBattles = state.dayCareRef ? state.dayCareRef.slot1.requiredBattles : 100;
+        const breedBattles = state.dayCareRef ? state.dayCareRef.slot1.requiredBattles : 200;
         const trainBattles = state.dayCareRef ? state.dayCareRef.slot2.requiredBattles : 100;
 
         const introText = document.getElementById('daycare-intro-text');
@@ -1290,10 +1303,10 @@ export function switchView(viewName) {
             p2.textContent = 'You can adjust pokemon on daycare here or directly in your backpack.';
 
             const p3 = document.createElement('p');
-            p3.textContent = `In order to Breed, you need 2 Pokémons with the same Quality Value. They will generate an egg that will hatch after ${breedBattles} fights. You can drag 2 Pokémons to the Breed Spot or you can click on Breed Spot to automatically filter Pokémons that can be inserted there. The egg will hatch and the Pokémon will have an increased Quality Value of a random number between 0 and 0.1 to a maximum of 1.99, keeping the highest SumIV of both parents. Remember that the process can’t be interrupted.`;
+            p3.textContent = `In order to Breed, you need 2 Pokémons with the same species and Quality Value difference up to 0.05. They will generate an egg that will hatch after 200 fights (400 for Shinies). You can drag 2 Pokémons to the Breeding Spot or you can click on Breeding Spot to automatically filter Pokémons that can be inserted there. The egg will hatch and the Pokémon will have an increased Quality Value of a random number up to 0.05 (maximum of 1.99), keeping the highest individual IVs of both parents. Its level will be 90% of the highest parent's level. Remember that the process can’t be interrupted.`;
 
             const p4 = document.createElement('p');
-            p4.textContent = `To Train, you just need to insert the desired Pokémon in the Train Spot. It will train its SumIV and it will gain +1 point in it every ${trainBattles} fights.`;
+            p4.textContent = `To Train, you just need to insert the desired Pokémon in the Training Spot. It will train its SumIV and it will gain +1 point in a random IV every X fights, where X is equal to its current SumIV (multiplied by 2 for Shinies).`;
 
             introText.appendChild(p1);
             introText.appendChild(p2);
@@ -1302,10 +1315,28 @@ export function switchView(viewName) {
         }
 
         const trainBtn = document.getElementById('btn-daycare-train');
-        if (trainBtn) trainBtn.title = `Insert any Pokémon and gain +1 SumIV after ${trainBattles} fights.`;
+        if (trainBtn) {
+            trainBtn.title = `Insert any Pokémon and gain +1 IV based on its current SumIV.`;
+            if (!state.globalStats.hasSeenDaycare) {
+                trainBtn.style.pointerEvents = 'none';
+                trainBtn.style.opacity = '0.5';
+            } else {
+                trainBtn.style.pointerEvents = 'auto';
+                trainBtn.style.opacity = '1';
+            }
+        }
 
         const breedBtn = document.getElementById('btn-daycare-breed');
-        if (breedBtn) breedBtn.title = `Insert 2 Pokémons with same Quality Value to increase it to a random number between 0 and 0.1 to a maximum of 1.99 after ${breedBattles} fights.`;
+        if (breedBtn) {
+            breedBtn.title = `Insert 2 Pokémons with close Quality Value to increase it up to +0.05 (max 1.99). Requires 200 fights (400 for Shinies).`;
+            if (!state.globalStats.hasSeenDaycare) {
+                breedBtn.style.pointerEvents = 'none';
+                breedBtn.style.opacity = '0.5';
+            } else {
+                breedBtn.style.pointerEvents = 'auto';
+                breedBtn.style.opacity = '1';
+            }
+        }
     }
 }
 

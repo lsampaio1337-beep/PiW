@@ -68,10 +68,10 @@ class DayCare {
         const p = this.slot1.pokemon;
         if (!p) return;
 
-        // Increase quality by a random number between 0 and 0.1 (Max 1.99)
-        // 0, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1
+        // Increase quality by a random number between 0 and 0.05
+        // 0, 0.01, 0.02, 0.03, 0.04, 0.05
         const randomVal = typeof crypto !== 'undefined' ? (crypto.getRandomValues(new Uint32Array(1))[0] / (0xFFFFFFFF + 1)) : Math.random();
-        const randIncrease = Math.floor(randomVal * 11) / 100;
+        const randIncrease = Math.floor(randomVal * 6) / 100;
 
         // Fix floating point precision
         p.quality = Number((p.quality + randIncrease).toFixed(2));
@@ -128,6 +128,9 @@ class DayCare {
 
         // Reset progress only if we are still under the cap
         const newTotalIV = pkmn.ivs.hp + pkmn.ivs.atk + pkmn.ivs.def + pkmn.ivs.spa + pkmn.ivs.spd + pkmn.ivs.spe;
+        this.slot2.requiredBattles = (pkmn.quality >= 2.0) ? newTotalIV * 2 : newTotalIV;
+        if (this.slot2.requiredBattles === 0) this.slot2.requiredBattles = 1;
+
         if (newTotalIV >= 600) {
             this.slot2.battles = this.slot2.requiredBattles;
         } else {
