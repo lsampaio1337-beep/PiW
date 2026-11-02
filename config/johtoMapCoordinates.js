@@ -1,6 +1,6 @@
 const johtoMapCoordinates = {
   "professor_lab": {
-    "name": "Professor Lab",
+    "name": "Johto Professor Lab",
     "x": 45.85,
     "y": 67.26
   },

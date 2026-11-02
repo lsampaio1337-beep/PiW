@@ -371,7 +371,13 @@ class BattleSystem {
             }
 
             if (typeof window.switchView === 'function') {
-                window.switchView("PROFESSOR_LAB");
+                if (this.state.currentRegionName === 'Hoenn') {
+                    window.switchView("HOENN_PROFESSOR_LAB");
+                } else if (this.state.currentRegionName === 'Johto') {
+                    window.switchView("JOHTO_PROFESSOR_LAB");
+                } else {
+                    window.switchView("PROFESSOR_LAB");
+                }
             }
 
             // Re-generate idle encounter
@@ -2129,7 +2135,7 @@ class BattleSystem {
 
         if (this.state.party.length === 0) {
             // No pokemon were selected, do not display message of fainted team and go to professor lab
-            const labRoute = (this.state.currentRegionName === 'Kanto' || this.state.currentRegionName === 'Johto') ? "Professor Lab" : "Professor Lab";
+            const labRoute = (this.state.currentRegionName || "Kanto") + " Professor Lab";
             this.state.currentRoute = labRoute;
 
             if (this.gymState) {
@@ -2139,7 +2145,13 @@ class BattleSystem {
                 this.gymState.inCombat = false;
             }
             if (typeof window.switchView === 'function') {
-                window.switchView("PROFESSOR_LAB");
+                if (this.state.currentRegionName === 'Hoenn') {
+                    window.switchView("HOENN_PROFESSOR_LAB");
+                } else if (this.state.currentRegionName === 'Johto') {
+                    window.switchView("JOHTO_PROFESSOR_LAB");
+                } else {
+                    window.switchView("PROFESSOR_LAB");
+                }
             }
             if (typeof window.navigateToLocation === 'function') {
                 window.navigateToLocation(labRoute);

@@ -206,8 +206,11 @@ function getRegionStats(regionName) {
 
 function getUnlockedAreas() {
     let unlockedAreas = new Set();
-    unlockedAreas.add("Professor Lab");
+    unlockedAreas.add("Kanto Professor Lab");
     unlockedAreas.add("Johto Professor Lab");
+    unlockedAreas.add("Hoenn Professor Lab");
+    unlockedAreas.add("Sinnoh Professor Lab");
+    unlockedAreas.add("Unova Professor Lab");
 
     let targetStats = getRegionStats(window.currentMapRegion);
 
@@ -239,6 +242,12 @@ function getUnlockedAreas() {
     }
     if (window.currentMapRegion === "Hoenn") {
         unlockedAreas.add("Route 101");
+    }
+    if (window.currentMapRegion === "Sinnoh") {
+        unlockedAreas.add("Route 201");
+    }
+    if (window.currentMapRegion === "Unova") {
+        unlockedAreas.add("Route 19");
     }
 
     if (targetStats.completed150Challenge || (targetStats.completedChallengeIds && targetStats.completedChallengeIds.includes("Extra Challenge B"))) {
@@ -323,6 +332,8 @@ function generateMarkersForRegion(region, unlockedAreas) {
         for (const [locationId, locationData] of Object.entries(state.config.sinnohMapCoordinates || {})) {
             const locationName = locationData.name;
             const coords = locationData;
+            let isUnlocked = unlockedAreas.has(locationName);
+            if (!isUnlocked) continue;
 
             let hasNewNotification = false;
             let showCheckmark = false;
@@ -410,6 +421,8 @@ function generateMarkersForRegion(region, unlockedAreas) {
         for (const [locationId, locationData] of Object.entries(state.config.unovaMapCoordinates || {})) {
             const locationName = locationData.name;
             const coords = locationData;
+            let isUnlocked = unlockedAreas.has(locationName);
+            if (!isUnlocked) continue;
 
             let hasNewNotification = false;
             let showCheckmark = false;
@@ -570,7 +583,7 @@ export function navigateToLocation(locationName) {
              if (battleSystem.gymState) battleSystem.gymState.isActive = false;
         }
         switchView("BATTLE_STADIUM");
-    } else if (locationName === "Professor Lab") {
+    } else if (locationName.endsWith("Professor Lab") || locationName === "Professor Lab") {
         if (battleSystem) {
              battleSystem.stop();
              battleSystem.activeEncounter = null;
@@ -579,17 +592,11 @@ export function navigateToLocation(locationName) {
         }
         if (state.currentRegionName === 'Hoenn') {
             switchView("HOENN_PROFESSOR_LAB");
+        } else if (state.currentRegionName === 'Johto') {
+            switchView("JOHTO_PROFESSOR_LAB");
         } else {
             switchView("PROFESSOR_LAB");
         }
-    } else if (locationName === "Johto Professor Lab") {
-        if (battleSystem) {
-             battleSystem.stop();
-             battleSystem.activeEncounter = null;
-             battleSystem.isSearching = false;
-             if (battleSystem.gymState) battleSystem.gymState.isActive = false;
-        }
-        switchView("JOHTO_PROFESSOR_LAB");
     } else if (["Safari Zone", "Kanto Safari Zone"].includes(locationName)) {
         if (battleSystem) {
             battleSystem.stop();

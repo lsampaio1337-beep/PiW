@@ -235,7 +235,7 @@ const mapCoordinates = {
     "y": 93.24
   },
   "professor_lab": {
-    "name": "Professor Lab",
+    "name": "Kanto Professor Lab",
     "x": 24.72,
     "y": 68.21
   },

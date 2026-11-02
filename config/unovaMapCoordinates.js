@@ -150,7 +150,7 @@ const unovaMapCoordinates = {
     "y": 30.72
   },
   "professor_lab": {
-    "name": "Professor Lab",
+    "name": "Unova Professor Lab",
     "x": 7.37,
     "y": 84.37
   },
