@@ -1313,7 +1313,7 @@ export function switchView(viewName) {
         document.getElementById('view-daycare').style.display = 'block';
 
         // Populate dynamic texts based on required battles
-        const breedBattles = state.dayCareRef ? state.dayCareRef.slot1.requiredBattles : 200;
+        const breedBattles = state.dayCareRef ? state.dayCareRef.slot1.requiredBattles : 100;
         const trainBattles = state.dayCareRef ? state.dayCareRef.slot2.requiredBattles : 100;
 
         const introText = document.getElementById('daycare-intro-text');
@@ -1327,7 +1327,7 @@ export function switchView(viewName) {
             p2.textContent = 'You can adjust pokemon on daycare here or directly in your backpack.';
 
             const p3 = document.createElement('p');
-            p3.textContent = `In order to Breed, you need 2 Pokémons with the same species and Quality Value difference up to 0.05. They will generate an egg that will hatch after 200 fights (400 for Shinies). You can drag 2 Pokémons to the Breeding Spot or you can click on Breeding Spot to automatically filter Pokémons that can be inserted there. The egg will hatch and the Pokémon will have an increased Quality Value of a random number up to 0.05 (maximum of 1.99), keeping the highest individual IVs of both parents. Its level will be 90% of the highest parent's level. Remember that the process can’t be interrupted.`;
+            p3.textContent = `In order to Breed, you need 2 Pokémons with the same species and Quality Value difference up to 0.05. They will generate an egg that will hatch after 100 fights (200 for Shinies). You can drag 2 Pokémons to the Breeding Spot or you can click on Breeding Spot to automatically filter Pokémons that can be inserted there. The egg will hatch and the Pokémon will have an increased Quality Value of a random number up to 0.03 (maximum of 1.80), keeping the highest individual IVs of both parents. Its level will be 90% of the highest parent's level. Remember that the process can’t be interrupted.`;
 
             const p4 = document.createElement('p');
             p4.textContent = `To Train, you just need to insert the desired Pokémon in the Training Spot. It will train its SumIV and it will gain +1 point in a random IV every X fights, where X is equal to its current SumIV (multiplied by 2 for Shinies).`;
@@ -1352,7 +1352,7 @@ export function switchView(viewName) {
 
         const breedBtn = document.getElementById('btn-daycare-breed');
         if (breedBtn) {
-            breedBtn.title = `Insert 2 Pokémons with close Quality Value to increase it up to +0.05 (max 1.99). Requires 200 fights (400 for Shinies).`;
+            breedBtn.title = `Insert 2 Pokémons with close Quality Value to increase it up to +0.03 (max 1.80). Requires 100 fights (200 for Shinies).`;
             if (!state.stats.hasSeenDaycare) {
                 breedBtn.style.pointerEvents = 'none';
                 breedBtn.style.opacity = '0.5';

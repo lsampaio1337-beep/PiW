@@ -283,17 +283,31 @@ window.applyPokemonFilters = function() {
     let breedableMap = null;
     if (filters.breedableOnly) {
         breedableMap = new Map();
-        const allMons = [...state.storage, ...state.safe]; // Only check storage/safe? Wait, all pokemon? Let's check all arrays just in case, or just storage/safe since they are the only ones filtered visually here.
+        const allMons = [...state.storage, ...state.safe];
+
+        // Find pairs of the same species that have a QValue difference of 0.05 or less
+        // Since we need to know if a pokemon is breedable with ANY other pokemon,
+        // we can group them by ID, then for each pokemon, check if there's another
+        // one with a valid quality difference.
+        const monsById = new Map();
         allMons.forEach(p => {
-            if (p.quality < 1.99) {
-                const key = p.id + '_' + p.quality.toFixed(2); // ID and exact quality must match? The user said "samem Q and it is same species".
-                // In game mechanics, same species, but wait, do they need same exact Q or just Q < 1.99?
-                // The rules of breeding: quality < 1.99. Then, if they have exactly same ID and Math.abs(currentP.quality - p.quality) <= 0.001 they merge.
-                // So yes, same ID and same Q.
-                if (breedableMap.has(key)) {
-                    breedableMap.set(key, breedableMap.get(key) + 1);
-                } else {
-                    breedableMap.set(key, 1);
+            if (p.quality < 1.80) {
+                if (!monsById.has(p.id)) {
+                    monsById.set(p.id, []);
+                }
+                monsById.get(p.id).push(p);
+            }
+        });
+
+        monsById.forEach((monsList, id) => {
+            for (let i = 0; i < monsList.length; i++) {
+                for (let j = i + 1; j < monsList.length; j++) {
+                    const p1 = monsList[i];
+                    const p2 = monsList[j];
+                    if (Math.round(Math.abs(p1.quality - p2.quality) * 100) <= 5) {
+                        breedableMap.set(p1.uuid, true);
+                        breedableMap.set(p2.uuid, true);
+                    }
                 }
             }
         });
@@ -310,15 +324,14 @@ window.applyPokemonFilters = function() {
         if (filters.maxIV !== '' && sumIV > parseInt(filters.maxIV)) return false;
 
         if (filters.breedableOnly) {
-            if (p.quality >= 1.99) return false;
-            const key = p.id + '_' + p.quality.toFixed(2);
-            if (!breedableMap || breedableMap.get(key) < 2) return false;
+            if (p.quality >= 1.80) return false;
+            if (!breedableMap || !breedableMap.has(p.uuid)) return false;
         }
 
         return true;
     };
 
-    const displayedBreedableKeys = new Set();
+    const displayedBreedableIds = new Set();
 
     // Filter Storage
     const storageSlots = document.querySelectorAll('.pokemon-storage-slot');
@@ -328,9 +341,8 @@ window.applyPokemonFilters = function() {
         if (p) {
             let show = filterFn(p);
             if (show && filters.breedableOnly) {
-                const key = p.id + '_' + p.quality.toFixed(2);
-                if (displayedBreedableKeys.has(key)) show = false;
-                else displayedBreedableKeys.add(key);
+                if (displayedBreedableIds.has(p.uuid)) show = false;
+                else displayedBreedableIds.add(p.uuid);
             }
             slot.style.display = show ? 'flex' : 'none';
         }
@@ -344,9 +356,8 @@ window.applyPokemonFilters = function() {
         if (p) {
             let show = filterFn(p);
             if (show && filters.breedableOnly) {
-                const key = p.id + '_' + p.quality.toFixed(2);
-                if (displayedBreedableKeys.has(key)) show = false;
-                else displayedBreedableKeys.add(key);
+                if (displayedBreedableIds.has(p.uuid)) show = false;
+                else displayedBreedableIds.add(p.uuid);
             }
             slot.style.display = show ? 'flex' : 'none';
         }
@@ -398,8 +409,8 @@ export function handleDrop(event, targetCol) {
         return;
     }
 
-    if (tCol === 'breeding' && p.quality >= 1.99) {
-        alert("Cannot breed a Pokémon with Q >= 1.99!");
+    if (tCol === 'breeding' && p.quality >= 1.80) {
+        alert("Cannot breed a Pokémon with Q >= 1.80!");
         return;
     }
 
@@ -593,6 +604,7 @@ export function handleDrop(event, targetCol) {
                     state.dayCareRef.slot1.battles = 0;
                     state.dayCareRef.slot1.isBreeding = true;
                     state.dayCareRef.slot1.isFinished = false;
+                    state.dayCareRef.slot1.requiredBattles = (newPokemon.qualityName === "Shiny") ? 200 : 100;
                 }
                 // Clear filter as breed started
                 if (window.clearPokemonFilter) window.clearPokemonFilter();
