@@ -166,8 +166,8 @@ const hoennMapCoordinates = {
   },
   "route_109_fishing_spot": {
     "name": "Route 109 Fishing Spot",
-    "x": 38.96,
-    "y": 26.4
+    "x": 30.11,
+    "y": 80.75
   },
   "fortree_gym": {
     "name": "Fortree Gym",
