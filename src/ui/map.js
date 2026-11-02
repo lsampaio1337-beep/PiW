@@ -208,7 +208,6 @@ function getUnlockedAreas() {
     let unlockedAreas = new Set();
     unlockedAreas.add("Professor Lab");
     unlockedAreas.add("Johto Professor Lab");
-    unlockedAreas.add("Professor Lab");
 
     let targetStats = getRegionStats(window.currentMapRegion);
 
@@ -237,6 +236,9 @@ function getUnlockedAreas() {
 
     if (window.currentMapRegion === "Johto") {
         unlockedAreas.add("Route 29");
+    }
+    if (window.currentMapRegion === "Hoenn") {
+        unlockedAreas.add("Route 101");
     }
 
     if (targetStats.completed150Challenge || (targetStats.completedChallengeIds && targetStats.completedChallengeIds.includes("Extra Challenge B"))) {
@@ -360,6 +362,8 @@ function generateMarkersForRegion(region, unlockedAreas) {
         for (const [locationId, locationData] of Object.entries(state.config.hoennMapCoordinates || {})) {
             const locationName = locationData.name;
             const coords = locationData;
+            let isUnlocked = unlockedAreas.has(locationName);
+            if (!isUnlocked) continue;
 
             let hasNewNotification = false;
             let showCheckmark = false;
