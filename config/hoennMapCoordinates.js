@@ -29,11 +29,6 @@ const hoennMapCoordinates = {
     "x": 22.0,
     "y": 92.0
   },
-  "weather_institute": {
-    "name": "Weather Institute",
-    "x": 46.72,
-    "y": 15.0
-  },
   "125": {
     "name": "Route 125",
     "x": 84.0,
