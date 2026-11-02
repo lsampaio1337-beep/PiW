@@ -5,7 +5,13 @@ describe('DayCare', () => {
     let mockState;
 
     beforeEach(() => {
-        mockState = {};
+        mockState = {
+            stats: {
+                upgrades: {
+                    daycareTier: 5
+                }
+            }
+        };
         dayCare = new DayCare(mockState);
 
         // Ensure global.window exists and has trackDailyChallenge
