@@ -1,9 +1,5 @@
 export const unovaRoutes = [
   {
-    "name": "Aspertia City",
-    "spawns": []
-  },
-  {
     "name": "Route 19",
     "spawns": [
       {
@@ -21,48 +17,89 @@ export const unovaRoutes = [
     ]
   },
   {
-    "name": "Floccesy Ranch",
+    "name": "Route 20",
     "spawns": [
       {
-        "pokemonId": 531,
+        "pokemonId": 543,
         "minLevel": 3,
         "maxLevel": 4,
-        "chance": 0.1426
+        "chance": 0.1665
       },
       {
-        "pokemonId": 506,
+        "pokemonId": 540,
         "minLevel": 3,
         "maxLevel": 4,
-        "chance": 0.1429
-      },
-      {
-        "pokemonId": 54,
-        "minLevel": 3,
-        "maxLevel": 4,
-        "chance": 0.1429
-      },
-      {
-        "pokemonId": 179,
-        "minLevel": 3,
-        "maxLevel": 4,
-        "chance": 0.1429
-      },
-      {
-        "pokemonId": 504,
-        "minLevel": 3,
-        "maxLevel": 4,
-        "chance": 0.1429
-      },
-      {
-        "pokemonId": 447,
-        "minLevel": 3,
-        "maxLevel": 4,
-        "chance": 0.1429
+        "chance": 0.1667
       },
       {
         "pokemonId": 519,
         "minLevel": 3,
         "maxLevel": 4,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 504,
+        "minLevel": 3,
+        "maxLevel": 4,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 509,
+        "minLevel": 3,
+        "maxLevel": 4,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 191,
+        "minLevel": 3,
+        "maxLevel": 4,
+        "chance": 0.1667
+      }
+    ]
+  },
+  {
+    "name": "Floccesy Ranch",
+    "spawns": [
+      {
+        "pokemonId": 531,
+        "minLevel": 4,
+        "maxLevel": 5,
+        "chance": 0.1426
+      },
+      {
+        "pokemonId": 506,
+        "minLevel": 4,
+        "maxLevel": 5,
+        "chance": 0.1429
+      },
+      {
+        "pokemonId": 54,
+        "minLevel": 4,
+        "maxLevel": 5,
+        "chance": 0.1429
+      },
+      {
+        "pokemonId": 179,
+        "minLevel": 4,
+        "maxLevel": 5,
+        "chance": 0.1429
+      },
+      {
+        "pokemonId": 504,
+        "minLevel": 4,
+        "maxLevel": 5,
+        "chance": 0.1429
+      },
+      {
+        "pokemonId": 447,
+        "minLevel": 4,
+        "maxLevel": 5,
+        "chance": 0.1429
+      },
+      {
+        "pokemonId": 519,
+        "minLevel": 4,
+        "maxLevel": 5,
         "chance": 0.1429
       }
     ]
@@ -72,92 +109,51 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 298,
-        "minLevel": 4,
-        "maxLevel": 5,
+        "minLevel": 6,
+        "maxLevel": 7,
         "chance": 0.125
       },
       {
         "pokemonId": 418,
-        "minLevel": 4,
-        "maxLevel": 5,
+        "minLevel": 6,
+        "maxLevel": 7,
         "chance": 0.125
       },
       {
         "pokemonId": 593,
-        "minLevel": 4,
-        "maxLevel": 5,
+        "minLevel": 6,
+        "maxLevel": 7,
         "chance": 0.125
       },
       {
         "pokemonId": 129,
-        "minLevel": 4,
-        "maxLevel": 5,
+        "minLevel": 6,
+        "maxLevel": 7,
         "chance": 0.125
       },
       {
         "pokemonId": 86,
-        "minLevel": 4,
-        "maxLevel": 5,
+        "minLevel": 6,
+        "maxLevel": 7,
         "chance": 0.125
       },
       {
         "pokemonId": 592,
-        "minLevel": 4,
-        "maxLevel": 5,
+        "minLevel": 6,
+        "maxLevel": 7,
         "chance": 0.125
       },
       {
         "pokemonId": 120,
-        "minLevel": 4,
-        "maxLevel": 5,
+        "minLevel": 6,
+        "maxLevel": 7,
         "chance": 0.125
       },
       {
         "pokemonId": 116,
-        "minLevel": 4,
-        "maxLevel": 5,
+        "minLevel": 6,
+        "maxLevel": 7,
         "chance": 0.125
-      }
-    ]
-  },
-  {
-    "name": "Route 20",
-    "spawns": [
-      {
-        "pokemonId": 543,
-        "minLevel": 6,
-        "maxLevel": 7,
-        "chance": 0.1665
-      },
-      {
-        "pokemonId": 540,
-        "minLevel": 6,
-        "maxLevel": 7,
-        "chance": 0.1667
-      },
-      {
-        "pokemonId": 519,
-        "minLevel": 6,
-        "maxLevel": 7,
-        "chance": 0.1667
-      },
-      {
-        "pokemonId": 504,
-        "minLevel": 6,
-        "maxLevel": 7,
-        "chance": 0.1667
-      },
-      {
-        "pokemonId": 509,
-        "minLevel": 6,
-        "maxLevel": 7,
-        "chance": 0.1667
-      },
-      {
-        "pokemonId": 191,
-        "minLevel": 6,
-        "maxLevel": 7,
-        "chance": 0.1667
       }
     ]
   },
@@ -397,10 +393,6 @@ export const unovaRoutes = [
     ]
   },
   {
-    "name": "Castelia Gym",
-    "spawns": []
-  },
-  {
     "name": "Relic Passage",
     "spawns": [
       {
@@ -428,6 +420,10 @@ export const unovaRoutes = [
         "chance": 0.25
       }
     ]
+  },
+  {
+    "name": "Castelia Gym",
+    "spawns": []
   },
   {
     "name": "Route 4",
@@ -606,10 +602,6 @@ export const unovaRoutes = [
     ]
   },
   {
-    "name": "Nimbasa Gym",
-    "spawns": []
-  },
-  {
     "name": "Route 16",
     "spawns": [
       {
@@ -716,6 +708,10 @@ export const unovaRoutes = [
     ]
   },
   {
+    "name": "Nimbasa Gym",
+    "spawns": []
+  },
+  {
     "name": "Driftveil Drawbridge",
     "spawns": [
       {
@@ -770,6 +766,10 @@ export const unovaRoutes = [
   },
   {
     "name": "Driftveil City",
+    "spawns": []
+  },
+  {
+    "name": "Driftveil Gym",
     "spawns": []
   },
   {
@@ -891,7 +891,7 @@ export const unovaRoutes = [
     ]
   },
   {
-    "name": "Driftveil Gym",
+    "name": "Mistralton City",
     "spawns": []
   },
   {
@@ -995,134 +995,130 @@ export const unovaRoutes = [
     ]
   },
   {
-    "name": "Mistralton City",
-    "spawns": []
-  },
-  {
     "name": "Mistralton Gym",
     "spawns": []
-  },
-  {
-    "name": "Reversal Mountain",
-    "spawns": [
-      {
-        "pokemonId": 227,
-        "minLevel": 37,
-        "maxLevel": 38,
-        "chance": 0.1112
-      },
-      {
-        "pokemonId": 323,
-        "minLevel": 37,
-        "maxLevel": 38,
-        "chance": 0.1111
-      },
-      {
-        "pokemonId": 530,
-        "minLevel": 37,
-        "maxLevel": 38,
-        "chance": 0.1111
-      },
-      {
-        "pokemonId": 428,
-        "minLevel": 37,
-        "maxLevel": 38,
-        "chance": 0.1111
-      },
-      {
-        "pokemonId": 451,
-        "minLevel": 37,
-        "maxLevel": 38,
-        "chance": 0.1111
-      },
-      {
-        "pokemonId": 322,
-        "minLevel": 37,
-        "maxLevel": 38,
-        "chance": 0.1111
-      },
-      {
-        "pokemonId": 126,
-        "minLevel": 37,
-        "maxLevel": 38,
-        "chance": 0.1111
-      },
-      {
-        "pokemonId": 329,
-        "minLevel": 37,
-        "maxLevel": 38,
-        "chance": 0.1111
-      },
-      {
-        "pokemonId": 330,
-        "minLevel": 37,
-        "maxLevel": 38,
-        "chance": 0.1111
-      }
-    ]
   },
   {
     "name": "Strange House",
     "spawns": [
       {
         "pokemonId": 607,
-        "minLevel": 38,
-        "maxLevel": 39,
+        "minLevel": 37,
+        "maxLevel": 38,
         "chance": 0.1
       },
       {
         "pokemonId": 20,
-        "minLevel": 38,
-        "maxLevel": 39,
+        "minLevel": 37,
+        "maxLevel": 38,
         "chance": 0.1
       },
       {
         "pokemonId": 42,
-        "minLevel": 38,
-        "maxLevel": 39,
+        "minLevel": 37,
+        "maxLevel": 38,
         "chance": 0.1
       },
       {
         "pokemonId": 354,
-        "minLevel": 38,
-        "maxLevel": 39,
+        "minLevel": 37,
+        "maxLevel": 38,
         "chance": 0.1
       },
       {
         "pokemonId": 574,
-        "minLevel": 38,
-        "maxLevel": 39,
+        "minLevel": 37,
+        "maxLevel": 38,
         "chance": 0.1
       },
       {
         "pokemonId": 577,
-        "minLevel": 38,
-        "maxLevel": 39,
+        "minLevel": 37,
+        "maxLevel": 38,
         "chance": 0.1
       },
       {
         "pokemonId": 575,
-        "minLevel": 38,
-        "maxLevel": 39,
+        "minLevel": 37,
+        "maxLevel": 38,
         "chance": 0.1
       },
       {
         "pokemonId": 578,
-        "minLevel": 38,
-        "maxLevel": 39,
+        "minLevel": 37,
+        "maxLevel": 38,
         "chance": 0.1
       },
       {
         "pokemonId": 353,
-        "minLevel": 38,
-        "maxLevel": 39,
+        "minLevel": 37,
+        "maxLevel": 38,
         "chance": 0.1
       },
       {
         "pokemonId": 609,
+        "minLevel": 37,
+        "maxLevel": 38,
+        "chance": 0.1
+      }
+    ]
+  },
+  {
+    "name": "Reversal Mountain",
+    "spawns": [
+      {
+        "pokemonId": 227,
         "minLevel": 38,
         "maxLevel": 39,
-        "chance": 0.1
+        "chance": 0.1112
+      },
+      {
+        "pokemonId": 323,
+        "minLevel": 38,
+        "maxLevel": 39,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 530,
+        "minLevel": 38,
+        "maxLevel": 39,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 428,
+        "minLevel": 38,
+        "maxLevel": 39,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 451,
+        "minLevel": 38,
+        "maxLevel": 39,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 322,
+        "minLevel": 38,
+        "maxLevel": 39,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 126,
+        "minLevel": 38,
+        "maxLevel": 39,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 329,
+        "minLevel": 38,
+        "maxLevel": 39,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 330,
+        "minLevel": 38,
+        "maxLevel": 39,
+        "chance": 0.1111
       }
     ]
   },
@@ -1208,95 +1204,42 @@ export const unovaRoutes = [
     ]
   },
   {
-    "name": "Route 13",
-    "spawns": [
-      {
-        "pokemonId": 114,
-        "minLevel": 42,
-        "maxLevel": 43,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 426,
-        "minLevel": 42,
-        "maxLevel": 43,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 279,
-        "minLevel": 42,
-        "maxLevel": 43,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 359,
-        "minLevel": 42,
-        "maxLevel": 43,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 419,
-        "minLevel": 42,
-        "maxLevel": 43,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 425,
-        "minLevel": 42,
-        "maxLevel": 43,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 581,
-        "minLevel": 42,
-        "maxLevel": 43,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 537,
-        "minLevel": 42,
-        "maxLevel": 43,
-        "chance": 0.125
-      }
-    ]
-  },
-  {
     "name": "Route 14",
     "spawns": [
       {
         "pokemonId": 334,
-        "minLevel": 43,
-        "maxLevel": 44,
+        "minLevel": 42,
+        "maxLevel": 43,
         "chance": 0.1665
       },
       {
         "pokemonId": 359,
-        "minLevel": 43,
-        "maxLevel": 44,
+        "minLevel": 42,
+        "maxLevel": 43,
         "chance": 0.1667
       },
       {
         "pokemonId": 619,
-        "minLevel": 43,
-        "maxLevel": 44,
+        "minLevel": 42,
+        "maxLevel": 43,
         "chance": 0.1667
       },
       {
         "pokemonId": 55,
-        "minLevel": 43,
-        "maxLevel": 44,
+        "minLevel": 42,
+        "maxLevel": 43,
         "chance": 0.1667
       },
       {
         "pokemonId": 333,
-        "minLevel": 43,
-        "maxLevel": 44,
+        "minLevel": 42,
+        "maxLevel": 43,
         "chance": 0.1667
       },
       {
         "pokemonId": 357,
-        "minLevel": 43,
-        "maxLevel": 44,
+        "minLevel": 42,
+        "maxLevel": 43,
         "chance": 0.1667
       }
     ]
@@ -1306,76 +1249,86 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 37,
-        "minLevel": 44,
-        "maxLevel": 45,
+        "minLevel": 43,
+        "maxLevel": 44,
         "chance": 0.2
       },
       {
         "pokemonId": 437,
-        "minLevel": 44,
-        "maxLevel": 45,
+        "minLevel": 43,
+        "maxLevel": 44,
         "chance": 0.2
       },
       {
         "pokemonId": 333,
-        "minLevel": 44,
-        "maxLevel": 45,
+        "minLevel": 43,
+        "maxLevel": 44,
         "chance": 0.2
       },
       {
         "pokemonId": 358,
-        "minLevel": 44,
-        "maxLevel": 45,
+        "minLevel": 43,
+        "maxLevel": 44,
         "chance": 0.2
       },
       {
         "pokemonId": 576,
-        "minLevel": 44,
-        "maxLevel": 45,
+        "minLevel": 43,
+        "maxLevel": 44,
         "chance": 0.2
       }
     ]
   },
   {
-    "name": "Opelucid City",
-    "spawns": []
-  },
-  {
-    "name": "Opelucid Gym",
-    "spawns": []
-  },
-  {
-    "name": "Route 11",
+    "name": "Route 13",
     "spawns": [
       {
-        "pokemonId": 207,
-        "minLevel": 48,
-        "maxLevel": 49,
-        "chance": 0.2
+        "pokemonId": 114,
+        "minLevel": 44,
+        "maxLevel": 45,
+        "chance": 0.125
       },
       {
-        "pokemonId": 335,
-        "minLevel": 48,
-        "maxLevel": 49,
-        "chance": 0.2
+        "pokemonId": 426,
+        "minLevel": 44,
+        "maxLevel": 45,
+        "chance": 0.125
       },
       {
-        "pokemonId": 336,
-        "minLevel": 48,
-        "maxLevel": 49,
-        "chance": 0.2
+        "pokemonId": 279,
+        "minLevel": 44,
+        "maxLevel": 45,
+        "chance": 0.125
       },
       {
-        "pokemonId": 588,
-        "minLevel": 48,
-        "maxLevel": 49,
-        "chance": 0.2
+        "pokemonId": 359,
+        "minLevel": 44,
+        "maxLevel": 45,
+        "chance": 0.125
       },
       {
-        "pokemonId": 616,
-        "minLevel": 48,
-        "maxLevel": 49,
-        "chance": 0.2
+        "pokemonId": 419,
+        "minLevel": 44,
+        "maxLevel": 45,
+        "chance": 0.125
+      },
+      {
+        "pokemonId": 425,
+        "minLevel": 44,
+        "maxLevel": 45,
+        "chance": 0.125
+      },
+      {
+        "pokemonId": 581,
+        "minLevel": 44,
+        "maxLevel": 45,
+        "chance": 0.125
+      },
+      {
+        "pokemonId": 537,
+        "minLevel": 44,
+        "maxLevel": 45,
+        "chance": 0.125
       }
     ]
   },
@@ -1384,38 +1337,38 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 400,
-        "minLevel": 49,
-        "maxLevel": 50,
+        "minLevel": 48,
+        "maxLevel": 49,
         "chance": 0.1665
       },
       {
         "pokemonId": 523,
-        "minLevel": 49,
-        "maxLevel": 50,
+        "minLevel": 48,
+        "maxLevel": 49,
         "chance": 0.1667
       },
       {
         "pokemonId": 279,
-        "minLevel": 49,
-        "maxLevel": 50,
+        "minLevel": 48,
+        "maxLevel": 49,
         "chance": 0.1667
       },
       {
         "pokemonId": 206,
-        "minLevel": 49,
-        "maxLevel": 50,
+        "minLevel": 48,
+        "maxLevel": 49,
         "chance": 0.1667
       },
       {
         "pokemonId": 294,
-        "minLevel": 49,
-        "maxLevel": 50,
+        "minLevel": 48,
+        "maxLevel": 49,
         "chance": 0.1667
       },
       {
         "pokemonId": 184,
-        "minLevel": 49,
-        "maxLevel": 50,
+        "minLevel": 48,
+        "maxLevel": 49,
         "chance": 0.1667
       }
     ]
@@ -1425,47 +1378,86 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 540,
-        "minLevel": 50,
-        "maxLevel": 51,
+        "minLevel": 49,
+        "maxLevel": 50,
         "chance": 0.1426
       },
       {
         "pokemonId": 520,
-        "minLevel": 50,
-        "maxLevel": 51,
+        "minLevel": 49,
+        "maxLevel": 50,
         "chance": 0.1429
       },
       {
         "pokemonId": 315,
-        "minLevel": 50,
-        "maxLevel": 51,
+        "minLevel": 49,
+        "maxLevel": 50,
         "chance": 0.1429
       },
       {
         "pokemonId": 415,
-        "minLevel": 50,
-        "maxLevel": 51,
+        "minLevel": 49,
+        "maxLevel": 50,
         "chance": 0.1429
       },
       {
         "pokemonId": 127,
-        "minLevel": 50,
-        "maxLevel": 51,
+        "minLevel": 49,
+        "maxLevel": 50,
         "chance": 0.1429
       },
       {
         "pokemonId": 192,
-        "minLevel": 50,
-        "maxLevel": 51,
+        "minLevel": 49,
+        "maxLevel": 50,
         "chance": 0.1429
       },
       {
         "pokemonId": 416,
-        "minLevel": 50,
-        "maxLevel": 51,
+        "minLevel": 49,
+        "maxLevel": 50,
         "chance": 0.1429
       }
     ]
+  },
+  {
+    "name": "Route 11",
+    "spawns": [
+      {
+        "pokemonId": 207,
+        "minLevel": 50,
+        "maxLevel": 51,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 335,
+        "minLevel": 50,
+        "maxLevel": 51,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 336,
+        "minLevel": 50,
+        "maxLevel": 51,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 588,
+        "minLevel": 50,
+        "maxLevel": 51,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 616,
+        "minLevel": 50,
+        "maxLevel": 51,
+        "chance": 0.2
+      }
+    ]
+  },
+  {
+    "name": "Opelucid City",
+    "spawns": []
   },
   {
     "name": "Route 9",
@@ -1507,6 +1499,10 @@ export const unovaRoutes = [
         "chance": 0.1667
       }
     ]
+  },
+  {
+    "name": "Opelucid Gym",
+    "spawns": []
   },
   {
     "name": "Humilau City",
@@ -1578,6 +1574,35 @@ export const unovaRoutes = [
     ]
   },
   {
+    "name": "Route 22",
+    "spawns": [
+      {
+        "pokemonId": 279,
+        "minLevel": 56,
+        "maxLevel": 57,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 55,
+        "minLevel": 56,
+        "maxLevel": 57,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 183,
+        "minLevel": 56,
+        "maxLevel": 57,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 591,
+        "minLevel": 56,
+        "maxLevel": 57,
+        "chance": 0.25
+      }
+    ]
+  },
+  {
     "name": "Humilau Gym",
     "spawns": []
   },
@@ -1586,44 +1611,44 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 458,
-        "minLevel": 56,
-        "maxLevel": 57,
+        "minLevel": 57,
+        "maxLevel": 58,
         "chance": 0.1426
       },
       {
         "pokemonId": 370,
-        "minLevel": 56,
-        "maxLevel": 57,
+        "minLevel": 57,
+        "maxLevel": 58,
         "chance": 0.1429
       },
       {
         "pokemonId": 222,
-        "minLevel": 56,
-        "maxLevel": 57,
+        "minLevel": 57,
+        "maxLevel": 58,
         "chance": 0.1429
       },
       {
         "pokemonId": 278,
-        "minLevel": 56,
-        "maxLevel": 57,
+        "minLevel": 57,
+        "maxLevel": 58,
         "chance": 0.1429
       },
       {
         "pokemonId": 279,
-        "minLevel": 56,
-        "maxLevel": 57,
+        "minLevel": 57,
+        "maxLevel": 58,
         "chance": 0.1429
       },
       {
         "pokemonId": 224,
-        "minLevel": 56,
-        "maxLevel": 57,
+        "minLevel": 57,
+        "maxLevel": 58,
         "chance": 0.1429
       },
       {
         "pokemonId": 342,
-        "minLevel": 56,
-        "maxLevel": 57,
+        "minLevel": 57,
+        "maxLevel": 58,
         "chance": 0.1429
       }
     ]
@@ -1633,68 +1658,39 @@ export const unovaRoutes = [
     "spawns": [
       {
         "pokemonId": 525,
-        "minLevel": 57,
-        "maxLevel": 58,
+        "minLevel": 58,
+        "maxLevel": 59,
         "chance": 0.1665
       },
       {
         "pokemonId": 349,
-        "minLevel": 57,
-        "maxLevel": 58,
+        "minLevel": 58,
+        "maxLevel": 59,
         "chance": 0.1667
       },
       {
         "pokemonId": 594,
-        "minLevel": 57,
-        "maxLevel": 58,
+        "minLevel": 58,
+        "maxLevel": 59,
         "chance": 0.1667
       },
       {
         "pokemonId": 527,
-        "minLevel": 57,
-        "maxLevel": 58,
+        "minLevel": 58,
+        "maxLevel": 59,
         "chance": 0.1667
       },
       {
         "pokemonId": 213,
-        "minLevel": 57,
-        "maxLevel": 58,
+        "minLevel": 58,
+        "maxLevel": 59,
         "chance": 0.1667
       },
       {
         "pokemonId": 565,
-        "minLevel": 57,
-        "maxLevel": 58,
+        "minLevel": 58,
+        "maxLevel": 59,
         "chance": 0.1667
-      }
-    ]
-  },
-  {
-    "name": "Route 22",
-    "spawns": [
-      {
-        "pokemonId": 279,
-        "minLevel": 58,
-        "maxLevel": 59,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 55,
-        "minLevel": 58,
-        "maxLevel": 59,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 183,
-        "minLevel": 58,
-        "maxLevel": 59,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 591,
-        "minLevel": 58,
-        "maxLevel": 59,
-        "chance": 0.25
       }
     ]
   },
@@ -2748,27 +2744,29 @@ export const unovaRoutes = [
 export const unovaUnlocks = [
   {
     "challengeName": "Challenge 1",
-    "areaId": "Aspertia City",
+    "areaId": "Route 19",
     "unlocks": [
-      "Route 19"
+      "Route 20"
     ],
     "requirements": {
-      "defeatCountRoute": {
-        "route": "Aspertia City",
-        "count": 20
-      }
+      "catchSpecies": [
+        {
+          "species": "Purrloin",
+          "count": 1
+        }
+      ]
     }
   },
   {
     "challengeName": "Challenge 2",
-    "areaId": "Route 19",
+    "areaId": "Route 20",
     "unlocks": [
       "Floccesy Ranch"
     ],
     "requirements": {
       "catchSpecies": [
         {
-          "species": "Purrloin",
+          "species": "Sunkern",
           "count": 1
         }
       ]
@@ -2793,7 +2791,7 @@ export const unovaUnlocks = [
     "challengeName": "Challenge 4",
     "areaId": "Floccesy Pond",
     "unlocks": [
-      "Route 20"
+      "Aspertia Gym"
     ],
     "requirements": {
       "catchSpecies": [
@@ -2806,21 +2804,6 @@ export const unovaUnlocks = [
   },
   {
     "challengeName": "Challenge 5",
-    "areaId": "Route 20",
-    "unlocks": [
-      "Aspertia Gym"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Sunkern",
-          "count": 1
-        }
-      ]
-    }
-  },
-  {
-    "challengeName": "Challenge 6",
     "areaId": "Aspertia Gym",
     "unlocks": [
       "Virbank City"
@@ -2834,7 +2817,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 7",
+    "challengeName": "Challenge 6",
     "areaId": "Virbank City",
     "unlocks": [
       "Virbank Complex"
@@ -2847,7 +2830,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 8",
+    "challengeName": "Challenge 7",
     "areaId": "Virbank Complex",
     "unlocks": [
       "Virbank Bay"
@@ -2862,7 +2845,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 9",
+    "challengeName": "Challenge 8",
     "areaId": "Virbank Bay",
     "unlocks": [
       "Virbank Gym"
@@ -2877,7 +2860,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 10",
+    "challengeName": "Challenge 9",
     "areaId": "Virbank Gym",
     "unlocks": [
       "Castelia City"
@@ -2891,7 +2874,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 11",
+    "challengeName": "Challenge 10",
     "areaId": "Castelia City",
     "unlocks": [
       "Castelia Sewers"
@@ -2906,7 +2889,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 12",
+    "challengeName": "Challenge 11",
     "areaId": "Castelia Sewers",
     "unlocks": [
       "Castelia Park"
@@ -2921,10 +2904,10 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 13",
+    "challengeName": "Challenge 12",
     "areaId": "Castelia Park",
     "unlocks": [
-      "Castelia Gym"
+      "Relic Passage"
     ],
     "requirements": {
       "catchSpecies": [
@@ -2936,24 +2919,10 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 14",
-    "areaId": "Castelia Gym",
-    "unlocks": [
-      "Relic Passage"
-    ],
-    "requirements": {
-      "earnBadge": {
-        "name": "Insect Badge",
-        "leader": "Burgh",
-        "badgeCount": 3
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 15",
+    "challengeName": "Challenge 13",
     "areaId": "Relic Passage",
     "unlocks": [
-      "Route 4"
+      "Castelia Gym"
     ],
     "requirements": {
       "catchSpecies": [
@@ -2965,7 +2934,21 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 16",
+    "challengeName": "Challenge 14",
+    "areaId": "Castelia Gym",
+    "unlocks": [
+      "Route 4"
+    ],
+    "requirements": {
+      "earnBadge": {
+        "name": "Insect Badge",
+        "leader": "Burgh",
+        "badgeCount": 3
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 15",
     "areaId": "Route 4",
     "unlocks": [
       "Desert Resort"
@@ -2980,7 +2963,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 17",
+    "challengeName": "Challenge 16",
     "areaId": "Desert Resort",
     "unlocks": [
       "Relic Castle"
@@ -2995,7 +2978,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 18",
+    "challengeName": "Challenge 17",
     "areaId": "Relic Castle",
     "unlocks": [
       "Nimbasa City"
@@ -3010,10 +2993,10 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 19",
+    "challengeName": "Challenge 18",
     "areaId": "Nimbasa City",
     "unlocks": [
-      "Nimbasa Gym"
+      "Route 16"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3025,21 +3008,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 20",
-    "areaId": "Nimbasa Gym",
-    "unlocks": [
-      "Route 16"
-    ],
-    "requirements": {
-      "earnBadge": {
-        "name": "Bolt Badge",
-        "leader": "Elesa",
-        "badgeCount": 4
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 21",
+    "challengeName": "Challenge 19",
     "areaId": "Route 16",
     "unlocks": [
       "Lostlorn Forest"
@@ -3054,10 +3023,10 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 22",
+    "challengeName": "Challenge 20",
     "areaId": "Lostlorn Forest",
     "unlocks": [
-      "Driftveil Drawbridge"
+      "Nimbasa Gym"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3069,7 +3038,21 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 23",
+    "challengeName": "Challenge 21",
+    "areaId": "Nimbasa Gym",
+    "unlocks": [
+      "Driftveil Drawbridge"
+    ],
+    "requirements": {
+      "earnBadge": {
+        "name": "Bolt Badge",
+        "leader": "Elesa",
+        "badgeCount": 4
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 22",
     "areaId": "Driftveil Drawbridge",
     "unlocks": [
       "Driftveil City"
@@ -3084,15 +3067,29 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 24",
+    "challengeName": "Challenge 23",
     "areaId": "Driftveil City",
     "unlocks": [
-      "Route 6"
+      "Driftveil Gym"
     ],
     "requirements": {
       "defeatCountRoute": {
         "route": "Driftveil City",
         "count": 20
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 24",
+    "areaId": "Driftveil Gym",
+    "unlocks": [
+      "Route 6"
+    ],
+    "requirements": {
+      "earnBadge": {
+        "name": "Quake Badge",
+        "leader": "Clay",
+        "badgeCount": 5
       }
     }
   },
@@ -3115,7 +3112,7 @@ export const unovaUnlocks = [
     "challengeName": "Challenge 26",
     "areaId": "Chargestone Cave",
     "unlocks": [
-      "Driftveil Gym"
+      "Mistralton City"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3128,15 +3125,14 @@ export const unovaUnlocks = [
   },
   {
     "challengeName": "Challenge 27",
-    "areaId": "Driftveil Gym",
+    "areaId": "Mistralton City",
     "unlocks": [
       "Route 7"
     ],
     "requirements": {
-      "earnBadge": {
-        "name": "Quake Badge",
-        "leader": "Clay",
-        "badgeCount": 5
+      "defeatCountRoute": {
+        "route": "Mistralton City",
+        "count": 20
       }
     }
   },
@@ -3159,7 +3155,7 @@ export const unovaUnlocks = [
     "challengeName": "Challenge 29",
     "areaId": "Celestial Tower",
     "unlocks": [
-      "Mistralton City"
+      "Mistralton Gym"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3172,22 +3168,9 @@ export const unovaUnlocks = [
   },
   {
     "challengeName": "Challenge 30",
-    "areaId": "Mistralton City",
-    "unlocks": [
-      "Mistralton Gym"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Mistralton City",
-        "count": 20
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 31",
     "areaId": "Mistralton Gym",
     "unlocks": [
-      "Reversal Mountain"
+      "Strange House"
     ],
     "requirements": {
       "earnBadge": {
@@ -3198,10 +3181,25 @@ export const unovaUnlocks = [
     }
   },
   {
+    "challengeName": "Challenge 31",
+    "areaId": "Strange House",
+    "unlocks": [
+      "Reversal Mountain"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Chandelure",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
     "challengeName": "Challenge 32",
     "areaId": "Reversal Mountain",
     "unlocks": [
-      "Strange House"
+      "Undella Town"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3214,21 +3212,6 @@ export const unovaUnlocks = [
   },
   {
     "challengeName": "Challenge 33",
-    "areaId": "Strange House",
-    "unlocks": [
-      "Undella Town"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Chandelure",
-          "count": 1
-        }
-      ]
-    }
-  },
-  {
-    "challengeName": "Challenge 34",
     "areaId": "Undella Town",
     "unlocks": [
       "Undella Bay"
@@ -3241,10 +3224,10 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 35",
+    "challengeName": "Challenge 34",
     "areaId": "Undella Bay",
     "unlocks": [
-      "Route 13"
+      "Route 14"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3256,22 +3239,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 36",
-    "areaId": "Route 13",
-    "unlocks": [
-      "Route 14"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Seismitoad",
-          "count": 1
-        }
-      ]
-    }
-  },
-  {
-    "challengeName": "Challenge 37",
+    "challengeName": "Challenge 35",
     "areaId": "Route 14",
     "unlocks": [
       "Abundant Shrine"
@@ -3286,10 +3254,10 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 38",
+    "challengeName": "Challenge 36",
     "areaId": "Abundant Shrine",
     "unlocks": [
-      "Opelucid City"
+      "Route 13"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3301,49 +3269,22 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 39",
-    "areaId": "Opelucid City",
-    "unlocks": [
-      "Opelucid Gym"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Opelucid City",
-        "count": 20
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 40",
-    "areaId": "Opelucid Gym",
-    "unlocks": [
-      "Route 11"
-    ],
-    "requirements": {
-      "earnBadge": {
-        "name": "Legend Badge",
-        "leader": "Drayden",
-        "badgeCount": 7
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 41",
-    "areaId": "Route 11",
+    "challengeName": "Challenge 37",
+    "areaId": "Route 13",
     "unlocks": [
       "Village Bridge"
     ],
     "requirements": {
       "catchSpecies": [
         {
-          "species": "Shelmet",
+          "species": "Seismitoad",
           "count": 1
         }
       ]
     }
   },
   {
-    "challengeName": "Challenge 42",
+    "challengeName": "Challenge 38",
     "areaId": "Village Bridge",
     "unlocks": [
       "Route 12"
@@ -3358,10 +3299,10 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 43",
+    "challengeName": "Challenge 39",
     "areaId": "Route 12",
     "unlocks": [
-      "Route 9"
+      "Route 11"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3373,10 +3314,38 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 44",
+    "challengeName": "Challenge 40",
+    "areaId": "Route 11",
+    "unlocks": [
+      "Opelucid City"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Shelmet",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 41",
+    "areaId": "Opelucid City",
+    "unlocks": [
+      "Route 9"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Opelucid City",
+        "count": 20
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 42",
     "areaId": "Route 9",
     "unlocks": [
-      "Humilau City"
+      "Opelucid Gym"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3388,7 +3357,21 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 45",
+    "challengeName": "Challenge 43",
+    "areaId": "Opelucid Gym",
+    "unlocks": [
+      "Humilau City"
+    ],
+    "requirements": {
+      "earnBadge": {
+        "name": "Legend Badge",
+        "leader": "Drayden",
+        "badgeCount": 7
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 44",
     "areaId": "Humilau City",
     "unlocks": [
       "Humilau Sea"
@@ -3401,15 +3384,30 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 46",
+    "challengeName": "Challenge 45",
     "areaId": "Humilau Sea",
+    "unlocks": [
+      "Route 22"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Dewgong",
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 46",
+    "areaId": "Route 22",
     "unlocks": [
       "Humilau Gym"
     ],
     "requirements": {
       "catchSpecies": [
         {
-          "species": "Dewgong",
+          "species": "Amoonguss",
           "count": 1
         }
       ]
@@ -3448,7 +3446,7 @@ export const unovaUnlocks = [
     "challengeName": "Challenge 49",
     "areaId": "Seaside Cave",
     "unlocks": [
-      "Route 22"
+      "P2 Laboratory"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3461,21 +3459,6 @@ export const unovaUnlocks = [
   },
   {
     "challengeName": "Challenge 50",
-    "areaId": "Route 22",
-    "unlocks": [
-      "P2 Laboratory"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Amoonguss",
-          "count": 1
-        }
-      ]
-    }
-  },
-  {
-    "challengeName": "Challenge 51",
     "areaId": "P2 Laboratory",
     "unlocks": [
       "Wellspring Cave"
@@ -3490,7 +3473,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 52",
+    "challengeName": "Challenge 51",
     "areaId": "Wellspring Cave",
     "unlocks": [
       "Giant Chasm"
@@ -3505,7 +3488,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 53",
+    "challengeName": "Challenge 52",
     "areaId": "Giant Chasm",
     "unlocks": [
       "Route 23"
@@ -3520,7 +3503,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 54",
+    "challengeName": "Challenge 53",
     "areaId": "Route 23",
     "unlocks": [
       "Victory Road"
@@ -3535,7 +3518,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 55",
+    "challengeName": "Challenge 54",
     "areaId": "Victory Road",
     "unlocks": [
       "Unova Pokemon League"
@@ -3573,7 +3556,7 @@ export const unovaUnlocks = [
     ],
     "requirements": {
       "completeChallenges": [
-        "Challenge 20"
+        "Challenge 21"
       ]
     }
   },
@@ -3660,7 +3643,7 @@ export const unovaUnlocks = [
     ],
     "requirements": {
       "completeChallenges": [
-        "Challenge 31"
+        "Challenge 30"
       ]
     }
   },
@@ -3953,7 +3936,7 @@ export const unovaUnlocks = [
         "Extra Challenge E 4"
       ]
     }
-    },
+  },
   {
     "challengeName": "Dragonspire Clouds",
     "areaId": "Dragonspire Clouds",
