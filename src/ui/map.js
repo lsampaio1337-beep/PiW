@@ -247,7 +247,7 @@ function getUnlockedAreas() {
         unlockedAreas.add("Route 201");
     }
     if (window.currentMapRegion === "Unova") {
-        unlockedAreas.add("Aspertia City");
+        unlockedAreas.add("Route 19");
     }
 
     if (targetStats.completed150Challenge || (targetStats.completedChallengeIds && targetStats.completedChallengeIds.includes("Extra Challenge B"))) {

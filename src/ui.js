@@ -1486,8 +1486,8 @@ function _initializeInitialRoutes(id) {
         state.stats.newRoutes.push("Route 101");
     } else if (currentRegion === 'Sinnoh' && !state.stats.newRoutes.includes("Route 201")) {
         state.stats.newRoutes.push("Route 201");
-    } else if (currentRegion === 'Unova' && !state.stats.newRoutes.includes("Aspertia City")) {
-        state.stats.newRoutes.push("Aspertia City");
+    } else if (currentRegion === 'Unova' && !state.stats.newRoutes.includes("Route 19")) {
+        state.stats.newRoutes.push("Route 19");
     }
     if (state.stats.activeChallenges) {
         for (let challenge of state.stats.activeChallenges) {
