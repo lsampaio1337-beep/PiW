@@ -1541,6 +1541,16 @@ function selectStarter(id) {
     state.stats.hasPickedStarter = true;
     returnToLab();
 
+    _updatePartyUIForStarter(pData);
+
+    _initializeInitialRoutes(id);
+
+    storage.save(state);
+
+    _resumeGameFlowAfterStarter();
+}
+
+function _updatePartyUIForStarter(pData) {
     // Refresh window after adding chosen pokemon
     const partyWindow = document.getElementById('party-window');
     if (partyWindow && window.windowManager) {
@@ -1562,11 +1572,9 @@ function selectStarter(id) {
 
     // Refresh window after removing duplicate
     _refreshPartyWindowHeight(partyWindow);
+}
 
-    _initializeInitialRoutes(id);
-
-    storage.save(state);
-
+function _resumeGameFlowAfterStarter() {
     // Continue normal game flow
     const navButtons = document.getElementById('main-control');
     if (navButtons) {
