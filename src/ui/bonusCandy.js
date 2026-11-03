@@ -68,19 +68,8 @@ function generateFirstTimeOverlayHTML(hasSeenModal) {
     `;
 }
 
-export function showBonusCandyModal() {
-    const defeats = state.stats.bonusCandyDefeats || 0;
-    const progressTextLeft = `${defeats}/${WHITE_CANDY_DEFEAT_REQUIREMENT}`;
-    const progressPct = (defeats / WHITE_CANDY_DEFEAT_REQUIREMENT) * 100;
-
-    if (!state.stats.candyPurchaseHistory) {
-        state.stats.candyPurchaseHistory = [];
-    }
-
-    const unspentWhite = state.stats.whiteCandies || 0;
-    const candyBankHTML = generateCandyBankHTML(state.stats.candyPurchaseHistory, unspentWhite);
-
-    const html = `
+function generateMainModalHTML(unspentWhite, progressPct, progressTextLeft, candyBankHTML, hasSeenModal) {
+    return `
         <div style="text-align: center; font-family: sans-serif; box-sizing: border-box;">
             <div style="margin-bottom: 10px;">
                 <h2 style="margin: 0; display: inline-block; vertical-align: middle;">White Candies: ${unspentWhite}</h2>
@@ -97,8 +86,29 @@ export function showBonusCandyModal() {
                 </div>
             </div>
         </div>
-        ${generateFirstTimeOverlayHTML(state.globalStats.hasSeenBonusCandyModal)}
+        ${generateFirstTimeOverlayHTML(hasSeenModal)}
     `;
+}
+
+export function showBonusCandyModal() {
+    const defeats = state.stats.bonusCandyDefeats || 0;
+    const progressTextLeft = `${defeats}/${WHITE_CANDY_DEFEAT_REQUIREMENT}`;
+    const progressPct = (defeats / WHITE_CANDY_DEFEAT_REQUIREMENT) * 100;
+
+    if (!state.stats.candyPurchaseHistory) {
+        state.stats.candyPurchaseHistory = [];
+    }
+
+    const unspentWhite = state.stats.whiteCandies || 0;
+    const candyBankHTML = generateCandyBankHTML(state.stats.candyPurchaseHistory, unspentWhite);
+
+    const html = generateMainModalHTML(
+        unspentWhite,
+        progressPct,
+        progressTextLeft,
+        candyBankHTML,
+        state.globalStats.hasSeenBonusCandyModal
+    );
 
     showModal("Bonus Candy", html, "window-bonus-candy", "800px", "auto");
 
