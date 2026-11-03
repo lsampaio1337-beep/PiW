@@ -182,39 +182,10 @@ export function formatMarketNumber(num) {
     return num.toLocaleString();
 }
 
-export function renderPokeMarketTab(category) {
-    const content = document.getElementById('market-buy-content');
-    if (!content) return;
 
-    // Highlight active tab
-    const tabs = ['pokeballs', 'potions', 'stones', 'vitamins', 'upgrades'];
-    tabs.forEach(tab => {
-        const btn = document.getElementById(`market-tab-buy-${tab}`);
-        if (btn) {
-            if (tab === category) {
-                btn.style.background = 'linear-gradient(to bottom, #2ecc71, #27ae60)';
-                btn.style.color = 'white';
-                btn.style.border = '1px solid #2ecc71';
-                btn.style.boxShadow = '0 2px 4px rgba(0,0,0,0.2)';
-            } else {
-                btn.style.background = 'transparent';
-                btn.style.color = 'rgba(255, 255, 255, 0.7)';
-                btn.style.border = '1px solid transparent';
-                btn.style.boxShadow = 'none';
-            }
-        }
-    });
-
-    content.dataset.category = category;
-
-
-
+export function getMarketItemsData(category) {
     let items = [];
-    let cols = 6;
-
-
     if (category === 'upgrades') {
-
         let ballTier = state.stats.upgrades.ballsTier || 0;
         let potionTier = state.stats.upgrades.potionsTier || 0;
         let boxTier = state.stats.upgrades.boxTier || 0;
@@ -308,10 +279,12 @@ export function renderPokeMarketTab(category) {
             };
         });
     }
+    return items;
+}
 
+export function generateMarketItemsHTML(items, category) {
     if (category === 'upgrades' && items.length === 0) {
-        safeSetHTML(content, `<div style="text-align: center; font-size: calc(var(--m-width) * 0.024); color: white; width: 100%; margin-top: calc(var(--m-width) * 0.05); padding-bottom: calc(var(--m-width) * 0.05);">No available upgrade to be bought.</div>`);
-        return;
+        return `<div style="text-align: center; font-size: calc(var(--m-width) * 0.024); color: white; width: 100%; margin-top: calc(var(--m-width) * 0.05); padding-bottom: calc(var(--m-width) * 0.05);">No available upgrade to be bought.</div>`;
     }
 
     let html = `<div style="--m-width: min(76vw, 750px); display: flex; flex-wrap: wrap; gap: calc(var(--m-width) * 0.018); justify-content: center; width: 100%;">`;
@@ -374,9 +347,39 @@ export function renderPokeMarketTab(category) {
         `;
     });
     html += `</div>`;
+    return html;
+}
 
+export function renderPokeMarketTab(category) {
+    const content = document.getElementById('market-buy-content');
+    if (!content) return;
+
+    // Highlight active tab
+    const tabs = ['pokeballs', 'potions', 'stones', 'vitamins', 'upgrades'];
+    tabs.forEach(tab => {
+        const btn = document.getElementById(`market-tab-buy-${tab}`);
+        if (btn) {
+            if (tab === category) {
+                btn.style.background = 'linear-gradient(to bottom, #2ecc71, #27ae60)';
+                btn.style.color = 'white';
+                btn.style.border = '1px solid #2ecc71';
+                btn.style.boxShadow = '0 2px 4px rgba(0,0,0,0.2)';
+            } else {
+                btn.style.background = 'transparent';
+                btn.style.color = 'rgba(255, 255, 255, 0.7)';
+                btn.style.border = '1px solid transparent';
+                btn.style.boxShadow = 'none';
+            }
+        }
+    });
+
+    content.dataset.category = category;
+
+    const items = getMarketItemsData(category);
+    const html = generateMarketItemsHTML(items, category);
     safeSetHTML(content, html);
 }
+
 
 export function buyItem(itemId, baseCost, category, upgradeType = null) { return newBuyItem(itemId, baseCost, category, upgradeType); }
 
