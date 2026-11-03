@@ -1,5 +1,6 @@
 import { state, globals, checkFinalChallengeCompleted } from '../state.js';
 import { checkDailyRewardAvailable, checkAnyDailyChallengeCompleted } from './calendar.js';
+import { escapeHTML } from '../utils/stringUtils.js';
 
 function getStatusHtml(isMet) {
     return isMet ? ` <span style="color: green;">[Complete]</span>` : "";
@@ -344,11 +345,11 @@ function formatRequirements(progressList) {
         } else if (p.type === 'catchByType') {
             textParts.push(`Catch ${p.required} ${p.pokemonType} Type Pokemons ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`);
         } else if (p.type === 'earnBadge') {
-            textParts.push(`Earn ${p.name}${getStatusHtml(p.isMet)}`);
+            textParts.push(`Earn ${escapeHTML(p.name)}${getStatusHtml(p.isMet)}`);
         } else if (p.type === 'defeatSpecific') {
-            textParts.push(`Defeat ${p.required} ${p.name} ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`);
+            textParts.push(`Defeat ${p.required} ${escapeHTML(p.name)} ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`);
         } else if (p.type === 'defeatMultipleSpecific') {
-            textParts.push(`Defeat ${p.required} ${p.name} ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`);
+            textParts.push(`Defeat ${p.required} ${escapeHTML(p.name)} ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`);
         } else if (p.type === 'defeatLeague') {
             textParts.push(`Win ${p.region} Pokémon League${getStatusHtml(p.isMet)}`);
         } else if (p.type === 'defeatRed') {
