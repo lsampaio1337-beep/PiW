@@ -377,3 +377,83 @@ describe('calculateCatchChance', () => {
         expect(calculateCatchChance(bst, level, quality, totalIV, ballMultiplier, { blackYellowCandies: 5 })).toBeCloseTo(baseChance * 2.0, 2);
     });
 });
+
+describe('calculateCatchChance - Additional edge cases', () => {
+    test('should function correctly when stats parameter is omitted (defaulting to empty object)', () => {
+        const bst = 300;
+        const level = 10;
+        const quality = 1.0;
+        const totalIV = 300;
+        const ballMultiplier = 1;
+        const baseChance = 46.852;
+
+        // Ensure no error and default chance is calculated correctly
+        const result = calculateCatchChance(bst, level, quality, totalIV, ballMultiplier);
+        expect(result).toBeCloseTo(baseChance, 2);
+    });
+
+    test('should default to isShiny false when omitted', () => {
+        const bst = 300;
+        const level = 10;
+        const quality = 1.0;
+        const totalIV = 300;
+        const ballMultiplier = 1;
+        const baseChance = 46.852;
+
+        // Pass a stats object that would trigger a multiplier if it were shiny
+        const stats = { shinySeenTaskTier: 3 };
+
+        const result = calculateCatchChance(bst, level, quality, totalIV, ballMultiplier, stats);
+        expect(result).toBeCloseTo(baseChance, 2); // Should not be doubled
+    });
+
+    test('should apply shiny multiplier correctly when isShiny is true but shinySeenTaskTier is just missing (default 0)', () => {
+        const bst = 300;
+        const level = 10;
+        const quality = 1.0;
+        const totalIV = 300;
+        const ballMultiplier = 1;
+        const baseChance = 46.852;
+
+        // If shiny, but no stats object or no shinySeenTaskTier, the multiplier should be 1
+        const result = calculateCatchChance(bst, level, quality, totalIV, ballMultiplier, {}, true);
+        expect(result).toBeCloseTo(baseChance, 2);
+    });
+
+    test('should properly calculate when cTaskTier is present but less than 1 (0 or negative)', () => {
+        const bst = 300;
+        const level = 10;
+        const quality = 1.0;
+        const totalIV = 300;
+        const ballMultiplier = 1;
+        const baseChance = 46.852;
+
+        expect(calculateCatchChance(bst, level, quality, totalIV, ballMultiplier, { cTaskTier: 0 })).toBeCloseTo(baseChance, 2);
+        expect(calculateCatchChance(bst, level, quality, totalIV, ballMultiplier, { cTaskTier: -1 })).toBeCloseTo(baseChance, 2);
+    });
+
+    test('should cap chance at 100 exactly when chance exceeds 100 without Masterball', () => {
+        const bst = 10;
+        const level = 1;
+        const quality = 0.8;
+        const totalIV = 10;
+        const ballMultiplier = 3; // Ultra ball
+
+        const stats = { cTaskTier: 5, blackYellowCandies: 10 }; // max modifiers
+
+        const result = calculateCatchChance(bst, level, quality, totalIV, ballMultiplier, stats, true);
+        expect(result).toBe(100.0);
+    });
+
+    test('should handle completely missing stats and isShiny parameters', () => {
+        const bst = 300;
+        const level = 10;
+        const quality = 1.0;
+        const totalIV = 300;
+        const ballMultiplier = 1;
+
+        // This relies on default parameters stats={} and isShiny=false in the function signature
+        const result = calculateCatchChance(bst, level, quality, totalIV, ballMultiplier);
+        expect(result).toBeCloseTo(46.852, 2);
+    });
+});
