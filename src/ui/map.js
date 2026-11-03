@@ -98,9 +98,9 @@ function generateMarkerHtml(locationId, locationName, coords, isUnlocked, hasNew
     } else if (locationId === 'celadon_gym') {
         markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Kanto', 4)}`;
     } else if (locationId === 'fuchsia_gym') {
-        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Kanto', 5)}`;
-    } else if (locationId === 'saffron_gym') {
         markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Kanto', 6)}`;
+    } else if (locationId === 'saffron_gym') {
+        markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Kanto', 5)}`;
     } else if (locationId === 'cinnabar_gym') {
         markerImg = `./Assets/Gym/Badges/${window.getBadgeFileName('Kanto', 7)}`;
     } else if (locationId === 'viridian_gym') {
