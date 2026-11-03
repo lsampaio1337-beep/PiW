@@ -148,21 +148,28 @@ export class WindowManager {
     }
 
     _sanitizeElement(el) {
+        // Use Element.prototype methods to avoid DOM Clobbering
+        const hasAttribute = Element.prototype.hasAttribute;
+        const getAttribute = Element.prototype.getAttribute;
+        const removeAttribute = Element.prototype.removeAttribute;
+        const attributesGetter = Object.getOwnPropertyDescriptor(Element.prototype, 'attributes').get;
+
         // Strip javascript: protocols from known URI attributes
         ['href', 'src', 'formaction', 'action'].forEach(attrName => {
-            if (el.hasAttribute(attrName)) {
-                const val = el.getAttribute(attrName).toLowerCase().replace(/[\s\x00-\x1f\x7f-\x9f]/g, '');
+            if (hasAttribute.call(el, attrName)) {
+                const val = getAttribute.call(el, attrName).toLowerCase().replace(/[\s\x00-\x1f\x7f-\x9f]/g, '');
                 if (val.startsWith('javascript:') || val.startsWith('vbscript:') || val.startsWith('data:text/html')) {
-                    el.removeAttribute(attrName);
+                    removeAttribute.call(el, attrName);
                 }
             }
         });
 
-        Array.from(el.attributes).forEach(attr => {
+        const attributes = attributesGetter.call(el);
+        Array.from(attributes).forEach(attr => {
             if (attr.name.toLowerCase().startsWith('on')) {
                 const eventType = attr.name.toLowerCase().substring(2);
                 const rawCode = attr.value;
-                el.removeAttribute(attr.name); // Remove the inline string to prevent arbitrary string execution
+                removeAttribute.call(el, attr.name); // Remove the inline string to prevent arbitrary string execution
 
                 el.addEventListener(eventType, (event) => {
                     this._executeInlineEvent(rawCode, event, el);
@@ -177,16 +184,19 @@ export class WindowManager {
         const doc = parser.parseFromString(htmlString, 'text/html');
         const body = doc.body;
 
+        const querySelectorAll = Element.prototype.querySelectorAll;
+        const remove = Element.prototype.remove;
+
         // Remove script, iframe, object tags completely to neutralize obvious XSS vectors
         const forbiddenTags = ['script', 'iframe', 'object', 'embed', 'applet', 'base', 'meta', 'link'];
         forbiddenTags.forEach(tag => {
-            const elements = body.querySelectorAll(tag);
-            elements.forEach(el => el.remove());
+            const elements = querySelectorAll.call(body, tag);
+            elements.forEach(el => remove.call(el));
         });
 
         // We must allow inline handlers (onclick, onmouseover) because the app is deeply coupled to them,
         // but we must not blindly use eval/innerHTML. We extract them and parse them to secure event listeners.
-        const allElements = body.querySelectorAll('*');
+        const allElements = querySelectorAll.call(body, '*');
         allElements.forEach(el => {
             this._sanitizeElement(el);
         });
