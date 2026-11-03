@@ -1,4 +1,4 @@
-import { calculateDamage, calculateReqXP, calculateStat, calculateCatchChance } from '../src/mathEngine.js';
+import { calculateDamage, calculateReqXP, calculateStat, calculateCatchChance, calculateTotalXP } from '../src/mathEngine.js';
 
 describe('calculateReqXP', () => {
     test('should calculate required XP correctly for level 1', () => {
@@ -19,6 +19,33 @@ describe('calculateReqXP', () => {
 
     test('should calculate required XP correctly for level 100', () => {
         expect(calculateReqXP(100)).toBe(409038);
+    });
+});
+
+describe('calculateTotalXP', () => {
+    test('should calculate total XP correctly for level 1', () => {
+        expect(calculateTotalXP(1)).toBe(0);
+    });
+
+    test('should calculate total XP correctly for level 2', () => {
+        expect(calculateTotalXP(2)).toBe(52);
+    });
+
+    test('should calculate total XP correctly for level 3', () => {
+        expect(calculateTotalXP(3)).toBe(142);
+    });
+
+    test('should calculate total XP correctly for level 50', () => {
+        expect(calculateTotalXP(50)).toBe(920397);
+    });
+
+    test('should calculate total XP correctly for level 100', () => {
+        // level 100 sum of 1..99 calculateReqXP
+        let expectedTotal = 0;
+        for (let i = 1; i < 100; i++) {
+            expectedTotal += calculateReqXP(i);
+        }
+        expect(calculateTotalXP(100)).toBe(expectedTotal);
     });
 });
 
