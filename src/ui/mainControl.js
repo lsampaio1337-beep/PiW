@@ -64,12 +64,34 @@ function evaluateRequirements(req, unlock) {
         }
     }
 
-    if (req.catchSpeciesByQuality) {
+if (req.catchSpeciesByQuality) {
         for (let spec of req.catchSpeciesByQuality) {
             let caughtKey = spec.species + "_" + spec.quality;
             let caughtCount = state.stats.challengeCaughtSpecific ? (state.stats.challengeCaughtSpecific[caughtKey] || 0) : 0;
             progress.push({
                 type: 'catchSpeciesByQuality',
+                species: spec.species,
+                quality: spec.quality,
+                current: caughtCount,
+                required: spec.count,
+                isMet: caughtCount >= spec.count
+            });
+        }
+    }
+
+    if (req.catchSpeciesByQualityOrHigher) {
+        let qualities = ["Weak", "Regular", "Uncommon", "Rare", "Epic", "Shiny", "Legendary", "Mythical"];
+        for (let spec of req.catchSpeciesByQualityOrHigher) {
+            let caughtCount = 0;
+            let idx = qualities.indexOf(spec.quality);
+            if (idx !== -1) {
+                for (let i = idx; i < qualities.length; i++) {
+                    let caughtKey = spec.species + "_" + qualities[i];
+                    caughtCount += state.stats.challengeCaughtSpecific ? (state.stats.challengeCaughtSpecific[caughtKey] || 0) : 0;
+                }
+            }
+            progress.push({
+                type: 'catchSpeciesByQualityOrHigher',
                 species: spec.species,
                 quality: spec.quality,
                 current: caughtCount,
@@ -327,8 +349,10 @@ function formatRequirements(progressList) {
             textParts.push(`Defeat ${p.required} Pokémon${routeText} ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`);
         } else if (p.type === 'catchSpecies') {
             textParts.push(`Catch ${p.required} ${formatSpecies(p.species)} ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`);
-        } else if (p.type === 'catchSpeciesByQuality') {
+} else if (p.type === 'catchSpeciesByQuality') {
             textParts.push(`Catch ${p.required} ${p.quality} ${formatSpecies(p.species)} ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`);
+        } else if (p.type === 'catchSpeciesByQualityOrHigher') {
+            textParts.push(`Catch ${p.required} ${p.quality}+ ${formatSpecies(p.species)} ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`);
         } else if (p.type === 'catchSpeciesAnyOf') {
             let speciesList = p.speciesList.map(s => formatSpecies(s)).join(' or ');
             textParts.push(`Catch ${p.required} ${speciesList} ${countDisplay(p.current, p.required)}${getStatusHtml(p.isMet)}`);

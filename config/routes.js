@@ -118,24 +118,8 @@ const routes = [
         "maxLevel": 7,
         "chance": 0.1
       },
-      {
-        "pokemonId": 40,
-        "minLevel": 8,
-        "maxLevel": 10,
-        "chance": 0.02
-      },
-      {
-        "pokemonId": 29,
-        "minLevel": 6,
-        "maxLevel": 8,
-        "chance": 0.04
-      },
-      {
-        "pokemonId": 32,
-        "minLevel": 6,
-        "maxLevel": 8,
-        "chance": 0.04
-      }
+      { "pokemonId": 29, "minLevel": 6, "maxLevel": 8, "chance": 0.05 },
+      { "pokemonId": 32, "minLevel": 6, "maxLevel": 8, "chance": 0.05 }
     ]
   },
   {
@@ -159,18 +143,7 @@ const routes = [
         "maxLevel": 12,
         "chance": 0.15
       },
-      {
-        "pokemonId": 35,
-        "minLevel": 9,
-        "maxLevel": 13,
-        "chance": 0.08
-      },
-      {
-        "pokemonId": 36,
-        "minLevel": 11,
-        "maxLevel": 14,
-        "chance": 0.02
-      }
+      { "pokemonId": 35, "minLevel": 9, "maxLevel": 13, "chance": 0.1 }
     ]
   },
   {
@@ -1589,7 +1562,7 @@ export const unlocks = [
   { "challengeName": "Challenge 3", "areaId": "Viridian Forest", "unlocks": ["Pewter Gym"], "requirements": { "catchByQualityAndType": { "type": "Bug", "quality": "Rare", "count": 1 } } },
   { "challengeName": "Challenge 4", "areaId": "Pewter Gym", "unlocks": ["Route 3"], "requirements": { "earnBadge": { "name": "Boulder Badge", "leader": "Brock", "badgeCount": 1 } } },
   { "challengeName": "Challenge 5", "areaId": "Route 3", "unlocks": ["Mount Moon"], "requirements": { "catchSpecies": [{ "species": "Ekans", "count": 1 }, { "species": "Sandshrew", "count": 1 }] } },
-  { "challengeName": "Challenge 6", "areaId": "Mount Moon", "unlocks": ["Route 4"], "gift": { "item": "Fairy Stone", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Clefairy", "count": 1 }], "catchSpeciesByQuality": [{ "species": "Zubat", "quality": "Rare", "count": 1 }] } },
+  { "challengeName": "Challenge 6", "areaId": "Mount Moon", "unlocks": ["Route 4"], "gift": { "item": "Fairy Stone", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Clefairy", "count": 1 }], "catchSpeciesByQualityOrHigher": [{ "species": "Zubat", "quality": "Uncommon", "count": 1 }] } },
   { "challengeName": "Challenge 7", "areaId": "Route 4", "unlocks": ["Cerulean Gym"], "requirements": { "catchSpecies": [{ "species": "Mankey", "count": 2 }] } },
   { "challengeName": "Challenge 8", "areaId": "Cerulean Gym", "unlocks": ["Route 24"], "requirements": { "earnBadge": { "name": "Cascade Badge", "leader": "Misty", "badgeCount": 2 } } },
   { "challengeName": "Challenge 9", "areaId": "Route 24", "unlocks": ["Route 25"], "requirements": { "catchSpecies": [{ "species": "Abra", "count": 2 }] } },
