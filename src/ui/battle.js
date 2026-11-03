@@ -338,22 +338,30 @@ function updateGymBackground(combatArena, state, battleSystem) {
     }
 }
 
-function updateRouteBackground(combatArena, state) {
-    if (["Safari Zone", "Kanto Safari Zone"].includes(state.currentRoute)) {
-        combatArena.style.backgroundImage = `url('./Assets/BG/SafariZone.png')`;
-    } else if (state.currentRoute && state.currentRoute.startsWith('Casino')) {
-         combatArena.style.backgroundImage = `url('./Assets/BG/Casino.png')`;
-    } else if (state.currentRoute === 'Viridian Forest') {
-        combatArena.style.backgroundImage = `url('./Assets/BG/BattleMode/Forest.png')`;
-    } else if (PLAINS_ROUTES.includes(state.currentRoute)) {
-        combatArena.style.backgroundImage = `url('./Assets/BG/BattleMode/Plains.png')`;
-    } else if (WATER_ROUTES.includes(state.currentRoute)) {
-        combatArena.style.backgroundImage = `url('./Assets/BG/BattleMode/Water.png')`;
-    } else if (CAVE_ROUTES.includes(state.currentRoute)) {
-        combatArena.style.backgroundImage = `url('./Assets/BG/BattleMode/Cave.png')`;
-    } else {
-        combatArena.style.backgroundImage = `url('./Assets/BG/BattleMode/Test.png')`;
+function getRouteBackgroundImage(route) {
+    if (!route) return 'url(\'./Assets/BG/BattleMode/Test.png\')';
+
+    if (["Safari Zone", "Kanto Safari Zone"].includes(route)) {
+        return `url('./Assets/BG/SafariZone.png')`;
     }
+    if (route.startsWith('Casino')) {
+        return `url('./Assets/BG/Casino.png')`;
+    }
+    if (route === 'Viridian Forest') {
+        return `url('./Assets/BG/BattleMode/Forest.png')`;
+    }
+    if (PLAINS_ROUTES.includes(route)) {
+        return `url('./Assets/BG/BattleMode/Plains.png')`;
+    }
+    if (WATER_ROUTES.includes(route)) {
+        return `url('./Assets/BG/BattleMode/Water.png')`;
+    }
+    if (CAVE_ROUTES.includes(route)) {
+        return `url('./Assets/BG/BattleMode/Cave.png')`;
+    }
+
+    // Determine region-specific or time-of-day logic here in the future
+    return `url('./Assets/BG/BattleMode/Test.png')`;
 }
 
 function updateBattleBackground(combatArena, state, battleSystem, inGymCombat, inMultiplayer) {
@@ -369,7 +377,7 @@ function updateBattleBackground(combatArena, state, battleSystem, inGymCombat, i
     } else if (inGymCombat) {
         updateGymBackground(combatArena, state, battleSystem);
     } else {
-        updateRouteBackground(combatArena, state);
+        combatArena.style.backgroundImage = getRouteBackgroundImage(state.currentRoute);
     }
 }
 
