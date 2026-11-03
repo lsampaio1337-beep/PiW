@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pokemon Catch Probability Calculator</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input[type="number"], select { width: 200px; padding: 5px; }
+        .result { font-size: 24px; font-weight: bold; margin-top: 20px; color: #333; }
+        .flex-row { display: flex; gap: 20px; align-items: center; margin-bottom: 15px; }
+        .flex-row > div { flex: 1; }
+    </style>
+</head>
+<body>
+    <h1>Pokemon Catch Probability Calculator</h1>
+
+    <div class="flex-row">
+        <div>
+            <label for="pokemonSelect">Select Pokemon (National Dex):</label>
+            <select id="pokemonSelect">
+                <option value="">-- Custom BST --</option>
+            </select>
+        </div>
+        <div>
+            <label for="bst">Base Stat Total (BST):</label>
+            <input type="number" id="bst" value="318" step="1">
+        </div>
+    </div>
+
+    <div class="flex-row">
+        <div>
+            <label for="level">Level:</label>
+            <input type="number" id="level" value="5" min="1" max="100">
+        </div>
+        <div>
+            <label for="quality">Quality (Q Value):</label>
+            <input type="number" id="quality" value="1.0" step="0.01">
+        </div>
+        <div>
+            <label for="totalIV">Total IV (6 - 600):</label>
+            <input type="number" id="totalIV" value="150" min="6" max="600">
+        </div>
+    </div>
+
+    <div class="flex-row">
+        <div>
+            <label for="ball">Pokeball Type:</label>
+            <select id="ball">
+                <option value="1.0">Pokeball (1.0x)</option>
+                <option value="1.5">Greatball (1.5x)</option>
+                <option value="2.0">Ultraball (2.0x)</option>
+                <option value="1.5">Safariball (1.5x)</option>
+                <option value="999.0">Masterball (999.0x)</option>
+            </select>
+        </div>
+        <div>
+            <label>
+                <input type="checkbox" id="isShiny"> Is Shiny?
+            </label>
+        </div>
+    </div>
+
+    <h3>Bonuses</h3>
+    <div class="flex-row">
+        <div>
+            <label for="cTaskTier">Capture Task Tier (0-5):</label>
+            <input type="number" id="cTaskTier" value="0" min="0" max="5">
+        </div>
+        <div>
+            <label for="shinySeenTaskTier">Shiny Seen Task Tier (0-5):</label>
+            <input type="number" id="shinySeenTaskTier" value="0" min="0" max="5">
+        </div>
+        <div>
+            <label for="blackYellowCandies">Black Yellow Candies:</label>
+            <input type="number" id="blackYellowCandies" value="0" min="0">
+        </div>
+    </div>
+
+    <div class="result" id="result">Catch Probability: 0%</div>
+
+    <script>
+        // Formula variables and logic
+        function calculateCatchChance() {
+            let bst = parseFloat(document.getElementById('bst').value) || 0;
+            let level = parseFloat(document.getElementById('level').value) || 1;
+            let quality = parseFloat(document.getElementById('quality').value) || 1.0;
+            let totalIV = parseFloat(document.getElementById('totalIV').value) || 6;
+            let ballMultiplier = parseFloat(document.getElementById('ball').value) || 1.0;
+            let isShiny = document.getElementById('isShiny').checked;
+
+            let cTaskTier = parseInt(document.getElementById('cTaskTier').value) || 0;
+            let shinySeenTaskTier = parseInt(document.getElementById('shinySeenTaskTier').value) || 0;
+            let blackYellowCandies = parseInt(document.getElementById('blackYellowCandies').value) || 0;
+
+            if (ballMultiplier >= 10) {
+                document.getElementById('result').innerText = `Catch Probability: 100% (Masterball)`;
+                return;
+            }
+
+            let catchBonus = 0;
+            if (cTaskTier >= 5) catchBonus = 25;
+            else if (cTaskTier >= 4) catchBonus = 20;
+            else if (cTaskTier >= 3) catchBonus = 15;
+            else if (cTaskTier >= 2) catchBonus = 10;
+            else if (cTaskTier >= 1) catchBonus = 5;
+
+            let shinyCatchMulti = (isShiny && shinySeenTaskTier >= 3) ? 2 : 1;
+
+            let baseChance = 74.0 - (bst / 14.6) - (level / 4.0) - 8.0 * ((quality - 0.8) / 1.0) - 5.0 * (totalIV / 600);
+
+            // REMOVED min 1% clamp for testing as requested
+            // if (baseChance < 1) baseChance = 1;
+
+            let chance = baseChance * ballMultiplier * (1 + catchBonus / 100) * shinyCatchMulti;
+
+            const blackYellowMulti = 1 + (0.20 * blackYellowCandies);
+            chance = chance * blackYellowMulti;
+
+            // Math.max(1.0) clamped removed as requested
+            chance = Math.min(100.0, chance);
+
+            document.getElementById('result').innerText = `Catch Probability: ${chance.toFixed(2)}%`;
+        }
+
+        // Add event listeners to all inputs to recalculate on change
+        document.querySelectorAll('input, select').forEach(el => {
+            el.addEventListener('input', calculateCatchChance);
+            el.addEventListener('change', calculateCatchChance);
+        });
+
+        // Load Pokemon Data
+        fetch('../data/pokemon_base.json')
+            .then(res => res.json())
+            .then(data => {
+                const select = document.getElementById('pokemonSelect');
+                data.forEach(p => {
+                    const option = document.createElement('option');
+                    option.value = p.stats.Total;
+                    option.innerText = `#${p.num} - ${p.name} (BST: ${p.stats.Total})`;
+                    select.appendChild(option);
+                });
+
+                select.addEventListener('change', (e) => {
+                    if (e.target.value) {
+                        document.getElementById('bst').value = e.target.value;
+                        calculateCatchChance();
+                    }
+                });
+            })
+            .catch(err => console.error("Error loading pokemon data:", err));
+
+        // Initial calculation
+        calculateCatchChance();
+    </script>
+</body>
+</html>
