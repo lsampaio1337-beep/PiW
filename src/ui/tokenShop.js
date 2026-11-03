@@ -118,6 +118,31 @@ const TOKEN_SHOP_ITEMS = [
     }
 ];
 
+function renderSelectableItemActions(item) {
+    return `
+        <div style="display: flex; gap: 5px; width: 100%;">
+            <button onclick="window.buyTokenItemRandom('${item.id}')" style="flex: 1; padding: 5px; background: #2ecc71; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 12px;">Random<br><img src="Assets/Extra/Token.png" style="width:12px;vertical-align:middle;"> ${item.randomPrice}</button>
+            <button onclick="window.showTokenItemSelect('${item.id}')" style="flex: 1; padding: 5px; background: #2ecc71; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 12px;">Choose<br><img src="Assets/Extra/Token.png" style="width:12px;vertical-align:middle;"> ${item.selectPrice}</button>
+        </div>
+    `;
+}
+
+function renderLockedItemActions() {
+    return `
+        <button disabled style="width: 100%; padding: 8px; background: #95a5a6; color: white; border: none; border-radius: 5px; cursor: not-allowed; font-weight: bold; font-size: 12px;">
+            Need to unlock Daycare
+        </button>
+    `;
+}
+
+function renderBuyableItemActions(item) {
+    return `
+        <button onclick='${item.action}' style="width: 100%; padding: 8px; background: #2ecc71; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 12px;">
+            Buy for <img src="Assets/Extra/Token.png" style="width:14px;vertical-align:middle;"> ${item.price}
+        </button>
+    `;
+}
+
 function renderTokenShopItem(item) {
     let isLocked = false;
     if (item.unlockKey === 'daycare' && (!state.globalStats || !state.globalStats.hasSeenDaycare)) {
@@ -132,25 +157,12 @@ function renderTokenShopItem(item) {
     `;
 
     if (item.isSelectable) {
-        html += `
-            <div style="display: flex; gap: 5px; width: 100%;">
-                <button onclick="window.buyTokenItemRandom('${item.id}')" style="flex: 1; padding: 5px; background: #2ecc71; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 12px;">Random<br><img src="Assets/Extra/Token.png" style="width:12px;vertical-align:middle;"> ${item.randomPrice}</button>
-                <button onclick="window.showTokenItemSelect('${item.id}')" style="flex: 1; padding: 5px; background: #2ecc71; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 12px;">Choose<br><img src="Assets/Extra/Token.png" style="width:12px;vertical-align:middle;"> ${item.selectPrice}</button>
-            </div>
-        `;
+        html += renderSelectableItemActions(item);
     } else {
         if (isLocked) {
-            html += `
-                <button disabled style="width: 100%; padding: 8px; background: #95a5a6; color: white; border: none; border-radius: 5px; cursor: not-allowed; font-weight: bold; font-size: 12px;">
-                    Need to unlock Daycare
-                </button>
-            `;
+            html += renderLockedItemActions();
         } else {
-            html += `
-                <button onclick='${item.action}' style="width: 100%; padding: 8px; background: #2ecc71; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 12px;">
-                    Buy for <img src="Assets/Extra/Token.png" style="width:14px;vertical-align:middle;"> ${item.price}
-                </button>
-            `;
+            html += renderBuyableItemActions(item);
         }
     }
 
