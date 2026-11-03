@@ -1,4 +1,164 @@
-import { calculateDamage, calculateReqXP, calculateStat, calculateCatchChance } from '../src/mathEngine.js';
+import { calculateDamage, calculateReqXP, calculateStat, calculateCatchChance, generateQuality } from '../src/mathEngine.js';
+
+describe('generateQuality', () => {
+    afterEach(() => {
+        jest.restoreAllMocks();
+    });
+
+    test('should generate Weak quality', () => {
+        // roll = Math.floor(Math.random() * maxTableRoll) + 1;
+        // maxTableRoll is usually 12000 (11999 + 1)
+        // weakMaxRoll = 1474
+        // To get roll <= 1474, random needs to be close to 0
+        jest.spyOn(Math, 'random').mockReturnValue(0.01);
+        // 0.01 * 12000 = 120. floor(120) + 1 = 121 <= 1474 -> Weak
+        // originalQ = baseQ + Math.random() * (maxQ - baseQ)
+        // For Weak, baseQ = 0.80, maxQ = 0.99
+        // Math.random() is mocked to 0.01, so originalQ = 0.80 + 0.01 * 0.19 = 0.8019
+        const result = generateQuality();
+        expect(result.name).toBe('Weak');
+        expect(result.q).toBeCloseTo(0.80, 2);
+    });
+
+    test('should generate Regular quality', () => {
+        // regularMaxRoll = 6586
+        // Need a roll between 1474 and 6586
+        jest.spyOn(Math, 'random').mockReturnValue(0.2); // 0.2 * 12000 = 2400
+        const result = generateQuality();
+        expect(result.name).toBe('Regular');
+        // baseQ = 1.00, maxQ = 1.19
+        expect(result.q).toBeGreaterThanOrEqual(1.00);
+        expect(result.q).toBeLessThanOrEqual(1.19);
+    });
+
+    test('should generate Uncommon quality', () => {
+        // uncommonMaxRoll = 9593
+        jest.spyOn(Math, 'random').mockReturnValue(0.6); // 0.6 * 12000 = 7200
+        const result = generateQuality();
+        expect(result.name).toBe('Uncommon');
+        expect(result.q).toBeGreaterThanOrEqual(1.20);
+        expect(result.q).toBeLessThanOrEqual(1.39);
+    });
+
+    test('should generate Rare quality', () => {
+        // rareMaxRoll = 11097
+        jest.spyOn(Math, 'random').mockReturnValue(0.85); // 0.85 * 12000 = 10200
+        const result = generateQuality();
+        expect(result.name).toBe('Rare');
+        expect(result.q).toBeGreaterThanOrEqual(1.40);
+        expect(result.q).toBeLessThanOrEqual(1.59);
+    });
+
+    test('should generate Epic quality', () => {
+        // maxTableRoll = 11999
+        jest.spyOn(Math, 'random').mockReturnValue(0.95); // 0.95 * 12000 = 11400
+        const result = generateQuality();
+        expect(result.name).toBe('Epic');
+        expect(result.q).toBeGreaterThanOrEqual(1.60);
+        expect(result.q).toBeLessThanOrEqual(1.80);
+    });
+
+    test('should generate Shiny quality', () => {
+        // maxTableRoll is usually 12000, shiny roll happens when roll > 11999
+        // To get shiny, Math.random() needs to be almost 1 to reach 12000
+        jest.spyOn(Math, 'random').mockReturnValue(0.99999);
+        const result = generateQuality();
+        expect(result.name).toBe('Shiny');
+        // Shinies range from 2.00 to 2.50
+        expect(result.q).toBeGreaterThanOrEqual(2.00);
+        expect(result.q).toBeLessThanOrEqual(2.51);
+    });
+
+    test('should apply shiny boosters correctly (rainbowCandies)', () => {
+        // With 1000 rainbow candies, maxTableRoll = 11999 + 1001 = 13000
+        // A random of 0.99 gives 0.99 * 13000 = 12870, which is > 11999, so Shiny!
+        jest.spyOn(Math, 'random').mockReturnValue(0.99);
+
+        // Without candies, 0.99 * 12000 = 11880 (Epic)
+        const normalResult = generateQuality();
+        expect(normalResult.name).toBe('Epic');
+
+        // With candies
+        const boostedResult = generateQuality({ rainbowCandies: 1000 });
+        expect(boostedResult.name).toBe('Shiny');
+    });
+
+    test('should apply shiny boosters correctly (shinySeenTaskTier)', () => {
+        jest.spyOn(Math, 'random').mockReturnValue(0.9999); // Close to threshold
+
+        // Without booster: 0.9999 * 12000 = 11998 (Epic)
+        const normalResult = generateQuality();
+        expect(normalResult.name).toBe('Epic');
+
+        // With booster (Tier 2 gives +2 rolls, maxTableRoll = 12002)
+        // 0.9999 * 12002 = 12000 (Shiny)
+        const boostedResult = generateQuality({ shinySeenTaskTier: 2 });
+        expect(boostedResult.name).toBe('Shiny');
+    });
+
+    test('should apply double shiny bonus correctly', () => {
+        jest.spyOn(Math, 'random').mockReturnValue(0.9999);
+
+        // Double shiny means shinyRolls = (1)*2 = 2. maxTableRoll = 12001
+        // 0.9999 * 12001 = 12000 (Shiny)
+        const boostedResult = generateQuality({}, true);
+        expect(boostedResult.name).toBe('Shiny');
+    });
+
+    test('should apply finalTaskTier bonus correctly', () => {
+        jest.spyOn(Math, 'random').mockReturnValue(0.9995);
+
+        // Final task tier gives *12 shiny rolls. maxTableRoll = 11999 + 12 = 12011
+        // Without bonus: 0.9995 * 12000 = 11994 (Epic)
+        const normalResult = generateQuality();
+        expect(normalResult.name).toBe('Epic');
+
+        // With finalTaskTier = 1
+        // 0.9995 * 12011 = 12004.99 -> 12005 (Shiny)
+        const boostedResult = generateQuality({ finalTaskTier: 1 });
+        expect(boostedResult.name).toBe('Shiny');
+    });
+
+    test('should apply qTaskTier bonus value to quality', () => {
+        // Roll for Regular quality to see effect of qTaskTier bonus
+        // Need a roll between 1474 and 6586
+        jest.spyOn(Math, 'random').mockReturnValue(0.2); // 0.2 * 12000 = 2400 (Regular)
+
+        const normalResult = generateQuality();
+        // Regular baseQ is 1.00. normalResult.q = 1.00 + 0.2 * 0.19 = 1.038
+        expect(normalResult.name).toBe('Regular');
+
+        // With qTaskTier = 5, bonus is 1.0. NewValue = (1 + BonusValue) * (OriginalValue - TierMin) + TierMin
+        // max table roll = 12000. 0.2 * 12000 = 2400.
+        // For qTaskTier >= 5, weakMaxRoll = 120, regularMaxRoll = 3720. 2400 is Regular.
+        // Expected Q: (1 + 1.0) * (OriginalValue - 1.00) + 1.00
+        const boostedResult = generateQuality({ qTaskTier: 5 });
+        expect(boostedResult.name).toBe('Regular');
+        expect(boostedResult.q).toBeGreaterThan(normalResult.q);
+    });
+
+    test('should cap newQ at maxQ', () => {
+        // Roll for Regular quality near the upper bound
+        jest.spyOn(Math, 'random').mockReturnValue(0.5); // 0.5 * 12000 = 6000 (Regular max is 6586)
+
+        // With qTaskTier = 5, the calculated Q might exceed maxQ (1.19 for Regular)
+        // If it does, it should be capped at 1.19.
+        const boostedResult = generateQuality({ qTaskTier: 5 });
+        expect(boostedResult.name).toBe('Uncommon'); // Wait, 6000 is Uncommon for qTaskTier=5 (regularMaxRoll=3720, uncommonMaxRoll=6120)
+        // So we need to ensure the capping logic works.
+        // For Uncommon, maxQ is 1.39.
+        expect(boostedResult.q).toBeLessThanOrEqual(1.39);
+
+        // To specifically test capping, force Math.random to 0.99 for the second call (which determines value)
+        jest.spyOn(Math, 'random')
+            .mockReturnValueOnce(0.2) // Roll for tier (2400 -> Regular for qTaskTier 5)
+            .mockReturnValueOnce(0.99); // Roll for originalQ (near maxQ)
+
+        const maxBoostedResult = generateQuality({ qTaskTier: 5 });
+        expect(maxBoostedResult.name).toBe('Regular');
+        expect(maxBoostedResult.q).toBeCloseTo(1.19, 2);
+    });
+});
 
 describe('calculateReqXP', () => {
     test('should calculate required XP correctly for level 1', () => {
