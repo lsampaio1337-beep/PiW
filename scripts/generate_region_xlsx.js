@@ -25,7 +25,11 @@ function loadDataFile(filename, varNames = null) {
     return context;
 }
 
-const pokemonData = require('../data/pokemon.json');
+
+const _pokemonDataArr = require('../data/pokemon.json');
+const pokemonData = {};
+_pokemonDataArr.forEach(p => { pokemonData[p.id] = p; });
+
 const { pokedexIndexes } = loadDataFile('config/pokedexIndexes.js', ['pokedexIndexes']);
 const { types } = loadDataFile('config/types.js', ['types']);
 

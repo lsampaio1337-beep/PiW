@@ -50,3 +50,18 @@
 ## Dependency Management
 * **Package Manager:** Use pnpm. Do not generate or commit package-lock.json files; rely exclusively on pnpm-lock.yaml.
 * **Multiplayer / WebRTC:** Handled in `src/ui/multiplayer.js`. Region locking enforced immediately via data channel based on `state.currentRegionName`.
+
+## Pokedex Version Information
+When verifying Pokedex numbers, use these authoritative bases:
+- **Kanto:** Pokémon Red, Blue & Green (151)
+- **Johto:** Pokémon Gold, Silver & Crystal (251)
+- **Hoenn:** Pokémon Ruby, Sapphire & Emerald / Original Hoenn Dex (202)
+- **Sinnoh:** Pokémon Platinum / Extended Sinnoh Dex (210)
+- **Unova:** Pokémon Black 2 & White 2 / Updated Unova Dex (301, including Victini as #000)
+- **Kalos:** Pokémon X & Y / Central, Coastal, Mountain Dexes combined (457)
+- **Alola:** Pokémon Ultra Sun & Ultra Moon / Updated Alola Dex (403)
+- **Galar:** Pokémon Sword & Shield including Isle of Armor & Crown Tundra DLCs (584)
+- **Hisui:** Pokémon Legends: Arceus (242)
+- **Paldea:** Pokémon Scarlet & Violet including Kitakami & Blueberry DLCs (664)
+
+*Note: Totals strictly represent natively capturable Pokémon and Mythicals numbered in the regional dexes. Transfer-only Pokémon (e.g. Mewtwo in Galar, Alolan starters in Paldea) are EXCLUDED.*
