@@ -171,7 +171,7 @@ export function showPokemonStats(idx, location) {
     const p = list[idx];
 
     const sumIV = p.ivs.hp + p.ivs.atk + p.ivs.def + p.ivs.spa + p.ivs.spd + p.ivs.spe;
-    const pData = state.config.pokemonData.find(pd => pd.id === p.id);
+    const pData = state.config.pokemonMap.get(p.id);
     if (!pData) return;
 
     const actionsHtml = getActionsHtml(p, pData, location, idx);
@@ -194,11 +194,11 @@ export function evolvePokemon(location, idx, toId) {
     if (!list || !list[idx]) return;
 
     let p = list[idx];
-    const newBase = state.config.pokemonData.find(pd => pd.id === toId);
+    const newBase = state.config.pokemonMap.get(toId);
     if (!newBase) return;
 
     // Re-verify requirements and consume stones
-    const oldPData = state.config.pokemonData.find(pd => pd.id === p.id);
+    const oldPData = state.config.pokemonMap.get(p.id);
     const evoObj = oldPData ? oldPData.evolutions.find(e => e.to === toId) : null;
     if (evoObj) {
         const req = getEvolveRequirements(p, evoObj, state);
@@ -319,7 +319,7 @@ window.useVitamin = function(location, idx, vitaminName, statKey) {
     p.vitamins[statKey] = (p.vitamins[statKey] || 0) + 1;
 
     // Recalculate stats
-    const pBase = state.config.pokemonData.find(pd => pd.id === p.id);
+    const pBase = state.config.pokemonMap.get(p.id);
     if (pBase) {
         if (statKey === 'hp') {
             const oldMax = p.maxHp;

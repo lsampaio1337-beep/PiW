@@ -1389,6 +1389,12 @@ async function loadConfigs() {
     ]);
 
     state.config.pokemonData = pokemonData;
+
+    // Precompute pokemonMap for O(1) lookups
+    state.config.pokemonMap = new Map();
+    for (const pd of pokemonData) {
+        state.config.pokemonMap.set(pd.id, pd);
+    }
     state.config.routes = routes;
     const unlocksModule = await import('../config/routes.js');
     state.config.unlocks = unlocksModule.unlocks;
