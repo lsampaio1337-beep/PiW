@@ -329,8 +329,8 @@ const johtoMapCoordinates = {
     "x": 63.93,
     "y": 34.57
   },
-  "temporal_sanctuary_spot": {
-    "name": "Temporal Sanctuary Spot",
+  "mount_silver_apex": {
+    "name": "Mount Silver Apex",
     "x": 55.8,
     "y": 34.57
   },
