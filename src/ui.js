@@ -1529,50 +1529,60 @@ function _initializeInitialRoutes(id) {
     state.stats.dex[id] = true;
 }
 
-function selectStarter(id) {
+function _ensureProfileExists() {
     if (!storage.currentProfileId) {
         storage.createNewProfile();
     }
-    const pData = state.config.pokemonData.find(p => p.id === id);
+}
 
+function _openPartyWindow(partyWindow) {
+    if (partyWindow && window.windowManager) {
+        if (partyWindow.style.display === 'none' || !partyWindow.style.display) {
+            window.windowManager.toggleWindow('party-window', true);
+        }
+    }
+}
+
+function _triggerPartyWindowLayoutRefresh(pData, partyWindow) {
+    _refreshPartyWindowHeight(partyWindow);
+
+    // Add identical pokemon to Team to force layout height change
+    const starterCopy = _createStarterPokemon(pData);
+    state.party.push(starterCopy);
+    _refreshPartyWindowHeight(partyWindow);
+
+    // Remove the duplicate from Team
+    state.party.pop();
+    _refreshPartyWindowHeight(partyWindow);
+}
+
+function _enableMainNavigation() {
+    const navButtons = document.getElementById('main-control');
+    if (navButtons) {
+        navButtons.style.pointerEvents = 'auto';
+        navButtons.style.opacity = '1.0';
+    }
+}
+
+function selectStarter(id) {
+    _ensureProfileExists();
+
+    const pData = state.config.pokemonData.find(p => p.id === id);
     const starter = _createStarterPokemon(pData);
 
     state.party.push(starter);
     state.stats.hasPickedStarter = true;
     returnToLab();
 
-    // Refresh window after adding chosen pokemon
     const partyWindow = document.getElementById('party-window');
-    if (partyWindow && window.windowManager) {
-        if (partyWindow.style.display === 'none' || !partyWindow.style.display) {
-            window.windowManager.toggleWindow('party-window', true);
-        }
-    }
-    _refreshPartyWindowHeight(partyWindow);
-
-    // Add identical pokemon to Team
-    const starterCopy = _createStarterPokemon(pData);
-    state.party.push(starterCopy);
-
-    // Refresh window after adding duplicate
-    _refreshPartyWindowHeight(partyWindow);
-
-    // Remove similar pokemon from Team
-    state.party.pop();
-
-    // Refresh window after removing duplicate
-    _refreshPartyWindowHeight(partyWindow);
+    _openPartyWindow(partyWindow);
+    _triggerPartyWindowLayoutRefresh(pData, partyWindow);
 
     _initializeInitialRoutes(id);
 
     storage.save(state);
 
-    // Continue normal game flow
-    const navButtons = document.getElementById('main-control');
-    if (navButtons) {
-        navButtons.style.pointerEvents = 'auto';
-        navButtons.style.opacity = '1.0';
-    }
+    _enableMainNavigation();
 
     startGame();
 
