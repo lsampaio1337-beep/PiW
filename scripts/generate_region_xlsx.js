@@ -149,197 +149,207 @@ function processRegion(region) {
         let currentSeen = new Set(initialSeenSet);
         for (let i = 0; i < challengeList.length; i++) {
             const c = challengeList[i];
-            const areaName = c.areaId || c.name;
+            const areaNames = [c.areaId || c.name];
+            if (c.secondaryAreas && Array.isArray(c.secondaryAreas)) {
+                areaNames.push(...c.secondaryAreas);
+            }
             const isLeagueOrKey = c.challengeName && (c.challengeName.includes('League') || c.challengeName.includes('Key'));
 
-            const r = routes.find(ro => ro.name === areaName) || {};
-            const spawns = r.spawns || [];
+            let primaryAdded = false;
 
-            const req = c.requirements || {};
-            let unlockStr = (c.unlocks || []).join(', ');
-            let giftStr = c.gift ? `${c.gift.item} x${c.gift.count}` : '';
+            areaNames.forEach(areaName => {
+                const r = routes.find(ro => ro.name === areaName) || {};
+                const spawns = r.spawns || [];
 
-            let avgBST = 0;
-            if (spawns.length > 0) {
-                let sumBST = 0;
-                let uniqueIds = new Set();
-                spawns.forEach(s => {
-                    uniqueIds.add(s.pokemonId);
-                });
-                uniqueIds.forEach(id => {
-                    sumBST += getBST(pokemonData[id]);
-                });
-                avgBST = uniqueIds.size > 0 ? sumBST / uniqueIds.size : 0;
-            }
+                const req = c.requirements || {};
+                let unlockStr = (c.unlocks || []).join(', ');
+                let giftStr = c.gift ? `${c.gift.item} x${c.gift.count}` : '';
 
-            let baseMin = 1;
-            if (isMain) {
-                if (mainChallenges.length > 1) {
-                    baseMin = Math.round(1 + ((79) * (i / (mainChallenges.length - 1))));
+                let avgBST = 0;
+                if (spawns.length > 0) {
+                    let sumBST = 0;
+                    let uniqueIds = new Set();
+                    spawns.forEach(s => {
+                        uniqueIds.add(s.pokemonId);
+                    });
+                    uniqueIds.forEach(id => {
+                        sumBST += getBST(pokemonData[id]);
+                    });
+                    avgBST = uniqueIds.size > 0 ? sumBST / uniqueIds.size : 0;
                 }
-            } else {
-                 const totalExtra = challengeList.length;
-                 let startLvl = 80;
-                 if (totalExtra > 0) {
-                     baseMin = Math.round(startLvl + ((20) * (i / totalExtra)));
-                 }
-            }
 
-            let diff = 0;
-            let baseMax = baseMin;
-            if (baseMin < 12) diff = 2;
-            else if (baseMin < 30) diff = 3;
-            else {
-                let tempDiff = baseMin * 0.1;
-                let avg = (baseMin + baseMin + tempDiff) / 2;
-                diff = Math.floor(avg * 0.1);
-                if (diff > 8) diff = 8;
-            }
-            baseMax = baseMin + diff;
-
-            let quarter = 1;
-            if (isMain && mainChallenges.length > 0) {
-                quarter = Math.ceil(((i + 1) / mainChallenges.length) * 4);
-                if (quarter > 4) quarter = 4;
-            } else {
-                quarter = 4;
-            }
-
-            if (spawns.length === 0) {
-                routesData.push({
-                    "Unlocked at": i === 0 && isMain ? "" : (i > 0 ? challengeList[i-1].challengeName : ""),
-                    "Challenge": c.challengeName,
-                    "Route": areaName,
-                    "Route (Secondary)": "",
-                    "Pokemon Name": "",
-                    "First?": "",
-                    "Level": "",
-                    "Sugested Level": "",
-                    "Peer to Peer": "",
-                    "% Appearance": "",
-                    "% Appearance Ok?": "",
-                    "Pokemon/Type Ok?": "",
-                    "BST": "",
-                    "Pokemon/BST Ok?": "",
-                    "Map Ok?": mapCoords[areaName] ? "Yes" : "No",
-                    "Will Unlock": unlockStr,
-                    "Requisite": reqString(req),
-                    "Reward": giftStr
-                });
-            } else {
-                spawns.forEach(s => {
-                    const pk = pokemonData[s.pokemonId];
-                    if (!pk) return;
-
-                    const pkName = pk.name;
-                    routeSpawnedPokemon.add(s.pokemonId);
-
-                    let first = "";
-                    if (currentSeen.has(s.pokemonId)) {
-                        first = "NONONO";
-                    } else {
-                        currentSeen.add(s.pokemonId);
-                        seenPokemon.add(s.pokemonId);
+                let baseMin = 1;
+                if (isMain) {
+                    if (mainChallenges.length > 1) {
+                        baseMin = Math.round(1 + ((79) * (i / (mainChallenges.length - 1))));
                     }
+                } else {
+                     const totalExtra = challengeList.length;
+                     let startLvl = 80;
+                     if (totalExtra > 0) {
+                         baseMin = Math.round(startLvl + ((20) * (i / totalExtra)));
+                     }
+                }
 
-                    let bst = getBST(pk);
-                    let diffBST = bst - avgBST;
+                let diff = 0;
+                let baseMax = baseMin;
+                if (baseMin < 12) diff = 2;
+                else if (baseMin < 30) diff = 3;
+                else {
+                    let tempDiff = baseMin * 0.1;
+                    let avg = (baseMin + baseMin + tempDiff) / 2;
+                    diff = Math.floor(avg * 0.1);
+                    if (diff > 8) diff = 8;
+                }
+                baseMax = baseMin + diff;
 
-                    let p2p = 0;
-                    if (diffBST > 150) p2p = 4;
-                    else if (diffBST >= 100) p2p = 2;
-                    else if (diffBST >= 50) p2p = 1;
-                    else if (diffBST > -50) p2p = 0;
-                    else if (diffBST >= -100) p2p = -1;
-                    else if (diffBST > -150) p2p = -2;
-                    else p2p = -4;
+                let quarter = 1;
+                if (isMain && mainChallenges.length > 0) {
+                    quarter = Math.ceil(((i + 1) / mainChallenges.length) * 4);
+                    if (quarter > 4) quarter = 4;
+                } else {
+                    quarter = 4;
+                }
 
-                    let sugMin = baseMin + p2p;
-                    let sugMax = baseMax + p2p;
-                    if (sugMin < 1) sugMin = 1;
-                    if (sugMax < 1) sugMax = 1;
-
-                    let bstOk = "";
-                    if (isMain) {
-                        if (quarter === 1 && bst > 400) bstOk = "NONONO";
-                        if (quarter === 2 && bst > 500) bstOk = "NONONO";
-                        if (quarter === 3 && bst < 250) bstOk = "NONONO";
-                        if (quarter === 4 && bst < 350) bstOk = "NONONO";
-                    }
-
-                    let chancePct = Math.round((s.chance || 0) * 100);
-                    let appOk = "";
-
-                    let typeOk = "Yes";
-                    const routeNameLower = areaName.toLowerCase();
-                    if ((routeNameLower.includes("sea") || routeNameLower.includes("water") || routeNameLower.includes("lake") || routeNameLower.includes("ocean")) && pk.types.includes("Fire")) {
-                        typeOk = "NONONO";
-                    }
-                    if (routeNameLower.includes("volcano") && pk.types.includes("Water")) {
-                        typeOk = "NONONO";
-                    }
-
+                if (spawns.length === 0) {
                     routesData.push({
-                        "Unlocked at": i === 0 && isMain ? "" : (i > 0 ? challengeList[i-1].challengeName : ""),
+                        "Unlocked at": (i === 0 && isMain && !primaryAdded) ? "" : ((i > 0 && !primaryAdded) ? challengeList[i-1].challengeName : ""),
                         "Challenge": c.challengeName,
                         "Route": areaName,
-                        "Route (Secondary)": "",
-                        "Pokemon Name": pkName,
-                        "First?": first,
-                        "Level": `${s.minLevel || 1}-${s.maxLevel || 80}`,
-                        "Sugested Level": `${sugMin}-${sugMax}`,
-                        "Peer to Peer": p2p,
-                        "% Appearance": chancePct,
-                        "% Appearance Ok?": appOk,
-                        "Pokemon/Type Ok?": typeOk,
-                        "BST": bst,
-                        "Pokemon/BST Ok?": bstOk,
+                        "Route (Secondary)": primaryAdded ? "Yes" : "",
+                        "Pokemon Name": "",
+                        "First?": "",
+                        "Level": "",
+                        "Sugested Level": "",
+                        "Peer to Peer": "",
+                        "% Appearance": "",
+                        "% Appearance Ok?": "",
+                        "Pokemon/Type Ok?": "",
+                        "BST": "",
+                        "Pokemon/BST Ok?": "",
                         "Map Ok?": mapCoords[areaName] ? "Yes" : "No",
                         "Will Unlock": unlockStr,
                         "Requisite": reqString(req),
                         "Reward": giftStr
                     });
-                });
-            }
+                } else {
+                    spawns.forEach(s => {
+                        const pk = pokemonData[s.pokemonId];
+                        if (!pk) return;
 
-            let sugReq = "";
-            let newPkCount = 0;
-            let lowAppPk = null;
-            let highAppLowBstPk = null;
+                        const pkName = pk.name;
+                        routeSpawnedPokemon.add(s.pokemonId);
 
-            if (spawns.length > 0) {
-                spawns.forEach(s => {
-                    let cPct = Math.round((s.chance || 0)*100);
-                    let b = getBST(pokemonData[s.pokemonId]);
-                    if (routesData.find(rd => rd["Route"] === areaName && rd["Pokemon Name"] === pokemonData[s.pokemonId].name && rd["First?"] === "")) {
-                        newPkCount++;
-                        if (cPct > 20 && b < 350) highAppLowBstPk = pokemonData[s.pokemonId];
+                        let first = "";
+                        if (currentSeen.has(s.pokemonId)) {
+                            first = "NONONO";
+                        } else {
+                            currentSeen.add(s.pokemonId);
+                            seenPokemon.add(s.pokemonId);
+                        }
+
+                        let bst = getBST(pk);
+                        let diffBST = bst - avgBST;
+
+                        let p2p = 0;
+                        if (diffBST > 150) p2p = 4;
+                        else if (diffBST >= 100) p2p = 2;
+                        else if (diffBST >= 50) p2p = 1;
+                        else if (diffBST > -50) p2p = 0;
+                        else if (diffBST >= -100) p2p = -1;
+                        else if (diffBST > -150) p2p = -2;
+                        else p2p = -4;
+
+                        let sugMin = baseMin + p2p;
+                        let sugMax = baseMax + p2p;
+                        if (sugMin < 1) sugMin = 1;
+                        if (sugMax < 1) sugMax = 1;
+
+                        let bstOk = "";
+                        if (isMain) {
+                            if (quarter === 1 && bst > 400) bstOk = "NONONO";
+                            if (quarter === 2 && bst > 500) bstOk = "NONONO";
+                            if (quarter === 3 && bst < 250) bstOk = "NONONO";
+                            if (quarter === 4 && bst < 350) bstOk = "NONONO";
+                        }
+
+                        let chancePct = Math.round((s.chance || 0) * 100);
+                        let appOk = "";
+
+                        let typeOk = "Yes";
+                        const routeNameLower = areaName.toLowerCase();
+                        if ((routeNameLower.includes("sea") || routeNameLower.includes("water") || routeNameLower.includes("lake") || routeNameLower.includes("ocean")) && pk.types.includes("Fire")) {
+                            typeOk = "NONONO";
+                        }
+                        if (routeNameLower.includes("volcano") && pk.types.includes("Water")) {
+                            typeOk = "NONONO";
+                        }
+
+                        routesData.push({
+                            "Unlocked at": (i === 0 && isMain && !primaryAdded) ? "" : ((i > 0 && !primaryAdded) ? challengeList[i-1].challengeName : ""),
+                            "Challenge": c.challengeName,
+                            "Route": areaName,
+                            "Route (Secondary)": primaryAdded ? "Yes" : "",
+                            "Pokemon Name": pkName,
+                            "First?": first,
+                            "Level": `${s.minLevel || 1}-${s.maxLevel || 80}`,
+                            "Sugested Level": `${sugMin}-${sugMax}`,
+                            "Peer to Peer": p2p,
+                            "% Appearance": chancePct,
+                            "% Appearance Ok?": appOk,
+                            "Pokemon/Type Ok?": typeOk,
+                            "BST": bst,
+                            "Pokemon/BST Ok?": bstOk,
+                            "Map Ok?": mapCoords[areaName] ? "Yes" : "No",
+                            "Will Unlock": unlockStr,
+                            "Requisite": reqString(req),
+                            "Reward": giftStr
+                        });
+                    });
+                }
+
+                let sugReq = "";
+                let newPkCount = 0;
+                let lowAppPk = null;
+                let highAppLowBstPk = null;
+
+                if (spawns.length > 0) {
+                    spawns.forEach(s => {
+                        let cPct = Math.round((s.chance || 0)*100);
+                        let b = getBST(pokemonData[s.pokemonId]);
+                        if (routesData.find(rd => rd["Route"] === areaName && rd["Pokemon Name"] === pokemonData[s.pokemonId].name && rd["First?"] === "")) {
+                            newPkCount++;
+                            if (cPct > 20 && b < 350) highAppLowBstPk = pokemonData[s.pokemonId];
+                        }
+                        if (cPct < 10) lowAppPk = pokemonData[s.pokemonId];
+                    });
+                }
+
+                if (!primaryAdded) {
+                    if (areaName.toLowerCase().includes("gym") || isLeagueOrKey) {
+                        sugReq = "Defeat Leader/Champion";
+                    } else if (newPkCount > 0) {
+                        sugReq = `Catch ${Math.min(newPkCount, 3)} new pokemon`;
+                    } else if (highAppLowBstPk) {
+                        sugReq = `Catch Rare+ ${highAppLowBstPk.name}`;
+                    } else if (lowAppPk) {
+                        let n = 150;
+                        sugReq = `Defeat ${n} ${lowAppPk.name}`;
+                    } else {
+                        let n = isMain ? (quarter <= 2 ? 50 : (quarter === 3 ? 150 : 250)) : 300;
+                        sugReq = `Defeat ${n} pokemon in route`;
                     }
-                    if (cPct < 10) lowAppPk = pokemonData[s.pokemonId];
-                });
-            }
 
-            if (areaName.toLowerCase().includes("gym") || isLeagueOrKey) {
-                sugReq = "Defeat Leader/Champion";
-            } else if (newPkCount > 0) {
-                sugReq = `Catch ${Math.min(newPkCount, 3)} new pokemon`;
-            } else if (highAppLowBstPk) {
-                sugReq = `Catch Rare+ ${highAppLowBstPk.name}`;
-            } else if (lowAppPk) {
-                let n = 150;
-                sugReq = `Defeat ${n} ${lowAppPk.name}`;
-            } else {
-                let n = isMain ? (quarter <= 2 ? 50 : (quarter === 3 ? 150 : 250)) : 300;
-                sugReq = `Defeat ${n} pokemon in route`;
-            }
-
-            challengesData.push({
-                "Challenge Name": c.challengeName,
-                "Requisite": reqString(req),
-                "Sugestion for Req": sugReq,
-                "Reward Map": unlockStr,
-                "Reward Challenge": "",
-                "Reward Gift": giftStr
+                    challengesData.push({
+                        "Challenge Name": c.challengeName,
+                        "Requisite": reqString(req),
+                        "Sugestion for Req": sugReq,
+                        "Reward Map": unlockStr,
+                        "Reward Challenge": "",
+                        "Reward Gift": giftStr
+                    });
+                    primaryAdded = true;
+                }
             });
         }
 

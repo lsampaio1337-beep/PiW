@@ -312,7 +312,7 @@ function updateGymBackground(combatArena, state, battleSystem) {
             combatArena.style.position = 'relative'; // Ensure relative positioning
             combatArena.insertBefore(dynamicBg, combatArena.firstChild);
         } else {
-            const gymIndex = state.config.gyms.findIndex(g => g.name === gym.name);
+            const gymIndex = battleSystem.gymState.gymIndex;
             const gymBGs = [
                 'BG-Gym-1-Pewter-Rock.png',
                 'BG-Gym-2-Cerulean-Water.png',
