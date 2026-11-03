@@ -92,6 +92,9 @@ class DayCare {
             p.quality = oldQuality; // If they are already above the cap, they gain 0 bonus
         }
 
+        // Fix floating point precision
+        p.quality = Number(p.quality.toFixed(2));
+
         p.lastQBonus = Number((p.quality - oldQuality).toFixed(2));
 
         // Map Quality Tier if Q >= 1.5, 1.25, etc.
