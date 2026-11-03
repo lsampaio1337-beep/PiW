@@ -106,11 +106,9 @@ export function setupMarket(vCenter) {
     });
 }
 
-export function openPokeMarketBuy() {
-    // Glass is available by default now, so upgrades are always unlocked.
-    const hasUnlockedUpgrades = true;
 
-    const html = `
+function getMarketBuyHtml() {
+    return `
         <div id="market-buy-wrapper" style="display: flex; flex-direction: column; width: 100%; height: 100%; margin-top: 0px; --m-width: min(90vw, 825px);">
 
             <div id="market-buy-content" style="display: flex; flex-wrap: wrap; gap: calc(var(--m-width) * 0.018); justify-content: center; overflow-y: scroll; flex: 1; padding: calc(var(--m-width) * 0.018); box-sizing: border-box;">
@@ -118,17 +116,10 @@ export function openPokeMarketBuy() {
             </div>
         </div>
     `;
+}
 
-    const overlay = document.getElementById('main-view-inner-modal-overlay');
-    const title = document.getElementById('main-view-inner-modal-title');
-    const content = document.getElementById('main-view-inner-modal-content');
-    const moneyDisplay = document.getElementById('inner-modal-money-display');
-    if (moneyDisplay) {
-        moneyDisplay.textContent = `$ ${state.trainer.money.toLocaleString()}`;
-        moneyDisplay.style.display = 'block';
-    }
-
-    const titleHtml = `
+function getMarketBuyTitleHtml(hasUnlockedUpgrades) {
+    return `
         <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
             <div style="display: inline-flex; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px;">
                 <button onclick="window.openPokeMarketBuy()" style="background: linear-gradient(to bottom, #2ecc71, #27ae60); color: white; border: 1px solid #2ecc71; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.2); font-size: 14px;">Buy</button>
@@ -143,6 +134,24 @@ export function openPokeMarketBuy() {
             </div>
         </div>
     `;
+}
+
+export function openPokeMarketBuy() {
+    // Glass is available by default now, so upgrades are always unlocked.
+    const hasUnlockedUpgrades = true;
+
+    const html = getMarketBuyHtml();
+
+    const overlay = document.getElementById('main-view-inner-modal-overlay');
+    const title = document.getElementById('main-view-inner-modal-title');
+    const content = document.getElementById('main-view-inner-modal-content');
+    const moneyDisplay = document.getElementById('inner-modal-money-display');
+    if (moneyDisplay) {
+        moneyDisplay.textContent = `$ ${state.trainer.money.toLocaleString()}`;
+        moneyDisplay.style.display = 'block';
+    }
+
+    const titleHtml = getMarketBuyTitleHtml(hasUnlockedUpgrades);
 
     if (overlay && title && content) {
         safeSetHTML(title, titleHtml);
@@ -497,8 +506,9 @@ export function newBuyItem(itemId, baseCost, category, upgradeType = null) {
 }
 
 
-export function openPokeMarketSell() {
-    const html = `
+
+function getMarketSellHtml() {
+    return `
         <div id="market-sell-wrapper" style="display: flex; flex-direction: column; width: 100%; height: 100%; margin-top: 0px; --m-width: min(90vw, 825px); overflow-y: auto;">
 
             <div id="market-pokemon-sell-controls" style="display: none; flex-direction: column; align-items: center; justify-content: center; margin-bottom: calc(var(--m-width) * 0.015); gap: calc(var(--m-width) * 0.012);">
@@ -540,19 +550,10 @@ export function openPokeMarketSell() {
             </div>
         </div>
     `;
+}
 
-    window.marketSelectedPokemonForSale = new Set();
-
-    const overlay = document.getElementById('main-view-inner-modal-overlay');
-    const title = document.getElementById('main-view-inner-modal-title');
-    const content = document.getElementById('main-view-inner-modal-content');
-    const moneyDisplay = document.getElementById('inner-modal-money-display');
-    if (moneyDisplay) {
-        moneyDisplay.textContent = `$ ${state.trainer.money.toLocaleString()}`;
-        moneyDisplay.style.display = 'block';
-    }
-
-    const titleHtml = `
+function getMarketSellTitleHtml() {
+    return `
         <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
             <div style="display: inline-flex; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px;">
                 <button onclick="window.openPokeMarketBuy()" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent; border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmouseover="this.style.color='white'; this.style.background='rgba(255,255,255,0.1)';" onmouseout="this.style.color='rgba(255, 255, 255, 0.7)'; this.style.background='transparent';">Buy</button>
@@ -567,6 +568,23 @@ export function openPokeMarketSell() {
             </div>
         </div>
     `;
+}
+
+export function openPokeMarketSell() {
+    const html = getMarketSellHtml();
+
+    window.marketSelectedPokemonForSale = new Set();
+
+    const overlay = document.getElementById('main-view-inner-modal-overlay');
+    const title = document.getElementById('main-view-inner-modal-title');
+    const content = document.getElementById('main-view-inner-modal-content');
+    const moneyDisplay = document.getElementById('inner-modal-money-display');
+    if (moneyDisplay) {
+        moneyDisplay.textContent = `$ ${state.trainer.money.toLocaleString()}`;
+        moneyDisplay.style.display = 'block';
+    }
+
+    const titleHtml = getMarketSellTitleHtml();
 
     if (overlay && title && content) {
         safeSetHTML(title, titleHtml);
