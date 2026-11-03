@@ -11,7 +11,13 @@ if (process.platform === 'linux') {
 
 function createWindow() {
     // Get primary display dimensions
-    const { x, y, width, height } = screen.getPrimaryDisplay().workArea;
+    let { x, y, width, height } = screen.getPrimaryDisplay().workArea;
+
+    // Subtract 1 pixel on Windows to bypass native window occlusion tracking
+    // which freezes underlying Chromium browsers (e.g. YouTube in Chrome)
+    if (process.platform === 'win32') {
+        height -= 1;
+    }
 
     const win = new BrowserWindow({
         width: width,
