@@ -2102,9 +2102,18 @@ class BattleSystem {
 
             this.isFainting = false;
 
-            if (this.state.party[0].currentHp <= 0) {
+            if (this.state.party.every(p => p.currentHp <= 0)) {
                 this.handleWipeout();
             } else {
+                let index = 0;
+                while (index < this.state.party.length && this.state.party[index].currentHp <= 0) {
+                    index++;
+                }
+                if (index > 0 && index < this.state.party.length) {
+                    const nextHealthy = this.state.party.splice(index, 1)[0];
+                    this.state.party.unshift(nextHealthy);
+                }
+
                 // Prepare slide in duration for next pokemon
                 const leaderSpeed = this.state.party[0].currentStats.spe;
                 const speedMult = this.getSpeedMultiplier();
@@ -2201,9 +2210,8 @@ class BattleSystem {
         if (index === 0 || index >= this.state.party.length) return;
         const target = this.state.party[index];
         if (target && target.currentHp > 0) {
-            const currentLeader = this.state.party[0];
-            this.state.party[0] = target;
-            this.state.party[index] = currentLeader;
+            const newLeader = this.state.party.splice(index, 1)[0];
+            this.state.party.unshift(newLeader);
             this.updateUI();
 
             if (this.activeEncounter && this.combatLoop) {
