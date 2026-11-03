@@ -767,7 +767,18 @@ export class WindowManager {
             // Scale up or down the window width by the same ratio
             if (oldWidth && oldWidth.endsWith('px')) {
                 const currentWidth = parseInt(oldWidth);
-                winElement.style.width = (currentWidth * growthRatio) + 'px';
+                // to allow it to wrap properly, avoiding the 80x80 initial bug where the wrapper is small.
+                if (currentWidth < 150) {
+                    let contentContainer = winElement.querySelector('.window-content-container');
+                    let horizontalPadding = 0;
+                    if (contentContainer) {
+                        const style = window.getComputedStyle(contentContainer);
+                        horizontalPadding = parseFloat(style.paddingLeft || 0) + parseFloat(style.paddingRight || 0);
+                    }
+                    winElement.style.width = (newOriginalWidth + horizontalPadding) + 'px';
+                } else {
+                    winElement.style.width = (currentWidth * growthRatio) + 'px';
+                }
             } else {
                 winElement.style.width = newOriginalWidth + 'px';
             }
