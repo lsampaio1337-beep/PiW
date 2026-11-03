@@ -5,11 +5,11 @@ const xlsx = require('xlsx');
 
 function loadDataFile(filename, varNames = null) {
     let code = fs.readFileSync(filename, 'utf8');
-    // Strip ES6 imports
     code = code.replace(/^import\s+.*?;?\s*$/gm, '');
     code = code.replace(/export\s+const\s+/g, 'var ')
                .replace(/export\s+default\s+/g, 'var defaultExport = ')
                .replace(/export\s+\{.*\}\s*;/g, '');
+    code = code.replace(/^const\s+([a-zA-Z0-9_]+)\s*=/gm, 'var $1 =');
 
     const context = {};
     vm.createContext(context);
@@ -42,6 +42,16 @@ const REGIONS = [
     { num: 10, name: 'Paldea', prefix: 'paldea', routesVar: 'paldeaRoutes', unlocksVar: 'paldeaUnlocks', mapVar: 'paldeaMapCoordinates' }
 ];
 
+
+function formatChallengeName(name) {
+    if (!name) return name;
+    return name.replace(/(Challenge\s+([A-Z]\s+)?|Extra Challenge\s+([A-Z]\s+)?)(\d+)$/i, (match, p1, p2, p3, p4) => {
+        let numStr = p4.length === 1 ? '0' + p4 : p4;
+        let prefix = p1;
+        return `${prefix}${numStr}`;
+    });
+}
+
 function getBST(pk) {
     if (!pk) return 0;
     return pk.hp + pk.atk + pk.def + pk.spa + pk.spd + pk.spe;
@@ -66,7 +76,7 @@ function reqString(req) {
     return JSON.stringify(req);
 }
 
-function processRegion(region) {
+async function processRegion(region, counter) {
     console.log(`Processing ${region.name}...`);
 
     let routesFile = 'config/routes.js';
@@ -91,14 +101,22 @@ function processRegion(region) {
         console.error(`Routes file not found: ${routesFile}`);
         return;
     }
-
-    if (!Array.isArray(routes)) {
+if (!Array.isArray(routes)) {
         routes = Object.values(routes);
     }
     if (!Array.isArray(unlocks)) {
         unlocks = Object.values(unlocks);
     }
 
+    for (const u of unlocks) {
+        if (u.challengeName) u.challengeName = formatChallengeName(u.challengeName);
+        if (u.unlocks && Array.isArray(u.unlocks)) {
+            u.unlocks = u.unlocks.map(formatChallengeName);
+        }
+        if (u.requirements && u.requirements.challenge) {
+            u.requirements.challenge = formatChallengeName(u.requirements.challenge);
+        }
+    }
     let mapCoords = {};
     if (fs.existsSync(mapFile)) {
         const loadedMap = loadDataFile(mapFile);
@@ -106,6 +124,30 @@ function processRegion(region) {
     }
 
     const nativeIds = pokedexIndexes.regional[region.prefix === '' ? 'kanto' : region.prefix] || [];
+
+
+    const allSpawnsToFetch = new Set();
+    routes.forEach(r => {
+        (r.spawns || []).forEach(s => {
+            const pk = pokemonData[s.pokemonId];
+            if (pk && pk.name) allSpawnsToFetch.add(pk.name.toLowerCase());
+        });
+    });
+
+    const encounterCache = {};
+    for (const pkName of allSpawnsToFetch) {
+        try {
+            const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pkName}/encounters`);
+            if (res.ok) {
+                const data = await res.json();
+                encounterCache[pkName] = data.map(d => d.location_area.name);
+            } else {
+                encounterCache[pkName] = [];
+            }
+        } catch (e) {
+            encounterCache[pkName] = [];
+        }
+    }
 
     const mainChallenges = [];
     const extraChallenges = {};
@@ -141,6 +183,18 @@ function processRegion(region) {
     const seenPokemon = new Set();
 
 
+
+    const getEvolutionStage = (id) => {
+        if (!id) return 1;
+        let stage = 1;
+        let currentId = id;
+        while (evosBackward[currentId]) {
+            stage++;
+            currentId = evosBackward[currentId];
+        }
+        return stage;
+    };
+const mainSeenSets = [];
     const processUnlocks = (challengeList, isMain, startChallengeIndex, initialSeenSet) => {
         let currentSeen = new Set(initialSeenSet);
         for (let i = 0; i < challengeList.length; i++) {
@@ -229,7 +283,30 @@ function processRegion(region) {
                         "Reward": giftStr
                     });
                 } else {
+                    let totalChance = 0;
+                    const weights = [];
+                    let totalWeight = 0;
+
                     spawns.forEach(s => {
+                        totalChance += (s.chance || 0);
+                        const pk = pokemonData[s.pokemonId];
+                        const bst = getBST(pk);
+                        const evoStage = getEvolutionStage(s.pokemonId);
+                        const weight = 10000 / (bst * evoStage);
+                        weights.push(weight);
+                        totalWeight += weight;
+                    });
+
+                    let allOk = Math.abs(totalChance - 1) < 0.01;
+                    spawns.forEach((s, idx) => {
+                        let cPct = s.chance || 0;
+                        let suggestedChance = weights[idx] / totalWeight;
+                        if (Math.abs(cPct - suggestedChance) > 0.05) {
+                            allOk = false;
+                        }
+                    });
+
+                    spawns.forEach((s, idx) => {
                         const pk = pokemonData[s.pokemonId];
                         if (!pk) return;
 
@@ -269,16 +346,28 @@ function processRegion(region) {
                             if (quarter === 4 && bst < 350) bstOk = "NONONO";
                         }
 
-                        let chancePct = Math.round((s.chance || 0) * 100);
-                        let appOk = "";
+                        let chancePct = (s.chance || 0);
+                        let appOk = !allOk ? (weights[idx] / totalWeight) : "";
 
-                        let typeOk = "Yes";
+                        let typeOk = "";
                         const routeNameLower = areaName.toLowerCase();
                         if ((routeNameLower.includes("sea") || routeNameLower.includes("water") || routeNameLower.includes("lake") || routeNameLower.includes("ocean")) && pk.types.includes("Fire")) {
                             typeOk = "NONONO";
                         }
                         if (routeNameLower.includes("volcano") && pk.types.includes("Water")) {
                             typeOk = "NONONO";
+                        }
+
+                        if (encounterCache[pkName.toLowerCase()]) {
+                            const locations = encounterCache[pkName.toLowerCase()];
+                            const normalizedRoute = routeNameLower.replace(/[^a-z0-9]/g, '');
+                            for (const loc of locations) {
+                                const normalizedLoc = loc.replace(/[^a-z0-9]/g, '');
+                                if (normalizedLoc.includes(normalizedRoute) || normalizedRoute.includes(normalizedLoc)) {
+                                    typeOk = "Legacy";
+                                    break;
+                                }
+                            }
                         }
 
                         routesData.push({
@@ -311,13 +400,13 @@ function processRegion(region) {
 
                 if (spawns.length > 0) {
                     spawns.forEach(s => {
-                        let cPct = Math.round((s.chance || 0)*100);
+                        let cPct = (s.chance || 0);
                         let b = getBST(pokemonData[s.pokemonId]);
                         if (routesData.find(rd => rd["Route"] === areaName && rd["Pokemon Name"] === pokemonData[s.pokemonId].name && rd["First?"] === "")) {
                             newPkCount++;
-                            if (cPct > 20 && b < 350) highAppLowBstPk = pokemonData[s.pokemonId];
+                            if (cPct > 0.20 && b < 350) highAppLowBstPk = pokemonData[s.pokemonId];
                         }
-                        if (cPct < 10) lowAppPk = pokemonData[s.pokemonId];
+                        if (cPct < 0.10) lowAppPk = pokemonData[s.pokemonId];
                     });
                 }
 
@@ -347,6 +436,9 @@ function processRegion(region) {
                     primaryAdded = true;
                 }
             });
+            if (isMain) {
+                mainSeenSets[i] = new Set(currentSeen);
+            }
         }
 
         if (isMain) {
@@ -356,11 +448,57 @@ function processRegion(region) {
 
     const mainSeenSet = processUnlocks(mainChallenges, true, 0, new Set());
     Object.keys(extraChallenges).sort().forEach(k => {
-        // Extra challenges inherit the seen set exactly as it was at the end of the main challenges
-        processUnlocks(extraChallenges[k], false, mainChallenges.length, mainSeenSet);
+        let splitSeenSet = new Set(mainSeenSet);
+        if (extraChallenges[k].length > 0) {
+            const firstExtraReq = extraChallenges[k][0].requirements;
+            if (firstExtraReq && firstExtraReq.challenge) {
+                const reqName = firstExtraReq.challenge;
+                const match = reqName.match(/Challenge\s+(\d+)/);
+                if (match) {
+                    const idx = parseInt(match[1]) - 1;
+                    if (idx >= 0 && idx < mainSeenSets.length) {
+                        splitSeenSet = new Set(mainSeenSets[idx]);
+                    }
+                }
+            }
+        }
+        processUnlocks(extraChallenges[k], false, mainChallenges.length, splitSeenSet);
     });
 
 const missingData = [];
+
+    const getFamilyMissingCount = (id) => {
+        let count = 0;
+        let queue = [id];
+        let visited = new Set();
+        let familyIds = new Set();
+
+        let root = id;
+        while (evosBackward[root]) {
+            root = evosBackward[root];
+        }
+
+        queue = [root];
+        while (queue.length > 0) {
+            let current = queue.shift();
+            if (visited.has(current)) continue;
+            visited.add(current);
+            familyIds.add(parseInt(current));
+
+            if (evosForward[current]) {
+                evosForward[current].forEach(next => queue.push(next));
+            }
+        }
+
+        familyIds.forEach(fid => {
+            if (nativeIds.includes(fid) && !routeSpawnedPokemon.has(fid)) {
+                count++;
+            }
+        });
+
+        return count;
+    };
+
     nativeIds.forEach(id => {
         if (!routeSpawnedPokemon.has(id)) {
             const pk = pokemonData[id];
@@ -399,6 +537,11 @@ const missingData = [];
                 }
             }
 
+            if (obtainStr === "No") {
+                const count = getFamilyMissingCount(id);
+                obtainStr = `No${count}`;
+            }
+
             missingData.push({
                 "Pokemon Name": pk.name,
                 "Can Obtain?": obtainStr
@@ -419,9 +562,43 @@ const missingData = [];
     const wsMissing = xlsx.utils.json_to_sheet(missingData);
     xlsx.utils.book_append_sheet(wb, wsMissing, "Missing PK");
 
-    const outFile = `${region.num}_${region.name}_Data.xlsx`;
+const outFile = `${region.num}_${region.name}Data${counter}.xlsx`;
+
+    // Formatting cols
+    const colsRoutes = ["% Appearance", "% Appearance Ok?"];
+    const rangeRoutes = xlsx.utils.decode_range(wsRoutes['!ref']);
+    for (let c = rangeRoutes.s.c; c <= rangeRoutes.e.c; c++) {
+        const header = wsRoutes[xlsx.utils.encode_cell({r: 0, c})];
+        if (header && colsRoutes.includes(header.v)) {
+            for (let r = 1; r <= rangeRoutes.e.r; r++) {
+                const cell = wsRoutes[xlsx.utils.encode_cell({r, c})];
+                if (cell && typeof cell.v === 'number') {
+                    cell.z = '0%';
+                }
+            }
+        }
+    }
+
     xlsx.writeFile(wb, outFile);
     console.log(`Generated ${outFile}`);
 }
 
-REGIONS.forEach(processRegion);
+(async () => {
+    let counterFile = '';
+    let counter = 1;
+    if (fs.existsSync('xlsx.md')) {
+        counterFile = fs.readFileSync('xlsx.md', 'utf8');
+        const counterMatch = counterFile.match(/Last Generation Counter:\s*(\d+)/);
+        if (counterMatch) counter = parseInt(counterMatch[1]);
+    }
+
+    for (const region of REGIONS) {
+        await processRegion(region, counter);
+    }
+
+    // Increment counter
+    if (counterFile) {
+        const newCounterFile = counterFile.replace(/Last Generation Counter:\s*\d+/, `Last Generation Counter: ${counter + 1}`);
+        fs.writeFileSync('xlsx.md', newCounterFile);
+    }
+})();
