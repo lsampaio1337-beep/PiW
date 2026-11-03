@@ -1386,28 +1386,34 @@ export const hoennRoutes = [
     "name": "Nebula Fissure",
     "spawns": [
       {
-        "pokemonId": 386,
-        "minLevel": 120,
-        "maxLevel": 120,
-        "chance": 0.25
+        "pokemonId": 382,
+        "minLevel": 115,
+        "maxLevel": 119,
+        "chance": 0.2
       },
       {
-        "pokemonId": 385,
+        "pokemonId": 383,
+        "minLevel": 115,
+        "maxLevel": 119,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 384,
         "minLevel": 120,
         "maxLevel": 120,
-        "chance": 0.25
+        "chance": 0.2
       },
       {
         "pokemonId": 380,
         "minLevel": 110,
-        "maxLevel": 110,
-        "chance": 0.25
+        "maxLevel": 115,
+        "chance": 0.2
       },
       {
         "pokemonId": 381,
         "minLevel": 110,
-        "maxLevel": 110,
-        "chance": 0.25
+        "maxLevel": 115,
+        "chance": 0.2
       }
     ]
   },
@@ -1714,25 +1720,19 @@ export const hoennRoutes = [
     ]
   },
   {
-    "name": "Weather Climax Cave",
+    "name": "The Solitary Atoll",
     "spawns": [
       {
-        "pokemonId": 382,
-        "minLevel": 115,
-        "maxLevel": 115,
-        "chance": 0.33
+        "pokemonId": 386,
+        "minLevel": 105,
+        "maxLevel": 110,
+        "chance": 0.5
       },
       {
-        "pokemonId": 383,
-        "minLevel": 115,
-        "maxLevel": 115,
-        "chance": 0.33
-      },
-      {
-        "pokemonId": 384,
-        "minLevel": 115,
-        "maxLevel": 115,
-        "chance": 0.33
+        "pokemonId": 385,
+        "minLevel": 105,
+        "maxLevel": 110,
+        "chance": 0.5
       }
     ]
   },
@@ -2298,6 +2298,10 @@ export const hoennUnlocks = [
   {
     "challengeName": "Challenge 32",
     "areaId": "Safari Zone East",
+    "secondaryAreas": [
+      "Safari Zone West",
+      "Safari Zone North"
+    ],
     "unlocks": [
       "Mount Pyre"
     ],
@@ -2599,7 +2603,7 @@ export const hoennUnlocks = [
     "challengeName": "Extra Challenge A 5",
     "areaId": "Battle Frontier Facility",
     "unlocks": [
-      "Weather Climax Cave"
+      "The Solitary Atoll"
     ],
     "gift": {
       "item": "Masterball",
@@ -2614,7 +2618,7 @@ export const hoennUnlocks = [
   },
   {
     "challengeName": "Extra Challenge A 6",
-    "areaId": "Weather Climax Cave",
+    "areaId": "The Solitary Atoll",
     "unlocks": [
       "Key to Nebula Fissure Challenge"
     ],
@@ -2625,15 +2629,11 @@ export const hoennUnlocks = [
     "requirements": {
       "catchSpecies": [
         {
-          "species": "Kyogre",
+          "species": "Deoxys",
           "count": 1
         },
         {
-          "species": "Groudon",
-          "count": 1
-        },
-        {
-          "species": "Rayquaza",
+          "species": "Jirachi",
           "count": 1
         }
       ]
@@ -2819,11 +2819,15 @@ export const hoennUnlocks = [
     "requirements": {
       "catchSpecies": [
         {
-          "species": "Deoxys",
+          "species": "Kyogre",
           "count": 1
         },
         {
-          "species": "Jirachi",
+          "species": "Groudon",
+          "count": 1
+        },
+        {
+          "species": "Rayquaza",
           "count": 1
         }
       ]
