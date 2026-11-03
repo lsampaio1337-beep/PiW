@@ -1924,7 +1924,7 @@ class BattleSystem {
                     this.state.stats.defeatedBosses["Pokemon League Lorelei"] = true;
                     this.state.stats.defeatedBosses["Champion Rival"] = true;
                 }
-                if (enemy.name === "Champion" || enemy.name === "Champion Wallace" || enemy.name === "Champion Iris") {
+                if (trainer.name === "Champion" || trainer.name === "Champion Wallace" || trainer.name === "Champion Iris") {
                     if (!this.state.stats.defeatedBosses) this.state.stats.defeatedBosses = {};
                     if (gym.name === "Johto Pokemon League") {
                         this.state.stats.defeatedBosses["Johto Champion"] = true;
