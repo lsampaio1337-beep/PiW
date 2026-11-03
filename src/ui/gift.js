@@ -101,10 +101,7 @@ function generateBadgeGiftHTML(gift, isPending, index) {
 
 
 function generateItemGiftHTML(gift, isPending, index) {
-    let imgPath = gift.item.includes('Potion') ? `Assets/Items/Potions/${gift.item}.png` :
-                  gift.item.includes('Stone') ? `Assets/Items/Stones/${gift.item}.png` :
-                  VITAMINS.includes(gift.item) ? `Assets/Items/Vitamins/${gift.item}.png` :
-                  `Assets/Items/Balls/${gift.item}.png`;
+    let imgPath = gift.item.includes("Key") ? `Assets/Items/KeyItems/${gift.item.replace(/ /g, "_")}.png` : gift.item.includes("Potion") ? `Assets/Items/Potions/${gift.item}.png` : gift.item.includes("Stone") ? `Assets/Items/Stones/${gift.item}.png` : VITAMINS.includes(gift.item) ? `Assets/Items/Vitamins/${gift.item}.png` : `Assets/Items/Balls/${gift.item}.png`;
 
     let wrapperStyle = isPending
         ? `cursor: pointer; padding: 10px; border: 1px solid #ccc; border-radius: 5px; background: rgba(0,0,0,0.5); transition: background 0.2s;`

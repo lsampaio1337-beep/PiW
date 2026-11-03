@@ -319,5 +319,11 @@ const sinnohMapCoordinates = {
     "x": 45.14,
     "y": 77.12
   }
+,
+  "huge_starters": {
+    "name": "Huge Starters",
+    "x": 13.24,
+    "y": 89.70
+  }
 };
 export default sinnohMapCoordinates;
