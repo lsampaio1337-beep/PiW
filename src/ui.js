@@ -1598,12 +1598,7 @@ window.restartGameClock = function() {
     gameClockTimeout = setTimeout(gameClockTick, delay);
 };
 
-function gameClockTick() {
-    const speed = (state.settings && state.settings.gameSpeed) || 1;
-
-    if (!state.globalStats.playtime) state.globalStats.playtime = 0;
-    state.globalStats.playtime++;
-
+function _updateBattleTimer() {
     if (state.currentView === "BATTLE_ARENA") {
         state.stats.battleModeTimer = (state.stats.battleModeTimer || 0) + 1;
         updateMainControl();
@@ -1611,8 +1606,9 @@ function gameClockTick() {
         state.stats.battleModeTimer = 0;
         updateMainControl();
     }
+}
 
-    // Award Jigglypuff Dust grains (1 grain per minute)
+function _awardJigglypuffDustGrains() {
     if (state.globalStats.playtime % 60 === 0 && state.globalStats.playtime > 0) {
         // Current active region
         if (state.stats && state.stats.hasPickedStarter) {
@@ -1634,6 +1630,16 @@ function gameClockTick() {
 
         updateUI(); // Reflect new grains
     }
+}
+
+function gameClockTick() {
+    const speed = (state.settings && state.settings.gameSpeed) || 1;
+
+    if (!state.globalStats.playtime) state.globalStats.playtime = 0;
+    state.globalStats.playtime++;
+
+    _updateBattleTimer();
+    _awardJigglypuffDustGrains();
 
     // Daily Challenge Check
     if (state.globalStats.playtime % 10 === 0) {
