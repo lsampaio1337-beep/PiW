@@ -1997,6 +1997,78 @@ async function init() {
 
             btn.appendChild(innerDiv);
 
+            // Add Medals Container on the right side
+            const regions = ['Kanto', 'Johto', 'Hoenn', 'Sinnoh', 'Unova', 'Kalos', 'Alola', 'Galar', 'Hisui', 'Paldea'];
+            const medalsContainer = document.createElement('div');
+            medalsContainer.style.display = "grid";
+            medalsContainer.style.gridTemplateColumns = "repeat(5, 1fr)";
+            medalsContainer.style.gap = "2px";
+            medalsContainer.style.marginLeft = "10px";
+
+            regions.forEach(region => {
+                let activeTier = 'First';
+                let isGray = true;
+
+                // On profile load, state.config is available.
+                if (typeof state !== 'undefined' && state && state.config && state.config.pokemonData) {
+                    let caughtCount = 0;
+                    let shinyCount = 0;
+                    let totalInRegion = 0;
+
+                    let regionalStats;
+                    if (pData.currentRegionName === region) {
+                        regionalStats = pData.stats;
+                    } else if (pData.regions && pData.regions[region]) {
+                        regionalStats = pData.regions[region].stats;
+                    }
+                    if (region === 'Kanto' && !regionalStats) {
+                        regionalStats = pData.stats;
+                    }
+
+                    const regionKey = region.toLowerCase() + '_id';
+                    state.config.pokemonData.forEach(p => {
+                        if (p[regionKey]) {
+                            totalInRegion++;
+                            if (regionalStats) {
+                                if (regionalStats.caughtSpecies && regionalStats.caughtSpecies[p.name]) {
+                                    caughtCount++;
+                                }
+                                if (regionalStats.caughtShiniesSpecies && regionalStats.caughtShiniesSpecies[p.name]) {
+                                    shinyCount++;
+                                }
+                            }
+                        }
+                    });
+
+                    const hasFirst = caughtCount > 0;
+                    const hasSecond = totalInRegion > 0 && caughtCount >= totalInRegion;
+                    const hasThird = totalInRegion > 0 && shinyCount >= totalInRegion;
+
+                    if (hasThird) {
+                        activeTier = 'Third';
+                        isGray = false;
+                    } else if (hasSecond) {
+                        activeTier = 'Second';
+                        isGray = false;
+                    } else if (hasFirst) {
+                        activeTier = 'First';
+                        isGray = false;
+                    }
+                }
+
+                const medalImg = document.createElement('img');
+                medalImg.src = `Assets/Extra/Medals/${region} ${activeTier}.png`;
+                medalImg.alt = `${region} Medal`;
+                medalImg.style.width = "24px";
+                medalImg.style.height = "24px";
+                medalImg.style.objectFit = "contain";
+                medalImg.style.imageRendering = "pixelated";
+                if (isGray) medalImg.style.filter = "grayscale(100%) opacity(0.5)";
+                medalImg.onerror = () => { medalImg.src = `Assets/Extra/Medals/Kanto ${activeTier}.png`; };
+                medalsContainer.appendChild(medalImg);
+            });
+            btn.appendChild(medalsContainer);
+
             if (pData.isZzZMode) {
                 const sleepImg = document.createElement('img');
                 sleepImg.src = "Assets/Extra/Icons/IconSleep.png";
