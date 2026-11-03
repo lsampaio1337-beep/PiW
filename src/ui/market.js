@@ -182,39 +182,10 @@ export function formatMarketNumber(num) {
     return num.toLocaleString();
 }
 
-export function renderPokeMarketTab(category) {
-    const content = document.getElementById('market-buy-content');
-    if (!content) return;
 
-    // Highlight active tab
-    const tabs = ['pokeballs', 'potions', 'stones', 'vitamins', 'upgrades'];
-    tabs.forEach(tab => {
-        const btn = document.getElementById(`market-tab-buy-${tab}`);
-        if (btn) {
-            if (tab === category) {
-                btn.style.background = 'linear-gradient(to bottom, #2ecc71, #27ae60)';
-                btn.style.color = 'white';
-                btn.style.border = '1px solid #2ecc71';
-                btn.style.boxShadow = '0 2px 4px rgba(0,0,0,0.2)';
-            } else {
-                btn.style.background = 'transparent';
-                btn.style.color = 'rgba(255, 255, 255, 0.7)';
-                btn.style.border = '1px solid transparent';
-                btn.style.boxShadow = 'none';
-            }
-        }
-    });
-
-    content.dataset.category = category;
-
-
-
+function getMarketItems(category) {
     let items = [];
-    let cols = 6;
-
-
     if (category === 'upgrades') {
-
         let ballTier = state.stats.upgrades.ballsTier || 0;
         let potionTier = state.stats.upgrades.potionsTier || 0;
         let boxTier = state.stats.upgrades.boxTier || 0;
@@ -308,6 +279,81 @@ export function renderPokeMarketTab(category) {
             };
         });
     }
+    return items;
+}
+
+
+function generateMarketItemCard(item, category, stock) {
+    let displayName = item.displayName || item.name;
+    if (category === 'potions') displayName = displayName.replace(' Potion', '<br>Potion');
+    if (category === 'stones') displayName = displayName.replace(' Stone', '<br>Stone');
+
+    const safeId = escapeHTML(item.name.replace(/\s+/g, ''));
+    const safeItemNameAttr = escapeHTML(item.name);
+    const safeItemNameJS = escapeHTML(escapeJS(item.name));
+    const safeCategoryAttr = escapeHTML(category);
+    const safeCategoryJS = escapeHTML(escapeJS(category));
+
+    let buyAction = `if(window.buyItem) window.buyItem('${safeItemNameJS}', ${item.price}, '${safeCategoryJS}')`;
+    if (category === 'upgrades') {
+        const safeUpgradeTypeJS = escapeHTML(escapeJS(item.upgradeType));
+        buyAction = `if(window.buyItem) window.buyItem('${safeItemNameJS}', ${item.price}, '${safeCategoryJS}', '${safeUpgradeTypeJS}')`;
+    }
+
+    const safeImg = escapeHTML(item.img);
+    let escapedDisplayName = escapeHTML(item.displayName || item.name);
+    if (category === 'potions') escapedDisplayName = escapedDisplayName.replace(' Potion', '<br>Potion');
+    if (category === 'stones') escapedDisplayName = escapedDisplayName.replace(' Stone', '<br>Stone');
+
+    return `
+        <div class="market-item-card" data-price="${item.price}" data-id="${safeItemNameAttr}" data-category="${safeCategoryAttr}"
+            style="width: calc(16.666% - calc(var(--m-width) * 0.018 * 5 / 6)); background: #2c3e50; border: 2px solid #2ecc71; border-radius: 10px; padding: calc(var(--m-width) * 0.012); text-align: center; transition: transform 0.2s; display: flex; flex-direction: column; align-items: center; justify-content: center; box-sizing: border-box;">
+            <div style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; margin-bottom: calc(var(--m-width) * 0.006); height: calc(var(--m-width) * 0.038); display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.1;">${escapedDisplayName}</div>
+            <img src="${safeImg}" style="width: calc(var(--m-width) * 0.072); height: calc(var(--m-width) * 0.072); object-fit: contain; margin-bottom: calc(var(--m-width) * 0.006);">
+            ${category !== 'stones' ? `<div style="font-size: calc(var(--m-width) * 0.014); color: #f1c40f; margin-bottom: calc(var(--m-width) * 0.006); line-height: 1.1;">${item.attrLabel}</div>` : ''}
+            ${category !== 'upgrades' ? `<div style="font-size: calc(var(--m-width) * 0.014); color: #bdc3c7; line-height: 1.1; margin-bottom: calc(var(--m-width) * 0.006);">Stock: ${formatMarketNumberDown(stock)}</div>` : ''}
+
+            ${category !== 'upgrades' ? `
+            <div style="display: flex; gap: 5px; margin-top: calc(var(--m-width) * 0.006); align-items: center; justify-content: center; width: 100%;">
+                <input type="text" id="buy-qty-${safeId}" value="1" oninput="if(window.updateBuyItemPrice) window.updateBuyItemPrice('${safeItemNameJS}', '${safeCategoryJS}', ${item.price})" style="width: calc(var(--m-width) * 0.06); height: calc(var(--m-width) * 0.025); padding: 0 calc(var(--m-width) * 0.006); font-size: calc(var(--m-width) * 0.015); text-align: center; border-radius: 5px; border: 1px solid #ccc; box-sizing: border-box; margin: 0; outline: none;">
+                ${(category === 'pokeballs' || category === 'potions') ? `
+                <button onclick="if(window.buySetMax) window.buySetMax('${safeItemNameJS}', '${safeCategoryJS}', ${item.price})" style="display: flex; align-items: center; justify-content: center; padding: 0 calc(var(--m-width) * 0.006); height: calc(var(--m-width) * 0.025); font-size: calc(var(--m-width) * 0.015); font-weight: bold; border-radius: 5px; cursor: pointer; background: #95a5a6; color: white; border: none; box-sizing: border-box; margin: 0;">Max</button>
+                ` : ''}
+            </div>
+            ` : ''}
+
+            <button id="buy-btn-${safeId}" onclick="${buyAction}" class="market-final-price" style="margin-top: calc(var(--m-width) * 0.012); background: #2ecc71; color: white; border: 2px solid white; border-radius: 8px; padding: 5px 15px; font-size: calc(var(--m-width) * 0.017); font-weight: bold; cursor: pointer; width: 100%;">${formatMarketNumber(item.price)}</button>
+        </div>
+    `;
+}
+
+
+export function renderPokeMarketTab(category) {
+    const content = document.getElementById('market-buy-content');
+    if (!content) return;
+
+    // Highlight active tab
+    const tabs = ['pokeballs', 'potions', 'stones', 'vitamins', 'upgrades'];
+    tabs.forEach(tab => {
+        const btn = document.getElementById(`market-tab-buy-${tab}`);
+        if (btn) {
+            if (tab === category) {
+                btn.style.background = 'linear-gradient(to bottom, #2ecc71, #27ae60)';
+                btn.style.color = 'white';
+                btn.style.border = '1px solid #2ecc71';
+                btn.style.boxShadow = '0 2px 4px rgba(0,0,0,0.2)';
+            } else {
+                btn.style.background = 'transparent';
+                btn.style.color = 'rgba(255, 255, 255, 0.7)';
+                btn.style.border = '1px solid transparent';
+                btn.style.boxShadow = 'none';
+            }
+        }
+    });
+
+    content.dataset.category = category;
+
+    let items = getMarketItems(category);
 
     if (category === 'upgrades' && items.length === 0) {
         safeSetHTML(content, `<div style="text-align: center; font-size: calc(var(--m-width) * 0.024); color: white; width: 100%; margin-top: calc(var(--m-width) * 0.05); padding-bottom: calc(var(--m-width) * 0.05);">No available upgrade to be bought.</div>`);
@@ -316,67 +362,19 @@ export function renderPokeMarketTab(category) {
 
     let html = `<div style="--m-width: min(76vw, 750px); display: flex; flex-wrap: wrap; gap: calc(var(--m-width) * 0.018); justify-content: center; width: 100%;">`;
     items.forEach(item => {
-        let displayName = item.displayName || item.name;
-        if (category === 'potions') displayName = displayName.replace(' Potion', '<br>Potion');
-        if (category === 'stones') displayName = displayName.replace(' Stone', '<br>Stone');
-
         let stock = 0;
         const targetCategory = category === 'vitamins' ? 'stones' : category;
         if (category !== 'upgrades' && state.backpack[targetCategory] && state.backpack[targetCategory][item.name]) {
             stock = state.backpack[targetCategory][item.name];
         }
 
-        const safeId = escapeHTML(item.name.replace(/\s+/g, ''));
-        const safeItemNameAttr = escapeHTML(item.name);
-        const safeItemNameJS = escapeHTML(escapeJS(item.name));
-        const safeCategoryAttr = escapeHTML(category);
-        const safeCategoryJS = escapeHTML(escapeJS(category));
-
-        let buyAction = `if(window.buyItem) window.buyItem('${safeItemNameJS}', ${item.price}, '${safeCategoryJS}')`;
-        if (category === 'upgrades') {
-            const safeUpgradeTypeJS = escapeHTML(escapeJS(item.upgradeType));
-            buyAction = `if(window.buyItem) window.buyItem('${safeItemNameJS}', ${item.price}, '${safeCategoryJS}', '${safeUpgradeTypeJS}')`;
-        }
-
-        const safeImg = escapeHTML(item.img);
-        // Note: We don't fully escape displayName and attrLabel because they may contain safe HTML (like <br>) as constructed above.
-        // We will ensure any user-controlled input in displayName/attrLabel is handled if needed. However, these mostly come from constants.
-        // But let's apply partial escaping if needed, or rely on the fact that these are from constants.
-        // Wait, items come from state/constants, EXCEPT item.name could be from state.backpack.stones keys, which might be polluted.
-        // Let's at least escape item.name where used directly.
-        // For displayName, if it has <br>, we should be careful.
-
-        // Actually, we must escape displayName if it is derived from item.name.
-        // displayName might have <br> appended. Let's do that cleanly.
-        let escapedDisplayName = escapeHTML(item.displayName || item.name);
-        if (category === 'potions') escapedDisplayName = escapedDisplayName.replace(' Potion', '<br>Potion');
-        if (category === 'stones') escapedDisplayName = escapedDisplayName.replace(' Stone', '<br>Stone');
-
-        html += `
-            <div class="market-item-card" data-price="${item.price}" data-id="${safeItemNameAttr}" data-category="${safeCategoryAttr}"
-                style="width: calc(16.666% - calc(var(--m-width) * 0.018 * 5 / 6)); background: #2c3e50; border: 2px solid #2ecc71; border-radius: 10px; padding: calc(var(--m-width) * 0.012); text-align: center; transition: transform 0.2s; display: flex; flex-direction: column; align-items: center; justify-content: center; box-sizing: border-box;">
-                <div style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; margin-bottom: calc(var(--m-width) * 0.006); height: calc(var(--m-width) * 0.038); display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.1;">${escapedDisplayName}</div>
-                <img src="${safeImg}" style="width: calc(var(--m-width) * 0.072); height: calc(var(--m-width) * 0.072); object-fit: contain; margin-bottom: calc(var(--m-width) * 0.006);">
-                ${category !== 'stones' ? `<div style="font-size: calc(var(--m-width) * 0.014); color: #f1c40f; margin-bottom: calc(var(--m-width) * 0.006); line-height: 1.1;">${item.attrLabel}</div>` : ''}
-                ${category !== 'upgrades' ? `<div style="font-size: calc(var(--m-width) * 0.014); color: #bdc3c7; line-height: 1.1; margin-bottom: calc(var(--m-width) * 0.006);">Stock: ${formatMarketNumberDown(stock)}</div>` : ''}
-
-                ${category !== 'upgrades' ? `
-                <div style="display: flex; gap: 5px; margin-top: calc(var(--m-width) * 0.006); align-items: center; justify-content: center; width: 100%;">
-                    <input type="text" id="buy-qty-${safeId}" value="1" oninput="if(window.updateBuyItemPrice) window.updateBuyItemPrice('${safeItemNameJS}', '${safeCategoryJS}', ${item.price})" style="width: calc(var(--m-width) * 0.06); height: calc(var(--m-width) * 0.025); padding: 0 calc(var(--m-width) * 0.006); font-size: calc(var(--m-width) * 0.015); text-align: center; border-radius: 5px; border: 1px solid #ccc; box-sizing: border-box; margin: 0; outline: none;">
-                    ${(category === 'pokeballs' || category === 'potions') ? `
-                    <button onclick="if(window.buySetMax) window.buySetMax('${safeItemNameJS}', '${safeCategoryJS}', ${item.price})" style="display: flex; align-items: center; justify-content: center; padding: 0 calc(var(--m-width) * 0.006); height: calc(var(--m-width) * 0.025); font-size: calc(var(--m-width) * 0.015); font-weight: bold; border-radius: 5px; cursor: pointer; background: #95a5a6; color: white; border: none; box-sizing: border-box; margin: 0;">Max</button>
-                    ` : ''}
-                </div>
-                ` : ''}
-
-                <button id="buy-btn-${safeId}" onclick="${buyAction}" class="market-final-price" style="margin-top: calc(var(--m-width) * 0.012); background: #2ecc71; color: white; border: 2px solid white; border-radius: 8px; padding: 5px 15px; font-size: calc(var(--m-width) * 0.017); font-weight: bold; cursor: pointer; width: 100%;">${formatMarketNumber(item.price)}</button>
-            </div>
-        `;
+        html += generateMarketItemCard(item, category, stock);
     });
     html += `</div>`;
 
     safeSetHTML(content, html);
 }
+
 
 export function buyItem(itemId, baseCost, category, upgradeType = null) { return newBuyItem(itemId, baseCost, category, upgradeType); }
 
