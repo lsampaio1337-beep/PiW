@@ -1,4 +1,4 @@
-import { calculateDamage, calculateReqXP, calculateStat, calculateCatchChance } from '../src/mathEngine.js';
+import { calculateDamage, calculateReqXP, calculateStat, calculateCatchChance, generateIVs } from '../src/mathEngine.js';
 
 describe('calculateReqXP', () => {
     test('should calculate required XP correctly for level 1', () => {
@@ -375,5 +375,130 @@ describe('calculateCatchChance', () => {
 
         // 5 candies = 2.0x multiplier
         expect(calculateCatchChance(bst, level, quality, totalIV, ballMultiplier, { blackYellowCandies: 5 })).toBeCloseTo(baseChance * 2.0, 2);
+    });
+});
+
+describe('generateIVs', () => {
+    let originalRandom;
+
+    beforeEach(() => {
+        originalRandom = Math.random;
+        jest.spyOn(Math, 'random');
+    });
+
+    afterEach(() => {
+        jest.restoreAllMocks();
+    });
+
+    test('should generate stats without boosts correctly', () => {
+        // Mock random once for sumIV formula (Math.floor(random * 595) + 6).
+        // If Math.random() is 0.5, then 0.5 * 595 = 297.5 -> 297 + 6 = 303
+        Math.random.mockImplementationOnce(() => 0.5).mockImplementation(originalRandom);
+
+        const result = generateIVs();
+
+        // Ensure standard object return format is correct
+        expect(result).toHaveProperty('hp');
+        expect(result).toHaveProperty('atk');
+        expect(result).toHaveProperty('def');
+        expect(result).toHaveProperty('spa');
+        expect(result).toHaveProperty('spd');
+        expect(result).toHaveProperty('spe');
+
+        const values = Object.values(result);
+
+        // Sum should be 303
+        const sum = values.reduce((a, b) => a + b, 0);
+        expect(sum).toBe(303);
+
+        // All values should be between 1 and 100
+        values.forEach(v => {
+            expect(v).toBeGreaterThanOrEqual(1);
+            expect(v).toBeLessThanOrEqual(100);
+        });
+    });
+
+    test('should apply Mastery IV Booster tiers correctly (Tier 1-5)', () => {
+        // Base sumIV if Math.random() = 0.5 is 303
+        // sumIV = Math.floor(303 * (1 + masteryBoost) * 1)
+
+        // Tier 1: boost 0.05. 303 * 1.05 = 318.15 -> 318
+        Math.random.mockImplementationOnce(() => 0.5).mockImplementation(originalRandom);
+        const t1 = generateIVs({ ivTaskTier: 1 });
+        expect(Object.values(t1).reduce((a, b) => a + b, 0)).toBe(318);
+
+        // Tier 2: boost 0.10. 303 * 1.10 = 333.3 -> 333
+        Math.random.mockImplementationOnce(() => 0.5).mockImplementation(originalRandom);
+        const t2 = generateIVs({ ivTaskTier: 2 });
+        expect(Object.values(t2).reduce((a, b) => a + b, 0)).toBe(333);
+
+        // Tier 3: boost 0.15. 303 * 1.15 = 348.45 -> 348
+        Math.random.mockImplementationOnce(() => 0.5).mockImplementation(originalRandom);
+        const t3 = generateIVs({ ivTaskTier: 3 });
+        expect(Object.values(t3).reduce((a, b) => a + b, 0)).toBe(348);
+
+        // Tier 4: boost 0.20. 303 * 1.20 = 363.6 -> 363
+        Math.random.mockImplementationOnce(() => 0.5).mockImplementation(originalRandom);
+        const t4 = generateIVs({ ivTaskTier: 4 });
+        expect(Object.values(t4).reduce((a, b) => a + b, 0)).toBe(363);
+
+        // Tier 5: boost 0.25. 303 * 1.25 = 378.75 -> 378
+        Math.random.mockImplementationOnce(() => 0.5).mockImplementation(originalRandom);
+        const t5 = generateIVs({ ivTaskTier: 5 });
+        expect(Object.values(t5).reduce((a, b) => a + b, 0)).toBe(378);
+    });
+
+    test('should apply Shiny IV Booster correctly', () => {
+        // Math.random() = 0.5 -> base 303
+        // Shiny boost requires shinyCaughtTaskTier >= 1 and isShiny = true
+
+        // No shiny tier
+        Math.random.mockImplementationOnce(() => 0.5).mockImplementation(originalRandom);
+        const noShinyBoost = generateIVs({ shinyCaughtTaskTier: 0 }, true);
+        expect(Object.values(noShinyBoost).reduce((a, b) => a + b, 0)).toBe(303);
+
+        // Not shiny
+        Math.random.mockImplementationOnce(() => 0.5).mockImplementation(originalRandom);
+        const notShiny = generateIVs({ shinyCaughtTaskTier: 1 }, false);
+        expect(Object.values(notShiny).reduce((a, b) => a + b, 0)).toBe(303);
+
+        // Applied correctly: 303 * 1.25 = 378.75 -> 378
+        Math.random.mockImplementationOnce(() => 0.5).mockImplementation(originalRandom);
+        const appliedShiny = generateIVs({ shinyCaughtTaskTier: 1 }, true);
+        expect(Object.values(appliedShiny).reduce((a, b) => a + b, 0)).toBe(378);
+    });
+
+    test('should cap sumIV at 600', () => {
+        // Math.random() = 1.0 -> 595 + 6 = 601
+        // (but wait, max random is slightly under 1.0, let's use 0.99)
+        // 0.99 * 595 = 589.05 -> 589 + 6 = 595
+        // Applied max multipliers: 595 * 1.25 * 1.25 = 929.68 -> well above 600
+        Math.random.mockImplementationOnce(() => 0.99).mockImplementation(originalRandom);
+
+        const result = generateIVs({ ivTaskTier: 5, shinyCaughtTaskTier: 1 }, true);
+
+        const sum = Object.values(result).reduce((a, b) => a + b, 0);
+        expect(sum).toBe(600); // capped at 600
+
+        // If it caps at 600, all stats MUST be 100 since there are 6 stats.
+        const values = Object.values(result);
+        values.forEach(v => {
+            expect(v).toBe(100);
+        });
+    });
+
+    test('should return valid stat distribution structure when remaining logic distributes stats', () => {
+        // Math.random() = 0.0 -> base 6
+        Math.random.mockImplementationOnce(() => 0.0).mockImplementation(originalRandom);
+
+        const result = generateIVs();
+
+        const sum = Object.values(result).reduce((a, b) => a + b, 0);
+        expect(sum).toBe(6);
+
+        const values = Object.values(result);
+        values.forEach(v => {
+            expect(v).toBe(1); // minimal value is 1 for each
+        });
     });
 });
