@@ -1529,6 +1529,45 @@ function _initializeInitialRoutes(id) {
     state.stats.dex[id] = true;
 }
 
+function _showPartyWindow() {
+    const partyWindow = document.getElementById('party-window');
+    if (partyWindow && window.windowManager) {
+        if (partyWindow.style.display === 'none' || !partyWindow.style.display) {
+            window.windowManager.toggleWindow('party-window', true);
+        }
+    }
+    return partyWindow;
+}
+
+function _performDummyPartyUpdates(pData, partyWindow) {
+    // Add identical pokemon to Team
+    const starterCopy = _createStarterPokemon(pData);
+    state.party.push(starterCopy);
+
+    // Refresh window after adding duplicate
+    _refreshPartyWindowHeight(partyWindow);
+
+    // Remove similar pokemon from Team
+    state.party.pop();
+
+    // Refresh window after removing duplicate
+    _refreshPartyWindowHeight(partyWindow);
+}
+
+function _resumeGameFlow() {
+    // Continue normal game flow
+    const navButtons = document.getElementById('main-control');
+    if (navButtons) {
+        navButtons.style.pointerEvents = 'auto';
+        navButtons.style.opacity = '1.0';
+    }
+
+    startGame();
+
+    // Refresh generic lab after assigning to display Assignments UI
+    renderProfessorLab();
+}
+
 function selectStarter(id) {
     if (!storage.currentProfileId) {
         storage.createNewProfile();
@@ -1542,42 +1581,16 @@ function selectStarter(id) {
     returnToLab();
 
     // Refresh window after adding chosen pokemon
-    const partyWindow = document.getElementById('party-window');
-    if (partyWindow && window.windowManager) {
-        if (partyWindow.style.display === 'none' || !partyWindow.style.display) {
-            window.windowManager.toggleWindow('party-window', true);
-        }
-    }
+    const partyWindow = _showPartyWindow();
     _refreshPartyWindowHeight(partyWindow);
 
-    // Add identical pokemon to Team
-    const starterCopy = _createStarterPokemon(pData);
-    state.party.push(starterCopy);
-
-    // Refresh window after adding duplicate
-    _refreshPartyWindowHeight(partyWindow);
-
-    // Remove similar pokemon from Team
-    state.party.pop();
-
-    // Refresh window after removing duplicate
-    _refreshPartyWindowHeight(partyWindow);
+    _performDummyPartyUpdates(pData, partyWindow);
 
     _initializeInitialRoutes(id);
 
     storage.save(state);
 
-    // Continue normal game flow
-    const navButtons = document.getElementById('main-control');
-    if (navButtons) {
-        navButtons.style.pointerEvents = 'auto';
-        navButtons.style.opacity = '1.0';
-    }
-
-    startGame();
-
-    // Refresh generic lab after assigning to display Assignments UI
-    renderProfessorLab();
+    _resumeGameFlow();
 }
 
 let gameClockTimeout = null;
