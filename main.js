@@ -5,8 +5,6 @@ const fs = require('fs');
 // Fix transparency issues conditionally rather than disabling hardware acceleration entirely
 if (process.platform === 'linux') {
     app.commandLine.appendSwitch('enable-transparent-visuals');
-    // Hardware acceleration must be disabled on Linux for transparency to work properly
-    app.disableHardwareAcceleration();
 }
 
 function createWindow() {
@@ -73,7 +71,11 @@ function createWindow() {
 }
 
 app.whenReady().then(() => {
-    createWindow();
+    if (process.platform === 'linux') {
+        setTimeout(createWindow, 1000);
+    } else {
+        createWindow();
+    }
 
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) {
