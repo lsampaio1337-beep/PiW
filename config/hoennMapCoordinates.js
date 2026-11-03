@@ -279,6 +279,11 @@ const hoennMapCoordinates = {
     "x": 71.54,
     "y": 76.8
   },
+  "the_solitary_atoll": {
+    "name": "The Solitary Atoll",
+    "x": 46.95,
+    "y": 85.56
+  },
   "nebula_fissure": {
     "name": "Nebula Fissure",
     "x": 63.06,

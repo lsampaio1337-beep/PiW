@@ -5,19 +5,19 @@ export const hoennRoutes = [
       {
         "pokemonId": 261,
         "minLevel": 1,
-        "maxLevel": 4,
+        "maxLevel": 3,
         "chance": 0.45
       },
       {
         "pokemonId": 263,
         "minLevel": 1,
-        "maxLevel": 4,
+        "maxLevel": 3,
         "chance": 0.45
       },
       {
         "pokemonId": 265,
         "minLevel": 1,
-        "maxLevel": 4,
+        "maxLevel": 3,
         "chance": 0.1
       }
     ]
@@ -27,31 +27,31 @@ export const hoennRoutes = [
     "spawns": [
       {
         "pokemonId": 261,
-        "minLevel": 2,
+        "minLevel": 3,
         "maxLevel": 5,
         "chance": 0.3
       },
       {
         "pokemonId": 263,
-        "minLevel": 2,
+        "minLevel": 3,
         "maxLevel": 5,
         "chance": 0.25
       },
       {
         "pokemonId": 278,
-        "minLevel": 2,
+        "minLevel": 3,
         "maxLevel": 5,
         "chance": 0.25
       },
       {
         "pokemonId": 72,
-        "minLevel": 2,
+        "minLevel": 3,
         "maxLevel": 5,
         "chance": 0.1
       },
       {
         "pokemonId": 279,
-        "minLevel": 2,
+        "minLevel": 3,
         "maxLevel": 5,
         "chance": 0.1
       }
@@ -62,37 +62,37 @@ export const hoennRoutes = [
     "spawns": [
       {
         "pokemonId": 265,
-        "minLevel": 4,
+        "minLevel": 5,
         "maxLevel": 7,
         "chance": 0.25
       },
       {
         "pokemonId": 270,
-        "minLevel": 4,
+        "minLevel": 5,
         "maxLevel": 7,
         "chance": 0.25
       },
       {
         "pokemonId": 273,
-        "minLevel": 4,
+        "minLevel": 5,
         "maxLevel": 7,
         "chance": 0.2
       },
       {
         "pokemonId": 183,
-        "minLevel": 4,
+        "minLevel": 5,
         "maxLevel": 7,
         "chance": 0.15
       },
       {
         "pokemonId": 280,
-        "minLevel": 4,
+        "minLevel": 5,
         "maxLevel": 7,
         "chance": 0.1
       },
       {
         "pokemonId": 283,
-        "minLevel": 4,
+        "minLevel": 5,
         "maxLevel": 7,
         "chance": 0.05
       }
@@ -103,32 +103,32 @@ export const hoennRoutes = [
     "spawns": [
       {
         "pokemonId": 261,
-        "minLevel": 5,
-        "maxLevel": 8,
+        "minLevel": 7,
+        "maxLevel": 9,
         "chance": 0.25
       },
       {
         "pokemonId": 265,
-        "minLevel": 5,
-        "maxLevel": 8,
+        "minLevel": 7,
+        "maxLevel": 9,
         "chance": 0.25
       },
       {
         "pokemonId": 276,
-        "minLevel": 5,
-        "maxLevel": 8,
+        "minLevel": 7,
+        "maxLevel": 9,
         "chance": 0.2
       },
       {
         "pokemonId": 278,
-        "minLevel": 5,
-        "maxLevel": 8,
+        "minLevel": 7,
+        "maxLevel": 9,
         "chance": 0.2
       },
       {
         "pokemonId": 279,
-        "minLevel": 5,
-        "maxLevel": 8,
+        "minLevel": 7,
+        "maxLevel": 9,
         "chance": 0.1
       }
     ]
@@ -138,38 +138,38 @@ export const hoennRoutes = [
     "spawns": [
       {
         "pokemonId": 265,
-        "minLevel": 7,
-        "maxLevel": 10,
+        "minLevel": 9,
+        "maxLevel": 11,
         "chance": 0.3
       },
       {
         "pokemonId": 266,
-        "minLevel": 7,
-        "maxLevel": 10,
+        "minLevel": 9,
+        "maxLevel": 11,
         "chance": 0.2
       },
       {
         "pokemonId": 268,
-        "minLevel": 7,
-        "maxLevel": 10,
+        "minLevel": 9,
+        "maxLevel": 11,
         "chance": 0.2
       },
       {
         "pokemonId": 276,
-        "minLevel": 7,
-        "maxLevel": 10,
+        "minLevel": 9,
+        "maxLevel": 11,
         "chance": 0.15
       },
       {
         "pokemonId": 285,
-        "minLevel": 7,
-        "maxLevel": 10,
+        "minLevel": 9,
+        "maxLevel": 11,
         "chance": 0.1
       },
       {
         "pokemonId": 287,
-        "minLevel": 7,
-        "maxLevel": 10,
+        "minLevel": 9,
+        "maxLevel": 11,
         "chance": 0.05
       }
     ]
@@ -179,37 +179,37 @@ export const hoennRoutes = [
     "spawns": [
       {
         "pokemonId": 261,
-        "minLevel": 9,
+        "minLevel": 10,
         "maxLevel": 12,
         "chance": 0.2375
       },
       {
         "pokemonId": 276,
-        "minLevel": 9,
+        "minLevel": 10,
         "maxLevel": 12,
         "chance": 0.2375
       },
       {
         "pokemonId": 293,
-        "minLevel": 9,
+        "minLevel": 10,
         "maxLevel": 12,
         "chance": 0.19
       },
       {
         "pokemonId": 290,
-        "minLevel": 9,
+        "minLevel": 10,
         "maxLevel": 12,
         "chance": 0.19
       },
       {
         "pokemonId": 300,
-        "minLevel": 9,
+        "minLevel": 10,
         "maxLevel": 12,
         "chance": 0.095
       },
       {
         "pokemonId": 292,
-        "minLevel": 9,
+        "minLevel": 10,
         "maxLevel": 12,
         "chance": 0.05
       }
@@ -220,56 +220,56 @@ export const hoennRoutes = [
     "spawns": [
       {
         "pokemonId": 41,
-        "minLevel": 12,
-        "maxLevel": 15,
+        "minLevel": 18,
+        "maxLevel": 21,
         "chance": 0.1805
       },
       {
         "pokemonId": 296,
-        "minLevel": 12,
-        "maxLevel": 15,
+        "minLevel": 18,
+        "maxLevel": 21,
         "chance": 0.1425
       },
       {
         "pokemonId": 74,
-        "minLevel": 12,
-        "maxLevel": 15,
+        "minLevel": 18,
+        "maxLevel": 21,
         "chance": 0.1425
       },
       {
         "pokemonId": 304,
-        "minLevel": 12,
-        "maxLevel": 15,
+        "minLevel": 18,
+        "maxLevel": 21,
         "chance": 0.1425
       },
       {
         "pokemonId": 63,
-        "minLevel": 12,
-        "maxLevel": 15,
+        "minLevel": 18,
+        "maxLevel": 21,
         "chance": 0.1425
       },
       {
         "pokemonId": 302,
-        "minLevel": 12,
-        "maxLevel": 15,
+        "minLevel": 18,
+        "maxLevel": 21,
         "chance": 0.076
       },
       {
         "pokemonId": 303,
-        "minLevel": 12,
-        "maxLevel": 15,
+        "minLevel": 18,
+        "maxLevel": 21,
         "chance": 0.076
       },
       {
         "pokemonId": 299,
-        "minLevel": 12,
-        "maxLevel": 15,
+        "minLevel": 18,
+        "maxLevel": 21,
         "chance": 0.0475
       },
       {
         "pokemonId": 64,
-        "minLevel": 12,
-        "maxLevel": 15,
+        "minLevel": 18,
+        "maxLevel": 21,
         "chance": 0.05
       }
     ]
@@ -279,32 +279,32 @@ export const hoennRoutes = [
     "spawns": [
       {
         "pokemonId": 129,
-        "minLevel": 14,
-        "maxLevel": 17,
+        "minLevel": 16,
+        "maxLevel": 19,
         "chance": 0.45
       },
       {
         "pokemonId": 118,
-        "minLevel": 14,
-        "maxLevel": 17,
+        "minLevel": 16,
+        "maxLevel": 19,
         "chance": 0.18
       },
       {
         "pokemonId": 72,
-        "minLevel": 14,
-        "maxLevel": 17,
+        "minLevel": 16,
+        "maxLevel": 19,
         "chance": 0.18
       },
       {
         "pokemonId": 283,
-        "minLevel": 14,
-        "maxLevel": 17,
+        "minLevel": 16,
+        "maxLevel": 19,
         "chance": 0.09
       },
       {
         "pokemonId": 120,
-        "minLevel": 14,
-        "maxLevel": 17,
+        "minLevel": 16,
+        "maxLevel": 19,
         "chance": 0.1
       }
     ]
@@ -314,20 +314,20 @@ export const hoennRoutes = [
     "spawns": [
       {
         "pokemonId": 72,
-        "minLevel": 19,
-        "maxLevel": 22,
+        "minLevel": 22,
+        "maxLevel": 25,
         "chance": 0.5
       },
       {
         "pokemonId": 278,
-        "minLevel": 18,
-        "maxLevel": 21,
+        "minLevel": 22,
+        "maxLevel": 25,
         "chance": 0.4
       },
       {
         "pokemonId": 279,
-        "minLevel": 20,
-        "maxLevel": 23,
+        "minLevel": 22,
+        "maxLevel": 25,
         "chance": 0.1
       }
     ]
@@ -337,50 +337,50 @@ export const hoennRoutes = [
     "spawns": [
       {
         "pokemonId": 309,
-        "minLevel": 20,
-        "maxLevel": 23,
+        "minLevel": 27,
+        "maxLevel": 30,
         "chance": 0.225
       },
       {
         "pokemonId": 316,
-        "minLevel": 20,
-        "maxLevel": 23,
+        "minLevel": 27,
+        "maxLevel": 30,
         "chance": 0.135
       },
       {
         "pokemonId": 312,
-        "minLevel": 20,
-        "maxLevel": 23,
+        "minLevel": 27,
+        "maxLevel": 30,
         "chance": 0.135
       },
       {
         "pokemonId": 311,
-        "minLevel": 20,
-        "maxLevel": 23,
+        "minLevel": 27,
+        "maxLevel": 30,
         "chance": 0.135
       },
       {
         "pokemonId": 278,
-        "minLevel": 20,
-        "maxLevel": 23,
+        "minLevel": 27,
+        "maxLevel": 30,
         "chance": 0.135
       },
       {
         "pokemonId": 43,
-        "minLevel": 20,
-        "maxLevel": 23,
+        "minLevel": 27,
+        "maxLevel": 30,
         "chance": 0.09
       },
       {
         "pokemonId": 279,
-        "minLevel": 20,
-        "maxLevel": 23,
+        "minLevel": 27,
+        "maxLevel": 30,
         "chance": 0.045
       },
       {
         "pokemonId": 81,
-        "minLevel": 20,
-        "maxLevel": 23,
+        "minLevel": 27,
+        "maxLevel": 30,
         "chance": 0.1
       }
     ]
@@ -390,50 +390,50 @@ export const hoennRoutes = [
     "spawns": [
       {
         "pokemonId": 43,
-        "minLevel": 22,
-        "maxLevel": 25,
+        "minLevel": 31,
+        "maxLevel": 34,
         "chance": 0.19
       },
       {
         "pokemonId": 183,
-        "minLevel": 22,
-        "maxLevel": 25,
+        "minLevel": 31,
+        "maxLevel": 34,
         "chance": 0.1425
       },
       {
         "pokemonId": 314,
-        "minLevel": 22,
-        "maxLevel": 25,
+        "minLevel": 31,
+        "maxLevel": 34,
         "chance": 0.1425
       },
       {
         "pokemonId": 313,
-        "minLevel": 22,
-        "maxLevel": 25,
+        "minLevel": 31,
+        "maxLevel": 34,
         "chance": 0.1425
       },
       {
         "pokemonId": 315,
-        "minLevel": 22,
-        "maxLevel": 25,
+        "minLevel": 31,
+        "maxLevel": 34,
         "chance": 0.1425
       },
       {
         "pokemonId": 273,
-        "minLevel": 22,
-        "maxLevel": 25,
+        "minLevel": 31,
+        "maxLevel": 34,
         "chance": 0.095
       },
       {
         "pokemonId": 283,
-        "minLevel": 22,
-        "maxLevel": 25,
+        "minLevel": 31,
+        "maxLevel": 34,
         "chance": 0.095
       },
       {
         "pokemonId": 281,
-        "minLevel": 22,
-        "maxLevel": 25,
+        "minLevel": 31,
+        "maxLevel": 34,
         "chance": 0.05
       }
     ]
@@ -443,38 +443,38 @@ export const hoennRoutes = [
     "spawns": [
       {
         "pokemonId": 27,
-        "minLevel": 23,
-        "maxLevel": 27,
+        "minLevel": 33,
+        "maxLevel": 36,
         "chance": 0.2375
       },
       {
         "pokemonId": 328,
-        "minLevel": 23,
-        "maxLevel": 27,
+        "minLevel": 33,
+        "maxLevel": 36,
         "chance": 0.2375
       },
       {
         "pokemonId": 74,
-        "minLevel": 23,
-        "maxLevel": 27,
+        "minLevel": 33,
+        "maxLevel": 36,
         "chance": 0.2375
       },
       {
         "pokemonId": 331,
-        "minLevel": 23,
-        "maxLevel": 27,
+        "minLevel": 33,
+        "maxLevel": 36,
         "chance": 0.1425
       },
       {
         "pokemonId": 343,
-        "minLevel": 23,
-        "maxLevel": 27,
+        "minLevel": 33,
+        "maxLevel": 36,
         "chance": 0.095
       },
       {
         "pokemonId": 330,
-        "minLevel": 23,
-        "maxLevel": 27,
+        "minLevel": 33,
+        "maxLevel": 36,
         "chance": 0.05
       }
     ]
@@ -484,38 +484,38 @@ export const hoennRoutes = [
     "spawns": [
       {
         "pokemonId": 322,
-        "minLevel": 27,
-        "maxLevel": 30,
+        "minLevel": 37,
+        "maxLevel": 40,
         "chance": 0.3
       },
       {
         "pokemonId": 66,
-        "minLevel": 27,
-        "maxLevel": 30,
+        "minLevel": 37,
+        "maxLevel": 40,
         "chance": 0.25
       },
       {
         "pokemonId": 218,
-        "minLevel": 27,
-        "maxLevel": 30,
+        "minLevel": 37,
+        "maxLevel": 40,
         "chance": 0.15
       },
       {
         "pokemonId": 324,
-        "minLevel": 27,
-        "maxLevel": 30,
+        "minLevel": 37,
+        "maxLevel": 40,
         "chance": 0.15
       },
       {
         "pokemonId": 109,
-        "minLevel": 27,
-        "maxLevel": 30,
+        "minLevel": 37,
+        "maxLevel": 40,
         "chance": 0.1
       },
       {
         "pokemonId": 88,
-        "minLevel": 27,
-        "maxLevel": 30,
+        "minLevel": 37,
+        "maxLevel": 40,
         "chance": 0.05
       }
     ]
@@ -525,26 +525,26 @@ export const hoennRoutes = [
     "spawns": [
       {
         "pokemonId": 66,
-        "minLevel": 28,
-        "maxLevel": 32,
+        "minLevel": 39,
+        "maxLevel": 43,
         "chance": 0.4275
       },
       {
         "pokemonId": 322,
-        "minLevel": 28,
-        "maxLevel": 32,
+        "minLevel": 39,
+        "maxLevel": 43,
         "chance": 0.4275
       },
       {
         "pokemonId": 325,
-        "minLevel": 28,
-        "maxLevel": 32,
+        "minLevel": 39,
+        "maxLevel": 43,
         "chance": 0.095
       },
       {
         "pokemonId": 67,
-        "minLevel": 28,
-        "maxLevel": 32,
+        "minLevel": 39,
+        "maxLevel": 43,
         "chance": 0.05
       }
     ]
@@ -554,20 +554,20 @@ export const hoennRoutes = [
     "spawns": [
       {
         "pokemonId": 327,
-        "minLevel": 30,
-        "maxLevel": 33,
+        "minLevel": 41,
+        "maxLevel": 45,
         "chance": 0.7
       },
       {
         "pokemonId": 227,
-        "minLevel": 30,
-        "maxLevel": 33,
+        "minLevel": 41,
+        "maxLevel": 45,
         "chance": 0.15
       },
       {
         "pokemonId": 27,
-        "minLevel": 30,
-        "maxLevel": 33,
+        "minLevel": 41,
+        "maxLevel": 45,
         "chance": 0.15
       }
     ]
@@ -577,44 +577,44 @@ export const hoennRoutes = [
     "spawns": [
       {
         "pokemonId": 333,
-        "minLevel": 31,
-        "maxLevel": 35,
+        "minLevel": 42,
+        "maxLevel": 46,
         "chance": 0.25
       },
       {
         "pokemonId": 74,
-        "minLevel": 31,
-        "maxLevel": 35,
+        "minLevel": 42,
+        "maxLevel": 46,
         "chance": 0.2
       },
       {
         "pokemonId": 271,
-        "minLevel": 31,
-        "maxLevel": 35,
+        "minLevel": 42,
+        "maxLevel": 46,
         "chance": 0.15
       },
       {
         "pokemonId": 274,
-        "minLevel": 31,
-        "maxLevel": 35,
+        "minLevel": 42,
+        "maxLevel": 46,
         "chance": 0.15
       },
       {
         "pokemonId": 336,
-        "minLevel": 31,
-        "maxLevel": 35,
+        "minLevel": 42,
+        "maxLevel": 46,
         "chance": 0.1
       },
       {
         "pokemonId": 335,
-        "minLevel": 31,
-        "maxLevel": 35,
+        "minLevel": 42,
+        "maxLevel": 46,
         "chance": 0.1
       },
       {
         "pokemonId": 283,
-        "minLevel": 31,
-        "maxLevel": 35,
+        "minLevel": 42,
+        "maxLevel": 46,
         "chance": 0.05
       }
     ]
@@ -624,38 +624,38 @@ export const hoennRoutes = [
     "spawns": [
       {
         "pokemonId": 41,
-        "minLevel": 33,
-        "maxLevel": 37,
+        "minLevel": 44,
+        "maxLevel": 48,
         "chance": 0.3325
       },
       {
         "pokemonId": 42,
-        "minLevel": 33,
-        "maxLevel": 37,
+        "minLevel": 44,
+        "maxLevel": 48,
         "chance": 0.2375
       },
       {
         "pokemonId": 338,
-        "minLevel": 33,
-        "maxLevel": 37,
+        "minLevel": 44,
+        "maxLevel": 48,
         "chance": 0.1425
       },
       {
         "pokemonId": 337,
-        "minLevel": 33,
-        "maxLevel": 37,
+        "minLevel": 44,
+        "maxLevel": 48,
         "chance": 0.1425
       },
       {
         "pokemonId": 371,
-        "minLevel": 33,
-        "maxLevel": 37,
+        "minLevel": 44,
+        "maxLevel": 48,
         "chance": 0.095
       },
       {
         "pokemonId": 374,
-        "minLevel": 33,
-        "maxLevel": 37,
+        "minLevel": 44,
+        "maxLevel": 48,
         "chance": 0.05
       }
     ]
@@ -665,32 +665,32 @@ export const hoennRoutes = [
     "spawns": [
       {
         "pokemonId": 333,
-        "minLevel": 35,
-        "maxLevel": 38,
+        "minLevel": 46,
+        "maxLevel": 50,
         "chance": 0.3
       },
       {
         "pokemonId": 276,
-        "minLevel": 35,
-        "maxLevel": 38,
+        "minLevel": 46,
+        "maxLevel": 50,
         "chance": 0.25
       },
       {
         "pokemonId": 278,
-        "minLevel": 35,
-        "maxLevel": 38,
+        "minLevel": 46,
+        "maxLevel": 50,
         "chance": 0.25
       },
       {
         "pokemonId": 39,
-        "minLevel": 35,
-        "maxLevel": 38,
+        "minLevel": 46,
+        "maxLevel": 50,
         "chance": 0.1
       },
       {
         "pokemonId": 279,
-        "minLevel": 35,
-        "maxLevel": 38,
+        "minLevel": 46,
+        "maxLevel": 50,
         "chance": 0.1
       }
     ]
@@ -700,38 +700,38 @@ export const hoennRoutes = [
     "spawns": [
       {
         "pokemonId": 309,
-        "minLevel": 38,
-        "maxLevel": 41,
+        "minLevel": 50,
+        "maxLevel": 55,
         "chance": 0.25
       },
       {
         "pokemonId": 264,
-        "minLevel": 38,
-        "maxLevel": 41,
+        "minLevel": 50,
+        "maxLevel": 55,
         "chance": 0.2
       },
       {
         "pokemonId": 278,
-        "minLevel": 38,
-        "maxLevel": 41,
+        "minLevel": 50,
+        "maxLevel": 55,
         "chance": 0.2
       },
       {
         "pokemonId": 310,
-        "minLevel": 38,
-        "maxLevel": 41,
+        "minLevel": 50,
+        "maxLevel": 55,
         "chance": 0.15
       },
       {
         "pokemonId": 352,
-        "minLevel": 38,
-        "maxLevel": 41,
+        "minLevel": 50,
+        "maxLevel": 55,
         "chance": 0.1
       },
       {
         "pokemonId": 279,
-        "minLevel": 38,
-        "maxLevel": 41,
+        "minLevel": 50,
+        "maxLevel": 55,
         "chance": 0.1
       }
     ]
@@ -741,44 +741,44 @@ export const hoennRoutes = [
     "spawns": [
       {
         "pokemonId": 318,
-        "minLevel": 18,
-        "maxLevel": 21,
+        "minLevel": 25,
+        "maxLevel": 28,
         "chance": 0.09
       },
       {
         "pokemonId": 339,
-        "minLevel": 18,
-        "maxLevel": 21,
+        "minLevel": 25,
+        "maxLevel": 28,
         "chance": 0.18
       },
       {
         "pokemonId": 341,
-        "minLevel": 18,
-        "maxLevel": 21,
+        "minLevel": 25,
+        "maxLevel": 28,
         "chance": 0.18
       },
       {
         "pokemonId": 320,
-        "minLevel": 20,
-        "maxLevel": 23,
+        "minLevel": 25,
+        "maxLevel": 28,
         "chance": 0.09
       },
       {
         "pokemonId": 118,
-        "minLevel": 19,
-        "maxLevel": 22,
+        "minLevel": 25,
+        "maxLevel": 28,
         "chance": 0.18
       },
       {
         "pokemonId": 72,
-        "minLevel": 19,
-        "maxLevel": 22,
+        "minLevel": 25,
+        "maxLevel": 28,
         "chance": 0.18
       },
       {
         "pokemonId": 370,
-        "minLevel": 19,
-        "maxLevel": 22,
+        "minLevel": 25,
+        "maxLevel": 28,
         "chance": 0.1
       }
     ]
@@ -788,44 +788,44 @@ export const hoennRoutes = [
     "spawns": [
       {
         "pokemonId": 264,
-        "minLevel": 41,
-        "maxLevel": 45,
+        "minLevel": 52,
+        "maxLevel": 57,
         "chance": 0.22
       },
       {
         "pokemonId": 43,
-        "minLevel": 41,
-        "maxLevel": 45,
+        "minLevel": 52,
+        "maxLevel": 57,
         "chance": 0.22
       },
       {
         "pokemonId": 357,
-        "minLevel": 41,
-        "maxLevel": 45,
+        "minLevel": 52,
+        "maxLevel": 57,
         "chance": 0.17
       },
       {
         "pokemonId": 278,
-        "minLevel": 41,
-        "maxLevel": 45,
+        "minLevel": 52,
+        "maxLevel": 57,
         "chance": 0.12
       },
       {
         "pokemonId": 352,
-        "minLevel": 41,
-        "maxLevel": 45,
+        "minLevel": 52,
+        "maxLevel": 57,
         "chance": 0.12
       },
       {
         "pokemonId": 279,
-        "minLevel": 41,
-        "maxLevel": 45,
+        "minLevel": 52,
+        "maxLevel": 57,
         "chance": 0.05
       },
       {
         "pokemonId": 277,
-        "minLevel": 41,
-        "maxLevel": 45,
+        "minLevel": 52,
+        "maxLevel": 57,
         "chance": 0.1
       }
     ]
@@ -835,50 +835,50 @@ export const hoennRoutes = [
     "spawns": [
       {
         "pokemonId": 264,
-        "minLevel": 43,
-        "maxLevel": 46,
+        "minLevel": 56,
+        "maxLevel": 61,
         "chance": 0.2375
       },
       {
         "pokemonId": 262,
-        "minLevel": 43,
-        "maxLevel": 46,
+        "minLevel": 56,
+        "maxLevel": 61,
         "chance": 0.19
       },
       {
         "pokemonId": 43,
-        "minLevel": 43,
-        "maxLevel": 46,
+        "minLevel": 56,
+        "maxLevel": 61,
         "chance": 0.1425
       },
       {
         "pokemonId": 183,
-        "minLevel": 43,
-        "maxLevel": 46,
+        "minLevel": 56,
+        "maxLevel": 61,
         "chance": 0.1425
       },
       {
         "pokemonId": 359,
-        "minLevel": 43,
-        "maxLevel": 46,
+        "minLevel": 56,
+        "maxLevel": 61,
         "chance": 0.095
       },
       {
         "pokemonId": 352,
-        "minLevel": 43,
-        "maxLevel": 46,
+        "minLevel": 56,
+        "maxLevel": 61,
         "chance": 0.095
       },
       {
         "pokemonId": 283,
-        "minLevel": 43,
-        "maxLevel": 46,
+        "minLevel": 56,
+        "maxLevel": 61,
         "chance": 0.0475
       },
       {
         "pokemonId": 284,
-        "minLevel": 43,
-        "maxLevel": 46,
+        "minLevel": 56,
+        "maxLevel": 61,
         "chance": 0.05
       }
     ]
@@ -888,38 +888,38 @@ export const hoennRoutes = [
     "spawns": [
       {
         "pokemonId": 261,
-        "minLevel": 44,
-        "maxLevel": 48,
+        "minLevel": 57,
+        "maxLevel": 62,
         "chance": 0.2
       },
       {
         "pokemonId": 262,
-        "minLevel": 44,
-        "maxLevel": 48,
+        "minLevel": 57,
+        "maxLevel": 62,
         "chance": 0.25
       },
       {
         "pokemonId": 353,
-        "minLevel": 44,
-        "maxLevel": 48,
+        "minLevel": 57,
+        "maxLevel": 62,
         "chance": 0.2
       },
       {
         "pokemonId": 355,
-        "minLevel": 44,
-        "maxLevel": 48,
+        "minLevel": 57,
+        "maxLevel": 62,
         "chance": 0.15
       },
       {
         "pokemonId": 44,
-        "minLevel": 44,
-        "maxLevel": 48,
+        "minLevel": 57,
+        "maxLevel": 62,
         "chance": 0.1
       },
       {
         "pokemonId": 352,
-        "minLevel": 44,
-        "maxLevel": 48,
+        "minLevel": 57,
+        "maxLevel": 62,
         "chance": 0.1
       }
     ]
@@ -929,56 +929,56 @@ export const hoennRoutes = [
     "spawns": [
       {
         "pokemonId": 25,
-        "minLevel": 46,
-        "maxLevel": 50,
+        "minLevel": 59,
+        "maxLevel": 65,
         "chance": 0.15
       },
       {
         "pokemonId": 177,
-        "minLevel": 46,
-        "maxLevel": 50,
+        "minLevel": 59,
+        "maxLevel": 65,
         "chance": 0.15
       },
       {
         "pokemonId": 127,
-        "minLevel": 51,
-        "maxLevel": 55,
+        "minLevel": 59,
+        "maxLevel": 65,
         "chance": 0.08
       },
       {
         "pokemonId": 231,
-        "minLevel": 46,
-        "maxLevel": 50,
+        "minLevel": 59,
+        "maxLevel": 65,
         "chance": 0.07
       },
       {
         "pokemonId": 74,
-        "minLevel": 46,
-        "maxLevel": 50,
+        "minLevel": 59,
+        "maxLevel": 65,
         "chance": 0.11
       },
       {
         "pokemonId": 190,
-        "minLevel": 46,
-        "maxLevel": 50,
+        "minLevel": 59,
+        "maxLevel": 65,
         "chance": 0.1
       },
       {
         "pokemonId": 228,
-        "minLevel": 46,
-        "maxLevel": 50,
+        "minLevel": 59,
+        "maxLevel": 65,
         "chance": 0.09
       },
       {
         "pokemonId": 191,
-        "minLevel": 44,
-        "maxLevel": 48,
+        "minLevel": 59,
+        "maxLevel": 65,
         "chance": 0.15
       },
       {
         "pokemonId": 213,
-        "minLevel": 51,
-        "maxLevel": 55,
+        "minLevel": 59,
+        "maxLevel": 65,
         "chance": 0.1
       }
     ]
@@ -1106,32 +1106,32 @@ export const hoennRoutes = [
     "spawns": [
       {
         "pokemonId": 353,
-        "minLevel": 48,
-        "maxLevel": 51,
+        "minLevel": 61,
+        "maxLevel": 67,
         "chance": 0.3
       },
       {
         "pokemonId": 355,
-        "minLevel": 48,
-        "maxLevel": 51,
+        "minLevel": 61,
+        "maxLevel": 67,
         "chance": 0.25
       },
       {
         "pokemonId": 37,
-        "minLevel": 48,
-        "maxLevel": 51,
+        "minLevel": 61,
+        "maxLevel": 67,
         "chance": 0.2
       },
       {
         "pokemonId": 307,
-        "minLevel": 48,
-        "maxLevel": 51,
+        "minLevel": 61,
+        "maxLevel": 67,
         "chance": 0.15
       },
       {
         "pokemonId": 358,
-        "minLevel": 48,
-        "maxLevel": 51,
+        "minLevel": 61,
+        "maxLevel": 67,
         "chance": 0.1
       }
     ]
@@ -1141,44 +1141,44 @@ export const hoennRoutes = [
     "spawns": [
       {
         "pokemonId": 262,
-        "minLevel": 49,
-        "maxLevel": 53,
+        "minLevel": 63,
+        "maxLevel": 69,
         "chance": 0.2
       },
       {
         "pokemonId": 353,
-        "minLevel": 49,
-        "maxLevel": 53,
+        "minLevel": 63,
+        "maxLevel": 69,
         "chance": 0.2
       },
       {
         "pokemonId": 355,
-        "minLevel": 49,
-        "maxLevel": 53,
+        "minLevel": 63,
+        "maxLevel": 69,
         "chance": 0.15
       },
       {
         "pokemonId": 44,
-        "minLevel": 49,
-        "maxLevel": 53,
+        "minLevel": 63,
+        "maxLevel": 69,
         "chance": 0.1
       },
       {
         "pokemonId": 352,
-        "minLevel": 49,
-        "maxLevel": 53,
+        "minLevel": 63,
+        "maxLevel": 69,
         "chance": 0.1
       },
       {
         "pokemonId": 332,
-        "minLevel": 49,
-        "maxLevel": 53,
+        "minLevel": 63,
+        "maxLevel": 69,
         "chance": 0.1
       },
       {
         "pokemonId": 477,
-        "minLevel": 49,
-        "maxLevel": 53,
+        "minLevel": 63,
+        "maxLevel": 69,
         "chance": 0.15
       }
     ]
@@ -1188,50 +1188,50 @@ export const hoennRoutes = [
     "spawns": [
       {
         "pokemonId": 320,
-        "minLevel": 54,
-        "maxLevel": 58,
+        "minLevel": 67,
+        "maxLevel": 74,
         "chance": 0.198
       },
       {
         "pokemonId": 319,
-        "minLevel": 54,
-        "maxLevel": 58,
+        "minLevel": 67,
+        "maxLevel": 74,
         "chance": 0.198
       },
       {
         "pokemonId": 119,
-        "minLevel": 54,
-        "maxLevel": 58,
+        "minLevel": 67,
+        "maxLevel": 74,
         "chance": 0.135
       },
       {
         "pokemonId": 340,
-        "minLevel": 54,
-        "maxLevel": 58,
+        "minLevel": 67,
+        "maxLevel": 74,
         "chance": 0.135
       },
       {
         "pokemonId": 222,
-        "minLevel": 54,
-        "maxLevel": 58,
+        "minLevel": 67,
+        "maxLevel": 74,
         "chance": 0.09
       },
       {
         "pokemonId": 73,
-        "minLevel": 54,
-        "maxLevel": 58,
+        "minLevel": 67,
+        "maxLevel": 74,
         "chance": 0.072
       },
       {
         "pokemonId": 349,
-        "minLevel": 54,
-        "maxLevel": 58,
+        "minLevel": 67,
+        "maxLevel": 74,
         "chance": 0.072
       },
       {
         "pokemonId": 116,
-        "minLevel": 54,
-        "maxLevel": 58,
+        "minLevel": 67,
+        "maxLevel": 74,
         "chance": 0.1
       }
     ]
@@ -1241,26 +1241,26 @@ export const hoennRoutes = [
     "spawns": [
       {
         "pokemonId": 366,
-        "minLevel": 56,
-        "maxLevel": 60,
+        "minLevel": 69,
+        "maxLevel": 76,
         "chance": 0.585
       },
       {
         "pokemonId": 170,
-        "minLevel": 56,
-        "maxLevel": 60,
+        "minLevel": 69,
+        "maxLevel": 76,
         "chance": 0.225
       },
       {
         "pokemonId": 369,
-        "minLevel": 56,
-        "maxLevel": 60,
+        "minLevel": 69,
+        "maxLevel": 76,
         "chance": 0.09
       },
       {
         "pokemonId": 117,
-        "minLevel": 56,
-        "maxLevel": 60,
+        "minLevel": 69,
+        "maxLevel": 76,
         "chance": 0.1
       }
     ]
@@ -1270,32 +1270,32 @@ export const hoennRoutes = [
     "spawns": [
       {
         "pokemonId": 363,
-        "minLevel": 59,
-        "maxLevel": 63,
+        "minLevel": 72,
+        "maxLevel": 79,
         "chance": 0.405
       },
       {
         "pokemonId": 41,
-        "minLevel": 59,
-        "maxLevel": 63,
+        "minLevel": 72,
+        "maxLevel": 79,
         "chance": 0.27
       },
       {
         "pokemonId": 42,
-        "minLevel": 59,
-        "maxLevel": 63,
+        "minLevel": 72,
+        "maxLevel": 79,
         "chance": 0.135
       },
       {
         "pokemonId": 361,
-        "minLevel": 59,
-        "maxLevel": 63,
+        "minLevel": 72,
+        "maxLevel": 79,
         "chance": 0.09
       },
       {
         "pokemonId": 364,
-        "minLevel": 59,
-        "maxLevel": 63,
+        "minLevel": 72,
+        "maxLevel": 79,
         "chance": 0.1
       }
     ]
@@ -1305,44 +1305,44 @@ export const hoennRoutes = [
     "spawns": [
       {
         "pokemonId": 42,
-        "minLevel": 64,
-        "maxLevel": 68,
+        "minLevel": 76,
+        "maxLevel": 83,
         "chance": 0.2375
       },
       {
         "pokemonId": 297,
-        "minLevel": 64,
-        "maxLevel": 68,
+        "minLevel": 76,
+        "maxLevel": 83,
         "chance": 0.2375
       },
       {
         "pokemonId": 305,
-        "minLevel": 64,
-        "maxLevel": 68,
+        "minLevel": 76,
+        "maxLevel": 83,
         "chance": 0.152
       },
       {
         "pokemonId": 308,
-        "minLevel": 64,
-        "maxLevel": 68,
+        "minLevel": 76,
+        "maxLevel": 83,
         "chance": 0.152
       },
       {
         "pokemonId": 294,
-        "minLevel": 64,
-        "maxLevel": 68,
+        "minLevel": 76,
+        "maxLevel": 83,
         "chance": 0.114
       },
       {
         "pokemonId": 75,
-        "minLevel": 64,
-        "maxLevel": 68,
+        "minLevel": 76,
+        "maxLevel": 83,
         "chance": 0.057
       },
       {
         "pokemonId": 295,
-        "minLevel": 64,
-        "maxLevel": 68,
+        "minLevel": 76,
+        "maxLevel": 83,
         "chance": 0.05
       }
     ]
@@ -1352,62 +1352,50 @@ export const hoennRoutes = [
     "spawns": [
       {
         "pokemonId": 42,
-        "minLevel": 62,
-        "maxLevel": 66,
+        "minLevel": 74,
+        "maxLevel": 81,
         "chance": 0.3
       },
       {
         "pokemonId": 344,
-        "minLevel": 62,
-        "maxLevel": 66,
+        "minLevel": 74,
+        "maxLevel": 81,
         "chance": 0.25
       },
       {
         "pokemonId": 334,
-        "minLevel": 62,
-        "maxLevel": 66,
+        "minLevel": 74,
+        "maxLevel": 81,
         "chance": 0.2
       },
       {
         "pokemonId": 356,
-        "minLevel": 62,
-        "maxLevel": 66,
+        "minLevel": 74,
+        "maxLevel": 81,
         "chance": 0.15
       },
       {
         "pokemonId": 354,
-        "minLevel": 62,
-        "maxLevel": 66,
+        "minLevel": 74,
+        "maxLevel": 81,
         "chance": 0.1
       }
     ]
   },
   {
-    "name": "Nebula Fissure",
+    "name": "The Solitary Atoll",
     "spawns": [
       {
         "pokemonId": 386,
-        "minLevel": 120,
-        "maxLevel": 120,
-        "chance": 0.25
+        "minLevel": 105,
+        "maxLevel": 110,
+        "chance": 0.5
       },
       {
         "pokemonId": 385,
-        "minLevel": 120,
-        "maxLevel": 120,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 380,
-        "minLevel": 110,
+        "minLevel": 105,
         "maxLevel": 110,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 381,
-        "minLevel": 110,
-        "maxLevel": 110,
-        "chance": 0.25
+        "chance": 0.5
       }
     ]
   },
@@ -1416,26 +1404,26 @@ export const hoennRoutes = [
     "spawns": [
       {
         "pokemonId": 352,
-        "minLevel": 78,
-        "maxLevel": 86,
+        "minLevel": 89,
+        "maxLevel": 97,
         "chance": 0.35
       },
       {
         "pokemonId": 100,
-        "minLevel": 76,
-        "maxLevel": 83,
+        "minLevel": 89,
+        "maxLevel": 97,
         "chance": 0.3
       },
       {
         "pokemonId": 309,
-        "minLevel": 76,
-        "maxLevel": 83,
+        "minLevel": 89,
+        "maxLevel": 97,
         "chance": 0.2
       },
       {
         "pokemonId": 101,
-        "minLevel": 79,
-        "maxLevel": 87,
+        "minLevel": 89,
+        "maxLevel": 97,
         "chance": 0.15
       }
     ]
@@ -1445,26 +1433,26 @@ export const hoennRoutes = [
     "spawns": [
       {
         "pokemonId": 345,
-        "minLevel": 80,
-        "maxLevel": 88,
+        "minLevel": 90,
+        "maxLevel": 98,
         "chance": 0.35
       },
       {
         "pokemonId": 347,
-        "minLevel": 80,
-        "maxLevel": 88,
+        "minLevel": 90,
+        "maxLevel": 98,
         "chance": 0.35
       },
       {
         "pokemonId": 346,
-        "minLevel": 82,
-        "maxLevel": 90,
+        "minLevel": 90,
+        "maxLevel": 98,
         "chance": 0.15
       },
       {
         "pokemonId": 348,
-        "minLevel": 82,
-        "maxLevel": 90,
+        "minLevel": 90,
+        "maxLevel": 98,
         "chance": 0.15
       }
     ]
@@ -1474,32 +1462,32 @@ export const hoennRoutes = [
     "spawns": [
       {
         "pokemonId": 73,
-        "minLevel": 86,
-        "maxLevel": 94,
+        "minLevel": 91,
+        "maxLevel": 99,
         "chance": 0.3325
       },
       {
         "pokemonId": 55,
-        "minLevel": 83,
-        "maxLevel": 91,
+        "minLevel": 91,
+        "maxLevel": 99,
         "chance": 0.2375
       },
       {
         "pokemonId": 183,
-        "minLevel": 84,
-        "maxLevel": 92,
+        "minLevel": 91,
+        "maxLevel": 99,
         "chance": 0.2375
       },
       {
         "pokemonId": 184,
-        "minLevel": 85,
-        "maxLevel": 91,
+        "minLevel": 91,
+        "maxLevel": 99,
         "chance": 0.1425
       },
       {
         "pokemonId": 368,
-        "minLevel": 83,
-        "maxLevel": 91,
+        "minLevel": 91,
+        "maxLevel": 99,
         "chance": 0.05
       }
     ]
@@ -1509,32 +1497,32 @@ export const hoennRoutes = [
     "spawns": [
       {
         "pokemonId": 262,
-        "minLevel": 89,
-        "maxLevel": 95,
+        "minLevel": 93,
+        "maxLevel": 101,
         "chance": 0.25
       },
       {
         "pokemonId": 42,
-        "minLevel": 89,
-        "maxLevel": 95,
+        "minLevel": 93,
+        "maxLevel": 101,
         "chance": 0.3
       },
       {
         "pokemonId": 109,
-        "minLevel": 87,
-        "maxLevel": 94,
+        "minLevel": 93,
+        "maxLevel": 101,
         "chance": 0.05
       },
       {
         "pokemonId": 110,
-        "minLevel": 89,
-        "maxLevel": 95,
+        "minLevel": 93,
+        "maxLevel": 101,
         "chance": 0.2
       },
       {
         "pokemonId": 306,
-        "minLevel": 90,
-        "maxLevel": 96,
+        "minLevel": 93,
+        "maxLevel": 101,
         "chance": 0.2
       }
     ]
@@ -1544,26 +1532,26 @@ export const hoennRoutes = [
     "spawns": [
       {
         "pokemonId": 369,
-        "minLevel": 93,
-        "maxLevel": 99,
+        "minLevel": 94,
+        "maxLevel": 102,
         "chance": 0.38
       },
       {
         "pokemonId": 321,
-        "minLevel": 93,
-        "maxLevel": 99,
+        "minLevel": 94,
+        "maxLevel": 102,
         "chance": 0.3325
       },
       {
         "pokemonId": 366,
-        "minLevel": 92,
-        "maxLevel": 97,
+        "minLevel": 94,
+        "maxLevel": 102,
         "chance": 0.2375
       },
       {
         "pokemonId": 230,
-        "minLevel": 96,
-        "maxLevel": 100,
+        "minLevel": 94,
+        "maxLevel": 102,
         "chance": 0.05
       }
     ]
@@ -1573,20 +1561,20 @@ export const hoennRoutes = [
     "spawns": [
       {
         "pokemonId": 377,
-        "minLevel": 105,
-        "maxLevel": 105,
+        "minLevel": 96,
+        "maxLevel": 104,
         "chance": 0.33
       },
       {
         "pokemonId": 378,
-        "minLevel": 105,
-        "maxLevel": 105,
+        "minLevel": 96,
+        "maxLevel": 104,
         "chance": 0.33
       },
       {
         "pokemonId": 379,
-        "minLevel": 105,
-        "maxLevel": 105,
+        "minLevel": 96,
+        "maxLevel": 104,
         "chance": 0.33
       }
     ]
@@ -1596,26 +1584,26 @@ export const hoennRoutes = [
     "spawns": [
       {
         "pokemonId": 287,
-        "minLevel": 75,
-        "maxLevel": 82,
+        "minLevel": 80,
+        "maxLevel": 88,
         "chance": 0.3
       },
       {
         "pokemonId": 63,
-        "minLevel": 76,
-        "maxLevel": 84,
+        "minLevel": 80,
+        "maxLevel": 88,
         "chance": 0.3
       },
       {
         "pokemonId": 351,
-        "minLevel": 77,
-        "maxLevel": 85,
+        "minLevel": 80,
+        "maxLevel": 88,
         "chance": 0.25
       },
       {
         "pokemonId": 137,
-        "minLevel": 76,
-        "maxLevel": 84,
+        "minLevel": 80,
+        "maxLevel": 88,
         "chance": 0.15
       }
     ]
@@ -1625,20 +1613,20 @@ export const hoennRoutes = [
     "spawns": [
       {
         "pokemonId": 252,
-        "minLevel": 80,
-        "maxLevel": 88,
+        "minLevel": 81,
+        "maxLevel": 89,
         "chance": 0.3334
       },
       {
         "pokemonId": 255,
-        "minLevel": 80,
-        "maxLevel": 88,
+        "minLevel": 81,
+        "maxLevel": 89,
         "chance": 0.3333
       },
       {
         "pokemonId": 258,
-        "minLevel": 80,
-        "maxLevel": 88,
+        "minLevel": 81,
+        "maxLevel": 89,
         "chance": 0.3333
       }
     ]
@@ -1648,38 +1636,38 @@ export const hoennRoutes = [
     "spawns": [
       {
         "pokemonId": 360,
-        "minLevel": 92,
-        "maxLevel": 100,
+        "minLevel": 84,
+        "maxLevel": 92,
         "chance": 0.1667
       },
       {
         "pokemonId": 298,
-        "minLevel": 92,
-        "maxLevel": 100,
+        "minLevel": 84,
+        "maxLevel": 92,
         "chance": 0.1667
       },
       {
         "pokemonId": 172,
-        "minLevel": 92,
-        "maxLevel": 100,
+        "minLevel": 84,
+        "maxLevel": 92,
         "chance": 0.1667
       },
       {
         "pokemonId": 174,
-        "minLevel": 92,
-        "maxLevel": 100,
+        "minLevel": 84,
+        "maxLevel": 92,
         "chance": 0.1667
       },
       {
         "pokemonId": 406,
-        "minLevel": 92,
-        "maxLevel": 100,
+        "minLevel": 84,
+        "maxLevel": 92,
         "chance": 0.1666
       },
       {
         "pokemonId": 433,
-        "minLevel": 92,
-        "maxLevel": 100,
+        "minLevel": 84,
+        "maxLevel": 92,
         "chance": 0.1666
       }
     ]
@@ -1689,50 +1677,62 @@ export const hoennRoutes = [
     "spawns": [
       {
         "pokemonId": 373,
-        "minLevel": 96,
-        "maxLevel": 99,
+        "minLevel": 86,
+        "maxLevel": 94,
         "chance": 0.25
       },
       {
         "pokemonId": 376,
-        "minLevel": 96,
-        "maxLevel": 99,
+        "minLevel": 86,
+        "maxLevel": 94,
         "chance": 0.25
       },
       {
         "pokemonId": 350,
-        "minLevel": 95,
-        "maxLevel": 98,
+        "minLevel": 86,
+        "maxLevel": 94,
         "chance": 0.25
       },
       {
         "pokemonId": 289,
-        "minLevel": 97,
-        "maxLevel": 100,
+        "minLevel": 86,
+        "maxLevel": 94,
         "chance": 0.25
       }
     ]
   },
   {
-    "name": "Weather Climax Cave",
+    "name": "Nebula Fissure",
     "spawns": [
       {
         "pokemonId": 382,
         "minLevel": 115,
-        "maxLevel": 115,
-        "chance": 0.33
+        "maxLevel": 119,
+        "chance": 0.2
       },
       {
         "pokemonId": 383,
         "minLevel": 115,
-        "maxLevel": 115,
-        "chance": 0.33
+        "maxLevel": 119,
+        "chance": 0.2
       },
       {
         "pokemonId": 384,
-        "minLevel": 115,
+        "minLevel": 120,
+        "maxLevel": 120,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 380,
+        "minLevel": 110,
         "maxLevel": 115,
-        "chance": 0.33
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 381,
+        "minLevel": 110,
+        "maxLevel": 115,
+        "chance": 0.2
       }
     ]
   },
@@ -1741,14 +1741,14 @@ export const hoennRoutes = [
     "spawns": [
       {
         "pokemonId": 380,
-        "minLevel": 110,
-        "maxLevel": 110,
+        "minLevel": 97,
+        "maxLevel": 105,
         "chance": 0.5
       },
       {
         "pokemonId": 381,
-        "minLevel": 110,
-        "maxLevel": 110,
+        "minLevel": 97,
+        "maxLevel": 105,
         "chance": 0.5
       }
     ]
@@ -1758,20 +1758,20 @@ export const hoennRoutes = [
     "spawns": [
       {
         "pokemonId": 253,
-        "minLevel": 84,
-        "maxLevel": 92,
+        "minLevel": 83,
+        "maxLevel": 91,
         "chance": 0.3333
       },
       {
         "pokemonId": 256,
-        "minLevel": 84,
-        "maxLevel": 92,
+        "minLevel": 83,
+        "maxLevel": 91,
         "chance": 0.3333
       },
       {
         "pokemonId": 259,
-        "minLevel": 84,
-        "maxLevel": 92,
+        "minLevel": 83,
+        "maxLevel": 91,
         "chance": 0.3334
       }
     ]
@@ -1781,14 +1781,14 @@ export const hoennRoutes = [
     "spawns": [
       {
         "pokemonId": 72,
-        "minLevel": 15,
-        "maxLevel": 18,
+        "minLevel": 14,
+        "maxLevel": 17,
         "chance": 0.6
       },
       {
         "pokemonId": 278,
-        "minLevel": 13,
-        "maxLevel": 16,
+        "minLevel": 14,
+        "maxLevel": 17,
         "chance": 0.4
       }
     ]
@@ -1798,18 +1798,18 @@ export const hoennRoutes = [
     "spawns": [
       {
         "pokemonId": 72,
-        "minLevel": 20,
-        "maxLevel": 23,
+        "minLevel": 24,
+        "maxLevel": 27,
         "chance": 0.6
       },
       {
         "pokemonId": 278,
-        "minLevel": 19,
-        "maxLevel": 22,
+        "minLevel": 24,
+        "maxLevel": 27,
         "chance": 0.4
       }
     ]
-  },
+  }
 ];
 
 export const hoennUnlocks = [
@@ -2599,7 +2599,7 @@ export const hoennUnlocks = [
     "challengeName": "Extra Challenge A 5",
     "areaId": "Battle Frontier Facility",
     "unlocks": [
-      "Weather Climax Cave"
+      "The Solitary Atoll"
     ],
     "gift": {
       "item": "Masterball",
@@ -2614,7 +2614,7 @@ export const hoennUnlocks = [
   },
   {
     "challengeName": "Extra Challenge A 6",
-    "areaId": "Weather Climax Cave",
+    "areaId": "The Solitary Atoll",
     "unlocks": [
       "Key to Nebula Fissure Challenge"
     ],
@@ -2625,15 +2625,11 @@ export const hoennUnlocks = [
     "requirements": {
       "catchSpecies": [
         {
-          "species": "Kyogre",
+          "species": "Deoxys",
           "count": 1
         },
         {
-          "species": "Groudon",
-          "count": 1
-        },
-        {
-          "species": "Rayquaza",
+          "species": "Jirachi",
           "count": 1
         }
       ]
@@ -2819,11 +2815,23 @@ export const hoennUnlocks = [
     "requirements": {
       "catchSpecies": [
         {
-          "species": "Deoxys",
+          "species": "Kyogre",
           "count": 1
         },
         {
-          "species": "Jirachi",
+          "species": "Groudon",
+          "count": 1
+        },
+        {
+          "species": "Rayquaza",
+          "count": 1
+        },
+        {
+          "species": "Latias",
+          "count": 1
+        },
+        {
+          "species": "Latios",
           "count": 1
         }
       ]
