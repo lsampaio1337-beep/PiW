@@ -1153,19 +1153,37 @@ window.showProfLabModal = function() {
     let shinySeenTaskHtml = renderActiveTask('shinySeen', state.stats.shiniesSeen || 0, seenTier, profTasks.shinySeen);
     let shinyCaughtTaskHtml = renderActiveTask('shinyCaught', state.stats.shiniesCaught || 0, caughtTier, profTasks.shinyCaught);
 
+    // Final Task inside Shiny Assignment
+    let finalTier = state.stats.finalTaskTier || 0;
+    let finalCurrentVal = (state.stats.caughtSpeciesCount || 0);
+    let currentRegionName = state.currentRegionName || 'Kanto';
+    let regionIdField = currentRegionName.toLowerCase() + '_id';
+    let totalSpecies = state.config.pokemonData.filter(p => Number.isInteger(p.id) && p[regionIdField] !== undefined).length;
+
+    if (finalTier >= profTasks.final.length && profTasks.final.length > 0) {
+        finalCurrentVal = totalSpecies;
+    }
+    if (profTasks.final.length > 0) {
+        profTasks.final[0].req = totalSpecies;
+        profTasks.final[0].text = `Capture ${totalSpecies} Pokemon species`;
+    }
+
+    let finalTaskHtml = "";
+    if (profTasks.final.length > 0) {
+        finalTaskHtml = renderActiveTask('final', finalCurrentVal, finalTier, profTasks.final);
+    }
+
     let shinyTitle = "Shiny Assignment";
 
-    // Only show "Assignment: Completed" once if both are done
-    if (seenTier >= profTasks.shinySeen.length && caughtTier >= profTasks.shinyCaught.length) {
+    if (seenTier >= profTasks.shinySeen.length && caughtTier >= profTasks.shinyCaught.length && finalTier >= profTasks.final.length) {
         shinyTitle = "Shiny Reward";
         shinySeenTaskHtml = "";
         shinyCaughtTaskHtml = "";
+        finalTaskHtml = "";
     } else {
-        // If one is complete but not the other, we don't want duplicate "Assignment: Completed" texts
-        // rendering their own individual completions. Since we only want a single "Completed" when BOTH are done,
-        // we strip out the individual "Assignment: Completed" if it exists.
         if (seenTier >= profTasks.shinySeen.length) shinySeenTaskHtml = "";
         if (caughtTier >= profTasks.shinyCaught.length) shinyCaughtTaskHtml = "";
+        if (finalTier >= profTasks.final.length) finalTaskHtml = "";
     }
 
     let shinyRewardsHtml = "";
@@ -1192,33 +1210,14 @@ window.showProfLabModal = function() {
         `;
     }
 
-    html += `
-        <div style="border: 1px solid #555; padding: 8px; border-radius: 5px; background-color: rgba(0,0,0,0.5);">
-            <h3 style="margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; font-size: 12px;">${shinyTitle}</h3>
-            ${shinySeenTaskHtml}
-            ${shinyCaughtTaskHtml}
-            ${shinyRewardsHtml}
-        </div>
-    `;
-
-    // Final Card
-    let finalTier = state.stats.finalTaskTier || 0;
-    let finalCurrentVal = (state.stats.caughtSpeciesCount || 0);
-    let currentRegionName = state.currentRegionName || 'Kanto';
-    let regionIdField = currentRegionName.toLowerCase() + '_id';
-    let totalSpecies = state.config.pokemonData.filter(p => Number.isInteger(p.id) && p[regionIdField] !== undefined).length;
-
-    if (finalTier >= profTasks.final.length && profTasks.final.length > 0) {
-        finalCurrentVal = totalSpecies;
+    // Final Task Rewards logic
+    for (let i = 0; i < finalTier; i++) {
+        if (profTasks.final && profTasks.final[i]) {
+            shinyRewardsHtml += `<div style="font-size: 9px; margin-top: 5px; padding-left: 5px; border-left: 2px solid #4CAF50;"><b>${profTasks.final[i].reward}</b>: <span style="color: #4CAF50;">${profTasks.final[i].effect}</span></div>`;
+        }
     }
-    // Update req dynamically if it differs (for example, if new Pokemon are added)
-    if (profTasks.final.length > 0) {
-        profTasks.final[0].req = totalSpecies;
-        profTasks.final[0].text = `Capture ${totalSpecies} Pokemon species`;
-    }
-    html += renderCard("Final Assignment", 'final', finalCurrentVal, finalTier, profTasks.final, true);
 
-    html += `</div>`;
+    html += `<div style="border: 1px solid #555; padding: 8px; border-radius: 5px; background-color: rgba(0,0,0,0.5);"><h3 style="margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; font-size: 12px;">${shinyTitle}</h3>${shinySeenTaskHtml}${shinyCaughtTaskHtml}${finalTaskHtml}${shinyRewardsHtml}</div></div>`;
 
     const overlay = document.getElementById('main-view-inner-modal-overlay');
     const title = document.getElementById('main-view-inner-modal-title');
