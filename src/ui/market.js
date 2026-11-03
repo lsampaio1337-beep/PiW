@@ -209,105 +209,8 @@ export function renderPokeMarketTab(category) {
 
 
 
-    let items = [];
     let cols = 6;
-
-
-    if (category === 'upgrades') {
-
-        let ballTier = state.stats.upgrades.ballsTier || 0;
-        let potionTier = state.stats.upgrades.potionsTier || 0;
-        let boxTier = state.stats.upgrades.boxTier || 0;
-        let glassTier = state.stats.upgrades.glassTier || 0;
-        let smartwatchTier = state.stats.upgrades.smartwatchTier || 0;
-        let speedTier = state.stats.upgrades.speedTier || 0;
-        let lootTier = state.stats.upgrades.lootTier || 0;
-        let daycareTier = state.stats.upgrades.daycareTier || 0;
-
-        let ballUpgrade = state.config.balance.expansions.ballPocket[ballTier];
-        let potionUpgrade = state.config.balance.expansions.potionSatchel[potionTier];
-        let boxUpgrade = state.config.balance.expansions.pokemonBox[boxTier];
-        let glassUpgrade = state.config.balance.expansions.glass[glassTier];
-        let smartwatchUpgrade = state.config.balance.expansions.smartwatch[smartwatchTier];
-        let speedUpgrade = state.config.balance.expansions.speed[speedTier];
-        let lootUpgrade = state.config.balance.expansions.loot[lootTier];
-        let daycareUpgrade = state.config.balance.expansions.daycare[daycareTier];
-
-        let unlocked = state.stats.upgradesUnlocked || {};
-
-        if (ballUpgrade && unlocked['balls']) items.push({ ...ballUpgrade, type: 'balls', img: './Assets/Items/Upgrades/' + ballUpgrade.name + '.png', attrLabel: '+' + ballUpgrade.increment + ' Balls<br>in stock' });
-        if (potionUpgrade && unlocked['potions']) items.push({ ...potionUpgrade, type: 'potions', img: './Assets/Items/Upgrades/' + potionUpgrade.name + '.png', attrLabel: '+' + potionUpgrade.increment + ' Potions<br>in stock' });
-        if (boxUpgrade && unlocked['box']) items.push({ ...boxUpgrade, type: 'box', img: './Assets/Items/Upgrades/' + boxUpgrade.name + '.png', attrLabel: '+' + boxUpgrade.increment + ' Pokemons<br>in backpack' });
-        if (glassUpgrade) items.push({ ...glassUpgrade, type: 'glass', img: './Assets/Items/Upgrades/' + glassUpgrade.name + '.png', attrLabel: glassUpgrade.description });
-        if (smartwatchUpgrade && unlocked['smartwatch']) items.push({ ...smartwatchUpgrade, type: 'smartwatch', img: './Assets/Items/Upgrades/' + smartwatchUpgrade.name + '.png', attrLabel: smartwatchUpgrade.description });
-        if (speedUpgrade && unlocked['speed']) items.push({ ...speedUpgrade, type: 'speed', img: './Assets/Items/Upgrades/' + speedUpgrade.name + '.png', attrLabel: speedUpgrade.description });
-        if (lootUpgrade && unlocked['loot']) items.push({ ...lootUpgrade, type: 'loot', img: './Assets/Items/Upgrades/' + lootUpgrade.name + '.png', attrLabel: lootUpgrade.description });
-        if (daycareUpgrade && unlocked['daycare']) items.push({ ...daycareUpgrade, type: 'daycare', img: './Assets/Items/Upgrades/' + daycareUpgrade.name + '.png', attrLabel: daycareUpgrade.description });
-
-        items = items.map(u => ({
-            name: u.name,
-            displayName: u.displayName,
-            price: u.cost,
-            img: u.img,
-            attrLabel: u.attrLabel,
-            upgradeType: u.type
-        }));
-    } else if (category === 'pokeballs') {
-        items = state.config.balance.items.pokeballs.map(b => ({
-            name: b.name,
-            price: b.price,
-            img: `./Assets/Items/Balls/${b.name}.png`,
-            attrLabel: b.name === 'Masterball' ? `Efficiency: 100%` : `Efficiency: ${b.multiplier}x`
-        }));
-    } else if (category === 'potions') {
-        items = state.config.balance.items.potions
-            .filter(p => p.name !== 'Max Potion')
-            .map(p => {
-                let invName = p.name;
-                if (p.name === 'Regular Potion') invName = 'Regular Potion';
-                if (p.name === 'Big') invName = 'Big Potion';
-                return {
-                    name: invName,
-                    price: p.price,
-                    img: `./Assets/Items/Potions/${invName}.png`,
-                    attrLabel: `Heal: ${p.heal >= 999999 ? '100%' : p.heal + ' HP'}`
-                };
-            });
-    } else if (category === 'stones') {
-        const badges = state.trainer.badges || 0;
-        const stonePrice = Math.max(1000, 1000 * badges);
-        let stoneKeys = Object.keys(state.backpack.stones).filter(k => !VITAMINS.includes(k));
-        stoneKeys.sort((a, b) => a.localeCompare(b));
-        items = stoneKeys.map(stoneName => {
-            return {
-                name: stoneName,
-                price: stonePrice,
-                img: `./Assets/Items/Stones/${stoneName}.png`,
-                attrLabel: `Evolution Item`
-            };
-        });
-    } else if (category === 'vitamins') {
-        const badges = state.trainer.badges || 0;
-        const getVitaminPrice = (vitaminName, badges) => {
-            switch(vitaminName) {
-                case 'HP Up': return Math.max(1000, 1000 * badges);
-                case 'Carbo Speed': return Math.max(500, 500 * badges);
-                case 'Protein Atk': return Math.max(750, Math.ceil(750 * badges));
-                case 'Calcium SpAtk': return Math.max(750, Math.ceil(750 * badges));
-                case 'Iron Def': return Math.max(782, Math.round(625 * badges));
-                case 'Zinc SpDef': return Math.max(625, Math.round(625 * badges));
-                default: return Math.max(2000, 1000 * badges);
-            }
-        };
-        items = VITAMINS.map(vitaminName => {
-            return {
-                name: vitaminName,
-                price: getVitaminPrice(vitaminName, badges),
-                img: `./Assets/Items/Vitamins/${vitaminName}.png`,
-                attrLabel: `Stat Item`
-            };
-        });
-    }
+    let items = getMarketBuyItems(category);
 
     if (category === 'upgrades' && items.length === 0) {
         safeSetHTML(content, `<div style="text-align: center; font-size: calc(var(--m-width) * 0.024); color: white; width: 100%; margin-top: calc(var(--m-width) * 0.05); padding-bottom: calc(var(--m-width) * 0.05);">No available upgrade to be bought.</div>`);
@@ -1072,6 +975,107 @@ window.marketSellSelectedPokemon = function() {
 
     if (window.renderPokeMarketSellTab) window.renderPokeMarketSellTab('pokemon');
 };
+
+function getMarketBuyItems(category) {
+    let items = [];
+    if (category === 'upgrades') {
+
+        let ballTier = state.stats.upgrades.ballsTier || 0;
+        let potionTier = state.stats.upgrades.potionsTier || 0;
+        let boxTier = state.stats.upgrades.boxTier || 0;
+        let glassTier = state.stats.upgrades.glassTier || 0;
+        let smartwatchTier = state.stats.upgrades.smartwatchTier || 0;
+        let speedTier = state.stats.upgrades.speedTier || 0;
+        let lootTier = state.stats.upgrades.lootTier || 0;
+        let daycareTier = state.stats.upgrades.daycareTier || 0;
+
+        let ballUpgrade = state.config.balance.expansions.ballPocket[ballTier];
+        let potionUpgrade = state.config.balance.expansions.potionSatchel[potionTier];
+        let boxUpgrade = state.config.balance.expansions.pokemonBox[boxTier];
+        let glassUpgrade = state.config.balance.expansions.glass[glassTier];
+        let smartwatchUpgrade = state.config.balance.expansions.smartwatch[smartwatchTier];
+        let speedUpgrade = state.config.balance.expansions.speed[speedTier];
+        let lootUpgrade = state.config.balance.expansions.loot[lootTier];
+        let daycareUpgrade = state.config.balance.expansions.daycare[daycareTier];
+
+        let unlocked = state.stats.upgradesUnlocked || {};
+
+        if (ballUpgrade && unlocked['balls']) items.push({ ...ballUpgrade, type: 'balls', img: './Assets/Items/Upgrades/' + ballUpgrade.name + '.png', attrLabel: '+' + ballUpgrade.increment + ' Balls<br>in stock' });
+        if (potionUpgrade && unlocked['potions']) items.push({ ...potionUpgrade, type: 'potions', img: './Assets/Items/Upgrades/' + potionUpgrade.name + '.png', attrLabel: '+' + potionUpgrade.increment + ' Potions<br>in stock' });
+        if (boxUpgrade && unlocked['box']) items.push({ ...boxUpgrade, type: 'box', img: './Assets/Items/Upgrades/' + boxUpgrade.name + '.png', attrLabel: '+' + boxUpgrade.increment + ' Pokemons<br>in backpack' });
+        if (glassUpgrade) items.push({ ...glassUpgrade, type: 'glass', img: './Assets/Items/Upgrades/' + glassUpgrade.name + '.png', attrLabel: glassUpgrade.description });
+        if (smartwatchUpgrade && unlocked['smartwatch']) items.push({ ...smartwatchUpgrade, type: 'smartwatch', img: './Assets/Items/Upgrades/' + smartwatchUpgrade.name + '.png', attrLabel: smartwatchUpgrade.description });
+        if (speedUpgrade && unlocked['speed']) items.push({ ...speedUpgrade, type: 'speed', img: './Assets/Items/Upgrades/' + speedUpgrade.name + '.png', attrLabel: speedUpgrade.description });
+        if (lootUpgrade && unlocked['loot']) items.push({ ...lootUpgrade, type: 'loot', img: './Assets/Items/Upgrades/' + lootUpgrade.name + '.png', attrLabel: lootUpgrade.description });
+        if (daycareUpgrade && unlocked['daycare']) items.push({ ...daycareUpgrade, type: 'daycare', img: './Assets/Items/Upgrades/' + daycareUpgrade.name + '.png', attrLabel: daycareUpgrade.description });
+
+        items = items.map(u => ({
+            name: u.name,
+            displayName: u.displayName,
+            price: u.cost,
+            img: u.img,
+            attrLabel: u.attrLabel,
+            upgradeType: u.type
+        }));
+    } else if (category === 'pokeballs') {
+        items = state.config.balance.items.pokeballs.map(b => ({
+            name: b.name,
+            price: b.price,
+            img: `./Assets/Items/Balls/${b.name}.png`,
+            attrLabel: b.name === 'Masterball' ? `Efficiency: 100%` : `Efficiency: ${b.multiplier}x`
+        }));
+    } else if (category === 'potions') {
+        items = state.config.balance.items.potions
+            .filter(p => p.name !== 'Max Potion')
+            .map(p => {
+                let invName = p.name;
+                if (p.name === 'Regular Potion') invName = 'Regular Potion';
+                if (p.name === 'Big') invName = 'Big Potion';
+                return {
+                    name: invName,
+                    price: p.price,
+                    img: `./Assets/Items/Potions/${invName}.png`,
+                    attrLabel: `Heal: ${p.heal >= 999999 ? '100%' : p.heal + ' HP'}`
+                };
+            });
+    } else if (category === 'stones') {
+        const badges = state.trainer.badges || 0;
+        const stonePrice = Math.max(1000, 1000 * badges);
+        let stoneKeys = Object.keys(state.backpack.stones).filter(k => !VITAMINS.includes(k));
+        stoneKeys.sort((a, b) => a.localeCompare(b));
+        items = stoneKeys.map(stoneName => {
+            return {
+                name: stoneName,
+                price: stonePrice,
+                img: `./Assets/Items/Stones/${stoneName}.png`,
+                attrLabel: `Evolution Item`
+            };
+        });
+    } else if (category === 'vitamins') {
+        const badges = state.trainer.badges || 0;
+        const getVitaminPrice = (vitaminName, badges) => {
+            switch(vitaminName) {
+                case 'HP Up': return Math.max(1000, 1000 * badges);
+                case 'Carbo Speed': return Math.max(500, 500 * badges);
+                case 'Protein Atk': return Math.max(750, Math.ceil(750 * badges));
+                case 'Calcium SpAtk': return Math.max(750, Math.ceil(750 * badges));
+                case 'Iron Def': return Math.max(782, Math.round(625 * badges));
+                case 'Zinc SpDef': return Math.max(625, Math.round(625 * badges));
+                default: return Math.max(2000, 1000 * badges);
+            }
+        };
+        items = VITAMINS.map(vitaminName => {
+            return {
+                name: vitaminName,
+                price: getVitaminPrice(vitaminName, badges),
+                img: `./Assets/Items/Vitamins/${vitaminName}.png`,
+                attrLabel: `Stat Item`
+            };
+        });
+    }
+    return items;
+}
+
 window.openPokeMarketBuy = openPokeMarketBuy;
 window.renderPokeMarketTab = renderPokeMarketTab;
 window.buyItem = buyItem;
