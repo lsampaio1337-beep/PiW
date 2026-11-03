@@ -2420,6 +2420,7 @@ export const johtoUnlocks = [
     "areaId": "Route 8",
     "unlocks": [
       "Celadon Gym",
+      "Casino",
       "Casino Starter Trupe"
     ],
     "requirements": {
