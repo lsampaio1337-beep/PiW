@@ -1529,19 +1529,20 @@ function _initializeInitialRoutes(id) {
     state.stats.dex[id] = true;
 }
 
-function selectStarter(id) {
+function _ensureProfileExists() {
     if (!storage.currentProfileId) {
         storage.createNewProfile();
     }
-    const pData = state.config.pokemonData.find(p => p.id === id);
+}
 
+function _addStarterToParty(pData) {
     const starter = _createStarterPokemon(pData);
-
     state.party.push(starter);
     state.stats.hasPickedStarter = true;
     returnToLab();
+}
 
-    // Refresh window after adding chosen pokemon
+function _forcePartyWindowRefresh(pData) {
     const partyWindow = document.getElementById('party-window');
     if (partyWindow && window.windowManager) {
         if (partyWindow.style.display === 'none' || !partyWindow.style.display) {
@@ -1550,33 +1551,38 @@ function selectStarter(id) {
     }
     _refreshPartyWindowHeight(partyWindow);
 
-    // Add identical pokemon to Team
+    // Add identical pokemon to Team to force UI refresh calculation
     const starterCopy = _createStarterPokemon(pData);
     state.party.push(starterCopy);
-
-    // Refresh window after adding duplicate
     _refreshPartyWindowHeight(partyWindow);
 
-    // Remove similar pokemon from Team
+    // Remove the copy
     state.party.pop();
-
-    // Refresh window after removing duplicate
     _refreshPartyWindowHeight(partyWindow);
+}
 
-    _initializeInitialRoutes(id);
-
-    storage.save(state);
-
-    // Continue normal game flow
+function _enableNavigationControls() {
     const navButtons = document.getElementById('main-control');
     if (navButtons) {
         navButtons.style.pointerEvents = 'auto';
         navButtons.style.opacity = '1.0';
     }
+}
+
+function selectStarter(id) {
+    _ensureProfileExists();
+
+    const pData = state.config.pokemonData.find(p => p.id === id);
+
+    _addStarterToParty(pData);
+    _forcePartyWindowRefresh(pData);
+    _initializeInitialRoutes(id);
+
+    storage.save(state);
+
+    _enableNavigationControls();
 
     startGame();
-
-    // Refresh generic lab after assigning to display Assignments UI
     renderProfessorLab();
 }
 
