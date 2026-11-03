@@ -1540,19 +1540,7 @@ function _initializeInitialRoutes(id) {
     state.stats.dex[id] = true;
 }
 
-function selectStarter(id) {
-    if (!storage.currentProfileId) {
-        storage.createNewProfile();
-    }
-    const pData = state.config.pokemonData.find(p => p.id === id);
-
-    const starter = _createStarterPokemon(pData);
-
-    state.party.push(starter);
-    state.stats.hasPickedStarter = true;
-    returnToLab();
-
-    // Refresh window after adding chosen pokemon
+function _forcePartyWindowRefresh(pData) {
     const partyWindow = document.getElementById('party-window');
     if (partyWindow && window.windowManager) {
         if (partyWindow.style.display === 'none' || !partyWindow.style.display) {
@@ -1573,17 +1561,35 @@ function selectStarter(id) {
 
     // Refresh window after removing duplicate
     _refreshPartyWindowHeight(partyWindow);
+}
 
-    _initializeInitialRoutes(id);
-
-    storage.save(state);
-
-    // Continue normal game flow
+function _enableNavButtons() {
     const navButtons = document.getElementById('main-control');
     if (navButtons) {
         navButtons.style.pointerEvents = 'auto';
         navButtons.style.opacity = '1.0';
     }
+}
+
+function selectStarter(id) {
+    if (!storage.currentProfileId) {
+        storage.createNewProfile();
+    }
+    const pData = state.config.pokemonData.find(p => p.id === id);
+
+    const starter = _createStarterPokemon(pData);
+
+    state.party.push(starter);
+    state.stats.hasPickedStarter = true;
+    returnToLab();
+
+    _forcePartyWindowRefresh(pData);
+
+    _initializeInitialRoutes(id);
+
+    storage.save(state);
+
+    _enableNavButtons();
 
     startGame();
 
