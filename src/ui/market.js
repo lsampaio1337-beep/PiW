@@ -209,12 +209,13 @@ export function renderPokeMarketTab(category) {
 
 
 
+    const items = getMarketBuyItems(category);
+    renderMarketBuyItemsList(content, category, items);
+}
+
+function getMarketBuyItems(category) {
     let items = [];
-    let cols = 6;
-
-
     if (category === 'upgrades') {
-
         let ballTier = state.stats.upgrades.ballsTier || 0;
         let potionTier = state.stats.upgrades.potionsTier || 0;
         let boxTier = state.stats.upgrades.boxTier || 0;
@@ -308,7 +309,10 @@ export function renderPokeMarketTab(category) {
             };
         });
     }
+    return items;
+}
 
+function renderMarketBuyItemsList(content, category, items) {
     if (category === 'upgrades' && items.length === 0) {
         safeSetHTML(content, `<div style="text-align: center; font-size: calc(var(--m-width) * 0.024); color: white; width: 100%; margin-top: calc(var(--m-width) * 0.05); padding-bottom: calc(var(--m-width) * 0.05);">No available upgrade to be bought.</div>`);
         return;
@@ -377,6 +381,7 @@ export function renderPokeMarketTab(category) {
 
     safeSetHTML(content, html);
 }
+
 
 export function buyItem(itemId, baseCost, category, upgradeType = null) { return newBuyItem(itemId, baseCost, category, upgradeType); }
 
