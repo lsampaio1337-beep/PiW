@@ -43,6 +43,21 @@
             flex: 1;
             min-width: 150px;
             position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        .slider-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .slider-group input[type="range"] {
+            flex: 1;
+            cursor: pointer;
+        }
+        .slider-group input[type="number"] {
+            width: 80px;
+            text-align: center;
         }
         label {
             display: block;
@@ -51,13 +66,13 @@
             color: #b0b0b0;
         }
         input[type="number"], input[type="text"], select {
-            width: 100%;
             padding: 10px;
             background-color: #2c2c2c;
             border: 1px solid #444;
             color: #fff;
             border-radius: 4px;
             box-sizing: border-box;
+            width: 100%;
         }
         input[type="number"]:focus, input[type="text"]:focus, select:focus {
             outline: none;
@@ -180,23 +195,39 @@
             <h2>Main Data</h2>
             <div class="form-row">
                 <div class="form-group" style="flex: 2;">
-                    <label for="bst">Pokemon Name or BST</label>
-                    <input type="text" id="bst" placeholder="Type name to search, or enter BST..." autocomplete="off">
+                    <label for="searchInput">Search Pokemon (Auto-fills BST)</label>
+                    <input type="text" id="searchInput" placeholder="Type name to search..." autocomplete="off">
                     <div class="search-results" id="searchResults"></div>
                 </div>
                 <div class="form-group">
                     <label for="level">Level</label>
                     <input type="number" id="level" value="5" min="1" max="100">
                 </div>
+            </div>
+
+            <div class="form-row">
                 <div class="form-group">
-                    <label for="quality">Quality (Q)</label>
-                    <input type="number" id="quality" value="1.0" step="0.01">
+                    <label>Base Stat Total (BST)</label>
+                    <div class="slider-group">
+                        <input type="range" id="bstSlider" min="180" max="700" value="318">
+                        <input type="number" id="bst" min="180" max="700" value="318">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Quality (Q)</label>
+                    <div class="slider-group">
+                        <input type="range" id="qualitySlider" min="0.80" max="2.50" step="0.01" value="1.00">
+                        <input type="number" id="quality" min="0.80" max="2.50" step="0.01" value="1.00">
+                    </div>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group">
-                    <label for="totalIV">Total IV</label>
-                    <input type="number" id="totalIV" value="150" min="6" max="600">
+                    <label>Total IV</label>
+                    <div class="slider-group">
+                        <input type="range" id="totalIVSlider" min="6" max="600" value="150">
+                        <input type="number" id="totalIV" min="6" max="600" value="150">
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="ball">Pokeball Type</label>
@@ -274,18 +305,40 @@
             })
             .catch(err => console.error("Error loading pokemon data:", err));
 
-        const bstInput = document.getElementById('bst');
+        const searchInput = document.getElementById('searchInput');
         const searchResults = document.getElementById('searchResults');
 
+        // Sync sliders and inputs
+        const bstSlider = document.getElementById('bstSlider');
+        const bstInput = document.getElementById('bst');
+
+        const qSlider = document.getElementById('qualitySlider');
+        const qInput = document.getElementById('quality');
+
+        const ivSlider = document.getElementById('totalIVSlider');
+        const ivInput = document.getElementById('totalIV');
+
+        function syncInput(source, target) {
+            target.value = source.value;
+            calculateCatchChance();
+        }
+
+        bstSlider.addEventListener('input', () => { selectedPokemonName = null; searchInput.value = ''; syncInput(bstSlider, bstInput); });
+        bstInput.addEventListener('input', () => { selectedPokemonName = null; searchInput.value = ''; syncInput(bstInput, bstSlider); });
+
+        qSlider.addEventListener('input', () => syncInput(qSlider, qInput));
+        qInput.addEventListener('input', () => syncInput(qInput, qSlider));
+
+        ivSlider.addEventListener('input', () => syncInput(ivSlider, ivInput));
+        ivInput.addEventListener('input', () => syncInput(ivInput, ivSlider));
+
         // Live search logic
-        bstInput.addEventListener('input', (e) => {
+        searchInput.addEventListener('input', (e) => {
             const val = e.target.value.toLowerCase();
             selectedPokemonName = null;
 
-            // Allow raw numbers to fall through normally without forcing search box
-            if (!val || !isNaN(val)) {
+            if (!val) {
                 searchResults.style.display = 'none';
-                calculateCatchChance();
                 return;
             }
 
@@ -299,6 +352,8 @@
                     div.innerHTML = `<span class="poke-name">${p.name}</span><span class="poke-bst">BST: ${p.stats.Total}</span>`;
                     div.addEventListener('click', () => {
                         selectedPokemonName = p.name;
+                        searchInput.value = p.name;
+                        bstSlider.value = p.stats.Total;
                         bstInput.value = p.stats.Total;
                         searchResults.style.display = 'none';
                         calculateCatchChance();
@@ -309,12 +364,11 @@
             } else {
                 searchResults.style.display = 'none';
             }
-            calculateCatchChance();
         });
 
         // Hide search results when clicking outside
         document.addEventListener('click', (e) => {
-            if (e.target !== bstInput && e.target !== searchResults) {
+            if (e.target !== searchInput && e.target !== searchResults) {
                 searchResults.style.display = 'none';
             }
         });
@@ -330,8 +384,8 @@
         function calculateCatchChance() {
             let bst = parseFloat(bstInput.value) || 0;
             let level = parseFloat(document.getElementById('level').value) || 1;
-            let quality = parseFloat(document.getElementById('quality').value) || 1.0;
-            let totalIV = parseFloat(document.getElementById('totalIV').value) || 6;
+            let quality = parseFloat(qInput.value) || 1.0;
+            let totalIV = parseFloat(ivInput.value) || 6;
             let ballMultiplier = parseFloat(document.getElementById('ball').value) || 1.0;
             let isShiny = isShinyCheckbox.checked;
 
@@ -368,7 +422,7 @@
         }
 
         // Add event listeners to all other inputs to recalculate on change
-        document.querySelectorAll('input:not(#bst), select').forEach(el => {
+        document.querySelectorAll('input:not(#searchInput):not([type="range"]), select').forEach(el => {
             el.addEventListener('input', calculateCatchChance);
             el.addEventListener('change', calculateCatchChance);
         });
@@ -377,8 +431,8 @@
         document.getElementById('saveBtn').addEventListener('click', () => {
             const bstVal = bstInput.value;
             const level = document.getElementById('level').value;
-            const q = document.getElementById('quality').value;
-            const iv = document.getElementById('totalIV').value;
+            const q = qInput.value;
+            const iv = ivInput.value;
             const ballSel = document.getElementById('ball');
             const ballName = ballSel.options[ballSel.selectedIndex].text.split(' ')[0];
             const isShiny = document.getElementById('isShiny').checked;
