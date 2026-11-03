@@ -304,7 +304,12 @@ const hoennMapCoordinates = {
     "name": "Slateport Docks",
     "x": 33.4,
     "y": 63.99
-  }
+  },
+  "the_solitary_atoll": {
+    "name": "The Solitary Atoll",
+    "x": 46.95,
+    "y": 85.56
+  },
 };
 
 export default hoennMapCoordinates;
