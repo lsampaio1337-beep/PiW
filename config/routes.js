@@ -1631,7 +1631,8 @@ export const unlocks = [
   { "challengeName": "Extra Challenge A 9", "areaId": "Victory Road", "unlocks": ["Cerulean Cave"], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "defeatSpecific": { "name": "Moltres", "count": 5 } } },
   { "challengeName": "Extra Challenge A 10", "areaId": "Cerulean Cave", "unlocks": ["Kanto Pokemon League", "Key for Indigo Summit"], "gift": { "item": "Masterball", "count": 2 }, "requirements": { "defeatSpecific": { "name": "Mewtwo", "count": 5 } } },
   { "challengeName": "Extra Challenge B", "areaId": "Extra Challenge B", "unlocks": ["Key for Indigo Summit"], "requirements": { "catchSpeciesUniqueCount": 150 } },
-  { "challengeName": "Key for Indigo Summit", "areaId": "Key for Indigo Summit", "unlocks": ["Indigo Summit"], "requirements": { "completeChallenges": ["Extra Challenge A 10", "Extra Challenge B"] } }
+  { "challengeName": "Key for Indigo Summit", "areaId": "Key for Indigo Summit", "unlocks": ["Indigo Summit", "Extra Final Challenge"], "requirements": { "completeChallenges": ["Extra Challenge A 10", "Extra Challenge B"] } },
+  { "challengeName": "Extra Final Challenge", "areaId": "Indigo Summit", "gift": { "item": "Masterball", "count": 3 }, "requirements": { "catchSpecies": [{ "species": "Mewtwo", "count": 1 }, { "species": "Mew", "count": 1 }, { "species": "Articuno", "count": 1 }, { "species": "Zapdos", "count": 1 }, { "species": "Moltres", "count": 1 }] } }
 ];
 
 export { routes };
