@@ -448,83 +448,34 @@ def parse_requirements(req_str, area_id):
         catch_rare = []
 
         # We need to split by "and" or "," but first fix specific edge cases
+        req_str_fixed = req_str.replace("Capture all 6 starters", "Catch 1 Bulbasaur, Catch 1 Charmander, Catch 1 Squirtle, Catch 1 Chikorita, Catch 1 Cyndaquil, Catch 1 Totodile")
+        req_str_fixed = re.sub(r"(?<!\band)(?<!,)\s+(Catch|Capture|Get|Defeat)\b", r", \1", req_str_fixed, flags=re.IGNORECASE)
 
-        req_str = req_str.replace("catch", "Catch")
-        req_str = req_str.replace("defeat", "Defeat")
+        parts = [p.strip() for p in req_str_fixed.replace(" and ", ",").split(",")]
 
-        # Special cases handling based on known structures
-        if " and " in req_str or "," in req_str:
-            # We need to split by "and" or "," but first fix specific edge cases
-            parts = [p.strip() for p in req_str.replace(" and ", ",").split(",")]
-
-            # Process parts to see if it's multiple catches or defeats
-            catch_parts = []
-            defeat_parts = []
-
-            current_verb = "Catch"
-            for part in parts:
-                if not part: continue
-                match = re.match(r'^(?:(Catch|Capture|Get|Defeat)\s+)?(\d+)\s+(.+)$', part, re.IGNORECASE)
-                if match:
-                    verb = match.group(1)
-                    if verb: current_verb = verb.capitalize()
-                    count = int(match.group(2))
-                    spec = match.group(3).strip()
-                    if current_verb in ["Catch", "Capture", "Get"]: catch_parts.append((count, spec))
-                    elif current_verb == "Defeat": defeat_parts.append((count, spec))
-
-            for count, spec in catch_parts:
-                if spec == "Water-type Pokémon": reqs["catchByType"] = {"type": "Water", "count": count}
-                elif spec == "Ghost-type Pokémon": reqs["catchByType"] = {"type": "Ghost", "count": count}
-                elif "Rare+" in spec:
-                    clean_spec = spec.replace("Rare+ Pokémon from Route 32", "Any").replace("Rare+ ", "").strip()
-                    if clean_spec == "Any": reqs["catchByQuality"] = {"quality": "Rare", "count": count}
-                    else: catch_rare.append({"species": clean_spec, "quality": "Rare", "count": count})
-                elif "Red Gyarados" in spec: catch_species.append({"species": "Gyarados", "count": count})
-                else: catch_species.append({"species": spec, "count": count})
-
-            for count, spec in defeat_parts:
-                defeat_specific.append({"name": spec, "count": count})
-
-        else:
-            # Revert to the existing behaviour where we substitute missing action verbs and parse
-            req_str_fixed = req_str.replace("Capture all 6 starters", "Catch 1 Bulbasaur, Catch 1 Charmander, Catch 1 Squirtle, Catch 1 Chikorita, Catch 1 Cyndaquil, Catch 1 Totodile")
-            req_str_fixed = re.sub(r"(?<!\band)(?<!,)\s+(Catch|Capture|Get|Defeat)\b", r", \1", req_str_fixed, flags=re.IGNORECASE)
-            req_str_fixed = req_str_fixed.replace(" and ", ", ")
-
-            parts = [p.strip() for p in req_str_fixed.split(",")]
-            current_verb = "Catch"
-
-            for part in parts:
-                if not part:
-                    continue
-                match = re.match(r'^(?:(Catch|Capture|Get|Defeat)\s+)?(\d+)\s+(.+)$', part, re.IGNORECASE)
-                if match:
-                    verb = match.group(1)
-                    if verb:
-                        current_verb = verb.capitalize()
-                    count = int(match.group(2))
-                    spec = match.group(3).strip()
-                    if current_verb in ["Catch", "Capture", "Get"]:
-                        if spec == "Water-type Pokémon":
-                            reqs["catchByType"] = {"type": "Water", "count": count}
-                        elif spec == "Ghost-type Pokémon":
-                            reqs["catchByType"] = {"type": "Ghost", "count": count}
-                        elif "Rare+" in spec:
-                            clean_spec = spec.replace("Rare+ Pokémon from Route 32", "Any").replace("Rare+ ", "").strip()
-                            if clean_spec == "Any":
-                                reqs["catchByQuality"] = {"quality": "Rare", "count": count}
-                            else:
-                                catch_rare.append({"species": clean_spec, "quality": "Rare", "count": count})
-                        elif "Red Gyarados" in spec:
-                             catch_species.append({"species": "Gyarados", "count": count})
-                        elif spec == "all 6 starters":
-                            for s in ["Bulbasaur", "Charmander", "Squirtle", "Chikorita", "Cyndaquil", "Totodile"]:
-                                catch_species.append({"species": s, "count": 1})
-                        else:
-                            catch_species.append({"species": spec, "count": count})
-                    elif current_verb == "Defeat":
-                        defeat_specific.append({"name": spec, "count": count})
+        current_verb = "Catch"
+        for part in parts:
+            if not part: continue
+            match = re.match(r'^(?:(Catch|Capture|Get|Defeat)\s+)?(\d+)\s+(.+)$', part, re.IGNORECASE)
+            if match:
+                verb = match.group(1)
+                if verb: current_verb = verb.capitalize()
+                count = int(match.group(2))
+                spec = match.group(3).strip()
+                if current_verb in ["Catch", "Capture", "Get"]:
+                    if spec == "Water-type Pokémon": reqs["catchByType"] = {"type": "Water", "count": count}
+                    elif spec == "Ghost-type Pokémon": reqs["catchByType"] = {"type": "Ghost", "count": count}
+                    elif "Rare+" in spec:
+                        clean_spec = spec.replace("Rare+ Pokémon from Route 32", "Any").replace("Rare+ ", "").strip()
+                        if clean_spec == "Any": reqs["catchByQuality"] = {"quality": "Rare", "count": count}
+                        else: catch_rare.append({"species": clean_spec, "quality": "Rare", "count": count})
+                    elif "Red Gyarados" in spec: catch_species.append({"species": "Gyarados", "count": count})
+                    elif spec == "all 6 starters":
+                        for s in ["Bulbasaur", "Charmander", "Squirtle", "Chikorita", "Cyndaquil", "Totodile"]:
+                            catch_species.append({"species": s, "count": 1})
+                    else: catch_species.append({"species": spec, "count": count})
+                elif current_verb == "Defeat":
+                    defeat_specific.append({"name": spec, "count": count})
 
         if catch_species:
             reqs["catchSpecies"] = catch_species
