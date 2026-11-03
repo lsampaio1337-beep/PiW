@@ -918,42 +918,62 @@ function logGymCombat(target, moveName, moveType, amount) {
     }
 }
 
-function createDamageNode(amount, isCrit, moveName, moveType, effectiveness) {
-    let dmgNode = document.createElement('div');
-
+export function getDamageInfo(amount, isCrit, moveName, moveType, effectiveness) {
     const typeColor = TYPE_COLORS[moveType] || '#ffffff';
-    let critText = isCrit ? ' Crit(1.5x)' : '';
-    let effText = `${effectiveness}x`;
+    const critText = isCrit ? ' Crit(1.5x)' : '';
+    const effText = `${effectiveness}x`;
+    const iconSrc = `Assets/Extra/Types/Type ${moveType}.png`;
+    const fontSize = isCrit ? '24px' : '18px';
+    const fontStyle = isCrit ? 'italic' : 'normal';
+
+    return {
+        amount,
+        isCrit,
+        moveName,
+        moveType,
+        effectiveness,
+        typeColor,
+        critText,
+        effText,
+        iconSrc,
+        fontSize,
+        fontStyle
+    };
+}
+
+function createDamageNode(amount, isCrit, moveName, moveType, effectiveness) {
+    const info = getDamageInfo(amount, isCrit, moveName, moveType, effectiveness);
+    let dmgNode = document.createElement('div');
 
     // Mitigate XSS: Build inner node safely
     const innerSpan = document.createElement('span');
     innerSpan.style.fontWeight = 'bold';
-    innerSpan.style.fontStyle = isCrit ? 'italic' : 'normal';
+    innerSpan.style.fontStyle = info.fontStyle;
     innerSpan.style.display = 'flex';
     innerSpan.style.alignItems = 'center';
     innerSpan.style.justifyContent = 'center';
     innerSpan.style.textShadow = '1px 1px 2px black';
 
     // Layout: [Amount] [Icon] [Name] [Effectiveness] [Crit]
-    innerSpan.appendChild(document.createTextNode(`${amount} `));
+    innerSpan.appendChild(document.createTextNode(`${info.amount} `));
 
     const iconImg = document.createElement('img');
-    iconImg.src = `Assets/Extra/Types/Type ${moveType}.png`;
+    iconImg.src = info.iconSrc;
     iconImg.style.width = '20px';
     iconImg.style.height = '20px';
     iconImg.style.verticalAlign = 'middle';
     iconImg.style.margin = '0 4px';
     innerSpan.appendChild(iconImg);
 
-    innerSpan.appendChild(document.createTextNode(` ${moveName} ${effText}${critText}`));
+    innerSpan.appendChild(document.createTextNode(` ${info.moveName} ${info.effText}${info.critText}`));
 
     dmgNode.appendChild(innerSpan);
 
     dmgNode.classList.add('floating-damage');
 
     dmgNode.style.position = 'absolute';
-    dmgNode.style.color = typeColor;
-    dmgNode.style.fontSize = isCrit ? '24px' : '18px';
+    dmgNode.style.color = info.typeColor;
+    dmgNode.style.fontSize = info.fontSize;
     dmgNode.style.fontWeight = 'bold';
     dmgNode.style.textShadow = '1px 1px 2px black';
     dmgNode.style.pointerEvents = 'none';
