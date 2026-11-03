@@ -158,59 +158,60 @@ function updateBattleButtonUI() {
 }
 
 function setupDataChannel(channel) {
-    const handleOpen = () => {
-        const connBtn = document.getElementById('btn-mp-connection-status');
-        if (connBtn) {
-            connBtn.style.background = '#2ecc71';
-            connBtn.innerText = 'Connected';
-            connBtn.disabled = false;
-            connBtn.style.cursor = 'pointer';
-
-            // Allow disconnection by clicking
-            connBtn.onclick = () => {
-                if (peerConnection) {
-                    peerConnection.close();
-                }
-                initMultiplayer();
-                connBtn.style.background = '#e74c3c';
-                connBtn.innerText = 'Not Connected';
-                connBtn.disabled = true;
-                connBtn.style.cursor = 'default';
-                connBtn.onmouseenter = null;
-                connBtn.onmouseleave = null;
-                updateBattleButtonUI();
-            };
-
-            // Hover effect
-            connBtn.onmouseenter = () => {
-                connBtn.style.background = '#e74c3c';
-                connBtn.innerText = 'Disconnect';
-            };
-            connBtn.onmouseleave = () => {
-                connBtn.style.background = '#2ecc71';
-                connBtn.innerText = 'Connected';
-            };
-        }
-        updateBattleButtonUI();
-
-        // Send our party data to the opponent
-        channel.send(JSON.stringify({ type: 'party', party: state.party, region: state.currentRegionName }));
-    };
-
-    channel.onopen = handleOpen;
+    channel.onopen = () => handleDataChannelOpen(channel);
     if (channel.readyState === 'open') {
-        handleOpen();
+        handleDataChannelOpen(channel);
     }
 
     channel.onmessage = handleMessage;
+    channel.onclose = handleDataChannelClose;
+}
 
-    channel.onclose = () => {
-        alert("Connection closed.");
-        if (globals.battleSystem && globals.battleSystem.multiplayerState?.isActive) {
-             globals.battleSystem.stopMultiplayerBattle();
-        }
-        initMultiplayer();
-    };
+function handleDataChannelOpen(channel) {
+    const connBtn = document.getElementById('btn-mp-connection-status');
+    if (connBtn) {
+        connBtn.style.background = '#2ecc71';
+        connBtn.innerText = 'Connected';
+        connBtn.disabled = false;
+        connBtn.style.cursor = 'pointer';
+
+        // Allow disconnection by clicking
+        connBtn.onclick = () => {
+            if (peerConnection) {
+                peerConnection.close();
+            }
+            initMultiplayer();
+            connBtn.style.background = '#e74c3c';
+            connBtn.innerText = 'Not Connected';
+            connBtn.disabled = true;
+            connBtn.style.cursor = 'default';
+            connBtn.onmouseenter = null;
+            connBtn.onmouseleave = null;
+            updateBattleButtonUI();
+        };
+
+        // Hover effect
+        connBtn.onmouseenter = () => {
+            connBtn.style.background = '#e74c3c';
+            connBtn.innerText = 'Disconnect';
+        };
+        connBtn.onmouseleave = () => {
+            connBtn.style.background = '#2ecc71';
+            connBtn.innerText = 'Connected';
+        };
+    }
+    updateBattleButtonUI();
+
+    // Send our party data to the opponent
+    channel.send(JSON.stringify({ type: 'party', party: state.party, region: state.currentRegionName }));
+}
+
+function handleDataChannelClose() {
+    alert("Connection closed.");
+    if (globals.battleSystem && globals.battleSystem.multiplayerState?.isActive) {
+         globals.battleSystem.stopMultiplayerBattle();
+    }
+    initMultiplayer();
 }
 
 function handleMessage(event) {
