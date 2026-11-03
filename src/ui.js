@@ -2390,6 +2390,18 @@ async function init() {
 
         let contentHtml = '';
 
+        // Helper function for dynamic height recalculation when tabs change
+        const triggerHeightAdjustment = () => {
+            setTimeout(() => {
+                if (win.adjustHeightForNewContent) {
+                    win.adjustHeightForNewContent();
+                }
+                if (window.windowManager) {
+                    window.windowManager.recalculateWindowSize('window-trainer');
+                }
+            }, 0);
+        };
+
         if (tab === 'statistics') {
             let uniqueSpeciesCaught = 0;
             if (state.stats.caughtSpecies) {
@@ -2505,7 +2517,7 @@ async function init() {
                 </div>
             `;
         } else if (tab === 'badges') {
-            let badgesHtml = '<div style="display: flex; gap: 10px; margin-top: 10px; justify-content: center; flex-wrap: wrap;">';
+            let badgesHtml = '<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 10px; justify-items: center;">';
 
             // To be consistent with gift mapping, we dynamically map badge icons according to sequential gym unlocks
             for (let i = 0; i < state.trainer.badges; i++) {
@@ -2527,7 +2539,7 @@ async function init() {
                 }
 
                 const badgeFile = window.getBadgeFileName(badgeRegion, badgeNum);
-                badgesHtml += `<img src="./Assets/Gym/Badges/${badgeFile}" style="width: 40px; height: 40px;" title="Badge ${i + 1}">`;
+                badgesHtml += `<img src="./Assets/Gym/Badges/${badgeFile}" style="width: 80px; height: 80px;" title="Badge ${i + 1}">`;
             }
             badgesHtml += '</div>';
 
@@ -2536,13 +2548,15 @@ async function init() {
                     ${badgesHtml}
                 </div>
             `;
+            triggerHeightAdjustment();
         } else if (tab === 'catch-rate') {
             const showShiny = options.showShiny || false;
             contentHtml = generateCatchRateHtml(showShiny);
+            triggerHeightAdjustment();
         } else if (tab === 'medals') {
             const regions = ['Kanto', 'Johto', 'Hoenn', 'Sinnoh', 'Unova', 'Kalos', 'Alola', 'Galar', 'Hisui', 'Paldea'];
 
-            let medalsHtml = '<div style="display: grid; grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(5, 1fr); gap: 10px; padding: 10px; height: 100%; overflow: hidden; box-sizing: border-box;">';
+            let medalsHtml = '<div style="display: grid; grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(5, auto); gap: 10px; padding: 10px; padding-bottom: 20px; justify-items: center; align-items: start; box-sizing: border-box;">';
 
             regions.forEach(region => {
                 let caughtCount = 0;
@@ -2618,6 +2632,7 @@ async function init() {
             `;
 
             contentHtml = medalsHtml;
+            triggerHeightAdjustment();
         } else if (tab === 'upgrades') {
             contentHtml = '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; padding: 15px;">';
 
