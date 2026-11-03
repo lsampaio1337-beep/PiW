@@ -266,9 +266,20 @@ window.completeChallenge = function(targetAreaId) {
                 }
             }
         }
-        if (unlock.requirements.catchSpeciesByQuality) {
+if (unlock.requirements.catchSpeciesByQuality) {
              for (let s of unlock.requirements.catchSpeciesByQuality) {
                  if (state.stats.challengeCaughtSpecific) delete state.stats.challengeCaughtSpecific[s.species + "_" + s.quality];
+             }
+        }
+        if (unlock.requirements.catchSpeciesByQualityOrHigher) {
+             let qualities = ["Weak", "Regular", "Uncommon", "Rare", "Epic", "Shiny", "Legendary", "Mythical"];
+             for (let s of unlock.requirements.catchSpeciesByQualityOrHigher) {
+                 let idx = qualities.indexOf(s.quality);
+                 if (idx !== -1 && state.stats.challengeCaughtSpecific) {
+                     for (let i = idx; i < qualities.length; i++) {
+                         delete state.stats.challengeCaughtSpecific[s.species + "_" + qualities[i]];
+                     }
+                 }
              }
         }
         if (unlock.requirements.catchSpeciesAnyOfByQuality) {
@@ -361,9 +372,17 @@ window.cheatProgressChallenge = function(targetAreaId) {
                 state.stats.caughtSpecies[r.species] = (state.stats.caughtSpecies[r.species] || 0) + r.count;
             });
         }
-        if (req.catchSpeciesByQuality) {
+if (req.catchSpeciesByQuality) {
             if (!state.stats.challengeCaughtSpecific) state.stats.challengeCaughtSpecific = {};
             req.catchSpeciesByQuality.forEach(r => {
+                let key = r.species + "_" + r.quality;
+                if (key === '__proto__' || key === 'constructor' || key === 'prototype') return;
+                state.stats.challengeCaughtSpecific[key] = (state.stats.challengeCaughtSpecific[key] || 0) + r.count;
+            });
+        }
+        if (req.catchSpeciesByQualityOrHigher) {
+            if (!state.stats.challengeCaughtSpecific) state.stats.challengeCaughtSpecific = {};
+            req.catchSpeciesByQualityOrHigher.forEach(r => {
                 let key = r.species + "_" + r.quality;
                 if (key === '__proto__' || key === 'constructor' || key === 'prototype') return;
                 state.stats.challengeCaughtSpecific[key] = (state.stats.challengeCaughtSpecific[key] || 0) + r.count;
