@@ -24,6 +24,10 @@ class DayCare {
         this._tickTraining();
     }
 
+    _getTotalIV(pkmn) {
+        return pkmn.ivs.hp + pkmn.ivs.atk + pkmn.ivs.def + pkmn.ivs.spa + pkmn.ivs.spd + pkmn.ivs.spe;
+    }
+
     _tickBreeding() {
         if (!this.slot1.pokemon || !this.slot1.isBreeding || this.slot1.isFinished) return;
 
@@ -37,7 +41,7 @@ class DayCare {
         if (!this.slot2.pokemon) return;
 
         const pkmn = this.slot2.pokemon;
-        const totalIV = pkmn.ivs.hp + pkmn.ivs.atk + pkmn.ivs.def + pkmn.ivs.spa + pkmn.ivs.spd + pkmn.ivs.spe;
+        const totalIV = this._getTotalIV(pkmn);
 
         // If we reach cap organically, keep it frozen
         if (totalIV >= 600) {
@@ -53,14 +57,16 @@ class DayCare {
     }
 
     grantPassiveXP(amount, grantXpCallback) {
-        if (this.slot2.pokemon && this.state.stats && this.state.stats.upgrades && this.state.stats.upgrades.daycareTier >= 2) {
-            // Passively receives 50% of battle XP. Use battleSystem's grantXP for correct level up handling.
-            const xpGained = Number((amount * 0.50).toFixed(2));
-            if (grantXpCallback) {
-                grantXpCallback(this.slot2.pokemon, xpGained);
-            } else {
-                this.slot2.pokemon.xp = Number((this.slot2.pokemon.xp + xpGained).toFixed(2));
-            }
+        if (!this.slot2.pokemon || !this.state.stats?.upgrades?.daycareTier || this.state.stats.upgrades.daycareTier < 2) {
+            return;
+        }
+
+        // Passively receives 50% of battle XP. Use battleSystem's grantXP for correct level up handling.
+        const xpGained = Number((amount * 0.50).toFixed(2));
+        if (grantXpCallback) {
+            grantXpCallback(this.slot2.pokemon, xpGained);
+        } else {
+            this.slot2.pokemon.xp = Number((this.slot2.pokemon.xp + xpGained).toFixed(2));
         }
     }
 
@@ -123,11 +129,11 @@ class DayCare {
 
     completeTrainingCycle() {
         const pkmn = this.slot2.pokemon;
-        const totalIV = pkmn.ivs.hp + pkmn.ivs.atk + pkmn.ivs.def + pkmn.ivs.spa + pkmn.ivs.spd + pkmn.ivs.spe;
+        const totalIV = this._getTotalIV(pkmn);
 
         if (totalIV < 600) {
             let ivsToGain = 1;
-            if (this.state.stats && this.state.stats.upgrades && this.state.stats.upgrades.daycareTier >= 4) {
+            if (this.state.stats?.upgrades?.daycareTier >= 4) {
                 const chance = typeof crypto !== 'undefined' ? (crypto.getRandomValues(new Uint32Array(1))[0] / (0xFFFFFFFF + 1)) : Math.random();
                 if (chance < 0.20) {
                     ivsToGain = 2;
@@ -135,7 +141,7 @@ class DayCare {
             }
 
             for (let i = 0; i < ivsToGain; i++) {
-                const currentTotalIV = pkmn.ivs.hp + pkmn.ivs.atk + pkmn.ivs.def + pkmn.ivs.spa + pkmn.ivs.spd + pkmn.ivs.spe;
+                const currentTotalIV = this._getTotalIV(pkmn);
                 if (currentTotalIV >= 600) break;
 
                 const sub100Stats = [];
@@ -159,7 +165,7 @@ class DayCare {
         if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') window.trackDailyChallenge('daycare_iv', { amount: 1 });
 
         // Reset progress only if we are still under the cap
-        const newTotalIV = pkmn.ivs.hp + pkmn.ivs.atk + pkmn.ivs.def + pkmn.ivs.spa + pkmn.ivs.spd + pkmn.ivs.spe;
+        const newTotalIV = this._getTotalIV(pkmn);
         this.slot2.requiredBattles = (pkmn.quality >= 2.0) ? newTotalIV * 2 : newTotalIV;
         if (this.slot2.requiredBattles === 0) this.slot2.requiredBattles = 1;
 
