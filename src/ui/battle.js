@@ -884,14 +884,21 @@ function scheduleDefeatCallbacks(ball, ballResult, shakeInterval, captureCallbac
 
 
 
+function getGymCombatDetails(target, moveType) {
+    return {
+        attacker: target === 'player' ? 'Enemy' : 'You',
+        typeColor: TYPE_COLORS[moveType] || '#ffffff'
+    };
+}
+
 function logGymCombat(target, moveName, moveType, amount) {
     const log = document.getElementById('gym-combat-log');
     if (!log) return;
 
+    const { attacker, typeColor } = getGymCombatDetails(target, moveType);
+
     const entry = document.createElement('div');
     entry.style.marginBottom = '2px';
-    const attacker = target === 'player' ? 'Enemy' : 'You';
-    const typeColor = TYPE_COLORS[moveType] || '#ffffff';
 
     // Mitigate XSS: Build inner node safely
     entry.textContent = `${attacker} used `;
@@ -918,17 +925,25 @@ function logGymCombat(target, moveName, moveType, amount) {
     }
 }
 
+function getDamageDetails(isCrit, moveType, effectiveness) {
+    return {
+        typeColor: TYPE_COLORS[moveType] || '#ffffff',
+        critText: isCrit ? ' Crit(1.5x)' : '',
+        effText: `${effectiveness}x`,
+        fontStyle: isCrit ? 'italic' : 'normal',
+        fontSize: isCrit ? '24px' : '18px'
+    };
+}
+
 function createDamageNode(amount, isCrit, moveName, moveType, effectiveness) {
     let dmgNode = document.createElement('div');
 
-    const typeColor = TYPE_COLORS[moveType] || '#ffffff';
-    let critText = isCrit ? ' Crit(1.5x)' : '';
-    let effText = `${effectiveness}x`;
+    const details = getDamageDetails(isCrit, moveType, effectiveness);
 
     // Mitigate XSS: Build inner node safely
     const innerSpan = document.createElement('span');
     innerSpan.style.fontWeight = 'bold';
-    innerSpan.style.fontStyle = isCrit ? 'italic' : 'normal';
+    innerSpan.style.fontStyle = details.fontStyle;
     innerSpan.style.display = 'flex';
     innerSpan.style.alignItems = 'center';
     innerSpan.style.justifyContent = 'center';
@@ -945,15 +960,15 @@ function createDamageNode(amount, isCrit, moveName, moveType, effectiveness) {
     iconImg.style.margin = '0 4px';
     innerSpan.appendChild(iconImg);
 
-    innerSpan.appendChild(document.createTextNode(` ${moveName} ${effText}${critText}`));
+    innerSpan.appendChild(document.createTextNode(` ${moveName} ${details.effText}${details.critText}`));
 
     dmgNode.appendChild(innerSpan);
 
     dmgNode.classList.add('floating-damage');
 
     dmgNode.style.position = 'absolute';
-    dmgNode.style.color = typeColor;
-    dmgNode.style.fontSize = isCrit ? '24px' : '18px';
+    dmgNode.style.color = details.typeColor;
+    dmgNode.style.fontSize = details.fontSize;
     dmgNode.style.fontWeight = 'bold';
     dmgNode.style.textShadow = '1px 1px 2px black';
     dmgNode.style.pointerEvents = 'none';
