@@ -4,46 +4,45 @@ import { updateUI } from '../ui.js';
 import { showModal } from '../ui.js';
 import { getCapacity, getCurrentCount } from '../mathEngine.js';
 
-window.claimPendingGift = function(index) {
-    if (!state.stats.pendingGifts || index < 0 || index >= state.stats.pendingGifts.length) return;
+function claimItemGift(gift) {
+    if (!state.backpack) state.backpack = {};
+    let qty = gift.count || 1;
 
-    const gift = state.stats.pendingGifts[index];
+    let isBall = gift.item.includes('ball') || gift.item.includes('Ball');
+    let isPotion = gift.item.includes('Potion');
 
-    if (gift.type === 'item') {
-        if (!state.backpack) state.backpack = {};
-        let qty = gift.count || 1;
-
-        let isBall = gift.item.includes('ball') || gift.item.includes('Ball');
-        let isPotion = gift.item.includes('Potion');
-
-        if (isBall && gift.item !== 'Masterball') {
-            let currentBalls = getCurrentCount(state, 'balls');
-            let maxBalls = getCapacity(state, 'balls');
-            let spaceLeft = maxBalls - currentBalls;
-            if (qty > spaceLeft) {
-                if (window.showGameAlert) window.showGameAlert("Can't collect Ball due to its maximum capacity", "window-gifts");
-                return;
-            }
-        } else if (isPotion) {
-            let currentPotions = getCurrentCount(state, 'potions');
-            let maxPotions = getCapacity(state, 'potions');
-            let spaceLeft = maxPotions - currentPotions;
-            if (qty > spaceLeft) {
-                if (window.showGameAlert) window.showGameAlert("Can't collect Potion due to its maximum capacity", "window-gifts");
-                return;
-            }
+    if (isBall && gift.item !== 'Masterball') {
+        let currentBalls = getCurrentCount(state, 'balls');
+        let maxBalls = getCapacity(state, 'balls');
+        let spaceLeft = maxBalls - currentBalls;
+        if (qty > spaceLeft) {
+            if (window.showGameAlert) window.showGameAlert("Can't collect Ball due to its maximum capacity", "window-gifts");
+            return false;
         }
-
-        if (!state.backpack[gift.item]) state.backpack[gift.item] = 0;
-        state.backpack[gift.item] += qty;
-    } else if (gift.type === 'badge') {
-        state.trainer.badges++;
+    } else if (isPotion) {
+        let currentPotions = getCurrentCount(state, 'potions');
+        let maxPotions = getCapacity(state, 'potions');
+        let spaceLeft = maxPotions - currentPotions;
+        if (qty > spaceLeft) {
+            if (window.showGameAlert) window.showGameAlert("Can't collect Potion due to its maximum capacity", "window-gifts");
+            return false;
+        }
     }
 
+    if (!state.backpack[gift.item]) state.backpack[gift.item] = 0;
+    state.backpack[gift.item] += qty;
+    return true;
+}
+
+function claimBadgeGift() {
+    state.trainer.badges++;
+}
+
+function ensureClaimedGiftsHistory(giftType) {
     if (!state.stats.claimedGifts) {
         state.stats.claimedGifts = [];
         // For backwards compatibility, populate existing badges
-        for (let i = 0; i < state.trainer.badges - (gift.type === 'badge' ? 1 : 0); i++) {
+        for (let i = 0; i < state.trainer.badges - (giftType === 'badge' ? 1 : 0); i++) {
             let gymIndex = i;
             if (state.currentRegionName === 'Johto') {
                 gymIndex = (i < 8) ? i + 9 : i - 8;
@@ -51,6 +50,21 @@ window.claimPendingGift = function(index) {
             state.stats.claimedGifts.push({ type: 'badge', gymIndex: gymIndex });
         }
     }
+}
+
+window.claimPendingGift = function(index) {
+    if (!state.stats.pendingGifts || index < 0 || index >= state.stats.pendingGifts.length) return;
+
+    const gift = state.stats.pendingGifts[index];
+
+    if (gift.type === 'item') {
+        const success = claimItemGift(gift);
+        if (!success) return;
+    } else if (gift.type === 'badge') {
+        claimBadgeGift();
+    }
+
+    ensureClaimedGiftsHistory(gift.type);
     state.stats.claimedGifts.push(gift);
 
     state.stats.pendingGifts.splice(index, 1);
