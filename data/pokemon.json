@@ -23263,7 +23263,6 @@
         "move": "Absorb"
       }
     ],
-    "hoenn_id": 206,
     "sinnoh_id": 25,
     "unova_id": 212,
     "kalos_id": 71,
@@ -23314,7 +23313,6 @@
         "move": "Leaf Storm"
       }
     ],
-    "hoenn_id": 207,
     "sinnoh_id": 27,
     "unova_id": 214,
     "kalos_id": 73,
@@ -24657,7 +24655,6 @@
         "move": "Psychic"
       }
     ],
-    "hoenn_id": 209,
     "sinnoh_id": 82,
     "kalos_id": 264,
     "hisui_id": 195,
@@ -26277,7 +26274,6 @@
         "move": "Zap Cannon"
       }
     ],
-    "hoenn_id": 205,
     "sinnoh_id": 180,
     "unova_id": 174,
     "kalos_id": 377,
@@ -26404,7 +26400,6 @@
         "move": "Rock Wrecker"
       }
     ],
-    "hoenn_id": 210,
     "sinnoh_id": 188,
     "kalos_id": 205,
     "galar_id": 266,
@@ -27041,7 +27036,6 @@
         "move": "Close Combat"
       }
     ],
-    "hoenn_id": 203,
     "sinnoh_id": 160,
     "kalos_id": 67,
     "galar_id": 123,
@@ -27100,7 +27094,6 @@
         "move": "Zap Cannon"
       }
     ],
-    "hoenn_id": 204,
     "sinnoh_id": 156,
     "unova_id": 223,
     "kalos_id": 247,
@@ -27171,7 +27164,6 @@
         "move": "Future Sight"
       }
     ],
-    "hoenn_id": 208,
     "sinnoh_id": 191,
     "galar_id": 137,
     "hisui_id": 160,
@@ -27225,7 +27217,6 @@
         "move": "Phantom Force"
       }
     ],
-    "hoenn_id": 211,
     "sinnoh_id": 208,
     "alola_id": 248,
     "galar_id": 81,
