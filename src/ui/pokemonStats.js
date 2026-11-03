@@ -37,21 +37,17 @@ function getEvolveRequirements(p, evo, state) {
 export function showPokemonStatsByUuid(uuid) {
     let p = null;
     let location = '';
-    let idx = state.party.findIndex(x => x.uuid === uuid);
-    if (idx !== -1) { p = state.party[idx]; location = 'party'; }
-    else {
-        idx = state.breeding.findIndex(x => x.uuid === uuid);
-        if (idx !== -1) { p = state.breeding[idx]; location = 'breeding'; }
-        else {
-            idx = state.training.findIndex(x => x.uuid === uuid);
-            if (idx !== -1) { p = state.training[idx]; location = 'training'; }
-            else {
-                idx = state.storage.findIndex(x => x.uuid === uuid);
-                if (idx !== -1) { p = state.storage[idx]; location = 'storage'; }
-                else {
-                    idx = state.safe.findIndex(x => x.uuid === uuid);
-                    if (idx !== -1) { p = state.safe[idx]; location = 'safe'; }
-                }
+    let idx = -1;
+
+    const locations = ['party', 'breeding', 'training', 'storage', 'safe'];
+    for (const loc of locations) {
+        const list = state[loc];
+        if (list) {
+            idx = list.findIndex(x => x.uuid === uuid);
+            if (idx !== -1) {
+                p = list[idx];
+                location = loc;
+                break;
             }
         }
     }
@@ -103,14 +99,7 @@ function getActionsHtml(p, pData, location, idx) {
     </div>`;
 }
 
-function getIndividualHtml(p, sumIV, actionsHtml) {
-    const ivBar = (val) => `
-        <div style="background: #333; width: 100%; height: 16px; border-radius: 8px; overflow: hidden; position: relative;">
-            <div style="background: #3498db; width: ${val}%; height: 100%;"></div>
-            <div style="position: absolute; top: 0; left: 0; width: 100%; text-align: center; font-size: 12px; line-height: 16px; font-weight: bold; color: white; text-shadow: 1px 1px 1px black;">${val}</div>
-        </div>
-    `;
-
+function getActualStatsHtml(p) {
     const v = p.vitamins || {};
     const getVitHtml = (count, imgName) => {
         if (!count || count <= 0) return '';
@@ -118,37 +107,61 @@ function getIndividualHtml(p, sumIV, actionsHtml) {
     };
 
     return `
+        <div style="background: rgba(0,0,0,0.5); padding: 15px; border-radius: 8px; text-align: left; min-width: 150px; flex: 1; display: flex; flex-direction: column;">
+            <h3 style="margin: 0 0 15px 0; text-align: center; border-bottom: 1px solid #555; padding-bottom: 5px;">Actual Stats</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px 10px; font-size: 14px; text-align: center; flex: 1; align-content: center;">
+                <div>HP<br><b>${p.maxHp}</b>${getVitHtml(v.hp, 'HP Up')}</div>
+                <div>Speed<br><b>${p.currentStats ? p.currentStats.spe : '?'}</b>${getVitHtml(v.spe, 'Carbo Speed')}</div>
+                <div>Atk<br><b>${p.currentStats ? p.currentStats.atk : '?'}</b>${getVitHtml(v.atk, 'Protein Atk')}</div>
+                <div>SpAtk<br><b>${p.currentStats ? p.currentStats.spa : '?'}</b>${getVitHtml(v.spa, 'Calcium SpAtk')}</div>
+                <div>Def<br><b>${p.currentStats ? p.currentStats.def : '?'}</b>${getVitHtml(v.def, 'Iron Def')}</div>
+                <div>SpDef<br><b>${p.currentStats ? p.currentStats.spd : '?'}</b>${getVitHtml(v.spd, 'Zinc SpDef')}</div>
+            </div>
+        </div>
+    `;
+}
+
+function getPokemonInfoHtml(p, sumIV) {
+    return `
+        <div style="background: rgba(0,0,0,0.5); padding: 15px; border-radius: 8px; text-align: center; flex: 1; font-size: 14px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+            <img src="${window.getSpriteUrl(p.id, p.qualityName === 'Shiny')}" style="width: 100px; height: 100px;"><br>
+            <p style="margin: 5px 0;"><b>Type:</b> ${p.types.map(t => formatType(t)).join(' ')}</p>
+            <b>Quality:</b> ${p.qualityName} (Q=${p.quality.toFixed(2)})<br>
+            <b>Sum IVs:</b> ${sumIV}<br>
+        </div>
+    `;
+}
+
+function getIvDistributionHtml(p) {
+    const ivBar = (val) => `
+        <div style="background: #333; width: 100%; height: 16px; border-radius: 8px; overflow: hidden; position: relative;">
+            <div style="background: #3498db; width: ${val}%; height: 100%;"></div>
+            <div style="position: absolute; top: 0; left: 0; width: 100%; text-align: center; font-size: 12px; line-height: 16px; font-weight: bold; color: white; text-shadow: 1px 1px 1px black;">${val}</div>
+        </div>
+    `;
+
+    return `
+        <div style="background: rgba(0,0,0,0.5); padding: 15px; border-radius: 8px; text-align: left; min-width: 200px; flex: 1; display: flex; flex-direction: column;">
+            <h3 style="margin: 0 0 15px 0; text-align: center; border-bottom: 1px solid #555; padding-bottom: 5px;">IV Distribution</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px 10px; font-size: 14px; text-align: center; flex: 1; align-content: center;">
+                <div>HP<br>${ivBar(p.ivs.hp)}</div>
+                <div>Speed<br>${ivBar(p.ivs.spe)}</div>
+                <div>Atk<br>${ivBar(p.ivs.atk)}</div>
+                <div>SpAtk<br>${ivBar(p.ivs.spa)}</div>
+                <div>Def<br>${ivBar(p.ivs.def)}</div>
+                <div>SpDef<br>${ivBar(p.ivs.spd)}</div>
+            </div>
+        </div>
+    `;
+}
+
+
+function getIndividualHtml(p, sumIV, actionsHtml) {
+    return `
         <div style="display: flex; justify-content: space-around; flex-wrap: wrap; align-items: stretch; gap: 10px;">
-            <div style="background: rgba(0,0,0,0.5); padding: 15px; border-radius: 8px; text-align: left; min-width: 150px; flex: 1; display: flex; flex-direction: column;">
-                <h3 style="margin: 0 0 15px 0; text-align: center; border-bottom: 1px solid #555; padding-bottom: 5px;">Actual Stats</h3>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px 10px; font-size: 14px; text-align: center; flex: 1; align-content: center;">
-                    <div>HP<br><b>${p.maxHp}</b>${getVitHtml(v.hp, 'HP Up')}</div>
-                    <div>Speed<br><b>${p.currentStats ? p.currentStats.spe : '?'}</b>${getVitHtml(v.spe, 'Carbo Speed')}</div>
-                    <div>Atk<br><b>${p.currentStats ? p.currentStats.atk : '?'}</b>${getVitHtml(v.atk, 'Protein Atk')}</div>
-                    <div>SpAtk<br><b>${p.currentStats ? p.currentStats.spa : '?'}</b>${getVitHtml(v.spa, 'Calcium SpAtk')}</div>
-                    <div>Def<br><b>${p.currentStats ? p.currentStats.def : '?'}</b>${getVitHtml(v.def, 'Iron Def')}</div>
-                    <div>SpDef<br><b>${p.currentStats ? p.currentStats.spd : '?'}</b>${getVitHtml(v.spd, 'Zinc SpDef')}</div>
-                </div>
-            </div>
-
-            <div style="background: rgba(0,0,0,0.5); padding: 15px; border-radius: 8px; text-align: center; flex: 1; font-size: 14px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                <img src="${window.getSpriteUrl(p.id, p.qualityName === 'Shiny')}" style="width: 100px; height: 100px;"><br>
-                <p style="margin: 5px 0;"><b>Type:</b> ${p.types.map(t => formatType(t)).join(' ')}</p>
-                <b>Quality:</b> ${p.qualityName} (Q=${p.quality.toFixed(2)})<br>
-                <b>Sum IVs:</b> ${sumIV}<br>
-            </div>
-
-            <div style="background: rgba(0,0,0,0.5); padding: 15px; border-radius: 8px; text-align: left; min-width: 200px; flex: 1; display: flex; flex-direction: column;">
-                <h3 style="margin: 0 0 15px 0; text-align: center; border-bottom: 1px solid #555; padding-bottom: 5px;">IV Distribution</h3>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px 10px; font-size: 14px; text-align: center; flex: 1; align-content: center;">
-                    <div>HP<br>${ivBar(p.ivs.hp)}</div>
-                    <div>Speed<br>${ivBar(p.ivs.spe)}</div>
-                    <div>Atk<br>${ivBar(p.ivs.atk)}</div>
-                    <div>SpAtk<br>${ivBar(p.ivs.spa)}</div>
-                    <div>Def<br>${ivBar(p.ivs.def)}</div>
-                    <div>SpDef<br>${ivBar(p.ivs.spd)}</div>
-                </div>
-            </div>
+            ${getActualStatsHtml(p)}
+            ${getPokemonInfoHtml(p, sumIV)}
+            ${getIvDistributionHtml(p)}
         </div>
         ${actionsHtml}
     `;
