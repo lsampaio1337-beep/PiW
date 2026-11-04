@@ -1994,13 +1994,8 @@ async function init() {
             playedDiv.style.marginBottom = "5px";
             playedDiv.textContent = `Last Played: ${lastPlayedStr}`;
 
-            const progressDiv = document.createElement('div');
-            progressDiv.style.fontSize = "14px";
-            progressDiv.style.fontWeight = "normal";
-            progressDiv.textContent = `${lastRoute}${zzzText}`;
 
             leftSide.appendChild(titleDiv);
-            leftSide.appendChild(progressDiv);
 
             rightSide.appendChild(playedDiv);
 
