@@ -766,7 +766,7 @@ window.closeModal = function(windowId) {
 
 export function generateCatchRateHtml(showShiny = false) {
     const balls = ["Pokeball", "Greatball", "Ultraball", "Safariball", "Masterball"];
-    const targetTracker = showShiny ? (state.stats.shinyCatchAttempts || {}) : (state.stats.catchAttempts || {});
+    const targetTracker = state.stats.shinyCatchAttempts || {};
 
     // Collect all pokemon that have been thrown at
     let rowData = [];
@@ -794,10 +794,8 @@ export function generateCatchRateHtml(showShiny = false) {
     }
 
     let html = `<div style="padding: 2%; box-sizing: border-box;">
-    <div style="text-align: center; margin-bottom: 15px;">
-        <button id="btn-catch-rate-shiny-toggle" onclick="window.showTrainerStats('catch-rate', { showShiny: ${!showShiny} }); return false;" style="padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer; background: ${showShiny ? '#fbbf24' : '#6b7280'}; color: white; border: none; border-radius: 5px;">
-            ${showShiny ? 'Showing Shiny Attempts (Click to show Normal)' : 'Showing Normal Attempts (Click to show Shiny)'}
-        </button>
+    <div style="text-align: center; margin-bottom: 15px; font-weight: bold; color: #fbbf24; font-size: 16px;">
+        Showing Shiny Attempts
     </div>
     <div style="max-height: 60vh; overflow-y: auto;">
         <table style="width: 100%; border-collapse: collapse; text-align: center; color: white;">
@@ -816,7 +814,7 @@ export function generateCatchRateHtml(showShiny = false) {
             <tbody>`;
 
     if (rowData.length === 0) {
-        html += `<tr><td colspan="${balls.length + 1}" style="padding: 20px; font-style: italic; color: #94a3b8;">No ${showShiny ? 'shiny ' : ''}catch attempts recorded yet.</td></tr>`;
+        html += `<tr><td colspan="${balls.length + 1}" style="padding: 20px; font-style: italic; color: #94a3b8;">No shiny catch attempts recorded yet.</td></tr>`;
     } else {
         rowData.forEach(row => {
             html += `<tr style="border-bottom: 1px solid #334155; background: rgba(0,0,0,0.2);">
@@ -857,7 +855,8 @@ export function showCatchRateModal(showShiny = false) {
     setTimeout(() => {
         const btn = document.getElementById('btn-catch-rate-shiny-toggle');
         if (btn) {
-            btn.onclick = () => {
+            btn.onclick = (e) => {
+                e.preventDefault();
                 showCatchRateModal(!showShiny);
             };
         }
@@ -2471,7 +2470,7 @@ async function init() {
             }
 
             contentHtml = `
-                <div style="position: relative; height: 100%; display: flex; flex-direction: column;">
+                <div style="position: relative; height: 100%; display: flex; flex-direction: column; padding: 15px; box-sizing: border-box;">
                     <div style="text-align: left; margin-bottom: 20px;">
                         <div style="display: flex; gap: 40px; justify-content: space-between;">
                             <div style="flex: 1;">
@@ -2546,12 +2545,12 @@ async function init() {
                 }
 
                 const badgeFile = window.getBadgeFileName(badgeRegion, badgeNum);
-                badgesHtml += `<img src="./Assets/Gym/Badges/${badgeFile}" style="width: 40px; height: 40px;" title="Badge ${i + 1}">`;
+                badgesHtml += `<img src="./Assets/Gym/Badges/${badgeFile}" style="width: 80px; height: 80px; object-fit: contain;" title="Badge ${i + 1}">`;
             }
             badgesHtml += '</div>';
 
             contentHtml = `
-                <div style="text-align: center; margin-bottom: 20px;">
+                <div style="text-align: center; margin-bottom: 20px; padding: 15px; box-sizing: border-box;">
                     ${badgesHtml}
                 </div>
             `;
@@ -2561,7 +2560,7 @@ async function init() {
         } else if (tab === 'medals') {
             const regions = ['Kanto', 'Johto', 'Hoenn', 'Sinnoh', 'Unova', 'Kalos', 'Alola', 'Galar', 'Hisui', 'Paldea'];
 
-            let medalsHtml = '<div style="display: grid; grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(5, 1fr); gap: 10px; padding: 10px; height: 100%; overflow: hidden; box-sizing: border-box;">';
+            let medalsHtml = '<div style="display: grid; grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(5, 1fr); gap: 10px; padding: 15px; height: 100%; overflow: hidden; box-sizing: border-box;">';
 
             regions.forEach(region => {
                 let caughtCount = 0;
@@ -2638,7 +2637,7 @@ async function init() {
 
             contentHtml = medalsHtml;
         } else if (tab === 'upgrades') {
-            contentHtml = '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; padding: 15px;">';
+            contentHtml = '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; padding: 15px; box-sizing: border-box;">';
 
             if (state.stats.upgrades) {
                 const upgradeTypes = [
