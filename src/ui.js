@@ -1961,14 +1961,9 @@ async function init() {
             btn.style.borderRadius = "5px";
             btn.style.textAlign = "left";
             btn.style.fontWeight = "bold";
-            btn.style.width = "100%";
-            btn.style.margin = "0 auto";
-            btn.style.display = "flex";
-            btn.style.justifyContent = "space-between";
-            btn.style.alignItems = "center";
 
-
-            btn.style.width = "100%"; // We will set width below depending on original sizes requested
+            btn.style.width = "auto";
+            btn.style.minWidth = "100%";
             btn.style.flexDirection = "column";
 
             const textWrapper = document.createElement('div');
@@ -2018,14 +2013,17 @@ async function init() {
             const regions = ['Kanto', 'Johto', 'Hoenn', 'Sinnoh', 'Unova', 'Kalos', 'Alola', 'Galar', 'Hisui', 'Paldea'];
             const medalsContainer = document.createElement('div');
             medalsContainer.style.display = "flex";
-            medalsContainer.style.justifyContent = "space-between";
+            medalsContainer.style.flexWrap = "nowrap"; // Keep them in a single row
+            medalsContainer.style.justifyContent = "center";
             medalsContainer.style.alignItems = "center";
-            medalsContainer.style.width = "100%";
+            medalsContainer.style.gap = "2px";
+            medalsContainer.style.marginLeft = "10px";
             medalsContainer.style.marginTop = "10px";
 
+            let earnedAnyMedal = false;
+
             regions.forEach(region => {
-                let activeTier = 'First';
-                let isGray = true;
+                let activeTier = null;
 
                 // On profile load, state.config is available.
                 if (typeof state !== 'undefined' && state && state.config && state.config.pokemonData) {
@@ -2064,28 +2062,31 @@ async function init() {
 
                     if (hasThird) {
                         activeTier = 'Third';
-                        isGray = false;
                     } else if (hasSecond) {
                         activeTier = 'Second';
-                        isGray = false;
                     } else if (hasFirst) {
                         activeTier = 'First';
-                        isGray = false;
                     }
                 }
 
-                const medalImg = document.createElement('img');
-                medalImg.src = `Assets/Extra/Medals/${region} ${activeTier}.png`;
-                medalImg.alt = `${region} Medal`;
-                medalImg.style.width = "96px";
-                medalImg.style.height = "96px";
-                medalImg.style.objectFit = "contain";
-                medalImg.style.imageRendering = "pixelated";
-                if (isGray) medalImg.style.filter = "grayscale(100%) opacity(0.5)";
-                medalImg.onerror = () => { medalImg.src = `Assets/Extra/Medals/Kanto ${activeTier}.png`; };
-                medalsContainer.appendChild(medalImg);
+                if (activeTier) {
+                    earnedAnyMedal = true;
+                    const medalImg = document.createElement('img');
+                    medalImg.src = `Assets/Extra/Medals/${region} ${activeTier}.png`;
+                    medalImg.alt = `${region} Medal`;
+                    medalImg.style.width = "96px";
+                    medalImg.style.height = "96px";
+                    medalImg.style.objectFit = "contain";
+                    medalImg.style.imageRendering = "pixelated";
+                    medalImg.onerror = () => { medalImg.src = `Assets/Extra/Medals/Kanto ${activeTier}.png`; };
+                    medalsContainer.appendChild(medalImg);
+                }
             });
-            btn.appendChild(medalsContainer);
+
+            if (earnedAnyMedal) {
+                btn.appendChild(medalsContainer);
+            }
+
 
 
             if (pData.isZzZMode) {
