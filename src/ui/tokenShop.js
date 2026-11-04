@@ -145,7 +145,7 @@ function renderBuyableItemActions(item) {
 
 function renderTokenShopItem(item) {
     let isLocked = false;
-    if (item.unlockKey === 'daycare' && (!state.globalStats || !state.globalStats.hasSeenDaycare)) {
+    if (item.unlockKey === 'daycare' && (!state.stats || !state.stats.hasSeenDaycare)) {
         isLocked = true;
     }
 
