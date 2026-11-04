@@ -2615,17 +2615,17 @@ async function init() {
                 let badgeNum = i + 1;
 
                 if (state.config && state.config.gyms) {
-                    let currentRegionGyms = 0;
-                    for (let j = 0; j <= i; j++) {
-                        if (state.config.gyms[j] && state.config.gyms[j].name.includes("Gym")) {
-                            currentRegionGyms++;
-                        }
+                    let gymIndex = i;
+                    // For backwards compatibility and correct ordering in Johto
+                    if (state.currentRegionName === 'Johto') {
+                        if (i < 8) gymIndex = i + 8;
+                        else if (i < 16) gymIndex = i - 8;
                     }
 
-                    let regionIndex = Math.floor((currentRegionGyms - 1) / 8);
+                    let regionIndex = Math.floor(gymIndex / 8);
                     const regions = ['Kanto', 'Johto', 'Hoenn', 'Sinnoh', 'Unova2', 'Kalos', 'Alola', 'Galar', 'Hisui', 'Paldea'];
                     badgeRegion = regions[regionIndex] || 'Kanto';
-                    badgeNum = ((currentRegionGyms - 1) % 8) + 1;
+                    badgeNum = (gymIndex % 8) + 1;
                 }
 
                 const badgeFile = window.getBadgeFileName(badgeRegion, badgeNum);
