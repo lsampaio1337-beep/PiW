@@ -1,5 +1,9 @@
 export const johtoRoutes = [
   {
+    "name": "Spot",
+    "spawns": []
+  },
+  {
     "name": "Route 29",
     "spawns": [
       {
@@ -2157,7 +2161,8 @@ export const johtoUnlocks = [
     "challengeName": "Challenge 18",
     "areaId": "Burned Tower",
     "unlocks": [
-      "Ecruteak Gym"
+      "Ecruteak Gym",
+      "Extra Challenge (Roaming)"
     ],
     "requirements": {
       "defeatSpecific": {
@@ -2533,6 +2538,7 @@ export const johtoUnlocks = [
     "areaId": "Route 8",
     "unlocks": [
       "Celadon Gym",
+      "Celadon Casino",
       "Casino Starter Trupe"
     ],
     "requirements": {
@@ -2944,8 +2950,7 @@ export const johtoUnlocks = [
     "challengeName": "Kanto Extra Challenge 5",
     "areaId": "Casino Late Trupe",
     "unlocks": [
-      "Legendaries Nest",
-      "Key for Mount Silver Apex Challenge"
+      "Legendaries Nest"
     ],
     "requirements": {
       "catchSpecies": [
@@ -2986,7 +2991,8 @@ export const johtoUnlocks = [
     "challengeName": "Kanto Extra Challenge 6",
     "areaId": "Legendaries Nest",
     "unlocks": [
-      "Nebula Fissure"
+      "Nebula Fissure",
+      "Key for Mount Silver Apex Challenge"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3019,7 +3025,7 @@ export const johtoUnlocks = [
     ],
     "requirements": {
       "completeChallenges": [
-        "Kanto Extra Challenge 5",
+        "Kanto Extra Challenge 6",
         "Johto Extra Challenge 5",
         "Extra Challenge (Roaming)"
       ]

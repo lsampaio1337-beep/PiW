@@ -307,7 +307,7 @@ export function cheatAction(action) {
         }
 
         // Ensure Casino spots and machines are unlocked
-        unlockArea('Casino');
+        unlockArea('Celadon Casino');
 
         // Ensure Daycare is unlocked
         unlockArea('Daycare');

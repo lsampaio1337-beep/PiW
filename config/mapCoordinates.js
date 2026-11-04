@@ -149,8 +149,8 @@ const mapCoordinates = {
     "x": 44.21,
     "y": 37.15
   },
-  "casino": {
-    "name": "Casino",
+  "celadon_casino": {
+    "name": "Celadon Casino",
     "x": 50,
     "y": 35.84
   },

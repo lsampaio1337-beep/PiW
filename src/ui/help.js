@@ -190,7 +190,7 @@ const helpContent = {
                     <li><strong>Ejection</strong>: You are forcefully removed from the Safari Zone if your total funds drop below $0.</li>
                 </ul>
             `,
-            "Casino": `
+            "Celadon Casino": `
                 <h3>Gambling Hub</h3>
                 <p>The Casino forces you to pay EVM per individual encounter for a chance at extreme quality.</p>
                 <ul>

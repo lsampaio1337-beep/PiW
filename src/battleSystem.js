@@ -872,7 +872,7 @@ class BattleSystem {
                 alert("Not enough money! You need $" + cost + " to continue hunting here.");
                 this.stop();
                 if (typeof window.navigateToLocation === 'function') {
-                    window.navigateToLocation("Casino");
+                    window.navigateToLocation("Celadon Casino");
                 }
                 return;
             }
@@ -1117,7 +1117,7 @@ class BattleSystem {
 
             // Track seen for pokedex using actual encounter (Ditto or regular)
             if (q.name === "Shiny") {
-                if (this.state.currentRoute === 'Casino') {
+                if (this.state.currentRoute === 'Celadon Casino') {
                     if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') window.trackDailyChallenge('casino_shiny');
                 }
                 this.state.stats.shiniesSeen = (this.state.stats.shiniesSeen || 0) + 1;
@@ -1615,7 +1615,7 @@ class BattleSystem {
                             window.trackDailyChallenge('catch_type', { types: caughtPokemon.types });
                             window.trackDailyChallenge('catch_ball_tier', { ball: this.activeEncounter.caughtBall });
                             if (["Safari Zone", "Kanto Safari Zone"].includes(this.state.currentRoute)) window.trackDailyChallenge('safari_catch');
-                            if (this.state.currentRoute === 'Casino') window.trackDailyChallenge('casino_catch'); // Would need species tracking logic inside trackDailyChallenge if we fully implement it
+                            if (this.state.currentRoute === 'Celadon Casino') window.trackDailyChallenge('casino_catch'); // Would need species tracking logic inside trackDailyChallenge if we fully implement it
                         }
                         if (sumIV < 300) this.state.stats.caughtIVUnder300 = (this.state.stats.caughtIVUnder300 || 0) + 1;
                         if (sumIV < 350) this.state.stats.caughtIVUnder350 = (this.state.stats.caughtIVUnder350 || 0) + 1;
@@ -2324,7 +2324,7 @@ class BattleSystem {
             this.state.stats.seenSpecies[pokemonBase.name] = true;
 
             if (q.name === "Shiny") {
-                if (this.state.currentRoute === 'Casino') {
+                if (this.state.currentRoute === 'Celadon Casino') {
                     if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') window.trackDailyChallenge('casino_shiny');
                 }
                 this.state.stats.shiniesSeen = (this.state.stats.shiniesSeen || 0) + 1;

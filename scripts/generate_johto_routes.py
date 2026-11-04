@@ -290,7 +290,7 @@ challenges_data_raw = [
     ["Challenge 15", "National Park", "Defeat 4 Scyther and Defeat 4 Pinsir", "Route 36 + 2 Bug Stones"],
     ["Challenge 16", "Route 36", "Defeat 5 Sudowoodo", "Route 37"],
     ["Challenge 17", "Route 37", "Catch 1 Ledian and Catch 1 Ariados", "Burned Tower"],
-    ["Challenge 18", "Burned Tower", "Defeat 3 Magmar", "Ecruteak Gym + 2 Fire Stones"],
+    ["Challenge 18", "Burned Tower", "Defeat 3 Magmar", "Ecruteak Gym + Extra Challenge (Roaming) + 2 Fire Stones"],
     ["Challenge 19", "Ecruteak Gym", "Earn Fog Badge (Badge 4)", "Route 38"],
     ["Challenge 20", "Route 38", "Catch 1 Tauros", "Route 39 + Normal Stone"],
     ["Challenge 21", "Route 39", "Catch 1 Farfetch'd", "Cianwood Gym"],
@@ -313,7 +313,7 @@ challenges_data_raw = [
     ["Challenge 37", "Mount Moon", "Capture 1 Crobat", "Cerulean Gym + Rock Tunnel"],
     ["Challenge 38", "Cerulean Gym", "Badge 10", "Vermilion Gym + Badge 10"],
     ["Challenge 39", "Vermilion Gym", "Badge 11", "Route 8 + Badge 11"],
-    ["Challenge 40", "Route 8", "Defeat 20 Slowpoke", "Celadon Gym  + Casino Starter Trupe"],
+    ["Challenge 40", "Route 8", "Defeat 20 Slowpoke", "Celadon Gym  + Celadon Casino + Casino Starter Trupe"],
     ["Challenge 41", "Celadon Gym", "Badge 12", "Saffron Gym + Badge 12"],
     ["Challenge 42", "Saffron Gym", "Badge 13", "Route 12 + Badge 13"],
     ["Challenge 43", "Route 12", "Capture 1 Snorlax", "Fuschia Gym + Safari Zone"],
@@ -333,8 +333,8 @@ challenges_data_raw = [
     ["Kanto Extra Challenge 2", "Casino Babies", "Evolve Pikachu into Raichu", "Casino Special Spot + 1 Masterball"],
     ["Kanto Extra Challenge 3", "Casino Special Spot", "Evolve Porygon into Porygon2", "Casino Eeveelution + Dojo + 1 Masterball"],
     ["Kanto Extra Challenge 4", "Dojo", "Capture 1 Hitmonlee Capture 1 Hitmonchan Capture 1 Hitmontop", "Casino Late Trupe + 2 Fighting Stones"],
-    ["Kanto Extra Challenge 5", "Casino Late Trupe", "Catch 1 Venusaur Catch 1 Charizard Catch 1 Blastoise", "Legendaries Nest + Key for Mount Silver Apex Challenge + 2 Grass Stones + 2 Fire Stones + 2 Water Stones + 1 Masterball"],
-    ["Kanto Extra Challenge 6", "Legendaries Nest", "Get 1 Articuno Get 1 Zapdos Get 1 Moltres", "Nebula Fissure + 2 Masterball"]
+    ["Kanto Extra Challenge 5", "Casino Late Trupe", "Catch 1 Venusaur Catch 1 Charizard Catch 1 Blastoise", "Legendaries Nest + 2 Grass Stones + 2 Fire Stones + 2 Water Stones + 1 Masterball"],
+    ["Kanto Extra Challenge 6", "Legendaries Nest", "Get 1 Articuno Get 1 Zapdos Get 1 Moltres", "Nebula Fissure + Key for Mount Silver Apex Challenge + 2 Masterball"]
 ]
 
 # Load pokemon data
@@ -553,7 +553,7 @@ unlocks.append({
         "unlocks": ["Mount Silver Apex"],
         "requirements": {
             "completeChallenges": [
-                "Kanto Extra Challenge 5",
+                "Kanto Extra Challenge 6",
                 "Johto Extra Challenge 5",
                 "Extra Challenge (Roaming)"
             ]

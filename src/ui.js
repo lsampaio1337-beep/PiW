@@ -3234,8 +3234,8 @@ window.simulateSleepFarm = function() {
             if (["Safari Zone", "Kanto Safari Zone"].includes(state.currentRoute)) {
                 switchView("SAFARI_HUB");
             } else if (state.currentRoute && state.currentRoute.startsWith("Casino - ")) {
-                state.currentRoute = "Casino";
-                window.navigateToLocation("Casino");
+                state.currentRoute = "Celadon Casino";
+                window.navigateToLocation("Celadon Casino");
             } else {
                 returnToLab();
             }

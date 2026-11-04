@@ -608,7 +608,7 @@ export function navigateToLocation(locationName) {
             const safariCost = state.config.balance.safariZonePrice || 500;
             msg.innerText = `Welcome to Safari Zone! Here we charge a fee per battle you have and you can use our SafariBalls at will. Do you wanna enter Safari Zone?`;
         }
-    } else if (locationName === "Casino" || locationName === "Goldenrod Game Corner") {
+    } else if (locationName === "Celadon Casino" || locationName === "Goldenrod Game Corner") {
         window.currentCasinoHub = locationName;
         if (battleSystem) {
              battleSystem.stop();
@@ -648,7 +648,7 @@ export function navigateToLocation(locationName) {
                     </div>
             `;
 
-            if (window.currentCasinoHub === 'Goldenrod Game Corner' || ((window.currentMapRegion === 'Johto' && window.currentCasinoHub !== 'Goldenrod Game Corner') ? isUnlockedByAreaId('Casino Starter Trupe') : isUnlockedByAreaId('Casino'))) {
+            if (window.currentCasinoHub === 'Goldenrod Game Corner' || ((window.currentMapRegion === 'Johto' && window.currentCasinoHub !== 'Goldenrod Game Corner') ? isUnlockedByAreaId('Casino Starter Trupe') : isUnlockedByAreaId('Celadon Casino'))) {
                 machinesHtml += `
                     <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
                         <img src="./Assets/Extra/Casino/${window.currentMapRegion === 'Johto' ? (window.currentCasinoHub === 'Goldenrod Game Corner' ? 'Region2 Johto Lucky Spot.png' : 'Region2 Kanto Babies.png') : 'Region1 Mid Troupe.png'}" alt="${window.currentMapRegion === 'Johto' ? 'Babies' : 'Mid Troupe'}" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
@@ -692,7 +692,7 @@ export function navigateToLocation(locationName) {
             btnContainer.innerHTML = machinesHtml;
         }
     } else if (locationName.startsWith("Casino - ") || locationName === "Casino Starter Trupe" || locationName === "Casino Babies" || locationName === "Casino Special Spot" || locationName === "Casino Eeveelution" || locationName === "Casino Late Trupe") {
-        if (!window.currentCasinoHub) window.currentCasinoHub = "Casino";
+        if (!window.currentCasinoHub) window.currentCasinoHub = "Celadon Casino";
         if (battleSystem) {
              battleSystem.stop();
              battleSystem.activeEncounter = null;
@@ -748,7 +748,7 @@ export function navigateToLocation(locationName) {
         // Overlay transparent divs
         html += `<div class="casino-overlay-btn" onclick="window.startCasinoEncounter(false, '${locationName}')" style="position: absolute; left: ${stdLeft}%; top: ${stdTop}%; width: ${stdWidth}%; height: ${stdHeight}%; cursor: pointer;" title="Standard Encounter ($${state.config.balance.casinoPrices?.standard || 75})"></div>`;
         html += `<div class="casino-overlay-btn" onclick="window.startCasinoEncounter(true, '${locationName}')" style="position: absolute; left: ${shinyLeft}%; top: ${shinyTop}%; width: ${shinyWidth}%; height: ${shinyHeight}%; cursor: pointer;" title="2x Shiny ($${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>`;
-        html += `<button class="casino-overlay-btn" onclick="window.navigateToLocation('Casino')" style="position: absolute; top: 10px; left: 10px; padding: 10px; cursor: pointer; z-index: 100;">Back to Lobby</button>`;
+        html += `<button class="casino-overlay-btn" onclick="window.navigateToLocation('Celadon Casino')" style="position: absolute; top: 10px; left: 10px; padding: 10px; cursor: pointer; z-index: 100;">Back to Lobby</button>`;
 
         // Append to the viewCasino container
         viewCasino.insertAdjacentHTML('beforeend', html);
