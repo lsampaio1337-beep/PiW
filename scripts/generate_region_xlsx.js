@@ -747,8 +747,8 @@ const outFile = `xdata/${region.num}_${region.name}_Data.xlsx`;
 (async () => {
     let counterFile = '';
     let counter = 1;
-    if (fs.existsSync('xlsx.md')) {
-        counterFile = fs.readFileSync('xlsx.md', 'utf8');
+    if (fs.existsSync('xdata/xlsx.md')) {
+        counterFile = fs.readFileSync('xdata/xlsx.md', 'utf8');
         const counterMatch = counterFile.match(/Last Generation Counter:\s*(\d+)/);
         if (counterMatch) counter = parseInt(counterMatch[1]);
     }
@@ -760,6 +760,6 @@ const outFile = `xdata/${region.num}_${region.name}_Data.xlsx`;
     // Increment counter
     if (counterFile) {
         const newCounterFile = counterFile.replace(/Last Generation Counter:\s*\d+/, `Last Generation Counter: ${counter + 1}`);
-        fs.writeFileSync('xlsx.md', newCounterFile);
+        fs.writeFileSync('xdata/xlsx.md', newCounterFile);
     }
 })();
