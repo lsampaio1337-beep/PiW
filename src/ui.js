@@ -2524,7 +2524,7 @@ async function init() {
                 </div>
             `;
         } else if (tab === 'badges') {
-            let badgesHtml = '<div style="display: flex; gap: 10px; margin-top: 10px; justify-content: center; flex-wrap: wrap;">';
+            let badgesHtml = '<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; justify-items: center; align-items: center; margin: 0 auto;">';
 
             // To be consistent with gift mapping, we dynamically map badge icons according to sequential gym unlocks
             for (let i = 0; i < state.trainer.badges; i++) {
