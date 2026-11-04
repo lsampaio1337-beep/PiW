@@ -1146,6 +1146,23 @@ export const johtoRoutes = [
     ]
   },
   {
+    "name": "Diglett Cave",
+    "spawns": [
+      {
+        "pokemonId": 50,
+        "minLevel": 82,
+        "maxLevel": 86,
+        "chance": 0.85
+      },
+      {
+        "pokemonId": 51,
+        "minLevel": 86,
+        "maxLevel": 90,
+        "chance": 0.15
+      }
+    ]
+  },
+  {
     "name": "Route 8",
     "spawns": [
       {
@@ -1339,7 +1356,7 @@ export const johtoRoutes = [
     ]
   },
   {
-    "name": "Fossil Revival",
+    "name": "Fossil Revival Lab",
     "spawns": [
       {
         "pokemonId": 138,
@@ -1374,7 +1391,7 @@ export const johtoRoutes = [
     ]
   },
   {
-    "name": "Pok\u00e9mon Mansion",
+    "name": "Pokemon Mansion",
     "spawns": [
       {
         "pokemonId": 109,
@@ -2346,7 +2363,7 @@ export const johtoUnlocks = [
     "areaId": "Viridian Forest",
     "unlocks": [
       "Pewter Gym",
-      "Fossil Revival"
+      "Fossil Revival Lab"
     ],
     "requirements": {
       "catchSpecies": [
@@ -2405,7 +2422,8 @@ export const johtoUnlocks = [
     "challengeName": "Challenge 40",
     "areaId": "Vermilion Gym",
     "unlocks": [
-      "Route 8"
+      "Route 8",
+      "Diglett Cave"
     ],
     "requirements": {
       "earnBadge": {
@@ -2494,7 +2512,7 @@ export const johtoUnlocks = [
     "areaId": "Sea Routes",
     "unlocks": [
       "Cinnabar Gym",
-      "Pokemansion"
+      "Pokemon Mansion"
     ],
     "requirements": {
       "defeatCountRoute": {
