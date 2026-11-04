@@ -67,4 +67,16 @@ describe('WindowManager', () => {
 
         expect(window.buyItem).toHaveBeenCalledWith('123');
     });
+
+    test('_parseArgs successfully evaluates an object literal', () => {
+        const rawArgs = windowManager._parseArgs("'catch-rate', { showShiny: false }", null);
+        expect(rawArgs).toEqual(['catch-rate', { showShiny: false }]);
+
+        const rawArgs2 = windowManager._parseArgs("'catch-rate', { showShiny: true }", null);
+        expect(rawArgs2).toEqual(['catch-rate', { showShiny: true }]);
+    });
 });
+    test('_parseArgs successfully evaluates nested structures', () => {
+        const rawArgs = windowManager._parseArgs("'catch-rate', { showShiny: { nested: true } }", null);
+        expect(rawArgs).toEqual(['catch-rate', { showShiny: { nested: true } }]);
+    });

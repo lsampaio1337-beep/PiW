@@ -20,15 +20,24 @@ export class WindowManager {
         let currentArg = '';
         let inQuotes = false;
         let quoteChar = '';
+        let objectDepth = 0;
+        let arrayDepth = 0;
+
         for (let i = 0; i < argStr.length; i++) {
             const char = argStr[i];
+
+            if (!inQuotes && char === '{') objectDepth++;
+            if (!inQuotes && char === '}') objectDepth--;
+            if (!inQuotes && char === '[') arrayDepth++;
+            if (!inQuotes && char === ']') arrayDepth--;
+
             if (!inQuotes && (char === "'" || char === '"')) {
                 inQuotes = true;
                 quoteChar = char;
             } else if (inQuotes && char === quoteChar) {
                 inQuotes = false;
                 quoteChar = '';
-            } else if (!inQuotes && char === ',') {
+            } else if (!inQuotes && objectDepth === 0 && arrayDepth === 0 && char === ',') {
                 rawArgs.push(currentArg.trim());
                 currentArg = '';
                 continue;
@@ -47,6 +56,22 @@ export class WindowManager {
             if (s === 'undefined') return undefined;
             if (!isNaN(s) && s !== '') return Number(s);
             if (s === 'this.value') return contextValue;
+
+            if (s.startsWith('{') && s.endsWith('}')) {
+                try {
+                    // Convert simple unquoted keys to quoted strings, and single quotes to double quotes, to make it valid JSON
+                    const jsonStr = s.replace(/([{,]\s*)([a-zA-Z0-9_]+)\s*:/g, '$1"$2":').replace(/'/g, '"');
+                    return JSON.parse(jsonStr);
+                } catch (e) {
+                    return s;
+                }
+            }
+
+            // Strip matching surrounding quotes
+            if ((s.startsWith("'") && s.endsWith("'")) || (s.startsWith('"') && s.endsWith('"'))) {
+                return s.slice(1, -1);
+            }
+
             return s;
         });
     }
