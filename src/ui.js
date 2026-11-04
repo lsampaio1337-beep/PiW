@@ -795,7 +795,7 @@ export function generateCatchRateHtml(showShiny = false) {
 
     let html = `<div style="padding: 2%; box-sizing: border-box;">
     <div style="text-align: center; margin-bottom: 15px;">
-        <button id="btn-catch-rate-shiny-toggle" onclick="window.showTrainerStats('catch-rate', { showShiny: ${!showShiny} })" style="padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer; background: ${showShiny ? '#fbbf24' : '#6b7280'}; color: white; border: none; border-radius: 5px;">
+        <button id="btn-catch-rate-shiny-toggle" onclick="window.showTrainerStats('catch-rate', { showShiny: ${!showShiny} }); return false;" style="padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer; background: ${showShiny ? '#fbbf24' : '#6b7280'}; color: white; border: none; border-radius: 5px;">
             ${showShiny ? 'Showing Shiny Attempts (Click to show Normal)' : 'Showing Normal Attempts (Click to show Shiny)'}
         </button>
     </div>
@@ -2524,7 +2524,7 @@ async function init() {
                 </div>
             `;
         } else if (tab === 'badges') {
-            let badgesHtml = '<div style="display: flex; gap: 10px; margin-top: 10px; justify-content: center; flex-wrap: wrap;">';
+            let badgesHtml = '<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 10px; justify-items: center;">';
 
             // To be consistent with gift mapping, we dynamically map badge icons according to sequential gym unlocks
             for (let i = 0; i < state.trainer.badges; i++) {
