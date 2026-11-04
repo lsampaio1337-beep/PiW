@@ -795,13 +795,14 @@ export function generateCatchRateHtml(showShiny = false) {
 
     let html = `<div style="padding: 2%; box-sizing: border-box;">
     <div style="max-height: 60vh; overflow-y: auto;">
-        <table style="width: 100%; border-collapse: collapse; text-align: center; color: white;">
+        <table style="width: 100%; border-collapse: separate; border-spacing: 0; text-align: center; color: white;">
             <thead>
                 <tr style="background: rgba(255,255,255,0.1);">
-                    <th style="padding: 8px; border-bottom: 1px solid #475569;">Pokémon</th>`;
+                    <th style="padding: 8px; border-bottom: 1px solid #475569; border-top-left-radius: 8px;">Pokémon</th>`;
 
-    balls.forEach(b => {
-        html += `<th style="padding: 8px; border-bottom: 1px solid #475569;">
+    balls.forEach((b, i) => {
+        const isLast = i === balls.length - 1;
+        html += `<th style="padding: 8px; border-bottom: 1px solid #475569; ${isLast ? 'border-top-right-radius: 8px;' : ''}">
             <img src="Assets/Items/Balls/${b}.png" style="width: 24px; height: 24px;" alt="${b}" title="${b}"><br>${b}
         </th>`;
     });
@@ -2541,7 +2542,7 @@ async function init() {
                 }
 
                 const badgeFile = window.getBadgeFileName(badgeRegion, badgeNum);
-                badgesHtml += `<img src="./Assets/Gym/Badges/${badgeFile}" style="width: 100px; height: 100px;" title="Badge ${i + 1}">`;
+                badgesHtml += `<div style="background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 15px; display: flex; justify-content: center; align-items: center; box-sizing: border-box;"><img src="./Assets/Gym/Badges/${badgeFile}" style="width: 100px; height: 100px; object-fit: contain;" title="Badge ${i + 1}"></div>`;
             }
             badgesHtml += '</div>';
 
@@ -2685,7 +2686,7 @@ async function init() {
                             }
 
                             contentHtml += `
-                                <div style="background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; padding: 15px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 10px;">
+                                <div class="upgrade-item" style="background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; padding: 15px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 10px; transition: all 0.2s ease-in-out;">
                                     <div style="font-size: 14px; font-weight: bold; color: white;">${displayName}</div>
                                     <img src="./Assets/Items/Upgrades/${configItem.name}.png" style="width: 50px; height: 50px; object-fit: contain;" alt="${displayName}">
                                     <div style="font-size: 12px; color: #cbd5e1; line-height: 1.3;">${description}</div>
@@ -2698,7 +2699,17 @@ async function init() {
 
             contentHtml += '</div>';
 
-            if (contentHtml === '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px;"></div>') {
+            contentHtml += `
+                <style>
+                    .upgrade-item:hover {
+                        background: rgba(255, 255, 255, 0.1) !important;
+                        border-color: rgba(255, 255, 255, 0.5) !important;
+                        box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+                    }
+                </style>
+            `;
+
+            if (contentHtml.includes('<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px;"></div>')) {
                 contentHtml = '<div style="text-align: center; font-style: italic; color: #ccc;">No upgrades purchased yet.</div>';
             }
         }
