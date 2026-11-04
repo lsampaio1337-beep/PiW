@@ -34,7 +34,7 @@ const { pokedexIndexes } = loadDataFile('config/pokedexIndexes.js', ['pokedexInd
 const { types } = loadDataFile('config/types.js', ['types']);
 
 const REGIONS = [
-    { num: 1, name: 'Kanto', prefix: '', routesVar: 'routes', unlocksVar: null, mapVar: 'mapCoordinates' },
+    { num: 1, name: 'Kanto', prefix: '', routesVar: 'routes', unlocksVar: 'unlocks', mapVar: 'mapCoordinates' },
     { num: 2, name: 'Johto', prefix: 'johto', routesVar: 'johtoRoutes', unlocksVar: 'johtoUnlocks', mapVar: 'johtoMapCoordinates' },
     { num: 3, name: 'Hoenn', prefix: 'hoenn', routesVar: 'hoennRoutes', unlocksVar: 'hoennUnlocks', mapVar: 'hoennMapCoordinates' },
     { num: 4, name: 'Sinnoh', prefix: 'sinnoh', routesVar: 'sinnohRoutes', unlocksVar: 'sinnohUnlocks', mapVar: 'sinnohMapCoordinates' },
@@ -100,7 +100,6 @@ async function processRegion(region, counter) {
         const loaded = loadDataFile(routesFile, varsToLoad);
         if (loaded[region.routesVar]) routes = loaded[region.routesVar];
         if (region.unlocksVar && loaded[region.unlocksVar]) unlocks = loaded[region.unlocksVar];
-        if (region.num === 1) unlocks = routes;
     } else {
         console.error(`Routes file not found: ${routesFile}`);
         return;
@@ -472,10 +471,18 @@ const mainSeenSets = [];
     // Add remaining maps that haven't been added yet
     const generatedRoutes = new Set(routesData.map(r => r["Route"]));
     const allMapNames = Object.values(mapCoords).map(m => m.name);
-    allMapNames.forEach(mapName => {
+
+    // Also include any route explicitly defined in the routes file, even if it lacks mapCoords
+    const allDefinedRoutes = routes.map(r => r.name).filter(Boolean);
+    const spotsToProcess = new Set([...allMapNames, ...allDefinedRoutes]);
+
+    spotsToProcess.forEach(mapName => {
         if (!generatedRoutes.has(mapName)) {
             const r = routes.find(ro => ro.name === mapName) || {};
             const spawns = r.spawns || [];
+
+            // Re-check Map Ok because some fallback routes might not have mapCoords
+            const mapOkStr = allMapNames.includes(mapName) ? "Yes" : "No";
 
             let avgBST = 0;
             if (spawns.length > 0) {
@@ -506,7 +513,7 @@ const mainSeenSets = [];
                     "Pokemon/Type Ok?": "",
                     "BST": "",
                     "Pokemon/BST Ok?": "",
-                    "Map Ok?": "Yes",
+                    "Map Ok?": mapOkStr,
                     "Will Unlock": "",
                     "Requisite": "",
                     "Reward": ""
@@ -609,7 +616,7 @@ const mainSeenSets = [];
                         "Pokemon/Type Ok?": typeOk,
                         "BST": bst,
                         "Pokemon/BST Ok?": bstOk,
-                        "Map Ok?": "Yes",
+                        "Map Ok?": mapOkStr,
                         "Will Unlock": "",
                         "Requisite": "",
                         "Reward": ""
