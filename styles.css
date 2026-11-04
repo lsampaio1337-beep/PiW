@@ -552,13 +552,15 @@ input[type="number"] {
     height: 100%;
 }
 
-#window-bonus-candy .window-content-container {
+#window-bonus-candy .window-content-container,
+#window-trainer .window-content-container {
     padding: 2% !important;
 }
 
 #main-view-window .content-panel,
 #top-bar-window .content-panel,
-#party-window .content-panel {
+#party-window .content-panel,
+#window-trainer .content-panel {
     padding: 0 !important;
 }
 

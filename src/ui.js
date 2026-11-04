@@ -2727,6 +2727,11 @@ async function init() {
                 }
             }
         }
+
+        const trainerWin = document.getElementById('window-trainer');
+        if (trainerWin && typeof trainerWin.adjustHeightForNewContent === 'function') {
+            trainerWin.adjustHeightForNewContent();
+        }
     };
 
     bindBtn('btn-stats', () => {
