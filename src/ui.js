@@ -2459,7 +2459,7 @@ async function init() {
             }
 
             contentHtml = `
-                <div style="position: relative; height: 100%; display: flex; flex-direction: column;">
+                <div style="position: relative; height: 100%; display: flex; flex-direction: column; padding: 2%; box-sizing: border-box;">
                     <div style="text-align: left;">
                         <div style="display: flex; gap: 40px; justify-content: space-between;">
                             <div style="flex: 1;">
@@ -2539,7 +2539,7 @@ async function init() {
             badgesHtml += '</div>';
 
             contentHtml = `
-                <div style="text-align: center;">
+                <div style="text-align: center; padding: 2%; box-sizing: border-box;">
                     ${badgesHtml}
                 </div>
             `;
@@ -2549,7 +2549,7 @@ async function init() {
         } else if (tab === 'medals') {
             const regions = ['Kanto', 'Johto', 'Hoenn', 'Sinnoh', 'Unova', 'Kalos', 'Alola', 'Galar', 'Hisui', 'Paldea'];
 
-            let medalsHtml = '<div style="display: grid; grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(5, 1fr); gap: 10px; height: 100%; overflow: hidden; box-sizing: border-box;">';
+            let medalsHtml = '<div style="display: grid; grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(5, 1fr); gap: 10px; height: 100%; padding: 2%; overflow: hidden; box-sizing: border-box;">';
 
             regions.forEach(region => {
                 let caughtCount = 0;
@@ -2626,7 +2626,7 @@ async function init() {
 
             contentHtml = medalsHtml;
         } else if (tab === 'upgrades') {
-            contentHtml = '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px;">';
+            contentHtml = '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; padding: 2%; box-sizing: border-box;">';
 
             if (state.stats.upgrades) {
                 const upgradeTypes = [
@@ -2702,11 +2702,7 @@ async function init() {
         if (win) {
             const innerContent = win.querySelector('.window-content-container');
             if (innerContent) {
-                if (tab === 'catch-rate') {
-                    innerContent.style.setProperty('padding', '0px', 'important');
-                } else {
-                    innerContent.style.setProperty('padding', '15px', 'important');
-                }
+                innerContent.style.setProperty('padding', '0px', 'important');
             }
             setTimeout(() => {
                 if (typeof win.adjustHeightForNewContent === 'function') {
