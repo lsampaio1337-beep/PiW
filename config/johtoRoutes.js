@@ -193,6 +193,12 @@ export const johtoRoutes = [
     "name": "Route 33",
     "spawns": [
       {
+        "pokemonId": 190,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
         "pokemonId": 74,
         "minLevel": 10,
         "maxLevel": 14,
@@ -578,6 +584,12 @@ export const johtoRoutes = [
     "name": "Route 47",
     "spawns": [
       {
+        "pokemonId": 214,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
         "pokemonId": 56,
         "minLevel": 38,
         "maxLevel": 43,
@@ -934,6 +946,12 @@ export const johtoRoutes = [
     "name": "Lake of Rage",
     "spawns": [
       {
+        "pokemonId": 48,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
         "pokemonId": 129,
         "minLevel": 48,
         "maxLevel": 55,
@@ -1229,6 +1247,18 @@ export const johtoRoutes = [
   {
     "name": "Safari Zone",
     "spawns": [
+      {
+        "pokemonId": 203,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 114,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
       {
         "pokemonId": 33,
         "minLevel": 86,

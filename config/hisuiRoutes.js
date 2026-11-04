@@ -1438,6 +1438,18 @@ export const hisuiRoutes = {
   "Snowpoint Temple": {
       pokes: [
           {
+            "id": 486,
+            "minLevel": 1,
+            "maxLevel": 1,
+            "probability": 0
+          },
+          {
+            "id": 215,
+            "minLevel": 1,
+            "maxLevel": 1,
+            "probability": 0
+          },
+          {
               id: 95,
               minLevel: 73,
               maxLevel: 75,
@@ -2086,6 +2098,36 @@ export const hisuiRoutes = {
   "Wayward Cave": {
       pokes: [
           {
+            "id": 443,
+            "minLevel": 1,
+            "maxLevel": 1,
+            "probability": 0
+          },
+          {
+            "id": 436,
+            "minLevel": 1,
+            "maxLevel": 1,
+            "probability": 0
+          },
+          {
+            "id": 95,
+            "minLevel": 1,
+            "maxLevel": 1,
+            "probability": 0
+          },
+          {
+            "id": 74,
+            "minLevel": 1,
+            "maxLevel": 1,
+            "probability": 0
+          },
+          {
+            "id": 41,
+            "minLevel": 1,
+            "maxLevel": 1,
+            "probability": 0
+          },
+          {
               id: 396,
               minLevel: 85,
               maxLevel: 87,
@@ -2248,6 +2290,42 @@ export const hisuiRoutes = {
   "Lake Verity": {
       pokes: [
           {
+            "id": 393,
+            "minLevel": 1,
+            "maxLevel": 1,
+            "probability": 0
+          },
+          {
+            "id": 387,
+            "minLevel": 1,
+            "maxLevel": 1,
+            "probability": 0
+          },
+          {
+            "id": 129,
+            "minLevel": 1,
+            "maxLevel": 1,
+            "probability": 0
+          },
+          {
+            "id": 390,
+            "minLevel": 1,
+            "maxLevel": 1,
+            "probability": 0
+          },
+          {
+            "id": 396,
+            "minLevel": 1,
+            "maxLevel": 1,
+            "probability": 0
+          },
+          {
+            "id": 399,
+            "minLevel": 1,
+            "maxLevel": 1,
+            "probability": 0
+          },
+          {
               id: 501,
               minLevel: 82,
               maxLevel: 84,
@@ -2275,6 +2353,30 @@ export const hisuiRoutes = {
   },
   "Lake Valor": {
       pokes: [
+          {
+            "id": 482,
+            "minLevel": 1,
+            "maxLevel": 1,
+            "probability": 0
+          },
+          {
+            "id": 433,
+            "minLevel": 1,
+            "maxLevel": 1,
+            "probability": 0
+          },
+          {
+            "id": 108,
+            "minLevel": 1,
+            "maxLevel": 1,
+            "probability": 0
+          },
+          {
+            "id": 54,
+            "minLevel": 1,
+            "maxLevel": 1,
+            "probability": 0
+          },
           {
               id: 404,
               minLevel: 82,

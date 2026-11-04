@@ -3,6 +3,42 @@ export const galarRoutes = [
     "name": "Route 1",
     "spawns": [
       {
+        "pokemonId": 640,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 116,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 403,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 577,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 574,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 280,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
         "pokemonId": 819,
         "minLevel": 1,
         "maxLevel": 3,
@@ -55,6 +91,42 @@ export const galarRoutes = [
   {
     "name": "Route 2",
     "spawns": [
+      {
+        "pokemonId": 442,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 661,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 80,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 175,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 281,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 519,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
       {
         "pokemonId": 833,
         "minLevel": 5,
@@ -109,6 +181,18 @@ export const galarRoutes = [
     "name": "Rolling Fields",
     "spawns": [
       {
+        "pokemonId": 292,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 761,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
         "pokemonId": 225,
         "minLevel": 7,
         "maxLevel": 9,
@@ -155,6 +239,18 @@ export const galarRoutes = [
   {
     "name": "Dappled Grove",
     "spawns": [
+      {
+        "pokemonId": 546,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 182,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
       {
         "pokemonId": 599,
         "minLevel": 10,
@@ -362,6 +458,12 @@ export const galarRoutes = [
     "name": "North Lake Miloch",
     "spawns": [
       {
+        "pokemonId": 45,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
         "pokemonId": 524,
         "minLevel": 20,
         "maxLevel": 23,
@@ -414,6 +516,12 @@ export const galarRoutes = [
   {
     "name": "Route 3",
     "spawns": [
+      {
+        "pokemonId": 222,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
       {
         "pokemonId": 829,
         "minLevel": 23,
@@ -533,6 +641,24 @@ export const galarRoutes = [
     "name": "Route 4",
     "spawns": [
       {
+        "pokemonId": 369,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 551,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 4,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
         "pokemonId": 25,
         "minLevel": 27,
         "maxLevel": 30,
@@ -597,6 +723,24 @@ export const galarRoutes = [
   {
     "name": "Route 5",
     "spawns": [
+      {
+        "pokemonId": 753,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 44,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 43,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
       {
         "pokemonId": 825,
         "minLevel": 29,
@@ -951,6 +1095,12 @@ export const galarRoutes = [
     "name": "Route 6",
     "spawns": [
       {
+        "pokemonId": 79,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
         "pokemonId": 814,
         "minLevel": 51,
         "maxLevel": 56,
@@ -1076,6 +1226,18 @@ export const galarRoutes = [
     "name": "Bridge Field",
     "spawns": [
       {
+        "pokemonId": 607,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 95,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
         "pokemonId": 686,
         "minLevel": 40,
         "maxLevel": 44,
@@ -1140,6 +1302,24 @@ export const galarRoutes = [
   {
     "name": "Stony Wilderness",
     "spawns": [
+      {
+        "pokemonId": 446,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 763,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 521,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
       {
         "pokemonId": 343,
         "minLevel": 42,
@@ -1282,6 +1462,12 @@ export const galarRoutes = [
     "name": "Hammerlocke Hills",
     "spawns": [
       {
+        "pokemonId": 776,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
         "pokemonId": 177,
         "minLevel": 48,
         "maxLevel": 52,
@@ -1400,6 +1586,12 @@ export const galarRoutes = [
     "name": "Route 7",
     "spawns": [
       {
+        "pokemonId": 137,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
         "pokemonId": 828,
         "minLevel": 55,
         "maxLevel": 60,
@@ -1470,6 +1662,18 @@ export const galarRoutes = [
   {
     "name": "Route 8",
     "spawns": [
+      {
+        "pokemonId": 120,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 320,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
       {
         "pokemonId": 452,
         "minLevel": 57,
@@ -1684,6 +1888,36 @@ export const galarRoutes = [
     "name": "Lake of Outrage",
     "spawns": [
       {
+        "pokemonId": 704,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 479,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 579,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 576,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 468,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
         "pokemonId": 875,
         "minLevel": 64,
         "maxLevel": 70,
@@ -1748,6 +1982,12 @@ export const galarRoutes = [
   {
     "name": "Route 10",
     "spawns": [
+      {
+        "pokemonId": 147,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
       {
         "pokemonId": 554,
         "minLevel": 70,
@@ -1861,6 +2101,12 @@ export const galarRoutes = [
     "name": "Soothing Wetlands",
     "spawns": [
       {
+        "pokemonId": 605,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
         "pokemonId": 819,
         "minLevel": 47,
         "maxLevel": 51,
@@ -1919,6 +2165,18 @@ export const galarRoutes = [
   {
     "name": "Forest of Focus",
     "spawns": [
+      {
+        "pokemonId": 636,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 570,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
       {
         "pokemonId": 374,
         "minLevel": 65,
@@ -1985,6 +2243,24 @@ export const galarRoutes = [
     "name": "Training Lowlands",
     "spawns": [
       {
+        "pokemonId": 764,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 3,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 782,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
         "pokemonId": 123,
         "minLevel": 82,
         "maxLevel": 90,
@@ -2044,6 +2320,18 @@ export const galarRoutes = [
     "name": "Master Dojo",
     "spawns": [
       {
+        "pokemonId": 7,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 1,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
         "pokemonId": 891,
         "minLevel": 100,
         "maxLevel": 100,
@@ -2054,6 +2342,18 @@ export const galarRoutes = [
   {
     "name": "Challenge Beach",
     "spawns": [
+      {
+        "pokemonId": 769,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 405,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
       {
         "pokemonId": 54,
         "minLevel": 64,
@@ -2095,6 +2395,36 @@ export const galarRoutes = [
   {
     "name": "Workout Sea",
     "spawns": [
+      {
+        "pokemonId": 230,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 663,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 784,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 706,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 780,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
       {
         "pokemonId": 693,
         "minLevel": 76,
@@ -2154,6 +2484,18 @@ export const galarRoutes = [
   {
     "name": "Stepping-Stone Sea",
     "spawns": [
+      {
+        "pokemonId": 9,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 282,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
       {
         "pokemonId": 102,
         "minLevel": 88,
@@ -2243,6 +2585,24 @@ export const galarRoutes = [
     "name": "Slippery Slope",
     "spawns": [
       {
+        "pokemonId": 467,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 240,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 778,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
         "pokemonId": 124,
         "minLevel": 70,
         "maxLevel": 77,
@@ -2302,6 +2662,18 @@ export const galarRoutes = [
     "name": "Path to the Peak",
     "spawns": [
       {
+        "pokemonId": 696,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 333,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
         "pokemonId": 873,
         "minLevel": 80,
         "maxLevel": 88,
@@ -2330,6 +2702,12 @@ export const galarRoutes = [
   {
     "name": "Old Cemetery",
     "spawns": [
+      {
+        "pokemonId": 239,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
       {
         "pokemonId": 886,
         "minLevel": 90,
@@ -2390,6 +2768,12 @@ export const galarRoutes = [
     "name": "Rock Peak Ruins",
     "spawns": [
       {
+        "pokemonId": 377,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
         "pokemonId": 851,
         "minLevel": 70,
         "maxLevel": 77,
@@ -2400,6 +2784,12 @@ export const galarRoutes = [
   {
     "name": "Iceberg Ruins",
     "spawns": [
+      {
+        "pokemonId": 378,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
       {
         "pokemonId": 858,
         "minLevel": 80,
@@ -2412,6 +2802,12 @@ export const galarRoutes = [
     "name": "Iron Ruins",
     "spawns": [
       {
+        "pokemonId": 379,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
         "pokemonId": 839,
         "minLevel": 90,
         "maxLevel": 98,
@@ -2422,6 +2818,18 @@ export const galarRoutes = [
   {
     "name": "Giant's Foot",
     "spawns": [
+      {
+        "pokemonId": 347,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 345,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
       {
         "pokemonId": 344,
         "minLevel": 70,
@@ -2475,6 +2883,12 @@ export const galarRoutes = [
   {
     "name": "Lakeside Cave",
     "spawns": [
+      {
+        "pokemonId": 639,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
       {
         "pokemonId": 304,
         "minLevel": 80,
@@ -2641,6 +3055,12 @@ export const galarRoutes = [
     "name": "Brawlers' Cave",
     "spawns": [
       {
+        "pokemonId": 621,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
         "pokemonId": 293,
         "minLevel": 93,
         "maxLevel": 101,
@@ -2681,6 +3101,12 @@ export const galarRoutes = [
   {
     "name": "Challenge Road",
     "spawns": [
+      {
+        "pokemonId": 475,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
       {
         "pokemonId": 619,
         "minLevel": 85,
@@ -2741,6 +3167,24 @@ export const galarRoutes = [
     "name": "Potbottom Desert",
     "spawns": [
       {
+        "pokemonId": 553,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 6,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 609,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
         "pokemonId": 838,
         "minLevel": 93,
         "maxLevel": 101,
@@ -2751,6 +3195,24 @@ export const galarRoutes = [
   {
     "name": "Frigid Sea",
     "spawns": [
+      {
+        "pokemonId": 638,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 149,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 466,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
       {
         "pokemonId": 781,
         "minLevel": 70,
@@ -2954,6 +3416,12 @@ export const galarRoutes = [
   {
     "name": "Dyna Tree Hill",
     "spawns": [
+      {
+        "pokemonId": 142,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
       {
         "pokemonId": 144,
         "minLevel": 100,
