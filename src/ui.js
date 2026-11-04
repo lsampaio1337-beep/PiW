@@ -2472,7 +2472,7 @@ async function init() {
 
             contentHtml = `
                 <div style="position: relative; height: 100%; display: flex; flex-direction: column;">
-                    <div style="text-align: left; margin-bottom: 20px;">
+                    <div style="text-align: left;">
                         <div style="display: flex; gap: 40px; justify-content: space-between;">
                             <div style="flex: 1;">
                                 <p><b>Time played:</b> ${playtimeStr}</p>
@@ -2551,7 +2551,7 @@ async function init() {
             badgesHtml += '</div>';
 
             contentHtml = `
-                <div style="text-align: center; margin-bottom: 20px;">
+                <div style="text-align: center;">
                     ${badgesHtml}
                 </div>
             `;
@@ -2561,7 +2561,7 @@ async function init() {
         } else if (tab === 'medals') {
             const regions = ['Kanto', 'Johto', 'Hoenn', 'Sinnoh', 'Unova', 'Kalos', 'Alola', 'Galar', 'Hisui', 'Paldea'];
 
-            let medalsHtml = '<div style="display: grid; grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(5, 1fr); gap: 10px; padding: 10px; height: 100%; overflow: hidden; box-sizing: border-box;">';
+            let medalsHtml = '<div style="display: grid; grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(5, 1fr); gap: 10px; height: 100%; overflow: hidden; box-sizing: border-box;">';
 
             regions.forEach(region => {
                 let caughtCount = 0;
@@ -2638,7 +2638,7 @@ async function init() {
 
             contentHtml = medalsHtml;
         } else if (tab === 'upgrades') {
-            contentHtml = '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; padding: 15px;">';
+            contentHtml = '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px;">';
 
             if (state.stats.upgrades) {
                 const upgradeTypes = [
@@ -2703,29 +2703,28 @@ async function init() {
 
             contentHtml += '</div>';
 
-            if (contentHtml === '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; padding: 15px;"></div>') {
-                contentHtml = '<div style="text-align: center; padding: 20px; font-style: italic; color: #ccc;">No upgrades purchased yet.</div>';
+            if (contentHtml === '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px;"></div>') {
+                contentHtml = '<div style="text-align: center; font-style: italic; color: #ccc;">No upgrades purchased yet.</div>';
             }
         }
 
         showModal(titleHtml, contentHtml, "window-trainer");
 
-        if (tab === 'catch-rate') {
-            const win = document.getElementById('window-trainer');
-            if (win) {
-                const innerContent = win.querySelector('.window-content-container');
-                if (innerContent) {
+        const win = document.getElementById('window-trainer');
+        if (win) {
+            const innerContent = win.querySelector('.window-content-container');
+            if (innerContent) {
+                if (tab === 'catch-rate') {
                     innerContent.style.setProperty('padding', '0px', 'important');
+                } else {
+                    innerContent.style.setProperty('padding', '15px', 'important');
                 }
             }
-        } else {
-            const win = document.getElementById('window-trainer');
-            if (win) {
-                const innerContent = win.querySelector('.window-content-container');
-                if (innerContent) {
-                    innerContent.style.removeProperty('padding'); // Restore default padding if needed, although modal re-renders often reset it. Wait, if it resets, it's fine.
+            setTimeout(() => {
+                if (typeof win.adjustHeightForNewContent === 'function') {
+                    win.adjustHeightForNewContent();
                 }
-            }
+            }, 50);
         }
     };
 
