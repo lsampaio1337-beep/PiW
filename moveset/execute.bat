@@ -1,4 +1,6 @@
 @echo off
+echo Installing dependencies...
+npm install axios cheerio
 echo Running fetch_movesets.js...
 node fetch_movesets.js
 pause
