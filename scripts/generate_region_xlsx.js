@@ -469,6 +469,156 @@ const mainSeenSets = [];
         processUnlocks(extraChallenges[k], false, mainChallenges.length, splitSeenSet);
     });
 
+    // Add remaining maps that haven't been added yet
+    const generatedRoutes = new Set(routesData.map(r => r["Route"]));
+    const allMapNames = Object.values(mapCoords).map(m => m.name);
+    allMapNames.forEach(mapName => {
+        if (!generatedRoutes.has(mapName)) {
+            const r = routes.find(ro => ro.name === mapName) || {};
+            const spawns = r.spawns || [];
+
+            let avgBST = 0;
+            if (spawns.length > 0) {
+                let sumBST = 0;
+                let uniqueIds = new Set();
+                spawns.forEach(s => {
+                    uniqueIds.add(s.pokemonId);
+                });
+                uniqueIds.forEach(id => {
+                    sumBST += getBST(pokemonData[id]);
+                });
+                avgBST = uniqueIds.size > 0 ? sumBST / uniqueIds.size : 0;
+            }
+
+            if (spawns.length === 0) {
+                routesData.push({
+                    "Unlocked at": "",
+                    "Challenge": "",
+                    "Route": mapName,
+                    "Route (Secondary)": "",
+                    "Pokemon Name": "",
+                    "First?": "",
+                    "Level": "",
+                    "Sugested Level": "",
+                    "Peer to Peer": "",
+                    "% Appearance": "",
+                    "% Appearance Ok?": "",
+                    "Pokemon/Type Ok?": "",
+                    "BST": "",
+                    "Pokemon/BST Ok?": "",
+                    "Map Ok?": "Yes",
+                    "Will Unlock": "",
+                    "Requisite": "",
+                    "Reward": ""
+                });
+            } else {
+                let totalChance = 0;
+                const weights = [];
+                let totalWeight = 0;
+
+                spawns.forEach(s => {
+                    totalChance += (s.chance || 0);
+                    const pk = pokemonData[s.pokemonId];
+                    const bst = getBST(pk);
+                    const evoStage = getEvolutionStage(s.pokemonId);
+                    const weight = 10000 / (bst * evoStage);
+                    weights.push(weight);
+                    totalWeight += weight;
+                });
+
+                let allOk = Math.abs(totalChance - 1) < 0.01;
+                spawns.forEach((s, idx) => {
+                    let cPct = s.chance || 0;
+                    let suggestedChance = weights[idx] / totalWeight;
+                    if (Math.abs(cPct - suggestedChance) > 0.05) {
+                        allOk = false;
+                    }
+                });
+
+                spawns.forEach((s, idx) => {
+                    const pk = pokemonData[s.pokemonId];
+                    if (!pk) return;
+
+                    const pkName = pk.name;
+                    routeSpawnedPokemon.add(s.pokemonId);
+
+                    let first = "";
+                    if (seenPokemon.has(s.pokemonId)) {
+                        first = "NONONO";
+                    } else {
+                        seenPokemon.add(s.pokemonId);
+                    }
+
+                    let bst = getBST(pk);
+                    let diffBST = bst - avgBST;
+
+                    let p2p = 0;
+                    if (diffBST > 150) p2p = 4;
+                    else if (diffBST >= 100) p2p = 2;
+                    else if (diffBST >= 50) p2p = 1;
+                    else if (diffBST > -50) p2p = 0;
+                    else if (diffBST >= -100) p2p = -1;
+                    else if (diffBST > -150) p2p = -2;
+                    else p2p = -4;
+
+                    let baseMin = s.minLevel || 1;
+                    let baseMax = s.maxLevel || 100;
+                    let sugMin = baseMin + p2p;
+                    let sugMax = baseMax + p2p;
+                    if (sugMin < 1) sugMin = 1;
+                    if (sugMax < 1) sugMax = 1;
+
+                    let bstOk = ""; // No quarter checking for fallback maps
+
+                    let chancePct = (s.chance || 0);
+                    let appOk = !allOk ? (weights[idx] / totalWeight) : "";
+
+                    let typeOk = "";
+                    const routeNameLower = mapName.toLowerCase();
+                    if ((routeNameLower.includes("sea") || routeNameLower.includes("water") || routeNameLower.includes("lake") || routeNameLower.includes("ocean")) && pk.types.includes("Fire")) {
+                        typeOk = "NONONO";
+                    }
+                    if (routeNameLower.includes("volcano") && pk.types.includes("Water")) {
+                        typeOk = "NONONO";
+                    }
+
+                    if (encounterCache[pkName.toLowerCase()]) {
+                        const locations = encounterCache[pkName.toLowerCase()];
+                        const normalizedRoute = routeNameLower.replace(/[^a-z0-9]/g, '');
+                        for (const loc of locations) {
+                            const normalizedLoc = loc.replace(/[^a-z0-9]/g, '');
+                            if (normalizedLoc.includes(normalizedRoute) || normalizedRoute.includes(normalizedLoc)) {
+                                typeOk = "Legacy";
+                                break;
+                            }
+                        }
+                    }
+
+                    routesData.push({
+                        "Unlocked at": "",
+                        "Challenge": "",
+                        "Route": mapName,
+                        "Route (Secondary)": "",
+                        "Pokemon Name": pkName,
+                        "First?": first,
+                        "Level": `${s.minLevel || 1}-${s.maxLevel || 80}`,
+                        "Sugested Level": `${sugMin}-${sugMax}`,
+                        "Peer to Peer": p2p,
+                        "% Appearance": chancePct,
+                        "% Appearance Ok?": appOk,
+                        "Pokemon/Type Ok?": typeOk,
+                        "BST": bst,
+                        "Pokemon/BST Ok?": bstOk,
+                        "Map Ok?": "Yes",
+                        "Will Unlock": "",
+                        "Requisite": "",
+                        "Reward": ""
+                    });
+                });
+            }
+        }
+    });
+
 const missingData = [];
 
     const getFamilyMissingCount = (id) => {

@@ -46,7 +46,7 @@ This sheet analyzes the spawn encounters, level scaling, and statistical balance
 *   **Requisite:** The requirements needed to unlock the next area (e.g., Catch 5 Pidgey).
 *   **Reward:** The items or gifts rewarded upon completion.
 
-*(Note: Special spots like Gyms and Daycares are included in this sheet, but spawn-specific columns are left blank).*
+*(Note: To ensure a complete map representation, **every map coordinate spot** is included in this sheet, including standalone routes, Gyms, Pokémon Centers, and other non-spawn locations. If a map has no spawn encounters, spawn-specific columns are left blank).*
 
 ---
 
@@ -81,4 +81,4 @@ This sheet lists all Pokémon native to the region (according to the regional Po
     *   `Breed`: Can be obtained by breeding a wild-caught Pokémon once to get its pre-evolution.
     *   `#xBreed`: Requires chain-breeding multiple times to reach this pre-evolution (e.g., `2xBreed`).
 
-Last Generation Counter: 2
+Last Generation Counter: 3
