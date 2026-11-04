@@ -53,6 +53,12 @@ export function runTimeLapse() {
             let simulatedSeconds = Math.floor((results.simulatedTimeMs !== undefined ? results.simulatedTimeMs : elapsedMs) / 1000);
 
             state.globalStats.playtime = (state.globalStats.playtime || 0) + simulatedSeconds;
+            if (state.currentRegionName && state.regions && state.regions[state.currentRegionName] && state.regions[state.currentRegionName].stats) {
+                state.regions[state.currentRegionName].stats.playtime = (state.regions[state.currentRegionName].stats.playtime || 0) + simulatedSeconds;
+            }
+            if (state.currentRegionName === 'Kanto' && state.stats) {
+                state.stats.playtime = (state.stats.playtime || 0) + simulatedSeconds;
+            }
             state.stats.battleModeTimer = (state.stats.battleModeTimer || 0) + simulatedSeconds;
 
             if (window.updateMainControl) window.updateMainControl();

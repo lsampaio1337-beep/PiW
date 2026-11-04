@@ -1633,6 +1633,66 @@ function _updateBattleTimer() {
     }
 }
 
+
+window.checkAndAwardMedals = function() {
+    if (!state.config || !state.config.pokemonData) return;
+
+    const regions = ['Kanto', 'Johto', 'Hoenn', 'Sinnoh', 'Unova', 'Kalos', 'Alola', 'Galar', 'Hisui', 'Paldea'];
+
+    regions.forEach(region => {
+        let regionalStats;
+        if (region === 'Kanto' && state.currentRegionName === 'Kanto') {
+            regionalStats = state.stats;
+        } else if (region === 'Kanto' && state.regions && state.regions['Kanto']) {
+            regionalStats = state.regions['Kanto'].stats;
+        } else {
+            regionalStats = state.regions && state.regions[region] ? state.regions[region].stats : null;
+        }
+
+        if (!regionalStats && state.currentRegionName === region) {
+            regionalStats = state.stats;
+        }
+
+        if (!regionalStats) return;
+
+        if (!regionalStats.medalsEarned) {
+            regionalStats.medalsEarned = {};
+        }
+
+        let caughtCount = 0;
+        let shinyCount = 0;
+        let totalInRegion = 0;
+
+        const regionKey = region.toLowerCase() + '_id';
+
+        state.config.pokemonData.forEach(p => {
+            if (p[regionKey]) {
+                totalInRegion++;
+                if (regionalStats.caughtSpecies && regionalStats.caughtSpecies[p.name]) {
+                    caughtCount++;
+                }
+                if (regionalStats.caughtShiniesSpecies && regionalStats.caughtShiniesSpecies[p.name]) {
+                    shinyCount++;
+                }
+            }
+        });
+
+        const hasFirst = checkFinalChallengeCompleted(region);
+        const hasSecond = totalInRegion > 0 && caughtCount >= totalInRegion;
+        const hasThird = totalInRegion > 0 && shinyCount >= totalInRegion;
+
+        if (hasFirst && !regionalStats.medalsEarned['First']) {
+            regionalStats.medalsEarned['First'] = { date: (regionalStats.playtime > 0 && caughtCount > 10) ? 'Unknown' : Date.now(), playtime: regionalStats.playtime || 0 };
+        }
+        if (hasSecond && !regionalStats.medalsEarned['Second']) {
+            regionalStats.medalsEarned['Second'] = { date: (regionalStats.playtime > 0) ? 'Unknown' : Date.now(), playtime: regionalStats.playtime || 0 };
+        }
+        if (hasThird && !regionalStats.medalsEarned['Third']) {
+            regionalStats.medalsEarned['Third'] = { date: (regionalStats.playtime > 0) ? 'Unknown' : Date.now(), playtime: regionalStats.playtime || 0 };
+        }
+    });
+};
+
 function _awardJigglypuffDustGrains() {
     if (state.globalStats.playtime % 60 === 0 && state.globalStats.playtime > 0) {
         // Current active region
@@ -1662,9 +1722,18 @@ function gameClockTick() {
 
     if (!state.globalStats.playtime) state.globalStats.playtime = 0;
     state.globalStats.playtime++;
+    if (state.currentRegionName && state.regions && state.regions[state.currentRegionName] && state.regions[state.currentRegionName].stats) {
+        if (!state.regions[state.currentRegionName].stats.playtime) state.regions[state.currentRegionName].stats.playtime = 0;
+        state.regions[state.currentRegionName].stats.playtime++;
+    }
+    if (state.currentRegionName === 'Kanto' && state.stats) {
+        if (!state.stats.playtime) state.stats.playtime = 0;
+        state.stats.playtime++;
+    }
 
     _updateBattleTimer();
     _awardJigglypuffDustGrains();
+    window.checkAndAwardMedals();
 
     // Daily Challenge Check
     if (state.globalStats.playtime % 10 === 0) {
@@ -2059,7 +2128,7 @@ async function init() {
                         }
                     });
 
-                    const hasFirst = caughtCount > 0;
+                    const hasFirst = checkFinalChallengeCompleted(region);
                     const hasSecond = totalInRegion > 0 && caughtCount >= totalInRegion;
                     const hasThird = totalInRegion > 0 && shinyCount >= totalInRegion;
 
@@ -2467,7 +2536,171 @@ async function init() {
 
     window.updateMainControl = updateMainControl;
 
-    window.showTrainerStats = function(tab = 'statistics', options = {}) {
+
+window.showMedalDetails = function(region) {
+    if (!state.config || !state.config.pokemonData) return;
+
+    let regionalStats;
+    if (region === 'Kanto' && state.currentRegionName === 'Kanto') {
+        regionalStats = state.stats;
+    } else if (region === 'Kanto' && state.regions && state.regions['Kanto']) {
+        regionalStats = state.regions['Kanto'].stats;
+    } else {
+        regionalStats = state.regions && state.regions[region] ? state.regions[region].stats : null;
+    }
+
+    if (!regionalStats && state.currentRegionName === region) {
+        regionalStats = state.stats;
+    }
+
+    if (!regionalStats) return;
+
+    let caughtCount = 0;
+    let shinyCount = 0;
+    let totalInRegion = 0;
+
+    const regionKey = region.toLowerCase() + '_id';
+
+    state.config.pokemonData.forEach(p => {
+        if (p[regionKey]) {
+            totalInRegion++;
+            if (regionalStats.caughtSpecies && regionalStats.caughtSpecies[p.name]) {
+                caughtCount++;
+            }
+            if (regionalStats.caughtShiniesSpecies && regionalStats.caughtShiniesSpecies[p.name]) {
+                shinyCount++;
+            }
+        }
+    });
+
+    const hasFirst = checkFinalChallengeCompleted(region);
+    const hasSecond = totalInRegion > 0 && caughtCount >= totalInRegion;
+    const hasThird = totalInRegion > 0 && shinyCount >= totalInRegion;
+
+    const medalsEarned = regionalStats.medalsEarned || {};
+
+    const formatPlaytime = (totalSec) => {
+        if (!totalSec || totalSec <= 0) return '0s';
+        const d = Math.floor(totalSec / 86400);
+        const h = Math.floor((totalSec % 86400) / 3600);
+        const m = Math.floor((totalSec % 3600) / 60);
+        const s = totalSec % 60;
+        let str = '';
+        if (d > 0) str += `${d}d `;
+        if (h > 0) str += `${h}h `;
+        if (m > 0) str += `${m}m `;
+        str += `${s}s`;
+        return str;
+    };
+
+    const formatDate = (dateObj) => {
+        if (dateObj === 'Unknown' || !dateObj) return 'Unknown';
+        const d = new Date(dateObj);
+        const dd = String(d.getDate()).padStart(2, '0');
+        const mm = String(d.getMonth() + 1).padStart(2, '0');
+        const yy = String(d.getFullYear()).slice(-2);
+        return `${dd}/${mm}/${yy}`;
+    };
+
+    const buildMedalCard = (tier, title, description, hasMedal, earnData) => {
+        const dateStr = hasMedal && earnData ? formatDate(earnData.date) : 'Locked';
+        const timeStr = hasMedal && earnData ? formatPlaytime(earnData.playtime) : 'Locked';
+
+        return `
+            <div style="background: rgba(0, 0, 0, 0.4); border-radius: 10px; padding: 15px; border: 1px solid rgba(255, 255, 255, 0.1); display: flex; flex-direction: column; align-items: center; gap: 10px;">
+                <div style="font-size: 16px; font-weight: bold; color: white; text-align: center;">${title}</div>
+                <div style="text-align: center; ${!hasMedal ? 'filter: grayscale(100%) opacity(0.5);' : 'filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.8));'}">
+                    <img src="Assets/Extra/Medals/${region} ${tier}.png" alt="${region} ${tier}" style="width: 128px; height: 128px; object-fit: contain; image-rendering: pixelated;" onerror="this.src='Assets/Extra/Medals/Kanto ${tier}.png'">
+                </div>
+                <div style="font-size: 12px; color: #cbd5e1; text-align: center; max-width: 200px;">${description}</div>
+                <div style="width: 100%; border-top: 1px solid rgba(255,255,255,0.1); margin: 5px 0;"></div>
+                <div style="font-size: 12px; color: #94a3b8; text-align: center; display: flex; flex-direction: column; gap: 3px;">
+                    <div><strong>Earned on:</strong> <span style="color: ${hasMedal ? '#f1c40f' : '#cbd5e1'}">${dateStr}</span></div>
+                    <div><strong>Time on Region:</strong> <span style="color: ${hasMedal ? '#f1c40f' : '#cbd5e1'}">${timeStr}</span></div>
+                </div>
+            </div>
+        `;
+    };
+
+    let html = `<div style="display: flex; gap: 20px; justify-content: space-around; padding: 20px; box-sizing: border-box;">`;
+
+    html += buildMedalCard('First', 'League Champion', `Won ${region} Pokemon League`, hasFirst, medalsEarned['First']);
+    html += buildMedalCard('Second', 'Master Catcher', `Catch all ${totalInRegion} Pokémons`, hasSecond, medalsEarned['Second']);
+    html += buildMedalCard('Third', 'Shiny Hunter', `Catch all ${totalInRegion} Shinies Pokémons`, hasThird, medalsEarned['Third']);
+
+    html += `</div>`;
+
+    showModal(`${region} Medals`, html, `window-medal-details-${region}`, "900px");
+};
+
+
+window.showUpgradeDetails = function(typeKey, configKey) {
+    if (!state.config || !state.config.balance || !state.config.balance.expansions) return;
+    const items = state.config.balance.expansions[configKey] || [];
+    const ownedTier = state.stats.upgrades[typeKey] || 0;
+
+    let html = `<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; padding: 2%; box-sizing: border-box;">`;
+
+    for (let i = 0; i < ownedTier; i++) {
+        const configItem = items[i];
+        if (!configItem) continue;
+
+        const displayName = configItem.displayName || configItem.name;
+        let description = configItem.description || '';
+        const tier = i + 1;
+
+        if (configKey === 'ballPocket') {
+            const tiers = [1000, 2000, 3000, 4000, 5000];
+            description = `Ball Stock Capacity: ${tiers[i] || 5000}`;
+        } else if (configKey === 'potionSatchel') {
+            const tiers = [1000, 2000, 3000, 4000, 5000];
+            description = `Potion Stock Capacity: ${tiers[i] || 5000}`;
+        } else if (configKey === 'pokemonBox') {
+            const tiers = [5000, 10000, 15000, 20000, 25000];
+            description = `Pokemon Capacity in Backpack: ${tiers[i] || 25000}`;
+        } else if (configKey === 'speed') {
+            if (tier === 1) description = "Encounter time decreased in 10%";
+            else if (tier === 2) description = "Encounter time decreased in 20%";
+            else if (tier === 3) description = "Encounter time decreased in 30%";
+            else if (tier === 4) description = "Encounter time decreased in 40%";
+            else if (tier >= 5) description = "Encounter time decreased in 50%";
+        } else if (configKey === 'glass') {
+            if (tier === 1) description = "Show Healthbar at Main View";
+            else if (tier === 2) description = "Show Healthbar and Damage at Main View";
+            else if (tier === 3) description = "Show Healthbar, Damage and Level at Main View";
+            else if (tier === 4) description = "Show Healthbar, Damage, Level and Quality at Main View";
+            else if (tier >= 5) description = "Show Healthbar, Damage, Level, Quality and SumIV at Main View";
+        } else if (configKey === 'loot') {
+            if (tier === 1) description = "Can loot Potion";
+            else if (tier === 2) description = "Can loot Potion and Ball";
+            else if (tier === 3) description = "Can loot Potion, Ball and Stone";
+            else if (tier === 4) description = "Can loot Potion, Ball, Stone and Vitamin";
+        } else if (configKey === 'smartwatch') {
+            if (tier === 1) description = "Can Select Ball at Main View";
+            else if (tier === 2) description = "Can Select Ball and potion at Main View";
+            else if (tier >= 3) description = "Can Select Ball and potion at Main View and use smart mode for capture";
+        }
+
+        html += `
+            <div style="background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; padding: 15px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 10px;">
+                <div style="font-size: 14px; font-weight: bold; color: white;">${displayName}</div>
+                <img src="./Assets/Items/Upgrades/${configItem.name}.png" style="width: 50px; height: 50px; object-fit: contain;" alt="${displayName}">
+                <div style="font-size: 12px; color: #cbd5e1; line-height: 1.3;">${description}</div>
+            </div>
+        `;
+    }
+
+    html += `</div>`;
+
+    // Capitalize first letter of configKey for title
+    let titleStr = configKey.charAt(0).toUpperCase() + configKey.slice(1);
+    // Add spaces before uppercase letters
+    titleStr = titleStr.replace(/([A-Z])/g, ' $1').trim();
+
+    showModal(`${titleStr} Upgrades`, html, `window-upgrade-details-${configKey}`, "800px");
+};
+
+window.showTrainerStats = function(tab = 'statistics', options = {}) {
         if(checkCombatLock()) return;
 
         const isShiny = options.showShiny || false;
@@ -2685,13 +2918,13 @@ async function init() {
                     });
                 }
 
-                const hasFirst = caughtCount > 0;
+                const hasFirst = checkFinalChallengeCompleted(region);
                 const hasSecond = totalInRegion > 0 && caughtCount >= totalInRegion;
                 const hasThird = totalInRegion > 0 && shinyCount >= totalInRegion;
 
                 medalsHtml += `
                     <div
-                        class="medal-item"
+                        class="medal-item" onclick="window.showMedalDetails('${region}')"
                         style="background: rgba(0, 0, 0, 0.2); border-radius: 10px; padding: 10px 15px; border: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-around; align-items: center; box-sizing: border-box; transition: all 0.2s ease-in-out; min-height: 0;"
                     >
                         <div style="text-align: center; ${!hasFirst ? 'filter: grayscale(100%) opacity(0.5);' : 'filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));'}">
@@ -2773,7 +3006,7 @@ async function init() {
                             }
 
                             contentHtml += `
-                                <div class="upgrade-item" style="background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; padding: 15px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 10px; transition: all 0.2s ease-in-out;">
+                                <div class="upgrade-item" onclick="window.showUpgradeDetails('${type.key}', '${type.configKey}')" style="cursor: pointer; background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; padding: 15px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 10px; transition: all 0.2s ease-in-out;">
                                     <div style="font-size: 14px; font-weight: bold; color: white;">${displayName}</div>
                                     <img src="./Assets/Items/Upgrades/${configItem.name}.png" style="width: 50px; height: 50px; object-fit: contain;" alt="${displayName}">
                                     <div style="font-size: 12px; color: #cbd5e1; line-height: 1.3;">${description}</div>
@@ -3130,6 +3363,13 @@ window.simulateSleepFarm = function() {
     let m = Math.floor((totalSeconds % 3600) / 60);
     let s = totalSeconds % 60;
 
+    state.globalStats.playtime = (state.globalStats.playtime || 0) + totalSeconds;
+    if (state.currentRegionName && state.regions && state.regions[state.currentRegionName] && state.regions[state.currentRegionName].stats) {
+        state.regions[state.currentRegionName].stats.playtime = (state.regions[state.currentRegionName].stats.playtime || 0) + totalSeconds;
+    }
+    if (state.currentRegionName === 'Kanto' && state.stats) {
+        state.stats.playtime = (state.stats.playtime || 0) + totalSeconds;
+    }
     let timeStr = "";
     if (d > 0) timeStr += `${d}d`;
     if (h > 0 || d > 0) timeStr += `${h}h`;
