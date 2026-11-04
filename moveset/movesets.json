@@ -1,0 +1,2410 @@
+{
+  "Bulbasaur": {
+    "1": [
+      {
+        "level": "1",
+        "move": "Tackle",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 35,
+        "acc": 95
+      },
+      {
+        "level": "13",
+        "move": "Vine Whip",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 35,
+        "acc": 100
+      },
+      {
+        "level": "27",
+        "move": "Razor Leaf",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 55,
+        "acc": 95
+      },
+      {
+        "level": "48",
+        "move": "SolarBeam",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 120,
+        "acc": 100
+      }
+    ],
+    "2": [
+      {
+        "level": "1",
+        "move": "Tackle",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 35,
+        "acc": 95
+      },
+      {
+        "level": "10",
+        "move": "Vine Whip",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 35,
+        "acc": 100
+      },
+      {
+        "level": "20",
+        "move": "Razor Leaf",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 55,
+        "acc": 95
+      },
+      {
+        "level": "46",
+        "move": "SolarBeam",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 120,
+        "acc": 100
+      }
+    ],
+    "3": [
+      {
+        "level": "1",
+        "move": "Tackle",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 35,
+        "acc": 95
+      },
+      {
+        "level": "10",
+        "move": "Vine Whip",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 35,
+        "acc": 100
+      },
+      {
+        "level": "20",
+        "move": "Razor Leaf",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 55,
+        "acc": 95
+      },
+      {
+        "level": "46",
+        "move": "SolarBeam",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 120,
+        "acc": 100
+      }
+    ],
+    "4": [
+      {
+        "level": "1",
+        "move": "Tackle",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 35,
+        "acc": 95
+      },
+      {
+        "level": "9",
+        "move": "Vine Whip",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 35,
+        "acc": 100
+      },
+      {
+        "level": "15",
+        "move": "Take Down",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 90,
+        "acc": 85
+      },
+      {
+        "level": "19",
+        "move": "Razor Leaf",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 55,
+        "acc": 95
+      },
+      {
+        "level": "27",
+        "move": "Double-Edge",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 120,
+        "acc": 100
+      },
+      {
+        "level": "37",
+        "move": "Seed Bomb",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 80,
+        "acc": 100
+      }
+    ],
+    "5": [
+      {
+        "level": "1",
+        "move": "Tackle",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 50,
+        "acc": 100
+      },
+      {
+        "level": "9",
+        "move": "Vine Whip",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 35,
+        "acc": 100
+      },
+      {
+        "level": "15",
+        "move": "Take Down",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 90,
+        "acc": 85
+      },
+      {
+        "level": "19",
+        "move": "Razor Leaf",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 55,
+        "acc": 95
+      },
+      {
+        "level": "27",
+        "move": "Double-Edge",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 120,
+        "acc": 100
+      },
+      {
+        "level": "37",
+        "move": "Seed Bomb",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 80,
+        "acc": 100
+      }
+    ],
+    "6": [
+      {
+        "level": "1",
+        "move": "Tackle",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 50,
+        "acc": 100
+      },
+      {
+        "level": "9",
+        "move": "Vine Whip",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 45,
+        "acc": 100
+      },
+      {
+        "level": "15",
+        "move": "Take Down",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 90,
+        "acc": 85
+      },
+      {
+        "level": "19",
+        "move": "Razor Leaf",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 55,
+        "acc": 95
+      },
+      {
+        "level": "27",
+        "move": "Double-Edge",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 120,
+        "acc": 100
+      },
+      {
+        "level": "37",
+        "move": "Seed Bomb",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 80,
+        "acc": 100
+      }
+    ],
+    "7": [
+      {
+        "level": "1",
+        "move": "Tackle",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "9",
+        "move": "Vine Whip",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 45,
+        "acc": 100
+      },
+      {
+        "level": "15",
+        "move": "Take Down",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 90,
+        "acc": 85
+      },
+      {
+        "level": "19",
+        "move": "Razor Leaf",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 55,
+        "acc": 95
+      },
+      {
+        "level": "27",
+        "move": "Double-Edge",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 120,
+        "acc": 100
+      },
+      {
+        "level": "37",
+        "move": "Seed Bomb",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 80,
+        "acc": 100
+      }
+    ],
+    "8": [
+      {
+        "level": "1",
+        "move": "Tackle",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "3",
+        "move": "Vine Whip",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 45,
+        "acc": 100
+      },
+      {
+        "level": "12",
+        "move": "Razor Leaf",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 55,
+        "acc": 95
+      },
+      {
+        "level": "18",
+        "move": "Seed Bomb",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 80,
+        "acc": 100
+      },
+      {
+        "level": "21",
+        "move": "Take Down",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 90,
+        "acc": 85
+      },
+      {
+        "level": "33",
+        "move": "Double-Edge",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 120,
+        "acc": 100
+      },
+      {
+        "level": "36",
+        "move": "Solar Beam",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 120,
+        "acc": 100
+      }
+    ],
+    "10": [
+      {
+        "level": "1",
+        "move": "Tackle",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "3",
+        "move": "Vine Whip",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 45,
+        "acc": 100
+      },
+      {
+        "level": "12",
+        "move": "Razor Leaf",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 55,
+        "acc": 95
+      },
+      {
+        "level": "18",
+        "move": "Seed Bomb",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 80,
+        "acc": 100
+      },
+      {
+        "level": "21",
+        "move": "Take Down",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 90,
+        "acc": 85
+      },
+      {
+        "level": "33",
+        "move": "Power Whip",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 120,
+        "acc": 85
+      },
+      {
+        "level": "36",
+        "move": "Solar Beam",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 120,
+        "acc": 100
+      }
+    ]
+  },
+  "Ivysaur": {
+    "1": [
+      {
+        "level": "1",
+        "move": "Tackle",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 35,
+        "acc": 95
+      },
+      {
+        "level": "13",
+        "move": "Vine Whip",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 35,
+        "acc": 100
+      },
+      {
+        "level": "30",
+        "move": "Razor Leaf",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 55,
+        "acc": 95
+      },
+      {
+        "level": "54",
+        "move": "SolarBeam",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 120,
+        "acc": 100
+      }
+    ],
+    "2": [
+      {
+        "level": "1",
+        "move": "Tackle",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 35,
+        "acc": 95
+      },
+      {
+        "level": "10",
+        "move": "Vine Whip",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 35,
+        "acc": 100
+      },
+      {
+        "level": "22",
+        "move": "Razor Leaf",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 55,
+        "acc": 95
+      },
+      {
+        "level": "56",
+        "move": "SolarBeam",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 120,
+        "acc": 100
+      }
+    ],
+    "3": [
+      {
+        "level": "1",
+        "move": "Tackle",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 35,
+        "acc": 95
+      },
+      {
+        "level": "10",
+        "move": "Vine Whip",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 35,
+        "acc": 100
+      },
+      {
+        "level": "22",
+        "move": "Razor Leaf",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 55,
+        "acc": 95
+      },
+      {
+        "level": "56",
+        "move": "SolarBeam",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 120,
+        "acc": 100
+      }
+    ],
+    "4": [
+      {
+        "level": "1",
+        "move": "Tackle",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 35,
+        "acc": 95
+      },
+      {
+        "level": "9",
+        "move": "Vine Whip",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 35,
+        "acc": 100
+      },
+      {
+        "level": "15",
+        "move": "Take Down",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 90,
+        "acc": 85
+      },
+      {
+        "level": "20",
+        "move": "Razor Leaf",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 55,
+        "acc": 95
+      },
+      {
+        "level": "31",
+        "move": "Double-Edge",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 120,
+        "acc": 100
+      },
+      {
+        "level": "44",
+        "move": "SolarBeam",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 120,
+        "acc": 100
+      }
+    ],
+    "5": [
+      {
+        "level": "1",
+        "move": "Tackle",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 50,
+        "acc": 100
+      },
+      {
+        "level": "9",
+        "move": "Vine Whip",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 35,
+        "acc": 100
+      },
+      {
+        "level": "15",
+        "move": "Take Down",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 90,
+        "acc": 85
+      },
+      {
+        "level": "20",
+        "move": "Razor Leaf",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 55,
+        "acc": 95
+      },
+      {
+        "level": "31",
+        "move": "Double-Edge",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 120,
+        "acc": 100
+      },
+      {
+        "level": "44",
+        "move": "SolarBeam",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 120,
+        "acc": 100
+      }
+    ],
+    "6": [
+      {
+        "level": "1",
+        "move": "Tackle",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 50,
+        "acc": 100
+      },
+      {
+        "level": "9",
+        "move": "Vine Whip",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 45,
+        "acc": 100
+      },
+      {
+        "level": "15",
+        "move": "Take Down",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 90,
+        "acc": 85
+      },
+      {
+        "level": "20",
+        "move": "Razor Leaf",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 55,
+        "acc": 95
+      },
+      {
+        "level": "31",
+        "move": "Double-Edge",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 120,
+        "acc": 100
+      },
+      {
+        "level": "44",
+        "move": "Solar Beam",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 120,
+        "acc": 100
+      }
+    ],
+    "7": [
+      {
+        "level": "1",
+        "move": "Tackle",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "9",
+        "move": "Vine Whip",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 45,
+        "acc": 100
+      },
+      {
+        "level": "15",
+        "move": "Take Down",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 90,
+        "acc": 85
+      },
+      {
+        "level": "20",
+        "move": "Razor Leaf",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 55,
+        "acc": 95
+      },
+      {
+        "level": "31",
+        "move": "Double-Edge",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 120,
+        "acc": 100
+      },
+      {
+        "level": "44",
+        "move": "Solar Beam",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 120,
+        "acc": 100
+      }
+    ],
+    "8": [
+      {
+        "level": "1",
+        "move": "Tackle",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "1",
+        "move": "Vine Whip",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 45,
+        "acc": 100
+      },
+      {
+        "level": "12",
+        "move": "Razor Leaf",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 55,
+        "acc": 95
+      },
+      {
+        "level": "20",
+        "move": "Seed Bomb",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 80,
+        "acc": 100
+      },
+      {
+        "level": "25",
+        "move": "Take Down",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 90,
+        "acc": 85
+      },
+      {
+        "level": "45",
+        "move": "Double-Edge",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 120,
+        "acc": 100
+      },
+      {
+        "level": "50",
+        "move": "Solar Beam",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 120,
+        "acc": 100
+      }
+    ]
+  },
+  "Venusaur": {
+    "1": [
+      {
+        "level": "1",
+        "move": "Tackle",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 35,
+        "acc": 95
+      },
+      {
+        "level": "1",
+        "move": "Vine Whip",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 35,
+        "acc": 100
+      },
+      {
+        "level": "13",
+        "move": "Vine Whip",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 35,
+        "acc": 100
+      },
+      {
+        "level": "30",
+        "move": "Razor Leaf",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 55,
+        "acc": 95
+      },
+      {
+        "level": "65",
+        "move": "SolarBeam",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 120,
+        "acc": 100
+      }
+    ],
+    "2": [
+      {
+        "level": "1",
+        "move": "Tackle",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 35,
+        "acc": 95
+      },
+      {
+        "level": "1",
+        "move": "Vine Whip",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 35,
+        "acc": 100
+      },
+      {
+        "level": "10",
+        "move": "Vine Whip",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 35,
+        "acc": 100
+      },
+      {
+        "level": "22",
+        "move": "Razor Leaf",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 55,
+        "acc": 95
+      },
+      {
+        "level": "65",
+        "move": "SolarBeam",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 120,
+        "acc": 100
+      }
+    ],
+    "3": [
+      {
+        "level": "1",
+        "move": "Tackle",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 35,
+        "acc": 95
+      },
+      {
+        "level": "1",
+        "move": "Vine Whip",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 35,
+        "acc": 100
+      },
+      {
+        "level": "10",
+        "move": "Vine Whip",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 35,
+        "acc": 100
+      },
+      {
+        "level": "22",
+        "move": "Razor Leaf",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 55,
+        "acc": 95
+      },
+      {
+        "level": "65",
+        "move": "SolarBeam",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 120,
+        "acc": 100
+      }
+    ],
+    "4": [
+      {
+        "level": "1",
+        "move": "Tackle",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 35,
+        "acc": 95
+      },
+      {
+        "level": "1",
+        "move": "Vine Whip",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 35,
+        "acc": 100
+      },
+      {
+        "level": "9",
+        "move": "Vine Whip",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 35,
+        "acc": 100
+      },
+      {
+        "level": "15",
+        "move": "Take Down",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 90,
+        "acc": 85
+      },
+      {
+        "level": "20",
+        "move": "Razor Leaf",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 55,
+        "acc": 95
+      },
+      {
+        "level": "31",
+        "move": "Double-Edge",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 120,
+        "acc": 100
+      },
+      {
+        "level": "32",
+        "move": "Petal Dance",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 90,
+        "acc": 100
+      },
+      {
+        "level": "53",
+        "move": "SolarBeam",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 120,
+        "acc": 100
+      }
+    ],
+    "5": [
+      {
+        "level": "1",
+        "move": "Tackle",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 50,
+        "acc": 100
+      },
+      {
+        "level": "1",
+        "move": "Vine Whip",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 35,
+        "acc": 100
+      },
+      {
+        "level": "9",
+        "move": "Vine Whip",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 35,
+        "acc": 100
+      },
+      {
+        "level": "15",
+        "move": "Take Down",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 90,
+        "acc": 85
+      },
+      {
+        "level": "20",
+        "move": "Razor Leaf",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 55,
+        "acc": 95
+      },
+      {
+        "level": "31",
+        "move": "Double-Edge",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 120,
+        "acc": 100
+      },
+      {
+        "level": "32",
+        "move": "Petal Dance",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 120,
+        "acc": 100
+      },
+      {
+        "level": "53",
+        "move": "SolarBeam",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 120,
+        "acc": 100
+      }
+    ],
+    "6": [
+      {
+        "level": "1",
+        "move": "Tackle",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 50,
+        "acc": 100
+      },
+      {
+        "level": "1",
+        "move": "Vine Whip",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 45,
+        "acc": 100
+      },
+      {
+        "level": "9",
+        "move": "Vine Whip",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 45,
+        "acc": 100
+      },
+      {
+        "level": "15",
+        "move": "Take Down",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 90,
+        "acc": 85
+      },
+      {
+        "level": "20",
+        "move": "Razor Leaf",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 55,
+        "acc": 95
+      },
+      {
+        "level": "31",
+        "move": "Double-Edge",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 120,
+        "acc": 100
+      },
+      {
+        "level": "32",
+        "move": "Petal Dance",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 120,
+        "acc": 100
+      },
+      {
+        "level": "50",
+        "move": "Petal Blizzard",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 90,
+        "acc": 100
+      },
+      {
+        "level": "53",
+        "move": "Solar Beam",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 120,
+        "acc": 100
+      }
+    ],
+    "7": [
+      {
+        "level": "1",
+        "move": "Petal Dance",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 120,
+        "acc": 100
+      },
+      {
+        "level": "1",
+        "move": "Tackle",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "1",
+        "move": "Vine Whip",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 45,
+        "acc": 100
+      },
+      {
+        "level": "9",
+        "move": "Vine Whip",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 45,
+        "acc": 100
+      },
+      {
+        "level": "15",
+        "move": "Take Down",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 90,
+        "acc": 85
+      },
+      {
+        "level": "20",
+        "move": "Razor Leaf",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 55,
+        "acc": 95
+      },
+      {
+        "level": "31",
+        "move": "Double-Edge",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 120,
+        "acc": 100
+      },
+      {
+        "level": "50",
+        "move": "Petal Blizzard",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 90,
+        "acc": 100
+      },
+      {
+        "level": "53",
+        "move": "Solar Beam",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 120,
+        "acc": 100
+      }
+    ],
+    "8": [
+      {
+        "level": "1",
+        "move": "Petal Blizzard",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 90,
+        "acc": 100
+      },
+      {
+        "level": "1",
+        "move": "Petal Dance",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 120,
+        "acc": 100
+      },
+      {
+        "level": "1",
+        "move": "Tackle",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "1",
+        "move": "Vine Whip",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 45,
+        "acc": 100
+      },
+      {
+        "level": "12",
+        "move": "Razor Leaf",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 55,
+        "acc": 95
+      },
+      {
+        "level": "20",
+        "move": "Seed Bomb",
+        "type": "Grass",
+        "cat": "Physical",
+        "power": 80,
+        "acc": 100
+      },
+      {
+        "level": "25",
+        "move": "Take Down",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 90,
+        "acc": 85
+      },
+      {
+        "level": "51",
+        "move": "Double-Edge",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 120,
+        "acc": 100
+      },
+      {
+        "level": "58",
+        "move": "Solar Beam",
+        "type": "Grass",
+        "cat": "Special",
+        "power": 120,
+        "acc": 100
+      }
+    ]
+  },
+  "Charmander": {
+    "1": [
+      {
+        "level": "1",
+        "move": "Scratch",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "9",
+        "move": "Ember",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "22",
+        "move": "Rage",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 20,
+        "acc": 100
+      },
+      {
+        "level": "30",
+        "move": "Slash",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 70,
+        "acc": 100
+      },
+      {
+        "level": "38",
+        "move": "Flamethrower",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 95,
+        "acc": 100
+      },
+      {
+        "level": "46",
+        "move": "Fire Spin",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 15,
+        "acc": 70
+      }
+    ],
+    "2": [
+      {
+        "level": "1",
+        "move": "Scratch",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "7",
+        "move": "Ember",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "19",
+        "move": "Rage",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 20,
+        "acc": 100
+      },
+      {
+        "level": "31",
+        "move": "Flamethrower",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 95,
+        "acc": 100
+      },
+      {
+        "level": "37",
+        "move": "Slash",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 70,
+        "acc": 100
+      },
+      {
+        "level": "49",
+        "move": "Fire Spin",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 15,
+        "acc": 70
+      }
+    ],
+    "3": [
+      {
+        "level": "1",
+        "move": "Scratch",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "7",
+        "move": "Ember",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "19",
+        "move": "Rage",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 20,
+        "acc": 100
+      },
+      {
+        "level": "31",
+        "move": "Flamethrower",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 95,
+        "acc": 100
+      },
+      {
+        "level": "37",
+        "move": "Slash",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 70,
+        "acc": 100
+      },
+      {
+        "level": "49",
+        "move": "Fire Spin",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 15,
+        "acc": 70
+      }
+    ],
+    "4": [
+      {
+        "level": "1",
+        "move": "Scratch",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "7",
+        "move": "Ember",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "25",
+        "move": "Fire Fang",
+        "type": "Fire",
+        "cat": "Physical",
+        "power": 65,
+        "acc": 95
+      },
+      {
+        "level": "28",
+        "move": "Slash",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 70,
+        "acc": 100
+      },
+      {
+        "level": "34",
+        "move": "Flamethrower",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 95,
+        "acc": 100
+      },
+      {
+        "level": "37",
+        "move": "Fire Spin",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 15,
+        "acc": 70
+      }
+    ],
+    "5": [
+      {
+        "level": "1",
+        "move": "Scratch",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "7",
+        "move": "Ember",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "25",
+        "move": "Fire Fang",
+        "type": "Fire",
+        "cat": "Physical",
+        "power": 65,
+        "acc": 95
+      },
+      {
+        "level": "28",
+        "move": "Flame Burst",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 70,
+        "acc": 100
+      },
+      {
+        "level": "34",
+        "move": "Slash",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 70,
+        "acc": 100
+      },
+      {
+        "level": "37",
+        "move": "Flamethrower",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 95,
+        "acc": 100
+      },
+      {
+        "level": "43",
+        "move": "Fire Spin",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 35,
+        "acc": 85
+      },
+      {
+        "level": "46",
+        "move": "Inferno",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 100,
+        "acc": 50
+      }
+    ],
+    "6": [
+      {
+        "level": "1",
+        "move": "Scratch",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "7",
+        "move": "Ember",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "25",
+        "move": "Fire Fang",
+        "type": "Fire",
+        "cat": "Physical",
+        "power": 65,
+        "acc": 95
+      },
+      {
+        "level": "28",
+        "move": "Flame Burst",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 70,
+        "acc": 100
+      },
+      {
+        "level": "34",
+        "move": "Slash",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 70,
+        "acc": 100
+      },
+      {
+        "level": "37",
+        "move": "Flamethrower",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 90,
+        "acc": 100
+      },
+      {
+        "level": "43",
+        "move": "Fire Spin",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 35,
+        "acc": 85
+      },
+      {
+        "level": "46",
+        "move": "Inferno",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 100,
+        "acc": 50
+      }
+    ],
+    "7": [
+      {
+        "level": "1",
+        "move": "Scratch",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "7",
+        "move": "Ember",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "25",
+        "move": "Fire Fang",
+        "type": "Fire",
+        "cat": "Physical",
+        "power": 65,
+        "acc": 95
+      },
+      {
+        "level": "28",
+        "move": "Flame Burst",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 70,
+        "acc": 100
+      },
+      {
+        "level": "34",
+        "move": "Slash",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 70,
+        "acc": 100
+      },
+      {
+        "level": "37",
+        "move": "Flamethrower",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 90,
+        "acc": 100
+      },
+      {
+        "level": "43",
+        "move": "Fire Spin",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 35,
+        "acc": 85
+      },
+      {
+        "level": "46",
+        "move": "Inferno",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 100,
+        "acc": 50
+      }
+    ],
+    "8": [
+      {
+        "level": "1",
+        "move": "Scratch",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "4",
+        "move": "Ember",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "12",
+        "move": "Dragon Breath",
+        "type": "Dragon",
+        "cat": "Special",
+        "power": 60,
+        "acc": 100
+      },
+      {
+        "level": "17",
+        "move": "Fire Fang",
+        "type": "Fire",
+        "cat": "Physical",
+        "power": 65,
+        "acc": 95
+      },
+      {
+        "level": "20",
+        "move": "Slash",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 70,
+        "acc": 100
+      },
+      {
+        "level": "24",
+        "move": "Flamethrower",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 90,
+        "acc": 100
+      },
+      {
+        "level": "32",
+        "move": "Fire Spin",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 35,
+        "acc": 85
+      },
+      {
+        "level": "36",
+        "move": "Inferno",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 100,
+        "acc": 50
+      },
+      {
+        "level": "40",
+        "move": "Flare Blitz",
+        "type": "Fire",
+        "cat": "Physical",
+        "power": 120,
+        "acc": 100
+      }
+    ],
+    "10": [
+      {
+        "level": "1",
+        "move": "Scratch",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "4",
+        "move": "Ember",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "12",
+        "move": "Dragon Breath",
+        "type": "Dragon",
+        "cat": "Special",
+        "power": 60,
+        "acc": 100
+      },
+      {
+        "level": "17",
+        "move": "Fire Fang",
+        "type": "Fire",
+        "cat": "Physical",
+        "power": 65,
+        "acc": 95
+      },
+      {
+        "level": "20",
+        "move": "Slash",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 70,
+        "acc": 100
+      },
+      {
+        "level": "24",
+        "move": "Flamethrower",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 90,
+        "acc": 100
+      },
+      {
+        "level": "32",
+        "move": "Fire Spin",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 35,
+        "acc": 85
+      },
+      {
+        "level": "36",
+        "move": "Inferno",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 100,
+        "acc": 50
+      },
+      {
+        "level": "40",
+        "move": "Flare Blitz",
+        "type": "Fire",
+        "cat": "Physical",
+        "power": 120,
+        "acc": 100
+      }
+    ]
+  },
+  "Charmeleon": {
+    "1": [
+      {
+        "level": "1",
+        "move": "Ember",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "1",
+        "move": "Scratch",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "9",
+        "move": "Ember",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "24",
+        "move": "Rage",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 20,
+        "acc": 100
+      },
+      {
+        "level": "33",
+        "move": "Slash",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 70,
+        "acc": 100
+      },
+      {
+        "level": "42",
+        "move": "Flamethrower",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 95,
+        "acc": 100
+      },
+      {
+        "level": "56",
+        "move": "Fire Spin",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 15,
+        "acc": 70
+      }
+    ],
+    "2": [
+      {
+        "level": "1",
+        "move": "Ember",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "1",
+        "move": "Scratch",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "7",
+        "move": "Ember",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "20",
+        "move": "Rage",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 20,
+        "acc": 100
+      },
+      {
+        "level": "34",
+        "move": "Flamethrower",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 95,
+        "acc": 100
+      },
+      {
+        "level": "41",
+        "move": "Slash",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 70,
+        "acc": 100
+      },
+      {
+        "level": "55",
+        "move": "Fire Spin",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 15,
+        "acc": 70
+      }
+    ],
+    "3": [
+      {
+        "level": "1",
+        "move": "Ember",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "1",
+        "move": "Scratch",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "7",
+        "move": "Ember",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "20",
+        "move": "Rage",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 20,
+        "acc": 100
+      },
+      {
+        "level": "34",
+        "move": "Flamethrower",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 95,
+        "acc": 100
+      },
+      {
+        "level": "41",
+        "move": "Slash",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 70,
+        "acc": 100
+      },
+      {
+        "level": "55",
+        "move": "Fire Spin",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 15,
+        "acc": 70
+      }
+    ],
+    "4": [
+      {
+        "level": "1",
+        "move": "Ember",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "1",
+        "move": "Scratch",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "7",
+        "move": "Ember",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "28",
+        "move": "Fire Fang",
+        "type": "Fire",
+        "cat": "Physical",
+        "power": 65,
+        "acc": 95
+      },
+      {
+        "level": "32",
+        "move": "Slash",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 70,
+        "acc": 100
+      },
+      {
+        "level": "39",
+        "move": "Flamethrower",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 95,
+        "acc": 100
+      },
+      {
+        "level": "43",
+        "move": "Fire Spin",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 15,
+        "acc": 70
+      }
+    ],
+    "5": [
+      {
+        "level": "1",
+        "move": "Ember",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "1",
+        "move": "Scratch",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "7",
+        "move": "Ember",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "28",
+        "move": "Fire Fang",
+        "type": "Fire",
+        "cat": "Physical",
+        "power": 65,
+        "acc": 95
+      },
+      {
+        "level": "32",
+        "move": "Flame Burst",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 70,
+        "acc": 100
+      },
+      {
+        "level": "39",
+        "move": "Slash",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 70,
+        "acc": 100
+      },
+      {
+        "level": "43",
+        "move": "Flamethrower",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 95,
+        "acc": 100
+      },
+      {
+        "level": "50",
+        "move": "Fire Spin",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 35,
+        "acc": 85
+      },
+      {
+        "level": "54",
+        "move": "Inferno",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 100,
+        "acc": 50
+      }
+    ],
+    "6": [
+      {
+        "level": "1",
+        "move": "Ember",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "1",
+        "move": "Scratch",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "7",
+        "move": "Ember",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "28",
+        "move": "Fire Fang",
+        "type": "Fire",
+        "cat": "Physical",
+        "power": 65,
+        "acc": 95
+      },
+      {
+        "level": "32",
+        "move": "Flame Burst",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 70,
+        "acc": 100
+      },
+      {
+        "level": "39",
+        "move": "Slash",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 70,
+        "acc": 100
+      },
+      {
+        "level": "43",
+        "move": "Flamethrower",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 90,
+        "acc": 100
+      },
+      {
+        "level": "50",
+        "move": "Fire Spin",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 35,
+        "acc": 85
+      },
+      {
+        "level": "54",
+        "move": "Inferno",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 100,
+        "acc": 50
+      }
+    ],
+    "7": [
+      {
+        "level": "1",
+        "move": "Ember",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "1",
+        "move": "Scratch",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "7",
+        "move": "Ember",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "28",
+        "move": "Fire Fang",
+        "type": "Fire",
+        "cat": "Physical",
+        "power": 65,
+        "acc": 95
+      },
+      {
+        "level": "32",
+        "move": "Flame Burst",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 70,
+        "acc": 100
+      },
+      {
+        "level": "39",
+        "move": "Slash",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 70,
+        "acc": 100
+      },
+      {
+        "level": "43",
+        "move": "Flamethrower",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 90,
+        "acc": 100
+      },
+      {
+        "level": "50",
+        "move": "Fire Spin",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 35,
+        "acc": 85
+      },
+      {
+        "level": "54",
+        "move": "Inferno",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 100,
+        "acc": 50
+      }
+    ],
+    "8": [
+      {
+        "level": "1",
+        "move": "Ember",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "1",
+        "move": "Scratch",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "12",
+        "move": "Dragon Breath",
+        "type": "Dragon",
+        "cat": "Special",
+        "power": 60,
+        "acc": 100
+      },
+      {
+        "level": "19",
+        "move": "Fire Fang",
+        "type": "Fire",
+        "cat": "Physical",
+        "power": 65,
+        "acc": 95
+      },
+      {
+        "level": "24",
+        "move": "Slash",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 70,
+        "acc": 100
+      },
+      {
+        "level": "30",
+        "move": "Flamethrower",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 90,
+        "acc": 100
+      },
+      {
+        "level": "42",
+        "move": "Fire Spin",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 35,
+        "acc": 85
+      },
+      {
+        "level": "48",
+        "move": "Inferno",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 100,
+        "acc": 50
+      },
+      {
+        "level": "54",
+        "move": "Flare Blitz",
+        "type": "Fire",
+        "cat": "Physical",
+        "power": 120,
+        "acc": 100
+      }
+    ],
+    "10": [
+      {
+        "level": "1",
+        "move": "Ember",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "1",
+        "move": "Scratch",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 40,
+        "acc": 100
+      },
+      {
+        "level": "12",
+        "move": "Dragon Breath",
+        "type": "Dragon",
+        "cat": "Special",
+        "power": 60,
+        "acc": 100
+      },
+      {
+        "level": "19",
+        "move": "Fire Fang",
+        "type": "Fire",
+        "cat": "Physical",
+        "power": 65,
+        "acc": 95
+      },
+      {
+        "level": "24",
+        "move": "Slash",
+        "type": "Normal",
+        "cat": "Physical",
+        "power": 70,
+        "acc": 100
+      },
+      {
+        "level": "30",
+        "move": "Flamethrower",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 90,
+        "acc": 100
+      },
+      {
+        "level": "48",
+        "move": "Inferno",
+        "type": "Fire",
+        "cat": "Special",
+        "power": 100,
+        "acc": 50
+      },
+      {
+        "level": "54",
+        "move": "Flare Blitz",
+        "type": "Fire",
+        "cat": "Physical",
+        "power": 120,
+        "acc": 100
+      }
+    ]
+  }
+}

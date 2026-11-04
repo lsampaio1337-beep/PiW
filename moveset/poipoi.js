@@ -84,49 +84,95 @@ async function fetchPokemonMovesForGen(pokemonId, gen) {
 function extractMovesFromDoc($, targetTabRegex, pokemonName) {
     const moves = [];
     let containers = [];
-    const tabs = $('.sv-tabs-tab-list a');
 
-    if (tabs.length > 0 && targetTabRegex) {
-        let targetHref = null;
-        tabs.each((i, el) => {
+    // We only care about main game tabs, which are typically the very first sv-tabs-tab-list on the page
+    // if there are multiple versions. We must not confuse these with form tabs.
+    // Pokemon forms don't have `/` or `&` usually (except maybe Type: Null, but let's be careful).
+    // The safest way is to check the first wrapper.
+    const allTabLists = $('.sv-tabs-tab-list');
+
+    let targetHref = null;
+    let foundAnyGameTabs = false;
+
+    if (allTabLists.length > 0 && targetTabRegex) {
+        // Let's check all links across all tab lists just in case
+        const allLinks = allTabLists.find('a');
+
+        allLinks.each((i, el) => {
             const text = $(el).text().trim();
             if (targetTabRegex.test(text)) {
                 targetHref = $(el).attr('href');
+                foundAnyGameTabs = true;
             }
         });
+
+        // If we didn't find the exact target but we did find other games like Sword/Shield and Brilliant Diamond
+        // it means the pokemon is NOT in the target game for this gen.
+        // We know they are game tabs if they match some game.
+        // Wait, how do we know if it was a game tab that was found?
+        // Let's just say if targetHref is found, we use it.
+        // If targetHref is NOT found, we fallback to body ONLY if there are no tabs that look like games at all.
+        // E.g. Gen 1 often has NO tabs (just body).
+        // Gen 9 often has Scarlet/Violet tabs. If a pokemon is not in SV, it might have no tabs, or just body.
 
         if (targetHref) {
             const tabId = targetHref.replace('#', '');
             containers = $(`#${tabId}`);
         } else {
-            // Found tabs, but the target game isn't there!
-            // Do NOT fall back to body. Return empty because pokemon doesn't exist in this game,
-            // or has no tab for it.
-            return [];
+            // It might be that this pokemon doesn't have ANY game tabs (e.g. Gen 1), so we fallback to body.
+            // Or it might be they DO have game tabs, but the target game isn't one of them (e.g. Larvitar in Legends Arceus), in which case we should return [].
+            // To distinguish: check if there are ANY tabs that match common game names for this gen.
+            const gameNamesForGen = {
+                1: /red|blue|yellow/i,
+                2: /gold|silver|crystal/i,
+                3: /ruby|sapphire|emerald|firered|leafgreen/i,
+                4: /diamond|pearl|platinum|heartgold|soulsilver/i,
+                5: /black|white/i,
+                6: /x\s*[\/&]\s*y|omega|alpha/i,
+                7: /sun|moon|let's/i,
+                8: /sword|shield|brilliant|shining|legends/i,
+                9: /scarlet|violet|legends/i
+            };
+
+            // Check if any link on the page matches any game in this gen.
+            let hasGameTabs = false;
+            // determine generation from the targetTabRegex by looking at the rules (we can't easily, but we can just test all game names)
+            const allGamesRegex = /red|blue|yellow|gold|silver|crystal|ruby|sapphire|emerald|firered|leafgreen|diamond|pearl|platinum|heartgold|soulsilver|black|white|x\s*[\/&]\s*y|omega|alpha|sun|moon|let's|sword|shield|brilliant|shining|legends|scarlet|violet/i;
+
+            allLinks.each((i, el) => {
+                if (allGamesRegex.test($(el).text().trim())) {
+                    hasGameTabs = true;
+                }
+            });
+
+            if (hasGameTabs) {
+                // There ARE game tabs, but our target wasn't among them.
+                // Ergo, the pokemon doesn't exist in our target game.
+                return [];
+            } else {
+                // There are NO game tabs at all.
+                // That means the whole page implicitly applies to the target game (usually Gen 1-4 format).
+                containers = $('body');
+            }
         }
     } else {
-        // If there are no tabs AT ALL, it means the whole page is for the given game (usually Gen 1-4)
         containers = $('body');
     }
 
     if (containers.length === 0) return [];
 
-    // Check if the container text says "does not learn any level up moves"
-    // or "does not exist in" to skip cleanly.
     if (containers.text().toLowerCase().includes('does not learn any level up moves') ||
         containers.text().toLowerCase().includes('does not learn any moves') ||
         containers.text().toLowerCase().includes('is not available in')) {
         return [];
     }
 
-    // Within the container, find 'h3' that matches "learnt by level up"
     containers.first().find('h3').each((i, h3) => {
         const title = $(h3).text().trim().toLowerCase();
         if (title.includes('learnt by level up') || title.includes('learned by level up')) {
             let current = $(h3).next();
             while(current.length && current.prop('tagName') !== 'H3') {
                 if (current.hasClass('sv-tabs-wrapper')) {
-                    // It's a tabs wrapper for forms. Find the tab that matches pokemonName exactly.
                     let targetHref = null;
                     current.find('.sv-tabs-tab-list a').each((j, a) => {
                         if ($(a).text().trim().toLowerCase() === pokemonName.toLowerCase()) {
@@ -176,7 +222,8 @@ async function processPokemon(pokemon) {
         for (const rule of rules) {
             let targetTabRegex = null;
             if (rule.tabs.length > 0) {
-                targetTabRegex = new RegExp(`^(${rule.tabs.join('|').replace(/\//g, '[/&]')})$`, 'i');
+                // Add flexible whitespace around / or & just in case
+                targetTabRegex = new RegExp(`^(${rule.tabs.join('|').replace(/\//g, '\\s*[/&]\\s*')})$`, 'i');
             }
 
             const moves = extractMovesFromDoc($, targetTabRegex, pokemon.name);
@@ -194,31 +241,50 @@ async function processPokemon(pokemon) {
                 results[rule.outRegion] = uniqueMoves;
             }
         }
-        await delay(500); // 500ms delay to avoid rate limiting
+        await delay(300);
     }
 
-    console.log(`Finished ${pokemon.name} - Regions found: ${Object.keys(results).join(', ')}`);
+    console.log(`[+] Collected data for ${pokemon.name} - Regions mapped: ${Object.keys(results).join(', ')}`);
     return { name: pokemon.name, id: pokemon.id, movesets: results };
 }
 
 async function main() {
     const pokemons = await fetchPokemonList();
-    console.log(`Found ${pokemons.length} unique pokemon.`);
+    console.log(`Found ${pokemons.length} unique pokemon to process. This will take a while!`);
 
-    const allMovesets = {};
-    const CONCURRENCY = 5;
+    let allMovesets = {};
+    const outPath = path.join(__dirname, 'movesets.json');
 
-    for (let i = 0; i < pokemons.length; i += CONCURRENCY) {
-        const chunk = pokemons.slice(i, i + CONCURRENCY);
-        const results = await Promise.all(chunk.map(p => processPokemon(p)));
-        for (const res of results) {
-            allMovesets[res.name] = res.movesets;
+    if (fs.existsSync(outPath)) {
+        try {
+            allMovesets = JSON.parse(fs.readFileSync(outPath, 'utf8'));
+            console.log(`Loaded ${Object.keys(allMovesets).length} already processed pokemon from movesets.json`);
+        } catch (e) {
+            console.log('Failed to parse existing movesets.json, starting fresh.');
         }
     }
 
-    const outPath = path.join(__dirname, 'movesets.json');
+    let count = 0;
+    for (const p of pokemons) {
+        if (allMovesets[p.name]) {
+            continue;
+        }
+
+        const res = await processPokemon(p);
+        allMovesets[res.name] = res.movesets;
+        count++;
+
+        if (count % 5 === 0) {
+            fs.writeFileSync(outPath, JSON.stringify(allMovesets, null, 2));
+            console.log(`>>> Progress saved to ${outPath} (${Object.keys(allMovesets).length}/${pokemons.length})`);
+        }
+    }
+
     fs.writeFileSync(outPath, JSON.stringify(allMovesets, null, 2));
-    console.log(`Saved all movesets to ${outPath}`);
+    console.log(`\n\n======================================================`);
+    console.log(`FINISHED PROCESSING ALL ${pokemons.length} POKEMON!`);
+    console.log(`Final data saved to ${outPath}`);
+    console.log(`======================================================\n`);
 }
 
 main().catch(console.error);

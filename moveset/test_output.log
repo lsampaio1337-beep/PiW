@@ -1,0 +1,8 @@
+Fetching full pokemon list...
+Found 1025 unique pokemon to process. This will take a while!
+[+] Collected data for Bulbasaur - Regions mapped: 1, 2, 3, 4, 5, 6, 7, 8, 10
+[+] Collected data for Ivysaur - Regions mapped: 1, 2, 3, 4, 5, 6, 7, 8
+[+] Collected data for Venusaur - Regions mapped: 1, 2, 3, 4, 5, 6, 7, 8
+[+] Collected data for Charmander - Regions mapped: 1, 2, 3, 4, 5, 6, 7, 8, 10
+[+] Collected data for Charmeleon - Regions mapped: 1, 2, 3, 4, 5, 6, 7, 8, 10
+>>> Progress saved to /app/moveset/movesets.json (5/1025)
