@@ -1994,14 +1994,15 @@ async function init() {
             titleDiv.textContent = `"${profileName}" - ${playtimeStr}`;
 
             const playedDiv = document.createElement('div');
-            playedDiv.style.fontSize = "14px";
-            playedDiv.style.fontWeight = "normal";
+            playedDiv.style.fontSize = "18px";
+            playedDiv.style.fontWeight = "bold";
+            playedDiv.style.marginBottom = "5px";
             playedDiv.textContent = `Last Played: ${lastPlayedStr}`;
 
             const progressDiv = document.createElement('div');
             progressDiv.style.fontSize = "14px";
             progressDiv.style.fontWeight = "normal";
-            progressDiv.textContent = `Progress: ${lastRoute}${zzzText}`;
+            progressDiv.textContent = `${lastRoute}${zzzText}`;
 
             leftSide.appendChild(titleDiv);
             leftSide.appendChild(progressDiv);
@@ -2076,8 +2077,8 @@ async function init() {
                 const medalImg = document.createElement('img');
                 medalImg.src = `Assets/Extra/Medals/${region} ${activeTier}.png`;
                 medalImg.alt = `${region} Medal`;
-                medalImg.style.width = "48px";
-                medalImg.style.height = "48px";
+                medalImg.style.width = "96px";
+                medalImg.style.height = "96px";
                 medalImg.style.objectFit = "contain";
                 medalImg.style.imageRendering = "pixelated";
                 if (isGray) medalImg.style.filter = "grayscale(100%) opacity(0.5)";
