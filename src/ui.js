@@ -764,9 +764,9 @@ window.closeModal = function(windowId) {
 
 
 
-export function generateCatchRateHtml(showShiny = false) {
+export function generateCatchRateHtml(showShiny = true) {
     const balls = ["Pokeball", "Greatball", "Ultraball", "Safariball", "Masterball"];
-    const targetTracker = showShiny ? (state.stats.shinyCatchAttempts || {}) : (state.stats.catchAttempts || {});
+    const targetTracker = state.stats.shinyCatchAttempts || {};
 
     // Collect all pokemon that have been thrown at
     let rowData = [];
@@ -794,11 +794,6 @@ export function generateCatchRateHtml(showShiny = false) {
     }
 
     let html = `<div style="padding: 2%; box-sizing: border-box;">
-    <div style="text-align: center; margin-bottom: 15px;">
-        <button id="btn-catch-rate-shiny-toggle" onclick="window.showTrainerStats('catch-rate', { showShiny: ${!showShiny} })" style="padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer; background: ${showShiny ? '#fbbf24' : '#6b7280'}; color: white; border: none; border-radius: 5px;">
-            ${showShiny ? 'Showing Shiny Attempts (Click to show Normal)' : 'Showing Normal Attempts (Click to show Shiny)'}
-        </button>
-    </div>
     <div style="max-height: 60vh; overflow-y: auto;">
         <table style="width: 100%; border-collapse: collapse; text-align: center; color: white;">
             <thead>
@@ -854,14 +849,7 @@ export function showCatchRateModal(showShiny = false) {
         }
     }
     // We override the button action just for standalone modal use
-    setTimeout(() => {
-        const btn = document.getElementById('btn-catch-rate-shiny-toggle');
-        if (btn) {
-            btn.onclick = () => {
-                showCatchRateModal(!showShiny);
-            };
-        }
-    }, 0);
+
 }
 
 export function showModal(title, htmlContent, windowId = 'dynamic-modal', width = '800px', height = 'auto') {
@@ -2546,7 +2534,7 @@ async function init() {
                 }
 
                 const badgeFile = window.getBadgeFileName(badgeRegion, badgeNum);
-                badgesHtml += `<img src="./Assets/Gym/Badges/${badgeFile}" style="width: 40px; height: 40px;" title="Badge ${i + 1}">`;
+                badgesHtml += `<img src="./Assets/Gym/Badges/${badgeFile}" style="width: 100px; height: 100px;" title="Badge ${i + 1}">`;
             }
             badgesHtml += '</div>';
 
