@@ -1816,7 +1816,7 @@ async function init() {
     window.windowManager.registerWindow('main-view-window', 'main-view-header', '30%', '15%');
 
     window.windowManager.registerWindow('modal-content-box', 'modal-header', '25%', '25%');
-    window.windowManager.registerWindow('save-manager-modal', 'save-manager-header', '25%', '15%');
+    window.windowManager.registerWindow('save-manager-modal', 'save-manager-header', '50%', '15%');
     await loadConfigs();
 
     const profiles = storage.getProfiles();
@@ -1980,41 +1980,128 @@ async function init() {
             btn.style.borderRadius = "5px";
             btn.style.textAlign = "left";
             btn.style.fontWeight = "bold";
-            btn.style.width = "75%";
-            btn.style.margin = "0 auto";
-            btn.style.display = "flex";
-            btn.style.justifyContent = "space-between";
-            btn.style.alignItems = "center";
 
-            const innerDiv = document.createElement('div');
-            innerDiv.style.flexGrow = "1";
-            innerDiv.style.display = "flex";
-            innerDiv.style.flexDirection = "column";
-            innerDiv.style.justifyContent = "center";
+            btn.style.width = "max-content";
+            btn.style.minWidth = "100%";
+            btn.style.flexDirection = "column";
+
+            const textWrapper = document.createElement('div');
+            textWrapper.style.display = "flex";
+            textWrapper.style.justifyContent = "space-between";
+            textWrapper.style.alignItems = "center";
+            textWrapper.style.width = "100%";
+
+            const leftSide = document.createElement('div');
+            leftSide.style.display = "flex";
+            leftSide.style.flexDirection = "column";
+            leftSide.style.alignItems = "flex-start";
+
+            const rightSide = document.createElement('div');
+            rightSide.style.display = "flex";
+            rightSide.style.flexDirection = "column";
+            rightSide.style.alignItems = "flex-end";
 
             const titleDiv = document.createElement('div');
             titleDiv.style.fontSize = "18px";
             titleDiv.style.marginBottom = "5px";
             titleDiv.style.fontWeight = "bold";
-            titleDiv.style.display = "flex";
-            titleDiv.style.alignItems = "center";
             titleDiv.textContent = `"${profileName}" - ${playtimeStr}`;
 
             const playedDiv = document.createElement('div');
-            playedDiv.style.fontSize = "14px";
-            playedDiv.style.fontWeight = "normal";
+            playedDiv.style.fontSize = "18px";
+            playedDiv.style.fontWeight = "bold";
+            playedDiv.style.marginBottom = "5px";
             playedDiv.textContent = `Last Played: ${lastPlayedStr}`;
 
-            const progressDiv = document.createElement('div');
-            progressDiv.style.fontSize = "14px";
-            progressDiv.style.fontWeight = "normal";
-            progressDiv.textContent = `Progress: ${lastRoute}${zzzText}`;
 
-            innerDiv.appendChild(titleDiv);
-            innerDiv.appendChild(playedDiv);
-            innerDiv.appendChild(progressDiv);
+            leftSide.appendChild(titleDiv);
 
-            btn.appendChild(innerDiv);
+            rightSide.appendChild(playedDiv);
+
+            textWrapper.appendChild(leftSide);
+            textWrapper.appendChild(rightSide);
+
+            btn.appendChild(textWrapper);
+
+            // Add Medals Container on the second row
+            const regions = ['Kanto', 'Johto', 'Hoenn', 'Sinnoh', 'Unova', 'Kalos', 'Alola', 'Galar', 'Hisui', 'Paldea'];
+            const medalsContainer = document.createElement('div');
+            medalsContainer.style.display = "flex";
+            medalsContainer.style.flexWrap = "nowrap"; // Keep them in a single row
+            medalsContainer.style.justifyContent = "center";
+            medalsContainer.style.alignItems = "center";
+            medalsContainer.style.gap = "2px";
+            medalsContainer.style.marginLeft = "10px";
+            medalsContainer.style.marginTop = "10px";
+
+            let earnedAnyMedal = false;
+
+            regions.forEach(region => {
+                let activeTier = null;
+
+                // On profile load, state.config is available.
+                if (typeof state !== 'undefined' && state && state.config && state.config.pokemonData) {
+                    let caughtCount = 0;
+                    let shinyCount = 0;
+                    let totalInRegion = 0;
+
+                    let regionalStats;
+                    if (pData.currentRegionName === region) {
+                        regionalStats = pData.stats;
+                    } else if (pData.regions && pData.regions[region]) {
+                        regionalStats = pData.regions[region].stats;
+                    }
+                    if (region === 'Kanto' && !regionalStats) {
+                        regionalStats = pData.stats;
+                    }
+
+                    const regionKey = region.toLowerCase() + '_id';
+                    state.config.pokemonData.forEach(p => {
+                        if (p[regionKey]) {
+                            totalInRegion++;
+                            if (regionalStats) {
+                                if (regionalStats.caughtSpecies && regionalStats.caughtSpecies[p.name]) {
+                                    caughtCount++;
+                                }
+                                if (regionalStats.caughtShiniesSpecies && regionalStats.caughtShiniesSpecies[p.name]) {
+                                    shinyCount++;
+                                }
+                            }
+                        }
+                    });
+
+                    const hasFirst = caughtCount > 0;
+                    const hasSecond = totalInRegion > 0 && caughtCount >= totalInRegion;
+                    const hasThird = totalInRegion > 0 && shinyCount >= totalInRegion;
+
+                    if (hasThird) {
+                        activeTier = 'Third';
+                    } else if (hasSecond) {
+                        activeTier = 'Second';
+                    } else if (hasFirst) {
+                        activeTier = 'First';
+                    }
+                }
+
+                if (activeTier) {
+                    earnedAnyMedal = true;
+                    const medalImg = document.createElement('img');
+                    medalImg.src = `Assets/Extra/Medals/${region} ${activeTier}.png`;
+                    medalImg.alt = `${region} Medal`;
+                    medalImg.style.width = "auto";
+                    medalImg.style.height = "96px";
+                    medalImg.style.objectFit = "contain";
+                    medalImg.style.imageRendering = "pixelated";
+                    medalImg.onerror = () => { medalImg.src = `Assets/Extra/Medals/Kanto ${activeTier}.png`; };
+                    medalsContainer.appendChild(medalImg);
+                }
+            });
+
+            if (earnedAnyMedal) {
+                btn.appendChild(medalsContainer);
+            }
+
+
 
             if (pData.isZzZMode) {
                 const sleepImg = document.createElement('img');
