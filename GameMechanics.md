@@ -126,7 +126,7 @@ This document provides a comprehensive overview of all formulas, game mechanics,
 - **Safari Zone**: Catch Dodrio (x2)
 - **Saffron Gym**: Defeat Safari Zone (x400)
 - **Sea Routes**: Earn Marsh Badge
-- **Pokémon Mansion**: Defeat Sea Routes (x250)
+- **Pokemon Mansion**: Defeat Sea Routes (x250)
 - **Cinnabar Gym**: Catch Magmar (Rare x1)
 - **Viridian Gym**: Earn Volcano Badge
 - **Route 22**: Earn Earth Badge
