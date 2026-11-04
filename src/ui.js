@@ -1797,7 +1797,7 @@ async function init() {
     window.windowManager.registerWindow('main-view-window', 'main-view-header', '30%', '15%');
 
     window.windowManager.registerWindow('modal-content-box', 'modal-header', '25%', '25%');
-    window.windowManager.registerWindow('save-manager-modal', 'save-manager-header', '25%', '15%');
+    window.windowManager.registerWindow('save-manager-modal', 'save-manager-header', '50%', '15%');
     await loadConfigs();
 
     const profiles = storage.getProfiles();
@@ -1961,7 +1961,7 @@ async function init() {
             btn.style.borderRadius = "5px";
             btn.style.textAlign = "left";
             btn.style.fontWeight = "bold";
-            btn.style.width = "75%";
+            btn.style.width = "95%";
             btn.style.margin = "0 auto";
             btn.style.display = "flex";
             btn.style.justifyContent = "space-between";
@@ -2001,7 +2001,8 @@ async function init() {
             const regions = ['Kanto', 'Johto', 'Hoenn', 'Sinnoh', 'Unova', 'Kalos', 'Alola', 'Galar', 'Hisui', 'Paldea'];
             const medalsContainer = document.createElement('div');
             medalsContainer.style.display = "grid";
-            medalsContainer.style.gridTemplateColumns = "repeat(5, 1fr)";
+            medalsContainer.style.gridTemplateColumns = "repeat(10, 1fr)";
+            medalsContainer.style.alignItems = "center";
             medalsContainer.style.gap = "2px";
             medalsContainer.style.marginLeft = "10px";
 
@@ -2059,8 +2060,8 @@ async function init() {
                 const medalImg = document.createElement('img');
                 medalImg.src = `Assets/Extra/Medals/${region} ${activeTier}.png`;
                 medalImg.alt = `${region} Medal`;
-                medalImg.style.width = "24px";
-                medalImg.style.height = "24px";
+                medalImg.style.width = "48px";
+                medalImg.style.height = "48px";
                 medalImg.style.objectFit = "contain";
                 medalImg.style.imageRendering = "pixelated";
                 if (isGray) medalImg.style.filter = "grayscale(100%) opacity(0.5)";
