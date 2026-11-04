@@ -1982,7 +1982,7 @@ async function init() {
             btn.style.fontWeight = "bold";
 
             btn.style.width = "max-content";
-            btn.style.minWidth = "100%";
+            btn.style.minWidth = "60%";
             btn.style.flexDirection = "column";
 
             const textWrapper = document.createElement('div');
