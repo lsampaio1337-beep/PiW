@@ -3776,6 +3776,96 @@ export const paldeaRoutes = [
     "name": "Ruins",
     "spawns": [
       {
+        "pokemonId": 579,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 577,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 622,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 677,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 686,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 43,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 116,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 235,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 355,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 736,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 299,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 74,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 708,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 37,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 459,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
         "pokemonId": 1001,
         "minLevel": 100,
         "maxLevel": 100,

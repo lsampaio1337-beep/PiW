@@ -3,6 +3,18 @@ export const alolaRoutes = [
     "name": "Route 1 East",
     "spawns": [
       {
+        "pokemonId": 427,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 440,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
         "pokemonId": 731,
         "minLevel": 2,
         "maxLevel": 7,
@@ -153,6 +165,12 @@ export const alolaRoutes = [
     "name": "Route 2 North",
     "spawns": [
       {
+        "pokemonId": 204,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
         "pokemonId": 96,
         "minLevel": 10,
         "maxLevel": 15,
@@ -222,6 +240,12 @@ export const alolaRoutes = [
   {
     "name": "Seaward Cave",
     "spawns": [
+      {
+        "pokemonId": 225,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
       {
         "pokemonId": 339,
         "minLevel": 14,
@@ -337,6 +361,12 @@ export const alolaRoutes = [
     "name": "Paniola Ranch",
     "spawns": [
       {
+        "pokemonId": 506,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
         "pokemonId": 133,
         "minLevel": 20,
         "maxLevel": 25,
@@ -389,6 +419,12 @@ export const alolaRoutes = [
     "name": "Route 5",
     "spawns": [
       {
+        "pokemonId": 674,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
         "pokemonId": 714,
         "minLevel": 23,
         "maxLevel": 28,
@@ -438,6 +474,12 @@ export const alolaRoutes = [
     "name": "Wela Volcano Park",
     "spawns": [
       {
+        "pokemonId": 661,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
         "pokemonId": 104,
         "minLevel": 28,
         "maxLevel": 33,
@@ -483,6 +525,36 @@ export const alolaRoutes = [
   {
     "name": "Route 7",
     "spawns": [
+      {
+        "pokemonId": 228,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 209,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 54,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 56,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 63,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
       {
         "pokemonId": 120,
         "minLevel": 31,
@@ -582,6 +654,24 @@ export const alolaRoutes = [
   {
     "name": "Lush Jungle North",
     "spawns": [
+      {
+        "pokemonId": 704,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 46,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 438,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
       {
         "pokemonId": 732,
         "minLevel": 34,
@@ -872,6 +962,12 @@ export const alolaRoutes = [
     "name": "Mount Hokulani East",
     "spawns": [
       {
+        "pokemonId": 132,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
         "pokemonId": 173,
         "minLevel": 52,
         "maxLevel": 57,
@@ -1032,6 +1128,24 @@ export const alolaRoutes = [
     "name": "Haina Desert",
     "spawns": [
       {
+        "pokemonId": 622,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 343,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 328,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
         "pokemonId": 51,
         "minLevel": 63,
         "maxLevel": 68,
@@ -1088,6 +1202,12 @@ export const alolaRoutes = [
     "name": "Seafolk Village",
     "spawns": [
       {
+        "pokemonId": 142,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
         "pokemonId": 762,
         "minLevel": 69,
         "maxLevel": 74,
@@ -1116,6 +1236,12 @@ export const alolaRoutes = [
   {
     "name": "Poni Wilds",
     "spawns": [
+      {
+        "pokemonId": 676,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
       {
         "pokemonId": 73,
         "minLevel": 70,
@@ -1224,6 +1350,12 @@ export const alolaRoutes = [
     "name": "Exeggutor Island",
     "spawns": [
       {
+        "pokemonId": 351,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
         "pokemonId": 279,
         "minLevel": 73,
         "maxLevel": 78,
@@ -1285,6 +1417,12 @@ export const alolaRoutes = [
   {
     "name": "Vast Poni Canyon Outside",
     "spawns": [
+      {
+        "pokemonId": 227,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
       {
         "pokemonId": 67,
         "minLevel": 75,
@@ -1350,6 +1488,18 @@ export const alolaRoutes = [
     "name": "Mount Lanakila",
     "spawns": [
       {
+        "pokemonId": 584,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 582,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
         "pokemonId": 780,
         "minLevel": 82,
         "maxLevel": 87,
@@ -1410,7 +1560,43 @@ export const alolaRoutes = [
   },
   {
     "name": "Route 6",
-    "spawns": [],
+    "spawns": [
+      {
+        "pokemonId": 701,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 206,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 587,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 118,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 186,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 174,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },],
     "challengeName": "Extra Challenge A-1",
     "areaId": "Route 6",
     "unlocks": [
@@ -1467,7 +1653,25 @@ export const alolaRoutes = [
   },
   {
     "name": "Poni Plains",
-    "spawns": [],
+    "spawns": [
+      {
+        "pokemonId": 190,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 123,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 242,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },],
     "challengeName": "Extra Challenge D-1",
     "areaId": "Poni Plains",
     "unlocks": [
@@ -1512,7 +1716,37 @@ export const alolaRoutes = [
   },
   {
     "name": "Route 16",
-    "spawns": [],
+    "spawns": [
+      {
+        "pokemonId": 214,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 559,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 149,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 61,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 60,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },],
     "challengeName": "Extra Challenge E-1",
     "areaId": "Route 16",
     "unlocks": [
@@ -1873,6 +2107,24 @@ export const alolaRoutes = [
   {
     "name": "Kala'e Bay",
     "spawns": [
+      {
+        "pokemonId": 458,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 223,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 371,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
       {
         "pokemonId": 90,
         "minLevel": 85,

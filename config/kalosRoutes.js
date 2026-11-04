@@ -44,6 +44,24 @@ export const kalosRoutes = [
     "name": "Route 2",
     "spawns": [
       {
+        "pokemonId": 163,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 21,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 504,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
         "pokemonId": 14,
         "minLevel": 2,
         "maxLevel": 4,
@@ -790,6 +808,12 @@ export const kalosRoutes = [
     "name": "Route 11",
     "spawns": [
       {
+        "pokemonId": 314,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
         "pokemonId": 366,
         "minLevel": 32,
         "maxLevel": 35,
@@ -1182,6 +1206,12 @@ export const kalosRoutes = [
     "name": "Route 14",
     "spawns": [
       {
+        "pokemonId": 451,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
         "pokemonId": 117,
         "minLevel": 52,
         "maxLevel": 57,
@@ -1400,6 +1430,18 @@ export const kalosRoutes = [
     "name": "Route 17",
     "spawns": [
       {
+        "pokemonId": 225,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 594,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
         "pokemonId": 685,
         "minLevel": 64,
         "maxLevel": 70,
@@ -1469,6 +1511,12 @@ export const kalosRoutes = [
   {
     "name": "Route 18",
     "spawns": [
+      {
+        "pokemonId": 441,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
       {
         "pokemonId": 558,
         "minLevel": 67,
@@ -1718,6 +1766,18 @@ export const kalosRoutes = [
   {
     "name": "Victory Road",
     "spawns": [
+      {
+        "pokemonId": 302,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 303,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
       {
         "pokemonId": 62,
         "minLevel": 80,
@@ -2367,6 +2427,12 @@ export const kalosRoutes = [
   {
     "name": "Friend Safari",
     "spawns": [
+      {
+        "pokemonId": 702,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
       {
         "pokemonId": 553,
         "minLevel": 93,
