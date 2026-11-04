@@ -3,6 +3,24 @@ export const alolaRoutes = [
     "name": "Route 1 East",
     "spawns": [
       {
+        "pokemonId": 427,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 242,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 440,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
         "pokemonId": 731,
         "minLevel": 2,
         "maxLevel": 7,
@@ -152,6 +170,12 @@ export const alolaRoutes = [
   {
     "name": "Route 2 North",
     "spawns": [
+      {
+        "pokemonId": 206,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
       {
         "pokemonId": 96,
         "minLevel": 10,
@@ -388,6 +412,18 @@ export const alolaRoutes = [
   {
     "name": "Route 5",
     "spawns": [
+      {
+        "pokemonId": 508,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 506,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
       {
         "pokemonId": 714,
         "minLevel": 23,
@@ -1410,7 +1446,19 @@ export const alolaRoutes = [
   },
   {
     "name": "Route 6",
-    "spawns": [],
+    "spawns": [
+      {
+        "pokemonId": 40,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 174,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },],
     "challengeName": "Extra Challenge A-1",
     "areaId": "Route 6",
     "unlocks": [
@@ -1512,7 +1560,13 @@ export const alolaRoutes = [
   },
   {
     "name": "Route 16",
-    "spawns": [],
+    "spawns": [
+      {
+        "pokemonId": 559,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },],
     "challengeName": "Extra Challenge E-1",
     "areaId": "Route 16",
     "unlocks": [

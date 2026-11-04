@@ -417,6 +417,12 @@ export const kalosRoutes = [
     "name": "Route 7",
     "spawns": [
       {
+        "pokemonId": 314,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
         "pokemonId": 147,
         "minLevel": 17,
         "maxLevel": 20,
@@ -790,6 +796,12 @@ export const kalosRoutes = [
     "name": "Route 11",
     "spawns": [
       {
+        "pokemonId": 702,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
         "pokemonId": 366,
         "minLevel": 32,
         "maxLevel": 35,
@@ -916,6 +928,12 @@ export const kalosRoutes = [
   {
     "name": "Route 12",
     "spawns": [
+      {
+        "pokemonId": 441,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
       {
         "pokemonId": 75,
         "minLevel": 38,
@@ -1182,6 +1200,12 @@ export const kalosRoutes = [
     "name": "Route 14",
     "spawns": [
       {
+        "pokemonId": 451,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
         "pokemonId": 117,
         "minLevel": 52,
         "maxLevel": 57,
@@ -1399,6 +1423,12 @@ export const kalosRoutes = [
   {
     "name": "Route 17",
     "spawns": [
+      {
+        "pokemonId": 225,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
       {
         "pokemonId": 685,
         "minLevel": 64,

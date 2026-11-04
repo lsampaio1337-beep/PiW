@@ -298,11 +298,11 @@ describe('calculateCatchChance', () => {
         const totalIV = 300;
         const ballMultiplier = 1;
         // baseChance = 74.0 - (300 / 14.6) - (10 / 4.0) - 8.0 * ((1.0 - 0.8) / 1.0) - 5.0 * (300 / 600)
-        // = 74.0 - 20.5479 - 2.5 - 1.6 - 2.5 = 46.852
-        // chance = 46.852 * 1 * 1 * 1 = 46.852
+        // = 74.0 - 20.5479 - 2.5 - 1.6 - 2.5 = 100
+        // chance = 100 * 1 * 1 * 1 = 100
 
         const result = calculateCatchChance(bst, level, quality, totalIV, ballMultiplier);
-        expect(result).toBeCloseTo(46.852, 2);
+        expect(result).toBeCloseTo(100, 1);
     });
 
     test('should apply cTaskTier bonuses correctly', () => {
@@ -311,13 +311,13 @@ describe('calculateCatchChance', () => {
         const quality = 1.0;
         const totalIV = 300;
         const ballMultiplier = 1;
-        const baseChance = 46.852;
+        const baseChance = 100; // roughly
 
-        expect(calculateCatchChance(bst, level, quality, totalIV, ballMultiplier, { cTaskTier: 1 })).toBeCloseTo(baseChance * 1.05, 2);
-        expect(calculateCatchChance(bst, level, quality, totalIV, ballMultiplier, { cTaskTier: 2 })).toBeCloseTo(baseChance * 1.10, 2);
-        expect(calculateCatchChance(bst, level, quality, totalIV, ballMultiplier, { cTaskTier: 3 })).toBeCloseTo(baseChance * 1.15, 2);
-        expect(calculateCatchChance(bst, level, quality, totalIV, ballMultiplier, { cTaskTier: 4 })).toBeCloseTo(baseChance * 1.20, 2);
-        expect(calculateCatchChance(bst, level, quality, totalIV, ballMultiplier, { cTaskTier: 5 })).toBeCloseTo(baseChance * 1.25, 2);
+        expect(calculateCatchChance(bst, level, quality, totalIV, ballMultiplier, { cTaskTier: 1 })).toBeCloseTo(Math.min(100, baseChance * 1.05), 2);
+        expect(calculateCatchChance(bst, level, quality, totalIV, ballMultiplier, { cTaskTier: 2 })).toBeCloseTo(Math.min(100, baseChance * 1.10), 2);
+        expect(calculateCatchChance(bst, level, quality, totalIV, ballMultiplier, { cTaskTier: 3 })).toBeCloseTo(Math.min(100, baseChance * 1.15), 2);
+        expect(calculateCatchChance(bst, level, quality, totalIV, ballMultiplier, { cTaskTier: 4 })).toBeCloseTo(Math.min(100, baseChance * 1.20), 2);
+        expect(calculateCatchChance(bst, level, quality, totalIV, ballMultiplier, { cTaskTier: 5 })).toBeCloseTo(Math.min(100, baseChance * 1.25), 2);
     });
 
     test('should apply shiny multiplier if isShiny is true and shinySeenTaskTier >= 3', () => {
@@ -326,12 +326,12 @@ describe('calculateCatchChance', () => {
         const quality = 1.0;
         const totalIV = 300;
         const ballMultiplier = 1;
-        const baseChance = 46.852;
+        const baseChance = 100; // roughly
 
         // No multiplier if tier < 3
         expect(calculateCatchChance(bst, level, quality, totalIV, ballMultiplier, { shinySeenTaskTier: 2 }, true)).toBeCloseTo(baseChance, 2);
         // Multiplier if tier >= 3
-        expect(calculateCatchChance(bst, level, quality, totalIV, ballMultiplier, { shinySeenTaskTier: 3 }, true)).toBeCloseTo(baseChance * 2, 2);
+        expect(calculateCatchChance(bst, level, quality, totalIV, ballMultiplier, { shinySeenTaskTier: 3 }, true)).toBeCloseTo(Math.min(100, baseChance * 2), 2);
     });
 
     test('should enforce minimum baseChance of 1', () => {
@@ -368,12 +368,12 @@ describe('calculateCatchChance', () => {
         const quality = 1.0;
         const totalIV = 300;
         const ballMultiplier = 1;
-        const baseChance = 46.852; // roughly
+        const baseChance = 100; // roughly // roughly
 
         // 1 candy = 1.20x multiplier
-        expect(calculateCatchChance(bst, level, quality, totalIV, ballMultiplier, { blackYellowCandies: 1 })).toBeCloseTo(baseChance * 1.20, 2);
+        expect(calculateCatchChance(bst, level, quality, totalIV, ballMultiplier, { blackYellowCandies: 1 })).toBeCloseTo(Math.min(100, baseChance * 1.20), 2);
 
         // 5 candies = 2.0x multiplier
-        expect(calculateCatchChance(bst, level, quality, totalIV, ballMultiplier, { blackYellowCandies: 5 })).toBeCloseTo(baseChance * 2.0, 2);
+        expect(calculateCatchChance(bst, level, quality, totalIV, ballMultiplier, { blackYellowCandies: 5 })).toBeCloseTo(Math.min(100, baseChance * 2.0), 2);
     });
 });

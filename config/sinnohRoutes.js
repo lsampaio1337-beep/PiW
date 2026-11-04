@@ -687,6 +687,12 @@ export const sinnohRoutes = [
     name: "Route 214",
     spawns: [
       {
+        pokemonId: 207,
+        minLevel: 1,
+        maxLevel: 1,
+        chance: 0
+      },
+      {
         pokemonId: 333,
         minLevel: 37,
         maxLevel: 39,

@@ -1619,6 +1619,12 @@ export const galarRoutes = [
     "name": "Route 9",
     "spawns": [
       {
+        "pokemonId": 320,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
         "pokemonId": 279,
         "minLevel": 59,
         "maxLevel": 64,
@@ -2390,6 +2396,12 @@ export const galarRoutes = [
     "name": "Rock Peak Ruins",
     "spawns": [
       {
+        "pokemonId": 377,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
         "pokemonId": 851,
         "minLevel": 70,
         "maxLevel": 77,
@@ -2401,6 +2413,12 @@ export const galarRoutes = [
     "name": "Iceberg Ruins",
     "spawns": [
       {
+        "pokemonId": 378,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
         "pokemonId": 858,
         "minLevel": 80,
         "maxLevel": 88,
@@ -2411,6 +2429,12 @@ export const galarRoutes = [
   {
     "name": "Iron Ruins",
     "spawns": [
+      {
+        "pokemonId": 379,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
       {
         "pokemonId": 839,
         "minLevel": 90,
