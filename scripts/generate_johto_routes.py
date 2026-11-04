@@ -28,10 +28,11 @@ pokemon_data_raw = [
     ["", "Ruins of Alph", "Unown", "10 – 14", 0.7],
     ["", "Ruins of Alph", "Natu", "11 – 15", 0.2],
     ["", "Ruins of Alph", "Smeargle", "11 – 15", 0.1],
-    ["", "Route 33", "Geodude", "10 – 14", 0.2],
-    ["", "Route 33", "Spearow", "10 – 14", 0.3],
-    ["", "Route 33", "Mareep", "11 – 15", 0.2],
-    ["", "Route 33", "Hoothoot", "10 – 14", 0.3],
+    ["", "Route 33", "Geodude", "10 – 14", 0.15],
+    ["", "Route 33", "Spearow", "10 – 14", 0.25],
+    ["", "Route 33", "Mareep", "11 – 15", 0.15],
+    ["", "Route 33", "Aipom", "11 – 15", 0.20],
+    ["", "Route 33", "Hoothoot", "10 – 14", 0.25],
     ["", "Ilex Forest", "Paras", "13 – 17", 0.3],
     ["", "Ilex Forest", "Caterpie", "12 – 16", 0.2],
     ["", "Ilex Forest", "Weedle", "12 – 16", 0.2],
@@ -197,13 +198,25 @@ pokemon_data_raw = [
     ["", "Fossil Revival", "Aerodactyl", "94 – 95", 0.1],
     ["", "Fossil Revival", "Omastar", "92 – 94", 0.15],
     ["", "Fossil Revival", "Kabutops", "92 – 94", 0.15],
-    ["", "Pokémon Mansion", "Koffing", "91 – 95", 0.2],
-    ["", "Pokémon Mansion", "Slugma", "91 – 95", 0.2],
-    ["", "Pokémon Mansion", "Houndour", "91 – 95", 0.2],
-    ["", "Pokémon Mansion", "Magmar", "92 – 95", 0.15],
-    ["", "Pokémon Mansion", "Weezing", "93 – 95", 0.15],
-    ["", "Pokémon Mansion", "Magcargo", "93 – 95", 0.05],
-    ["", "Pokémon Mansion", "Houndoom", "93 – 95", 0.05],
+    ["", "Pokemon Mansion", "Koffing", "91 – 95", 0.2],
+    ["", "Pokemon Mansion", "Slugma", "91 – 95", 0.2],
+    ["", "Pokemon Mansion", "Houndour", "91 – 95", 0.2],
+    ["", "Pokemon Mansion", "Magmar", "92 – 95", 0.15],
+    ["", "Pokemon Mansion", "Weezing", "93 – 95", 0.15],
+    ["", "Pokemon Mansion", "Magcargo", "93 – 95", 0.05],
+    ["", "Pokemon Mansion", "Houndoom", "93 – 95", 0.05],
+
+    ["", "Victory Road", "Venomoth", "92 – 97", 0.18],
+    ["", "Victory Road", "Tangela", "92 – 97", 0.18],
+    ["", "Victory Road", "Girafarig", "92 – 97", 0.18],
+    ["", "Victory Road", "Heracross", "92 – 97", 0.13],
+    ["", "Victory Road", "Ursaring", "95 – 100", 0.13],
+    ["", "Victory Road", "Nidoking", "95 – 100", 0.10],
+    ["", "Victory Road", "Nidoqueen", "95 – 100", 0.10],
+    ["", "Trade With Friends Hub", "Gengar", "95 – 100", 0.25],
+    ["", "Trade With Friends Hub", "Alakazam", "95 – 100", 0.25],
+    ["", "Trade With Friends Hub", "Machamp", "95 – 100", 0.25],
+    ["", "Trade With Friends Hub", "Golem", "95 – 100", 0.25],
     ["Sidequest", "Casino Starter Trupe", "Bulbasaur", "80 – 85", "16.67%"],
     ["Sidequest", "Casino Starter Trupe", "Charmander", "80 – 85", "16.67%"],
     ["Sidequest", "Casino Starter Trupe", "Squirtle", "80 – 85", "16.67%"],
@@ -241,6 +254,12 @@ pokemon_data_raw = [
     ["Sidequest", "Casino Late Trupe", "Meganium", "90 – 98", 0.17],
     ["Sidequest", "Casino Late Trupe", "Typhlosion", "90 – 98", 0.17],
     ["Sidequest", "Casino Late Trupe", "Feraligatr", "90 – 98", 0.17],
+
+    ["", "Mount Silver Apex", "Raikou", 105, 0.2],
+    ["", "Mount Silver Apex", "Entei", 105, 0.2],
+    ["", "Mount Silver Apex", "Suicune", 105, 0.2],
+    ["", "Mount Silver Apex", "Mew", 105, 0.2],
+    ["", "Mount Silver Apex", "Mewtwo", 105, 0.2],
     ["Sidequest", "Legendaries Nest", "Articuno", 98, 0.2],
     ["Sidequest", "Legendaries Nest", "Zapdos", 98, 0.2],
     ["Sidequest", "Legendaries Nest", "Moltres", 98, 0.2],
@@ -299,21 +318,22 @@ challenges_data_raw = [
     ["Challenge 42", "Saffron Gym", "Badge 13", "Route 12 + Badge 13"],
     ["Challenge 43", "Route 12", "Capture 1 Snorlax", "Fuschia Gym + Safari Zone"],
     ["Challenge 44", "Fuschia Gym", "Badge 14", "Cycling Road + Sea Routes + Badge 14"],
-    ["Challenge 45", "Sea Routes", "Defeat 100 pokemons on Sea Routes", "Cinnabar Gym + Pokemansion"],
+    ["Challenge 45", "Sea Routes", "Defeat 100 pokemons on Sea Routes", "Cinnabar Gym + Pokemon Mansion"],
     ["Challenge 46", "Cinnabar Gym", "Badge 15", "Viridian Gym + Trade With Friends Hub + Badge 15"],
-    ["Challenge 47", "Viridian Gym", "Badge 16", "Red + Badge 16 + 1 Masterball"],
-    ["Final Challenge", "Red", "Defeat Red", "Travel to a new Region"],
+    ["Challenge 47", "Viridian Gym", "Badge 16", "Victory Road + Badge 16 + 1 Masterball"],
+    ["Challenge 48", "Victory Road", "Catch 1 Nidoking or Catch 1 Nidoqueen", "Red + 1 Masterball"],
+    ["Challenge 49", "Red", "Defeat Red", "Travel to a new Region"],
     ["Johto Extra Challenge 1", "Goldenrod Game Corner", "Defeat 8 Eevee", "Team Rocket HQ + 1 Masterball"],
     ["Johto Extra Challenge 2", "Team Rocket HQ", "Defeat 10 Voltorb", "Lake of Rage + 1 Masterball"],
     ["Johto Extra Challenge 3", "Lake of Rage", "Catch 1 Red Gyarados", "Mount Silver + 1 Masterball"],
     ["Johto Extra Challenge 4", "Mount Silver", "Catch 5 Larvitar", "Ilex Forest 2 + 1 Masterball + 2 Dark Stones"],
-    ["Johto Extra Challenge 5", "Ilex Forest 2", "Catch 1 Celebi", "Nebula Fissure + 2 Masterball"],
-    ["Extra Challenge (Roaming)", "Roaming", "Defeat 1 Raikou, Defeat 1 Entei, Defeat 1 Suicune", "Nebula Fissure + 1 Masterball"],
+    ["Johto Extra Challenge 5", "Ilex Forest 2", "Catch 1 Celebi", "Key for Mount Silver Apex Challenge + 2 Masterball"],
+    ["Extra Challenge (Roaming)", "Roaming", "Defeat 1 Raikou, Defeat 1 Entei, Defeat 1 Suicune", "Key for Mount Silver Apex Challenge + 1 Masterball"],
     ["Kanto Extra Challenge 1", "Casino Starter Trupe", "Capture all 6 starters", "Casino Babies + 1 Grass Stone + 1 Fire Stone + 1 Water Stone"],
     ["Kanto Extra Challenge 2", "Casino Babies", "Evolve Pikachu into Raichu", "Casino Special Spot + 1 Masterball"],
     ["Kanto Extra Challenge 3", "Casino Special Spot", "Evolve Porygon into Porygon2", "Casino Eeveelution + Dojo + 1 Masterball"],
     ["Kanto Extra Challenge 4", "Dojo", "Capture 1 Hitmonlee Capture 1 Hitmonchan Capture 1 Hitmontop", "Casino Late Trupe + 2 Fighting Stones"],
-    ["Kanto Extra Challenge 5", "Casino Late Trupe", "Catch 1 Venusaur Catch 1 Charizard Catch 1 Blastoise", "Legendaries Nest + 2 Grass Stones + 2 Fire Stones + 2 Water Stones + 1 Masterball"],
+    ["Kanto Extra Challenge 5", "Casino Late Trupe", "Catch 1 Venusaur Catch 1 Charizard Catch 1 Blastoise", "Legendaries Nest + Key for Mount Silver Apex Challenge + 2 Grass Stones + 2 Fire Stones + 2 Water Stones + 1 Masterball"],
     ["Kanto Extra Challenge 6", "Legendaries Nest", "Get 1 Articuno Get 1 Zapdos Get 1 Moltres", "Nebula Fissure + 2 Masterball"]
 ]
 
@@ -523,6 +543,42 @@ for entry in challenges_data_raw:
         unlock["gifts"] = gift_obj
 
     unlocks.append(unlock)
+
+
+
+
+unlocks.append({
+        "challengeName": "Key for Mount Silver Apex Challenge",
+        "areaId": "Key for Mount Silver Apex Challenge",
+        "unlocks": ["Mount Silver Apex"],
+        "requirements": {
+            "completeChallenges": [
+                "Kanto Extra Challenge 5",
+                "Johto Extra Challenge 5",
+                "Extra Challenge (Roaming)"
+            ]
+        }
+    })
+
+unlocks.append({
+        "challengeName": "Mount Silver Apex Challenge",
+        "areaId": "Mount Silver Apex",
+        "requirements": {
+            "catchSpecies": [
+                { "species": "Raikou", "count": 1 },
+                { "species": "Entei", "count": 1 },
+                { "species": "Suicune", "count": 1 },
+                { "species": "Mew", "count": 1 },
+                { "species": "Mewtwo", "count": 1 }
+            ]
+        },
+        "gifts": [
+            {
+                "item": "Masterball",
+                "count": 2
+            }
+        ]
+    })
 
 with open('config/johtoRoutes.js', 'w') as f:
     f.write(f"export const johtoRoutes = {json.dumps(routes, indent=2)};\n\n")

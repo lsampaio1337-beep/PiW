@@ -81,4 +81,4 @@ This sheet lists all Pokémon native to the region (according to the regional Po
     *   `Breed`: Can be obtained by breeding a wild-caught Pokémon once to get its pre-evolution.
     *   `#xBreed`: Requires chain-breeding multiple times to reach this pre-evolution (e.g., `2xBreed`).
 
-Last Generation Counter: 6
+Last Generation Counter: 7
