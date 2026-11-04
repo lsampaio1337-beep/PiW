@@ -98,13 +98,25 @@ function extractMovesFromDoc($, targetTabRegex, pokemonName) {
         if (targetHref) {
             const tabId = targetHref.replace('#', '');
             containers = $(`#${tabId}`);
-        }
-
-        if (containers.length === 0) {
-            containers = $('body');
+        } else {
+            // Found tabs, but the target game isn't there!
+            // Do NOT fall back to body. Return empty because pokemon doesn't exist in this game,
+            // or has no tab for it.
+            return [];
         }
     } else {
+        // If there are no tabs AT ALL, it means the whole page is for the given game (usually Gen 1-4)
         containers = $('body');
+    }
+
+    if (containers.length === 0) return [];
+
+    // Check if the container text says "does not learn any level up moves"
+    // or "does not exist in" to skip cleanly.
+    if (containers.text().toLowerCase().includes('does not learn any level up moves') ||
+        containers.text().toLowerCase().includes('does not learn any moves') ||
+        containers.text().toLowerCase().includes('is not available in')) {
+        return [];
     }
 
     // Within the container, find 'h3' that matches "learnt by level up"
@@ -122,7 +134,6 @@ function extractMovesFromDoc($, targetTabRegex, pokemonName) {
                         }
                     });
 
-                    // If no exact match, fallback to the first tab (usually the base form).
                     if (!targetHref) {
                         targetHref = current.find('.sv-tabs-tab-list a').first().attr('href');
                     }
@@ -165,7 +176,7 @@ async function processPokemon(pokemon) {
         for (const rule of rules) {
             let targetTabRegex = null;
             if (rule.tabs.length > 0) {
-                targetTabRegex = new RegExp(`^(${rule.tabs.join('|')})$`, 'i');
+                targetTabRegex = new RegExp(`^(${rule.tabs.join('|').replace(/\//g, '[/&]')})$`, 'i');
             }
 
             const moves = extractMovesFromDoc($, targetTabRegex, pokemon.name);
@@ -183,7 +194,7 @@ async function processPokemon(pokemon) {
                 results[rule.outRegion] = uniqueMoves;
             }
         }
-        await delay(50);
+        await delay(500); // 500ms delay to avoid rate limiting
     }
 
     console.log(`Finished ${pokemon.name} - Regions found: ${Object.keys(results).join(', ')}`);
@@ -195,7 +206,7 @@ async function main() {
     console.log(`Found ${pokemons.length} unique pokemon.`);
 
     const allMovesets = {};
-    const CONCURRENCY = 10;
+    const CONCURRENCY = 5;
 
     for (let i = 0; i < pokemons.length; i += CONCURRENCY) {
         const chunk = pokemons.slice(i, i + CONCURRENCY);
