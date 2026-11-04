@@ -2,6 +2,8 @@
 
 This document explains the structure and logic behind the auto-generated regional `.xlsx` files (`#_$_Data.xlsx` where `#` is the region number and `$` is the region name). These files provide a comprehensive overview of regional progression, route balance, challenges, and missing Pokémon.
 
+All generated `.xlsx` files based on these instructions should be stored in the `xdata/` folder at the root of the project.
+
 The workbook contains three sheets: **Routes**, **Challenges**, and **Missing PK**.
 
 ---
