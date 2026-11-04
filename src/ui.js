@@ -41,6 +41,9 @@ window.dismissDaycareMessage = function() {
         window.storageRef.save(state);
     }
     updateUI();
+    if (window.showCalendar && document.getElementById('window-calendar') && document.getElementById('window-calendar').offsetParent !== null) {
+        window.showCalendar('shop');
+    }
 };
 
 
