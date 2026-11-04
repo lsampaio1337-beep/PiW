@@ -1961,24 +1961,36 @@ async function init() {
             btn.style.borderRadius = "5px";
             btn.style.textAlign = "left";
             btn.style.fontWeight = "bold";
-            btn.style.width = "95%";
+            btn.style.width = "100%";
             btn.style.margin = "0 auto";
             btn.style.display = "flex";
             btn.style.justifyContent = "space-between";
             btn.style.alignItems = "center";
 
-            const innerDiv = document.createElement('div');
-            innerDiv.style.flexGrow = "1";
-            innerDiv.style.display = "flex";
-            innerDiv.style.flexDirection = "column";
-            innerDiv.style.justifyContent = "center";
+
+            btn.style.width = "100%"; // We will set width below depending on original sizes requested
+            btn.style.flexDirection = "column";
+
+            const textWrapper = document.createElement('div');
+            textWrapper.style.display = "flex";
+            textWrapper.style.justifyContent = "space-between";
+            textWrapper.style.alignItems = "center";
+            textWrapper.style.width = "100%";
+
+            const leftSide = document.createElement('div');
+            leftSide.style.display = "flex";
+            leftSide.style.flexDirection = "column";
+            leftSide.style.alignItems = "flex-start";
+
+            const rightSide = document.createElement('div');
+            rightSide.style.display = "flex";
+            rightSide.style.flexDirection = "column";
+            rightSide.style.alignItems = "flex-end";
 
             const titleDiv = document.createElement('div');
             titleDiv.style.fontSize = "18px";
             titleDiv.style.marginBottom = "5px";
             titleDiv.style.fontWeight = "bold";
-            titleDiv.style.display = "flex";
-            titleDiv.style.alignItems = "center";
             titleDiv.textContent = `"${profileName}" - ${playtimeStr}`;
 
             const playedDiv = document.createElement('div');
@@ -1991,20 +2003,24 @@ async function init() {
             progressDiv.style.fontWeight = "normal";
             progressDiv.textContent = `Progress: ${lastRoute}${zzzText}`;
 
-            innerDiv.appendChild(titleDiv);
-            innerDiv.appendChild(playedDiv);
-            innerDiv.appendChild(progressDiv);
+            leftSide.appendChild(titleDiv);
+            leftSide.appendChild(progressDiv);
 
-            btn.appendChild(innerDiv);
+            rightSide.appendChild(playedDiv);
 
-            // Add Medals Container on the right side
+            textWrapper.appendChild(leftSide);
+            textWrapper.appendChild(rightSide);
+
+            btn.appendChild(textWrapper);
+
+            // Add Medals Container on the second row
             const regions = ['Kanto', 'Johto', 'Hoenn', 'Sinnoh', 'Unova', 'Kalos', 'Alola', 'Galar', 'Hisui', 'Paldea'];
             const medalsContainer = document.createElement('div');
-            medalsContainer.style.display = "grid";
-            medalsContainer.style.gridTemplateColumns = "repeat(10, 1fr)";
+            medalsContainer.style.display = "flex";
+            medalsContainer.style.justifyContent = "space-between";
             medalsContainer.style.alignItems = "center";
-            medalsContainer.style.gap = "2px";
-            medalsContainer.style.marginLeft = "10px";
+            medalsContainer.style.width = "100%";
+            medalsContainer.style.marginTop = "10px";
 
             regions.forEach(region => {
                 let activeTier = 'First';
@@ -2069,6 +2085,7 @@ async function init() {
                 medalsContainer.appendChild(medalImg);
             });
             btn.appendChild(medalsContainer);
+
 
             if (pData.isZzZMode) {
                 const sleepImg = document.createElement('img');
