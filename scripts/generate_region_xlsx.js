@@ -723,7 +723,7 @@ const missingData = [];
     const wsMissing = xlsx.utils.json_to_sheet(missingData);
     xlsx.utils.book_append_sheet(wb, wsMissing, "Missing PK");
 
-const outFile = `${region.num}_${region.name}_Data.xlsx`;
+const outFile = `xdata/${region.num}_${region.name}_Data.xlsx`;
 
     // Formatting cols
     const colsRoutes = ["% Appearance", "% Appearance Ok?"];
