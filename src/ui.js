@@ -1962,7 +1962,7 @@ async function init() {
             btn.style.textAlign = "left";
             btn.style.fontWeight = "bold";
 
-            btn.style.width = "auto";
+            btn.style.width = "max-content";
             btn.style.minWidth = "100%";
             btn.style.flexDirection = "column";
 
@@ -2074,7 +2074,7 @@ async function init() {
                     const medalImg = document.createElement('img');
                     medalImg.src = `Assets/Extra/Medals/${region} ${activeTier}.png`;
                     medalImg.alt = `${region} Medal`;
-                    medalImg.style.width = "96px";
+                    medalImg.style.width = "auto";
                     medalImg.style.height = "96px";
                     medalImg.style.objectFit = "contain";
                     medalImg.style.imageRendering = "pixelated";
