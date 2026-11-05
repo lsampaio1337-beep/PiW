@@ -63,7 +63,7 @@ export const alolaRoutes = [
         "chance": 0.125
       }
     ],
-    "challengeName": "Challenge 1",
+    "challengeName": "Challenge 01",
     "areaId": "Route 1 East",
     "unlocks": [
       "Route 1 Hau'oli Outskirts"
@@ -109,7 +109,7 @@ export const alolaRoutes = [
         "chance": 0.2
       }
     ],
-    "challengeName": "Challenge 2",
+    "challengeName": "Challenge 02",
     "areaId": "Route 1 Hau'oli Outskirts",
     "unlocks": [
       "Hau'oli Cemetery"
@@ -149,7 +149,7 @@ export const alolaRoutes = [
         "chance": 0.25
       }
     ],
-    "challengeName": "Challenge 3",
+    "challengeName": "Challenge 03",
     "areaId": "Hau'oli Cemetery",
     "unlocks": [
       "Route 2 North"
@@ -213,7 +213,7 @@ export const alolaRoutes = [
         "chance": 0.1
       }
     ],
-    "challengeName": "Challenge 4",
+    "challengeName": "Challenge 04",
     "areaId": "Route 2 North",
     "unlocks": [
       "Captain Ilima Boss Battle"
@@ -228,7 +228,7 @@ export const alolaRoutes = [
   {
     "name": "Captain Ilima Boss Battle",
     "spawns": [],
-    "challengeName": "Challenge 5",
+    "challengeName": "Challenge 05",
     "areaId": "Captain Ilima Boss Battle",
     "unlocks": [
       "Seaward Cave"
@@ -270,12 +270,12 @@ export const alolaRoutes = [
       "Kahuna Hala Boss Battle"
     ],
     "requirements": {},
-    "challengeName": "Challenge 6"
+    "challengeName": "Challenge 06"
   },
   {
     "name": "Kahuna Hala Boss Battle",
     "spawns": [],
-    "challengeName": "Challenge 7",
+    "challengeName": "Challenge 07",
     "areaId": "Kahuna Hala Boss Battle",
     "unlocks": [
       "Ten Carat Hill Farthest Hollow"
@@ -345,7 +345,7 @@ export const alolaRoutes = [
         "chance": 0.1
       }
     ],
-    "challengeName": "Challenge 8",
+    "challengeName": "Challenge 08",
     "areaId": "Ten Carat Hill Farthest Hollow",
     "unlocks": [
       "Paniola Ranch"
@@ -391,7 +391,7 @@ export const alolaRoutes = [
         "chance": 0.25
       }
     ],
-    "challengeName": "Challenge 9",
+    "challengeName": "Challenge 09",
     "areaId": "Paniola Ranch",
     "unlocks": [
       "Daycare NPC"
@@ -1597,7 +1597,7 @@ export const alolaRoutes = [
         "maxLevel": 1,
         "chance": 0
       },],
-    "challengeName": "Extra Challenge A-1",
+    "challengeName": "Extra Challenge A-01",
     "areaId": "Route 6",
     "unlocks": [
       "Royal Avenue"
@@ -1612,7 +1612,7 @@ export const alolaRoutes = [
   {
     "name": "Shopping Mall Antiquities",
     "spawns": [],
-    "challengeName": "Extra Challenge B-4",
+    "challengeName": "Extra Challenge B-04",
     "areaId": "Shopping Mall Antiquities",
     "unlocks": [
       "The Zenith Anomaly"
@@ -1627,7 +1627,7 @@ export const alolaRoutes = [
   {
     "name": "Ruins of Conflict",
     "spawns": [],
-    "challengeName": "Extra Challenge B-1",
+    "challengeName": "Extra Challenge B-01",
     "areaId": "Ruins of Conflict",
     "unlocks": [
       "Ula'ula Meadow"
@@ -1639,7 +1639,7 @@ export const alolaRoutes = [
   {
     "name": "Ten Carat Hill Deepest Cave",
     "spawns": [],
-    "challengeName": "Extra Challenge C-3",
+    "challengeName": "Extra Challenge C-03",
     "areaId": "Ten Carat Hill Deepest Cave",
     "unlocks": [
       "Kala'e Bay"
@@ -1672,7 +1672,7 @@ export const alolaRoutes = [
         "maxLevel": 1,
         "chance": 0
       },],
-    "challengeName": "Extra Challenge D-1",
+    "challengeName": "Extra Challenge D-01",
     "areaId": "Poni Plains",
     "unlocks": [
       "Poni Coast"
@@ -1687,7 +1687,7 @@ export const alolaRoutes = [
   {
     "name": "Resolution Cave",
     "spawns": [],
-    "challengeName": "Extra Challenge D-3",
+    "challengeName": "Extra Challenge D-03",
     "areaId": "Resolution Cave",
     "unlocks": [
       "Ruins of Hope"
@@ -1702,7 +1702,7 @@ export const alolaRoutes = [
   {
     "name": "Ruins of Hope",
     "spawns": [],
-    "challengeName": "Extra Challenge D-4",
+    "challengeName": "Extra Challenge D-04",
     "areaId": "Ruins of Hope",
     "unlocks": [
       "The Interdimensional Rift"
@@ -1747,7 +1747,7 @@ export const alolaRoutes = [
         "maxLevel": 1,
         "chance": 0
       },],
-    "challengeName": "Extra Challenge E-1",
+    "challengeName": "Extra Challenge E-01",
     "areaId": "Route 16",
     "unlocks": [
       "Aether Paradise Labs"
@@ -1781,7 +1781,7 @@ export const alolaRoutes = [
         "chance": 0.3333
       }
     ],
-    "challengeName": "Extra Challenge A-2",
+    "challengeName": "Extra Challenge A-02",
     "areaId": "Royal Avenue",
     "unlocks": [
       "Pikachu Valley"
@@ -1821,7 +1821,7 @@ export const alolaRoutes = [
         "chance": 0.25
       }
     ],
-    "challengeName": "Extra Challenge A-3",
+    "challengeName": "Extra Challenge A-03",
     "areaId": "Pikachu Valley",
     "unlocks": [
       "Starter Depot"
@@ -1967,7 +1967,7 @@ export const alolaRoutes = [
         "chance": 0.11109999999999999
       }
     ],
-    "challengeName": "Extra Challenge B-2",
+    "challengeName": "Extra Challenge B-02",
     "areaId": "Blush Mountain",
     "unlocks": [
       "Blush Mountain"
@@ -2019,7 +2019,7 @@ export const alolaRoutes = [
         "chance": 0.3333
       }
     ],
-    "challengeName": "Extra Challenge B-5",
+    "challengeName": "Extra Challenge B-05",
     "areaId": "The Zenith Anomaly",
     "unlocks": [],
     "requirements": {
@@ -2095,7 +2095,7 @@ export const alolaRoutes = [
         "chance": 0.125
       }
     ],
-    "challengeName": "Extra Challenge C-1",
+    "challengeName": "Extra Challenge C-01",
     "areaId": "Melemele Meadow",
     "unlocks": [
       "Ruins of Conflict"
@@ -2144,7 +2144,7 @@ export const alolaRoutes = [
         "chance": 0.3333
       }
     ],
-    "challengeName": "Extra Challenge C-4",
+    "challengeName": "Extra Challenge C-04",
     "areaId": "Kala'e Bay",
     "unlocks": [
       "Sacred Shrine"
@@ -2184,7 +2184,7 @@ export const alolaRoutes = [
         "chance": 0.25
       }
     ],
-    "challengeName": "Extra Challenge C-5",
+    "challengeName": "Extra Challenge C-05",
     "areaId": "Sacred Shrine",
     "unlocks": [],
     "requirements": {
@@ -2234,7 +2234,7 @@ export const alolaRoutes = [
         "chance": 0.3333
       }
     ],
-    "challengeName": "Extra Challenge D-2",
+    "challengeName": "Extra Challenge D-02",
     "areaId": "Poni Coast",
     "unlocks": [
       "Resolution Cave"
@@ -2310,7 +2310,7 @@ export const alolaRoutes = [
         "chance": 0.1
       }
     ],
-    "challengeName": "Extra Challenge D-5",
+    "challengeName": "Extra Challenge D-05",
     "areaId": "The Interdimensional Rift",
     "unlocks": [],
     "requirements": {
@@ -2346,7 +2346,7 @@ export const alolaRoutes = [
         "chance": 0.1
       }
     ],
-    "challengeName": "Extra Challenge E-2",
+    "challengeName": "Extra Challenge E-02",
     "areaId": "Aether Paradise Labs",
     "unlocks": [
       "Aether Paradise Secret Lab"
@@ -2368,7 +2368,7 @@ export const alolaRoutes = [
         "chance": 1
       }
     ],
-    "challengeName": "Extra Challenge E-3",
+    "challengeName": "Extra Challenge E-03",
     "areaId": "Aether Paradise Secret Lab",
     "unlocks": [
       "Lake of the Sunne"
@@ -2402,7 +2402,7 @@ export const alolaRoutes = [
         "chance": 0.3333
       }
     ],
-    "challengeName": "Extra Challenge E-4",
+    "challengeName": "Extra Challenge E-04",
     "areaId": "Lake of the Sunne",
     "unlocks": [
       "Obsidian Sphere"
@@ -2456,7 +2456,7 @@ export const alolaRoutes = [
         "chance": 0.3333
       }
     ],
-    "challengeName": "Extra Challenge E-5",
+    "challengeName": "Extra Challenge E-05",
     "areaId": "Obsidian Tesseract",
     "unlocks": [
       "Obsidian Tesseract"
@@ -2516,13 +2516,13 @@ export const alolaRoutes = [
         "count": 5
       }
     },
-    "challengeName": "Extra Challenge F-1"
+    "challengeName": "Extra Challenge F-01"
   }
 ];
 
 export const alolaUnlocks = [
   {
-    "challengeName": "Challenge 1",
+    "challengeName": "Challenge 01",
     "areaId": "Route 1 East",
     "unlocks": [
       "Route 1 Hau'oli Outskirts"
@@ -2535,7 +2535,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 2",
+    "challengeName": "Challenge 02",
     "areaId": "Route 1 Hau'oli Outskirts",
     "unlocks": [
       "Hau'oli Cemetery"
@@ -2548,7 +2548,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 3",
+    "challengeName": "Challenge 03",
     "areaId": "Hau'oli Cemetery",
     "unlocks": [
       "Route 2 North"
@@ -2561,7 +2561,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 4",
+    "challengeName": "Challenge 04",
     "areaId": "Route 2 North",
     "unlocks": [
       "Captain Ilima Boss Battle"
@@ -2574,7 +2574,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 5",
+    "challengeName": "Challenge 05",
     "areaId": "Captain Ilima Boss Battle",
     "unlocks": [
       "Seaward Cave"
@@ -2584,7 +2584,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 6",
+    "challengeName": "Challenge 06",
     "areaId": "Seaward Cave",
     "unlocks": [
       "Kahuna Hala Boss Battle"
@@ -2592,7 +2592,7 @@ export const alolaUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Challenge 7",
+    "challengeName": "Challenge 07",
     "areaId": "Kahuna Hala Boss Battle",
     "unlocks": [
       "Ten Carat Hill Farthest Hollow"
@@ -2623,7 +2623,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 8",
+    "challengeName": "Challenge 08",
     "areaId": "Ten Carat Hill Farthest Hollow",
     "unlocks": [
       "Paniola Ranch"
@@ -2636,7 +2636,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 9",
+    "challengeName": "Challenge 09",
     "areaId": "Paniola Ranch",
     "unlocks": [
       "Daycare NPC"
@@ -3037,7 +3037,7 @@ export const alolaUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Extra Challenge A-1",
+    "challengeName": "Extra Challenge A-01",
     "areaId": "Route 6",
     "unlocks": [
       "Royal Avenue"
@@ -3050,7 +3050,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge A-2",
+    "challengeName": "Extra Challenge A-02",
     "areaId": "Royal Avenue",
     "unlocks": [
       "Pikachu Valley"
@@ -3063,7 +3063,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge A-3",
+    "challengeName": "Extra Challenge A-03",
     "areaId": "Pikachu Valley",
     "unlocks": [
       "Starter Depot"
@@ -3076,7 +3076,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge B-1",
+    "challengeName": "Extra Challenge B-01",
     "areaId": "Ruins of Conflict",
     "unlocks": [
       "Ula'ula Meadow"
@@ -3086,7 +3086,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge B-2",
+    "challengeName": "Extra Challenge B-02",
     "areaId": "Blush Mountain",
     "unlocks": [
       "Blush Mountain"
@@ -3117,7 +3117,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge B-3",
+    "challengeName": "Extra Challenge B-03",
     "areaId": "Blush Mountain",
     "unlocks": [
       "Shopping Mall Antiquities"
@@ -3130,7 +3130,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge B-4",
+    "challengeName": "Extra Challenge B-04",
     "areaId": "Shopping Mall Antiquities",
     "unlocks": [
       "The Zenith Anomaly"
@@ -3143,7 +3143,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge B-5",
+    "challengeName": "Extra Challenge B-05",
     "areaId": "The Zenith Anomaly",
     "unlocks": [],
     "requirements": {
@@ -3168,7 +3168,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge C-1",
+    "challengeName": "Extra Challenge C-01",
     "areaId": "Melemele Meadow",
     "unlocks": [
       "Ruins of Conflict"
@@ -3178,7 +3178,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge C-2",
+    "challengeName": "Extra Challenge C-02",
     "areaId": "Ruins of Conflict",
     "unlocks": [
       "Ten Carat Hill Deepest Cave"
@@ -3191,7 +3191,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge C-3",
+    "challengeName": "Extra Challenge C-03",
     "areaId": "Ten Carat Hill Deepest Cave",
     "unlocks": [
       "Kala'e Bay"
@@ -3204,7 +3204,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge C-4",
+    "challengeName": "Extra Challenge C-04",
     "areaId": "Kala'e Bay",
     "unlocks": [
       "Sacred Shrine"
@@ -3217,7 +3217,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge C-5",
+    "challengeName": "Extra Challenge C-05",
     "areaId": "Sacred Shrine",
     "unlocks": [],
     "requirements": {
@@ -3246,7 +3246,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge D-1",
+    "challengeName": "Extra Challenge D-01",
     "areaId": "Poni Plains",
     "unlocks": [
       "Poni Coast"
@@ -3259,7 +3259,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge D-2",
+    "challengeName": "Extra Challenge D-02",
     "areaId": "Poni Coast",
     "unlocks": [
       "Resolution Cave"
@@ -3272,7 +3272,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge D-3",
+    "challengeName": "Extra Challenge D-03",
     "areaId": "Resolution Cave",
     "unlocks": [
       "Ruins of Hope"
@@ -3285,7 +3285,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge D-4",
+    "challengeName": "Extra Challenge D-04",
     "areaId": "Ruins of Hope",
     "unlocks": [
       "The Interdimensional Rift"
@@ -3298,7 +3298,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge D-5",
+    "challengeName": "Extra Challenge D-05",
     "areaId": "The Interdimensional Rift",
     "unlocks": [],
     "requirements": {
@@ -3313,7 +3313,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge E-1",
+    "challengeName": "Extra Challenge E-01",
     "areaId": "Route 16",
     "unlocks": [
       "Aether Paradise Labs"
@@ -3326,7 +3326,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge E-2",
+    "challengeName": "Extra Challenge E-02",
     "areaId": "Aether Paradise Labs",
     "unlocks": [
       "Aether Paradise Secret Lab"
@@ -3339,7 +3339,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge E-3",
+    "challengeName": "Extra Challenge E-03",
     "areaId": "Aether Paradise Secret Lab",
     "unlocks": [
       "Lake of the Sunne"
@@ -3352,7 +3352,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge E-4",
+    "challengeName": "Extra Challenge E-04",
     "areaId": "Lake of the Sunne",
     "unlocks": [
       "Obsidian Sphere"
@@ -3365,7 +3365,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge E-5",
+    "challengeName": "Extra Challenge E-05",
     "areaId": "Obsidian Tesseract",
     "unlocks": [
       "Obsidian Tesseract"
@@ -3384,7 +3384,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge E-6",
+    "challengeName": "Extra Challenge E-06",
     "areaId": "Obsidian Tesseract",
     "unlocks": [],
     "requirements": {
@@ -3409,7 +3409,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge F-1",
+    "challengeName": "Extra Challenge F-01",
     "areaId": "Route 8 Fossil Restoration Center Part 2",
     "unlocks": [],
     "requirements": {

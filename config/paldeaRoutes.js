@@ -3950,7 +3950,7 @@ export const paldeaRoutes = [
 
 export const paldeaUnlocks = [
   {
-    "challengeName": "Challenge 1",
+    "challengeName": "Challenge 01",
     "areaId": "Poco Path - Main",
     "unlocks": [
       "Los Platos - Main"
@@ -3963,7 +3963,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 2",
+    "challengeName": "Challenge 02",
     "areaId": "Los Platos - Main",
     "requirements": {
       "defeatCountRoute": {
@@ -3976,7 +3976,7 @@ export const paldeaUnlocks = [
     ]
   },
   {
-    "challengeName": "Challenge 3",
+    "challengeName": "Challenge 03",
     "areaId": "South Province (Area One) - Beach",
     "requirements": {
       "defeatCountRoute": {
@@ -3989,7 +3989,7 @@ export const paldeaUnlocks = [
     ]
   },
   {
-    "challengeName": "Challenge 4",
+    "challengeName": "Challenge 04",
     "areaId": "South Province (Area One) - Cave",
     "requirements": {
       "defeatCountRoute": {
@@ -4002,7 +4002,7 @@ export const paldeaUnlocks = [
     ]
   },
   {
-    "challengeName": "Challenge 5",
+    "challengeName": "Challenge 05",
     "areaId": "South Province (Area One) - Flower Patch",
     "requirements": {
       "defeatCountRoute": {
@@ -4015,7 +4015,7 @@ export const paldeaUnlocks = [
     ]
   },
   {
-    "challengeName": "Challenge 6",
+    "challengeName": "Challenge 06",
     "areaId": "South Province (Area One) - Forest",
     "requirements": {
       "defeatCountRoute": {
@@ -4028,7 +4028,7 @@ export const paldeaUnlocks = [
     ]
   },
   {
-    "challengeName": "Challenge 7",
+    "challengeName": "Challenge 07",
     "areaId": "South Province (Area One) - Grass",
     "requirements": {
       "defeatCountRoute": {
@@ -4041,7 +4041,7 @@ export const paldeaUnlocks = [
     ]
   },
   {
-    "challengeName": "Challenge 8",
+    "challengeName": "Challenge 08",
     "areaId": "South Province (Area One) - Lake",
     "requirements": {
       "defeatCountRoute": {
@@ -4054,7 +4054,7 @@ export const paldeaUnlocks = [
     ]
   },
   {
-    "challengeName": "Challenge 9",
+    "challengeName": "Challenge 09",
     "areaId": "South Province (Area One) - Near Town",
     "requirements": {
       "defeatCountRoute": {
@@ -4698,7 +4698,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge A 1",
+    "challengeName": "Extra Challenge A 01",
     "areaId": "Cortondo Gym",
     "requirements": {
       "earnBadge": {
@@ -4711,7 +4711,7 @@ export const paldeaUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge A 2",
+    "challengeName": "Extra Challenge A 02",
     "areaId": "South Province (Area Four) - Grass",
     "requirements": {
       "defeatCountRoute": {
@@ -4724,7 +4724,7 @@ export const paldeaUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge A 3",
+    "challengeName": "Extra Challenge A 03",
     "areaId": "South Province (Area Four) - Lake",
     "requirements": {
       "defeatCountRoute": {
@@ -4737,7 +4737,7 @@ export const paldeaUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge A 4",
+    "challengeName": "Extra Challenge A 04",
     "areaId": "South Province (Area Four) - Mountain",
     "requirements": {
       "defeatCountRoute": {
@@ -4750,7 +4750,7 @@ export const paldeaUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge A 5",
+    "challengeName": "Extra Challenge A 05",
     "areaId": "South Province (Area Four) - Ocean",
     "requirements": {
       "defeatCountRoute": {
@@ -4764,7 +4764,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge B 1",
+    "challengeName": "Extra Challenge B 01",
     "areaId": "Artazon Gym",
     "requirements": {
       "earnBadge": {
@@ -4777,7 +4777,7 @@ export const paldeaUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge B 2",
+    "challengeName": "Extra Challenge B 02",
     "areaId": "East Province (Area Three) - Mine",
     "requirements": {
       "defeatCountRoute": {
@@ -4790,7 +4790,7 @@ export const paldeaUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge B 3",
+    "challengeName": "Extra Challenge B 03",
     "areaId": "East Province (Area Three) - Near Town",
     "requirements": {
       "defeatCountRoute": {
@@ -4803,7 +4803,7 @@ export const paldeaUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge B 4",
+    "challengeName": "Extra Challenge B 04",
     "areaId": "East Province (Area Three) - Ocean",
     "requirements": {
       "defeatCountRoute": {
@@ -4816,7 +4816,7 @@ export const paldeaUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge B 5",
+    "challengeName": "Extra Challenge B 05",
     "areaId": "East Province (Area Three) - Rocky",
     "requirements": {
       "defeatCountRoute": {
@@ -4830,7 +4830,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge C 1",
+    "challengeName": "Extra Challenge C 01",
     "areaId": "Levincia Gym",
     "requirements": {
       "earnBadge": {
@@ -4843,7 +4843,7 @@ export const paldeaUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge C 2",
+    "challengeName": "Extra Challenge C 02",
     "areaId": "West Province (Area One) - Grass",
     "requirements": {
       "defeatCountRoute": {
@@ -4856,7 +4856,7 @@ export const paldeaUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge C 3",
+    "challengeName": "Extra Challenge C 03",
     "areaId": "West Province (Area One) - Mountain",
     "requirements": {
       "defeatCountRoute": {
@@ -4869,7 +4869,7 @@ export const paldeaUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge C 4",
+    "challengeName": "Extra Challenge C 04",
     "areaId": "West Province (Area One) - Ocean",
     "requirements": {
       "defeatCountRoute": {
@@ -4882,7 +4882,7 @@ export const paldeaUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge C 5",
+    "challengeName": "Extra Challenge C 05",
     "areaId": "West Paldean Sea - Ocean",
     "requirements": {
       "defeatCountRoute": {
@@ -4896,7 +4896,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge D 1",
+    "challengeName": "Extra Challenge D 01",
     "areaId": "Cascarrafa Gym",
     "requirements": {
       "earnBadge": {
@@ -4909,7 +4909,7 @@ export const paldeaUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge D 2",
+    "challengeName": "Extra Challenge D 02",
     "areaId": "Asado Desert - Desert",
     "requirements": {
       "defeatCountRoute": {
@@ -4922,7 +4922,7 @@ export const paldeaUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge D 3",
+    "challengeName": "Extra Challenge D 03",
     "areaId": "Asado Desert - Grass",
     "requirements": {
       "defeatCountRoute": {
@@ -4935,7 +4935,7 @@ export const paldeaUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge D 4",
+    "challengeName": "Extra Challenge D 04",
     "areaId": "Asado Desert - Ruins",
     "requirements": {
       "defeatCountRoute": {
@@ -4948,7 +4948,7 @@ export const paldeaUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge D 5",
+    "challengeName": "Extra Challenge D 05",
     "areaId": "Asado Desert - Ruins Deep",
     "requirements": {
       "defeatCountRoute": {
@@ -4962,7 +4962,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge E 1",
+    "challengeName": "Extra Challenge E 01",
     "areaId": "Medali Gym",
     "requirements": {
       "earnBadge": {
@@ -4975,7 +4975,7 @@ export const paldeaUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge E 2",
+    "challengeName": "Extra Challenge E 02",
     "areaId": "North Province (Area One) - Bamboo Forest",
     "requirements": {
       "defeatCountRoute": {
@@ -4988,7 +4988,7 @@ export const paldeaUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge E 3",
+    "challengeName": "Extra Challenge E 03",
     "areaId": "North Province (Area One) - Beach",
     "requirements": {
       "defeatCountRoute": {
@@ -5001,7 +5001,7 @@ export const paldeaUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge E 4",
+    "challengeName": "Extra Challenge E 04",
     "areaId": "North Province (Area One) - Cave",
     "requirements": {
       "defeatCountRoute": {
@@ -5014,7 +5014,7 @@ export const paldeaUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge E 5",
+    "challengeName": "Extra Challenge E 05",
     "areaId": "North Province (Area One) - Forest",
     "requirements": {
       "defeatCountRoute": {
@@ -5028,7 +5028,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge F 1",
+    "challengeName": "Extra Challenge F 01",
     "areaId": "Montenevera Gym",
     "requirements": {
       "earnBadge": {
@@ -5041,7 +5041,7 @@ export const paldeaUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge F 2",
+    "challengeName": "Extra Challenge F 02",
     "areaId": "North Province (Area Two) - Bamboo Forest",
     "requirements": {
       "defeatCountRoute": {
@@ -5054,7 +5054,7 @@ export const paldeaUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge F 3",
+    "challengeName": "Extra Challenge F 03",
     "areaId": "North Province (Area Two) - Forest",
     "requirements": {
       "defeatCountRoute": {
@@ -5067,7 +5067,7 @@ export const paldeaUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge F 4",
+    "challengeName": "Extra Challenge F 04",
     "areaId": "North Province (Area Two) - Lake",
     "requirements": {
       "defeatCountRoute": {
@@ -5081,7 +5081,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge G 1",
+    "challengeName": "Extra Challenge G 01",
     "areaId": "Alfornada Gym",
     "requirements": {
       "earnBadge": {
@@ -5094,7 +5094,7 @@ export const paldeaUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge G 2",
+    "challengeName": "Extra Challenge G 02",
     "areaId": "North Province (Area Three) - Flower Patch",
     "requirements": {
       "defeatCountRoute": {
@@ -5107,7 +5107,7 @@ export const paldeaUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge G 3",
+    "challengeName": "Extra Challenge G 03",
     "areaId": "Tagtree Thicket - Flower Patch",
     "requirements": {
       "defeatCountRoute": {
@@ -5121,7 +5121,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge H 1",
+    "challengeName": "Extra Challenge H 01",
     "areaId": "Paldea Pokemon League",
     "requirements": {
       "defeatPaldeaChampion": true
@@ -5131,7 +5131,7 @@ export const paldeaUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge H 2",
+    "challengeName": "Extra Challenge H 02",
     "areaId": "Kitakami Road",
     "requirements": {
       "defeatCountRoute": {
@@ -5144,7 +5144,7 @@ export const paldeaUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge H 3",
+    "challengeName": "Extra Challenge H 03",
     "areaId": "Mossfell Confluence",
     "requirements": {
       "defeatCountRoute": {
@@ -5157,7 +5157,7 @@ export const paldeaUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge H 4",
+    "challengeName": "Extra Challenge H 04",
     "areaId": "Infernal Pass",
     "requirements": {
       "defeatCountRoute": {
@@ -5171,7 +5171,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge I 1",
+    "challengeName": "Extra Challenge I 01",
     "areaId": "Paldea Pokemon League",
     "requirements": {
       "defeatPaldeaChampion": true
@@ -5181,7 +5181,7 @@ export const paldeaUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge I 2",
+    "challengeName": "Extra Challenge I 02",
     "areaId": "Shrine of Wood",
     "requirements": {
       "defeatCountRoute": {
@@ -5194,7 +5194,7 @@ export const paldeaUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge I 3",
+    "challengeName": "Extra Challenge I 03",
     "areaId": "Shrine of Snow",
     "requirements": {
       "defeatCountRoute": {
@@ -5207,7 +5207,7 @@ export const paldeaUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge I 4",
+    "challengeName": "Extra Challenge I 04",
     "areaId": "Shrine of Earth",
     "requirements": {
       "defeatCountRoute": {
@@ -5221,7 +5221,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge J 1",
+    "challengeName": "Extra Challenge J 01",
     "areaId": "Paldea Pokemon League",
     "requirements": {
       "defeatPaldeaChampion": true
@@ -5231,7 +5231,7 @@ export const paldeaUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge J 2",
+    "challengeName": "Extra Challenge J 02",
     "areaId": "Path of Legends",
     "requirements": {
       "defeatCountRoute": {
@@ -5244,7 +5244,7 @@ export const paldeaUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge J 3",
+    "challengeName": "Extra Challenge J 03",
     "areaId": "Path of Legends",
     "requirements": {
       "defeatCountRoute": {
@@ -5258,7 +5258,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge K 1",
+    "challengeName": "Extra Challenge K 01",
     "areaId": "Paldea Pokemon League",
     "requirements": {
       "defeatPaldeaChampion": true
@@ -5268,7 +5268,7 @@ export const paldeaUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge K 2",
+    "challengeName": "Extra Challenge K 02",
     "areaId": "Starfall Street",
     "requirements": {
       "defeatCountRoute": {
@@ -5281,7 +5281,7 @@ export const paldeaUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge K 3",
+    "challengeName": "Extra Challenge K 03",
     "areaId": "Starfall Street",
     "requirements": {
       "defeatCountRoute": {
@@ -5295,14 +5295,14 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Final Extra Challenge 1",
+    "challengeName": "Final Extra Challenge 01",
     "areaId": "The Great Crater of Paldea - Upper",
     "requirements": {
       "completeChallenges": [
-        "Extra Challenge H 4",
-        "Extra Challenge I 4",
-        "Extra Challenge J 3",
-        "Extra Challenge K 3"
+        "Extra Challenge H 04",
+        "Extra Challenge I 04",
+        "Extra Challenge J 03",
+        "Extra Challenge K 03"
       ]
     },
     "unlocks": [
@@ -5310,7 +5310,7 @@ export const paldeaUnlocks = [
     ]
   },
   {
-    "challengeName": "Final Extra Challenge 2",
+    "challengeName": "Final Extra Challenge 02",
     "areaId": "The Great Crater of Paldea - Lower",
     "requirements": {
       "defeatCountRoute": {
@@ -5323,7 +5323,7 @@ export const paldeaUnlocks = [
     ]
   },
   {
-    "challengeName": "Final Extra Challenge 3",
+    "challengeName": "Final Extra Challenge 03",
     "areaId": "Zero Gate - Main",
     "requirements": {
       "defeatCountRoute": {
