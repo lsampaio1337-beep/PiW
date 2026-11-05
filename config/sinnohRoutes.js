@@ -2447,6 +2447,253 @@ export const sinnohRoutes = [
 export const sinnohUnlocks = [
   {
     challengeName: "Challenge 1",
+    areaId: "Route 201",
+    unlocks: [
+      "Route 202"
+    ],
+    requirements: {
+      catchSpecies: [
+        {
+          species: "Bidoof",
+          count: 1
+        }
+      ]
+    }
+  },
+  {
+    challengeName: "Challenge 2",
+    areaId: "Route 202",
+    unlocks: [
+      "Route 203"
+    ],
+    requirements: {
+      catchSpecies: [
+        {
+          species: "Bidoof",
+          count: 1
+        }
+      ]
+    }
+  },
+  {
+    challengeName: "Challenge 3",
+    areaId: "Route 203",
+    unlocks: [
+      "Oreburgh Gate"
+    ],
+    requirements: {
+      catchSpecies: [
+        {
+          species: "Abra",
+          count: 1
+        }
+      ]
+    }
+  },
+  {
+    challengeName: "Challenge 4",
+    areaId: "Oreburgh Gate",
+    unlocks: [
+      "Oreburgh Gym"
+    ],
+    requirements: {
+      catchSpecies: [
+        {
+          species: "Geodude",
+          count: 1
+        }
+      ]
+    }
+  },
+  {
+    challengeName: "Challenge 5",
+    areaId: "Oreburgh Gym",
+    unlocks: [
+      "Route 204"
+    ],
+    requirements: {
+      earnBadge: {
+        name: "Coal Badge",
+        leader: "Roark",
+        badgeCount: 1
+      }
+    }
+  },
+  {
+    challengeName: "Challenge 6",
+    areaId: "Route 204",
+    unlocks: [
+      "Ravaged Path"
+    ],
+    requirements: {
+      catchSpecies: [
+        {
+          species: "Bidoof",
+          count: 1
+        }
+      ]
+    }
+  },
+  {
+    challengeName: "Challenge 7",
+    areaId: "Ravaged Path",
+    unlocks: [
+      "Valley Windworks"
+    ],
+    requirements: {
+      catchSpecies: [
+        {
+          species: "Geodude",
+          count: 1
+        }
+      ]
+    },
+    gift: {
+      item: "Rock Stone",
+      count: 1
+    }
+  },
+  {
+    challengeName: "Challenge 8",
+    areaId: "Valley Windworks",
+    unlocks: [
+      "Route 205"
+    ],
+    requirements: {
+      catchSpecies: [
+        {
+          species: "Bidoof",
+          count: 1
+        }
+      ]
+    },
+    gift: {
+      item: "Electric Stone",
+      count: 1
+    }
+  },
+  {
+    challengeName: "Challenge 9",
+    areaId: "Route 205",
+    unlocks: [
+      "Eterna Forest"
+    ],
+    requirements: {
+      catchSpecies: [
+        {
+          species: "Beautifly",
+          count: 1
+        }
+      ]
+    }
+  },
+  {
+    challengeName: "Challenge 10",
+    areaId: "Eterna Forest",
+    unlocks: [
+      "Eterna Gym"
+    ],
+    requirements: {
+      catchSpecies: [
+        {
+          species: "Beautifly",
+          count: 1
+        }
+      ]
+    }
+  },
+  {
+    challengeName: "Challenge 11",
+    areaId: "Eterna Gym",
+    unlocks: [
+      "Route 211",
+      "Old Chateau"
+    ],
+    requirements: {
+      earnBadge: {
+        name: "Forest Badge",
+        leader: "Gardenia",
+        badgeCount: 2
+      }
+    }
+  },
+  {
+    challengeName: "Challenge 12",
+    areaId: "Route 211",
+    unlocks: [
+      "Mount Coronet"
+    ],
+    requirements: {
+      catchSpecies: [
+        {
+          species: "Bronzor",
+          count: 1
+        }
+      ]
+    }
+  },
+  {
+    challengeName: "Challenge 13",
+    areaId: "Mount Coronet",
+    unlocks: [
+      "Route 208"
+    ],
+    requirements: {
+      catchSpecies: [
+        {
+          species: "Bronzong",
+          count: 1
+        }
+      ]
+    }
+  },
+  {
+    challengeName: "Challenge 14",
+    areaId: "Route 208",
+    unlocks: [
+      "Hearthome Gym"
+    ],
+    requirements: {
+      catchSpecies: [
+        {
+          species: "Bibarel",
+          count: 1
+        }
+      ]
+    }
+  },
+  {
+    challengeName: "Challenge 15",
+    areaId: "Hearthome Gym",
+    unlocks: [
+      "Route 209"
+    ],
+    requirements: {
+      earnBadge: {
+        name: "Relic Badge",
+        leader: "Fantina",
+        badgeCount: 3
+      }
+    }
+  },
+  {
+    challengeName: "Challenge 16",
+    areaId: "Route 209",
+    unlocks: [
+      "Solaceon Daycare",
+      "Route 210"
+    ],
+    requirements: {
+      catchSpecies: [
+        {
+          species: "Bibarel",
+          count: 1
+        }
+      ]
+    }
+  },
+  {
+    challengeName: "Challenge 17",
     areaId: "Route 210",
     unlocks: [
       "Veilstone Gym"
