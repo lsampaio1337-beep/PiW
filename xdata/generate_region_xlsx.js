@@ -144,12 +144,12 @@ if (!Array.isArray(routes)) {
             const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pkName}/encounters`);
             if (res.ok) {
                 const data = await res.json();
-                encounterCache[pkName] = data.map(d => d.location_area.name);
+                encounterCache[pkName.toLowerCase()] = data.map(d => d.location_area.name);
             } else {
-                encounterCache[pkName] = [];
+                encounterCache[pkName.toLowerCase()] = [];
             }
         } catch (e) {
-            encounterCache[pkName] = [];
+            encounterCache[pkName.toLowerCase()] = [];
         }
     }
 
@@ -415,7 +415,9 @@ const mainSeenSets = [];
                 }
 
                 if (!primaryAdded) {
-                    if (areaName.toLowerCase().includes("gym") || isLeagueOrKey) {
+
+                    if ((areaName || "").toLowerCase().includes("gym") || isLeagueOrKey) {
+
                         sugReq = "Defeat Leader/Champion";
                     } else if (newPkCount > 0) {
                         sugReq = `Catch ${Math.min(newPkCount, 3)} new pokemon`;
@@ -711,13 +713,44 @@ const missingData = [];
         }
     });
 
-    const routeSecondaryEmpty = routesData.every(r => !r["Route (Secondary)"]);
-    if (routeSecondaryEmpty) {
-        routesData.forEach(r => delete r["Route (Secondary)"]);
+
+    const allKeysToTest = ["Route (Secondary)", "Pokemon Name", "First?", "Level", "Sugested Level", "Peer to Peer", "% Appearance", "% Appearance Ok?", "Pokemon/Type Ok?", "BST", "Pokemon/BST Ok?", "Reward"];
+
+    let keysToRemove = [];
+    allKeysToTest.forEach(k => {
+        let isEmpty = true;
+        for (let i = 0; i < routesData.length; i++) {
+            if (routesData[i][k] !== undefined && routesData[i][k] !== null && routesData[i][k] !== "") {
+                isEmpty = false;
+                break;
+            }
+        }
+        if (isEmpty) {
+            keysToRemove.push(k);
+        }
+    });
+
+    if (keysToRemove.length > 0) {
+        routesData.forEach(r => {
+            keysToRemove.forEach(k => {
+                delete r[k];
+            });
+        });
     }
 
+
     const wb = xlsx.utils.book_new();
-    const wsRoutes = xlsx.utils.json_to_sheet(routesData);
+
+    let validKeys = Object.keys(routesData[0] || {}).filter(k => {
+        return !routesData.every(r => r[k] === "" || r[k] === null || r[k] === undefined);
+    });
+    let filteredRoutesData = routesData.map(r => {
+        let obj = {};
+        validKeys.forEach(k => obj[k] = r[k]);
+        return obj;
+    });
+    const wsRoutes = xlsx.utils.json_to_sheet(filteredRoutesData, { header: validKeys });
+
     xlsx.utils.book_append_sheet(wb, wsRoutes, "Routes");
     const wsChallenges = xlsx.utils.json_to_sheet(challengesData);
     xlsx.utils.book_append_sheet(wb, wsChallenges, "Challenges");

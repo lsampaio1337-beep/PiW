@@ -2,6 +2,7 @@ export const galarRoutes = [
   {
     "name": "Route 1",
     "spawns": [
+      { "pokemonId": 867, "minLevel": 1, "maxLevel": 1, "chance": 0.05 },
       {
         "pokemonId": 640,
         "minLevel": 1,
@@ -91,6 +92,7 @@ export const galarRoutes = [
   {
     "name": "Route 2",
     "spawns": [
+      { "pokemonId": 862, "minLevel": 1, "maxLevel": 1, "chance": 0.05 },
       {
         "pokemonId": 442,
         "minLevel": 1,

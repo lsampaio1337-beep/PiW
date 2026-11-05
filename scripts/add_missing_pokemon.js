@@ -153,10 +153,10 @@ function addSpawnToFile(file, routeName, spawnData, isObj) {
 
     for (let i = 1; i <= 10; i++) {
         const files = fs.readdirSync('.');
-        const file = files.find(f => f.startsWith(`${i}_`) && f.endsWith('Data7.xlsx'));
+        const file = files.find(f => f.startsWith(`${i}_`) && f.endsWith('xlsx'));
         if (!file) continue;
 
-        const wb = xlsx.readFile(file);
+        const wb = xlsx.readFile("xdata/" + file);
         const ws = wb.Sheets['Missing PK'];
         if (!ws) continue;
         const data = xlsx.utils.sheet_to_json(ws);
