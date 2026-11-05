@@ -61,6 +61,18 @@ export const alolaRoutes = [
         "minLevel": 2,
         "maxLevel": 7,
         "chance": 0.125
+      },
+      {
+        "pokemonId": 143,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 628,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0.05
       }
     ],
     "challengeName": "Challenge 1",
@@ -107,6 +119,18 @@ export const alolaRoutes = [
         "minLevel": 4,
         "maxLevel": 9,
         "chance": 0.2
+      },
+      {
+        "pokemonId": 630,
+        "minLevel": 4,
+        "maxLevel": 9,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 302,
+        "minLevel": 4,
+        "maxLevel": 9,
+        "chance": 0.05
       }
     ],
     "challengeName": "Challenge 2",
@@ -147,6 +171,12 @@ export const alolaRoutes = [
         "minLevel": 7,
         "maxLevel": 12,
         "chance": 0.25
+      },
+      {
+        "pokemonId": 370,
+        "minLevel": 7,
+        "maxLevel": 12,
+        "chance": 0.05
       }
     ],
     "challengeName": "Challenge 3",
@@ -211,6 +241,18 @@ export const alolaRoutes = [
         "minLevel": 10,
         "maxLevel": 15,
         "chance": 0.1
+      },
+      {
+        "pokemonId": 350,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 594,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0.05
       }
     ],
     "challengeName": "Challenge 4",
@@ -227,7 +269,14 @@ export const alolaRoutes = [
   },
   {
     "name": "Captain Ilima Boss Battle",
-    "spawns": [],
+    "spawns": [
+      {
+        "pokemonId": 443,
+        "minLevel": 10,
+        "maxLevel": 15,
+        "chance": 0.05
+      }
+    ],
     "challengeName": "Challenge 5",
     "areaId": "Captain Ilima Boss Battle",
     "unlocks": [
@@ -263,6 +312,12 @@ export const alolaRoutes = [
         "minLevel": 14,
         "maxLevel": 19,
         "chance": 0.3333
+      },
+      {
+        "pokemonId": 445,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0.05
       }
     ],
     "areaId": "Seaward Cave",
@@ -274,7 +329,14 @@ export const alolaRoutes = [
   },
   {
     "name": "Kahuna Hala Boss Battle",
-    "spawns": [],
+    "spawns": [
+      {
+        "pokemonId": 448,
+        "minLevel": 10,
+        "maxLevel": 15,
+        "chance": 0.05
+      }
+    ],
     "challengeName": "Challenge 7",
     "areaId": "Kahuna Hala Boss Battle",
     "unlocks": [
@@ -343,6 +405,18 @@ export const alolaRoutes = [
         "minLevel": 16,
         "maxLevel": 21,
         "chance": 0.1
+      },
+      {
+        "pokemonId": 571,
+        "minLevel": 16,
+        "maxLevel": 21,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 439,
+        "minLevel": 16,
+        "maxLevel": 21,
+        "chance": 0.05
       }
     ],
     "challengeName": "Challenge 8",
@@ -389,6 +463,18 @@ export const alolaRoutes = [
         "minLevel": 20,
         "maxLevel": 25,
         "chance": 0.25
+      },
+      {
+        "pokemonId": 122,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 366,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0.05
       }
     ],
     "challengeName": "Challenge 9",
@@ -405,7 +491,14 @@ export const alolaRoutes = [
   },
   {
     "name": "Daycare NPC",
-    "spawns": [],
+    "spawns": [
+      {
+        "pokemonId": 368,
+        "minLevel": 10,
+        "maxLevel": 15,
+        "chance": 0.05
+      }
+    ],
     "challengeName": "Challenge 10",
     "areaId": "Daycare NPC",
     "unlocks": [
@@ -447,6 +540,18 @@ export const alolaRoutes = [
         "minLevel": 23,
         "maxLevel": 28,
         "chance": 0.1
+      },
+      {
+        "pokemonId": 550,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 310,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0.05
       }
     ],
     "challengeName": "Challenge 11",
@@ -460,7 +565,14 @@ export const alolaRoutes = [
   },
   {
     "name": "Captain Lana Boss Battle",
-    "spawns": [],
+    "spawns": [
+      {
+        "pokemonId": 593,
+        "minLevel": 10,
+        "maxLevel": 15,
+        "chance": 0.05
+      }
+    ],
     "challengeName": "Challenge 12",
     "areaId": "Captain Lana Boss Battle",
     "unlocks": [
@@ -496,6 +608,12 @@ export const alolaRoutes = [
         "minLevel": 28,
         "maxLevel": 33,
         "chance": 0.3333
+      },
+      {
+        "pokemonId": 624,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0.05
       }
     ],
     "challengeName": "Challenge 13",
@@ -512,7 +630,14 @@ export const alolaRoutes = [
   },
   {
     "name": "Captain Kiawe Boss Battle",
-    "spawns": [],
+    "spawns": [
+      {
+        "pokemonId": 625,
+        "minLevel": 10,
+        "maxLevel": 15,
+        "chance": 0.05
+      }
+    ],
     "challengeName": "Challenge 14",
     "areaId": "Captain Kiawe Boss Battle",
     "unlocks": [
@@ -590,6 +715,18 @@ export const alolaRoutes = [
         "minLevel": 31,
         "maxLevel": 36,
         "chance": 0.1
+      },
+      {
+        "pokemonId": 691,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 693,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0.05
       }
     ],
     "challengeName": "Challenge 15",
@@ -636,6 +773,18 @@ export const alolaRoutes = [
         "minLevel": 32,
         "maxLevel": 37,
         "chance": 0.2
+      },
+      {
+        "pokemonId": 342,
+        "minLevel": 32,
+        "maxLevel": 37,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 668,
+        "minLevel": 32,
+        "maxLevel": 37,
+        "chance": 0.05
       }
     ],
     "challengeName": "Challenge 16",
@@ -713,6 +862,12 @@ export const alolaRoutes = [
         "minLevel": 34,
         "maxLevel": 39,
         "chance": 0.1
+      },
+      {
+        "pokemonId": 463,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0.05
       }
     ],
     "challengeName": "Challenge 17",
@@ -1490,13 +1645,13 @@ export const alolaRoutes = [
       {
         "pokemonId": 584,
         "minLevel": 1,
-        "maxLevel": 1,
+        "maxLevel": 70,
         "chance": 0
       },
       {
         "pokemonId": 582,
         "minLevel": 1,
-        "maxLevel": 1,
+        "maxLevel": 70,
         "chance": 0
       },
       {
@@ -1596,7 +1751,8 @@ export const alolaRoutes = [
         "minLevel": 1,
         "maxLevel": 1,
         "chance": 0
-      },],
+      }
+    ],
     "challengeName": "Extra Challenge A-1",
     "areaId": "Route 6",
     "unlocks": [
@@ -1671,7 +1827,8 @@ export const alolaRoutes = [
         "minLevel": 1,
         "maxLevel": 1,
         "chance": 0
-      },],
+      }
+    ],
     "challengeName": "Extra Challenge D-1",
     "areaId": "Poni Plains",
     "unlocks": [
@@ -1686,7 +1843,14 @@ export const alolaRoutes = [
   },
   {
     "name": "Resolution Cave",
-    "spawns": [],
+    "spawns": [
+      {
+        "pokemonId": 718,
+        "minLevel": 70,
+        "maxLevel": 75,
+        "chance": 1
+      }
+    ],
     "challengeName": "Extra Challenge D-3",
     "areaId": "Resolution Cave",
     "unlocks": [
@@ -1746,7 +1910,8 @@ export const alolaRoutes = [
         "minLevel": 1,
         "maxLevel": 1,
         "chance": 0
-      },],
+      }
+    ],
     "challengeName": "Extra Challenge E-1",
     "areaId": "Route 16",
     "unlocks": [
@@ -2480,31 +2645,31 @@ export const alolaRoutes = [
       {
         "pokemonId": 410,
         "minLevel": 32,
-        "maxLevel": 37,
+        "maxLevel": 100,
         "chance": 0.2
       },
       {
         "pokemonId": 566,
         "minLevel": 32,
-        "maxLevel": 37,
+        "maxLevel": 100,
         "chance": 0.2
       },
       {
         "pokemonId": 564,
         "minLevel": 32,
-        "maxLevel": 37,
+        "maxLevel": 100,
         "chance": 0.2
       },
       {
         "pokemonId": 696,
         "minLevel": 32,
-        "maxLevel": 37,
+        "maxLevel": 100,
         "chance": 0.2
       },
       {
         "pokemonId": 698,
         "minLevel": 32,
-        "maxLevel": 37,
+        "maxLevel": 100,
         "chance": 0.2
       }
     ],

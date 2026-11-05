@@ -1,11 +1,25 @@
 export const paldeaRoutes = [
   {
     "name": "Poco Path - Main",
-    "spawns": []
+    "spawns": [
+      {
+        "pokemonId": 912,
+        "minLevel": 20,
+        "maxLevel": 25,
+        "chance": 0.05
+      }
+    ]
   },
   {
     "name": "Los Platos - Main",
-    "spawns": []
+    "spawns": [
+      {
+        "pokemonId": 914,
+        "minLevel": 20,
+        "maxLevel": 25,
+        "chance": 0.05
+      }
+    ]
   },
   {
     "name": "South Province (Area One) - Beach",
@@ -57,6 +71,18 @@ export const paldeaRoutes = [
         "minLevel": 1,
         "maxLevel": 3,
         "chance": 0.12
+      },
+      {
+        "pokemonId": 336,
+        "minLevel": 1,
+        "maxLevel": 3,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 778,
+        "minLevel": 1,
+        "maxLevel": 3,
+        "chance": 0.05
       }
     ]
   },
@@ -104,6 +130,18 @@ export const paldeaRoutes = [
         "minLevel": 3,
         "maxLevel": 5,
         "chance": 0.14
+      },
+      {
+        "pokemonId": 876,
+        "minLevel": 3,
+        "maxLevel": 5,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 357,
+        "minLevel": 3,
+        "maxLevel": 5,
+        "chance": 0.05
       }
     ]
   },
@@ -151,6 +189,18 @@ export const paldeaRoutes = [
         "minLevel": 5,
         "maxLevel": 7,
         "chance": 0.14
+      },
+      {
+        "pokemonId": 950,
+        "minLevel": 5,
+        "maxLevel": 7,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 442,
+        "minLevel": 5,
+        "maxLevel": 7,
+        "chance": 0.05
       }
     ]
   },
@@ -198,6 +248,18 @@ export const paldeaRoutes = [
         "minLevel": 6,
         "maxLevel": 8,
         "chance": 0.14
+      },
+      {
+        "pokemonId": 874,
+        "minLevel": 6,
+        "maxLevel": 8,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 615,
+        "minLevel": 6,
+        "maxLevel": 8,
+        "chance": 0.05
       }
     ]
   },
@@ -245,6 +307,18 @@ export const paldeaRoutes = [
         "minLevel": 8,
         "maxLevel": 10,
         "chance": 0.14
+      },
+      {
+        "pokemonId": 976,
+        "minLevel": 8,
+        "maxLevel": 10,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 984,
+        "minLevel": 8,
+        "maxLevel": 10,
+        "chance": 0.05
       }
     ]
   },
@@ -298,6 +372,18 @@ export const paldeaRoutes = [
         "minLevel": 10,
         "maxLevel": 12,
         "chance": 0.12
+      },
+      {
+        "pokemonId": 986,
+        "minLevel": 10,
+        "maxLevel": 12,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 987,
+        "minLevel": 10,
+        "maxLevel": 12,
+        "chance": 0.05
       }
     ]
   },
@@ -357,6 +443,18 @@ export const paldeaRoutes = [
         "minLevel": 12,
         "maxLevel": 15,
         "chance": 0.11
+      },
+      {
+        "pokemonId": 988,
+        "minLevel": 12,
+        "maxLevel": 15,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 990,
+        "minLevel": 12,
+        "maxLevel": 15,
+        "chance": 0.05
       }
     ]
   },
@@ -404,6 +502,18 @@ export const paldeaRoutes = [
         "minLevel": 13,
         "maxLevel": 16,
         "chance": 0.14
+      },
+      {
+        "pokemonId": 991,
+        "minLevel": 13,
+        "maxLevel": 16,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 993,
+        "minLevel": 13,
+        "maxLevel": 16,
+        "chance": 0.05
       }
     ]
   },
@@ -451,6 +561,18 @@ export const paldeaRoutes = [
         "minLevel": 15,
         "maxLevel": 18,
         "chance": 0.14
+      },
+      {
+        "pokemonId": 994,
+        "minLevel": 15,
+        "maxLevel": 18,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 1000,
+        "minLevel": 15,
+        "maxLevel": 18,
+        "chance": 0.05
       }
     ]
   },
@@ -504,12 +626,31 @@ export const paldeaRoutes = [
         "minLevel": 17,
         "maxLevel": 20,
         "chance": 0.12
+      },
+      {
+        "pokemonId": 1006,
+        "minLevel": 17,
+        "maxLevel": 20,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 168,
+        "minLevel": 17,
+        "maxLevel": 20,
+        "chance": 0.05
       }
     ]
   },
   {
     "name": "Mesagoza - Main",
-    "spawns": []
+    "spawns": [
+      {
+        "pokemonId": 469,
+        "minLevel": 20,
+        "maxLevel": 25,
+        "chance": 0.05
+      }
+    ]
   },
   {
     "name": "South Province (Area Two) - Flower Patch",
@@ -567,6 +708,18 @@ export const paldeaRoutes = [
         "minLevel": 19,
         "maxLevel": 22,
         "chance": 0.11
+      },
+      {
+        "pokemonId": 262,
+        "minLevel": 19,
+        "maxLevel": 22,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 313,
+        "minLevel": 19,
+        "maxLevel": 22,
+        "chance": 0.05
       }
     ]
   },
@@ -620,6 +773,18 @@ export const paldeaRoutes = [
         "minLevel": 20,
         "maxLevel": 23,
         "chance": 0.12
+      },
+      {
+        "pokemonId": 314,
+        "minLevel": 20,
+        "maxLevel": 23,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 342,
+        "minLevel": 20,
+        "maxLevel": 23,
+        "chance": 0.05
       }
     ]
   },
@@ -667,6 +832,18 @@ export const paldeaRoutes = [
         "minLevel": 22,
         "maxLevel": 25,
         "chance": 0.14
+      },
+      {
+        "pokemonId": 540,
+        "minLevel": 22,
+        "maxLevel": 25,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 542,
+        "minLevel": 22,
+        "maxLevel": 25,
+        "chance": 0.05
       }
     ]
   },
@@ -720,6 +897,18 @@ export const paldeaRoutes = [
         "minLevel": 24,
         "maxLevel": 27,
         "chance": 0.12
+      },
+      {
+        "pokemonId": 743,
+        "minLevel": 24,
+        "maxLevel": 27,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 24,
+        "minLevel": 24,
+        "maxLevel": 27,
+        "chance": 0.05
       }
     ]
   },
@@ -767,6 +956,18 @@ export const paldeaRoutes = [
         "minLevel": 26,
         "maxLevel": 29,
         "chance": 0.14
+      },
+      {
+        "pokemonId": 69,
+        "minLevel": 26,
+        "maxLevel": 29,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 71,
+        "minLevel": 26,
+        "maxLevel": 29,
+        "chance": 0.05
       }
     ]
   },
@@ -820,6 +1021,18 @@ export const paldeaRoutes = [
         "minLevel": 27,
         "maxLevel": 30,
         "chance": 0.12
+      },
+      {
+        "pokemonId": 162,
+        "minLevel": 27,
+        "maxLevel": 30,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 164,
+        "minLevel": 27,
+        "maxLevel": 30,
+        "chance": 0.05
       }
     ]
   },
@@ -867,6 +1080,18 @@ export const paldeaRoutes = [
         "minLevel": 29,
         "maxLevel": 32,
         "chance": 0.14
+      },
+      {
+        "pokemonId": 424,
+        "minLevel": 29,
+        "maxLevel": 32,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 220,
+        "minLevel": 29,
+        "maxLevel": 32,
+        "chance": 0.05
       }
     ]
   },
@@ -936,6 +1161,18 @@ export const paldeaRoutes = [
         "minLevel": 31,
         "maxLevel": 34,
         "chance": 0.1
+      },
+      {
+        "pokemonId": 473,
+        "minLevel": 31,
+        "maxLevel": 34,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 273,
+        "minLevel": 31,
+        "maxLevel": 34,
+        "chance": 0.05
       }
     ]
   },
@@ -983,6 +1220,18 @@ export const paldeaRoutes = [
         "minLevel": 33,
         "maxLevel": 36,
         "chance": 0.14
+      },
+      {
+        "pokemonId": 275,
+        "minLevel": 33,
+        "maxLevel": 36,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 1013,
+        "minLevel": 33,
+        "maxLevel": 36,
+        "chance": 0.05
       }
     ]
   },
@@ -1040,6 +1289,18 @@ export const paldeaRoutes = [
         "minLevel": 34,
         "maxLevel": 37,
         "chance": 0.12
+      },
+      {
+        "pokemonId": 532,
+        "minLevel": 34,
+        "maxLevel": 37,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 534,
+        "minLevel": 34,
+        "maxLevel": 37,
+        "chance": 0.05
       }
     ]
   },
@@ -1087,6 +1348,18 @@ export const paldeaRoutes = [
         "minLevel": 36,
         "maxLevel": 39,
         "chance": 0.14
+      },
+      {
+        "pokemonId": 877,
+        "minLevel": 36,
+        "maxLevel": 39,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 143,
+        "minLevel": 36,
+        "maxLevel": 39,
+        "chance": 0.05
       }
     ]
   },
@@ -1134,6 +1407,18 @@ export const paldeaRoutes = [
         "minLevel": 38,
         "maxLevel": 41,
         "chance": 0.14
+      },
+      {
+        "pokemonId": 270,
+        "minLevel": 38,
+        "maxLevel": 41,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 272,
+        "minLevel": 38,
+        "maxLevel": 41,
+        "chance": 0.05
       }
     ]
   },
@@ -1187,6 +1472,18 @@ export const paldeaRoutes = [
         "minLevel": 40,
         "maxLevel": 44,
         "chance": 0.12
+      },
+      {
+        "pokemonId": 472,
+        "minLevel": 40,
+        "maxLevel": 44,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 630,
+        "minLevel": 40,
+        "maxLevel": 44,
+        "chance": 0.05
       }
     ]
   },
@@ -1216,6 +1513,12 @@ export const paldeaRoutes = [
         "minLevel": 41,
         "maxLevel": 45,
         "chance": 0.25
+      },
+      {
+        "pokemonId": 782,
+        "minLevel": 41,
+        "maxLevel": 45,
+        "chance": 0.05
       }
     ]
   },
@@ -1263,6 +1566,18 @@ export const paldeaRoutes = [
         "minLevel": 43,
         "maxLevel": 47,
         "chance": 0.14
+      },
+      {
+        "pokemonId": 784,
+        "minLevel": 43,
+        "maxLevel": 47,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 110,
+        "minLevel": 43,
+        "maxLevel": 47,
+        "chance": 0.05
       }
     ]
   },
@@ -1310,6 +1625,18 @@ export const paldeaRoutes = [
         "minLevel": 45,
         "maxLevel": 49,
         "chance": 0.14
+      },
+      {
+        "pokemonId": 620,
+        "minLevel": 45,
+        "maxLevel": 49,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 358,
+        "minLevel": 45,
+        "maxLevel": 49,
+        "chance": 0.05
       }
     ]
   },
@@ -1363,6 +1690,18 @@ export const paldeaRoutes = [
         "minLevel": 47,
         "maxLevel": 51,
         "chance": 0.12
+      },
+      {
+        "pokemonId": 219,
+        "minLevel": 47,
+        "maxLevel": 51,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 607,
+        "minLevel": 47,
+        "maxLevel": 51,
+        "chance": 0.05
       }
     ]
   },
@@ -1410,6 +1749,18 @@ export const paldeaRoutes = [
         "minLevel": 48,
         "maxLevel": 52,
         "chance": 0.14
+      },
+      {
+        "pokemonId": 609,
+        "minLevel": 48,
+        "maxLevel": 52,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 173,
+        "minLevel": 48,
+        "maxLevel": 52,
+        "chance": 0.05
       }
     ]
   },
@@ -1451,6 +1802,18 @@ export const paldeaRoutes = [
         "minLevel": 50,
         "maxLevel": 55,
         "chance": 0.16
+      },
+      {
+        "pokemonId": 36,
+        "minLevel": 50,
+        "maxLevel": 55,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 350,
+        "minLevel": 50,
+        "maxLevel": 55,
+        "chance": 0.05
       }
     ]
   },
@@ -1492,6 +1855,18 @@ export const paldeaRoutes = [
         "minLevel": 52,
         "maxLevel": 57,
         "chance": 0.16
+      },
+      {
+        "pokemonId": 703,
+        "minLevel": 52,
+        "maxLevel": 57,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 581,
+        "minLevel": 52,
+        "maxLevel": 57,
+        "chance": 0.05
       }
     ]
   },
@@ -1533,6 +1908,18 @@ export const paldeaRoutes = [
         "minLevel": 54,
         "maxLevel": 59,
         "chance": 0.16
+      },
+      {
+        "pokemonId": 845,
+        "minLevel": 54,
+        "maxLevel": 59,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 85,
+        "minLevel": 54,
+        "maxLevel": 59,
+        "chance": 0.05
       }
     ]
   },
@@ -1566,6 +1953,12 @@ export const paldeaRoutes = [
         "minLevel": 55,
         "maxLevel": 60,
         "chance": 0.25
+      },
+      {
+        "pokemonId": 103,
+        "minLevel": 55,
+        "maxLevel": 60,
+        "chance": 0.05
       }
     ]
   },
@@ -1613,6 +2006,18 @@ export const paldeaRoutes = [
         "minLevel": 57,
         "maxLevel": 62,
         "chance": 0.14
+      },
+      {
+        "pokemonId": 111,
+        "minLevel": 57,
+        "maxLevel": 62,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 464,
+        "minLevel": 57,
+        "maxLevel": 62,
+        "chance": 0.05
       }
     ]
   },
@@ -1678,6 +2083,18 @@ export const paldeaRoutes = [
         "minLevel": 59,
         "maxLevel": 64,
         "chance": 0.1
+      },
+      {
+        "pokemonId": 239,
+        "minLevel": 59,
+        "maxLevel": 64,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 466,
+        "minLevel": 59,
+        "maxLevel": 64,
+        "chance": 0.05
       }
     ]
   },
@@ -1737,6 +2154,18 @@ export const paldeaRoutes = [
         "minLevel": 61,
         "maxLevel": 67,
         "chance": 0.11
+      },
+      {
+        "pokemonId": 240,
+        "minLevel": 61,
+        "maxLevel": 67,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 467,
+        "minLevel": 61,
+        "maxLevel": 67,
+        "chance": 0.05
       }
     ]
   },
@@ -1790,6 +2219,18 @@ export const paldeaRoutes = [
         "minLevel": 62,
         "maxLevel": 68,
         "chance": 0.12
+      },
+      {
+        "pokemonId": 523,
+        "minLevel": 62,
+        "maxLevel": 68,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 869,
+        "minLevel": 62,
+        "maxLevel": 68,
+        "chance": 0.05
       }
     ]
   },
@@ -1849,6 +2290,18 @@ export const paldeaRoutes = [
         "minLevel": 64,
         "maxLevel": 70,
         "chance": 0.11
+      },
+      {
+        "pokemonId": 328,
+        "minLevel": 64,
+        "maxLevel": 70,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 330,
+        "minLevel": 64,
+        "maxLevel": 70,
+        "chance": 0.05
       }
     ]
   },
@@ -1902,6 +2355,18 @@ export const paldeaRoutes = [
         "minLevel": 66,
         "maxLevel": 72,
         "chance": 0.12
+      },
+      {
+        "pokemonId": 731,
+        "minLevel": 66,
+        "maxLevel": 72,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 733,
+        "minLevel": 66,
+        "maxLevel": 72,
+        "chance": 0.05
       }
     ]
   },
@@ -1943,6 +2408,18 @@ export const paldeaRoutes = [
         "minLevel": 68,
         "maxLevel": 74,
         "chance": 0.16
+      },
+      {
+        "pokemonId": 547,
+        "minLevel": 68,
+        "maxLevel": 74,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 764,
+        "minLevel": 68,
+        "maxLevel": 74,
+        "chance": 0.05
       }
     ]
   },
@@ -1990,6 +2467,18 @@ export const paldeaRoutes = [
         "minLevel": 69,
         "maxLevel": 75,
         "chance": 0.14
+      },
+      {
+        "pokemonId": 171,
+        "minLevel": 69,
+        "maxLevel": 75,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 752,
+        "minLevel": 69,
+        "maxLevel": 75,
+        "chance": 0.05
       }
     ]
   },
@@ -2041,6 +2530,18 @@ export const paldeaRoutes = [
         "minLevel": 71,
         "maxLevel": 78,
         "chance": 0.14
+      },
+      {
+        "pokemonId": 530,
+        "minLevel": 71,
+        "maxLevel": 78,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 774,
+        "minLevel": 71,
+        "maxLevel": 78,
+        "chance": 0.05
       }
     ]
   },
@@ -2088,6 +2589,18 @@ export const paldeaRoutes = [
         "minLevel": 73,
         "maxLevel": 80,
         "chance": 0.14
+      },
+      {
+        "pokemonId": 409,
+        "minLevel": 73,
+        "maxLevel": 80,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 411,
+        "minLevel": 73,
+        "maxLevel": 80,
+        "chance": 0.05
       }
     ]
   },
@@ -2147,6 +2660,18 @@ export const paldeaRoutes = [
         "minLevel": 75,
         "maxLevel": 82,
         "chance": 0.11
+      },
+      {
+        "pokemonId": 573,
+        "minLevel": 75,
+        "maxLevel": 82,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 227,
+        "minLevel": 75,
+        "maxLevel": 82,
+        "chance": 0.05
       }
     ]
   },
@@ -2204,6 +2729,18 @@ export const paldeaRoutes = [
         "minLevel": 76,
         "maxLevel": 83,
         "chance": 0.16
+      },
+      {
+        "pokemonId": 311,
+        "minLevel": 76,
+        "maxLevel": 83,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 312,
+        "minLevel": 76,
+        "maxLevel": 83,
+        "chance": 0.05
       }
     ]
   },
@@ -2257,6 +2794,18 @@ export const paldeaRoutes = [
         "minLevel": 78,
         "maxLevel": 85,
         "chance": 0.12
+      },
+      {
+        "pokemonId": 560,
+        "minLevel": 78,
+        "maxLevel": 85,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 137,
+        "minLevel": 78,
+        "maxLevel": 85,
+        "chance": 0.05
       }
     ]
   },
@@ -2304,12 +2853,31 @@ export const paldeaRoutes = [
         "minLevel": 80,
         "maxLevel": 88,
         "chance": 0.14
+      },
+      {
+        "pokemonId": 474,
+        "minLevel": 80,
+        "maxLevel": 88,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 596,
+        "minLevel": 80,
+        "maxLevel": 88,
+        "chance": 0.05
       }
     ]
   },
   {
     "name": "Paldea Pokemon League",
-    "spawns": []
+    "spawns": [
+      {
+        "pokemonId": 374,
+        "minLevel": 20,
+        "maxLevel": 25,
+        "chance": 0.05
+      }
+    ]
   },
   {
     "name": "South Province (Area Four) - Grass",
@@ -2361,6 +2929,18 @@ export const paldeaRoutes = [
         "minLevel": 15,
         "maxLevel": 25,
         "chance": 0.12
+      },
+      {
+        "pokemonId": 376,
+        "minLevel": 15,
+        "maxLevel": 25,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 87,
+        "minLevel": 15,
+        "maxLevel": 25,
+        "chance": 0.05
       }
     ]
   },
@@ -2414,6 +2994,18 @@ export const paldeaRoutes = [
         "minLevel": 15,
         "maxLevel": 25,
         "chance": 0.12
+      },
+      {
+        "pokemonId": 131,
+        "minLevel": 15,
+        "maxLevel": 25,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 210,
+        "minLevel": 15,
+        "maxLevel": 25,
+        "chance": 0.05
       }
     ]
   },
@@ -2467,6 +3059,18 @@ export const paldeaRoutes = [
         "minLevel": 15,
         "maxLevel": 25,
         "chance": 0.12
+      },
+      {
+        "pokemonId": 1018,
+        "minLevel": 15,
+        "maxLevel": 25,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 152,
+        "minLevel": 15,
+        "maxLevel": 25,
+        "chance": 0.05
       }
     ]
   },
@@ -2520,6 +3124,18 @@ export const paldeaRoutes = [
         "minLevel": 15,
         "maxLevel": 25,
         "chance": 0.12
+      },
+      {
+        "pokemonId": 154,
+        "minLevel": 15,
+        "maxLevel": 25,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 155,
+        "minLevel": 15,
+        "maxLevel": 25,
+        "chance": 0.05
       }
     ]
   },
@@ -2579,6 +3195,18 @@ export const paldeaRoutes = [
         "minLevel": 15,
         "maxLevel": 25,
         "chance": 0.11
+      },
+      {
+        "pokemonId": 157,
+        "minLevel": 15,
+        "maxLevel": 25,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 158,
+        "minLevel": 15,
+        "maxLevel": 25,
+        "chance": 0.05
       }
     ]
   },
@@ -2626,6 +3254,18 @@ export const paldeaRoutes = [
         "minLevel": 25,
         "maxLevel": 35,
         "chance": 0.14
+      },
+      {
+        "pokemonId": 160,
+        "minLevel": 25,
+        "maxLevel": 35,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 252,
+        "minLevel": 25,
+        "maxLevel": 35,
+        "chance": 0.05
       }
     ]
   },
@@ -2667,6 +3307,18 @@ export const paldeaRoutes = [
         "minLevel": 25,
         "maxLevel": 35,
         "chance": 0.16
+      },
+      {
+        "pokemonId": 254,
+        "minLevel": 25,
+        "maxLevel": 35,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 255,
+        "minLevel": 25,
+        "maxLevel": 35,
+        "chance": 0.05
       }
     ]
   },
@@ -2714,6 +3366,18 @@ export const paldeaRoutes = [
         "minLevel": 25,
         "maxLevel": 35,
         "chance": 0.14
+      },
+      {
+        "pokemonId": 257,
+        "minLevel": 25,
+        "maxLevel": 35,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 258,
+        "minLevel": 25,
+        "maxLevel": 35,
+        "chance": 0.05
       }
     ]
   },
@@ -2767,6 +3431,18 @@ export const paldeaRoutes = [
         "minLevel": 25,
         "maxLevel": 35,
         "chance": 0.12
+      },
+      {
+        "pokemonId": 260,
+        "minLevel": 25,
+        "maxLevel": 35,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 387,
+        "minLevel": 25,
+        "maxLevel": 35,
+        "chance": 0.05
       }
     ]
   },
@@ -2796,6 +3472,12 @@ export const paldeaRoutes = [
         "minLevel": 25,
         "maxLevel": 35,
         "chance": 0.25
+      },
+      {
+        "pokemonId": 389,
+        "minLevel": 25,
+        "maxLevel": 35,
+        "chance": 0.05
       }
     ]
   },
@@ -2843,6 +3525,18 @@ export const paldeaRoutes = [
         "minLevel": 35,
         "maxLevel": 45,
         "chance": 0.14
+      },
+      {
+        "pokemonId": 390,
+        "minLevel": 35,
+        "maxLevel": 45,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 392,
+        "minLevel": 35,
+        "maxLevel": 45,
+        "chance": 0.05
       }
     ]
   },
@@ -2890,6 +3584,18 @@ export const paldeaRoutes = [
         "minLevel": 35,
         "maxLevel": 45,
         "chance": 0.14
+      },
+      {
+        "pokemonId": 393,
+        "minLevel": 35,
+        "maxLevel": 45,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 395,
+        "minLevel": 35,
+        "maxLevel": 45,
+        "chance": 0.05
       }
     ]
   },
@@ -2943,6 +3649,18 @@ export const paldeaRoutes = [
         "minLevel": 35,
         "maxLevel": 45,
         "chance": 0.12
+      },
+      {
+        "pokemonId": 495,
+        "minLevel": 35,
+        "maxLevel": 45,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 497,
+        "minLevel": 35,
+        "maxLevel": 45,
+        "chance": 0.05
       }
     ]
   },
@@ -2990,6 +3708,18 @@ export const paldeaRoutes = [
         "minLevel": 35,
         "maxLevel": 45,
         "chance": 0.14
+      },
+      {
+        "pokemonId": 498,
+        "minLevel": 35,
+        "maxLevel": 45,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 500,
+        "minLevel": 35,
+        "maxLevel": 45,
+        "chance": 0.05
       }
     ]
   },
@@ -3007,6 +3737,12 @@ export const paldeaRoutes = [
         "minLevel": 35,
         "maxLevel": 45,
         "chance": 0.5
+      },
+      {
+        "pokemonId": 501,
+        "minLevel": 35,
+        "maxLevel": 45,
+        "chance": 0.05
       }
     ]
   },
@@ -3054,6 +3790,18 @@ export const paldeaRoutes = [
         "minLevel": 45,
         "maxLevel": 55,
         "chance": 0.14
+      },
+      {
+        "pokemonId": 503,
+        "minLevel": 45,
+        "maxLevel": 55,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 650,
+        "minLevel": 45,
+        "maxLevel": 55,
+        "chance": 0.05
       }
     ]
   },
@@ -3101,6 +3849,18 @@ export const paldeaRoutes = [
         "minLevel": 45,
         "maxLevel": 55,
         "chance": 0.14
+      },
+      {
+        "pokemonId": 652,
+        "minLevel": 45,
+        "maxLevel": 55,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 653,
+        "minLevel": 45,
+        "maxLevel": 55,
+        "chance": 0.05
       }
     ]
   },
@@ -3154,6 +3914,18 @@ export const paldeaRoutes = [
         "minLevel": 45,
         "maxLevel": 55,
         "chance": 0.12
+      },
+      {
+        "pokemonId": 655,
+        "minLevel": 45,
+        "maxLevel": 55,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 656,
+        "minLevel": 45,
+        "maxLevel": 55,
+        "chance": 0.05
       }
     ]
   },
@@ -3171,6 +3943,12 @@ export const paldeaRoutes = [
         "minLevel": 45,
         "maxLevel": 55,
         "chance": 0.5
+      },
+      {
+        "pokemonId": 658,
+        "minLevel": 45,
+        "maxLevel": 55,
+        "chance": 0.05
       }
     ]
   },
@@ -3200,6 +3978,12 @@ export const paldeaRoutes = [
         "minLevel": 45,
         "maxLevel": 55,
         "chance": 0.25
+      },
+      {
+        "pokemonId": 722,
+        "minLevel": 45,
+        "maxLevel": 55,
+        "chance": 0.05
       }
     ]
   },
@@ -3229,6 +4013,12 @@ export const paldeaRoutes = [
         "minLevel": 55,
         "maxLevel": 65,
         "chance": 0.25
+      },
+      {
+        "pokemonId": 724,
+        "minLevel": 55,
+        "maxLevel": 65,
+        "chance": 0.05
       }
     ]
   },
@@ -3258,6 +4048,12 @@ export const paldeaRoutes = [
         "minLevel": 55,
         "maxLevel": 65,
         "chance": 0.25
+      },
+      {
+        "pokemonId": 725,
+        "minLevel": 55,
+        "maxLevel": 65,
+        "chance": 0.05
       }
     ]
   },
@@ -3305,6 +4101,18 @@ export const paldeaRoutes = [
         "minLevel": 55,
         "maxLevel": 65,
         "chance": 0.14
+      },
+      {
+        "pokemonId": 727,
+        "minLevel": 55,
+        "maxLevel": 65,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 728,
+        "minLevel": 55,
+        "maxLevel": 65,
+        "chance": 0.05
       }
     ]
   },
@@ -3352,6 +4160,18 @@ export const paldeaRoutes = [
         "minLevel": 55,
         "maxLevel": 65,
         "chance": 0.14
+      },
+      {
+        "pokemonId": 730,
+        "minLevel": 55,
+        "maxLevel": 65,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 810,
+        "minLevel": 55,
+        "maxLevel": 65,
+        "chance": 0.05
       }
     ]
   },
@@ -3399,6 +4219,18 @@ export const paldeaRoutes = [
         "minLevel": 55,
         "maxLevel": 65,
         "chance": 0.14
+      },
+      {
+        "pokemonId": 812,
+        "minLevel": 55,
+        "maxLevel": 65,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 813,
+        "minLevel": 55,
+        "maxLevel": 65,
+        "chance": 0.05
       }
     ]
   },
@@ -3446,6 +4278,18 @@ export const paldeaRoutes = [
         "minLevel": 65,
         "maxLevel": 75,
         "chance": 0.14
+      },
+      {
+        "pokemonId": 815,
+        "minLevel": 65,
+        "maxLevel": 75,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 816,
+        "minLevel": 65,
+        "maxLevel": 75,
+        "chance": 0.05
       }
     ]
   },
@@ -3499,6 +4343,18 @@ export const paldeaRoutes = [
         "minLevel": 65,
         "maxLevel": 75,
         "chance": 0.12
+      },
+      {
+        "pokemonId": 818,
+        "minLevel": 65,
+        "maxLevel": 75,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 1020,
+        "minLevel": 65,
+        "maxLevel": 75,
+        "chance": 0.05
       }
     ]
   },
@@ -3552,6 +4408,18 @@ export const paldeaRoutes = [
         "minLevel": 65,
         "maxLevel": 75,
         "chance": 0.12
+      },
+      {
+        "pokemonId": 1021,
+        "minLevel": 65,
+        "maxLevel": 75,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 1023,
+        "minLevel": 65,
+        "maxLevel": 75,
+        "chance": 0.05
       }
     ]
   },
@@ -3587,6 +4455,18 @@ export const paldeaRoutes = [
         "minLevel": 65,
         "maxLevel": 75,
         "chance": 0.2
+      },
+      {
+        "pokemonId": 1022,
+        "minLevel": 65,
+        "maxLevel": 75,
+        "chance": 0.05
+      },
+      {
+        "pokemonId": 1009,
+        "minLevel": 65,
+        "maxLevel": 75,
+        "chance": 0.05
       }
     ]
   },
@@ -3634,6 +4514,12 @@ export const paldeaRoutes = [
         "minLevel": 75,
         "maxLevel": 85,
         "chance": 0.14
+      },
+      {
+        "pokemonId": 1010,
+        "minLevel": 75,
+        "maxLevel": 85,
+        "chance": 0.05
       }
     ]
   },

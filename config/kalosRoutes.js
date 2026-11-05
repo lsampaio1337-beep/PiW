@@ -1769,13 +1769,13 @@ export const kalosRoutes = [
       {
         "pokemonId": 302,
         "minLevel": 1,
-        "maxLevel": 1,
+        "maxLevel": 70,
         "chance": 0
       },
       {
         "pokemonId": 303,
         "minLevel": 1,
-        "maxLevel": 1,
+        "maxLevel": 70,
         "chance": 0
       },
       {

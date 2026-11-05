@@ -35,7 +35,7 @@ This sheet analyzes the spawn encounters, level scaling, and statistical balance
     *   If `BST - AvgBST < -150`: -4 levels
 *   **% Appearance:** The frequency or chance of encountering the Pokémon (formatted as a percentage, e.g., `25%`).
 *   **% Appearance Ok?:** Analyzes if the appearance rate is balanced relative to the Pokémon's rarity and route counterparts. Blank if acceptable; contains a suggested percentage if it needs rebalancing.
-*   **Pokemon/Type Ok?:** Checks if the Pokémon thematically belongs on the route. "Yes" if acceptable, "Legacy" if it appears there in the official games, or "NONONO" if it feels out of place (e.g., a Fire type in a "Sea Route").
+*   **Pokemon/Type Ok?:** Checks if the Pokémon thematically belongs on the route. "Yes" if acceptable, "Legacy" if it appears there in the official games (using fuzzy text matching to accommodate route name variations), or "NONONO" if it feels out of place (e.g., a Fire type in a "Sea Route").
 *   **BST:** The Base Stat Total of the Pokémon.
 *   **Pokemon/BST Ok?:** Verifies that the Pokémon's power level matches the game's progression. The Main Challenges are divided into four quarters:
     *   1st Quarter: BST should not exceed 400.
@@ -83,4 +83,4 @@ This sheet lists all Pokémon native to the region (according to the regional Po
     *   `Breed`: Can be obtained by breeding a wild-caught Pokémon once to get its pre-evolution.
     *   `#xBreed`: Requires chain-breeding multiple times to reach this pre-evolution (e.g., `2xBreed`).
 
-Last Generation Counter: 12
+Last Generation Counter: 19
