@@ -2061,7 +2061,8 @@ export const hoennUnlocks = [
     "challengeName": "Challenge 16",
     "areaId": "Mauville Gym",
     "unlocks": [
-      "Route 117"
+      "Route 117",
+      "Daycare"
     ],
     "requirements": {
       "earnBadge": {
@@ -2408,7 +2409,8 @@ export const hoennUnlocks = [
     "challengeName": "Challenge 38",
     "areaId": "Sootopolis Gym",
     "unlocks": [
-      "Shoal Cave"
+      "Shoal Cave",
+      "Battle Stadium"
     ],
     "requirements": {
       "earnBadge": {
