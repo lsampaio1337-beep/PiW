@@ -149,12 +149,15 @@ export function cheatAction(action) {
         }
 
         updateUI();
+        alertMessage = "God Mode activated!";
     } else if (action === 'Money') {
         state.trainer.money += 1000000000;
         updateUI();
+        alertMessage = "Added $1,000,000,000!";
     } else if (action === 'NoMoney') {
         state.trainer.money = 0;
         updateUI();
+        alertMessage = "Money set to $0!";
     } else if (action === 'XP') {
         if (state.party.length > 0) {
             let p = state.party[0];
@@ -184,6 +187,7 @@ export function cheatAction(action) {
                 p.pp = mathEngine.calculatePP(p.bst, p.level, p.quality, Object.values(p.ivs).reduce((a,b)=>a+b,0));
             }
             updateUI();
+            alertMessage = "Level increased by 1!";
         }
     } else if (action === 'InfiniteItems') {
         state.settings.infiniteItems = !state.settings.infiniteItems;
@@ -192,6 +196,7 @@ export function cheatAction(action) {
             btn.style.background = state.settings.infiniteItems ? '#9b59b6' : '#95a5a6';
             btn.innerText = `Infinite items: ${state.settings.infiniteItems ? 'ON' : 'OFF'}`;
         }
+        alertMessage = `Infinite items turned ${state.settings.infiniteItems ? 'ON' : 'OFF'}!`;
     } else if (action === 'Upgrades') {
         if (!state.stats.upgrades) state.stats.upgrades = {};
 
@@ -216,6 +221,7 @@ export function cheatAction(action) {
         state.stats.upgrades.daycareTier = maxDaycareTier;
 
         updateUI();
+        alertMessage = "All upgrades maximized!";
     } else if (action === 'Map') {
         if (!state.stats.completedChallengeIds) state.stats.completedChallengeIds = [];
         if (!state.stats.newRoutes) state.stats.newRoutes = [];
@@ -317,16 +323,21 @@ export function cheatAction(action) {
         state.stats.activeChallenges = [];
         state.stats.hasUnseenMap = true;
         updateUI();
+        alertMessage = "Map challenges completed and areas unlocked!";
     } else if (action === 'Pokedex') {
         generatePokedex(false);
+        alertMessage = "Regional Pokédex completed!";
     } else if (action === 'PokedexShiny') {
         generatePokedex(true);
+        alertMessage = "Shiny Regional Pokédex completed!";
     } else if (action === 'JigglypuffDust') {
         state.stats.jigglypuffGrains = (state.stats.jigglypuffGrains || 0) + 100;
         updateUI();
+        alertMessage = "Added 100 Jigglypuff Dust!";
     } else if (action === 'BonusCandy') {
         state.stats.whiteCandies = (state.stats.whiteCandies || 0) + 100;
         updateUI();
+        alertMessage = "Added 100 Bonus Candies!";
     } else if (action === 'RerollDailyChallenges') {
         if (state.stats.dailyChallenges) {
             state.stats.dailyChallenges.lastDate = null;
@@ -340,7 +351,7 @@ export function cheatAction(action) {
         if (document.getElementById('window-calendar')) {
             if (typeof window.showCalendar === 'function' && document.getElementById('window-calendar') && document.getElementById('window-calendar').offsetParent !== null) window.showCalendar();
         }
-
+        alertMessage = "Daily Challenges rerolled!";
     } else if (action === 'NextDailyReward') {
         if (!state.stats.dailyRewards) {
             state.stats.dailyRewards = { daysClaimed: 0, lastClaimDate: null };
@@ -350,6 +361,7 @@ export function cheatAction(action) {
         if (document.getElementById('window-calendar')) {
             if (typeof window.showCalendar === 'function' && document.getElementById('window-calendar') && document.getElementById('window-calendar').offsetParent !== null) window.showCalendar();
         }
+        alertMessage = "Next Daily Reward unlocked!";
     } else if (action === 'GameSpeed') {
         const speeds = [0.25, 0.5, 1, 2, 5, 10, 25, 50, 100, 500, 1000];
         const currentIndex = speeds.indexOf(state.settings.gameSpeed || 1);
@@ -380,6 +392,10 @@ export function cheatAction(action) {
         };
 
         showModal("Game Speed", speedHtml, "window-gamespeed", "300px");
+    }
+
+    if (alertMessage && window.showGameAlert) {
+        window.showGameAlert(alertMessage, 'window-cheat-control');
     }
 }
 
