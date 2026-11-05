@@ -54,6 +54,7 @@ export const REGION_TEMPLATE = {
         jigglypuffGrains: 0,
         jigglypuffGrainsUsed: 0,
         newRoutes: [],
+        playtime: 0,
         hasUnseenMap: false,
         hasPickedStarter: false,
         seenSpecies: {},
