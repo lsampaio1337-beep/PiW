@@ -2494,7 +2494,7 @@ export const hoennUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge A 1",
+    "challengeName": "Extra Challenge A 01",
     "areaId": "Mauville Game Corner",
     "unlocks": [
       "Starter Sanctuary"
@@ -2513,7 +2513,7 @@ export const hoennUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge A 2",
+    "challengeName": "Extra Challenge A 02",
     "areaId": "Starter Sanctuary",
     "unlocks": [
       "Advanced Starter Sanctuary"
@@ -2536,7 +2536,7 @@ export const hoennUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge A 3",
+    "challengeName": "Extra Challenge A 03",
     "areaId": "Advanced Starter Sanctuary",
     "unlocks": [
       "Daycare Special Spot"
@@ -2563,7 +2563,7 @@ export const hoennUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge A 4",
+    "challengeName": "Extra Challenge A 04",
     "areaId": "Daycare Special Spot",
     "unlocks": [
       "Battle Frontier Facility"
@@ -2602,7 +2602,7 @@ export const hoennUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge A 5",
+    "challengeName": "Extra Challenge A 05",
     "areaId": "Battle Frontier Facility",
     "unlocks": [
       "The Solitary Atoll"
@@ -2619,7 +2619,7 @@ export const hoennUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge A 6",
+    "challengeName": "Extra Challenge A 06",
     "areaId": "The Solitary Atoll",
     "unlocks": [
       "Key to Nebula Fissure Challenge"
@@ -2642,7 +2642,7 @@ export const hoennUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge B 1",
+    "challengeName": "Extra Challenge B 01",
     "areaId": "Trick House",
     "unlocks": [
       "Rustboro Fossil Lab"
@@ -2665,7 +2665,7 @@ export const hoennUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge B 2",
+    "challengeName": "Extra Challenge B 02",
     "areaId": "Rustboro Fossil Lab",
     "unlocks": [
       "Abandoned Ship"
@@ -2688,7 +2688,7 @@ export const hoennUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge B 3",
+    "challengeName": "Extra Challenge B 03",
     "areaId": "Abandoned Ship",
     "unlocks": [
       "Enemy Hideout"
@@ -2707,7 +2707,7 @@ export const hoennUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge B 4",
+    "challengeName": "Extra Challenge B 04",
     "areaId": "Enemy Hideout",
     "unlocks": [
       "Sealed Chamber"
@@ -2724,7 +2724,7 @@ export const hoennUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge B 5",
+    "challengeName": "Extra Challenge B 05",
     "areaId": "Sealed Chamber",
     "unlocks": [
       "Ancient Ruins"
@@ -2747,7 +2747,7 @@ export const hoennUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge B 6",
+    "challengeName": "Extra Challenge B 06",
     "areaId": "Ancient Ruins",
     "unlocks": [
       "Key to Nebula Fissure Challenge"
@@ -2804,8 +2804,8 @@ export const hoennUnlocks = [
     ],
     "requirements": {
       "completeChallenges": [
-        "Extra Challenge A 6",
-        "Extra Challenge B 6",
+        "Extra Challenge A 06",
+        "Extra Challenge B 06",
         "Extra Challenge (Roaming)"
       ]
     }

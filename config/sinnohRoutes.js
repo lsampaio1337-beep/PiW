@@ -2446,7 +2446,7 @@ export const sinnohRoutes = [
 
 export const sinnohUnlocks = [
   {
-    challengeName: "Challenge 1",
+    challengeName: "Challenge 01",
     areaId: "Route 201",
     unlocks: [
       "Route 202"
@@ -2461,7 +2461,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Challenge 2",
+    challengeName: "Challenge 02",
     areaId: "Route 202",
     unlocks: [
       "Route 203"
@@ -2476,7 +2476,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Challenge 3",
+    challengeName: "Challenge 03",
     areaId: "Route 203",
     unlocks: [
       "Oreburgh Gate"
@@ -2491,7 +2491,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Challenge 4",
+    challengeName: "Challenge 04",
     areaId: "Oreburgh Gate",
     unlocks: [
       "Oreburgh Gym"
@@ -2506,7 +2506,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Challenge 5",
+    challengeName: "Challenge 05",
     areaId: "Oreburgh Gym",
     unlocks: [
       "Route 204"
@@ -2520,7 +2520,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Challenge 6",
+    challengeName: "Challenge 06",
     areaId: "Route 204",
     unlocks: [
       "Ravaged Path"
@@ -2535,7 +2535,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Challenge 7",
+    challengeName: "Challenge 07",
     areaId: "Ravaged Path",
     unlocks: [
       "Valley Windworks"
@@ -2554,7 +2554,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Challenge 8",
+    challengeName: "Challenge 08",
     areaId: "Valley Windworks",
     unlocks: [
       "Route 205"
@@ -2573,7 +2573,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Challenge 9",
+    challengeName: "Challenge 09",
     areaId: "Route 205",
     unlocks: [
       "Eterna Forest"
@@ -2953,7 +2953,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Extra Challenge A 1",
+    challengeName: "Extra Challenge A 01",
     areaId: "Old Chateau",
     unlocks: [
       "Wayward Cave"
@@ -2972,7 +2972,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Extra Challenge A 2",
+    challengeName: "Extra Challenge A 02",
     areaId: "Wayward Cave",
     unlocks: [
       "Fuego Ironworks"
@@ -2991,7 +2991,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Extra Challenge A 3",
+    challengeName: "Extra Challenge A 03",
     areaId: "Fuego Ironworks",
     unlocks: [
       "Trophy Garden"
@@ -3010,7 +3010,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Extra Challenge A 4",
+    challengeName: "Extra Challenge A 04",
     areaId: "Trophy Garden",
     requirements: {
       catchSpecies: [
@@ -3026,7 +3026,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Extra Challenge B 1",
+    challengeName: "Extra Challenge B 01",
     areaId: "Iron Island",
     unlocks: [
       "Lake Acuity"
@@ -3045,7 +3045,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Extra Challenge B 2",
+    challengeName: "Extra Challenge B 02",
     areaId: "Lake Acuity",
     unlocks: [
       "Snowpoint Temple"
@@ -3064,7 +3064,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Extra Challenge B 3",
+    challengeName: "Extra Challenge B 03",
     areaId: "Snowpoint Temple",
     unlocks: [
       "Guardian's Cavern"
@@ -3083,7 +3083,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Extra Challenge B 4",
+    challengeName: "Extra Challenge B 04",
     areaId: "Guardian's Cavern",
     requirements: {
       catchSpecies: [
@@ -3107,7 +3107,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Extra Challenge C 1",
+    challengeName: "Extra Challenge C 01",
     areaId: "Deep Lake Verity",
     unlocks: [
       "Deep Lake Valor"
@@ -3122,7 +3122,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Extra Challenge C 2",
+    challengeName: "Extra Challenge C 02",
     areaId: "Deep Lake Valor",
     unlocks: [
       "Pastoria Bog"
@@ -3141,7 +3141,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Extra Challenge C 3",
+    challengeName: "Extra Challenge C 03",
     areaId: "Pastoria Bog",
     unlocks: [
       "Canalave Sea"
@@ -3160,7 +3160,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Extra Challenge C 4",
+    challengeName: "Extra Challenge C 04",
     areaId: "Canalave Sea",
     unlocks: [
       "Flower Paradise"
@@ -3179,7 +3179,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Extra Challenge C 5",
+    challengeName: "Extra Challenge C 05",
     areaId: "Flower Paradise",
     requirements: {
       catchSpecies: [
@@ -3212,7 +3212,7 @@ export const sinnohUnlocks = [
     ]
   },
   {
-    challengeName: "Extra Challenge D 1",
+    challengeName: "Extra Challenge D 01",
     areaId: "Sendoff Spring",
     unlocks: [
       "Turnback Cave"
@@ -3227,7 +3227,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Extra Challenge D 2",
+    challengeName: "Extra Challenge D 02",
     areaId: "Turnback Cave",
     unlocks: [
       "Lunar Isles"
@@ -3246,7 +3246,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Extra Challenge D 3",
+    challengeName: "Extra Challenge D 03",
     areaId: "Lunar Isles",
     requirements: {
       catchSpecies: [
@@ -3275,7 +3275,7 @@ export const sinnohUnlocks = [
     ]
   },
   {
-    challengeName: "Extra Challenge E 1",
+    challengeName: "Extra Challenge E 01",
     areaId: "Route 225",
     unlocks: [
       "Route 227"
@@ -3290,7 +3290,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Extra Challenge E 2",
+    challengeName: "Extra Challenge E 02",
     areaId: "Route 227",
     unlocks: [
       "Stark Mountain"
@@ -3309,7 +3309,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Extra Challenge E 3",
+    challengeName: "Extra Challenge E 03",
     areaId: "Stark Mountain",
     unlocks: [
       "Continental Depths"
@@ -3328,7 +3328,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Extra Challenge E 4",
+    challengeName: "Extra Challenge E 04",
     areaId: "Continental Depths",
     requirements: {
       catchSpecies: [
@@ -3357,7 +3357,7 @@ export const sinnohUnlocks = [
     ]
   },
   {
-    challengeName: "Extra Challenge F 1",
+    challengeName: "Extra Challenge F 01",
     areaId: "Route 224",
     unlocks: [
       "Route 228"
@@ -3372,7 +3372,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Extra Challenge F 2",
+    challengeName: "Extra Challenge F 02",
     areaId: "Route 228",
     unlocks: [
       "Spear Pillar"
@@ -3391,7 +3391,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Extra Challenge F 3",
+    challengeName: "Extra Challenge F 03",
     areaId: "Spear Pillar",
     unlocks: [
       "Huge Starters"
@@ -3410,7 +3410,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Extra Challenge F 4",
+    challengeName: "Extra Challenge F 04",
     areaId: "Huge Starters",
     unlocks: [
       "Key to Hall of Origin Challenge"
@@ -3480,10 +3480,10 @@ export const sinnohUnlocks = [
     ],
     requirements: {
       completeChallenges: [
-        "Extra Challenge C 5",
-        "Extra Challenge D 3",
-        "Extra Challenge E 4",
-        "Extra Challenge F 4"
+        "Extra Challenge C 05",
+        "Extra Challenge D 03",
+        "Extra Challenge E 04",
+        "Extra Challenge F 04"
       ]
     }
   }

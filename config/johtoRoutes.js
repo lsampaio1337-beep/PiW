@@ -1812,7 +1812,7 @@ export const johtoRoutes = [
 
 export const johtoUnlocks = [
   {
-    "challengeName": "Challenge 1",
+    "challengeName": "Challenge 01",
     "areaId": "Route 29",
     "unlocks": [
       "Route 30"
@@ -1825,7 +1825,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 2",
+    "challengeName": "Challenge 02",
     "areaId": "Route 30",
     "unlocks": [
       "Route 31"
@@ -1844,7 +1844,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 3",
+    "challengeName": "Challenge 03",
     "areaId": "Route 31",
     "unlocks": [
       "Violet Gym"
@@ -1857,7 +1857,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 4",
+    "challengeName": "Challenge 04",
     "areaId": "Violet Gym",
     "unlocks": [
       "Route 32"
@@ -1871,7 +1871,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 5",
+    "challengeName": "Challenge 05",
     "areaId": "Route 32",
     "unlocks": [
       "Tiny Fishing Spot"
@@ -1890,7 +1890,7 @@ export const johtoUnlocks = [
     ]
   },
   {
-    "challengeName": "Challenge 6",
+    "challengeName": "Challenge 06",
     "areaId": "Tiny Fishing Spot",
     "unlocks": [
       "Route 33"
@@ -1903,7 +1903,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 7",
+    "challengeName": "Challenge 07",
     "areaId": "Route 33",
     "unlocks": [
       "Ruins of Alph"
@@ -1918,7 +1918,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 8",
+    "challengeName": "Challenge 08",
     "areaId": "Ruins of Alph",
     "unlocks": [
       "Azalea Gym"
@@ -1937,7 +1937,7 @@ export const johtoUnlocks = [
     ]
   },
   {
-    "challengeName": "Challenge 9",
+    "challengeName": "Challenge 09",
     "areaId": "Azalea Gym",
     "unlocks": [
       "Ilex Forest"
@@ -2610,7 +2610,7 @@ export const johtoUnlocks = [
     }
   },
   {
-    "challengeName": "Johto Extra Challenge 1",
+    "challengeName": "Johto Extra Challenge 01",
     "areaId": "Goldenrod Game Corner",
     "unlocks": [
       "Team Rocket HQ"
@@ -2629,7 +2629,7 @@ export const johtoUnlocks = [
     ]
   },
   {
-    "challengeName": "Johto Extra Challenge 2",
+    "challengeName": "Johto Extra Challenge 02",
     "areaId": "Team Rocket HQ",
     "unlocks": [
       "Lake of Rage"
@@ -2648,7 +2648,7 @@ export const johtoUnlocks = [
     ]
   },
   {
-    "challengeName": "Johto Extra Challenge 3",
+    "challengeName": "Johto Extra Challenge 03",
     "areaId": "Lake of Rage",
     "unlocks": [
       "Mount Silver"
@@ -2669,7 +2669,7 @@ export const johtoUnlocks = [
     ]
   },
   {
-    "challengeName": "Johto Extra Challenge 4",
+    "challengeName": "Johto Extra Challenge 04",
     "areaId": "Mount Silver",
     "unlocks": [
       "Ilex Forest 2"
@@ -2694,7 +2694,7 @@ export const johtoUnlocks = [
     ]
   },
   {
-    "challengeName": "Johto Extra Challenge 5",
+    "challengeName": "Johto Extra Challenge 05",
     "areaId": "Ilex Forest 2",
     "unlocks": [
       "Key to Mount Silver Apex Challenge"
@@ -2752,7 +2752,7 @@ export const johtoUnlocks = [
     ]
   },
   {
-    "challengeName": "Kanto Extra Challenge 1",
+    "challengeName": "Kanto Extra Challenge 01",
     "areaId": "Casino Starter Trupe",
     "unlocks": [
       "Casino Babies"
@@ -2801,7 +2801,7 @@ export const johtoUnlocks = [
     ]
   },
   {
-    "challengeName": "Kanto Extra Challenge 2",
+    "challengeName": "Kanto Extra Challenge 02",
     "areaId": "Casino Babies",
     "unlocks": [
       "Casino Special Spot"
@@ -2822,7 +2822,7 @@ export const johtoUnlocks = [
     ]
   },
   {
-    "challengeName": "Kanto Extra Challenge 3",
+    "challengeName": "Kanto Extra Challenge 03",
     "areaId": "Casino Special Spot",
     "unlocks": [
       "Casino Eeveelution",
@@ -2844,7 +2844,7 @@ export const johtoUnlocks = [
     ]
   },
   {
-    "challengeName": "Kanto Extra Challenge 4",
+    "challengeName": "Kanto Extra Challenge 04",
     "areaId": "Dojo",
     "unlocks": [
       "Casino Late Trupe"
@@ -2873,7 +2873,7 @@ export const johtoUnlocks = [
     ]
   },
   {
-    "challengeName": "Kanto Extra Challenge 5",
+    "challengeName": "Kanto Extra Challenge 05",
     "areaId": "Casino Late Trupe",
     "unlocks": [
       "Legendaries Nest"
@@ -2914,7 +2914,7 @@ export const johtoUnlocks = [
     ]
   },
   {
-    "challengeName": "Kanto Extra Challenge 6",
+    "challengeName": "Kanto Extra Challenge 06",
     "areaId": "Legendaries Nest",
     "unlocks": [
       "Key to Mount Silver Apex Challenge"
@@ -2954,8 +2954,8 @@ export const johtoUnlocks = [
     ],
     "requirements": {
       "completeChallenges": [
-        "Kanto Extra Challenge 6",
-        "Johto Extra Challenge 5",
+        "Kanto Extra Challenge 06",
+        "Johto Extra Challenge 05",
         "Extra Challenge (Roaming)"
       ]
     }

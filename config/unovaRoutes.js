@@ -2637,7 +2637,7 @@ export const unovaRoutes = [
 
 export const unovaUnlocks = [
   {
-    "challengeName": "Challenge 1",
+    "challengeName": "Challenge 01",
     "areaId": "Route 19",
     "unlocks": [
       "Route 20"
@@ -2652,7 +2652,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 2",
+    "challengeName": "Challenge 02",
     "areaId": "Route 20",
     "unlocks": [
       "Floccesy Ranch"
@@ -2667,7 +2667,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 3",
+    "challengeName": "Challenge 03",
     "areaId": "Floccesy Ranch",
     "unlocks": [
       "Floccesy Pond"
@@ -2682,7 +2682,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 4",
+    "challengeName": "Challenge 04",
     "areaId": "Floccesy Pond",
     "unlocks": [
       "Aspertia Gym"
@@ -2697,7 +2697,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 5",
+    "challengeName": "Challenge 05",
     "areaId": "Aspertia Gym",
     "unlocks": [
       "Virbank City"
@@ -2711,7 +2711,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 6",
+    "challengeName": "Challenge 06",
     "areaId": "Virbank City",
     "unlocks": [
       "Virbank Complex"
@@ -2724,7 +2724,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 7",
+    "challengeName": "Challenge 07",
     "areaId": "Virbank Complex",
     "unlocks": [
       "Virbank Bay"
@@ -2739,7 +2739,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 8",
+    "challengeName": "Challenge 08",
     "areaId": "Virbank Bay",
     "unlocks": [
       "Virbank Gym"
@@ -2754,7 +2754,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 9",
+    "challengeName": "Challenge 09",
     "areaId": "Virbank Gym",
     "unlocks": [
       "Castelia City"
@@ -3433,7 +3433,7 @@ export const unovaUnlocks = [
     "areaId": "Unova Pokemon League",
     "unlocks": [
       "New Region to Travel",
-      "Route 1",
+      "Route 19",
       "Daycare",
       "Route 10"
     ],
@@ -3458,7 +3458,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge A 1",
+    "challengeName": "Extra Challenge A 01",
     "areaId": "Route 8",
     "unlocks": [
       "Moor of Icirrus"
@@ -3473,7 +3473,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge A 2",
+    "challengeName": "Extra Challenge A 02",
     "areaId": "Moor of Icirrus",
     "unlocks": [
       "Icirrus City"
@@ -3488,7 +3488,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge A 3",
+    "challengeName": "Extra Challenge A 03",
     "areaId": "Icirrus City",
     "unlocks": [
       "Dragonspiral Tower"
@@ -3503,7 +3503,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge A 4",
+    "challengeName": "Extra Challenge A 04",
     "areaId": "Dragonspiral Tower",
     "unlocks": [
       "Twist Mountain"
@@ -3518,7 +3518,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge A 5",
+    "challengeName": "Extra Challenge A 05",
     "areaId": "Twist Mountain",
     "unlocks": [
       "Underground Ruins"
@@ -3543,7 +3543,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge B 1",
+    "challengeName": "Extra Challenge B 01",
     "areaId": "Route 15",
     "unlocks": [
       "Striaton City"
@@ -3558,7 +3558,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge B 2",
+    "challengeName": "Extra Challenge B 02",
     "areaId": "Striaton City",
     "unlocks": [
       "Dreamyard"
@@ -3573,7 +3573,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge B 3",
+    "challengeName": "Extra Challenge B 03",
     "areaId": "Dreamyard",
     "unlocks": [
       "Route 18"
@@ -3588,7 +3588,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge B 4",
+    "challengeName": "Extra Challenge B 04",
     "areaId": "Route 18",
     "unlocks": [
       "Route 17"
@@ -3613,7 +3613,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge C 1",
+    "challengeName": "Extra Challenge C 01",
     "areaId": "Route 1",
     "unlocks": [
       "Nuvema Town"
@@ -3628,7 +3628,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge C 2",
+    "challengeName": "Extra Challenge C 02",
     "areaId": "Nuvema Town",
     "unlocks": [
       "Route 2"
@@ -3643,7 +3643,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge C 3",
+    "challengeName": "Extra Challenge C 03",
     "areaId": "Route 2",
     "unlocks": [
       "Route 3"
@@ -3658,7 +3658,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge C 4",
+    "challengeName": "Extra Challenge C 04",
     "areaId": "Route 3",
     "unlocks": [
       "Moor of Icirrus Depths"
@@ -3683,7 +3683,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge D 1",
+    "challengeName": "Extra Challenge D 01",
     "areaId": "Daycare",
     "unlocks": [
       "Nacrene City"
@@ -3696,7 +3696,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge D 2",
+    "challengeName": "Extra Challenge D 02",
     "areaId": "Nacrene City",
     "unlocks": [
       "Pinwheel Forest"
@@ -3711,7 +3711,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge D 3",
+    "challengeName": "Extra Challenge D 03",
     "areaId": "Pinwheel Forest",
     "unlocks": [
       "Cave of Being"
@@ -3726,7 +3726,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge D 4",
+    "challengeName": "Extra Challenge D 04",
     "areaId": "Cave of Being",
     "unlocks": [
       "Liberty Garden"
@@ -3751,7 +3751,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge E 1",
+    "challengeName": "Extra Challenge E 01",
     "areaId": "Route 10",
     "unlocks": [
       "Nature Sanctuary"
@@ -3766,7 +3766,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge E 2",
+    "challengeName": "Extra Challenge E 02",
     "areaId": "Nature Sanctuary",
     "unlocks": [
       "Route 24"
@@ -3781,7 +3781,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge E 3",
+    "challengeName": "Extra Challenge E 03",
     "areaId": "Route 24",
     "unlocks": [
       "Route 25"
@@ -3796,7 +3796,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge E 4",
+    "challengeName": "Extra Challenge E 04",
     "areaId": "Route 25",
     "unlocks": [
       "Abundant Shrine Depths"
@@ -3811,7 +3811,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge C 5",
+    "challengeName": "Extra Challenge C 05",
     "areaId": "Moor of Icirrus Depths",
     "unlocks": [],
     "requirements": {
@@ -3825,7 +3825,7 @@ export const unovaUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge D 5",
+    "challengeName": "Extra Challenge D 05",
     "areaId": "Liberty Garden",
     "unlocks": [],
     "requirements": {
@@ -3839,7 +3839,7 @@ export const unovaUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge E 5",
+    "challengeName": "Extra Challenge E 05",
     "areaId": "Abundant Shrine Depths",
     "unlocks": [],
     "requirements": {
@@ -3860,9 +3860,9 @@ export const unovaUnlocks = [
     ],
     "requirements": {
       "completeChallenges": [
-        "Extra Challenge C 5",
-        "Extra Challenge D 5",
-        "Extra Challenge E 5"
+        "Extra Challenge C 05",
+        "Extra Challenge D 05",
+        "Extra Challenge E 05"
       ]
     },
     "gifts": [
@@ -3873,7 +3873,7 @@ export const unovaUnlocks = [
     ]
   },
   {
-    "challengeName": "Dragonspire Clouds Challenge 1",
+    "challengeName": "Dragonspire Clouds Challenge 01",
     "areaId": "Dragonspire Clouds",
     "unlocks": [],
     "requirements": {
@@ -3891,7 +3891,7 @@ export const unovaUnlocks = [
     ]
   },
   {
-    "challengeName": "Dragonspire Clouds Challenge 2",
+    "challengeName": "Dragonspire Clouds Challenge 02",
     "areaId": "Dragonspire Clouds",
     "unlocks": [],
     "requirements": {

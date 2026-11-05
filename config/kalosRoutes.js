@@ -3578,7 +3578,7 @@ export const kalosUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge A 1",
+    "challengeName": "Extra Challenge A 01",
     "areaId": "Route 22",
     "requirements": {
       "defeatCountRoute": {
@@ -3591,7 +3591,7 @@ export const kalosUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge A 2",
+    "challengeName": "Extra Challenge A 02",
     "areaId": "Parfum Palace Gardens",
     "requirements": {
       "defeatCountRoute": {
@@ -3604,7 +3604,7 @@ export const kalosUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge A 3",
+    "challengeName": "Extra Challenge A 03",
     "areaId": "Ambrette Reef",
     "requirements": {
       "defeatCountRoute": {
@@ -3617,7 +3617,7 @@ export const kalosUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge A 4",
+    "challengeName": "Extra Challenge A 04",
     "areaId": "Cyllage Tidepools",
     "requirements": {
       "defeatCountRoute": {
@@ -3630,7 +3630,7 @@ export const kalosUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge A 5",
+    "challengeName": "Extra Challenge A 05",
     "areaId": "Tower of Mastery",
     "requirements": {
       "defeatCountRoute": {
@@ -3643,7 +3643,7 @@ export const kalosUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge A 6",
+    "challengeName": "Extra Challenge A 06",
     "areaId": "Lost Hotel",
     "requirements": {
       "defeatCountRoute": {
@@ -3656,7 +3656,7 @@ export const kalosUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge A 7",
+    "challengeName": "Extra Challenge A 07",
     "areaId": "Route 16",
     "requirements": {
       "defeatCountRoute": {
@@ -3670,7 +3670,7 @@ export const kalosUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge B 1",
+    "challengeName": "Extra Challenge B 01",
     "areaId": "Path to Team Flare Secret HQ",
     "requirements": {
       "defeatCountRoute": {
@@ -3683,7 +3683,7 @@ export const kalosUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge B 2",
+    "challengeName": "Extra Challenge B 02",
     "areaId": "Team Flare Secret HQ Gate",
     "requirements": {
       "defeatCountRoute": {
@@ -3696,7 +3696,7 @@ export const kalosUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge B 3",
+    "challengeName": "Extra Challenge B 03",
     "areaId": "Team Flare Secret HQ Entrance",
     "requirements": {
       "defeatCountRoute": {
@@ -3709,7 +3709,7 @@ export const kalosUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge B 4",
+    "challengeName": "Extra Challenge B 04",
     "areaId": "Team Flare Secret HQ Hall",
     "requirements": {
       "defeatCountRoute": {
@@ -3722,7 +3722,7 @@ export const kalosUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge B 5",
+    "challengeName": "Extra Challenge B 05",
     "areaId": "Terminus Cave (Surface)",
     "requirements": {
       "defeatCountRoute": {
@@ -3735,7 +3735,7 @@ export const kalosUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge B 6",
+    "challengeName": "Extra Challenge B 06",
     "areaId": "Pokémon Village",
     "requirements": {
       "defeatCountRoute": {
@@ -3749,7 +3749,7 @@ export const kalosUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge C 1",
+    "challengeName": "Extra Challenge C 01",
     "areaId": "Starter Depot",
     "requirements": {
       "defeatCountRoute": {
@@ -3762,7 +3762,7 @@ export const kalosUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge C 2",
+    "challengeName": "Extra Challenge C 02",
     "areaId": "Starter Evolved Depot",
     "requirements": {
       "defeatCountRoute": {
@@ -3775,7 +3775,7 @@ export const kalosUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge C 3",
+    "challengeName": "Extra Challenge C 03",
     "areaId": "Kiloude Southern Hills",
     "requirements": {
       "defeatCountRoute": {
@@ -3788,7 +3788,7 @@ export const kalosUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge C 4",
+    "challengeName": "Extra Challenge C 04",
     "areaId": "Friend Safari",
     "requirements": {
       "defeatCountRoute": {
@@ -3801,7 +3801,7 @@ export const kalosUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge C 5",
+    "challengeName": "Extra Challenge C 05",
     "areaId": "Battle Maison",
     "requirements": {
       "defeatCountRoute": {
@@ -3814,7 +3814,7 @@ export const kalosUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge C 6",
+    "challengeName": "Extra Challenge C 06",
     "areaId": "Secret Forest North",
     "requirements": {
       "defeatCountRoute": {
@@ -3828,7 +3828,7 @@ export const kalosUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge D 1",
+    "challengeName": "Extra Challenge D 01",
     "areaId": "Path to Sea Spirit Den",
     "requirements": {
       "defeatCountRoute": {
@@ -3841,7 +3841,7 @@ export const kalosUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge D 2",
+    "challengeName": "Extra Challenge D 02",
     "areaId": "Sea Spirit Den Outer Depths",
     "requirements": {
       "defeatCountRoute": {
@@ -3854,7 +3854,7 @@ export const kalosUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge D 3",
+    "challengeName": "Extra Challenge D 03",
     "areaId": "Sea Spirit Den Entrance",
     "requirements": {
       "defeatCountRoute": {
@@ -3867,7 +3867,7 @@ export const kalosUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge D 4",
+    "challengeName": "Extra Challenge D 04",
     "areaId": "Sea Spirit Den Tunnels",
     "requirements": {
       "defeatCountRoute": {
@@ -3880,7 +3880,7 @@ export const kalosUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge D 5",
+    "challengeName": "Extra Challenge D 05",
     "areaId": "Sea Spirit Den Hall",
     "requirements": {
       "defeatCountRoute": {
@@ -3894,7 +3894,7 @@ export const kalosUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge E 1",
+    "challengeName": "Extra Challenge E 01",
     "areaId": "Path to Secret Chambers",
     "requirements": {
       "defeatCountRoute": {
@@ -3907,7 +3907,7 @@ export const kalosUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge E 2",
+    "challengeName": "Extra Challenge E 02",
     "areaId": "Chambers of Emptiness",
     "requirements": {
       "defeatCountRoute": {
@@ -3920,7 +3920,7 @@ export const kalosUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge E 3",
+    "challengeName": "Extra Challenge E 03",
     "areaId": "Underground Chambers",
     "requirements": {
       "defeatCountRoute": {
@@ -3933,7 +3933,7 @@ export const kalosUnlocks = [
     ]
   },
   {
-    "challengeName": "Extra Challenge E 4",
+    "challengeName": "Extra Challenge E 04",
     "areaId": "Ultimate Chamber",
     "requirements": {
       "defeatCountRoute": {
@@ -3954,9 +3954,9 @@ export const kalosUnlocks = [
     ],
     "requirements": {
       "completeChallenges": [
-        "Extra Challenge C 6",
-        "Extra Challenge D 5",
-        "Extra Challenge E 4"
+        "Extra Challenge C 06",
+        "Extra Challenge D 05",
+        "Extra Challenge E 04"
       ]
     }
   },

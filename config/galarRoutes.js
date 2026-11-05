@@ -3446,7 +3446,7 @@ export const galarRoutes = [
 
 export const galarUnlocks = [
   {
-    "challengeName": "Challenge 1",
+    "challengeName": "Challenge 01",
     "areaId": "Route 1",
     "unlocks": [
       "Slumbering Weald"
@@ -3454,7 +3454,7 @@ export const galarUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Challenge 2",
+    "challengeName": "Challenge 02",
     "areaId": "Slumbering Weald",
     "unlocks": [
       "Route 2"
@@ -3462,7 +3462,7 @@ export const galarUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Challenge 3",
+    "challengeName": "Challenge 03",
     "areaId": "Route 2",
     "unlocks": [
       "Rolling Fields"
@@ -3470,7 +3470,7 @@ export const galarUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Challenge 4",
+    "challengeName": "Challenge 04",
     "areaId": "Rolling Fields",
     "unlocks": [
       "Dappled Grove"
@@ -3478,7 +3478,7 @@ export const galarUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Challenge 5",
+    "challengeName": "Challenge 05",
     "areaId": "Dappled Grove",
     "unlocks": [
       "West Lake Axewell"
@@ -3486,7 +3486,7 @@ export const galarUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Challenge 6",
+    "challengeName": "Challenge 06",
     "areaId": "West Lake Axewell",
     "unlocks": [
       "Watchtower Ruins"
@@ -3494,7 +3494,7 @@ export const galarUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Challenge 7",
+    "challengeName": "Challenge 07",
     "areaId": "Watchtower Ruins",
     "unlocks": [
       "East Lake Axewell"
@@ -3502,7 +3502,7 @@ export const galarUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Challenge 8",
+    "challengeName": "Challenge 08",
     "areaId": "East Lake Axewell",
     "unlocks": [
       "South Lake Miloch"
@@ -3510,7 +3510,7 @@ export const galarUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Challenge 9",
+    "challengeName": "Challenge 09",
     "areaId": "South Lake Miloch",
     "unlocks": [
       "North Lake Miloch"
@@ -3838,7 +3838,7 @@ export const galarUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge A 1",
+    "challengeName": "Extra Challenge A 01",
     "areaId": "Fields of Honor",
     "unlocks": [
       "Soothing Wetlands"
@@ -3846,7 +3846,7 @@ export const galarUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Extra Challenge A 2",
+    "challengeName": "Extra Challenge A 02",
     "areaId": "Soothing Wetlands",
     "unlocks": [
       "Forest of Focus"
@@ -3854,7 +3854,7 @@ export const galarUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Extra Challenge A 3",
+    "challengeName": "Extra Challenge A 03",
     "areaId": "Forest of Focus",
     "unlocks": [
       "Training Lowlands"
@@ -3862,7 +3862,7 @@ export const galarUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Extra Challenge A 4",
+    "challengeName": "Extra Challenge A 04",
     "areaId": "Training Lowlands",
     "unlocks": [
       "Master Dojo"
@@ -3870,7 +3870,7 @@ export const galarUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Extra Challenge A 5",
+    "challengeName": "Extra Challenge A 05",
     "areaId": "Master Dojo",
     "unlocks": [
       "Isle of Armor Plains"
@@ -3878,7 +3878,7 @@ export const galarUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Extra Challenge B 1",
+    "challengeName": "Extra Challenge B 01",
     "areaId": "Challenge Beach",
     "unlocks": [
       "Workout Sea"
@@ -3886,7 +3886,7 @@ export const galarUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Extra Challenge B 2",
+    "challengeName": "Extra Challenge B 02",
     "areaId": "Workout Sea",
     "unlocks": [
       "Stepping-Stone Sea"
@@ -3894,7 +3894,7 @@ export const galarUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Extra Challenge B 3",
+    "challengeName": "Extra Challenge B 03",
     "areaId": "Stepping-Stone Sea",
     "unlocks": [
       "Honeycalm Island"
@@ -3902,7 +3902,7 @@ export const galarUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Extra Challenge B 4",
+    "challengeName": "Extra Challenge B 04",
     "areaId": "Honeycalm Island",
     "unlocks": [
       "Isle of Armor Sea"
@@ -3910,7 +3910,7 @@ export const galarUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Extra Challenge C 1",
+    "challengeName": "Extra Challenge C 01",
     "areaId": "Slippery Slope",
     "unlocks": [
       "Path to the Peak"
@@ -3918,7 +3918,7 @@ export const galarUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Extra Challenge C 2",
+    "challengeName": "Extra Challenge C 02",
     "areaId": "Path to the Peak",
     "unlocks": [
       "Old Cemetery"
@@ -3926,7 +3926,7 @@ export const galarUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Extra Challenge C 3",
+    "challengeName": "Extra Challenge C 03",
     "areaId": "Old Cemetery",
     "unlocks": [
       "Crown Shrine"
@@ -3934,13 +3934,13 @@ export const galarUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Extra Challenge C 4",
+    "challengeName": "Extra Challenge C 04",
     "areaId": "Crown Shrine",
     "unlocks": [],
     "requirements": {}
   },
   {
-    "challengeName": "Extra Challenge D 1",
+    "challengeName": "Extra Challenge D 01",
     "areaId": "Rock Peak Ruins",
     "unlocks": [
       "Iceberg Ruins"
@@ -3948,7 +3948,7 @@ export const galarUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Extra Challenge D 2",
+    "challengeName": "Extra Challenge D 02",
     "areaId": "Iceberg Ruins",
     "unlocks": [
       "Unlocks"
@@ -3956,7 +3956,7 @@ export const galarUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Extra Challenge D 3",
+    "challengeName": "Extra Challenge D 03",
     "areaId": "Iron Ruins",
     "unlocks": [
       "Split-Decision Ruins"
@@ -3964,13 +3964,13 @@ export const galarUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Extra Challenge D 4",
+    "challengeName": "Extra Challenge D 04",
     "areaId": "Split-Decision Ruins",
     "unlocks": [],
     "requirements": {}
   },
   {
-    "challengeName": "Extra Challenge E 1",
+    "challengeName": "Extra Challenge E 01",
     "areaId": "Giant's Foot",
     "unlocks": [
       "Lakeside Cave"
@@ -3978,7 +3978,7 @@ export const galarUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Extra Challenge E 2",
+    "challengeName": "Extra Challenge E 02",
     "areaId": "Lakeside Cave",
     "unlocks": [
       "Roaring-Sea Caves"
@@ -3986,7 +3986,7 @@ export const galarUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Extra Challenge E 3",
+    "challengeName": "Extra Challenge E 03",
     "areaId": "Roaring-Sea Caves",
     "unlocks": [
       "Dyna Tree Hill"
@@ -3994,13 +3994,13 @@ export const galarUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Extra Challenge E 4",
+    "challengeName": "Extra Challenge E 04",
     "areaId": "Dyna Tree Hill",
     "unlocks": [],
     "requirements": {}
   },
   {
-    "challengeName": "Extra Challenge F 1",
+    "challengeName": "Extra Challenge F 01",
     "areaId": "Slumbering Weald 2",
     "unlocks": [
       "Brawlers' Cave"
@@ -4008,7 +4008,7 @@ export const galarUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Extra Challenge F 2",
+    "challengeName": "Extra Challenge F 02",
     "areaId": "Brawlers' Cave",
     "unlocks": [
       "Challenge Road"
@@ -4016,7 +4016,7 @@ export const galarUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Extra Challenge F 3",
+    "challengeName": "Extra Challenge F 03",
     "areaId": "Challenge Road",
     "unlocks": [
       "Unlocks"
@@ -4024,7 +4024,7 @@ export const galarUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Extra Challenge F 4",
+    "challengeName": "Extra Challenge F 04",
     "areaId": "Potbottom Desert",
     "unlocks": [
       "Energy Plant"
@@ -4032,13 +4032,13 @@ export const galarUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Extra Challenge F 5",
+    "challengeName": "Extra Challenge F 05",
     "areaId": "Energy Plant",
     "unlocks": [],
     "requirements": {}
   },
   {
-    "challengeName": "Extra Challenge G 1",
+    "challengeName": "Extra Challenge G 01",
     "areaId": "Frigid Sea",
     "unlocks": [
       "Tunnel to the Top"
@@ -4046,7 +4046,7 @@ export const galarUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Extra Challenge G 2",
+    "challengeName": "Extra Challenge G 02",
     "areaId": "Tunnel to the Top",
     "unlocks": [
       "Roaring-Sea Caves"
@@ -4054,7 +4054,7 @@ export const galarUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Extra Challenge G 3",
+    "challengeName": "Extra Challenge G 03",
     "areaId": "Roaring-Sea Caves",
     "unlocks": [
       "Brawlers' Cave"
@@ -4062,7 +4062,7 @@ export const galarUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Extra Challenge G 4",
+    "challengeName": "Extra Challenge G 04",
     "areaId": "Brawlers' Cave",
     "unlocks": [
       "Tower Summit"
@@ -4070,7 +4070,7 @@ export const galarUnlocks = [
     "requirements": {}
   },
   {
-    "challengeName": "Extra Challenge G 5",
+    "challengeName": "Extra Challenge G 05",
     "areaId": "Tower Summit",
     "unlocks": [],
     "requirements": {}
