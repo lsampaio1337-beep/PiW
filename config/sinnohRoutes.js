@@ -2699,9 +2699,9 @@ export const sinnohUnlocks = [
       "Veilstone Gym"
     ],
     requirements: {
-      defeatSpecies: [
+      defeatMultipleSpecific: [
         {
-          species: "Unown",
+          name: "Unown",
           count: 5
         }
       ]
@@ -2947,10 +2947,12 @@ export const sinnohUnlocks = [
     requirements: {
       defeatSinnohChampion: true
     },
-    gift: {
-      item: "Masterball",
-      count: 2
-    }
+    gifts: [
+      {
+        item: "Masterball",
+        count: 2
+      }
+    ]
   },
   {
     challengeName: "Extra Challenge A 01",
@@ -3101,10 +3103,12 @@ export const sinnohUnlocks = [
         }
       ]
     },
-    gift: {
-      item: "Masterball",
-      count: 2
-    }
+    gifts: [
+      {
+        item: "Masterball",
+        count: 2
+      }
+    ]
   },
   {
     challengeName: "Extra Challenge C 01",
@@ -3181,6 +3185,9 @@ export const sinnohUnlocks = [
   {
     challengeName: "Extra Challenge C 05",
     areaId: "Flower Paradise",
+    unlocks: [
+      "Key to Hall of Origin Challenge"
+    ],
     requirements: {
       catchSpecies: [
         {
@@ -3196,20 +3203,7 @@ export const sinnohUnlocks = [
           count: 1
         }
       ]
-    },
-    unlocks: [
-      "Key to Hall of Origin Challenge"
-    ],
-    gifts: [
-      {
-        item: "Masterball",
-        count: 1
-      },
-      {
-        item: "Key to Hall of Origin",
-        count: 1
-      }
-    ]
+    }
   },
   {
     challengeName: "Extra Challenge D 01",
@@ -3240,14 +3234,19 @@ export const sinnohUnlocks = [
         }
       ]
     },
-    gift: {
-      item: "Ghost Stone",
-      count: 2
-    }
+    gifts: [
+      {
+        item: "Ghost Stone",
+        count: 2
+      }
+    ]
   },
   {
     challengeName: "Extra Challenge D 03",
     areaId: "Lunar Isles",
+    unlocks: [
+      "Key to Hall of Origin Challenge"
+    ],
     requirements: {
       catchSpecies: [
         {
@@ -3259,20 +3258,7 @@ export const sinnohUnlocks = [
           count: 1
         }
       ]
-    },
-    unlocks: [
-      "Key to Hall of Origin Challenge"
-    ],
-    gifts: [
-      {
-        item: "Masterball",
-        count: 1
-      },
-      {
-        item: "Key to Hall of Origin",
-        count: 1
-      }
-    ]
+    }
   },
   {
     challengeName: "Extra Challenge E 01",
@@ -3330,6 +3316,9 @@ export const sinnohUnlocks = [
   {
     challengeName: "Extra Challenge E 04",
     areaId: "Continental Depths",
+    unlocks: [
+      "Key to Hall of Origin Challenge"
+    ],
     requirements: {
       catchSpecies: [
         {
@@ -3341,20 +3330,7 @@ export const sinnohUnlocks = [
           count: 1
         }
       ]
-    },
-    unlocks: [
-      "Key to Hall of Origin Challenge"
-    ],
-    gifts: [
-      {
-        item: "Masterball",
-        count: 1
-      },
-      {
-        item: "Key to Hall of Origin",
-        count: 1
-      }
-    ]
+    }
   },
   {
     challengeName: "Extra Challenge F 01",
@@ -3430,17 +3406,7 @@ export const sinnohUnlocks = [
           count: 1
         }
       ]
-    },
-    gifts: [
-      {
-        item: "Masterball",
-        count: 1
-      },
-      {
-        item: "Key to Hall of Origin",
-        count: 1
-      }
-    ]
+    }
   },
   {
     challengeName: "Extra Challenge Hall of Origin",
@@ -3464,13 +3430,7 @@ export const sinnohUnlocks = [
           count: 1
         }
       ]
-    },
-    gifts: [
-      {
-        item: "Masterball",
-        count: 3
-      }
-    ]
+    }
   },
   {
     challengeName: "Key to Hall of Origin Challenge",
