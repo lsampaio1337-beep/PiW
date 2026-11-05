@@ -724,7 +724,7 @@ const missingData = [];
     const wsMissing = xlsx.utils.json_to_sheet(missingData);
     xlsx.utils.book_append_sheet(wb, wsMissing, "Missing PK");
 
-const outFile = path.join(__dirname, `${region.num}_${region.name}_Data${counter}.xlsx`);
+const outFile = path.join(__dirname, '..', 'xdata', `${region.num}_${region.name}_Data.xlsx`);
 
     // Formatting cols
     const colsRoutes = ["% Appearance", "% Appearance Ok?"];
@@ -747,29 +747,32 @@ const outFile = path.join(__dirname, `${region.num}_${region.name}_Data${counter
 
 (async () => {
     const args = process.argv.slice(2);
-    if (args.length === 0) {
-        console.error("Error: Please provide a region number (1-10) or name as an argument.");
-        console.error("Example: node xdata/generate_region_xlsx.js 1");
-        process.exit(1);
-    }
-    const regionArg = args[0].toLowerCase();
-    const regionToProcess = REGIONS.find(r => r.num.toString() === regionArg || r.name.toLowerCase() === regionArg);
-
-    if (!regionToProcess) {
-        console.error(`Error: Region '${args[0]}' not found.`);
-        process.exit(1);
-    }
 
     let counterFile = '';
     let counter = 1;
-    const xlsxMdPath = path.join(__dirname, 'xlsx.md');
+    const xlsxMdPath = path.join(__dirname, '..', 'xlsx.md');
     if (fs.existsSync(xlsxMdPath)) {
         counterFile = fs.readFileSync(xlsxMdPath, 'utf8');
         const counterMatch = counterFile.match(/Last Generation Counter:\s*(\d+)/);
         if (counterMatch) counter = parseInt(counterMatch[1]);
     }
 
-    await processRegion(regionToProcess, counter);
+    if (args.length === 0) {
+        console.log("Generating data for all regions...");
+        for (const region of REGIONS) {
+            await processRegion(region, counter);
+        }
+    } else {
+        const regionArg = args[0].toLowerCase();
+        const regionToProcess = REGIONS.find(r => r.num.toString() === regionArg || r.name.toLowerCase() === regionArg);
+
+        if (!regionToProcess) {
+            console.error(`Error: Region '${args[0]}' not found.`);
+            process.exit(1);
+        }
+
+        await processRegion(regionToProcess, counter);
+    }
 
     // Increment counter
     if (counterFile) {

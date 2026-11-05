@@ -1,0 +1,10 @@
+<<<<<<< SEARCH
+const outFile = path.join(__dirname, `${region.num}_${region.name}_Data${counter}.xlsx`);
+=======
+const outFile = path.join(__dirname, '..', 'xdata', `${region.num}_${region.name}_Data.xlsx`);
+>>>>>>> REPLACE
+<<<<<<< SEARCH
+    const xlsxMdPath = path.join(__dirname, 'xlsx.md');
+=======
+    const xlsxMdPath = path.join(__dirname, '..', 'xlsx.md');
+>>>>>>> REPLACE
