@@ -129,10 +129,10 @@ export class WindowManager {
         ];
 
         // We explicitly match the arguments pattern carefully.
-        const argCallMatch = /^(?:if\s*\([^)]*\)\s*)?window\.([a-zA-Z0-9_]+)\s*\(\s*(['"]?[a-zA-Z0-9_\/$!*#@&\s.{}\[\]:()\\'\-]+['"]?(?:\s*,\s*['"]?[a-zA-Z0-9_\/$!*#@&\s.{}\[\]:()\\'\-]+['"]?)*)\s*\)\s*;?$/.exec(codeToExecute);
+        const argCallMatch = /^(?:if\s*\([^)]*\)\s*)?window\.([a-zA-Z0-9_]+)\s*\(\s*(['"]?[a-zA-Z0-9_\/$!*#@&\s.{}\[\]:()\\'<>\-]+['"]?(?:\s*,\s*['"]?[a-zA-Z0-9_\/$!*#@&\s.{}\[\]:()\\'<>\-]+['"]?)*)\s*\)\s*;?$/.exec(codeToExecute);
 
         // Nested properties matching (e.g. \`window.windowManager.closeDynamicWindow\`)
-        const nestedCallMatch = /^(?:if\s*\([^)]*\)\s*)?window\.([a-zA-Z0-9_]+)\.([a-zA-Z0-9_]+)\s*\(\s*(['"]?[a-zA-Z0-9_\/$!*#@&\s.{}\[\]:()\\'\-]+['"]?(?:\s*,\s*['"]?[a-zA-Z0-9_\/$!*#@&\s.{}\[\]:()\\'\-]+['"]?)*)\s*\)\s*;?$/.exec(codeToExecute);
+        const nestedCallMatch = /^(?:if\s*\([^)]*\)\s*)?window\.([a-zA-Z0-9_]+)\.([a-zA-Z0-9_]+)\s*\(\s*(['"]?[a-zA-Z0-9_\/$!*#@&\s.{}\[\]:()\\'<>\-]+['"]?(?:\s*,\s*['"]?[a-zA-Z0-9_\/$!*#@&\s.{}\[\]:()\\'<>\-]+['"]?)*)\s*\)\s*;?$/.exec(codeToExecute);
 
         if (argCallMatch) {
             const funcName = argCallMatch[1];

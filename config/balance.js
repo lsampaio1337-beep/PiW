@@ -64,11 +64,11 @@ const balance = {
         { "tier": 4, "name": "Loot4", "displayName": "Vitamin Loot", "increment": 0, "cost": 2500, "description": "Can loot Vitamins" }
       ],
       "daycare": [
-        { "tier": 1, "name": "Daycare1", "displayName": "Improved<br>Breeder", "increment": 0, "cost": 2, "description": "Increases<br>QValue Bonus" },
-        { "tier": 2, "name": "Daycare2", "displayName": "Live<br>Coach", "increment": 0, "cost": 2, "description": "Train Earns<br>50% of team XP" },
-        { "tier": 3, "name": "Daycare3", "displayName": "Advanced<br>Breeder", "increment": 0, "cost": 2, "description": "Max Breed<br>QValue=1.99" },
-        { "tier": 4, "name": "Daycare4", "displayName": "No Pain<br>No Gain", "increment": 0, "cost": 2, "description": "20% Chance of<br>Extra IV Point" },
-        { "tier": 5, "name": "Daycare5", "displayName": "Shiny<br>Breeder", "increment": 0, "cost": 2, "description": "Can Breed Shiny" }
+        { "tier": 1, "name": "Daycare1", "displayName": "Improved<br>Breeder", "increment": 0, "cost": 250, "description": "Increases<br>QValue Bonus" },
+        { "tier": 2, "name": "Daycare2", "displayName": "Live<br>Coach", "increment": 0, "cost": 1000, "description": "Train Earns<br>50% of team XP" },
+        { "tier": 3, "name": "Daycare3", "displayName": "Advanced<br>Breeder", "increment": 0, "cost": 3000, "description": "Max Breed<br>QValue=1.99" },
+        { "tier": 4, "name": "Daycare4", "displayName": "No Pain<br>No Gain", "increment": 0, "cost": 10000, "description": "20% Chance of<br>Extra IV Point" },
+        { "tier": 5, "name": "Daycare5", "displayName": "Shiny<br>Breeder", "increment": 0, "cost": 50000, "description": "Can Breed Shiny" }
       ]
     },
     "items": {

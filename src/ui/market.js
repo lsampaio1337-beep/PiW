@@ -303,14 +303,14 @@ function generateMarketItemCard(item, category, stock) {
     const safeCategoryAttr = escapeHTML(category);
     const safeCategoryJS = escapeHTML(escapeJS(category));
 
-    let buyAction = `if(window.buyItem) window.buyItem('${safeItemNameJS}', ${item.price}, '${safeCategoryJS}')`;
+    let buyAction = `if(window.buyItem) window.buyItem('${safeItemNameJS}', ${item.price}, '${safeCategoryJS}', null, '${escapeHTML(escapeJS(item.displayName || item.name))}')`;
     if (category === 'upgrades') {
         const safeUpgradeTypeJS = escapeHTML(escapeJS(item.upgradeType));
-        buyAction = `if(window.buyItem) window.buyItem('${safeItemNameJS}', ${item.price}, '${safeCategoryJS}', '${safeUpgradeTypeJS}')`;
+        buyAction = `if(window.buyItem) window.buyItem('${safeItemNameJS}', ${item.price}, '${safeCategoryJS}', '${safeUpgradeTypeJS}', '${escapeHTML(escapeJS(item.displayName || item.name))}')`;
     }
 
     const safeImg = escapeHTML(item.img);
-    let escapedDisplayName = escapeHTML(item.displayName || item.name);
+    let escapedDisplayName = escapeHTML(item.displayName || item.name).replace(/&lt;br&gt;/gi, '<br>');
     if (category === 'potions') escapedDisplayName = escapedDisplayName.replace(' Potion', '<br>Potion');
     if (category === 'stones') escapedDisplayName = escapedDisplayName.replace(' Stone', '<br>Stone');
 
@@ -319,7 +319,7 @@ function generateMarketItemCard(item, category, stock) {
             style="width: calc(16.666% - calc(var(--m-width) * 0.018 * 5 / 6)); background: #2c3e50; border: 2px solid #2ecc71; border-radius: 10px; padding: calc(var(--m-width) * 0.012); text-align: center; transition: transform 0.2s; display: flex; flex-direction: column; align-items: center; justify-content: center; box-sizing: border-box;">
             <div style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; margin-bottom: calc(var(--m-width) * 0.006); height: calc(var(--m-width) * 0.038); display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.1;">${escapedDisplayName}</div>
             <img src="${safeImg}" style="width: calc(var(--m-width) * 0.072); height: calc(var(--m-width) * 0.072); object-fit: contain; margin-bottom: calc(var(--m-width) * 0.006);">
-            ${category !== 'stones' ? `<div style="font-size: calc(var(--m-width) * 0.014); color: #f1c40f; margin-bottom: calc(var(--m-width) * 0.006); line-height: 1.1;">${item.attrLabel}</div>` : ''}
+            ${category !== 'stones' ? `<div style="font-size: calc(var(--m-width) * 0.014); color: #f1c40f; margin-bottom: calc(var(--m-width) * 0.006); line-height: 1.1;">${item.attrLabel ? String(item.attrLabel).replace(/&lt;br&gt;/gi, '<br>') : ''}</div>` : ''}
             ${category !== 'upgrades' ? `<div style="font-size: calc(var(--m-width) * 0.014); color: #bdc3c7; line-height: 1.1; margin-bottom: calc(var(--m-width) * 0.006);">Stock: ${formatMarketNumberDown(stock)}</div>` : ''}
 
             ${category !== 'upgrades' ? `
@@ -385,7 +385,7 @@ export function renderPokeMarketTab(category) {
 }
 
 
-export function buyItem(itemId, baseCost, category, upgradeType = null) { return newBuyItem(itemId, baseCost, category, upgradeType); }
+export function buyItem(itemId, baseCost, category, upgradeType = null, displayName = null) { return newBuyItem(itemId, baseCost, category, upgradeType, displayName); }
 
 
 export function formatMarketNumberDown(num) {
@@ -442,7 +442,7 @@ export function buySetMax(itemId, category, basePrice) {
     updateBuyItemPrice(itemId, category, basePrice);
 }
 
-export function newBuyItem(itemId, baseCost, category, upgradeType = null) {
+export function newBuyItem(itemId, baseCost, category, upgradeType = null, displayName = null) {
     const safeId = itemId.replace(/\s+/g, '');
     const input = document.getElementById(`buy-qty-${safeId}`);
     let qty = 1;
@@ -496,7 +496,7 @@ export function newBuyItem(itemId, baseCost, category, upgradeType = null) {
         if (moneyDisplay) {
             moneyDisplay.textContent = `$ ${state.trainer.money.toLocaleString()}`;
         }
-        window.showGameAlert(`Bought ${qty.toLocaleString()}x ${itemId} for ${totalCost.toLocaleString()}!`, getMarketAlertTarget());
+        window.showGameAlert(`Bought ${qty.toLocaleString()}x ${(displayName || itemId).replace(/&lt;br&gt;/gi, ' ').replace(/<br>/gi, ' ')} for ${totalCost.toLocaleString()}!`, getMarketAlertTarget());
         renderPokeMarketTab(category);
     } else {
         window.showGameAlert(`Not enough money! You need ${totalCost.toLocaleString()} but only have ${state.trainer.money.toLocaleString()}.`, getMarketAlertTarget());
@@ -704,7 +704,7 @@ function getMarketSellItems(category) {
 function renderMarketSellItemsList(content, category, items) {
     let html = `<div style="--m-width: min(76vw, 750px); display: flex; flex-wrap: wrap; gap: calc(var(--m-width) * 0.018); justify-content: center; width: 100%;">`;
     items.forEach(item => {
-        let escapedDisplayName = escapeHTML(item.displayName || item.name);
+        let escapedDisplayName = escapeHTML(item.displayName || item.name).replace(/&lt;br&gt;/gi, '<br>');
         if (category === 'potions') escapedDisplayName = escapedDisplayName.replace(' Potion', '<br>Potion');
         if (category === 'stones') escapedDisplayName = escapedDisplayName.replace(' Stone', '<br>Stone');
 
@@ -728,7 +728,7 @@ function renderMarketSellItemsList(content, category, items) {
                 style="width: calc(16.666% - calc(var(--m-width) * 0.018 * 5 / 6)); box-sizing: border-box; background: #2c3e50; border: 2px solid #e74c3c; border-radius: 10px; padding: calc(var(--m-width) * 0.012); text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center;">
                 <div style="font-size: calc(var(--m-width) * 0.017); font-weight: bold; margin-bottom: calc(var(--m-width) * 0.006); height: calc(var(--m-width) * 0.038); display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.1;">${escapedDisplayName}</div>
                 <img src="${safeImg}" style="width: calc(var(--m-width) * 0.072); height: calc(var(--m-width) * 0.072); object-fit: contain; margin-bottom: calc(var(--m-width) * 0.006);">
-                ${item.attrLabel ? `<div style="font-size: calc(var(--m-width) * 0.014); color: #f1c40f; margin-bottom: calc(var(--m-width) * 0.006); line-height: 1.1;">${item.attrLabel}</div>` : ''}
+                ${item.attrLabel ? `<div style="font-size: calc(var(--m-width) * 0.014); color: #f1c40f; margin-bottom: calc(var(--m-width) * 0.006); line-height: 1.1;">${item.attrLabel ? String(item.attrLabel).replace(/&lt;br&gt;/gi, '<br>') : ''}</div>` : ''}
                 <div style="font-size: calc(var(--m-width) * 0.014); color: #bdc3c7; line-height: 1.1;">Stock: ${formatMarketNumberDown(stock)}</div>
 
                 <div style="display: flex; gap: 5px; margin-top: calc(var(--m-width) * 0.012); align-items: center; justify-content: center; width: 100%;">
