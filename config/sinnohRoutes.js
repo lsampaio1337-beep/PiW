@@ -6,19 +6,19 @@ export const sinnohRoutes = [
         pokemonId: 401,
         minLevel: 1,
         maxLevel: 3,
-        chance: 0.34
+        chance: 0.3333
       },
       {
         pokemonId: 396,
         minLevel: 1,
         maxLevel: 3,
-        chance: 0.33
+        chance: 0.3333
       },
       {
         pokemonId: 399,
         minLevel: 2,
         maxLevel: 4,
-        chance: 0.33
+        chance: 0.3333
       }
     ]
   },
@@ -58,13 +58,13 @@ export const sinnohRoutes = [
         pokemonId: 401,
         minLevel: 4,
         maxLevel: 6,
-        chance: 0.3
+        chance: 0.2
       },
       {
         pokemonId: 396,
         minLevel: 4,
         maxLevel: 6,
-        chance: 0.25
+        chance: 0.2
       },
       {
         pokemonId: 41,
@@ -76,13 +76,13 @@ export const sinnohRoutes = [
         pokemonId: 403,
         minLevel: 6,
         maxLevel: 8,
-        chance: 0.15
+        chance: 0.2
       },
       {
         pokemonId: 63,
         minLevel: 6,
         maxLevel: 8,
-        chance: 0.1
+        chance: 0.2
       }
     ]
   },
@@ -93,13 +93,13 @@ export const sinnohRoutes = [
         pokemonId: 74,
         minLevel: 7,
         maxLevel: 9,
-        chance: 0.3
+        chance: 0.2
       },
       {
         pokemonId: 54,
         minLevel: 7,
         maxLevel: 9,
-        chance: 0.25
+        chance: 0.2
       },
       {
         pokemonId: 41,
@@ -111,13 +111,13 @@ export const sinnohRoutes = [
         pokemonId: 408,
         minLevel: 8,
         maxLevel: 10,
-        chance: 0.15
+        chance: 0.2
       },
       {
         pokemonId: 410,
         minLevel: 8,
         maxLevel: 10,
-        chance: 0.1
+        chance: 0.2
       }
     ]
   },
@@ -132,37 +132,37 @@ export const sinnohRoutes = [
         pokemonId: 265,
         minLevel: 10,
         maxLevel: 12,
-        chance: 0.3
+        chance: 0.1667
       },
       {
         pokemonId: 41,
         minLevel: 11,
         maxLevel: 13,
-        chance: 0.25
+        chance: 0.1667
       },
       {
         pokemonId: 175,
         minLevel: 11,
         maxLevel: 13,
-        chance: 0.15
+        chance: 0.1667
       },
       {
         pokemonId: 399,
         minLevel: 11,
         maxLevel: 13,
-        chance: 0.15
+        chance: 0.1667
       },
       {
         pokemonId: 403,
         minLevel: 12,
         maxLevel: 14,
-        chance: 0.1
+        chance: 0.1667
       },
       {
         pokemonId: 406,
         minLevel: 12,
         maxLevel: 14,
-        chance: 0.05
+        chance: 0.1667
       }
     ]
   },
@@ -173,19 +173,19 @@ export const sinnohRoutes = [
         pokemonId: 74,
         minLevel: 13,
         maxLevel: 15,
-        chance: 0.34
+        chance: 0.3333
       },
       {
         pokemonId: 54,
         minLevel: 14,
         maxLevel: 16,
-        chance: 0.33
+        chance: 0.3333
       },
       {
         pokemonId: 41,
         minLevel: 12,
         maxLevel: 14,
-        chance: 0.33
+        chance: 0.3333
       }
     ]
   },
@@ -196,13 +196,13 @@ export const sinnohRoutes = [
         pokemonId: 399,
         minLevel: 14,
         maxLevel: 16,
-        chance: 0.3
+        chance: 0.2
       },
       {
         pokemonId: 418,
         minLevel: 16,
         maxLevel: 18,
-        chance: 0.25
+        chance: 0.2
       },
       {
         pokemonId: 179,
@@ -214,13 +214,13 @@ export const sinnohRoutes = [
         pokemonId: 417,
         minLevel: 16,
         maxLevel: 18,
-        chance: 0.15
+        chance: 0.2
       },
       {
         pokemonId: 422,
         minLevel: 15,
         maxLevel: 17,
-        chance: 0.1
+        chance: 0.2
       }
     ]
   },
@@ -259,8 +259,8 @@ export const sinnohRoutes = [
       },
       {
         pokemonId: 339,
-        minLevel: 10,
-        maxLevel: 25,
+        minLevel: 17,
+        maxLevel: 19,
         chance: 0.0833
       },
       {
@@ -395,43 +395,43 @@ export const sinnohRoutes = [
         pokemonId: 307,
         minLevel: 22,
         maxLevel: 24,
-        chance: 0.2
+        chance: 0.1429
       },
       {
         pokemonId: 433,
         minLevel: 22,
         maxLevel: 24,
-        chance: 0.2
+        chance: 0.1429
       },
       {
         pokemonId: 436,
         minLevel: 23,
         maxLevel: 25,
-        chance: 0.15
+        chance: 0.1429
       },
       {
         pokemonId: 75,
         minLevel: 23,
         maxLevel: 25,
-        chance: 0.15
+        chance: 0.1429
       },
       {
         pokemonId: 67,
         minLevel: 24,
         maxLevel: 26,
-        chance: 0.1
+        chance: 0.1429
       },
       {
         pokemonId: 77,
         minLevel: 24,
         maxLevel: 26,
-        chance: 0.1
+        chance: 0.1429
       },
       {
         pokemonId: 164,
         minLevel: 25,
         maxLevel: 27,
-        chance: 0.1
+        chance: 0.1429
       }
     ]
   },
@@ -507,43 +507,43 @@ export const sinnohRoutes = [
         pokemonId: 280,
         minLevel: 25,
         maxLevel: 27,
-        chance: 0.2
+        chance: 0.1429
       },
       {
         pokemonId: 406,
         minLevel: 27,
         maxLevel: 29,
-        chance: 0.2
+        chance: 0.1429
       },
       {
         pokemonId: 307,
         minLevel: 27,
         maxLevel: 29,
-        chance: 0.15
+        chance: 0.1429
       },
       {
         pokemonId: 66,
         minLevel: 28,
         maxLevel: 30,
-        chance: 0.15
+        chance: 0.1429
       },
       {
         pokemonId: 54,
         minLevel: 28,
         maxLevel: 30,
-        chance: 0.1
+        chance: 0.1429
       },
       {
         pokemonId: 315,
         minLevel: 29,
         maxLevel: 31,
-        chance: 0.1
+        chance: 0.1429
       },
       {
         pokemonId: 400,
         minLevel: 29,
         maxLevel: 31,
-        chance: 0.1
+        chance: 0.1429
       }
     ]
   },
@@ -558,67 +558,61 @@ export const sinnohRoutes = [
         pokemonId: 280,
         minLevel: 29,
         maxLevel: 31,
-        chance: 0.0909
+        chance: 0.1
       },
       {
         pokemonId: 440,
         minLevel: 29,
         maxLevel: 31,
-        chance: 0.0909
+        chance: 0.1
       },
       {
         pokemonId: 438,
         minLevel: 30,
         maxLevel: 32,
-        chance: 0.0909
+        chance: 0.1
       },
       {
         pokemonId: 355,
         minLevel: 31,
         maxLevel: 33,
-        chance: 0.0909
+        chance: 0.1
       },
       {
         pokemonId: 92,
         minLevel: 31,
         maxLevel: 33,
-        chance: 0.0909
-      },
-      {
-        pokemonId: 439,
-        minLevel: 31,
-        maxLevel: 33,
-        chance: 0.0909
+        chance: 0.1
       },
       {
         pokemonId: 397,
         minLevel: 32,
         maxLevel: 34,
-        chance: 0.0909
+        chance: 0.1
       },
       {
         pokemonId: 315,
         minLevel: 32,
         maxLevel: 34,
-        chance: 0.0909
+        chance: 0.1
       },
       {
         pokemonId: 400,
         minLevel: 32,
         maxLevel: 34,
-        chance: 0.0909
+        chance: 0.1
       },
       {
         pokemonId: 113,
         minLevel: 33,
         maxLevel: 35,
-        chance: 0.0909
+        chance: 0.1
       },
       {
         pokemonId: 442,
         minLevel: 33,
         maxLevel: 35,
-        chance: 0.0909
+        chance: 0.1
       }
     ]
   },
@@ -633,49 +627,49 @@ export const sinnohRoutes = [
         pokemonId: 307,
         minLevel: 34,
         maxLevel: 36,
-        chance: 0.2
+        chance: 0.125
       },
       {
         pokemonId: 74,
         minLevel: 34,
         maxLevel: 36,
-        chance: 0.2
+        chance: 0.125
       },
       {
         pokemonId: 66,
         minLevel: 35,
         maxLevel: 37,
-        chance: 0.15
+        chance: 0.125
       },
       {
         pokemonId: 201,
         minLevel: 35,
         maxLevel: 37,
-        chance: 0.15
+        chance: 0.125
       },
       {
         pokemonId: 77,
         minLevel: 36,
         maxLevel: 38,
-        chance: 0.1
+        chance: 0.125
       },
       {
         pokemonId: 113,
         minLevel: 36,
         maxLevel: 38,
-        chance: 0.1
+        chance: 0.125
       },
       {
         pokemonId: 164,
         minLevel: 37,
         maxLevel: 39,
-        chance: 0.05
+        chance: 0.125
       },
       {
         pokemonId: 123,
         minLevel: 37,
         maxLevel: 39,
-        chance: 0.05
+        chance: 0.125
       }
     ]
   },
@@ -730,8 +724,8 @@ export const sinnohRoutes = [
       },
       {
         pokemonId: 414,
-        minLevel: 24,
-        maxLevel: 30,
+        minLevel: 40,
+        maxLevel: 42,
         chance: 0.1111
       },
       {
@@ -749,37 +743,37 @@ export const sinnohRoutes = [
         pokemonId: 278,
         minLevel: 39,
         maxLevel: 41,
-        chance: 0.3
+        chance: 0.1667
       },
       {
         pokemonId: 223,
-        minLevel: 19,
-        maxLevel: 24,
-        chance: 0.25
+        minLevel: 39,
+        maxLevel: 41,
+        chance: 0.1667
       },
       {
         pokemonId: 422,
         minLevel: 41,
         maxLevel: 43,
-        chance: 0.15
+        chance: 0.1667
       },
       {
         pokemonId: 418,
         minLevel: 41,
         maxLevel: 43,
-        chance: 0.15
+        chance: 0.1667
       },
       {
         pokemonId: 441,
         minLevel: 42,
         maxLevel: 44,
-        chance: 0.1
+        chance: 0.1667
       },
       {
         pokemonId: 419,
         minLevel: 43,
         maxLevel: 45,
-        chance: 0.05
+        chance: 0.1667
       }
     ]
   },
@@ -877,13 +871,13 @@ export const sinnohRoutes = [
         pokemonId: 172,
         minLevel: 45,
         maxLevel: 47,
-        chance: 0.3
+        chance: 0.2
       },
       {
         pokemonId: 281,
         minLevel: 46,
         maxLevel: 48,
-        chance: 0.25
+        chance: 0.2
       },
       {
         pokemonId: 25,
@@ -895,13 +889,13 @@ export const sinnohRoutes = [
         pokemonId: 397,
         minLevel: 48,
         maxLevel: 50,
-        chance: 0.15
+        chance: 0.2
       },
       {
         pokemonId: 315,
         minLevel: 49,
         maxLevel: 51,
-        chance: 0.1
+        chance: 0.2
       }
     ]
   },
@@ -971,55 +965,49 @@ export const sinnohRoutes = [
         pokemonId: 129,
         minLevel: 50,
         maxLevel: 52,
-        chance: 0.1111
+        chance: 0.125
       },
       {
         pokemonId: 431,
         minLevel: 50,
         maxLevel: 52,
-        chance: 0.1111
+        chance: 0.125
       },
       {
         pokemonId: 118,
         minLevel: 50,
         maxLevel: 52,
-        chance: 0.1111
+        chance: 0.125
       },
       {
         pokemonId: 422,
         minLevel: 51,
         maxLevel: 53,
-        chance: 0.1111
+        chance: 0.125
       },
       {
         pokemonId: 456,
         minLevel: 50,
         maxLevel: 52,
-        chance: 0.1111
+        chance: 0.125
       },
       {
         pokemonId: 441,
         minLevel: 52,
         maxLevel: 54,
-        chance: 0.1111
-      },
-      {
-        pokemonId: 122,
-        minLevel: 52,
-        maxLevel: 54,
-        chance: 0.1111
+        chance: 0.125
       },
       {
         pokemonId: 423,
         minLevel: 53,
         maxLevel: 55,
-        chance: 0.1111
+        chance: 0.125
       },
       {
         pokemonId: 419,
         minLevel: 53,
         maxLevel: 55,
-        chance: 0.1111
+        chance: 0.125
       }
     ]
   },
@@ -1034,37 +1022,37 @@ export const sinnohRoutes = [
         pokemonId: 41,
         minLevel: 51,
         maxLevel: 53,
-        chance: 0.3
+        chance: 0.1667
       },
       {
         pokemonId: 307,
         minLevel: 53,
         maxLevel: 55,
-        chance: 0.25
+        chance: 0.1667
       },
       {
         pokemonId: 459,
         minLevel: 54,
         maxLevel: 56,
-        chance: 0.15
+        chance: 0.1667
       },
       {
         pokemonId: 67,
         minLevel: 56,
         maxLevel: 58,
-        chance: 0.15
+        chance: 0.1667
       },
       {
         pokemonId: 215,
         minLevel: 57,
         maxLevel: 59,
-        chance: 0.1
+        chance: 0.1667
       },
       {
         pokemonId: 164,
         minLevel: 59,
         maxLevel: 61,
-        chance: 0.05
+        chance: 0.1667
       }
     ]
   },
@@ -1075,37 +1063,37 @@ export const sinnohRoutes = [
         pokemonId: 41,
         minLevel: 53,
         maxLevel: 55,
-        chance: 0.3
+        chance: 0.1667
       },
       {
         pokemonId: 220,
         minLevel: 55,
         maxLevel: 57,
-        chance: 0.25
+        chance: 0.1667
       },
       {
         pokemonId: 459,
         minLevel: 56,
         maxLevel: 58,
-        chance: 0.15
+        chance: 0.1667
       },
       {
         pokemonId: 67,
         minLevel: 58,
         maxLevel: 60,
-        chance: 0.15
+        chance: 0.1667
       },
       {
         pokemonId: 308,
         minLevel: 59,
         maxLevel: 61,
-        chance: 0.1
+        chance: 0.1667
       },
       {
         pokemonId: 215,
         minLevel: 61,
         maxLevel: 63,
-        chance: 0.05
+        chance: 0.1667
       }
     ]
   },
@@ -1120,73 +1108,67 @@ export const sinnohRoutes = [
         pokemonId: 431,
         minLevel: 57,
         maxLevel: 59,
-        chance: 0.0833
+        chance: 0.0909
       },
       {
         pokemonId: 81,
         minLevel: 58,
         maxLevel: 60,
-        chance: 0.0833
+        chance: 0.0909
       },
       {
         pokemonId: 239,
         minLevel: 58,
         maxLevel: 60,
-        chance: 0.0833
+        chance: 0.0909
       },
       {
         pokemonId: 404,
         minLevel: 59,
         maxLevel: 61,
-        chance: 0.0833
+        chance: 0.0909
       },
       {
         pokemonId: 441,
         minLevel: 60,
         maxLevel: 62,
-        chance: 0.0833
+        chance: 0.0909
       },
       {
         pokemonId: 279,
         minLevel: 61,
         maxLevel: 63,
-        chance: 0.0833
+        chance: 0.0909
       },
       {
         pokemonId: 432,
         minLevel: 61,
         maxLevel: 63,
-        chance: 0.0833
-      },
-      {
-        pokemonId: 122,
-        minLevel: 62,
-        maxLevel: 64,
-        chance: 0.0833
+        chance: 0.0909
       },
       {
         pokemonId: 82,
         minLevel: 63,
         maxLevel: 65,
-        chance: 0.0833
+        chance: 0.0909
       },
       {
         pokemonId: 423,
         minLevel: 64,
         maxLevel: 66,
-        chance: 0.0833
+        chance: 0.0909
       },
       {
         pokemonId: 125,
         minLevel: 64,
         maxLevel: 66,
-        chance: 0.0833
+        chance: 0.0909
       },
       {
         pokemonId: 419,
         minLevel: 65,
         maxLevel: 67,
-        chance: 0.0833
+        chance: 0.0909
       }
     ]
   },
@@ -1201,19 +1183,19 @@ export const sinnohRoutes = [
         pokemonId: 458,
         minLevel: 61,
         maxLevel: 63,
-        chance: 0.34
+        chance: 0.3333
       },
       {
         pokemonId: 279,
         minLevel: 65,
         maxLevel: 67,
-        chance: 0.33
+        chance: 0.3333
       },
       {
         pokemonId: 73,
         minLevel: 69,
         maxLevel: 71,
-        chance: 0.33
+        chance: 0.3333
       }
     ]
   },
@@ -1285,26 +1267,26 @@ export const sinnohRoutes = [
     spawns: [
       {
         pokemonId: 92,
-        minLevel: 30,
-        maxLevel: 35,
+        minLevel: 35,
+        maxLevel: 39,
         chance: 0.25
       },
       {
         pokemonId: 94,
-        minLevel: 36,
-        maxLevel: 41,
+        minLevel: 39,
+        maxLevel: 43,
         chance: 0.25
       },
       {
         pokemonId: 93,
-        minLevel: 33,
-        maxLevel: 38,
+        minLevel: 37,
+        maxLevel: 41,
         chance: 0.25
       },
       {
         pokemonId: 479,
-        minLevel: 33,
-        maxLevel: 38,
+        minLevel: 37,
+        maxLevel: 41,
         chance: 0.25
       }
     ]
@@ -1314,26 +1296,26 @@ export const sinnohRoutes = [
     spawns: [
       {
         pokemonId: 436,
-        minLevel: 40,
-        maxLevel: 45,
+        minLevel: 43,
+        maxLevel: 47,
         chance: 0.25
       },
       {
         pokemonId: 74,
-        minLevel: 40,
-        maxLevel: 45,
+        minLevel: 43,
+        maxLevel: 47,
         chance: 0.25
       },
       {
         pokemonId: 443,
-        minLevel: 40,
-        maxLevel: 45,
+        minLevel: 43,
+        maxLevel: 47,
         chance: 0.25
       },
       {
         pokemonId: 41,
-        minLevel: 38,
-        maxLevel: 43,
+        minLevel: 42,
+        maxLevel: 46,
         chance: 0.25
       }
     ]
@@ -1343,56 +1325,56 @@ export const sinnohRoutes = [
     spawns: [
       {
         pokemonId: 403,
-        minLevel: 44,
-        maxLevel: 50,
+        minLevel: 50,
+        maxLevel: 55,
         chance: 0.1111
       },
       {
         pokemonId: 81,
-        minLevel: 46,
-        maxLevel: 52,
+        minLevel: 51,
+        maxLevel: 54,
         chance: 0.1111
       },
       {
         pokemonId: 422,
-        minLevel: 46,
-        maxLevel: 52,
+        minLevel: 51,
+        maxLevel: 54,
         chance: 0.1111
       },
       {
         pokemonId: 404,
-        minLevel: 46,
-        maxLevel: 52,
+        minLevel: 52,
+        maxLevel: 57,
         chance: 0.1111
       },
       {
         pokemonId: 240,
-        minLevel: 46,
-        maxLevel: 52,
+        minLevel: 52,
+        maxLevel: 57,
         chance: 0.1111
       },
       {
         pokemonId: 417,
-        minLevel: 48,
-        maxLevel: 54,
+        minLevel: 52,
+        maxLevel: 57,
         chance: 0.1111
       },
       {
         pokemonId: 423,
-        minLevel: 48,
-        maxLevel: 54,
+        minLevel: 53,
+        maxLevel: 58,
         chance: 0.1111
       },
       {
         pokemonId: 419,
-        minLevel: 48,
-        maxLevel: 54,
+        minLevel: 53,
+        maxLevel: 58,
         chance: 0.1111
       },
       {
         pokemonId: 126,
-        minLevel: 48,
-        maxLevel: 54,
+        minLevel: 53,
+        maxLevel: 58,
         chance: 0.1111
       }
     ]
@@ -1402,62 +1384,62 @@ export const sinnohRoutes = [
     spawns: [
       {
         pokemonId: 133,
-        minLevel: 61,
-        maxLevel: 67,
+        minLevel: 60,
+        maxLevel: 66,
         chance: 0.1
       },
       {
         pokemonId: 137,
-        minLevel: 63,
-        maxLevel: 69,
+        minLevel: 60,
+        maxLevel: 66,
         chance: 0.1
       },
       {
         pokemonId: 233,
-        minLevel: 71,
-        maxLevel: 80,
+        minLevel: 65,
+        maxLevel: 71,
         chance: 0.1
       },
       {
         pokemonId: 134,
-        minLevel: 71,
-        maxLevel: 80,
+        minLevel: 65,
+        maxLevel: 71,
         chance: 0.1
       },
       {
         pokemonId: 135,
-        minLevel: 71,
-        maxLevel: 80,
+        minLevel: 65,
+        maxLevel: 71,
         chance: 0.1
       },
       {
         pokemonId: 136,
-        minLevel: 71,
-        maxLevel: 80,
+        minLevel: 65,
+        maxLevel: 71,
         chance: 0.1
       },
       {
         pokemonId: 196,
-        minLevel: 71,
-        maxLevel: 80,
+        minLevel: 65,
+        maxLevel: 71,
         chance: 0.1
       },
       {
         pokemonId: 197,
-        minLevel: 71,
-        maxLevel: 80,
+        minLevel: 65,
+        maxLevel: 71,
         chance: 0.1
       },
       {
         pokemonId: 470,
-        minLevel: 71,
-        maxLevel: 80,
+        minLevel: 65,
+        maxLevel: 71,
         chance: 0.1
       },
       {
         pokemonId: 471,
-        minLevel: 71,
-        maxLevel: 80,
+        minLevel: 65,
+        maxLevel: 71,
         chance: 0.1
       }
     ]
@@ -1469,43 +1451,43 @@ export const sinnohRoutes = [
         pokemonId: 423,
         minLevel: 74,
         maxLevel: 81,
-        chance: 0.2
+        chance: 0.1429
       },
       {
         pokemonId: 183,
-        minLevel: 66,
-        maxLevel: 73,
-        chance: 0.2
+        minLevel: 70,
+        maxLevel: 77,
+        chance: 0.1429
       },
       {
         pokemonId: 279,
         minLevel: 73,
         maxLevel: 80,
-        chance: 0.15
+        chance: 0.1429
       },
       {
         pokemonId: 54,
         minLevel: 69,
         maxLevel: 76,
-        chance: 0.15
+        chance: 0.1429
       },
       {
         pokemonId: 90,
         minLevel: 67,
         maxLevel: 74,
-        chance: 0.1
+        chance: 0.1429
       },
       {
         pokemonId: 120,
         minLevel: 71,
         maxLevel: 78,
-        chance: 0.1
+        chance: 0.1429
       },
       {
         pokemonId: 72,
         minLevel: 70,
         maxLevel: 77,
-        chance: 0.1
+        chance: 0.1429
       }
     ]
   },
@@ -1516,43 +1498,43 @@ export const sinnohRoutes = [
         pokemonId: 171,
         minLevel: 77,
         maxLevel: 85,
-        chance: 0.2
+        chance: 0.1429
       },
       {
         pokemonId: 457,
         minLevel: 78,
         maxLevel: 86,
-        chance: 0.2
+        chance: 0.1429
       },
       {
         pokemonId: 224,
         minLevel: 80,
         maxLevel: 88,
-        chance: 0.15
+        chance: 0.1429
       },
       {
         pokemonId: 195,
         minLevel: 76,
         maxLevel: 84,
-        chance: 0.15
+        chance: 0.1429
       },
       {
         pokemonId: 369,
         minLevel: 81,
         maxLevel: 89,
-        chance: 0.1
+        chance: 0.1429
       },
       {
         pokemonId: 320,
         minLevel: 74,
         maxLevel: 82,
-        chance: 0.1
+        chance: 0.1429
       },
       {
         pokemonId: 194,
         minLevel: 73,
         maxLevel: 81,
-        chance: 0.1
+        chance: 0.1429
       }
     ]
   },
@@ -1563,43 +1545,43 @@ export const sinnohRoutes = [
         pokemonId: 283,
         minLevel: 81,
         maxLevel: 88,
-        chance: 0.2
+        chance: 0.1429
       },
       {
         pokemonId: 341,
         minLevel: 82,
         maxLevel: 89,
-        chance: 0.2
+        chance: 0.1429
       },
       {
         pokemonId: 54,
         minLevel: 84,
         maxLevel: 91,
-        chance: 0.15
+        chance: 0.1429
       },
       {
         pokemonId: 86,
         minLevel: 85,
         maxLevel: 92,
-        chance: 0.15
+        chance: 0.1429
       },
       {
         pokemonId: 61,
         minLevel: 86,
         maxLevel: 93,
-        chance: 0.1
+        chance: 0.1429
       },
       {
         pokemonId: 117,
         minLevel: 88,
         maxLevel: 95,
-        chance: 0.1
+        chance: 0.1429
       },
       {
         pokemonId: 340,
         minLevel: 89,
         maxLevel: 96,
-        chance: 0.1
+        chance: 0.1429
       }
     ]
   },
@@ -1699,19 +1681,19 @@ export const sinnohRoutes = [
         pokemonId: 490,
         minLevel: 100,
         maxLevel: 100,
-        chance: 0.34
+        chance: 0.3333
       },
       {
         pokemonId: 489,
         minLevel: 100,
         maxLevel: 100,
-        chance: 0.33
+        chance: 0.3333
       },
       {
         pokemonId: 492,
         minLevel: 100,
         maxLevel: 100,
-        chance: 0.33
+        chance: 0.3333
       }
     ]
   },
@@ -1720,45 +1702,45 @@ export const sinnohRoutes = [
     spawns: [
       {
         pokemonId: 74,
-        minLevel: 69,
-        maxLevel: 79,
-        chance: 0.2
+        minLevel: 45,
+        maxLevel: 50,
+        chance: 0.1429
       },
       {
         pokemonId: 42,
-        minLevel: 73,
-        maxLevel: 83,
-        chance: 0.2
+        minLevel: 16,
+        maxLevel: 51,
+        chance: 0.1429
       },
       {
         pokemonId: 75,
-        minLevel: 71,
-        maxLevel: 81,
-        chance: 0.15
+        minLevel: 45,
+        maxLevel: 50,
+        chance: 0.1429
       },
       {
         pokemonId: 95,
-        minLevel: 70,
-        maxLevel: 80,
-        chance: 0.15
+        minLevel: 45,
+        maxLevel: 50,
+        chance: 0.1429
       },
       {
         pokemonId: 208,
-        minLevel: 74,
-        maxLevel: 84,
-        chance: 0.1
+        minLevel: 47,
+        maxLevel: 52,
+        chance: 0.1429
       },
       {
         pokemonId: 41,
-        minLevel: 66,
-        maxLevel: 76,
-        chance: 0.1
+        minLevel: 45,
+        maxLevel: 50,
+        chance: 0.1429
       },
       {
         pokemonId: 447,
-        minLevel: 67,
-        maxLevel: 77,
-        chance: 0.1
+        minLevel: 54,
+        maxLevel: 59,
+        chance: 0.1429
       }
     ]
   },
@@ -1767,51 +1749,51 @@ export const sinnohRoutes = [
     spawns: [
       {
         pokemonId: 400,
-        minLevel: 81,
-        maxLevel: 91,
-        chance: 0.2
+        minLevel: 55,
+        maxLevel: 60,
+        chance: 0.125
       },
       {
         pokemonId: 433,
-        minLevel: 76,
-        maxLevel: 86,
-        chance: 0.2
+        minLevel: 54,
+        maxLevel: 59,
+        chance: 0.125
       },
       {
         pokemonId: 55,
-        minLevel: 84,
-        maxLevel: 94,
-        chance: 0.15
+        minLevel: 57,
+        maxLevel: 62,
+        chance: 0.125
       },
       {
         pokemonId: 164,
-        minLevel: 83,
-        maxLevel: 93,
-        chance: 0.15
+        minLevel: 56,
+        maxLevel: 61,
+        chance: 0.125
       },
       {
         pokemonId: 54,
-        minLevel: 78,
-        maxLevel: 88,
-        chance: 0.1
+        minLevel: 54,
+        maxLevel: 59,
+        chance: 0.125
       },
       {
         pokemonId: 215,
-        minLevel: 82,
-        maxLevel: 92,
-        chance: 0.1
+        minLevel: 56,
+        maxLevel: 61,
+        chance: 0.125
       },
       {
         pokemonId: 361,
-        minLevel: 77,
-        maxLevel: 87,
-        chance: 0.05
+        minLevel: 54,
+        maxLevel: 59,
+        chance: 0.125
       },
       {
         pokemonId: 459,
-        minLevel: 79,
-        maxLevel: 89,
-        chance: 0.05
+        minLevel: 55,
+        maxLevel: 60,
+        chance: 0.125
       }
     ]
   },
@@ -1820,45 +1802,45 @@ export const sinnohRoutes = [
     spawns: [
       {
         pokemonId: 220,
-        minLevel: 86,
-        maxLevel: 96,
-        chance: 0.2
+        minLevel: 63,
+        maxLevel: 69,
+        chance: 0.1429
       },
       {
         pokemonId: 238,
-        minLevel: 87,
-        maxLevel: 97,
-        chance: 0.2
+        minLevel: 64,
+        maxLevel: 70,
+        chance: 0.1429
       },
       {
         pokemonId: 95,
-        minLevel: 89,
-        maxLevel: 99,
-        chance: 0.15
+        minLevel: 65,
+        maxLevel: 71,
+        chance: 0.1429
       },
       {
         pokemonId: 75,
-        minLevel: 90,
-        maxLevel: 100,
-        chance: 0.15
+        minLevel: 65,
+        maxLevel: 71,
+        chance: 0.1429
       },
       {
         pokemonId: 215,
-        minLevel: 91,
-        maxLevel: 101,
-        chance: 0.1
+        minLevel: 65,
+        maxLevel: 71,
+        chance: 0.1429
       },
       {
         pokemonId: 221,
-        minLevel: 93,
-        maxLevel: 103,
-        chance: 0.1
+        minLevel: 66,
+        maxLevel: 72,
+        chance: 0.1429
       },
       {
         pokemonId: 208,
-        minLevel: 94,
-        maxLevel: 104,
-        chance: 0.1
+        minLevel: 67,
+        maxLevel: 73,
+        chance: 0.1429
       }
     ]
   },
@@ -1869,19 +1851,19 @@ export const sinnohRoutes = [
         pokemonId: 480,
         minLevel: 105,
         maxLevel: 105,
-        chance: 0.34
+        chance: 0.3333
       },
       {
         pokemonId: 481,
         minLevel: 105,
         maxLevel: 105,
-        chance: 0.33
+        chance: 0.3333
       },
       {
         pokemonId: 482,
         minLevel: 105,
         maxLevel: 105,
-        chance: 0.33
+        chance: 0.3333
       }
     ]
   },
@@ -1892,43 +1874,43 @@ export const sinnohRoutes = [
         pokemonId: 433,
         minLevel: 82,
         maxLevel: 90,
-        chance: 0.2
+        chance: 0.1429
       },
       {
         pokemonId: 75,
         minLevel: 84,
         maxLevel: 92,
-        chance: 0.2
+        chance: 0.1429
       },
       {
         pokemonId: 400,
         minLevel: 84,
         maxLevel: 92,
-        chance: 0.15
+        chance: 0.1429
       },
       {
         pokemonId: 164,
         minLevel: 84,
         maxLevel: 92,
-        chance: 0.15
+        chance: 0.1429
       },
       {
         pokemonId: 358,
         minLevel: 84,
         maxLevel: 92,
-        chance: 0.1
+        chance: 0.1429
       },
       {
         pokemonId: 356,
         minLevel: 84,
         maxLevel: 92,
-        chance: 0.1
+        chance: 0.1429
       },
       {
         pokemonId: 143,
         minLevel: 87,
         maxLevel: 95,
-        chance: 0.1
+        chance: 0.1429
       }
     ]
   },
@@ -1939,43 +1921,43 @@ export const sinnohRoutes = [
         pokemonId: 437,
         minLevel: 95,
         maxLevel: 100,
-        chance: 0.2
+        chance: 0.1429
       },
       {
         pokemonId: 436,
         minLevel: 92,
         maxLevel: 97,
-        chance: 0.2
+        chance: 0.1429
       },
       {
         pokemonId: 433,
         minLevel: 92,
         maxLevel: 97,
-        chance: 0.15
+        chance: 0.1429
       },
       {
         pokemonId: 355,
         minLevel: 92,
         maxLevel: 97,
-        chance: 0.15
+        chance: 0.1429
       },
       {
         pokemonId: 92,
         minLevel: 92,
         maxLevel: 97,
-        chance: 0.1
+        chance: 0.1429
       },
       {
         pokemonId: 42,
         minLevel: 94,
         maxLevel: 99,
-        chance: 0.1
+        chance: 0.1429
       },
       {
         pokemonId: 93,
         minLevel: 93,
         maxLevel: 98,
-        chance: 0.1
+        chance: 0.1429
       }
     ]
   },
@@ -1986,13 +1968,13 @@ export const sinnohRoutes = [
         pokemonId: 488,
         minLevel: 110,
         maxLevel: 110,
-        chance: 0.6
+        chance: 0.5
       },
       {
         pokemonId: 491,
         minLevel: 110,
         maxLevel: 110,
-        chance: 0.4
+        chance: 0.5
       }
     ]
   },
@@ -2192,13 +2174,13 @@ export const sinnohRoutes = [
         pokemonId: 485,
         minLevel: 115,
         maxLevel: 115,
-        chance: 0.6
+        chance: 0.5
       },
       {
         pokemonId: 486,
         minLevel: 115,
         maxLevel: 115,
-        chance: 0.4
+        chance: 0.5
       }
     ]
   },
@@ -2421,19 +2403,19 @@ export const sinnohRoutes = [
         pokemonId: 389,
         minLevel: 100,
         maxLevel: 110,
-        chance: 0.34
+        chance: 0.3333
       },
       {
         pokemonId: 392,
         minLevel: 100,
         maxLevel: 110,
-        chance: 0.33
+        chance: 0.3333
       },
       {
         pokemonId: 395,
         minLevel: 100,
         maxLevel: 110,
-        chance: 0.33
+        chance: 0.3333
       }
     ]
   },
@@ -2444,19 +2426,19 @@ export const sinnohRoutes = [
         pokemonId: 389,
         minLevel: 100,
         maxLevel: 110,
-        chance: 0.34
+        chance: 0.3333
       },
       {
         pokemonId: 392,
         minLevel: 100,
         maxLevel: 110,
-        chance: 0.33
+        chance: 0.3333
       },
       {
         pokemonId: 395,
         minLevel: 100,
         maxLevel: 110,
-        chance: 0.33
+        chance: 0.3333
       }
     ]
   }
@@ -2712,16 +2694,17 @@ export const sinnohUnlocks = [
   },
   {
     challengeName: "Challenge 17",
-    areaId: "Veilstone Gym",
+    areaId: "Route 210",
     unlocks: [
-      "Route 214"
+      "Veilstone Gym"
     ],
     requirements: {
-      earnBadge: {
-        name: "Cobble Badge",
-        leader: "Maylene",
-        badgeCount: 4
-      }
+      defeatSpecies: [
+        {
+          species: "Unown",
+          count: 5
+        }
+      ]
     }
   },
   {

@@ -24,11 +24,6 @@ const sinnohMapCoordinates = {
     "x": 30.9,
     "y": 51.69
   },
-  "207": {
-    "name": "Route 207",
-    "x": 37.22,
-    "y": 64.32
-  },
   "208": {
     "name": "Route 208",
     "x": 49.22,
@@ -84,11 +79,6 @@ const sinnohMapCoordinates = {
     "x": 18.65,
     "y": 69.68
   },
-  "221": {
-    "name": "Route 221",
-    "x": 34.18,
-    "y": 91.23
-  },
   "222": {
     "name": "Route 222",
     "x": 83.89,
@@ -118,11 +108,6 @@ const sinnohMapCoordinates = {
     "name": "Route 228",
     "x": 78.91,
     "y": 28.52
-  },
-  "229": {
-    "name": "Route 229",
-    "x": 79.78,
-    "y": 34.6
   },
   "professor_lab": {
     "name": "Sinnoh Professor Lab",
@@ -234,21 +219,6 @@ const sinnohMapCoordinates = {
     "x": 74.61,
     "y": 14.43
   },
-  "diving_spot": {
-    "name": "Diving Spot",
-    "x": 73.83,
-    "y": 34.19
-  },
-  "huge_fishing_spot": {
-    "name": "Huge Fishing Spot",
-    "x": 26.37,
-    "y": 92.2
-  },
-  "big_fishing_spot": {
-    "name": "Big Fishing Spot",
-    "x": 57.62,
-    "y": 41.78
-  },
   "oreburgh_gate": {
     "name": "Oreburgh Gate",
     "x": 33.11,
@@ -260,7 +230,7 @@ const sinnohMapCoordinates = {
     "y": 58.03
   },
   "daycare": {
-    "name": "Daycare",
+    "name": "Solaceon Daycare",
     "x": 59.38,
     "y": 57.02
   },
@@ -318,12 +288,12 @@ const sinnohMapCoordinates = {
     "name": "Continental Depths",
     "x": 45.14,
     "y": 77.12
-  }
-,
+  },
   "huge_starters": {
     "name": "Huge Starters",
     "x": 13.24,
-    "y": 89.70
+    "y": 89.7
   }
 };
+
 export default sinnohMapCoordinates;
