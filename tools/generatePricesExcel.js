@@ -20,7 +20,7 @@ const wb = xlsx.utils.book_new();
 const formulasData = [
   {
     "Calculation": "Pokemon Price (Selling / PP)",
-    "Formula": "max(1, floor(50 * (Q / 1.40)^4.0 * (IV_Total / 450)^3.0 * (BST / 300)^1.1 * (Level / 50)))",
+    "Formula": "max(1, floor(50 * (Q / 1.40)^6.0 * (IV_Total / 450)^4.0 * (BST / 300)^5.0 * (Level / 50)^3.0))",
     "Variables": "Q = Quality, IV_Total = Sum of all IVs, BST = Base Stat Total, Level = Pokemon Level"
   },
   {

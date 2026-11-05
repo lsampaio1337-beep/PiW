@@ -2744,7 +2744,13 @@ async function init() {
                         // Show the currently purchased tier (index tier - 1)
                         const configItem = state.config.balance.expansions[type.configKey][tier - 1];
                         if (configItem) {
-                            const displayName = configItem.displayName || configItem.name;
+                            let displayName = configItem.displayName || configItem.name;
+                            if (type.configKey === 'daycare') {
+                                const parts = displayName.split(' ');
+                                if (parts.length >= 2) {
+                                    displayName = parts.slice(0, -1).join(' ') + '<br>' + parts[parts.length - 1];
+                                }
+                            }
                             let description = configItem.description || '';
                             if (type.configKey === 'ballPocket') {
                                 description = `Ball Stock Capacity: ${getCapacity(state, 'balls')}`;
