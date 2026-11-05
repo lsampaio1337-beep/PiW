@@ -1666,6 +1666,9 @@ function gameClockTick() {
     if (!state.globalStats.playtime) state.globalStats.playtime = 0;
     state.globalStats.playtime++;
 
+    if (!state.stats.playtime) state.stats.playtime = 0;
+    state.stats.playtime++;
+
     _updateBattleTimer();
     _awardJigglypuffDustGrains();
 
@@ -2470,6 +2473,132 @@ async function init() {
 
     window.updateMainControl = updateMainControl;
 
+    window.showMedalDetail = function(region, caughtCount, shinyCount, totalInRegion) {
+        const hasFirst = caughtCount > 0;
+        const hasSecond = totalInRegion > 0 && caughtCount >= totalInRegion;
+        const hasThird = totalInRegion > 0 && shinyCount >= totalInRegion;
+
+        let regionalStats;
+        if (region === 'Kanto' && state.currentRegionName === 'Kanto') {
+            regionalStats = state.stats;
+        } else if (region === 'Kanto' && state.regions && state.regions['Kanto']) {
+            regionalStats = state.regions['Kanto'].stats;
+        } else {
+            regionalStats = state.regions && state.regions[region] ? state.regions[region].stats : null;
+        }
+        if (!regionalStats && state.currentRegionName === region) {
+            regionalStats = state.stats;
+        }
+
+        const regionPlaytime = regionalStats && regionalStats.playtime ? regionalStats.playtime : 0;
+        const formatTime = (secs) => {
+            const d = Math.floor(secs / 86400);
+            const h = Math.floor((secs % 86400) / 3600);
+            const m = Math.floor((secs % 3600) / 60);
+            const s = Math.floor(secs % 60);
+            let timeStr = `${h.toString().padStart(2, '0')}h:${m.toString().padStart(2, '0')}m:${s.toString().padStart(2, '0')}s`;
+            if (d >= 1) timeStr = `${d}d ${timeStr}`;
+            return timeStr;
+        };
+        const timePlayedStr = formatTime(regionPlaytime);
+
+        let medalsHtml = `
+            <div style="display: flex; flex-direction: column; gap: 20px; padding: 20px; align-items: center; color: white;">
+                <!-- First Medal -->
+                <div style="display: flex; flex-direction: column; align-items: center; text-align: center; ${!hasFirst ? 'filter: grayscale(100%) opacity(0.5);' : 'filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));'}">
+                    <img src="Assets/Extra/Medals/${region} First.png" alt="${region} First" style="width: 128px; height: 128px; object-fit: contain; image-rendering: pixelated;" onerror="this.src='Assets/Extra/Medals/Kanto First.png'">
+                    <div style="margin-top: 10px; font-weight: bold;">Won ${region} Pokemon League</div>
+                    <div style="font-size: 12px; color: #ccc;">Time on Region: ${timePlayedStr}</div>
+                </div>
+
+                <!-- Second Medal -->
+                <div style="display: flex; flex-direction: column; align-items: center; text-align: center; ${!hasSecond ? 'filter: grayscale(100%) opacity(0.5);' : 'filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.8));'}">
+                    <img src="Assets/Extra/Medals/${region} Second.png" alt="${region} Second" style="width: 128px; height: 128px; object-fit: contain; image-rendering: pixelated;" onerror="this.src='Assets/Extra/Medals/Kanto Second.png'">
+                    <div style="margin-top: 10px; font-weight: bold;">Catch all ${totalInRegion} Pokémons</div>
+                    <div style="font-size: 12px; color: #ccc;">Time on Region: ${timePlayedStr}</div>
+                </div>
+
+                <!-- Third Medal -->
+                <div style="display: flex; flex-direction: column; align-items: center; text-align: center; ${!hasThird ? 'filter: grayscale(100%) opacity(0.5);' : 'filter: drop-shadow(0 0 20px rgba(255, 215, 0, 1));'}">
+                    <img src="Assets/Extra/Medals/${region} Third.png" alt="${region} Third" style="width: 128px; height: 128px; object-fit: contain; image-rendering: pixelated;" onerror="this.src='Assets/Extra/Medals/Kanto Third.png'">
+                    <div style="margin-top: 10px; font-weight: bold;">Catch all ${totalInRegion} Shinies Pokémons</div>
+                    <div style="font-size: 12px; color: #ccc;">Time on Region: ${timePlayedStr}</div>
+                </div>
+            </div>
+        `;
+
+        const overlay = document.getElementById('trainer-stats-inner-modal');
+        const content = document.getElementById('trainer-stats-inner-modal-content');
+
+        if (overlay && content) {
+            safeSetHTML(content, `<h3 style="margin-top: 0; text-align: center;">${region} Medals Details</h3>${medalsHtml}`);
+            overlay.style.display = 'flex';
+        }
+    };
+
+    window.showUpgradeDetail = function(configKey, currentTier) {
+        if (!state.config || !state.config.balance || !state.config.balance.expansions || !state.config.balance.expansions[configKey]) return;
+        const expansionsList = state.config.balance.expansions[configKey];
+
+        let upgradesHtml = '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; padding: 2%; box-sizing: border-box; width: 100%;">';
+
+        for (let i = 0; i < currentTier; i++) {
+            const configItem = expansionsList[i];
+            if (!configItem) continue;
+
+            const displayName = configItem.displayName || configItem.name;
+            let description = configItem.description || '';
+            const tier = i + 1;
+
+            if (configKey === 'ballPocket') {
+                description = `Ball Stock Capacity increases.`;
+            } else if (configKey === 'potionSatchel') {
+                description = `Potion Stock Capacity increases.`;
+            } else if (configKey === 'pokemonBox') {
+                description = `Pokemon Capacity in Backpack increases.`;
+            } else if (configKey === 'speed') {
+                if (tier === 1) description = "Encounter time decreased in 10%";
+                else if (tier === 2) description = "Encounter time decreased in 20%";
+                else if (tier === 3) description = "Encounter time decreased in 30%";
+                else if (tier === 4) description = "Encounter time decreased in 40%";
+                else if (tier >= 5) description = "Encounter time decreased in 50%";
+            } else if (configKey === 'glass') {
+                if (tier === 1) description = "Show Healthbar at Main View";
+                else if (tier === 2) description = "Show Healthbar and Damage at Main View";
+                else if (tier === 3) description = "Show Healthbar, Damage and Level at Main View";
+                else if (tier === 4) description = "Show Healthbar, Damage, Level and Quality at Main View";
+                else if (tier >= 5) description = "Show Healthbar, Damage, Level, Quality and SumIV at Main View";
+            } else if (configKey === 'loot') {
+                if (tier === 1) description = "Can loot Potion";
+                else if (tier === 2) description = "Can loot Potion and Ball";
+                else if (tier === 3) description = "Can loot Potion, Ball and Stone";
+                else if (tier === 4) description = "Can loot Potion, Ball, Stone and Vitamin";
+            } else if (configKey === 'smartwatch') {
+                if (tier === 1) description = "Can Select Ball at Main View";
+                else if (tier === 2) description = "Can Select Ball and potion at Main View";
+                else if (tier >= 3) description = "Can Select Ball and potion at Main View and use smart mode for capture";
+            }
+
+            upgradesHtml += `
+                <div style="background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; padding: 15px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 10px;">
+                    <div style="font-size: 14px; font-weight: bold; color: white;">${displayName} (Tier ${tier})</div>
+                    <img src="./Assets/Items/Upgrades/${configItem.name}.png" style="width: 64px; height: 64px; object-fit: contain;" alt="${displayName}">
+                    <div style="font-size: 12px; color: #cbd5e1; line-height: 1.3;">${description}</div>
+                </div>
+            `;
+        }
+
+        upgradesHtml += '</div>';
+
+        const overlay = document.getElementById('trainer-stats-inner-modal');
+        const content = document.getElementById('trainer-stats-inner-modal-content');
+
+        if (overlay && content) {
+            safeSetHTML(content, `<h3 style="margin-top: 0; text-align: center;">Upgrades Details</h3>${upgradesHtml}`);
+            overlay.style.display = 'flex';
+        }
+    };
+
     window.showTrainerStats = function(tab = 'statistics', options = {}) {
         if(checkCombatLock()) return;
 
@@ -2695,7 +2824,8 @@ async function init() {
                 medalsHtml += `
                     <div
                         class="medal-item"
-                        style="background: rgba(0, 0, 0, 0.2); border-radius: 10px; padding: 10px 15px; border: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-around; align-items: center; box-sizing: border-box; transition: all 0.2s ease-in-out; min-height: 0;"
+                        onclick="if(window.showMedalDetail) window.showMedalDetail('${region}', ${caughtCount}, ${shinyCount}, ${totalInRegion})"
+                        style="cursor: pointer; background: rgba(0, 0, 0, 0.2); border-radius: 10px; padding: 10px 15px; border: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-around; align-items: center; box-sizing: border-box; transition: all 0.2s ease-in-out; min-height: 0;"
                     >
                         <div style="text-align: center; ${!hasFirst ? 'filter: grayscale(100%) opacity(0.5);' : 'filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));'}">
                             <img src="Assets/Extra/Medals/${region} First.png" alt="${region} First" style="width: 100%; max-width: 64px; max-height: 100%; object-fit: contain; image-rendering: pixelated;" onerror="this.src='Assets/Extra/Medals/Kanto First.png'">
@@ -2776,7 +2906,9 @@ async function init() {
                             }
 
                             contentHtml += `
-                                <div class="upgrade-item" style="background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; padding: 15px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 10px; transition: all 0.2s ease-in-out;">
+                                <div class="upgrade-item"
+                                     onclick="if(window.showUpgradeDetail) window.showUpgradeDetail('${type.configKey}', ${tier})"
+                                     style="cursor: pointer; background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; padding: 15px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 10px; transition: all 0.2s ease-in-out;">
                                     <div style="font-size: 14px; font-weight: bold; color: white;">${displayName}</div>
                                     <img src="./Assets/Items/Upgrades/${configItem.name}.png" style="width: 50px; height: 50px; object-fit: contain;" alt="${displayName}">
                                     <div style="font-size: 12px; color: #cbd5e1; line-height: 1.3;">${description}</div>
@@ -2812,6 +2944,14 @@ async function init() {
             if (innerContent) {
                 innerContent.style.setProperty('padding', '0px', 'important');
             }
+            contentHtml += `
+            <div id="trainer-stats-inner-modal" style="display: none; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.8); z-index: 10000; align-items: center; justify-content: center;">
+                <div style="background: linear-gradient(135deg, #2c3e50, #34495e); border: 2px solid #4a90e2; border-radius: 12px; padding: 25px; max-width: 80%; max-height: 80%; overflow-y: auto; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.5); color: white;">
+                    <div style="position: absolute; top: 10px; right: 10px; cursor: pointer; color: #e74c3c; font-weight: bold; font-size: 20px; background: rgba(0,0,0,0.3); border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;" onclick="document.getElementById('trainer-stats-inner-modal').style.display='none'">&times;</div>
+                    <div id="trainer-stats-inner-modal-content"></div>
+                </div>
+            </div>`;
+
             setTimeout(() => {
                 if (typeof win.adjustHeightForNewContent === 'function') {
                     win.adjustHeightForNewContent();
