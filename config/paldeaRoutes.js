@@ -3775,6 +3775,7 @@ export const paldeaRoutes = [
   {
     "name": "Ruins",
     "spawns": [
+      { "pokemonId": 530, "minLevel": 1, "maxLevel": 1, "chance": 0.05 },
       {
         "pokemonId": 579,
         "minLevel": 1,
@@ -3946,9 +3947,834 @@ export const paldeaRoutes = [
       }
     ]
   }
+,
+
+  {
+    "name": "Paldea Extra 1",
+    "spawns": [
+      { "pokemonId": 912, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 913, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 914, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 336, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 778, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 915, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 921, "minLevel": 1, "maxLevel": 1, "chance": 0.10 }
+    ]
+  },
+
+  {
+    "name": "Paldea Extra 2",
+    "spawns": [
+      { "pokemonId": 876, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 357, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 950, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 442, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 874, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 915, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 921, "minLevel": 1, "maxLevel": 1, "chance": 0.10 }
+    ]
+  },
+
+  {
+    "name": "Paldea Extra 3",
+    "spawns": [
+      { "pokemonId": 615, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 976, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 984, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 986, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 987, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 915, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 921, "minLevel": 1, "maxLevel": 1, "chance": 0.10 }
+    ]
+  },
+
+  {
+    "name": "Paldea Extra 4",
+    "spawns": [
+      { "pokemonId": 988, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 990, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 991, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 993, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 994, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 915, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 921, "minLevel": 1, "maxLevel": 1, "chance": 0.10 }
+    ]
+  },
+
+  {
+    "name": "Paldea Extra 5",
+    "spawns": [
+      { "pokemonId": 999, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 1000, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 1006, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 167, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 168, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 915, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 921, "minLevel": 1, "maxLevel": 1, "chance": 0.10 }
+    ]
+  },
+
+  {
+    "name": "Paldea Extra 6",
+    "spawns": [
+      { "pokemonId": 193, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 469, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 261, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 262, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 313, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 915, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 921, "minLevel": 1, "maxLevel": 1, "chance": 0.10 }
+    ]
+  },
+
+  {
+    "name": "Paldea Extra 7",
+    "spawns": [
+      { "pokemonId": 314, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 341, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 342, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 540, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 541, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 915, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 921, "minLevel": 1, "maxLevel": 1, "chance": 0.10 }
+    ]
+  },
+
+  {
+    "name": "Paldea Extra 8",
+    "spawns": [
+      { "pokemonId": 542, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 742, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 743, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 23, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 24, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 915, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 921, "minLevel": 1, "maxLevel": 1, "chance": 0.10 }
+    ]
+  },
+
+  {
+    "name": "Paldea Extra 9",
+    "spawns": [
+      { "pokemonId": 69, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 70, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 71, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 161, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 162, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 915, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 921, "minLevel": 1, "maxLevel": 1, "chance": 0.10 }
+    ]
+  },
+
+  {
+    "name": "Paldea Extra 10",
+    "spawns": [
+      { "pokemonId": 163, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 164, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 190, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 424, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 220, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 915, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 921, "minLevel": 1, "maxLevel": 1, "chance": 0.10 }
+    ]
+  },
+
+  {
+    "name": "Paldea Extra 11",
+    "spawns": [
+      { "pokemonId": 221, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 473, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 273, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 274, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 275, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 915, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 921, "minLevel": 1, "maxLevel": 1, "chance": 0.10 }
+    ]
+  },
+
+  {
+    "name": "Paldea Extra 12",
+    "spawns": [
+      { "pokemonId": 1012, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 1013, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 532, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 533, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 534, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 915, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 921, "minLevel": 1, "maxLevel": 1, "chance": 0.10 }
+    ]
+  },
+
+  {
+    "name": "Paldea Extra 13",
+    "spawns": [
+      { "pokemonId": 877, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 446, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 143, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 270, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 271, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 915, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 921, "minLevel": 1, "maxLevel": 1, "chance": 0.10 }
+    ]
+  },
+
+  {
+    "name": "Paldea Extra 14",
+    "spawns": [
+      { "pokemonId": 272, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 207, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 472, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 629, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 630, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 915, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 921, "minLevel": 1, "maxLevel": 1, "chance": 0.10 }
+    ]
+  },
+
+  {
+    "name": "Paldea Extra 15",
+    "spawns": [
+      { "pokemonId": 782, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 783, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 784, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 109, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 110, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 915, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 921, "minLevel": 1, "maxLevel": 1, "chance": 0.10 }
+    ]
+  },
+
+  {
+    "name": "Paldea Extra 16",
+    "spawns": [
+      { "pokemonId": 619, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 620, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 433, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 358, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 218, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 915, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 921, "minLevel": 1, "maxLevel": 1, "chance": 0.10 }
+    ]
+  },
+
+  {
+    "name": "Paldea Extra 17",
+    "spawns": [
+      { "pokemonId": 219, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 607, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 608, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 609, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 173, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 915, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 921, "minLevel": 1, "maxLevel": 1, "chance": 0.10 }
+    ]
+  },
+
+  {
+    "name": "Paldea Extra 18",
+    "spawns": [
+      { "pokemonId": 35, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 36, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 349, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 350, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 703, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 915, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 921, "minLevel": 1, "maxLevel": 1, "chance": 0.10 }
+    ]
+  },
+
+  {
+    "name": "Paldea Extra 19",
+    "spawns": [
+      { "pokemonId": 580, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 581, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 845, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 84, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 85, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 915, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 921, "minLevel": 1, "maxLevel": 1, "chance": 0.10 }
+    ]
+  },
+
+  {
+    "name": "Paldea Extra 20",
+    "spawns": [
+      { "pokemonId": 102, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 103, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 111, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 112, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 464, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 915, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 921, "minLevel": 1, "maxLevel": 1, "chance": 0.10 }
+    ]
+  },
+
+  {
+    "name": "Paldea Extra 21",
+    "spawns": [
+      { "pokemonId": 239, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 125, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 466, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 240, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 126, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 915, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 921, "minLevel": 1, "maxLevel": 1, "chance": 0.10 }
+    ]
+  },
+
+  {
+    "name": "Paldea Extra 22",
+    "spawns": [
+      { "pokemonId": 467, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 522, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 523, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 868, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 869, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 915, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 921, "minLevel": 1, "maxLevel": 1, "chance": 0.10 }
+    ]
+  },
+
+  {
+    "name": "Paldea Extra 23",
+    "spawns": [
+      { "pokemonId": 328, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 329, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 330, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 731, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 732, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 915, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 921, "minLevel": 1, "maxLevel": 1, "chance": 0.10 }
+    ]
+  },
+
+  {
+    "name": "Paldea Extra 24",
+    "spawns": [
+      { "pokemonId": 733, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 546, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 547, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 764, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 170, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 915, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 921, "minLevel": 1, "maxLevel": 1, "chance": 0.10 }
+    ]
+  },
+
+  {
+    "name": "Paldea Extra 25",
+    "spawns": [
+      { "pokemonId": 171, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 751, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 752, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 236, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 106, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 915, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 921, "minLevel": 1, "maxLevel": 1, "chance": 0.10 }
+    ]
+  },
+
+  {
+    "name": "Paldea Extra 26",
+    "spawns": [
+      { "pokemonId": 107, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 237, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 529, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 774, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 408, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 915, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 921, "minLevel": 1, "maxLevel": 1, "chance": 0.10 }
+    ]
+  },
+
+  {
+    "name": "Paldea Extra 27",
+    "spawns": [
+      { "pokemonId": 409, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 410, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 411, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 572, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 573, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 915, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 921, "minLevel": 1, "maxLevel": 1, "chance": 0.10 }
+    ]
+  },
+
+  {
+    "name": "Paldea Extra 28",
+    "spawns": [
+      { "pokemonId": 227, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 311, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 312, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 559, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 560, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 915, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 921, "minLevel": 1, "maxLevel": 1, "chance": 0.10 }
+    ]
+  },
+
+  {
+    "name": "Paldea Extra 29",
+    "spawns": [
+      { "pokemonId": 137, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 233, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 474, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 595, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 596, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 915, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 921, "minLevel": 1, "maxLevel": 1, "chance": 0.10 }
+    ]
+  },
+
+  {
+    "name": "Paldea Extra 30",
+    "spawns": [
+      { "pokemonId": 374, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 375, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 376, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 86, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 87, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 915, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 921, "minLevel": 1, "maxLevel": 1, "chance": 0.10 }
+    ]
+  },
+
+  {
+    "name": "Paldea Extra 31",
+    "spawns": [
+      { "pokemonId": 131, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 209, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 210, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 884, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 1018, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 915, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 921, "minLevel": 1, "maxLevel": 1, "chance": 0.10 }
+    ]
+  },
+
+  {
+    "name": "Paldea Extra 32",
+    "spawns": [
+      { "pokemonId": 152, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 153, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 154, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 155, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 156, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 915, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 921, "minLevel": 1, "maxLevel": 1, "chance": 0.10 }
+    ]
+  },
+
+  {
+    "name": "Paldea Extra 33",
+    "spawns": [
+      { "pokemonId": 157, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 158, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 159, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 160, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 915, "minLevel": 1, "maxLevel": 1, "chance": 0.15 },
+      { "pokemonId": 921, "minLevel": 1, "maxLevel": 1, "chance": 0.10 }
+    ]
+  }
 ];
 
 export const paldeaUnlocks = [
+
+  {
+    "challengeName": "Extra Challenge A 01",
+    "requirements": {
+      "catchSpecies": {
+        "921": 3
+      }
+    },
+    "reward": {
+      "unlockRoute": "Paldea Extra 1"
+    }
+  },
+
+  {
+    "challengeName": "Extra Challenge A 02",
+    "requirements": {
+      "catchSpecies": {
+        "187": 4
+      }
+    },
+    "reward": {
+      "unlockRoute": "Paldea Extra 2"
+    }
+  },
+
+  {
+    "challengeName": "Extra Challenge A 03",
+    "requirements": {
+      "catchSpecies": {
+        "917": 5
+      }
+    },
+    "reward": {
+      "unlockRoute": "Paldea Extra 3"
+    }
+  },
+
+  {
+    "challengeName": "Extra Challenge A 04",
+    "requirements": {
+      "catchSpecies": {
+        "54": 6
+      }
+    },
+    "reward": {
+      "unlockRoute": "Paldea Extra 4"
+    }
+  },
+
+  {
+    "challengeName": "Extra Challenge A 05",
+    "requirements": {
+      "catchSpecies": {
+        "833": 7
+      }
+    },
+    "reward": {
+      "unlockRoute": "Paldea Extra 5"
+    }
+  },
+
+  {
+    "challengeName": "Extra Challenge A 06",
+    "requirements": {
+      "catchSpecies": {
+        "915": 8
+      }
+    },
+    "reward": {
+      "unlockRoute": "Paldea Extra 6"
+    }
+  },
+
+  {
+    "challengeName": "Extra Challenge A 07",
+    "requirements": {
+      "catchSpecies": {
+        "921": 9
+      }
+    },
+    "reward": {
+      "unlockRoute": "Paldea Extra 7"
+    }
+  },
+
+  {
+    "challengeName": "Extra Challenge A 08",
+    "requirements": {
+      "catchSpecies": {
+        "187": 10
+      }
+    },
+    "reward": {
+      "unlockRoute": "Paldea Extra 8"
+    }
+  },
+
+  {
+    "challengeName": "Extra Challenge A 09",
+    "requirements": {
+      "catchSpecies": {
+        "917": 11
+      }
+    },
+    "reward": {
+      "unlockRoute": "Paldea Extra 9"
+    }
+  },
+
+  {
+    "challengeName": "Extra Challenge A 010",
+    "requirements": {
+      "catchSpecies": {
+        "54": 12
+      }
+    },
+    "reward": {
+      "unlockRoute": "Paldea Extra 10"
+    }
+  },
+
+  {
+    "challengeName": "Extra Challenge A 011",
+    "requirements": {
+      "catchSpecies": {
+        "833": 13
+      }
+    },
+    "reward": {
+      "unlockRoute": "Paldea Extra 11"
+    }
+  },
+
+  {
+    "challengeName": "Extra Challenge A 012",
+    "requirements": {
+      "catchSpecies": {
+        "915": 14
+      }
+    },
+    "reward": {
+      "unlockRoute": "Paldea Extra 12"
+    }
+  },
+
+  {
+    "challengeName": "Extra Challenge A 013",
+    "requirements": {
+      "catchSpecies": {
+        "921": 15
+      }
+    },
+    "reward": {
+      "unlockRoute": "Paldea Extra 13"
+    }
+  },
+
+  {
+    "challengeName": "Extra Challenge A 014",
+    "requirements": {
+      "catchSpecies": {
+        "187": 16
+      }
+    },
+    "reward": {
+      "unlockRoute": "Paldea Extra 14"
+    }
+  },
+
+  {
+    "challengeName": "Extra Challenge A 015",
+    "requirements": {
+      "catchSpecies": {
+        "917": 17
+      }
+    },
+    "reward": {
+      "unlockRoute": "Paldea Extra 15"
+    }
+  },
+
+  {
+    "challengeName": "Extra Challenge A 016",
+    "requirements": {
+      "catchSpecies": {
+        "54": 18
+      }
+    },
+    "reward": {
+      "unlockRoute": "Paldea Extra 16"
+    }
+  },
+
+  {
+    "challengeName": "Extra Challenge A 017",
+    "requirements": {
+      "catchSpecies": {
+        "833": 19
+      }
+    },
+    "reward": {
+      "unlockRoute": "Paldea Extra 17"
+    }
+  },
+
+  {
+    "challengeName": "Extra Challenge A 018",
+    "requirements": {
+      "catchSpecies": {
+        "915": 20
+      }
+    },
+    "reward": {
+      "unlockRoute": "Paldea Extra 18"
+    }
+  },
+
+  {
+    "challengeName": "Extra Challenge A 019",
+    "requirements": {
+      "catchSpecies": {
+        "921": 20
+      }
+    },
+    "reward": {
+      "unlockRoute": "Paldea Extra 19"
+    }
+  },
+
+  {
+    "challengeName": "Extra Challenge A 020",
+    "requirements": {
+      "catchSpecies": {
+        "187": 20
+      }
+    },
+    "reward": {
+      "unlockRoute": "Paldea Extra 20"
+    }
+  },
+
+  {
+    "challengeName": "Extra Challenge A 021",
+    "requirements": {
+      "catchSpecies": {
+        "917": 20
+      }
+    },
+    "reward": {
+      "unlockRoute": "Paldea Extra 21"
+    }
+  },
+
+  {
+    "challengeName": "Extra Challenge A 022",
+    "requirements": {
+      "catchSpecies": {
+        "54": 20
+      }
+    },
+    "reward": {
+      "unlockRoute": "Paldea Extra 22"
+    }
+  },
+
+  {
+    "challengeName": "Extra Challenge A 023",
+    "requirements": {
+      "catchSpecies": {
+        "833": 20
+      }
+    },
+    "reward": {
+      "unlockRoute": "Paldea Extra 23"
+    }
+  },
+
+  {
+    "challengeName": "Extra Challenge A 024",
+    "requirements": {
+      "catchSpecies": {
+        "915": 20
+      }
+    },
+    "reward": {
+      "unlockRoute": "Paldea Extra 24"
+    }
+  },
+
+  {
+    "challengeName": "Extra Challenge A 025",
+    "requirements": {
+      "catchSpecies": {
+        "921": 20
+      }
+    },
+    "reward": {
+      "unlockRoute": "Paldea Extra 25"
+    }
+  },
+
+  {
+    "challengeName": "Extra Challenge A 026",
+    "requirements": {
+      "catchSpecies": {
+        "187": 20
+      }
+    },
+    "reward": {
+      "unlockRoute": "Paldea Extra 26"
+    }
+  },
+
+  {
+    "challengeName": "Extra Challenge A 027",
+    "requirements": {
+      "catchSpecies": {
+        "917": 20
+      }
+    },
+    "reward": {
+      "unlockRoute": "Paldea Extra 27"
+    }
+  },
+
+  {
+    "challengeName": "Extra Challenge A 028",
+    "requirements": {
+      "catchSpecies": {
+        "54": 20
+      }
+    },
+    "reward": {
+      "unlockRoute": "Paldea Extra 28"
+    }
+  },
+
+  {
+    "challengeName": "Extra Challenge A 029",
+    "requirements": {
+      "catchSpecies": {
+        "833": 20
+      }
+    },
+    "reward": {
+      "unlockRoute": "Paldea Extra 29"
+    }
+  },
+
+  {
+    "challengeName": "Extra Challenge A 030",
+    "requirements": {
+      "catchSpecies": {
+        "915": 20
+      }
+    },
+    "reward": {
+      "unlockRoute": "Paldea Extra 30"
+    }
+  },
+
+  {
+    "challengeName": "Extra Challenge A 031",
+    "requirements": {
+      "catchSpecies": {
+        "921": 20
+      }
+    },
+    "reward": {
+      "unlockRoute": "Paldea Extra 31"
+    }
+  },
+
+  {
+    "challengeName": "Extra Challenge A 032",
+    "requirements": {
+      "catchSpecies": {
+        "187": 20
+      }
+    },
+    "reward": {
+      "unlockRoute": "Paldea Extra 32"
+    }
+  },
+
+  {
+    "challengeName": "Extra Challenge A 033",
+    "requirements": {
+      "catchSpecies": {
+        "917": 20
+      }
+    },
+    "reward": {
+      "unlockRoute": "Paldea Extra 33"
+    }
+  },
   {
     "challengeName": "Challenge 1",
     "areaId": "Poco Path - Main",

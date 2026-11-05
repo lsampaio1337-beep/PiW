@@ -2,6 +2,7 @@ export const alolaRoutes = [
   {
     "name": "Route 1 East",
     "spawns": [
+      { "pokemonId": 446, "minLevel": 1, "maxLevel": 1, "chance": 0.05 },
       {
         "pokemonId": 427,
         "minLevel": 1,
@@ -78,6 +79,7 @@ export const alolaRoutes = [
   {
     "name": "Route 1 Hau'oli Outskirts",
     "spawns": [
+      { "pokemonId": 627, "minLevel": 1, "maxLevel": 1, "chance": 0.05 },
       {
         "pokemonId": 686,
         "minLevel": 4,
@@ -124,6 +126,7 @@ export const alolaRoutes = [
   {
     "name": "Hau'oli Cemetery",
     "spawns": [
+      { "pokemonId": 629, "minLevel": 1, "maxLevel": 1, "chance": 0.05 },
       {
         "pokemonId": 92,
         "minLevel": 7,
@@ -164,6 +167,7 @@ export const alolaRoutes = [
   {
     "name": "Route 2 North",
     "spawns": [
+      { "pokemonId": 302, "minLevel": 1, "maxLevel": 1, "chance": 0.05 },
       {
         "pokemonId": 204,
         "minLevel": 1,
@@ -227,7 +231,8 @@ export const alolaRoutes = [
   },
   {
     "name": "Captain Ilima Boss Battle",
-    "spawns": [],
+    "spawns": [
+      { "pokemonId": 370, "minLevel": 1, "maxLevel": 1, "chance": 0.05 },],
     "challengeName": "Challenge 5",
     "areaId": "Captain Ilima Boss Battle",
     "unlocks": [
@@ -240,6 +245,7 @@ export const alolaRoutes = [
   {
     "name": "Seaward Cave",
     "spawns": [
+      { "pokemonId": 349, "minLevel": 1, "maxLevel": 1, "chance": 0.05 },
       {
         "pokemonId": 225,
         "minLevel": 1,
@@ -274,7 +280,8 @@ export const alolaRoutes = [
   },
   {
     "name": "Kahuna Hala Boss Battle",
-    "spawns": [],
+    "spawns": [
+      { "pokemonId": 594, "minLevel": 1, "maxLevel": 1, "chance": 0.05 },],
     "challengeName": "Challenge 7",
     "areaId": "Kahuna Hala Boss Battle",
     "unlocks": [
@@ -308,6 +315,7 @@ export const alolaRoutes = [
   {
     "name": "Ten Carat Hill Farthest Hollow",
     "spawns": [
+      { "pokemonId": 718, "minLevel": 1, "maxLevel": 1, "chance": 0.05 },
       {
         "pokemonId": 524,
         "minLevel": 16,
@@ -360,6 +368,7 @@ export const alolaRoutes = [
   {
     "name": "Paniola Ranch",
     "spawns": [
+      { "pokemonId": 443, "minLevel": 1, "maxLevel": 1, "chance": 0.05 },
       {
         "pokemonId": 506,
         "minLevel": 1,
@@ -405,7 +414,8 @@ export const alolaRoutes = [
   },
   {
     "name": "Daycare NPC",
-    "spawns": [],
+    "spawns": [
+      { "pokemonId": 445, "minLevel": 1, "maxLevel": 1, "chance": 0.05 },],
     "challengeName": "Challenge 10",
     "areaId": "Daycare NPC",
     "unlocks": [
@@ -418,6 +428,7 @@ export const alolaRoutes = [
   {
     "name": "Route 5",
     "spawns": [
+      { "pokemonId": 447, "minLevel": 1, "maxLevel": 1, "chance": 0.05 },
       {
         "pokemonId": 674,
         "minLevel": 1,
@@ -460,7 +471,8 @@ export const alolaRoutes = [
   },
   {
     "name": "Captain Lana Boss Battle",
-    "spawns": [],
+    "spawns": [
+      { "pokemonId": 570, "minLevel": 1, "maxLevel": 1, "chance": 0.05 },],
     "challengeName": "Challenge 12",
     "areaId": "Captain Lana Boss Battle",
     "unlocks": [
@@ -473,6 +485,7 @@ export const alolaRoutes = [
   {
     "name": "Wela Volcano Park",
     "spawns": [
+      { "pokemonId": 439, "minLevel": 1, "maxLevel": 1, "chance": 0.05 },
       {
         "pokemonId": 661,
         "minLevel": 1,
@@ -512,7 +525,8 @@ export const alolaRoutes = [
   },
   {
     "name": "Captain Kiawe Boss Battle",
-    "spawns": [],
+    "spawns": [
+      { "pokemonId": 366, "minLevel": 1, "maxLevel": 1, "chance": 0.05 },],
     "challengeName": "Challenge 14",
     "areaId": "Captain Kiawe Boss Battle",
     "unlocks": [
@@ -525,6 +539,7 @@ export const alolaRoutes = [
   {
     "name": "Route 7",
     "spawns": [
+      { "pokemonId": 367, "minLevel": 1, "maxLevel": 1, "chance": 0.05 },
       {
         "pokemonId": 228,
         "minLevel": 1,
@@ -607,6 +622,7 @@ export const alolaRoutes = [
   {
     "name": "Route 8 Fossil Restoration Center Part 1",
     "spawns": [
+      { "pokemonId": 368, "minLevel": 1, "maxLevel": 1, "chance": 0.05 },
       {
         "pokemonId": 138,
         "minLevel": 32,
@@ -654,6 +670,7 @@ export const alolaRoutes = [
   {
     "name": "Lush Jungle North",
     "spawns": [
+      { "pokemonId": 550, "minLevel": 1, "maxLevel": 1, "chance": 0.05 },
       {
         "pokemonId": 704,
         "minLevel": 1,
@@ -730,6 +747,7 @@ export const alolaRoutes = [
   {
     "name": "Lush Jungle East Cave",
     "spawns": [
+      { "pokemonId": 309, "minLevel": 1, "maxLevel": 1, "chance": 0.05 },
       {
         "pokemonId": 42,
         "minLevel": 35,
@@ -793,7 +811,8 @@ export const alolaRoutes = [
   },
   {
     "name": "Captain Mallow Boss Battle",
-    "spawns": [],
+    "spawns": [
+      { "pokemonId": 592, "minLevel": 1, "maxLevel": 1, "chance": 0.05 },],
     "areaId": "Captain Mallow Boss Battle",
     "unlocks": [
       "Diglett's Tunnel"
@@ -804,6 +823,7 @@ export const alolaRoutes = [
   {
     "name": "Diglett's Tunnel",
     "spawns": [
+      { "pokemonId": 624, "minLevel": 1, "maxLevel": 1, "chance": 0.05 },
       {
         "pokemonId": 41,
         "minLevel": 38,
@@ -844,6 +864,7 @@ export const alolaRoutes = [
   {
     "name": "Akala Outskirts",
     "spawns": [
+      { "pokemonId": 690, "minLevel": 1, "maxLevel": 1, "chance": 0.05 },
       {
         "pokemonId": 735,
         "minLevel": 43,
@@ -904,7 +925,8 @@ export const alolaRoutes = [
   },
   {
     "name": "Kahuna Olivia Boss Battle",
-    "spawns": [],
+    "spawns": [
+      { "pokemonId": 692, "minLevel": 1, "maxLevel": 1, "chance": 0.05 },],
     "areaId": "Kahuna Olivia Boss Battle",
     "unlocks": [
       "Malie City"
@@ -915,6 +937,7 @@ export const alolaRoutes = [
   {
     "name": "Malie City",
     "spawns": [
+      { "pokemonId": 341, "minLevel": 1, "maxLevel": 1, "chance": 0.05 },
       {
         "pokemonId": 81,
         "minLevel": 48,
@@ -961,6 +984,7 @@ export const alolaRoutes = [
   {
     "name": "Mount Hokulani East",
     "spawns": [
+      { "pokemonId": 667, "minLevel": 1, "maxLevel": 1, "chance": 0.05 },
       {
         "pokemonId": 132,
         "minLevel": 1,
@@ -1006,7 +1030,8 @@ export const alolaRoutes = [
   },
   {
     "name": "Captain Sophocles Boss Battle",
-    "spawns": [],
+    "spawns": [
+      { "pokemonId": 108, "minLevel": 1, "maxLevel": 1, "chance": 0.05 },],
     "areaId": "Captain Sophocles Boss Battle",
     "unlocks": [
       "Tapu Village"
