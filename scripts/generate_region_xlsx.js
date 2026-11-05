@@ -106,8 +106,26 @@ async function processRegion(region, counter) {
         return;
     }
 if (!Array.isArray(routes)) {
-        routes = Object.values(routes);
+        routes = Object.keys(routes).map(key => {
+            const val = routes[key];
+            return {
+                name: key,
+                ...val
+            };
+        });
     }
+
+    // Normalize Hisui specific field names
+    routes.forEach(r => {
+        if (!r.spawns && r.pokes) {
+            r.spawns = r.pokes.map(p => ({
+                pokemonId: p.id,
+                minLevel: p.minLevel,
+                maxLevel: p.maxLevel,
+                chance: p.probability || p.chance || 0
+            }));
+        }
+    });
     if (!Array.isArray(unlocks)) {
         unlocks = Object.values(unlocks);
     }
