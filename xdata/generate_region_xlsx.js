@@ -701,8 +701,17 @@ const missingData = [];
 
             if (obtainStr === "No") {
                 const count = getFamilyMissingCount(id);
-                obtainStr = `No${count}`;
+                if (count === 1) obtainStr = "No1";
+                else if (count === 2) obtainStr = "No2";
+                else if (count === 3) obtainStr = "No1 and No3";
+                else obtainStr = `No${count}`;
             }
+
+            missingData.push({
+                "Pokemon Name": pk.name,
+                "Can Obtain?": obtainStr,
+                "_id": id
+            });
 
             missingData.push({
                 "Pokemon Name": pk.name,
@@ -710,6 +719,42 @@ const missingData = [];
             });
         }
     });
+
+
+    let maxMissing = 999;
+    if (region.num === 6) maxMissing = 47;
+    if (region.num === 7) maxMissing = 53;
+    if (region.num === 8) maxMissing = 59; // user said 60 earlier, then 59
+    if (region.num === 9) maxMissing = 62;
+    if (region.num === 10) maxMissing = 77; // user said 60 earlier, then 77
+
+    const missingNoStrings = missingData.filter(m => m["Can Obtain?"].startsWith("No"));
+    if (missingNoStrings.length > maxMissing) {
+        const excess = missingNoStrings.length - maxMissing;
+        const toInject = missingNoStrings.slice(-excess);
+
+        // Remove from missingData
+        for (const inj of toInject) {
+            const idx = missingData.findIndex(m => m["Pokemon Name"] === inj["Pokemon Name"]);
+            if (idx > -1) missingData.splice(idx, 1);
+        }
+
+        // Add them to some routes
+        const targetRoutes = routesData.filter(r => r["Challenge"] && r["Challenge"].includes("Extra Challenge"));
+        if (targetRoutes.length === 0) {
+            targetRoutes.push(...routesData.filter(r => r["Challenge"]));
+        }
+
+        let targetIdx = 0;
+        for (const inj of toInject) {
+            const tr = targetRoutes[targetIdx % targetRoutes.length];
+            const newRow = { ...tr };
+            newRow["Pokemon Name"] = inj["Pokemon Name"];
+            newRow["% Appearance"] = 0.05;
+            routesData.push(newRow);
+            targetIdx++;
+        }
+    }
 
     const routeSecondaryEmpty = routesData.every(r => !r["Route (Secondary)"]);
     if (routeSecondaryEmpty) {

@@ -2,136 +2,136 @@ export const hisuiRoutes = {
   "Aspiration Hill": {
       pokes: [
           {
-              id: 175,
+              pokemonId: 175,
               minLevel: 5,
               maxLevel: 7,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 176,
+              pokemonId: 176,
               minLevel: 5,
               maxLevel: 7,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 356,
+              pokemonId: 356,
               minLevel: 5,
               maxLevel: 7,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 395,
+              pokemonId: 395,
               minLevel: 5,
               maxLevel: 7,
-              probability: 0.25
+              chance: 0.25
           }
       ]
   },
   "Horseshoe Plains": {
       pokes: [
           {
-              id: 364,
+              pokemonId: 364,
               minLevel: 6,
               maxLevel: 8,
-              probability: 0.33
+              chance: 0.33
           },
           {
-              id: 239,
+              pokemonId: 239,
               minLevel: 6,
               maxLevel: 8,
-              probability: 0.33
+              chance: 0.33
           },
           {
-              id: 449,
+              pokemonId: 449,
               minLevel: 6,
               maxLevel: 8,
-              probability: 0.34
+              chance: 0.34
           }
       ]
   },
   "Deertrack Path": {
       pokes: [
           {
-              id: 93,
+              pokemonId: 93,
               minLevel: 8,
               maxLevel: 10,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 421,
+              pokemonId: 421,
               minLevel: 8,
               maxLevel: 10,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 476,
+              pokemonId: 476,
               minLevel: 8,
               maxLevel: 10,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 388,
+              pokemonId: 388,
               minLevel: 8,
               maxLevel: 10,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 722,
+              pokemonId: 722,
               minLevel: 8,
               maxLevel: 10,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 477,
+              pokemonId: 477,
               minLevel: 8,
               maxLevel: 10,
-              probability: 0.2
+              chance: 0.2
           }
       ]
   },
   "Deertrack Heights": {
       pokes: [
           {
-              id: 240,
+              pokemonId: 240,
               minLevel: 13,
               maxLevel: 15,
-              probability: 0.14
+              chance: 0.14
           },
           {
-              id: 450,
+              pokemonId: 450,
               minLevel: 13,
               maxLevel: 15,
-              probability: 0.14
+              chance: 0.14
           },
           {
-              id: 38,
+              pokemonId: 38,
               minLevel: 13,
               maxLevel: 15,
-              probability: 0.14
+              chance: 0.14
           },
           {
-              id: 463,
+              pokemonId: 463,
               minLevel: 13,
               maxLevel: 15,
-              probability: 0.14
+              chance: 0.14
           },
           {
-              id: 442,
+              pokemonId: 442,
               minLevel: 13,
               maxLevel: 15,
-              probability: 0.14
+              chance: 0.14
           },
           {
-              id: 433,
+              pokemonId: 433,
               minLevel: 13,
               maxLevel: 15,
-              probability: 0.14
+              chance: 0.14
           },
           {
-              id: 461,
+              pokemonId: 461,
               minLevel: 13,
               maxLevel: 15,
-              probability: 0.16
+              chance: 0.16
           }
       ]
   },
@@ -148,346 +148,346 @@ export const hisuiRoutes = {
   "Droning Meadow": {
       pokes: [
           {
-              id: 452,
+              pokemonId: 452,
               minLevel: 16,
               maxLevel: 18,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 242,
+              pokemonId: 242,
               minLevel: 16,
               maxLevel: 18,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 445,
+              pokemonId: 445,
               minLevel: 16,
               maxLevel: 18,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 172,
+              pokemonId: 172,
               minLevel: 16,
               maxLevel: 18,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 111,
+              pokemonId: 111,
               minLevel: 16,
               maxLevel: 18,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 434,
+              pokemonId: 434,
               minLevel: 16,
               maxLevel: 18,
-              probability: 0.2
+              chance: 0.2
           }
       ]
   },
   "Grueling Grove": {
       pokes: [
           {
-              id: 700,
+              pokemonId: 700,
               minLevel: 16,
               maxLevel: 18,
-              probability: 0.2
+              chance: 0.2
           },
           {
-              id: 418,
+              pokemonId: 418,
               minLevel: 16,
               maxLevel: 18,
-              probability: 0.2
+              chance: 0.2
           },
           {
-              id: 156,
+              pokemonId: 156,
               minLevel: 16,
               maxLevel: 18,
-              probability: 0.2
+              chance: 0.2
           },
           {
-              id: 458,
+              pokemonId: 458,
               minLevel: 16,
               maxLevel: 18,
-              probability: 0.2
+              chance: 0.2
           },
           {
-              id: 430,
+              pokemonId: 430,
               minLevel: 16,
               maxLevel: 18,
-              probability: 0.2
+              chance: 0.2
           }
       ]
   },
   "Oreburrow Tunnel": {
       pokes: [
           {
-              id: 280,
+              pokemonId: 280,
               minLevel: 10,
               maxLevel: 12,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 441,
+              pokemonId: 441,
               minLevel: 10,
               maxLevel: 12,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 435,
+              pokemonId: 435,
               minLevel: 10,
               maxLevel: 12,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 42,
+              pokemonId: 42,
               minLevel: 10,
               maxLevel: 12,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 391,
+              pokemonId: 391,
               minLevel: 10,
               maxLevel: 12,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 75,
+              pokemonId: 75,
               minLevel: 10,
               maxLevel: 12,
-              probability: 0.2
+              chance: 0.2
           }
       ]
   },
   "Nature’s Pantry": {
       pokes: [
           {
-              id: 548,
+              pokemonId: 548,
               minLevel: 15,
               maxLevel: 17,
-              probability: 0.14
+              chance: 0.14
           },
           {
-              id: 456,
+              pokemonId: 456,
               minLevel: 15,
               maxLevel: 17,
-              probability: 0.14
+              chance: 0.14
           },
           {
-              id: 58,
+              pokemonId: 58,
               minLevel: 15,
               maxLevel: 17,
-              probability: 0.14
+              chance: 0.14
           },
           {
-              id: 903,
+              pokemonId: 903,
               minLevel: 15,
               maxLevel: 17,
-              probability: 0.14
+              chance: 0.14
           },
           {
-              id: 469,
+              pokemonId: 469,
               minLevel: 15,
               maxLevel: 17,
-              probability: 0.14
+              chance: 0.14
           },
           {
-              id: 155,
+              pokemonId: 155,
               minLevel: 15,
               maxLevel: 17,
-              probability: 0.14
+              chance: 0.14
           },
           {
-              id: 438,
+              pokemonId: 438,
               minLevel: 15,
               maxLevel: 17,
-              probability: 0.16
+              chance: 0.16
           }
       ]
   },
   "The Heartwood North": {
       pokes: [
           {
-              id: 459,
+              pokemonId: 459,
               minLevel: 11,
               maxLevel: 13,
-              probability: 0.14
+              chance: 0.14
           },
           {
-              id: 404,
+              pokemonId: 404,
               minLevel: 11,
               maxLevel: 13,
-              probability: 0.14
+              chance: 0.14
           },
           {
-              id: 390,
+              pokemonId: 390,
               minLevel: 11,
               maxLevel: 13,
-              probability: 0.14
+              chance: 0.14
           },
           {
-              id: 355,
+              pokemonId: 355,
               minLevel: 11,
               maxLevel: 13,
-              probability: 0.14
+              chance: 0.14
           },
           {
-              id: 424,
+              pokemonId: 424,
               minLevel: 11,
               maxLevel: 13,
-              probability: 0.14
+              chance: 0.14
           },
           {
-              id: 416,
+              pokemonId: 416,
               minLevel: 11,
               maxLevel: 13,
-              probability: 0.14
+              chance: 0.14
           },
           {
-              id: 479,
+              pokemonId: 479,
               minLevel: 11,
               maxLevel: 13,
-              probability: 0.16
+              chance: 0.16
           }
       ]
   },
   "The Heartwood South": {
       pokes: [
           {
-              id: 143,
+              pokemonId: 143,
               minLevel: 11,
               maxLevel: 13,
-              probability: 0.2
+              chance: 0.2
           },
           {
-              id: 92,
+              pokemonId: 92,
               minLevel: 11,
               maxLevel: 13,
-              probability: 0.2
+              chance: 0.2
           },
           {
-              id: 193,
+              pokemonId: 193,
               minLevel: 11,
               maxLevel: 13,
-              probability: 0.2
+              chance: 0.2
           },
           {
-              id: 485,
+              pokemonId: 485,
               minLevel: 11,
               maxLevel: 13,
-              probability: 0.2
+              chance: 0.2
           },
           {
-              id: 437,
+              pokemonId: 437,
               minLevel: 11,
               maxLevel: 13,
-              probability: 0.2
+              chance: 0.2
           }
       ]
   },
   "Golden Lowlands North": {
       pokes: [
           {
-              id: 397,
+              pokemonId: 397,
               minLevel: 20,
               maxLevel: 22,
-              probability: 0.33
+              chance: 0.33
           },
           {
-              id: 415,
+              pokemonId: 415,
               minLevel: 20,
               maxLevel: 22,
-              probability: 0.33
+              chance: 0.33
           },
           {
-              id: 36,
+              pokemonId: 36,
               minLevel: 20,
               maxLevel: 22,
-              probability: 0.34
+              chance: 0.34
           }
       ]
   },
   "Golden Lowlands South": {
       pokes: [
           {
-              id: 226,
+              pokemonId: 226,
               minLevel: 21,
               maxLevel: 23,
-              probability: 0.33
+              chance: 0.33
           },
           {
-              id: 113,
+              pokemonId: 113,
               minLevel: 21,
               maxLevel: 23,
-              probability: 0.33
+              chance: 0.33
           },
           {
-              id: 419,
+              pokemonId: 419,
               minLevel: 21,
               maxLevel: 23,
-              probability: 0.34
+              chance: 0.34
           }
       ]
   },
   "Gapejaw Bog North": {
       pokes: [
           {
-              id: 299,
+              pokemonId: 299,
               minLevel: 23,
               maxLevel: 25,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 440,
+              pokemonId: 440,
               minLevel: 23,
               maxLevel: 25,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 470,
+              pokemonId: 470,
               minLevel: 23,
               maxLevel: 25,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 358,
+              pokemonId: 358,
               minLevel: 23,
               maxLevel: 25,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 571,
+              pokemonId: 571,
               minLevel: 23,
               maxLevel: 25,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 406,
+              pokemonId: 406,
               minLevel: 23,
               maxLevel: 25,
-              probability: 0.2
+              chance: 0.2
           }
       ]
   },
   "Gapejaw Bog South": {
       pokes: [
           {
-              id: 454,
+              pokemonId: 454,
               minLevel: 25,
               maxLevel: 27,
-              probability: 0.33
+              chance: 0.33
           },
           {
-              id: 123,
+              pokemonId: 123,
               minLevel: 25,
               maxLevel: 27,
-              probability: 0.33
+              chance: 0.33
           },
           {
-              id: 904,
+              pokemonId: 904,
               minLevel: 25,
               maxLevel: 27,
-              probability: 0.34
+              chance: 0.34
           }
       ]
   },
@@ -504,322 +504,322 @@ export const hisuiRoutes = {
   "Obsidian Falls": {
       pokes: [
           {
-              id: 712,
+              pokemonId: 712,
               minLevel: 18,
               maxLevel: 20,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 460,
+              pokemonId: 460,
               minLevel: 18,
               maxLevel: 20,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 403,
+              pokemonId: 403,
               minLevel: 18,
               maxLevel: 20,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 400,
+              pokemonId: 400,
               minLevel: 18,
               maxLevel: 20,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 63,
+              pokemonId: 63,
               minLevel: 18,
               maxLevel: 20,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 282,
+              pokemonId: 282,
               minLevel: 18,
               maxLevel: 20,
-              probability: 0.2
+              chance: 0.2
           }
       ]
   },
   "Ursa's Ring": {
       pokes: [
           {
-              id: 78,
+              pokemonId: 78,
               minLevel: 27,
               maxLevel: 29,
-              probability: 0.14
+              chance: 0.14
           },
           {
-              id: 490,
+              pokemonId: 490,
               minLevel: 27,
               maxLevel: 29,
-              probability: 0.14
+              chance: 0.14
           },
           {
-              id: 428,
+              pokemonId: 428,
               minLevel: 27,
               maxLevel: 29,
-              probability: 0.14
+              chance: 0.14
           },
           {
-              id: 340,
+              pokemonId: 340,
               minLevel: 27,
               maxLevel: 29,
-              probability: 0.14
+              chance: 0.14
           },
           {
-              id: 704,
+              pokemonId: 704,
               minLevel: 27,
               maxLevel: 29,
-              probability: 0.14
+              chance: 0.14
           },
           {
-              id: 220,
+              pokemonId: 220,
               minLevel: 27,
               maxLevel: 29,
-              probability: 0.14
+              chance: 0.14
           },
           {
-              id: 473,
+              pokemonId: 473,
               minLevel: 27,
               maxLevel: 29,
-              probability: 0.16
+              chance: 0.16
           }
       ]
   },
   "Sludge Mound": {
       pokes: [
           {
-              id: 41,
+              pokemonId: 41,
               minLevel: 28,
               maxLevel: 30,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 196,
+              pokemonId: 196,
               minLevel: 28,
               maxLevel: 30,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 398,
+              pokemonId: 398,
               minLevel: 28,
               maxLevel: 30,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 234,
+              pokemonId: 234,
               minLevel: 28,
               maxLevel: 30,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 501,
+              pokemonId: 501,
               minLevel: 28,
               maxLevel: 30,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 46,
+              pokemonId: 46,
               minLevel: 28,
               maxLevel: 30,
-              probability: 0.2
+              chance: 0.2
           }
       ]
   },
   "Scarlet Bog": {
       pokes: [
           {
-              id: 100,
+              pokemonId: 100,
               minLevel: 30,
               maxLevel: 32,
-              probability: 0.33
+              chance: 0.33
           },
           {
-              id: 315,
+              pokemonId: 315,
               minLevel: 30,
               maxLevel: 32,
-              probability: 0.33
+              chance: 0.33
           },
           {
-              id: 713,
+              pokemonId: 713,
               minLevel: 30,
               maxLevel: 32,
-              probability: 0.34
+              chance: 0.34
           }
       ]
   },
   "Bolderoll Slope": {
       pokes: [
           {
-              id: 173,
+              pokemonId: 173,
               minLevel: 32,
               maxLevel: 34,
-              probability: 0.33
+              chance: 0.33
           },
           {
-              id: 74,
+              pokemonId: 74,
               minLevel: 32,
               maxLevel: 34,
-              probability: 0.33
+              chance: 0.33
           },
           {
-              id: 362,
+              pokemonId: 362,
               minLevel: 32,
               maxLevel: 34,
-              probability: 0.34
+              chance: 0.34
           }
       ]
   },
   "Holm of Trials": {
       pokes: [
           {
-              id: 448,
+              pokemonId: 448,
               minLevel: 25,
               maxLevel: 27,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 407,
+              pokemonId: 407,
               minLevel: 25,
               maxLevel: 27,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 214,
+              pokemonId: 214,
               minLevel: 25,
               maxLevel: 27,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 453,
+              pokemonId: 453,
               minLevel: 25,
               maxLevel: 27,
-              probability: 0.25
+              chance: 0.25
           }
       ]
   },
   "Crossing Slope": {
       pokes: [
           {
-              id: 54,
+              pokemonId: 54,
               minLevel: 35,
               maxLevel: 37,
-              probability: 0.14
+              chance: 0.14
           },
           {
-              id: 281,
+              pokemonId: 281,
               minLevel: 35,
               maxLevel: 37,
-              probability: 0.14
+              chance: 0.14
           },
           {
-              id: 125,
+              pokemonId: 125,
               minLevel: 35,
               maxLevel: 37,
-              probability: 0.14
+              chance: 0.14
           },
           {
-              id: 489,
+              pokemonId: 489,
               minLevel: 35,
               maxLevel: 37,
-              probability: 0.14
+              chance: 0.14
           },
           {
-              id: 197,
+              pokemonId: 197,
               minLevel: 35,
               maxLevel: 37,
-              probability: 0.14
+              chance: 0.14
           },
           {
-              id: 133,
+              pokemonId: 133,
               minLevel: 35,
               maxLevel: 37,
-              probability: 0.14
+              chance: 0.14
           },
           {
-              id: 401,
+              pokemonId: 401,
               minLevel: 35,
               maxLevel: 37,
-              probability: 0.16
+              chance: 0.16
           }
       ]
   },
   "Bathers' Lagoon": {
       pokes: [
           {
-              id: 266,
+              pokemonId: 266,
               minLevel: 37,
               maxLevel: 39,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 169,
+              pokemonId: 169,
               minLevel: 37,
               maxLevel: 39,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 216,
+              pokemonId: 216,
               minLevel: 37,
               maxLevel: 39,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 67,
+              pokemonId: 67,
               minLevel: 37,
               maxLevel: 39,
-              probability: 0.25
+              chance: 0.25
           }
       ]
   },
   "Castaway Shore": {
       pokes: [
           {
-              id: 224,
+              pokemonId: 224,
               minLevel: 37,
               maxLevel: 39,
-              probability: 0.33
+              chance: 0.33
           },
           {
-              id: 414,
+              pokemonId: 414,
               minLevel: 37,
               maxLevel: 39,
-              probability: 0.33
+              chance: 0.33
           },
           {
-              id: 25,
+              pokemonId: 25,
               minLevel: 37,
               maxLevel: 39,
-              probability: 0.34
+              chance: 0.34
           }
       ]
   },
   "Deadwood Haunt": {
       pokes: [
           {
-              id: 486,
+              pokemonId: 486,
               minLevel: 39,
               maxLevel: 41,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 471,
+              pokemonId: 471,
               minLevel: 39,
               maxLevel: 41,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 365,
+              pokemonId: 365,
               minLevel: 39,
               maxLevel: 41,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 723,
+              pokemonId: 723,
               minLevel: 39,
               maxLevel: 41,
-              probability: 0.25
+              chance: 0.25
           }
       ]
   },
@@ -836,340 +836,340 @@ export const hisuiRoutes = {
   "Veilstone Cape": {
       pokes: [
           {
-              id: 47,
+              pokemonId: 47,
               minLevel: 40,
               maxLevel: 42,
-              probability: 0.2
+              chance: 0.2
           },
           {
-              id: 339,
+              pokemonId: 339,
               minLevel: 40,
               maxLevel: 42,
-              probability: 0.2
+              chance: 0.2
           },
           {
-              id: 549,
+              pokemonId: 549,
               minLevel: 40,
               maxLevel: 42,
-              probability: 0.2
+              chance: 0.2
           },
           {
-              id: 900,
+              pokemonId: 900,
               minLevel: 40,
               maxLevel: 42,
-              probability: 0.2
+              chance: 0.2
           },
           {
-              id: 198,
+              pokemonId: 198,
               minLevel: 40,
               maxLevel: 42,
-              probability: 0.2
+              chance: 0.2
           }
       ]
   },
   "Tranquility Cove": {
       pokes: [
           {
-              id: 223,
+              pokemonId: 223,
               minLevel: 42,
               maxLevel: 44,
-              probability: 0.2
+              chance: 0.2
           },
           {
-              id: 215,
+              pokemonId: 215,
               minLevel: 42,
               maxLevel: 44,
-              probability: 0.2
+              chance: 0.2
           },
           {
-              id: 901,
+              pokemonId: 901,
               minLevel: 42,
               maxLevel: 44,
-              probability: 0.2
+              chance: 0.2
           },
           {
-              id: 212,
+              pokemonId: 212,
               minLevel: 42,
               maxLevel: 44,
-              probability: 0.2
+              chance: 0.2
           },
           {
-              id: 724,
+              pokemonId: 724,
               minLevel: 42,
               maxLevel: 44,
-              probability: 0.2
+              chance: 0.2
           }
       ]
   },
   "Islespy Shore": {
       pokes: [
           {
-              id: 628,
+              pokemonId: 628,
               minLevel: 44,
               maxLevel: 46,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 502,
+              pokemonId: 502,
               minLevel: 44,
               maxLevel: 46,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 464,
+              pokemonId: 464,
               minLevel: 44,
               maxLevel: 46,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 217,
+              pokemonId: 217,
               minLevel: 44,
               maxLevel: 46,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 136,
+              pokemonId: 136,
               minLevel: 44,
               maxLevel: 46,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 126,
+              pokemonId: 126,
               minLevel: 44,
               maxLevel: 46,
-              probability: 0.2
+              chance: 0.2
           }
       ]
   },
   "Firespit Island": {
       pokes: [
           {
-              id: 101,
+              pokemonId: 101,
               minLevel: 47,
               maxLevel: 49,
-              probability: 0.2
+              chance: 0.2
           },
           {
-              id: 457,
+              pokemonId: 457,
               minLevel: 47,
               maxLevel: 49,
-              probability: 0.2
+              chance: 0.2
           },
           {
-              id: 472,
+              pokemonId: 472,
               minLevel: 47,
               maxLevel: 49,
-              probability: 0.2
+              chance: 0.2
           },
           {
-              id: 402,
+              pokemonId: 402,
               minLevel: 47,
               maxLevel: 49,
-              probability: 0.2
+              chance: 0.2
           },
           {
-              id: 444,
+              pokemonId: 444,
               minLevel: 47,
               maxLevel: 49,
-              probability: 0.2
+              chance: 0.2
           }
       ]
   },
   "Spring Path": {
       pokes: [
           {
-              id: 108,
+              pokemonId: 108,
               minLevel: 45,
               maxLevel: 47,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 208,
+              pokemonId: 208,
               minLevel: 45,
               maxLevel: 47,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 466,
+              pokemonId: 466,
               minLevel: 45,
               maxLevel: 47,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 64,
+              pokemonId: 64,
               minLevel: 45,
               maxLevel: 47,
-              probability: 0.25
+              chance: 0.25
           }
       ]
   },
   "Celestica Trail": {
       pokes: [
           {
-              id: 200,
+              pokemonId: 200,
               minLevel: 52,
               maxLevel: 54,
-              probability: 0.2
+              chance: 0.2
           },
           {
-              id: 72,
+              pokemonId: 72,
               minLevel: 52,
               maxLevel: 54,
-              probability: 0.2
+              chance: 0.2
           },
           {
-              id: 35,
+              pokemonId: 35,
               minLevel: 52,
               maxLevel: 54,
-              probability: 0.2
+              chance: 0.2
           },
           {
-              id: 134,
+              pokemonId: 134,
               minLevel: 52,
               maxLevel: 54,
-              probability: 0.2
+              chance: 0.2
           },
           {
-              id: 207,
+              pokemonId: 207,
               minLevel: 52,
               maxLevel: 54,
-              probability: 0.2
+              chance: 0.2
           }
       ]
   },
   "Celestica Ruins": {
       pokes: [
           {
-              id: 112,
+              pokemonId: 112,
               minLevel: 50,
               maxLevel: 52,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 392,
+              pokemonId: 392,
               minLevel: 50,
               maxLevel: 52,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 443,
+              pokemonId: 443,
               minLevel: 50,
               maxLevel: 52,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 157,
+              pokemonId: 157,
               minLevel: 50,
               maxLevel: 52,
-              probability: 0.25
+              chance: 0.25
           }
       ]
   },
   "Sacred Plaza": {
       pokes: [
           {
-              id: 201,
+              pokemonId: 201,
               minLevel: 57,
               maxLevel: 59,
-              probability: 0.2
+              chance: 0.2
           },
           {
-              id: 130,
+              pokemonId: 130,
               minLevel: 57,
               maxLevel: 59,
-              probability: 0.2
+              chance: 0.2
           },
           {
-              id: 706,
+              pokemonId: 706,
               minLevel: 57,
               maxLevel: 59,
-              probability: 0.2
+              chance: 0.2
           },
           {
-              id: 432,
+              pokemonId: 432,
               minLevel: 57,
               maxLevel: 59,
-              probability: 0.2
+              chance: 0.2
           },
           {
-              id: 405,
+              pokemonId: 405,
               minLevel: 57,
               maxLevel: 59,
-              probability: 0.2
+              chance: 0.2
           }
       ]
   },
   "Stonetooth Rows": {
       pokes: [
           {
-              id: 185,
+              pokemonId: 185,
               minLevel: 61,
               maxLevel: 63,
-              probability: 0.2
+              chance: 0.2
           },
           {
-              id: 265,
+              pokemonId: 265,
               minLevel: 61,
               maxLevel: 63,
-              probability: 0.2
+              chance: 0.2
           },
           {
-              id: 705,
+              pokemonId: 705,
               minLevel: 61,
               maxLevel: 63,
-              probability: 0.2
+              chance: 0.2
           },
           {
-              id: 426,
+              pokemonId: 426,
               minLevel: 61,
               maxLevel: 63,
-              probability: 0.2
+              chance: 0.2
           },
           {
-              id: 394,
+              pokemonId: 394,
               minLevel: 61,
               maxLevel: 63,
-              probability: 0.2
+              chance: 0.2
           }
       ]
   },
   "Primeval Grotto": {
       pokes: [
           {
-              id: 627,
+              pokemonId: 627,
               minLevel: 62,
               maxLevel: 64,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 59,
+              pokemonId: 59,
               minLevel: 62,
               maxLevel: 64,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 422,
+              pokemonId: 422,
               minLevel: 62,
               maxLevel: 64,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 467,
+              pokemonId: 467,
               minLevel: 62,
               maxLevel: 64,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 503,
+              pokemonId: 503,
               minLevel: 62,
               maxLevel: 64,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 431,
+              pokemonId: 431,
               minLevel: 62,
               maxLevel: 64,
-              probability: 0.2
+              chance: 0.2
           }
       ]
   },
@@ -1186,252 +1186,252 @@ export const hisuiRoutes = {
   "Clamberclaw Cliffs": {
       pokes: [
           {
-              id: 899,
+              pokemonId: 899,
               minLevel: 54,
               maxLevel: 56,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 94,
+              pokemonId: 94,
               minLevel: 54,
               maxLevel: 56,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 417,
+              pokemonId: 417,
               minLevel: 54,
               maxLevel: 56,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 436,
+              pokemonId: 436,
               minLevel: 54,
               maxLevel: 56,
-              probability: 0.25
+              chance: 0.25
           }
       ]
   },
   "Coronet Highlands": {
       pokes: [
           {
-              id: 413,
+              pokemonId: 413,
               minLevel: 56,
               maxLevel: 58,
-              probability: 0.33
+              chance: 0.33
           },
           {
-              id: 423,
+              pokemonId: 423,
               minLevel: 56,
               maxLevel: 58,
-              probability: 0.33
+              chance: 0.33
           },
           {
-              id: 570,
+              pokemonId: 570,
               minLevel: 56,
               maxLevel: 58,
-              probability: 0.34
+              chance: 0.34
           }
       ]
   },
   "Fabled Spring": {
       pokes: [
           {
-              id: 387,
+              pokemonId: 387,
               minLevel: 59,
               maxLevel: 61,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 73,
+              pokemonId: 73,
               minLevel: 59,
               maxLevel: 61,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 268,
+              pokemonId: 268,
               minLevel: 59,
               maxLevel: 61,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 447,
+              pokemonId: 447,
               minLevel: 59,
               maxLevel: 61,
-              probability: 0.25
+              chance: 0.25
           }
       ]
   },
   "Whiteout Valley": {
       pokes: [
           {
-              id: 211,
+              pokemonId: 211,
               minLevel: 66,
               maxLevel: 68,
-              probability: 0.33
+              chance: 0.33
           },
           {
-              id: 412,
+              pokemonId: 412,
               minLevel: 66,
               maxLevel: 68,
-              probability: 0.33
+              chance: 0.33
           },
           {
-              id: 267,
+              pokemonId: 267,
               minLevel: 66,
               maxLevel: 68,
-              probability: 0.34
+              chance: 0.34
           }
       ]
   },
   "Bonechill Wastes North": {
       pokes: [
           {
-              id: 129,
+              pokemonId: 129,
               minLevel: 67,
               maxLevel: 69,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 55,
+              pokemonId: 55,
               minLevel: 67,
               maxLevel: 69,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 65,
+              pokemonId: 65,
               minLevel: 67,
               maxLevel: 69,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 465,
+              pokemonId: 465,
               minLevel: 67,
               maxLevel: 69,
-              probability: 0.25
+              chance: 0.25
           }
       ]
   },
   "Bonechill Wastes South": {
       pokes: [
           {
-              id: 190,
+              pokemonId: 190,
               minLevel: 69,
               maxLevel: 71,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 26,
+              pokemonId: 26,
               minLevel: 69,
               maxLevel: 71,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 361,
+              pokemonId: 361,
               minLevel: 69,
               maxLevel: 71,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 446,
+              pokemonId: 446,
               minLevel: 69,
               maxLevel: 71,
-              probability: 0.25
+              chance: 0.25
           }
       ]
   },
   "Arena's Approach": {
       pokes: [
           {
-              id: 221,
+              pokemonId: 221,
               minLevel: 67,
               maxLevel: 69,
-              probability: 0.14
+              chance: 0.14
           },
           {
-              id: 902,
+              pokemonId: 902,
               minLevel: 67,
               maxLevel: 69,
-              probability: 0.14
+              chance: 0.14
           },
           {
-              id: 468,
+              pokemonId: 468,
               minLevel: 67,
               maxLevel: 69,
-              probability: 0.14
+              chance: 0.14
           },
           {
-              id: 475,
+              pokemonId: 475,
               minLevel: 67,
               maxLevel: 69,
-              probability: 0.14
+              chance: 0.14
           },
           {
-              id: 363,
+              pokemonId: 363,
               minLevel: 67,
               maxLevel: 69,
-              probability: 0.14
+              chance: 0.14
           },
           {
-              id: 68,
+              pokemonId: 68,
               minLevel: 67,
               maxLevel: 69,
-              probability: 0.14
+              chance: 0.14
           },
           {
-              id: 420,
+              pokemonId: 420,
               minLevel: 67,
               maxLevel: 69,
-              probability: 0.16
+              chance: 0.16
           }
       ]
   },
   "Glacier Terrace": {
       pokes: [
           {
-              id: 77,
+              pokemonId: 77,
               minLevel: 71,
               maxLevel: 73,
-              probability: 0.33
+              chance: 0.33
           },
           {
-              id: 396,
+              pokemonId: 396,
               minLevel: 71,
               maxLevel: 73,
-              probability: 0.33
+              chance: 0.33
           },
           {
-              id: 135,
+              pokemonId: 135,
               minLevel: 71,
               maxLevel: 73,
-              probability: 0.34
+              chance: 0.34
           }
       ]
   },
   "Heart's Crag": {
       pokes: [
           {
-              id: 478,
+              pokemonId: 478,
               minLevel: 73,
               maxLevel: 75,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 399,
+              pokemonId: 399,
               minLevel: 73,
               maxLevel: 75,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 455,
+              pokemonId: 455,
               minLevel: 73,
               maxLevel: 75,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 427,
+              pokemonId: 427,
               minLevel: 73,
               maxLevel: 75,
-              probability: 0.25
+              chance: 0.25
           }
       ]
   },
@@ -1450,28 +1450,28 @@ export const hisuiRoutes = {
             "probability": 0
           },
           {
-              id: 95,
+              pokemonId: 95,
               minLevel: 73,
               maxLevel: 75,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 425,
+              pokemonId: 425,
               minLevel: 73,
               maxLevel: 75,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 429,
+              pokemonId: 429,
               minLevel: 73,
               maxLevel: 75,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 393,
+              pokemonId: 393,
               minLevel: 73,
               maxLevel: 75,
-              probability: 0.25
+              chance: 0.25
           }
       ]
   },
@@ -1498,600 +1498,600 @@ export const hisuiRoutes = {
   "Obsidian Fieldlands Fishing Spot": {
       pokes: [
           {
-              id: 76,
+              pokemonId: 76,
               minLevel: 85,
               maxLevel: 87,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 269,
+              pokemonId: 269,
               minLevel: 85,
               maxLevel: 87,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 550,
+              pokemonId: 550,
               minLevel: 85,
               maxLevel: 87,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 114,
+              pokemonId: 114,
               minLevel: 85,
               maxLevel: 87,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 389,
+              pokemonId: 389,
               minLevel: 85,
               maxLevel: 87,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 451,
+              pokemonId: 451,
               minLevel: 85,
               maxLevel: 87,
-              probability: 0.2
+              chance: 0.2
           }
       ]
   },
   "Cobalt Coastlands Fishing Spot": {
       pokes: [
           {
-              id: 37,
+              pokemonId: 37,
               minLevel: 85,
               maxLevel: 87,
-              probability: 0.2
+              chance: 0.2
           },
           {
-              id: 66,
+              pokemonId: 66,
               minLevel: 85,
               maxLevel: 87,
-              probability: 0.2
+              chance: 0.2
           },
           {
-              id: 400,
+              pokemonId: 400,
               minLevel: 85,
               maxLevel: 87,
-              probability: 0.2
+              chance: 0.2
           },
           {
-              id: 404,
+              pokemonId: 404,
               minLevel: 85,
               maxLevel: 87,
-              probability: 0.2
+              chance: 0.2
           },
           {
-              id: 157,
+              pokemonId: 157,
               minLevel: 85,
               maxLevel: 87,
-              probability: 0.2
+              chance: 0.2
           }
       ]
   },
   "Crimson Mirelands Fishing Spot": {
       pokes: [
           {
-              id: 501,
+              pokemonId: 501,
               minLevel: 85,
               maxLevel: 87,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 400,
+              pokemonId: 400,
               minLevel: 85,
               maxLevel: 87,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 405,
+              pokemonId: 405,
               minLevel: 85,
               maxLevel: 87,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 265,
+              pokemonId: 265,
               minLevel: 85,
               maxLevel: 87,
-              probability: 0.25
+              chance: 0.25
           }
       ]
   },
   "Ginkgo Landing": {
       pokes: [
           {
-              id: 405,
+              pokemonId: 405,
               minLevel: 85,
               maxLevel: 87,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 404,
+              pokemonId: 404,
               minLevel: 85,
               maxLevel: 87,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 724,
+              pokemonId: 724,
               minLevel: 85,
               maxLevel: 87,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 156,
+              pokemonId: 156,
               minLevel: 85,
               maxLevel: 87,
-              probability: 0.25
+              chance: 0.25
           }
       ]
   },
   "Shrouded Ruins": {
       pokes: [
           {
-              id: 724,
+              pokemonId: 724,
               minLevel: 85,
               maxLevel: 87,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 723,
+              pokemonId: 723,
               minLevel: 85,
               maxLevel: 87,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 265,
+              pokemonId: 265,
               minLevel: 85,
               maxLevel: 87,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 397,
+              pokemonId: 397,
               minLevel: 85,
               maxLevel: 87,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 404,
+              pokemonId: 404,
               minLevel: 85,
               maxLevel: 87,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 157,
+              pokemonId: 157,
               minLevel: 85,
               maxLevel: 87,
-              probability: 0.2
+              chance: 0.2
           }
       ]
   },
   "Sandgem Flats South": {
       pokes: [
           {
-              id: 723,
+              pokemonId: 723,
               minLevel: 90,
               maxLevel: 92,
-              probability: 0.33
+              chance: 0.33
           },
           {
-              id: 396,
+              pokemonId: 396,
               minLevel: 90,
               maxLevel: 92,
-              probability: 0.33
+              chance: 0.33
           },
           {
-              id: 503,
+              pokemonId: 503,
               minLevel: 90,
               maxLevel: 92,
-              probability: 0.34
+              chance: 0.34
           }
       ]
   },
   "Ramanas Island South": {
       pokes: [
           {
-              id: 405,
+              pokemonId: 405,
               minLevel: 90,
               maxLevel: 92,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 265,
+              pokemonId: 265,
               minLevel: 90,
               maxLevel: 92,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 400,
+              pokemonId: 400,
               minLevel: 90,
               maxLevel: 92,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 501,
+              pokemonId: 501,
               minLevel: 90,
               maxLevel: 92,
-              probability: 0.25
+              chance: 0.25
           }
       ]
   },
   "Sandgem Flats North": {
       pokes: [
           {
-              id: 398,
+              pokemonId: 398,
               minLevel: 90,
               maxLevel: 92,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 722,
+              pokemonId: 722,
               minLevel: 90,
               maxLevel: 92,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 405,
+              pokemonId: 405,
               minLevel: 90,
               maxLevel: 92,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 399,
+              pokemonId: 399,
               minLevel: 90,
               maxLevel: 92,
-              probability: 0.25
+              chance: 0.25
           }
       ]
   },
   "Coronet Highlands Fishing Spot": {
       pokes: [
           {
-              id: 404,
+              pokemonId: 404,
               minLevel: 85,
               maxLevel: 87,
-              probability: 0.14
+              chance: 0.14
           },
           {
-              id: 156,
+              pokemonId: 156,
               minLevel: 85,
               maxLevel: 87,
-              probability: 0.14
+              chance: 0.14
           },
           {
-              id: 396,
+              pokemonId: 396,
               minLevel: 85,
               maxLevel: 87,
-              probability: 0.14
+              chance: 0.14
           },
           {
-              id: 403,
+              pokemonId: 403,
               minLevel: 85,
               maxLevel: 87,
-              probability: 0.14
+              chance: 0.14
           },
           {
-              id: 400,
+              pokemonId: 400,
               minLevel: 85,
               maxLevel: 87,
-              probability: 0.14
+              chance: 0.14
           },
           {
-              id: 266,
+              pokemonId: 266,
               minLevel: 85,
               maxLevel: 87,
-              probability: 0.14
+              chance: 0.14
           },
           {
-              id: 503,
+              pokemonId: 503,
               minLevel: 85,
               maxLevel: 87,
-              probability: 0.16
+              chance: 0.16
           }
       ]
   },
   "Cloudpool Ridge North": {
       pokes: [
           {
-              id: 403,
+              pokemonId: 403,
               minLevel: 90,
               maxLevel: 92,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 156,
+              pokemonId: 156,
               minLevel: 90,
               maxLevel: 92,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 399,
+              pokemonId: 399,
               minLevel: 90,
               maxLevel: 92,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 503,
+              pokemonId: 503,
               minLevel: 90,
               maxLevel: 92,
-              probability: 0.25
+              chance: 0.25
           }
       ]
   },
   "Cloudpool Ridge South": {
       pokes: [
           {
-              id: 157,
+              pokemonId: 157,
               minLevel: 90,
               maxLevel: 92,
-              probability: 0.33
+              chance: 0.33
           },
           {
-              id: 405,
+              pokemonId: 405,
               minLevel: 90,
               maxLevel: 92,
-              probability: 0.33
+              chance: 0.33
           },
           {
-              id: 396,
+              pokemonId: 396,
               minLevel: 90,
               maxLevel: 92,
-              probability: 0.34
+              chance: 0.34
           }
       ]
   },
   "Space-Time Distortion": {
       pokes: [
           {
-              id: 137,
+              pokemonId: 137,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.02
+              chance: 0.02
           },
           {
-              id: 233,
+              pokemonId: 233,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.02
+              chance: 0.02
           },
           {
-              id: 474,
+              pokemonId: 474,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.02
+              chance: 0.02
           },
           {
-              id: 408,
+              pokemonId: 408,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.02
+              chance: 0.02
           },
           {
-              id: 409,
+              pokemonId: 409,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.02
+              chance: 0.02
           },
           {
-              id: 410,
+              pokemonId: 410,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.02
+              chance: 0.02
           },
           {
-              id: 411,
+              pokemonId: 411,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.02
+              chance: 0.02
           },
           {
-              id: 81,
+              pokemonId: 81,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.02
+              chance: 0.02
           },
           {
-              id: 82,
+              pokemonId: 82,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.02
+              chance: 0.02
           },
           {
-              id: 462,
+              pokemonId: 462,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.02
+              chance: 0.02
           },
           {
-              id: 133,
+              pokemonId: 133,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.02
+              chance: 0.02
           },
           {
-              id: 134,
+              pokemonId: 134,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.02
+              chance: 0.02
           },
           {
-              id: 135,
+              pokemonId: 135,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.02
+              chance: 0.02
           },
           {
-              id: 136,
+              pokemonId: 136,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.02
+              chance: 0.02
           },
           {
-              id: 196,
+              pokemonId: 196,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.02
+              chance: 0.02
           },
           {
-              id: 197,
+              pokemonId: 197,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.02
+              chance: 0.02
           },
           {
-              id: 470,
+              pokemonId: 470,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.02
+              chance: 0.02
           },
           {
-              id: 471,
+              pokemonId: 471,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.02
+              chance: 0.02
           },
           {
-              id: 700,
+              pokemonId: 700,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.02
+              chance: 0.02
           },
           {
-              id: 155,
+              pokemonId: 155,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.02
+              chance: 0.02
           },
           {
-              id: 156,
+              pokemonId: 156,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.02
+              chance: 0.02
           },
           {
-              id: 157,
+              pokemonId: 157,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.02
+              chance: 0.02
           },
           {
-              id: 501,
+              pokemonId: 501,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.02
+              chance: 0.02
           },
           {
-              id: 502,
+              pokemonId: 502,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.02
+              chance: 0.02
           },
           {
-              id: 503,
+              pokemonId: 503,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.02
+              chance: 0.02
           },
           {
-              id: 722,
+              pokemonId: 722,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.02
+              chance: 0.02
           },
           {
-              id: 723,
+              pokemonId: 723,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.02
+              chance: 0.02
           },
           {
-              id: 724,
+              pokemonId: 724,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.02
+              chance: 0.02
           },
           {
-              id: 900,
+              pokemonId: 900,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.02
+              chance: 0.02
           },
           {
-              id: 549,
+              pokemonId: 549,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.02
+              chance: 0.02
           },
           {
-              id: 101,
+              pokemonId: 101,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.02
+              chance: 0.02
           },
           {
-              id: 713,
+              pokemonId: 713,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.02
+              chance: 0.02
           },
           {
-              id: 59,
+              pokemonId: 59,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.02
+              chance: 0.02
           },
           {
-              id: 215,
+              pokemonId: 215,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.02
+              chance: 0.02
           },
           {
-              id: 461,
+              pokemonId: 461,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.02
+              chance: 0.02
           },
           {
-              id: 903,
+              pokemonId: 903,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.02
+              chance: 0.02
           },
           {
-              id: 94,
+              pokemonId: 94,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.02
+              chance: 0.02
           },
           {
-              id: 65,
+              pokemonId: 65,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.02
+              chance: 0.02
           },
           {
-              id: 212,
+              pokemonId: 212,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.02
+              chance: 0.02
           },
           {
-              id: 92,
+              pokemonId: 92,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.02
+              chance: 0.02
           },
           {
-              id: 93,
+              pokemonId: 93,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.02
+              chance: 0.02
           },
           {
-              id: 63,
+              pokemonId: 63,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.18
+              chance: 0.18
           }
       ]
   },
@@ -2128,162 +2128,162 @@ export const hisuiRoutes = {
             "probability": 0
           },
           {
-              id: 396,
+              pokemonId: 396,
               minLevel: 85,
               maxLevel: 87,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 501,
+              pokemonId: 501,
               minLevel: 85,
               maxLevel: 87,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 724,
+              pokemonId: 724,
               minLevel: 85,
               maxLevel: 87,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 267,
+              pokemonId: 267,
               minLevel: 85,
               maxLevel: 87,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 265,
+              pokemonId: 265,
               minLevel: 85,
               maxLevel: 87,
-              probability: 0.16
+              chance: 0.16
           },
           {
-              id: 404,
+              pokemonId: 404,
               minLevel: 85,
               maxLevel: 87,
-              probability: 0.2
+              chance: 0.2
           }
       ]
   },
   "Seagrass Haven": {
       pokes: [
           {
-              id: 156,
+              pokemonId: 156,
               minLevel: 95,
               maxLevel: 97,
-              probability: 0.2
+              chance: 0.2
           },
           {
-              id: 155,
+              pokemonId: 155,
               minLevel: 95,
               maxLevel: 97,
-              probability: 0.2
+              chance: 0.2
           },
           {
-              id: 723,
+              pokemonId: 723,
               minLevel: 95,
               maxLevel: 97,
-              probability: 0.2
+              chance: 0.2
           },
           {
-              id: 399,
+              pokemonId: 399,
               minLevel: 95,
               maxLevel: 97,
-              probability: 0.2
+              chance: 0.2
           },
           {
-              id: 397,
+              pokemonId: 397,
               minLevel: 95,
               maxLevel: 97,
-              probability: 0.2
+              chance: 0.2
           }
       ]
   },
   "Moonview Arena": {
       pokes: [
           {
-              id: 488,
+              pokemonId: 488,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.33
+              chance: 0.33
           },
           {
-              id: 491,
+              pokemonId: 491,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.33
+              chance: 0.33
           },
           {
-              id: 492,
+              pokemonId: 492,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.34
+              chance: 0.34
           }
       ]
   },
   "Alabaster Icelands Fishing Spot": {
       pokes: [
           {
-              id: 398,
+              pokemonId: 398,
               minLevel: 85,
               maxLevel: 87,
-              probability: 0.33
+              chance: 0.33
           },
           {
-              id: 397,
+              pokemonId: 397,
               minLevel: 85,
               maxLevel: 87,
-              probability: 0.33
+              chance: 0.33
           },
           {
-              id: 399,
+              pokemonId: 399,
               minLevel: 85,
               maxLevel: 87,
-              probability: 0.34
+              chance: 0.34
           }
       ]
   },
   "Worn Bridge": {
       pokes: [
           {
-              id: 723,
+              pokemonId: 723,
               minLevel: 95,
               maxLevel: 97,
-              probability: 0.5
+              chance: 0.5
           },
           {
-              id: 501,
+              pokemonId: 501,
               minLevel: 95,
               maxLevel: 97,
-              probability: 0.5
+              chance: 0.5
           }
       ]
   },
   "Incarnate Fields": {
       pokes: [
           {
-              id: 641,
+              pokemonId: 641,
               minLevel: 110,
               maxLevel: 110,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 642,
+              pokemonId: 642,
               minLevel: 110,
               maxLevel: 110,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 645,
+              pokemonId: 645,
               minLevel: 110,
               maxLevel: 110,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 905,
+              pokemonId: 905,
               minLevel: 110,
               maxLevel: 110,
-              probability: 0.25
+              chance: 0.25
           }
       ]
   },
@@ -2326,28 +2326,28 @@ export const hisuiRoutes = {
             "probability": 0
           },
           {
-              id: 501,
+              pokemonId: 501,
               minLevel: 82,
               maxLevel: 84,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 502,
+              pokemonId: 502,
               minLevel: 82,
               maxLevel: 84,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 724,
+              pokemonId: 724,
               minLevel: 82,
               maxLevel: 84,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 399,
+              pokemonId: 399,
               minLevel: 82,
               maxLevel: 84,
-              probability: 0.25
+              chance: 0.25
           }
       ]
   },
@@ -2378,84 +2378,84 @@ export const hisuiRoutes = {
             "probability": 0
           },
           {
-              id: 404,
+              pokemonId: 404,
               minLevel: 82,
               maxLevel: 84,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 403,
+              pokemonId: 403,
               minLevel: 82,
               maxLevel: 84,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 501,
+              pokemonId: 501,
               minLevel: 82,
               maxLevel: 84,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 723,
+              pokemonId: 723,
               minLevel: 82,
               maxLevel: 84,
-              probability: 0.25
+              chance: 0.25
           }
       ]
   },
   "Lake of Trials": {
       pokes: [
           {
-              id: 480,
+              pokemonId: 480,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.33
+              chance: 0.33
           },
           {
-              id: 481,
+              pokemonId: 481,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.33
+              chance: 0.33
           },
           {
-              id: 482,
+              pokemonId: 482,
               minLevel: 100,
               maxLevel: 100,
-              probability: 0.34
+              chance: 0.34
           }
       ]
   },
   "Etertime Storm": {
       pokes: [
           {
-              id: 723,
+              pokemonId: 723,
               minLevel: 82,
               maxLevel: 84,
-              probability: 0.2
+              chance: 0.2
           },
           {
-              id: 265,
+              pokemonId: 265,
               minLevel: 82,
               maxLevel: 84,
-              probability: 0.2
+              chance: 0.2
           },
           {
-              id: 397,
+              pokemonId: 397,
               minLevel: 82,
               maxLevel: 84,
-              probability: 0.2
+              chance: 0.2
           },
           {
-              id: 155,
+              pokemonId: 155,
               minLevel: 82,
               maxLevel: 84,
-              probability: 0.2
+              chance: 0.2
           },
           {
-              id: 399,
+              pokemonId: 399,
               minLevel: 82,
               maxLevel: 84,
-              probability: 0.2
+              chance: 0.2
           }
       ]
   },
@@ -2469,28 +2469,28 @@ export const hisuiRoutes = {
   "Etertime Citadel": {
       pokes: [
           {
-              id: 493,
+              pokemonId: 493,
               minLevel: 120,
               maxLevel: 120,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 483,
+              pokemonId: 483,
               minLevel: 120,
               maxLevel: 120,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 484,
+              pokemonId: 484,
               minLevel: 120,
               maxLevel: 120,
-              probability: 0.25
+              chance: 0.25
           },
           {
-              id: 487,
+              pokemonId: 487,
               minLevel: 120,
               maxLevel: 120,
-              probability: 0.25
+              chance: 0.25
           }
       ]
   },
