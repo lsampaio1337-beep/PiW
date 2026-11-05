@@ -2879,7 +2879,12 @@ window.showGameAlert = function(message, attachToElementId = null) {
         alertBox.style.position = 'fixed';
     }
 
-    alertBox.style.top = '20px';
+    if (isAbsolute) {
+        // Place it just below the typical header height for standardized floating window alerts
+        alertBox.style.top = '40px';
+    } else {
+        alertBox.style.top = '20px';
+    }
     alertBox.style.left = '50%';
     alertBox.style.transform = 'translateX(-50%)';
     alertBox.style.backgroundColor = 'rgba(0, 0, 0, 0.85)';
