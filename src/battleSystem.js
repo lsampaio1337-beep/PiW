@@ -1111,7 +1111,7 @@ class BattleSystem {
 
             q = mathEngine.generateQuality(this.state.stats, this.state.casinoDoubleShiny);
 
-            if (!isRoamingEncounter && selectedSpawn && selectedSpawn.forceShiny) {
+            if (!isRoamingEncounter && selectedSpawn && (selectedSpawn.forceShiny || selectedSpawn.quality >= 2)) {
                 q = { name: "Shiny", q: 2.00 };
             }
 

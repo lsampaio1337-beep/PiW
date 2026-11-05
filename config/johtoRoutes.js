@@ -1808,6 +1808,44 @@ export const johtoRoutes = [
       }
     ]
   }
+,
+  {
+    "name": "Trade With Friends Hub",
+    "spawns": [
+      { "pokemonId": 65, "minLevel": 93, "maxLevel": 97, "chance": 0.25 },
+      { "pokemonId": 68, "minLevel": 93, "maxLevel": 97, "chance": 0.25 },
+      { "pokemonId": 76, "minLevel": 93, "maxLevel": 97, "chance": 0.25 },
+      { "pokemonId": 94, "minLevel": 93, "maxLevel": 97, "chance": 0.25 }
+    ]
+  },
+  {
+    "name": "Kanto Safari Zone",
+    "spawns": [
+      { "pokemonId": 186, "minLevel": 83, "maxLevel": 86, "chance": 0.125 },
+      { "pokemonId": 57, "minLevel": 84, "maxLevel": 87, "chance": 0.125 },
+      { "pokemonId": 224, "minLevel": 83, "maxLevel": 86, "chance": 0.125 },
+      { "pokemonId": 112, "minLevel": 86, "maxLevel": 89, "chance": 0.125 },
+      { "pokemonId": 71, "minLevel": 84, "maxLevel": 87, "chance": 0.125 },
+      { "pokemonId": 36, "minLevel": 83, "maxLevel": 86, "chance": 0.125 },
+      { "pokemonId": 40, "minLevel": 84, "maxLevel": 87, "chance": 0.125 },
+      { "pokemonId": 91, "minLevel": 86, "maxLevel": 89, "chance": 0.125 }
+    ]
+  },
+  {
+    "name": "Victory Road",
+    "spawns": [
+      { "pokemonId": 26, "minLevel": 95, "maxLevel": 99, "chance": 0.1 },
+      { "pokemonId": 31, "minLevel": 96, "maxLevel": 100, "chance": 0.1 },
+      { "pokemonId": 34, "minLevel": 96, "maxLevel": 100, "chance": 0.1 },
+      { "pokemonId": 59, "minLevel": 96, "maxLevel": 100, "chance": 0.1 },
+      { "pokemonId": 112, "minLevel": 96, "maxLevel": 100, "chance": 0.1 },
+      { "pokemonId": 57, "minLevel": 95, "maxLevel": 99, "chance": 0.1 },
+      { "pokemonId": 210, "minLevel": 94, "maxLevel": 98, "chance": 0.1 },
+      { "pokemonId": 178, "minLevel": 94, "maxLevel": 98, "chance": 0.1 },
+      { "pokemonId": 82, "minLevel": 95, "maxLevel": 99, "chance": 0.1 },
+      { "pokemonId": 89, "minLevel": 94, "maxLevel": 98, "chance": 0.1 }
+    ]
+  }
 ];
 
 export const johtoUnlocks = [
@@ -2523,8 +2561,8 @@ export const johtoUnlocks = [
     "challengeName": "Challenge 44",
     "areaId": "Route 12",
     "unlocks": [
-      "Fuschia Gym",
-      "Safari Zone"
+      "Fuchsia Gym",
+      "Kanto Safari Zone"
     ],
     "requirements": {
       "catchSpecies": [
@@ -2537,7 +2575,7 @@ export const johtoUnlocks = [
   },
   {
     "challengeName": "Challenge 45",
-    "areaId": "Fuschia Gym",
+    "areaId": "Fuchsia Gym",
     "unlocks": [
       "Cycling Road",
       "Sea Routes"
@@ -2555,7 +2593,8 @@ export const johtoUnlocks = [
     "areaId": "Sea Routes",
     "unlocks": [
       "Cinnabar Gym",
-      "Pokemon Mansion"
+      "Pokemon Mansion",
+      "Fossil Revival Lab"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -2711,10 +2750,6 @@ export const johtoUnlocks = [
       {
         "item": "Masterball",
         "count": 2
-      },
-      {
-        "item": "Key to Mount Silver Apex",
-        "count": 1
       }
     ]
   },
@@ -2743,10 +2778,6 @@ export const johtoUnlocks = [
     "gifts": [
       {
         "item": "Masterball",
-        "count": 1
-      },
-      {
-        "item": "Key to Mount Silver Apex",
         "count": 1
       }
     ]
@@ -2939,10 +2970,6 @@ export const johtoUnlocks = [
       {
         "item": "Masterball",
         "count": 2
-      },
-      {
-        "item": "Key to Mount Silver Apex",
-        "count": 1
       }
     ]
   },
