@@ -303,10 +303,10 @@ function generateMarketItemCard(item, category, stock) {
     const safeCategoryAttr = escapeHTML(category);
     const safeCategoryJS = escapeHTML(escapeJS(category));
 
-    let buyAction = `if(window.buyItem) window.buyItem('${safeItemNameJS}', ${item.price}, '${safeCategoryJS}')`;
+    let buyAction = `if(window.buyItem) window.buyItem('${safeItemNameJS}', ${item.price}, '${safeCategoryJS}', null, '${escapeHTML(escapeJS(item.displayName || item.name))}')`;
     if (category === 'upgrades') {
         const safeUpgradeTypeJS = escapeHTML(escapeJS(item.upgradeType));
-        buyAction = `if(window.buyItem) window.buyItem('${safeItemNameJS}', ${item.price}, '${safeCategoryJS}', '${safeUpgradeTypeJS}')`;
+        buyAction = `if(window.buyItem) window.buyItem('${safeItemNameJS}', ${item.price}, '${safeCategoryJS}', '${safeUpgradeTypeJS}', '${escapeHTML(escapeJS(item.displayName || item.name))}')`;
     }
 
     const safeImg = escapeHTML(item.img);
@@ -385,7 +385,7 @@ export function renderPokeMarketTab(category) {
 }
 
 
-export function buyItem(itemId, baseCost, category, upgradeType = null) { return newBuyItem(itemId, baseCost, category, upgradeType); }
+export function buyItem(itemId, baseCost, category, upgradeType = null, displayName = null) { return newBuyItem(itemId, baseCost, category, upgradeType, displayName); }
 
 
 export function formatMarketNumberDown(num) {
@@ -442,7 +442,7 @@ export function buySetMax(itemId, category, basePrice) {
     updateBuyItemPrice(itemId, category, basePrice);
 }
 
-export function newBuyItem(itemId, baseCost, category, upgradeType = null) {
+export function newBuyItem(itemId, baseCost, category, upgradeType = null, displayName = null) {
     const safeId = itemId.replace(/\s+/g, '');
     const input = document.getElementById(`buy-qty-${safeId}`);
     let qty = 1;
@@ -496,7 +496,7 @@ export function newBuyItem(itemId, baseCost, category, upgradeType = null) {
         if (moneyDisplay) {
             moneyDisplay.textContent = `$ ${state.trainer.money.toLocaleString()}`;
         }
-        window.showGameAlert(`Bought ${qty.toLocaleString()}x ${itemId} for ${totalCost.toLocaleString()}!`, getMarketAlertTarget());
+        window.showGameAlert(`Bought ${qty.toLocaleString()}x ${(displayName || itemId).replace(/&lt;br&gt;/gi, ' ').replace(/<br>/gi, ' ')} for ${totalCost.toLocaleString()}!`, getMarketAlertTarget());
         renderPokeMarketTab(category);
     } else {
         window.showGameAlert(`Not enough money! You need ${totalCost.toLocaleString()} but only have ${state.trainer.money.toLocaleString()}.`, getMarketAlertTarget());
