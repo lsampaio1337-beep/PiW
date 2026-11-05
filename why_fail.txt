@@ -1,0 +1,2 @@
+Ah!!! I added `contentHtml += ...` *AFTER* calling `showModal(titleHtml, contentHtml, "window-trainer")` !!!
+So the modal overlay HTML is never actually added to the DOM!!

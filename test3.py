@@ -1,0 +1,1 @@
+# Ah wait! Because I appended the inner html string AFTER building the content HTML string, but before passing it into `showModal` (which creates the innerHTML), it works properly now. The UI wasn't popping up before because I was modifying the string locally *after* it was rendered to the page, effectively throwing away the update.
