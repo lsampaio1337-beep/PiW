@@ -1,6 +1,6 @@
 # Regional Excel Data Documentation
 
-This document explains the structure and logic behind the auto-generated regional `.xlsx` files (`#_$_Data.xlsx` where `#` is the region number and `$` is the region name). These files provide a comprehensive overview of regional progression, route balance, challenges, and missing Pokémon.
+This document explains the structure and logic behind the auto-generated regional `.xlsx` files (`#_$_DataCounter.xlsx` (e.g., `1_Kanto_Data14.xlsx`) where `#` is the region number and `$` is the region name). These files provide a comprehensive overview of regional progression, route balance, challenges, and missing Pokémon.
 
 All generated `.xlsx` files based on these instructions should be stored in the `xdata/` folder at the root of the project.
 
@@ -83,4 +83,4 @@ This sheet lists all Pokémon native to the region (according to the regional Po
     *   `Breed`: Can be obtained by breeding a wild-caught Pokémon once to get its pre-evolution.
     *   `#xBreed`: Requires chain-breeding multiple times to reach this pre-evolution (e.g., `2xBreed`).
 
-Last Generation Counter: 14
+Last Generation Counter: 16
