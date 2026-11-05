@@ -2481,7 +2481,8 @@ export const hoennUnlocks = [
     "unlocks": [
       "Roaming Hoenn Skies",
       "Mauville Game Corner",
-      "Trick House"
+      "Trick House",
+      "Unlock a new region"
     ],
     "gifts": [
       {
