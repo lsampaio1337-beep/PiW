@@ -2527,13 +2527,11 @@ async function init() {
             </div>
         `;
 
-        const overlay = document.getElementById('main-view-inner-modal-overlay');
-        const title = document.getElementById('main-view-inner-modal-title');
-        const content = document.getElementById('main-view-inner-modal-content');
+        const overlay = document.getElementById('trainer-stats-inner-modal');
+        const content = document.getElementById('trainer-stats-inner-modal-content');
 
-        if (overlay && title && content) {
-            safeSetHTML(title, `${region} Medals Details`);
-            safeSetHTML(content, medalsHtml);
+        if (overlay && content) {
+            safeSetHTML(content, `<h3 style="margin-top: 0; text-align: center;">${region} Medals Details</h3>${medalsHtml}`);
             overlay.style.display = 'flex';
         }
     };
@@ -2592,13 +2590,11 @@ async function init() {
 
         upgradesHtml += '</div>';
 
-        const overlay = document.getElementById('main-view-inner-modal-overlay');
-        const title = document.getElementById('main-view-inner-modal-title');
-        const content = document.getElementById('main-view-inner-modal-content');
+        const overlay = document.getElementById('trainer-stats-inner-modal');
+        const content = document.getElementById('trainer-stats-inner-modal-content');
 
-        if (overlay && title && content) {
-            safeSetHTML(title, `Upgrades Details`);
-            safeSetHTML(content, upgradesHtml);
+        if (overlay && content) {
+            safeSetHTML(content, `<h3 style="margin-top: 0; text-align: center;">Upgrades Details</h3>${upgradesHtml}`);
             overlay.style.display = 'flex';
         }
     };
@@ -2948,6 +2944,14 @@ async function init() {
             if (innerContent) {
                 innerContent.style.setProperty('padding', '0px', 'important');
             }
+            contentHtml += `
+            <div id="trainer-stats-inner-modal" style="display: none; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.8); z-index: 10000; align-items: center; justify-content: center;">
+                <div style="background: linear-gradient(135deg, #2c3e50, #34495e); border: 2px solid #4a90e2; border-radius: 12px; padding: 25px; max-width: 80%; max-height: 80%; overflow-y: auto; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.5); color: white;">
+                    <div style="position: absolute; top: 10px; right: 10px; cursor: pointer; color: #e74c3c; font-weight: bold; font-size: 20px; background: rgba(0,0,0,0.3); border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;" onclick="document.getElementById('trainer-stats-inner-modal').style.display='none'">&times;</div>
+                    <div id="trainer-stats-inner-modal-content"></div>
+                </div>
+            </div>`;
+
             setTimeout(() => {
                 if (typeof win.adjustHeightForNewContent === 'function') {
                     win.adjustHeightForNewContent();
