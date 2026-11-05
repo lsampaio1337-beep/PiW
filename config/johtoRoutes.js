@@ -231,7 +231,13 @@ export const johtoRoutes = [
         "pokemonId": 46,
         "minLevel": 13,
         "maxLevel": 17,
-        "chance": 0.3
+        "chance": 0.15
+      },
+      {
+        "pokemonId": 48,
+        "minLevel": 13,
+        "maxLevel": 17,
+        "chance": 0.15
       },
       {
         "pokemonId": 10,
@@ -946,22 +952,23 @@ export const johtoRoutes = [
     "name": "Lake of Rage",
     "spawns": [
       {
-        "pokemonId": 48,
-        "minLevel": 1,
-        "maxLevel": 1,
-        "chance": 0
-      },
-      {
         "pokemonId": 129,
-        "minLevel": 48,
+        "minLevel": 50,
         "maxLevel": 55,
-        "chance": 0.95
+        "chance": 0.75
       },
       {
         "pokemonId": 130,
         "minLevel": 55,
         "maxLevel": 60,
-        "chance": 0.05
+        "chance": 0.23
+      },
+      {
+        "pokemonId": 130,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.02,
+        "quality": 2
       }
     ]
   },
@@ -1013,19 +1020,25 @@ export const johtoRoutes = [
         "pokemonId": 12,
         "minLevel": 80,
         "maxLevel": 86,
-        "chance": 0.35
+        "chance": 0.25
       },
       {
         "pokemonId": 15,
         "minLevel": 80,
         "maxLevel": 86,
-        "chance": 0.35
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 49,
+        "minLevel": 80,
+        "maxLevel": 86,
+        "chance": 0.25
       },
       {
         "pokemonId": 47,
         "minLevel": 82,
         "maxLevel": 88,
-        "chance": 0.25
+        "chance": 0.2
       },
       {
         "pokemonId": 251,
