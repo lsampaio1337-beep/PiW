@@ -255,7 +255,7 @@ function getMarketItems(category) {
             });
     } else if (category === 'stones') {
         const badges = state.trainer.badges || 0;
-        const stonePrice = Math.max(1000, 1000 * badges);
+        const stonePrice = Math.max(2500, 2500 * badges);
         let stoneKeys = Object.keys(state.backpack.stones).filter(k => !VITAMINS.includes(k));
         stoneKeys.sort((a, b) => a.localeCompare(b));
         items = stoneKeys.map(stoneName => {
@@ -270,13 +270,13 @@ function getMarketItems(category) {
         const badges = state.trainer.badges || 0;
         const getVitaminPrice = (vitaminName, badges) => {
             switch(vitaminName) {
-                case 'HP Up': return Math.max(1000, 1000 * badges);
-                case 'Carbo Speed': return Math.max(500, 500 * badges);
-                case 'Protein Atk': return Math.max(750, Math.ceil(750 * badges));
-                case 'Calcium SpAtk': return Math.max(750, Math.ceil(750 * badges));
-                case 'Iron Def': return Math.max(782, Math.round(625 * badges));
-                case 'Zinc SpDef': return Math.max(625, Math.round(625 * badges));
-                default: return Math.max(2000, 1000 * badges);
+                case 'HP Up': return Math.max(2500, 2500 * badges);
+                case 'Carbo Speed': return Math.max(1250, 1250 * badges);
+                case 'Protein Atk': return Math.max(1875, 1875 * badges);
+                case 'Calcium SpAtk': return Math.max(1875, 1875 * badges);
+                case 'Iron Def': return Math.max(1563, Math.ceil(1562.5 * badges));
+                case 'Zinc SpDef': return Math.max(1563, Math.ceil(1562.5 * badges));
+                default: return Math.max(2500, 2500 * badges);
             }
         };
         items = VITAMINS.map(vitaminName => {
@@ -668,32 +668,36 @@ function getMarketSellItems(category) {
                 };
             });
     } else if (category === 'stones') {
+        const badges = state.trainer.badges || 0;
+        const stonePrice = Math.max(2500, 2500 * badges);
+        const stoneSellPrice = Math.floor(stonePrice * 0.1);
         let stoneKeysSell = Object.keys(state.backpack.stones).filter(k => !VITAMINS.includes(k));
         stoneKeysSell.sort((a, b) => a.localeCompare(b));
         return stoneKeysSell.map(stoneName => {
             return {
                 name: stoneName,
-                sellPrice: 50,
+                sellPrice: stoneSellPrice,
                 img: `./Assets/Items/Stones/${stoneName}.png`
             };
         });
     } else if (category === 'vitamins') {
-        const getVitaminSellPrice = (vitaminName) => {
+        const badges = state.trainer.badges || 0;
+        const getVitaminSellPrice = (vitaminName, badges) => {
             switch(vitaminName) {
-                case 'HP Up': return 80;
-                case 'Carbo Speed': return 40;
-                case 'Protein Atk':
-                case 'Calcium SpAtk': return 60;
-                case 'Iron Def':
-                case 'Zinc SpDef': return 50;
-                default: return 50;
+                case 'HP Up': return Math.floor(Math.max(2500, 2500 * badges) * 0.1);
+                case 'Carbo Speed': return Math.floor(Math.max(1250, 1250 * badges) * 0.1);
+                case 'Protein Atk': return Math.floor(Math.max(1875, 1875 * badges) * 0.1);
+                case 'Calcium SpAtk': return Math.floor(Math.max(1875, 1875 * badges) * 0.1);
+                case 'Iron Def': return Math.floor(Math.max(1563, Math.ceil(1562.5 * badges)) * 0.1);
+                case 'Zinc SpDef': return Math.floor(Math.max(1563, Math.ceil(1562.5 * badges)) * 0.1);
+                default: return Math.floor(Math.max(2500, 2500 * badges) * 0.1);
             }
         };
 
         return VITAMINS.map(vitaminName => {
             return {
                 name: vitaminName,
-                sellPrice: getVitaminSellPrice(vitaminName),
+                sellPrice: getVitaminSellPrice(vitaminName, badges),
                 img: `./Assets/Items/Vitamins/${vitaminName}.png`
             };
         });

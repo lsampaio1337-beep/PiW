@@ -107,16 +107,27 @@ window.showTimeLapseResults = function(results) {
                 basePrice = potionObj.price;
             } else if (VITAMINS.includes(itemName)) {
                 imgFolder = "Vitamins";
-                basePrice = state.config.balance.items.stones.price * 2;
+                const badges = state.trainer.badges || 0;
+                let vitaminPrice = Math.max(2500, 2500 * badges); // default
+                switch (itemName) {
+                    case 'HP Up': vitaminPrice = Math.max(2500, 2500 * badges); break;
+                    case 'Carbo Speed': vitaminPrice = Math.max(1250, 1250 * badges); break;
+                    case 'Protein Atk': vitaminPrice = Math.max(1875, 1875 * badges); break;
+                    case 'Calcium SpAtk': vitaminPrice = Math.max(1875, 1875 * badges); break;
+                    case 'Iron Def': vitaminPrice = Math.max(1563, Math.ceil(1562.5 * badges)); break;
+                    case 'Zinc SpDef': vitaminPrice = Math.max(1563, Math.ceil(1562.5 * badges)); break;
+                }
+                basePrice = vitaminPrice;
             } else {
                 imgFolder = "Stones";
-                basePrice = state.config.balance.items.stones.price;
+                const badges = state.trainer.badges || 0;
+                basePrice = Math.max(2500, 2500 * badges);
             }
 
             itemsLootedHtml += `${count}x <img src="Assets/Items/${imgFolder}/${itemName}.png" style="width: 20px; height: 20px; vertical-align: middle;" title="${itemName}"> / `;
 
             valItemsLootedBuy += basePrice * count;
-            valItemsLootedSold += Math.floor(basePrice * 0.5) * count;
+            valItemsLootedSold += (imgFolder === "Stones" || imgFolder === "Vitamins") ? Math.floor(basePrice * 0.1) * count : Math.floor(basePrice * 0.5) * count;
         }
     }
     if (itemsLootedHtml.endsWith(" / ")) itemsLootedHtml = itemsLootedHtml.slice(0, -3);
