@@ -2536,6 +2536,11 @@ async function init() {
         }
     };
 
+    window.closeTrainerInnerModal = function() {
+        const overlay = document.getElementById('trainer-stats-inner-modal');
+        if (overlay) overlay.style.display = 'none';
+    };
+
     window.showUpgradeDetail = function(configKey, currentTier) {
         if (!state.config || !state.config.balance || !state.config.balance.expansions || !state.config.balance.expansions[configKey]) return;
         const expansionsList = state.config.balance.expansions[configKey];
@@ -2939,7 +2944,7 @@ async function init() {
         contentHtml += `
         <div id="trainer-stats-inner-modal" style="display: none; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.8); z-index: 10000; align-items: center; justify-content: center;">
             <div style="background: linear-gradient(135deg, #2c3e50, #34495e); border: 2px solid #4a90e2; border-radius: 12px; padding: 25px; max-width: 80%; max-height: 80%; overflow-y: auto; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.5); color: white;">
-                <div style="position: absolute; top: 10px; right: 10px; cursor: pointer; color: #e74c3c; font-weight: bold; font-size: 20px; background: rgba(0,0,0,0.3); border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;" onclick="document.getElementById('trainer-stats-inner-modal').style.display='none'">&times;</div>
+                <div style="position: absolute; top: 10px; right: 10px; cursor: pointer; color: #e74c3c; font-weight: bold; font-size: 20px; background: rgba(0,0,0,0.3); border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;" onclick="if(window.closeTrainerInnerModal) window.closeTrainerInnerModal()">&times;</div>
                 <div id="trainer-stats-inner-modal-content"></div>
             </div>
         </div>`;

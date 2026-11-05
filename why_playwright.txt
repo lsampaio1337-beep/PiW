@@ -1,0 +1,2 @@
+Awesome, the close button fix has been applied!
+Now let's submit.
