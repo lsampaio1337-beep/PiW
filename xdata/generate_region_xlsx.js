@@ -4,6 +4,7 @@ const vm = require('vm');
 const xlsx = require('xlsx');
 
 function loadDataFile(filename, varNames = null) {
+    filename = path.resolve(__dirname, '..', filename);
     let code = fs.readFileSync(filename, 'utf8');
     code = code.replace(/^import\s+.*?;?\s*$/gm, '');
     code = code.replace(/export\s+const\s+/g, 'var ')
@@ -723,7 +724,7 @@ const missingData = [];
     const wsMissing = xlsx.utils.json_to_sheet(missingData);
     xlsx.utils.book_append_sheet(wb, wsMissing, "Missing PK");
 
-const outFile = `xdata/${region.num}_${region.name}_Data.xlsx`;
+const outFile = path.join(__dirname, `${region.num}_${region.name}_Data${counter}.xlsx`);
 
     // Formatting cols
     const colsRoutes = ["% Appearance", "% Appearance Ok?"];
@@ -745,21 +746,34 @@ const outFile = `xdata/${region.num}_${region.name}_Data.xlsx`;
 }
 
 (async () => {
+    const args = process.argv.slice(2);
+    if (args.length === 0) {
+        console.error("Error: Please provide a region number (1-10) or name as an argument.");
+        console.error("Example: node xdata/generate_region_xlsx.js 1");
+        process.exit(1);
+    }
+    const regionArg = args[0].toLowerCase();
+    const regionToProcess = REGIONS.find(r => r.num.toString() === regionArg || r.name.toLowerCase() === regionArg);
+
+    if (!regionToProcess) {
+        console.error(`Error: Region '${args[0]}' not found.`);
+        process.exit(1);
+    }
+
     let counterFile = '';
     let counter = 1;
-    if (fs.existsSync('xdata/xlsx.md')) {
-        counterFile = fs.readFileSync('xdata/xlsx.md', 'utf8');
+    const xlsxMdPath = path.join(__dirname, 'xlsx.md');
+    if (fs.existsSync(xlsxMdPath)) {
+        counterFile = fs.readFileSync(xlsxMdPath, 'utf8');
         const counterMatch = counterFile.match(/Last Generation Counter:\s*(\d+)/);
         if (counterMatch) counter = parseInt(counterMatch[1]);
     }
 
-    for (const region of REGIONS) {
-        await processRegion(region, counter);
-    }
+    await processRegion(regionToProcess, counter);
 
     // Increment counter
     if (counterFile) {
         const newCounterFile = counterFile.replace(/Last Generation Counter:\s*\d+/, `Last Generation Counter: ${counter + 1}`);
-        fs.writeFileSync('xdata/xlsx.md', newCounterFile);
+        fs.writeFileSync(xlsxMdPath, newCounterFile);
     }
 })();
