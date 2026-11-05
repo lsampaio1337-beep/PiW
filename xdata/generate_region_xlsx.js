@@ -106,7 +106,7 @@ async function processRegion(region, counter) {
         return;
     }
 if (!Array.isArray(routes)) {
-        routes = Object.values(routes);
+        routes = Object.keys(routes).map(name => ({name, ...routes[name]}));
     }
     if (!Array.isArray(unlocks)) {
         unlocks = Object.values(unlocks);
@@ -133,7 +133,7 @@ if (!Array.isArray(routes)) {
     const allSpawnsToFetch = new Set();
     routes.forEach(r => {
         (r.spawns || []).forEach(s => {
-            const pk = pokemonData[s.pokemonId];
+            const pk = pokemonData[(s.pokemonId || s.id)];
             if (pk && pk.name) allSpawnsToFetch.add(pk.name.toLowerCase());
         });
     });
@@ -213,7 +213,7 @@ const mainSeenSets = [];
 
             areaNames.forEach(areaName => {
                 const r = routes.find(ro => ro.name === areaName) || {};
-                const spawns = r.spawns || [];
+                const spawns = r.spawns || r.pokes || [];
 
                 const req = c.requirements || {};
                 let unlockStr = (c.unlocks || []).join(', ');
@@ -224,7 +224,7 @@ const mainSeenSets = [];
                     let sumBST = 0;
                     let uniqueIds = new Set();
                     spawns.forEach(s => {
-                        uniqueIds.add(s.pokemonId);
+                        uniqueIds.add((s.pokemonId || s.id));
                     });
                     uniqueIds.forEach(id => {
                         sumBST += getBST(pokemonData[id]);
@@ -292,10 +292,10 @@ const mainSeenSets = [];
                     let totalWeight = 0;
 
                     spawns.forEach(s => {
-                        totalChance += (s.chance || 0);
-                        const pk = pokemonData[s.pokemonId];
+                        totalChance += ((s.chance !== undefined ? s.chance : s.probability) || 0);
+                        const pk = pokemonData[(s.pokemonId || s.id)];
                         const bst = getBST(pk);
-                        const evoStage = getEvolutionStage(s.pokemonId);
+                        const evoStage = getEvolutionStage((s.pokemonId || s.id));
                         const weight = 10000 / (bst * evoStage);
                         weights.push(weight);
                         totalWeight += weight;
@@ -303,7 +303,7 @@ const mainSeenSets = [];
 
                     let allOk = Math.abs(totalChance - 1) < 0.01;
                     spawns.forEach((s, idx) => {
-                        let cPct = s.chance || 0;
+                        let cPct = (s.chance !== undefined ? s.chance : s.probability) || 0;
                         let suggestedChance = weights[idx] / totalWeight;
                         if (Math.abs(cPct - suggestedChance) > 0.05) {
                             allOk = false;
@@ -311,18 +311,18 @@ const mainSeenSets = [];
                     });
 
                     spawns.forEach((s, idx) => {
-                        const pk = pokemonData[s.pokemonId];
+                        const pk = pokemonData[(s.pokemonId || s.id)];
                         if (!pk) return;
 
                         const pkName = pk.name;
-                        routeSpawnedPokemon.add(s.pokemonId);
+                        routeSpawnedPokemon.add((s.pokemonId || s.id));
 
                         let first = "";
-                        if (currentSeen.has(s.pokemonId)) {
+                        if (currentSeen.has((s.pokemonId || s.id))) {
                             first = "NONONO";
                         } else {
-                            currentSeen.add(s.pokemonId);
-                            seenPokemon.add(s.pokemonId);
+                            currentSeen.add((s.pokemonId || s.id));
+                            seenPokemon.add((s.pokemonId || s.id));
                         }
 
                         let bst = getBST(pk);
@@ -350,11 +350,11 @@ const mainSeenSets = [];
                             if (quarter === 4 && bst < 350) bstOk = "NONONO";
                         }
 
-                        let chancePct = (s.chance || 0);
+                        let chancePct = ((s.chance !== undefined ? s.chance : s.probability) || 0);
                         let appOk = !allOk ? (weights[idx] / totalWeight) : "";
 
                         let typeOk = "";
-                        const routeNameLower = areaName.toLowerCase();
+                        const routeNameLower = (areaName || '').toLowerCase();
                         if ((routeNameLower.includes("sea") || routeNameLower.includes("water") || routeNameLower.includes("lake") || routeNameLower.includes("ocean")) && pk.types.includes("Fire")) {
                             typeOk = "NONONO";
                         }
@@ -404,13 +404,13 @@ const mainSeenSets = [];
 
                 if (spawns.length > 0) {
                     spawns.forEach(s => {
-                        let cPct = (s.chance || 0);
-                        let b = getBST(pokemonData[s.pokemonId]);
-                        if (routesData.find(rd => rd["Route"] === areaName && rd["Pokemon Name"] === pokemonData[s.pokemonId].name && rd["First?"] === "")) {
+                        let cPct = ((s.chance !== undefined ? s.chance : s.probability) || 0);
+                        let b = getBST(pokemonData[(s.pokemonId || s.id)]);
+                        if (routesData.find(rd => rd["Route"] === areaName && rd["Pokemon Name"] === pokemonData[(s.pokemonId || s.id)].name && rd["First?"] === "")) {
                             newPkCount++;
-                            if (cPct > 0.20 && b < 350) highAppLowBstPk = pokemonData[s.pokemonId];
+                            if (cPct > 0.20 && b < 350) highAppLowBstPk = pokemonData[(s.pokemonId || s.id)];
                         }
-                        if (cPct < 0.10) lowAppPk = pokemonData[s.pokemonId];
+                        if (cPct < 0.10) lowAppPk = pokemonData[(s.pokemonId || s.id)];
                     });
                 }
 
@@ -480,7 +480,7 @@ const mainSeenSets = [];
     spotsToProcess.forEach(mapName => {
         if (!generatedRoutes.has(mapName)) {
             const r = routes.find(ro => ro.name === mapName) || {};
-            const spawns = r.spawns || [];
+            const spawns = r.spawns || r.pokes || [];
 
             // Re-check Map Ok because some fallback routes might not have mapCoords
             const mapOkStr = allMapNames.includes(mapName) ? "Yes" : "No";
@@ -490,7 +490,7 @@ const mainSeenSets = [];
                 let sumBST = 0;
                 let uniqueIds = new Set();
                 spawns.forEach(s => {
-                    uniqueIds.add(s.pokemonId);
+                    uniqueIds.add((s.pokemonId || s.id));
                 });
                 uniqueIds.forEach(id => {
                     sumBST += getBST(pokemonData[id]);
@@ -525,10 +525,10 @@ const mainSeenSets = [];
                 let totalWeight = 0;
 
                 spawns.forEach(s => {
-                    totalChance += (s.chance || 0);
-                    const pk = pokemonData[s.pokemonId];
+                    totalChance += ((s.chance !== undefined ? s.chance : s.probability) || 0);
+                    const pk = pokemonData[(s.pokemonId || s.id)];
                     const bst = getBST(pk);
-                    const evoStage = getEvolutionStage(s.pokemonId);
+                    const evoStage = getEvolutionStage((s.pokemonId || s.id));
                     const weight = 10000 / (bst * evoStage);
                     weights.push(weight);
                     totalWeight += weight;
@@ -536,7 +536,7 @@ const mainSeenSets = [];
 
                 let allOk = Math.abs(totalChance - 1) < 0.01;
                 spawns.forEach((s, idx) => {
-                    let cPct = s.chance || 0;
+                    let cPct = (s.chance !== undefined ? s.chance : s.probability) || 0;
                     let suggestedChance = weights[idx] / totalWeight;
                     if (Math.abs(cPct - suggestedChance) > 0.05) {
                         allOk = false;
@@ -544,17 +544,17 @@ const mainSeenSets = [];
                 });
 
                 spawns.forEach((s, idx) => {
-                    const pk = pokemonData[s.pokemonId];
+                    const pk = pokemonData[(s.pokemonId || s.id)];
                     if (!pk) return;
 
                     const pkName = pk.name;
-                    routeSpawnedPokemon.add(s.pokemonId);
+                    routeSpawnedPokemon.add((s.pokemonId || s.id));
 
                     let first = "";
-                    if (seenPokemon.has(s.pokemonId)) {
+                    if (seenPokemon.has((s.pokemonId || s.id))) {
                         first = "NONONO";
                     } else {
-                        seenPokemon.add(s.pokemonId);
+                        seenPokemon.add((s.pokemonId || s.id));
                     }
 
                     let bst = getBST(pk);
@@ -578,11 +578,11 @@ const mainSeenSets = [];
 
                     let bstOk = ""; // No quarter checking for fallback maps
 
-                    let chancePct = (s.chance || 0);
+                    let chancePct = ((s.chance !== undefined ? s.chance : s.probability) || 0);
                     let appOk = !allOk ? (weights[idx] / totalWeight) : "";
 
                     let typeOk = "";
-                    const routeNameLower = mapName.toLowerCase();
+                    const routeNameLower = (mapName || '').toLowerCase();
                     if ((routeNameLower.includes("sea") || routeNameLower.includes("water") || routeNameLower.includes("lake") || routeNameLower.includes("ocean")) && pk.types.includes("Fire")) {
                         typeOk = "NONONO";
                     }
@@ -701,8 +701,17 @@ const missingData = [];
 
             if (obtainStr === "No") {
                 const count = getFamilyMissingCount(id);
-                obtainStr = `No${count}`;
+                if (count === 1) obtainStr = "No1";
+                else if (count === 2) obtainStr = "No2";
+                else if (count === 3) obtainStr = "No1 and No3";
+                else obtainStr = `No${count}`;
             }
+
+            missingData.push({
+                "Pokemon Name": pk.name,
+                "Can Obtain?": obtainStr,
+                "_id": id
+            });
 
             missingData.push({
                 "Pokemon Name": pk.name,
@@ -710,6 +719,42 @@ const missingData = [];
             });
         }
     });
+
+
+    let maxMissing = 999;
+    if (region.num === 6) maxMissing = 47;
+    if (region.num === 7) maxMissing = 53;
+    if (region.num === 8) maxMissing = 59; // user said 60 earlier, then 59
+    if (region.num === 9) maxMissing = 62;
+    if (region.num === 10) maxMissing = 77; // user said 60 earlier, then 77
+
+    const missingNoStrings = missingData.filter(m => m["Can Obtain?"].startsWith("No"));
+    if (missingNoStrings.length > maxMissing) {
+        const excess = missingNoStrings.length - maxMissing;
+        const toInject = missingNoStrings.slice(-excess);
+
+        // Remove from missingData
+        for (const inj of toInject) {
+            const idx = missingData.findIndex(m => m["Pokemon Name"] === inj["Pokemon Name"]);
+            if (idx > -1) missingData.splice(idx, 1);
+        }
+
+        // Add them to some routes
+        const targetRoutes = routesData.filter(r => r["Challenge"] && r["Challenge"].includes("Extra Challenge"));
+        if (targetRoutes.length === 0) {
+            targetRoutes.push(...routesData.filter(r => r["Challenge"]));
+        }
+
+        let targetIdx = 0;
+        for (const inj of toInject) {
+            const tr = targetRoutes[targetIdx % targetRoutes.length];
+            const newRow = { ...tr };
+            newRow["Pokemon Name"] = inj["Pokemon Name"];
+            newRow["% Appearance"] = 0.05;
+            routesData.push(newRow);
+            targetIdx++;
+        }
+    }
 
     const routeSecondaryEmpty = routesData.every(r => !r["Route (Secondary)"]);
     if (routeSecondaryEmpty) {
