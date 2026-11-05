@@ -49,8 +49,8 @@ function calculateEVM(bst, level, quality, totalIV) {
 }
 
 function calculatePP(bst, level, quality, totalIV) {
-    // PP = max(1, floor(50 * (Q / 1.40)^4.0 * (IV_Total / 450)^3.0 * (BST / 300)^1.1 * (Level / 50)))
-    const pp = Math.floor(50 * Math.pow(quality / 1.40, 4.0) * Math.pow(totalIV / 450, 3.0) * Math.pow(bst / 300, 1.1) * (level / 50));
+    // PP = max(1, floor(50 * (Q / 1.40)^6.0 * (IV_Total / 450)^4.0 * (BST / 300)^5.0 * (Level / 50)^3.0))
+    const pp = Math.floor(50 * Math.pow(quality / 1.40, 6.0) * Math.pow(totalIV / 450, 4.0) * Math.pow(bst / 300, 5.0) * Math.pow(level / 50, 3.0));
     return Math.max(1, pp);
 }
 

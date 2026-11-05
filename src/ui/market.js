@@ -313,6 +313,12 @@ function generateMarketItemCard(item, category, stock) {
     let escapedDisplayName = escapeHTML(item.displayName || item.name).replace(/&lt;br&gt;/gi, '<br>');
     if (category === 'potions') escapedDisplayName = escapedDisplayName.replace(' Potion', '<br>Potion');
     if (category === 'stones') escapedDisplayName = escapedDisplayName.replace(' Stone', '<br>Stone');
+    if (category === 'upgrades' && item.upgradeType === 'daycare') {
+        const parts = escapedDisplayName.split(' ');
+        if (parts.length >= 2) {
+            escapedDisplayName = parts.slice(0, -1).join(' ') + '<br>' + parts[parts.length - 1];
+        }
+    }
 
     return `
         <div class="market-item-card" data-price="${item.price}" data-id="${safeItemNameAttr}" data-category="${safeCategoryAttr}"
@@ -712,6 +718,12 @@ function renderMarketSellItemsList(content, category, items) {
         let escapedDisplayName = escapeHTML(item.displayName || item.name).replace(/&lt;br&gt;/gi, '<br>');
         if (category === 'potions') escapedDisplayName = escapedDisplayName.replace(' Potion', '<br>Potion');
         if (category === 'stones') escapedDisplayName = escapedDisplayName.replace(' Stone', '<br>Stone');
+        if (category === 'upgrades' && item.upgradeType === 'daycare') {
+            const parts = escapedDisplayName.split(' ');
+            if (parts.length >= 2) {
+                escapedDisplayName = parts.slice(0, -1).join(' ') + '<br>' + parts[parts.length - 1];
+            }
+        }
 
         const baseSellPrice = item.sellPrice !== undefined ? item.sellPrice : Math.floor(item.buyPrice * 0.5);
         let stock = 0;
