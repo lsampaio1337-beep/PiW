@@ -2609,7 +2609,8 @@ async function init() {
         if (titleName === 'loot') titleName = 'Loot';
         if (titleName === 'daycare') titleName = 'Daycare';
 
-        showModal(`${titleName} Upgrades`, htmlContent, 'window-upgrade-details', '800px');
+        // Directly call showTrainerStats to render this inside the existing window
+        window.showTrainerStats('upgrade-details', { title: titleName, html: htmlContent });
     };
 
     window.showMedalDetails = function(region, caughtCount, shinyCount, totalInRegion) {
@@ -2675,31 +2676,46 @@ async function init() {
             </div>
         `;
 
-        showModal(`${region} Medals`, htmlContent, 'window-medal-details', '800px');
+        window.showTrainerStats('medal-details', { region: region, html: htmlContent });
     };
 
     window.showTrainerStats = function(tab = 'statistics', options = {}) {
         if(checkCombatLock()) return;
 
         const isShiny = options.showShiny || false;
-        let titleHtml = `
-            <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
-                <div style="font-weight: bold; font-size: 18px; color: white;">Trainer</div>
-                <div style="display: inline-flex; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px;">
-                    <button onclick="window.showTrainerStats('statistics')" style="${tab === 'statistics' ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmousedown="event.stopPropagation()">Statistics</button>
-                    <button onclick="window.showTrainerStats('badges')" style="${tab === 'badges' ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmousedown="event.stopPropagation()">Badges</button>
-                    <button onclick="window.showTrainerStats('catch-rate', { showShiny: false })" style="${tab === 'catch-rate' ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmousedown="event.stopPropagation()">Catch Rate</button>
-                    <button onclick="window.showTrainerStats('upgrades')" style="${tab === 'upgrades' ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmousedown="event.stopPropagation()">Upgrades</button>
-                    <button onclick="window.showTrainerStats('medals')" style="${tab === 'medals' ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmousedown="event.stopPropagation()">Medals</button>
+        let titleHtml = '';
+
+        if (tab === 'medal-details' || tab === 'upgrade-details') {
+            const headerTitle = tab === 'medal-details' ? `${options.region} Medals` : `${options.title} Upgrades`;
+            const backTab = tab === 'medal-details' ? 'medals' : 'upgrades';
+            titleHtml = `
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 5px; position: relative;">
+                    <div style="position: absolute; left: 0; top: 0;">
+                        <button onclick="window.showTrainerStats('${backTab}')" style="background: rgba(255, 255, 255, 0.1); color: white; border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 12px; transition: all 0.2s;" onmousedown="event.stopPropagation()">← Back</button>
+                    </div>
+                    <div style="font-weight: bold; font-size: 18px; color: white;">${headerTitle}</div>
                 </div>
-                ${tab === 'catch-rate' ? `
-                <div style="display: inline-flex; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px; margin-top: 5px;">
-                    <button onclick="window.showTrainerStats('catch-rate', { showShiny: false })" style="${!isShiny ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 12px; transition: all 0.2s;" onmousedown="event.stopPropagation()">Normal</button>
-                    <button onclick="window.showTrainerStats('catch-rate', { showShiny: true })" style="${isShiny ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 12px; transition: all 0.2s;" onmousedown="event.stopPropagation()">Shiny</button>
+            `;
+        } else {
+            titleHtml = `
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
+                    <div style="font-weight: bold; font-size: 18px; color: white;">Trainer</div>
+                    <div style="display: inline-flex; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px;">
+                        <button onclick="window.showTrainerStats('statistics')" style="${tab === 'statistics' ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmousedown="event.stopPropagation()">Statistics</button>
+                        <button onclick="window.showTrainerStats('badges')" style="${tab === 'badges' ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmousedown="event.stopPropagation()">Badges</button>
+                        <button onclick="window.showTrainerStats('catch-rate', { showShiny: false })" style="${tab === 'catch-rate' ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmousedown="event.stopPropagation()">Catch Rate</button>
+                        <button onclick="window.showTrainerStats('upgrades')" style="${tab === 'upgrades' ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmousedown="event.stopPropagation()">Upgrades</button>
+                        <button onclick="window.showTrainerStats('medals')" style="${tab === 'medals' ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 14px; transition: all 0.2s;" onmousedown="event.stopPropagation()">Medals</button>
+                    </div>
+                    ${tab === 'catch-rate' ? `
+                    <div style="display: inline-flex; background: rgba(0, 0, 0, 0.2); border-radius: 20px; padding: 3px; gap: 5px; margin-top: 5px;">
+                        <button onclick="window.showTrainerStats('catch-rate', { showShiny: false })" style="${!isShiny ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 12px; transition: all 0.2s;" onmousedown="event.stopPropagation()">Normal</button>
+                        <button onclick="window.showTrainerStats('catch-rate', { showShiny: true })" style="${isShiny ? 'background: linear-gradient(to bottom, #3498db, #2980b9); color: white; border: 1px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.2);' : 'background: transparent; color: rgba(255, 255, 255, 0.7); border: 1px solid transparent;'} border-radius: 15px; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 12px; transition: all 0.2s;" onmousedown="event.stopPropagation()">Shiny</button>
+                    </div>
+                    ` : ''}
                 </div>
-                ` : ''}
-            </div>
-        `;
+            `;
+        }
 
         let contentHtml = '';
 
@@ -2933,6 +2949,8 @@ async function init() {
             `;
 
             contentHtml = medalsHtml;
+        } else if (tab === 'medal-details' || tab === 'upgrade-details') {
+            contentHtml = options.html;
         } else if (tab === 'upgrades') {
             contentHtml = '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; padding: 2%; box-sizing: border-box;">';
 
