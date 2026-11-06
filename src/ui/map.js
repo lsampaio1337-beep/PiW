@@ -990,17 +990,35 @@ export function showMapTooltip(e, locationName) {
     let leftPos = e.clientX + cursorOffset;
     let topPos = e.clientY + cursorOffset;
 
-    // Clamp to window boundaries
-    if (leftPos + rect.width > window.innerWidth) {
+    // Clamp to map boundaries
+    let bounds = {
+        left: 0,
+        top: 0,
+        right: window.innerWidth,
+        bottom: window.innerHeight
+    };
+
+    const mapWindowElem = document.getElementById('window-map');
+    if (mapWindowElem) {
+        const mapRect = mapWindowElem.getBoundingClientRect();
+        bounds = {
+            left: mapRect.left,
+            top: mapRect.top,
+            right: mapRect.right,
+            bottom: mapRect.bottom
+        };
+    }
+
+    if (leftPos + rect.width > bounds.right) {
         leftPos = e.clientX - rect.width - cursorOffset;
     }
-    if (topPos + rect.height > window.innerHeight) {
+    if (topPos + rect.height > bounds.bottom) {
         topPos = e.clientY - rect.height - cursorOffset;
     }
 
-    // Ensure it doesn't go off the top or left edges either
-    leftPos = Math.max(0, leftPos);
-    topPos = Math.max(0, topPos);
+    // Ensure it doesn't go off the top or left edges of the map
+    leftPos = Math.max(bounds.left, leftPos);
+    topPos = Math.max(bounds.top, topPos);
 
     tooltip.style.left = leftPos + "px";
     tooltip.style.top = topPos + "px";
