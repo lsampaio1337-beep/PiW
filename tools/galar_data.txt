@@ -1,0 +1,524 @@
+Route Name	Pokemon Name
+Axew's Eye	Greedent
+Axew's Eye	Bronzong
+Axew's Eye	Diggersby
+Axew's Eye	Bewear
+Axew's Eye	Snover
+Axew's Eye	Klink
+Axew's Eye	Vanillish
+Axew's Eye	Delibird
+Brawlers' Cave	Druddigon
+Brawlers' Cave	Woobat
+Brawlers' Cave	Chansey
+Brawlers' Cave	Whismur
+Brawlers' Cave	Psyduck
+Brawlers' Cave	Azurill
+Brawlers' Cave	Lickitung
+Bridge Field	Lanturn
+Bridge Field	Qwilfish
+Bridge Field	Litwick
+Bridge Field	Drednaw
+Bridge Field	Onix
+Bridge Field	Cufant
+Bridge Field	Cubchoo
+Bridge Field	Sneasel
+Bridge Field	Mawile
+Bridge Field	Poliwag
+Bridge Field	Palpitoad
+Bridge Field	Inkay
+Challenge Beach	Luxray
+Challenge Beach	Morpeko
+Challenge Beach	Magnemite
+Challenge Beach	Dedenne
+Challenge Beach	Chansey
+Challenge Beach	Sandygast
+Challenge Beach	Buneary
+Challenge Beach	Psyduck
+Challenge Road	Gallade
+Challenge Road	Skarmory
+Challenge Road	Rockruff
+Challenge Road	Chansey
+Challenge Road	Happiny
+Challenge Road	Mienfoo
+Challenge Road	Dwebble
+Challenge Road	Roggenrola
+Challenge Road	Blipbug
+Challenge Road	Salandit
+Crown Shrine	Glastrier
+Crown Shrine	Spectrier
+Dappled Grove	Bellossom
+Dappled Grove	Klink
+Dappled Grove	Nuzleaf
+Dappled Grove	Snorunt
+Dappled Grove	Bunnelby
+Dappled Grove	Lombre
+Dappled Grove	Delibird
+Dappled Grove	Vanillite
+Dappled Grove	Cottonee
+Dusty Bowl	Klang
+Dusty Bowl	Hattrem
+Dusty Bowl	Ferrothorn
+Dusty Bowl	Bronzong
+Dusty Bowl	Snover
+Dusty Bowl	Swinub
+Dusty Bowl	Mawile
+Dusty Bowl	Cubchoo
+Dyna Tree Hill	Aerodactyl
+Dyna Tree Hill	Articuno
+Dyna Tree Hill	Zapdos
+Dyna Tree Hill	Moltres
+East Lake Axewell	Snover
+East Lake Axewell	Minccino
+East Lake Axewell	Pancham
+East Lake Axewell	Stufful
+East Lake Axewell	Wishiwashi
+East Lake Axewell	Shellder
+East Lake Axewell	Magikarp
+East Lake Axewell	Wingull
+East Lake Axewell	Vanillite
+Energy Plant	Zacian
+Energy Plant	Zamazenta
+Fields of Honor	Jigglypuff
+Fields of Honor	Klefki
+Fields of Honor	Chansey
+Fields of Honor	Happiny
+Fields of Honor	Abra
+Fields of Honor	Buneary
+Fields of Honor	Blipbug
+Forest of Focus	Zarude
+Forest of Focus	Larvesta
+Forest of Focus	Zorua
+Forest of Focus	Oranguru
+Forest of Focus	Emolga
+Forest of Focus	Passimian
+Forest of Focus	Karrablast
+Forest of Focus	Beldum
+Forest of Focus	Pikachu
+Forest of Focus	Foongus
+Forest of Focus	Venipede
+Forest of Focus	Tangela
+Frigid Sea	Electivire
+Frigid Sea	Cobalion
+Frigid Sea	Eiscue
+Frigid Sea	Dragonite
+Frigid Sea	Dhelmise
+Frigid Sea	Gyarados
+Frigid Sea	Tirtouga
+Frigid Sea	Avalugg
+Frigid Sea	Lapras
+Frigid Sea	Vanillish
+Frigid Sea	Cryogonal
+Galar Mine	Grookey
+Galar Mine	Scorbunny
+Galar Mine	Sobble
+Galar Mine	Diglett
+Galar Mine	Woobat
+Galar Mine	Rolycoly
+Galar Mine	Timburr
+Galar Mine	Drilbur
+Galar Mine	Roggenrola
+Galar Mine No. 2	Croagunk
+Galar Mine No. 2	Scraggy
+Galar Mine No. 2	Shuckle
+Galar Mine No. 2	Wimpod
+Galar Mine No. 2	Binacle
+Galar Mine No. 2	Chewtle
+Galar Mine No. 2	Stunfisk
+Galar Mine No. 2	Shellos
+Galar Mine No. 2	Noibat
+Giant's Cap	Riolu
+Giant's Cap	Linoone
+Giant's Cap	Sneasel
+Giant's Cap	Pawniard
+Giant's Cap	Dottler
+Giant's Cap	Delibird
+Giant's Foot	Lileep
+Giant's Foot	Anorith
+Giant's Foot	Archen
+Giant's Foot	Claydol
+Giant's Foot	Copperajah
+Giant's Foot	Stonjourner
+Giant's Foot	Bronzong
+Giant's Foot	Absol
+Giant's Foot	Audino
+Giant's Foot	Cryogonal
+Glimwood Tangle	Indeedee
+Glimwood Tangle	Hattrem
+Glimwood Tangle	Oranguru
+Glimwood Tangle	Shiinotic
+Glimwood Tangle	Passimian
+Glimwood Tangle	Sinistea
+Glimwood Tangle	Morgrem
+Glimwood Tangle	Ponyta
+Glimwood Tangle	Phantump
+Hammerlocke Hills	Pumpkaboo
+Hammerlocke Hills	Natu
+Hammerlocke Hills	Wobbuffet
+Hammerlocke Hills	Machoke
+Hammerlocke Hills	Turtonator
+Hammerlocke Hills	Honedge
+Hammerlocke Hills	Sneasel
+Hammerlocke Hills	Snorunt
+Hammerlocke Hills	Klink
+Hammerlocke Hills	Vanillite
+Honeycalm Island	Combee
+Honeycalm Island	Chansey
+Honeycalm Island	Happiny
+Honeycalm Island	Blipbug
+Honeycalm Island	Petilil
+Hulbury	Chinchou
+Hulbury	Arrokuda
+Hulbury	Chewtle
+Hulbury	Basculin
+Hulbury	Wishiwashi
+Iceberg Ruins	Regice
+Iceberg Ruins	Hatterene
+Iron Ruins	Registeel
+Iron Ruins	Coalossal
+Lake of Outrage	Eiscue
+Lake of Outrage	Reuniclus
+Lake of Outrage	Gothitelle
+Lake of Outrage	Bisharp
+Lake of Outrage	Ditto
+Lake of Outrage	Doublade
+Lake of Outrage	Copperajah
+Lake of Outrage	Klinklang
+Lake of Outrage	Golurk
+Lake of Outrage	Rotom
+Lake of Outrage	Duraludon
+Lake of Outrage	Togekiss
+Lake of Outrage	Dreepy
+Lake of Outrage	Goomy
+Lake of Outrage	Vanilluxe
+Lakeside Cave	Terrakion
+Lakeside Cave	Aron
+Lakeside Cave	Noivern
+Lakeside Cave	Carbink
+Lakeside Cave	Audino
+Lakeside Cave	Carkol
+Lakeside Cave	Sableye
+Lakeside Cave	Mawile
+Lakeside Cave	Ferroseed
+Lakeside Cave	Zubat
+Master Dojo	Kubfu
+Master Dojo	Squirtle
+Master Dojo	Bulbasaur
+Motostoke Outskirts	Sudowoodo
+Motostoke Outskirts	Impidimp
+Motostoke Outskirts	Salandit
+Motostoke Outskirts	Pawniard
+Motostoke Outskirts	Hatenna
+Motostoke Outskirts	Throh
+Motostoke Outskirts	Sawk
+Motostoke Riverbank	Barraskewda
+Motostoke Riverbank	Mantyke
+Motostoke Riverbank	Sigilyph
+Motostoke Riverbank	Cutiefly
+Motostoke Riverbank	Mareanie
+Motostoke Riverbank	Ferroseed
+Motostoke Riverbank	Sneasel
+Motostoke Riverbank	Basculin
+Motostoke Riverbank	Vanillite
+North Lake Miloch	Vileplume
+North Lake Miloch	Croagunk
+North Lake Miloch	Noctowl
+North Lake Miloch	Corvisquire
+North Lake Miloch	Scraggy
+North Lake Miloch	Roggenrola
+North Lake Miloch	Pawniard
+North Lake Miloch	Chewtle
+North Lake Miloch	Koffing
+Old Cemetery	Nidoran♂
+Old Cemetery	Nidoran♀
+Old Cemetery	Mime Jr.
+Old Cemetery	Absol
+Old Cemetery	Karrablast
+Old Cemetery	Elekid
+Old Cemetery	Drakloak
+Old Cemetery	Sinistea
+Old Cemetery	Vanillish
+Old Cemetery	Vanillite
+Path to the Peak	Tyrunt
+Path to the Peak	Swablu
+Path to the Peak	Frosmoth
+Path to the Peak	Snom
+Path to the Peak	Absol
+Path to the Peak	Audino
+Potbottom Desert	Krookodile
+Potbottom Desert	Chandelure
+Potbottom Desert	Carkol
+Potbottom Desert	Charizard
+Roaring-Sea Caves	Feebas
+Roaring-Sea Caves	Omanyte
+Roaring-Sea Caves	Kabuto
+Roaring-Sea Caves	Carbink
+Roaring-Sea Caves	Piloswine
+Roaring-Sea Caves	Larvitar
+Roaring-Sea Caves	Deino
+Roaring-Sea Caves	Zubat
+Roaring-Sea Caves	Spheal
+Rock Peak Ruins	Regirock
+Rock Peak Ruins	Centiskorch
+Rolling Fields	Shedinja
+Rolling Fields	Tyrogue
+Rolling Fields	Swinub
+Rolling Fields	Snorunt
+Rolling Fields	Metapod
+Rolling Fields	Bunnelby
+Rolling Fields	Delibird
+Rolling Fields	Vanillite
+Rolling Fields	Bounsweet
+Route 1	Virizion
+Route 1	Hoothoot
+Route 1	Shinx
+Route 1	Solosis
+Route 1	Gothita
+Route 1	Ralts
+Route 1	Rookidee
+Route 1	Blipbug
+Route 1	Grubbin
+Route 1	Caterpie
+Route 1	Wooloo
+Route 1	Nickit
+Route 1	Horsea
+Route 1	Skwovet
+Route 10	Dratini
+Route 10	Mr. Mime
+Route 10	Mr. Rime
+Route 10	Beartic
+Route 10	Stonjourner
+Route 10	Snom
+Route 10	Abomasnow
+Route 10	Snover
+Route 10	Cubchoo
+Route 10	Vanillish
+Route 10	Darumaka
+Route 2	Fletchling
+Route 2	Kirlia
+Route 2	Hoothoot
+Route 2	Togepi
+Route 2	Spiritomb
+Route 2	Pidove
+Route 2	Chewtle
+Route 2	Lotad
+Route 2	Purrloin
+Route 2	Yamper
+Route 2	Nickit
+Route 2	Slowbro
+Route 2	Seedot
+Route 2	Zigzagoon
+Route 3	Vulpix
+Route 3	Sizzlipede
+Route 3	Gossifleur
+Route 3	Growlithe
+Route 3	Mudbray
+Route 3	Stunky
+Route 3	Trubbish
+Route 3	Pancham
+Route 3	Corsola
+Route 3	Machop
+Route 4	Charmander
+Route 4	Relicanth
+Route 4	Pumpkaboo
+Route 4	Electrike
+Route 4	Eevee
+Route 4	Cutiefly
+Route 4	Pikachu
+Route 4	Sandile
+Route 4	Milcery
+Route 4	Ferroseed
+Route 4	Joltik
+Route 4	Budew
+Route 4	Meowth
+Route 5	Wobbuffet
+Route 5	Fomantis
+Route 5	Gloom
+Route 5	Oddish
+Route 5	Dottler
+Route 5	Spritzee
+Route 5	Swirlix
+Route 5	Espurr
+Route 5	Applin
+Route 5	Nincada
+Route 5	Dewpider
+Route 5	Farfetch'd
+Route 6	Dracozolt
+Route 6	Arctozolt
+Route 6	Dracovish
+Route 6	Arctovish
+Route 6	Raboot
+Route 6	Thwackey
+Route 6	Drizzile
+Route 6	Heatmor
+Route 6	Durant
+Route 6	Torkoal
+Route 6	Hawlucha
+Route 6	Maractus
+Route 6	Skorupi
+Route 6	Trapinch
+Route 6	Silicobra
+Route 6	Axew
+Route 6	Helioptile
+Route 6	Hippopotas
+Route 6	Slowpoke
+Route 6	Yamask
+Route 6	Dugtrio
+Route 7	Meowstic
+Route 7	Morpeko
+Route 7	Porygon
+Route 7	Thievul
+Route 7	Perrserker
+Route 7	Corviknight
+Route 7	Galvantula
+Route 7	Shelmet
+Route 7	Liepard
+Route 7	Toxel
+Route 7	Karrablast
+Route 7	Seismitoad
+Route 8	Wailmer
+Route 8	Drapion
+Route 8	Falinks
+Route 8	Togedemaru
+Route 8	Sandaconda
+Route 8	Vullaby
+Route 8	Dusclops
+Route 8	Rufflet
+Route 8	Haunter
+Route 8	Hippowdon
+Route 8	Boldore
+Route 8	Gurdurr
+Route 8	Staryu
+Route 8	Solrock
+Route 8	Lunatone
+Route 8	Rhyhorn
+Route 9	Kingler
+Route 9	Mareanie
+Route 9	Jellicent
+Route 9	Octillery
+Route 9	Pelipper
+Route 9	Pyukumuku
+Route 9	Cramorant
+Route 9	Pincurchin
+Route 9	Gastrodon
+Route 9	Clobbopus
+Slippery Slope	Magmortar
+Slippery Slope	Mimikyu
+Slippery Slope	Mime Jr.
+Slippery Slope	Magby
+Slippery Slope	Amaura
+Slippery Slope	Audino
+Slippery Slope	Piloswine
+Slippery Slope	Snom
+Slippery Slope	Greedent
+Slippery Slope	Smoochum
+Slippery Slope	Jynx
+Slippery Slope	Cryogonal
+Slumbering Weald	Hoothoot
+Slumbering Weald	Munna
+Slumbering Weald	Rookidee
+Slumbering Weald	Blipbug
+Slumbering Weald	Grubbin
+Slumbering Weald	Weezing
+Slumbering Weald	Skwovet
+Slumbering Weald 2	Whiscash
+Slumbering Weald 2	Orbeetle
+Slumbering Weald 2	Corviknight
+Slumbering Weald 2	Butterfree
+Slumbering Weald 2	Magikarp
+Slumbering Weald 2	Barboach
+Slumbering Weald 2	Stunfisk
+Soothing Wetlands	Shelmet
+Soothing Wetlands	Bouffalant
+Soothing Wetlands	Happiny
+Soothing Wetlands	Elgyem
+Soothing Wetlands	Dunsparce
+Soothing Wetlands	Applin
+Soothing Wetlands	Skorupi
+Soothing Wetlands	Wooper
+Soothing Wetlands	Skwovet
+Soothing Wetlands	Lickitung
+South Lake Miloch	Klink
+South Lake Miloch	Snover
+South Lake Miloch	Corphish
+South Lake Miloch	Vanillite
+South Lake Miloch	Delibird
+South Lake Miloch	Machop
+Split-Decision Ruins	Regieleki
+Split-Decision Ruins	Regidrago
+Stepping-Stone Sea	Blastoise
+Stepping-Stone Sea	Flapple
+Stepping-Stone Sea	Appletun
+Stepping-Stone Sea	Gardevoir
+Stepping-Stone Sea	Chansey
+Stepping-Stone Sea	Happiny
+Stepping-Stone Sea	Exeggcute
+Stepping-Stone Sea	Blipbug
+Stepping-Stone Sea	Wingull
+Stepping-Stone Sea	Skwovet
+Stony Wilderness	Tsareena
+Stony Wilderness	Sirfetch'd
+Stony Wilderness	Unfezant
+Stony Wilderness	Munchlax
+Stony Wilderness	Baltoy
+Stony Wilderness	Bronzor
+Stony Wilderness	Golett
+Stony Wilderness	Sneasel
+Stony Wilderness	Pawniard
+Stony Wilderness	Ferroseed
+Tower Summit	Calyrex
+Tower Summit	Eternatus
+Training Lowlands	Carvanha
+Training Lowlands	Venusaur
+Training Lowlands	Sharpedo
+Training Lowlands	Comfey
+Training Lowlands	Jangmo-o
+Training Lowlands	Scyther
+Training Lowlands	Pinsir
+Training Lowlands	Miltank
+Training Lowlands	Heracross
+Training Lowlands	Tauros
+Training Lowlands	Blipbug
+Training Lowlands	Lillipup
+Tunnel to the Top	Bagon
+Tunnel to the Top	Gible
+Tunnel to the Top	Clefairy
+Tunnel to the Top	Audino
+Tunnel to the Top	Carbink
+Tunnel to the Top	Snorunt
+Tunnel to the Top	Zubat
+Warm-Up Tunnel	Sandshrew
+Warm-Up Tunnel	Cubone
+Warm-Up Tunnel	Kangaskhan
+Warm-Up Tunnel	Torkoal
+Warm-Up Tunnel	Chansey
+Watchtower Ruins	Gastly
+Watchtower Ruins	Cherubi
+Watchtower Ruins	Snorunt
+Watchtower Ruins	Purrloin
+Watchtower Ruins	Snover
+Watchtower Ruins	Duskull
+Watchtower Ruins	Drifloon
+Watchtower Ruins	Delibird
+West Lake Axewell	Remoraid
+West Lake Axewell	Goldeen
+West Lake Axewell	Klink
+West Lake Axewell	Tympole
+West Lake Axewell	Frillish
+West Lake Axewell	Wishiwashi
+West Lake Axewell	Krabby
+West Lake Axewell	Vanillite
+West Lake Axewell	Delibird
+Workout Sea	Kommo-o
+Workout Sea	Talonflame
+Workout Sea	Goodra
+Workout Sea	Kingdra
+Workout Sea	Clawitzer
+Workout Sea	Dragalge
+Workout Sea	Clauncher
+Workout Sea	Remoraid
+Workout Sea	Skrelp
+Workout Sea	Drampa
+Workout Sea	Tentacool
+Workout Sea	Magikarp
+Workout Sea	Gyarados
+Workout Sea	Octillery
