@@ -98,7 +98,8 @@ export const state = {
         hasSeenMultiplayerIcon: false,
         hasSeenGiftIcon: false,
         hasSeenJohtoMap: false,
-        hasSeenBonusCandyModal: false
+        hasSeenBonusCandyModal: false,
+        medals: {}
     },
     settings: {
         gameSpeed: 1.0,
