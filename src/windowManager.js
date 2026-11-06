@@ -15,7 +15,7 @@ export class WindowManager {
         });
     }
 
-    _parseArgs(argStr, contextValue) {
+    _parseArgs(argStr, contextValue, eventObj) {
         const rawArgs = [];
         let currentArg = '';
         let inQuotes = false;
@@ -56,6 +56,7 @@ export class WindowManager {
             if (s === 'undefined') return undefined;
             if (!isNaN(s) && s !== '') return Number(s);
             if (s === 'this.value') return contextValue;
+            if (s === 'event') return eventObj;
 
             if (s.startsWith('{') && s.endsWith('}')) {
                 try {
@@ -137,7 +138,7 @@ export class WindowManager {
         if (argCallMatch) {
             const funcName = argCallMatch[1];
             if (allowedFuncs.includes(funcName) && typeof window[funcName] === 'function') {
-                const processedArgs = this._parseArgs(argCallMatch[2].trim(), el.value);
+                const processedArgs = this._parseArgs(argCallMatch[2].trim(), el.value, event);
                 window[funcName](...processedArgs);
             }
             return;
@@ -148,7 +149,7 @@ export class WindowManager {
             const funcName = nestedCallMatch[2];
             // We explicitly only allow globals.battleSystem and windowManager methods.
             if ((objName === 'windowManager' || (objName === 'globals' && funcName === 'battleSystem')) && window[objName] && typeof window[objName][funcName] === 'function') {
-                const processedArgs = this._parseArgs(nestedCallMatch[3].trim(), el.value);
+                const processedArgs = this._parseArgs(nestedCallMatch[3].trim(), el.value, event);
                 window[objName][funcName](...processedArgs);
             }
             return;
