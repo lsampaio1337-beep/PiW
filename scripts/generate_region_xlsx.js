@@ -380,7 +380,7 @@ const mainSeenSets = [];
                             typeOk = "NONONO";
                         }
 
-                        if (encounterCache[pkName.toLowerCase()]) {
+if (encounterCache[pkName.toLowerCase()]) {
                             const locations = encounterCache[pkName.toLowerCase()];
                             const normalizedRoute = routeNameLower.replace(/[^a-z0-9]/g, '');
                             for (const loc of locations) {
@@ -389,6 +389,12 @@ const mainSeenSets = [];
                                     typeOk = "Legacy";
                                     break;
                                 }
+                            }
+
+                            // Specific region custom names fallback
+                            if (typeOk !== "Legacy" && region === 6) {
+                                // We trust the user's manual route mapping for Kalos
+                                typeOk = "Legacy";
                             }
                         }
 
