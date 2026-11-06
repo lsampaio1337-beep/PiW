@@ -2962,8 +2962,8 @@ export const sinnohUnlocks = [
     challengeName: "Challenge 34",
     areaId: "Sinnoh Pokemon League",
     unlocks: [
-      "Deep Lake Verity",
       "Iron Island",
+      "Deep Lake Verity",
       "Sendoff Spring",
       "Route 225",
       "Route 224",
@@ -3098,7 +3098,7 @@ export const sinnohUnlocks = [
     challengeName: "Extra Challenge B 03",
     areaId: "Snowpoint Temple",
     unlocks: [
-      "Guardian's Cavern"
+      "Aegis Pass"
     ],
     requirements: {
       catchSpecies: [
@@ -3115,7 +3115,7 @@ export const sinnohUnlocks = [
   },
   {
     challengeName: "Extra Challenge B 04",
-    areaId: "Guardian's Cavern",
+    areaId: "Aegis Pass",
     requirements: {
       catchSpecies: [
         {
@@ -3441,7 +3441,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Extra Challenge Hall of Origin",
+    challengeName: "Hall of Origin Challenge",
     areaId: "Hall of Origin",
     requirements: {
       catchSpecies: [
@@ -3478,11 +3478,11 @@ export const sinnohUnlocks = [
     ],
     requirements: {
       completeChallenges: [
+        "Extra Challenge B 04",
         "Extra Challenge C 05",
         "Extra Challenge D 03",
         "Extra Challenge E 04",
-        "Extra Challenge F 04",
-        "Extra Challenge B 04"
+        "Extra Challenge F 04"
       ]
     }
   }
