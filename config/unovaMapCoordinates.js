@@ -116,8 +116,8 @@ const unovaMapCoordinates = {
   },
   "virbank_gym": {
     "name": "Virbank Gym",
-    "x": 27.24,
-    "y": 72.44
+    "x": 26.15,
+    "y": 64.25
   },
   "castelia_gym": {
     "name": "Castelia Gym",
@@ -398,6 +398,17 @@ const unovaMapCoordinates = {
     "name": "Abundant Shrine Depths",
     "x": 74.65,
     "y": 47.99
+  }
+,
+  "virbank_bay": {
+    "name": "Virbank Bay",
+    "x": 26.65,
+    "y": 73.6
+  },
+  "hidden_grotto": {
+    "name": "Hidden Grotto",
+    "x": 74,
+    "y": 55
   }
 };
 export default unovaMapCoordinates;

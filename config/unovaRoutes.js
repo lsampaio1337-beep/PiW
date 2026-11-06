@@ -2554,40 +2554,6 @@ export const unovaRoutes = [
     ]
   },
   {
-    "name": "Route 24",
-    "spawns": [
-      {
-        "pokemonId": 615,
-        "minLevel": 92,
-        "maxLevel": 96,
-        "chance": 0.5
-      },
-      {
-        "pokemonId": 614,
-        "minLevel": 92,
-        "maxLevel": 96,
-        "chance": 0.5
-      }
-    ]
-  },
-  {
-    "name": "Route 25",
-    "spawns": [
-      {
-        "pokemonId": 618,
-        "minLevel": 96,
-        "maxLevel": 100,
-        "chance": 0.5
-      },
-      {
-        "pokemonId": 626,
-        "minLevel": 96,
-        "maxLevel": 100,
-        "chance": 0.5
-      }
-    ]
-  },
-  {
     "name": "Abundant Shrine Depths",
     "spawns": [
       {
@@ -2632,6 +2598,41 @@ export const unovaRoutes = [
         "chance": 0.3333
       }
     ]
+  },
+  {
+    "name": "Hidden Grotto",
+    "spawns": [
+      {
+        "pokemonId": 615,
+        "minLevel": 92,
+        "maxLevel": 96,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 614,
+        "minLevel": 92,
+        "maxLevel": 96,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 618,
+        "minLevel": 96,
+        "maxLevel": 100,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 626,
+        "minLevel": 96,
+        "maxLevel": 100,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 214,
+        "minLevel": 92,
+        "maxLevel": 100,
+        "chance": 0.2
+      }
+    ]
   }
 ];
 
@@ -2640,7 +2641,7 @@ export const unovaUnlocks = [
     "challengeName": "Challenge 01",
     "areaId": "Route 19",
     "unlocks": [
-      "Route 20"
+      "Floccesy Ranch"
     ],
     "requirements": {
       "catchSpecies": [
@@ -2655,7 +2656,7 @@ export const unovaUnlocks = [
     "challengeName": "Challenge 02",
     "areaId": "Route 20",
     "unlocks": [
-      "Floccesy Ranch"
+      "Aspertia Gym"
     ],
     "requirements": {
       "catchSpecies": [
@@ -2685,7 +2686,7 @@ export const unovaUnlocks = [
     "challengeName": "Challenge 04",
     "areaId": "Floccesy Pond",
     "unlocks": [
-      "Aspertia Gym"
+      "Route 20"
     ],
     "requirements": {
       "catchSpecies": [
@@ -2700,7 +2701,7 @@ export const unovaUnlocks = [
     "challengeName": "Challenge 05",
     "areaId": "Aspertia Gym",
     "unlocks": [
-      "Virbank City"
+      "Virbank Complex"
     ],
     "requirements": {
       "earnBadge": {
@@ -2712,19 +2713,6 @@ export const unovaUnlocks = [
   },
   {
     "challengeName": "Challenge 06",
-    "areaId": "Virbank City",
-    "unlocks": [
-      "Virbank Complex"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Virbank City",
-        "count": 20
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 07",
     "areaId": "Virbank Complex",
     "unlocks": [
       "Virbank Bay"
@@ -2739,7 +2727,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 08",
+    "challengeName": "Challenge 07",
     "areaId": "Virbank Bay",
     "unlocks": [
       "Virbank Gym"
@@ -2754,7 +2742,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 09",
+    "challengeName": "Challenge 08",
     "areaId": "Virbank Gym",
     "unlocks": [
       "Castelia City"
@@ -2768,7 +2756,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 10",
+    "challengeName": "Challenge 09",
     "areaId": "Castelia City",
     "unlocks": [
       "Castelia Sewers"
@@ -2783,7 +2771,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 11",
+    "challengeName": "Challenge 10",
     "areaId": "Castelia Sewers",
     "unlocks": [
       "Castelia Park"
@@ -2798,7 +2786,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 12",
+    "challengeName": "Challenge 11",
     "areaId": "Castelia Park",
     "unlocks": [
       "Relic Passage"
@@ -2813,7 +2801,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 13",
+    "challengeName": "Challenge 12",
     "areaId": "Relic Passage",
     "unlocks": [
       "Castelia Gym"
@@ -2828,7 +2816,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 14",
+    "challengeName": "Challenge 13",
     "areaId": "Castelia Gym",
     "unlocks": [
       "Route 4"
@@ -2842,7 +2830,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 15",
+    "challengeName": "Challenge 14",
     "areaId": "Route 4",
     "unlocks": [
       "Desert Resort"
@@ -2857,7 +2845,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 16",
+    "challengeName": "Challenge 15",
     "areaId": "Desert Resort",
     "unlocks": [
       "Relic Castle"
@@ -2872,7 +2860,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 17",
+    "challengeName": "Challenge 16",
     "areaId": "Relic Castle",
     "unlocks": [
       "Nimbasa City"
@@ -2887,7 +2875,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 18",
+    "challengeName": "Challenge 17",
     "areaId": "Nimbasa City",
     "unlocks": [
       "Route 16"
@@ -2902,7 +2890,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 19",
+    "challengeName": "Challenge 18",
     "areaId": "Route 16",
     "unlocks": [
       "Lostlorn Forest"
@@ -2917,7 +2905,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 20",
+    "challengeName": "Challenge 19",
     "areaId": "Lostlorn Forest",
     "unlocks": [
       "Nimbasa Gym"
@@ -2932,7 +2920,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 21",
+    "challengeName": "Challenge 20",
     "areaId": "Nimbasa Gym",
     "unlocks": [
       "Driftveil Drawbridge"
@@ -2946,10 +2934,10 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 22",
+    "challengeName": "Challenge 21",
     "areaId": "Driftveil Drawbridge",
     "unlocks": [
-      "Driftveil City"
+      "Driftveil Gym"
     ],
     "requirements": {
       "catchSpecies": [
@@ -2961,20 +2949,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 23",
-    "areaId": "Driftveil City",
-    "unlocks": [
-      "Driftveil Gym"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Driftveil City",
-        "count": 20
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 24",
+    "challengeName": "Challenge 22",
     "areaId": "Driftveil Gym",
     "unlocks": [
       "Route 6"
@@ -2988,7 +2963,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 25",
+    "challengeName": "Challenge 23",
     "areaId": "Route 6",
     "unlocks": [
       "Chargestone Cave"
@@ -3003,10 +2978,10 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 26",
+    "challengeName": "Challenge 24",
     "areaId": "Chargestone Cave",
     "unlocks": [
-      "Mistralton City"
+      "Route 7"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3018,24 +2993,10 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 27",
-    "areaId": "Mistralton City",
-    "unlocks": [
-      "Route 7"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Mistralton City",
-        "count": 20
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 28",
+    "challengeName": "Challenge 25",
     "areaId": "Route 7",
     "unlocks": [
-      "Celestial Tower",
-      "Route 8"
+      "Celestial Tower"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3047,7 +3008,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 29",
+    "challengeName": "Challenge 26",
     "areaId": "Celestial Tower",
     "unlocks": [
       "Mistralton Gym"
@@ -3062,10 +3023,11 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 30",
+    "challengeName": "Challenge 27",
     "areaId": "Mistralton Gym",
     "unlocks": [
-      "Strange House"
+      "Strange House",
+      "Route 8"
     ],
     "requirements": {
       "earnBadge": {
@@ -3076,7 +3038,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 31",
+    "challengeName": "Challenge 28",
     "areaId": "Strange House",
     "unlocks": [
       "Reversal Mountain"
@@ -3091,10 +3053,10 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 32",
+    "challengeName": "Challenge 29",
     "areaId": "Reversal Mountain",
     "unlocks": [
-      "Undella Town"
+      "Undella Bay"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3106,20 +3068,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 33",
-    "areaId": "Undella Town",
-    "unlocks": [
-      "Undella Bay"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Undella Town",
-        "count": 20
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 34",
+    "challengeName": "Challenge 30",
     "areaId": "Undella Bay",
     "unlocks": [
       "Route 14"
@@ -3134,7 +3083,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 35",
+    "challengeName": "Challenge 31",
     "areaId": "Route 14",
     "unlocks": [
       "Abundant Shrine",
@@ -3150,7 +3099,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 36",
+    "challengeName": "Challenge 32",
     "areaId": "Abundant Shrine",
     "unlocks": [
       "Route 13"
@@ -3165,10 +3114,10 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 37",
+    "challengeName": "Challenge 33",
     "areaId": "Route 13",
     "unlocks": [
-      "Village Bridge"
+      "Route 12"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3180,10 +3129,10 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 38",
+    "challengeName": "Challenge 34",
     "areaId": "Village Bridge",
     "unlocks": [
-      "Route 12"
+      "Route 11"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3195,10 +3144,10 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 39",
+    "challengeName": "Challenge 35",
     "areaId": "Route 12",
     "unlocks": [
-      "Route 11"
+      "Village Bridge"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3210,10 +3159,10 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 40",
+    "challengeName": "Challenge 36",
     "areaId": "Route 11",
     "unlocks": [
-      "Opelucid City"
+      "Route 9"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3225,20 +3174,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 41",
-    "areaId": "Opelucid City",
-    "unlocks": [
-      "Route 9"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Opelucid City",
-        "count": 20
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 42",
+    "challengeName": "Challenge 37",
     "areaId": "Route 9",
     "unlocks": [
       "Opelucid Gym"
@@ -3253,10 +3189,10 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 43",
+    "challengeName": "Challenge 38",
     "areaId": "Opelucid Gym",
     "unlocks": [
-      "Humilau City"
+      "Humilau Sea"
     ],
     "requirements": {
       "earnBadge": {
@@ -3267,20 +3203,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 44",
-    "areaId": "Humilau City",
-    "unlocks": [
-      "Humilau Sea"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Humilau City",
-        "count": 20
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 45",
+    "challengeName": "Challenge 39",
     "areaId": "Humilau Sea",
     "unlocks": [
       "Route 22"
@@ -3295,7 +3218,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 46",
+    "challengeName": "Challenge 40",
     "areaId": "Route 22",
     "unlocks": [
       "Humilau Gym"
@@ -3310,7 +3233,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 47",
+    "challengeName": "Challenge 41",
     "areaId": "Humilau Gym",
     "unlocks": [
       "Route 21"
@@ -3324,7 +3247,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 48",
+    "challengeName": "Challenge 42",
     "areaId": "Route 21",
     "unlocks": [
       "Seaside Cave"
@@ -3339,7 +3262,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 49",
+    "challengeName": "Challenge 43",
     "areaId": "Seaside Cave",
     "unlocks": [
       "P2 Laboratory"
@@ -3354,7 +3277,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 50",
+    "challengeName": "Challenge 44",
     "areaId": "P2 Laboratory",
     "unlocks": [
       "Wellspring Cave"
@@ -3369,7 +3292,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 51",
+    "challengeName": "Challenge 45",
     "areaId": "Wellspring Cave",
     "unlocks": [
       "Giant Chasm"
@@ -3384,7 +3307,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 52",
+    "challengeName": "Challenge 46",
     "areaId": "Giant Chasm",
     "unlocks": [
       "Route 23"
@@ -3399,7 +3322,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 53",
+    "challengeName": "Challenge 47",
     "areaId": "Route 23",
     "unlocks": [
       "Victory Road"
@@ -3414,7 +3337,7 @@ export const unovaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 54",
+    "challengeName": "Challenge 48",
     "areaId": "Victory Road",
     "unlocks": [
       "Unova Pokemon League"
@@ -3433,7 +3356,7 @@ export const unovaUnlocks = [
     "areaId": "Unova Pokemon League",
     "unlocks": [
       "New Region to Travel",
-      "Route 19",
+      "Route 1",
       "Daycare",
       "Route 10"
     ],
@@ -3533,6 +3456,29 @@ export const unovaUnlocks = [
     }
   },
   {
+    "challengeName": "Extra Challenge A 06",
+    "areaId": "Underground Ruins",
+    "unlocks": [],
+    "requirements": {
+      "catchSpeciesOr": [
+        {
+          "species": "Aggron",
+          "count": 1
+        },
+        {
+          "species": "Probopass",
+          "count": 1
+        }
+      ]
+    },
+    "gifts": [
+      {
+        "item": "Masterball",
+        "count": 1
+      }
+    ]
+  },
+  {
     "challengeName": "Extra Challenge B Condition",
     "areaId": "Mistralton Gym",
     "unlocks": [],
@@ -3546,7 +3492,7 @@ export const unovaUnlocks = [
     "challengeName": "Extra Challenge B 01",
     "areaId": "Route 15",
     "unlocks": [
-      "Striaton City"
+      "Route 13"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3576,7 +3522,7 @@ export const unovaUnlocks = [
     "challengeName": "Extra Challenge B 03",
     "areaId": "Dreamyard",
     "unlocks": [
-      "Route 18"
+      "Route 17"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3589,9 +3535,9 @@ export const unovaUnlocks = [
   },
   {
     "challengeName": "Extra Challenge B 04",
-    "areaId": "Route 18",
+    "areaId": "Route 17",
     "unlocks": [
-      "Route 17"
+      "Route 18"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3600,6 +3546,14 @@ export const unovaUnlocks = [
           "count": 10
         }
       ]
+    }
+  },
+  {
+    "challengeName": "Extra Challenge B 05",
+    "areaId": "Route 18",
+    "unlocks": [],
+    "requirements": {
+      "catchSpeciesRoute": "Route 18"
     }
   },
   {
@@ -3769,7 +3723,7 @@ export const unovaUnlocks = [
     "challengeName": "Extra Challenge E 02",
     "areaId": "Nature Sanctuary",
     "unlocks": [
-      "Route 24"
+      "Hidden Grotto"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3782,30 +3736,19 @@ export const unovaUnlocks = [
   },
   {
     "challengeName": "Extra Challenge E 03",
-    "areaId": "Route 24",
-    "unlocks": [
-      "Route 25"
-    ],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Beartic",
-          "count": 10
-        }
-      ]
-    }
-  },
-  {
-    "challengeName": "Extra Challenge E 04",
-    "areaId": "Route 25",
+    "areaId": "Hidden Grotto",
     "unlocks": [
       "Abundant Shrine Depths"
     ],
     "requirements": {
       "catchSpecies": [
         {
-          "species": "Bouffalant",
-          "count": 10
+          "species": "Stunfisk",
+          "count": 1
+        },
+        {
+          "species": "Beartic",
+          "count": 1
         }
       ]
     }
@@ -3820,7 +3763,7 @@ export const unovaUnlocks = [
     "gifts": [
       {
         "item": "Masterball",
-        "count": 2
+        "count": 1
       }
     ]
   },
@@ -3834,7 +3777,7 @@ export const unovaUnlocks = [
     "gifts": [
       {
         "item": "Masterball",
-        "count": 2
+        "count": 1
       }
     ]
   },
@@ -3848,7 +3791,7 @@ export const unovaUnlocks = [
     "gifts": [
       {
         "item": "Masterball",
-        "count": 2
+        "count": 1
       }
     ]
   },
