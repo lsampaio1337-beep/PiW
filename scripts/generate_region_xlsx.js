@@ -380,7 +380,7 @@ const mainSeenSets = [];
                             typeOk = "NONONO";
                         }
 
-                        if (encounterCache[pkName.toLowerCase()]) {
+                        if (region.num === 9) { typeOk = "Legacy"; } else if (encounterCache[pkName.toLowerCase()]) {
                             const locations = encounterCache[pkName.toLowerCase()];
                             const normalizedRoute = routeNameLower.replace(/[^a-z0-9]/g, '');
                             for (const loc of locations) {
@@ -608,7 +608,7 @@ const mainSeenSets = [];
                         typeOk = "NONONO";
                     }
 
-                    if (encounterCache[pkName.toLowerCase()]) {
+                    if (region.num === 9) { typeOk = "Legacy"; } else if (encounterCache[pkName.toLowerCase()]) {
                         const locations = encounterCache[pkName.toLowerCase()];
                         const normalizedRoute = routeNameLower.replace(/[^a-z0-9]/g, '');
                         for (const loc of locations) {

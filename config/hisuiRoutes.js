@@ -45,7 +45,7 @@ export const hisuiRoutes = {
               id: 364,
               minLevel: 2,
               maxLevel: 4,
-              probability: 0.33
+              probability: 0.34
           }
       ]
   },
@@ -85,7 +85,7 @@ export const hisuiRoutes = {
               id: 421,
               minLevel: 4,
               maxLevel: 6,
-              probability: 0.17
+              probability: 0.15
           }
       ]
   },
@@ -131,7 +131,7 @@ export const hisuiRoutes = {
               id: 442,
               minLevel: 5,
               maxLevel: 7,
-              probability: 0.14
+              probability: 0.16
           }
       ]
   },
@@ -177,7 +177,7 @@ export const hisuiRoutes = {
               id: 548,
               minLevel: 7,
               maxLevel: 9,
-              probability: 0.14
+              probability: 0.16
           }
       ]
   },
@@ -227,7 +227,7 @@ export const hisuiRoutes = {
               id: 114,
               minLevel: 10,
               maxLevel: 12,
-              probability: 0.17
+              probability: 0.15
           }
       ]
   },
@@ -267,7 +267,7 @@ export const hisuiRoutes = {
               id: 400,
               minLevel: 11,
               maxLevel: 13,
-              probability: 0.17
+              probability: 0.15
           }
       ]
   },
@@ -313,7 +313,7 @@ export const hisuiRoutes = {
               id: 355,
               minLevel: 13,
               maxLevel: 15,
-              probability: 0.14
+              probability: 0.16
           }
       ]
   },
@@ -347,7 +347,7 @@ export const hisuiRoutes = {
               id: 193,
               minLevel: 14,
               maxLevel: 16,
-              probability: 0.20
+              probability: 0.2
           }
       ]
   },
@@ -387,7 +387,7 @@ export const hisuiRoutes = {
               id: 75,
               minLevel: 16,
               maxLevel: 18,
-              probability: 0.17
+              probability: 0.15
           }
       ]
   },
@@ -403,7 +403,7 @@ export const hisuiRoutes = {
               id: 723,
               minLevel: 17,
               maxLevel: 19,
-              probability: 0.50
+              probability: 0.5
           }
       ]
   },
@@ -453,7 +453,7 @@ export const hisuiRoutes = {
               id: 396,
               minLevel: 20,
               maxLevel: 22,
-              probability: 0.33
+              probability: 0.34
           }
       ]
   },
@@ -521,7 +521,7 @@ export const hisuiRoutes = {
               id: 406,
               minLevel: 23,
               maxLevel: 25,
-              probability: 0.17
+              probability: 0.15
           }
       ]
   },
@@ -543,7 +543,7 @@ export const hisuiRoutes = {
               id: 123,
               minLevel: 25,
               maxLevel: 27,
-              probability: 0.33
+              probability: 0.34
           }
       ]
   },
@@ -583,7 +583,7 @@ export const hisuiRoutes = {
               id: 41,
               minLevel: 26,
               maxLevel: 28,
-              probability: 0.17
+              probability: 0.15
           }
       ]
   },
@@ -605,7 +605,7 @@ export const hisuiRoutes = {
               id: 100,
               minLevel: 28,
               maxLevel: 30,
-              probability: 0.33
+              probability: 0.34
           }
       ]
   },
@@ -627,7 +627,7 @@ export const hisuiRoutes = {
               id: 397,
               minLevel: 29,
               maxLevel: 31,
-              probability: 0.33
+              probability: 0.34
           }
       ]
   },
@@ -649,7 +649,7 @@ export const hisuiRoutes = {
               id: 419,
               minLevel: 31,
               maxLevel: 33,
-              probability: 0.33
+              probability: 0.34
           }
       ]
   },
@@ -671,7 +671,7 @@ export const hisuiRoutes = {
               id: 74,
               minLevel: 32,
               maxLevel: 34,
-              probability: 0.33
+              probability: 0.34
           }
       ]
   },
@@ -755,7 +755,7 @@ export const hisuiRoutes = {
               id: 78,
               minLevel: 37,
               maxLevel: 39,
-              probability: 0.14
+              probability: 0.16
           }
       ]
   },
@@ -851,7 +851,7 @@ export const hisuiRoutes = {
               id: 397,
               minLevel: 41,
               maxLevel: 43,
-              probability: 0.17
+              probability: 0.15
           }
       ]
   },
@@ -891,7 +891,7 @@ export const hisuiRoutes = {
               id: 111,
               minLevel: 43,
               maxLevel: 45,
-              probability: 0.17
+              probability: 0.15
           }
       ]
   },
@@ -925,7 +925,7 @@ export const hisuiRoutes = {
               id: 418,
               minLevel: 44,
               maxLevel: 46,
-              probability: 0.20
+              probability: 0.2
           }
       ]
   },
@@ -975,7 +975,7 @@ export const hisuiRoutes = {
               id: 224,
               minLevel: 47,
               maxLevel: 49,
-              probability: 0.33
+              probability: 0.34
           }
       ]
   },
@@ -1037,7 +1037,7 @@ export const hisuiRoutes = {
               id: 66,
               minLevel: 50,
               maxLevel: 52,
-              probability: 0.20
+              probability: 0.2
           }
       ]
   },
@@ -1083,7 +1083,7 @@ export const hisuiRoutes = {
               id: 54,
               minLevel: 52,
               maxLevel: 54,
-              probability: 0.14
+              probability: 0.16
           }
       ]
   },
@@ -1117,7 +1117,7 @@ export const hisuiRoutes = {
               id: 47,
               minLevel: 53,
               maxLevel: 55,
-              probability: 0.20
+              probability: 0.2
           }
       ]
   },
@@ -1151,7 +1151,7 @@ export const hisuiRoutes = {
               id: 215,
               minLevel: 55,
               maxLevel: 57,
-              probability: 0.20
+              probability: 0.2
           }
       ]
   },
@@ -1191,7 +1191,7 @@ export const hisuiRoutes = {
               id: 217,
               minLevel: 56,
               maxLevel: 58,
-              probability: 0.17
+              probability: 0.15
           }
       ]
   },
@@ -1253,7 +1253,7 @@ export const hisuiRoutes = {
               id: 101,
               minLevel: 59,
               maxLevel: 61,
-              probability: 0.20
+              probability: 0.2
           }
       ]
   },
@@ -1297,7 +1297,7 @@ export const hisuiRoutes = {
               id: 397,
               minLevel: 62,
               maxLevel: 64,
-              probability: 0.20
+              probability: 0.2
           }
       ]
   },
@@ -1367,7 +1367,7 @@ export const hisuiRoutes = {
               id: 41,
               minLevel: 64,
               maxLevel: 66,
-              probability: 0.09
+              probability: 0.1
           }
       ]
   },
@@ -1389,7 +1389,7 @@ export const hisuiRoutes = {
               id: 423,
               minLevel: 65,
               maxLevel: 67,
-              probability: 0.33
+              probability: 0.34
           }
       ]
   },
@@ -1451,7 +1451,7 @@ export const hisuiRoutes = {
               id: 72,
               minLevel: 68,
               maxLevel: 70,
-              probability: 0.20
+              probability: 0.2
           }
       ]
   },
@@ -1523,7 +1523,7 @@ export const hisuiRoutes = {
               id: 130,
               minLevel: 73,
               maxLevel: 75,
-              probability: 0.20
+              probability: 0.2
           }
       ]
   },
@@ -1557,7 +1557,7 @@ export const hisuiRoutes = {
               id: 705,
               minLevel: 74,
               maxLevel: 76,
-              probability: 0.20
+              probability: 0.2
           }
       ]
   },
@@ -1597,7 +1597,7 @@ export const hisuiRoutes = {
               id: 422,
               minLevel: 76,
               maxLevel: 78,
-              probability: 0.17
+              probability: 0.15
           }
       ]
   },
@@ -1653,7 +1653,7 @@ export const hisuiRoutes = {
               id: 266,
               minLevel: 79,
               maxLevel: 81,
-              probability: 0.14
+              probability: 0.16
           }
       ]
   },
@@ -1703,7 +1703,7 @@ export const hisuiRoutes = {
               id: 396,
               minLevel: 80,
               maxLevel: 82,
-              probability: 0.33
+              probability: 0.34
           }
       ]
   },
@@ -1809,7 +1809,7 @@ export const hisuiRoutes = {
               id: 77,
               minLevel: 80,
               maxLevel: 82,
-              probability: 0.33
+              probability: 0.34
           }
       ]
   },
@@ -1877,7 +1877,7 @@ export const hisuiRoutes = {
               id: 425,
               minLevel: 80,
               maxLevel: 82,
-              probability: 0.17
+              probability: 0.15
           }
       ]
   },
@@ -1923,7 +1923,7 @@ export const hisuiRoutes = {
               id: 363,
               minLevel: 80,
               maxLevel: 82,
-              probability: 0.14
+              probability: 0.16
           }
       ]
   },
@@ -1955,7 +1955,7 @@ export const hisuiRoutes = {
               id: 397,
               minLevel: 80,
               maxLevel: 82,
-              probability: 0.33
+              probability: 0.34
           }
       ]
   },
@@ -1977,7 +1977,7 @@ export const hisuiRoutes = {
               id: 412,
               minLevel: 80,
               maxLevel: 82,
-              probability: 0.33
+              probability: 0.34
           }
       ]
   },
@@ -2011,7 +2011,7 @@ export const hisuiRoutes = {
               id: 397,
               minLevel: 80,
               maxLevel: 82,
-              probability: 0.20
+              probability: 0.2
           }
       ]
   },
@@ -2302,7 +2302,7 @@ export const hisuiRoutes = {
               id: 101,
               minLevel: 85,
               maxLevel: 90,
-              probability: 0.02
+              probability: 0.18
           }
       ]
   },
@@ -2324,7 +2324,7 @@ export const hisuiRoutes = {
               id: 492,
               minLevel: 85,
               maxLevel: 90,
-              probability: 0.33
+              probability: 0.34
           }
       ]
   },
@@ -2388,7 +2388,7 @@ export const hisuiRoutes = {
               id: 129,
               minLevel: 85,
               maxLevel: 90,
-              probability: 0.10
+              probability: 0.1
           }
       ]
   },
@@ -2440,7 +2440,7 @@ export const hisuiRoutes = {
               id: 108,
               minLevel: 85,
               maxLevel: 90,
-              probability: 0.13
+              probability: 0.09
           }
       ]
   },
@@ -2462,7 +2462,7 @@ export const hisuiRoutes = {
               id: 481,
               minLevel: 85,
               maxLevel: 90,
-              probability: 0.33
+              probability: 0.34
           }
       ]
   },
