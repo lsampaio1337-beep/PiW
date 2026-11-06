@@ -617,7 +617,7 @@ export const sinnohRoutes = [
     ]
   },
   {
-    name: "Solaceon Daycare",
+    name: "Daycare",
     spawns: []
   },
   {
@@ -1845,7 +1845,7 @@ export const sinnohRoutes = [
     ]
   },
   {
-    name: "Guardian's Cavern",
+    name: "Aegis Pass",
     spawns: [
       {
         pokemonId: 480,
@@ -2678,7 +2678,7 @@ export const sinnohUnlocks = [
     challengeName: "Challenge 16",
     areaId: "Route 209",
     unlocks: [
-      "Solaceon Daycare",
+      "Daycare",
       "Route 210"
     ],
     requirements: {
@@ -2967,8 +2967,7 @@ export const sinnohUnlocks = [
       "Sendoff Spring",
       "Route 225",
       "Route 224",
-      "New Region to Travel",
-      "(Extra Challenges B C D E F)"
+      "New Region to Travel"
     ],
     requirements: {
       defeatCountRoute: {
@@ -3138,6 +3137,9 @@ export const sinnohUnlocks = [
         item: "Masterball",
         count: 2
       }
+    ],
+    unlocks: [
+      "Key to Hall of Origin Challenge"
     ]
   },
   {
@@ -3479,7 +3481,8 @@ export const sinnohUnlocks = [
         "Extra Challenge C 05",
         "Extra Challenge D 03",
         "Extra Challenge E 04",
-        "Extra Challenge F 04"
+        "Extra Challenge F 04",
+        "Extra Challenge B 04"
       ]
     }
   }
