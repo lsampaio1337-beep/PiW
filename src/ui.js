@@ -366,7 +366,16 @@ window.cheatProgressChallenge = function(targetAreaId) {
         }
 
         if (req.catchSpecies) {
-            if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {}
+            if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
+            req.catchSpecies.forEach(r => {
+                if (r.species === '__proto__' || r.species === 'constructor' || r.species === 'prototype') return;
+                if (!state.stats.caughtSpecies[r.species]) {
+                    state.stats.caughtSpeciesCount = (state.stats.caughtSpeciesCount || 0) + 1;
+                }
+                state.stats.caughtSpecies[r.species] = (state.stats.caughtSpecies[r.species] || 0) + r.count;
+            });
+        }
+
         if (req.catchSpeciesOr) {
             for (let spec of req.catchSpeciesOr) {
                 if (spec.species === '__proto__' || spec.species === 'constructor' || spec.species === 'prototype') continue;
@@ -375,14 +384,6 @@ window.cheatProgressChallenge = function(targetAreaId) {
                 state.stats.caughtSpecies[spec.species] = Math.max(state.stats.caughtSpecies[spec.species] || 0, spec.count);
                 break; // Just fulfill one
             }
-        };
-            req.catchSpecies.forEach(r => {
-                if (r.species === '__proto__' || r.species === 'constructor' || r.species === 'prototype') return;
-                if (!state.stats.caughtSpecies[r.species]) {
-                    state.stats.caughtSpeciesCount = (state.stats.caughtSpeciesCount || 0) + 1;
-                }
-                state.stats.caughtSpecies[r.species] = (state.stats.caughtSpecies[r.species] || 0) + r.count;
-            });
         }
 if (req.catchSpeciesByQuality) {
             if (!state.stats.challengeCaughtSpecific) state.stats.challengeCaughtSpecific = {};

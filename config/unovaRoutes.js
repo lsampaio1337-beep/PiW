@@ -3791,7 +3791,9 @@ export const unovaUnlocks = [
   {
     "challengeName": "Extra Challenge C 05",
     "areaId": "Moor of Icirrus Depths",
-    "unlocks": [],
+    "unlocks": [
+      "Key for Dragonspire Clouds Challenge"
+    ],
     "requirements": {
       "catchSpecies": [
         {
@@ -3822,7 +3824,9 @@ export const unovaUnlocks = [
   {
     "challengeName": "Extra Challenge D 05",
     "areaId": "Liberty Garden",
-    "unlocks": [],
+    "unlocks": [
+      "Key for Dragonspire Clouds Challenge"
+    ],
     "requirements": {
       "catchSpecies": [
         {
@@ -3849,7 +3853,9 @@ export const unovaUnlocks = [
   {
     "challengeName": "Extra Challenge E 05",
     "areaId": "Abundant Shrine Depths",
-    "unlocks": [],
+    "unlocks": [
+      "Key for Dragonspire Clouds Challenge"
+    ],
     "requirements": {
       "catchSpecies": [
         {
