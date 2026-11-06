@@ -1447,37 +1447,12 @@ const routes = [
   {
     "name": "Fossil Revival Lab",
     "spawns": [
-      {
-        "pokemonId": 142,
-        "minLevel": 60,
-        "maxLevel": 67,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 138,
-        "minLevel": 55,
-        "maxLevel": 62,
-        "chance": 0.3
-      },
-      {
-        "pokemonId": 140,
-        "minLevel": 55,
-        "maxLevel": 62,
-        "chance": 0.3
-      },
-      {
-        "pokemonId": 139,
-        "minLevel": 58,
-        "maxLevel": 65,
-        "chance": 0.1
-      },
-      {
-        "pokemonId": 141,
-        "minLevel": 58,
-        "maxLevel": 65,
-        "chance": 0.1
-      }
-    ]
+      { "pokemonId": 138, "minLevel": 78, "maxLevel": 86, "chance": 0.2 },
+      { "pokemonId": 140, "minLevel": 78, "maxLevel": 86, "chance": 0.2 },
+      { "pokemonId": 142, "minLevel": 82, "maxLevel": 90, "chance": 0.2 },
+      { "pokemonId": 139, "minLevel": 80, "maxLevel": 88, "chance": 0.2 },
+      { "pokemonId": 141, "minLevel": 80, "maxLevel": 88, "chance": 0.2 }
+]
   },
   {
     "name": "Fighting Dojo",
@@ -1615,7 +1590,10 @@ export const unlocks = [
   { "challengeName": "Challenge 34", "areaId": "Route 22", "unlocks": ["Route 23"], "gift": { "item": "Big Potion", "count": 10 }, "requirements": { "defeatCountRoute": { "route": "Route 22", "count": 350 } } },
   { "challengeName": "Challenge 35", "areaId": "Route 23", "unlocks": ["Kanto Pokemon League"], "requirements": { "catchSpeciesAnyOfByQuality": [{ "species": ["Nidoking", "Nidoqueen"], "quality": "Rare", "count": 1 }] } },
   { "challengeName": "Challenge 36", "areaId": "Kanto Pokemon League", "unlocks": ["New Region to Travel", "Extra Challenge B"], "requirements": { "defeatEliteFourAndChampion": true } },
-  { "challengeName": "Extra Challenge A 01", "areaId": "Casino", "unlocks": ["Small Fishing Spot", "Casino - Mid Troupe"], "gift": { "item": "Ultraball", "count": 10 }, "requirements": { "catchSpecies": [{ "species": "Bulbasaur", "count": 1 }, { "species": "Charmander", "count": 1 }, { "species": "Squirtle", "count": 1 }] } },
+  { "challengeName": "Extra Challenge A 01", "areaId": "Celadon Casino", "unlocks": [
+      "Small Fishing Spot",
+      "Celadon Casino - Mid Troupe"
+    ], "gift": { "item": "Ultraball", "count": 10 }, "requirements": { "catchSpecies": [{ "species": "Bulbasaur", "count": 1 }, { "species": "Charmander", "count": 1 }, { "species": "Squirtle", "count": 1 }] } },
   { "challengeName": "Extra Challenge A 02", "areaId": "Small Fishing Spot", "unlocks": ["Fighting Dojo", "Casino - Eeveelutions"], "gift": { "item": "Ultraball", "count": 10 }, "requirements": { "catchSpeciesByQuality": [{ "species": "Magikarp", "quality": "Epic", "count": 1 }], "catchEachFromSlotMachine": { "machines": [["Ivysaur", "Charmeleon", "Wartortle"]] } } },
   { "challengeName": "Extra Challenge A 03", "areaId": "Fighting Dojo", "unlocks": ["Big Fishing Spot", "Casino - Special Spot"], "gift": { "item": "Fighting Stone", "count": 3 }, "requirements": { "catchSpeciesByQuality": [{ "species": "Hitmonchan", "quality": "Rare", "count": 1 }, { "species": "Hitmonlee", "quality": "Rare", "count": 1 }, { "species": "Eevee", "quality": "Rare", "count": 1 }] } },
   { "challengeName": "Extra Challenge A 04", "areaId": "Big Fishing Spot", "unlocks": ["Fossil Revival Lab", "Casino - Late Troupe"], "gift": { "item": "Dragon Stone", "count": 6 }, "requirements": { "catchByQualityAndType": { "type": "Dragon", "quality": "Rare", "count": 2 }, "catchEachFromSlotMachine": { "machines": [["Lapras", "Porygon", "Lickitung"]] } } },

@@ -1401,37 +1401,12 @@ export const johtoRoutes = [
   {
     "name": "Fossil Revival Lab",
     "spawns": [
-      {
-        "pokemonId": 138,
-        "minLevel": 91,
-        "maxLevel": 93,
-        "chance": 0.3
-      },
-      {
-        "pokemonId": 140,
-        "minLevel": 91,
-        "maxLevel": 93,
-        "chance": 0.3
-      },
-      {
-        "pokemonId": 142,
-        "minLevel": 94,
-        "maxLevel": 95,
-        "chance": 0.1
-      },
-      {
-        "pokemonId": 139,
-        "minLevel": 92,
-        "maxLevel": 94,
-        "chance": 0.15
-      },
-      {
-        "pokemonId": 141,
-        "minLevel": 92,
-        "maxLevel": 94,
-        "chance": 0.15
-      }
-    ]
+      { "pokemonId": 138, "minLevel": 78, "maxLevel": 86, "chance": 0.2 },
+      { "pokemonId": 140, "minLevel": 78, "maxLevel": 86, "chance": 0.2 },
+      { "pokemonId": 142, "minLevel": 82, "maxLevel": 90, "chance": 0.2 },
+      { "pokemonId": 139, "minLevel": 80, "maxLevel": 88, "chance": 0.2 },
+      { "pokemonId": 141, "minLevel": 80, "maxLevel": 88, "chance": 0.2 }
+]
   },
   {
     "name": "Pokemon Mansion",
@@ -2443,8 +2418,7 @@ export const johtoUnlocks = [
     "challengeName": "Challenge 36",
     "areaId": "Viridian Forest",
     "unlocks": [
-      "Pewter Gym",
-      "Fossil Revival Lab"
+      "Pewter Gym"
     ],
     "requirements": {
       "catchSpecies": [
@@ -2459,7 +2433,8 @@ export const johtoUnlocks = [
     "challengeName": "Challenge 37",
     "areaId": "Pewter Gym",
     "unlocks": [
-      "Mount Moon"
+      "Mount Moon",
+      "Fossil Revival Lab"
     ],
     "requirements": {
       "earnBadge": {
@@ -2593,8 +2568,7 @@ export const johtoUnlocks = [
     "areaId": "Sea Routes",
     "unlocks": [
       "Cinnabar Gym",
-      "Pokemon Mansion",
-      "Fossil Revival Lab"
+      "Pokemon Mansion"
     ],
     "requirements": {
       "defeatCountRoute": {
