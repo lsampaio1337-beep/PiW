@@ -99,6 +99,7 @@ export class WindowManager {
 
         // 2. Check for basic parameter invocations (e.g. \`window.buyItem(1, true)\`)
         const allowedFuncs = [
+            'showMedalDetails', 'showUpgradeDetails',
             'activateCheat', 'applyPokemonFilters', 'buyBonusCandy', 'buyItem', 'buySetMax',
             'buyTokenItem', 'buyTokenItemRandom', 'buyTokenUnlock', 'cancelSellMode', 'changeLocation',
             'cheatAction', 'cheatCompleteDailyChallenge', 'cheatCompleteProfTask', 'cheatProgressChallenge',

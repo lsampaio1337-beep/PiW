@@ -2903,6 +2903,7 @@ async function init() {
                 medalsHtml += `
                     <div
                         class="medal-item"
+                        data-region="${region}" data-caught="${caughtCount}" data-shiny="${shinyCount}" data-total="${totalInRegion}"
                         onclick="if(window.showMedalDetails) window.showMedalDetails('${region}', ${caughtCount}, ${shinyCount}, ${totalInRegion})"
                         style="background: rgba(0, 0, 0, 0.2); border-radius: 10px; padding: 10px 15px; border: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-around; align-items: center; box-sizing: border-box; transition: all 0.2s ease-in-out; min-height: 0; cursor: pointer;"
                     >
@@ -2991,7 +2992,7 @@ async function init() {
                             }
 
                             contentHtml += `
-                                <div class="upgrade-item" onclick="if(window.showUpgradeDetails) window.showUpgradeDetails('${type.configKey}', ${tier})" style="background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; padding: 15px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 10px; transition: all 0.2s ease-in-out; cursor: pointer;">
+                                <div class="upgrade-item" data-type="${type.configKey}" data-tier="${tier}" onclick="if(window.showUpgradeDetails) window.showUpgradeDetails('${type.configKey}', ${tier})" style="background: #2c3e50; border: 2px solid #3498db; border-radius: 10px; padding: 15px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 10px; transition: all 0.2s ease-in-out; cursor: pointer;">
                                     <div style="font-size: 14px; font-weight: bold; color: white;">${displayName}</div>
                                     <img src="./Assets/Items/Upgrades/${configItem.name}.png" style="width: 50px; height: 50px; object-fit: contain;" alt="${displayName}">
                                     <div style="font-size: 12px; color: #cbd5e1; line-height: 1.3;">${description}</div>
@@ -3026,6 +3027,27 @@ async function init() {
             const innerContent = win.querySelector('.window-content-container');
             if (innerContent) {
                 innerContent.style.setProperty('padding', '0px', 'important');
+
+                // Add redundant event listeners (Failsafe for onclick restriction)
+                const medalItems = innerContent.querySelectorAll('.medal-item');
+                medalItems.forEach(item => {
+                    item.addEventListener('click', (e) => {
+                        const region = item.getAttribute('data-region');
+                        const caught = parseInt(item.getAttribute('data-caught') || '0', 10);
+                        const shiny = parseInt(item.getAttribute('data-shiny') || '0', 10);
+                        const total = parseInt(item.getAttribute('data-total') || '0', 10);
+                        if(window.showMedalDetails && region) window.showMedalDetails(region, caught, shiny, total);
+                    });
+                });
+
+                const upgradeItems = innerContent.querySelectorAll('.upgrade-item');
+                upgradeItems.forEach(item => {
+                    item.addEventListener('click', (e) => {
+                        const type = item.getAttribute('data-type');
+                        const tier = parseInt(item.getAttribute('data-tier') || '0', 10);
+                        if(window.showUpgradeDetails && type && tier > 0) window.showUpgradeDetails(type, tier);
+                    });
+                });
             }
             setTimeout(() => {
                 if (typeof win.adjustHeightForNewContent === 'function') {
