@@ -366,7 +366,16 @@ window.cheatProgressChallenge = function(targetAreaId) {
         }
 
         if (req.catchSpecies) {
-            if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
+            if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {}
+        if (req.catchSpeciesOr) {
+            for (let spec of req.catchSpeciesOr) {
+                if (spec.species === '__proto__' || spec.species === 'constructor' || spec.species === 'prototype') continue;
+                if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
+                // Cheat by catching the first one in the list
+                state.stats.caughtSpecies[spec.species] = Math.max(state.stats.caughtSpecies[spec.species] || 0, spec.count);
+                break; // Just fulfill one
+            }
+        };
             req.catchSpecies.forEach(r => {
                 if (r.species === '__proto__' || r.species === 'constructor' || r.species === 'prototype') return;
                 if (!state.stats.caughtSpecies[r.species]) {

@@ -11,8 +11,8 @@ const unovaMapCoordinates = {
   },
   "3": {
     "name": "Route 3",
-    "x": 80.02,
-    "y": 58.39
+    "x": 82.22,
+    "y": 57.49
   },
   "4": {
     "name": "Route 4",
@@ -226,8 +226,8 @@ const unovaMapCoordinates = {
   },
   "dragonspiral_tower": {
     "name": "Dragonspiral Tower",
-    "x": 22.49,
-    "y": 17.77
+    "x": 22.39,
+    "y": 16
   },
   "unova_pokemon_league": {
     "name": "Unova Pokemon League",
@@ -326,13 +326,13 @@ const unovaMapCoordinates = {
   },
   "wellspring_cave": {
     "name": "Wellspring Cave",
-    "x": 79.36,
-    "y": 56.18
+    "x": 77.52,
+    "y": 56.33
   },
   "dragonspire_clouds": {
     "name": "Dragonspire Clouds",
-    "x": 22.49,
-    "y": 7.06
+    "x": 22.39,
+    "y": 10.5
   },
   "moor_of_icirrus": {
     "name": "Moor of Icirrus",
@@ -409,6 +409,12 @@ const unovaMapCoordinates = {
     "name": "Hidden Grotto",
     "x": 74,
     "y": 55
+  }
+,
+  "dragonspire_higher_clouds": {
+    "name": "Dragonspire Higher Clouds",
+    "x": 22.39,
+    "y": 5
   }
 };
 export default unovaMapCoordinates;

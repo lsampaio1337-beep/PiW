@@ -2633,6 +2633,41 @@ export const unovaRoutes = [
         "chance": 0.2
       }
     ]
+  },
+  {
+    "name": "Dragonspire Higher Clouds",
+    "spawns": [
+      {
+        "pokemonId": 646,
+        "minLevel": 120,
+        "maxLevel": 121,
+        "chance": 0.1
+      },
+      {
+        "pokemonId": 643,
+        "minLevel": 120,
+        "maxLevel": 121,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 644,
+        "minLevel": 120,
+        "maxLevel": 121,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 646.1,
+        "minLevel": 121,
+        "maxLevel": 125,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 646.2,
+        "minLevel": 121,
+        "maxLevel": 125,
+        "chance": 0.2
+      }
+    ]
   }
 ];
 
@@ -3758,7 +3793,24 @@ export const unovaUnlocks = [
     "areaId": "Moor of Icirrus Depths",
     "unlocks": [],
     "requirements": {
-      "catchSpeciesRoute": "Moor of Icirrus Depths"
+      "catchSpecies": [
+        {
+          "species": "Cobalion",
+          "count": 1
+        },
+        {
+          "species": "Terrakion",
+          "count": 1
+        },
+        {
+          "species": "Virizion",
+          "count": 1
+        },
+        {
+          "species": "Keldeo",
+          "count": 1
+        }
+      ]
     },
     "gifts": [
       {
@@ -3772,7 +3824,20 @@ export const unovaUnlocks = [
     "areaId": "Liberty Garden",
     "unlocks": [],
     "requirements": {
-      "catchSpeciesRoute": "Liberty Garden"
+      "catchSpecies": [
+        {
+          "species": "Genesect",
+          "count": 1
+        },
+        {
+          "species": "Victini",
+          "count": 1
+        },
+        {
+          "species": "Meloetta",
+          "count": 1
+        }
+      ]
     },
     "gifts": [
       {
@@ -3786,7 +3851,20 @@ export const unovaUnlocks = [
     "areaId": "Abundant Shrine Depths",
     "unlocks": [],
     "requirements": {
-      "catchSpeciesRoute": "Abundant Shrine Depths"
+      "catchSpecies": [
+        {
+          "species": "Thundurus",
+          "count": 1
+        },
+        {
+          "species": "Landorus",
+          "count": 1
+        },
+        {
+          "species": "Tornadus",
+          "count": 1
+        }
+      ]
     },
     "gifts": [
       {
@@ -3818,33 +3896,44 @@ export const unovaUnlocks = [
   {
     "challengeName": "Dragonspire Clouds Challenge 01",
     "areaId": "Dragonspire Clouds",
-    "unlocks": [],
+    "unlocks": [
+      "Dragonspire Higher Clouds"
+    ],
     "requirements": {
-      "catchSpeciesRoute": "Dragonspire Clouds"
+      "catchSpecies": [
+        {
+          "species": "Kyurem",
+          "count": 1
+        },
+        {
+          "species": "Reshiram",
+          "count": 1
+        },
+        {
+          "species": "Zekrom",
+          "count": 1
+        }
+      ]
     },
     "gifts": [
       {
         "item": "Dragonspire Cloud Evolved",
         "count": 1
-      },
-      {
-        "item": "Masterball",
-        "count": 2
       }
     ]
   },
   {
     "challengeName": "Dragonspire Clouds Challenge 02",
-    "areaId": "Dragonspire Clouds",
+    "areaId": "Dragonspire Higher Clouds",
     "unlocks": [],
     "requirements": {
       "catchSpecies": [
         {
-          "species": "Black Kyurem",
+          "species": "Kyurem (Black Kyurem)",
           "count": 1
         },
         {
-          "species": "White Kyruem",
+          "species": "Kyurem (White Kyurem)",
           "count": 1
         }
       ]
