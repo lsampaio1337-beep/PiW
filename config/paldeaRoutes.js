@@ -1,15 +1,90 @@
 export const paldeaRoutes = [
   {
     "name": "Poco Path - Main",
-    "spawns": []
+    "spawns": [
+      {
+        "pokemonId": 940,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.64
+      },
+      {
+        "pokemonId": 960,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 90,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 278,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      }
+    ]
   },
   {
     "name": "Los Platos - Main",
-    "spawns": []
+    "spawns": [
+      {
+        "pokemonId": 940,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.64
+      },
+      {
+        "pokemonId": 960,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 90,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 278,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      }
+    ]
   },
   {
     "name": "Mesagoza - Main",
-    "spawns": []
+    "spawns": [
+      {
+        "pokemonId": 940,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.64
+      },
+      {
+        "pokemonId": 960,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 90,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 278,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      }
+    ]
   },
   {
     "name": "South Province (Area One) - Beach",
@@ -3898,7 +3973,13 @@ export const paldeaUnlocks = [
     "areaId": "Poco Path - Main",
     "unlocks": [
       "Los Platos - Main"
-    ]
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Poco Path - Main",
+        "count": 10
+      }
+    }
   },
   {
     "challengeName": "Challenge 02",
@@ -3908,7 +3989,7 @@ export const paldeaUnlocks = [
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Poco Path - Main",
+        "route": "Los Platos - Main",
         "count": 20
       }
     }
@@ -3938,11 +4019,12 @@ export const paldeaUnlocks = [
       "South Province (Area Four) - Lake",
       "South Province (Area Four) - Mountain",
       "South Province (Area Four) - Ocean",
-      "South Province (Area Four) - River"
+      "South Province (Area Four) - River",
+      "Cortondo Gym"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Los Platos - Main",
+        "route": "Mesagoza - Main",
         "count": 20
       }
     }
@@ -4184,7 +4266,8 @@ export const paldeaUnlocks = [
       "South Province (Area Five) - Grass",
       "South Province (Area Five) - Lake",
       "South Province (Area Five) - Mountain",
-      "South Province (Area Five) - River"
+      "South Province (Area Five) - River",
+      "Artazon Gym"
     ],
     "requirements": {
       "completeChallenges": [
@@ -4210,11 +4293,11 @@ export const paldeaUnlocks = [
         "Challenge 23",
         "Challenge 24",
         "Challenge 25"
-      ]
-    },
-    "gift": {
-      "item": "Cortondo Gym Badge",
-      "count": 1
+      ],
+      "earnBadge": {
+        "badgeCount": 73,
+        "name": "Cortondo Gym Badge"
+      }
     }
   },
   {
@@ -4369,7 +4452,8 @@ export const paldeaUnlocks = [
       "East Province (Area Three) - Mine",
       "East Province (Area Three) - Near Town",
       "East Province (Area Three) - Ocean",
-      "East Province (Area Three) - Rocky"
+      "East Province (Area Three) - Rocky",
+      "Levincia Gym"
     ],
     "requirements": {
       "completeChallenges": [
@@ -4387,11 +4471,11 @@ export const paldeaUnlocks = [
         "Challenge 38",
         "Challenge 39",
         "Challenge 40"
-      ]
-    },
-    "gift": {
-      "item": "Artazon Gym Badge",
-      "count": 1
+      ],
+      "earnBadge": {
+        "badgeCount": 74,
+        "name": "Artazon Gym Badge"
+      }
     }
   },
   {
@@ -4494,7 +4578,8 @@ export const paldeaUnlocks = [
       "Asado Desert - Desert",
       "Asado Desert - Grass",
       "Asado Desert - Ruins",
-      "Asado Desert - Ruins Deep"
+      "Asado Desert - Ruins Deep",
+      "Cascarrafa Gym"
     ],
     "requirements": {
       "completeChallenges": [
@@ -4507,11 +4592,11 @@ export const paldeaUnlocks = [
         "Challenge 48",
         "Challenge 49",
         "Challenge 50"
-      ]
-    },
-    "gift": {
-      "item": "Levincia Gym Badge",
-      "count": 1
+      ],
+      "earnBadge": {
+        "badgeCount": 75,
+        "name": "Levincia Gym Badge"
+      }
     }
   },
   {
@@ -4595,7 +4680,8 @@ export const paldeaUnlocks = [
       "West Province (Area Three) - Forest",
       "West Province (Area Three) - Grass",
       "West Province (Area Three) - Lake",
-      "West Province (Area Two) - Desert"
+      "West Province (Area Two) - Desert",
+      "Medali Gym"
     ],
     "requirements": {
       "completeChallenges": [
@@ -4606,11 +4692,11 @@ export const paldeaUnlocks = [
         "Challenge 56",
         "Challenge 57",
         "Challenge 58"
-      ]
-    },
-    "gift": {
-      "item": "Cascarrafa Gym Badge",
-      "count": 1
+      ],
+      "earnBadge": {
+        "badgeCount": 76,
+        "name": "Cascarrafa Gym Badge"
+      }
     }
   },
   {
@@ -4703,7 +4789,8 @@ export const paldeaUnlocks = [
       "North Province (Area One) - Forest",
       "North Province (Area One) - Mountain",
       "Tagtree Thicket - Flower Patch",
-      "Tagtree Thicket - Forest"
+      "Tagtree Thicket - Forest",
+      "Montenevera Gym"
     ],
     "requirements": {
       "completeChallenges": [
@@ -4715,11 +4802,11 @@ export const paldeaUnlocks = [
         "Challenge 65",
         "Challenge 66",
         "Challenge 67"
-      ]
-    },
-    "gift": {
-      "item": "Medali Gym Badge",
-      "count": 1
+      ],
+      "earnBadge": {
+        "badgeCount": 77,
+        "name": "Medali Gym Badge"
+      }
     }
   },
   {
@@ -4798,7 +4885,8 @@ export const paldeaUnlocks = [
     "unlocks": [
       "East Paldean Sea - Beach",
       "West Paldean Sea - Ocean",
-      "West Paldean Sea - Ocean Abyss"
+      "West Paldean Sea - Ocean Abyss",
+      "Alfornada Gym"
     ],
     "requirements": {
       "completeChallenges": [
@@ -4809,11 +4897,11 @@ export const paldeaUnlocks = [
         "Challenge 73",
         "Challenge 74",
         "Challenge 75"
-      ]
-    },
-    "gift": {
-      "item": "Montenevera Gym Badge",
-      "count": 1
+      ],
+      "earnBadge": {
+        "badgeCount": 78,
+        "name": "Montenevera Gym Badge"
+      }
     }
   },
   {
@@ -4857,18 +4945,19 @@ export const paldeaUnlocks = [
       "North Province (Area Two) - Forest",
       "North Province (Area Two) - Lake",
       "North Province (Area Two) - Rocky",
-      "North Province (Area Three) - Flower Patch"
+      "North Province (Area Three) - Flower Patch",
+      "Glaseado Gym"
     ],
     "requirements": {
       "completeChallenges": [
         "Challenge 77",
         "Challenge 78",
         "Challenge 79"
-      ]
-    },
-    "gift": {
-      "item": "Alfornada Gym Badge",
-      "count": 1
+      ],
+      "earnBadge": {
+        "badgeCount": 79,
+        "name": "Alfornada Gym Badge"
+      }
     }
   },
   {
@@ -4967,11 +5056,11 @@ export const paldeaUnlocks = [
         "Challenge 86",
         "Challenge 87",
         "Challenge 88"
-      ]
-    },
-    "gift": {
-      "item": "Glaseado Gym Badge",
-      "count": 1
+      ],
+      "earnBadge": {
+        "badgeCount": 80,
+        "name": "Glaseado Gym Badge"
+      }
     }
   },
   {
@@ -4983,6 +5072,7 @@ export const paldeaUnlocks = [
       "Zero Gate"
     ],
     "requirements": {
+      "defeatPaldeaChampion": true,
       "earnBadge": {
         "badgeCount": 80,
         "name": "Glaseado Gym Badge"
@@ -4993,27 +5083,30 @@ export const paldeaUnlocks = [
     "challengeName": "Extra Challenge A 01",
     "areaId": "Loyal Plaza",
     "requirements": {
-      "completeChallenges": [
-        "Challenge 90"
-      ]
+      "defeatCountRoute": {
+        "route": "Loyal Plaza",
+        "count": 150
+      }
     }
   },
   {
     "challengeName": "Extra Challenge A 02",
     "areaId": "Ruins",
     "requirements": {
-      "completeChallenges": [
-        "Challenge 90"
-      ]
+      "defeatCountRoute": {
+        "route": "Ruins",
+        "count": 150
+      }
     }
   },
   {
     "challengeName": "Extra Challenge A 03",
     "areaId": "Zero Gate",
     "requirements": {
-      "completeChallenges": [
-        "Challenge 90"
-      ]
+      "defeatCountRoute": {
+        "route": "Zero Gate",
+        "count": 150
+      }
     }
   }
 ];
