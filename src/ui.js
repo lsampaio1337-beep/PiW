@@ -1526,6 +1526,13 @@ function _initializeInitialRoutes(id) {
 
     // Add specific first routes for regions if applicable
     let currentRegion = state.currentRegionName || 'Kanto';
+    if (!state.stats.activeChallenges || state.stats.activeChallenges.length === 0 || state.stats.activeChallenges[0] === 'Route 1') {
+        if (currentRegion === 'Johto') state.stats.activeChallenges = ['Route 29'];
+        else if (currentRegion === 'Hoenn') state.stats.activeChallenges = ['Route 101'];
+        else if (currentRegion === 'Sinnoh') state.stats.activeChallenges = ['Route 201'];
+        else if (currentRegion === 'Hisui') state.stats.activeChallenges = ['Aspiration Hill'];
+    }
+
     if (currentRegion === 'Johto' && !state.stats.newRoutes.includes("Route 29")) {
         state.stats.newRoutes.push("Route 29");
     } else if (currentRegion === 'Hoenn' && !state.stats.newRoutes.includes("Route 101")) {

@@ -176,9 +176,6 @@ export function swapRegion(newRegionName) {
         } else if (newRegionName === 'Hoenn') {
             state.regions[newRegionName].currentRoute = 'Route 101';
             state.regions[newRegionName].stats.activeChallenges = ['Route 101'];
-        } else if (newRegionName === 'Sinnoh') {
-            state.regions[newRegionName].currentRoute = 'Route 201';
-            state.regions[newRegionName].stats.activeChallenges = ['Route 201'];
         } else if (newRegionName === 'Hisui') {
             state.regions[newRegionName].currentRoute = 'Aspiration Hill';
             state.regions[newRegionName].stats.activeChallenges = ['Aspiration Hill'];

@@ -2541,12 +2541,10 @@ export const sinnohUnlocks = [
       "Valley Windworks"
     ],
     requirements: {
-      catchSpecies: [
-        {
-          species: "Geodude",
-          count: 1
-        }
-      ]
+      defeatCountRoute: {
+        route: "Ravaged Path",
+        count: 50
+      }
     },
     gift: {
       item: "Rock Stone",
@@ -2709,6 +2707,34 @@ export const sinnohUnlocks = [
   },
   {
     challengeName: "Challenge 18",
+    areaId: "Veilstone Gym",
+    unlocks: [
+      "Route 214"
+    ],
+    requirements: {
+      earnBadge: {
+        name: "Cobble Badge",
+        leader: "Maylene",
+        badgeCount: 4
+      }
+    }
+  },
+  {
+    challengeName: "Challenge 19",
+    areaId: "Veilstone Gym",
+    unlocks: [
+      "Route 214"
+    ],
+    requirements: {
+      earnBadge: {
+        name: "Cobble Badge",
+        leader: "Maylene",
+        badgeCount: 4
+      }
+    }
+  },
+  {
+    challengeName: "Challenge 20",
     areaId: "Route 214",
     unlocks: [
       "Route 213"
@@ -2723,7 +2749,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Challenge 19",
+    challengeName: "Challenge 21",
     areaId: "Route 213",
     unlocks: [
       "Pastoria Gym"
@@ -2738,7 +2764,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Challenge 20",
+    challengeName: "Challenge 22",
     areaId: "Pastoria Gym",
     unlocks: [
       "Great Marsh"
@@ -2752,7 +2778,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Challenge 21",
+    challengeName: "Challenge 23",
     areaId: "Great Marsh",
     unlocks: [
       "Route 212"
@@ -2771,7 +2797,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Challenge 22",
+    challengeName: "Challenge 24",
     areaId: "Route 212",
     unlocks: [
       "Route 215"
@@ -2786,7 +2812,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Challenge 23",
+    challengeName: "Challenge 25",
     areaId: "Route 215",
     unlocks: [
       "Route 218"
@@ -2801,7 +2827,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Challenge 24",
+    challengeName: "Challenge 26",
     areaId: "Route 218",
     unlocks: [
       "Canalave Gym"
@@ -2816,7 +2842,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Challenge 25",
+    challengeName: "Challenge 27",
     areaId: "Canalave Gym",
     unlocks: [
       "Route 216"
@@ -2830,7 +2856,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Challenge 26",
+    challengeName: "Challenge 28",
     areaId: "Route 216",
     unlocks: [
       "Route 217"
@@ -2845,7 +2871,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Challenge 27",
+    challengeName: "Challenge 29",
     areaId: "Route 217",
     unlocks: [
       "Snowpoint Gym"
@@ -2860,7 +2886,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Challenge 28",
+    challengeName: "Challenge 30",
     areaId: "Snowpoint Gym",
     unlocks: [
       "Route 222"
@@ -2874,7 +2900,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Challenge 29",
+    challengeName: "Challenge 31",
     areaId: "Route 222",
     unlocks: [
       "Sunyshore Gym"
@@ -2889,7 +2915,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Challenge 30",
+    challengeName: "Challenge 32",
     areaId: "Sunyshore Gym",
     unlocks: [
       "Route 223"
@@ -2903,7 +2929,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Challenge 31",
+    challengeName: "Challenge 33",
     areaId: "Route 223",
     unlocks: [
       "Victory Road"
@@ -2918,7 +2944,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Challenge 32",
+    challengeName: "Challenge 33",
     areaId: "Victory Road",
     unlocks: [
       "Sinnoh Pokemon League"
@@ -2945,6 +2971,10 @@ export const sinnohUnlocks = [
       "(Extra Challenges B C D E F)"
     ],
     requirements: {
+      defeatCountRoute: {
+        route: "Sinnoh Pokemon League",
+        count: 250
+      },
       defeatSinnohChampion: true
     },
     gifts: [
@@ -3430,7 +3460,13 @@ export const sinnohUnlocks = [
           count: 1
         }
       ]
-    }
+    },
+    gifts: [
+      {
+        item: "Masterball",
+        count: 3
+      }
+    ]
   },
   {
     challengeName: "Key to Hall of Origin Challenge",
