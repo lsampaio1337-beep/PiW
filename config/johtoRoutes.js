@@ -2608,7 +2608,8 @@ export const johtoUnlocks = [
     "areaId": "Cinnabar Gym",
     "unlocks": [
       "Viridian Gym",
-      "Trade With Friends Hub"
+      "Trade With Friends Hub",
+      "Battle Stadium"
     ],
     "requirements": {
       "earnBadge": {
@@ -2622,7 +2623,7 @@ export const johtoUnlocks = [
     "challengeName": "Challenge 48",
     "areaId": "Viridian Gym",
     "unlocks": [
-      "Red"
+      "Victory Road"
     ],
     "requirements": {
       "earnBadge": {
@@ -2640,6 +2641,21 @@ export const johtoUnlocks = [
   },
   {
     "challengeName": "Challenge 49",
+    "areaId": "Victory Road",
+    "unlocks": [
+      "Red"
+    ],
+    "requirements": {
+      "catchSpeciesAnyOf": [
+        {
+          "species": ["Nidoking", "Nidoqueen"],
+          "count": 1
+        }
+      ]
+    }
+  },
+  {
+    "challengeName": "Challenge 50",
     "areaId": "Red",
     "unlocks": [
       "Travel to a new Region"
