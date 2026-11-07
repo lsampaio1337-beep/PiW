@@ -426,5 +426,41 @@ export const paldeaMapCoordinates = {
   "Terarium Core": {
     "x": 80,
     "y": 30
+  },
+  "Extra Route Z1": {
+    "x": 80,
+    "y": 40
+  },
+  "Extra Route Z2": {
+    "x": 90,
+    "y": 40
+  },
+  "Extra Route Z3": {
+    "x": 100,
+    "y": 40
+  },
+  "Extra Route Z4": {
+    "x": 110,
+    "y": 40
+  },
+  "Extra Route Z5": {
+    "x": 120,
+    "y": 40
+  },
+  "Extra Route Z6": {
+    "x": 130,
+    "y": 40
+  },
+  "Extra Route Z7": {
+    "x": 140,
+    "y": 40
+  },
+  "Extra Route Z8": {
+    "x": 150,
+    "y": 40
+  },
+  "Extra Route Z9": {
+    "x": 160,
+    "y": 40
   }
 };
