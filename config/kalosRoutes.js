@@ -1781,10 +1781,6 @@ export const kalosRoutes = [
     ]
   },
   {
-    name: "Snowbelle City Gym",
-    spawns: []
-  },
-  {
     name: "Route 20",
     spawns: [
       {
@@ -1877,6 +1873,10 @@ export const kalosRoutes = [
         chance: 0.19999999999999996
       }
     ]
+  },
+  {
+    name: "Snowbelle City Gym",
+    spawns: []
   },
   {
     name: "Route 21",
@@ -3681,7 +3681,7 @@ export const kalosUnlocks = [
     "challengeName": "Challenge 48",
     "areaId": "Snowbelle Frostwoods",
     "unlocks": [
-      "Snowbelle City Gym"
+      "Route 20"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -3692,20 +3692,6 @@ export const kalosUnlocks = [
   },
   {
     "challengeName": "Challenge 49",
-    "areaId": "Snowbelle City Gym",
-    "unlocks": [
-      "Route 20"
-    ],
-    "requirements": {
-      "earnBadge": {
-        "name": "Iceberg Badge",
-        "leader": "Wulfric",
-        "badgeCount": 8
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 50",
     "areaId": "Route 20",
     "unlocks": [
       "Hidden Village Glade"
@@ -3718,15 +3704,29 @@ export const kalosUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 51",
+    "challengeName": "Challenge 50",
     "areaId": "Hidden Village Glade",
     "unlocks": [
-      "Route 21"
+      "Snowbelle City Gym"
     ],
     "requirements": {
       "defeatCountRoute": {
         "route": "Hidden Village Glade",
         "count": 200
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 51",
+    "areaId": "Snowbelle City Gym",
+    "unlocks": [
+      "Route 21"
+    ],
+    "requirements": {
+      "earnBadge": {
+        "name": "Iceberg Badge",
+        "leader": "Wulfric",
+        "badgeCount": 8
       }
     }
   },
@@ -4140,9 +4140,6 @@ export const kalosUnlocks = [
   {
     "challengeName": "Extra Challenge E 27",
     "areaId": "Ultimate Chamber",
-    "unlocks": [
-      "The Eternal Fight"
-    ],
     "requirements": {
       "defeatCountRoute": {
         "route": "Ultimate Chamber",
