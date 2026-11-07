@@ -3414,7 +3414,55 @@ export const galarRoutes = [
       }
     ]
   }
-];
+  ,
+  {
+    "name": "Z Realm - Entrance",
+    "pokes": [
+      { "name": "Vikavolt", "minLevel": 100, "maxLevel": 100, "probability": 0.14 },
+      { "name": "Roserade", "minLevel": 100, "maxLevel": 100, "probability": 0.14 },
+      { "name": "Barboach", "minLevel": 100, "maxLevel": 100, "probability": 0.14 },
+      { "name": "Rhyperior", "minLevel": 100, "maxLevel": 100, "probability": 0.14 },
+      { "name": "Flygon", "minLevel": 100, "maxLevel": 100, "probability": 0.14 },
+      { "name": "Haxorus", "minLevel": 100, "maxLevel": 100, "probability": 0.15 },
+      { "name": "Type: Null", "minLevel": 100, "maxLevel": 100, "probability": 0.15 }
+    ]
+  },
+  {
+    "name": "Z Realm - Path",
+    "pokes": [
+      { "name": "Tyranitar", "minLevel": 100, "maxLevel": 100, "probability": 0.14 },
+      { "name": "Hydreigon", "minLevel": 100, "maxLevel": 100, "probability": 0.14 },
+      { "name": "Eternatus", "minLevel": 100, "maxLevel": 100, "probability": 0.14 },
+      { "name": "Alakazam", "minLevel": 100, "maxLevel": 100, "probability": 0.14 },
+      { "name": "Scolipede", "minLevel": 100, "maxLevel": 100, "probability": 0.14 },
+      { "name": "Magnezone", "minLevel": 100, "maxLevel": 100, "probability": 0.15 },
+      { "name": "Stoutland", "minLevel": 100, "maxLevel": 100, "probability": 0.15 }
+    ]
+  },
+  {
+    "name": "Z Realm - Depths",
+    "pokes": [
+      { "name": "Azumarill", "minLevel": 100, "maxLevel": 100, "probability": 0.14 },
+      { "name": "Poliwrath", "minLevel": 100, "maxLevel": 100, "probability": 0.14 },
+      { "name": "Politoed", "minLevel": 100, "maxLevel": 100, "probability": 0.14 },
+      { "name": "Exploud", "minLevel": 100, "maxLevel": 100, "probability": 0.14 },
+      { "name": "Porygon-Z", "minLevel": 100, "maxLevel": 100, "probability": 0.14 },
+      { "name": "Nidoqueen", "minLevel": 100, "maxLevel": 100, "probability": 0.15 },
+      { "name": "Nidoking", "minLevel": 100, "maxLevel": 100, "probability": 0.15 }
+    ]
+  },
+  {
+    "name": "Z Realm - Core",
+    "pokes": [
+      { "name": "Salamence", "minLevel": 100, "maxLevel": 100, "probability": 0.14 },
+      { "name": "Garchomp", "minLevel": 100, "maxLevel": 100, "probability": 0.14 },
+      { "name": "Metagross", "minLevel": 100, "maxLevel": 100, "probability": 0.14 },
+      { "name": "Crobat", "minLevel": 100, "maxLevel": 100, "probability": 0.14 },
+      { "name": "Walrein", "minLevel": 100, "maxLevel": 100, "probability": 0.14 },
+      { "name": "Aggron", "minLevel": 100, "maxLevel": 100, "probability": 0.15 },
+      { "name": "Calyrex", "minLevel": 100, "maxLevel": 100, "probability": 0.15 }
+    ]
+  }];
 
 export const galarUnlocks = [
   {
@@ -4005,6 +4053,38 @@ export const galarUnlocks = [
   {
     "challengeName": "Extra Challenge ECrown 14",
     "areaId": "Split-Decision Ruins",
+    "unlocks": [
+      "Z Realm - Entrance"
+    ],
+    "requirements": {}
+  },
+  {
+    "challengeName": "Extra Challenge Z 1",
+    "areaId": "Z Realm - Entrance",
+    "unlocks": [
+      "Z Realm - Path"
+    ],
+    "requirements": {}
+  },
+  {
+    "challengeName": "Extra Challenge Z 2",
+    "areaId": "Z Realm - Path",
+    "unlocks": [
+      "Z Realm - Depths"
+    ],
+    "requirements": {}
+  },
+  {
+    "challengeName": "Extra Challenge Z 3",
+    "areaId": "Z Realm - Depths",
+    "unlocks": [
+      "Z Realm - Core"
+    ],
+    "requirements": {}
+  },
+  {
+    "challengeName": "Extra Challenge Z 4",
+    "areaId": "Z Realm - Core",
     "unlocks": [],
     "requirements": {}
   }
