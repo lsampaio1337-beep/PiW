@@ -261,6 +261,14 @@ export function cheatAction(action) {
                     state.stats.completedChallengeIds.push(unlock.areaId);
                 }
 
+
+                if (unlock.requirements && unlock.requirements.catchSpecies) {
+                    if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
+                    unlock.requirements.catchSpecies.forEach(req => {
+                        state.stats.caughtSpecies[req.species] = req.count;
+                    });
+                }
+
                 // Fulfill catchSpeciesUniqueCount if present
                 if (unlock.requirements && unlock.requirements.catchSpeciesUniqueCount) {
                     if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};

@@ -623,8 +623,18 @@ window.showChallengesModal = function() {
 
             let cData = getChallengeData(unlock);
             let isExtra = unlock.challengeName && unlock.challengeName.includes("Extra");
-            let rewardsStr = unlock.unlocks ? unlock.unlocks.join(" + ") : "Next Area";
-            if (unlock.gift || unlock.gifts) rewardsStr += " + Gift";
+            let rewardsStr = "";
+            if (unlock.unlocks && unlock.unlocks.length > 0) {
+                rewardsStr = "Unlocks " + unlock.unlocks.join(" + ");
+            }
+            if (unlock.gift || unlock.gifts) {
+                if (rewardsStr) {
+                    rewardsStr += " + Gift";
+                } else {
+                    rewardsStr = "Gift";
+                }
+            }
+            if (!rewardsStr) rewardsStr = "Unlocks Next Area";
 
             let displayName = unlock.challengeName || (isExtra ? 'Extra Challenge - ' + unlock.areaId : 'Challenge - ' + unlock.areaId);
 
@@ -639,7 +649,7 @@ window.showChallengesModal = function() {
             }
 
             html += `</ul>
-                     <div style="margin-top: 10px; color: #4CAF50;"><b>Rewards:</b> Unlocks ${rewardsStr}</div>`;
+                     <div style="margin-top: 10px; color: #4CAF50;"><b>Rewards:</b> ${rewardsStr}</div>`;
 
             let safeAreaId = unlock.areaId.replace(/'/g, "\\'");
 
@@ -690,8 +700,20 @@ window.showChallengesModal = function() {
              // Fake the data slightly to make it look completed, though getChallengeData will naturally evaluate to true
              let pData = getChallengeData(pUnlock);
 
-             let pRewards = pUnlock.unlocks ? pUnlock.unlocks.join(" + ") : "Next Area";
-             if (pUnlock.gift || pUnlock.gifts) pRewards += " + Gift";
+
+             let pRewards = "";
+             if (pUnlock.unlocks && pUnlock.unlocks.length > 0) {
+                 pRewards = "Unlocks " + pUnlock.unlocks.join(" + ");
+             }
+             if (pUnlock.gift || pUnlock.gifts) {
+                 if (pRewards) {
+                     pRewards += " + Gift";
+                 } else {
+                     pRewards = "Gift";
+                 }
+             }
+             if (!pRewards) pRewards = "Unlocks Next Area"; // Fallback if somehow both missing
+
 
              let displayName = pUnlock.challengeName || (isExtra ? 'Extra Challenge - ' + pUnlock.areaId : 'Challenge - ' + pUnlock.areaId);
 
@@ -713,7 +735,7 @@ window.showChallengesModal = function() {
                   html += `<li>${part}</li>`;
              }
              html += `</ul>
-                      <div style="font-size: 14px; color: #4CAF50;"><b>Rewards:</b> Unlocks ${pRewards}</div>
+                      <div style="font-size: 14px; color: #4CAF50;"><b>Rewards:</b> ${pRewards}</div>
                       </div>`;
         }
         html += `</div></div>`;
@@ -1536,6 +1558,13 @@ function _initializeInitialRoutes(id) {
 
     // Add specific first routes for regions if applicable
     let currentRegion = state.currentRegionName || 'Kanto';
+    if (!state.stats.activeChallenges || state.stats.activeChallenges.length === 0 || state.stats.activeChallenges[0] === 'Route 1') {
+        if (currentRegion === 'Johto') state.stats.activeChallenges = ['Route 29'];
+        else if (currentRegion === 'Hoenn') state.stats.activeChallenges = ['Route 101'];
+        else if (currentRegion === 'Sinnoh') state.stats.activeChallenges = ['Route 201'];
+        else if (currentRegion === 'Hisui') state.stats.activeChallenges = ['Aspiration Hill'];
+    }
+
     if (currentRegion === 'Johto' && !state.stats.newRoutes.includes("Route 29")) {
         state.stats.newRoutes.push("Route 29");
     } else if (currentRegion === 'Hoenn' && !state.stats.newRoutes.includes("Route 101")) {

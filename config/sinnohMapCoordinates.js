@@ -230,7 +230,7 @@ const sinnohMapCoordinates = {
     "y": 58.03
   },
   "daycare": {
-    "name": "Solaceon Daycare",
+    "name": "Daycare",
     "x": 59.38,
     "y": 57.02
   },
