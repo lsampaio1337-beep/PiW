@@ -617,7 +617,7 @@ export const sinnohRoutes = [
     ]
   },
   {
-    name: "Solaceon Daycare",
+    name: "Daycare",
     spawns: []
   },
   {
@@ -1845,7 +1845,7 @@ export const sinnohRoutes = [
     ]
   },
   {
-    name: "Guardian's Cavern",
+    name: "Aegis Pass",
     spawns: [
       {
         pokemonId: 480,
@@ -2541,12 +2541,10 @@ export const sinnohUnlocks = [
       "Valley Windworks"
     ],
     requirements: {
-      catchSpecies: [
-        {
-          species: "Geodude",
-          count: 1
-        }
-      ]
+      defeatCountRoute: {
+        route: "Ravaged Path",
+        count: 50
+      }
     },
     gift: {
       item: "Rock Stone",
@@ -2656,7 +2654,7 @@ export const sinnohUnlocks = [
     requirements: {
       catchSpecies: [
         {
-          species: "Bibarel",
+          species: "Dusclops",
           count: 1
         }
       ]
@@ -2680,7 +2678,7 @@ export const sinnohUnlocks = [
     challengeName: "Challenge 16",
     areaId: "Route 209",
     unlocks: [
-      "Solaceon Daycare",
+      "Daycare",
       "Route 210"
     ],
     requirements: {
@@ -2699,9 +2697,9 @@ export const sinnohUnlocks = [
       "Veilstone Gym"
     ],
     requirements: {
-      defeatSpecies: [
+      defeatMultipleSpecific: [
         {
-          species: "Unown",
+          name: "Unown",
           count: 5
         }
       ]
@@ -2709,6 +2707,34 @@ export const sinnohUnlocks = [
   },
   {
     challengeName: "Challenge 18",
+    areaId: "Veilstone Gym",
+    unlocks: [
+      "Route 214"
+    ],
+    requirements: {
+      earnBadge: {
+        name: "Cobble Badge",
+        leader: "Maylene",
+        badgeCount: 4
+      }
+    }
+  },
+  {
+    challengeName: "Challenge 19",
+    areaId: "Veilstone Gym",
+    unlocks: [
+      "Route 214"
+    ],
+    requirements: {
+      earnBadge: {
+        name: "Cobble Badge",
+        leader: "Maylene",
+        badgeCount: 4
+      }
+    }
+  },
+  {
+    challengeName: "Challenge 20",
     areaId: "Route 214",
     unlocks: [
       "Route 213"
@@ -2723,7 +2749,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Challenge 19",
+    challengeName: "Challenge 21",
     areaId: "Route 213",
     unlocks: [
       "Pastoria Gym"
@@ -2738,7 +2764,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Challenge 20",
+    challengeName: "Challenge 22",
     areaId: "Pastoria Gym",
     unlocks: [
       "Great Marsh"
@@ -2752,7 +2778,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Challenge 21",
+    challengeName: "Challenge 23",
     areaId: "Great Marsh",
     unlocks: [
       "Route 212"
@@ -2771,7 +2797,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Challenge 22",
+    challengeName: "Challenge 24",
     areaId: "Route 212",
     unlocks: [
       "Route 215"
@@ -2786,7 +2812,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Challenge 23",
+    challengeName: "Challenge 25",
     areaId: "Route 215",
     unlocks: [
       "Route 218"
@@ -2801,7 +2827,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Challenge 24",
+    challengeName: "Challenge 26",
     areaId: "Route 218",
     unlocks: [
       "Canalave Gym"
@@ -2816,7 +2842,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Challenge 25",
+    challengeName: "Challenge 27",
     areaId: "Canalave Gym",
     unlocks: [
       "Route 216"
@@ -2830,7 +2856,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Challenge 26",
+    challengeName: "Challenge 28",
     areaId: "Route 216",
     unlocks: [
       "Route 217"
@@ -2845,7 +2871,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Challenge 27",
+    challengeName: "Challenge 29",
     areaId: "Route 217",
     unlocks: [
       "Snowpoint Gym"
@@ -2860,7 +2886,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Challenge 28",
+    challengeName: "Challenge 30",
     areaId: "Snowpoint Gym",
     unlocks: [
       "Route 222"
@@ -2874,7 +2900,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Challenge 29",
+    challengeName: "Challenge 31",
     areaId: "Route 222",
     unlocks: [
       "Sunyshore Gym"
@@ -2889,7 +2915,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Challenge 30",
+    challengeName: "Challenge 32",
     areaId: "Sunyshore Gym",
     unlocks: [
       "Route 223"
@@ -2903,7 +2929,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Challenge 31",
+    challengeName: "Challenge 33",
     areaId: "Route 223",
     unlocks: [
       "Victory Road"
@@ -2918,7 +2944,7 @@ export const sinnohUnlocks = [
     }
   },
   {
-    challengeName: "Challenge 32",
+    challengeName: "Challenge 33",
     areaId: "Victory Road",
     unlocks: [
       "Sinnoh Pokemon League"
@@ -2936,21 +2962,26 @@ export const sinnohUnlocks = [
     challengeName: "Challenge 34",
     areaId: "Sinnoh Pokemon League",
     unlocks: [
-      "Deep Lake Verity",
       "Iron Island",
+      "Deep Lake Verity",
       "Sendoff Spring",
       "Route 225",
       "Route 224",
-      "New Region to Travel",
-      "(Extra Challenges B C D E F)"
+      "New Region to Travel"
     ],
     requirements: {
+      defeatCountRoute: {
+        route: "Sinnoh Pokemon League",
+        count: 250
+      },
       defeatSinnohChampion: true
     },
-    gift: {
-      item: "Masterball",
-      count: 2
-    }
+    gifts: [
+      {
+        item: "Masterball",
+        count: 2
+      }
+    ]
   },
   {
     challengeName: "Extra Challenge A 01",
@@ -3067,7 +3098,7 @@ export const sinnohUnlocks = [
     challengeName: "Extra Challenge B 03",
     areaId: "Snowpoint Temple",
     unlocks: [
-      "Guardian's Cavern"
+      "Aegis Pass"
     ],
     requirements: {
       catchSpecies: [
@@ -3084,7 +3115,7 @@ export const sinnohUnlocks = [
   },
   {
     challengeName: "Extra Challenge B 04",
-    areaId: "Guardian's Cavern",
+    areaId: "Aegis Pass",
     requirements: {
       catchSpecies: [
         {
@@ -3101,10 +3132,15 @@ export const sinnohUnlocks = [
         }
       ]
     },
-    gift: {
-      item: "Masterball",
-      count: 2
-    }
+    gifts: [
+      {
+        item: "Masterball",
+        count: 2
+      }
+    ],
+    unlocks: [
+      "Key to Hall of Origin Challenge"
+    ]
   },
   {
     challengeName: "Extra Challenge C 01",
@@ -3181,6 +3217,9 @@ export const sinnohUnlocks = [
   {
     challengeName: "Extra Challenge C 05",
     areaId: "Flower Paradise",
+    unlocks: [
+      "Key to Hall of Origin Challenge"
+    ],
     requirements: {
       catchSpecies: [
         {
@@ -3196,20 +3235,7 @@ export const sinnohUnlocks = [
           count: 1
         }
       ]
-    },
-    unlocks: [
-      "Key to Hall of Origin Challenge"
-    ],
-    gifts: [
-      {
-        item: "Masterball",
-        count: 1
-      },
-      {
-        item: "Key to Hall of Origin",
-        count: 1
-      }
-    ]
+    }
   },
   {
     challengeName: "Extra Challenge D 01",
@@ -3240,14 +3266,19 @@ export const sinnohUnlocks = [
         }
       ]
     },
-    gift: {
-      item: "Ghost Stone",
-      count: 2
-    }
+    gifts: [
+      {
+        item: "Ghost Stone",
+        count: 2
+      }
+    ]
   },
   {
     challengeName: "Extra Challenge D 03",
     areaId: "Lunar Isles",
+    unlocks: [
+      "Key to Hall of Origin Challenge"
+    ],
     requirements: {
       catchSpecies: [
         {
@@ -3259,20 +3290,7 @@ export const sinnohUnlocks = [
           count: 1
         }
       ]
-    },
-    unlocks: [
-      "Key to Hall of Origin Challenge"
-    ],
-    gifts: [
-      {
-        item: "Masterball",
-        count: 1
-      },
-      {
-        item: "Key to Hall of Origin",
-        count: 1
-      }
-    ]
+    }
   },
   {
     challengeName: "Extra Challenge E 01",
@@ -3330,6 +3348,9 @@ export const sinnohUnlocks = [
   {
     challengeName: "Extra Challenge E 04",
     areaId: "Continental Depths",
+    unlocks: [
+      "Key to Hall of Origin Challenge"
+    ],
     requirements: {
       catchSpecies: [
         {
@@ -3341,20 +3362,7 @@ export const sinnohUnlocks = [
           count: 1
         }
       ]
-    },
-    unlocks: [
-      "Key to Hall of Origin Challenge"
-    ],
-    gifts: [
-      {
-        item: "Masterball",
-        count: 1
-      },
-      {
-        item: "Key to Hall of Origin",
-        count: 1
-      }
-    ]
+    }
   },
   {
     challengeName: "Extra Challenge F 01",
@@ -3430,20 +3438,10 @@ export const sinnohUnlocks = [
           count: 1
         }
       ]
-    },
-    gifts: [
-      {
-        item: "Masterball",
-        count: 1
-      },
-      {
-        item: "Key to Hall of Origin",
-        count: 1
-      }
-    ]
+    }
   },
   {
-    challengeName: "Extra Challenge Hall of Origin",
+    challengeName: "Hall of Origin Challenge",
     areaId: "Hall of Origin",
     requirements: {
       catchSpecies: [
@@ -3480,6 +3478,7 @@ export const sinnohUnlocks = [
     ],
     requirements: {
       completeChallenges: [
+        "Extra Challenge B 04",
         "Extra Challenge C 05",
         "Extra Challenge D 03",
         "Extra Challenge E 04",
