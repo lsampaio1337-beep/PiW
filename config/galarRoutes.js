@@ -3462,7 +3462,972 @@ export const galarRoutes = [
       { "name": "Aggron", "minLevel": 100, "maxLevel": 100, "probability": 0.15 },
       { "name": "Calyrex", "minLevel": 100, "maxLevel": 100, "probability": 0.15 }
     ]
-  }];
+  },
+// Extra Challenge W Routes
+  {
+    "name": "Whispering Woods",
+    "spawns": [
+      {
+        "pokemonId": 2,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 103,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 315,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 407,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 465,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 470,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 547,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      }
+    ]
+  },
+  {
+    "name": "Crystal Caverns",
+    "spawns": [
+      {
+        "pokemonId": 549,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 591,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 754,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 755,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 762,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 812,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 5,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      }
+    ]
+  },
+  {
+    "name": "Volcanic Ridge",
+    "spawns": [
+      {
+        "pokemonId": 38,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 59,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 78,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 126,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 136,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 555,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 662,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      }
+    ]
+  },
+  {
+    "name": "Mystic Lake",
+    "spawns": [
+      {
+        "pokemonId": 815,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 8,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 55,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 61,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 62,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 73,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 119,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      }
+    ]
+  },
+  {
+    "name": "Zephyr Heights",
+    "spawns": [
+      {
+        "pokemonId": 121,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 183,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 184,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 186,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 199,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 226,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 272,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      }
+    ]
+  },
+  {
+    "name": "Shadow Valley",
+    "spawns": [
+      {
+        "pokemonId": 321,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 339,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 340,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 342,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 350,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 565,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 752,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      }
+    ]
+  },
+  {
+    "name": "Glimmering Sands",
+    "spawns": [
+      {
+        "pokemonId": 818,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 12,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 212,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 545,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 558,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 637,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 737,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      }
+    ]
+  },
+  {
+    "name": "Thunder Peak",
+    "spawns": [
+      {
+        "pokemonId": 738,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 768,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 826,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 30,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 31,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 34,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 42,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      }
+    ]
+  },
+  {
+    "name": "Frozen Tundra",
+    "spawns": [
+      {
+        "pokemonId": 169,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 569,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 748,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 758,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 890,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 40,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 53,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      }
+    ]
+  },
+  {
+    "name": "Ironforge Depths",
+    "spawns": [
+      {
+        "pokemonId": 143,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 174,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 233,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 294,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 295,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 428,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 463,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      }
+    ]
+  },
+  {
+    "name": "Celestial Gardens",
+    "spawns": [
+      {
+        "pokemonId": 474,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 507,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 508,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 520,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 573,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 628,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 772,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      }
+    ]
+  },
+  {
+    "name": "Abyssal Trench",
+    "spawns": [
+      {
+        "pokemonId": 64,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 65,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 178,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 196,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 360,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 518,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 528,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      }
+    ]
+  },
+  {
+    "name": "Radiant Meadow",
+    "spawns": [
+      {
+        "pokemonId": 578,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 606,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 898,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 106,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 448,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 620,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 853,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      }
+    ]
+  },
+  {
+    "name": "Phantom Ruins",
+    "spawns": [
+      {
+        "pokemonId": 112,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 329,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 330,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 464,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 552,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 867,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 125,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      }
+    ]
+  },
+  {
+    "name": "Earthen Plateau",
+    "spawns": [
+      {
+        "pokemonId": 135,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 172,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 462,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 695,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 836,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 849,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 139,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      }
+    ]
+  },
+  {
+    "name": "Serene Delta",
+    "spawns": [
+      {
+        "pokemonId": 247,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 248,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 346,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 438,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 526,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 699,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 745,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      }
+    ]
+  },
+  {
+    "name": "Bramble Thicket",
+    "spawns": [
+      {
+        "pokemonId": 173,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 176,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 685,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 700,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 197,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 560,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 571,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      }
+    ]
+  },
+  {
+    "name": "Mirage Oasis",
+    "spawns": [
+      {
+        "pokemonId": 630,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 634,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 635,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 687,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 862,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 305,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 306,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      }
+    ]
+  },
+  {
+    "name": "Cobalt Coast",
+    "spawns": [
+      {
+        "pokemonId": 375,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 376,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 681,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 334,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 372,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 373,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 444,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.14
+      }
+    ]
+  },
+  {
+    "name": "Obsidian Spire",
+    "spawns": [
+      {
+        "pokemonId": 445,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 611,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 612,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 365,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 473,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.2
+      }
+    ]
+  },
+  {
+    "name": "Lush Canopy",
+    "spawns": [
+      {
+        "pokemonId": 477,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 563,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 608,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 709,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 864,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.2
+      }
+    ]
+  }
+];
 
 export const galarUnlocks = [
   {
@@ -4085,6 +5050,132 @@ export const galarUnlocks = [
   {
     "challengeName": "Extra Challenge Z 4",
     "areaId": "Z Realm - Core",
+    "unlocks": ["Whispering Woods"],
+    "requirements": {}
+  },
+  {
+    "challengeName": "Extra Challenge W 1",
+    "areaId": "Whispering Woods",
+    "unlocks": ["Crystal Caverns"],
+    "requirements": {}
+  },
+  {
+    "challengeName": "Extra Challenge W 2",
+    "areaId": "Crystal Caverns",
+    "unlocks": ["Volcanic Ridge"],
+    "requirements": {}
+  },
+  {
+    "challengeName": "Extra Challenge W 3",
+    "areaId": "Volcanic Ridge",
+    "unlocks": ["Mystic Lake"],
+    "requirements": {}
+  },
+  {
+    "challengeName": "Extra Challenge W 4",
+    "areaId": "Mystic Lake",
+    "unlocks": ["Zephyr Heights"],
+    "requirements": {}
+  },
+  {
+    "challengeName": "Extra Challenge W 5",
+    "areaId": "Zephyr Heights",
+    "unlocks": ["Shadow Valley"],
+    "requirements": {}
+  },
+  {
+    "challengeName": "Extra Challenge W 6",
+    "areaId": "Shadow Valley",
+    "unlocks": ["Glimmering Sands"],
+    "requirements": {}
+  },
+  {
+    "challengeName": "Extra Challenge W 7",
+    "areaId": "Glimmering Sands",
+    "unlocks": ["Thunder Peak"],
+    "requirements": {}
+  },
+  {
+    "challengeName": "Extra Challenge W 8",
+    "areaId": "Thunder Peak",
+    "unlocks": ["Frozen Tundra"],
+    "requirements": {}
+  },
+  {
+    "challengeName": "Extra Challenge W 9",
+    "areaId": "Frozen Tundra",
+    "unlocks": ["Ironforge Depths"],
+    "requirements": {}
+  },
+  {
+    "challengeName": "Extra Challenge W 10",
+    "areaId": "Ironforge Depths",
+    "unlocks": ["Celestial Gardens"],
+    "requirements": {}
+  },
+  {
+    "challengeName": "Extra Challenge W 11",
+    "areaId": "Celestial Gardens",
+    "unlocks": ["Abyssal Trench"],
+    "requirements": {}
+  },
+  {
+    "challengeName": "Extra Challenge W 12",
+    "areaId": "Abyssal Trench",
+    "unlocks": ["Radiant Meadow"],
+    "requirements": {}
+  },
+  {
+    "challengeName": "Extra Challenge W 13",
+    "areaId": "Radiant Meadow",
+    "unlocks": ["Phantom Ruins"],
+    "requirements": {}
+  },
+  {
+    "challengeName": "Extra Challenge W 14",
+    "areaId": "Phantom Ruins",
+    "unlocks": ["Earthen Plateau"],
+    "requirements": {}
+  },
+  {
+    "challengeName": "Extra Challenge W 15",
+    "areaId": "Earthen Plateau",
+    "unlocks": ["Serene Delta"],
+    "requirements": {}
+  },
+  {
+    "challengeName": "Extra Challenge W 16",
+    "areaId": "Serene Delta",
+    "unlocks": ["Bramble Thicket"],
+    "requirements": {}
+  },
+  {
+    "challengeName": "Extra Challenge W 17",
+    "areaId": "Bramble Thicket",
+    "unlocks": ["Mirage Oasis"],
+    "requirements": {}
+  },
+  {
+    "challengeName": "Extra Challenge W 18",
+    "areaId": "Mirage Oasis",
+    "unlocks": ["Cobalt Coast"],
+    "requirements": {}
+  },
+  {
+    "challengeName": "Extra Challenge W 19",
+    "areaId": "Cobalt Coast",
+    "unlocks": ["Obsidian Spire"],
+    "requirements": {}
+  },
+  {
+    "challengeName": "Extra Challenge W 20",
+    "areaId": "Obsidian Spire",
+    "unlocks": ["Lush Canopy"],
+    "requirements": {}
+  },
+  {
+    "challengeName": "Extra Challenge W 21",
+    "areaId": "Lush Canopy",
     "unlocks": [],
     "requirements": {}
   }
