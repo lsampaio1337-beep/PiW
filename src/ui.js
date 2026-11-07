@@ -2560,15 +2560,15 @@ async function init() {
             if (typeConfigKey === 'ballPocket') {
                 let capacity = 100;
                 for (let i = 0; i < t; i++) capacity += state.config.balance.expansions.ballPocket[i].increment;
-                description = `Ball capacity: ${capacity}`;
+                description = `Ball capacity: ${capacity.toLocaleString('pt-BR')}`;
             } else if (typeConfigKey === 'potionSatchel') {
                 let capacity = 20;
                 for (let i = 0; i < t; i++) capacity += state.config.balance.expansions.potionSatchel[i].increment;
-                description = `Potion capacity: ${capacity}`;
+                description = `Potion capacity: ${capacity.toLocaleString('pt-BR')}`;
             } else if (typeConfigKey === 'pokemonBox') {
                 let capacity = 20;
                 for (let i = 0; i < t; i++) capacity += state.config.balance.expansions.pokemonBox[i].increment;
-                description = `Storage capacity ${capacity}`;
+                description = `Storage capacity: ${capacity.toLocaleString('pt-BR')}`;
             } else if (typeConfigKey === 'speed') {
                 if (t === 1) description = "Encounter time decreased by 10%";
                 else if (t === 2) description = "Encounter time decreased by 20%";
@@ -2989,11 +2989,11 @@ async function init() {
                             }
                             let description = configItem.description || '';
                             if (type.configKey === 'ballPocket') {
-                                description = `Ball capacity: ${getCapacity(state, 'balls')}`;
+                                description = `Ball capacity: ${getCapacity(state, 'balls').toLocaleString('pt-BR')}`;
                             } else if (type.configKey === 'potionSatchel') {
-                                description = `Potion capacity: ${getCapacity(state, 'potions')}`;
+                                description = `Potion capacity: ${getCapacity(state, 'potions').toLocaleString('pt-BR')}`;
                             } else if (type.configKey === 'pokemonBox') {
-                                description = `Storage capacity ${getCapacity(state, 'box')}`;
+                                description = `Storage capacity: ${getCapacity(state, 'box').toLocaleString('pt-BR')}`;
                             } else if (type.configKey === 'speed') {
                                 if (tier === 1) description = "Encounter time decreased by 10%";
                                 else if (tier === 2) description = "Encounter time decreased by 20%";
