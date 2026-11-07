@@ -1541,7 +1541,11 @@ export const alolaRoutes = [
     "spawns": [],
     "areaId": "Champion Hau Boss Battle",
     "unlocks": [
-      "Route 6"
+      "Route 3",
+      "Poni Grove",
+      "Route 10",
+      "Aether Base",
+      "Route 9"
     ],
     "requirements": {},
     "challengeName": "Challenge 40"
@@ -1586,10 +1590,10 @@ export const alolaRoutes = [
         "chance": 0
       }
     ],
-    "challengeName": "Extra Challenge E 01",
+    "challengeName": "Extra Challenge A 02",
     "areaId": "Route 6",
     "unlocks": [
-      "Royal Avenue"
+      "Melemele Meadow"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -1620,7 +1624,7 @@ export const alolaRoutes = [
         "chance": 0
       }
     ],
-    "challengeName": "Extra Challenge E 02",
+    "challengeName": "Extra Challenge B 02",
     "areaId": "Poni Plains",
     "unlocks": [
       "Poni Coast"
@@ -1666,10 +1670,10 @@ export const alolaRoutes = [
         "chance": 0
       }
     ],
-    "challengeName": "Extra Challenge E 03",
+    "challengeName": "Extra Challenge B 04",
     "areaId": "Route 16",
     "unlocks": [
-      "Aether Paradise Labs"
+      "Lake of the Sunne"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -1700,7 +1704,7 @@ export const alolaRoutes = [
         "chance": 0.3333
       }
     ],
-    "challengeName": "Extra Challenge E 04",
+    "challengeName": "Extra Challenge E 03",
     "areaId": "Royal Avenue",
     "unlocks": [
       "Pikachu Valley"
@@ -1740,7 +1744,7 @@ export const alolaRoutes = [
         "chance": 0.25
       }
     ],
-    "challengeName": "Extra Challenge E 05",
+    "challengeName": "Extra Challenge E 04",
     "areaId": "Pikachu Valley",
     "unlocks": [
       "Starter Depot"
@@ -1795,7 +1799,7 @@ export const alolaRoutes = [
     "areaId": "Starter Depot",
     "unlocks": [],
     "requirements": {},
-    "challengeName": "Extra Challenge E 06"
+    "challengeName": "Extra Challenge E 05"
   },
   {
     "name": "Ula'ula Meadow",
@@ -1826,9 +1830,11 @@ export const alolaRoutes = [
       }
     ],
     "areaId": "Ula'ula Meadow",
-    "unlocks": [],
+    "unlocks": [
+      "Blush Mountain"
+    ],
     "requirements": {},
-    "challengeName": "Extra Challenge E 07"
+    "challengeName": "Extra Challenge C 02"
   },
   {
     "name": "Blush Mountain",
@@ -1888,10 +1894,10 @@ export const alolaRoutes = [
         "chance": 0.11109999999999999
       }
     ],
-    "challengeName": "Extra Challenge E 08",
+    "challengeName": "Extra Challenge C 03",
     "areaId": "Blush Mountain",
     "unlocks": [
-      "Blush Mountain"
+      "The Zenith Anomaly"
     ],
     "requirements": {
       "defeatMultipleSpecific": [
@@ -1940,7 +1946,7 @@ export const alolaRoutes = [
         "chance": 0.3333
       }
     ],
-    "challengeName": "Extra Challenge E 09",
+    "challengeName": "Extra Challenge C 04",
     "areaId": "The Zenith Anomaly",
     "unlocks": [],
     "requirements": {
@@ -2016,10 +2022,10 @@ export const alolaRoutes = [
         "chance": 0.125
       }
     ],
-    "challengeName": "Extra Challenge E 10",
+    "challengeName": "Extra Challenge A 03",
     "areaId": "Melemele Meadow",
     "unlocks": [
-      "Ruins of Conflict"
+      "Kala'e Bay"
     ],
     "requirements": {
       "catchSpeciesUniqueCount": 2
@@ -2065,7 +2071,7 @@ export const alolaRoutes = [
         "chance": 0.3333
       }
     ],
-    "challengeName": "Extra Challenge E 11",
+    "challengeName": "Extra Challenge A 04",
     "areaId": "Kala'e Bay",
     "unlocks": [
       "Sacred Shrine"
@@ -2105,7 +2111,7 @@ export const alolaRoutes = [
         "chance": 0.25
       }
     ],
-    "challengeName": "Extra Challenge E 12",
+    "challengeName": "Extra Challenge A 05",
     "areaId": "Sacred Shrine",
     "unlocks": [],
     "requirements": {
@@ -2155,10 +2161,10 @@ export const alolaRoutes = [
         "chance": 0.3333
       }
     ],
-    "challengeName": "Extra Challenge E 13",
+    "challengeName": "Extra Challenge B 03",
     "areaId": "Poni Coast",
     "unlocks": [
-      "Resolution Cave"
+      "Route 16"
     ],
     "requirements": {
       "catchByType": {
@@ -2231,9 +2237,11 @@ export const alolaRoutes = [
         "chance": 0.1
       }
     ],
-    "challengeName": "Extra Challenge E 14",
+    "challengeName": "Extra Challenge D 04",
     "areaId": "The Interdimensional Rift",
-    "unlocks": [],
+    "unlocks": [
+      "Obsidian Sphere"
+    ],
     "requirements": {
       "defeatCountRoute": {
         "route": "The Interdimensional Rift",
@@ -2267,7 +2275,7 @@ export const alolaRoutes = [
         "chance": 0.1
       }
     ],
-    "challengeName": "Extra Challenge E 15",
+    "challengeName": "Extra Challenge D 02",
     "areaId": "Aether Paradise Labs",
     "unlocks": [
       "Aether Paradise Secret Lab"
@@ -2289,10 +2297,10 @@ export const alolaRoutes = [
         "chance": 1
       }
     ],
-    "challengeName": "Extra Challenge E 16",
+    "challengeName": "Extra Challenge D 03",
     "areaId": "Aether Paradise Secret Lab",
     "unlocks": [
-      "Lake of the Sunne"
+      "The Interdimensional Rift"
     ],
     "requirements": {
       "catchByQuality": {
@@ -2323,11 +2331,9 @@ export const alolaRoutes = [
         "chance": 0.3333
       }
     ],
-    "challengeName": "Extra Challenge E 17",
+    "challengeName": "Extra Challenge B 05",
     "areaId": "Lake of the Sunne",
-    "unlocks": [
-      "Obsidian Sphere"
-    ],
+    "unlocks": [],
     "requirements": {
       "catchByQuality": {
         "quality": "Epic+",
@@ -2352,9 +2358,11 @@ export const alolaRoutes = [
       }
     ],
     "areaId": "Obsidian Sphere",
-    "unlocks": [],
+    "unlocks": [
+      "Obsidian Tesseract"
+    ],
     "requirements": {},
-    "challengeName": "Extra Challenge E 18"
+    "challengeName": "Extra Challenge D 05"
   },
   {
     "name": "Obsidian Tesseract",
@@ -2378,11 +2386,9 @@ export const alolaRoutes = [
         "chance": 0.3333
       }
     ],
-    "challengeName": "Extra Challenge E 19",
+    "challengeName": "Extra Challenge D 06",
     "areaId": "Obsidian Tesseract",
-    "unlocks": [
-      "Obsidian Tesseract"
-    ],
+    "unlocks": [],
     "requirements": {
       "catchSpecies": [
         {
@@ -2431,14 +2437,66 @@ export const alolaRoutes = [
       }
     ],
     "areaId": "Route 8 Fossil Restoration Center Part 2",
-    "unlocks": [],
+    "unlocks": [
+      "Royal Avenue"
+    ],
     "requirements": {
       "catchByQuality": {
         "quality": "Uncommon+",
         "count": 5
       }
     },
-    "challengeName": "Extra Challenge E 20"
+    "challengeName": "Extra Challenge E 02"
+  },
+  {
+    "name": "Route 3",
+    "spawns": [],
+    "challengeName": "Extra Challenge A 01",
+    "areaId": "Route 3",
+    "unlocks": [
+      "Route 6"
+    ],
+    "requirements": {}
+  },
+  {
+    "name": "Poni Grove",
+    "spawns": [],
+    "challengeName": "Extra Challenge B 01",
+    "areaId": "Poni Grove",
+    "unlocks": [
+      "Poni Plains"
+    ],
+    "requirements": {}
+  },
+  {
+    "name": "Route 10",
+    "spawns": [],
+    "challengeName": "Extra Challenge C 01",
+    "areaId": "Route 10",
+    "unlocks": [
+      "Ula'ula Meadow"
+    ],
+    "requirements": {}
+  },
+  {
+    "name": "Aether Base",
+    "spawns": [],
+    "challengeName": "Extra Challenge D 01",
+    "areaId": "Aether Base",
+    "unlocks": [
+      "Aether Paradise Labs"
+    ],
+    "requirements": {}
+  },
+  {
+    "name": "Route 9",
+    "spawns": [],
+    "challengeName": "Extra Challenge E 01",
+    "areaId": "Route 9",
+    "unlocks": [
+      "Route 8 Fossil Restoration Center Part 2"
+    ],
+    "requirements": {}
   }
 ];
 
@@ -2943,15 +3001,19 @@ export const alolaUnlocks = [
     "challengeName": "Challenge 40",
     "areaId": "Champion Hau Boss Battle",
     "unlocks": [
-      "Route 6"
+      "Route 3",
+      "Poni Grove",
+      "Route 10",
+      "Aether Base",
+      "Route 9"
     ],
     "requirements": {}
   },
   {
-    "challengeName": "Extra Challenge E 01",
+    "challengeName": "Extra Challenge A 02",
     "areaId": "Route 6",
     "unlocks": [
-      "Poni Plains"
+      "Melemele Meadow"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -2961,10 +3023,10 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge E 02",
+    "challengeName": "Extra Challenge B 02",
     "areaId": "Poni Plains",
     "unlocks": [
-      "Route 16"
+      "Poni Coast"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -2974,10 +3036,10 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge E 03",
+    "challengeName": "Extra Challenge B 04",
     "areaId": "Route 16",
     "unlocks": [
-      "Royal Avenue"
+      "Lake of the Sunne"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -2987,7 +3049,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge E 04",
+    "challengeName": "Extra Challenge E 03",
     "areaId": "Royal Avenue",
     "unlocks": [
       "Pikachu Valley"
@@ -3000,7 +3062,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge E 05",
+    "challengeName": "Extra Challenge E 04",
     "areaId": "Pikachu Valley",
     "unlocks": [
       "Starter Depot"
@@ -3013,11 +3075,9 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge E 06",
+    "challengeName": "Extra Challenge E 05",
     "areaId": "Starter Depot",
-    "unlocks": [
-      "Ula'ula Meadow"
-    ],
+    "unlocks": [],
     "requirements": {
       "defeatCountRoute": {
         "route": "Starter Depot",
@@ -3026,7 +3086,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge E 07",
+    "challengeName": "Extra Challenge C 02",
     "areaId": "Ula'ula Meadow",
     "unlocks": [
       "Blush Mountain"
@@ -3039,7 +3099,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge E 08",
+    "challengeName": "Extra Challenge C 03",
     "areaId": "Blush Mountain",
     "unlocks": [
       "The Zenith Anomaly"
@@ -3052,11 +3112,9 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge E 09",
+    "challengeName": "Extra Challenge C 04",
     "areaId": "The Zenith Anomaly",
-    "unlocks": [
-      "Melemele Meadow"
-    ],
+    "unlocks": [],
     "requirements": {
       "catchSpecies": [
         {
@@ -3079,7 +3137,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge E 10",
+    "challengeName": "Extra Challenge A 03",
     "areaId": "Melemele Meadow",
     "unlocks": [
       "Kala'e Bay"
@@ -3089,7 +3147,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge E 11",
+    "challengeName": "Extra Challenge A 04",
     "areaId": "Kala'e Bay",
     "unlocks": [
       "Sacred Shrine"
@@ -3102,11 +3160,9 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge E 12",
+    "challengeName": "Extra Challenge A 05",
     "areaId": "Sacred Shrine",
-    "unlocks": [
-      "Poni Coast"
-    ],
+    "unlocks": [],
     "requirements": {
       "catchSpecies": [
         {
@@ -3133,10 +3189,10 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge E 13",
+    "challengeName": "Extra Challenge B 03",
     "areaId": "Poni Coast",
     "unlocks": [
-      "The Interdimensional Rift"
+      "Route 16"
     ],
     "requirements": {
       "catchByType": {
@@ -3146,10 +3202,10 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge E 14",
+    "challengeName": "Extra Challenge D 04",
     "areaId": "The Interdimensional Rift",
     "unlocks": [
-      "Aether Paradise Labs"
+      "Obsidian Sphere"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -3163,7 +3219,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge E 15",
+    "challengeName": "Extra Challenge D 02",
     "areaId": "Aether Paradise Labs",
     "unlocks": [
       "Aether Paradise Secret Lab"
@@ -3176,10 +3232,10 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge E 16",
+    "challengeName": "Extra Challenge D 03",
     "areaId": "Aether Paradise Secret Lab",
     "unlocks": [
-      "Lake of the Sunne"
+      "The Interdimensional Rift"
     ],
     "requirements": {
       "catchByQuality": {
@@ -3189,11 +3245,9 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge E 17",
+    "challengeName": "Extra Challenge B 05",
     "areaId": "Lake of the Sunne",
-    "unlocks": [
-      "Obsidian Sphere"
-    ],
+    "unlocks": [],
     "requirements": {
       "catchByQuality": {
         "quality": "Epic+",
@@ -3202,7 +3256,7 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge E 18",
+    "challengeName": "Extra Challenge D 05",
     "areaId": "Obsidian Sphere",
     "unlocks": [
       "Obsidian Tesseract"
@@ -3215,11 +3269,9 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge E 19",
+    "challengeName": "Extra Challenge D 06",
     "areaId": "Obsidian Tesseract",
-    "unlocks": [
-      "Route 8 Fossil Restoration Center Part 2"
-    ],
+    "unlocks": [],
     "requirements": {
       "catchSpecies": [
         {
@@ -3242,14 +3294,56 @@ export const alolaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge E 20",
+    "challengeName": "Extra Challenge E 02",
     "areaId": "Route 8 Fossil Restoration Center Part 2",
-    "unlocks": [],
+    "unlocks": [
+      "Royal Avenue"
+    ],
     "requirements": {
       "catchByQuality": {
         "quality": "Uncommon+",
         "count": 5
       }
     }
+  },
+  {
+    "challengeName": "Extra Challenge A 01",
+    "areaId": "Route 3",
+    "unlocks": [
+      "Route 6"
+    ],
+    "requirements": {}
+  },
+  {
+    "challengeName": "Extra Challenge B 01",
+    "areaId": "Poni Grove",
+    "unlocks": [
+      "Poni Plains"
+    ],
+    "requirements": {}
+  },
+  {
+    "challengeName": "Extra Challenge C 01",
+    "areaId": "Route 10",
+    "unlocks": [
+      "Ula'ula Meadow"
+    ],
+    "requirements": {}
+  },
+  {
+    "challengeName": "Extra Challenge D 01",
+    "areaId": "Aether Base",
+    "unlocks": [
+      "Aether Paradise Labs"
+    ],
+    "requirements": {}
+  },
+  {
+    "challengeName": "Extra Challenge E 01",
+    "areaId": "Route 9",
+    "unlocks": [
+      "Route 8 Fossil Restoration Center Part 2"
+    ],
+    "requirements": {}
   }
 ];
