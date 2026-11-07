@@ -1541,55 +1541,74 @@ export const alolaRoutes = [
     "spawns": [],
     "areaId": "Champion Hau Boss Battle",
     "unlocks": [
-      "Route 6"
+      "Route 3",
+      "Poni Grove",
+      "Route 10",
+      "Aether Base",
+      "Route 9"
     ],
     "requirements": {},
     "challengeName": "Challenge 40"
   },
   {
+    "name": "Route 3",
+    "spawns": [],
+    "challengeName": "Extra Challenge A 01",
+    "areaId": "Route 3",
+    "unlocks": [
+      "Route 6"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Route 3",
+        "count": 10
+      }
+    }
+  },
+  {
     "name": "Route 6",
     "spawns": [
       {
-        "pokemonId": 701,
+        "pokemonId": 700,
         "minLevel": 1,
         "maxLevel": 1,
         "chance": 0
       },
       {
-        "pokemonId": 206,
+        "pokemonId": 205,
         "minLevel": 1,
         "maxLevel": 1,
         "chance": 0
       },
       {
-        "pokemonId": 587,
+        "pokemonId": 586,
         "minLevel": 1,
         "maxLevel": 1,
         "chance": 0
       },
       {
-        "pokemonId": 118,
+        "pokemonId": 117,
         "minLevel": 1,
         "maxLevel": 1,
         "chance": 0
       },
       {
-        "pokemonId": 186,
+        "pokemonId": 185,
         "minLevel": 1,
         "maxLevel": 1,
         "chance": 0
       },
       {
-        "pokemonId": 174,
+        "pokemonId": 173,
         "minLevel": 1,
         "maxLevel": 1,
         "chance": 0
       }
     ],
-    "challengeName": "Extra Challenge E 01",
+    "challengeName": "Extra Challenge A 02",
     "areaId": "Route 6",
     "unlocks": [
-      "Royal Avenue"
+      "Melemele Meadow"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -1599,28 +1618,214 @@ export const alolaRoutes = [
     }
   },
   {
+    "name": "Melemele Meadow",
+    "spawns": [
+      {
+        "pokemonId": 9,
+        "minLevel": 85,
+        "maxLevel": 90,
+        "chance": 0.13
+      },
+      {
+        "pokemonId": 10,
+        "minLevel": 85,
+        "maxLevel": 90,
+        "chance": 0.13
+      },
+      {
+        "pokemonId": 741,
+        "minLevel": 85,
+        "maxLevel": 90,
+        "chance": 0.13
+      },
+      {
+        "pokemonId": 11,
+        "minLevel": 85,
+        "maxLevel": 90,
+        "chance": 0.13
+      },
+      {
+        "pokemonId": 668,
+        "minLevel": 85,
+        "maxLevel": 90,
+        "chance": 0.13
+      },
+      {
+        "pokemonId": 547,
+        "minLevel": 85,
+        "maxLevel": 90,
+        "chance": 0.13
+      },
+      {
+        "pokemonId": 545,
+        "minLevel": 85,
+        "maxLevel": 90,
+        "chance": 0.13
+      },
+      {
+        "pokemonId": 707,
+        "minLevel": 85,
+        "maxLevel": 90,
+        "chance": 0.13
+      }
+    ],
+    "challengeName": "Extra Challenge A 03",
+    "areaId": "Melemele Meadow",
+    "unlocks": [
+      "Kala'e Bay"
+    ],
+    "requirements": {
+      "catchSpeciesUniqueCount": 2
+    }
+  },
+  {
+    "name": "Kala'e Bay",
+    "spawns": [
+      {
+        "pokemonId": 457,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 222,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 370,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
+      },
+      {
+        "pokemonId": 89,
+        "minLevel": 85,
+        "maxLevel": 90,
+        "chance": 0.33
+      },
+      {
+        "pokemonId": 78,
+        "minLevel": 85,
+        "maxLevel": 90,
+        "chance": 0.33
+      },
+      {
+        "pokemonId": 455,
+        "minLevel": 85,
+        "maxLevel": 90,
+        "chance": 0.33
+      }
+    ],
+    "challengeName": "Extra Challenge A 04",
+    "areaId": "Kala'e Bay",
+    "unlocks": [
+      "Sacred Shrine"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Kala'e Bay",
+        "count": 15
+      }
+    }
+  },
+  {
+    "name": "Sacred Shrine",
+    "spawns": [
+      {
+        "pokemonId": 784,
+        "minLevel": 100,
+        "maxLevel": 100,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 785,
+        "minLevel": 100,
+        "maxLevel": 100,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 786,
+        "minLevel": 100,
+        "maxLevel": 100,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 787,
+        "minLevel": 100,
+        "maxLevel": 100,
+        "chance": 0.25
+      }
+    ],
+    "challengeName": "Extra Challenge A 05",
+    "areaId": "Sacred Shrine",
+    "unlocks": [
+      "Crystal Depths"
+    ],
+    "requirements": {
+      "catchSpecies": [
+        {
+          "species": "Tapu Koko",
+          "count": 1
+        },
+        {
+          "species": "Tapu Lele",
+          "count": 1
+        },
+        {
+          "species": "Tapu Bulu",
+          "count": 1
+        },
+        {
+          "species": "Tapu Fini",
+          "count": 1
+        }
+      ]
+    },
+    "gift": {
+      "item": "Masterball",
+      "count": 2
+    }
+  },
+  {
+    "name": "Poni Grove",
+    "spawns": [],
+    "challengeName": "Extra Challenge B 01",
+    "areaId": "Poni Grove",
+    "unlocks": [
+      "Poni Plains"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Poni Grove",
+        "count": 10
+      }
+    }
+  },
+  {
     "name": "Poni Plains",
     "spawns": [
       {
-        "pokemonId": 190,
+        "pokemonId": 189,
         "minLevel": 1,
         "maxLevel": 1,
         "chance": 0
       },
       {
-        "pokemonId": 123,
+        "pokemonId": 122,
         "minLevel": 1,
         "maxLevel": 1,
         "chance": 0
       },
       {
-        "pokemonId": 242,
+        "pokemonId": 241,
         "minLevel": 1,
         "maxLevel": 1,
         "chance": 0
       }
     ],
-    "challengeName": "Extra Challenge E 02",
+    "challengeName": "Extra Challenge B 02",
     "areaId": "Poni Plains",
     "unlocks": [
       "Poni Coast"
@@ -1633,28 +1838,56 @@ export const alolaRoutes = [
     }
   },
   {
+    "name": "Poni Coast",
+    "spawns": [
+      {
+        "pokemonId": 50,
+        "minLevel": 85,
+        "maxLevel": 90,
+        "chance": 0.33
+      },
+      {
+        "pokemonId": 422,
+        "minLevel": 85,
+        "maxLevel": 90,
+        "chance": 0.33
+      },
+      {
+        "pokemonId": 101,
+        "minLevel": 85,
+        "maxLevel": 90,
+        "chance": 0.33
+      }
+    ],
+    "challengeName": "Extra Challenge B 03",
+    "areaId": "Poni Coast",
+    "unlocks": [
+      "Route 16"
+    ],
+    "requirements": {
+      "catchByType": {
+        "type": "Normal",
+        "count": 3
+      }
+    }
+  },
+  {
     "name": "Route 16",
     "spawns": [
       {
-        "pokemonId": 214,
+        "pokemonId": 213,
         "minLevel": 1,
         "maxLevel": 1,
         "chance": 0
       },
       {
-        "pokemonId": 559,
+        "pokemonId": 558,
         "minLevel": 1,
         "maxLevel": 1,
         "chance": 0
       },
       {
-        "pokemonId": 149,
-        "minLevel": 1,
-        "maxLevel": 1,
-        "chance": 0
-      },
-      {
-        "pokemonId": 61,
+        "pokemonId": 148,
         "minLevel": 1,
         "maxLevel": 1,
         "chance": 0
@@ -1664,12 +1897,18 @@ export const alolaRoutes = [
         "minLevel": 1,
         "maxLevel": 1,
         "chance": 0
+      },
+      {
+        "pokemonId": 59,
+        "minLevel": 1,
+        "maxLevel": 1,
+        "chance": 0
       }
     ],
-    "challengeName": "Extra Challenge E 03",
+    "challengeName": "Extra Challenge B 04",
     "areaId": "Route 16",
     "unlocks": [
-      "Aether Paradise Labs"
+      "Lake of the Sunne"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -1679,71 +1918,31 @@ export const alolaRoutes = [
     }
   },
   {
-    "name": "Royal Avenue",
+    "name": "Lake of the Sunne",
     "spawns": [
       {
-        "pokemonId": 741,
+        "pokemonId": 41,
         "minLevel": 85,
         "maxLevel": 90,
-        "chance": 0.3333
+        "chance": 0.33
       },
       {
-        "pokemonId": 732,
+        "pokemonId": 91,
         "minLevel": 85,
         "maxLevel": 90,
-        "chance": 0.3333
+        "chance": 0.33
       },
       {
-        "pokemonId": 743,
+        "pokemonId": 92,
         "minLevel": 85,
         "maxLevel": 90,
-        "chance": 0.3333
+        "chance": 0.33
       }
     ],
-    "challengeName": "Extra Challenge E 04",
-    "areaId": "Royal Avenue",
+    "challengeName": "Extra Challenge B 05",
+    "areaId": "Lake of the Sunne",
     "unlocks": [
-      "Pikachu Valley"
-    ],
-    "requirements": {
-      "catchByQuality": {
-        "quality": "Rare+",
-        "count": 2
-      }
-    }
-  },
-  {
-    "name": "Pikachu Valley",
-    "spawns": [
-      {
-        "pokemonId": 25,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 26,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 172,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 81,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "chance": 0.25
-      }
-    ],
-    "challengeName": "Extra Challenge E 05",
-    "areaId": "Pikachu Valley",
-    "unlocks": [
-      "Starter Depot"
+      "Crystal Depths"
     ],
     "requirements": {
       "catchByQuality": {
@@ -1753,145 +1952,122 @@ export const alolaRoutes = [
     }
   },
   {
-    "name": "Starter Depot",
-    "spawns": [
-      {
-        "pokemonId": 722,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "chance": 0.16670000000000001
-      },
-      {
-        "pokemonId": 723,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "chance": 0.16670000000000001
-      },
-      {
-        "pokemonId": 725,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "chance": 0.16670000000000001
-      },
-      {
-        "pokemonId": 726,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "chance": 0.16670000000000001
-      },
-      {
-        "pokemonId": 728,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "chance": 0.16670000000000001
-      },
-      {
-        "pokemonId": 729,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "chance": 0.16670000000000001
-      }
+    "name": "Route 10",
+    "spawns": [],
+    "challengeName": "Extra Challenge C 01",
+    "areaId": "Route 10",
+    "unlocks": [
+      "Ula'ula Meadow"
     ],
-    "areaId": "Starter Depot",
-    "unlocks": [],
-    "requirements": {},
-    "challengeName": "Extra Challenge E 06"
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Route 10",
+        "count": 10
+      }
+    }
   },
   {
     "name": "Ula'ula Meadow",
     "spawns": [
       {
-        "pokemonId": 166,
+        "pokemonId": 165,
         "minLevel": 85,
         "maxLevel": 90,
-        "chance": 0.3333
+        "chance": 0.33
       },
       {
-        "pokemonId": 168,
+        "pokemonId": 167,
         "minLevel": 85,
         "maxLevel": 90,
-        "chance": 0.3333
+        "chance": 0.33
       },
       {
-        "pokemonId": 741,
+        "pokemonId": 740,
         "minLevel": 85,
         "maxLevel": 90,
-        "chance": 0.3333
+        "chance": 0.33
       },
       {
-        "pokemonId": 775,
+        "pokemonId": 774,
         "minLevel": 85,
         "maxLevel": 90,
         "chance": 0.1
       }
     ],
+    "challengeName": "Extra Challenge C 02",
     "areaId": "Ula'ula Meadow",
-    "unlocks": [],
-    "requirements": {},
-    "challengeName": "Extra Challenge E 07"
+    "unlocks": [
+      "Blush Mountain"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Ula'ula Meadow",
+        "count": 10
+      }
+    }
   },
   {
     "name": "Blush Mountain",
     "spawns": [
       {
-        "pokemonId": 749,
+        "pokemonId": 748,
         "minLevel": 85,
         "maxLevel": 90,
-        "chance": 0.11109999999999999
+        "chance": 0.11
       },
       {
-        "pokemonId": 324,
+        "pokemonId": 323,
         "minLevel": 85,
         "maxLevel": 90,
-        "chance": 0.11109999999999999
-      },
-      {
-        "pokemonId": 777,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "chance": 0.11109999999999999
-      },
-      {
-        "pokemonId": 239,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "chance": 0.11109999999999999
-      },
-      {
-        "pokemonId": 74,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "chance": 0.11109999999999999
-      },
-      {
-        "pokemonId": 75,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "chance": 0.11109999999999999
-      },
-      {
-        "pokemonId": 737,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "chance": 0.11109999999999999
+        "chance": 0.11
       },
       {
         "pokemonId": 776,
         "minLevel": 85,
         "maxLevel": 90,
-        "chance": 0.11109999999999999
+        "chance": 0.11
       },
       {
-        "pokemonId": 702,
+        "pokemonId": 238,
         "minLevel": 85,
         "maxLevel": 90,
-        "chance": 0.11109999999999999
+        "chance": 0.11
+      },
+      {
+        "pokemonId": 73,
+        "minLevel": 85,
+        "maxLevel": 90,
+        "chance": 0.11
+      },
+      {
+        "pokemonId": 74,
+        "minLevel": 85,
+        "maxLevel": 90,
+        "chance": 0.11
+      },
+      {
+        "pokemonId": 736,
+        "minLevel": 85,
+        "maxLevel": 90,
+        "chance": 0.11
+      },
+      {
+        "pokemonId": 775,
+        "minLevel": 85,
+        "maxLevel": 90,
+        "chance": 0.11
+      },
+      {
+        "pokemonId": 701,
+        "minLevel": 85,
+        "maxLevel": 90,
+        "chance": 0.11
       }
     ],
-    "challengeName": "Extra Challenge E 08",
+    "challengeName": "Extra Challenge C 03",
     "areaId": "Blush Mountain",
     "unlocks": [
-      "Blush Mountain"
+      "The Zenith Anomaly"
     ],
     "requirements": {
       "defeatMultipleSpecific": [
@@ -1922,27 +2098,29 @@ export const alolaRoutes = [
     "name": "The Zenith Anomaly",
     "spawns": [
       {
+        "pokemonId": 800,
+        "minLevel": 95,
+        "maxLevel": 100,
+        "chance": 0.33
+      },
+      {
         "pokemonId": 801,
         "minLevel": 95,
         "maxLevel": 100,
-        "chance": 0.3333
+        "chance": 0.33
       },
       {
-        "pokemonId": 802,
+        "pokemonId": 806,
         "minLevel": 95,
         "maxLevel": 100,
-        "chance": 0.3333
-      },
-      {
-        "pokemonId": 807,
-        "minLevel": 95,
-        "maxLevel": 100,
-        "chance": 0.3333
+        "chance": 0.33
       }
     ],
-    "challengeName": "Extra Challenge E 09",
+    "challengeName": "Extra Challenge C 04",
     "areaId": "The Zenith Anomaly",
-    "unlocks": [],
+    "unlocks": [
+      "Crystal Depths"
+    ],
     "requirements": {
       "catchSpecies": [
         {
@@ -1965,211 +2143,85 @@ export const alolaRoutes = [
     }
   },
   {
-    "name": "Melemele Meadow",
-    "spawns": [
-      {
-        "pokemonId": 10,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 11,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 742,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 12,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 669,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 548,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 546,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 708,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "chance": 0.125
-      }
-    ],
-    "challengeName": "Extra Challenge E 10",
-    "areaId": "Melemele Meadow",
+    "name": "Aether Base",
+    "spawns": [],
+    "challengeName": "Extra Challenge D 01",
+    "areaId": "Aether Base",
     "unlocks": [
-      "Ruins of Conflict"
-    ],
-    "requirements": {
-      "catchSpeciesUniqueCount": 2
-    }
-  },
-  {
-    "name": "Kala'e Bay",
-    "spawns": [
-      {
-        "pokemonId": 458,
-        "minLevel": 1,
-        "maxLevel": 1,
-        "chance": 0
-      },
-      {
-        "pokemonId": 223,
-        "minLevel": 1,
-        "maxLevel": 1,
-        "chance": 0
-      },
-      {
-        "pokemonId": 371,
-        "minLevel": 1,
-        "maxLevel": 1,
-        "chance": 0
-      },
-      {
-        "pokemonId": 90,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "chance": 0.3333
-      },
-      {
-        "pokemonId": 79,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "chance": 0.3333
-      },
-      {
-        "pokemonId": 456,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "chance": 0.3333
-      }
-    ],
-    "challengeName": "Extra Challenge E 11",
-    "areaId": "Kala'e Bay",
-    "unlocks": [
-      "Sacred Shrine"
+      "Aether Paradise Labs"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Kala'e Bay",
-        "count": 15
+        "route": "Aether Base",
+        "count": 10
       }
     }
   },
   {
-    "name": "Sacred Shrine",
+    "name": "Aether Paradise Labs",
     "spawns": [
       {
-        "pokemonId": 785,
-        "minLevel": 100,
-        "maxLevel": 100,
-        "chance": 0.25
+        "pokemonId": 771,
+        "minLevel": 85,
+        "maxLevel": 90,
+        "chance": 0.5
       },
       {
-        "pokemonId": 786,
-        "minLevel": 100,
-        "maxLevel": 100,
-        "chance": 0.25
+        "pokemonId": 136,
+        "minLevel": 85,
+        "maxLevel": 90,
+        "chance": 0.5
       },
       {
-        "pokemonId": 787,
-        "minLevel": 100,
-        "maxLevel": 100,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 788,
-        "minLevel": 100,
-        "maxLevel": 100,
-        "chance": 0.25
+        "pokemonId": 807,
+        "minLevel": 85,
+        "maxLevel": 90,
+        "chance": 0.1
       }
     ],
-    "challengeName": "Extra Challenge E 12",
-    "areaId": "Sacred Shrine",
-    "unlocks": [],
-    "requirements": {
-      "catchSpecies": [
-        {
-          "species": "Tapu Koko",
-          "count": 1
-        },
-        {
-          "species": "Tapu Lele",
-          "count": 1
-        },
-        {
-          "species": "Tapu Bulu",
-          "count": 1
-        },
-        {
-          "species": "Tapu Fini",
-          "count": 1
-        }
-      ]
-    },
-    "gift": {
-      "item": "Masterball",
-      "count": 2
-    }
-  },
-  {
-    "name": "Poni Coast",
-    "spawns": [
-      {
-        "pokemonId": 51,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "chance": 0.3333
-      },
-      {
-        "pokemonId": 423,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "chance": 0.3333
-      },
-      {
-        "pokemonId": 102,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "chance": 0.3333
-      }
-    ],
-    "challengeName": "Extra Challenge E 13",
-    "areaId": "Poni Coast",
+    "challengeName": "Extra Challenge D 02",
+    "areaId": "Aether Paradise Labs",
     "unlocks": [
-      "Resolution Cave"
+      "Aether Paradise Secret Lab"
     ],
     "requirements": {
-      "catchByType": {
-        "type": "Normal",
-        "count": 3
+      "catchByQuality": {
+        "quality": "Uncommon+",
+        "count": 5
+      }
+    }
+  },
+  {
+    "name": "Aether Paradise Secret Lab",
+    "spawns": [
+      {
+        "pokemonId": 772,
+        "minLevel": 85,
+        "maxLevel": 90,
+        "chance": 1
+      }
+    ],
+    "challengeName": "Extra Challenge D 03",
+    "areaId": "Aether Paradise Secret Lab",
+    "unlocks": [
+      "The Interdimensional Rift"
+    ],
+    "requirements": {
+      "catchByQuality": {
+        "quality": "Rare+",
+        "count": 2
       }
     }
   },
   {
     "name": "The Interdimensional Rift",
     "spawns": [
+      {
+        "pokemonId": 792,
+        "minLevel": 110,
+        "maxLevel": 110,
+        "chance": 0.1
+      },
       {
         "pokemonId": 793,
         "minLevel": 110,
@@ -2207,13 +2259,13 @@ export const alolaRoutes = [
         "chance": 0.1
       },
       {
-        "pokemonId": 799,
+        "pokemonId": 802,
         "minLevel": 110,
         "maxLevel": 110,
         "chance": 0.1
       },
       {
-        "pokemonId": 803,
+        "pokemonId": 804,
         "minLevel": 110,
         "maxLevel": 110,
         "chance": 0.1
@@ -2223,17 +2275,13 @@ export const alolaRoutes = [
         "minLevel": 110,
         "maxLevel": 110,
         "chance": 0.1
-      },
-      {
-        "pokemonId": 806,
-        "minLevel": 110,
-        "maxLevel": 110,
-        "chance": 0.1
       }
     ],
-    "challengeName": "Extra Challenge E 14",
+    "challengeName": "Extra Challenge D 04",
     "areaId": "The Interdimensional Rift",
-    "unlocks": [],
+    "unlocks": [
+      "Obsidian Sphere"
+    ],
     "requirements": {
       "defeatCountRoute": {
         "route": "The Interdimensional Rift",
@@ -2246,142 +2294,59 @@ export const alolaRoutes = [
     }
   },
   {
-    "name": "Aether Paradise Labs",
-    "spawns": [
-      {
-        "pokemonId": 772,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "chance": 0.5
-      },
-      {
-        "pokemonId": 137,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "chance": 0.5
-      },
-      {
-        "pokemonId": 808,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "chance": 0.1
-      }
-    ],
-    "challengeName": "Extra Challenge E 15",
-    "areaId": "Aether Paradise Labs",
-    "unlocks": [
-      "Aether Paradise Secret Lab"
-    ],
-    "requirements": {
-      "catchByQuality": {
-        "quality": "Uncommon+",
-        "count": 5
-      }
-    }
-  },
-  {
-    "name": "Aether Paradise Secret Lab",
-    "spawns": [
-      {
-        "pokemonId": 773,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "chance": 1
-      }
-    ],
-    "challengeName": "Extra Challenge E 16",
-    "areaId": "Aether Paradise Secret Lab",
-    "unlocks": [
-      "Lake of the Sunne"
-    ],
-    "requirements": {
-      "catchByQuality": {
-        "quality": "Rare+",
-        "count": 2
-      }
-    }
-  },
-  {
-    "name": "Lake of the Sunne",
-    "spawns": [
-      {
-        "pokemonId": 42,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "chance": 0.3333
-      },
-      {
-        "pokemonId": 92,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "chance": 0.3333
-      },
-      {
-        "pokemonId": 93,
-        "minLevel": 85,
-        "maxLevel": 90,
-        "chance": 0.3333
-      }
-    ],
-    "challengeName": "Extra Challenge E 17",
-    "areaId": "Lake of the Sunne",
-    "unlocks": [
-      "Obsidian Sphere"
-    ],
-    "requirements": {
-      "catchByQuality": {
-        "quality": "Epic+",
-        "count": 1
-      }
-    }
-  },
-  {
     "name": "Obsidian Sphere",
     "spawns": [
       {
-        "pokemonId": 789,
+        "pokemonId": 788,
         "minLevel": 110,
         "maxLevel": 110,
         "chance": 0.6
       },
       {
-        "pokemonId": 790,
+        "pokemonId": 789,
         "minLevel": 110,
         "maxLevel": 110,
         "chance": 0.4
       }
     ],
+    "challengeName": "Extra Challenge D 05",
     "areaId": "Obsidian Sphere",
-    "unlocks": [],
-    "requirements": {},
-    "challengeName": "Extra Challenge E 18"
+    "unlocks": [
+      "Obsidian Tesseract"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Obsidian Sphere",
+        "count": 10
+      }
+    }
   },
   {
     "name": "Obsidian Tesseract",
     "spawns": [
       {
+        "pokemonId": 790,
+        "minLevel": 120,
+        "maxLevel": 120,
+        "chance": 0.33
+      },
+      {
         "pokemonId": 791,
         "minLevel": 120,
         "maxLevel": 120,
-        "chance": 0.3333
+        "chance": 0.33
       },
       {
-        "pokemonId": 792,
+        "pokemonId": 799,
         "minLevel": 120,
         "maxLevel": 120,
-        "chance": 0.3333
-      },
-      {
-        "pokemonId": 800,
-        "minLevel": 120,
-        "maxLevel": 120,
-        "chance": 0.3333
+        "chance": 0.33
       }
     ],
-    "challengeName": "Extra Challenge E 19",
+    "challengeName": "Extra Challenge D 06",
     "areaId": "Obsidian Tesseract",
     "unlocks": [
-      "Obsidian Tesseract"
+      "Crystal Depths"
     ],
     "requirements": {
       "catchSpecies": [
@@ -2397,50 +2362,191 @@ export const alolaRoutes = [
     }
   },
   {
+    "name": "Route 9",
+    "spawns": [],
+    "challengeName": "Extra Challenge E 01",
+    "areaId": "Route 9",
+    "unlocks": [
+      "Route 8 Fossil Restoration Center Part 2"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Route 9",
+        "count": 10
+      }
+    }
+  },
+  {
     "name": "Route 8 Fossil Restoration Center Part 2",
     "spawns": [
       {
-        "pokemonId": 410,
+        "pokemonId": 409,
         "minLevel": 32,
         "maxLevel": 37,
         "chance": 0.2
       },
       {
-        "pokemonId": 566,
+        "pokemonId": 565,
         "minLevel": 32,
         "maxLevel": 37,
         "chance": 0.2
       },
       {
-        "pokemonId": 564,
+        "pokemonId": 563,
         "minLevel": 32,
         "maxLevel": 37,
         "chance": 0.2
       },
       {
-        "pokemonId": 696,
+        "pokemonId": 695,
         "minLevel": 32,
         "maxLevel": 37,
         "chance": 0.2
       },
       {
-        "pokemonId": 698,
+        "pokemonId": 697,
         "minLevel": 32,
         "maxLevel": 37,
         "chance": 0.2
       }
     ],
+    "challengeName": "Extra Challenge E 02",
     "areaId": "Route 8 Fossil Restoration Center Part 2",
     "unlocks": [
-      "Crystal Depths"
+      "Royal Avenue"
     ],
     "requirements": {
       "catchByQuality": {
         "quality": "Uncommon+",
         "count": 5
       }
-    },
-    "challengeName": "Extra Challenge E 20"
+    }
+  },
+  {
+    "name": "Royal Avenue",
+    "spawns": [
+      {
+        "pokemonId": 740,
+        "minLevel": 85,
+        "maxLevel": 90,
+        "chance": 0.33
+      },
+      {
+        "pokemonId": 731,
+        "minLevel": 85,
+        "maxLevel": 90,
+        "chance": 0.33
+      },
+      {
+        "pokemonId": 742,
+        "minLevel": 85,
+        "maxLevel": 90,
+        "chance": 0.33
+      }
+    ],
+    "challengeName": "Extra Challenge E 03",
+    "areaId": "Royal Avenue",
+    "unlocks": [
+      "Pikachu Valley"
+    ],
+    "requirements": {
+      "catchByQuality": {
+        "quality": "Rare+",
+        "count": 2
+      }
+    }
+  },
+  {
+    "name": "Pikachu Valley",
+    "spawns": [
+      {
+        "pokemonId": 24,
+        "minLevel": 85,
+        "maxLevel": 90,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 25,
+        "minLevel": 85,
+        "maxLevel": 90,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 171,
+        "minLevel": 85,
+        "maxLevel": 90,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 80,
+        "minLevel": 85,
+        "maxLevel": 90,
+        "chance": 0.25
+      }
+    ],
+    "challengeName": "Extra Challenge E 04",
+    "areaId": "Pikachu Valley",
+    "unlocks": [
+      "Starter Depot"
+    ],
+    "requirements": {
+      "catchByQuality": {
+        "quality": "Epic+",
+        "count": 1
+      }
+    }
+  },
+  {
+    "name": "Starter Depot",
+    "spawns": [
+      {
+        "pokemonId": 721,
+        "minLevel": 85,
+        "maxLevel": 90,
+        "chance": 0.17
+      },
+      {
+        "pokemonId": 722,
+        "minLevel": 85,
+        "maxLevel": 90,
+        "chance": 0.17
+      },
+      {
+        "pokemonId": 724,
+        "minLevel": 85,
+        "maxLevel": 90,
+        "chance": 0.17
+      },
+      {
+        "pokemonId": 725,
+        "minLevel": 85,
+        "maxLevel": 90,
+        "chance": 0.17
+      },
+      {
+        "pokemonId": 727,
+        "minLevel": 85,
+        "maxLevel": 90,
+        "chance": 0.17
+      },
+      {
+        "pokemonId": 728,
+        "minLevel": 85,
+        "maxLevel": 90,
+        "chance": 0.17
+      }
+    ],
+    "challengeName": "Extra Challenge E 05",
+    "areaId": "Starter Depot",
+    "unlocks": [
+      "Crystal Depths"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Starter Depot",
+        "count": 10
+      }
+    }
   },
   {
     "name": "Crystal Depths",
@@ -3269,7 +3375,11 @@ export const alolaUnlocks = [
     "challengeName": "Challenge 40",
     "areaId": "Champion Hau Boss Battle",
     "unlocks": [
-      "Route 6"
+      "Route 3",
+      "Poni Grove",
+      "Route 10",
+      "Aether Base",
+      "Route 9"
     ],
     "requirements": {}
   },
