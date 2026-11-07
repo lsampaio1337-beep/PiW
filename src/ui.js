@@ -2597,34 +2597,38 @@ async function init() {
 
             // Adjust descriptions per tier since they depend on the level in showTrainerStats
             if (typeConfigKey === 'ballPocket') {
-                // To show historical, we can just say "Tier X Capacity" or recompute it if needed, but getCapacity uses the current state tier.
-                // We'll show the base description or derive historical capacity.
-                description = `Ball Stock Upgrade Tier ${t}`;
+                let capacity = 100;
+                for (let i = 0; i < t; i++) capacity += state.config.balance.expansions.ballPocket[i].increment;
+                description = `Ball capacity: ${capacity.toLocaleString('pt-BR')}`;
             } else if (typeConfigKey === 'potionSatchel') {
-                description = `Potion Stock Upgrade Tier ${t}`;
+                let capacity = 20;
+                for (let i = 0; i < t; i++) capacity += state.config.balance.expansions.potionSatchel[i].increment;
+                description = `Potion capacity: ${capacity.toLocaleString('pt-BR')}`;
             } else if (typeConfigKey === 'pokemonBox') {
-                description = `Pokemon Capacity Upgrade Tier ${t}`;
+                let capacity = 20;
+                for (let i = 0; i < t; i++) capacity += state.config.balance.expansions.pokemonBox[i].increment;
+                description = `Storage capacity: ${capacity.toLocaleString('pt-BR')}`;
             } else if (typeConfigKey === 'speed') {
-                if (t === 1) description = "Encounter time decreased in 10%";
-                else if (t === 2) description = "Encounter time decreased in 20%";
-                else if (t === 3) description = "Encounter time decreased in 30%";
-                else if (t === 4) description = "Encounter time decreased in 40%";
-                else if (t >= 5) description = "Encounter time decreased in 50%";
+                if (t === 1) description = "Encounter time decreased by 10%";
+                else if (t === 2) description = "Encounter time decreased by 20%";
+                else if (t === 3) description = "Encounter time decreased by 30%";
+                else if (t === 4) description = "Encounter time decreased by 40%";
+                else if (t >= 5) description = "Encounter time decreased by 50%";
             } else if (typeConfigKey === 'glass') {
                 if (t === 1) description = "Show Healthbar at Main View";
-                else if (t === 2) description = "Show Healthbar and Damage at Main View";
-                else if (t === 3) description = "Show Healthbar, Damage and Level at Main View";
-                else if (t === 4) description = "Show Healthbar, Damage, Level and Quality at Main View";
-                else if (t >= 5) description = "Show Healthbar, Damage, Level, Quality and SumIV at Main View";
+                else if (t === 2) description = "Show Damage at Main View";
+                else if (t === 3) description = "Show Level at Main View";
+                else if (t === 4) description = "Show Quality at Main View";
+                else if (t >= 5) description = "Show SumIV at Main View";
             } else if (typeConfigKey === 'loot') {
-                if (t === 1) description = "Can loot Potion";
-                else if (t === 2) description = "Can loot Potion and Ball";
-                else if (t === 3) description = "Can loot Potion, Ball and Stone";
-                else if (t === 4) description = "Can loot Potion, Ball, Stone and Vitamin";
+                if (t === 1) description = "Can loot Potions";
+                else if (t === 2) description = "Can loot Balls";
+                else if (t === 3) description = "Can loot Stones";
+                else if (t === 4) description = "Can loot Vitamins";
             } else if (typeConfigKey === 'smartwatch') {
                 if (t === 1) description = "Can Select Ball at Main View";
-                else if (t === 2) description = "Can Select Ball and potion at Main View";
-                else if (t >= 3) description = "Can Select Ball and potion at Main View and use smart mode for capture";
+                else if (t === 2) description = "Can Select Potion at Main View";
+                else if (t >= 3) description = "Access Smart Mode Capture<br>at Main View";
             }
 
             htmlContent += `
@@ -3024,32 +3028,32 @@ async function init() {
                             }
                             let description = configItem.description || '';
                             if (type.configKey === 'ballPocket') {
-                                description = `Ball Stock Capacity: ${getCapacity(state, 'balls')}`;
+                                description = `Ball capacity: ${getCapacity(state, 'balls').toLocaleString('pt-BR')}`;
                             } else if (type.configKey === 'potionSatchel') {
-                                description = `Potion Stock Capacity: ${getCapacity(state, 'potions')}`;
+                                description = `Potion capacity: ${getCapacity(state, 'potions').toLocaleString('pt-BR')}`;
                             } else if (type.configKey === 'pokemonBox') {
-                                description = `Pokemon Capacity in Backpack: ${getCapacity(state, 'box')}`;
+                                description = `Storage capacity: ${getCapacity(state, 'box').toLocaleString('pt-BR')}`;
                             } else if (type.configKey === 'speed') {
-                                if (tier === 1) description = "Encounter time decreased in 10%";
-                                else if (tier === 2) description = "Encounter time decreased in 20%";
-                                else if (tier === 3) description = "Encounter time decreased in 30%";
-                                else if (tier === 4) description = "Encounter time decreased in 40%";
-                                else if (tier >= 5) description = "Encounter time decreased in 50%";
+                                if (tier === 1) description = "Encounter time decreased by 10%";
+                                else if (tier === 2) description = "Encounter time decreased by 20%";
+                                else if (tier === 3) description = "Encounter time decreased by 30%";
+                                else if (tier === 4) description = "Encounter time decreased by 40%";
+                                else if (tier >= 5) description = "Encounter time decreased by 50%";
                             } else if (type.configKey === 'glass') {
                                 if (tier === 1) description = "Show Healthbar at Main View";
-                                else if (tier === 2) description = "Show Healthbar and Damage at Main View";
-                                else if (tier === 3) description = "Show Healthbar, Damage and Level at Main View";
-                                else if (tier === 4) description = "Show Healthbar, Damage, Level and Quality at Main View";
-                                else if (tier >= 5) description = "Show Healthbar, Damage, Level, Quality and SumIV at Main View";
+                                else if (tier === 2) description = "Show Damage at Main View";
+                                else if (tier === 3) description = "Show Level at Main View";
+                                else if (tier === 4) description = "Show Quality at Main View";
+                                else if (tier >= 5) description = "Show SumIV at Main View";
                             } else if (type.configKey === 'loot') {
-                                if (tier === 1) description = "Can loot Potion";
-                                else if (tier === 2) description = "Can loot Potion and Ball";
-                                else if (tier === 3) description = "Can loot Potion, Ball and Stone";
-                                else if (tier === 4) description = "Can loot Potion, Ball, Stone and Vitamin";
+                                if (tier === 1) description = "Can loot Potions";
+                                else if (tier === 2) description = "Can loot Balls";
+                                else if (tier === 3) description = "Can loot Stones";
+                                else if (tier === 4) description = "Can loot Vitamins";
                             } else if (type.configKey === 'smartwatch') {
                                 if (tier === 1) description = "Can Select Ball at Main View";
-                                else if (tier === 2) description = "Can Select Ball and potion at Main View";
-                                else if (tier >= 3) description = "Can Select Ball and potion at Main View and use smart mode for capture";
+                                else if (tier === 2) description = "Can Select Potion at Main View";
+                                else if (tier >= 3) description = "Access Smart Mode Capture<br>at Main View";
                             }
 
                             contentHtml += `
