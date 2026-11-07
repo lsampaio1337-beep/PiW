@@ -623,8 +623,15 @@ window.showChallengesModal = function() {
 
             let cData = getChallengeData(unlock);
             let isExtra = unlock.challengeName && unlock.challengeName.includes("Extra");
-            let rewardsStr = unlock.unlocks ? unlock.unlocks.join(" + ") : "Next Area";
-            if (unlock.gift || unlock.gifts) rewardsStr += " + Gift";
+            let rewardsStr = "";
+            if (unlock.unlocks && unlock.unlocks.length > 0) {
+                rewardsStr = unlock.unlocks.join(" + ");
+                if (unlock.gift || unlock.gifts) rewardsStr += " + Gift";
+            } else if (unlock.gift || unlock.gifts) {
+                rewardsStr = "Gift";
+            } else {
+                rewardsStr = "Next Area";
+            }
 
             let displayName = unlock.challengeName || (isExtra ? 'Extra Challenge - ' + unlock.areaId : 'Challenge - ' + unlock.areaId);
 
@@ -638,8 +645,12 @@ window.showChallengesModal = function() {
                 html += `<li>${part}</li>`;
             }
 
+            let rewardsLabel = rewardsStr === "Gift" ? `<b>Rewards:</b> ${rewardsStr}` : `<b>Rewards:</b> Unlocks ${rewardsStr}`;
             html += `</ul>
-                     <div style="margin-top: 10px; color: #4CAF50;"><b>Rewards:</b> Unlocks ${rewardsStr}</div>`;
+                     <div style="margin-top: 10px; color: #4CAF50;">${rewardsLabel}</div>`;
+             let pRewardsLabel = pRewards === "Gift" ? `<b>Rewards:</b> ${pRewards}` : `<b>Rewards:</b> Unlocks ${pRewards}`;
+            html += `</ul>
+                      <div style="margin-top: 10px; color: #888;">${pRewardsLabel}</div>`;
 
             let safeAreaId = unlock.areaId.replace(/'/g, "\\'");
 
@@ -690,8 +701,15 @@ window.showChallengesModal = function() {
              // Fake the data slightly to make it look completed, though getChallengeData will naturally evaluate to true
              let pData = getChallengeData(pUnlock);
 
-             let pRewards = pUnlock.unlocks ? pUnlock.unlocks.join(" + ") : "Next Area";
-             if (pUnlock.gift || pUnlock.gifts) pRewards += " + Gift";
+             let pRewards = "";
+             if (pUnlock.unlocks && pUnlock.unlocks.length > 0) {
+                 pRewards = pUnlock.unlocks.join(" + ");
+                 if (pUnlock.gift || pUnlock.gifts) pRewards += " + Gift";
+             } else if (pUnlock.gift || pUnlock.gifts) {
+                 pRewards = "Gift";
+             } else {
+                 pRewards = "Next Area";
+             }
 
              let displayName = pUnlock.challengeName || (isExtra ? 'Extra Challenge - ' + pUnlock.areaId : 'Challenge - ' + pUnlock.areaId);
 

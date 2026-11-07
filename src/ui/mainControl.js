@@ -632,9 +632,16 @@ export function getChallengeText() {
         let activeId = state.stats.activeChallenges[0];
         let unlock = window.getCurrentUnlocks().find(u => u.areaId === activeId);
         if (unlock) {
-            let unlocks = "Unlocks: " + (unlock.unlocks ? unlock.unlocks.join(' + ') : "Next Area");
+            let unlocksStr = "";
+            if (unlock.unlocks && unlock.unlocks.length > 0) {
+                unlocksStr = "Unlocks: " + unlock.unlocks.join(' + ');
+            } else if (unlock.gift || unlock.gifts) {
+                unlocksStr = "Rewards: Gift";
+            } else {
+                unlocksStr = "Unlocks: Next Area";
+            }
             let displayName = unlock.challengeName || activeId;
-            return `Next Challenge: ${displayName} - ${unlocks}`;
+            return `Next Challenge: ${displayName} - ${unlocksStr}`;
         }
     }
 

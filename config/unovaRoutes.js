@@ -2172,6 +2172,23 @@ export const unovaRoutes = [
     ]
   },
   {
+    "name": "Route 17",
+    "spawns": [
+      {
+        "pokemonId": 592,
+        "minLevel": 78,
+        "maxLevel": 88,
+        "chance": 0.5
+      },
+      {
+        "pokemonId": 594,
+        "minLevel": 78,
+        "maxLevel": 88,
+        "chance": 0.5
+      }
+    ]
+  },
+  {
     "name": "Route 18",
     "spawns": [
       {
@@ -2577,7 +2594,7 @@ export const unovaRoutes = [
     ]
   },
   {
-    "name": "Dragonspire Clouds",
+    "name": "Dragonspiral Clouds",
     "spawns": [
       {
         "pokemonId": 646,
@@ -2635,7 +2652,7 @@ export const unovaRoutes = [
     ]
   },
   {
-    "name": "Dragonspire Higher Clouds",
+    "name": "Dragonspiral Higher Clouds",
     "spawns": [
       {
         "pokemonId": 646,
@@ -3495,13 +3512,9 @@ export const unovaUnlocks = [
     "areaId": "Underground Ruins",
     "unlocks": [],
     "requirements": {
-      "catchSpeciesOr": [
+      "catchSpecies": [
         {
           "species": "Aggron",
-          "count": 1
-        },
-        {
-          "species": "Probopass",
           "count": 1
         }
       ]
@@ -3588,8 +3601,17 @@ export const unovaUnlocks = [
     "areaId": "Route 18",
     "unlocks": [],
     "requirements": {
-      "catchSpeciesRoute": "Route 18"
-    }
+      "defeatCountRoute": {
+        "route": "Route 18",
+        "count": 150
+      }
+    },
+    "gifts": [
+      {
+        "item": "Masterball",
+        "count": 1
+      }
+    ]
   },
   {
     "challengeName": "Extra Challenge C Condition",
@@ -3792,7 +3814,7 @@ export const unovaUnlocks = [
     "challengeName": "Extra Challenge C 05",
     "areaId": "Moor of Icirrus Depths",
     "unlocks": [
-      "Key for Dragonspire Clouds Challenge"
+      "Key to Dragonspiral Clouds Challenge"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3825,7 +3847,7 @@ export const unovaUnlocks = [
     "challengeName": "Extra Challenge D 05",
     "areaId": "Liberty Garden",
     "unlocks": [
-      "Key for Dragonspire Clouds Challenge"
+      "Key to Dragonspiral Clouds Challenge"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3854,7 +3876,7 @@ export const unovaUnlocks = [
     "challengeName": "Extra Challenge E 05",
     "areaId": "Abundant Shrine Depths",
     "unlocks": [
-      "Key for Dragonspire Clouds Challenge"
+      "Key to Dragonspiral Clouds Challenge"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3880,13 +3902,13 @@ export const unovaUnlocks = [
     ]
   },
   {
-    "challengeName": "Key for Dragonspire Clouds Challenge",
+    "challengeName": "Key to Dragonspiral Clouds Challenge",
     "areaId": "Unova Pokemon League",
     "unlocks": [
-      "Dragonspire Clouds"
+      "Dragonspiral Clouds"
     ],
     "requirements": {
-      "completeAnyOfChallenges": [
+      "completeChallenges": [
         "Extra Challenge C 05",
         "Extra Challenge D 05",
         "Extra Challenge E 05"
@@ -3894,16 +3916,16 @@ export const unovaUnlocks = [
     },
     "gifts": [
       {
-        "item": "Dragonspire Cloud",
+        "item": "Dragonspiral Clouds",
         "count": 1
       }
     ]
   },
   {
-    "challengeName": "Dragonspire Clouds Challenge",
-    "areaId": "Dragonspire Clouds",
+    "challengeName": "Dragonspiral Clouds Challenge",
+    "areaId": "Dragonspiral Clouds",
     "unlocks": [
-      "Dragonspire Higher Clouds"
+      "Dragonspiral Higher Clouds"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3923,14 +3945,14 @@ export const unovaUnlocks = [
     },
     "gifts": [
       {
-        "item": "Dragonspire Cloud Evolved",
+        "item": "Dragonspiral Cloud Evolved",
         "count": 1
       }
     ]
   },
   {
-    "challengeName": "Dragonspire Higher Clouds Challenge",
-    "areaId": "Dragonspire Higher Clouds",
+    "challengeName": "Dragonspiral Higher Clouds Challenge",
+    "areaId": "Dragonspiral Higher Clouds",
     "unlocks": [],
     "requirements": {
       "catchSpecies": [

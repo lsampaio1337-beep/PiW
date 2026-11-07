@@ -330,7 +330,7 @@ const unovaMapCoordinates = {
     "y": 56.33
   },
   "dragonspire_clouds": {
-    "name": "Dragonspire Clouds",
+    "name": "Dragonspiral Clouds",
     "x": 22.39,
     "y": 10.5
   },
@@ -412,7 +412,7 @@ const unovaMapCoordinates = {
   }
 ,
   "dragonspire_higher_clouds": {
-    "name": "Dragonspire Higher Clouds",
+    "name": "Dragonspiral Higher Clouds",
     "x": 22.39,
     "y": 5
   }
