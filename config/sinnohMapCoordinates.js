@@ -186,8 +186,8 @@ const sinnohMapCoordinates = {
   },
   "lake_acuity": {
     "name": "Lake Acuity",
-    "x": 40.43,
-    "y": 16.37
+    "x": 40.83,
+    "y": 13.79
   },
   "snowpoint_temple": {
     "name": "Snowpoint Temple",
@@ -230,7 +230,7 @@ const sinnohMapCoordinates = {
     "y": 58.03
   },
   "daycare": {
-    "name": "Solaceon Daycare",
+    "name": "Daycare",
     "x": 59.38,
     "y": 57.02
   },
@@ -293,6 +293,16 @@ const sinnohMapCoordinates = {
     "name": "Huge Starters",
     "x": 13.24,
     "y": 89.7
+  },
+  "deep_lake_valor": {
+    "name": "Deep Lake Valor",
+    "x": 73.9,
+    "y": 69.23
+  },
+  "aegis_pass": {
+    "name": "Aegis Pass",
+    "x": 48.24,
+    "y": 94.52
   }
 };
 
