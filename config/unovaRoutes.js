@@ -3527,12 +3527,12 @@ export const unovaUnlocks = [
     "challengeName": "Extra Challenge B 01",
     "areaId": "Route 15",
     "unlocks": [
-      "Route 13"
+      "Striaton City"
     ],
     "requirements": {
-      "catchSpecies": [
+      "defeatMultipleSpecific": [
         {
-          "species": "Tyranitar",
+          "name": "Tyranitar",
           "count": 10
         }
       ]
@@ -3886,7 +3886,7 @@ export const unovaUnlocks = [
       "Dragonspire Clouds"
     ],
     "requirements": {
-      "completeChallenges": [
+      "completeAnyOfChallenges": [
         "Extra Challenge C 05",
         "Extra Challenge D 05",
         "Extra Challenge E 05"
@@ -3900,7 +3900,7 @@ export const unovaUnlocks = [
     ]
   },
   {
-    "challengeName": "Dragonspire Clouds Challenge 01",
+    "challengeName": "Dragonspire Clouds Challenge",
     "areaId": "Dragonspire Clouds",
     "unlocks": [
       "Dragonspire Higher Clouds"
@@ -3929,7 +3929,7 @@ export const unovaUnlocks = [
     ]
   },
   {
-    "challengeName": "Dragonspire Clouds Challenge 02",
+    "challengeName": "Dragonspire Higher Clouds Challenge",
     "areaId": "Dragonspire Higher Clouds",
     "unlocks": [],
     "requirements": {
