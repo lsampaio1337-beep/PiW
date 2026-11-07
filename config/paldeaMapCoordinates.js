@@ -462,5 +462,46 @@ export const paldeaMapCoordinates = {
   "Extra Route Z9": {
     "x": 160,
     "y": 40
+  },
+  "Extra Route W01": {
+    "x": 170,
+    "y": 60
+  },
+  "Extra Route W02": {
+    "x": 180,
+    "y": 60
+  },
+  "Extra Route W03": {
+    "x": 190,
+    "y": 60
+  },
+  "Extra Route W04": {
+    "x": 200,
+    "y": 60
+  },
+  "Extra Route W05": {
+    "x": 210,
+    "y": 60
+  },
+  "Extra Route W06": {
+    "x": 220,
+    "y": 60
+  },
+  "Extra Route W07": {
+    "x": 230,
+    "y": 60
+  },
+  "Extra Route W08": {
+    "x": 240,
+    "y": 60
+  },
+  "Extra Route W09": {
+    "x": 250,
+    "y": 60
+  },
+  "Extra Route W10": {
+    "x": 260,
+    "y": 60
   }
+
 };
