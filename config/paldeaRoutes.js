@@ -6,7 +6,7 @@ export const paldeaRoutes = [
         "pokemonId": 940,
         "minLevel": 1,
         "maxLevel": 5,
-        "chance": 0.64
+        "chance": 0.16
       },
       {
         "pokemonId": 960,
@@ -22,6 +22,30 @@ export const paldeaRoutes = [
       },
       {
         "pokemonId": 278,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 739,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 279,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 418,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 907,
         "minLevel": 1,
         "maxLevel": 5,
         "chance": 0.12
@@ -35,7 +59,7 @@ export const paldeaRoutes = [
         "pokemonId": 940,
         "minLevel": 1,
         "maxLevel": 5,
-        "chance": 0.64
+        "chance": 0.16
       },
       {
         "pokemonId": 960,
@@ -51,6 +75,30 @@ export const paldeaRoutes = [
       },
       {
         "pokemonId": 278,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 739,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 279,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 418,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 907,
         "minLevel": 1,
         "maxLevel": 5,
         "chance": 0.12
@@ -64,7 +112,7 @@ export const paldeaRoutes = [
         "pokemonId": 940,
         "minLevel": 1,
         "maxLevel": 5,
-        "chance": 0.64
+        "chance": 0.16
       },
       {
         "pokemonId": 960,
@@ -80,6 +128,30 @@ export const paldeaRoutes = [
       },
       {
         "pokemonId": 278,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 739,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 279,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 418,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 907,
         "minLevel": 1,
         "maxLevel": 5,
         "chance": 0.12
@@ -585,6 +657,10 @@ export const paldeaRoutes = [
         "chance": 0.12
       }
     ]
+  },
+  {
+    "name": "Cortondo Gym",
+    "spawns": []
   },
   {
     "name": "South Province (Area Two) - Flower Patch",
@@ -1105,6 +1181,10 @@ export const paldeaRoutes = [
     ]
   },
   {
+    "name": "Artazon Gym",
+    "spawns": []
+  },
+  {
     "name": "South Province (Area Four) - Ocean",
     "spawns": [
       {
@@ -1215,10 +1295,6 @@ export const paldeaRoutes = [
         "chance": 0.11
       }
     ]
-  },
-  {
-    "name": "Cortondo Gym",
-    "spawns": []
   },
   {
     "name": "South Province (Area Three) - Grass",
@@ -1609,6 +1685,10 @@ export const paldeaRoutes = [
     ]
   },
   {
+    "name": "Levincia Gym",
+    "spawns": []
+  },
+  {
     "name": "East Province (Area One) - Rocky",
     "spawns": [
       {
@@ -1909,10 +1989,6 @@ export const paldeaRoutes = [
     ]
   },
   {
-    "name": "Artazon Gym",
-    "spawns": []
-  },
-  {
     "name": "East Province (Area Two) - Forest",
     "spawns": [
       {
@@ -2093,6 +2169,10 @@ export const paldeaRoutes = [
         "chance": 0.16
       }
     ]
+  },
+  {
+    "name": "Cascarrafa Gym",
+    "spawns": []
   },
   {
     "name": "East Province (Area Two) - Rocky",
@@ -2322,10 +2402,6 @@ export const paldeaRoutes = [
         "chance": 0.12
       }
     ]
-  },
-  {
-    "name": "Levincia Gym",
-    "spawns": []
   },
   {
     "name": "West Province (Area One) - Grass",
@@ -2569,6 +2645,10 @@ export const paldeaRoutes = [
     ]
   },
   {
+    "name": "Medali Gym",
+    "spawns": []
+  },
+  {
     "name": "Asado Desert - Ruins",
     "spawns": [
       {
@@ -2637,10 +2717,6 @@ export const paldeaRoutes = [
         "chance": 0.5
       }
     ]
-  },
-  {
-    "name": "Cascarrafa Gym",
-    "spawns": []
   },
   {
     "name": "West Province (Area Two) - Beach",
@@ -3025,7 +3101,7 @@ export const paldeaRoutes = [
     ]
   },
   {
-    "name": "Medali Gym",
+    "name": "Montenevera Gym",
     "spawns": []
   },
   {
@@ -3310,10 +3386,6 @@ export const paldeaRoutes = [
     ]
   },
   {
-    "name": "Montenevera Gym",
-    "spawns": []
-  },
-  {
     "name": "East Paldean Sea - Beach",
     "spawns": [
       {
@@ -3390,6 +3462,10 @@ export const paldeaRoutes = [
     ]
   },
   {
+    "name": "Alfornada Gym",
+    "spawns": []
+  },
+  {
     "name": "West Paldean Sea - Ocean Abyss",
     "spawns": [
       {
@@ -3405,10 +3481,6 @@ export const paldeaRoutes = [
         "chance": 0.5
       }
     ]
-  },
-  {
-    "name": "Alfornada Gym",
-    "spawns": []
   },
   {
     "name": "Casseroya Lake - Forest",
@@ -3795,173 +3867,813 @@ export const paldeaRoutes = [
     "spawns": []
   },
   {
-    "name": "Loyal Plaza",
+    "name": "Apple Hills",
     "spawns": [
       {
-        "pokemonId": 1014,
+        "pokemonId": 261,
         "minLevel": 1,
         "maxLevel": 5,
-        "chance": 0.25
+        "chance": 0.16
       },
       {
-        "pokemonId": 1015,
+        "pokemonId": 161,
         "minLevel": 1,
         "maxLevel": 5,
-        "chance": 0.25
+        "chance": 0.12
       },
       {
-        "pokemonId": 1016,
+        "pokemonId": 163,
         "minLevel": 1,
         "maxLevel": 5,
-        "chance": 0.25
+        "chance": 0.12
       },
       {
-        "pokemonId": 1025,
+        "pokemonId": 167,
         "minLevel": 1,
         "maxLevel": 5,
-        "chance": 0.25
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 193,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 540,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 541,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 742,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
       }
     ]
   },
   {
-    "name": "Ruins",
+    "name": "Loyalty Town",
     "spawns": [
       {
-        "pokemonId": 579,
+        "pokemonId": 37,
         "minLevel": 1,
         "maxLevel": 5,
-        "chance": 0.1
+        "chance": 0.2
       },
       {
-        "pokemonId": 577,
+        "pokemonId": 172,
         "minLevel": 1,
         "maxLevel": 5,
-        "chance": 0.05
+        "chance": 0.16
       },
       {
-        "pokemonId": 622,
+        "pokemonId": 25,
         "minLevel": 1,
         "maxLevel": 5,
-        "chance": 0.05
+        "chance": 0.16
       },
       {
-        "pokemonId": 677,
+        "pokemonId": 1012,
         "minLevel": 1,
         "maxLevel": 5,
-        "chance": 0.05
+        "chance": 0.16
       },
       {
-        "pokemonId": 686,
+        "pokemonId": 1013,
         "minLevel": 1,
         "maxLevel": 5,
-        "chance": 0.05
+        "chance": 0.16
       },
       {
-        "pokemonId": 43,
+        "pokemonId": 840,
         "minLevel": 1,
         "maxLevel": 5,
-        "chance": 0.05
+        "chance": 0.16
+      }
+    ]
+  },
+  {
+    "name": "Wistful Fields",
+    "spawns": [
+      {
+        "pokemonId": 23,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.16
       },
       {
-        "pokemonId": 116,
+        "pokemonId": 24,
         "minLevel": 1,
         "maxLevel": 5,
-        "chance": 0.05
+        "chance": 0.14
       },
       {
-        "pokemonId": 235,
+        "pokemonId": 173,
         "minLevel": 1,
         "maxLevel": 5,
-        "chance": 0.05
+        "chance": 0.14
       },
       {
-        "pokemonId": 355,
+        "pokemonId": 35,
         "minLevel": 1,
         "maxLevel": 5,
-        "chance": 0.05
+        "chance": 0.14
       },
       {
-        "pokemonId": 736,
+        "pokemonId": 36,
         "minLevel": 1,
         "maxLevel": 5,
-        "chance": 0.05
-      },
-      {
-        "pokemonId": 299,
-        "minLevel": 1,
-        "maxLevel": 5,
-        "chance": 0.05
+        "chance": 0.14
       },
       {
         "pokemonId": 74,
         "minLevel": 1,
         "maxLevel": 5,
-        "chance": 0.05
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 75,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.14
+      }
+    ]
+  },
+  {
+    "name": "Mossfell Confluence",
+    "spawns": [
+      {
+        "pokemonId": 60,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.1
+      },
+      {
+        "pokemonId": 61,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.1
+      },
+      {
+        "pokemonId": 194,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.1
+      },
+      {
+        "pokemonId": 270,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.1
+      },
+      {
+        "pokemonId": 271,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.1
+      },
+      {
+        "pokemonId": 283,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.1
+      },
+      {
+        "pokemonId": 284,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.1
+      },
+      {
+        "pokemonId": 341,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.1
+      },
+      {
+        "pokemonId": 535,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.1
+      },
+      {
+        "pokemonId": 536,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.1
+      }
+    ]
+  },
+  {
+    "name": "Oni Mountain",
+    "spawns": [
+      {
+        "pokemonId": 56,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 57,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 74,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 218,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 219,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 629,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 630,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 703,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      }
+    ]
+  },
+  {
+    "name": "Dreaded Den",
+    "spawns": [
+      {
+        "pokemonId": 92,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 93,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 94,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 355,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 356,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 607,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 608,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.14
+      }
+    ]
+  },
+  {
+    "name": "Paradise Barrens",
+    "spawns": [
+      {
+        "pokemonId": 27,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 28,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 109,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 110,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 218,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 207,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.16
+      }
+    ]
+  },
+  {
+    "name": "Timeless Woods",
+    "spawns": [
+      {
+        "pokemonId": 163,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 164,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 167,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 168,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
       },
       {
         "pokemonId": 708,
         "minLevel": 1,
         "maxLevel": 5,
-        "chance": 0.05
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 709,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 778,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 877,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      }
+    ]
+  },
+  {
+    "name": "Canyon Biome - Area 1",
+    "spawns": [
+      {
+        "pokemonId": 74,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 75,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 111,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 112,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 235,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 227,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 410,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 408,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      }
+    ]
+  },
+  {
+    "name": "Canyon Biome - Area 2",
+    "spawns": [
+      {
+        "pokemonId": 84,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 85,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 236,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 106,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 107,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 237,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 374,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      },
+      {
+        "pokemonId": 375,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.12
+      }
+    ]
+  },
+  {
+    "name": "Polar Biome - Area 1",
+    "spawns": [
+      {
+        "pokemonId": 86,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 87,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 572,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 573,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.16
       },
       {
         "pokemonId": 37,
         "minLevel": 1,
         "maxLevel": 5,
-        "chance": 0.05
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 27,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.16
+      }
+    ]
+  },
+  {
+    "name": "Polar Biome - Area 2",
+    "spawns": [
+      {
+        "pokemonId": 393,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 394,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 884,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 1018,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 131,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.14
       },
       {
         "pokemonId": 459,
         "minLevel": 1,
         "maxLevel": 5,
-        "chance": 0.05
+        "chance": 0.14
       },
       {
-        "pokemonId": 1001,
+        "pokemonId": 460,
         "minLevel": 1,
         "maxLevel": 5,
-        "chance": 0.05
-      },
-      {
-        "pokemonId": 1002,
-        "minLevel": 1,
-        "maxLevel": 5,
-        "chance": 0.05
-      },
-      {
-        "pokemonId": 1003,
-        "minLevel": 1,
-        "maxLevel": 5,
-        "chance": 0.05
-      },
-      {
-        "pokemonId": 1004,
-        "minLevel": 1,
-        "maxLevel": 5,
-        "chance": 0.05
+        "chance": 0.14
       }
     ]
   },
   {
-    "name": "Zero Gate",
+    "name": "Coastal Biome - Area 1",
     "spawns": [
       {
-        "pokemonId": 1007,
+        "pokemonId": 72,
         "minLevel": 1,
         "maxLevel": 5,
-        "chance": 0.34
+        "chance": 0.16
       },
       {
-        "pokemonId": 1008,
+        "pokemonId": 73,
         "minLevel": 1,
         "maxLevel": 5,
-        "chance": 0.33
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 79,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 80,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 103,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 116,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 117,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.14
+      }
+    ]
+  },
+  {
+    "name": "Coastal Biome - Area 2",
+    "spawns": [
+      {
+        "pokemonId": 170,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 171,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 686,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 687,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 779,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 370,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.16
+      }
+    ]
+  },
+  {
+    "name": "Savanna Biome - Area 1",
+    "spawns": [
+      {
+        "pokemonId": 111,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 112,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 123,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 128,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 522,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 523,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.16
+      }
+    ]
+  },
+  {
+    "name": "Savanna Biome - Area 2",
+    "spawns": [
+      {
+        "pokemonId": 667,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 668,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 585,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 586,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 203,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 981,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.16
+      }
+    ]
+  },
+  {
+    "name": "Terarium Core",
+    "spawns": [
+      {
+        "pokemonId": 374,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.16
+      },
+      {
+        "pokemonId": 375,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 137,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 233,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 474,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.14
+      },
+      {
+        "pokemonId": 479,
+        "minLevel": 1,
+        "maxLevel": 5,
+        "chance": 0.14
       },
       {
         "pokemonId": 1024,
         "minLevel": 1,
         "maxLevel": 5,
-        "chance": 0.33
+        "chance": 0.14
       }
     ]
   }
@@ -4008,18 +4720,6 @@ export const paldeaUnlocks = [
       "South Province (Area One) - Ocean",
       "South Province (Area One) - River",
       "South Province (Area One) - Ruins",
-      "South Province (Area Two) - Flower Patch",
-      "South Province (Area Two) - Forest",
-      "South Province (Area Two) - Grass",
-      "South Province (Area Two) - Mountain",
-      "South Province (Area Two) - Near Town",
-      "South Province (Area Two) - Olive Grove",
-      "South Province (Area Two) - Rocky",
-      "South Province (Area Four) - Grass",
-      "South Province (Area Four) - Lake",
-      "South Province (Area Four) - Mountain",
-      "South Province (Area Four) - Ocean",
-      "South Province (Area Four) - River",
       "Cortondo Gym"
     ],
     "requirements": {
@@ -4131,142 +4831,18 @@ export const paldeaUnlocks = [
   },
   {
     "challengeName": "Challenge 14",
-    "areaId": "South Province (Area Two) - Flower Patch",
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "South Province (Area Two) - Flower Patch",
-        "count": 150
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 15",
-    "areaId": "South Province (Area Two) - Forest",
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "South Province (Area Two) - Forest",
-        "count": 150
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 16",
-    "areaId": "South Province (Area Two) - Grass",
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "South Province (Area Two) - Grass",
-        "count": 150
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 17",
-    "areaId": "South Province (Area Two) - Mountain",
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "South Province (Area Two) - Mountain",
-        "count": 150
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 18",
-    "areaId": "South Province (Area Two) - Near Town",
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "South Province (Area Two) - Near Town",
-        "count": 150
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 19",
-    "areaId": "South Province (Area Two) - Olive Grove",
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "South Province (Area Two) - Olive Grove",
-        "count": 150
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 20",
-    "areaId": "South Province (Area Two) - Rocky",
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "South Province (Area Two) - Rocky",
-        "count": 150
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 21",
-    "areaId": "South Province (Area Four) - Grass",
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "South Province (Area Four) - Grass",
-        "count": 150
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 22",
-    "areaId": "South Province (Area Four) - Lake",
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "South Province (Area Four) - Lake",
-        "count": 150
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 23",
-    "areaId": "South Province (Area Four) - Mountain",
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "South Province (Area Four) - Mountain",
-        "count": 150
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 24",
-    "areaId": "South Province (Area Four) - Ocean",
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "South Province (Area Four) - Ocean",
-        "count": 150
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 25",
-    "areaId": "South Province (Area Four) - River",
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "South Province (Area Four) - River",
-        "count": 150
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 26",
     "areaId": "Cortondo Gym",
     "unlocks": [
-      "South Province (Area Three) - Grass",
-      "South Province (Area Three) - Rocky",
-      "East Province (Area One) - Beach",
-      "East Province (Area One) - Forest",
-      "East Province (Area One) - Grass",
-      "East Province (Area One) - Mountain",
-      "East Province (Area One) - Near Town",
-      "East Province (Area One) - Ocean",
-      "East Province (Area One) - Rocky",
-      "South Province (Area Five) - Beach",
-      "South Province (Area Five) - Grass",
-      "South Province (Area Five) - Lake",
-      "South Province (Area Five) - Mountain",
-      "South Province (Area Five) - River",
+      "South Province (Area Two) - Flower Patch",
+      "South Province (Area Two) - Forest",
+      "South Province (Area Two) - Grass",
+      "South Province (Area Two) - Mountain",
+      "South Province (Area Two) - Near Town",
+      "South Province (Area Two) - Olive Grove",
+      "South Province (Area Two) - Rocky",
+      "South Province (Area Four) - Grass",
+      "South Province (Area Four) - Lake",
+      "South Province (Area Four) - Mountain",
       "Artazon Gym"
     ],
     "requirements": {
@@ -4280,8 +4856,132 @@ export const paldeaUnlocks = [
         "Challenge 10",
         "Challenge 11",
         "Challenge 12",
-        "Challenge 13",
-        "Challenge 14",
+        "Challenge 13"
+      ],
+      "earnBadge": {
+        "badgeCount": 73,
+        "name": "Cortondo Gym Badge"
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 15",
+    "areaId": "South Province (Area Two) - Flower Patch",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "South Province (Area Two) - Flower Patch",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 16",
+    "areaId": "South Province (Area Two) - Forest",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "South Province (Area Two) - Forest",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 17",
+    "areaId": "South Province (Area Two) - Grass",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "South Province (Area Two) - Grass",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 18",
+    "areaId": "South Province (Area Two) - Mountain",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "South Province (Area Two) - Mountain",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 19",
+    "areaId": "South Province (Area Two) - Near Town",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "South Province (Area Two) - Near Town",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 20",
+    "areaId": "South Province (Area Two) - Olive Grove",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "South Province (Area Two) - Olive Grove",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 21",
+    "areaId": "South Province (Area Two) - Rocky",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "South Province (Area Two) - Rocky",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 22",
+    "areaId": "South Province (Area Four) - Grass",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "South Province (Area Four) - Grass",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 23",
+    "areaId": "South Province (Area Four) - Lake",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "South Province (Area Four) - Lake",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 24",
+    "areaId": "South Province (Area Four) - Mountain",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "South Province (Area Four) - Mountain",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 25",
+    "areaId": "Artazon Gym",
+    "unlocks": [
+      "South Province (Area Four) - Ocean",
+      "South Province (Area Four) - River",
+      "South Province (Area Three) - Grass",
+      "South Province (Area Three) - Rocky",
+      "East Province (Area One) - Beach",
+      "East Province (Area One) - Forest",
+      "East Province (Area One) - Grass",
+      "East Province (Area One) - Mountain",
+      "East Province (Area One) - Near Town",
+      "East Province (Area One) - Ocean",
+      "Levincia Gym"
+    ],
+    "requirements": {
+      "completeChallenges": [
         "Challenge 15",
         "Challenge 16",
         "Challenge 17",
@@ -4291,17 +4991,36 @@ export const paldeaUnlocks = [
         "Challenge 21",
         "Challenge 22",
         "Challenge 23",
-        "Challenge 24",
-        "Challenge 25"
+        "Challenge 24"
       ],
       "earnBadge": {
-        "badgeCount": 73,
-        "name": "Cortondo Gym Badge"
+        "badgeCount": 74,
+        "name": "Artazon Gym Badge"
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 26",
+    "areaId": "South Province (Area Four) - Ocean",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "South Province (Area Four) - Ocean",
+        "count": 150
       }
     }
   },
   {
     "challengeName": "Challenge 27",
+    "areaId": "South Province (Area Four) - River",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "South Province (Area Four) - River",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 28",
     "areaId": "South Province (Area Three) - Grass",
     "requirements": {
       "defeatCountRoute": {
@@ -4311,7 +5030,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 28",
+    "challengeName": "Challenge 29",
     "areaId": "South Province (Area Three) - Rocky",
     "requirements": {
       "defeatCountRoute": {
@@ -4321,7 +5040,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 29",
+    "challengeName": "Challenge 30",
     "areaId": "East Province (Area One) - Beach",
     "requirements": {
       "defeatCountRoute": {
@@ -4331,7 +5050,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 30",
+    "challengeName": "Challenge 31",
     "areaId": "East Province (Area One) - Forest",
     "requirements": {
       "defeatCountRoute": {
@@ -4341,7 +5060,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 31",
+    "challengeName": "Challenge 32",
     "areaId": "East Province (Area One) - Grass",
     "requirements": {
       "defeatCountRoute": {
@@ -4351,7 +5070,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 32",
+    "challengeName": "Challenge 33",
     "areaId": "East Province (Area One) - Mountain",
     "requirements": {
       "defeatCountRoute": {
@@ -4361,7 +5080,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 33",
+    "challengeName": "Challenge 34",
     "areaId": "East Province (Area One) - Near Town",
     "requirements": {
       "defeatCountRoute": {
@@ -4371,7 +5090,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 34",
+    "challengeName": "Challenge 35",
     "areaId": "East Province (Area One) - Ocean",
     "requirements": {
       "defeatCountRoute": {
@@ -4381,7 +5100,42 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 35",
+    "challengeName": "Challenge 36",
+    "areaId": "Levincia Gym",
+    "unlocks": [
+      "East Province (Area One) - Rocky",
+      "South Province (Area Five) - Beach",
+      "South Province (Area Five) - Grass",
+      "South Province (Area Five) - Lake",
+      "South Province (Area Five) - Mountain",
+      "South Province (Area Five) - River",
+      "East Province (Area Two) - Forest",
+      "East Province (Area Two) - Grass",
+      "East Province (Area Two) - Near Town",
+      "East Province (Area Two) - River",
+      "Cascarrafa Gym"
+    ],
+    "requirements": {
+      "completeChallenges": [
+        "Challenge 26",
+        "Challenge 27",
+        "Challenge 28",
+        "Challenge 29",
+        "Challenge 30",
+        "Challenge 31",
+        "Challenge 32",
+        "Challenge 33",
+        "Challenge 34",
+        "Challenge 35"
+      ],
+      "earnBadge": {
+        "badgeCount": 75,
+        "name": "Levincia Gym Badge"
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 37",
     "areaId": "East Province (Area One) - Rocky",
     "requirements": {
       "defeatCountRoute": {
@@ -4391,7 +5145,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 36",
+    "challengeName": "Challenge 38",
     "areaId": "South Province (Area Five) - Beach",
     "requirements": {
       "defeatCountRoute": {
@@ -4401,7 +5155,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 37",
+    "challengeName": "Challenge 39",
     "areaId": "South Province (Area Five) - Grass",
     "requirements": {
       "defeatCountRoute": {
@@ -4411,7 +5165,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 38",
+    "challengeName": "Challenge 40",
     "areaId": "South Province (Area Five) - Lake",
     "requirements": {
       "defeatCountRoute": {
@@ -4421,7 +5175,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 39",
+    "challengeName": "Challenge 41",
     "areaId": "South Province (Area Five) - Mountain",
     "requirements": {
       "defeatCountRoute": {
@@ -4431,7 +5185,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 40",
+    "challengeName": "Challenge 42",
     "areaId": "South Province (Area Five) - River",
     "requirements": {
       "defeatCountRoute": {
@@ -4441,45 +5195,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 41",
-    "areaId": "Artazon Gym",
-    "unlocks": [
-      "East Province (Area Two) - Forest",
-      "East Province (Area Two) - Grass",
-      "East Province (Area Two) - Near Town",
-      "East Province (Area Two) - River",
-      "East Province (Area Two) - Rocky",
-      "East Province (Area Three) - Mine",
-      "East Province (Area Three) - Near Town",
-      "East Province (Area Three) - Ocean",
-      "East Province (Area Three) - Rocky",
-      "Levincia Gym"
-    ],
-    "requirements": {
-      "completeChallenges": [
-        "Challenge 27",
-        "Challenge 28",
-        "Challenge 29",
-        "Challenge 30",
-        "Challenge 31",
-        "Challenge 32",
-        "Challenge 33",
-        "Challenge 34",
-        "Challenge 35",
-        "Challenge 36",
-        "Challenge 37",
-        "Challenge 38",
-        "Challenge 39",
-        "Challenge 40"
-      ],
-      "earnBadge": {
-        "badgeCount": 74,
-        "name": "Artazon Gym Badge"
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 42",
+    "challengeName": "Challenge 43",
     "areaId": "East Province (Area Two) - Forest",
     "requirements": {
       "defeatCountRoute": {
@@ -4489,7 +5205,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 43",
+    "challengeName": "Challenge 44",
     "areaId": "East Province (Area Two) - Grass",
     "requirements": {
       "defeatCountRoute": {
@@ -4499,7 +5215,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 44",
+    "challengeName": "Challenge 45",
     "areaId": "East Province (Area Two) - Near Town",
     "requirements": {
       "defeatCountRoute": {
@@ -4509,7 +5225,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 45",
+    "challengeName": "Challenge 46",
     "areaId": "East Province (Area Two) - River",
     "requirements": {
       "defeatCountRoute": {
@@ -4519,7 +5235,42 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 46",
+    "challengeName": "Challenge 47",
+    "areaId": "Cascarrafa Gym",
+    "unlocks": [
+      "East Province (Area Two) - Rocky",
+      "East Province (Area Three) - Mine",
+      "East Province (Area Three) - Near Town",
+      "East Province (Area Three) - Ocean",
+      "East Province (Area Three) - Rocky",
+      "West Province (Area One) - Grass",
+      "West Province (Area One) - Mountain",
+      "West Province (Area One) - Ocean",
+      "Asado Desert - Desert",
+      "Asado Desert - Grass",
+      "Medali Gym"
+    ],
+    "requirements": {
+      "completeChallenges": [
+        "Challenge 37",
+        "Challenge 38",
+        "Challenge 39",
+        "Challenge 40",
+        "Challenge 41",
+        "Challenge 42",
+        "Challenge 43",
+        "Challenge 44",
+        "Challenge 45",
+        "Challenge 46"
+      ],
+      "earnBadge": {
+        "badgeCount": 76,
+        "name": "Cascarrafa Gym Badge"
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 48",
     "areaId": "East Province (Area Two) - Rocky",
     "requirements": {
       "defeatCountRoute": {
@@ -4529,7 +5280,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 47",
+    "challengeName": "Challenge 49",
     "areaId": "East Province (Area Three) - Mine",
     "requirements": {
       "defeatCountRoute": {
@@ -4539,7 +5290,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 48",
+    "challengeName": "Challenge 50",
     "areaId": "East Province (Area Three) - Near Town",
     "requirements": {
       "defeatCountRoute": {
@@ -4549,7 +5300,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 49",
+    "challengeName": "Challenge 51",
     "areaId": "East Province (Area Three) - Ocean",
     "requirements": {
       "defeatCountRoute": {
@@ -4559,7 +5310,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 50",
+    "challengeName": "Challenge 52",
     "areaId": "East Province (Area Three) - Rocky",
     "requirements": {
       "defeatCountRoute": {
@@ -4569,38 +5320,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 51",
-    "areaId": "Levincia Gym",
-    "unlocks": [
-      "West Province (Area One) - Grass",
-      "West Province (Area One) - Mountain",
-      "West Province (Area One) - Ocean",
-      "Asado Desert - Desert",
-      "Asado Desert - Grass",
-      "Asado Desert - Ruins",
-      "Asado Desert - Ruins Deep",
-      "Cascarrafa Gym"
-    ],
-    "requirements": {
-      "completeChallenges": [
-        "Challenge 42",
-        "Challenge 43",
-        "Challenge 44",
-        "Challenge 45",
-        "Challenge 46",
-        "Challenge 47",
-        "Challenge 48",
-        "Challenge 49",
-        "Challenge 50"
-      ],
-      "earnBadge": {
-        "badgeCount": 75,
-        "name": "Levincia Gym Badge"
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 52",
+    "challengeName": "Challenge 53",
     "areaId": "West Province (Area One) - Grass",
     "requirements": {
       "defeatCountRoute": {
@@ -4610,7 +5330,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 53",
+    "challengeName": "Challenge 54",
     "areaId": "West Province (Area One) - Mountain",
     "requirements": {
       "defeatCountRoute": {
@@ -4620,7 +5340,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 54",
+    "challengeName": "Challenge 55",
     "areaId": "West Province (Area One) - Ocean",
     "requirements": {
       "defeatCountRoute": {
@@ -4630,7 +5350,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 55",
+    "challengeName": "Challenge 56",
     "areaId": "Asado Desert - Desert",
     "requirements": {
       "defeatCountRoute": {
@@ -4640,7 +5360,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 56",
+    "challengeName": "Challenge 57",
     "areaId": "Asado Desert - Grass",
     "requirements": {
       "defeatCountRoute": {
@@ -4650,7 +5370,42 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 57",
+    "challengeName": "Challenge 58",
+    "areaId": "Medali Gym",
+    "unlocks": [
+      "Asado Desert - Ruins",
+      "Asado Desert - Ruins Deep",
+      "West Province (Area Two) - Beach",
+      "West Province (Area Two) - Grass",
+      "West Province (Area Two) - Near Town",
+      "West Province (Area Two) - River",
+      "West Province (Area Three) - Forest",
+      "West Province (Area Three) - Grass",
+      "West Province (Area Three) - Lake",
+      "West Province (Area Two) - Desert",
+      "Montenevera Gym"
+    ],
+    "requirements": {
+      "completeChallenges": [
+        "Challenge 48",
+        "Challenge 49",
+        "Challenge 50",
+        "Challenge 51",
+        "Challenge 52",
+        "Challenge 53",
+        "Challenge 54",
+        "Challenge 55",
+        "Challenge 56",
+        "Challenge 57"
+      ],
+      "earnBadge": {
+        "badgeCount": 77,
+        "name": "Medali Gym Badge"
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 59",
     "areaId": "Asado Desert - Ruins",
     "requirements": {
       "defeatCountRoute": {
@@ -4660,7 +5415,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 58",
+    "challengeName": "Challenge 60",
     "areaId": "Asado Desert - Ruins Deep",
     "requirements": {
       "defeatCountRoute": {
@@ -4670,37 +5425,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 59",
-    "areaId": "Cascarrafa Gym",
-    "unlocks": [
-      "West Province (Area Two) - Beach",
-      "West Province (Area Two) - Grass",
-      "West Province (Area Two) - Near Town",
-      "West Province (Area Two) - River",
-      "West Province (Area Three) - Forest",
-      "West Province (Area Three) - Grass",
-      "West Province (Area Three) - Lake",
-      "West Province (Area Two) - Desert",
-      "Medali Gym"
-    ],
-    "requirements": {
-      "completeChallenges": [
-        "Challenge 52",
-        "Challenge 53",
-        "Challenge 54",
-        "Challenge 55",
-        "Challenge 56",
-        "Challenge 57",
-        "Challenge 58"
-      ],
-      "earnBadge": {
-        "badgeCount": 76,
-        "name": "Cascarrafa Gym Badge"
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 60",
+    "challengeName": "Challenge 61",
     "areaId": "West Province (Area Two) - Beach",
     "requirements": {
       "defeatCountRoute": {
@@ -4710,7 +5435,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 61",
+    "challengeName": "Challenge 62",
     "areaId": "West Province (Area Two) - Grass",
     "requirements": {
       "defeatCountRoute": {
@@ -4720,7 +5445,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 62",
+    "challengeName": "Challenge 63",
     "areaId": "West Province (Area Two) - Near Town",
     "requirements": {
       "defeatCountRoute": {
@@ -4730,7 +5455,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 63",
+    "challengeName": "Challenge 64",
     "areaId": "West Province (Area Two) - River",
     "requirements": {
       "defeatCountRoute": {
@@ -4740,7 +5465,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 64",
+    "challengeName": "Challenge 65",
     "areaId": "West Province (Area Three) - Forest",
     "requirements": {
       "defeatCountRoute": {
@@ -4750,7 +5475,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 65",
+    "challengeName": "Challenge 66",
     "areaId": "West Province (Area Three) - Grass",
     "requirements": {
       "defeatCountRoute": {
@@ -4760,7 +5485,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 66",
+    "challengeName": "Challenge 67",
     "areaId": "West Province (Area Three) - Lake",
     "requirements": {
       "defeatCountRoute": {
@@ -4770,7 +5495,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 67",
+    "challengeName": "Challenge 68",
     "areaId": "West Province (Area Two) - Desert",
     "requirements": {
       "defeatCountRoute": {
@@ -4780,8 +5505,8 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 68",
-    "areaId": "Medali Gym",
+    "challengeName": "Challenge 69",
+    "areaId": "Montenevera Gym",
     "unlocks": [
       "North Province (Area One) - Bamboo Forest",
       "North Province (Area One) - Beach",
@@ -4790,10 +5515,13 @@ export const paldeaUnlocks = [
       "North Province (Area One) - Mountain",
       "Tagtree Thicket - Flower Patch",
       "Tagtree Thicket - Forest",
-      "Montenevera Gym"
+      "East Paldean Sea - Beach",
+      "West Paldean Sea - Ocean",
+      "Alfornada Gym"
     ],
     "requirements": {
       "completeChallenges": [
+        "Challenge 59",
         "Challenge 60",
         "Challenge 61",
         "Challenge 62",
@@ -4801,16 +5529,17 @@ export const paldeaUnlocks = [
         "Challenge 64",
         "Challenge 65",
         "Challenge 66",
-        "Challenge 67"
+        "Challenge 67",
+        "Challenge 68"
       ],
       "earnBadge": {
-        "badgeCount": 77,
-        "name": "Medali Gym Badge"
+        "badgeCount": 78,
+        "name": "Montenevera Gym Badge"
       }
     }
   },
   {
-    "challengeName": "Challenge 69",
+    "challengeName": "Challenge 70",
     "areaId": "North Province (Area One) - Bamboo Forest",
     "requirements": {
       "defeatCountRoute": {
@@ -4820,7 +5549,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 70",
+    "challengeName": "Challenge 71",
     "areaId": "North Province (Area One) - Beach",
     "requirements": {
       "defeatCountRoute": {
@@ -4830,7 +5559,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 71",
+    "challengeName": "Challenge 72",
     "areaId": "North Province (Area One) - Cave",
     "requirements": {
       "defeatCountRoute": {
@@ -4840,7 +5569,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 72",
+    "challengeName": "Challenge 73",
     "areaId": "North Province (Area One) - Forest",
     "requirements": {
       "defeatCountRoute": {
@@ -4850,7 +5579,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 73",
+    "challengeName": "Challenge 74",
     "areaId": "North Province (Area One) - Mountain",
     "requirements": {
       "defeatCountRoute": {
@@ -4860,7 +5589,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 74",
+    "challengeName": "Challenge 75",
     "areaId": "Tagtree Thicket - Flower Patch",
     "requirements": {
       "defeatCountRoute": {
@@ -4870,37 +5599,12 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Challenge 75",
+    "challengeName": "Challenge 76",
     "areaId": "Tagtree Thicket - Forest",
     "requirements": {
       "defeatCountRoute": {
         "route": "Tagtree Thicket - Forest",
         "count": 150
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 76",
-    "areaId": "Montenevera Gym",
-    "unlocks": [
-      "East Paldean Sea - Beach",
-      "West Paldean Sea - Ocean",
-      "West Paldean Sea - Ocean Abyss",
-      "Alfornada Gym"
-    ],
-    "requirements": {
-      "completeChallenges": [
-        "Challenge 69",
-        "Challenge 70",
-        "Challenge 71",
-        "Challenge 72",
-        "Challenge 73",
-        "Challenge 74",
-        "Challenge 75"
-      ],
-      "earnBadge": {
-        "badgeCount": 78,
-        "name": "Montenevera Gym Badge"
       }
     }
   },
@@ -4926,18 +5630,9 @@ export const paldeaUnlocks = [
   },
   {
     "challengeName": "Challenge 79",
-    "areaId": "West Paldean Sea - Ocean Abyss",
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "West Paldean Sea - Ocean Abyss",
-        "count": 150
-      }
-    }
-  },
-  {
-    "challengeName": "Challenge 80",
     "areaId": "Alfornada Gym",
     "unlocks": [
+      "West Paldean Sea - Ocean Abyss",
       "Casseroya Lake - Forest",
       "Casseroya Lake - Lake",
       "Casseroya Lake - Snow",
@@ -4950,13 +5645,29 @@ export const paldeaUnlocks = [
     ],
     "requirements": {
       "completeChallenges": [
+        "Challenge 70",
+        "Challenge 71",
+        "Challenge 72",
+        "Challenge 73",
+        "Challenge 74",
+        "Challenge 75",
+        "Challenge 76",
         "Challenge 77",
-        "Challenge 78",
-        "Challenge 79"
+        "Challenge 78"
       ],
       "earnBadge": {
         "badgeCount": 79,
         "name": "Alfornada Gym Badge"
+      }
+    }
+  },
+  {
+    "challengeName": "Challenge 80",
+    "areaId": "West Paldean Sea - Ocean Abyss",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "West Paldean Sea - Ocean Abyss",
+        "count": 150
       }
     }
   },
@@ -5048,6 +5759,7 @@ export const paldeaUnlocks = [
     ],
     "requirements": {
       "completeChallenges": [
+        "Challenge 80",
         "Challenge 81",
         "Challenge 82",
         "Challenge 83",
@@ -5067,9 +5779,7 @@ export const paldeaUnlocks = [
     "challengeName": "Challenge 90",
     "areaId": "Pokémon League",
     "unlocks": [
-      "Loyal Plaza",
-      "Ruins",
-      "Zero Gate"
+      "Apple Hills"
     ],
     "requirements": {
       "defeatPaldeaChampion": true,
@@ -5080,31 +5790,220 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge A 01",
-    "areaId": "Loyal Plaza",
+    "challengeName": "Extra Challenge The Teal Mask 01",
+    "areaId": "Apple Hills",
+    "unlocks": [
+      "Loyalty Town"
+    ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Loyal Plaza",
+        "route": "Apple Hills",
         "count": 150
       }
     }
   },
   {
-    "challengeName": "Extra Challenge A 02",
-    "areaId": "Ruins",
+    "challengeName": "Extra Challenge The Teal Mask 02",
+    "areaId": "Loyalty Town",
+    "unlocks": [
+      "Wistful Fields"
+    ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Ruins",
+        "route": "Loyalty Town",
         "count": 150
       }
     }
   },
   {
-    "challengeName": "Extra Challenge A 03",
-    "areaId": "Zero Gate",
+    "challengeName": "Extra Challenge The Teal Mask 03",
+    "areaId": "Wistful Fields",
+    "unlocks": [
+      "Mossfell Confluence"
+    ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Zero Gate",
+        "route": "Wistful Fields",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge The Teal Mask 04",
+    "areaId": "Mossfell Confluence",
+    "unlocks": [
+      "Oni Mountain"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Mossfell Confluence",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge The Teal Mask 05",
+    "areaId": "Oni Mountain",
+    "unlocks": [
+      "Dreaded Den"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Oni Mountain",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge The Teal Mask 06",
+    "areaId": "Dreaded Den",
+    "unlocks": [
+      "Paradise Barrens"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Dreaded Den",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge The Teal Mask 07",
+    "areaId": "Paradise Barrens",
+    "unlocks": [
+      "Timeless Woods"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Paradise Barrens",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge The Teal Mask 08",
+    "areaId": "Timeless Woods",
+    "unlocks": [
+      "Canyon Biome - Area 1"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Timeless Woods",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge The Indigo Disk 01",
+    "areaId": "Canyon Biome - Area 1",
+    "unlocks": [
+      "Canyon Biome - Area 2"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Canyon Biome - Area 1",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge The Indigo Disk 02",
+    "areaId": "Canyon Biome - Area 2",
+    "unlocks": [
+      "Polar Biome - Area 1"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Canyon Biome - Area 2",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge The Indigo Disk 03",
+    "areaId": "Polar Biome - Area 1",
+    "unlocks": [
+      "Polar Biome - Area 2"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Polar Biome - Area 1",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge The Indigo Disk 04",
+    "areaId": "Polar Biome - Area 2",
+    "unlocks": [
+      "Coastal Biome - Area 1"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Polar Biome - Area 2",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge The Indigo Disk 05",
+    "areaId": "Coastal Biome - Area 1",
+    "unlocks": [
+      "Coastal Biome - Area 2"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Coastal Biome - Area 1",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge The Indigo Disk 06",
+    "areaId": "Coastal Biome - Area 2",
+    "unlocks": [
+      "Savanna Biome - Area 1"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Coastal Biome - Area 2",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge The Indigo Disk 07",
+    "areaId": "Savanna Biome - Area 1",
+    "unlocks": [
+      "Savanna Biome - Area 2"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Savanna Biome - Area 1",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge The Indigo Disk 08",
+    "areaId": "Savanna Biome - Area 2",
+    "unlocks": [
+      "Terarium Core"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Savanna Biome - Area 2",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge The Indigo Disk 09",
+    "areaId": "Terarium Core",
+    "unlocks": [],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Terarium Core",
         "count": 150
       }
     }
