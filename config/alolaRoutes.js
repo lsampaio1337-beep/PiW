@@ -2431,7 +2431,9 @@ export const alolaRoutes = [
       }
     ],
     "areaId": "Route 8 Fossil Restoration Center Part 2",
-    "unlocks": [],
+    "unlocks": [
+      "Crystal Depths"
+    ],
     "requirements": {
       "catchByQuality": {
         "quality": "Uncommon+",
@@ -2439,6 +2441,330 @@ export const alolaRoutes = [
       }
     },
     "challengeName": "Extra Challenge E 20"
+  },
+  {
+    "name": "Crystal Depths",
+    "spawns": [
+      {
+        "pokemonId": 341,
+        "minLevel": 125,
+        "maxLevel": 130,
+        "chance": 0.111
+      },
+      {
+        "pokemonId": 349,
+        "minLevel": 125,
+        "maxLevel": 130,
+        "chance": 0.111
+      },
+      {
+        "pokemonId": 366,
+        "minLevel": 125,
+        "maxLevel": 130,
+        "chance": 0.111
+      },
+      {
+        "pokemonId": 368,
+        "minLevel": 125,
+        "maxLevel": 130,
+        "chance": 0.111
+      },
+      {
+        "pokemonId": 370,
+        "minLevel": 125,
+        "maxLevel": 130,
+        "chance": 0.111
+      },
+      {
+        "pokemonId": 550,
+        "minLevel": 125,
+        "maxLevel": 130,
+        "chance": 0.111
+      },
+      {
+        "pokemonId": 592,
+        "minLevel": 125,
+        "maxLevel": 130,
+        "chance": 0.111
+      },
+      {
+        "pokemonId": 594,
+        "minLevel": 125,
+        "maxLevel": 130,
+        "chance": 0.111
+      },
+      {
+        "pokemonId": 692,
+        "minLevel": 125,
+        "maxLevel": 130,
+        "chance": 0.112
+      }
+    ],
+    "challengeName": "Extra Challenge Z 01",
+    "areaId": "Crystal Depths",
+    "unlocks": [
+      "Dragon's Peak"
+    ],
+    "requirements": {
+      "catchByQuality": {
+        "quality": "Uncommon+",
+        "count": 5
+      }
+    }
+  },
+  {
+    "name": "Dragon's Peak",
+    "spawns": [
+      {
+        "pokemonId": 147,
+        "minLevel": 125,
+        "maxLevel": 130,
+        "chance": 0.111
+      },
+      {
+        "pokemonId": 330,
+        "minLevel": 125,
+        "maxLevel": 130,
+        "chance": 0.111
+      },
+      {
+        "pokemonId": 373,
+        "minLevel": 125,
+        "maxLevel": 130,
+        "chance": 0.111
+      },
+      {
+        "pokemonId": 443,
+        "minLevel": 125,
+        "maxLevel": 130,
+        "chance": 0.111
+      },
+      {
+        "pokemonId": 445,
+        "minLevel": 125,
+        "maxLevel": 130,
+        "chance": 0.111
+      },
+      {
+        "pokemonId": 706,
+        "minLevel": 125,
+        "maxLevel": 130,
+        "chance": 0.111
+      },
+      {
+        "pokemonId": 718,
+        "minLevel": 125,
+        "maxLevel": 130,
+        "chance": 0.111
+      },
+      {
+        "pokemonId": 467,
+        "minLevel": 125,
+        "maxLevel": 130,
+        "chance": 0.111
+      },
+      {
+        "pokemonId": 663,
+        "minLevel": 125,
+        "maxLevel": 130,
+        "chance": 0.112
+      }
+    ],
+    "challengeName": "Extra Challenge Z 02",
+    "areaId": "Dragon's Peak",
+    "unlocks": [
+      "Serene Meadows"
+    ],
+    "requirements": {
+      "catchByQuality": {
+        "quality": "Uncommon+",
+        "count": 5
+      }
+    }
+  },
+  {
+    "name": "Serene Meadows",
+    "spawns": [
+      {
+        "pokemonId": 36,
+        "minLevel": 125,
+        "maxLevel": 130,
+        "chance": 0.111
+      },
+      {
+        "pokemonId": 40,
+        "minLevel": 125,
+        "maxLevel": 130,
+        "chance": 0.111
+      },
+      {
+        "pokemonId": 108,
+        "minLevel": 125,
+        "maxLevel": 130,
+        "chance": 0.111
+      },
+      {
+        "pokemonId": 439,
+        "minLevel": 125,
+        "maxLevel": 130,
+        "chance": 0.111
+      },
+      {
+        "pokemonId": 446,
+        "minLevel": 125,
+        "maxLevel": 130,
+        "chance": 0.111
+      },
+      {
+        "pokemonId": 474,
+        "minLevel": 125,
+        "maxLevel": 130,
+        "chance": 0.111
+      },
+      {
+        "pokemonId": 508,
+        "minLevel": 125,
+        "maxLevel": 130,
+        "chance": 0.111
+      },
+      {
+        "pokemonId": 627,
+        "minLevel": 125,
+        "maxLevel": 130,
+        "chance": 0.111
+      },
+      {
+        "pokemonId": 667,
+        "minLevel": 125,
+        "maxLevel": 130,
+        "chance": 0.112
+      }
+    ],
+    "challengeName": "Extra Challenge Z 03",
+    "areaId": "Serene Meadows",
+    "unlocks": [
+      "Shadow Forge"
+    ],
+    "requirements": {
+      "catchByQuality": {
+        "quality": "Uncommon+",
+        "count": 5
+      }
+    }
+  },
+  {
+    "name": "Shadow Forge",
+    "spawns": [
+      {
+        "pokemonId": 181,
+        "minLevel": 125,
+        "maxLevel": 130,
+        "chance": 0.125
+      },
+      {
+        "pokemonId": 248,
+        "minLevel": 125,
+        "maxLevel": 130,
+        "chance": 0.125
+      },
+      {
+        "pokemonId": 309,
+        "minLevel": 125,
+        "maxLevel": 130,
+        "chance": 0.125
+      },
+      {
+        "pokemonId": 462,
+        "minLevel": 125,
+        "maxLevel": 130,
+        "chance": 0.125
+      },
+      {
+        "pokemonId": 466,
+        "minLevel": 125,
+        "maxLevel": 130,
+        "chance": 0.125
+      },
+      {
+        "pokemonId": 570,
+        "minLevel": 125,
+        "maxLevel": 130,
+        "chance": 0.125
+      },
+      {
+        "pokemonId": 624,
+        "minLevel": 125,
+        "maxLevel": 130,
+        "chance": 0.125
+      },
+      {
+        "pokemonId": 629,
+        "minLevel": 125,
+        "maxLevel": 130,
+        "chance": 0.125
+      }
+    ],
+    "challengeName": "Extra Challenge Z 04",
+    "areaId": "Shadow Forge",
+    "unlocks": [
+      "Mystic Grotto"
+    ],
+    "requirements": {
+      "catchByQuality": {
+        "quality": "Uncommon+",
+        "count": 5
+      }
+    }
+  },
+  {
+    "name": "Mystic Grotto",
+    "spawns": [
+      {
+        "pokemonId": 65,
+        "minLevel": 125,
+        "maxLevel": 130,
+        "chance": 0.166
+      },
+      {
+        "pokemonId": 302,
+        "minLevel": 125,
+        "maxLevel": 130,
+        "chance": 0.166
+      },
+      {
+        "pokemonId": 376,
+        "minLevel": 125,
+        "maxLevel": 130,
+        "chance": 0.166
+      },
+      {
+        "pokemonId": 671,
+        "minLevel": 125,
+        "maxLevel": 130,
+        "chance": 0.166
+      },
+      {
+        "pokemonId": 447,
+        "minLevel": 125,
+        "maxLevel": 130,
+        "chance": 0.166
+      },
+      {
+        "pokemonId": 690,
+        "minLevel": 125,
+        "maxLevel": 130,
+        "chance": 0.17
+      }
+    ],
+    "challengeName": "Extra Challenge Z 05",
+    "areaId": "Mystic Grotto",
+    "unlocks": [],
+    "requirements": {
+      "catchByQuality": {
+        "quality": "Uncommon+",
+        "count": 5
+      }
+    }
   }
 ];
 
@@ -3244,6 +3570,71 @@ export const alolaUnlocks = [
   {
     "challengeName": "Extra Challenge E 20",
     "areaId": "Route 8 Fossil Restoration Center Part 2",
+    "unlocks": [
+      "Crystal Depths"
+    ],
+    "requirements": {
+      "catchByQuality": {
+        "quality": "Uncommon+",
+        "count": 5
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge Z 01",
+    "areaId": "Crystal Depths",
+    "unlocks": [
+      "Dragon's Peak"
+    ],
+    "requirements": {
+      "catchByQuality": {
+        "quality": "Uncommon+",
+        "count": 5
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge Z 02",
+    "areaId": "Dragon's Peak",
+    "unlocks": [
+      "Serene Meadows"
+    ],
+    "requirements": {
+      "catchByQuality": {
+        "quality": "Uncommon+",
+        "count": 5
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge Z 03",
+    "areaId": "Serene Meadows",
+    "unlocks": [
+      "Shadow Forge"
+    ],
+    "requirements": {
+      "catchByQuality": {
+        "quality": "Uncommon+",
+        "count": 5
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge Z 04",
+    "areaId": "Shadow Forge",
+    "unlocks": [
+      "Mystic Grotto"
+    ],
+    "requirements": {
+      "catchByQuality": {
+        "quality": "Uncommon+",
+        "count": 5
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge Z 05",
+    "areaId": "Mystic Grotto",
     "unlocks": [],
     "requirements": {
       "catchByQuality": {
