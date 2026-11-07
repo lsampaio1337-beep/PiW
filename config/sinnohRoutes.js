@@ -2654,7 +2654,7 @@ export const sinnohUnlocks = [
     requirements: {
       catchSpecies: [
         {
-          species: "Bibarel",
+          species: "Dusclops",
           count: 1
         }
       ]
