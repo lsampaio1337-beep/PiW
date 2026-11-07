@@ -366,6 +366,14 @@ function generateMarkersForRegion(region, unlockedAreas) {
             if (locationId === 'olivine_gym' && state.trainer.badges >= 6) showCheckmark = true;
             if (locationId === 'mahogany_gym' && state.trainer.badges >= 7) showCheckmark = true;
             if (locationId === 'blackthorn_gym' && state.trainer.badges >= 8) showCheckmark = true;
+            if (locationId === "pewter_gym" && state.trainer.badges >= 9) showCheckmark = true;
+            if (locationId === "cerulean_gym" && state.trainer.badges >= 10) showCheckmark = true;
+            if (locationId === "vermilion_gym" && state.trainer.badges >= 11) showCheckmark = true;
+            if (locationId === "celadon_gym" && state.trainer.badges >= 12) showCheckmark = true;
+            if (locationId === "fuchsia_gym" && state.trainer.badges >= 14) showCheckmark = true;
+            if (locationId === "saffron_gym" && state.trainer.badges >= 13) showCheckmark = true;
+            if (locationId === "cinnabar_gym" && state.trainer.badges >= 15) showCheckmark = true;
+            if (locationId === "viridian_gym" && state.trainer.badges >= 16) showCheckmark = true;
 
             html += generateMarkerHtml(locationId, locationName, coords, true, hasNewNotification, showCheckmark);
         }
@@ -990,17 +998,35 @@ export function showMapTooltip(e, locationName) {
     let leftPos = e.clientX + cursorOffset;
     let topPos = e.clientY + cursorOffset;
 
-    // Clamp to window boundaries
-    if (leftPos + rect.width > window.innerWidth) {
+    // Clamp to map boundaries
+    let bounds = {
+        left: 0,
+        top: 0,
+        right: window.innerWidth,
+        bottom: window.innerHeight
+    };
+
+    const mapWindowElem = document.getElementById('window-map');
+    if (mapWindowElem) {
+        const mapRect = mapWindowElem.getBoundingClientRect();
+        bounds = {
+            left: mapRect.left,
+            top: mapRect.top,
+            right: mapRect.right,
+            bottom: mapRect.bottom
+        };
+    }
+
+    if (leftPos + rect.width > bounds.right) {
         leftPos = e.clientX - rect.width - cursorOffset;
     }
-    if (topPos + rect.height > window.innerHeight) {
+    if (topPos + rect.height > bounds.bottom) {
         topPos = e.clientY - rect.height - cursorOffset;
     }
 
-    // Ensure it doesn't go off the top or left edges either
-    leftPos = Math.max(0, leftPos);
-    topPos = Math.max(0, topPos);
+    // Ensure it doesn't go off the top or left edges of the map
+    leftPos = Math.max(bounds.left, leftPos);
+    topPos = Math.max(bounds.top, topPos);
 
     tooltip.style.left = leftPos + "px";
     tooltip.style.top = topPos + "px";

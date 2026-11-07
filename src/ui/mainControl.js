@@ -64,6 +64,31 @@ function evaluateRequirements(req, unlock) {
         }
     }
 
+    if (req.catchSpeciesOr) {
+        let isMet = false;
+        let bestCurrent = 0;
+        let bestRequired = 1;
+        let names = [];
+        for (let spec of req.catchSpeciesOr) {
+            names.push(spec.species);
+            let caughtCount = state.stats.caughtSpecies ? (state.stats.caughtSpecies[spec.species] || 0) : 0;
+            if (caughtCount >= spec.count) {
+                isMet = true;
+            }
+            if (caughtCount > bestCurrent) {
+                bestCurrent = caughtCount;
+            }
+            bestRequired = spec.count;
+        }
+        progress.push({
+            type: 'catchSpeciesOr',
+            species: names.join(" or "),
+            current: isMet ? bestRequired : bestCurrent,
+            required: bestRequired,
+            isMet: isMet
+        });
+    }
+
 if (req.catchSpeciesByQuality) {
         for (let spec of req.catchSpeciesByQuality) {
             let caughtKey = spec.species + "_" + spec.quality;
@@ -607,9 +632,9 @@ export function getChallengeText() {
         let activeId = state.stats.activeChallenges[0];
         let unlock = window.getCurrentUnlocks().find(u => u.areaId === activeId);
         if (unlock) {
-            let unlocks = "Unlocks: " + (unlock.unlocks ? unlock.unlocks.join(' + ') : "Next Area");
+            let unlocks = unlock.unlocks ? "Unlocks: " + unlock.unlocks.join(" + ") : "";
             let displayName = unlock.challengeName || activeId;
-            return `Next Challenge: ${displayName} - ${unlocks}`;
+            return `Next Challenge: ${displayName}` + (unlocks ? ` - ${unlocks}` : ``);
         }
     }
 

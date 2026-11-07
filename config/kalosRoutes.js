@@ -1,2865 +1,3093 @@
 export const kalosRoutes = [
   {
-    "name": "Aquacorde Outskirts",
-    "spawns": [
+    name: 'Aquacorde Outskirts',
+    spawns: [
       {
-        "pokemonId": 298,
-        "minLevel": 1,
-        "maxLevel": 3,
-        "chance": 0.3
+        pokemonId: 298,
+        minLevel: 1,
+        maxLevel: 3,
+        chance: 0.3
       },
       {
-        "pokemonId": 10,
-        "minLevel": 1,
-        "maxLevel": 3,
-        "chance": 0.25
+        pokemonId: 10,
+        minLevel: 1,
+        maxLevel: 3,
+        chance: 0.25
       },
       {
-        "pokemonId": 13,
-        "minLevel": 1,
-        "maxLevel": 3,
-        "chance": 0.15
+        pokemonId: 13,
+        minLevel: 1,
+        maxLevel: 3,
+        chance: 0.15
       },
       {
-        "pokemonId": 280,
-        "minLevel": 1,
-        "maxLevel": 3,
-        "chance": 0.15
+        pokemonId: 280,
+        minLevel: 1,
+        maxLevel: 3,
+        chance: 0.15
       },
       {
-        "pokemonId": 664,
-        "minLevel": 1,
-        "maxLevel": 3,
-        "chance": 0.1
+        pokemonId: 664,
+        minLevel: 1,
+        maxLevel: 3,
+        chance: 0.1
       },
       {
-        "pokemonId": 129,
-        "minLevel": 1,
-        "maxLevel": 3,
-        "chance": 0.05
+        pokemonId: 129,
+        minLevel: 1,
+        maxLevel: 3,
+        chance: 0.05
       }
     ]
   },
   {
-    "name": "Route 2",
-    "spawns": [
+    name: 'Route 2',
+    spawns: [
       {
-        "pokemonId": 163,
-        "minLevel": 1,
-        "maxLevel": 1,
-        "chance": 0
+        pokemonId: 163,
+        minLevel: 1,
+        maxLevel: 1,
+        chance: 0
       },
       {
-        "pokemonId": 21,
-        "minLevel": 1,
-        "maxLevel": 1,
-        "chance": 0
+        pokemonId: 21,
+        minLevel: 1,
+        maxLevel: 1,
+        chance: 0
       },
       {
-        "pokemonId": 504,
-        "minLevel": 1,
-        "maxLevel": 1,
-        "chance": 0
+        pokemonId: 504,
+        minLevel: 1,
+        maxLevel: 1,
+        chance: 0
       },
       {
-        "pokemonId": 14,
-        "minLevel": 2,
-        "maxLevel": 4,
-        "chance": 0.3
+        pokemonId: 14,
+        minLevel: 2,
+        maxLevel: 4,
+        chance: 0.3
       },
       {
-        "pokemonId": 11,
-        "minLevel": 2,
-        "maxLevel": 4,
-        "chance": 0.25
+        pokemonId: 11,
+        minLevel: 2,
+        maxLevel: 4,
+        chance: 0.25
       },
       {
-        "pokemonId": 172,
-        "minLevel": 2,
-        "maxLevel": 4,
-        "chance": 0.15
+        pokemonId: 172,
+        minLevel: 2,
+        maxLevel: 4,
+        chance: 0.15
       },
       {
-        "pokemonId": 174,
-        "minLevel": 2,
-        "maxLevel": 4,
-        "chance": 0.15
+        pokemonId: 174,
+        minLevel: 2,
+        maxLevel: 4,
+        chance: 0.15
       },
       {
-        "pokemonId": 194,
-        "minLevel": 2,
-        "maxLevel": 4,
-        "chance": 0.1
+        pokemonId: 194,
+        minLevel: 2,
+        maxLevel: 4,
+        chance: 0.1
       },
       {
-        "pokemonId": 665,
-        "minLevel": 2,
-        "maxLevel": 4,
-        "chance": 0.05
+        pokemonId: 665,
+        minLevel: 2,
+        maxLevel: 4,
+        chance: 0.05
       }
     ]
   },
   {
-    "name": "Santalune Forest",
-    "spawns": [
+    name: 'Santalune Forest',
+    spawns: [
       {
-        "pokemonId": 161,
-        "minLevel": 4,
-        "maxLevel": 6,
-        "chance": 0.3
+        pokemonId: 161,
+        minLevel: 4,
+        maxLevel: 6,
+        chance: 0.3
       },
       {
-        "pokemonId": 261,
-        "minLevel": 4,
-        "maxLevel": 6,
-        "chance": 0.25
+        pokemonId: 261,
+        minLevel: 4,
+        maxLevel: 6,
+        chance: 0.25
       },
       {
-        "pokemonId": 270,
-        "minLevel": 4,
-        "maxLevel": 6,
-        "chance": 0.15
+        pokemonId: 270,
+        minLevel: 4,
+        maxLevel: 6,
+        chance: 0.15
       },
       {
-        "pokemonId": 412,
-        "minLevel": 4,
-        "maxLevel": 6,
-        "chance": 0.15
+        pokemonId: 412,
+        minLevel: 4,
+        maxLevel: 6,
+        chance: 0.15
       },
       {
-        "pokemonId": 659,
-        "minLevel": 4,
-        "maxLevel": 6,
-        "chance": 0.1
+        pokemonId: 659,
+        minLevel: 4,
+        maxLevel: 6,
+        chance: 0.1
       },
       {
-        "pokemonId": 263,
-        "minLevel": 4,
-        "maxLevel": 6,
-        "chance": 0.05
+        pokemonId: 263,
+        minLevel: 4,
+        maxLevel: 6,
+        chance: 0.05
       }
     ]
   },
   {
-    "name": "Route 3",
-    "spawns": [
+    name: 'Route 3',
+    spawns: [
       {
-        "pokemonId": 293,
-        "minLevel": 5,
-        "maxLevel": 7,
-        "chance": 0.3
+        pokemonId: 293,
+        minLevel: 5,
+        maxLevel: 7,
+        chance: 0.2609
       },
       {
-        "pokemonId": 415,
-        "minLevel": 5,
-        "maxLevel": 7,
-        "chance": 0.25
+        pokemonId: 415,
+        minLevel: 5,
+        maxLevel: 7,
+        chance: 0.2174
       },
       {
-        "pokemonId": 396,
-        "minLevel": 5,
-        "maxLevel": 7,
-        "chance": 0.15
+        pokemonId: 396,
+        minLevel: 5,
+        maxLevel: 7,
+        chance: 0.1304
       },
       {
-        "pokemonId": 41,
-        "minLevel": 5,
-        "maxLevel": 7,
-        "chance": 0.15
+        pokemonId: 41,
+        minLevel: 5,
+        maxLevel: 7,
+        chance: 0.1304
       },
       {
-        "pokemonId": 714,
-        "minLevel": 5,
-        "maxLevel": 7,
-        "chance": 0.1
+        pokemonId: 714,
+        minLevel: 5,
+        maxLevel: 7,
+        chance: 0.087
       },
       {
-        "pokemonId": 399,
-        "minLevel": 5,
-        "maxLevel": 7,
-        "chance": 0.05
+        pokemonId: 399,
+        minLevel: 5,
+        maxLevel: 7,
+        chance: 0.0435
+      },
+      {
+        pokemonId: 284,
+        minLevel: 5,
+        maxLevel: 7,
+        chance: 0.0435
+      },
+      {
+        pokemonId: 183,
+        minLevel: 5,
+        maxLevel: 7,
+        chance: 0.0435
+      },
+      {
+        pokemonId: 25,
+        minLevel: 5,
+        maxLevel: 7,
+        chance: 0.0435
       }
     ]
   },
   {
-    "name": "Santalune Outskirts",
-    "spawns": [
+    name: 'Santalune Outskirts',
+    spawns: [
       {
-        "pokemonId": 220,
-        "minLevel": 7,
-        "maxLevel": 9,
-        "chance": 0.3
+        pokemonId: 220,
+        minLevel: 7,
+        maxLevel: 9,
+        chance: 0.3
       },
       {
-        "pokemonId": 235,
-        "minLevel": 7,
-        "maxLevel": 9,
-        "chance": 0.25
+        pokemonId: 235,
+        minLevel: 7,
+        maxLevel: 9,
+        chance: 0.25
       },
       {
-        "pokemonId": 218,
-        "minLevel": 7,
-        "maxLevel": 9,
-        "chance": 0.15
+        pokemonId: 218,
+        minLevel: 7,
+        maxLevel: 9,
+        chance: 0.15
       },
       {
-        "pokemonId": 187,
-        "minLevel": 7,
-        "maxLevel": 9,
-        "chance": 0.15
+        pokemonId: 187,
+        minLevel: 7,
+        maxLevel: 9,
+        chance: 0.15
       },
       {
-        "pokemonId": 167,
-        "minLevel": 7,
-        "maxLevel": 9,
-        "chance": 0.1
+        pokemonId: 167,
+        minLevel: 7,
+        maxLevel: 9,
+        chance: 0.1
       },
       {
-        "pokemonId": 16,
-        "minLevel": 7,
-        "maxLevel": 9,
-        "chance": 0.05
+        pokemonId: 16,
+        minLevel: 7,
+        maxLevel: 9,
+        chance: 0.05
       }
     ]
   },
   {
-    "name": "Santalune City Gym",
-    "spawns": []
+    name: 'Santalune City Gym',
+    spawns: []
   },
   {
-    "name": "Route 4",
-    "spawns": [
+    name: 'Route 4',
+    spawns: [
       {
-        "pokemonId": 607,
-        "minLevel": 10,
-        "maxLevel": 12,
-        "chance": 0.3
+        pokemonId: 607,
+        minLevel: 10,
+        maxLevel: 12,
+        chance: 0.3
       },
       {
-        "pokemonId": 281,
-        "minLevel": 10,
-        "maxLevel": 12,
-        "chance": 0.25
+        pokemonId: 281,
+        minLevel: 10,
+        maxLevel: 12,
+        chance: 0.25
       },
       {
-        "pokemonId": 661,
-        "minLevel": 10,
-        "maxLevel": 12,
-        "chance": 0.15
+        pokemonId: 661,
+        minLevel: 10,
+        maxLevel: 12,
+        chance: 0.15
       },
       {
-        "pokemonId": 307,
-        "minLevel": 10,
-        "maxLevel": 12,
-        "chance": 0.15
+        pokemonId: 307,
+        minLevel: 10,
+        maxLevel: 12,
+        chance: 0.15
       },
       {
-        "pokemonId": 406,
-        "minLevel": 10,
-        "maxLevel": 12,
-        "chance": 0.1
+        pokemonId: 406,
+        minLevel: 10,
+        maxLevel: 12,
+        chance: 0.1
       },
       {
-        "pokemonId": 179,
-        "minLevel": 10,
-        "maxLevel": 12,
-        "chance": 0.05
+        pokemonId: 179,
+        minLevel: 10,
+        maxLevel: 12,
+        chance: 0.05
       }
     ]
   },
   {
-    "name": "Lumiose South Boulevard",
-    "spawns": [
+    name: 'Lumiose South Boulevard',
+    spawns: [
       {
-        "pokemonId": 524,
-        "minLevel": 11,
-        "maxLevel": 13,
-        "chance": 0.3
+        pokemonId: 524,
+        minLevel: 11,
+        maxLevel: 13,
+        chance: 0.3
       },
       {
-        "pokemonId": 509,
-        "minLevel": 11,
-        "maxLevel": 13,
-        "chance": 0.25
+        pokemonId: 509,
+        minLevel: 11,
+        maxLevel: 13,
+        chance: 0.25
       },
       {
-        "pokemonId": 433,
-        "minLevel": 11,
-        "maxLevel": 13,
-        "chance": 0.15
+        pokemonId: 433,
+        minLevel: 11,
+        maxLevel: 13,
+        chance: 0.15
       },
       {
-        "pokemonId": 447,
-        "minLevel": 11,
-        "maxLevel": 13,
-        "chance": 0.15
+        pokemonId: 447,
+        minLevel: 11,
+        maxLevel: 13,
+        chance: 0.15
       },
       {
-        "pokemonId": 339,
-        "minLevel": 11,
-        "maxLevel": 13,
-        "chance": 0.1
+        pokemonId: 339,
+        minLevel: 11,
+        maxLevel: 13,
+        chance: 0.1
       },
       {
-        "pokemonId": 23,
-        "minLevel": 11,
-        "maxLevel": 13,
-        "chance": 0.05
+        pokemonId: 23,
+        minLevel: 11,
+        maxLevel: 13,
+        chance: 0.05
       }
     ]
   },
   {
-    "name": "Route 5",
-    "spawns": [
+    name: 'Route 5',
+    spawns: [
       {
-        "pokemonId": 686,
-        "minLevel": 13,
-        "maxLevel": 16,
-        "chance": 0.3
+        pokemonId: 686,
+        minLevel: 13,
+        maxLevel: 16,
+        chance: 0.3
       },
       {
-        "pokemonId": 132,
-        "minLevel": 13,
-        "maxLevel": 16,
-        "chance": 0.25
+        pokemonId: 132,
+        minLevel: 13,
+        maxLevel: 16,
+        chance: 0.25
       },
       {
-        "pokemonId": 694,
-        "minLevel": 13,
-        "maxLevel": 16,
-        "chance": 0.15
+        pokemonId: 694,
+        minLevel: 13,
+        maxLevel: 16,
+        chance: 0.15
       },
       {
-        "pokemonId": 577,
-        "minLevel": 13,
-        "maxLevel": 16,
-        "chance": 0.15
+        pokemonId: 577,
+        minLevel: 13,
+        maxLevel: 16,
+        chance: 0.15
       },
       {
-        "pokemonId": 328,
-        "minLevel": 13,
-        "maxLevel": 16,
-        "chance": 0.1
+        pokemonId: 328,
+        minLevel: 13,
+        maxLevel: 16,
+        chance: 0.1
       },
       {
-        "pokemonId": 438,
-        "minLevel": 13,
-        "maxLevel": 16,
-        "chance": 0.05
+        pokemonId: 438,
+        minLevel: 13,
+        maxLevel: 16,
+        chance: 0.05
       }
     ]
   },
   {
-    "name": "Camphrier Berry Fields",
-    "spawns": [
+    name: 'Camphrier Berry Fields',
+    spawns: [
       {
-        "pokemonId": 574,
-        "minLevel": 14,
-        "maxLevel": 17,
-        "chance": 0.3
+        pokemonId: 574,
+        minLevel: 14,
+        maxLevel: 17,
+        chance: 0.3
       },
       {
-        "pokemonId": 551,
-        "minLevel": 14,
-        "maxLevel": 17,
-        "chance": 0.25
+        pokemonId: 551,
+        minLevel: 14,
+        maxLevel: 17,
+        chance: 0.25
       },
       {
-        "pokemonId": 590,
-        "minLevel": 14,
-        "maxLevel": 17,
-        "chance": 0.15
+        pokemonId: 590,
+        minLevel: 14,
+        maxLevel: 17,
+        chance: 0.15
       },
       {
-        "pokemonId": 309,
-        "minLevel": 14,
-        "maxLevel": 17,
-        "chance": 0.15
+        pokemonId: 309,
+        minLevel: 14,
+        maxLevel: 17,
+        chance: 0.15
       },
       {
-        "pokemonId": 116,
-        "minLevel": 14,
-        "maxLevel": 17,
-        "chance": 0.1
+        pokemonId: 116,
+        minLevel: 14,
+        maxLevel: 17,
+        chance: 0.1
       },
       {
-        "pokemonId": 353,
-        "minLevel": 14,
-        "maxLevel": 17,
-        "chance": 0.05
+        pokemonId: 353,
+        minLevel: 14,
+        maxLevel: 17,
+        chance: 0.05
       }
     ]
   },
   {
-    "name": "Route 6",
-    "spawns": [
+    name: 'Route 6',
+    spawns: [
+      {
+        pokemonId: 60,
+        minLevel: 16,
+        maxLevel: 19,
+        chance: 0.2857
+      },
       {
-        "pokemonId": 60,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "chance": 0.3
+        pokemonId: 32,
+        minLevel: 16,
+        maxLevel: 19,
+        chance: 0.2381
       },
       {
-        "pokemonId": 32,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "chance": 0.25
+        pokemonId: 83,
+        minLevel: 16,
+        maxLevel: 19,
+        chance: 0.1429
       },
       {
-        "pokemonId": 83,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "chance": 0.15
+        pokemonId: 69,
+        minLevel: 16,
+        maxLevel: 19,
+        chance: 0.1429
       },
       {
-        "pokemonId": 69,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "chance": 0.15
+        pokemonId: 669,
+        minLevel: 16,
+        maxLevel: 19,
+        chance: 0.0952
       },
       {
-        "pokemonId": 669,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "chance": 0.1
+        pokemonId: 704,
+        minLevel: 16,
+        maxLevel: 19,
+        chance: 0.0476
       },
       {
-        "pokemonId": 704,
-        "minLevel": 16,
-        "maxLevel": 19,
-        "chance": 0.05
+        pokemonId: 543,
+        minLevel: 16,
+        maxLevel: 19,
+        chance: 0.0476
       }
     ]
   },
   {
-    "name": "Route 7",
-    "spawns": [
+    name: 'Route 7',
+    spawns: [
+      {
+        pokemonId: 147,
+        minLevel: 17,
+        maxLevel: 20,
+        chance: 0.2727
+      },
       {
-        "pokemonId": 147,
-        "minLevel": 17,
-        "maxLevel": 20,
-        "chance": 0.3
+        pokemonId: 223,
+        minLevel: 17,
+        maxLevel: 20,
+        chance: 0.2273
       },
       {
-        "pokemonId": 223,
-        "minLevel": 17,
-        "maxLevel": 20,
-        "chance": 0.25
+        pokemonId: 439,
+        minLevel: 17,
+        maxLevel: 20,
+        chance: 0.1364
       },
       {
-        "pokemonId": 439,
-        "minLevel": 17,
-        "maxLevel": 20,
-        "chance": 0.15
+        pokemonId: 453,
+        minLevel: 17,
+        maxLevel: 20,
+        chance: 0.1364
       },
       {
-        "pokemonId": 453,
-        "minLevel": 17,
-        "maxLevel": 20,
-        "chance": 0.15
+        pokemonId: 633,
+        minLevel: 17,
+        maxLevel: 20,
+        chance: 0.0909
       },
       {
-        "pokemonId": 633,
-        "minLevel": 17,
-        "maxLevel": 20,
-        "chance": 0.1
+        pokemonId: 74,
+        minLevel: 17,
+        maxLevel: 20,
+        chance: 0.0455
       },
       {
-        "pokemonId": 74,
-        "minLevel": 17,
-        "maxLevel": 20,
-        "chance": 0.05
+        pokemonId: 143,
+        minLevel: 17,
+        maxLevel: 20,
+        chance: 0.0455
+      },
+      {
+        pokemonId: 315,
+        minLevel: 17,
+        maxLevel: 20,
+        chance: 0.0455
       }
     ]
   },
   {
-    "name": "Connecting Cave",
-    "spawns": [
+    name: 'Connecting Cave',
+    spawns: [
       {
-        "pokemonId": 371,
-        "minLevel": 19,
-        "maxLevel": 22,
-        "chance": 0.3
+        pokemonId: 371,
+        minLevel: 19,
+        maxLevel: 22,
+        chance: 0.3
       },
       {
-        "pokemonId": 316,
-        "minLevel": 19,
-        "maxLevel": 22,
-        "chance": 0.25
+        pokemonId: 316,
+        minLevel: 19,
+        maxLevel: 22,
+        chance: 0.25
       },
       {
-        "pokemonId": 622,
-        "minLevel": 19,
-        "maxLevel": 22,
-        "chance": 0.15
+        pokemonId: 622,
+        minLevel: 19,
+        maxLevel: 22,
+        chance: 0.15
       },
       {
-        "pokemonId": 712,
-        "minLevel": 19,
-        "maxLevel": 22,
-        "chance": 0.15
+        pokemonId: 712,
+        minLevel: 19,
+        maxLevel: 22,
+        chance: 0.15
       },
       {
-        "pokemonId": 238,
-        "minLevel": 19,
-        "maxLevel": 22,
-        "chance": 0.1
+        pokemonId: 238,
+        minLevel: 19,
+        maxLevel: 22,
+        chance: 0.1
       },
       {
-        "pokemonId": 613,
-        "minLevel": 19,
-        "maxLevel": 22,
-        "chance": 0.05
+        pokemonId: 613,
+        minLevel: 19,
+        maxLevel: 22,
+        chance: 0.05
       }
     ]
   },
   {
-    "name": "Route 8",
-    "spawns": [
+    name: 'Route 8',
+    spawns: [
+      {
+        pokemonId: 84,
+        minLevel: 20,
+        maxLevel: 23,
+        chance: 0.2727
+      },
+      {
+        pokemonId: 92,
+        minLevel: 20,
+        maxLevel: 23,
+        chance: 0.2273
+      },
       {
-        "pokemonId": 84,
-        "minLevel": 20,
-        "maxLevel": 23,
-        "chance": 0.3
+        pokemonId: 333,
+        minLevel: 20,
+        maxLevel: 23,
+        chance: 0.1364
       },
       {
-        "pokemonId": 92,
-        "minLevel": 20,
-        "maxLevel": 23,
-        "chance": 0.25
+        pokemonId: 79,
+        minLevel: 20,
+        maxLevel: 23,
+        chance: 0.1364
       },
       {
-        "pokemonId": 333,
-        "minLevel": 20,
-        "maxLevel": 23,
-        "chance": 0.15
+        pokemonId: 588,
+        minLevel: 20,
+        maxLevel: 23,
+        chance: 0.0909
       },
       {
-        "pokemonId": 79,
-        "minLevel": 20,
-        "maxLevel": 23,
-        "chance": 0.15
+        pokemonId: 513,
+        minLevel: 20,
+        maxLevel: 23,
+        chance: 0.0455
       },
       {
-        "pokemonId": 588,
-        "minLevel": 20,
-        "maxLevel": 23,
-        "chance": 0.1
+        pokemonId: 121,
+        minLevel: 20,
+        maxLevel: 23,
+        chance: 0.0455
       },
       {
-        "pokemonId": 513,
-        "minLevel": 20,
-        "maxLevel": 23,
-        "chance": 0.05
+        pokemonId: 325,
+        minLevel: 20,
+        maxLevel: 23,
+        chance: 0.0455
       }
     ]
   },
   {
-    "name": "Ambrette Cliffs",
-    "spawns": [
+    name: 'Ambrette Cliffs',
+    spawns: [
       {
-        "pokemonId": 616,
-        "minLevel": 22,
-        "maxLevel": 25,
-        "chance": 0.3
+        pokemonId: 616,
+        minLevel: 22,
+        maxLevel: 25,
+        chance: 0.3
       },
       {
-        "pokemonId": 597,
-        "minLevel": 22,
-        "maxLevel": 25,
-        "chance": 0.25
+        pokemonId: 597,
+        minLevel: 22,
+        maxLevel: 25,
+        chance: 0.25
       },
       {
-        "pokemonId": 582,
-        "minLevel": 22,
-        "maxLevel": 25,
-        "chance": 0.15
+        pokemonId: 582,
+        minLevel: 22,
+        maxLevel: 25,
+        chance: 0.15
       },
       {
-        "pokemonId": 532,
-        "minLevel": 22,
-        "maxLevel": 25,
-        "chance": 0.15
+        pokemonId: 532,
+        minLevel: 22,
+        maxLevel: 25,
+        chance: 0.15
       },
       {
-        "pokemonId": 580,
-        "minLevel": 22,
-        "maxLevel": 25,
-        "chance": 0.1
+        pokemonId: 580,
+        minLevel: 22,
+        maxLevel: 25,
+        chance: 0.1
       },
       {
-        "pokemonId": 66,
-        "minLevel": 22,
-        "maxLevel": 25,
-        "chance": 0.05
+        pokemonId: 66,
+        minLevel: 22,
+        maxLevel: 25,
+        chance: 0.05
       }
     ]
   },
   {
-    "name": "Route 9",
-    "spawns": [
+    name: 'Route 9',
+    spawns: [
+      {
+        pokemonId: 511,
+        minLevel: 23,
+        maxLevel: 26,
+        chance: 0.2857
+      },
       {
-        "pokemonId": 511,
-        "minLevel": 23,
-        "maxLevel": 26,
-        "chance": 0.3
+        pokemonId: 515,
+        minLevel: 23,
+        maxLevel: 26,
+        chance: 0.2381
       },
       {
-        "pokemonId": 515,
-        "minLevel": 23,
-        "maxLevel": 26,
-        "chance": 0.25
+        pokemonId: 104,
+        minLevel: 23,
+        maxLevel: 26,
+        chance: 0.1429
       },
       {
-        "pokemonId": 104,
-        "minLevel": 23,
-        "maxLevel": 26,
-        "chance": 0.15
+        pokemonId: 118,
+        minLevel: 23,
+        maxLevel: 26,
+        chance: 0.1429
       },
       {
-        "pokemonId": 118,
-        "minLevel": 23,
-        "maxLevel": 26,
-        "chance": 0.15
+        pokemonId: 54,
+        minLevel: 23,
+        maxLevel: 26,
+        chance: 0.0952
       },
       {
-        "pokemonId": 54,
-        "minLevel": 23,
-        "maxLevel": 26,
-        "chance": 0.1
+        pokemonId: 690,
+        minLevel: 23,
+        maxLevel: 26,
+        chance: 0.0476
       },
       {
-        "pokemonId": 690,
-        "minLevel": 23,
-        "maxLevel": 26,
-        "chance": 0.05
+        pokemonId: 449,
+        minLevel: 23,
+        maxLevel: 26,
+        chance: 0.0476
       }
     ]
   },
   {
-    "name": "Glittering Cave",
-    "spawns": [
+    name: 'Glittering Cave',
+    spawns: [
       {
-        "pokemonId": 610,
-        "minLevel": 25,
-        "maxLevel": 28,
-        "chance": 0.3
+        pokemonId: 610,
+        minLevel: 25,
+        maxLevel: 28,
+        chance: 0.3
       },
       {
-        "pokemonId": 43,
-        "minLevel": 25,
-        "maxLevel": 28,
-        "chance": 0.25
+        pokemonId: 43,
+        minLevel: 25,
+        maxLevel: 28,
+        chance: 0.25
       },
       {
-        "pokemonId": 527,
-        "minLevel": 25,
-        "maxLevel": 28,
-        "chance": 0.15
+        pokemonId: 527,
+        minLevel: 25,
+        maxLevel: 28,
+        chance: 0.15
       },
       {
-        "pokemonId": 133,
-        "minLevel": 25,
-        "maxLevel": 28,
-        "chance": 0.15
+        pokemonId: 133,
+        minLevel: 25,
+        maxLevel: 28,
+        chance: 0.15
       },
       {
-        "pokemonId": 679,
-        "minLevel": 25,
-        "maxLevel": 28,
-        "chance": 0.1
+        pokemonId: 679,
+        minLevel: 25,
+        maxLevel: 28,
+        chance: 0.1
       },
       {
-        "pokemonId": 81,
-        "minLevel": 25,
-        "maxLevel": 28,
-        "chance": 0.05
+        pokemonId: 81,
+        minLevel: 25,
+        maxLevel: 28,
+        chance: 0.05
       }
     ]
   },
   {
-    "name": "Cyllage Seaside Slope",
-    "spawns": [
+    name: 'Cyllage Seaside Slope',
+    spawns: [
       {
-        "pokemonId": 102,
-        "minLevel": 26,
-        "maxLevel": 29,
-        "chance": 0.3
+        pokemonId: 102,
+        minLevel: 26,
+        maxLevel: 29,
+        chance: 0.3
       },
       {
-        "pokemonId": 557,
-        "minLevel": 26,
-        "maxLevel": 29,
-        "chance": 0.25
+        pokemonId: 557,
+        minLevel: 26,
+        maxLevel: 29,
+        chance: 0.25
       },
       {
-        "pokemonId": 568,
-        "minLevel": 26,
-        "maxLevel": 29,
-        "chance": 0.15
+        pokemonId: 568,
+        minLevel: 26,
+        maxLevel: 29,
+        chance: 0.15
       },
       {
-        "pokemonId": 434,
-        "minLevel": 26,
-        "maxLevel": 29,
-        "chance": 0.15
+        pokemonId: 434,
+        minLevel: 26,
+        maxLevel: 29,
+        chance: 0.15
       },
       {
-        "pokemonId": 170,
-        "minLevel": 26,
-        "maxLevel": 29,
-        "chance": 0.1
+        pokemonId: 170,
+        minLevel: 26,
+        maxLevel: 29,
+        chance: 0.1
       },
       {
-        "pokemonId": 228,
-        "minLevel": 26,
-        "maxLevel": 29,
-        "chance": 0.05
+        pokemonId: 228,
+        minLevel: 26,
+        maxLevel: 29,
+        chance: 0.05
       }
     ]
   },
   {
-    "name": "Cyllage City Gym",
-    "spawns": []
+    name: 'Cyllage City Gym',
+    spawns: []
   },
   {
-    "name": "Route 10",
-    "spawns": [
+    name: 'Route 10',
+    spawns: [
+      {
+        pokemonId: 710,
+        minLevel: 29,
+        maxLevel: 32,
+        chance: 0.2857
+      },
       {
-        "pokemonId": 710,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "chance": 0.3
+        pokemonId: 72,
+        minLevel: 29,
+        maxLevel: 32,
+        chance: 0.2381
       },
       {
-        "pokemonId": 72,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "chance": 0.25
+        pokemonId: 397,
+        minLevel: 29,
+        maxLevel: 32,
+        chance: 0.1429
       },
       {
-        "pokemonId": 397,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "chance": 0.15
+        pokemonId: 329,
+        minLevel: 29,
+        maxLevel: 32,
+        chance: 0.1429
       },
       {
-        "pokemonId": 329,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "chance": 0.15
+        pokemonId: 271,
+        minLevel: 29,
+        maxLevel: 32,
+        chance: 0.0952
       },
       {
-        "pokemonId": 271,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "chance": 0.1
+        pokemonId: 624,
+        minLevel: 29,
+        maxLevel: 32,
+        chance: 0.0476
       },
       {
-        "pokemonId": 624,
-        "minLevel": 29,
-        "maxLevel": 32,
-        "chance": 0.05
+        pokemonId: 299,
+        minLevel: 29,
+        maxLevel: 32,
+        chance: 0.0476
       }
     ]
   },
   {
-    "name": "Geosenge Megalith Ruins",
-    "spawns": [
+    name: 'Geosenge Megalith Ruins',
+    spawns: [
       {
-        "pokemonId": 188,
-        "minLevel": 31,
-        "maxLevel": 34,
-        "chance": 0.3
+        pokemonId: 188,
+        minLevel: 31,
+        maxLevel: 34,
+        chance: 0.3
       },
       {
-        "pokemonId": 120,
-        "minLevel": 31,
-        "maxLevel": 34,
-        "chance": 0.25
+        pokemonId: 120,
+        minLevel: 31,
+        maxLevel: 34,
+        chance: 0.25
       },
       {
-        "pokemonId": 682,
-        "minLevel": 31,
-        "maxLevel": 34,
-        "chance": 0.15
+        pokemonId: 682,
+        minLevel: 31,
+        maxLevel: 34,
+        chance: 0.15
       },
       {
-        "pokemonId": 684,
-        "minLevel": 31,
-        "maxLevel": 34,
-        "chance": 0.15
+        pokemonId: 684,
+        minLevel: 31,
+        maxLevel: 34,
+        chance: 0.15
       },
       {
-        "pokemonId": 458,
-        "minLevel": 31,
-        "maxLevel": 34,
-        "chance": 0.1
+        pokemonId: 458,
+        minLevel: 31,
+        maxLevel: 34,
+        chance: 0.1
       },
       {
-        "pokemonId": 111,
-        "minLevel": 31,
-        "maxLevel": 34,
-        "chance": 0.05
+        pokemonId: 111,
+        minLevel: 31,
+        maxLevel: 34,
+        chance: 0.05
       }
     ]
   },
   {
-    "name": "Route 11",
-    "spawns": [
+    name: 'Route 11',
+    spawns: [
       {
-        "pokemonId": 314,
-        "minLevel": 1,
-        "maxLevel": 1,
-        "chance": 0
+        pokemonId: 314,
+        minLevel: 1,
+        maxLevel: 1,
+        chance: 0
       },
       {
-        "pokemonId": 366,
-        "minLevel": 32,
-        "maxLevel": 35,
-        "chance": 0.3
+        pokemonId: 366,
+        minLevel: 32,
+        maxLevel: 35,
+        chance: 0.3
       },
       {
-        "pokemonId": 559,
-        "minLevel": 32,
-        "maxLevel": 35,
-        "chance": 0.25
+        pokemonId: 559,
+        minLevel: 32,
+        maxLevel: 35,
+        chance: 0.25
       },
       {
-        "pokemonId": 425,
-        "minLevel": 32,
-        "maxLevel": 35,
-        "chance": 0.15
+        pokemonId: 425,
+        minLevel: 32,
+        maxLevel: 35,
+        chance: 0.15
       },
       {
-        "pokemonId": 674,
-        "minLevel": 32,
-        "maxLevel": 35,
-        "chance": 0.15
+        pokemonId: 674,
+        minLevel: 32,
+        maxLevel: 35,
+        chance: 0.15
       },
       {
-        "pokemonId": 17,
-        "minLevel": 32,
-        "maxLevel": 35,
-        "chance": 0.1
+        pokemonId: 17,
+        minLevel: 32,
+        maxLevel: 35,
+        chance: 0.1
       },
       {
-        "pokemonId": 619,
-        "minLevel": 32,
-        "maxLevel": 35,
-        "chance": 0.05
+        pokemonId: 619,
+        minLevel: 32,
+        maxLevel: 35,
+        chance: 0.05
       }
     ]
   },
   {
-    "name": "Reflection Cave",
-    "spawns": [
+    name: 'Reflection Cave',
+    spawns: [
       {
-        "pokemonId": 672,
-        "minLevel": 34,
-        "maxLevel": 37,
-        "chance": 0.3
+        pokemonId: 672,
+        minLevel: 34,
+        maxLevel: 37,
+        chance: 0.3
       },
       {
-        "pokemonId": 552,
-        "minLevel": 34,
-        "maxLevel": 37,
-        "chance": 0.25
+        pokemonId: 552,
+        minLevel: 34,
+        maxLevel: 37,
+        chance: 0.25
       },
       {
-        "pokemonId": 677,
-        "minLevel": 34,
-        "maxLevel": 37,
-        "chance": 0.15
+        pokemonId: 677,
+        minLevel: 34,
+        maxLevel: 37,
+        chance: 0.15
       },
       {
-        "pokemonId": 544,
-        "minLevel": 34,
-        "maxLevel": 37,
-        "chance": 0.15
+        pokemonId: 544,
+        minLevel: 34,
+        maxLevel: 37,
+        chance: 0.15
       },
       {
-        "pokemonId": 294,
-        "minLevel": 34,
-        "maxLevel": 37,
-        "chance": 0.1
+        pokemonId: 294,
+        minLevel: 34,
+        maxLevel: 37,
+        chance: 0.1
       },
       {
-        "pokemonId": 327,
-        "minLevel": 34,
-        "maxLevel": 37,
-        "chance": 0.05
+        pokemonId: 327,
+        minLevel: 34,
+        maxLevel: 37,
+        chance: 0.05
       }
     ]
   },
   {
-    "name": "Shalour Beachfront",
-    "spawns": [
+    name: 'Shalour Beachfront',
+    spawns: [
       {
-        "pokemonId": 696,
-        "minLevel": 35,
-        "maxLevel": 38,
-        "chance": 0.3
+        pokemonId: 696,
+        minLevel: 35,
+        maxLevel: 38,
+        chance: 0.3
       },
       {
-        "pokemonId": 698,
-        "minLevel": 35,
-        "maxLevel": 38,
-        "chance": 0.25
+        pokemonId: 698,
+        minLevel: 35,
+        maxLevel: 38,
+        chance: 0.25
       },
       {
-        "pokemonId": 33,
-        "minLevel": 35,
-        "maxLevel": 38,
-        "chance": 0.15
+        pokemonId: 33,
+        minLevel: 35,
+        maxLevel: 38,
+        chance: 0.15
       },
       {
-        "pokemonId": 30,
-        "minLevel": 35,
-        "maxLevel": 38,
-        "chance": 0.15
+        pokemonId: 30,
+        minLevel: 35,
+        maxLevel: 38,
+        chance: 0.15
       },
       {
-        "pokemonId": 180,
-        "minLevel": 35,
-        "maxLevel": 38,
-        "chance": 0.1
+        pokemonId: 180,
+        minLevel: 35,
+        maxLevel: 38,
+        chance: 0.1
       },
       {
-        "pokemonId": 667,
-        "minLevel": 35,
-        "maxLevel": 38,
-        "chance": 0.05
+        pokemonId: 667,
+        minLevel: 35,
+        maxLevel: 38,
+        chance: 0.05
       }
     ]
   },
   {
-    "name": "Shalour City Gym",
-    "spawns": []
+    name: 'Shalour City Gym',
+    spawns: []
   },
   {
-    "name": "Route 12",
-    "spawns": [
+    name: 'Route 12',
+    spawns: [
       {
-        "pokemonId": 75,
-        "minLevel": 38,
-        "maxLevel": 41,
-        "chance": 0.3
+        pokemonId: 75,
+        minLevel: 38,
+        maxLevel: 41,
+        chance: 0.3
       },
       {
-        "pokemonId": 575,
-        "minLevel": 38,
-        "maxLevel": 41,
-        "chance": 0.25
+        pokemonId: 575,
+        minLevel: 38,
+        maxLevel: 41,
+        chance: 0.25
       },
       {
-        "pokemonId": 446,
-        "minLevel": 38,
-        "maxLevel": 41,
-        "chance": 0.15
+        pokemonId: 446,
+        minLevel: 38,
+        maxLevel: 41,
+        chance: 0.15
       },
       {
-        "pokemonId": 166,
-        "minLevel": 38,
-        "maxLevel": 41,
-        "chance": 0.15
+        pokemonId: 166,
+        minLevel: 38,
+        maxLevel: 41,
+        chance: 0.15
       },
       {
-        "pokemonId": 15,
-        "minLevel": 38,
-        "maxLevel": 41,
-        "chance": 0.1
+        pokemonId: 15,
+        minLevel: 38,
+        maxLevel: 41,
+        chance: 0.1
       },
       {
-        "pokemonId": 44,
-        "minLevel": 38,
-        "maxLevel": 41,
-        "chance": 0.05
+        pokemonId: 44,
+        minLevel: 38,
+        maxLevel: 41,
+        chance: 0.05
       }
     ]
   },
   {
-    "name": "Azure Deep",
-    "spawns": [
+    name: 'Azure Deep',
+    spawns: [
       {
-        "pokemonId": 12,
-        "minLevel": 40,
-        "maxLevel": 44,
-        "chance": 0.3
+        pokemonId: 12,
+        minLevel: 40,
+        maxLevel: 44,
+        chance: 0.3
       },
       {
-        "pokemonId": 583,
-        "minLevel": 40,
-        "maxLevel": 44,
-        "chance": 0.25
+        pokemonId: 583,
+        minLevel: 40,
+        maxLevel: 44,
+        chance: 0.25
       },
       {
-        "pokemonId": 64,
-        "minLevel": 40,
-        "maxLevel": 44,
-        "chance": 0.15
+        pokemonId: 64,
+        minLevel: 40,
+        maxLevel: 44,
+        chance: 0.15
       },
       {
-        "pokemonId": 320,
-        "minLevel": 40,
-        "maxLevel": 44,
-        "chance": 0.15
+        pokemonId: 320,
+        minLevel: 40,
+        maxLevel: 44,
+        chance: 0.15
       },
       {
-        "pokemonId": 168,
-        "minLevel": 40,
-        "maxLevel": 44,
-        "chance": 0.1
+        pokemonId: 168,
+        minLevel: 40,
+        maxLevel: 44,
+        chance: 0.1
       },
       {
-        "pokemonId": 417,
-        "minLevel": 40,
-        "maxLevel": 44,
-        "chance": 0.05
+        pokemonId: 417,
+        minLevel: 40,
+        maxLevel: 44,
+        chance: 0.05
       }
     ]
   },
   {
-    "name": "Azure Bay Isles",
-    "spawns": [
+    name: 'Azure Bay Isles',
+    spawns: [
       {
-        "pokemonId": 311,
-        "minLevel": 42,
-        "maxLevel": 46,
-        "chance": 0.3
+        pokemonId: 311,
+        minLevel: 42,
+        maxLevel: 46,
+        chance: 0.3
       },
       {
-        "pokemonId": 67,
-        "minLevel": 42,
-        "maxLevel": 46,
-        "chance": 0.25
+        pokemonId: 67,
+        minLevel: 42,
+        maxLevel: 46,
+        chance: 0.25
       },
       {
-        "pokemonId": 533,
-        "minLevel": 42,
-        "maxLevel": 46,
-        "chance": 0.2
+        pokemonId: 533,
+        minLevel: 42,
+        maxLevel: 46,
+        chance: 0.2
       },
       {
-        "pokemonId": 312,
-        "minLevel": 42,
-        "maxLevel": 46,
-        "chance": 0.15
+        pokemonId: 312,
+        minLevel: 42,
+        maxLevel: 46,
+        chance: 0.15
       },
       {
-        "pokemonId": 198,
-        "minLevel": 42,
-        "maxLevel": 46,
-        "chance": 0.1
+        pokemonId: 198,
+        minLevel: 42,
+        maxLevel: 46,
+        chance: 0.1
       }
     ]
   },
   {
-    "name": "Coumarine Seaside Hill",
-    "spawns": [
+    name: 'Coumarine Seaside Hill',
+    spawns: [
       {
-        "pokemonId": 202,
-        "minLevel": 43,
-        "maxLevel": 47,
-        "chance": 0.3
+        pokemonId: 202,
+        minLevel: 43,
+        maxLevel: 47,
+        chance: 0.3
       },
       {
-        "pokemonId": 93,
-        "minLevel": 43,
-        "maxLevel": 47,
-        "chance": 0.25
+        pokemonId: 93,
+        minLevel: 43,
+        maxLevel: 47,
+        chance: 0.25
       },
       {
-        "pokemonId": 611,
-        "minLevel": 43,
-        "maxLevel": 47,
-        "chance": 0.2
+        pokemonId: 611,
+        minLevel: 43,
+        maxLevel: 47,
+        chance: 0.2
       },
       {
-        "pokemonId": 247,
-        "minLevel": 43,
-        "maxLevel": 47,
-        "chance": 0.15
+        pokemonId: 247,
+        minLevel: 43,
+        maxLevel: 47,
+        chance: 0.15
       },
       {
-        "pokemonId": 222,
-        "minLevel": 43,
-        "maxLevel": 47,
-        "chance": 0.1
+        pokemonId: 222,
+        minLevel: 43,
+        maxLevel: 47,
+        chance: 0.1
       }
     ]
   },
   {
-    "name": "Coumarine Docks",
-    "spawns": [
+    name: 'Coumarine Docks',
+    spawns: [
       {
-        "pokemonId": 206,
-        "minLevel": 45,
-        "maxLevel": 49,
-        "chance": 0.3
+        pokemonId: 206,
+        minLevel: 45,
+        maxLevel: 49,
+        chance: 0.3
       },
       {
-        "pokemonId": 264,
-        "minLevel": 45,
-        "maxLevel": 49,
-        "chance": 0.25
+        pokemonId: 264,
+        minLevel: 45,
+        maxLevel: 49,
+        chance: 0.25
       },
       {
-        "pokemonId": 372,
-        "minLevel": 45,
-        "maxLevel": 49,
-        "chance": 0.2
+        pokemonId: 372,
+        minLevel: 45,
+        maxLevel: 49,
+        chance: 0.2
       },
       {
-        "pokemonId": 148,
-        "minLevel": 45,
-        "maxLevel": 49,
-        "chance": 0.15
+        pokemonId: 148,
+        minLevel: 45,
+        maxLevel: 49,
+        chance: 0.15
       },
       {
-        "pokemonId": 184,
-        "minLevel": 45,
-        "maxLevel": 49,
-        "chance": 0.1
+        pokemonId: 184,
+        minLevel: 45,
+        maxLevel: 49,
+        chance: 0.1
       }
     ]
   },
   {
-    "name": "Coumarine City Gym",
-    "spawns": []
+    name: 'Coumarine City Gym',
+    spawns: []
   },
   {
-    "name": "Route 13",
-    "spawns": [
+    name: 'Route 13',
+    spawns: [
       {
-        "pokemonId": 413,
-        "minLevel": 48,
-        "maxLevel": 52,
-        "chance": 0.3
+        pokemonId: 413,
+        minLevel: 48,
+        maxLevel: 52,
+        chance: 0.3
       },
       {
-        "pokemonId": 414,
-        "minLevel": 48,
-        "maxLevel": 52,
-        "chance": 0.25
+        pokemonId: 414,
+        minLevel: 48,
+        maxLevel: 52,
+        chance: 0.25
       },
       {
-        "pokemonId": 51,
-        "minLevel": 48,
-        "maxLevel": 52,
-        "chance": 0.2
+        pokemonId: 51,
+        minLevel: 48,
+        maxLevel: 52,
+        chance: 0.2
       },
       {
-        "pokemonId": 105,
-        "minLevel": 48,
-        "maxLevel": 52,
-        "chance": 0.15
+        pokemonId: 105,
+        minLevel: 48,
+        maxLevel: 52,
+        chance: 0.15
       },
       {
-        "pokemonId": 528,
-        "minLevel": 48,
-        "maxLevel": 52,
-        "chance": 0.1
+        pokemonId: 528,
+        minLevel: 48,
+        maxLevel: 52,
+        chance: 0.1
       }
     ]
   },
   {
-    "name": "Lumiose North Boulevard",
-    "spawns": [
+    name: 'Lumiose North Boulevard',
+    spawns: [
       {
-        "pokemonId": 587,
-        "minLevel": 49,
-        "maxLevel": 53,
-        "chance": 0.3
+        pokemonId: 587,
+        minLevel: 49,
+        maxLevel: 53,
+        chance: 0.3
       },
       {
-        "pokemonId": 305,
-        "minLevel": 49,
-        "maxLevel": 53,
-        "chance": 0.25
+        pokemonId: 305,
+        minLevel: 49,
+        maxLevel: 53,
+        chance: 0.25
       },
       {
-        "pokemonId": 313,
-        "minLevel": 49,
-        "maxLevel": 53,
-        "chance": 0.2
+        pokemonId: 313,
+        minLevel: 49,
+        maxLevel: 53,
+        chance: 0.2
       },
       {
-        "pokemonId": 219,
-        "minLevel": 49,
-        "maxLevel": 53,
-        "chance": 0.15
+        pokemonId: 219,
+        minLevel: 49,
+        maxLevel: 53,
+        chance: 0.15
       },
       {
-        "pokemonId": 215,
-        "minLevel": 49,
-        "maxLevel": 53,
-        "chance": 0.1
+        pokemonId: 215,
+        minLevel: 49,
+        maxLevel: 53,
+        chance: 0.1
       }
     ]
   },
   {
-    "name": "Lumiose City Gym",
-    "spawns": []
+    name: 'Lumiose City Gym',
+    spawns: []
   },
   {
-    "name": "Route 14",
-    "spawns": [
+    name: 'Route 14',
+    spawns: [
       {
-        "pokemonId": 451,
-        "minLevel": 1,
-        "maxLevel": 1,
-        "chance": 0
+        pokemonId: 451,
+        minLevel: 1,
+        maxLevel: 1,
+        chance: 0
       },
       {
-        "pokemonId": 117,
-        "minLevel": 52,
-        "maxLevel": 57,
-        "chance": 0.3
+        pokemonId: 117,
+        minLevel: 52,
+        maxLevel: 57,
+        chance: 0.2857
       },
       {
-        "pokemonId": 479,
-        "minLevel": 52,
-        "maxLevel": 57,
-        "chance": 0.25
+        pokemonId: 479,
+        minLevel: 52,
+        maxLevel: 57,
+        chance: 0.2381
       },
       {
-        "pokemonId": 352,
-        "minLevel": 52,
-        "maxLevel": 57,
-        "chance": 0.2
+        pokemonId: 352,
+        minLevel: 52,
+        maxLevel: 57,
+        chance: 0.1905
       },
       {
-        "pokemonId": 211,
-        "minLevel": 52,
-        "maxLevel": 57,
-        "chance": 0.15
+        pokemonId: 211,
+        minLevel: 52,
+        maxLevel: 57,
+        chance: 0.1429
       },
       {
-        "pokemonId": 531,
-        "minLevel": 52,
-        "maxLevel": 57,
-        "chance": 0.1
+        pokemonId: 531,
+        minLevel: 52,
+        maxLevel: 57,
+        chance: 0.0952
+      },
+      {
+        pokemonId: 40,
+        minLevel: 1,
+        maxLevel: 1,
+        chance: 0.0476
       }
     ]
   },
   {
-    "name": "Laverre Mushroom Woods",
-    "spawns": [
+    name: 'Laverre Mushroom Woods',
+    spawns: [
       {
-        "pokemonId": 510,
-        "minLevel": 54,
-        "maxLevel": 59,
-        "chance": 0.3
+        pokemonId: 510,
+        minLevel: 54,
+        maxLevel: 59,
+        chance: 0.3
       },
       {
-        "pokemonId": 680,
-        "minLevel": 54,
-        "maxLevel": 59,
-        "chance": 0.25
+        pokemonId: 680,
+        minLevel: 54,
+        maxLevel: 59,
+        chance: 0.25
       },
       {
-        "pokemonId": 28,
-        "minLevel": 54,
-        "maxLevel": 59,
-        "chance": 0.2
+        pokemonId: 28,
+        minLevel: 54,
+        maxLevel: 59,
+        chance: 0.2
       },
       {
-        "pokemonId": 210,
-        "minLevel": 54,
-        "maxLevel": 59,
-        "chance": 0.15
+        pokemonId: 210,
+        minLevel: 54,
+        maxLevel: 59,
+        chance: 0.15
       },
       {
-        "pokemonId": 221,
-        "minLevel": 54,
-        "maxLevel": 59,
-        "chance": 0.1
+        pokemonId: 221,
+        minLevel: 54,
+        maxLevel: 59,
+        chance: 0.1
       }
     ]
   },
   {
-    "name": "Laverre City Gym",
-    "spawns": []
+    name: 'Laverre City Gym',
+    spawns: []
   },
   {
-    "name": "Route 15",
-    "spawns": [
+    name: 'Route 15',
+    spawns: [
+      {
+        pokemonId: 124,
+        minLevel: 57,
+        maxLevel: 62,
+        chance: 0.2727
+      },
+      {
+        pokemonId: 358,
+        minLevel: 57,
+        maxLevel: 62,
+        chance: 0.2273
+      },
       {
-        "pokemonId": 124,
-        "minLevel": 57,
-        "maxLevel": 62,
-        "chance": 0.3
+        pokemonId: 277,
+        minLevel: 57,
+        maxLevel: 62,
+        chance: 0.1818
       },
       {
-        "pokemonId": 358,
-        "minLevel": 57,
-        "maxLevel": 62,
-        "chance": 0.25
+        pokemonId: 42,
+        minLevel: 57,
+        maxLevel: 62,
+        chance: 0.1364
       },
       {
-        "pokemonId": 277,
-        "minLevel": 57,
-        "maxLevel": 62,
-        "chance": 0.2
+        pokemonId: 354,
+        minLevel: 57,
+        maxLevel: 62,
+        chance: 0.0909
       },
       {
-        "pokemonId": 42,
-        "minLevel": 57,
-        "maxLevel": 62,
-        "chance": 0.15
+        pokemonId: 505,
+        minLevel: 57,
+        maxLevel: 62,
+        chance: 0.0455
       },
       {
-        "pokemonId": 354,
-        "minLevel": 57,
-        "maxLevel": 62,
-        "chance": 0.1
+        pokemonId: 262,
+        minLevel: 57,
+        maxLevel: 62,
+        chance: 0.0455
       }
     ]
   },
   {
-    "name": "Dendemille Windmill Farm",
-    "spawns": [
+    name: 'Dendemille Windmill Farm',
+    spawns: [
       {
-        "pokemonId": 337,
-        "minLevel": 58,
-        "maxLevel": 63,
-        "chance": 0.3
+        pokemonId: 337,
+        minLevel: 58,
+        maxLevel: 63,
+        chance: 0.3
       },
       {
-        "pokemonId": 171,
-        "minLevel": 58,
-        "maxLevel": 63,
-        "chance": 0.25
+        pokemonId: 171,
+        minLevel: 58,
+        maxLevel: 63,
+        chance: 0.25
       },
       {
-        "pokemonId": 189,
-        "minLevel": 58,
-        "maxLevel": 63,
-        "chance": 0.2
+        pokemonId: 189,
+        minLevel: 58,
+        maxLevel: 63,
+        chance: 0.2
       },
       {
-        "pokemonId": 338,
-        "minLevel": 58,
-        "maxLevel": 63,
-        "chance": 0.15
+        pokemonId: 338,
+        minLevel: 58,
+        maxLevel: 63,
+        chance: 0.15
       },
       {
-        "pokemonId": 683,
-        "minLevel": 58,
-        "maxLevel": 63,
-        "chance": 0.1
+        pokemonId: 683,
+        minLevel: 58,
+        maxLevel: 63,
+        chance: 0.1
       }
     ]
   },
   {
-    "name": "Frost Cavern",
-    "spawns": [
+    name: 'Frost Cavern',
+    spawns: [
+      {
+        pokemonId: 317,
+        minLevel: 60,
+        maxLevel: 66,
+        chance: 0.2857
+      },
       {
-        "pokemonId": 317,
-        "minLevel": 60,
-        "maxLevel": 66,
-        "chance": 0.3
+        pokemonId: 342,
+        minLevel: 60,
+        maxLevel: 66,
+        chance: 0.2381
       },
       {
-        "pokemonId": 342,
-        "minLevel": 60,
-        "maxLevel": 66,
-        "chance": 0.25
+        pokemonId: 340,
+        minLevel: 60,
+        maxLevel: 66,
+        chance: 0.1905
       },
       {
-        "pokemonId": 340,
-        "minLevel": 60,
-        "maxLevel": 66,
-        "chance": 0.2
+        pokemonId: 326,
+        minLevel: 60,
+        maxLevel: 66,
+        chance: 0.1429
       },
       {
-        "pokemonId": 326,
-        "minLevel": 60,
-        "maxLevel": 66,
-        "chance": 0.15
+        pokemonId: 707,
+        minLevel: 60,
+        maxLevel: 66,
+        chance: 0.0952
       },
       {
-        "pokemonId": 707,
-        "minLevel": 60,
-        "maxLevel": 66,
-        "chance": 0.1
+        pokemonId: 614,
+        minLevel: 60,
+        maxLevel: 66,
+        chance: 0.0476
       }
     ]
   },
   {
-    "name": "Anistar Sundial Terrace",
-    "spawns": [
+    name: 'Anistar Sundial Terrace',
+    spawns: [
       {
-        "pokemonId": 324,
-        "minLevel": 61,
-        "maxLevel": 67,
-        "chance": 0.3
+        pokemonId: 324,
+        minLevel: 61,
+        maxLevel: 67,
+        chance: 0.3
       },
       {
-        "pokemonId": 618,
-        "minLevel": 61,
-        "maxLevel": 67,
-        "chance": 0.25
+        pokemonId: 618,
+        minLevel: 61,
+        maxLevel: 67,
+        chance: 0.25
       },
       {
-        "pokemonId": 676,
-        "minLevel": 61,
-        "maxLevel": 67,
-        "chance": 0.2
+        pokemonId: 676,
+        minLevel: 61,
+        maxLevel: 67,
+        chance: 0.2
       },
       {
-        "pokemonId": 581,
-        "minLevel": 61,
-        "maxLevel": 67,
-        "chance": 0.15
+        pokemonId: 581,
+        minLevel: 61,
+        maxLevel: 67,
+        chance: 0.15
       },
       {
-        "pokemonId": 297,
-        "minLevel": 61,
-        "maxLevel": 67,
-        "chance": 0.1
+        pokemonId: 297,
+        minLevel: 61,
+        maxLevel: 67,
+        chance: 0.1
       }
     ]
   },
   {
-    "name": "Anistar City Gym",
-    "spawns": []
+    name: 'Anistar City Gym',
+    spawns: []
   },
   {
-    "name": "Route 17",
-    "spawns": [
+    name: 'Route 17',
+    spawns: [
+      {
+        pokemonId: 225,
+        minLevel: 1,
+        maxLevel: 1,
+        chance: 0
+      },
       {
-        "pokemonId": 225,
-        "minLevel": 1,
-        "maxLevel": 1,
-        "chance": 0
+        pokemonId: 594,
+        minLevel: 1,
+        maxLevel: 1,
+        chance: 0
       },
       {
-        "pokemonId": 594,
-        "minLevel": 1,
-        "maxLevel": 1,
-        "chance": 0
+        pokemonId: 685,
+        minLevel: 64,
+        maxLevel: 70,
+        chance: 0.2857
       },
       {
-        "pokemonId": 685,
-        "minLevel": 64,
-        "maxLevel": 70,
-        "chance": 0.3
+        pokemonId: 224,
+        minLevel: 64,
+        maxLevel: 70,
+        chance: 0.2381
       },
       {
-        "pokemonId": 224,
-        "minLevel": 64,
-        "maxLevel": 70,
-        "chance": 0.25
+        pokemonId: 687,
+        minLevel: 64,
+        maxLevel: 70,
+        chance: 0.1905
       },
       {
-        "pokemonId": 687,
-        "minLevel": 64,
-        "maxLevel": 70,
-        "chance": 0.2
+        pokemonId: 623,
+        minLevel: 64,
+        maxLevel: 70,
+        chance: 0.1429
       },
       {
-        "pokemonId": 623,
-        "minLevel": 64,
-        "maxLevel": 70,
-        "chance": 0.15
+        pokemonId: 632,
+        minLevel: 64,
+        maxLevel: 70,
+        chance: 0.0952
       },
       {
-        "pokemonId": 632,
-        "minLevel": 64,
-        "maxLevel": 70,
-        "chance": 0.1
+        pokemonId: 460,
+        minLevel: 1,
+        maxLevel: 1,
+        chance: 0.0476
       }
     ]
   },
   {
-    "name": "Couriway Cascades",
-    "spawns": [
+    name: 'Couriway Cascades',
+    spawns: [
       {
-        "pokemonId": 631,
-        "minLevel": 66,
-        "maxLevel": 72,
-        "chance": 0.3
+        pokemonId: 631,
+        minLevel: 66,
+        maxLevel: 72,
+        chance: 0.2857
       },
       {
-        "pokemonId": 545,
-        "minLevel": 66,
-        "maxLevel": 72,
-        "chance": 0.25
+        pokemonId: 545,
+        minLevel: 66,
+        maxLevel: 72,
+        chance: 0.2381
       },
       {
-        "pokemonId": 367,
-        "minLevel": 66,
-        "maxLevel": 72,
-        "chance": 0.2
+        pokemonId: 367,
+        minLevel: 66,
+        maxLevel: 72,
+        chance: 0.1905
       },
       {
-        "pokemonId": 226,
-        "minLevel": 66,
-        "maxLevel": 72,
-        "chance": 0.15
+        pokemonId: 226,
+        minLevel: 66,
+        maxLevel: 72,
+        chance: 0.1429
       },
       {
-        "pokemonId": 26,
-        "minLevel": 66,
-        "maxLevel": 72,
-        "chance": 0.1
+        pokemonId: 26,
+        minLevel: 66,
+        maxLevel: 72,
+        chance: 0.0952
+      },
+      {
+        pokemonId: 419,
+        minLevel: 66,
+        maxLevel: 72,
+        chance: 0.0476
       }
     ]
   },
   {
-    "name": "Route 18",
-    "spawns": [
+    name: 'Route 18',
+    spawns: [
       {
-        "pokemonId": 441,
-        "minLevel": 1,
-        "maxLevel": 1,
-        "chance": 0
+        pokemonId: 441,
+        minLevel: 1,
+        maxLevel: 1,
+        chance: 0
       },
       {
-        "pokemonId": 558,
-        "minLevel": 67,
-        "maxLevel": 73,
-        "chance": 0.3
+        pokemonId: 558,
+        minLevel: 67,
+        maxLevel: 73,
+        chance: 0.3
       },
       {
-        "pokemonId": 368,
-        "minLevel": 67,
-        "maxLevel": 73,
-        "chance": 0.25
+        pokemonId: 368,
+        minLevel: 67,
+        maxLevel: 73,
+        chance: 0.25
       },
       {
-        "pokemonId": 112,
-        "minLevel": 67,
-        "maxLevel": 73,
-        "chance": 0.2
+        pokemonId: 112,
+        minLevel: 67,
+        maxLevel: 73,
+        chance: 0.2
       },
       {
-        "pokemonId": 398,
-        "minLevel": 67,
-        "maxLevel": 73,
-        "chance": 0.15
+        pokemonId: 398,
+        minLevel: 67,
+        maxLevel: 73,
+        chance: 0.15
       },
       {
-        "pokemonId": 369,
-        "minLevel": 67,
-        "maxLevel": 73,
-        "chance": 0.1
+        pokemonId: 369,
+        minLevel: 67,
+        maxLevel: 73,
+        chance: 0.1
       }
     ]
   },
   {
-    "name": "Route 19 Marshlands",
-    "spawns": [
+    name: 'Route 19 Marshlands',
+    spawns: [
+      {
+        pokemonId: 80,
+        minLevel: 69,
+        maxLevel: 75,
+        chance: 0.24
+      },
+      {
+        pokemonId: 45,
+        minLevel: 69,
+        maxLevel: 75,
+        chance: 0.2
+      },
+      {
+        pokemonId: 625,
+        minLevel: 69,
+        maxLevel: 75,
+        chance: 0.16
+      },
+      {
+        pokemonId: 115,
+        minLevel: 69,
+        maxLevel: 75,
+        chance: 0.12
+      },
       {
-        "pokemonId": 80,
-        "minLevel": 69,
-        "maxLevel": 75,
-        "chance": 0.3
+        pokemonId: 101,
+        minLevel: 69,
+        maxLevel: 75,
+        chance: 0.08
       },
       {
-        "pokemonId": 45,
-        "minLevel": 69,
-        "maxLevel": 75,
-        "chance": 0.25
+        pokemonId: 71,
+        minLevel: 69,
+        maxLevel: 75,
+        chance: 0.04
       },
       {
-        "pokemonId": 625,
-        "minLevel": 69,
-        "maxLevel": 75,
-        "chance": 0.2
+        pokemonId: 24,
+        minLevel: 69,
+        maxLevel: 75,
+        chance: 0.04
       },
       {
-        "pokemonId": 115,
-        "minLevel": 69,
-        "maxLevel": 75,
-        "chance": 0.15
+        pokemonId: 186,
+        minLevel: 69,
+        maxLevel: 75,
+        chance: 0.04
       },
       {
-        "pokemonId": 101,
-        "minLevel": 69,
-        "maxLevel": 75,
-        "chance": 0.1
+        pokemonId: 705,
+        minLevel: 69,
+        maxLevel: 75,
+        chance: 0.04
+      },
+      {
+        pokemonId: 452,
+        minLevel: 69,
+        maxLevel: 75,
+        chance: 0.04
       }
     ]
   },
   {
-    "name": "Vallée Grande Marshlands",
-    "spawns": [
+    name: 'Vallée Grande Marshlands',
+    spawns: [
       {
-        "pokemonId": 561,
-        "minLevel": 70,
-        "maxLevel": 77,
-        "chance": 0.3
+        pokemonId: 561,
+        minLevel: 70,
+        maxLevel: 77,
+        chance: 0.3
       },
       {
-        "pokemonId": 295,
-        "minLevel": 70,
-        "maxLevel": 77,
-        "chance": 0.25
+        pokemonId: 295,
+        minLevel: 70,
+        maxLevel: 77,
+        chance: 0.25
       },
       {
-        "pokemonId": 128,
-        "minLevel": 70,
-        "maxLevel": 77,
-        "chance": 0.2
+        pokemonId: 128,
+        minLevel: 70,
+        maxLevel: 77,
+        chance: 0.2
       },
       {
-        "pokemonId": 454,
-        "minLevel": 70,
-        "maxLevel": 77,
-        "chance": 0.15
+        pokemonId: 454,
+        minLevel: 70,
+        maxLevel: 77,
+        chance: 0.15
       },
       {
-        "pokemonId": 334,
-        "minLevel": 70,
-        "maxLevel": 77,
-        "chance": 0.1
+        pokemonId: 334,
+        minLevel: 70,
+        maxLevel: 77,
+        chance: 0.1
       }
     ]
   },
   {
-    "name": "Snowbelle Frostwoods",
-    "spawns": [
+    name: 'Snowbelle Frostwoods',
+    spawns: [
       {
-        "pokemonId": 576,
-        "minLevel": 72,
-        "maxLevel": 79,
-        "chance": 0.3
+        pokemonId: 576,
+        minLevel: 72,
+        maxLevel: 79,
+        chance: 0.3
       },
       {
-        "pokemonId": 579,
-        "minLevel": 72,
-        "maxLevel": 79,
-        "chance": 0.25
+        pokemonId: 579,
+        minLevel: 72,
+        maxLevel: 79,
+        chance: 0.25
       },
       {
-        "pokemonId": 691,
-        "minLevel": 72,
-        "maxLevel": 79,
-        "chance": 0.2
+        pokemonId: 691,
+        minLevel: 72,
+        maxLevel: 79,
+        chance: 0.2
       },
       {
-        "pokemonId": 711,
-        "minLevel": 72,
-        "maxLevel": 79,
-        "chance": 0.15
+        pokemonId: 711,
+        minLevel: 72,
+        maxLevel: 79,
+        chance: 0.15
       },
       {
-        "pokemonId": 589,
-        "minLevel": 72,
-        "maxLevel": 79,
-        "chance": 0.1
+        pokemonId: 589,
+        minLevel: 72,
+        maxLevel: 79,
+        chance: 0.1
       }
     ]
   },
   {
-    "name": "Route 20",
-    "spawns": [
+    name: 'Route 20',
+    spawns: [
+      {
+        pokemonId: 693,
+        minLevel: 73,
+        maxLevel: 80,
+        chance: 0.25
+      },
+      {
+        pokemonId: 701,
+        minLevel: 73,
+        maxLevel: 80,
+        chance: 0.2083
+      },
+      {
+        pokemonId: 703,
+        minLevel: 73,
+        maxLevel: 80,
+        chance: 0.1667
+      },
+      {
+        pokemonId: 127,
+        minLevel: 73,
+        maxLevel: 80,
+        chance: 0.125
+      },
       {
-        "pokemonId": 693,
-        "minLevel": 73,
-        "maxLevel": 80,
-        "chance": 0.3
+        pokemonId: 689,
+        minLevel: 73,
+        maxLevel: 80,
+        chance: 0.0833
       },
       {
-        "pokemonId": 701,
-        "minLevel": 73,
-        "maxLevel": 80,
-        "chance": 0.25
+        pokemonId: 185,
+        minLevel: 73,
+        maxLevel: 80,
+        chance: 0.0417
       },
       {
-        "pokemonId": 703,
-        "minLevel": 73,
-        "maxLevel": 80,
-        "chance": 0.2
+        pokemonId: 39,
+        minLevel: 73,
+        maxLevel: 80,
+        chance: 0.0417
       },
       {
-        "pokemonId": 127,
-        "minLevel": 73,
-        "maxLevel": 80,
-        "chance": 0.15
+        pokemonId: 709,
+        minLevel: 73,
+        maxLevel: 80,
+        chance: 0.0417
       },
       {
-        "pokemonId": 689,
-        "minLevel": 73,
-        "maxLevel": 80,
-        "chance": 0.1
+        pokemonId: 591,
+        minLevel: 73,
+        maxLevel: 80,
+        chance: 0.0417
       }
     ]
   },
   {
-    "name": "Hidden Village Glade",
-    "spawns": [
+    name: 'Hidden Village Glade',
+    spawns: [
       {
-        "pokemonId": 123,
-        "minLevel": 75,
-        "maxLevel": 82,
-        "chance": 0.3
+        pokemonId: 123,
+        minLevel: 75,
+        maxLevel: 82,
+        chance: 0.3
       },
       {
-        "pokemonId": 214,
-        "minLevel": 75,
-        "maxLevel": 82,
-        "chance": 0.25
+        pokemonId: 214,
+        minLevel: 75,
+        maxLevel: 82,
+        chance: 0.25
       },
       {
-        "pokemonId": 681,
-        "minLevel": 75,
-        "maxLevel": 82,
-        "chance": 0.2
+        pokemonId: 681,
+        minLevel: 75,
+        maxLevel: 82,
+        chance: 0.2
       },
       {
-        "pokemonId": 31,
-        "minLevel": 75,
-        "maxLevel": 82,
-        "chance": 0.15
+        pokemonId: 31,
+        minLevel: 75,
+        maxLevel: 82,
+        chance: 0.15
       },
       {
-        "pokemonId": 68,
-        "minLevel": 75,
-        "maxLevel": 82,
-        "chance": 0.1
+        pokemonId: 68,
+        minLevel: 75,
+        maxLevel: 82,
+        chance: 0.1
       }
     ]
   },
   {
-    "name": "Snowbelle City Gym",
-    "spawns": []
+    name: 'Snowbelle City Gym',
+    spawns: []
   },
   {
-    "name": "Route 21",
-    "spawns": [
+    name: 'Route 21',
+    spawns: [
       {
-        "pokemonId": 430,
-        "minLevel": 78,
-        "maxLevel": 85,
-        "chance": 0.3
+        pokemonId: 430,
+        minLevel: 78,
+        maxLevel: 85,
+        chance: 0.3
       },
       {
-        "pokemonId": 34,
-        "minLevel": 78,
-        "maxLevel": 85,
-        "chance": 0.25
+        pokemonId: 34,
+        minLevel: 78,
+        maxLevel: 85,
+        chance: 0.25
       },
       {
-        "pokemonId": 213,
-        "minLevel": 78,
-        "maxLevel": 85,
-        "chance": 0.2
+        pokemonId: 213,
+        minLevel: 78,
+        maxLevel: 85,
+        chance: 0.2
       },
       {
-        "pokemonId": 534,
-        "minLevel": 78,
-        "maxLevel": 85,
-        "chance": 0.15
+        pokemonId: 534,
+        minLevel: 78,
+        maxLevel: 85,
+        chance: 0.15
       },
       {
-        "pokemonId": 668,
-        "minLevel": 78,
-        "maxLevel": 85,
-        "chance": 0.1
+        pokemonId: 668,
+        minLevel: 78,
+        maxLevel: 85,
+        chance: 0.1
       }
     ]
   },
   {
-    "name": "Victory Road",
-    "spawns": [
+    name: 'Victory Road',
+    spawns: [
       {
-        "pokemonId": 302,
-        "minLevel": 1,
-        "maxLevel": 1,
-        "chance": 0
+        pokemonId: 302,
+        minLevel: 1,
+        maxLevel: 1,
+        chance: 0
       },
       {
-        "pokemonId": 303,
-        "minLevel": 1,
-        "maxLevel": 1,
-        "chance": 0
+        pokemonId: 303,
+        minLevel: 1,
+        maxLevel: 1,
+        chance: 0
       },
       {
-        "pokemonId": 62,
-        "minLevel": 80,
-        "maxLevel": 88,
-        "chance": 0.3
+        pokemonId: 62,
+        minLevel: 80,
+        maxLevel: 88,
+        chance: 0.2727
       },
       {
-        "pokemonId": 208,
-        "minLevel": 80,
-        "maxLevel": 88,
-        "chance": 0.25
+        pokemonId: 208,
+        minLevel: 80,
+        maxLevel: 88,
+        chance: 0.2273
       },
       {
-        "pokemonId": 571,
-        "minLevel": 80,
-        "maxLevel": 88,
-        "chance": 0.2
+        pokemonId: 571,
+        minLevel: 80,
+        maxLevel: 88,
+        chance: 0.1818
       },
       {
-        "pokemonId": 472,
-        "minLevel": 80,
-        "maxLevel": 88,
-        "chance": 0.15
+        pokemonId: 472,
+        minLevel: 80,
+        maxLevel: 88,
+        chance: 0.1364
       },
       {
-        "pokemonId": 461,
-        "minLevel": 80,
-        "maxLevel": 88,
-        "chance": 0.1
+        pokemonId: 461,
+        minLevel: 80,
+        maxLevel: 88,
+        chance: 0.0909
+      },
+      {
+        pokemonId: 634,
+        minLevel: 1,
+        maxLevel: 1,
+        chance: 0.0455
+      },
+      {
+        pokemonId: 22,
+        minLevel: 1,
+        maxLevel: 1,
+        chance: 0.0455
       }
     ]
   },
   {
-    "name": "Route 22",
-    "spawns": [
+    name: 'Route 22',
+    spawns: [
+      {
+        pokemonId: 50,
+        minLevel: 21,
+        maxLevel: 24,
+        chance: 0.2727
+      },
+      {
+        pokemonId: 165,
+        minLevel: 21,
+        maxLevel: 24,
+        chance: 0.2273
+      },
       {
-        "pokemonId": 50,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "chance": 0.3
+        pokemonId: 290,
+        minLevel: 21,
+        maxLevel: 24,
+        chance: 0.1364
       },
       {
-        "pokemonId": 165,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "chance": 0.25
+        pokemonId: 283,
+        minLevel: 21,
+        maxLevel: 24,
+        chance: 0.1364
       },
       {
-        "pokemonId": 290,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "chance": 0.15
+        pokemonId: 276,
+        minLevel: 21,
+        maxLevel: 24,
+        chance: 0.0909
       },
       {
-        "pokemonId": 283,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "chance": 0.15
+        pokemonId: 278,
+        minLevel: 21,
+        maxLevel: 24,
+        chance: 0.0455
       },
       {
-        "pokemonId": 276,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "chance": 0.1
+        pokemonId: 400,
+        minLevel: 21,
+        maxLevel: 24,
+        chance: 0.0455
       },
       {
-        "pokemonId": 278,
-        "minLevel": 21,
-        "maxLevel": 24,
-        "chance": 0.05
+        pokemonId: 660,
+        minLevel: 21,
+        maxLevel: 24,
+        chance: 0.0455
       }
     ]
   },
   {
-    "name": "Parfum Palace Gardens",
-    "spawns": [
+    name: 'Parfum Palace Gardens',
+    spawns: [
+      {
+        pokemonId: 443,
+        minLevel: 34,
+        maxLevel: 37,
+        chance: 0.2727
+      },
       {
-        "pokemonId": 443,
-        "minLevel": 34,
-        "maxLevel": 37,
-        "chance": 0.3
+        pokemonId: 122,
+        minLevel: 34,
+        maxLevel: 37,
+        chance: 0.2273
       },
       {
-        "pokemonId": 122,
-        "minLevel": 34,
-        "maxLevel": 37,
-        "chance": 0.25
+        pokemonId: 209,
+        minLevel: 34,
+        maxLevel: 37,
+        chance: 0.1364
       },
       {
-        "pokemonId": 209,
-        "minLevel": 34,
-        "maxLevel": 37,
-        "chance": 0.15
+        pokemonId: 27,
+        minLevel: 34,
+        maxLevel: 37,
+        chance: 0.1364
       },
       {
-        "pokemonId": 27,
-        "minLevel": 34,
-        "maxLevel": 37,
-        "chance": 0.15
+        pokemonId: 29,
+        minLevel: 34,
+        maxLevel: 37,
+        chance: 0.0909
       },
       {
-        "pokemonId": 29,
-        "minLevel": 34,
-        "maxLevel": 37,
-        "chance": 0.1
+        pokemonId: 246,
+        minLevel: 34,
+        maxLevel: 37,
+        chance: 0.0455
       },
       {
-        "pokemonId": 246,
-        "minLevel": 34,
-        "maxLevel": 37,
-        "chance": 0.05
+        pokemonId: 119,
+        minLevel: 34,
+        maxLevel: 37,
+        chance: 0.0455
+      },
+      {
+        pokemonId: 130,
+        minLevel: 34,
+        maxLevel: 37,
+        chance: 0.0455
       }
     ]
   },
   {
-    "name": "Ambrette Reef",
-    "spawns": [
+    name: 'Ambrette Reef',
+    spawns: [
       {
-        "pokemonId": 90,
-        "minLevel": 47,
-        "maxLevel": 51,
-        "chance": 0.3
+        pokemonId: 90,
+        minLevel: 47,
+        maxLevel: 51,
+        chance: 0.3
       },
       {
-        "pokemonId": 318,
-        "minLevel": 47,
-        "maxLevel": 51,
-        "chance": 0.25
+        pokemonId: 318,
+        minLevel: 47,
+        maxLevel: 51,
+        chance: 0.25
       },
       {
-        "pokemonId": 688,
-        "minLevel": 47,
-        "maxLevel": 51,
-        "chance": 0.15
+        pokemonId: 688,
+        minLevel: 47,
+        maxLevel: 51,
+        chance: 0.15
       },
       {
-        "pokemonId": 341,
-        "minLevel": 47,
-        "maxLevel": 51,
-        "chance": 0.15
+        pokemonId: 341,
+        minLevel: 47,
+        maxLevel: 51,
+        chance: 0.15
       },
       {
-        "pokemonId": 708,
-        "minLevel": 47,
-        "maxLevel": 51,
-        "chance": 0.1
+        pokemonId: 708,
+        minLevel: 47,
+        maxLevel: 51,
+        chance: 0.1
       },
       {
-        "pokemonId": 63,
-        "minLevel": 47,
-        "maxLevel": 51,
-        "chance": 0.05
+        pokemonId: 63,
+        minLevel: 47,
+        maxLevel: 51,
+        chance: 0.05
       }
     ]
   },
   {
-    "name": "Cyllage Tidepools",
-    "spawns": [
+    name: 'Cyllage Tidepools',
+    spawns: [
       {
-        "pokemonId": 692,
-        "minLevel": 60,
-        "maxLevel": 66,
-        "chance": 0.3
+        pokemonId: 692,
+        minLevel: 60,
+        maxLevel: 66,
+        chance: 0.3
       },
       {
-        "pokemonId": 418,
-        "minLevel": 60,
-        "maxLevel": 66,
-        "chance": 0.25
+        pokemonId: 418,
+        minLevel: 60,
+        maxLevel: 66,
+        chance: 0.25
       },
       {
-        "pokemonId": 304,
-        "minLevel": 60,
-        "maxLevel": 66,
-        "chance": 0.15
+        pokemonId: 304,
+        minLevel: 60,
+        maxLevel: 66,
+        chance: 0.15
       },
       {
-        "pokemonId": 370,
-        "minLevel": 60,
-        "maxLevel": 66,
-        "chance": 0.15
+        pokemonId: 370,
+        minLevel: 60,
+        maxLevel: 66,
+        chance: 0.15
       },
       {
-        "pokemonId": 570,
-        "minLevel": 60,
-        "maxLevel": 66,
-        "chance": 0.1
+        pokemonId: 570,
+        minLevel: 60,
+        maxLevel: 66,
+        chance: 0.1
       },
       {
-        "pokemonId": 459,
-        "minLevel": 60,
-        "maxLevel": 66,
-        "chance": 0.05
+        pokemonId: 459,
+        minLevel: 60,
+        maxLevel: 66,
+        chance: 0.05
       }
     ]
   },
   {
-    "name": "Tower of Mastery",
-    "spawns": [
+    name: 'Tower of Mastery',
+    spawns: [
       {
-        "pokemonId": 662,
-        "minLevel": 73,
-        "maxLevel": 80,
-        "chance": 0.3
+        pokemonId: 662,
+        minLevel: 73,
+        maxLevel: 80,
+        chance: 0.3
       },
       {
-        "pokemonId": 61,
-        "minLevel": 73,
-        "maxLevel": 80,
-        "chance": 0.25
+        pokemonId: 61,
+        minLevel: 73,
+        maxLevel: 80,
+        chance: 0.25
       },
       {
-        "pokemonId": 95,
-        "minLevel": 73,
-        "maxLevel": 80,
-        "chance": 0.15
+        pokemonId: 95,
+        minLevel: 73,
+        maxLevel: 80,
+        chance: 0.15
       },
       {
-        "pokemonId": 108,
-        "minLevel": 73,
-        "maxLevel": 80,
-        "chance": 0.15
+        pokemonId: 108,
+        minLevel: 73,
+        maxLevel: 80,
+        chance: 0.15
       },
       {
-        "pokemonId": 525,
-        "minLevel": 73,
-        "maxLevel": 80,
-        "chance": 0.1
+        pokemonId: 525,
+        minLevel: 73,
+        maxLevel: 80,
+        chance: 0.1
       },
       {
-        "pokemonId": 193,
-        "minLevel": 73,
-        "maxLevel": 80,
-        "chance": 0.05
+        pokemonId: 193,
+        minLevel: 73,
+        maxLevel: 80,
+        chance: 0.05
       }
     ]
   },
   {
-    "name": "Lost Hotel",
-    "spawns": [
+    name: 'Lost Hotel',
+    spawns: [
       {
-        "pokemonId": 291,
-        "minLevel": 86,
-        "maxLevel": 94,
-        "chance": 0.3
+        pokemonId: 335,
+        minLevel: 86,
+        maxLevel: 94,
+        chance: 0.3571
       },
       {
-        "pokemonId": 335,
-        "minLevel": 86,
-        "maxLevel": 94,
-        "chance": 0.25
+        pokemonId: 336,
+        minLevel: 86,
+        maxLevel: 94,
+        chance: 0.2857
       },
       {
-        "pokemonId": 336,
-        "minLevel": 86,
-        "maxLevel": 94,
-        "chance": 0.2
+        pokemonId: 319,
+        minLevel: 86,
+        maxLevel: 94,
+        chance: 0.2143
       },
       {
-        "pokemonId": 319,
-        "minLevel": 86,
-        "maxLevel": 94,
-        "chance": 0.15
-      },
-      {
-        "pokemonId": 550,
-        "minLevel": 86,
-        "maxLevel": 94,
-        "chance": 0.1
+        pokemonId: 550,
+        minLevel: 86,
+        maxLevel: 94,
+        chance: 0.1429
       }
     ]
   },
   {
-    "name": "Route 16",
-    "spawns": [
+    name: 'Route 16',
+    spawns: [
+      {
+        pokemonId: 538,
+        minLevel: 100,
+        maxLevel: 105,
+        chance: 0.2857
+      },
       {
-        "pokemonId": 538,
-        "minLevel": 100,
-        "maxLevel": 105,
-        "chance": 0.3
+        pokemonId: 82,
+        minLevel: 100,
+        maxLevel: 105,
+        chance: 0.2381
       },
       {
-        "pokemonId": 82,
-        "minLevel": 100,
-        "maxLevel": 105,
-        "chance": 0.25
+        pokemonId: 227,
+        minLevel: 100,
+        maxLevel: 105,
+        chance: 0.1905
       },
       {
-        "pokemonId": 227,
-        "minLevel": 100,
-        "maxLevel": 105,
-        "chance": 0.2
+        pokemonId: 539,
+        minLevel: 100,
+        maxLevel: 105,
+        chance: 0.1429
       },
       {
-        "pokemonId": 539,
-        "minLevel": 100,
-        "maxLevel": 105,
-        "chance": 0.15
+        pokemonId: 359,
+        minLevel: 100,
+        maxLevel: 105,
+        chance: 0.0952
       },
       {
-        "pokemonId": 359,
-        "minLevel": 100,
-        "maxLevel": 105,
-        "chance": 0.1
+        pokemonId: 70,
+        minLevel: 100,
+        maxLevel: 105,
+        chance: 0.0476
       }
     ]
   },
   {
-    "name": "Path to Team Flare Secret HQ",
-    "spawns": [
+    name: 'Path to Team Flare Secret HQ',
+    spawns: [
       {
-        "pokemonId": 124,
-        "minLevel": 69,
-        "maxLevel": 75,
-        "chance": 0.3
+        pokemonId: 124,
+        minLevel: 69,
+        maxLevel: 75,
+        chance: 0.3
       },
       {
-        "pokemonId": 717,
-        "minLevel": 69,
-        "maxLevel": 75,
-        "chance": 0.25
+        pokemonId: 717,
+        minLevel: 69,
+        maxLevel: 75,
+        chance: 0.25
       },
       {
-        "pokemonId": 102,
-        "minLevel": 69,
-        "maxLevel": 75,
-        "chance": 0.2
+        pokemonId: 102,
+        minLevel: 69,
+        maxLevel: 75,
+        chance: 0.2
       },
       {
-        "pokemonId": 73,
-        "minLevel": 69,
-        "maxLevel": 75,
-        "chance": 0.15
+        pokemonId: 73,
+        minLevel: 69,
+        maxLevel: 75,
+        chance: 0.15
       },
       {
-        "pokemonId": 407,
-        "minLevel": 69,
-        "maxLevel": 75,
-        "chance": 0.1
+        pokemonId: 407,
+        minLevel: 69,
+        maxLevel: 75,
+        chance: 0.1
       }
     ]
   },
   {
-    "name": "Team Flare Secret HQ Gate",
-    "spawns": [
+    name: 'Team Flare Secret HQ Gate',
+    spawns: [
       {
-        "pokemonId": 339,
-        "minLevel": 75,
-        "maxLevel": 82,
-        "chance": 0.3
+        pokemonId: 339,
+        minLevel: 75,
+        maxLevel: 82,
+        chance: 0.3
       },
       {
-        "pokemonId": 316,
-        "minLevel": 75,
-        "maxLevel": 82,
-        "chance": 0.25
+        pokemonId: 316,
+        minLevel: 75,
+        maxLevel: 82,
+        chance: 0.25
       },
       {
-        "pokemonId": 127,
-        "minLevel": 75,
-        "maxLevel": 82,
-        "chance": 0.2
+        pokemonId: 127,
+        minLevel: 75,
+        maxLevel: 82,
+        chance: 0.2
       },
       {
-        "pokemonId": 691,
-        "minLevel": 75,
-        "maxLevel": 82,
-        "chance": 0.15
+        pokemonId: 691,
+        minLevel: 75,
+        maxLevel: 82,
+        chance: 0.15
       },
       {
-        "pokemonId": 195,
-        "minLevel": 75,
-        "maxLevel": 82,
-        "chance": 0.1
+        pokemonId: 195,
+        minLevel: 75,
+        maxLevel: 82,
+        chance: 0.1
       }
     ]
   },
   {
-    "name": "Team Flare Secret HQ Entrance",
-    "spawns": [
+    name: 'Team Flare Secret HQ Entrance',
+    spawns: [
       {
-        "pokemonId": 169,
-        "minLevel": 81,
-        "maxLevel": 89,
-        "chance": 0.3
+        pokemonId: 169,
+        minLevel: 81,
+        maxLevel: 89,
+        chance: 0.3
       },
       {
-        "pokemonId": 464,
-        "minLevel": 81,
-        "maxLevel": 89,
-        "chance": 0.25
+        pokemonId: 464,
+        minLevel: 81,
+        maxLevel: 89,
+        chance: 0.25
       },
       {
-        "pokemonId": 131,
-        "minLevel": 81,
-        "maxLevel": 89,
-        "chance": 0.2
+        pokemonId: 131,
+        minLevel: 81,
+        maxLevel: 89,
+        chance: 0.2
       },
       {
-        "pokemonId": 715,
-        "minLevel": 81,
-        "maxLevel": 89,
-        "chance": 0.15
+        pokemonId: 715,
+        minLevel: 81,
+        maxLevel: 89,
+        chance: 0.15
       },
       {
-        "pokemonId": 612,
-        "minLevel": 81,
-        "maxLevel": 89,
-        "chance": 0.1
+        pokemonId: 612,
+        minLevel: 81,
+        maxLevel: 89,
+        chance: 0.1
       }
     ]
   },
   {
-    "name": "Team Flare Secret HQ Hall",
-    "spawns": [
+    name: 'Team Flare Secret HQ Hall',
+    spawns: [
+      {
+        pokemonId: 373,
+        minLevel: 87,
+        maxLevel: 95,
+        chance: 0.2381
+      },
       {
-        "pokemonId": 373,
-        "minLevel": 87,
-        "maxLevel": 95,
-        "chance": 0.25
+        pokemonId: 248,
+        minLevel: 87,
+        maxLevel: 95,
+        chance: 0.2381
       },
       {
-        "pokemonId": 248,
-        "minLevel": 87,
-        "maxLevel": 95,
-        "chance": 0.25
+        pokemonId: 635,
+        minLevel: 87,
+        maxLevel: 95,
+        chance: 0.2381
       },
       {
-        "pokemonId": 635,
-        "minLevel": 87,
-        "maxLevel": 95,
-        "chance": 0.25
+        pokemonId: 445,
+        minLevel: 87,
+        maxLevel: 95,
+        chance: 0.2381
       },
       {
-        "pokemonId": 445,
-        "minLevel": 87,
-        "maxLevel": 95,
-        "chance": 0.25
+        pokemonId: 706,
+        minLevel: 87,
+        maxLevel: 95,
+        chance: 0.0476
       }
     ]
   },
   {
-    "name": "Terminus Cave (Surface)",
-    "spawns": [
+    name: 'Terminus Cave (Surface)',
+    spawns: [
       {
-        "pokemonId": 621,
-        "minLevel": 93,
-        "maxLevel": 101,
-        "chance": 0.3
+        pokemonId: 621,
+        minLevel: 93,
+        maxLevel: 101,
+        chance: 0.3
       },
       {
-        "pokemonId": 560,
-        "minLevel": 93,
-        "maxLevel": 101,
-        "chance": 0.25
+        pokemonId: 560,
+        minLevel: 93,
+        maxLevel: 101,
+        chance: 0.25
       },
       {
-        "pokemonId": 598,
-        "minLevel": 93,
-        "maxLevel": 101,
-        "chance": 0.2
+        pokemonId: 598,
+        minLevel: 93,
+        maxLevel: 101,
+        chance: 0.2
       },
       {
-        "pokemonId": 241,
-        "minLevel": 93,
-        "maxLevel": 101,
-        "chance": 0.15
+        pokemonId: 241,
+        minLevel: 93,
+        maxLevel: 101,
+        chance: 0.15
       },
       {
-        "pokemonId": 182,
-        "minLevel": 93,
-        "maxLevel": 101,
-        "chance": 0.1
+        pokemonId: 182,
+        minLevel: 93,
+        maxLevel: 101,
+        chance: 0.1
       }
     ]
   },
   {
-    "name": "Pokémon Village",
-    "spawns": [
+    name: 'Pokémon Village',
+    spawns: [
+      {
+        pokemonId: 212,
+        minLevel: 100,
+        maxLevel: 105,
+        chance: 0.2727
+      },
       {
-        "pokemonId": 212,
-        "minLevel": 100,
-        "maxLevel": 105,
-        "chance": 0.3
+        pokemonId: 94,
+        minLevel: 100,
+        maxLevel: 105,
+        chance: 0.2273
       },
       {
-        "pokemonId": 94,
-        "minLevel": 100,
-        "maxLevel": 105,
-        "chance": 0.25
+        pokemonId: 65,
+        minLevel: 100,
+        maxLevel: 105,
+        chance: 0.1818
       },
       {
-        "pokemonId": 65,
-        "minLevel": 100,
-        "maxLevel": 105,
-        "chance": 0.2
+        pokemonId: 321,
+        minLevel: 100,
+        maxLevel: 105,
+        chance: 0.1364
       },
       {
-        "pokemonId": 321,
-        "minLevel": 100,
-        "maxLevel": 105,
-        "chance": 0.15
+        pokemonId: 217,
+        minLevel: 100,
+        maxLevel: 105,
+        chance: 0.0909
       },
       {
-        "pokemonId": 217,
-        "minLevel": 100,
-        "maxLevel": 105,
-        "chance": 0.1
+        pokemonId: 164,
+        minLevel: 100,
+        maxLevel: 105,
+        chance: 0.0455
+      },
+      {
+        pokemonId: 569,
+        minLevel: 100,
+        maxLevel: 105,
+        chance: 0.0455
       }
     ]
   },
   {
-    "name": "Starter Depot",
-    "spawns": [
+    name: 'Starter Depot',
+    spawns: [
       {
-        "pokemonId": 656,
-        "minLevel": 83,
-        "maxLevel": 91,
-        "chance": 0.1111
+        pokemonId: 656,
+        minLevel: 83,
+        maxLevel: 91,
+        chance: 0.1111
       },
       {
-        "pokemonId": 653,
-        "minLevel": 83,
-        "maxLevel": 91,
-        "chance": 0.1111
+        pokemonId: 653,
+        minLevel: 83,
+        maxLevel: 91,
+        chance: 0.1111
       },
       {
-        "pokemonId": 650,
-        "minLevel": 83,
-        "maxLevel": 91,
-        "chance": 0.1111
+        pokemonId: 650,
+        minLevel: 83,
+        maxLevel: 91,
+        chance: 0.1111
       },
       {
-        "pokemonId": 722,
-        "minLevel": 83,
-        "maxLevel": 91,
-        "chance": 0.1111
+        pokemonId: 722,
+        minLevel: 83,
+        maxLevel: 91,
+        chance: 0.1111
       },
       {
-        "pokemonId": 725,
-        "minLevel": 83,
-        "maxLevel": 91,
-        "chance": 0.1111
+        pokemonId: 725,
+        minLevel: 83,
+        maxLevel: 91,
+        chance: 0.1111
       },
       {
-        "pokemonId": 728,
-        "minLevel": 83,
-        "maxLevel": 91,
-        "chance": 0.1111
+        pokemonId: 728,
+        minLevel: 83,
+        maxLevel: 91,
+        chance: 0.1111
       },
       {
-        "pokemonId": 1,
-        "minLevel": 83,
-        "maxLevel": 91,
-        "chance": 0.1111
+        pokemonId: 1,
+        minLevel: 83,
+        maxLevel: 91,
+        chance: 0.1111
       },
       {
-        "pokemonId": 4,
-        "minLevel": 83,
-        "maxLevel": 91,
-        "chance": 0.1111
+        pokemonId: 4,
+        minLevel: 83,
+        maxLevel: 91,
+        chance: 0.1111
       },
       {
-        "pokemonId": 7,
-        "minLevel": 83,
-        "maxLevel": 91,
-        "chance": 0.1111
+        pokemonId: 7,
+        minLevel: 83,
+        maxLevel: 91,
+        chance: 0.1111
       }
     ]
   },
   {
-    "name": "Starter Evolved Depot",
-    "spawns": [
+    name: 'Starter Evolved Depot',
+    spawns: [
       {
-        "pokemonId": 723,
-        "minLevel": 86,
-        "maxLevel": 94,
-        "chance": 0.3
+        pokemonId: 723,
+        minLevel: 86,
+        maxLevel: 94,
+        chance: 0.3
       },
       {
-        "pokemonId": 726,
-        "minLevel": 86,
-        "maxLevel": 94,
-        "chance": 0.25
+        pokemonId: 726,
+        minLevel: 86,
+        maxLevel: 94,
+        chance: 0.25
       },
       {
-        "pokemonId": 729,
-        "minLevel": 86,
-        "maxLevel": 94,
-        "chance": 0.15
+        pokemonId: 729,
+        minLevel: 86,
+        maxLevel: 94,
+        chance: 0.15
       },
       {
-        "pokemonId": 2,
-        "minLevel": 86,
-        "maxLevel": 94,
-        "chance": 0.15
+        pokemonId: 2,
+        minLevel: 86,
+        maxLevel: 94,
+        chance: 0.15
       },
       {
-        "pokemonId": 5,
-        "minLevel": 86,
-        "maxLevel": 94,
-        "chance": 0.1
+        pokemonId: 5,
+        minLevel: 86,
+        maxLevel: 94,
+        chance: 0.1
       },
       {
-        "pokemonId": 9,
-        "minLevel": 86,
-        "maxLevel": 94,
-        "chance": 0.05
+        pokemonId: 9,
+        minLevel: 86,
+        maxLevel: 94,
+        chance: 0.05
       }
     ]
   },
   {
-    "name": "Kiloude Southern Hills",
-    "spawns": [
+    name: 'Kiloude Southern Hills',
+    spawns: [
       {
-        "pokemonId": 407,
-        "minLevel": 90,
-        "maxLevel": 98,
-        "chance": 0.3
+        pokemonId: 407,
+        minLevel: 90,
+        maxLevel: 98,
+        chance: 0.2857
       },
       {
-        "pokemonId": 526,
-        "minLevel": 90,
-        "maxLevel": 98,
-        "chance": 0.25
+        pokemonId: 526,
+        minLevel: 90,
+        maxLevel: 98,
+        chance: 0.2381
       },
       {
-        "pokemonId": 463,
-        "minLevel": 90,
-        "maxLevel": 98,
-        "chance": 0.2
+        pokemonId: 463,
+        minLevel: 90,
+        maxLevel: 98,
+        chance: 0.1905
       },
       {
-        "pokemonId": 615,
-        "minLevel": 90,
-        "maxLevel": 98,
-        "chance": 0.15
+        pokemonId: 615,
+        minLevel: 90,
+        maxLevel: 98,
+        chance: 0.1429
       },
       {
-        "pokemonId": 282,
-        "minLevel": 90,
-        "maxLevel": 98,
-        "chance": 0.1
+        pokemonId: 282,
+        minLevel: 90,
+        maxLevel: 98,
+        chance: 0.0952
+      },
+      {
+        pokemonId: 671,
+        minLevel: 90,
+        maxLevel: 98,
+        chance: 0.0476
       }
     ]
   },
   {
-    "name": "Friend Safari",
-    "spawns": [
+    name: 'Friend Safari',
+    spawns: [
+      {
+        pokemonId: 702,
+        minLevel: 1,
+        maxLevel: 1,
+        chance: 0
+      },
+      {
+        pokemonId: 553,
+        minLevel: 93,
+        maxLevel: 101,
+        chance: 0.2609
+      },
+      {
+        pokemonId: 609,
+        minLevel: 93,
+        maxLevel: 101,
+        chance: 0.2174
+      },
       {
-        "pokemonId": 702,
-        "minLevel": 1,
-        "maxLevel": 1,
-        "chance": 0
+        pokemonId: 330,
+        minLevel: 93,
+        maxLevel: 101,
+        chance: 0.1739
       },
       {
-        "pokemonId": 553,
-        "minLevel": 93,
-        "maxLevel": 101,
-        "chance": 0.3
+        pokemonId: 697,
+        minLevel: 93,
+        maxLevel: 101,
+        chance: 0.1304
       },
       {
-        "pokemonId": 609,
-        "minLevel": 93,
-        "maxLevel": 101,
-        "chance": 0.25
+        pokemonId: 699,
+        minLevel: 93,
+        maxLevel: 101,
+        chance: 0.087
       },
       {
-        "pokemonId": 330,
-        "minLevel": 93,
-        "maxLevel": 101,
-        "chance": 0.2
+        pokemonId: 657,
+        minLevel: 1,
+        maxLevel: 1,
+        chance: 0.0435
       },
       {
-        "pokemonId": 697,
-        "minLevel": 93,
-        "maxLevel": 101,
-        "chance": 0.15
+        pokemonId: 654,
+        minLevel: 1,
+        maxLevel: 1,
+        chance: 0.0435
       },
       {
-        "pokemonId": 699,
-        "minLevel": 93,
-        "maxLevel": 101,
-        "chance": 0.1
+        pokemonId: 651,
+        minLevel: 1,
+        maxLevel: 1,
+        chance: 0.0435
       }
     ]
   },
   {
-    "name": "Battle Maison",
-    "spawns": [
+    name: 'Battle Maison',
+    spawns: [
       {
-        "pokemonId": 134,
-        "minLevel": 96,
-        "maxLevel": 104,
-        "chance": 0.3
+        pokemonId: 134,
+        minLevel: 96,
+        maxLevel: 104,
+        chance: 0.3
       },
       {
-        "pokemonId": 700,
-        "minLevel": 96,
-        "maxLevel": 104,
-        "chance": 0.25
+        pokemonId: 700,
+        minLevel: 96,
+        maxLevel: 104,
+        chance: 0.25
       },
       {
-        "pokemonId": 476,
-        "minLevel": 96,
-        "maxLevel": 104,
-        "chance": 0.2
+        pokemonId: 476,
+        minLevel: 96,
+        maxLevel: 104,
+        chance: 0.2
       },
       {
-        "pokemonId": 448,
-        "minLevel": 96,
-        "maxLevel": 104,
-        "chance": 0.15
+        pokemonId: 448,
+        minLevel: 96,
+        maxLevel: 104,
+        chance: 0.15
       },
       {
-        "pokemonId": 136,
-        "minLevel": 96,
-        "maxLevel": 104,
-        "chance": 0.1
+        pokemonId: 136,
+        minLevel: 96,
+        maxLevel: 104,
+        chance: 0.1
       }
     ]
   },
   {
-    "name": "Secret Forest North",
-    "spawns": [
+    name: 'Secret Forest North',
+    spawns: [
       {
-        "pokemonId": 704,
-        "minLevel": 100,
-        "maxLevel": 105,
-        "chance": 0.3
+        pokemonId: 704,
+        minLevel: 100,
+        maxLevel: 105,
+        chance: 0.3
       },
       {
-        "pokemonId": 455,
-        "minLevel": 100,
-        "maxLevel": 105,
-        "chance": 0.25
+        pokemonId: 455,
+        minLevel: 100,
+        maxLevel: 105,
+        chance: 0.25
       },
       {
-        "pokemonId": 277,
-        "minLevel": 100,
-        "maxLevel": 105,
-        "chance": 0.2
+        pokemonId: 277,
+        minLevel: 100,
+        maxLevel: 105,
+        chance: 0.2
       },
       {
-        "pokemonId": 81,
-        "minLevel": 100,
-        "maxLevel": 105,
-        "chance": 0.15
+        pokemonId: 81,
+        minLevel: 100,
+        maxLevel: 105,
+        chance: 0.15
       },
       {
-        "pokemonId": 92,
-        "minLevel": 100,
-        "maxLevel": 105,
-        "chance": 0.1
+        pokemonId: 92,
+        minLevel: 100,
+        maxLevel: 105,
+        chance: 0.1
       }
     ]
   },
   {
-    "name": "Path to Sea Spirit Den",
-    "spawns": [
+    name: 'Path to Sea Spirit Den',
+    spawns: [
       {
-        "pokemonId": 584,
-        "minLevel": 84,
-        "maxLevel": 92,
-        "chance": 0.3
+        pokemonId: 584,
+        minLevel: 84,
+        maxLevel: 92,
+        chance: 0.3
       },
       {
-        "pokemonId": 609,
-        "minLevel": 84,
-        "maxLevel": 92,
-        "chance": 0.25
+        pokemonId: 609,
+        minLevel: 84,
+        maxLevel: 92,
+        chance: 0.25
       },
       {
-        "pokemonId": 104,
-        "minLevel": 84,
-        "maxLevel": 92,
-        "chance": 0.2
+        pokemonId: 104,
+        minLevel: 84,
+        maxLevel: 92,
+        chance: 0.2
       },
       {
-        "pokemonId": 624,
-        "minLevel": 84,
-        "maxLevel": 92,
-        "chance": 0.15
+        pokemonId: 624,
+        minLevel: 84,
+        maxLevel: 92,
+        chance: 0.15
       },
       {
-        "pokemonId": 142,
-        "minLevel": 84,
-        "maxLevel": 92,
-        "chance": 0.1
+        pokemonId: 142,
+        minLevel: 84,
+        maxLevel: 92,
+        chance: 0.1
       }
     ]
   },
   {
-    "name": "Sea Spirit Den Outer Depths",
-    "spawns": [
+    name: 'Sea Spirit Den Outer Depths',
+    spawns: [
       {
-        "pokemonId": 471,
-        "minLevel": 88,
-        "maxLevel": 96,
-        "chance": 0.3
+        pokemonId: 471,
+        minLevel: 88,
+        maxLevel: 96,
+        chance: 0.3
       },
       {
-        "pokemonId": 612,
-        "minLevel": 88,
-        "maxLevel": 96,
-        "chance": 0.25
+        pokemonId: 612,
+        minLevel: 88,
+        maxLevel: 96,
+        chance: 0.25
       },
       {
-        "pokemonId": 367,
-        "minLevel": 88,
-        "maxLevel": 96,
-        "chance": 0.2
+        pokemonId: 367,
+        minLevel: 88,
+        maxLevel: 96,
+        chance: 0.2
       },
       {
-        "pokemonId": 9,
-        "minLevel": 88,
-        "maxLevel": 96,
-        "chance": 0.15
+        pokemonId: 9,
+        minLevel: 88,
+        maxLevel: 96,
+        chance: 0.15
       },
       {
-        "pokemonId": 713,
-        "minLevel": 88,
-        "maxLevel": 96,
-        "chance": 0.1
+        pokemonId: 713,
+        minLevel: 88,
+        maxLevel: 96,
+        chance: 0.1
       }
     ]
   },
   {
-    "name": "Sea Spirit Den Entrance",
-    "spawns": [
+    name: 'Sea Spirit Den Entrance',
+    spawns: [
       {
-        "pokemonId": 450,
-        "minLevel": 92,
-        "maxLevel": 100,
-        "chance": 0.3
+        pokemonId: 450,
+        minLevel: 92,
+        maxLevel: 100,
+        chance: 0.3
       },
       {
-        "pokemonId": 471,
-        "minLevel": 92,
-        "maxLevel": 100,
-        "chance": 0.25
+        pokemonId: 471,
+        minLevel: 92,
+        maxLevel: 100,
+        chance: 0.25
       },
       {
-        "pokemonId": 3,
-        "minLevel": 92,
-        "maxLevel": 100,
-        "chance": 0.2
+        pokemonId: 3,
+        minLevel: 92,
+        maxLevel: 100,
+        chance: 0.2
       },
       {
-        "pokemonId": 197,
-        "minLevel": 92,
-        "maxLevel": 100,
-        "chance": 0.15
+        pokemonId: 197,
+        minLevel: 92,
+        maxLevel: 100,
+        chance: 0.15
       },
       {
-        "pokemonId": 135,
-        "minLevel": 92,
-        "maxLevel": 100,
-        "chance": 0.1
+        pokemonId: 135,
+        minLevel: 92,
+        maxLevel: 100,
+        chance: 0.1
       }
     ]
   },
   {
-    "name": "Sea Spirit Den Tunnels",
-    "spawns": [
+    name: 'Sea Spirit Den Tunnels',
+    spawns: [
       {
-        "pokemonId": 470,
-        "minLevel": 96,
-        "maxLevel": 104,
-        "chance": 0.3
+        pokemonId: 470,
+        minLevel: 96,
+        maxLevel: 104,
+        chance: 0.3
       },
       {
-        "pokemonId": 91,
-        "minLevel": 96,
-        "maxLevel": 104,
-        "chance": 0.25
+        pokemonId: 91,
+        minLevel: 96,
+        maxLevel: 104,
+        chance: 0.25
       },
       {
-        "pokemonId": 9,
-        "minLevel": 96,
-        "maxLevel": 104,
-        "chance": 0.2
+        pokemonId: 9,
+        minLevel: 96,
+        maxLevel: 104,
+        chance: 0.2
       },
       {
-        "pokemonId": 652,
-        "minLevel": 96,
-        "maxLevel": 104,
-        "chance": 0.15
+        pokemonId: 652,
+        minLevel: 96,
+        maxLevel: 104,
+        chance: 0.15
       },
       {
-        "pokemonId": 473,
-        "minLevel": 96,
-        "maxLevel": 104,
-        "chance": 0.1
+        pokemonId: 473,
+        minLevel: 96,
+        maxLevel: 104,
+        chance: 0.1
       }
     ]
   },
   {
-    "name": "Sea Spirit Den Hall",
-    "spawns": [
+    name: 'Sea Spirit Den Hall',
+    spawns: [
       {
-        "pokemonId": 144,
-        "minLevel": 100,
-        "maxLevel": 105,
-        "chance": 0.33
+        pokemonId: 144,
+        minLevel: 100,
+        maxLevel: 105,
+        chance: 0.33
       },
       {
-        "pokemonId": 145,
-        "minLevel": 100,
-        "maxLevel": 105,
-        "chance": 0.33
+        pokemonId: 145,
+        minLevel: 100,
+        maxLevel: 105,
+        chance: 0.33
       },
       {
-        "pokemonId": 146,
-        "minLevel": 100,
-        "maxLevel": 105,
-        "chance": 0.33
+        pokemonId: 146,
+        minLevel: 100,
+        maxLevel: 105,
+        chance: 0.33
       }
     ]
   },
   {
-    "name": "Path to Secret Chambers",
-    "spawns": [
+    name: 'Path to Secret Chambers',
+    spawns: [
       {
-        "pokemonId": 635,
-        "minLevel": 85,
-        "maxLevel": 93,
-        "chance": 0.3
+        pokemonId: 635,
+        minLevel: 85,
+        maxLevel: 93,
+        chance: 0.3
       },
       {
-        "pokemonId": 28,
-        "minLevel": 85,
-        "maxLevel": 93,
-        "chance": 0.25
+        pokemonId: 28,
+        minLevel: 85,
+        maxLevel: 93,
+        chance: 0.25
       },
       {
-        "pokemonId": 613,
-        "minLevel": 85,
-        "maxLevel": 93,
-        "chance": 0.2
+        pokemonId: 613,
+        minLevel: 85,
+        maxLevel: 93,
+        chance: 0.2
       },
       {
-        "pokemonId": 263,
-        "minLevel": 85,
-        "maxLevel": 93,
-        "chance": 0.15
+        pokemonId: 263,
+        minLevel: 85,
+        maxLevel: 93,
+        chance: 0.15
       },
       {
-        "pokemonId": 182,
-        "minLevel": 85,
-        "maxLevel": 93,
-        "chance": 0.1
+        pokemonId: 182,
+        minLevel: 85,
+        maxLevel: 93,
+        chance: 0.1
       }
     ]
   },
   {
-    "name": "Chambers of Emptiness",
-    "spawns": [
+    name: 'Chambers of Emptiness',
+    spawns: [
       {
-        "pokemonId": 658,
-        "minLevel": 90,
-        "maxLevel": 98,
-        "chance": 0.3
+        pokemonId: 658,
+        minLevel: 90,
+        maxLevel: 98,
+        chance: 0.3
       },
       {
-        "pokemonId": 306,
-        "minLevel": 90,
-        "maxLevel": 98,
-        "chance": 0.25
+        pokemonId: 306,
+        minLevel: 90,
+        maxLevel: 98,
+        chance: 0.25
       },
       {
-        "pokemonId": 673,
-        "minLevel": 90,
-        "maxLevel": 98,
-        "chance": 0.2
+        pokemonId: 673,
+        minLevel: 90,
+        maxLevel: 98,
+        chance: 0.2
       },
       {
-        "pokemonId": 655,
-        "minLevel": 90,
-        "maxLevel": 98,
-        "chance": 0.15
+        pokemonId: 655,
+        minLevel: 90,
+        maxLevel: 98,
+        chance: 0.15
       },
       {
-        "pokemonId": 584,
-        "minLevel": 90,
-        "maxLevel": 98,
-        "chance": 0.1
+        pokemonId: 584,
+        minLevel: 90,
+        maxLevel: 98,
+        chance: 0.1
       }
     ]
   },
   {
-    "name": "Underground Chambers",
-    "spawns": [
+    name: 'Underground Chambers',
+    spawns: [
       {
-        "pokemonId": 712,
-        "minLevel": 95,
-        "maxLevel": 103,
-        "chance": 0.3
+        pokemonId: 712,
+        minLevel: 95,
+        maxLevel: 103,
+        chance: 0.3
       },
       {
-        "pokemonId": 703,
-        "minLevel": 95,
-        "maxLevel": 103,
-        "chance": 0.25
+        pokemonId: 703,
+        minLevel: 95,
+        maxLevel: 103,
+        chance: 0.25
       },
       {
-        "pokemonId": 300,
-        "minLevel": 95,
-        "maxLevel": 103,
-        "chance": 0.2
+        pokemonId: 300,
+        minLevel: 95,
+        maxLevel: 103,
+        chance: 0.2
       },
       {
-        "pokemonId": 42,
-        "minLevel": 95,
-        "maxLevel": 103,
-        "chance": 0.15
+        pokemonId: 42,
+        minLevel: 95,
+        maxLevel: 103,
+        chance: 0.15
       },
       {
-        "pokemonId": 708,
-        "minLevel": 95,
-        "maxLevel": 103,
-        "chance": 0.1
+        pokemonId: 708,
+        minLevel: 95,
+        maxLevel: 103,
+        chance: 0.1
       }
     ]
   },
   {
-    "name": "Ultimate Chamber",
-    "spawns": [
+    name: 'Ultimate Chamber',
+    spawns: [
       {
-        "pokemonId": 721,
-        "minLevel": 100,
-        "maxLevel": 105,
-        "chance": 0.25
+        pokemonId: 721,
+        minLevel: 100,
+        maxLevel: 105,
+        chance: 0.25
       },
       {
-        "pokemonId": 719,
-        "minLevel": 100,
-        "maxLevel": 105,
-        "chance": 0.25
+        pokemonId: 719,
+        minLevel: 100,
+        maxLevel: 105,
+        chance: 0.25
       },
       {
-        "pokemonId": 720,
-        "minLevel": 100,
-        "maxLevel": 105,
-        "chance": 0.25
+        pokemonId: 720,
+        minLevel: 100,
+        maxLevel: 105,
+        chance: 0.25
       },
       {
-        "pokemonId": 150,
-        "minLevel": 100,
-        "maxLevel": 105,
-        "chance": 0.25
+        pokemonId: 150,
+        minLevel: 100,
+        maxLevel: 105,
+        chance: 0.25
       }
     ]
   },
   {
-    "name": "Kalos Pokemon League",
-    "spawns": []
+    name: 'Kalos Pokemon League',
+    spawns: []
   },
   {
-    "name": "Keys to Eternal Fight",
-    "spawns": []
+    name: 'Keys to Eternal Fight',
+    spawns: []
   },
   {
-    "name": "The Eternal Fight",
-    "spawns": [
+    name: 'The Eternal Fight',
+    spawns: [
       {
-        "pokemonId": 717,
-        "minLevel": 120,
-        "maxLevel": 120,
-        "chance": 0.33
+        pokemonId: 717,
+        minLevel: 120,
+        maxLevel: 120,
+        chance: 0.33
       },
       {
-        "pokemonId": 718,
-        "minLevel": 115,
-        "maxLevel": 119,
-        "chance": 0.33
+        pokemonId: 718,
+        minLevel: 115,
+        maxLevel: 119,
+        chance: 0.33
       },
       {
-        "pokemonId": 716,
-        "minLevel": 115,
-        "maxLevel": 119,
-        "chance": 0.33
+        pokemonId: 716,
+        minLevel: 115,
+        maxLevel: 119,
+        chance: 0.33
       }
     ]
   }
