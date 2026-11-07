@@ -440,42 +440,5 @@ export const kalosMapCoordinates = {
     "x": 48,
     "y": 48,
     "type": "poi"
-  },
-  "kaloshiddenpath": {
-    "name": "Kalos Hidden Path",
-    "x": 80,
-    "y": 80,
-    "type": "route"
-  },
-  "kalossecretgarden": {
-    "name": "Kalos Secret Garden",
-    "x": 82,
-    "y": 80,
-    "type": "route"
-  },
-  "kalosforgottenruins": {
-    "name": "Kalos Forgotten Ruins",
-    "x": 84,
-    "y": 80,
-    "type": "route"
-  },
-  "kalosmysticgrotto": {
-    "name": "Kalos Mystic Grotto",
-    "x": 86,
-    "y": 80,
-    "type": "route"
-  },
-  "kalosshadowcanyon": {
-    "name": "Kalos Shadow Canyon",
-    "x": 88,
-    "y": 80,
-    "type": "route"
-  },
-  "kaloslegendtrail": {
-    "name": "Kalos Legend Trail",
-    "x": 90,
-    "y": 80,
-    "type": "route"
-  },
-
+  }
 };
