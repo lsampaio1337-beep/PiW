@@ -2589,7 +2589,7 @@ async function init() {
             } else if (typeConfigKey === 'smartwatch') {
                 if (t === 1) description = "Can Select Ball at Main View";
                 else if (t === 2) description = "Can Select Potion at Main View";
-                else if (t >= 3) description = "Access to Smart Mode Capture at Main View";
+                else if (t >= 3) description = "Access Smart Mode Capture<br>at Main View";
             }
 
             htmlContent += `
@@ -3014,7 +3014,7 @@ async function init() {
                             } else if (type.configKey === 'smartwatch') {
                                 if (tier === 1) description = "Can Select Ball at Main View";
                                 else if (tier === 2) description = "Can Select Potion at Main View";
-                                else if (tier >= 3) description = "Access to Smart Mode Capture at Main View";
+                                else if (tier >= 3) description = "Access Smart Mode Capture<br>at Main View";
                             }
 
                             contentHtml += `

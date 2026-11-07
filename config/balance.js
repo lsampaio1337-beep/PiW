@@ -68,7 +68,7 @@ const balance = {
         { "tier": 2, "name": "Daycare2", "displayName": "Live Coach", "increment": 0, "cost": 2500, "description": "Train Earns<br>50% of team XP" },
         { "tier": 3, "name": "Daycare3", "displayName": "Advanced Breeder", "increment": 0, "cost": 25000, "description": "Max Breed<br>QValue=1.99" },
         { "tier": 4, "name": "Daycare4", "displayName": "No Pain No Gain", "increment": 0, "cost": 250000, "description": "20% Chance of<br>Extra IV Point" },
-        { "tier": 5, "name": "Daycare5", "displayName": "Shiny Breeder", "increment": 0, "cost": 2500000, "description": "Can Breed Shiny<br>2*QBonus" }
+        { "tier": 5, "name": "Daycare5", "displayName": "Shiny Breeder", "increment": 0, "cost": 2500000, "description": "Can Breed Shiny<br>(2*QBonus)" }
       ]
     },
     "items": {
