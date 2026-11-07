@@ -413,25 +413,31 @@ export const hisuiRoutes = {
               id: 722,
               minLevel: 19,
               maxLevel: 21,
-              probability: 0.25
+              probability: 0.2
           },
           {
               id: 405,
               minLevel: 19,
               maxLevel: 21,
-              probability: 0.25
+              probability: 0.2
           },
           {
               id: 398,
               minLevel: 19,
               maxLevel: 21,
-              probability: 0.25
+              probability: 0.2
           },
           {
               id: 399,
               minLevel: 19,
               maxLevel: 21,
-              probability: 0.25
+              probability: 0.2
+          },
+          {
+              id: 439,
+              minLevel: 19,
+              maxLevel: 21,
+              probability: 0.2
           }
       ]
   },
