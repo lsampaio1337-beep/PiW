@@ -632,9 +632,9 @@ export function getChallengeText() {
         let activeId = state.stats.activeChallenges[0];
         let unlock = window.getCurrentUnlocks().find(u => u.areaId === activeId);
         if (unlock) {
-            let unlocks = "Unlocks: " + (unlock.unlocks ? unlock.unlocks.join(' + ') : "Next Area");
+            let unlocks = unlock.unlocks ? "Unlocks: " + unlock.unlocks.join(" + ") : "";
             let displayName = unlock.challengeName || activeId;
-            return `Next Challenge: ${displayName} - ${unlocks}`;
+            return `Next Challenge: ${displayName}` + (unlocks ? ` - ${unlocks}` : ``);
         }
     }
 
