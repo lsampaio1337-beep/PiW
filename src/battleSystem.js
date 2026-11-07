@@ -839,8 +839,8 @@ class BattleSystem {
             return;
         }
 
-        if (["Safari Zone", "Kanto Safari Zone"].includes(this.state.currentRoute)) {
-            const safariCost = this.state.config.balance.safariZonePrice || 500;
+        if (["Safari Zone", "Kanto Safari Zone", "Johto Safari Zone"].includes(this.state.currentRoute)) {
+            const safariCost = this.state.currentRoute === "Johto Safari Zone" ? 80 : 150;
             if (this.state.trainer.money < safariCost) {
                 this.stop();
                 if (typeof window.switchView === 'function') {
@@ -2265,12 +2265,20 @@ class BattleSystem {
 
         let encounterCost = 0;
         let requiresPayment = false;
-        if (["Safari Zone", "Kanto Safari Zone"].includes(this.state.currentRoute)) {
-            encounterCost = this.state.config.balance.safariZonePrice || 500;
+        if (["Safari Zone", "Kanto Safari Zone", "Johto Safari Zone"].includes(this.state.currentRoute)) {
+            encounterCost = this.state.currentRoute === "Johto Safari Zone" ? 80 : 150;
             requiresPayment = true;
-        } else if (this.state.currentRoute && this.state.currentRoute.startsWith("Casino - ")) {
-            const baseCostStandard = this.state.config.balance.casinoPrices?.standard || 10;
-            const baseCostSpecial = this.state.config.balance.casinoPrices?.doubleShiny || 20;
+        } else if (this.state.currentRoute && (this.state.currentRoute.startsWith("Casino") || this.state.currentRoute.startsWith("Celadon Casino") || this.state.currentRoute.startsWith("Goldenrod") || this.state.currentRoute.includes("Troupe") || this.state.currentRoute.includes("Spot") || this.state.currentRoute.includes("Corner"))) {
+            let baseCostStandard = this.state.config.balance.casinoPrices?.standard || 75;
+            if (this.state.currentRoute.includes("Goldenrod Baby Corner")) baseCostStandard = 5;
+            else if (this.state.currentRoute.includes("Goldenrod Lucky Spot Corner")) baseCostStandard = 10;
+            else if (this.state.currentRoute.includes("Starter Troupe") || this.state.currentRoute.includes("Starter Trupe")) baseCostStandard = 120;
+            else if (this.state.currentRoute.includes("Babies") || this.state.currentRoute.includes("Mid Troupe")) baseCostStandard = 80;
+            else if (this.state.currentRoute.includes("Late Troupe") || this.state.currentRoute.includes("Late Trupe")) baseCostStandard = 135;
+            else if (this.state.currentRoute.includes("Eeveelution")) baseCostStandard = 150;
+            else if (this.state.currentRoute.includes("Special Spot")) baseCostStandard = 175;
+
+            const baseCostSpecial = baseCostStandard * 2.5;
             encounterCost = this.state.casinoDoubleShiny ? baseCostSpecial : baseCostStandard;
             requiresPayment = true;
         }

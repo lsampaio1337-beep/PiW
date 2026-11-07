@@ -314,6 +314,7 @@ function generateMarkersForRegion(region, unlockedAreas) {
             if (locationId === 'vermilion_gym' && state.trainer.badges >= 3) showCheckmark = true;
             if (locationId === 'celadon_gym' && state.trainer.badges >= 4) showCheckmark = true;
             if (locationId === 'fuchsia_gym' && state.trainer.badges >= 5) showCheckmark = true;
+            if (locationId === 'fuchsia_gym') markerImg = './Assets/Map/Spots/Spot_Gym.png';
             if (locationId === 'saffron_gym' && state.trainer.badges >= 6) showCheckmark = true;
             if (locationId === 'cinnabar_gym' && state.trainer.badges >= 7) showCheckmark = true;
             if (locationId === 'viridian_gym' && state.trainer.badges >= 8) showCheckmark = true;
@@ -612,11 +613,15 @@ export function navigateToLocation(locationName) {
         window.currentSafariZone = locationName;
         switchView("SAFARI_HUB");
         const msg = document.getElementById("safari-welcome-msg");
+        const btn = document.getElementById("btn-enter-safari");
         if (msg) {
-            const safariCost = state.config.balance.safariZonePrice || 500;
-            msg.innerText = `Welcome to Safari Zone! Here we charge a fee per battle you have and you can use our SafariBalls at will. Do you wanna enter Safari Zone?`;
+            const safariCost = locationName === "Johto Safari Zone" ? 80 : 150;
+            msg.innerText = `Welcome to Safari Zone! Here we charge a fee per battle (${safariCost}) you have and you can use our SafariBalls at will. Do you wanna enter Safari Zone?`;
+            if (btn) {
+                btn.innerText = `Enter (${safariCost})`;
+            }
         }
-    } else if (locationName === "Casino" || locationName === "Goldenrod Game Corner") {
+    } else if (locationName === "Celadon Casino" || locationName === "Goldenrod Game Corner" || locationName === "Casino") {
         window.currentCasinoHub = locationName;
         if (battleSystem) {
              battleSystem.stop();
@@ -699,7 +704,7 @@ export function navigateToLocation(locationName) {
             machinesHtml += `</div>`;
             btnContainer.innerHTML = machinesHtml;
         }
-    } else if (locationName.startsWith("Casino - ") || locationName === "Casino Starter Trupe" || locationName === "Casino Babies" || locationName === "Casino Special Spot" || locationName === "Casino Eeveelution" || locationName === "Casino Late Trupe") {
+    } else if (locationName.startsWith("Celadon Casino - ") || locationName.startsWith("Casino - ") || locationName === "Goldenrod Baby Corner" || locationName === "Goldenrod Lucky Spot Corner" || locationName === "Casino Starter Trupe" || locationName === "Casino Babies" || locationName === "Casino Special Spot" || locationName === "Casino Eeveelution" || locationName === "Casino Late Trupe") {
         if (!window.currentCasinoHub) window.currentCasinoHub = "Casino";
         if (battleSystem) {
              battleSystem.stop();
@@ -760,6 +765,51 @@ export function navigateToLocation(locationName) {
 
         // Append to the viewCasino container
         viewCasino.insertAdjacentHTML('beforeend', html);
+    } else if (locationName.startsWith("Celadon Casino - ") || locationName === "Goldenrod Baby Corner" || locationName === "Goldenrod Lucky Spot Corner") {
+        if (battleSystem) {
+            let bgImg = "Region1 Mid Troupe.png";
+            if (locationName === "Celadon Casino - Starter Troupe") bgImg = "Region1 Starter Troupe.png";
+            if (locationName === "Celadon Casino - Late Troupe") bgImg = "Region1 Late Troupe.png";
+            if (locationName === "Celadon Casino - Eeveelutions") bgImg = "Region1 Eeveelutions.png";
+            if (locationName === "Celadon Casino - Special Spot") bgImg = "Region1 Special Spot.png";
+            if (locationName === "Goldenrod Lucky Spot Corner") bgImg = "Region2 Johto Lucky Spot.png";
+            if (locationName === "Celadon Casino - Babies" || locationName === "Goldenrod Baby Corner") {
+                bgImg = "Region2 Kanto Babies.png";
+            }
+            if (locationName === "Goldenrod Baby Corner" || locationName === "Goldenrod Lucky Spot Corner") {
+                window.currentCasinoHub = "Goldenrod Game Corner";
+            } else {
+                window.currentCasinoHub = "Celadon Casino";
+            }
+
+            const headerHTML = `<div style="position: absolute; top: 10px; left: 0; width: 100%; text-align: center; z-index: 10; color: white; text-shadow: 2px 2px 4px black;">
+                <h2>${locationName}</h2>
+                <div style="font-size: 18px; margin-top: 5px;">
+                    Cost: $<span id="casino-cost-display">???</span> | Coins: $<span id="casino-coins-display">${state.resources.coins || 0}</span>
+                </div>
+            </div>`;
+
+            mapOverlay.innerHTML = headerHTML + `<div style="display: flex; justify-content: space-evenly; align-items: center; width: 100%; height: 100%;"><div style="position: relative; text-align: center; width: 300px;"><img src="./Assets/Extra/Casino/${bgImg}" alt="${locationName}" style="width: 100%; display: block; filter: drop-shadow(0 0 15px black);"><div onclick="window.startCasinoEncounter(false, '${locationName}')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter"></div><div onclick="window.startCasinoEncounter(true, '${locationName}')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny"></div></div></div>`;
+            mapOverlay.style.display = "block";
+
+            // update cost display
+            const costEl = document.getElementById("casino-cost-display");
+            if(costEl) {
+                if(locationName === "Goldenrod Baby Corner") costEl.innerText = "5";
+                else if(locationName === "Goldenrod Lucky Spot Corner") costEl.innerText = "10";
+                else if (locationName === "Celadon Casino - Starter Troupe") costEl.innerText = "120";
+                else if (locationName === "Celadon Casino - Babies") costEl.innerText = "80"; // Mid
+                else if (locationName === "Celadon Casino - Late Troupe") costEl.innerText = "135";
+                else if (locationName === "Celadon Casino - Eeveelutions") costEl.innerText = "150";
+                else if (locationName === "Celadon Casino - Special Spot") costEl.innerText = "175";
+                else {
+                    let mapData = state.config.routes.find(r => r.name === locationName);
+                    if(!mapData) mapData = state.config.johtoRoutes.find(r => r.name === locationName);
+                    if(mapData && mapData.cost) costEl.innerText = mapData.cost;
+                    else costEl.innerText = "120";
+                }
+            }
+        }
     } else if (locationName === "Daycare") {
         if (!state.stats.hasSeenDaycare) {
             document.getElementById('daycare-first-time-overlay').style.display = 'flex';
