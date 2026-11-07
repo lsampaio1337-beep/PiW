@@ -3055,7 +3055,314 @@ export const kalosRoutes = [
         chance: 0.33340000000000003
       }
     ]
-  }
+  },
+  {
+    name: "Kalos Hidden Path",
+    spawns: [
+      {
+        pokemonId: 663,
+        minLevel: 50,
+        maxLevel: 60,
+        chance: 0.1429
+      },
+      {
+        pokemonId: 18,
+        minLevel: 50,
+        maxLevel: 60,
+        chance: 0.1429
+      },
+      {
+        pokemonId: 666,
+        minLevel: 50,
+        maxLevel: 60,
+        chance: 0.1429
+      },
+      {
+        pokemonId: 512,
+        minLevel: 50,
+        maxLevel: 60,
+        chance: 0.1429
+      },
+      {
+        pokemonId: 514,
+        minLevel: 50,
+        maxLevel: 60,
+        chance: 0.1429
+      },
+      {
+        pokemonId: 516,
+        minLevel: 50,
+        maxLevel: 60,
+        chance: 0.1429
+      },
+      {
+        pokemonId: 55,
+        minLevel: 50,
+        maxLevel: 60,
+        chance: 0.1426
+      }
+    ]
+  },
+  {
+    name: "Kalos Secret Garden",
+    spawns: [
+      {
+        pokemonId: 448,
+        minLevel: 50,
+        maxLevel: 60,
+        chance: 0.1429
+      },
+      {
+        pokemonId: 475,
+        minLevel: 50,
+        maxLevel: 60,
+        chance: 0.1429
+      },
+      {
+        pokemonId: 670,
+        minLevel: 50,
+        maxLevel: 60,
+        chance: 0.1429
+      },
+      {
+        pokemonId: 416,
+        minLevel: 50,
+        maxLevel: 60,
+        chance: 0.1429
+      },
+      {
+        pokemonId: 301,
+        minLevel: 50,
+        maxLevel: 60,
+        chance: 0.1429
+      },
+      {
+        pokemonId: 6,
+        minLevel: 50,
+        maxLevel: 60,
+        chance: 0.1429
+      },
+      {
+        pokemonId: 8,
+        minLevel: 50,
+        maxLevel: 60,
+        chance: 0.1426
+      }
+    ]
+  },
+  {
+    name: "Kalos Forgotten Ruins",
+    spawns: [
+      {
+        pokemonId: 675,
+        minLevel: 50,
+        maxLevel: 60,
+        chance: 0.125
+      },
+      {
+        pokemonId: 85,
+        minLevel: 50,
+        maxLevel: 60,
+        chance: 0.125
+      },
+      {
+        pokemonId: 162,
+        minLevel: 50,
+        maxLevel: 60,
+        chance: 0.125
+      },
+      {
+        pokemonId: 291,
+        minLevel: 50,
+        maxLevel: 60,
+        chance: 0.125
+      },
+      {
+        pokemonId: 292,
+        minLevel: 50,
+        maxLevel: 60,
+        chance: 0.125
+      },
+      {
+        pokemonId: 678,
+        minLevel: 50,
+        maxLevel: 60,
+        chance: 0.125
+      },
+      {
+        pokemonId: 308,
+        minLevel: 50,
+        maxLevel: 60,
+        chance: 0.125
+      },
+      {
+        pokemonId: 426,
+        minLevel: 50,
+        maxLevel: 60,
+        chance: 0.125
+      }
+    ]
+  },
+  {
+    name: "Kalos Mystic Grotto",
+    spawns: [
+      {
+        pokemonId: 620,
+        minLevel: 50,
+        maxLevel: 60,
+        chance: 0.125
+      },
+      {
+        pokemonId: 279,
+        minLevel: 50,
+        maxLevel: 60,
+        chance: 0.125
+      },
+      {
+        pokemonId: 230,
+        minLevel: 50,
+        maxLevel: 60,
+        chance: 0.125
+      },
+      {
+        pokemonId: 695,
+        minLevel: 50,
+        maxLevel: 60,
+        chance: 0.125
+      },
+      {
+        pokemonId: 310,
+        minLevel: 50,
+        maxLevel: 60,
+        chance: 0.125
+      },
+      {
+        pokemonId: 229,
+        minLevel: 50,
+        maxLevel: 60,
+        chance: 0.125
+      },
+      {
+        pokemonId: 134,
+        minLevel: 50,
+        maxLevel: 60,
+        chance: 0.125
+      },
+      {
+        pokemonId: 136,
+        minLevel: 50,
+        maxLevel: 60,
+        chance: 0.125
+      }
+    ]
+  },
+  {
+    name: "Kalos Shadow Canyon",
+    spawns: [
+      {
+        pokemonId: 196,
+        minLevel: 50,
+        maxLevel: 60,
+        chance: 0.125
+      },
+      {
+        pokemonId: 700,
+        minLevel: 50,
+        maxLevel: 60,
+        chance: 0.125
+      },
+      {
+        pokemonId: 469,
+        minLevel: 50,
+        maxLevel: 60,
+        chance: 0.125
+      },
+      {
+        pokemonId: 476,
+        minLevel: 50,
+        maxLevel: 60,
+        chance: 0.125
+      },
+      {
+        pokemonId: 435,
+        minLevel: 50,
+        maxLevel: 60,
+        chance: 0.125
+      },
+      {
+        pokemonId: 578,
+        minLevel: 50,
+        maxLevel: 60,
+        chance: 0.125
+      },
+      {
+        pokemonId: 181,
+        minLevel: 50,
+        maxLevel: 60,
+        chance: 0.125
+      },
+      {
+        pokemonId: 199,
+        minLevel: 50,
+        maxLevel: 60,
+        chance: 0.125
+      }
+    ]
+  },
+  {
+    name: "Kalos Legend Trail",
+    spawns: [
+      {
+        pokemonId: 103,
+        minLevel: 50,
+        maxLevel: 60,
+        chance: 0.125
+      },
+      {
+        pokemonId: 444,
+        minLevel: 50,
+        maxLevel: 60,
+        chance: 0.125
+      },
+      {
+        pokemonId: 76,
+        minLevel: 50,
+        maxLevel: 60,
+        chance: 0.125
+      },
+      {
+        pokemonId: 617,
+        minLevel: 50,
+        maxLevel: 60,
+        chance: 0.125
+      },
+      {
+        pokemonId: 272,
+        minLevel: 50,
+        maxLevel: 60,
+        chance: 0.125
+      },
+      {
+        pokemonId: 608,
+        minLevel: 50,
+        maxLevel: 60,
+        chance: 0.125
+      },
+      {
+        pokemonId: 462,
+        minLevel: 50,
+        maxLevel: 60,
+        chance: 0.125
+      },
+      {
+        pokemonId: 149,
+        minLevel: 50,
+        maxLevel: 60,
+        chance: 0.125
+      }
+    ]
+  },
+
 ];
 
 export const kalosUnlocks = [
@@ -4148,6 +4455,23 @@ export const kalosUnlocks = [
     }
   },
   {
+    "challengeName": "Extra Challenge Z",
+    "areaId": "Extra Challenge Z",
+    "unlocks": [
+      "Kalos Hidden Path",
+      "Kalos Secret Garden",
+      "Kalos Forgotten Ruins",
+      "Kalos Mystic Grotto",
+      "Kalos Shadow Canyon",
+      "Kalos Legend Trail"
+    ],
+    "requirements": {
+      "hasBadge": {
+        "badge": "Extra Challenge Z"
+      }
+    }
+  },
+  {
     "challengeName": "Eternal Fight Challenge",
     "areaId": "The Eternal Fight",
     "requirements": {
@@ -4170,5 +4494,60 @@ export const kalosUnlocks = [
       "item": "Masterball",
       "count": 2
     }
-  }
+  },
+  {
+    name: "Kalos Hidden Path",
+    reqs: [
+      {
+        type: "hasBadge",
+        badge: "Extra Challenge Z"
+      }
+    ]
+  },
+  {
+    name: "Kalos Secret Garden",
+    reqs: [
+      {
+        type: "hasBadge",
+        badge: "Extra Challenge Z"
+      }
+    ]
+  },
+  {
+    name: "Kalos Forgotten Ruins",
+    reqs: [
+      {
+        type: "hasBadge",
+        badge: "Extra Challenge Z"
+      }
+    ]
+  },
+  {
+    name: "Kalos Mystic Grotto",
+    reqs: [
+      {
+        type: "hasBadge",
+        badge: "Extra Challenge Z"
+      }
+    ]
+  },
+  {
+    name: "Kalos Shadow Canyon",
+    reqs: [
+      {
+        type: "hasBadge",
+        badge: "Extra Challenge Z"
+      }
+    ]
+  },
+  {
+    name: "Kalos Legend Trail",
+    reqs: [
+      {
+        type: "hasBadge",
+        badge: "Extra Challenge Z"
+      }
+    ]
+  },
+
 ];
