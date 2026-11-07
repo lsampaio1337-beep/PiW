@@ -2991,7 +2991,7 @@ async function init() {
                         <span>${headerTitle}</span>
                         <span onclick="window.showTrainerStats('${backTab}')" style="position: absolute; top: 5px; right: 5px; font-size: 12px; font-weight: bold; line-height: 1; padding: 0; cursor: pointer; color: white;">X</span>
                     </div>
-                    <div class="window-content-container" style="flex: 1; overflow-y: auto;">
+                    <div class="window-content-container" style="flex: 1; overflow-y: auto; overflow-x: hidden;">
                         <div style="padding: 15px; box-sizing: border-box; width: 100%; height: 100%;">
                             ${options.html}
                         </div>
