@@ -382,7 +382,69 @@ const mainSeenSets = [];
 
                         if (region.num === 9) { typeOk = "Legacy"; } else if (encounterCache[pkName.toLowerCase()]) {
                             const locations = encounterCache[pkName.toLowerCase()];
-                            const normalizedRoute = routeNameLower.replace(/[^a-z0-9]/g, '');
+
+                        let matchableRouteName = routeNameLower;
+                        if (region === 6) {
+                            if (routeNameLower.includes("aquacorde outskirts")) matchableRouteName = "kalos-route-2";
+                            else if (routeNameLower === "route 2") matchableRouteName = "kalos-route-2";
+                            else if (routeNameLower === "route 3") matchableRouteName = "kalos-route-3";
+                            else if (routeNameLower.includes("santalune outskirts")) matchableRouteName = "kalos-route-3";
+                            else if (routeNameLower === "route 4") matchableRouteName = "kalos-route-4";
+                            else if (routeNameLower === "route 5") matchableRouteName = "kalos-route-5";
+                            else if (routeNameLower === "route 6") matchableRouteName = "kalos-route-6";
+                            else if (routeNameLower === "route 7") matchableRouteName = "kalos-route-7";
+                            else if (routeNameLower === "route 8") matchableRouteName = "kalos-route-8";
+                            else if (routeNameLower === "route 9") matchableRouteName = "kalos-route-9";
+                            else if (routeNameLower === "route 10") matchableRouteName = "kalos-route-10";
+                            else if (routeNameLower === "route 11") matchableRouteName = "kalos-route-11";
+                            else if (routeNameLower === "route 12") matchableRouteName = "kalos-route-12";
+                            else if (routeNameLower === "route 13") matchableRouteName = "kalos-route-13";
+                            else if (routeNameLower === "route 14") matchableRouteName = "kalos-route-14";
+                            else if (routeNameLower === "route 15") matchableRouteName = "kalos-route-15";
+                            else if (routeNameLower === "route 16") matchableRouteName = "kalos-route-16";
+                            else if (routeNameLower === "route 17") matchableRouteName = "kalos-route-17";
+                            else if (routeNameLower === "route 18") matchableRouteName = "kalos-route-18";
+                            else if (routeNameLower === "route 19") matchableRouteName = "kalos-route-19";
+                            else if (routeNameLower === "route 20") matchableRouteName = "kalos-route-20";
+                            else if (routeNameLower === "route 21") matchableRouteName = "kalos-route-21";
+                            else if (routeNameLower === "route 22") matchableRouteName = "kalos-route-22";
+                            else if (routeNameLower.includes("santalune forest")) matchableRouteName = "santalune-forest";
+                            else if (routeNameLower.includes("lumiose south")) matchableRouteName = "kalos-route-4";
+                            else if (routeNameLower.includes("lumiose north")) matchableRouteName = "kalos-route-13";
+                            else if (routeNameLower.includes("camphrier berry")) matchableRouteName = "kalos-route-5";
+                            else if (routeNameLower.includes("connecting cave")) matchableRouteName = "connecting-cave";
+                            else if (routeNameLower.includes("ambrette cliffs")) matchableRouteName = "kalos-route-8";
+                            else if (routeNameLower.includes("glittering cave")) matchableRouteName = "glittering-cave";
+                            else if (routeNameLower.includes("cyllage seaside")) matchableRouteName = "kalos-route-8";
+                            else if (routeNameLower.includes("geosenge megalith")) matchableRouteName = "kalos-route-10";
+                            else if (routeNameLower.includes("reflection cave")) matchableRouteName = "reflection-cave";
+                            else if (routeNameLower.includes("shalour beachfront")) matchableRouteName = "kalos-route-11";
+                            else if (routeNameLower.includes("azure deep")) matchableRouteName = "azure-bay";
+                            else if (routeNameLower.includes("azure bay isles")) matchableRouteName = "azure-bay";
+                            else if (routeNameLower.includes("coumarine seaside")) matchableRouteName = "kalos-route-12";
+                            else if (routeNameLower.includes("coumarine docks")) matchableRouteName = "kalos-route-12";
+                            else if (routeNameLower.includes("laverre mushroom")) matchableRouteName = "kalos-route-14";
+                            else if (routeNameLower.includes("dendemille windmill")) matchableRouteName = "kalos-route-15";
+                            else if (routeNameLower.includes("frost cavern")) matchableRouteName = "frost-cavern";
+                            else if (routeNameLower.includes("anistar sundial")) matchableRouteName = "kalos-route-17";
+                            else if (routeNameLower.includes("couriway cascades")) matchableRouteName = "kalos-route-18";
+                            else if (routeNameLower.includes("vallee grande") || routeNameLower.includes("vallée grande")) matchableRouteName = "kalos-route-19";
+                            else if (routeNameLower.includes("snowbelle frostwoods")) matchableRouteName = "kalos-route-19";
+                            else if (routeNameLower.includes("hidden village")) matchableRouteName = "pokemon-village";
+                            else if (routeNameLower.includes("victory road")) matchableRouteName = "kalos-victory-road";
+                            else if (routeNameLower.includes("parfum palace")) matchableRouteName = "parfum-palace";
+                            else if (routeNameLower.includes("ambrette reef")) matchableRouteName = "kalos-route-8";
+                            else if (routeNameLower.includes("cyllage tidepools")) matchableRouteName = "kalos-route-8";
+                            else if (routeNameLower.includes("tower of mastery")) matchableRouteName = "tower-of-mastery";
+                            else if (routeNameLower.includes("lost hotel")) matchableRouteName = "lost-hotel";
+                            else if (routeNameLower.includes("team flare")) matchableRouteName = "team-flare-secret-hq";
+                            else if (routeNameLower.includes("terminus cave")) matchableRouteName = "terminus-cave";
+                            else if (routeNameLower.includes("pokemon village") || routeNameLower.includes("pokémon village")) matchableRouteName = "pokemon-village";
+                            else if (routeNameLower.includes("friend safari")) matchableRouteName = "friend-safari";
+                            else if (routeNameLower.includes("sea spirit")) matchableRouteName = "sea-spirit-den";
+                        }
+                        const normalizedRoute = matchableRouteName.replace(/[^a-z0-9]/g, '');
+
                             for (const loc of locations) {
                                 const normalizedLoc = loc.replace(/[^a-z0-9]/g, '');
                                 if (normalizedLoc.includes(normalizedRoute) || normalizedRoute.includes(normalizedLoc)) {
