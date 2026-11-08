@@ -427,40 +427,196 @@ export const paldeaMapCoordinates = {
     "x": 80,
     "y": 30
   },
-  "Extra Route Z1": {
+  "Poco Path - Main (High Level)": {
+    "x": 10,
+    "y": 20
+  },
+  "Los Platos - Main (High Level)": {
+    "x": 20,
+    "y": 20
+  },
+  "Mesagoza - Main (High Level)": {
+    "x": 30,
+    "y": 20
+  },
+  "South Province (Area One) - Beach (High Level)": {
+    "x": 40,
+    "y": 20
+  },
+  "South Province (Area One) - Cave (High Level)": {
+    "x": 50,
+    "y": 20
+  },
+  "South Province (Area One) - Flower Patch (High Level)": {
+    "x": 60,
+    "y": 20
+  },
+  "South Province (Area One) - Forest (High Level)": {
+    "x": 70,
+    "y": 20
+  },
+  "South Province (Area One) - Grass (High Level)": {
+    "x": 80,
+    "y": 20
+  },
+  "South Province (Area One) - Lake (High Level)": {
+    "x": 90,
+    "y": 20
+  },
+  "South Province (Area One) - Near Town (High Level)": {
+    "x": 10,
+    "y": 30
+  },
+  "South Province (Area One) - Ocean (High Level)": {
+    "x": 20,
+    "y": 30
+  },
+  "South Province (Area One) - River (High Level)": {
+    "x": 30,
+    "y": 30
+  },
+  "South Province (Area One) - Ruins (High Level)": {
+    "x": 40,
+    "y": 30
+  },
+  "Cortondo Gym (High Level)": {
+    "x": 50,
+    "y": 30
+  },
+  "South Province (Area Two) - Flower Patch (High Level)": {
+    "x": 60,
+    "y": 30
+  },
+  "South Province (Area Two) - Forest (High Level)": {
+    "x": 70,
+    "y": 30
+  },
+  "South Province (Area Two) - Grass (High Level)": {
+    "x": 80,
+    "y": 30
+  },
+  "South Province (Area Two) - Mountain (High Level)": {
+    "x": 90,
+    "y": 30
+  },
+  "South Province (Area Two) - Near Town (High Level)": {
+    "x": 10,
+    "y": 40
+  },
+  "South Province (Area Two) - Olive Grove (High Level)": {
+    "x": 20,
+    "y": 40
+  },
+  "South Province (Area Two) - Rocky (High Level)": {
+    "x": 30,
+    "y": 40
+  },
+  "South Province (Area Four) - Grass (High Level)": {
+    "x": 40,
+    "y": 40
+  },
+  "South Province (Area Four) - Lake (High Level)": {
+    "x": 50,
+    "y": 40
+  },
+  "South Province (Area Four) - Mountain (High Level)": {
+    "x": 60,
+    "y": 40
+  },
+  "Artazon Gym (High Level)": {
+    "x": 70,
+    "y": 40
+  },
+  "South Province (Area Four) - Ocean (High Level)": {
     "x": 80,
     "y": 40
   },
-  "Extra Route Z2": {
+  "South Province (Area Four) - River (High Level)": {
     "x": 90,
     "y": 40
   },
-  "Extra Route Z3": {
-    "x": 100,
-    "y": 40
+  "South Province (Area Three) - Grass (High Level)": {
+    "x": 10,
+    "y": 50
   },
-  "Extra Route Z4": {
-    "x": 110,
-    "y": 40
+  "South Province (Area Three) - Rocky (High Level)": {
+    "x": 20,
+    "y": 50
   },
-  "Extra Route Z5": {
-    "x": 120,
-    "y": 40
+  "East Province (Area One) - Beach (High Level)": {
+    "x": 30,
+    "y": 50
   },
-  "Extra Route Z6": {
-    "x": 130,
-    "y": 40
+  "East Province (Area One) - Forest (High Level)": {
+    "x": 40,
+    "y": 50
   },
-  "Extra Route Z7": {
-    "x": 140,
-    "y": 40
+  "East Province (Area One) - Grass (High Level)": {
+    "x": 50,
+    "y": 50
   },
-  "Extra Route Z8": {
-    "x": 150,
-    "y": 40
+  "East Province (Area One) - Mountain (High Level)": {
+    "x": 60,
+    "y": 50
   },
-  "Extra Route Z9": {
-    "x": 160,
-    "y": 40
+  "East Province (Area One) - Near Town (High Level)": {
+    "x": 70,
+    "y": 50
+  },
+  "East Province (Area One) - Ocean (High Level)": {
+    "x": 80,
+    "y": 50
+  },
+  "Levincia Gym (High Level)": {
+    "x": 90,
+    "y": 50
+  },
+  "East Province (Area One) - Rocky (High Level)": {
+    "x": 10,
+    "y": 60
+  },
+  "South Province (Area Five) - Beach (High Level)": {
+    "x": 20,
+    "y": 60
+  },
+  "South Province (Area Five) - Grass (High Level)": {
+    "x": 30,
+    "y": 60
+  },
+  "South Province (Area Five) - Lake (High Level)": {
+    "x": 40,
+    "y": 60
+  },
+  "South Province (Area Five) - Mountain (High Level)": {
+    "x": 50,
+    "y": 60
+  },
+  "South Province (Area Five) - River (High Level)": {
+    "x": 60,
+    "y": 60
+  },
+  "East Province (Area Two) - Forest (High Level)": {
+    "x": 70,
+    "y": 60
+  },
+  "East Province (Area Two) - Grass (High Level)": {
+    "x": 80,
+    "y": 60
+  },
+  "East Province (Area Two) - Near Town (High Level)": {
+    "x": 90,
+    "y": 60
+  },
+  "East Province (Area Two) - River (High Level)": {
+    "x": 10,
+    "y": 70
+  },
+  "Cascarrafa Gym (High Level)": {
+    "x": 20,
+    "y": 70
+  },
+  "East Province (Area Two) - Rocky (High Level)": {
+    "x": 30,
+    "y": 70
   }
 };
