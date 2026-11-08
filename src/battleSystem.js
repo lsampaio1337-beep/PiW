@@ -864,7 +864,7 @@ class BattleSystem {
 
         this.consecutiveHeals = 0; // Reset for new battle
 
-        if (this.state.currentRoute && this.state.currentRoute.startsWith("Casino - ")) {
+        if (this.state.currentRoute && (this.state.currentRoute.startsWith("Casino - ") || this.state.currentRoute === "Goldenrod Baby Corner" || this.state.currentRoute === "Goldenrod Lucky Spot Corner")) {
             const baseCostStandard = this.state.config.balance.casinoPrices?.standard || 10;
             const baseCostSpecial = this.state.config.balance.casinoPrices?.doubleShiny || 20;
             const cost = this.state.casinoDoubleShiny ? baseCostSpecial : baseCostStandard;
@@ -872,7 +872,7 @@ class BattleSystem {
                 alert("Not enough money! You need $" + cost + " to continue hunting here.");
                 this.stop();
                 if (typeof window.navigateToLocation === 'function') {
-                    window.navigateToLocation("Casino");
+                    window.navigateToLocation(window.currentCasinoHub || "Celadon Casino");
                 }
                 return;
             }
@@ -2268,7 +2268,7 @@ class BattleSystem {
         if (["Safari Zone", "Kanto Safari Zone"].includes(this.state.currentRoute)) {
             encounterCost = this.state.config.balance.safariZonePrice || 500;
             requiresPayment = true;
-        } else if (this.state.currentRoute && this.state.currentRoute.startsWith("Casino - ")) {
+        } else if (this.state.currentRoute && (this.state.currentRoute.startsWith("Casino - ") || this.state.currentRoute === "Goldenrod Baby Corner" || this.state.currentRoute === "Goldenrod Lucky Spot Corner")) {
             const baseCostStandard = this.state.config.balance.casinoPrices?.standard || 10;
             const baseCostSpecial = this.state.config.balance.casinoPrices?.doubleShiny || 20;
             encounterCost = this.state.casinoDoubleShiny ? baseCostSpecial : baseCostStandard;
