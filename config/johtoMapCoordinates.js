@@ -34,10 +34,20 @@ const johtoMapCoordinates = {
     "x": 23.44,
     "y": 59.4
   },
-  "goldenrod_game_corner": {
+"goldenrod_game_corner": {
     "name": "Goldenrod Game Corner",
     "x": 25.62,
     "y": 62.95
+  },
+  "goldenrod_baby_corner": {
+    "name": "Goldenrod Baby Corner",
+    "x": 50,
+    "y": 35.84
+  },
+  "goldenrod_lucky_spot_corner": {
+    "name": "Goldenrod Lucky Spot Corner",
+    "x": 50,
+    "y": 35.84
   },
   "azalea_gym": {
     "name": "Azalea Gym",

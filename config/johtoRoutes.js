@@ -920,6 +920,64 @@ export const johtoRoutes = [
     ]
   },
   {
+    "name": "Goldenrod Baby Corner",
+    "spawns": [
+      {
+        "pokemonId": 440,
+        "minLevel": 18,
+        "maxLevel": 22,
+        "chance": 0.33
+      },
+      {
+        "pokemonId": 173,
+        "minLevel": 18,
+        "maxLevel": 22,
+        "chance": 0.33
+      },
+      {
+        "pokemonId": 174,
+        "minLevel": 18,
+        "maxLevel": 22,
+        "chance": 0.34
+      }
+    ]
+  },
+  {
+    "name": "Goldenrod Lucky Spot Corner",
+    "spawns": [
+      {
+        "pokemonId": 63,
+        "minLevel": 24,
+        "maxLevel": 28,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 27,
+        "minLevel": 24,
+        "maxLevel": 28,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 66,
+        "minLevel": 25,
+        "maxLevel": 29,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 104,
+        "minLevel": 25,
+        "maxLevel": 29,
+        "chance": 0.15
+      },
+      {
+        "pokemonId": 133,
+        "minLevel": 26,
+        "maxLevel": 30,
+        "chance": 0.15
+      }
+    ]
+  },
+  {
     "name": "Team Rocket HQ",
     "spawns": [
       {
@@ -1990,7 +2048,8 @@ export const johtoUnlocks = [
     "areaId": "Route 34",
     "unlocks": [
       "Goldenrod Gym",
-      "Goldenrod Game Corner"
+      "Goldenrod Game Corner",
+      "Goldenrod Baby Corner"
     ],
     "requirements": {
       "catchSpecies": [
@@ -2640,7 +2699,39 @@ export const johtoUnlocks = [
   },
   {
     "challengeName": "Johto Extra Challenge 01",
-    "areaId": "Goldenrod Game Corner",
+    "areaId": "Goldenrod Baby Corner",
+    "unlocks": [
+      "Goldenrod Lucky Spot Corner"
+    ],
+    "requirements": {
+      "catchSpeciesOr": [
+        {
+          "species": "Happiny",
+          "count": 1,
+          "quality": 2
+        },
+        {
+          "species": "Cleffa",
+          "count": 1,
+          "quality": 2
+        },
+        {
+          "species": "Igglybuff",
+          "count": 1,
+          "quality": 2
+        }
+      ]
+    },
+    "gifts": [
+      {
+        "item": "Masterball",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "challengeName": "Johto Extra Challenge 02",
+    "areaId": "Goldenrod Lucky Spot Corner",
     "unlocks": [
       "Team Rocket HQ"
     ],
@@ -2658,15 +2749,15 @@ export const johtoUnlocks = [
     ]
   },
   {
-    "challengeName": "Johto Extra Challenge 02",
+    "challengeName": "Johto Extra Challenge 03",
     "areaId": "Team Rocket HQ",
     "unlocks": [
       "Lake of Rage"
     ],
     "requirements": {
       "defeatSpecific": {
-        "name": "Voltorb",
-        "count": 10
+        "name": "Eevee",
+        "count": 8
       }
     },
     "gifts": [
@@ -2677,7 +2768,7 @@ export const johtoUnlocks = [
     ]
   },
   {
-    "challengeName": "Johto Extra Challenge 03",
+    "challengeName": "Johto Extra Challenge 04",
     "areaId": "Lake of Rage",
     "unlocks": [
       "Mount Silver"
@@ -2698,7 +2789,7 @@ export const johtoUnlocks = [
     ]
   },
   {
-    "challengeName": "Johto Extra Challenge 04",
+    "challengeName": "Johto Extra Challenge 05",
     "areaId": "Mount Silver",
     "unlocks": [
       "Ilex Forest 2"
@@ -2723,7 +2814,7 @@ export const johtoUnlocks = [
     ]
   },
   {
-    "challengeName": "Johto Extra Challenge 05",
+    "challengeName": "Johto Extra Challenge 06",
     "areaId": "Ilex Forest 2",
     "unlocks": [
       "Key to Mount Silver Apex Challenge"
@@ -2972,7 +3063,7 @@ export const johtoUnlocks = [
     "requirements": {
       "completeChallenges": [
         "Kanto Extra Challenge 06",
-        "Johto Extra Challenge 05",
+        "Johto Extra Challenge 06",
         "Extra Challenge (Roaming)"
       ]
     }
