@@ -2086,16 +2086,22 @@ export const galarRoutes = [
     "name": "Energy Plant",
     "spawns": [
       {
+        "pokemonId": 887,
+        "minLevel": 58,
+        "maxLevel": 59,
+        "chance": 0.34
+      },
+      {
         "pokemonId": 888,
         "minLevel": 58,
         "maxLevel": 59,
-        "chance": 0.5
+        "chance": 0.33
       },
       {
         "pokemonId": 889,
         "minLevel": 58,
         "maxLevel": 59,
-        "chance": 0.5
+        "chance": 0.33
       }
     ]
   },
@@ -2289,6 +2295,12 @@ export const galarRoutes = [
         "minLevel": 64,
         "maxLevel": 65,
         "chance": 0.08
+      },
+      {
+        "pokemonId": 892,
+        "minLevel": 64,
+        "maxLevel": 65,
+        "chance": 0.04
       }
     ]
   },
@@ -3327,13 +3339,13 @@ export const galarRoutes = [
         "chance": 0.25
       },
       {
-        "pokemonId": 144,
+        "pokemonId": 1079,
         "minLevel": 93,
         "maxLevel": 95,
         "chance": 0.25
       },
       {
-        "pokemonId": 145,
+        "pokemonId": 1080,
         "minLevel": 93,
         "maxLevel": 95,
         "chance": 0.25
@@ -3891,7 +3903,7 @@ export const galarRoutes = [
     "name": "Ironforge Depths",
     "spawns": [
       {
-        "pokemonId": 143,
+        "pokemonId": 1078,
         "minLevel": 60,
         "maxLevel": 65,
         "chance": 0.16
