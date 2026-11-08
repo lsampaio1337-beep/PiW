@@ -1033,91 +1033,73 @@ export const galarRoutes = [
         "pokemonId": 875,
         "minLevel": 25,
         "maxLevel": 27,
-        "chance": 0.07
+        "chance": 0.0837
       },
       {
         "pokemonId": 579,
         "minLevel": 25,
         "maxLevel": 27,
-        "chance": 0.07
+        "chance": 0.0833
       },
       {
         "pokemonId": 576,
         "minLevel": 25,
         "maxLevel": 27,
-        "chance": 0.07
+        "chance": 0.0833
       },
       {
         "pokemonId": 625,
         "minLevel": 25,
         "maxLevel": 27,
-        "chance": 0.07
+        "chance": 0.0833
       },
       {
         "pokemonId": 132,
         "minLevel": 25,
         "maxLevel": 27,
-        "chance": 0.07
+        "chance": 0.0833
       },
       {
         "pokemonId": 680,
         "minLevel": 25,
         "maxLevel": 27,
-        "chance": 0.07
-      },
-      {
-        "pokemonId": 879,
-        "minLevel": 25,
-        "maxLevel": 27,
-        "chance": 0.07
+        "chance": 0.0833
       },
       {
         "pokemonId": 601,
         "minLevel": 25,
         "maxLevel": 27,
-        "chance": 0.07
+        "chance": 0.0833
       },
       {
         "pokemonId": 623,
         "minLevel": 25,
         "maxLevel": 27,
-        "chance": 0.07
+        "chance": 0.0833
       },
       {
         "pokemonId": 479,
         "minLevel": 25,
         "maxLevel": 27,
-        "chance": 0.07
-      },
-      {
-        "pokemonId": 884,
-        "minLevel": 25,
-        "maxLevel": 27,
-        "chance": 0.07
+        "chance": 0.0833
       },
       {
         "pokemonId": 468,
         "minLevel": 25,
         "maxLevel": 27,
-        "chance": 0.07
-      },
-      {
-        "pokemonId": 885,
-        "minLevel": 25,
-        "maxLevel": 27,
-        "chance": 0.07
+        "chance": 0.0833
       },
       {
         "pokemonId": 704,
         "minLevel": 25,
         "maxLevel": 27,
-        "chance": 0.07
+        "chance": 0.0833
       },
       {
         "pokemonId": 584,
         "minLevel": 25,
         "maxLevel": 27,
-        "chance": 0.07
+        "chance": 0.0833
       }
     ]
   },
@@ -1562,130 +1544,112 @@ export const galarRoutes = [
     "name": "Route 6",
     "spawns": [
       {
-        "pokemonId": 880,
-        "minLevel": 42,
-        "maxLevel": 43,
-        "chance": 0.05
-      },
-      {
-        "pokemonId": 881,
-        "minLevel": 42,
-        "maxLevel": 43,
-        "chance": 0.05
-      },
-      {
-        "pokemonId": 882,
-        "minLevel": 42,
-        "maxLevel": 43,
-        "chance": 0.05
-      },
-      {
         "pokemonId": 883,
         "minLevel": 42,
         "maxLevel": 43,
-        "chance": 0.05
+        "chance": 0.0548
       },
       {
         "pokemonId": 814,
         "minLevel": 42,
         "maxLevel": 43,
-        "chance": 0.05
+        "chance": 0.0556
       },
       {
         "pokemonId": 811,
         "minLevel": 42,
         "maxLevel": 43,
-        "chance": 0.05
+        "chance": 0.0556
       },
       {
         "pokemonId": 817,
         "minLevel": 42,
         "maxLevel": 43,
-        "chance": 0.05
+        "chance": 0.0556
       },
       {
         "pokemonId": 631,
         "minLevel": 42,
         "maxLevel": 43,
-        "chance": 0.05
+        "chance": 0.0556
       },
       {
         "pokemonId": 632,
         "minLevel": 42,
         "maxLevel": 43,
-        "chance": 0.05
+        "chance": 0.0556
       },
       {
         "pokemonId": 324,
         "minLevel": 42,
         "maxLevel": 43,
-        "chance": 0.05
+        "chance": 0.0556
       },
       {
         "pokemonId": 701,
         "minLevel": 42,
         "maxLevel": 43,
-        "chance": 0.05
+        "chance": 0.0556
       },
       {
         "pokemonId": 556,
         "minLevel": 42,
         "maxLevel": 43,
-        "chance": 0.05
+        "chance": 0.0556
       },
       {
         "pokemonId": 451,
         "minLevel": 42,
         "maxLevel": 43,
-        "chance": 0.05
+        "chance": 0.0556
       },
       {
         "pokemonId": 328,
         "minLevel": 42,
         "maxLevel": 43,
-        "chance": 0.05
+        "chance": 0.0556
       },
       {
         "pokemonId": 843,
         "minLevel": 42,
         "maxLevel": 43,
-        "chance": 0.05
+        "chance": 0.0556
       },
       {
         "pokemonId": 610,
         "minLevel": 42,
         "maxLevel": 43,
-        "chance": 0.05
+        "chance": 0.0556
       },
       {
         "pokemonId": 694,
         "minLevel": 42,
         "maxLevel": 43,
-        "chance": 0.05
+        "chance": 0.0556
       },
       {
         "pokemonId": 449,
         "minLevel": 42,
         "maxLevel": 43,
-        "chance": 0.05
+        "chance": 0.0556
       },
       {
         "pokemonId": 79,
         "minLevel": 42,
         "maxLevel": 43,
-        "chance": 0.05
+        "chance": 0.0556
       },
       {
         "pokemonId": 562,
         "minLevel": 42,
         "maxLevel": 43,
-        "chance": 0.05
+        "chance": 0.0556
       },
       {
         "pokemonId": 51,
         "minLevel": 42,
         "maxLevel": 43,
-        "chance": 0.05
+        "chance": 0.0556
       }
     ]
   },
@@ -2084,26 +2048,7 @@ export const galarRoutes = [
   },
   {
     "name": "Energy Plant",
-    "spawns": [
-      {
-        "pokemonId": 887,
-        "minLevel": 58,
-        "maxLevel": 59,
-        "chance": 0.34
-      },
-      {
-        "pokemonId": 888,
-        "minLevel": 58,
-        "maxLevel": 59,
-        "chance": 0.33
-      },
-      {
-        "pokemonId": 889,
-        "minLevel": 58,
-        "maxLevel": 59,
-        "chance": 0.33
-      }
-    ]
+    "spawns": []
   },
   {
     "name": "Pokemon League",
@@ -2225,82 +2170,70 @@ export const galarRoutes = [
     "name": "Forest of Focus",
     "spawns": [
       {
-        "pokemonId": 893,
-        "minLevel": 64,
-        "maxLevel": 65,
-        "chance": 0.08
-      },
-      {
         "pokemonId": 636,
         "minLevel": 64,
         "maxLevel": 65,
-        "chance": 0.08
+        "chance": 0.091
       },
       {
         "pokemonId": 570,
         "minLevel": 64,
         "maxLevel": 65,
-        "chance": 0.08
+        "chance": 0.0909
       },
       {
         "pokemonId": 765,
         "minLevel": 64,
         "maxLevel": 65,
-        "chance": 0.08
+        "chance": 0.0909
       },
       {
         "pokemonId": 587,
         "minLevel": 64,
         "maxLevel": 65,
-        "chance": 0.08
+        "chance": 0.0909
       },
       {
         "pokemonId": 766,
         "minLevel": 64,
         "maxLevel": 65,
-        "chance": 0.08
+        "chance": 0.0909
       },
       {
         "pokemonId": 588,
         "minLevel": 64,
         "maxLevel": 65,
-        "chance": 0.08
+        "chance": 0.0909
       },
       {
         "pokemonId": 374,
         "minLevel": 64,
         "maxLevel": 65,
-        "chance": 0.08
+        "chance": 0.0909
       },
       {
         "pokemonId": 25,
         "minLevel": 64,
         "maxLevel": 65,
-        "chance": 0.08
+        "chance": 0.0909
       },
       {
         "pokemonId": 590,
         "minLevel": 64,
         "maxLevel": 65,
-        "chance": 0.08
+        "chance": 0.0909
       },
       {
         "pokemonId": 543,
         "minLevel": 64,
         "maxLevel": 65,
-        "chance": 0.08
+        "chance": 0.0909
       },
       {
         "pokemonId": 114,
         "minLevel": 64,
         "maxLevel": 65,
-        "chance": 0.08
-      },
-      {
-        "pokemonId": 892,
-        "minLevel": 64,
-        "maxLevel": 65,
-        "chance": 0.04
+        "chance": 0.0909
       }
     ]
   },
@@ -2803,22 +2736,16 @@ export const galarRoutes = [
     "name": "Master Dojo",
     "spawns": [
       {
-        "pokemonId": 891,
-        "minLevel": 78,
-        "maxLevel": 80,
-        "chance": 0.33
-      },
-      {
         "pokemonId": 7,
         "minLevel": 78,
         "maxLevel": 80,
-        "chance": 0.33
+        "chance": 0.5
       },
       {
         "pokemonId": 1,
         "minLevel": 78,
         "maxLevel": 80,
-        "chance": 0.33
+        "chance": 0.5
       }
     ]
   },
@@ -2906,61 +2833,55 @@ export const galarRoutes = [
         "pokemonId": 32,
         "minLevel": 81,
         "maxLevel": 83,
-        "chance": 0.1
+        "chance": 0.1112
       },
       {
         "pokemonId": 29,
         "minLevel": 81,
         "maxLevel": 83,
-        "chance": 0.1
+        "chance": 0.1111
       },
       {
         "pokemonId": 439,
         "minLevel": 81,
         "maxLevel": 83,
-        "chance": 0.1
+        "chance": 0.1111
       },
       {
         "pokemonId": 359,
         "minLevel": 81,
         "maxLevel": 83,
-        "chance": 0.1
+        "chance": 0.1111
       },
       {
         "pokemonId": 588,
         "minLevel": 81,
         "maxLevel": 83,
-        "chance": 0.1
+        "chance": 0.1111
       },
       {
         "pokemonId": 239,
         "minLevel": 81,
         "maxLevel": 83,
-        "chance": 0.1
-      },
-      {
-        "pokemonId": 886,
-        "minLevel": 81,
-        "maxLevel": 83,
-        "chance": 0.1
+        "chance": 0.1111
       },
       {
         "pokemonId": 854,
         "minLevel": 81,
         "maxLevel": 83,
-        "chance": 0.1
+        "chance": 0.1111
       },
       {
         "pokemonId": 583,
         "minLevel": 81,
         "maxLevel": 83,
-        "chance": 0.1
+        "chance": 0.1111
       },
       {
         "pokemonId": 582,
         "minLevel": 81,
         "maxLevel": 83,
-        "chance": 0.1
+        "chance": 0.1111
       }
     ]
   },
@@ -3054,20 +2975,7 @@ export const galarRoutes = [
   },
   {
     "name": "Crown Shrine",
-    "spawns": [
-      {
-        "pokemonId": 896,
-        "minLevel": 86,
-        "maxLevel": 87,
-        "chance": 0.5
-      },
-      {
-        "pokemonId": 897,
-        "minLevel": 86,
-        "maxLevel": 87,
-        "chance": 0.5
-      }
-    ]
+    "spawns": []
   },
   {
     "name": "Giant's Foot",
@@ -3076,61 +2984,55 @@ export const galarRoutes = [
         "pokemonId": 345,
         "minLevel": 87,
         "maxLevel": 89,
-        "chance": 0.1
+        "chance": 0.1112
       },
       {
         "pokemonId": 347,
         "minLevel": 87,
         "maxLevel": 89,
-        "chance": 0.1
+        "chance": 0.1111
       },
       {
         "pokemonId": 566,
         "minLevel": 87,
         "maxLevel": 89,
-        "chance": 0.1
+        "chance": 0.1111
       },
       {
         "pokemonId": 344,
         "minLevel": 87,
         "maxLevel": 89,
-        "chance": 0.1
-      },
-      {
-        "pokemonId": 879,
-        "minLevel": 87,
-        "maxLevel": 89,
-        "chance": 0.1
+        "chance": 0.1111
       },
       {
         "pokemonId": 874,
         "minLevel": 87,
         "maxLevel": 89,
-        "chance": 0.1
+        "chance": 0.1111
       },
       {
         "pokemonId": 437,
         "minLevel": 87,
         "maxLevel": 89,
-        "chance": 0.1
+        "chance": 0.1111
       },
       {
         "pokemonId": 359,
         "minLevel": 87,
         "maxLevel": 89,
-        "chance": 0.1
+        "chance": 0.1111
       },
       {
         "pokemonId": 531,
         "minLevel": 87,
         "maxLevel": 89,
-        "chance": 0.1
+        "chance": 0.1111
       },
       {
         "pokemonId": 615,
         "minLevel": 87,
         "maxLevel": 89,
-        "chance": 0.1
+        "chance": 0.1111
       }
     ]
   },
@@ -3336,25 +3238,13 @@ export const galarRoutes = [
         "pokemonId": 142,
         "minLevel": 93,
         "maxLevel": 95,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 1079,
-        "minLevel": 93,
-        "maxLevel": 95,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 1080,
-        "minLevel": 93,
-        "maxLevel": 95,
-        "chance": 0.25
+        "chance": 0.5
       },
       {
         "pokemonId": 146,
         "minLevel": 93,
         "maxLevel": 95,
-        "chance": 0.25
+        "chance": 0.5
       }
     ]
   },
@@ -3411,71 +3301,184 @@ export const galarRoutes = [
   },
   {
     "name": "Split-Decision Ruins",
-    "spawns": [
-      {
-        "pokemonId": 894,
-        "minLevel": 99,
-        "maxLevel": 100,
-        "chance": 0.5
-      },
-      {
-        "pokemonId": 895,
-        "minLevel": 99,
-        "maxLevel": 100,
-        "chance": 0.5
-      }
-    ]
-  }
-  ,
+    "spawns": []
+  },
   {
     "name": "Z Realm - Entrance",
     "pokes": [
-      { "name": "Vikavolt", "minLevel": 100, "maxLevel": 100, "probability": 0.14 },
-      { "name": "Roserade", "minLevel": 100, "maxLevel": 100, "probability": 0.14 },
-      { "name": "Barboach", "minLevel": 100, "maxLevel": 100, "probability": 0.14 },
-      { "name": "Rhyperior", "minLevel": 100, "maxLevel": 100, "probability": 0.14 },
-      { "name": "Flygon", "minLevel": 100, "maxLevel": 100, "probability": 0.14 },
-      { "name": "Haxorus", "minLevel": 100, "maxLevel": 100, "probability": 0.15 },
-      { "name": "Type: Null", "minLevel": 100, "maxLevel": 100, "probability": 0.15 }
+      {
+        "name": "Vikavolt",
+        "minLevel": 100,
+        "maxLevel": 100,
+        "probability": 0.14
+      },
+      {
+        "name": "Roserade",
+        "minLevel": 100,
+        "maxLevel": 100,
+        "probability": 0.14
+      },
+      {
+        "name": "Barboach",
+        "minLevel": 100,
+        "maxLevel": 100,
+        "probability": 0.14
+      },
+      {
+        "name": "Rhyperior",
+        "minLevel": 100,
+        "maxLevel": 100,
+        "probability": 0.14
+      },
+      {
+        "name": "Flygon",
+        "minLevel": 100,
+        "maxLevel": 100,
+        "probability": 0.14
+      },
+      {
+        "name": "Haxorus",
+        "minLevel": 100,
+        "maxLevel": 100,
+        "probability": 0.15
+      },
+      {
+        "name": "Type: Null",
+        "minLevel": 100,
+        "maxLevel": 100,
+        "probability": 0.15
+      }
     ]
   },
   {
     "name": "Z Realm - Path",
     "pokes": [
-      { "name": "Tyranitar", "minLevel": 100, "maxLevel": 100, "probability": 0.14 },
-      { "name": "Hydreigon", "minLevel": 100, "maxLevel": 100, "probability": 0.14 },
-      { "name": "Eternatus", "minLevel": 100, "maxLevel": 100, "probability": 0.14 },
-      { "name": "Alakazam", "minLevel": 100, "maxLevel": 100, "probability": 0.14 },
-      { "name": "Scolipede", "minLevel": 100, "maxLevel": 100, "probability": 0.14 },
-      { "name": "Magnezone", "minLevel": 100, "maxLevel": 100, "probability": 0.15 },
-      { "name": "Stoutland", "minLevel": 100, "maxLevel": 100, "probability": 0.15 }
+      {
+        "name": "Tyranitar",
+        "minLevel": 100,
+        "maxLevel": 100,
+        "probability": 0.1628
+      },
+      {
+        "name": "Hydreigon",
+        "minLevel": 100,
+        "maxLevel": 100,
+        "probability": 0.1628
+      },
+      {
+        "name": "Alakazam",
+        "minLevel": 100,
+        "maxLevel": 100,
+        "probability": 0.1628
+      },
+      {
+        "name": "Scolipede",
+        "minLevel": 100,
+        "maxLevel": 100,
+        "probability": 0.1628
+      },
+      {
+        "name": "Magnezone",
+        "minLevel": 100,
+        "maxLevel": 100,
+        "probability": 0.1744
+      },
+      {
+        "name": "Stoutland",
+        "minLevel": 100,
+        "maxLevel": 100,
+        "probability": 0.1744
+      }
     ]
   },
   {
     "name": "Z Realm - Depths",
     "pokes": [
-      { "name": "Azumarill", "minLevel": 100, "maxLevel": 100, "probability": 0.14 },
-      { "name": "Poliwrath", "minLevel": 100, "maxLevel": 100, "probability": 0.14 },
-      { "name": "Politoed", "minLevel": 100, "maxLevel": 100, "probability": 0.14 },
-      { "name": "Exploud", "minLevel": 100, "maxLevel": 100, "probability": 0.14 },
-      { "name": "Porygon-Z", "minLevel": 100, "maxLevel": 100, "probability": 0.14 },
-      { "name": "Nidoqueen", "minLevel": 100, "maxLevel": 100, "probability": 0.15 },
-      { "name": "Nidoking", "minLevel": 100, "maxLevel": 100, "probability": 0.15 }
+      {
+        "name": "Azumarill",
+        "minLevel": 100,
+        "maxLevel": 100,
+        "probability": 0.14
+      },
+      {
+        "name": "Poliwrath",
+        "minLevel": 100,
+        "maxLevel": 100,
+        "probability": 0.14
+      },
+      {
+        "name": "Politoed",
+        "minLevel": 100,
+        "maxLevel": 100,
+        "probability": 0.14
+      },
+      {
+        "name": "Exploud",
+        "minLevel": 100,
+        "maxLevel": 100,
+        "probability": 0.14
+      },
+      {
+        "name": "Porygon-Z",
+        "minLevel": 100,
+        "maxLevel": 100,
+        "probability": 0.14
+      },
+      {
+        "name": "Nidoqueen",
+        "minLevel": 100,
+        "maxLevel": 100,
+        "probability": 0.15
+      },
+      {
+        "name": "Nidoking",
+        "minLevel": 100,
+        "maxLevel": 100,
+        "probability": 0.15
+      }
     ]
   },
   {
     "name": "Z Realm - Core",
     "pokes": [
-      { "name": "Salamence", "minLevel": 100, "maxLevel": 100, "probability": 0.14 },
-      { "name": "Garchomp", "minLevel": 100, "maxLevel": 100, "probability": 0.14 },
-      { "name": "Metagross", "minLevel": 100, "maxLevel": 100, "probability": 0.14 },
-      { "name": "Crobat", "minLevel": 100, "maxLevel": 100, "probability": 0.14 },
-      { "name": "Walrein", "minLevel": 100, "maxLevel": 100, "probability": 0.14 },
-      { "name": "Aggron", "minLevel": 100, "maxLevel": 100, "probability": 0.15 },
-      { "name": "Calyrex", "minLevel": 100, "maxLevel": 100, "probability": 0.15 }
+      {
+        "name": "Salamence",
+        "minLevel": 100,
+        "maxLevel": 100,
+        "probability": 0.1647
+      },
+      {
+        "name": "Garchomp",
+        "minLevel": 100,
+        "maxLevel": 100,
+        "probability": 0.1647
+      },
+      {
+        "name": "Metagross",
+        "minLevel": 100,
+        "maxLevel": 100,
+        "probability": 0.1647
+      },
+      {
+        "name": "Crobat",
+        "minLevel": 100,
+        "maxLevel": 100,
+        "probability": 0.1647
+      },
+      {
+        "name": "Walrein",
+        "minLevel": 100,
+        "maxLevel": 100,
+        "probability": 0.1647
+      },
+      {
+        "name": "Aggron",
+        "minLevel": 100,
+        "maxLevel": 100,
+        "probability": 0.1765
+      }
     ]
   },
-// Extra Challenge W Routes
   {
     "name": "Whispering Woods",
     "spawns": [
@@ -3859,43 +3862,37 @@ export const galarRoutes = [
         "pokemonId": 169,
         "minLevel": 60,
         "maxLevel": 65,
-        "chance": 0.16
+        "chance": 0.186
       },
       {
         "pokemonId": 569,
         "minLevel": 60,
         "maxLevel": 65,
-        "chance": 0.14
+        "chance": 0.1628
       },
       {
         "pokemonId": 748,
         "minLevel": 60,
         "maxLevel": 65,
-        "chance": 0.14
+        "chance": 0.1628
       },
       {
         "pokemonId": 758,
         "minLevel": 60,
         "maxLevel": 65,
-        "chance": 0.14
-      },
-      {
-        "pokemonId": 890,
-        "minLevel": 60,
-        "maxLevel": 65,
-        "chance": 0.14
+        "chance": 0.1628
       },
       {
         "pokemonId": 40,
         "minLevel": 60,
         "maxLevel": 65,
-        "chance": 0.14
+        "chance": 0.1628
       },
       {
         "pokemonId": 53,
         "minLevel": 60,
         "maxLevel": 65,
-        "chance": 0.14
+        "chance": 0.1628
       }
     ]
   },
@@ -3903,46 +3900,40 @@ export const galarRoutes = [
     "name": "Ironforge Depths",
     "spawns": [
       {
-        "pokemonId": 1078,
-        "minLevel": 60,
-        "maxLevel": 65,
-        "chance": 0.16
-      },
-      {
         "pokemonId": 174,
         "minLevel": 60,
         "maxLevel": 65,
-        "chance": 0.14
+        "chance": 0.1665
       },
       {
         "pokemonId": 233,
         "minLevel": 60,
         "maxLevel": 65,
-        "chance": 0.14
+        "chance": 0.1667
       },
       {
         "pokemonId": 294,
         "minLevel": 60,
         "maxLevel": 65,
-        "chance": 0.14
+        "chance": 0.1667
       },
       {
         "pokemonId": 295,
         "minLevel": 60,
         "maxLevel": 65,
-        "chance": 0.14
+        "chance": 0.1667
       },
       {
         "pokemonId": 428,
         "minLevel": 60,
         "maxLevel": 65,
-        "chance": 0.14
+        "chance": 0.1667
       },
       {
         "pokemonId": 463,
         "minLevel": 60,
         "maxLevel": 65,
-        "chance": 0.14
+        "chance": 0.1667
       }
     ]
   },
@@ -4438,6 +4429,137 @@ export const galarRoutes = [
         "chance": 0.2
       }
     ]
+  },
+  {
+    "name": "Special Route",
+    "spawns": [
+      {
+        "pokemonId": 887,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.048
+      },
+      {
+        "pokemonId": 888,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.0476
+      },
+      {
+        "pokemonId": 889,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.0476
+      },
+      {
+        "pokemonId": 890,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.0476
+      },
+      {
+        "pokemonId": 891,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.0476
+      },
+      {
+        "pokemonId": 897,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.0476
+      },
+      {
+        "pokemonId": 895,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.0476
+      },
+      {
+        "pokemonId": 896,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.0476
+      },
+      {
+        "pokemonId": 893,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.0476
+      },
+      {
+        "pokemonId": 894,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.0476
+      },
+      {
+        "pokemonId": 1078,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.0476
+      },
+      {
+        "pokemonId": 1079,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.0476
+      },
+      {
+        "pokemonId": 1080,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.0476
+      },
+      {
+        "pokemonId": 892,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.0476
+      },
+      {
+        "pokemonId": 884,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.0476
+      },
+      {
+        "pokemonId": 885,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.0476
+      },
+      {
+        "pokemonId": 886,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.0476
+      },
+      {
+        "pokemonId": 879,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.0476
+      },
+      {
+        "pokemonId": 881,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.0476
+      },
+      {
+        "pokemonId": 880,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.0476
+      },
+      {
+        "pokemonId": 882,
+        "minLevel": 60,
+        "maxLevel": 65,
+        "chance": 0.0476
+      }
+    ]
   }
 ];
 
@@ -4806,7 +4928,8 @@ export const galarUnlocks = [
     "challengeName": "Challenge 40",
     "areaId": "Energy Plant",
     "unlocks": [
-      "Pokemon League"
+      "Pokemon League",
+      "Special Route"
     ],
     "requirements": {}
   },
@@ -5062,132 +5185,180 @@ export const galarUnlocks = [
   {
     "challengeName": "Extra Challenge Z 4",
     "areaId": "Z Realm - Core",
-    "unlocks": ["Whispering Woods"],
+    "unlocks": [
+      "Whispering Woods"
+    ],
     "requirements": {}
   },
   {
     "challengeName": "Extra Challenge W 1",
     "areaId": "Whispering Woods",
-    "unlocks": ["Crystal Caverns"],
+    "unlocks": [
+      "Crystal Caverns"
+    ],
     "requirements": {}
   },
   {
     "challengeName": "Extra Challenge W 2",
     "areaId": "Crystal Caverns",
-    "unlocks": ["Volcanic Ridge"],
+    "unlocks": [
+      "Volcanic Ridge"
+    ],
     "requirements": {}
   },
   {
     "challengeName": "Extra Challenge W 3",
     "areaId": "Volcanic Ridge",
-    "unlocks": ["Mystic Lake"],
+    "unlocks": [
+      "Mystic Lake"
+    ],
     "requirements": {}
   },
   {
     "challengeName": "Extra Challenge W 4",
     "areaId": "Mystic Lake",
-    "unlocks": ["Zephyr Heights"],
+    "unlocks": [
+      "Zephyr Heights"
+    ],
     "requirements": {}
   },
   {
     "challengeName": "Extra Challenge W 5",
     "areaId": "Zephyr Heights",
-    "unlocks": ["Shadow Valley"],
+    "unlocks": [
+      "Shadow Valley"
+    ],
     "requirements": {}
   },
   {
     "challengeName": "Extra Challenge W 6",
     "areaId": "Shadow Valley",
-    "unlocks": ["Glimmering Sands"],
+    "unlocks": [
+      "Glimmering Sands"
+    ],
     "requirements": {}
   },
   {
     "challengeName": "Extra Challenge W 7",
     "areaId": "Glimmering Sands",
-    "unlocks": ["Thunder Peak"],
+    "unlocks": [
+      "Thunder Peak"
+    ],
     "requirements": {}
   },
   {
     "challengeName": "Extra Challenge W 8",
     "areaId": "Thunder Peak",
-    "unlocks": ["Frozen Tundra"],
+    "unlocks": [
+      "Frozen Tundra"
+    ],
     "requirements": {}
   },
   {
     "challengeName": "Extra Challenge W 9",
     "areaId": "Frozen Tundra",
-    "unlocks": ["Ironforge Depths"],
+    "unlocks": [
+      "Ironforge Depths"
+    ],
     "requirements": {}
   },
   {
     "challengeName": "Extra Challenge W 10",
     "areaId": "Ironforge Depths",
-    "unlocks": ["Celestial Gardens"],
+    "unlocks": [
+      "Celestial Gardens"
+    ],
     "requirements": {}
   },
   {
     "challengeName": "Extra Challenge W 11",
     "areaId": "Celestial Gardens",
-    "unlocks": ["Abyssal Trench"],
+    "unlocks": [
+      "Abyssal Trench"
+    ],
     "requirements": {}
   },
   {
     "challengeName": "Extra Challenge W 12",
     "areaId": "Abyssal Trench",
-    "unlocks": ["Radiant Meadow"],
+    "unlocks": [
+      "Radiant Meadow"
+    ],
     "requirements": {}
   },
   {
     "challengeName": "Extra Challenge W 13",
     "areaId": "Radiant Meadow",
-    "unlocks": ["Phantom Ruins"],
+    "unlocks": [
+      "Phantom Ruins"
+    ],
     "requirements": {}
   },
   {
     "challengeName": "Extra Challenge W 14",
     "areaId": "Phantom Ruins",
-    "unlocks": ["Earthen Plateau"],
+    "unlocks": [
+      "Earthen Plateau"
+    ],
     "requirements": {}
   },
   {
     "challengeName": "Extra Challenge W 15",
     "areaId": "Earthen Plateau",
-    "unlocks": ["Serene Delta"],
+    "unlocks": [
+      "Serene Delta"
+    ],
     "requirements": {}
   },
   {
     "challengeName": "Extra Challenge W 16",
     "areaId": "Serene Delta",
-    "unlocks": ["Bramble Thicket"],
+    "unlocks": [
+      "Bramble Thicket"
+    ],
     "requirements": {}
   },
   {
     "challengeName": "Extra Challenge W 17",
     "areaId": "Bramble Thicket",
-    "unlocks": ["Mirage Oasis"],
+    "unlocks": [
+      "Mirage Oasis"
+    ],
     "requirements": {}
   },
   {
     "challengeName": "Extra Challenge W 18",
     "areaId": "Mirage Oasis",
-    "unlocks": ["Cobalt Coast"],
+    "unlocks": [
+      "Cobalt Coast"
+    ],
     "requirements": {}
   },
   {
     "challengeName": "Extra Challenge W 19",
     "areaId": "Cobalt Coast",
-    "unlocks": ["Obsidian Spire"],
+    "unlocks": [
+      "Obsidian Spire"
+    ],
     "requirements": {}
   },
   {
     "challengeName": "Extra Challenge W 20",
     "areaId": "Obsidian Spire",
-    "unlocks": ["Lush Canopy"],
+    "unlocks": [
+      "Lush Canopy"
+    ],
     "requirements": {}
   },
   {
     "challengeName": "Extra Challenge W 21",
     "areaId": "Lush Canopy",
+    "unlocks": [],
+    "requirements": {}
+  },
+  {
+    "challengeName": "Special Extra Challenge",
+    "areaId": "Special Route",
     "unlocks": [],
     "requirements": {}
   }

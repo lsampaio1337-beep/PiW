@@ -123,6 +123,11 @@ const galarMapCoordinates = {
     "name": "Lush Canopy",
     "x": 820,
     "y": 1200
+  },
+  "Special Route": {
+    "name": "Special Route",
+    "x": 100,
+    "y": 100
   }
 };
 export default galarMapCoordinates;
