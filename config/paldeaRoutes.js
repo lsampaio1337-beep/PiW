@@ -5123,6 +5123,1575 @@ export const paldeaRoutes = [
         "chance": 0.2
       }
     ]
+  },
+  {
+    "name": "Poco Path - Main (High Level)",
+    "spawns": [
+      {
+        "pokemonId": 817,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1665
+      },
+      {
+        "pokemonId": 731,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 124,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 391,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 677,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 750,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      }
+    ]
+  },
+  {
+    "name": "Los Platos - Main (High Level)",
+    "spawns": [
+      {
+        "pokemonId": 312,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1665
+      },
+      {
+        "pokemonId": 998,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 68,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 372,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 78,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 1016,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      }
+    ]
+  },
+  {
+    "name": "Mesagoza - Main (High Level)",
+    "spawns": [
+      {
+        "pokemonId": 158,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1665
+      },
+      {
+        "pokemonId": 44,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 969,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 842,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 732,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 721,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      }
+    ]
+  },
+  {
+    "name": "South Province (Area One) - Beach (High Level)",
+    "spawns": [
+      {
+        "pokemonId": 178,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1665
+      },
+      {
+        "pokemonId": 836,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 199,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 558,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 777,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 130,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      }
+    ]
+  },
+  {
+    "name": "South Province (Area One) - Cave (High Level)",
+    "spawns": [
+      {
+        "pokemonId": 756,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1665
+      },
+      {
+        "pokemonId": 975,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 867,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 937,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 593,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 964,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      }
+    ]
+  },
+  {
+    "name": "South Province (Area One) - Flower Patch (High Level)",
+    "spawns": [
+      {
+        "pokemonId": 186,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1665
+      },
+      {
+        "pokemonId": 136,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 815,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 260,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 247,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 621,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      }
+    ]
+  },
+  {
+    "name": "South Province (Area One) - Forest (High Level)",
+    "spawns": [
+      {
+        "pokemonId": 500,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1665
+      },
+      {
+        "pokemonId": 255,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 329,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 280,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 1019,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 906,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      }
+    ]
+  },
+  {
+    "name": "South Province (Area One) - Grass (High Level)",
+    "spawns": [
+      {
+        "pokemonId": 949,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1665
+      },
+      {
+        "pokemonId": 386,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 182,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 407,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 22,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 577,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      }
+    ]
+  },
+  {
+    "name": "South Province (Area One) - Lake (High Level)",
+    "spawns": [
+      {
+        "pokemonId": 105,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1665
+      },
+      {
+        "pokemonId": 429,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 539,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 42,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 332,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 360,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      }
+    ]
+  },
+  {
+    "name": "South Province (Area One) - Near Town (High Level)",
+    "spawns": [
+      {
+        "pokemonId": 724,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1665
+      },
+      {
+        "pokemonId": 392,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 5,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 618,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 47,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 252,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      }
+    ]
+  },
+  {
+    "name": "South Province (Area One) - Ocean (High Level)",
+    "spawns": [
+      {
+        "pokemonId": 157,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1665
+      },
+      {
+        "pokemonId": 699,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 213,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 930,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 472,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 477,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      }
+    ]
+  },
+  {
+    "name": "South Province (Area One) - River (High Level)",
+    "spawns": [
+      {
+        "pokemonId": 700,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1665
+      },
+      {
+        "pokemonId": 809,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 660,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 740,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 979,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 814,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      }
+    ]
+  },
+  {
+    "name": "South Province (Area One) - Ruins (High Level)",
+    "spawns": [
+      {
+        "pokemonId": 841,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1665
+      },
+      {
+        "pokemonId": 497,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 728,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 209,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 655,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 354,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      }
+    ]
+  },
+  {
+    "name": "Cortondo Gym (High Level)",
+    "spawns": [
+      {
+        "pokemonId": 151,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1665
+      },
+      {
+        "pokemonId": 155,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 432,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 142,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 166,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 282,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      }
+    ]
+  },
+  {
+    "name": "South Province (Area Two) - Flower Patch (High Level)",
+    "spawns": [
+      {
+        "pokemonId": 812,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1665
+      },
+      {
+        "pokemonId": 428,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 448,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 2,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 601,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 654,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      }
+    ]
+  },
+  {
+    "name": "South Province (Area Two) - Forest (High Level)",
+    "spawns": [
+      {
+        "pokemonId": 148,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1665
+      },
+      {
+        "pokemonId": 195,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 91,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 439,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 689,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 632,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      }
+    ]
+  },
+  {
+    "name": "South Province (Area Two) - Grass (High Level)",
+    "spawns": [
+      {
+        "pokemonId": 498,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1665
+      },
+      {
+        "pokemonId": 469,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 1022,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 768,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 952,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 258,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      }
+    ]
+  },
+  {
+    "name": "South Province (Area Two) - Mountain (High Level)",
+    "spawns": [
+      {
+        "pokemonId": 571,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1665
+      },
+      {
+        "pokemonId": 310,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 1011,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 1023,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 595,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 1020,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      }
+    ]
+  },
+  {
+    "name": "South Province (Area Two) - Near Town (High Level)",
+    "spawns": [
+      {
+        "pokemonId": 628,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1665
+      },
+      {
+        "pokemonId": 839,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 711,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 626,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 311,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 3,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      }
+    ]
+  },
+  {
+    "name": "South Province (Area Two) - Olive Grove (High Level)",
+    "spawns": [
+      {
+        "pokemonId": 494,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1665
+      },
+      {
+        "pokemonId": 256,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 903,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 652,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 853,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 455,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      }
+    ]
+  },
+  {
+    "name": "South Province (Area Two) - Rocky (High Level)",
+    "spawns": [
+      {
+        "pokemonId": 38,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1665
+      },
+      {
+        "pokemonId": 899,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 606,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 939,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 414,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 465,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      }
+    ]
+  },
+  {
+    "name": "South Province (Area Four) - Grass (High Level)",
+    "spawns": [
+      {
+        "pokemonId": 663,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1665
+      },
+      {
+        "pokemonId": 441,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 499,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 205,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 1021,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 210,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      }
+    ]
+  },
+  {
+    "name": "South Province (Area Four) - Lake (High Level)",
+    "spawns": [
+      {
+        "pokemonId": 421,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1665
+      },
+      {
+        "pokemonId": 502,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 468,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 547,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 733,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 729,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      }
+    ]
+  },
+  {
+    "name": "South Province (Area Four) - Mountain (High Level)",
+    "spawns": [
+      {
+        "pokemonId": 818,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1665
+      },
+      {
+        "pokemonId": 43,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 730,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 89,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 832,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 671,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      }
+    ]
+  },
+  {
+    "name": "Artazon Gym (High Level)",
+    "spawns": [
+      {
+        "pokemonId": 858,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1665
+      },
+      {
+        "pokemonId": 923,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 181,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 982,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 713,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 774,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      }
+    ]
+  },
+  {
+    "name": "South Province (Area Four) - Ocean (High Level)",
+    "spawns": [
+      {
+        "pokemonId": 813,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1665
+      },
+      {
+        "pokemonId": 160,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 4,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 569,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 589,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 934,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      }
+    ]
+  },
+  {
+    "name": "South Province (Area Four) - River (High Level)",
+    "spawns": [
+      {
+        "pokemonId": 59,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1665
+      },
+      {
+        "pokemonId": 579,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 656,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 338,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 301,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 154,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      }
+    ]
+  },
+  {
+    "name": "South Province (Area Three) - Grass (High Level)",
+    "spawns": [
+      {
+        "pokemonId": 609,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1665
+      },
+      {
+        "pokemonId": 226,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 495,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 546,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 622,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 315,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      }
+    ]
+  },
+  {
+    "name": "South Province (Area Three) - Rocky (High Level)",
+    "spawns": [
+      {
+        "pokemonId": 390,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1665
+      },
+      {
+        "pokemonId": 197,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 727,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 159,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 611,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 816,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      }
+    ]
+  },
+  {
+    "name": "East Province (Area One) - Beach (High Level)",
+    "spawns": [
+      {
+        "pokemonId": 99,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1665
+      },
+      {
+        "pokemonId": 208,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 152,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 653,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 925,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 169,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      }
+    ]
+  },
+  {
+    "name": "East Province (Area One) - Forest (High Level)",
+    "spawns": [
+      {
+        "pokemonId": 763,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1665
+      },
+      {
+        "pokemonId": 146,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 321,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 475,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 388,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 400,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      }
+    ]
+  },
+  {
+    "name": "East Province (Area One) - Grass (High Level)",
+    "spawns": [
+      {
+        "pokemonId": 743,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1665
+      },
+      {
+        "pokemonId": 298,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 239,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 269,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 746,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 723,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      }
+    ]
+  },
+  {
+    "name": "East Province (Area One) - Mountain (High Level)",
+    "spawns": [
+      {
+        "pokemonId": 445,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1665
+      },
+      {
+        "pokemonId": 202,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 869,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 1015,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 868,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 901,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      }
+    ]
+  },
+  {
+    "name": "East Province (Area One) - Near Town (High Level)",
+    "spawns": [
+      {
+        "pokemonId": 277,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1665
+      },
+      {
+        "pokemonId": 905,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 156,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 649,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 943,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 251,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      }
+    ]
+  },
+  {
+    "name": "East Province (Area One) - Ocean (High Level)",
+    "spawns": [
+      {
+        "pokemonId": 458,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1665
+      },
+      {
+        "pokemonId": 844,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 369,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 584,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 529,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 352,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      }
+    ]
+  },
+  {
+    "name": "Levincia Gym (High Level)",
+    "spawns": [
+      {
+        "pokemonId": 125,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1665
+      },
+      {
+        "pokemonId": 855,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 306,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 501,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 272,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 241,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      }
+    ]
+  },
+  {
+    "name": "East Province (Area One) - Rocky (High Level)",
+    "spawns": [
+      {
+        "pokemonId": 651,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1665
+      },
+      {
+        "pokemonId": 238,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 725,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 781,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 722,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 259,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      }
+    ]
+  },
+  {
+    "name": "South Province (Area Five) - Beach (High Level)",
+    "spawns": [
+      {
+        "pokemonId": 726,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.3334
+      },
+      {
+        "pokemonId": 257,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.3333
+      },
+      {
+        "pokemonId": 552,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.3333
+      }
+    ]
+  },
+  {
+    "name": "South Province (Area Five) - Grass (High Level)",
+    "spawns": [
+      {
+        "pokemonId": 387,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 127,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 623,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 328,
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.25
+      }
+    ]
   }
 ];
 
@@ -6564,10 +8133,517 @@ export const paldeaUnlocks = [
   {
     "challengeName": "Extra Challenge Z09",
     "areaId": "Extra Route Z9",
-    "unlocks": [],
+    "unlocks": [
+      "Poco Path - Main (High Level)"
+    ],
     "requirements": {
       "defeatCountRoute": {
         "route": "Extra Route Z9",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 01",
+    "areaId": "Poco Path - Main (High Level)",
+    "unlocks": [
+      "Los Platos - Main (High Level)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Poco Path - Main (High Level)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 02",
+    "areaId": "Los Platos - Main (High Level)",
+    "unlocks": [
+      "Mesagoza - Main (High Level)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Los Platos - Main (High Level)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 03",
+    "areaId": "Mesagoza - Main (High Level)",
+    "unlocks": [
+      "South Province (Area One) - Beach (High Level)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Mesagoza - Main (High Level)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 04",
+    "areaId": "South Province (Area One) - Beach (High Level)",
+    "unlocks": [
+      "South Province (Area One) - Cave (High Level)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "South Province (Area One) - Beach (High Level)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 05",
+    "areaId": "South Province (Area One) - Cave (High Level)",
+    "unlocks": [
+      "South Province (Area One) - Flower Patch (High Level)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "South Province (Area One) - Cave (High Level)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 06",
+    "areaId": "South Province (Area One) - Flower Patch (High Level)",
+    "unlocks": [
+      "South Province (Area One) - Forest (High Level)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "South Province (Area One) - Flower Patch (High Level)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 07",
+    "areaId": "South Province (Area One) - Forest (High Level)",
+    "unlocks": [
+      "South Province (Area One) - Grass (High Level)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "South Province (Area One) - Forest (High Level)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 08",
+    "areaId": "South Province (Area One) - Grass (High Level)",
+    "unlocks": [
+      "South Province (Area One) - Lake (High Level)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "South Province (Area One) - Grass (High Level)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 09",
+    "areaId": "South Province (Area One) - Lake (High Level)",
+    "unlocks": [
+      "South Province (Area One) - Near Town (High Level)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "South Province (Area One) - Lake (High Level)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 10",
+    "areaId": "South Province (Area One) - Near Town (High Level)",
+    "unlocks": [
+      "South Province (Area One) - Ocean (High Level)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "South Province (Area One) - Near Town (High Level)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 11",
+    "areaId": "South Province (Area One) - Ocean (High Level)",
+    "unlocks": [
+      "South Province (Area One) - River (High Level)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "South Province (Area One) - Ocean (High Level)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 12",
+    "areaId": "South Province (Area One) - River (High Level)",
+    "unlocks": [
+      "South Province (Area One) - Ruins (High Level)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "South Province (Area One) - River (High Level)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 13",
+    "areaId": "South Province (Area One) - Ruins (High Level)",
+    "unlocks": [
+      "Cortondo Gym (High Level)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "South Province (Area One) - Ruins (High Level)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 14",
+    "areaId": "Cortondo Gym (High Level)",
+    "unlocks": [
+      "South Province (Area Two) - Flower Patch (High Level)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Cortondo Gym (High Level)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 15",
+    "areaId": "South Province (Area Two) - Flower Patch (High Level)",
+    "unlocks": [
+      "South Province (Area Two) - Forest (High Level)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "South Province (Area Two) - Flower Patch (High Level)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 16",
+    "areaId": "South Province (Area Two) - Forest (High Level)",
+    "unlocks": [
+      "South Province (Area Two) - Grass (High Level)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "South Province (Area Two) - Forest (High Level)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 17",
+    "areaId": "South Province (Area Two) - Grass (High Level)",
+    "unlocks": [
+      "South Province (Area Two) - Mountain (High Level)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "South Province (Area Two) - Grass (High Level)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 18",
+    "areaId": "South Province (Area Two) - Mountain (High Level)",
+    "unlocks": [
+      "South Province (Area Two) - Near Town (High Level)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "South Province (Area Two) - Mountain (High Level)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 19",
+    "areaId": "South Province (Area Two) - Near Town (High Level)",
+    "unlocks": [
+      "South Province (Area Two) - Olive Grove (High Level)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "South Province (Area Two) - Near Town (High Level)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 20",
+    "areaId": "South Province (Area Two) - Olive Grove (High Level)",
+    "unlocks": [
+      "South Province (Area Two) - Rocky (High Level)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "South Province (Area Two) - Olive Grove (High Level)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 21",
+    "areaId": "South Province (Area Two) - Rocky (High Level)",
+    "unlocks": [
+      "South Province (Area Four) - Grass (High Level)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "South Province (Area Two) - Rocky (High Level)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 22",
+    "areaId": "South Province (Area Four) - Grass (High Level)",
+    "unlocks": [
+      "South Province (Area Four) - Lake (High Level)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "South Province (Area Four) - Grass (High Level)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 23",
+    "areaId": "South Province (Area Four) - Lake (High Level)",
+    "unlocks": [
+      "South Province (Area Four) - Mountain (High Level)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "South Province (Area Four) - Lake (High Level)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 24",
+    "areaId": "South Province (Area Four) - Mountain (High Level)",
+    "unlocks": [
+      "Artazon Gym (High Level)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "South Province (Area Four) - Mountain (High Level)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 25",
+    "areaId": "Artazon Gym (High Level)",
+    "unlocks": [
+      "South Province (Area Four) - Ocean (High Level)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Artazon Gym (High Level)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 26",
+    "areaId": "South Province (Area Four) - Ocean (High Level)",
+    "unlocks": [
+      "South Province (Area Four) - River (High Level)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "South Province (Area Four) - Ocean (High Level)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 27",
+    "areaId": "South Province (Area Four) - River (High Level)",
+    "unlocks": [
+      "South Province (Area Three) - Grass (High Level)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "South Province (Area Four) - River (High Level)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 28",
+    "areaId": "South Province (Area Three) - Grass (High Level)",
+    "unlocks": [
+      "South Province (Area Three) - Rocky (High Level)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "South Province (Area Three) - Grass (High Level)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 29",
+    "areaId": "South Province (Area Three) - Rocky (High Level)",
+    "unlocks": [
+      "East Province (Area One) - Beach (High Level)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "South Province (Area Three) - Rocky (High Level)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 30",
+    "areaId": "East Province (Area One) - Beach (High Level)",
+    "unlocks": [
+      "East Province (Area One) - Forest (High Level)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "East Province (Area One) - Beach (High Level)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 31",
+    "areaId": "East Province (Area One) - Forest (High Level)",
+    "unlocks": [
+      "East Province (Area One) - Grass (High Level)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "East Province (Area One) - Forest (High Level)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 32",
+    "areaId": "East Province (Area One) - Grass (High Level)",
+    "unlocks": [
+      "East Province (Area One) - Mountain (High Level)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "East Province (Area One) - Grass (High Level)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 33",
+    "areaId": "East Province (Area One) - Mountain (High Level)",
+    "unlocks": [
+      "East Province (Area One) - Near Town (High Level)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "East Province (Area One) - Mountain (High Level)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 34",
+    "areaId": "East Province (Area One) - Near Town (High Level)",
+    "unlocks": [
+      "East Province (Area One) - Ocean (High Level)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "East Province (Area One) - Near Town (High Level)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 35",
+    "areaId": "East Province (Area One) - Ocean (High Level)",
+    "unlocks": [
+      "Levincia Gym (High Level)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "East Province (Area One) - Ocean (High Level)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 36",
+    "areaId": "Levincia Gym (High Level)",
+    "unlocks": [
+      "East Province (Area One) - Rocky (High Level)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Levincia Gym (High Level)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 37",
+    "areaId": "East Province (Area One) - Rocky (High Level)",
+    "unlocks": [
+      "South Province (Area Five) - Beach (High Level)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "East Province (Area One) - Rocky (High Level)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 38",
+    "areaId": "South Province (Area Five) - Beach (High Level)",
+    "unlocks": [
+      "South Province (Area Five) - Grass (High Level)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "South Province (Area Five) - Beach (High Level)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 39",
+    "areaId": "South Province (Area Five) - Grass (High Level)",
+    "unlocks": [],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "South Province (Area Five) - Grass (High Level)",
         "count": 150
       }
     }
