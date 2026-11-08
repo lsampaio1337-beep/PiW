@@ -292,6 +292,13 @@ if (unlock.requirements.catchSpeciesByQuality) {
                  }
              }
         }
+        if (unlock.requirements.catchSpeciesAnyOfByQuality) {
+             for (let group of unlock.requirements.catchSpeciesAnyOfByQuality) {
+                 for (let s of group.species) {
+                     if (state.stats.challengeCaughtSpecific) delete state.stats.challengeCaughtSpecific[s + "_" + group.quality];
+                 }
+             }
+        }
         if (unlock.requirements.catchByQualityAndType) {
              if (state.stats.challengeCaughtSpecific) delete state.stats.challengeCaughtSpecific[unlock.requirements.catchByQualityAndType.type + "_" + unlock.requirements.catchByQualityAndType.quality];
         }

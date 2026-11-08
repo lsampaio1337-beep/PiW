@@ -611,10 +611,14 @@ export function navigateToLocation(locationName) {
         }
         window.currentSafariZone = locationName;
         switchView("SAFARI_HUB");
-        const msg = document.getElementById("safari-welcome-msg");
+                const msg = document.getElementById("safari-welcome-msg");
+        const btnEnter = document.getElementById("btn-enter-safari");
         if (msg) {
-            const safariCost = state.config.balance.safariZonePrice || 500;
-            msg.innerText = `Welcome to Safari Zone! Here we charge a fee per battle you have and you can use our SafariBalls at will. Do you wanna enter Safari Zone?`;
+            const safariCost = locationName === "Kanto Safari Zone" ? 150 : 80;
+            msg.innerText = `Welcome to Safari Zone! Here we charge a fee of ${safariCost} per battle you have and you can use our SafariBalls at will.\n\nDo you wanna enter Safari Zone?`;
+            if (btnEnter) {
+                btnEnter.innerText = `Enter (${safariCost})`;
+            }
         }
     } else if (locationName === "Casino" || locationName === "Goldenrod Game Corner") {
         window.currentCasinoHub = locationName;
@@ -754,8 +758,19 @@ export function navigateToLocation(locationName) {
         const shinyHeight = 94.72 - 85.96;
 
         // Overlay transparent divs
-        html += `<div class="casino-overlay-btn" onclick="window.startCasinoEncounter(false, '${locationName}')" style="position: absolute; left: ${stdLeft}%; top: ${stdTop}%; width: ${stdWidth}%; height: ${stdHeight}%; cursor: pointer;" title="Standard Encounter ($${state.config.balance.casinoPrices?.standard || 75})"></div>`;
-        html += `<div class="casino-overlay-btn" onclick="window.startCasinoEncounter(true, '${locationName}')" style="position: absolute; left: ${shinyLeft}%; top: ${shinyTop}%; width: ${shinyWidth}%; height: ${shinyHeight}%; cursor: pointer;" title="2x Shiny ($${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>`;
+                const stdPrice = typeof getCasinoPrice !== 'undefined' ? getCasinoPrice(locationName) : (
+            locationName === 'Casino - Mid Troupe' || locationName === 'Casino Babies' ? 80 :
+            locationName === 'Casino - Starter Troupe' || locationName === 'Casino Starter Trupe' ? 120 :
+            locationName === 'Casino - Special Spot' || locationName === 'Casino Special Spot' ? 135 :
+            locationName === 'Casino - Eeveelutions' || locationName === 'Casino Eeveelution' ? 150 :
+            locationName === 'Casino - Late Troupe' || locationName === 'Casino Late Trupe' ? 175 :
+            (locationName === 'Goldenrod Baby Corner' ? 5 :
+            (locationName === 'Goldenrod Lucky Spot Corner' ? 10 : 75))
+        );
+
+        // Overlay transparent divs
+        html += `<div class="casino-overlay-btn" onclick="window.startCasinoEncounter(false, '${locationName}')" style="position: absolute; left: ${stdLeft}%; top: ${stdTop}%; width: ${stdWidth}%; height: ${stdHeight}%; cursor: pointer;" title="Standard Encounter (${stdPrice})"></div>`;
+        html += `<div class="casino-overlay-btn" onclick="window.startCasinoEncounter(true, '${locationName}')" style="position: absolute; left: ${shinyLeft}%; top: ${shinyTop}%; width: ${shinyWidth}%; height: ${shinyHeight}%; cursor: pointer;" title="2x Shiny (${stdPrice * 2.5})"></div>`;
         html += `<button class="casino-overlay-btn" onclick="window.navigateToLocation('Casino')" style="position: absolute; top: 10px; left: 10px; padding: 10px; cursor: pointer; z-index: 100;">Back to Lobby</button>`;
 
         // Append to the viewCasino container

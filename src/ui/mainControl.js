@@ -126,6 +126,30 @@ if (req.catchSpeciesByQuality) {
         }
     }
 
+    if (req.catchSpeciesAnyOfByQuality) {
+         for (let specGroup of req.catchSpeciesAnyOfByQuality) {
+             let caughtCount = 0;
+             let speciesList = Array.isArray(specGroup.species) ? specGroup.species : [specGroup.species];
+             let quality = specGroup.quality || "Weak";
+             let requiredCount = specGroup.count || 1;
+
+             let flatSpeciesList = [];
+             for (let s of speciesList) {
+                 flatSpeciesList.push(s);
+                 let caughtKey = s + "_" + quality;
+                 caughtCount += state.stats.challengeCaughtSpecific ? (state.stats.challengeCaughtSpecific[caughtKey] || 0) : 0;
+             }
+             progress.push({
+                 type: 'catchSpeciesAnyOfByQuality',
+                 speciesList: flatSpeciesList,
+                 quality: quality,
+                 current: caughtCount,
+                 required: requiredCount,
+                 isMet: caughtCount >= requiredCount
+             });
+         }
+    }
+
     if (req.catchSpeciesAnyOf) {
          for (let specGroup of req.catchSpeciesAnyOf) {
              let caughtCount = 0;
