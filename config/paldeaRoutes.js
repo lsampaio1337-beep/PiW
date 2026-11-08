@@ -4684,37 +4684,31 @@ export const paldeaRoutes = [
         "pokemonId": 576,
         "minLevel": 50,
         "maxLevel": 60,
-        "chance": 0.1667
+        "chance": 0.2000
       },
       {
         "pokemonId": 433,
         "minLevel": 50,
         "maxLevel": 60,
-        "chance": 0.1667
-      },
-      {
-        "pokemonId": 358,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1667
+        "chance": 0.2000
       },
       {
         "pokemonId": 577,
         "minLevel": 50,
         "maxLevel": 60,
-        "chance": 0.1667
+        "chance": 0.2000
       },
       {
         "pokemonId": 579,
         "minLevel": 50,
         "maxLevel": 60,
-        "chance": 0.1667
+        "chance": 0.2000
       },
       {
         "pokemonId": 336,
         "minLevel": 50,
         "maxLevel": 60,
-        "chance": 0.1665
+        "chance": 0.2000
       }
     ]
   },
@@ -4772,37 +4766,31 @@ export const paldeaRoutes = [
         "pokemonId": 553,
         "minLevel": 50,
         "maxLevel": 60,
-        "chance": 0.1667
+        "chance": 0.2000
       },
       {
         "pokemonId": 328,
         "minLevel": 50,
         "maxLevel": 60,
-        "chance": 0.1667
+        "chance": 0.2000
       },
       {
         "pokemonId": 330,
         "minLevel": 50,
         "maxLevel": 60,
-        "chance": 0.1667
+        "chance": 0.2000
       },
       {
         "pokemonId": 622,
         "minLevel": 50,
         "maxLevel": 60,
-        "chance": 0.1667
-      },
-      {
-        "pokemonId": 623,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1667
+        "chance": 0.2000
       },
       {
         "pokemonId": 373,
         "minLevel": 50,
         "maxLevel": 60,
-        "chance": 0.1665
+        "chance": 0.2000
       }
     ]
   },
@@ -4924,49 +4912,43 @@ export const paldeaRoutes = [
         "pokemonId": 240,
         "minLevel": 50,
         "maxLevel": 60,
-        "chance": 0.1250
+        "chance": 0.1429
       },
       {
         "pokemonId": 4,
         "minLevel": 50,
         "maxLevel": 60,
-        "chance": 0.1250
+        "chance": 0.1429
       },
       {
         "pokemonId": 653,
         "minLevel": 50,
         "maxLevel": 60,
-        "chance": 0.1250
+        "chance": 0.1429
       },
       {
         "pokemonId": 655,
         "minLevel": 50,
         "maxLevel": 60,
-        "chance": 0.1250
+        "chance": 0.1429
       },
       {
         "pokemonId": 725,
         "minLevel": 50,
         "maxLevel": 60,
-        "chance": 0.1250
+        "chance": 0.1429
       },
       {
         "pokemonId": 559,
         "minLevel": 50,
         "maxLevel": 60,
-        "chance": 0.1250
-      },
-      {
-        "pokemonId": 560,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1250
+        "chance": 0.1429
       },
       {
         "pokemonId": 209,
         "minLevel": 50,
         "maxLevel": 60,
-        "chance": 0.1250
+        "chance": 0.1426
       }
     ]
   }
