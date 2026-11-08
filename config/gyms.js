@@ -5754,6 +5754,23 @@ const gyms = [
         ]
       }
     ]
+  },
+  {
+    "id": "teamflarebattle",
+    "name": "Team Flare Battle (4 mix fighters)",
+    "leader": "Lysandre",
+    "levelRequirement": 100,
+    "trainers": [
+      {
+        "name": "Team Flare Grunt",
+        "team": [
+          {
+            "id": 41,
+            "level": 100
+          }
+        ]
+      }
+    ]
   }
 ];
 
