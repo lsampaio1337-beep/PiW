@@ -1349,8 +1349,6 @@ export function switchView(viewName) {
         setupMarket(document.getElementById('view-center-market'));
     } else if (viewName === 'GYM') {
         document.getElementById('view-gym').style.display = 'block';
-    } else if (viewName === 'CASINO_HUB') {
-        document.getElementById('view-casino').style.display = 'block';
     } else if (viewName === 'BATTLE_STADIUM') {
         document.getElementById('view-battle-stadium').style.display = 'flex';
         // Initialize multiplayer when entering the view if it's not already set up
