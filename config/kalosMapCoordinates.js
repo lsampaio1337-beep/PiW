@@ -440,5 +440,305 @@ export const kalosMapCoordinates = {
     "x": 48,
     "y": 48,
     "type": "poi"
+  },
+"Extra Route W 01": {
+    "name": "Extra Route W 01",
+    "x": 40,
+    "y": 40
+  },
+  "Extra Route W 02": {
+    "name": "Extra Route W 02",
+    "x": 41,
+    "y": 40
+  },
+  "Extra Route W 03": {
+    "name": "Extra Route W 03",
+    "x": 42,
+    "y": 40
+  },
+  "Extra Route W 04": {
+    "name": "Extra Route W 04",
+    "x": 43,
+    "y": 40
+  },
+  "Extra Route W 05": {
+    "name": "Extra Route W 05",
+    "x": 44,
+    "y": 40
+  },
+  "Extra Route W 06": {
+    "name": "Extra Route W 06",
+    "x": 45,
+    "y": 40
+  },
+  "Extra Route W 07": {
+    "name": "Extra Route W 07",
+    "x": 46,
+    "y": 40
+  },
+  "Extra Route W 08": {
+    "name": "Extra Route W 08",
+    "x": 47,
+    "y": 40
+  },
+  "Extra Route W 09": {
+    "name": "Extra Route W 09",
+    "x": 48,
+    "y": 40
+  },
+  "Extra Route W 10": {
+    "name": "Extra Route W 10",
+    "x": 49,
+    "y": 40
+  },
+  "Extra Route W 11": {
+    "name": "Extra Route W 11",
+    "x": 50,
+    "y": 40
+  },
+  "Extra Route W 12": {
+    "name": "Extra Route W 12",
+    "x": 51,
+    "y": 40
+  },
+  "Extra Route W 13": {
+    "name": "Extra Route W 13",
+    "x": 52,
+    "y": 40
+  },
+  "Extra Route W 14": {
+    "name": "Extra Route W 14",
+    "x": 53,
+    "y": 40
+  },
+  "Extra Route W 15": {
+    "name": "Extra Route W 15",
+    "x": 54,
+    "y": 40
+  },
+  "Extra Route W 16": {
+    "name": "Extra Route W 16",
+    "x": 55,
+    "y": 40
+  },
+  "Extra Route W 17": {
+    "name": "Extra Route W 17",
+    "x": 56,
+    "y": 40
+  },
+  "Extra Route W 18": {
+    "name": "Extra Route W 18",
+    "x": 57,
+    "y": 40
+  },
+  "Extra Route W 19": {
+    "name": "Extra Route W 19",
+    "x": 58,
+    "y": 40
+  },
+  "Extra Route W 20": {
+    "name": "Extra Route W 20",
+    "x": 59,
+    "y": 40
+  },
+  "Extra Route W 21": {
+    "name": "Extra Route W 21",
+    "x": 40,
+    "y": 45
+  },
+  "Extra Route W 22": {
+    "name": "Extra Route W 22",
+    "x": 41,
+    "y": 45
+  },
+  "Extra Route W 23": {
+    "name": "Extra Route W 23",
+    "x": 42,
+    "y": 45
+  },
+  "Extra Route W 24": {
+    "name": "Extra Route W 24",
+    "x": 43,
+    "y": 45
+  },
+  "Extra Route W 25": {
+    "name": "Extra Route W 25",
+    "x": 44,
+    "y": 45
+  },
+  "Extra Route W 26": {
+    "name": "Extra Route W 26",
+    "x": 45,
+    "y": 45
+  },
+  "Extra Route W 27": {
+    "name": "Extra Route W 27",
+    "x": 46,
+    "y": 45
+  },
+  "Extra Route W 28": {
+    "name": "Extra Route W 28",
+    "x": 47,
+    "y": 45
+  },
+  "Extra Route W 29": {
+    "name": "Extra Route W 29",
+    "x": 48,
+    "y": 45
+  },
+  "Extra Route W 30": {
+    "name": "Extra Route W 30",
+    "x": 49,
+    "y": 45
+  },
+  "Extra Route W 31": {
+    "name": "Extra Route W 31",
+    "x": 50,
+    "y": 45
+  },
+  "Extra Route W 32": {
+    "name": "Extra Route W 32",
+    "x": 51,
+    "y": 45
+  },
+  "Extra Route W 33": {
+    "name": "Extra Route W 33",
+    "x": 52,
+    "y": 45
+  },
+  "Extra Route W 34": {
+    "name": "Extra Route W 34",
+    "x": 53,
+    "y": 45
+  },
+  "Extra Route W 35": {
+    "name": "Extra Route W 35",
+    "x": 54,
+    "y": 45
+  },
+  "Extra Route W 36": {
+    "name": "Extra Route W 36",
+    "x": 55,
+    "y": 45
+  },
+  "Extra Route W 37": {
+    "name": "Extra Route W 37",
+    "x": 56,
+    "y": 45
+  },
+  "Extra Route W 38": {
+    "name": "Extra Route W 38",
+    "x": 57,
+    "y": 45
+  },
+  "Extra Route W 39": {
+    "name": "Extra Route W 39",
+    "x": 58,
+    "y": 45
+  },
+  "Extra Route W 40": {
+    "name": "Extra Route W 40",
+    "x": 59,
+    "y": 45
+  },
+  "Extra Route W 41": {
+    "name": "Extra Route W 41",
+    "x": 40,
+    "y": 50
+  },
+  "Extra Route W 42": {
+    "name": "Extra Route W 42",
+    "x": 41,
+    "y": 50
+  },
+  "Extra Route W 43": {
+    "name": "Extra Route W 43",
+    "x": 42,
+    "y": 50
+  },
+  "Extra Route W 44": {
+    "name": "Extra Route W 44",
+    "x": 43,
+    "y": 50
+  },
+  "Extra Route W 45": {
+    "name": "Extra Route W 45",
+    "x": 44,
+    "y": 50
+  },
+  "Extra Route W 46": {
+    "name": "Extra Route W 46",
+    "x": 45,
+    "y": 50
+  },
+  "Extra Route W 47": {
+    "name": "Extra Route W 47",
+    "x": 46,
+    "y": 50
+  },
+  "Extra Route W 48": {
+    "name": "Extra Route W 48",
+    "x": 47,
+    "y": 50
+  },
+  "Extra Route W 49": {
+    "name": "Extra Route W 49",
+    "x": 48,
+    "y": 50
+  },
+  "Extra Route W 50": {
+    "name": "Extra Route W 50",
+    "x": 49,
+    "y": 50
+  },
+  "Extra Route W 51": {
+    "name": "Extra Route W 51",
+    "x": 50,
+    "y": 50
+  },
+  "Extra Route W 52": {
+    "name": "Extra Route W 52",
+    "x": 51,
+    "y": 50
+  },
+  "Extra Route W 53": {
+    "name": "Extra Route W 53",
+    "x": 52,
+    "y": 50
+  },
+  "Extra Route W 54": {
+    "name": "Extra Route W 54",
+    "x": 53,
+    "y": 50
+  },
+  "Extra Route W 55": {
+    "name": "Extra Route W 55",
+    "x": 54,
+    "y": 50
+  },
+  "Extra Route W 56": {
+    "name": "Extra Route W 56",
+    "x": 55,
+    "y": 50
+  },
+  "Extra Route W 57": {
+    "name": "Extra Route W 57",
+    "x": 56,
+    "y": 50
+  },
+  "Extra Route W 58": {
+    "name": "Extra Route W 58",
+    "x": 57,
+    "y": 50
+  },
+  "Extra Route W 59": {
+    "name": "Extra Route W 59",
+    "x": 58,
+    "y": 50
+  },
+  "Extra Route W 60": {
+    "name": "Extra Route W 60",
+    "x": 59,
+    "y": 50
   }
 };
