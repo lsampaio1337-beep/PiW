@@ -3055,6 +3055,1938 @@ export const kalosRoutes = [
         chance: 0.33340000000000003
       }
     ]
+  },
+  {
+    "routeName": "Extra Route W 01",
+    "pokes": [
+      {
+        "species": "Bulbasaur",
+        "chance": 0.148
+      },
+      {
+        "species": "Venusaur",
+        "chance": 0.142
+      },
+      {
+        "species": "Charmander",
+        "chance": 0.142
+      },
+      {
+        "species": "Charizard",
+        "chance": 0.142
+      },
+      {
+        "species": "Squirtle",
+        "chance": 0.142
+      },
+      {
+        "species": "Blastoise",
+        "chance": 0.142
+      },
+      {
+        "species": "Caterpie",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 02",
+    "pokes": [
+      {
+        "species": "Butterfree",
+        "chance": 0.148
+      },
+      {
+        "species": "Weedle",
+        "chance": 0.142
+      },
+      {
+        "species": "Beedrill",
+        "chance": 0.142
+      },
+      {
+        "species": "Pidgey",
+        "chance": 0.142
+      },
+      {
+        "species": "Pidgeot",
+        "chance": 0.142
+      },
+      {
+        "species": "Spearow",
+        "chance": 0.142
+      },
+      {
+        "species": "Ekans",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 03",
+    "pokes": [
+      {
+        "species": "Pichu",
+        "chance": 0.148
+      },
+      {
+        "species": "Raichu",
+        "chance": 0.142
+      },
+      {
+        "species": "Sandshrew",
+        "chance": 0.142
+      },
+      {
+        "species": "Nidoran♀",
+        "chance": 0.142
+      },
+      {
+        "species": "Nidoqueen",
+        "chance": 0.142
+      },
+      {
+        "species": "Nidoran♂",
+        "chance": 0.142
+      },
+      {
+        "species": "Nidoking",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 04",
+    "pokes": [
+      {
+        "species": "Igglybuff",
+        "chance": 0.148
+      },
+      {
+        "species": "Wigglytuff",
+        "chance": 0.142
+      },
+      {
+        "species": "Zubat",
+        "chance": 0.142
+      },
+      {
+        "species": "Crobat",
+        "chance": 0.142
+      },
+      {
+        "species": "Diglett",
+        "chance": 0.142
+      },
+      {
+        "species": "Psyduck",
+        "chance": 0.142
+      },
+      {
+        "species": "Abra",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 05",
+    "pokes": [
+      {
+        "species": "Alakazam",
+        "chance": 0.148
+      },
+      {
+        "species": "Machop",
+        "chance": 0.142
+      },
+      {
+        "species": "Machamp",
+        "chance": 0.142
+      },
+      {
+        "species": "Bellsprout",
+        "chance": 0.142
+      },
+      {
+        "species": "Victreebel",
+        "chance": 0.142
+      },
+      {
+        "species": "Tentacool",
+        "chance": 0.142
+      },
+      {
+        "species": "Geodude",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 06",
+    "pokes": [
+      {
+        "species": "Golem",
+        "chance": 0.148
+      },
+      {
+        "species": "Slowpoke",
+        "chance": 0.142
+      },
+      {
+        "species": "Slowking",
+        "chance": 0.142
+      },
+      {
+        "species": "Magnemite",
+        "chance": 0.142
+      },
+      {
+        "species": "Magnezone",
+        "chance": 0.142
+      },
+      {
+        "species": "Farfetch'd",
+        "chance": 0.142
+      },
+      {
+        "species": "Doduo",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 07",
+    "pokes": [
+      {
+        "species": "Shellder",
+        "chance": 0.148
+      },
+      {
+        "species": "Gastly",
+        "chance": 0.142
+      },
+      {
+        "species": "Gengar",
+        "chance": 0.142
+      },
+      {
+        "species": "Onix",
+        "chance": 0.142
+      },
+      {
+        "species": "Voltorb",
+        "chance": 0.142
+      },
+      {
+        "species": "Exeggcute",
+        "chance": 0.142
+      },
+      {
+        "species": "Cubone",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 08",
+    "pokes": [
+      {
+        "species": "Lickitung",
+        "chance": 0.148
+      },
+      {
+        "species": "Rhyhorn",
+        "chance": 0.142
+      },
+      {
+        "species": "Rhyperior",
+        "chance": 0.142
+      },
+      {
+        "species": "Kangaskhan",
+        "chance": 0.142
+      },
+      {
+        "species": "Horsea",
+        "chance": 0.142
+      },
+      {
+        "species": "Kingdra",
+        "chance": 0.142
+      },
+      {
+        "species": "Goldeen",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 09",
+    "pokes": [
+      {
+        "species": "Staryu",
+        "chance": 0.148
+      },
+      {
+        "species": "Mime Jr.",
+        "chance": 0.142
+      },
+      {
+        "species": "Scyther",
+        "chance": 0.142
+      },
+      {
+        "species": "Smoochum",
+        "chance": 0.142
+      },
+      {
+        "species": "Pinsir",
+        "chance": 0.142
+      },
+      {
+        "species": "Tauros",
+        "chance": 0.142
+      },
+      {
+        "species": "Magikarp",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 10",
+    "pokes": [
+      {
+        "species": "Lapras",
+        "chance": 0.148
+      },
+      {
+        "species": "Ditto",
+        "chance": 0.142
+      },
+      {
+        "species": "Aerodactyl",
+        "chance": 0.142
+      },
+      {
+        "species": "Munchlax",
+        "chance": 0.142
+      },
+      {
+        "species": "Articuno",
+        "chance": 0.142
+      },
+      {
+        "species": "Zapdos",
+        "chance": 0.142
+      },
+      {
+        "species": "Moltres",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 11",
+    "pokes": [
+      {
+        "species": "Dratini",
+        "chance": 0.148
+      },
+      {
+        "species": "Dragonite",
+        "chance": 0.142
+      },
+      {
+        "species": "Mewtwo",
+        "chance": 0.142
+      },
+      {
+        "species": "Sentret",
+        "chance": 0.142
+      },
+      {
+        "species": "Hoothoot",
+        "chance": 0.142
+      },
+      {
+        "species": "Ledyba",
+        "chance": 0.142
+      },
+      {
+        "species": "Spinarak",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 12",
+    "pokes": [
+      {
+        "species": "Chinchou",
+        "chance": 0.148
+      },
+      {
+        "species": "Mareep",
+        "chance": 0.142
+      },
+      {
+        "species": "Ampharos",
+        "chance": 0.142
+      },
+      {
+        "species": "Azurill",
+        "chance": 0.142
+      },
+      {
+        "species": "Azumarill",
+        "chance": 0.142
+      },
+      {
+        "species": "Bonsly",
+        "chance": 0.142
+      },
+      {
+        "species": "Hoppip",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 13",
+    "pokes": [
+      {
+        "species": "Jumpluff",
+        "chance": 0.148
+      },
+      {
+        "species": "Yanma",
+        "chance": 0.142
+      },
+      {
+        "species": "Wooper",
+        "chance": 0.142
+      },
+      {
+        "species": "Murkrow",
+        "chance": 0.142
+      },
+      {
+        "species": "Wynaut",
+        "chance": 0.142
+      },
+      {
+        "species": "Dunsparce",
+        "chance": 0.142
+      },
+      {
+        "species": "Gligar",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 14",
+    "pokes": [
+      {
+        "species": "Snubbull",
+        "chance": 0.148
+      },
+      {
+        "species": "Qwilfish",
+        "chance": 0.142
+      },
+      {
+        "species": "Shuckle",
+        "chance": 0.142
+      },
+      {
+        "species": "Heracross",
+        "chance": 0.142
+      },
+      {
+        "species": "Sneasel",
+        "chance": 0.142
+      },
+      {
+        "species": "Teddiursa",
+        "chance": 0.142
+      },
+      {
+        "species": "Slugma",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 15",
+    "pokes": [
+      {
+        "species": "Swinub",
+        "chance": 0.148
+      },
+      {
+        "species": "Mamoswine",
+        "chance": 0.142
+      },
+      {
+        "species": "Corsola",
+        "chance": 0.142
+      },
+      {
+        "species": "Remoraid",
+        "chance": 0.142
+      },
+      {
+        "species": "Delibird",
+        "chance": 0.142
+      },
+      {
+        "species": "Mantyke",
+        "chance": 0.142
+      },
+      {
+        "species": "Skarmory",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 16",
+    "pokes": [
+      {
+        "species": "Houndour",
+        "chance": 0.148
+      },
+      {
+        "species": "Smeargle",
+        "chance": 0.142
+      },
+      {
+        "species": "Miltank",
+        "chance": 0.142
+      },
+      {
+        "species": "Larvitar",
+        "chance": 0.142
+      },
+      {
+        "species": "Tyranitar",
+        "chance": 0.142
+      },
+      {
+        "species": "Poochyena",
+        "chance": 0.142
+      },
+      {
+        "species": "Zigzagoon",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 17",
+    "pokes": [
+      {
+        "species": "Lotad",
+        "chance": 0.148
+      },
+      {
+        "species": "Ludicolo",
+        "chance": 0.142
+      },
+      {
+        "species": "Taillow",
+        "chance": 0.142
+      },
+      {
+        "species": "Wingull",
+        "chance": 0.142
+      },
+      {
+        "species": "Surskit",
+        "chance": 0.142
+      },
+      {
+        "species": "Nincada",
+        "chance": 0.142
+      },
+      {
+        "species": "Shedinja",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 18",
+    "pokes": [
+      {
+        "species": "Whismur",
+        "chance": 0.148
+      },
+      {
+        "species": "Exploud",
+        "chance": 0.142
+      },
+      {
+        "species": "Makuhita",
+        "chance": 0.142
+      },
+      {
+        "species": "Nosepass",
+        "chance": 0.142
+      },
+      {
+        "species": "Skitty",
+        "chance": 0.142
+      },
+      {
+        "species": "Sableye",
+        "chance": 0.142
+      },
+      {
+        "species": "Mawile",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 19",
+    "pokes": [
+      {
+        "species": "Aron",
+        "chance": 0.148
+      },
+      {
+        "species": "Aggron",
+        "chance": 0.142
+      },
+      {
+        "species": "Meditite",
+        "chance": 0.142
+      },
+      {
+        "species": "Electrike",
+        "chance": 0.142
+      },
+      {
+        "species": "Plusle",
+        "chance": 0.142
+      },
+      {
+        "species": "Minun",
+        "chance": 0.142
+      },
+      {
+        "species": "Volbeat",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 20",
+    "pokes": [
+      {
+        "species": "Illumise",
+        "chance": 0.148
+      },
+      {
+        "species": "Budew",
+        "chance": 0.142
+      },
+      {
+        "species": "Roserade",
+        "chance": 0.142
+      },
+      {
+        "species": "Gulpin",
+        "chance": 0.142
+      },
+      {
+        "species": "Carvanha",
+        "chance": 0.142
+      },
+      {
+        "species": "Wailmer",
+        "chance": 0.142
+      },
+      {
+        "species": "Torkoal",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 21",
+    "pokes": [
+      {
+        "species": "Spoink",
+        "chance": 0.148
+      },
+      {
+        "species": "Spinda",
+        "chance": 0.142
+      },
+      {
+        "species": "Trapinch",
+        "chance": 0.142
+      },
+      {
+        "species": "Flygon",
+        "chance": 0.142
+      },
+      {
+        "species": "Swablu",
+        "chance": 0.142
+      },
+      {
+        "species": "Zangoose",
+        "chance": 0.142
+      },
+      {
+        "species": "Seviper",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 22",
+    "pokes": [
+      {
+        "species": "Lunatone",
+        "chance": 0.148
+      },
+      {
+        "species": "Solrock",
+        "chance": 0.142
+      },
+      {
+        "species": "Barboach",
+        "chance": 0.142
+      },
+      {
+        "species": "Corphish",
+        "chance": 0.142
+      },
+      {
+        "species": "Kecleon",
+        "chance": 0.142
+      },
+      {
+        "species": "Shuppet",
+        "chance": 0.142
+      },
+      {
+        "species": "Chingling",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 23",
+    "pokes": [
+      {
+        "species": "Absol",
+        "chance": 0.148
+      },
+      {
+        "species": "Clamperl",
+        "chance": 0.142
+      },
+      {
+        "species": "Gorebyss",
+        "chance": 0.142
+      },
+      {
+        "species": "Relicanth",
+        "chance": 0.142
+      },
+      {
+        "species": "Luvdisc",
+        "chance": 0.142
+      },
+      {
+        "species": "Bagon",
+        "chance": 0.142
+      },
+      {
+        "species": "Salamence",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 24",
+    "pokes": [
+      {
+        "species": "Starly",
+        "chance": 0.148
+      },
+      {
+        "species": "Staraptor",
+        "chance": 0.142
+      },
+      {
+        "species": "Bidoof",
+        "chance": 0.142
+      },
+      {
+        "species": "Burmy",
+        "chance": 0.142
+      },
+      {
+        "species": "Mothim",
+        "chance": 0.142
+      },
+      {
+        "species": "Combee",
+        "chance": 0.142
+      },
+      {
+        "species": "Pachirisu",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 25",
+    "pokes": [
+      {
+        "species": "Buizel",
+        "chance": 0.148
+      },
+      {
+        "species": "Drifloon",
+        "chance": 0.142
+      },
+      {
+        "species": "Stunky",
+        "chance": 0.142
+      },
+      {
+        "species": "Chatot",
+        "chance": 0.142
+      },
+      {
+        "species": "Gible",
+        "chance": 0.142
+      },
+      {
+        "species": "Garchomp",
+        "chance": 0.142
+      },
+      {
+        "species": "Riolu",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 26",
+    "pokes": [
+      {
+        "species": "Hippopotas",
+        "chance": 0.148
+      },
+      {
+        "species": "Skorupi",
+        "chance": 0.142
+      },
+      {
+        "species": "Croagunk",
+        "chance": 0.142
+      },
+      {
+        "species": "Carnivine",
+        "chance": 0.142
+      },
+      {
+        "species": "Snover",
+        "chance": 0.142
+      },
+      {
+        "species": "Rotom",
+        "chance": 0.142
+      },
+      {
+        "species": "Patrat",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 27",
+    "pokes": [
+      {
+        "species": "Purrloin",
+        "chance": 0.148
+      },
+      {
+        "species": "Pansage",
+        "chance": 0.142
+      },
+      {
+        "species": "Pansear",
+        "chance": 0.142
+      },
+      {
+        "species": "Panpour",
+        "chance": 0.142
+      },
+      {
+        "species": "Roggenrola",
+        "chance": 0.142
+      },
+      {
+        "species": "Gigalith",
+        "chance": 0.142
+      },
+      {
+        "species": "Woobat",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 28",
+    "pokes": [
+      {
+        "species": "Audino",
+        "chance": 0.148
+      },
+      {
+        "species": "Timburr",
+        "chance": 0.142
+      },
+      {
+        "species": "Conkeldurr",
+        "chance": 0.142
+      },
+      {
+        "species": "Throh",
+        "chance": 0.142
+      },
+      {
+        "species": "Sawk",
+        "chance": 0.142
+      },
+      {
+        "species": "Venipede",
+        "chance": 0.142
+      },
+      {
+        "species": "Scolipede",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 29",
+    "pokes": [
+      {
+        "species": "Basculin",
+        "chance": 0.148
+      },
+      {
+        "species": "Sandile",
+        "chance": 0.142
+      },
+      {
+        "species": "Krookodile",
+        "chance": 0.142
+      },
+      {
+        "species": "Dwebble",
+        "chance": 0.142
+      },
+      {
+        "species": "Scraggy",
+        "chance": 0.142
+      },
+      {
+        "species": "Sigilyph",
+        "chance": 0.142
+      },
+      {
+        "species": "Trubbish",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 30",
+    "pokes": [
+      {
+        "species": "Zorua",
+        "chance": 0.148
+      },
+      {
+        "species": "Gothita",
+        "chance": 0.142
+      },
+      {
+        "species": "Gothitelle",
+        "chance": 0.142
+      },
+      {
+        "species": "Solosis",
+        "chance": 0.142
+      },
+      {
+        "species": "Reuniclus",
+        "chance": 0.142
+      },
+      {
+        "species": "Ducklett",
+        "chance": 0.142
+      },
+      {
+        "species": "Vanillite",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 31",
+    "pokes": [
+      {
+        "species": "Vanilluxe",
+        "chance": 0.148
+      },
+      {
+        "species": "Emolga",
+        "chance": 0.142
+      },
+      {
+        "species": "Karrablast",
+        "chance": 0.142
+      },
+      {
+        "species": "Foongus",
+        "chance": 0.142
+      },
+      {
+        "species": "Alomomola",
+        "chance": 0.142
+      },
+      {
+        "species": "Ferroseed",
+        "chance": 0.142
+      },
+      {
+        "species": "Litwick",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 32",
+    "pokes": [
+      {
+        "species": "Chandelure",
+        "chance": 0.148
+      },
+      {
+        "species": "Axew",
+        "chance": 0.142
+      },
+      {
+        "species": "Haxorus",
+        "chance": 0.142
+      },
+      {
+        "species": "Cubchoo",
+        "chance": 0.142
+      },
+      {
+        "species": "Cryogonal",
+        "chance": 0.142
+      },
+      {
+        "species": "Shelmet",
+        "chance": 0.142
+      },
+      {
+        "species": "Stunfisk",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 33",
+    "pokes": [
+      {
+        "species": "Mienfoo",
+        "chance": 0.148
+      },
+      {
+        "species": "Druddigon",
+        "chance": 0.142
+      },
+      {
+        "species": "Golett",
+        "chance": 0.142
+      },
+      {
+        "species": "Pawniard",
+        "chance": 0.142
+      },
+      {
+        "species": "Heatmor",
+        "chance": 0.142
+      },
+      {
+        "species": "Durant",
+        "chance": 0.142
+      },
+      {
+        "species": "Deino",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 34",
+    "pokes": [
+      {
+        "species": "Hydreigon",
+        "chance": 0.148
+      },
+      {
+        "species": "Chespin",
+        "chance": 0.142
+      },
+      {
+        "species": "Chesnaught",
+        "chance": 0.142
+      },
+      {
+        "species": "Fennekin",
+        "chance": 0.142
+      },
+      {
+        "species": "Delphox",
+        "chance": 0.142
+      },
+      {
+        "species": "Froakie",
+        "chance": 0.142
+      },
+      {
+        "species": "Greninja",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 35",
+    "pokes": [
+      {
+        "species": "Bunnelby",
+        "chance": 0.148
+      },
+      {
+        "species": "Fletchling",
+        "chance": 0.142
+      },
+      {
+        "species": "Talonflame",
+        "chance": 0.142
+      },
+      {
+        "species": "Scatterbug",
+        "chance": 0.142
+      },
+      {
+        "species": "Vivillon",
+        "chance": 0.142
+      },
+      {
+        "species": "Litleo",
+        "chance": 0.142
+      },
+      {
+        "species": "Flabébé",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 36",
+    "pokes": [
+      {
+        "species": "Florges",
+        "chance": 0.148
+      },
+      {
+        "species": "Skiddo",
+        "chance": 0.142
+      },
+      {
+        "species": "Pancham",
+        "chance": 0.142
+      },
+      {
+        "species": "Furfrou",
+        "chance": 0.142
+      },
+      {
+        "species": "Espurr",
+        "chance": 0.142
+      },
+      {
+        "species": "Honedge",
+        "chance": 0.142
+      },
+      {
+        "species": "Aegislash",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 37",
+    "pokes": [
+      {
+        "species": "Spritzee",
+        "chance": 0.148
+      },
+      {
+        "species": "Swirlix",
+        "chance": 0.142
+      },
+      {
+        "species": "Inkay",
+        "chance": 0.142
+      },
+      {
+        "species": "Binacle",
+        "chance": 0.142
+      },
+      {
+        "species": "Skrelp",
+        "chance": 0.142
+      },
+      {
+        "species": "Clauncher",
+        "chance": 0.142
+      },
+      {
+        "species": "Helioptile",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 38",
+    "pokes": [
+      {
+        "species": "Tyrunt",
+        "chance": 0.148
+      },
+      {
+        "species": "Amaura",
+        "chance": 0.142
+      },
+      {
+        "species": "Hawlucha",
+        "chance": 0.142
+      },
+      {
+        "species": "Dedenne",
+        "chance": 0.142
+      },
+      {
+        "species": "Carbink",
+        "chance": 0.142
+      },
+      {
+        "species": "Goomy",
+        "chance": 0.142
+      },
+      {
+        "species": "Goodra",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 39",
+    "pokes": [
+      {
+        "species": "Klefki",
+        "chance": 0.148
+      },
+      {
+        "species": "Phantump",
+        "chance": 0.142
+      },
+      {
+        "species": "Pumpkaboo",
+        "chance": 0.142
+      },
+      {
+        "species": "Bergmite",
+        "chance": 0.142
+      },
+      {
+        "species": "Noibat",
+        "chance": 0.142
+      },
+      {
+        "species": "Diancie",
+        "chance": 0.142
+      },
+      {
+        "species": "Hoopa",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 40",
+    "pokes": [
+      {
+        "species": "Volcanion",
+        "chance": 0.148
+      },
+      {
+        "species": "Ivysaur",
+        "chance": 0.142
+      },
+      {
+        "species": "Charmeleon",
+        "chance": 0.142
+      },
+      {
+        "species": "Wartortle",
+        "chance": 0.142
+      },
+      {
+        "species": "Metapod",
+        "chance": 0.142
+      },
+      {
+        "species": "Pidgeotto",
+        "chance": 0.142
+      },
+      {
+        "species": "Fearow",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 41",
+    "pokes": [
+      {
+        "species": "Arbok",
+        "chance": 0.148
+      },
+      {
+        "species": "Nidorina",
+        "chance": 0.142
+      },
+      {
+        "species": "Nidorino",
+        "chance": 0.142
+      },
+      {
+        "species": "Jigglypuff",
+        "chance": 0.142
+      },
+      {
+        "species": "Golbat",
+        "chance": 0.142
+      },
+      {
+        "species": "Oddish",
+        "chance": 0.142
+      },
+      {
+        "species": "Gloom",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 42",
+    "pokes": [
+      {
+        "species": "Vileplume",
+        "chance": 0.148
+      },
+      {
+        "species": "Dugtrio",
+        "chance": 0.142
+      },
+      {
+        "species": "Golduck",
+        "chance": 0.142
+      },
+      {
+        "species": "Poliwag",
+        "chance": 0.142
+      },
+      {
+        "species": "Poliwhirl",
+        "chance": 0.142
+      },
+      {
+        "species": "Poliwrath",
+        "chance": 0.142
+      },
+      {
+        "species": "Kadabra",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 43",
+    "pokes": [
+      {
+        "species": "Machoke",
+        "chance": 0.148
+      },
+      {
+        "species": "Weepinbell",
+        "chance": 0.142
+      },
+      {
+        "species": "Tentacruel",
+        "chance": 0.142
+      },
+      {
+        "species": "Graveler",
+        "chance": 0.142
+      },
+      {
+        "species": "Slowbro",
+        "chance": 0.142
+      },
+      {
+        "species": "Magneton",
+        "chance": 0.142
+      },
+      {
+        "species": "Dodrio",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 44",
+    "pokes": [
+      {
+        "species": "Haunter",
+        "chance": 0.148
+      },
+      {
+        "species": "Marowak",
+        "chance": 0.142
+      },
+      {
+        "species": "Rhydon",
+        "chance": 0.142
+      },
+      {
+        "species": "Seadra",
+        "chance": 0.142
+      },
+      {
+        "species": "Seaking",
+        "chance": 0.142
+      },
+      {
+        "species": "Starmie",
+        "chance": 0.142
+      },
+      {
+        "species": "Eevee",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 45",
+    "pokes": [
+      {
+        "species": "Jolteon",
+        "chance": 0.2
+      },
+      {
+        "species": "Snorlax",
+        "chance": 0.2
+      },
+      {
+        "species": "Furret",
+        "chance": 0.2
+      },
+      {
+        "species": "Noctowl",
+        "chance": 0.2
+      },
+      {
+        "species": "Ariados",
+        "chance": 0.2
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 46",
+    "pokes": [
+      {
+        "species": "Flaaffy",
+        "chance": 0.17
+      },
+      {
+        "species": "Bellossom",
+        "chance": 0.166
+      },
+      {
+        "species": "Marill",
+        "chance": 0.166
+      },
+      {
+        "species": "Sudowoodo",
+        "chance": 0.166
+      },
+      {
+        "species": "Skiploom",
+        "chance": 0.166
+      },
+      {
+        "species": "Quagsire",
+        "chance": 0.166
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 47",
+    "pokes": [
+      {
+        "species": "Umbreon",
+        "chance": 0.148
+      },
+      {
+        "species": "Wobbuffet",
+        "chance": 0.142
+      },
+      {
+        "species": "Steelix",
+        "chance": 0.142
+      },
+      {
+        "species": "Granbull",
+        "chance": 0.142
+      },
+      {
+        "species": "Scizor",
+        "chance": 0.142
+      },
+      {
+        "species": "Ursaring",
+        "chance": 0.142
+      },
+      {
+        "species": "Magcargo",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 48",
+    "pokes": [
+      {
+        "species": "Octillery",
+        "chance": 0.148
+      },
+      {
+        "species": "Mantine",
+        "chance": 0.142
+      },
+      {
+        "species": "Pupitar",
+        "chance": 0.142
+      },
+      {
+        "species": "Mightyena",
+        "chance": 0.142
+      },
+      {
+        "species": "Linoone",
+        "chance": 0.142
+      },
+      {
+        "species": "Lombre",
+        "chance": 0.142
+      },
+      {
+        "species": "Swellow",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 49",
+    "pokes": [
+      {
+        "species": "Pelipper",
+        "chance": 0.148
+      },
+      {
+        "species": "Ralts",
+        "chance": 0.142
+      },
+      {
+        "species": "Kirlia",
+        "chance": 0.142
+      },
+      {
+        "species": "Delcatty",
+        "chance": 0.142
+      },
+      {
+        "species": "Lairon",
+        "chance": 0.142
+      },
+      {
+        "species": "Medicham",
+        "chance": 0.142
+      },
+      {
+        "species": "Manectric",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 50",
+    "pokes": [
+      {
+        "species": "Roselia",
+        "chance": 0.148
+      },
+      {
+        "species": "Sharpedo",
+        "chance": 0.142
+      },
+      {
+        "species": "Wailord",
+        "chance": 0.142
+      },
+      {
+        "species": "Grumpig",
+        "chance": 0.142
+      },
+      {
+        "species": "Whiscash",
+        "chance": 0.142
+      },
+      {
+        "species": "Crawdaunt",
+        "chance": 0.142
+      },
+      {
+        "species": "Shelgon",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 51",
+    "pokes": [
+      {
+        "species": "Staravia",
+        "chance": 0.148
+      },
+      {
+        "species": "Floatzel",
+        "chance": 0.142
+      },
+      {
+        "species": "Drifblim",
+        "chance": 0.142
+      },
+      {
+        "species": "Honchkrow",
+        "chance": 0.142
+      },
+      {
+        "species": "Gabite",
+        "chance": 0.142
+      },
+      {
+        "species": "Lucario",
+        "chance": 0.142
+      },
+      {
+        "species": "Hippowdon",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 52",
+    "pokes": [
+      {
+        "species": "Drapion",
+        "chance": 0.148
+      },
+      {
+        "species": "Toxicroak",
+        "chance": 0.142
+      },
+      {
+        "species": "Abomasnow",
+        "chance": 0.142
+      },
+      {
+        "species": "Weavile",
+        "chance": 0.142
+      },
+      {
+        "species": "Leafeon",
+        "chance": 0.142
+      },
+      {
+        "species": "Gliscor",
+        "chance": 0.142
+      },
+      {
+        "species": "Probopass",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 53",
+    "pokes": [
+      {
+        "species": "Watchog",
+        "chance": 0.148
+      },
+      {
+        "species": "Liepard",
+        "chance": 0.142
+      },
+      {
+        "species": "Simisage",
+        "chance": 0.142
+      },
+      {
+        "species": "Simisear",
+        "chance": 0.142
+      },
+      {
+        "species": "Boldore",
+        "chance": 0.142
+      },
+      {
+        "species": "Crustle",
+        "chance": 0.142
+      },
+      {
+        "species": "Scrafty",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 54",
+    "pokes": [
+      {
+        "species": "Zoroark",
+        "chance": 0.148
+      },
+      {
+        "species": "Gothorita",
+        "chance": 0.142
+      },
+      {
+        "species": "Duosion",
+        "chance": 0.142
+      },
+      {
+        "species": "Swanna",
+        "chance": 0.142
+      },
+      {
+        "species": "Escavalier",
+        "chance": 0.142
+      },
+      {
+        "species": "Amoonguss",
+        "chance": 0.142
+      },
+      {
+        "species": "Ferrothorn",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 55",
+    "pokes": [
+      {
+        "species": "Lampent",
+        "chance": 0.148
+      },
+      {
+        "species": "Fraxure",
+        "chance": 0.142
+      },
+      {
+        "species": "Beartic",
+        "chance": 0.142
+      },
+      {
+        "species": "Accelgor",
+        "chance": 0.142
+      },
+      {
+        "species": "Golurk",
+        "chance": 0.142
+      },
+      {
+        "species": "Bisharp",
+        "chance": 0.142
+      },
+      {
+        "species": "Zweilous",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 56",
+    "pokes": [
+      {
+        "species": "Quilladin",
+        "chance": 0.148
+      },
+      {
+        "species": "Braixen",
+        "chance": 0.142
+      },
+      {
+        "species": "Frogadier",
+        "chance": 0.142
+      },
+      {
+        "species": "Diggersby",
+        "chance": 0.142
+      },
+      {
+        "species": "Fletchinder",
+        "chance": 0.142
+      },
+      {
+        "species": "Pyroar",
+        "chance": 0.142
+      },
+      {
+        "species": "Floette",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 57",
+    "pokes": [
+      {
+        "species": "Gogoat",
+        "chance": 0.148
+      },
+      {
+        "species": "Pangoro",
+        "chance": 0.142
+      },
+      {
+        "species": "Meowstic",
+        "chance": 0.142
+      },
+      {
+        "species": "Doublade",
+        "chance": 0.142
+      },
+      {
+        "species": "Aromatisse",
+        "chance": 0.142
+      },
+      {
+        "species": "Slurpuff",
+        "chance": 0.142
+      },
+      {
+        "species": "Malamar",
+        "chance": 0.142
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 58",
+    "pokes": [
+      {
+        "species": "Barbaracle",
+        "chance": 0.17
+      },
+      {
+        "species": "Dragalge",
+        "chance": 0.166
+      },
+      {
+        "species": "Clawitzer",
+        "chance": 0.166
+      },
+      {
+        "species": "Tyrantrum",
+        "chance": 0.166
+      },
+      {
+        "species": "Sliggoo",
+        "chance": 0.166
+      },
+      {
+        "species": "Gourgeist",
+        "chance": 0.166
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 59",
+    "pokes": [
+      {
+        "species": "Avalugg",
+        "chance": 0.5
+      },
+      {
+        "species": "Noivern",
+        "chance": 0.5
+      }
+    ]
+  },
+  {
+    "routeName": "Extra Route W 60",
+    "pokes": [
+      {
+        "species": "Vaporeon",
+        "chance": 0.25
+      },
+      {
+        "species": "Flareon",
+        "chance": 0.25
+      },
+      {
+        "species": "Espeon",
+        "chance": 0.25
+      },
+      {
+        "species": "Sylveon",
+        "chance": 0.25
+      }
+    ]
   }
 ];
 
@@ -4150,6 +6082,9 @@ export const kalosUnlocks = [
   {
     "challengeName": "Eternal Fight Challenge",
     "areaId": "The Eternal Fight",
+    "unlocks": [
+      "Extra Route W 01"
+    ],
     "requirements": {
       "catchSpecies": [
         {
@@ -4169,6 +6104,783 @@ export const kalosUnlocks = [
     "gift": {
       "item": "Masterball",
       "count": 2
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 01",
+    "areaId": "Extra Route W 01",
+    "unlocks": [
+      "Extra Route W 02"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 01",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 02",
+    "areaId": "Extra Route W 02",
+    "unlocks": [
+      "Extra Route W 03"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 02",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 03",
+    "areaId": "Extra Route W 03",
+    "unlocks": [
+      "Extra Route W 04"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 03",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 04",
+    "areaId": "Extra Route W 04",
+    "unlocks": [
+      "Extra Route W 05"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 04",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 05",
+    "areaId": "Extra Route W 05",
+    "unlocks": [
+      "Extra Route W 06"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 05",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 06",
+    "areaId": "Extra Route W 06",
+    "unlocks": [
+      "Extra Route W 07"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 06",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 07",
+    "areaId": "Extra Route W 07",
+    "unlocks": [
+      "Extra Route W 08"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 07",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 08",
+    "areaId": "Extra Route W 08",
+    "unlocks": [
+      "Extra Route W 09"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 08",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 09",
+    "areaId": "Extra Route W 09",
+    "unlocks": [
+      "Extra Route W 10"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 09",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 10",
+    "areaId": "Extra Route W 10",
+    "unlocks": [
+      "Extra Route W 11"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 10",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 11",
+    "areaId": "Extra Route W 11",
+    "unlocks": [
+      "Extra Route W 12"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 11",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 12",
+    "areaId": "Extra Route W 12",
+    "unlocks": [
+      "Extra Route W 13"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 12",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 13",
+    "areaId": "Extra Route W 13",
+    "unlocks": [
+      "Extra Route W 14"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 13",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 14",
+    "areaId": "Extra Route W 14",
+    "unlocks": [
+      "Extra Route W 15"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 14",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 15",
+    "areaId": "Extra Route W 15",
+    "unlocks": [
+      "Extra Route W 16"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 15",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 16",
+    "areaId": "Extra Route W 16",
+    "unlocks": [
+      "Extra Route W 17"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 16",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 17",
+    "areaId": "Extra Route W 17",
+    "unlocks": [
+      "Extra Route W 18"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 17",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 18",
+    "areaId": "Extra Route W 18",
+    "unlocks": [
+      "Extra Route W 19"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 18",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 19",
+    "areaId": "Extra Route W 19",
+    "unlocks": [
+      "Extra Route W 20"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 19",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 20",
+    "areaId": "Extra Route W 20",
+    "unlocks": [
+      "Extra Route W 21"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 20",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 21",
+    "areaId": "Extra Route W 21",
+    "unlocks": [
+      "Extra Route W 22"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 21",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 22",
+    "areaId": "Extra Route W 22",
+    "unlocks": [
+      "Extra Route W 23"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 22",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 23",
+    "areaId": "Extra Route W 23",
+    "unlocks": [
+      "Extra Route W 24"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 23",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 24",
+    "areaId": "Extra Route W 24",
+    "unlocks": [
+      "Extra Route W 25"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 24",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 25",
+    "areaId": "Extra Route W 25",
+    "unlocks": [
+      "Extra Route W 26"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 25",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 26",
+    "areaId": "Extra Route W 26",
+    "unlocks": [
+      "Extra Route W 27"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 26",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 27",
+    "areaId": "Extra Route W 27",
+    "unlocks": [
+      "Extra Route W 28"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 27",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 28",
+    "areaId": "Extra Route W 28",
+    "unlocks": [
+      "Extra Route W 29"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 28",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 29",
+    "areaId": "Extra Route W 29",
+    "unlocks": [
+      "Extra Route W 30"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 29",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 30",
+    "areaId": "Extra Route W 30",
+    "unlocks": [
+      "Extra Route W 31"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 30",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 31",
+    "areaId": "Extra Route W 31",
+    "unlocks": [
+      "Extra Route W 32"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 31",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 32",
+    "areaId": "Extra Route W 32",
+    "unlocks": [
+      "Extra Route W 33"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 32",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 33",
+    "areaId": "Extra Route W 33",
+    "unlocks": [
+      "Extra Route W 34"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 33",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 34",
+    "areaId": "Extra Route W 34",
+    "unlocks": [
+      "Extra Route W 35"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 34",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 35",
+    "areaId": "Extra Route W 35",
+    "unlocks": [
+      "Extra Route W 36"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 35",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 36",
+    "areaId": "Extra Route W 36",
+    "unlocks": [
+      "Extra Route W 37"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 36",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 37",
+    "areaId": "Extra Route W 37",
+    "unlocks": [
+      "Extra Route W 38"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 37",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 38",
+    "areaId": "Extra Route W 38",
+    "unlocks": [
+      "Extra Route W 39"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 38",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 39",
+    "areaId": "Extra Route W 39",
+    "unlocks": [
+      "Extra Route W 40"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 39",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 40",
+    "areaId": "Extra Route W 40",
+    "unlocks": [
+      "Extra Route W 41"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 40",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 41",
+    "areaId": "Extra Route W 41",
+    "unlocks": [
+      "Extra Route W 42"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 41",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 42",
+    "areaId": "Extra Route W 42",
+    "unlocks": [
+      "Extra Route W 43"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 42",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 43",
+    "areaId": "Extra Route W 43",
+    "unlocks": [
+      "Extra Route W 44"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 43",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 44",
+    "areaId": "Extra Route W 44",
+    "unlocks": [
+      "Extra Route W 45"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 44",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 45",
+    "areaId": "Extra Route W 45",
+    "unlocks": [
+      "Extra Route W 46"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 45",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 46",
+    "areaId": "Extra Route W 46",
+    "unlocks": [
+      "Extra Route W 47"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 46",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 47",
+    "areaId": "Extra Route W 47",
+    "unlocks": [
+      "Extra Route W 48"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 47",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 48",
+    "areaId": "Extra Route W 48",
+    "unlocks": [
+      "Extra Route W 49"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 48",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 49",
+    "areaId": "Extra Route W 49",
+    "unlocks": [
+      "Extra Route W 50"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 49",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 50",
+    "areaId": "Extra Route W 50",
+    "unlocks": [
+      "Extra Route W 51"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 50",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 51",
+    "areaId": "Extra Route W 51",
+    "unlocks": [
+      "Extra Route W 52"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 51",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 52",
+    "areaId": "Extra Route W 52",
+    "unlocks": [
+      "Extra Route W 53"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 52",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 53",
+    "areaId": "Extra Route W 53",
+    "unlocks": [
+      "Extra Route W 54"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 53",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 54",
+    "areaId": "Extra Route W 54",
+    "unlocks": [
+      "Extra Route W 55"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 54",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 55",
+    "areaId": "Extra Route W 55",
+    "unlocks": [
+      "Extra Route W 56"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 55",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 56",
+    "areaId": "Extra Route W 56",
+    "unlocks": [
+      "Extra Route W 57"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 56",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 57",
+    "areaId": "Extra Route W 57",
+    "unlocks": [
+      "Extra Route W 58"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 57",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 58",
+    "areaId": "Extra Route W 58",
+    "unlocks": [
+      "Extra Route W 59"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 58",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 59",
+    "areaId": "Extra Route W 59",
+    "unlocks": [
+      "Extra Route W 60"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 59",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 60",
+    "areaId": "Extra Route W 60",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 60",
+        "count": 50
+      }
     }
   }
 ];
