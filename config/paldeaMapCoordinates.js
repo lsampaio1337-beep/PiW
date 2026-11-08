@@ -427,42 +427,6 @@ export const paldeaMapCoordinates = {
     "x": 80,
     "y": 30
   },
-  "Extra Route Z1": {
-    "x": 80,
-    "y": 40
-  },
-  "Extra Route Z2": {
-    "x": 90,
-    "y": 40
-  },
-  "Extra Route Z3": {
-    "x": 100,
-    "y": 40
-  },
-  "Extra Route Z4": {
-    "x": 110,
-    "y": 40
-  },
-  "Extra Route Z5": {
-    "x": 120,
-    "y": 40
-  },
-  "Extra Route Z6": {
-    "x": 130,
-    "y": 40
-  },
-  "Extra Route Z7": {
-    "x": 140,
-    "y": 40
-  },
-  "Extra Route Z8": {
-    "x": 150,
-    "y": 40
-  },
-  "Extra Route Z9": {
-    "x": 160,
-    "y": 40
-  },
   "Poco Path - Main (High Level)": {
     "x": 10,
     "y": 20
@@ -618,5 +582,41 @@ export const paldeaMapCoordinates = {
   "South Province (Area Five) - Grass (High Level)": {
     "x": 30,
     "y": 60
+  },
+  "South Province (Area Five) - Lake (High Level)": {
+    "x": 40,
+    "y": 60
+  },
+  "South Province (Area Five) - Mountain (High Level)": {
+    "x": 50,
+    "y": 60
+  },
+  "South Province (Area Five) - River (High Level)": {
+    "x": 60,
+    "y": 60
+  },
+  "East Province (Area Two) - Forest (High Level)": {
+    "x": 70,
+    "y": 60
+  },
+  "East Province (Area Two) - Grass (High Level)": {
+    "x": 80,
+    "y": 60
+  },
+  "East Province (Area Two) - Near Town (High Level)": {
+    "x": 90,
+    "y": 60
+  },
+  "East Province (Area Two) - River (High Level)": {
+    "x": 10,
+    "y": 70
+  },
+  "Cascarrafa Gym (High Level)": {
+    "x": 20,
+    "y": 70
+  },
+  "East Province (Area Two) - Rocky (High Level)": {
+    "x": 30,
+    "y": 70
   }
 };

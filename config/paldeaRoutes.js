@@ -4678,487 +4678,40 @@ export const paldeaRoutes = [
     ]
   },
   {
-    "name": "Extra Route Z1",
-    "spawns": [
-      {
-        "pokemonId": 912,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 913,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 914,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 462,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 336,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 576,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 876,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 357,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      }
-    ]
-  },
-  {
-    "name": "Extra Route Z2",
-    "spawns": [
-      {
-        "pokemonId": 950,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 553,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 373,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 442,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 874,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 149,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 615,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 976,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      }
-    ]
-  },
-  {
-    "name": "Extra Route Z3",
-    "spawns": [
-      {
-        "pokemonId": 984,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 986,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 987,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 988,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 990,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 991,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 993,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 994,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      }
-    ]
-  },
-  {
-    "name": "Extra Route Z4",
-    "spawns": [
-      {
-        "pokemonId": 999,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 1000,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 1002,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 1004,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 1006,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 1007,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 1008,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 313,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      }
-    ]
-  },
-  {
-    "name": "Extra Route Z5",
-    "spawns": [
-      {
-        "pokemonId": 314,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 69,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 70,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 71,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 190,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 424,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 220,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 221,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      }
-    ]
-  },
-  {
-    "name": "Extra Route Z6",
-    "spawns": [
-      {
-        "pokemonId": 473,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 273,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 274,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 275,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 532,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 533,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 534,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 446,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      }
-    ]
-  },
-  {
-    "name": "Extra Route Z7",
-    "spawns": [
-      {
-        "pokemonId": 143,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 299,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 476,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 736,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 737,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 738,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 782,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 783,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      }
-    ]
-  },
-  {
-    "name": "Extra Route Z8",
-    "spawns": [
-      {
-        "pokemonId": 784,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.16666666666666666
-      },
-      {
-        "pokemonId": 619,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.16666666666666666
-      },
-      {
-        "pokemonId": 620,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.16666666666666666
-      },
-      {
-        "pokemonId": 433,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.16666666666666666
-      },
-      {
-        "pokemonId": 358,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.16666666666666666
-      },
-      {
-        "pokemonId": 349,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.16666666666666666
-      }
-    ]
-  },
-  {
-    "name": "Extra Route Z9",
-    "spawns": [
-      {
-        "pokemonId": 350,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 580,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 581,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 845,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 1014,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.2
-      }
-    ]
-  },
-  {
     "name": "Poco Path - Main (High Level)",
     "spawns": [
       {
-        "pokemonId": 817,
+        "pokemonId": "147",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1665
       },
       {
-        "pokemonId": 731,
+        "pokemonId": "89",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 124,
+        "pokemonId": "652",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 391,
+        "pokemonId": "901",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 677,
+        "pokemonId": "1009",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 750,
+        "pokemonId": "302",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
@@ -5169,37 +4722,37 @@ export const paldeaRoutes = [
     "name": "Los Platos - Main (High Level)",
     "spawns": [
       {
-        "pokemonId": 312,
+        "pokemonId": "675",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1665
       },
       {
-        "pokemonId": 998,
+        "pokemonId": "815",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 68,
+        "pokemonId": "558",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 372,
+        "pokemonId": "1010",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 78,
+        "pokemonId": "103",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 1016,
+        "pokemonId": "270",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
@@ -5210,37 +4763,37 @@ export const paldeaRoutes = [
     "name": "Mesagoza - Main (High Level)",
     "spawns": [
       {
-        "pokemonId": 158,
+        "pokemonId": "392",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1665
       },
       {
-        "pokemonId": 44,
+        "pokemonId": "117",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 969,
+        "pokemonId": "772",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 842,
+        "pokemonId": "366",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 732,
+        "pokemonId": "410",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 721,
+        "pokemonId": "494",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
@@ -5251,37 +4804,37 @@ export const paldeaRoutes = [
     "name": "South Province (Area One) - Beach (High Level)",
     "spawns": [
       {
-        "pokemonId": 178,
+        "pokemonId": "189",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1665
       },
       {
-        "pokemonId": 836,
+        "pokemonId": "333",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 199,
+        "pokemonId": "810",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 558,
+        "pokemonId": "989",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 777,
+        "pokemonId": "328",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 130,
+        "pokemonId": "60",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
@@ -5292,37 +4845,37 @@ export const paldeaRoutes = [
     "name": "South Province (Area One) - Cave (High Level)",
     "spawns": [
       {
-        "pokemonId": 756,
+        "pokemonId": "953",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1665
       },
       {
-        "pokemonId": 975,
+        "pokemonId": "206",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 867,
+        "pokemonId": "518",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 937,
+        "pokemonId": "397",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 593,
+        "pokemonId": "635",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 964,
+        "pokemonId": "552",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
@@ -5333,37 +4886,37 @@ export const paldeaRoutes = [
     "name": "South Province (Area One) - Flower Patch (High Level)",
     "spawns": [
       {
-        "pokemonId": 186,
+        "pokemonId": "276",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1665
       },
       {
-        "pokemonId": 136,
+        "pokemonId": "610",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 815,
+        "pokemonId": "196",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 260,
+        "pokemonId": "1022",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 247,
+        "pokemonId": "26",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 621,
+        "pokemonId": "620",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
@@ -5374,37 +4927,37 @@ export const paldeaRoutes = [
     "name": "South Province (Area One) - Forest (High Level)",
     "spawns": [
       {
-        "pokemonId": 500,
+        "pokemonId": "454",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1665
       },
       {
-        "pokemonId": 255,
+        "pokemonId": "31",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 329,
+        "pokemonId": "396",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 280,
+        "pokemonId": "394",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 1019,
+        "pokemonId": "463",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 906,
+        "pokemonId": "577",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
@@ -5415,37 +4968,37 @@ export const paldeaRoutes = [
     "name": "South Province (Area One) - Grass (High Level)",
     "spawns": [
       {
-        "pokemonId": 949,
+        "pokemonId": "274",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1665
       },
       {
-        "pokemonId": 386,
+        "pokemonId": "423",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 182,
+        "pokemonId": "775",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 407,
+        "pokemonId": "371",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 22,
+        "pokemonId": "761",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 577,
+        "pokemonId": "474",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
@@ -5456,37 +5009,37 @@ export const paldeaRoutes = [
     "name": "South Province (Area One) - Lake (High Level)",
     "spawns": [
       {
-        "pokemonId": 105,
+        "pokemonId": "544",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1665
       },
       {
-        "pokemonId": 429,
+        "pokemonId": "169",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 539,
+        "pokemonId": "570",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 42,
+        "pokemonId": "587",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 332,
+        "pokemonId": "238",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 360,
+        "pokemonId": "900",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
@@ -5497,37 +5050,37 @@ export const paldeaRoutes = [
     "name": "South Province (Area One) - Near Town (High Level)",
     "spawns": [
       {
-        "pokemonId": 724,
+        "pokemonId": "577",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1665
       },
       {
-        "pokemonId": 392,
+        "pokemonId": "271",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 5,
+        "pokemonId": "468",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 618,
+        "pokemonId": "262",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 47,
+        "pokemonId": "282",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 252,
+        "pokemonId": "4",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
@@ -5538,37 +5091,37 @@ export const paldeaRoutes = [
     "name": "South Province (Area One) - Ocean (High Level)",
     "spawns": [
       {
-        "pokemonId": 157,
+        "pokemonId": "124",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1665
       },
       {
-        "pokemonId": 699,
+        "pokemonId": "624",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 213,
+        "pokemonId": "499",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 930,
+        "pokemonId": "352",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 472,
+        "pokemonId": "390",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 477,
+        "pokemonId": "699",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
@@ -5579,37 +5132,37 @@ export const paldeaRoutes = [
     "name": "South Province (Area One) - River (High Level)",
     "spawns": [
       {
-        "pokemonId": 700,
+        "pokemonId": "370",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1665
       },
       {
-        "pokemonId": 809,
+        "pokemonId": "209",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 660,
+        "pokemonId": "322",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 740,
+        "pokemonId": "576",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 979,
+        "pokemonId": "759",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 814,
+        "pokemonId": "462",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
@@ -5620,37 +5173,37 @@ export const paldeaRoutes = [
     "name": "South Province (Area One) - Ruins (High Level)",
     "spawns": [
       {
-        "pokemonId": 841,
+        "pokemonId": "1020",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1665
       },
       {
-        "pokemonId": 497,
+        "pokemonId": "163",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 728,
+        "pokemonId": "762",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 209,
+        "pokemonId": "27",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 655,
+        "pokemonId": "686",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 354,
+        "pokemonId": "348",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
@@ -5661,37 +5214,37 @@ export const paldeaRoutes = [
     "name": "Cortondo Gym (High Level)",
     "spawns": [
       {
-        "pokemonId": 151,
+        "pokemonId": "568",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1665
       },
       {
-        "pokemonId": 155,
+        "pokemonId": "502",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 432,
+        "pokemonId": "337",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 142,
+        "pokemonId": "613",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 166,
+        "pokemonId": "90",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 282,
+        "pokemonId": "290",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
@@ -5702,37 +5255,37 @@ export const paldeaRoutes = [
     "name": "South Province (Area Two) - Flower Patch (High Level)",
     "spawns": [
       {
-        "pokemonId": 812,
+        "pokemonId": "924",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1665
       },
       {
-        "pokemonId": 428,
+        "pokemonId": "672",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 448,
+        "pokemonId": "563",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 2,
+        "pokemonId": "107",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 601,
+        "pokemonId": "622",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 654,
+        "pokemonId": "670",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
@@ -5743,37 +5296,37 @@ export const paldeaRoutes = [
     "name": "South Province (Area Two) - Forest (High Level)",
     "spawns": [
       {
-        "pokemonId": 148,
+        "pokemonId": "225",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1665
       },
       {
-        "pokemonId": 195,
+        "pokemonId": "559",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 91,
+        "pokemonId": "579",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 439,
+        "pokemonId": "152",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 689,
+        "pokemonId": "185",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 632,
+        "pokemonId": "52",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
@@ -5784,37 +5337,37 @@ export const paldeaRoutes = [
     "name": "South Province (Area Two) - Grass (High Level)",
     "spawns": [
       {
-        "pokemonId": 498,
+        "pokemonId": "453",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1665
       },
       {
-        "pokemonId": 469,
+        "pokemonId": "389",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 1022,
+        "pokemonId": "582",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 768,
+        "pokemonId": "764",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 952,
+        "pokemonId": "753",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 258,
+        "pokemonId": "240",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
@@ -5825,37 +5378,37 @@ export const paldeaRoutes = [
     "name": "South Province (Area Two) - Mountain (High Level)",
     "spawns": [
       {
-        "pokemonId": 571,
+        "pokemonId": "735",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1665
       },
       {
-        "pokemonId": 310,
+        "pokemonId": "393",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 1011,
+        "pokemonId": "279",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 1023,
+        "pokemonId": "856",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 595,
+        "pokemonId": "115",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 1020,
+        "pokemonId": "30",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
@@ -5866,37 +5419,37 @@ export const paldeaRoutes = [
     "name": "South Province (Area Two) - Near Town (High Level)",
     "spawns": [
       {
-        "pokemonId": 628,
+        "pokemonId": "373",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1665
       },
       {
-        "pokemonId": 839,
+        "pokemonId": "884",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 711,
+        "pokemonId": "1012",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 626,
+        "pokemonId": "522",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 311,
+        "pokemonId": "523",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 3,
+        "pokemonId": "375",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
@@ -5907,37 +5460,37 @@ export const paldeaRoutes = [
     "name": "South Province (Area Two) - Olive Grove (High Level)",
     "spawns": [
       {
-        "pokemonId": 494,
+        "pokemonId": "254",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1665
       },
       {
-        "pokemonId": 256,
+        "pokemonId": "470",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 903,
+        "pokemonId": "593",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 652,
+        "pokemonId": "1",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 853,
+        "pokemonId": "422",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 455,
+        "pokemonId": "436",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
@@ -5948,37 +5501,37 @@ export const paldeaRoutes = [
     "name": "South Province (Area Two) - Rocky (High Level)",
     "spawns": [
       {
-        "pokemonId": 38,
+        "pokemonId": "605",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1665
       },
       {
-        "pokemonId": 899,
+        "pokemonId": "306",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 606,
+        "pokemonId": "82",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 939,
+        "pokemonId": "113",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 414,
+        "pokemonId": "529",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 465,
+        "pokemonId": "697",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
@@ -5989,37 +5542,37 @@ export const paldeaRoutes = [
     "name": "South Province (Area Four) - Grass (High Level)",
     "spawns": [
       {
-        "pokemonId": 663,
+        "pokemonId": "948",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1665
       },
       {
-        "pokemonId": 441,
+        "pokemonId": "378",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 499,
+        "pokemonId": "1025",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 205,
+        "pokemonId": "205",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 1021,
+        "pokemonId": "679",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 210,
+        "pokemonId": "995",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
@@ -6030,37 +5583,37 @@ export const paldeaRoutes = [
     "name": "South Province (Area Four) - Lake (High Level)",
     "spawns": [
       {
-        "pokemonId": 421,
+        "pokemonId": "686",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1665
       },
       {
-        "pokemonId": 502,
+        "pokemonId": "620",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 468,
+        "pokemonId": "110",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 547,
+        "pokemonId": "592",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 733,
+        "pokemonId": "483",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 729,
+        "pokemonId": "581",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
@@ -6071,37 +5624,37 @@ export const paldeaRoutes = [
     "name": "South Province (Area Four) - Mountain (High Level)",
     "spawns": [
       {
-        "pokemonId": 818,
+        "pokemonId": "283",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1665
       },
       {
-        "pokemonId": 43,
+        "pokemonId": "322",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 730,
+        "pokemonId": "57",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 89,
+        "pokemonId": "478",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 832,
+        "pokemonId": "160",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 671,
+        "pokemonId": "750",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
@@ -6112,37 +5665,37 @@ export const paldeaRoutes = [
     "name": "Artazon Gym (High Level)",
     "spawns": [
       {
-        "pokemonId": 858,
+        "pokemonId": "309",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1665
       },
       {
-        "pokemonId": 923,
+        "pokemonId": "1001",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 181,
+        "pokemonId": "294",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 982,
+        "pokemonId": "902",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 713,
+        "pokemonId": "1008",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 774,
+        "pokemonId": "461",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
@@ -6153,37 +5706,37 @@ export const paldeaRoutes = [
     "name": "South Province (Area Four) - Ocean (High Level)",
     "spawns": [
       {
-        "pokemonId": 813,
+        "pokemonId": "601",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1665
       },
       {
-        "pokemonId": 160,
+        "pokemonId": "193",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 4,
+        "pokemonId": "180",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 569,
+        "pokemonId": "114",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 589,
+        "pokemonId": "1024",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 934,
+        "pokemonId": "122",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
@@ -6194,37 +5747,37 @@ export const paldeaRoutes = [
     "name": "South Province (Area Four) - River (High Level)",
     "spawns": [
       {
-        "pokemonId": 59,
+        "pokemonId": "977",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1665
       },
       {
-        "pokemonId": 579,
+        "pokemonId": "342",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 656,
+        "pokemonId": "116",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 338,
+        "pokemonId": "591",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 301,
+        "pokemonId": "293",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 154,
+        "pokemonId": "346",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
@@ -6235,37 +5788,37 @@ export const paldeaRoutes = [
     "name": "South Province (Area Three) - Grass (High Level)",
     "spawns": [
       {
-        "pokemonId": 609,
+        "pokemonId": "316",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1665
       },
       {
-        "pokemonId": 226,
+        "pokemonId": "657",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 495,
+        "pokemonId": "585",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 546,
+        "pokemonId": "1007",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 622,
+        "pokemonId": "391",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 315,
+        "pokemonId": "526",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
@@ -6276,37 +5829,37 @@ export const paldeaRoutes = [
     "name": "South Province (Area Three) - Rocky (High Level)",
     "spawns": [
       {
-        "pokemonId": 390,
+        "pokemonId": "543",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1665
       },
       {
-        "pokemonId": 197,
+        "pokemonId": "588",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 727,
+        "pokemonId": "435",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 159,
+        "pokemonId": "476",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 611,
+        "pokemonId": "987",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 816,
+        "pokemonId": "178",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
@@ -6317,37 +5870,37 @@ export const paldeaRoutes = [
     "name": "East Province (Area One) - Beach (High Level)",
     "spawns": [
       {
-        "pokemonId": 99,
+        "pokemonId": "200",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1665
       },
       {
-        "pokemonId": 208,
+        "pokemonId": "721",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 152,
+        "pokemonId": "209",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 653,
+        "pokemonId": "43",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 925,
+        "pokemonId": "3",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 169,
+        "pokemonId": "308",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
@@ -6358,37 +5911,37 @@ export const paldeaRoutes = [
     "name": "East Province (Area One) - Forest (High Level)",
     "spawns": [
       {
-        "pokemonId": 763,
+        "pokemonId": "112",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1665
       },
       {
-        "pokemonId": 146,
+        "pokemonId": "129",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 321,
+        "pokemonId": "631",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 475,
+        "pokemonId": "177",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 388,
+        "pokemonId": "97",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 400,
+        "pokemonId": "34",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
@@ -6399,37 +5952,37 @@ export const paldeaRoutes = [
     "name": "East Province (Area One) - Grass (High Level)",
     "spawns": [
       {
-        "pokemonId": 743,
+        "pokemonId": "440",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1665
       },
       {
-        "pokemonId": 298,
+        "pokemonId": "819",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 239,
+        "pokemonId": "520",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 269,
+        "pokemonId": "51",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 746,
+        "pokemonId": "617",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 723,
+        "pokemonId": "135",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
@@ -6440,37 +5993,37 @@ export const paldeaRoutes = [
     "name": "East Province (Area One) - Mountain (High Level)",
     "spawns": [
       {
-        "pokemonId": 445,
+        "pokemonId": "345",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1665
       },
       {
-        "pokemonId": 202,
+        "pokemonId": "392",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 869,
+        "pokemonId": "725",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 1015,
+        "pokemonId": "656",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 868,
+        "pokemonId": "654",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 901,
+        "pokemonId": "126",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
@@ -6481,37 +6034,37 @@ export const paldeaRoutes = [
     "name": "East Province (Area One) - Near Town (High Level)",
     "spawns": [
       {
-        "pokemonId": 277,
+        "pokemonId": "625",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1665
       },
       {
-        "pokemonId": 905,
+        "pokemonId": "940",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 156,
+        "pokemonId": "677",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 649,
+        "pokemonId": "94",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 943,
+        "pokemonId": "464",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 251,
+        "pokemonId": "422",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
@@ -6522,37 +6075,37 @@ export const paldeaRoutes = [
     "name": "East Province (Area One) - Ocean (High Level)",
     "spawns": [
       {
-        "pokemonId": 458,
+        "pokemonId": "380",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1665
       },
       {
-        "pokemonId": 844,
+        "pokemonId": "944",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 369,
+        "pokemonId": "519",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 584,
+        "pokemonId": "1010",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 529,
+        "pokemonId": "329",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 352,
+        "pokemonId": "119",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
@@ -6563,37 +6116,37 @@ export const paldeaRoutes = [
     "name": "Levincia Gym (High Level)",
     "spawns": [
       {
-        "pokemonId": 125,
+        "pokemonId": "1005",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1665
       },
       {
-        "pokemonId": 855,
+        "pokemonId": "913",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 306,
+        "pokemonId": "214",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 501,
+        "pokemonId": "751",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 272,
+        "pokemonId": "361",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 241,
+        "pokemonId": "67",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
@@ -6604,37 +6157,37 @@ export const paldeaRoutes = [
     "name": "East Province (Area One) - Rocky (High Level)",
     "spawns": [
       {
-        "pokemonId": 651,
+        "pokemonId": "195",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1665
       },
       {
-        "pokemonId": 238,
+        "pokemonId": "376",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 725,
+        "pokemonId": "698",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 781,
+        "pokemonId": "616",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 722,
+        "pokemonId": "473",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
       },
       {
-        "pokemonId": 259,
+        "pokemonId": "757",
         "minLevel": 70,
         "maxLevel": 100,
         "chance": 0.1667
@@ -6645,22 +6198,40 @@ export const paldeaRoutes = [
     "name": "South Province (Area Five) - Beach (High Level)",
     "spawns": [
       {
-        "pokemonId": 726,
+        "pokemonId": "524",
         "minLevel": 70,
         "maxLevel": 100,
-        "chance": 0.3334
+        "chance": 0.1665
       },
       {
-        "pokemonId": 257,
+        "pokemonId": "421",
         "minLevel": 70,
         "maxLevel": 100,
-        "chance": 0.3333
+        "chance": 0.1667
       },
       {
-        "pokemonId": 552,
+        "pokemonId": "274",
         "minLevel": 70,
         "maxLevel": 100,
-        "chance": 0.3333
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": "531",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": "363",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": "811",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
       }
     ]
   },
@@ -6668,28 +6239,403 @@ export const paldeaRoutes = [
     "name": "South Province (Area Five) - Grass (High Level)",
     "spawns": [
       {
-        "pokemonId": 387,
+        "pokemonId": "467",
         "minLevel": 70,
         "maxLevel": 100,
-        "chance": 0.25
+        "chance": 0.1665
       },
       {
-        "pokemonId": 127,
+        "pokemonId": "583",
         "minLevel": 70,
         "maxLevel": 100,
-        "chance": 0.25
+        "chance": 0.1667
       },
       {
-        "pokemonId": 623,
+        "pokemonId": "341",
         "minLevel": 70,
         "maxLevel": 100,
-        "chance": 0.25
+        "chance": 0.1667
       },
       {
-        "pokemonId": 328,
+        "pokemonId": "751",
         "minLevel": 70,
         "maxLevel": 100,
-        "chance": 0.25
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": "305",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": "632",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      }
+    ]
+  },
+  {
+    "name": "South Province (Area Five) - Lake (High Level)",
+    "spawns": [
+      {
+        "pokemonId": "234",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1665
+      },
+      {
+        "pokemonId": "153",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": "843",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": "132",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": "1016",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": "703",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      }
+    ]
+  },
+  {
+    "name": "South Province (Area Five) - Mountain (High Level)",
+    "spawns": [
+      {
+        "pokemonId": "985",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1665
+      },
+      {
+        "pokemonId": "733",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": "192",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": "213",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": "493",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": "159",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      }
+    ]
+  },
+  {
+    "name": "South Province (Area Five) - River (High Level)",
+    "spawns": [
+      {
+        "pokemonId": "419",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1665
+      },
+      {
+        "pokemonId": "628",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": "764",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": "602",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": "151",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": "773",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      }
+    ]
+  },
+  {
+    "name": "East Province (Area Two) - Forest (High Level)",
+    "spawns": [
+      {
+        "pokemonId": "859",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1665
+      },
+      {
+        "pokemonId": "965",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": "109",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": "606",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": "446",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": "950",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      }
+    ]
+  },
+  {
+    "name": "East Province (Area Two) - Grass (High Level)",
+    "spawns": [
+      {
+        "pokemonId": "845",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1665
+      },
+      {
+        "pokemonId": "938",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": "18",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": "755",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": "991",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": "769",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      }
+    ]
+  },
+  {
+    "name": "East Province (Area Two) - Near Town (High Level)",
+    "spawns": [
+      {
+        "pokemonId": "538",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1665
+      },
+      {
+        "pokemonId": "521",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": "258",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": "395",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": "99",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": "165",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      }
+    ]
+  },
+  {
+    "name": "East Province (Area Two) - River (High Level)",
+    "spawns": [
+      {
+        "pokemonId": "446",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1665
+      },
+      {
+        "pokemonId": "357",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": "497",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": "525",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": "147",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": "131",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      }
+    ]
+  },
+  {
+    "name": "Cascarrafa Gym (High Level)",
+    "spawns": [
+      {
+        "pokemonId": "307",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": "72",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": "658",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": "983",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": "4",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.2
+      }
+    ]
+  },
+  {
+    "name": "East Province (Area Two) - Rocky (High Level)",
+    "spawns": [
+      {
+        "pokemonId": "522",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1665
+      },
+      {
+        "pokemonId": "559",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": "243",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": "926",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": "456",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": "311",
+        "minLevel": 70,
+        "maxLevel": 100,
+        "chance": 0.1667
       }
     ]
   }
@@ -8017,7 +7963,7 @@ export const paldeaUnlocks = [
     "challengeName": "Extra Challenge The Indigo Disk 09",
     "areaId": "Terarium Core",
     "unlocks": [
-      "Extra Route Z1"
+      "Poco Path - Main (High Level)"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -8028,123 +7974,6 @@ export const paldeaUnlocks = [
   },
   {
     "challengeName": "Extra Challenge Z01",
-    "areaId": "Extra Route Z1",
-    "unlocks": [
-      "Extra Route Z2"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Extra Route Z1",
-        "count": 150
-      }
-    }
-  },
-  {
-    "challengeName": "Extra Challenge Z02",
-    "areaId": "Extra Route Z2",
-    "unlocks": [
-      "Extra Route Z3"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Extra Route Z2",
-        "count": 150
-      }
-    }
-  },
-  {
-    "challengeName": "Extra Challenge Z03",
-    "areaId": "Extra Route Z3",
-    "unlocks": [
-      "Extra Route Z4"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Extra Route Z3",
-        "count": 150
-      }
-    }
-  },
-  {
-    "challengeName": "Extra Challenge Z04",
-    "areaId": "Extra Route Z4",
-    "unlocks": [
-      "Extra Route Z5"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Extra Route Z4",
-        "count": 150
-      }
-    }
-  },
-  {
-    "challengeName": "Extra Challenge Z05",
-    "areaId": "Extra Route Z5",
-    "unlocks": [
-      "Extra Route Z6"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Extra Route Z5",
-        "count": 150
-      }
-    }
-  },
-  {
-    "challengeName": "Extra Challenge Z06",
-    "areaId": "Extra Route Z6",
-    "unlocks": [
-      "Extra Route Z7"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Extra Route Z6",
-        "count": 150
-      }
-    }
-  },
-  {
-    "challengeName": "Extra Challenge Z07",
-    "areaId": "Extra Route Z7",
-    "unlocks": [
-      "Extra Route Z8"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Extra Route Z7",
-        "count": 150
-      }
-    }
-  },
-  {
-    "challengeName": "Extra Challenge Z08",
-    "areaId": "Extra Route Z8",
-    "unlocks": [
-      "Extra Route Z9"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Extra Route Z8",
-        "count": 150
-      }
-    }
-  },
-  {
-    "challengeName": "Extra Challenge Z09",
-    "areaId": "Extra Route Z9",
-    "unlocks": [
-      "Poco Path - Main (High Level)"
-    ],
-    "requirements": {
-      "defeatCountRoute": {
-        "route": "Extra Route Z9",
-        "count": 150
-      }
-    }
-  },
-  {
-    "challengeName": "Extra Challenge W 01",
     "areaId": "Poco Path - Main (High Level)",
     "unlocks": [
       "Los Platos - Main (High Level)"
@@ -8157,7 +7986,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge W 02",
+    "challengeName": "Extra Challenge Z02",
     "areaId": "Los Platos - Main (High Level)",
     "unlocks": [
       "Mesagoza - Main (High Level)"
@@ -8170,7 +7999,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge W 03",
+    "challengeName": "Extra Challenge Z03",
     "areaId": "Mesagoza - Main (High Level)",
     "unlocks": [
       "South Province (Area One) - Beach (High Level)"
@@ -8183,7 +8012,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge W 04",
+    "challengeName": "Extra Challenge Z04",
     "areaId": "South Province (Area One) - Beach (High Level)",
     "unlocks": [
       "South Province (Area One) - Cave (High Level)"
@@ -8196,7 +8025,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge W 05",
+    "challengeName": "Extra Challenge Z05",
     "areaId": "South Province (Area One) - Cave (High Level)",
     "unlocks": [
       "South Province (Area One) - Flower Patch (High Level)"
@@ -8209,7 +8038,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge W 06",
+    "challengeName": "Extra Challenge Z06",
     "areaId": "South Province (Area One) - Flower Patch (High Level)",
     "unlocks": [
       "South Province (Area One) - Forest (High Level)"
@@ -8222,7 +8051,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge W 07",
+    "challengeName": "Extra Challenge Z07",
     "areaId": "South Province (Area One) - Forest (High Level)",
     "unlocks": [
       "South Province (Area One) - Grass (High Level)"
@@ -8235,7 +8064,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge W 08",
+    "challengeName": "Extra Challenge Z08",
     "areaId": "South Province (Area One) - Grass (High Level)",
     "unlocks": [
       "South Province (Area One) - Lake (High Level)"
@@ -8248,7 +8077,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge W 09",
+    "challengeName": "Extra Challenge Z09",
     "areaId": "South Province (Area One) - Lake (High Level)",
     "unlocks": [
       "South Province (Area One) - Near Town (High Level)"
@@ -8261,7 +8090,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge W 10",
+    "challengeName": "Extra Challenge Z10",
     "areaId": "South Province (Area One) - Near Town (High Level)",
     "unlocks": [
       "South Province (Area One) - Ocean (High Level)"
@@ -8274,7 +8103,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge W 11",
+    "challengeName": "Extra Challenge Z11",
     "areaId": "South Province (Area One) - Ocean (High Level)",
     "unlocks": [
       "South Province (Area One) - River (High Level)"
@@ -8287,7 +8116,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge W 12",
+    "challengeName": "Extra Challenge Z12",
     "areaId": "South Province (Area One) - River (High Level)",
     "unlocks": [
       "South Province (Area One) - Ruins (High Level)"
@@ -8300,7 +8129,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge W 13",
+    "challengeName": "Extra Challenge Z13",
     "areaId": "South Province (Area One) - Ruins (High Level)",
     "unlocks": [
       "Cortondo Gym (High Level)"
@@ -8313,7 +8142,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge W 14",
+    "challengeName": "Extra Challenge Z14",
     "areaId": "Cortondo Gym (High Level)",
     "unlocks": [
       "South Province (Area Two) - Flower Patch (High Level)"
@@ -8326,7 +8155,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge W 15",
+    "challengeName": "Extra Challenge Z15",
     "areaId": "South Province (Area Two) - Flower Patch (High Level)",
     "unlocks": [
       "South Province (Area Two) - Forest (High Level)"
@@ -8339,7 +8168,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge W 16",
+    "challengeName": "Extra Challenge Z16",
     "areaId": "South Province (Area Two) - Forest (High Level)",
     "unlocks": [
       "South Province (Area Two) - Grass (High Level)"
@@ -8352,7 +8181,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge W 17",
+    "challengeName": "Extra Challenge Z17",
     "areaId": "South Province (Area Two) - Grass (High Level)",
     "unlocks": [
       "South Province (Area Two) - Mountain (High Level)"
@@ -8365,7 +8194,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge W 18",
+    "challengeName": "Extra Challenge Z18",
     "areaId": "South Province (Area Two) - Mountain (High Level)",
     "unlocks": [
       "South Province (Area Two) - Near Town (High Level)"
@@ -8378,7 +8207,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge W 19",
+    "challengeName": "Extra Challenge Z19",
     "areaId": "South Province (Area Two) - Near Town (High Level)",
     "unlocks": [
       "South Province (Area Two) - Olive Grove (High Level)"
@@ -8391,7 +8220,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge W 20",
+    "challengeName": "Extra Challenge Z20",
     "areaId": "South Province (Area Two) - Olive Grove (High Level)",
     "unlocks": [
       "South Province (Area Two) - Rocky (High Level)"
@@ -8404,7 +8233,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge W 21",
+    "challengeName": "Extra Challenge Z21",
     "areaId": "South Province (Area Two) - Rocky (High Level)",
     "unlocks": [
       "South Province (Area Four) - Grass (High Level)"
@@ -8417,7 +8246,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge W 22",
+    "challengeName": "Extra Challenge Z22",
     "areaId": "South Province (Area Four) - Grass (High Level)",
     "unlocks": [
       "South Province (Area Four) - Lake (High Level)"
@@ -8430,7 +8259,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge W 23",
+    "challengeName": "Extra Challenge Z23",
     "areaId": "South Province (Area Four) - Lake (High Level)",
     "unlocks": [
       "South Province (Area Four) - Mountain (High Level)"
@@ -8443,7 +8272,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge W 24",
+    "challengeName": "Extra Challenge Z24",
     "areaId": "South Province (Area Four) - Mountain (High Level)",
     "unlocks": [
       "Artazon Gym (High Level)"
@@ -8456,7 +8285,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge W 25",
+    "challengeName": "Extra Challenge Z25",
     "areaId": "Artazon Gym (High Level)",
     "unlocks": [
       "South Province (Area Four) - Ocean (High Level)"
@@ -8469,7 +8298,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge W 26",
+    "challengeName": "Extra Challenge Z26",
     "areaId": "South Province (Area Four) - Ocean (High Level)",
     "unlocks": [
       "South Province (Area Four) - River (High Level)"
@@ -8482,7 +8311,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge W 27",
+    "challengeName": "Extra Challenge Z27",
     "areaId": "South Province (Area Four) - River (High Level)",
     "unlocks": [
       "South Province (Area Three) - Grass (High Level)"
@@ -8495,7 +8324,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge W 28",
+    "challengeName": "Extra Challenge Z28",
     "areaId": "South Province (Area Three) - Grass (High Level)",
     "unlocks": [
       "South Province (Area Three) - Rocky (High Level)"
@@ -8508,7 +8337,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge W 29",
+    "challengeName": "Extra Challenge Z29",
     "areaId": "South Province (Area Three) - Rocky (High Level)",
     "unlocks": [
       "East Province (Area One) - Beach (High Level)"
@@ -8521,7 +8350,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge W 30",
+    "challengeName": "Extra Challenge Z30",
     "areaId": "East Province (Area One) - Beach (High Level)",
     "unlocks": [
       "East Province (Area One) - Forest (High Level)"
@@ -8534,7 +8363,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge W 31",
+    "challengeName": "Extra Challenge Z31",
     "areaId": "East Province (Area One) - Forest (High Level)",
     "unlocks": [
       "East Province (Area One) - Grass (High Level)"
@@ -8547,7 +8376,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge W 32",
+    "challengeName": "Extra Challenge Z32",
     "areaId": "East Province (Area One) - Grass (High Level)",
     "unlocks": [
       "East Province (Area One) - Mountain (High Level)"
@@ -8560,7 +8389,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge W 33",
+    "challengeName": "Extra Challenge Z33",
     "areaId": "East Province (Area One) - Mountain (High Level)",
     "unlocks": [
       "East Province (Area One) - Near Town (High Level)"
@@ -8573,7 +8402,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge W 34",
+    "challengeName": "Extra Challenge Z34",
     "areaId": "East Province (Area One) - Near Town (High Level)",
     "unlocks": [
       "East Province (Area One) - Ocean (High Level)"
@@ -8586,7 +8415,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge W 35",
+    "challengeName": "Extra Challenge Z35",
     "areaId": "East Province (Area One) - Ocean (High Level)",
     "unlocks": [
       "Levincia Gym (High Level)"
@@ -8599,7 +8428,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge W 36",
+    "challengeName": "Extra Challenge Z36",
     "areaId": "Levincia Gym (High Level)",
     "unlocks": [
       "East Province (Area One) - Rocky (High Level)"
@@ -8612,7 +8441,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge W 37",
+    "challengeName": "Extra Challenge Z37",
     "areaId": "East Province (Area One) - Rocky (High Level)",
     "unlocks": [
       "South Province (Area Five) - Beach (High Level)"
@@ -8625,7 +8454,7 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge W 38",
+    "challengeName": "Extra Challenge Z38",
     "areaId": "South Province (Area Five) - Beach (High Level)",
     "unlocks": [
       "South Province (Area Five) - Grass (High Level)"
@@ -8638,12 +8467,129 @@ export const paldeaUnlocks = [
     }
   },
   {
-    "challengeName": "Extra Challenge W 39",
+    "challengeName": "Extra Challenge Z39",
     "areaId": "South Province (Area Five) - Grass (High Level)",
-    "unlocks": [],
+    "unlocks": [
+      "South Province (Area Five) - Lake (High Level)"
+    ],
     "requirements": {
       "defeatCountRoute": {
         "route": "South Province (Area Five) - Grass (High Level)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge Z40",
+    "areaId": "South Province (Area Five) - Lake (High Level)",
+    "unlocks": [
+      "South Province (Area Five) - Mountain (High Level)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "South Province (Area Five) - Lake (High Level)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge Z41",
+    "areaId": "South Province (Area Five) - Mountain (High Level)",
+    "unlocks": [
+      "South Province (Area Five) - River (High Level)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "South Province (Area Five) - Mountain (High Level)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge Z42",
+    "areaId": "South Province (Area Five) - River (High Level)",
+    "unlocks": [
+      "East Province (Area Two) - Forest (High Level)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "South Province (Area Five) - River (High Level)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge Z43",
+    "areaId": "East Province (Area Two) - Forest (High Level)",
+    "unlocks": [
+      "East Province (Area Two) - Grass (High Level)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "East Province (Area Two) - Forest (High Level)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge Z44",
+    "areaId": "East Province (Area Two) - Grass (High Level)",
+    "unlocks": [
+      "East Province (Area Two) - Near Town (High Level)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "East Province (Area Two) - Grass (High Level)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge Z45",
+    "areaId": "East Province (Area Two) - Near Town (High Level)",
+    "unlocks": [
+      "East Province (Area Two) - River (High Level)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "East Province (Area Two) - Near Town (High Level)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge Z46",
+    "areaId": "East Province (Area Two) - River (High Level)",
+    "unlocks": [
+      "Cascarrafa Gym (High Level)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "East Province (Area Two) - River (High Level)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge Z47",
+    "areaId": "Cascarrafa Gym (High Level)",
+    "unlocks": [
+      "East Province (Area Two) - Rocky (High Level)"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Cascarrafa Gym (High Level)",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge Z48",
+    "areaId": "East Province (Area Two) - Rocky (High Level)",
+    "unlocks": [],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "East Province (Area Two) - Rocky (High Level)",
         "count": 150
       }
     }
