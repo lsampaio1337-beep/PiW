@@ -7813,7 +7813,8 @@
     "kanto_id": 138,
     "johto_id": 138,
     "alola_id": 342,
-    "galar_id": 541
+    "galar_id": 541,
+    "kalos_id": 458
   },
   {
     "id": 139,
@@ -7874,7 +7875,8 @@
     "kanto_id": 139,
     "johto_id": 139,
     "alola_id": 343,
-    "galar_id": 542
+    "galar_id": 542,
+    "kalos_id": 459
   },
   {
     "id": 140,
@@ -7936,7 +7938,8 @@
     "kanto_id": 140,
     "johto_id": 140,
     "alola_id": 344,
-    "galar_id": 543
+    "galar_id": 543,
+    "kalos_id": 460
   },
   {
     "id": 141,
@@ -8005,7 +8008,8 @@
     "kanto_id": 141,
     "johto_id": 141,
     "alola_id": 345,
-    "galar_id": 544
+    "galar_id": 544,
+    "kalos_id": 461
   },
   {
     "id": 142,
@@ -19843,7 +19847,8 @@
     ],
     "hoenn_id": 133,
     "alola_id": 346,
-    "galar_id": 560
+    "galar_id": 560,
+    "kalos_id": 462
   },
   {
     "id": 346,
@@ -19899,7 +19904,8 @@
     ],
     "hoenn_id": 134,
     "alola_id": 347,
-    "galar_id": 561
+    "galar_id": 561,
+    "kalos_id": 463
   },
   {
     "id": 347,
@@ -19968,7 +19974,8 @@
     ],
     "hoenn_id": 135,
     "alola_id": 348,
-    "galar_id": 562
+    "galar_id": 562,
+    "kalos_id": 464
   },
   {
     "id": 348,
@@ -20032,7 +20039,8 @@
     ],
     "hoenn_id": 136,
     "alola_id": 349,
-    "galar_id": 563
+    "galar_id": 563,
+    "kalos_id": 465
   },
   {
     "id": 349,
@@ -23374,7 +23382,8 @@
     "sinnoh_id": 36,
     "alola_id": 188,
     "hisui_id": 208,
-    "paldea_id": 552
+    "paldea_id": 552,
+    "kalos_id": 466
   },
   {
     "id": 409,
@@ -23426,7 +23435,8 @@
     "sinnoh_id": 37,
     "alola_id": 189,
     "hisui_id": 209,
-    "paldea_id": 553
+    "paldea_id": 553,
+    "kalos_id": 467
   },
   {
     "id": 410,
@@ -23476,7 +23486,8 @@
     "sinnoh_id": 38,
     "alola_id": 190,
     "hisui_id": 210,
-    "paldea_id": 554
+    "paldea_id": 554,
+    "kalos_id": 468
   },
   {
     "id": 411,
@@ -23521,7 +23532,8 @@
     "sinnoh_id": 39,
     "alola_id": 191,
     "hisui_id": 211,
-    "paldea_id": 555
+    "paldea_id": 555,
+    "kalos_id": 469
   },
   {
     "id": 412,
@@ -31959,7 +31971,8 @@
     ],
     "unova_id": 71,
     "alola_id": 194,
-    "galar_id": 553
+    "galar_id": 553,
+    "kalos_id": 470
   },
   {
     "id": 565,
@@ -32019,7 +32032,8 @@
     ],
     "unova_id": 72,
     "alola_id": 195,
-    "galar_id": 554
+    "galar_id": 554,
+    "kalos_id": 471
   },
   {
     "id": 566,
@@ -32092,7 +32106,8 @@
     ],
     "unova_id": 73,
     "alola_id": 192,
-    "galar_id": 555
+    "galar_id": 555,
+    "kalos_id": 472
   },
   {
     "id": 567,
@@ -32160,7 +32175,8 @@
     ],
     "unova_id": 74,
     "alola_id": 193,
-    "galar_id": 556
+    "galar_id": 556,
+    "kalos_id": 473
   },
   {
     "id": 568,
