@@ -429,14 +429,14 @@ export const kalosMapCoordinates = {
     "x": 50,
     "y": 100
   },
-  "Keys to Eternal Fight": {
-    "name": "Keys to Eternal Fight",
+  "Keys to Sanctum of Order": {
+    "name": "Keys to Sanctum of Order",
     "x": 48,
     "y": 48,
     "type": "poi"
   },
-  "The Eternal Fight": {
-    "name": "The Eternal Fight",
+  "Sanctum of Order": {
+    "name": "Sanctum of Order",
     "x": 48,
     "y": 48,
     "type": "poi"
