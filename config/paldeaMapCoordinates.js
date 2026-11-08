@@ -427,81 +427,136 @@ export const paldeaMapCoordinates = {
     "x": 80,
     "y": 30
   },
-  "Extra Route Z1": {
+  "Extra Route Z01": {
+    "x": 40,
+    "y": 30
+  },
+  "Extra Route Z02": {
+    "x": 50,
+    "y": 30
+  },
+  "Extra Route Z03": {
+    "x": 60,
+    "y": 30
+  },
+  "Extra Route Z04": {
+    "x": 70,
+    "y": 30
+  },
+  "Extra Route Z05": {
     "x": 80,
-    "y": 40
+    "y": 30
   },
-  "Extra Route Z2": {
+  "Extra Route Z06": {
     "x": 90,
-    "y": 40
+    "y": 30
   },
-  "Extra Route Z3": {
+  "Extra Route Z07": {
     "x": 100,
-    "y": 40
+    "y": 30
   },
-  "Extra Route Z4": {
+  "Extra Route Z08": {
     "x": 110,
-    "y": 40
+    "y": 30
   },
-  "Extra Route Z5": {
+  "Extra Route Z09": {
     "x": 120,
-    "y": 40
+    "y": 30
   },
-  "Extra Route Z6": {
+  "Extra Route Z10": {
     "x": 130,
-    "y": 40
+    "y": 30
   },
-  "Extra Route Z7": {
+  "Extra Route Z11": {
     "x": 140,
-    "y": 40
+    "y": 30
   },
-  "Extra Route Z8": {
+  "Extra Route Z12": {
     "x": 150,
-    "y": 40
+    "y": 30
   },
-  "Extra Route Z9": {
+  "Extra Route Z13": {
     "x": 160,
-    "y": 40
+    "y": 30
   },
-  "Extra Route W01": {
+  "Extra Route Z14": {
     "x": 170,
-    "y": 60
+    "y": 30
   },
-  "Extra Route W02": {
+  "Extra Route Z15": {
     "x": 180,
-    "y": 60
+    "y": 30
   },
-  "Extra Route W03": {
+  "Extra Route Z16": {
     "x": 190,
-    "y": 60
+    "y": 30
   },
-  "Extra Route W04": {
+  "Extra Route Z17": {
     "x": 200,
-    "y": 60
+    "y": 30
   },
-  "Extra Route W05": {
+  "Extra Route Z18": {
     "x": 210,
-    "y": 60
+    "y": 30
   },
-  "Extra Route W06": {
+  "Extra Route Z19": {
     "x": 220,
-    "y": 60
+    "y": 30
   },
-  "Extra Route W07": {
+  "Extra Route Z20": {
     "x": 230,
-    "y": 60
+    "y": 30
   },
-  "Extra Route W08": {
+  "Extra Route Z21": {
     "x": 240,
-    "y": 60
+    "y": 30
   },
-  "Extra Route W09": {
+  "Extra Route Z22": {
     "x": 250,
-    "y": 60
+    "y": 30
   },
-  "Extra Route W10": {
+  "Extra Route Z23": {
     "x": 260,
-    "y": 60
+    "y": 30
+  },
+  "Extra Route Z24": {
+    "x": 270,
+    "y": 30
+  },
+  "Extra Route Z25": {
+    "x": 280,
+    "y": 30
+  },
+  "Extra Route Z26": {
+    "x": 290,
+    "y": 30
+  },
+  "Extra Route Z27": {
+    "x": 300,
+    "y": 30
+  },
+  "Extra Route Z28": {
+    "x": 310,
+    "y": 30
+  },
+  "Extra Route Z29": {
+    "x": 320,
+    "y": 30
+  },
+  "Extra Route Z30": {
+    "x": 330,
+    "y": 30
+  },
+  "Extra Route Z31": {
+    "x": 340,
+    "y": 30
+  },
+  "Extra Route Z32": {
+    "x": 350,
+    "y": 30
+  },
+  "Extra Route Z33": {
+    "x": 360,
+    "y": 30
   }
-
 };

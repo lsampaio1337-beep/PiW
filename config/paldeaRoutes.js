@@ -4678,487 +4678,16 @@ export const paldeaRoutes = [
     ]
   },
   {
-    "name": "Extra Route Z1",
+    "name": "Extra Route Z01",
     "spawns": [
       {
-        "pokemonId": 912,
+        "pokemonId": 6,
         "minLevel": 50,
         "maxLevel": 60,
-        "chance": 0.125
+        "chance": 0.1250
       },
-      {
-        "pokemonId": 913,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 914,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 462,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 336,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 576,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 876,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 357,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      }
-    ]
-  },
-  {
-    "name": "Extra Route Z2",
-    "spawns": [
-      {
-        "pokemonId": 950,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 553,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 373,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 442,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 874,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 149,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 615,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 976,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      }
-    ]
-  },
-  {
-    "name": "Extra Route Z3",
-    "spawns": [
-      {
-        "pokemonId": 984,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 986,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 987,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 988,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 990,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 991,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 993,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 994,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      }
-    ]
-  },
-  {
-    "name": "Extra Route Z4",
-    "spawns": [
-      {
-        "pokemonId": 999,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 1000,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 1002,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 1004,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 1006,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 1007,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 1008,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 313,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      }
-    ]
-  },
-  {
-    "name": "Extra Route Z5",
-    "spawns": [
-      {
-        "pokemonId": 314,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 69,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 70,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 71,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 190,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 424,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 220,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 221,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      }
-    ]
-  },
-  {
-    "name": "Extra Route Z6",
-    "spawns": [
-      {
-        "pokemonId": 473,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 273,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 274,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 275,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 532,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 533,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 534,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 446,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      }
-    ]
-  },
-  {
-    "name": "Extra Route Z7",
-    "spawns": [
-      {
-        "pokemonId": 143,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 299,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 476,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 736,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 737,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 738,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 782,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 783,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.125
-      }
-    ]
-  },
-  {
-    "name": "Extra Route Z8",
-    "spawns": [
-      {
-        "pokemonId": 784,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.16666666666666666
-      },
-      {
-        "pokemonId": 619,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.16666666666666666
-      },
-      {
-        "pokemonId": 620,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.16666666666666666
-      },
-      {
-        "pokemonId": 433,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.16666666666666666
-      },
-      {
-        "pokemonId": 358,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.16666666666666666
-      },
-      {
-        "pokemonId": 349,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.16666666666666666
-      }
-    ]
-  },
-  {
-    "name": "Extra Route Z9",
-    "spawns": [
-      {
-        "pokemonId": 350,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 580,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 581,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 845,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 1014,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.2
-      }
-    ]
-  },
-  {
-    "name": "Extra Route W01",
-    "spawns": [
       {
         "pokemonId": 37,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1250
-      },
-      {
-        "pokemonId": 48,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1250
-      },
-      {
-        "pokemonId": 52,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1250
-      },
-      {
-        "pokemonId": 863,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1250
-      },
-      {
-        "pokemonId": 56,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1250
-      },
-      {
-        "pokemonId": 979,
         "minLevel": 50,
         "maxLevel": 60,
         "chance": 0.1250
@@ -5170,30 +4699,25 @@ export const paldeaRoutes = [
         "chance": 0.1250
       },
       {
-        "pokemonId": 88,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1250
-      }
-    ]
-  },
-  {
-    "name": "Extra Route W02",
-    "spawns": [
-      {
-        "pokemonId": 96,
+        "pokemonId": 741,
         "minLevel": 50,
         "maxLevel": 60,
         "chance": 0.1250
       },
       {
-        "pokemonId": 152,
+        "pokemonId": 994,
         "minLevel": 50,
         "maxLevel": 60,
         "chance": 0.1250
       },
       {
-        "pokemonId": 154,
+        "pokemonId": 1020,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 467,
         "minLevel": 50,
         "maxLevel": 60,
         "chance": 0.1250
@@ -5203,62 +4727,14 @@ export const paldeaRoutes = [
         "minLevel": 50,
         "maxLevel": 60,
         "chance": 0.1250
-      },
-      {
-        "pokemonId": 157,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1250
-      },
-      {
-        "pokemonId": 158,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1250
-      },
-      {
-        "pokemonId": 160,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1250
-      },
-      {
-        "pokemonId": 191,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1250
       }
     ]
   },
   {
-    "name": "Extra Route W03",
+    "name": "Extra Route Z02",
     "spawns": [
       {
-        "pokemonId": 204,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1250
-      },
-      {
-        "pokemonId": 231,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1250
-      },
-      {
-        "pokemonId": 234,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1250
-      },
-      {
-        "pokemonId": 252,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1250
-      },
-      {
-        "pokemonId": 254,
+        "pokemonId": 157,
         "minLevel": 50,
         "maxLevel": 60,
         "chance": 0.1250
@@ -5276,7 +4752,31 @@ export const paldeaRoutes = [
         "chance": 0.1250
       },
       {
-        "pokemonId": 258,
+        "pokemonId": 390,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 391,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 498,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 500,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 663,
         "minLevel": 50,
         "maxLevel": 60,
         "chance": 0.1250
@@ -5284,10 +4784,1028 @@ export const paldeaRoutes = [
     ]
   },
   {
-    "name": "Extra Route W04",
+    "name": "Extra Route Z03",
     "spawns": [
       {
+        "pokemonId": 727,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 813,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 815,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 909,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 911,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 935,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1665
+      }
+    ]
+  },
+  {
+    "name": "Extra Route Z04",
+    "spawns": [
+      {
+        "pokemonId": 36,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 764,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 985,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 1006,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 700,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 868,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 926,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 957,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 959,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1112
+      }
+    ]
+  },
+  {
+    "name": "Extra Route Z05",
+    "spawns": [
+      {
+        "pokemonId": 48,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 988,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 900,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 469,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 204,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 416,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 540,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 542,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      }
+    ]
+  },
+  {
+    "name": "Extra Route Z06",
+    "spawns": [
+      {
+        "pokemonId": 595,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 636,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 666,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 736,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 738,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 742,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 917,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 919,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 953,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1112
+      }
+    ]
+  },
+  {
+    "name": "Extra Route Z07",
+    "spawns": [
+      {
+        "pokemonId": 52,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 85,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 242,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 765,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 775,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 931,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 1024,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 474,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      }
+    ]
+  },
+  {
+    "name": "Extra Route Z08",
+    "spawns": [
+      {
+        "pokemonId": 162,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 424,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 981,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 982,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 216,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 234,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 287,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 289,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      }
+    ]
+  },
+  {
+    "name": "Extra Route Z09",
+    "spawns": [
+      {
+        "pokemonId": 572,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 585,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 627,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 731,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 733,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 734,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 819,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 915,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 924,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1112
+      }
+    ]
+  },
+  {
+    "name": "Extra Route Z10",
+    "spawns": [
+      {
+        "pokemonId": 56,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 979,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 236,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 766,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 870,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 992,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1665
+      }
+    ]
+  },
+  {
+    "name": "Extra Route Z11",
+    "spawns": [
+      {
+        "pokemonId": 1007,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.2000
+      },
+      {
+        "pokemonId": 296,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.2000
+      },
+      {
+        "pokemonId": 448,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.2000
+      },
+      {
+        "pokemonId": 620,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.2000
+      },
+      {
+        "pokemonId": 739,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.2000
+      }
+    ]
+  },
+  {
+    "name": "Extra Route Z12",
+    "spawns": [
+      {
+        "pokemonId": 76,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 774,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 874,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 950,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 995,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 1022,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 476,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 409,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      }
+    ]
+  },
+  {
+    "name": "Extra Route Z13",
+    "spawns": [
+      {
+        "pokemonId": 411,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1429
+      },
+      {
+        "pokemonId": 744,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1429
+      },
+      {
+        "pokemonId": 837,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1429
+      },
+      {
+        "pokemonId": 839,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1429
+      },
+      {
+        "pokemonId": 932,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1429
+      },
+      {
+        "pokemonId": 934,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1429
+      },
+      {
+        "pokemonId": 969,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1426
+      }
+    ]
+  },
+  {
+    "name": "Extra Route Z14",
+    "spawns": [
+      {
+        "pokemonId": 199,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 779,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 976,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 977,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 1009,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 230,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 158,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 160,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      }
+    ]
+  },
+  {
+    "name": "Extra Route Z15",
+    "spawns": [
+      {
+        "pokemonId": 258,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
         "pokemonId": 260,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 272,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 350,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 393,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 394,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 501,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 503,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      }
+    ]
+  },
+  {
+    "name": "Extra Route Z16",
+    "spawns": [
+      {
+        "pokemonId": 902,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 730,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 751,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 816,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 818,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 833,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1665
+      }
+    ]
+  },
+  {
+    "name": "Extra Route Z17",
+    "spawns": [
+      {
+        "pokemonId": 846,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.2000
+      },
+      {
+        "pokemonId": 912,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.2000
+      },
+      {
+        "pokemonId": 914,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.2000
+      },
+      {
+        "pokemonId": 960,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.2000
+      },
+      {
+        "pokemonId": 963,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.2000
+      }
+    ]
+  },
+  {
+    "name": "Extra Route Z18",
+    "spawns": [
+      {
+        "pokemonId": 462,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 100,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 871,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 877,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 989,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 1008,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 1021,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 466,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      }
+    ]
+  },
+  {
+    "name": "Extra Route Z19",
+    "spawns": [
+      {
+        "pokemonId": 181,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1000
+      },
+      {
+        "pokemonId": 405,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1000
+      },
+      {
+        "pokemonId": 522,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1000
+      },
+      {
+        "pokemonId": 602,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1000
+      },
+      {
+        "pokemonId": 604,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1000
+      },
+      {
+        "pokemonId": 848,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1000
+      },
+      {
+        "pokemonId": 921,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1000
+      },
+      {
+        "pokemonId": 923,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1000
+      },
+      {
+        "pokemonId": 938,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1000
+      },
+      {
+        "pokemonId": 940,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1000
+      }
+    ]
+  },
+  {
+    "name": "Extra Route Z20",
+    "spawns": [
+      {
+        "pokemonId": 88,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1000
+      },
+      {
+        "pokemonId": 109,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1000
+      },
+      {
+        "pokemonId": 1014,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1000
+      },
+      {
+        "pokemonId": 1015,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1000
+      },
+      {
+        "pokemonId": 1016,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1000
+      },
+      {
+        "pokemonId": 1025,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1000
+      },
+      {
+        "pokemonId": 980,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1000
+      },
+      {
+        "pokemonId": 747,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1000
+      },
+      {
+        "pokemonId": 757,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1000
+      },
+      {
+        "pokemonId": 944,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1000
+      }
+    ]
+  },
+  {
+    "name": "Extra Route Z21",
+    "spawns": [
+      {
+        "pokemonId": 96,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1429
+      },
+      {
+        "pokemonId": 876,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1429
+      },
+      {
+        "pokemonId": 475,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1429
+      },
+      {
+        "pokemonId": 678,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1429
+      },
+      {
+        "pokemonId": 856,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1429
+      },
+      {
+        "pokemonId": 858,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1429
+      },
+      {
+        "pokemonId": 955,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1426
+      }
+    ]
+  },
+  {
+    "name": "Extra Route Z22",
+    "spawns": [
+      {
+        "pokemonId": 103,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 986,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 1010,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 1017,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 152,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 154,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 191,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      },
+      {
+        "pokemonId": 252,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1250
+      }
+    ]
+  },
+  {
+    "name": "Extra Route Z23",
+    "spawns": [
+      {
+        "pokemonId": 254,
         "minLevel": 50,
         "maxLevel": 60,
         "chance": 0.1250
@@ -5311,34 +5829,17 @@ export const paldeaRoutes = [
         "chance": 0.1250
       },
       {
-        "pokemonId": 287,
+        "pokemonId": 387,
         "minLevel": 50,
         "maxLevel": 60,
         "chance": 0.1250
       },
       {
-        "pokemonId": 289,
+        "pokemonId": 388,
         "minLevel": 50,
         "maxLevel": 60,
         "chance": 0.1250
       },
-      {
-        "pokemonId": 374,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1250
-      },
-      {
-        "pokemonId": 376,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1250
-      }
-    ]
-  },
-  {
-    "name": "Extra Route W05",
-    "spawns": [
       {
         "pokemonId": 495,
         "minLevel": 50,
@@ -5350,60 +5851,12 @@ export const paldeaRoutes = [
         "minLevel": 50,
         "maxLevel": 60,
         "chance": 0.1250
-      },
-      {
-        "pokemonId": 498,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1250
-      },
-      {
-        "pokemonId": 500,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1250
-      },
-      {
-        "pokemonId": 501,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1250
-      },
-      {
-        "pokemonId": 503,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1250
-      },
-      {
-        "pokemonId": 522,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1250
-      },
-      {
-        "pokemonId": 529,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1250
       }
     ]
   },
   {
-    "name": "Extra Route W06",
+    "name": "Extra Route Z24",
     "spawns": [
-      {
-        "pokemonId": 540,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1250
-      },
-      {
-        "pokemonId": 542,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1250
-      },
       {
         "pokemonId": 546,
         "minLevel": 50,
@@ -5417,142 +5870,13 @@ export const paldeaRoutes = [
         "chance": 0.1250
       },
       {
-        "pokemonId": 572,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1250
-      },
-      {
-        "pokemonId": 585,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1250
-      },
-      {
-        "pokemonId": 595,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1250
-      },
-      {
-        "pokemonId": 602,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1250
-      }
-    ]
-  },
-  {
-    "name": "Extra Route W07",
-    "spawns": [
-      {
-        "pokemonId": 604,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1250
-      },
-      {
-        "pokemonId": 627,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1250
-      },
-      {
-        "pokemonId": 629,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1250
-      },
-      {
-        "pokemonId": 636,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1250
-      },
-      {
-        "pokemonId": 731,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1250
-      },
-      {
-        "pokemonId": 733,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1250
-      },
-      {
-        "pokemonId": 734,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1250
-      },
-      {
-        "pokemonId": 736,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1250
-      }
-    ]
-  },
-  {
-    "name": "Extra Route W08",
-    "spawns": [
-      {
-        "pokemonId": 738,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1250
-      },
-      {
-        "pokemonId": 739,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1250
-      },
-      {
-        "pokemonId": 742,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1250
-      },
-      {
-        "pokemonId": 744,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1250
-      },
-      {
-        "pokemonId": 747,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1250
-      },
-      {
-        "pokemonId": 749,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1250
-      },
-      {
-        "pokemonId": 751,
+        "pokemonId": 724,
         "minLevel": 50,
         "maxLevel": 60,
         "chance": 0.1250
       },
       {
         "pokemonId": 753,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1250
-      }
-    ]
-  },
-  {
-    "name": "Extra Route W09",
-    "spawns": [
-      {
-        "pokemonId": 757,
         "minLevel": 50,
         "maxLevel": 60,
         "chance": 0.1250
@@ -5565,24 +5889,6 @@ export const paldeaRoutes = [
       },
       {
         "pokemonId": 763,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1250
-      },
-      {
-        "pokemonId": 769,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1250
-      },
-      {
-        "pokemonId": 782,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "chance": 0.1250
-      },
-      {
-        "pokemonId": 784,
         "minLevel": 50,
         "maxLevel": 60,
         "chance": 0.1250
@@ -5602,41 +5908,452 @@ export const paldeaRoutes = [
     ]
   },
   {
-    "name": "Extra Route W10",
+    "name": "Extra Route Z25",
     "spawns": [
       {
-        "pokemonId": 813,
+        "pokemonId": 840,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 1019,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 906,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 908,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 928,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 930,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 946,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 951,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 1012,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1112
+      }
+    ]
+  },
+  {
+    "name": "Extra Route Z26",
+    "spawns": [
+      {
+        "pokemonId": 778,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 987,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 999,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 429,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 477,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 426,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 769,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 854,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 971,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1112
+      }
+    ]
+  },
+  {
+    "name": "Extra Route Z27",
+    "spawns": [
+      {
+        "pokemonId": 845,
         "minLevel": 50,
         "maxLevel": 60,
         "chance": 0.2000
       },
       {
-        "pokemonId": 815,
+        "pokemonId": 962,
         "minLevel": 50,
         "maxLevel": 60,
         "chance": 0.2000
       },
       {
-        "pokemonId": 816,
+        "pokemonId": 973,
         "minLevel": 50,
         "maxLevel": 60,
         "chance": 0.2000
       },
       {
-        "pokemonId": 818,
+        "pokemonId": 821,
         "minLevel": 50,
         "maxLevel": 60,
         "chance": 0.2000
       },
       {
-        "pokemonId": 819,
+        "pokemonId": 823,
         "minLevel": 50,
         "maxLevel": 60,
         "chance": 0.2000
       }
     ]
+  },
+  {
+    "name": "Extra Route Z28",
+    "spawns": [
+      {
+        "pokemonId": 875,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 991,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 362,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 478,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 872,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 974,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1665
+      }
+    ]
+  },
+  {
+    "name": "Extra Route Z29",
+    "spawns": [
+      {
+        "pokemonId": 967,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1000
+      },
+      {
+        "pokemonId": 978,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1000
+      },
+      {
+        "pokemonId": 1005,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1000
+      },
+      {
+        "pokemonId": 149,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1000
+      },
+      {
+        "pokemonId": 782,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1000
+      },
+      {
+        "pokemonId": 784,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1000
+      },
+      {
+        "pokemonId": 885,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1000
+      },
+      {
+        "pokemonId": 887,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1000
+      },
+      {
+        "pokemonId": 996,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1000
+      },
+      {
+        "pokemonId": 998,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1000
+      }
+    ]
+  },
+  {
+    "name": "Extra Route Z30",
+    "spawns": [
+      {
+        "pokemonId": 968,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1429
+      },
+      {
+        "pokemonId": 1023,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1429
+      },
+      {
+        "pokemonId": 374,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1429
+      },
+      {
+        "pokemonId": 376,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1429
+      },
+      {
+        "pokemonId": 878,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1429
+      },
+      {
+        "pokemonId": 884,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1429
+      },
+      {
+        "pokemonId": 965,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1426
+      }
+    ]
+  },
+  {
+    "name": "Extra Route Z31",
+    "spawns": [
+      {
+        "pokemonId": 984,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 990,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 207,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 901,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 231,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 529,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 749,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 843,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1111
+      },
+      {
+        "pokemonId": 948,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1112
+      }
+    ]
+  },
+  {
+    "name": "Extra Route Z32",
+    "spawns": [
+      {
+        "pokemonId": 993,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 1001,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 1002,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 1003,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 1004,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 904,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1665
+      }
+    ]
+  },
+  {
+    "name": "Extra Route Z33",
+    "spawns": [
+      {
+        "pokemonId": 229,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 983,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 629,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 859,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 861,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1667
+      },
+      {
+        "pokemonId": 942,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "chance": 0.1665
+      }
+    ]
   }
-
 ];
 
 export const paldeaUnlocks = [
@@ -6961,7 +7678,7 @@ export const paldeaUnlocks = [
     "challengeName": "Extra Challenge The Indigo Disk 09",
     "areaId": "Terarium Core",
     "unlocks": [
-      "Extra Route Z1"
+      "Extra Route Z01"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -6972,250 +7689,431 @@ export const paldeaUnlocks = [
   },
   {
     "challengeName": "Extra Challenge Z01",
-    "areaId": "Extra Route Z1",
+    "areaId": "Extra Route Z01",
     "unlocks": [
-      "Extra Route Z2"
+      "Extra Route Z02"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Extra Route Z1",
+        "route": "Extra Route Z01",
         "count": 150
       }
     }
   },
   {
     "challengeName": "Extra Challenge Z02",
-    "areaId": "Extra Route Z2",
+    "areaId": "Extra Route Z02",
     "unlocks": [
-      "Extra Route Z3"
+      "Extra Route Z03"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Extra Route Z2",
+        "route": "Extra Route Z02",
         "count": 150
       }
     }
   },
   {
     "challengeName": "Extra Challenge Z03",
-    "areaId": "Extra Route Z3",
+    "areaId": "Extra Route Z03",
     "unlocks": [
-      "Extra Route Z4"
+      "Extra Route Z04"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Extra Route Z3",
+        "route": "Extra Route Z03",
         "count": 150
       }
     }
   },
   {
     "challengeName": "Extra Challenge Z04",
-    "areaId": "Extra Route Z4",
+    "areaId": "Extra Route Z04",
     "unlocks": [
-      "Extra Route Z5"
+      "Extra Route Z05"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Extra Route Z4",
+        "route": "Extra Route Z04",
         "count": 150
       }
     }
   },
   {
     "challengeName": "Extra Challenge Z05",
-    "areaId": "Extra Route Z5",
+    "areaId": "Extra Route Z05",
     "unlocks": [
-      "Extra Route Z6"
+      "Extra Route Z06"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Extra Route Z5",
+        "route": "Extra Route Z05",
         "count": 150
       }
     }
   },
   {
     "challengeName": "Extra Challenge Z06",
-    "areaId": "Extra Route Z6",
+    "areaId": "Extra Route Z06",
     "unlocks": [
-      "Extra Route Z7"
+      "Extra Route Z07"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Extra Route Z6",
+        "route": "Extra Route Z06",
         "count": 150
       }
     }
   },
   {
     "challengeName": "Extra Challenge Z07",
-    "areaId": "Extra Route Z7",
+    "areaId": "Extra Route Z07",
     "unlocks": [
-      "Extra Route Z8"
+      "Extra Route Z08"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Extra Route Z7",
+        "route": "Extra Route Z07",
         "count": 150
       }
     }
   },
   {
     "challengeName": "Extra Challenge Z08",
-    "areaId": "Extra Route Z8",
+    "areaId": "Extra Route Z08",
     "unlocks": [
-      "Extra Route Z9"
+      "Extra Route Z09"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Extra Route Z8",
+        "route": "Extra Route Z08",
         "count": 150
       }
     }
   },
   {
     "challengeName": "Extra Challenge Z09",
-    "areaId": "Extra Route Z9",
+    "areaId": "Extra Route Z09",
     "unlocks": [
-      "Extra Route W01"
+      "Extra Route Z10"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Extra Route Z9",
+        "route": "Extra Route Z09",
         "count": 150
       }
     }
   },
   {
-    "challengeName": "Extra Challenge W01",
-    "areaId": "Extra Route W01",
+    "challengeName": "Extra Challenge Z10",
+    "areaId": "Extra Route Z10",
     "unlocks": [
-      "Extra Route W02"
+      "Extra Route Z11"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Extra Route W01",
+        "route": "Extra Route Z10",
         "count": 150
       }
     }
   },
   {
-    "challengeName": "Extra Challenge W02",
-    "areaId": "Extra Route W02",
+    "challengeName": "Extra Challenge Z11",
+    "areaId": "Extra Route Z11",
     "unlocks": [
-      "Extra Route W03"
+      "Extra Route Z12"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Extra Route W02",
+        "route": "Extra Route Z11",
         "count": 150
       }
     }
   },
   {
-    "challengeName": "Extra Challenge W03",
-    "areaId": "Extra Route W03",
+    "challengeName": "Extra Challenge Z12",
+    "areaId": "Extra Route Z12",
     "unlocks": [
-      "Extra Route W04"
+      "Extra Route Z13"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Extra Route W03",
+        "route": "Extra Route Z12",
         "count": 150
       }
     }
   },
   {
-    "challengeName": "Extra Challenge W04",
-    "areaId": "Extra Route W04",
+    "challengeName": "Extra Challenge Z13",
+    "areaId": "Extra Route Z13",
     "unlocks": [
-      "Extra Route W05"
+      "Extra Route Z14"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Extra Route W04",
+        "route": "Extra Route Z13",
         "count": 150
       }
     }
   },
   {
-    "challengeName": "Extra Challenge W05",
-    "areaId": "Extra Route W05",
+    "challengeName": "Extra Challenge Z14",
+    "areaId": "Extra Route Z14",
     "unlocks": [
-      "Extra Route W06"
+      "Extra Route Z15"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Extra Route W05",
+        "route": "Extra Route Z14",
         "count": 150
       }
     }
   },
   {
-    "challengeName": "Extra Challenge W06",
-    "areaId": "Extra Route W06",
+    "challengeName": "Extra Challenge Z15",
+    "areaId": "Extra Route Z15",
     "unlocks": [
-      "Extra Route W07"
+      "Extra Route Z16"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Extra Route W06",
+        "route": "Extra Route Z15",
         "count": 150
       }
     }
   },
   {
-    "challengeName": "Extra Challenge W07",
-    "areaId": "Extra Route W07",
+    "challengeName": "Extra Challenge Z16",
+    "areaId": "Extra Route Z16",
     "unlocks": [
-      "Extra Route W08"
+      "Extra Route Z17"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Extra Route W07",
+        "route": "Extra Route Z16",
         "count": 150
       }
     }
   },
   {
-    "challengeName": "Extra Challenge W08",
-    "areaId": "Extra Route W08",
+    "challengeName": "Extra Challenge Z17",
+    "areaId": "Extra Route Z17",
     "unlocks": [
-      "Extra Route W09"
+      "Extra Route Z18"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Extra Route W08",
+        "route": "Extra Route Z17",
         "count": 150
       }
     }
   },
   {
-    "challengeName": "Extra Challenge W09",
-    "areaId": "Extra Route W09",
+    "challengeName": "Extra Challenge Z18",
+    "areaId": "Extra Route Z18",
     "unlocks": [
-      "Extra Route W10"
+      "Extra Route Z19"
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Extra Route W09",
+        "route": "Extra Route Z18",
         "count": 150
       }
     }
   },
   {
-    "challengeName": "Extra Challenge W10",
-    "areaId": "Extra Route W10",
+    "challengeName": "Extra Challenge Z19",
+    "areaId": "Extra Route Z19",
+    "unlocks": [
+      "Extra Route Z20"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route Z19",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge Z20",
+    "areaId": "Extra Route Z20",
+    "unlocks": [
+      "Extra Route Z21"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route Z20",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge Z21",
+    "areaId": "Extra Route Z21",
+    "unlocks": [
+      "Extra Route Z22"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route Z21",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge Z22",
+    "areaId": "Extra Route Z22",
+    "unlocks": [
+      "Extra Route Z23"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route Z22",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge Z23",
+    "areaId": "Extra Route Z23",
+    "unlocks": [
+      "Extra Route Z24"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route Z23",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge Z24",
+    "areaId": "Extra Route Z24",
+    "unlocks": [
+      "Extra Route Z25"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route Z24",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge Z25",
+    "areaId": "Extra Route Z25",
+    "unlocks": [
+      "Extra Route Z26"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route Z25",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge Z26",
+    "areaId": "Extra Route Z26",
+    "unlocks": [
+      "Extra Route Z27"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route Z26",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge Z27",
+    "areaId": "Extra Route Z27",
+    "unlocks": [
+      "Extra Route Z28"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route Z27",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge Z28",
+    "areaId": "Extra Route Z28",
+    "unlocks": [
+      "Extra Route Z29"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route Z28",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge Z29",
+    "areaId": "Extra Route Z29",
+    "unlocks": [
+      "Extra Route Z30"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route Z29",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge Z30",
+    "areaId": "Extra Route Z30",
+    "unlocks": [
+      "Extra Route Z31"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route Z30",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge Z31",
+    "areaId": "Extra Route Z31",
+    "unlocks": [
+      "Extra Route Z32"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route Z31",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge Z32",
+    "areaId": "Extra Route Z32",
+    "unlocks": [
+      "Extra Route Z33"
+    ],
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route Z32",
+        "count": 150
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge Z33",
+    "areaId": "Extra Route Z33",
     "unlocks": [
 
     ],
     "requirements": {
       "defeatCountRoute": {
-        "route": "Extra Route W10",
+        "route": "Extra Route Z33",
         "count": 150
       }
     }
   }
-
 ];
