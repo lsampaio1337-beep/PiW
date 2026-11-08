@@ -618,5 +618,53 @@ export const paldeaMapCoordinates = {
   "East Province (Area Two) - Rocky (High Level)": {
     "x": 30,
     "y": 70
+  },
+  "Major Legendary Pokémon": {
+    "x": 50,
+    "y": 50
+  },
+  "Treasures of Ruin": {
+    "x": 50,
+    "y": 50
+  },
+  "The Loyal Three": {
+    "x": 50,
+    "y": 50
+  },
+  "Mask Weaver": {
+    "x": 50,
+    "y": 50
+  },
+  "Mythical Pokémon": {
+    "x": 50,
+    "y": 50
+  },
+  "Native Paldean Pseudo-Legendary Line": {
+    "x": 50,
+    "y": 50
+  },
+  "Blueberry Academy Special Line": {
+    "x": 50,
+    "y": 50
+  },
+  "Past Pseudo-Legendary Lines Present in Paldea & DLCs": {
+    "x": 50,
+    "y": 50
+  },
+  "Ancient Paradox Pokémon": {
+    "x": 50,
+    "y": 50
+  },
+  "Future Paradox Pokémon": {
+    "x": 50,
+    "y": 50
+  },
+  "Titan Pokémon": {
+    "x": 50,
+    "y": 50
+  },
+  "Special Unique Form": {
+    "x": 50,
+    "y": 50
   }
 };
