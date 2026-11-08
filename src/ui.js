@@ -648,9 +648,6 @@ window.showChallengesModal = function() {
             let rewardsLabel = rewardsStr === "Gift" ? `<b>Rewards:</b> ${rewardsStr}` : `<b>Rewards:</b> Unlocks ${rewardsStr}`;
             html += `</ul>
                      <div style="margin-top: 10px; color: #4CAF50;">${rewardsLabel}</div>`;
-             let pRewardsLabel = pRewards === "Gift" ? `<b>Rewards:</b> ${pRewards}` : `<b>Rewards:</b> Unlocks ${pRewards}`;
-            html += `</ul>
-                      <div style="margin-top: 10px; color: #888;">${pRewardsLabel}</div>`;
 
             let safeAreaId = unlock.areaId.replace(/'/g, "\\'");
 
@@ -730,8 +727,9 @@ window.showChallengesModal = function() {
 
                   html += `<li>${part}</li>`;
              }
+             let pRewardsLabel = pRewards === "Gift" ? `<b>Rewards:</b> ${pRewards}` : `<b>Rewards:</b> Unlocks ${pRewards}`;
              html += `</ul>
-                      <div style="font-size: 14px; color: #4CAF50;"><b>Rewards:</b> Unlocks ${pRewards}</div>
+                      <div style="font-size: 14px; color: #4CAF50;">${pRewardsLabel}</div>
                       </div>`;
         }
         html += `</div></div>`;
