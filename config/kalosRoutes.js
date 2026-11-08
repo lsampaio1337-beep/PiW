@@ -4512,32 +4512,24 @@ export const kalosRoutes = [
     "routeName": "Extra Route W 45",
     "pokes": [
       {
-        "species": "Vaporeon",
-        "chance": 0.148
-      },
-      {
         "species": "Jolteon",
-        "chance": 0.142
-      },
-      {
-        "species": "Flareon",
-        "chance": 0.142
+        "chance": 0.2
       },
       {
         "species": "Snorlax",
-        "chance": 0.142
+        "chance": 0.2
       },
       {
         "species": "Furret",
-        "chance": 0.142
+        "chance": 0.2
       },
       {
         "species": "Noctowl",
-        "chance": 0.142
+        "chance": 0.2
       },
       {
         "species": "Ariados",
-        "chance": 0.142
+        "chance": 0.2
       }
     ]
   },
@@ -4546,31 +4538,27 @@ export const kalosRoutes = [
     "pokes": [
       {
         "species": "Flaaffy",
-        "chance": 0.148
+        "chance": 0.17
       },
       {
         "species": "Bellossom",
-        "chance": 0.142
+        "chance": 0.166
       },
       {
         "species": "Marill",
-        "chance": 0.142
+        "chance": 0.166
       },
       {
         "species": "Sudowoodo",
-        "chance": 0.142
+        "chance": 0.166
       },
       {
         "species": "Skiploom",
-        "chance": 0.142
+        "chance": 0.166
       },
       {
         "species": "Quagsire",
-        "chance": 0.142
-      },
-      {
-        "species": "Espeon",
-        "chance": 0.142
+        "chance": 0.166
       }
     ]
   },
@@ -4942,31 +4930,27 @@ export const kalosRoutes = [
     "pokes": [
       {
         "species": "Barbaracle",
-        "chance": 0.148
+        "chance": 0.17
       },
       {
         "species": "Dragalge",
-        "chance": 0.142
+        "chance": 0.166
       },
       {
         "species": "Clawitzer",
-        "chance": 0.142
+        "chance": 0.166
       },
       {
         "species": "Tyrantrum",
-        "chance": 0.142
-      },
-      {
-        "species": "Sylveon",
-        "chance": 0.142
+        "chance": 0.166
       },
       {
         "species": "Sliggoo",
-        "chance": 0.142
+        "chance": 0.166
       },
       {
         "species": "Gourgeist",
-        "chance": 0.142
+        "chance": 0.166
       }
     ]
   },
@@ -4975,11 +4959,27 @@ export const kalosRoutes = [
     "pokes": [
       {
         "species": "Avalugg",
-        "chance": 0.5
+        "chance": 0.17
       },
       {
         "species": "Noivern",
-        "chance": 0.5
+        "chance": 0.166
+      },
+      {
+        "species": "Vaporeon",
+        "chance": 0.166
+      },
+      {
+        "species": "Flareon",
+        "chance": 0.166
+      },
+      {
+        "species": "Espeon",
+        "chance": 0.166
+      },
+      {
+        "species": "Sylveon",
+        "chance": 0.166
       }
     ]
   },
