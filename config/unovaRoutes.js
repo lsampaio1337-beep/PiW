@@ -2577,7 +2577,7 @@ export const unovaRoutes = [
     ]
   },
   {
-    "name": "Dragonspire Clouds",
+    "name": "Dragonspiral Clouds",
     "spawns": [
       {
         "pokemonId": 646,
@@ -2635,7 +2635,7 @@ export const unovaRoutes = [
     ]
   },
   {
-    "name": "Dragonspire Higher Clouds",
+    "name": "Dragonspiral Higher Clouds",
     "spawns": [
       {
         "pokemonId": 646,
@@ -3527,12 +3527,12 @@ export const unovaUnlocks = [
     "challengeName": "Extra Challenge B 01",
     "areaId": "Route 15",
     "unlocks": [
-      "Route 13"
+      "Striaton City"
     ],
     "requirements": {
-      "catchSpecies": [
+      "defeatMultipleSpecific": [
         {
-          "species": "Tyranitar",
+          "name": "Tyranitar",
           "count": 10
         }
       ]
@@ -3792,7 +3792,7 @@ export const unovaUnlocks = [
     "challengeName": "Extra Challenge C 05",
     "areaId": "Moor of Icirrus Depths",
     "unlocks": [
-      "Key for Dragonspire Clouds Challenge"
+      "Key to Dragonspiral Clouds Challenge"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3825,7 +3825,7 @@ export const unovaUnlocks = [
     "challengeName": "Extra Challenge D 05",
     "areaId": "Liberty Garden",
     "unlocks": [
-      "Key for Dragonspire Clouds Challenge"
+      "Key to Dragonspiral Clouds Challenge"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3854,7 +3854,7 @@ export const unovaUnlocks = [
     "challengeName": "Extra Challenge E 05",
     "areaId": "Abundant Shrine Depths",
     "unlocks": [
-      "Key for Dragonspire Clouds Challenge"
+      "Key to Dragonspiral Clouds Challenge"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3880,30 +3880,24 @@ export const unovaUnlocks = [
     ]
   },
   {
-    "challengeName": "Key for Dragonspire Clouds Challenge",
-    "areaId": "Unova Pokemon League",
+    "challengeName": "Key to Dragonspiral Clouds Challenge",
+    "areaId": "Key to Dragonspiral Clouds Challenge",
     "unlocks": [
-      "Dragonspire Clouds"
+      "Dragonspiral Clouds"
     ],
     "requirements": {
-      "completeChallenges": [
+      "completeAnyOfChallenges": [
         "Extra Challenge C 05",
         "Extra Challenge D 05",
         "Extra Challenge E 05"
       ]
-    },
-    "gifts": [
-      {
-        "item": "Dragonspire Cloud",
-        "count": 1
-      }
-    ]
+    }
   },
   {
-    "challengeName": "Dragonspire Clouds Challenge 01",
-    "areaId": "Dragonspire Clouds",
+    "challengeName": "Dragonspiral Clouds Challenge 1",
+    "areaId": "Dragonspiral Clouds",
     "unlocks": [
-      "Dragonspire Higher Clouds"
+      "Dragonspiral Higher Clouds"
     ],
     "requirements": {
       "catchSpecies": [
@@ -3920,26 +3914,20 @@ export const unovaUnlocks = [
           "count": 1
         }
       ]
-    },
-    "gifts": [
-      {
-        "item": "Dragonspire Cloud Evolved",
-        "count": 1
-      }
-    ]
+    }
   },
   {
-    "challengeName": "Dragonspire Clouds Challenge 02",
-    "areaId": "Dragonspire Higher Clouds",
+    "challengeName": "Dragonspiral Higher Clouds Challenge",
+    "areaId": "Dragonspiral Higher Clouds",
     "unlocks": [],
     "requirements": {
       "catchSpecies": [
         {
-          "species": "Kyurem (Black Kyurem)",
+          "species": "Black Kyurem",
           "count": 1
         },
         {
-          "species": "Kyurem (White Kyurem)",
+          "species": "White Kyurem",
           "count": 1
         }
       ]
