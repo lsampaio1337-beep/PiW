@@ -735,5 +735,10 @@ export const kalosMapCoordinates = {
     "name": "Extra Route W 59",
     "x": 58,
     "y": 50
+  },
+  "Extra Route W 60": {
+    "name": "Extra Route W 60",
+    "x": 59,
+    "y": 50
   }
 };

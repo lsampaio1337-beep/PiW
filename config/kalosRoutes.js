@@ -4959,30 +4959,35 @@ export const kalosRoutes = [
     "pokes": [
       {
         "species": "Avalugg",
-        "chance": 0.17
+        "chance": 0.5
       },
       {
         "species": "Noivern",
-        "chance": 0.166
-      },
-      {
-        "species": "Vaporeon",
-        "chance": 0.166
-      },
-      {
-        "species": "Flareon",
-        "chance": 0.166
-      },
-      {
-        "species": "Espeon",
-        "chance": 0.166
-      },
-      {
-        "species": "Sylveon",
-        "chance": 0.166
+        "chance": 0.5
       }
     ]
   },
+  {
+    "routeName": "Extra Route W 60",
+    "pokes": [
+      {
+        "species": "Vaporeon",
+        "chance": 0.25
+      },
+      {
+        "species": "Flareon",
+        "chance": 0.25
+      },
+      {
+        "species": "Espeon",
+        "chance": 0.25
+      },
+      {
+        "species": "Sylveon",
+        "chance": 0.25
+      }
+    ]
+  }
 ];
 
 export const kalosUnlocks = [
@@ -6858,9 +6863,22 @@ export const kalosUnlocks = [
   {
     "challengeName": "Extra Challenge W 59",
     "areaId": "Extra Route W 59",
+    "unlocks": [
+      "Extra Route W 60"
+    ],
     "requirements": {
       "defeatCountRoute": {
         "route": "Extra Route W 59",
+        "count": 50
+      }
+    }
+  },
+  {
+    "challengeName": "Extra Challenge W 60",
+    "areaId": "Extra Route W 60",
+    "requirements": {
+      "defeatCountRoute": {
+        "route": "Extra Route W 60",
         "count": 50
       }
     }
