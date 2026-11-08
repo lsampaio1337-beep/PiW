@@ -1977,305 +1977,6 @@ export const kalosRoutes = [
     "spawns": []
   },
   {
-    "name": "Route 22",
-    "spawns": [
-      {
-        "pokemonId": 50,
-        "minLevel": 46,
-        "maxLevel": 48,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 165,
-        "minLevel": 46,
-        "maxLevel": 48,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 290,
-        "minLevel": 46,
-        "maxLevel": 48,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 283,
-        "minLevel": 46,
-        "maxLevel": 48,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 276,
-        "minLevel": 46,
-        "maxLevel": 48,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 278,
-        "minLevel": 46,
-        "maxLevel": 48,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 400,
-        "minLevel": 46,
-        "maxLevel": 48,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 660,
-        "minLevel": 46,
-        "maxLevel": 48,
-        "chance": 0.125
-      }
-    ]
-  },
-  {
-    "name": "Parfum Palace Gardens",
-    "spawns": [
-      {
-        "pokemonId": 443,
-        "minLevel": 47,
-        "maxLevel": 49,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 122,
-        "minLevel": 47,
-        "maxLevel": 49,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 209,
-        "minLevel": 47,
-        "maxLevel": 49,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 27,
-        "minLevel": 47,
-        "maxLevel": 49,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 29,
-        "minLevel": 47,
-        "maxLevel": 49,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 246,
-        "minLevel": 47,
-        "maxLevel": 49,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 119,
-        "minLevel": 47,
-        "maxLevel": 49,
-        "chance": 0.125
-      },
-      {
-        "pokemonId": 130,
-        "minLevel": 47,
-        "maxLevel": 49,
-        "chance": 0.125
-      }
-    ]
-  },
-  {
-    "name": "Ambrette Reef",
-    "spawns": [
-      {
-        "pokemonId": 90,
-        "minLevel": 48,
-        "maxLevel": 50,
-        "chance": 0.1667
-      },
-      {
-        "pokemonId": 318,
-        "minLevel": 48,
-        "maxLevel": 50,
-        "chance": 0.1667
-      },
-      {
-        "pokemonId": 688,
-        "minLevel": 48,
-        "maxLevel": 50,
-        "chance": 0.1667
-      },
-      {
-        "pokemonId": 341,
-        "minLevel": 48,
-        "maxLevel": 50,
-        "chance": 0.1667
-      },
-      {
-        "pokemonId": 708,
-        "minLevel": 48,
-        "maxLevel": 50,
-        "chance": 0.1667
-      },
-      {
-        "pokemonId": 63,
-        "minLevel": 48,
-        "maxLevel": 50,
-        "chance": 0.1665000000000001
-      }
-    ]
-  },
-  {
-    "name": "Cyllage Tidepools",
-    "spawns": [
-      {
-        "pokemonId": 692,
-        "minLevel": 49,
-        "maxLevel": 51,
-        "chance": 0.1667
-      },
-      {
-        "pokemonId": 418,
-        "minLevel": 49,
-        "maxLevel": 51,
-        "chance": 0.1667
-      },
-      {
-        "pokemonId": 304,
-        "minLevel": 49,
-        "maxLevel": 51,
-        "chance": 0.1667
-      },
-      {
-        "pokemonId": 370,
-        "minLevel": 49,
-        "maxLevel": 51,
-        "chance": 0.1667
-      },
-      {
-        "pokemonId": 570,
-        "minLevel": 49,
-        "maxLevel": 51,
-        "chance": 0.1667
-      },
-      {
-        "pokemonId": 459,
-        "minLevel": 49,
-        "maxLevel": 51,
-        "chance": 0.1665000000000001
-      }
-    ]
-  },
-  {
-    "name": "Tower of Mastery",
-    "spawns": [
-      {
-        "pokemonId": 662,
-        "minLevel": 50,
-        "maxLevel": 52,
-        "chance": 0.1667
-      },
-      {
-        "pokemonId": 61,
-        "minLevel": 50,
-        "maxLevel": 52,
-        "chance": 0.1667
-      },
-      {
-        "pokemonId": 95,
-        "minLevel": 50,
-        "maxLevel": 52,
-        "chance": 0.1667
-      },
-      {
-        "pokemonId": 108,
-        "minLevel": 50,
-        "maxLevel": 52,
-        "chance": 0.1667
-      },
-      {
-        "pokemonId": 525,
-        "minLevel": 50,
-        "maxLevel": 52,
-        "chance": 0.1667
-      },
-      {
-        "pokemonId": 193,
-        "minLevel": 50,
-        "maxLevel": 52,
-        "chance": 0.1665000000000001
-      }
-    ]
-  },
-  {
-    "name": "Lost Hotel",
-    "spawns": [
-      {
-        "pokemonId": 335,
-        "minLevel": 51,
-        "maxLevel": 53,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 336,
-        "minLevel": 51,
-        "maxLevel": 53,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 319,
-        "minLevel": 51,
-        "maxLevel": 53,
-        "chance": 0.25
-      },
-      {
-        "pokemonId": 550,
-        "minLevel": 51,
-        "maxLevel": 53,
-        "chance": 0.25
-      }
-    ]
-  },
-  {
-    "name": "Route 16",
-    "spawns": [
-      {
-        "pokemonId": 538,
-        "minLevel": 52,
-        "maxLevel": 54,
-        "chance": 0.1667
-      },
-      {
-        "pokemonId": 82,
-        "minLevel": 52,
-        "maxLevel": 54,
-        "chance": 0.1667
-      },
-      {
-        "pokemonId": 227,
-        "minLevel": 52,
-        "maxLevel": 54,
-        "chance": 0.1667
-      },
-      {
-        "pokemonId": 539,
-        "minLevel": 52,
-        "maxLevel": 54,
-        "chance": 0.1667
-      },
-      {
-        "pokemonId": 359,
-        "minLevel": 52,
-        "maxLevel": 54,
-        "chance": 0.1667
-      },
-      {
-        "pokemonId": 70,
-        "minLevel": 52,
-        "maxLevel": 54,
-        "chance": 0.1665000000000001
-      }
-    ]
-  },
-  {
     "name": "Path to Team Flare Secret HQ",
     "spawns": [
       {
@@ -2422,88 +2123,6 @@ export const kalosRoutes = [
     ]
   },
   {
-    "name": "Terminus Cave",
-    "spawns": [
-      {
-        "pokemonId": 621,
-        "minLevel": 57,
-        "maxLevel": 59,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 560,
-        "minLevel": 57,
-        "maxLevel": 59,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 598,
-        "minLevel": 57,
-        "maxLevel": 59,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 241,
-        "minLevel": 57,
-        "maxLevel": 59,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 182,
-        "minLevel": 57,
-        "maxLevel": 59,
-        "chance": 0.19999999999999996
-      }
-    ]
-  },
-  {
-    "name": "Pokémon Village",
-    "spawns": [
-      {
-        "pokemonId": 212,
-        "minLevel": 58,
-        "maxLevel": 60,
-        "chance": 0.1429
-      },
-      {
-        "pokemonId": 94,
-        "minLevel": 58,
-        "maxLevel": 60,
-        "chance": 0.1429
-      },
-      {
-        "pokemonId": 65,
-        "minLevel": 58,
-        "maxLevel": 60,
-        "chance": 0.1429
-      },
-      {
-        "pokemonId": 321,
-        "minLevel": 58,
-        "maxLevel": 60,
-        "chance": 0.1429
-      },
-      {
-        "pokemonId": 217,
-        "minLevel": 58,
-        "maxLevel": 60,
-        "chance": 0.1429
-      },
-      {
-        "pokemonId": 164,
-        "minLevel": 58,
-        "maxLevel": 60,
-        "chance": 0.1429
-      },
-      {
-        "pokemonId": 569,
-        "minLevel": 58,
-        "maxLevel": 60,
-        "chance": 0.14260000000000006
-      }
-    ]
-  },
-  {
     "name": "Starter Depot",
     "spawns": [
       {
@@ -2600,141 +2219,6 @@ export const kalosRoutes = [
         "minLevel": 60,
         "maxLevel": 62,
         "chance": 0.1665000000000001
-      }
-    ]
-  },
-  {
-    "name": "Kiloude Southern Hills",
-    "spawns": [
-      {
-        "pokemonId": 407,
-        "minLevel": 61,
-        "maxLevel": 63,
-        "chance": 0.1667
-      },
-      {
-        "pokemonId": 526,
-        "minLevel": 61,
-        "maxLevel": 63,
-        "chance": 0.1667
-      },
-      {
-        "pokemonId": 463,
-        "minLevel": 61,
-        "maxLevel": 63,
-        "chance": 0.1667
-      },
-      {
-        "pokemonId": 615,
-        "minLevel": 61,
-        "maxLevel": 63,
-        "chance": 0.1667
-      },
-      {
-        "pokemonId": 282,
-        "minLevel": 61,
-        "maxLevel": 63,
-        "chance": 0.1667
-      },
-      {
-        "pokemonId": 671,
-        "minLevel": 61,
-        "maxLevel": 63,
-        "chance": 0.1665000000000001
-      }
-    ]
-  },
-  {
-    "name": "Friend Safari",
-    "spawns": [
-      {
-        "pokemonId": 702,
-        "minLevel": 62,
-        "maxLevel": 64,
-        "chance": 0.1111
-      },
-      {
-        "pokemonId": 553,
-        "minLevel": 62,
-        "maxLevel": 64,
-        "chance": 0.1111
-      },
-      {
-        "pokemonId": 609,
-        "minLevel": 62,
-        "maxLevel": 64,
-        "chance": 0.1111
-      },
-      {
-        "pokemonId": 330,
-        "minLevel": 62,
-        "maxLevel": 64,
-        "chance": 0.1111
-      },
-      {
-        "pokemonId": 697,
-        "minLevel": 62,
-        "maxLevel": 64,
-        "chance": 0.1111
-      },
-      {
-        "pokemonId": 699,
-        "minLevel": 62,
-        "maxLevel": 64,
-        "chance": 0.1111
-      },
-      {
-        "pokemonId": 657,
-        "minLevel": 62,
-        "maxLevel": 64,
-        "chance": 0.1111
-      },
-      {
-        "pokemonId": 654,
-        "minLevel": 62,
-        "maxLevel": 64,
-        "chance": 0.1111
-      },
-      {
-        "pokemonId": 651,
-        "minLevel": 62,
-        "maxLevel": 64,
-        "chance": 0.11119999999999997
-      }
-    ]
-  },
-  {
-    "name": "Secret Forest",
-    "spawns": [
-      {
-        "pokemonId": 704,
-        "minLevel": 63,
-        "maxLevel": 65,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 455,
-        "minLevel": 63,
-        "maxLevel": 65,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 277,
-        "minLevel": 63,
-        "maxLevel": 65,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 81,
-        "minLevel": 63,
-        "maxLevel": 65,
-        "chance": 0.2
-      },
-      {
-        "pokemonId": 92,
-        "minLevel": 63,
-        "maxLevel": 65,
-        "chance": 0.19999999999999996
       }
     ]
   },
@@ -3646,22 +3130,24 @@ export const kalosRoutes = [
     "name": "Sanctum of Order",
     "spawns": [
       {
-        "pokemonId": 721,
-        "minLevel": 73,
-        "maxLevel": 75,
-        "chance": 0.3333
+        "pokemonId": 716,
+        "chance": 0.2
       },
       {
-        "pokemonId": 719,
-        "minLevel": 73,
-        "maxLevel": 75,
-        "chance": 0.3333
+        "pokemonId": 717,
+        "chance": 0.2
       },
       {
-        "pokemonId": 720,
-        "minLevel": 73,
-        "maxLevel": 75,
-        "chance": 0.3334
+        "pokemonId": 718.2,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 718.1,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 718.3,
+        "chance": 0.2
       }
     ]
   }
@@ -4372,7 +3858,6 @@ export const kalosUnlocks = [
     "challengeName": "Challenge 54",
     "areaId": "Kalos Pokemon League",
     "unlocks": [
-      "Route 22",
       "Path to Dragon Territory",
       "Path to Team Flare Secret HQ",
       "Path to Sea Spirit Den",
@@ -4761,11 +4246,19 @@ export const kalosUnlocks = [
           "count": 1
         },
         {
-          "species": "Zygarde",
+          "species": "Xerneas",
           "count": 1
         },
         {
-          "species": "Xerneas",
+          "species": "Zygarde (10% Forme)",
+          "count": 1
+        },
+        {
+          "species": "Zygarde (50% Forme)",
+          "count": 1
+        },
+        {
+          "species": "Zygarde (Complete Forme)",
           "count": 1
         }
       ]
