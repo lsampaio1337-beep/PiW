@@ -549,7 +549,7 @@ const routes = [
     ]
   },
   {
-    "name": "Casino - Starter Troupe",
+    "name": "Celadon Casino - Starter Troupe",
     "spawns": [
       {
         "pokemonId": 1,
@@ -572,7 +572,7 @@ const routes = [
     ]
   },
   {
-    "name": "Casino - Mid Troupe",
+    "name": "Celadon Casino - Mid Troupe",
     "spawns": [
       {
         "pokemonId": 2,
@@ -595,7 +595,7 @@ const routes = [
     ]
   },
   {
-    "name": "Casino - Late Troupe",
+    "name": "Celadon Casino - Late Troupe",
     "spawns": [
       {
         "pokemonId": 3,
@@ -618,7 +618,7 @@ const routes = [
     ]
   },
   {
-    "name": "Casino - Eeveelutions",
+    "name": "Celadon Casino - Eeveelutions",
     "spawns": [
       {
         "pokemonId": 133,
@@ -647,7 +647,7 @@ const routes = [
     ]
   },
   {
-    "name": "Casino - Special Spot",
+    "name": "Celadon Casino - Special Spot",
     "spawns": [
       {
         "pokemonId": 131,
@@ -1573,7 +1573,7 @@ export const unlocks = [
   { "challengeName": "Challenge 17", "areaId": "Route 10", "unlocks": ["Rock Tunnel"], "requirements": { "defeatCountRoute": { "route": "Route 10", "count": 100 } } },
   { "challengeName": "Challenge 18", "areaId": "Rock Tunnel", "unlocks": ["Route 8"], "gift": { "item": "Rock Stone", "count": 1 }, "requirements": { "catchSpecies": [{ "species": "Onix", "count": 2 }, { "species": "Machop", "count": 2 }] } },
   { "challengeName": "Challenge 19", "areaId": "Route 8", "unlocks": ["Celadon Gym"], "requirements": { "catchSpecies": [{ "species": "Kadabra", "count": 2 }], "catchByType": { "type": "Fire", "count": 10 } } },
-  { "challengeName": "Challenge 20", "areaId": "Celadon Gym", "unlocks": ["Route 7", "Casino", "Casino - Starter Troupe"], "requirements": { "earnBadge": { "name": "Rainbow Badge", "leader": "Erika", "badgeCount": 4 } } },
+  { "challengeName": "Challenge 20", "areaId": "Celadon Gym", "unlocks": ["Route 7", "Celadon Celadon Casino", "Celadon Casino - Starter Troupe"], "requirements": { "earnBadge": { "name": "Rainbow Badge", "leader": "Erika", "badgeCount": 4 } } },
   { "challengeName": "Challenge 21", "areaId": "Route 7", "unlocks": ["Pokemon Tower"], "requirements": { "defeatCountRoute": { "route": "Route 7", "count": 150 } } },
   { "challengeName": "Challenge 22", "areaId": "Pokemon Tower", "unlocks": ["Route 12"], "gift": { "item": "Ghost Stone", "count": 2 }, "requirements": { "catchSpecies": [{ "species": "Haunter", "count": 2 }, { "species": "Cubone", "count": 1 }] } },
   { "challengeName": "Challenge 23", "areaId": "Route 12", "unlocks": ["Route 13"], "requirements": { "catchSpecies": [{ "species": "Farfetch'd", "count": 3 }] } },
@@ -1590,13 +1590,13 @@ export const unlocks = [
   { "challengeName": "Challenge 34", "areaId": "Route 22", "unlocks": ["Route 23"], "gift": { "item": "Big Potion", "count": 10 }, "requirements": { "defeatCountRoute": { "route": "Route 22", "count": 350 } } },
   { "challengeName": "Challenge 35", "areaId": "Route 23", "unlocks": ["Kanto Pokemon League"], "requirements": { "catchSpeciesAnyOfByQuality": [{ "species": ["Nidoking", "Nidoqueen"], "quality": "Rare", "count": 1 }] } },
   { "challengeName": "Challenge 36", "areaId": "Kanto Pokemon League", "unlocks": ["New Region to Travel", "Extra Challenge B"], "requirements": { "defeatEliteFourAndChampion": true } },
-  { "challengeName": "Extra Challenge A 01", "areaId": "Celadon Casino", "unlocks": [
+  { "challengeName": "Extra Challenge A 01", "areaId": "Celadon Celadon Casino", "unlocks": [
       "Small Fishing Spot",
-      "Celadon Casino - Mid Troupe"
+      "Celadon Celadon Casino - Mid Troupe"
     ], "gift": { "item": "Ultraball", "count": 10 }, "requirements": { "catchSpecies": [{ "species": "Bulbasaur", "count": 1 }, { "species": "Charmander", "count": 1 }, { "species": "Squirtle", "count": 1 }] } },
-  { "challengeName": "Extra Challenge A 02", "areaId": "Small Fishing Spot", "unlocks": ["Fighting Dojo", "Casino - Eeveelutions"], "gift": { "item": "Ultraball", "count": 10 }, "requirements": { "catchSpeciesByQuality": [{ "species": "Magikarp", "quality": "Epic", "count": 1 }], "catchEachFromSlotMachine": { "machines": [["Ivysaur", "Charmeleon", "Wartortle"]] } } },
-  { "challengeName": "Extra Challenge A 03", "areaId": "Fighting Dojo", "unlocks": ["Big Fishing Spot", "Casino - Special Spot"], "gift": { "item": "Fighting Stone", "count": 3 }, "requirements": { "catchSpeciesByQuality": [{ "species": "Hitmonchan", "quality": "Rare", "count": 1 }, { "species": "Hitmonlee", "quality": "Rare", "count": 1 }, { "species": "Eevee", "quality": "Rare", "count": 1 }] } },
-  { "challengeName": "Extra Challenge A 04", "areaId": "Big Fishing Spot", "unlocks": ["Fossil Revival Lab", "Casino - Late Troupe"], "gift": { "item": "Dragon Stone", "count": 6 }, "requirements": { "catchByQualityAndType": { "type": "Dragon", "quality": "Rare", "count": 2 }, "catchEachFromSlotMachine": { "machines": [["Lapras", "Porygon", "Lickitung"]] } } },
+  { "challengeName": "Extra Challenge A 02", "areaId": "Small Fishing Spot", "unlocks": ["Fighting Dojo", "Celadon Casino - Eeveelutions"], "gift": { "item": "Ultraball", "count": 10 }, "requirements": { "catchSpeciesByQuality": [{ "species": "Magikarp", "quality": "Epic", "count": 1 }], "catchEachFromSlotMachine": { "machines": [["Ivysaur", "Charmeleon", "Wartortle"]] } } },
+  { "challengeName": "Extra Challenge A 03", "areaId": "Fighting Dojo", "unlocks": ["Big Fishing Spot", "Celadon Casino - Special Spot"], "gift": { "item": "Fighting Stone", "count": 3 }, "requirements": { "catchSpeciesByQuality": [{ "species": "Hitmonchan", "quality": "Rare", "count": 1 }, { "species": "Hitmonlee", "quality": "Rare", "count": 1 }, { "species": "Eevee", "quality": "Rare", "count": 1 }] } },
+  { "challengeName": "Extra Challenge A 04", "areaId": "Big Fishing Spot", "unlocks": ["Fossil Revival Lab", "Celadon Casino - Late Troupe"], "gift": { "item": "Dragon Stone", "count": 6 }, "requirements": { "catchByQualityAndType": { "type": "Dragon", "quality": "Rare", "count": 2 }, "catchEachFromSlotMachine": { "machines": [["Lapras", "Porygon", "Lickitung"]] } } },
   { "challengeName": "Extra Challenge A 05", "areaId": "Fossil Revival Lab", "unlocks": ["Trade With Friends Hub", "Battle Stadium"], "gift": { "item": "Ultraball", "count": 20 }, "requirements": { "catchSpeciesByQuality": [{ "species": "Aerodactyl", "quality": "Rare", "count": 1 }], "catchEachFromSlotMachine": { "machines": [["Venusaur", "Charizard", "Blastoise"]] } } },
   { "challengeName": "Extra Challenge A 06", "areaId": "Trade With Friends Hub", "unlocks": ["Power Plant"], "gift": { "item": "Ultraball", "count": 20 }, "requirements": { "catchSpecies": [{ "species": "Gengar", "count": 1 }, { "species": "Golem", "count": 1 }, { "species": "Alakazam", "count": 1 }, { "species": "Machamp", "count": 1 }] } },
   { "challengeName": "Extra Challenge A 07", "areaId": "Power Plant", "unlocks": ["Seafoam Islands"], "gift": { "item": "Masterball", "count": 1 }, "requirements": { "defeatSpecific": { "name": "Zapdos", "count": 5 } } },

@@ -885,36 +885,59 @@ export const johtoRoutes = [
     ]
   },
   {
+    "name": "Goldenrod Baby Corner",
+    "spawns": [
+      {
+        "pokemonId": 440,
+        "minLevel": 18,
+        "maxLevel": 22,
+        "chance": 0.333
+      },
+      {
+        "pokemonId": 173,
+        "minLevel": 18,
+        "maxLevel": 22,
+        "chance": 0.333
+      },
+      {
+        "pokemonId": 174,
+        "minLevel": 18,
+        "maxLevel": 22,
+        "chance": 0.334
+      }
+    ]
+  },
+  {
     "name": "Goldenrod Game Corner",
     "spawns": [
       {
         "pokemonId": 63,
-        "minLevel": 18,
-        "maxLevel": 22,
+        "minLevel": 24,
+        "maxLevel": 28,
         "chance": 0.25
       },
       {
         "pokemonId": 27,
-        "minLevel": 18,
-        "maxLevel": 22,
+        "minLevel": 24,
+        "maxLevel": 28,
         "chance": 0.25
       },
       {
         "pokemonId": 66,
-        "minLevel": 18,
-        "maxLevel": 22,
+        "minLevel": 25,
+        "maxLevel": 29,
         "chance": 0.2
       },
       {
         "pokemonId": 104,
-        "minLevel": 18,
-        "maxLevel": 22,
+        "minLevel": 25,
+        "maxLevel": 29,
         "chance": 0.15
       },
       {
         "pokemonId": 133,
-        "minLevel": 20,
-        "maxLevel": 24,
+        "minLevel": 26,
+        "maxLevel": 30,
         "chance": 0.15
       }
     ]
@@ -1258,7 +1281,7 @@ export const johtoRoutes = [
     ]
   },
   {
-    "name": "Safari Zone",
+    "name": "Johto Safari Zone",
     "spawns": [
       {
         "pokemonId": 203,
@@ -1401,12 +1424,37 @@ export const johtoRoutes = [
   {
     "name": "Fossil Revival Lab",
     "spawns": [
-      { "pokemonId": 138, "minLevel": 78, "maxLevel": 86, "chance": 0.2 },
-      { "pokemonId": 140, "minLevel": 78, "maxLevel": 86, "chance": 0.2 },
-      { "pokemonId": 142, "minLevel": 82, "maxLevel": 90, "chance": 0.2 },
-      { "pokemonId": 139, "minLevel": 80, "maxLevel": 88, "chance": 0.2 },
-      { "pokemonId": 141, "minLevel": 80, "maxLevel": 88, "chance": 0.2 }
-]
+      {
+        "pokemonId": 138,
+        "minLevel": 78,
+        "maxLevel": 86,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 140,
+        "minLevel": 78,
+        "maxLevel": 86,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 142,
+        "minLevel": 82,
+        "maxLevel": 90,
+        "chance": 0.1
+      },
+      {
+        "pokemonId": 139,
+        "minLevel": 80,
+        "maxLevel": 88,
+        "chance": 0.2
+      },
+      {
+        "pokemonId": 141,
+        "minLevel": 80,
+        "maxLevel": 88,
+        "chance": 0.2
+      }
+    ]
   },
   {
     "name": "Pokemon Mansion",
@@ -1990,7 +2038,8 @@ export const johtoUnlocks = [
     "areaId": "Route 34",
     "unlocks": [
       "Goldenrod Gym",
-      "Goldenrod Game Corner"
+      "Goldenrod Game Corner",
+      "Goldenrod Baby Corner"
     ],
     "requirements": {
       "catchSpecies": [
@@ -2200,7 +2249,7 @@ export const johtoUnlocks = [
     "challengeName": "Challenge 23",
     "areaId": "Route 47",
     "unlocks": [
-      "Safari Zone"
+      "Johto Safari Zone"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -2211,7 +2260,7 @@ export const johtoUnlocks = [
   },
   {
     "challengeName": "Challenge 24",
-    "areaId": "Safari Zone",
+    "areaId": "Johto Safari Zone",
     "unlocks": [
       "Mount Mortar"
     ],
@@ -2640,14 +2689,15 @@ export const johtoUnlocks = [
   },
   {
     "challengeName": "Johto Extra Challenge 01",
-    "areaId": "Goldenrod Game Corner",
+    "areaId": "Goldenrod Baby Corner",
     "unlocks": [
-      "Team Rocket HQ"
+      "Goldenrod Lucky Spot Corner"
     ],
     "requirements": {
-      "defeatSpecific": {
-        "name": "Eevee",
-        "count": 8
+      "catchSpeciesOr": {
+        "species": ["Happiny", "Cleffa", "Igglybuff"],
+        "count": 1,
+        "quality": 2
       }
     },
     "gifts": [
@@ -2659,14 +2709,14 @@ export const johtoUnlocks = [
   },
   {
     "challengeName": "Johto Extra Challenge 02",
-    "areaId": "Team Rocket HQ",
+    "areaId": "Goldenrod Lucky Spot Corner",
     "unlocks": [
-      "Lake of Rage"
+      "Team Rocket HQ"
     ],
     "requirements": {
       "defeatSpecific": {
-        "name": "Voltorb",
-        "count": 10
+        "name": "Eevee",
+        "count": 8
       }
     },
     "gifts": [

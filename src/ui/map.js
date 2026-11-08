@@ -605,7 +605,7 @@ export function navigateToLocation(locationName) {
         } else {
             switchView("PROFESSOR_LAB");
         }
-    } else if (["Safari Zone", "Kanto Safari Zone"].includes(locationName)) {
+    } else if (["Safari Zone", "Kanto Safari Zone", "Johto Safari Zone"].includes(locationName)) {
         if (battleSystem) {
             battleSystem.stop();
         }
@@ -613,10 +613,10 @@ export function navigateToLocation(locationName) {
         switchView("SAFARI_HUB");
         const msg = document.getElementById("safari-welcome-msg");
         if (msg) {
-            const safariCost = state.config.balance.safariZonePrice || 500;
-            msg.innerText = `Welcome to Safari Zone! Here we charge a fee per battle you have and you can use our SafariBalls at will. Do you wanna enter Safari Zone?`;
+            const safariCost = locationName === 'Johto Safari Zone' ? 80 : 150;
+            msg.innerText = `Welcome to Safari Zone! Here we charge a fee of ${safariCost} per battle you have and you can use our SafariBalls at will. Do you wanna enter Safari Zone?`;
         }
-    } else if (locationName === "Casino" || locationName === "Goldenrod Game Corner") {
+    } else if (["Casino", "Celadon Casino", "Goldenrod Game Corner", "Goldenrod Baby Corner", "Goldenrod Lucky Spot Corner"].includes(locationName)) {
         window.currentCasinoHub = locationName;
         if (battleSystem) {
              battleSystem.stop();
