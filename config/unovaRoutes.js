@@ -3890,6 +3890,11 @@ export const unovaUnlocks = [
         "Extra Challenge C 05",
         "Extra Challenge D 05",
         "Extra Challenge E 05"
+      ],
+      "activeAnyOfChallenges": [
+        "Extra Challenge C 05",
+        "Extra Challenge D 05",
+        "Extra Challenge E 05"
       ]
     }
   },
