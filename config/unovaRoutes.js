@@ -3886,7 +3886,7 @@ export const unovaUnlocks = [
       "Dragonspiral Clouds"
     ],
     "requirements": {
-      "completeAnyOfChallenges": [
+      "completeChallenges": [
         "Extra Challenge C 05",
         "Extra Challenge D 05",
         "Extra Challenge E 05"
