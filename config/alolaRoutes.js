@@ -1880,835 +1880,770 @@ export const alolaRoutes = [
     }
   },
   {
-    "name": "Alola Forest W01",
+    "name": "Alola Forest W",
     "spawns": [
       {
         "pokemonId": 10,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0349
       },
       {
         "pokemonId": 12,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0358
       },
       {
         "pokemonId": 46,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0358
       },
       {
         "pokemonId": 123,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0358
       },
       {
         "pokemonId": 127,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0358
       },
       {
         "pokemonId": 165,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0358
       },
       {
         "pokemonId": 166,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.142
-      }
-    ]
-  },
-  {
-    "name": "Alola Forest W02",
-    "spawns": [
+        "chance": 0.0355
+      },
       {
         "pokemonId": 167,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0358
       },
       {
         "pokemonId": 168,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0358
       },
       {
         "pokemonId": 204,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0358
       },
       {
         "pokemonId": 205,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0358
       },
       {
         "pokemonId": 212,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0358
       },
       {
         "pokemonId": 214,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0358
       },
       {
         "pokemonId": 283,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.142
-      }
-    ]
-  },
-  {
-    "name": "Alola Forest W03",
-    "spawns": [
+        "chance": 0.0355
+      },
       {
         "pokemonId": 284,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0358
       },
       {
         "pokemonId": 636,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0358
       },
       {
         "pokemonId": 637,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0358
       },
       {
         "pokemonId": 736,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0358
       },
       {
         "pokemonId": 737,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0358
       },
       {
         "pokemonId": 738,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0358
       },
       {
         "pokemonId": 742,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.142
-      }
-    ]
-  },
-  {
-    "name": "Alola Forest W04",
-    "spawns": [
+        "chance": 0.0355
+      },
       {
         "pokemonId": 743,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.2
+        "chance": 0.05
       },
       {
         "pokemonId": 767,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.2
+        "chance": 0.05
       },
       {
         "pokemonId": 768,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.2
+        "chance": 0.05
       },
       {
         "pokemonId": 794,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.2
+        "chance": 0.05
       },
       {
         "pokemonId": 795,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.2
+        "chance": 0.05
       }
     ]
   },
   {
-    "name": "Alola Plain W05",
+    "name": "Alola Plain W",
     "spawns": [
       {
         "pokemonId": 19,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.021
       },
       {
         "pokemonId": 21,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0204
       },
       {
         "pokemonId": 40,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0204
       },
       {
         "pokemonId": 52,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0204
       },
       {
         "pokemonId": 108,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0204
       },
       {
         "pokemonId": 115,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0204
       },
       {
         "pokemonId": 128,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.142
-      }
-    ]
-  },
-  {
-    "name": "Alola Plain W06",
-    "spawns": [
+        "chance": 0.0203
+      },
       {
         "pokemonId": 132,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0204
       },
       {
         "pokemonId": 137,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0204
       },
       {
         "pokemonId": 143,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0204
       },
       {
         "pokemonId": 163,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0204
       },
       {
         "pokemonId": 164,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0204
       },
       {
         "pokemonId": 174,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0204
       },
       {
         "pokemonId": 190,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.142
-      }
-    ]
-  },
-  {
-    "name": "Alola Plain W07",
-    "spawns": [
+        "chance": 0.0203
+      },
       {
         "pokemonId": 206,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0204
       },
       {
         "pokemonId": 233,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0204
       },
       {
         "pokemonId": 235,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0204
       },
       {
         "pokemonId": 241,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0204
       },
       {
         "pokemonId": 242,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0204
       },
       {
         "pokemonId": 327,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0204
       },
       {
         "pokemonId": 351,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.142
-      }
-    ]
-  },
-  {
-    "name": "Alola Plain W08",
-    "spawns": [
+        "chance": 0.0203
+      },
       {
         "pokemonId": 352,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0204
       },
       {
         "pokemonId": 424,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0204
       },
       {
         "pokemonId": 427,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0204
       },
       {
         "pokemonId": 428,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0204
       },
       {
         "pokemonId": 440,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0204
       },
       {
         "pokemonId": 446,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0204
       },
       {
         "pokemonId": 463,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.142
-      }
-    ]
-  },
-  {
-    "name": "Alola Plain W09",
-    "spawns": [
+        "chance": 0.0203
+      },
       {
         "pokemonId": 474,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0204
       },
       {
         "pokemonId": 506,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0204
       },
       {
         "pokemonId": 507,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0204
       },
       {
         "pokemonId": 508,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0204
       },
       {
         "pokemonId": 572,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0204
       },
       {
         "pokemonId": 573,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0204
       },
       {
         "pokemonId": 627,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.142
-      }
-    ]
-  },
-  {
-    "name": "Alola Plain W10",
-    "spawns": [
+        "chance": 0.0203
+      },
       {
         "pokemonId": 628,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0204
       },
       {
         "pokemonId": 661,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0204
       },
       {
         "pokemonId": 676,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0204
       },
       {
         "pokemonId": 731,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0204
       },
       {
         "pokemonId": 732,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0204
       },
       {
         "pokemonId": 733,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0204
       },
       {
         "pokemonId": 734,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.142
-      }
-    ]
-  },
-  {
-    "name": "Alola Plain W11",
-    "spawns": [
+        "chance": 0.0203
+      },
       {
         "pokemonId": 735,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.125
+        "chance": 0.0179
       },
       {
         "pokemonId": 759,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.125
+        "chance": 0.0179
       },
       {
         "pokemonId": 760,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.125
+        "chance": 0.0179
       },
       {
         "pokemonId": 765,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.125
+        "chance": 0.0179
       },
       {
         "pokemonId": 772,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.125
+        "chance": 0.0179
       },
       {
         "pokemonId": 773,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.125
+        "chance": 0.0179
       },
       {
         "pokemonId": 775,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.125
+        "chance": 0.0179
       },
       {
         "pokemonId": 780,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.125
+        "chance": 0.0179
       }
     ]
   },
   {
-    "name": "Alola Swamp W12",
+    "name": "Alola Swamp W",
     "spawns": [
       {
         "pokemonId": 23,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 41,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 88,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 169,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 568,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 569,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 690,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.142
-      }
-    ]
-  },
-  {
-    "name": "Alola Swamp W13",
-    "spawns": [
+        "chance": 0.071
+      },
       {
         "pokemonId": 691,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 747,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 748,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 757,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 758,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 803,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 804,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.142
+        "chance": 0.071
       }
     ]
   },
   {
-    "name": "Alola Power Plant W14",
+    "name": "Alola Power Plant W",
     "spawns": [
       {
         "pokemonId": 26,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0475
       },
       {
         "pokemonId": 81,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0477
       },
       {
         "pokemonId": 135,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0477
       },
       {
         "pokemonId": 172,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0477
       },
       {
         "pokemonId": 179,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0477
       },
       {
         "pokemonId": 180,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0477
       },
       {
         "pokemonId": 181,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.142
-      }
-    ]
-  },
-  {
-    "name": "Alola Power Plant W15",
-    "spawns": [
+        "chance": 0.0473
+      },
       {
         "pokemonId": 239,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0477
       },
       {
         "pokemonId": 309,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0477
       },
       {
         "pokemonId": 310,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0477
       },
       {
         "pokemonId": 462,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0477
       },
       {
         "pokemonId": 466,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0477
       },
       {
         "pokemonId": 587,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0477
       },
       {
         "pokemonId": 702,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.142
-      }
-    ]
-  },
-  {
-    "name": "Alola Power Plant W16",
-    "spawns": [
+        "chance": 0.0473
+      },
       {
         "pokemonId": 777,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.25
+        "chance": 0.0833
       },
       {
         "pokemonId": 785,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.25
+        "chance": 0.0833
       },
       {
         "pokemonId": 796,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.25
+        "chance": 0.0833
       },
       {
         "pokemonId": 807,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.25
+        "chance": 0.0833
       }
     ]
   },
   {
-    "name": "Alola Desert W17",
+    "name": "Alola Desert W",
     "spawns": [
       {
         "pokemonId": 27,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 50,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 104,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 328,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 329,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 330,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 343,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.142
-      }
-    ]
-  },
-  {
-    "name": "Alola Desert W18",
-    "spawns": [
+        "chance": 0.071
+      },
       {
         "pokemonId": 344,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.125
+        "chance": 0.0625
       },
       {
         "pokemonId": 551,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.125
+        "chance": 0.0625
       },
       {
         "pokemonId": 552,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.125
+        "chance": 0.0625
       },
       {
         "pokemonId": 553,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.125
+        "chance": 0.0625
       },
       {
         "pokemonId": 622,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.125
+        "chance": 0.0625
       },
       {
         "pokemonId": 623,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.125
+        "chance": 0.0625
       },
       {
         "pokemonId": 749,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.125
+        "chance": 0.0625
       },
       {
         "pokemonId": 750,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.125
+        "chance": 0.0625
       }
     ]
   },
   {
-    "name": "Alola Meadow W19",
+    "name": "Alola Meadow W",
     "spawns": [
       {
         "pokemonId": 36,
@@ -2767,1423 +2702,1318 @@ export const alolaRoutes = [
     ]
   },
   {
-    "name": "Alola Volcano W20",
+    "name": "Alola Volcano W",
     "spawns": [
       {
         "pokemonId": 37,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 58,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 136,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 240,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 324,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 467,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 662,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.142
-      }
-    ]
-  },
-  {
-    "name": "Alola Volcano W21",
-    "spawns": [
+        "chance": 0.071
+      },
       {
         "pokemonId": 663,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.111
+        "chance": 0.0555
       },
       {
         "pokemonId": 667,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.111
+        "chance": 0.0555
       },
       {
         "pokemonId": 668,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.111
+        "chance": 0.0555
       },
       {
         "pokemonId": 725,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.111
+        "chance": 0.0555
       },
       {
         "pokemonId": 726,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.111
+        "chance": 0.0555
       },
       {
         "pokemonId": 727,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.111
+        "chance": 0.0555
       },
       {
         "pokemonId": 741,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.111
+        "chance": 0.0555
       },
       {
         "pokemonId": 776,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.111
+        "chance": 0.0555
       },
       {
         "pokemonId": 806,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.112
+        "chance": 0.056
       }
     ]
   },
   {
-    "name": "Alola Ocean W22",
+    "name": "Alola Ocean W",
     "spawns": [
       {
         "pokemonId": 54,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0167
       },
       {
         "pokemonId": 72,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0179
       },
       {
         "pokemonId": 79,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0179
       },
       {
         "pokemonId": 86,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0179
       },
       {
         "pokemonId": 90,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0179
       },
       {
         "pokemonId": 118,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0179
       },
       {
         "pokemonId": 120,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.142
-      }
-    ]
-  },
-  {
-    "name": "Alola Ocean W23",
-    "spawns": [
+        "chance": 0.0178
+      },
       {
         "pokemonId": 129,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0179
       },
       {
         "pokemonId": 131,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0179
       },
       {
         "pokemonId": 134,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0179
       },
       {
         "pokemonId": 170,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0179
       },
       {
         "pokemonId": 171,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0179
       },
       {
         "pokemonId": 186,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0179
       },
       {
         "pokemonId": 199,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.142
-      }
-    ]
-  },
-  {
-    "name": "Alola Ocean W24",
-    "spawns": [
+        "chance": 0.0178
+      },
       {
         "pokemonId": 222,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0179
       },
       {
         "pokemonId": 223,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0179
       },
       {
         "pokemonId": 224,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0179
       },
       {
         "pokemonId": 226,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0179
       },
       {
         "pokemonId": 278,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0179
       },
       {
         "pokemonId": 279,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0179
       },
       {
         "pokemonId": 318,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.142
-      }
-    ]
-  },
-  {
-    "name": "Alola Ocean W25",
-    "spawns": [
+        "chance": 0.0178
+      },
       {
         "pokemonId": 319,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0179
       },
       {
         "pokemonId": 320,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0179
       },
       {
         "pokemonId": 321,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0179
       },
       {
         "pokemonId": 339,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0179
       },
       {
         "pokemonId": 340,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0179
       },
       {
         "pokemonId": 341,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0179
       },
       {
         "pokemonId": 342,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.142
-      }
-    ]
-  },
-  {
-    "name": "Alola Ocean W26",
-    "spawns": [
+        "chance": 0.0178
+      },
       {
         "pokemonId": 349,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0179
       },
       {
         "pokemonId": 350,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0179
       },
       {
         "pokemonId": 366,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0179
       },
       {
         "pokemonId": 367,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0179
       },
       {
         "pokemonId": 368,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0179
       },
       {
         "pokemonId": 369,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0179
       },
       {
         "pokemonId": 370,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.142
-      }
-    ]
-  },
-  {
-    "name": "Alola Ocean W27",
-    "spawns": [
+        "chance": 0.0178
+      },
       {
         "pokemonId": 422,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0179
       },
       {
         "pokemonId": 423,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0179
       },
       {
         "pokemonId": 456,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0179
       },
       {
         "pokemonId": 457,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0179
       },
       {
         "pokemonId": 458,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0179
       },
       {
         "pokemonId": 550,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0179
       },
       {
         "pokemonId": 564,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.142
-      }
-    ]
-  },
-  {
-    "name": "Alola Ocean W28",
-    "spawns": [
+        "chance": 0.0178
+      },
       {
         "pokemonId": 565,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0179
       },
       {
         "pokemonId": 592,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0179
       },
       {
         "pokemonId": 593,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0179
       },
       {
         "pokemonId": 594,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0179
       },
       {
         "pokemonId": 692,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0179
       },
       {
         "pokemonId": 693,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0179
       },
       {
         "pokemonId": 728,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.142
-      }
-    ]
-  },
-  {
-    "name": "Alola Ocean W29",
-    "spawns": [
+        "chance": 0.0178
+      },
       {
         "pokemonId": 729,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.125
+        "chance": 0.0156
       },
       {
         "pokemonId": 730,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.125
+        "chance": 0.0156
       },
       {
         "pokemonId": 746,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.125
+        "chance": 0.0156
       },
       {
         "pokemonId": 751,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.125
+        "chance": 0.0156
       },
       {
         "pokemonId": 752,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.125
+        "chance": 0.0156
       },
       {
         "pokemonId": 771,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.125
+        "chance": 0.0156
       },
       {
         "pokemonId": 779,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.125
+        "chance": 0.0156
       },
       {
         "pokemonId": 788,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.125
+        "chance": 0.0156
       }
     ]
   },
   {
-    "name": "Alola Dojo W30",
+    "name": "Alola Dojo W",
     "spawns": [
       {
         "pokemonId": 56,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 66,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 68,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 296,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 297,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 447,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 448,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.142
-      }
-    ]
-  },
-  {
-    "name": "Alola Dojo W31",
-    "spawns": [
+        "chance": 0.071
+      },
       {
         "pokemonId": 619,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.111
+        "chance": 0.0555
       },
       {
         "pokemonId": 620,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.111
+        "chance": 0.0555
       },
       {
         "pokemonId": 674,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.111
+        "chance": 0.0555
       },
       {
         "pokemonId": 675,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.111
+        "chance": 0.0555
       },
       {
         "pokemonId": 701,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.111
+        "chance": 0.0555
       },
       {
         "pokemonId": 739,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.111
+        "chance": 0.0555
       },
       {
         "pokemonId": 740,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.111
+        "chance": 0.0555
       },
       {
         "pokemonId": 766,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.111
+        "chance": 0.0555
       },
       {
         "pokemonId": 802,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.112
+        "chance": 0.056
       }
     ]
   },
   {
-    "name": "Alola Mind W32",
+    "name": "Alola Mind W",
     "spawns": [
       {
         "pokemonId": 63,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 65,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 96,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 177,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 178,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 196,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 439,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.142
-      }
-    ]
-  },
-  {
-    "name": "Alola Mind W33",
-    "spawns": [
+        "chance": 0.071
+      },
       {
         "pokemonId": 605,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.125
+        "chance": 0.0625
       },
       {
         "pokemonId": 606,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.125
+        "chance": 0.0625
       },
       {
         "pokemonId": 786,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.125
+        "chance": 0.0625
       },
       {
         "pokemonId": 789,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.125
+        "chance": 0.0625
       },
       {
         "pokemonId": 790,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.125
+        "chance": 0.0625
       },
       {
         "pokemonId": 791,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.125
+        "chance": 0.0625
       },
       {
         "pokemonId": 792,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.125
+        "chance": 0.0625
       },
       {
         "pokemonId": 800,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.125
+        "chance": 0.0625
       }
     ]
   },
   {
-    "name": "Alola Crag W34",
+    "name": "Alola Crag W",
     "spawns": [
       {
         "pokemonId": 74,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0286
       },
       {
         "pokemonId": 76,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0286
       },
       {
         "pokemonId": 138,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0286
       },
       {
         "pokemonId": 139,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0286
       },
       {
         "pokemonId": 140,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0286
       },
       {
         "pokemonId": 141,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0286
       },
       {
         "pokemonId": 142,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.142
-      }
-    ]
-  },
-  {
-    "name": "Alola Crag W35",
-    "spawns": [
+        "chance": 0.0284
+      },
       {
         "pokemonId": 185,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0286
       },
       {
         "pokemonId": 246,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0286
       },
       {
         "pokemonId": 247,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0286
       },
       {
         "pokemonId": 248,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0286
       },
       {
         "pokemonId": 299,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0286
       },
       {
         "pokemonId": 345,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0286
       },
       {
         "pokemonId": 346,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.142
-      }
-    ]
-  },
-  {
-    "name": "Alola Crag W36",
-    "spawns": [
+        "chance": 0.0284
+      },
       {
         "pokemonId": 347,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0286
       },
       {
         "pokemonId": 348,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0286
       },
       {
         "pokemonId": 408,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0286
       },
       {
         "pokemonId": 409,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0286
       },
       {
         "pokemonId": 410,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0286
       },
       {
         "pokemonId": 411,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0286
       },
       {
         "pokemonId": 438,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.142
-      }
-    ]
-  },
-  {
-    "name": "Alola Crag W37",
-    "spawns": [
+        "chance": 0.0284
+      },
       {
         "pokemonId": 476,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0286
       },
       {
         "pokemonId": 524,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0286
       },
       {
         "pokemonId": 525,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0286
       },
       {
         "pokemonId": 526,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0286
       },
       {
         "pokemonId": 566,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0286
       },
       {
         "pokemonId": 567,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0286
       },
       {
         "pokemonId": 696,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.142
-      }
-    ]
-  },
-  {
-    "name": "Alola Crag W38",
-    "spawns": [
+        "chance": 0.0284
+      },
       {
         "pokemonId": 697,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.111
+        "chance": 0.0222
       },
       {
         "pokemonId": 698,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.111
+        "chance": 0.0222
       },
       {
         "pokemonId": 699,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.111
+        "chance": 0.0222
       },
       {
         "pokemonId": 703,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.111
+        "chance": 0.0222
       },
       {
         "pokemonId": 744,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.111
+        "chance": 0.0222
       },
       {
         "pokemonId": 745,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.111
+        "chance": 0.0222
       },
       {
         "pokemonId": 774,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.111
+        "chance": 0.0222
       },
       {
         "pokemonId": 793,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.111
+        "chance": 0.0222
       },
       {
         "pokemonId": 805,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.112
+        "chance": 0.0224
       }
     ]
   },
   {
-    "name": "Alola Graveyard W39",
+    "name": "Alola Graveyard W",
     "spawns": [
       {
         "pokemonId": 92,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 94,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 200,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 353,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 354,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 425,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 426,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.142
-      }
-    ]
-  },
-  {
-    "name": "Alola Graveyard W40",
-    "spawns": [
+        "chance": 0.071
+      },
       {
         "pokemonId": 429,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 708,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 709,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 769,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 770,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 778,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0715
       },
       {
         "pokemonId": 781,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.142
+        "chance": 0.071
       }
     ]
   },
   {
-    "name": "Alola Jungle W41",
+    "name": "Alola Jungle W",
     "spawns": [
       {
         "pokemonId": 102,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0472
       },
       {
         "pokemonId": 357,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0477
       },
       {
         "pokemonId": 470,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0477
       },
       {
         "pokemonId": 546,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0477
       },
       {
         "pokemonId": 547,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0477
       },
       {
         "pokemonId": 548,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0477
       },
       {
         "pokemonId": 549,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.142
-      }
-    ]
-  },
-  {
-    "name": "Alola Jungle W42",
-    "spawns": [
+        "chance": 0.0473
+      },
       {
         "pokemonId": 722,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0477
       },
       {
         "pokemonId": 723,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0477
       },
       {
         "pokemonId": 724,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0477
       },
       {
         "pokemonId": 753,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0477
       },
       {
         "pokemonId": 754,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0477
       },
       {
         "pokemonId": 755,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0477
       },
       {
         "pokemonId": 756,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.142
-      }
-    ]
-  },
-  {
-    "name": "Alola Jungle W43",
-    "spawns": [
+        "chance": 0.0473
+      },
       {
         "pokemonId": 761,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.2
+        "chance": 0.0667
       },
       {
         "pokemonId": 762,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.2
+        "chance": 0.0667
       },
       {
         "pokemonId": 763,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.2
+        "chance": 0.0667
       },
       {
         "pokemonId": 787,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.2
+        "chance": 0.0667
       },
       {
         "pokemonId": 798,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.2
+        "chance": 0.0667
       }
     ]
   },
   {
-    "name": "Alola Den W44",
+    "name": "Alola Den W",
     "spawns": [
       {
         "pokemonId": 147,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0474
       },
       {
         "pokemonId": 148,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0477
       },
       {
         "pokemonId": 149,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0477
       },
       {
         "pokemonId": 371,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0477
       },
       {
         "pokemonId": 372,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0477
       },
       {
         "pokemonId": 373,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0477
       },
       {
         "pokemonId": 443,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.142
-      }
-    ]
-  },
-  {
-    "name": "Alola Den W45",
-    "spawns": [
+        "chance": 0.0473
+      },
       {
         "pokemonId": 444,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0477
       },
       {
         "pokemonId": 445,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0477
       },
       {
         "pokemonId": 621,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0477
       },
       {
         "pokemonId": 704,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0477
       },
       {
         "pokemonId": 705,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0477
       },
       {
         "pokemonId": 706,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0477
       },
       {
         "pokemonId": 718,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.142
-      }
-    ]
-  },
-  {
-    "name": "Alola Den W46",
-    "spawns": [
+        "chance": 0.0473
+      },
       {
         "pokemonId": 782,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.333
+        "chance": 0.111
       },
       {
         "pokemonId": 783,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.333
+        "chance": 0.111
       },
       {
         "pokemonId": 784,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.334
+        "chance": 0.1113
       }
     ]
   },
   {
-    "name": "Alola Shadow W47",
+    "name": "Alola Shadow W",
     "spawns": [
       {
         "pokemonId": 197,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0472
       },
       {
         "pokemonId": 198,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0477
       },
       {
         "pokemonId": 215,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0477
       },
       {
         "pokemonId": 228,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0477
       },
       {
         "pokemonId": 229,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0477
       },
       {
         "pokemonId": 302,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0477
       },
       {
         "pokemonId": 359,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.142
-      }
-    ]
-  },
-  {
-    "name": "Alola Shadow W48",
-    "spawns": [
+        "chance": 0.0473
+      },
       {
         "pokemonId": 430,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0477
       },
       {
         "pokemonId": 461,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0477
       },
       {
         "pokemonId": 559,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0477
       },
       {
         "pokemonId": 560,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0477
       },
       {
         "pokemonId": 570,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0477
       },
       {
         "pokemonId": 571,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.143
+        "chance": 0.0477
       },
       {
         "pokemonId": 624,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.142
-      }
-    ]
-  },
-  {
-    "name": "Alola Shadow W49",
-    "spawns": [
+        "chance": 0.0473
+      },
       {
         "pokemonId": 625,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.167
+        "chance": 0.0557
       },
       {
         "pokemonId": 629,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.167
+        "chance": 0.0557
       },
       {
         "pokemonId": 630,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.167
+        "chance": 0.0557
       },
       {
         "pokemonId": 686,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.167
+        "chance": 0.0557
       },
       {
         "pokemonId": 687,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.167
+        "chance": 0.0557
       },
       {
         "pokemonId": 799,
         "minLevel": 100,
         "maxLevel": 100,
-        "chance": 0.165
+        "chance": 0.055
       }
     ]
   },
   {
-    "name": "Alola Glacier W50",
+    "name": "Alola Glacier W",
     "spawns": [
       {
         "pokemonId": 225,
@@ -4242,7 +4072,7 @@ export const alolaRoutes = [
     ]
   },
   {
-    "name": "Alola Factory W51",
+    "name": "Alola Factory W",
     "spawns": [
       {
         "pokemonId": 227,
@@ -4295,7 +4125,7 @@ export const alolaRoutes = [
     ]
   },
   {
-    "name": "Alola Sky W52",
+    "name": "Alola Sky W",
     "spawns": [
       {
         "pokemonId": 714,
@@ -5847,9 +5677,7 @@ export const alolaUnlocks = [
     "challengeName": "Extra Challenge Z 05",
     "areaId": "Mystic Grotto",
     "unlocks": [
-      "Alola Forest W01",
-      "Alola Forest W02",
-      "Alola Forest W03"
+      "Alola Forest W"
     ],
     "requirements": {
       "catchByQuality": {
@@ -5860,11 +5688,9 @@ export const alolaUnlocks = [
   },
   {
     "challengeName": "Extra Challenge W 01",
-    "areaId": "Alola Forest W03",
+    "areaId": "Alola Forest W",
     "unlocks": [
-      "Alola Forest W04",
-      "Alola Plain W05",
-      "Alola Plain W06"
+      "Alola Plain W"
     ],
     "requirements": {
       "catchByQuality": {
@@ -5875,11 +5701,9 @@ export const alolaUnlocks = [
   },
   {
     "challengeName": "Extra Challenge W 02",
-    "areaId": "Alola Plain W06",
+    "areaId": "Alola Plain W",
     "unlocks": [
-      "Alola Plain W07",
-      "Alola Plain W08",
-      "Alola Plain W09"
+      "Alola Swamp W"
     ],
     "requirements": {
       "catchByQuality": {
@@ -5890,11 +5714,9 @@ export const alolaUnlocks = [
   },
   {
     "challengeName": "Extra Challenge W 03",
-    "areaId": "Alola Plain W09",
+    "areaId": "Alola Swamp W",
     "unlocks": [
-      "Alola Plain W10",
-      "Alola Plain W11",
-      "Alola Swamp W12"
+      "Alola Power Plant W"
     ],
     "requirements": {
       "catchByQuality": {
@@ -5905,11 +5727,9 @@ export const alolaUnlocks = [
   },
   {
     "challengeName": "Extra Challenge W 04",
-    "areaId": "Alola Swamp W12",
+    "areaId": "Alola Power Plant W",
     "unlocks": [
-      "Alola Swamp W13",
-      "Alola Power Plant W14",
-      "Alola Power Plant W15"
+      "Alola Desert W"
     ],
     "requirements": {
       "catchByQuality": {
@@ -5920,11 +5740,9 @@ export const alolaUnlocks = [
   },
   {
     "challengeName": "Extra Challenge W 05",
-    "areaId": "Alola Power Plant W15",
+    "areaId": "Alola Desert W",
     "unlocks": [
-      "Alola Power Plant W16",
-      "Alola Desert W17",
-      "Alola Desert W18"
+      "Alola Meadow W"
     ],
     "requirements": {
       "catchByQuality": {
@@ -5935,11 +5753,9 @@ export const alolaUnlocks = [
   },
   {
     "challengeName": "Extra Challenge W 06",
-    "areaId": "Alola Desert W18",
+    "areaId": "Alola Meadow W",
     "unlocks": [
-      "Alola Meadow W19",
-      "Alola Volcano W20",
-      "Alola Volcano W21"
+      "Alola Volcano W"
     ],
     "requirements": {
       "catchByQuality": {
@@ -5950,11 +5766,9 @@ export const alolaUnlocks = [
   },
   {
     "challengeName": "Extra Challenge W 07",
-    "areaId": "Alola Volcano W21",
+    "areaId": "Alola Volcano W",
     "unlocks": [
-      "Alola Ocean W22",
-      "Alola Ocean W23",
-      "Alola Ocean W24"
+      "Alola Ocean W"
     ],
     "requirements": {
       "catchByQuality": {
@@ -5965,11 +5779,9 @@ export const alolaUnlocks = [
   },
   {
     "challengeName": "Extra Challenge W 08",
-    "areaId": "Alola Ocean W24",
+    "areaId": "Alola Ocean W",
     "unlocks": [
-      "Alola Ocean W25",
-      "Alola Ocean W26",
-      "Alola Ocean W27"
+      "Alola Dojo W"
     ],
     "requirements": {
       "catchByQuality": {
@@ -5980,11 +5792,9 @@ export const alolaUnlocks = [
   },
   {
     "challengeName": "Extra Challenge W 09",
-    "areaId": "Alola Ocean W27",
+    "areaId": "Alola Dojo W",
     "unlocks": [
-      "Alola Ocean W28",
-      "Alola Ocean W29",
-      "Alola Dojo W30"
+      "Alola Mind W"
     ],
     "requirements": {
       "catchByQuality": {
@@ -5995,11 +5805,9 @@ export const alolaUnlocks = [
   },
   {
     "challengeName": "Extra Challenge W 10",
-    "areaId": "Alola Dojo W30",
+    "areaId": "Alola Mind W",
     "unlocks": [
-      "Alola Dojo W31",
-      "Alola Mind W32",
-      "Alola Mind W33"
+      "Alola Crag W"
     ],
     "requirements": {
       "catchByQuality": {
@@ -6010,11 +5818,9 @@ export const alolaUnlocks = [
   },
   {
     "challengeName": "Extra Challenge W 11",
-    "areaId": "Alola Mind W33",
+    "areaId": "Alola Crag W",
     "unlocks": [
-      "Alola Crag W34",
-      "Alola Crag W35",
-      "Alola Crag W36"
+      "Alola Graveyard W"
     ],
     "requirements": {
       "catchByQuality": {
@@ -6025,11 +5831,9 @@ export const alolaUnlocks = [
   },
   {
     "challengeName": "Extra Challenge W 12",
-    "areaId": "Alola Crag W36",
+    "areaId": "Alola Graveyard W",
     "unlocks": [
-      "Alola Crag W37",
-      "Alola Crag W38",
-      "Alola Graveyard W39"
+      "Alola Jungle W"
     ],
     "requirements": {
       "catchByQuality": {
@@ -6040,11 +5844,9 @@ export const alolaUnlocks = [
   },
   {
     "challengeName": "Extra Challenge W 13",
-    "areaId": "Alola Graveyard W39",
+    "areaId": "Alola Jungle W",
     "unlocks": [
-      "Alola Graveyard W40",
-      "Alola Jungle W41",
-      "Alola Jungle W42"
+      "Alola Den W"
     ],
     "requirements": {
       "catchByQuality": {
@@ -6055,11 +5857,9 @@ export const alolaUnlocks = [
   },
   {
     "challengeName": "Extra Challenge W 14",
-    "areaId": "Alola Jungle W42",
+    "areaId": "Alola Den W",
     "unlocks": [
-      "Alola Jungle W43",
-      "Alola Den W44",
-      "Alola Den W45"
+      "Alola Shadow W"
     ],
     "requirements": {
       "catchByQuality": {
@@ -6070,11 +5870,9 @@ export const alolaUnlocks = [
   },
   {
     "challengeName": "Extra Challenge W 15",
-    "areaId": "Alola Den W45",
+    "areaId": "Alola Shadow W",
     "unlocks": [
-      "Alola Den W46",
-      "Alola Shadow W47",
-      "Alola Shadow W48"
+      "Alola Glacier W"
     ],
     "requirements": {
       "catchByQuality": {
@@ -6085,11 +5883,9 @@ export const alolaUnlocks = [
   },
   {
     "challengeName": "Extra Challenge W 16",
-    "areaId": "Alola Shadow W48",
+    "areaId": "Alola Glacier W",
     "unlocks": [
-      "Alola Shadow W49",
-      "Alola Glacier W50",
-      "Alola Factory W51"
+      "Alola Factory W"
     ],
     "requirements": {
       "catchByQuality": {
@@ -6100,9 +5896,9 @@ export const alolaUnlocks = [
   },
   {
     "challengeName": "Extra Challenge W 17",
-    "areaId": "Alola Factory W51",
+    "areaId": "Alola Factory W",
     "unlocks": [
-      "Alola Sky W52"
+      "Alola Sky W"
     ],
     "requirements": {
       "catchByQuality": {
@@ -6113,7 +5909,7 @@ export const alolaUnlocks = [
   },
   {
     "challengeName": "Extra Challenge W 18",
-    "areaId": "Alola Sky W52",
+    "areaId": "Alola Sky W",
     "unlocks": [],
     "requirements": {
       "catchByQuality": {
