@@ -366,6 +366,14 @@ function generateMarkersForRegion(region, unlockedAreas) {
             if (locationId === 'olivine_gym' && state.trainer.badges >= 6) showCheckmark = true;
             if (locationId === 'mahogany_gym' && state.trainer.badges >= 7) showCheckmark = true;
             if (locationId === 'blackthorn_gym' && state.trainer.badges >= 8) showCheckmark = true;
+            if (locationId === "pewter_gym" && state.trainer.badges >= 9) showCheckmark = true;
+            if (locationId === "cerulean_gym" && state.trainer.badges >= 10) showCheckmark = true;
+            if (locationId === "vermilion_gym" && state.trainer.badges >= 11) showCheckmark = true;
+            if (locationId === "celadon_gym" && state.trainer.badges >= 12) showCheckmark = true;
+            if (locationId === "fuchsia_gym" && state.trainer.badges >= 14) showCheckmark = true;
+            if (locationId === "saffron_gym" && state.trainer.badges >= 13) showCheckmark = true;
+            if (locationId === "cinnabar_gym" && state.trainer.badges >= 15) showCheckmark = true;
+            if (locationId === "viridian_gym" && state.trainer.badges >= 16) showCheckmark = true;
 
             html += generateMarkerHtml(locationId, locationName, coords, true, hasNewNotification, showCheckmark);
         }
