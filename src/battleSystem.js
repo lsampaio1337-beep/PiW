@@ -68,6 +68,12 @@ class BattleSystem {
     }
 
     getRoute(routeName) {
+        if (routeName && (routeName.startsWith("Casino - ") || routeName.startsWith("Goldenrod Baby") || routeName.startsWith("Goldenrod Lucky"))) {
+            let routes = window.getCurrentRoutes();
+            if (routes) {
+                return routes.find(r => r.name === routeName);
+            }
+        }
         const currentRegion = this.state.currentRegionName;
 
         if (this._cachedRouteName === routeName && this._cachedRegionName === currentRegion) {
@@ -1062,7 +1068,7 @@ class BattleSystem {
         } else {
             // Find route spawns based on state.currentRoute
             const route = this.getRoute(this.state.currentRoute);
-            if (!route) return;
+            if (!route && this.state.currentRoute !== "Casino - Eeveelutions" && !this.state.currentRoute.startsWith("Casino") && this.state.currentRoute !== "Goldenrod Baby Corner" && this.state.currentRoute !== "Goldenrod Lucky Spot Corner") return;
 
             let actualPokemonBase;
             let isRoamingEncounter = false;
@@ -2267,7 +2273,7 @@ class BattleSystem {
         const maxTime = Math.min(elapsedMs, 111 * 60 * 60 * 1000);
         const route = this.getRoute(this.state.currentRoute);
 
-        if (!route && this.state.currentRoute !== "Casino - Eeveelutions" && !this.state.currentRoute.startsWith("Casino")) {
+        if (!route && this.state.currentRoute !== "Casino - Eeveelutions" && !this.state.currentRoute.startsWith("Casino") && this.state.currentRoute !== "Goldenrod Baby Corner" && this.state.currentRoute !== "Goldenrod Lucky Spot Corner") {
             return results; // Can't farm without a route
         }
 
