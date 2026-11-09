@@ -520,7 +520,13 @@ export function showMap() {
 
     html += generateMarkersForRegion(window.currentMapRegion, unlockedAreas);
 
+    // Inner modal for gym overlays natively locked to the map
     html += `
+            <div id="map-inner-modal-overlay" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 1000; align-items: center; justify-content: center;">
+                <div id="map-inner-modal-body" style="position: relative; width: 100%; height: 100%;">
+                    <!-- Content injected via JS -->
+                </div>
+            </div>
         </div>
     `;
 
@@ -545,6 +551,15 @@ export function showMap() {
         setupMapWindowDimensions(currentRegionObj, targetWidth);
     }
 }
+
+window.closeMapInnerModal = function() {
+    const overlay = document.getElementById('map-inner-modal-overlay');
+    if (overlay) {
+        overlay.style.display = 'none';
+        const body = document.getElementById('map-inner-modal-body');
+        if (body) body.innerHTML = '';
+    }
+};
 
 export function navigateToLocation(locationName) {
     if (globals.battleSystem && globals.battleSystem.gymState && globals.battleSystem.gymState.isActive) {
@@ -787,7 +802,6 @@ export function navigateToLocation(locationName) {
         const vCenter = document.getElementById("view-center-market");
         setupMarket(vCenter);
     } else if (locationName.includes("Gym") || locationName.includes("Pokemon League")) {
-        switchView("GYM");
         let bgImg = "";
         let lookupName = locationName;
 
@@ -804,7 +818,7 @@ export function navigateToLocation(locationName) {
             lookupName = "Kanto Pokemon League";
         }
 
-        const vGym = document.getElementById("view-gym");
+        const vGym = document.getElementById("map-inner-modal-body");
         const gymConfig = state.config.gyms.find(g => g.name === lookupName);
 
         // Stop current battle system
@@ -883,6 +897,24 @@ export function navigateToLocation(locationName) {
         uiContainer.appendChild(contentArea);
         vGym.appendChild(uiContainer);
 
+        // Add close button
+        const closeBtn = document.createElement('button');
+        closeBtn.textContent = 'X';
+        closeBtn.style.position = 'absolute';
+        closeBtn.style.top = '10px';
+        closeBtn.style.right = '10px';
+        closeBtn.style.background = 'red';
+        closeBtn.style.color = 'white';
+        closeBtn.style.border = 'none';
+        closeBtn.style.borderRadius = '50%';
+        closeBtn.style.width = '30px';
+        closeBtn.style.height = '30px';
+        closeBtn.style.cursor = 'pointer';
+        closeBtn.style.fontWeight = 'bold';
+        closeBtn.style.zIndex = '10';
+        closeBtn.onclick = () => window.closeMapInnerModal();
+        vGym.appendChild(closeBtn);
+
         if (gymConfig && contentArea) {
             let buttonText = lookupName.includes("Pokemon League") ? "Challenge" : "Battle Gym";
             const btn = document.createElement('button');
@@ -901,6 +933,11 @@ export function navigateToLocation(locationName) {
         } else {
             vGym.style.backgroundImage = "none";
         }
+
+        // Show the inner modal overlay instead of closing the map modal
+        const overlay = document.getElementById('map-inner-modal-overlay');
+        if (overlay) overlay.style.display = 'flex';
+
     } else {
         switchView("BATTLE_ARENA");
         if (battleSystem) {
