@@ -7,14 +7,6 @@ export const paldeaMapCoordinates = {
     "x": 20,
     "y": 10
   },
-  "Mesagoza - Main": {
-    "x": 30,
-    "y": 10
-  },
-  "South Province (Area One) - Beach": {
-    "x": 40,
-    "y": 10
-  },
   "South Province (Area One) - Cave": {
     "x": 50,
     "y": 10
@@ -55,10 +47,6 @@ export const paldeaMapCoordinates = {
     "x": 50,
     "y": 20
   },
-  "South Province (Area Two) - Flower Patch": {
-    "x": 60,
-    "y": 20
-  },
   "South Province (Area Two) - Forest": {
     "x": 70,
     "y": 20
@@ -73,10 +61,6 @@ export const paldeaMapCoordinates = {
   },
   "South Province (Area Two) - Near Town": {
     "x": 10,
-    "y": 30
-  },
-  "South Province (Area Two) - Olive Grove": {
-    "x": 20,
     "y": 30
   },
   "South Province (Area Two) - Rocky": {
@@ -125,14 +109,6 @@ export const paldeaMapCoordinates = {
   },
   "East Province (Area One) - Grass": {
     "x": 50,
-    "y": 40
-  },
-  "East Province (Area One) - Mountain": {
-    "x": 60,
-    "y": 40
-  },
-  "East Province (Area One) - Near Town": {
-    "x": 70,
     "y": 40
   },
   "East Province (Area One) - Ocean": {
@@ -203,21 +179,9 @@ export const paldeaMapCoordinates = {
     "x": 60,
     "y": 60
   },
-  "East Province (Area Three) - Rocky": {
-    "x": 70,
-    "y": 60
-  },
-  "West Province (Area One) - Grass": {
-    "x": 80,
-    "y": 60
-  },
   "West Province (Area One) - Mountain": {
     "x": 90,
     "y": 60
-  },
-  "West Province (Area One) - Ocean": {
-    "x": 10,
-    "y": 70
   },
   "Asado Desert - Desert": {
     "x": 20,
@@ -229,18 +193,6 @@ export const paldeaMapCoordinates = {
   },
   "Medali Gym": {
     "x": 40,
-    "y": 70
-  },
-  "Asado Desert - Ruins": {
-    "x": 50,
-    "y": 70
-  },
-  "Asado Desert - Ruins Deep": {
-    "x": 60,
-    "y": 70
-  },
-  "West Province (Area Two) - Beach": {
-    "x": 70,
     "y": 70
   },
   "West Province (Area Two) - Grass": {
@@ -259,28 +211,12 @@ export const paldeaMapCoordinates = {
     "x": 20,
     "y": 80
   },
-  "West Province (Area Three) - Grass": {
-    "x": 30,
-    "y": 80
-  },
-  "West Province (Area Three) - Lake": {
-    "x": 40,
-    "y": 80
-  },
   "West Province (Area Two) - Desert": {
     "x": 50,
     "y": 80
   },
   "Montenevera Gym": {
     "x": 60,
-    "y": 80
-  },
-  "North Province (Area One) - Bamboo Forest": {
-    "x": 70,
-    "y": 80
-  },
-  "North Province (Area One) - Beach": {
-    "x": 80,
     "y": 80
   },
   "North Province (Area One) - Cave": {
@@ -333,10 +269,6 @@ export const paldeaMapCoordinates = {
   },
   "North Province (Area Two) - Bamboo Forest": {
     "x": 30,
-    "y": 10
-  },
-  "North Province (Area Two) - Forest": {
-    "x": 40,
     "y": 10
   },
   "North Province (Area Two) - Lake": {

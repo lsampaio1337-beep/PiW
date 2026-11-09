@@ -29,7 +29,7 @@ function loadDataFile(filename, varNames = null) {
 
 const _pokemonDataArr = require('../data/pokemon.json');
 const pokemonData = {};
-_pokemonDataArr.forEach(p => { pokemonData[p.id] = p; });
+_pokemonDataArr.forEach((p, index) => { pokemonData[index] = p; });
 
 const { pokedexIndexes } = loadDataFile('config/pokedexIndexes.js', ['pokedexIndexes']);
 const { types } = loadDataFile('config/types.js', ['types']);
