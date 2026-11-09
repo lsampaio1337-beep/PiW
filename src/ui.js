@@ -121,6 +121,7 @@ window.updateZzZModeUI = function() {
 };
 
 window.showMap = showMap;
+window.showModal = showModal;
 window.navigateToLocation = navigateToLocation;
 window.showMapTooltip = showMapTooltip;
 window.hideMapTooltip = hideMapTooltip;
