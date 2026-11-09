@@ -885,7 +885,7 @@ export const johtoRoutes = [
     ]
   },
   {
-    "name": "Goldenrod Baby Corner",
+    "name": "Goldenrod Babies Corner",
     "spawns": [
       {
         "pokemonId": 440,
@@ -1316,7 +1316,7 @@ export const johtoRoutes = [
     ]
   },
   {
-    "name": "Safari Zone",
+    "name": "Johto Safari Zone",
     "spawns": [
       {
         "pokemonId": 203,
@@ -1514,7 +1514,7 @@ export const johtoRoutes = [
     ]
   },
   {
-    "name": "Casino Starter Trupe",
+    "name": "Celadon Casino Starter Troupe",
     "spawns": [
       {
         "pokemonId": 1,
@@ -1555,7 +1555,7 @@ export const johtoRoutes = [
     ]
   },
   {
-    "name": "Casino Babies",
+    "name": "Celadon Casino Babies",
     "spawns": [
       {
         "pokemonId": 172,
@@ -1608,7 +1608,7 @@ export const johtoRoutes = [
     ]
   },
   {
-    "name": "Casino Special Spot",
+    "name": "Celadon Casino Special Spot",
     "spawns": [
       {
         "pokemonId": 108,
@@ -1637,7 +1637,7 @@ export const johtoRoutes = [
     ]
   },
   {
-    "name": "Casino Eeveelution",
+    "name": "Celadon Casino Eeveelutions",
     "spawns": [
       {
         "pokemonId": 133,
@@ -1725,7 +1725,7 @@ export const johtoRoutes = [
     ]
   },
   {
-    "name": "Casino Late Trupe",
+    "name": "Celadon Casino Late Troupe",
     "spawns": [
       {
         "pokemonId": 3,
@@ -2258,7 +2258,7 @@ export const johtoUnlocks = [
     "challengeName": "Challenge 23",
     "areaId": "Route 47",
     "unlocks": [
-      "Safari Zone"
+      "Johto Safari Zone"
     ],
     "requirements": {
       "defeatCountRoute": {
@@ -2269,7 +2269,7 @@ export const johtoUnlocks = [
   },
   {
     "challengeName": "Challenge 24",
-    "areaId": "Safari Zone",
+    "areaId": "Johto Safari Zone",
     "unlocks": [
       "Mount Mortar"
     ],
@@ -2553,7 +2553,7 @@ export const johtoUnlocks = [
     "unlocks": [
       "Celadon Gym",
       "Celadon Casino",
-      "Casino Starter Trupe"
+      "Celadon Casino Starter Troupe"
     ],
     "requirements": {
       "defeatSpecific": {
@@ -2832,9 +2832,9 @@ export const johtoUnlocks = [
   },
   {
     "challengeName": "Kanto Extra Challenge 01",
-    "areaId": "Casino Starter Trupe",
+    "areaId": "Celadon Casino Starter Troupe",
     "unlocks": [
-      "Casino Babies"
+      "Celadon Casino Babies"
     ],
     "requirements": {
       "catchSpecies": [
@@ -2881,9 +2881,9 @@ export const johtoUnlocks = [
   },
   {
     "challengeName": "Kanto Extra Challenge 02",
-    "areaId": "Casino Babies",
+    "areaId": "Celadon Casino Babies",
     "unlocks": [
-      "Casino Special Spot"
+      "Celadon Casino Special Spot"
     ],
     "requirements": {
       "catchSpecies": [
@@ -2902,9 +2902,9 @@ export const johtoUnlocks = [
   },
   {
     "challengeName": "Kanto Extra Challenge 03",
-    "areaId": "Casino Special Spot",
+    "areaId": "Celadon Casino Special Spot",
     "unlocks": [
-      "Casino Eeveelution",
+      "Celadon Casino Eeveelutions",
       "Dojo"
     ],
     "requirements": {
@@ -2926,7 +2926,7 @@ export const johtoUnlocks = [
     "challengeName": "Kanto Extra Challenge 04",
     "areaId": "Dojo",
     "unlocks": [
-      "Casino Late Trupe"
+      "Celadon Casino Late Troupe"
     ],
     "requirements": {
       "catchSpecies": [
@@ -2953,7 +2953,7 @@ export const johtoUnlocks = [
   },
   {
     "challengeName": "Kanto Extra Challenge 05",
-    "areaId": "Casino Late Trupe",
+    "areaId": "Celadon Casino Late Troupe",
     "unlocks": [
       "Legendaries Nest"
     ],

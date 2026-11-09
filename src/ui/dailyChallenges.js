@@ -144,7 +144,7 @@ const CHALLENGE_DEFS = {
         { id: 12, text: "Weak: Catch $ Weak Pokémon.", getTarget: () => 2 + state.trainer.badges, type: 'catch_weak' },
         { id: 13, text: "Specific Species: Catch $ {extra}.", getTarget: () => Math.max(5, (state.stats.completedChallengeIds ? state.stats.completedChallengeIds.length : 1)), type: 'catch_species', getExtra: () => {
             let caught = Object.keys(state.stats.caughtSpecies || {});
-            let casinoUnlocked = state.stats.completedChallengeIds && (state.stats.completedChallengeIds.includes('Casino') || state.stats.completedChallengeIds.includes('Casino - Starter Troupe'));
+            let casinoUnlocked = state.stats.completedChallengeIds && (state.stats.completedChallengeIds.includes('Celadon Casino') || state.stats.completedChallengeIds.includes('Celadon Casino Starter Troupe'));
             if (!casinoUnlocked) {
                 caught = caught.filter(species => !['Bulbasaur', 'Charmander', 'Squirtle'].includes(species));
             }
@@ -210,8 +210,8 @@ const CHALLENGE_DEFS = {
         { id: 26, text: "Daycare Manager: Gain $ IV in daycare.", getTarget: () => 10 + (state.stats.highestLevelCaptured || 0), type: 'daycare_iv', condition: () => state.stats.hasSeenDaycare },
         { id: 27, text: "Breeder: Hatch $ Eggs from the Daycare.", getTarget: () => Math.random() < 0.5 ? 1 : 2, type: 'hatch_eggs', condition: () => state.stats.hasSeenDaycare },
         { id: 28, text: "Safari Tourist: Catch $ Pokémon in the Safari Zone.", getTarget: () => 5 + ((state.stats.completedChallenges || 0) * 2), type: 'safari_catch', condition: () => state.stats.completedChallengeIds && state.stats.completedChallengeIds.includes("Fuchsia City") },
-        { id: 29, text: "High Roller: Catch $ Pokémon in the Casino.", getTarget: () => 5 * Math.max(1, state.trainer.badges), type: 'casino_catch', condition: () => state.stats.completedChallengeIds && state.stats.completedChallengeIds.includes('Casino') },
-        { id: 30, text: "Lucky Spinner: See 1 Shiny Pokémon in the Casino.", getTarget: () => 1, type: 'casino_shiny', condition: () => state.stats.completedChallengeIds && state.stats.completedChallengeIds.includes('Casino') }
+        { id: 29, text: "High Roller: Catch $ Pokémon in the Celadon Casino.", getTarget: () => 5 * Math.max(1, state.trainer.badges), type: 'casino_catch', condition: () => state.stats.completedChallengeIds && state.stats.completedChallengeIds.includes('Celadon Casino') },
+        { id: 30, text: "Lucky Spinner: See 1 Shiny Pokémon in the Celadon Casino.", getTarget: () => 1, type: 'casino_shiny', condition: () => state.stats.completedChallengeIds && state.stats.completedChallengeIds.includes('Celadon Casino') }
     ]
 };
 

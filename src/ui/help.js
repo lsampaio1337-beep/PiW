@@ -181,16 +181,16 @@ const helpContent = {
             `
         },
         "Special Hubs": {
-            "Safari Zone": `
+            "Safari Zone (Kanto/Johto)": `
                 <h3>Mechanics</h3>
-                <p>The Safari Zone is a high-risk, high-reward catching hub.</p>
+                <p>The Safari Zone (Kanto/Johto) is a high-risk, high-reward catching hub.</p>
                 <ul>
                     <li><strong>Entry Fee</strong>: $5,000 EVM per entry session.</li>
                     <li><strong>Infinite Balls</strong>: You are granted infinite Safari Balls while inside.</li>
-                    <li><strong>Ejection</strong>: You are forcefully removed from the Safari Zone if your total funds drop below $0.</li>
+                    <li><strong>Ejection</strong>: You are forcefully removed from the Safari Zone (Kanto/Johto) if your total funds drop below $0.</li>
                 </ul>
             `,
-            "Casino": `
+            "Celadon Casino": `
                 <h3>Gambling Hub</h3>
                 <p>The Casino forces you to pay EVM per individual encounter for a chance at extreme quality.</p>
                 <ul>
@@ -216,7 +216,7 @@ const helpContent = {
                 <ul>
                     <li>You run out of Jigglypuff Grains (Maximum time reached).</li>
                     <li>Your entire active party faints due to lack of potions or tough enemies.</li>
-                    <li>You run out of funds while simulating a fee-based zone like the Casino.</li>
+                    <li>You run out of funds while simulating a fee-based zone like the Celadon Casino.</li>
                 </ul>
             `
         }

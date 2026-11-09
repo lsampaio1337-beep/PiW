@@ -150,7 +150,7 @@ const mapCoordinates = {
     "y": 37.15
   },
   "casino": {
-    "name": "Casino",
+    "name": "Celadon Casino",
     "x": 50,
     "y": 35.84
   },
@@ -165,7 +165,7 @@ const mapCoordinates = {
     "y": 31.48
   },
   "safari_zone": {
-    "name": "Safari Zone",
+    "name": "Kanto Safari Zone",
     "x": 50.43,
     "y": 62.51
   },

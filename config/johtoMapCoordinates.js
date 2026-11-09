@@ -145,7 +145,7 @@ const johtoMapCoordinates = {
     "y": 60.63
   },
   "safari_zone": {
-    "name": "Safari Zone",
+    "name": "Johto Safari Zone",
     "x": 5.62,
     "y": 48.25
   },
