@@ -804,7 +804,7 @@ const missingData = [];
     const wsMissing = xlsx.utils.json_to_sheet(missingData);
     xlsx.utils.book_append_sheet(wb, wsMissing, "Missing PK");
 
-const outFile = path.join(__dirname, '..', 'xdata', `${region.num}_${region.name}_Data.xlsx`);
+const outFile = path.join(__dirname, '..', 'xdata', `${region.num}_${region.name}_Data${counter}.xlsx`);
 
     // Formatting cols
     const colsRoutes = ["% Appearance", "% Appearance Ok?"];
@@ -843,15 +843,17 @@ const outFile = path.join(__dirname, '..', 'xdata', `${region.num}_${region.name
             await processRegion(region, counter);
         }
     } else {
-        const regionArg = args[0].toLowerCase();
-        const regionToProcess = REGIONS.find(r => r.num.toString() === regionArg || r.name.toLowerCase() === regionArg);
+        for (const arg of args) {
+            const regionArg = arg.toLowerCase();
+            const regionToProcess = REGIONS.find(r => r.num.toString() === regionArg || r.name.toLowerCase() === regionArg);
 
-        if (!regionToProcess) {
-            console.error(`Error: Region '${args[0]}' not found.`);
-            process.exit(1);
+            if (!regionToProcess) {
+                console.error(`Error: Region '${arg}' not found.`);
+                process.exit(1);
+            }
+
+            await processRegion(regionToProcess, counter);
         }
-
-        await processRegion(regionToProcess, counter);
     }
 
     // Increment counter
