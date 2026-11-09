@@ -641,7 +641,7 @@ export function navigateToLocation(locationName) {
             <div class="floating-window" style="text-align: center; margin-bottom: 20px; background: rgba(0,0,0,0.9); border: 2px solid #555; padding: 20px; border-radius: 10px;">
                 <div class="window-header">
                     <h3 style="color: #ffd700; margin: 0;">${window.currentCasinoHub}</h3>
-                    <button class="action-btn action-btn-danger" style="position: absolute; right: 10px; top: 10px;" onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-casino-modal'); updateUI();">X</button>
+                    <button class="action-btn action-btn-danger" style="position: absolute; right: 10px; top: 10px;" onclick="const popup = document.getElementById('casino-inner-popup'); if (popup) popup.style.display = 'none'; updateUI();">X</button>
                 </div>
                 <p style="color: #ccc; font-size: 14px; margin-top: 5px;">Select a machine to play</p>
                 <div style="display: flex; justify-content: center; gap: 15px; margin-top: 20px; flex-wrap: wrap;">
@@ -651,8 +651,8 @@ export function navigateToLocation(locationName) {
         machinesHtml += `
             <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
                 <img src="./Assets/Extra/Casino/${window.currentMapRegion === 'Johto' ? 'Region2 Kanto Standard Spot.png' : 'Region1 Standard Spot.png'}" alt="Standard Spot" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
-                <div onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-casino-modal'); window.startCasinoEncounter(false, 'Casino - Standard Spot')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter (${state.config.balance.casinoPrices?.standard || 75})"></div>
-                <div onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-casino-modal'); window.startCasinoEncounter(true, 'Casino - Standard Spot')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny (${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
+                <div onclick="const popup = document.getElementById('casino-inner-popup'); if (popup) popup.style.display = 'none'; window.startCasinoEncounter(false, 'Casino - Standard Spot')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter (${state.config.balance.casinoPrices?.standard || 75})"></div>
+                <div onclick="const popup = document.getElementById('casino-inner-popup'); if (popup) popup.style.display = 'none'; window.startCasinoEncounter(true, 'Casino - Standard Spot')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny (${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
             </div>
         `;
 
@@ -661,8 +661,8 @@ export function navigateToLocation(locationName) {
             machinesHtml += `
                 <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
                     <img src="./Assets/Extra/Casino/${window.currentMapRegion === 'Johto' ? 'Region2 Kanto Starter Troupe.png' : 'Region1 Starter Troupe.png'}" alt="Starter Troupe" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
-                    <div onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-casino-modal'); window.startCasinoEncounter(false, 'Casino - Starter Troupe')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter (${state.config.balance.casinoPrices?.standard || 75})"></div>
-                    <div onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-casino-modal'); window.startCasinoEncounter(true, 'Casino - Starter Troupe')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny (${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
+                    <div onclick="const popup = document.getElementById('casino-inner-popup'); if (popup) popup.style.display = 'none'; window.startCasinoEncounter(false, 'Casino - Starter Troupe')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter (${state.config.balance.casinoPrices?.standard || 75})"></div>
+                    <div onclick="const popup = document.getElementById('casino-inner-popup'); if (popup) popup.style.display = 'none'; window.startCasinoEncounter(true, 'Casino - Starter Troupe')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny (${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
                 </div>
             `;
         }
@@ -672,8 +672,8 @@ export function navigateToLocation(locationName) {
             machinesHtml += `
                 <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
                     <img src="./Assets/Extra/Casino/Region2 Johto Babies.png" alt="Baby Corner" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
-                    <div onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-casino-modal'); window.startCasinoEncounter(false, 'Goldenrod Baby Corner')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter (${state.config.balance.casinoPrices?.standard || 75})"></div>
-                    <div onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-casino-modal'); window.startCasinoEncounter(true, 'Goldenrod Baby Corner')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny (${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
+                    <div onclick="const popup = document.getElementById('casino-inner-popup'); if (popup) popup.style.display = 'none'; window.startCasinoEncounter(false, 'Goldenrod Baby Corner')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter (${state.config.balance.casinoPrices?.standard || 75})"></div>
+                    <div onclick="const popup = document.getElementById('casino-inner-popup'); if (popup) popup.style.display = 'none'; window.startCasinoEncounter(true, 'Goldenrod Baby Corner')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny (${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
                 </div>
             `;
         }
@@ -683,8 +683,8 @@ export function navigateToLocation(locationName) {
             machinesHtml += `
                 <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
                     <img src="./Assets/Extra/Casino/Region2 Johto Lucky Spot.png" alt="Lucky Spot" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
-                    <div onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-casino-modal'); window.startCasinoEncounter(false, 'Goldenrod Lucky Spot Corner')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter (${state.config.balance.casinoPrices?.standard || 75})"></div>
-                    <div onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-casino-modal'); window.startCasinoEncounter(true, 'Goldenrod Lucky Spot Corner')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny (${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
+                    <div onclick="const popup = document.getElementById('casino-inner-popup'); if (popup) popup.style.display = 'none'; window.startCasinoEncounter(false, 'Goldenrod Lucky Spot Corner')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter (${state.config.balance.casinoPrices?.standard || 75})"></div>
+                    <div onclick="const popup = document.getElementById('casino-inner-popup'); if (popup) popup.style.display = 'none'; window.startCasinoEncounter(true, 'Goldenrod Lucky Spot Corner')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny (${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
                 </div>
             `;
         }
@@ -694,8 +694,8 @@ export function navigateToLocation(locationName) {
             machinesHtml += `
                 <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
                     <img src="./Assets/Extra/Casino/${window.currentMapRegion === 'Johto' ? 'Region2 Kanto Late Troupe.png' : 'Region1 Late Troupe.png'}" alt="Late Troupe" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
-                    <div onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-casino-modal'); window.startCasinoEncounter(false, 'Casino - Late Troupe')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter (${state.config.balance.casinoPrices?.standard || 75})"></div>
-                    <div onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-casino-modal'); window.startCasinoEncounter(true, 'Casino - Late Troupe')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny (${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
+                    <div onclick="const popup = document.getElementById('casino-inner-popup'); if (popup) popup.style.display = 'none'; window.startCasinoEncounter(false, 'Casino - Late Troupe')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter (${state.config.balance.casinoPrices?.standard || 75})"></div>
+                    <div onclick="const popup = document.getElementById('casino-inner-popup'); if (popup) popup.style.display = 'none'; window.startCasinoEncounter(true, 'Casino - Late Troupe')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny (${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
                 </div>
             `;
         }
@@ -705,8 +705,8 @@ export function navigateToLocation(locationName) {
             machinesHtml += `
                 <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
                     <img src="./Assets/Extra/Casino/${window.currentMapRegion === 'Johto' ? 'Region2 Kanto Eeveelutions.png' : 'Region1 Eeveelutions.png'}" alt="Eeveelutions" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
-                    <div onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-casino-modal'); window.startCasinoEncounter(false, 'Casino - Eeveelutions')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter (${state.config.balance.casinoPrices?.standard || 75})"></div>
-                    <div onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-casino-modal'); window.startCasinoEncounter(true, 'Casino - Eeveelutions')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny (${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
+                    <div onclick="const popup = document.getElementById('casino-inner-popup'); if (popup) popup.style.display = 'none'; window.startCasinoEncounter(false, 'Casino - Eeveelutions')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter (${state.config.balance.casinoPrices?.standard || 75})"></div>
+                    <div onclick="const popup = document.getElementById('casino-inner-popup'); if (popup) popup.style.display = 'none'; window.startCasinoEncounter(true, 'Casino - Eeveelutions')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny (${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
                 </div>
             `;
         }
@@ -716,8 +716,8 @@ export function navigateToLocation(locationName) {
             machinesHtml += `
                 <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
                     <img src="./Assets/Extra/Casino/${window.currentMapRegion === 'Johto' ? 'Region2 Kanto Special Spot.png' : 'Region1 Special Spot.png'}" alt="Special Spot" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
-                    <div onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-casino-modal'); window.startCasinoEncounter(false, 'Casino - Special Spot')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter (${state.config.balance.casinoPrices?.standard || 75})"></div>
-                    <div onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-casino-modal'); window.startCasinoEncounter(true, 'Casino - Special Spot')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny (${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
+                    <div onclick="const popup = document.getElementById('casino-inner-popup'); if (popup) popup.style.display = 'none'; window.startCasinoEncounter(false, 'Casino - Special Spot')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter (${state.config.balance.casinoPrices?.standard || 75})"></div>
+                    <div onclick="const popup = document.getElementById('casino-inner-popup'); if (popup) popup.style.display = 'none'; window.startCasinoEncounter(true, 'Casino - Special Spot')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny (${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
                 </div>
             `;
         }
@@ -726,7 +726,33 @@ export function navigateToLocation(locationName) {
                 </div>
             </div>
         `;
-        window.showModal(locationName, machinesHtml, 'window-casino-modal', '800px');
+                let mapWin = document.getElementById('window-map-content');
+        if (!mapWin) mapWin = document.querySelector('#window-map .content-panel');
+        if (mapWin) {
+            let overlay = document.getElementById('casino-inner-popup');
+            if (!overlay) {
+                overlay = document.createElement('div');
+                overlay.id = 'casino-inner-popup';
+                overlay.style.position = 'absolute';
+                overlay.style.top = '0';
+                overlay.style.left = '0';
+                overlay.style.width = '100%';
+                overlay.style.height = '100%';
+                overlay.style.backgroundColor = 'rgba(0,0,0,0.8)';
+                overlay.style.zIndex = '1000';
+                overlay.style.display = 'flex';
+                overlay.style.justifyContent = 'center';
+                overlay.style.alignItems = 'center';
+                mapWin.parentElement.style.position = 'relative'; // Ensure relative parent
+                mapWin.parentElement.appendChild(overlay);
+            }
+            if (window.windowManager) {
+                window.windowManager._parseAndSanitizeToElement(machinesHtml, overlay);
+            } else {
+                overlay.innerHTML = machinesHtml;
+            }
+            overlay.style.display = 'flex';
+        }
     } else if (locationName.startsWith("Casino - ") || locationName === "Casino Starter Trupe" || locationName === "Casino Babies" || locationName === "Casino Special Spot" || locationName === "Casino Eeveelution" || locationName === "Casino Late Trupe" || locationName === "Goldenrod Baby Corner" || locationName === "Goldenrod Lucky Spot Corner" || locationName === "Casino - Starter Troupe" || locationName === "Casino - Mid Troupe" || locationName === "Casino - Late Troupe" || locationName === "Casino - Eeveelutions") {
         if (!window.currentCasinoHub) window.currentCasinoHub = "Celadon Casino";
 
@@ -775,13 +801,39 @@ export function navigateToLocation(locationName) {
         const shinyHeight = 94.72 - 85.96;
 
         // Overlay transparent divs
-        html += `<div class="casino-overlay-btn" onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-casino-modal'); window.startCasinoEncounter(false, '${locationName}')" style="position: absolute; left: ${stdLeft}%; top: ${stdTop}%; width: ${stdWidth}%; height: ${61.06 - 34.16}%; cursor: pointer;" title="Standard Encounter (${state.config.balance.casinoPrices?.standard || 75})"></div>`;
-        html += `<div class="casino-overlay-btn" onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-casino-modal'); window.startCasinoEncounter(true, '${locationName}')" style="position: absolute; left: ${shinyLeft}%; top: ${shinyTop}%; width: ${shinyWidth}%; height: ${shinyHeight}%; cursor: pointer;" title="2x Shiny (${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>`;
+        html += `<div class="casino-overlay-btn" onclick="const popup = document.getElementById('casino-inner-popup'); if (popup) popup.style.display = 'none'; window.startCasinoEncounter(false, '${locationName}')" style="position: absolute; left: ${stdLeft}%; top: ${stdTop}%; width: ${stdWidth}%; height: ${61.06 - 34.16}%; cursor: pointer;" title="Standard Encounter (${state.config.balance.casinoPrices?.standard || 75})"></div>`;
+        html += `<div class="casino-overlay-btn" onclick="const popup = document.getElementById('casino-inner-popup'); if (popup) popup.style.display = 'none'; window.startCasinoEncounter(true, '${locationName}')" style="position: absolute; left: ${shinyLeft}%; top: ${shinyTop}%; width: ${shinyWidth}%; height: ${shinyHeight}%; cursor: pointer;" title="2x Shiny (${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>`;
         html += `<button class="casino-overlay-btn" onclick="window.navigateToLocation('${window.currentCasinoHub}')" style="position: absolute; top: 10px; left: 10px; padding: 10px; cursor: pointer; z-index: 100;">Back to Lobby</button>`;
-        html += `<button class="action-btn action-btn-danger" style="position: absolute; right: 10px; top: 10px;" onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-casino-modal'); updateUI();">X</button>`;
+        html += `<button class="action-btn action-btn-danger" style="position: absolute; right: 10px; top: 10px;" onclick="const popup = document.getElementById('casino-inner-popup'); if (popup) popup.style.display = 'none'; updateUI();">X</button>`;
         html += `</div>`;
 
-        window.showModal(locationName, html, 'window-casino-modal', '800px');
+                let mapWin = document.getElementById('window-map-content');
+        if (!mapWin) mapWin = document.querySelector('#window-map .content-panel');
+        if (mapWin) {
+            let overlay = document.getElementById('casino-inner-popup');
+            if (!overlay) {
+                overlay = document.createElement('div');
+                overlay.id = 'casino-inner-popup';
+                overlay.style.position = 'absolute';
+                overlay.style.top = '0';
+                overlay.style.left = '0';
+                overlay.style.width = '100%';
+                overlay.style.height = '100%';
+                overlay.style.backgroundColor = 'rgba(0,0,0,0.8)';
+                overlay.style.zIndex = '1000';
+                overlay.style.display = 'flex';
+                overlay.style.justifyContent = 'center';
+                overlay.style.alignItems = 'center';
+                mapWin.parentElement.style.position = 'relative';
+                mapWin.parentElement.appendChild(overlay);
+            }
+            if (window.windowManager) {
+                window.windowManager._parseAndSanitizeToElement(html, overlay);
+            } else {
+                overlay.innerHTML = html;
+            }
+            overlay.style.display = 'flex';
+        }
     } else if (locationName === "Daycare") {
         if (!state.stats.hasSeenDaycare) {
             document.getElementById('daycare-first-time-overlay').style.display = 'flex';
