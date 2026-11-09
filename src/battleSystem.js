@@ -840,7 +840,11 @@ class BattleSystem {
         }
 
         if (["Safari Zone", "Kanto Safari Zone"].includes(this.state.currentRoute)) {
-            const safariCost = this.state.config.balance.safariZonePrice || 500;
+            let safariCost = this.state.config.balance.safariZonePrice || 500;
+            if (this.state.currentRegionName === "Johto") {
+                if (this.state.currentRoute === "Safari Zone") safariCost = 80;
+                else if (this.state.currentRoute === "Kanto Safari Zone") safariCost = 150;
+            }
             if (this.state.trainer.money < safariCost) {
                 this.stop();
                 if (typeof window.switchView === 'function') {
@@ -865,8 +869,17 @@ class BattleSystem {
         this.consecutiveHeals = 0; // Reset for new battle
 
         if (this.state.currentRoute && (this.state.currentRoute.startsWith("Casino - ") || this.state.currentRoute === "Goldenrod Baby Corner" || this.state.currentRoute === "Goldenrod Lucky Spot Corner")) {
-            const baseCostStandard = this.state.config.balance.casinoPrices?.standard || 10;
-            const baseCostSpecial = this.state.config.balance.casinoPrices?.doubleShiny || 20;
+            let baseCostStandard = this.state.config.balance.casinoPrices?.standard || 75;
+            if (this.state.currentRegionName === "Johto") {
+                if (this.state.currentRoute === "Goldenrod Baby Corner") baseCostStandard = 5;
+                else if (this.state.currentRoute === "Goldenrod Lucky Spot Corner") baseCostStandard = 10;
+                else if (this.state.currentRoute === "Casino - Starter Troupe") baseCostStandard = 120;
+                else if (this.state.currentRoute === "Casino - Mid Troupe") baseCostStandard = 80;
+                else if (this.state.currentRoute === "Casino - Special Spot") baseCostStandard = 135;
+                else if (this.state.currentRoute === "Casino - Eeveelutions") baseCostStandard = 150;
+                else if (this.state.currentRoute === "Casino - Late Troupe") baseCostStandard = 175;
+            }
+            const baseCostSpecial = Math.round(baseCostStandard * 2.5); // double shiny is 2.5x base cost
             const cost = this.state.casinoDoubleShiny ? baseCostSpecial : baseCostStandard;
             if (this.state.trainer.money < cost) {
                 alert("Not enough money! You need $" + cost + " to continue hunting here.");
@@ -2267,10 +2280,23 @@ class BattleSystem {
         let requiresPayment = false;
         if (["Safari Zone", "Kanto Safari Zone"].includes(this.state.currentRoute)) {
             encounterCost = this.state.config.balance.safariZonePrice || 500;
+            if (this.state.currentRegionName === "Johto") {
+                if (this.state.currentRoute === "Safari Zone") encounterCost = 80;
+                else if (this.state.currentRoute === "Kanto Safari Zone") encounterCost = 150;
+            }
             requiresPayment = true;
         } else if (this.state.currentRoute && (this.state.currentRoute.startsWith("Casino - ") || this.state.currentRoute === "Goldenrod Baby Corner" || this.state.currentRoute === "Goldenrod Lucky Spot Corner")) {
-            const baseCostStandard = this.state.config.balance.casinoPrices?.standard || 10;
-            const baseCostSpecial = this.state.config.balance.casinoPrices?.doubleShiny || 20;
+            let baseCostStandard = this.state.config.balance.casinoPrices?.standard || 75;
+            if (this.state.currentRegionName === "Johto") {
+                if (this.state.currentRoute === "Goldenrod Baby Corner") baseCostStandard = 5;
+                else if (this.state.currentRoute === "Goldenrod Lucky Spot Corner") baseCostStandard = 10;
+                else if (this.state.currentRoute === "Casino - Starter Troupe") baseCostStandard = 120;
+                else if (this.state.currentRoute === "Casino - Mid Troupe") baseCostStandard = 80;
+                else if (this.state.currentRoute === "Casino - Special Spot") baseCostStandard = 135;
+                else if (this.state.currentRoute === "Casino - Eeveelutions") baseCostStandard = 150;
+                else if (this.state.currentRoute === "Casino - Late Troupe") baseCostStandard = 175;
+            }
+            const baseCostSpecial = Math.round(baseCostStandard * 2.5);
             encounterCost = this.state.casinoDoubleShiny ? baseCostSpecial : baseCostStandard;
             requiresPayment = true;
         }

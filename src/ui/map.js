@@ -613,8 +613,14 @@ export function navigateToLocation(locationName) {
         switchView("SAFARI_HUB");
         const msg = document.getElementById("safari-welcome-msg");
         if (msg) {
-            const safariCost = state.config.balance.safariZonePrice || 500;
-            msg.innerText = `Welcome to Safari Zone! Here we charge a fee per battle you have and you can use our SafariBalls at will. Do you wanna enter Safari Zone?`;
+            let safariCost = state.config.balance.safariZonePrice || 500;
+            if (state.currentRegionName === "Johto") {
+                if (locationName === "Safari Zone") safariCost = 80;
+                else if (locationName === "Kanto Safari Zone") safariCost = 150;
+            }
+            msg.innerText = `Welcome to Safari Zone! Here we charge a fee of ${safariCost} per battle you have and you can use our SafariBalls at will.\n\nDo you wanna enter Safari Zone?`;
+            const btn = document.getElementById("btn-enter-safari");
+            if (btn) btn.innerText = `Enter (${safariCost})`;
         }
     } else if (locationName === "Celadon Casino" || locationName === "Goldenrod Game Corner") {
         window.currentCasinoHub = locationName;
@@ -646,13 +652,13 @@ export function navigateToLocation(locationName) {
 
             let machinesHtml = `
                 <div style="position: absolute; top: 20px; left: 0; width: 100%; text-align: center; z-index: 10; color: white; text-shadow: 2px 2px 4px black; font-size: 24px;">
-                    <h3>Standard Route $${state.config.balance.casinoPrices?.standard || 75} 2x Shiny $${state.config.balance.casinoPrices?.doubleShiny || 200}</h3>
+                    <h3>Select Slot Machine</h3>
                 </div>
                 <div style="display: flex; justify-content: space-evenly; align-items: center; width: 100%; height: 100%; padding: 15px; box-sizing: border-box;">
                     <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
                         <img src="./Assets/Extra/Casino/${window.currentMapRegion === 'Johto' ? (window.currentCasinoHub === 'Goldenrod Game Corner' ? 'Region2 Johto Babies.png' : 'Region2 Kanto Starter Troupe.png') : 'Region1 Starter Troupe.png'}" alt="Starter Troupe" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
-                        <div onclick="window.startCasinoEncounter(false, window.currentMapRegion === 'Johto' && window.currentCasinoHub === 'Goldenrod Game Corner' ? 'Goldenrod Baby Corner' : 'Casino - Starter Troupe')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter ($${state.config.balance.casinoPrices?.standard || 75})"></div>
-                        <div onclick="window.startCasinoEncounter(true, window.currentMapRegion === 'Johto' && window.currentCasinoHub === 'Goldenrod Game Corner' ? 'Goldenrod Baby Corner' : 'Casino - Starter Troupe')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny ($${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
+                        <div onclick="window.startCasinoEncounter(false, window.currentMapRegion === 'Johto' && window.currentCasinoHub === 'Goldenrod Game Corner' ? 'Goldenrod Baby Corner' : 'Casino - Starter Troupe')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter"></div>
+                        <div onclick="window.startCasinoEncounter(true, window.currentMapRegion === 'Johto' && window.currentCasinoHub === 'Goldenrod Game Corner' ? 'Goldenrod Baby Corner' : 'Casino - Starter Troupe')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny"></div>
                     </div>
             `;
 
@@ -660,8 +666,8 @@ export function navigateToLocation(locationName) {
                 machinesHtml += `
                     <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
                         <img src="./Assets/Extra/Casino/${window.currentMapRegion === 'Johto' ? (window.currentCasinoHub === 'Goldenrod Game Corner' ? 'Region2 Johto Lucky Spot.png' : 'Region2 Kanto Babies.png') : 'Region1 Mid Troupe.png'}" alt="${window.currentMapRegion === 'Johto' ? 'Babies' : 'Mid Troupe'}" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
-                        <div onclick="window.startCasinoEncounter(false, window.currentMapRegion === 'Johto' && window.currentCasinoHub === 'Goldenrod Game Corner' ? 'Goldenrod Lucky Spot Corner' : 'Casino - Mid Troupe')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter ($${state.config.balance.casinoPrices?.standard || 75})"></div>
-                        <div onclick="window.startCasinoEncounter(true, window.currentMapRegion === 'Johto' && window.currentCasinoHub === 'Goldenrod Game Corner' ? 'Goldenrod Lucky Spot Corner' : 'Casino - Mid Troupe')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny ($${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
+                        <div onclick="window.startCasinoEncounter(false, window.currentMapRegion === 'Johto' && window.currentCasinoHub === 'Goldenrod Game Corner' ? 'Goldenrod Lucky Spot Corner' : 'Casino - Mid Troupe')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter"></div>
+                        <div onclick="window.startCasinoEncounter(true, window.currentMapRegion === 'Johto' && window.currentCasinoHub === 'Goldenrod Game Corner' ? 'Goldenrod Lucky Spot Corner' : 'Casino - Mid Troupe')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny"></div>
                     </div>
                 `;
             }
@@ -670,8 +676,8 @@ export function navigateToLocation(locationName) {
                 machinesHtml += `
                     <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
                         <img src="./Assets/Extra/Casino/${window.currentMapRegion === 'Johto' ? 'Region2 Late Troupe Kanto.png' : 'Region1 Late Troupe.png'}" alt="Late Troupe" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
-                        <div onclick="window.startCasinoEncounter(false, 'Casino - Late Troupe')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter ($${state.config.balance.casinoPrices?.standard || 75})"></div>
-                        <div onclick="window.startCasinoEncounter(true, 'Casino - Late Troupe')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny ($${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
+                        <div onclick="window.startCasinoEncounter(false, 'Casino - Late Troupe')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter"></div>
+                        <div onclick="window.startCasinoEncounter(true, 'Casino - Late Troupe')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny"></div>
                     </div>
                 `;
             }
@@ -680,8 +686,8 @@ export function navigateToLocation(locationName) {
                 machinesHtml += `
                     <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
                         <img src="./Assets/Extra/Casino/${window.currentMapRegion === 'Johto' ? 'Region2 Kanto Eeveelutions.png' : 'Region1 Eeveelutions.png'}" alt="Eeveelutions" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
-                        <div onclick="window.startCasinoEncounter(false, 'Casino - Eeveelutions')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter ($${state.config.balance.casinoPrices?.standard || 75})"></div>
-                        <div onclick="window.startCasinoEncounter(true, 'Casino - Eeveelutions')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny ($${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
+                        <div onclick="window.startCasinoEncounter(false, 'Casino - Eeveelutions')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter"></div>
+                        <div onclick="window.startCasinoEncounter(true, 'Casino - Eeveelutions')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny"></div>
                     </div>
                 `;
             }
@@ -690,8 +696,8 @@ export function navigateToLocation(locationName) {
                 machinesHtml += `
                     <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
                         <img src="./Assets/Extra/Casino/${window.currentMapRegion === 'Johto' ? 'Region2 Kanto Special Spot.png' : 'Region1 Special Spot.png'}" alt="Special Spot" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
-                        <div onclick="window.startCasinoEncounter(false, 'Casino - Special Spot')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter ($${state.config.balance.casinoPrices?.standard || 75})"></div>
-                        <div onclick="window.startCasinoEncounter(true, 'Casino - Special Spot')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny ($${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
+                        <div onclick="window.startCasinoEncounter(false, 'Casino - Special Spot')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter"></div>
+                        <div onclick="window.startCasinoEncounter(true, 'Casino - Special Spot')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny"></div>
                     </div>
                 `;
             }
@@ -754,8 +760,8 @@ export function navigateToLocation(locationName) {
         const shinyHeight = 94.72 - 85.96;
 
         // Overlay transparent divs
-        html += `<div class="casino-overlay-btn" onclick="window.startCasinoEncounter(false, '${locationName}')" style="position: absolute; left: ${stdLeft}%; top: ${stdTop}%; width: ${stdWidth}%; height: ${stdHeight}%; cursor: pointer;" title="Standard Encounter ($${state.config.balance.casinoPrices?.standard || 75})"></div>`;
-        html += `<div class="casino-overlay-btn" onclick="window.startCasinoEncounter(true, '${locationName}')" style="position: absolute; left: ${shinyLeft}%; top: ${shinyTop}%; width: ${shinyWidth}%; height: ${shinyHeight}%; cursor: pointer;" title="2x Shiny ($${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>`;
+        html += `<div class="casino-overlay-btn" onclick="window.startCasinoEncounter(false, '${locationName}')" style="position: absolute; left: ${stdLeft}%; top: ${stdTop}%; width: ${stdWidth}%; height: ${stdHeight}%; cursor: pointer;" title="Standard Encounter"></div>`;
+        html += `<div class="casino-overlay-btn" onclick="window.startCasinoEncounter(true, '${locationName}')" style="position: absolute; left: ${shinyLeft}%; top: ${shinyTop}%; width: ${shinyWidth}%; height: ${shinyHeight}%; cursor: pointer;" title="2x Shiny"></div>`;
         html += `<button class="casino-overlay-btn" onclick="window.navigateToLocation('Celadon Casino')" style="position: absolute; top: 10px; left: 10px; padding: 10px; cursor: pointer; z-index: 100;">Back to Lobby</button>`;
 
         // Append to the viewCasino container
