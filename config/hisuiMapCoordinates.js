@@ -73,4 +73,5 @@ export default {
     "Lake Valor": { x: 0, y: 0 },
     "Lake of Trials": { x: 0, y: 0 },
     "Incarnate Fields": { x: 0, y: 0 },
+    "Special Route": { x: 0, y: 0 }
 };

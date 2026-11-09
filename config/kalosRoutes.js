@@ -3981,6 +3981,9 @@ export const kalosUnlocks = [
   {
     "challengeName": "Extra Challenge C 3",
     "areaId": "Friend Safari Deep Inside",
+    "unlocks": [
+      "Keys to Sanctum of Order"
+    ],
     "requirements": {
       "defeatCountRoute": {
         "route": "Friend Safari Deep Inside",
@@ -4222,13 +4225,14 @@ export const kalosUnlocks = [
     }
   },
   {
-    "challengeName": "Sanctum of Order Challenge",
+    "challengeName": "Key to Sanctum of Order Challenge",
     "areaId": "Keys to Sanctum of Order",
     "unlocks": [
       "Sanctum of Order"
     ],
     "requirements": {
       "completeChallenges": [
+        "Extra Challenge C 3",
         "Extra Challenge D 4",
         "Extra Challenge E 5",
         "Extra Challenge F 5",
@@ -4237,7 +4241,7 @@ export const kalosUnlocks = [
     }
   },
   {
-    "challengeName": "Eternal Fight Challenge",
+    "challengeName": "Sanctum of Order Challenge",
     "areaId": "Sanctum of Order",
     "requirements": {
       "catchSpecies": [

@@ -1,3 +1,4 @@
+import * as mathEngine from '../mathEngine.js';
 import { getSpeciesDataHtml, buildEvolutionLineHtml, formatType } from "./pokedex.js";
 import { state } from '../state.js';
 import { updateUI, showModal } from '../ui.js';
@@ -200,6 +201,29 @@ export function evolvePokemon(location, idx, toId) {
             alert("Requirements not met!");
             return;
         }
+
+        // Nincada evolution edge case: Nincada (0290) -> Ninjask (0291)
+        if (p.id === '0290' && toId === '0291') {
+            let hasFreeSlot = false;
+            if (location === 'party') {
+                hasFreeSlot = list.length < 6;
+            } else if (location === 'storage' || location === 'safe') {
+                hasFreeSlot = mathEngine.getCurrentCount(state, 'box') < mathEngine.getCapacity(state, 'box');
+            }
+
+            if (!hasFreeSlot) {
+                let locName = location;
+                if (location === 'safe') locName = 'safe';
+                if (location === 'storage') locName = 'storage';
+                if (window.showGameAlert) {
+                    window.showGameAlert("Need a free slot in " + locName);
+                } else {
+                    alert("Need a free slot in " + locName);
+                }
+                return;
+            }
+        }
+
         // Deduct stones
         for (const type of p.types) {
             const stoneName = type + " Stone";
@@ -235,10 +259,54 @@ export function evolvePokemon(location, idx, toId) {
 
     if (p.quality >= 2) {
         if (!state.stats.caughtShiniesSpecies) state.stats.caughtShiniesSpecies = {};
-        state.stats.caughtShiniesSpecies[newBase.name] = true;
+        if (!state.stats.caughtShiniesSpecies[newBase.name]) {
+            state.stats.caughtShiniesSpeciesCount = (state.stats.caughtShiniesSpeciesCount || 0) + 1;
+            state.stats.caughtShiniesSpecies[newBase.name] = true;
+        }
     }
 
+
     alert(`${p.name} evolved into ${newBase.name}!`);
+
+    // Nincada evolution edge case: create Shedinja (0292)
+    if (oldPData && oldPData.id === '0290' && newBase.id === '0291') {
+        const shedinjaBase = state.config.pokemonMap.get('0292');
+        if (shedinjaBase) {
+            let shedinja = JSON.parse(JSON.stringify(p));
+            shedinja.uuid = crypto.randomUUID();
+            shedinja.id = shedinjaBase.id;
+            shedinja.name = shedinjaBase.name;
+            shedinja.types = shedinjaBase.types;
+            shedinja.bst = shedinjaBase.hp + shedinjaBase.atk + shedinjaBase.def + shedinjaBase.spa + shedinjaBase.spd + shedinjaBase.spe;
+
+            const sv = shedinja.vitamins || {};
+            shedinja.maxHp = mathEngine.calculateHP(shedinjaBase.hp, shedinja.ivs.hp, shedinja.level, shedinja.quality, sv.hp || 0);
+            shedinja.currentStats.atk = mathEngine.calculateStat(shedinjaBase.atk, shedinja.ivs.atk, shedinja.level, shedinja.quality, sv.atk || 0);
+            shedinja.currentStats.def = mathEngine.calculateStat(shedinjaBase.def, shedinja.ivs.def, shedinja.level, shedinja.quality, sv.def || 0);
+            shedinja.currentStats.spa = mathEngine.calculateStat(shedinjaBase.spa, shedinja.ivs.spa, shedinja.level, shedinja.quality, sv.spa || 0);
+            shedinja.currentStats.spd = mathEngine.calculateStat(shedinjaBase.spd, shedinja.ivs.spd, shedinja.level, shedinja.quality, sv.spd || 0);
+            shedinja.currentStats.spe = mathEngine.calculateStat(shedinjaBase.spe, shedinja.ivs.spe, shedinja.level, shedinja.quality, sv.spe || 0);
+
+            shedinja.currentHp = shedinja.maxHp;
+
+            if (!state.stats.caughtSpecies) state.stats.caughtSpecies = {};
+            if (!state.stats.caughtSpecies[shedinjaBase.name]) {
+                state.stats.caughtSpeciesCount = (state.stats.caughtSpeciesCount || 0) + 1;
+                state.stats.caughtSpecies[shedinjaBase.name] = true;
+                state.stats.caught++;
+            }
+
+            if (shedinja.quality >= 2) {
+                if (!state.stats.caughtShiniesSpecies) state.stats.caughtShiniesSpecies = {};
+                if (!state.stats.caughtShiniesSpecies[shedinjaBase.name]) {
+                    state.stats.caughtShiniesSpeciesCount = (state.stats.caughtShiniesSpeciesCount || 0) + 1;
+                    state.stats.caughtShiniesSpecies[shedinjaBase.name] = true;
+                }
+            }
+
+            list.push(shedinja);
+        }
+    }
     document.getElementById('modal-overlay').style.display = 'none'; // Close modal
 
     updateUI();
@@ -297,7 +365,6 @@ window.showVitaminsModal = function(location, idx) {
     showModal(`Vitamins for ${escapeHTML(p.name)}`, html, "window-vitamins", "500px");
 };
 
-import * as mathEngine from '../mathEngine.js';
 
 window.useVitamin = function(location, idx, vitaminName, statKey) {
     const list = state[location];

@@ -255,7 +255,7 @@ const johtoMapCoordinates = {
     "y": 46.84
   },
   "casino": {
-    "name": "Casino",
+    "name": "Celadon Casino",
     "x": 80.83,
     "y": 44.78
   },

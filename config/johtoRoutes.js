@@ -885,6 +885,64 @@ export const johtoRoutes = [
     ]
   },
   {
+    "name": "Goldenrod Baby Corner",
+    "spawns": [
+      {
+        "pokemonId": 440,
+        "minLevel": 18,
+        "maxLevel": 22,
+        "chance": 0.33
+      },
+      {
+        "pokemonId": 173,
+        "minLevel": 18,
+        "maxLevel": 22,
+        "chance": 0.33
+      },
+      {
+        "pokemonId": 174,
+        "minLevel": 18,
+        "maxLevel": 22,
+        "chance": 0.34
+      }
+    ]
+  },
+  {
+    "name": "Goldenrod Lucky Spot Corner",
+    "spawns": [
+      {
+        "pokemonId": 63,
+        "minLevel": 24,
+        "maxLevel": 28,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 27,
+        "minLevel": 24,
+        "maxLevel": 28,
+        "chance": 0.25
+      },
+      {
+        "pokemonId": 66,
+        "minLevel": 25,
+        "maxLevel": 29,
+        "chance": 0.20
+      },
+      {
+        "pokemonId": 104,
+        "minLevel": 25,
+        "maxLevel": 29,
+        "chance": 0.15
+      },
+      {
+        "pokemonId": 133,
+        "minLevel": 26,
+        "maxLevel": 30,
+        "chance": 0.15
+      }
+    ]
+  },
+  {
     "name": "Goldenrod Game Corner",
     "spawns": [
       {
@@ -2494,7 +2552,7 @@ export const johtoUnlocks = [
     "areaId": "Route 8",
     "unlocks": [
       "Celadon Gym",
-      "Casino",
+      "Celadon Casino",
       "Casino Starter Trupe"
     ],
     "requirements": {
