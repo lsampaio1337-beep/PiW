@@ -726,8 +726,7 @@ export function navigateToLocation(locationName) {
                 </div>
             </div>
         `;
-                let mapWin = document.getElementById('window-map-content');
-        if (!mapWin) mapWin = document.querySelector('#window-map .content-panel');
+                                let mapWin = document.querySelector('#window-map');
         if (mapWin) {
             let overlay = document.getElementById('casino-inner-popup');
             if (!overlay) {
@@ -744,7 +743,7 @@ export function navigateToLocation(locationName) {
                 overlay.style.justifyContent = 'center';
                 overlay.style.alignItems = 'center';
                 mapWin.parentElement.style.position = 'relative'; // Ensure relative parent
-                mapWin.parentElement.appendChild(overlay);
+                mapWin.appendChild(overlay);
             }
             if (window.windowManager) {
                 window.windowManager._parseAndSanitizeToElement(machinesHtml, overlay);
@@ -807,8 +806,7 @@ export function navigateToLocation(locationName) {
         html += `<button class="action-btn action-btn-danger" style="position: absolute; right: 10px; top: 10px;" onclick="const popup = document.getElementById('casino-inner-popup'); if (popup) popup.style.display = 'none'; updateUI();">X</button>`;
         html += `</div>`;
 
-                let mapWin = document.getElementById('window-map-content');
-        if (!mapWin) mapWin = document.querySelector('#window-map .content-panel');
+                                let mapWin = document.querySelector('#window-map');
         if (mapWin) {
             let overlay = document.getElementById('casino-inner-popup');
             if (!overlay) {
@@ -825,7 +823,7 @@ export function navigateToLocation(locationName) {
                 overlay.style.justifyContent = 'center';
                 overlay.style.alignItems = 'center';
                 mapWin.parentElement.style.position = 'relative';
-                mapWin.parentElement.appendChild(overlay);
+                mapWin.appendChild(overlay);
             }
             if (window.windowManager) {
                 window.windowManager._parseAndSanitizeToElement(html, overlay);
