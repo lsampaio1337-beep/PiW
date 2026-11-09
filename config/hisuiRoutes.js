@@ -1,1845 +1,609 @@
 export const hisuiRoutes = {
-  "Aspiration Hill": {
+  "Snowpoint Temple (Alabaster Icelands)": {
     pokes: [
       {
-        id: 395,
+        id: 41,
         minLevel: 1,
-        maxLevel: 3,
-        probability: 0.25
+        maxLevel: 1,
+        probability: 0.125
       },
       {
-        id: 356,
+        id: 42,
         minLevel: 1,
-        maxLevel: 3,
-        probability: 0.25
+        maxLevel: 1,
+        probability: 0.125
       },
       {
-        id: 175,
+        id: 75,
         minLevel: 1,
-        maxLevel: 3,
-        probability: 0.25
-      },
-      {
-        id: 176,
-        minLevel: 1,
-        maxLevel: 3,
-        probability: 0.25
-      }
-    ]
-  },
-  "Horseshoe Plains": {
-    pokes: [
-      {
-        id: 239,
-        minLevel: 2,
-        maxLevel: 4,
-        probability: 0.33
-      },
-      {
-        id: 449,
-        minLevel: 2,
-        maxLevel: 4,
-        probability: 0.33
-      },
-      {
-        id: 364,
-        minLevel: 2,
-        maxLevel: 4,
-        probability: 0.34
-      }
-    ]
-  },
-  "Deertrack Path": {
-    pokes: [
-      {
-        id: 722,
-        minLevel: 4,
-        maxLevel: 6,
-        probability: 0.17
-      },
-      {
-        id: 477,
-        minLevel: 4,
-        maxLevel: 6,
-        probability: 0.17
-      },
-      {
-        id: 388,
-        minLevel: 4,
-        maxLevel: 6,
-        probability: 0.17
-      },
-      {
-        id: 476,
-        minLevel: 4,
-        maxLevel: 6,
-        probability: 0.17
-      },
-      {
-        id: 93,
-        minLevel: 4,
-        maxLevel: 6,
-        probability: 0.17
-      },
-      {
-        id: 421,
-        minLevel: 4,
-        maxLevel: 6,
-        probability: 0.15
-      }
-    ]
-  },
-  "Deertrack Heights": {
-    pokes: [
-      {
-        id: 463,
-        minLevel: 5,
-        maxLevel: 7,
-        probability: 0.14
-      },
-      {
-        id: 461,
-        minLevel: 5,
-        maxLevel: 7,
-        probability: 0.14
-      },
-      {
-        id: 433,
-        minLevel: 5,
-        maxLevel: 7,
-        probability: 0.14
-      },
-      {
-        id: 240,
-        minLevel: 5,
-        maxLevel: 7,
-        probability: 0.14
-      },
-      {
-        id: 450,
-        minLevel: 5,
-        maxLevel: 7,
-        probability: 0.14
-      },
-      {
-        id: 38,
-        minLevel: 5,
-        maxLevel: 7,
-        probability: 0.14
-      },
-      {
-        id: 442,
-        minLevel: 5,
-        maxLevel: 7,
-        probability: 0.16
-      }
-    ]
-  },
-  "Nature’s Pantry": {
-    pokes: [
-      {
-        id: 155,
-        minLevel: 7,
-        maxLevel: 9,
-        probability: 0.1628
-      },
-      {
-        id: 469,
-        minLevel: 7,
-        maxLevel: 9,
-        probability: 0.1628
-      },
-      {
-        id: 456,
-        minLevel: 7,
-        maxLevel: 9,
-        probability: 0.1628
-      },
-      {
-        id: 58,
-        minLevel: 7,
-        maxLevel: 9,
-        probability: 0.1628
-      },
-      {
-        id: 438,
-        minLevel: 7,
-        maxLevel: 9,
-        probability: 0.1628
-      },
-      {
-        id: 548,
-        minLevel: 7,
-        maxLevel: 9,
-        probability: 0.186
-      }
-    ]
-  },
-  "Gym - Kleavor": {
-    type: "gym",
-    name: "Gym - Kleavor",
-    requirements: {
-      earnBadge: {
-        badgeCount: 65,
-        name: "Kleavor Badge"
-      }
-    }
-  },
-  "Obsidian Fieldlands Fishing Spot": {
-    pokes: [
-      {
-        id: 76,
-        minLevel: 10,
-        maxLevel: 12,
-        probability: 0.17
-      },
-      {
-        id: 269,
-        minLevel: 10,
-        maxLevel: 12,
-        probability: 0.17
-      },
-      {
-        id: 389,
-        minLevel: 10,
-        maxLevel: 12,
-        probability: 0.17
-      },
-      {
-        id: 451,
-        minLevel: 10,
-        maxLevel: 12,
-        probability: 0.17
-      },
-      {
-        id: 550,
-        minLevel: 10,
-        maxLevel: 12,
-        probability: 0.17
-      },
-      {
-        id: 114,
-        minLevel: 10,
-        maxLevel: 12,
-        probability: 0.15
-      }
-    ]
-  },
-  "Obsidian Falls": {
-    pokes: [
-      {
-        id: 460,
-        minLevel: 11,
-        maxLevel: 13,
-        probability: 0.17
-      },
-      {
-        id: 282,
-        minLevel: 11,
-        maxLevel: 13,
-        probability: 0.17
-      },
-      {
-        id: 63,
-        minLevel: 11,
-        maxLevel: 13,
-        probability: 0.17
-      },
-      {
-        id: 712,
-        minLevel: 11,
-        maxLevel: 13,
-        probability: 0.17
-      },
-      {
-        id: 403,
-        minLevel: 11,
-        maxLevel: 13,
-        probability: 0.17
-      },
-      {
-        id: 400,
-        minLevel: 11,
-        maxLevel: 13,
-        probability: 0.15
-      }
-    ]
-  },
-  "The Heartwood North": {
-    pokes: [
-      {
-        id: 390,
-        minLevel: 13,
-        maxLevel: 15,
-        probability: 0.14
-      },
-      {
-        id: 416,
-        minLevel: 13,
-        maxLevel: 15,
-        probability: 0.14
-      },
-      {
-        id: 424,
-        minLevel: 13,
-        maxLevel: 15,
-        probability: 0.14
-      },
-      {
-        id: 404,
-        minLevel: 13,
-        maxLevel: 15,
-        probability: 0.14
-      },
-      {
-        id: 479,
-        minLevel: 13,
-        maxLevel: 15,
-        probability: 0.14
-      },
-      {
-        id: 459,
-        minLevel: 13,
-        maxLevel: 15,
-        probability: 0.14
-      },
-      {
-        id: 355,
-        minLevel: 13,
-        maxLevel: 15,
-        probability: 0.16
-      }
-    ]
-  },
-  "The Heartwood South": {
-    pokes: [
-      {
-        id: 143,
-        minLevel: 14,
-        maxLevel: 16,
-        probability: 0.25
-      },
-      {
-        id: 92,
-        minLevel: 14,
-        maxLevel: 16,
-        probability: 0.25
-      },
-      {
-        id: 437,
-        minLevel: 14,
-        maxLevel: 16,
-        probability: 0.25
-      },
-      {
-        id: 193,
-        minLevel: 14,
-        maxLevel: 16,
-        probability: 0.25
-      }
-    ]
-  },
-  "Oreburrow Tunnel": {
-    pokes: [
-      {
-        id: 391,
-        minLevel: 16,
-        maxLevel: 18,
-        probability: 0.17
-      },
-      {
-        id: 435,
-        minLevel: 16,
-        maxLevel: 18,
-        probability: 0.17
+        maxLevel: 1,
+        probability: 0.125
       },
       {
         id: 280,
         minLevel: 16,
-        maxLevel: 18,
-        probability: 0.17
-      },
-      {
-        id: 42,
-        minLevel: 16,
-        maxLevel: 18,
-        probability: 0.17
-      },
-      {
-        id: 441,
-        minLevel: 16,
-        maxLevel: 18,
-        probability: 0.17
-      },
-      {
-        id: 75,
-        minLevel: 16,
-        maxLevel: 18,
-        probability: 0.15
-      }
-    ]
-  },
-  "Worn Bridge": {
-    pokes: [
-      {
-        id: 501,
-        minLevel: 17,
         maxLevel: 19,
-        probability: 0.5
-      },
-      {
-        id: 723,
-        minLevel: 17,
-        maxLevel: 19,
-        probability: 0.5
-      }
-    ]
-  },
-  "Sandgem Flats North": {
-    pokes: [
-      {
-        id: 722,
-        minLevel: 19,
-        maxLevel: 21,
-        probability: 0.2
-      },
-      {
-        id: 405,
-        minLevel: 19,
-        maxLevel: 21,
-        probability: 0.2
-      },
-      {
-        id: 398,
-        minLevel: 19,
-        maxLevel: 21,
-        probability: 0.2
-      },
-      {
-        id: 399,
-        minLevel: 19,
-        maxLevel: 21,
-        probability: 0.2
-      },
-      {
-        id: 439,
-        minLevel: 19,
-        maxLevel: 21,
-        probability: 0.2
-      }
-    ]
-  },
-  "Sandgem Flats South": {
-    pokes: [
-      {
-        id: 503,
-        minLevel: 20,
-        maxLevel: 22,
-        probability: 0.33
-      },
-      {
-        id: 723,
-        minLevel: 20,
-        maxLevel: 22,
-        probability: 0.33
-      },
-      {
-        id: 396,
-        minLevel: 20,
-        maxLevel: 22,
-        probability: 0.34
-      }
-    ]
-  },
-  "Ramanas Island South": {
-    pokes: [
-      {
-        id: 501,
-        minLevel: 22,
-        maxLevel: 24,
-        probability: 0.25
-      },
-      {
-        id: 405,
-        minLevel: 22,
-        maxLevel: 24,
-        probability: 0.25
-      },
-      {
-        id: 265,
-        minLevel: 22,
-        maxLevel: 24,
-        probability: 0.25
-      },
-      {
-        id: 400,
-        minLevel: 22,
-        maxLevel: 24,
-        probability: 0.25
-      }
-    ]
-  },
-  "Gapejaw Bog North": {
-    pokes: [
-      {
-        id: 470,
-        minLevel: 23,
-        maxLevel: 25,
-        probability: 0.17
-      },
-      {
-        id: 358,
-        minLevel: 23,
-        maxLevel: 25,
-        probability: 0.17
-      },
-      {
-        id: 571,
-        minLevel: 23,
-        maxLevel: 25,
-        probability: 0.17
-      },
-      {
-        id: 440,
-        minLevel: 23,
-        maxLevel: 25,
-        probability: 0.17
-      },
-      {
-        id: 299,
-        minLevel: 23,
-        maxLevel: 25,
-        probability: 0.17
-      },
-      {
-        id: 406,
-        minLevel: 23,
-        maxLevel: 25,
-        probability: 0.15
-      }
-    ]
-  },
-  "Gapejaw Bog South": {
-    pokes: [
-      {
-        id: 904,
-        minLevel: 25,
-        maxLevel: 27,
-        probability: 0.33
-      },
-      {
-        id: 454,
-        minLevel: 25,
-        maxLevel: 27,
-        probability: 0.33
-      },
-      {
-        id: 123,
-        minLevel: 25,
-        maxLevel: 27,
-        probability: 0.34
-      }
-    ]
-  },
-  "Sludge Mound": {
-    pokes: [
-      {
-        id: 501,
-        minLevel: 26,
-        maxLevel: 28,
-        probability: 0.17
-      },
-      {
-        id: 196,
-        minLevel: 26,
-        maxLevel: 28,
-        probability: 0.17
-      },
-      {
-        id: 398,
-        minLevel: 26,
-        maxLevel: 28,
-        probability: 0.17
-      },
-      {
-        id: 234,
-        minLevel: 26,
-        maxLevel: 28,
-        probability: 0.17
-      },
-      {
-        id: 46,
-        minLevel: 26,
-        maxLevel: 28,
-        probability: 0.17
-      },
-      {
-        id: 41,
-        minLevel: 26,
-        maxLevel: 28,
-        probability: 0.15
-      }
-    ]
-  },
-  "Scarlet Bog": {
-    pokes: [
-      {
-        id: 315,
-        minLevel: 28,
-        maxLevel: 30,
-        probability: 0.33
-      },
-      {
-        id: 713,
-        minLevel: 28,
-        maxLevel: 30,
-        probability: 0.33
-      },
-      {
-        id: 100,
-        minLevel: 28,
-        maxLevel: 30,
-        probability: 0.34
-      }
-    ]
-  },
-  "Golden Lowlands North": {
-    pokes: [
-      {
-        id: 415,
-        minLevel: 29,
-        maxLevel: 31,
-        probability: 0.33
-      },
-      {
-        id: 36,
-        minLevel: 29,
-        maxLevel: 31,
-        probability: 0.33
-      },
-      {
-        id: 397,
-        minLevel: 29,
-        maxLevel: 31,
-        probability: 0.34
-      }
-    ]
-  },
-  "Golden Lowlands South": {
-    pokes: [
-      {
-        id: 226,
-        minLevel: 31,
-        maxLevel: 33,
-        probability: 0.33
-      },
-      {
-        id: 113,
-        minLevel: 31,
-        maxLevel: 33,
-        probability: 0.33
-      },
-      {
-        id: 419,
-        minLevel: 31,
-        maxLevel: 33,
-        probability: 0.34
-      }
-    ]
-  },
-  "Bolderoll Slope": {
-    pokes: [
-      {
-        id: 173,
-        minLevel: 32,
-        maxLevel: 34,
-        probability: 0.33
-      },
-      {
-        id: 362,
-        minLevel: 32,
-        maxLevel: 34,
-        probability: 0.33
-      },
-      {
-        id: 74,
-        minLevel: 32,
-        maxLevel: 34,
-        probability: 0.34
-      }
-    ]
-  },
-  "Gym - Lilligant": {
-    type: "gym",
-    name: "Gym - Lilligant",
-    requirements: {
-      earnBadge: {
-        badgeCount: 66,
-        name: "Lilligant Badge"
-      }
-    }
-  },
-  "Holm of Trials": {
-    pokes: [
-      {
-        id: 448,
-        minLevel: 35,
-        maxLevel: 37,
-        probability: 0.25
-      },
-      {
-        id: 407,
-        minLevel: 35,
-        maxLevel: 37,
-        probability: 0.25
-      },
-      {
-        id: 214,
-        minLevel: 35,
-        maxLevel: 37,
-        probability: 0.25
-      },
-      {
-        id: 453,
-        minLevel: 35,
-        maxLevel: 37,
-        probability: 0.25
-      }
-    ]
-  },
-  "Ursa's Ring": {
-    pokes: [
-      {
-        id: 428,
-        minLevel: 37,
-        maxLevel: 39,
-        probability: 0.1946
-      },
-      {
-        id: 473,
-        minLevel: 37,
-        maxLevel: 39,
-        probability: 0.1944
-      },
-      {
-        id: 340,
-        minLevel: 37,
-        maxLevel: 39,
-        probability: 0.1944
-      },
-      {
-        id: 220,
-        minLevel: 37,
-        maxLevel: 39,
-        probability: 0.1944
-      },
-      {
-        id: 78,
-        minLevel: 37,
-        maxLevel: 39,
-        probability: 0.2222
-      }
-    ]
-  },
-  "Crimson Mirelands Fishing Spot": {
-    pokes: [
-      {
-        id: 501,
-        minLevel: 38,
-        maxLevel: 40,
-        probability: 0.25
-      },
-      {
-        id: 405,
-        minLevel: 38,
-        maxLevel: 40,
-        probability: 0.25
-      },
-      {
-        id: 400,
-        minLevel: 38,
-        maxLevel: 40,
-        probability: 0.25
-      },
-      {
-        id: 265,
-        minLevel: 38,
-        maxLevel: 40,
-        probability: 0.25
-      }
-    ]
-  },
-  "Ginkgo Landing": {
-    pokes: [
-      {
-        id: 405,
-        minLevel: 40,
-        maxLevel: 42,
-        probability: 0.25
-      },
-      {
-        id: 156,
-        minLevel: 40,
-        maxLevel: 42,
-        probability: 0.25
-      },
-      {
-        id: 724,
-        minLevel: 40,
-        maxLevel: 42,
-        probability: 0.25
-      },
-      {
-        id: 404,
-        minLevel: 40,
-        maxLevel: 42,
-        probability: 0.25
-      }
-    ]
-  },
-  "Shrouded Ruins": {
-    pokes: [
-      {
-        id: 724,
-        minLevel: 41,
-        maxLevel: 43,
-        probability: 0.17
-      },
-      {
-        id: 723,
-        minLevel: 41,
-        maxLevel: 43,
-        probability: 0.17
-      },
-      {
-        id: 157,
-        minLevel: 41,
-        maxLevel: 43,
-        probability: 0.17
-      },
-      {
-        id: 404,
-        minLevel: 41,
-        maxLevel: 43,
-        probability: 0.17
-      },
-      {
-        id: 265,
-        minLevel: 41,
-        maxLevel: 43,
-        probability: 0.17
-      },
-      {
-        id: 397,
-        minLevel: 41,
-        maxLevel: 43,
-        probability: 0.15
-      }
-    ]
-  },
-  "Droning Meadow": {
-    pokes: [
-      {
-        id: 452,
-        minLevel: 43,
-        maxLevel: 45,
-        probability: 0.2049
-      },
-      {
-        id: 242,
-        minLevel: 43,
-        maxLevel: 45,
-        probability: 0.2048
-      },
-      {
-        id: 172,
-        minLevel: 43,
-        maxLevel: 45,
-        probability: 0.2048
-      },
-      {
-        id: 434,
-        minLevel: 43,
-        maxLevel: 45,
-        probability: 0.2048
-      },
-      {
-        id: 111,
-        minLevel: 43,
-        maxLevel: 45,
-        probability: 0.1807
-      }
-    ]
-  },
-  "Grueling Grove": {
-    pokes: [
-      {
-        id: 700,
-        minLevel: 44,
-        maxLevel: 46,
-        probability: 0.2
-      },
-      {
-        id: 430,
-        minLevel: 44,
-        maxLevel: 46,
-        probability: 0.2
-      },
-      {
-        id: 156,
-        minLevel: 44,
-        maxLevel: 46,
-        probability: 0.2
-      },
-      {
-        id: 458,
-        minLevel: 44,
-        maxLevel: 46,
-        probability: 0.2
-      },
-      {
-        id: 418,
-        minLevel: 44,
-        maxLevel: 46,
-        probability: 0.2
-      }
-    ]
-  },
-  "Bathers' Lagoon": {
-    pokes: [
-      {
-        id: 169,
-        minLevel: 46,
-        maxLevel: 48,
-        probability: 0.25
-      },
-      {
-        id: 67,
-        minLevel: 46,
-        maxLevel: 48,
-        probability: 0.25
-      },
-      {
-        id: 266,
-        minLevel: 46,
-        maxLevel: 48,
-        probability: 0.25
-      },
-      {
-        id: 216,
-        minLevel: 46,
-        maxLevel: 48,
-        probability: 0.25
-      }
-    ]
-  },
-  "Castaway Shore": {
-    pokes: [
-      {
-        id: 414,
-        minLevel: 47,
-        maxLevel: 49,
-        probability: 0.33
-      },
-      {
-        id: 25,
-        minLevel: 47,
-        maxLevel: 49,
-        probability: 0.33
-      },
-      {
-        id: 224,
-        minLevel: 47,
-        maxLevel: 49,
-        probability: 0.34
-      }
-    ]
-  },
-  "Deadwood Haunt": {
-    pokes: [
-      {
-        id: 471,
-        minLevel: 49,
-        maxLevel: 51,
-        probability: 0.3334
-      },
-      {
-        id: 365,
-        minLevel: 49,
-        maxLevel: 51,
-        probability: 0.3333
-      },
-      {
-        id: 723,
-        minLevel: 49,
-        maxLevel: 51,
-        probability: 0.3333
-      }
-    ]
-  },
-  "Cobalt Coastlands Fishing Spot": {
-    pokes: [
-      {
-        id: 157,
-        minLevel: 50,
-        maxLevel: 52,
-        probability: 0.2
-      },
-      {
-        id: 37,
-        minLevel: 50,
-        maxLevel: 52,
-        probability: 0.2
-      },
-      {
-        id: 404,
-        minLevel: 50,
-        maxLevel: 52,
-        probability: 0.2
-      },
-      {
-        id: 400,
-        minLevel: 50,
-        maxLevel: 52,
-        probability: 0.2
-      },
-      {
-        id: 66,
-        minLevel: 50,
-        maxLevel: 52,
-        probability: 0.2
-      }
-    ]
-  },
-  "Crossing Slope": {
-    pokes: [
-      {
-        id: 197,
-        minLevel: 52,
-        maxLevel: 54,
-        probability: 0.1628
-      },
-      {
-        id: 401,
-        minLevel: 52,
-        maxLevel: 54,
-        probability: 0.1628
+        probability: 0.125
       },
       {
         id: 281,
-        minLevel: 52,
-        maxLevel: 54,
-        probability: 0.1628
+        minLevel: 16,
+        maxLevel: 29,
+        probability: 0.125
       },
       {
-        id: 125,
-        minLevel: 52,
-        maxLevel: 54,
-        probability: 0.1628
+        id: 436,
+        minLevel: 29,
+        maxLevel: 32,
+        probability: 0.125
       },
       {
-        id: 133,
-        minLevel: 52,
-        maxLevel: 54,
-        probability: 0.1628
+        id: 437,
+        minLevel: 29,
+        maxLevel: 57,
+        probability: 0.125
       },
       {
-        id: 54,
-        minLevel: 52,
-        maxLevel: 54,
-        probability: 0.186
+        id: 486,
+        minLevel: 70,
+        maxLevel: 70,
+        probability: 0.125
       }
     ]
   },
-  "Veilstone Cape": {
+  "Lake Acuity (Alabaster Icelands)": {
     pokes: [
       {
-        id: 549,
-        minLevel: 53,
-        maxLevel: 55,
-        probability: 0.25
-      },
-      {
-        id: 339,
-        minLevel: 53,
-        maxLevel: 55,
-        probability: 0.25
-      },
-      {
-        id: 198,
-        minLevel: 53,
-        maxLevel: 55,
-        probability: 0.25
-      },
-      {
-        id: 47,
-        minLevel: 53,
-        maxLevel: 55,
-        probability: 0.25
-      }
-    ]
-  },
-  "Tranquility Cove": {
-    pokes: [
-      {
-        id: 212,
-        minLevel: 55,
-        maxLevel: 57,
-        probability: 0.25
-      },
-      {
-        id: 223,
-        minLevel: 55,
-        maxLevel: 57,
-        probability: 0.25
-      },
-      {
-        id: 724,
-        minLevel: 55,
-        maxLevel: 57,
-        probability: 0.25
-      },
-      {
-        id: 215,
-        minLevel: 55,
-        maxLevel: 57,
-        probability: 0.25
-      }
-    ]
-  },
-  "Islespy Shore": {
-    pokes: [
-      {
-        id: 464,
-        minLevel: 56,
-        maxLevel: 58,
-        probability: 0.17
-      },
-      {
-        id: 136,
-        minLevel: 56,
-        maxLevel: 58,
-        probability: 0.17
-      },
-      {
-        id: 502,
-        minLevel: 56,
-        maxLevel: 58,
-        probability: 0.17
-      },
-      {
-        id: 628,
-        minLevel: 56,
-        maxLevel: 58,
-        probability: 0.17
-      },
-      {
-        id: 126,
-        minLevel: 56,
-        maxLevel: 58,
-        probability: 0.17
-      },
-      {
-        id: 217,
-        minLevel: 56,
-        maxLevel: 58,
-        probability: 0.15
-      }
-    ]
-  },
-  "Spring Path": {
-    pokes: [
-      {
-        id: 466,
-        minLevel: 58,
-        maxLevel: 60,
-        probability: 0.25
+        id: 63,
+        minLevel: 12,
+        maxLevel: 15,
+        probability: 0.09
       },
       {
         id: 64,
-        minLevel: 58,
-        maxLevel: 60,
-        probability: 0.25
+        minLevel: 12,
+        maxLevel: 15,
+        probability: 0.091
       },
       {
-        id: 208,
-        minLevel: 58,
-        maxLevel: 60,
-        probability: 0.25
+        id: 412.3,
+        minLevel: 18,
+        maxLevel: 18,
+        probability: 0.091
       },
       {
-        id: 108,
-        minLevel: 58,
-        maxLevel: 60,
-        probability: 0.25
-      }
-    ]
-  },
-  "Firespit Island": {
-    pokes: [
-      {
-        id: 472,
-        minLevel: 59,
-        maxLevel: 61,
-        probability: 0.25
+        id: 413.3,
+        minLevel: 46,
+        maxLevel: 46,
+        probability: 0.091
       },
       {
-        id: 457,
-        minLevel: 59,
-        maxLevel: 61,
-        probability: 0.25
-      },
-      {
-        id: 402,
-        minLevel: 59,
-        maxLevel: 61,
-        probability: 0.25
-      },
-      {
-        id: 101,
-        minLevel: 59,
-        maxLevel: 61,
-        probability: 0.25
-      }
-    ]
-  },
-  "Gym - Arcanine": {
-    type: "gym",
-    name: "Gym - Arcanine",
-    requirements: {
-      earnBadge: {
-        badgeCount: 67,
-        name: "Arcanine Badge"
-      }
-    }
-  },
-  "Seagrass Haven": {
-    pokes: [
-      {
-        id: 155,
-        minLevel: 62,
-        maxLevel: 64,
-        probability: 0.2
-      },
-      {
-        id: 156,
-        minLevel: 62,
-        maxLevel: 64,
-        probability: 0.2
-      },
-      {
-        id: 723,
-        minLevel: 62,
-        maxLevel: 64,
-        probability: 0.2
-      },
-      {
-        id: 399,
-        minLevel: 62,
-        maxLevel: 64,
-        probability: 0.2
-      },
-      {
-        id: 397,
-        minLevel: 62,
-        maxLevel: 64,
-        probability: 0.2
-      }
-    ]
-  },
-  "Wayward Cave": {
-    pokes: [
-      {
-        id: 501,
-        minLevel: 64,
+        id: 433,
+        minLevel: 49,
         maxLevel: 66,
-        probability: 0.0989
-      },
-      {
-        id: 724,
-        minLevel: 64,
-        maxLevel: 66,
-        probability: 0.0989
-      },
-      {
-        id: 267,
-        minLevel: 64,
-        maxLevel: 66,
-        probability: 0.0989
-      },
-      {
-        id: 404,
-        minLevel: 64,
-        maxLevel: 66,
-        probability: 0.0989
-      },
-      {
-        id: 95,
-        minLevel: 64,
-        maxLevel: 66,
-        probability: 0.0989
+        probability: 0.091
       },
       {
         id: 436,
-        minLevel: 64,
-        maxLevel: 66,
-        probability: 0.0989
+        minLevel: 29,
+        maxLevel: 32,
+        probability: 0.091
       },
       {
-        id: 74,
-        minLevel: 64,
-        maxLevel: 66,
-        probability: 0.0989
+        id: 437,
+        minLevel: 29,
+        maxLevel: 57,
+        probability: 0.091
       },
       {
-        id: 396,
-        minLevel: 64,
-        maxLevel: 66,
-        probability: 0.0989
-      },
-      {
-        id: 265,
-        minLevel: 64,
-        maxLevel: 66,
-        probability: 0.0989
-      },
-      {
-        id: 41,
-        minLevel: 64,
-        maxLevel: 66,
-        probability: 0.1099
-      }
-    ]
-  },
-  "Coronet Highlands": {
-    pokes: [
-      {
-        id: 413,
-        minLevel: 65,
-        maxLevel: 67,
-        probability: 0.33
-      },
-      {
-        id: 570,
-        minLevel: 65,
-        maxLevel: 67,
-        probability: 0.33
-      },
-      {
-        id: 423,
-        minLevel: 65,
-        maxLevel: 67,
-        probability: 0.34
-      }
-    ]
-  },
-  "Clamberclaw Cliffs": {
-    pokes: [
-      {
-        id: 94,
-        minLevel: 67,
-        maxLevel: 69,
-        probability: 0.3334
-      },
-      {
-        id: 417,
-        minLevel: 67,
-        maxLevel: 69,
-        probability: 0.3333
-      },
-      {
-        id: 436,
-        minLevel: 67,
-        maxLevel: 69,
-        probability: 0.3333
-      }
-    ]
-  },
-  "Celestica Trail": {
-    pokes: [
-      {
-        id: 134,
-        minLevel: 68,
+        id: 480,
+        minLevel: 70,
         maxLevel: 70,
-        probability: 0.2
+        probability: 0.091
       },
       {
-        id: 200,
-        minLevel: 68,
-        maxLevel: 70,
-        probability: 0.2
-      },
-      {
-        id: 35,
-        minLevel: 68,
-        maxLevel: 70,
-        probability: 0.2
-      },
-      {
-        id: 207,
-        minLevel: 68,
-        maxLevel: 70,
-        probability: 0.2
-      },
-      {
-        id: 72,
-        minLevel: 68,
-        maxLevel: 70,
-        probability: 0.2
-      }
-    ]
-  },
-  "Gym - Warden Ingo": {
-    type: "gym",
-    name: "Gym - Warden Ingo",
-    requirements: {
-      earnBadge: {
-        badgeCount: 68,
-        name: "Warden Ingo Badge"
-      }
-    }
-  },
-  "Celestica Ruins": {
-    pokes: [
-      {
-        id: 392,
-        minLevel: 71,
-        maxLevel: 73,
-        probability: 0.3334
-      },
-      {
-        id: 157,
-        minLevel: 71,
-        maxLevel: 73,
-        probability: 0.3333
-      },
-      {
-        id: 112,
-        minLevel: 71,
-        maxLevel: 73,
-        probability: 0.3333
-      }
-    ]
-  },
-  "Sacred Plaza": {
-    pokes: [
-      {
-        id: 405,
-        minLevel: 73,
-        maxLevel: 75,
-        probability: 0.2
-      },
-      {
-        id: 706,
-        minLevel: 73,
-        maxLevel: 75,
-        probability: 0.2
-      },
-      {
-        id: 201,
-        minLevel: 73,
-        maxLevel: 75,
-        probability: 0.2
-      },
-      {
-        id: 432,
-        minLevel: 73,
-        maxLevel: 75,
-        probability: 0.2
-      },
-      {
-        id: 130,
-        minLevel: 73,
-        maxLevel: 75,
-        probability: 0.2
-      }
-    ]
-  },
-  "Stonetooth Rows": {
-    pokes: [
-      {
-        id: 394,
-        minLevel: 74,
-        maxLevel: 76,
-        probability: 0.2
-      },
-      {
-        id: 185,
-        minLevel: 74,
-        maxLevel: 76,
-        probability: 0.2
-      },
-      {
-        id: 265,
-        minLevel: 74,
-        maxLevel: 76,
-        probability: 0.2
-      },
-      {
-        id: 426,
-        minLevel: 74,
-        maxLevel: 76,
-        probability: 0.2
-      },
-      {
-        id: 705,
-        minLevel: 74,
-        maxLevel: 76,
-        probability: 0.2
-      }
-    ]
-  },
-  "Primeval Grotto": {
-    pokes: [
-      {
-        id: 467,
-        minLevel: 76,
-        maxLevel: 78,
-        probability: 0.17
-      },
-      {
-        id: 503,
-        minLevel: 76,
-        maxLevel: 78,
-        probability: 0.17
-      },
-      {
-        id: 431,
-        minLevel: 76,
-        maxLevel: 78,
-        probability: 0.17
+        id: 550.3,
+        minLevel: 49,
+        maxLevel: 65,
+        probability: 0.091
       },
       {
         id: 627,
-        minLevel: 76,
-        maxLevel: 78,
-        probability: 0.17
+        minLevel: 24,
+        maxLevel: 58,
+        probability: 0.091
       },
       {
-        id: 59,
-        minLevel: 76,
-        maxLevel: 78,
-        probability: 0.17
-      },
-      {
-        id: 422,
-        minLevel: 76,
-        maxLevel: 78,
-        probability: 0.15
+        id: 628,
+        minLevel: 49,
+        maxLevel: 57,
+        probability: 0.091
       }
     ]
   },
-  "Gym - Electrode": {
-    type: "gym",
-    name: "Gym - Electrode",
-    requirements: {
-      earnBadge: {
-        badgeCount: 69,
-        name: "Electrode Badge"
-      }
-    }
-  },
-  "Coronet Highlands Fishing Spot": {
+  "Icebound Falls (Alabaster Icelands)": {
     pokes: [
       {
-        id: 156,
-        minLevel: 79,
-        maxLevel: 81,
-        probability: 0.14
+        id: 66,
+        minLevel: 24,
+        maxLevel: 27,
+        probability: 0.2
       },
       {
-        id: 503,
-        minLevel: 79,
-        maxLevel: 81,
-        probability: 0.14
+        id: 67,
+        minLevel: 24,
+        maxLevel: 52,
+        probability: 0.2
       },
       {
-        id: 404,
-        minLevel: 79,
-        maxLevel: 81,
-        probability: 0.14
+        id: 169,
+        minLevel: 49,
+        maxLevel: 52,
+        probability: 0.2
       },
       {
-        id: 396,
-        minLevel: 79,
-        maxLevel: 81,
-        probability: 0.14
-      },
-      {
-        id: 403,
-        minLevel: 79,
-        maxLevel: 81,
-        probability: 0.14
-      },
-      {
-        id: 400,
-        minLevel: 79,
-        maxLevel: 81,
-        probability: 0.14
-      },
-      {
-        id: 266,
-        minLevel: 79,
-        maxLevel: 81,
-        probability: 0.16
-      }
-    ]
-  },
-  "Cloudpool Ridge North": {
-    pokes: [
-      {
-        id: 156,
-        minLevel: 80,
-        maxLevel: 82,
-        probability: 0.25
-      },
-      {
-        id: 503,
-        minLevel: 80,
-        maxLevel: 82,
-        probability: 0.25
-      },
-      {
-        id: 399,
-        minLevel: 80,
-        maxLevel: 82,
-        probability: 0.25
-      },
-      {
-        id: 403,
-        minLevel: 80,
-        maxLevel: 82,
-        probability: 0.25
-      }
-    ]
-  },
-  "Cloudpool Ridge South": {
-    pokes: [
-      {
-        id: 405,
-        minLevel: 80,
-        maxLevel: 82,
-        probability: 0.33
-      },
-      {
-        id: 157,
-        minLevel: 80,
-        maxLevel: 82,
-        probability: 0.33
-      },
-      {
-        id: 396,
-        minLevel: 80,
-        maxLevel: 82,
-        probability: 0.34
-      }
-    ]
-  },
-  "Fabled Spring": {
-    pokes: [
-      {
-        id: 387,
-        minLevel: 80,
-        maxLevel: 82,
-        probability: 0.25
-      },
-      {
-        id: 73,
-        minLevel: 80,
-        maxLevel: 82,
-        probability: 0.25
+        id: 239,
+        minLevel: 26,
+        maxLevel: 29,
+        probability: 0.2
       },
       {
         id: 447,
-        minLevel: 80,
-        maxLevel: 82,
-        probability: 0.25
-      },
-      {
-        id: 268,
-        minLevel: 80,
-        maxLevel: 82,
-        probability: 0.25
+        minLevel: 24,
+        maxLevel: 56,
+        probability: 0.2
       }
     ]
   },
-  "Bonechill Wastes North": {
+  "Arena's Approach (Alabaster Icelands)": {
     pokes: [
       {
-        id: 65,
-        minLevel: 80,
-        maxLevel: 82,
-        probability: 0.25
+        id: 66,
+        minLevel: 24,
+        maxLevel: 27,
+        probability: 0.125
       },
       {
-        id: 465,
-        minLevel: 80,
-        maxLevel: 82,
-        probability: 0.25
+        id: 67,
+        minLevel: 24,
+        maxLevel: 52,
+        probability: 0.125
       },
       {
-        id: 129,
-        minLevel: 80,
-        maxLevel: 82,
-        probability: 0.25
+        id: 207,
+        minLevel: 24,
+        maxLevel: 56,
+        probability: 0.125
       },
       {
-        id: 55,
-        minLevel: 80,
-        maxLevel: 82,
-        probability: 0.25
+        id: 239,
+        minLevel: 26,
+        maxLevel: 29,
+        probability: 0.125
+      },
+      {
+        id: 355,
+        minLevel: 20,
+        maxLevel: 52,
+        probability: 0.125
+      },
+      {
+        id: 356,
+        minLevel: 20,
+        maxLevel: 56,
+        probability: 0.125
+      },
+      {
+        id: 424,
+        minLevel: 21,
+        maxLevel: 62,
+        probability: 0.125
+      },
+      {
+        id: 712,
+        minLevel: 21,
+        maxLevel: 36,
+        probability: 0.125
       }
     ]
   },
-  "Bonechill Wastes South": {
+  "Snowfall Hot Spring (Alabaster Icelands)": {
     pokes: [
       {
-        id: 26,
-        minLevel: 80,
-        maxLevel: 82,
-        probability: 0.25
+        id: 66,
+        minLevel: 24,
+        maxLevel: 27,
+        probability: 0.112
+      },
+      {
+        id: 67,
+        minLevel: 24,
+        maxLevel: 52,
+        probability: 0.111
+      },
+      {
+        id: 108,
+        minLevel: 47,
+        maxLevel: 62,
+        probability: 0.111
+      },
+      {
+        id: 143,
+        minLevel: 47,
+        maxLevel: 50,
+        probability: 0.111
       },
       {
         id: 190,
-        minLevel: 80,
-        maxLevel: 82,
-        probability: 0.25
-      },
-      {
-        id: 361,
-        minLevel: 80,
-        maxLevel: 82,
-        probability: 0.25
-      },
-      {
-        id: 446,
-        minLevel: 80,
-        maxLevel: 82,
-        probability: 0.25
-      }
-    ]
-  },
-  "Glacier Terrace": {
-    pokes: [
-      {
-        id: 135,
-        minLevel: 80,
-        maxLevel: 82,
-        probability: 0.33
-      },
-      {
-        id: 396,
-        minLevel: 80,
-        maxLevel: 82,
-        probability: 0.33
-      },
-      {
-        id: 77,
-        minLevel: 80,
-        maxLevel: 82,
-        probability: 0.34
-      }
-    ]
-  },
-  "Heart's Crag": {
-    pokes: [
-      {
-        id: 478,
-        minLevel: 80,
-        maxLevel: 82,
-        probability: 0.25
-      },
-      {
-        id: 399,
-        minLevel: 80,
-        maxLevel: 82,
-        probability: 0.25
-      },
-      {
-        id: 455,
-        minLevel: 80,
-        maxLevel: 82,
-        probability: 0.25
+        minLevel: 21,
+        maxLevel: 62,
+        probability: 0.111
       },
       {
         id: 427,
-        minLevel: 80,
-        maxLevel: 82,
-        probability: 0.25
+        minLevel: 21,
+        maxLevel: 27,
+        probability: 0.111
+      },
+      {
+        id: 428,
+        minLevel: 21,
+        maxLevel: 50,
+        probability: 0.111
+      },
+      {
+        id: 446,
+        minLevel: 24,
+        maxLevel: 58,
+        probability: 0.111
+      },
+      {
+        id: 447,
+        minLevel: 24,
+        maxLevel: 56,
+        probability: 0.111
       }
     ]
   },
-  "Snowpoint Temple": {
+  "Bonechill Wastes (Alabaster Icelands)": {
     pokes: [
       {
-        id: 393,
-        minLevel: 80,
-        maxLevel: 82,
-        probability: 0.2049
+        id: 92,
+        minLevel: 21,
+        maxLevel: 24,
+        probability: 0.1
       },
       {
-        id: 429,
-        minLevel: 80,
-        maxLevel: 82,
-        probability: 0.2048
+        id: 93,
+        minLevel: 21,
+        maxLevel: 65,
+        probability: 0.1
       },
       {
-        id: 95,
-        minLevel: 80,
-        maxLevel: 82,
-        probability: 0.2048
+        id: 200,
+        minLevel: 21,
+        maxLevel: 62,
+        probability: 0.1
       },
       {
-        id: 215,
-        minLevel: 80,
-        maxLevel: 82,
-        probability: 0.2048
+        id: 361,
+        minLevel: 21,
+        maxLevel: 41,
+        probability: 0.1
+      },
+      {
+        id: 412.3,
+        minLevel: 18,
+        maxLevel: 18,
+        probability: 0.1
+      },
+      {
+        id: 413.3,
+        minLevel: 46,
+        maxLevel: 46,
+        probability: 0.1
+      },
+      {
+        id: 427,
+        minLevel: 21,
+        maxLevel: 27,
+        probability: 0.1
+      },
+      {
+        id: 428,
+        minLevel: 21,
+        maxLevel: 50,
+        probability: 0.1
+      },
+      {
+        id: 570,
+        minLevel: 21,
+        maxLevel: 29,
+        probability: 0.1
+      },
+      {
+        id: 641.1,
+        minLevel: 70,
+        maxLevel: 70,
+        probability: 0.1
+      }
+    ]
+  },
+  "Avalanche Slopes (Alabaster Icelands)": {
+    pokes: [
+      {
+        id: 108,
+        minLevel: 47,
+        maxLevel: 62,
+        probability: 0.077
+      },
+      {
+        id: 113,
+        minLevel: 54,
+        maxLevel: 62,
+        probability: 0.071
+      },
+      {
+        id: 133,
+        minLevel: 21,
+        maxLevel: 62,
+        probability: 0.071
+      },
+      {
+        id: 242,
+        minLevel: 59,
+        maxLevel: 62,
+        probability: 0.071
+      },
+      {
+        id: 355,
+        minLevel: 20,
+        maxLevel: 52,
+        probability: 0.071
+      },
+      {
+        id: 356,
+        minLevel: 20,
+        maxLevel: 56,
+        probability: 0.071
+      },
+      {
+        id: 361,
+        minLevel: 21,
+        maxLevel: 41,
+        probability: 0.071
+      },
+      {
+        id: 412.3,
+        minLevel: 18,
+        maxLevel: 18,
+        probability: 0.071
+      },
+      {
+        id: 413.3,
+        minLevel: 46,
+        maxLevel: 46,
+        probability: 0.071
+      },
+      {
+        id: 424,
+        minLevel: 21,
+        maxLevel: 62,
+        probability: 0.071
+      },
+      {
+        id: 440,
+        minLevel: 51,
+        maxLevel: 62,
+        probability: 0.071
+      },
+      {
+        id: 443,
+        minLevel: 20,
+        maxLevel: 23,
+        probability: 0.071
+      },
+      {
+        id: 444,
+        minLevel: 20,
+        maxLevel: 47,
+        probability: 0.071
+      },
+      {
+        id: 463,
+        minLevel: 59,
+        maxLevel: 62,
+        probability: 0.071
+      }
+    ]
+  },
+  "Avalugg's Legacy (Alabaster Icelands)": {
+    pokes: [
+      {
+        id: 133,
+        minLevel: 21,
+        maxLevel: 62,
+        probability: 0.112
+      },
+      {
+        id: 361,
+        minLevel: 21,
+        maxLevel: 41,
+        probability: 0.111
+      },
+      {
+        id: 399,
+        minLevel: 11,
+        maxLevel: 14,
+        probability: 0.111
+      },
+      {
+        id: 400,
+        minLevel: 11,
+        maxLevel: 54,
+        probability: 0.111
       },
       {
         id: 425,
-        minLevel: 80,
-        maxLevel: 82,
-        probability: 0.1807
+        minLevel: 11,
+        maxLevel: 27,
+        probability: 0.111
+      },
+      {
+        id: 426,
+        minLevel: 11,
+        maxLevel: 56,
+        probability: 0.111
+      },
+      {
+        id: 459,
+        minLevel: 24,
+        maxLevel: 39,
+        probability: 0.111
+      },
+      {
+        id: 712,
+        minLevel: 21,
+        maxLevel: 36,
+        probability: 0.111
+      },
+      {
+        id: 713,
+        minLevel: 21,
+        maxLevel: 53,
+        probability: 0.111
       }
     ]
   },
-  "Arena's Approach": {
+  "Whiteout Valley (Alabaster Icelands)": {
     pokes: [
       {
-        id: 475,
-        minLevel: 80,
-        maxLevel: 82,
-        probability: 0.1628
+        id: 190,
+        minLevel: 21,
+        maxLevel: 62,
+        probability: 0.5
       },
       {
-        id: 68,
-        minLevel: 80,
-        maxLevel: 82,
-        probability: 0.1628
+        id: 361,
+        minLevel: 21,
+        maxLevel: 41,
+        probability: 0.5
+      }
+    ]
+  },
+  "Glacier Terrace (Alabaster Icelands)": {
+    pokes: [
+      {
+        id: 190,
+        minLevel: 21,
+        maxLevel: 62,
+        probability: 0.1
       },
       {
-        id: 221,
-        minLevel: 80,
-        maxLevel: 82,
-        probability: 0.1628
+        id: 207,
+        minLevel: 24,
+        maxLevel: 56,
+        probability: 0.1
       },
       {
-        id: 468,
-        minLevel: 80,
-        maxLevel: 82,
-        probability: 0.1628
+        id: 234,
+        minLevel: 49,
+        maxLevel: 57,
+        probability: 0.1
       },
       {
-        id: 420,
-        minLevel: 80,
-        maxLevel: 82,
-        probability: 0.1628
+        id: 412.3,
+        minLevel: 18,
+        maxLevel: 18,
+        probability: 0.1
       },
       {
-        id: 363,
-        minLevel: 80,
-        maxLevel: 82,
-        probability: 0.186
+        id: 413.3,
+        minLevel: 46,
+        maxLevel: 46,
+        probability: 0.1
+      },
+      {
+        id: 425,
+        minLevel: 11,
+        maxLevel: 27,
+        probability: 0.1
+      },
+      {
+        id: 426,
+        minLevel: 11,
+        maxLevel: 56,
+        probability: 0.1
+      },
+      {
+        id: 431,
+        minLevel: 34,
+        maxLevel: 37,
+        probability: 0.1
+      },
+      {
+        id: 432,
+        minLevel: 34,
+        maxLevel: 37,
+        probability: 0.1
+      },
+      {
+        id: 459,
+        minLevel: 24,
+        maxLevel: 39,
+        probability: 0.1
+      }
+    ]
+  },
+  "Heart's Crag (Alabaster Icelands)": {
+    pokes: [
+      {
+        id: 190,
+        minLevel: 21,
+        maxLevel: 62,
+        probability: 0.125
+      },
+      {
+        id: 280,
+        minLevel: 16,
+        maxLevel: 19,
+        probability: 0.125
+      },
+      {
+        id: 281,
+        minLevel: 16,
+        maxLevel: 29,
+        probability: 0.125
+      },
+      {
+        id: 424,
+        minLevel: 21,
+        maxLevel: 62,
+        probability: 0.125
+      },
+      {
+        id: 425,
+        minLevel: 11,
+        maxLevel: 27,
+        probability: 0.125
+      },
+      {
+        id: 426,
+        minLevel: 11,
+        maxLevel: 56,
+        probability: 0.125
+      },
+      {
+        id: 550.3,
+        minLevel: 49,
+        maxLevel: 65,
+        probability: 0.125
+      },
+      {
+        id: 627,
+        minLevel: 24,
+        maxLevel: 58,
+        probability: 0.125
       }
     ]
   },
@@ -1848,1313 +612,3102 @@ export const hisuiRoutes = {
     name: "Gym - Avalugg",
     requirements: {
       earnBadge: {
-        badgeCount: 70,
-        name: "Avalugg Badge"
+            badgeCount: 70,
+            name: "Avalugg Badge"
       }
-    }
-  },
-  "Alabaster Icelands Fishing Spot": {
+}
+      },
+  "Windbreak Stand (Cobalt Coastlands)": {
     pokes: [
       {
-        id: 398,
-        minLevel: 80,
-        maxLevel: 82,
-        probability: 0.33
+        id: 25,
+        minLevel: 20,
+        maxLevel: 23,
+        probability: 0.165
       },
       {
-        id: 399,
-        minLevel: 80,
-        maxLevel: 82,
-        probability: 0.33
+        id: 46,
+        minLevel: 20,
+        maxLevel: 23,
+        probability: 0.167
       },
       {
-        id: 397,
-        minLevel: 80,
-        maxLevel: 82,
-        probability: 0.34
+        id: 47,
+        minLevel: 20,
+        maxLevel: 44,
+        probability: 0.167
+      },
+      {
+        id: 58,
+        minLevel: 29,
+        maxLevel: 44,
+        probability: 0.167
+      },
+      {
+        id: 75,
+        minLevel: 26,
+        maxLevel: 29,
+        probability: 0.167
+      },
+      {
+        id: 234,
+        minLevel: 29,
+        maxLevel: 44,
+        probability: 0.167
       }
     ]
   },
-  "Whiteout Valley": {
+  "Veilstone Cape (Cobalt Coastlands)": {
     pokes: [
       {
-        id: 211,
-        minLevel: 80,
-        maxLevel: 82,
-        probability: 0.33
+        id: 37,
+        minLevel: 29,
+        maxLevel: 39,
+        probability: 0.112
+      },
+      {
+        id: 58,
+        minLevel: 29,
+        maxLevel: 44,
+        probability: 0.111
+      },
+      {
+        id: 74,
+        minLevel: 1,
+        maxLevel: 1,
+        probability: 0.111
+      },
+      {
+        id: 198,
+        minLevel: 20,
+        maxLevel: 44,
+        probability: 0.111
       },
       {
         id: 267,
-        minLevel: 80,
-        maxLevel: 82,
-        probability: 0.33
+        minLevel: 29,
+        maxLevel: 32,
+        probability: 0.111
       },
       {
-        id: 412,
-        minLevel: 80,
-        maxLevel: 82,
-        probability: 0.34
+        id: 269,
+        minLevel: 29,
+        maxLevel: 32,
+        probability: 0.111
+      },
+      {
+        id: 412.3,
+        minLevel: 16,
+        maxLevel: 19,
+        probability: 0.111
+      },
+      {
+        id: 413.3,
+        minLevel: 41,
+        maxLevel: 41,
+        probability: 0.111
+      },
+      {
+        id: 431,
+        minLevel: 27,
+        maxLevel: 37,
+        probability: 0.111
       }
     ]
   },
-  "Etertime Storm": {
+  "Bathers' Lagoon (Cobalt Coastlands)": {
     pokes: [
       {
-        id: 155,
-        minLevel: 80,
-        maxLevel: 82,
-        probability: 0.2
+        id: 54,
+        minLevel: 29,
+        maxLevel: 32,
+        probability: 0.1
       },
       {
-        id: 723,
-        minLevel: 80,
-        maxLevel: 82,
-        probability: 0.2
+        id: 74,
+        minLevel: 1,
+        maxLevel: 1,
+        probability: 0.1
       },
       {
-        id: 399,
-        minLevel: 80,
-        maxLevel: 82,
-        probability: 0.2
+        id: 175,
+        minLevel: 10,
+        maxLevel: 35,
+        probability: 0.1
       },
       {
-        id: 265,
-        minLevel: 80,
-        maxLevel: 82,
-        probability: 0.2
+        id: 412.3,
+        minLevel: 16,
+        maxLevel: 19,
+        probability: 0.1
+      },
+      {
+        id: 413.3,
+        minLevel: 41,
+        maxLevel: 41,
+        probability: 0.1
+      },
+      {
+        id: 418,
+        minLevel: 22,
+        maxLevel: 25,
+        probability: 0.1
+      },
+      {
+        id: 419,
+        minLevel: 22,
+        maxLevel: 33,
+        probability: 0.1
+      },
+      {
+        id: 425,
+        minLevel: 10,
+        maxLevel: 28,
+        probability: 0.1
+      },
+      {
+        id: 426,
+        minLevel: 10,
+        maxLevel: 35,
+        probability: 0.1
+      },
+      {
+        id: 430,
+        minLevel: 27,
+        maxLevel: 37,
+        probability: 0.1
+      }
+    ]
+  },
+  "Castaway Shore (Cobalt Coastlands)": {
+    pokes: [
+      {
+        id: 66,
+        minLevel: 24,
+        maxLevel: 27,
+        probability: 0.334
+      },
+      {
+        id: 223,
+        minLevel: 21,
+        maxLevel: 24,
+        probability: 0.333
+      },
+      {
+        id: 451,
+        minLevel: 27,
+        maxLevel: 34,
+        probability: 0.333
+      }
+    ]
+  },
+  "Lunker's Lair (Cobalt Coastlands)": {
+    pokes: [
+      {
+        id: 72,
+        minLevel: 24,
+        maxLevel: 29,
+        probability: 0.5
+      },
+      {
+        id: 211,
+        minLevel: 24,
+        maxLevel: 40,
+        probability: 0.5
+      }
+    ]
+  },
+  "Seagrass Haven (Cobalt Coastlands)": {
+    pokes: [
+      {
+        id: 72,
+        minLevel: 24,
+        maxLevel: 29,
+        probability: 0.334
+      },
+      {
+        id: 422,
+        minLevel: 26,
+        maxLevel: 34,
+        probability: 0.333
+      },
+      {
+        id: 456,
+        minLevel: 24,
+        maxLevel: 30,
+        probability: 0.333
+      }
+    ]
+  },
+  "Islespy Shore (Cobalt Coastlands)": {
+    pokes: [
+      {
+        id: 72,
+        minLevel: 24,
+        maxLevel: 29,
+        probability: 0.142
+      },
+      {
+        id: 75,
+        minLevel: 26,
+        maxLevel: 29,
+        probability: 0.143
+      },
+      {
+        id: 198,
+        minLevel: 20,
+        maxLevel: 44,
+        probability: 0.143
+      },
+      {
+        id: 211,
+        minLevel: 24,
+        maxLevel: 40,
+        probability: 0.143
+      },
+      {
+        id: 363,
+        minLevel: 24,
+        maxLevel: 31,
+        probability: 0.143
+      },
+      {
+        id: 364,
+        minLevel: 28,
+        maxLevel: 43,
+        probability: 0.143
+      },
+      {
+        id: 550.3,
+        minLevel: 24,
+        maxLevel: 38,
+        probability: 0.143
+      }
+    ]
+  },
+  "Ginkgo Landing (Cobalt Coastlands)": {
+    pokes: [
+      {
+        id: 74,
+        minLevel: 1,
+        maxLevel: 1,
+        probability: 0.1
+      },
+      {
+        id: 363,
+        minLevel: 24,
+        maxLevel: 31,
+        probability: 0.1
+      },
+      {
+        id: 396,
+        minLevel: 10,
+        maxLevel: 13,
+        probability: 0.1
       },
       {
         id: 397,
-        minLevel: 80,
-        maxLevel: 82,
+        minLevel: 10,
+        maxLevel: 33,
+        probability: 0.1
+      },
+      {
+        id: 412.3,
+        minLevel: 16,
+        maxLevel: 19,
+        probability: 0.1
+      },
+      {
+        id: 413.3,
+        minLevel: 41,
+        maxLevel: 41,
+        probability: 0.1
+      },
+      {
+        id: 425,
+        minLevel: 10,
+        maxLevel: 28,
+        probability: 0.1
+      },
+      {
+        id: 426,
+        minLevel: 10,
+        maxLevel: 35,
+        probability: 0.1
+      },
+      {
+        id: 451,
+        minLevel: 27,
+        maxLevel: 34,
+        probability: 0.1
+      },
+      {
+        id: 458,
+        minLevel: 24,
+        maxLevel: 35,
+        probability: 0.1
+      }
+    ]
+  },
+  "Aipom Hill (Cobalt Coastlands)": {
+    pokes: [
+      {
+        id: 74,
+        minLevel: 1,
+        maxLevel: 1,
+        probability: 0.2
+      },
+      {
+        id: 190,
+        minLevel: 29,
+        maxLevel: 44,
+        probability: 0.2
+      },
+      {
+        id: 415,
+        minLevel: 17,
+        maxLevel: 20,
+        probability: 0.2
+      },
+      {
+        id: 418,
+        minLevel: 22,
+        maxLevel: 25,
+        probability: 0.2
+      },
+      {
+        id: 419,
+        minLevel: 22,
+        maxLevel: 33,
         probability: 0.2
       }
     ]
   },
-  "Etertime Citadel": {
+  "Firespit Island (Cobalt Coastlands)": {
     pokes: [
       {
-        id: 493,
-        minLevel: 85,
-        maxLevel: 90,
+        id: 75,
+        minLevel: 26,
+        maxLevel: 29,
         probability: 0.25
       },
       {
-        id: 483,
-        minLevel: 85,
-        maxLevel: 90,
+        id: 126,
+        minLevel: 26,
+        maxLevel: 40,
         probability: 0.25
       },
       {
-        id: 484,
-        minLevel: 85,
-        maxLevel: 90,
+        id: 240,
+        minLevel: 26,
+        maxLevel: 37,
         probability: 0.25
       },
       {
-        id: 487,
-        minLevel: 85,
-        maxLevel: 90,
+        id: 550.3,
+        minLevel: 24,
+        maxLevel: 38,
         probability: 0.25
       }
     ]
   },
+  "Spring Path (Cobalt Coastlands)": {
+    pokes: [
+      {
+        id: 75,
+        minLevel: 26,
+        maxLevel: 29,
+        probability: 0.2
+      },
+      {
+        id: 393,
+        minLevel: 11,
+        maxLevel: 15,
+        probability: 0.2
+      },
+      {
+        id: 394,
+        minLevel: 12,
+        maxLevel: 18,
+        probability: 0.2
+      },
+      {
+        id: 400,
+        minLevel: 12,
+        maxLevel: 44,
+        probability: 0.2
+      },
+      {
+        id: 454,
+        minLevel: 41,
+        maxLevel: 44,
+        probability: 0.2
+      }
+    ]
+  },
+  "Crossing Slope (Cobalt Coastlands)": {
+    pokes: [
+      {
+        id: 114,
+        minLevel: 27,
+        maxLevel: 30,
+        probability: 0.165
+      },
+      {
+        id: 133,
+        minLevel: 27,
+        maxLevel: 30,
+        probability: 0.167
+      },
+      {
+        id: 198,
+        minLevel: 20,
+        maxLevel: 44,
+        probability: 0.167
+      },
+      {
+        id: 412.3,
+        minLevel: 16,
+        maxLevel: 19,
+        probability: 0.167
+      },
+      {
+        id: 413.3,
+        minLevel: 41,
+        maxLevel: 41,
+        probability: 0.167
+      },
+      {
+        id: 431,
+        minLevel: 27,
+        maxLevel: 37,
+        probability: 0.167
+      }
+    ]
+  },
+  "Tranquility Cove (Cobalt Coastlands)": {
+    pokes: [
+      {
+        id: 175,
+        minLevel: 10,
+        maxLevel: 35,
+        probability: 0.1
+      },
+      {
+        id: 176,
+        minLevel: 24,
+        maxLevel: 27,
+        probability: 0.1
+      },
+      {
+        id: 211,
+        minLevel: 24,
+        maxLevel: 40,
+        probability: 0.1
+      },
+      {
+        id: 223,
+        minLevel: 21,
+        maxLevel: 24,
+        probability: 0.1
+      },
+      {
+        id: 226,
+        minLevel: 31,
+        maxLevel: 38,
+        probability: 0.1
+      },
+      {
+        id: 422,
+        minLevel: 26,
+        maxLevel: 34,
+        probability: 0.1
+      },
+      {
+        id: 425,
+        minLevel: 10,
+        maxLevel: 28,
+        probability: 0.1
+      },
+      {
+        id: 426,
+        minLevel: 10,
+        maxLevel: 35,
+        probability: 0.1
+      },
+      {
+        id: 458,
+        minLevel: 24,
+        maxLevel: 35,
+        probability: 0.1
+      },
+      {
+        id: 550.3,
+        minLevel: 24,
+        maxLevel: 38,
+        probability: 0.1
+      }
+    ]
+  },
+  "Hideaway Bay (Cobalt Coastlands)": {
+    pokes: [
+      {
+        id: 190,
+        minLevel: 29,
+        maxLevel: 44,
+        probability: 0.334
+      },
+      {
+        id: 198,
+        minLevel: 20,
+        maxLevel: 44,
+        probability: 0.333
+      },
+      {
+        id: 440,
+        minLevel: 28,
+        maxLevel: 36,
+        probability: 0.333
+      }
+    ]
+  },
+  "Sand's Reach (Cobalt Coastlands)": {
+    pokes: [
+      {
+        id: 223,
+        minLevel: 21,
+        maxLevel: 24,
+        probability: 0.334
+      },
+      {
+        id: 226,
+        minLevel: 31,
+        maxLevel: 38,
+        probability: 0.333
+      },
+      {
+        id: 642.1,
+        minLevel: 70,
+        maxLevel: 70,
+        probability: 0.333
+      }
+    ]
+  },
+  "Deadwood Haunt (Cobalt Coastlands)": {
+    pokes: [
+      {
+        id: 355,
+        minLevel: 29,
+        maxLevel: 35,
+        probability: 0.125
+      },
+      {
+        id: 356,
+        minLevel: 29,
+        maxLevel: 40,
+        probability: 0.125
+      },
+      {
+        id: 396,
+        minLevel: 10,
+        maxLevel: 13,
+        probability: 0.125
+      },
+      {
+        id: 397,
+        minLevel: 10,
+        maxLevel: 33,
+        probability: 0.125
+      },
+      {
+        id: 398,
+        minLevel: 10,
+        maxLevel: 44,
+        probability: 0.125
+      },
+      {
+        id: 425,
+        minLevel: 10,
+        maxLevel: 28,
+        probability: 0.125
+      },
+      {
+        id: 426,
+        minLevel: 10,
+        maxLevel: 35,
+        probability: 0.125
+      },
+      {
+        id: 441,
+        minLevel: 29,
+        maxLevel: 35,
+        probability: 0.125
+      }
+    ]
+  },
+  "Lava Dome Sanctum (Cobalt Coastlands)": {
+    pokes: [
+      {
+        id: 485,
+        minLevel: 70,
+        maxLevel: 70,
+        probability: 1
+      }
+    ]
+  },
+  "Turnback Cave (Cobalt Coastlands)": {
+    pokes: [
+      {
+        id: 487.2,
+        minLevel: 70,
+        maxLevel: 70,
+        probability: 1
+      }
+    ]
+  },
+  "Gym - Arcanine": {
+    type: "gym",
+    name: "Gym - Arcanine",
+    requirements: {
+      earnBadge: {
+            badgeCount: 67,
+            name: "Arcanine Badge"
+      }
+}
+      },
+  "Fabled Spring (Coronet Highlands)": {
+    pokes: [
+      {
+        id: 35,
+        minLevel: 43,
+        maxLevel: 53,
+        probability: 0.112
+      },
+      {
+        id: 129,
+        minLevel: 16,
+        maxLevel: 19,
+        probability: 0.111
+      },
+      {
+        id: 173,
+        minLevel: 43,
+        maxLevel: 50,
+        probability: 0.111
+      },
+      {
+        id: 315,
+        minLevel: 43,
+        maxLevel: 53,
+        probability: 0.111
+      },
+      {
+        id: 406,
+        minLevel: 43,
+        maxLevel: 50,
+        probability: 0.111
+      },
+      {
+        id: 420,
+        minLevel: 1,
+        maxLevel: 1,
+        probability: 0.111
+      },
+      {
+        id: 421,
+        minLevel: 1,
+        maxLevel: 1,
+        probability: 0.111
+      },
+      {
+        id: 462,
+        minLevel: 38,
+        maxLevel: 49,
+        probability: 0.111
+      },
+      {
+        id: 550.3,
+        minLevel: 43,
+        maxLevel: 46,
+        probability: 0.111
+      }
+    ]
+  },
+  "Heavenward Lookout (Coronet Highlands)": {
+    pokes: [
+      {
+        id: 41,
+        minLevel: 18,
+        maxLevel: 21,
+        probability: 0.1
+      },
+      {
+        id: 42,
+        minLevel: 18,
+        maxLevel: 46,
+        probability: 0.1
+      },
+      {
+        id: 46,
+        minLevel: 18,
+        maxLevel: 23,
+        probability: 0.1
+      },
+      {
+        id: 47,
+        minLevel: 18,
+        maxLevel: 23,
+        probability: 0.1
+      },
+      {
+        id: 75,
+        minLevel: 18,
+        maxLevel: 48,
+        probability: 0.1
+      },
+      {
+        id: 193,
+        minLevel: 18,
+        maxLevel: 30,
+        probability: 0.1
+      },
+      {
+        id: 404,
+        minLevel: 11,
+        maxLevel: 29,
+        probability: 0.1
+      },
+      {
+        id: 412.2,
+        minLevel: 1,
+        maxLevel: 1,
+        probability: 0.1
+      },
+      {
+        id: 413.2,
+        minLevel: 1,
+        maxLevel: 1,
+        probability: 0.1
+      },
+      {
+        id: 469,
+        minLevel: 18,
+        maxLevel: 42,
+        probability: 0.1
+      }
+    ]
+  },
+  "Wayward Cave (Coronet Highlands)": {
+    pokes: [
+      {
+        id: 41,
+        minLevel: 18,
+        maxLevel: 21,
+        probability: 0.2
+      },
+      {
+        id: 42,
+        minLevel: 18,
+        maxLevel: 46,
+        probability: 0.2
+      },
+      {
+        id: 339,
+        minLevel: 1,
+        maxLevel: 1,
+        probability: 0.2
+      },
+      {
+        id: 340,
+        minLevel: 1,
+        maxLevel: 1,
+        probability: 0.2
+      },
+      {
+        id: 443,
+        minLevel: 20,
+        maxLevel: 23,
+        probability: 0.2
+      }
+    ]
+  },
+  "Wayward Wood (Coronet Highlands)": {
+    pokes: [
+      {
+        id: 46,
+        minLevel: 18,
+        maxLevel: 23,
+        probability: 0.165
+      },
+      {
+        id: 47,
+        minLevel: 18,
+        maxLevel: 23,
+        probability: 0.167
+      },
+      {
+        id: 54,
+        minLevel: 18,
+        maxLevel: 32,
+        probability: 0.167
+      },
+      {
+        id: 55,
+        minLevel: 18,
+        maxLevel: 32,
+        probability: 0.167
+      },
+      {
+        id: 214,
+        minLevel: 35,
+        maxLevel: 44,
+        probability: 0.167
+      },
+      {
+        id: 234,
+        minLevel: 18,
+        maxLevel: 21,
+        probability: 0.167
+      }
+    ]
+  },
+  "Lonely Spring (Coronet Highlands)": {
+    pokes: [
+      {
+        id: 54,
+        minLevel: 18,
+        maxLevel: 32,
+        probability: 0.2
+      },
+      {
+        id: 55,
+        minLevel: 18,
+        maxLevel: 32,
+        probability: 0.2
+      },
+      {
+        id: 420,
+        minLevel: 1,
+        maxLevel: 1,
+        probability: 0.2
+      },
+      {
+        id: 421,
+        minLevel: 1,
+        maxLevel: 1,
+        probability: 0.2
+      },
+      {
+        id: 455,
+        minLevel: 37,
+        maxLevel: 40,
+        probability: 0.2
+      }
+    ]
+  },
+  "Bolderoll Ravine (Coronet Highlands)": {
+    pokes: [
+      {
+        id: 66,
+        minLevel: 21,
+        maxLevel: 27,
+        probability: 0.165
+      },
+      {
+        id: 67,
+        minLevel: 21,
+        maxLevel: 27,
+        probability: 0.167
+      },
+      {
+        id: 74,
+        minLevel: 18,
+        maxLevel: 24,
+        probability: 0.167
+      },
+      {
+        id: 75,
+        minLevel: 18,
+        maxLevel: 48,
+        probability: 0.167
+      },
+      {
+        id: 92,
+        minLevel: 21,
+        maxLevel: 24,
+        probability: 0.167
+      },
+      {
+        id: 93,
+        minLevel: 21,
+        maxLevel: 46,
+        probability: 0.167
+      }
+    ]
+  },
+  "Cloudcap Pass (Coronet Highlands)": {
+    pokes: [
+      {
+        id: 66,
+        minLevel: 21,
+        maxLevel: 27,
+        probability: 0.165
+      },
+      {
+        id: 67,
+        minLevel: 21,
+        maxLevel: 27,
+        probability: 0.167
+      },
+      {
+        id: 125,
+        minLevel: 53,
+        maxLevel: 64,
+        probability: 0.167
+      },
+      {
+        id: 207,
+        minLevel: 37,
+        maxLevel: 56,
+        probability: 0.167
+      },
+      {
+        id: 239,
+        minLevel: 53,
+        maxLevel: 61,
+        probability: 0.167
+      },
+      {
+        id: 404,
+        minLevel: 11,
+        maxLevel: 29,
+        probability: 0.167
+      }
+    ]
+  },
+  "Clamberclaw Cliffs (Coronet Highlands)": {
+    pokes: [
+      {
+        id: 74,
+        minLevel: 18,
+        maxLevel: 24,
+        probability: 0.142
+      },
+      {
+        id: 75,
+        minLevel: 18,
+        maxLevel: 48,
+        probability: 0.143
+      },
+      {
+        id: 207,
+        minLevel: 37,
+        maxLevel: 56,
+        probability: 0.143
+      },
+      {
+        id: 436,
+        minLevel: 29,
+        maxLevel: 32,
+        probability: 0.143
+      },
+      {
+        id: 443,
+        minLevel: 20,
+        maxLevel: 23,
+        probability: 0.143
+      },
+      {
+        id: 462,
+        minLevel: 38,
+        maxLevel: 49,
+        probability: 0.143
+      },
+      {
+        id: 491,
+        minLevel: 70,
+        maxLevel: 70,
+        probability: 0.143
+      }
+    ]
+  },
+  "Celestica Ruins (Coronet Highlands)": {
+    pokes: [
+      {
+        id: 74,
+        minLevel: 18,
+        maxLevel: 24,
+        probability: 0.087
+      },
+      {
+        id: 75,
+        minLevel: 18,
+        maxLevel: 48,
+        probability: 0.083
+      },
+      {
+        id: 92,
+        minLevel: 21,
+        maxLevel: 24,
+        probability: 0.083
+      },
+      {
+        id: 93,
+        minLevel: 21,
+        maxLevel: 46,
+        probability: 0.083
+      },
+      {
+        id: 185,
+        minLevel: 39,
+        maxLevel: 49,
+        probability: 0.083
+      },
+      {
+        id: 200,
+        minLevel: 21,
+        maxLevel: 61,
+        probability: 0.083
+      },
+      {
+        id: 207,
+        minLevel: 37,
+        maxLevel: 56,
+        probability: 0.083
+      },
+      {
+        id: 299,
+        minLevel: 39,
+        maxLevel: 56,
+        probability: 0.083
+      },
+      {
+        id: 412.2,
+        minLevel: 1,
+        maxLevel: 1,
+        probability: 0.083
+      },
+      {
+        id: 413.2,
+        minLevel: 1,
+        maxLevel: 1,
+        probability: 0.083
+      },
+      {
+        id: 436,
+        minLevel: 29,
+        maxLevel: 32,
+        probability: 0.083
+      },
+      {
+        id: 438,
+        minLevel: 44,
+        maxLevel: 46,
+        probability: 0.083
+      }
+    ]
+  },
+  "Sacred Plaza (Coronet Highlands)": {
+    pokes: [
+      {
+        id: 92,
+        minLevel: 21,
+        maxLevel: 24,
+        probability: 0.112
+      },
+      {
+        id: 93,
+        minLevel: 21,
+        maxLevel: 46,
+        probability: 0.111
+      },
+      {
+        id: 100,
+        minLevel: 21,
+        maxLevel: 50,
+        probability: 0.111
+      },
+      {
+        id: 111,
+        minLevel: 21,
+        maxLevel: 41,
+        probability: 0.111
+      },
+      {
+        id: 112,
+        minLevel: 21,
+        maxLevel: 52,
+        probability: 0.111
+      },
+      {
+        id: 200,
+        minLevel: 21,
+        maxLevel: 61,
+        probability: 0.111
+      },
+      {
+        id: 404,
+        minLevel: 11,
+        maxLevel: 29,
+        probability: 0.111
+      },
+      {
+        id: 433,
+        minLevel: 50,
+        maxLevel: 56,
+        probability: 0.111
+      },
+      {
+        id: 479,
+        minLevel: 21,
+        maxLevel: 50,
+        probability: 0.111
+      }
+    ]
+  },
+  "Celestica Trail (Coronet Highlands)": {
+    pokes: [
+      {
+        id: 95,
+        minLevel: 43,
+        maxLevel: 52,
+        probability: 0.1
+      },
+      {
+        id: 111,
+        minLevel: 21,
+        maxLevel: 41,
+        probability: 0.1
+      },
+      {
+        id: 112,
+        minLevel: 21,
+        maxLevel: 52,
+        probability: 0.1
+      },
+      {
+        id: 215,
+        minLevel: 43,
+        maxLevel: 56,
+        probability: 0.1
+      },
+      {
+        id: 358,
+        minLevel: 43,
+        maxLevel: 63,
+        probability: 0.1
+      },
+      {
+        id: 412.2,
+        minLevel: 1,
+        maxLevel: 1,
+        probability: 0.1
+      },
+      {
+        id: 413.2,
+        minLevel: 1,
+        maxLevel: 1,
+        probability: 0.1
+      },
+      {
+        id: 449,
+        minLevel: 30,
+        maxLevel: 33,
+        probability: 0.1
+      },
+      {
+        id: 450,
+        minLevel: 30,
+        maxLevel: 52,
+        probability: 0.1
+      },
+      {
+        id: 462,
+        minLevel: 38,
+        maxLevel: 49,
+        probability: 0.1
+      }
+    ]
+  },
+  "Primeval Grotto (Coronet Highlands)": {
+    pokes: [
+      {
+        id: 123,
+        minLevel: 53,
+        maxLevel: 65,
+        probability: 0.142
+      },
+      {
+        id: 130,
+        minLevel: 53,
+        maxLevel: 64,
+        probability: 0.143
+      },
+      {
+        id: 207,
+        minLevel: 37,
+        maxLevel: 56,
+        probability: 0.143
+      },
+      {
+        id: 215,
+        minLevel: 43,
+        maxLevel: 56,
+        probability: 0.143
+      },
+      {
+        id: 299,
+        minLevel: 39,
+        maxLevel: 56,
+        probability: 0.143
+      },
+      {
+        id: 420,
+        minLevel: 1,
+        maxLevel: 1,
+        probability: 0.143
+      },
+      {
+        id: 421,
+        minLevel: 1,
+        maxLevel: 1,
+        probability: 0.143
+      }
+    ]
+  },
+  "Stonetooth Rows (Coronet Highlands)": {
+    pokes: [
+      {
+        id: 200,
+        minLevel: 21,
+        maxLevel: 61,
+        probability: 0.2
+      },
+      {
+        id: 412.2,
+        minLevel: 1,
+        maxLevel: 1,
+        probability: 0.2
+      },
+      {
+        id: 413.2,
+        minLevel: 1,
+        maxLevel: 1,
+        probability: 0.2
+      },
+      {
+        id: 436,
+        minLevel: 29,
+        maxLevel: 32,
+        probability: 0.2
+      },
+      {
+        id: 479,
+        minLevel: 21,
+        maxLevel: 50,
+        probability: 0.2
+      }
+    ]
+  },
+  "Sonorous Path (Coronet Highlands)": {
+    pokes: [
+      {
+        id: 216,
+        minLevel: 21,
+        maxLevel: 29,
+        probability: 0.25
+      },
+      {
+        id: 217,
+        minLevel: 21,
+        maxLevel: 64,
+        probability: 0.25
+      },
+      {
+        id: 403,
+        minLevel: 11,
+        maxLevel: 21,
+        probability: 0.25
+      },
+      {
+        id: 404,
+        minLevel: 11,
+        maxLevel: 29,
+        probability: 0.25
+      }
+    ]
+  },
+  "Ancient Quarry (Coronet Highlands)": {
+    pokes: [
+      {
+        id: 434,
+        minLevel: 18,
+        maxLevel: 33,
+        probability: 0.142
+      },
+      {
+        id: 435,
+        minLevel: 18,
+        maxLevel: 53,
+        probability: 0.143
+      },
+      {
+        id: 436,
+        minLevel: 29,
+        maxLevel: 32,
+        probability: 0.143
+      },
+      {
+        id: 453,
+        minLevel: 33,
+        maxLevel: 36,
+        probability: 0.143
+      },
+      {
+        id: 454,
+        minLevel: 33,
+        maxLevel: 64,
+        probability: 0.143
+      },
+      {
+        id: 704,
+        minLevel: 33,
+        maxLevel: 39,
+        probability: 0.143
+      },
+      {
+        id: 705,
+        minLevel: 33,
+        maxLevel: 49,
+        probability: 0.143
+      }
+    ]
+  },
+  "Moonview Arena (Coronet Highlands)": {
+    pokes: [
+      {
+        id: 488,
+        minLevel: 70,
+        maxLevel: 70,
+        probability: 1
+      }
+    ]
+  },
+  "Gym - Warden Ingo": {
+    type: "gym",
+    name: "Gym - Warden Ingo",
+    requirements: {
+      earnBadge: {
+            badgeCount: 68,
+            name: "Warden Ingo Badge"
+      }
+}
+      },
+  "Gym - Electrode": {
+    type: "gym",
+    name: "Gym - Electrode",
+    requirements: {
+      earnBadge: {
+            badgeCount: 69,
+            name: "Electrode Badge"
+      }
+}
+      },
+  "Golden Lowlands (Crimson Mirelands)": {
+    pokes: [
+      {
+        id: 25,
+        minLevel: 17,
+        maxLevel: 23,
+        probability: 0.087
+      },
+      {
+        id: 46,
+        minLevel: 14,
+        maxLevel: 23,
+        probability: 0.083
+      },
+      {
+        id: 47,
+        minLevel: 14,
+        maxLevel: 26,
+        probability: 0.083
+      },
+      {
+        id: 54,
+        minLevel: 17,
+        maxLevel: 24,
+        probability: 0.083
+      },
+      {
+        id: 92,
+        minLevel: 6,
+        maxLevel: 24,
+        probability: 0.083
+      },
+      {
+        id: 172,
+        minLevel: 17,
+        maxLevel: 23,
+        probability: 0.083
+      },
+      {
+        id: 216,
+        minLevel: 20,
+        maxLevel: 29,
+        probability: 0.083
+      },
+      {
+        id: 401,
+        minLevel: 6,
+        maxLevel: 9,
+        probability: 0.083
+      },
+      {
+        id: 402,
+        minLevel: 6,
+        maxLevel: 24,
+        probability: 0.083
+      },
+      {
+        id: 406,
+        minLevel: 16,
+        maxLevel: 24,
+        probability: 0.083
+      },
+      {
+        id: 412.2,
+        minLevel: 18,
+        maxLevel: 18,
+        probability: 0.083
+      },
+      {
+        id: 413.2,
+        minLevel: 1,
+        maxLevel: 1,
+        probability: 0.083
+      }
+    ]
+  },
+  "Bolderoll Slope (Crimson Mirelands)": {
+    pokes: [
+      {
+        id: 41,
+        minLevel: 6,
+        maxLevel: 24,
+        probability: 0.2
+      },
+      {
+        id: 42,
+        minLevel: 6,
+        maxLevel: 28,
+        probability: 0.2
+      },
+      {
+        id: 74,
+        minLevel: 18,
+        maxLevel: 24,
+        probability: 0.2
+      },
+      {
+        id: 75,
+        minLevel: 18,
+        maxLevel: 28,
+        probability: 0.2
+      },
+      {
+        id: 176,
+        minLevel: 22,
+        maxLevel: 35,
+        probability: 0.2
+      }
+    ]
+  },
+  "Diamond Heath (Crimson Mirelands)": {
+    pokes: [
+      {
+        id: 41,
+        minLevel: 6,
+        maxLevel: 24,
+        probability: 0.2
+      },
+      {
+        id: 42,
+        minLevel: 6,
+        maxLevel: 28,
+        probability: 0.2
+      },
+      {
+        id: 46,
+        minLevel: 14,
+        maxLevel: 23,
+        probability: 0.2
+      },
+      {
+        id: 47,
+        minLevel: 14,
+        maxLevel: 26,
+        probability: 0.2
+      },
+      {
+        id: 438,
+        minLevel: 18,
+        maxLevel: 26,
+        probability: 0.2
+      }
+    ]
+  },
+  "Cloudpool Ridge (Crimson Mirelands)": {
+    pokes: [
+      {
+        id: 41,
+        minLevel: 6,
+        maxLevel: 24,
+        probability: 0.087
+      },
+      {
+        id: 42,
+        minLevel: 6,
+        maxLevel: 28,
+        probability: 0.083
+      },
+      {
+        id: 46,
+        minLevel: 14,
+        maxLevel: 23,
+        probability: 0.083
+      },
+      {
+        id: 47,
+        minLevel: 14,
+        maxLevel: 26,
+        probability: 0.083
+      },
+      {
+        id: 185,
+        minLevel: 18,
+        maxLevel: 29,
+        probability: 0.083
+      },
+      {
+        id: 198,
+        minLevel: 23,
+        maxLevel: 44,
+        probability: 0.083
+      },
+      {
+        id: 401,
+        minLevel: 6,
+        maxLevel: 9,
+        probability: 0.083
+      },
+      {
+        id: 402,
+        minLevel: 6,
+        maxLevel: 24,
+        probability: 0.083
+      },
+      {
+        id: 412.2,
+        minLevel: 18,
+        maxLevel: 18,
+        probability: 0.083
+      },
+      {
+        id: 415,
+        minLevel: 17,
+        maxLevel: 20,
+        probability: 0.083
+      },
+      {
+        id: 438,
+        minLevel: 18,
+        maxLevel: 26,
+        probability: 0.083
+      },
+      {
+        id: 440,
+        minLevel: 23,
+        maxLevel: 25,
+        probability: 0.083
+      }
+    ]
+  },
+  "Cottonsedge Prairie (Crimson Mirelands)": {
+    pokes: [
+      {
+        id: 46,
+        minLevel: 14,
+        maxLevel: 23,
+        probability: 0.142
+      },
+      {
+        id: 47,
+        minLevel: 14,
+        maxLevel: 26,
+        probability: 0.143
+      },
+      {
+        id: 93,
+        minLevel: 11,
+        maxLevel: 27,
+        probability: 0.143
+      },
+      {
+        id: 175,
+        minLevel: 21,
+        maxLevel: 40,
+        probability: 0.143
+      },
+      {
+        id: 176,
+        minLevel: 22,
+        maxLevel: 35,
+        probability: 0.143
+      },
+      {
+        id: 415,
+        minLevel: 17,
+        maxLevel: 20,
+        probability: 0.143
+      },
+      {
+        id: 548,
+        minLevel: 21,
+        maxLevel: 40,
+        probability: 0.143
+      }
+    ]
+  },
+  "Gapejaw Bog (Crimson Mirelands)": {
+    pokes: [
+      {
+        id: 54,
+        minLevel: 17,
+        maxLevel: 24,
+        probability: 0.056
+      },
+      {
+        id: 74,
+        minLevel: 18,
+        maxLevel: 24,
+        probability: 0.059
+      },
+      {
+        id: 75,
+        minLevel: 18,
+        maxLevel: 28,
+        probability: 0.059
+      },
+      {
+        id: 92,
+        minLevel: 6,
+        maxLevel: 24,
+        probability: 0.059
+      },
+      {
+        id: 93,
+        minLevel: 11,
+        maxLevel: 27,
+        probability: 0.059
+      },
+      {
+        id: 114,
+        minLevel: 19,
+        maxLevel: 28,
+        probability: 0.059
+      },
+      {
+        id: 193,
+        minLevel: 21,
+        maxLevel: 30,
+        probability: 0.059
+      },
+      {
+        id: 280,
+        minLevel: 16,
+        maxLevel: 22,
+        probability: 0.059
+      },
+      {
+        id: 339,
+        minLevel: 19,
+        maxLevel: 29,
+        probability: 0.059
+      },
+      {
+        id: 399,
+        minLevel: 11,
+        maxLevel: 14,
+        probability: 0.059
+      },
+      {
+        id: 400,
+        minLevel: 11,
+        maxLevel: 14,
+        probability: 0.059
+      },
+      {
+        id: 406,
+        minLevel: 16,
+        maxLevel: 24,
+        probability: 0.059
+      },
+      {
+        id: 412.2,
+        minLevel: 18,
+        maxLevel: 18,
+        probability: 0.059
+      },
+      {
+        id: 413.2,
+        minLevel: 1,
+        maxLevel: 1,
+        probability: 0.059
+      },
+      {
+        id: 420,
+        minLevel: 1,
+        maxLevel: 1,
+        probability: 0.059
+      },
+      {
+        id: 421,
+        minLevel: 1,
+        maxLevel: 1,
+        probability: 0.059
+      },
+      {
+        id: 453,
+        minLevel: 19,
+        maxLevel: 24,
+        probability: 0.059
+      }
+    ]
+  },
+  "Holm of Trials (Crimson Mirelands)": {
+    pokes: [
+      {
+        id: 54,
+        minLevel: 17,
+        maxLevel: 24,
+        probability: 0.2
+      },
+      {
+        id: 55,
+        minLevel: 21,
+        maxLevel: 35,
+        probability: 0.2
+      },
+      {
+        id: 453,
+        minLevel: 19,
+        maxLevel: 24,
+        probability: 0.2
+      },
+      {
+        id: 548,
+        minLevel: 21,
+        maxLevel: 40,
+        probability: 0.2
+      },
+      {
+        id: 704,
+        minLevel: 30,
+        maxLevel: 39,
+        probability: 0.2
+      }
+    ]
+  },
+  "Scarlet Bog (Crimson Mirelands)": {
+    pokes: [
+      {
+        id: 74,
+        minLevel: 18,
+        maxLevel: 24,
+        probability: 0.125
+      },
+      {
+        id: 75,
+        minLevel: 18,
+        maxLevel: 28,
+        probability: 0.125
+      },
+      {
+        id: 92,
+        minLevel: 6,
+        maxLevel: 24,
+        probability: 0.125
+      },
+      {
+        id: 93,
+        minLevel: 11,
+        maxLevel: 27,
+        probability: 0.125
+      },
+      {
+        id: 434,
+        minLevel: 21,
+        maxLevel: 26,
+        probability: 0.125
+      },
+      {
+        id: 449,
+        minLevel: 21,
+        maxLevel: 24,
+        probability: 0.125
+      },
+      {
+        id: 453,
+        minLevel: 19,
+        maxLevel: 24,
+        probability: 0.125
+      },
+      {
+        id: 905.1,
+        minLevel: 70,
+        maxLevel: 70,
+        probability: 0.125
+      }
+    ]
+  },
+  "Ursa's Ring (Crimson Mirelands)": {
+    pokes: [
+      {
+        id: 74,
+        minLevel: 18,
+        maxLevel: 24,
+        probability: 0.165
+      },
+      {
+        id: 75,
+        minLevel: 18,
+        maxLevel: 28,
+        probability: 0.167
+      },
+      {
+        id: 193,
+        minLevel: 21,
+        maxLevel: 30,
+        probability: 0.167
+      },
+      {
+        id: 216,
+        minLevel: 20,
+        maxLevel: 29,
+        probability: 0.167
+      },
+      {
+        id: 399,
+        minLevel: 11,
+        maxLevel: 14,
+        probability: 0.167
+      },
+      {
+        id: 400,
+        minLevel: 11,
+        maxLevel: 14,
+        probability: 0.167
+      }
+    ]
+  },
+  "Shrouded Ruins (Crimson Mirelands)": {
+    pokes: [
+      {
+        id: 92,
+        minLevel: 6,
+        maxLevel: 24,
+        probability: 0.142
+      },
+      {
+        id: 93,
+        minLevel: 11,
+        maxLevel: 27,
+        probability: 0.143
+      },
+      {
+        id: 108,
+        minLevel: 18,
+        maxLevel: 29,
+        probability: 0.143
+      },
+      {
+        id: 280,
+        minLevel: 16,
+        maxLevel: 22,
+        probability: 0.143
+      },
+      {
+        id: 281,
+        minLevel: 16,
+        maxLevel: 19,
+        probability: 0.143
+      },
+      {
+        id: 412.2,
+        minLevel: 18,
+        maxLevel: 18,
+        probability: 0.143
+      },
+      {
+        id: 442,
+        minLevel: 17,
+        maxLevel: 60,
+        probability: 0.143
+      }
+    ]
+  },
+  "Droning Meadow (Crimson Mirelands)": {
+    pokes: [
+      {
+        id: 193,
+        minLevel: 21,
+        maxLevel: 30,
+        probability: 0.142
+      },
+      {
+        id: 216,
+        minLevel: 20,
+        maxLevel: 29,
+        probability: 0.143
+      },
+      {
+        id: 387,
+        minLevel: 11,
+        maxLevel: 17,
+        probability: 0.143
+      },
+      {
+        id: 388,
+        minLevel: 14,
+        maxLevel: 20,
+        probability: 0.143
+      },
+      {
+        id: 399,
+        minLevel: 11,
+        maxLevel: 14,
+        probability: 0.143
+      },
+      {
+        id: 400,
+        minLevel: 11,
+        maxLevel: 14,
+        probability: 0.143
+      },
+      {
+        id: 415,
+        minLevel: 17,
+        maxLevel: 20,
+        probability: 0.143
+      }
+    ]
+  },
+  "Solaceon Ruins (Crimson Mirelands)": {
+    pokes: [
+      {
+        id: 201,
+        minLevel: 25,
+        maxLevel: 25,
+        probability: 1
+      }
+    ]
+  },
+  "Lake Valor (Crimson Mirelands)": {
+    pokes: [
+      {
+        id: 339,
+        minLevel: 19,
+        maxLevel: 29,
+        probability: 0.334
+      },
+      {
+        id: 415,
+        minLevel: 17,
+        maxLevel: 20,
+        probability: 0.333
+      },
+      {
+        id: 482,
+        minLevel: 70,
+        maxLevel: 70,
+        probability: 0.333
+      }
+    ]
+  },
+  "Sludge Mound (Crimson Mirelands)": {
+    pokes: [
+      {
+        id: 449,
+        minLevel: 21,
+        maxLevel: 24,
+        probability: 1
+      }
+    ]
+  },
+  "Gym - Lilligant": {
+    type: "gym",
+    name: "Gym - Lilligant",
+    requirements: {
+      earnBadge: {
+            badgeCount: 66,
+            name: "Lilligant Badge"
+      }
+}
+      },
+  "Nature's Pantry (Obsidian Fieldlands)": {
+    pokes: [
+      {
+        id: 25,
+        minLevel: 6,
+        maxLevel: 13,
+        probability: 0.142
+      },
+      {
+        id: 41,
+        minLevel: 3,
+        maxLevel: 18,
+        probability: 0.143
+      },
+      {
+        id: 46,
+        minLevel: 9,
+        maxLevel: 13,
+        probability: 0.143
+      },
+      {
+        id: 172,
+        minLevel: 3,
+        maxLevel: 10,
+        probability: 0.143
+      },
+      {
+        id: 398,
+        minLevel: 34,
+        maxLevel: 44,
+        probability: 0.143
+      },
+      {
+        id: 401,
+        minLevel: 6,
+        maxLevel: 9,
+        probability: 0.143
+      },
+      {
+        id: 412.1,
+        minLevel: 1,
+        maxLevel: 1,
+        probability: 0.143
+      }
+    ]
+  },
+  "Deertrack Path (Obsidian Fieldlands)": {
+    pokes: [
+      {
+        id: 41,
+        minLevel: 3,
+        maxLevel: 18,
+        probability: 0.334
+      },
+      {
+        id: 401,
+        minLevel: 6,
+        maxLevel: 9,
+        probability: 0.333
+      },
+      {
+        id: 412.1,
+        minLevel: 1,
+        maxLevel: 1,
+        probability: 0.333
+      }
+    ]
+  },
+  "The Heartwood (Obsidian Fieldlands)": {
+    pokes: [
+      {
+        id: 41,
+        minLevel: 3,
+        maxLevel: 18,
+        probability: 0.09
+      },
+      {
+        id: 54,
+        minLevel: 13,
+        maxLevel: 17,
+        probability: 0.091
+      },
+      {
+        id: 265,
+        minLevel: 2,
+        maxLevel: 6,
+        probability: 0.091
+      },
+      {
+        id: 266,
+        minLevel: 2,
+        maxLevel: 9,
+        probability: 0.091
+      },
+      {
+        id: 267,
+        minLevel: 13,
+        maxLevel: 24,
+        probability: 0.091
+      },
+      {
+        id: 268,
+        minLevel: 2,
+        maxLevel: 9,
+        probability: 0.091
+      },
+      {
+        id: 269,
+        minLevel: 13,
+        maxLevel: 24,
+        probability: 0.091
+      },
+      {
+        id: 415,
+        minLevel: 6,
+        maxLevel: 20,
+        probability: 0.091
+      },
+      {
+        id: 420,
+        minLevel: 22,
+        maxLevel: 24,
+        probability: 0.091
+      },
+      {
+        id: 421,
+        minLevel: 1,
+        maxLevel: 1,
+        probability: 0.091
+      },
+      {
+        id: 427,
+        minLevel: 13,
+        maxLevel: 18,
+        probability: 0.091
+      }
+    ]
+  },
+  "Oreburrow Tunnel (Obsidian Fieldlands)": {
+    pokes: [
+      {
+        id: 41,
+        minLevel: 3,
+        maxLevel: 18,
+        probability: 0.2
+      },
+      {
+        id: 66,
+        minLevel: 13,
+        maxLevel: 27,
+        probability: 0.2
+      },
+      {
+        id: 74,
+        minLevel: 7,
+        maxLevel: 16,
+        probability: 0.2
+      },
+      {
+        id: 403,
+        minLevel: 2,
+        maxLevel: 14,
+        probability: 0.2
+      },
+      {
+        id: 440,
+        minLevel: 13,
+        maxLevel: 27,
+        probability: 0.2
+      }
+    ]
+  },
+  "Windswept Run (Obsidian Fieldlands)": {
+    pokes: [
+      {
+        id: 63,
+        minLevel: 9,
+        maxLevel: 15,
+        probability: 0.25
+      },
+      {
+        id: 396,
+        minLevel: 2,
+        maxLevel: 13,
+        probability: 0.25
+      },
+      {
+        id: 401,
+        minLevel: 6,
+        maxLevel: 9,
+        probability: 0.25
+      },
+      {
+        id: 418,
+        minLevel: 2,
+        maxLevel: 16,
+        probability: 0.25
+      }
+    ]
+  },
+  "Sandgem Flats (Obsidian Fieldlands)": {
+    pokes: [
+      {
+        id: 63,
+        minLevel: 9,
+        maxLevel: 15,
+        probability: 0.112
+      },
+      {
+        id: 64,
+        minLevel: 12,
+        maxLevel: 30,
+        probability: 0.111
+      },
+      {
+        id: 122,
+        minLevel: 15,
+        maxLevel: 30,
+        probability: 0.111
+      },
+      {
+        id: 405,
+        minLevel: 15,
+        maxLevel: 44,
+        probability: 0.111
+      },
+      {
+        id: 413.1,
+        minLevel: 21,
+        maxLevel: 21,
+        probability: 0.111
+      },
+      {
+        id: 422,
+        minLevel: 15,
+        maxLevel: 29,
+        probability: 0.111
+      },
+      {
+        id: 423,
+        minLevel: 15,
+        maxLevel: 40,
+        probability: 0.111
+      },
+      {
+        id: 426,
+        minLevel: 10,
+        maxLevel: 44,
+        probability: 0.111
+      },
+      {
+        id: 439,
+        minLevel: 3,
+        maxLevel: 25,
+        probability: 0.111
+      }
+    ]
+  },
+  "Obsidian Falls (Obsidian Fieldlands)": {
+    pokes: [
+      {
+        id: 66,
+        minLevel: 13,
+        maxLevel: 27,
+        probability: 0.2
+      },
+      {
+        id: 67,
+        minLevel: 24,
+        maxLevel: 27,
+        probability: 0.2
+      },
+      {
+        id: 113,
+        minLevel: 20,
+        maxLevel: 27,
+        probability: 0.2
+      },
+      {
+        id: 129,
+        minLevel: 13,
+        maxLevel: 40,
+        probability: 0.2
+      },
+      {
+        id: 440,
+        minLevel: 13,
+        maxLevel: 27,
+        probability: 0.2
+      }
+    ]
+  },
+  "Deertrack Heights (Obsidian Fieldlands)": {
+    pokes: [
+      {
+        id: 74,
+        minLevel: 7,
+        maxLevel: 16,
+        probability: 0.25
+      },
+      {
+        id: 390,
+        minLevel: 10,
+        maxLevel: 13,
+        probability: 0.25
+      },
+      {
+        id: 412.1,
+        minLevel: 1,
+        maxLevel: 1,
+        probability: 0.25
+      },
+      {
+        id: 446,
+        minLevel: 6,
+        maxLevel: 9,
+        probability: 0.25
+      }
+    ]
+  },
+  "Worn Bridge (Obsidian Fieldlands)": {
+    pokes: [
+      {
+        id: 74,
+        minLevel: 7,
+        maxLevel: 16,
+        probability: 0.5
+      },
+      {
+        id: 418,
+        minLevel: 2,
+        maxLevel: 16,
+        probability: 0.5
+      }
+    ]
+  },
+  "Horseshoe Plains (Obsidian Fieldlands)": {
+    pokes: [
+      {
+        id: 77,
+        minLevel: 3,
+        maxLevel: 17,
+        probability: 0.125
+      },
+      {
+        id: 133,
+        minLevel: 2,
+        maxLevel: 17,
+        probability: 0.125
+      },
+      {
+        id: 265,
+        minLevel: 2,
+        maxLevel: 6,
+        probability: 0.125
+      },
+      {
+        id: 396,
+        minLevel: 2,
+        maxLevel: 13,
+        probability: 0.125
+      },
+      {
+        id: 399,
+        minLevel: 2,
+        maxLevel: 14,
+        probability: 0.125
+      },
+      {
+        id: 418,
+        minLevel: 2,
+        maxLevel: 16,
+        probability: 0.125
+      },
+      {
+        id: 425,
+        minLevel: 2,
+        maxLevel: 27,
+        probability: 0.125
+      },
+      {
+        id: 439,
+        minLevel: 3,
+        maxLevel: 25,
+        probability: 0.125
+      }
+    ]
+  },
+  "Lake Verity (Obsidian Fieldlands)": {
+    pokes: [
+      {
+        id: 129,
+        minLevel: 13,
+        maxLevel: 40,
+        probability: 0.2
+      },
+      {
+        id: 398,
+        minLevel: 34,
+        maxLevel: 44,
+        probability: 0.2
+      },
+      {
+        id: 405,
+        minLevel: 15,
+        maxLevel: 44,
+        probability: 0.2
+      },
+      {
+        id: 468,
+        minLevel: 42,
+        maxLevel: 45,
+        probability: 0.2
+      },
+      {
+        id: 481,
+        minLevel: 70,
+        maxLevel: 70,
+        probability: 0.2
+      }
+    ]
+  },
+  "Floaro Gardens (Obsidian Fieldlands)": {
+    pokes: [
+      {
+        id: 172,
+        minLevel: 3,
+        maxLevel: 10,
+        probability: 0.112
+      },
+      {
+        id: 265,
+        minLevel: 2,
+        maxLevel: 6,
+        probability: 0.111
+      },
+      {
+        id: 266,
+        minLevel: 2,
+        maxLevel: 9,
+        probability: 0.111
+      },
+      {
+        id: 267,
+        minLevel: 13,
+        maxLevel: 24,
+        probability: 0.111
+      },
+      {
+        id: 268,
+        minLevel: 2,
+        maxLevel: 9,
+        probability: 0.111
+      },
+      {
+        id: 269,
+        minLevel: 13,
+        maxLevel: 24,
+        probability: 0.111
+      },
+      {
+        id: 403,
+        minLevel: 2,
+        maxLevel: 14,
+        probability: 0.111
+      },
+      {
+        id: 425,
+        minLevel: 2,
+        maxLevel: 27,
+        probability: 0.111
+      },
+      {
+        id: 492.1,
+        minLevel: 70,
+        maxLevel: 70,
+        probability: 0.111
+      }
+    ]
+  },
+  "Ramanas Island (Obsidian Fieldlands)": {
+    pokes: [
+      {
+        id: 190,
+        minLevel: 24,
+        maxLevel: 27,
+        probability: 0.1
+      },
+      {
+        id: 211,
+        minLevel: 53,
+        maxLevel: 60,
+        probability: 0.1
+      },
+      {
+        id: 390,
+        minLevel: 10,
+        maxLevel: 13,
+        probability: 0.1
+      },
+      {
+        id: 391,
+        minLevel: 10,
+        maxLevel: 17,
+        probability: 0.1
+      },
+      {
+        id: 415,
+        minLevel: 6,
+        maxLevel: 20,
+        probability: 0.1
+      },
+      {
+        id: 422,
+        minLevel: 15,
+        maxLevel: 29,
+        probability: 0.1
+      },
+      {
+        id: 423,
+        minLevel: 15,
+        maxLevel: 40,
+        probability: 0.1
+      },
+      {
+        id: 425,
+        minLevel: 2,
+        maxLevel: 27,
+        probability: 0.1
+      },
+      {
+        id: 426,
+        minLevel: 10,
+        maxLevel: 44,
+        probability: 0.1
+      },
+      {
+        id: 645.1,
+        minLevel: 70,
+        maxLevel: 70,
+        probability: 0.1
+      }
+    ]
+  },
+  "Grueling Grove (Obsidian Fieldlands)": {
+    pokes: [
+      {
+        id: 267,
+        minLevel: 13,
+        maxLevel: 24,
+        probability: 0.165
+      },
+      {
+        id: 269,
+        minLevel: 13,
+        maxLevel: 24,
+        probability: 0.167
+      },
+      {
+        id: 412.1,
+        minLevel: 1,
+        maxLevel: 1,
+        probability: 0.167
+      },
+      {
+        id: 413.1,
+        minLevel: 21,
+        maxLevel: 21,
+        probability: 0.167
+      },
+      {
+        id: 414,
+        minLevel: 15,
+        maxLevel: 18,
+        probability: 0.167
+      },
+      {
+        id: 415,
+        minLevel: 6,
+        maxLevel: 20,
+        probability: 0.167
+      }
+    ]
+  },
+  "Aspiration Hill (Obsidian Fieldlands)": {
+    pokes: [
+      {
+        id: 396,
+        minLevel: 2,
+        maxLevel: 13,
+        probability: 0.25
+      },
+      {
+        id: 399,
+        minLevel: 2,
+        maxLevel: 14,
+        probability: 0.25
+      },
+      {
+        id: 403,
+        minLevel: 2,
+        maxLevel: 14,
+        probability: 0.25
+      },
+      {
+        id: 425,
+        minLevel: 2,
+        maxLevel: 27,
+        probability: 0.25
+      }
+    ]
+  },
+  "Tidewater Dam (Obsidian Fieldlands)": {
+    pokes: [
+      {
+        id: 396,
+        minLevel: 2,
+        maxLevel: 13,
+        probability: 0.5
+      },
+      {
+        id: 399,
+        minLevel: 2,
+        maxLevel: 14,
+        probability: 0.5
+      }
+    ]
+  },
+  "Pokémon Sword or Shield (Obsidian Fieldlands)": {
+    pokes: [
+      {
+        id: 492.1,
+        minLevel: 70,
+        maxLevel: 70,
+        probability: 1
+      }
+    ]
+  },
+  "Gym - Kleavor": {
+    type: "gym",
+    name: "Gym - Kleavor",
+    requirements: {
+      earnBadge: {
+            badgeCount: 65,
+            name: "Kleavor Badge"
+      }
+}
+      },
   "Gym of Etertime": {
     type: "gym",
     name: "Gym of Etertime",
     requirements: {
       defeatHisuiChampion: true
-    }
-  },
-  "Space-Time Distortion": {
-    pokes: [
-      {
-        id: 408,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0221
+}
       },
-      {
-        id: 410,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0208
-      },
-      {
-        id: 501,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0208
-      },
-      {
-        id: 722,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0208
-      },
-      {
-        id: 462,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0208
-      },
-      {
-        id: 134,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0208
-      },
-      {
-        id: 135,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0208
-      },
-      {
-        id: 136,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0208
-      },
-      {
-        id: 196,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0208
-      },
-      {
-        id: 197,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0208
-      },
-      {
-        id: 470,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0208
-      },
-      {
-        id: 471,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0208
-      },
-      {
-        id: 700,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0208
-      },
-      {
-        id: 155,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0208
-      },
-      {
-        id: 549,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0208
-      },
-      {
-        id: 461,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0208
-      },
-      {
-        id: 212,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0208
-      },
-      {
-        id: 65,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0208
-      },
-      {
-        id: 156,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0208
-      },
-      {
-        id: 503,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0208
-      },
-      {
-        id: 233,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0208
-      },
-      {
-        id: 474,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0208
-      },
-      {
-        id: 409,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0208
-      },
-      {
-        id: 411,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0208
-      },
-      {
-        id: 157,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0208
-      },
-      {
-        id: 502,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0208
-      },
-      {
-        id: 723,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0208
-      },
-      {
-        id: 724,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0208
-      },
-      {
-        id: 137,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0208
-      },
-      {
-        id: 81,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0208
-      },
-      {
-        id: 133,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0208
-      },
-      {
-        id: 59,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0208
-      },
-      {
-        id: 94,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0208
-      },
-      {
-        id: 92,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0208
-      },
-      {
-        id: 82,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0208
-      },
-      {
-        id: 93,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0208
-      },
-      {
-        id: 63,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0208
-      },
-      {
-        id: 215,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0208
-      },
-      {
-        id: 713,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0208
-      },
-      {
-        id: 101,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.1875
-      }
-    ]
-  },
-  "Moonview Arena": {
-    pokes: []
-  },
-  "Lake Verity": {
-    pokes: [
-      {
-        id: 393,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.1
-      },
-      {
-        id: 387,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.1
-      },
-      {
-        id: 390,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.1
-      },
-      {
-        id: 501,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.1
-      },
-      {
-        id: 399,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.1
-      },
-      {
-        id: 502,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.1
-      },
-      {
-        id: 724,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.1
-      },
-      {
-        id: 399,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.1
-      },
-      {
-        id: 396,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.1
-      },
-      {
-        id: 129,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.1
-      }
-    ]
-  },
-  "Lake Valor": {
-    pokes: [
-      {
-        id: 501,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.1496
-      },
-      {
-        id: 433,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.1494
-      },
-      {
-        id: 723,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.1494
-      },
-      {
-        id: 404,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.1494
-      },
-      {
-        id: 403,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.1494
-      },
-      {
-        id: 54,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.1494
-      },
-      {
-        id: 108,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.1034
-      }
-    ]
-  },
-  "Lake of Trials": {
-    pokes: []
-  },
-  "Incarnate Fields": {
-    pokes: []
-  },
-  "Special Route": {
-    pokes: [
-      {
-        id: 483,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0208
-      },
-      {
-        id: 483.1,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      },
-      {
-        id: 484,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      },
-      {
-        id: 484.1,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      },
-      {
-        id: 487,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      },
-      {
-        id: 487.1,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      },
-      {
-        id: 487.2,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      },
-      {
-        id: 480,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      },
-      {
-        id: 481,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      },
-      {
-        id: 482,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      },
-      {
-        id: 486,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      },
-      {
-        id: 485,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      },
-      {
-        id: 488,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      },
-      {
-        id: 641,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      },
-      {
-        id: 641.1,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      },
-      {
-        id: 641.2,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      },
-      {
-        id: 642,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      },
-      {
-        id: 642.1,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      },
-      {
-        id: 642.2,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      },
-      {
-        id: 645,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      },
-      {
-        id: 645.1,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      },
-      {
-        id: 645.2,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      },
-      {
-        id: 905,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      },
-      {
-        id: 905.1,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      },
-      {
-        id: 905.2,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      },
-      {
-        id: 493,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      },
-      {
-        id: 490,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      },
-      {
-        id: 489,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      },
-      {
-        id: 491,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      },
-      {
-        id: 492,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      },
-      {
-        id: 492.1,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      },
-      {
-        id: 492.2,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      },
-      {
-        id: 704,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      },
-      {
-        id: 705.1,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      },
-      {
-        id: 706.1,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      },
-      {
-        id: 443,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      },
-      {
-        id: 444,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      },
-      {
-        id: 445,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      },
-      {
-        id: 900,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      },
-      {
-        id: 549.1,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      },
-      {
-        id: 59.1,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      },
-      {
-        id: 101.1,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      },
-      {
-        id: 713.1,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      },
-      {
-        id: 899,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      },
-      {
-        id: 901,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      },
-      {
-        id: 902,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      },
-      {
-        id: 903,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      },
-      {
-        id: 628.1,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      },
-      {
-        id: 901.1,
-        minLevel: 85,
-        maxLevel: 90,
-        probability: 0.0204
-      }
-    ]
-  }
-};
-
 export const hisuiUnlocks = [
   {
     challengeName: "Challenge 01",
-    areaId: "Aspiration Hill",
+    areaId: "Snowpoint Temple (Alabaster Icelands)",
     unlocks: [
-      "Horseshoe Plains"
+      "Lake Acuity (Alabaster Icelands)"
     ],
     requirements: {
       defeatCountRoute: {
-        routeName: "Aspiration Hill",
+        routeName: "Snowpoint Temple (Alabaster Icelands)",
         count: 10
       }
     }
   },
   {
     challengeName: "Challenge 02",
-    areaId: "Horseshoe Plains",
+    areaId: "Lake Acuity (Alabaster Icelands)",
     unlocks: [
-      "Deertrack Path"
+      "Icebound Falls (Alabaster Icelands)"
     ],
     requirements: {
       defeatCountRoute: {
-        routeName: "Horseshoe Plains",
+        routeName: "Lake Acuity (Alabaster Icelands)",
         count: 10
       }
     }
   },
   {
     challengeName: "Challenge 03",
-    areaId: "Deertrack Path",
+    areaId: "Icebound Falls (Alabaster Icelands)",
     unlocks: [
-      "Deertrack Heights"
+      "Arena's Approach (Alabaster Icelands)"
     ],
     requirements: {
       defeatCountRoute: {
-        routeName: "Deertrack Path",
+        routeName: "Icebound Falls (Alabaster Icelands)",
         count: 10
       }
     }
   },
   {
     challengeName: "Challenge 04",
-    areaId: "Deertrack Heights",
+    areaId: "Arena's Approach (Alabaster Icelands)",
     unlocks: [
-      "Nature’s Pantry"
+      "Snowfall Hot Spring (Alabaster Icelands)"
     ],
     requirements: {
       defeatCountRoute: {
-        routeName: "Deertrack Heights",
+        routeName: "Arena's Approach (Alabaster Icelands)",
         count: 10
       }
     }
   },
   {
     challengeName: "Challenge 05",
-    areaId: "Nature’s Pantry",
+    areaId: "Snowfall Hot Spring (Alabaster Icelands)",
     unlocks: [
-      "Gym - Kleavor"
+      "Bonechill Wastes (Alabaster Icelands)"
     ],
     requirements: {
       defeatCountRoute: {
-        routeName: "Nature’s Pantry",
+        routeName: "Snowfall Hot Spring (Alabaster Icelands)",
         count: 10
       }
     }
   },
   {
     challengeName: "Challenge 06",
-    areaId: "Gym - Kleavor",
+    areaId: "Bonechill Wastes (Alabaster Icelands)",
     unlocks: [
-      "Obsidian Fieldlands Fishing Spot"
+      "Avalanche Slopes (Alabaster Icelands)"
     ],
     requirements: {
-      earnBadge: {
-        badgeCount: 65,
-        name: "Kleavor Badge"
+      defeatCountRoute: {
+        routeName: "Bonechill Wastes (Alabaster Icelands)",
+        count: 10
       }
     }
   },
   {
     challengeName: "Challenge 07",
-    areaId: "Obsidian Fieldlands Fishing Spot",
+    areaId: "Avalanche Slopes (Alabaster Icelands)",
     unlocks: [
-      "Obsidian Falls"
+      "Avalugg's Legacy (Alabaster Icelands)"
     ],
     requirements: {
       defeatCountRoute: {
-        routeName: "Obsidian Fieldlands Fishing Spot",
+        routeName: "Avalanche Slopes (Alabaster Icelands)",
         count: 10
       }
     }
   },
   {
     challengeName: "Challenge 08",
-    areaId: "Obsidian Falls",
+    areaId: "Avalugg's Legacy (Alabaster Icelands)",
     unlocks: [
-      "The Heartwood North"
+      "Whiteout Valley (Alabaster Icelands)"
     ],
     requirements: {
       defeatCountRoute: {
-        routeName: "Obsidian Falls",
+        routeName: "Avalugg's Legacy (Alabaster Icelands)",
         count: 10
       }
     }
   },
   {
     challengeName: "Challenge 09",
-    areaId: "The Heartwood North",
+    areaId: "Whiteout Valley (Alabaster Icelands)",
     unlocks: [
-      "The Heartwood South"
+      "Glacier Terrace (Alabaster Icelands)"
     ],
     requirements: {
       defeatCountRoute: {
-        routeName: "The Heartwood North",
+        routeName: "Whiteout Valley (Alabaster Icelands)",
         count: 10
       }
     }
   },
   {
     challengeName: "Challenge 10",
-    areaId: "The Heartwood South",
+    areaId: "Glacier Terrace (Alabaster Icelands)",
     unlocks: [
-      "Oreburrow Tunnel"
+      "Heart's Crag (Alabaster Icelands)"
     ],
     requirements: {
       defeatCountRoute: {
-        routeName: "The Heartwood South",
+        routeName: "Glacier Terrace (Alabaster Icelands)",
         count: 10
       }
     }
   },
   {
     challengeName: "Challenge 11",
-    areaId: "Oreburrow Tunnel",
+    areaId: "Heart's Crag (Alabaster Icelands)",
     unlocks: [
-      "Worn Bridge"
+      "Gym - Avalugg"
     ],
     requirements: {
       defeatCountRoute: {
-        routeName: "Oreburrow Tunnel",
+        routeName: "Heart's Crag (Alabaster Icelands)",
         count: 10
       }
     }
   },
   {
     challengeName: "Challenge 12",
-    areaId: "Worn Bridge",
+    areaId: "Gym - Avalugg",
+    type: "gym",
     unlocks: [
-      "Sandgem Flats North"
+      "Windbreak Stand (Cobalt Coastlands)"
     ],
     requirements: {
-      defeatCountRoute: {
-        routeName: "Worn Bridge",
-        count: 10
+      earnBadge: {
+        badgeCount: 70,
+        name: "Avalugg Badge"
       }
     }
   },
   {
     challengeName: "Challenge 13",
-    areaId: "Sandgem Flats North",
+    areaId: "Windbreak Stand (Cobalt Coastlands)",
     unlocks: [
-      "Sandgem Flats South"
+      "Veilstone Cape (Cobalt Coastlands)"
     ],
     requirements: {
       defeatCountRoute: {
-        routeName: "Sandgem Flats North",
+        routeName: "Windbreak Stand (Cobalt Coastlands)",
         count: 10
       }
     }
   },
   {
     challengeName: "Challenge 14",
-    areaId: "Sandgem Flats South",
+    areaId: "Veilstone Cape (Cobalt Coastlands)",
     unlocks: [
-      "Ramanas Island South"
+      "Bathers' Lagoon (Cobalt Coastlands)"
     ],
     requirements: {
       defeatCountRoute: {
-        routeName: "Sandgem Flats South",
+        routeName: "Veilstone Cape (Cobalt Coastlands)",
         count: 10
       }
     }
   },
   {
     challengeName: "Challenge 15",
-    areaId: "Ramanas Island South",
+    areaId: "Bathers' Lagoon (Cobalt Coastlands)",
     unlocks: [
-      "Gapejaw Bog North"
+      "Castaway Shore (Cobalt Coastlands)"
     ],
     requirements: {
       defeatCountRoute: {
-        routeName: "Ramanas Island South",
+        routeName: "Bathers' Lagoon (Cobalt Coastlands)",
         count: 10
       }
     }
   },
   {
     challengeName: "Challenge 16",
-    areaId: "Gapejaw Bog North",
+    areaId: "Castaway Shore (Cobalt Coastlands)",
     unlocks: [
-      "Gapejaw Bog South"
+      "Lunker's Lair (Cobalt Coastlands)"
     ],
     requirements: {
       defeatCountRoute: {
-        routeName: "Gapejaw Bog North",
+        routeName: "Castaway Shore (Cobalt Coastlands)",
         count: 10
       }
     }
   },
   {
     challengeName: "Challenge 17",
-    areaId: "Gapejaw Bog South",
+    areaId: "Lunker's Lair (Cobalt Coastlands)",
     unlocks: [
-      "Sludge Mound"
+      "Seagrass Haven (Cobalt Coastlands)"
     ],
     requirements: {
       defeatCountRoute: {
-        routeName: "Gapejaw Bog South",
+        routeName: "Lunker's Lair (Cobalt Coastlands)",
         count: 10
       }
     }
   },
   {
     challengeName: "Challenge 18",
-    areaId: "Sludge Mound",
+    areaId: "Seagrass Haven (Cobalt Coastlands)",
     unlocks: [
-      "Scarlet Bog"
+      "Islespy Shore (Cobalt Coastlands)"
     ],
     requirements: {
       defeatCountRoute: {
-        routeName: "Sludge Mound",
+        routeName: "Seagrass Haven (Cobalt Coastlands)",
         count: 10
       }
     }
   },
   {
     challengeName: "Challenge 19",
-    areaId: "Scarlet Bog",
+    areaId: "Islespy Shore (Cobalt Coastlands)",
     unlocks: [
-      "Golden Lowlands North"
+      "Ginkgo Landing (Cobalt Coastlands)"
     ],
     requirements: {
       defeatCountRoute: {
-        routeName: "Scarlet Bog",
+        routeName: "Islespy Shore (Cobalt Coastlands)",
         count: 10
       }
     }
   },
   {
     challengeName: "Challenge 20",
-    areaId: "Golden Lowlands North",
+    areaId: "Ginkgo Landing (Cobalt Coastlands)",
     unlocks: [
-      "Golden Lowlands South"
+      "Aipom Hill (Cobalt Coastlands)"
     ],
     requirements: {
       defeatCountRoute: {
-        routeName: "Golden Lowlands North",
+        routeName: "Ginkgo Landing (Cobalt Coastlands)",
         count: 10
       }
     }
   },
   {
     challengeName: "Challenge 21",
-    areaId: "Golden Lowlands South",
+    areaId: "Aipom Hill (Cobalt Coastlands)",
     unlocks: [
-      "Bolderoll Slope"
+      "Firespit Island (Cobalt Coastlands)"
     ],
     requirements: {
       defeatCountRoute: {
-        routeName: "Golden Lowlands South",
+        routeName: "Aipom Hill (Cobalt Coastlands)",
         count: 10
       }
     }
   },
   {
     challengeName: "Challenge 22",
-    areaId: "Bolderoll Slope",
+    areaId: "Firespit Island (Cobalt Coastlands)",
     unlocks: [
-      "Gym - Lilligant"
+      "Spring Path (Cobalt Coastlands)"
     ],
     requirements: {
       defeatCountRoute: {
-        routeName: "Bolderoll Slope",
+        routeName: "Firespit Island (Cobalt Coastlands)",
         count: 10
       }
     }
   },
   {
     challengeName: "Challenge 23",
-    areaId: "Gym - Lilligant",
+    areaId: "Spring Path (Cobalt Coastlands)",
     unlocks: [
-      "Holm of Trials"
+      "Crossing Slope (Cobalt Coastlands)"
     ],
     requirements: {
-      earnBadge: {
-        badgeCount: 66,
-        name: "Lilligant Badge"
+      defeatCountRoute: {
+        routeName: "Spring Path (Cobalt Coastlands)",
+        count: 10
       }
     }
   },
   {
     challengeName: "Challenge 24",
-    areaId: "Holm of Trials",
+    areaId: "Crossing Slope (Cobalt Coastlands)",
     unlocks: [
-      "Ursa's Ring"
+      "Tranquility Cove (Cobalt Coastlands)"
     ],
     requirements: {
       defeatCountRoute: {
-        routeName: "Holm of Trials",
+        routeName: "Crossing Slope (Cobalt Coastlands)",
         count: 10
       }
     }
   },
   {
     challengeName: "Challenge 25",
-    areaId: "Ursa's Ring",
+    areaId: "Tranquility Cove (Cobalt Coastlands)",
     unlocks: [
-      "Crimson Mirelands Fishing Spot"
+      "Hideaway Bay (Cobalt Coastlands)"
     ],
     requirements: {
       defeatCountRoute: {
-        routeName: "Ursa's Ring",
+        routeName: "Tranquility Cove (Cobalt Coastlands)",
         count: 10
       }
     }
   },
   {
     challengeName: "Challenge 26",
-    areaId: "Crimson Mirelands Fishing Spot",
+    areaId: "Hideaway Bay (Cobalt Coastlands)",
     unlocks: [
-      "Ginkgo Landing"
+      "Sand's Reach (Cobalt Coastlands)"
     ],
     requirements: {
       defeatCountRoute: {
-        routeName: "Crimson Mirelands Fishing Spot",
+        routeName: "Hideaway Bay (Cobalt Coastlands)",
         count: 10
       }
     }
   },
   {
     challengeName: "Challenge 27",
-    areaId: "Ginkgo Landing",
+    areaId: "Sand's Reach (Cobalt Coastlands)",
     unlocks: [
-      "Shrouded Ruins"
+      "Deadwood Haunt (Cobalt Coastlands)"
     ],
     requirements: {
       defeatCountRoute: {
-        routeName: "Ginkgo Landing",
+        routeName: "Sand's Reach (Cobalt Coastlands)",
         count: 10
       }
     }
   },
   {
     challengeName: "Challenge 28",
-    areaId: "Shrouded Ruins",
+    areaId: "Deadwood Haunt (Cobalt Coastlands)",
     unlocks: [
-      "Droning Meadow"
+      "Lava Dome Sanctum (Cobalt Coastlands)"
     ],
     requirements: {
       defeatCountRoute: {
-        routeName: "Shrouded Ruins",
+        routeName: "Deadwood Haunt (Cobalt Coastlands)",
         count: 10
       }
     }
   },
   {
     challengeName: "Challenge 29",
-    areaId: "Droning Meadow",
+    areaId: "Lava Dome Sanctum (Cobalt Coastlands)",
     unlocks: [
-      "Grueling Grove"
+      "Turnback Cave (Cobalt Coastlands)"
     ],
     requirements: {
       defeatCountRoute: {
-        routeName: "Droning Meadow",
+        routeName: "Lava Dome Sanctum (Cobalt Coastlands)",
         count: 10
       }
     }
   },
   {
     challengeName: "Challenge 30",
-    areaId: "Grueling Grove",
+    areaId: "Turnback Cave (Cobalt Coastlands)",
     unlocks: [
-      "Bathers' Lagoon"
+      "Gym - Arcanine"
     ],
     requirements: {
       defeatCountRoute: {
-        routeName: "Grueling Grove",
+        routeName: "Turnback Cave (Cobalt Coastlands)",
         count: 10
       }
     }
   },
   {
     challengeName: "Challenge 31",
-    areaId: "Bathers' Lagoon",
-    unlocks: [
-      "Castaway Shore"
-    ],
-    requirements: {
-      defeatCountRoute: {
-        routeName: "Bathers' Lagoon",
-        count: 10
-      }
-    }
-  },
-  {
-    challengeName: "Challenge 32",
-    areaId: "Castaway Shore",
-    unlocks: [
-      "Deadwood Haunt"
-    ],
-    requirements: {
-      defeatCountRoute: {
-        routeName: "Castaway Shore",
-        count: 10
-      }
-    }
-  },
-  {
-    challengeName: "Challenge 33",
-    areaId: "Deadwood Haunt",
-    unlocks: [
-      "Cobalt Coastlands Fishing Spot"
-    ],
-    requirements: {
-      defeatCountRoute: {
-        routeName: "Deadwood Haunt",
-        count: 10
-      }
-    }
-  },
-  {
-    challengeName: "Challenge 34",
-    areaId: "Cobalt Coastlands Fishing Spot",
-    unlocks: [
-      "Crossing Slope"
-    ],
-    requirements: {
-      defeatCountRoute: {
-        routeName: "Cobalt Coastlands Fishing Spot",
-        count: 10
-      }
-    }
-  },
-  {
-    challengeName: "Challenge 35",
-    areaId: "Crossing Slope",
-    unlocks: [
-      "Veilstone Cape"
-    ],
-    requirements: {
-      defeatCountRoute: {
-        routeName: "Crossing Slope",
-        count: 10
-      }
-    }
-  },
-  {
-    challengeName: "Challenge 36",
-    areaId: "Veilstone Cape",
-    unlocks: [
-      "Tranquility Cove"
-    ],
-    requirements: {
-      defeatCountRoute: {
-        routeName: "Veilstone Cape",
-        count: 10
-      }
-    }
-  },
-  {
-    challengeName: "Challenge 37",
-    areaId: "Tranquility Cove",
-    unlocks: [
-      "Islespy Shore"
-    ],
-    requirements: {
-      defeatCountRoute: {
-        routeName: "Tranquility Cove",
-        count: 10
-      }
-    }
-  },
-  {
-    challengeName: "Challenge 38",
-    areaId: "Islespy Shore",
-    unlocks: [
-      "Spring Path"
-    ],
-    requirements: {
-      defeatCountRoute: {
-        routeName: "Islespy Shore",
-        count: 10
-      }
-    }
-  },
-  {
-    challengeName: "Challenge 39",
-    areaId: "Spring Path",
-    unlocks: [
-      "Firespit Island"
-    ],
-    requirements: {
-      defeatCountRoute: {
-        routeName: "Spring Path",
-        count: 10
-      }
-    }
-  },
-  {
-    challengeName: "Challenge 40",
-    areaId: "Firespit Island",
-    unlocks: [
-      "Gym - Arcanine"
-    ],
-    requirements: {
-      defeatCountRoute: {
-        routeName: "Firespit Island",
-        count: 10
-      }
-    }
-  },
-  {
-    challengeName: "Challenge 41",
     areaId: "Gym - Arcanine",
+    type: "gym",
     unlocks: [
-      "Seagrass Haven"
+      "Fabled Spring (Coronet Highlands)"
     ],
     requirements: {
       earnBadge: {
@@ -3164,75 +3717,219 @@ export const hisuiUnlocks = [
     }
   },
   {
-    challengeName: "Challenge 42",
-    areaId: "Seagrass Haven",
+    challengeName: "Challenge 32",
+    areaId: "Fabled Spring (Coronet Highlands)",
     unlocks: [
-      "Wayward Cave"
+      "Heavenward Lookout (Coronet Highlands)"
     ],
     requirements: {
       defeatCountRoute: {
-        routeName: "Seagrass Haven",
+        routeName: "Fabled Spring (Coronet Highlands)",
+        count: 10
+      }
+    }
+  },
+  {
+    challengeName: "Challenge 33",
+    areaId: "Heavenward Lookout (Coronet Highlands)",
+    unlocks: [
+      "Wayward Cave (Coronet Highlands)"
+    ],
+    requirements: {
+      defeatCountRoute: {
+        routeName: "Heavenward Lookout (Coronet Highlands)",
+        count: 10
+      }
+    }
+  },
+  {
+    challengeName: "Challenge 34",
+    areaId: "Wayward Cave (Coronet Highlands)",
+    unlocks: [
+      "Wayward Wood (Coronet Highlands)"
+    ],
+    requirements: {
+      defeatCountRoute: {
+        routeName: "Wayward Cave (Coronet Highlands)",
+        count: 10
+      }
+    }
+  },
+  {
+    challengeName: "Challenge 35",
+    areaId: "Wayward Wood (Coronet Highlands)",
+    unlocks: [
+      "Lonely Spring (Coronet Highlands)"
+    ],
+    requirements: {
+      defeatCountRoute: {
+        routeName: "Wayward Wood (Coronet Highlands)",
+        count: 10
+      }
+    }
+  },
+  {
+    challengeName: "Challenge 36",
+    areaId: "Lonely Spring (Coronet Highlands)",
+    unlocks: [
+      "Bolderoll Ravine (Coronet Highlands)"
+    ],
+    requirements: {
+      defeatCountRoute: {
+        routeName: "Lonely Spring (Coronet Highlands)",
+        count: 10
+      }
+    }
+  },
+  {
+    challengeName: "Challenge 37",
+    areaId: "Bolderoll Ravine (Coronet Highlands)",
+    unlocks: [
+      "Cloudcap Pass (Coronet Highlands)"
+    ],
+    requirements: {
+      defeatCountRoute: {
+        routeName: "Bolderoll Ravine (Coronet Highlands)",
+        count: 10
+      }
+    }
+  },
+  {
+    challengeName: "Challenge 38",
+    areaId: "Cloudcap Pass (Coronet Highlands)",
+    unlocks: [
+      "Clamberclaw Cliffs (Coronet Highlands)"
+    ],
+    requirements: {
+      defeatCountRoute: {
+        routeName: "Cloudcap Pass (Coronet Highlands)",
+        count: 10
+      }
+    }
+  },
+  {
+    challengeName: "Challenge 39",
+    areaId: "Clamberclaw Cliffs (Coronet Highlands)",
+    unlocks: [
+      "Celestica Ruins (Coronet Highlands)"
+    ],
+    requirements: {
+      defeatCountRoute: {
+        routeName: "Clamberclaw Cliffs (Coronet Highlands)",
+        count: 10
+      }
+    }
+  },
+  {
+    challengeName: "Challenge 40",
+    areaId: "Celestica Ruins (Coronet Highlands)",
+    unlocks: [
+      "Sacred Plaza (Coronet Highlands)"
+    ],
+    requirements: {
+      defeatCountRoute: {
+        routeName: "Celestica Ruins (Coronet Highlands)",
+        count: 10
+      }
+    }
+  },
+  {
+    challengeName: "Challenge 41",
+    areaId: "Sacred Plaza (Coronet Highlands)",
+    unlocks: [
+      "Celestica Trail (Coronet Highlands)"
+    ],
+    requirements: {
+      defeatCountRoute: {
+        routeName: "Sacred Plaza (Coronet Highlands)",
+        count: 10
+      }
+    }
+  },
+  {
+    challengeName: "Challenge 42",
+    areaId: "Celestica Trail (Coronet Highlands)",
+    unlocks: [
+      "Primeval Grotto (Coronet Highlands)"
+    ],
+    requirements: {
+      defeatCountRoute: {
+        routeName: "Celestica Trail (Coronet Highlands)",
         count: 10
       }
     }
   },
   {
     challengeName: "Challenge 43",
-    areaId: "Wayward Cave",
+    areaId: "Primeval Grotto (Coronet Highlands)",
     unlocks: [
-      "Coronet Highlands"
+      "Stonetooth Rows (Coronet Highlands)"
     ],
     requirements: {
       defeatCountRoute: {
-        routeName: "Wayward Cave",
+        routeName: "Primeval Grotto (Coronet Highlands)",
         count: 10
       }
     }
   },
   {
     challengeName: "Challenge 44",
-    areaId: "Coronet Highlands",
+    areaId: "Stonetooth Rows (Coronet Highlands)",
     unlocks: [
-      "Clamberclaw Cliffs"
+      "Sonorous Path (Coronet Highlands)"
     ],
     requirements: {
       defeatCountRoute: {
-        routeName: "Coronet Highlands",
+        routeName: "Stonetooth Rows (Coronet Highlands)",
         count: 10
       }
     }
   },
   {
     challengeName: "Challenge 45",
-    areaId: "Clamberclaw Cliffs",
+    areaId: "Sonorous Path (Coronet Highlands)",
     unlocks: [
-      "Celestica Trail"
+      "Ancient Quarry (Coronet Highlands)"
     ],
     requirements: {
       defeatCountRoute: {
-        routeName: "Clamberclaw Cliffs",
+        routeName: "Sonorous Path (Coronet Highlands)",
         count: 10
       }
     }
   },
   {
     challengeName: "Challenge 46",
-    areaId: "Celestica Trail",
+    areaId: "Ancient Quarry (Coronet Highlands)",
     unlocks: [
-      "Gym - Warden Ingo"
+      "Moonview Arena (Coronet Highlands)"
     ],
     requirements: {
       defeatCountRoute: {
-        routeName: "Celestica Trail",
+        routeName: "Ancient Quarry (Coronet Highlands)",
         count: 10
       }
     }
   },
   {
     challengeName: "Challenge 47",
-    areaId: "Gym - Warden Ingo",
+    areaId: "Moonview Arena (Coronet Highlands)",
     unlocks: [
-      "Celestica Ruins"
+      "Gym - Warden Ingo"
+    ],
+    requirements: {
+      defeatCountRoute: {
+        routeName: "Moonview Arena (Coronet Highlands)",
+        count: 10
+      }
+    }
+  },
+  {
+    challengeName: "Challenge 48",
+    areaId: "Gym - Warden Ingo",
+    type: "gym",
+    unlocks: [
+      "Gym - Electrode"
     ],
     requirements: {
       earnBadge: {
@@ -3242,62 +3939,11 @@ export const hisuiUnlocks = [
     }
   },
   {
-    challengeName: "Challenge 48",
-    areaId: "Celestica Ruins",
-    unlocks: [
-      "Sacred Plaza"
-    ],
-    requirements: {
-      defeatCountRoute: {
-        routeName: "Celestica Ruins",
-        count: 10
-      }
-    }
-  },
-  {
     challengeName: "Challenge 49",
-    areaId: "Sacred Plaza",
-    unlocks: [
-      "Stonetooth Rows"
-    ],
-    requirements: {
-      defeatCountRoute: {
-        routeName: "Sacred Plaza",
-        count: 10
-      }
-    }
-  },
-  {
-    challengeName: "Challenge 50",
-    areaId: "Stonetooth Rows",
-    unlocks: [
-      "Primeval Grotto"
-    ],
-    requirements: {
-      defeatCountRoute: {
-        routeName: "Stonetooth Rows",
-        count: 10
-      }
-    }
-  },
-  {
-    challengeName: "Challenge 51",
-    areaId: "Primeval Grotto",
-    unlocks: [
-      "Gym - Electrode"
-    ],
-    requirements: {
-      defeatCountRoute: {
-        routeName: "Primeval Grotto",
-        count: 10
-      }
-    }
-  },
-  {
-    challengeName: "Challenge 52",
     areaId: "Gym - Electrode",
+    type: "gym",
     unlocks: [
-      "Coronet Highlands Fishing Spot"
+      "Golden Lowlands (Crimson Mirelands)"
     ],
     requirements: {
       earnBadge: {
@@ -3307,186 +3953,445 @@ export const hisuiUnlocks = [
     }
   },
   {
-    challengeName: "Challenge 53",
-    areaId: "Coronet Highlands Fishing Spot",
+    challengeName: "Challenge 50",
+    areaId: "Golden Lowlands (Crimson Mirelands)",
     unlocks: [
-      "Cloudpool Ridge North"
+      "Bolderoll Slope (Crimson Mirelands)"
     ],
     requirements: {
       defeatCountRoute: {
-        routeName: "Coronet Highlands Fishing Spot",
+        routeName: "Golden Lowlands (Crimson Mirelands)",
+        count: 10
+      }
+    }
+  },
+  {
+    challengeName: "Challenge 51",
+    areaId: "Bolderoll Slope (Crimson Mirelands)",
+    unlocks: [
+      "Diamond Heath (Crimson Mirelands)"
+    ],
+    requirements: {
+      defeatCountRoute: {
+        routeName: "Bolderoll Slope (Crimson Mirelands)",
+        count: 10
+      }
+    }
+  },
+  {
+    challengeName: "Challenge 52",
+    areaId: "Diamond Heath (Crimson Mirelands)",
+    unlocks: [
+      "Cloudpool Ridge (Crimson Mirelands)"
+    ],
+    requirements: {
+      defeatCountRoute: {
+        routeName: "Diamond Heath (Crimson Mirelands)",
+        count: 10
+      }
+    }
+  },
+  {
+    challengeName: "Challenge 53",
+    areaId: "Cloudpool Ridge (Crimson Mirelands)",
+    unlocks: [
+      "Cottonsedge Prairie (Crimson Mirelands)"
+    ],
+    requirements: {
+      defeatCountRoute: {
+        routeName: "Cloudpool Ridge (Crimson Mirelands)",
         count: 10
       }
     }
   },
   {
     challengeName: "Challenge 54",
-    areaId: "Cloudpool Ridge North",
+    areaId: "Cottonsedge Prairie (Crimson Mirelands)",
     unlocks: [
-      "Cloudpool Ridge South"
+      "Gapejaw Bog (Crimson Mirelands)"
     ],
     requirements: {
       defeatCountRoute: {
-        routeName: "Cloudpool Ridge North",
+        routeName: "Cottonsedge Prairie (Crimson Mirelands)",
         count: 10
       }
     }
   },
   {
     challengeName: "Challenge 55",
-    areaId: "Cloudpool Ridge South",
+    areaId: "Gapejaw Bog (Crimson Mirelands)",
     unlocks: [
-      "Fabled Spring"
+      "Holm of Trials (Crimson Mirelands)"
     ],
     requirements: {
       defeatCountRoute: {
-        routeName: "Cloudpool Ridge South",
+        routeName: "Gapejaw Bog (Crimson Mirelands)",
         count: 10
       }
     }
   },
   {
     challengeName: "Challenge 56",
-    areaId: "Fabled Spring",
+    areaId: "Holm of Trials (Crimson Mirelands)",
     unlocks: [
-      "Bonechill Wastes North"
+      "Scarlet Bog (Crimson Mirelands)"
     ],
     requirements: {
       defeatCountRoute: {
-        routeName: "Fabled Spring",
+        routeName: "Holm of Trials (Crimson Mirelands)",
         count: 10
       }
     }
   },
   {
     challengeName: "Challenge 57",
-    areaId: "Bonechill Wastes North",
+    areaId: "Scarlet Bog (Crimson Mirelands)",
     unlocks: [
-      "Bonechill Wastes South"
+      "Ursa's Ring (Crimson Mirelands)"
     ],
     requirements: {
       defeatCountRoute: {
-        routeName: "Bonechill Wastes North",
+        routeName: "Scarlet Bog (Crimson Mirelands)",
         count: 10
       }
     }
   },
   {
     challengeName: "Challenge 58",
-    areaId: "Bonechill Wastes South",
+    areaId: "Ursa's Ring (Crimson Mirelands)",
     unlocks: [
-      "Glacier Terrace"
+      "Shrouded Ruins (Crimson Mirelands)"
     ],
     requirements: {
       defeatCountRoute: {
-        routeName: "Bonechill Wastes South",
+        routeName: "Ursa's Ring (Crimson Mirelands)",
         count: 10
       }
     }
   },
   {
     challengeName: "Challenge 59",
-    areaId: "Glacier Terrace",
+    areaId: "Shrouded Ruins (Crimson Mirelands)",
     unlocks: [
-      "Heart's Crag"
+      "Droning Meadow (Crimson Mirelands)"
     ],
     requirements: {
       defeatCountRoute: {
-        routeName: "Glacier Terrace",
+        routeName: "Shrouded Ruins (Crimson Mirelands)",
         count: 10
       }
     }
   },
   {
     challengeName: "Challenge 60",
-    areaId: "Heart's Crag",
+    areaId: "Droning Meadow (Crimson Mirelands)",
     unlocks: [
-      "Snowpoint Temple"
+      "Solaceon Ruins (Crimson Mirelands)"
     ],
     requirements: {
       defeatCountRoute: {
-        routeName: "Heart's Crag",
+        routeName: "Droning Meadow (Crimson Mirelands)",
         count: 10
       }
     }
   },
   {
     challengeName: "Challenge 61",
-    areaId: "Snowpoint Temple",
+    areaId: "Solaceon Ruins (Crimson Mirelands)",
     unlocks: [
-      "Arena's Approach"
+      "Lake Valor (Crimson Mirelands)"
     ],
     requirements: {
       defeatCountRoute: {
-        routeName: "Snowpoint Temple",
+        routeName: "Solaceon Ruins (Crimson Mirelands)",
         count: 10
       }
     }
   },
   {
     challengeName: "Challenge 62",
-    areaId: "Arena's Approach",
+    areaId: "Lake Valor (Crimson Mirelands)",
     unlocks: [
-      "Gym - Avalugg"
+      "Sludge Mound (Crimson Mirelands)"
     ],
     requirements: {
       defeatCountRoute: {
-        routeName: "Arena's Approach",
+        routeName: "Lake Valor (Crimson Mirelands)",
         count: 10
       }
     }
   },
   {
     challengeName: "Challenge 63",
-    areaId: "Gym - Avalugg",
+    areaId: "Sludge Mound (Crimson Mirelands)",
     unlocks: [
-      "Alabaster Icelands Fishing Spot"
-    ],
-    requirements: {
-      earnBadge: {
-        badgeCount: 70,
-        name: "Avalugg Badge"
-      }
-    }
-  },
-  {
-    challengeName: "Challenge 64",
-    areaId: "Alabaster Icelands Fishing Spot",
-    unlocks: [
-      "Whiteout Valley"
+      "Gym - Lilligant"
     ],
     requirements: {
       defeatCountRoute: {
-        routeName: "Alabaster Icelands Fishing Spot",
+        routeName: "Sludge Mound (Crimson Mirelands)",
         count: 10
       }
     }
   },
   {
-    challengeName: "Challenge 65",
-    areaId: "Whiteout Valley",
+    challengeName: "Challenge 64",
+    areaId: "Gym - Lilligant",
+    type: "gym",
     unlocks: [
-      "Etertime Storm"
+      "Nature's Pantry (Obsidian Fieldlands)"
+    ],
+    requirements: {
+      earnBadge: {
+        badgeCount: 66,
+        name: "Lilligant Badge"
+      }
+    }
+  },
+  {
+    challengeName: "Challenge 65",
+    areaId: "Nature's Pantry (Obsidian Fieldlands)",
+    unlocks: [
+      "Deertrack Path (Obsidian Fieldlands)"
     ],
     requirements: {
       defeatCountRoute: {
-        routeName: "Whiteout Valley",
+        routeName: "Nature's Pantry (Obsidian Fieldlands)",
         count: 10
       }
     }
   },
   {
     challengeName: "Challenge 66",
-    areaId: "Etertime Storm",
+    areaId: "Deertrack Path (Obsidian Fieldlands)",
     unlocks: [
-      "Etertime Citadel",
-      "Special Challenge"
+      "The Heartwood (Obsidian Fieldlands)"
     ],
     requirements: {
       defeatCountRoute: {
-        routeName: "Etertime Storm",
+        routeName: "Deertrack Path (Obsidian Fieldlands)",
         count: 10
       }
+    }
+  },
+  {
+    challengeName: "Challenge 67",
+    areaId: "The Heartwood (Obsidian Fieldlands)",
+    unlocks: [
+      "Oreburrow Tunnel (Obsidian Fieldlands)"
+    ],
+    requirements: {
+      defeatCountRoute: {
+        routeName: "The Heartwood (Obsidian Fieldlands)",
+        count: 10
+      }
+    }
+  },
+  {
+    challengeName: "Challenge 68",
+    areaId: "Oreburrow Tunnel (Obsidian Fieldlands)",
+    unlocks: [
+      "Windswept Run (Obsidian Fieldlands)"
+    ],
+    requirements: {
+      defeatCountRoute: {
+        routeName: "Oreburrow Tunnel (Obsidian Fieldlands)",
+        count: 10
+      }
+    }
+  },
+  {
+    challengeName: "Challenge 69",
+    areaId: "Windswept Run (Obsidian Fieldlands)",
+    unlocks: [
+      "Sandgem Flats (Obsidian Fieldlands)"
+    ],
+    requirements: {
+      defeatCountRoute: {
+        routeName: "Windswept Run (Obsidian Fieldlands)",
+        count: 10
+      }
+    }
+  },
+  {
+    challengeName: "Challenge 70",
+    areaId: "Sandgem Flats (Obsidian Fieldlands)",
+    unlocks: [
+      "Obsidian Falls (Obsidian Fieldlands)"
+    ],
+    requirements: {
+      defeatCountRoute: {
+        routeName: "Sandgem Flats (Obsidian Fieldlands)",
+        count: 10
+      }
+    }
+  },
+  {
+    challengeName: "Challenge 71",
+    areaId: "Obsidian Falls (Obsidian Fieldlands)",
+    unlocks: [
+      "Deertrack Heights (Obsidian Fieldlands)"
+    ],
+    requirements: {
+      defeatCountRoute: {
+        routeName: "Obsidian Falls (Obsidian Fieldlands)",
+        count: 10
+      }
+    }
+  },
+  {
+    challengeName: "Challenge 72",
+    areaId: "Deertrack Heights (Obsidian Fieldlands)",
+    unlocks: [
+      "Worn Bridge (Obsidian Fieldlands)"
+    ],
+    requirements: {
+      defeatCountRoute: {
+        routeName: "Deertrack Heights (Obsidian Fieldlands)",
+        count: 10
+      }
+    }
+  },
+  {
+    challengeName: "Challenge 73",
+    areaId: "Worn Bridge (Obsidian Fieldlands)",
+    unlocks: [
+      "Horseshoe Plains (Obsidian Fieldlands)"
+    ],
+    requirements: {
+      defeatCountRoute: {
+        routeName: "Worn Bridge (Obsidian Fieldlands)",
+        count: 10
+      }
+    }
+  },
+  {
+    challengeName: "Challenge 74",
+    areaId: "Horseshoe Plains (Obsidian Fieldlands)",
+    unlocks: [
+      "Lake Verity (Obsidian Fieldlands)"
+    ],
+    requirements: {
+      defeatCountRoute: {
+        routeName: "Horseshoe Plains (Obsidian Fieldlands)",
+        count: 10
+      }
+    }
+  },
+  {
+    challengeName: "Challenge 75",
+    areaId: "Lake Verity (Obsidian Fieldlands)",
+    unlocks: [
+      "Floaro Gardens (Obsidian Fieldlands)"
+    ],
+    requirements: {
+      defeatCountRoute: {
+        routeName: "Lake Verity (Obsidian Fieldlands)",
+        count: 10
+      }
+    }
+  },
+  {
+    challengeName: "Challenge 76",
+    areaId: "Floaro Gardens (Obsidian Fieldlands)",
+    unlocks: [
+      "Ramanas Island (Obsidian Fieldlands)"
+    ],
+    requirements: {
+      defeatCountRoute: {
+        routeName: "Floaro Gardens (Obsidian Fieldlands)",
+        count: 10
+      }
+    }
+  },
+  {
+    challengeName: "Challenge 77",
+    areaId: "Ramanas Island (Obsidian Fieldlands)",
+    unlocks: [
+      "Grueling Grove (Obsidian Fieldlands)"
+    ],
+    requirements: {
+      defeatCountRoute: {
+        routeName: "Ramanas Island (Obsidian Fieldlands)",
+        count: 10
+      }
+    }
+  },
+  {
+    challengeName: "Challenge 78",
+    areaId: "Grueling Grove (Obsidian Fieldlands)",
+    unlocks: [
+      "Aspiration Hill (Obsidian Fieldlands)"
+    ],
+    requirements: {
+      defeatCountRoute: {
+        routeName: "Grueling Grove (Obsidian Fieldlands)",
+        count: 10
+      }
+    }
+  },
+  {
+    challengeName: "Challenge 79",
+    areaId: "Aspiration Hill (Obsidian Fieldlands)",
+    unlocks: [
+      "Tidewater Dam (Obsidian Fieldlands)"
+    ],
+    requirements: {
+      defeatCountRoute: {
+        routeName: "Aspiration Hill (Obsidian Fieldlands)",
+        count: 10
+      }
+    }
+  },
+  {
+    challengeName: "Challenge 80",
+    areaId: "Tidewater Dam (Obsidian Fieldlands)",
+    unlocks: [
+      "Pokémon Sword or Shield (Obsidian Fieldlands)"
+    ],
+    requirements: {
+      defeatCountRoute: {
+        routeName: "Tidewater Dam (Obsidian Fieldlands)",
+        count: 10
+      }
+    }
+  },
+  {
+    challengeName: "Challenge 81",
+    areaId: "Pokémon Sword or Shield (Obsidian Fieldlands)",
+    unlocks: [
+      "Gym - Kleavor"
+    ],
+    requirements: {
+      defeatCountRoute: {
+        routeName: "Pokémon Sword or Shield (Obsidian Fieldlands)",
+        count: 10
+      }
+    }
+  },
+  {
+    challengeName: "Challenge 82",
+    areaId: "Gym - Kleavor",
+    type: "gym",
+    unlocks: [
+      "Gym of Etertime"
+    ],
+    requirements: {
+      earnBadge: {
+        badgeCount: 65,
+        name: "Kleavor Badge"
+      }
+    }
+  },
+  {
+    challengeName: "Challenge 83",
+    areaId: "Gym of Etertime",
+    type: "gym",
+    unlocks: [
+      "Special Route"
+    ],
+    requirements: {
+      defeatHisuiChampion: true
     }
   },
   {
@@ -3538,10 +4443,7 @@ export const hisuiUnlocks = [
       "Moonview Arena"
     ],
     requirements: {
-      defeatCountRoute: {
-        routeName: "Space-Time Distortion",
-        count: 10
-      }
+      defeatHisuiChampion: true
     }
   },
   {
@@ -3606,4 +4508,5 @@ export const hisuiUnlocks = [
       }
     }
   }
+
 ];
