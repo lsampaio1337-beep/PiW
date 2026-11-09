@@ -3308,8 +3308,10 @@ export const hisuiRoutes = {
     name: "Gym of Etertime",
     requirements: {
       defeatHisuiChampion: true
-}
-      },
+    }
+  }
+};
+
 export const hisuiUnlocks = [
   {
     challengeName: "Challenge 01",
