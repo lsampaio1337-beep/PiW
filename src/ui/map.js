@@ -613,61 +613,111 @@ export function navigateToLocation(locationName) {
         switchView("SAFARI_HUB");
         const msg = document.getElementById("safari-welcome-msg");
         if (msg) {
-    } else if (locationName === "Celadon Casino" || locationName === "Goldenrod Game Corner") {
-        window.currentCasinoHub = locationName;
+            const safariCost = state.config.balance.safariZonePrice || 500;
+            msg.innerText = `Welcome to Safari Zone! Here we charge a fee per battle you have and you can use our SafariBalls at will. Do you wanna enter Safari Zone?`;
+        }
+    } else if (locationName === "Casino" || locationName === "Celadon Casino" || locationName === "Goldenrod Game Corner") {
+        if (!window.currentCasinoHub) window.currentCasinoHub = "Celadon Casino";
+        if (locationName !== "Casino") {
+            window.currentCasinoHub = locationName;
+        }
+
+        if (battleSystem) {
+             battleSystem.stop();
+             battleSystem.activeEncounter = null;
+             battleSystem.isSearching = false;
+             if (battleSystem.gymState) battleSystem.gymState.isActive = false;
+        }
+
+        const completedChallenges = state.stats.completedChallengeIds || [];
+        const parseAreaNames = (id) => {
+            if (!state.config.routes) return [];
+            const r = state.config.routes.find(r => r.name === id);
+            return r ? r.unlocks : [];
+        };
+        const isUnlockedByAreaId = (areaId) => completedChallenges.some(id => parseAreaNames(id).includes(areaId));
 
         let machinesHtml = `
-            <div style="background-image: url('./Assets/BG/Casino.png'); text-align: center; background-size: 100% 100%; width: 100%; height: 500px; position: relative; display: flex; align-items: center; justify-content: center;">
-                <div style="display: flex; flex-direction: row; gap: 10px; justify-content: center; align-items: center; width: 100%;">
+            <div class="floating-window" style="text-align: center; margin-bottom: 20px; background: rgba(0,0,0,0.9); border: 2px solid #555; padding: 20px; border-radius: 10px;">
+                <div class="window-header">
+                    <h3 style="color: #ffd700; margin: 0;">${window.currentCasinoHub}</h3>
+                    <button class="action-btn action-btn-danger" style="position: absolute; right: 10px; top: 10px;" onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-casino-modal'); updateUI();">X</button>
+                </div>
+                <p style="color: #ccc; font-size: 14px; margin-top: 5px;">Select a machine to play</p>
+                <div style="display: flex; justify-content: center; gap: 15px; margin-top: 20px; flex-wrap: wrap;">
         `;
 
-        // Starter Troupe is default unlocked
+        // Standard Spot
         machinesHtml += `
-            <div style="display: flex; flex-direction: column; align-items: center;">
-                <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
-                    <img src="./Assets/Extra/Casino/${window.currentMapRegion === 'Johto' ? (window.currentCasinoHub === 'Goldenrod Game Corner' ? 'Region2 Johto Babies.png' : 'Region2 Kanto Starter Troupe.png') : 'Region1 Starter Troupe.png'}" alt="Starter Troupe" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
-                    <div onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-map'); window.startCasinoEncounter(false, window.currentMapRegion === 'Johto' && window.currentCasinoHub === 'Goldenrod Game Corner' ? 'Goldenrod Baby Corner' : 'Casino - Starter Troupe')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter (${state.config.balance.casinoPrices?.standard || 75})"></div>
-                    <div onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-map'); window.startCasinoEncounter(true, window.currentMapRegion === 'Johto' && window.currentCasinoHub === 'Goldenrod Game Corner' ? 'Goldenrod Baby Corner' : 'Casino - Starter Troupe')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny (${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
-                </div>
+            <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
+                <img src="./Assets/Extra/Casino/${window.currentMapRegion === 'Johto' ? 'Region2 Kanto Standard Spot.png' : 'Region1 Standard Spot.png'}" alt="Standard Spot" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
+                <div onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-casino-modal'); window.startCasinoEncounter(false, 'Casino - Standard Spot')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter (${state.config.balance.casinoPrices?.standard || 75})"></div>
+                <div onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-casino-modal'); window.startCasinoEncounter(true, 'Casino - Standard Spot')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny (${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
             </div>
         `;
 
-        if (window.currentCasinoHub === 'Goldenrod Game Corner' || ((window.currentMapRegion === 'Johto' && window.currentCasinoHub !== 'Goldenrod Game Corner') ? isUnlockedByAreaId('Casino Starter Trupe') : isUnlockedByAreaId('Celadon Casino'))) {
+        // Starter Troupe
+        if ((window.currentMapRegion === 'Johto' ? isUnlockedByAreaId('Casino Starter Troupe') : isUnlockedByAreaId('Mt. Moon')) && window.currentCasinoHub !== 'Goldenrod Game Corner') {
             machinesHtml += `
                 <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
-                    <img src="./Assets/Extra/Casino/${window.currentMapRegion === 'Johto' ? (window.currentCasinoHub === 'Goldenrod Game Corner' ? 'Region2 Johto Lucky Spot.png' : 'Region2 Kanto Babies.png') : 'Region1 Mid Troupe.png'}" alt="${window.currentMapRegion === 'Johto' ? 'Babies' : 'Mid Troupe'}" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
-                    <div onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-map'); window.startCasinoEncounter(false, window.currentMapRegion === 'Johto' && window.currentCasinoHub === 'Goldenrod Game Corner' ? 'Goldenrod Lucky Spot Corner' : 'Casino - Mid Troupe')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter (${state.config.balance.casinoPrices?.standard || 75})"></div>
-                    <div onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-map'); window.startCasinoEncounter(true, window.currentMapRegion === 'Johto' && window.currentCasinoHub === 'Goldenrod Game Corner' ? 'Goldenrod Lucky Spot Corner' : 'Casino - Mid Troupe')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny (${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
+                    <img src="./Assets/Extra/Casino/${window.currentMapRegion === 'Johto' ? 'Region2 Kanto Starter Troupe.png' : 'Region1 Starter Troupe.png'}" alt="Starter Troupe" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
+                    <div onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-casino-modal'); window.startCasinoEncounter(false, 'Casino - Starter Troupe')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter (${state.config.balance.casinoPrices?.standard || 75})"></div>
+                    <div onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-casino-modal'); window.startCasinoEncounter(true, 'Casino - Starter Troupe')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny (${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
                 </div>
             `;
         }
 
-        if ((window.currentMapRegion === 'Johto' ? isUnlockedByAreaId('Dojo') : isUnlockedByAreaId('Big Fishing Spot')) && window.currentCasinoHub !== 'Goldenrod Game Corner') {
+        // Baby Corner (Johto / Goldenrod)
+        if (window.currentMapRegion === 'Johto' && isUnlockedByAreaId('Goldenrod Baby Corner') && window.currentCasinoHub === 'Goldenrod Game Corner') {
             machinesHtml += `
                 <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
-                    <img src="./Assets/Extra/Casino/${window.currentMapRegion === 'Johto' ? 'Region2 Late Troupe Kanto.png' : 'Region1 Late Troupe.png'}" alt="Late Troupe" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
-                    <div onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-map'); window.startCasinoEncounter(false, 'Casino - Late Troupe')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter (${state.config.balance.casinoPrices?.standard || 75})"></div>
-                    <div onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-map'); window.startCasinoEncounter(true, 'Casino - Late Troupe')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny (${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
+                    <img src="./Assets/Extra/Casino/Region2 Johto Babies.png" alt="Baby Corner" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
+                    <div onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-casino-modal'); window.startCasinoEncounter(false, 'Goldenrod Baby Corner')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter (${state.config.balance.casinoPrices?.standard || 75})"></div>
+                    <div onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-casino-modal'); window.startCasinoEncounter(true, 'Goldenrod Baby Corner')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny (${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
                 </div>
             `;
         }
 
+        // Lucky Spot (Johto / Goldenrod)
+        if (window.currentMapRegion === 'Johto' && isUnlockedByAreaId('Goldenrod Lucky Spot Corner') && window.currentCasinoHub === 'Goldenrod Game Corner') {
+            machinesHtml += `
+                <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
+                    <img src="./Assets/Extra/Casino/Region2 Johto Lucky Spot.png" alt="Lucky Spot" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
+                    <div onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-casino-modal'); window.startCasinoEncounter(false, 'Goldenrod Lucky Spot Corner')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter (${state.config.balance.casinoPrices?.standard || 75})"></div>
+                    <div onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-casino-modal'); window.startCasinoEncounter(true, 'Goldenrod Lucky Spot Corner')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny (${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
+                </div>
+            `;
+        }
+
+        // Late Troupe
+        if ((window.currentMapRegion === 'Johto' ? isUnlockedByAreaId('Casino Late Troupe') : isUnlockedByAreaId('Rock Tunnel')) && window.currentCasinoHub !== 'Goldenrod Game Corner') {
+            machinesHtml += `
+                <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
+                    <img src="./Assets/Extra/Casino/${window.currentMapRegion === 'Johto' ? 'Region2 Kanto Late Troupe.png' : 'Region1 Late Troupe.png'}" alt="Late Troupe" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
+                    <div onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-casino-modal'); window.startCasinoEncounter(false, 'Casino - Late Troupe')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter (${state.config.balance.casinoPrices?.standard || 75})"></div>
+                    <div onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-casino-modal'); window.startCasinoEncounter(true, 'Casino - Late Troupe')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny (${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
+                </div>
+            `;
+        }
+
+        // Eeveelutions
         if ((window.currentMapRegion === 'Johto' ? isUnlockedByAreaId('Casino Special Spot') : isUnlockedByAreaId('Small Fishing Spot')) && window.currentCasinoHub !== 'Goldenrod Game Corner') {
             machinesHtml += `
                 <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
                     <img src="./Assets/Extra/Casino/${window.currentMapRegion === 'Johto' ? 'Region2 Kanto Eeveelutions.png' : 'Region1 Eeveelutions.png'}" alt="Eeveelutions" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
-                    <div onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-map'); window.startCasinoEncounter(false, 'Casino - Eeveelutions')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter (${state.config.balance.casinoPrices?.standard || 75})"></div>
-                    <div onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-map'); window.startCasinoEncounter(true, 'Casino - Eeveelutions')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny (${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
+                    <div onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-casino-modal'); window.startCasinoEncounter(false, 'Casino - Eeveelutions')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter (${state.config.balance.casinoPrices?.standard || 75})"></div>
+                    <div onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-casino-modal'); window.startCasinoEncounter(true, 'Casino - Eeveelutions')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny (${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
                 </div>
             `;
         }
 
+        // Special Spot
         if ((window.currentMapRegion === 'Johto' ? isUnlockedByAreaId('Casino Babies') : isUnlockedByAreaId('Fighting Dojo')) && window.currentCasinoHub !== 'Goldenrod Game Corner') {
             machinesHtml += `
                 <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
                     <img src="./Assets/Extra/Casino/${window.currentMapRegion === 'Johto' ? 'Region2 Kanto Special Spot.png' : 'Region1 Special Spot.png'}" alt="Special Spot" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
-                    <div onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-map'); window.startCasinoEncounter(false, 'Casino - Special Spot')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter (${state.config.balance.casinoPrices?.standard || 75})"></div>
-                    <div onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-map'); window.startCasinoEncounter(true, 'Casino - Special Spot')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny (${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
+                    <div onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-casino-modal'); window.startCasinoEncounter(false, 'Casino - Special Spot')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter (${state.config.balance.casinoPrices?.standard || 75})"></div>
+                    <div onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-casino-modal'); window.startCasinoEncounter(true, 'Casino - Special Spot')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny (${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
                 </div>
             `;
         }
@@ -676,9 +726,16 @@ export function navigateToLocation(locationName) {
                 </div>
             </div>
         `;
-        window.showModal(locationName, machinesHtml, 'window-map', '800px');
-    } else if (locationName.startsWith("Casino - ") || locationName === "Casino Starter Trupe" || locationName === "Casino Babies" || locationName === "Casino Special Spot" || locationName === "Casino Eeveelution" || locationName === "Casino Late Trupe" || locationName === "Goldenrod Baby Corner" || locationName === "Goldenrod Lucky Spot Corner") {
+        window.showModal(locationName, machinesHtml, 'window-casino-modal', '800px');
+    } else if (locationName.startsWith("Casino - ") || locationName === "Casino Starter Trupe" || locationName === "Casino Babies" || locationName === "Casino Special Spot" || locationName === "Casino Eeveelution" || locationName === "Casino Late Trupe" || locationName === "Goldenrod Baby Corner" || locationName === "Goldenrod Lucky Spot Corner" || locationName === "Casino - Starter Troupe" || locationName === "Casino - Mid Troupe" || locationName === "Casino - Late Troupe" || locationName === "Casino - Eeveelutions") {
         if (!window.currentCasinoHub) window.currentCasinoHub = "Celadon Casino";
+
+        if (battleSystem) {
+             battleSystem.stop();
+             battleSystem.activeEncounter = null;
+             battleSystem.isSearching = false;
+             if (battleSystem.gymState) battleSystem.gymState.isActive = false;
+        }
 
         let bgImg = '';
         const isGoldenrod = window.currentCasinoHub === "Goldenrod Game Corner";
@@ -686,28 +743,31 @@ export function navigateToLocation(locationName) {
         if (locationName === 'Casino - Starter Troupe' || locationName === 'Casino Starter Trupe' || locationName === 'Goldenrod Baby Corner') {
             bgImg = window.currentMapRegion === 'Johto' ? (isGoldenrod ? 'Region2 Johto Babies.png' : 'Region2 Kanto Starter Troupe.png') : 'Region1 Starter Troupe.png';
         }
-        if (locationName === 'Casino - Mid Troupe' || locationName === 'Casino Babies' || locationName === 'Goldenrod Lucky Spot Corner') {
+        else if (locationName === 'Casino - Mid Troupe' || locationName === 'Casino Babies' || locationName === 'Goldenrod Lucky Spot Corner') {
             bgImg = window.currentMapRegion === 'Johto' ? (isGoldenrod ? 'Region2 Johto Lucky Spot.png' : 'Region2 Kanto Babies.png') : 'Region1 Mid Troupe.png';
         }
-        if (locationName === 'Casino - Late Troupe' || locationName === 'Casino Late Trupe') {
+        else if (locationName === 'Casino - Late Troupe' || locationName === 'Casino Late Trupe') {
             bgImg = window.currentMapRegion === 'Johto' ? (isGoldenrod ? '' : 'Region2 Late Troupe Kanto.png') : 'Region1 Late Troupe.png';
         }
-        if (locationName === 'Casino - Eeveelutions' || locationName === 'Casino Eeveelution') {
+        else if (locationName === 'Casino - Eeveelutions' || locationName === 'Casino Eeveelution') {
             bgImg = window.currentMapRegion === 'Johto' ? (isGoldenrod ? '' : 'Region2 Kanto Eeveelutions.png') : 'Region1 Eeveelutions.png';
         }
-        if (locationName === 'Casino - Special Spot' || locationName === 'Casino Special Spot') {
+        else if (locationName === 'Casino - Special Spot' || locationName === 'Casino Special Spot') {
             bgImg = window.currentMapRegion === 'Johto' ? (isGoldenrod ? '' : 'Region2 Kanto Special Spot.png') : 'Region1 Special Spot.png';
+        }
+        else { // Standard
+            bgImg = window.currentMapRegion === 'Johto' ? (isGoldenrod ? '' : 'Region2 Kanto Standard Spot.png') : 'Region1 Standard Spot.png';
         }
 
         let html = `
-            <div style="background-image: url('./Assets/Extra/Casino/${bgImg}'); background-position: center; background-repeat: no-repeat; background-size: contain; width: 100%; height: 500px; position: relative;">
+            <div class="floating-window" style="background-image: url('./Assets/Extra/Casino/${bgImg}'); background-position: center; background-repeat: no-repeat; background-size: contain; width: 100%; height: 500px; position: relative;">
         `;
 
         // We use relative positioning for click areas
         const stdLeft = 16.3;
         const stdTop = 34.16;
         const stdWidth = 76.7 - 16.3;
-        const stdHeight = 61.06 - 34.16;
+        const stdHeight = 58.74 - 34.16;
 
         const shinyLeft = 19.24;
         const shinyTop = 85.96;
@@ -715,12 +775,13 @@ export function navigateToLocation(locationName) {
         const shinyHeight = 94.72 - 85.96;
 
         // Overlay transparent divs
-        html += `<div class="casino-overlay-btn" onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-map'); window.startCasinoEncounter(false, '${locationName}')" style="position: absolute; left: ${stdLeft}%; top: ${stdTop}%; width: ${stdWidth}%; height: ${stdHeight}%; cursor: pointer;" title="Standard Encounter (${state.config.balance.casinoPrices?.standard || 75})"></div>`;
-        html += `<div class="casino-overlay-btn" onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-map'); window.startCasinoEncounter(true, '${locationName}')" style="position: absolute; left: ${shinyLeft}%; top: ${shinyTop}%; width: ${shinyWidth}%; height: ${shinyHeight}%; cursor: pointer;" title="2x Shiny (${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>`;
+        html += `<div class="casino-overlay-btn" onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-casino-modal'); window.startCasinoEncounter(false, '${locationName}')" style="position: absolute; left: ${stdLeft}%; top: ${stdTop}%; width: ${stdWidth}%; height: ${61.06 - 34.16}%; cursor: pointer;" title="Standard Encounter (${state.config.balance.casinoPrices?.standard || 75})"></div>`;
+        html += `<div class="casino-overlay-btn" onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-casino-modal'); window.startCasinoEncounter(true, '${locationName}')" style="position: absolute; left: ${shinyLeft}%; top: ${shinyTop}%; width: ${shinyWidth}%; height: ${shinyHeight}%; cursor: pointer;" title="2x Shiny (${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>`;
         html += `<button class="casino-overlay-btn" onclick="window.navigateToLocation('${window.currentCasinoHub}')" style="position: absolute; top: 10px; left: 10px; padding: 10px; cursor: pointer; z-index: 100;">Back to Lobby</button>`;
+        html += `<button class="action-btn action-btn-danger" style="position: absolute; right: 10px; top: 10px;" onclick="if(window.windowManager) window.windowManager.closeDynamicWindow('window-casino-modal'); updateUI();">X</button>`;
         html += `</div>`;
 
-        window.showModal(locationName, html, 'window-map', '800px');
+        window.showModal(locationName, html, 'window-casino-modal', '800px');
     } else if (locationName === "Daycare") {
         if (!state.stats.hasSeenDaycare) {
             document.getElementById('daycare-first-time-overlay').style.display = 'flex';
