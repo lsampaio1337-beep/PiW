@@ -12,7 +12,7 @@ To update or recreate region data from Serebii.net for the Pokémon Idle game, y
 ## Process
 
 ### Step 1: Identify Target Categories and Allowed Spawns
-First, list the Serebii URL categories for the region you want to scrape, along with the specific encounter types you want to keep. In the Hisui update, we filtered for standard spawns, flying, shaking trees/ore, and Unown notes, while explicitly ignoring Alphas and Mass Outbreaks.
+First, list the Serebii URL categories for the region you want to scrape, along with the specific encounter types you want to keep. In the Hisui update, we filtered for standard spawns, flying, shaking trees/ore, Unown notes, and Space-Time Distortions, while explicitly ignoring Alphas and Mass Outbreaks.
 
 ```python
 CATEGORIES = [
