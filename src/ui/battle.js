@@ -341,10 +341,10 @@ function updateGymBackground(combatArena, state, battleSystem) {
 function getRouteBackgroundImage(route) {
     if (!route) return 'url(\'./Assets/BG/BattleMode/Test.png\')';
 
-    if (["Safari Zone", "Kanto Safari Zone"].includes(route)) {
+    if (["Johto Safari Zone", "Kanto Safari Zone"].includes(route)) {
         return `url('./Assets/BG/SafariZone.png')`;
     }
-    if (route.startsWith('Casino')) {
+    if (route.startsWith('Celadon Casino')) {
         return `url('./Assets/BG/Casino.png')`;
     }
     if (route === 'Viridian Forest') {

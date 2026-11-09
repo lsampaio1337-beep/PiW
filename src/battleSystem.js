@@ -839,7 +839,7 @@ class BattleSystem {
             return;
         }
 
-        if (["Safari Zone", "Kanto Safari Zone"].includes(this.state.currentRoute)) {
+        if (["Johto Safari Zone", "Kanto Safari Zone"].includes(this.state.currentRoute)) {
             const safariCost = this.state.config.balance.safariZonePrice || 500;
             if (this.state.trainer.money < safariCost) {
                 this.stop();
@@ -864,7 +864,7 @@ class BattleSystem {
 
         this.consecutiveHeals = 0; // Reset for new battle
 
-        if (this.state.currentRoute && (this.state.currentRoute.startsWith("Casino - ") || this.state.currentRoute === "Goldenrod Baby Corner" || this.state.currentRoute === "Goldenrod Lucky Spot Corner")) {
+        if (this.state.currentRoute && (this.state.currentRoute.startsWith("Celadon Casino ") || this.state.currentRoute === "Goldenrod Babies Corner" || this.state.currentRoute === "Goldenrod Lucky Spot Corner")) {
             const baseCostStandard = this.state.config.balance.casinoPrices?.standard || 10;
             const baseCostSpecial = this.state.config.balance.casinoPrices?.doubleShiny || 20;
             const cost = this.state.casinoDoubleShiny ? baseCostSpecial : baseCostStandard;
@@ -1117,7 +1117,7 @@ class BattleSystem {
 
             // Track seen for pokedex using actual encounter (Ditto or regular)
             if (q.name === "Shiny") {
-                if (this.state.currentRoute === 'Casino') {
+                if (this.state.currentRoute === 'Celadon Casino') {
                     if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') window.trackDailyChallenge('casino_shiny');
                 }
                 this.state.stats.shiniesSeen = (this.state.stats.shiniesSeen || 0) + 1;
@@ -1400,7 +1400,7 @@ class BattleSystem {
 
         let tier = this.state.settings.activeBallTier;
 
-        // Smart Capture Mode override (only if outside Safari Zone, checked later)
+        // Smart Capture Mode override (only if outside Johto Safari Zone, checked later)
         if (this.activeEncounter && this.state.settings.smartCapture) {
             let overrideTier;
             if (this.activeEncounter.qualityName === "Shiny") {
@@ -1420,7 +1420,7 @@ class BattleSystem {
             }
         }
 
-        let isSafariZone = ["Safari Zone", "Kanto Safari Zone"].includes(this.state.currentRoute);
+        let isSafariZone = ["Johto Safari Zone", "Kanto Safari Zone"].includes(this.state.currentRoute);
         let ballName;
         let multiplier;
 
@@ -1614,8 +1614,8 @@ class BattleSystem {
                             window.trackDailyChallenge('catch_species', { species: caughtPokemon.name });
                             window.trackDailyChallenge('catch_type', { types: caughtPokemon.types });
                             window.trackDailyChallenge('catch_ball_tier', { ball: this.activeEncounter.caughtBall });
-                            if (["Safari Zone", "Kanto Safari Zone"].includes(this.state.currentRoute)) window.trackDailyChallenge('safari_catch');
-                            if (this.state.currentRoute === 'Casino') window.trackDailyChallenge('casino_catch'); // Would need species tracking logic inside trackDailyChallenge if we fully implement it
+                            if (["Johto Safari Zone", "Kanto Safari Zone"].includes(this.state.currentRoute)) window.trackDailyChallenge('safari_catch');
+                            if (this.state.currentRoute === 'Celadon Casino') window.trackDailyChallenge('casino_catch'); // Would need species tracking logic inside trackDailyChallenge if we fully implement it
                         }
                         if (sumIV < 300) this.state.stats.caughtIVUnder300 = (this.state.stats.caughtIVUnder300 || 0) + 1;
                         if (sumIV < 350) this.state.stats.caughtIVUnder350 = (this.state.stats.caughtIVUnder350 || 0) + 1;
@@ -2259,16 +2259,16 @@ class BattleSystem {
         const maxTime = Math.min(elapsedMs, 111 * 60 * 60 * 1000);
         const route = this.getRoute(this.state.currentRoute);
 
-        if (!route && this.state.currentRoute !== "Casino - Eeveelutions" && !this.state.currentRoute.startsWith("Casino")) {
+        if (!route && this.state.currentRoute !== "Celadon Casino Eeveelutions" && !this.state.currentRoute.startsWith("Celadon Casino")) {
             return results; // Can't farm without a route
         }
 
         let encounterCost = 0;
         let requiresPayment = false;
-        if (["Safari Zone", "Kanto Safari Zone"].includes(this.state.currentRoute)) {
+        if (["Johto Safari Zone", "Kanto Safari Zone"].includes(this.state.currentRoute)) {
             encounterCost = this.state.config.balance.safariZonePrice || 500;
             requiresPayment = true;
-        } else if (this.state.currentRoute && (this.state.currentRoute.startsWith("Casino - ") || this.state.currentRoute === "Goldenrod Baby Corner" || this.state.currentRoute === "Goldenrod Lucky Spot Corner")) {
+        } else if (this.state.currentRoute && (this.state.currentRoute.startsWith("Celadon Casino ") || this.state.currentRoute === "Goldenrod Babies Corner" || this.state.currentRoute === "Goldenrod Lucky Spot Corner")) {
             const baseCostStandard = this.state.config.balance.casinoPrices?.standard || 10;
             const baseCostSpecial = this.state.config.balance.casinoPrices?.doubleShiny || 20;
             encounterCost = this.state.casinoDoubleShiny ? baseCostSpecial : baseCostStandard;
@@ -2324,7 +2324,7 @@ class BattleSystem {
             this.state.stats.seenSpecies[pokemonBase.name] = true;
 
             if (q.name === "Shiny") {
-                if (this.state.currentRoute === 'Casino') {
+                if (this.state.currentRoute === 'Celadon Casino') {
                     if (typeof window !== 'undefined' && typeof window.trackDailyChallenge === 'function') window.trackDailyChallenge('casino_shiny');
                 }
                 this.state.stats.shiniesSeen = (this.state.stats.shiniesSeen || 0) + 1;
