@@ -610,11 +610,17 @@ export function navigateToLocation(locationName) {
             battleSystem.stop();
         }
         window.currentSafariZone = locationName;
-        switchView("SAFARI_HUB");
-        const msg = document.getElementById("safari-welcome-msg");
-        if (msg) {
-            const safariCost = state.config.balance.safariZonePrice || 500;
-            msg.innerText = `Welcome to ${locationName}! Here we charge a fee per battle you have and you can use our SafariBalls at will. Do you wanna enter ${locationName}?`;
+
+        const safariCost = state.config.balance.safariZonePrice || 500;
+        const html = `
+            <div style="text-align: center; color: white; background: rgba(0,0,0,0.8); padding: 20px; border-radius: 10px; font-size: 20px; font-family: monospace;">
+                <p>Welcome to ${locationName}! Here we charge a fee per battle you have and you can use our SafariBalls at will.<br><br>Do you wanna enter ${locationName}?</p>
+                <button onclick="window.enterSafariZone()" style="margin-top: 20px; padding: 10px 20px; font-size: 18px; cursor: pointer; background: #ffcc00; border: none; border-radius: 5px; color: black; font-weight: bold;">Enter (${safariCost})</button>
+            </div>
+        `;
+
+        if (window.showModal) {
+            window.showModal(locationName, html, "window-safari-modal", "600px", "auto");
         }
     } else if (locationName === "Celadon Casino" || locationName === "Goldenrod Game Corner") {
         window.currentCasinoHub = locationName;
@@ -624,80 +630,70 @@ export function navigateToLocation(locationName) {
              battleSystem.isSearching = false;
              if (battleSystem.gymState) battleSystem.gymState.isActive = false;
         }
-        switchView("CASINO_HUB");
 
-        // Reset Casino background to default lobby if it was changed
-        const viewCasino = document.getElementById("view-casino");
-        viewCasino.style.backgroundImage = "url('./Assets/BG/Casino.png')";
-        const casinoContent = document.getElementById("casino-content");
-        if(casinoContent) casinoContent.style.display = 'block';
+        const completedChallenges = state.stats.completedChallengeIds || [];
+        const isUnlockedByAreaId = (areaId) => completedChallenges.some(id => parseAreaNames(id).includes(areaId));
 
-        // Clear any overlay buttons
-        const oldOverlays = viewCasino.querySelectorAll('.casino-overlay-btn');
-        oldOverlays.forEach(el => el.remove());
-
-        const btnContainer = document.getElementById("casino-buttons-container");
-        if (btnContainer) {
-            btnContainer.style.width = '100%';
-            btnContainer.style.height = '100%';
-
-            const completedChallenges = state.stats.completedChallengeIds || [];
-            const isUnlockedByAreaId = (areaId) => completedChallenges.some(id => parseAreaNames(id).includes(areaId));
-
-            let machinesHtml = `
+        let machinesHtml = `
+            <div style="position: relative; width: 100%; min-height: 400px; background-image: url('./Assets/BG/Casino.png'); background-size: 100% 100%; background-position: center; display: flex; align-items: center; justify-content: center; overflow: hidden; border-radius: 8px;">
                 <div style="position: absolute; top: 20px; left: 0; width: 100%; text-align: center; z-index: 10; color: white; text-shadow: 2px 2px 4px black; font-size: 24px;">
-                    <h3>Standard Route $${state.config.balance.casinoPrices?.standard || 75} 2x Shiny $${state.config.balance.casinoPrices?.doubleShiny || 200}</h3>
+                    <h3>Standard Route ${state.config.balance.casinoPrices?.standard || 75} 2x Shiny ${state.config.balance.casinoPrices?.doubleShiny || 200}</h3>
                 </div>
-                <div style="display: flex; justify-content: space-evenly; align-items: center; width: 100%; height: 100%; padding: 15px; box-sizing: border-box;">
+                <div style="display: flex; justify-content: space-evenly; align-items: center; width: 100%; height: 100%; padding: 15px; box-sizing: border-box; z-index: 2;">
                     <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
                         <img src="./Assets/Extra/Casino/${window.currentMapRegion === 'Johto' ? (window.currentCasinoHub === 'Goldenrod Game Corner' ? 'Region2 Johto Babies.png' : 'Region2 Kanto Starter Troupe.png') : 'Region1 Starter Troupe.png'}" alt="Starter Troupe" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
-                        <div onclick="window.startCasinoEncounter(false, window.currentMapRegion === 'Johto' && window.currentCasinoHub === 'Goldenrod Game Corner' ? 'Goldenrod Babies Corner' : 'Celadon Casino Starter Troupe')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter ($${state.config.balance.casinoPrices?.standard || 75})"></div>
-                        <div onclick="window.startCasinoEncounter(true, window.currentMapRegion === 'Johto' && window.currentCasinoHub === 'Goldenrod Game Corner' ? 'Goldenrod Babies Corner' : 'Celadon Casino Starter Troupe')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny ($${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
+                        <div onclick="window.startCasinoEncounter(false, window.currentMapRegion === 'Johto' && window.currentCasinoHub === 'Goldenrod Game Corner' ? 'Goldenrod Babies Corner' : 'Celadon Casino Starter Troupe')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter (${state.config.balance.casinoPrices?.standard || 75})"></div>
+                        <div onclick="window.startCasinoEncounter(true, window.currentMapRegion === 'Johto' && window.currentCasinoHub === 'Goldenrod Game Corner' ? 'Goldenrod Babies Corner' : 'Celadon Casino Starter Troupe')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny (${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
                     </div>
+        `;
+
+        if (window.currentCasinoHub === 'Goldenrod Game Corner' || ((window.currentMapRegion === 'Johto' && window.currentCasinoHub !== 'Goldenrod Game Corner') ? isUnlockedByAreaId('Celadon Casino Starter Troupe') : isUnlockedByAreaId('Celadon Casino'))) {
+            machinesHtml += `
+                <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
+                    <img src="./Assets/Extra/Casino/${window.currentMapRegion === 'Johto' ? (window.currentCasinoHub === 'Goldenrod Game Corner' ? 'Region2 Johto Lucky Spot.png' : 'Region2 Kanto Babies.png') : 'Region1 Mid Troupe.png'}" alt="${window.currentMapRegion === 'Johto' ? 'Babies' : 'Mid Troupe'}" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
+                    <div onclick="window.startCasinoEncounter(false, window.currentMapRegion === 'Johto' && window.currentCasinoHub === 'Goldenrod Game Corner' ? 'Goldenrod Lucky Spot Corner' : 'Celadon Casino Mid Troupe')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter (${state.config.balance.casinoPrices?.standard || 75})"></div>
+                    <div onclick="window.startCasinoEncounter(true, window.currentMapRegion === 'Johto' && window.currentCasinoHub === 'Goldenrod Game Corner' ? 'Goldenrod Lucky Spot Corner' : 'Celadon Casino Mid Troupe')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny (${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
+                </div>
             `;
+        }
 
-            if (window.currentCasinoHub === 'Goldenrod Game Corner' || ((window.currentMapRegion === 'Johto' && window.currentCasinoHub !== 'Goldenrod Game Corner') ? isUnlockedByAreaId('Celadon Casino Starter Troupe') : isUnlockedByAreaId('Celadon Casino'))) {
-                machinesHtml += `
-                    <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
-                        <img src="./Assets/Extra/Casino/${window.currentMapRegion === 'Johto' ? (window.currentCasinoHub === 'Goldenrod Game Corner' ? 'Region2 Johto Lucky Spot.png' : 'Region2 Kanto Babies.png') : 'Region1 Mid Troupe.png'}" alt="${window.currentMapRegion === 'Johto' ? 'Babies' : 'Mid Troupe'}" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
-                        <div onclick="window.startCasinoEncounter(false, window.currentMapRegion === 'Johto' && window.currentCasinoHub === 'Goldenrod Game Corner' ? 'Goldenrod Lucky Spot Corner' : 'Celadon Casino Mid Troupe')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter ($${state.config.balance.casinoPrices?.standard || 75})"></div>
-                        <div onclick="window.startCasinoEncounter(true, window.currentMapRegion === 'Johto' && window.currentCasinoHub === 'Goldenrod Game Corner' ? 'Goldenrod Lucky Spot Corner' : 'Celadon Casino Mid Troupe')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny ($${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
-                    </div>
-                `;
-            }
+        if ((window.currentMapRegion === 'Johto' ? isUnlockedByAreaId('Dojo') : isUnlockedByAreaId('Big Fishing Spot')) && window.currentCasinoHub !== 'Goldenrod Game Corner') {
+            machinesHtml += `
+                <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
+                    <img src="./Assets/Extra/Casino/${window.currentMapRegion === 'Johto' ? 'Region2 Late Troupe Kanto.png' : 'Region1 Late Troupe.png'}" alt="Late Troupe" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
+                    <div onclick="window.startCasinoEncounter(false, 'Celadon Casino Late Troupe')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter (${state.config.balance.casinoPrices?.standard || 75})"></div>
+                    <div onclick="window.startCasinoEncounter(true, 'Celadon Casino Late Troupe')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny (${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
+                </div>
+            `;
+        }
 
-            if ((window.currentMapRegion === 'Johto' ? isUnlockedByAreaId('Dojo') : isUnlockedByAreaId('Big Fishing Spot')) && window.currentCasinoHub !== 'Goldenrod Game Corner') {
-                machinesHtml += `
-                    <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
-                        <img src="./Assets/Extra/Casino/${window.currentMapRegion === 'Johto' ? 'Region2 Late Troupe Kanto.png' : 'Region1 Late Troupe.png'}" alt="Late Troupe" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
-                        <div onclick="window.startCasinoEncounter(false, 'Celadon Casino Late Troupe')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter ($${state.config.balance.casinoPrices?.standard || 75})"></div>
-                        <div onclick="window.startCasinoEncounter(true, 'Celadon Casino Late Troupe')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny ($${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
-                    </div>
-                `;
-            }
+        if ((window.currentMapRegion === 'Johto' ? isUnlockedByAreaId('Celadon Casino Special Spot') : isUnlockedByAreaId('Small Fishing Spot')) && window.currentCasinoHub !== 'Goldenrod Game Corner') {
+            machinesHtml += `
+                <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
+                    <img src="./Assets/Extra/Casino/${window.currentMapRegion === 'Johto' ? 'Region2 Kanto Eeveelutions.png' : 'Region1 Eeveelutions.png'}" alt="Eeveelutions" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
+                    <div onclick="window.startCasinoEncounter(false, 'Celadon Casino Eeveelutions')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter (${state.config.balance.casinoPrices?.standard || 75})"></div>
+                    <div onclick="window.startCasinoEncounter(true, 'Celadon Casino Eeveelutions')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny (${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
+                </div>
+            `;
+        }
 
-            if ((window.currentMapRegion === 'Johto' ? isUnlockedByAreaId('Celadon Casino Special Spot') : isUnlockedByAreaId('Small Fishing Spot')) && window.currentCasinoHub !== 'Goldenrod Game Corner') {
-                machinesHtml += `
-                    <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
-                        <img src="./Assets/Extra/Casino/${window.currentMapRegion === 'Johto' ? 'Region2 Kanto Eeveelutions.png' : 'Region1 Eeveelutions.png'}" alt="Eeveelutions" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
-                        <div onclick="window.startCasinoEncounter(false, 'Celadon Casino Eeveelutions')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter ($${state.config.balance.casinoPrices?.standard || 75})"></div>
-                        <div onclick="window.startCasinoEncounter(true, 'Celadon Casino Eeveelutions')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny ($${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
-                    </div>
-                `;
-            }
+        if ((window.currentMapRegion === 'Johto' ? isUnlockedByAreaId('Celadon Casino Babies') : isUnlockedByAreaId('Fighting Dojo')) && window.currentCasinoHub !== 'Goldenrod Game Corner') {
+            machinesHtml += `
+                <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
+                    <img src="./Assets/Extra/Casino/${window.currentMapRegion === 'Johto' ? 'Region2 Kanto Special Spot.png' : 'Region1 Special Spot.png'}" alt="Special Spot" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
+                    <div onclick="window.startCasinoEncounter(false, 'Celadon Casino Special Spot')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter (${state.config.balance.casinoPrices?.standard || 75})"></div>
+                    <div onclick="window.startCasinoEncounter(true, 'Celadon Casino Special Spot')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny (${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
+                </div>
+            `;
+        }
 
-            if ((window.currentMapRegion === 'Johto' ? isUnlockedByAreaId('Celadon Casino Babies') : isUnlockedByAreaId('Fighting Dojo')) && window.currentCasinoHub !== 'Goldenrod Game Corner') {
-                machinesHtml += `
-                    <div style="position: relative; text-align: center; flex: 1 1 0; max-width: 200px; margin: 0 5px;">
-                        <img src="./Assets/Extra/Casino/${window.currentMapRegion === 'Johto' ? 'Region2 Kanto Special Spot.png' : 'Region1 Special Spot.png'}" alt="Special Spot" style="width: 100%; display: block; filter: drop-shadow(0 0 10px black);">
-                        <div onclick="window.startCasinoEncounter(false, 'Celadon Casino Special Spot')" style="position: absolute; left: 15.38%; top: 33.47%; width: 62.06%; height: 28.08%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="Standard Encounter ($${state.config.balance.casinoPrices?.standard || 75})"></div>
-                        <div onclick="window.startCasinoEncounter(true, 'Celadon Casino Special Spot')" style="position: absolute; left: 18.14%; top: 85.36%; width: 55.62%; height: 10.16%; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" title="2x Shiny ($${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>
-                    </div>
-                `;
-            }
+        machinesHtml += `
+                </div>
+            </div>
+        `;
 
-            machinesHtml += `</div>`;
-            btnContainer.innerHTML = machinesHtml;
+        if (window.showModal) {
+            window.showModal(locationName, machinesHtml, "window-casino-modal", "800px", "auto");
         }
     } else if (locationName.startsWith("Celadon Casino ") || locationName === "Celadon Casino Starter Troupe" || locationName === "Celadon Casino Babies" || locationName === "Celadon Casino Special Spot" || locationName === "Celadon Casino Eeveelutions" || locationName === "Celadon Casino Late Troupe" || locationName === "Goldenrod Babies Corner" || locationName === "Goldenrod Lucky Spot Corner") {
         if (!window.currentCasinoHub) window.currentCasinoHub = "Celadon Casino";
@@ -707,10 +703,9 @@ export function navigateToLocation(locationName) {
              battleSystem.isSearching = false;
              if (battleSystem.gymState) battleSystem.gymState.isActive = false;
         }
-        switchView("CASINO_HUB");
+        // Don't switchView, we will render it into a modal.
 
-        const casinoContent = document.getElementById("casino-content");
-        if(casinoContent) casinoContent.style.display = 'none';
+        // Also we don't need to manipulate casinoContent anymore as we render HTML directly
 
         let bgImg = '';
         const isGoldenrod = window.currentCasinoHub === "Goldenrod Game Corner";
@@ -731,18 +726,9 @@ export function navigateToLocation(locationName) {
             bgImg = window.currentMapRegion === 'Johto' ? (isGoldenrod ? '' : 'Region2 Kanto Special Spot.png') : 'Region1 Special Spot.png';
         }
 
-        const viewCasino = document.getElementById("view-casino");
-        viewCasino.style.backgroundImage = `url('./Assets/Extra/Casino/${bgImg}')`;
-        viewCasino.style.backgroundPosition = 'center';
-        viewCasino.style.backgroundRepeat = 'no-repeat';
-        viewCasino.style.backgroundSize = 'contain';
-
-        // Remove old buttons if any
-        const oldOverlays = viewCasino.querySelectorAll('.casino-overlay-btn');
-        oldOverlays.forEach(el => el.remove());
-
-        // We use relative positioning for click areas
-        let html = '';
+        let html = `
+            <div style="position: relative; width: 100%; min-height: 400px; background-image: url('./Assets/Extra/Casino/${bgImg}'); background-size: contain; background-position: center; background-repeat: no-repeat; display: flex; align-items: center; justify-content: center; overflow: hidden; border-radius: 8px;">
+        `;
         const stdLeft = 16.3;
         const stdTop = 34.16;
         const stdWidth = 76.7 - 16.3;
@@ -757,9 +743,11 @@ export function navigateToLocation(locationName) {
         html += `<div class="casino-overlay-btn" onclick="window.startCasinoEncounter(false, '${locationName}')" style="position: absolute; left: ${stdLeft}%; top: ${stdTop}%; width: ${stdWidth}%; height: ${stdHeight}%; cursor: pointer;" title="Standard Encounter ($${state.config.balance.casinoPrices?.standard || 75})"></div>`;
         html += `<div class="casino-overlay-btn" onclick="window.startCasinoEncounter(true, '${locationName}')" style="position: absolute; left: ${shinyLeft}%; top: ${shinyTop}%; width: ${shinyWidth}%; height: ${shinyHeight}%; cursor: pointer;" title="2x Shiny ($${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>`;
         html += `<button class="casino-overlay-btn" onclick="window.navigateToLocation('Celadon Casino')" style="position: absolute; top: 10px; left: 10px; padding: 10px; cursor: pointer; z-index: 100;">Back to Lobby</button>`;
+        html += `</div>`;
 
-        // Append to the viewCasino container
-        viewCasino.insertAdjacentHTML('beforeend', html);
+        if (window.showModal) {
+            window.showModal(locationName, html, "window-casino-modal", "800px", "auto");
+        }
     } else if (locationName === "Daycare") {
         if (!state.stats.hasSeenDaycare) {
             document.getElementById('daycare-first-time-overlay').style.display = 'flex';
