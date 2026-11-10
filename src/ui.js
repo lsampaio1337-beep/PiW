@@ -2399,7 +2399,7 @@ async function init() {
         state.casinoDoubleShiny = doubleShiny;
         state.currentRoute = locationName;
 
-        if (window.windowManager) window.windowManager.closeDynamicWindow('window-casino-modal');
+        if (window.hideInnerMapModal) window.hideInnerMapModal();
 
         // Money deduction and validation are handled by battleSystem.searchNext()
         switchView("BATTLE_ARENA");
@@ -3223,7 +3223,7 @@ window.showGameAlert = function(message, attachToElementId = null) {
 };
 
 window.enterSafariZone = () => {
-    if (window.windowManager) window.windowManager.closeDynamicWindow('window-safari-modal');
+    if (window.hideInnerMapModal) window.hideInnerMapModal();
     switchView("BATTLE_ARENA");
     if (window.globals && window.globals.battleSystem) {
         window.globals.battleSystem.stop();

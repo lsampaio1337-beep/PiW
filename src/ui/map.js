@@ -546,6 +546,42 @@ export function showMap() {
     }
 }
 
+
+window.showInnerMapModal = function(htmlContent) {
+    const mapWindowElem = document.getElementById('window-map-content');
+    if (!mapWindowElem) return;
+
+    let overlay = document.getElementById('map-inner-overlay');
+    if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.id = 'map-inner-overlay';
+        overlay.style.position = 'absolute';
+        overlay.style.top = '0';
+        overlay.style.left = '0';
+        overlay.style.width = '100%';
+        overlay.style.height = '100%';
+        overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.85)';
+        overlay.style.zIndex = '9000';
+        overlay.style.display = 'flex';
+        overlay.style.justifyContent = 'center';
+        overlay.style.alignItems = 'center';
+        overlay.style.overflow = 'auto'; // allow scrolling if content is tall
+        mapWindowElem.style.position = 'relative'; // ensure map window content handles absolute positioning
+        mapWindowElem.appendChild(overlay);
+    }
+
+    overlay.innerHTML = htmlContent;
+    overlay.style.display = 'flex';
+};
+
+window.hideInnerMapModal = function() {
+    const overlay = document.getElementById('map-inner-overlay');
+    if (overlay) {
+        overlay.style.display = 'none';
+        overlay.innerHTML = '';
+    }
+};
+
 export function navigateToLocation(locationName) {
     if (globals.battleSystem && globals.battleSystem.gymState && globals.battleSystem.gymState.isActive) {
         if (window.closeModal) {
@@ -616,11 +652,12 @@ export function navigateToLocation(locationName) {
             <div style="text-align: center; color: white; background: rgba(0,0,0,0.8); padding: 20px; border-radius: 10px; font-size: 20px; font-family: monospace;">
                 <p>Welcome to ${locationName}! Here we charge a fee per battle you have and you can use our SafariBalls at will.<br><br>Do you wanna enter ${locationName}?</p>
                 <button onclick="window.enterSafariZone()" style="margin-top: 20px; padding: 10px 20px; font-size: 18px; cursor: pointer; background: #ffcc00; border: none; border-radius: 5px; color: black; font-weight: bold;">Enter (${safariCost})</button>
+                <button onclick="window.hideInnerMapModal()" style="margin-top: 20px; margin-left: 10px; padding: 10px 20px; font-size: 18px; cursor: pointer; background: #cccccc; border: none; border-radius: 5px; color: black; font-weight: bold;">Cancel</button>
             </div>
         `;
 
         if (window.showModal) {
-            window.showModal(locationName, html, "window-safari-modal", "600px", "auto");
+            if (window.showInnerMapModal) { window.showInnerMapModal(html); }
         }
     } else if (locationName === "Celadon Casino" || locationName === "Goldenrod Game Corner") {
         window.currentCasinoHub = locationName;
@@ -689,11 +726,12 @@ export function navigateToLocation(locationName) {
 
         machinesHtml += `
                 </div>
+            <button class="casino-overlay-btn" onclick="window.hideInnerMapModal()" style="position: absolute; top: 10px; left: 10px; padding: 10px; cursor: pointer; z-index: 100; font-size: 16px; border: 1px solid #ccc; border-radius: 5px; background: rgba(255,255,255,0.8); color: black;">Back to Map</button>
             </div>
         `;
 
         if (window.showModal) {
-            window.showModal(locationName, machinesHtml, "window-casino-modal", "800px", "auto");
+            if (window.showInnerMapModal) { window.showInnerMapModal(machinesHtml); }
         }
     } else if (locationName.startsWith("Celadon Casino ") || locationName === "Celadon Casino Starter Troupe" || locationName === "Celadon Casino Babies" || locationName === "Celadon Casino Special Spot" || locationName === "Celadon Casino Eeveelutions" || locationName === "Celadon Casino Late Troupe" || locationName === "Goldenrod Babies Corner" || locationName === "Goldenrod Lucky Spot Corner") {
         if (!window.currentCasinoHub) window.currentCasinoHub = "Celadon Casino";
@@ -746,7 +784,7 @@ export function navigateToLocation(locationName) {
         html += `</div>`;
 
         if (window.showModal) {
-            window.showModal(locationName, html, "window-casino-modal", "800px", "auto");
+            if (window.showInnerMapModal) { window.showInnerMapModal(html); }
         }
     } else if (locationName === "Daycare") {
         if (!state.stats.hasSeenDaycare) {
