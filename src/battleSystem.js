@@ -764,7 +764,11 @@ class BattleSystem {
         if (trainer) {
             let trainerButtonsHtml = gym.trainers.map((t, index) => {
                 const isLeader = index === gym.trainers.length - 1;
-                const buttonText = isLeader ? `Leader ${escapeHTML(t.name)}` : `${escapeHTML(t.name)}`;
+                let parsedName = escapeHTML(t.name);
+                if (isLeader && parsedName.startsWith("Leader ")) {
+                    parsedName = parsedName.replace(/^Leader\s+/, "");
+                }
+                const buttonText = isLeader ? `Leader ${parsedName}` : `${parsedName}`;
 
                 if (index < this.gymState.currentTrainerIndex) {
                     return `<button disabled class="action-btn" style="opacity: 0.5; width: 100%;">${buttonText} (Defeated)</button>`;
@@ -792,11 +796,37 @@ class BattleSystem {
                 if (typeof window.switchView === 'function') {
                     window.switchView("BATTLE_ARENA");
                 }
+
+                // Apply gym background to the main battle arena view
+                const arenaView = document.getElementById("view-battle-arena");
+                if (arenaView && this.state.config && this.state.config.gymAssets && this.state.config.gymAssets[gym.leader]) {
+                    const assetConfig = this.state.config.gymAssets[gym.leader];
+                    const bgPath = `./Assets/Gym/BG/${assetConfig.background}`;
+                    arenaView.style.backgroundImage = `url('${bgPath}')`;
+                    arenaView.style.backgroundSize = "100% 100%";
+                    arenaView.style.backgroundPosition = "center";
+                    arenaView.style.backgroundRepeat = "no-repeat";
+                } else if (arenaView) {
+                    const gymBGs = [
+                        'BG-Gym-1-Pewter-Rock.png', 'BG-Gym-2-Cerulean-Water.png', 'BG-Gym-3-Vermilion-Electric.png',
+                        'BG-Gym-4-Celadon-Grass.png', 'BG-Gym-5-Fuchsia-Poison.png', 'BG-Gym-6-Saffron-Psychic.png',
+                        'BG-Gym-7-Cinnabar-Fire.png', 'BG-Gym-8-Viridian-Ground.png', 'IndigoPlateau.png',
+                        '../Gym/BG/BG_Gym_Flying.png', '../Gym/BG/BG_Gym_Bug.png', '../Gym/BG/BG_Gym_Normal.png',
+                        '../Gym/BG/BG_Gym_Ghost.png', '../Gym/BG/BG_Gym_Fighting.png', '../Gym/BG/BG_Gym_Steel.png',
+                        '../Gym/BG/BG_Gym_Ice.png', '../Gym/BG/BG_Gym_Dragon.png'
+                    ];
+                    const bgImage = gymBGs[this.gymState.gymIndex] || 'BattleMode/Test.png';
+                    arenaView.style.backgroundImage = `url('./Assets/BG/${bgImage}')`;
+                    arenaView.style.backgroundSize = "cover";
+                    arenaView.style.backgroundPosition = "center";
+                    arenaView.style.backgroundRepeat = "no-repeat";
+                }
+
                 const leaderSpeed = this.state.party[0].currentStats.spe;
                 const speedMult = this.getSpeedMultiplier();
-            let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed)) * speedMult;
-            slideDelay = Math.max(300, slideDelay) / this.state.settings.gameSpeed;
-            this.generateGymEncounter(slideDelay);
+                let slideDelay = this.state.config.balance.baseSearchTime * 1000 * (100 / (100 + leaderSpeed)) * speedMult;
+                slideDelay = Math.max(300, slideDelay) / this.state.settings.gameSpeed;
+                this.generateGymEncounter(slideDelay);
             };
         } else {
             // Gym completed
