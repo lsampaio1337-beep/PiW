@@ -647,10 +647,12 @@ export function navigateToLocation(locationName) {
         vGym.replaceChildren();
         vGym.style.position = "relative";
         vGym.style.height = "100%";
+        vGym.style.width = "100%";
         vGym.style.backgroundImage = "url('Assets/BG/SafariZone.png')";
-        vGym.style.backgroundSize = "cover";
+        vGym.style.backgroundSize = "contain";
         vGym.style.backgroundPosition = "center";
         vGym.style.backgroundRepeat = "no-repeat";
+        vGym.style.backgroundColor = "black";
 
         const safariCost = state.config.balance.safariZonePrice || 500;
         const uiContainer = document.createElement('div');
@@ -714,10 +716,12 @@ export function navigateToLocation(locationName) {
         vGym.replaceChildren();
         vGym.style.position = "relative";
         vGym.style.height = "100%";
+        vGym.style.width = "100%";
         vGym.style.backgroundImage = "url('./Assets/BG/Casino.png')";
-        vGym.style.backgroundSize = "cover";
+        vGym.style.backgroundSize = "contain";
         vGym.style.backgroundPosition = "center";
         vGym.style.backgroundRepeat = "no-repeat";
+        vGym.style.backgroundColor = "black";
 
         const completedChallenges = state.stats.completedChallengeIds || [];
         const isUnlockedByAreaId = (areaId) => completedChallenges.some(id => parseAreaNames(id).includes(areaId));
@@ -826,12 +830,34 @@ export function navigateToLocation(locationName) {
         vGym.replaceChildren();
         vGym.style.position = "relative";
         vGym.style.height = "100%";
-        vGym.style.backgroundImage = `url('./Assets/Extra/Casino/${bgImg}')`;
-        vGym.style.backgroundPosition = 'center';
-        vGym.style.backgroundRepeat = 'no-repeat';
-        vGym.style.backgroundSize = 'contain';
+        vGym.style.width = "100%";
+        vGym.style.backgroundImage = "none";
+        vGym.style.backgroundColor = "black";
 
-        // We use relative positioning for click areas
+        const flexContainer = document.createElement('div');
+        flexContainer.style.width = '100%';
+        flexContainer.style.height = '100%';
+        flexContainer.style.display = 'flex';
+        flexContainer.style.justifyContent = 'center';
+        flexContainer.style.alignItems = 'center';
+        flexContainer.style.position = 'relative';
+
+        const wrapper = document.createElement('div');
+        wrapper.style.position = 'relative';
+        wrapper.style.display = 'inline-block';
+        wrapper.style.maxWidth = '100%';
+        wrapper.style.maxHeight = '100%';
+
+        const imgEl = document.createElement('img');
+        imgEl.src = `./Assets/Extra/Casino/${bgImg}`;
+        imgEl.style.maxWidth = '100%';
+        imgEl.style.maxHeight = '100%';
+        imgEl.style.display = 'block';
+        imgEl.style.objectFit = 'contain';
+
+        wrapper.appendChild(imgEl);
+
+        // We use relative positioning for click areas mapped to the image dimensions
         let html = '';
         const stdLeft = 16.3;
         const stdTop = 34.16;
@@ -843,16 +869,31 @@ export function navigateToLocation(locationName) {
         const shinyWidth = 73.94 - 19.24;
         const shinyHeight = 94.72 - 85.96;
 
-        // Overlay transparent divs
+        // Overlay transparent divs on the wrapper so percentages map to the un-stretched image
         html += `<div class="casino-overlay-btn" onclick="window.startCasinoEncounter(false, '${locationName}')" style="position: absolute; left: ${stdLeft}%; top: ${stdTop}%; width: ${stdWidth}%; height: ${stdHeight}%; cursor: pointer;" title="Standard Encounter ($${state.config.balance.casinoPrices?.standard || 75})"></div>`;
         html += `<div class="casino-overlay-btn" onclick="window.startCasinoEncounter(true, '${locationName}')" style="position: absolute; left: ${shinyLeft}%; top: ${shinyTop}%; width: ${shinyWidth}%; height: ${shinyHeight}%; cursor: pointer;" title="2x Shiny ($${state.config.balance.casinoPrices?.doubleShiny || 200})"></div>`;
-        html += `<button class="casino-overlay-btn" onclick="window.navigateToLocation('${window.currentCasinoHub}')" style="position: absolute; top: 10px; left: 10px; padding: 10px; cursor: pointer; z-index: 100;">Back to Lobby</button>`;
 
-        const containerDiv = document.createElement('div');
-        containerDiv.style.width = '100%';
-        containerDiv.style.height = '100%';
-        containerDiv.innerHTML = html;
-        vGym.appendChild(containerDiv);
+        const overlayContainer = document.createElement('div');
+        overlayContainer.innerHTML = html;
+        while (overlayContainer.firstChild) {
+            wrapper.appendChild(overlayContainer.firstChild);
+        }
+
+        flexContainer.appendChild(wrapper);
+
+        const backBtn = document.createElement('button');
+        backBtn.className = "casino-overlay-btn";
+        backBtn.onclick = () => window.navigateToLocation(window.currentCasinoHub);
+        backBtn.style.position = "absolute";
+        backBtn.style.top = "10px";
+        backBtn.style.left = "10px";
+        backBtn.style.padding = "10px";
+        backBtn.style.cursor = "pointer";
+        backBtn.style.zIndex = "100";
+        backBtn.innerText = "Back to Lobby";
+        flexContainer.appendChild(backBtn);
+
+        vGym.appendChild(flexContainer);
 
         const overlay = document.getElementById('map-inner-modal-overlay');
         if (overlay) overlay.style.display = 'flex';
@@ -1001,6 +1042,7 @@ export function navigateToLocation(locationName) {
         } else {
             vGym.style.backgroundImage = "none";
         }
+        vGym.style.backgroundColor = "transparent";
 
         // Show the inner modal overlay instead of closing the map modal
         const overlay = document.getElementById('map-inner-modal-overlay');
