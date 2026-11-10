@@ -377,7 +377,7 @@ def scan_region(region):
     return data
 
 def main():
-    regions = ['kalos', 'alola', 'galar', 'paldea']
+    regions = ['paldea']
     all_data = []
     for region in regions:
         data = scan_region(region)
@@ -387,6 +387,7 @@ def main():
         d['Topic'] = d['Topic'].replace(' - Toggle Condensed Details', '')
         d['Topic'] = d['Topic'].replace(' - Toggle S.O.S. Details', '')
         d['Topic'] = ' '.join(d['Topic'].split())
+        if d['Region'] == 'Paldea' and d['Topic'] == 'Filters': d['Topic'] = 'Standard Spawns'
 
     df = pd.DataFrame(all_data)
 
@@ -421,7 +422,7 @@ def main():
 
     final_df = pd.DataFrame(merged_data)
 
-    junk_topics = ["Filters", "Shop", "Shops - Sword & Shield", "Sword / Shield", "Scarlet / Violet", "Area Anchors", "Game Anchors", "Trainer Battles", "Wild Pokémon", "Pokémon", "Name", "Items", "Ogre Oustin'"]
+    junk_topics = ["Shop", "Shops - Sword & Shield", "Sword / Shield", "Scarlet / Violet", "Area Anchors", "Game Anchors", "Trainer Battles", "Wild Pokémon", "Pokémon", "Name", "Items", "Ogre Oustin'"]
     if not final_df.empty:
         final_df = final_df[~final_df['Topic'].isin(junk_topics)]
 
