@@ -522,9 +522,17 @@ export function showMap() {
 
     // Inner modal for gym overlays natively locked to the map
     html += `
-            <div id="map-inner-modal-overlay" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 1000; align-items: center; justify-content: center;">
-                <div id="map-inner-modal-body" style="position: relative; width: 70%; height: 70%; border-radius: 8px; box-shadow: 0px 4px 15px rgba(0,0,0,0.8); overflow: hidden; background: black;">
-                    <!-- Content injected via JS -->
+            <div id="map-inner-modal-overlay" onclick="if(event.target === this) { window.closeMapInnerModal(); }" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 1000; align-items: center; justify-content: center; padding: 20px 0; box-sizing: border-box;">
+                <div id="map-inner-modal" class="floating-window">
+                    <div class="window-header" style="position: relative; cursor: default;">
+                        <span id="map-inner-modal-title">Gym</span>
+                        <span id="btn-close-map-inner-modal" onclick="window.closeMapInnerModal()" style="position: absolute; top: 5px; right: 5px; font-size: 12px; font-weight: bold; line-height: 1; padding: 0; cursor: pointer; color: white;">X</span>
+                    </div>
+                    <div class="window-content-container" style="flex: 1; display: flex;">
+                        <div id="map-inner-modal-content" class="content-panel" style="width: 100%; height: auto; overflow-y: auto; position: relative;">
+                            <!-- Content injected via JS -->
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -556,8 +564,8 @@ window.closeMapInnerModal = function() {
     const overlay = document.getElementById('map-inner-modal-overlay');
     if (overlay) {
         overlay.style.display = 'none';
-        const body = document.getElementById('map-inner-modal-body');
-        if (body) body.innerHTML = '';
+        const content = document.getElementById('map-inner-modal-content');
+        if (content) content.innerHTML = '';
     }
 };
 
@@ -818,8 +826,13 @@ export function navigateToLocation(locationName) {
             lookupName = "Kanto Pokemon League";
         }
 
-        const vGym = document.getElementById("map-inner-modal-body");
+        const vGym = document.getElementById("map-inner-modal-content");
+        const vGymTitle = document.getElementById("map-inner-modal-title");
         const gymConfig = state.config.gyms.find(g => g.name === lookupName);
+
+        if (vGymTitle) {
+            vGymTitle.innerText = locationName;
+        }
 
         // Stop current battle system
         if (battleSystem) {
@@ -896,24 +909,6 @@ export function navigateToLocation(locationName) {
         uiContainer.appendChild(headerEl);
         uiContainer.appendChild(contentArea);
         vGym.appendChild(uiContainer);
-
-        // Add close button
-        const closeBtn = document.createElement('button');
-        closeBtn.textContent = 'X';
-        closeBtn.style.position = 'absolute';
-        closeBtn.style.top = '10px';
-        closeBtn.style.right = '10px';
-        closeBtn.style.background = 'red';
-        closeBtn.style.color = 'white';
-        closeBtn.style.border = 'none';
-        closeBtn.style.borderRadius = '50%';
-        closeBtn.style.width = '30px';
-        closeBtn.style.height = '30px';
-        closeBtn.style.cursor = 'pointer';
-        closeBtn.style.fontWeight = 'bold';
-        closeBtn.style.zIndex = '10';
-        closeBtn.onclick = () => window.closeMapInnerModal();
-        vGym.appendChild(closeBtn);
 
         if (gymConfig && contentArea) {
             let buttonText = lookupName.includes("Pokemon League") ? "Challenge" : "Battle Gym";

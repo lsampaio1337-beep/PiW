@@ -663,7 +663,7 @@ class BattleSystem {
 
 
     updateGymUI() {
-        const vGym = document.getElementById("map-inner-modal-body");
+        const vGym = document.getElementById("map-inner-modal-content");
         const contentArea = document.getElementById("gym-content-area");
         if (!vGym || !contentArea) return;
 
