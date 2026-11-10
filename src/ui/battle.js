@@ -690,7 +690,7 @@ function prepareCloneWrapper(originalSpriteWrapper, elEnemySide) {
     cloneWrapper.style.width = '100%';
     cloneWrapper.style.height = '100%';
 
-    const floatingDamages = elEnemySide.querySelectorAll('.damage-text-node');
+    const floatingDamages = elEnemySide.querySelectorAll('.floating-damage');
     floatingDamages.forEach(node => {
         cloneWrapper.appendChild(node);
     });
@@ -714,11 +714,6 @@ function createDefeatContainer(elEnemySide) {
         const frameClone = frameBorder.cloneNode(true);
         defeatContainer.appendChild(frameClone);
     }
-
-    const damageNodes = elEnemySide.querySelectorAll('.damage-text-node');
-    damageNodes.forEach(node => {
-        defeatContainer.appendChild(node);
-    });
 
     return defeatContainer;
 }
@@ -840,9 +835,9 @@ function animateModals(cloneWrapper) {
 }
 
 function animateDamageTexts(cloneWrapper) {
-    const clonedDamages = cloneWrapper.querySelectorAll('.damage-text-node');
+    const clonedDamages = cloneWrapper.querySelectorAll('.floating-damage');
     clonedDamages.forEach(dmg => {
-        dmg.style.transition = 'opacity 2000ms linear, transform 2000ms linear';
+        dmg.style.transition = 'opacity 2000ms linear, transform 2000ms linear, top 1s ease-out';
         dmg.style.transformOrigin = 'center center';
         dmg.style.opacity = '0';
         dmg.style.transform = 'translate(-50%, -50%) scale(0.3)';
