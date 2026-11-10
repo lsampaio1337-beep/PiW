@@ -842,6 +842,10 @@ function animateModals(cloneWrapper) {
 function animateDamageTexts(cloneWrapper) {
     const clonedDamages = cloneWrapper.querySelectorAll('.floating-damage');
     clonedDamages.forEach(dmg => {
+        // Cancel the ongoing animation from showDamage
+        dmg.style.transition = 'none';
+        void dmg.offsetWidth; // Force reflow
+
         dmg.style.transition = 'all 2000ms linear';
         dmg.style.transformOrigin = 'center center';
         dmg.style.opacity = '0';
